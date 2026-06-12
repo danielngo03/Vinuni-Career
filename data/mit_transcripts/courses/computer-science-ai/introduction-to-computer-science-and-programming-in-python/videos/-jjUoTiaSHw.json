@@ -1,0 +1,508 @@
+{
+  "video": {
+    "id": "-jjUoTiaSHw",
+    "title": "String Manipulations",
+    "url": "https://www.youtube.com/watch?v=-jjUoTiaSHw",
+    "channel": "MIT OpenCourseWare",
+    "duration": 184,
+    "language": "en"
+  },
+  "segment_count": 70,
+  "segments": [
+    {
+      "index": 0,
+      "start": 2.63,
+      "end": 2.64,
+      "duration": 0.01,
+      "text": "The following content is provided under"
+    },
+    {
+      "index": 1,
+      "start": 2.64,
+      "end": 5.35,
+      "duration": 2.71,
+      "text": "a Creative Commons license. Your support"
+    },
+    {
+      "index": 2,
+      "start": 5.36,
+      "end": 7.63,
+      "duration": 2.27,
+      "text": "will help MIT OpenCourseware continue to"
+    },
+    {
+      "index": 3,
+      "start": 7.64,
+      "end": 9.99,
+      "duration": 2.35,
+      "text": "offer high-quality educational resources"
+    },
+    {
+      "index": 4,
+      "start": 10.0,
+      "end": 11.23,
+      "duration": 1.23,
+      "text": "for free."
+    },
+    {
+      "index": 5,
+      "start": 11.24,
+      "end": 13.39,
+      "duration": 2.15,
+      "text": "To make a donation or view additional"
+    },
+    {
+      "index": 6,
+      "start": 13.4,
+      "end": 16.07,
+      "duration": 2.67,
+      "text": "materials from hundreds of MIT courses,"
+    },
+    {
+      "index": 7,
+      "start": 16.08,
+      "end": 22.67,
+      "duration": 6.59,
+      "text": "visit MIT OpenCourseware at ocw.mit.edu."
+    },
+    {
+      "index": 8,
+      "start": 24.51,
+      "end": 24.52,
+      "duration": 0.01,
+      "text": "So, the question is, we have the string"
+    },
+    {
+      "index": 9,
+      "start": 24.52,
+      "end": 26.71,
+      "duration": 2.19,
+      "text": "S. Is"
+    },
+    {
+      "index": 10,
+      "start": 26.72,
+      "end": 30.39,
+      "duration": 3.67,
+      "text": "the string 600 is 611 and 6002?"
+    },
+    {
+      "index": 11,
+      "start": 30.4,
+      "end": 31.95,
+      "duration": 1.55,
+      "text": "So, we're going to create this string"
+    },
+    {
+      "index": 12,
+      "start": 31.96,
+      "end": 34.11,
+      "duration": 2.15,
+      "text": "here, right? It's initially an empty"
+    },
+    {
+      "index": 13,
+      "start": 34.12,
+      "end": 39.59,
+      "duration": 5.47,
+      "text": "string."
+    },
+    {
+      "index": 14,
+      "start": 43.15,
+      "end": 43.16,
+      "duration": 0.01,
+      "text": "Uh I want to mention that"
+    },
+    {
+      "index": 15,
+      "start": 43.16,
+      "end": 45.83,
+      "duration": 2.67,
+      "text": "the plus equals"
+    },
+    {
+      "index": 16,
+      "start": 45.84,
+      "end": 49.59,
+      "duration": 3.75,
+      "text": "for example, if I say A plus equals 1,"
+    },
+    {
+      "index": 17,
+      "start": 49.6,
+      "end": 51.83,
+      "duration": 2.23,
+      "text": "this is equivalent to A is equal to A"
+    },
+    {
+      "index": 18,
+      "start": 51.84,
+      "end": 53.51,
+      "duration": 1.67,
+      "text": "plus 1."
+    },
+    {
+      "index": 19,
+      "start": 53.52,
+      "end": 55.35,
+      "duration": 1.83,
+      "text": "Okay? We've seen this a couple times"
+    },
+    {
+      "index": 20,
+      "start": 55.36,
+      "end": 57.03,
+      "duration": 1.67,
+      "text": "before, last lecture and the lecture"
+    },
+    {
+      "index": 21,
+      "start": 57.04,
+      "end": 58.63,
+      "duration": 1.59,
+      "text": "before that."
+    },
+    {
+      "index": 22,
+      "start": 58.64,
+      "end": 64.79,
+      "duration": 6.15,
+      "text": "So, all this means here, this line here,"
+    },
+    {
+      "index": 23,
+      "start": 66.19,
+      "end": 66.2,
+      "duration": 0.01,
+      "text": "is we're going to take the previous"
+    },
+    {
+      "index": 24,
+      "start": 66.2,
+      "end": 67.67,
+      "duration": 1.47,
+      "text": "string that we have and we're just going"
+    },
+    {
+      "index": 25,
+      "start": 67.68,
+      "end": 69.63,
+      "duration": 1.95,
+      "text": "to add it to itself"
+    },
+    {
+      "index": 26,
+      "start": 69.64,
+      "end": 71.75,
+      "duration": 2.11,
+      "text": "plus the last letter. So, the first"
+    },
+    {
+      "index": 27,
+      "start": 71.76,
+      "end": 75.23,
+      "duration": 3.47,
+      "text": "thing we're going to have is going to be"
+    },
+    {
+      "index": 28,
+      "start": 75.24,
+      "end": 81.99,
+      "duration": 6.75,
+      "text": "new underscore str is equal to two."
+    },
+    {
+      "index": 29,
+      "start": 83.95,
+      "end": 83.96,
+      "duration": 0.01,
+      "text": "Then this line here is going to say, now"
+    },
+    {
+      "index": 30,
+      "start": 83.96,
+      "end": 86.63,
+      "duration": 2.67,
+      "text": "I'm going to add to the to the two that"
+    },
+    {
+      "index": 31,
+      "start": 86.64,
+      "end": 88.79,
+      "duration": 2.15,
+      "text": "I already have"
+    },
+    {
+      "index": 32,
+      "start": 88.8,
+      "end": 90.55,
+      "duration": 1.75,
+      "text": "the element at position zero, which is a"
+    },
+    {
+      "index": 33,
+      "start": 90.56,
+      "end": 94.67,
+      "duration": 4.11,
+      "text": "six. So, I'm going to have six."
+    },
+    {
+      "index": 34,
+      "start": 94.68,
+      "end": 97.83,
+      "duration": 3.15,
+      "text": "Then I'm going to add to that"
+    },
+    {
+      "index": 35,
+      "start": 97.84,
+      "end": 100.91,
+      "duration": 3.07,
+      "text": "the element at position at index four."
+    },
+    {
+      "index": 36,
+      "start": 100.92,
+      "end": 102.43,
+      "duration": 1.51,
+      "text": "So, I'm starting to count from zero, so"
+    },
+    {
+      "index": 37,
+      "start": 102.44,
+      "end": 105.03,
+      "duration": 2.59,
+      "text": "this is zero, one,"
+    },
+    {
+      "index": 38,
+      "start": 105.04,
+      "end": 107.39,
+      "duration": 2.35,
+      "text": "two, three, four."
+    },
+    {
+      "index": 39,
+      "start": 107.4,
+      "end": 111.23,
+      "duration": 3.83,
+      "text": "Right? So, that's a space."
+    },
+    {
+      "index": 40,
+      "start": 112.99,
+      "end": 113.0,
+      "duration": 0.01,
+      "text": "And I'm going to go"
+    },
+    {
+      "index": 41,
+      "start": 113.0,
+      "end": 115.11,
+      "duration": 2.11,
+      "text": "Notice I have four and then nothing in"
+    },
+    {
+      "index": 42,
+      "start": 115.12,
+      "end": 117.75,
+      "duration": 2.63,
+      "text": "the middle, so my stop is going to be"
+    },
+    {
+      "index": 43,
+      "start": 117.76,
+      "end": 120.07,
+      "duration": 2.31,
+      "text": "length S by default."
+    },
+    {
+      "index": 44,
+      "start": 120.08,
+      "end": 121.31,
+      "duration": 1.23,
+      "text": "And I'm going to take every 30"
+    },
+    {
+      "index": 45,
+      "start": 121.32,
+      "end": 123.95,
+      "duration": 2.63,
+      "text": "characters. Now, every 30 is longer than"
+    },
+    {
+      "index": 46,
+      "start": 123.96,
+      "end": 126.39,
+      "duration": 2.43,
+      "text": "the actual string I have, right?"
+    },
+    {
+      "index": 47,
+      "start": 126.4,
+      "end": 130.27,
+      "duration": 3.87,
+      "text": "So, we're just going to end at"
+    },
+    {
+      "index": 48,
+      "start": 130.28,
+      "end": 132.35,
+      "duration": 2.07,
+      "text": "the end of the string."
+    },
+    {
+      "index": 49,
+      "start": 132.36,
+      "end": 133.47,
+      "duration": 1.11,
+      "text": "So, this is the next thing that we're"
+    },
+    {
+      "index": 50,
+      "start": 133.48,
+      "end": 137.11,
+      "duration": 3.63,
+      "text": "going to add is a space."
+    },
+    {
+      "index": 51,
+      "start": 138.67,
+      "end": 138.68,
+      "duration": 0.01,
+      "text": "Okay? And then the last thing we're"
+    },
+    {
+      "index": 52,
+      "start": 138.68,
+      "end": 141.43,
+      "duration": 2.75,
+      "text": "doing here is we're starting at 13. So,"
+    },
+    {
+      "index": 53,
+      "start": 141.44,
+      "end": 143.71,
+      "duration": 2.27,
+      "text": "now I'm going to have to count 13. 0 1 2"
+    },
+    {
+      "index": 54,
+      "start": 143.72,
+      "end": 149.03,
+      "duration": 5.31,
+      "text": "3 4 5 6 8 9 10 11 12 13."
+    },
+    {
+      "index": 55,
+      "start": 149.04,
+      "end": 150.75,
+      "duration": 1.71,
+      "text": "That's the one."
+    },
+    {
+      "index": 56,
+      "start": 150.76,
+      "end": 152.59,
+      "duration": 1.83,
+      "text": "I'm going to go backward because of this"
+    },
+    {
+      "index": 57,
+      "start": 152.6,
+      "end": 154.95,
+      "duration": 2.35,
+      "text": "minus one."
+    },
+    {
+      "index": 58,
+      "start": 154.96,
+      "end": 157.95,
+      "duration": 2.99,
+      "text": "And I'm going to go backward until 10,"
+    },
+    {
+      "index": 59,
+      "start": 157.96,
+      "end": 160.03,
+      "duration": 2.07,
+      "text": "but right before 10. Okay? So, one less"
+    },
+    {
+      "index": 60,
+      "start": 160.04,
+      "end": 161.47,
+      "duration": 1.43,
+      "text": "than 10."
+    },
+    {
+      "index": 61,
+      "start": 161.48,
+      "end": 163.67,
+      "duration": 2.19,
+      "text": "So, I'm going to do one"
+    },
+    {
+      "index": 62,
+      "start": 163.68,
+      "end": 165.87,
+      "duration": 2.19,
+      "text": "hundred. So, this one,"
+    },
+    {
+      "index": 63,
+      "start": 165.88,
+      "end": 167.95,
+      "duration": 2.07,
+      "text": "this zero, and then this zero."
+    },
+    {
+      "index": 64,
+      "start": 167.96,
+      "end": 168.79,
+      "duration": 0.83,
+      "text": "Okay? And then I'm going to print this"
+    },
+    {
+      "index": 65,
+      "start": 168.8,
+      "end": 172.75,
+      "duration": 3.95,
+      "text": "new string."
+    },
+    {
+      "index": 66,
+      "start": 174.35,
+      "end": 174.36,
+      "duration": 0.01,
+      "text": "I think this is right. If you paste it"
+    },
+    {
+      "index": 67,
+      "start": 174.36,
+      "end": 176.83,
+      "duration": 2.47,
+      "text": "into Spyder, it should give you 26 space"
+    },
+    {
+      "index": 68,
+      "start": 176.84,
+      "end": 179.47,
+      "duration": 2.63,
+      "text": "100. So, I think most of the class got"
+    },
+    {
+      "index": 69,
+      "start": 179.48,
+      "end": 182.39,
+      "duration": 2.91,
+      "text": "it right."
+    }
+  ],
+  "course": {
+    "category": "Computer Science & AI",
+    "title": "Introduction to Computer Science and Programming in Python",
+    "source_url": "https://www.youtube.com/playlist?list=PLUl4u3cNGP63WbdFxL8giv4yhgdMGaZNA"
+  }
+}

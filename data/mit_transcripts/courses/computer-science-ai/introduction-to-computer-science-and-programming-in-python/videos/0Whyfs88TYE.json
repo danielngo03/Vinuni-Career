@@ -1,0 +1,494 @@
+{
+  "video": {
+    "id": "0Whyfs88TYE",
+    "title": "Exceptions",
+    "url": "https://www.youtube.com/watch?v=0Whyfs88TYE",
+    "channel": "MIT OpenCourseWare",
+    "duration": 161,
+    "language": "en"
+  },
+  "segment_count": 68,
+  "segments": [
+    {
+      "index": 0,
+      "start": 2.55,
+      "end": 2.56,
+      "duration": 0.01,
+      "text": "the following content is provided under"
+    },
+    {
+      "index": 1,
+      "start": 2.56,
+      "end": 5.269,
+      "duration": 2.709,
+      "text": "a Creative Commons license your support"
+    },
+    {
+      "index": 2,
+      "start": 5.279,
+      "end": 7.389,
+      "duration": 2.11,
+      "text": "will help MIT open courseware continue"
+    },
+    {
+      "index": 3,
+      "start": 7.399,
+      "end": 9.39,
+      "duration": 1.991,
+      "text": "to offer highquality educational"
+    },
+    {
+      "index": 4,
+      "start": 9.4,
+      "end": 12.509,
+      "duration": 3.109,
+      "text": "resources for free to make a donation or"
+    },
+    {
+      "index": 5,
+      "start": 12.519,
+      "end": 14.47,
+      "duration": 1.951,
+      "text": "view additional materials from hundreds"
+    },
+    {
+      "index": 6,
+      "start": 14.48,
+      "end": 17.83,
+      "duration": 3.35,
+      "text": "of MIT courses visit MIT opencourseware"
+    },
+    {
+      "index": 7,
+      "start": 17.84,
+      "end": 22.509,
+      "duration": 4.669,
+      "text": "at"
+    },
+    {
+      "index": 8,
+      "start": 24.67,
+      "end": 24.68,
+      "duration": 0.01,
+      "text": "ocw.mit.edu"
+    },
+    {
+      "index": 9,
+      "start": 24.68,
+      "end": 26.95,
+      "duration": 2.27,
+      "text": "okay code looks a little bit daunting"
+    },
+    {
+      "index": 10,
+      "start": 26.96,
+      "end": 28.95,
+      "duration": 1.99,
+      "text": "but it's not that bad really"
+    },
+    {
+      "index": 11,
+      "start": 28.96,
+      "end": 31.71,
+      "duration": 2.75,
+      "text": "the only part of the code that actually"
+    },
+    {
+      "index": 12,
+      "start": 31.72,
+      "end": 33.389,
+      "duration": 1.669,
+      "text": "does something is is this part right"
+    },
+    {
+      "index": 13,
+      "start": 33.399,
+      "end": 35.75,
+      "duration": 2.351,
+      "text": "here where we're trying to do this these"
+    },
+    {
+      "index": 14,
+      "start": 35.76,
+      "end": 36.59,
+      "duration": 0.83,
+      "text": "three"
+    },
+    {
+      "index": 15,
+      "start": 36.6,
+      "end": 40.27,
+      "duration": 3.67,
+      "text": "lines the first being we get an input"
+    },
+    {
+      "index": 16,
+      "start": 40.28,
+      "end": 42.15,
+      "duration": 1.87,
+      "text": "from the user that says how old are you"
+    },
+    {
+      "index": 17,
+      "start": 42.16,
+      "end": 44.229,
+      "duration": 2.069,
+      "text": "we're converting that to an integer"
+    },
+    {
+      "index": 18,
+      "start": 44.239,
+      "end": 46.95,
+      "duration": 2.711,
+      "text": "we're going to take that number that"
+    },
+    {
+      "index": 19,
+      "start": 46.96,
+      "end": 49.63,
+      "duration": 2.67,
+      "text": "they gave you that they gave us divide"
+    },
+    {
+      "index": 20,
+      "start": 49.64,
+      "end": 51.99,
+      "duration": 2.35,
+      "text": "by 80 I'm assuming life expect"
+    },
+    {
+      "index": 21,
+      "start": 52.0,
+      "end": 53.95,
+      "duration": 1.95,
+      "text": "expectancy is 80 and multiply by 100 to"
+    },
+    {
+      "index": 22,
+      "start": 53.96,
+      "end": 56.79,
+      "duration": 2.83,
+      "text": "get the percent going to round it to one"
+    },
+    {
+      "index": 23,
+      "start": 56.8,
+      "end": 58.069,
+      "duration": 1.269,
+      "text": "and then I'm going to print you've gone"
+    },
+    {
+      "index": 24,
+      "start": 58.079,
+      "end": 62.27,
+      "duration": 4.191,
+      "text": "through that much percent of your life"
+    },
+    {
+      "index": 25,
+      "start": 63.67,
+      "end": 63.68,
+      "duration": 0.01,
+      "text": "okay so again we're dealing with user"
+    },
+    {
+      "index": 26,
+      "start": 63.68,
+      "end": 64.95,
+      "duration": 1.27,
+      "text": "input which is"
+    },
+    {
+      "index": 27,
+      "start": 64.96,
+      "end": 66.75,
+      "duration": 1.79,
+      "text": "unpredictable so we're going to catch"
+    },
+    {
+      "index": 28,
+      "start": 66.76,
+      "end": 69.03,
+      "duration": 2.27,
+      "text": "first of all a value error and that's if"
+    },
+    {
+      "index": 29,
+      "start": 69.04,
+      "end": 70.749,
+      "duration": 1.709,
+      "text": "the user doesn't enter a number in that"
+    },
+    {
+      "index": 30,
+      "start": 70.759,
+      "end": 71.99,
+      "duration": 1.231,
+      "text": "case we're going to say oops you must"
+    },
+    {
+      "index": 31,
+      "start": 72.0,
+      "end": 73.03,
+      "duration": 1.03,
+      "text": "enter a"
+    },
+    {
+      "index": 32,
+      "start": 73.04,
+      "end": 75.35,
+      "duration": 2.31,
+      "text": "number and then we're going to also"
+    },
+    {
+      "index": 33,
+      "start": 75.36,
+      "end": 77.07,
+      "duration": 1.71,
+      "text": "catch the zero division error which says"
+    },
+    {
+      "index": 34,
+      "start": 77.08,
+      "end": 79.71,
+      "duration": 2.63,
+      "text": "print divided by uh trying to do a"
+    },
+    {
+      "index": 35,
+      "start": 79.72,
+      "end": 82.19,
+      "duration": 2.47,
+      "text": "division by zero and otherwise we'll"
+    },
+    {
+      "index": 36,
+      "start": 82.2,
+      "end": 83.59,
+      "duration": 1.39,
+      "text": "have a last except that says something"
+    },
+    {
+      "index": 37,
+      "start": 83.6,
+      "end": 85.91,
+      "duration": 2.31,
+      "text": "went VAR wrong so it looks like people"
+    },
+    {
+      "index": 38,
+      "start": 85.92,
+      "end": 88.109,
+      "duration": 2.189,
+      "text": "are getting it right the question being"
+    },
+    {
+      "index": 39,
+      "start": 88.119,
+      "end": 90.149,
+      "duration": 2.03,
+      "text": "if the user enters 20 what is do the"
+    },
+    {
+      "index": 40,
+      "start": 90.159,
+      "end": 91.23,
+      "duration": 1.071,
+      "text": "program"
+    },
+    {
+      "index": 41,
+      "start": 91.24,
+      "end": 96.069,
+      "duration": 4.829,
+      "text": "do okay so we're giving uh string and"
+    },
+    {
+      "index": 42,
+      "start": 96.079,
+      "end": 98.51,
+      "duration": 2.431,
+      "text": "strings taken in as input and then"
+    },
+    {
+      "index": 43,
+      "start": 98.52,
+      "end": 100.109,
+      "duration": 1.589,
+      "text": "trying to con convert those to an"
+    },
+    {
+      "index": 44,
+      "start": 100.119,
+      "end": 102.83,
+      "duration": 2.711,
+      "text": "integer gives us a value error so it's"
+    },
+    {
+      "index": 45,
+      "start": 102.84,
+      "end": 104.91,
+      "duration": 2.07,
+      "text": "going to go through this accept block"
+    },
+    {
+      "index": 46,
+      "start": 104.92,
+      "end": 108.59,
+      "duration": 3.67,
+      "text": "here and print that which is great most"
+    },
+    {
+      "index": 47,
+      "start": 108.6,
+      "end": 111.749,
+      "duration": 3.149,
+      "text": "of you guys are getting that"
+    },
+    {
+      "index": 48,
+      "start": 115.789,
+      "end": 115.799,
+      "duration": 0.01,
+      "text": "right and then the next one ah perfect I"
+    },
+    {
+      "index": 49,
+      "start": 115.799,
+      "end": 118.55,
+      "duration": 2.751,
+      "text": "tricked some of you the next one says if"
+    },
+    {
+      "index": 50,
+      "start": 118.56,
+      "end": 121.389,
+      "duration": 2.829,
+      "text": "the user enters zero what does the"
+    },
+    {
+      "index": 51,
+      "start": 121.399,
+      "end": 124.069,
+      "duration": 2.67,
+      "text": "program"
+    },
+    {
+      "index": 52,
+      "start": 126.83,
+      "end": 126.84,
+      "duration": 0.01,
+      "text": "do well what does the program do we're"
+    },
+    {
+      "index": 53,
+      "start": 126.84,
+      "end": 128.229,
+      "duration": 1.389,
+      "text": "going to take in zero we're going to do"
+    },
+    {
+      "index": 54,
+      "start": 128.239,
+      "end": 131.51,
+      "duration": 3.271,
+      "text": "0 * 100 divide by 80 that's fine it's"
+    },
+    {
+      "index": 55,
+      "start": 131.52,
+      "end": 133.27,
+      "duration": 1.75,
+      "text": "always going to be zero we're going to"
+    },
+    {
+      "index": 56,
+      "start": 133.28,
+      "end": 134.35,
+      "duration": 1.07,
+      "text": "round that to"
+    },
+    {
+      "index": 57,
+      "start": 134.36,
+      "end": 136.869,
+      "duration": 2.509,
+      "text": "one and then we're going to print that"
+    },
+    {
+      "index": 58,
+      "start": 136.879,
+      "end": 140.27,
+      "duration": 3.391,
+      "text": "out so no zero division error no value"
+    },
+    {
+      "index": 59,
+      "start": 140.28,
+      "end": 141.99,
+      "duration": 1.71,
+      "text": "error everything went"
+    },
+    {
+      "index": 60,
+      "start": 142.0,
+      "end": 144.43,
+      "duration": 2.43,
+      "text": "right so that means it's going to print"
+    },
+    {
+      "index": 61,
+      "start": 144.44,
+      "end": 149.309,
+      "duration": 4.869,
+      "text": "out this the first one okay so that's"
+    },
+    {
+      "index": 62,
+      "start": 149.319,
+      "end": 150.67,
+      "duration": 1.351,
+      "text": "this one here"
+    },
+    {
+      "index": 63,
+      "start": 150.68,
+      "end": 152.55,
+      "duration": 1.87,
+      "text": "so the zero division error only happens"
+    },
+    {
+      "index": 64,
+      "start": 152.56,
+      "end": 154.39,
+      "duration": 1.83,
+      "text": "when you're trying to divide something"
+    },
+    {
+      "index": 65,
+      "start": 154.4,
+      "end": 156.75,
+      "duration": 2.35,
+      "text": "by zero right in this case we're not the"
+    },
+    {
+      "index": 66,
+      "start": 156.76,
+      "end": 159.47,
+      "duration": 2.71,
+      "text": "zero is uh at the top of the"
+    },
+    {
+      "index": 67,
+      "start": 159.48,
+      "end": 162.48,
+      "duration": 3.0,
+      "text": "fraction"
+    }
+  ],
+  "course": {
+    "category": "Computer Science & AI",
+    "title": "Introduction to Computer Science and Programming in Python",
+    "source_url": "https://www.youtube.com/playlist?list=PLUl4u3cNGP63WbdFxL8giv4yhgdMGaZNA"
+  }
+}

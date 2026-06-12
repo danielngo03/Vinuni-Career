@@ -1,0 +1,1873 @@
+{
+  "video": {
+    "id": "LjqUV6vqwkg",
+    "title": "Unit Step and Impulse Response | MIT 18.03SC Differential Equations, Fall 2011",
+    "url": "https://www.youtube.com/watch?v=LjqUV6vqwkg",
+    "channel": "MIT OpenCourseWare",
+    "duration": 782,
+    "language": "en"
+  },
+  "segment_count": 265,
+  "segments": [
+    {
+      "index": 0,
+      "start": 7.99,
+      "end": 8.0,
+      "duration": 0.01,
+      "text": "welcome back so in this session we're"
+    },
+    {
+      "index": 1,
+      "start": 8.0,
+      "end": 9.91,
+      "duration": 1.91,
+      "text": "going to look at unit step and impulse"
+    },
+    {
+      "index": 2,
+      "start": 9.92,
+      "end": 12.35,
+      "duration": 2.43,
+      "text": "responses so in this question we ask you"
+    },
+    {
+      "index": 3,
+      "start": 12.36,
+      "end": 14.509,
+      "duration": 2.149,
+      "text": "to find the unit impulse response to"
+    },
+    {
+      "index": 4,
+      "start": 14.519,
+      "end": 17.67,
+      "duration": 3.151,
+      "text": "these two equation x dot plus 2X F of T"
+    },
+    {
+      "index": 5,
+      "start": 17.68,
+      "end": 21.429,
+      "duration": 3.749,
+      "text": "and 2x dot dot + 27x dot oops it should"
+    },
+    {
+      "index": 6,
+      "start": 21.439,
+      "end": 23.589,
+      "duration": 2.15,
+      "text": "be a"
+    },
+    {
+      "index": 7,
+      "start": 23.599,
+      "end": 28.109,
+      "duration": 4.51,
+      "text": "seven + 7 x dot + 3x = F of T in the"
+    },
+    {
+      "index": 8,
+      "start": 28.119,
+      "end": 29.429,
+      "duration": 1.31,
+      "text": "second part you're asked to find the"
+    },
+    {
+      "index": 9,
+      "start": 29.439,
+      "end": 32.47,
+      "duration": 3.031,
+      "text": "unit step response for the first"
+    },
+    {
+      "index": 10,
+      "start": 32.48,
+      "end": 34.95,
+      "duration": 2.47,
+      "text": "equation so here the key points are"
+    },
+    {
+      "index": 11,
+      "start": 34.96,
+      "end": 36.549,
+      "duration": 1.589,
+      "text": "really to remember what do we mean by"
+    },
+    {
+      "index": 12,
+      "start": 36.559,
+      "end": 38.869,
+      "duration": 2.31,
+      "text": "unit impulse and unit step response"
+    },
+    {
+      "index": 13,
+      "start": 38.879,
+      "end": 40.59,
+      "duration": 1.711,
+      "text": "which initial conditions correspond to"
+    },
+    {
+      "index": 14,
+      "start": 40.6,
+      "end": 43.43,
+      "duration": 2.83,
+      "text": "these responses and what functions of f"
+    },
+    {
+      "index": 15,
+      "start": 43.44,
+      "end": 45.31,
+      "duration": 1.87,
+      "text": "of T do you choose in each case so why"
+    },
+    {
+      "index": 16,
+      "start": 45.32,
+      "end": 46.709,
+      "duration": 1.389,
+      "text": "don't you pause the video and work"
+    },
+    {
+      "index": 17,
+      "start": 46.719,
+      "end": 55.189,
+      "duration": 8.47,
+      "text": "through this problem and I'll be right"
+    },
+    {
+      "index": 18,
+      "start": 61.15,
+      "end": 61.16,
+      "duration": 0.01,
+      "text": "back welcome back so let's look at a"
+    },
+    {
+      "index": 19,
+      "start": 61.16,
+      "end": 64.63,
+      "duration": 3.47,
+      "text": "the equation a so the unit impulse"
+    },
+    {
+      "index": 20,
+      "start": 64.64,
+      "end": 66.67,
+      "duration": 2.03,
+      "text": "response is simply and I'm going to"
+    },
+    {
+      "index": 21,
+      "start": 66.68,
+      "end": 68.469,
+      "duration": 1.789,
+      "text": "write this"
+    },
+    {
+      "index": 22,
+      "start": 68.479,
+      "end": 74.07,
+      "duration": 5.591,
+      "text": "down unit impulse response is simply the"
+    },
+    {
+      "index": 23,
+      "start": 74.08,
+      "end": 78.35,
+      "duration": 4.27,
+      "text": "solution to the following"
+    },
+    {
+      "index": 24,
+      "start": 81.67,
+      "end": 81.68,
+      "duration": 0.01,
+      "text": "problem to our differential equation x"
+    },
+    {
+      "index": 25,
+      "start": 81.68,
+      "end": 84.069,
+      "duration": 2.389,
+      "text": "do plus 2X that we're given with the"
+    },
+    {
+      "index": 26,
+      "start": 84.079,
+      "end": 86.67,
+      "duration": 2.591,
+      "text": "forcing in a Delta function of magnitude"
+    },
+    {
+      "index": 27,
+      "start": 86.68,
+      "end": 92.71,
+      "duration": 6.03,
+      "text": "one with rest initial conditions"
+    },
+    {
+      "index": 28,
+      "start": 94.469,
+      "end": 94.479,
+      "duration": 0.01,
+      "text": "which means in this case that X of 0"
+    },
+    {
+      "index": 29,
+      "start": 94.479,
+      "end": 97.95,
+      "duration": 3.471,
+      "text": "equals to Z x of 0 minus is equal to Z"
+    },
+    {
+      "index": 30,
+      "start": 97.96,
+      "end": 99.67,
+      "duration": 1.71,
+      "text": "so how do we go about solving this"
+    },
+    {
+      "index": 31,
+      "start": 99.68,
+      "end": 102.469,
+      "duration": 2.789,
+      "text": "equation so here first of all let's look"
+    },
+    {
+      "index": 32,
+      "start": 102.479,
+      "end": 104.51,
+      "duration": 2.031,
+      "text": "at what this means this equation could"
+    },
+    {
+      "index": 33,
+      "start": 104.52,
+      "end": 106.63,
+      "duration": 2.11,
+      "text": "be modeling for example the quantity of"
+    },
+    {
+      "index": 34,
+      "start": 106.64,
+      "end": 109.749,
+      "duration": 3.109,
+      "text": "radioactive chemical in a tank and delta"
+    },
+    {
+      "index": 35,
+      "start": 109.759,
+      "end": 112.789,
+      "duration": 3.03,
+      "text": "T here means that we're we are giving a"
+    },
+    {
+      "index": 36,
+      "start": 112.799,
+      "end": 115.109,
+      "duration": 2.31,
+      "text": "high disturbance on a very short time on"
+    },
+    {
+      "index": 37,
+      "start": 115.119,
+      "end": 116.95,
+      "duration": 1.831,
+      "text": "this system so for example dumping a"
+    },
+    {
+      "index": 38,
+      "start": 116.96,
+      "end": 119.19,
+      "duration": 2.23,
+      "text": "huge amount of chemical in that tank and"
+    },
+    {
+      "index": 39,
+      "start": 119.2,
+      "end": 121.31,
+      "duration": 2.11,
+      "text": "then just letting the system evolve"
+    },
+    {
+      "index": 40,
+      "start": 121.32,
+      "end": 123.149,
+      "duration": 1.829,
+      "text": "after dumping all that chemical in the"
+    },
+    {
+      "index": 41,
+      "start": 123.159,
+      "end": 125.51,
+      "duration": 2.351,
+      "text": "tank so really what we could see is that"
+    },
+    {
+      "index": 42,
+      "start": 125.52,
+      "end": 128.71,
+      "duration": 3.19,
+      "text": "the Delta could be identified to to the"
+    },
+    {
+      "index": 43,
+      "start": 128.72,
+      "end": 131.029,
+      "duration": 2.309,
+      "text": "x dot which is the highest derivative in"
+    },
+    {
+      "index": 44,
+      "start": 131.039,
+      "end": 133.15,
+      "duration": 2.111,
+      "text": "the system and that would then mean that"
+    },
+    {
+      "index": 45,
+      "start": 133.16,
+      "end": 134.83,
+      "duration": 1.67,
+      "text": "we have a jump in the second highest"
+    },
+    {
+      "index": 46,
+      "start": 134.84,
+      "end": 137.949,
+      "duration": 3.109,
+      "text": "derivative which would be an X so delta"
+    },
+    {
+      "index": 47,
+      "start": 137.959,
+      "end": 141.19,
+      "duration": 3.231,
+      "text": "T"
+    },
+    {
+      "index": 48,
+      "start": 147.19,
+      "end": 147.2,
+      "duration": 0.01,
+      "text": "jump in"
+    },
+    {
+      "index": 49,
+      "start": 147.2,
+      "end": 150.71,
+      "duration": 3.51,
+      "text": "X and what do I mean by that is that we"
+    },
+    {
+      "index": 50,
+      "start": 150.72,
+      "end": 153.83,
+      "duration": 3.11,
+      "text": "have we we had rest initial conditions"
+    },
+    {
+      "index": 51,
+      "start": 153.84,
+      "end": 158.03,
+      "duration": 4.19,
+      "text": "initially now we have to go into a jump"
+    },
+    {
+      "index": 52,
+      "start": 158.04,
+      "end": 161.309,
+      "duration": 3.269,
+      "text": "where the quantity in the tank was"
+    },
+    {
+      "index": 53,
+      "start": 161.319,
+      "end": 164.35,
+      "duration": 3.031,
+      "text": "raised to one which is basically uh the"
+    },
+    {
+      "index": 54,
+      "start": 164.36,
+      "end": 166.11,
+      "duration": 1.75,
+      "text": "magnitude on the right hand side and the"
+    },
+    {
+      "index": 55,
+      "start": 166.12,
+      "end": 167.55,
+      "duration": 1.43,
+      "text": "fact that we have no coefficients for"
+    },
+    {
+      "index": 56,
+      "start": 167.56,
+      "end": 170.229,
+      "duration": 2.669,
+      "text": "the highest derivative in the system so"
+    },
+    {
+      "index": 57,
+      "start": 170.239,
+      "end": 173.869,
+      "duration": 3.63,
+      "text": "basically we can solve this equation"
+    },
+    {
+      "index": 58,
+      "start": 173.879,
+      "end": 181.91,
+      "duration": 8.031,
+      "text": "by solving the equivalent problem"
+    },
+    {
+      "index": 59,
+      "start": 185.589,
+      "end": 185.599,
+      "duration": 0.01,
+      "text": "x dot + 2x = to 0 which is just the"
+    },
+    {
+      "index": 60,
+      "start": 185.599,
+      "end": 191.39,
+      "duration": 5.791,
+      "text": "homogeneous part with our new initial"
+    },
+    {
+      "index": 61,
+      "start": 194.99,
+      "end": 195.0,
+      "duration": 0.01,
+      "text": "conditions X of 0 minus equal to 1 and"
+    },
+    {
+      "index": 62,
+      "start": 195.0,
+      "end": 197.509,
+      "duration": 2.509,
+      "text": "so here clearly from before we saw that"
+    },
+    {
+      "index": 63,
+      "start": 197.519,
+      "end": 199.509,
+      "duration": 1.99,
+      "text": "this"
+    },
+    {
+      "index": 64,
+      "start": 199.519,
+      "end": 202.27,
+      "duration": 2.751,
+      "text": "solution would be a decaying exponential"
+    },
+    {
+      "index": 65,
+      "start": 202.28,
+      "end": 204.91,
+      "duration": 2.63,
+      "text": "we would have Conant integration here"
+    },
+    {
+      "index": 66,
+      "start": 204.92,
+      "end": 206.949,
+      "duration": 2.029,
+      "text": "which would be just one given our new"
+    },
+    {
+      "index": 67,
+      "start": 206.959,
+      "end": 209.11,
+      "duration": 2.151,
+      "text": "initial condition so this would be valid"
+    },
+    {
+      "index": 68,
+      "start": 209.12,
+      "end": 211.869,
+      "duration": 2.749,
+      "text": "for t l than zero and given that we"
+    },
+    {
+      "index": 69,
+      "start": 211.879,
+      "end": 213.83,
+      "duration": 1.951,
+      "text": "started from rest initial conditions"
+    },
+    {
+      "index": 70,
+      "start": 213.84,
+      "end": 215.83,
+      "duration": 1.99,
+      "text": "prior to the disturbance introduced by"
+    },
+    {
+      "index": 71,
+      "start": 215.84,
+      "end": 217.91,
+      "duration": 2.07,
+      "text": "the Delta we could also write"
+    },
+    {
+      "index": 72,
+      "start": 217.92,
+      "end": 220.949,
+      "duration": 3.029,
+      "text": "this with a U of T step function if we"
+    },
+    {
+      "index": 73,
+      "start": 220.959,
+      "end": 224.91,
+      "duration": 3.951,
+      "text": "were to consider T in R so if you want"
+    },
+    {
+      "index": 74,
+      "start": 224.92,
+      "end": 227.55,
+      "duration": 2.63,
+      "text": "to look at how would the solution would"
+    },
+    {
+      "index": 75,
+      "start": 227.56,
+      "end": 230.99,
+      "duration": 3.43,
+      "text": "look like we would have basically rest"
+    },
+    {
+      "index": 76,
+      "start": 231.0,
+      "end": 233.27,
+      "duration": 2.27,
+      "text": "initial conditions and then a jump"
+    },
+    {
+      "index": 77,
+      "start": 233.28,
+      "end": 236.789,
+      "duration": 3.509,
+      "text": "introduced by our forcing and after that"
+    },
+    {
+      "index": 78,
+      "start": 236.799,
+      "end": 237.91,
+      "duration": 1.111,
+      "text": "just a"
+    },
+    {
+      "index": 79,
+      "start": 237.92,
+      "end": 240.91,
+      "duration": 2.99,
+      "text": "decaying exponential"
+    },
+    {
+      "index": 80,
+      "start": 240.92,
+      "end": 242.27,
+      "duration": 1.35,
+      "text": "and a jump"
+    },
+    {
+      "index": 81,
+      "start": 242.28,
+      "end": 246.03,
+      "duration": 3.75,
+      "text": "here to New initial condition of one so"
+    },
+    {
+      "index": 82,
+      "start": 246.04,
+      "end": 248.869,
+      "duration": 2.829,
+      "text": "let's move to the second"
+    },
+    {
+      "index": 83,
+      "start": 248.879,
+      "end": 251.03,
+      "duration": 2.151,
+      "text": "problem now we're dealing with the"
+    },
+    {
+      "index": 84,
+      "start": 251.04,
+      "end": 253.309,
+      "duration": 2.269,
+      "text": "second order differential"
+    },
+    {
+      "index": 85,
+      "start": 253.319,
+      "end": 255.909,
+      "duration": 2.59,
+      "text": "equation 2 x do"
+    },
+    {
+      "index": 86,
+      "start": 255.919,
+      "end": 258.229,
+      "duration": 2.31,
+      "text": "dot 7 x"
+    },
+    {
+      "index": 87,
+      "start": 258.239,
+      "end": 261.069,
+      "duration": 2.83,
+      "text": "dot +"
+    },
+    {
+      "index": 88,
+      "start": 261.079,
+      "end": 265.67,
+      "duration": 4.591,
+      "text": "3x = F of T and we are asked again to"
+    },
+    {
+      "index": 89,
+      "start": 265.68,
+      "end": 269.95,
+      "duration": 4.27,
+      "text": "seek the unit and pulse response to this"
+    },
+    {
+      "index": 90,
+      "start": 269.96,
+      "end": 272.23,
+      "duration": 2.27,
+      "text": "problem so the unit impulse response is"
+    },
+    {
+      "index": 91,
+      "start": 272.24,
+      "end": 277.67,
+      "duration": 5.43,
+      "text": "simply the"
+    },
+    {
+      "index": 92,
+      "start": 280.71,
+      "end": 280.72,
+      "duration": 0.01,
+      "text": "solution of 2 x dot"
+    },
+    {
+      "index": 93,
+      "start": 280.72,
+      "end": 286.83,
+      "duration": 6.11,
+      "text": "dot + 7 x dot + 3x equals again the unit"
+    },
+    {
+      "index": 94,
+      "start": 286.84,
+      "end": 288.909,
+      "duration": 2.069,
+      "text": "impulse means that we're just kicking"
+    },
+    {
+      "index": 95,
+      "start": 288.919,
+      "end": 291.87,
+      "duration": 2.951,
+      "text": "the system with an Impulse or Delta"
+    },
+    {
+      "index": 96,
+      "start": 291.88,
+      "end": 294.51,
+      "duration": 2.63,
+      "text": "function and we're starting from rest"
+    },
+    {
+      "index": 97,
+      "start": 294.52,
+      "end": 296.749,
+      "duration": 2.229,
+      "text": "initial"
+    },
+    {
+      "index": 98,
+      "start": 296.759,
+      "end": 299.99,
+      "duration": 3.231,
+      "text": "conditions so here let's just look at"
+    },
+    {
+      "index": 99,
+      "start": 300.0,
+      "end": 302.029,
+      "duration": 2.029,
+      "text": "what could this be modeling so this"
+    },
+    {
+      "index": 100,
+      "start": 302.039,
+      "end": 304.029,
+      "duration": 1.99,
+      "text": "could be just basically Newton Second"
+    },
+    {
+      "index": 101,
+      "start": 304.039,
+      "end": 306.83,
+      "duration": 2.791,
+      "text": "Law with an acceleration and forces"
+    },
+    {
+      "index": 102,
+      "start": 306.84,
+      "end": 308.95,
+      "duration": 2.11,
+      "text": "applied to the system for example it"
+    },
+    {
+      "index": 103,
+      "start": 308.96,
+      "end": 311.27,
+      "duration": 2.31,
+      "text": "could be a mass with uh hanged on a"
+    },
+    {
+      "index": 104,
+      "start": 311.28,
+      "end": 313.189,
+      "duration": 1.909,
+      "text": "spring with certain damping due to this"
+    },
+    {
+      "index": 105,
+      "start": 313.199,
+      "end": 315.99,
+      "duration": 2.791,
+      "text": "term and this Delta here would have"
+    },
+    {
+      "index": 106,
+      "start": 316.0,
+      "end": 317.87,
+      "duration": 1.87,
+      "text": "basically the units corresponding to a"
+    },
+    {
+      "index": 107,
+      "start": 317.88,
+      "end": 320.27,
+      "duration": 2.39,
+      "text": "force that would be felt by the highest"
+    },
+    {
+      "index": 108,
+      "start": 320.28,
+      "end": 321.99,
+      "duration": 1.71,
+      "text": "order term in the integral which could"
+    },
+    {
+      "index": 109,
+      "start": 322.0,
+      "end": 323.749,
+      "duration": 1.749,
+      "text": "correspond to the acceleration"
+    },
+    {
+      "index": 110,
+      "start": 323.759,
+      "end": 326.029,
+      "duration": 2.27,
+      "text": "multiplied for example by a mass of of"
+    },
+    {
+      "index": 111,
+      "start": 326.039,
+      "end": 329.029,
+      "duration": 2.99,
+      "text": "two so really the Delta introduces can"
+    },
+    {
+      "index": 112,
+      "start": 329.039,
+      "end": 330.749,
+      "duration": 1.71,
+      "text": "be identified to the highest order"
+    },
+    {
+      "index": 113,
+      "start": 330.759,
+      "end": 333.11,
+      "duration": 2.351,
+      "text": "derivative which means that we would"
+    },
+    {
+      "index": 114,
+      "start": 333.12,
+      "end": 335.749,
+      "duration": 2.629,
+      "text": "have a discontinuity from 0 to one on"
+    },
+    {
+      "index": 115,
+      "start": 335.759,
+      "end": 338.629,
+      "duration": 2.87,
+      "text": "the derivative one degree lower so in x"
+    },
+    {
+      "index": 116,
+      "start": 338.639,
+      "end": 344.99,
+      "duration": 6.351,
+      "text": "dot and so the"
+    },
+    {
+      "index": 117,
+      "start": 352.469,
+      "end": 352.479,
+      "duration": 0.01,
+      "text": "discontinuity on the second highest"
+    },
+    {
+      "index": 118,
+      "start": 352.479,
+      "end": 354.99,
+      "duration": 2.511,
+      "text": "derivative and what I mean by that is"
+    },
+    {
+      "index": 119,
+      "start": 355.0,
+      "end": 357.99,
+      "duration": 2.99,
+      "text": "that we have a"
+    },
+    {
+      "index": 120,
+      "start": 361.189,
+      "end": 361.199,
+      "duration": 0.01,
+      "text": "jump from our original initial"
+    },
+    {
+      "index": 121,
+      "start": 361.199,
+      "end": 365.79,
+      "duration": 4.591,
+      "text": "conditions of X do 0 minus equal to"
+    },
+    {
+      "index": 122,
+      "start": 365.8,
+      "end": 369.83,
+      "duration": 4.03,
+      "text": "0 to new initial conditions X do of 0"
+    },
+    {
+      "index": 123,
+      "start": 369.84,
+      "end": 372.71,
+      "duration": 2.87,
+      "text": "minus = 1 12 where did this 1/2 come"
+    },
+    {
+      "index": 124,
+      "start": 372.72,
+      "end": 375.43,
+      "duration": 2.71,
+      "text": "from it came from the fact that I have a"
+    },
+    {
+      "index": 125,
+      "start": 375.44,
+      "end": 376.95,
+      "duration": 1.51,
+      "text": "factor of two in front of the highest"
+    },
+    {
+      "index": 126,
+      "start": 376.96,
+      "end": 379.35,
+      "duration": 2.39,
+      "text": "order derivative so if I'm identifying"
+    },
+    {
+      "index": 127,
+      "start": 379.36,
+      "end": 382.11,
+      "duration": 2.75,
+      "text": "this with Delta then integration of this"
+    },
+    {
+      "index": 128,
+      "start": 382.12,
+      "end": 383.71,
+      "duration": 1.59,
+      "text": "term would give me x dot that"
+    },
+    {
+      "index": 129,
+      "start": 383.72,
+      "end": 388.15,
+      "duration": 4.43,
+      "text": "corresponds to the jump from0 to 1/ two"
+    },
+    {
+      "index": 130,
+      "start": 388.16,
+      "end": 390.79,
+      "duration": 2.63,
+      "text": "SO2 so that's it come from and each time"
+    },
+    {
+      "index": 131,
+      "start": 390.8,
+      "end": 392.309,
+      "duration": 1.509,
+      "text": "that you would have a coefficient front"
+    },
+    {
+      "index": 132,
+      "start": 392.319,
+      "end": 394.11,
+      "duration": 1.791,
+      "text": "of your highest order derivative"
+    },
+    {
+      "index": 133,
+      "start": 394.12,
+      "end": 395.67,
+      "duration": 1.55,
+      "text": "associated with the Delta on the right"
+    },
+    {
+      "index": 134,
+      "start": 395.68,
+      "end": 398.629,
+      "duration": 2.949,
+      "text": "you would have a jump of one over that"
+    },
+    {
+      "index": 135,
+      "start": 398.639,
+      "end": 401.99,
+      "duration": 3.351,
+      "text": "coefficient okay so from this point what"
+    },
+    {
+      "index": 136,
+      "start": 402.0,
+      "end": 403.79,
+      "duration": 1.79,
+      "text": "are we solving what do we need to solve"
+    },
+    {
+      "index": 137,
+      "start": 403.8,
+      "end": 406.07,
+      "duration": 2.27,
+      "text": "to get the unit impulse response it's"
+    },
+    {
+      "index": 138,
+      "start": 406.08,
+      "end": 412.629,
+      "duration": 6.549,
+      "text": "equivalent to solving our new"
+    },
+    {
+      "index": 139,
+      "start": 426.51,
+      "end": 426.52,
+      "duration": 0.01,
+      "text": "conditions do equals 1/2 and of course"
+    },
+    {
+      "index": 140,
+      "start": 426.52,
+      "end": 428.79,
+      "duration": 2.27,
+      "text": "here I didn't mention but the initial"
+    },
+    {
+      "index": 141,
+      "start": 428.8,
+      "end": 431.39,
+      "duration": 2.59,
+      "text": "condition on x0 minus one because we"
+    },
+    {
+      "index": 142,
+      "start": 431.4,
+      "end": 432.869,
+      "duration": 1.469,
+      "text": "need two initial conditions for this"
+    },
+    {
+      "index": 143,
+      "start": 432.879,
+      "end": 434.95,
+      "duration": 2.071,
+      "text": "second order derivative would still be"
+    },
+    {
+      "index": 144,
+      "start": 434.96,
+      "end": 437.43,
+      "duration": 2.47,
+      "text": "zero as the discontinuity would not be"
+    },
+    {
+      "index": 145,
+      "start": 437.44,
+      "end": 440.029,
+      "duration": 2.589,
+      "text": "felt by the the function X"
+    },
+    {
+      "index": 146,
+      "start": 440.039,
+      "end": 442.869,
+      "duration": 2.83,
+      "text": "itself so we can go ahead and solve this"
+    },
+    {
+      "index": 147,
+      "start": 442.879,
+      "end": 445.469,
+      "duration": 2.59,
+      "text": "problem so we we use the characteristic"
+    },
+    {
+      "index": 148,
+      "start": 445.479,
+      "end": 451.43,
+      "duration": 5.951,
+      "text": "polinomial as we did before"
+    },
+    {
+      "index": 149,
+      "start": 453.51,
+      "end": 453.52,
+      "duration": 0.01,
+      "text": "this characteristic polinomial would"
+    },
+    {
+      "index": 150,
+      "start": 453.52,
+      "end": 455.309,
+      "duration": 1.789,
+      "text": "have a discriminant of"
+    },
+    {
+      "index": 151,
+      "start": 455.319,
+      "end": 458.469,
+      "duration": 3.15,
+      "text": "25 which give us simple"
+    },
+    {
+      "index": 152,
+      "start": 458.479,
+      "end": 461.309,
+      "duration": 2.83,
+      "text": "roots that we can compute so it be Min -"
+    },
+    {
+      "index": 153,
+      "start": 461.319,
+      "end": 464.83,
+      "duration": 3.511,
+      "text": "7 plus or minus the square root of the"
+    },
+    {
+      "index": 154,
+      "start": 464.84,
+      "end": 472.11,
+      "duration": 7.27,
+      "text": "discriminant over over"
+    },
+    {
+      "index": 155,
+      "start": 477.07,
+      "end": 477.08,
+      "duration": 0.01,
+      "text": "four so we have two Roots - 7 - 5 over 4"
+    },
+    {
+      "index": 156,
+      "start": 477.08,
+      "end": 481.189,
+      "duration": 4.109,
+      "text": "-2 over 4 which is -3 - 7 + 5 over 4"
+    },
+    {
+      "index": 157,
+      "start": 481.199,
+      "end": 483.589,
+      "duration": 2.39,
+      "text": "which just gives us"
+    },
+    {
+      "index": 158,
+      "start": 483.599,
+      "end": 486.149,
+      "duration": 2.55,
+      "text": "-2 so we can write down the solution to"
+    },
+    {
+      "index": 159,
+      "start": 486.159,
+      "end": 488.83,
+      "duration": 2.671,
+      "text": "this"
+    },
+    {
+      "index": 160,
+      "start": 493.07,
+      "end": 493.08,
+      "duration": 0.01,
+      "text": "problem as C1 exponential the root that"
+    },
+    {
+      "index": 161,
+      "start": 493.08,
+      "end": 497.869,
+      "duration": 4.789,
+      "text": "we just found minus 3T plus C2"
+    },
+    {
+      "index": 162,
+      "start": 497.879,
+      "end": 501.27,
+      "duration": 3.391,
+      "text": "exponential the other root minus"
+    },
+    {
+      "index": 163,
+      "start": 501.28,
+      "end": 503.07,
+      "duration": 1.79,
+      "text": "12 of"
+    },
+    {
+      "index": 164,
+      "start": 503.08,
+      "end": 506.909,
+      "duration": 3.829,
+      "text": "T now to get C1 C2 we need to take into"
+    },
+    {
+      "index": 165,
+      "start": 506.919,
+      "end": 508.79,
+      "duration": 1.871,
+      "text": "account the initial conditions so the"
+    },
+    {
+      "index": 166,
+      "start": 508.8,
+      "end": 511.51,
+      "duration": 2.71,
+      "text": "first one tells tell us that X at 0 is z"
+    },
+    {
+      "index": 167,
+      "start": 511.52,
+      "end": 514.909,
+      "duration": 3.389,
+      "text": "so that will give us C1 + C2 = to 0 so"
+    },
+    {
+      "index": 168,
+      "start": 514.919,
+      "end": 517.19,
+      "duration": 2.271,
+      "text": "basically C2 = minus"
+    },
+    {
+      "index": 169,
+      "start": 517.2,
+      "end": 520.029,
+      "duration": 2.829,
+      "text": "C1 and the second initial condition"
+    },
+    {
+      "index": 170,
+      "start": 520.039,
+      "end": 521.949,
+      "duration": 1.91,
+      "text": "tells us that the derivative is zero so"
+    },
+    {
+      "index": 171,
+      "start": 521.959,
+      "end": 523.949,
+      "duration": 1.99,
+      "text": "that giv us minus 3"
+    },
+    {
+      "index": 172,
+      "start": 523.959,
+      "end": 528.63,
+      "duration": 4.671,
+      "text": "C1 minus 12 C2 equals to zero here we"
+    },
+    {
+      "index": 173,
+      "start": 528.64,
+      "end": 531.07,
+      "duration": 2.43,
+      "text": "have that C2 is equal to minus C1 so we"
+    },
+    {
+      "index": 174,
+      "start": 531.08,
+      "end": 533.07,
+      "duration": 1.99,
+      "text": "can just factor out everything and we"
+    },
+    {
+      "index": 175,
+      "start": 533.08,
+      "end": 534.99,
+      "duration": 1.91,
+      "text": "end up with"
+    },
+    {
+      "index": 176,
+      "start": 535.0,
+      "end": 538.829,
+      "duration": 3.829,
+      "text": "3 minus 12 oops sorry here it should be"
+    },
+    {
+      "index": 177,
+      "start": 538.839,
+      "end": 544.15,
+      "duration": 5.311,
+      "text": "1/2 our new modified initial"
+    },
+    {
+      "index": 178,
+      "start": 546.15,
+      "end": 546.16,
+      "duration": 0.01,
+      "text": "condition equals"
+    },
+    {
+      "index": 179,
+      "start": 546.16,
+      "end": 550.269,
+      "duration": 4.109,
+      "text": "to2 and here we would have fifth half"
+    },
+    {
+      "index": 180,
+      "start": 550.279,
+      "end": 554.509,
+      "duration": 4.23,
+      "text": "equal to 1/2 so C2 equal"
+    },
+    {
+      "index": 181,
+      "start": 559.63,
+      "end": 559.64,
+      "duration": 0.01,
+      "text": "1/ equals minus C1 and so plugging in C1"
+    },
+    {
+      "index": 182,
+      "start": 559.64,
+      "end": 562.389,
+      "duration": 2.749,
+      "text": "and C2 in this formula would give us the"
+    },
+    {
+      "index": 183,
+      "start": 562.399,
+      "end": 565.79,
+      "duration": 3.391,
+      "text": "general"
+    },
+    {
+      "index": 184,
+      "start": 569.949,
+      "end": 569.959,
+      "duration": 0.01,
+      "text": "solution with C2"
+    },
+    {
+      "index": 185,
+      "start": 569.959,
+      "end": 572.79,
+      "duration": 2.831,
+      "text": "exponential minus 12 T minus exponential"
+    },
+    {
+      "index": 186,
+      "start": 572.8,
+      "end": 575.35,
+      "duration": 2.55,
+      "text": "minus 3T and all of this remember we're"
+    },
+    {
+      "index": 187,
+      "start": 575.36,
+      "end": 577.23,
+      "duration": 1.87,
+      "text": "solving for T larger than zero in our"
+    },
+    {
+      "index": 188,
+      "start": 577.24,
+      "end": 579.55,
+      "duration": 2.31,
+      "text": "modified system with our new initial"
+    },
+    {
+      "index": 189,
+      "start": 579.56,
+      "end": 581.63,
+      "duration": 2.07,
+      "text": "conditions so this is for T larger than"
+    },
+    {
+      "index": 190,
+      "start": 581.64,
+      "end": 583.87,
+      "duration": 2.23,
+      "text": "zero and again here if we wanted to just"
+    },
+    {
+      "index": 191,
+      "start": 583.88,
+      "end": 586.87,
+      "duration": 2.99,
+      "text": "write it for T and or R then we would"
+    },
+    {
+      "index": 192,
+      "start": 586.88,
+      "end": 589.509,
+      "duration": 2.629,
+      "text": "could just add the step function U of T"
+    },
+    {
+      "index": 193,
+      "start": 589.519,
+      "end": 591.31,
+      "duration": 1.791,
+      "text": "that would just signify that we took"
+    },
+    {
+      "index": 194,
+      "start": 591.32,
+      "end": 594.59,
+      "duration": 3.27,
+      "text": "rest initial conditions before x equal 0"
+    },
+    {
+      "index": 195,
+      "start": 594.6,
+      "end": 598.43,
+      "duration": 3.83,
+      "text": "minus okay so that ends the first part"
+    },
+    {
+      "index": 196,
+      "start": 598.44,
+      "end": 600.59,
+      "duration": 2.15,
+      "text": "so now quickly for the second part we're"
+    },
+    {
+      "index": 197,
+      "start": 600.6,
+      "end": 603.71,
+      "duration": 3.11,
+      "text": "asked to find the unit step response the"
+    },
+    {
+      "index": 198,
+      "start": 603.72,
+      "end": 606.59,
+      "duration": 2.87,
+      "text": "unit um yeah the unit step"
+    },
+    {
+      "index": 199,
+      "start": 606.6,
+      "end": 609.829,
+      "duration": 3.229,
+      "text": "response to the first system so the unit"
+    },
+    {
+      "index": 200,
+      "start": 609.839,
+      "end": 615.389,
+      "duration": 5.55,
+      "text": "step response is just the"
+    },
+    {
+      "index": 201,
+      "start": 619.389,
+      "end": 619.399,
+      "duration": 0.01,
+      "text": "solution to our original OD problem x"
+    },
+    {
+      "index": 202,
+      "start": 619.399,
+      "end": 623.67,
+      "duration": 4.271,
+      "text": "dot plus 2X but now F of T is the step"
+    },
+    {
+      "index": 203,
+      "start": 623.68,
+      "end": 626.91,
+      "duration": 3.23,
+      "text": "function hence the step"
+    },
+    {
+      "index": 204,
+      "start": 626.92,
+      "end": 630.91,
+      "duration": 3.99,
+      "text": "here with still rest initial"
+    },
+    {
+      "index": 205,
+      "start": 630.92,
+      "end": 633.47,
+      "duration": 2.55,
+      "text": "definitions so really the step function"
+    },
+    {
+      "index": 206,
+      "start": 633.48,
+      "end": 636.15,
+      "duration": 2.67,
+      "text": "is just zero everywhere before 0 minus"
+    },
+    {
+      "index": 207,
+      "start": 636.16,
+      "end": 639.43,
+      "duration": 3.27,
+      "text": "and it takes the value of one after and"
+    },
+    {
+      "index": 208,
+      "start": 639.44,
+      "end": 641.389,
+      "duration": 1.949,
+      "text": "so basically we can just solve again for"
+    },
+    {
+      "index": 209,
+      "start": 641.399,
+      "end": 646.35,
+      "duration": 4.951,
+      "text": "T"
+    },
+    {
+      "index": 210,
+      "start": 649.19,
+      "end": 649.2,
+      "duration": 0.01,
+      "text": "positive the modified differential"
+    },
+    {
+      "index": 211,
+      "start": 649.2,
+      "end": 651.069,
+      "duration": 1.869,
+      "text": "equation with you taking just the value"
+    },
+    {
+      "index": 212,
+      "start": 651.079,
+      "end": 655.79,
+      "duration": 4.711,
+      "text": "of one and here we just"
+    },
+    {
+      "index": 213,
+      "start": 659.35,
+      "end": 659.36,
+      "duration": 0.01,
+      "text": "get similar Roots it would be a minus 2T"
+    },
+    {
+      "index": 214,
+      "start": 659.36,
+      "end": 660.509,
+      "duration": 1.149,
+      "text": "but then we would have a constant"
+    },
+    {
+      "index": 215,
+      "start": 660.519,
+      "end": 664.35,
+      "duration": 3.831,
+      "text": "integration to worry about and a new"
+    },
+    {
+      "index": 216,
+      "start": 664.36,
+      "end": 666.35,
+      "duration": 1.99,
+      "text": "particular solution a lucky guess would"
+    },
+    {
+      "index": 217,
+      "start": 666.36,
+      "end": 667.87,
+      "duration": 1.51,
+      "text": "just be a constant and that would give"
+    },
+    {
+      "index": 218,
+      "start": 667.88,
+      "end": 668.71,
+      "duration": 0.83,
+      "text": "us a"
+    },
+    {
+      "index": 219,
+      "start": 668.72,
+      "end": 672.389,
+      "duration": 3.669,
+      "text": "1/2 from one over two okay so then we"
+    },
+    {
+      "index": 220,
+      "start": 672.399,
+      "end": 675.11,
+      "duration": 2.711,
+      "text": "would just need to seek the C1 that"
+    },
+    {
+      "index": 221,
+      "start": 675.12,
+      "end": 678.269,
+      "duration": 3.149,
+      "text": "would give us X of T equals to zero at"
+    },
+    {
+      "index": 222,
+      "start": 678.279,
+      "end": 680.069,
+      "duration": 1.79,
+      "text": "zero because in this case we don't need"
+    },
+    {
+      "index": 223,
+      "start": 680.079,
+      "end": 681.79,
+      "duration": 1.711,
+      "text": "to modify the initial conditions they"
+    },
+    {
+      "index": 224,
+      "start": 681.8,
+      "end": 683.75,
+      "duration": 1.95,
+      "text": "still remain the same rest initial"
+    },
+    {
+      "index": 225,
+      "start": 683.76,
+      "end": 685.71,
+      "duration": 1.95,
+      "text": "conditions and so we would get here just"
+    },
+    {
+      "index": 226,
+      "start": 685.72,
+      "end": 692.389,
+      "duration": 6.669,
+      "text": "C1 equal minus 2"
+    },
+    {
+      "index": 227,
+      "start": 695.19,
+      "end": 695.2,
+      "duration": 0.01,
+      "text": "uh equals minus one2 sorry and so we"
+    },
+    {
+      "index": 228,
+      "start": 695.2,
+      "end": 697.15,
+      "duration": 1.95,
+      "text": "would have 1 minus"
+    },
+    {
+      "index": 229,
+      "start": 697.16,
+      "end": 699.829,
+      "duration": 2.669,
+      "text": "exponential minus 2T so just here"
+    },
+    {
+      "index": 230,
+      "start": 699.839,
+      "end": 701.509,
+      "duration": 1.67,
+      "text": "something I forgot to mention what could"
+    },
+    {
+      "index": 231,
+      "start": 701.519,
+      "end": 703.23,
+      "duration": 1.711,
+      "text": "this be modeling so this could be"
+    },
+    {
+      "index": 232,
+      "start": 703.24,
+      "end": 705.43,
+      "duration": 2.19,
+      "text": "modeling if I go back to my analogy of"
+    },
+    {
+      "index": 233,
+      "start": 705.44,
+      "end": 708.389,
+      "duration": 2.949,
+      "text": "the the radioactive chemical in the tank"
+    },
+    {
+      "index": 234,
+      "start": 708.399,
+      "end": 709.829,
+      "duration": 1.43,
+      "text": "this would be telling me that after a"
+    },
+    {
+      "index": 235,
+      "start": 709.839,
+      "end": 711.629,
+      "duration": 1.79,
+      "text": "certain time I start inputting at a"
+    },
+    {
+      "index": 236,
+      "start": 711.639,
+      "end": 714.11,
+      "duration": 2.471,
+      "text": "steady rate at a constant rate of UFT of"
+    },
+    {
+      "index": 237,
+      "start": 714.12,
+      "end": 715.829,
+      "duration": 1.709,
+      "text": "one per unit of time the amount in the"
+    },
+    {
+      "index": 238,
+      "start": 715.839,
+      "end": 718.069,
+      "duration": 2.23,
+      "text": "tank and then looking at how the system"
+    },
+    {
+      "index": 239,
+      "start": 718.079,
+      "end": 719.75,
+      "duration": 1.671,
+      "text": "evolves to that so there's no abrupt"
+    },
+    {
+      "index": 240,
+      "start": 719.76,
+      "end": 721.59,
+      "duration": 1.83,
+      "text": "change that introduces a"
+    },
+    {
+      "index": 241,
+      "start": 721.6,
+      "end": 724.19,
+      "duration": 2.59,
+      "text": "discontinuity uh so just to conclude I"
+    },
+    {
+      "index": 242,
+      "start": 724.2,
+      "end": 726.43,
+      "duration": 2.23,
+      "text": "just want to sketch this solution just"
+    },
+    {
+      "index": 243,
+      "start": 726.44,
+      "end": 727.949,
+      "duration": 1.509,
+      "text": "so that you see the difference between"
+    },
+    {
+      "index": 244,
+      "start": 727.959,
+      "end": 729.23,
+      "duration": 1.271,
+      "text": "the"
+    },
+    {
+      "index": 245,
+      "start": 729.24,
+      "end": 733.189,
+      "duration": 3.949,
+      "text": "two and here what we have uh again I"
+    },
+    {
+      "index": 246,
+      "start": 733.199,
+      "end": 735.55,
+      "duration": 2.351,
+      "text": "could have introduced my UFT here if I"
+    },
+    {
+      "index": 247,
+      "start": 735.56,
+      "end": 737.59,
+      "duration": 2.03,
+      "text": "want T in"
+    },
+    {
+      "index": 248,
+      "start": 737.6,
+      "end": 741.189,
+      "duration": 3.589,
+      "text": "R so here we have again A solution that"
+    },
+    {
+      "index": 249,
+      "start": 741.199,
+      "end": 744.389,
+      "duration": 3.19,
+      "text": "is zero before it's there's no"
+    },
+    {
+      "index": 250,
+      "start": 744.399,
+      "end": 747.189,
+      "duration": 2.79,
+      "text": "discontinuity it's still zero at zero"
+    },
+    {
+      "index": 251,
+      "start": 747.199,
+      "end": 750.11,
+      "duration": 2.911,
+      "text": "minus and then we have basically a"
+    },
+    {
+      "index": 252,
+      "start": 750.12,
+      "end": 753.509,
+      "duration": 3.389,
+      "text": "solution that is growing until it"
+    },
+    {
+      "index": 253,
+      "start": 753.519,
+      "end": 756.79,
+      "duration": 3.271,
+      "text": "reaches an ASM toote of 1/2 when this"
+    },
+    {
+      "index": 254,
+      "start": 756.8,
+      "end": 759.069,
+      "duration": 2.269,
+      "text": "exponential goes to zero and so you can"
+    },
+    {
+      "index": 255,
+      "start": 759.079,
+      "end": 760.59,
+      "duration": 1.511,
+      "text": "see that it's a smooth transition"
+    },
+    {
+      "index": 256,
+      "start": 760.6,
+      "end": 762.23,
+      "duration": 1.63,
+      "text": "because I just started inputting the"
+    },
+    {
+      "index": 257,
+      "start": 762.24,
+      "end": 764.389,
+      "duration": 2.149,
+      "text": "amount of the chemical in the tank and"
+    },
+    {
+      "index": 258,
+      "start": 764.399,
+      "end": 766.79,
+      "duration": 2.391,
+      "text": "non in a non abrupt way so this"
+    },
+    {
+      "index": 259,
+      "start": 766.8,
+      "end": 768.99,
+      "duration": 2.19,
+      "text": "concludes this session and the key here"
+    },
+    {
+      "index": 260,
+      "start": 769.0,
+      "end": 770.71,
+      "duration": 1.71,
+      "text": "was to really remember what do we mean"
+    },
+    {
+      "index": 261,
+      "start": 770.72,
+      "end": 773.71,
+      "duration": 2.99,
+      "text": "by initial by the unit step response"
+    },
+    {
+      "index": 262,
+      "start": 773.72,
+      "end": 775.59,
+      "duration": 1.87,
+      "text": "what type of f of T are we talking about"
+    },
+    {
+      "index": 263,
+      "start": 775.6,
+      "end": 777.59,
+      "duration": 1.99,
+      "text": "what initial conditions do we need and"
+    },
+    {
+      "index": 264,
+      "start": 777.6,
+      "end": 782.44,
+      "duration": 4.84,
+      "text": "same thing for the unit false response"
+    }
+  ],
+  "course": {
+    "category": "Mathematics",
+    "title": "Differential Equations",
+    "source_url": "https://www.youtube.com/playlist?list=PL64BDFBDA2AF24F7E"
+  }
+}

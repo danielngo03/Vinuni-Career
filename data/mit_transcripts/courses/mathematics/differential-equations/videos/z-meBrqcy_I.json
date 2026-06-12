@@ -1,0 +1,4330 @@
+{
+  "video": {
+    "id": "z-meBrqcy_I",
+    "title": "Lec 32 | MIT 18.03 Differential Equations, Spring 2006",
+    "url": "https://www.youtube.com/watch?v=z-meBrqcy_I",
+    "channel": "MIT OpenCourseWare",
+    "duration": 2753,
+    "language": "en"
+  },
+  "segment_count": 616,
+  "segments": [
+    {
+      "index": 0,
+      "start": 8.0,
+      "end": 11.638,
+      "duration": 3.638,
+      "text": "First of all, the way a nonlinear autonomous"
+    },
+    {
+      "index": 1,
+      "start": 11.638,
+      "end": 15.361,
+      "duration": 3.723,
+      "text": "system looks, you have had some practice with"
+    },
+    {
+      "index": 2,
+      "start": 15.361,
+      "end": 17.73,
+      "duration": 2.369,
+      "text": "it by now. This is nonlinear."
+    },
+    {
+      "index": 3,
+      "start": 17.73,
+      "end": 22.384,
+      "duration": 4.654,
+      "text": "The right-hand side are no longer simple combinations ax"
+    },
+    {
+      "index": 4,
+      "start": 22.384,
+      "end": 26.192,
+      "duration": 3.808,
+      "text": "plus by. Nonlinear and autonomous,"
+    },
+    {
+      "index": 5,
+      "start": 26.192,
+      "end": 30.0,
+      "duration": 3.808,
+      "text": "these are function just of x and y."
+    },
+    {
+      "index": 6,
+      "start": 30.0,
+      "end": 33.789,
+      "duration": 3.789,
+      "text": "There is no t on the right-hand side."
+    },
+    {
+      "index": 7,
+      "start": 33.789,
+      "end": 37.578,
+      "duration": 3.789,
+      "text": "Now, most of today will be geometric."
+    },
+    {
+      "index": 8,
+      "start": 37.578,
+      "end": 43.157,
+      "duration": 5.579,
+      "text": "The way to get a geometric picture of that is first by"
+    },
+    {
+      "index": 9,
+      "start": 43.157,
+      "end": 48.947,
+      "duration": 5.79,
+      "text": "constructing the velocity field whose components are the"
+    },
+    {
+      "index": 10,
+      "start": 48.947,
+      "end": 53.894,
+      "duration": 4.947,
+      "text": "functions f and g. This is a velocity field that"
+    },
+    {
+      "index": 11,
+      "start": 53.894,
+      "end": 60.0,
+      "duration": 6.106,
+      "text": "gives a picture of the system and has solutions."
+    },
+    {
+      "index": 12,
+      "start": 60.0,
+      "end": 65.12,
+      "duration": 5.12,
+      "text": "The solutions to the system, from the point of view of"
+    },
+    {
+      "index": 13,
+      "start": 65.12,
+      "end": 69.95,
+      "duration": 4.83,
+      "text": "functions, they would look like pairs of functions,"
+    },
+    {
+      "index": 14,
+      "start": 69.95,
+      "end": 72.751,
+      "duration": 2.801,
+      "text": "x of t, y of t."
+    },
+    {
+      "index": 15,
+      "start": 72.751,
+      "end": 78.644,
+      "duration": 5.893,
+      "text": "But, from the point of view of geometry, when you plot them as"
+    },
+    {
+      "index": 16,
+      "start": 78.644,
+      "end": 83.668,
+      "duration": 5.024,
+      "text": "parametric equations, they are called trajectories of"
+    },
+    {
+      "index": 17,
+      "start": 83.668,
+      "end": 89.657,
+      "duration": 5.989,
+      "text": "the field F, which simply means that they are curves everywhere"
+    },
+    {
+      "index": 18,
+      "start": 89.657,
+      "end": 94.971,
+      "duration": 5.314,
+      "text": "having the right velocity. So a typical curve would look"
+    },
+    {
+      "index": 19,
+      "start": 94.971,
+      "end": 98.497,
+      "duration": 3.526,
+      "text": "like -- There is a trajectory."
+    },
+    {
+      "index": 20,
+      "start": 98.497,
+      "end": 102.715,
+      "duration": 4.218,
+      "text": "And we know it is a trajectory because at each point the vector"
+    },
+    {
+      "index": 21,
+      "start": 102.715,
+      "end": 105.505,
+      "duration": 2.79,
+      "text": "on it has, of course, the right direction,"
+    },
+    {
+      "index": 22,
+      "start": 105.505,
+      "end": 108.295,
+      "duration": 2.79,
+      "text": "the tangent direction, but more than that,"
+    },
+    {
+      "index": 23,
+      "start": 108.295,
+      "end": 111.494,
+      "duration": 3.199,
+      "text": "it has the right velocity. So here, for example,"
+    },
+    {
+      "index": 24,
+      "start": 111.494,
+      "end": 113.807,
+      "duration": 2.313,
+      "text": "the point is traveling more slowly."
+    },
+    {
+      "index": 25,
+      "start": 113.807,
+      "end": 117.414,
+      "duration": 3.607,
+      "text": "Here it is traveling more rapidly because the velocity"
+    },
+    {
+      "index": 26,
+      "start": 117.414,
+      "end": 120.0,
+      "duration": 2.586,
+      "text": "vector is bigger, longer."
+    },
+    {
+      "index": 27,
+      "start": 120.0,
+      "end": 123.955,
+      "duration": 3.955,
+      "text": "So this is a picture of a typical trajectory."
+    },
+    {
+      "index": 28,
+      "start": 123.955,
+      "end": 129.258,
+      "duration": 5.303,
+      "text": "The only other things that I should mention are the critical"
+    },
+    {
+      "index": 29,
+      "start": 129.258,
+      "end": 132.674,
+      "duration": 3.416,
+      "text": "points. If you have worked the problems"
+    },
+    {
+      "index": 30,
+      "start": 132.674,
+      "end": 136.539,
+      "duration": 3.865,
+      "text": "for this week, the first couple of problems,"
+    },
+    {
+      "index": 31,
+      "start": 136.539,
+      "end": 141.303,
+      "duration": 4.764,
+      "text": "you have already seen the significance of the critical"
+    },
+    {
+      "index": 32,
+      "start": 141.303,
+      "end": 144.719,
+      "duration": 3.416,
+      "text": "points. Well, from Monday's lecture you"
+    },
+    {
+      "index": 33,
+      "start": 144.719,
+      "end": 149.842,
+      "duration": 5.123,
+      "text": "know from the point of view of solutions they are constant"
+    },
+    {
+      "index": 34,
+      "start": 149.842,
+      "end": 152.0,
+      "duration": 2.158,
+      "text": "solutions."
+    },
+    {
+      "index": 35,
+      "start": 157.0,
+      "end": 161.224,
+      "duration": 4.224,
+      "text": "From the point of view of the field they are where the field"
+    },
+    {
+      "index": 36,
+      "start": 161.224,
+      "end": 163.801,
+      "duration": 2.577,
+      "text": "is zero. There is no velocity vector,"
+    },
+    {
+      "index": 37,
+      "start": 163.801,
+      "end": 166.88,
+      "duration": 3.079,
+      "text": "in other words. The velocity vector is zero."
+    },
+    {
+      "index": 38,
+      "start": 166.88,
+      "end": 169.816,
+      "duration": 2.936,
+      "text": "And, therefore, a point being there has no"
+    },
+    {
+      "index": 39,
+      "start": 169.816,
+      "end": 173.252,
+      "duration": 3.436,
+      "text": "reason to go anywhere else. And, spelling it out,"
+    },
+    {
+      "index": 40,
+      "start": 173.252,
+      "end": 177.119,
+      "duration": 3.867,
+      "text": "it's where the partial derivatives, where the values of"
+    },
+    {
+      "index": 41,
+      "start": 177.119,
+      "end": 181.057,
+      "duration": 3.938,
+      "text": "the functions on the right-hand side, which give the two"
+    },
+    {
+      "index": 42,
+      "start": 181.057,
+      "end": 184.422,
+      "duration": 3.365,
+      "text": "components, the i and j components of the field,"
+    },
+    {
+      "index": 43,
+      "start": 184.422,
+      "end": 187.0,
+      "duration": 2.578,
+      "text": "where they are zero."
+    },
+    {
+      "index": 44,
+      "start": 191.0,
+      "end": 194.645,
+      "duration": 3.645,
+      "text": "That is all I will need by way of a recall today."
+    },
+    {
+      "index": 45,
+      "start": 194.645,
+      "end": 197.607,
+      "duration": 2.962,
+      "text": "I don't think I will need anything else."
+    },
+    {
+      "index": 46,
+      "start": 197.607,
+      "end": 202.164,
+      "duration": 4.557,
+      "text": "The topic for today is another kind of behavior that you have"
+    },
+    {
+      "index": 47,
+      "start": 202.164,
+      "end": 206.873,
+      "duration": 4.709,
+      "text": "not yet observed at the computer screen, unless you have worked"
+    },
+    {
+      "index": 48,
+      "start": 206.873,
+      "end": 211.278,
+      "duration": 4.405,
+      "text": "ahead, and that is there are trajectories which go along to"
+    },
+    {
+      "index": 49,
+      "start": 211.278,
+      "end": 215.0,
+      "duration": 3.722,
+      "text": "infinity or end up at a critical point."
+    },
+    {
+      "index": 50,
+      "start": 215.0,
+      "end": 219.631,
+      "duration": 4.631,
+      "text": "They are the critical points that just sit there all the"
+    },
+    {
+      "index": 51,
+      "start": 219.631,
+      "end": 222.41,
+      "duration": 2.779,
+      "text": "time. But there is a third type of"
+    },
+    {
+      "index": 52,
+      "start": 222.41,
+      "end": 227.463,
+      "duration": 5.053,
+      "text": "behavior that a trajectory can have where it neither sits for"
+    },
+    {
+      "index": 53,
+      "start": 227.463,
+      "end": 230.326,
+      "duration": 2.863,
+      "text": "all time nor goes off for all time."
+    },
+    {
+      "index": 54,
+      "start": 230.326,
+      "end": 235.21,
+      "duration": 4.884,
+      "text": "Instead, it repeats itself. Such a thing is called a closed"
+    },
+    {
+      "index": 55,
+      "start": 235.21,
+      "end": 239.0,
+      "duration": 3.79,
+      "text": "trajectory. What does it look like?"
+    },
+    {
+      "index": 56,
+      "start": 239.0,
+      "end": 245.051,
+      "duration": 6.051,
+      "text": "Well, it is a closed curve in the plane that at every point,"
+    },
+    {
+      "index": 57,
+      "start": 245.051,
+      "end": 250.179,
+      "duration": 5.128,
+      "text": "it is a trajectory, i.e., the arrows at each point,"
+    },
+    {
+      "index": 58,
+      "start": 250.179,
+      "end": 255.205,
+      "duration": 5.026,
+      "text": "let's say it is traced in the clockwise direction."
+    },
+    {
+      "index": 59,
+      "start": 255.205,
+      "end": 260.128,
+      "duration": 4.923,
+      "text": "And so the arrows of the field will go like this."
+    },
+    {
+      "index": 60,
+      "start": 260.128,
+      "end": 265.564,
+      "duration": 5.436,
+      "text": "Here it is going slowly, here it is very slow and here"
+    },
+    {
+      "index": 61,
+      "start": 265.564,
+      "end": 271.0,
+      "duration": 5.436,
+      "text": "it picks up a little speed again and so on."
+    },
+    {
+      "index": 62,
+      "start": 271.0,
+      "end": 275.938,
+      "duration": 4.938,
+      "text": "Now, for such a trajectory what is happening?"
+    },
+    {
+      "index": 63,
+      "start": 275.938,
+      "end": 282.561,
+      "duration": 6.623,
+      "text": "Well, it goes around in finite time and then repeats itself."
+    },
+    {
+      "index": 64,
+      "start": 282.561,
+      "end": 288.734,
+      "duration": 6.173,
+      "text": "It just goes round and round forever if you land on that"
+    },
+    {
+      "index": 65,
+      "start": 288.734,
+      "end": 293.0,
+      "duration": 4.266,
+      "text": "trajectory. It represents a system that"
+    },
+    {
+      "index": 66,
+      "start": 293.0,
+      "end": 297.714,
+      "duration": 4.714,
+      "text": "returns to its original state periodically."
+    },
+    {
+      "index": 67,
+      "start": 297.714,
+      "end": 304.0,
+      "duration": 6.286,
+      "text": "It represents periodic behavior of the system."
+    },
+    {
+      "index": 68,
+      "start": 316.0,
+      "end": 323.651,
+      "duration": 7.651,
+      "text": "Now, we have seen one example of that, a simple example where"
+    },
+    {
+      "index": 69,
+      "start": 323.651,
+      "end": 329.644,
+      "duration": 5.993,
+      "text": "this simple system, x prime equals y,"
+    },
+    {
+      "index": 70,
+      "start": 329.644,
+      "end": 335.0,
+      "duration": 5.356,
+      "text": "y prime equals negative x."
+    },
+    {
+      "index": 71,
+      "start": 340.0,
+      "end": 343.521,
+      "duration": 3.521,
+      "text": "We could write down the solutions to that directly,"
+    },
+    {
+      "index": 72,
+      "start": 343.521,
+      "end": 347.253,
+      "duration": 3.732,
+      "text": "but if you want to do eigenvalues and eigenvectors the"
+    },
+    {
+      "index": 73,
+      "start": 347.253,
+      "end": 351.056,
+      "duration": 3.803,
+      "text": "matrix will look like this. The equation will be lambda"
+    },
+    {
+      "index": 74,
+      "start": 351.056,
+      "end": 355.07,
+      "duration": 4.014,
+      "text": "squared plus zero lambda plus one equals zero,"
+    },
+    {
+      "index": 75,
+      "start": 355.07,
+      "end": 358.521,
+      "duration": 3.451,
+      "text": "so the eigenvalues will be plus"
+    },
+    {
+      "index": 76,
+      "start": 358.521,
+      "end": 362.084,
+      "duration": 3.563,
+      "text": "or minus i. In fact, from then on you could"
+    },
+    {
+      "index": 77,
+      "start": 362.084,
+      "end": 364.976,
+      "duration": 2.892,
+      "text": "work out in the usual ways the eigenvectors,"
+    },
+    {
+      "index": 78,
+      "start": 364.976,
+      "end": 367.531,
+      "duration": 2.555,
+      "text": "complex eigenvectors and separate them."
+    },
+    {
+      "index": 79,
+      "start": 367.531,
+      "end": 371.364,
+      "duration": 3.833,
+      "text": "But, look, you can avoid all that just by writing down the"
+    },
+    {
+      "index": 80,
+      "start": 371.364,
+      "end": 373.785,
+      "duration": 2.421,
+      "text": "solution. The solutions are sines and"
+    },
+    {
+      "index": 81,
+      "start": 373.785,
+      "end": 376.206,
+      "duration": 2.421,
+      "text": "cosines. One basic solution will be x"
+    },
+    {
+      "index": 82,
+      "start": 376.206,
+      "end": 379.904,
+      "duration": 3.698,
+      "text": "equals cosine t, in which case what is y?"
+    },
+    {
+      "index": 83,
+      "start": 379.904,
+      "end": 382.123,
+      "duration": 2.219,
+      "text": "Well, y is the derivative of that."
+    },
+    {
+      "index": 84,
+      "start": 382.123,
+      "end": 384.88,
+      "duration": 2.757,
+      "text": "That will be minus sine t."
+    },
+    {
+      "index": 85,
+      "start": 384.88,
+      "end": 388.242,
+      "duration": 3.362,
+      "text": "Another basic solution, we will start with x equals"
+    },
+    {
+      "index": 86,
+      "start": 388.242,
+      "end": 393.861,
+      "duration": 5.619,
+      "text": "sine t. In which case y will be cosine"
+    },
+    {
+      "index": 87,
+      "start": 393.861,
+      "end": 396.914,
+      "duration": 3.053,
+      "text": "t, its derivative."
+    },
+    {
+      "index": 88,
+      "start": 396.914,
+      "end": 401.779,
+      "duration": 4.865,
+      "text": "Now, if you do that, what do these things look like?"
+    },
+    {
+      "index": 89,
+      "start": 401.779,
+      "end": 407.598,
+      "duration": 5.819,
+      "text": "Well, either of these two basic solutions looks like a circle,"
+    },
+    {
+      "index": 90,
+      "start": 407.598,
+      "end": 412.463,
+      "duration": 4.865,
+      "text": "not traced in the usual way but in the opposite way."
+    },
+    {
+      "index": 91,
+      "start": 412.463,
+      "end": 416.088,
+      "duration": 3.625,
+      "text": "For example, when t is equal to zero it"
+    },
+    {
+      "index": 92,
+      "start": 416.088,
+      "end": 420.0,
+      "duration": 3.912,
+      "text": "starts at the point one, zero."
+    },
+    {
+      "index": 93,
+      "start": 420.0,
+      "end": 424.224,
+      "duration": 4.224,
+      "text": "Now, if the minus sign were not there this would be x equals"
+    },
+    {
+      "index": 94,
+      "start": 424.224,
+      "end": 428.162,
+      "duration": 3.938,
+      "text": "cosine t, y equals sine t,"
+    },
+    {
+      "index": 95,
+      "start": 428.162,
+      "end": 431.169,
+      "duration": 3.007,
+      "text": "which is the usual counterclockwise circle."
+    },
+    {
+      "index": 96,
+      "start": 431.169,
+      "end": 435.465,
+      "duration": 4.296,
+      "text": "But if I change y from sine t to negative sine t"
+    },
+    {
+      "index": 97,
+      "start": 435.465,
+      "end": 438.472,
+      "duration": 3.007,
+      "text": "it is going around the other way."
+    },
+    {
+      "index": 98,
+      "start": 438.472,
+      "end": 440.835,
+      "duration": 2.363,
+      "text": "So this circle is traced that way."
+    },
+    {
+      "index": 99,
+      "start": 440.835,
+      "end": 444.773,
+      "duration": 3.938,
+      "text": "And this is a family of circles, according to the values"
+    },
+    {
+      "index": 100,
+      "start": 444.773,
+      "end": 447.637,
+      "duration": 2.864,
+      "text": "of c1 and c2, concentric, all of which go"
+    },
+    {
+      "index": 101,
+      "start": 447.637,
+      "end": 451.33,
+      "duration": 3.693,
+      "text": "around clockwise. So those are closed"
+    },
+    {
+      "index": 102,
+      "start": 451.33,
+      "end": 453.921,
+      "duration": 2.591,
+      "text": "trajectories. Those are the solutions."
+    },
+    {
+      "index": 103,
+      "start": 453.921,
+      "end": 456.792,
+      "duration": 2.871,
+      "text": "They are trajectories of the vector field."
+    },
+    {
+      "index": 104,
+      "start": 456.792,
+      "end": 459.663,
+      "duration": 2.871,
+      "text": "They are closed. They come around and they"
+    },
+    {
+      "index": 105,
+      "start": 459.663,
+      "end": 462.815,
+      "duration": 3.152,
+      "text": "repeat in finite time. Now, these are no good."
+    },
+    {
+      "index": 106,
+      "start": 462.815,
+      "end": 465.686,
+      "duration": 2.871,
+      "text": "These are the kind I am not interested in."
+    },
+    {
+      "index": 107,
+      "start": 465.686,
+      "end": 469.257,
+      "duration": 3.571,
+      "text": "These are commonplace, and we are interested in good"
+    },
+    {
+      "index": 108,
+      "start": 469.257,
+      "end": 471.848,
+      "duration": 2.591,
+      "text": "stuff today. And the good stuff we are"
+    },
+    {
+      "index": 109,
+      "start": 471.848,
+      "end": 475.0,
+      "duration": 3.152,
+      "text": "interested in is limit cycles."
+    },
+    {
+      "index": 110,
+      "start": 481.0,
+      "end": 486.185,
+      "duration": 5.185,
+      "text": "A limit cycle is a closed trajectory with a couple of"
+    },
+    {
+      "index": 111,
+      "start": 486.185,
+      "end": 490.472,
+      "duration": 4.287,
+      "text": "extra hypotheses. It is a closed trajectory,"
+    },
+    {
+      "index": 112,
+      "start": 490.472,
+      "end": 495.658,
+      "duration": 5.186,
+      "text": "just like those guys, but it has something they don't"
+    },
+    {
+      "index": 113,
+      "start": 495.658,
+      "end": 499.347,
+      "duration": 3.689,
+      "text": "have, namely, it is king of the roost."
+    },
+    {
+      "index": 114,
+      "start": 499.347,
+      "end": 503.934,
+      "duration": 4.587,
+      "text": "They have to be isolated, no other guys nearby."
+    },
+    {
+      "index": 115,
+      "start": 503.934,
+      "end": 507.025,
+      "duration": 3.091,
+      "text": "And they also have to be stable."
+    },
+    {
+      "index": 116,
+      "start": 507.025,
+      "end": 512.809,
+      "duration": 5.784,
+      "text": "See, the problem here is that none of these stands out from"
+    },
+    {
+      "index": 117,
+      "start": 512.809,
+      "end": 517.406,
+      "duration": 4.597,
+      "text": "any of the others. In other words,"
+    },
+    {
+      "index": 118,
+      "start": 517.406,
+      "end": 520.125,
+      "duration": 2.719,
+      "text": "there must be, isolated means,"
+    },
+    {
+      "index": 119,
+      "start": 520.125,
+      "end": 522.0,
+      "duration": 1.875,
+      "text": "no others nearby."
+    },
+    {
+      "index": 120,
+      "start": 529.0,
+      "end": 531.506,
+      "duration": 2.506,
+      "text": "That is just what goes wrong here."
+    },
+    {
+      "index": 121,
+      "start": 531.506,
+      "end": 535.759,
+      "duration": 4.253,
+      "text": "Arbitrarily close to each of these circles is yet another"
+    },
+    {
+      "index": 122,
+      "start": 535.759,
+      "end": 538.417,
+      "duration": 2.658,
+      "text": "circle doing exactly the same thing."
+    },
+    {
+      "index": 123,
+      "start": 538.417,
+      "end": 543.05,
+      "duration": 4.633,
+      "text": "That means that there are some that are only of mild interest."
+    },
+    {
+      "index": 124,
+      "start": 543.05,
+      "end": 547.531,
+      "duration": 4.481,
+      "text": "What is much more interesting is to find a cycle where there"
+    },
+    {
+      "index": 125,
+      "start": 547.531,
+      "end": 550.493,
+      "duration": 2.962,
+      "text": "is nothing nearby. Something, therefore,"
+    },
+    {
+      "index": 126,
+      "start": 550.493,
+      "end": 553.0,
+      "duration": 2.507,
+      "text": "that looks like this."
+    },
+    {
+      "index": 127,
+      "start": 562.0,
+      "end": 565.405,
+      "duration": 3.405,
+      "text": "Here is our pink guy. Let's make this one go"
+    },
+    {
+      "index": 128,
+      "start": 565.405,
+      "end": 568.495,
+      "duration": 3.09,
+      "text": "counterclockwise. Here is a limit cycle,"
+    },
+    {
+      "index": 129,
+      "start": 568.495,
+      "end": 573.089,
+      "duration": 4.594,
+      "text": "it seems to be. And now what do nearby guys do?"
+    },
+    {
+      "index": 130,
+      "start": 573.089,
+      "end": 578.87,
+      "duration": 5.781,
+      "text": "Well, they should approach it. Somebody here like that does"
+    },
+    {
+      "index": 131,
+      "start": 578.87,
+      "end": 584.95,
+      "duration": 6.08,
+      "text": "this, spirals in and gets ever and every closer to that thing."
+    },
+    {
+      "index": 132,
+      "start": 584.95,
+      "end": 590.531,
+      "duration": 5.581,
+      "text": "Now, it can never join it because, if it joined it at the"
+    },
+    {
+      "index": 133,
+      "start": 590.531,
+      "end": 594.518,
+      "duration": 3.987,
+      "text": "joining point, I would have two solutions"
+    },
+    {
+      "index": 134,
+      "start": 594.518,
+      "end": 600.0,
+      "duration": 5.482,
+      "text": "going through this point. And that is illegal."
+    },
+    {
+      "index": 135,
+      "start": 600.0,
+      "end": 602.727,
+      "duration": 2.727,
+      "text": "All it can do is get arbitrarily close."
+    },
+    {
+      "index": 136,
+      "start": 602.727,
+      "end": 606.818,
+      "duration": 4.091,
+      "text": "On the computer screen it will look as if it joins it but,"
+    },
+    {
+      "index": 137,
+      "start": 606.818,
+      "end": 610.191,
+      "duration": 3.373,
+      "text": "of course, it cannot. It is just the resolution,"
+    },
+    {
+      "index": 138,
+      "start": 610.191,
+      "end": 612.272,
+      "duration": 2.081,
+      "text": "the pixels. Not enough pixels."
+    },
+    {
+      "index": 139,
+      "start": 612.272,
+      "end": 614.569,
+      "duration": 2.297,
+      "text": "The resolution isn't good enough."
+    },
+    {
+      "index": 140,
+      "start": 614.569,
+      "end": 618.875,
+      "duration": 4.306,
+      "text": "And the ones that start further away will take longer to find"
+    },
+    {
+      "index": 141,
+      "start": 618.875,
+      "end": 623.468,
+      "duration": 4.593,
+      "text": "their way to the limit cycle and they will always stay outside of"
+    },
+    {
+      "index": 142,
+      "start": 623.468,
+      "end": 626.77,
+      "duration": 3.302,
+      "text": "the earlier guys, but they will get arbitrarily"
+    },
+    {
+      "index": 143,
+      "start": 626.77,
+      "end": 630.0,
+      "duration": 3.23,
+      "text": "close, too. How about inside?"
+    },
+    {
+      "index": 144,
+      "start": 630.0,
+      "end": 633.517,
+      "duration": 3.517,
+      "text": "Inside, well, it starts somewhere and does"
+    },
+    {
+      "index": 145,
+      "start": 633.517,
+      "end": 637.378,
+      "duration": 3.861,
+      "text": "the same thing. It starts here and will try to"
+    },
+    {
+      "index": 146,
+      "start": 637.378,
+      "end": 641.067,
+      "duration": 3.689,
+      "text": "join the limit cycle. That is what I mean by"
+    },
+    {
+      "index": 147,
+      "start": 641.067,
+      "end": 644.241,
+      "duration": 3.174,
+      "text": "stability. Stability means that nearby"
+    },
+    {
+      "index": 148,
+      "start": 644.241,
+      "end": 648.53,
+      "duration": 4.289,
+      "text": "guys, the guys that start somewhere else eventually"
+    },
+    {
+      "index": 149,
+      "start": 648.53,
+      "end": 652.906,
+      "duration": 4.376,
+      "text": "approach the limit cycle, regardless of whether they"
+    },
+    {
+      "index": 150,
+      "start": 652.906,
+      "end": 656.938,
+      "duration": 4.032,
+      "text": "start from the outside or start from the inside."
+    },
+    {
+      "index": 151,
+      "start": 656.938,
+      "end": 662.0,
+      "duration": 5.062,
+      "text": "So that is stable. An unstable limit cycle --"
+    },
+    {
+      "index": 152,
+      "start": 662.0,
+      "end": 666.078,
+      "duration": 4.078,
+      "text": "But I am not calling it a limit cycle if it is unstable."
+    },
+    {
+      "index": 153,
+      "start": 666.078,
+      "end": 670.454,
+      "duration": 4.376,
+      "text": "I am just calling it a closed trajectory, but let's draw one"
+    },
+    {
+      "index": 154,
+      "start": 670.454,
+      "end": 674.088,
+      "duration": 3.634,
+      "text": "which is unstable. Here is the way we will look if"
+    },
+    {
+      "index": 155,
+      "start": 674.088,
+      "end": 677.425,
+      "duration": 3.337,
+      "text": "it is unstable. Guys that start nearby will be"
+    },
+    {
+      "index": 156,
+      "start": 677.425,
+      "end": 681.504,
+      "duration": 4.079,
+      "text": "repelled, driven somewhere else. Or, if they start here,"
+    },
+    {
+      "index": 157,
+      "start": 681.504,
+      "end": 685.583,
+      "duration": 4.079,
+      "text": "they will go away from the thing instead of going toward"
+    },
+    {
+      "index": 158,
+      "start": 685.583,
+      "end": 687.066,
+      "duration": 1.483,
+      "text": "it. This is unstable."
+    },
+    {
+      "index": 159,
+      "start": 687.066,
+      "end": 689.514,
+      "duration": 2.448,
+      "text": "And I don't call it a limit cycle."
+    },
+    {
+      "index": 160,
+      "start": 689.514,
+      "end": 693.0,
+      "duration": 3.486,
+      "text": "It is just a closed trajectory."
+    },
+    {
+      "index": 161,
+      "start": 698.0,
+      "end": 700.902,
+      "duration": 2.902,
+      "text": "Cycle because it cycles round and round."
+    },
+    {
+      "index": 162,
+      "start": 700.902,
+      "end": 704.624,
+      "duration": 3.722,
+      "text": "Limit because it is the limit of the nearby curves."
+    },
+    {
+      "index": 163,
+      "start": 704.624,
+      "end": 708.495,
+      "duration": 3.871,
+      "text": "The other case where it is unstable is not the limit."
+    },
+    {
+      "index": 164,
+      "start": 708.495,
+      "end": 712.44,
+      "duration": 3.945,
+      "text": "Of course, you could have a case also where the curves"
+    },
+    {
+      "index": 165,
+      "start": 712.44,
+      "end": 717.129,
+      "duration": 4.689,
+      "text": "outside spiral in toward it but the ones inside are repelled and"
+    },
+    {
+      "index": 166,
+      "start": 717.129,
+      "end": 719.213,
+      "duration": 2.084,
+      "text": "do this. That would be called"
+    },
+    {
+      "index": 167,
+      "start": 719.213,
+      "end": 723.261,
+      "duration": 4.048,
+      "text": "semi-stable. And you can make up all sorts"
+    },
+    {
+      "index": 168,
+      "start": 723.261,
+      "end": 725.055,
+      "duration": 1.794,
+      "text": "of cases. And I think I,"
+    },
+    {
+      "index": 169,
+      "start": 725.055,
+      "end": 727.863,
+      "duration": 2.808,
+      "text": "at one point, drew them in the notes,"
+    },
+    {
+      "index": 170,
+      "start": 727.863,
+      "end": 731.529,
+      "duration": 3.666,
+      "text": "but I am not going to. The only interesting one,"
+    },
+    {
+      "index": 171,
+      "start": 731.529,
+      "end": 734.727,
+      "duration": 3.198,
+      "text": "of permanent importance that people study,"
+    },
+    {
+      "index": 172,
+      "start": 734.727,
+      "end": 739.094,
+      "duration": 4.367,
+      "text": "are the actual limit cycles. No, it was the stable closed"
+    },
+    {
+      "index": 173,
+      "start": 739.094,
+      "end": 741.59,
+      "duration": 2.496,
+      "text": "trajectories. Notice, by the way,"
+    },
+    {
+      "index": 174,
+      "start": 741.59,
+      "end": 745.022,
+      "duration": 3.432,
+      "text": "a closed trajectory is always a simple curve."
+    },
+    {
+      "index": 175,
+      "start": 745.022,
+      "end": 749.0,
+      "duration": 3.978,
+      "text": "Remember what that means from 18.02?"
+    },
+    {
+      "index": 176,
+      "start": 749.0,
+      "end": 752.335,
+      "duration": 3.335,
+      "text": "Simple means it doesn't cross itself."
+    },
+    {
+      "index": 177,
+      "start": 752.335,
+      "end": 757.801,
+      "duration": 5.466,
+      "text": "Why doesn't it cross itself? It cannot cross itself because,"
+    },
+    {
+      "index": 178,
+      "start": 757.801,
+      "end": 761.97,
+      "duration": 4.169,
+      "text": "if it tried to, what is wrong with that point?"
+    },
+    {
+      "index": 179,
+      "start": 761.97,
+      "end": 766.416,
+      "duration": 4.446,
+      "text": "At that point which way does the vector field go,"
+    },
+    {
+      "index": 180,
+      "start": 766.416,
+      "end": 770.678,
+      "duration": 4.262,
+      "text": "that way or that way? Why the interest of limit"
+    },
+    {
+      "index": 181,
+      "start": 770.678,
+      "end": 774.198,
+      "duration": 3.52,
+      "text": "cycles? Well, because there are systems"
+    },
+    {
+      "index": 182,
+      "start": 774.198,
+      "end": 778.367,
+      "duration": 4.169,
+      "text": "in nature in which just this type of behavior,"
+    },
+    {
+      "index": 183,
+      "start": 778.367,
+      "end": 783.0,
+      "duration": 4.633,
+      "text": "they have a certain periodic motion."
+    },
+    {
+      "index": 184,
+      "start": 783.0,
+      "end": 787.128,
+      "duration": 4.128,
+      "text": "And, if you disturb it, gradually it returns to its"
+    },
+    {
+      "index": 185,
+      "start": 787.128,
+      "end": 791.587,
+      "duration": 4.459,
+      "text": "original periodic state. A simple example is breathing."
+    },
+    {
+      "index": 186,
+      "start": 791.587,
+      "end": 794.724,
+      "duration": 3.137,
+      "text": "Now I have made you all self-conscious."
+    },
+    {
+      "index": 187,
+      "start": 794.724,
+      "end": 798.688,
+      "duration": 3.964,
+      "text": "All of you are breathing. If you are here you are"
+    },
+    {
+      "index": 188,
+      "start": 798.688,
+      "end": 802.073,
+      "duration": 3.385,
+      "text": "breathing. At what rate are you breathing?"
+    },
+    {
+      "index": 189,
+      "start": 802.073,
+      "end": 806.201,
+      "duration": 4.128,
+      "text": "Well, you are unaware of it, of course, except now."
+    },
+    {
+      "index": 190,
+      "start": 806.201,
+      "end": 810.0,
+      "duration": 3.799,
+      "text": "If you are sitting here listening."
+    },
+    {
+      "index": 191,
+      "start": 810.0,
+      "end": 814.248,
+      "duration": 4.248,
+      "text": "There is a certain temperature and a certain air circulation in"
+    },
+    {
+      "index": 192,
+      "start": 814.248,
+      "end": 816.441,
+      "duration": 2.193,
+      "text": "the room. You are not thinking of"
+    },
+    {
+      "index": 193,
+      "start": 816.441,
+      "end": 820.621,
+      "duration": 4.18,
+      "text": "anything, certainly not of the lecture, and the lecture is not"
+    },
+    {
+      "index": 194,
+      "start": 820.621,
+      "end": 823.705,
+      "duration": 3.084,
+      "text": "unduly exciting, you will breathe at a certain"
+    },
+    {
+      "index": 195,
+      "start": 823.705,
+      "end": 827.748,
+      "duration": 4.043,
+      "text": "steady rate which is a little different for every person but"
+    },
+    {
+      "index": 196,
+      "start": 827.748,
+      "end": 830.695,
+      "duration": 2.947,
+      "text": "that is your rate. Now, you can artificially"
+    },
+    {
+      "index": 197,
+      "start": 830.695,
+      "end": 833.642,
+      "duration": 2.947,
+      "text": "change that. You could say now I am going to"
+    },
+    {
+      "index": 198,
+      "start": 833.642,
+      "end": 837.0,
+      "duration": 3.358,
+      "text": "breathe faster. And indeed you can."
+    },
+    {
+      "index": 199,
+      "start": 837.0,
+      "end": 841.917,
+      "duration": 4.917,
+      "text": "But, as soon as you stop being aware of what you are doing,"
+    },
+    {
+      "index": 200,
+      "start": 841.917,
+      "end": 846.665,
+      "duration": 4.748,
+      "text": "the levels of various hormones and carbon dioxide in your"
+    },
+    {
+      "index": 201,
+      "start": 846.665,
+      "end": 851.244,
+      "duration": 4.579,
+      "text": "bloodstream and so on will return your breathing to its"
+    },
+    {
+      "index": 202,
+      "start": 851.244,
+      "end": 853.703,
+      "duration": 2.459,
+      "text": "natural state. In other words,"
+    },
+    {
+      "index": 203,
+      "start": 853.703,
+      "end": 858.79,
+      "duration": 5.087,
+      "text": "that system of your breathing, which is controlled by various"
+    },
+    {
+      "index": 204,
+      "start": 858.79,
+      "end": 863.962,
+      "duration": 5.172,
+      "text": "chemicals and hormones in the body, is exhibiting exactly this"
+    },
+    {
+      "index": 205,
+      "start": 863.962,
+      "end": 867.438,
+      "duration": 3.476,
+      "text": "type of behavior. It has a certain regular"
+    },
+    {
+      "index": 206,
+      "start": 867.438,
+      "end": 872.12,
+      "duration": 4.682,
+      "text": "periodic motion as a system. And, if disturbed,"
+    },
+    {
+      "index": 207,
+      "start": 872.12,
+      "end": 874.921,
+      "duration": 2.801,
+      "text": "if artificially you set it out somewhere else,"
+    },
+    {
+      "index": 208,
+      "start": 874.921,
+      "end": 877.785,
+      "duration": 2.864,
+      "text": "it will gradually return to its original state."
+    },
+    {
+      "index": 209,
+      "start": 877.785,
+      "end": 880.337,
+      "duration": 2.552,
+      "text": "Now, of course, if I am running it will be"
+    },
+    {
+      "index": 210,
+      "start": 880.337,
+      "end": 881.271,
+      "duration": 0.934,
+      "text": "different. Sure."
+    },
+    {
+      "index": 211,
+      "start": 881.271,
+      "end": 885.068,
+      "duration": 3.797,
+      "text": "If you are running you breathe faster, but that is because the"
+    },
+    {
+      "index": 212,
+      "start": 885.068,
+      "end": 888.242,
+      "duration": 3.174,
+      "text": "parameters in the system, the a's and the b's in the"
+    },
+    {
+      "index": 213,
+      "start": 888.242,
+      "end": 890.546,
+      "duration": 2.304,
+      "text": "equation, the f of (x, y) and g of (x,"
+    },
+    {
+      "index": 214,
+      "start": 890.546,
+      "end": 893.658,
+      "duration": 3.112,
+      "text": "y), the parameters in those"
+    },
+    {
+      "index": 215,
+      "start": 893.658,
+      "end": 896.21,
+      "duration": 2.552,
+      "text": "functions will be set at different levels."
+    },
+    {
+      "index": 216,
+      "start": 896.21,
+      "end": 899.572,
+      "duration": 3.362,
+      "text": "You will have different hormones, a different of carbon"
+    },
+    {
+      "index": 217,
+      "start": 899.572,
+      "end": 904.056,
+      "duration": 4.484,
+      "text": "dioxide and so on. Now, I am not saying that"
+    },
+    {
+      "index": 218,
+      "start": 904.056,
+      "end": 907.1,
+      "duration": 3.044,
+      "text": "breathing is modeled by a limit cycle."
+    },
+    {
+      "index": 219,
+      "start": 907.1,
+      "end": 911.624,
+      "duration": 4.524,
+      "text": "It is the sort of thing which one might look for a limit"
+    },
+    {
+      "index": 220,
+      "start": 911.624,
+      "end": 913.681,
+      "duration": 2.057,
+      "text": "cycle. That is, of course,"
+    },
+    {
+      "index": 221,
+      "start": 913.681,
+      "end": 917.136,
+      "duration": 3.455,
+      "text": "a question for biologists. And, in general,"
+    },
+    {
+      "index": 222,
+      "start": 917.136,
+      "end": 922.071,
+      "duration": 4.935,
+      "text": "any type of periodic behavior in nature, people try to see if"
+    },
+    {
+      "index": 223,
+      "start": 922.071,
+      "end": 926.267,
+      "duration": 4.196,
+      "text": "there is some system of differential equations which"
+    },
+    {
+      "index": 224,
+      "start": 926.267,
+      "end": 930.38,
+      "duration": 4.113,
+      "text": "governs it in which perhaps there is a limit cycle,"
+    },
+    {
+      "index": 225,
+      "start": 930.38,
+      "end": 936.467,
+      "duration": 6.087,
+      "text": "which contains a limit cycle. Well, what are the problems?"
+    },
+    {
+      "index": 226,
+      "start": 936.467,
+      "end": 941.755,
+      "duration": 5.288,
+      "text": "In a sense, limit cycles are easy to lecture about because so"
+    },
+    {
+      "index": 227,
+      "start": 941.755,
+      "end": 946.338,
+      "duration": 4.583,
+      "text": "little is known about them. At the end of the period,"
+    },
+    {
+      "index": 228,
+      "start": 946.338,
+      "end": 949.776,
+      "duration": 3.438,
+      "text": "if I have time, I will show you that the"
+    },
+    {
+      "index": 229,
+      "start": 949.776,
+      "end": 955.064,
+      "duration": 5.288,
+      "text": "simplest possible question you could ask, the answer to it is"
+    },
+    {
+      "index": 230,
+      "start": 955.064,
+      "end": 960.0,
+      "duration": 4.936,
+      "text": "totally known after 120 years of steady trying."
+    },
+    {
+      "index": 231,
+      "start": 960.0,
+      "end": 965.163,
+      "duration": 5.163,
+      "text": "But let's first talk about what sorts of problems people address"
+    },
+    {
+      "index": 232,
+      "start": 965.163,
+      "end": 969.016,
+      "duration": 3.853,
+      "text": "with limit cycles. First of all is the existence"
+    },
+    {
+      "index": 233,
+      "start": 969.016,
+      "end": 970.0,
+      "duration": 0.984,
+      "text": "problem."
+    },
+    {
+      "index": 234,
+      "start": 976.0,
+      "end": 979.436,
+      "duration": 3.436,
+      "text": "If I give you a system, you know, the right-hand side"
+    },
+    {
+      "index": 235,
+      "start": 979.436,
+      "end": 983.202,
+      "duration": 3.766,
+      "text": "is x squared plus 2y cubed minus 3xy,"
+    },
+    {
+      "index": 236,
+      "start": 983.202,
+      "end": 986.969,
+      "duration": 3.767,
+      "text": "and the g is something similar. I say does this have limit"
+    },
+    {
+      "index": 237,
+      "start": 986.969,
+      "end": 989.414,
+      "duration": 2.445,
+      "text": "cycles? Well, you know how to find its"
+    },
+    {
+      "index": 238,
+      "start": 989.414,
+      "end": 994.797,
+      "duration": 5.383,
+      "text": "critical points. But how do you find out if it"
+    },
+    {
+      "index": 239,
+      "start": 994.797,
+      "end": 1000.69,
+      "duration": 5.893,
+      "text": "has limit cycles? The answer to that is nobody"
+    },
+    {
+      "index": 240,
+      "start": 1000.69,
+      "end": 1004.095,
+      "duration": 3.405,
+      "text": "has any idea. This problem,"
+    },
+    {
+      "index": 241,
+      "start": 1004.095,
+      "end": 1010.904,
+      "duration": 6.809,
+      "text": "in general, there are not much in the way of methods."
+    },
+    {
+      "index": 242,
+      "start": 1010.904,
+      "end": 1013.0,
+      "duration": 2.096,
+      "text": "Not much."
+    },
+    {
+      "index": 243,
+      "start": 1020.0,
+      "end": 1023.66,
+      "duration": 3.66,
+      "text": "Not much is known. There is one theorem that you"
+    },
+    {
+      "index": 244,
+      "start": 1023.66,
+      "end": 1027.555,
+      "duration": 3.895,
+      "text": "will find in the notes, a simple theorem called the"
+    },
+    {
+      "index": 245,
+      "start": 1027.555,
+      "end": 1031.994,
+      "duration": 4.439,
+      "text": "Poincare-Bendixson theorem which, for about 60 or 70 years"
+    },
+    {
+      "index": 246,
+      "start": 1031.994,
+      "end": 1036.59,
+      "duration": 4.596,
+      "text": "was about the only result known which enabled people to find"
+    },
+    {
+      "index": 247,
+      "start": 1036.59,
+      "end": 1039.783,
+      "duration": 3.193,
+      "text": "limit cycles. Nowadays the theorem is used"
+    },
+    {
+      "index": 248,
+      "start": 1039.783,
+      "end": 1044.379,
+      "duration": 4.596,
+      "text": "relatively little because people try to find limit cycles by"
+    },
+    {
+      "index": 249,
+      "start": 1044.379,
+      "end": 1047.494,
+      "duration": 3.115,
+      "text": "computer. Now, the difficulty is you have"
+    },
+    {
+      "index": 250,
+      "start": 1047.494,
+      "end": 1052.062,
+      "duration": 4.568,
+      "text": "to know where to look for them. In other words,"
+    },
+    {
+      "index": 251,
+      "start": 1052.062,
+      "end": 1056.454,
+      "duration": 4.392,
+      "text": "the computer screen shows that much and you set the axes and it"
+    },
+    {
+      "index": 252,
+      "start": 1056.454,
+      "end": 1060.775,
+      "duration": 4.321,
+      "text": "doesn't show any limit cycles. That doesn't mean there are not"
+    },
+    {
+      "index": 253,
+      "start": 1060.775,
+      "end": 1063.254,
+      "duration": 2.479,
+      "text": "any. That means they are over there,"
+    },
+    {
+      "index": 254,
+      "start": 1063.254,
+      "end": 1066.158,
+      "duration": 2.904,
+      "text": "or it means there is a big one like there."
+    },
+    {
+      "index": 255,
+      "start": 1066.158,
+      "end": 1070.125,
+      "duration": 3.967,
+      "text": "And you are looking in the middle of it and don't see it."
+    },
+    {
+      "index": 256,
+      "start": 1070.125,
+      "end": 1073.099,
+      "duration": 2.974,
+      "text": "So, in general, people don't look for limit"
+    },
+    {
+      "index": 257,
+      "start": 1073.099,
+      "end": 1076.924,
+      "duration": 3.825,
+      "text": "cycles unless the physical system that gave rise to the"
+    },
+    {
+      "index": 258,
+      "start": 1076.924,
+      "end": 1081.316,
+      "duration": 4.392,
+      "text": "pair of differential equations suggests that there is something"
+    },
+    {
+      "index": 259,
+      "start": 1081.316,
+      "end": 1085.0,
+      "duration": 3.684,
+      "text": "repetitive going on like breathing."
+    },
+    {
+      "index": 260,
+      "start": 1085.0,
+      "end": 1089.281,
+      "duration": 4.281,
+      "text": "And, if it tells you that, then it often gives you"
+    },
+    {
+      "index": 261,
+      "start": 1089.281,
+      "end": 1094.174,
+      "duration": 4.893,
+      "text": "approximate values of the parameters and the variables so"
+    },
+    {
+      "index": 262,
+      "start": 1094.174,
+      "end": 1098.368,
+      "duration": 4.194,
+      "text": "you know where to look. Basically this is done by"
+    },
+    {
+      "index": 263,
+      "start": 1098.368,
+      "end": 1103.0,
+      "duration": 4.632,
+      "text": "computer search guided by the physical problem."
+    },
+    {
+      "index": 264,
+      "start": 1111.0,
+      "end": 1115.495,
+      "duration": 4.495,
+      "text": "Therefore, I cannot say much more about it today."
+    },
+    {
+      "index": 265,
+      "start": 1115.495,
+      "end": 1120.74,
+      "duration": 5.245,
+      "text": "Instead I am going to focus my attention on nonexistence."
+    },
+    {
+      "index": 266,
+      "start": 1120.74,
+      "end": 1126.078,
+      "duration": 5.338,
+      "text": "When can you be sure that a system will not have any limit"
+    },
+    {
+      "index": 267,
+      "start": 1126.078,
+      "end": 1129.262,
+      "duration": 3.184,
+      "text": "cycles? And there are two theorems."
+    },
+    {
+      "index": 268,
+      "start": 1129.262,
+      "end": 1134.788,
+      "duration": 5.526,
+      "text": "One, again, due to Bendixson who was a Swedish mathematician"
+    },
+    {
+      "index": 269,
+      "start": 1134.788,
+      "end": 1139.939,
+      "duration": 5.151,
+      "text": "who lived around 1900 or so. There is a criterion due to"
+    },
+    {
+      "index": 270,
+      "start": 1139.939,
+      "end": 1144.277,
+      "duration": 4.338,
+      "text": "Bendixson. And there is one involving"
+    },
+    {
+      "index": 271,
+      "start": 1144.277,
+      "end": 1148.131,
+      "duration": 3.854,
+      "text": "critical points. And I would like to describe"
+    },
+    {
+      "index": 272,
+      "start": 1148.131,
+      "end": 1151.635,
+      "duration": 3.504,
+      "text": "both of them for you today. First of all,"
+    },
+    {
+      "index": 273,
+      "start": 1151.635,
+      "end": 1154.0,
+      "duration": 2.365,
+      "text": "Bendixson's criterion."
+    },
+    {
+      "index": 274,
+      "start": 1162.0,
+      "end": 1165.418,
+      "duration": 3.418,
+      "text": "It is very simply stated and has a marvelous proof,"
+    },
+    {
+      "index": 275,
+      "start": 1165.418,
+      "end": 1169.316,
+      "duration": 3.898,
+      "text": "which I am going to give you. We have D as a region of the"
+    },
+    {
+      "index": 276,
+      "start": 1169.316,
+      "end": 1170.0,
+      "duration": 0.684,
+      "text": "plane."
+    },
+    {
+      "index": 277,
+      "start": 1175.0,
+      "end": 1180.08,
+      "duration": 5.08,
+      "text": "And what Bendixson's criterion tells you to do is take your"
+    },
+    {
+      "index": 278,
+      "start": 1180.08,
+      "end": 1183.671,
+      "duration": 3.591,
+      "text": "vector field and calculate its divergence."
+    },
+    {
+      "index": 279,
+      "start": 1183.671,
+      "end": 1188.313,
+      "duration": 4.642,
+      "text": "We are set back in 1802, and this proof is going to be"
+    },
+    {
+      "index": 280,
+      "start": 1188.313,
+      "end": 1191.204,
+      "duration": 2.891,
+      "text": "straight 18.02. You will enjoy it."
+    },
+    {
+      "index": 281,
+      "start": 1191.204,
+      "end": 1195.759,
+      "duration": 4.555,
+      "text": "Calculate the divergence. Now, I am talking about the"
+    },
+    {
+      "index": 282,
+      "start": 1195.759,
+      "end": 1200.671,
+      "duration": 4.912,
+      "text": "two-dimensional divergence. Remember that is fx,"
+    },
+    {
+      "index": 283,
+      "start": 1200.671,
+      "end": 1205.768,
+      "duration": 5.097,
+      "text": "the partial of f with respect to x, plus the partial of the g,"
+    },
+    {
+      "index": 284,
+      "start": 1205.768,
+      "end": 1208.525,
+      "duration": 2.757,
+      "text": "the j component with respect to y."
+    },
+    {
+      "index": 285,
+      "start": 1208.525,
+      "end": 1212.285,
+      "duration": 3.76,
+      "text": "And assume that that is a continuous function."
+    },
+    {
+      "index": 286,
+      "start": 1212.285,
+      "end": 1216.964,
+      "duration": 4.679,
+      "text": "It always will be with us. Practically all the examples I"
+    },
+    {
+      "index": 287,
+      "start": 1216.964,
+      "end": 1220.975,
+      "duration": 4.011,
+      "text": "will give you f and g will be simple polynomials."
+    },
+    {
+      "index": 288,
+      "start": 1220.975,
+      "end": 1224.819,
+      "duration": 3.844,
+      "text": "They are smooth, continuous and nice and behave"
+    },
+    {
+      "index": 289,
+      "start": 1224.819,
+      "end": 1227.994,
+      "duration": 3.175,
+      "text": "as you want. And you calculate that and"
+    },
+    {
+      "index": 290,
+      "start": 1227.994,
+      "end": 1232.415,
+      "duration": 4.421,
+      "text": "assume -- Suppose, in other words,"
+    },
+    {
+      "index": 291,
+      "start": 1232.415,
+      "end": 1236.641,
+      "duration": 4.226,
+      "text": "that the divergence of f, I need more room."
+    },
+    {
+      "index": 292,
+      "start": 1236.641,
+      "end": 1242.276,
+      "duration": 5.635,
+      "text": "The hypothesis is that the divergence of f is not zero in"
+    },
+    {
+      "index": 293,
+      "start": 1242.276,
+      "end": 1245.396,
+      "duration": 3.12,
+      "text": "that region D. It is never zero."
+    },
+    {
+      "index": 294,
+      "start": 1245.396,
+      "end": 1249.622,
+      "duration": 4.226,
+      "text": "It is not zero at any point in that region."
+    },
+    {
+      "index": 295,
+      "start": 1249.622,
+      "end": 1255.056,
+      "duration": 5.434,
+      "text": "The conclusion is that there are no limit cycles in the"
+    },
+    {
+      "index": 296,
+      "start": 1255.056,
+      "end": 1258.075,
+      "duration": 3.019,
+      "text": "region. If it is not zero in D,"
+    },
+    {
+      "index": 297,
+      "start": 1258.075,
+      "end": 1264.844,
+      "duration": 6.769,
+      "text": "there are no limit cycles. In fact, there are not even any"
+    },
+    {
+      "index": 298,
+      "start": 1264.844,
+      "end": 1269.25,
+      "duration": 4.406,
+      "text": "closed trajectories. You couldn't even have those"
+    },
+    {
+      "index": 299,
+      "start": 1269.25,
+      "end": 1273.838,
+      "duration": 4.588,
+      "text": "bunch of concentric circles, so there are no closed"
+    },
+    {
+      "index": 300,
+      "start": 1273.838,
+      "end": 1278.886,
+      "duration": 5.048,
+      "text": "trajectories of the original system whose divergence you"
+    },
+    {
+      "index": 301,
+      "start": 1278.886,
+      "end": 1281.639,
+      "duration": 2.753,
+      "text": "calculated. There are no closed"
+    },
+    {
+      "index": 302,
+      "start": 1281.639,
+      "end": 1284.392,
+      "duration": 2.753,
+      "text": "trajectories in D. For example,"
+    },
+    {
+      "index": 303,
+      "start": 1284.392,
+      "end": 1289.531,
+      "duration": 5.139,
+      "text": "let me give you a simple example to put a little flesh on"
+    },
+    {
+      "index": 304,
+      "start": 1289.531,
+      "end": 1292.057,
+      "duration": 2.526,
+      "text": "it. Let's see."
+    },
+    {
+      "index": 305,
+      "start": 1292.057,
+      "end": 1295.971,
+      "duration": 3.914,
+      "text": "What do I have? I prepared an example."
+    },
+    {
+      "index": 306,
+      "start": 1295.971,
+      "end": 1300.307,
+      "duration": 4.336,
+      "text": "x prime equals, here is a simple nonlinear"
+    },
+    {
+      "index": 307,
+      "start": 1300.307,
+      "end": 1305.278,
+      "duration": 4.971,
+      "text": "system, x cubed plus y cubed."
+    },
+    {
+      "index": 308,
+      "start": 1305.278,
+      "end": 1311.519,
+      "duration": 6.241,
+      "text": "And y prime equals 3x plus y cubed plus 2y."
+    },
+    {
+      "index": 309,
+      "start": 1319.0,
+      "end": 1321.604,
+      "duration": 2.604,
+      "text": "Does this system have limit cycles?"
+    },
+    {
+      "index": 310,
+      "start": 1321.604,
+      "end": 1325.665,
+      "duration": 4.061,
+      "text": "Well, even to calculate its critical points would be a"
+    },
+    {
+      "index": 311,
+      "start": 1325.665,
+      "end": 1329.879,
+      "duration": 4.214,
+      "text": "little task, but we can easily answer the question as to"
+    },
+    {
+      "index": 312,
+      "start": 1329.879,
+      "end": 1334.399,
+      "duration": 4.52,
+      "text": "whether it has limit cycles or not by Bendixson's criterion."
+    },
+    {
+      "index": 313,
+      "start": 1334.399,
+      "end": 1338.919,
+      "duration": 4.52,
+      "text": "Let's calculate the divergence. The divergence of the vector"
+    },
+    {
+      "index": 314,
+      "start": 1338.919,
+      "end": 1342.673,
+      "duration": 3.754,
+      "text": "field whose components are these two functions is,"
+    },
+    {
+      "index": 315,
+      "start": 1342.673,
+      "end": 1346.887,
+      "duration": 4.214,
+      "text": "well, 3x squared, it's the partial of the first"
+    },
+    {
+      "index": 316,
+      "start": 1346.887,
+      "end": 1351.483,
+      "duration": 4.596,
+      "text": "guy with respect to x plus the partial of the second guy with"
+    },
+    {
+      "index": 317,
+      "start": 1351.483,
+      "end": 1354.625,
+      "duration": 3.142,
+      "text": "respect to y, which is 3y squared plus two."
+    },
+    {
+      "index": 318,
+      "start": 1354.625,
+      "end": 1359.654,
+      "duration": 5.029,
+      "text": "Now, can that be zero anywhere"
+    },
+    {
+      "index": 319,
+      "start": 1359.654,
+      "end": 1363.635,
+      "duration": 3.981,
+      "text": "in the x,y-plane? No, because it is the sum of"
+    },
+    {
+      "index": 320,
+      "start": 1363.635,
+      "end": 1367.793,
+      "duration": 4.158,
+      "text": "these two squares. This much of it could be zero"
+    },
+    {
+      "index": 321,
+      "start": 1367.793,
+      "end": 1371.951,
+      "duration": 4.158,
+      "text": "only at the origin, but that plus two eliminates"
+    },
+    {
+      "index": 322,
+      "start": 1371.951,
+      "end": 1375.49,
+      "duration": 3.539,
+      "text": "even that. This is always positive in the"
+    },
+    {
+      "index": 323,
+      "start": 1375.49,
+      "end": 1379.383,
+      "duration": 3.893,
+      "text": "entire x,y-plane. Here my domain is the whole"
+    },
+    {
+      "index": 324,
+      "start": 1379.383,
+      "end": 1383.099,
+      "duration": 3.716,
+      "text": "x,y-plane and, therefore, the conclusion is"
+    },
+    {
+      "index": 325,
+      "start": 1383.099,
+      "end": 1387.876,
+      "duration": 4.777,
+      "text": "that there are no closed trajectories in the x,y-plane,"
+    },
+    {
+      "index": 326,
+      "start": 1387.876,
+      "end": 1390.0,
+      "duration": 2.124,
+      "text": "anywhere."
+    },
+    {
+      "index": 327,
+      "start": 1395.0,
+      "end": 1398.566,
+      "duration": 3.566,
+      "text": "And we have done that with just a couple of lines of calculation"
+    },
+    {
+      "index": 328,
+      "start": 1398.566,
+      "end": 1401.283,
+      "duration": 2.717,
+      "text": "and nothing further required. No computer search."
+    },
+    {
+      "index": 329,
+      "start": 1401.283,
+      "end": 1404.056,
+      "duration": 2.773,
+      "text": "In fact, no computer search could ever proof this."
+    },
+    {
+      "index": 330,
+      "start": 1404.056,
+      "end": 1407.226,
+      "duration": 3.17,
+      "text": "It would be impossible because, no matter where you look,"
+    },
+    {
+      "index": 331,
+      "start": 1407.226,
+      "end": 1410.0,
+      "duration": 2.774,
+      "text": "there is always some other place to look."
+    },
+    {
+      "index": 332,
+      "start": 1410.0,
+      "end": 1415.404,
+      "duration": 5.404,
+      "text": "This is an example where a couple lines of mathematics"
+    },
+    {
+      "index": 333,
+      "start": 1415.404,
+      "end": 1421.115,
+      "duration": 5.711,
+      "text": "dispose of the matter far more effectively than a million"
+    },
+    {
+      "index": 334,
+      "start": 1421.115,
+      "end": 1426.927,
+      "duration": 5.812,
+      "text": "dollars worth of calculation. Well, where does Bendixson's"
+    },
+    {
+      "index": 335,
+      "start": 1426.927,
+      "end": 1431.822,
+      "duration": 4.895,
+      "text": "theorem come from? Yes, Bendixson's theorem comes"
+    },
+    {
+      "index": 336,
+      "start": 1431.822,
+      "end": 1436.003,
+      "duration": 4.181,
+      "text": "from 18.02. And I am giving it to you both"
+    },
+    {
+      "index": 337,
+      "start": 1436.003,
+      "end": 1441.0,
+      "duration": 4.997,
+      "text": "to recall a little bit of 18.02 to you."
+    },
+    {
+      "index": 338,
+      "start": 1441.0,
+      "end": 1446.272,
+      "duration": 5.272,
+      "text": "Because it is about the first example in the course that we"
+    },
+    {
+      "index": 339,
+      "start": 1446.272,
+      "end": 1449.181,
+      "duration": 2.909,
+      "text": "have had of an indirect argument."
+    },
+    {
+      "index": 340,
+      "start": 1449.181,
+      "end": 1454.454,
+      "duration": 5.273,
+      "text": "And indirect arguments are something you have to slowly get"
+    },
+    {
+      "index": 341,
+      "start": 1454.454,
+      "end": 1457.454,
+      "duration": 3.0,
+      "text": "used to. I am going to give you an"
+    },
+    {
+      "index": 342,
+      "start": 1457.454,
+      "end": 1460.818,
+      "duration": 3.364,
+      "text": "indirect proof. Remember what that is?"
+    },
+    {
+      "index": 343,
+      "start": 1460.818,
+      "end": 1465.272,
+      "duration": 4.454,
+      "text": "You assume the contrary and you show it leads to a"
+    },
+    {
+      "index": 344,
+      "start": 1465.272,
+      "end": 1468.636,
+      "duration": 3.364,
+      "text": "contradiction. What would assuming the"
+    },
+    {
+      "index": 345,
+      "start": 1468.636,
+      "end": 1474.335,
+      "duration": 5.699,
+      "text": "contrary be? Contrary would be I will assume"
+    },
+    {
+      "index": 346,
+      "start": 1474.335,
+      "end": 1480.36,
+      "duration": 6.025,
+      "text": "the divergence is not zero, but I will suppose there is a"
+    },
+    {
+      "index": 347,
+      "start": 1480.36,
+      "end": 1484.987,
+      "duration": 4.627,
+      "text": "closed trajectory. Suppose there is a closed"
+    },
+    {
+      "index": 348,
+      "start": 1484.987,
+      "end": 1488.0,
+      "duration": 3.013,
+      "text": "trajectory that exists."
+    },
+    {
+      "index": 349,
+      "start": 1496.0,
+      "end": 1499.0,
+      "duration": 3.0,
+      "text": "Let's draw a picture of it."
+    },
+    {
+      "index": 350,
+      "start": 1508.0,
+      "end": 1511.243,
+      "duration": 3.243,
+      "text": "And let's say it goes around this way."
+    },
+    {
+      "index": 351,
+      "start": 1511.243,
+      "end": 1515.011,
+      "duration": 3.768,
+      "text": "There is a closed trajectory for our system."
+    },
+    {
+      "index": 352,
+      "start": 1515.011,
+      "end": 1519.306,
+      "duration": 4.295,
+      "text": "Let's call the curve C. And I am going to call the"
+    },
+    {
+      "index": 353,
+      "start": 1519.306,
+      "end": 1522.812,
+      "duration": 3.506,
+      "text": "inside of it R, the way one often does in"
+    },
+    {
+      "index": 354,
+      "start": 1522.812,
+      "end": 1525.968,
+      "duration": 3.156,
+      "text": "18.02. D is all this region out here,"
+    },
+    {
+      "index": 355,
+      "start": 1525.968,
+      "end": 1530.0,
+      "duration": 4.032,
+      "text": "in which everything is taking place."
+    },
+    {
+      "index": 356,
+      "start": 1530.0,
+      "end": 1535.257,
+      "duration": 5.257,
+      "text": "This is to exist in D. Now, what I am going to do is"
+    },
+    {
+      "index": 357,
+      "start": 1535.257,
+      "end": 1540.0,
+      "duration": 4.743,
+      "text": "calculate a line integral around that curve."
+    },
+    {
+      "index": 358,
+      "start": 1545.0,
+      "end": 1547.825,
+      "duration": 2.825,
+      "text": "A line integral of this vector field."
+    },
+    {
+      "index": 359,
+      "start": 1547.825,
+      "end": 1551.201,
+      "duration": 3.376,
+      "text": "Now, there are two things you can calculate."
+    },
+    {
+      "index": 360,
+      "start": 1551.201,
+      "end": 1555.283,
+      "duration": 4.082,
+      "text": "One of the line integrals, I will put in a few of the"
+    },
+    {
+      "index": 361,
+      "start": 1555.283,
+      "end": 1558.737,
+      "duration": 3.454,
+      "text": "vectors here. The vectors I know are pointing"
+    },
+    {
+      "index": 362,
+      "start": 1558.737,
+      "end": 1563.368,
+      "duration": 4.631,
+      "text": "this way because that is the direction in which the curve is"
+    },
+    {
+      "index": 363,
+      "start": 1563.368,
+      "end": 1568.0,
+      "duration": 4.632,
+      "text": "being traversed in order to make it a trajectory."
+    },
+    {
+      "index": 364,
+      "start": 1568.0,
+      "end": 1572.087,
+      "duration": 4.087,
+      "text": "Those are a few of the typical vectors in the field."
+    },
+    {
+      "index": 365,
+      "start": 1572.087,
+      "end": 1576.735,
+      "duration": 4.648,
+      "text": "I am going to calculate the line integral around that curve"
+    },
+    {
+      "index": 366,
+      "start": 1576.735,
+      "end": 1579.7,
+      "duration": 2.965,
+      "text": "in the positive sense. In other words,"
+    },
+    {
+      "index": 367,
+      "start": 1579.7,
+      "end": 1583.547,
+      "duration": 3.847,
+      "text": "not in the direction of the salmon-colored arrow,"
+    },
+    {
+      "index": 368,
+      "start": 1583.547,
+      "end": 1587.874,
+      "duration": 4.327,
+      "text": "but in the normal sense in which you calculate it using"
+    },
+    {
+      "index": 369,
+      "start": 1587.874,
+      "end": 1591.0,
+      "duration": 3.126,
+      "text": "Green's theorem, for example."
+    },
+    {
+      "index": 370,
+      "start": 1591.0,
+      "end": 1594.752,
+      "duration": 3.752,
+      "text": "The positive sense means the one which keeps the region,"
+    },
+    {
+      "index": 371,
+      "start": 1594.752,
+      "end": 1598.301,
+      "duration": 3.549,
+      "text": "the inside on your left, as you walk around like that"
+    },
+    {
+      "index": 372,
+      "start": 1598.301,
+      "end": 1602.19,
+      "duration": 3.889,
+      "text": "the region stays on your left. That is the positive sense."
+    },
+    {
+      "index": 373,
+      "start": 1602.19,
+      "end": 1605.124,
+      "duration": 2.934,
+      "text": "That is the sense in which I am integrating."
+    },
+    {
+      "index": 374,
+      "start": 1605.124,
+      "end": 1609.014,
+      "duration": 3.89,
+      "text": "I am going to use Green's theorem, but the integral that I"
+    },
+    {
+      "index": 375,
+      "start": 1609.014,
+      "end": 1612.152,
+      "duration": 3.138,
+      "text": "am going to calculate is not the work integral."
+    },
+    {
+      "index": 376,
+      "start": 1612.152,
+      "end": 1615.496,
+      "duration": 3.344,
+      "text": "I am going to calculate instead the flux integral,"
+    },
+    {
+      "index": 377,
+      "start": 1615.496,
+      "end": 1620.0,
+      "duration": 4.504,
+      "text": "the integral that represents the flux of F across C."
+    },
+    {
+      "index": 378,
+      "start": 1620.0,
+      "end": 1624.372,
+      "duration": 4.372,
+      "text": "Now, what is that integral? Well, at each point,"
+    },
+    {
+      "index": 379,
+      "start": 1624.372,
+      "end": 1629.953,
+      "duration": 5.581,
+      "text": "you station a little ant and the ant reports the outward flow"
+    },
+    {
+      "index": 380,
+      "start": 1629.953,
+      "end": 1635.813,
+      "duration": 5.86,
+      "text": "rate across that point which is F dotted with the normal vector."
+    },
+    {
+      "index": 381,
+      "start": 1635.813,
+      "end": 1640.744,
+      "duration": 4.931,
+      "text": "I will put in a few normal vectors just to remind you."
+    },
+    {
+      "index": 382,
+      "start": 1640.744,
+      "end": 1645.953,
+      "duration": 5.209,
+      "text": "The normal vectors look like little unit vectors pointing"
+    },
+    {
+      "index": 383,
+      "start": 1645.953,
+      "end": 1649.209,
+      "duration": 3.256,
+      "text": "perpendicularly outwards everywhere."
+    },
+    {
+      "index": 384,
+      "start": 1649.209,
+      "end": 1654.594,
+      "duration": 5.385,
+      "text": "These are the n's. F dotted with the unit normal"
+    },
+    {
+      "index": 385,
+      "start": 1654.594,
+      "end": 1658.619,
+      "duration": 4.025,
+      "text": "vector, and that is added up around the curve."
+    },
+    {
+      "index": 386,
+      "start": 1658.619,
+      "end": 1663.361,
+      "duration": 4.742,
+      "text": "This quantity gives me the flux of the field across C."
+    },
+    {
+      "index": 387,
+      "start": 1663.361,
+      "end": 1668.191,
+      "duration": 4.83,
+      "text": "Now, we are going to calculate that by Green's theorem."
+    },
+    {
+      "index": 388,
+      "start": 1668.191,
+      "end": 1672.306,
+      "duration": 4.115,
+      "text": "But, before we calculate it by Green's theorem,"
+    },
+    {
+      "index": 389,
+      "start": 1672.306,
+      "end": 1675.884,
+      "duration": 3.578,
+      "text": "we are going to psych it out. What is it?"
+    },
+    {
+      "index": 390,
+      "start": 1675.884,
+      "end": 1680.0,
+      "duration": 4.116,
+      "text": "What is the value of that integral?"
+    },
+    {
+      "index": 391,
+      "start": 1680.0,
+      "end": 1684.131,
+      "duration": 4.131,
+      "text": "Well, since I am asking you to do it in your head there can"
+    },
+    {
+      "index": 392,
+      "start": 1684.131,
+      "end": 1686.91,
+      "duration": 2.779,
+      "text": "only be one possible answer. It is zero."
+    },
+    {
+      "index": 393,
+      "start": 1686.91,
+      "end": 1690.97,
+      "duration": 4.06,
+      "text": "Why is that integral zero? Well, because at each point the"
+    },
+    {
+      "index": 394,
+      "start": 1690.97,
+      "end": 1693.464,
+      "duration": 2.494,
+      "text": "field vector, the velocity vector is"
+    },
+    {
+      "index": 395,
+      "start": 1693.464,
+      "end": 1695.886,
+      "duration": 2.422,
+      "text": "perpendicular to the normal vector."
+    },
+    {
+      "index": 396,
+      "start": 1695.886,
+      "end": 1697.881,
+      "duration": 1.995,
+      "text": "Why? The normal vector points"
+    },
+    {
+      "index": 397,
+      "start": 1697.881,
+      "end": 1702.013,
+      "duration": 4.132,
+      "text": "perpendicularly to the curve but the field vector always is"
+    },
+    {
+      "index": 398,
+      "start": 1702.013,
+      "end": 1707.0,
+      "duration": 4.987,
+      "text": "tangent to the curve because this curve is a trajectory."
+    },
+    {
+      "index": 399,
+      "start": 1707.0,
+      "end": 1714.631,
+      "duration": 7.631,
+      "text": "It is always supposed to be going in the direction given by"
+    },
+    {
+      "index": 400,
+      "start": 1714.631,
+      "end": 1719.631,
+      "duration": 5.0,
+      "text": "that white field vector. Do you follow?"
+    },
+    {
+      "index": 401,
+      "start": 1719.631,
+      "end": 1727.0,
+      "duration": 7.369,
+      "text": "A trajectory means that it is always tangent to the field"
+    },
+    {
+      "index": 402,
+      "start": 1727.0,
+      "end": 1733.447,
+      "duration": 6.447,
+      "text": "vector and, therefore, always perpendicular to the"
+    },
+    {
+      "index": 403,
+      "start": 1733.447,
+      "end": 1739.105,
+      "duration": 5.658,
+      "text": "normal vector. This is zero since F dot n is"
+    },
+    {
+      "index": 404,
+      "start": 1739.105,
+      "end": 1743.846,
+      "duration": 4.741,
+      "text": "always zero. Everywhere on the curve,"
+    },
+    {
+      "index": 405,
+      "start": 1743.846,
+      "end": 1747.923,
+      "duration": 4.077,
+      "text": "F dot n has to be zero. There is no flux of this field"
+    },
+    {
+      "index": 406,
+      "start": 1747.923,
+      "end": 1752.153,
+      "duration": 4.23,
+      "text": "across the curve because the field is always in the same"
+    },
+    {
+      "index": 407,
+      "start": 1752.153,
+      "end": 1755.923,
+      "duration": 3.77,
+      "text": "direction as the curve, never perpendicular to it."
+    },
+    {
+      "index": 408,
+      "start": 1755.923,
+      "end": 1759.0,
+      "duration": 3.077,
+      "text": "It has no components perpendicular to it."
+    },
+    {
+      "index": 409,
+      "start": 1759.0,
+      "end": 1761.615,
+      "duration": 2.615,
+      "text": "Good. Now let's do it the hard way."
+    },
+    {
+      "index": 410,
+      "start": 1761.615,
+      "end": 1765.846,
+      "duration": 4.231,
+      "text": "Let's use Green's theorem. Green's theorem says that the"
+    },
+    {
+      "index": 411,
+      "start": 1765.846,
+      "end": 1770.538,
+      "duration": 4.692,
+      "text": "flux across C should be equal to the double integral over that"
+    },
+    {
+      "index": 412,
+      "start": 1770.538,
+      "end": 1775.95,
+      "duration": 5.412,
+      "text": "region of the divergence of F. It's like Gauss theorem in two"
+    },
+    {
+      "index": 413,
+      "start": 1775.95,
+      "end": 1779.006,
+      "duration": 3.056,
+      "text": "dimensions, this version of it. Divergence of F,"
+    },
+    {
+      "index": 414,
+      "start": 1779.006,
+      "end": 1782.191,
+      "duration": 3.185,
+      "text": "that is a function, I double integrate it over the"
+    },
+    {
+      "index": 415,
+      "start": 1782.191,
+      "end": 1786.092,
+      "duration": 3.901,
+      "text": "region, and then that is dx / dy, or let's say da because you"
+    },
+    {
+      "index": 416,
+      "start": 1786.092,
+      "end": 1788.693,
+      "duration": 2.601,
+      "text": "might want to do it in polar coordinates."
+    },
+    {
+      "index": 417,
+      "start": 1788.693,
+      "end": 1792.139,
+      "duration": 3.446,
+      "text": "And, on the problem set, you certainly will want to do"
+    },
+    {
+      "index": 418,
+      "start": 1792.139,
+      "end": 1795.0,
+      "duration": 2.861,
+      "text": "it in polar coordinates, I think."
+    },
+    {
+      "index": 419,
+      "start": 1800.0,
+      "end": 1802.769,
+      "duration": 2.769,
+      "text": "All right. How much is that?"
+    },
+    {
+      "index": 420,
+      "start": 1802.769,
+      "end": 1806.871,
+      "duration": 4.102,
+      "text": "Well, we haven't yet used the hypothesis."
+    },
+    {
+      "index": 421,
+      "start": 1806.871,
+      "end": 1810.769,
+      "duration": 3.898,
+      "text": "All we have done is set up the problem."
+    },
+    {
+      "index": 422,
+      "start": 1810.769,
+      "end": 1816.512,
+      "duration": 5.743,
+      "text": "Now, the hypothesis was that the divergence is never zero"
+    },
+    {
+      "index": 423,
+      "start": 1816.512,
+      "end": 1820.82,
+      "duration": 4.308,
+      "text": "anywhere in D. Therefore, the divergence is"
+    },
+    {
+      "index": 424,
+      "start": 1820.82,
+      "end": 1826.564,
+      "duration": 5.744,
+      "text": "never zero anywhere in R. What I say is the divergence is"
+    },
+    {
+      "index": 425,
+      "start": 1826.564,
+      "end": 1832.0,
+      "duration": 5.436,
+      "text": "either greater than zero everywhere in R."
+    },
+    {
+      "index": 426,
+      "start": 1832.0,
+      "end": 1835.017,
+      "duration": 3.017,
+      "text": "Or less than zero everywhere in R."
+    },
+    {
+      "index": 427,
+      "start": 1835.017,
+      "end": 1840.321,
+      "duration": 5.304,
+      "text": "But it cannot be sometimes positive and sometimes negative."
+    },
+    {
+      "index": 428,
+      "start": 1840.321,
+      "end": 1842.424,
+      "duration": 2.103,
+      "text": "Why not? In other words,"
+    },
+    {
+      "index": 429,
+      "start": 1842.424,
+      "end": 1847.82,
+      "duration": 5.396,
+      "text": "I say it is not possible the divergence here is one and here"
+    },
+    {
+      "index": 430,
+      "start": 1847.82,
+      "end": 1851.66,
+      "duration": 3.84,
+      "text": "is minus two. That is not possible because,"
+    },
+    {
+      "index": 431,
+      "start": 1851.66,
+      "end": 1855.318,
+      "duration": 3.658,
+      "text": "if I drew a line from this point to that,"
+    },
+    {
+      "index": 432,
+      "start": 1855.318,
+      "end": 1860.896,
+      "duration": 5.578,
+      "text": "along that line the divergence would start positive and end up"
+    },
+    {
+      "index": 433,
+      "start": 1860.896,
+      "end": 1864.021,
+      "duration": 3.125,
+      "text": "negative. And, therefore,"
+    },
+    {
+      "index": 434,
+      "start": 1864.021,
+      "end": 1866.473,
+      "duration": 2.452,
+      "text": "have to be zero some time in between."
+    },
+    {
+      "index": 435,
+      "start": 1866.473,
+      "end": 1869.198,
+      "duration": 2.725,
+      "text": "It's because it is a continuous function."
+    },
+    {
+      "index": 436,
+      "start": 1869.198,
+      "end": 1872.399,
+      "duration": 3.201,
+      "text": "I am assuming that."
+    },
+    {
+      "index": 437,
+      "start": 1872.399,
+      "end": 1875.328,
+      "duration": 2.929,
+      "text": "And, therefore, if it sometimes positive and"
+    },
+    {
+      "index": 438,
+      "start": 1875.328,
+      "end": 1878.529,
+      "duration": 3.201,
+      "text": "sometimes negative it has to be zero in between."
+    },
+    {
+      "index": 439,
+      "start": 1878.529,
+      "end": 1882.139,
+      "duration": 3.61,
+      "text": "You cannot get continuously from plus one to minus two"
+    },
+    {
+      "index": 440,
+      "start": 1882.139,
+      "end": 1887.915,
+      "duration": 5.776,
+      "text": "without passing through zero. The reason for this is,"
+    },
+    {
+      "index": 441,
+      "start": 1887.915,
+      "end": 1895.014,
+      "duration": 7.099,
+      "text": "since the divergence is never zero in R it therefore must"
+    },
+    {
+      "index": 442,
+      "start": 1895.014,
+      "end": 1900.591,
+      "duration": 5.577,
+      "text": "always stay positive or always stay negative."
+    },
+    {
+      "index": 443,
+      "start": 1900.591,
+      "end": 1907.563,
+      "duration": 6.972,
+      "text": "Now, if it always stays positive, the conclusion is then"
+    },
+    {
+      "index": 444,
+      "start": 1907.563,
+      "end": 1912.253,
+      "duration": 4.69,
+      "text": "this double integral must be positive."
+    },
+    {
+      "index": 445,
+      "start": 1912.253,
+      "end": 1921.0,
+      "duration": 8.747,
+      "text": "Therefore, this double integral is either greater than zero."
+    },
+    {
+      "index": 446,
+      "start": 1921.0,
+      "end": 1924.911,
+      "duration": 3.911,
+      "text": "That is if the divergence is always positive."
+    },
+    {
+      "index": 447,
+      "start": 1924.911,
+      "end": 1930.333,
+      "duration": 5.422,
+      "text": "Or, it is less than zero if the divergence is always negative."
+    },
+    {
+      "index": 448,
+      "start": 1930.333,
+      "end": 1934.066,
+      "duration": 3.733,
+      "text": "But the one thing it cannot be is not zero."
+    },
+    {
+      "index": 449,
+      "start": 1934.066,
+      "end": 1938.955,
+      "duration": 4.889,
+      "text": "Well, the left-hand side, Green's theorem is supposed to"
+    },
+    {
+      "index": 450,
+      "start": 1938.955,
+      "end": 1942.422,
+      "duration": 3.467,
+      "text": "be true. Green's theorem is our bedrock."
+    },
+    {
+      "index": 451,
+      "start": 1942.422,
+      "end": 1946.955,
+      "duration": 4.533,
+      "text": "18.02 would crumble without that so it must be true."
+    },
+    {
+      "index": 452,
+      "start": 1946.955,
+      "end": 1953.0,
+      "duration": 6.045,
+      "text": "One way of calculating the left-hand side gives us zero."
+    },
+    {
+      "index": 453,
+      "start": 1953.0,
+      "end": 1956.352,
+      "duration": 3.352,
+      "text": "If we calculate the right-hand side it is not zero."
+    },
+    {
+      "index": 454,
+      "start": 1956.352,
+      "end": 1958.498,
+      "duration": 2.146,
+      "text": "That is called the contradiction."
+    },
+    {
+      "index": 455,
+      "start": 1958.498,
+      "end": 1961.046,
+      "duration": 2.548,
+      "text": "Where did the contradiction arise from?"
+    },
+    {
+      "index": 456,
+      "start": 1961.046,
+      "end": 1965.137,
+      "duration": 4.091,
+      "text": "It arose from the fact that I supposed that there was a closed"
+    },
+    {
+      "index": 457,
+      "start": 1965.137,
+      "end": 1968.892,
+      "duration": 3.755,
+      "text": "trajectory in that region. The conclusion is there cannot"
+    },
+    {
+      "index": 458,
+      "start": 1968.892,
+      "end": 1972.915,
+      "duration": 4.023,
+      "text": "be any closed trajectory of that region because it leads to a"
+    },
+    {
+      "index": 459,
+      "start": 1972.915,
+      "end": 1976.0,
+      "duration": 3.085,
+      "text": "contradiction via Green's theorem."
+    },
+    {
+      "index": 460,
+      "start": 1982.0,
+      "end": 1986.21,
+      "duration": 4.21,
+      "text": "Let me see if I can give you some of the argument for the"
+    },
+    {
+      "index": 461,
+      "start": 1986.21,
+      "end": 1990.27,
+      "duration": 4.06,
+      "text": "other, well, let's at least state the other criterion I"
+    },
+    {
+      "index": 462,
+      "start": 1990.27,
+      "end": 1992.0,
+      "duration": 1.73,
+      "text": "wanted to give you."
+    },
+    {
+      "index": 463,
+      "start": 2001.0,
+      "end": 2005.067,
+      "duration": 4.067,
+      "text": "Suppose, for example, we use this system,"
+    },
+    {
+      "index": 464,
+      "start": 2005.067,
+      "end": 2007.0,
+      "duration": 1.933,
+      "text": "x prime equals --"
+    },
+    {
+      "index": 465,
+      "start": 2030.0,
+      "end": 2033.0,
+      "duration": 3.0,
+      "text": "Does this have limit cycles?"
+    },
+    {
+      "index": 466,
+      "start": 2039.0,
+      "end": 2042.0,
+      "duration": 3.0,
+      "text": "Does that have limit cycles?"
+    },
+    {
+      "index": 467,
+      "start": 2048.0,
+      "end": 2052.329,
+      "duration": 4.329,
+      "text": "Let's Bendixson it. We will calculate the"
+    },
+    {
+      "index": 468,
+      "start": 2052.329,
+      "end": 2058.824,
+      "duration": 6.495,
+      "text": "divergence of a vector field. It is 2x from the top function."
+    },
+    {
+      "index": 469,
+      "start": 2058.824,
+      "end": 2062.613,
+      "duration": 3.789,
+      "text": "The partial with respect to x is 2x."
+    },
+    {
+      "index": 470,
+      "start": 2062.613,
+      "end": 2069.0,
+      "duration": 6.387,
+      "text": "The second function with respect to y is negative 2y."
+    },
+    {
+      "index": 471,
+      "start": 2069.0,
+      "end": 2074.736,
+      "duration": 5.736,
+      "text": "That certainly could be zero. In fact, this is zero along the"
+    },
+    {
+      "index": 472,
+      "start": 2074.736,
+      "end": 2079.516,
+      "duration": 4.78,
+      "text": "entire line x equals y. Its divergence is zero here"
+    },
+    {
+      "index": 473,
+      "start": 2079.516,
+      "end": 2084.488,
+      "duration": 4.972,
+      "text": "along that whole line. The best I could conclude was,"
+    },
+    {
+      "index": 474,
+      "start": 2084.488,
+      "end": 2090.033,
+      "duration": 5.545,
+      "text": "I could conclude that there is no limit cycle like this and"
+    },
+    {
+      "index": 475,
+      "start": 2090.033,
+      "end": 2095.483,
+      "duration": 5.45,
+      "text": "there is no limit cycle like this, but there is nothing so"
+    },
+    {
+      "index": 476,
+      "start": 2095.483,
+      "end": 2100.741,
+      "duration": 5.258,
+      "text": "far that says a limit cycle could not cross that because"
+    },
+    {
+      "index": 477,
+      "start": 2100.741,
+      "end": 2106.0,
+      "duration": 5.259,
+      "text": "that would not violate Bendixson's theorem."
+    },
+    {
+      "index": 478,
+      "start": 2106.0,
+      "end": 2109.686,
+      "duration": 3.686,
+      "text": "In other words, any domain that contained part"
+    },
+    {
+      "index": 479,
+      "start": 2109.686,
+      "end": 2113.044,
+      "duration": 3.358,
+      "text": "of this line, the divergence would be zero"
+    },
+    {
+      "index": 480,
+      "start": 2113.044,
+      "end": 2115.583,
+      "duration": 2.539,
+      "text": "along that line. And, therefore,"
+    },
+    {
+      "index": 481,
+      "start": 2115.583,
+      "end": 2120.088,
+      "duration": 4.505,
+      "text": "I could conclude nothing. I could have limit cycles that"
+    },
+    {
+      "index": 482,
+      "start": 2120.088,
+      "end": 2123.529,
+      "duration": 3.441,
+      "text": "cross that line, as long as they included a"
+    },
+    {
+      "index": 483,
+      "start": 2123.529,
+      "end": 2128.116,
+      "duration": 4.587,
+      "text": "piece of that line in them. The answer is I cannot make a"
+    },
+    {
+      "index": 484,
+      "start": 2128.116,
+      "end": 2132.059,
+      "duration": 3.943,
+      "text": "conclusion. Well, that is because I am"
+    },
+    {
+      "index": 485,
+      "start": 2132.059,
+      "end": 2136.495,
+      "duration": 4.436,
+      "text": "using the wrong criterion. Let's instead use the critical"
+    },
+    {
+      "index": 486,
+      "start": 2136.495,
+      "end": 2138.0,
+      "duration": 1.505,
+      "text": "point criterion."
+    },
+    {
+      "index": 487,
+      "start": 2155.0,
+      "end": 2158.956,
+      "duration": 3.956,
+      "text": "Now, I am going to say that it makes a nice positive statement"
+    },
+    {
+      "index": 488,
+      "start": 2158.956,
+      "end": 2161.032,
+      "duration": 2.076,
+      "text": "but nobody ever uses it this way."
+    },
+    {
+      "index": 489,
+      "start": 2161.032,
+      "end": 2163.108,
+      "duration": 2.076,
+      "text": "Nonetheless, let's first state it"
+    },
+    {
+      "index": 490,
+      "start": 2163.108,
+      "end": 2167.0,
+      "duration": 3.892,
+      "text": "positively, even though that is not the way to use it."
+    },
+    {
+      "index": 491,
+      "start": 2167.0,
+      "end": 2173.808,
+      "duration": 6.808,
+      "text": "The positive statement will be, once again, we have our region"
+    },
+    {
+      "index": 492,
+      "start": 2173.808,
+      "end": 2180.058,
+      "duration": 6.25,
+      "text": "D and we have a region of the xy plane and we have our C,"
+    },
+    {
+      "index": 493,
+      "start": 2180.058,
+      "end": 2186.084,
+      "duration": 6.026,
+      "text": "a closed trajectory in it. A closed trajectory of what?"
+    },
+    {
+      "index": 494,
+      "start": 2186.084,
+      "end": 2190.883,
+      "duration": 4.799,
+      "text": "Of our system. And that is supposed to be in"
+    },
+    {
+      "index": 495,
+      "start": 2190.883,
+      "end": 2195.333,
+      "duration": 4.45,
+      "text": "D. The critical point criterion"
+    },
+    {
+      "index": 496,
+      "start": 2195.333,
+      "end": 2202.0,
+      "duration": 6.667,
+      "text": "says something very simple. If you have that situation it"
+    },
+    {
+      "index": 497,
+      "start": 2202.0,
+      "end": 2208.428,
+      "duration": 6.428,
+      "text": "says that inside that closed trajectory there must be a"
+    },
+    {
+      "index": 498,
+      "start": 2208.428,
+      "end": 2212.0,
+      "duration": 3.572,
+      "text": "critical point somewhere."
+    },
+    {
+      "index": 499,
+      "start": 2220.0,
+      "end": 2228.0,
+      "duration": 8.0,
+      "text": "It says that inside C is a critical point."
+    },
+    {
+      "index": 500,
+      "start": 2235.0,
+      "end": 2238.652,
+      "duration": 3.652,
+      "text": "Now, this won't help us with the existence problem."
+    },
+    {
+      "index": 501,
+      "start": 2238.652,
+      "end": 2241.794,
+      "duration": 3.142,
+      "text": "This won't help us find a closed trajectory."
+    },
+    {
+      "index": 502,
+      "start": 2241.794,
+      "end": 2246.397,
+      "duration": 4.603,
+      "text": "We will take our system and say it has a critical point here and"
+    },
+    {
+      "index": 503,
+      "start": 2246.397,
+      "end": 2249.611,
+      "duration": 3.214,
+      "text": "a critical point there. Does it have a closed"
+    },
+    {
+      "index": 504,
+      "start": 2249.611,
+      "end": 2253.091,
+      "duration": 3.48,
+      "text": "trajectory? Well, all I know is the closed"
+    },
+    {
+      "index": 505,
+      "start": 2253.091,
+      "end": 2256.855,
+      "duration": 3.764,
+      "text": "trajectory, if it exists, will have to go around one or"
+    },
+    {
+      "index": 506,
+      "start": 2256.855,
+      "end": 2260.55,
+      "duration": 3.695,
+      "text": "more of those critical points. But I don't know where."
+    },
+    {
+      "index": 507,
+      "start": 2260.55,
+      "end": 2263.408,
+      "duration": 2.858,
+      "text": "It is not going to go around it like this."
+    },
+    {
+      "index": 508,
+      "start": 2263.408,
+      "end": 2265.569,
+      "duration": 2.161,
+      "text": "It might go around it like this."
+    },
+    {
+      "index": 509,
+      "start": 2265.569,
+      "end": 2269.752,
+      "duration": 4.183,
+      "text": "And my computer search won't find it because it is looking at"
+    },
+    {
+      "index": 510,
+      "start": 2269.752,
+      "end": 2273.656,
+      "duration": 3.904,
+      "text": "too small a part of the screen. It doesn't work that way."
+    },
+    {
+      "index": 511,
+      "start": 2273.656,
+      "end": 2276.235,
+      "duration": 2.579,
+      "text": "It works negatively by contraposition."
+    },
+    {
+      "index": 512,
+      "start": 2276.235,
+      "end": 2280.0,
+      "duration": 3.765,
+      "text": "Do you know what the contrapositive is?"
+    },
+    {
+      "index": 513,
+      "start": 2280.0,
+      "end": 2287.764,
+      "duration": 7.764,
+      "text": "You will at least learn that. A implies B says the same thing"
+    },
+    {
+      "index": 514,
+      "start": 2287.764,
+      "end": 2291.0,
+      "duration": 3.236,
+      "text": "as not B implies not A."
+    },
+    {
+      "index": 515,
+      "start": 2300.0,
+      "end": 2304.551,
+      "duration": 4.551,
+      "text": "They are different statements but they are equivalent to each"
+    },
+    {
+      "index": 516,
+      "start": 2304.551,
+      "end": 2307.282,
+      "duration": 2.731,
+      "text": "other. If you prove one you prove the"
+    },
+    {
+      "index": 517,
+      "start": 2307.282,
+      "end": 2309.027,
+      "duration": 1.745,
+      "text": "other. What would be the"
+    },
+    {
+      "index": 518,
+      "start": 2309.027,
+      "end": 2315.939,
+      "duration": 6.912,
+      "text": "contrapositive here? If you have a closed trajectory"
+    },
+    {
+      "index": 519,
+      "start": 2315.939,
+      "end": 2324.862,
+      "duration": 8.923,
+      "text": "inside is a critical point. The theorem is used this way."
+    },
+    {
+      "index": 520,
+      "start": 2324.862,
+      "end": 2333.945,
+      "duration": 9.083,
+      "text": "If D has no critical points, it has no closed trajectories"
+    },
+    {
+      "index": 521,
+      "start": 2333.945,
+      "end": 2340.0,
+      "duration": 6.055,
+      "text": "and therefore has no limit cycle."
+    },
+    {
+      "index": 522,
+      "start": 2340.0,
+      "end": 2343.909,
+      "duration": 3.909,
+      "text": "Because, if it did have a closed trajectory,"
+    },
+    {
+      "index": 523,
+      "start": 2343.909,
+      "end": 2347.09,
+      "duration": 3.181,
+      "text": "inside it would be a critical point."
+    },
+    {
+      "index": 524,
+      "start": 2347.09,
+      "end": 2350.181,
+      "duration": 3.091,
+      "text": "But I said B had no critical point."
+    },
+    {
+      "index": 525,
+      "start": 2350.181,
+      "end": 2355.727,
+      "duration": 5.546,
+      "text": "That enables us to dispose of this system that Bendixson could"
+    },
+    {
+      "index": 526,
+      "start": 2355.727,
+      "end": 2360.0,
+      "duration": 4.273,
+      "text": "not handle at all. We can dispose of this system"
+    },
+    {
+      "index": 527,
+      "start": 2360.0,
+      "end": 2362.818,
+      "duration": 2.818,
+      "text": "immediately. Namely, what is it?"
+    },
+    {
+      "index": 528,
+      "start": 2362.818,
+      "end": 2369.0,
+      "duration": 6.182,
+      "text": "Where are its critical points? Well, where is that zero?"
+    },
+    {
+      "index": 529,
+      "start": 2369.0,
+      "end": 2372.55,
+      "duration": 3.55,
+      "text": "x squared plus y squared is one,"
+    },
+    {
+      "index": 530,
+      "start": 2372.55,
+      "end": 2375.449,
+      "duration": 2.899,
+      "text": "plus one is never zero. This is positive."
+    },
+    {
+      "index": 531,
+      "start": 2375.449,
+      "end": 2378.637,
+      "duration": 3.188,
+      "text": "Or, worse, zero. And then I add the one to it"
+    },
+    {
+      "index": 532,
+      "start": 2378.637,
+      "end": 2382.188,
+      "duration": 3.551,
+      "text": "and it is not zero anymore. This has no zeros and,"
+    },
+    {
+      "index": 533,
+      "start": 2382.188,
+      "end": 2386.173,
+      "duration": 3.985,
+      "text": "therefore, it does not matter that this one has a lot of"
+    },
+    {
+      "index": 534,
+      "start": 2386.173,
+      "end": 2388.275,
+      "duration": 2.102,
+      "text": "zeros. It makes no difference."
+    },
+    {
+      "index": 535,
+      "start": 2388.275,
+      "end": 2391.028,
+      "duration": 2.753,
+      "text": "It has no critical points. It has none,"
+    },
+    {
+      "index": 536,
+      "start": 2391.028,
+      "end": 2394.0,
+      "duration": 2.972,
+      "text": "therefore, no limit cycles."
+    },
+    {
+      "index": 537,
+      "start": 2401.0,
+      "end": 2404.705,
+      "duration": 3.705,
+      "text": "Now, I desperately wanted to give you the proof of this."
+    },
+    {
+      "index": 538,
+      "start": 2404.705,
+      "end": 2407.804,
+      "duration": 3.099,
+      "text": "It is clearly impossible in the time remaining."
+    },
+    {
+      "index": 539,
+      "start": 2407.804,
+      "end": 2409.96,
+      "duration": 2.156,
+      "text": "The proof requires a little time."
+    },
+    {
+      "index": 540,
+      "start": 2409.96,
+      "end": 2412.588,
+      "duration": 2.628,
+      "text": "I haven't decided what to do about that."
+    },
+    {
+      "index": 541,
+      "start": 2412.588,
+      "end": 2415.351,
+      "duration": 2.763,
+      "text": "It might leak over until Friday's lecture."
+    },
+    {
+      "index": 542,
+      "start": 2415.351,
+      "end": 2418.382,
+      "duration": 3.031,
+      "text": "Instead, I will finish by telling you a story."
+    },
+    {
+      "index": 543,
+      "start": 2418.382,
+      "end": 2420.0,
+      "duration": 1.618,
+      "text": "How is that?"
+    },
+    {
+      "index": 544,
+      "start": 2437.0,
+      "end": 2439.88,
+      "duration": 2.88,
+      "text": "And along side of it was little y prime."
+    },
+    {
+      "index": 545,
+      "start": 2439.88,
+      "end": 2443.719,
+      "duration": 3.839,
+      "text": "I am not going to continue on with the letters of the"
+    },
+    {
+      "index": 546,
+      "start": 2443.719,
+      "end": 2446.526,
+      "duration": 2.807,
+      "text": "alphabet. I will prime the earlier one."
+    },
+    {
+      "index": 547,
+      "start": 2446.526,
+      "end": 2449.406,
+      "duration": 2.88,
+      "text": "This has a total of 12 parameters in it."
+    },
+    {
+      "index": 548,
+      "start": 2449.406,
+      "end": 2452.655,
+      "duration": 3.249,
+      "text": "But, in fact, if you change variables you can"
+    },
+    {
+      "index": 549,
+      "start": 2452.655,
+      "end": 2457.012,
+      "duration": 4.357,
+      "text": "get rid of all the linear terms. The important part of it is"
+    },
+    {
+      "index": 550,
+      "start": 2457.012,
+      "end": 2461.0,
+      "duration": 3.988,
+      "text": "only the quadratic terms in the beginning."
+    },
+    {
+      "index": 551,
+      "start": 2461.0,
+      "end": 2465.313,
+      "duration": 4.313,
+      "text": "This sort of thing is called a quadratic system."
+    },
+    {
+      "index": 552,
+      "start": 2465.313,
+      "end": 2469.259,
+      "duration": 3.946,
+      "text": "After you have departed from linear systems,"
+    },
+    {
+      "index": 553,
+      "start": 2469.259,
+      "end": 2472.196,
+      "duration": 2.937,
+      "text": "it is the simplest kind there is."
+    },
+    {
+      "index": 554,
+      "start": 2472.196,
+      "end": 2476.968,
+      "duration": 4.772,
+      "text": "And the predictor-prey, the robin-earthworm example I"
+    },
+    {
+      "index": 555,
+      "start": 2476.968,
+      "end": 2481.832,
+      "duration": 4.864,
+      "text": "gave you is of a typical quadratic system and exhibits"
+    },
+    {
+      "index": 556,
+      "start": 2481.832,
+      "end": 2485.778,
+      "duration": 3.946,
+      "text": "typical nonlinear quadratic system behavior."
+    },
+    {
+      "index": 557,
+      "start": 2485.778,
+      "end": 2490.0,
+      "duration": 4.222,
+      "text": "Now, the problem is the following."
+    },
+    {
+      "index": 558,
+      "start": 2490.0,
+      "end": 2492.297,
+      "duration": 2.297,
+      "text": "A, b, c, d, e, f and so on,"
+    },
+    {
+      "index": 559,
+      "start": 2492.297,
+      "end": 2497.421,
+      "duration": 5.124,
+      "text": "those are just real numbers, parameters, so I am allowed to"
+    },
+    {
+      "index": 560,
+      "start": 2497.421,
+      "end": 2502.016,
+      "duration": 4.595,
+      "text": "give them any values I want. And the problem that has"
+    },
+    {
+      "index": 561,
+      "start": 2502.016,
+      "end": 2507.228,
+      "duration": 5.212,
+      "text": "bothered people since 1880 when it was first proposed is how"
+    },
+    {
+      "index": 562,
+      "start": 2507.228,
+      "end": 2512.0,
+      "duration": 4.772,
+      "text": "many limit cycles can a quadratic system have?"
+    },
+    {
+      "index": 563,
+      "start": 2523.0,
+      "end": 2527.106,
+      "duration": 4.106,
+      "text": "After 120 years this problem is totally unsolved,"
+    },
+    {
+      "index": 564,
+      "start": 2527.106,
+      "end": 2532.155,
+      "duration": 5.049,
+      "text": "and the mathematicians of the world who are interested in it"
+    },
+    {
+      "index": 565,
+      "start": 2532.155,
+      "end": 2536.433,
+      "duration": 4.278,
+      "text": "cannot even agree with each other on what the right"
+    },
+    {
+      "index": 566,
+      "start": 2536.433,
+      "end": 2540.026,
+      "duration": 3.593,
+      "text": "conjecture is. But let me tell you a little"
+    },
+    {
+      "index": 567,
+      "start": 2540.026,
+      "end": 2544.304,
+      "duration": 4.278,
+      "text": "bit of its history. There were attempts to solve it"
+    },
+    {
+      "index": 568,
+      "start": 2544.304,
+      "end": 2548.497,
+      "duration": 4.193,
+      "text": "in the 20 or 30 years after it was first proposed,"
+    },
+    {
+      "index": 569,
+      "start": 2548.497,
+      "end": 2555.0,
+      "duration": 6.503,
+      "text": "through the 1920 and `30s which all seemed to have gaps in them."
+    },
+    {
+      "index": 570,
+      "start": 2555.0,
+      "end": 2559.818,
+      "duration": 4.818,
+      "text": "Until finally around 1950 two Russians mathematicians,"
+    },
+    {
+      "index": 571,
+      "start": 2559.818,
+      "end": 2564.0,
+      "duration": 4.182,
+      "text": "one of whom is extremely well-known, Petrovski,"
+    },
+    {
+      "index": 572,
+      "start": 2564.0,
+      "end": 2569.181,
+      "duration": 5.181,
+      "text": "a specialist in systems of ordinary differential equations"
+    },
+    {
+      "index": 573,
+      "start": 2569.181,
+      "end": 2574.636,
+      "duration": 5.455,
+      "text": "published a long and difficult, complicated 100 page paper in"
+    },
+    {
+      "index": 574,
+      "start": 2574.636,
+      "end": 2580.0,
+      "duration": 5.364,
+      "text": "which they proved that the maximum number is three."
+    },
+    {
+      "index": 575,
+      "start": 2580.0,
+      "end": 2583.575,
+      "duration": 3.575,
+      "text": "I won't put down their names. Petrovski-Landis."
+    },
+    {
+      "index": 576,
+      "start": 2583.575,
+      "end": 2588.084,
+      "duration": 4.509,
+      "text": "The maximum number was three. And then not many people were"
+    },
+    {
+      "index": 577,
+      "start": 2588.084,
+      "end": 2592.203,
+      "duration": 4.119,
+      "text": "able to read the paper, and those who did there seemed"
+    },
+    {
+      "index": 578,
+      "start": 2592.203,
+      "end": 2596.712,
+      "duration": 4.509,
+      "text": "to be gaps in the reasoning in various places until finally"
+    },
+    {
+      "index": 579,
+      "start": 2596.712,
+      "end": 2600.598,
+      "duration": 3.886,
+      "text": "Arnold who was the greatest Russian, in my opinion,"
+    },
+    {
+      "index": 580,
+      "start": 2600.598,
+      "end": 2603.785,
+      "duration": 3.187,
+      "text": "one of the greatest Russian mathematician,"
+    },
+    {
+      "index": 581,
+      "start": 2603.785,
+      "end": 2607.75,
+      "duration": 3.965,
+      "text": "certainly in this field of analysis and differential"
+    },
+    {
+      "index": 582,
+      "start": 2607.75,
+      "end": 2611.947,
+      "duration": 4.197,
+      "text": "equations, but in other fields, too, he still is great,"
+    },
+    {
+      "index": 583,
+      "start": 2611.947,
+      "end": 2617.0,
+      "duration": 5.053,
+      "text": "although he is somewhat older now, criticized it."
+    },
+    {
+      "index": 584,
+      "start": 2617.0,
+      "end": 2621.164,
+      "duration": 4.164,
+      "text": "He said look, there is a really big gap in"
+    },
+    {
+      "index": 585,
+      "start": 2621.164,
+      "end": 2626.546,
+      "duration": 5.382,
+      "text": "this argument and it really cannot be considered to be"
+    },
+    {
+      "index": 586,
+      "start": 2626.546,
+      "end": 2630.304,
+      "duration": 3.758,
+      "text": "proven. People tried working very hard"
+    },
+    {
+      "index": 587,
+      "start": 2630.304,
+      "end": 2633.757,
+      "duration": 3.453,
+      "text": "to patch it up and without success."
+    },
+    {
+      "index": 588,
+      "start": 2633.757,
+      "end": 2638.023,
+      "duration": 4.266,
+      "text": "Then about 1972 or so, '75 maybe, a Chinese"
+    },
+    {
+      "index": 589,
+      "start": 2638.023,
+      "end": 2643.0,
+      "duration": 4.977,
+      "text": "mathematician found a system with four."
+    },
+    {
+      "index": 590,
+      "start": 2643.0,
+      "end": 2647.581,
+      "duration": 4.581,
+      "text": "Wrote down the numbers, the number a is so much,"
+    },
+    {
+      "index": 591,
+      "start": 2647.581,
+      "end": 2651.577,
+      "duration": 3.996,
+      "text": "b is so much, and they were absurd numbers"
+    },
+    {
+      "index": 592,
+      "start": 2651.577,
+      "end": 2657.718,
+      "duration": 6.141,
+      "text": "like 10^-6 and 40 billion and so on, nothing you could plot on a"
+    },
+    {
+      "index": 593,
+      "start": 2657.718,
+      "end": 2662.104,
+      "duration": 4.386,
+      "text": "computer screen, but found a system with four."
+    },
+    {
+      "index": 594,
+      "start": 2662.104,
+      "end": 2666.783,
+      "duration": 4.679,
+      "text": "Nobody after this tried to fill in the gap in the"
+    },
+    {
+      "index": 595,
+      "start": 2666.783,
+      "end": 2672.274,
+      "duration": 5.491,
+      "text": "Petrovski-Landis paper. I was then chairman of the math"
+    },
+    {
+      "index": 596,
+      "start": 2672.274,
+      "end": 2676.236,
+      "duration": 3.962,
+      "text": "department, and one of my tasks was protocol and so on."
+    },
+    {
+      "index": 597,
+      "start": 2676.236,
+      "end": 2680.052,
+      "duration": 3.816,
+      "text": "Anyway, we were trying very hard to attract a Chinese"
+    },
+    {
+      "index": 598,
+      "start": 2680.052,
+      "end": 2684.308,
+      "duration": 4.256,
+      "text": "mathematician to our department to become a full professor."
+    },
+    {
+      "index": 599,
+      "start": 2684.308,
+      "end": 2688.123,
+      "duration": 3.815,
+      "text": "He was a really outstanding analyst and specialist in"
+    },
+    {
+      "index": 600,
+      "start": 2688.123,
+      "end": 2690.985,
+      "duration": 2.862,
+      "text": "various fields. Anyway, he came in for a"
+    },
+    {
+      "index": 601,
+      "start": 2690.985,
+      "end": 2693.406,
+      "duration": 2.421,
+      "text": "courtesy interview and we chatted."
+    },
+    {
+      "index": 602,
+      "start": 2693.406,
+      "end": 2696.415,
+      "duration": 3.009,
+      "text": "At the time, I was very much interested in"
+    },
+    {
+      "index": 603,
+      "start": 2696.415,
+      "end": 2699.496,
+      "duration": 3.081,
+      "text": "limit cycles. And I had on my desk the Math"
+    },
+    {
+      "index": 604,
+      "start": 2699.496,
+      "end": 2705.0,
+      "duration": 5.504,
+      "text": "Society's translation of the Chinese book on limit cycles."
+    },
+    {
+      "index": 605,
+      "start": 2705.0,
+      "end": 2708.668,
+      "duration": 3.668,
+      "text": "A collection of papers by Chinese mathematicians all on"
+    },
+    {
+      "index": 606,
+      "start": 2708.668,
+      "end": 2711.589,
+      "duration": 2.921,
+      "text": "limit cycles. After a certain point he said,"
+    },
+    {
+      "index": 607,
+      "start": 2711.589,
+      "end": 2715.054,
+      "duration": 3.465,
+      "text": "oh, I see you're interested in limit cycle problems."
+    },
+    {
+      "index": 608,
+      "start": 2715.054,
+      "end": 2716.82,
+      "duration": 1.766,
+      "text": "I said yeah, in particular,"
+    },
+    {
+      "index": 609,
+      "start": 2716.82,
+      "end": 2720.828,
+      "duration": 4.008,
+      "text": "I was reading this paper of the mathematician who found four"
+    },
+    {
+      "index": 610,
+      "start": 2720.828,
+      "end": 2723.817,
+      "duration": 2.989,
+      "text": "limit cycles. And I opened to that system and"
+    },
+    {
+      "index": 611,
+      "start": 2723.817,
+      "end": 2726.535,
+      "duration": 2.718,
+      "text": "said the name is, and I read it out loud."
+    },
+    {
+      "index": 612,
+      "start": 2726.535,
+      "end": 2730.0,
+      "duration": 3.465,
+      "text": "I said do you by any chance know him?"
+    },
+    {
+      "index": 613,
+      "start": 2730.0,
+      "end": 2732.72,
+      "duration": 2.72,
+      "text": "And he smiled and said yes, very well."
+    },
+    {
+      "index": 614,
+      "start": 2732.72,
+      "end": 2735.0,
+      "duration": 2.28,
+      "text": "That is my mother. [LAUGHTER]"
+    },
+    {
+      "index": 615,
+      "start": 2743.0,
+      "end": 2744.0,
+      "duration": 1.0,
+      "text": "Well, bye-bye."
+    }
+  ],
+  "course": {
+    "category": "Mathematics",
+    "title": "Differential Equations",
+    "source_url": "https://www.youtube.com/playlist?list=PL64BDFBDA2AF24F7E"
+  }
+}

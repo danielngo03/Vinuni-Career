@@ -1,0 +1,6542 @@
+{
+  "video": {
+    "id": "3_goGnJm5sA",
+    "title": "Lec 10: Second derivative test; boundaries & infinity | MIT 18.02 Multivariable Calculus, Fall 2007",
+    "url": "https://www.youtube.com/watch?v=3_goGnJm5sA",
+    "channel": "MIT OpenCourseWare",
+    "duration": 3138,
+    "language": "en"
+  },
+  "segment_count": 932,
+  "segments": [
+    {
+      "index": 0,
+      "start": 1.75,
+      "end": 1.76,
+      "duration": 0.01,
+      "text": "the following content is provided under"
+    },
+    {
+      "index": 1,
+      "start": 1.76,
+      "end": 4.309,
+      "duration": 2.549,
+      "text": "a Creative Commons license your support"
+    },
+    {
+      "index": 2,
+      "start": 4.319,
+      "end": 6.43,
+      "duration": 2.111,
+      "text": "will help MIT open courseware continue"
+    },
+    {
+      "index": 3,
+      "start": 6.44,
+      "end": 8.35,
+      "duration": 1.91,
+      "text": "to offer highquality educational"
+    },
+    {
+      "index": 4,
+      "start": 8.36,
+      "end": 11.19,
+      "duration": 2.83,
+      "text": "resources for free to make a donation or"
+    },
+    {
+      "index": 5,
+      "start": 11.2,
+      "end": 12.749,
+      "duration": 1.549,
+      "text": "to view additional materials from"
+    },
+    {
+      "index": 6,
+      "start": 12.759,
+      "end": 15.869,
+      "duration": 3.11,
+      "text": "hundreds of MIT courses visit MIT open"
+    },
+    {
+      "index": 7,
+      "start": 15.879,
+      "end": 21.87,
+      "duration": 5.991,
+      "text": "coreware at"
+    },
+    {
+      "index": 8,
+      "start": 23.75,
+      "end": 23.76,
+      "duration": 0.01,
+      "text": "ocw.mit.edu"
+    },
+    {
+      "index": 9,
+      "start": 23.76,
+      "end": 26.79,
+      "duration": 3.03,
+      "text": "so today we are going to continue"
+    },
+    {
+      "index": 10,
+      "start": 26.8,
+      "end": 29.589,
+      "duration": 2.789,
+      "text": "looking at critical points and we'll"
+    },
+    {
+      "index": 11,
+      "start": 29.599,
+      "end": 31.749,
+      "duration": 2.15,
+      "text": "learn how to actually decide whether a"
+    },
+    {
+      "index": 12,
+      "start": 31.759,
+      "end": 33.79,
+      "duration": 2.031,
+      "text": "critical point is a minimum a maximum or"
+    },
+    {
+      "index": 13,
+      "start": 33.8,
+      "end": 36.59,
+      "duration": 2.79,
+      "text": "a SLE point so that's the main topic for"
+    },
+    {
+      "index": 14,
+      "start": 36.6,
+      "end": 38.47,
+      "duration": 1.87,
+      "text": "today"
+    },
+    {
+      "index": 15,
+      "start": 38.48,
+      "end": 42.79,
+      "duration": 4.31,
+      "text": "so remember"
+    },
+    {
+      "index": 16,
+      "start": 46.75,
+      "end": 46.76,
+      "duration": 0.01,
+      "text": "yesterday we looked at critical points"
+    },
+    {
+      "index": 17,
+      "start": 46.76,
+      "end": 49.189,
+      "duration": 2.429,
+      "text": "of functions of several"
+    },
+    {
+      "index": 18,
+      "start": 49.199,
+      "end": 52.59,
+      "duration": 3.391,
+      "text": "variables and so a critical"
+    },
+    {
+      "index": 19,
+      "start": 52.6,
+      "end": 55.189,
+      "duration": 2.589,
+      "text": "point of a functions have two variables"
+    },
+    {
+      "index": 20,
+      "start": 55.199,
+      "end": 58.91,
+      "duration": 3.711,
+      "text": "X and"
+    },
+    {
+      "index": 21,
+      "start": 63.15,
+      "end": 63.16,
+      "duration": 0.01,
+      "text": "Y that's the point that's a point where"
+    },
+    {
+      "index": 22,
+      "start": 63.16,
+      "end": 70.469,
+      "duration": 7.309,
+      "text": "the partial derivatives are both"
+    },
+    {
+      "index": 23,
+      "start": 73.109,
+      "end": 73.119,
+      "duration": 0.01,
+      "text": "zero and we've seen that there's various"
+    },
+    {
+      "index": 24,
+      "start": 73.119,
+      "end": 78.91,
+      "duration": 5.791,
+      "text": "kinds of critical points there's local"
+    },
+    {
+      "index": 25,
+      "start": 78.92,
+      "end": 81.19,
+      "duration": 2.27,
+      "text": "Minima so maybe I should show the"
+    },
+    {
+      "index": 26,
+      "start": 81.2,
+      "end": 84.67,
+      "duration": 3.47,
+      "text": "function and its cont plot there's local"
+    },
+    {
+      "index": 27,
+      "start": 84.68,
+      "end": 86.71,
+      "duration": 2.03,
+      "text": "Maxima which are"
+    },
+    {
+      "index": 28,
+      "start": 86.72,
+      "end": 92.27,
+      "duration": 5.55,
+      "text": "like that and there's points which are"
+    },
+    {
+      "index": 29,
+      "start": 92.28,
+      "end": 94.99,
+      "duration": 2.71,
+      "text": "neither Minima nor"
+    },
+    {
+      "index": 30,
+      "start": 95.0,
+      "end": 99.069,
+      "duration": 4.069,
+      "text": "Maxima and of course if you have a real"
+    },
+    {
+      "index": 31,
+      "start": 99.079,
+      "end": 101.03,
+      "duration": 1.951,
+      "text": "function then it may be it will be more"
+    },
+    {
+      "index": 32,
+      "start": 101.04,
+      "end": 103.27,
+      "duration": 2.23,
+      "text": "complicated it will have several"
+    },
+    {
+      "index": 33,
+      "start": 103.28,
+      "end": 104.67,
+      "duration": 1.39,
+      "text": "critical"
+    },
+    {
+      "index": 34,
+      "start": 104.68,
+      "end": 106.31,
+      "duration": 1.63,
+      "text": "points"
+    },
+    {
+      "index": 35,
+      "start": 106.32,
+      "end": 110.59,
+      "duration": 4.27,
+      "text": "so this example here well you see on the"
+    },
+    {
+      "index": 36,
+      "start": 110.6,
+      "end": 113.27,
+      "duration": 2.67,
+      "text": "plot that there's two"
+    },
+    {
+      "index": 37,
+      "start": 113.28,
+      "end": 116.35,
+      "duration": 3.07,
+      "text": "Maxima and there's in the middle between"
+    },
+    {
+      "index": 38,
+      "start": 116.36,
+      "end": 120.35,
+      "duration": 3.99,
+      "text": "them there's a saddle point and actually"
+    },
+    {
+      "index": 39,
+      "start": 120.36,
+      "end": 121.91,
+      "duration": 1.55,
+      "text": "you can see them on the Contour plot on"
+    },
+    {
+      "index": 40,
+      "start": 121.92,
+      "end": 124.31,
+      "duration": 2.39,
+      "text": "the Contour plot you see the Maxima"
+    },
+    {
+      "index": 41,
+      "start": 124.32,
+      "end": 126.99,
+      "duration": 2.67,
+      "text": "because the level curves"
+    },
+    {
+      "index": 42,
+      "start": 127.0,
+      "end": 130.029,
+      "duration": 3.029,
+      "text": "become circles that narrow down and"
+    },
+    {
+      "index": 43,
+      "start": 130.039,
+      "end": 133.99,
+      "duration": 3.951,
+      "text": "Shrink to the maximum and you can see"
+    },
+    {
+      "index": 44,
+      "start": 134.0,
+      "end": 136.19,
+      "duration": 2.19,
+      "text": "the subtle point because here you have"
+    },
+    {
+      "index": 45,
+      "start": 136.2,
+      "end": 138.03,
+      "duration": 1.83,
+      "text": "this level curve that makes a figure"
+    },
+    {
+      "index": 46,
+      "start": 138.04,
+      "end": 141.949,
+      "duration": 3.909,
+      "text": "eight it crosses itself and if you move"
+    },
+    {
+      "index": 47,
+      "start": 141.959,
+      "end": 145.35,
+      "duration": 3.391,
+      "text": "up or down here then so along the y"
+    },
+    {
+      "index": 48,
+      "start": 145.36,
+      "end": 146.91,
+      "duration": 1.55,
+      "text": "direction the values of the function"
+    },
+    {
+      "index": 49,
+      "start": 146.92,
+      "end": 149.39,
+      "duration": 2.47,
+      "text": "will decrease along the X Direction the"
+    },
+    {
+      "index": 50,
+      "start": 149.4,
+      "end": 151.39,
+      "duration": 1.99,
+      "text": "values will"
+    },
+    {
+      "index": 51,
+      "start": 151.4,
+      "end": 155.19,
+      "duration": 3.79,
+      "text": "increase so you can see usually quite"
+    },
+    {
+      "index": 52,
+      "start": 155.2,
+      "end": 157.55,
+      "duration": 2.35,
+      "text": "easily where are the critical points"
+    },
+    {
+      "index": 53,
+      "start": 157.56,
+      "end": 159.509,
+      "duration": 1.949,
+      "text": "just by looking either at the graph or"
+    },
+    {
+      "index": 54,
+      "start": 159.519,
+      "end": 161.55,
+      "duration": 2.031,
+      "text": "at the Contour"
+    },
+    {
+      "index": 55,
+      "start": 161.56,
+      "end": 163.75,
+      "duration": 2.19,
+      "text": "plot so the only thing with the Contour"
+    },
+    {
+      "index": 56,
+      "start": 163.76,
+      "end": 166.35,
+      "duration": 2.59,
+      "text": "plot is you need to read the values to"
+    },
+    {
+      "index": 57,
+      "start": 166.36,
+      "end": 168.67,
+      "duration": 2.31,
+      "text": "to tell a minimum from a maximum because"
+    },
+    {
+      "index": 58,
+      "start": 168.68,
+      "end": 171.63,
+      "duration": 2.95,
+      "text": "the Contour plots look the same just of"
+    },
+    {
+      "index": 59,
+      "start": 171.64,
+      "end": 173.11,
+      "duration": 1.47,
+      "text": "course in one case the values increase"
+    },
+    {
+      "index": 60,
+      "start": 173.12,
+      "end": 176.309,
+      "duration": 3.189,
+      "text": "in P One V"
+    },
+    {
+      "index": 61,
+      "start": 178.47,
+      "end": 178.48,
+      "duration": 0.01,
+      "text": "decrease"
+    },
+    {
+      "index": 62,
+      "start": 178.48,
+      "end": 185.19,
+      "duration": 6.71,
+      "text": "so the question"
+    },
+    {
+      "index": 63,
+      "start": 196.19,
+      "end": 196.2,
+      "duration": 0.01,
+      "text": "decide between the various"
+    },
+    {
+      "index": 64,
+      "start": 196.2,
+      "end": 200.19,
+      "duration": 3.99,
+      "text": "possibilities so local"
+    },
+    {
+      "index": 65,
+      "start": 200.2,
+      "end": 204.19,
+      "duration": 3.99,
+      "text": "minimum local"
+    },
+    {
+      "index": 66,
+      "start": 224.149,
+      "end": 224.159,
+      "duration": 0.01,
+      "text": "so and in fact why do we care well the"
+    },
+    {
+      "index": 67,
+      "start": 224.159,
+      "end": 226.63,
+      "duration": 2.471,
+      "text": "other question"
+    },
+    {
+      "index": 68,
+      "start": 226.64,
+      "end": 231.67,
+      "duration": 5.03,
+      "text": "is how do we"
+    },
+    {
+      "index": 69,
+      "start": 235.11,
+      "end": 235.12,
+      "duration": 0.01,
+      "text": "find the global minimum or"
+    },
+    {
+      "index": 70,
+      "start": 235.12,
+      "end": 238.67,
+      "duration": 3.55,
+      "text": "maximum of a"
+    },
+    {
+      "index": 71,
+      "start": 245.63,
+      "end": 245.64,
+      "duration": 0.01,
+      "text": "so here already I should point out"
+    },
+    {
+      "index": 72,
+      "start": 245.64,
+      "end": 248.11,
+      "duration": 2.47,
+      "text": "well first of all you know to decide"
+    },
+    {
+      "index": 73,
+      "start": 248.12,
+      "end": 249.55,
+      "duration": 1.43,
+      "text": "where the function is the largest in"
+    },
+    {
+      "index": 74,
+      "start": 249.56,
+      "end": 251.069,
+      "duration": 1.509,
+      "text": "general you'll have actually to compare"
+    },
+    {
+      "index": 75,
+      "start": 251.079,
+      "end": 253.71,
+      "duration": 2.631,
+      "text": "the values for example here if you want"
+    },
+    {
+      "index": 76,
+      "start": 253.72,
+      "end": 255.59,
+      "duration": 1.87,
+      "text": "to know what is the maximum of this"
+    },
+    {
+      "index": 77,
+      "start": 255.6,
+      "end": 258.349,
+      "duration": 2.749,
+      "text": "function well we have two obvious"
+    },
+    {
+      "index": 78,
+      "start": 258.359,
+      "end": 260.59,
+      "duration": 2.231,
+      "text": "candidates we have this local maximum"
+    },
+    {
+      "index": 79,
+      "start": 260.6,
+      "end": 262.39,
+      "duration": 1.79,
+      "text": "and that local maximum and the question"
+    },
+    {
+      "index": 80,
+      "start": 262.4,
+      "end": 264.629,
+      "duration": 2.229,
+      "text": "is which one is the higher of the two"
+    },
+    {
+      "index": 81,
+      "start": 264.639,
+      "end": 267.83,
+      "duration": 3.191,
+      "text": "well in this case actually uh they're"
+    },
+    {
+      "index": 82,
+      "start": 267.84,
+      "end": 270.23,
+      "duration": 2.39,
+      "text": "exactly tied for maximum but in general"
+    },
+    {
+      "index": 83,
+      "start": 270.24,
+      "end": 272.23,
+      "duration": 1.99,
+      "text": "you would have to compute the function"
+    },
+    {
+      "index": 84,
+      "start": 272.24,
+      "end": 274.31,
+      "duration": 2.07,
+      "text": "at both points and compare the values if"
+    },
+    {
+      "index": 85,
+      "start": 274.32,
+      "end": 275.59,
+      "duration": 1.27,
+      "text": "you know that it's three at one of them"
+    },
+    {
+      "index": 86,
+      "start": 275.6,
+      "end": 277.71,
+      "duration": 2.11,
+      "text": "and four at the other well four"
+    },
+    {
+      "index": 87,
+      "start": 277.72,
+      "end": 280.39,
+      "duration": 2.67,
+      "text": "wins the other thing that you see here"
+    },
+    {
+      "index": 88,
+      "start": 280.4,
+      "end": 282.469,
+      "duration": 2.069,
+      "text": "is if you're looking for the minimum of"
+    },
+    {
+      "index": 89,
+      "start": 282.479,
+      "end": 284.55,
+      "duration": 2.071,
+      "text": "this function well the minimum is not"
+    },
+    {
+      "index": 90,
+      "start": 284.56,
+      "end": 287.27,
+      "duration": 2.71,
+      "text": "going to be at any of the critical"
+    },
+    {
+      "index": 91,
+      "start": 287.28,
+      "end": 289.71,
+      "duration": 2.43,
+      "text": "points so where's the minimum well it"
+    },
+    {
+      "index": 92,
+      "start": 289.72,
+      "end": 291.39,
+      "duration": 1.67,
+      "text": "looks like the minimum is actually out"
+    },
+    {
+      "index": 93,
+      "start": 291.4,
+      "end": 294.71,
+      "duration": 3.31,
+      "text": "there on the boundary or at Infinity so"
+    },
+    {
+      "index": 94,
+      "start": 294.72,
+      "end": 296.39,
+      "duration": 1.67,
+      "text": "that's another feature the global"
+    },
+    {
+      "index": 95,
+      "start": 296.4,
+      "end": 298.71,
+      "duration": 2.31,
+      "text": "minimum or maximum doesn't have to be at"
+    },
+    {
+      "index": 96,
+      "start": 298.72,
+      "end": 300.27,
+      "duration": 1.55,
+      "text": "the critical point it could also be"
+    },
+    {
+      "index": 97,
+      "start": 300.28,
+      "end": 303.11,
+      "duration": 2.83,
+      "text": "somehow on the side you know in some"
+    },
+    {
+      "index": 98,
+      "start": 303.12,
+      "end": 305.67,
+      "duration": 2.55,
+      "text": "limiting situation where one"
+    },
+    {
+      "index": 99,
+      "start": 305.68,
+      "end": 308.43,
+      "duration": 2.75,
+      "text": "variable stops being in the allowed"
+    },
+    {
+      "index": 100,
+      "start": 308.44,
+      "end": 311.07,
+      "duration": 2.63,
+      "text": "range of values or goes to Infinity so"
+    },
+    {
+      "index": 101,
+      "start": 311.08,
+      "end": 313.71,
+      "duration": 2.63,
+      "text": "we have to actually check the boundary"
+    },
+    {
+      "index": 102,
+      "start": 313.72,
+      "end": 316.51,
+      "duration": 2.79,
+      "text": "and the infinity behavior of our"
+    },
+    {
+      "index": 103,
+      "start": 316.52,
+      "end": 319.15,
+      "duration": 2.63,
+      "text": "function to know where actually the"
+    },
+    {
+      "index": 104,
+      "start": 319.16,
+      "end": 323.11,
+      "duration": 3.95,
+      "text": "minimum and maximum will"
+    },
+    {
+      "index": 105,
+      "start": 327.51,
+      "end": 327.52,
+      "duration": 0.01,
+      "text": "be so in general should point out this"
+    },
+    {
+      "index": 106,
+      "start": 327.52,
+      "end": 328.469,
+      "duration": 0.949,
+      "text": "could"
+    },
+    {
+      "index": 107,
+      "start": 328.479,
+      "end": 331.43,
+      "duration": 2.951,
+      "text": "occur"
+    },
+    {
+      "index": 108,
+      "start": 331.44,
+      "end": 337.95,
+      "duration": 6.51,
+      "text": "either at a critical"
+    },
+    {
+      "index": 109,
+      "start": 347.43,
+      "end": 347.44,
+      "duration": 0.01,
+      "text": "boundary or at"
+    },
+    {
+      "index": 110,
+      "start": 347.44,
+      "end": 350.55,
+      "duration": 3.11,
+      "text": "Infinity so by that I mean on the"
+    },
+    {
+      "index": 111,
+      "start": 350.56,
+      "end": 352.87,
+      "duration": 2.31,
+      "text": "boundary of the domain of definition"
+    },
+    {
+      "index": 112,
+      "start": 352.88,
+      "end": 354.55,
+      "duration": 1.67,
+      "text": "that we are"
+    },
+    {
+      "index": 113,
+      "start": 354.56,
+      "end": 358.029,
+      "duration": 3.469,
+      "text": "considering and so we have to try"
+    },
+    {
+      "index": 114,
+      "start": 358.039,
+      "end": 360.629,
+      "duration": 2.59,
+      "text": "both okay but so we'll get back to that"
+    },
+    {
+      "index": 115,
+      "start": 360.639,
+      "end": 362.309,
+      "duration": 1.67,
+      "text": "for now let's try to focus on the"
+    },
+    {
+      "index": 116,
+      "start": 362.319,
+      "end": 364.35,
+      "duration": 2.031,
+      "text": "question of you know what's the type of"
+    },
+    {
+      "index": 117,
+      "start": 364.36,
+      "end": 370.79,
+      "duration": 6.43,
+      "text": "the critical"
+    },
+    {
+      "index": 118,
+      "start": 374.51,
+      "end": 374.52,
+      "duration": 0.01,
+      "text": "point so we'll use something that's"
+    },
+    {
+      "index": 119,
+      "start": 374.52,
+      "end": 380.629,
+      "duration": 6.109,
+      "text": "known as the second derivative"
+    },
+    {
+      "index": 120,
+      "start": 387.15,
+      "end": 387.16,
+      "duration": 0.01,
+      "text": "and in principle well the idea is kind"
+    },
+    {
+      "index": 121,
+      "start": 387.16,
+      "end": 389.15,
+      "duration": 1.99,
+      "text": "of similar to what you do with a"
+    },
+    {
+      "index": 122,
+      "start": 389.16,
+      "end": 391.029,
+      "duration": 1.869,
+      "text": "function of one variable namely function"
+    },
+    {
+      "index": 123,
+      "start": 391.039,
+      "end": 392.71,
+      "duration": 1.671,
+      "text": "of one variable if the derivative is"
+    },
+    {
+      "index": 124,
+      "start": 392.72,
+      "end": 394.629,
+      "duration": 1.909,
+      "text": "zero then you know that you should look"
+    },
+    {
+      "index": 125,
+      "start": 394.639,
+      "end": 396.55,
+      "duration": 1.911,
+      "text": "at the second derivative and that will"
+    },
+    {
+      "index": 126,
+      "start": 396.56,
+      "end": 399.43,
+      "duration": 2.87,
+      "text": "tell you whether it's curving up or down"
+    },
+    {
+      "index": 127,
+      "start": 399.44,
+      "end": 401.67,
+      "duration": 2.23,
+      "text": "whether you have a local Max and a local"
+    },
+    {
+      "index": 128,
+      "start": 401.68,
+      "end": 404.71,
+      "duration": 3.03,
+      "text": "mean and the main problem here is of"
+    },
+    {
+      "index": 129,
+      "start": 404.72,
+      "end": 406.39,
+      "duration": 1.67,
+      "text": "course we have more possible situations"
+    },
+    {
+      "index": 130,
+      "start": 406.4,
+      "end": 408.51,
+      "duration": 2.11,
+      "text": "and we have several derivatives so"
+    },
+    {
+      "index": 131,
+      "start": 408.52,
+      "end": 409.909,
+      "duration": 1.389,
+      "text": "actually we have to think a bit harder"
+    },
+    {
+      "index": 132,
+      "start": 409.919,
+      "end": 412.749,
+      "duration": 2.83,
+      "text": "about how we'll decide but it will again"
+    },
+    {
+      "index": 133,
+      "start": 412.759,
+      "end": 415.15,
+      "duration": 2.391,
+      "text": "involve the second"
+    },
+    {
+      "index": 134,
+      "start": 415.16,
+      "end": 418.23,
+      "duration": 3.07,
+      "text": "derivatives okay so let's start with"
+    },
+    {
+      "index": 135,
+      "start": 418.24,
+      "end": 420.309,
+      "duration": 2.069,
+      "text": "just an easy example"
+    },
+    {
+      "index": 136,
+      "start": 420.319,
+      "end": 422.67,
+      "duration": 2.351,
+      "text": "um that will be useful to us because"
+    },
+    {
+      "index": 137,
+      "start": 422.68,
+      "end": 424.749,
+      "duration": 2.069,
+      "text": "actually it will provide the basis for"
+    },
+    {
+      "index": 138,
+      "start": 424.759,
+      "end": 426.39,
+      "duration": 1.631,
+      "text": "the general"
+    },
+    {
+      "index": 139,
+      "start": 426.4,
+      "end": 432.189,
+      "duration": 5.789,
+      "text": "method okay so we're first going to"
+    },
+    {
+      "index": 140,
+      "start": 434.71,
+      "end": 434.72,
+      "duration": 0.01,
+      "text": "consider a case where we have a function"
+    },
+    {
+      "index": 141,
+      "start": 434.72,
+      "end": 436.79,
+      "duration": 2.07,
+      "text": "that's actually just quadratic so let's"
+    },
+    {
+      "index": 142,
+      "start": 436.8,
+      "end": 440.189,
+      "duration": 3.389,
+      "text": "say I have a function W of XY that's of"
+    },
+    {
+      "index": 143,
+      "start": 440.199,
+      "end": 446.99,
+      "duration": 6.791,
+      "text": "the form a x^2 plus BX YY plus c y^"
+    },
+    {
+      "index": 144,
+      "start": 449.79,
+      "end": 449.8,
+      "duration": 0.01,
+      "text": "2 Okay so this guy has a critical point"
+    },
+    {
+      "index": 145,
+      "start": 449.8,
+      "end": 453.55,
+      "duration": 3.75,
+      "text": "at the origin right because if you take"
+    },
+    {
+      "index": 146,
+      "start": 453.56,
+      "end": 456.79,
+      "duration": 3.23,
+      "text": "the derivative with respect to X well"
+    },
+    {
+      "index": 147,
+      "start": 456.8,
+      "end": 459.07,
+      "duration": 2.27,
+      "text": "and if you plug xal yals 0 you'll get"
+    },
+    {
+      "index": 148,
+      "start": 459.08,
+      "end": 462.189,
+      "duration": 3.109,
+      "text": "zero and same with respect to Y you can"
+    },
+    {
+      "index": 149,
+      "start": 462.199,
+      "end": 463.83,
+      "duration": 1.631,
+      "text": "also see if you try to do a linear"
+    },
+    {
+      "index": 150,
+      "start": 463.84,
+      "end": 466.43,
+      "duration": 2.59,
+      "text": "approximation of this well all these"
+    },
+    {
+      "index": 151,
+      "start": 466.44,
+      "end": 468.39,
+      "duration": 1.95,
+      "text": "guys are much smaller than X and Y when"
+    },
+    {
+      "index": 152,
+      "start": 468.4,
+      "end": 470.35,
+      "duration": 1.95,
+      "text": "X and Y are small so the linear"
+    },
+    {
+      "index": 153,
+      "start": 470.36,
+      "end": 472.309,
+      "duration": 1.949,
+      "text": "approximation the tangent plane to the"
+    },
+    {
+      "index": 154,
+      "start": 472.319,
+      "end": 476.189,
+      "duration": 3.87,
+      "text": "graph is really just W equal"
+    },
+    {
+      "index": 155,
+      "start": 476.199,
+      "end": 481.029,
+      "duration": 4.83,
+      "text": "Z okay so how do we do it well"
+    },
+    {
+      "index": 156,
+      "start": 481.039,
+      "end": 483.23,
+      "duration": 2.191,
+      "text": "yesterday we actually did an example it"
+    },
+    {
+      "index": 157,
+      "start": 483.24,
+      "end": 484.909,
+      "duration": 1.669,
+      "text": "was a bit more complicated than that but"
+    },
+    {
+      "index": 158,
+      "start": 484.919,
+      "end": 486.909,
+      "duration": 1.99,
+      "text": "let me do"
+    },
+    {
+      "index": 159,
+      "start": 486.919,
+      "end": 489.07,
+      "duration": 2.151,
+      "text": "it so remember we were looking at"
+    },
+    {
+      "index": 160,
+      "start": 489.08,
+      "end": 493.309,
+      "duration": 4.229,
+      "text": "something that started with X2 + 2x y"
+    },
+    {
+      "index": 161,
+      "start": 493.319,
+      "end": 497.51,
+      "duration": 4.191,
+      "text": "plus + 3 Y squ and there were other"
+    },
+    {
+      "index": 162,
+      "start": 497.52,
+      "end": 500.79,
+      "duration": 3.27,
+      "text": "terms but let's forget them now and what"
+    },
+    {
+      "index": 163,
+      "start": 500.8,
+      "end": 502.95,
+      "duration": 2.15,
+      "text": "we did is we said well we can rewrite"
+    },
+    {
+      "index": 164,
+      "start": 502.96,
+      "end": 508.909,
+      "duration": 5.949,
+      "text": "this as x + y^ 2 + 2 y^ 2 and now this"
+    },
+    {
+      "index": 165,
+      "start": 508.919,
+      "end": 512.19,
+      "duration": 3.271,
+      "text": "is a sum of two squares so each of these"
+    },
+    {
+      "index": 166,
+      "start": 512.2,
+      "end": 516.149,
+      "duration": 3.949,
+      "text": "guys has to be non- negative and so the"
+    },
+    {
+      "index": 167,
+      "start": 516.159,
+      "end": 519.589,
+      "duration": 3.43,
+      "text": "origin will be a"
+    },
+    {
+      "index": 168,
+      "start": 522.149,
+      "end": 522.159,
+      "duration": 0.01,
+      "text": "minimum Well turns out we can do"
+    },
+    {
+      "index": 169,
+      "start": 522.159,
+      "end": 524.949,
+      "duration": 2.79,
+      "text": "something similar in general no matter"
+    },
+    {
+      "index": 170,
+      "start": 524.959,
+      "end": 527.47,
+      "duration": 2.511,
+      "text": "what this values of a B and C are we'll"
+    },
+    {
+      "index": 171,
+      "start": 527.48,
+      "end": 529.43,
+      "duration": 1.95,
+      "text": "just try to First Complete things to a"
+    },
+    {
+      "index": 172,
+      "start": 529.44,
+      "end": 532.11,
+      "duration": 2.67,
+      "text": "square okay so let's do"
+    },
+    {
+      "index": 173,
+      "start": 532.12,
+      "end": 534.79,
+      "duration": 2.67,
+      "text": "that"
+    },
+    {
+      "index": 174,
+      "start": 534.8,
+      "end": 539.55,
+      "duration": 4.75,
+      "text": "so in general well let maybe slight less"
+    },
+    {
+      "index": 175,
+      "start": 539.56,
+      "end": 542.63,
+      "duration": 3.07,
+      "text": "General and let me assume that a is non"
+    },
+    {
+      "index": 176,
+      "start": 542.64,
+      "end": 546.069,
+      "duration": 3.429,
+      "text": "zero because otherwise I can't do what"
+    },
+    {
+      "index": 177,
+      "start": 546.079,
+      "end": 548.91,
+      "duration": 2.831,
+      "text": "I'm going to do so I'm going to write"
+    },
+    {
+      "index": 178,
+      "start": 548.92,
+      "end": 553.31,
+      "duration": 4.39,
+      "text": "this as a"
+    },
+    {
+      "index": 179,
+      "start": 553.32,
+      "end": 562.75,
+      "duration": 9.43,
+      "text": "* X2 plus b/ a x y then I have my C y^ 2"
+    },
+    {
+      "index": 180,
+      "start": 562.76,
+      "end": 566.11,
+      "duration": 3.35,
+      "text": "and now this looks like the beginning of"
+    },
+    {
+      "index": 181,
+      "start": 566.12,
+      "end": 567.59,
+      "duration": 1.47,
+      "text": "the square of"
+    },
+    {
+      "index": 182,
+      "start": 567.6,
+      "end": 569.91,
+      "duration": 2.31,
+      "text": "something okay just like what we did"
+    },
+    {
+      "index": 183,
+      "start": 569.92,
+      "end": 570.75,
+      "duration": 0.83,
+      "text": "over"
+    },
+    {
+      "index": 184,
+      "start": 570.76,
+      "end": 572.71,
+      "duration": 1.95,
+      "text": "there"
+    },
+    {
+      "index": 185,
+      "start": 572.72,
+      "end": 576.11,
+      "duration": 3.39,
+      "text": "so what is it the square of well you"
+    },
+    {
+      "index": 186,
+      "start": 576.12,
+      "end": 578.23,
+      "duration": 2.11,
+      "text": "start with X"
+    },
+    {
+      "index": 187,
+      "start": 578.24,
+      "end": 583.31,
+      "duration": 5.07,
+      "text": "plus I claim if I put b/ 2 a *"
+    },
+    {
+      "index": 188,
+      "start": 583.32,
+      "end": 587.43,
+      "duration": 4.11,
+      "text": "Y and I Square then see the term the"
+    },
+    {
+      "index": 189,
+      "start": 587.44,
+      "end": 591.389,
+      "duration": 3.949,
+      "text": "cross term 2 * x * b/ 2 a y will become"
+    },
+    {
+      "index": 190,
+      "start": 591.399,
+      "end": 593.829,
+      "duration": 2.43,
+      "text": "b a x"
+    },
+    {
+      "index": 191,
+      "start": 593.839,
+      "end": 598.31,
+      "duration": 4.471,
+      "text": "y of course now I I also get some y"
+    },
+    {
+      "index": 192,
+      "start": 598.32,
+      "end": 601.03,
+      "duration": 2.71,
+      "text": "squares out of it how many y s do I get"
+    },
+    {
+      "index": 193,
+      "start": 601.04,
+      "end": 606.47,
+      "duration": 5.43,
+      "text": "well I get b^ 2 4 a 2 * a so I get B S 4"
+    },
+    {
+      "index": 194,
+      "start": 606.48,
+      "end": 614.03,
+      "duration": 7.55,
+      "text": "a y^ 2 so and I want in fact C * y^ 2 so"
+    },
+    {
+      "index": 195,
+      "start": 614.04,
+      "end": 618.11,
+      "duration": 4.07,
+      "text": "the number of y s that I should add is C"
+    },
+    {
+      "index": 196,
+      "start": 618.12,
+      "end": 621.269,
+      "duration": 3.149,
+      "text": "minus b^2 4"
+    },
+    {
+      "index": 197,
+      "start": 621.279,
+      "end": 625.19,
+      "duration": 3.911,
+      "text": "a okay let's see that again if I expand"
+    },
+    {
+      "index": 198,
+      "start": 625.2,
+      "end": 630.59,
+      "duration": 5.39,
+      "text": "this thing I will get a x^2 plus a * B /"
+    },
+    {
+      "index": 199,
+      "start": 630.6,
+      "end": 635.829,
+      "duration": 5.229,
+      "text": "2 a * 2xy that's going to be my bxy but"
+    },
+    {
+      "index": 200,
+      "start": 635.839,
+      "end": 641.19,
+      "duration": 5.351,
+      "text": "I also get b^ 2 4 a^ 2 y^ 2 * a that's"
+    },
+    {
+      "index": 201,
+      "start": 641.2,
+      "end": 645.71,
+      "duration": 4.51,
+      "text": "b^2 4 a y^ 2 and that cancels out with"
+    },
+    {
+      "index": 202,
+      "start": 645.72,
+      "end": 647.75,
+      "duration": 2.03,
+      "text": "this guy here and then I will be left"
+    },
+    {
+      "index": 203,
+      "start": 647.76,
+      "end": 651.269,
+      "duration": 3.509,
+      "text": "with C"
+    },
+    {
+      "index": 204,
+      "start": 656.91,
+      "end": 656.92,
+      "duration": 0.01,
+      "text": "y^2 okay do you see it kind of okay if"
+    },
+    {
+      "index": 205,
+      "start": 656.92,
+      "end": 663.829,
+      "duration": 6.909,
+      "text": "not well try expanding this Square again"
+    },
+    {
+      "index": 206,
+      "start": 666.269,
+      "end": 666.279,
+      "duration": 0.01,
+      "text": "okay maybe I'll do it just to convince"
+    },
+    {
+      "index": 207,
+      "start": 666.279,
+      "end": 673.03,
+      "duration": 6.751,
+      "text": "you but so if I expand this I will get a"
+    },
+    {
+      "index": 208,
+      "start": 673.04,
+      "end": 675.11,
+      "duration": 2.07,
+      "text": "* let me put that in a different color"
+    },
+    {
+      "index": 209,
+      "start": 675.12,
+      "end": 678.15,
+      "duration": 3.03,
+      "text": "because you shouldn't write that down"
+    },
+    {
+      "index": 210,
+      "start": 678.16,
+      "end": 681.79,
+      "duration": 3.63,
+      "text": "it's just to convince you again"
+    },
+    {
+      "index": 211,
+      "start": 684.509,
+      "end": 684.519,
+      "duration": 0.01,
+      "text": "so if you don't see it yet let's expand"
+    },
+    {
+      "index": 212,
+      "start": 684.519,
+      "end": 689.55,
+      "duration": 5.031,
+      "text": "this thing we'll get a * x^ 2 plus a"
+    },
+    {
+      "index": 213,
+      "start": 689.56,
+      "end": 694.389,
+      "duration": 4.829,
+      "text": "* 2 x b/ 2 a"
+    },
+    {
+      "index": 214,
+      "start": 694.399,
+      "end": 699.47,
+      "duration": 5.071,
+      "text": "y well the 2 A's cancel out we get"
+    },
+    {
+      "index": 215,
+      "start": 699.48,
+      "end": 703.269,
+      "duration": 3.789,
+      "text": "bxy plus a * the square of that that's"
+    },
+    {
+      "index": 216,
+      "start": 703.279,
+      "end": 706.15,
+      "duration": 2.871,
+      "text": "going to be B ^2 over 4 a"
+    },
+    {
+      "index": 217,
+      "start": 706.16,
+      "end": 708.31,
+      "duration": 2.15,
+      "text": "2 y^"
+    },
+    {
+      "index": 218,
+      "start": 708.32,
+      "end": 717.629,
+      "duration": 9.309,
+      "text": "2 + C y^ 2 - b² over 4 a y^ 2 here the A"
+    },
+    {
+      "index": 219,
+      "start": 717.639,
+      "end": 722.069,
+      "duration": 4.43,
+      "text": "and the a simplifies and now these two"
+    },
+    {
+      "index": 220,
+      "start": 722.079,
+      "end": 727.11,
+      "duration": 5.031,
+      "text": "terms simplify and give me just C y^2 in"
+    },
+    {
+      "index": 221,
+      "start": 727.12,
+      "end": 729.629,
+      "duration": 2.509,
+      "text": "the end okay and that's kind of"
+    },
+    {
+      "index": 222,
+      "start": 729.639,
+      "end": 731.269,
+      "duration": 1.63,
+      "text": "unreadable after I've canceled"
+    },
+    {
+      "index": 223,
+      "start": 731.279,
+      "end": 733.43,
+      "duration": 2.151,
+      "text": "everything"
+    },
+    {
+      "index": 224,
+      "start": 733.44,
+      "end": 736.509,
+      "duration": 3.069,
+      "text": "but if you follow it you see that"
+    },
+    {
+      "index": 225,
+      "start": 736.519,
+      "end": 742.829,
+      "duration": 6.31,
+      "text": "basically I've just Rewritten my initial"
+    },
+    {
+      "index": 226,
+      "start": 745.35,
+      "end": 745.36,
+      "duration": 0.01,
+      "text": "function okay is"
+    },
+    {
+      "index": 227,
+      "start": 745.36,
+      "end": 747.47,
+      "duration": 2.11,
+      "text": "that kind of okay I mean otherwise"
+    },
+    {
+      "index": 228,
+      "start": 747.48,
+      "end": 748.949,
+      "duration": 1.469,
+      "text": "there's just no substitute to you know"
+    },
+    {
+      "index": 229,
+      "start": 748.959,
+      "end": 750.31,
+      "duration": 1.351,
+      "text": "you have you'll have to do it yourself"
+    },
+    {
+      "index": 230,
+      "start": 750.32,
+      "end": 752.509,
+      "duration": 2.189,
+      "text": "I'm"
+    },
+    {
+      "index": 231,
+      "start": 757.75,
+      "end": 757.76,
+      "duration": 0.01,
+      "text": "afraid okay so let me continue to play"
+    },
+    {
+      "index": 232,
+      "start": 757.76,
+      "end": 758.949,
+      "duration": 1.189,
+      "text": "with"
+    },
+    {
+      "index": 233,
+      "start": 758.959,
+      "end": 761.75,
+      "duration": 2.791,
+      "text": "this so I'm just going"
+    },
+    {
+      "index": 234,
+      "start": 761.76,
+      "end": 764.71,
+      "duration": 2.95,
+      "text": "to put this in a slightly different"
+    },
+    {
+      "index": 235,
+      "start": 764.72,
+      "end": 767.23,
+      "duration": 2.51,
+      "text": "form uh just to clear the"
+    },
+    {
+      "index": 236,
+      "start": 767.24,
+      "end": 770.87,
+      "duration": 3.63,
+      "text": "denominators okay so I will instead"
+    },
+    {
+      "index": 237,
+      "start": 770.88,
+      "end": 775.23,
+      "duration": 4.35,
+      "text": "write this as one over 4 a"
+    },
+    {
+      "index": 238,
+      "start": 775.24,
+      "end": 779.15,
+      "duration": 3.91,
+      "text": "times a big thing so I'm going to just"
+    },
+    {
+      "index": 239,
+      "start": 779.16,
+      "end": 781.829,
+      "duration": 2.669,
+      "text": "put 4 a 2"
+    },
+    {
+      "index": 240,
+      "start": 781.839,
+      "end": 789.11,
+      "duration": 7.271,
+      "text": "* x + B / 2 a y squared okay so so far I"
+    },
+    {
+      "index": 241,
+      "start": 789.12,
+      "end": 791.23,
+      "duration": 2.11,
+      "text": "have the same thing as here okay I just"
+    },
+    {
+      "index": 242,
+      "start": 791.24,
+      "end": 794.47,
+      "duration": 3.23,
+      "text": "introduced a 4 a that cancels"
+    },
+    {
+      "index": 243,
+      "start": 794.48,
+      "end": 797.31,
+      "duration": 2.83,
+      "text": "out plus for the other"
+    },
+    {
+      "index": 244,
+      "start": 797.32,
+      "end": 800.389,
+      "duration": 3.069,
+      "text": "one I'm just clearing the denominator I"
+    },
+    {
+      "index": 245,
+      "start": 800.399,
+      "end": 807.35,
+      "duration": 6.951,
+      "text": "end up with 4 a c minus b squ y^"
+    },
+    {
+      "index": 246,
+      "start": 809.99,
+      "end": 810.0,
+      "duration": 0.01,
+      "text": "2 Okay so that's a lot of"
+    },
+    {
+      "index": 247,
+      "start": 810.0,
+      "end": 812.75,
+      "duration": 2.75,
+      "text": "terms but what does it look like well it"
+    },
+    {
+      "index": 248,
+      "start": 812.76,
+      "end": 814.629,
+      "duration": 1.869,
+      "text": "looks like so we have some constant"
+    },
+    {
+      "index": 249,
+      "start": 814.639,
+      "end": 816.949,
+      "duration": 2.31,
+      "text": "factors and here we have a square and"
+    },
+    {
+      "index": 250,
+      "start": 816.959,
+      "end": 819.11,
+      "duration": 2.151,
+      "text": "here we have a squared a square so"
+    },
+    {
+      "index": 251,
+      "start": 819.12,
+      "end": 821.069,
+      "duration": 1.949,
+      "text": "basically we've written this as a sum of"
+    },
+    {
+      "index": 252,
+      "start": 821.079,
+      "end": 823.269,
+      "duration": 2.19,
+      "text": "two"
+    },
+    {
+      "index": 253,
+      "start": 823.279,
+      "end": 826.15,
+      "duration": 2.871,
+      "text": "squares well a sum or a difference of"
+    },
+    {
+      "index": 254,
+      "start": 826.16,
+      "end": 828.189,
+      "duration": 2.029,
+      "text": "two squares and maybe that's what we"
+    },
+    {
+      "index": 255,
+      "start": 828.199,
+      "end": 829.829,
+      "duration": 1.63,
+      "text": "need to figure out to know what kind of"
+    },
+    {
+      "index": 256,
+      "start": 829.839,
+      "end": 833.55,
+      "duration": 3.711,
+      "text": "point it is because C if you take a sum"
+    },
+    {
+      "index": 257,
+      "start": 833.56,
+      "end": 834.749,
+      "duration": 1.189,
+      "text": "of two"
+    },
+    {
+      "index": 258,
+      "start": 834.759,
+      "end": 837.43,
+      "duration": 2.671,
+      "text": "squares then you'll know that each"
+    },
+    {
+      "index": 259,
+      "start": 837.44,
+      "end": 839.55,
+      "duration": 2.11,
+      "text": "Square takes non- negative value"
+    },
+    {
+      "index": 260,
+      "start": 839.56,
+      "end": 841.629,
+      "duration": 2.069,
+      "text": "and you'll have the total you know the"
+    },
+    {
+      "index": 261,
+      "start": 841.639,
+      "end": 843.31,
+      "duration": 1.671,
+      "text": "function will always take non- negative"
+    },
+    {
+      "index": 262,
+      "start": 843.32,
+      "end": 845.79,
+      "duration": 2.47,
+      "text": "values so the origin will be a"
+    },
+    {
+      "index": 263,
+      "start": 845.8,
+      "end": 847.749,
+      "duration": 1.949,
+      "text": "minimum while if you have a difference"
+    },
+    {
+      "index": 264,
+      "start": 847.759,
+      "end": 850.15,
+      "duration": 2.391,
+      "text": "of two squares then typically you'll"
+    },
+    {
+      "index": 265,
+      "start": 850.16,
+      "end": 853.31,
+      "duration": 3.15,
+      "text": "have a settle point because depending on"
+    },
+    {
+      "index": 266,
+      "start": 853.32,
+      "end": 854.949,
+      "duration": 1.629,
+      "text": "whether one or the other is larger"
+    },
+    {
+      "index": 267,
+      "start": 854.959,
+      "end": 859.23,
+      "duration": 4.271,
+      "text": "you'll have a positive or A negative"
+    },
+    {
+      "index": 268,
+      "start": 863.389,
+      "end": 863.399,
+      "duration": 0.01,
+      "text": "quantity okay so I claim there's various"
+    },
+    {
+      "index": 269,
+      "start": 863.399,
+      "end": 864.749,
+      "duration": 1.35,
+      "text": "cases to look"
+    },
+    {
+      "index": 270,
+      "start": 864.759,
+      "end": 867.67,
+      "duration": 2.911,
+      "text": "at so let's"
+    },
+    {
+      "index": 271,
+      "start": 867.68,
+      "end": 872.47,
+      "duration": 4.79,
+      "text": "see"
+    },
+    {
+      "index": 272,
+      "start": 873.99,
+      "end": 874.0,
+      "duration": 0.01,
+      "text": "so in fact I claim there will be three"
+    },
+    {
+      "index": 273,
+      "start": 874.0,
+      "end": 876.15,
+      "duration": 2.15,
+      "text": "cases and that's good news for us"
+    },
+    {
+      "index": 274,
+      "start": 876.16,
+      "end": 878.35,
+      "duration": 2.19,
+      "text": "because after all we want to distinguish"
+    },
+    {
+      "index": 275,
+      "start": 878.36,
+      "end": 880.59,
+      "duration": 2.23,
+      "text": "between three"
+    },
+    {
+      "index": 276,
+      "start": 880.6,
+      "end": 884.509,
+      "duration": 3.909,
+      "text": "possibilities so let's first do a away"
+    },
+    {
+      "index": 277,
+      "start": 884.519,
+      "end": 887.069,
+      "duration": 2.55,
+      "text": "with the most complicated"
+    },
+    {
+      "index": 278,
+      "start": 887.079,
+      "end": 893.55,
+      "duration": 6.471,
+      "text": "one what if 4 a c minus b^2 is"
+    },
+    {
+      "index": 279,
+      "start": 896.31,
+      "end": 896.32,
+      "duration": 0.01,
+      "text": "negative well if it's negative then it"
+    },
+    {
+      "index": 280,
+      "start": 896.32,
+      "end": 899.269,
+      "duration": 2.949,
+      "text": "means what I have between the brackets"
+    },
+    {
+      "index": 281,
+      "start": 899.279,
+      "end": 903.509,
+      "duration": 4.23,
+      "text": "is so the first guy is obviously a"
+    },
+    {
+      "index": 282,
+      "start": 903.519,
+      "end": 904.949,
+      "duration": 1.43,
+      "text": "positive"
+    },
+    {
+      "index": 283,
+      "start": 904.959,
+      "end": 907.43,
+      "duration": 2.471,
+      "text": "quantity while the second one will be"
+    },
+    {
+      "index": 284,
+      "start": 907.44,
+      "end": 910.509,
+      "duration": 3.069,
+      "text": "something negative time y^ 2 so it will"
+    },
+    {
+      "index": 285,
+      "start": 910.519,
+      "end": 911.99,
+      "duration": 1.471,
+      "text": "be a negative"
+    },
+    {
+      "index": 286,
+      "start": 912.0,
+      "end": 916.71,
+      "duration": 4.71,
+      "text": "quantity okay so one"
+    },
+    {
+      "index": 287,
+      "start": 919.11,
+      "end": 919.12,
+      "duration": 0.01,
+      "text": "term is positive"
+    },
+    {
+      "index": 288,
+      "start": 919.12,
+      "end": 922.11,
+      "duration": 2.99,
+      "text": "V is"
+    },
+    {
+      "index": 289,
+      "start": 922.12,
+      "end": 924.79,
+      "duration": 2.67,
+      "text": "negative that tells us we actually have"
+    },
+    {
+      "index": 290,
+      "start": 924.8,
+      "end": 927.59,
+      "duration": 2.79,
+      "text": "a saddle"
+    },
+    {
+      "index": 291,
+      "start": 933.15,
+      "end": 933.16,
+      "duration": 0.01,
+      "text": "we in fact written our function as a"
+    },
+    {
+      "index": 292,
+      "start": 933.16,
+      "end": 936.189,
+      "duration": 3.029,
+      "text": "difference of two"
+    },
+    {
+      "index": 293,
+      "start": 939.23,
+      "end": 939.24,
+      "duration": 0.01,
+      "text": "squares okay is that"
+    },
+    {
+      "index": 294,
+      "start": 939.24,
+      "end": 941.35,
+      "duration": 2.11,
+      "text": "convincing so if you want I could do"
+    },
+    {
+      "index": 295,
+      "start": 941.36,
+      "end": 942.509,
+      "duration": 1.149,
+      "text": "what I could do is actually I could"
+    },
+    {
+      "index": 296,
+      "start": 942.519,
+      "end": 944.67,
+      "duration": 2.151,
+      "text": "change my coordinates have new"
+    },
+    {
+      "index": 297,
+      "start": 944.68,
+      "end": 947.71,
+      "duration": 3.03,
+      "text": "coordinates called I don't know U equals"
+    },
+    {
+      "index": 298,
+      "start": 947.72,
+      "end": 951.389,
+      "duration": 3.669,
+      "text": "um x + b/ 2 a y and V actually well I"
+    },
+    {
+      "index": 299,
+      "start": 951.399,
+      "end": 953.67,
+      "duration": 2.271,
+      "text": "could keep Y and then it would look like"
+    },
+    {
+      "index": 300,
+      "start": 953.68,
+      "end": 957.389,
+      "duration": 3.709,
+      "text": "a difference of squares"
+    },
+    {
+      "index": 301,
+      "start": 961.79,
+      "end": 961.8,
+      "duration": 0.01,
+      "text": "directly okay so that's the first case"
+    },
+    {
+      "index": 302,
+      "start": 961.8,
+      "end": 964.43,
+      "duration": 2.63,
+      "text": "the second"
+    },
+    {
+      "index": 303,
+      "start": 971.629,
+      "end": 971.639,
+      "duration": 0.01,
+      "text": "case is where 4 a cus b^2 equal"
+    },
+    {
+      "index": 304,
+      "start": 971.639,
+      "end": 975.069,
+      "duration": 3.43,
+      "text": "Z well what"
+    },
+    {
+      "index": 305,
+      "start": 975.079,
+      "end": 978.71,
+      "duration": 3.631,
+      "text": "happens if that's zero then it means"
+    },
+    {
+      "index": 306,
+      "start": 978.72,
+      "end": 981.43,
+      "duration": 2.71,
+      "text": "that this term over goes away so what we"
+    },
+    {
+      "index": 307,
+      "start": 981.44,
+      "end": 983.79,
+      "duration": 2.35,
+      "text": "have is just one"
+    },
+    {
+      "index": 308,
+      "start": 983.8,
+      "end": 987.069,
+      "duration": 3.269,
+      "text": "square okay so what that means is"
+    },
+    {
+      "index": 309,
+      "start": 987.079,
+      "end": 991.03,
+      "duration": 3.951,
+      "text": "actually that our function only on One"
+    },
+    {
+      "index": 310,
+      "start": 991.04,
+      "end": 992.629,
+      "duration": 1.589,
+      "text": "Direction of things in the other"
+    },
+    {
+      "index": 311,
+      "start": 992.639,
+      "end": 995.71,
+      "duration": 3.071,
+      "text": "direction it's going to actually be"
+    },
+    {
+      "index": 312,
+      "start": 995.72,
+      "end": 997.269,
+      "duration": 1.549,
+      "text": "degenerate"
+    },
+    {
+      "index": 313,
+      "start": 997.279,
+      "end": 999.829,
+      "duration": 2.55,
+      "text": "so for example forget all the clutter in"
+    },
+    {
+      "index": 314,
+      "start": 999.839,
+      "end": 1002.749,
+      "duration": 2.91,
+      "text": "there say I give you just the"
+    },
+    {
+      "index": 315,
+      "start": 1002.759,
+      "end": 1007.11,
+      "duration": 4.351,
+      "text": "function two variables W equals just x s"
+    },
+    {
+      "index": 316,
+      "start": 1007.12,
+      "end": 1009.55,
+      "duration": 2.43,
+      "text": "so that means it doesn't depend on Y at"
+    },
+    {
+      "index": 317,
+      "start": 1009.56,
+      "end": 1013.829,
+      "duration": 4.269,
+      "text": "all and if I try to plot the"
+    },
+    {
+      "index": 318,
+      "start": 1018.55,
+      "end": 1018.56,
+      "duration": 0.01,
+      "text": "graph it will look well so X is here so"
+    },
+    {
+      "index": 319,
+      "start": 1018.56,
+      "end": 1021.829,
+      "duration": 3.269,
+      "text": "it will depend on X in that way but it"
+    },
+    {
+      "index": 320,
+      "start": 1021.839,
+      "end": 1029.35,
+      "duration": 7.511,
+      "text": "doesn't depend on Y at all"
+    },
+    {
+      "index": 321,
+      "start": 1031.87,
+      "end": 1031.88,
+      "duration": 0.01,
+      "text": "so what the graph looks like is"
+    },
+    {
+      "index": 322,
+      "start": 1031.88,
+      "end": 1033.949,
+      "duration": 2.069,
+      "text": "something like"
+    },
+    {
+      "index": 323,
+      "start": 1033.959,
+      "end": 1036.429,
+      "duration": 2.47,
+      "text": "that okay"
+    },
+    {
+      "index": 324,
+      "start": 1036.439,
+      "end": 1039.23,
+      "duration": 2.791,
+      "text": "it's basically it's a valy whose bottom"
+    },
+    {
+      "index": 325,
+      "start": 1039.24,
+      "end": 1040.51,
+      "duration": 1.27,
+      "text": "is completely"
+    },
+    {
+      "index": 326,
+      "start": 1040.52,
+      "end": 1042.949,
+      "duration": 2.429,
+      "text": "flat so that means actually we have a"
+    },
+    {
+      "index": 327,
+      "start": 1042.959,
+      "end": 1044.75,
+      "duration": 1.791,
+      "text": "degenerate critical point it's called"
+    },
+    {
+      "index": 328,
+      "start": 1044.76,
+      "end": 1047.51,
+      "duration": 2.75,
+      "text": "degenerate because there's a direction"
+    },
+    {
+      "index": 329,
+      "start": 1047.52,
+      "end": 1049.43,
+      "duration": 1.91,
+      "text": "in which nothing happen and in fact you"
+    },
+    {
+      "index": 330,
+      "start": 1049.44,
+      "end": 1052.63,
+      "duration": 3.19,
+      "text": "have critical points everywhere along"
+    },
+    {
+      "index": 331,
+      "start": 1052.64,
+      "end": 1054.51,
+      "duration": 1.87,
+      "text": "the y"
+    },
+    {
+      "index": 332,
+      "start": 1054.52,
+      "end": 1057.27,
+      "duration": 2.75,
+      "text": "axis okay"
+    },
+    {
+      "index": 333,
+      "start": 1057.28,
+      "end": 1060.59,
+      "duration": 3.31,
+      "text": "so now whether the square that we have"
+    },
+    {
+      "index": 334,
+      "start": 1060.6,
+      "end": 1063.15,
+      "duration": 2.55,
+      "text": "is X or something else namely X plus b/"
+    },
+    {
+      "index": 335,
+      "start": 1063.16,
+      "end": 1066.35,
+      "duration": 3.19,
+      "text": "2 a y it doesn't matter I mean it we'll"
+    },
+    {
+      "index": 336,
+      "start": 1066.36,
+      "end": 1068.029,
+      "duration": 1.669,
+      "text": "still get this degenerate Behavior but"
+    },
+    {
+      "index": 337,
+      "start": 1068.039,
+      "end": 1069.95,
+      "duration": 1.911,
+      "text": "there's a direction in which nothing"
+    },
+    {
+      "index": 338,
+      "start": 1069.96,
+      "end": 1072.19,
+      "duration": 2.23,
+      "text": "happens because we just have the square"
+    },
+    {
+      "index": 339,
+      "start": 1072.2,
+      "end": 1077.39,
+      "duration": 5.19,
+      "text": "of one"
+    },
+    {
+      "index": 340,
+      "start": 1083.669,
+      "end": 1083.679,
+      "duration": 0.01,
+      "text": "I'm sure that 300 students means 300"
+    },
+    {
+      "index": 341,
+      "start": 1083.679,
+      "end": 1085.789,
+      "duration": 2.11,
+      "text": "different ringtones but I'm not eager to"
+    },
+    {
+      "index": 342,
+      "start": 1085.799,
+      "end": 1088.59,
+      "duration": 2.791,
+      "text": "hear all of them"
+    },
+    {
+      "index": 343,
+      "start": 1088.6,
+      "end": 1092.51,
+      "duration": 3.91,
+      "text": "thanks okay"
+    },
+    {
+      "index": 344,
+      "start": 1092.52,
+      "end": 1095.59,
+      "duration": 3.07,
+      "text": "uh so this"
+    },
+    {
+      "index": 345,
+      "start": 1095.6,
+      "end": 1101.27,
+      "duration": 5.67,
+      "text": "is what's called the degenerate critical"
+    },
+    {
+      "index": 346,
+      "start": 1109.909,
+      "end": 1109.919,
+      "duration": 0.01,
+      "text": "and"
+    },
+    {
+      "index": 347,
+      "start": 1109.919,
+      "end": 1113.51,
+      "duration": 3.591,
+      "text": "okay so basically we'll leave it here um"
+    },
+    {
+      "index": 348,
+      "start": 1113.52,
+      "end": 1117.149,
+      "duration": 3.629,
+      "text": "we won't actually try to figure out"
+    },
+    {
+      "index": 349,
+      "start": 1117.159,
+      "end": 1119.909,
+      "duration": 2.75,
+      "text": "further what happens and the reason for"
+    },
+    {
+      "index": 350,
+      "start": 1119.919,
+      "end": 1122.149,
+      "duration": 2.23,
+      "text": "that is that when you have an actual"
+    },
+    {
+      "index": 351,
+      "start": 1122.159,
+      "end": 1124.669,
+      "duration": 2.51,
+      "text": "function a general function not just one"
+    },
+    {
+      "index": 352,
+      "start": 1124.679,
+      "end": 1127.43,
+      "duration": 2.751,
+      "text": "that's quadratic like this then there"
+    },
+    {
+      "index": 353,
+      "start": 1127.44,
+      "end": 1129.149,
+      "duration": 1.709,
+      "text": "will actually be other terms maybe"
+    },
+    {
+      "index": 354,
+      "start": 1129.159,
+      "end": 1131.95,
+      "duration": 2.791,
+      "text": "involving higher Powers you know maybe X"
+    },
+    {
+      "index": 355,
+      "start": 1131.96,
+      "end": 1135.23,
+      "duration": 3.27,
+      "text": "cubed or Y cubed or things like that and"
+    },
+    {
+      "index": 356,
+      "start": 1135.24,
+      "end": 1137.35,
+      "duration": 2.11,
+      "text": "then they will mess up what happens in"
+    },
+    {
+      "index": 357,
+      "start": 1137.36,
+      "end": 1139.07,
+      "duration": 1.71,
+      "text": "this Valley and it's a situation where"
+    },
+    {
+      "index": 358,
+      "start": 1139.08,
+      "end": 1141.149,
+      "duration": 2.069,
+      "text": "we won't be able actually to tell"
+    },
+    {
+      "index": 359,
+      "start": 1141.159,
+      "end": 1143.07,
+      "duration": 1.911,
+      "text": "automatically just by looking at second"
+    },
+    {
+      "index": 360,
+      "start": 1143.08,
+      "end": 1145.31,
+      "duration": 2.23,
+      "text": "derivatives what"
+    },
+    {
+      "index": 361,
+      "start": 1145.32,
+      "end": 1148.11,
+      "duration": 2.79,
+      "text": "happens see for example in a function of"
+    },
+    {
+      "index": 362,
+      "start": 1148.12,
+      "end": 1149.71,
+      "duration": 1.59,
+      "text": "one variable if you have just a function"
+    },
+    {
+      "index": 363,
+      "start": 1149.72,
+      "end": 1154.63,
+      "duration": 4.91,
+      "text": "of one variable say f of xal x 5 well if"
+    },
+    {
+      "index": 364,
+      "start": 1154.64,
+      "end": 1156.31,
+      "duration": 1.67,
+      "text": "you try to decide what type of point the"
+    },
+    {
+      "index": 365,
+      "start": 1156.32,
+      "end": 1158.59,
+      "duration": 2.27,
+      "text": "origin is you know you're going to take"
+    },
+    {
+      "index": 366,
+      "start": 1158.6,
+      "end": 1160.909,
+      "duration": 2.309,
+      "text": "the second derivative it will be zero"
+    },
+    {
+      "index": 367,
+      "start": 1160.919,
+      "end": 1163.35,
+      "duration": 2.431,
+      "text": "and then you can conclude because things"
+    },
+    {
+      "index": 368,
+      "start": 1163.36,
+      "end": 1167.11,
+      "duration": 3.75,
+      "text": "depend on higher order derivatives so we"
+    },
+    {
+      "index": 369,
+      "start": 1167.12,
+      "end": 1170.35,
+      "duration": 3.23,
+      "text": "just won't like that case we just want"
+    },
+    {
+      "index": 370,
+      "start": 1170.36,
+      "end": 1173.43,
+      "duration": 3.07,
+      "text": "to try to figure out what's going on"
+    },
+    {
+      "index": 371,
+      "start": 1173.44,
+      "end": 1177.029,
+      "duration": 3.589,
+      "text": "here now the last situation is a 4 A"
+    },
+    {
+      "index": 372,
+      "start": 1177.039,
+      "end": 1179.27,
+      "duration": 2.231,
+      "text": "minus B2 is"
+    },
+    {
+      "index": 373,
+      "start": 1179.28,
+      "end": 1180.789,
+      "duration": 1.509,
+      "text": "positive"
+    },
+    {
+      "index": 374,
+      "start": 1180.799,
+      "end": 1184.63,
+      "duration": 3.831,
+      "text": "so then that means that actually we've"
+    },
+    {
+      "index": 375,
+      "start": 1184.64,
+      "end": 1186.71,
+      "duration": 2.07,
+      "text": "written things the the big bracket up"
+    },
+    {
+      "index": 376,
+      "start": 1186.72,
+      "end": 1188.87,
+      "duration": 2.15,
+      "text": "there is a sum of two"
+    },
+    {
+      "index": 377,
+      "start": 1188.88,
+      "end": 1190.83,
+      "duration": 1.95,
+      "text": "squares"
+    },
+    {
+      "index": 378,
+      "start": 1190.84,
+      "end": 1194.11,
+      "duration": 3.27,
+      "text": "okay"
+    },
+    {
+      "index": 379,
+      "start": 1196.029,
+      "end": 1196.039,
+      "duration": 0.01,
+      "text": "so that"
+    },
+    {
+      "index": 380,
+      "start": 1196.039,
+      "end": 1198.87,
+      "duration": 2.831,
+      "text": "means that we've written w"
+    },
+    {
+      "index": 381,
+      "start": 1198.88,
+      "end": 1204.87,
+      "duration": 5.99,
+      "text": "as 1 4 a * plus something squ plus"
+    },
+    {
+      "index": 382,
+      "start": 1204.88,
+      "end": 1207.27,
+      "duration": 2.39,
+      "text": "something else"
+    },
+    {
+      "index": 383,
+      "start": 1207.28,
+      "end": 1211.31,
+      "duration": 4.03,
+      "text": "squ okay so these guys have the same"
+    },
+    {
+      "index": 384,
+      "start": 1211.32,
+      "end": 1214.23,
+      "duration": 2.91,
+      "text": "sign and that means that this term here"
+    },
+    {
+      "index": 385,
+      "start": 1214.24,
+      "end": 1215.71,
+      "duration": 1.47,
+      "text": "will always"
+    },
+    {
+      "index": 386,
+      "start": 1215.72,
+      "end": 1218.99,
+      "duration": 3.27,
+      "text": "be greater or equal to"
+    },
+    {
+      "index": 387,
+      "start": 1219.0,
+      "end": 1222.11,
+      "duration": 3.11,
+      "text": "zero and so that means that we should"
+    },
+    {
+      "index": 388,
+      "start": 1222.12,
+      "end": 1224.549,
+      "duration": 2.429,
+      "text": "have either a maximum or a minimum how"
+    },
+    {
+      "index": 389,
+      "start": 1224.559,
+      "end": 1226.99,
+      "duration": 2.431,
+      "text": "do we decide which one it is well we"
+    },
+    {
+      "index": 390,
+      "start": 1227.0,
+      "end": 1230.43,
+      "duration": 3.43,
+      "text": "look at the sign of a exactly okay so"
+    },
+    {
+      "index": 391,
+      "start": 1230.44,
+      "end": 1231.63,
+      "duration": 1.19,
+      "text": "there's two"
+    },
+    {
+      "index": 392,
+      "start": 1231.64,
+      "end": 1235.549,
+      "duration": 3.909,
+      "text": "subcases one is if a is"
+    },
+    {
+      "index": 393,
+      "start": 1235.559,
+      "end": 1238.59,
+      "duration": 3.031,
+      "text": "positive then this quantity over all"
+    },
+    {
+      "index": 394,
+      "start": 1238.6,
+      "end": 1240.669,
+      "duration": 2.069,
+      "text": "will always be non- negative and that"
+    },
+    {
+      "index": 395,
+      "start": 1240.679,
+      "end": 1243.47,
+      "duration": 2.791,
+      "text": "means we have"
+    },
+    {
+      "index": 396,
+      "start": 1243.48,
+      "end": 1245.35,
+      "duration": 1.87,
+      "text": "a a"
+    },
+    {
+      "index": 397,
+      "start": 1245.36,
+      "end": 1252.669,
+      "duration": 7.309,
+      "text": "minimum"
+    },
+    {
+      "index": 398,
+      "start": 1257.11,
+      "end": 1257.12,
+      "duration": 0.01,
+      "text": "okay and if a is negative on the other"
+    },
+    {
+      "index": 399,
+      "start": 1257.12,
+      "end": 1260.51,
+      "duration": 3.39,
+      "text": "hand so that means that we multiply this"
+    },
+    {
+      "index": 400,
+      "start": 1260.52,
+      "end": 1262.35,
+      "duration": 1.83,
+      "text": "positive quantity by a negative number"
+    },
+    {
+      "index": 401,
+      "start": 1262.36,
+      "end": 1264.27,
+      "duration": 1.91,
+      "text": "we get something that's always negative"
+    },
+    {
+      "index": 402,
+      "start": 1264.28,
+      "end": 1271.87,
+      "duration": 7.59,
+      "text": "so zero is actually the"
+    },
+    {
+      "index": 403,
+      "start": 1280.51,
+      "end": 1280.52,
+      "duration": 0.01,
+      "text": "everyone"
+    },
+    {
+      "index": 404,
+      "start": 1280.52,
+      "end": 1286.549,
+      "duration": 6.029,
+      "text": "yes said"
+    },
+    {
+      "index": 405,
+      "start": 1290.07,
+      "end": 1290.08,
+      "duration": 0.01,
+      "text": "that uh sorry so yeah I said no I said"
+    },
+    {
+      "index": 406,
+      "start": 1290.08,
+      "end": 1292.71,
+      "duration": 2.63,
+      "text": "in the example wal x² it doesn't depend"
+    },
+    {
+      "index": 407,
+      "start": 1292.72,
+      "end": 1295.63,
+      "duration": 2.91,
+      "text": "on y if I have so the more General"
+    },
+    {
+      "index": 408,
+      "start": 1295.64,
+      "end": 1299.83,
+      "duration": 4.19,
+      "text": "situation is W equals some constant well"
+    },
+    {
+      "index": 409,
+      "start": 1299.84,
+      "end": 1306.75,
+      "duration": 6.91,
+      "text": "I guess it's a * x + B / 2 a * y^ 2 so"
+    },
+    {
+      "index": 410,
+      "start": 1306.76,
+      "end": 1308.87,
+      "duration": 2.11,
+      "text": "it does depend on X and on y but it only"
+    },
+    {
+      "index": 411,
+      "start": 1308.88,
+      "end": 1310.23,
+      "duration": 1.35,
+      "text": "depends on this"
+    },
+    {
+      "index": 412,
+      "start": 1310.24,
+      "end": 1313.35,
+      "duration": 3.11,
+      "text": "combination okay so if I choose to move"
+    },
+    {
+      "index": 413,
+      "start": 1313.36,
+      "end": 1315.43,
+      "duration": 2.07,
+      "text": "in somehow a perpendicular Direction in"
+    },
+    {
+      "index": 414,
+      "start": 1315.44,
+      "end": 1317.63,
+      "duration": 2.19,
+      "text": "the direction where this remains"
+    },
+    {
+      "index": 415,
+      "start": 1317.64,
+      "end": 1319.31,
+      "duration": 1.67,
+      "text": "constant"
+    },
+    {
+      "index": 416,
+      "start": 1319.32,
+      "end": 1324.63,
+      "duration": 5.31,
+      "text": "so maybe if I set xal minus b 2 a y then"
+    },
+    {
+      "index": 417,
+      "start": 1324.64,
+      "end": 1327.07,
+      "duration": 2.43,
+      "text": "this remains zero all the time so"
+    },
+    {
+      "index": 418,
+      "start": 1327.08,
+      "end": 1329.149,
+      "duration": 2.069,
+      "text": "there's a degenerate direction in which"
+    },
+    {
+      "index": 419,
+      "start": 1329.159,
+      "end": 1331.59,
+      "duration": 2.431,
+      "text": "I stay at the minimum or maximum or"
+    },
+    {
+      "index": 420,
+      "start": 1331.6,
+      "end": 1333.83,
+      "duration": 2.23,
+      "text": "whatever it is that I have okay so"
+    },
+    {
+      "index": 421,
+      "start": 1333.84,
+      "end": 1335.029,
+      "duration": 1.189,
+      "text": "that's why it's called degenerate"
+    },
+    {
+      "index": 422,
+      "start": 1335.039,
+      "end": 1337.95,
+      "duration": 2.911,
+      "text": "there's a direction in which nothing"
+    },
+    {
+      "index": 423,
+      "start": 1337.96,
+      "end": 1341.83,
+      "duration": 3.87,
+      "text": "happens"
+    },
+    {
+      "index": 424,
+      "start": 1348.87,
+      "end": 1348.88,
+      "duration": 0.01,
+      "text": "yes"
+    },
+    {
+      "index": 425,
+      "start": 1348.88,
+      "end": 1350.35,
+      "duration": 1.47,
+      "text": "yes yeah yeah so that's a very good"
+    },
+    {
+      "index": 426,
+      "start": 1350.36,
+      "end": 1351.669,
+      "duration": 1.309,
+      "text": "question so I say it's going to be the"
+    },
+    {
+      "index": 427,
+      "start": 1351.679,
+      "end": 1353.35,
+      "duration": 1.671,
+      "text": "second derivative test why do we not"
+    },
+    {
+      "index": 428,
+      "start": 1353.36,
+      "end": 1355.269,
+      "duration": 1.909,
+      "text": "have derivatives yet well that's because"
+    },
+    {
+      "index": 429,
+      "start": 1355.279,
+      "end": 1356.669,
+      "duration": 1.39,
+      "text": "I've been looking at this special"
+    },
+    {
+      "index": 430,
+      "start": 1356.679,
+      "end": 1359.11,
+      "duration": 2.431,
+      "text": "example where we have a function like"
+    },
+    {
+      "index": 431,
+      "start": 1359.12,
+      "end": 1361.31,
+      "duration": 2.19,
+      "text": "this and so I don't actually need to"
+    },
+    {
+      "index": 432,
+      "start": 1361.32,
+      "end": 1363.75,
+      "duration": 2.43,
+      "text": "take derivatives yet but that's secretly"
+    },
+    {
+      "index": 433,
+      "start": 1363.76,
+      "end": 1365.83,
+      "duration": 2.07,
+      "text": "that's because a b and c will be the"
+    },
+    {
+      "index": 434,
+      "start": 1365.84,
+      "end": 1367.31,
+      "duration": 1.47,
+      "text": "second derivatives of the function"
+    },
+    {
+      "index": 435,
+      "start": 1367.32,
+      "end": 1370.789,
+      "duration": 3.469,
+      "text": "actually 2 a b and 2 C so now we're"
+    },
+    {
+      "index": 436,
+      "start": 1370.799,
+      "end": 1372.789,
+      "duration": 1.99,
+      "text": "going to go to a general function and"
+    },
+    {
+      "index": 437,
+      "start": 1372.799,
+      "end": 1374.63,
+      "duration": 1.831,
+      "text": "there instead of having these"
+    },
+    {
+      "index": 438,
+      "start": 1374.64,
+      "end": 1376.549,
+      "duration": 1.909,
+      "text": "coefficients a b and c given to us we'll"
+    },
+    {
+      "index": 439,
+      "start": 1376.559,
+      "end": 1379.11,
+      "duration": 2.551,
+      "text": "have to compute them as second"
+    },
+    {
+      "index": 440,
+      "start": 1379.12,
+      "end": 1381.71,
+      "duration": 2.59,
+      "text": "derivatives okay so here I'm basically"
+    },
+    {
+      "index": 441,
+      "start": 1381.72,
+      "end": 1384.11,
+      "duration": 2.39,
+      "text": "setting the stage for what will be the"
+    },
+    {
+      "index": 442,
+      "start": 1384.12,
+      "end": 1385.71,
+      "duration": 1.59,
+      "text": "actual Criterion we'll"
+    },
+    {
+      "index": 443,
+      "start": 1385.72,
+      "end": 1392.07,
+      "duration": 6.35,
+      "text": "use using second derivatives"
+    },
+    {
+      "index": 444,
+      "start": 1394.789,
+      "end": 1394.799,
+      "duration": 0.01,
+      "text": "yes so yes so when you have a degenerate"
+    },
+    {
+      "index": 445,
+      "start": 1394.799,
+      "end": 1396.87,
+      "duration": 2.071,
+      "text": "critical point it could be a degenerate"
+    },
+    {
+      "index": 446,
+      "start": 1396.88,
+      "end": 1398.789,
+      "duration": 1.909,
+      "text": "minimum or a degenerate maximum"
+    },
+    {
+      "index": 447,
+      "start": 1398.799,
+      "end": 1401.31,
+      "duration": 2.511,
+      "text": "depending on the sign of"
+    },
+    {
+      "index": 448,
+      "start": 1401.32,
+      "end": 1404.87,
+      "duration": 3.55,
+      "text": "a but in general once you start having"
+    },
+    {
+      "index": 449,
+      "start": 1404.88,
+      "end": 1406.39,
+      "duration": 1.51,
+      "text": "more complicated functions you don't"
+    },
+    {
+      "index": 450,
+      "start": 1406.4,
+      "end": 1408.029,
+      "duration": 1.629,
+      "text": "really know what will happen anymore it"
+    },
+    {
+      "index": 451,
+      "start": 1408.039,
+      "end": 1409.75,
+      "duration": 1.711,
+      "text": "could also be degenerate saddle and so"
+    },
+    {
+      "index": 452,
+      "start": 1409.76,
+      "end": 1415.63,
+      "duration": 5.87,
+      "text": "on so we won't really be able to"
+    },
+    {
+      "index": 453,
+      "start": 1419.23,
+      "end": 1419.24,
+      "duration": 0.01,
+      "text": "tell uh yes"
+    },
+    {
+      "index": 454,
+      "start": 1419.24,
+      "end": 1421.87,
+      "duration": 2.63,
+      "text": "iter it is possible to have a degenerate"
+    },
+    {
+      "index": 455,
+      "start": 1421.88,
+      "end": 1424.63,
+      "duration": 2.75,
+      "text": "Saddle Point uh for example if I give"
+    },
+    {
+      "index": 456,
+      "start": 1424.64,
+      "end": 1427.31,
+      "duration": 2.67,
+      "text": "you X cubed plus y cubed you can"
+    },
+    {
+      "index": 457,
+      "start": 1427.32,
+      "end": 1428.909,
+      "duration": 1.589,
+      "text": "convince yourself that if you take X and"
+    },
+    {
+      "index": 458,
+      "start": 1428.919,
+      "end": 1431.47,
+      "duration": 2.551,
+      "text": "Y to be negative it will be negative If"
+    },
+    {
+      "index": 459,
+      "start": 1431.48,
+      "end": 1433.95,
+      "duration": 2.47,
+      "text": "X and Y are positive it's positive and"
+    },
+    {
+      "index": 460,
+      "start": 1433.96,
+      "end": 1435.59,
+      "duration": 1.63,
+      "text": "it has a very degenerate critical point"
+    },
+    {
+      "index": 461,
+      "start": 1435.6,
+      "end": 1437.59,
+      "duration": 1.99,
+      "text": "at the origin so that's a degenerate"
+    },
+    {
+      "index": 462,
+      "start": 1437.6,
+      "end": 1438.549,
+      "duration": 0.949,
+      "text": "setle"
+    },
+    {
+      "index": 463,
+      "start": 1438.559,
+      "end": 1440.99,
+      "duration": 2.431,
+      "text": "Point uh we don't see it here because"
+    },
+    {
+      "index": 464,
+      "start": 1441.0,
+      "end": 1442.789,
+      "duration": 1.789,
+      "text": "that doesn't happen if you have only"
+    },
+    {
+      "index": 465,
+      "start": 1442.799,
+      "end": 1445.11,
+      "duration": 2.311,
+      "text": "quadratic terms like that you need to"
+    },
+    {
+      "index": 466,
+      "start": 1445.12,
+      "end": 1451.269,
+      "duration": 6.149,
+      "text": "have higher order terms to see it"
+    },
+    {
+      "index": 467,
+      "start": 1459.149,
+      "end": 1459.159,
+      "duration": 0.01,
+      "text": "Okay"
+    },
+    {
+      "index": 468,
+      "start": 1459.159,
+      "end": 1462.35,
+      "duration": 3.191,
+      "text": "so okay so let's"
+    },
+    {
+      "index": 469,
+      "start": 1462.36,
+      "end": 1464.59,
+      "duration": 2.23,
+      "text": "continue oh before we"
+    },
+    {
+      "index": 470,
+      "start": 1464.6,
+      "end": 1466.87,
+      "duration": 2.27,
+      "text": "continue let's see I wanted to point out"
+    },
+    {
+      "index": 471,
+      "start": 1466.88,
+      "end": 1468.43,
+      "duration": 1.55,
+      "text": "one small thing"
+    },
+    {
+      "index": 472,
+      "start": 1468.44,
+      "end": 1470.99,
+      "duration": 2.55,
+      "text": "so here we have this magic quantity 4 a"
+    },
+    {
+      "index": 473,
+      "start": 1471.0,
+      "end": 1473.549,
+      "duration": 2.549,
+      "text": "c minus b s you've probably seen that"
+    },
+    {
+      "index": 474,
+      "start": 1473.559,
+      "end": 1475.19,
+      "duration": 1.631,
+      "text": "before in your"
+    },
+    {
+      "index": 475,
+      "start": 1475.2,
+      "end": 1477.909,
+      "duration": 2.709,
+      "text": "life yeah it looks like the quadratic"
+    },
+    {
+      "index": 476,
+      "start": 1477.919,
+      "end": 1479.43,
+      "duration": 1.511,
+      "text": "formula except that one involves b"
+    },
+    {
+      "index": 477,
+      "start": 1479.44,
+      "end": 1482.149,
+      "duration": 2.709,
+      "text": "square minus 4 a c but that's really the"
+    },
+    {
+      "index": 478,
+      "start": 1482.159,
+      "end": 1488.149,
+      "duration": 5.99,
+      "text": "same thing okay"
+    },
+    {
+      "index": 479,
+      "start": 1490.389,
+      "end": 1490.399,
+      "duration": 0.01,
+      "text": "so let's see where does the quadratic"
+    },
+    {
+      "index": 480,
+      "start": 1490.399,
+      "end": 1496.11,
+      "duration": 5.711,
+      "text": "formula come in"
+    },
+    {
+      "index": 481,
+      "start": 1499.389,
+      "end": 1499.399,
+      "duration": 0.01,
+      "text": "here well let me write things"
+    },
+    {
+      "index": 482,
+      "start": 1499.399,
+      "end": 1501.59,
+      "duration": 2.191,
+      "text": "differently Okay so we've manipulated"
+    },
+    {
+      "index": 483,
+      "start": 1501.6,
+      "end": 1503.75,
+      "duration": 2.15,
+      "text": "things and gotten to a conclusion but"
+    },
+    {
+      "index": 484,
+      "start": 1503.76,
+      "end": 1509.549,
+      "duration": 5.789,
+      "text": "let me just do a different"
+    },
+    {
+      "index": 485,
+      "start": 1511.669,
+      "end": 1511.679,
+      "duration": 0.01,
+      "text": "manipulation and write this now instead"
+    },
+    {
+      "index": 486,
+      "start": 1511.679,
+      "end": 1513.63,
+      "duration": 1.951,
+      "text": "as y^"
+    },
+    {
+      "index": 487,
+      "start": 1513.64,
+      "end": 1522.83,
+      "duration": 9.19,
+      "text": "2times a * x y^ 2 + b x over y + C okay"
+    },
+    {
+      "index": 488,
+      "start": 1522.84,
+      "end": 1525.35,
+      "duration": 2.51,
+      "text": "see that's the same thing that I had"
+    },
+    {
+      "index": 489,
+      "start": 1525.36,
+      "end": 1528.19,
+      "duration": 2.83,
+      "text": "before right"
+    },
+    {
+      "index": 490,
+      "start": 1528.2,
+      "end": 1532.83,
+      "duration": 4.63,
+      "text": "well so now this quantity here is always"
+    },
+    {
+      "index": 491,
+      "start": 1532.84,
+      "end": 1534.149,
+      "duration": 1.309,
+      "text": "non-"
+    },
+    {
+      "index": 492,
+      "start": 1534.159,
+      "end": 1537.63,
+      "duration": 3.471,
+      "text": "negative what about this"
+    },
+    {
+      "index": 493,
+      "start": 1537.64,
+      "end": 1540.35,
+      "duration": 2.71,
+      "text": "one well of course this one depends on X"
+    },
+    {
+      "index": 494,
+      "start": 1540.36,
+      "end": 1542.269,
+      "duration": 1.909,
+      "text": "over y it means it depends on which"
+    },
+    {
+      "index": 495,
+      "start": 1542.279,
+      "end": 1544.029,
+      "duration": 1.75,
+      "text": "direction you're going to move away from"
+    },
+    {
+      "index": 496,
+      "start": 1544.039,
+      "end": 1546.43,
+      "duration": 2.391,
+      "text": "the origin which ratio between X and Y"
+    },
+    {
+      "index": 497,
+      "start": 1546.44,
+      "end": 1549.789,
+      "duration": 3.349,
+      "text": "you will consider but I claim there's"
+    },
+    {
+      "index": 498,
+      "start": 1549.799,
+      "end": 1553.549,
+      "duration": 3.75,
+      "text": "two situations one"
+    },
+    {
+      "index": 499,
+      "start": 1553.559,
+      "end": 1557.43,
+      "duration": 3.871,
+      "text": "is so let's try to reformulate things so"
+    },
+    {
+      "index": 500,
+      "start": 1557.44,
+      "end": 1559.83,
+      "duration": 2.39,
+      "text": "if the discriminant here is positive"
+    },
+    {
+      "index": 501,
+      "start": 1559.84,
+      "end": 1562.549,
+      "duration": 2.709,
+      "text": "then it means that this has roots right"
+    },
+    {
+      "index": 502,
+      "start": 1562.559,
+      "end": 1568.669,
+      "duration": 6.11,
+      "text": "this has"
+    },
+    {
+      "index": 503,
+      "start": 1571.149,
+      "end": 1571.159,
+      "duration": 0.01,
+      "text": "Solutions and that means that this"
+    },
+    {
+      "index": 504,
+      "start": 1571.159,
+      "end": 1580.909,
+      "duration": 9.75,
+      "text": "quantity can be both positive and"
+    },
+    {
+      "index": 505,
+      "start": 1583.389,
+      "end": 1583.399,
+      "duration": 0.01,
+      "text": "negative this quantity takes positive"
+    },
+    {
+      "index": 506,
+      "start": 1583.399,
+      "end": 1584.59,
+      "duration": 1.191,
+      "text": "and negative"
+    },
+    {
+      "index": 507,
+      "start": 1584.6,
+      "end": 1589.95,
+      "duration": 5.35,
+      "text": "values uh one way to convince yourself"
+    },
+    {
+      "index": 508,
+      "start": 1598.47,
+      "end": 1598.48,
+      "duration": 0.01,
+      "text": "plot ² plus BT plus C you know that"
+    },
+    {
+      "index": 509,
+      "start": 1598.48,
+      "end": 1600.789,
+      "duration": 2.309,
+      "text": "there's two Roots so it might look like"
+    },
+    {
+      "index": 510,
+      "start": 1600.799,
+      "end": 1603.23,
+      "duration": 2.431,
+      "text": "this or it might look like that"
+    },
+    {
+      "index": 511,
+      "start": 1603.24,
+      "end": 1607.269,
+      "duration": 4.029,
+      "text": "depending on the sign of"
+    },
+    {
+      "index": 512,
+      "start": 1611.43,
+      "end": 1611.44,
+      "duration": 0.01,
+      "text": "a but in either case it will take values"
+    },
+    {
+      "index": 513,
+      "start": 1611.44,
+      "end": 1613.83,
+      "duration": 2.39,
+      "text": "of both sides so that means that your"
+    },
+    {
+      "index": 514,
+      "start": 1613.84,
+      "end": 1616.59,
+      "duration": 2.75,
+      "text": "function will take values of both"
+    },
+    {
+      "index": 515,
+      "start": 1616.6,
+      "end": 1623.789,
+      "duration": 7.189,
+      "text": "sides"
+    },
+    {
+      "index": 516,
+      "start": 1635.43,
+      "end": 1635.44,
+      "duration": 0.01,
+      "text": "values and so that means we have a"
+    },
+    {
+      "index": 517,
+      "start": 1635.44,
+      "end": 1640.43,
+      "duration": 4.99,
+      "text": "settle"
+    },
+    {
+      "index": 518,
+      "start": 1644.51,
+      "end": 1644.52,
+      "duration": 0.01,
+      "text": "Point while the other situation when b^"
+    },
+    {
+      "index": 519,
+      "start": 1644.52,
+      "end": 1651.43,
+      "duration": 6.91,
+      "text": "2us 4 a c is negative"
+    },
+    {
+      "index": 520,
+      "start": 1655.19,
+      "end": 1655.2,
+      "duration": 0.01,
+      "text": "means that this equation this quadratic"
+    },
+    {
+      "index": 521,
+      "start": 1655.2,
+      "end": 1657.35,
+      "duration": 2.15,
+      "text": "never takes the value zero so it's"
+    },
+    {
+      "index": 522,
+      "start": 1657.36,
+      "end": 1659.549,
+      "duration": 2.189,
+      "text": "always positive or it's always negative"
+    },
+    {
+      "index": 523,
+      "start": 1659.559,
+      "end": 1662.43,
+      "duration": 2.871,
+      "text": "depending on the sign of a so the other"
+    },
+    {
+      "index": 524,
+      "start": 1662.44,
+      "end": 1666.47,
+      "duration": 4.03,
+      "text": "case is if b² - 4 a is"
+    },
+    {
+      "index": 525,
+      "start": 1666.48,
+      "end": 1668.31,
+      "duration": 1.83,
+      "text": "negative"
+    },
+    {
+      "index": 526,
+      "start": 1668.32,
+      "end": 1672.19,
+      "duration": 3.87,
+      "text": "then that quadratic doesn't have a"
+    },
+    {
+      "index": 527,
+      "start": 1672.2,
+      "end": 1674.789,
+      "duration": 2.589,
+      "text": "solution and it could look like this or"
+    },
+    {
+      "index": 528,
+      "start": 1674.799,
+      "end": 1677.149,
+      "duration": 2.35,
+      "text": "like that depending on whether a is"
+    },
+    {
+      "index": 529,
+      "start": 1677.159,
+      "end": 1679.149,
+      "duration": 1.99,
+      "text": "positive or a is"
+    },
+    {
+      "index": 530,
+      "start": 1679.159,
+      "end": 1683.549,
+      "duration": 4.39,
+      "text": "negative so in particular that means a x"
+    },
+    {
+      "index": 531,
+      "start": 1683.559,
+      "end": 1690.11,
+      "duration": 6.551,
+      "text": "y^ 2+ b x over y + C is"
+    },
+    {
+      "index": 532,
+      "start": 1690.12,
+      "end": 1692.909,
+      "duration": 2.789,
+      "text": "always positive"
+    },
+    {
+      "index": 533,
+      "start": 1692.919,
+      "end": 1695.149,
+      "duration": 2.23,
+      "text": "or"
+    },
+    {
+      "index": 534,
+      "start": 1695.159,
+      "end": 1698.149,
+      "duration": 2.99,
+      "text": "always"
+    },
+    {
+      "index": 535,
+      "start": 1698.159,
+      "end": 1701.509,
+      "duration": 3.35,
+      "text": "negative depending on the sign of a and"
+    },
+    {
+      "index": 536,
+      "start": 1701.519,
+      "end": 1703.389,
+      "duration": 1.87,
+      "text": "then that tells us that our function W"
+    },
+    {
+      "index": 537,
+      "start": 1703.399,
+      "end": 1704.99,
+      "duration": 1.591,
+      "text": "will be always positive or always"
+    },
+    {
+      "index": 538,
+      "start": 1705.0,
+      "end": 1718.71,
+      "duration": 13.71,
+      "text": "negative and then we'll get a min or a"
+    },
+    {
+      "index": 539,
+      "start": 1721.029,
+      "end": 1721.039,
+      "duration": 0.01,
+      "text": "maximum okay we'll have a minan or a Max"
+    },
+    {
+      "index": 540,
+      "start": 1721.039,
+      "end": 1723.95,
+      "duration": 2.911,
+      "text": "depending on which situation we are"
+    },
+    {
+      "index": 541,
+      "start": 1723.96,
+      "end": 1727.19,
+      "duration": 3.23,
+      "text": "in okay so that's another way to derive"
+    },
+    {
+      "index": 542,
+      "start": 1727.2,
+      "end": 1728.509,
+      "duration": 1.309,
+      "text": "the same"
+    },
+    {
+      "index": 543,
+      "start": 1728.519,
+      "end": 1731.59,
+      "duration": 3.071,
+      "text": "answer and now here you see why the"
+    },
+    {
+      "index": 544,
+      "start": 1731.6,
+      "end": 1734.389,
+      "duration": 2.789,
+      "text": "discriminant plays a role that's"
+    },
+    {
+      "index": 545,
+      "start": 1734.399,
+      "end": 1737.11,
+      "duration": 2.711,
+      "text": "because it exactly tells you whether"
+    },
+    {
+      "index": 546,
+      "start": 1737.12,
+      "end": 1739.47,
+      "duration": 2.35,
+      "text": "this quadratic quantity has always the"
+    },
+    {
+      "index": 547,
+      "start": 1739.48,
+      "end": 1741.23,
+      "duration": 1.75,
+      "text": "same sign or whether it can actually"
+    },
+    {
+      "index": 548,
+      "start": 1741.24,
+      "end": 1743.47,
+      "duration": 2.23,
+      "text": "cross the value zero when you have a"
+    },
+    {
+      "index": 549,
+      "start": 1743.48,
+      "end": 1752.909,
+      "duration": 9.429,
+      "text": "root of a"
+    },
+    {
+      "index": 550,
+      "start": 1756.11,
+      "end": 1756.12,
+      "duration": 0.01,
+      "text": "quadratic okay so"
+    },
+    {
+      "index": 551,
+      "start": 1756.12,
+      "end": 1758.149,
+      "duration": 2.029,
+      "text": "hopefully at this stage you're happy"
+    },
+    {
+      "index": 552,
+      "start": 1758.159,
+      "end": 1760.029,
+      "duration": 1.87,
+      "text": "with one of the two explanations at"
+    },
+    {
+      "index": 553,
+      "start": 1760.039,
+      "end": 1763.47,
+      "duration": 3.431,
+      "text": "least and now you're willing to believe"
+    },
+    {
+      "index": 554,
+      "start": 1763.48,
+      "end": 1767.389,
+      "duration": 3.909,
+      "text": "I hope that we have basically a way of"
+    },
+    {
+      "index": 555,
+      "start": 1767.399,
+      "end": 1769.31,
+      "duration": 1.911,
+      "text": "deciding what type of critical point we"
+    },
+    {
+      "index": 556,
+      "start": 1769.32,
+      "end": 1777.27,
+      "duration": 7.95,
+      "text": "have in the special case of a quadratic"
+    },
+    {
+      "index": 557,
+      "start": 1804.549,
+      "end": 1804.559,
+      "duration": 0.01,
+      "text": "so now what do we do with a general"
+    },
+    {
+      "index": 558,
+      "start": 1804.559,
+      "end": 1807.269,
+      "duration": 2.71,
+      "text": "function"
+    },
+    {
+      "index": 559,
+      "start": 1807.279,
+      "end": 1810.31,
+      "duration": 3.031,
+      "text": "well so in"
+    },
+    {
+      "index": 560,
+      "start": 1810.32,
+      "end": 1821.87,
+      "duration": 11.55,
+      "text": "general we want to look at second"
+    },
+    {
+      "index": 561,
+      "start": 1823.669,
+      "end": 1823.679,
+      "duration": 0.01,
+      "text": "derivatives okay so now we're getting to"
+    },
+    {
+      "index": 562,
+      "start": 1823.679,
+      "end": 1824.669,
+      "duration": 0.99,
+      "text": "the real"
+    },
+    {
+      "index": 563,
+      "start": 1824.679,
+      "end": 1828.11,
+      "duration": 3.431,
+      "text": "stuff so how many second der do we have"
+    },
+    {
+      "index": 564,
+      "start": 1828.12,
+      "end": 1829.19,
+      "duration": 1.07,
+      "text": "that's maybe the first thing we should"
+    },
+    {
+      "index": 565,
+      "start": 1829.2,
+      "end": 1833.23,
+      "duration": 4.03,
+      "text": "figure out well we can take the"
+    },
+    {
+      "index": 566,
+      "start": 1833.24,
+      "end": 1835.71,
+      "duration": 2.47,
+      "text": "derivative first with respect to X and"
+    },
+    {
+      "index": 567,
+      "start": 1835.72,
+      "end": 1838.549,
+      "duration": 2.829,
+      "text": "then again with respect to"
+    },
+    {
+      "index": 568,
+      "start": 1838.559,
+      "end": 1842.07,
+      "duration": 3.511,
+      "text": "X okay that gives us something we denote"
+    },
+    {
+      "index": 569,
+      "start": 1842.08,
+      "end": 1845.389,
+      "duration": 3.309,
+      "text": "by partial Square F partial x"
+    },
+    {
+      "index": 570,
+      "start": 1845.399,
+      "end": 1852.789,
+      "duration": 7.39,
+      "text": "s or F sub"
+    },
+    {
+      "index": 571,
+      "start": 1856.71,
+      "end": 1856.72,
+      "duration": 0.01,
+      "text": "XX then there's another one which is f"
+    },
+    {
+      "index": 572,
+      "start": 1856.72,
+      "end": 1860.47,
+      "duration": 3.75,
+      "text": "subx Y which means you take the"
+    },
+    {
+      "index": 573,
+      "start": 1860.48,
+      "end": 1862.99,
+      "duration": 2.51,
+      "text": "derivative with respect to X and then"
+    },
+    {
+      "index": 574,
+      "start": 1863.0,
+      "end": 1864.269,
+      "duration": 1.269,
+      "text": "with respect to"
+    },
+    {
+      "index": 575,
+      "start": 1864.279,
+      "end": 1868.11,
+      "duration": 3.831,
+      "text": "Y another thing you can do is do first"
+    },
+    {
+      "index": 576,
+      "start": 1868.12,
+      "end": 1870.389,
+      "duration": 2.269,
+      "text": "derivative respect to Y and then with"
+    },
+    {
+      "index": 577,
+      "start": 1870.399,
+      "end": 1873.99,
+      "duration": 3.591,
+      "text": "respect to X that would be F sub y"
+    },
+    {
+      "index": 578,
+      "start": 1874.0,
+      "end": 1878.19,
+      "duration": 4.19,
+      "text": "x well good news these are actually"
+    },
+    {
+      "index": 579,
+      "start": 1878.2,
+      "end": 1881.029,
+      "duration": 2.829,
+      "text": "always equal to each"
+    },
+    {
+      "index": 580,
+      "start": 1881.039,
+      "end": 1883.47,
+      "duration": 2.431,
+      "text": "other okay so it's a fact that we will"
+    },
+    {
+      "index": 581,
+      "start": 1883.48,
+      "end": 1886.35,
+      "duration": 2.87,
+      "text": "admit uh it's actually not very hard to"
+    },
+    {
+      "index": 582,
+      "start": 1886.36,
+      "end": 1888.07,
+      "duration": 1.71,
+      "text": "check but"
+    },
+    {
+      "index": 583,
+      "start": 1888.08,
+      "end": 1890.19,
+      "duration": 2.11,
+      "text": "so these are always the same we don't"
+    },
+    {
+      "index": 584,
+      "start": 1890.2,
+      "end": 1893.149,
+      "duration": 2.949,
+      "text": "need to worry about which one we do"
+    },
+    {
+      "index": 585,
+      "start": 1893.159,
+      "end": 1895.909,
+      "duration": 2.75,
+      "text": "that's one computation that we won't"
+    },
+    {
+      "index": 586,
+      "start": 1895.919,
+      "end": 1899.269,
+      "duration": 3.35,
+      "text": "need to do we can save bit of effort and"
+    },
+    {
+      "index": 587,
+      "start": 1899.279,
+      "end": 1903.389,
+      "duration": 4.11,
+      "text": "then we have the last one namely the"
+    },
+    {
+      "index": 588,
+      "start": 1903.399,
+      "end": 1906.43,
+      "duration": 3.031,
+      "text": "second partial with respect to Y and"
+    },
+    {
+      "index": 589,
+      "start": 1906.44,
+      "end": 1910.35,
+      "duration": 3.91,
+      "text": "Y F sub y"
+    },
+    {
+      "index": 590,
+      "start": 1910.36,
+      "end": 1916.149,
+      "duration": 5.789,
+      "text": "y okay so we have three of"
+    },
+    {
+      "index": 591,
+      "start": 1919.149,
+      "end": 1919.159,
+      "duration": 0.01,
+      "text": "them"
+    },
+    {
+      "index": 592,
+      "start": 1919.159,
+      "end": 1934.789,
+      "duration": 15.63,
+      "text": "so what does the second derivative test"
+    },
+    {
+      "index": 593,
+      "start": 1937.909,
+      "end": 1937.919,
+      "duration": 0.01,
+      "text": "say it says say that you"
+    },
+    {
+      "index": 594,
+      "start": 1937.919,
+      "end": 1943.71,
+      "duration": 5.791,
+      "text": "have a critical"
+    },
+    {
+      "index": 595,
+      "start": 1947.99,
+      "end": 1948.0,
+      "duration": 0.01,
+      "text": "point x0 y0 of a function of two"
+    },
+    {
+      "index": 596,
+      "start": 1948.0,
+      "end": 1952.509,
+      "duration": 4.509,
+      "text": "variables F and then let's compute the"
+    },
+    {
+      "index": 597,
+      "start": 1952.519,
+      "end": 1955.95,
+      "duration": 3.431,
+      "text": "partial derivatives so let let's call"
+    },
+    {
+      "index": 598,
+      "start": 1955.96,
+      "end": 1958.71,
+      "duration": 2.75,
+      "text": "Capital"
+    },
+    {
+      "index": 599,
+      "start": 1961.389,
+      "end": 1961.399,
+      "duration": 0.01,
+      "text": "a the second derivative with respect to"
+    },
+    {
+      "index": 600,
+      "start": 1961.399,
+      "end": 1964.269,
+      "duration": 2.87,
+      "text": "X let's call capital B the second"
+    },
+    {
+      "index": 601,
+      "start": 1964.279,
+      "end": 1968.269,
+      "duration": 3.99,
+      "text": "derivative with respect to X and"
+    },
+    {
+      "index": 602,
+      "start": 1968.279,
+      "end": 1974.35,
+      "duration": 6.071,
+      "text": "Y and C equals F sub y y at this"
+    },
+    {
+      "index": 603,
+      "start": 1974.36,
+      "end": 1977.75,
+      "duration": 3.39,
+      "text": "point okay so these are just num numbers"
+    },
+    {
+      "index": 604,
+      "start": 1977.76,
+      "end": 1979.509,
+      "duration": 1.749,
+      "text": "because we first compute the second"
+    },
+    {
+      "index": 605,
+      "start": 1979.519,
+      "end": 1981.669,
+      "duration": 2.15,
+      "text": "derivative and then we plug in the"
+    },
+    {
+      "index": 606,
+      "start": 1981.679,
+      "end": 1984.35,
+      "duration": 2.671,
+      "text": "values of X and Y at the critical point"
+    },
+    {
+      "index": 607,
+      "start": 1984.36,
+      "end": 1986.269,
+      "duration": 1.909,
+      "text": "so this will just be"
+    },
+    {
+      "index": 608,
+      "start": 1986.279,
+      "end": 1989.71,
+      "duration": 3.431,
+      "text": "numbers and now what we do is we look at"
+    },
+    {
+      "index": 609,
+      "start": 1989.72,
+      "end": 1991.789,
+      "duration": 2.069,
+      "text": "the"
+    },
+    {
+      "index": 610,
+      "start": 1991.799,
+      "end": 1998.07,
+      "duration": 6.271,
+      "text": "quantity a minus b ^"
+    },
+    {
+      "index": 611,
+      "start": 2001.629,
+      "end": 2001.639,
+      "duration": 0.01,
+      "text": "2 I am not forgetting a four you will"
+    },
+    {
+      "index": 612,
+      "start": 2001.639,
+      "end": 2004.87,
+      "duration": 3.231,
+      "text": "see why very"
+    },
+    {
+      "index": 613,
+      "start": 2004.88,
+      "end": 2008.95,
+      "duration": 4.07,
+      "text": "soon so if AC minus b^ s is"
+    },
+    {
+      "index": 614,
+      "start": 2008.96,
+      "end": 2012.509,
+      "duration": 3.549,
+      "text": "positive then there's two subcases if a"
+    },
+    {
+      "index": 615,
+      "start": 2012.519,
+      "end": 2015.99,
+      "duration": 3.471,
+      "text": "is"
+    },
+    {
+      "index": 616,
+      "start": 2033.149,
+      "end": 2033.159,
+      "duration": 0.01,
+      "text": "minimum the second case so still if AC C"
+    },
+    {
+      "index": 617,
+      "start": 2033.159,
+      "end": 2037.99,
+      "duration": 4.831,
+      "text": "minus b^ s is positive but a is"
+    },
+    {
+      "index": 618,
+      "start": 2038.0,
+      "end": 2045.23,
+      "duration": 7.23,
+      "text": "negative then it's going to be a local"
+    },
+    {
+      "index": 619,
+      "start": 2052.109,
+      "end": 2052.119,
+      "duration": 0.01,
+      "text": "maximum and if AC minus b^ 2 is negative"
+    },
+    {
+      "index": 620,
+      "start": 2052.119,
+      "end": 2054.43,
+      "duration": 2.311,
+      "text": "then it's a settle"
+    },
+    {
+      "index": 621,
+      "start": 2054.44,
+      "end": 2059.109,
+      "duration": 4.669,
+      "text": "point and finally if AC minus b^ 2 is"
+    },
+    {
+      "index": 622,
+      "start": 2059.119,
+      "end": 2065.03,
+      "duration": 5.911,
+      "text": "zero then we actually cannot"
+    },
+    {
+      "index": 623,
+      "start": 2067.589,
+      "end": 2067.599,
+      "duration": 0.01,
+      "text": "conclude we don't know"
+    },
+    {
+      "index": 624,
+      "start": 2067.599,
+      "end": 2069.03,
+      "duration": 1.431,
+      "text": "whether it's going to be a minimum a"
+    },
+    {
+      "index": 625,
+      "start": 2069.04,
+      "end": 2071.71,
+      "duration": 2.67,
+      "text": "maximum or a"
+    },
+    {
+      "index": 626,
+      "start": 2074.389,
+      "end": 2074.399,
+      "duration": 0.01,
+      "text": "settle we know it's degenera in some way"
+    },
+    {
+      "index": 627,
+      "start": 2074.399,
+      "end": 2077.99,
+      "duration": 3.591,
+      "text": "but we don't know what type of point it"
+    },
+    {
+      "index": 628,
+      "start": 2078.0,
+      "end": 2080.31,
+      "duration": 2.31,
+      "text": "is okay so that's actually what you need"
+    },
+    {
+      "index": 629,
+      "start": 2080.32,
+      "end": 2082.23,
+      "duration": 1.91,
+      "text": "to remember if you're you know formula"
+    },
+    {
+      "index": 630,
+      "start": 2082.24,
+      "end": 2083.869,
+      "duration": 1.629,
+      "text": "oriented that's all you need to remember"
+    },
+    {
+      "index": 631,
+      "start": 2083.879,
+      "end": 2086.55,
+      "duration": 2.671,
+      "text": "about today but let's try to understand"
+    },
+    {
+      "index": 632,
+      "start": 2086.56,
+      "end": 2088.869,
+      "duration": 2.309,
+      "text": "why you know how this comes out of what"
+    },
+    {
+      "index": 633,
+      "start": 2088.879,
+      "end": 2094.149,
+      "duration": 5.27,
+      "text": "we had"
+    },
+    {
+      "index": 634,
+      "start": 2097.87,
+      "end": 2097.88,
+      "duration": 0.01,
+      "text": "there okay so"
+    },
+    {
+      "index": 635,
+      "start": 2097.88,
+      "end": 2102.589,
+      "duration": 4.709,
+      "text": "I think maybe I actually want to"
+    },
+    {
+      "index": 636,
+      "start": 2102.599,
+      "end": 2104.87,
+      "duration": 2.271,
+      "text": "keep so maybe I want to keep this middle"
+    },
+    {
+      "index": 637,
+      "start": 2104.88,
+      "end": 2106.55,
+      "duration": 1.67,
+      "text": "board because it actually has you know"
+    },
+    {
+      "index": 638,
+      "start": 2106.56,
+      "end": 2108.43,
+      "duration": 1.87,
+      "text": "the recipe that we found before for the"
+    },
+    {
+      "index": 639,
+      "start": 2108.44,
+      "end": 2110.67,
+      "duration": 2.23,
+      "text": "quadratic function so let me move"
+    },
+    {
+      "index": 640,
+      "start": 2110.68,
+      "end": 2113.95,
+      "duration": 3.27,
+      "text": "directly over there and try to relate"
+    },
+    {
+      "index": 641,
+      "start": 2113.96,
+      "end": 2125.79,
+      "duration": 11.83,
+      "text": "our old recipe with a new"
+    },
+    {
+      "index": 642,
+      "start": 2156.99,
+      "end": 2157.0,
+      "duration": 0.01,
+      "text": "so so first let's check that this two"
+    },
+    {
+      "index": 643,
+      "start": 2157.0,
+      "end": 2159.069,
+      "duration": 2.069,
+      "text": "things say the same thing in the special"
+    },
+    {
+      "index": 644,
+      "start": 2159.079,
+      "end": 2161.87,
+      "duration": 2.791,
+      "text": "case that we were looking at okay so"
+    },
+    {
+      "index": 645,
+      "start": 2161.88,
+      "end": 2163.75,
+      "duration": 1.87,
+      "text": "let's"
+    },
+    {
+      "index": 646,
+      "start": 2163.76,
+      "end": 2167.589,
+      "duration": 3.829,
+      "text": "verify in the special"
+    },
+    {
+      "index": 647,
+      "start": 2173.15,
+      "end": 2173.16,
+      "duration": 0.01,
+      "text": "case where the function was a x^2 + bxy"
+    },
+    {
+      "index": 648,
+      "start": 2173.16,
+      "end": 2175.589,
+      "duration": 2.429,
+      "text": "plus c y^"
+    },
+    {
+      "index": 649,
+      "start": 2175.599,
+      "end": 2180.75,
+      "duration": 5.151,
+      "text": "2"
+    },
+    {
+      "index": 650,
+      "start": 2183.95,
+      "end": 2183.96,
+      "duration": 0.01,
+      "text": "so well what"
+    },
+    {
+      "index": 651,
+      "start": 2183.96,
+      "end": 2186.349,
+      "duration": 2.389,
+      "text": "is the second derivative with respect to"
+    },
+    {
+      "index": 652,
+      "start": 2186.359,
+      "end": 2187.27,
+      "duration": 0.911,
+      "text": "X and"
+    },
+    {
+      "index": 653,
+      "start": 2187.28,
+      "end": 2189.589,
+      "duration": 2.309,
+      "text": "X if I take the second derivative with"
+    },
+    {
+      "index": 654,
+      "start": 2189.599,
+      "end": 2191.27,
+      "duration": 1.671,
+      "text": "respect to x and x so first I want to"
+    },
+    {
+      "index": 655,
+      "start": 2191.28,
+      "end": 2193.39,
+      "duration": 2.11,
+      "text": "take maybe the derivative with respect"
+    },
+    {
+      "index": 656,
+      "start": 2193.4,
+      "end": 2196.19,
+      "duration": 2.79,
+      "text": "to X the first let's take first the"
+    },
+    {
+      "index": 657,
+      "start": 2196.2,
+      "end": 2201.99,
+      "duration": 5.79,
+      "text": "first partial W subx that will be 2 a X"
+    },
+    {
+      "index": 658,
+      "start": 2202.0,
+      "end": 2203.589,
+      "duration": 1.589,
+      "text": "plus b"
+    },
+    {
+      "index": 659,
+      "start": 2203.599,
+      "end": 2205.27,
+      "duration": 1.671,
+      "text": "y"
+    },
+    {
+      "index": 660,
+      "start": 2205.28,
+      "end": 2208.19,
+      "duration": 2.91,
+      "text": "right so w sub"
+    },
+    {
+      "index": 661,
+      "start": 2208.2,
+      "end": 2210.589,
+      "duration": 2.389,
+      "text": "XX will be well let's take the partial"
+    },
+    {
+      "index": 662,
+      "start": 2210.599,
+      "end": 2213.51,
+      "duration": 2.911,
+      "text": "respect to X again that's 2"
+    },
+    {
+      "index": 663,
+      "start": 2213.52,
+      "end": 2217.589,
+      "duration": 4.069,
+      "text": "a w sub XY"
+    },
+    {
+      "index": 664,
+      "start": 2217.599,
+      "end": 2219.39,
+      "duration": 1.791,
+      "text": "I take the partial with respect to Y I"
+    },
+    {
+      "index": 665,
+      "start": 2219.4,
+      "end": 2221.55,
+      "duration": 2.15,
+      "text": "will get"
+    },
+    {
+      "index": 666,
+      "start": 2221.56,
+      "end": 2224.67,
+      "duration": 3.11,
+      "text": "B okay now we need also the partial"
+    },
+    {
+      "index": 667,
+      "start": 2224.68,
+      "end": 2231.75,
+      "duration": 7.07,
+      "text": "respect to Y so w sub y is BX + 2 c"
+    },
+    {
+      "index": 668,
+      "start": 2231.76,
+      "end": 2234.43,
+      "duration": 2.67,
+      "text": "y in case you don't believe what I told"
+    },
+    {
+      "index": 669,
+      "start": 2234.44,
+      "end": 2238.43,
+      "duration": 3.99,
+      "text": "you about the mixed partials W sub"
+    },
+    {
+      "index": 670,
+      "start": 2238.44,
+      "end": 2242.23,
+      "duration": 3.79,
+      "text": "YX well you can check and it's again B"
+    },
+    {
+      "index": 671,
+      "start": 2242.24,
+      "end": 2244.95,
+      "duration": 2.71,
+      "text": "so they're indeed the same"
+    },
+    {
+      "index": 672,
+      "start": 2244.96,
+      "end": 2249.589,
+      "duration": 4.629,
+      "text": "thing and w sub y y will be 2"
+    },
+    {
+      "index": 673,
+      "start": 2249.599,
+      "end": 2252.91,
+      "duration": 3.311,
+      "text": "C"
+    },
+    {
+      "index": 674,
+      "start": 2257.39,
+      "end": 2257.4,
+      "duration": 0.01,
+      "text": "so if we now look at these quantities"
+    },
+    {
+      "index": 675,
+      "start": 2257.4,
+      "end": 2260.23,
+      "duration": 2.83,
+      "text": "that tells us"
+    },
+    {
+      "index": 676,
+      "start": 2260.24,
+      "end": 2264.47,
+      "duration": 4.23,
+      "text": "well big a is two little a big b is"
+    },
+    {
+      "index": 677,
+      "start": 2264.48,
+      "end": 2267.27,
+      "duration": 2.79,
+      "text": "Little B Big"
+    },
+    {
+      "index": 678,
+      "start": 2267.28,
+      "end": 2273.99,
+      "duration": 6.71,
+      "text": "C is two little C so AC minus b^ 2 is"
+    },
+    {
+      "index": 679,
+      "start": 2274.0,
+      "end": 2276.19,
+      "duration": 2.19,
+      "text": "what we used to call four little AC"
+    },
+    {
+      "index": 680,
+      "start": 2276.2,
+      "end": 2278.99,
+      "duration": 2.79,
+      "text": "minus B"
+    },
+    {
+      "index": 681,
+      "start": 2285.19,
+      "end": 2285.2,
+      "duration": 0.01,
+      "text": "o"
+    },
+    {
+      "index": 682,
+      "start": 2285.2,
+      "end": 2287.67,
+      "duration": 2.47,
+      "text": "so now you can compare the cases well"
+    },
+    {
+      "index": 683,
+      "start": 2287.68,
+      "end": 2289.069,
+      "duration": 1.389,
+      "text": "they're not listed in the same order"
+    },
+    {
+      "index": 684,
+      "start": 2289.079,
+      "end": 2292.79,
+      "duration": 3.711,
+      "text": "just to make it you know harder but uh"
+    },
+    {
+      "index": 685,
+      "start": 2292.8,
+      "end": 2297.109,
+      "duration": 4.309,
+      "text": "so we say it first if so the settle case"
+    },
+    {
+      "index": 686,
+      "start": 2297.119,
+      "end": 2300.63,
+      "duration": 3.511,
+      "text": "is when a c minus b s in big letters is"
+    },
+    {
+      "index": 687,
+      "start": 2300.64,
+      "end": 2303.589,
+      "duration": 2.949,
+      "text": "negative that's the same as 4 A minus"
+    },
+    {
+      "index": 688,
+      "start": 2303.599,
+      "end": 2307.43,
+      "duration": 3.831,
+      "text": "b^2 in lower case is negative"
+    },
+    {
+      "index": 689,
+      "start": 2307.44,
+      "end": 2310.15,
+      "duration": 2.71,
+      "text": "the case where capital A C minus b"
+    },
+    {
+      "index": 690,
+      "start": 2310.16,
+      "end": 2312.349,
+      "duration": 2.189,
+      "text": "square is positive local mean and local"
+    },
+    {
+      "index": 691,
+      "start": 2312.359,
+      "end": 2317.55,
+      "duration": 5.191,
+      "text": "Max corresponds to this one and the case"
+    },
+    {
+      "index": 692,
+      "start": 2317.56,
+      "end": 2319.589,
+      "duration": 2.029,
+      "text": "where we can't conclude was what used to"
+    },
+    {
+      "index": 693,
+      "start": 2319.599,
+      "end": 2320.99,
+      "duration": 1.391,
+      "text": "be the degenerate"
+    },
+    {
+      "index": 694,
+      "start": 2321.0,
+      "end": 2324.829,
+      "duration": 3.829,
+      "text": "one okay so at least we don't seem to"
+    },
+    {
+      "index": 695,
+      "start": 2324.839,
+      "end": 2328.55,
+      "duration": 3.711,
+      "text": "have messed up when copying the formula"
+    },
+    {
+      "index": 696,
+      "start": 2328.56,
+      "end": 2330.47,
+      "duration": 1.91,
+      "text": "now why does that work more generally"
+    },
+    {
+      "index": 697,
+      "start": 2330.48,
+      "end": 2335.349,
+      "duration": 4.869,
+      "text": "than"
+    },
+    {
+      "index": 698,
+      "start": 2339.23,
+      "end": 2339.24,
+      "duration": 0.01,
+      "text": "that well well the answer to that is"
+    },
+    {
+      "index": 699,
+      "start": 2339.24,
+      "end": 2342.43,
+      "duration": 3.19,
+      "text": "again tailor"
+    },
+    {
+      "index": 700,
+      "start": 2342.44,
+      "end": 2348.829,
+      "duration": 6.389,
+      "text": "approximation"
+    },
+    {
+      "index": 701,
+      "start": 2350.349,
+      "end": 2350.359,
+      "duration": 0.01,
+      "text": "uh"
+    },
+    {
+      "index": 702,
+      "start": 2350.359,
+      "end": 2351.91,
+      "duration": 1.551,
+      "text": "okay"
+    },
+    {
+      "index": 703,
+      "start": 2351.92,
+      "end": 2360.15,
+      "duration": 8.23,
+      "text": "so let me just do here quadratic"
+    },
+    {
+      "index": 704,
+      "start": 2362.55,
+      "end": 2362.56,
+      "duration": 0.01,
+      "text": "approximation so quadratic approximation"
+    },
+    {
+      "index": 705,
+      "start": 2362.56,
+      "end": 2365.15,
+      "duration": 2.59,
+      "text": "tells me the following thing it tells me"
+    },
+    {
+      "index": 706,
+      "start": 2365.16,
+      "end": 2367.87,
+      "duration": 2.71,
+      "text": "if I have a function"
+    },
+    {
+      "index": 707,
+      "start": 2367.88,
+      "end": 2369.03,
+      "duration": 1.15,
+      "text": "F of"
+    },
+    {
+      "index": 708,
+      "start": 2369.04,
+      "end": 2372.39,
+      "duration": 3.35,
+      "text": "XY and I want to understand the change"
+    },
+    {
+      "index": 709,
+      "start": 2372.4,
+      "end": 2373.51,
+      "duration": 1.11,
+      "text": "in"
+    },
+    {
+      "index": 710,
+      "start": 2373.52,
+      "end": 2377.51,
+      "duration": 3.99,
+      "text": "F when I change X and Y A little bit"
+    },
+    {
+      "index": 711,
+      "start": 2377.52,
+      "end": 2379.91,
+      "duration": 2.39,
+      "text": "well there's the first order terms there"
+    },
+    {
+      "index": 712,
+      "start": 2379.92,
+      "end": 2381.63,
+      "duration": 1.71,
+      "text": "the linear terms that by now you should"
+    },
+    {
+      "index": 713,
+      "start": 2381.64,
+      "end": 2385.55,
+      "duration": 3.91,
+      "text": "know and be comfortable with that's F"
+    },
+    {
+      "index": 714,
+      "start": 2385.56,
+      "end": 2389.75,
+      "duration": 4.19,
+      "text": "subx times the change in"
+    },
+    {
+      "index": 715,
+      "start": 2389.76,
+      "end": 2393.43,
+      "duration": 3.67,
+      "text": "X then there's F sub y times the change"
+    },
+    {
+      "index": 716,
+      "start": 2393.44,
+      "end": 2395.109,
+      "duration": 1.669,
+      "text": "in"
+    },
+    {
+      "index": 717,
+      "start": 2395.119,
+      "end": 2398.51,
+      "duration": 3.391,
+      "text": "y okay that's the starting point but now"
+    },
+    {
+      "index": 718,
+      "start": 2398.52,
+      "end": 2402.03,
+      "duration": 3.51,
+      "text": "of course if X and Y sorry if we at a"
+    },
+    {
+      "index": 719,
+      "start": 2402.04,
+      "end": 2404.99,
+      "duration": 2.95,
+      "text": "critical point"
+    },
+    {
+      "index": 720,
+      "start": 2405.0,
+      "end": 2407.51,
+      "duration": 2.51,
+      "text": "then that's going to be zero at a"
+    },
+    {
+      "index": 721,
+      "start": 2407.52,
+      "end": 2409.309,
+      "duration": 1.789,
+      "text": "critical"
+    },
+    {
+      "index": 722,
+      "start": 2409.319,
+      "end": 2414.43,
+      "duration": 5.111,
+      "text": "point so that term actually goes"
+    },
+    {
+      "index": 723,
+      "start": 2417.03,
+      "end": 2417.04,
+      "duration": 0.01,
+      "text": "away and that's also zero at the"
+    },
+    {
+      "index": 724,
+      "start": 2417.04,
+      "end": 2418.349,
+      "duration": 1.309,
+      "text": "critical"
+    },
+    {
+      "index": 725,
+      "start": 2418.359,
+      "end": 2421.95,
+      "duration": 3.591,
+      "text": "point so that term also goes away okay"
+    },
+    {
+      "index": 726,
+      "start": 2421.96,
+      "end": 2423.87,
+      "duration": 1.91,
+      "text": "so linear approximation is really no"
+    },
+    {
+      "index": 727,
+      "start": 2423.88,
+      "end": 2425.95,
+      "duration": 2.07,
+      "text": "good we need more terms so what are the"
+    },
+    {
+      "index": 728,
+      "start": 2425.96,
+      "end": 2430.67,
+      "duration": 4.71,
+      "text": "next terms"
+    },
+    {
+      "index": 729,
+      "start": 2435.43,
+      "end": 2435.44,
+      "duration": 0.01,
+      "text": "well the next terms are quadratic terms"
+    },
+    {
+      "index": 730,
+      "start": 2435.44,
+      "end": 2437.109,
+      "duration": 1.669,
+      "text": "and"
+    },
+    {
+      "index": 731,
+      "start": 2437.119,
+      "end": 2439.47,
+      "duration": 2.351,
+      "text": "so I mean if you remember the tailor"
+    },
+    {
+      "index": 732,
+      "start": 2439.48,
+      "end": 2440.99,
+      "duration": 1.51,
+      "text": "formula for a function of a single"
+    },
+    {
+      "index": 733,
+      "start": 2441.0,
+      "end": 2444.03,
+      "duration": 3.03,
+      "text": "variable there was the derivative time x"
+    },
+    {
+      "index": 734,
+      "start": 2444.04,
+      "end": 2447.67,
+      "duration": 3.63,
+      "text": "- x0 plus 12 of the second derivative *"
+    },
+    {
+      "index": 735,
+      "start": 2447.68,
+      "end": 2450.75,
+      "duration": 3.07,
+      "text": "x - x0 2 and see this side here is"
+    },
+    {
+      "index": 736,
+      "start": 2450.76,
+      "end": 2452.79,
+      "duration": 2.03,
+      "text": "really tailor approximation in one"
+    },
+    {
+      "index": 737,
+      "start": 2452.8,
+      "end": 2455.43,
+      "duration": 2.63,
+      "text": "variable looking only at X but of course"
+    },
+    {
+      "index": 738,
+      "start": 2455.44,
+      "end": 2457.75,
+      "duration": 2.31,
+      "text": "we also have terms in involving Y and"
+    },
+    {
+      "index": 739,
+      "start": 2457.76,
+      "end": 2460.069,
+      "duration": 2.309,
+      "text": "terms involving simultaneously X and Y"
+    },
+    {
+      "index": 740,
+      "start": 2460.079,
+      "end": 2464.349,
+      "duration": 4.27,
+      "text": "and these terms are f subx y * changing"
+    },
+    {
+      "index": 741,
+      "start": 2464.359,
+      "end": 2466.23,
+      "duration": 1.871,
+      "text": "x * change in"
+    },
+    {
+      "index": 742,
+      "start": 2466.24,
+      "end": 2470.67,
+      "duration": 4.43,
+      "text": "y plus 12 of FY"
+    },
+    {
+      "index": 743,
+      "start": 2470.68,
+      "end": 2474.71,
+      "duration": 4.03,
+      "text": "y * Yus y0"
+    },
+    {
+      "index": 744,
+      "start": 2474.72,
+      "end": 2478.15,
+      "duration": 3.43,
+      "text": "2 there's no one2 in the middle because"
+    },
+    {
+      "index": 745,
+      "start": 2478.16,
+      "end": 2479.79,
+      "duration": 1.63,
+      "text": "in fact you would have two terms one for"
+    },
+    {
+      "index": 746,
+      "start": 2479.8,
+      "end": 2482.91,
+      "duration": 3.11,
+      "text": "X Y one for YX but they're the"
+    },
+    {
+      "index": 747,
+      "start": 2482.92,
+      "end": 2485.47,
+      "duration": 2.55,
+      "text": "same um and then if you want to continue"
+    },
+    {
+      "index": 748,
+      "start": 2485.48,
+      "end": 2487.51,
+      "duration": 2.03,
+      "text": "there's actually cubic terms involving"
+    },
+    {
+      "index": 749,
+      "start": 2487.52,
+      "end": 2489.71,
+      "duration": 2.19,
+      "text": "the third derivatives and so on but we"
+    },
+    {
+      "index": 750,
+      "start": 2489.72,
+      "end": 2492.309,
+      "duration": 2.589,
+      "text": "are not actually looking at"
+    },
+    {
+      "index": 751,
+      "start": 2492.319,
+      "end": 2498.109,
+      "duration": 5.79,
+      "text": "them and so now when we do this"
+    },
+    {
+      "index": 752,
+      "start": 2498.119,
+      "end": 2501.47,
+      "duration": 3.351,
+      "text": "approximation well the type of critical"
+    },
+    {
+      "index": 753,
+      "start": 2501.48,
+      "end": 2503.91,
+      "duration": 2.43,
+      "text": "point Remains the Same when we replace"
+    },
+    {
+      "index": 754,
+      "start": 2503.92,
+      "end": 2505.589,
+      "duration": 1.669,
+      "text": "the function by this"
+    },
+    {
+      "index": 755,
+      "start": 2505.599,
+      "end": 2508.79,
+      "duration": 3.191,
+      "text": "approximation and so we can apply the"
+    },
+    {
+      "index": 756,
+      "start": 2508.8,
+      "end": 2511.19,
+      "duration": 2.39,
+      "text": "argument that we used to deduce things"
+    },
+    {
+      "index": 757,
+      "start": 2511.2,
+      "end": 2513.55,
+      "duration": 2.35,
+      "text": "in the quadratic case in fact we can it"
+    },
+    {
+      "index": 758,
+      "start": 2513.56,
+      "end": 2515.27,
+      "duration": 1.71,
+      "text": "still works in the general case using"
+    },
+    {
+      "index": 759,
+      "start": 2515.28,
+      "end": 2530.91,
+      "duration": 15.63,
+      "text": "this approximation form"
+    },
+    {
+      "index": 760,
+      "start": 2533.589,
+      "end": 2533.599,
+      "duration": 0.01,
+      "text": "so the general"
+    },
+    {
+      "index": 761,
+      "start": 2533.599,
+      "end": 2536.03,
+      "duration": 2.431,
+      "text": "case"
+    },
+    {
+      "index": 762,
+      "start": 2536.04,
+      "end": 2544.79,
+      "duration": 8.75,
+      "text": "reduces to the quadratic"
+    },
+    {
+      "index": 763,
+      "start": 2546.829,
+      "end": 2546.839,
+      "duration": 0.01,
+      "text": "case and"
+    },
+    {
+      "index": 764,
+      "start": 2546.839,
+      "end": 2548.99,
+      "duration": 2.151,
+      "text": "now you see actually why well here you"
+    },
+    {
+      "index": 765,
+      "start": 2549.0,
+      "end": 2551.99,
+      "duration": 2.99,
+      "text": "see again how this"
+    },
+    {
+      "index": 766,
+      "start": 2552.0,
+      "end": 2554.91,
+      "duration": 2.91,
+      "text": "coefficient which we used to call Little"
+    },
+    {
+      "index": 767,
+      "start": 2554.92,
+      "end": 2560.309,
+      "duration": 5.389,
+      "text": "a is also 1 12 of capital A and same"
+    },
+    {
+      "index": 768,
+      "start": 2560.319,
+      "end": 2563.19,
+      "duration": 2.871,
+      "text": "here this coefficient is what we call"
+    },
+    {
+      "index": 769,
+      "start": 2563.2,
+      "end": 2565.27,
+      "duration": 2.07,
+      "text": "capital b or little B and this"
+    },
+    {
+      "index": 770,
+      "start": 2565.28,
+      "end": 2567.15,
+      "duration": 1.87,
+      "text": "coefficient here is what we called"
+    },
+    {
+      "index": 771,
+      "start": 2567.16,
+      "end": 2573.829,
+      "duration": 6.669,
+      "text": "little C or 12 of capital"
+    },
+    {
+      "index": 772,
+      "start": 2577.99,
+      "end": 2578.0,
+      "duration": 0.01,
+      "text": "c and then when you place things"
+    },
+    {
+      "index": 773,
+      "start": 2578.0,
+      "end": 2581.549,
+      "duration": 3.549,
+      "text": "into the various cases that we had here"
+    },
+    {
+      "index": 774,
+      "start": 2581.559,
+      "end": 2584.99,
+      "duration": 3.431,
+      "text": "you end up with a second derivative"
+    },
+    {
+      "index": 775,
+      "start": 2585.0,
+      "end": 2587.51,
+      "duration": 2.51,
+      "text": "test so what about the what about the"
+    },
+    {
+      "index": 776,
+      "start": 2587.52,
+      "end": 2590.309,
+      "duration": 2.789,
+      "text": "degenerate case why can't we just say"
+    },
+    {
+      "index": 777,
+      "start": 2590.319,
+      "end": 2591.47,
+      "duration": 1.151,
+      "text": "well it's going to be a degenerate"
+    },
+    {
+      "index": 778,
+      "start": 2591.48,
+      "end": 2592.43,
+      "duration": 0.95,
+      "text": "critical"
+    },
+    {
+      "index": 779,
+      "start": 2592.44,
+      "end": 2595.829,
+      "duration": 3.389,
+      "text": "point so the reason is that this"
+    },
+    {
+      "index": 780,
+      "start": 2595.839,
+      "end": 2599.19,
+      "duration": 3.351,
+      "text": "approximation formula is reasonable only"
+    },
+    {
+      "index": 781,
+      "start": 2599.2,
+      "end": 2601.95,
+      "duration": 2.75,
+      "text": "if the higher order terms are"
+    },
+    {
+      "index": 782,
+      "start": 2601.96,
+      "end": 2604.03,
+      "duration": 2.07,
+      "text": "negligible okay so in fact secretly"
+    },
+    {
+      "index": 783,
+      "start": 2604.04,
+      "end": 2606.349,
+      "duration": 2.309,
+      "text": "there's more terms this is only an"
+    },
+    {
+      "index": 784,
+      "start": 2606.359,
+      "end": 2608.069,
+      "duration": 1.71,
+      "text": "approximation there would be terms"
+    },
+    {
+      "index": 785,
+      "start": 2608.079,
+      "end": 2610.23,
+      "duration": 2.151,
+      "text": "involving third derivatives and maybe"
+    },
+    {
+      "index": 786,
+      "start": 2610.24,
+      "end": 2613.43,
+      "duration": 3.19,
+      "text": "even beyond that and so in the non"
+    },
+    {
+      "index": 787,
+      "start": 2613.44,
+      "end": 2615.47,
+      "duration": 2.03,
+      "text": "degenerate case they don't actually"
+    },
+    {
+      "index": 788,
+      "start": 2615.48,
+      "end": 2619.349,
+      "duration": 3.869,
+      "text": "matter because the shape of the function"
+    },
+    {
+      "index": 789,
+      "start": 2619.359,
+      "end": 2621.109,
+      "duration": 1.75,
+      "text": "the shape of the graph is actually"
+    },
+    {
+      "index": 790,
+      "start": 2621.119,
+      "end": 2623.91,
+      "duration": 2.791,
+      "text": "determined by the quadratic terms but in"
+    },
+    {
+      "index": 791,
+      "start": 2623.92,
+      "end": 2626.51,
+      "duration": 2.59,
+      "text": "the degenerate case see if I start with"
+    },
+    {
+      "index": 792,
+      "start": 2626.52,
+      "end": 2628.51,
+      "duration": 1.99,
+      "text": "this and I add something even very very"
+    },
+    {
+      "index": 793,
+      "start": 2628.52,
+      "end": 2631.589,
+      "duration": 3.069,
+      "text": "small along the y axis then that can"
+    },
+    {
+      "index": 794,
+      "start": 2631.599,
+      "end": 2633.95,
+      "duration": 2.351,
+      "text": "that can be enough to bend this valy"
+    },
+    {
+      "index": 795,
+      "start": 2633.96,
+      "end": 2636.71,
+      "duration": 2.75,
+      "text": "slightly up or slightly down and turn my"
+    },
+    {
+      "index": 796,
+      "start": 2636.72,
+      "end": 2639.15,
+      "duration": 2.43,
+      "text": "degenerate Point into either a minimum"
+    },
+    {
+      "index": 797,
+      "start": 2639.16,
+      "end": 2641.75,
+      "duration": 2.59,
+      "text": "or a SLE point and I won't be able to"
+    },
+    {
+      "index": 798,
+      "start": 2641.76,
+      "end": 2645.15,
+      "duration": 3.39,
+      "text": "tell until I go further in the list of"
+    },
+    {
+      "index": 799,
+      "start": 2645.16,
+      "end": 2649.39,
+      "duration": 4.23,
+      "text": "derivatives"
+    },
+    {
+      "index": 800,
+      "start": 2656.549,
+      "end": 2656.559,
+      "duration": 0.01,
+      "text": "case what actually"
+    },
+    {
+      "index": 801,
+      "start": 2656.559,
+      "end": 2664.99,
+      "duration": 8.431,
+      "text": "happens depends on the higher order"
+    },
+    {
+      "index": 802,
+      "start": 2681.39,
+      "end": 2681.4,
+      "duration": 0.01,
+      "text": "so we need to analyze things more"
+    },
+    {
+      "index": 803,
+      "start": 2681.4,
+      "end": 2683.03,
+      "duration": 1.63,
+      "text": "carefully well we are not going to"
+    },
+    {
+      "index": 804,
+      "start": 2683.04,
+      "end": 2685.23,
+      "duration": 2.19,
+      "text": "bother with that in this class so we'll"
+    },
+    {
+      "index": 805,
+      "start": 2685.24,
+      "end": 2687.95,
+      "duration": 2.71,
+      "text": "just say well we cannot"
+    },
+    {
+      "index": 806,
+      "start": 2687.96,
+      "end": 2691.39,
+      "duration": 3.43,
+      "text": "conclude"
+    },
+    {
+      "index": 807,
+      "start": 2693.75,
+      "end": 2693.76,
+      "duration": 0.01,
+      "text": "okay I mean you have to realize that in"
+    },
+    {
+      "index": 808,
+      "start": 2693.76,
+      "end": 2694.87,
+      "duration": 1.11,
+      "text": "real life you know you have to be"
+    },
+    {
+      "index": 809,
+      "start": 2694.88,
+      "end": 2697.47,
+      "duration": 2.59,
+      "text": "extremely unlucky for this quantity to"
+    },
+    {
+      "index": 810,
+      "start": 2697.48,
+      "end": 2700.75,
+      "duration": 3.27,
+      "text": "end up being exactly"
+    },
+    {
+      "index": 811,
+      "start": 2703.43,
+      "end": 2703.44,
+      "duration": 0.01,
+      "text": "zero well if that happens then what you"
+    },
+    {
+      "index": 812,
+      "start": 2703.44,
+      "end": 2705.19,
+      "duration": 1.75,
+      "text": "should do is maybe try by inspection see"
+    },
+    {
+      "index": 813,
+      "start": 2705.2,
+      "end": 2706.27,
+      "duration": 1.07,
+      "text": "if there's a good reason why the"
+    },
+    {
+      "index": 814,
+      "start": 2706.28,
+      "end": 2707.79,
+      "duration": 1.51,
+      "text": "function should always be positive or"
+    },
+    {
+      "index": 815,
+      "start": 2707.8,
+      "end": 2710.43,
+      "duration": 2.63,
+      "text": "always be negative or"
+    },
+    {
+      "index": 816,
+      "start": 2710.44,
+      "end": 2712.75,
+      "duration": 2.31,
+      "text": "something or you know plot it on a"
+    },
+    {
+      "index": 817,
+      "start": 2712.76,
+      "end": 2716.309,
+      "duration": 3.549,
+      "text": "computer and see what happens"
+    },
+    {
+      "index": 818,
+      "start": 2716.319,
+      "end": 2722.39,
+      "duration": 6.071,
+      "text": "um but otherwise we can't"
+    },
+    {
+      "index": 819,
+      "start": 2724.87,
+      "end": 2724.88,
+      "duration": 0.01,
+      "text": "conclude okay so let's"
+    },
+    {
+      "index": 820,
+      "start": 2724.88,
+      "end": 2727.349,
+      "duration": 2.469,
+      "text": "do"
+    },
+    {
+      "index": 821,
+      "start": 2727.359,
+      "end": 2729.23,
+      "duration": 1.871,
+      "text": "Let's do an"
+    },
+    {
+      "index": 822,
+      "start": 2729.24,
+      "end": 2731.349,
+      "duration": 2.109,
+      "text": "example uh so probably I should leave"
+    },
+    {
+      "index": 823,
+      "start": 2731.359,
+      "end": 2733.15,
+      "duration": 1.791,
+      "text": "this on so"
+    },
+    {
+      "index": 824,
+      "start": 2733.16,
+      "end": 2738.51,
+      "duration": 5.35,
+      "text": "that we still have the test with"
+    },
+    {
+      "index": 825,
+      "start": 2741.91,
+      "end": 2741.92,
+      "duration": 0.01,
+      "text": "us and instead okay so I'll do my"
+    },
+    {
+      "index": 826,
+      "start": 2741.92,
+      "end": 2754.87,
+      "duration": 12.95,
+      "text": "example"
+    },
+    {
+      "index": 827,
+      "start": 2784.79,
+      "end": 2784.8,
+      "duration": 0.01,
+      "text": "so just do an"
+    },
+    {
+      "index": 828,
+      "start": 2784.8,
+      "end": 2790.27,
+      "duration": 5.47,
+      "text": "example let's say I look at f of x y = x"
+    },
+    {
+      "index": 829,
+      "start": 2790.28,
+      "end": 2794.39,
+      "duration": 4.11,
+      "text": "+ y + 1 /x Y"
+    },
+    {
+      "index": 830,
+      "start": 2794.4,
+      "end": 2796.99,
+      "duration": 2.59,
+      "text": "where X and Y are positive so I'm"
+    },
+    {
+      "index": 831,
+      "start": 2797.0,
+      "end": 2799.589,
+      "duration": 2.589,
+      "text": "looking only at the first quadrant okay"
+    },
+    {
+      "index": 832,
+      "start": 2799.599,
+      "end": 2801.43,
+      "duration": 1.831,
+      "text": "I mean I'm doing this because I don't"
+    },
+    {
+      "index": 833,
+      "start": 2801.44,
+      "end": 2804.95,
+      "duration": 3.51,
+      "text": "want this denominator to become zero so"
+    },
+    {
+      "index": 834,
+      "start": 2804.96,
+      "end": 2806.51,
+      "duration": 1.55,
+      "text": "I'm just looking at that"
+    },
+    {
+      "index": 835,
+      "start": 2806.52,
+      "end": 2810.19,
+      "duration": 3.67,
+      "text": "situation so let's look first for so the"
+    },
+    {
+      "index": 836,
+      "start": 2810.2,
+      "end": 2813.71,
+      "duration": 3.51,
+      "text": "question will be what are the minimum"
+    },
+    {
+      "index": 837,
+      "start": 2813.72,
+      "end": 2818.19,
+      "duration": 4.47,
+      "text": "and the maximum of this function"
+    },
+    {
+      "index": 838,
+      "start": 2821.03,
+      "end": 2821.04,
+      "duration": 0.01,
+      "text": "so the first thing we should do to hand"
+    },
+    {
+      "index": 839,
+      "start": 2821.04,
+      "end": 2825.109,
+      "duration": 4.069,
+      "text": "to to answer this question is look for"
+    },
+    {
+      "index": 840,
+      "start": 2825.119,
+      "end": 2832.39,
+      "duration": 7.271,
+      "text": "critical points"
+    },
+    {
+      "index": 841,
+      "start": 2835.349,
+      "end": 2835.359,
+      "duration": 0.01,
+      "text": "okay so for that we have to compute the"
+    },
+    {
+      "index": 842,
+      "start": 2835.359,
+      "end": 2837.549,
+      "duration": 2.19,
+      "text": "first"
+    },
+    {
+      "index": 843,
+      "start": 2837.559,
+      "end": 2841.71,
+      "duration": 4.151,
+      "text": "derivatives okay so f subx"
+    },
+    {
+      "index": 844,
+      "start": 2843.87,
+      "end": 2843.88,
+      "duration": 0.01,
+      "text": "is"
+    },
+    {
+      "index": 845,
+      "start": 2843.88,
+      "end": 2848.349,
+      "duration": 4.469,
+      "text": "1 minus"
+    },
+    {
+      "index": 846,
+      "start": 2849.43,
+      "end": 2849.44,
+      "duration": 0.01,
+      "text": "one"
+    },
+    {
+      "index": 847,
+      "start": 2849.44,
+      "end": 2853.03,
+      "duration": 3.59,
+      "text": "over x^2"
+    },
+    {
+      "index": 848,
+      "start": 2853.04,
+      "end": 2856.39,
+      "duration": 3.35,
+      "text": "y okay take the derivative of 1 /x"
+    },
+    {
+      "index": 849,
+      "start": 2856.4,
+      "end": 2858.87,
+      "duration": 2.47,
+      "text": "that's 1/x^2"
+    },
+    {
+      "index": 850,
+      "start": 2858.88,
+      "end": 2862.75,
+      "duration": 3.87,
+      "text": "and we'll want to set that equal to"
+    },
+    {
+      "index": 851,
+      "start": 2862.76,
+      "end": 2869.91,
+      "duration": 7.15,
+      "text": "zero and F sub y is 1 - 1 /x y^ 2 and we"
+    },
+    {
+      "index": 852,
+      "start": 2869.92,
+      "end": 2873.15,
+      "duration": 3.23,
+      "text": "want to set that equal to"
+    },
+    {
+      "index": 853,
+      "start": 2875.349,
+      "end": 2875.359,
+      "duration": 0.01,
+      "text": "zero so what are the equations we have"
+    },
+    {
+      "index": 854,
+      "start": 2875.359,
+      "end": 2878.91,
+      "duration": 3.551,
+      "text": "to solve"
+    },
+    {
+      "index": 855,
+      "start": 2883.309,
+      "end": 2883.319,
+      "duration": 0.01,
+      "text": "well I guess x^2 y ="
+    },
+    {
+      "index": 856,
+      "start": 2883.319,
+      "end": 2886.069,
+      "duration": 2.75,
+      "text": "1 I mean if I get this you know if I"
+    },
+    {
+      "index": 857,
+      "start": 2886.079,
+      "end": 2888.79,
+      "duration": 2.711,
+      "text": "move this guy over here I get 1/ x^2 y ="
+    },
+    {
+      "index": 858,
+      "start": 2888.8,
+      "end": 2893.589,
+      "duration": 4.789,
+      "text": "1 that's X2 y = 1 and x y^2 equals"
+    },
+    {
+      "index": 859,
+      "start": 2893.599,
+      "end": 2897.549,
+      "duration": 3.95,
+      "text": "1 what do you get by comparing these"
+    },
+    {
+      "index": 860,
+      "start": 2897.559,
+      "end": 2901.91,
+      "duration": 4.351,
+      "text": "two well X and Y should both be okay so"
+    },
+    {
+      "index": 861,
+      "start": 2901.92,
+      "end": 2903.47,
+      "duration": 1.55,
+      "text": "yeah I agree with you that one and one"
+    },
+    {
+      "index": 862,
+      "start": 2903.48,
+      "end": 2905.95,
+      "duration": 2.47,
+      "text": "is a solution why is it the only one so"
+    },
+    {
+      "index": 863,
+      "start": 2905.96,
+      "end": 2907.95,
+      "duration": 1.99,
+      "text": "first if I divide this one by that one I"
+    },
+    {
+      "index": 864,
+      "start": 2907.96,
+      "end": 2911.27,
+      "duration": 3.31,
+      "text": "get X over yal 1 so that tells me xals"
+    },
+    {
+      "index": 865,
+      "start": 2911.28,
+      "end": 2915.51,
+      "duration": 4.23,
+      "text": "Y and then if xals y then if I put that"
+    },
+    {
+      "index": 866,
+      "start": 2915.52,
+      "end": 2920.19,
+      "duration": 4.67,
+      "text": "into here it will give me y cubal 1"
+    },
+    {
+      "index": 867,
+      "start": 2920.2,
+      "end": 2922.95,
+      "duration": 2.75,
+      "text": "which tells me yal one and therefore"
+    },
+    {
+      "index": 868,
+      "start": 2922.96,
+      "end": 2925.349,
+      "duration": 2.389,
+      "text": "xals 1 as"
+    },
+    {
+      "index": 869,
+      "start": 2925.359,
+      "end": 2927.47,
+      "duration": 2.111,
+      "text": "well okay"
+    },
+    {
+      "index": 870,
+      "start": 2927.48,
+      "end": 2930.19,
+      "duration": 2.71,
+      "text": "so there's only one"
+    },
+    {
+      "index": 871,
+      "start": 2930.2,
+      "end": 2933.309,
+      "duration": 3.109,
+      "text": "solution there's only one critical"
+    },
+    {
+      "index": 872,
+      "start": 2933.319,
+      "end": 2937.589,
+      "duration": 4.27,
+      "text": "point which is going to be one onea"
+    },
+    {
+      "index": 873,
+      "start": 2937.599,
+      "end": 2942.99,
+      "duration": 5.391,
+      "text": "one okay so"
+    },
+    {
+      "index": 874,
+      "start": 2943.0,
+      "end": 2948.069,
+      "duration": 5.069,
+      "text": "now here's where you do a bit of"
+    },
+    {
+      "index": 875,
+      "start": 2958.829,
+      "end": 2958.839,
+      "duration": 0.01,
+      "text": "point okay"
+    },
+    {
+      "index": 876,
+      "start": 2958.839,
+      "end": 2963.15,
+      "duration": 4.311,
+      "text": "I see some valid votes I see some okay I"
+    },
+    {
+      "index": 877,
+      "start": 2963.16,
+      "end": 2966.09,
+      "duration": 2.93,
+      "text": "see a lot of people answering for"
+    },
+    {
+      "index": 878,
+      "start": 2966.1,
+      "end": 2967.589,
+      "duration": 1.489,
+      "text": "[Music]"
+    },
+    {
+      "index": 879,
+      "start": 2967.599,
+      "end": 2971.39,
+      "duration": 3.791,
+      "text": "um that seems to suggest that maybe well"
+    },
+    {
+      "index": 880,
+      "start": 2971.4,
+      "end": 2972.589,
+      "duration": 1.189,
+      "text": "you haven't computed the second"
+    },
+    {
+      "index": 881,
+      "start": 2972.599,
+      "end": 2975.03,
+      "duration": 2.431,
+      "text": "derivative yet yes I see someone giving"
+    },
+    {
+      "index": 882,
+      "start": 2975.04,
+      "end": 2976.39,
+      "duration": 1.35,
+      "text": "the correct"
+    },
+    {
+      "index": 883,
+      "start": 2976.4,
+      "end": 2979.75,
+      "duration": 3.35,
+      "text": "answer uh I see some people not giving"
+    },
+    {
+      "index": 884,
+      "start": 2979.76,
+      "end": 2981.109,
+      "duration": 1.349,
+      "text": "quite the correct answer I see more and"
+    },
+    {
+      "index": 885,
+      "start": 2981.119,
+      "end": 2985.789,
+      "duration": 4.67,
+      "text": "more correct answers okay so let's"
+    },
+    {
+      "index": 886,
+      "start": 2985.799,
+      "end": 2988.23,
+      "duration": 2.431,
+      "text": "see to figure out what type of point it"
+    },
+    {
+      "index": 887,
+      "start": 2988.24,
+      "end": 2990.309,
+      "duration": 2.069,
+      "text": "is we should compute the second partial"
+    },
+    {
+      "index": 888,
+      "start": 2990.319,
+      "end": 2993.75,
+      "duration": 3.431,
+      "text": "derivatives okay so f"
+    },
+    {
+      "index": 889,
+      "start": 2993.76,
+      "end": 2997.51,
+      "duration": 3.75,
+      "text": "subxx is"
+    },
+    {
+      "index": 890,
+      "start": 2997.52,
+      "end": 2998.63,
+      "duration": 1.11,
+      "text": "what do we get when we take the"
+    },
+    {
+      "index": 891,
+      "start": 2998.64,
+      "end": 3003.829,
+      "duration": 5.189,
+      "text": "derivative of this with respect to"
+    },
+    {
+      "index": 892,
+      "start": 3010.03,
+      "end": 3010.04,
+      "duration": 0.01,
+      "text": "x 2 over X cubed y"
+    },
+    {
+      "index": 893,
+      "start": 3010.04,
+      "end": 3015.27,
+      "duration": 5.23,
+      "text": "okay so at our point a will be"
+    },
+    {
+      "index": 894,
+      "start": 3015.28,
+      "end": 3017.95,
+      "duration": 2.67,
+      "text": "two f subx"
+    },
+    {
+      "index": 895,
+      "start": 3017.96,
+      "end": 3020.309,
+      "duration": 2.349,
+      "text": "y will"
+    },
+    {
+      "index": 896,
+      "start": 3020.319,
+      "end": 3024.109,
+      "duration": 3.79,
+      "text": "be 1 / x^2 y^"
+    },
+    {
+      "index": 897,
+      "start": 3024.119,
+      "end": 3028.589,
+      "duration": 4.47,
+      "text": "2 so B will be"
+    },
+    {
+      "index": 898,
+      "start": 3028.599,
+      "end": 3035.47,
+      "duration": 6.871,
+      "text": "one and F sub y y is going to be one no"
+    },
+    {
+      "index": 899,
+      "start": 3035.48,
+      "end": 3039.15,
+      "duration": 3.67,
+      "text": "two over X Y"
+    },
+    {
+      "index": 900,
+      "start": 3039.16,
+      "end": 3043.19,
+      "duration": 4.03,
+      "text": "cubed so c will be 2 and so that tells"
+    },
+    {
+      "index": 901,
+      "start": 3043.2,
+      "end": 3050.03,
+      "duration": 6.83,
+      "text": "us well a c minus b^ 2 is 4 -"
+    },
+    {
+      "index": 902,
+      "start": 3050.04,
+      "end": 3051.99,
+      "duration": 1.95,
+      "text": "1 sorry I should probably use a"
+    },
+    {
+      "index": 903,
+      "start": 3052.0,
+      "end": 3054.43,
+      "duration": 2.43,
+      "text": "different Blackboard for"
+    },
+    {
+      "index": 904,
+      "start": 3054.44,
+      "end": 3061.549,
+      "duration": 7.109,
+      "text": "that"
+    },
+    {
+      "index": 905,
+      "start": 3066.63,
+      "end": 3066.64,
+      "duration": 0.01,
+      "text": "a c minus b ^ 2 is 2 * 2 - 1^ 2 is 3 is"
+    },
+    {
+      "index": 906,
+      "start": 3066.64,
+      "end": 3070.069,
+      "duration": 3.429,
+      "text": "positive that tells us we are either a"
+    },
+    {
+      "index": 907,
+      "start": 3070.079,
+      "end": 3072.39,
+      "duration": 2.311,
+      "text": "local minimum or a local"
+    },
+    {
+      "index": 908,
+      "start": 3072.4,
+      "end": 3075.789,
+      "duration": 3.389,
+      "text": "maximum and a is"
+    },
+    {
+      "index": 909,
+      "start": 3075.799,
+      "end": 3079.069,
+      "duration": 3.27,
+      "text": "positive so it's a local"
+    },
+    {
+      "index": 910,
+      "start": 3079.079,
+      "end": 3081.309,
+      "duration": 2.23,
+      "text": "minimum and in fact you can check it's"
+    },
+    {
+      "index": 911,
+      "start": 3081.319,
+      "end": 3084.349,
+      "duration": 3.03,
+      "text": "the global minimum what about the"
+    },
+    {
+      "index": 912,
+      "start": 3084.359,
+      "end": 3087.349,
+      "duration": 2.99,
+      "text": "maximum"
+    },
+    {
+      "index": 913,
+      "start": 3087.359,
+      "end": 3090.43,
+      "duration": 3.071,
+      "text": "well the maximum is not actually at a"
+    },
+    {
+      "index": 914,
+      "start": 3090.44,
+      "end": 3092.19,
+      "duration": 1.75,
+      "text": "critical point it's on the boundary or"
+    },
+    {
+      "index": 915,
+      "start": 3092.2,
+      "end": 3094.549,
+      "duration": 2.349,
+      "text": "at Infinity see so we have actually to"
+    },
+    {
+      "index": 916,
+      "start": 3094.559,
+      "end": 3097.71,
+      "duration": 3.151,
+      "text": "check what happens when X and Y go to"
+    },
+    {
+      "index": 917,
+      "start": 3097.72,
+      "end": 3099.589,
+      "duration": 1.869,
+      "text": "zero or go to Infinity well if that"
+    },
+    {
+      "index": 918,
+      "start": 3099.599,
+      "end": 3102.47,
+      "duration": 2.871,
+      "text": "happens if x or y goes to Infinity then"
+    },
+    {
+      "index": 919,
+      "start": 3102.48,
+      "end": 3105.27,
+      "duration": 2.79,
+      "text": "the function goes to Infinity also if x"
+    },
+    {
+      "index": 920,
+      "start": 3105.28,
+      "end": 3107.99,
+      "duration": 2.71,
+      "text": "or y goes to zero then one/ X Y goes to"
+    },
+    {
+      "index": 921,
+      "start": 3108.0,
+      "end": 3111.03,
+      "duration": 3.03,
+      "text": "Infinity so the"
+    },
+    {
+      "index": 922,
+      "start": 3111.04,
+      "end": 3114.069,
+      "duration": 3.029,
+      "text": "maximum well the function goes to"
+    },
+    {
+      "index": 923,
+      "start": 3114.079,
+      "end": 3116.19,
+      "duration": 2.111,
+      "text": "Infinity when"
+    },
+    {
+      "index": 924,
+      "start": 3116.2,
+      "end": 3120.23,
+      "duration": 4.03,
+      "text": "X goes to infinity or Y goes to infinity"
+    },
+    {
+      "index": 925,
+      "start": 3120.24,
+      "end": 3124.23,
+      "duration": 3.99,
+      "text": "or X and Y go to"
+    },
+    {
+      "index": 926,
+      "start": 3126.67,
+      "end": 3126.68,
+      "duration": 0.01,
+      "text": "zero so it's not at a critical point"
+    },
+    {
+      "index": 927,
+      "start": 3126.68,
+      "end": 3129.069,
+      "duration": 2.389,
+      "text": "okay so in general we have to check both"
+    },
+    {
+      "index": 928,
+      "start": 3129.079,
+      "end": 3131.349,
+      "duration": 2.27,
+      "text": "the critical points and the boundaries"
+    },
+    {
+      "index": 929,
+      "start": 3131.359,
+      "end": 3133.069,
+      "duration": 1.71,
+      "text": "to decide what"
+    },
+    {
+      "index": 930,
+      "start": 3133.079,
+      "end": 3136.789,
+      "duration": 3.71,
+      "text": "happens okay the end have a nice"
+    },
+    {
+      "index": 931,
+      "start": 3136.799,
+      "end": 3139.799,
+      "duration": 3.0,
+      "text": "weekend"
+    }
+  ],
+  "course": {
+    "category": "Mathematics",
+    "title": "Multivariable Calculus",
+    "source_url": "https://www.youtube.com/playlist?list=PL4C4C8A7D06566F38"
+  }
+}

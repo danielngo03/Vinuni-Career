@@ -48,7 +48,9 @@ Parse JD content into a structured job requirement profile using Gemini 3.1 Flas
 ## Scope
 
 - Enterprise-side JD creation and management.
+- Student CV analysis into skill profiles for matching.
 - LLM JD parsing.
+- LLM CV parsing.
 - JSON validation and edit flow.
 - Local JSON storage.
 - Rule-based `all_students_for_job` matching.
@@ -58,7 +60,6 @@ Parse JD content into a structured job requirement profile using Gemini 3.1 Flas
 
 ## Non-Goals
 
-- Student CV parsing.
 - Course recommendations.
 - Interview RAG.
 - Admin dashboards.

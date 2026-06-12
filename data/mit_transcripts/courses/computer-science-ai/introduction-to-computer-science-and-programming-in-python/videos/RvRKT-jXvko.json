@@ -1,0 +1,6857 @@
+{
+  "video": {
+    "id": "RvRKT-jXvko",
+    "title": "5. Tuples, Lists, Aliasing, Mutability, and Cloning",
+    "url": "https://www.youtube.com/watch?v=RvRKT-jXvko",
+    "channel": "MIT OpenCourseWare",
+    "duration": 2487,
+    "language": "en"
+  },
+  "segment_count": 977,
+  "segments": [
+    {
+      "index": 0,
+      "start": 2.55,
+      "end": 2.56,
+      "duration": 0.01,
+      "text": "the following content is provided under"
+    },
+    {
+      "index": 1,
+      "start": 2.56,
+      "end": 5.309,
+      "duration": 2.749,
+      "text": "a Creative Commons license your support"
+    },
+    {
+      "index": 2,
+      "start": 5.319,
+      "end": 7.429,
+      "duration": 2.11,
+      "text": "will help MIT open courseware continue"
+    },
+    {
+      "index": 3,
+      "start": 7.439,
+      "end": 9.39,
+      "duration": 1.951,
+      "text": "to offer highquality educational"
+    },
+    {
+      "index": 4,
+      "start": 9.4,
+      "end": 12.549,
+      "duration": 3.149,
+      "text": "resources for free to make a donation or"
+    },
+    {
+      "index": 5,
+      "start": 12.559,
+      "end": 14.509,
+      "duration": 1.95,
+      "text": "view additional materials from hundreds"
+    },
+    {
+      "index": 6,
+      "start": 14.519,
+      "end": 17.83,
+      "duration": 3.311,
+      "text": "of MIT courses visit MIT opencourseware"
+    },
+    {
+      "index": 7,
+      "start": 17.84,
+      "end": 30.71,
+      "duration": 12.87,
+      "text": "at ocw.mit.edu"
+    },
+    {
+      "index": 8,
+      "start": 32.51,
+      "end": 32.52,
+      "duration": 0.01,
+      "text": "quick quick recap of what we did last"
+    },
+    {
+      "index": 9,
+      "start": 32.52,
+      "end": 35.43,
+      "duration": 2.91,
+      "text": "time so last time we introduced um this"
+    },
+    {
+      "index": 10,
+      "start": 35.44,
+      "end": 37.47,
+      "duration": 2.03,
+      "text": "idea of decomposition and abstraction"
+    },
+    {
+      "index": 11,
+      "start": 37.48,
+      "end": 38.95,
+      "duration": 1.47,
+      "text": "and we started putting that into our"
+    },
+    {
+      "index": 12,
+      "start": 38.96,
+      "end": 40.95,
+      "duration": 1.99,
+      "text": "programs these were sort of high level"
+    },
+    {
+      "index": 13,
+      "start": 40.96,
+      "end": 43.229,
+      "duration": 2.269,
+      "text": "Concepts and we achieved them using"
+    },
+    {
+      "index": 14,
+      "start": 43.239,
+      "end": 45.709,
+      "duration": 2.47,
+      "text": "these concrete things called functions"
+    },
+    {
+      "index": 15,
+      "start": 45.719,
+      "end": 47.43,
+      "duration": 1.711,
+      "text": "in our programs and functions allowed us"
+    },
+    {
+      "index": 16,
+      "start": 47.44,
+      "end": 50.99,
+      "duration": 3.55,
+      "text": "to create code that was coherent that"
+    },
+    {
+      "index": 17,
+      "start": 51.0,
+      "end": 53.63,
+      "duration": 2.63,
+      "text": "was that had some structure to it and"
+    },
+    {
+      "index": 18,
+      "start": 53.64,
+      "end": 56.15,
+      "duration": 2.51,
+      "text": "was reusable"
+    },
+    {
+      "index": 19,
+      "start": 56.16,
+      "end": 58.869,
+      "duration": 2.709,
+      "text": "okay and from now on in problem sets and"
+    },
+    {
+      "index": 20,
+      "start": 58.879,
+      "end": 60.15,
+      "duration": 1.271,
+      "text": "in lectures I'm going to be using"
+    },
+    {
+      "index": 21,
+      "start": 60.16,
+      "end": 62.15,
+      "duration": 1.99,
+      "text": "functions a lot so make sure that you"
+    },
+    {
+      "index": 22,
+      "start": 62.16,
+      "end": 64.509,
+      "duration": 2.349,
+      "text": "understand how they work uh and all of"
+    },
+    {
+      "index": 23,
+      "start": 64.519,
+      "end": 67.03,
+      "duration": 2.511,
+      "text": "those details so today we're going to"
+    },
+    {
+      "index": 24,
+      "start": 67.04,
+      "end": 70.03,
+      "duration": 2.99,
+      "text": "introduce two new data types and they're"
+    },
+    {
+      "index": 25,
+      "start": 70.04,
+      "end": 71.469,
+      "duration": 1.429,
+      "text": "called compound data types because"
+    },
+    {
+      "index": 26,
+      "start": 71.479,
+      "end": 72.71,
+      "duration": 1.231,
+      "text": "they're actually data types that are"
+    },
+    {
+      "index": 27,
+      "start": 72.72,
+      "end": 76.23,
+      "duration": 3.51,
+      "text": "made up of other data types particularly"
+    },
+    {
+      "index": 28,
+      "start": 76.24,
+      "end": 79.23,
+      "duration": 2.99,
+      "text": "ins floats booleans and strings and"
+    },
+    {
+      "index": 29,
+      "start": 79.24,
+      "end": 80.83,
+      "duration": 1.59,
+      "text": "actually not just these but other data"
+    },
+    {
+      "index": 30,
+      "start": 80.84,
+      "end": 82.71,
+      "duration": 1.87,
+      "text": "types as well so that's why they're"
+    },
+    {
+      "index": 31,
+      "start": 82.72,
+      "end": 84.35,
+      "duration": 1.63,
+      "text": "called compound data types so we're"
+    },
+    {
+      "index": 32,
+      "start": 84.36,
+      "end": 85.469,
+      "duration": 1.109,
+      "text": "going to look"
+    },
+    {
+      "index": 33,
+      "start": 85.479,
+      "end": 88.27,
+      "duration": 2.791,
+      "text": "at a new data type called a tupal and a"
+    },
+    {
+      "index": 34,
+      "start": 88.28,
+      "end": 90.71,
+      "duration": 2.43,
+      "text": "new dat data type called a list"
+    },
+    {
+      "index": 35,
+      "start": 90.72,
+      "end": 92.23,
+      "duration": 1.51,
+      "text": "and then we're going to talk about these"
+    },
+    {
+      "index": 36,
+      "start": 92.24,
+      "end": 94.99,
+      "duration": 2.75,
+      "text": "ideas that come about with uh"
+    },
+    {
+      "index": 37,
+      "start": 95.0,
+      "end": 97.27,
+      "duration": 2.27,
+      "text": "specifically with"
+    },
+    {
+      "index": 38,
+      "start": 97.28,
+      "end": 99.87,
+      "duration": 2.59,
+      "text": "lists all right so let's go right into"
+    },
+    {
+      "index": 39,
+      "start": 99.88,
+      "end": 103.59,
+      "duration": 3.71,
+      "text": "tupal okay so if you recall strings"
+    },
+    {
+      "index": 40,
+      "start": 103.6,
+      "end": 106.83,
+      "duration": 3.23,
+      "text": "strings were sequences of characters"
+    },
+    {
+      "index": 41,
+      "start": 106.84,
+      "end": 109.149,
+      "duration": 2.309,
+      "text": "okay tupal are going to be similar to"
+    },
+    {
+      "index": 42,
+      "start": 109.159,
+      "end": 110.99,
+      "duration": 1.831,
+      "text": "strings in that they're going to be"
+    },
+    {
+      "index": 43,
+      "start": 111.0,
+      "end": 113.95,
+      "duration": 2.95,
+      "text": "sequences of something except that tupal"
+    },
+    {
+      "index": 44,
+      "start": 113.96,
+      "end": 115.389,
+      "duration": 1.429,
+      "text": "aren't just sequences of characters they"
+    },
+    {
+      "index": 45,
+      "start": 115.399,
+      "end": 117.55,
+      "duration": 2.151,
+      "text": "can be sequences of of anything they're"
+    },
+    {
+      "index": 46,
+      "start": 117.56,
+      "end": 119.95,
+      "duration": 2.39,
+      "text": "a collection of data where that data can"
+    },
+    {
+      "index": 47,
+      "start": 119.96,
+      "end": 122.23,
+      "duration": 2.27,
+      "text": "be of any"
+    },
+    {
+      "index": 48,
+      "start": 122.24,
+      "end": 126.789,
+      "duration": 4.549,
+      "text": "type okay so the so a tupal can contain"
+    },
+    {
+      "index": 49,
+      "start": 126.799,
+      "end": 129.19,
+      "duration": 2.391,
+      "text": "elements that are integers floats"
+    },
+    {
+      "index": 50,
+      "start": 129.2,
+      "end": 131.949,
+      "duration": 2.749,
+      "text": "strings and so"
+    },
+    {
+      "index": 51,
+      "start": 131.959,
+      "end": 135.309,
+      "duration": 3.35,
+      "text": "on tupal are immutable and if you recall"
+    },
+    {
+      "index": 52,
+      "start": 135.319,
+      "end": 137.11,
+      "duration": 1.791,
+      "text": "we talked about this word a little bit"
+    },
+    {
+      "index": 53,
+      "start": 137.12,
+      "end": 139.15,
+      "duration": 2.03,
+      "text": "uh when we talked about strings so that"
+    },
+    {
+      "index": 54,
+      "start": 139.16,
+      "end": 141.47,
+      "duration": 2.31,
+      "text": "means once you create a tupal object you"
+    },
+    {
+      "index": 55,
+      "start": 141.48,
+      "end": 143.63,
+      "duration": 2.15,
+      "text": "can't modify it so just like when you"
+    },
+    {
+      "index": 56,
+      "start": 143.64,
+      "end": 145.55,
+      "duration": 1.91,
+      "text": "created a string object you weren't able"
+    },
+    {
+      "index": 57,
+      "start": 145.56,
+      "end": 150.19,
+      "duration": 4.63,
+      "text": "you were not a allowed to modify it"
+    },
+    {
+      "index": 58,
+      "start": 150.2,
+      "end": 152.39,
+      "duration": 2.19,
+      "text": "so the way we create tuples are with"
+    },
+    {
+      "index": 59,
+      "start": 152.4,
+      "end": 154.949,
+      "duration": 2.549,
+      "text": "these open and close"
+    },
+    {
+      "index": 60,
+      "start": 154.959,
+      "end": 156.83,
+      "duration": 1.871,
+      "text": "parentheses you this shouldn't be"
+    },
+    {
+      "index": 61,
+      "start": 156.84,
+      "end": 159.07,
+      "duration": 2.23,
+      "text": "confused with a function because there's"
+    },
+    {
+      "index": 62,
+      "start": 159.08,
+      "end": 161.63,
+      "duration": 2.55,
+      "text": "nothing there's no there's no this isn't"
+    },
+    {
+      "index": 63,
+      "start": 161.64,
+      "end": 163.83,
+      "duration": 2.19,
+      "text": "a function call it's just how you"
+    },
+    {
+      "index": 64,
+      "start": 163.84,
+      "end": 165.99,
+      "duration": 2.15,
+      "text": "represent a tupal for a function call"
+    },
+    {
+      "index": 65,
+      "start": 166.0,
+      "end": 167.27,
+      "duration": 1.27,
+      "text": "you'd have something right before the"
+    },
+    {
+      "index": 66,
+      "start": 167.28,
+      "end": 170.11,
+      "duration": 2.83,
+      "text": "parenthesis okay this is just how we"
+    },
+    {
+      "index": 67,
+      "start": 170.12,
+      "end": 172.03,
+      "duration": 1.91,
+      "text": "chose to represent a"
+    },
+    {
+      "index": 68,
+      "start": 172.04,
+      "end": 174.35,
+      "duration": 2.31,
+      "text": "tupal and just a plain open and closed"
+    },
+    {
+      "index": 69,
+      "start": 174.36,
+      "end": 176.309,
+      "duration": 1.949,
+      "text": "parentheses represents an empty tupal so"
+    },
+    {
+      "index": 70,
+      "start": 176.319,
+      "end": 178.55,
+      "duration": 2.231,
+      "text": "it's of length zero there's nothing in"
+    },
+    {
+      "index": 71,
+      "start": 178.56,
+      "end": 180.39,
+      "duration": 1.83,
+      "text": "it whoops"
+    },
+    {
+      "index": 72,
+      "start": 180.4,
+      "end": 182.75,
+      "duration": 2.35,
+      "text": "you can create a tupal that contains"
+    },
+    {
+      "index": 73,
+      "start": 182.76,
+      "end": 185.55,
+      "duration": 2.79,
+      "text": "some elements by separating each element"
+    },
+    {
+      "index": 74,
+      "start": 185.56,
+      "end": 189.91,
+      "duration": 4.35,
+      "text": "with a comma so in this case this is a"
+    },
+    {
+      "index": 75,
+      "start": 189.92,
+      "end": 191.949,
+      "duration": 2.029,
+      "text": "tuple that can be accessed with a"
+    },
+    {
+      "index": 76,
+      "start": 191.959,
+      "end": 194.55,
+      "duration": 2.591,
+      "text": "variable T that contains three elements"
+    },
+    {
+      "index": 77,
+      "start": 194.56,
+      "end": 196.67,
+      "duration": 2.11,
+      "text": "the first is an integer the second in a"
+    },
+    {
+      "index": 78,
+      "start": 196.68,
+      "end": 199.309,
+      "duration": 2.629,
+      "text": "is a string and the third is another"
+    },
+    {
+      "index": 79,
+      "start": 199.319,
+      "end": 202.47,
+      "duration": 3.151,
+      "text": "integer much like strings we can index"
+    },
+    {
+      "index": 80,
+      "start": 202.48,
+      "end": 205.71,
+      "duration": 3.23,
+      "text": "into tupal to find out values at uh"
+    },
+    {
+      "index": 81,
+      "start": 205.72,
+      "end": 209.149,
+      "duration": 3.429,
+      "text": "particular indices so you read this as T"
+    },
+    {
+      "index": 82,
+      "start": 209.159,
+      "end": 212.55,
+      "duration": 3.391,
+      "text": "at position Z so the Tuple represented"
+    },
+    {
+      "index": 83,
+      "start": 212.56,
+      "end": 214.949,
+      "duration": 2.389,
+      "text": "by uh variable T at position Z will"
+    },
+    {
+      "index": 84,
+      "start": 214.959,
+      "end": 217.429,
+      "duration": 2.47,
+      "text": "evaluate to two because again we start"
+    },
+    {
+      "index": 85,
+      "start": 217.439,
+      "end": 219.789,
+      "duration": 2.35,
+      "text": "counting from zero in computer science"
+    },
+    {
+      "index": 86,
+      "start": 219.799,
+      "end": 222.55,
+      "duration": 2.751,
+      "text": "so that brings us gives us the first"
+    },
+    {
+      "index": 87,
+      "start": 222.56,
+      "end": 224.589,
+      "duration": 2.029,
+      "text": "element just like strings we can"
+    },
+    {
+      "index": 88,
+      "start": 224.599,
+      "end": 226.789,
+      "duration": 2.19,
+      "text": "concatenate TS together that just means"
+    },
+    {
+      "index": 89,
+      "start": 226.799,
+      "end": 229.27,
+      "duration": 2.471,
+      "text": "add them together so if we add these two"
+    },
+    {
+      "index": 90,
+      "start": 229.28,
+      "end": 231.509,
+      "duration": 2.229,
+      "text": "tupal together we just get back one"
+    },
+    {
+      "index": 91,
+      "start": 231.519,
+      "end": 235.149,
+      "duration": 3.63,
+      "text": "larger Tuple that's just those two uh"
+    },
+    {
+      "index": 92,
+      "start": 235.159,
+      "end": 237.71,
+      "duration": 2.551,
+      "text": "the elements of all of those tupal just"
+    },
+    {
+      "index": 93,
+      "start": 237.72,
+      "end": 240.83,
+      "duration": 3.11,
+      "text": "put together in one larger tupal"
+    },
+    {
+      "index": 94,
+      "start": 240.84,
+      "end": 242.309,
+      "duration": 1.469,
+      "text": "again much like strings we can slice"
+    },
+    {
+      "index": 95,
+      "start": 242.319,
+      "end": 243.27,
+      "duration": 0.951,
+      "text": "into"
+    },
+    {
+      "index": 96,
+      "start": 243.28,
+      "end": 245.069,
+      "duration": 1.789,
+      "text": "tupes so"
+    },
+    {
+      "index": 97,
+      "start": 245.079,
+      "end": 249.509,
+      "duration": 4.43,
+      "text": "T slice from index one until index two"
+    },
+    {
+      "index": 98,
+      "start": 249.519,
+      "end": 254.11,
+      "duration": 4.591,
+      "text": "remember we go until this stop minus one"
+    },
+    {
+      "index": 99,
+      "start": 254.12,
+      "end": 257.43,
+      "duration": 3.31,
+      "text": "so this only gives us one element inside"
+    },
+    {
+      "index": 100,
+      "start": 257.44,
+      "end": 258.509,
+      "duration": 1.069,
+      "text": "the"
+    },
+    {
+      "index": 101,
+      "start": 258.519,
+      "end": 261.55,
+      "duration": 3.031,
+      "text": "tupal and this is not a mistake this"
+    },
+    {
+      "index": 102,
+      "start": 261.56,
+      "end": 263.99,
+      "duration": 2.43,
+      "text": "extra comma here actually represents a"
+    },
+    {
+      "index": 103,
+      "start": 264.0,
+      "end": 267.15,
+      "duration": 3.15,
+      "text": "tupal object okay if I didn't have this"
+    },
+    {
+      "index": 104,
+      "start": 267.16,
+      "end": 270.71,
+      "duration": 3.55,
+      "text": "comma here then this would just be a"
+    },
+    {
+      "index": 105,
+      "start": 270.72,
+      "end": 273.71,
+      "duration": 2.99,
+      "text": "string the parentheses would just would"
+    },
+    {
+      "index": 106,
+      "start": 273.72,
+      "end": 275.189,
+      "duration": 1.469,
+      "text": "wouldn't really make any difference but"
+    },
+    {
+      "index": 107,
+      "start": 275.199,
+      "end": 278.27,
+      "duration": 3.071,
+      "text": "the comma here makes it clear to python"
+    },
+    {
+      "index": 108,
+      "start": 278.28,
+      "end": 279.71,
+      "duration": 1.43,
+      "text": "that this is a tupal with only one"
+    },
+    {
+      "index": 109,
+      "start": 279.72,
+      "end": 281.55,
+      "duration": 1.83,
+      "text": "element in"
+    },
+    {
+      "index": 110,
+      "start": 281.56,
+      "end": 284.27,
+      "duration": 2.71,
+      "text": "it we can slice even further to get a"
+    },
+    {
+      "index": 111,
+      "start": 284.28,
+      "end": 286.11,
+      "duration": 1.83,
+      "text": "tupal with two"
+    },
+    {
+      "index": 112,
+      "start": 286.12,
+      "end": 288.27,
+      "duration": 2.15,
+      "text": "elements and we can do the usual"
+    },
+    {
+      "index": 113,
+      "start": 288.28,
+      "end": 289.87,
+      "duration": 1.59,
+      "text": "operations like get the length of a"
+    },
+    {
+      "index": 114,
+      "start": 289.88,
+      "end": 291.59,
+      "duration": 1.71,
+      "text": "tupal which says how many elements are"
+    },
+    {
+      "index": 115,
+      "start": 291.6,
+      "end": 296.51,
+      "duration": 4.91,
+      "text": "in my Tuple and Len of this T would"
+    },
+    {
+      "index": 116,
+      "start": 296.52,
+      "end": 297.83,
+      "duration": 1.31,
+      "text": "evaluate to three because there are"
+    },
+    {
+      "index": 117,
+      "start": 297.84,
+      "end": 299.87,
+      "duration": 2.03,
+      "text": "three elements inside the tall each"
+    },
+    {
+      "index": 118,
+      "start": 299.88,
+      "end": 302.55,
+      "duration": 2.67,
+      "text": "element again separated by the"
+    },
+    {
+      "index": 119,
+      "start": 302.56,
+      "end": 305.07,
+      "duration": 2.51,
+      "text": "comma and just like strings if we try to"
+    },
+    {
+      "index": 120,
+      "start": 305.08,
+      "end": 307.55,
+      "duration": 2.47,
+      "text": "change a value inside the Tuple in this"
+    },
+    {
+      "index": 121,
+      "start": 307.56,
+      "end": 309.67,
+      "duration": 2.11,
+      "text": "case I wanted to try to change the value"
+    },
+    {
+      "index": 122,
+      "start": 309.68,
+      "end": 314.87,
+      "duration": 5.19,
+      "text": "of of the um the second the second"
+    },
+    {
+      "index": 123,
+      "start": 314.88,
+      "end": 317.909,
+      "duration": 3.029,
+      "text": "element to four python doesn't allow"
+    },
+    {
+      "index": 124,
+      "start": 317.919,
+      "end": 322.11,
+      "duration": 4.191,
+      "text": "that because tupal are"
+    },
+    {
+      "index": 125,
+      "start": 324.23,
+      "end": 324.24,
+      "duration": 0.01,
+      "text": "immutable okay so why would we want to"
+    },
+    {
+      "index": 126,
+      "start": 324.24,
+      "end": 326.309,
+      "duration": 2.069,
+      "text": "use tups tups are actually useful in a"
+    },
+    {
+      "index": 127,
+      "start": 326.319,
+      "end": 330.35,
+      "duration": 4.031,
+      "text": "couple of different uh scenarios"
+    },
+    {
+      "index": 128,
+      "start": 330.36,
+      "end": 332.67,
+      "duration": 2.31,
+      "text": "so recall a few lectures ago we looked"
+    },
+    {
+      "index": 129,
+      "start": 332.68,
+      "end": 334.79,
+      "duration": 2.11,
+      "text": "at this code where we tried to swap the"
+    },
+    {
+      "index": 130,
+      "start": 334.8,
+      "end": 337.27,
+      "duration": 2.47,
+      "text": "values of variables X and Y and this"
+    },
+    {
+      "index": 131,
+      "start": 337.28,
+      "end": 339.629,
+      "duration": 2.349,
+      "text": "first code actually didn't work because"
+    },
+    {
+      "index": 132,
+      "start": 339.639,
+      "end": 342.95,
+      "duration": 3.311,
+      "text": "you're overwriting the value for x right"
+    },
+    {
+      "index": 133,
+      "start": 342.96,
+      "end": 344.51,
+      "duration": 1.55,
+      "text": "so instead what we ended up doing was"
+    },
+    {
+      "index": 134,
+      "start": 344.52,
+      "end": 346.35,
+      "duration": 1.83,
+      "text": "creating this temporary variable where"
+    },
+    {
+      "index": 135,
+      "start": 346.36,
+      "end": 347.99,
+      "duration": 1.63,
+      "text": "we stored the value of x and then we"
+    },
+    {
+      "index": 136,
+      "start": 348.0,
+      "end": 349.909,
+      "duration": 1.909,
+      "text": "overwrote it and then we used the"
+    },
+    {
+      "index": 137,
+      "start": 349.919,
+      "end": 352.15,
+      "duration": 2.231,
+      "text": "temporary variable Well turns out this"
+    },
+    {
+      "index": 138,
+      "start": 352.16,
+      "end": 354.11,
+      "duration": 1.95,
+      "text": "thre liner code right here can actually"
+    },
+    {
+      "index": 139,
+      "start": 354.12,
+      "end": 356.07,
+      "duration": 1.95,
+      "text": "be written in one line using"
+    },
+    {
+      "index": 140,
+      "start": 356.08,
+      "end": 359.029,
+      "duration": 2.949,
+      "text": "tupal so you say x comma Y is equal to Y"
+    },
+    {
+      "index": 141,
+      "start": 359.039,
+      "end": 360.83,
+      "duration": 1.791,
+      "text": "comma X"
+    },
+    {
+      "index": 142,
+      "start": 360.84,
+      "end": 363.43,
+      "duration": 2.59,
+      "text": "and python goes in and says what's the"
+    },
+    {
+      "index": 143,
+      "start": 363.44,
+      "end": 367.07,
+      "duration": 3.63,
+      "text": "value of y and assigns it to X and then"
+    },
+    {
+      "index": 144,
+      "start": 367.08,
+      "end": 369.189,
+      "duration": 2.109,
+      "text": "what's the value of x and assigns it to"
+    },
+    {
+      "index": 145,
+      "start": 369.199,
+      "end": 374.11,
+      "duration": 4.911,
+      "text": "Y"
+    },
+    {
+      "index": 146,
+      "start": 376.589,
+      "end": 376.599,
+      "duration": 0.01,
+      "text": "okay extending on that we can actually"
+    },
+    {
+      "index": 147,
+      "start": 376.599,
+      "end": 379.51,
+      "duration": 2.911,
+      "text": "use tuples to return more than one value"
+    },
+    {
+      "index": 148,
+      "start": 379.52,
+      "end": 381.27,
+      "duration": 1.75,
+      "text": "from a"
+    },
+    {
+      "index": 149,
+      "start": 381.28,
+      "end": 383.95,
+      "duration": 2.67,
+      "text": "function so functions you're only"
+    },
+    {
+      "index": 150,
+      "start": 383.96,
+      "end": 387.51,
+      "duration": 3.55,
+      "text": "allowed to return one object okay so"
+    },
+    {
+      "index": 151,
+      "start": 387.52,
+      "end": 388.67,
+      "duration": 1.15,
+      "text": "you're not allowed to return more than"
+    },
+    {
+      "index": 152,
+      "start": 388.68,
+      "end": 391.629,
+      "duration": 2.949,
+      "text": "one object however if we use an a tuple"
+    },
+    {
+      "index": 153,
+      "start": 391.639,
+      "end": 393.909,
+      "duration": 2.27,
+      "text": "object and if that's the thing that we"
+    },
+    {
+      "index": 154,
+      "start": 393.919,
+      "end": 396.99,
+      "duration": 3.071,
+      "text": "return we can actually get around this"
+    },
+    {
+      "index": 155,
+      "start": 397.0,
+      "end": 401.27,
+      "duration": 4.27,
+      "text": "sort of rule by putting in as many"
+    },
+    {
+      "index": 156,
+      "start": 401.28,
+      "end": 403.87,
+      "duration": 2.59,
+      "text": "values as we want inside the tupo object"
+    },
+    {
+      "index": 157,
+      "start": 403.88,
+      "end": 405.749,
+      "duration": 1.869,
+      "text": "and then we can return as many values as"
+    },
+    {
+      "index": 158,
+      "start": 405.759,
+      "end": 406.629,
+      "duration": 0.87,
+      "text": "we'd"
+    },
+    {
+      "index": 159,
+      "start": 406.639,
+      "end": 409.189,
+      "duration": 2.55,
+      "text": "like so in this specific example I'm"
+    },
+    {
+      "index": 160,
+      "start": 409.199,
+      "end": 410.909,
+      "duration": 1.71,
+      "text": "trying to calculate the quotient and"
+    },
+    {
+      "index": 161,
+      "start": 410.919,
+      "end": 414.15,
+      "duration": 3.231,
+      "text": "remainder when we divide X by y so this"
+    },
+    {
+      "index": 162,
+      "start": 414.16,
+      "end": 416.67,
+      "duration": 2.51,
+      "text": "is a function definition here and down"
+    },
+    {
+      "index": 163,
+      "start": 416.68,
+      "end": 419.589,
+      "duration": 2.909,
+      "text": "here I'm calling the function with four"
+    },
+    {
+      "index": 164,
+      "start": 419.599,
+      "end": 420.469,
+      "duration": 0.87,
+      "text": "and"
+    },
+    {
+      "index": 165,
+      "start": 420.479,
+      "end": 423.589,
+      "duration": 3.11,
+      "text": "five so when I make the function call"
+    },
+    {
+      "index": 166,
+      "start": 423.599,
+      "end": 425.909,
+      "duration": 2.31,
+      "text": "oops four gets assigned"
+    },
+    {
+      "index": 167,
+      "start": 425.919,
+      "end": 431.27,
+      "duration": 5.351,
+      "text": "to X and five gets assigned to Y right"
+    },
+    {
+      "index": 168,
+      "start": 431.28,
+      "end": 433.71,
+      "duration": 2.43,
+      "text": "so then Q is going to"
+    },
+    {
+      "index": 169,
+      "start": 433.72,
+      "end": 437.55,
+      "duration": 3.83,
+      "text": "be the integer division when X is is"
+    },
+    {
+      "index": 170,
+      "start": 437.56,
+      "end": 438.869,
+      "duration": 1.309,
+      "text": "divided by"
+    },
+    {
+      "index": 171,
+      "start": 438.879,
+      "end": 441.79,
+      "duration": 2.911,
+      "text": "Y and this double slash just means it's"
+    },
+    {
+      "index": 172,
+      "start": 441.8,
+      "end": 443.15,
+      "duration": 1.35,
+      "text": "it's like casting their result to an"
+    },
+    {
+      "index": 173,
+      "start": 443.16,
+      "end": 446.469,
+      "duration": 3.309,
+      "text": "integer it says divide it keep the whole"
+    },
+    {
+      "index": 174,
+      "start": 446.479,
+      "end": 448.629,
+      "duration": 2.15,
+      "text": "number part and just delete everything"
+    },
+    {
+      "index": 175,
+      "start": 448.639,
+      "end": 452.35,
+      "duration": 3.711,
+      "text": "else U be uh beyond the decimal point so"
+    },
+    {
+      "index": 176,
+      "start": 452.36,
+      "end": 453.99,
+      "duration": 1.63,
+      "text": "when you divide four by five this Q is"
+    },
+    {
+      "index": 177,
+      "start": 454.0,
+      "end": 455.869,
+      "duration": 1.869,
+      "text": "actually going to be zero it's zero"
+    },
+    {
+      "index": 178,
+      "start": 455.879,
+      "end": 457.11,
+      "duration": 1.231,
+      "text": "point something and I don't care about"
+    },
+    {
+      "index": 179,
+      "start": 457.12,
+      "end": 458.71,
+      "duration": 1.59,
+      "text": "the point"
+    },
+    {
+      "index": 180,
+      "start": 458.72,
+      "end": 461.23,
+      "duration": 2.51,
+      "text": "something and then the remainder is just"
+    },
+    {
+      "index": 181,
+      "start": 461.24,
+      "end": 463.51,
+      "duration": 2.27,
+      "text": "using the percent operator so when I"
+    },
+    {
+      "index": 182,
+      "start": 463.52,
+      "end": 466.149,
+      "duration": 2.629,
+      "text": "divide four by five the the remainder is"
+    },
+    {
+      "index": 183,
+      "start": 466.159,
+      "end": 468.83,
+      "duration": 2.671,
+      "text": "going to be four and notice that I'm"
+    },
+    {
+      "index": 184,
+      "start": 468.84,
+      "end": 470.99,
+      "duration": 2.15,
+      "text": "going to be returning q and R which are"
+    },
+    {
+      "index": 185,
+      "start": 471.0,
+      "end": 472.67,
+      "duration": 1.67,
+      "text": "these two values that I calculated"
+    },
+    {
+      "index": 186,
+      "start": 472.68,
+      "end": 475.029,
+      "duration": 2.349,
+      "text": "inside my function and I'm returning"
+    },
+    {
+      "index": 187,
+      "start": 475.039,
+      "end": 477.189,
+      "duration": 2.15,
+      "text": "them in the context of this"
+    },
+    {
+      "index": 188,
+      "start": 477.199,
+      "end": 479.71,
+      "duration": 2.511,
+      "text": "Tuple right so I'm only returning one"
+    },
+    {
+      "index": 189,
+      "start": 479.72,
+      "end": 481.189,
+      "duration": 1.469,
+      "text": "object which is a tuple it just so"
+    },
+    {
+      "index": 190,
+      "start": 481.199,
+      "end": 483.51,
+      "duration": 2.311,
+      "text": "happens that I'm populating that object"
+    },
+    {
+      "index": 191,
+      "start": 483.52,
+      "end": 487.309,
+      "duration": 3.789,
+      "text": "with a few a few different values"
+    },
+    {
+      "index": 192,
+      "start": 487.319,
+      "end": 489.95,
+      "duration": 2.631,
+      "text": "okay so when I return When the function"
+    },
+    {
+      "index": 193,
+      "start": 489.96,
+      "end": 492.589,
+      "duration": 2.629,
+      "text": "returns here this is going to say 0"
+    },
+    {
+      "index": 194,
+      "start": 492.599,
+      "end": 495.149,
+      "duration": 2.55,
+      "text": "comma 4 that's the twole it's going to"
+    },
+    {
+      "index": 195,
+      "start": 495.159,
+      "end": 497.909,
+      "duration": 2.75,
+      "text": "return right Q is going to be zero and R"
+    },
+    {
+      "index": 196,
+      "start": 497.919,
+      "end": 500.469,
+      "duration": 2.55,
+      "text": "is going to be four so then this line"
+    },
+    {
+      "index": 197,
+      "start": 500.479,
+      "end": 504.55,
+      "duration": 4.071,
+      "text": "here quote REM equals 04 is basically"
+    },
+    {
+      "index": 198,
+      "start": 504.56,
+      "end": 506.99,
+      "duration": 2.43,
+      "text": "this little it's sort of like what we"
+    },
+    {
+      "index": 199,
+      "start": 507.0,
+      "end": 509.83,
+      "duration": 2.83,
+      "text": "did up here so it assigns quote to four"
+    },
+    {
+      "index": 200,
+      "start": 509.84,
+      "end": 513.269,
+      "duration": 3.429,
+      "text": "quot sorry quote to zero and REM to"
+    },
+    {
+      "index": 201,
+      "start": 513.279,
+      "end": 515.829,
+      "duration": 2.55,
+      "text": "four okay so we can use tles this is"
+    },
+    {
+      "index": 202,
+      "start": 515.839,
+      "end": 518.63,
+      "duration": 2.791,
+      "text": "very useful we can use them to return"
+    },
+    {
+      "index": 203,
+      "start": 518.64,
+      "end": 521.149,
+      "duration": 2.509,
+      "text": "more than one value from a"
+    },
+    {
+      "index": 204,
+      "start": 521.159,
+      "end": 524.509,
+      "duration": 3.35,
+      "text": "function so tup are great might seem a"
+    },
+    {
+      "index": 205,
+      "start": 524.519,
+      "end": 526.11,
+      "duration": 1.591,
+      "text": "little bit confusing at first but"
+    },
+    {
+      "index": 206,
+      "start": 526.12,
+      "end": 527.829,
+      "duration": 1.709,
+      "text": "they're actually pretty useful because"
+    },
+    {
+      "index": 207,
+      "start": 527.839,
+      "end": 530.79,
+      "duration": 2.951,
+      "text": "they hold collections of data so here I"
+    },
+    {
+      "index": 208,
+      "start": 530.8,
+      "end": 532.79,
+      "duration": 1.99,
+      "text": "wrote a"
+    },
+    {
+      "index": 209,
+      "start": 532.8,
+      "end": 535.43,
+      "duration": 2.63,
+      "text": "function which I can apply to any set of"
+    },
+    {
+      "index": 210,
+      "start": 535.44,
+      "end": 538.15,
+      "duration": 2.71,
+      "text": "data okay and I'll explain what this"
+    },
+    {
+      "index": 211,
+      "start": 538.16,
+      "end": 539.47,
+      "duration": 1.31,
+      "text": "function does and then we can apply it"
+    },
+    {
+      "index": 212,
+      "start": 539.48,
+      "end": 540.71,
+      "duration": 1.23,
+      "text": "to some data and you can see that you"
+    },
+    {
+      "index": 213,
+      "start": 540.72,
+      "end": 543.23,
+      "duration": 2.51,
+      "text": "can extract some very basic information"
+    },
+    {
+      "index": 214,
+      "start": 543.24,
+      "end": 545.069,
+      "duration": 1.829,
+      "text": "from whatever set of data that you"
+    },
+    {
+      "index": 215,
+      "start": 545.079,
+      "end": 546.03,
+      "duration": 0.951,
+      "text": "happen to"
+    },
+    {
+      "index": 216,
+      "start": 546.04,
+      "end": 548.509,
+      "duration": 2.469,
+      "text": "collect so here's a function called get"
+    },
+    {
+      "index": 217,
+      "start": 548.519,
+      "end": 550.59,
+      "duration": 2.071,
+      "text": "data and it does all of this stuff in"
+    },
+    {
+      "index": 218,
+      "start": 550.6,
+      "end": 553.35,
+      "duration": 2.75,
+      "text": "here and in the actual code associated"
+    },
+    {
+      "index": 219,
+      "start": 553.36,
+      "end": 555.75,
+      "duration": 2.39,
+      "text": "with the lecture I actually said what"
+    },
+    {
+      "index": 220,
+      "start": 555.76,
+      "end": 558.15,
+      "duration": 2.39,
+      "text": "the condition on a tuple was so it has"
+    },
+    {
+      "index": 221,
+      "start": 558.16,
+      "end": 561.15,
+      "duration": 2.99,
+      "text": "to be a tuple of a certain um that that"
+    },
+    {
+      "index": 222,
+      "start": 561.16,
+      "end": 562.63,
+      "duration": 1.47,
+      "text": "looks a certain"
+    },
+    {
+      "index": 223,
+      "start": 562.64,
+      "end": 565.15,
+      "duration": 2.51,
+      "text": "way and this is the way that it has to"
+    },
+    {
+      "index": 224,
+      "start": 565.16,
+      "end": 567.509,
+      "duration": 2.349,
+      "text": "look so it's one"
+    },
+    {
+      "index": 225,
+      "start": 567.519,
+      "end": 570.59,
+      "duration": 3.071,
+      "text": "Tuple the outer Square the outer uh"
+    },
+    {
+      "index": 226,
+      "start": 570.6,
+      "end": 572.47,
+      "duration": 1.87,
+      "text": "parentheses out here represent the fact"
+    },
+    {
+      "index": 227,
+      "start": 572.48,
+      "end": 573.829,
+      "duration": 1.349,
+      "text": "that it's a"
+    },
+    {
+      "index": 228,
+      "start": 573.839,
+      "end": 576.79,
+      "duration": 2.951,
+      "text": "tupal and the elements of this tupal are"
+    },
+    {
+      "index": 229,
+      "start": 576.8,
+      "end": 579.79,
+      "duration": 2.99,
+      "text": "actually other tupal right so the first"
+    },
+    {
+      "index": 230,
+      "start": 579.8,
+      "end": 581.269,
+      "duration": 1.469,
+      "text": "element's a tupal object the second"
+    },
+    {
+      "index": 231,
+      "start": 581.279,
+      "end": 582.71,
+      "duration": 1.431,
+      "text": "element is a tupal object and third"
+    },
+    {
+      "index": 232,
+      "start": 582.72,
+      "end": 585.949,
+      "duration": 3.229,
+      "text": "one's a tuple object and so"
+    },
+    {
+      "index": 233,
+      "start": 585.959,
+      "end": 589.55,
+      "duration": 3.591,
+      "text": "on and each one of these inner tle"
+    },
+    {
+      "index": 234,
+      "start": 589.56,
+      "end": 591.71,
+      "duration": 2.15,
+      "text": "objects are actually going to contain"
+    },
+    {
+      "index": 235,
+      "start": 591.72,
+      "end": 593.59,
+      "duration": 1.87,
+      "text": "two elements the first being an integer"
+    },
+    {
+      "index": 236,
+      "start": 593.6,
+      "end": 595.71,
+      "duration": 2.11,
+      "text": "and the second being a string okay so"
+    },
+    {
+      "index": 237,
+      "start": 595.72,
+      "end": 597.55,
+      "duration": 1.83,
+      "text": "that's sort of the precondition that"
+    },
+    {
+      "index": 238,
+      "start": 597.56,
+      "end": 599.67,
+      "duration": 2.11,
+      "text": "this function assumes"
+    },
+    {
+      "index": 239,
+      "start": 599.68,
+      "end": 603.35,
+      "duration": 3.67,
+      "text": "on a tuple before it can before it it it"
+    },
+    {
+      "index": 240,
+      "start": 603.36,
+      "end": 605.509,
+      "duration": 2.149,
+      "text": "actually it can"
+    },
+    {
+      "index": 241,
+      "start": 605.519,
+      "end": 608.87,
+      "duration": 3.351,
+      "text": "work all right so given a tupal that"
+    },
+    {
+      "index": 242,
+      "start": 608.88,
+      "end": 610.949,
+      "duration": 2.069,
+      "text": "looks like that what's the function"
+    },
+    {
+      "index": 243,
+      "start": 610.959,
+      "end": 613.43,
+      "duration": 2.471,
+      "text": "going to"
+    },
+    {
+      "index": 244,
+      "start": 617.15,
+      "end": 617.16,
+      "duration": 0.01,
+      "text": "do it's first creating two empty tupal"
+    },
+    {
+      "index": 245,
+      "start": 617.16,
+      "end": 619.15,
+      "duration": 1.99,
+      "text": "one is called nums and one is called"
+    },
+    {
+      "index": 246,
+      "start": 619.16,
+      "end": 621.63,
+      "duration": 2.47,
+      "text": "words and then there's a for Loop and"
+    },
+    {
+      "index": 247,
+      "start": 621.64,
+      "end": 623.79,
+      "duration": 2.15,
+      "text": "notice here the for Loop is going to"
+    },
+    {
+      "index": 248,
+      "start": 623.8,
+      "end": 626.67,
+      "duration": 2.87,
+      "text": "iterate over every element inside the"
+    },
+    {
+      "index": 249,
+      "start": 626.68,
+      "end": 628.91,
+      "duration": 2.23,
+      "text": "tupal remember in strings when we were"
+    },
+    {
+      "index": 250,
+      "start": 628.92,
+      "end": 630.87,
+      "duration": 1.95,
+      "text": "able to use for Loops that iterated over"
+    },
+    {
+      "index": 251,
+      "start": 630.88,
+      "end": 632.47,
+      "duration": 1.59,
+      "text": "the characters directly as opposed to"
+    },
+    {
+      "index": 252,
+      "start": 632.48,
+      "end": 634.75,
+      "duration": 2.27,
+      "text": "over the indices where we're doing the"
+    },
+    {
+      "index": 253,
+      "start": 634.76,
+      "end": 636.79,
+      "duration": 2.03,
+      "text": "same sort of thing here instead of"
+    },
+    {
+      "index": 254,
+      "start": 636.8,
+      "end": 638.269,
+      "duration": 1.469,
+      "text": "iterating over the indices we're going"
+    },
+    {
+      "index": 255,
+      "start": 638.279,
+      "end": 641.11,
+      "duration": 2.831,
+      "text": "to iterate over the tupal object at each"
+    },
+    {
+      "index": 256,
+      "start": 641.12,
+      "end": 644.389,
+      "duration": 3.269,
+      "text": "position okay so first time through the"
+    },
+    {
+      "index": 257,
+      "start": 644.399,
+      "end": 648.35,
+      "duration": 3.951,
+      "text": "loop T here is going to be this first"
+    },
+    {
+      "index": 258,
+      "start": 648.36,
+      "end": 650.629,
+      "duration": 2.269,
+      "text": "Tuple the second time through the loop T"
+    },
+    {
+      "index": 259,
+      "start": 650.639,
+      "end": 652.15,
+      "duration": 1.511,
+      "text": "is going to be this Tuple and the third"
+    },
+    {
+      "index": 260,
+      "start": 652.16,
+      "end": 655.75,
+      "duration": 3.59,
+      "text": "time it's going to be this exact twole"
+    },
+    {
+      "index": 261,
+      "start": 655.76,
+      "end": 658.71,
+      "duration": 2.95,
+      "text": "object okay so each time through the"
+    },
+    {
+      "index": 262,
+      "start": 658.72,
+      "end": 660.91,
+      "duration": 2.19,
+      "text": "loop what I'm doing is I'm going to have"
+    },
+    {
+      "index": 263,
+      "start": 660.92,
+      "end": 664.03,
+      "duration": 3.11,
+      "text": "this nums tupal that I'm going to keep"
+    },
+    {
+      "index": 264,
+      "start": 664.04,
+      "end": 665.47,
+      "duration": 1.43,
+      "text": "adding to and each time I'm going to"
+    },
+    {
+      "index": 265,
+      "start": 665.48,
+      "end": 667.31,
+      "duration": 1.83,
+      "text": "create a new object and reassign it to"
+    },
+    {
+      "index": 266,
+      "start": 667.32,
+      "end": 668.829,
+      "duration": 1.509,
+      "text": "this variable"
+    },
+    {
+      "index": 267,
+      "start": 668.839,
+      "end": 671.23,
+      "duration": 2.391,
+      "text": "nums and each time through the loop I'm"
+    },
+    {
+      "index": 268,
+      "start": 671.24,
+      "end": 673.269,
+      "duration": 2.029,
+      "text": "looking at what the previous value of"
+    },
+    {
+      "index": 269,
+      "start": 673.279,
+      "end": 676.59,
+      "duration": 3.311,
+      "text": "nums was so what was my previous"
+    },
+    {
+      "index": 270,
+      "start": 676.6,
+      "end": 679.71,
+      "duration": 3.11,
+      "text": "tupal and I'm going to add it with this"
+    },
+    {
+      "index": 271,
+      "start": 679.72,
+      "end": 681.91,
+      "duration": 2.19,
+      "text": "Singleton tupal so it's a tupal of one"
+    },
+    {
+      "index": 272,
+      "start": 681.92,
+      "end": 685.31,
+      "duration": 3.39,
+      "text": "character or one"
+    },
+    {
+      "index": 273,
+      "start": 687.829,
+      "end": 687.839,
+      "duration": 0.01,
+      "text": "element this element being T at position"
+    },
+    {
+      "index": 274,
+      "start": 687.839,
+      "end": 690.15,
+      "duration": 2.311,
+      "text": "zero so you have to sort wrap your mind"
+    },
+    {
+      "index": 275,
+      "start": 690.16,
+      "end": 691.829,
+      "duration": 1.669,
+      "text": "wrap wrap your mind around how this is"
+    },
+    {
+      "index": 276,
+      "start": 691.839,
+      "end": 695.629,
+      "duration": 3.79,
+      "text": "working so if T is going to be this tle"
+    },
+    {
+      "index": 277,
+      "start": 695.639,
+      "end": 698.47,
+      "duration": 2.831,
+      "text": "element right here then T at position"
+    },
+    {
+      "index": 278,
+      "start": 698.48,
+      "end": 701.269,
+      "duration": 2.789,
+      "text": "zero is going to be this blue bar here"
+    },
+    {
+      "index": 279,
+      "start": 701.279,
+      "end": 702.949,
+      "duration": 1.67,
+      "text": "so it represents the integer portion of"
+    },
+    {
+      "index": 280,
+      "start": 702.959,
+      "end": 706.269,
+      "duration": 3.31,
+      "text": "the Tuple okay so as we're going through"
+    },
+    {
+      "index": 281,
+      "start": 706.279,
+      "end": 708.75,
+      "duration": 2.471,
+      "text": "the loop this nums is going to get"
+    },
+    {
+      "index": 282,
+      "start": 708.76,
+      "end": 711.71,
+      "duration": 2.95,
+      "text": "populated with all of the integers from"
+    },
+    {
+      "index": 283,
+      "start": 711.72,
+      "end": 715.67,
+      "duration": 3.95,
+      "text": "every one of my Tuple inside Tuple"
+    },
+    {
+      "index": 284,
+      "start": 717.71,
+      "end": 717.72,
+      "duration": 0.01,
+      "text": "objects so that's basically what this"
+    },
+    {
+      "index": 285,
+      "start": 717.72,
+      "end": 721.829,
+      "duration": 4.109,
+      "text": "line here is doing"
+    },
+    {
+      "index": 286,
+      "start": 723.71,
+      "end": 723.72,
+      "duration": 0.01,
+      "text": "at the same time I'm also populating"
+    },
+    {
+      "index": 287,
+      "start": 723.72,
+      "end": 724.87,
+      "duration": 1.15,
+      "text": "this"
+    },
+    {
+      "index": 288,
+      "start": 724.88,
+      "end": 728.11,
+      "duration": 3.23,
+      "text": "words tupal and the word stupo is a"
+    },
+    {
+      "index": 289,
+      "start": 728.12,
+      "end": 730.269,
+      "duration": 2.149,
+      "text": "little bit different because I'm not"
+    },
+    {
+      "index": 290,
+      "start": 730.279,
+      "end": 732.509,
+      "duration": 2.23,
+      "text": "adding every single one of these string"
+    },
+    {
+      "index": 291,
+      "start": 732.519,
+      "end": 735.31,
+      "duration": 2.791,
+      "text": "objects so T position one being the"
+    },
+    {
+      "index": 292,
+      "start": 735.32,
+      "end": 737.71,
+      "duration": 2.39,
+      "text": "string part of the inner tupal I'm"
+    },
+    {
+      "index": 293,
+      "start": 737.72,
+      "end": 738.79,
+      "duration": 1.07,
+      "text": "actually"
+    },
+    {
+      "index": 294,
+      "start": 738.8,
+      "end": 741.389,
+      "duration": 2.589,
+      "text": "adding the string part only if it's not"
+    },
+    {
+      "index": 295,
+      "start": 741.399,
+      "end": 743.35,
+      "duration": 1.951,
+      "text": "already in my words"
+    },
+    {
+      "index": 296,
+      "start": 743.36,
+      "end": 746.389,
+      "duration": 3.029,
+      "text": "list okay so here I'm essentially"
+    },
+    {
+      "index": 297,
+      "start": 746.399,
+      "end": 748.629,
+      "duration": 2.23,
+      "text": "grabbing all of the unique strings from"
+    },
+    {
+      "index": 298,
+      "start": 748.639,
+      "end": 752.47,
+      "duration": 3.831,
+      "text": "my list"
+    },
+    {
+      "index": 299,
+      "start": 754.629,
+      "end": 754.639,
+      "duration": 0.01,
+      "text": "these last sort of three lines three"
+    },
+    {
+      "index": 300,
+      "start": 754.639,
+      "end": 756.71,
+      "duration": 2.071,
+      "text": "four lines here just do a little bit of"
+    },
+    {
+      "index": 301,
+      "start": 756.72,
+      "end": 759.55,
+      "duration": 2.83,
+      "text": "arithmetic on it saying okay now I have"
+    },
+    {
+      "index": 302,
+      "start": 759.56,
+      "end": 762.03,
+      "duration": 2.47,
+      "text": "my all of the numbers here what's the"
+    },
+    {
+      "index": 303,
+      "start": 762.04,
+      "end": 763.67,
+      "duration": 1.63,
+      "text": "minimum out of all of these and then"
+    },
+    {
+      "index": 304,
+      "start": 763.68,
+      "end": 766.35,
+      "duration": 2.67,
+      "text": "what's the maximum out of all of these"
+    },
+    {
+      "index": 305,
+      "start": 766.36,
+      "end": 769.03,
+      "duration": 2.67,
+      "text": "and then this unique words variable"
+    },
+    {
+      "index": 306,
+      "start": 769.04,
+      "end": 771.389,
+      "duration": 2.349,
+      "text": "tells me how many unique words do I have"
+    },
+    {
+      "index": 307,
+      "start": 771.399,
+      "end": 773.31,
+      "duration": 1.911,
+      "text": "in my original"
+    },
+    {
+      "index": 308,
+      "start": 773.32,
+      "end": 776.509,
+      "duration": 3.189,
+      "text": "tubal so this feels sort of generic so"
+    },
+    {
+      "index": 309,
+      "start": 776.519,
+      "end": 779.75,
+      "duration": 3.231,
+      "text": "let's let's let's run it on some data"
+    },
+    {
+      "index": 310,
+      "start": 779.76,
+      "end": 781.43,
+      "duration": 1.67,
+      "text": "so here I have"
+    },
+    {
+      "index": 311,
+      "start": 781.44,
+      "end": 785.03,
+      "duration": 3.59,
+      "text": "it I tested it on some test data and"
+    },
+    {
+      "index": 312,
+      "start": 785.04,
+      "end": 788.91,
+      "duration": 3.87,
+      "text": "then I got some actual data okay and"
+    },
+    {
+      "index": 313,
+      "start": 788.92,
+      "end": 790.269,
+      "duration": 1.349,
+      "text": "this actual data that I wanted to"
+    },
+    {
+      "index": 314,
+      "start": 790.279,
+      "end": 793.389,
+      "duration": 3.11,
+      "text": "analyze was Taylor Swift"
+    },
+    {
+      "index": 315,
+      "start": 793.399,
+      "end": 796.31,
+      "duration": 2.911,
+      "text": "data and"
+    },
+    {
+      "index": 316,
+      "start": 796.32,
+      "end": 798.35,
+      "duration": 2.03,
+      "text": "representing the integer portion of the"
+    },
+    {
+      "index": 317,
+      "start": 798.36,
+      "end": 801.15,
+      "duration": 2.79,
+      "text": "tupal representing a year and the string"
+    },
+    {
+      "index": 318,
+      "start": 801.16,
+      "end": 803.15,
+      "duration": 1.99,
+      "text": "portion of the tupal"
+    },
+    {
+      "index": 319,
+      "start": 803.16,
+      "end": 805.79,
+      "duration": 2.63,
+      "text": "representing the um the person who she"
+    },
+    {
+      "index": 320,
+      "start": 805.8,
+      "end": 810.43,
+      "duration": 4.63,
+      "text": "wrote a song about that year okay"
+    },
+    {
+      "index": 321,
+      "start": 810.44,
+      "end": 812.269,
+      "duration": 1.829,
+      "text": "so some real world data that we're"
+    },
+    {
+      "index": 322,
+      "start": 812.279,
+      "end": 815.71,
+      "duration": 3.431,
+      "text": "working with here um very important that"
+    },
+    {
+      "index": 323,
+      "start": 815.72,
+      "end": 819.069,
+      "duration": 3.349,
+      "text": "we know this this information okay so"
+    },
+    {
+      "index": 324,
+      "start": 819.079,
+      "end": 821.949,
+      "duration": 2.87,
+      "text": "with this data I can run it I can plug"
+    },
+    {
+      "index": 325,
+      "start": 821.959,
+      "end": 825.31,
+      "duration": 3.351,
+      "text": "it into my this function that I wrote up"
+    },
+    {
+      "index": 326,
+      "start": 825.32,
+      "end": 827.47,
+      "duration": 2.15,
+      "text": "here and I'm going to actually comment"
+    },
+    {
+      "index": 327,
+      "start": 827.48,
+      "end": 830.87,
+      "duration": 3.39,
+      "text": "this out so it doesn't get"
+    },
+    {
+      "index": 328,
+      "start": 839.71,
+      "end": 839.72,
+      "duration": 0.01,
+      "text": "it this is the part where I'm calling my"
+    },
+    {
+      "index": 329,
+      "start": 839.72,
+      "end": 842.189,
+      "duration": 2.469,
+      "text": "function I'm calling it with this data"
+    },
+    {
+      "index": 330,
+      "start": 842.199,
+      "end": 846.35,
+      "duration": 4.151,
+      "text": "here t-swift being this Tuple of"
+    },
+    {
+      "index": 331,
+      "start": 846.36,
+      "end": 849.749,
+      "duration": 3.389,
+      "text": "tupes and what I get back is up here"
+    },
+    {
+      "index": 332,
+      "start": 849.759,
+      "end": 853.629,
+      "duration": 3.87,
+      "text": "line 38 is the return from the function"
+    },
+    {
+      "index": 333,
+      "start": 853.639,
+      "end": 854.949,
+      "duration": 1.31,
+      "text": "being a large"
+    },
+    {
+      "index": 334,
+      "start": 854.959,
+      "end": 857.43,
+      "duration": 2.471,
+      "text": "Tuple and that large tupal I'm then"
+    },
+    {
+      "index": 335,
+      "start": 857.44,
+      "end": 859.749,
+      "duration": 2.309,
+      "text": "assigning it to my own Tuple in my"
+    },
+    {
+      "index": 336,
+      "start": 859.759,
+      "end": 861.91,
+      "duration": 2.151,
+      "text": "program and then I'm just writing out"
+    },
+    {
+      "index": 337,
+      "start": 861.92,
+      "end": 865.15,
+      "duration": 3.23,
+      "text": "printing out some statement here okay so"
+    },
+    {
+      "index": 338,
+      "start": 865.16,
+      "end": 866.91,
+      "duration": 1.75,
+      "text": "I'm getting the minimum year the maximum"
+    },
+    {
+      "index": 339,
+      "start": 866.92,
+      "end": 869.79,
+      "duration": 2.87,
+      "text": "year and then the number of people so I"
+    },
+    {
+      "index": 340,
+      "start": 869.8,
+      "end": 871.59,
+      "duration": 1.79,
+      "text": "can show you that it works if I replace"
+    },
+    {
+      "index": 341,
+      "start": 871.6,
+      "end": 873.509,
+      "duration": 1.909,
+      "text": "one of these names with another one that"
+    },
+    {
+      "index": 342,
+      "start": 873.519,
+      "end": 875.71,
+      "duration": 2.191,
+      "text": "I already have in here so instead of"
+    },
+    {
+      "index": 343,
+      "start": 875.72,
+      "end": 877.269,
+      "duration": 1.549,
+      "text": "writing a song about five people she"
+    },
+    {
+      "index": 344,
+      "start": 877.279,
+      "end": 878.629,
+      "duration": 1.35,
+      "text": "would have wrote a song about four"
+    },
+    {
+      "index": 345,
+      "start": 878.639,
+      "end": 885.03,
+      "duration": 6.391,
+      "text": "people yay it worked"
+    },
+    {
+      "index": 346,
+      "start": 887.23,
+      "end": 887.24,
+      "duration": 0.01,
+      "text": "okay"
+    },
+    {
+      "index": 347,
+      "start": 887.24,
+      "end": 890.03,
+      "duration": 2.79,
+      "text": "okay so so that's"
+    },
+    {
+      "index": 348,
+      "start": 890.04,
+      "end": 893.11,
+      "duration": 3.07,
+      "text": "tupes and remember or recall keep in"
+    },
+    {
+      "index": 349,
+      "start": 893.12,
+      "end": 895.35,
+      "duration": 2.23,
+      "text": "mind tupes were immutable now we're"
+    },
+    {
+      "index": 350,
+      "start": 895.36,
+      "end": 896.79,
+      "duration": 1.43,
+      "text": "going to look at a very very similar"
+    },
+    {
+      "index": 351,
+      "start": 896.8,
+      "end": 900.03,
+      "duration": 3.23,
+      "text": "data structure to tupes called list"
+    },
+    {
+      "index": 352,
+      "start": 900.04,
+      "end": 901.79,
+      "duration": 1.75,
+      "text": "except that instead of lists being"
+    },
+    {
+      "index": 353,
+      "start": 901.8,
+      "end": 904.11,
+      "duration": 2.31,
+      "text": "immutable lists are going to be mutable"
+    },
+    {
+      "index": 354,
+      "start": 904.12,
+      "end": 908.749,
+      "duration": 4.629,
+      "text": "object objects okay so much like lists"
+    },
+    {
+      "index": 355,
+      "start": 908.759,
+      "end": 910.629,
+      "duration": 1.87,
+      "text": "they're going to contain elements of any"
+    },
+    {
+      "index": 356,
+      "start": 910.639,
+      "end": 912.99,
+      "duration": 2.351,
+      "text": "type or objects of any"
+    },
+    {
+      "index": 357,
+      "start": 913.0,
+      "end": 915.55,
+      "duration": 2.55,
+      "text": "type you denote them with you denote a"
+    },
+    {
+      "index": 358,
+      "start": 915.56,
+      "end": 919.55,
+      "duration": 3.99,
+      "text": "list with square brackets instead of uh"
+    },
+    {
+      "index": 359,
+      "start": 919.56,
+      "end": 921.79,
+      "duration": 2.23,
+      "text": "parentheses and the difference being"
+    },
+    {
+      "index": 360,
+      "start": 921.8,
+      "end": 923.23,
+      "duration": 1.43,
+      "text": "that they're going to be mutable objects"
+    },
+    {
+      "index": 361,
+      "start": 923.24,
+      "end": 925.87,
+      "duration": 2.63,
+      "text": "instead of"
+    },
+    {
+      "index": 362,
+      "start": 928.749,
+      "end": 928.759,
+      "duration": 0.01,
+      "text": "immutable so cre creating an empty list"
+    },
+    {
+      "index": 363,
+      "start": 928.759,
+      "end": 931.509,
+      "duration": 2.75,
+      "text": "you just do open close square brackets"
+    },
+    {
+      "index": 364,
+      "start": 931.519,
+      "end": 934.55,
+      "duration": 3.031,
+      "text": "you can have a list of elements of"
+    },
+    {
+      "index": 365,
+      "start": 934.56,
+      "end": 935.47,
+      "duration": 0.91,
+      "text": "different"
+    },
+    {
+      "index": 366,
+      "start": 935.48,
+      "end": 940.189,
+      "duration": 4.709,
+      "text": "types even oops even a list"
+    },
+    {
+      "index": 367,
+      "start": 940.199,
+      "end": 943.03,
+      "duration": 2.831,
+      "text": "of of lists so one of the elements being"
+    },
+    {
+      "index": 368,
+      "start": 943.04,
+      "end": 945.629,
+      "duration": 2.589,
+      "text": "a"
+    },
+    {
+      "index": 369,
+      "start": 948.71,
+      "end": 948.72,
+      "duration": 0.01,
+      "text": "list as usual you can apply length on a"
+    },
+    {
+      "index": 370,
+      "start": 948.72,
+      "end": 950.03,
+      "duration": 1.31,
+      "text": "list and that tells you how many"
+    },
+    {
+      "index": 371,
+      "start": 950.04,
+      "end": 952.15,
+      "duration": 2.11,
+      "text": "elements are in it this is going to tell"
+    },
+    {
+      "index": 372,
+      "start": 952.16,
+      "end": 955.269,
+      "duration": 3.109,
+      "text": "you how many elements are in your list l"
+    },
+    {
+      "index": 373,
+      "start": 955.279,
+      "end": 956.99,
+      "duration": 1.711,
+      "text": "so it's not going to look any further"
+    },
+    {
+      "index": 374,
+      "start": 957.0,
+      "end": 958.47,
+      "duration": 1.47,
+      "text": "than that right so it's going to say"
+    },
+    {
+      "index": 375,
+      "start": 958.48,
+      "end": 960.03,
+      "duration": 1.55,
+      "text": "this is an integer this is a string this"
+    },
+    {
+      "index": 376,
+      "start": 960.04,
+      "end": 962.509,
+      "duration": 2.469,
+      "text": "is an integer this is a list it's not"
+    },
+    {
+      "index": 377,
+      "start": 962.519,
+      "end": 964.03,
+      "duration": 1.511,
+      "text": "going to say how many elements are in"
+    },
+    {
+      "index": 378,
+      "start": 964.04,
+      "end": 965.749,
+      "duration": 1.709,
+      "text": "this list okay it's just going to look"
+    },
+    {
+      "index": 379,
+      "start": 965.759,
+      "end": 968.87,
+      "duration": 3.111,
+      "text": "at the outer sort of the shell of of the"
+    },
+    {
+      "index": 380,
+      "start": 968.88,
+      "end": 970.629,
+      "duration": 1.749,
+      "text": "shell of"
+    },
+    {
+      "index": 381,
+      "start": 970.639,
+      "end": 973.389,
+      "duration": 2.75,
+      "text": "elements indexing and slicing works the"
+    },
+    {
+      "index": 382,
+      "start": 973.399,
+      "end": 975.59,
+      "duration": 2.191,
+      "text": "same way so L at position zero gives you"
+    },
+    {
+      "index": 383,
+      "start": 975.6,
+      "end": 976.87,
+      "duration": 1.27,
+      "text": "the value"
+    },
+    {
+      "index": 384,
+      "start": 976.88,
+      "end": 979.509,
+      "duration": 2.629,
+      "text": "two you can index into a list and then"
+    },
+    {
+      "index": 385,
+      "start": 979.519,
+      "end": 981.43,
+      "duration": 1.911,
+      "text": "do something with the value that you get"
+    },
+    {
+      "index": 386,
+      "start": 981.44,
+      "end": 984.189,
+      "duration": 2.749,
+      "text": "back so L at position two says that's"
+    },
+    {
+      "index": 387,
+      "start": 984.199,
+      "end": 987.11,
+      "duration": 2.911,
+      "text": "this value there and add one to"
+    },
+    {
+      "index": 388,
+      "start": 987.12,
+      "end": 990.269,
+      "duration": 3.149,
+      "text": "it l at position three that's going to"
+    },
+    {
+      "index": 389,
+      "start": 990.279,
+      "end": 993.189,
+      "duration": 2.91,
+      "text": "be this list here notice it evaluates to"
+    },
+    {
+      "index": 390,
+      "start": 993.199,
+      "end": 995.949,
+      "duration": 2.75,
+      "text": "another"
+    },
+    {
+      "index": 391,
+      "start": 998.389,
+      "end": 998.399,
+      "duration": 0.01,
+      "text": "list you're not allowed to index outside"
+    },
+    {
+      "index": 392,
+      "start": 998.399,
+      "end": 999.629,
+      "duration": 1.23,
+      "text": "of the length of the list so that's"
+    },
+    {
+      "index": 393,
+      "start": 999.639,
+      "end": 1000.99,
+      "duration": 1.351,
+      "text": "going to give you an error because we"
+    },
+    {
+      "index": 394,
+      "start": 1001.0,
+      "end": 1004.309,
+      "duration": 3.309,
+      "text": "only have four"
+    },
+    {
+      "index": 395,
+      "start": 1007.069,
+      "end": 1007.079,
+      "duration": 0.01,
+      "text": "elements and you can also have"
+    },
+    {
+      "index": 396,
+      "start": 1007.079,
+      "end": 1010.309,
+      "duration": 3.23,
+      "text": "expressions for your index so this"
+    },
+    {
+      "index": 397,
+      "start": 1010.319,
+      "end": 1012.43,
+      "duration": 2.111,
+      "text": "python just replaces I with two here and"
+    },
+    {
+      "index": 398,
+      "start": 1012.44,
+      "end": 1014.59,
+      "duration": 2.15,
+      "text": "say what's and says what's L at position"
+    },
+    {
+      "index": 399,
+      "start": 1014.6,
+      "end": 1017.79,
+      "duration": 3.19,
+      "text": "one and it grabs that from in there okay"
+    },
+    {
+      "index": 400,
+      "start": 1017.8,
+      "end": 1019.87,
+      "duration": 2.07,
+      "text": "so very very similar to to the kinds of"
+    },
+    {
+      "index": 401,
+      "start": 1019.88,
+      "end": 1022.71,
+      "duration": 2.83,
+      "text": "operations we've seen on strings and and"
+    },
+    {
+      "index": 402,
+      "start": 1022.72,
+      "end": 1024.75,
+      "duration": 2.03,
+      "text": "tupal okay the one difference and that's"
+    },
+    {
+      "index": 403,
+      "start": 1024.76,
+      "end": 1025.789,
+      "duration": 1.029,
+      "text": "what we're going to focus on for the"
+    },
+    {
+      "index": 404,
+      "start": 1025.799,
+      "end": 1027.829,
+      "duration": 2.03,
+      "text": "rest of this class is that lists are"
+    },
+    {
+      "index": 405,
+      "start": 1027.839,
+      "end": 1031.71,
+      "duration": 3.871,
+      "text": "mutable mutable objects okay so what"
+    },
+    {
+      "index": 406,
+      "start": 1031.72,
+      "end": 1033.59,
+      "duration": 1.87,
+      "text": "does that mean internally internally"
+    },
+    {
+      "index": 407,
+      "start": 1033.6,
+      "end": 1035.87,
+      "duration": 2.27,
+      "text": "that means let's say we have a list L"
+    },
+    {
+      "index": 408,
+      "start": 1035.88,
+      "end": 1038.029,
+      "duration": 2.149,
+      "text": "and we assign it uh sorry let's say we"
+    },
+    {
+      "index": 409,
+      "start": 1038.039,
+      "end": 1040.11,
+      "duration": 2.071,
+      "text": "have a variable L that's going to point"
+    },
+    {
+      "index": 410,
+      "start": 1040.12,
+      "end": 1043.87,
+      "duration": 3.75,
+      "text": "to a list with three elements two one"
+    },
+    {
+      "index": 411,
+      "start": 1043.88,
+      "end": 1046.39,
+      "duration": 2.51,
+      "text": "and three okay they're all each each"
+    },
+    {
+      "index": 412,
+      "start": 1046.4,
+      "end": 1049.669,
+      "duration": 3.269,
+      "text": "element is an integer"
+    },
+    {
+      "index": 413,
+      "start": 1049.679,
+      "end": 1052.63,
+      "duration": 2.951,
+      "text": "when we were dealing with with tupal or"
+    },
+    {
+      "index": 414,
+      "start": 1052.64,
+      "end": 1055.19,
+      "duration": 2.55,
+      "text": "with strings if we reassigned if we"
+    },
+    {
+      "index": 415,
+      "start": 1055.2,
+      "end": 1057.23,
+      "duration": 2.03,
+      "text": "tried to do this line right here we had"
+    },
+    {
+      "index": 416,
+      "start": 1057.24,
+      "end": 1059.15,
+      "duration": 1.91,
+      "text": "an error but this is actually allowed"
+    },
+    {
+      "index": 417,
+      "start": 1059.16,
+      "end": 1060.27,
+      "duration": 1.11,
+      "text": "with"
+    },
+    {
+      "index": 418,
+      "start": 1060.28,
+      "end": 1063.75,
+      "duration": 3.47,
+      "text": "lists so when you execute that line"
+    },
+    {
+      "index": 419,
+      "start": 1063.76,
+      "end": 1066.11,
+      "duration": 2.35,
+      "text": "Python's going to look at that middle"
+    },
+    {
+      "index": 420,
+      "start": 1066.12,
+      "end": 1067.63,
+      "duration": 1.51,
+      "text": "element and it's going to change its"
+    },
+    {
+      "index": 421,
+      "start": 1067.64,
+      "end": 1071.27,
+      "duration": 3.63,
+      "text": "value from a one to a five and that's"
+    },
+    {
+      "index": 422,
+      "start": 1071.28,
+      "end": 1075.47,
+      "duration": 4.19,
+      "text": "just due to the mutability nature of the"
+    },
+    {
+      "index": 423,
+      "start": 1079.95,
+      "end": 1079.96,
+      "duration": 0.01,
+      "text": "list okay so not notice that this list"
+    },
+    {
+      "index": 424,
+      "start": 1079.96,
+      "end": 1082.23,
+      "duration": 2.27,
+      "text": "variable this this variable L which"
+    },
+    {
+      "index": 425,
+      "start": 1082.24,
+      "end": 1083.95,
+      "duration": 1.71,
+      "text": "originally pointed to this list points"
+    },
+    {
+      "index": 426,
+      "start": 1083.96,
+      "end": 1086.07,
+      "duration": 2.11,
+      "text": "to the exact same list we haven't"
+    },
+    {
+      "index": 427,
+      "start": 1086.08,
+      "end": 1088.87,
+      "duration": 2.79,
+      "text": "created a new object in memory we're"
+    },
+    {
+      "index": 428,
+      "start": 1088.88,
+      "end": 1091.75,
+      "duration": 2.87,
+      "text": "just modifying the same object in memory"
+    },
+    {
+      "index": 429,
+      "start": 1091.76,
+      "end": 1093.029,
+      "duration": 1.269,
+      "text": "okay and you're going to see why this is"
+    },
+    {
+      "index": 430,
+      "start": 1093.039,
+      "end": 1095.23,
+      "duration": 2.191,
+      "text": "important as we look at a few side"
+    },
+    {
+      "index": 431,
+      "start": 1095.24,
+      "end": 1096.87,
+      "duration": 1.63,
+      "text": "effects that can happen when when you"
+    },
+    {
+      "index": 432,
+      "start": 1096.88,
+      "end": 1101.35,
+      "duration": 4.47,
+      "text": "have"
+    },
+    {
+      "index": 433,
+      "start": 1103.83,
+      "end": 1103.84,
+      "duration": 0.01,
+      "text": "this"
+    },
+    {
+      "index": 434,
+      "start": 1103.84,
+      "end": 1107.47,
+      "duration": 3.63,
+      "text": "so I've said this a couple times before"
+    },
+    {
+      "index": 435,
+      "start": 1107.48,
+      "end": 1109.35,
+      "duration": 1.87,
+      "text": "but it's"
+    },
+    {
+      "index": 436,
+      "start": 1109.36,
+      "end": 1112.07,
+      "duration": 2.71,
+      "text": "um it'll make your life a lot easier if"
+    },
+    {
+      "index": 437,
+      "start": 1112.08,
+      "end": 1114.83,
+      "duration": 2.75,
+      "text": "you try to think of of when you when you"
+    },
+    {
+      "index": 438,
+      "start": 1114.84,
+      "end": 1116.35,
+      "duration": 1.51,
+      "text": "want to iterate through a list if you"
+    },
+    {
+      "index": 439,
+      "start": 1116.36,
+      "end": 1119.029,
+      "duration": 2.669,
+      "text": "try to think about iterating through the"
+    },
+    {
+      "index": 440,
+      "start": 1119.039,
+      "end": 1120.83,
+      "duration": 1.791,
+      "text": "through the elements directly it's a lot"
+    },
+    {
+      "index": 441,
+      "start": 1120.84,
+      "end": 1123.47,
+      "duration": 2.63,
+      "text": "more pythonic I've used that word before"
+    },
+    {
+      "index": 442,
+      "start": 1123.48,
+      "end": 1125.31,
+      "duration": 1.83,
+      "text": "so this is sort of a common pattern that"
+    },
+    {
+      "index": 443,
+      "start": 1125.32,
+      "end": 1126.99,
+      "duration": 1.67,
+      "text": "you're going to see where you're"
+    },
+    {
+      "index": 444,
+      "start": 1127.0,
+      "end": 1128.63,
+      "duration": 1.63,
+      "text": "iterating over the list elements"
+    },
+    {
+      "index": 445,
+      "start": 1128.64,
+      "end": 1130.51,
+      "duration": 1.87,
+      "text": "directly right we've done it over tupal"
+    },
+    {
+      "index": 446,
+      "start": 1130.52,
+      "end": 1133.149,
+      "duration": 2.629,
+      "text": "we've done it over"
+    },
+    {
+      "index": 447,
+      "start": 1133.159,
+      "end": 1135.59,
+      "duration": 2.431,
+      "text": "strings so these are identical codes"
+    },
+    {
+      "index": 448,
+      "start": 1135.6,
+      "end": 1137.63,
+      "duration": 2.03,
+      "text": "they do the exact same thing except on"
+    },
+    {
+      "index": 449,
+      "start": 1137.64,
+      "end": 1140.39,
+      "duration": 2.75,
+      "text": "the left you're going from you're going"
+    },
+    {
+      "index": 450,
+      "start": 1140.4,
+      "end": 1143.909,
+      "duration": 3.509,
+      "text": "through 0 1 two three and so"
+    },
+    {
+      "index": 451,
+      "start": 1143.919,
+      "end": 1146.95,
+      "duration": 3.031,
+      "text": "on and then you're indexing into each"
+    },
+    {
+      "index": 452,
+      "start": 1146.96,
+      "end": 1148.75,
+      "duration": 1.79,
+      "text": "one of"
+    },
+    {
+      "index": 453,
+      "start": 1148.76,
+      "end": 1152.23,
+      "duration": 3.47,
+      "text": "these uh each one of these uh numbers to"
+    },
+    {
+      "index": 454,
+      "start": 1152.24,
+      "end": 1153.47,
+      "duration": 1.23,
+      "text": "get the element"
+    },
+    {
+      "index": 455,
+      "start": 1153.48,
+      "end": 1157.47,
+      "duration": 3.99,
+      "text": "value whereas on the right this this L"
+    },
+    {
+      "index": 456,
+      "start": 1157.48,
+      "end": 1159.669,
+      "duration": 2.189,
+      "text": "uh loop variable I is going to have the"
+    },
+    {
+      "index": 457,
+      "start": 1159.679,
+      "end": 1162.95,
+      "duration": 3.271,
+      "text": "element value itself okay so this code"
+    },
+    {
+      "index": 458,
+      "start": 1162.96,
+      "end": 1167.43,
+      "duration": 4.47,
+      "text": "on the right is a lot"
+    },
+    {
+      "index": 459,
+      "start": 1170.83,
+      "end": 1170.84,
+      "duration": 0.01,
+      "text": "cleaner okay so now let's look at some"
+    },
+    {
+      "index": 460,
+      "start": 1170.84,
+      "end": 1172.95,
+      "duration": 2.11,
+      "text": "operations that we can do on lists okay"
+    },
+    {
+      "index": 461,
+      "start": 1172.96,
+      "end": 1174.51,
+      "duration": 1.55,
+      "text": "so there's a lot more operations that we"
+    },
+    {
+      "index": 462,
+      "start": 1174.52,
+      "end": 1176.669,
+      "duration": 2.149,
+      "text": "can do on lists because of their"
+    },
+    {
+      "index": 463,
+      "start": 1176.679,
+      "end": 1178.51,
+      "duration": 1.831,
+      "text": "mutability aspect than we can do on"
+    },
+    {
+      "index": 464,
+      "start": 1178.52,
+      "end": 1180.95,
+      "duration": 2.43,
+      "text": "tupes or strings for example okay so"
+    },
+    {
+      "index": 465,
+      "start": 1180.96,
+      "end": 1182.99,
+      "duration": 2.03,
+      "text": "here's a few of them and they're going"
+    },
+    {
+      "index": 466,
+      "start": 1183.0,
+      "end": 1185.11,
+      "duration": 2.11,
+      "text": "to take advantage of of this mutability"
+    },
+    {
+      "index": 467,
+      "start": 1185.12,
+      "end": 1187.549,
+      "duration": 2.429,
+      "text": "uh concept so we can add elements"
+    },
+    {
+      "index": 468,
+      "start": 1187.559,
+      "end": 1190.47,
+      "duration": 2.911,
+      "text": "directly to the end of the list using"
+    },
+    {
+      "index": 469,
+      "start": 1190.48,
+      "end": 1193.59,
+      "duration": 3.11,
+      "text": "this funky looking notation l. append"
+    },
+    {
+      "index": 470,
+      "start": 1193.6,
+      "end": 1195.39,
+      "duration": 1.79,
+      "text": "and then the element we we want to add"
+    },
+    {
+      "index": 471,
+      "start": 1195.4,
+      "end": 1197.99,
+      "duration": 2.59,
+      "text": "to the end okay and this operation"
+    },
+    {
+      "index": 472,
+      "start": 1198.0,
+      "end": 1200.99,
+      "duration": 2.99,
+      "text": "mutates the list so if I have L is equal"
+    },
+    {
+      "index": 473,
+      "start": 1201.0,
+      "end": 1203.35,
+      "duration": 2.35,
+      "text": "to 213 and I append the element five to"
+    },
+    {
+      "index": 474,
+      "start": 1203.36,
+      "end": 1207.47,
+      "duration": 4.11,
+      "text": "the end then L the same L is going to"
+    },
+    {
+      "index": 475,
+      "start": 1207.48,
+      "end": 1209.27,
+      "duration": 1.79,
+      "text": "point to the same object except it's"
+    },
+    {
+      "index": 476,
+      "start": 1209.28,
+      "end": 1213.47,
+      "duration": 4.19,
+      "text": "going to have an extra number at the end"
+    },
+    {
+      "index": 477,
+      "start": 1216.47,
+      "end": 1216.48,
+      "duration": 0.01,
+      "text": "five okay but now what's this dot right"
+    },
+    {
+      "index": 478,
+      "start": 1216.48,
+      "end": 1219.59,
+      "duration": 3.11,
+      "text": "we haven't really seen this before okay"
+    },
+    {
+      "index": 479,
+      "start": 1219.6,
+      "end": 1222.99,
+      "duration": 3.39,
+      "text": "and it's going to become apparent what"
+    },
+    {
+      "index": 480,
+      "start": 1223.0,
+      "end": 1226.11,
+      "duration": 3.11,
+      "text": "it means in a few lectures from now but"
+    },
+    {
+      "index": 481,
+      "start": 1226.12,
+      "end": 1228.35,
+      "duration": 2.23,
+      "text": "for the moment you can think of this of"
+    },
+    {
+      "index": 482,
+      "start": 1228.36,
+      "end": 1233.029,
+      "duration": 4.669,
+      "text": "this dot as an operation it's it's like"
+    },
+    {
+      "index": 483,
+      "start": 1233.039,
+      "end": 1235.35,
+      "duration": 2.311,
+      "text": "applying a function except that the"
+    },
+    {
+      "index": 484,
+      "start": 1235.36,
+      "end": 1237.51,
+      "duration": 2.15,
+      "text": "function that you're applying can only"
+    },
+    {
+      "index": 485,
+      "start": 1237.52,
+      "end": 1240.63,
+      "duration": 3.11,
+      "text": "work on certain types of objects okay so"
+    },
+    {
+      "index": 486,
+      "start": 1240.64,
+      "end": 1244.11,
+      "duration": 3.47,
+      "text": "in this case a pend for example is the"
+    },
+    {
+      "index": 487,
+      "start": 1244.12,
+      "end": 1245.669,
+      "duration": 1.549,
+      "text": "function we're trying"
+    },
+    {
+      "index": 488,
+      "start": 1245.679,
+      "end": 1249.909,
+      "duration": 4.23,
+      "text": "to apply and we want to apply it to"
+    },
+    {
+      "index": 489,
+      "start": 1249.919,
+      "end": 1251.669,
+      "duration": 1.75,
+      "text": "whatever is before the dot which is the"
+    },
+    {
+      "index": 490,
+      "start": 1251.679,
+      "end": 1255.23,
+      "duration": 3.551,
+      "text": "object okay and a Pen's only been"
+    },
+    {
+      "index": 491,
+      "start": 1255.24,
+      "end": 1258.07,
+      "duration": 2.83,
+      "text": "defined to work with a list object for"
+    },
+    {
+      "index": 492,
+      "start": 1258.08,
+      "end": 1259.47,
+      "duration": 1.39,
+      "text": "example which which is why we're using"
+    },
+    {
+      "index": 493,
+      "start": 1259.48,
+      "end": 1262.23,
+      "duration": 2.75,
+      "text": "the dot in this"
+    },
+    {
+      "index": 494,
+      "start": 1262.24,
+      "end": 1264.71,
+      "duration": 2.47,
+      "text": "case we wouldn't be able to use a pend"
+    },
+    {
+      "index": 495,
+      "start": 1264.72,
+      "end": 1266.909,
+      "duration": 2.189,
+      "text": "on an integer for example because it"
+    },
+    {
+      "index": 496,
+      "start": 1266.919,
+      "end": 1268.83,
+      "duration": 1.911,
+      "text": "that sort of function is not defined on"
+    },
+    {
+      "index": 497,
+      "start": 1268.84,
+      "end": 1272.31,
+      "duration": 3.47,
+      "text": "an integer so for now you'll sort of"
+    },
+    {
+      "index": 498,
+      "start": 1272.32,
+      "end": 1276.31,
+      "duration": 3.99,
+      "text": "have to remember or or or uh remember"
+    },
+    {
+      "index": 499,
+      "start": 1276.32,
+      "end": 1278.909,
+      "duration": 2.589,
+      "text": "which which are functions that work with"
+    },
+    {
+      "index": 500,
+      "start": 1278.919,
+      "end": 1282.07,
+      "duration": 3.151,
+      "text": "a DOT and which are functions like Len"
+    },
+    {
+      "index": 501,
+      "start": 1282.08,
+      "end": 1284.71,
+      "duration": 2.63,
+      "text": "that aren't with a dot but in a couple"
+    },
+    {
+      "index": 502,
+      "start": 1284.72,
+      "end": 1286.47,
+      "duration": 1.75,
+      "text": "lectures I promise it'll be a lot"
+    },
+    {
+      "index": 503,
+      "start": 1286.48,
+      "end": 1289.47,
+      "duration": 2.99,
+      "text": "clearer okay so for now just think of it"
+    },
+    {
+      "index": 504,
+      "start": 1289.48,
+      "end": 1291.23,
+      "duration": 1.75,
+      "text": "as whatever is before the dot is the"
+    },
+    {
+      "index": 505,
+      "start": 1291.24,
+      "end": 1294.35,
+      "duration": 3.11,
+      "text": "object you're applying a function to and"
+    },
+    {
+      "index": 506,
+      "start": 1294.36,
+      "end": 1295.909,
+      "duration": 1.549,
+      "text": "whatever is after the dot is the"
+    },
+    {
+      "index": 507,
+      "start": 1295.919,
+      "end": 1299.87,
+      "duration": 3.951,
+      "text": "function you're applying on the object"
+    },
+    {
+      "index": 508,
+      "start": 1299.88,
+      "end": 1303.31,
+      "duration": 3.43,
+      "text": "okay okay so we can add things to the"
+    },
+    {
+      "index": 509,
+      "start": 1303.32,
+      "end": 1305.789,
+      "duration": 2.469,
+      "text": "end of our list we can also combine"
+    },
+    {
+      "index": 510,
+      "start": 1305.799,
+      "end": 1308.269,
+      "duration": 2.47,
+      "text": "lists together using the plus operator"
+    },
+    {
+      "index": 511,
+      "start": 1308.279,
+      "end": 1310.75,
+      "duration": 2.471,
+      "text": "okay the plus operator does not mutate"
+    },
+    {
+      "index": 512,
+      "start": 1310.76,
+      "end": 1313.149,
+      "duration": 2.389,
+      "text": "the list okay instead it gives you a new"
+    },
+    {
+      "index": 513,
+      "start": 1313.159,
+      "end": 1315.31,
+      "duration": 2.151,
+      "text": "list that's the sum of those two lists"
+    },
+    {
+      "index": 514,
+      "start": 1315.32,
+      "end": 1318.35,
+      "duration": 3.03,
+      "text": "combined so in this case if L1 is 213"
+    },
+    {
+      "index": 515,
+      "start": 1318.36,
+      "end": 1321.11,
+      "duration": 2.75,
+      "text": "and L2 is 456 when we add those two"
+    },
+    {
+      "index": 516,
+      "start": 1321.12,
+      "end": 1322.87,
+      "duration": 1.75,
+      "text": "lists together that's going to give us"
+    },
+    {
+      "index": 517,
+      "start": 1322.88,
+      "end": 1325.789,
+      "duration": 2.909,
+      "text": "an entirely new list leaving L1 and L2"
+    },
+    {
+      "index": 518,
+      "start": 1325.799,
+      "end": 1326.83,
+      "duration": 1.031,
+      "text": "the"
+    },
+    {
+      "index": 519,
+      "start": 1326.84,
+      "end": 1329.51,
+      "duration": 2.67,
+      "text": "same and that's why we have"
+    },
+    {
+      "index": 520,
+      "start": 1329.52,
+      "end": 1331.909,
+      "duration": 2.389,
+      "text": "to um we have"
+    },
+    {
+      "index": 521,
+      "start": 1331.919,
+      "end": 1333.549,
+      "duration": 1.63,
+      "text": "to"
+    },
+    {
+      "index": 522,
+      "start": 1333.559,
+      "end": 1336.669,
+      "duration": 3.11,
+      "text": "uh assign the result of the addition to"
+    },
+    {
+      "index": 523,
+      "start": 1336.679,
+      "end": 1341.029,
+      "duration": 4.35,
+      "text": "a new list otherwise the results"
+    },
+    {
+      "index": 524,
+      "start": 1343.669,
+      "end": 1343.679,
+      "duration": 0.01,
+      "text": "lost if you want to mutate a list"
+    },
+    {
+      "index": 525,
+      "start": 1343.679,
+      "end": 1346.39,
+      "duration": 2.711,
+      "text": "directly and make it longer"
+    },
+    {
+      "index": 526,
+      "start": 1346.4,
+      "end": 1349.909,
+      "duration": 3.509,
+      "text": "by the elements within another list then"
+    },
+    {
+      "index": 527,
+      "start": 1349.919,
+      "end": 1352.11,
+      "duration": 2.191,
+      "text": "you can use this"
+    },
+    {
+      "index": 528,
+      "start": 1352.12,
+      "end": 1355.669,
+      "duration": 3.549,
+      "text": "extend um function or extend method okay"
+    },
+    {
+      "index": 529,
+      "start": 1355.679,
+      "end": 1358.71,
+      "duration": 3.031,
+      "text": "and this is going to mutate L1 directly"
+    },
+    {
+      "index": 530,
+      "start": 1358.72,
+      "end": 1360.47,
+      "duration": 1.75,
+      "text": "so if L1 was"
+    },
+    {
+      "index": 531,
+      "start": 1360.48,
+      "end": 1364.87,
+      "duration": 4.39,
+      "text": "213 if you extend it by the list 06 it's"
+    },
+    {
+      "index": 532,
+      "start": 1364.88,
+      "end": 1367.43,
+      "duration": 2.55,
+      "text": "just going to tack on 06 to L1 directly"
+    },
+    {
+      "index": 533,
+      "start": 1367.44,
+      "end": 1369.23,
+      "duration": 1.79,
+      "text": "so notice L1 has been"
+    },
+    {
+      "index": 534,
+      "start": 1369.24,
+      "end": 1375.35,
+      "duration": 6.11,
+      "text": "mutated"
+    },
+    {
+      "index": 535,
+      "start": 1379.909,
+      "end": 1379.919,
+      "duration": 0.01,
+      "text": "okay okay so that's adding add things to"
+    },
+    {
+      "index": 536,
+      "start": 1379.919,
+      "end": 1382.269,
+      "duration": 2.35,
+      "text": "lists we can also delete things from"
+    },
+    {
+      "index": 537,
+      "start": 1382.279,
+      "end": 1384.07,
+      "duration": 1.791,
+      "text": "lists right we don't just want to keep"
+    },
+    {
+      "index": 538,
+      "start": 1384.08,
+      "end": 1385.549,
+      "duration": 1.469,
+      "text": "adding to our lists because then they'd"
+    },
+    {
+      "index": 539,
+      "start": 1385.559,
+      "end": 1387.669,
+      "duration": 2.11,
+      "text": "become very very big so let's see how we"
+    },
+    {
+      "index": 540,
+      "start": 1387.679,
+      "end": 1389.63,
+      "duration": 1.951,
+      "text": "can delete some some items from our list"
+    },
+    {
+      "index": 541,
+      "start": 1389.64,
+      "end": 1392.71,
+      "duration": 3.07,
+      "text": "there's a few ways first one being you"
+    },
+    {
+      "index": 542,
+      "start": 1392.72,
+      "end": 1396.35,
+      "duration": 3.63,
+      "text": "can use this Dell function and this says"
+    },
+    {
+      "index": 543,
+      "start": 1396.36,
+      "end": 1399.909,
+      "duration": 3.549,
+      "text": "delete from the list L the element at"
+    },
+    {
+      "index": 544,
+      "start": 1399.919,
+      "end": 1400.95,
+      "duration": 1.031,
+      "text": "this"
+    },
+    {
+      "index": 545,
+      "start": 1400.96,
+      "end": 1403.75,
+      "duration": 2.79,
+      "text": "index okay so you give it the index 0 1"
+    },
+    {
+      "index": 546,
+      "start": 1403.76,
+      "end": 1405.269,
+      "duration": 1.509,
+      "text": "two or whatever you want to whatever"
+    },
+    {
+      "index": 547,
+      "start": 1405.279,
+      "end": 1407.99,
+      "duration": 2.711,
+      "text": "index you want to delete the element at"
+    },
+    {
+      "index": 548,
+      "start": 1408.0,
+      "end": 1409.39,
+      "duration": 1.39,
+      "text": "if you just want to delete the element"
+    },
+    {
+      "index": 549,
+      "start": 1409.4,
+      "end": 1410.549,
+      "duration": 1.149,
+      "text": "at the end of the list that's the"
+    },
+    {
+      "index": 550,
+      "start": 1410.559,
+      "end": 1414.11,
+      "duration": 3.551,
+      "text": "farthest right you do"
+    },
+    {
+      "index": 551,
+      "start": 1414.12,
+      "end": 1416.47,
+      "duration": 2.35,
+      "text": "L.P if you want to remove a specific"
+    },
+    {
+      "index": 552,
+      "start": 1416.48,
+      "end": 1418.029,
+      "duration": 1.549,
+      "text": "element so you know there's somewhere in"
+    },
+    {
+      "index": 553,
+      "start": 1418.039,
+      "end": 1419.789,
+      "duration": 1.75,
+      "text": "your list there's you know there's the"
+    },
+    {
+      "index": 554,
+      "start": 1419.799,
+      "end": 1421.31,
+      "duration": 1.511,
+      "text": "number five and you want to delete it"
+    },
+    {
+      "index": 555,
+      "start": 1421.32,
+      "end": 1424.63,
+      "duration": 3.31,
+      "text": "from the list then you say l. remove and"
+    },
+    {
+      "index": 556,
+      "start": 1424.64,
+      "end": 1426.39,
+      "duration": 1.75,
+      "text": "you say what element you want to"
+    },
+    {
+      "index": 557,
+      "start": 1426.4,
+      "end": 1428.71,
+      "duration": 2.31,
+      "text": "remove and that only removes the very"
+    },
+    {
+      "index": 558,
+      "start": 1428.72,
+      "end": 1430.95,
+      "duration": 2.23,
+      "text": "first occurrence of it so if there's two"
+    },
+    {
+      "index": 559,
+      "start": 1430.96,
+      "end": 1432.31,
+      "duration": 1.35,
+      "text": "fives in your list then it's only going"
+    },
+    {
+      "index": 560,
+      "start": 1432.32,
+      "end": 1433.789,
+      "duration": 1.469,
+      "text": "to remove the very first"
+    },
+    {
+      "index": 561,
+      "start": 1433.799,
+      "end": 1437.029,
+      "duration": 3.23,
+      "text": "one okay so let's take a look at this"
+    },
+    {
+      "index": 562,
+      "start": 1437.039,
+      "end": 1438.99,
+      "duration": 1.951,
+      "text": "sort of sequence of"
+    },
+    {
+      "index": 563,
+      "start": 1439.0,
+      "end": 1442.71,
+      "duration": 3.71,
+      "text": "um sequence of commands so we have first"
+    },
+    {
+      "index": 564,
+      "start": 1442.72,
+      "end": 1445.63,
+      "duration": 2.91,
+      "text": "L is equal to this this long list here"
+    },
+    {
+      "index": 565,
+      "start": 1445.64,
+      "end": 1447.59,
+      "duration": 1.95,
+      "text": "okay and I want to mention that all of"
+    },
+    {
+      "index": 566,
+      "start": 1447.6,
+      "end": 1449.269,
+      "duration": 1.669,
+      "text": "these operations are going to mutate our"
+    },
+    {
+      "index": 567,
+      "start": 1449.279,
+      "end": 1451.63,
+      "duration": 2.351,
+      "text": "list which is why I wrote this uh"
+    },
+    {
+      "index": 568,
+      "start": 1451.64,
+      "end": 1453.43,
+      "duration": 1.79,
+      "text": "comment here that says assume that"
+    },
+    {
+      "index": 569,
+      "start": 1453.44,
+      "end": 1455.43,
+      "duration": 1.99,
+      "text": "you're doing these in order okay so as"
+    },
+    {
+      "index": 570,
+      "start": 1455.44,
+      "end": 1456.549,
+      "duration": 1.109,
+      "text": "you're doing these in order you're going"
+    },
+    {
+      "index": 571,
+      "start": 1456.559,
+      "end": 1458.39,
+      "duration": 1.831,
+      "text": "to be mutating your list and if you're"
+    },
+    {
+      "index": 572,
+      "start": 1458.4,
+      "end": 1459.669,
+      "duration": 1.269,
+      "text": "mutating your list you have to remember"
+    },
+    {
+      "index": 573,
+      "start": 1459.679,
+      "end": 1461.269,
+      "duration": 1.59,
+      "text": "that you're working with this new"
+    },
+    {
+      "index": 574,
+      "start": 1461.279,
+      "end": 1463.23,
+      "duration": 1.951,
+      "text": "mutated list"
+    },
+    {
+      "index": 575,
+      "start": 1463.24,
+      "end": 1465.549,
+      "duration": 2.309,
+      "text": "okay so the first thing we're doing is"
+    },
+    {
+      "index": 576,
+      "start": 1465.559,
+      "end": 1469.19,
+      "duration": 3.631,
+      "text": "we're removing two from our list"
+    },
+    {
+      "index": 577,
+      "start": 1469.2,
+      "end": 1471.029,
+      "duration": 1.829,
+      "text": "so when you remove two this says look"
+    },
+    {
+      "index": 578,
+      "start": 1471.039,
+      "end": 1473.71,
+      "duration": 2.671,
+      "text": "for an element with the value two and"
+    },
+    {
+      "index": 579,
+      "start": 1473.72,
+      "end": 1475.19,
+      "duration": 1.47,
+      "text": "take it away from the"
+    },
+    {
+      "index": 580,
+      "start": 1475.2,
+      "end": 1478.389,
+      "duration": 3.189,
+      "text": "list so that's the very first one"
+    },
+    {
+      "index": 581,
+      "start": 1478.399,
+      "end": 1481.029,
+      "duration": 2.63,
+      "text": "here so the list we're left with is just"
+    },
+    {
+      "index": 582,
+      "start": 1481.039,
+      "end": 1483.269,
+      "duration": 2.23,
+      "text": "everything after"
+    },
+    {
+      "index": 583,
+      "start": 1483.279,
+      "end": 1485.63,
+      "duration": 2.351,
+      "text": "it then I want to remove three from the"
+    },
+    {
+      "index": 584,
+      "start": 1485.64,
+      "end": 1487.269,
+      "duration": 1.629,
+      "text": "list and notice there's two of them"
+    },
+    {
+      "index": 585,
+      "start": 1487.279,
+      "end": 1488.51,
+      "duration": 1.231,
+      "text": "there's this three here and there's this"
+    },
+    {
+      "index": 586,
+      "start": 1488.52,
+      "end": 1490.51,
+      "duration": 1.99,
+      "text": "three here so we're going to remove only"
+    },
+    {
+      "index": 587,
+      "start": 1490.52,
+      "end": 1491.549,
+      "duration": 1.029,
+      "text": "the first"
+    },
+    {
+      "index": 588,
+      "start": 1491.559,
+      "end": 1494.75,
+      "duration": 3.191,
+      "text": "one okay which is this one here so the"
+    },
+    {
+      "index": 589,
+      "start": 1494.76,
+      "end": 1499.83,
+      "duration": 5.07,
+      "text": "list we're left with is 1 6370"
+    },
+    {
+      "index": 590,
+      "start": 1501.31,
+      "end": 1501.32,
+      "duration": 0.01,
+      "text": "then we're going to"
+    },
+    {
+      "index": 591,
+      "start": 1501.32,
+      "end": 1504.43,
+      "duration": 3.11,
+      "text": "delete from the list L the element at"
+    },
+    {
+      "index": 592,
+      "start": 1504.44,
+      "end": 1506.59,
+      "duration": 2.15,
+      "text": "position one so starting counting from"
+    },
+    {
+      "index": 593,
+      "start": 1506.6,
+      "end": 1508.35,
+      "duration": 1.75,
+      "text": "zero the element at position one is this"
+    },
+    {
+      "index": 594,
+      "start": 1508.36,
+      "end": 1511.11,
+      "duration": 2.75,
+      "text": "one here so we've removed that and we're"
+    },
+    {
+      "index": 595,
+      "start": 1511.12,
+      "end": 1514.19,
+      "duration": 3.07,
+      "text": "left with 1"
+    },
+    {
+      "index": 596,
+      "start": 1514.2,
+      "end": 1516.909,
+      "duration": 2.709,
+      "text": "370 and then when we do l. pop that's"
+    },
+    {
+      "index": 597,
+      "start": 1516.919,
+      "end": 1518.43,
+      "duration": 1.511,
+      "text": "going to delete the element furthest to"
+    },
+    {
+      "index": 598,
+      "start": 1518.44,
+      "end": 1520.029,
+      "duration": 1.589,
+      "text": "the right so at the end of the list"
+    },
+    {
+      "index": 599,
+      "start": 1520.039,
+      "end": 1524.35,
+      "duration": 4.311,
+      "text": "which is that"
+    },
+    {
+      "index": 600,
+      "start": 1526.99,
+      "end": 1527.0,
+      "duration": 0.01,
+      "text": "zero so then we're left with only 1"
+    },
+    {
+      "index": 601,
+      "start": 1527.0,
+      "end": 1529.269,
+      "duration": 2.269,
+      "text": "three and seven"
+    },
+    {
+      "index": 602,
+      "start": 1529.279,
+      "end": 1532.19,
+      "duration": 2.911,
+      "text": "okay and l. poop is often useful because"
+    },
+    {
+      "index": 603,
+      "start": 1532.2,
+      "end": 1535.389,
+      "duration": 3.189,
+      "text": "it tells you the return value from l."
+    },
+    {
+      "index": 604,
+      "start": 1535.399,
+      "end": 1537.909,
+      "duration": 2.51,
+      "text": "poop is going to be the value that it"
+    },
+    {
+      "index": 605,
+      "start": 1537.919,
+      "end": 1539.51,
+      "duration": 1.591,
+      "text": "removed so in this case it's going to"
+    },
+    {
+      "index": 606,
+      "start": 1539.52,
+      "end": 1542.63,
+      "duration": 3.11,
+      "text": "return"
+    },
+    {
+      "index": 607,
+      "start": 1545.87,
+      "end": 1545.88,
+      "duration": 0.01,
+      "text": "zero I want to mention though that some"
+    },
+    {
+      "index": 608,
+      "start": 1545.88,
+      "end": 1547.83,
+      "duration": 1.95,
+      "text": "of the so so these functions all mutate"
+    },
+    {
+      "index": 609,
+      "start": 1547.84,
+      "end": 1551.31,
+      "duration": 3.47,
+      "text": "the list you have to be careful with"
+    },
+    {
+      "index": 610,
+      "start": 1551.32,
+      "end": 1553.43,
+      "duration": 2.11,
+      "text": "return values so these are all you can"
+    },
+    {
+      "index": 611,
+      "start": 1553.44,
+      "end": 1555.269,
+      "duration": 1.829,
+      "text": "all you can think of all of these as"
+    },
+    {
+      "index": 612,
+      "start": 1555.279,
+      "end": 1557.99,
+      "duration": 2.711,
+      "text": "functions right that operate on a list"
+    },
+    {
+      "index": 613,
+      "start": 1558.0,
+      "end": 1559.59,
+      "duration": 1.59,
+      "text": "EX ex that what these functions do is"
+    },
+    {
+      "index": 614,
+      "start": 1559.6,
+      "end": 1561.99,
+      "duration": 2.39,
+      "text": "they take in the list and they modify it"
+    },
+    {
+      "index": 615,
+      "start": 1562.0,
+      "end": 1564.99,
+      "duration": 2.99,
+      "text": "okay but as functions they obviously"
+    },
+    {
+      "index": 616,
+      "start": 1565.0,
+      "end": 1566.71,
+      "duration": 1.71,
+      "text": "return something back to whoever called"
+    },
+    {
+      "index": 617,
+      "start": 1566.72,
+      "end": 1568.789,
+      "duration": 2.069,
+      "text": "them right and often times they're going"
+    },
+    {
+      "index": 618,
+      "start": 1568.799,
+      "end": 1571.75,
+      "duration": 2.951,
+      "text": "to return the value none okay so for"
+    },
+    {
+      "index": 619,
+      "start": 1571.76,
+      "end": 1574.71,
+      "duration": 2.95,
+      "text": "example if you are going to do l. remove"
+    },
+    {
+      "index": 620,
+      "start": 1574.72,
+      "end": 1577.19,
+      "duration": 2.47,
+      "text": "two and you print that out that might"
+    },
+    {
+      "index": 621,
+      "start": 1577.2,
+      "end": 1579.43,
+      "duration": 2.23,
+      "text": "print out none for you okay so you can't"
+    },
+    {
+      "index": 622,
+      "start": 1579.44,
+      "end": 1583.35,
+      "duration": 3.91,
+      "text": "just assign the value of this to a"
+    },
+    {
+      "index": 623,
+      "start": 1583.36,
+      "end": 1585.669,
+      "duration": 2.309,
+      "text": "variable and expect it to be the mutated"
+    },
+    {
+      "index": 624,
+      "start": 1585.679,
+      "end": 1587.789,
+      "duration": 2.11,
+      "text": "list right the list that the list got"
+    },
+    {
+      "index": 625,
+      "start": 1587.799,
+      "end": 1590.07,
+      "duration": 2.271,
+      "text": "mutated the list that got mutated is the"
+    },
+    {
+      "index": 626,
+      "start": 1590.08,
+      "end": 1591.95,
+      "duration": 1.87,
+      "text": "list that was passed into here okay"
+    },
+    {
+      "index": 627,
+      "start": 1591.96,
+      "end": 1593.83,
+      "duration": 1.87,
+      "text": "we're going to look at one example in a"
+    },
+    {
+      "index": 628,
+      "start": 1593.84,
+      "end": 1596.43,
+      "duration": 2.59,
+      "text": "few slides that's going to show this"
+    },
+    {
+      "index": 629,
+      "start": 1596.44,
+      "end": 1598.35,
+      "duration": 1.91,
+      "text": "okay another thing that we can do and"
+    },
+    {
+      "index": 630,
+      "start": 1598.36,
+      "end": 1599.71,
+      "duration": 1.35,
+      "text": "this is often useful when you're working"
+    },
+    {
+      "index": 631,
+      "start": 1599.72,
+      "end": 1600.47,
+      "duration": 0.75,
+      "text": "with"
+    },
+    {
+      "index": 632,
+      "start": 1600.48,
+      "end": 1603.87,
+      "duration": 3.39,
+      "text": "data is to convert lists to Strings and"
+    },
+    {
+      "index": 633,
+      "start": 1603.88,
+      "end": 1605.87,
+      "duration": 1.99,
+      "text": "then strings to lists okay sometimes it"
+    },
+    {
+      "index": 634,
+      "start": 1605.88,
+      "end": 1607.51,
+      "duration": 1.63,
+      "text": "might be useful to work with with"
+    },
+    {
+      "index": 635,
+      "start": 1607.52,
+      "end": 1610.95,
+      "duration": 3.43,
+      "text": "strings as opposed to a list and vice"
+    },
+    {
+      "index": 636,
+      "start": 1610.96,
+      "end": 1614.83,
+      "duration": 3.87,
+      "text": "versa okay so this first line here list"
+    },
+    {
+      "index": 637,
+      "start": 1614.84,
+      "end": 1617.87,
+      "duration": 3.03,
+      "text": "s takes in a string and casts it to a"
+    },
+    {
+      "index": 638,
+      "start": 1617.88,
+      "end": 1620.47,
+      "duration": 2.59,
+      "text": "list so much like we cast a float to an"
+    },
+    {
+      "index": 639,
+      "start": 1620.48,
+      "end": 1622.43,
+      "duration": 1.95,
+      "text": "integer for example you're just casting"
+    },
+    {
+      "index": 640,
+      "start": 1622.44,
+      "end": 1623.909,
+      "duration": 1.469,
+      "text": "a string to a list"
+    },
+    {
+      "index": 641,
+      "start": 1623.919,
+      "end": 1626.31,
+      "duration": 2.391,
+      "text": "here and when you do that at this line"
+    },
+    {
+      "index": 642,
+      "start": 1626.32,
+      "end": 1628.99,
+      "duration": 2.67,
+      "text": "so if this is your s here when you do"
+    },
+    {
+      "index": 643,
+      "start": 1629.0,
+      "end": 1631.99,
+      "duration": 2.99,
+      "text": "list s this is going to give you a list"
+    },
+    {
+      "index": 644,
+      "start": 1632.0,
+      "end": 1633.95,
+      "duration": 1.95,
+      "text": "looks like this where every single"
+    },
+    {
+      "index": 645,
+      "start": 1633.96,
+      "end": 1635.87,
+      "duration": 1.91,
+      "text": "character and S is going to be its own"
+    },
+    {
+      "index": 646,
+      "start": 1635.88,
+      "end": 1638.31,
+      "duration": 2.43,
+      "text": "element so that means every character is"
+    },
+    {
+      "index": 647,
+      "start": 1638.32,
+      "end": 1639.51,
+      "duration": 1.19,
+      "text": "going to be a string and it's going to"
+    },
+    {
+      "index": 648,
+      "start": 1639.52,
+      "end": 1643.95,
+      "duration": 4.43,
+      "text": "be separated by a comma so including"
+    },
+    {
+      "index": 649,
+      "start": 1646.63,
+      "end": 1646.64,
+      "duration": 0.01,
+      "text": "spaces okay sometimes you don't want"
+    },
+    {
+      "index": 650,
+      "start": 1646.64,
+      "end": 1648.389,
+      "duration": 1.749,
+      "text": "each character in the list to be at own"
+    },
+    {
+      "index": 651,
+      "start": 1648.399,
+      "end": 1650.23,
+      "duration": 1.831,
+      "text": "element sometimes you want for example"
+    },
+    {
+      "index": 652,
+      "start": 1650.24,
+      "end": 1651.99,
+      "duration": 1.75,
+      "text": "if you're given a sentence you might"
+    },
+    {
+      "index": 653,
+      "start": 1652.0,
+      "end": 1654.269,
+      "duration": 2.269,
+      "text": "want to have everything in between"
+    },
+    {
+      "index": 654,
+      "start": 1654.279,
+      "end": 1656.43,
+      "duration": 2.151,
+      "text": "spaces being its own element so that'll"
+    },
+    {
+      "index": 655,
+      "start": 1656.44,
+      "end": 1658.35,
+      "duration": 1.91,
+      "text": "give you every word in the sentence for"
+    },
+    {
+      "index": 656,
+      "start": 1658.36,
+      "end": 1660.07,
+      "duration": 1.71,
+      "text": "example"
+    },
+    {
+      "index": 657,
+      "start": 1660.08,
+      "end": 1664.149,
+      "duration": 4.069,
+      "text": "okay in that case you're going to use"
+    },
+    {
+      "index": 658,
+      "start": 1664.159,
+      "end": 1666.549,
+      "duration": 2.39,
+      "text": "split in this case I've split over the"
+    },
+    {
+      "index": 659,
+      "start": 1666.559,
+      "end": 1668.95,
+      "duration": 2.391,
+      "text": "less than sign but again if you're doing"
+    },
+    {
+      "index": 660,
+      "start": 1668.96,
+      "end": 1672.269,
+      "duration": 3.309,
+      "text": "the uh the sentence example you might"
+    },
+    {
+      "index": 661,
+      "start": 1672.279,
+      "end": 1674.63,
+      "duration": 2.351,
+      "text": "want to split on a space so this is"
+    },
+    {
+      "index": 662,
+      "start": 1674.64,
+      "end": 1677.029,
+      "duration": 2.389,
+      "text": "going to take everything in between the"
+    },
+    {
+      "index": 663,
+      "start": 1677.039,
+      "end": 1678.35,
+      "duration": 1.311,
+      "text": "sign that you're interested in in this"
+    },
+    {
+      "index": 664,
+      "start": 1678.36,
+      "end": 1680.11,
+      "duration": 1.75,
+      "text": "case the less than sign and it's going"
+    },
+    {
+      "index": 665,
+      "start": 1680.12,
+      "end": 1682.47,
+      "duration": 2.35,
+      "text": "to set it as a separate element in the"
+    },
+    {
+      "index": 666,
+      "start": 1682.48,
+      "end": 1686.43,
+      "duration": 3.95,
+      "text": "list"
+    },
+    {
+      "index": 667,
+      "start": 1689.99,
+      "end": 1690.0,
+      "duration": 0.01,
+      "text": "okay so that's how you convert strings"
+    },
+    {
+      "index": 668,
+      "start": 1690.0,
+      "end": 1692.99,
+      "duration": 2.99,
+      "text": "uh strings to list and sometimes you're"
+    },
+    {
+      "index": 669,
+      "start": 1693.0,
+      "end": 1694.789,
+      "duration": 1.789,
+      "text": "given a a list and you might want to"
+    },
+    {
+      "index": 670,
+      "start": 1694.799,
+      "end": 1696.509,
+      "duration": 1.71,
+      "text": "convert it to a string so that's where"
+    },
+    {
+      "index": 671,
+      "start": 1696.519,
+      "end": 1698.149,
+      "duration": 1.63,
+      "text": "this"
+    },
+    {
+      "index": 672,
+      "start": 1698.159,
+      "end": 1701.99,
+      "duration": 3.831,
+      "text": "join uh method or function is useful so"
+    },
+    {
+      "index": 673,
+      "start": 1702.0,
+      "end": 1704.11,
+      "duration": 2.11,
+      "text": "this is an empty string so it's just"
+    },
+    {
+      "index": 674,
+      "start": 1704.12,
+      "end": 1706.95,
+      "duration": 2.83,
+      "text": "open close quote right away no space so"
+    },
+    {
+      "index": 675,
+      "start": 1706.96,
+      "end": 1709.75,
+      "duration": 2.79,
+      "text": "this just joins every every one of the"
+    },
+    {
+      "index": 676,
+      "start": 1709.76,
+      "end": 1711.35,
+      "duration": 1.59,
+      "text": "elements in the list together so it"
+    },
+    {
+      "index": 677,
+      "start": 1711.36,
+      "end": 1713.269,
+      "duration": 1.909,
+      "text": "return the string ABC and then you can"
+    },
+    {
+      "index": 678,
+      "start": 1713.279,
+      "end": 1714.87,
+      "duration": 1.591,
+      "text": "join on any character that you would"
+    },
+    {
+      "index": 679,
+      "start": 1714.88,
+      "end": 1716.909,
+      "duration": 2.029,
+      "text": "want so in this case you can join on the"
+    },
+    {
+      "index": 680,
+      "start": 1716.919,
+      "end": 1719.07,
+      "duration": 2.151,
+      "text": "underscore okay so it'll put whatever"
+    },
+    {
+      "index": 681,
+      "start": 1719.08,
+      "end": 1721.19,
+      "duration": 2.11,
+      "text": "characters in here in between every one"
+    },
+    {
+      "index": 682,
+      "start": 1721.2,
+      "end": 1725.149,
+      "duration": 3.949,
+      "text": "of the elements in your list okay pretty"
+    },
+    {
+      "index": 683,
+      "start": 1725.159,
+      "end": 1727.269,
+      "duration": 2.11,
+      "text": "useful"
+    },
+    {
+      "index": 684,
+      "start": 1727.279,
+      "end": 1729.83,
+      "duration": 2.551,
+      "text": "functions okay couple other operations"
+    },
+    {
+      "index": 685,
+      "start": 1729.84,
+      "end": 1731.549,
+      "duration": 1.709,
+      "text": "we can do on lists and these are also"
+    },
+    {
+      "index": 686,
+      "start": 1731.559,
+      "end": 1734.07,
+      "duration": 2.511,
+      "text": "pretty useful is to sort lists and to"
+    },
+    {
+      "index": 687,
+      "start": 1734.08,
+      "end": 1737.269,
+      "duration": 3.189,
+      "text": "reverse lists and many many others uh in"
+    },
+    {
+      "index": 688,
+      "start": 1737.279,
+      "end": 1740.71,
+      "duration": 3.431,
+      "text": "the python uh"
+    },
+    {
+      "index": 689,
+      "start": 1740.72,
+      "end": 1743.19,
+      "duration": 2.47,
+      "text": "documentation so sort and"
+    },
+    {
+      "index": 690,
+      "start": 1743.2,
+      "end": 1746.71,
+      "duration": 3.51,
+      "text": "sorted both sort lists but one of them"
+    },
+    {
+      "index": 691,
+      "start": 1746.72,
+      "end": 1748.59,
+      "duration": 1.87,
+      "text": "mutates the list and the other one does"
+    },
+    {
+      "index": 692,
+      "start": 1748.6,
+      "end": 1751.389,
+      "duration": 2.789,
+      "text": "not and sometimes it's useful to use one"
+    },
+    {
+      "index": 693,
+      "start": 1751.399,
+      "end": 1752.75,
+      "duration": 1.351,
+      "text": "and sometimes it's useful to use the"
+    },
+    {
+      "index": 694,
+      "start": 1752.76,
+      "end": 1756.149,
+      "duration": 3.389,
+      "text": "other okay so if I have this list L is"
+    },
+    {
+      "index": 695,
+      "start": 1756.159,
+      "end": 1758.509,
+      "duration": 2.35,
+      "text": "equal to"
+    },
+    {
+      "index": 696,
+      "start": 1758.519,
+      "end": 1761.549,
+      "duration": 3.03,
+      "text": "9603"
+    },
+    {
+      "index": 697,
+      "start": 1764.31,
+      "end": 1764.32,
+      "duration": 0.01,
+      "text": "sorted you can think of it as give me"
+    },
+    {
+      "index": 698,
+      "start": 1764.32,
+      "end": 1765.909,
+      "duration": 1.589,
+      "text": "the sorted version of"
+    },
+    {
+      "index": 699,
+      "start": 1765.919,
+      "end": 1768.669,
+      "duration": 2.75,
+      "text": "L gives you back the sorted version of L"
+    },
+    {
+      "index": 700,
+      "start": 1768.679,
+      "end": 1771.149,
+      "duration": 2.47,
+      "text": "so it returns a new list that's the"
+    },
+    {
+      "index": 701,
+      "start": 1771.159,
+      "end": 1773.509,
+      "duration": 2.35,
+      "text": "sorted version of the input list and"
+    },
+    {
+      "index": 702,
+      "start": 1773.519,
+      "end": 1775.47,
+      "duration": 1.951,
+      "text": "does not mutate l so it keeps L the"
+    },
+    {
+      "index": 703,
+      "start": 1775.48,
+      "end": 1778.07,
+      "duration": 2.59,
+      "text": "exact same"
+    },
+    {
+      "index": 704,
+      "start": 1781.83,
+      "end": 1781.84,
+      "duration": 0.01,
+      "text": "way so this will be replaced by the"
+    },
+    {
+      "index": 705,
+      "start": 1781.84,
+      "end": 1783.59,
+      "duration": 1.75,
+      "text": "sorted version of the list which you can"
+    },
+    {
+      "index": 706,
+      "start": 1783.6,
+      "end": 1785.47,
+      "duration": 1.87,
+      "text": "assign to a variable and then do"
+    },
+    {
+      "index": 707,
+      "start": 1785.48,
+      "end": 1787.19,
+      "duration": 1.71,
+      "text": "whatever you want with it like L2 is"
+    },
+    {
+      "index": 708,
+      "start": 1787.2,
+      "end": 1789.029,
+      "duration": 1.829,
+      "text": "equal to"
+    },
+    {
+      "index": 709,
+      "start": 1789.039,
+      "end": 1792.43,
+      "duration": 3.391,
+      "text": "sorted L for example"
+    },
+    {
+      "index": 710,
+      "start": 1792.44,
+      "end": 1794.87,
+      "duration": 2.43,
+      "text": "okay and it keeps L the"
+    },
+    {
+      "index": 711,
+      "start": 1794.88,
+      "end": 1797.07,
+      "duration": 2.19,
+      "text": "same on the other hand if you just want"
+    },
+    {
+      "index": 712,
+      "start": 1797.08,
+      "end": 1799.029,
+      "duration": 1.949,
+      "text": "to mutate l and you don't care about"
+    },
+    {
+      "index": 713,
+      "start": 1799.039,
+      "end": 1801.029,
+      "duration": 1.99,
+      "text": "getting another copy that's sorted you"
+    },
+    {
+      "index": 714,
+      "start": 1801.039,
+      "end": 1802.83,
+      "duration": 1.791,
+      "text": "just do l."
+    },
+    {
+      "index": 715,
+      "start": 1802.84,
+      "end": 1805.269,
+      "duration": 2.429,
+      "text": "sort and that's going to automatically"
+    },
+    {
+      "index": 716,
+      "start": 1805.279,
+      "end": 1808.909,
+      "duration": 3.63,
+      "text": "sort L for you and L now contain l l is"
+    },
+    {
+      "index": 717,
+      "start": 1808.919,
+      "end": 1812.549,
+      "duration": 3.63,
+      "text": "now the sorted uh the sorted version of"
+    },
+    {
+      "index": 718,
+      "start": 1812.559,
+      "end": 1816.269,
+      "duration": 3.71,
+      "text": "L similarly reverse is going to take L"
+    },
+    {
+      "index": 719,
+      "start": 1816.279,
+      "end": 1818.149,
+      "duration": 1.87,
+      "text": "and reverse all the character all the"
+    },
+    {
+      "index": 720,
+      "start": 1818.159,
+      "end": 1819.63,
+      "duration": 1.471,
+      "text": "elements in it so the last one is the"
+    },
+    {
+      "index": 721,
+      "start": 1819.64,
+      "end": 1820.99,
+      "duration": 1.35,
+      "text": "first one the second last one is the"
+    },
+    {
+      "index": 722,
+      "start": 1821.0,
+      "end": 1823.95,
+      "duration": 2.95,
+      "text": "second one and so"
+    },
+    {
+      "index": 723,
+      "start": 1823.96,
+      "end": 1826.99,
+      "duration": 3.03,
+      "text": "on so lists are mutable we've said that"
+    },
+    {
+      "index": 724,
+      "start": 1827.0,
+      "end": 1829.07,
+      "duration": 2.07,
+      "text": "so many times this like but what exactly"
+    },
+    {
+      "index": 725,
+      "start": 1829.08,
+      "end": 1830.75,
+      "duration": 1.67,
+      "text": "does that mean what implications does"
+    },
+    {
+      "index": 726,
+      "start": 1830.76,
+      "end": 1834.509,
+      "duration": 3.749,
+      "text": "that um does that have okay once again"
+    },
+    {
+      "index": 727,
+      "start": 1834.519,
+      "end": 1837.029,
+      "duration": 2.51,
+      "text": "this next part of the lecture python"
+    },
+    {
+      "index": 728,
+      "start": 1837.039,
+      "end": 1841.59,
+      "duration": 4.551,
+      "text": "tutor um just type you know paste all"
+    },
+    {
+      "index": 729,
+      "start": 1841.6,
+      "end": 1843.789,
+      "duration": 2.189,
+      "text": "the code in and go step by step to see"
+    },
+    {
+      "index": 730,
+      "start": 1843.799,
+      "end": 1846.31,
+      "duration": 2.511,
+      "text": "exactly what's um what's"
+    },
+    {
+      "index": 731,
+      "start": 1846.32,
+      "end": 1851.47,
+      "duration": 5.15,
+      "text": "happening so lists are"
+    },
+    {
+      "index": 732,
+      "start": 1854.909,
+      "end": 1854.919,
+      "duration": 0.01,
+      "text": "mutable as you have variable variable"
+    },
+    {
+      "index": 733,
+      "start": 1854.919,
+      "end": 1857.629,
+      "duration": 2.71,
+      "text": "names so for example L is equal to some"
+    },
+    {
+      "index": 734,
+      "start": 1857.639,
+      "end": 1859.47,
+      "duration": 1.831,
+      "text": "list"
+    },
+    {
+      "index": 735,
+      "start": 1859.48,
+      "end": 1862.31,
+      "duration": 2.83,
+      "text": "that L is going to be pointing to the"
+    },
+    {
+      "index": 736,
+      "start": 1862.32,
+      "end": 1864.629,
+      "duration": 2.309,
+      "text": "list in memory okay and since it's a"
+    },
+    {
+      "index": 737,
+      "start": 1864.639,
+      "end": 1867.029,
+      "duration": 2.39,
+      "text": "mutable object this list you can have"
+    },
+    {
+      "index": 738,
+      "start": 1867.039,
+      "end": 1868.909,
+      "duration": 1.87,
+      "text": "more than one variable that points to"
+    },
+    {
+      "index": 739,
+      "start": 1868.919,
+      "end": 1871.11,
+      "duration": 2.191,
+      "text": "the exact same object in"
+    },
+    {
+      "index": 740,
+      "start": 1871.12,
+      "end": 1874.11,
+      "duration": 2.99,
+      "text": "memory okay and if you have more than"
+    },
+    {
+      "index": 741,
+      "start": 1874.12,
+      "end": 1876.23,
+      "duration": 2.11,
+      "text": "one variable that points to the same"
+    },
+    {
+      "index": 742,
+      "start": 1876.24,
+      "end": 1877.909,
+      "duration": 1.669,
+      "text": "object in memory if that object in"
+    },
+    {
+      "index": 743,
+      "start": 1877.919,
+      "end": 1880.95,
+      "duration": 3.031,
+      "text": "memory is changed then when you access"
+    },
+    {
+      "index": 744,
+      "start": 1880.96,
+      "end": 1883.43,
+      "duration": 2.47,
+      "text": "it through any one of these variables"
+    },
+    {
+      "index": 745,
+      "start": 1883.44,
+      "end": 1885.43,
+      "duration": 1.99,
+      "text": "they're all going to give you the"
+    },
+    {
+      "index": 746,
+      "start": 1885.44,
+      "end": 1890.75,
+      "duration": 5.31,
+      "text": "changed um the changed object value okay"
+    },
+    {
+      "index": 747,
+      "start": 1890.76,
+      "end": 1892.269,
+      "duration": 1.509,
+      "text": "so the key phrase to keep in mind when"
+    },
+    {
+      "index": 748,
+      "start": 1892.279,
+      "end": 1894.549,
+      "duration": 2.27,
+      "text": "you're dealing with lists is what side"
+    },
+    {
+      "index": 749,
+      "start": 1894.559,
+      "end": 1896.23,
+      "duration": 1.671,
+      "text": "effects could happen right if you're"
+    },
+    {
+      "index": 750,
+      "start": 1896.24,
+      "end": 1898.23,
+      "duration": 1.99,
+      "text": "mutating a list if you're doing"
+    },
+    {
+      "index": 751,
+      "start": 1898.24,
+      "end": 1900.31,
+      "duration": 2.07,
+      "text": "operations on lists what what side"
+    },
+    {
+      "index": 752,
+      "start": 1900.32,
+      "end": 1903.47,
+      "duration": 3.15,
+      "text": "effects you know what variables might be"
+    },
+    {
+      "index": 753,
+      "start": 1903.48,
+      "end": 1906.909,
+      "duration": 3.429,
+      "text": "affected by by this change okay let's"
+    },
+    {
+      "index": 754,
+      "start": 1906.919,
+      "end": 1908.87,
+      "duration": 1.951,
+      "text": "come back down to earth for a second"
+    },
+    {
+      "index": 755,
+      "start": 1908.88,
+      "end": 1910.87,
+      "duration": 1.99,
+      "text": "okay this will wake a lot of people"
+    },
+    {
+      "index": 756,
+      "start": 1910.88,
+      "end": 1916.149,
+      "duration": 5.269,
+      "text": "up okay so let's do an analogy with um"
+    },
+    {
+      "index": 757,
+      "start": 1916.159,
+      "end": 1918.99,
+      "duration": 2.831,
+      "text": "with people okay let's say we have a"
+    },
+    {
+      "index": 758,
+      "start": 1919.0,
+      "end": 1922.83,
+      "duration": 3.83,
+      "text": "person a person this case Justin Bieber"
+    },
+    {
+      "index": 759,
+      "start": 1922.84,
+      "end": 1925.629,
+      "duration": 2.789,
+      "text": "is going to be an object right I'm an"
+    },
+    {
+      "index": 760,
+      "start": 1925.639,
+      "end": 1928.31,
+      "duration": 2.671,
+      "text": "object right I'm like the number three"
+    },
+    {
+      "index": 761,
+      "start": 1928.32,
+      "end": 1930.35,
+      "duration": 2.03,
+      "text": "Bieber's an object he's like number five"
+    },
+    {
+      "index": 762,
+      "start": 1930.36,
+      "end": 1932.149,
+      "duration": 1.789,
+      "text": "right we're different objects we're both"
+    },
+    {
+      "index": 763,
+      "start": 1932.159,
+      "end": 1934.11,
+      "duration": 1.951,
+      "text": "of type"
+    },
+    {
+      "index": 764,
+      "start": 1934.12,
+      "end": 1935.83,
+      "duration": 1.71,
+      "text": "people"
+    },
+    {
+      "index": 765,
+      "start": 1935.84,
+      "end": 1939.23,
+      "duration": 3.39,
+      "text": "okay let's say a a person has different"
+    },
+    {
+      "index": 766,
+      "start": 1939.24,
+      "end": 1942.47,
+      "duration": 3.23,
+      "text": "attributes right let's say we can let's"
+    },
+    {
+      "index": 767,
+      "start": 1942.48,
+      "end": 1945.35,
+      "duration": 2.87,
+      "text": "say he gets two attributes to begin with"
+    },
+    {
+      "index": 768,
+      "start": 1945.36,
+      "end": 1949.47,
+      "duration": 4.11,
+      "text": "he's a singer and he's rich"
+    },
+    {
+      "index": 769,
+      "start": 1952.43,
+      "end": 1952.44,
+      "duration": 0.01,
+      "text": "okay I can refer to this person object"
+    },
+    {
+      "index": 770,
+      "start": 1952.44,
+      "end": 1954.47,
+      "duration": 2.03,
+      "text": "by many different names right his full"
+    },
+    {
+      "index": 771,
+      "start": 1954.48,
+      "end": 1956.909,
+      "duration": 2.429,
+      "text": "name his stage name all of the fan girls"
+    },
+    {
+      "index": 772,
+      "start": 1956.919,
+      "end": 1959.59,
+      "duration": 2.671,
+      "text": "call him by these names um people who"
+    },
+    {
+      "index": 773,
+      "start": 1959.6,
+      "end": 1961.11,
+      "duration": 1.51,
+      "text": "dislike him call him by other names that"
+    },
+    {
+      "index": 774,
+      "start": 1961.12,
+      "end": 1964.07,
+      "duration": 2.95,
+      "text": "I didn't put up here okay but he's known"
+    },
+    {
+      "index": 775,
+      "start": 1964.08,
+      "end": 1965.43,
+      "duration": 1.35,
+      "text": "by any by all these different names"
+    },
+    {
+      "index": 776,
+      "start": 1965.44,
+      "end": 1967.23,
+      "duration": 1.79,
+      "text": "they're all aliases or nicknames that"
+    },
+    {
+      "index": 777,
+      "start": 1967.24,
+      "end": 1969.87,
+      "duration": 2.63,
+      "text": "point to this same person object"
+    },
+    {
+      "index": 778,
+      "start": 1969.88,
+      "end": 1973.029,
+      "duration": 3.149,
+      "text": "right okay so originally let's say I say"
+    },
+    {
+      "index": 779,
+      "start": 1973.039,
+      "end": 1974.95,
+      "duration": 1.911,
+      "text": "Justin Bieber is a singer and Rich those"
+    },
+    {
+      "index": 780,
+      "start": 1974.96,
+      "end": 1976.509,
+      "duration": 1.549,
+      "text": "are the two attributes I've originally"
+    },
+    {
+      "index": 781,
+      "start": 1976.519,
+      "end": 1979.35,
+      "duration": 2.831,
+      "text": "assigned to him and then let's say I"
+    },
+    {
+      "index": 782,
+      "start": 1979.36,
+      "end": 1981.629,
+      "duration": 2.269,
+      "text": "want to assign a different attribute to"
+    },
+    {
+      "index": 783,
+      "start": 1981.639,
+      "end": 1984.07,
+      "duration": 2.431,
+      "text": "him and say Justin Bieber is singer a"
+    },
+    {
+      "index": 784,
+      "start": 1984.08,
+      "end": 1986.47,
+      "duration": 2.39,
+      "text": "rich and a troublemaker I'm being kind"
+    },
+    {
+      "index": 785,
+      "start": 1986.48,
+      "end": 1990.35,
+      "duration": 3.87,
+      "text": "here okay okay so if I say Justin Bieber"
+    },
+    {
+      "index": 786,
+      "start": 1990.36,
+      "end": 1991.669,
+      "duration": 1.309,
+      "text": "is these three has these three"
+    },
+    {
+      "index": 787,
+      "start": 1991.679,
+      "end": 1993.629,
+      "duration": 1.95,
+      "text": "attributes so it's the same person I'm"
+    },
+    {
+      "index": 788,
+      "start": 1993.639,
+      "end": 1996.269,
+      "duration": 2.63,
+      "text": "referring to then all of his"
+    },
+    {
+      "index": 789,
+      "start": 1996.279,
+      "end": 1998.87,
+      "duration": 2.591,
+      "text": "nicknames right are going to refer to"
+    },
+    {
+      "index": 790,
+      "start": 1998.88,
+      "end": 2000.629,
+      "duration": 1.749,
+      "text": "this exact same person so all of his"
+    },
+    {
+      "index": 791,
+      "start": 2000.639,
+      "end": 2003.389,
+      "duration": 2.75,
+      "text": "nicknames are going to or aliases will"
+    },
+    {
+      "index": 792,
+      "start": 2003.399,
+      "end": 2005.389,
+      "duration": 1.99,
+      "text": "refer to the same person object right"
+    },
+    {
+      "index": 793,
+      "start": 2005.399,
+      "end": 2008.149,
+      "duration": 2.75,
+      "text": "with these changed attributes"
+    },
+    {
+      "index": 794,
+      "start": 2008.159,
+      "end": 2009.629,
+      "duration": 1.47,
+      "text": "okay does that make"
+    },
+    {
+      "index": 795,
+      "start": 2009.639,
+      "end": 2014.669,
+      "duration": 5.03,
+      "text": "sense okay so that sort of idea arises"
+    },
+    {
+      "index": 796,
+      "start": 2014.679,
+      "end": 2017.31,
+      "duration": 2.631,
+      "text": "in lists so list is like a person object"
+    },
+    {
+      "index": 797,
+      "start": 2017.32,
+      "end": 2019.549,
+      "duration": 2.229,
+      "text": "whose value you whose attributes can"
+    },
+    {
+      "index": 798,
+      "start": 2019.559,
+      "end": 2021.75,
+      "duration": 2.191,
+      "text": "change for example and as they change"
+    },
+    {
+      "index": 799,
+      "start": 2021.76,
+      "end": 2023.71,
+      "duration": 1.95,
+      "text": "all of the different aliases for this"
+    },
+    {
+      "index": 800,
+      "start": 2023.72,
+      "end": 2027.029,
+      "duration": 3.309,
+      "text": "object will point to this changed"
+    },
+    {
+      "index": 801,
+      "start": 2027.039,
+      "end": 2030.87,
+      "duration": 3.831,
+      "text": "object okay so let's see a few examples"
+    },
+    {
+      "index": 802,
+      "start": 2030.88,
+      "end": 2032.87,
+      "duration": 1.99,
+      "text": "I apologize if this is a little a little"
+    },
+    {
+      "index": 803,
+      "start": 2032.88,
+      "end": 2035.029,
+      "duration": 2.149,
+      "text": "small but this I basically copy and"
+    },
+    {
+      "index": 804,
+      "start": 2035.039,
+      "end": 2037.11,
+      "duration": 2.071,
+      "text": "pasted from the python tutor which is"
+    },
+    {
+      "index": 805,
+      "start": 2037.12,
+      "end": 2039.99,
+      "duration": 2.87,
+      "text": "just in the in uh from the code from"
+    },
+    {
+      "index": 806,
+      "start": 2040.0,
+      "end": 2043.389,
+      "duration": 3.389,
+      "text": "today's lecture okay so I have this uh"
+    },
+    {
+      "index": 807,
+      "start": 2043.399,
+      "end": 2045.43,
+      "duration": 2.031,
+      "text": "these lines of code here the first"
+    },
+    {
+      "index": 808,
+      "start": 2045.44,
+      "end": 2047.11,
+      "duration": 1.67,
+      "text": "couple of lines really just show what"
+    },
+    {
+      "index": 809,
+      "start": 2047.12,
+      "end": 2048.23,
+      "duration": 1.11,
+      "text": "happens when you're dealing with"
+    },
+    {
+      "index": 810,
+      "start": 2048.24,
+      "end": 2050.71,
+      "duration": 2.47,
+      "text": "non-mutable objects so with non-mutable"
+    },
+    {
+      "index": 811,
+      "start": 2050.72,
+      "end": 2052.669,
+      "duration": 1.949,
+      "text": "objects you have two separate objects"
+    },
+    {
+      "index": 812,
+      "start": 2052.679,
+      "end": 2055.03,
+      "duration": 2.351,
+      "text": "that get their own values and that's it"
+    },
+    {
+      "index": 813,
+      "start": 2055.04,
+      "end": 2055.95,
+      "duration": 0.91,
+      "text": "end of"
+    },
+    {
+      "index": 814,
+      "start": 2055.96,
+      "end": 2059.109,
+      "duration": 3.149,
+      "text": "story with lists"
+    },
+    {
+      "index": 815,
+      "start": 2059.119,
+      "end": 2061.389,
+      "duration": 2.27,
+      "text": "however it there's something different"
+    },
+    {
+      "index": 816,
+      "start": 2061.399,
+      "end": 2064.349,
+      "duration": 2.95,
+      "text": "that happens so I have warm is a"
+    },
+    {
+      "index": 817,
+      "start": 2064.359,
+      "end": 2066.629,
+      "duration": 2.27,
+      "text": "variable and it's going to be equal to"
+    },
+    {
+      "index": 818,
+      "start": 2066.639,
+      "end": 2069.069,
+      "duration": 2.43,
+      "text": "this list so warm is going to point to"
+    },
+    {
+      "index": 819,
+      "start": 2069.079,
+      "end": 2071.149,
+      "duration": 2.07,
+      "text": "this list here red yellow orange it"
+    },
+    {
+      "index": 820,
+      "start": 2071.159,
+      "end": 2073.51,
+      "duration": 2.351,
+      "text": "contains three"
+    },
+    {
+      "index": 821,
+      "start": 2073.52,
+      "end": 2076.27,
+      "duration": 2.75,
+      "text": "elements hot is equal to warm means I'm"
+    },
+    {
+      "index": 822,
+      "start": 2076.28,
+      "end": 2079.75,
+      "duration": 3.47,
+      "text": "creating an alias for this list and I'm"
+    },
+    {
+      "index": 823,
+      "start": 2079.76,
+      "end": 2081.95,
+      "duration": 2.19,
+      "text": "and the aliens is Alias is going to be"
+    },
+    {
+      "index": 824,
+      "start": 2081.96,
+      "end": 2084.069,
+      "duration": 2.109,
+      "text": "with this variable hot so notice warm"
+    },
+    {
+      "index": 825,
+      "start": 2084.079,
+      "end": 2087.669,
+      "duration": 3.59,
+      "text": "and hot point to the exact same"
+    },
+    {
+      "index": 826,
+      "start": 2087.679,
+      "end": 2091.149,
+      "duration": 3.47,
+      "text": "object so on line eight when I append a"
+    },
+    {
+      "index": 827,
+      "start": 2091.159,
+      "end": 2093.869,
+      "duration": 2.71,
+      "text": "when I append this string pink to my"
+    },
+    {
+      "index": 828,
+      "start": 2093.879,
+      "end": 2096.909,
+      "duration": 3.03,
+      "text": "object since both of these two variables"
+    },
+    {
+      "index": 829,
+      "start": 2096.919,
+      "end": 2098.829,
+      "duration": 1.91,
+      "text": "point to the exact same object if I'm"
+    },
+    {
+      "index": 830,
+      "start": 2098.839,
+      "end": 2102.23,
+      "duration": 3.391,
+      "text": "trying to access this object through"
+    },
+    {
+      "index": 831,
+      "start": 2102.24,
+      "end": 2104.03,
+      "duration": 1.79,
+      "text": "either variable they're going both going"
+    },
+    {
+      "index": 832,
+      "start": 2104.04,
+      "end": 2108.27,
+      "duration": 4.23,
+      "text": "to print out the same thing okay and"
+    },
+    {
+      "index": 833,
+      "start": 2108.28,
+      "end": 2110.069,
+      "duration": 1.789,
+      "text": "that's the side effect that's the side"
+    },
+    {
+      "index": 834,
+      "start": 2110.079,
+      "end": 2113.349,
+      "duration": 3.27,
+      "text": "effect of of lists being lists being"
+    },
+    {
+      "index": 835,
+      "start": 2113.359,
+      "end": 2116.27,
+      "duration": 2.911,
+      "text": "mutable"
+    },
+    {
+      "index": 836,
+      "start": 2116.28,
+      "end": 2119.47,
+      "duration": 3.19,
+      "text": "okay if you want to create an entirely"
+    },
+    {
+      "index": 837,
+      "start": 2119.48,
+      "end": 2121.39,
+      "duration": 1.91,
+      "text": "new copy of the"
+    },
+    {
+      "index": 838,
+      "start": 2121.4,
+      "end": 2124.15,
+      "duration": 2.75,
+      "text": "list then you can clone it which sounds"
+    },
+    {
+      "index": 839,
+      "start": 2124.16,
+      "end": 2126.069,
+      "duration": 1.909,
+      "text": "really cool but really it's just making"
+    },
+    {
+      "index": 840,
+      "start": 2126.079,
+      "end": 2128.79,
+      "duration": 2.711,
+      "text": "a copy of the list and you clone it"
+    },
+    {
+      "index": 841,
+      "start": 2128.8,
+      "end": 2131.27,
+      "duration": 2.47,
+      "text": "using this little notation here which is"
+    },
+    {
+      "index": 842,
+      "start": 2131.28,
+      "end": 2133.31,
+      "duration": 2.03,
+      "text": "open close square brackets with a"
+    },
+    {
+      "index": 843,
+      "start": 2133.32,
+      "end": 2135.23,
+      "duration": 1.91,
+      "text": "colon and we've sort of seen this"
+    },
+    {
+      "index": 844,
+      "start": 2135.24,
+      "end": 2137.589,
+      "duration": 2.349,
+      "text": "notation here and this tells python this"
+    },
+    {
+      "index": 845,
+      "start": 2137.599,
+      "end": 2140.87,
+      "duration": 3.271,
+      "text": "is zero sorry this is zero and this is"
+    },
+    {
+      "index": 846,
+      "start": 2140.88,
+      "end": 2145.109,
+      "duration": 4.229,
+      "text": "length uh cool I"
+    },
+    {
+      "index": 847,
+      "start": 2145.119,
+      "end": 2147.47,
+      "duration": 2.351,
+      "text": "guess but it basically says take every"
+    },
+    {
+      "index": 848,
+      "start": 2147.48,
+      "end": 2149.67,
+      "duration": 2.19,
+      "text": "element create a new list with those"
+    },
+    {
+      "index": 849,
+      "start": 2149.68,
+      "end": 2151.109,
+      "duration": 1.429,
+      "text": "exact same"
+    },
+    {
+      "index": 850,
+      "start": 2151.119,
+      "end": 2153.349,
+      "duration": 2.23,
+      "text": "elements um and assign it to the"
+    },
+    {
+      "index": 851,
+      "start": 2153.359,
+      "end": 2154.67,
+      "duration": 1.311,
+      "text": "variable"
+    },
+    {
+      "index": 852,
+      "start": 2154.68,
+      "end": 2157.43,
+      "duration": 2.75,
+      "text": "chill so here if I originally have cool"
+    },
+    {
+      "index": 853,
+      "start": 2157.44,
+      "end": 2160.63,
+      "duration": 3.19,
+      "text": "as equal to blue green gray right here"
+    },
+    {
+      "index": 854,
+      "start": 2160.64,
+      "end": 2162.91,
+      "duration": 2.27,
+      "text": "when I clone it on line two with that"
+    },
+    {
+      "index": 855,
+      "start": 2162.92,
+      "end": 2165.87,
+      "duration": 2.95,
+      "text": "with that funky notation I'm creating a"
+    },
+    {
+      "index": 856,
+      "start": 2165.88,
+      "end": 2168.79,
+      "duration": 2.91,
+      "text": "new copy of it and then on the next line"
+    },
+    {
+      "index": 857,
+      "start": 2168.8,
+      "end": 2170.63,
+      "duration": 1.83,
+      "text": "when I'm appending"
+    },
+    {
+      "index": 858,
+      "start": 2170.64,
+      "end": 2173.91,
+      "duration": 3.27,
+      "text": "another element to the to the copy"
+    },
+    {
+      "index": 859,
+      "start": 2173.92,
+      "end": 2176.67,
+      "duration": 2.75,
+      "text": "notice I'm just altering the copy the"
+    },
+    {
+      "index": 860,
+      "start": 2176.68,
+      "end": 2178.55,
+      "duration": 1.87,
+      "text": "original stayed the same because I've"
+    },
+    {
+      "index": 861,
+      "start": 2178.56,
+      "end": 2182.109,
+      "duration": 3.549,
+      "text": "cloned it okay so if you don't want to"
+    },
+    {
+      "index": 862,
+      "start": 2182.119,
+      "end": 2184.67,
+      "duration": 2.551,
+      "text": "have this the side effect side effect"
+    },
+    {
+      "index": 863,
+      "start": 2184.68,
+      "end": 2187.71,
+      "duration": 3.03,
+      "text": "issue then you should clone your"
+    },
+    {
+      "index": 864,
+      "start": 2187.72,
+      "end": 2191.349,
+      "duration": 3.629,
+      "text": "your uh your variable your"
+    },
+    {
+      "index": 865,
+      "start": 2191.359,
+      "end": 2193.55,
+      "duration": 2.191,
+      "text": "list"
+    },
+    {
+      "index": 866,
+      "start": 2193.56,
+      "end": 2196.95,
+      "duration": 3.39,
+      "text": "okay so let's see a slightly more"
+    },
+    {
+      "index": 867,
+      "start": 2196.96,
+      "end": 2200.27,
+      "duration": 3.31,
+      "text": "complicated example example"
+    },
+    {
+      "index": 868,
+      "start": 2200.28,
+      "end": 2202.309,
+      "duration": 2.029,
+      "text": "where you're going to see the difference"
+    },
+    {
+      "index": 869,
+      "start": 2202.319,
+      "end": 2204.99,
+      "duration": 2.671,
+      "text": "between sort and sorted in the context"
+    },
+    {
+      "index": 870,
+      "start": 2205.0,
+      "end": 2206.99,
+      "duration": 1.99,
+      "text": "of this uh"
+    },
+    {
+      "index": 871,
+      "start": 2207.0,
+      "end": 2209.79,
+      "duration": 2.79,
+      "text": "mutability and and side effects issue"
+    },
+    {
+      "index": 872,
+      "start": 2209.8,
+      "end": 2210.75,
+      "duration": 0.95,
+      "text": "okay"
+    },
+    {
+      "index": 873,
+      "start": 2210.76,
+      "end": 2213.19,
+      "duration": 2.43,
+      "text": "so once again let's create this warm is"
+    },
+    {
+      "index": 874,
+      "start": 2213.2,
+      "end": 2216.349,
+      "duration": 3.149,
+      "text": "equal to red yellow orange so that's"
+    },
+    {
+      "index": 875,
+      "start": 2216.359,
+      "end": 2219.95,
+      "duration": 3.591,
+      "text": "what warm is going to point to this list"
+    },
+    {
+      "index": 876,
+      "start": 2219.96,
+      "end": 2223.109,
+      "duration": 3.149,
+      "text": "and then sorted warm is equal to warm do"
+    },
+    {
+      "index": 877,
+      "start": 2223.119,
+      "end": 2225.47,
+      "duration": 2.351,
+      "text": "sort so do sort"
+    },
+    {
+      "index": 878,
+      "start": 2225.48,
+      "end": 2229.03,
+      "duration": 3.55,
+      "text": "mutates so as soon as I do that that"
+    },
+    {
+      "index": 879,
+      "start": 2229.04,
+      "end": 2232.39,
+      "duration": 3.35,
+      "text": "list warm is now the sorted version of"
+    },
+    {
+      "index": 880,
+      "start": 2232.4,
+      "end": 2235.51,
+      "duration": 3.11,
+      "text": "it and notice that I've assigned the"
+    },
+    {
+      "index": 881,
+      "start": 2235.52,
+      "end": 2237.87,
+      "duration": 2.35,
+      "text": "return of this to sorted warm and the"
+    },
+    {
+      "index": 882,
+      "start": 2237.88,
+      "end": 2239.71,
+      "duration": 1.83,
+      "text": "return is"
+    },
+    {
+      "index": 883,
+      "start": 2239.72,
+      "end": 2242.309,
+      "duration": 2.589,
+      "text": "none"
+    },
+    {
+      "index": 884,
+      "start": 2242.319,
+      "end": 2246.109,
+      "duration": 3.79,
+      "text": "because l. sort or do do sort mutated"
+    },
+    {
+      "index": 885,
+      "start": 2246.119,
+      "end": 2248.71,
+      "duration": 2.591,
+      "text": "the list right it didn't return turn a m"
+    },
+    {
+      "index": 886,
+      "start": 2248.72,
+      "end": 2250.63,
+      "duration": 1.91,
+      "text": "a sorted version of the list it mutated"
+    },
+    {
+      "index": 887,
+      "start": 2250.64,
+      "end": 2253.63,
+      "duration": 2.99,
+      "text": "the list itself okay so when I print"
+    },
+    {
+      "index": 888,
+      "start": 2253.64,
+      "end": 2255.39,
+      "duration": 1.75,
+      "text": "warm and I print sorted warm I'm"
+    },
+    {
+      "index": 889,
+      "start": 2255.4,
+      "end": 2257.75,
+      "duration": 2.35,
+      "text": "printing the mutated version and then"
+    },
+    {
+      "index": 890,
+      "start": 2257.76,
+      "end": 2259.349,
+      "duration": 1.589,
+      "text": "this none"
+    },
+    {
+      "index": 891,
+      "start": 2259.359,
+      "end": 2263.19,
+      "duration": 3.831,
+      "text": "here sorted on the other"
+    },
+    {
+      "index": 892,
+      "start": 2263.2,
+      "end": 2268.19,
+      "duration": 4.99,
+      "text": "hand returns it doesn't sorted does not"
+    },
+    {
+      "index": 893,
+      "start": 2268.2,
+      "end": 2271.51,
+      "duration": 3.31,
+      "text": "sort the list that uh that's given to it"
+    },
+    {
+      "index": 894,
+      "start": 2271.52,
+      "end": 2273.23,
+      "duration": 1.71,
+      "text": "and instead it returns a sorted version"
+    },
+    {
+      "index": 895,
+      "start": 2273.24,
+      "end": 2275.95,
+      "duration": 2.71,
+      "text": "of the list so in this case if cool is"
+    },
+    {
+      "index": 896,
+      "start": 2275.96,
+      "end": 2279.71,
+      "duration": 3.75,
+      "text": "equal to these three col gray green blue"
+    },
+    {
+      "index": 897,
+      "start": 2279.72,
+      "end": 2283.47,
+      "duration": 3.75,
+      "text": "if I do sorted cool it's going to return"
+    },
+    {
+      "index": 898,
+      "start": 2283.48,
+      "end": 2285.47,
+      "duration": 1.99,
+      "text": "the sorted version of that list which is"
+    },
+    {
+      "index": 899,
+      "start": 2285.48,
+      "end": 2287.95,
+      "duration": 2.47,
+      "text": "blue green gray and it's assigned to the"
+    },
+    {
+      "index": 900,
+      "start": 2287.96,
+      "end": 2289.75,
+      "duration": 1.79,
+      "text": "variable sorted cool so when I print"
+    },
+    {
+      "index": 901,
+      "start": 2289.76,
+      "end": 2291.829,
+      "duration": 2.069,
+      "text": "them it's going to show me the two"
+    },
+    {
+      "index": 902,
+      "start": 2291.839,
+      "end": 2294.19,
+      "duration": 2.351,
+      "text": "separate lists one being the original"
+    },
+    {
+      "index": 903,
+      "start": 2294.2,
+      "end": 2300.23,
+      "duration": 6.03,
+      "text": "unsorted one and one being the sorted"
+    },
+    {
+      "index": 904,
+      "start": 2302.71,
+      "end": 2302.72,
+      "duration": 0.01,
+      "text": "version last one's a little bit more"
+    },
+    {
+      "index": 905,
+      "start": 2302.72,
+      "end": 2305.03,
+      "duration": 2.31,
+      "text": "complicated but it shows that even"
+    },
+    {
+      "index": 906,
+      "start": 2305.04,
+      "end": 2307.63,
+      "duration": 2.59,
+      "text": "though you you have nested"
+    },
+    {
+      "index": 907,
+      "start": 2307.64,
+      "end": 2310.069,
+      "duration": 2.429,
+      "text": "um even though you can have nested lists"
+    },
+    {
+      "index": 908,
+      "start": 2310.079,
+      "end": 2312.99,
+      "duration": 2.911,
+      "text": "you still you're not you you you're not"
+    },
+    {
+      "index": 909,
+      "start": 2313.0,
+      "end": 2317.109,
+      "duration": 4.109,
+      "text": "you don't escape this idea of of"
+    },
+    {
+      "index": 910,
+      "start": 2317.119,
+      "end": 2319.589,
+      "duration": 2.47,
+      "text": "um uh side"
+    },
+    {
+      "index": 911,
+      "start": 2319.599,
+      "end": 2323.51,
+      "duration": 3.911,
+      "text": "effects so first I'm going to create"
+    },
+    {
+      "index": 912,
+      "start": 2323.52,
+      "end": 2325.43,
+      "duration": 1.91,
+      "text": "warm is equal to these two colors yellow"
+    },
+    {
+      "index": 913,
+      "start": 2325.44,
+      "end": 2328.069,
+      "duration": 2.629,
+      "text": "orange so warm is points to these two"
+    },
+    {
+      "index": 914,
+      "start": 2328.079,
+      "end": 2331.27,
+      "duration": 3.191,
+      "text": "colors hot is equal to this one list a"
+    },
+    {
+      "index": 915,
+      "start": 2331.28,
+      "end": 2332.91,
+      "duration": 1.63,
+      "text": "list with one"
+    },
+    {
+      "index": 916,
+      "start": 2332.92,
+      "end": 2335.71,
+      "duration": 2.79,
+      "text": "element bright colors is going to be a"
+    },
+    {
+      "index": 917,
+      "start": 2335.72,
+      "end": 2337.79,
+      "duration": 2.07,
+      "text": "list"
+    },
+    {
+      "index": 918,
+      "start": 2337.8,
+      "end": 2340.349,
+      "duration": 2.549,
+      "text": "and the element inside the list is a"
+    },
+    {
+      "index": 919,
+      "start": 2340.359,
+      "end": 2341.309,
+      "duration": 0.95,
+      "text": "list"
+    },
+    {
+      "index": 920,
+      "start": 2341.319,
+      "end": 2344.03,
+      "duration": 2.711,
+      "text": "itself so since it's a listed so this is"
+    },
+    {
+      "index": 921,
+      "start": 2344.04,
+      "end": 2347.109,
+      "duration": 3.069,
+      "text": "your list and the element inside here"
+    },
+    {
+      "index": 922,
+      "start": 2347.119,
+      "end": 2348.87,
+      "duration": 1.751,
+      "text": "which is a list itself is actually just"
+    },
+    {
+      "index": 923,
+      "start": 2348.88,
+      "end": 2351.589,
+      "duration": 2.709,
+      "text": "pointing to whatever warm is that"
+    },
+    {
+      "index": 924,
+      "start": 2351.599,
+      "end": 2355.71,
+      "duration": 4.111,
+      "text": "object"
+    },
+    {
+      "index": 925,
+      "start": 2359.43,
+      "end": 2359.44,
+      "duration": 0.01,
+      "text": "okay then I do then I append hot to my"
+    },
+    {
+      "index": 926,
+      "start": 2359.44,
+      "end": 2361.87,
+      "duration": 2.43,
+      "text": "bright colors so the next element here"
+    },
+    {
+      "index": 927,
+      "start": 2361.88,
+      "end": 2364.51,
+      "duration": 2.63,
+      "text": "is going to be another list which means"
+    },
+    {
+      "index": 928,
+      "start": 2364.52,
+      "end": 2366.51,
+      "duration": 1.99,
+      "text": "it's just pointing to this other list"
+    },
+    {
+      "index": 929,
+      "start": 2366.52,
+      "end": 2369.95,
+      "duration": 3.43,
+      "text": "here it's not creating a copy of it okay"
+    },
+    {
+      "index": 930,
+      "start": 2369.96,
+      "end": 2371.67,
+      "duration": 1.71,
+      "text": "so each one of these elements here is"
+    },
+    {
+      "index": 931,
+      "start": 2371.68,
+      "end": 2373.27,
+      "duration": 1.59,
+      "text": "actually just pointing to these two"
+    },
+    {
+      "index": 932,
+      "start": 2373.28,
+      "end": 2374.47,
+      "duration": 1.19,
+      "text": "lists"
+    },
+    {
+      "index": 933,
+      "start": 2374.48,
+      "end": 2377.309,
+      "duration": 2.829,
+      "text": "here so if I modified either one of"
+    },
+    {
+      "index": 934,
+      "start": 2377.319,
+      "end": 2379.47,
+      "duration": 2.151,
+      "text": "these then bright colors would also be"
+    },
+    {
+      "index": 935,
+      "start": 2379.48,
+      "end": 2381.95,
+      "duration": 2.47,
+      "text": "modified so let's say I add pink here to"
+    },
+    {
+      "index": 936,
+      "start": 2381.96,
+      "end": 2384.109,
+      "duration": 2.149,
+      "text": "my hot"
+    },
+    {
+      "index": 937,
+      "start": 2384.119,
+      "end": 2387.349,
+      "duration": 3.23,
+      "text": "list we have red and pink then notice"
+    },
+    {
+      "index": 938,
+      "start": 2387.359,
+      "end": 2388.589,
+      "duration": 1.23,
+      "text": "that bright"
+    },
+    {
+      "index": 939,
+      "start": 2388.599,
+      "end": 2391.43,
+      "duration": 2.831,
+      "text": "colors the first element points to this"
+    },
+    {
+      "index": 940,
+      "start": 2391.44,
+      "end": 2392.95,
+      "duration": 1.51,
+      "text": "list and the second element points to"
+    },
+    {
+      "index": 941,
+      "start": 2392.96,
+      "end": 2395.47,
+      "duration": 2.51,
+      "text": "this list which I've just"
+    },
+    {
+      "index": 942,
+      "start": 2395.48,
+      "end": 2397.79,
+      "duration": 2.31,
+      "text": "modified last thing is I'll let you try"
+    },
+    {
+      "index": 943,
+      "start": 2397.8,
+      "end": 2400.79,
+      "duration": 2.99,
+      "text": "this as an exercise in Python tutor but"
+    },
+    {
+      "index": 944,
+      "start": 2400.8,
+      "end": 2402.43,
+      "duration": 1.63,
+      "text": "the idea here being you should be"
+    },
+    {
+      "index": 945,
+      "start": 2402.44,
+      "end": 2404.349,
+      "duration": 1.909,
+      "text": "careful as you're writing a for Loop"
+    },
+    {
+      "index": 946,
+      "start": 2404.359,
+      "end": 2406.27,
+      "duration": 1.911,
+      "text": "that iterates over a list that you're"
+    },
+    {
+      "index": 947,
+      "start": 2406.28,
+      "end": 2408.91,
+      "duration": 2.63,
+      "text": "modifying inside the list in this case"
+    },
+    {
+      "index": 948,
+      "start": 2408.92,
+      "end": 2412.27,
+      "duration": 3.35,
+      "text": "I'm trying to go through the list L1 and"
+    },
+    {
+      "index": 949,
+      "start": 2412.28,
+      "end": 2415.15,
+      "duration": 2.87,
+      "text": "if I find an item that's in L1 and L2 I"
+    },
+    {
+      "index": 950,
+      "start": 2415.16,
+      "end": 2417.109,
+      "duration": 1.949,
+      "text": "want to delete it from"
+    },
+    {
+      "index": 951,
+      "start": 2417.119,
+      "end": 2420.79,
+      "duration": 3.671,
+      "text": "L1 so one and two are also in L2 so I"
+    },
+    {
+      "index": 952,
+      "start": 2420.8,
+      "end": 2422.75,
+      "duration": 1.95,
+      "text": "want to delete them from L1 and be left"
+    },
+    {
+      "index": 953,
+      "start": 2422.76,
+      "end": 2425.27,
+      "duration": 2.51,
+      "text": "with 34 however the code on the left"
+    },
+    {
+      "index": 954,
+      "start": 2425.28,
+      "end": 2426.79,
+      "duration": 1.51,
+      "text": "here doesn't actually do what I think"
+    },
+    {
+      "index": 955,
+      "start": 2426.8,
+      "end": 2429.75,
+      "duration": 2.95,
+      "text": "it's doing"
+    },
+    {
+      "index": 956,
+      "start": 2432.67,
+      "end": 2432.68,
+      "duration": 0.01,
+      "text": "because here I'm I'm modifying a list as"
+    },
+    {
+      "index": 957,
+      "start": 2432.68,
+      "end": 2434.23,
+      "duration": 1.55,
+      "text": "I'm iterating over it and behind the"
+    },
+    {
+      "index": 958,
+      "start": 2434.24,
+      "end": 2436.99,
+      "duration": 2.75,
+      "text": "scenes python keeps this this keeps"
+    },
+    {
+      "index": 959,
+      "start": 2437.0,
+      "end": 2439.27,
+      "duration": 2.27,
+      "text": "track of the index and doesn't update"
+    },
+    {
+      "index": 960,
+      "start": 2439.28,
+      "end": 2442.069,
+      "duration": 2.789,
+      "text": "the index as it's as you're changing the"
+    },
+    {
+      "index": 961,
+      "start": 2442.079,
+      "end": 2444.79,
+      "duration": 2.711,
+      "text": "list so it figures out the length of the"
+    },
+    {
+      "index": 962,
+      "start": 2444.8,
+      "end": 2446.39,
+      "duration": 1.59,
+      "text": "list to begin with and how many indices"
+    },
+    {
+      "index": 963,
+      "start": 2446.4,
+      "end": 2447.39,
+      "duration": 0.99,
+      "text": "it"
+    },
+    {
+      "index": 964,
+      "start": 2447.4,
+      "end": 2450.03,
+      "duration": 2.63,
+      "text": "has and doesn't update it as you're"
+    },
+    {
+      "index": 965,
+      "start": 2450.04,
+      "end": 2451.63,
+      "duration": 1.59,
+      "text": "removing items from the"
+    },
+    {
+      "index": 966,
+      "start": 2451.64,
+      "end": 2454.47,
+      "duration": 2.83,
+      "text": "list so the solution to that is to make"
+    },
+    {
+      "index": 967,
+      "start": 2454.48,
+      "end": 2456.23,
+      "duration": 1.75,
+      "text": "a copy of the list"
+    },
+    {
+      "index": 968,
+      "start": 2456.24,
+      "end": 2459.87,
+      "duration": 3.63,
+      "text": "first iterate over the copy which will"
+    },
+    {
+      "index": 969,
+      "start": 2459.88,
+      "end": 2463.75,
+      "duration": 3.87,
+      "text": "remain intact and modify the list that"
+    },
+    {
+      "index": 970,
+      "start": 2463.76,
+      "end": 2466.589,
+      "duration": 2.829,
+      "text": "you want to modify inside the loop so"
+    },
+    {
+      "index": 971,
+      "start": 2466.599,
+      "end": 2468.55,
+      "duration": 1.951,
+      "text": "please run both of these in the python"
+    },
+    {
+      "index": 972,
+      "start": 2468.56,
+      "end": 2470.309,
+      "duration": 1.749,
+      "text": "tutor and you'll see that what ends up"
+    },
+    {
+      "index": 973,
+      "start": 2470.319,
+      "end": 2471.67,
+      "duration": 1.351,
+      "text": "happening is on the left you're going to"
+    },
+    {
+      "index": 974,
+      "start": 2471.68,
+      "end": 2474.309,
+      "duration": 2.629,
+      "text": "skip over one element okay so you so"
+    },
+    {
+      "index": 975,
+      "start": 2474.319,
+      "end": 2476.349,
+      "duration": 2.03,
+      "text": "your code so that's that's going to be"
+    },
+    {
+      "index": 976,
+      "start": 2476.359,
+      "end": 2480.96,
+      "duration": 4.601,
+      "text": "the wrong code all right"
+    }
+  ],
+  "course": {
+    "category": "Computer Science & AI",
+    "title": "Introduction to Computer Science and Programming in Python",
+    "source_url": "https://www.youtube.com/playlist?list=PLUl4u3cNGP63WbdFxL8giv4yhgdMGaZNA"
+  }
+}

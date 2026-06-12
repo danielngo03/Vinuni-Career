@@ -1,0 +1,1663 @@
+{
+  "video": {
+    "id": "D6Rd1K93nSA",
+    "title": "Partial Fractions and Laplace Inverse | MIT 18.03SC Differential Equations, Fall 2011",
+    "url": "https://www.youtube.com/watch?v=D6Rd1K93nSA",
+    "channel": "MIT OpenCourseWare",
+    "duration": 749,
+    "language": "en"
+  },
+  "segment_count": 235,
+  "segments": [
+    {
+      "index": 0,
+      "start": 7.55,
+      "end": 7.5600000000000005,
+      "duration": 0.01,
+      "text": "everyone welcome back so today we're"
+    },
+    {
+      "index": 1,
+      "start": 7.5600000000000005,
+      "end": 9.509,
+      "duration": 1.949,
+      "text": "going to take a look at a problem uh"
+    },
+    {
+      "index": 2,
+      "start": 9.519,
+      "end": 11.87,
+      "duration": 2.351,
+      "text": "with partial fractions and specifically"
+    },
+    {
+      "index": 3,
+      "start": 11.88,
+      "end": 13.509,
+      "duration": 1.629,
+      "text": "how to use these partial fractions to"
+    },
+    {
+      "index": 4,
+      "start": 13.519,
+      "end": 15.39,
+      "duration": 1.871,
+      "text": "compute llast"
+    },
+    {
+      "index": 5,
+      "start": 15.4,
+      "end": 17.99,
+      "duration": 2.59,
+      "text": "inverses so just as a warm-up uh we're"
+    },
+    {
+      "index": 6,
+      "start": 18.0,
+      "end": 21.23,
+      "duration": 3.23,
+      "text": "asked to recall what the formula is for"
+    },
+    {
+      "index": 7,
+      "start": 21.24,
+      "end": 24.269,
+      "duration": 3.029,
+      "text": "the llas transform of fime uh in terms"
+    },
+    {
+      "index": 8,
+      "start": 24.279,
+      "end": 26.87,
+      "duration": 2.591,
+      "text": "of the llast transform of f in the"
+    },
+    {
+      "index": 9,
+      "start": 26.88,
+      "end": 28.509,
+      "duration": 1.629,
+      "text": "second part uh we're asked to find the"
+    },
+    {
+      "index": 10,
+      "start": 28.519,
+      "end": 30.509,
+      "duration": 1.99,
+      "text": "inverse llas transform for three"
+    },
+    {
+      "index": 11,
+      "start": 30.519,
+      "end": 33.03,
+      "duration": 2.511,
+      "text": "different functions the first one is 1/"
+    },
+    {
+      "index": 12,
+      "start": 33.04,
+      "end": 41.79,
+      "duration": 8.75,
+      "text": "s^2 - 4 s^2 / s^2 + 4 eus 5S / s^2 - 4"
+    },
+    {
+      "index": 13,
+      "start": 41.8,
+      "end": 43.99,
+      "duration": 2.19,
+      "text": "and notice how we don't have any of"
+    },
+    {
+      "index": 14,
+      "start": 44.0,
+      "end": 46.869,
+      "duration": 2.869,
+      "text": "these formulas or sorry none of these uh"
+    },
+    {
+      "index": 15,
+      "start": 46.879,
+      "end": 48.43,
+      "duration": 1.551,
+      "text": "functions appear in the lookup table for"
+    },
+    {
+      "index": 16,
+      "start": 48.44,
+      "end": 50.709,
+      "duration": 2.269,
+      "text": "llas transform so in each case we have"
+    },
+    {
+      "index": 17,
+      "start": 50.719,
+      "end": 53.029,
+      "duration": 2.31,
+      "text": "to use partial fractions uh to convert"
+    },
+    {
+      "index": 18,
+      "start": 53.039,
+      "end": 55.229,
+      "duration": 2.19,
+      "text": "it or massage these functions into"
+    },
+    {
+      "index": 19,
+      "start": 55.239,
+      "end": 56.67,
+      "duration": 1.431,
+      "text": "something which we do know the llast"
+    },
+    {
+      "index": 20,
+      "start": 56.68,
+      "end": 59.31,
+      "duration": 2.63,
+      "text": "transform inverse for and then lastly"
+    },
+    {
+      "index": 21,
+      "start": 59.32,
+      "end": 61.069,
+      "duration": 1.749,
+      "text": "for the third part problem we're asked"
+    },
+    {
+      "index": 22,
+      "start": 61.079,
+      "end": 63.029,
+      "duration": 1.95,
+      "text": "to write down the partial fracture"
+    },
+    {
+      "index": 23,
+      "start": 63.039,
+      "end": 65.429,
+      "duration": 2.39,
+      "text": "partial fraction decomposition of this"
+    },
+    {
+      "index": 24,
+      "start": 65.439,
+      "end": 71.35,
+      "duration": 5.911,
+      "text": "function 1 s^2 * s^2 + 4 * s + 1 * s + 3"
+    },
+    {
+      "index": 25,
+      "start": 71.36,
+      "end": 72.87,
+      "duration": 1.51,
+      "text": "and specifically when we do the partial"
+    },
+    {
+      "index": 26,
+      "start": 72.88,
+      "end": 75.51,
+      "duration": 2.63,
+      "text": "fraction decomposition we're just uh"
+    },
+    {
+      "index": 27,
+      "start": 75.52,
+      "end": 78.109,
+      "duration": 2.589,
+      "text": "going to leave the coefficients uh the"
+    },
+    {
+      "index": 28,
+      "start": 78.119,
+      "end": 80.27,
+      "duration": 2.151,
+      "text": "UN undetermined coefficients uh unknown"
+    },
+    {
+      "index": 29,
+      "start": 80.28,
+      "end": 81.59,
+      "duration": 1.31,
+      "text": "we're not actually going to solve for"
+    },
+    {
+      "index": 30,
+      "start": 81.6,
+      "end": 83.59,
+      "duration": 1.99,
+      "text": "them okay so I'll let you think about"
+    },
+    {
+      "index": 31,
+      "start": 83.6,
+      "end": 84.95,
+      "duration": 1.35,
+      "text": "this problem and I'll be back in a"
+    },
+    {
+      "index": 32,
+      "start": 84.96,
+      "end": 95.91,
+      "duration": 10.95,
+      "text": "moment"
+    },
+    {
+      "index": 33,
+      "start": 98.59,
+      "end": 98.6,
+      "duration": 0.01,
+      "text": "hi everyone welcome back okay so for"
+    },
+    {
+      "index": 34,
+      "start": 98.6,
+      "end": 99.91,
+      "duration": 1.31,
+      "text": "part"
+    },
+    {
+      "index": 35,
+      "start": 99.92,
+      "end": 102.469,
+      "duration": 2.549,
+      "text": "one uh we're just asked to recall the"
+    },
+    {
+      "index": 36,
+      "start": 102.479,
+      "end": 106.31,
+      "duration": 3.831,
+      "text": "lass transform of fime in terms of the"
+    },
+    {
+      "index": 37,
+      "start": 106.32,
+      "end": 108.99,
+      "duration": 2.67,
+      "text": "lass transform of f so the lass"
+    },
+    {
+      "index": 38,
+      "start": 109.0,
+      "end": 110.67,
+      "duration": 1.67,
+      "text": "transform of"
+    },
+    {
+      "index": 39,
+      "start": 110.68,
+      "end": 115.55,
+      "duration": 4.87,
+      "text": "frime we can write down as s times the"
+    },
+    {
+      "index": 40,
+      "start": 115.56,
+      "end": 118.59,
+      "duration": 3.03,
+      "text": "lass transform of f which I'll use"
+    },
+    {
+      "index": 41,
+      "start": 118.6,
+      "end": 122.149,
+      "duration": 3.549,
+      "text": "capital f"
+    },
+    {
+      "index": 42,
+      "start": 125.069,
+      "end": 125.079,
+      "duration": 0.01,
+      "text": "minus F evaluated at the lower bound of"
+    },
+    {
+      "index": 43,
+      "start": 125.079,
+      "end": 127.069,
+      "duration": 1.99,
+      "text": "the laas transform integral which in"
+    },
+    {
+      "index": 44,
+      "start": 127.079,
+      "end": 129.469,
+      "duration": 2.39,
+      "text": "this case is just 0"
+    },
+    {
+      "index": 45,
+      "start": 129.479,
+      "end": 131.99,
+      "duration": 2.511,
+      "text": "minus okay so this is just part one this"
+    },
+    {
+      "index": 46,
+      "start": 132.0,
+      "end": 134.589,
+      "duration": 2.589,
+      "text": "is a warm-up problem for part"
+    },
+    {
+      "index": 47,
+      "start": 134.599,
+      "end": 137.19,
+      "duration": 2.591,
+      "text": "two we're asked to find the uh inverse"
+    },
+    {
+      "index": 48,
+      "start": 137.2,
+      "end": 139.509,
+      "duration": 2.309,
+      "text": "llas transform for three different"
+    },
+    {
+      "index": 49,
+      "start": 139.519,
+      "end": 141.99,
+      "duration": 2.471,
+      "text": "functions the first"
+    },
+    {
+      "index": 50,
+      "start": 142.0,
+      "end": 145.47,
+      "duration": 3.47,
+      "text": "one is 1/ s s minus"
+    },
+    {
+      "index": 51,
+      "start": 145.48,
+      "end": 148.229,
+      "duration": 2.749,
+      "text": "4 and we see here that we can Factor the"
+    },
+    {
+      "index": 52,
+      "start": 148.239,
+      "end": 151.47,
+      "duration": 3.231,
+      "text": "denominator into"
+    },
+    {
+      "index": 53,
+      "start": 151.48,
+      "end": 156.47,
+      "duration": 4.99,
+      "text": "1 / s - 2 * 1 s +"
+    },
+    {
+      "index": 54,
+      "start": 156.48,
+      "end": 159.43,
+      "duration": 2.95,
+      "text": "2 which means that we can use a partial"
+    },
+    {
+      "index": 55,
+      "start": 159.44,
+      "end": 162.03,
+      "duration": 2.59,
+      "text": "fraction uh decomposition which has the"
+    },
+    {
+      "index": 56,
+      "start": 162.04,
+      "end": 163.27,
+      "duration": 1.23,
+      "text": "form of"
+    },
+    {
+      "index": 57,
+      "start": 163.28,
+      "end": 172.43,
+      "duration": 9.15,
+      "text": "a times or divided by s- 2 plus b / s +"
+    },
+    {
+      "index": 58,
+      "start": 174.55,
+      "end": 174.56,
+      "duration": 0.01,
+      "text": "2 and now we need to solve for the"
+    },
+    {
+      "index": 59,
+      "start": 174.56,
+      "end": 176.91,
+      "duration": 2.35,
+      "text": "coefficients A and B so one way to solve"
+    },
+    {
+      "index": 60,
+      "start": 176.92,
+      "end": 178.75,
+      "duration": 1.83,
+      "text": "for the coefficients A and B is just to"
+    },
+    {
+      "index": 61,
+      "start": 178.76,
+      "end": 181.229,
+      "duration": 2.469,
+      "text": "multiply both sides of of this equation"
+    },
+    {
+      "index": 62,
+      "start": 181.239,
+      "end": 185.11,
+      "duration": 3.871,
+      "text": "through by the factors s- 2 and s+ 2 we"
+    },
+    {
+      "index": 63,
+      "start": 185.12,
+      "end": 187.229,
+      "duration": 2.109,
+      "text": "can then plug in values of s and solve"
+    },
+    {
+      "index": 64,
+      "start": 187.239,
+      "end": 189.949,
+      "duration": 2.71,
+      "text": "for A and B there's another way which is"
+    },
+    {
+      "index": 65,
+      "start": 189.959,
+      "end": 191.99,
+      "duration": 2.031,
+      "text": "sometimes referred to as a coverup"
+    },
+    {
+      "index": 66,
+      "start": 192.0,
+      "end": 194.43,
+      "duration": 2.43,
+      "text": "method and in this case what we do is we"
+    },
+    {
+      "index": 67,
+      "start": 194.44,
+      "end": 197.91,
+      "duration": 3.47,
+      "text": "pick for example say one of the one of"
+    },
+    {
+      "index": 68,
+      "start": 197.92,
+      "end": 199.99,
+      "duration": 2.07,
+      "text": "the places where the denominator blows"
+    },
+    {
+      "index": 69,
+      "start": 200.0,
+      "end": 201.67,
+      "duration": 1.67,
+      "text": "up so for example if we look at this"
+    },
+    {
+      "index": 70,
+      "start": 201.68,
+      "end": 205.43,
+      "duration": 3.75,
+      "text": "Factor uh s minus 2 this Factor uh"
+    },
+    {
+      "index": 71,
+      "start": 205.44,
+      "end": 208.309,
+      "duration": 2.869,
+      "text": "diverges when s approaches two so then"
+    },
+    {
+      "index": 72,
+      "start": 208.319,
+      "end": 210.07,
+      "duration": 1.751,
+      "text": "what we do is we go back to our original"
+    },
+    {
+      "index": 73,
+      "start": 210.08,
+      "end": 214.67,
+      "duration": 4.59,
+      "text": "function we cover up the term s minus 2"
+    },
+    {
+      "index": 74,
+      "start": 214.68,
+      "end": 216.67,
+      "duration": 1.99,
+      "text": "where it diverges and then in the"
+    },
+    {
+      "index": 75,
+      "start": 216.68,
+      "end": 220.35,
+      "duration": 3.67,
+      "text": "remaining term we plug in the value of s"
+    },
+    {
+      "index": 76,
+      "start": 220.36,
+      "end": 222.589,
+      "duration": 2.229,
+      "text": "uh which causes the Factor s minus 2 to"
+    },
+    {
+      "index": 77,
+      "start": 222.599,
+      "end": 227.149,
+      "duration": 4.55,
+      "text": "di diverge so in this case uh s minus 2"
+    },
+    {
+      "index": 78,
+      "start": 227.159,
+      "end": 229.91,
+      "duration": 2.751,
+      "text": "diverges at two so we would cover this"
+    },
+    {
+      "index": 79,
+      "start": 229.92,
+      "end": 232.39,
+      "duration": 2.47,
+      "text": "Factor up and then plug in s is equal to"
+    },
+    {
+      "index": 80,
+      "start": 232.4,
+      "end": 234.949,
+      "duration": 2.549,
+      "text": "two and this would give us the value of"
+    },
+    {
+      "index": 81,
+      "start": 234.959,
+      "end": 240.069,
+      "duration": 5.11,
+      "text": "a so for this problem a is equal to"
+    },
+    {
+      "index": 82,
+      "start": 240.079,
+      "end": 243.71,
+      "duration": 3.631,
+      "text": "2 + 2 which is just 1 over"
+    },
+    {
+      "index": 83,
+      "start": 243.72,
+      "end": 248.19,
+      "duration": 4.47,
+      "text": "4 for B we we look at uh plugging in s"
+    },
+    {
+      "index": 84,
+      "start": 248.2,
+      "end": 250.99,
+      "duration": 2.79,
+      "text": "equal -2 so we cover up the factor that"
+    },
+    {
+      "index": 85,
+      "start": 251.0,
+      "end": 253.67,
+      "duration": 2.67,
+      "text": "diverges in the original function"
+    },
+    {
+      "index": 86,
+      "start": 253.68,
+      "end": 261.03,
+      "duration": 7.35,
+      "text": "plugging inal -2 gives me2 - -2 so B is"
+    },
+    {
+      "index": 87,
+      "start": 264.67,
+      "end": 264.68,
+      "duration": 0.01,
+      "text": "just4 so this function"
+    },
+    {
+      "index": 88,
+      "start": 264.68,
+      "end": 267.51,
+      "duration": 2.83,
+      "text": "is4 1 / s -"
+    },
+    {
+      "index": 89,
+      "start": 267.52,
+      "end": 270.51,
+      "duration": 2.99,
+      "text": "2 - 1/4"
+    },
+    {
+      "index": 90,
+      "start": 270.52,
+      "end": 273.23,
+      "duration": 2.71,
+      "text": "1/ s +"
+    },
+    {
+      "index": 91,
+      "start": 273.24,
+      "end": 277.95,
+      "duration": 4.71,
+      "text": "2 and when we take the inverse llas"
+    },
+    {
+      "index": 92,
+      "start": 277.96,
+      "end": 281.83,
+      "duration": 3.87,
+      "text": "transform so the inverse lass transform"
+    },
+    {
+      "index": 93,
+      "start": 281.84,
+      "end": 284.99,
+      "duration": 3.15,
+      "text": "of 1 s^2 -"
+    },
+    {
+      "index": 94,
+      "start": 285.0,
+      "end": 287.749,
+      "duration": 2.749,
+      "text": "4 is going to be 1 over"
+    },
+    {
+      "index": 95,
+      "start": 287.759,
+      "end": 290.71,
+      "duration": 2.951,
+      "text": "4 the inverse llast transform of s minus"
+    },
+    {
+      "index": 96,
+      "start": 290.72,
+      "end": 292.83,
+      "duration": 2.11,
+      "text": "2 is e to the"
+    },
+    {
+      "index": 97,
+      "start": 292.84,
+      "end": 296.43,
+      "duration": 3.59,
+      "text": "uh"
+    },
+    {
+      "index": 98,
+      "start": 298.23,
+      "end": 298.24,
+      "duration": 0.01,
+      "text": "-2t uh"
+    },
+    {
+      "index": 99,
+      "start": 298.24,
+      "end": 301.95,
+      "duration": 3.71,
+      "text": "minus oh sorry plus 2T the second factor"
+    },
+    {
+      "index": 100,
+      "start": 301.96,
+      "end": 303.43,
+      "duration": 1.47,
+      "text": "is"
+    },
+    {
+      "index": 101,
+      "start": 303.44,
+      "end": 307.95,
+      "duration": 4.51,
+      "text": "-14 uh e to the"
+    },
+    {
+      "index": 102,
+      "start": 311.07,
+      "end": 311.08,
+      "duration": 0.01,
+      "text": "2T and this concludes uh the first"
+    },
+    {
+      "index": 103,
+      "start": 311.08,
+      "end": 314.189,
+      "duration": 3.109,
+      "text": "problem for the second"
+    },
+    {
+      "index": 104,
+      "start": 314.199,
+      "end": 317.189,
+      "duration": 2.99,
+      "text": "function we have"
+    },
+    {
+      "index": 105,
+      "start": 317.199,
+      "end": 320.79,
+      "duration": 3.591,
+      "text": "S2 / s^2 +"
+    },
+    {
+      "index": 106,
+      "start": 320.8,
+      "end": 323.189,
+      "duration": 2.389,
+      "text": "4 so again this function is not in the"
+    },
+    {
+      "index": 107,
+      "start": 323.199,
+      "end": 325.59,
+      "duration": 2.391,
+      "text": "correct form uh to use a laass transform"
+    },
+    {
+      "index": 108,
+      "start": 325.6,
+      "end": 326.469,
+      "duration": 0.869,
+      "text": "lookup"
+    },
+    {
+      "index": 109,
+      "start": 326.479,
+      "end": 329.23,
+      "duration": 2.751,
+      "text": "table but what we can do is we can"
+    },
+    {
+      "index": 110,
+      "start": 329.24,
+      "end": 330.55,
+      "duration": 1.31,
+      "text": "divide"
+    },
+    {
+      "index": 111,
+      "start": 330.56,
+      "end": 333.11,
+      "duration": 2.55,
+      "text": "uh long division of pols uh the"
+    },
+    {
+      "index": 112,
+      "start": 333.12,
+      "end": 335.95,
+      "duration": 2.83,
+      "text": "numerator out by the"
+    },
+    {
+      "index": 113,
+      "start": 335.96,
+      "end": 343.99,
+      "duration": 8.03,
+      "text": "denominator so when we do"
+    },
+    {
+      "index": 114,
+      "start": 350.11,
+      "end": 350.12,
+      "duration": 0.01,
+      "text": "that we end up with 1 - 4 / s^2 +"
+    },
+    {
+      "index": 115,
+      "start": 350.12,
+      "end": 353.629,
+      "duration": 3.509,
+      "text": "4 so when we take the inverse llast"
+    },
+    {
+      "index": 116,
+      "start": 353.639,
+      "end": 359.909,
+      "duration": 6.27,
+      "text": "transform of S2 / S2 + 4"
+    },
+    {
+      "index": 117,
+      "start": 361.309,
+      "end": 361.319,
+      "duration": 0.01,
+      "text": "we're left with the inverse llast"
+    },
+    {
+      "index": 118,
+      "start": 361.319,
+      "end": 362.87,
+      "duration": 1.551,
+      "text": "transform of"
+    },
+    {
+      "index": 119,
+      "start": 362.88,
+      "end": 366.67,
+      "duration": 3.79,
+      "text": "one minus the inverse llast"
+    },
+    {
+      "index": 120,
+      "start": 366.68,
+      "end": 371.589,
+      "duration": 4.909,
+      "text": "transform of 4 / s^2 +"
+    },
+    {
+      "index": 121,
+      "start": 374.87,
+      "end": 374.88,
+      "duration": 0.01,
+      "text": "4 and if we use our lookup table we know"
+    },
+    {
+      "index": 122,
+      "start": 374.88,
+      "end": 377.189,
+      "duration": 2.309,
+      "text": "that the inverse lass transform of one"
+    },
+    {
+      "index": 123,
+      "start": 377.199,
+      "end": 383.35,
+      "duration": 6.151,
+      "text": "is the Delta"
+    },
+    {
+      "index": 124,
+      "start": 385.909,
+      "end": 385.919,
+      "duration": 0.01,
+      "text": "function uh meanwhile uh the inverse L"
+    },
+    {
+      "index": 125,
+      "start": 385.919,
+      "end": 388.27,
+      "duration": 2.351,
+      "text": "plast transform of some number divided"
+    },
+    {
+      "index": 126,
+      "start": 388.28,
+      "end": 390.55,
+      "duration": 2.27,
+      "text": "by s^2 + 4"
+    },
+    {
+      "index": 127,
+      "start": 390.56,
+      "end": 394.27,
+      "duration": 3.71,
+      "text": "uh looks like s of in this case s of"
+    },
+    {
+      "index": 128,
+      "start": 394.28,
+      "end": 397.79,
+      "duration": 3.51,
+      "text": "2T now we needed two upstairs so this is"
+    },
+    {
+      "index": 129,
+      "start": 397.8,
+      "end": 401.309,
+      "duration": 3.509,
+      "text": "going to give us 2 *"
+    },
+    {
+      "index": 130,
+      "start": 401.319,
+      "end": 406.39,
+      "duration": 5.071,
+      "text": "s of"
+    },
+    {
+      "index": 131,
+      "start": 409.909,
+      "end": 409.919,
+      "duration": 0.01,
+      "text": "2T and I I obtain this by noting that"
+    },
+    {
+      "index": 132,
+      "start": 409.919,
+      "end": 413.749,
+      "duration": 3.83,
+      "text": "the llas transform of sin Omega"
+    },
+    {
+      "index": 133,
+      "start": 413.759,
+      "end": 420.27,
+      "duration": 6.511,
+      "text": "T is equal to Omega / s^2 + Omega 2"
+    },
+    {
+      "index": 134,
+      "start": 420.28,
+      "end": 422.27,
+      "duration": 1.99,
+      "text": "so that's how I went from this formula"
+    },
+    {
+      "index": 135,
+      "start": 422.28,
+      "end": 424.869,
+      "duration": 2.589,
+      "text": "or this this function llast transform"
+    },
+    {
+      "index": 136,
+      "start": 424.879,
+      "end": 428.07,
+      "duration": 3.191,
+      "text": "inverse to 2 sin"
+    },
+    {
+      "index": 137,
+      "start": 428.08,
+      "end": 432.909,
+      "duration": 4.829,
+      "text": "2T lastly for part three the third"
+    },
+    {
+      "index": 138,
+      "start": 435.309,
+      "end": 435.319,
+      "duration": 0.01,
+      "text": "problem we're asked for the inverse lass"
+    },
+    {
+      "index": 139,
+      "start": 435.319,
+      "end": 441.99,
+      "duration": 6.671,
+      "text": "transform of e to - 5S / s^2 -"
+    },
+    {
+      "index": 140,
+      "start": 444.469,
+      "end": 444.479,
+      "duration": 0.01,
+      "text": "4 now note that we already know the"
+    },
+    {
+      "index": 141,
+      "start": 444.479,
+      "end": 448.309,
+      "duration": 3.83,
+      "text": "inverse llas transform to 1 s^2 - 4 in"
+    },
+    {
+      "index": 142,
+      "start": 448.319,
+      "end": 449.83,
+      "duration": 1.511,
+      "text": "this case it's just we're just"
+    },
+    {
+      "index": 143,
+      "start": 449.84,
+      "end": 455.51,
+      "duration": 5.67,
+      "text": "multiplying uh s 1 S2 - 4 by e - 5 S so"
+    },
+    {
+      "index": 144,
+      "start": 455.52,
+      "end": 459.35,
+      "duration": 3.83,
+      "text": "we can use the shift formula uh in"
+    },
+    {
+      "index": 145,
+      "start": 459.36,
+      "end": 461.83,
+      "duration": 2.47,
+      "text": "addition to what we already computed the"
+    },
+    {
+      "index": 146,
+      "start": 461.84,
+      "end": 465.309,
+      "duration": 3.469,
+      "text": "inverse lli transform to 1/ s^2 minus 4"
+    },
+    {
+      "index": 147,
+      "start": 465.319,
+      "end": 467.67,
+      "duration": 2.351,
+      "text": "to compute this inverse lass"
+    },
+    {
+      "index": 148,
+      "start": 467.68,
+      "end": 470.629,
+      "duration": 2.949,
+      "text": "transform so the shift formula says that"
+    },
+    {
+      "index": 149,
+      "start": 470.639,
+      "end": 475.23,
+      "duration": 4.591,
+      "text": "we need to multiply by the step function"
+    },
+    {
+      "index": 150,
+      "start": 475.24,
+      "end": 481.029,
+      "duration": 5.789,
+      "text": "T minus 5 so we're shifting uh"
+    },
+    {
+      "index": 151,
+      "start": 481.039,
+      "end": 483.469,
+      "duration": 2.43,
+      "text": "with the step function and then what we"
+    },
+    {
+      "index": 152,
+      "start": 483.479,
+      "end": 485.55,
+      "duration": 2.071,
+      "text": "do is we want to"
+    },
+    {
+      "index": 153,
+      "start": 485.56,
+      "end": 488.749,
+      "duration": 3.189,
+      "text": "shift the inverse LL transform of 1 s^2"
+    },
+    {
+      "index": 154,
+      "start": 488.759,
+      "end": 491.43,
+      "duration": 2.671,
+      "text": "- 4 so the inverse lli transform to 1"
+    },
+    {
+      "index": 155,
+      "start": 491.44,
+      "end": 498.869,
+      "duration": 7.429,
+      "text": "s^2 - 4 is 2 t - 5 so if we shift T by"
+    },
+    {
+      "index": 156,
+      "start": 498.879,
+      "end": 502.51,
+      "duration": 3.631,
+      "text": "five we end up with 1/4 e to the 2 tus"
+    },
+    {
+      "index": 157,
+      "start": 502.52,
+      "end": 504.99,
+      "duration": 2.47,
+      "text": "5us"
+    },
+    {
+      "index": 158,
+      "start": 505.0,
+      "end": 511.35,
+      "duration": 6.35,
+      "text": "1/4 eus 2 tus 5"
+    },
+    {
+      "index": 159,
+      "start": 511.36,
+      "end": 513.19,
+      "duration": 1.83,
+      "text": "so again just to reiterate when we have"
+    },
+    {
+      "index": 160,
+      "start": 513.2,
+      "end": 516.63,
+      "duration": 3.43,
+      "text": "an exponential e to the minus say 5T or"
+    },
+    {
+      "index": 161,
+      "start": 516.64,
+      "end": 519.11,
+      "duration": 2.47,
+      "text": "5s and we already know the inverse lli"
+    },
+    {
+      "index": 162,
+      "start": 519.12,
+      "end": 520.75,
+      "duration": 1.63,
+      "text": "transform of everything"
+    },
+    {
+      "index": 163,
+      "start": 520.76,
+      "end": 523.509,
+      "duration": 2.749,
+      "text": "else we just uh"
+    },
+    {
+      "index": 164,
+      "start": 523.519,
+      "end": 526.71,
+      "duration": 3.191,
+      "text": "multiply uh by the step function U T"
+    },
+    {
+      "index": 165,
+      "start": 526.72,
+      "end": 529.15,
+      "duration": 2.43,
+      "text": "minus 5 the same shift and then wherever"
+    },
+    {
+      "index": 166,
+      "start": 529.16,
+      "end": 530.91,
+      "duration": 1.75,
+      "text": "we see the T in the inverse llast"
+    },
+    {
+      "index": 167,
+      "start": 530.92,
+      "end": 533.23,
+      "duration": 2.31,
+      "text": "transform we just replace it with t"
+    },
+    {
+      "index": 168,
+      "start": 533.24,
+      "end": 535.23,
+      "duration": 1.99,
+      "text": "minus5 in this"
+    },
+    {
+      "index": 169,
+      "start": 535.24,
+      "end": 540.35,
+      "duration": 5.11,
+      "text": "case okay and now lastly for part three"
+    },
+    {
+      "index": 170,
+      "start": 540.36,
+      "end": 543.15,
+      "duration": 2.79,
+      "text": "we're just asked to uh to write down the"
+    },
+    {
+      "index": 171,
+      "start": 543.16,
+      "end": 547.47,
+      "duration": 4.31,
+      "text": "decomposition uh for this very"
+    },
+    {
+      "index": 172,
+      "start": 550.15,
+      "end": 550.16,
+      "duration": 0.01,
+      "text": "large uh function the partial fraction"
+    },
+    {
+      "index": 173,
+      "start": 550.16,
+      "end": 553.19,
+      "duration": 3.03,
+      "text": "uh decomposition of this large"
+    },
+    {
+      "index": 174,
+      "start": 553.2,
+      "end": 560.03,
+      "duration": 6.83,
+      "text": "function so it's s^2 * S2 + 1 * s"
+    },
+    {
+      "index": 175,
+      "start": 560.04,
+      "end": 566.63,
+      "duration": 6.59,
+      "text": "+ 1 * s +"
+    },
+    {
+      "index": 176,
+      "start": 574.91,
+      "end": 574.92,
+      "duration": 0.01,
+      "text": "okay"
+    },
+    {
+      "index": 177,
+      "start": 574.92,
+      "end": 577.55,
+      "duration": 2.63,
+      "text": "and unfortunately this"
+    },
+    {
+      "index": 178,
+      "start": 577.56,
+      "end": 580.19,
+      "duration": 2.63,
+      "text": "function's going to be a little"
+    },
+    {
+      "index": 179,
+      "start": 580.2,
+      "end": 582.75,
+      "duration": 2.55,
+      "text": "ugly we're going to have a constant a"
+    },
+    {
+      "index": 180,
+      "start": 582.76,
+      "end": 586.389,
+      "duration": 3.629,
+      "text": "divid s plus b divid"
+    },
+    {
+      "index": 181,
+      "start": 586.399,
+      "end": 589.19,
+      "duration": 2.791,
+      "text": "s^2 so these first two terms come from"
+    },
+    {
+      "index": 182,
+      "start": 589.2,
+      "end": 591.31,
+      "duration": 2.11,
+      "text": "this term right"
+    },
+    {
+      "index": 183,
+      "start": 591.32,
+      "end": 594.35,
+      "duration": 3.03,
+      "text": "here for the S s+ 4 term we're going to"
+    },
+    {
+      "index": 184,
+      "start": 594.36,
+      "end": 599.389,
+      "duration": 5.029,
+      "text": "seek a c * S Plus D so we need both"
+    },
+    {
+      "index": 185,
+      "start": 599.399,
+      "end": 604.829,
+      "duration": 5.43,
+      "text": "factors uh CS + D / s^2 +"
+    },
+    {
+      "index": 186,
+      "start": 604.839,
+      "end": 607.509,
+      "duration": 2.67,
+      "text": "4 we have"
+    },
+    {
+      "index": 187,
+      "start": 607.519,
+      "end": 611.47,
+      "duration": 3.951,
+      "text": "e ID s +"
+    },
+    {
+      "index": 188,
+      "start": 611.48,
+      "end": 619.389,
+      "duration": 7.909,
+      "text": "one and then plus F / s+"
+    },
+    {
+      "index": 189,
+      "start": 622.949,
+      "end": 622.959,
+      "duration": 0.01,
+      "text": "three so just to"
+    },
+    {
+      "index": 190,
+      "start": 622.959,
+      "end": 625.91,
+      "duration": 2.951,
+      "text": "associate each"
+    },
+    {
+      "index": 191,
+      "start": 625.92,
+      "end": 628.19,
+      "duration": 2.27,
+      "text": "factor or each factor in the partial"
+    },
+    {
+      "index": 192,
+      "start": 628.2,
+      "end": 630.31,
+      "duration": 2.11,
+      "text": "fraction decomposition"
+    },
+    {
+      "index": 193,
+      "start": 630.32,
+      "end": 632.47,
+      "duration": 2.15,
+      "text": "uh with the original function I've just"
+    },
+    {
+      "index": 194,
+      "start": 632.48,
+      "end": 634.269,
+      "duration": 1.789,
+      "text": "drawn some"
+    },
+    {
+      "index": 195,
+      "start": 634.279,
+      "end": 637.43,
+      "duration": 3.151,
+      "text": "arrows okay and then lastly although I"
+    },
+    {
+      "index": 196,
+      "start": 637.44,
+      "end": 638.629,
+      "duration": 1.189,
+      "text": "didn't State this in the original"
+    },
+    {
+      "index": 197,
+      "start": 638.639,
+      "end": 640.11,
+      "duration": 1.471,
+      "text": "problem we can also just write down the"
+    },
+    {
+      "index": 198,
+      "start": 640.12,
+      "end": 643.23,
+      "duration": 3.11,
+      "text": "inverse laass transform of this"
+    },
+    {
+      "index": 199,
+      "start": 643.24,
+      "end": 646.15,
+      "duration": 2.91,
+      "text": "entire uh mess"
+    },
+    {
+      "index": 200,
+      "start": 646.16,
+      "end": 648.35,
+      "duration": 2.19,
+      "text": "uh without actually determining the"
+    },
+    {
+      "index": 201,
+      "start": 648.36,
+      "end": 649.87,
+      "duration": 1.51,
+      "text": "constants we can just keep the constants"
+    },
+    {
+      "index": 202,
+      "start": 649.88,
+      "end": 651.87,
+      "duration": 1.99,
+      "text": "in so if we wanted to compute the"
+    },
+    {
+      "index": 203,
+      "start": 651.88,
+      "end": 655.35,
+      "duration": 3.47,
+      "text": "inverse La"
+    },
+    {
+      "index": 204,
+      "start": 658.509,
+      "end": 658.519,
+      "duration": 0.01,
+      "text": "transform well it would just be a"
+    },
+    {
+      "index": 205,
+      "start": 658.519,
+      "end": 660.47,
+      "duration": 1.951,
+      "text": "because inverse plus transform of 1 / s"
+    },
+    {
+      "index": 206,
+      "start": 660.48,
+      "end": 664.389,
+      "duration": 3.909,
+      "text": "is 1 plus b inversal plus transform of"
+    },
+    {
+      "index": 207,
+      "start": 664.399,
+      "end": 666.11,
+      "duration": 1.711,
+      "text": "s^2 is"
+    },
+    {
+      "index": 208,
+      "start": 666.12,
+      "end": 671.87,
+      "duration": 5.75,
+      "text": "t plus now this part has two terms c s"
+    },
+    {
+      "index": 209,
+      "start": 671.88,
+      "end": 674.509,
+      "duration": 2.629,
+      "text": "uh divid S2 + 4 that's going to give us"
+    },
+    {
+      "index": 210,
+      "start": 674.519,
+      "end": 677.87,
+      "duration": 3.351,
+      "text": "C * cosine of"
+    },
+    {
+      "index": 211,
+      "start": 677.88,
+      "end": 682.59,
+      "duration": 4.71,
+      "text": "2T uh the D / S2 + 4 is going to give us"
+    },
+    {
+      "index": 212,
+      "start": 682.6,
+      "end": 684.269,
+      "duration": 1.669,
+      "text": "well we need to multiply upstairs by two"
+    },
+    {
+      "index": 213,
+      "start": 684.279,
+      "end": 686.79,
+      "duration": 2.511,
+      "text": "and divide by down uh downstairs by two"
+    },
+    {
+      "index": 214,
+      "start": 686.8,
+      "end": 689.55,
+      "duration": 2.75,
+      "text": "so we get two or sorry D divided by of"
+    },
+    {
+      "index": 215,
+      "start": 689.56,
+      "end": 691.55,
+      "duration": 1.99,
+      "text": "sin"
+    },
+    {
+      "index": 216,
+      "start": 691.56,
+      "end": 695.59,
+      "duration": 4.03,
+      "text": "2T uh this term e is going to give us"
+    },
+    {
+      "index": 217,
+      "start": 695.6,
+      "end": 704.87,
+      "duration": 9.27,
+      "text": "e times the exponential of uh T negative"
+    },
+    {
+      "index": 218,
+      "start": 708.15,
+      "end": 708.16,
+      "duration": 0.01,
+      "text": "T and then f is going to give"
+    },
+    {
+      "index": 219,
+      "start": 708.16,
+      "end": 710.79,
+      "duration": 2.63,
+      "text": "us or the last term is going to give us"
+    },
+    {
+      "index": 220,
+      "start": 710.8,
+      "end": 715.389,
+      "duration": 4.589,
+      "text": "s uh F uh times eus 3"
+    },
+    {
+      "index": 221,
+      "start": 715.399,
+      "end": 720.069,
+      "duration": 4.67,
+      "text": "t Okay so uh just as a quick wrap up in"
+    },
+    {
+      "index": 222,
+      "start": 720.079,
+      "end": 721.99,
+      "duration": 1.911,
+      "text": "this problem we've computed uh partial"
+    },
+    {
+      "index": 223,
+      "start": 722.0,
+      "end": 723.75,
+      "duration": 1.75,
+      "text": "fraction decompositions of several"
+    },
+    {
+      "index": 224,
+      "start": 723.76,
+      "end": 725.509,
+      "duration": 1.749,
+      "text": "functions and the reason we've done this"
+    },
+    {
+      "index": 225,
+      "start": 725.519,
+      "end": 729.11,
+      "duration": 3.591,
+      "text": "is because uh we often end up in a"
+    },
+    {
+      "index": 226,
+      "start": 729.12,
+      "end": 731.389,
+      "duration": 2.269,
+      "text": "situation when we want to solve an OD"
+    },
+    {
+      "index": 227,
+      "start": 731.399,
+      "end": 734.15,
+      "duration": 2.751,
+      "text": "using llas transforms where we have some"
+    },
+    {
+      "index": 228,
+      "start": 734.16,
+      "end": 736.829,
+      "duration": 2.669,
+      "text": "complicated uh function and we need to"
+    },
+    {
+      "index": 229,
+      "start": 736.839,
+      "end": 739.15,
+      "duration": 2.311,
+      "text": "use partial fraction decomposition to"
+    },
+    {
+      "index": 230,
+      "start": 739.16,
+      "end": 741.35,
+      "duration": 2.19,
+      "text": "write down simpler functions in which"
+    },
+    {
+      "index": 231,
+      "start": 741.36,
+      "end": 743.23,
+      "duration": 1.87,
+      "text": "case we can then use the laass inverse"
+    },
+    {
+      "index": 232,
+      "start": 743.24,
+      "end": 745.91,
+      "duration": 2.67,
+      "text": "formula on each of the simpler functions"
+    },
+    {
+      "index": 233,
+      "start": 745.92,
+      "end": 747.59,
+      "duration": 1.67,
+      "text": "okay so I'll just conclude here and I'll"
+    },
+    {
+      "index": 234,
+      "start": 747.6,
+      "end": 751.079,
+      "duration": 3.479,
+      "text": "see you next time"
+    }
+  ],
+  "course": {
+    "category": "Mathematics",
+    "title": "Differential Equations",
+    "source_url": "https://www.youtube.com/playlist?list=PL64BDFBDA2AF24F7E"
+  }
+}

@@ -13,6 +13,7 @@ from backend.src.models.schemas import (
     job_from_dict,
     job_to_dict,
     student_from_dict,
+    student_to_dict,
 )
 
 
@@ -66,3 +67,49 @@ class MockStudentProfileProvider:
         if not isinstance(data, list):
             raise ValidationError("Mock student profile file must contain a list.")
         return [student_from_dict(item) for item in data]
+
+
+class JsonStudentRepository:
+    def __init__(self, students_dir: Path) -> None:
+        self.students_dir = students_dir
+        self.students_dir.mkdir(parents=True, exist_ok=True)
+
+    def _path(self, student_id: str) -> Path:
+        return self.students_dir / f"{student_id}.json"
+
+    def save(self, student: StudentProfile) -> StudentProfile:
+        path = self._path(student.student_id)
+        path.write_text(json.dumps(student_to_dict(student), indent=2, ensure_ascii=False), encoding="utf-8")
+        return student
+
+    def get(self, student_id: str) -> StudentProfile:
+        path = self._path(student_id)
+        if not path.exists():
+            raise FileNotFoundError(f"Student not found: {student_id}")
+        return student_from_dict(json.loads(path.read_text(encoding="utf-8")))
+
+    def list_profiles(self) -> list[StudentProfile]:
+        students: list[StudentProfile] = []
+        for path in sorted(self.students_dir.glob("*.json")):
+            students.append(student_from_dict(json.loads(path.read_text(encoding="utf-8"))))
+        return students
+
+    def delete(self, student_id: str) -> None:
+        path = self._path(student_id)
+        if not path.exists():
+            raise FileNotFoundError(f"Student not found: {student_id}")
+        path.unlink()
+
+
+class CombinedStudentProfileProvider:
+    def __init__(self, saved_repo: JsonStudentRepository, mock_provider: MockStudentProfileProvider) -> None:
+        self.saved_repo = saved_repo
+        self.mock_provider = mock_provider
+
+    def list_profiles(self) -> list[StudentProfile]:
+        profiles_by_id: dict[str, StudentProfile] = {}
+        for student in self.mock_provider.list_profiles():
+            profiles_by_id[student.student_id] = student
+        for student in self.saved_repo.list_profiles():
+            profiles_by_id[student.student_id] = student
+        return list(profiles_by_id.values())

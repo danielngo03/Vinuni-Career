@@ -6,7 +6,7 @@ Build the enterprise JD management and rule-based matching module for final/demo
 
 ## Current Status
 
-The original demo scope is implemented. The backend has since been refactored into agent-style routers, and the frontend has been split into a Streamlit home page plus a JD Workspace page.
+The original demo scope is implemented. The backend has since been refactored into agent-style routers, the frontend has been split into Streamlit pages, and CV parsing now creates local student skill profiles for matching.
 
 ## Completed Milestones
 
@@ -22,6 +22,7 @@ The original demo scope is implemented. The backend has since been refactored in
 10. Refactored backend routes into agent-style modules.
 11. Split frontend into home page and JD Workspace.
 12. Split README introduction from the run guide.
+13. Added CV analysis agent, local student profile storage, Streamlit CV page, and matching against saved CV-derived students.
 
 ## Current Structure
 
@@ -34,6 +35,8 @@ project-root/
         main.py
       agents/
         jd_matching/
+          router.py
+        cv_analysis/
           router.py
         student_profile/
           router.py
@@ -48,8 +51,10 @@ project-root/
     shared.py
     pages/
       1_JD_Workspace.py
+      2_CV_Analysis.py
   data/
     jobs/
+    students/
     mock/
   docs/
     RUNNING.md
@@ -59,9 +64,8 @@ project-root/
 ## Remaining Integration Work
 
 - Connect to a real student profile API when the teammate module is ready.
-- Add a CV page only after CV upload/parsing or real profile work exists.
 - Decide whether local JSON storage should be replaced for a production-like demo.
-- Manually verify Streamlit UI with a real Gemini key.
+- Manually verify Streamlit UI with a real Gemini key for both JD and CV parsing.
 
 ## Development Rule For New Agents
 

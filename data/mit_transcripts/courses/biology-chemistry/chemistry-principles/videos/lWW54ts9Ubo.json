@@ -1,0 +1,7627 @@
+{
+  "video": {
+    "id": "lWW54ts9Ubo",
+    "title": "24. Generalized Linear Models (cont.)",
+    "url": "https://www.youtube.com/watch?v=lWW54ts9Ubo",
+    "channel": "MIT OpenCourseWare",
+    "duration": 3284,
+    "language": "en"
+  },
+  "segment_count": 1087,
+  "segments": [
+    {
+      "index": 0,
+      "start": 1.79,
+      "end": 1.8,
+      "duration": 0.01,
+      "text": "the following content is provided under"
+    },
+    {
+      "index": 1,
+      "start": 1.8,
+      "end": 4.349,
+      "duration": 2.549,
+      "text": "a Creative Commons license your support"
+    },
+    {
+      "index": 2,
+      "start": 4.359,
+      "end": 6.47,
+      "duration": 2.111,
+      "text": "will help MIT open courseware continue"
+    },
+    {
+      "index": 3,
+      "start": 6.48,
+      "end": 8.39,
+      "duration": 1.91,
+      "text": "to offer highquality educational"
+    },
+    {
+      "index": 4,
+      "start": 8.4,
+      "end": 11.27,
+      "duration": 2.87,
+      "text": "resources for free to make a donation or"
+    },
+    {
+      "index": 5,
+      "start": 11.28,
+      "end": 12.83,
+      "duration": 1.55,
+      "text": "to view additional materials from"
+    },
+    {
+      "index": 6,
+      "start": 12.84,
+      "end": 15.629,
+      "duration": 2.789,
+      "text": "hundreds of MIT courses visit MIT"
+    },
+    {
+      "index": 7,
+      "start": 15.639,
+      "end": 21.029,
+      "duration": 5.39,
+      "text": "opencourseware at"
+    },
+    {
+      "index": 8,
+      "start": 24.55,
+      "end": 24.56,
+      "duration": 0.01,
+      "text": "ocw.mit.edu so I apologize my"
+    },
+    {
+      "index": 9,
+      "start": 24.56,
+      "end": 28.589,
+      "duration": 4.029,
+      "text": "voice is not uh 100% so if you don't"
+    },
+    {
+      "index": 10,
+      "start": 28.599,
+      "end": 30.23,
+      "duration": 1.631,
+      "text": "understand uh what I'm saying thing"
+    },
+    {
+      "index": 11,
+      "start": 30.24,
+      "end": 31.389,
+      "duration": 1.149,
+      "text": "please ask"
+    },
+    {
+      "index": 12,
+      "start": 31.399,
+      "end": 34.75,
+      "duration": 3.351,
+      "text": "me um so we're going to be analyzing"
+    },
+    {
+      "index": 13,
+      "start": 34.76,
+      "end": 36.63,
+      "duration": 1.87,
+      "text": "actually not really analyzing uh we"
+    },
+    {
+      "index": 14,
+      "start": 36.64,
+      "end": 38.91,
+      "duration": 2.27,
+      "text": "described a second order method to"
+    },
+    {
+      "index": 15,
+      "start": 38.92,
+      "end": 40.869,
+      "duration": 1.949,
+      "text": "optimize the log likelihood in a"
+    },
+    {
+      "index": 16,
+      "start": 40.879,
+      "end": 43.029,
+      "duration": 2.15,
+      "text": "generalized linear model when the"
+    },
+    {
+      "index": 17,
+      "start": 43.039,
+      "end": 45.79,
+      "duration": 2.751,
+      "text": "parameter of Interest was beta okay so"
+    },
+    {
+      "index": 18,
+      "start": 45.8,
+      "end": 46.869,
+      "duration": 1.069,
+      "text": "here I'm going to rewrite the whole"
+    },
+    {
+      "index": 19,
+      "start": 46.879,
+      "end": 49.229,
+      "duration": 2.35,
+      "text": "thing as a beta so that's the equation"
+    },
+    {
+      "index": 20,
+      "start": 49.239,
+      "end": 51.91,
+      "duration": 2.671,
+      "text": "you see but we really have this beta in"
+    },
+    {
+      "index": 21,
+      "start": 51.92,
+      "end": 57.11,
+      "duration": 5.19,
+      "text": "iteration k + One beta is given by Beta"
+    },
+    {
+      "index": 22,
+      "start": 57.12,
+      "end": 60.509,
+      "duration": 3.389,
+      "text": "K and then I have a plus"
+    },
+    {
+      "index": 23,
+      "start": 60.519,
+      "end": 64.91,
+      "duration": 4.391,
+      "text": "F and the plus uh if you think of the"
+    },
+    {
+      "index": 24,
+      "start": 64.92,
+      "end": 68.07,
+      "duration": 3.15,
+      "text": "Fisher information that beta K as being"
+    },
+    {
+      "index": 25,
+      "start": 68.08,
+      "end": 70.39,
+      "duration": 2.31,
+      "text": "some number if you were to say whether"
+    },
+    {
+      "index": 26,
+      "start": 70.4,
+      "end": 72.27,
+      "duration": 1.87,
+      "text": "it's a positive or negative number it's"
+    },
+    {
+      "index": 27,
+      "start": 72.28,
+      "end": 73.59,
+      "duration": 1.31,
+      "text": "actually going to be a positive number"
+    },
+    {
+      "index": 28,
+      "start": 73.6,
+      "end": 74.99,
+      "duration": 1.39,
+      "text": "because it's a positive semi-definite"
+    },
+    {
+      "index": 29,
+      "start": 75.0,
+      "end": 77.51,
+      "duration": 2.51,
+      "text": "Matrix so since we're doing gradient"
+    },
+    {
+      "index": 30,
+      "start": 77.52,
+      "end": 80.19,
+      "duration": 2.67,
+      "text": "Ascent we have a plus sign here and then"
+    },
+    {
+      "index": 31,
+      "start": 80.2,
+      "end": 83.469,
+      "duration": 3.269,
+      "text": "the direction is basically gradient Ln"
+    },
+    {
+      "index": 32,
+      "start": 83.479,
+      "end": 85.83,
+      "duration": 2.351,
+      "text": "at beta"
+    },
+    {
+      "index": 33,
+      "start": 85.84,
+      "end": 88.99,
+      "duration": 3.15,
+      "text": "K okay so this is the iterations that"
+    },
+    {
+      "index": 34,
+      "start": 89.0,
+      "end": 90.51,
+      "duration": 1.51,
+      "text": "we're trying to implement M then we"
+    },
+    {
+      "index": 35,
+      "start": 90.52,
+      "end": 92.67,
+      "duration": 2.15,
+      "text": "could just do this at it's duration we"
+    },
+    {
+      "index": 36,
+      "start": 92.68,
+      "end": 95.069,
+      "duration": 2.389,
+      "text": "compute the Fisher information and then"
+    },
+    {
+      "index": 37,
+      "start": 95.079,
+      "end": 97.149,
+      "duration": 2.07,
+      "text": "we do it again and again right that's"
+    },
+    {
+      "index": 38,
+      "start": 97.159,
+      "end": 99.55,
+      "duration": 2.391,
+      "text": "called the Fisher coring algorithm and U"
+    },
+    {
+      "index": 39,
+      "start": 99.56,
+      "end": 100.749,
+      "duration": 1.189,
+      "text": "I told you that this was going to"
+    },
+    {
+      "index": 40,
+      "start": 100.759,
+      "end": 102.59,
+      "duration": 1.831,
+      "text": "converge and what we're going to try to"
+    },
+    {
+      "index": 41,
+      "start": 102.6,
+      "end": 104.469,
+      "duration": 1.869,
+      "text": "do this uh in this lecture is to show"
+    },
+    {
+      "index": 42,
+      "start": 104.479,
+      "end": 106.429,
+      "duration": 1.95,
+      "text": "how we can reimplement this using"
+    },
+    {
+      "index": 43,
+      "start": 106.439,
+      "end": 108.91,
+      "duration": 2.471,
+      "text": "iteratively reweighted Le squares so"
+    },
+    {
+      "index": 44,
+      "start": 108.92,
+      "end": 111.03,
+      "duration": 2.11,
+      "text": "that each step of this algorithm is"
+    },
+    {
+      "index": 45,
+      "start": 111.04,
+      "end": 113.109,
+      "duration": 2.069,
+      "text": "consists simply of solving a weighted Le"
+    },
+    {
+      "index": 46,
+      "start": 113.119,
+      "end": 116.35,
+      "duration": 3.231,
+      "text": "Square problem all right so uh let's uh"
+    },
+    {
+      "index": 47,
+      "start": 116.36,
+      "end": 119.59,
+      "duration": 3.23,
+      "text": "go back quickly and uh remind ourselves"
+    },
+    {
+      "index": 48,
+      "start": 119.6,
+      "end": 124.789,
+      "duration": 5.189,
+      "text": "uh that we are in the um uh Galan uh"
+    },
+    {
+      "index": 49,
+      "start": 124.799,
+      "end": 126.99,
+      "duration": 2.191,
+      "text": "sorry we're in the uh exponential family"
+    },
+    {
+      "index": 50,
+      "start": 127.0,
+      "end": 128.869,
+      "duration": 1.869,
+      "text": "so if I look at the log likelihood for"
+    },
+    {
+      "index": 51,
+      "start": 128.879,
+      "end": 133.229,
+      "duration": 4.35,
+      "text": "one observation so uh here it's Ln sorry"
+    },
+    {
+      "index": 52,
+      "start": 133.239,
+      "end": 137.63,
+      "duration": 4.391,
+      "text": "this is the sum from I = 1 to n of Yi"
+    },
+    {
+      "index": 53,
+      "start": 137.64,
+      "end": 139.949,
+      "duration": 2.309,
+      "text": "minus"
+    },
+    {
+      "index": 54,
+      "start": 139.959,
+      "end": 143.589,
+      "duration": 3.63,
+      "text": "um okay so it's Yi times Theta I"
+    },
+    {
+      "index": 55,
+      "start": 143.599,
+      "end": 147.11,
+      "duration": 3.511,
+      "text": "sorry minus B of theta I then there's"
+    },
+    {
+      "index": 56,
+      "start": 147.12,
+      "end": 148.91,
+      "duration": 1.79,
+      "text": "going to be some parameter and then I"
+    },
+    {
+      "index": 57,
+      "start": 148.92,
+      "end": 150.47,
+      "duration": 1.55,
+      "text": "have plus c"
+    },
+    {
+      "index": 58,
+      "start": 150.48,
+      "end": 152.11,
+      "duration": 1.63,
+      "text": "of Y"
+    },
+    {
+      "index": 59,
+      "start": 152.12,
+      "end": 155.15,
+      "duration": 3.03,
+      "text": "I5 okay so just the exponential one away"
+    },
+    {
+      "index": 60,
+      "start": 155.16,
+      "end": 156.79,
+      "duration": 1.63,
+      "text": "when I took the log of the likelihood"
+    },
+    {
+      "index": 61,
+      "start": 156.8,
+      "end": 158.55,
+      "duration": 1.75,
+      "text": "and I have n observations so I'm summing"
+    },
+    {
+      "index": 62,
+      "start": 158.56,
+      "end": 160.91,
+      "duration": 2.35,
+      "text": "over all n observations all right then"
+    },
+    {
+      "index": 63,
+      "start": 160.92,
+      "end": 163.03,
+      "duration": 2.11,
+      "text": "we had a bunch of formulas that we came"
+    },
+    {
+      "index": 64,
+      "start": 163.04,
+      "end": 164.71,
+      "duration": 1.67,
+      "text": "up to be so if I look at the at the"
+    },
+    {
+      "index": 65,
+      "start": 164.72,
+      "end": 166.949,
+      "duration": 2.229,
+      "text": "expectation of Yi so that's really the"
+    },
+    {
+      "index": 66,
+      "start": 166.959,
+      "end": 170.47,
+      "duration": 3.511,
+      "text": "conditional of Yi given XI uh but like"
+    },
+    {
+      "index": 67,
+      "start": 170.48,
+      "end": 172.229,
+      "duration": 1.749,
+      "text": "here it is really doesn't matter it's"
+    },
+    {
+      "index": 68,
+      "start": 172.239,
+      "end": 174.11,
+      "duration": 1.871,
+      "text": "just going to be different for each I"
+    },
+    {
+      "index": 69,
+      "start": 174.12,
+      "end": 176.79,
+      "duration": 2.67,
+      "text": "this is denoted by mui and we showed"
+    },
+    {
+      "index": 70,
+      "start": 176.8,
+      "end": 180.869,
+      "duration": 4.069,
+      "text": "that this was beta Prime of theta I"
+    },
+    {
+      "index": 71,
+      "start": 180.879,
+      "end": 183.35,
+      "duration": 2.471,
+      "text": "then uh the other equation that we found"
+    },
+    {
+      "index": 72,
+      "start": 183.36,
+      "end": 185.83,
+      "duration": 2.47,
+      "text": "was that so what we want to model is"
+    },
+    {
+      "index": 73,
+      "start": 185.84,
+      "end": 188.19,
+      "duration": 2.35,
+      "text": "this thing we want it to be equal to X I"
+    },
+    {
+      "index": 74,
+      "start": 188.2,
+      "end": 194.27,
+      "duration": 6.07,
+      "text": "transpose beta sorry G of this"
+    },
+    {
+      "index": 75,
+      "start": 197.229,
+      "end": 197.239,
+      "duration": 0.01,
+      "text": "thing all right so that's our"
+    },
+    {
+      "index": 76,
+      "start": 197.239,
+      "end": 200.67,
+      "duration": 3.431,
+      "text": "model um and then uh we had that the"
+    },
+    {
+      "index": 77,
+      "start": 200.68,
+      "end": 202.509,
+      "duration": 1.829,
+      "text": "variance was also given by the second"
+    },
+    {
+      "index": 78,
+      "start": 202.519,
+      "end": 204.75,
+      "duration": 2.231,
+      "text": "derivative I'm not going to go into it"
+    },
+    {
+      "index": 79,
+      "start": 204.76,
+      "end": 206.39,
+      "duration": 1.63,
+      "text": "what's actually interesting is to see if"
+    },
+    {
+      "index": 80,
+      "start": 206.4,
+      "end": 209.47,
+      "duration": 3.07,
+      "text": "we want to express Theta I as a function"
+    },
+    {
+      "index": 81,
+      "start": 209.48,
+      "end": 214.35,
+      "duration": 4.87,
+      "text": "of x x i what we get uh going from X I"
+    },
+    {
+      "index": 82,
+      "start": 214.36,
+      "end": 218.03,
+      "duration": 3.67,
+      "text": "um to through to mui by G inverse and"
+    },
+    {
+      "index": 83,
+      "start": 218.04,
+      "end": 221.149,
+      "duration": 3.109,
+      "text": "then to Theta I by B inverse we get that"
+    },
+    {
+      "index": 84,
+      "start": 221.159,
+      "end": 226.39,
+      "duration": 5.231,
+      "text": "um Theta I is equal to H of X I"
+    },
+    {
+      "index": 85,
+      "start": 226.4,
+      "end": 229.83,
+      "duration": 3.43,
+      "text": "transpose beta sorry yeah h of X I"
+    },
+    {
+      "index": 86,
+      "start": 229.84,
+      "end": 233.27,
+      "duration": 3.43,
+      "text": "transpose beta where"
+    },
+    {
+      "index": 87,
+      "start": 233.28,
+      "end": 237.19,
+      "duration": 3.91,
+      "text": "H is the inverse uh so which order is"
+    },
+    {
+      "index": 88,
+      "start": 237.2,
+      "end": 241.11,
+      "duration": 3.91,
+      "text": "this uh is the inverse of G and uh"
+    },
+    {
+      "index": 89,
+      "start": 241.12,
+      "end": 242.789,
+      "duration": 1.669,
+      "text": "composed with B"
+    },
+    {
+      "index": 90,
+      "start": 242.799,
+      "end": 247.229,
+      "duration": 4.43,
+      "text": "Prime okay so we we remembered that last"
+    },
+    {
+      "index": 91,
+      "start": 247.239,
+      "end": 249.429,
+      "duration": 2.19,
+      "text": "time those are all uh computations that"
+    },
+    {
+      "index": 92,
+      "start": 249.439,
+      "end": 251.19,
+      "duration": 1.751,
+      "text": "we've made they're going to be useful in"
+    },
+    {
+      "index": 93,
+      "start": 251.2,
+      "end": 253.509,
+      "duration": 2.309,
+      "text": "our derivation and the first thing we"
+    },
+    {
+      "index": 94,
+      "start": 253.519,
+      "end": 255.35,
+      "duration": 1.831,
+      "text": "did last time is to show that if I look"
+    },
+    {
+      "index": 95,
+      "start": 255.36,
+      "end": 257.67,
+      "duration": 2.31,
+      "text": "now at the derivative of the log"
+    },
+    {
+      "index": 96,
+      "start": 257.68,
+      "end": 259.189,
+      "duration": 1.509,
+      "text": "likelihood with respect to one"
+    },
+    {
+      "index": 97,
+      "start": 259.199,
+      "end": 261.27,
+      "duration": 2.071,
+      "text": "coordinate of beta which is going to"
+    },
+    {
+      "index": 98,
+      "start": 261.28,
+      "end": 262.83,
+      "duration": 1.55,
+      "text": "give me the gradient if I do that for"
+    },
+    {
+      "index": 99,
+      "start": 262.84,
+      "end": 264.79,
+      "duration": 1.95,
+      "text": "all the coordinates what we ended up"
+    },
+    {
+      "index": 100,
+      "start": 264.8,
+      "end": 267.43,
+      "duration": 2.63,
+      "text": "finding is that we can rewrite it uh in"
+    },
+    {
+      "index": 101,
+      "start": 267.44,
+      "end": 271.51,
+      "duration": 4.07,
+      "text": "this form sum of Yi Tia minus mu Tilda"
+    },
+    {
+      "index": 102,
+      "start": 271.52,
+      "end": 275.35,
+      "duration": 3.83,
+      "text": "so let's remind ourselves that uh"
+    },
+    {
+      "index": 103,
+      "start": 275.36,
+      "end": 281.83,
+      "duration": 6.47,
+      "text": "um so y Tilda is just y divided well"
+    },
+    {
+      "index": 104,
+      "start": 281.84,
+      "end": 285.83,
+      "duration": 3.99,
+      "text": "okay y Tia I is y i is it times or"
+    },
+    {
+      "index": 105,
+      "start": 285.84,
+      "end": 288.469,
+      "duration": 2.629,
+      "text": "divided times G"
+    },
+    {
+      "index": 106,
+      "start": 288.479,
+      "end": 295.909,
+      "duration": 7.43,
+      "text": "Prime of mui mulda is I is mui time glda"
+    },
+    {
+      "index": 107,
+      "start": 295.919,
+      "end": 299.909,
+      "duration": 3.99,
+      "text": "time G Prime of mu I"
+    },
+    {
+      "index": 108,
+      "start": 299.919,
+      "end": 302.189,
+      "duration": 2.27,
+      "text": "and uh and then uh that was just an"
+    },
+    {
+      "index": 109,
+      "start": 302.199,
+      "end": 303.55,
+      "duration": 1.351,
+      "text": "artificial thing so that we could"
+    },
+    {
+      "index": 110,
+      "start": 303.56,
+      "end": 306.99,
+      "duration": 3.43,
+      "text": "actually divide the weights by G Prime"
+    },
+    {
+      "index": 111,
+      "start": 307.0,
+      "end": 308.469,
+      "duration": 1.469,
+      "text": "but the real thing that builds the"
+    },
+    {
+      "index": 112,
+      "start": 308.479,
+      "end": 310.35,
+      "duration": 1.871,
+      "text": "weights are this H Prime and there's"
+    },
+    {
+      "index": 113,
+      "start": 310.36,
+      "end": 312.749,
+      "duration": 2.389,
+      "text": "this normalization factor and so if we"
+    },
+    {
+      "index": 114,
+      "start": 312.759,
+      "end": 314.749,
+      "duration": 1.99,
+      "text": "write it like that so if I also write"
+    },
+    {
+      "index": 115,
+      "start": 314.759,
+      "end": 316.27,
+      "duration": 1.511,
+      "text": "that"
+    },
+    {
+      "index": 116,
+      "start": 316.28,
+      "end": 322.43,
+      "duration": 6.15,
+      "text": "Wii is H Prime of X I transpose beta"
+    },
+    {
+      "index": 117,
+      "start": 322.44,
+      "end": 326.39,
+      "duration": 3.95,
+      "text": "divided by G Prime of mui *"
+    },
+    {
+      "index": 118,
+      "start": 326.4,
+      "end": 328.95,
+      "duration": 2.55,
+      "text": "pi then I could actually rewrite my"
+    },
+    {
+      "index": 119,
+      "start": 328.96,
+      "end": 330.55,
+      "duration": 1.59,
+      "text": "gradient"
+    },
+    {
+      "index": 120,
+      "start": 330.56,
+      "end": 332.71,
+      "duration": 2.15,
+      "text": "which is a vector in the following"
+    },
+    {
+      "index": 121,
+      "start": 332.72,
+      "end": 338.35,
+      "duration": 5.63,
+      "text": "Matrix form the gradient"
+    },
+    {
+      "index": 122,
+      "start": 342.67,
+      "end": 342.68,
+      "duration": 0.01,
+      "text": "Ln at beta so the gradient of my log"
+    },
+    {
+      "index": 123,
+      "start": 342.68,
+      "end": 344.909,
+      "duration": 2.229,
+      "text": "likelihood at beta took the following"
+    },
+    {
+      "index": 124,
+      "start": 344.919,
+      "end": 346.87,
+      "duration": 1.951,
+      "text": "form it was X"
+    },
+    {
+      "index": 125,
+      "start": 346.88,
+      "end": 348.39,
+      "duration": 1.51,
+      "text": "transpose"
+    },
+    {
+      "index": 126,
+      "start": 348.4,
+      "end": 352.51,
+      "duration": 4.11,
+      "text": "W and then yld minus"
+    },
+    {
+      "index": 127,
+      "start": 352.52,
+      "end": 356.629,
+      "duration": 4.109,
+      "text": "mulda and here W was just the Matrix"
+    },
+    {
+      "index": 128,
+      "start": 356.639,
+      "end": 360.909,
+      "duration": 4.27,
+      "text": "with W1 W2 all the way way to w n on the"
+    },
+    {
+      "index": 129,
+      "start": 360.919,
+      "end": 363.35,
+      "duration": 2.431,
+      "text": "diagonal and zero on the of"
+    },
+    {
+      "index": 130,
+      "start": 363.36,
+      "end": 364.909,
+      "duration": 1.549,
+      "text": "diagonals"
+    },
+    {
+      "index": 131,
+      "start": 364.919,
+      "end": 367.629,
+      "duration": 2.71,
+      "text": "okay so that was just taking the"
+    },
+    {
+      "index": 132,
+      "start": 367.639,
+      "end": 369.83,
+      "duration": 2.191,
+      "text": "derivative and doing a slight"
+    },
+    {
+      "index": 133,
+      "start": 369.84,
+      "end": 372.629,
+      "duration": 2.789,
+      "text": "manipulations that said well let's just"
+    },
+    {
+      "index": 134,
+      "start": 372.639,
+      "end": 375.15,
+      "duration": 2.511,
+      "text": "divide whatever is here by G Prime and"
+    },
+    {
+      "index": 135,
+      "start": 375.16,
+      "end": 377.749,
+      "duration": 2.589,
+      "text": "multiply whatever is here by G Prime so"
+    },
+    {
+      "index": 136,
+      "start": 377.759,
+      "end": 379.189,
+      "duration": 1.43,
+      "text": "today we'll see why we make this"
+    },
+    {
+      "index": 137,
+      "start": 379.199,
+      "end": 381.189,
+      "duration": 1.99,
+      "text": "Division and and multiplication by G"
+    },
+    {
+      "index": 138,
+      "start": 381.199,
+      "end": 383.309,
+      "duration": 2.11,
+      "text": "Prime which seems to make no sense but"
+    },
+    {
+      "index": 139,
+      "start": 383.319,
+      "end": 385.469,
+      "duration": 2.15,
+      "text": "it actually comes from the hen"
+    },
+    {
+      "index": 140,
+      "start": 385.479,
+      "end": 388.15,
+      "duration": 2.671,
+      "text": "computations so the hen computations uh"
+    },
+    {
+      "index": 141,
+      "start": 388.16,
+      "end": 389.79,
+      "duration": 1.63,
+      "text": "are going to be a little more annoying"
+    },
+    {
+      "index": 142,
+      "start": 389.8,
+      "end": 392.629,
+      "duration": 2.829,
+      "text": "actually let me start directly with the"
+    },
+    {
+      "index": 143,
+      "start": 392.639,
+      "end": 394.99,
+      "duration": 2.351,
+      "text": "coordinate wise derivative right so to"
+    },
+    {
+      "index": 144,
+      "start": 395.0,
+      "end": 397.43,
+      "duration": 2.43,
+      "text": "build this gradient what we used in the"
+    },
+    {
+      "index": 145,
+      "start": 397.44,
+      "end": 400.11,
+      "duration": 2.67,
+      "text": "end was that the partial derivative of"
+    },
+    {
+      "index": 146,
+      "start": 400.12,
+      "end": 403.27,
+      "duration": 3.15,
+      "text": "Ln with respect to the jth coordinate of"
+    },
+    {
+      "index": 147,
+      "start": 403.28,
+      "end": 406.67,
+      "duration": 3.39,
+      "text": "beta was equal to the"
+    },
+    {
+      "index": 148,
+      "start": 406.68,
+      "end": 412.029,
+      "duration": 5.349,
+      "text": "sum over I of Yi cha minus mui"
+    },
+    {
+      "index": 149,
+      "start": 412.039,
+      "end": 414.39,
+      "duration": 2.351,
+      "text": "cha time w"
+    },
+    {
+      "index": 150,
+      "start": 414.4,
+      "end": 420.43,
+      "duration": 6.03,
+      "text": "i times the J coordinate of x i"
+    },
+    {
+      "index": 151,
+      "start": 420.44,
+      "end": 422.83,
+      "duration": 2.39,
+      "text": "okay so now let's just take another"
+    },
+    {
+      "index": 152,
+      "start": 422.84,
+      "end": 424.99,
+      "duration": 2.15,
+      "text": "derivative and that's going to give us"
+    },
+    {
+      "index": 153,
+      "start": 425.0,
+      "end": 426.83,
+      "duration": 1.83,
+      "text": "the entries of the"
+    },
+    {
+      "index": 154,
+      "start": 426.84,
+      "end": 429.23,
+      "duration": 2.39,
+      "text": "hhen okay so we're doing we're going to"
+    },
+    {
+      "index": 155,
+      "start": 429.24,
+      "end": 430.589,
+      "duration": 1.349,
+      "text": "the second"
+    },
+    {
+      "index": 156,
+      "start": 430.599,
+      "end": 432.95,
+      "duration": 2.351,
+      "text": "derivative so what I want to compute is"
+    },
+    {
+      "index": 157,
+      "start": 432.96,
+      "end": 435.35,
+      "duration": 2.39,
+      "text": "the"
+    },
+    {
+      "index": 158,
+      "start": 438.15,
+      "end": 438.16,
+      "duration": 0.01,
+      "text": "derivative with respect to Beta J and"
+    },
+    {
+      "index": 159,
+      "start": 438.16,
+      "end": 441.15,
+      "duration": 2.99,
+      "text": "beta"
+    },
+    {
+      "index": 160,
+      "start": 445.029,
+      "end": 445.039,
+      "duration": 0.01,
+      "text": "K okay so where does beta J so here I"
+    },
+    {
+      "index": 161,
+      "start": 445.039,
+      "end": 446.55,
+      "duration": 1.511,
+      "text": "already took the derivative with respect"
+    },
+    {
+      "index": 162,
+      "start": 446.56,
+      "end": 448.869,
+      "duration": 2.309,
+      "text": "to Beta J so this is just the derivative"
+    },
+    {
+      "index": 163,
+      "start": 448.879,
+      "end": 451.189,
+      "duration": 2.31,
+      "text": "with respect to to Beta K of the"
+    },
+    {
+      "index": 164,
+      "start": 451.199,
+      "end": 455.95,
+      "duration": 4.751,
+      "text": "derivative with respect to Beta"
+    },
+    {
+      "index": 165,
+      "start": 458.35,
+      "end": 458.36,
+      "duration": 0.01,
+      "text": "J so what I need to do is to take the"
+    },
+    {
+      "index": 166,
+      "start": 458.36,
+      "end": 459.95,
+      "duration": 1.59,
+      "text": "derivative of this guy with respect to"
+    },
+    {
+      "index": 167,
+      "start": 459.96,
+      "end": 467.749,
+      "duration": 7.789,
+      "text": "Beta K where does beta K show up"
+    },
+    {
+      "index": 168,
+      "start": 475.23,
+      "end": 475.24,
+      "duration": 0.01,
+      "text": "places no it's not in the Y's the Y's"
+    },
+    {
+      "index": 169,
+      "start": 475.24,
+      "end": 479.55,
+      "duration": 4.31,
+      "text": "are my are my data right"
+    },
+    {
+      "index": 170,
+      "start": 479.56,
+      "end": 481.23,
+      "duration": 1.67,
+      "text": "but I mean it's in the white"
+    },
+    {
+      "index": 171,
+      "start": 481.24,
+      "end": 484.029,
+      "duration": 2.789,
+      "text": "tias yeah because it's in mu right mu"
+    },
+    {
+      "index": 172,
+      "start": 484.039,
+      "end": 487.79,
+      "duration": 3.751,
+      "text": "depends on beta mu is uh G inverse of XI"
+    },
+    {
+      "index": 173,
+      "start": 487.8,
+      "end": 491.469,
+      "duration": 3.669,
+      "text": "transpose beta and it's also in the in"
+    },
+    {
+      "index": 174,
+      "start": 491.479,
+      "end": 495.07,
+      "duration": 3.591,
+      "text": "the wi actually everything that you see"
+    },
+    {
+      "index": 175,
+      "start": 495.08,
+      "end": 498.51,
+      "duration": 3.43,
+      "text": "is directly well okay W depends on mu uh"
+    },
+    {
+      "index": 176,
+      "start": 498.52,
+      "end": 502.11,
+      "duration": 3.59,
+      "text": "n of on beta explicitly and uh but the"
+    },
+    {
+      "index": 177,
+      "start": 502.12,
+      "end": 506.029,
+      "duration": 3.909,
+      "text": "rest depends only on mu and so uh we"
+    },
+    {
+      "index": 178,
+      "start": 506.039,
+      "end": 508.67,
+      "duration": 2.631,
+      "text": "might want to be a little uh well we can"
+    },
+    {
+      "index": 179,
+      "start": 508.68,
+      "end": 511.51,
+      "duration": 2.83,
+      "text": "actually use the did we did I use the"
+    },
+    {
+      "index": 180,
+      "start": 511.52,
+      "end": 513.55,
+      "duration": 2.03,
+      "text": "chin roll"
+    },
+    {
+      "index": 181,
+      "start": 513.56,
+      "end": 518.87,
+      "duration": 5.31,
+      "text": "already uh yeah it's here uh but uh okay"
+    },
+    {
+      "index": 182,
+      "start": 518.88,
+      "end": 528.23,
+      "duration": 9.35,
+      "text": "well let's uh let's go for it"
+    },
+    {
+      "index": 183,
+      "start": 531.71,
+      "end": 531.72,
+      "duration": 0.01,
+      "text": "so oh yeah okay sorry I should not write"
+    },
+    {
+      "index": 184,
+      "start": 531.72,
+      "end": 534.389,
+      "duration": 2.669,
+      "text": "it like that because that was actually"
+    },
+    {
+      "index": 185,
+      "start": 534.399,
+      "end": 536.15,
+      "duration": 1.751,
+      "text": "right so I make my life miserable by"
+    },
+    {
+      "index": 186,
+      "start": 536.16,
+      "end": 538.67,
+      "duration": 2.51,
+      "text": "just multiplying and dividing by uh this"
+    },
+    {
+      "index": 187,
+      "start": 538.68,
+      "end": 541.75,
+      "duration": 3.07,
+      "text": "G Prime of of me I should not do this"
+    },
+    {
+      "index": 188,
+      "start": 541.76,
+      "end": 543.829,
+      "duration": 2.069,
+      "text": "right so what I should just write is say"
+    },
+    {
+      "index": 189,
+      "start": 543.839,
+      "end": 545.59,
+      "duration": 1.751,
+      "text": "that this guy here I'm actually going to"
+    },
+    {
+      "index": 190,
+      "start": 545.6,
+      "end": 549.19,
+      "duration": 3.59,
+      "text": "remove the MU Prime the G Prime of new"
+    },
+    {
+      "index": 191,
+      "start": 549.2,
+      "end": 550.71,
+      "duration": 1.51,
+      "text": "because I just make something that"
+    },
+    {
+      "index": 192,
+      "start": 550.72,
+      "end": 552.55,
+      "duration": 1.83,
+      "text": "depends on Theta appear when it really"
+    },
+    {
+      "index": 193,
+      "start": 552.56,
+      "end": 554.389,
+      "duration": 1.829,
+      "text": "should not so let's just look at the"
+    },
+    {
+      "index": 194,
+      "start": 554.399,
+      "end": 562.269,
+      "duration": 7.87,
+      "text": "last but one"
+    },
+    {
+      "index": 195,
+      "start": 564.47,
+      "end": 564.48,
+      "duration": 0.01,
+      "text": "equality okay so that's the one over"
+    },
+    {
+      "index": 196,
+      "start": 564.48,
+      "end": 566.509,
+      "duration": 2.029,
+      "text": "there and then I have x i"
+    },
+    {
+      "index": 197,
+      "start": 566.519,
+      "end": 568.99,
+      "duration": 2.471,
+      "text": "j okay so here it makees my life much"
+    },
+    {
+      "index": 198,
+      "start": 569.0,
+      "end": 571.509,
+      "duration": 2.509,
+      "text": "more sense because Yi does not depend on"
+    },
+    {
+      "index": 199,
+      "start": 571.519,
+      "end": 573.35,
+      "duration": 1.831,
+      "text": "beta but this guy depends on beta and"
+    },
+    {
+      "index": 200,
+      "start": 573.36,
+      "end": 575.55,
+      "duration": 2.19,
+      "text": "this guy depends on beta right so when I"
+    },
+    {
+      "index": 201,
+      "start": 575.56,
+      "end": 576.829,
+      "duration": 1.269,
+      "text": "take the derivative I'm going to have to"
+    },
+    {
+      "index": 202,
+      "start": 576.839,
+      "end": 578.829,
+      "duration": 1.99,
+      "text": "be a little more careful now but I just"
+    },
+    {
+      "index": 203,
+      "start": 578.839,
+      "end": 580.59,
+      "duration": 1.751,
+      "text": "have a derivative of a product nothing"
+    },
+    {
+      "index": 204,
+      "start": 580.6,
+      "end": 583.63,
+      "duration": 3.03,
+      "text": "more complicated so this is what well"
+    },
+    {
+      "index": 205,
+      "start": 583.64,
+      "end": 585.47,
+      "duration": 1.83,
+      "text": "the sum is going to be linear so it's"
+    },
+    {
+      "index": 206,
+      "start": 585.48,
+      "end": 587.15,
+      "duration": 1.67,
+      "text": "going to come out then I'm going to have"
+    },
+    {
+      "index": 207,
+      "start": 587.16,
+      "end": 590.03,
+      "duration": 2.87,
+      "text": "to take the derivative of this"
+    },
+    {
+      "index": 208,
+      "start": 590.04,
+      "end": 592.47,
+      "duration": 2.43,
+      "text": "term uh so it's just going to be one"
+    },
+    {
+      "index": 209,
+      "start": 592.48,
+      "end": 598.03,
+      "duration": 5.55,
+      "text": "over P then the derivative of mu I with"
+    },
+    {
+      "index": 210,
+      "start": 598.04,
+      "end": 599.79,
+      "duration": 1.75,
+      "text": "respect to Beta K which I we'll just"
+    },
+    {
+      "index": 211,
+      "start": 599.8,
+      "end": 603.43,
+      "duration": 3.63,
+      "text": "write like"
+    },
+    {
+      "index": 212,
+      "start": 608.23,
+      "end": 608.24,
+      "duration": 0.01,
+      "text": "this times H Prime of X I transpose beta"
+    },
+    {
+      "index": 213,
+      "start": 608.24,
+      "end": 610.87,
+      "duration": 2.63,
+      "text": "x i j and then I'm going to have the"
+    },
+    {
+      "index": 214,
+      "start": 610.88,
+      "end": 612.91,
+      "duration": 2.03,
+      "text": "other one which is"
+    },
+    {
+      "index": 215,
+      "start": 612.92,
+      "end": 618.11,
+      "duration": 5.19,
+      "text": "Mu y i minus mu I over 5 times the"
+    },
+    {
+      "index": 216,
+      "start": 618.12,
+      "end": 621.35,
+      "duration": 3.23,
+      "text": "second derivative of"
+    },
+    {
+      "index": 217,
+      "start": 625.389,
+      "end": 625.399,
+      "duration": 0.01,
+      "text": "H of X transpose X I transpose beta and"
+    },
+    {
+      "index": 218,
+      "start": 625.399,
+      "end": 626.71,
+      "duration": 1.311,
+      "text": "then I'm going to take the derivative of"
+    },
+    {
+      "index": 219,
+      "start": 626.72,
+      "end": 628.87,
+      "duration": 2.15,
+      "text": "this guy with respect to Beta J with"
+    },
+    {
+      "index": 220,
+      "start": 628.88,
+      "end": 631.75,
+      "duration": 2.87,
+      "text": "beta k which is just x i"
+    },
+    {
+      "index": 221,
+      "start": 631.76,
+      "end": 635.509,
+      "duration": 3.749,
+      "text": "k so I have XI J * x i"
+    },
+    {
+      "index": 222,
+      "start": 635.519,
+      "end": 639.31,
+      "duration": 3.791,
+      "text": "k okay so I still need to compute this"
+    },
+    {
+      "index": 223,
+      "start": 639.32,
+      "end": 642.59,
+      "duration": 3.27,
+      "text": "guy so what is the partial derivative"
+    },
+    {
+      "index": 224,
+      "start": 642.6,
+      "end": 647.91,
+      "duration": 5.31,
+      "text": "with respect to Beta K of G uh so mu is"
+    },
+    {
+      "index": 225,
+      "start": 647.92,
+      "end": 655.71,
+      "duration": 7.79,
+      "text": "G of sorry is G inverse of X I transpose"
+    },
+    {
+      "index": 226,
+      "start": 657.269,
+      "end": 657.279,
+      "duration": 0.01,
+      "text": "beta"
+    },
+    {
+      "index": 227,
+      "start": 657.279,
+      "end": 661.03,
+      "duration": 3.751,
+      "text": "okay so what do I get well I'm going to"
+    },
+    {
+      "index": 228,
+      "start": 661.04,
+      "end": 664.47,
+      "duration": 3.43,
+      "text": "get definitely the second derivative of"
+    },
+    {
+      "index": 229,
+      "start": 664.48,
+      "end": 670.91,
+      "duration": 6.43,
+      "text": "G"
+    },
+    {
+      "index": 230,
+      "start": 674.069,
+      "end": 674.079,
+      "duration": 0.01,
+      "text": "uh well okay that's actually not a bad"
+    },
+    {
+      "index": 231,
+      "start": 674.079,
+      "end": 676.87,
+      "duration": 2.791,
+      "text": "idea"
+    },
+    {
+      "index": 232,
+      "start": 676.88,
+      "end": 680.19,
+      "duration": 3.31,
+      "text": "um well no that's okay I can make the"
+    },
+    {
+      "index": 233,
+      "start": 680.2,
+      "end": 682.47,
+      "duration": 2.27,
+      "text": "second what makes my life easier"
+    },
+    {
+      "index": 234,
+      "start": 682.48,
+      "end": 691.91,
+      "duration": 9.43,
+      "text": "actually"
+    },
+    {
+      "index": 235,
+      "start": 693.55,
+      "end": 693.56,
+      "duration": 0.01,
+      "text": "there's no one that actually makes my"
+    },
+    {
+      "index": 236,
+      "start": 693.56,
+      "end": 696.269,
+      "duration": 2.709,
+      "text": "life so much easier uh let's just write"
+    },
+    {
+      "index": 237,
+      "start": 696.279,
+      "end": 698.03,
+      "duration": 1.751,
+      "text": "it let's go with this guy so it's going"
+    },
+    {
+      "index": 238,
+      "start": 698.04,
+      "end": 700.069,
+      "duration": 2.029,
+      "text": "to be G prime"
+    },
+    {
+      "index": 239,
+      "start": 700.079,
+      "end": 706.87,
+      "duration": 6.791,
+      "text": "prime of X I transpose beta times x i"
+    },
+    {
+      "index": 240,
+      "start": 709.03,
+      "end": 709.04,
+      "duration": 0.01,
+      "text": "k"
+    },
+    {
+      "index": 241,
+      "start": 709.04,
+      "end": 711.59,
+      "duration": 2.55,
+      "text": "okay so now what do I have if I collect"
+    },
+    {
+      "index": 242,
+      "start": 711.6,
+      "end": 712.47,
+      "duration": 0.87,
+      "text": "my"
+    },
+    {
+      "index": 243,
+      "start": 712.48,
+      "end": 715.75,
+      "duration": 3.27,
+      "text": "terms I have that this whole thing here"
+    },
+    {
+      "index": 244,
+      "start": 715.76,
+      "end": 724.99,
+      "duration": 9.23,
+      "text": "the second derivative"
+    },
+    {
+      "index": 245,
+      "start": 727.829,
+      "end": 727.839,
+      "duration": 0.01,
+      "text": "is well I have the"
+    },
+    {
+      "index": 246,
+      "start": 727.839,
+      "end": 731.43,
+      "duration": 3.591,
+      "text": "sum from yal 1 to n then I have terms"
+    },
+    {
+      "index": 247,
+      "start": 731.44,
+      "end": 733.59,
+      "duration": 2.15,
+      "text": "that I can factor out right both of"
+    },
+    {
+      "index": 248,
+      "start": 733.6,
+      "end": 736.47,
+      "duration": 2.87,
+      "text": "these guys have X IJ and this guy pulls"
+    },
+    {
+      "index": 249,
+      "start": 736.48,
+      "end": 739.269,
+      "duration": 2.789,
+      "text": "out an x i k and it's also here XI J"
+    },
+    {
+      "index": 250,
+      "start": 739.279,
+      "end": 743.91,
+      "duration": 4.631,
+      "text": "time x i k right so everybody here is x"
+    },
+    {
+      "index": 251,
+      "start": 743.92,
+      "end": 748.069,
+      "duration": 4.149,
+      "text": "i j x i k and now I just have to take"
+    },
+    {
+      "index": 252,
+      "start": 748.079,
+      "end": 749.67,
+      "duration": 1.591,
+      "text": "the terms that I have here"
+    },
+    {
+      "index": 253,
+      "start": 749.68,
+      "end": 751.43,
+      "duration": 1.75,
+      "text": "the one over five I can actually pull"
+    },
+    {
+      "index": 254,
+      "start": 751.44,
+      "end": 755.55,
+      "duration": 4.11,
+      "text": "out in front and I'm left with the"
+    },
+    {
+      "index": 255,
+      "start": 755.56,
+      "end": 758.949,
+      "duration": 3.389,
+      "text": "second derivative of"
+    },
+    {
+      "index": 256,
+      "start": 762.829,
+      "end": 762.839,
+      "duration": 0.01,
+      "text": "G times the first derivative of h both"
+    },
+    {
+      "index": 257,
+      "start": 762.839,
+      "end": 765.31,
+      "duration": 2.471,
+      "text": "taken at X I transpose"
+    },
+    {
+      "index": 258,
+      "start": 765.32,
+      "end": 768.75,
+      "duration": 3.43,
+      "text": "beta and then I have this y i minus mu I"
+    },
+    {
+      "index": 259,
+      "start": 768.76,
+      "end": 771.03,
+      "duration": 2.27,
+      "text": "* the second derivative of H taken at X"
+    },
+    {
+      "index": 260,
+      "start": 771.04,
+      "end": 780.47,
+      "duration": 9.43,
+      "text": "I transpose beta"
+    },
+    {
+      "index": 261,
+      "start": 782.15,
+      "end": 782.16,
+      "duration": 0.01,
+      "text": "okay but here I'm looking at Fisher"
+    },
+    {
+      "index": 262,
+      "start": 782.16,
+      "end": 785.79,
+      "duration": 3.63,
+      "text": "scoring I'm not looking at uh um"
+    },
+    {
+      "index": 263,
+      "start": 785.8,
+      "end": 787.79,
+      "duration": 1.99,
+      "text": "Newton's method which means that I can"
+    },
+    {
+      "index": 264,
+      "start": 787.8,
+      "end": 789.91,
+      "duration": 2.11,
+      "text": "actually take the expectation of the"
+    },
+    {
+      "index": 265,
+      "start": 789.92,
+      "end": 792.43,
+      "duration": 2.51,
+      "text": "second derivative so when I start taking"
+    },
+    {
+      "index": 266,
+      "start": 792.44,
+      "end": 794.43,
+      "duration": 1.99,
+      "text": "the expectation what's going to"
+    },
+    {
+      "index": 267,
+      "start": 794.44,
+      "end": 797.069,
+      "duration": 2.629,
+      "text": "happen so if I take the expectation of"
+    },
+    {
+      "index": 268,
+      "start": 797.079,
+      "end": 798.79,
+      "duration": 1.711,
+      "text": "this whole thing"
+    },
+    {
+      "index": 269,
+      "start": 798.8,
+      "end": 802.389,
+      "duration": 3.589,
+      "text": "here well this guy is not and when I say"
+    },
+    {
+      "index": 270,
+      "start": 802.399,
+      "end": 803.949,
+      "duration": 1.55,
+      "text": "expectation it's always conditionally on"
+    },
+    {
+      "index": 271,
+      "start": 803.959,
+      "end": 806.43,
+      "duration": 2.471,
+      "text": "XI so let's write"
+    },
+    {
+      "index": 272,
+      "start": 806.44,
+      "end": 811.43,
+      "duration": 4.99,
+      "text": "it X1 xn so I I take conditional this is"
+    },
+    {
+      "index": 273,
+      "start": 811.44,
+      "end": 813.389,
+      "duration": 1.949,
+      "text": "just deterministic but what is the"
+    },
+    {
+      "index": 274,
+      "start": 813.399,
+      "end": 817.35,
+      "duration": 3.951,
+      "text": "conditional expectation of Yi minus mui"
+    },
+    {
+      "index": 275,
+      "start": 817.36,
+      "end": 821.23,
+      "duration": 3.87,
+      "text": "times this guy conditionally on"
+    },
+    {
+      "index": 276,
+      "start": 824.43,
+      "end": 824.44,
+      "duration": 0.01,
+      "text": "XI zero right because this is just the"
+    },
+    {
+      "index": 277,
+      "start": 824.44,
+      "end": 825.87,
+      "duration": 1.43,
+      "text": "conditional expectation of Yi and"
+    },
+    {
+      "index": 278,
+      "start": 825.88,
+      "end": 827.75,
+      "duration": 1.87,
+      "text": "everything else depends on X I only so I"
+    },
+    {
+      "index": 279,
+      "start": 827.76,
+      "end": 829.67,
+      "duration": 1.91,
+      "text": "can push it out of the conditional"
+    },
+    {
+      "index": 280,
+      "start": 829.68,
+      "end": 831.79,
+      "duration": 2.11,
+      "text": "expectation so I'm left only with this"
+    },
+    {
+      "index": 281,
+      "start": 831.8,
+      "end": 847.87,
+      "duration": 16.07,
+      "text": "term"
+    },
+    {
+      "index": 282,
+      "start": 855.43,
+      "end": 855.44,
+      "duration": 0.01,
+      "text": "now um so now I need to uh sorry and I"
+    },
+    {
+      "index": 283,
+      "start": 855.44,
+      "end": 857.71,
+      "duration": 2.27,
+      "text": "have x"
+    },
+    {
+      "index": 284,
+      "start": 857.72,
+      "end": 862.35,
+      "duration": 4.63,
+      "text": "ixj x i k XI x"
+    },
+    {
+      "index": 285,
+      "start": 862.36,
+      "end": 866.069,
+      "duration": 3.709,
+      "text": "i"
+    },
+    {
+      "index": 286,
+      "start": 870.829,
+      "end": 870.839,
+      "duration": 0.01,
+      "text": "okay so now I want"
+    },
+    {
+      "index": 287,
+      "start": 870.839,
+      "end": 874.23,
+      "duration": 3.391,
+      "text": "um I want to go to something that's"
+    },
+    {
+      "index": 288,
+      "start": 874.24,
+      "end": 876.35,
+      "duration": 2.11,
+      "text": "slightly more convenient for me so maybe"
+    },
+    {
+      "index": 289,
+      "start": 876.36,
+      "end": 878.629,
+      "duration": 2.269,
+      "text": "we can skip that part here because this"
+    },
+    {
+      "index": 290,
+      "start": 878.639,
+      "end": 880.03,
+      "duration": 1.391,
+      "text": "is not going to be convenient for me"
+    },
+    {
+      "index": 291,
+      "start": 880.04,
+      "end": 882.15,
+      "duration": 2.11,
+      "text": "anyway so I just want to go back to"
+    },
+    {
+      "index": 292,
+      "start": 882.16,
+      "end": 884.509,
+      "duration": 2.349,
+      "text": "something that looks"
+    },
+    {
+      "index": 293,
+      "start": 884.519,
+      "end": 887.15,
+      "duration": 2.631,
+      "text": "eventually like"
+    },
+    {
+      "index": 294,
+      "start": 887.16,
+      "end": 889.87,
+      "duration": 2.71,
+      "text": "this okay that's what I'm going to want"
+    },
+    {
+      "index": 295,
+      "start": 889.88,
+      "end": 892.189,
+      "duration": 2.309,
+      "text": "so I need to have my XI show up with"
+    },
+    {
+      "index": 296,
+      "start": 892.199,
+      "end": 894.47,
+      "duration": 2.271,
+      "text": "some weight somehow and the WID should"
+    },
+    {
+      "index": 297,
+      "start": 894.48,
+      "end": 897.59,
+      "duration": 3.11,
+      "text": "involve H Prime divided by G Prime okay"
+    },
+    {
+      "index": 298,
+      "start": 897.6,
+      "end": 899.79,
+      "duration": 2.19,
+      "text": "and the reason why I want to see G Prime"
+    },
+    {
+      "index": 299,
+      "start": 899.8,
+      "end": 902.47,
+      "duration": 2.67,
+      "text": "coming back is because I had G Prime"
+    },
+    {
+      "index": 300,
+      "start": 902.48,
+      "end": 904.23,
+      "duration": 1.75,
+      "text": "coming in the original W this is"
+    },
+    {
+      "index": 301,
+      "start": 904.24,
+      "end": 906.629,
+      "duration": 2.389,
+      "text": "actually the same definition as the W's"
+    },
+    {
+      "index": 302,
+      "start": 906.639,
+      "end": 908.829,
+      "duration": 2.19,
+      "text": "that I used when I was uh Computing the"
+    },
+    {
+      "index": 303,
+      "start": 908.839,
+      "end": 911.71,
+      "duration": 2.871,
+      "text": "gradients right those are exactly this"
+    },
+    {
+      "index": 304,
+      "start": 911.72,
+      "end": 915.069,
+      "duration": 3.349,
+      "text": "W's those guys so I need to have G Prime"
+    },
+    {
+      "index": 305,
+      "start": 915.079,
+      "end": 916.31,
+      "duration": 1.231,
+      "text": "that shows up and that's where I'm going"
+    },
+    {
+      "index": 306,
+      "start": 916.32,
+      "end": 919.069,
+      "duration": 2.749,
+      "text": "to have to make a little bit of uh of"
+    },
+    {
+      "index": 307,
+      "start": 919.079,
+      "end": 923.11,
+      "duration": 4.031,
+      "text": "computation here and uh it's coming from"
+    },
+    {
+      "index": 308,
+      "start": 923.12,
+      "end": 925.55,
+      "duration": 2.43,
+      "text": "this kind of uh from this kind of"
+    },
+    {
+      "index": 309,
+      "start": 925.56,
+      "end": 932.629,
+      "duration": 7.069,
+      "text": "considerations okay so um this thing"
+    },
+    {
+      "index": 310,
+      "start": 936.189,
+      "end": 936.199,
+      "duration": 0.01,
+      "text": "here oh actually I'm missing the FI over"
+    },
+    {
+      "index": 311,
+      "start": 936.199,
+      "end": 937.99,
+      "duration": 1.791,
+      "text": "there"
+    },
+    {
+      "index": 312,
+      "start": 938.0,
+      "end": 942.47,
+      "duration": 4.47,
+      "text": "right there should be a f here okay so"
+    },
+    {
+      "index": 313,
+      "start": 942.48,
+      "end": 945.629,
+      "duration": 3.149,
+      "text": "we have exactly this thing because this"
+    },
+    {
+      "index": 314,
+      "start": 945.639,
+      "end": 952.99,
+      "duration": 7.351,
+      "text": "tells me that if I look at the"
+    },
+    {
+      "index": 315,
+      "start": 956.269,
+      "end": 956.279,
+      "duration": 0.01,
+      "text": "hashen so this was entrywise and this is"
+    },
+    {
+      "index": 316,
+      "start": 956.279,
+      "end": 958.15,
+      "duration": 1.871,
+      "text": "exactly the form of something of the for"
+    },
+    {
+      "index": 317,
+      "start": 958.16,
+      "end": 961.03,
+      "duration": 2.87,
+      "text": "of the C the this is exactly the"
+    },
+    {
+      "index": 318,
+      "start": 961.04,
+      "end": 965.389,
+      "duration": 4.349,
+      "text": "J Cas entry of X ixi"
+    },
+    {
+      "index": 319,
+      "start": 965.399,
+      "end": 967.749,
+      "duration": 2.35,
+      "text": "transpose right we've used that before"
+    },
+    {
+      "index": 320,
+      "start": 967.759,
+      "end": 969.389,
+      "duration": 1.63,
+      "text": "so if I want to write this in a vector"
+    },
+    {
+      "index": 321,
+      "start": 969.399,
+      "end": 971.749,
+      "duration": 2.35,
+      "text": "form this is just going to be the sum of"
+    },
+    {
+      "index": 322,
+      "start": 971.759,
+      "end": 974.309,
+      "duration": 2.55,
+      "text": "something in that depends on I times x i"
+    },
+    {
+      "index": 323,
+      "start": 974.319,
+      "end": 978.35,
+      "duration": 4.031,
+      "text": "x i transpose so this is 1 over 5 sum"
+    },
+    {
+      "index": 324,
+      "start": 978.36,
+      "end": 982.309,
+      "duration": 3.949,
+      "text": "from I = 1 to n of G prime prime X I"
+    },
+    {
+      "index": 325,
+      "start": 982.319,
+      "end": 987.23,
+      "duration": 4.911,
+      "text": "transpose beta H Prime XI transpose beta"
+    },
+    {
+      "index": 326,
+      "start": 987.24,
+      "end": 990.87,
+      "duration": 3.63,
+      "text": "XI XI transpose"
+    },
+    {
+      "index": 327,
+      "start": 990.88,
+      "end": 992.43,
+      "duration": 1.55,
+      "text": "okay and that's for the entire Matrix"
+    },
+    {
+      "index": 328,
+      "start": 992.44,
+      "end": 994.23,
+      "duration": 1.79,
+      "text": "here that was just the JK entries of"
+    },
+    {
+      "index": 329,
+      "start": 994.24,
+      "end": 997.309,
+      "duration": 3.069,
+      "text": "this"
+    },
+    {
+      "index": 330,
+      "start": 999.67,
+      "end": 999.68,
+      "duration": 0.01,
+      "text": "Matrix and you can just check that if I"
+    },
+    {
+      "index": 331,
+      "start": 999.68,
+      "end": 1003.189,
+      "duration": 3.509,
+      "text": "take this Matrix the J JK entry is just"
+    },
+    {
+      "index": 332,
+      "start": 1003.199,
+      "end": 1005.55,
+      "duration": 2.351,
+      "text": "the product of the J coordinate and the"
+    },
+    {
+      "index": 333,
+      "start": 1005.56,
+      "end": 1007.749,
+      "duration": 2.189,
+      "text": "case coordinate of"
+    },
+    {
+      "index": 334,
+      "start": 1007.759,
+      "end": 1010.55,
+      "duration": 2.791,
+      "text": "XI all"
+    },
+    {
+      "index": 335,
+      "start": 1010.56,
+      "end": 1013.47,
+      "duration": 2.91,
+      "text": "right so uh now I need to do my"
+    },
+    {
+      "index": 336,
+      "start": 1013.48,
+      "end": 1017.43,
+      "duration": 3.95,
+      "text": "rewriting can I write"
+    },
+    {
+      "index": 337,
+      "start": 1035.309,
+      "end": 1035.319,
+      "duration": 0.01,
+      "text": "right oh I know where it's coming"
+    },
+    {
+      "index": 338,
+      "start": 1035.319,
+      "end": 1037.59,
+      "duration": 2.271,
+      "text": "from"
+    },
+    {
+      "index": 339,
+      "start": 1037.6,
+      "end": 1040.909,
+      "duration": 3.309,
+      "text": "uh mu is not g Prime of X"
+    },
+    {
+      "index": 340,
+      "start": 1040.919,
+      "end": 1046.909,
+      "duration": 5.99,
+      "text": "beta mu is G inverse of X beta"
+    },
+    {
+      "index": 341,
+      "start": 1049.63,
+      "end": 1049.64,
+      "duration": 0.01,
+      "text": "right so derivative of"
+    },
+    {
+      "index": 342,
+      "start": 1049.64,
+      "end": 1054.35,
+      "duration": 4.71,
+      "text": "X Prime is not uh uh it's not g prime"
+    },
+    {
+      "index": 343,
+      "start": 1054.36,
+      "end": 1057.87,
+      "duration": 3.51,
+      "text": "prime it's"
+    },
+    {
+      "index": 344,
+      "start": 1068.31,
+      "end": 1068.32,
+      "duration": 0.01,
+      "text": "guy no uh one over this"
+    },
+    {
+      "index": 345,
+      "start": 1068.32,
+      "end": 1070.909,
+      "duration": 2.589,
+      "text": "right"
+    },
+    {
+      "index": 346,
+      "start": 1070.919,
+      "end": 1087.07,
+      "duration": 16.151,
+      "text": "uh yeah"
+    },
+    {
+      "index": 347,
+      "start": 1089.75,
+      "end": 1089.76,
+      "duration": 0.01,
+      "text": "okay the derivative of G inverse is one"
+    },
+    {
+      "index": 348,
+      "start": 1089.76,
+      "end": 1094.39,
+      "duration": 4.63,
+      "text": "over G Prime of G"
+    },
+    {
+      "index": 349,
+      "start": 1097.59,
+      "end": 1097.6,
+      "duration": 0.01,
+      "text": "inverse I I need you guys okay I'm not"
+    },
+    {
+      "index": 350,
+      "start": 1097.6,
+      "end": 1099.909,
+      "duration": 2.309,
+      "text": "uh all right so now I'm gonna have to"
+    },
+    {
+      "index": 351,
+      "start": 1099.919,
+      "end": 1101.35,
+      "duration": 1.431,
+      "text": "rewrite this this guy is still going to"
+    },
+    {
+      "index": 352,
+      "start": 1101.36,
+      "end": 1102.95,
+      "duration": 1.59,
+      "text": "go away it doesn't matter but now this"
+    },
+    {
+      "index": 353,
+      "start": 1102.96,
+      "end": 1107.31,
+      "duration": 4.35,
+      "text": "thing is becoming H Prime over G Prime"
+    },
+    {
+      "index": 354,
+      "start": 1107.32,
+      "end": 1111.07,
+      "duration": 3.75,
+      "text": "of G in inverse of X I transpose"
+    },
+    {
+      "index": 355,
+      "start": 1111.08,
+      "end": 1119.909,
+      "duration": 8.829,
+      "text": "beta which is the same"
+    },
+    {
+      "index": 356,
+      "start": 1134.51,
+      "end": 1134.52,
+      "duration": 0.01,
+      "text": "here okay everybody"
+    },
+    {
+      "index": 357,
+      "start": 1134.52,
+      "end": 1136.909,
+      "duration": 2.389,
+      "text": "approves all right but now it's actually"
+    },
+    {
+      "index": 358,
+      "start": 1136.919,
+      "end": 1140.07,
+      "duration": 3.151,
+      "text": "much nicer what is g inverse of X I"
+    },
+    {
+      "index": 359,
+      "start": 1140.08,
+      "end": 1144.19,
+      "duration": 4.11,
+      "text": "transpose"
+    },
+    {
+      "index": 360,
+      "start": 1146.51,
+      "end": 1146.52,
+      "duration": 0.01,
+      "text": "beta well that was exactly the mistake"
+    },
+    {
+      "index": 361,
+      "start": 1146.52,
+      "end": 1149.87,
+      "duration": 3.35,
+      "text": "that I just made right it's mui"
+    },
+    {
+      "index": 362,
+      "start": 1149.88,
+      "end": 1154.549,
+      "duration": 4.669,
+      "text": "itself so this guy is really G"
+    },
+    {
+      "index": 363,
+      "start": 1154.559,
+      "end": 1157.11,
+      "duration": 2.551,
+      "text": "Prime of"
+    },
+    {
+      "index": 364,
+      "start": 1157.12,
+      "end": 1162.07,
+      "duration": 4.95,
+      "text": "mui this sorry just the bottom"
+    },
+    {
+      "index": 365,
+      "start": 1164.43,
+      "end": 1164.44,
+      "duration": 0.01,
+      "text": "right so now I have something which"
+    },
+    {
+      "index": 366,
+      "start": 1164.44,
+      "end": 1171.63,
+      "duration": 7.19,
+      "text": "looks like"
+    },
+    {
+      "index": 367,
+      "start": 1176.87,
+      "end": 1176.88,
+      "duration": 0.01,
+      "text": "is sum from I = 1 to n of H Prime of X I"
+    },
+    {
+      "index": 368,
+      "start": 1176.88,
+      "end": 1182.47,
+      "duration": 5.59,
+      "text": "transpose beta divided by G Prime of mui"
+    },
+    {
+      "index": 369,
+      "start": 1182.48,
+      "end": 1186.99,
+      "duration": 4.51,
+      "text": "F time x i x i transpose which I can"
+    },
+    {
+      "index": 370,
+      "start": 1187.0,
+      "end": 1191.669,
+      "duration": 4.669,
+      "text": "certainly write in Matrix form as X"
+    },
+    {
+      "index": 371,
+      "start": 1191.679,
+      "end": 1193.59,
+      "duration": 1.911,
+      "text": "transpose"
+    },
+    {
+      "index": 372,
+      "start": 1193.6,
+      "end": 1195.549,
+      "duration": 1.949,
+      "text": "WX"
+    },
+    {
+      "index": 373,
+      "start": 1195.559,
+      "end": 1200.23,
+      "duration": 4.671,
+      "text": "where uh W is exactly the same as before"
+    },
+    {
+      "index": 374,
+      "start": 1200.24,
+      "end": 1202.23,
+      "duration": 1.99,
+      "text": "so it's uh"
+    },
+    {
+      "index": 375,
+      "start": 1202.24,
+      "end": 1204.35,
+      "duration": 2.11,
+      "text": "W1 w"
+    },
+    {
+      "index": 376,
+      "start": 1204.36,
+      "end": 1210.549,
+      "duration": 6.189,
+      "text": "n and w i is H Prime of xit transpose"
+    },
+    {
+      "index": 377,
+      "start": 1210.559,
+      "end": 1215.35,
+      "duration": 4.791,
+      "text": "beta divided by G Prime of"
+    },
+    {
+      "index": 378,
+      "start": 1215.36,
+      "end": 1218.19,
+      "duration": 2.83,
+      "text": "mui there's a prime"
+    },
+    {
+      "index": 379,
+      "start": 1218.2,
+      "end": 1221.549,
+      "duration": 3.349,
+      "text": "here times five which is the same that"
+    },
+    {
+      "index": 380,
+      "start": 1221.559,
+      "end": 1224.669,
+      "duration": 3.11,
+      "text": "we had here and it's supposed to be the"
+    },
+    {
+      "index": 381,
+      "start": 1224.679,
+      "end": 1227.51,
+      "duration": 2.831,
+      "text": "same that we have here except that the"
+    },
+    {
+      "index": 382,
+      "start": 1227.52,
+      "end": 1230.99,
+      "duration": 3.47,
+      "text": "FI is in white"
+    },
+    {
+      "index": 383,
+      "start": 1240.95,
+      "end": 1240.96,
+      "duration": 0.01,
+      "text": "um all right so it's actually simpler"
+    },
+    {
+      "index": 384,
+      "start": 1240.96,
+      "end": 1243.149,
+      "duration": 2.189,
+      "text": "than what's on the slides I guess all"
+    },
+    {
+      "index": 385,
+      "start": 1243.159,
+      "end": 1246.07,
+      "duration": 2.911,
+      "text": "right so now if you pay attention I"
+    },
+    {
+      "index": 386,
+      "start": 1246.08,
+      "end": 1247.87,
+      "duration": 1.79,
+      "text": "actually never forced this G Prime of"
+    },
+    {
+      "index": 387,
+      "start": 1247.88,
+      "end": 1250.63,
+      "duration": 2.75,
+      "text": "mui to be here actually I even tried to"
+    },
+    {
+      "index": 388,
+      "start": 1250.64,
+      "end": 1254.35,
+      "duration": 3.71,
+      "text": "make a mistake to not have it and uh uh"
+    },
+    {
+      "index": 389,
+      "start": 1254.36,
+      "end": 1257.07,
+      "duration": 2.71,
+      "text": "so this G Prime of shows up completely"
+    },
+    {
+      "index": 390,
+      "start": 1257.08,
+      "end": 1258.87,
+      "duration": 1.79,
+      "text": "naturally if I had started with with"
+    },
+    {
+      "index": 391,
+      "start": 1258.88,
+      "end": 1262.83,
+      "duration": 3.95,
+      "text": "this you would have never questioned"
+    },
+    {
+      "index": 392,
+      "start": 1262.84,
+      "end": 1266.909,
+      "duration": 4.069,
+      "text": "the the why actually multiply by G Prime"
+    },
+    {
+      "index": 393,
+      "start": 1266.919,
+      "end": 1268.549,
+      "duration": 1.63,
+      "text": "and divided by G Prime completely"
+    },
+    {
+      "index": 394,
+      "start": 1268.559,
+      "end": 1270.51,
+      "duration": 1.951,
+      "text": "artificially here it just shows up"
+    },
+    {
+      "index": 395,
+      "start": 1270.52,
+      "end": 1271.789,
+      "duration": 1.269,
+      "text": "naturally in the"
+    },
+    {
+      "index": 396,
+      "start": 1271.799,
+      "end": 1273.99,
+      "duration": 2.191,
+      "text": "weights but it's just more natural for"
+    },
+    {
+      "index": 397,
+      "start": 1274.0,
+      "end": 1275.63,
+      "duration": 1.63,
+      "text": "me to compute the first derivative first"
+    },
+    {
+      "index": 398,
+      "start": 1275.64,
+      "end": 1277.789,
+      "duration": 2.149,
+      "text": "and the second derivative second okay"
+    },
+    {
+      "index": 399,
+      "start": 1277.799,
+      "end": 1279.83,
+      "duration": 2.031,
+      "text": "and so and so we just did it the other"
+    },
+    {
+      "index": 400,
+      "start": 1279.84,
+      "end": 1281.99,
+      "duration": 2.15,
+      "text": "way around but now let's assume we"
+    },
+    {
+      "index": 401,
+      "start": 1282.0,
+      "end": 1284.31,
+      "duration": 2.31,
+      "text": "forgot about everything we have this"
+    },
+    {
+      "index": 402,
+      "start": 1284.32,
+      "end": 1286.07,
+      "duration": 1.75,
+      "text": "this is a natural way of writing it X"
+    },
+    {
+      "index": 403,
+      "start": 1286.08,
+      "end": 1289.11,
+      "duration": 3.03,
+      "text": "transpose w x if I want something that"
+    },
+    {
+      "index": 404,
+      "start": 1289.12,
+      "end": 1291.11,
+      "duration": 1.99,
+      "text": "involves some weights I have to sort of"
+    },
+    {
+      "index": 405,
+      "start": 1291.12,
+      "end": 1293.75,
+      "duration": 2.63,
+      "text": "force them in by dividing by G Prime of"
+    },
+    {
+      "index": 406,
+      "start": 1293.76,
+      "end": 1297.87,
+      "duration": 4.11,
+      "text": "mui and therefore multiplying y i n mui"
+    },
+    {
+      "index": 407,
+      "start": 1297.88,
+      "end": 1299.47,
+      "duration": 1.59,
+      "text": "by this"
+    },
+    {
+      "index": 408,
+      "start": 1299.48,
+      "end": 1302.83,
+      "duration": 3.35,
+      "text": "wi okay so now if we recap what we've"
+    },
+    {
+      "index": 409,
+      "start": 1302.84,
+      "end": 1304.549,
+      "duration": 1.709,
+      "text": "actually"
+    },
+    {
+      "index": 410,
+      "start": 1304.559,
+      "end": 1308.43,
+      "duration": 3.871,
+      "text": "found we got that"
+    },
+    {
+      "index": 411,
+      "start": 1308.44,
+      "end": 1318.63,
+      "duration": 10.19,
+      "text": "um let me write it here"
+    },
+    {
+      "index": 412,
+      "start": 1320.95,
+      "end": 1320.96,
+      "duration": 0.01,
+      "text": "we also have that the"
+    },
+    {
+      "index": 413,
+      "start": 1320.96,
+      "end": 1323.269,
+      "duration": 2.309,
+      "text": "expectation of"
+    },
+    {
+      "index": 414,
+      "start": 1323.279,
+      "end": 1329.269,
+      "duration": 5.99,
+      "text": "HLN of"
+    },
+    {
+      "index": 415,
+      "start": 1333.029,
+      "end": 1333.039,
+      "duration": 0.01,
+      "text": "beta X transpose x w so if I go back to"
+    },
+    {
+      "index": 416,
+      "start": 1333.039,
+      "end": 1335.47,
+      "duration": 2.431,
+      "text": "my iterations over there I should"
+    },
+    {
+      "index": 417,
+      "start": 1335.48,
+      "end": 1339.39,
+      "duration": 3.91,
+      "text": "actually update beta k +"
+    },
+    {
+      "index": 418,
+      "start": 1339.4,
+      "end": 1343.029,
+      "duration": 3.629,
+      "text": "one to be equal to Beta"
+    },
+    {
+      "index": 419,
+      "start": 1343.039,
+      "end": 1345.95,
+      "duration": 2.911,
+      "text": "K plus the inverse so that's actually"
+    },
+    {
+      "index": 420,
+      "start": 1345.96,
+      "end": 1351.149,
+      "duration": 5.189,
+      "text": "equal to negative I of beta K uh"
+    },
+    {
+      "index": 421,
+      "start": 1351.159,
+      "end": 1355.149,
+      "duration": 3.99,
+      "text": "well uh yeah that's negative I of beta I"
+    },
+    {
+      "index": 422,
+      "start": 1355.159,
+      "end": 1358.669,
+      "duration": 3.51,
+      "text": "guess so uh so that's going to be oh and"
+    },
+    {
+      "index": 423,
+      "start": 1358.679,
+      "end": 1361.149,
+      "duration": 2.47,
+      "text": "beta here shows up in in W right W"
+    },
+    {
+      "index": 424,
+      "start": 1361.159,
+      "end": 1363.35,
+      "duration": 2.191,
+      "text": "depends on beta so that's going to be"
+    },
+    {
+      "index": 425,
+      "start": 1363.36,
+      "end": 1368.43,
+      "duration": 5.07,
+      "text": "beta K so let me call it w"
+    },
+    {
+      "index": 426,
+      "start": 1373.51,
+      "end": 1373.52,
+      "duration": 0.01,
+      "text": "k so that's the diagonal of H Prime X I"
+    },
+    {
+      "index": 427,
+      "start": 1373.52,
+      "end": 1377.51,
+      "duration": 3.99,
+      "text": "transpose beta K this time divided by G"
+    },
+    {
+      "index": 428,
+      "start": 1377.52,
+      "end": 1380.35,
+      "duration": 2.83,
+      "text": "Prime of mu i"
+    },
+    {
+      "index": 429,
+      "start": 1380.36,
+      "end": 1385.029,
+      "duration": 4.669,
+      "text": "k f okay so this mu indu this beta K"
+    },
+    {
+      "index": 430,
+      "start": 1385.039,
+      "end": 1387.87,
+      "duration": 2.831,
+      "text": "induces a mu by looking at G inverse of"
+    },
+    {
+      "index": 431,
+      "start": 1387.88,
+      "end": 1390.51,
+      "duration": 2.63,
+      "text": "X I transpose beta"
+    },
+    {
+      "index": 432,
+      "start": 1390.52,
+      "end": 1393.83,
+      "duration": 3.31,
+      "text": "K right so mu i"
+    },
+    {
+      "index": 433,
+      "start": 1393.84,
+      "end": 1398.51,
+      "duration": 4.67,
+      "text": "k is G inverse of X I"
+    },
+    {
+      "index": 434,
+      "start": 1398.52,
+      "end": 1401.029,
+      "duration": 2.509,
+      "text": "transpose beta"
+    },
+    {
+      "index": 435,
+      "start": 1401.039,
+      "end": 1405.43,
+      "duration": 4.391,
+      "text": "K that's to sorry that's an iteration"
+    },
+    {
+      "index": 436,
+      "start": 1405.44,
+      "end": 1406.909,
+      "duration": 1.469,
+      "text": "and so now if I actually write these"
+    },
+    {
+      "index": 437,
+      "start": 1406.919,
+      "end": 1409.71,
+      "duration": 2.791,
+      "text": "things together I get"
+    },
+    {
+      "index": 438,
+      "start": 1409.72,
+      "end": 1413.909,
+      "duration": 4.189,
+      "text": "minus X transpose"
+    },
+    {
+      "index": 439,
+      "start": 1413.919,
+      "end": 1416.59,
+      "duration": 2.671,
+      "text": "WX"
+    },
+    {
+      "index": 440,
+      "start": 1416.6,
+      "end": 1420.83,
+      "duration": 4.23,
+      "text": "inverse so that's w"
+    },
+    {
+      "index": 441,
+      "start": 1424.789,
+      "end": 1424.799,
+      "duration": 0.01,
+      "text": "k and then I have my uh gr my gradient"
+    },
+    {
+      "index": 442,
+      "start": 1424.799,
+      "end": 1427.47,
+      "duration": 2.671,
+      "text": "here that I have to apply at K which is"
+    },
+    {
+      "index": 443,
+      "start": 1427.48,
+      "end": 1433.83,
+      "duration": 6.35,
+      "text": "X transpose w k and then I have y tlda k"
+    },
+    {
+      "index": 444,
+      "start": 1433.84,
+      "end": 1435.31,
+      "duration": 1.47,
+      "text": "minus"
+    },
+    {
+      "index": 445,
+      "start": 1435.32,
+      "end": 1439.47,
+      "duration": 4.15,
+      "text": "mulda K where again the indices I mean"
+    },
+    {
+      "index": 446,
+      "start": 1439.48,
+      "end": 1442.31,
+      "duration": 2.83,
+      "text": "the superscript k are pretty natural y"
+    },
+    {
+      "index": 447,
+      "start": 1442.32,
+      "end": 1446.83,
+      "duration": 4.51,
+      "text": "Tilda K just means that so that's just y"
+    },
+    {
+      "index": 448,
+      "start": 1446.84,
+      "end": 1448.95,
+      "duration": 2.11,
+      "text": "i that's just"
+    },
+    {
+      "index": 449,
+      "start": 1448.96,
+      "end": 1453.63,
+      "duration": 4.67,
+      "text": "y i times G Prime of mu i"
+    },
+    {
+      "index": 450,
+      "start": 1453.64,
+      "end": 1457.35,
+      "duration": 3.71,
+      "text": "k and mu well and mulda"
+    },
+    {
+      "index": 451,
+      "start": 1457.36,
+      "end": 1461.19,
+      "duration": 3.83,
+      "text": "K is uh if I look at the I coordinate"
+    },
+    {
+      "index": 452,
+      "start": 1461.2,
+      "end": 1463.269,
+      "duration": 2.069,
+      "text": "it's just going to be mu"
+    },
+    {
+      "index": 453,
+      "start": 1463.279,
+      "end": 1465.99,
+      "duration": 2.711,
+      "text": "I times G"
+    },
+    {
+      "index": 454,
+      "start": 1466.0,
+      "end": 1471.83,
+      "duration": 5.83,
+      "text": "Prime of mui"
+    },
+    {
+      "index": 455,
+      "start": 1474.029,
+      "end": 1474.039,
+      "duration": 0.01,
+      "text": "okay so I just add superscripts K to"
+    },
+    {
+      "index": 456,
+      "start": 1474.039,
+      "end": 1475.59,
+      "duration": 1.551,
+      "text": "everything so I know that those things"
+    },
+    {
+      "index": 457,
+      "start": 1475.6,
+      "end": 1478.19,
+      "duration": 2.59,
+      "text": "get updated real time right every time I"
+    },
+    {
+      "index": 458,
+      "start": 1478.2,
+      "end": 1480.59,
+      "duration": 2.39,
+      "text": "have I make one iteration I get a new"
+    },
+    {
+      "index": 459,
+      "start": 1480.6,
+      "end": 1483.11,
+      "duration": 2.51,
+      "text": "value for beta I get a new value for me"
+    },
+    {
+      "index": 460,
+      "start": 1483.12,
+      "end": 1489.269,
+      "duration": 6.149,
+      "text": "and therefore I get a new value for w"
+    },
+    {
+      "index": 461,
+      "start": 1492.83,
+      "end": 1492.84,
+      "duration": 0.01,
+      "text": "yes uh yeah that's a good point uh so"
+    },
+    {
+      "index": 462,
+      "start": 1492.84,
+      "end": 1494.389,
+      "duration": 1.549,
+      "text": "that's definitely a plus because this is"
+    },
+    {
+      "index": 463,
+      "start": 1494.399,
+      "end": 1496.23,
+      "duration": 1.831,
+      "text": "a positive semi-definite Matrix so this"
+    },
+    {
+      "index": 464,
+      "start": 1496.24,
+      "end": 1499.909,
+      "duration": 3.669,
+      "text": "is a plus and uh where did I uh well"
+    },
+    {
+      "index": 465,
+      "start": 1499.919,
+      "end": 1502.1,
+      "duration": 2.181,
+      "text": "that's probably where I erased it"
+    },
+    {
+      "index": 466,
+      "start": 1502.11,
+      "end": 1515.23,
+      "duration": 13.12,
+      "text": "[Music]"
+    },
+    {
+      "index": 467,
+      "start": 1525.95,
+      "end": 1525.96,
+      "duration": 0.01,
+      "text": "mistake so"
+    },
+    {
+      "index": 468,
+      "start": 1525.96,
+      "end": 1528.59,
+      "duration": 2.63,
+      "text": "this there should be a minus here here"
+    },
+    {
+      "index": 469,
+      "start": 1528.6,
+      "end": 1529.83,
+      "duration": 1.23,
+      "text": "there should be a minus here there"
+    },
+    {
+      "index": 470,
+      "start": 1529.84,
+      "end": 1531.51,
+      "duration": 1.67,
+      "text": "should be a minus even at the beginning"
+    },
+    {
+      "index": 471,
+      "start": 1531.52,
+      "end": 1535.31,
+      "duration": 3.79,
+      "text": "I believe so that means that what is my"
+    },
+    {
+      "index": 472,
+      "start": 1535.32,
+      "end": 1539.909,
+      "duration": 4.589,
+      "text": "oh yeah um yeah so you see um when we go"
+    },
+    {
+      "index": 473,
+      "start": 1539.919,
+      "end": 1542.31,
+      "duration": 2.391,
+      "text": "back to the first so what I erased was"
+    },
+    {
+      "index": 474,
+      "start": 1542.32,
+      "end": 1546.35,
+      "duration": 4.03,
+      "text": "basically this thing here Yi minus"
+    },
+    {
+      "index": 475,
+      "start": 1546.36,
+      "end": 1549.51,
+      "duration": 3.15,
+      "text": "mui and when I took the first derivative"
+    },
+    {
+      "index": 476,
+      "start": 1549.52,
+      "end": 1551.31,
+      "duration": 1.79,
+      "text": "so there was the derivative with respect"
+    },
+    {
+      "index": 477,
+      "start": 1551.32,
+      "end": 1553.909,
+      "duration": 2.589,
+      "text": "to H Prime so the derivative with"
+    },
+    {
+      "index": 478,
+      "start": 1553.919,
+      "end": 1556.149,
+      "duration": 2.23,
+      "text": "respect to the second term I mean the"
+    },
+    {
+      "index": 479,
+      "start": 1556.159,
+      "end": 1557.95,
+      "duration": 1.791,
+      "text": "derivative of the second term was"
+    },
+    {
+      "index": 480,
+      "start": 1557.96,
+      "end": 1558.87,
+      "duration": 0.91,
+      "text": "actually"
+    },
+    {
+      "index": 481,
+      "start": 1558.88,
+      "end": 1560.389,
+      "duration": 1.509,
+      "text": "killed because we took the expectation"
+    },
+    {
+      "index": 482,
+      "start": 1560.399,
+      "end": 1562.269,
+      "duration": 1.87,
+      "text": "of this guy when we took the derivative"
+    },
+    {
+      "index": 483,
+      "start": 1562.279,
+      "end": 1563.669,
+      "duration": 1.39,
+      "text": "of the first term which is the only one"
+    },
+    {
+      "index": 484,
+      "start": 1563.679,
+      "end": 1566.11,
+      "duration": 2.431,
+      "text": "that stayed this guy went away but there"
+    },
+    {
+      "index": 485,
+      "start": 1566.12,
+      "end": 1567.59,
+      "duration": 1.47,
+      "text": "there was a negative sign from this guy"
+    },
+    {
+      "index": 486,
+      "start": 1567.6,
+      "end": 1568.669,
+      "duration": 1.069,
+      "text": "because that's the thing we did the"
+    },
+    {
+      "index": 487,
+      "start": 1568.679,
+      "end": 1571.23,
+      "duration": 2.551,
+      "text": "negative off so it's really when I take"
+    },
+    {
+      "index": 488,
+      "start": 1571.24,
+      "end": 1573.87,
+      "duration": 2.63,
+      "text": "my second derivative I should carry out"
+    },
+    {
+      "index": 489,
+      "start": 1573.88,
+      "end": 1581.19,
+      "duration": 7.31,
+      "text": "some minus signs"
+    },
+    {
+      "index": 490,
+      "start": 1582.909,
+      "end": 1582.919,
+      "duration": 0.01,
+      "text": "everywhere"
+    },
+    {
+      "index": 491,
+      "start": 1582.919,
+      "end": 1585.35,
+      "duration": 2.431,
+      "text": "okay so it's just I had I forgot this"
+    },
+    {
+      "index": 492,
+      "start": 1585.36,
+      "end": 1586.71,
+      "duration": 1.35,
+      "text": "minus"
+    },
+    {
+      "index": 493,
+      "start": 1586.72,
+      "end": 1590.19,
+      "duration": 3.47,
+      "text": "throughout so if you"
+    },
+    {
+      "index": 494,
+      "start": 1590.2,
+      "end": 1592.51,
+      "duration": 2.31,
+      "text": "uh right then you see that the first"
+    },
+    {
+      "index": 495,
+      "start": 1592.52,
+      "end": 1594.83,
+      "duration": 2.31,
+      "text": "term went away on the first line there"
+    },
+    {
+      "index": 496,
+      "start": 1594.84,
+      "end": 1596.31,
+      "duration": 1.47,
+      "text": "the first term went away because the"
+    },
+    {
+      "index": 497,
+      "start": 1596.32,
+      "end": 1598.029,
+      "duration": 1.709,
+      "text": "conditional expectation of Yi given XI"
+    },
+    {
+      "index": 498,
+      "start": 1598.039,
+      "end": 1600.149,
+      "duration": 2.11,
+      "text": "is zero and then I had this minus sign"
+    },
+    {
+      "index": 499,
+      "start": 1600.159,
+      "end": 1603.63,
+      "duration": 3.471,
+      "text": "in front of everyone and I forgot"
+    },
+    {
+      "index": 500,
+      "start": 1603.64,
+      "end": 1610.789,
+      "duration": 7.149,
+      "text": "it all right any other mistake that I"
+    },
+    {
+      "index": 501,
+      "start": 1613.87,
+      "end": 1613.88,
+      "duration": 0.01,
+      "text": "made good all"
+    },
+    {
+      "index": 502,
+      "start": 1613.88,
+      "end": 1615.75,
+      "duration": 1.87,
+      "text": "right"
+    },
+    {
+      "index": 503,
+      "start": 1615.76,
+      "end": 1621.23,
+      "duration": 5.47,
+      "text": "so now this is what we have"
+    },
+    {
+      "index": 504,
+      "start": 1627.19,
+      "end": 1627.2,
+      "duration": 0.01,
+      "text": "um"
+    },
+    {
+      "index": 505,
+      "start": 1627.2,
+      "end": 1632.47,
+      "duration": 5.27,
+      "text": "XK so sorry that uh um beta k + one is"
+    },
+    {
+      "index": 506,
+      "start": 1632.48,
+      "end": 1637.19,
+      "duration": 4.71,
+      "text": "equal to Beta K plus this thing okay and"
+    },
+    {
+      "index": 507,
+      "start": 1637.2,
+      "end": 1638.63,
+      "duration": 1.43,
+      "text": "if you look at this thing it sort of"
+    },
+    {
+      "index": 508,
+      "start": 1638.64,
+      "end": 1640.63,
+      "duration": 1.99,
+      "text": "reminds us of something it's sort of"
+    },
+    {
+      "index": 509,
+      "start": 1640.64,
+      "end": 1643.07,
+      "duration": 2.43,
+      "text": "remember the Le squares estimator so"
+    },
+    {
+      "index": 510,
+      "start": 1643.08,
+      "end": 1644.43,
+      "duration": 1.35,
+      "text": "here I'm going to actually deviate"
+    },
+    {
+      "index": 511,
+      "start": 1644.44,
+      "end": 1646.269,
+      "duration": 1.829,
+      "text": "slightly from the slides and I will tell"
+    },
+    {
+      "index": 512,
+      "start": 1646.279,
+      "end": 1650.43,
+      "duration": 4.151,
+      "text": "you how the slides take beta K and put"
+    },
+    {
+      "index": 513,
+      "start": 1650.44,
+      "end": 1653.149,
+      "duration": 2.709,
+      "text": "it in here which is one way to go and"
+    },
+    {
+      "index": 514,
+      "start": 1653.159,
+      "end": 1655.35,
+      "duration": 2.191,
+      "text": "just think of this as a big Le Square"
+    },
+    {
+      "index": 515,
+      "start": 1655.36,
+      "end": 1658.51,
+      "duration": 3.15,
+      "text": "solution or you can keep the beta K"
+    },
+    {
+      "index": 516,
+      "start": 1658.52,
+      "end": 1660.71,
+      "duration": 2.19,
+      "text": "solve another Sol solve another Le"
+    },
+    {
+      "index": 517,
+      "start": 1660.72,
+      "end": 1662.23,
+      "duration": 1.51,
+      "text": "squares and then add it to the beta K"
+    },
+    {
+      "index": 518,
+      "start": 1662.24,
+      "end": 1664.43,
+      "duration": 2.19,
+      "text": "that you have it's the same thing so I"
+    },
+    {
+      "index": 519,
+      "start": 1664.44,
+      "end": 1665.99,
+      "duration": 1.55,
+      "text": "will take the different routes so you"
+    },
+    {
+      "index": 520,
+      "start": 1666.0,
+      "end": 1688.31,
+      "duration": 22.31,
+      "text": "have the two options all right"
+    },
+    {
+      "index": 521,
+      "start": 1703.149,
+      "end": 1703.159,
+      "duration": 0.01,
+      "text": "squares we had uh y = x beta plus"
+    },
+    {
+      "index": 522,
+      "start": 1703.159,
+      "end": 1707.029,
+      "duration": 3.87,
+      "text": "Epsilon and our estimator beta hat was X"
+    },
+    {
+      "index": 523,
+      "start": 1707.039,
+      "end": 1709.47,
+      "duration": 2.431,
+      "text": "transpose X"
+    },
+    {
+      "index": 524,
+      "start": 1709.48,
+      "end": 1712.549,
+      "duration": 3.069,
+      "text": "inverse X transpose y"
+    },
+    {
+      "index": 525,
+      "start": 1712.559,
+      "end": 1715.47,
+      "duration": 2.911,
+      "text": "right and that was just solving the"
+    },
+    {
+      "index": 526,
+      "start": 1715.48,
+      "end": 1717.149,
+      "duration": 1.669,
+      "text": "first order condition and that's what we"
+    },
+    {
+      "index": 527,
+      "start": 1717.159,
+      "end": 1719.59,
+      "duration": 2.431,
+      "text": "found now look at"
+    },
+    {
+      "index": 528,
+      "start": 1719.6,
+      "end": 1724.669,
+      "duration": 5.069,
+      "text": "this x transpose b x inverse X transpose"
+    },
+    {
+      "index": 529,
+      "start": 1724.679,
+      "end": 1729.389,
+      "duration": 4.71,
+      "text": "bleep something okay so this looks like"
+    },
+    {
+      "index": 530,
+      "start": 1729.399,
+      "end": 1732.509,
+      "duration": 3.11,
+      "text": "if this is the"
+    },
+    {
+      "index": 531,
+      "start": 1732.519,
+      "end": 1738.95,
+      "duration": 6.431,
+      "text": "same as the left board"
+    },
+    {
+      "index": 532,
+      "start": 1743.47,
+      "end": 1743.48,
+      "duration": 0.01,
+      "text": "if w k is equal to the identity Matrix"
+    },
+    {
+      "index": 533,
+      "start": 1743.48,
+      "end": 1747.59,
+      "duration": 4.11,
+      "text": "meaning we don't see it and Y is equal"
+    },
+    {
+      "index": 534,
+      "start": 1747.6,
+      "end": 1752.43,
+      "duration": 4.83,
+      "text": "to yld K minus muld"
+    },
+    {
+      "index": 535,
+      "start": 1752.44,
+      "end": 1755.509,
+      "duration": 3.069,
+      "text": "K so those similarities the fact that we"
+    },
+    {
+      "index": 536,
+      "start": 1755.519,
+      "end": 1758.11,
+      "duration": 2.591,
+      "text": "just squeeze in so the fact that the"
+    },
+    {
+      "index": 537,
+      "start": 1758.12,
+      "end": 1760.029,
+      "duration": 1.909,
+      "text": "response variable is different is really"
+    },
+    {
+      "index": 538,
+      "start": 1760.039,
+      "end": 1762.07,
+      "duration": 2.031,
+      "text": "not a problem we just have to pretend"
+    },
+    {
+      "index": 539,
+      "start": 1762.08,
+      "end": 1764.549,
+      "duration": 2.469,
+      "text": "that this is equal to Y Tilda minus"
+    },
+    {
+      "index": 540,
+      "start": 1764.559,
+      "end": 1766.389,
+      "duration": 1.83,
+      "text": "mulda I mean that's just the least words"
+    },
+    {
+      "index": 541,
+      "start": 1766.399,
+      "end": 1768.59,
+      "duration": 2.191,
+      "text": "when you call a software it does le"
+    },
+    {
+      "index": 542,
+      "start": 1768.6,
+      "end": 1770.509,
+      "duration": 1.909,
+      "text": "squares for you you just tell it what Y"
+    },
+    {
+      "index": 543,
+      "start": 1770.519,
+      "end": 1772.19,
+      "duration": 1.671,
+      "text": "is you tell it what x is and it makes"
+    },
+    {
+      "index": 544,
+      "start": 1772.2,
+      "end": 1774.19,
+      "duration": 1.99,
+      "text": "the computation so you would just lie to"
+    },
+    {
+      "index": 545,
+      "start": 1774.2,
+      "end": 1775.87,
+      "duration": 1.67,
+      "text": "it and say oh the actual y I want is"
+    },
+    {
+      "index": 546,
+      "start": 1775.88,
+      "end": 1779.669,
+      "duration": 3.789,
+      "text": "this thing and then we need to somehow"
+    },
+    {
+      "index": 547,
+      "start": 1779.679,
+      "end": 1782.789,
+      "duration": 3.11,
+      "text": "incorporate those weights and so the"
+    },
+    {
+      "index": 548,
+      "start": 1782.799,
+      "end": 1785.07,
+      "duration": 2.271,
+      "text": "question is is that easy to do and the"
+    },
+    {
+      "index": 549,
+      "start": 1785.08,
+      "end": 1787.59,
+      "duration": 2.51,
+      "text": "answer is yes because this is a setup"
+    },
+    {
+      "index": 550,
+      "start": 1787.6,
+      "end": 1789.23,
+      "duration": 1.63,
+      "text": "where you would this would actually"
+    },
+    {
+      "index": 551,
+      "start": 1789.24,
+      "end": 1791.35,
+      "duration": 2.11,
+      "text": "arise a lot so one of the thing that's"
+    },
+    {
+      "index": 552,
+      "start": 1791.36,
+      "end": 1793.59,
+      "duration": 2.23,
+      "text": "very specific to what we did here in"
+    },
+    {
+      "index": 553,
+      "start": 1793.6,
+      "end": 1796.149,
+      "duration": 2.549,
+      "text": "with Le squares we assume that Epsilon"
+    },
+    {
+      "index": 554,
+      "start": 1796.159,
+      "end": 1798.269,
+      "duration": 2.11,
+      "text": "when we did at least the inference we"
+    },
+    {
+      "index": 555,
+      "start": 1798.279,
+      "end": 1801.11,
+      "duration": 2.831,
+      "text": "assumed that Epsilon was normal zero and"
+    },
+    {
+      "index": 556,
+      "start": 1801.12,
+      "end": 1803.909,
+      "duration": 2.789,
+      "text": "the ciance Matrix was the identity"
+    },
+    {
+      "index": 557,
+      "start": 1803.919,
+      "end": 1806.47,
+      "duration": 2.551,
+      "text": "right what if the cence Matrix is not"
+    },
+    {
+      "index": 558,
+      "start": 1806.48,
+      "end": 1808.909,
+      "duration": 2.429,
+      "text": "the identity if the cence Matrix is not"
+    },
+    {
+      "index": 559,
+      "start": 1808.919,
+      "end": 1810.83,
+      "duration": 1.911,
+      "text": "the identity then your maximum"
+    },
+    {
+      "index": 560,
+      "start": 1810.84,
+      "end": 1812.47,
+      "duration": 1.63,
+      "text": "likelihood is not exactly this Le"
+    },
+    {
+      "index": 561,
+      "start": 1812.48,
+      "end": 1815.07,
+      "duration": 2.59,
+      "text": "squares if the cence Matrix is any"
+    },
+    {
+      "index": 562,
+      "start": 1815.08,
+      "end": 1817.149,
+      "duration": 2.069,
+      "text": "Matrix you have another solution which"
+    },
+    {
+      "index": 563,
+      "start": 1817.159,
+      "end": 1819.269,
+      "duration": 2.11,
+      "text": "involves the inverse of the cence Matrix"
+    },
+    {
+      "index": 564,
+      "start": 1819.279,
+      "end": 1822.23,
+      "duration": 2.951,
+      "text": "that you have but if your cence Matrix"
+    },
+    {
+      "index": 565,
+      "start": 1822.24,
+      "end": 1824.47,
+      "duration": 2.23,
+      "text": "in particular is diagonal which would"
+    },
+    {
+      "index": 566,
+      "start": 1824.48,
+      "end": 1826.83,
+      "duration": 2.35,
+      "text": "mean that each observations that you get"
+    },
+    {
+      "index": 567,
+      "start": 1826.84,
+      "end": 1829.149,
+      "duration": 2.309,
+      "text": "in the system of equations is still"
+    },
+    {
+      "index": 568,
+      "start": 1829.159,
+      "end": 1831.789,
+      "duration": 2.63,
+      "text": "independent but the variances can change"
+    },
+    {
+      "index": 569,
+      "start": 1831.799,
+      "end": 1833.269,
+      "duration": 1.47,
+      "text": "from one line to another from one"
+    },
+    {
+      "index": 570,
+      "start": 1833.279,
+      "end": 1836.509,
+      "duration": 3.23,
+      "text": "observation to another then it's called"
+    },
+    {
+      "index": 571,
+      "start": 1836.519,
+      "end": 1838.669,
+      "duration": 2.15,
+      "text": "heteroskedastic hetero means you know"
+    },
+    {
+      "index": 572,
+      "start": 1838.679,
+      "end": 1842.75,
+      "duration": 4.071,
+      "text": "not the same sastic is scale and uh uh"
+    },
+    {
+      "index": 573,
+      "start": 1842.76,
+      "end": 1844.789,
+      "duration": 2.029,
+      "text": "heteroskedastic case you would have"
+    },
+    {
+      "index": 574,
+      "start": 1844.799,
+      "end": 1846.83,
+      "duration": 2.031,
+      "text": "slightly something slightly different"
+    },
+    {
+      "index": 575,
+      "start": 1846.84,
+      "end": 1849.029,
+      "duration": 2.189,
+      "text": "and it sort it sort of makes sense that"
+    },
+    {
+      "index": 576,
+      "start": 1849.039,
+      "end": 1850.99,
+      "duration": 1.951,
+      "text": "if you know that some observations have"
+    },
+    {
+      "index": 577,
+      "start": 1851.0,
+      "end": 1853.07,
+      "duration": 2.07,
+      "text": "much less variance than others you might"
+    },
+    {
+      "index": 578,
+      "start": 1853.08,
+      "end": 1855.59,
+      "duration": 2.51,
+      "text": "want to give them more weight okay so if"
+    },
+    {
+      "index": 579,
+      "start": 1855.6,
+      "end": 1861.87,
+      "duration": 6.27,
+      "text": "you think about your you know usual"
+    },
+    {
+      "index": 580,
+      "start": 1864.029,
+      "end": 1864.039,
+      "duration": 0.01,
+      "text": "drawing and maybe you have something"
+    },
+    {
+      "index": 581,
+      "start": 1864.039,
+      "end": 1864.87,
+      "duration": 0.831,
+      "text": "like"
+    },
+    {
+      "index": 582,
+      "start": 1864.88,
+      "end": 1867.71,
+      "duration": 2.83,
+      "text": "this and you know and but the actual"
+    },
+    {
+      "index": 583,
+      "start": 1867.72,
+      "end": 1869.31,
+      "duration": 1.59,
+      "text": "line is really okay let's see you have"
+    },
+    {
+      "index": 584,
+      "start": 1869.32,
+      "end": 1872.11,
+      "duration": 2.79,
+      "text": "this guy as well okay just a few here"
+    },
+    {
+      "index": 585,
+      "start": 1872.12,
+      "end": 1874.509,
+      "duration": 2.389,
+      "text": "like if you start drawing this thing"
+    },
+    {
+      "index": 586,
+      "start": 1874.519,
+      "end": 1876.71,
+      "duration": 2.191,
+      "text": "it's going to be the if you do Le"
+    },
+    {
+      "index": 587,
+      "start": 1876.72,
+      "end": 1877.71,
+      "duration": 0.99,
+      "text": "squares you're going to see something"
+    },
+    {
+      "index": 588,
+      "start": 1877.72,
+      "end": 1880.19,
+      "duration": 2.47,
+      "text": "that looks like this on those points but"
+    },
+    {
+      "index": 589,
+      "start": 1880.2,
+      "end": 1882.83,
+      "duration": 2.63,
+      "text": "now if I tell you that on this side the"
+    },
+    {
+      "index": 590,
+      "start": 1882.84,
+      "end": 1885.909,
+      "duration": 3.069,
+      "text": "variance is equal to 100 meaning that"
+    },
+    {
+      "index": 591,
+      "start": 1885.919,
+      "end": 1887.669,
+      "duration": 1.75,
+      "text": "those points are actually really far"
+    },
+    {
+      "index": 592,
+      "start": 1887.679,
+      "end": 1889.669,
+      "duration": 1.99,
+      "text": "from from the true one and here on this"
+    },
+    {
+      "index": 593,
+      "start": 1889.679,
+      "end": 1891.83,
+      "duration": 2.151,
+      "text": "side the variance is equal to one"
+    },
+    {
+      "index": 594,
+      "start": 1891.84,
+      "end": 1893.11,
+      "duration": 1.27,
+      "text": "meaning that those points are actually"
+    },
+    {
+      "index": 595,
+      "start": 1893.12,
+      "end": 1894.789,
+      "duration": 1.669,
+      "text": "close to the line you're looking for"
+    },
+    {
+      "index": 596,
+      "start": 1894.799,
+      "end": 1896.23,
+      "duration": 1.431,
+      "text": "then the line you should be fitting is"
+    },
+    {
+      "index": 597,
+      "start": 1896.24,
+      "end": 1898.71,
+      "duration": 2.47,
+      "text": "probably this guy meaning do not trust"
+    },
+    {
+      "index": 598,
+      "start": 1898.72,
+      "end": 1901.149,
+      "duration": 2.429,
+      "text": "the guys that have a lot of"
+    },
+    {
+      "index": 599,
+      "start": 1901.159,
+      "end": 1903.389,
+      "duration": 2.23,
+      "text": "variance and so you need somehow to"
+    },
+    {
+      "index": 600,
+      "start": 1903.399,
+      "end": 1905.389,
+      "duration": 1.99,
+      "text": "incorporate that if you know that those"
+    },
+    {
+      "index": 601,
+      "start": 1905.399,
+      "end": 1907.07,
+      "duration": 1.671,
+      "text": "things have much more variance than this"
+    },
+    {
+      "index": 602,
+      "start": 1907.08,
+      "end": 1909.59,
+      "duration": 2.51,
+      "text": "guys you want to weight this and the way"
+    },
+    {
+      "index": 603,
+      "start": 1909.6,
+      "end": 1911.909,
+      "duration": 2.309,
+      "text": "you do it is by using weighted Le"
+    },
+    {
+      "index": 604,
+      "start": 1911.919,
+      "end": 1913.95,
+      "duration": 2.031,
+      "text": "squares okay so we're going to open in"
+    },
+    {
+      "index": 605,
+      "start": 1913.96,
+      "end": 1916.19,
+      "duration": 2.23,
+      "text": "parenthesis on WE these squares it's not"
+    },
+    {
+      "index": 606,
+      "start": 1916.2,
+      "end": 1918.07,
+      "duration": 1.87,
+      "text": "a fundamental statistical question but"
+    },
+    {
+      "index": 607,
+      "start": 1918.08,
+      "end": 1919.99,
+      "duration": 1.91,
+      "text": "it's useful for us because this is"
+    },
+    {
+      "index": 608,
+      "start": 1920.0,
+      "end": 1921.83,
+      "duration": 1.83,
+      "text": "exactly what's going to spit out"
+    },
+    {
+      "index": 609,
+      "start": 1921.84,
+      "end": 1923.31,
+      "duration": 1.47,
+      "text": "something that looks like this with this"
+    },
+    {
+      "index": 610,
+      "start": 1923.32,
+      "end": 1927.07,
+      "duration": 3.75,
+      "text": "Matrix W in there okay so let's uh you"
+    },
+    {
+      "index": 611,
+      "start": 1927.08,
+      "end": 1929.99,
+      "duration": 2.91,
+      "text": "know go back in time for a second assume"
+    },
+    {
+      "index": 612,
+      "start": 1930.0,
+      "end": 1932.59,
+      "duration": 2.59,
+      "text": "we're still covering Le sares regression"
+    },
+    {
+      "index": 613,
+      "start": 1932.6,
+      "end": 1935.23,
+      "duration": 2.63,
+      "text": "so now I'm going to assume that"
+    },
+    {
+      "index": 614,
+      "start": 1935.24,
+      "end": 1937.389,
+      "duration": 2.149,
+      "text": "Y is X"
+    },
+    {
+      "index": 615,
+      "start": 1937.399,
+      "end": 1940.789,
+      "duration": 3.39,
+      "text": "beta plus Epsilon but this time Epsilon"
+    },
+    {
+      "index": 616,
+      "start": 1940.799,
+      "end": 1943.87,
+      "duration": 3.071,
+      "text": "is a multivariate Galan uh in say p"
+    },
+    {
+      "index": 617,
+      "start": 1943.88,
+      "end": 1946.509,
+      "duration": 2.629,
+      "text": "Dimensions with mean zero and cience"
+    },
+    {
+      "index": 618,
+      "start": 1946.519,
+      "end": 1949.75,
+      "duration": 3.231,
+      "text": "Matrix I will write it as W inverse"
+    },
+    {
+      "index": 619,
+      "start": 1949.76,
+      "end": 1951.669,
+      "duration": 1.909,
+      "text": "because W is going to be the one that's"
+    },
+    {
+      "index": 620,
+      "start": 1951.679,
+      "end": 1953.669,
+      "duration": 1.99,
+      "text": "going to show up"
+    },
+    {
+      "index": 621,
+      "start": 1953.679,
+      "end": 1956.07,
+      "duration": 2.391,
+      "text": "okay so this is the so-call"
+    },
+    {
+      "index": 622,
+      "start": 1956.08,
+      "end": 1959.07,
+      "duration": 2.99,
+      "text": "heteroskedastic that's how it's"
+    },
+    {
+      "index": 623,
+      "start": 1959.08,
+      "end": 1963.31,
+      "duration": 4.23,
+      "text": "spelled um and uh you know yet another"
+    },
+    {
+      "index": 624,
+      "start": 1963.32,
+      "end": 1964.75,
+      "duration": 1.43,
+      "text": "name that you can pick for your soccer"
+    },
+    {
+      "index": 625,
+      "start": 1964.76,
+      "end": 1968.11,
+      "duration": 3.35,
+      "text": "team or you know a capella group uh all"
+    },
+    {
+      "index": 626,
+      "start": 1968.12,
+      "end": 1971.509,
+      "duration": 3.389,
+      "text": "right so uh the maximum likelihood in"
+    },
+    {
+      "index": 627,
+      "start": 1971.519,
+      "end": 1973.509,
+      "duration": 1.99,
+      "text": "this case so actually let's compute the"
+    },
+    {
+      "index": 628,
+      "start": 1973.519,
+      "end": 1974.99,
+      "duration": 1.471,
+      "text": "maximum likelihood for this problem"
+    },
+    {
+      "index": 629,
+      "start": 1975.0,
+      "end": 1978.11,
+      "duration": 3.11,
+      "text": "right so the lock likelihood"
+    },
+    {
+      "index": 630,
+      "start": 1978.12,
+      "end": 1980.23,
+      "duration": 2.11,
+      "text": "is what well we're going to have the"
+    },
+    {
+      "index": 631,
+      "start": 1980.24,
+      "end": 1982.629,
+      "duration": 2.389,
+      "text": "term uh that tells us that it's going to"
+    },
+    {
+      "index": 632,
+      "start": 1982.639,
+      "end": 1985.31,
+      "duration": 2.671,
+      "text": "be so okay what is the density of a"
+    },
+    {
+      "index": 633,
+      "start": 1985.32,
+      "end": 1989.389,
+      "duration": 4.069,
+      "text": "multivariate"
+    },
+    {
+      "index": 634,
+      "start": 1991.59,
+      "end": 1991.6,
+      "duration": 0.01,
+      "text": "gan so it's going to be a multivariate"
+    },
+    {
+      "index": 635,
+      "start": 1991.6,
+      "end": 1995.789,
+      "duration": 4.189,
+      "text": "gan in P Dimension with mean X beta and"
+    },
+    {
+      "index": 636,
+      "start": 1995.799,
+      "end": 1999.31,
+      "duration": 3.511,
+      "text": "ciance Matrix W inverse right so that's"
+    },
+    {
+      "index": 637,
+      "start": 1999.32,
+      "end": 2001.23,
+      "duration": 1.91,
+      "text": "the density that we want well it's of"
+    },
+    {
+      "index": 638,
+      "start": 2001.24,
+      "end": 2003.07,
+      "duration": 1.83,
+      "text": "the form one"
+    },
+    {
+      "index": 639,
+      "start": 2003.08,
+      "end": 2005.549,
+      "duration": 2.469,
+      "text": "over um"
+    },
+    {
+      "index": 640,
+      "start": 2005.559,
+      "end": 2010.11,
+      "duration": 4.551,
+      "text": "determinant of w inverse"
+    },
+    {
+      "index": 641,
+      "start": 2011.47,
+      "end": 2011.48,
+      "duration": 0.01,
+      "text": "time 2"
+    },
+    {
+      "index": 642,
+      "start": 2011.48,
+      "end": 2015.11,
+      "duration": 3.63,
+      "text": "pi to the p/"
+    },
+    {
+      "index": 643,
+      "start": 2015.12,
+      "end": 2016.789,
+      "duration": 1.669,
+      "text": "2"
+    },
+    {
+      "index": 644,
+      "start": 2016.799,
+      "end": 2021.35,
+      "duration": 4.551,
+      "text": "okay and uh uh times exponential and now"
+    },
+    {
+      "index": 645,
+      "start": 2021.36,
+      "end": 2028.75,
+      "duration": 7.39,
+      "text": "what I have is x minus X beta transpose"
+    },
+    {
+      "index": 646,
+      "start": 2028.76,
+      "end": 2033.75,
+      "duration": 4.99,
+      "text": "W so that's the inverse of w inverse"
+    },
+    {
+      "index": 647,
+      "start": 2033.76,
+      "end": 2035.87,
+      "duration": 2.11,
+      "text": "xus X"
+    },
+    {
+      "index": 648,
+      "start": 2035.88,
+      "end": 2038.43,
+      "duration": 2.55,
+      "text": "beta / 2"
+    },
+    {
+      "index": 649,
+      "start": 2038.44,
+      "end": 2042.31,
+      "duration": 3.87,
+      "text": "okay so this is xus Mu transpose Sigma"
+    },
+    {
+      "index": 650,
+      "start": 2042.32,
+      "end": 2045.31,
+      "duration": 2.99,
+      "text": "inverse x - mu / 2 and if you want to"
+    },
+    {
+      "index": 651,
+      "start": 2045.32,
+      "end": 2049.27,
+      "duration": 3.95,
+      "text": "sanity check just assume that uh"
+    },
+    {
+      "index": 652,
+      "start": 2049.28,
+      "end": 2054.349,
+      "duration": 5.069,
+      "text": "um Sigma"
+    },
+    {
+      "index": 653,
+      "start": 2057.589,
+      "end": 2057.599,
+      "duration": 0.01,
+      "text": "yeah well you know if you want this to"
+    },
+    {
+      "index": 654,
+      "start": 2057.599,
+      "end": 2061.03,
+      "duration": 3.431,
+      "text": "be y then this is y"
+    },
+    {
+      "index": 655,
+      "start": 2061.04,
+      "end": 2063.869,
+      "duration": 2.829,
+      "text": "right sure yeah maybe it's less"
+    },
+    {
+      "index": 656,
+      "start": 2063.879,
+      "end": 2068.03,
+      "duration": 4.151,
+      "text": "confusing so if you do uh p is equal to"
+    },
+    {
+      "index": 657,
+      "start": 2068.04,
+      "end": 2070.23,
+      "duration": 2.19,
+      "text": "one then what does it mean it means that"
+    },
+    {
+      "index": 658,
+      "start": 2070.24,
+      "end": 2071.869,
+      "duration": 1.629,
+      "text": "you have this mean here so let's forget"
+    },
+    {
+      "index": 659,
+      "start": 2071.879,
+      "end": 2073.55,
+      "duration": 1.671,
+      "text": "about what it is but this guy is going"
+    },
+    {
+      "index": 660,
+      "start": 2073.56,
+      "end": 2075.95,
+      "duration": 2.39,
+      "text": "to be just one Sigma squar right so what"
+    },
+    {
+      "index": 661,
+      "start": 2075.96,
+      "end": 2078.589,
+      "duration": 2.629,
+      "text": "you see here is the inverse of Sigma squ"
+    },
+    {
+      "index": 662,
+      "start": 2078.599,
+      "end": 2080.589,
+      "duration": 1.99,
+      "text": "so that's going to be two over two Sigma"
+    },
+    {
+      "index": 663,
+      "start": 2080.599,
+      "end": 2082.51,
+      "duration": 1.911,
+      "text": "square like we usually see it the"
+    },
+    {
+      "index": 664,
+      "start": 2082.52,
+      "end": 2084.47,
+      "duration": 1.95,
+      "text": "determinant of w inverse is just the"
+    },
+    {
+      "index": 665,
+      "start": 2084.48,
+      "end": 2086.27,
+      "duration": 1.79,
+      "text": "product of the entry of the one by one"
+    },
+    {
+      "index": 666,
+      "start": 2086.28,
+      "end": 2088.669,
+      "duration": 2.389,
+      "text": "Matrix which is"
+    },
+    {
+      "index": 667,
+      "start": 2088.679,
+      "end": 2092.669,
+      "duration": 3.99,
+      "text": "just one over uh which is just uh Sigma"
+    },
+    {
+      "index": 668,
+      "start": 2092.679,
+      "end": 2095.589,
+      "duration": 2.91,
+      "text": "Square okay"
+    },
+    {
+      "index": 669,
+      "start": 2095.599,
+      "end": 2098.15,
+      "duration": 2.551,
+      "text": "so that should be actually"
+    },
+    {
+      "index": 670,
+      "start": 2098.16,
+      "end": 2099.87,
+      "duration": 1.71,
+      "text": "uh yeah no that's actually yeah that's"
+    },
+    {
+      "index": 671,
+      "start": 2099.88,
+      "end": 2102.67,
+      "duration": 2.79,
+      "text": "Sigma square and then I have the 2 pi so"
+    },
+    {
+      "index": 672,
+      "start": 2102.68,
+      "end": 2104.23,
+      "duration": 1.55,
+      "text": "square root of this because p is equal"
+    },
+    {
+      "index": 673,
+      "start": 2104.24,
+      "end": 2106.19,
+      "duration": 1.95,
+      "text": "to one I get Sigma root 2 pi which is"
+    },
+    {
+      "index": 674,
+      "start": 2106.2,
+      "end": 2108.349,
+      "duration": 2.149,
+      "text": "the normalization that I get this is not"
+    },
+    {
+      "index": 675,
+      "start": 2108.359,
+      "end": 2109.71,
+      "duration": 1.351,
+      "text": "going to matter because when I look at"
+    },
+    {
+      "index": 676,
+      "start": 2109.72,
+      "end": 2111.55,
+      "duration": 1.83,
+      "text": "the log"
+    },
+    {
+      "index": 677,
+      "start": 2111.56,
+      "end": 2114.27,
+      "duration": 2.71,
+      "text": "likelihood as a function of"
+    },
+    {
+      "index": 678,
+      "start": 2114.28,
+      "end": 2117.67,
+      "duration": 3.39,
+      "text": "beta so I'm assuming that W is known"
+    },
+    {
+      "index": 679,
+      "start": 2117.68,
+      "end": 2119.23,
+      "duration": 1.55,
+      "text": "what I get is something which is a"
+    },
+    {
+      "index": 680,
+      "start": 2119.24,
+      "end": 2125.95,
+      "duration": 6.71,
+      "text": "constant so it's minus P - n * P / 2 *"
+    },
+    {
+      "index": 681,
+      "start": 2125.96,
+      "end": 2128.15,
+      "duration": 2.19,
+      "text": "log de"
+    },
+    {
+      "index": 682,
+      "start": 2128.16,
+      "end": 2130.63,
+      "duration": 2.47,
+      "text": "W inverse * 2"
+    },
+    {
+      "index": 683,
+      "start": 2130.64,
+      "end": 2132.829,
+      "duration": 2.189,
+      "text": "pi okay so this is just going to be a"
+    },
+    {
+      "index": 684,
+      "start": 2132.839,
+      "end": 2134.51,
+      "duration": 1.671,
+      "text": "constant it won't matter when I do the"
+    },
+    {
+      "index": 685,
+      "start": 2134.52,
+      "end": 2136.19,
+      "duration": 1.67,
+      "text": "maximum likelihood and then I'm going to"
+    },
+    {
+      "index": 686,
+      "start": 2136.2,
+      "end": 2139.87,
+      "duration": 3.67,
+      "text": "have what I'm going to have plus2 of y -"
+    },
+    {
+      "index": 687,
+      "start": 2139.88,
+      "end": 2143.63,
+      "duration": 3.75,
+      "text": "x beta transpose"
+    },
+    {
+      "index": 688,
+      "start": 2143.64,
+      "end": 2148.15,
+      "duration": 4.51,
+      "text": "w y - x"
+    },
+    {
+      "index": 689,
+      "start": 2151.47,
+      "end": 2151.48,
+      "duration": 0.01,
+      "text": "beta so if I want to take the minimum"
+    },
+    {
+      "index": 690,
+      "start": 2151.48,
+      "end": 2154.03,
+      "duration": 2.55,
+      "text": "the maximum of this guy sorry there's a"
+    },
+    {
+      "index": 691,
+      "start": 2154.04,
+      "end": 2155.43,
+      "duration": 1.39,
+      "text": "minus"
+    },
+    {
+      "index": 692,
+      "start": 2155.44,
+      "end": 2157.63,
+      "duration": 2.19,
+      "text": "here so if I want to take the maximum"
+    },
+    {
+      "index": 693,
+      "start": 2157.64,
+      "end": 2159.109,
+      "duration": 1.469,
+      "text": "maximum of this guy I'm going to have to"
+    },
+    {
+      "index": 694,
+      "start": 2159.119,
+      "end": 2161.27,
+      "duration": 2.151,
+      "text": "take the minimum of this thing and the"
+    },
+    {
+      "index": 695,
+      "start": 2161.28,
+      "end": 2163.43,
+      "duration": 2.15,
+      "text": "minimum of this thing if you take the"
+    },
+    {
+      "index": 696,
+      "start": 2163.44,
+      "end": 2166.47,
+      "duration": 3.03,
+      "text": "derivatives you get to see so that's the"
+    },
+    {
+      "index": 697,
+      "start": 2166.48,
+      "end": 2167.71,
+      "duration": 1.23,
+      "text": "that's what we have right we need to"
+    },
+    {
+      "index": 698,
+      "start": 2167.72,
+      "end": 2170.19,
+      "duration": 2.47,
+      "text": "compute the minimum of Y minus X beta"
+    },
+    {
+      "index": 699,
+      "start": 2170.2,
+      "end": 2174.19,
+      "duration": 3.99,
+      "text": "transpose W minus X Yus X beta and the"
+    },
+    {
+      "index": 700,
+      "start": 2174.2,
+      "end": 2177.15,
+      "duration": 2.95,
+      "text": "solution that you get I mean you can"
+    },
+    {
+      "index": 701,
+      "start": 2177.16,
+      "end": 2180.27,
+      "duration": 3.11,
+      "text": "actually check this uh uh for yourself"
+    },
+    {
+      "index": 702,
+      "start": 2180.28,
+      "end": 2182.49,
+      "duration": 2.21,
+      "text": "the way you can see this is by doing the"
+    },
+    {
+      "index": 703,
+      "start": 2182.5,
+      "end": 2183.55,
+      "duration": 1.05,
+      "text": "[Music]"
+    },
+    {
+      "index": 704,
+      "start": 2183.56,
+      "end": 2185.71,
+      "duration": 2.15,
+      "text": "following if you're lazy and you don't"
+    },
+    {
+      "index": 705,
+      "start": 2185.72,
+      "end": 2188.15,
+      "duration": 2.43,
+      "text": "want to redo the entire thing uh maybe I"
+    },
+    {
+      "index": 706,
+      "start": 2188.16,
+      "end": 2195.15,
+      "duration": 6.99,
+      "text": "should keep"
+    },
+    {
+      "index": 707,
+      "start": 2198.19,
+      "end": 2198.2,
+      "duration": 0.01,
+      "text": "that W is diagonal"
+    },
+    {
+      "index": 708,
+      "start": 2198.2,
+      "end": 2201.19,
+      "duration": 2.99,
+      "text": "right I'm going to assume that so w"
+    },
+    {
+      "index": 709,
+      "start": 2201.2,
+      "end": 2202.829,
+      "duration": 1.629,
+      "text": "inverse is diagonal and I'm going to"
+    },
+    {
+      "index": 710,
+      "start": 2202.839,
+      "end": 2205.19,
+      "duration": 2.351,
+      "text": "assume that no variance is equal to zero"
+    },
+    {
+      "index": 711,
+      "start": 2205.2,
+      "end": 2207.349,
+      "duration": 2.149,
+      "text": "and no variance is equal to Infinity so"
+    },
+    {
+      "index": 712,
+      "start": 2207.359,
+      "end": 2211.15,
+      "duration": 3.791,
+      "text": "that both W inverse and W have only a"
+    },
+    {
+      "index": 713,
+      "start": 2211.16,
+      "end": 2213.15,
+      "duration": 1.99,
+      "text": "positive entries on the diagonal all"
+    },
+    {
+      "index": 714,
+      "start": 2213.16,
+      "end": 2215.349,
+      "duration": 2.189,
+      "text": "right so in particular I can talk about"
+    },
+    {
+      "index": 715,
+      "start": 2215.359,
+      "end": 2217.109,
+      "duration": 1.75,
+      "text": "the square root of w which is just the"
+    },
+    {
+      "index": 716,
+      "start": 2217.119,
+      "end": 2218.67,
+      "duration": 1.551,
+      "text": "Matrix the diagonal matrix with the"
+    },
+    {
+      "index": 717,
+      "start": 2218.68,
+      "end": 2222.03,
+      "duration": 3.35,
+      "text": "square roots on the diagonal okay and so"
+    },
+    {
+      "index": 718,
+      "start": 2222.04,
+      "end": 2224.15,
+      "duration": 2.11,
+      "text": "I want to minimize in"
+    },
+    {
+      "index": 719,
+      "start": 2224.16,
+      "end": 2231.43,
+      "duration": 7.27,
+      "text": "beta y- X beta transpose w y - x beta so"
+    },
+    {
+      "index": 720,
+      "start": 2231.44,
+      "end": 2234.47,
+      "duration": 3.03,
+      "text": "I'm going to write w as square root of w"
+    },
+    {
+      "index": 721,
+      "start": 2234.48,
+      "end": 2237.069,
+      "duration": 2.589,
+      "text": "time sare root of w which I can because"
+    },
+    {
+      "index": 722,
+      "start": 2237.079,
+      "end": 2239.23,
+      "duration": 2.151,
+      "text": "W and it's just the simplest thing right"
+    },
+    {
+      "index": 723,
+      "start": 2239.24,
+      "end": 2241.99,
+      "duration": 2.75,
+      "text": "if W is"
+    },
+    {
+      "index": 724,
+      "start": 2242.0,
+      "end": 2244.069,
+      "duration": 2.069,
+      "text": "W1 w"
+    },
+    {
+      "index": 725,
+      "start": 2244.079,
+      "end": 2247.99,
+      "duration": 3.911,
+      "text": "n so that's my w then square root of w W"
+    },
+    {
+      "index": 726,
+      "start": 2248.0,
+      "end": 2251.79,
+      "duration": 3.79,
+      "text": "is just square otk of W1 < TK of w n and"
+    },
+    {
+      "index": 727,
+      "start": 2251.8,
+      "end": 2253.03,
+      "duration": 1.23,
+      "text": "then Zer"
+    },
+    {
+      "index": 728,
+      "start": 2253.04,
+      "end": 2256.39,
+      "duration": 3.35,
+      "text": "elsewhere okay so the product of those"
+    },
+    {
+      "index": 729,
+      "start": 2256.4,
+      "end": 2257.95,
+      "duration": 1.55,
+      "text": "two matrices gives me definitely back"
+    },
+    {
+      "index": 730,
+      "start": 2257.96,
+      "end": 2260.91,
+      "duration": 2.95,
+      "text": "what I want and that's the usual matrix"
+    },
+    {
+      "index": 731,
+      "start": 2260.92,
+      "end": 2262.79,
+      "duration": 1.87,
+      "text": "product now what I'm going to do is I'm"
+    },
+    {
+      "index": 732,
+      "start": 2262.8,
+      "end": 2264.27,
+      "duration": 1.47,
+      "text": "going to push one on one side and push"
+    },
+    {
+      "index": 733,
+      "start": 2264.28,
+      "end": 2265.99,
+      "duration": 1.71,
+      "text": "the other one on the other side so that"
+    },
+    {
+      "index": 734,
+      "start": 2266.0,
+      "end": 2267.67,
+      "duration": 1.67,
+      "text": "gives me that this is really the minimum"
+    },
+    {
+      "index": 735,
+      "start": 2267.68,
+      "end": 2269.99,
+      "duration": 2.31,
+      "text": "over beta of well here I have this"
+    },
+    {
+      "index": 736,
+      "start": 2270.0,
+      "end": 2271.27,
+      "duration": 1.27,
+      "text": "transpose so I have to put it on the"
+    },
+    {
+      "index": 737,
+      "start": 2271.28,
+      "end": 2273.67,
+      "duration": 2.39,
+      "text": "other side W is clearly symmetric and"
+    },
+    {
+      "index": 738,
+      "start": 2273.68,
+      "end": 2276.069,
+      "duration": 2.389,
+      "text": "square root so is square root of w so"
+    },
+    {
+      "index": 739,
+      "start": 2276.079,
+      "end": 2278.069,
+      "duration": 1.99,
+      "text": "the transpose doesn't matter and so what"
+    },
+    {
+      "index": 740,
+      "start": 2278.079,
+      "end": 2282.95,
+      "duration": 4.871,
+      "text": "I'm left with is < TK of w Yus < TK of w"
+    },
+    {
+      "index": 741,
+      "start": 2282.96,
+      "end": 2287.71,
+      "duration": 4.75,
+      "text": "x beta transpose and then times itself"
+    },
+    {
+      "index": 742,
+      "start": 2287.72,
+      "end": 2292.75,
+      "duration": 5.03,
+      "text": "so that's Square < TK w y minus Square <"
+    },
+    {
+      "index": 743,
+      "start": 2292.76,
+      "end": 2294.39,
+      "duration": 1.63,
+      "text": "TK"
+    },
+    {
+      "index": 744,
+      "start": 2294.4,
+      "end": 2299.23,
+      "duration": 4.83,
+      "text": "W I don't have enough space X"
+    },
+    {
+      "index": 745,
+      "start": 2299.24,
+      "end": 2302.309,
+      "duration": 3.069,
+      "text": "beta okay and that stops"
+    },
+    {
+      "index": 746,
+      "start": 2302.319,
+      "end": 2304.39,
+      "duration": 2.071,
+      "text": "here but this is the same thing that"
+    },
+    {
+      "index": 747,
+      "start": 2304.4,
+      "end": 2306.589,
+      "duration": 2.189,
+      "text": "we've been doing before this is a new y"
+    },
+    {
+      "index": 748,
+      "start": 2306.599,
+      "end": 2308.95,
+      "duration": 2.351,
+      "text": "let's call it y Prime this is a new X"
+    },
+    {
+      "index": 749,
+      "start": 2308.96,
+      "end": 2311.87,
+      "duration": 2.91,
+      "text": "let's call it X Prime and now this is"
+    },
+    {
+      "index": 750,
+      "start": 2311.88,
+      "end": 2313.99,
+      "duration": 2.11,
+      "text": "just the Le squares estimator Associated"
+    },
+    {
+      "index": 751,
+      "start": 2314.0,
+      "end": 2317.03,
+      "duration": 3.03,
+      "text": "to a response y Prime and a design"
+    },
+    {
+      "index": 752,
+      "start": 2317.04,
+      "end": 2320.829,
+      "duration": 3.789,
+      "text": "Matrix X Prime so I know that the"
+    },
+    {
+      "index": 753,
+      "start": 2320.839,
+      "end": 2326.47,
+      "duration": 5.631,
+      "text": "solution is X Prime transpose X Prime"
+    },
+    {
+      "index": 754,
+      "start": 2326.48,
+      "end": 2331.91,
+      "duration": 5.43,
+      "text": "inverse X Prime transpose y"
+    },
+    {
+      "index": 755,
+      "start": 2331.92,
+      "end": 2333.75,
+      "duration": 1.83,
+      "text": "Prime and now I'm just going to"
+    },
+    {
+      "index": 756,
+      "start": 2333.76,
+      "end": 2337.15,
+      "duration": 3.39,
+      "text": "substitute again what my X Prime is in"
+    },
+    {
+      "index": 757,
+      "start": 2337.16,
+      "end": 2339.87,
+      "duration": 2.71,
+      "text": "terms of ter of X and what my y Prime is"
+    },
+    {
+      "index": 758,
+      "start": 2339.88,
+      "end": 2343.43,
+      "duration": 3.55,
+      "text": "in terms of Y and that gives me exactly"
+    },
+    {
+      "index": 759,
+      "start": 2343.44,
+      "end": 2349.95,
+      "duration": 6.51,
+      "text": "x wunk w"
+    },
+    {
+      "index": 760,
+      "start": 2354.99,
+      "end": 2355.0,
+      "duration": 0.01,
+      "text": "WX inverse and then I have X transpose"
+    },
+    {
+      "index": 761,
+      "start": 2355.0,
+      "end": 2357.79,
+      "duration": 2.79,
+      "text": "square root W for this guy and then I"
+    },
+    {
+      "index": 762,
+      "start": 2357.8,
+      "end": 2361.75,
+      "duration": 3.95,
+      "text": "have square root w y for that guy and"
+    },
+    {
+      "index": 763,
+      "start": 2361.76,
+      "end": 2363.87,
+      "duration": 2.11,
+      "text": "that's exactly what I wanted I'm left"
+    },
+    {
+      "index": 764,
+      "start": 2363.88,
+      "end": 2368.19,
+      "duration": 4.31,
+      "text": "with X transpose w x"
+    },
+    {
+      "index": 765,
+      "start": 2368.2,
+      "end": 2374.03,
+      "duration": 5.83,
+      "text": "inverse X transpose"
+    },
+    {
+      "index": 766,
+      "start": 2381.109,
+      "end": 2381.119,
+      "duration": 0.01,
+      "text": "okay so that's a simple way to take into"
+    },
+    {
+      "index": 767,
+      "start": 2381.119,
+      "end": 2384.349,
+      "duration": 3.23,
+      "text": "account the W that we had before and you"
+    },
+    {
+      "index": 768,
+      "start": 2384.359,
+      "end": 2386.75,
+      "duration": 2.391,
+      "text": "could actually do it with any Matrix"
+    },
+    {
+      "index": 769,
+      "start": 2386.76,
+      "end": 2388.349,
+      "duration": 1.589,
+      "text": "that's positive semi-definite because"
+    },
+    {
+      "index": 770,
+      "start": 2388.359,
+      "end": 2389.67,
+      "duration": 1.311,
+      "text": "you can actually talk about the square"
+    },
+    {
+      "index": 771,
+      "start": 2389.68,
+      "end": 2391.23,
+      "duration": 1.55,
+      "text": "root of those"
+    },
+    {
+      "index": 772,
+      "start": 2391.24,
+      "end": 2393.51,
+      "duration": 2.27,
+      "text": "matrices it's just the square root of a"
+    },
+    {
+      "index": 773,
+      "start": 2393.52,
+      "end": 2394.99,
+      "duration": 1.47,
+      "text": "matrix is just a matrix such that when"
+    },
+    {
+      "index": 774,
+      "start": 2395.0,
+      "end": 2397.55,
+      "duration": 2.55,
+      "text": "you multiply it"
+    },
+    {
+      "index": 775,
+      "start": 2397.56,
+      "end": 2399.87,
+      "duration": 2.31,
+      "text": "by itself it gives you the original"
+    },
+    {
+      "index": 776,
+      "start": 2399.88,
+      "end": 2402.309,
+      "duration": 2.429,
+      "text": "Matrix"
+    },
+    {
+      "index": 777,
+      "start": 2402.319,
+      "end": 2405.51,
+      "duration": 3.191,
+      "text": "okay so here that was just a shortcut"
+    },
+    {
+      "index": 778,
+      "start": 2405.52,
+      "end": 2408.39,
+      "duration": 2.87,
+      "text": "into that consisted in saying okay maybe"
+    },
+    {
+      "index": 779,
+      "start": 2408.4,
+      "end": 2411.75,
+      "duration": 3.35,
+      "text": "I don't want to recompute the gradient"
+    },
+    {
+      "index": 780,
+      "start": 2411.76,
+      "end": 2414.43,
+      "duration": 2.67,
+      "text": "of this quantity set it equal to zero"
+    },
+    {
+      "index": 781,
+      "start": 2414.44,
+      "end": 2417.39,
+      "duration": 2.95,
+      "text": "and see what beta hat should be I"
+    },
+    {
+      "index": 782,
+      "start": 2417.4,
+      "end": 2419.39,
+      "duration": 1.99,
+      "text": "instead I I'm going to assume that I"
+    },
+    {
+      "index": 783,
+      "start": 2419.4,
+      "end": 2422.109,
+      "duration": 2.709,
+      "text": "already know that if I did not have the"
+    },
+    {
+      "index": 784,
+      "start": 2422.119,
+      "end": 2424.67,
+      "duration": 2.551,
+      "text": "W I would know how to solve it and"
+    },
+    {
+      "index": 785,
+      "start": 2424.68,
+      "end": 2426.589,
+      "duration": 1.909,
+      "text": "that's exactly what I did I said well"
+    },
+    {
+      "index": 786,
+      "start": 2426.599,
+      "end": 2428.109,
+      "duration": 1.51,
+      "text": "let's I know that that this is the"
+    },
+    {
+      "index": 787,
+      "start": 2428.119,
+      "end": 2429.63,
+      "duration": 1.511,
+      "text": "minimum of something that looks like"
+    },
+    {
+      "index": 788,
+      "start": 2429.64,
+      "end": 2432.349,
+      "duration": 2.709,
+      "text": "this when I have the primes and then I"
+    },
+    {
+      "index": 789,
+      "start": 2432.359,
+      "end": 2435.51,
+      "duration": 3.151,
+      "text": "just substitute back my w in"
+    },
+    {
+      "index": 790,
+      "start": 2435.52,
+      "end": 2437.67,
+      "duration": 2.15,
+      "text": "there all right so that's just the lazy"
+    },
+    {
+      "index": 791,
+      "start": 2437.68,
+      "end": 2439.99,
+      "duration": 2.31,
+      "text": "computation but again if you don't like"
+    },
+    {
+      "index": 792,
+      "start": 2440.0,
+      "end": 2441.79,
+      "duration": 1.79,
+      "text": "it you can always take the gradient of"
+    },
+    {
+      "index": 793,
+      "start": 2441.8,
+      "end": 2445.79,
+      "duration": 3.99,
+      "text": "this guy"
+    },
+    {
+      "index": 794,
+      "start": 2448.95,
+      "end": 2448.96,
+      "duration": 0.01,
+      "text": "yes because there's a"
+    },
+    {
+      "index": 795,
+      "start": 2448.96,
+      "end": 2452.109,
+      "duration": 3.149,
+      "text": "mistake yeah there's a mistake on the"
+    },
+    {
+      "index": 796,
+      "start": 2452.119,
+      "end": 2458.39,
+      "duration": 6.271,
+      "text": "slides uh"
+    },
+    {
+      "index": 797,
+      "start": 2459.99,
+      "end": 2460.0,
+      "duration": 0.01,
+      "text": "how did I make that one I'm actually"
+    },
+    {
+      "index": 798,
+      "start": 2460.0,
+      "end": 2462.03,
+      "duration": 2.03,
+      "text": "trying to parse it"
+    },
+    {
+      "index": 799,
+      "start": 2462.04,
+      "end": 2470.47,
+      "duration": 8.43,
+      "text": "back"
+    },
+    {
+      "index": 800,
+      "start": 2474.109,
+      "end": 2474.119,
+      "duration": 0.01,
+      "text": "um I mean it's clearly wrong right oh no"
+    },
+    {
+      "index": 801,
+      "start": 2474.119,
+      "end": 2483.47,
+      "duration": 9.351,
+      "text": "it's"
+    },
+    {
+      "index": 802,
+      "start": 2486.069,
+      "end": 2486.079,
+      "duration": 0.01,
+      "text": "not no it"
+    },
+    {
+      "index": 803,
+      "start": 2486.079,
+      "end": 2489.91,
+      "duration": 3.831,
+      "text": "is uh so it's not clearly"
+    },
+    {
+      "index": 804,
+      "start": 2489.92,
+      "end": 2491.67,
+      "duration": 1.75,
+      "text": "wrong"
+    },
+    {
+      "index": 805,
+      "start": 2491.68,
+      "end": 2495.15,
+      "duration": 3.47,
+      "text": "uh actually it is clearly wrong because"
+    },
+    {
+      "index": 806,
+      "start": 2495.16,
+      "end": 2498.109,
+      "duration": 2.949,
+      "text": "if I put the identity here those are"
+    },
+    {
+      "index": 807,
+      "start": 2498.119,
+      "end": 2500.47,
+      "duration": 2.351,
+      "text": "still associative right so this product"
+    },
+    {
+      "index": 808,
+      "start": 2500.48,
+      "end": 2502.95,
+      "duration": 2.47,
+      "text": "is actually not compatible so it's wrong"
+    },
+    {
+      "index": 809,
+      "start": 2502.96,
+      "end": 2504.39,
+      "duration": 1.43,
+      "text": "there's just this extra thing that I"
+    },
+    {
+      "index": 810,
+      "start": 2504.4,
+      "end": 2506.829,
+      "duration": 2.429,
+      "text": "probably copy pasted from some place"
+    },
+    {
+      "index": 811,
+      "start": 2506.839,
+      "end": 2508.43,
+      "duration": 1.591,
+      "text": "since this is one of my latest slide"
+    },
+    {
+      "index": 812,
+      "start": 2508.44,
+      "end": 2511.55,
+      "duration": 3.11,
+      "text": "I'll just color it in white and uh but"
+    },
+    {
+      "index": 813,
+      "start": 2511.56,
+      "end": 2512.95,
+      "duration": 1.39,
+      "text": "yeah sorry there's a this this"
+    },
+    {
+      "index": 814,
+      "start": 2512.96,
+      "end": 2515.91,
+      "duration": 2.95,
+      "text": "parenthesis is not here thank"
+    },
+    {
+      "index": 815,
+      "start": 2515.92,
+      "end": 2525.91,
+      "duration": 9.99,
+      "text": "you yeah"
+    },
+    {
+      "index": 816,
+      "start": 2528.23,
+      "end": 2528.24,
+      "duration": 0.01,
+      "text": "okay because I have two of them I have"
+    },
+    {
+      "index": 817,
+      "start": 2528.24,
+      "end": 2529.829,
+      "duration": 1.589,
+      "text": "one that comes from the X Prime that's"
+    },
+    {
+      "index": 818,
+      "start": 2529.839,
+      "end": 2531.91,
+      "duration": 2.071,
+      "text": "here this guy and I have one that comes"
+    },
+    {
+      "index": 819,
+      "start": 2531.92,
+      "end": 2534.75,
+      "duration": 2.83,
+      "text": "from the this guy"
+    },
+    {
+      "index": 820,
+      "start": 2534.76,
+      "end": 2537.91,
+      "duration": 3.15,
+      "text": "here okay so the solution uh let's rate"
+    },
+    {
+      "index": 821,
+      "start": 2537.92,
+      "end": 2544.51,
+      "duration": 6.59,
+      "text": "it in some place that's actually"
+    },
+    {
+      "index": 822,
+      "start": 2546.829,
+      "end": 2546.839,
+      "duration": 0.01,
+      "text": "lital which is the correction for this"
+    },
+    {
+      "index": 823,
+      "start": 2546.839,
+      "end": 2547.67,
+      "duration": 0.831,
+      "text": "thing is"
+    },
+    {
+      "index": 824,
+      "start": 2547.68,
+      "end": 2549.829,
+      "duration": 2.149,
+      "text": "Xpose"
+    },
+    {
+      "index": 825,
+      "start": 2549.839,
+      "end": 2553.95,
+      "duration": 4.111,
+      "text": "WX inverse Xpose w"
+    },
+    {
+      "index": 826,
+      "start": 2553.96,
+      "end": 2557.51,
+      "duration": 3.55,
+      "text": "y okay so you just squeez in this W in"
+    },
+    {
+      "index": 827,
+      "start": 2557.52,
+      "end": 2560.71,
+      "duration": 3.19,
+      "text": "there and that's exactly what we had"
+    },
+    {
+      "index": 828,
+      "start": 2560.72,
+      "end": 2564.39,
+      "duration": 3.67,
+      "text": "before X transpose w x inverse X"
+    },
+    {
+      "index": 829,
+      "start": 2564.4,
+      "end": 2568.349,
+      "duration": 3.949,
+      "text": "transpose W some y"
+    },
+    {
+      "index": 830,
+      "start": 2568.359,
+      "end": 2571.87,
+      "duration": 3.511,
+      "text": "okay and what I claim is that this is R"
+    },
+    {
+      "index": 831,
+      "start": 2571.88,
+      "end": 2573.79,
+      "duration": 1.91,
+      "text": "routinely implemented as you can imagine"
+    },
+    {
+      "index": 832,
+      "start": 2573.8,
+      "end": 2575.51,
+      "duration": 1.71,
+      "text": "heteroscedastic linear regression is"
+    },
+    {
+      "index": 833,
+      "start": 2575.52,
+      "end": 2577.829,
+      "duration": 2.309,
+      "text": "something that's very common uh so every"
+    },
+    {
+      "index": 834,
+      "start": 2577.839,
+      "end": 2580.069,
+      "duration": 2.23,
+      "text": "time you have a Le squares uh formula"
+    },
+    {
+      "index": 835,
+      "start": 2580.079,
+      "end": 2582.069,
+      "duration": 1.99,
+      "text": "you also have a way to put in some"
+    },
+    {
+      "index": 836,
+      "start": 2582.079,
+      "end": 2583.71,
+      "duration": 1.631,
+      "text": "weights you can you don't have to put"
+    },
+    {
+      "index": 837,
+      "start": 2583.72,
+      "end": 2585.99,
+      "duration": 2.27,
+      "text": "diagonal weights but here that's all we"
+    },
+    {
+      "index": 838,
+      "start": 2586.0,
+      "end": 2590.47,
+      "duration": 4.47,
+      "text": "need and uh so here on the slides again"
+    },
+    {
+      "index": 839,
+      "start": 2590.48,
+      "end": 2593.47,
+      "duration": 2.99,
+      "text": "I took the beta K and I put it in there"
+    },
+    {
+      "index": 840,
+      "start": 2593.48,
+      "end": 2595.03,
+      "duration": 1.55,
+      "text": "so that I have only one Le Square"
+    },
+    {
+      "index": 841,
+      "start": 2595.04,
+      "end": 2597.99,
+      "duration": 2.95,
+      "text": "solution to to to formulate but uh let's"
+    },
+    {
+      "index": 842,
+      "start": 2598.0,
+      "end": 2599.87,
+      "duration": 1.87,
+      "text": "do it slightly differently what I'm"
+    },
+    {
+      "index": 843,
+      "start": 2599.88,
+      "end": 2601.67,
+      "duration": 1.79,
+      "text": "going to do here now is I'm going to say"
+    },
+    {
+      "index": 844,
+      "start": 2601.68,
+      "end": 2604.549,
+      "duration": 2.869,
+      "text": "okay let's feed to some Le squares so"
+    },
+    {
+      "index": 845,
+      "start": 2604.559,
+      "end": 2608.589,
+      "duration": 4.03,
+      "text": "let's do weighted Le squares on"
+    },
+    {
+      "index": 846,
+      "start": 2608.599,
+      "end": 2611.63,
+      "duration": 3.031,
+      "text": "uh"
+    },
+    {
+      "index": 847,
+      "start": 2619.069,
+      "end": 2619.079,
+      "duration": 0.01,
+      "text": "response y being uh y k minus mu"
+    },
+    {
+      "index": 848,
+      "start": 2619.079,
+      "end": 2623.03,
+      "duration": 3.951,
+      "text": "K and uh design"
+    },
+    {
+      "index": 849,
+      "start": 2623.04,
+      "end": 2627.75,
+      "duration": 4.71,
+      "text": "Matrix being well just X itself so that"
+    },
+    {
+      "index": 850,
+      "start": 2627.76,
+      "end": 2629.23,
+      "duration": 1.47,
+      "text": "doesn't"
+    },
+    {
+      "index": 851,
+      "start": 2629.24,
+      "end": 2633.27,
+      "duration": 4.03,
+      "text": "change and and the"
+    },
+    {
+      "index": 852,
+      "start": 2640.549,
+      "end": 2640.559,
+      "duration": 0.01,
+      "text": "so the weights are what the weights are"
+    },
+    {
+      "index": 853,
+      "start": 2640.559,
+      "end": 2643.23,
+      "duration": 2.671,
+      "text": "the w k that I had"
+    },
+    {
+      "index": 854,
+      "start": 2643.24,
+      "end": 2648.39,
+      "duration": 5.15,
+      "text": "here so w k i"
+    },
+    {
+      "index": 855,
+      "start": 2648.4,
+      "end": 2651.51,
+      "duration": 3.11,
+      "text": "is uh H"
+    },
+    {
+      "index": 856,
+      "start": 2651.52,
+      "end": 2658.23,
+      "duration": 6.71,
+      "text": "Prime of X I transpose beta"
+    },
+    {
+      "index": 857,
+      "start": 2663.71,
+      "end": 2663.72,
+      "duration": 0.01,
+      "text": "K divided by G Prime of mui at time K"
+    },
+    {
+      "index": 858,
+      "start": 2663.72,
+      "end": 2668.71,
+      "duration": 4.99,
+      "text": "Time 5"
+    },
+    {
+      "index": 859,
+      "start": 2671.589,
+      "end": 2671.599,
+      "duration": 0.01,
+      "text": "okay and so I this if I solve it will"
+    },
+    {
+      "index": 860,
+      "start": 2671.599,
+      "end": 2673.39,
+      "duration": 1.791,
+      "text": "spit out something that I will call a"
+    },
+    {
+      "index": 861,
+      "start": 2673.4,
+      "end": 2678.109,
+      "duration": 4.709,
+      "text": "solution I will call it um"
+    },
+    {
+      "index": 862,
+      "start": 2678.119,
+      "end": 2683.829,
+      "duration": 5.71,
+      "text": "uh U hat k + one and to get beta hat k +"
+    },
+    {
+      "index": 863,
+      "start": 2683.839,
+      "end": 2687.63,
+      "duration": 3.791,
+      "text": "one all I need to do is to do beta"
+    },
+    {
+      "index": 864,
+      "start": 2687.64,
+      "end": 2692.549,
+      "duration": 4.909,
+      "text": "K plus u had k +"
+    },
+    {
+      "index": 865,
+      "start": 2695.39,
+      "end": 2695.4,
+      "duration": 0.01,
+      "text": "one sorry beta"
+    },
+    {
+      "index": 866,
+      "start": 2695.4,
+      "end": 2698.63,
+      "duration": 3.23,
+      "text": "yeah okay"
+    },
+    {
+      "index": 867,
+      "start": 2698.64,
+      "end": 2700.79,
+      "duration": 2.15,
+      "text": "and that's because so here that's not"
+    },
+    {
+      "index": 868,
+      "start": 2700.8,
+      "end": 2704.03,
+      "duration": 3.23,
+      "text": "clear but I started from there remember"
+    },
+    {
+      "index": 869,
+      "start": 2704.04,
+      "end": 2708.47,
+      "duration": 4.43,
+      "text": "I started from U this guy here so I'm"
+    },
+    {
+      "index": 870,
+      "start": 2708.48,
+      "end": 2710.27,
+      "duration": 1.79,
+      "text": "just solving a Le Square that's a"
+    },
+    {
+      "index": 871,
+      "start": 2710.28,
+      "end": 2711.47,
+      "duration": 1.19,
+      "text": "weighted Le Square that's going to give"
+    },
+    {
+      "index": 872,
+      "start": 2711.48,
+      "end": 2713.63,
+      "duration": 2.15,
+      "text": "me this thing that's what I called U hat"
+    },
+    {
+      "index": 873,
+      "start": 2713.64,
+      "end": 2717.03,
+      "duration": 3.39,
+      "text": "k + one then I add it to Beta K and that"
+    },
+    {
+      "index": 874,
+      "start": 2717.04,
+      "end": 2719.43,
+      "duration": 2.39,
+      "text": "gives me beta K minus one so I just have"
+    },
+    {
+      "index": 875,
+      "start": 2719.44,
+      "end": 2722.589,
+      "duration": 3.149,
+      "text": "this intermediate step which is removed"
+    },
+    {
+      "index": 876,
+      "start": 2722.599,
+      "end": 2724.67,
+      "duration": 2.071,
+      "text": "in the"
+    },
+    {
+      "index": 877,
+      "start": 2724.68,
+      "end": 2727.99,
+      "duration": 3.31,
+      "text": "slides okay"
+    },
+    {
+      "index": 878,
+      "start": 2728.0,
+      "end": 2730.15,
+      "duration": 2.15,
+      "text": "so then you can repeat until convergence"
+    },
+    {
+      "index": 879,
+      "start": 2730.16,
+      "end": 2737.15,
+      "duration": 6.99,
+      "text": "what does it mean to repeat until"
+    },
+    {
+      "index": 880,
+      "start": 2739.71,
+      "end": 2739.72,
+      "duration": 0.01,
+      "text": "convergence yeah exactly so you just set"
+    },
+    {
+      "index": 881,
+      "start": 2739.72,
+      "end": 2741.589,
+      "duration": 1.869,
+      "text": "some threshold and you say I I promise"
+    },
+    {
+      "index": 882,
+      "start": 2741.599,
+      "end": 2744.109,
+      "duration": 2.51,
+      "text": "you that this will converge right so you"
+    },
+    {
+      "index": 883,
+      "start": 2744.119,
+      "end": 2745.349,
+      "duration": 1.23,
+      "text": "know that at some point you're going to"
+    },
+    {
+      "index": 884,
+      "start": 2745.359,
+      "end": 2747.71,
+      "duration": 2.351,
+      "text": "be there but uh you're going to go there"
+    },
+    {
+      "index": 885,
+      "start": 2747.72,
+      "end": 2749.109,
+      "duration": 1.389,
+      "text": "but you're never going to be exactly"
+    },
+    {
+      "index": 886,
+      "start": 2749.119,
+      "end": 2750.95,
+      "duration": 1.831,
+      "text": "there and so you just say Okay I want"
+    },
+    {
+      "index": 887,
+      "start": 2750.96,
+      "end": 2752.79,
+      "duration": 1.83,
+      "text": "this accuracy on my Beta actually the"
+    },
+    {
+      "index": 888,
+      "start": 2752.8,
+      "end": 2755.75,
+      "duration": 2.95,
+      "text": "machine is a little uh uh strong right"
+    },
+    {
+      "index": 889,
+      "start": 2755.76,
+      "end": 2757.349,
+      "duration": 1.589,
+      "text": "especially if you have 10 of obervations"
+    },
+    {
+      "index": 890,
+      "start": 2757.359,
+      "end": 2758.43,
+      "duration": 1.071,
+      "text": "to start with you know you're going to"
+    },
+    {
+      "index": 891,
+      "start": 2758.44,
+      "end": 2761.549,
+      "duration": 3.109,
+      "text": "have something that's um uh going to be"
+    },
+    {
+      "index": 892,
+      "start": 2761.559,
+      "end": 2762.75,
+      "duration": 1.191,
+      "text": "that's going to have some statistical"
+    },
+    {
+      "index": 893,
+      "start": 2762.76,
+      "end": 2764.549,
+      "duration": 1.789,
+      "text": "error so that should actually guide you"
+    },
+    {
+      "index": 894,
+      "start": 2764.559,
+      "end": 2766.43,
+      "duration": 1.871,
+      "text": "into what kind of error you want to be"
+    },
+    {
+      "index": 895,
+      "start": 2766.44,
+      "end": 2768.43,
+      "duration": 1.99,
+      "text": "making so for example A good rule of"
+    },
+    {
+      "index": 896,
+      "start": 2768.44,
+      "end": 2771.19,
+      "duration": 2.75,
+      "text": "thumb is that if you have uh n"
+    },
+    {
+      "index": 897,
+      "start": 2771.2,
+      "end": 2773.67,
+      "duration": 2.47,
+      "text": "observations you just take some within"
+    },
+    {
+      "index": 898,
+      "start": 2773.68,
+      "end": 2776.309,
+      "duration": 2.629,
+      "text": "if you want the L2 distance between the"
+    },
+    {
+      "index": 899,
+      "start": 2776.319,
+      "end": 2778.63,
+      "duration": 2.311,
+      "text": "beta the two consecutive beta to be less"
+    },
+    {
+      "index": 900,
+      "start": 2778.64,
+      "end": 2780.51,
+      "duration": 1.87,
+      "text": "than one over n you should be good"
+    },
+    {
+      "index": 901,
+      "start": 2780.52,
+      "end": 2781.99,
+      "duration": 1.47,
+      "text": "enough it doesn't have to be the prec"
+    },
+    {
+      "index": 902,
+      "start": 2782.0,
+      "end": 2783.309,
+      "duration": 1.309,
+      "text": "mission"
+    },
+    {
+      "index": 903,
+      "start": 2783.319,
+      "end": 2786.349,
+      "duration": 3.03,
+      "text": "Precision uh and uh uh so is it clear"
+    },
+    {
+      "index": 904,
+      "start": 2786.359,
+      "end": 2788.349,
+      "duration": 1.99,
+      "text": "how we do this right so here I have I"
+    },
+    {
+      "index": 905,
+      "start": 2788.359,
+      "end": 2790.47,
+      "duration": 2.111,
+      "text": "just have to maintain a bunch of things"
+    },
+    {
+      "index": 906,
+      "start": 2790.48,
+      "end": 2792.03,
+      "duration": 1.55,
+      "text": "right so remember when I want to"
+    },
+    {
+      "index": 907,
+      "start": 2792.04,
+      "end": 2793.95,
+      "duration": 1.91,
+      "text": "recompute every at every step I have to"
+    },
+    {
+      "index": 908,
+      "start": 2793.96,
+      "end": 2795.91,
+      "duration": 1.95,
+      "text": "recompute a bunch of things so I have to"
+    },
+    {
+      "index": 909,
+      "start": 2795.92,
+      "end": 2797.349,
+      "duration": 1.429,
+      "text": "recompute the weights but if I want to"
+    },
+    {
+      "index": 910,
+      "start": 2797.359,
+      "end": 2799.23,
+      "duration": 1.871,
+      "text": "recompute the weights not only do I need"
+    },
+    {
+      "index": 911,
+      "start": 2799.24,
+      "end": 2801.39,
+      "duration": 2.15,
+      "text": "the previous iterate but I need to know"
+    },
+    {
+      "index": 912,
+      "start": 2801.4,
+      "end": 2805.069,
+      "duration": 3.669,
+      "text": "how the previous iterate impacts my um"
+    },
+    {
+      "index": 913,
+      "start": 2805.079,
+      "end": 2807.99,
+      "duration": 2.911,
+      "text": "my means so at each step I have to"
+    },
+    {
+      "index": 914,
+      "start": 2808.0,
+      "end": 2813.03,
+      "duration": 5.03,
+      "text": "recalculate mu by doing G Prime right"
+    },
+    {
+      "index": 915,
+      "start": 2813.04,
+      "end": 2814.91,
+      "duration": 1.87,
+      "text": "remember mu"
+    },
+    {
+      "index": 916,
+      "start": 2814.92,
+      "end": 2820.309,
+      "duration": 5.389,
+      "text": "K was just G Prime uh G uh inverse of X"
+    },
+    {
+      "index": 917,
+      "start": 2820.319,
+      "end": 2823.549,
+      "duration": 3.23,
+      "text": "I transpose beta K right so I have to"
+    },
+    {
+      "index": 918,
+      "start": 2823.559,
+      "end": 2826.99,
+      "duration": 3.431,
+      "text": "recompute that and then I use this to"
+    },
+    {
+      "index": 919,
+      "start": 2827.0,
+      "end": 2828.27,
+      "duration": 1.27,
+      "text": "compute my"
+    },
+    {
+      "index": 920,
+      "start": 2828.28,
+      "end": 2834.43,
+      "duration": 6.15,
+      "text": "weights I also use this uh to compute my"
+    },
+    {
+      "index": 921,
+      "start": 2834.44,
+      "end": 2838.109,
+      "duration": 3.669,
+      "text": "y right so my y depends also on G Prime"
+    },
+    {
+      "index": 922,
+      "start": 2838.119,
+      "end": 2842.309,
+      "duration": 4.19,
+      "text": "of mu k i feed that to my weighted Le"
+    },
+    {
+      "index": 923,
+      "start": 2842.319,
+      "end": 2846.109,
+      "duration": 3.79,
+      "text": "squares uh uh engine it spits out the U"
+    },
+    {
+      "index": 924,
+      "start": 2846.119,
+      "end": 2848.47,
+      "duration": 2.351,
+      "text": "had k that I add to my previous beta K"
+    },
+    {
+      "index": 925,
+      "start": 2848.48,
+      "end": 2852.51,
+      "duration": 4.03,
+      "text": "and that gives me my new beta K plus"
+    },
+    {
+      "index": 926,
+      "start": 2855.549,
+      "end": 2855.559,
+      "duration": 0.01,
+      "text": "one okay so here's the pseudo code if"
+    },
+    {
+      "index": 927,
+      "start": 2855.559,
+      "end": 2858.43,
+      "duration": 2.871,
+      "text": "you want to take some time uh to uh"
+    },
+    {
+      "index": 928,
+      "start": 2858.44,
+      "end": 2859.95,
+      "duration": 1.51,
+      "text": "parse"
+    },
+    {
+      "index": 929,
+      "start": 2859.96,
+      "end": 2863.349,
+      "duration": 3.389,
+      "text": "it all right so here again the trick is"
+    },
+    {
+      "index": 930,
+      "start": 2863.359,
+      "end": 2865.829,
+      "duration": 2.47,
+      "text": "not much it's just saying if you don't"
+    },
+    {
+      "index": 931,
+      "start": 2865.839,
+      "end": 2870.15,
+      "duration": 4.311,
+      "text": "feel like implementing uh fisser scoring"
+    },
+    {
+      "index": 932,
+      "start": 2870.16,
+      "end": 2872.87,
+      "duration": 2.71,
+      "text": "or inverting your hessen at every step"
+    },
+    {
+      "index": 933,
+      "start": 2872.88,
+      "end": 2874.39,
+      "duration": 1.51,
+      "text": "then awaited Le squares is actually"
+    },
+    {
+      "index": 934,
+      "start": 2874.4,
+      "end": 2876.549,
+      "duration": 2.149,
+      "text": "going to do it for you automatically all"
+    },
+    {
+      "index": 935,
+      "start": 2876.559,
+      "end": 2877.99,
+      "duration": 1.431,
+      "text": "right then and that's just a numerical"
+    },
+    {
+      "index": 936,
+      "start": 2878.0,
+      "end": 2879.99,
+      "duration": 1.99,
+      "text": "trick there's nothing really statistical"
+    },
+    {
+      "index": 937,
+      "start": 2880.0,
+      "end": 2882.79,
+      "duration": 2.79,
+      "text": "about this except the fact that you know"
+    },
+    {
+      "index": 938,
+      "start": 2882.8,
+      "end": 2884.99,
+      "duration": 2.19,
+      "text": "this close firm solution for each of the"
+    },
+    {
+      "index": 939,
+      "start": 2885.0,
+      "end": 2888.71,
+      "duration": 3.71,
+      "text": "step reminded us of um reminded us of"
+    },
+    {
+      "index": 940,
+      "start": 2888.72,
+      "end": 2890.39,
+      "duration": 1.67,
+      "text": "some Le squares and except that there"
+    },
+    {
+      "index": 941,
+      "start": 2890.4,
+      "end": 2893.51,
+      "duration": 3.11,
+      "text": "was some extra"
+    },
+    {
+      "index": 942,
+      "start": 2897.47,
+      "end": 2897.48,
+      "duration": 0.01,
+      "text": "weights okay so uh to conclude uh for to"
+    },
+    {
+      "index": 943,
+      "start": 2897.48,
+      "end": 2899.39,
+      "duration": 1.91,
+      "text": "we only need to know of course X Y the"
+    },
+    {
+      "index": 944,
+      "start": 2899.4,
+      "end": 2901.51,
+      "duration": 2.11,
+      "text": "link"
+    },
+    {
+      "index": 945,
+      "start": 2901.52,
+      "end": 2903.75,
+      "duration": 2.23,
+      "text": "function uh why do we need the variance"
+    },
+    {
+      "index": 946,
+      "start": 2903.76,
+      "end": 2909.309,
+      "duration": 5.549,
+      "text": "function"
+    },
+    {
+      "index": 947,
+      "start": 2910.589,
+      "end": 2910.599,
+      "duration": 0.01,
+      "text": "I'm not sure we actually need the"
+    },
+    {
+      "index": 948,
+      "start": 2910.599,
+      "end": 2912.23,
+      "duration": 1.631,
+      "text": "variance"
+    },
+    {
+      "index": 949,
+      "start": 2912.24,
+      "end": 2915.069,
+      "duration": 2.829,
+      "text": "function no I don't know why I say"
+    },
+    {
+      "index": 950,
+      "start": 2915.079,
+      "end": 2918.63,
+      "duration": 3.551,
+      "text": "this uh you need Fi not the variance"
+    },
+    {
+      "index": 951,
+      "start": 2918.64,
+      "end": 2921.15,
+      "duration": 2.51,
+      "text": "function so where do you start actually"
+    },
+    {
+      "index": 952,
+      "start": 2921.16,
+      "end": 2922.75,
+      "duration": 1.59,
+      "text": "right so clearly if you start very close"
+    },
+    {
+      "index": 953,
+      "start": 2922.76,
+      "end": 2925.069,
+      "duration": 2.309,
+      "text": "to your solution you're actually going"
+    },
+    {
+      "index": 954,
+      "start": 2925.079,
+      "end": 2927.91,
+      "duration": 2.831,
+      "text": "to do much better and one good way to"
+    },
+    {
+      "index": 955,
+      "start": 2927.92,
+      "end": 2930.27,
+      "duration": 2.35,
+      "text": "start so for the beta itself it's not"
+    },
+    {
+      "index": 956,
+      "start": 2930.28,
+      "end": 2932.23,
+      "duration": 1.95,
+      "text": "clear what it's going to be but you can"
+    },
+    {
+      "index": 957,
+      "start": 2932.24,
+      "end": 2935.109,
+      "duration": 2.869,
+      "text": "actually get a good idea of what beta is"
+    },
+    {
+      "index": 958,
+      "start": 2935.119,
+      "end": 2937.91,
+      "duration": 2.791,
+      "text": "by just having a good idea of what mu is"
+    },
+    {
+      "index": 959,
+      "start": 2937.92,
+      "end": 2941.069,
+      "duration": 3.149,
+      "text": "because mu is G inverse of X I transpose"
+    },
+    {
+      "index": 960,
+      "start": 2941.079,
+      "end": 2943.91,
+      "duration": 2.831,
+      "text": "Beta And so what you could do is to try"
+    },
+    {
+      "index": 961,
+      "start": 2943.92,
+      "end": 2946.91,
+      "duration": 2.99,
+      "text": "to set mu to be the actual observations"
+    },
+    {
+      "index": 962,
+      "start": 2946.92,
+      "end": 2948.27,
+      "duration": 1.35,
+      "text": "that you have because you know that's"
+    },
+    {
+      "index": 963,
+      "start": 2948.28,
+      "end": 2949.67,
+      "duration": 1.39,
+      "text": "the best guess that you have for their"
+    },
+    {
+      "index": 964,
+      "start": 2949.68,
+      "end": 2953.109,
+      "duration": 3.429,
+      "text": "expected value and then you just say"
+    },
+    {
+      "index": 965,
+      "start": 2953.119,
+      "end": 2956.27,
+      "duration": 3.151,
+      "text": "okay once I have my me I know that my mu"
+    },
+    {
+      "index": 966,
+      "start": 2956.28,
+      "end": 2958.549,
+      "duration": 2.269,
+      "text": "is a function of this thing so I can"
+    },
+    {
+      "index": 967,
+      "start": 2958.559,
+      "end": 2960.99,
+      "duration": 2.431,
+      "text": "write G of mu and solve it using a least"
+    },
+    {
+      "index": 968,
+      "start": 2961.0,
+      "end": 2965.19,
+      "duration": 4.19,
+      "text": "squares estimator right so G of"
+    },
+    {
+      "index": 969,
+      "start": 2970.15,
+      "end": 2970.16,
+      "duration": 0.01,
+      "text": "mu is of the form X beta so you just"
+    },
+    {
+      "index": 970,
+      "start": 2970.16,
+      "end": 2973.87,
+      "duration": 3.71,
+      "text": "solve um for once you have your mu you"
+    },
+    {
+      "index": 971,
+      "start": 2973.88,
+      "end": 2975.91,
+      "duration": 2.03,
+      "text": "pass it through G and then you solve for"
+    },
+    {
+      "index": 972,
+      "start": 2975.92,
+      "end": 2978.47,
+      "duration": 2.55,
+      "text": "the beta that you want and then that's"
+    },
+    {
+      "index": 973,
+      "start": 2978.48,
+      "end": 2981.99,
+      "duration": 3.51,
+      "text": "the beta that you initialize"
+    },
+    {
+      "index": 974,
+      "start": 2983.95,
+      "end": 2983.96,
+      "duration": 0.01,
+      "text": "with"
+    },
+    {
+      "index": 975,
+      "start": 2983.96,
+      "end": 2986.47,
+      "duration": 2.51,
+      "text": "okay and uh actually this was your"
+    },
+    {
+      "index": 976,
+      "start": 2986.48,
+      "end": 2988.47,
+      "duration": 1.99,
+      "text": "question from last time as soon as I use"
+    },
+    {
+      "index": 977,
+      "start": 2988.48,
+      "end": 2992.71,
+      "duration": 4.23,
+      "text": "the canonical link Fisher scoring and uh"
+    },
+    {
+      "index": 978,
+      "start": 2992.72,
+      "end": 2995.15,
+      "duration": 2.43,
+      "text": "uh Newton rapson are the same thing"
+    },
+    {
+      "index": 979,
+      "start": 2995.16,
+      "end": 2997.67,
+      "duration": 2.51,
+      "text": "because the uh hen is actually"
+    },
+    {
+      "index": 980,
+      "start": 2997.68,
+      "end": 3000.19,
+      "duration": 2.51,
+      "text": "deterministic in that case just because"
+    },
+    {
+      "index": 981,
+      "start": 3000.2,
+      "end": 3003.03,
+      "duration": 2.83,
+      "text": "when we took this when the"
+    },
+    {
+      "index": 982,
+      "start": 3003.04,
+      "end": 3007.27,
+      "duration": 4.23,
+      "text": "H in um when you use the canonical link"
+    },
+    {
+      "index": 983,
+      "start": 3007.28,
+      "end": 3009.829,
+      "duration": 2.549,
+      "text": "H is the identity which means that its"
+    },
+    {
+      "index": 984,
+      "start": 3009.839,
+      "end": 3012.23,
+      "duration": 2.391,
+      "text": "second derivative is equal to zero so"
+    },
+    {
+      "index": 985,
+      "start": 3012.24,
+      "end": 3014.15,
+      "duration": 1.91,
+      "text": "this term goes away even without taking"
+    },
+    {
+      "index": 986,
+      "start": 3014.16,
+      "end": 3016.349,
+      "duration": 2.189,
+      "text": "the expectation right so remember the"
+    },
+    {
+      "index": 987,
+      "start": 3016.359,
+      "end": 3020.03,
+      "duration": 3.671,
+      "text": "term that went away was of the"
+    },
+    {
+      "index": 988,
+      "start": 3020.04,
+      "end": 3027.15,
+      "duration": 7.11,
+      "text": "form y IUS mu I / 5 * H prime prime"
+    },
+    {
+      "index": 989,
+      "start": 3027.16,
+      "end": 3030.15,
+      "duration": 2.99,
+      "text": "of X I transpose beta right that's the"
+    },
+    {
+      "index": 990,
+      "start": 3030.16,
+      "end": 3031.67,
+      "duration": 1.51,
+      "text": "term that we said oh the conditional"
+    },
+    {
+      "index": 991,
+      "start": 3031.68,
+      "end": 3034.829,
+      "duration": 3.149,
+      "text": "expectation of this guy is zero but if H"
+    },
+    {
+      "index": 992,
+      "start": 3034.839,
+      "end": 3036.43,
+      "duration": 1.591,
+      "text": "prime prime is already equal to zero"
+    },
+    {
+      "index": 993,
+      "start": 3036.44,
+      "end": 3037.75,
+      "duration": 1.31,
+      "text": "then there's nothing that changes"
+    },
+    {
+      "index": 994,
+      "start": 3037.76,
+      "end": 3039.349,
+      "duration": 1.589,
+      "text": "there's nothing that goes away it was"
+    },
+    {
+      "index": 995,
+      "start": 3039.359,
+      "end": 3041.27,
+      "duration": 1.911,
+      "text": "already equal to zero and that always"
+    },
+    {
+      "index": 996,
+      "start": 3041.28,
+      "end": 3043.71,
+      "duration": 2.43,
+      "text": "happen when you have the canonical link"
+    },
+    {
+      "index": 997,
+      "start": 3043.72,
+      "end": 3044.91,
+      "duration": 1.19,
+      "text": "because"
+    },
+    {
+      "index": 998,
+      "start": 3044.92,
+      "end": 3047.589,
+      "duration": 2.669,
+      "text": "H is G"
+    },
+    {
+      "index": 999,
+      "start": 3047.599,
+      "end": 3051.63,
+      "duration": 4.031,
+      "text": "Prime uh is G uh B"
+    },
+    {
+      "index": 1000,
+      "start": 3051.64,
+      "end": 3053.47,
+      "duration": 1.83,
+      "text": "Prime"
+    },
+    {
+      "index": 1001,
+      "start": 3053.48,
+      "end": 3056.15,
+      "duration": 2.67,
+      "text": "inverse and G is equal to B the"
+    },
+    {
+      "index": 1002,
+      "start": 3056.16,
+      "end": 3057.75,
+      "duration": 1.59,
+      "text": "canonical link is B Prime inverse so"
+    },
+    {
+      "index": 1003,
+      "start": 3057.76,
+      "end": 3059.03,
+      "duration": 1.27,
+      "text": "this thing is the"
+    },
+    {
+      "index": 1004,
+      "start": 3059.04,
+      "end": 3062.27,
+      "duration": 3.23,
+      "text": "identity so the second derivative of y"
+    },
+    {
+      "index": 1005,
+      "start": 3062.28,
+      "end": 3065.95,
+      "duration": 3.67,
+      "text": "of f ofx is equal to X is"
+    },
+    {
+      "index": 1006,
+      "start": 3065.96,
+      "end": 3067.63,
+      "duration": 1.67,
+      "text": "zero"
+    },
+    {
+      "index": 1007,
+      "start": 3067.64,
+      "end": 3070.43,
+      "duration": 2.79,
+      "text": "okay my screen says end of"
+    },
+    {
+      "index": 1008,
+      "start": 3070.44,
+      "end": 3078.43,
+      "duration": 7.99,
+      "text": "show uh so we can start with some"
+    },
+    {
+      "index": 1009,
+      "start": 3085.39,
+      "end": 3085.4,
+      "duration": 0.01,
+      "text": "squares that's an implementation that's"
+    },
+    {
+      "index": 1010,
+      "start": 3085.4,
+      "end": 3087.95,
+      "duration": 2.55,
+      "text": "just making calls to weighted Le squares"
+    },
+    {
+      "index": 1011,
+      "start": 3087.96,
+      "end": 3090.589,
+      "duration": 2.629,
+      "text": "oracles it's called an oracle sometimes"
+    },
+    {
+      "index": 1012,
+      "start": 3090.599,
+      "end": 3092.23,
+      "duration": 1.631,
+      "text": "an oracle is what you assume the machine"
+    },
+    {
+      "index": 1013,
+      "start": 3092.24,
+      "end": 3094.63,
+      "duration": 2.39,
+      "text": "can do easily for you so if you assume"
+    },
+    {
+      "index": 1014,
+      "start": 3094.64,
+      "end": 3096.19,
+      "duration": 1.55,
+      "text": "that your machine is very good at you"
+    },
+    {
+      "index": 1015,
+      "start": 3096.2,
+      "end": 3097.67,
+      "duration": 1.47,
+      "text": "know multiplying by the inverse of a"
+    },
+    {
+      "index": 1016,
+      "start": 3097.68,
+      "end": 3099.03,
+      "duration": 1.35,
+      "text": "matrix you might as well just do Fisher"
+    },
+    {
+      "index": 1017,
+      "start": 3099.04,
+      "end": 3100.95,
+      "duration": 1.91,
+      "text": "and scoring yourself right it's just a"
+    },
+    {
+      "index": 1018,
+      "start": 3100.96,
+      "end": 3102.27,
+      "duration": 1.31,
+      "text": "way so that you don't have to actually"
+    },
+    {
+      "index": 1019,
+      "start": 3102.28,
+      "end": 3105.47,
+      "duration": 3.19,
+      "text": "do it and those things usually um those"
+    },
+    {
+      "index": 1020,
+      "start": 3105.48,
+      "end": 3106.95,
+      "duration": 1.47,
+      "text": "things are implemented and I just said"
+    },
+    {
+      "index": 1021,
+      "start": 3106.96,
+      "end": 3109.23,
+      "duration": 2.27,
+      "text": "routinely in statistical software but"
+    },
+    {
+      "index": 1022,
+      "start": 3109.24,
+      "end": 3111.349,
+      "duration": 2.109,
+      "text": "they're implemented very efficiently in"
+    },
+    {
+      "index": 1023,
+      "start": 3111.359,
+      "end": 3113.27,
+      "duration": 1.911,
+      "text": "statistical software so this is going to"
+    },
+    {
+      "index": 1024,
+      "start": 3113.28,
+      "end": 3114.75,
+      "duration": 1.47,
+      "text": "be one of the fastest ways you're going"
+    },
+    {
+      "index": 1025,
+      "start": 3114.76,
+      "end": 3118.47,
+      "duration": 3.71,
+      "text": "to have to solve uh to to to to do this"
+    },
+    {
+      "index": 1026,
+      "start": 3118.48,
+      "end": 3129.309,
+      "duration": 10.829,
+      "text": "step especially for large scale"
+    },
+    {
+      "index": 1027,
+      "start": 3131.789,
+      "end": 3131.799,
+      "duration": 0.01,
+      "text": "problem so if you were to do this uh in"
+    },
+    {
+      "index": 1028,
+      "start": 3131.799,
+      "end": 3133.349,
+      "duration": 1.55,
+      "text": "the simplest possible way right your"
+    },
+    {
+      "index": 1029,
+      "start": 3133.359,
+      "end": 3136.47,
+      "duration": 3.111,
+      "text": "iterations for the uh weighted for say"
+    },
+    {
+      "index": 1030,
+      "start": 3136.48,
+      "end": 3139.75,
+      "duration": 3.27,
+      "text": "fissure scoring is uh just multiply by"
+    },
+    {
+      "index": 1031,
+      "start": 3139.76,
+      "end": 3143.19,
+      "duration": 3.43,
+      "text": "the inverse of the Fisher information"
+    },
+    {
+      "index": 1032,
+      "start": 3143.2,
+      "end": 3146.549,
+      "duration": 3.349,
+      "text": "right yeah so it takes a bit of time uh"
+    },
+    {
+      "index": 1033,
+      "start": 3146.559,
+      "end": 3148.589,
+      "duration": 2.03,
+      "text": "whereas uh since you know you're going"
+    },
+    {
+      "index": 1034,
+      "start": 3148.599,
+      "end": 3152.15,
+      "duration": 3.551,
+      "text": "to multiply directly by something uh if"
+    },
+    {
+      "index": 1035,
+      "start": 3152.16,
+      "end": 3153.99,
+      "duration": 1.83,
+      "text": "you just say those things are not as"
+    },
+    {
+      "index": 1036,
+      "start": 3154.0,
+      "end": 3155.829,
+      "duration": 1.829,
+      "text": "optimized as solving Le squares actually"
+    },
+    {
+      "index": 1037,
+      "start": 3155.839,
+      "end": 3157.51,
+      "duration": 1.671,
+      "text": "the way it's typically done is by doing"
+    },
+    {
+      "index": 1038,
+      "start": 3157.52,
+      "end": 3159.19,
+      "duration": 1.67,
+      "text": "some Le squares so you might as well"
+    },
+    {
+      "index": 1039,
+      "start": 3159.2,
+      "end": 3161.23,
+      "duration": 2.03,
+      "text": "just do the Le squares that you like and"
+    },
+    {
+      "index": 1040,
+      "start": 3161.24,
+      "end": 3163.109,
+      "duration": 1.869,
+      "text": "there's also less"
+    },
+    {
+      "index": 1041,
+      "start": 3163.119,
+      "end": 3164.95,
+      "duration": 1.831,
+      "text": "um"
+    },
+    {
+      "index": 1042,
+      "start": 3164.96,
+      "end": 3168.43,
+      "duration": 3.47,
+      "text": "uh well no there's no well there is less"
+    },
+    {
+      "index": 1043,
+      "start": 3168.44,
+      "end": 3171.91,
+      "duration": 3.47,
+      "text": "Rec recalculation right here your Fisher"
+    },
+    {
+      "index": 1044,
+      "start": 3171.92,
+      "end": 3173.39,
+      "duration": 1.47,
+      "text": "you would have to recompute the entire"
+    },
+    {
+      "index": 1045,
+      "start": 3173.4,
+      "end": 3174.99,
+      "duration": 1.59,
+      "text": "Matrix of Fisher information whereas"
+    },
+    {
+      "index": 1046,
+      "start": 3175.0,
+      "end": 3176.99,
+      "duration": 1.99,
+      "text": "here you don't have to right you really"
+    },
+    {
+      "index": 1047,
+      "start": 3177.0,
+      "end": 3179.23,
+      "duration": 2.23,
+      "text": "just have to compute like some vectors"
+    },
+    {
+      "index": 1048,
+      "start": 3179.24,
+      "end": 3181.23,
+      "duration": 1.99,
+      "text": "and the vector of weights right so the"
+    },
+    {
+      "index": 1049,
+      "start": 3181.24,
+      "end": 3183.349,
+      "duration": 2.109,
+      "text": "Fisher information Matrix has say n"
+    },
+    {
+      "index": 1050,
+      "start": 3183.359,
+      "end": 3184.87,
+      "duration": 1.511,
+      "text": "choose two entries that you need to"
+    },
+    {
+      "index": 1051,
+      "start": 3184.88,
+      "end": 3186.75,
+      "duration": 1.87,
+      "text": "compute right it's symmetric so it's"
+    },
+    {
+      "index": 1052,
+      "start": 3186.76,
+      "end": 3189.63,
+      "duration": 2.87,
+      "text": "order n squar entries but here the only"
+    },
+    {
+      "index": 1053,
+      "start": 3189.64,
+      "end": 3191.47,
+      "duration": 1.83,
+      "text": "things you update if you think about it"
+    },
+    {
+      "index": 1054,
+      "start": 3191.48,
+      "end": 3194.63,
+      "duration": 3.15,
+      "text": "are this weights Matrix so there's only"
+    },
+    {
+      "index": 1055,
+      "start": 3194.64,
+      "end": 3196.15,
+      "duration": 1.51,
+      "text": "the diagonal elements that you need to"
+    },
+    {
+      "index": 1056,
+      "start": 3196.16,
+      "end": 3198.589,
+      "duration": 2.429,
+      "text": "update and this vectors in there also so"
+    },
+    {
+      "index": 1057,
+      "start": 3198.599,
+      "end": 3200.829,
+      "duration": 2.23,
+      "text": "those are size there's two n versus n"
+    },
+    {
+      "index": 1058,
+      "start": 3200.839,
+      "end": 3202.87,
+      "duration": 2.031,
+      "text": "squ so that's much less thing to"
+    },
+    {
+      "index": 1059,
+      "start": 3202.88,
+      "end": 3204.87,
+      "duration": 1.99,
+      "text": "actually put in there it does it for you"
+    },
+    {
+      "index": 1060,
+      "start": 3204.88,
+      "end": 3210.03,
+      "duration": 5.15,
+      "text": "somehow"
+    },
+    {
+      "index": 1061,
+      "start": 3212.349,
+      "end": 3212.359,
+      "duration": 0.01,
+      "text": "any other"
+    },
+    {
+      "index": 1062,
+      "start": 3212.359,
+      "end": 3220.309,
+      "duration": 7.95,
+      "text": "question all right so"
+    },
+    {
+      "index": 1063,
+      "start": 3228.87,
+      "end": 3228.88,
+      "duration": 0.01,
+      "text": "can well not exactly right because the G"
+    },
+    {
+      "index": 1064,
+      "start": 3228.88,
+      "end": 3230.71,
+      "duration": 1.83,
+      "text": "also shows up in this correction that"
+    },
+    {
+      "index": 1065,
+      "start": 3230.72,
+      "end": 3232.589,
+      "duration": 1.869,
+      "text": "you have here"
+    },
+    {
+      "index": 1066,
+      "start": 3232.599,
+      "end": 3235.03,
+      "duration": 2.431,
+      "text": "right I mean I don't know what you mean"
+    },
+    {
+      "index": 1067,
+      "start": 3235.04,
+      "end": 3244.39,
+      "duration": 9.35,
+      "text": "by I'm just trying to"
+    },
+    {
+      "index": 1068,
+      "start": 3246.95,
+      "end": 3246.96,
+      "duration": 0.01,
+      "text": "yeah I mean"
+    },
+    {
+      "index": 1069,
+      "start": 3246.96,
+      "end": 3249.71,
+      "duration": 2.75,
+      "text": "uh well okay there's the heteroskedastic"
+    },
+    {
+      "index": 1070,
+      "start": 3249.72,
+      "end": 3251.75,
+      "duration": 2.03,
+      "text": "case for sure so if you can actually"
+    },
+    {
+      "index": 1071,
+      "start": 3251.76,
+      "end": 3254.03,
+      "duration": 2.27,
+      "text": "compute those things and you know more"
+    },
+    {
+      "index": 1072,
+      "start": 3254.04,
+      "end": 3255.27,
+      "duration": 1.23,
+      "text": "generally I don't think you should think"
+    },
+    {
+      "index": 1073,
+      "start": 3255.28,
+      "end": 3256.67,
+      "duration": 1.39,
+      "text": "of those as being weights you should"
+    },
+    {
+      "index": 1074,
+      "start": 3256.68,
+      "end": 3258.349,
+      "duration": 1.669,
+      "text": "really think of those as being matrices"
+    },
+    {
+      "index": 1075,
+      "start": 3258.359,
+      "end": 3260.19,
+      "duration": 1.831,
+      "text": "that you invert and don't think of it as"
+    },
+    {
+      "index": 1076,
+      "start": 3260.2,
+      "end": 3262.109,
+      "duration": 1.909,
+      "text": "being diagonal but really think of them"
+    },
+    {
+      "index": 1077,
+      "start": 3262.119,
+      "end": 3264.349,
+      "duration": 2.23,
+      "text": "as being like full matrices so if you"
+    },
+    {
+      "index": 1078,
+      "start": 3264.359,
+      "end": 3266.99,
+      "duration": 2.631,
+      "text": "have right when we wrote uh weed Le"
+    },
+    {
+      "index": 1079,
+      "start": 3267.0,
+      "end": 3270.95,
+      "duration": 3.95,
+      "text": "squares here uh this was really the W I"
+    },
+    {
+      "index": 1080,
+      "start": 3270.96,
+      "end": 3272.15,
+      "duration": 1.19,
+      "text": "said is diagonal but all the"
+    },
+    {
+      "index": 1081,
+      "start": 3272.16,
+      "end": 3273.87,
+      "duration": 1.71,
+      "text": "computations really never really use the"
+    },
+    {
+      "index": 1082,
+      "start": 3273.88,
+      "end": 3275.87,
+      "duration": 1.99,
+      "text": "fact that it's diagonal so this is what"
+    },
+    {
+      "index": 1083,
+      "start": 3275.88,
+      "end": 3277.99,
+      "duration": 2.11,
+      "text": "you what shows up here is just the"
+    },
+    {
+      "index": 1084,
+      "start": 3278.0,
+      "end": 3280.19,
+      "duration": 2.19,
+      "text": "inverse of your convenience Matrix and"
+    },
+    {
+      "index": 1085,
+      "start": 3280.2,
+      "end": 3282.87,
+      "duration": 2.67,
+      "text": "so if you have data that's correlated"
+    },
+    {
+      "index": 1086,
+      "start": 3282.88,
+      "end": 3286.16,
+      "duration": 3.28,
+      "text": "this is where it's going to show up"
+    }
+  ],
+  "course": {
+    "category": "Biology & Chemistry",
+    "title": "Chemistry Principles",
+    "source_url": "https://www.youtube.com/playlist?list=PLUl4u3cNGP60uVBMaoNERc6knT_MgPKS0"
+  }
+}

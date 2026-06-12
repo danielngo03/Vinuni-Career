@@ -1,0 +1,2188 @@
+{
+  "video": {
+    "id": "2IBWxERRjvM",
+    "title": "Sinusoidal Functions | MIT 18.03SC Differential Equations, Fall 2011",
+    "url": "https://www.youtube.com/watch?v=2IBWxERRjvM",
+    "channel": "MIT OpenCourseWare",
+    "duration": 904,
+    "language": "en"
+  },
+  "segment_count": 310,
+  "segments": [
+    {
+      "index": 0,
+      "start": 7.63,
+      "end": 7.64,
+      "duration": 0.01,
+      "text": "So, today we're going to take a look at"
+    },
+    {
+      "index": 1,
+      "start": 7.64,
+      "end": 9.87,
+      "duration": 2.23,
+      "text": "sinusoidal functions, and specifically"
+    },
+    {
+      "index": 2,
+      "start": 9.88,
+      "end": 12.03,
+      "duration": 2.15,
+      "text": "we're going to use complex numbers"
+    },
+    {
+      "index": 3,
+      "start": 12.04,
+      "end": 15.23,
+      "duration": 3.19,
+      "text": "to get a handle on sinusoidal functions."
+    },
+    {
+      "index": 4,
+      "start": 15.24,
+      "end": 16.79,
+      "duration": 1.55,
+      "text": "The reason is complex numbers provide a"
+    },
+    {
+      "index": 5,
+      "start": 16.8,
+      "end": 19.71,
+      "duration": 2.91,
+      "text": "robust way of analyzing sinusoidal"
+    },
+    {
+      "index": 6,
+      "start": 19.72,
+      "end": 20.83,
+      "duration": 1.11,
+      "text": "functions."
+    },
+    {
+      "index": 7,
+      "start": 20.84,
+      "end": 22.83,
+      "duration": 1.99,
+      "text": "So, specifically we're interested in"
+    },
+    {
+      "index": 8,
+      "start": 22.84,
+      "end": 25.47,
+      "duration": 2.63,
+      "text": "this function e to the i omega t divided"
+    },
+    {
+      "index": 9,
+      "start": 25.48,
+      "end": 27.11,
+      "duration": 1.63,
+      "text": "by 2 + 3i."
+    },
+    {
+      "index": 10,
+      "start": 27.12,
+      "end": 28.51,
+      "duration": 1.39,
+      "text": "And we're asked to write the real part"
+    },
+    {
+      "index": 11,
+      "start": 28.52,
+      "end": 29.79,
+      "duration": 1.27,
+      "text": "of this function"
+    },
+    {
+      "index": 12,
+      "start": 29.8,
+      "end": 32.55,
+      "duration": 2.75,
+      "text": "using polar form and then rectangular"
+    },
+    {
+      "index": 13,
+      "start": 32.56,
+      "end": 34.07,
+      "duration": 1.51,
+      "text": "form."
+    },
+    {
+      "index": 14,
+      "start": 34.08,
+      "end": 35.83,
+      "duration": 1.75,
+      "text": "And then secondly, we're asked several"
+    },
+    {
+      "index": 15,
+      "start": 35.84,
+      "end": 37.87,
+      "duration": 2.03,
+      "text": "properties of this function, the real"
+    },
+    {
+      "index": 16,
+      "start": 37.88,
+      "end": 39.23,
+      "duration": 1.35,
+      "text": "part of this function."
+    },
+    {
+      "index": 17,
+      "start": 39.24,
+      "end": 41.35,
+      "duration": 2.11,
+      "text": "What's the circular frequency?"
+    },
+    {
+      "index": 18,
+      "start": 41.36,
+      "end": 43.11,
+      "duration": 1.75,
+      "text": "What's the amplitude?"
+    },
+    {
+      "index": 19,
+      "start": 43.12,
+      "end": 45.35,
+      "duration": 2.23,
+      "text": "And what's the phase lag?"
+    },
+    {
+      "index": 20,
+      "start": 45.36,
+      "end": 47.43,
+      "duration": 2.07,
+      "text": "And then lastly, we're asked to sketch"
+    },
+    {
+      "index": 21,
+      "start": 47.44,
+      "end": 49.15,
+      "duration": 1.71,
+      "text": "the real part of this function versus"
+    },
+    {
+      "index": 22,
+      "start": 49.16,
+      "end": 50.31,
+      "duration": 1.15,
+      "text": "time."
+    },
+    {
+      "index": 23,
+      "start": 50.32,
+      "end": 52.15,
+      "duration": 1.83,
+      "text": "So, I'll let you take a look at this and"
+    },
+    {
+      "index": 24,
+      "start": 52.16,
+      "end": 53.83,
+      "duration": 1.67,
+      "text": "try it for yourself, and I'll come back"
+    },
+    {
+      "index": 25,
+      "start": 53.84,
+      "end": 68.35,
+      "duration": 14.51,
+      "text": "in a moment."
+    },
+    {
+      "index": 26,
+      "start": 70.31,
+      "end": 70.32,
+      "duration": 0.01,
+      "text": "Hi everyone. Welcome back."
+    },
+    {
+      "index": 27,
+      "start": 70.32,
+      "end": 71.43,
+      "duration": 1.11,
+      "text": "Okay, so let's take a look at this"
+    },
+    {
+      "index": 28,
+      "start": 71.44,
+      "end": 72.91,
+      "duration": 1.47,
+      "text": "problem."
+    },
+    {
+      "index": 29,
+      "start": 72.92,
+      "end": 74.99,
+      "duration": 2.07,
+      "text": "So, we're asked to write e to the i"
+    },
+    {
+      "index": 30,
+      "start": 75.0,
+      "end": 77.67,
+      "duration": 2.67,
+      "text": "omega t"
+    },
+    {
+      "index": 31,
+      "start": 77.68,
+      "end": 80.07,
+      "duration": 2.39,
+      "text": "divided by 2 + 3i."
+    },
+    {
+      "index": 32,
+      "start": 80.08,
+      "end": 81.47,
+      "duration": 1.39,
+      "text": "Uh"
+    },
+    {
+      "index": 33,
+      "start": 81.48,
+      "end": 82.59,
+      "duration": 1.11,
+      "text": "But we're asked to write the real part"
+    },
+    {
+      "index": 34,
+      "start": 82.6,
+      "end": 84.59,
+      "duration": 1.99,
+      "text": "of this function using polar form and"
+    },
+    {
+      "index": 35,
+      "start": 84.6,
+      "end": 86.47,
+      "duration": 1.87,
+      "text": "then also rectangular form. So, I'll"
+    },
+    {
+      "index": 36,
+      "start": 86.48,
+      "end": 94.87,
+      "duration": 8.39,
+      "text": "first start off with polar form."
+    },
+    {
+      "index": 37,
+      "start": 96.27,
+      "end": 96.28,
+      "duration": 0.01,
+      "text": "And if we take a look at this function,"
+    },
+    {
+      "index": 38,
+      "start": 96.28,
+      "end": 97.83,
+      "duration": 1.55,
+      "text": "we see that the"
+    },
+    {
+      "index": 39,
+      "start": 97.84,
+      "end": 99.99,
+      "duration": 2.15,
+      "text": "um the numerator"
+    },
+    {
+      "index": 40,
+      "start": 100.0,
+      "end": 101.99,
+      "duration": 1.99,
+      "text": "is already written in polar form."
+    },
+    {
+      "index": 41,
+      "start": 102.0,
+      "end": 103.99,
+      "duration": 1.99,
+      "text": "So, just recall the polar form is of the"
+    },
+    {
+      "index": 42,
+      "start": 104.0,
+      "end": 106.51,
+      "duration": 2.51,
+      "text": "form r"
+    },
+    {
+      "index": 43,
+      "start": 106.52,
+      "end": 110.67,
+      "duration": 4.15,
+      "text": "e to the i theta."
+    },
+    {
+      "index": 44,
+      "start": 112.35,
+      "end": 112.36,
+      "duration": 0.01,
+      "text": "Uh meanwhile, the denominator is written"
+    },
+    {
+      "index": 45,
+      "start": 112.36,
+      "end": 114.07,
+      "duration": 1.71,
+      "text": "in Cartesian form"
+    },
+    {
+      "index": 46,
+      "start": 114.08,
+      "end": 115.47,
+      "duration": 1.39,
+      "text": "or rectangular form. So, we need to"
+    },
+    {
+      "index": 47,
+      "start": 115.48,
+      "end": 119.23,
+      "duration": 3.75,
+      "text": "convert this into polar form."
+    },
+    {
+      "index": 48,
+      "start": 121.15,
+      "end": 121.16,
+      "duration": 0.01,
+      "text": "So, what we can do is we can write 2 +"
+    },
+    {
+      "index": 49,
+      "start": 121.16,
+      "end": 123.67,
+      "duration": 2.51,
+      "text": "3i."
+    },
+    {
+      "index": 50,
+      "start": 123.68,
+      "end": 127.43,
+      "duration": 3.75,
+      "text": "We can combine these two into a modulus."
+    },
+    {
+      "index": 51,
+      "start": 127.44,
+      "end": 128.55,
+      "duration": 1.11,
+      "text": "And the modulus is going to be the"
+    },
+    {
+      "index": 52,
+      "start": 128.56,
+      "end": 130.27,
+      "duration": 1.71,
+      "text": "square root"
+    },
+    {
+      "index": 53,
+      "start": 130.28,
+      "end": 132.91,
+      "duration": 2.63,
+      "text": "of 2 squared"
+    },
+    {
+      "index": 54,
+      "start": 132.92,
+      "end": 136.39,
+      "duration": 3.47,
+      "text": "plus 3 squared."
+    },
+    {
+      "index": 55,
+      "start": 138.67,
+      "end": 138.68,
+      "duration": 0.01,
+      "text": "So, this is the the complex modulus or"
+    },
+    {
+      "index": 56,
+      "start": 138.68,
+      "end": 142.83,
+      "duration": 4.15,
+      "text": "the the modulus of the complex number."
+    },
+    {
+      "index": 57,
+      "start": 144.59,
+      "end": 144.6,
+      "duration": 0.01,
+      "text": "And then we have e to the i"
+    },
+    {
+      "index": 58,
+      "start": 144.6,
+      "end": 146.63,
+      "duration": 2.03,
+      "text": "phi."
+    },
+    {
+      "index": 59,
+      "start": 146.64,
+      "end": 149.35,
+      "duration": 2.71,
+      "text": "And the angle phi"
+    },
+    {
+      "index": 60,
+      "start": 149.36,
+      "end": 151.63,
+      "duration": 2.27,
+      "text": "we can deduce by"
+    },
+    {
+      "index": 61,
+      "start": 151.64,
+      "end": 154.55,
+      "duration": 2.91,
+      "text": "writing a triangle"
+    },
+    {
+      "index": 62,
+      "start": 154.56,
+      "end": 157.59,
+      "duration": 3.03,
+      "text": "which it is over to the right by two"
+    },
+    {
+      "index": 63,
+      "start": 157.6,
+      "end": 160.87,
+      "duration": 3.27,
+      "text": "units. And then it's up two units. And"
+    },
+    {
+      "index": 64,
+      "start": 160.88,
+      "end": 163.55,
+      "duration": 2.67,
+      "text": "this is the angle phi."
+    },
+    {
+      "index": 65,
+      "start": 163.56,
+      "end": 166.75,
+      "duration": 3.19,
+      "text": "So, we see from the triangle"
+    },
+    {
+      "index": 66,
+      "start": 166.76,
+      "end": 169.63,
+      "duration": 2.87,
+      "text": "that the arc tangent"
+    },
+    {
+      "index": 67,
+      "start": 169.64,
+      "end": 172.35,
+      "duration": 2.71,
+      "text": "of or sorry, the tangent of phi"
+    },
+    {
+      "index": 68,
+      "start": 172.36,
+      "end": 179.55,
+      "duration": 7.19,
+      "text": "is equal to 3 over 2."
+    },
+    {
+      "index": 69,
+      "start": 181.07,
+      "end": 181.08,
+      "duration": 0.01,
+      "text": "Okay, so putting the pieces together, we"
+    },
+    {
+      "index": 70,
+      "start": 181.08,
+      "end": 182.87,
+      "duration": 1.79,
+      "text": "have"
+    },
+    {
+      "index": 71,
+      "start": 182.88,
+      "end": 186.83,
+      "duration": 3.95,
+      "text": "e to the i omega t"
+    },
+    {
+      "index": 72,
+      "start": 186.84,
+      "end": 190.35,
+      "duration": 3.51,
+      "text": "divided by root 13"
+    },
+    {
+      "index": 73,
+      "start": 190.36,
+      "end": 195.43,
+      "duration": 5.07,
+      "text": "e to the i phi."
+    },
+    {
+      "index": 74,
+      "start": 198.67,
+      "end": 198.68,
+      "duration": 0.01,
+      "text": "And the beautiful thing about polar form"
+    },
+    {
+      "index": 75,
+      "start": 198.68,
+      "end": 200.95,
+      "duration": 2.27,
+      "text": "is that when we divide and multiply"
+    },
+    {
+      "index": 76,
+      "start": 200.96,
+      "end": 202.71,
+      "duration": 1.75,
+      "text": "uh"
+    },
+    {
+      "index": 77,
+      "start": 202.72,
+      "end": 204.71,
+      "duration": 1.99,
+      "text": "these complex exponentials, it just"
+    },
+    {
+      "index": 78,
+      "start": 204.72,
+      "end": 205.95,
+      "duration": 1.23,
+      "text": "turns into a simple addition or"
+    },
+    {
+      "index": 79,
+      "start": 205.96,
+      "end": 212.71,
+      "duration": 6.75,
+      "text": "subtraction of the phases."
+    },
+    {
+      "index": 80,
+      "start": 218.47,
+      "end": 218.48,
+      "duration": 0.01,
+      "text": "e to the i omega t"
+    },
+    {
+      "index": 81,
+      "start": 218.48,
+      "end": 221.71,
+      "duration": 3.23,
+      "text": "minus phi."
+    },
+    {
+      "index": 82,
+      "start": 223.95,
+      "end": 223.96,
+      "duration": 0.01,
+      "text": "So, we've successfully combined all the"
+    },
+    {
+      "index": 83,
+      "start": 223.96,
+      "end": 227.15,
+      "duration": 3.19,
+      "text": "terms into one polar term."
+    },
+    {
+      "index": 84,
+      "start": 227.16,
+      "end": 229.11,
+      "duration": 1.95,
+      "text": "And then now we're asked to compute the"
+    },
+    {
+      "index": 85,
+      "start": 229.12,
+      "end": 230.55,
+      "duration": 1.43,
+      "text": "real part."
+    },
+    {
+      "index": 86,
+      "start": 230.56,
+      "end": 232.91,
+      "duration": 2.35,
+      "text": "And here we use Euler's formula."
+    },
+    {
+      "index": 87,
+      "start": 232.92,
+      "end": 236.07,
+      "duration": 3.15,
+      "text": "So,"
+    },
+    {
+      "index": 88,
+      "start": 239.59,
+      "end": 239.6,
+      "duration": 0.01,
+      "text": "just to recall Euler's formula"
+    },
+    {
+      "index": 89,
+      "start": 239.6,
+      "end": 240.63,
+      "duration": 1.03,
+      "text": "we have"
+    },
+    {
+      "index": 90,
+      "start": 240.64,
+      "end": 243.27,
+      "duration": 2.63,
+      "text": "e to the i"
+    },
+    {
+      "index": 91,
+      "start": 243.28,
+      "end": 245.35,
+      "duration": 2.07,
+      "text": "theta"
+    },
+    {
+      "index": 92,
+      "start": 245.36,
+      "end": 247.19,
+      "duration": 1.83,
+      "text": "then this is equal to"
+    },
+    {
+      "index": 93,
+      "start": 247.2,
+      "end": 249.71,
+      "duration": 2.51,
+      "text": "cosine theta"
+    },
+    {
+      "index": 94,
+      "start": 249.72,
+      "end": 260.87,
+      "duration": 11.15,
+      "text": "plus i sine theta."
+    },
+    {
+      "index": 95,
+      "start": 264.95,
+      "end": 264.96,
+      "duration": 0.01,
+      "text": "So, at the end of the day, we're"
+    },
+    {
+      "index": 96,
+      "start": 264.96,
+      "end": 266.35,
+      "duration": 1.39,
+      "text": "interested in the real part and I'm"
+    },
+    {
+      "index": 97,
+      "start": 266.36,
+      "end": 268.11,
+      "duration": 1.75,
+      "text": "going to use this notation RE with a"
+    },
+    {
+      "index": 98,
+      "start": 268.12,
+      "end": 271.07,
+      "duration": 2.95,
+      "text": "curly bracket to denote the real part"
+    },
+    {
+      "index": 99,
+      "start": 271.08,
+      "end": 273.51,
+      "duration": 2.43,
+      "text": "of 1 over root 13."
+    },
+    {
+      "index": 100,
+      "start": 273.52,
+      "end": 275.99,
+      "duration": 2.47,
+      "text": "And I'll use Euler's formula on e to the"
+    },
+    {
+      "index": 101,
+      "start": 276.0,
+      "end": 278.07,
+      "duration": 2.07,
+      "text": "i omega t minus phi."
+    },
+    {
+      "index": 102,
+      "start": 278.08,
+      "end": 280.23,
+      "duration": 2.15,
+      "text": "So, we have cosine"
+    },
+    {
+      "index": 103,
+      "start": 280.24,
+      "end": 284.63,
+      "duration": 4.39,
+      "text": "omega t minus phi"
+    },
+    {
+      "index": 104,
+      "start": 286.39,
+      "end": 286.4,
+      "duration": 0.01,
+      "text": "plus i"
+    },
+    {
+      "index": 105,
+      "start": 286.4,
+      "end": 288.63,
+      "duration": 2.23,
+      "text": "sine"
+    },
+    {
+      "index": 106,
+      "start": 288.64,
+      "end": 294.31,
+      "duration": 5.67,
+      "text": "omega t minus phi."
+    },
+    {
+      "index": 107,
+      "start": 296.39,
+      "end": 296.4,
+      "duration": 0.01,
+      "text": "Sorry."
+    },
+    {
+      "index": 108,
+      "start": 296.4,
+      "end": 298.51,
+      "duration": 2.11,
+      "text": "1 over root 13 is multiplying both the"
+    },
+    {
+      "index": 109,
+      "start": 298.52,
+      "end": 304.95,
+      "duration": 6.43,
+      "text": "sine and the cosine."
+    },
+    {
+      "index": 110,
+      "start": 306.23,
+      "end": 306.24,
+      "duration": 0.01,
+      "text": "And we see that the second term is"
+    },
+    {
+      "index": 111,
+      "start": 306.24,
+      "end": 307.95,
+      "duration": 1.71,
+      "text": "purely imaginary."
+    },
+    {
+      "index": 112,
+      "start": 307.96,
+      "end": 310.15,
+      "duration": 2.19,
+      "text": "So, when we take the real part of a real"
+    },
+    {
+      "index": 113,
+      "start": 310.16,
+      "end": 312.55,
+      "duration": 2.39,
+      "text": "number plus an imaginary number, we just"
+    },
+    {
+      "index": 114,
+      "start": 312.56,
+      "end": 313.67,
+      "duration": 1.11,
+      "text": "are left at the real number at the end"
+    },
+    {
+      "index": 115,
+      "start": 313.68,
+      "end": 320.67,
+      "duration": 6.99,
+      "text": "of the day."
+    },
+    {
+      "index": 116,
+      "start": 327.71,
+      "end": 327.72,
+      "duration": 0.01,
+      "text": "is 1 over root 13 cosine omega t minus"
+    },
+    {
+      "index": 117,
+      "start": 327.72,
+      "end": 329.03,
+      "duration": 1.31,
+      "text": "phi"
+    },
+    {
+      "index": 118,
+      "start": 329.04,
+      "end": 332.23,
+      "duration": 3.19,
+      "text": "where"
+    },
+    {
+      "index": 119,
+      "start": 335.91,
+      "end": 335.92,
+      "duration": 0.01,
+      "text": "from before phi is"
+    },
+    {
+      "index": 120,
+      "start": 335.92,
+      "end": 342.63,
+      "duration": 6.71,
+      "text": "the arc tangent of 3 over 2."
+    },
+    {
+      "index": 121,
+      "start": 344.79,
+      "end": 344.8,
+      "duration": 0.01,
+      "text": "And phi can also be thought of"
+    },
+    {
+      "index": 122,
+      "start": 344.8,
+      "end": 349.11,
+      "duration": 4.31,
+      "text": "the angle being between 0 and pi over 2."
+    },
+    {
+      "index": 123,
+      "start": 349.12,
+      "end": 351.03,
+      "duration": 1.91,
+      "text": "Okay, so this is this concludes the"
+    },
+    {
+      "index": 124,
+      "start": 351.04,
+      "end": 352.31,
+      "duration": 1.27,
+      "text": "polar form"
+    },
+    {
+      "index": 125,
+      "start": 352.32,
+      "end": 355.03,
+      "duration": 2.71,
+      "text": "computation. Uh secondly, we also have"
+    },
+    {
+      "index": 126,
+      "start": 355.04,
+      "end": 357.15,
+      "duration": 2.11,
+      "text": "to compute this using"
+    },
+    {
+      "index": 127,
+      "start": 357.16,
+      "end": 361.15,
+      "duration": 3.99,
+      "text": "using a rectangular form calculation."
+    },
+    {
+      "index": 128,
+      "start": 361.16,
+      "end": 371.39,
+      "duration": 10.23,
+      "text": "So, let's use let's do the calculation"
+    },
+    {
+      "index": 129,
+      "start": 373.91,
+      "end": 373.92,
+      "duration": 0.01,
+      "text": "in rectangular form."
+    },
+    {
+      "index": 130,
+      "start": 373.92,
+      "end": 375.43,
+      "duration": 1.51,
+      "text": "And for this, I'm going to use Euler's"
+    },
+    {
+      "index": 131,
+      "start": 375.44,
+      "end": 379.99,
+      "duration": 4.55,
+      "text": "formula to expand out the numerator."
+    },
+    {
+      "index": 132,
+      "start": 382.35,
+      "end": 382.36,
+      "duration": 0.01,
+      "text": "So, first"
+    },
+    {
+      "index": 133,
+      "start": 382.36,
+      "end": 385.39,
+      "duration": 3.03,
+      "text": "we want to take the real part of"
+    },
+    {
+      "index": 134,
+      "start": 385.4,
+      "end": 388.07,
+      "duration": 2.67,
+      "text": "the numerator is cosine"
+    },
+    {
+      "index": 135,
+      "start": 388.08,
+      "end": 389.91,
+      "duration": 1.83,
+      "text": "omega t"
+    },
+    {
+      "index": 136,
+      "start": 389.92,
+      "end": 395.99,
+      "duration": 6.07,
+      "text": "plus i sine omega t."
+    },
+    {
+      "index": 137,
+      "start": 397.91,
+      "end": 397.92,
+      "duration": 0.01,
+      "text": "The denominator was"
+    },
+    {
+      "index": 138,
+      "start": 397.92,
+      "end": 403.47,
+      "duration": 5.55,
+      "text": "2 + i 3i."
+    },
+    {
+      "index": 139,
+      "start": 405.63,
+      "end": 405.64,
+      "duration": 0.01,
+      "text": "And uh typically what we want to do is"
+    },
+    {
+      "index": 140,
+      "start": 405.64,
+      "end": 407.43,
+      "duration": 1.79,
+      "text": "we want to uh"
+    },
+    {
+      "index": 141,
+      "start": 407.44,
+      "end": 409.35,
+      "duration": 1.91,
+      "text": "turn the denominator in into an entirely"
+    },
+    {
+      "index": 142,
+      "start": 409.36,
+      "end": 410.59,
+      "duration": 1.23,
+      "text": "real number."
+    },
+    {
+      "index": 143,
+      "start": 410.6,
+      "end": 412.39,
+      "duration": 1.79,
+      "text": "So, what we do is we multiply the top"
+    },
+    {
+      "index": 144,
+      "start": 412.4,
+      "end": 413.83,
+      "duration": 1.43,
+      "text": "and bottom"
+    },
+    {
+      "index": 145,
+      "start": 413.84,
+      "end": 419.35,
+      "duration": 5.51,
+      "text": "by the complex conjugate"
+    },
+    {
+      "index": 146,
+      "start": 421.19,
+      "end": 421.2,
+      "duration": 0.01,
+      "text": "of the denominator."
+    },
+    {
+      "index": 147,
+      "start": 421.2,
+      "end": 423.43,
+      "duration": 2.23,
+      "text": "So, for example, I have 2 + 3i. So, I'm"
+    },
+    {
+      "index": 148,
+      "start": 423.44,
+      "end": 425.43,
+      "duration": 1.99,
+      "text": "going to multiply the top and bottom by"
+    },
+    {
+      "index": 149,
+      "start": 425.44,
+      "end": 433.55,
+      "duration": 8.11,
+      "text": "2 - 3i."
+    },
+    {
+      "index": 150,
+      "start": 435.83,
+      "end": 435.84,
+      "duration": 0.01,
+      "text": "Okay, and when I do this you'll note"
+    },
+    {
+      "index": 151,
+      "start": 435.84,
+      "end": 438.71,
+      "duration": 2.87,
+      "text": "that when we multiply out 2 + 3i and 2 -"
+    },
+    {
+      "index": 152,
+      "start": 438.72,
+      "end": 441.47,
+      "duration": 2.75,
+      "text": "3i, we have a difference of squares."
+    },
+    {
+      "index": 153,
+      "start": 441.48,
+      "end": 445.59,
+      "duration": 4.11,
+      "text": "So, we're left with 2 * 2 is 4."
+    },
+    {
+      "index": 154,
+      "start": 445.6,
+      "end": 447.59,
+      "duration": 1.99,
+      "text": "The cross terms cancel."
+    },
+    {
+      "index": 155,
+      "start": 447.6,
+      "end": 451.11,
+      "duration": 3.51,
+      "text": "And then we have 3i * -3i. That's going"
+    },
+    {
+      "index": 156,
+      "start": 451.12,
+      "end": 459.47,
+      "duration": 8.35,
+      "text": "to give us -9i squared which is plus 9."
+    },
+    {
+      "index": 157,
+      "start": 461.39,
+      "end": 461.4,
+      "duration": 0.01,
+      "text": "So, the denominator is going to be 4 +"
+    },
+    {
+      "index": 158,
+      "start": 461.4,
+      "end": 465.95,
+      "duration": 4.55,
+      "text": "9."
+    },
+    {
+      "index": 159,
+      "start": 467.43,
+      "end": 467.44,
+      "duration": 0.01,
+      "text": "And then the numerator, I'll write it"
+    },
+    {
+      "index": 160,
+      "start": 467.44,
+      "end": 470.35,
+      "duration": 2.91,
+      "text": "all the terms just for completeness."
+    },
+    {
+      "index": 161,
+      "start": 470.36,
+      "end": 472.59,
+      "duration": 2.23,
+      "text": "But it'll be two two times cosine omega"
+    },
+    {
+      "index": 162,
+      "start": 472.6,
+      "end": 476.31,
+      "duration": 3.71,
+      "text": "t"
+    },
+    {
+      "index": 163,
+      "start": 491.67,
+      "end": 491.68,
+      "duration": 0.01,
+      "text": "And then now we have some imaginary"
+    },
+    {
+      "index": 164,
+      "start": 491.68,
+      "end": 494.75,
+      "duration": 3.07,
+      "text": "terms"
+    },
+    {
+      "index": 165,
+      "start": 502.71,
+      "end": 502.72,
+      "duration": 0.01,
+      "text": "and plus two"
+    },
+    {
+      "index": 166,
+      "start": 502.72,
+      "end": 506.55,
+      "duration": 3.83,
+      "text": "sine omega t."
+    },
+    {
+      "index": 167,
+      "start": 514.589,
+      "end": 514.599,
+      "duration": 0.01,
+      "text": "but now we're going to take the real"
+    },
+    {
+      "index": 168,
+      "start": 514.599,
+      "end": 515.63,
+      "duration": 1.031,
+      "text": "part"
+    },
+    {
+      "index": 169,
+      "start": 515.64,
+      "end": 518.07,
+      "duration": 2.43,
+      "text": "of this complex function."
+    },
+    {
+      "index": 170,
+      "start": 518.08,
+      "end": 520.31,
+      "duration": 2.23,
+      "text": "And if we take a look at it"
+    },
+    {
+      "index": 171,
+      "start": 520.32,
+      "end": 522.95,
+      "duration": 2.63,
+      "text": "this first term is entirely real."
+    },
+    {
+      "index": 172,
+      "start": 522.96,
+      "end": 525.31,
+      "duration": 2.35,
+      "text": "The second term is entirely complex"
+    },
+    {
+      "index": 173,
+      "start": 525.32,
+      "end": 528.11,
+      "duration": 2.79,
+      "text": "because we're multiplying by an i."
+    },
+    {
+      "index": 174,
+      "start": 528.12,
+      "end": 530.07,
+      "duration": 1.95,
+      "text": "So, when we take the real part"
+    },
+    {
+      "index": 175,
+      "start": 530.08,
+      "end": 531.67,
+      "duration": 1.59,
+      "text": "at the end of the day, the second term"
+    },
+    {
+      "index": 176,
+      "start": 531.68,
+      "end": 539.03,
+      "duration": 7.35,
+      "text": "is is going to drop out."
+    },
+    {
+      "index": 177,
+      "start": 540.59,
+      "end": 540.6,
+      "duration": 0.01,
+      "text": "So,"
+    },
+    {
+      "index": 178,
+      "start": 540.6,
+      "end": 542.83,
+      "duration": 2.23,
+      "text": "when the dust settles"
+    },
+    {
+      "index": 179,
+      "start": 542.84,
+      "end": 546.03,
+      "duration": 3.19,
+      "text": "we have 1 over 13"
+    },
+    {
+      "index": 180,
+      "start": 546.04,
+      "end": 549.47,
+      "duration": 3.43,
+      "text": "2 * cosine omega t"
+    },
+    {
+      "index": 181,
+      "start": 549.48,
+      "end": 556.19,
+      "duration": 6.71,
+      "text": "plus 3 sine omega t."
+    },
+    {
+      "index": 182,
+      "start": 563.31,
+      "end": 563.32,
+      "duration": 0.01,
+      "text": "For part B, we're asked several"
+    },
+    {
+      "index": 183,
+      "start": 563.32,
+      "end": 565.67,
+      "duration": 2.35,
+      "text": "questions about this complex sinusoidal"
+    },
+    {
+      "index": 184,
+      "start": 565.68,
+      "end": 567.39,
+      "duration": 1.71,
+      "text": "function or sorry, this"
+    },
+    {
+      "index": 185,
+      "start": 567.4,
+      "end": 570.07,
+      "duration": 2.67,
+      "text": "uh sinusoidal function when written"
+    },
+    {
+      "index": 186,
+      "start": 570.08,
+      "end": 571.43,
+      "duration": 1.35,
+      "text": "um"
+    },
+    {
+      "index": 187,
+      "start": 571.44,
+      "end": 573.99,
+      "duration": 2.55,
+      "text": "in its real form."
+    },
+    {
+      "index": 188,
+      "start": 574.0,
+      "end": 575.75,
+      "duration": 1.75,
+      "text": "Specifically, what's the circular"
+    },
+    {
+      "index": 189,
+      "start": 575.76,
+      "end": 582.91,
+      "duration": 7.15,
+      "text": "frequency?"
+    },
+    {
+      "index": 190,
+      "start": 584.35,
+      "end": 584.36,
+      "duration": 0.01,
+      "text": "The circular frequency is just the"
+    },
+    {
+      "index": 191,
+      "start": 584.36,
+      "end": 585.91,
+      "duration": 1.55,
+      "text": "frequency"
+    },
+    {
+      "index": 192,
+      "start": 585.92,
+      "end": 588.83,
+      "duration": 2.91,
+      "text": "that this function oscillates at. And we"
+    },
+    {
+      "index": 193,
+      "start": 588.84,
+      "end": 590.59,
+      "duration": 1.75,
+      "text": "can we can get this from looking at the"
+    },
+    {
+      "index": 194,
+      "start": 590.6,
+      "end": 592.19,
+      "duration": 1.59,
+      "text": "rectangular form"
+    },
+    {
+      "index": 195,
+      "start": 592.2,
+      "end": 595.35,
+      "duration": 3.15,
+      "text": "or the or the polar form."
+    },
+    {
+      "index": 196,
+      "start": 595.36,
+      "end": 598.35,
+      "duration": 2.99,
+      "text": "And it's simply just going to be omega."
+    },
+    {
+      "index": 197,
+      "start": 598.36,
+      "end": 600.31,
+      "duration": 1.95,
+      "text": "So note how this this function"
+    },
+    {
+      "index": 198,
+      "start": 600.32,
+      "end": 604.43,
+      "duration": 4.11,
+      "text": "oscillates with frequency omega."
+    },
+    {
+      "index": 199,
+      "start": 606.67,
+      "end": 606.68,
+      "duration": 0.01,
+      "text": "Uh secondly,"
+    },
+    {
+      "index": 200,
+      "start": 606.68,
+      "end": 616.39,
+      "duration": 9.71,
+      "text": "we're asked about the amplitude."
+    },
+    {
+      "index": 201,
+      "start": 618.39,
+      "end": 618.4,
+      "duration": 0.01,
+      "text": "And if we take a look at it, the"
+    },
+    {
+      "index": 202,
+      "start": 618.4,
+      "end": 620.47,
+      "duration": 2.07,
+      "text": "amplitude is a little tricky to get from"
+    },
+    {
+      "index": 203,
+      "start": 620.48,
+      "end": 622.07,
+      "duration": 1.59,
+      "text": "the rectangular form,"
+    },
+    {
+      "index": 204,
+      "start": 622.08,
+      "end": 624.51,
+      "duration": 2.43,
+      "text": "but it's completely apparent from the"
+    },
+    {
+      "index": 205,
+      "start": 624.52,
+      "end": 625.91,
+      "duration": 1.39,
+      "text": "polar form."
+    },
+    {
+      "index": 206,
+      "start": 625.92,
+      "end": 627.99,
+      "duration": 2.07,
+      "text": "So if we take a look at the polar form,"
+    },
+    {
+      "index": 207,
+      "start": 628.0,
+      "end": 629.19,
+      "duration": 1.19,
+      "text": "we have"
+    },
+    {
+      "index": 208,
+      "start": 629.2,
+      "end": 632.99,
+      "duration": 3.79,
+      "text": "1 over root 13 cosine omega t minus phi."
+    },
+    {
+      "index": 209,
+      "start": 633.0,
+      "end": 635.83,
+      "duration": 2.83,
+      "text": "And phi oscillates between plus one and"
+    },
+    {
+      "index": 210,
+      "start": 635.84,
+      "end": 637.67,
+      "duration": 1.83,
+      "text": "sorry, cosine oscillates between plus"
+    },
+    {
+      "index": 211,
+      "start": 637.68,
+      "end": 639.95,
+      "duration": 2.27,
+      "text": "one and minus one. So this function"
+    },
+    {
+      "index": 212,
+      "start": 639.96,
+      "end": 641.99,
+      "duration": 2.03,
+      "text": "takes on a maximum value of"
+    },
+    {
+      "index": 213,
+      "start": 642.0,
+      "end": 644.63,
+      "duration": 2.63,
+      "text": "plus 1 over root 13 and a a maximum"
+    },
+    {
+      "index": 214,
+      "start": 644.64,
+      "end": 646.75,
+      "duration": 2.11,
+      "text": "negative value of negative 1 over root"
+    },
+    {
+      "index": 215,
+      "start": 646.76,
+      "end": 648.19,
+      "duration": 1.43,
+      "text": "13."
+    },
+    {
+      "index": 216,
+      "start": 648.2,
+      "end": 649.59,
+      "duration": 1.39,
+      "text": "So the amplitude of this function is"
+    },
+    {
+      "index": 217,
+      "start": 649.6,
+      "end": 651.71,
+      "duration": 2.11,
+      "text": "just going to be"
+    },
+    {
+      "index": 218,
+      "start": 651.72,
+      "end": 655.71,
+      "duration": 3.99,
+      "text": "1 over root 13."
+    },
+    {
+      "index": 219,
+      "start": 667.27,
+      "end": 667.28,
+      "duration": 0.01,
+      "text": "This is the angle that the cosine is"
+    },
+    {
+      "index": 220,
+      "start": 667.28,
+      "end": 671.71,
+      "duration": 4.43,
+      "text": "picked up and shifted over."
+    },
+    {
+      "index": 221,
+      "start": 673.51,
+      "end": 673.52,
+      "duration": 0.01,
+      "text": "So again, we can we can get this uh"
+    },
+    {
+      "index": 222,
+      "start": 673.52,
+      "end": 675.87,
+      "duration": 2.35,
+      "text": "directly from the polar form or sorry,"
+    },
+    {
+      "index": 223,
+      "start": 675.88,
+      "end": 679.07,
+      "duration": 3.19,
+      "text": "yeah, sorry, from the polar form."
+    },
+    {
+      "index": 224,
+      "start": 679.08,
+      "end": 681.19,
+      "duration": 2.11,
+      "text": "Meanwhile, it's a little less obvious"
+    },
+    {
+      "index": 225,
+      "start": 681.2,
+      "end": 682.75,
+      "duration": 1.55,
+      "text": "what this angle is"
+    },
+    {
+      "index": 226,
+      "start": 682.76,
+      "end": 683.99,
+      "duration": 1.23,
+      "text": "when we take a look at the rectangular"
+    },
+    {
+      "index": 227,
+      "start": 684.0,
+      "end": 685.55,
+      "duration": 1.55,
+      "text": "form."
+    },
+    {
+      "index": 228,
+      "start": 685.56,
+      "end": 688.27,
+      "duration": 2.71,
+      "text": "So in our case,"
+    },
+    {
+      "index": 229,
+      "start": 688.28,
+      "end": 693.23,
+      "duration": 4.95,
+      "text": "the phase lag is just going to be phi,"
+    },
+    {
+      "index": 230,
+      "start": 701.91,
+      "end": 701.92,
+      "duration": 0.01,
+      "text": "Okay. So this concludes part B."
+    },
+    {
+      "index": 231,
+      "start": 701.92,
+      "end": 704.15,
+      "duration": 2.23,
+      "text": "And then lastly, for part C,"
+    },
+    {
+      "index": 232,
+      "start": 704.16,
+      "end": 706.03,
+      "duration": 1.87,
+      "text": "we're just asked to sketch sketch this"
+    },
+    {
+      "index": 233,
+      "start": 706.04,
+      "end": 709.27,
+      "duration": 3.23,
+      "text": "diagram."
+    },
+    {
+      "index": 234,
+      "start": 710.91,
+      "end": 710.92,
+      "duration": 0.01,
+      "text": "And again,"
+    },
+    {
+      "index": 235,
+      "start": 710.92,
+      "end": 714.63,
+      "duration": 3.71,
+      "text": "this function's going to be"
+    },
+    {
+      "index": 236,
+      "start": 716.95,
+      "end": 716.96,
+      "duration": 0.01,
+      "text": "uh or the most the most direct way of"
+    },
+    {
+      "index": 237,
+      "start": 716.96,
+      "end": 718.87,
+      "duration": 1.91,
+      "text": "sketching this function is through the"
+    },
+    {
+      "index": 238,
+      "start": 718.88,
+      "end": 720.59,
+      "duration": 1.71,
+      "text": "polar form."
+    },
+    {
+      "index": 239,
+      "start": 720.6,
+      "end": 726.51,
+      "duration": 5.91,
+      "text": "So I'll write time on this axis."
+    },
+    {
+      "index": 240,
+      "start": 729.39,
+      "end": 729.4,
+      "duration": 0.01,
+      "text": "And if we just recall"
+    },
+    {
+      "index": 241,
+      "start": 729.4,
+      "end": 732.43,
+      "duration": 3.03,
+      "text": "that a cosine"
+    },
+    {
+      "index": 242,
+      "start": 732.44,
+      "end": 738.47,
+      "duration": 6.03,
+      "text": "might look something like this."
+    },
+    {
+      "index": 243,
+      "start": 744.63,
+      "end": 744.64,
+      "duration": 0.01,
+      "text": "And in our case,"
+    },
+    {
+      "index": 244,
+      "start": 744.64,
+      "end": 747.51,
+      "duration": 2.87,
+      "text": "we're looking at plotting 1 over root 13"
+    },
+    {
+      "index": 245,
+      "start": 747.52,
+      "end": 750.19,
+      "duration": 2.67,
+      "text": "cosine omega t minus phi."
+    },
+    {
+      "index": 246,
+      "start": 750.2,
+      "end": 752.35,
+      "duration": 2.15,
+      "text": "So we're interested in a cosine which"
+    },
+    {
+      "index": 247,
+      "start": 752.36,
+      "end": 754.51,
+      "duration": 2.15,
+      "text": "has an amplitude"
+    },
+    {
+      "index": 248,
+      "start": 754.52,
+      "end": 757.43,
+      "duration": 2.91,
+      "text": "of 1 over root 13"
+    },
+    {
+      "index": 249,
+      "start": 757.44,
+      "end": 759.31,
+      "duration": 1.87,
+      "text": "and a maximum negative value of minus 1"
+    },
+    {
+      "index": 250,
+      "start": 759.32,
+      "end": 764.15,
+      "duration": 4.83,
+      "text": "over root root 13."
+    },
+    {
+      "index": 251,
+      "start": 769.15,
+      "end": 769.16,
+      "duration": 0.01,
+      "text": "is omega."
+    },
+    {
+      "index": 252,
+      "start": 769.16,
+      "end": 771.27,
+      "duration": 2.11,
+      "text": "So there's a there's a quick way on"
+    },
+    {
+      "index": 253,
+      "start": 771.28,
+      "end": 772.91,
+      "duration": 1.63,
+      "text": "finding uh"
+    },
+    {
+      "index": 254,
+      "start": 772.92,
+      "end": 775.07,
+      "duration": 2.15,
+      "text": "the zeros."
+    },
+    {
+      "index": 255,
+      "start": 775.08,
+      "end": 777.63,
+      "duration": 2.55,
+      "text": "So if the zero of a regular cosine is at"
+    },
+    {
+      "index": 256,
+      "start": 777.64,
+      "end": 779.15,
+      "duration": 1.51,
+      "text": "pi over 2,"
+    },
+    {
+      "index": 257,
+      "start": 779.16,
+      "end": 780.15,
+      "duration": 0.99,
+      "text": "then"
+    },
+    {
+      "index": 258,
+      "start": 780.16,
+      "end": 781.95,
+      "duration": 1.79,
+      "text": "uh if we have an angular frequency of"
+    },
+    {
+      "index": 259,
+      "start": 781.96,
+      "end": 783.47,
+      "duration": 1.51,
+      "text": "omega,"
+    },
+    {
+      "index": 260,
+      "start": 783.48,
+      "end": 785.63,
+      "duration": 2.15,
+      "text": "the zero here is going to be pi over 2"
+    },
+    {
+      "index": 261,
+      "start": 785.64,
+      "end": 787.75,
+      "duration": 2.11,
+      "text": "omega."
+    },
+    {
+      "index": 262,
+      "start": 787.76,
+      "end": 789.87,
+      "duration": 2.11,
+      "text": "And this zero is going to be at 3 pi"
+    },
+    {
+      "index": 263,
+      "start": 789.88,
+      "end": 793.99,
+      "duration": 4.11,
+      "text": "over 2 omega."
+    },
+    {
+      "index": 264,
+      "start": 796.35,
+      "end": 796.36,
+      "duration": 0.01,
+      "text": "And lastly, this is not the this is not"
+    },
+    {
+      "index": 265,
+      "start": 796.36,
+      "end": 798.87,
+      "duration": 2.51,
+      "text": "necessarily the cosine of our function."
+    },
+    {
+      "index": 266,
+      "start": 798.88,
+      "end": 801.23,
+      "duration": 2.35,
+      "text": "Our function is this cosine. However, it"
+    },
+    {
+      "index": 267,
+      "start": 801.24,
+      "end": 803.39,
+      "duration": 2.15,
+      "text": "must be picked up and shifted over by"
+    },
+    {
+      "index": 268,
+      "start": 803.4,
+      "end": 805.55,
+      "duration": 2.15,
+      "text": "some phase lag phi."
+    },
+    {
+      "index": 269,
+      "start": 805.56,
+      "end": 806.99,
+      "duration": 1.43,
+      "text": "So in our case,"
+    },
+    {
+      "index": 270,
+      "start": 807.0,
+      "end": 808.99,
+      "duration": 1.99,
+      "text": "the function we're actually looking for"
+    },
+    {
+      "index": 271,
+      "start": 809.0,
+      "end": 811.71,
+      "duration": 2.71,
+      "text": "is some shifted cosine which looks like"
+    },
+    {
+      "index": 272,
+      "start": 811.72,
+      "end": 822.31,
+      "duration": 10.59,
+      "text": "this."
+    },
+    {
+      "index": 273,
+      "start": 835.11,
+      "end": 835.12,
+      "duration": 0.01,
+      "text": "Okay. So this just gives us a quick"
+    },
+    {
+      "index": 274,
+      "start": 835.12,
+      "end": 837.23,
+      "duration": 2.11,
+      "text": "sketch of this function."
+    },
+    {
+      "index": 275,
+      "start": 837.24,
+      "end": 839.03,
+      "duration": 1.79,
+      "text": "And again, we note that"
+    },
+    {
+      "index": 276,
+      "start": 839.04,
+      "end": 840.47,
+      "duration": 1.43,
+      "text": "uh"
+    },
+    {
+      "index": 277,
+      "start": 840.48,
+      "end": 841.87,
+      "duration": 1.39,
+      "text": "we were able to plot this using the"
+    },
+    {
+      "index": 278,
+      "start": 841.88,
+      "end": 844.11,
+      "duration": 2.23,
+      "text": "polar form uh very quickly. And the"
+    },
+    {
+      "index": 279,
+      "start": 844.12,
+      "end": 845.95,
+      "duration": 1.83,
+      "text": "reason is because the polar form gives"
+    },
+    {
+      "index": 280,
+      "start": 845.96,
+      "end": 848.11,
+      "duration": 2.15,
+      "text": "us the amplitude,"
+    },
+    {
+      "index": 281,
+      "start": 848.12,
+      "end": 849.79,
+      "duration": 1.67,
+      "text": "the circular frequency,"
+    },
+    {
+      "index": 282,
+      "start": 849.8,
+      "end": 851.39,
+      "duration": 1.59,
+      "text": "and the phase lag."
+    },
+    {
+      "index": 283,
+      "start": 851.4,
+      "end": 852.91,
+      "duration": 1.51,
+      "text": "Whereas if we were to take a look at the"
+    },
+    {
+      "index": 284,
+      "start": 852.92,
+      "end": 854.829,
+      "duration": 1.909,
+      "text": "equivalent rectangular form,"
+    },
+    {
+      "index": 285,
+      "start": 854.839,
+      "end": 856.71,
+      "duration": 1.871,
+      "text": "it's a little less obvious. The"
+    },
+    {
+      "index": 286,
+      "start": 856.72,
+      "end": 858.23,
+      "duration": 1.51,
+      "text": "rectangular form is actually the sum of"
+    },
+    {
+      "index": 287,
+      "start": 858.24,
+      "end": 859.79,
+      "duration": 1.55,
+      "text": "a sine and a cosine."
+    },
+    {
+      "index": 288,
+      "start": 859.8,
+      "end": 861.47,
+      "duration": 1.67,
+      "text": "And unless you can just add signs and"
+    },
+    {
+      "index": 289,
+      "start": 861.48,
+      "end": 863.51,
+      "duration": 2.03,
+      "text": "cosines in your head very quickly, it's"
+    },
+    {
+      "index": 290,
+      "start": 863.52,
+      "end": 865.51,
+      "duration": 1.99,
+      "text": "a little less obvious on how to come up"
+    },
+    {
+      "index": 291,
+      "start": 865.52,
+      "end": 867.67,
+      "duration": 2.15,
+      "text": "with this picture."
+    },
+    {
+      "index": 292,
+      "start": 867.68,
+      "end": 869.99,
+      "duration": 2.31,
+      "text": "Okay. So just to summarize, we've kind"
+    },
+    {
+      "index": 293,
+      "start": 870.0,
+      "end": 871.91,
+      "duration": 1.91,
+      "text": "of used we've used"
+    },
+    {
+      "index": 294,
+      "start": 871.92,
+      "end": 874.35,
+      "duration": 2.43,
+      "text": "complex functions uh to analyze"
+    },
+    {
+      "index": 295,
+      "start": 874.36,
+      "end": 876.39,
+      "duration": 2.03,
+      "text": "sinusoidal functions."
+    },
+    {
+      "index": 296,
+      "start": 876.4,
+      "end": 878.99,
+      "duration": 2.59,
+      "text": "And uh we've used uh polar form and"
+    },
+    {
+      "index": 297,
+      "start": 879.0,
+      "end": 881.23,
+      "duration": 2.23,
+      "text": "rectangular form to get a handle on uh"
+    },
+    {
+      "index": 298,
+      "start": 881.24,
+      "end": 883.15,
+      "duration": 1.91,
+      "text": "the complex functions."
+    },
+    {
+      "index": 299,
+      "start": 883.16,
+      "end": 885.79,
+      "duration": 2.63,
+      "text": "And specifically, complex functions"
+    },
+    {
+      "index": 300,
+      "start": 885.8,
+      "end": 888.15,
+      "duration": 2.35,
+      "text": "are a very good way to uh represent"
+    },
+    {
+      "index": 301,
+      "start": 888.16,
+      "end": 890.23,
+      "duration": 2.07,
+      "text": "sinusoidal functions."
+    },
+    {
+      "index": 302,
+      "start": 890.24,
+      "end": 891.19,
+      "duration": 0.95,
+      "text": "And"
+    },
+    {
+      "index": 303,
+      "start": 891.2,
+      "end": 893.15,
+      "duration": 1.95,
+      "text": "uh just to reiterate, the reason is that"
+    },
+    {
+      "index": 304,
+      "start": 893.16,
+      "end": 894.79,
+      "duration": 1.63,
+      "text": "they contain a lot of information that"
+    },
+    {
+      "index": 305,
+      "start": 894.8,
+      "end": 895.67,
+      "duration": 0.87,
+      "text": "we can"
+    },
+    {
+      "index": 306,
+      "start": 895.68,
+      "end": 897.55,
+      "duration": 1.87,
+      "text": "uh graphically uh"
+    },
+    {
+      "index": 307,
+      "start": 897.56,
+      "end": 900.71,
+      "duration": 3.15,
+      "text": "handle and turn into a sketch."
+    },
+    {
+      "index": 308,
+      "start": 900.72,
+      "end": 902.43,
+      "duration": 1.71,
+      "text": "So I'll just conclude there and I'll see"
+    },
+    {
+      "index": 309,
+      "start": 902.44,
+      "end": 905.04,
+      "duration": 2.6,
+      "text": "you next time."
+    }
+  ],
+  "course": {
+    "category": "Mathematics",
+    "title": "Differential Equations",
+    "source_url": "https://www.youtube.com/playlist?list=PL64BDFBDA2AF24F7E"
+  }
+}

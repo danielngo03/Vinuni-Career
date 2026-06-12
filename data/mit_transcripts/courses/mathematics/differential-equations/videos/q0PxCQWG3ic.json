@@ -1,0 +1,1621 @@
+{
+  "video": {
+    "id": "q0PxCQWG3ic",
+    "title": "Step and Delta Functions | MIT 18.03SC Differential Equations, Fall 2011",
+    "url": "https://www.youtube.com/watch?v=q0PxCQWG3ic",
+    "channel": "MIT OpenCourseWare",
+    "duration": 564,
+    "language": "en"
+  },
+  "segment_count": 229,
+  "segments": [
+    {
+      "index": 0,
+      "start": 7.39,
+      "end": 7.4,
+      "duration": 0.01,
+      "text": "So, in this recitation we're going to"
+    },
+    {
+      "index": 1,
+      "start": 7.4,
+      "end": 8.99,
+      "duration": 1.59,
+      "text": "look at step and delta functions,"
+    },
+    {
+      "index": 2,
+      "start": 9.0,
+      "end": 10.27,
+      "duration": 1.27,
+      "text": "integration, and generalized"
+    },
+    {
+      "index": 3,
+      "start": 10.28,
+      "end": 12.39,
+      "duration": 2.11,
+      "text": "derivatives. So, the first part you were"
+    },
+    {
+      "index": 4,
+      "start": 12.4,
+      "end": 15.03,
+      "duration": 2.63,
+      "text": "asked to compute the integral from 0"
+    },
+    {
+      "index": 5,
+      "start": 15.04,
+      "end": 18.23,
+      "duration": 3.19,
+      "text": "minus to infinity delta t exponential t"
+    },
+    {
+      "index": 6,
+      "start": 18.24,
+      "end": 19.71,
+      "duration": 1.47,
+      "text": "squared dt."
+    },
+    {
+      "index": 7,
+      "start": 19.72,
+      "end": 22.03,
+      "duration": 2.31,
+      "text": "The second one is from zero zero minus"
+    },
+    {
+      "index": 8,
+      "start": 22.04,
+      "end": 24.11,
+      "duration": 2.07,
+      "text": "to infinity delta t minus two"
+    },
+    {
+      "index": 9,
+      "start": 24.12,
+      "end": 27.67,
+      "duration": 3.55,
+      "text": "exponential of t squared sine t cos 2t."
+    },
+    {
+      "index": 10,
+      "start": 27.68,
+      "end": 30.11,
+      "duration": 2.43,
+      "text": "The third one is zero plus to infinity"
+    },
+    {
+      "index": 11,
+      "start": 30.12,
+      "end": 32.35,
+      "duration": 2.23,
+      "text": "delta t exponential of t squared dt. So,"
+    },
+    {
+      "index": 12,
+      "start": 32.36,
+      "end": 35.03,
+      "duration": 2.67,
+      "text": "notice the first is the same as A except"
+    },
+    {
+      "index": 13,
+      "start": 35.04,
+      "end": 37.27,
+      "duration": 2.23,
+      "text": "that the bounds of integration changed."
+    },
+    {
+      "index": 14,
+      "start": 37.28,
+      "end": 39.27,
+      "duration": 1.99,
+      "text": "The second part we're asked to find the"
+    },
+    {
+      "index": 15,
+      "start": 39.28,
+      "end": 40.71,
+      "duration": 1.43,
+      "text": "generalized derivatives of these two"
+    },
+    {
+      "index": 16,
+      "start": 40.72,
+      "end": 42.95,
+      "duration": 2.23,
+      "text": "functions, where U here is just a step"
+    },
+    {
+      "index": 17,
+      "start": 42.96,
+      "end": 45.79,
+      "duration": 2.83,
+      "text": "function that you saw before. And uh"
+    },
+    {
+      "index": 18,
+      "start": 45.8,
+      "end": 49.43,
+      "duration": 3.63,
+      "text": "yeah, so it's 3ut minus 2ut minus 1. And"
+    },
+    {
+      "index": 19,
+      "start": 49.44,
+      "end": 51.99,
+      "duration": 2.55,
+      "text": "the second one is t squared for t"
+    },
+    {
+      "index": 20,
+      "start": 52.0,
+      "end": 54.31,
+      "duration": 2.31,
+      "text": "negative and exponential minus t for t"
+    },
+    {
+      "index": 21,
+      "start": 54.32,
+      "end": 56.31,
+      "duration": 1.99,
+      "text": "positive. So, why don't you pause the"
+    },
+    {
+      "index": 22,
+      "start": 56.32,
+      "end": 57.95,
+      "duration": 1.63,
+      "text": "video and work through this example and"
+    },
+    {
+      "index": 23,
+      "start": 57.96,
+      "end": 68.59,
+      "duration": 10.63,
+      "text": "I'll be right back."
+    },
+    {
+      "index": 24,
+      "start": 69.95,
+      "end": 69.96,
+      "duration": 0.01,
+      "text": "Welcome back."
+    },
+    {
+      "index": 25,
+      "start": 69.96,
+      "end": 74.75,
+      "duration": 4.79,
+      "text": "So, let's compute the first one."
+    },
+    {
+      "index": 26,
+      "start": 78.35,
+      "end": 78.36,
+      "duration": 0.01,
+      "text": "0 minus infinity"
+    },
+    {
+      "index": 27,
+      "start": 78.36,
+      "end": 79.99,
+      "duration": 1.63,
+      "text": "delta t"
+    },
+    {
+      "index": 28,
+      "start": 80.0,
+      "end": 82.63,
+      "duration": 2.63,
+      "text": "exponential t squared"
+    },
+    {
+      "index": 29,
+      "start": 82.64,
+      "end": 83.99,
+      "duration": 1.35,
+      "text": "dt."
+    },
+    {
+      "index": 30,
+      "start": 84.0,
+      "end": 86.87,
+      "duration": 2.87,
+      "text": "So, just to remind you"
+    },
+    {
+      "index": 31,
+      "start": 86.88,
+      "end": 88.95,
+      "duration": 2.07,
+      "text": "the delta function is everywhere zero"
+    },
+    {
+      "index": 32,
+      "start": 88.96,
+      "end": 91.19,
+      "duration": 2.23,
+      "text": "except at the value zero and we"
+    },
+    {
+      "index": 33,
+      "start": 91.2,
+      "end": 94.07,
+      "duration": 2.87,
+      "text": "represent it with an arrow."
+    },
+    {
+      "index": 34,
+      "start": 94.08,
+      "end": 96.39,
+      "duration": 2.31,
+      "text": "And the integral of the delta would be"
+    },
+    {
+      "index": 35,
+      "start": 96.4,
+      "end": 98.47,
+      "duration": 2.07,
+      "text": "one from minus infinity to plus"
+    },
+    {
+      "index": 36,
+      "start": 98.48,
+      "end": 101.15,
+      "duration": 2.67,
+      "text": "infinity. In this in this integral we're"
+    },
+    {
+      "index": 37,
+      "start": 101.16,
+      "end": 103.51,
+      "duration": 2.35,
+      "text": "integrating from 0 minus to infinity,"
+    },
+    {
+      "index": 38,
+      "start": 103.52,
+      "end": 106.47,
+      "duration": 2.95,
+      "text": "which means that the zero is included in"
+    },
+    {
+      "index": 39,
+      "start": 106.48,
+      "end": 109.35,
+      "duration": 2.87,
+      "text": "our interval from 0 minus to infinity."
+    },
+    {
+      "index": 40,
+      "start": 109.36,
+      "end": 112.23,
+      "duration": 2.87,
+      "text": "Therefore this integral is basically"
+    },
+    {
+      "index": 41,
+      "start": 112.24,
+      "end": 114.19,
+      "duration": 1.95,
+      "text": "assigning the value to this function"
+    },
+    {
+      "index": 42,
+      "start": 114.2,
+      "end": 116.55,
+      "duration": 2.35,
+      "text": "exponential t squared and the value that"
+    },
+    {
+      "index": 43,
+      "start": 116.56,
+      "end": 118.23,
+      "duration": 1.67,
+      "text": "it's assigning to it is the value it"
+    },
+    {
+      "index": 44,
+      "start": 118.24,
+      "end": 120.19,
+      "duration": 1.95,
+      "text": "would take at t equals to zero where the"
+    },
+    {
+      "index": 45,
+      "start": 120.2,
+      "end": 122.91,
+      "duration": 2.71,
+      "text": "delta is non-zero. And so really clearly"
+    },
+    {
+      "index": 46,
+      "start": 122.92,
+      "end": 125.99,
+      "duration": 3.07,
+      "text": "this is just exponential of zero"
+    },
+    {
+      "index": 47,
+      "start": 126.0,
+      "end": 129.109,
+      "duration": 3.109,
+      "text": "and it's give us one."
+    },
+    {
+      "index": 48,
+      "start": 129.119,
+      "end": 132.71,
+      "duration": 3.591,
+      "text": "For the second one integral"
+    },
+    {
+      "index": 49,
+      "start": 135.59,
+      "end": 135.6,
+      "duration": 0.01,
+      "text": "goes from 0 minus to infinity delta t"
+    },
+    {
+      "index": 50,
+      "start": 135.6,
+      "end": 137.47,
+      "duration": 1.87,
+      "text": "minus two"
+    },
+    {
+      "index": 51,
+      "start": 137.48,
+      "end": 139.87,
+      "duration": 2.39,
+      "text": "exponential a more complicated function"
+    },
+    {
+      "index": 52,
+      "start": 139.88,
+      "end": 141.83,
+      "duration": 1.95,
+      "text": "t squared"
+    },
+    {
+      "index": 53,
+      "start": 141.84,
+      "end": 144.75,
+      "duration": 2.91,
+      "text": "sine t"
+    },
+    {
+      "index": 54,
+      "start": 146.23,
+      "end": 146.24,
+      "duration": 0.01,
+      "text": "cos 2t."
+    },
+    {
+      "index": 55,
+      "start": 146.24,
+      "end": 147.71,
+      "duration": 1.47,
+      "text": "So, now let's represent this delta"
+    },
+    {
+      "index": 56,
+      "start": 147.72,
+      "end": 150.35,
+      "duration": 2.63,
+      "text": "function here."
+    },
+    {
+      "index": 57,
+      "start": 150.36,
+      "end": 153.03,
+      "duration": 2.67,
+      "text": "So, this is just our zero axis"
+    },
+    {
+      "index": 58,
+      "start": 153.04,
+      "end": 155.83,
+      "duration": 2.79,
+      "text": "and the delta here is zero everywhere"
+    },
+    {
+      "index": 59,
+      "start": 155.84,
+      "end": 158.15,
+      "duration": 2.31,
+      "text": "except at two where we would represent"
+    },
+    {
+      "index": 60,
+      "start": 158.16,
+      "end": 160.71,
+      "duration": 2.55,
+      "text": "it again with an arrow and amplitude"
+    },
+    {
+      "index": 61,
+      "start": 160.72,
+      "end": 162.87,
+      "duration": 2.15,
+      "text": "one, okay? So, this"
+    },
+    {
+      "index": 62,
+      "start": 162.88,
+      "end": 165.59,
+      "duration": 2.71,
+      "text": "delta is zero everywhere except at two"
+    },
+    {
+      "index": 63,
+      "start": 165.6,
+      "end": 167.75,
+      "duration": 2.15,
+      "text": "where it would assign the value to the"
+    },
+    {
+      "index": 64,
+      "start": 167.76,
+      "end": 169.31,
+      "duration": 1.55,
+      "text": "function"
+    },
+    {
+      "index": 65,
+      "start": 169.32,
+      "end": 172.39,
+      "duration": 3.07,
+      "text": "next to it at the value t equals to two."
+    },
+    {
+      "index": 66,
+      "start": 172.4,
+      "end": 174.59,
+      "duration": 2.19,
+      "text": "So, really this integration"
+    },
+    {
+      "index": 67,
+      "start": 174.6,
+      "end": 176.71,
+      "duration": 2.11,
+      "text": "gives us just"
+    },
+    {
+      "index": 68,
+      "start": 176.72,
+      "end": 179.59,
+      "duration": 2.87,
+      "text": "the value of this function at t equal"
+    },
+    {
+      "index": 69,
+      "start": 179.6,
+      "end": 181.83,
+      "duration": 2.23,
+      "text": "two. So, four"
+    },
+    {
+      "index": 70,
+      "start": 181.84,
+      "end": 184.19,
+      "duration": 2.35,
+      "text": "sine two"
+    },
+    {
+      "index": 71,
+      "start": 184.2,
+      "end": 186.59,
+      "duration": 2.39,
+      "text": "cos four."
+    },
+    {
+      "index": 72,
+      "start": 186.6,
+      "end": 188.47,
+      "duration": 1.87,
+      "text": "And here the key was that again this"
+    },
+    {
+      "index": 73,
+      "start": 188.48,
+      "end": 190.43,
+      "duration": 1.95,
+      "text": "interval of integration from 0 minus to"
+    },
+    {
+      "index": 74,
+      "start": 190.44,
+      "end": 192.91,
+      "duration": 2.47,
+      "text": "infinity and clearly includes the value"
+    },
+    {
+      "index": 75,
+      "start": 192.92,
+      "end": 195.47,
+      "duration": 2.55,
+      "text": "at which delta function is non-zero."
+    },
+    {
+      "index": 76,
+      "start": 195.48,
+      "end": 198.23,
+      "duration": 2.75,
+      "text": "So, for the last one"
+    },
+    {
+      "index": 77,
+      "start": 198.24,
+      "end": 200.67,
+      "duration": 2.43,
+      "text": "we return to our first integral except"
+    },
+    {
+      "index": 78,
+      "start": 200.68,
+      "end": 202.07,
+      "duration": 1.39,
+      "text": "that now we're changing the bounds of"
+    },
+    {
+      "index": 79,
+      "start": 202.08,
+      "end": 203.51,
+      "duration": 1.43,
+      "text": "integration"
+    },
+    {
+      "index": 80,
+      "start": 203.52,
+      "end": 209.75,
+      "duration": 6.23,
+      "text": "from 0 plus to infinity."
+    },
+    {
+      "index": 81,
+      "start": 212.59,
+      "end": 212.6,
+      "duration": 0.01,
+      "text": "So, now if I do a representation"
+    },
+    {
+      "index": 82,
+      "start": 212.6,
+      "end": 214.35,
+      "duration": 1.75,
+      "text": "of the delta function that we're dealing"
+    },
+    {
+      "index": 83,
+      "start": 214.36,
+      "end": 217.11,
+      "duration": 2.75,
+      "text": "with, so delta centered at one, and the"
+    },
+    {
+      "index": 84,
+      "start": 217.12,
+      "end": 220.03,
+      "duration": 2.91,
+      "text": "interval of integration"
+    },
+    {
+      "index": 85,
+      "start": 220.04,
+      "end": 222.31,
+      "duration": 2.27,
+      "text": "we have an open interval now"
+    },
+    {
+      "index": 86,
+      "start": 222.32,
+      "end": 224.39,
+      "duration": 2.07,
+      "text": "that does not include the value at which"
+    },
+    {
+      "index": 87,
+      "start": 224.4,
+      "end": 227.39,
+      "duration": 2.99,
+      "text": "delta is not equal to zero. So,"
+    },
+    {
+      "index": 88,
+      "start": 227.4,
+      "end": 229.47,
+      "duration": 2.07,
+      "text": "everywhere this function would just be"
+    },
+    {
+      "index": 89,
+      "start": 229.48,
+      "end": 230.47,
+      "duration": 0.99,
+      "text": "assigned"
+    },
+    {
+      "index": 90,
+      "start": 230.48,
+      "end": 233.35,
+      "duration": 2.87,
+      "text": "the its value at it's just be multiplied"
+    },
+    {
+      "index": 91,
+      "start": 233.36,
+      "end": 235.11,
+      "duration": 1.75,
+      "text": "by the function that is zero. And so"
+    },
+    {
+      "index": 92,
+      "start": 235.12,
+      "end": 237.43,
+      "duration": 2.31,
+      "text": "basically it's like multiplying"
+    },
+    {
+      "index": 93,
+      "start": 237.44,
+      "end": 239.15,
+      "duration": 1.71,
+      "text": "this function by zero and it just gives"
+    },
+    {
+      "index": 94,
+      "start": 239.16,
+      "end": 242.11,
+      "duration": 2.95,
+      "text": "us zero. It's like the delta fell off of"
+    },
+    {
+      "index": 95,
+      "start": 242.12,
+      "end": 243.67,
+      "duration": 1.55,
+      "text": "our interval of integration, so we're"
+    },
+    {
+      "index": 96,
+      "start": 243.68,
+      "end": 246.55,
+      "duration": 2.87,
+      "text": "just left with a zero function."
+    },
+    {
+      "index": 97,
+      "start": 246.56,
+      "end": 250.79,
+      "duration": 4.23,
+      "text": "So, let's move to the second part."
+    },
+    {
+      "index": 98,
+      "start": 252.43,
+      "end": 252.44,
+      "duration": 0.01,
+      "text": "The second part asks us to find the"
+    },
+    {
+      "index": 99,
+      "start": 252.44,
+      "end": 255.43,
+      "duration": 2.99,
+      "text": "generalized derivative"
+    },
+    {
+      "index": 100,
+      "start": 255.44,
+      "end": 257.71,
+      "duration": 2.27,
+      "text": "to f of t"
+    },
+    {
+      "index": 101,
+      "start": 257.72,
+      "end": 261.229,
+      "duration": 3.509,
+      "text": "equals 3ut"
+    },
+    {
+      "index": 102,
+      "start": 261.239,
+      "end": 262.87,
+      "duration": 1.631,
+      "text": "minus two"
+    },
+    {
+      "index": 103,
+      "start": 262.88,
+      "end": 264.27,
+      "duration": 1.39,
+      "text": "u"
+    },
+    {
+      "index": 104,
+      "start": 264.28,
+      "end": 266.55,
+      "duration": 2.27,
+      "text": "t minus one."
+    },
+    {
+      "index": 105,
+      "start": 266.56,
+      "end": 268.75,
+      "duration": 2.19,
+      "text": "So, just to remind you here"
+    },
+    {
+      "index": 106,
+      "start": 268.76,
+      "end": 270.87,
+      "duration": 2.11,
+      "text": "of what u of t is are, just want to"
+    },
+    {
+      "index": 107,
+      "start": 270.88,
+      "end": 272.87,
+      "duration": 1.99,
+      "text": "sketch"
+    },
+    {
+      "index": 108,
+      "start": 272.88,
+      "end": 274.91,
+      "duration": 2.03,
+      "text": "a few things."
+    },
+    {
+      "index": 109,
+      "start": 274.92,
+      "end": 276.75,
+      "duration": 1.83,
+      "text": "So, first"
+    },
+    {
+      "index": 110,
+      "start": 276.76,
+      "end": 278.39,
+      "duration": 1.63,
+      "text": "u of t is just a step function that"
+    },
+    {
+      "index": 111,
+      "start": 278.4,
+      "end": 280.31,
+      "duration": 1.91,
+      "text": "would be zero everywhere and would take"
+    },
+    {
+      "index": 112,
+      "start": 280.32,
+      "end": 283.27,
+      "duration": 2.95,
+      "text": "the value one for t larger than zero."
+    },
+    {
+      "index": 113,
+      "start": 283.28,
+      "end": 284.95,
+      "duration": 1.67,
+      "text": "So, this first part here would just be"
+    },
+    {
+      "index": 114,
+      "start": 284.96,
+      "end": 287.43,
+      "duration": 2.47,
+      "text": "non-zero for t larger than zero. Instead"
+    },
+    {
+      "index": 115,
+      "start": 287.44,
+      "end": 289.19,
+      "duration": 1.75,
+      "text": "of being assigned value one, it's just"
+    },
+    {
+      "index": 116,
+      "start": 289.2,
+      "end": 290.75,
+      "duration": 1.55,
+      "text": "be assigned value three cuz we're"
+    },
+    {
+      "index": 117,
+      "start": 290.76,
+      "end": 293.83,
+      "duration": 3.07,
+      "text": "multiplying the u of t by three."
+    },
+    {
+      "index": 118,
+      "start": 293.84,
+      "end": 296.43,
+      "duration": 2.59,
+      "text": "So, this first part would look like"
+    },
+    {
+      "index": 119,
+      "start": 296.44,
+      "end": 297.79,
+      "duration": 1.35,
+      "text": "this."
+    },
+    {
+      "index": 120,
+      "start": 297.8,
+      "end": 300.71,
+      "duration": 2.91,
+      "text": "The second part here would be u shifted"
+    },
+    {
+      "index": 121,
+      "start": 300.72,
+      "end": 301.91,
+      "duration": 1.19,
+      "text": "to t"
+    },
+    {
+      "index": 122,
+      "start": 301.92,
+      "end": 305.47,
+      "duration": 3.55,
+      "text": "t by by minus one, which means that u"
+    },
+    {
+      "index": 123,
+      "start": 305.48,
+      "end": 308.63,
+      "duration": 3.15,
+      "text": "is zero everywhere for t less than one."
+    },
+    {
+      "index": 124,
+      "start": 308.64,
+      "end": 310.51,
+      "duration": 1.87,
+      "text": "So, you would have zero function here."
+    },
+    {
+      "index": 125,
+      "start": 310.52,
+      "end": 313.23,
+      "duration": 2.71,
+      "text": "So, let me just do dots."
+    },
+    {
+      "index": 126,
+      "start": 313.24,
+      "end": 315.95,
+      "duration": 2.71,
+      "text": "But, it should be on the same axis and"
+    },
+    {
+      "index": 127,
+      "start": 315.96,
+      "end": 318.71,
+      "duration": 2.75,
+      "text": "one for t larger than one. But, here"
+    },
+    {
+      "index": 128,
+      "start": 318.72,
+      "end": 320.55,
+      "duration": 1.83,
+      "text": "we're giving it a multiplying it by"
+    },
+    {
+      "index": 129,
+      "start": 320.56,
+      "end": 322.55,
+      "duration": 1.99,
+      "text": "factor minus two. So, really what we"
+    },
+    {
+      "index": 130,
+      "start": 322.56,
+      "end": 325.91,
+      "duration": 3.35,
+      "text": "have"
+    },
+    {
+      "index": 131,
+      "start": 331.91,
+      "end": 331.92,
+      "duration": 0.01,
+      "text": "function that is shifted down"
+    },
+    {
+      "index": 132,
+      "start": 331.92,
+      "end": 333.99,
+      "duration": 2.07,
+      "text": "to minus two. So, the sum of these two"
+    },
+    {
+      "index": 133,
+      "start": 334.0,
+      "end": 336.47,
+      "duration": 2.47,
+      "text": "contributions"
+    },
+    {
+      "index": 134,
+      "start": 336.48,
+      "end": 338.91,
+      "duration": 2.43,
+      "text": "is zero for t negative"
+    },
+    {
+      "index": 135,
+      "start": 338.92,
+      "end": 340.71,
+      "duration": 1.79,
+      "text": "takes the value three"
+    },
+    {
+      "index": 136,
+      "start": 340.72,
+      "end": 344.11,
+      "duration": 3.39,
+      "text": "for t between zero and one"
+    },
+    {
+      "index": 137,
+      "start": 344.12,
+      "end": 345.91,
+      "duration": 1.79,
+      "text": "and the value one"
+    },
+    {
+      "index": 138,
+      "start": 345.92,
+      "end": 347.43,
+      "duration": 1.51,
+      "text": "three minus two"
+    },
+    {
+      "index": 139,
+      "start": 347.44,
+      "end": 349.23,
+      "duration": 1.79,
+      "text": "for"
+    },
+    {
+      "index": 140,
+      "start": 349.24,
+      "end": 352.15,
+      "duration": 2.91,
+      "text": "t larger than one, okay? So, clearly"
+    },
+    {
+      "index": 141,
+      "start": 352.16,
+      "end": 354.11,
+      "duration": 1.95,
+      "text": "here we have discontinuities at t equals"
+    },
+    {
+      "index": 142,
+      "start": 354.12,
+      "end": 355.99,
+      "duration": 1.87,
+      "text": "to zero and t equals to one."
+    },
+    {
+      "index": 143,
+      "start": 356.0,
+      "end": 356.95,
+      "duration": 0.95,
+      "text": "So, let's just write down the"
+    },
+    {
+      "index": 144,
+      "start": 356.96,
+      "end": 359.23,
+      "duration": 2.27,
+      "text": "derivative."
+    },
+    {
+      "index": 145,
+      "start": 359.24,
+      "end": 361.35,
+      "duration": 2.11,
+      "text": "The generalized derivative here"
+    },
+    {
+      "index": 146,
+      "start": 361.36,
+      "end": 362.67,
+      "duration": 1.31,
+      "text": "would lead us first to compute the"
+    },
+    {
+      "index": 147,
+      "start": 362.68,
+      "end": 364.35,
+      "duration": 1.67,
+      "text": "derivatives when"
+    },
+    {
+      "index": 148,
+      "start": 364.36,
+      "end": 366.35,
+      "duration": 1.99,
+      "text": "where the function is continuous. So,"
+    },
+    {
+      "index": 149,
+      "start": 366.36,
+      "end": 368.19,
+      "duration": 1.83,
+      "text": "from minus infinity to zero it's a"
+    },
+    {
+      "index": 150,
+      "start": 368.2,
+      "end": 370.23,
+      "duration": 2.03,
+      "text": "constant, so derivative would be zero."
+    },
+    {
+      "index": 151,
+      "start": 370.24,
+      "end": 372.43,
+      "duration": 2.19,
+      "text": "Between zero and one it's constant,"
+    },
+    {
+      "index": 152,
+      "start": 372.44,
+      "end": 374.31,
+      "duration": 1.87,
+      "text": "derivative would be zero. And from one"
+    },
+    {
+      "index": 153,
+      "start": 374.32,
+      "end": 376.35,
+      "duration": 2.03,
+      "text": "to infinity it would also give us zero."
+    },
+    {
+      "index": 154,
+      "start": 376.36,
+      "end": 377.91,
+      "duration": 1.55,
+      "text": "So, we would have a zero contribution"
+    },
+    {
+      "index": 155,
+      "start": 377.92,
+      "end": 379.79,
+      "duration": 1.87,
+      "text": "from the the continuous part of the"
+    },
+    {
+      "index": 156,
+      "start": 379.8,
+      "end": 381.35,
+      "duration": 1.55,
+      "text": "function if you wish."
+    },
+    {
+      "index": 157,
+      "start": 381.36,
+      "end": 382.91,
+      "duration": 1.55,
+      "text": "But, we still need to account for the"
+    },
+    {
+      "index": 158,
+      "start": 382.92,
+      "end": 384.95,
+      "duration": 2.03,
+      "text": "discontinuities. So, at zero we have a"
+    },
+    {
+      "index": 159,
+      "start": 384.96,
+      "end": 387.31,
+      "duration": 2.35,
+      "text": "jump from zero to three and that we"
+    },
+    {
+      "index": 160,
+      "start": 387.32,
+      "end": 390.03,
+      "duration": 2.71,
+      "text": "learned can be written down as a delta"
+    },
+    {
+      "index": 161,
+      "start": 390.04,
+      "end": 392.03,
+      "duration": 1.99,
+      "text": "function"
+    },
+    {
+      "index": 162,
+      "start": 392.04,
+      "end": 395.71,
+      "duration": 3.67,
+      "text": "of magnitude three centered at zero."
+    },
+    {
+      "index": 163,
+      "start": 395.72,
+      "end": 397.51,
+      "duration": 1.79,
+      "text": "After that we have another jump. Now,"
+    },
+    {
+      "index": 164,
+      "start": 397.52,
+      "end": 399.43,
+      "duration": 1.91,
+      "text": "it's from three to one. So, it's a jump"
+    },
+    {
+      "index": 165,
+      "start": 399.44,
+      "end": 402.63,
+      "duration": 3.19,
+      "text": "of minus two amplitude centered at one."
+    },
+    {
+      "index": 166,
+      "start": 402.64,
+      "end": 404.59,
+      "duration": 1.95,
+      "text": "So, here we can also do that with the"
+    },
+    {
+      "index": 167,
+      "start": 404.6,
+      "end": 406.79,
+      "duration": 2.19,
+      "text": "delta, but we just need also to shift it"
+    },
+    {
+      "index": 168,
+      "start": 406.8,
+      "end": 409.23,
+      "duration": 2.43,
+      "text": "by minus one to to show clearly that the"
+    },
+    {
+      "index": 169,
+      "start": 409.24,
+      "end": 411.11,
+      "duration": 1.87,
+      "text": "jump occurs at one"
+    },
+    {
+      "index": 170,
+      "start": 411.12,
+      "end": 414.15,
+      "duration": 3.03,
+      "text": "and multiply this by minus two to show"
+    },
+    {
+      "index": 171,
+      "start": 414.16,
+      "end": 417.07,
+      "duration": 2.91,
+      "text": "the amplitude of the jump down, okay?"
+    },
+    {
+      "index": 172,
+      "start": 417.08,
+      "end": 418.99,
+      "duration": 1.91,
+      "text": "So, if we were now to represent it f"
+    },
+    {
+      "index": 173,
+      "start": 419.0,
+      "end": 422.79,
+      "duration": 3.79,
+      "text": "prime"
+    },
+    {
+      "index": 174,
+      "start": 424.67,
+      "end": 424.68,
+      "duration": 0.01,
+      "text": "basically the regular part zero, so"
+    },
+    {
+      "index": 175,
+      "start": 424.68,
+      "end": 426.15,
+      "duration": 1.47,
+      "text": "there's nothing to"
+    },
+    {
+      "index": 176,
+      "start": 426.16,
+      "end": 427.51,
+      "duration": 1.35,
+      "text": "to write down except just a zero"
+    },
+    {
+      "index": 177,
+      "start": 427.52,
+      "end": 430.35,
+      "duration": 2.83,
+      "text": "function and the discontinuities that"
+    },
+    {
+      "index": 178,
+      "start": 430.36,
+      "end": 432.75,
+      "duration": 2.39,
+      "text": "I'm just going to represent on the graph"
+    },
+    {
+      "index": 179,
+      "start": 432.76,
+      "end": 434.71,
+      "duration": 1.95,
+      "text": "would be the delta function"
+    },
+    {
+      "index": 180,
+      "start": 434.72,
+      "end": 438.67,
+      "duration": 3.95,
+      "text": "centered at zero of magnitude three."
+    },
+    {
+      "index": 181,
+      "start": 441.75,
+      "end": 441.76,
+      "duration": 0.01,
+      "text": "And delta function centered around one"
+    },
+    {
+      "index": 182,
+      "start": 441.76,
+      "end": 444.91,
+      "duration": 3.15,
+      "text": "of magnitude minus two."
+    },
+    {
+      "index": 183,
+      "start": 444.92,
+      "end": 446.87,
+      "duration": 1.95,
+      "text": "And the rest would just be the zero"
+    },
+    {
+      "index": 184,
+      "start": 446.88,
+      "end": 449.19,
+      "duration": 2.31,
+      "text": "function."
+    },
+    {
+      "index": 185,
+      "start": 449.2,
+      "end": 452.87,
+      "duration": 3.67,
+      "text": "So, that would be f prime."
+    },
+    {
+      "index": 186,
+      "start": 455.07,
+      "end": 455.08,
+      "duration": 0.01,
+      "text": "That's f of t."
+    },
+    {
+      "index": 187,
+      "start": 455.08,
+      "end": 460.23,
+      "duration": 5.15,
+      "text": "So, for the second one"
+    },
+    {
+      "index": 188,
+      "start": 462.19,
+      "end": 462.2,
+      "duration": 0.01,
+      "text": "that we were given"
+    },
+    {
+      "index": 189,
+      "start": 462.2,
+      "end": 465.07,
+      "duration": 2.87,
+      "text": "it's a function f of t"
+    },
+    {
+      "index": 190,
+      "start": 465.08,
+      "end": 467.55,
+      "duration": 2.47,
+      "text": "that takes the value t squared"
+    },
+    {
+      "index": 191,
+      "start": 467.56,
+      "end": 469.11,
+      "duration": 1.55,
+      "text": "for t negative"
+    },
+    {
+      "index": 192,
+      "start": 469.12,
+      "end": 471.07,
+      "duration": 1.95,
+      "text": "and exponential"
+    },
+    {
+      "index": 193,
+      "start": 471.08,
+      "end": 474.75,
+      "duration": 3.67,
+      "text": "minus t"
+    },
+    {
+      "index": 194,
+      "start": 476.87,
+      "end": 476.88,
+      "duration": 0.01,
+      "text": "for t positive."
+    },
+    {
+      "index": 195,
+      "start": 476.88,
+      "end": 478.87,
+      "duration": 1.99,
+      "text": "So, quick sketch here"
+    },
+    {
+      "index": 196,
+      "start": 478.88,
+      "end": 480.91,
+      "duration": 2.03,
+      "text": "tells that this function looks like this"
+    },
+    {
+      "index": 197,
+      "start": 480.92,
+      "end": 483.43,
+      "duration": 2.51,
+      "text": "an exponential minus t"
+    },
+    {
+      "index": 198,
+      "start": 483.44,
+      "end": 485.71,
+      "duration": 2.27,
+      "text": "for t positive, okay?"
+    },
+    {
+      "index": 199,
+      "start": 485.72,
+      "end": 487.51,
+      "duration": 1.79,
+      "text": "Taking a value here one. So, clearly"
+    },
+    {
+      "index": 200,
+      "start": 487.52,
+      "end": 489.83,
+      "duration": 2.31,
+      "text": "there is a jump here."
+    },
+    {
+      "index": 201,
+      "start": 489.84,
+      "end": 491.67,
+      "duration": 1.83,
+      "text": "Discontinuity."
+    },
+    {
+      "index": 202,
+      "start": 491.68,
+      "end": 494.07,
+      "duration": 2.39,
+      "text": "So, how do we go about computing this"
+    },
+    {
+      "index": 203,
+      "start": 494.08,
+      "end": 495.99,
+      "duration": 1.91,
+      "text": "generalized derivative? So, let's look"
+    },
+    {
+      "index": 204,
+      "start": 496.0,
+      "end": 498.75,
+      "duration": 2.75,
+      "text": "again at the continuous parts. So, from"
+    },
+    {
+      "index": 205,
+      "start": 498.76,
+      "end": 500.71,
+      "duration": 1.95,
+      "text": "minus infinity to zero we're dealing"
+    },
+    {
+      "index": 206,
+      "start": 500.72,
+      "end": 502.43,
+      "duration": 1.71,
+      "text": "with just a t squared. So, the"
+    },
+    {
+      "index": 207,
+      "start": 502.44,
+      "end": 506.71,
+      "duration": 4.27,
+      "text": "derivative is just 2t."
+    },
+    {
+      "index": 208,
+      "start": 508.51,
+      "end": 508.52,
+      "duration": 0.01,
+      "text": "For t between zero and infinity we're"
+    },
+    {
+      "index": 209,
+      "start": 508.52,
+      "end": 510.75,
+      "duration": 2.23,
+      "text": "just dealing with exponential minus t."
+    },
+    {
+      "index": 210,
+      "start": 510.76,
+      "end": 515.589,
+      "duration": 4.829,
+      "text": "So, that's minus exponential minus t."
+    },
+    {
+      "index": 211,
+      "start": 516.79,
+      "end": 516.8,
+      "duration": 0.01,
+      "text": "But, we need to account for the"
+    },
+    {
+      "index": 212,
+      "start": 516.8,
+      "end": 519.99,
+      "duration": 3.19,
+      "text": "discontinuity, the jump of amplitude one"
+    },
+    {
+      "index": 213,
+      "start": 520.0,
+      "end": 522.55,
+      "duration": 2.55,
+      "text": "at zero. So, as we saw before this can"
+    },
+    {
+      "index": 214,
+      "start": 522.56,
+      "end": 524.71,
+      "duration": 2.15,
+      "text": "just be modeled"
+    },
+    {
+      "index": 215,
+      "start": 524.72,
+      "end": 526.75,
+      "duration": 2.03,
+      "text": "with a delta function."
+    },
+    {
+      "index": 216,
+      "start": 526.76,
+      "end": 528.07,
+      "duration": 1.31,
+      "text": "And if we were to represent this"
+    },
+    {
+      "index": 217,
+      "start": 528.08,
+      "end": 531.71,
+      "duration": 3.63,
+      "text": "function, then we would just need"
+    },
+    {
+      "index": 218,
+      "start": 531.72,
+      "end": 534.95,
+      "duration": 3.23,
+      "text": "to add a delta function"
+    },
+    {
+      "index": 219,
+      "start": 534.96,
+      "end": 537.71,
+      "duration": 2.75,
+      "text": "of magnitude one here and then just"
+    },
+    {
+      "index": 220,
+      "start": 537.72,
+      "end": 541.83,
+      "duration": 4.11,
+      "text": "sketch 2t. So, for for example"
+    },
+    {
+      "index": 221,
+      "start": 541.84,
+      "end": 546.43,
+      "duration": 4.59,
+      "text": "and then minus exponential minus 2t."
+    },
+    {
+      "index": 222,
+      "start": 546.44,
+      "end": 548.39,
+      "duration": 1.95,
+      "text": "That would give us something like that."
+    },
+    {
+      "index": 223,
+      "start": 548.4,
+      "end": 550.71,
+      "duration": 2.31,
+      "text": "And that ends the problem for today. And"
+    },
+    {
+      "index": 224,
+      "start": 550.72,
+      "end": 552.27,
+      "duration": 1.55,
+      "text": "the key points here were just to learn"
+    },
+    {
+      "index": 225,
+      "start": 552.28,
+      "end": 555.95,
+      "duration": 3.67,
+      "text": "how to manipulate the the step function"
+    },
+    {
+      "index": 226,
+      "start": 555.96,
+      "end": 558.83,
+      "duration": 2.87,
+      "text": "and how to use the delta function when"
+    },
+    {
+      "index": 227,
+      "start": 558.84,
+      "end": 560.39,
+      "duration": 1.55,
+      "text": "you compute your integrals and be"
+    },
+    {
+      "index": 228,
+      "start": 560.4,
+      "end": 564.12,
+      "duration": 3.72,
+      "text": "careful with the bounds of integration."
+    }
+  ],
+  "course": {
+    "category": "Mathematics",
+    "title": "Differential Equations",
+    "source_url": "https://www.youtube.com/playlist?list=PL64BDFBDA2AF24F7E"
+  }
+}

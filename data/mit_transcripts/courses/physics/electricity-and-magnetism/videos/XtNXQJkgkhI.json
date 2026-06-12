@@ -1,0 +1,6318 @@
+{
+  "video": {
+    "id": "XtNXQJkgkhI",
+    "title": "22. Bayesian Statistical Inference II",
+    "url": "https://www.youtube.com/watch?v=XtNXQJkgkhI",
+    "channel": "MIT OpenCourseWare",
+    "duration": 3135,
+    "language": "en"
+  },
+  "segment_count": 900,
+  "segments": [
+    {
+      "index": 0,
+      "start": 0.04,
+      "end": 2.46,
+      "duration": 2.42,
+      "text": "The following content is provided under a Creative"
+    },
+    {
+      "index": 1,
+      "start": 2.46,
+      "end": 3.87,
+      "duration": 1.41,
+      "text": "Commons license."
+    },
+    {
+      "index": 2,
+      "start": 3.87,
+      "end": 6.91,
+      "duration": 3.04,
+      "text": "Your support will help MIT OpenCourseWare continue to"
+    },
+    {
+      "index": 3,
+      "start": 6.91,
+      "end": 10.56,
+      "duration": 3.65,
+      "text": "offer high quality educational resources for free."
+    },
+    {
+      "index": 4,
+      "start": 10.56,
+      "end": 13.46,
+      "duration": 2.9,
+      "text": "To make a donation or view additional materials from"
+    },
+    {
+      "index": 5,
+      "start": 13.46,
+      "end": 19.29,
+      "duration": 5.83,
+      "text": "hundreds of MIT courses, visit MIT OpenCourseWare at"
+    },
+    {
+      "index": 6,
+      "start": 19.29,
+      "end": 22.41,
+      "duration": 3.12,
+      "text": "ocw.mit.edu"
+    },
+    {
+      "index": 7,
+      "start": 22.41,
+      "end": 25.43,
+      "duration": 3.02,
+      "text": "PROFESSOR: So we're going to finish today our discussion of"
+    },
+    {
+      "index": 8,
+      "start": 25.43,
+      "end": 28.87,
+      "duration": 3.44,
+      "text": "Bayesian Inference, which we started last time."
+    },
+    {
+      "index": 9,
+      "start": 28.87,
+      "end": 32.96,
+      "duration": 4.09,
+      "text": "As you probably saw there's not a huge lot of concepts"
+    },
+    {
+      "index": 10,
+      "start": 32.96,
+      "end": 37.37,
+      "duration": 4.41,
+      "text": "that we're introducing at this point in terms of specific"
+    },
+    {
+      "index": 11,
+      "start": 37.37,
+      "end": 39.77,
+      "duration": 2.4,
+      "text": "skills of calculating probabilities."
+    },
+    {
+      "index": 12,
+      "start": 39.77,
+      "end": 44.04,
+      "duration": 4.27,
+      "text": "But, rather, it's more of an interpretation and setting up"
+    },
+    {
+      "index": 13,
+      "start": 44.04,
+      "end": 45.46,
+      "duration": 1.42,
+      "text": "the framework."
+    },
+    {
+      "index": 14,
+      "start": 45.46,
+      "end": 48.01,
+      "duration": 2.55,
+      "text": "So the framework in Bayesian estimation is that there is"
+    },
+    {
+      "index": 15,
+      "start": 48.01,
+      "end": 52.5,
+      "duration": 4.49,
+      "text": "some parameter which is not known, but we have a prior"
+    },
+    {
+      "index": 16,
+      "start": 52.5,
+      "end": 53.55,
+      "duration": 1.05,
+      "text": "distribution on it."
+    },
+    {
+      "index": 17,
+      "start": 53.55,
+      "end": 60.04,
+      "duration": 6.49,
+      "text": "These are beliefs about what this variable might be, and"
+    },
+    {
+      "index": 18,
+      "start": 60.04,
+      "end": 62.37,
+      "duration": 2.33,
+      "text": "then we'll obtain some measurements."
+    },
+    {
+      "index": 19,
+      "start": 62.37,
+      "end": 65.41,
+      "duration": 3.04,
+      "text": "And the measurements are affected by the value of that"
+    },
+    {
+      "index": 20,
+      "start": 65.41,
+      "end": 67.56,
+      "duration": 2.15,
+      "text": "parameter that we don't know."
+    },
+    {
+      "index": 21,
+      "start": 67.56,
+      "end": 72.49,
+      "duration": 4.93,
+      "text": "And this effect, the fact that X is affected by Theta, is"
+    },
+    {
+      "index": 22,
+      "start": 72.49,
+      "end": 75.97,
+      "duration": 3.48,
+      "text": "captured by introducing a conditional probability"
+    },
+    {
+      "index": 23,
+      "start": 75.97,
+      "end": 76.66,
+      "duration": 0.69,
+      "text": "distribution--"
+    },
+    {
+      "index": 24,
+      "start": 76.66,
+      "end": 79.59,
+      "duration": 2.93,
+      "text": "the distribution of X depends on Theta."
+    },
+    {
+      "index": 25,
+      "start": 79.59,
+      "end": 82.27,
+      "duration": 2.68,
+      "text": "It's a conditional probability distribution."
+    },
+    {
+      "index": 26,
+      "start": 82.27,
+      "end": 86.28,
+      "duration": 4.01,
+      "text": "So we have formulas for these two densities, the prior"
+    },
+    {
+      "index": 27,
+      "start": 86.28,
+      "end": 88.33,
+      "duration": 2.05,
+      "text": "density and the conditional density."
+    },
+    {
+      "index": 28,
+      "start": 88.33,
+      "end": 91.11,
+      "duration": 2.78,
+      "text": "And given that we have these, if we multiply them we can"
+    },
+    {
+      "index": 29,
+      "start": 91.11,
+      "end": 94.0,
+      "duration": 2.89,
+      "text": "also get the joint density of X and Theta."
+    },
+    {
+      "index": 30,
+      "start": 94.0,
+      "end": 95.94,
+      "duration": 1.94,
+      "text": "So we have everything that's there is to"
+    },
+    {
+      "index": 31,
+      "start": 95.94,
+      "end": 97.45,
+      "duration": 1.51,
+      "text": "know in this second."
+    },
+    {
+      "index": 32,
+      "start": 97.45,
+      "end": 101.65,
+      "duration": 4.2,
+      "text": "And now we observe the random variable X. Given this random"
+    },
+    {
+      "index": 33,
+      "start": 101.65,
+      "end": 104.4,
+      "duration": 2.75,
+      "text": "variable what can we say about Theta?"
+    },
+    {
+      "index": 34,
+      "start": 104.4,
+      "end": 108.38,
+      "duration": 3.98,
+      "text": "Well, what we can do is we can always calculate the"
+    },
+    {
+      "index": 35,
+      "start": 108.38,
+      "end": 112.6,
+      "duration": 4.22,
+      "text": "conditional distribution of theta given X. And now that we"
+    },
+    {
+      "index": 36,
+      "start": 112.6,
+      "end": 115.99,
+      "duration": 3.39,
+      "text": "have the specific value of X we can plot this as"
+    },
+    {
+      "index": 37,
+      "start": 115.99,
+      "end": 118.65,
+      "duration": 2.66,
+      "text": "a function of Theta."
+    },
+    {
+      "index": 38,
+      "start": 118.65,
+      "end": 119.15,
+      "duration": 0.5,
+      "text": "OK."
+    },
+    {
+      "index": 39,
+      "start": 119.15,
+      "end": 121.38,
+      "duration": 2.23,
+      "text": "And this is the complete answer to a"
+    },
+    {
+      "index": 40,
+      "start": 121.38,
+      "end": 122.99,
+      "duration": 1.61,
+      "text": "Bayesian Inference problem."
+    },
+    {
+      "index": 41,
+      "start": 122.99,
+      "end": 126.13,
+      "duration": 3.14,
+      "text": "This posterior distribution captures everything there is"
+    },
+    {
+      "index": 42,
+      "start": 126.13,
+      "end": 130.24,
+      "duration": 4.11,
+      "text": "to say about Theta, that's what we know about Theta."
+    },
+    {
+      "index": 43,
+      "start": 130.24,
+      "end": 133.33,
+      "duration": 3.09,
+      "text": "Given the X that we have observed Theta is still"
+    },
+    {
+      "index": 44,
+      "start": 133.33,
+      "end": 135.08,
+      "duration": 1.75,
+      "text": "random, it's still unknown."
+    },
+    {
+      "index": 45,
+      "start": 135.08,
+      "end": 138.27,
+      "duration": 3.19,
+      "text": "And it might be here, there, or there with several"
+    },
+    {
+      "index": 46,
+      "start": 138.27,
+      "end": 139.9,
+      "duration": 1.63,
+      "text": "probabilities."
+    },
+    {
+      "index": 47,
+      "start": 139.9,
+      "end": 142.78,
+      "duration": 2.88,
+      "text": "On the other hand, if you want to report a single value for"
+    },
+    {
+      "index": 48,
+      "start": 142.78,
+      "end": 147.59,
+      "duration": 4.81,
+      "text": "Theta then you do some extra work."
+    },
+    {
+      "index": 49,
+      "start": 147.59,
+      "end": 151.43,
+      "duration": 3.84,
+      "text": "You continue from here, and you do some data processing on"
+    },
+    {
+      "index": 50,
+      "start": 151.43,
+      "end": 155.36,
+      "duration": 3.93,
+      "text": "X. Doing data processing means that you apply a certain"
+    },
+    {
+      "index": 51,
+      "start": 155.36,
+      "end": 159.0,
+      "duration": 3.64,
+      "text": "function on the data, and this function is"
+    },
+    {
+      "index": 52,
+      "start": 159.0,
+      "end": 160.65,
+      "duration": 1.65,
+      "text": "something that you design."
+    },
+    {
+      "index": 53,
+      "start": 160.65,
+      "end": 162.93,
+      "duration": 2.28,
+      "text": "It's the so-called estimator."
+    },
+    {
+      "index": 54,
+      "start": 162.93,
+      "end": 166.46,
+      "duration": 3.53,
+      "text": "And once that function is applied it outputs an estimate"
+    },
+    {
+      "index": 55,
+      "start": 166.46,
+      "end": 170.76,
+      "duration": 4.3,
+      "text": "of Theta, which we call Theta hat."
+    },
+    {
+      "index": 56,
+      "start": 170.76,
+      "end": 173.49,
+      "duration": 2.73,
+      "text": "So this is sort of the big picture of what's happening."
+    },
+    {
+      "index": 57,
+      "start": 173.49,
+      "end": 175.88,
+      "duration": 2.39,
+      "text": "Now one thing to keep in mind is that even though I'm"
+    },
+    {
+      "index": 58,
+      "start": 175.88,
+      "end": 180.45,
+      "duration": 4.57,
+      "text": "writing single letters here, in general Theta or X could be"
+    },
+    {
+      "index": 59,
+      "start": 180.45,
+      "end": 182.03,
+      "duration": 1.58,
+      "text": "vector random variables."
+    },
+    {
+      "index": 60,
+      "start": 182.03,
+      "end": 183.54,
+      "duration": 1.51,
+      "text": "So think of this--"
+    },
+    {
+      "index": 61,
+      "start": 183.54,
+      "end": 188.17,
+      "duration": 4.63,
+      "text": "it could be a collection Theta1, Theta2, Theta3."
+    },
+    {
+      "index": 62,
+      "start": 188.17,
+      "end": 191.57,
+      "duration": 3.4,
+      "text": "And maybe we obtained several measurements, so this X is"
+    },
+    {
+      "index": 63,
+      "start": 191.57,
+      "end": 195.63,
+      "duration": 4.06,
+      "text": "really a vector X1, X2, up to Xn."
+    },
+    {
+      "index": 64,
+      "start": 195.63,
+      "end": 200.19,
+      "duration": 4.56,
+      "text": "All right, so now how do we choose a Theta to report?"
+    },
+    {
+      "index": 65,
+      "start": 200.19,
+      "end": 201.96,
+      "duration": 1.77,
+      "text": "There are various ways of doing it."
+    },
+    {
+      "index": 66,
+      "start": 201.96,
+      "end": 205.28,
+      "duration": 3.32,
+      "text": "One is to look at the posterior distribution and"
+    },
+    {
+      "index": 67,
+      "start": 205.28,
+      "end": 209.94,
+      "duration": 4.66,
+      "text": "report the value of Theta, at which the density or the PMF"
+    },
+    {
+      "index": 68,
+      "start": 209.94,
+      "end": 211.99,
+      "duration": 2.05,
+      "text": "is highest."
+    },
+    {
+      "index": 69,
+      "start": 211.99,
+      "end": 215.57,
+      "duration": 3.58,
+      "text": "This is called the maximum a posteriori estimate."
+    },
+    {
+      "index": 70,
+      "start": 215.57,
+      "end": 218.77,
+      "duration": 3.2,
+      "text": "So we pick a value of theta for which the posteriori is"
+    },
+    {
+      "index": 71,
+      "start": 218.77,
+      "end": 220.99,
+      "duration": 2.22,
+      "text": "maximum, and we report it."
+    },
+    {
+      "index": 72,
+      "start": 220.99,
+      "end": 226.03,
+      "duration": 5.04,
+      "text": "An alternative way is to try to be optimal with respects to"
+    },
+    {
+      "index": 73,
+      "start": 226.03,
+      "end": 228.5,
+      "duration": 2.47,
+      "text": "a mean squared error."
+    },
+    {
+      "index": 74,
+      "start": 228.5,
+      "end": 229.41,
+      "duration": 0.91,
+      "text": "So what is this?"
+    },
+    {
+      "index": 75,
+      "start": 229.41,
+      "end": 233.26,
+      "duration": 3.85,
+      "text": "If we have a specific estimator, g, this is the"
+    },
+    {
+      "index": 76,
+      "start": 233.26,
+      "end": 235.88,
+      "duration": 2.62,
+      "text": "estimate it's going to produce."
+    },
+    {
+      "index": 77,
+      "start": 235.88,
+      "end": 238.3,
+      "duration": 2.42,
+      "text": "This is the true value of Theta, so this is our"
+    },
+    {
+      "index": 78,
+      "start": 238.3,
+      "end": 239.74,
+      "duration": 1.44,
+      "text": "estimation error."
+    },
+    {
+      "index": 79,
+      "start": 239.74,
+      "end": 243.18,
+      "duration": 3.44,
+      "text": "We look at the square of the estimation error, and look at"
+    },
+    {
+      "index": 80,
+      "start": 243.18,
+      "end": 244.18,
+      "duration": 1.0,
+      "text": "the average value."
+    },
+    {
+      "index": 81,
+      "start": 244.18,
+      "end": 247.18,
+      "duration": 3.0,
+      "text": "We would like this squared estimation error to be as"
+    },
+    {
+      "index": 82,
+      "start": 247.18,
+      "end": 248.71,
+      "duration": 1.53,
+      "text": "small as possible."
+    },
+    {
+      "index": 83,
+      "start": 248.71,
+      "end": 252.47,
+      "duration": 3.76,
+      "text": "How can we design our estimator g to make that error"
+    },
+    {
+      "index": 84,
+      "start": 252.47,
+      "end": 253.92,
+      "duration": 1.45,
+      "text": "as small as possible?"
+    },
+    {
+      "index": 85,
+      "start": 253.92,
+      "end": 259.49,
+      "duration": 5.57,
+      "text": "It turns out that the answer is to produce, as an estimate,"
+    },
+    {
+      "index": 86,
+      "start": 259.49,
+      "end": 262.66,
+      "duration": 3.17,
+      "text": "the conditional expectation of Theta given X. So the"
+    },
+    {
+      "index": 87,
+      "start": 262.66,
+      "end": 266.6,
+      "duration": 3.94,
+      "text": "conditional expectation is the best estimate that you could"
+    },
+    {
+      "index": 88,
+      "start": 266.6,
+      "end": 270.69,
+      "duration": 4.09,
+      "text": "produce if your objective is to keep the mean squared error"
+    },
+    {
+      "index": 89,
+      "start": 270.69,
+      "end": 272.72,
+      "duration": 2.03,
+      "text": "as small as possible."
+    },
+    {
+      "index": 90,
+      "start": 272.72,
+      "end": 275.28,
+      "duration": 2.56,
+      "text": "So this statement here is a statement of what happens on"
+    },
+    {
+      "index": 91,
+      "start": 275.28,
+      "end": 279.95,
+      "duration": 4.67,
+      "text": "the average over all Theta's and all X's that may happen in"
+    },
+    {
+      "index": 92,
+      "start": 279.95,
+      "end": 282.49,
+      "duration": 2.54,
+      "text": "our experiment."
+    },
+    {
+      "index": 93,
+      "start": 282.49,
+      "end": 285.16,
+      "duration": 2.67,
+      "text": "The conditional expectation as an estimator has an even"
+    },
+    {
+      "index": 94,
+      "start": 285.16,
+      "end": 287.75,
+      "duration": 2.59,
+      "text": "stronger property."
+    },
+    {
+      "index": 95,
+      "start": 287.75,
+      "end": 291.49,
+      "duration": 3.74,
+      "text": "Not only it's optimal on the average, but it's also optimal"
+    },
+    {
+      "index": 96,
+      "start": 291.49,
+      "end": 296.13,
+      "duration": 4.64,
+      "text": "given that you have made a specific observation, no"
+    },
+    {
+      "index": 97,
+      "start": 296.13,
+      "end": 297.84,
+      "duration": 1.71,
+      "text": "matter what you observe."
+    },
+    {
+      "index": 98,
+      "start": 297.84,
+      "end": 301.15,
+      "duration": 3.31,
+      "text": "Let's say you observe the specific value for the random"
+    },
+    {
+      "index": 99,
+      "start": 301.15,
+      "end": 305.56,
+      "duration": 4.41,
+      "text": "variable X. After that point if you're asked to produce a"
+    },
+    {
+      "index": 100,
+      "start": 305.56,
+      "end": 311.19,
+      "duration": 5.63,
+      "text": "best estimate Theta hat that minimizes this mean squared"
+    },
+    {
+      "index": 101,
+      "start": 311.19,
+      "end": 314.08,
+      "duration": 2.89,
+      "text": "error, your best estimate would be the conditional"
+    },
+    {
+      "index": 102,
+      "start": 314.08,
+      "end": 318.94,
+      "duration": 4.86,
+      "text": "expectation given the specific value that you have observed."
+    },
+    {
+      "index": 103,
+      "start": 318.94,
+      "end": 323.15,
+      "duration": 4.21,
+      "text": "These two statements say almost the same thing, but"
+    },
+    {
+      "index": 104,
+      "start": 323.15,
+      "end": 325.65,
+      "duration": 2.5,
+      "text": "this one is a bit stronger."
+    },
+    {
+      "index": 105,
+      "start": 325.65,
+      "end": 330.83,
+      "duration": 5.18,
+      "text": "This one tells you no matter what specific X happens the"
+    },
+    {
+      "index": 106,
+      "start": 330.83,
+      "end": 333.37,
+      "duration": 2.54,
+      "text": "conditional expectation is the best estimate."
+    },
+    {
+      "index": 107,
+      "start": 333.37,
+      "end": 336.87,
+      "duration": 3.5,
+      "text": "This one tells you on the average, over all X's may"
+    },
+    {
+      "index": 108,
+      "start": 336.87,
+      "end": 339.05,
+      "duration": 2.18,
+      "text": "happen, the conditional"
+    },
+    {
+      "index": 109,
+      "start": 339.05,
+      "end": 342.65,
+      "duration": 3.6,
+      "text": "expectation is the best estimator."
+    },
+    {
+      "index": 110,
+      "start": 342.65,
+      "end": 344.87,
+      "duration": 2.22,
+      "text": "Now this is really a consequence of this."
+    },
+    {
+      "index": 111,
+      "start": 344.87,
+      "end": 348.51,
+      "duration": 3.64,
+      "text": "If the conditional expectation is best for any specific X,"
+    },
+    {
+      "index": 112,
+      "start": 348.51,
+      "end": 352.75,
+      "duration": 4.24,
+      "text": "then it's the best one even when X is left random and you"
+    },
+    {
+      "index": 113,
+      "start": 352.75,
+      "end": 358.2,
+      "duration": 5.45,
+      "text": "are averaging your error over all possible X's."
+    },
+    {
+      "index": 114,
+      "start": 358.2,
+      "end": 362.12,
+      "duration": 3.92,
+      "text": "OK so now that we know what is the optimal way of producing"
+    },
+    {
+      "index": 115,
+      "start": 362.12,
+      "end": 365.51,
+      "duration": 3.39,
+      "text": "an estimate let's do a simple example to see"
+    },
+    {
+      "index": 116,
+      "start": 365.51,
+      "end": 367.24,
+      "duration": 1.73,
+      "text": "how things work out."
+    },
+    {
+      "index": 117,
+      "start": 367.24,
+      "end": 370.29,
+      "duration": 3.05,
+      "text": "So we have started with an unknown random variable,"
+    },
+    {
+      "index": 118,
+      "start": 370.29,
+      "end": 375.08,
+      "duration": 4.79,
+      "text": "Theta, which is uniformly distributed between 4 and 10."
+    },
+    {
+      "index": 119,
+      "start": 375.08,
+      "end": 378.27,
+      "duration": 3.19,
+      "text": "And then we have an observation model that tells"
+    },
+    {
+      "index": 120,
+      "start": 378.27,
+      "end": 382.43,
+      "duration": 4.16,
+      "text": "us that given the value of Theta, X is going to be a"
+    },
+    {
+      "index": 121,
+      "start": 382.43,
+      "end": 384.532,
+      "duration": 2.102,
+      "text": "random variable that ranges between Theta -"
+    },
+    {
+      "index": 122,
+      "start": 384.532,
+      "end": 386.57,
+      "duration": 2.038,
+      "text": "1, and Theta + 1."
+    },
+    {
+      "index": 123,
+      "start": 386.57,
+      "end": 392.55,
+      "duration": 5.98,
+      "text": "So think of X as a noisy measurement of Theta, plus"
+    },
+    {
+      "index": 124,
+      "start": 392.55,
+      "end": 397.6,
+      "duration": 5.05,
+      "text": "some noise, which is between -1, and +1."
+    },
+    {
+      "index": 125,
+      "start": 397.6,
+      "end": 401.98,
+      "duration": 4.38,
+      "text": "So really the model that we are using here is that X is"
+    },
+    {
+      "index": 126,
+      "start": 401.98,
+      "end": 404.43,
+      "duration": 2.45,
+      "text": "equal to Theta plus U --"
+    },
+    {
+      "index": 127,
+      "start": 404.43,
+      "end": 410.5,
+      "duration": 6.07,
+      "text": "where U is uniform on -1, and +1."
+    },
+    {
+      "index": 128,
+      "start": 410.5,
+      "end": 412.35,
+      "duration": 1.85,
+      "text": "one, and plus one."
+    },
+    {
+      "index": 129,
+      "start": 412.35,
+      "end": 415.946,
+      "duration": 3.596,
+      "text": "So we have the true value of Theta, but X could be Theta -"
+    },
+    {
+      "index": 130,
+      "start": 415.946,
+      "end": 420.75,
+      "duration": 4.804,
+      "text": "1, or it could be all the way up to Theta + 1."
+    },
+    {
+      "index": 131,
+      "start": 420.75,
+      "end": 423.77,
+      "duration": 3.02,
+      "text": "And the X is uniformly distributed on that interval."
+    },
+    {
+      "index": 132,
+      "start": 423.77,
+      "end": 428.06,
+      "duration": 4.29,
+      "text": "That's the same as saying that U is uniformly distributed"
+    },
+    {
+      "index": 133,
+      "start": 428.06,
+      "end": 429.82,
+      "duration": 1.76,
+      "text": "over this interval."
+    },
+    {
+      "index": 134,
+      "start": 429.82,
+      "end": 432.78,
+      "duration": 2.96,
+      "text": "So now we have all the information that we need, we"
+    },
+    {
+      "index": 135,
+      "start": 432.78,
+      "end": 435.27,
+      "duration": 2.49,
+      "text": "can construct the joint density."
+    },
+    {
+      "index": 136,
+      "start": 435.27,
+      "end": 439.02,
+      "duration": 3.75,
+      "text": "And the joint density is, of course, the prior density"
+    },
+    {
+      "index": 137,
+      "start": 439.02,
+      "end": 441.85,
+      "duration": 2.83,
+      "text": "times the conditional density."
+    },
+    {
+      "index": 138,
+      "start": 441.85,
+      "end": 444.54,
+      "duration": 2.69,
+      "text": "We go both of these."
+    },
+    {
+      "index": 139,
+      "start": 444.54,
+      "end": 448.88,
+      "duration": 4.34,
+      "text": "Both of these are constants, so the joint density is also"
+    },
+    {
+      "index": 140,
+      "start": 448.88,
+      "end": 450.15,
+      "duration": 1.27,
+      "text": "going to be a constant."
+    },
+    {
+      "index": 141,
+      "start": 450.15,
+      "end": 454.42,
+      "duration": 4.27,
+      "text": "1/6 times 1/2, this is one over 12."
+    },
+    {
+      "index": 142,
+      "start": 454.42,
+      "end": 457.7,
+      "duration": 3.28,
+      "text": "But it is a constant, not everywhere."
+    },
+    {
+      "index": 143,
+      "start": 457.7,
+      "end": 461.28,
+      "duration": 3.58,
+      "text": "Only on the range of possible x's and thetas."
+    },
+    {
+      "index": 144,
+      "start": 461.28,
+      "end": 466.03,
+      "duration": 4.75,
+      "text": "So theta can take any value between four and ten, so these"
+    },
+    {
+      "index": 145,
+      "start": 466.03,
+      "end": 467.43,
+      "duration": 1.4,
+      "text": "are the values of theta."
+    },
+    {
+      "index": 146,
+      "start": 467.43,
+      "end": 471.99,
+      "duration": 4.56,
+      "text": "And for any given value of theta x can take values from"
+    },
+    {
+      "index": 147,
+      "start": 471.99,
+      "end": 475.69,
+      "duration": 3.7,
+      "text": "theta minus one, up to theta plus one."
+    },
+    {
+      "index": 148,
+      "start": 475.69,
+      "end": 480.21,
+      "duration": 4.52,
+      "text": "So here, if you can imagine, a line that goes with slope one,"
+    },
+    {
+      "index": 149,
+      "start": 480.21,
+      "end": 488.53,
+      "duration": 8.32,
+      "text": "and then x can take that value of theta plus or minus one."
+    },
+    {
+      "index": 150,
+      "start": 488.53,
+      "end": 494.72,
+      "duration": 6.19,
+      "text": "So this object here, this is the set of possible x and"
+    },
+    {
+      "index": 151,
+      "start": 494.72,
+      "end": 496.07,
+      "duration": 1.35,
+      "text": "theta pairs."
+    },
+    {
+      "index": 152,
+      "start": 496.07,
+      "end": 501.49,
+      "duration": 5.42,
+      "text": "So the density is equal to one over 12 over this set, and"
+    },
+    {
+      "index": 153,
+      "start": 501.49,
+      "end": 503.64,
+      "duration": 2.15,
+      "text": "it's zero everywhere else."
+    },
+    {
+      "index": 154,
+      "start": 503.64,
+      "end": 508.035,
+      "duration": 4.395,
+      "text": "So outside here the density is zero, the density only applies"
+    },
+    {
+      "index": 155,
+      "start": 508.035,
+      "end": 509.8,
+      "duration": 1.765,
+      "text": "at that point."
+    },
+    {
+      "index": 156,
+      "start": 509.8,
+      "end": 513.11,
+      "duration": 3.31,
+      "text": "All right, so now we're asked to estimate"
+    },
+    {
+      "index": 157,
+      "start": 513.11,
+      "end": 514.89,
+      "duration": 1.78,
+      "text": "theta in terms of x."
+    },
+    {
+      "index": 158,
+      "start": 514.89,
+      "end": 517.5,
+      "duration": 2.61,
+      "text": "So we want to build an estimator which is going to be"
+    },
+    {
+      "index": 159,
+      "start": 517.5,
+      "end": 520.0,
+      "duration": 2.5,
+      "text": "a function from the x's to the thetas."
+    },
+    {
+      "index": 160,
+      "start": 520.0,
+      "end": 522.909,
+      "duration": 2.909,
+      "text": "That's why I chose the axis this way-- x to be on this"
+    },
+    {
+      "index": 161,
+      "start": 522.909,
+      "end": 524.6,
+      "duration": 1.691,
+      "text": "axis, theta on that axis--"
+    },
+    {
+      "index": 162,
+      "start": 524.6,
+      "end": 528.02,
+      "duration": 3.42,
+      "text": "Because the estimator we're building is a function of x."
+    },
+    {
+      "index": 163,
+      "start": 528.02,
+      "end": 531.07,
+      "duration": 3.05,
+      "text": "Based on the observation that we obtained, we want to"
+    },
+    {
+      "index": 164,
+      "start": 531.07,
+      "end": 531.94,
+      "duration": 0.87,
+      "text": "estimate theta."
+    },
+    {
+      "index": 165,
+      "start": 531.94,
+      "end": 535.68,
+      "duration": 3.74,
+      "text": "So we know that the optimal estimator is the conditional"
+    },
+    {
+      "index": 166,
+      "start": 535.68,
+      "end": 539.36,
+      "duration": 3.68,
+      "text": "expectation, given the value of x."
+    },
+    {
+      "index": 167,
+      "start": 539.36,
+      "end": 542.16,
+      "duration": 2.8,
+      "text": "So what is the conditional expectation?"
+    },
+    {
+      "index": 168,
+      "start": 542.16,
+      "end": 547.89,
+      "duration": 5.73,
+      "text": "If you fix a particular value of x, let's say in this range."
+    },
+    {
+      "index": 169,
+      "start": 547.89,
+      "end": 553.24,
+      "duration": 5.35,
+      "text": "So this is our x, then what do we know about theta?"
+    },
+    {
+      "index": 170,
+      "start": 553.24,
+      "end": 558.05,
+      "duration": 4.81,
+      "text": "We know that theta lies in this range."
+    },
+    {
+      "index": 171,
+      "start": 558.05,
+      "end": 561.67,
+      "duration": 3.62,
+      "text": "Theta can only be sampled between those two values."
+    },
+    {
+      "index": 172,
+      "start": 561.67,
+      "end": 564.76,
+      "duration": 3.09,
+      "text": "And what kind of distribution does theta have?"
+    },
+    {
+      "index": 173,
+      "start": 564.76,
+      "end": 568.98,
+      "duration": 4.22,
+      "text": "What is the conditional distribution of theta given x?"
+    },
+    {
+      "index": 174,
+      "start": 568.98,
+      "end": 572.26,
+      "duration": 3.28,
+      "text": "Well, remember how we built conditional distributions from"
+    },
+    {
+      "index": 175,
+      "start": 572.26,
+      "end": 573.41,
+      "duration": 1.15,
+      "text": "joint distributions?"
+    },
+    {
+      "index": 176,
+      "start": 573.41,
+      "end": 578.9,
+      "duration": 5.49,
+      "text": "The conditional distribution is just a section of the joint"
+    },
+    {
+      "index": 177,
+      "start": 578.9,
+      "end": 581.64,
+      "duration": 2.74,
+      "text": "distribution applied to the place where we're"
+    },
+    {
+      "index": 178,
+      "start": 581.64,
+      "end": 582.77,
+      "duration": 1.13,
+      "text": "conditioning."
+    },
+    {
+      "index": 179,
+      "start": 582.77,
+      "end": 585.8,
+      "duration": 3.03,
+      "text": "So the joint is constant."
+    },
+    {
+      "index": 180,
+      "start": 585.8,
+      "end": 589.31,
+      "duration": 3.51,
+      "text": "So the conditional is also going to be a constant density"
+    },
+    {
+      "index": 181,
+      "start": 589.31,
+      "end": 590.63,
+      "duration": 1.32,
+      "text": "over this interval."
+    },
+    {
+      "index": 182,
+      "start": 590.63,
+      "end": 593.56,
+      "duration": 2.93,
+      "text": "So the posterior distribution of theta is"
+    },
+    {
+      "index": 183,
+      "start": 593.56,
+      "end": 597.21,
+      "duration": 3.65,
+      "text": "uniform over this interval."
+    },
+    {
+      "index": 184,
+      "start": 597.21,
+      "end": 601.11,
+      "duration": 3.9,
+      "text": "So if the posterior of theta is uniform over that interval,"
+    },
+    {
+      "index": 185,
+      "start": 601.11,
+      "end": 604.9,
+      "duration": 3.79,
+      "text": "the expected value of theta is going to be the meet point of"
+    },
+    {
+      "index": 186,
+      "start": 604.9,
+      "end": 606.07,
+      "duration": 1.17,
+      "text": "that interval."
+    },
+    {
+      "index": 187,
+      "start": 606.07,
+      "end": 608.88,
+      "duration": 2.81,
+      "text": "So the estimate which you report--"
+    },
+    {
+      "index": 188,
+      "start": 608.88,
+      "end": 610.71,
+      "duration": 1.83,
+      "text": "if you observe that theta--"
+    },
+    {
+      "index": 189,
+      "start": 610.71,
+      "end": 615.75,
+      "duration": 5.04,
+      "text": "is going to be this particular point here, it's the midpoint."
+    },
+    {
+      "index": 190,
+      "start": 615.75,
+      "end": 619.14,
+      "duration": 3.39,
+      "text": "The same argument goes through even if you obtain an x"
+    },
+    {
+      "index": 191,
+      "start": 619.14,
+      "end": 622.57,
+      "duration": 3.43,
+      "text": "somewhere here."
+    },
+    {
+      "index": 192,
+      "start": 622.57,
+      "end": 629.54,
+      "duration": 6.97,
+      "text": "Given this x, theta can take a value"
+    },
+    {
+      "index": 193,
+      "start": 629.54,
+      "end": 632.8,
+      "duration": 3.26,
+      "text": "between these two values."
+    },
+    {
+      "index": 194,
+      "start": 632.8,
+      "end": 635.99,
+      "duration": 3.19,
+      "text": "Theta is going to have a uniform distribution over this"
+    },
+    {
+      "index": 195,
+      "start": 635.99,
+      "end": 640.65,
+      "duration": 4.66,
+      "text": "interval, and the conditional expectation of theta given x"
+    },
+    {
+      "index": 196,
+      "start": 640.65,
+      "end": 643.84,
+      "duration": 3.19,
+      "text": "is going to be the midpoint of that interval."
+    },
+    {
+      "index": 197,
+      "start": 643.84,
+      "end": 650.79,
+      "duration": 6.95,
+      "text": "So now if we plot our estimator by tracing midpoints"
+    },
+    {
+      "index": 198,
+      "start": 650.79,
+      "end": 656.3,
+      "duration": 5.51,
+      "text": "in this diagram what you're going to obtain is a curve"
+    },
+    {
+      "index": 199,
+      "start": 656.3,
+      "end": 661.795,
+      "duration": 5.495,
+      "text": "that starts like this, then it changes slope."
+    },
+    {
+      "index": 200,
+      "start": 664.49,
+      "end": 667.28,
+      "duration": 2.79,
+      "text": "So that it keeps track of the midpoint, and then it goes"
+    },
+    {
+      "index": 201,
+      "start": 667.28,
+      "end": 669.0,
+      "duration": 1.72,
+      "text": "like that again."
+    },
+    {
+      "index": 202,
+      "start": 669.0,
+      "end": 673.76,
+      "duration": 4.76,
+      "text": "So this blue curve here is our g of x, which is the"
+    },
+    {
+      "index": 203,
+      "start": 673.76,
+      "end": 676.91,
+      "duration": 3.15,
+      "text": "conditional expectation of theta given that x is"
+    },
+    {
+      "index": 204,
+      "start": 676.91,
+      "end": 680.48,
+      "duration": 3.57,
+      "text": "equal to little x."
+    },
+    {
+      "index": 205,
+      "start": 680.48,
+      "end": 686.61,
+      "duration": 6.13,
+      "text": "So it's a curve, in our example it consists of three"
+    },
+    {
+      "index": 206,
+      "start": 686.61,
+      "end": 688.22,
+      "duration": 1.61,
+      "text": "straight segments."
+    },
+    {
+      "index": 207,
+      "start": 688.22,
+      "end": 690.78,
+      "duration": 2.56,
+      "text": "But overall it's non-linear."
+    },
+    {
+      "index": 208,
+      "start": 690.78,
+      "end": 693.44,
+      "duration": 2.66,
+      "text": "It's not a single line through this diagram."
+    },
+    {
+      "index": 209,
+      "start": 693.44,
+      "end": 695.67,
+      "duration": 2.23,
+      "text": "And that's how things are in general."
+    },
+    {
+      "index": 210,
+      "start": 695.67,
+      "end": 699.3,
+      "duration": 3.63,
+      "text": "g of x, our optimal estimate has no reason to be a linear"
+    },
+    {
+      "index": 211,
+      "start": 699.3,
+      "end": 700.46,
+      "duration": 1.16,
+      "text": "function of x."
+    },
+    {
+      "index": 212,
+      "start": 700.46,
+      "end": 702.78,
+      "duration": 2.32,
+      "text": "In general it's going to be some complicated curve."
+    },
+    {
+      "index": 213,
+      "start": 707.35,
+      "end": 711.17,
+      "duration": 3.82,
+      "text": "So how good is our estimate?"
+    },
+    {
+      "index": 214,
+      "start": 711.17,
+      "end": 715.7,
+      "duration": 4.53,
+      "text": "I mean you reported your x, your estimate of theta based"
+    },
+    {
+      "index": 215,
+      "start": 715.7,
+      "end": 720.69,
+      "duration": 4.99,
+      "text": "on x, and your boss asks you what kind of error do you"
+    },
+    {
+      "index": 216,
+      "start": 720.69,
+      "end": 723.35,
+      "duration": 2.66,
+      "text": "expect to get?"
+    },
+    {
+      "index": 217,
+      "start": 723.35,
+      "end": 727.01,
+      "duration": 3.66,
+      "text": "Having observed the particular value of x, what you can"
+    },
+    {
+      "index": 218,
+      "start": 727.01,
+      "end": 731.14,
+      "duration": 4.13,
+      "text": "report to your boss is what you think is the mean squared"
+    },
+    {
+      "index": 219,
+      "start": 731.14,
+      "end": 733.04,
+      "duration": 1.9,
+      "text": "error is going to be."
+    },
+    {
+      "index": 220,
+      "start": 733.04,
+      "end": 735.38,
+      "duration": 2.34,
+      "text": "We observe the particular value of x."
+    },
+    {
+      "index": 221,
+      "start": 735.38,
+      "end": 739.65,
+      "duration": 4.27,
+      "text": "So we're conditioning, and we're living in this universe."
+    },
+    {
+      "index": 222,
+      "start": 739.65,
+      "end": 742.76,
+      "duration": 3.11,
+      "text": "Given that we have made this observation, this is the true"
+    },
+    {
+      "index": 223,
+      "start": 742.76,
+      "end": 745.84,
+      "duration": 3.08,
+      "text": "value of theta, this is the estimate that we have"
+    },
+    {
+      "index": 224,
+      "start": 745.84,
+      "end": 752.22,
+      "duration": 6.38,
+      "text": "produced, this is the expected squared error, given that we"
+    },
+    {
+      "index": 225,
+      "start": 752.22,
+      "end": 755.74,
+      "duration": 3.52,
+      "text": "have made the particular observation."
+    },
+    {
+      "index": 226,
+      "start": 755.74,
+      "end": 759.7,
+      "duration": 3.96,
+      "text": "Now in this conditional universe this is the expected"
+    },
+    {
+      "index": 227,
+      "start": 759.7,
+      "end": 762.88,
+      "duration": 3.18,
+      "text": "value of theta given x."
+    },
+    {
+      "index": 228,
+      "start": 762.88,
+      "end": 766.24,
+      "duration": 3.36,
+      "text": "So this is the expected value of this random variable inside"
+    },
+    {
+      "index": 229,
+      "start": 766.24,
+      "end": 767.9,
+      "duration": 1.66,
+      "text": "the conditional universe."
+    },
+    {
+      "index": 230,
+      "start": 767.9,
+      "end": 770.9,
+      "duration": 3.0,
+      "text": "So when you take the mean squared of a random variable"
+    },
+    {
+      "index": 231,
+      "start": 770.9,
+      "end": 773.78,
+      "duration": 2.88,
+      "text": "minus the expected value, this is the same thing as the"
+    },
+    {
+      "index": 232,
+      "start": 773.78,
+      "end": 775.84,
+      "duration": 2.06,
+      "text": "variance of that random variable."
+    },
+    {
+      "index": 233,
+      "start": 775.84,
+      "end": 778.67,
+      "duration": 2.83,
+      "text": "Except that it's the variance inside"
+    },
+    {
+      "index": 234,
+      "start": 778.67,
+      "end": 780.94,
+      "duration": 2.27,
+      "text": "the conditional universe."
+    },
+    {
+      "index": 235,
+      "start": 780.94,
+      "end": 786.23,
+      "duration": 5.29,
+      "text": "Having observed x, theta is still a random variable."
+    },
+    {
+      "index": 236,
+      "start": 786.23,
+      "end": 789.01,
+      "duration": 2.78,
+      "text": "It's distributed according to the posterior distribution."
+    },
+    {
+      "index": 237,
+      "start": 789.01,
+      "end": 792.22,
+      "duration": 3.21,
+      "text": "Since it's a random variable, it has a variance."
+    },
+    {
+      "index": 238,
+      "start": 792.22,
+      "end": 796.06,
+      "duration": 3.84,
+      "text": "And that variance is our mean squared error."
+    },
+    {
+      "index": 239,
+      "start": 796.06,
+      "end": 800.28,
+      "duration": 4.22,
+      "text": "So this is the variance of the posterior distribution of"
+    },
+    {
+      "index": 240,
+      "start": 800.28,
+      "end": 802.605,
+      "duration": 2.325,
+      "text": "Theta given the observation that we have made."
+    },
+    {
+      "index": 241,
+      "start": 806.688,
+      "end": 810.18,
+      "duration": 3.492,
+      "text": "OK, so what is the variance in our example?"
+    },
+    {
+      "index": 242,
+      "start": 810.18,
+      "end": 816.27,
+      "duration": 6.09,
+      "text": "If X happens to be here, then Theta is uniform over this"
+    },
+    {
+      "index": 243,
+      "start": 816.27,
+      "end": 821.99,
+      "duration": 5.72,
+      "text": "interval, and this interval has length 2."
+    },
+    {
+      "index": 244,
+      "start": 821.99,
+      "end": 826.96,
+      "duration": 4.97,
+      "text": "Theta is uniformly distributed over an interval of length 2."
+    },
+    {
+      "index": 245,
+      "start": 826.96,
+      "end": 829.9,
+      "duration": 2.94,
+      "text": "This is the posterior distribution of Theta."
+    },
+    {
+      "index": 246,
+      "start": 829.9,
+      "end": 831.41,
+      "duration": 1.51,
+      "text": "What is the variance?"
+    },
+    {
+      "index": 247,
+      "start": 831.41,
+      "end": 834.68,
+      "duration": 3.27,
+      "text": "Then you remember the formula for the variance of a uniform"
+    },
+    {
+      "index": 248,
+      "start": 834.68,
+      "end": 839.52,
+      "duration": 4.84,
+      "text": "random variable, it is the length of the interval squared"
+    },
+    {
+      "index": 249,
+      "start": 839.52,
+      "end": 843.59,
+      "duration": 4.07,
+      "text": "divided by 12, so this is 1/3."
+    },
+    {
+      "index": 250,
+      "start": 843.59,
+      "end": 846.06,
+      "duration": 2.47,
+      "text": "So the variance of Theta --"
+    },
+    {
+      "index": 251,
+      "start": 846.06,
+      "end": 850.33,
+      "duration": 4.27,
+      "text": "the mean squared error-- is going to be 1/3 whenever this"
+    },
+    {
+      "index": 252,
+      "start": 850.33,
+      "end": 852.43,
+      "duration": 2.1,
+      "text": "kind of picture applies."
+    },
+    {
+      "index": 253,
+      "start": 852.43,
+      "end": 856.46,
+      "duration": 4.03,
+      "text": "This picture applies when X is between 5 and 9."
+    },
+    {
+      "index": 254,
+      "start": 856.46,
+      "end": 860.1,
+      "duration": 3.64,
+      "text": "If X is less than 5, then the picture is a little different,"
+    },
+    {
+      "index": 255,
+      "start": 860.1,
+      "end": 862.02,
+      "duration": 1.92,
+      "text": "and Theta is going to be uniform"
+    },
+    {
+      "index": 256,
+      "start": 862.02,
+      "end": 864.66,
+      "duration": 2.64,
+      "text": "over a smaller interval."
+    },
+    {
+      "index": 257,
+      "start": 864.66,
+      "end": 866.93,
+      "duration": 2.27,
+      "text": "And so the variance of theta is going to"
+    },
+    {
+      "index": 258,
+      "start": 866.93,
+      "end": 868.77,
+      "duration": 1.84,
+      "text": "be smaller as well."
+    },
+    {
+      "index": 259,
+      "start": 868.77,
+      "end": 871.47,
+      "duration": 2.7,
+      "text": "So let's start plotting our mean squared error."
+    },
+    {
+      "index": 260,
+      "start": 871.47,
+      "end": 875.93,
+      "duration": 4.46,
+      "text": "Between 5 and 9 the variance of Theta --"
+    },
+    {
+      "index": 261,
+      "start": 875.93,
+      "end": 877.26,
+      "duration": 1.33,
+      "text": "the posterior variance--"
+    },
+    {
+      "index": 262,
+      "start": 877.26,
+      "end": 879.09,
+      "duration": 1.83,
+      "text": "is 1/3."
+    },
+    {
+      "index": 263,
+      "start": 879.09,
+      "end": 886.1,
+      "duration": 7.01,
+      "text": "Now when the X falls in here Theta is uniformly distributed"
+    },
+    {
+      "index": 264,
+      "start": 886.1,
+      "end": 888.45,
+      "duration": 2.35,
+      "text": "over a smaller interval."
+    },
+    {
+      "index": 265,
+      "start": 888.45,
+      "end": 890.67,
+      "duration": 2.22,
+      "text": "The size of this interval changes"
+    },
+    {
+      "index": 266,
+      "start": 890.67,
+      "end": 892.8,
+      "duration": 2.13,
+      "text": "linearly over that range."
+    },
+    {
+      "index": 267,
+      "start": 892.8,
+      "end": 899.26,
+      "duration": 6.46,
+      "text": "And so when we take the square size of that interval we get a"
+    },
+    {
+      "index": 268,
+      "start": 899.26,
+      "end": 901.56,
+      "duration": 2.3,
+      "text": "quadratic function of how much we have"
+    },
+    {
+      "index": 269,
+      "start": 901.56,
+      "end": 903.12,
+      "duration": 1.56,
+      "text": "moved from that corner."
+    },
+    {
+      "index": 270,
+      "start": 903.12,
+      "end": 907.14,
+      "duration": 4.02,
+      "text": "So at that corner what is the variance of Theta?"
+    },
+    {
+      "index": 271,
+      "start": 907.14,
+      "end": 911.29,
+      "duration": 4.15,
+      "text": "Well if I observe an X that's equal to 3 then I know with"
+    },
+    {
+      "index": 272,
+      "start": 911.29,
+      "end": 914.81,
+      "duration": 3.52,
+      "text": "certainty that Theta is equal to 4."
+    },
+    {
+      "index": 273,
+      "start": 914.81,
+      "end": 918.34,
+      "duration": 3.53,
+      "text": "Then I'm in very good shape, I know exactly what Theta is"
+    },
+    {
+      "index": 274,
+      "start": 918.34,
+      "end": 919.24,
+      "duration": 0.9,
+      "text": "going to be."
+    },
+    {
+      "index": 275,
+      "start": 919.24,
+      "end": 922.89,
+      "duration": 3.65,
+      "text": "So the variance, in this case, is going to be 0."
+    },
+    {
+      "index": 276,
+      "start": 922.89,
+      "end": 926.57,
+      "duration": 3.68,
+      "text": "If I observe an X that's a little larger than Theta is"
+    },
+    {
+      "index": 277,
+      "start": 926.57,
+      "end": 931.13,
+      "duration": 4.56,
+      "text": "now random, takes values on a little interval, and the"
+    },
+    {
+      "index": 278,
+      "start": 931.13,
+      "end": 935.43,
+      "duration": 4.3,
+      "text": "variance of Theta is going to be proportional to the square"
+    },
+    {
+      "index": 279,
+      "start": 935.43,
+      "end": 937.91,
+      "duration": 2.48,
+      "text": "of the length of that little interval."
+    },
+    {
+      "index": 280,
+      "start": 937.91,
+      "end": 940.4,
+      "duration": 2.49,
+      "text": "So we get a curve that starts rising"
+    },
+    {
+      "index": 281,
+      "start": 940.4,
+      "end": 942.56,
+      "duration": 2.16,
+      "text": "quadratically from here."
+    },
+    {
+      "index": 282,
+      "start": 942.56,
+      "end": 945.39,
+      "duration": 2.83,
+      "text": "It goes up forward 1/3."
+    },
+    {
+      "index": 283,
+      "start": 945.39,
+      "end": 948.98,
+      "duration": 3.59,
+      "text": "At the other end of the picture the same is true."
+    },
+    {
+      "index": 284,
+      "start": 948.98,
+      "end": 954.5,
+      "duration": 5.52,
+      "text": "If you observe an X which is 11 then Theta can only be"
+    },
+    {
+      "index": 285,
+      "start": 954.5,
+      "end": 957.15,
+      "duration": 2.65,
+      "text": "equal to 10."
+    },
+    {
+      "index": 286,
+      "start": 957.15,
+      "end": 960.72,
+      "duration": 3.57,
+      "text": "And so the error in Theta is equal to 0,"
+    },
+    {
+      "index": 287,
+      "start": 960.72,
+      "end": 962.92,
+      "duration": 2.2,
+      "text": "there's 0 error variance."
+    },
+    {
+      "index": 288,
+      "start": 962.92,
+      "end": 967.36,
+      "duration": 4.44,
+      "text": "But as we obtain X's that are slightly less than 11 then the"
+    },
+    {
+      "index": 289,
+      "start": 967.36,
+      "end": 970.38,
+      "duration": 3.02,
+      "text": "mean squared error again rises quadratically."
+    },
+    {
+      "index": 290,
+      "start": 970.38,
+      "end": 973.45,
+      "duration": 3.07,
+      "text": "So we end up with a plot like this."
+    },
+    {
+      "index": 291,
+      "start": 973.45,
+      "end": 977.12,
+      "duration": 3.67,
+      "text": "What this plot tells us is that certain measurements are"
+    },
+    {
+      "index": 292,
+      "start": 977.12,
+      "end": 978.92,
+      "duration": 1.8,
+      "text": "better than others."
+    },
+    {
+      "index": 293,
+      "start": 978.92,
+      "end": 985.27,
+      "duration": 6.35,
+      "text": "If you're lucky, and you see X equal to 3 then you're lucky,"
+    },
+    {
+      "index": 294,
+      "start": 985.27,
+      "end": 988.82,
+      "duration": 3.55,
+      "text": "because you know Theta exactly what it is."
+    },
+    {
+      "index": 295,
+      "start": 988.82,
+      "end": 993.83,
+      "duration": 5.01,
+      "text": "If you see an X which is equal to 6 then you're sort of"
+    },
+    {
+      "index": 296,
+      "start": 993.83,
+      "end": 995.8,
+      "duration": 1.97,
+      "text": "unlikely, because it doesn't tell you"
+    },
+    {
+      "index": 297,
+      "start": 995.8,
+      "end": 997.9,
+      "duration": 2.1,
+      "text": "Theta with great precision."
+    },
+    {
+      "index": 298,
+      "start": 997.9,
+      "end": 1000.56,
+      "duration": 2.66,
+      "text": "Theta could be anywhere on that interval."
+    },
+    {
+      "index": 299,
+      "start": 1000.56,
+      "end": 1002.36,
+      "duration": 1.8,
+      "text": "And so the variance of Theta --"
+    },
+    {
+      "index": 300,
+      "start": 1002.36,
+      "end": 1004.63,
+      "duration": 2.27,
+      "text": "even after you have observed X --"
+    },
+    {
+      "index": 301,
+      "start": 1004.63,
+      "end": 1008.47,
+      "duration": 3.84,
+      "text": "is a certain number, 1/3 in our case."
+    },
+    {
+      "index": 302,
+      "start": 1008.47,
+      "end": 1012.37,
+      "duration": 3.9,
+      "text": "So the moral to keep out of that story is"
+    },
+    {
+      "index": 303,
+      "start": 1012.37,
+      "end": 1016.97,
+      "duration": 4.6,
+      "text": "that the error variance--"
+    },
+    {
+      "index": 304,
+      "start": 1016.97,
+      "end": 1020.38,
+      "duration": 3.41,
+      "text": "or the mean squared error--"
+    },
+    {
+      "index": 305,
+      "start": 1020.38,
+      "end": 1023.35,
+      "duration": 2.97,
+      "text": "depends on what particular observation"
+    },
+    {
+      "index": 306,
+      "start": 1023.35,
+      "end": 1024.829,
+      "duration": 1.479,
+      "text": "you happen to obtain."
+    },
+    {
+      "index": 307,
+      "start": 1024.829,
+      "end": 1030.24,
+      "duration": 5.411,
+      "text": "Some observations may be very informative, and once you see"
+    },
+    {
+      "index": 308,
+      "start": 1030.24,
+      "end": 1033.55,
+      "duration": 3.31,
+      "text": "a specific number than you know exactly what Theta is."
+    },
+    {
+      "index": 309,
+      "start": 1033.55,
+      "end": 1035.76,
+      "duration": 2.21,
+      "text": "Some observations might be less informative."
+    },
+    {
+      "index": 310,
+      "start": 1035.76,
+      "end": 1038.98,
+      "duration": 3.22,
+      "text": "You observe your X, but it could still leave a lot of"
+    },
+    {
+      "index": 311,
+      "start": 1038.98,
+      "end": 1040.23,
+      "duration": 1.25,
+      "text": "uncertainty about Theta."
+    },
+    {
+      "index": 312,
+      "start": 1043.839,
+      "end": 1047.65,
+      "duration": 3.811,
+      "text": "So conditional expectations are really the cornerstone of"
+    },
+    {
+      "index": 313,
+      "start": 1047.65,
+      "end": 1048.89,
+      "duration": 1.24,
+      "text": "Bayesian estimation."
+    },
+    {
+      "index": 314,
+      "start": 1048.89,
+      "end": 1051.69,
+      "duration": 2.8,
+      "text": "They're particularly popular, especially"
+    },
+    {
+      "index": 315,
+      "start": 1051.69,
+      "end": 1053.95,
+      "duration": 2.26,
+      "text": "in engineering contexts."
+    },
+    {
+      "index": 316,
+      "start": 1053.95,
+      "end": 1058.26,
+      "duration": 4.31,
+      "text": "There used a lot in signal processing, communications,"
+    },
+    {
+      "index": 317,
+      "start": 1058.26,
+      "end": 1060.94,
+      "duration": 2.68,
+      "text": "control theory, so on."
+    },
+    {
+      "index": 318,
+      "start": 1060.94,
+      "end": 1064.3,
+      "duration": 3.36,
+      "text": "So that makes it worth playing a little bit with their"
+    },
+    {
+      "index": 319,
+      "start": 1064.3,
+      "end": 1070.45,
+      "duration": 6.15,
+      "text": "theoretical properties, and get some appreciation of a few"
+    },
+    {
+      "index": 320,
+      "start": 1070.45,
+      "end": 1073.59,
+      "duration": 3.14,
+      "text": "subtleties involved here."
+    },
+    {
+      "index": 321,
+      "start": 1073.59,
+      "end": 1077.99,
+      "duration": 4.4,
+      "text": "No new math in reality, in what we're going to do here."
+    },
+    {
+      "index": 322,
+      "start": 1077.99,
+      "end": 1081.29,
+      "duration": 3.3,
+      "text": "But it's going to be a good opportunity to practice"
+    },
+    {
+      "index": 323,
+      "start": 1081.29,
+      "end": 1085.31,
+      "duration": 4.02,
+      "text": "manipulation of conditional expectations."
+    },
+    {
+      "index": 324,
+      "start": 1085.31,
+      "end": 1093.15,
+      "duration": 7.84,
+      "text": "So let's look at the expected value of the estimation error"
+    },
+    {
+      "index": 325,
+      "start": 1093.15,
+      "end": 1095.33,
+      "duration": 2.18,
+      "text": "that we obtained."
+    },
+    {
+      "index": 326,
+      "start": 1095.33,
+      "end": 1098.54,
+      "duration": 3.21,
+      "text": "So Theta hat is our estimator, is the conditional"
+    },
+    {
+      "index": 327,
+      "start": 1098.54,
+      "end": 1099.855,
+      "duration": 1.315,
+      "text": "expectation."
+    },
+    {
+      "index": 328,
+      "start": 1099.855,
+      "end": 1105.69,
+      "duration": 5.835,
+      "text": "Theta hat minus Theta is what kind of error do we have?"
+    },
+    {
+      "index": 329,
+      "start": 1105.69,
+      "end": 1109.61,
+      "duration": 3.92,
+      "text": "If Theta hat, is bigger than Theta then we have made the"
+    },
+    {
+      "index": 330,
+      "start": 1109.61,
+      "end": 1111.51,
+      "duration": 1.9,
+      "text": "positive error."
+    },
+    {
+      "index": 331,
+      "start": 1111.51,
+      "end": 1113.91,
+      "duration": 2.4,
+      "text": "If not, if it's on the other side, we have made the"
+    },
+    {
+      "index": 332,
+      "start": 1113.91,
+      "end": 1115.29,
+      "duration": 1.38,
+      "text": "negative error."
+    },
+    {
+      "index": 333,
+      "start": 1115.29,
+      "end": 1119.11,
+      "duration": 3.82,
+      "text": "Then it turns out that on the average the errors cancel each"
+    },
+    {
+      "index": 334,
+      "start": 1119.11,
+      "end": 1121.03,
+      "duration": 1.92,
+      "text": "other out, on the average."
+    },
+    {
+      "index": 335,
+      "start": 1121.03,
+      "end": 1123.11,
+      "duration": 2.08,
+      "text": "So let's do this calculation."
+    },
+    {
+      "index": 336,
+      "start": 1123.11,
+      "end": 1130.01,
+      "duration": 6.9,
+      "text": "Let's calculate the expected value of the error given X."
+    },
+    {
+      "index": 337,
+      "start": 1130.01,
+      "end": 1134.48,
+      "duration": 4.47,
+      "text": "Now by definition the error is expected value of Theta hat"
+    },
+    {
+      "index": 338,
+      "start": 1134.48,
+      "end": 1137.85,
+      "duration": 3.37,
+      "text": "minus Theta given X."
+    },
+    {
+      "index": 339,
+      "start": 1137.85,
+      "end": 1141.09,
+      "duration": 3.24,
+      "text": "We use linearity of expectations to break it up as"
+    },
+    {
+      "index": 340,
+      "start": 1141.09,
+      "end": 1144.85,
+      "duration": 3.76,
+      "text": "expected value of Theta hat given X minus expected value"
+    },
+    {
+      "index": 341,
+      "start": 1144.85,
+      "end": 1151.09,
+      "duration": 6.24,
+      "text": "of Theta given X. And now what?"
+    },
+    {
+      "index": 342,
+      "start": 1151.09,
+      "end": 1158.68,
+      "duration": 7.59,
+      "text": "Our estimate is made on the basis of the data of the X's."
+    },
+    {
+      "index": 343,
+      "start": 1158.68,
+      "end": 1163.6,
+      "duration": 4.92,
+      "text": "If I tell you X then you know what Theta hat is."
+    },
+    {
+      "index": 344,
+      "start": 1163.6,
+      "end": 1166.49,
+      "duration": 2.89,
+      "text": "Remember that the conditional expectation is a random"
+    },
+    {
+      "index": 345,
+      "start": 1166.49,
+      "end": 1169.68,
+      "duration": 3.19,
+      "text": "variable which is a function of the random variable, on"
+    },
+    {
+      "index": 346,
+      "start": 1169.68,
+      "end": 1171.56,
+      "duration": 1.88,
+      "text": "which you're conditioning on."
+    },
+    {
+      "index": 347,
+      "start": 1171.56,
+      "end": 1175.33,
+      "duration": 3.77,
+      "text": "If you know X then you know the conditional expectation"
+    },
+    {
+      "index": 348,
+      "start": 1175.33,
+      "end": 1178.39,
+      "duration": 3.06,
+      "text": "given X, you know what Theta hat is going to be."
+    },
+    {
+      "index": 349,
+      "start": 1178.39,
+      "end": 1182.91,
+      "duration": 4.52,
+      "text": "So Theta hat is a function of X. If it's a function of X"
+    },
+    {
+      "index": 350,
+      "start": 1182.91,
+      "end": 1185.91,
+      "duration": 3.0,
+      "text": "then once I tell you X you know what Theta"
+    },
+    {
+      "index": 351,
+      "start": 1185.91,
+      "end": 1187.46,
+      "duration": 1.55,
+      "text": "hat is going to be."
+    },
+    {
+      "index": 352,
+      "start": 1187.46,
+      "end": 1189.58,
+      "duration": 2.12,
+      "text": "So this conditional expectation is going to be"
+    },
+    {
+      "index": 353,
+      "start": 1189.58,
+      "end": 1191.86,
+      "duration": 2.28,
+      "text": "Theta hat itself."
+    },
+    {
+      "index": 354,
+      "start": 1191.86,
+      "end": 1194.03,
+      "duration": 2.17,
+      "text": "Here this is-- just by definition--"
+    },
+    {
+      "index": 355,
+      "start": 1194.03,
+      "end": 1199.58,
+      "duration": 5.55,
+      "text": "Theta hat, and so we get equality to 0."
+    },
+    {
+      "index": 356,
+      "start": 1199.58,
+      "end": 1204.26,
+      "duration": 4.68,
+      "text": "So what we have proved is that no matter what I have"
+    },
+    {
+      "index": 357,
+      "start": 1204.26,
+      "end": 1208.97,
+      "duration": 4.71,
+      "text": "observed, and given that I have observed something on the"
+    },
+    {
+      "index": 358,
+      "start": 1208.97,
+      "end": 1214.05,
+      "duration": 5.08,
+      "text": "average my error is going to be 0."
+    },
+    {
+      "index": 359,
+      "start": 1214.05,
+      "end": 1219.96,
+      "duration": 5.91,
+      "text": "This is a statement involving equality of random variables."
+    },
+    {
+      "index": 360,
+      "start": 1219.96,
+      "end": 1222.62,
+      "duration": 2.66,
+      "text": "Remember that conditional expectations are random"
+    },
+    {
+      "index": 361,
+      "start": 1222.62,
+      "end": 1226.97,
+      "duration": 4.35,
+      "text": "variables because they depend on the thing you're"
+    },
+    {
+      "index": 362,
+      "start": 1226.97,
+      "end": 1228.44,
+      "duration": 1.47,
+      "text": "conditioning on."
+    },
+    {
+      "index": 363,
+      "start": 1228.44,
+      "end": 1231.63,
+      "duration": 3.19,
+      "text": "0 is sort of a trivial random variable."
+    },
+    {
+      "index": 364,
+      "start": 1231.63,
+      "end": 1234.08,
+      "duration": 2.45,
+      "text": "This tells you that this random variable is identically"
+    },
+    {
+      "index": 365,
+      "start": 1234.08,
+      "end": 1236.39,
+      "duration": 2.31,
+      "text": "equal to the 0 random variable."
+    },
+    {
+      "index": 366,
+      "start": 1236.39,
+      "end": 1240.72,
+      "duration": 4.33,
+      "text": "More specifically it tells you that no matter what value for"
+    },
+    {
+      "index": 367,
+      "start": 1240.72,
+      "end": 1245.12,
+      "duration": 4.4,
+      "text": "X you observe, the conditional expectation of the error is"
+    },
+    {
+      "index": 368,
+      "start": 1245.12,
+      "end": 1246.41,
+      "duration": 1.29,
+      "text": "going to be 0."
+    },
+    {
+      "index": 369,
+      "start": 1246.41,
+      "end": 1249.15,
+      "duration": 2.74,
+      "text": "And this takes us to this statement here, which is"
+    },
+    {
+      "index": 370,
+      "start": 1249.15,
+      "end": 1251.83,
+      "duration": 2.68,
+      "text": "inequality between numbers."
+    },
+    {
+      "index": 371,
+      "start": 1251.83,
+      "end": 1256.33,
+      "duration": 4.5,
+      "text": "No matter what specific value for capital X you have"
+    },
+    {
+      "index": 372,
+      "start": 1256.33,
+      "end": 1260.44,
+      "duration": 4.11,
+      "text": "observed, your error, on the average, is going"
+    },
+    {
+      "index": 373,
+      "start": 1260.44,
+      "end": 1262.42,
+      "duration": 1.98,
+      "text": "to be equal to 0."
+    },
+    {
+      "index": 374,
+      "start": 1262.42,
+      "end": 1266.73,
+      "duration": 4.31,
+      "text": "So this is a less abstract version of these statements."
+    },
+    {
+      "index": 375,
+      "start": 1266.73,
+      "end": 1269.3,
+      "duration": 2.57,
+      "text": "This is inequality between two numbers."
+    },
+    {
+      "index": 376,
+      "start": 1269.3,
+      "end": 1275.08,
+      "duration": 5.78,
+      "text": "It's true for every value of X, so it's true in terms of"
+    },
+    {
+      "index": 377,
+      "start": 1275.08,
+      "end": 1278.55,
+      "duration": 3.47,
+      "text": "these random variables being equal to that random variable."
+    },
+    {
+      "index": 378,
+      "start": 1278.55,
+      "end": 1281.17,
+      "duration": 2.62,
+      "text": "Because remember according to our definition this random"
+    },
+    {
+      "index": 379,
+      "start": 1281.17,
+      "end": 1284.4,
+      "duration": 3.23,
+      "text": "variable is the random variable that takes this"
+    },
+    {
+      "index": 380,
+      "start": 1284.4,
+      "end": 1287.41,
+      "duration": 3.01,
+      "text": "specific value when capital X happens to be"
+    },
+    {
+      "index": 381,
+      "start": 1287.41,
+      "end": 1289.41,
+      "duration": 2.0,
+      "text": "equal to little x."
+    },
+    {
+      "index": 382,
+      "start": 1289.41,
+      "end": 1293.48,
+      "duration": 4.07,
+      "text": "Now this doesn't mean that your error is 0, it only means"
+    },
+    {
+      "index": 383,
+      "start": 1293.48,
+      "end": 1297.05,
+      "duration": 3.57,
+      "text": "that your error is as likely, in some sense, to fall on the"
+    },
+    {
+      "index": 384,
+      "start": 1297.05,
+      "end": 1300.04,
+      "duration": 2.99,
+      "text": "positive side, as to fall on the negative side."
+    },
+    {
+      "index": 385,
+      "start": 1300.04,
+      "end": 1301.4,
+      "duration": 1.36,
+      "text": "So sometimes your error will be"
+    },
+    {
+      "index": 386,
+      "start": 1301.4,
+      "end": 1302.88,
+      "duration": 1.48,
+      "text": "positive, sometimes negative."
+    },
+    {
+      "index": 387,
+      "start": 1302.88,
+      "end": 1306.36,
+      "duration": 3.48,
+      "text": "And on the average these things cancel out and"
+    },
+    {
+      "index": 388,
+      "start": 1306.36,
+      "end": 1308.15,
+      "duration": 1.79,
+      "text": "give you a 0 --."
+    },
+    {
+      "index": 389,
+      "start": 1308.15,
+      "end": 1309.47,
+      "duration": 1.32,
+      "text": "on the average."
+    },
+    {
+      "index": 390,
+      "start": 1309.47,
+      "end": 1313.62,
+      "duration": 4.15,
+      "text": "So this is a property that's sometimes giving the name we"
+    },
+    {
+      "index": 391,
+      "start": 1313.62,
+      "end": 1319.04,
+      "duration": 5.42,
+      "text": "say that Theta hat is unbiased."
+    },
+    {
+      "index": 392,
+      "start": 1319.04,
+      "end": 1323.19,
+      "duration": 4.15,
+      "text": "So Theta hat, our estimate, does not have a tendency to be"
+    },
+    {
+      "index": 393,
+      "start": 1323.19,
+      "end": 1324.18,
+      "duration": 0.99,
+      "text": "on the high side."
+    },
+    {
+      "index": 394,
+      "start": 1324.18,
+      "end": 1326.92,
+      "duration": 2.74,
+      "text": "It does not have a tendency to be on the low side."
+    },
+    {
+      "index": 395,
+      "start": 1326.92,
+      "end": 1330.58,
+      "duration": 3.66,
+      "text": "On the average it's just right."
+    },
+    {
+      "index": 396,
+      "start": 1334.7,
+      "end": 1338.39,
+      "duration": 3.69,
+      "text": "So let's do a little more playing here."
+    },
+    {
+      "index": 397,
+      "start": 1341.79,
+      "end": 1347.69,
+      "duration": 5.9,
+      "text": "Let's see how our error is related to an arbitrary"
+    },
+    {
+      "index": 398,
+      "start": 1347.69,
+      "end": 1350.27,
+      "duration": 2.58,
+      "text": "function of the data."
+    },
+    {
+      "index": 399,
+      "start": 1350.27,
+      "end": 1356.96,
+      "duration": 6.69,
+      "text": "Let's do this in a conditional universe and"
+    },
+    {
+      "index": 400,
+      "start": 1356.96,
+      "end": 1358.21,
+      "duration": 1.25,
+      "text": "look at this quantity."
+    },
+    {
+      "index": 401,
+      "start": 1365.21,
+      "end": 1367.91,
+      "duration": 2.7,
+      "text": "In a conditional universe where X is known"
+    },
+    {
+      "index": 402,
+      "start": 1367.91,
+      "end": 1371.06,
+      "duration": 3.15,
+      "text": "then h of X is known."
+    },
+    {
+      "index": 403,
+      "start": 1371.06,
+      "end": 1374.2,
+      "duration": 3.14,
+      "text": "And so you can pull it outside the expectation."
+    },
+    {
+      "index": 404,
+      "start": 1374.2,
+      "end": 1378.01,
+      "duration": 3.81,
+      "text": "In the conditional universe where the value of X is given"
+    },
+    {
+      "index": 405,
+      "start": 1378.01,
+      "end": 1381.29,
+      "duration": 3.28,
+      "text": "this quantity becomes just a constant."
+    },
+    {
+      "index": 406,
+      "start": 1381.29,
+      "end": 1383.25,
+      "duration": 1.96,
+      "text": "There's nothing random about it."
+    },
+    {
+      "index": 407,
+      "start": 1383.25,
+      "end": 1386.28,
+      "duration": 3.03,
+      "text": "So you can pull it out, the expectation, and"
+    },
+    {
+      "index": 408,
+      "start": 1386.28,
+      "end": 1389.84,
+      "duration": 3.56,
+      "text": "write things this way."
+    },
+    {
+      "index": 409,
+      "start": 1389.84,
+      "end": 1394.09,
+      "duration": 4.25,
+      "text": "And we have just calculated that this quantity is 0."
+    },
+    {
+      "index": 410,
+      "start": 1394.09,
+      "end": 1397.39,
+      "duration": 3.3,
+      "text": "So this number turns out to be 0 as well."
+    },
+    {
+      "index": 411,
+      "start": 1400.81,
+      "end": 1403.83,
+      "duration": 3.02,
+      "text": "Now having done this, we can take"
+    },
+    {
+      "index": 412,
+      "start": 1403.83,
+      "end": 1406.11,
+      "duration": 2.28,
+      "text": "expectations of both sides."
+    },
+    {
+      "index": 413,
+      "start": 1406.11,
+      "end": 1409.53,
+      "duration": 3.42,
+      "text": "And now let's use the law of iterated expectations."
+    },
+    {
+      "index": 414,
+      "start": 1409.53,
+      "end": 1413.04,
+      "duration": 3.51,
+      "text": "Expectation of a conditional expectation gives us the"
+    },
+    {
+      "index": 415,
+      "start": 1413.04,
+      "end": 1422.2,
+      "duration": 9.16,
+      "text": "unconditional expectation, and this is also going to be 0."
+    },
+    {
+      "index": 416,
+      "start": 1422.2,
+      "end": 1427.455,
+      "duration": 5.255,
+      "text": "So here we use the law of iterated expectations."
+    },
+    {
+      "index": 417,
+      "start": 1434.46,
+      "end": 1435.71,
+      "duration": 1.25,
+      "text": "OK."
+    },
+    {
+      "index": 418,
+      "start": 1444.51,
+      "end": 1446.29,
+      "duration": 1.78,
+      "text": "OK, why are we doing this?"
+    },
+    {
+      "index": 419,
+      "start": 1446.29,
+      "end": 1449.99,
+      "duration": 3.7,
+      "text": "We're doing this because I would like to calculate the"
+    },
+    {
+      "index": 420,
+      "start": 1449.99,
+      "end": 1453.94,
+      "duration": 3.95,
+      "text": "covariance between Theta tilde and Theta hat."
+    },
+    {
+      "index": 421,
+      "start": 1453.94,
+      "end": 1456.49,
+      "duration": 2.55,
+      "text": "Theta hat is, ask the question -- is there a systematic"
+    },
+    {
+      "index": 422,
+      "start": 1456.49,
+      "end": 1460.87,
+      "duration": 4.38,
+      "text": "relation between the error and the estimate?"
+    },
+    {
+      "index": 423,
+      "start": 1460.87,
+      "end": 1470.83,
+      "duration": 9.96,
+      "text": "So to calculate the covariance we use the property that we"
+    },
+    {
+      "index": 424,
+      "start": 1470.83,
+      "end": 1474.46,
+      "duration": 3.63,
+      "text": "can calculate the covariances by calculating the expected"
+    },
+    {
+      "index": 425,
+      "start": 1474.46,
+      "end": 1479.52,
+      "duration": 5.06,
+      "text": "value of the product minus the product of"
+    },
+    {
+      "index": 426,
+      "start": 1479.52,
+      "end": 1480.77,
+      "duration": 1.25,
+      "text": "the expected values."
+    },
+    {
+      "index": 427,
+      "start": 1488.44,
+      "end": 1490.85,
+      "duration": 2.41,
+      "text": "And what do we get?"
+    },
+    {
+      "index": 428,
+      "start": 1490.85,
+      "end": 1496.08,
+      "duration": 5.23,
+      "text": "This is 0, because of what we just proved."
+    },
+    {
+      "index": 429,
+      "start": 1500.98,
+      "end": 1506.16,
+      "duration": 5.18,
+      "text": "And this is 0, because of what we proved earlier."
+    },
+    {
+      "index": 430,
+      "start": 1506.16,
+      "end": 1509.74,
+      "duration": 3.58,
+      "text": "That the expected value of the error is equal to 0."
+    },
+    {
+      "index": 431,
+      "start": 1512.9,
+      "end": 1527.8,
+      "duration": 14.9,
+      "text": "So the covariance between the error and any function of X is"
+    },
+    {
+      "index": 432,
+      "start": 1527.8,
+      "end": 1529.47,
+      "duration": 1.67,
+      "text": "equal to 0."
+    },
+    {
+      "index": 433,
+      "start": 1529.47,
+      "end": 1533.06,
+      "duration": 3.59,
+      "text": "Let's use that to the case where the function of X we're"
+    },
+    {
+      "index": 434,
+      "start": 1533.06,
+      "end": 1538.62,
+      "duration": 5.56,
+      "text": "considering is Theta hat itself."
+    },
+    {
+      "index": 435,
+      "start": 1538.62,
+      "end": 1543.3,
+      "duration": 4.68,
+      "text": "Theta hat is our estimate, it's a function of X. So this"
+    },
+    {
+      "index": 436,
+      "start": 1543.3,
+      "end": 1546.845,
+      "duration": 3.545,
+      "text": "0 result would still apply, and we get that this"
+    },
+    {
+      "index": 437,
+      "start": 1546.845,
+      "end": 1550.57,
+      "duration": 3.725,
+      "text": "covariance is equal to 0."
+    },
+    {
+      "index": 438,
+      "start": 1550.57,
+      "end": 1559.1,
+      "duration": 8.53,
+      "text": "OK, so that's what we proved."
+    },
+    {
+      "index": 439,
+      "start": 1559.1,
+      "end": 1562.72,
+      "duration": 3.62,
+      "text": "Let's see, what are the morals to take out of all this?"
+    },
+    {
+      "index": 440,
+      "start": 1562.72,
+      "end": 1567.64,
+      "duration": 4.92,
+      "text": "First is you should be very comfortable with this type of"
+    },
+    {
+      "index": 441,
+      "start": 1567.64,
+      "end": 1570.58,
+      "duration": 2.94,
+      "text": "calculation involving conditional expectations."
+    },
+    {
+      "index": 442,
+      "start": 1570.58,
+      "end": 1574.1,
+      "duration": 3.52,
+      "text": "The main two things that we're using are that when you"
+    },
+    {
+      "index": 443,
+      "start": 1574.1,
+      "end": 1577.63,
+      "duration": 3.53,
+      "text": "condition on a random variable any function of that random"
+    },
+    {
+      "index": 444,
+      "start": 1577.63,
+      "end": 1581.02,
+      "duration": 3.39,
+      "text": "variable becomes a constant, and can be pulled out the"
+    },
+    {
+      "index": 445,
+      "start": 1581.02,
+      "end": 1582.69,
+      "duration": 1.67,
+      "text": "conditional expectation."
+    },
+    {
+      "index": 446,
+      "start": 1582.69,
+      "end": 1585.46,
+      "duration": 2.77,
+      "text": "The other thing that we are using is the law of iterated"
+    },
+    {
+      "index": 447,
+      "start": 1585.46,
+      "end": 1589.45,
+      "duration": 3.99,
+      "text": "expectations, so these are the skills involved."
+    },
+    {
+      "index": 448,
+      "start": 1589.45,
+      "end": 1592.98,
+      "duration": 3.53,
+      "text": "Now on the substance, why is this result interesting?"
+    },
+    {
+      "index": 449,
+      "start": 1592.98,
+      "end": 1595.39,
+      "duration": 2.41,
+      "text": "This tells us that the error is"
+    },
+    {
+      "index": 450,
+      "start": 1595.39,
+      "end": 1597.06,
+      "duration": 1.67,
+      "text": "uncorrelated with the estimate."
+    },
+    {
+      "index": 451,
+      "start": 1599.77,
+      "end": 1602.53,
+      "duration": 2.76,
+      "text": "What's a hypothetical situation where these would"
+    },
+    {
+      "index": 452,
+      "start": 1602.53,
+      "end": 1604.16,
+      "duration": 1.63,
+      "text": "not happen?"
+    },
+    {
+      "index": 453,
+      "start": 1604.16,
+      "end": 1612.72,
+      "duration": 8.56,
+      "text": "Whenever Theta hat is positive my error tends to be negative."
+    },
+    {
+      "index": 454,
+      "start": 1612.72,
+      "end": 1617.0,
+      "duration": 4.28,
+      "text": "Suppose that whenever Theta hat is big then you say oh my"
+    },
+    {
+      "index": 455,
+      "start": 1617.0,
+      "end": 1620.61,
+      "duration": 3.61,
+      "text": "estimate is too big, maybe the true Theta is on the lower"
+    },
+    {
+      "index": 456,
+      "start": 1620.61,
+      "end": 1624.47,
+      "duration": 3.86,
+      "text": "side, so I expect my error to be negative."
+    },
+    {
+      "index": 457,
+      "start": 1624.47,
+      "end": 1629.23,
+      "duration": 4.76,
+      "text": "That would be a situation that would violate this condition."
+    },
+    {
+      "index": 458,
+      "start": 1629.23,
+      "end": 1633.88,
+      "duration": 4.65,
+      "text": "This condition tells you that no matter what Theta hat is,"
+    },
+    {
+      "index": 459,
+      "start": 1633.88,
+      "end": 1637.11,
+      "duration": 3.23,
+      "text": "you don't expect your error to be on the positive side or on"
+    },
+    {
+      "index": 460,
+      "start": 1637.11,
+      "end": 1638.03,
+      "duration": 0.92,
+      "text": "the negative side."
+    },
+    {
+      "index": 461,
+      "start": 1638.03,
+      "end": 1641.63,
+      "duration": 3.6,
+      "text": "Your error will still be 0 on the average."
+    },
+    {
+      "index": 462,
+      "start": 1641.63,
+      "end": 1645.78,
+      "duration": 4.15,
+      "text": "So if you obtain a very high estimate this is no reason for"
+    },
+    {
+      "index": 463,
+      "start": 1645.78,
+      "end": 1649.63,
+      "duration": 3.85,
+      "text": "you to suspect that the true Theta is"
+    },
+    {
+      "index": 464,
+      "start": 1649.63,
+      "end": 1650.89,
+      "duration": 1.26,
+      "text": "lower than your estimate."
+    },
+    {
+      "index": 465,
+      "start": 1650.89,
+      "end": 1654.42,
+      "duration": 3.53,
+      "text": "If you suspected that the true Theta was lower than your"
+    },
+    {
+      "index": 466,
+      "start": 1654.42,
+      "end": 1658.83,
+      "duration": 4.41,
+      "text": "estimate you should have changed your Theta hat."
+    },
+    {
+      "index": 467,
+      "start": 1658.83,
+      "end": 1662.58,
+      "duration": 3.75,
+      "text": "If you make an estimate and after obtaining that estimate"
+    },
+    {
+      "index": 468,
+      "start": 1662.58,
+      "end": 1666.27,
+      "duration": 3.69,
+      "text": "you say I think my estimate is too big, and so"
+    },
+    {
+      "index": 469,
+      "start": 1666.27,
+      "end": 1667.77,
+      "duration": 1.5,
+      "text": "the error is negative."
+    },
+    {
+      "index": 470,
+      "start": 1667.77,
+      "end": 1670.73,
+      "duration": 2.96,
+      "text": "If you thought that way then that means that your estimate"
+    },
+    {
+      "index": 471,
+      "start": 1670.73,
+      "end": 1673.69,
+      "duration": 2.96,
+      "text": "is not the optimal one, that your estimate should have been"
+    },
+    {
+      "index": 472,
+      "start": 1673.69,
+      "end": 1677.2,
+      "duration": 3.51,
+      "text": "corrected to be smaller."
+    },
+    {
+      "index": 473,
+      "start": 1677.2,
+      "end": 1680.03,
+      "duration": 2.83,
+      "text": "And that would mean that there's a better estimate than"
+    },
+    {
+      "index": 474,
+      "start": 1680.03,
+      "end": 1683.06,
+      "duration": 3.03,
+      "text": "the one you used, but the estimate that we are using"
+    },
+    {
+      "index": 475,
+      "start": 1683.06,
+      "end": 1686.06,
+      "duration": 3.0,
+      "text": "here is the optimal one in terms of mean squared error,"
+    },
+    {
+      "index": 476,
+      "start": 1686.06,
+      "end": 1688.35,
+      "duration": 2.29,
+      "text": "there's no way of improving it."
+    },
+    {
+      "index": 477,
+      "start": 1688.35,
+      "end": 1691.64,
+      "duration": 3.29,
+      "text": "And this is really captured in that statement."
+    },
+    {
+      "index": 478,
+      "start": 1691.64,
+      "end": 1694.25,
+      "duration": 2.61,
+      "text": "That is knowing Theta hat doesn't give you a lot of"
+    },
+    {
+      "index": 479,
+      "start": 1694.25,
+      "end": 1698.29,
+      "duration": 4.04,
+      "text": "information about the error, and gives you, therefore, no"
+    },
+    {
+      "index": 480,
+      "start": 1698.29,
+      "end": 1704.43,
+      "duration": 6.14,
+      "text": "reason to adjust your estimate from what it was."
+    },
+    {
+      "index": 481,
+      "start": 1704.43,
+      "end": 1709.19,
+      "duration": 4.76,
+      "text": "Finally, a consequence of all this."
+    },
+    {
+      "index": 482,
+      "start": 1709.19,
+      "end": 1711.91,
+      "duration": 2.72,
+      "text": "This is the definition of the error."
+    },
+    {
+      "index": 483,
+      "start": 1711.91,
+      "end": 1715.77,
+      "duration": 3.86,
+      "text": "Send Theta to this side, send Theta tilde to that side, you"
+    },
+    {
+      "index": 484,
+      "start": 1715.77,
+      "end": 1716.85,
+      "duration": 1.08,
+      "text": "get this relation."
+    },
+    {
+      "index": 485,
+      "start": 1716.85,
+      "end": 1721.01,
+      "duration": 4.16,
+      "text": "The true parameter is composed of two quantities."
+    },
+    {
+      "index": 486,
+      "start": 1721.01,
+      "end": 1724.94,
+      "duration": 3.93,
+      "text": "The estimate, and the error that they got"
+    },
+    {
+      "index": 487,
+      "start": 1724.94,
+      "end": 1726.46,
+      "duration": 1.52,
+      "text": "with a minus sign."
+    },
+    {
+      "index": 488,
+      "start": 1726.46,
+      "end": 1729.79,
+      "duration": 3.33,
+      "text": "These two quantities are uncorrelated with each other."
+    },
+    {
+      "index": 489,
+      "start": 1729.79,
+      "end": 1733.35,
+      "duration": 3.56,
+      "text": "Their covariance is 0, and therefore, the variance of"
+    },
+    {
+      "index": 490,
+      "start": 1733.35,
+      "end": 1736.33,
+      "duration": 2.98,
+      "text": "this is the sum of the variances of these two"
+    },
+    {
+      "index": 491,
+      "start": 1736.33,
+      "end": 1737.58,
+      "duration": 1.25,
+      "text": "quantities."
+    },
+    {
+      "index": 492,
+      "start": 1740.47,
+      "end": 1747.52,
+      "duration": 7.05,
+      "text": "So what's an interpretation of this equality?"
+    },
+    {
+      "index": 493,
+      "start": 1747.52,
+      "end": 1750.93,
+      "duration": 3.41,
+      "text": "There is some inherent randomness in the random"
+    },
+    {
+      "index": 494,
+      "start": 1750.93,
+      "end": 1754.54,
+      "duration": 3.61,
+      "text": "variable theta that we're trying to estimate."
+    },
+    {
+      "index": 495,
+      "start": 1754.54,
+      "end": 1759.36,
+      "duration": 4.82,
+      "text": "Theta hat tries to estimate it, tries to get close to it."
+    },
+    {
+      "index": 496,
+      "start": 1759.36,
+      "end": 1765.5,
+      "duration": 6.14,
+      "text": "And if Theta hat always stays close to Theta, since Theta is"
+    },
+    {
+      "index": 497,
+      "start": 1765.5,
+      "end": 1769.26,
+      "duration": 3.76,
+      "text": "random Theta hat must also be quite random, so it has"
+    },
+    {
+      "index": 498,
+      "start": 1769.26,
+      "end": 1771.17,
+      "duration": 1.91,
+      "text": "uncertainty in it."
+    },
+    {
+      "index": 499,
+      "start": 1771.17,
+      "end": 1775.27,
+      "duration": 4.1,
+      "text": "And the more uncertain Theta hat is the more it moves"
+    },
+    {
+      "index": 500,
+      "start": 1775.27,
+      "end": 1776.64,
+      "duration": 1.37,
+      "text": "together with Theta."
+    },
+    {
+      "index": 501,
+      "start": 1776.64,
+      "end": 1780.86,
+      "duration": 4.22,
+      "text": "So the more uncertainty it removes from Theta."
+    },
+    {
+      "index": 502,
+      "start": 1780.86,
+      "end": 1783.9,
+      "duration": 3.04,
+      "text": "And this is the remaining uncertainty in Theta."
+    },
+    {
+      "index": 503,
+      "start": 1783.9,
+      "end": 1787.14,
+      "duration": 3.24,
+      "text": "The uncertainty that's left after we've done our"
+    },
+    {
+      "index": 504,
+      "start": 1787.14,
+      "end": 1788.35,
+      "duration": 1.21,
+      "text": "estimation."
+    },
+    {
+      "index": 505,
+      "start": 1788.35,
+      "end": 1792.33,
+      "duration": 3.98,
+      "text": "So ideally, to have a small error we want this"
+    },
+    {
+      "index": 506,
+      "start": 1792.33,
+      "end": 1794.12,
+      "duration": 1.79,
+      "text": "quantity to be small."
+    },
+    {
+      "index": 507,
+      "start": 1794.12,
+      "end": 1795.82,
+      "duration": 1.7,
+      "text": "Which is the same as saying that this"
+    },
+    {
+      "index": 508,
+      "start": 1795.82,
+      "end": 1797.74,
+      "duration": 1.92,
+      "text": "quantity should be big."
+    },
+    {
+      "index": 509,
+      "start": 1797.74,
+      "end": 1802.07,
+      "duration": 4.33,
+      "text": "In the ideal case Theta hat is the same as Theta."
+    },
+    {
+      "index": 510,
+      "start": 1802.07,
+      "end": 1804.82,
+      "duration": 2.75,
+      "text": "That's the best we could hope for."
+    },
+    {
+      "index": 511,
+      "start": 1804.82,
+      "end": 1809.25,
+      "duration": 4.43,
+      "text": "That corresponds to 0 error, and all the uncertainly in"
+    },
+    {
+      "index": 512,
+      "start": 1809.25,
+      "end": 1814.23,
+      "duration": 4.98,
+      "text": "Theta is absorbed by the uncertainty in Theta hat."
+    },
+    {
+      "index": 513,
+      "start": 1814.23,
+      "end": 1818.96,
+      "duration": 4.73,
+      "text": "Interestingly, this relation here is just another variation"
+    },
+    {
+      "index": 514,
+      "start": 1818.96,
+      "end": 1821.63,
+      "duration": 2.67,
+      "text": "of the law of total variance that we have seen at some"
+    },
+    {
+      "index": 515,
+      "start": 1821.63,
+      "end": 1823.88,
+      "duration": 2.25,
+      "text": "point in the past."
+    },
+    {
+      "index": 516,
+      "start": 1823.88,
+      "end": 1828.57,
+      "duration": 4.69,
+      "text": "I will skip that derivation, but it's an interesting fact,"
+    },
+    {
+      "index": 517,
+      "start": 1828.57,
+      "end": 1831.43,
+      "duration": 2.86,
+      "text": "and it can give you an alternative interpretation of"
+    },
+    {
+      "index": 518,
+      "start": 1831.43,
+      "end": 1832.68,
+      "duration": 1.25,
+      "text": "the law of total variance."
+    },
+    {
+      "index": 519,
+      "start": 1836.84,
+      "end": 1840.57,
+      "duration": 3.73,
+      "text": "OK, so now let's return to our example."
+    },
+    {
+      "index": 520,
+      "start": 1840.57,
+      "end": 1845.63,
+      "duration": 5.06,
+      "text": "In our example we obtained the optimal estimator, and we saw"
+    },
+    {
+      "index": 521,
+      "start": 1845.63,
+      "end": 1851.22,
+      "duration": 5.59,
+      "text": "that it was a nonlinear curve, something like this."
+    },
+    {
+      "index": 522,
+      "start": 1851.22,
+      "end": 1853.66,
+      "duration": 2.44,
+      "text": "I'm exaggerating the corner of a little bit to"
+    },
+    {
+      "index": 523,
+      "start": 1853.66,
+      "end": 1855.35,
+      "duration": 1.69,
+      "text": "show that it's nonlinear."
+    },
+    {
+      "index": 524,
+      "start": 1855.35,
+      "end": 1857.4,
+      "duration": 2.05,
+      "text": "This is the optimal estimator."
+    },
+    {
+      "index": 525,
+      "start": 1857.4,
+      "end": 1861.07,
+      "duration": 3.67,
+      "text": "It's a nonlinear function of X --"
+    },
+    {
+      "index": 526,
+      "start": 1861.07,
+      "end": 1865.2,
+      "duration": 4.13,
+      "text": "nonlinear generally means complicated."
+    },
+    {
+      "index": 527,
+      "start": 1865.2,
+      "end": 1869.02,
+      "duration": 3.82,
+      "text": "Sometimes the conditional expectation is really hard to"
+    },
+    {
+      "index": 528,
+      "start": 1869.02,
+      "end": 1872.32,
+      "duration": 3.3,
+      "text": "compute, because whenever you have to compute expectations"
+    },
+    {
+      "index": 529,
+      "start": 1872.32,
+      "end": 1877.27,
+      "duration": 4.95,
+      "text": "you need to do some integrals."
+    },
+    {
+      "index": 530,
+      "start": 1877.27,
+      "end": 1879.88,
+      "duration": 2.61,
+      "text": "And if you have many random variables involved it might"
+    },
+    {
+      "index": 531,
+      "start": 1879.88,
+      "end": 1883.16,
+      "duration": 3.28,
+      "text": "correspond to a multi-dimensional integration."
+    },
+    {
+      "index": 532,
+      "start": 1883.16,
+      "end": 1884.37,
+      "duration": 1.21,
+      "text": "We don't like this."
+    },
+    {
+      "index": 533,
+      "start": 1884.37,
+      "end": 1887.37,
+      "duration": 3.0,
+      "text": "Can we come up, maybe, with a simpler way"
+    },
+    {
+      "index": 534,
+      "start": 1887.37,
+      "end": 1889.2,
+      "duration": 1.83,
+      "text": "of estimating Theta?"
+    },
+    {
+      "index": 535,
+      "start": 1889.2,
+      "end": 1892.58,
+      "duration": 3.38,
+      "text": "Of coming up with a point estimate which still has some"
+    },
+    {
+      "index": 536,
+      "start": 1892.58,
+      "end": 1894.35,
+      "duration": 1.77,
+      "text": "nice properties, it has some good"
+    },
+    {
+      "index": 537,
+      "start": 1894.35,
+      "end": 1897.12,
+      "duration": 2.77,
+      "text": "motivation, but is simpler."
+    },
+    {
+      "index": 538,
+      "start": 1897.12,
+      "end": 1898.63,
+      "duration": 1.51,
+      "text": "What does simpler mean?"
+    },
+    {
+      "index": 539,
+      "start": 1898.63,
+      "end": 1900.92,
+      "duration": 2.29,
+      "text": "Perhaps linear."
+    },
+    {
+      "index": 540,
+      "start": 1900.92,
+      "end": 1905.57,
+      "duration": 4.65,
+      "text": "Let's put ourselves in a straitjacket and restrict"
+    },
+    {
+      "index": 541,
+      "start": 1905.57,
+      "end": 1910.26,
+      "duration": 4.69,
+      "text": "ourselves to estimators that's are of these forms."
+    },
+    {
+      "index": 542,
+      "start": 1910.26,
+      "end": 1913.28,
+      "duration": 3.02,
+      "text": "My estimate is constrained to be a linear"
+    },
+    {
+      "index": 543,
+      "start": 1913.28,
+      "end": 1914.93,
+      "duration": 1.65,
+      "text": "function of the X's."
+    },
+    {
+      "index": 544,
+      "start": 1914.93,
+      "end": 1919.32,
+      "duration": 4.39,
+      "text": "So my estimator is going to be a curve, a linear curve."
+    },
+    {
+      "index": 545,
+      "start": 1919.32,
+      "end": 1923.45,
+      "duration": 4.13,
+      "text": "It could be this, it could be that, maybe it would want to"
+    },
+    {
+      "index": 546,
+      "start": 1923.45,
+      "end": 1926.35,
+      "duration": 2.9,
+      "text": "be something like this."
+    },
+    {
+      "index": 547,
+      "start": 1926.35,
+      "end": 1930.54,
+      "duration": 4.19,
+      "text": "I want to choose the best possible linear function."
+    },
+    {
+      "index": 548,
+      "start": 1930.54,
+      "end": 1931.49,
+      "duration": 0.95,
+      "text": "What does that mean?"
+    },
+    {
+      "index": 549,
+      "start": 1931.49,
+      "end": 1935.57,
+      "duration": 4.08,
+      "text": "It means that I write my Theta hat in this form."
+    },
+    {
+      "index": 550,
+      "start": 1935.57,
+      "end": 1940.75,
+      "duration": 5.18,
+      "text": "If I fix a certain a and b I have fixed the functional form"
+    },
+    {
+      "index": 551,
+      "start": 1940.75,
+      "end": 1943.94,
+      "duration": 3.19,
+      "text": "of my estimator, and this is the corresponding"
+    },
+    {
+      "index": 552,
+      "start": 1943.94,
+      "end": 1945.36,
+      "duration": 1.42,
+      "text": "mean squared error."
+    },
+    {
+      "index": 553,
+      "start": 1945.36,
+      "end": 1948.21,
+      "duration": 2.85,
+      "text": "That's the error between the true parameter and the"
+    },
+    {
+      "index": 554,
+      "start": 1948.21,
+      "end": 1951.13,
+      "duration": 2.92,
+      "text": "estimate of that parameter, we take the square of this."
+    },
+    {
+      "index": 555,
+      "start": 1953.73,
+      "end": 1958.35,
+      "duration": 4.62,
+      "text": "And now the optimal linear estimator is defined as one"
+    },
+    {
+      "index": 556,
+      "start": 1958.35,
+      "end": 1962.21,
+      "duration": 3.86,
+      "text": "for which these mean squared error is smallest possible"
+    },
+    {
+      "index": 557,
+      "start": 1962.21,
+      "end": 1965.6,
+      "duration": 3.39,
+      "text": "over all choices of a and b."
+    },
+    {
+      "index": 558,
+      "start": 1965.6,
+      "end": 1968.26,
+      "duration": 2.66,
+      "text": "So we want to minimize this expression"
+    },
+    {
+      "index": 559,
+      "start": 1968.26,
+      "end": 1972.03,
+      "duration": 3.77,
+      "text": "over all a's and b's."
+    },
+    {
+      "index": 560,
+      "start": 1972.03,
+      "end": 1975.65,
+      "duration": 3.62,
+      "text": "How do we do this minimization?"
+    },
+    {
+      "index": 561,
+      "start": 1975.65,
+      "end": 1978.91,
+      "duration": 3.26,
+      "text": "Well this is a square, you can expand it."
+    },
+    {
+      "index": 562,
+      "start": 1978.91,
+      "end": 1982.04,
+      "duration": 3.13,
+      "text": "Write down all the terms in the expansion of the square."
+    },
+    {
+      "index": 563,
+      "start": 1982.04,
+      "end": 1983.81,
+      "duration": 1.77,
+      "text": "So you're going to get the term expected"
+    },
+    {
+      "index": 564,
+      "start": 1983.81,
+      "end": 1985.4,
+      "duration": 1.59,
+      "text": "value of Theta squared."
+    },
+    {
+      "index": 565,
+      "start": 1985.4,
+      "end": 1987.38,
+      "duration": 1.98,
+      "text": "You're going to get another term--"
+    },
+    {
+      "index": 566,
+      "start": 1987.38,
+      "end": 1991.01,
+      "duration": 3.63,
+      "text": "a squared expected value of X squared, another term which is"
+    },
+    {
+      "index": 567,
+      "start": 1991.01,
+      "end": 1993.34,
+      "duration": 2.33,
+      "text": "b squared, and then you're going to get to"
+    },
+    {
+      "index": 568,
+      "start": 1993.34,
+      "end": 1996.62,
+      "duration": 3.28,
+      "text": "various cross terms."
+    },
+    {
+      "index": 569,
+      "start": 1996.62,
+      "end": 2002.05,
+      "duration": 5.43,
+      "text": "What you have here is really a quadratic function of a and b."
+    },
+    {
+      "index": 570,
+      "start": 2002.05,
+      "end": 2005.03,
+      "duration": 2.98,
+      "text": "So think of this quantity that we're minimizing as some"
+    },
+    {
+      "index": 571,
+      "start": 2005.03,
+      "end": 2008.92,
+      "duration": 3.89,
+      "text": "function h of a and b, and it happens to be quadratic."
+    },
+    {
+      "index": 572,
+      "start": 2012.5,
+      "end": 2015.28,
+      "duration": 2.78,
+      "text": "How do we minimize a quadratic function?"
+    },
+    {
+      "index": 573,
+      "start": 2015.28,
+      "end": 2018.89,
+      "duration": 3.61,
+      "text": "We set the derivative of this function with respect to a and"
+    },
+    {
+      "index": 574,
+      "start": 2018.89,
+      "end": 2022.94,
+      "duration": 4.05,
+      "text": "b to 0, and then do the algebra."
+    },
+    {
+      "index": 575,
+      "start": 2022.94,
+      "end": 2028.0,
+      "duration": 5.06,
+      "text": "After you do the algebra you find that the best choice for"
+    },
+    {
+      "index": 576,
+      "start": 2028.0,
+      "end": 2034.38,
+      "duration": 6.38,
+      "text": "a is this 1, so this is the coefficient next to X. This is"
+    },
+    {
+      "index": 577,
+      "start": 2034.38,
+      "end": 2035.63,
+      "duration": 1.25,
+      "text": "the optimal a."
+    },
+    {
+      "index": 578,
+      "start": 2039.56,
+      "end": 2043.66,
+      "duration": 4.1,
+      "text": "And the optimal b corresponds of the constant terms."
+    },
+    {
+      "index": 579,
+      "start": 2043.66,
+      "end": 2048.77,
+      "duration": 5.11,
+      "text": "So this term and this times that together are the optimal"
+    },
+    {
+      "index": 580,
+      "start": 2048.77,
+      "end": 2051.09,
+      "duration": 2.32,
+      "text": "choices of b."
+    },
+    {
+      "index": 581,
+      "start": 2051.09,
+      "end": 2055.59,
+      "duration": 4.5,
+      "text": "So the algebra itself is not very interesting."
+    },
+    {
+      "index": 582,
+      "start": 2055.59,
+      "end": 2059.21,
+      "duration": 3.62,
+      "text": "What is really interesting is the nature of the result that"
+    },
+    {
+      "index": 583,
+      "start": 2059.21,
+      "end": 2061.179,
+      "duration": 1.969,
+      "text": "we get here."
+    },
+    {
+      "index": 584,
+      "start": 2061.179,
+      "end": 2066.26,
+      "duration": 5.081,
+      "text": "If we were to plot the result on this particular example you"
+    },
+    {
+      "index": 585,
+      "start": 2066.26,
+      "end": 2072.28,
+      "duration": 6.02,
+      "text": "would get the curve that's something like this."
+    },
+    {
+      "index": 586,
+      "start": 2076.949,
+      "end": 2080.71,
+      "duration": 3.761,
+      "text": "It goes through the middle of this diagram"
+    },
+    {
+      "index": 587,
+      "start": 2080.71,
+      "end": 2083.08,
+      "duration": 2.37,
+      "text": "and is a little slanted."
+    },
+    {
+      "index": 588,
+      "start": 2083.08,
+      "end": 2088.639,
+      "duration": 5.559,
+      "text": "In this example, X and Theta are positively correlated."
+    },
+    {
+      "index": 589,
+      "start": 2088.639,
+      "end": 2091.19,
+      "duration": 2.551,
+      "text": "Bigger values of X generally correspond to"
+    },
+    {
+      "index": 590,
+      "start": 2091.19,
+      "end": 2093.139,
+      "duration": 1.949,
+      "text": "bigger values of Theta."
+    },
+    {
+      "index": 591,
+      "start": 2093.139,
+      "end": 2096.31,
+      "duration": 3.171,
+      "text": "So in this example the covariance between X and Theta"
+    },
+    {
+      "index": 592,
+      "start": 2096.31,
+      "end": 2105.53,
+      "duration": 9.22,
+      "text": "is positive, and so our estimate can be interpreted in"
+    },
+    {
+      "index": 593,
+      "start": 2105.53,
+      "end": 2109.11,
+      "duration": 3.58,
+      "text": "the following way: The expected value of Theta is the"
+    },
+    {
+      "index": 594,
+      "start": 2109.11,
+      "end": 2113.13,
+      "duration": 4.02,
+      "text": "estimate that you would come up with if you didn't have any"
+    },
+    {
+      "index": 595,
+      "start": 2113.13,
+      "end": 2115.96,
+      "duration": 2.83,
+      "text": "information about Theta."
+    },
+    {
+      "index": 596,
+      "start": 2115.96,
+      "end": 2119.59,
+      "duration": 3.63,
+      "text": "If you don't make any observations this is the best"
+    },
+    {
+      "index": 597,
+      "start": 2119.59,
+      "end": 2122.27,
+      "duration": 2.68,
+      "text": "way of estimating Theta."
+    },
+    {
+      "index": 598,
+      "start": 2122.27,
+      "end": 2126.19,
+      "duration": 3.92,
+      "text": "But I have made an observation, X, and I need to"
+    },
+    {
+      "index": 599,
+      "start": 2126.19,
+      "end": 2127.92,
+      "duration": 1.73,
+      "text": "take it into account."
+    },
+    {
+      "index": 600,
+      "start": 2127.92,
+      "end": 2132.36,
+      "duration": 4.44,
+      "text": "I look at this difference, which is the piece of news"
+    },
+    {
+      "index": 601,
+      "start": 2132.36,
+      "end": 2134.38,
+      "duration": 2.02,
+      "text": "contained in X?"
+    },
+    {
+      "index": 602,
+      "start": 2134.38,
+      "end": 2137.87,
+      "duration": 3.49,
+      "text": "That's what X should be on the average."
+    },
+    {
+      "index": 603,
+      "start": 2137.87,
+      "end": 2141.91,
+      "duration": 4.04,
+      "text": "If I observe an X which is bigger than what I expected it"
+    },
+    {
+      "index": 604,
+      "start": 2141.91,
+      "end": 2146.83,
+      "duration": 4.92,
+      "text": "to be, and since X and Theta are positively correlated,"
+    },
+    {
+      "index": 605,
+      "start": 2146.83,
+      "end": 2151.07,
+      "duration": 4.24,
+      "text": "this tells me that Theta should also be bigger than its"
+    },
+    {
+      "index": 606,
+      "start": 2151.07,
+      "end": 2152.69,
+      "duration": 1.62,
+      "text": "average value."
+    },
+    {
+      "index": 607,
+      "start": 2152.69,
+      "end": 2157.18,
+      "duration": 4.49,
+      "text": "Whenever I see an X that's larger than its average value"
+    },
+    {
+      "index": 608,
+      "start": 2157.18,
+      "end": 2160.23,
+      "duration": 3.05,
+      "text": "this gives me an indication that theta should also"
+    },
+    {
+      "index": 609,
+      "start": 2160.23,
+      "end": 2164.48,
+      "duration": 4.25,
+      "text": "probably be larger than its average value."
+    },
+    {
+      "index": 610,
+      "start": 2164.48,
+      "end": 2168.04,
+      "duration": 3.56,
+      "text": "And so I'm taking that difference and multiplying it"
+    },
+    {
+      "index": 611,
+      "start": 2168.04,
+      "end": 2170.24,
+      "duration": 2.2,
+      "text": "by a positive coefficient."
+    },
+    {
+      "index": 612,
+      "start": 2170.24,
+      "end": 2172.36,
+      "duration": 2.12,
+      "text": "And that's what gives me a curve here that"
+    },
+    {
+      "index": 613,
+      "start": 2172.36,
+      "end": 2174.88,
+      "duration": 2.52,
+      "text": "has a positive slope."
+    },
+    {
+      "index": 614,
+      "start": 2174.88,
+      "end": 2177.78,
+      "duration": 2.9,
+      "text": "So this increment--"
+    },
+    {
+      "index": 615,
+      "start": 2177.78,
+      "end": 2181.75,
+      "duration": 3.97,
+      "text": "the new information contained in X as compared to the"
+    },
+    {
+      "index": 616,
+      "start": 2181.75,
+      "end": 2185.95,
+      "duration": 4.2,
+      "text": "average value we expected apriori, that increment allows"
+    },
+    {
+      "index": 617,
+      "start": 2185.95,
+      "end": 2190.78,
+      "duration": 4.83,
+      "text": "us to make a correction to our prior estimate of Theta, and"
+    },
+    {
+      "index": 618,
+      "start": 2190.78,
+      "end": 2194.78,
+      "duration": 4.0,
+      "text": "the amount of that correction is guided by the covariance of"
+    },
+    {
+      "index": 619,
+      "start": 2194.78,
+      "end": 2196.26,
+      "duration": 1.48,
+      "text": "X with Theta."
+    },
+    {
+      "index": 620,
+      "start": 2196.26,
+      "end": 2199.67,
+      "duration": 3.41,
+      "text": "If the covariance of X with Theta were 0, that would mean"
+    },
+    {
+      "index": 621,
+      "start": 2199.67,
+      "end": 2203.05,
+      "duration": 3.38,
+      "text": "there's no systematic relation between the two, and in that"
+    },
+    {
+      "index": 622,
+      "start": 2203.05,
+      "end": 2206.38,
+      "duration": 3.33,
+      "text": "case obtaining some information from X doesn't"
+    },
+    {
+      "index": 623,
+      "start": 2206.38,
+      "end": 2211.01,
+      "duration": 4.63,
+      "text": "give us a guide as to how to change the estimates of Theta."
+    },
+    {
+      "index": 624,
+      "start": 2211.01,
+      "end": 2213.87,
+      "duration": 2.86,
+      "text": "If that were 0, we would just stay with"
+    },
+    {
+      "index": 625,
+      "start": 2213.87,
+      "end": 2215.05,
+      "duration": 1.18,
+      "text": "this particular estimate."
+    },
+    {
+      "index": 626,
+      "start": 2215.05,
+      "end": 2217.09,
+      "duration": 2.04,
+      "text": "We're not able to make a correction."
+    },
+    {
+      "index": 627,
+      "start": 2217.09,
+      "end": 2220.81,
+      "duration": 3.72,
+      "text": "But when there's a non zero covariance between X and Theta"
+    },
+    {
+      "index": 628,
+      "start": 2220.81,
+      "end": 2224.62,
+      "duration": 3.81,
+      "text": "that covariance works as a guide for us to obtain a"
+    },
+    {
+      "index": 629,
+      "start": 2224.62,
+      "end": 2228.13,
+      "duration": 3.51,
+      "text": "better estimate of Theta."
+    },
+    {
+      "index": 630,
+      "start": 2232.27,
+      "end": 2235.22,
+      "duration": 2.95,
+      "text": "How about the resulting mean squared error?"
+    },
+    {
+      "index": 631,
+      "start": 2235.22,
+      "end": 2238.69,
+      "duration": 3.47,
+      "text": "In this context turns out that there's a very nice formula"
+    },
+    {
+      "index": 632,
+      "start": 2238.69,
+      "end": 2241.36,
+      "duration": 2.67,
+      "text": "for the mean squared error obtained from"
+    },
+    {
+      "index": 633,
+      "start": 2241.36,
+      "end": 2244.78,
+      "duration": 3.42,
+      "text": "the best linear estimate."
+    },
+    {
+      "index": 634,
+      "start": 2244.78,
+      "end": 2247.9,
+      "duration": 3.12,
+      "text": "What's the story here?"
+    },
+    {
+      "index": 635,
+      "start": 2247.9,
+      "end": 2251.21,
+      "duration": 3.31,
+      "text": "The mean squared error that we have has something to do with"
+    },
+    {
+      "index": 636,
+      "start": 2251.21,
+      "end": 2255.45,
+      "duration": 4.24,
+      "text": "the variance of the original random variable."
+    },
+    {
+      "index": 637,
+      "start": 2255.45,
+      "end": 2258.71,
+      "duration": 3.26,
+      "text": "The more uncertain our original random variable is,"
+    },
+    {
+      "index": 638,
+      "start": 2258.71,
+      "end": 2261.67,
+      "duration": 2.96,
+      "text": "the more error we're going to make."
+    },
+    {
+      "index": 639,
+      "start": 2261.67,
+      "end": 2265.59,
+      "duration": 3.92,
+      "text": "On the other hand, when the two variables are correlated"
+    },
+    {
+      "index": 640,
+      "start": 2265.59,
+      "end": 2268.37,
+      "duration": 2.78,
+      "text": "we explored that correlation to improve our estimate."
+    },
+    {
+      "index": 641,
+      "start": 2272.1,
+      "end": 2274.65,
+      "duration": 2.55,
+      "text": "This row here is the correlation coefficient"
+    },
+    {
+      "index": 642,
+      "start": 2274.65,
+      "end": 2276.73,
+      "duration": 2.08,
+      "text": "between the two random variables."
+    },
+    {
+      "index": 643,
+      "start": 2276.73,
+      "end": 2279.72,
+      "duration": 2.99,
+      "text": "When this correlation coefficient is larger this"
+    },
+    {
+      "index": 644,
+      "start": 2279.72,
+      "end": 2281.78,
+      "duration": 2.06,
+      "text": "factor here becomes smaller."
+    },
+    {
+      "index": 645,
+      "start": 2281.78,
+      "end": 2284.66,
+      "duration": 2.88,
+      "text": "And our mean squared error become smaller."
+    },
+    {
+      "index": 646,
+      "start": 2284.66,
+      "end": 2287.56,
+      "duration": 2.9,
+      "text": "So think of the two extreme cases."
+    },
+    {
+      "index": 647,
+      "start": 2287.56,
+      "end": 2291.27,
+      "duration": 3.71,
+      "text": "One extreme case is when rho equal to 1 --"
+    },
+    {
+      "index": 648,
+      "start": 2291.27,
+      "end": 2294.2,
+      "duration": 2.93,
+      "text": "so X and Theta are perfectly correlated."
+    },
+    {
+      "index": 649,
+      "start": 2294.2,
+      "end": 2298.42,
+      "duration": 4.22,
+      "text": "When they're perfectly correlated once I know X then"
+    },
+    {
+      "index": 650,
+      "start": 2298.42,
+      "end": 2300.31,
+      "duration": 1.89,
+      "text": "I also know Theta."
+    },
+    {
+      "index": 651,
+      "start": 2300.31,
+      "end": 2303.58,
+      "duration": 3.27,
+      "text": "And the two random variables are linearly related."
+    },
+    {
+      "index": 652,
+      "start": 2303.58,
+      "end": 2307.08,
+      "duration": 3.5,
+      "text": "In that case, my estimate is right on the target, and the"
+    },
+    {
+      "index": 653,
+      "start": 2307.08,
+      "end": 2310.86,
+      "duration": 3.78,
+      "text": "mean squared error is going to be 0."
+    },
+    {
+      "index": 654,
+      "start": 2310.86,
+      "end": 2314.81,
+      "duration": 3.95,
+      "text": "The other extreme case is if rho is equal to 0."
+    },
+    {
+      "index": 655,
+      "start": 2314.81,
+      "end": 2317.59,
+      "duration": 2.78,
+      "text": "The two random variables are uncorrelated."
+    },
+    {
+      "index": 656,
+      "start": 2317.59,
+      "end": 2321.74,
+      "duration": 4.15,
+      "text": "In that case the measurement does not help me estimate"
+    },
+    {
+      "index": 657,
+      "start": 2321.74,
+      "end": 2325.39,
+      "duration": 3.65,
+      "text": "Theta, and the uncertainty that's left--"
+    },
+    {
+      "index": 658,
+      "start": 2325.39,
+      "end": 2326.97,
+      "duration": 1.58,
+      "text": "the mean squared error--"
+    },
+    {
+      "index": 659,
+      "start": 2326.97,
+      "end": 2329.83,
+      "duration": 2.86,
+      "text": "is just the original variance of Theta."
+    },
+    {
+      "index": 660,
+      "start": 2329.83,
+      "end": 2333.75,
+      "duration": 3.92,
+      "text": "So the uncertainty in Theta does not get reduced."
+    },
+    {
+      "index": 661,
+      "start": 2333.75,
+      "end": 2334.67,
+      "duration": 0.92,
+      "text": "So moral--"
+    },
+    {
+      "index": 662,
+      "start": 2334.67,
+      "end": 2339.71,
+      "duration": 5.04,
+      "text": "the estimation error is a reduced version of the"
+    },
+    {
+      "index": 663,
+      "start": 2339.71,
+      "end": 2343.66,
+      "duration": 3.95,
+      "text": "original amount of uncertainty in the random variable Theta,"
+    },
+    {
+      "index": 664,
+      "start": 2343.66,
+      "end": 2348.28,
+      "duration": 4.62,
+      "text": "and the larger the correlation between those two random"
+    },
+    {
+      "index": 665,
+      "start": 2348.28,
+      "end": 2352.62,
+      "duration": 4.34,
+      "text": "variables, the better we can remove uncertainty from the"
+    },
+    {
+      "index": 666,
+      "start": 2352.62,
+      "end": 2353.97,
+      "duration": 1.35,
+      "text": "original random variable."
+    },
+    {
+      "index": 667,
+      "start": 2357.32,
+      "end": 2361.2,
+      "duration": 3.88,
+      "text": "I didn't derive this formula, but it's just a matter of"
+    },
+    {
+      "index": 668,
+      "start": 2361.2,
+      "end": 2362.43,
+      "duration": 1.23,
+      "text": "algebraic manipulations."
+    },
+    {
+      "index": 669,
+      "start": 2362.43,
+      "end": 2365.77,
+      "duration": 3.34,
+      "text": "We have a formula for Theta hat, subtract"
+    },
+    {
+      "index": 670,
+      "start": 2365.77,
+      "end": 2367.62,
+      "duration": 1.85,
+      "text": "Theta from that formula."
+    },
+    {
+      "index": 671,
+      "start": 2367.62,
+      "end": 2370.64,
+      "duration": 3.02,
+      "text": "Take square, take expectations, and do a few"
+    },
+    {
+      "index": 672,
+      "start": 2370.64,
+      "end": 2373.75,
+      "duration": 3.11,
+      "text": "lines of algebra that you can read in the text, and you end"
+    },
+    {
+      "index": 673,
+      "start": 2373.75,
+      "end": 2375.915,
+      "duration": 2.165,
+      "text": "up with this really neat and clean formula."
+    },
+    {
+      "index": 674,
+      "start": 2378.65,
+      "end": 2382.36,
+      "duration": 3.71,
+      "text": "Now I mentioned in the beginning of the lecture that"
+    },
+    {
+      "index": 675,
+      "start": 2382.36,
+      "end": 2385.22,
+      "duration": 2.86,
+      "text": "we can do inference with Theta's and X's not just being"
+    },
+    {
+      "index": 676,
+      "start": 2385.22,
+      "end": 2388.97,
+      "duration": 3.75,
+      "text": "single numbers, but they could be vector random variables."
+    },
+    {
+      "index": 677,
+      "start": 2388.97,
+      "end": 2392.1,
+      "duration": 3.13,
+      "text": "So for example we might have multiple data that gives us"
+    },
+    {
+      "index": 678,
+      "start": 2392.1,
+      "end": 2396.71,
+      "duration": 4.61,
+      "text": "information about X."
+    },
+    {
+      "index": 679,
+      "start": 2396.71,
+      "end": 2400.24,
+      "duration": 3.53,
+      "text": "There are no vectors here, so this discussion was for the"
+    },
+    {
+      "index": 680,
+      "start": 2400.24,
+      "end": 2404.46,
+      "duration": 4.22,
+      "text": "case where Theta and X were just scalar, one-dimensional"
+    },
+    {
+      "index": 681,
+      "start": 2404.46,
+      "end": 2405.35,
+      "duration": 0.89,
+      "text": "quantities."
+    },
+    {
+      "index": 682,
+      "start": 2405.35,
+      "end": 2408.06,
+      "duration": 2.71,
+      "text": "What do we do if we have multiple data?"
+    },
+    {
+      "index": 683,
+      "start": 2408.06,
+      "end": 2411.99,
+      "duration": 3.93,
+      "text": "Suppose that Theta is still a scalar, it's one dimensional,"
+    },
+    {
+      "index": 684,
+      "start": 2411.99,
+      "end": 2414.71,
+      "duration": 2.72,
+      "text": "but we make several observations."
+    },
+    {
+      "index": 685,
+      "start": 2414.71,
+      "end": 2417.05,
+      "duration": 2.34,
+      "text": "And on the basis of these observations we want to"
+    },
+    {
+      "index": 686,
+      "start": 2417.05,
+      "end": 2420.08,
+      "duration": 3.03,
+      "text": "estimate Theta."
+    },
+    {
+      "index": 687,
+      "start": 2420.08,
+      "end": 2424.65,
+      "duration": 4.57,
+      "text": "The optimal least mean squares estimator would be again the"
+    },
+    {
+      "index": 688,
+      "start": 2424.65,
+      "end": 2428.83,
+      "duration": 4.18,
+      "text": "conditional expectation of Theta given X. That's the"
+    },
+    {
+      "index": 689,
+      "start": 2428.83,
+      "end": 2430.13,
+      "duration": 1.3,
+      "text": "optimal one."
+    },
+    {
+      "index": 690,
+      "start": 2430.13,
+      "end": 2436.33,
+      "duration": 6.2,
+      "text": "And in this case X is a vector, so the general"
+    },
+    {
+      "index": 691,
+      "start": 2436.33,
+      "end": 2440.65,
+      "duration": 4.32,
+      "text": "estimator we would use would be this one."
+    },
+    {
+      "index": 692,
+      "start": 2440.65,
+      "end": 2444.05,
+      "duration": 3.4,
+      "text": "But if we want to keep things simple and we want our"
+    },
+    {
+      "index": 693,
+      "start": 2444.05,
+      "end": 2447.3,
+      "duration": 3.25,
+      "text": "estimator to have a simple functional form we might"
+    },
+    {
+      "index": 694,
+      "start": 2447.3,
+      "end": 2451.87,
+      "duration": 4.57,
+      "text": "restrict to estimator that are linear functions of the data."
+    },
+    {
+      "index": 695,
+      "start": 2451.87,
+      "end": 2453.8,
+      "duration": 1.93,
+      "text": "And then the story is exactly the same as"
+    },
+    {
+      "index": 696,
+      "start": 2453.8,
+      "end": 2457.01,
+      "duration": 3.21,
+      "text": "we discussed before."
+    },
+    {
+      "index": 697,
+      "start": 2457.01,
+      "end": 2460.46,
+      "duration": 3.45,
+      "text": "I constrained myself to estimating Theta using a"
+    },
+    {
+      "index": 698,
+      "start": 2460.46,
+      "end": 2465.88,
+      "duration": 5.42,
+      "text": "linear function of the data, so my signal processing box"
+    },
+    {
+      "index": 699,
+      "start": 2465.88,
+      "end": 2467.83,
+      "duration": 1.95,
+      "text": "just applies a linear function."
+    },
+    {
+      "index": 700,
+      "start": 2467.83,
+      "end": 2471.145,
+      "duration": 3.315,
+      "text": "And I'm looking for the best coefficients, the coefficients"
+    },
+    {
+      "index": 701,
+      "start": 2471.145,
+      "end": 2473.49,
+      "duration": 2.345,
+      "text": "that are going to result in the least"
+    },
+    {
+      "index": 702,
+      "start": 2473.49,
+      "end": 2475.99,
+      "duration": 2.5,
+      "text": "possible squared error."
+    },
+    {
+      "index": 703,
+      "start": 2475.99,
+      "end": 2479.78,
+      "duration": 3.79,
+      "text": "This is my squared error, this is (my estimate minus the"
+    },
+    {
+      "index": 704,
+      "start": 2479.78,
+      "end": 2482.11,
+      "duration": 2.33,
+      "text": "thing I'm trying to estimate) squared, and"
+    },
+    {
+      "index": 705,
+      "start": 2482.11,
+      "end": 2484.1,
+      "duration": 1.99,
+      "text": "then taking the average."
+    },
+    {
+      "index": 706,
+      "start": 2484.1,
+      "end": 2485.33,
+      "duration": 1.23,
+      "text": "How do we do this?"
+    },
+    {
+      "index": 707,
+      "start": 2485.33,
+      "end": 2486.58,
+      "duration": 1.25,
+      "text": "Same story as before."
+    },
+    {
+      "index": 708,
+      "start": 2489.51,
+      "end": 2492.5,
+      "duration": 2.99,
+      "text": "The X's and the Theta's get averaged out because we have"
+    },
+    {
+      "index": 709,
+      "start": 2492.5,
+      "end": 2493.43,
+      "duration": 0.93,
+      "text": "an expectation."
+    },
+    {
+      "index": 710,
+      "start": 2493.43,
+      "end": 2496.83,
+      "duration": 3.4,
+      "text": "Whatever is left is just a function of the coefficients"
+    },
+    {
+      "index": 711,
+      "start": 2496.83,
+      "end": 2498.76,
+      "duration": 1.93,
+      "text": "of the a's and of b's."
+    },
+    {
+      "index": 712,
+      "start": 2498.76,
+      "end": 2502.11,
+      "duration": 3.35,
+      "text": "As before it turns out to be a quadratic function."
+    },
+    {
+      "index": 713,
+      "start": 2502.11,
+      "end": 2506.58,
+      "duration": 4.47,
+      "text": "Then we set the derivatives of this function of a's and b's"
+    },
+    {
+      "index": 714,
+      "start": 2506.58,
+      "end": 2510.0,
+      "duration": 3.42,
+      "text": "with respect to the coefficients, we set it to 0."
+    },
+    {
+      "index": 715,
+      "start": 2510.0,
+      "end": 2514.34,
+      "duration": 4.34,
+      "text": "And this gives us a system of linear equations."
+    },
+    {
+      "index": 716,
+      "start": 2514.34,
+      "end": 2516.78,
+      "duration": 2.44,
+      "text": "It's a system of linear equations that's satisfied by"
+    },
+    {
+      "index": 717,
+      "start": 2516.78,
+      "end": 2517.73,
+      "duration": 0.95,
+      "text": "those coefficients."
+    },
+    {
+      "index": 718,
+      "start": 2517.73,
+      "end": 2520.86,
+      "duration": 3.13,
+      "text": "It's a linear system because this is a quadratic function"
+    },
+    {
+      "index": 719,
+      "start": 2520.86,
+      "end": 2523.95,
+      "duration": 3.09,
+      "text": "of those coefficients."
+    },
+    {
+      "index": 720,
+      "start": 2523.95,
+      "end": 2530.41,
+      "duration": 6.46,
+      "text": "So to get closed-form formulas in this particular case one"
+    },
+    {
+      "index": 721,
+      "start": 2530.41,
+      "end": 2533.18,
+      "duration": 2.77,
+      "text": "would need to introduce vectors, and matrices, and"
+    },
+    {
+      "index": 722,
+      "start": 2533.18,
+      "end": 2535.33,
+      "duration": 2.15,
+      "text": "metrics inverses and so on."
+    },
+    {
+      "index": 723,
+      "start": 2535.33,
+      "end": 2538.57,
+      "duration": 3.24,
+      "text": "The particular formulas are not so much what interests us"
+    },
+    {
+      "index": 724,
+      "start": 2538.57,
+      "end": 2542.95,
+      "duration": 4.38,
+      "text": "here, rather, the interesting thing is that this is simply"
+    },
+    {
+      "index": 725,
+      "start": 2542.95,
+      "end": 2547.12,
+      "duration": 4.17,
+      "text": "done just using straightforward solvers of"
+    },
+    {
+      "index": 726,
+      "start": 2547.12,
+      "end": 2549.24,
+      "duration": 2.12,
+      "text": "linear equations."
+    },
+    {
+      "index": 727,
+      "start": 2549.24,
+      "end": 2552.47,
+      "duration": 3.23,
+      "text": "The only thing you need to do is to write down the correct"
+    },
+    {
+      "index": 728,
+      "start": 2552.47,
+      "end": 2555.28,
+      "duration": 2.81,
+      "text": "coefficients of those non-linear equations."
+    },
+    {
+      "index": 729,
+      "start": 2555.28,
+      "end": 2557.44,
+      "duration": 2.16,
+      "text": "And the typical coefficient that you would"
+    },
+    {
+      "index": 730,
+      "start": 2557.44,
+      "end": 2559.24,
+      "duration": 1.8,
+      "text": "get would be what?"
+    },
+    {
+      "index": 731,
+      "start": 2559.24,
+      "end": 2562.48,
+      "duration": 3.24,
+      "text": "Let say a typical quick equations would be --"
+    },
+    {
+      "index": 732,
+      "start": 2562.48,
+      "end": 2564.19,
+      "duration": 1.71,
+      "text": "let's take a typical term of this"
+    },
+    {
+      "index": 733,
+      "start": 2564.19,
+      "end": 2565.68,
+      "duration": 1.49,
+      "text": "quadratic one you expanded."
+    },
+    {
+      "index": 734,
+      "start": 2565.68,
+      "end": 2571.47,
+      "duration": 5.79,
+      "text": "You're going to get the terms such as a1x1 times a2x2."
+    },
+    {
+      "index": 735,
+      "start": 2571.47,
+      "end": 2575.68,
+      "duration": 4.21,
+      "text": "When you take expectations you're left with a1a2 times"
+    },
+    {
+      "index": 736,
+      "start": 2575.68,
+      "end": 2578.21,
+      "duration": 2.53,
+      "text": "expected value of x1x2."
+    },
+    {
+      "index": 737,
+      "start": 2582.03,
+      "end": 2586.7,
+      "duration": 4.67,
+      "text": "So this would involve terms such as a1 squared expected"
+    },
+    {
+      "index": 738,
+      "start": 2586.7,
+      "end": 2588.52,
+      "duration": 1.82,
+      "text": "value of x1 squared."
+    },
+    {
+      "index": 739,
+      "start": 2588.52,
+      "end": 2594.76,
+      "duration": 6.24,
+      "text": "You would get terms such as a1a2, expected value of x1x2,"
+    },
+    {
+      "index": 740,
+      "start": 2594.76,
+      "end": 2600.12,
+      "duration": 5.36,
+      "text": "and a lot of other terms here should have a too."
+    },
+    {
+      "index": 741,
+      "start": 2600.12,
+      "end": 2603.6,
+      "duration": 3.48,
+      "text": "So you get something that's quadratic in your"
+    },
+    {
+      "index": 742,
+      "start": 2603.6,
+      "end": 2604.89,
+      "duration": 1.29,
+      "text": "coefficients."
+    },
+    {
+      "index": 743,
+      "start": 2604.89,
+      "end": 2610.49,
+      "duration": 5.6,
+      "text": "And the constants that show up in your system of equations"
+    },
+    {
+      "index": 744,
+      "start": 2610.49,
+      "end": 2613.79,
+      "duration": 3.3,
+      "text": "are things that have to do with the expected values of"
+    },
+    {
+      "index": 745,
+      "start": 2613.79,
+      "end": 2617.07,
+      "duration": 3.28,
+      "text": "squares of your random variables, or products of your"
+    },
+    {
+      "index": 746,
+      "start": 2617.07,
+      "end": 2619.13,
+      "duration": 2.06,
+      "text": "random variables."
+    },
+    {
+      "index": 747,
+      "start": 2619.13,
+      "end": 2623.06,
+      "duration": 3.93,
+      "text": "To write down the numerical values for these the only"
+    },
+    {
+      "index": 748,
+      "start": 2623.06,
+      "end": 2626.33,
+      "duration": 3.27,
+      "text": "thing you need to know are the means and variances of your"
+    },
+    {
+      "index": 749,
+      "start": 2626.33,
+      "end": 2627.57,
+      "duration": 1.24,
+      "text": "random variables."
+    },
+    {
+      "index": 750,
+      "start": 2627.57,
+      "end": 2630.36,
+      "duration": 2.79,
+      "text": "If you know the mean and variance then you know what"
+    },
+    {
+      "index": 751,
+      "start": 2630.36,
+      "end": 2631.76,
+      "duration": 1.4,
+      "text": "this thing is."
+    },
+    {
+      "index": 752,
+      "start": 2631.76,
+      "end": 2634.95,
+      "duration": 3.19,
+      "text": "And if you know the covariances as well then you"
+    },
+    {
+      "index": 753,
+      "start": 2634.95,
+      "end": 2637.25,
+      "duration": 2.3,
+      "text": "know what this thing is."
+    },
+    {
+      "index": 754,
+      "start": 2637.25,
+      "end": 2642.08,
+      "duration": 4.83,
+      "text": "So in order to find the optimal linear estimator in"
+    },
+    {
+      "index": 755,
+      "start": 2642.08,
+      "end": 2646.87,
+      "duration": 4.79,
+      "text": "the case of multiple data you do not need to know the entire"
+    },
+    {
+      "index": 756,
+      "start": 2646.87,
+      "end": 2649.23,
+      "duration": 2.36,
+      "text": "probability distribution of the random"
+    },
+    {
+      "index": 757,
+      "start": 2649.23,
+      "end": 2651.05,
+      "duration": 1.82,
+      "text": "variables that are involved."
+    },
+    {
+      "index": 758,
+      "start": 2651.05,
+      "end": 2654.69,
+      "duration": 3.64,
+      "text": "You only need to know your means and covariances."
+    },
+    {
+      "index": 759,
+      "start": 2654.69,
+      "end": 2658.67,
+      "duration": 3.98,
+      "text": "These are the only quantities that affect the construction"
+    },
+    {
+      "index": 760,
+      "start": 2658.67,
+      "end": 2660.57,
+      "duration": 1.9,
+      "text": "of your optimal estimator."
+    },
+    {
+      "index": 761,
+      "start": 2660.57,
+      "end": 2663.84,
+      "duration": 3.27,
+      "text": "We could see this already in this formula."
+    },
+    {
+      "index": 762,
+      "start": 2663.84,
+      "end": 2669.65,
+      "duration": 5.81,
+      "text": "The form of my optimal estimator is completely"
+    },
+    {
+      "index": 763,
+      "start": 2669.65,
+      "end": 2674.1,
+      "duration": 4.45,
+      "text": "determined once I know the means, variance, and"
+    },
+    {
+      "index": 764,
+      "start": 2674.1,
+      "end": 2677.97,
+      "duration": 3.87,
+      "text": "covariance of the random variables in my model."
+    },
+    {
+      "index": 765,
+      "start": 2677.97,
+      "end": 2684.41,
+      "duration": 6.44,
+      "text": "I do not need to know how the details distribution of the"
+    },
+    {
+      "index": 766,
+      "start": 2684.41,
+      "end": 2686.57,
+      "duration": 2.16,
+      "text": "random variables that are involved here."
+    },
+    {
+      "index": 767,
+      "start": 2691.69,
+      "end": 2695.11,
+      "duration": 3.42,
+      "text": "So as I said in general, you find the form of the optimal"
+    },
+    {
+      "index": 768,
+      "start": 2695.11,
+      "end": 2699.55,
+      "duration": 4.44,
+      "text": "estimator by using a linear equation solver."
+    },
+    {
+      "index": 769,
+      "start": 2699.55,
+      "end": 2701.89,
+      "duration": 2.34,
+      "text": "There are special examples in which you can"
+    },
+    {
+      "index": 770,
+      "start": 2701.89,
+      "end": 2705.21,
+      "duration": 3.32,
+      "text": "get closed-form solutions."
+    },
+    {
+      "index": 771,
+      "start": 2705.21,
+      "end": 2710.09,
+      "duration": 4.88,
+      "text": "The nicest simplest estimation problem one can think of is"
+    },
+    {
+      "index": 772,
+      "start": 2710.09,
+      "end": 2711.12,
+      "duration": 1.03,
+      "text": "the following--"
+    },
+    {
+      "index": 773,
+      "start": 2711.12,
+      "end": 2714.87,
+      "duration": 3.75,
+      "text": "you have some uncertain parameter, and you make"
+    },
+    {
+      "index": 774,
+      "start": 2714.87,
+      "end": 2717.79,
+      "duration": 2.92,
+      "text": "multiple measurements of that parameter in"
+    },
+    {
+      "index": 775,
+      "start": 2717.79,
+      "end": 2719.95,
+      "duration": 2.16,
+      "text": "the presence of noise."
+    },
+    {
+      "index": 776,
+      "start": 2719.95,
+      "end": 2722.52,
+      "duration": 2.57,
+      "text": "So the Wi's are noises."
+    },
+    {
+      "index": 777,
+      "start": 2722.52,
+      "end": 2725.13,
+      "duration": 2.61,
+      "text": "I corresponds to your i-th experiment."
+    },
+    {
+      "index": 778,
+      "start": 2725.13,
+      "end": 2727.81,
+      "duration": 2.68,
+      "text": "So this is the most common situation that you encounter"
+    },
+    {
+      "index": 779,
+      "start": 2727.81,
+      "end": 2728.49,
+      "duration": 0.68,
+      "text": "in the lab."
+    },
+    {
+      "index": 780,
+      "start": 2728.49,
+      "end": 2731.24,
+      "duration": 2.75,
+      "text": "If you are dealing with some process, you're trying to"
+    },
+    {
+      "index": 781,
+      "start": 2731.24,
+      "end": 2734.11,
+      "duration": 2.87,
+      "text": "measure something you measure it over and over."
+    },
+    {
+      "index": 782,
+      "start": 2734.11,
+      "end": 2737.03,
+      "duration": 2.92,
+      "text": "Each time your measurement has some random error."
+    },
+    {
+      "index": 783,
+      "start": 2737.03,
+      "end": 2740.36,
+      "duration": 3.33,
+      "text": "And then you need to take all your measurements together and"
+    },
+    {
+      "index": 784,
+      "start": 2740.36,
+      "end": 2743.55,
+      "duration": 3.19,
+      "text": "come up with a single estimate."
+    },
+    {
+      "index": 785,
+      "start": 2743.55,
+      "end": 2748.32,
+      "duration": 4.77,
+      "text": "So the noises are assumed to be independent of each other,"
+    },
+    {
+      "index": 786,
+      "start": 2748.32,
+      "end": 2750.01,
+      "duration": 1.69,
+      "text": "and also to be independent from the"
+    },
+    {
+      "index": 787,
+      "start": 2750.01,
+      "end": 2752.09,
+      "duration": 2.08,
+      "text": "value of the true parameter."
+    },
+    {
+      "index": 788,
+      "start": 2752.09,
+      "end": 2755.01,
+      "duration": 2.92,
+      "text": "Without loss of generality we can assume that the noises"
+    },
+    {
+      "index": 789,
+      "start": 2755.01,
+      "end": 2758.89,
+      "duration": 3.88,
+      "text": "have 0 mean and they have some variances that we"
+    },
+    {
+      "index": 790,
+      "start": 2758.89,
+      "end": 2760.34,
+      "duration": 1.45,
+      "text": "assume to be known."
+    },
+    {
+      "index": 791,
+      "start": 2760.34,
+      "end": 2763.18,
+      "duration": 2.84,
+      "text": "Theta itself has a prior distribution with a certain"
+    },
+    {
+      "index": 792,
+      "start": 2763.18,
+      "end": 2765.67,
+      "duration": 2.49,
+      "text": "mean and the certain variance."
+    },
+    {
+      "index": 793,
+      "start": 2765.67,
+      "end": 2767.61,
+      "duration": 1.94,
+      "text": "So the form of the optimal linear"
+    },
+    {
+      "index": 794,
+      "start": 2767.61,
+      "end": 2770.94,
+      "duration": 3.33,
+      "text": "estimator is really nice."
+    },
+    {
+      "index": 795,
+      "start": 2770.94,
+      "end": 2774.93,
+      "duration": 3.99,
+      "text": "Well maybe you cannot see it right away because this looks"
+    },
+    {
+      "index": 796,
+      "start": 2774.93,
+      "end": 2778.58,
+      "duration": 3.65,
+      "text": "messy, but what is it really?"
+    },
+    {
+      "index": 797,
+      "start": 2778.58,
+      "end": 2784.59,
+      "duration": 6.01,
+      "text": "It's a linear combination of the X's and the prior mean."
+    },
+    {
+      "index": 798,
+      "start": 2784.59,
+      "end": 2788.56,
+      "duration": 3.97,
+      "text": "And it's actually a weighted average of the X's and the"
+    },
+    {
+      "index": 799,
+      "start": 2788.56,
+      "end": 2790.25,
+      "duration": 1.69,
+      "text": "prior mean."
+    },
+    {
+      "index": 800,
+      "start": 2790.25,
+      "end": 2793.57,
+      "duration": 3.32,
+      "text": "Here we collect all of the coefficients that"
+    },
+    {
+      "index": 801,
+      "start": 2793.57,
+      "end": 2795.92,
+      "duration": 2.35,
+      "text": "we have at the top."
+    },
+    {
+      "index": 802,
+      "start": 2795.92,
+      "end": 2802.06,
+      "duration": 6.14,
+      "text": "So the whole thing is basically a weighted average."
+    },
+    {
+      "index": 803,
+      "start": 2806.46,
+      "end": 2811.11,
+      "duration": 4.65,
+      "text": "1/(sigma_i-squared) is the weight that we give to Xi, and"
+    },
+    {
+      "index": 804,
+      "start": 2811.11,
+      "end": 2814.71,
+      "duration": 3.6,
+      "text": "in the denominator we have the sum of all of the weights."
+    },
+    {
+      "index": 805,
+      "start": 2814.71,
+      "end": 2819.26,
+      "duration": 4.55,
+      "text": "So in the end we're dealing with a weighted average."
+    },
+    {
+      "index": 806,
+      "start": 2819.26,
+      "end": 2823.76,
+      "duration": 4.5,
+      "text": "If mu was equal to 1, and all the Xi's were equal to 1 then"
+    },
+    {
+      "index": 807,
+      "start": 2823.76,
+      "end": 2826.79,
+      "duration": 3.03,
+      "text": "our estimate would also be equal to 1."
+    },
+    {
+      "index": 808,
+      "start": 2826.79,
+      "end": 2830.67,
+      "duration": 3.88,
+      "text": "Now the form of the weights that we have is interesting."
+    },
+    {
+      "index": 809,
+      "start": 2830.67,
+      "end": 2836.05,
+      "duration": 5.38,
+      "text": "Any given data point is weighted inversely"
+    },
+    {
+      "index": 810,
+      "start": 2836.05,
+      "end": 2837.82,
+      "duration": 1.77,
+      "text": "proportional to the variance."
+    },
+    {
+      "index": 811,
+      "start": 2837.82,
+      "end": 2840.27,
+      "duration": 2.45,
+      "text": "What does that say?"
+    },
+    {
+      "index": 812,
+      "start": 2840.27,
+      "end": 2846.92,
+      "duration": 6.65,
+      "text": "If my i-th data point has a lot of variance, if Wi is very"
+    },
+    {
+      "index": 813,
+      "start": 2846.92,
+      "end": 2852.9,
+      "duration": 5.98,
+      "text": "noisy then Xi is not very useful, is not very reliable."
+    },
+    {
+      "index": 814,
+      "start": 2852.9,
+      "end": 2856.84,
+      "duration": 3.94,
+      "text": "So I'm giving it a small weight."
+    },
+    {
+      "index": 815,
+      "start": 2856.84,
+      "end": 2861.87,
+      "duration": 5.03,
+      "text": "Large variance, a lot of error in my Xi means that I should"
+    },
+    {
+      "index": 816,
+      "start": 2861.87,
+      "end": 2864.2,
+      "duration": 2.33,
+      "text": "give it a smaller weight."
+    },
+    {
+      "index": 817,
+      "start": 2864.2,
+      "end": 2867.92,
+      "duration": 3.72,
+      "text": "If two data points have the same variance, they're of"
+    },
+    {
+      "index": 818,
+      "start": 2867.92,
+      "end": 2870.14,
+      "duration": 2.22,
+      "text": "comparable quality, then I'm going to"
+    },
+    {
+      "index": 819,
+      "start": 2870.14,
+      "end": 2871.95,
+      "duration": 1.81,
+      "text": "give them equal weight."
+    },
+    {
+      "index": 820,
+      "start": 2871.95,
+      "end": 2876.2,
+      "duration": 4.25,
+      "text": "The other interesting thing is that the prior mean is treated"
+    },
+    {
+      "index": 821,
+      "start": 2876.2,
+      "end": 2878.3,
+      "duration": 2.1,
+      "text": "the same way as the X's."
+    },
+    {
+      "index": 822,
+      "start": 2878.3,
+      "end": 2883.05,
+      "duration": 4.75,
+      "text": "So it's treated as an additional observation."
+    },
+    {
+      "index": 823,
+      "start": 2883.05,
+      "end": 2887.1,
+      "duration": 4.05,
+      "text": "So we're taking a weighted average of the prior mean and"
+    },
+    {
+      "index": 824,
+      "start": 2887.1,
+      "end": 2889.85,
+      "duration": 2.75,
+      "text": "of the measurements that we are making."
+    },
+    {
+      "index": 825,
+      "start": 2889.85,
+      "end": 2893.38,
+      "duration": 3.53,
+      "text": "The formula looks as if the prior mean was just another"
+    },
+    {
+      "index": 826,
+      "start": 2893.38,
+      "end": 2894.21,
+      "duration": 0.83,
+      "text": "data point."
+    },
+    {
+      "index": 827,
+      "start": 2894.21,
+      "end": 2897.44,
+      "duration": 3.23,
+      "text": "So that's the way of thinking about Bayesian estimation."
+    },
+    {
+      "index": 828,
+      "start": 2897.44,
+      "end": 2900.27,
+      "duration": 2.83,
+      "text": "You have your real data points, the X's that you"
+    },
+    {
+      "index": 829,
+      "start": 2900.27,
+      "end": 2903.43,
+      "duration": 3.16,
+      "text": "observe, you also had some prior information."
+    },
+    {
+      "index": 830,
+      "start": 2903.43,
+      "end": 2907.47,
+      "duration": 4.04,
+      "text": "This plays a role similar to a data point."
+    },
+    {
+      "index": 831,
+      "start": 2907.47,
+      "end": 2911.58,
+      "duration": 4.11,
+      "text": "Interesting note that if all random variables are normal in"
+    },
+    {
+      "index": 832,
+      "start": 2911.58,
+      "end": 2915.23,
+      "duration": 3.65,
+      "text": "this model these optimal linear estimator happens to be"
+    },
+    {
+      "index": 833,
+      "start": 2915.23,
+      "end": 2916.95,
+      "duration": 1.72,
+      "text": "also the conditional expectation."
+    },
+    {
+      "index": 834,
+      "start": 2916.95,
+      "end": 2920.0,
+      "duration": 3.05,
+      "text": "That's the nice thing about normal random variables that"
+    },
+    {
+      "index": 835,
+      "start": 2920.0,
+      "end": 2922.77,
+      "duration": 2.77,
+      "text": "conditional expectations turn out to be linear."
+    },
+    {
+      "index": 836,
+      "start": 2922.77,
+      "end": 2926.92,
+      "duration": 4.15,
+      "text": "So the optimal estimate and the optimal linear estimate"
+    },
+    {
+      "index": 837,
+      "start": 2926.92,
+      "end": 2928.56,
+      "duration": 1.64,
+      "text": "turn out to be the same."
+    },
+    {
+      "index": 838,
+      "start": 2928.56,
+      "end": 2931.05,
+      "duration": 2.49,
+      "text": "And that gives us another interpretation of linear"
+    },
+    {
+      "index": 839,
+      "start": 2931.05,
+      "end": 2932.1,
+      "duration": 1.05,
+      "text": "estimation."
+    },
+    {
+      "index": 840,
+      "start": 2932.1,
+      "end": 2934.66,
+      "duration": 2.56,
+      "text": "Linear estimation is essentially the same as"
+    },
+    {
+      "index": 841,
+      "start": 2934.66,
+      "end": 2938.97,
+      "duration": 4.31,
+      "text": "pretending that all random variables are normal."
+    },
+    {
+      "index": 842,
+      "start": 2938.97,
+      "end": 2942.04,
+      "duration": 3.07,
+      "text": "So that's a side point."
+    },
+    {
+      "index": 843,
+      "start": 2942.04,
+      "end": 2944.23,
+      "duration": 2.19,
+      "text": "Now I'd like to close with a comment."
+    },
+    {
+      "index": 844,
+      "start": 2948.37,
+      "end": 2951.76,
+      "duration": 3.39,
+      "text": "You do your measurements and you estimate Theta on the"
+    },
+    {
+      "index": 845,
+      "start": 2951.76,
+      "end": 2957.04,
+      "duration": 5.28,
+      "text": "basis of X. Suppose that instead you have a measuring"
+    },
+    {
+      "index": 846,
+      "start": 2957.04,
+      "end": 2960.97,
+      "duration": 3.93,
+      "text": "device that's measures X-cubed instead of measuring X, and"
+    },
+    {
+      "index": 847,
+      "start": 2960.97,
+      "end": 2963.35,
+      "duration": 2.38,
+      "text": "you want to estimate Theta."
+    },
+    {
+      "index": 848,
+      "start": 2963.35,
+      "end": 2966.76,
+      "duration": 3.41,
+      "text": "Are you going to get to different a estimate?"
+    },
+    {
+      "index": 849,
+      "start": 2966.76,
+      "end": 2971.79,
+      "duration": 5.03,
+      "text": "Well X and X-cubed contained the same information."
+    },
+    {
+      "index": 850,
+      "start": 2971.79,
+      "end": 2974.73,
+      "duration": 2.94,
+      "text": "Telling you X is the same as telling you"
+    },
+    {
+      "index": 851,
+      "start": 2974.73,
+      "end": 2976.64,
+      "duration": 1.91,
+      "text": "the value of X-cubed."
+    },
+    {
+      "index": 852,
+      "start": 2976.64,
+      "end": 2980.66,
+      "duration": 4.02,
+      "text": "So the posterior distribution of Theta given X is the same"
+    },
+    {
+      "index": 853,
+      "start": 2980.66,
+      "end": 2984.16,
+      "duration": 3.5,
+      "text": "as the posterior distribution of Theta given X-cubed."
+    },
+    {
+      "index": 854,
+      "start": 2984.16,
+      "end": 2987.45,
+      "duration": 3.29,
+      "text": "And so the means of these posterior distributions are"
+    },
+    {
+      "index": 855,
+      "start": 2987.45,
+      "end": 2989.39,
+      "duration": 1.94,
+      "text": "going to be the same."
+    },
+    {
+      "index": 856,
+      "start": 2989.39,
+      "end": 2992.85,
+      "duration": 3.46,
+      "text": "So doing transformations through your data does not"
+    },
+    {
+      "index": 857,
+      "start": 2992.85,
+      "end": 2997.37,
+      "duration": 4.52,
+      "text": "matter if you're doing optimal least squares estimation."
+    },
+    {
+      "index": 858,
+      "start": 2997.37,
+      "end": 3000.1,
+      "duration": 2.73,
+      "text": "On the other hand, if you restrict yourself to doing"
+    },
+    {
+      "index": 859,
+      "start": 3000.1,
+      "end": 3005.54,
+      "duration": 5.44,
+      "text": "linear estimation then using a linear function of X is not"
+    },
+    {
+      "index": 860,
+      "start": 3005.54,
+      "end": 3009.72,
+      "duration": 4.18,
+      "text": "the same as using a linear function of X-cubed."
+    },
+    {
+      "index": 861,
+      "start": 3009.72,
+      "end": 3014.72,
+      "duration": 5.0,
+      "text": "So this is a linear estimator, but where the data are the"
+    },
+    {
+      "index": 862,
+      "start": 3014.72,
+      "end": 3019.25,
+      "duration": 4.53,
+      "text": "X-cube's, and we have a linear function of the data."
+    },
+    {
+      "index": 863,
+      "start": 3019.25,
+      "end": 3023.69,
+      "duration": 4.44,
+      "text": "So this means that when you're using linear estimation you"
+    },
+    {
+      "index": 864,
+      "start": 3023.69,
+      "end": 3028.04,
+      "duration": 4.35,
+      "text": "have some choices to make linear on what?"
+    },
+    {
+      "index": 865,
+      "start": 3028.04,
+      "end": 3032.29,
+      "duration": 4.25,
+      "text": "Sometimes you want to plot your data on a not ordinary"
+    },
+    {
+      "index": 866,
+      "start": 3032.29,
+      "end": 3035.09,
+      "duration": 2.8,
+      "text": "scale and try to plot a line through them."
+    },
+    {
+      "index": 867,
+      "start": 3035.09,
+      "end": 3038.36,
+      "duration": 3.27,
+      "text": "Sometimes you plot your data on a logarithmic scale, and"
+    },
+    {
+      "index": 868,
+      "start": 3038.36,
+      "end": 3040.48,
+      "duration": 2.12,
+      "text": "try to plot a line through them."
+    },
+    {
+      "index": 869,
+      "start": 3040.48,
+      "end": 3042.39,
+      "duration": 1.91,
+      "text": "Which scale is the appropriate one?"
+    },
+    {
+      "index": 870,
+      "start": 3042.39,
+      "end": 3044.51,
+      "duration": 2.12,
+      "text": "Here it would be a cubic scale."
+    },
+    {
+      "index": 871,
+      "start": 3044.51,
+      "end": 3046.83,
+      "duration": 2.32,
+      "text": "And you have to think about your particular model to"
+    },
+    {
+      "index": 872,
+      "start": 3046.83,
+      "end": 3051.18,
+      "duration": 4.35,
+      "text": "decide which version would be a more appropriate one."
+    },
+    {
+      "index": 873,
+      "start": 3051.18,
+      "end": 3055.83,
+      "duration": 4.65,
+      "text": "Finally when we have multiple data sometimes these multiple"
+    },
+    {
+      "index": 874,
+      "start": 3055.83,
+      "end": 3059.91,
+      "duration": 4.08,
+      "text": "data might contain the same information."
+    },
+    {
+      "index": 875,
+      "start": 3059.91,
+      "end": 3062.8,
+      "duration": 2.89,
+      "text": "So X is one data point, X-squared is another data"
+    },
+    {
+      "index": 876,
+      "start": 3062.8,
+      "end": 3065.61,
+      "duration": 2.81,
+      "text": "point, X-cubed is another data point."
+    },
+    {
+      "index": 877,
+      "start": 3065.61,
+      "end": 3068.54,
+      "duration": 2.93,
+      "text": "The three of them contain the same information, but you can"
+    },
+    {
+      "index": 878,
+      "start": 3068.54,
+      "end": 3071.48,
+      "duration": 2.94,
+      "text": "try to form a linear function of them."
+    },
+    {
+      "index": 879,
+      "start": 3071.48,
+      "end": 3074.38,
+      "duration": 2.9,
+      "text": "And then you obtain a linear estimator that has a more"
+    },
+    {
+      "index": 880,
+      "start": 3074.38,
+      "end": 3076.93,
+      "duration": 2.55,
+      "text": "general form as a function of X."
+    },
+    {
+      "index": 881,
+      "start": 3076.93,
+      "end": 3082.13,
+      "duration": 5.2,
+      "text": "So if you want to estimate your Theta as a cubic function"
+    },
+    {
+      "index": 882,
+      "start": 3082.13,
+      "end": 3086.33,
+      "duration": 4.2,
+      "text": "of X, for example, you can set up a linear estimation model"
+    },
+    {
+      "index": 883,
+      "start": 3086.33,
+      "end": 3089.48,
+      "duration": 3.15,
+      "text": "of this particular form and find the optimal coefficients,"
+    },
+    {
+      "index": 884,
+      "start": 3089.48,
+      "end": 3092.9,
+      "duration": 3.42,
+      "text": "the a's and the b's."
+    },
+    {
+      "index": 885,
+      "start": 3092.9,
+      "end": 3095.7,
+      "duration": 2.8,
+      "text": "All right, so the last slide just gives you the big picture"
+    },
+    {
+      "index": 886,
+      "start": 3095.7,
+      "end": 3099.33,
+      "duration": 3.63,
+      "text": "of what's happening in Bayesian Inference, it's for"
+    },
+    {
+      "index": 887,
+      "start": 3099.33,
+      "end": 3100.33,
+      "duration": 1.0,
+      "text": "you to ponder."
+    },
+    {
+      "index": 888,
+      "start": 3100.33,
+      "end": 3101.93,
+      "duration": 1.6,
+      "text": "Basically we talked about three"
+    },
+    {
+      "index": 889,
+      "start": 3101.93,
+      "end": 3103.47,
+      "duration": 1.54,
+      "text": "possible estimation methods."
+    },
+    {
+      "index": 890,
+      "start": 3103.47,
+      "end": 3108.3,
+      "duration": 4.83,
+      "text": "Maximum posteriori, mean squared error estimation, and"
+    },
+    {
+      "index": 891,
+      "start": 3108.3,
+      "end": 3111.07,
+      "duration": 2.77,
+      "text": "linear mean squared error estimation, or least squares"
+    },
+    {
+      "index": 892,
+      "start": 3111.07,
+      "end": 3112.29,
+      "duration": 1.22,
+      "text": "estimation."
+    },
+    {
+      "index": 893,
+      "start": 3112.29,
+      "end": 3114.41,
+      "duration": 2.12,
+      "text": "And there's a number of standard examples that you"
+    },
+    {
+      "index": 894,
+      "start": 3114.41,
+      "end": 3117.13,
+      "duration": 2.72,
+      "text": "will be seeing over and over in the recitations, tutorial,"
+    },
+    {
+      "index": 895,
+      "start": 3117.13,
+      "end": 3120.95,
+      "duration": 3.82,
+      "text": "homework, and so on, perhaps on exams even."
+    },
+    {
+      "index": 896,
+      "start": 3120.95,
+      "end": 3125.63,
+      "duration": 4.68,
+      "text": "Where we take some nice priors on some unknown parameter, we"
+    },
+    {
+      "index": 897,
+      "start": 3125.63,
+      "end": 3129.41,
+      "duration": 3.78,
+      "text": "take some nice models for the noise or the observations, and"
+    },
+    {
+      "index": 898,
+      "start": 3129.41,
+      "end": 3131.88,
+      "duration": 2.47,
+      "text": "then you need to work out posterior distributions in the"
+    },
+    {
+      "index": 899,
+      "start": 3131.88,
+      "end": 3133.57,
+      "duration": 1.69,
+      "text": "various estimates and compare them."
+    }
+  ],
+  "course": {
+    "category": "Physics",
+    "title": "Electricity and Magnetism",
+    "source_url": "https://www.youtube.com/playlist?list=PLUl4u3cNGP61MdtwGTqZA0MreSaDybji8"
+  }
+}

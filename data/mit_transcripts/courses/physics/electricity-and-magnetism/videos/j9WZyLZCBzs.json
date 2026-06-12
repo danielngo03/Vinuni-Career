@@ -1,0 +1,8019 @@
+{
+  "video": {
+    "id": "j9WZyLZCBzs",
+    "title": "1. Probability Models and Axioms",
+    "url": "https://www.youtube.com/watch?v=j9WZyLZCBzs",
+    "channel": "MIT OpenCourseWare",
+    "duration": 3070,
+    "language": "en"
+  },
+  "segment_count": 1143,
+  "segments": [
+    {
+      "index": 0,
+      "start": 1.87,
+      "end": 1.88,
+      "duration": 0.01,
+      "text": "the following content is provided under"
+    },
+    {
+      "index": 1,
+      "start": 1.88,
+      "end": 4.63,
+      "duration": 2.75,
+      "text": "a Creative Commons license your support"
+    },
+    {
+      "index": 2,
+      "start": 4.64,
+      "end": 6.749,
+      "duration": 2.109,
+      "text": "will help MIT open courseware continue"
+    },
+    {
+      "index": 3,
+      "start": 6.759,
+      "end": 8.709,
+      "duration": 1.95,
+      "text": "to offer highquality educational"
+    },
+    {
+      "index": 4,
+      "start": 8.719,
+      "end": 11.87,
+      "duration": 3.151,
+      "text": "resources for free to make a donation or"
+    },
+    {
+      "index": 5,
+      "start": 11.88,
+      "end": 13.829,
+      "duration": 1.949,
+      "text": "view additional materials from hundreds"
+    },
+    {
+      "index": 6,
+      "start": 13.839,
+      "end": 17.15,
+      "duration": 3.311,
+      "text": "of MIT courses visit MIT opencourseware"
+    },
+    {
+      "index": 7,
+      "start": 17.16,
+      "end": 21.67,
+      "duration": 4.51,
+      "text": "at"
+    },
+    {
+      "index": 8,
+      "start": 23.429,
+      "end": 23.439,
+      "duration": 0.01,
+      "text": "ocw.mit.edu"
+    },
+    {
+      "index": 9,
+      "start": 23.439,
+      "end": 28.91,
+      "duration": 5.471,
+      "text": "okay so uh welcome to 6041 6431 a class"
+    },
+    {
+      "index": 10,
+      "start": 28.92,
+      "end": 31.83,
+      "duration": 2.91,
+      "text": "on probability models and the like I'm"
+    },
+    {
+      "index": 11,
+      "start": 31.84,
+      "end": 35.19,
+      "duration": 3.35,
+      "text": "John C I will be teaching this class and"
+    },
+    {
+      "index": 12,
+      "start": 35.2,
+      "end": 37.75,
+      "duration": 2.55,
+      "text": "I'm looking forward to this being an an"
+    },
+    {
+      "index": 13,
+      "start": 37.76,
+      "end": 41.31,
+      "duration": 3.55,
+      "text": "enjoyable and also useful experience we"
+    },
+    {
+      "index": 14,
+      "start": 41.32,
+      "end": 43.47,
+      "duration": 2.15,
+      "text": "have a fair amount of staff involved in"
+    },
+    {
+      "index": 15,
+      "start": 43.48,
+      "end": 46.31,
+      "duration": 2.83,
+      "text": "this course your restation instructors"
+    },
+    {
+      "index": 16,
+      "start": 46.32,
+      "end": 48.31,
+      "duration": 1.99,
+      "text": "and also a bunch of T but I want to"
+    },
+    {
+      "index": 17,
+      "start": 48.32,
+      "end": 52.59,
+      "duration": 4.27,
+      "text": "single out our head ta uzoma who is the"
+    },
+    {
+      "index": 18,
+      "start": 52.6,
+      "end": 55.069,
+      "duration": 2.469,
+      "text": "key person in this class everything has"
+    },
+    {
+      "index": 19,
+      "start": 55.079,
+      "end": 57.709,
+      "duration": 2.63,
+      "text": "to go through him if he doesn't know in"
+    },
+    {
+      "index": 20,
+      "start": 57.719,
+      "end": 59.99,
+      "duration": 2.271,
+      "text": "which recitation section you are then"
+    },
+    {
+      "index": 21,
+      "start": 60.0,
+      "end": 62.67,
+      "duration": 2.67,
+      "text": "simply you do not exist so keep that in"
+    },
+    {
+      "index": 22,
+      "start": 62.68,
+      "end": 66.23,
+      "duration": 3.55,
+      "text": "mind all right so we want to jump right"
+    },
+    {
+      "index": 23,
+      "start": 66.24,
+      "end": 68.39,
+      "duration": 2.15,
+      "text": "in into the subject but I'm going to"
+    },
+    {
+      "index": 24,
+      "start": 68.4,
+      "end": 70.39,
+      "duration": 1.99,
+      "text": "take just a few minutes to talk about a"
+    },
+    {
+      "index": 25,
+      "start": 70.4,
+      "end": 73.109,
+      "duration": 2.709,
+      "text": "few administrative details and how the"
+    },
+    {
+      "index": 26,
+      "start": 73.119,
+      "end": 75.55,
+      "duration": 2.431,
+      "text": "course is run so we're going to have"
+    },
+    {
+      "index": 27,
+      "start": 75.56,
+      "end": 78.31,
+      "duration": 2.75,
+      "text": "lectures twice a week and I'm going to"
+    },
+    {
+      "index": 28,
+      "start": 78.32,
+      "end": 80.71,
+      "duration": 2.39,
+      "text": "use oldfashioned transparencies now you"
+    },
+    {
+      "index": 29,
+      "start": 80.72,
+      "end": 82.67,
+      "duration": 1.95,
+      "text": "get copies of these slides with plenty"
+    },
+    {
+      "index": 30,
+      "start": 82.68,
+      "end": 85.51,
+      "duration": 2.83,
+      "text": "of space for you to keep notes on them"
+    },
+    {
+      "index": 31,
+      "start": 85.52,
+      "end": 88.429,
+      "duration": 2.909,
+      "text": "uh a useful way of uh making good use of"
+    },
+    {
+      "index": 32,
+      "start": 88.439,
+      "end": 92.31,
+      "duration": 3.871,
+      "text": "the slides is to use them as a sort of"
+    },
+    {
+      "index": 33,
+      "start": 92.32,
+      "end": 94.749,
+      "duration": 2.429,
+      "text": "pneumonic summary of what happened in"
+    },
+    {
+      "index": 34,
+      "start": 94.759,
+      "end": 97.149,
+      "duration": 2.39,
+      "text": "lecture not everything that I'm going to"
+    },
+    {
+      "index": 35,
+      "start": 97.159,
+      "end": 99.789,
+      "duration": 2.63,
+      "text": "say is of course on the slides but by"
+    },
+    {
+      "index": 36,
+      "start": 99.799,
+      "end": 101.749,
+      "duration": 1.95,
+      "text": "looking them you get a sense of what's"
+    },
+    {
+      "index": 37,
+      "start": 101.759,
+      "end": 103.59,
+      "duration": 1.831,
+      "text": "happening right now and it may be a good"
+    },
+    {
+      "index": 38,
+      "start": 103.6,
+      "end": 106.23,
+      "duration": 2.63,
+      "text": "idea to review them before you go to"
+    },
+    {
+      "index": 39,
+      "start": 106.24,
+      "end": 108.67,
+      "duration": 2.43,
+      "text": "recitation so what happens in recitation"
+    },
+    {
+      "index": 40,
+      "start": 108.68,
+      "end": 111.03,
+      "duration": 2.35,
+      "text": "in recitation your recitation instructor"
+    },
+    {
+      "index": 41,
+      "start": 111.04,
+      "end": 113.03,
+      "duration": 1.99,
+      "text": "is going to maybe review some of the"
+    },
+    {
+      "index": 42,
+      "start": 113.04,
+      "end": 116.31,
+      "duration": 3.27,
+      "text": "theory and then solve some problems for"
+    },
+    {
+      "index": 43,
+      "start": 116.32,
+      "end": 119.19,
+      "duration": 2.87,
+      "text": "you and then you have tutorials where"
+    },
+    {
+      "index": 44,
+      "start": 119.2,
+      "end": 121.469,
+      "duration": 2.269,
+      "text": "you meet in very small groups together"
+    },
+    {
+      "index": 45,
+      "start": 121.479,
+      "end": 123.59,
+      "duration": 2.111,
+      "text": "with your ta and what happens in"
+    },
+    {
+      "index": 46,
+      "start": 123.6,
+      "end": 125.83,
+      "duration": 2.23,
+      "text": "tutorials is that you actually do the"
+    },
+    {
+      "index": 47,
+      "start": 125.84,
+      "end": 128.229,
+      "duration": 2.389,
+      "text": "problem solving with the help of your ta"
+    },
+    {
+      "index": 48,
+      "start": 128.239,
+      "end": 130.19,
+      "duration": 1.951,
+      "text": "and the help of your classmates in your"
+    },
+    {
+      "index": 49,
+      "start": 130.2,
+      "end": 133.07,
+      "duration": 2.87,
+      "text": "in your tutorial section now probability"
+    },
+    {
+      "index": 50,
+      "start": 133.08,
+      "end": 135.229,
+      "duration": 2.149,
+      "text": "is a tricky subject you may be reading"
+    },
+    {
+      "index": 51,
+      "start": 135.239,
+      "end": 136.79,
+      "duration": 1.551,
+      "text": "the text listening to lectures"
+    },
+    {
+      "index": 52,
+      "start": 136.8,
+      "end": 139.71,
+      "duration": 2.91,
+      "text": "everything makes perfect sense and so on"
+    },
+    {
+      "index": 53,
+      "start": 139.72,
+      "end": 142.15,
+      "duration": 2.43,
+      "text": "but until you actually sit down and try"
+    },
+    {
+      "index": 54,
+      "start": 142.16,
+      "end": 143.869,
+      "duration": 1.709,
+      "text": "to solve problems you don't quite"
+    },
+    {
+      "index": 55,
+      "start": 143.879,
+      "end": 145.67,
+      "duration": 1.791,
+      "text": "appreciate the subtleties and the"
+    },
+    {
+      "index": 56,
+      "start": 145.68,
+      "end": 147.63,
+      "duration": 1.95,
+      "text": "difficulties that are involved so"
+    },
+    {
+      "index": 57,
+      "start": 147.64,
+      "end": 149.949,
+      "duration": 2.309,
+      "text": "problem solving is a key part of this"
+    },
+    {
+      "index": 58,
+      "start": 149.959,
+      "end": 152.91,
+      "duration": 2.951,
+      "text": "class and tutorials are extremely useful"
+    },
+    {
+      "index": 59,
+      "start": 152.92,
+      "end": 154.589,
+      "duration": 1.669,
+      "text": "just for this reason because that's"
+    },
+    {
+      "index": 60,
+      "start": 154.599,
+      "end": 156.67,
+      "duration": 2.071,
+      "text": "where you actually get the practice of"
+    },
+    {
+      "index": 61,
+      "start": 156.68,
+      "end": 158.589,
+      "duration": 1.909,
+      "text": "solving problems on your own as opposed"
+    },
+    {
+      "index": 62,
+      "start": 158.599,
+      "end": 161.91,
+      "duration": 3.311,
+      "text": "to seeing someone else uh who's solving"
+    },
+    {
+      "index": 63,
+      "start": 161.92,
+      "end": 165.43,
+      "duration": 3.51,
+      "text": "them for you okay uh about mechanics a"
+    },
+    {
+      "index": 64,
+      "start": 165.44,
+      "end": 167.309,
+      "duration": 1.869,
+      "text": "key part of what's going to happen today"
+    },
+    {
+      "index": 65,
+      "start": 167.319,
+      "end": 170.35,
+      "duration": 3.031,
+      "text": "is that you will all turn in your uh"
+    },
+    {
+      "index": 66,
+      "start": 170.36,
+      "end": 172.63,
+      "duration": 2.27,
+      "text": "schedule forms that are at the end of"
+    },
+    {
+      "index": 67,
+      "start": 172.64,
+      "end": 175.43,
+      "duration": 2.79,
+      "text": "the handout that you have in your hands"
+    },
+    {
+      "index": 68,
+      "start": 175.44,
+      "end": 178.27,
+      "duration": 2.83,
+      "text": "then the Tas will be working frantically"
+    },
+    {
+      "index": 69,
+      "start": 178.28,
+      "end": 180.63,
+      "duration": 2.35,
+      "text": "through the night and they're going to"
+    },
+    {
+      "index": 70,
+      "start": 180.64,
+      "end": 184.309,
+      "duration": 3.669,
+      "text": "be producing a list of uh who goes into"
+    },
+    {
+      "index": 71,
+      "start": 184.319,
+      "end": 188.19,
+      "duration": 3.871,
+      "text": "what section and when that happens any"
+    },
+    {
+      "index": 72,
+      "start": 188.2,
+      "end": 190.07,
+      "duration": 1.87,
+      "text": "person in this class with probability"
+    },
+    {
+      "index": 73,
+      "start": 190.08,
+      "end": 192.43,
+      "duration": 2.35,
+      "text": "90% is going to be happy with their"
+    },
+    {
+      "index": 74,
+      "start": 192.44,
+      "end": 195.47,
+      "duration": 3.03,
+      "text": "assignment and with probability 10%"
+    },
+    {
+      "index": 75,
+      "start": 195.48,
+      "end": 198.47,
+      "duration": 2.99,
+      "text": "they're going to be unhappy now unhappy"
+    },
+    {
+      "index": 76,
+      "start": 198.48,
+      "end": 201.43,
+      "duration": 2.95,
+      "text": "people have an option though you can"
+    },
+    {
+      "index": 77,
+      "start": 201.44,
+      "end": 203.509,
+      "duration": 2.069,
+      "text": "resubmit your form together with your"
+    },
+    {
+      "index": 78,
+      "start": 203.519,
+      "end": 205.71,
+      "duration": 2.191,
+      "text": "full schedule and constraints give it"
+    },
+    {
+      "index": 79,
+      "start": 205.72,
+      "end": 208.47,
+      "duration": 2.75,
+      "text": "back to the Head ta who will then do"
+    },
+    {
+      "index": 80,
+      "start": 208.48,
+      "end": 210.27,
+      "duration": 1.79,
+      "text": "some further juggling"
+    },
+    {
+      "index": 81,
+      "start": 210.28,
+      "end": 213.309,
+      "duration": 3.029,
+      "text": "and reassign people and after that"
+    },
+    {
+      "index": 82,
+      "start": 213.319,
+      "end": 216.27,
+      "duration": 2.951,
+      "text": "happens 90% of those unhappy people will"
+    },
+    {
+      "index": 83,
+      "start": 216.28,
+      "end": 220.67,
+      "duration": 4.39,
+      "text": "become happy and 10% of them will be"
+    },
+    {
+      "index": 84,
+      "start": 220.68,
+      "end": 223.67,
+      "duration": 2.99,
+      "text": "left unhappy okay so what's the"
+    },
+    {
+      "index": 85,
+      "start": 223.68,
+      "end": 226.229,
+      "duration": 2.549,
+      "text": "probability that out that random person"
+    },
+    {
+      "index": 86,
+      "start": 226.239,
+      "end": 228.03,
+      "duration": 1.791,
+      "text": "is going to be unhappy at the end of"
+    },
+    {
+      "index": 87,
+      "start": 228.04,
+      "end": 228.789,
+      "duration": 0.749,
+      "text": "this"
+    },
+    {
+      "index": 88,
+      "start": 228.799,
+      "end": 231.789,
+      "duration": 2.99,
+      "text": "process it's 1% excellent maybe you"
+    },
+    {
+      "index": 89,
+      "start": 231.799,
+      "end": 234.71,
+      "duration": 2.911,
+      "text": "don't need this class okay so 1% we have"
+    },
+    {
+      "index": 90,
+      "start": 234.72,
+      "end": 236.949,
+      "duration": 2.229,
+      "text": "about 100 people in this class so"
+    },
+    {
+      "index": 91,
+      "start": 236.959,
+      "end": 238.83,
+      "duration": 1.871,
+      "text": "there's going to be about one unhappy"
+    },
+    {
+      "index": 92,
+      "start": 238.84,
+      "end": 241.309,
+      "duration": 2.469,
+      "text": "person and anywhere you look in life"
+    },
+    {
+      "index": 93,
+      "start": 241.319,
+      "end": 243.19,
+      "duration": 1.871,
+      "text": "there's all in any group you look at"
+    },
+    {
+      "index": 94,
+      "start": 243.2,
+      "end": 245.39,
+      "duration": 2.19,
+      "text": "there's always one unhappy person right"
+    },
+    {
+      "index": 95,
+      "start": 245.4,
+      "end": 248.069,
+      "duration": 2.669,
+      "text": "so what can we do about"
+    },
+    {
+      "index": 96,
+      "start": 248.079,
+      "end": 250.75,
+      "duration": 2.671,
+      "text": "it all right another important part"
+    },
+    {
+      "index": 97,
+      "start": 250.76,
+      "end": 252.83,
+      "duration": 2.07,
+      "text": "about mechanics is to read carefully the"
+    },
+    {
+      "index": 98,
+      "start": 252.84,
+      "end": 254.19,
+      "duration": 1.35,
+      "text": "statement that we have about"
+    },
+    {
+      "index": 99,
+      "start": 254.2,
+      "end": 256.39,
+      "duration": 2.19,
+      "text": "collaboration academic honesty and all"
+    },
+    {
+      "index": 100,
+      "start": 256.4,
+      "end": 258.71,
+      "duration": 2.31,
+      "text": "that you encouraged it's a very good"
+    },
+    {
+      "index": 101,
+      "start": 258.72,
+      "end": 261.789,
+      "duration": 3.069,
+      "text": "idea to work with other students you can"
+    },
+    {
+      "index": 102,
+      "start": 261.799,
+      "end": 264.31,
+      "duration": 2.511,
+      "text": "consult sources that are out there but"
+    },
+    {
+      "index": 103,
+      "start": 264.32,
+      "end": 265.99,
+      "duration": 1.67,
+      "text": "when you sit down and write your"
+    },
+    {
+      "index": 104,
+      "start": 266.0,
+      "end": 268.749,
+      "duration": 2.749,
+      "text": "Solutions you have to do that by setting"
+    },
+    {
+      "index": 105,
+      "start": 268.759,
+      "end": 271.51,
+      "duration": 2.751,
+      "text": "things aside and just just write them on"
+    },
+    {
+      "index": 106,
+      "start": 271.52,
+      "end": 273.71,
+      "duration": 2.19,
+      "text": "your own you cannot copy something that"
+    },
+    {
+      "index": 107,
+      "start": 273.72,
+      "end": 277.71,
+      "duration": 3.99,
+      "text": "somebody else has given to you uh one"
+    },
+    {
+      "index": 108,
+      "start": 277.72,
+      "end": 280.469,
+      "duration": 2.749,
+      "text": "reason is that we're not going to like"
+    },
+    {
+      "index": 109,
+      "start": 280.479,
+      "end": 283.79,
+      "duration": 3.311,
+      "text": "it when it happens and another reason is"
+    },
+    {
+      "index": 110,
+      "start": 283.8,
+      "end": 285.67,
+      "duration": 1.87,
+      "text": "that you're not going to do yourself any"
+    },
+    {
+      "index": 111,
+      "start": 285.68,
+      "end": 287.629,
+      "duration": 1.949,
+      "text": "favor really the only way to do well in"
+    },
+    {
+      "index": 112,
+      "start": 287.639,
+      "end": 289.35,
+      "duration": 1.711,
+      "text": "this class is to get a lot of practice"
+    },
+    {
+      "index": 113,
+      "start": 289.36,
+      "end": 292.15,
+      "duration": 2.79,
+      "text": "by solving problems yourselves so if you"
+    },
+    {
+      "index": 114,
+      "start": 292.16,
+      "end": 294.87,
+      "duration": 2.71,
+      "text": "don't do that on your own then when quiz"
+    },
+    {
+      "index": 115,
+      "start": 294.88,
+      "end": 297.43,
+      "duration": 2.55,
+      "text": "and exam time comes uh things are going"
+    },
+    {
+      "index": 116,
+      "start": 297.44,
+      "end": 299.67,
+      "duration": 2.23,
+      "text": "to be difficult so as I mentioned"
+    },
+    {
+      "index": 117,
+      "start": 299.68,
+      "end": 301.59,
+      "duration": 1.91,
+      "text": "mentioned here so we're going to have"
+    },
+    {
+      "index": 118,
+      "start": 301.6,
+      "end": 304.31,
+      "duration": 2.71,
+      "text": "section restation sections that some of"
+    },
+    {
+      "index": 119,
+      "start": 304.32,
+      "end": 306.87,
+      "duration": 2.55,
+      "text": "them are for 6041 students some are for"
+    },
+    {
+      "index": 120,
+      "start": 306.88,
+      "end": 309.43,
+      "duration": 2.55,
+      "text": "631 students The Graduate section of the"
+    },
+    {
+      "index": 121,
+      "start": 309.44,
+      "end": 312.99,
+      "duration": 3.55,
+      "text": "class now undergraduates can sit in The"
+    },
+    {
+      "index": 122,
+      "start": 313.0,
+      "end": 314.87,
+      "duration": 1.87,
+      "text": "Graduate recitation sections what's"
+    },
+    {
+      "index": 123,
+      "start": 314.88,
+      "end": 317.029,
+      "duration": 2.149,
+      "text": "going to happen there is that things may"
+    },
+    {
+      "index": 124,
+      "start": 317.039,
+      "end": 319.15,
+      "duration": 2.111,
+      "text": "be just a little faster and you may be"
+    },
+    {
+      "index": 125,
+      "start": 319.16,
+      "end": 321.749,
+      "duration": 2.589,
+      "text": "covering a problem that's a little more"
+    },
+    {
+      "index": 126,
+      "start": 321.759,
+      "end": 323.35,
+      "duration": 1.591,
+      "text": "advanced and is not covered in the"
+    },
+    {
+      "index": 127,
+      "start": 323.36,
+      "end": 325.67,
+      "duration": 2.31,
+      "text": "undergrad sections but if you sit in The"
+    },
+    {
+      "index": 128,
+      "start": 325.68,
+      "end": 327.629,
+      "duration": 1.949,
+      "text": "Graduate section you still just respond"
+    },
+    {
+      "index": 129,
+      "start": 327.639,
+      "end": 329.35,
+      "duration": 1.711,
+      "text": "and you're an undergraduate you're still"
+    },
+    {
+      "index": 130,
+      "start": 329.36,
+      "end": 332.189,
+      "duration": 2.829,
+      "text": "just responsible for the undergraduate"
+    },
+    {
+      "index": 131,
+      "start": 332.199,
+      "end": 334.35,
+      "duration": 2.151,
+      "text": "material that is you can just do the"
+    },
+    {
+      "index": 132,
+      "start": 334.36,
+      "end": 336.55,
+      "duration": 2.19,
+      "text": "undergraduate work in the class but"
+    },
+    {
+      "index": 133,
+      "start": 336.56,
+      "end": 340.39,
+      "duration": 3.83,
+      "text": "maybe be exposed at a different"
+    },
+    {
+      "index": 134,
+      "start": 344.51,
+      "end": 344.52,
+      "duration": 0.01,
+      "text": "section okay um few words about the"
+    },
+    {
+      "index": 135,
+      "start": 344.52,
+      "end": 347.71,
+      "duration": 3.19,
+      "text": "style of this class we want to focus on"
+    },
+    {
+      "index": 136,
+      "start": 347.72,
+      "end": 351.23,
+      "duration": 3.51,
+      "text": "basic ideas and Concepts there's going"
+    },
+    {
+      "index": 137,
+      "start": 351.24,
+      "end": 353.71,
+      "duration": 2.47,
+      "text": "to be lots of formulas but what we try"
+    },
+    {
+      "index": 138,
+      "start": 353.72,
+      "end": 355.67,
+      "duration": 1.95,
+      "text": "to do in this class is to actually have"
+    },
+    {
+      "index": 139,
+      "start": 355.68,
+      "end": 358.23,
+      "duration": 2.55,
+      "text": "you understand what those formulas mean"
+    },
+    {
+      "index": 140,
+      "start": 358.24,
+      "end": 360.35,
+      "duration": 2.11,
+      "text": "and in a year from now when when almost"
+    },
+    {
+      "index": 141,
+      "start": 360.36,
+      "end": 362.27,
+      "duration": 1.91,
+      "text": "all of the formulas have been wiped out"
+    },
+    {
+      "index": 142,
+      "start": 362.28,
+      "end": 364.71,
+      "duration": 2.43,
+      "text": "from your memory you still have the"
+    },
+    {
+      "index": 143,
+      "start": 364.72,
+      "end": 366.589,
+      "duration": 1.869,
+      "text": "basic concepts you can understand them"
+    },
+    {
+      "index": 144,
+      "start": 366.599,
+      "end": 368.99,
+      "duration": 2.391,
+      "text": "so when you look things up again they"
+    },
+    {
+      "index": 145,
+      "start": 369.0,
+      "end": 373.029,
+      "duration": 4.029,
+      "text": "will still make sense uh it's not a it's"
+    },
+    {
+      "index": 146,
+      "start": 373.039,
+      "end": 376.629,
+      "duration": 3.59,
+      "text": "not a plug and chug kind of class where"
+    },
+    {
+      "index": 147,
+      "start": 376.639,
+      "end": 378.27,
+      "duration": 1.631,
+      "text": "you're given list of formulas you're"
+    },
+    {
+      "index": 148,
+      "start": 378.28,
+      "end": 380.189,
+      "duration": 1.909,
+      "text": "given numbers and you plug in and you"
+    },
+    {
+      "index": 149,
+      "start": 380.199,
+      "end": 382.99,
+      "duration": 2.791,
+      "text": "get answers the really hard part is"
+    },
+    {
+      "index": 150,
+      "start": 383.0,
+      "end": 385.629,
+      "duration": 2.629,
+      "text": "usually to choose which formulas you're"
+    },
+    {
+      "index": 151,
+      "start": 385.639,
+      "end": 387.87,
+      "duration": 2.231,
+      "text": "going to use you need judgment you need"
+    },
+    {
+      "index": 152,
+      "start": 387.88,
+      "end": 390.83,
+      "duration": 2.95,
+      "text": "intuition lots of prob ility problems at"
+    },
+    {
+      "index": 153,
+      "start": 390.84,
+      "end": 393.15,
+      "duration": 2.31,
+      "text": "least the interesting ones often have"
+    },
+    {
+      "index": 154,
+      "start": 393.16,
+      "end": 394.909,
+      "duration": 1.749,
+      "text": "lots of different solutions some are"
+    },
+    {
+      "index": 155,
+      "start": 394.919,
+      "end": 397.39,
+      "duration": 2.471,
+      "text": "extremely long some are extremely short"
+    },
+    {
+      "index": 156,
+      "start": 397.4,
+      "end": 399.95,
+      "duration": 2.55,
+      "text": "the extremely short ones usually involve"
+    },
+    {
+      "index": 157,
+      "start": 399.96,
+      "end": 402.07,
+      "duration": 2.11,
+      "text": "some kind of deeper understanding where"
+    },
+    {
+      "index": 158,
+      "start": 402.08,
+      "end": 404.23,
+      "duration": 2.15,
+      "text": "of what's going on so that you can pick"
+    },
+    {
+      "index": 159,
+      "start": 404.24,
+      "end": 406.99,
+      "duration": 2.75,
+      "text": "a shortcut and use it and hopefully"
+    },
+    {
+      "index": 160,
+      "start": 407.0,
+      "end": 409.39,
+      "duration": 2.39,
+      "text": "we're going to develop this skill during"
+    },
+    {
+      "index": 161,
+      "start": 409.4,
+      "end": 410.629,
+      "duration": 1.229,
+      "text": "this"
+    },
+    {
+      "index": 162,
+      "start": 410.639,
+      "end": 415.27,
+      "duration": 4.631,
+      "text": "class now I I could spend a lot of time"
+    },
+    {
+      "index": 163,
+      "start": 415.28,
+      "end": 417.189,
+      "duration": 1.909,
+      "text": "in this lecture talking about why the"
+    },
+    {
+      "index": 164,
+      "start": 417.199,
+      "end": 419.629,
+      "duration": 2.43,
+      "text": "subject is important I'll keep it short"
+    },
+    {
+      "index": 165,
+      "start": 419.639,
+      "end": 422.27,
+      "duration": 2.631,
+      "text": "because I think it's almost obvious"
+    },
+    {
+      "index": 166,
+      "start": 422.28,
+      "end": 424.55,
+      "duration": 2.27,
+      "text": "anything that happens in life is"
+    },
+    {
+      "index": 167,
+      "start": 424.56,
+      "end": 427.23,
+      "duration": 2.67,
+      "text": "uncertain there's uncertainty anywhere"
+    },
+    {
+      "index": 168,
+      "start": 427.24,
+      "end": 429.43,
+      "duration": 2.19,
+      "text": "so whatever you try to do you need to"
+    },
+    {
+      "index": 169,
+      "start": 429.44,
+      "end": 431.83,
+      "duration": 2.39,
+      "text": "have some way of dealing or thinking"
+    },
+    {
+      "index": 170,
+      "start": 431.84,
+      "end": 434.79,
+      "duration": 2.95,
+      "text": "about this uncertainty and the way to do"
+    },
+    {
+      "index": 171,
+      "start": 434.8,
+      "end": 437.07,
+      "duration": 2.27,
+      "text": "that in a systematic way is by using the"
+    },
+    {
+      "index": 172,
+      "start": 437.08,
+      "end": 438.67,
+      "duration": 1.59,
+      "text": "models that are given to us by"
+    },
+    {
+      "index": 173,
+      "start": 438.68,
+      "end": 440.67,
+      "duration": 1.99,
+      "text": "probability Theory so if you're an"
+    },
+    {
+      "index": 174,
+      "start": 440.68,
+      "end": 442.35,
+      "duration": 1.67,
+      "text": "engineer and you're dealing with a"
+    },
+    {
+      "index": 175,
+      "start": 442.36,
+      "end": 444.07,
+      "duration": 1.71,
+      "text": "communication system or signal"
+    },
+    {
+      "index": 176,
+      "start": 444.08,
+      "end": 446.15,
+      "duration": 2.07,
+      "text": "processing basically you're facing a"
+    },
+    {
+      "index": 177,
+      "start": 446.16,
+      "end": 449.749,
+      "duration": 3.589,
+      "text": "fight against noise noise is random is"
+    },
+    {
+      "index": 178,
+      "start": 449.759,
+      "end": 451.869,
+      "duration": 2.11,
+      "text": "uncertain how do you model it how do you"
+    },
+    {
+      "index": 179,
+      "start": 451.879,
+      "end": 454.99,
+      "duration": 3.111,
+      "text": "deal with it if you're a manager yes"
+    },
+    {
+      "index": 180,
+      "start": 455.0,
+      "end": 456.99,
+      "duration": 1.99,
+      "text": "you're dealing with customer demand"
+    },
+    {
+      "index": 181,
+      "start": 457.0,
+      "end": 458.909,
+      "duration": 1.909,
+      "text": "which is of course random or you're"
+    },
+    {
+      "index": 182,
+      "start": 458.919,
+      "end": 461.629,
+      "duration": 2.71,
+      "text": "dealing with the stock market which is"
+    },
+    {
+      "index": 183,
+      "start": 461.639,
+      "end": 464.39,
+      "duration": 2.751,
+      "text": "definitely random or you play at the"
+    },
+    {
+      "index": 184,
+      "start": 464.4,
+      "end": 468.23,
+      "duration": 3.83,
+      "text": "casino which is again random and so on"
+    },
+    {
+      "index": 185,
+      "start": 468.24,
+      "end": 469.95,
+      "duration": 1.71,
+      "text": "and the same goes for pretty much any"
+    },
+    {
+      "index": 186,
+      "start": 469.96,
+      "end": 473.99,
+      "duration": 4.03,
+      "text": "other field that you can think of but uh"
+    },
+    {
+      "index": 187,
+      "start": 474.0,
+      "end": 476.589,
+      "duration": 2.589,
+      "text": "independent of which field you're coming"
+    },
+    {
+      "index": 188,
+      "start": 476.599,
+      "end": 478.99,
+      "duration": 2.391,
+      "text": "from the basic concepts and tools are"
+    },
+    {
+      "index": 189,
+      "start": 479.0,
+      "end": 481.67,
+      "duration": 2.67,
+      "text": "really all the same so you may see in"
+    },
+    {
+      "index": 190,
+      "start": 481.68,
+      "end": 484.149,
+      "duration": 2.469,
+      "text": "bookstores that there there are books"
+    },
+    {
+      "index": 191,
+      "start": 484.159,
+      "end": 486.11,
+      "duration": 1.951,
+      "text": "probability for scientists probability"
+    },
+    {
+      "index": 192,
+      "start": 486.12,
+      "end": 488.35,
+      "duration": 2.23,
+      "text": "for engineers probability for social"
+    },
+    {
+      "index": 193,
+      "start": 488.36,
+      "end": 491.55,
+      "duration": 3.19,
+      "text": "scientists probability for astrologists"
+    },
+    {
+      "index": 194,
+      "start": 491.56,
+      "end": 493.909,
+      "duration": 2.349,
+      "text": "well what all those books have inside"
+    },
+    {
+      "index": 195,
+      "start": 493.919,
+      "end": 496.309,
+      "duration": 2.39,
+      "text": "them is exactly the same models the same"
+    },
+    {
+      "index": 196,
+      "start": 496.319,
+      "end": 498.589,
+      "duration": 2.27,
+      "text": "equations the same problems they just"
+    },
+    {
+      "index": 197,
+      "start": 498.599,
+      "end": 500.67,
+      "duration": 2.071,
+      "text": "make them somewhat different word"
+    },
+    {
+      "index": 198,
+      "start": 500.68,
+      "end": 503.149,
+      "duration": 2.469,
+      "text": "problems the basic concepts are just one"
+    },
+    {
+      "index": 199,
+      "start": 503.159,
+      "end": 506.79,
+      "duration": 3.631,
+      "text": "and the same and we'll take this as an"
+    },
+    {
+      "index": 200,
+      "start": 506.8,
+      "end": 509.869,
+      "duration": 3.069,
+      "text": "excuse for not going too much into to"
+    },
+    {
+      "index": 201,
+      "start": 509.879,
+      "end": 512.389,
+      "duration": 2.51,
+      "text": "specific domain applications we will"
+    },
+    {
+      "index": 202,
+      "start": 512.399,
+      "end": 514.509,
+      "duration": 2.11,
+      "text": "have problems and examples that are"
+    },
+    {
+      "index": 203,
+      "start": 514.519,
+      "end": 516.709,
+      "duration": 2.19,
+      "text": "motivated in some loose sense from Real"
+    },
+    {
+      "index": 204,
+      "start": 516.719,
+      "end": 519.23,
+      "duration": 2.511,
+      "text": "World situations but we're not really"
+    },
+    {
+      "index": 205,
+      "start": 519.24,
+      "end": 522.389,
+      "duration": 3.149,
+      "text": "try in this class to develop the skills"
+    },
+    {
+      "index": 206,
+      "start": 522.399,
+      "end": 525.47,
+      "duration": 3.071,
+      "text": "for a specific uh for domain specific"
+    },
+    {
+      "index": 207,
+      "start": 525.48,
+      "end": 527.949,
+      "duration": 2.469,
+      "text": "problems rather we're going to try to"
+    },
+    {
+      "index": 208,
+      "start": 527.959,
+      "end": 531.55,
+      "duration": 3.591,
+      "text": "stick to General understanding of the"
+    },
+    {
+      "index": 209,
+      "start": 531.56,
+      "end": 534.19,
+      "duration": 2.63,
+      "text": "subject okay so the next slide of which"
+    },
+    {
+      "index": 210,
+      "start": 534.2,
+      "end": 537.269,
+      "duration": 3.069,
+      "text": "you do which you do have in your handout"
+    },
+    {
+      "index": 211,
+      "start": 537.279,
+      "end": 539.11,
+      "duration": 1.831,
+      "text": "gives you a few more details about the"
+    },
+    {
+      "index": 212,
+      "start": 539.12,
+      "end": 540.79,
+      "duration": 1.67,
+      "text": "class"
+    },
+    {
+      "index": 213,
+      "start": 540.8,
+      "end": 543.03,
+      "duration": 2.23,
+      "text": "uh maybe one thing to comment here is"
+    },
+    {
+      "index": 214,
+      "start": 543.04,
+      "end": 546.75,
+      "duration": 3.71,
+      "text": "that you do need to read the text in"
+    },
+    {
+      "index": 215,
+      "start": 546.76,
+      "end": 549.11,
+      "duration": 2.35,
+      "text": "with Calculus books perhaps you can live"
+    },
+    {
+      "index": 216,
+      "start": 549.12,
+      "end": 551.509,
+      "duration": 2.389,
+      "text": "with just a two-page summary of all the"
+    },
+    {
+      "index": 217,
+      "start": 551.519,
+      "end": 553.79,
+      "duration": 2.271,
+      "text": "interesting formulas in calculus and you"
+    },
+    {
+      "index": 218,
+      "start": 553.8,
+      "end": 555.75,
+      "duration": 1.95,
+      "text": "can get by"
+    },
+    {
+      "index": 219,
+      "start": 555.76,
+      "end": 558.55,
+      "duration": 2.79,
+      "text": "uh just with those formulas but here"
+    },
+    {
+      "index": 220,
+      "start": 558.56,
+      "end": 560.47,
+      "duration": 1.91,
+      "text": "because we want to develop Concepts and"
+    },
+    {
+      "index": 221,
+      "start": 560.48,
+      "end": 563.11,
+      "duration": 2.63,
+      "text": "intuition actually reading words as"
+    },
+    {
+      "index": 222,
+      "start": 563.12,
+      "end": 564.99,
+      "duration": 1.87,
+      "text": "opposed to just browsing through"
+    },
+    {
+      "index": 223,
+      "start": 565.0,
+      "end": 567.75,
+      "duration": 2.75,
+      "text": "equations does make a difference in the"
+    },
+    {
+      "index": 224,
+      "start": 567.76,
+      "end": 570.43,
+      "duration": 2.67,
+      "text": "beginning the class is kind of easy when"
+    },
+    {
+      "index": 225,
+      "start": 570.44,
+      "end": 572.63,
+      "duration": 2.19,
+      "text": "we deal with discrete probability that's"
+    },
+    {
+      "index": 226,
+      "start": 572.64,
+      "end": 575.63,
+      "duration": 2.99,
+      "text": "the material until our first quiz and"
+    },
+    {
+      "index": 227,
+      "start": 575.64,
+      "end": 578.389,
+      "duration": 2.749,
+      "text": "some of you may get by without being too"
+    },
+    {
+      "index": 228,
+      "start": 578.399,
+      "end": 580.75,
+      "duration": 2.351,
+      "text": "systematic about following the material"
+    },
+    {
+      "index": 229,
+      "start": 580.76,
+      "end": 583.069,
+      "duration": 2.309,
+      "text": "but it does get substantially harder"
+    },
+    {
+      "index": 230,
+      "start": 583.079,
+      "end": 586.47,
+      "duration": 3.391,
+      "text": "afterwards and I will keep restating"
+    },
+    {
+      "index": 231,
+      "start": 586.48,
+      "end": 588.949,
+      "duration": 2.469,
+      "text": "that you do have to read the text to"
+    },
+    {
+      "index": 232,
+      "start": 588.959,
+      "end": 591.63,
+      "duration": 2.671,
+      "text": "really understand the"
+    },
+    {
+      "index": 233,
+      "start": 591.64,
+      "end": 595.31,
+      "duration": 3.67,
+      "text": "material okay so now we can start with"
+    },
+    {
+      "index": 234,
+      "start": 595.32,
+      "end": 598.99,
+      "duration": 3.67,
+      "text": "the real part of the lecture let us set"
+    },
+    {
+      "index": 235,
+      "start": 599.0,
+      "end": 600.63,
+      "duration": 1.63,
+      "text": "the goals for"
+    },
+    {
+      "index": 236,
+      "start": 600.64,
+      "end": 604.35,
+      "duration": 3.71,
+      "text": "today so probability probability theory"
+    },
+    {
+      "index": 237,
+      "start": 604.36,
+      "end": 607.11,
+      "duration": 2.75,
+      "text": "is a framework for dealing with"
+    },
+    {
+      "index": 238,
+      "start": 607.12,
+      "end": 609.63,
+      "duration": 2.51,
+      "text": "uncertainty for dealing with situations"
+    },
+    {
+      "index": 239,
+      "start": 609.64,
+      "end": 612.19,
+      "duration": 2.55,
+      "text": "in which we have some kind of Randomness"
+    },
+    {
+      "index": 240,
+      "start": 612.2,
+      "end": 614.55,
+      "duration": 2.35,
+      "text": "so what we want to do is by the end of"
+    },
+    {
+      "index": 241,
+      "start": 614.56,
+      "end": 617.91,
+      "duration": 3.35,
+      "text": "today's lecture to give you anything"
+    },
+    {
+      "index": 242,
+      "start": 617.92,
+      "end": 620.59,
+      "duration": 2.67,
+      "text": "that you need to know how to set up what"
+    },
+    {
+      "index": 243,
+      "start": 620.6,
+      "end": 623.15,
+      "duration": 2.55,
+      "text": "does it take to set up a probabilistic"
+    },
+    {
+      "index": 244,
+      "start": 623.16,
+      "end": 626.949,
+      "duration": 3.789,
+      "text": "model and uh what are the basic rules of"
+    },
+    {
+      "index": 245,
+      "start": 626.959,
+      "end": 628.99,
+      "duration": 2.031,
+      "text": "the game for dealing with probabilistic"
+    },
+    {
+      "index": 246,
+      "start": 629.0,
+      "end": 630.55,
+      "duration": 1.55,
+      "text": "model"
+    },
+    {
+      "index": 247,
+      "start": 630.56,
+      "end": 632.509,
+      "duration": 1.949,
+      "text": "so by the end of this lecture you will"
+    },
+    {
+      "index": 248,
+      "start": 632.519,
+      "end": 634.71,
+      "duration": 2.191,
+      "text": "have essentially recovered half of this"
+    },
+    {
+      "index": 249,
+      "start": 634.72,
+      "end": 637.59,
+      "duration": 2.87,
+      "text": "semester's tuition right so we're going"
+    },
+    {
+      "index": 250,
+      "start": 637.6,
+      "end": 639.87,
+      "duration": 2.27,
+      "text": "to talk about probabilistic models in"
+    },
+    {
+      "index": 251,
+      "start": 639.88,
+      "end": 642.31,
+      "duration": 2.43,
+      "text": "more detail the sample space which is"
+    },
+    {
+      "index": 252,
+      "start": 642.32,
+      "end": 644.03,
+      "duration": 1.71,
+      "text": "basically a description of all the"
+    },
+    {
+      "index": 253,
+      "start": 644.04,
+      "end": 646.43,
+      "duration": 2.39,
+      "text": "things that may happen during a random"
+    },
+    {
+      "index": 254,
+      "start": 646.44,
+      "end": 649.15,
+      "duration": 2.71,
+      "text": "experiment and the probability law which"
+    },
+    {
+      "index": 255,
+      "start": 649.16,
+      "end": 651.19,
+      "duration": 2.03,
+      "text": "describes our beliefs about which"
+    },
+    {
+      "index": 256,
+      "start": 651.2,
+      "end": 653.71,
+      "duration": 2.51,
+      "text": "outcomes are more likely to occur"
+    },
+    {
+      "index": 257,
+      "start": 653.72,
+      "end": 656.269,
+      "duration": 2.549,
+      "text": "compared to other outcomes uh"
+    },
+    {
+      "index": 258,
+      "start": 656.279,
+      "end": 658.35,
+      "duration": 2.071,
+      "text": "probability laws have to obey certain"
+    },
+    {
+      "index": 259,
+      "start": 658.36,
+      "end": 660.069,
+      "duration": 1.709,
+      "text": "properties that we call the axioms of"
+    },
+    {
+      "index": 260,
+      "start": 660.079,
+      "end": 663.19,
+      "duration": 3.111,
+      "text": "probability so B main part of today's"
+    },
+    {
+      "index": 261,
+      "start": 663.2,
+      "end": 665.19,
+      "duration": 1.99,
+      "text": "lecture is to describe those axioms"
+    },
+    {
+      "index": 262,
+      "start": 665.2,
+      "end": 667.75,
+      "duration": 2.55,
+      "text": "which are the rules of the game and"
+    },
+    {
+      "index": 263,
+      "start": 667.76,
+      "end": 671.91,
+      "duration": 4.15,
+      "text": "consider a few really trivial"
+    },
+    {
+      "index": 264,
+      "start": 671.92,
+      "end": 674.389,
+      "duration": 2.469,
+      "text": "examples okay so let's start with our"
+    },
+    {
+      "index": 265,
+      "start": 674.399,
+      "end": 676.35,
+      "duration": 1.951,
+      "text": "agenda the first piece in a"
+    },
+    {
+      "index": 266,
+      "start": 676.36,
+      "end": 678.67,
+      "duration": 2.31,
+      "text": "probabilistic model is a description of"
+    },
+    {
+      "index": 267,
+      "start": 678.68,
+      "end": 680.87,
+      "duration": 2.19,
+      "text": "the sample space of an"
+    },
+    {
+      "index": 268,
+      "start": 680.88,
+      "end": 683.75,
+      "duration": 2.87,
+      "text": "experiment so we do an"
+    },
+    {
+      "index": 269,
+      "start": 683.76,
+      "end": 686.23,
+      "duration": 2.47,
+      "text": "experiment and by experiment we just"
+    },
+    {
+      "index": 270,
+      "start": 686.24,
+      "end": 689.11,
+      "duration": 2.87,
+      "text": "mean that just something happens out"
+    },
+    {
+      "index": 271,
+      "start": 689.12,
+      "end": 691.67,
+      "duration": 2.55,
+      "text": "there there and that's something that"
+    },
+    {
+      "index": 272,
+      "start": 691.68,
+      "end": 694.509,
+      "duration": 2.829,
+      "text": "happens it could be flipping a coin or"
+    },
+    {
+      "index": 273,
+      "start": 694.519,
+      "end": 698.99,
+      "duration": 4.471,
+      "text": "it could be rolling a Dy or it could be"
+    },
+    {
+      "index": 274,
+      "start": 699.0,
+      "end": 702.15,
+      "duration": 3.15,
+      "text": "doing something in a card game so we fix"
+    },
+    {
+      "index": 275,
+      "start": 702.16,
+      "end": 705.71,
+      "duration": 3.55,
+      "text": "a particular experiment and we come up"
+    },
+    {
+      "index": 276,
+      "start": 705.72,
+      "end": 708.55,
+      "duration": 2.83,
+      "text": "with a list of all the possible things"
+    },
+    {
+      "index": 277,
+      "start": 708.56,
+      "end": 711.11,
+      "duration": 2.55,
+      "text": "that may happen during this experiment"
+    },
+    {
+      "index": 278,
+      "start": 711.12,
+      "end": 713.389,
+      "duration": 2.269,
+      "text": "so we write down a list of all the"
+    },
+    {
+      "index": 279,
+      "start": 713.399,
+      "end": 716.35,
+      "duration": 2.951,
+      "text": "possible outcomes so here's a list of"
+    },
+    {
+      "index": 280,
+      "start": 716.36,
+      "end": 717.99,
+      "duration": 1.63,
+      "text": "all the possible outcomes of the"
+    },
+    {
+      "index": 281,
+      "start": 718.0,
+      "end": 721.509,
+      "duration": 3.509,
+      "text": "experiment I use the word list but if"
+    },
+    {
+      "index": 282,
+      "start": 721.519,
+      "end": 723.829,
+      "duration": 2.31,
+      "text": "you want to be a little more formal it's"
+    },
+    {
+      "index": 283,
+      "start": 723.839,
+      "end": 726.99,
+      "duration": 3.151,
+      "text": "better to think of that list as a set so"
+    },
+    {
+      "index": 284,
+      "start": 727.0,
+      "end": 730.15,
+      "duration": 3.15,
+      "text": "we have a set that set is our sample"
+    },
+    {
+      "index": 285,
+      "start": 730.16,
+      "end": 733.31,
+      "duration": 3.15,
+      "text": "space and it's a set whose elements are"
+    },
+    {
+      "index": 286,
+      "start": 733.32,
+      "end": 735.91,
+      "duration": 2.59,
+      "text": "the possible outcomes of the experiment"
+    },
+    {
+      "index": 287,
+      "start": 735.92,
+      "end": 737.55,
+      "duration": 1.63,
+      "text": "so for example if you're dealing with"
+    },
+    {
+      "index": 288,
+      "start": 737.56,
+      "end": 739.949,
+      "duration": 2.389,
+      "text": "flipping a coin your sample space would"
+    },
+    {
+      "index": 289,
+      "start": 739.959,
+      "end": 743.31,
+      "duration": 3.351,
+      "text": "be Heads This is one outcome tails is"
+    },
+    {
+      "index": 290,
+      "start": 743.32,
+      "end": 745.949,
+      "duration": 2.629,
+      "text": "one outcome and this set which has two"
+    },
+    {
+      "index": 291,
+      "start": 745.959,
+      "end": 747.829,
+      "duration": 1.87,
+      "text": "elements is the sample space of the"
+    },
+    {
+      "index": 292,
+      "start": 747.839,
+      "end": 749.389,
+      "duration": 1.55,
+      "text": "experiment"
+    },
+    {
+      "index": 293,
+      "start": 749.399,
+      "end": 752.35,
+      "duration": 2.951,
+      "text": "okay what do we need to think about when"
+    },
+    {
+      "index": 294,
+      "start": 752.36,
+      "end": 754.79,
+      "duration": 2.43,
+      "text": "we're setting up this sample space first"
+    },
+    {
+      "index": 295,
+      "start": 754.8,
+      "end": 756.67,
+      "duration": 1.87,
+      "text": "the list should be mutually exclusive"
+    },
+    {
+      "index": 296,
+      "start": 756.68,
+      "end": 758.35,
+      "duration": 1.67,
+      "text": "collectively exhaustive what does that"
+    },
+    {
+      "index": 297,
+      "start": 758.36,
+      "end": 761.069,
+      "duration": 2.709,
+      "text": "mean collectively exhaustive means that"
+    },
+    {
+      "index": 298,
+      "start": 761.079,
+      "end": 763.67,
+      "duration": 2.591,
+      "text": "no matter what happens in the experiment"
+    },
+    {
+      "index": 299,
+      "start": 763.68,
+      "end": 766.55,
+      "duration": 2.87,
+      "text": "you're going to get one of the outcomes"
+    },
+    {
+      "index": 300,
+      "start": 766.56,
+      "end": 769.35,
+      "duration": 2.79,
+      "text": "inside here so you have not forgotten"
+    },
+    {
+      "index": 301,
+      "start": 769.36,
+      "end": 771.23,
+      "duration": 1.87,
+      "text": "any of the possibilities of what may"
+    },
+    {
+      "index": 302,
+      "start": 771.24,
+      "end": 773.509,
+      "duration": 2.269,
+      "text": "happen in the experiment mutually"
+    },
+    {
+      "index": 303,
+      "start": 773.519,
+      "end": 776.79,
+      "duration": 3.271,
+      "text": "exclusive means that if this happens"
+    },
+    {
+      "index": 304,
+      "start": 776.8,
+      "end": 779.35,
+      "duration": 2.55,
+      "text": "then that cannot happen so it's at the"
+    },
+    {
+      "index": 305,
+      "start": 779.36,
+      "end": 781.47,
+      "duration": 2.11,
+      "text": "end of the experiment you should be able"
+    },
+    {
+      "index": 306,
+      "start": 781.48,
+      "end": 785.509,
+      "duration": 4.029,
+      "text": "to point out to me just one exactly one"
+    },
+    {
+      "index": 307,
+      "start": 785.519,
+      "end": 787.87,
+      "duration": 2.351,
+      "text": "of these outcomes and say this is the"
+    },
+    {
+      "index": 308,
+      "start": 787.88,
+      "end": 789.829,
+      "duration": 1.949,
+      "text": "outcome that"
+    },
+    {
+      "index": 309,
+      "start": 789.839,
+      "end": 792.67,
+      "duration": 2.831,
+      "text": "happened okay so these are sort of basic"
+    },
+    {
+      "index": 310,
+      "start": 792.68,
+      "end": 794.99,
+      "duration": 2.31,
+      "text": "requirements there's another requirement"
+    },
+    {
+      "index": 311,
+      "start": 795.0,
+      "end": 796.829,
+      "duration": 1.829,
+      "text": "which is a little more loose when you"
+    },
+    {
+      "index": 312,
+      "start": 796.839,
+      "end": 798.67,
+      "duration": 1.831,
+      "text": "set up your sample space sometimes you"
+    },
+    {
+      "index": 313,
+      "start": 798.68,
+      "end": 800.79,
+      "duration": 2.11,
+      "text": "do have some Freedom about the details"
+    },
+    {
+      "index": 314,
+      "start": 800.8,
+      "end": 803.23,
+      "duration": 2.43,
+      "text": "of the of what you're of how you're"
+    },
+    {
+      "index": 315,
+      "start": 803.24,
+      "end": 806.03,
+      "duration": 2.79,
+      "text": "going to describe it and the question is"
+    },
+    {
+      "index": 316,
+      "start": 806.04,
+      "end": 808.67,
+      "duration": 2.63,
+      "text": "how much detail are you going to include"
+    },
+    {
+      "index": 317,
+      "start": 808.68,
+      "end": 810.75,
+      "duration": 2.07,
+      "text": "so let's let's take this coin flipping"
+    },
+    {
+      "index": 318,
+      "start": 810.76,
+      "end": 812.509,
+      "duration": 1.749,
+      "text": "experiment and think of the following"
+    },
+    {
+      "index": 319,
+      "start": 812.519,
+      "end": 815.43,
+      "duration": 2.911,
+      "text": "sample space one possible outcome is"
+    },
+    {
+      "index": 320,
+      "start": 815.44,
+      "end": 819.03,
+      "duration": 3.59,
+      "text": "heads a second possible outcome is Tails"
+    },
+    {
+      "index": 321,
+      "start": 819.04,
+      "end": 820.79,
+      "duration": 1.75,
+      "text": "and it's"
+    },
+    {
+      "index": 322,
+      "start": 820.8,
+      "end": 823.71,
+      "duration": 2.91,
+      "text": "raining and the third possible outcome"
+    },
+    {
+      "index": 323,
+      "start": 823.72,
+      "end": 828.269,
+      "duration": 4.549,
+      "text": "is Tails and it's not"
+    },
+    {
+      "index": 324,
+      "start": 831.59,
+      "end": 831.6,
+      "duration": 0.01,
+      "text": "training so this is another possible"
+    },
+    {
+      "index": 325,
+      "start": 831.6,
+      "end": 833.91,
+      "duration": 2.31,
+      "text": "sample space for the experiment where I"
+    },
+    {
+      "index": 326,
+      "start": 833.92,
+      "end": 835.87,
+      "duration": 1.95,
+      "text": "flip a coin just"
+    },
+    {
+      "index": 327,
+      "start": 835.88,
+      "end": 838.71,
+      "duration": 2.83,
+      "text": "once it's a legitimate one these three"
+    },
+    {
+      "index": 328,
+      "start": 838.72,
+      "end": 841.389,
+      "duration": 2.669,
+      "text": "possib abilities are mutually exclusive"
+    },
+    {
+      "index": 329,
+      "start": 841.399,
+      "end": 843.99,
+      "duration": 2.591,
+      "text": "and collectively exhaustive which one is"
+    },
+    {
+      "index": 330,
+      "start": 844.0,
+      "end": 847.03,
+      "duration": 3.03,
+      "text": "the right sample space is it this one or"
+    },
+    {
+      "index": 331,
+      "start": 847.04,
+      "end": 850.55,
+      "duration": 3.51,
+      "text": "that one well if you think that my coin"
+    },
+    {
+      "index": 332,
+      "start": 850.56,
+      "end": 852.629,
+      "duration": 2.069,
+      "text": "flipping inside this room is completely"
+    },
+    {
+      "index": 333,
+      "start": 852.639,
+      "end": 855.389,
+      "duration": 2.75,
+      "text": "unrelated to the weather outside then"
+    },
+    {
+      "index": 334,
+      "start": 855.399,
+      "end": 857.55,
+      "duration": 2.151,
+      "text": "you're going to stick with this sample"
+    },
+    {
+      "index": 335,
+      "start": 857.56,
+      "end": 860.67,
+      "duration": 3.11,
+      "text": "space if on the other hand you have some"
+    },
+    {
+      "index": 336,
+      "start": 860.68,
+      "end": 863.35,
+      "duration": 2.67,
+      "text": "superstitious beliefs that maybe rain"
+    },
+    {
+      "index": 337,
+      "start": 863.36,
+      "end": 867.23,
+      "duration": 3.87,
+      "text": "has an effect on my coins you might work"
+    },
+    {
+      "index": 338,
+      "start": 867.24,
+      "end": 869.55,
+      "duration": 2.31,
+      "text": "with a sample space of this kind"
+    },
+    {
+      "index": 339,
+      "start": 869.56,
+      "end": 872.189,
+      "duration": 2.629,
+      "text": "so you probably wouldn't do that but"
+    },
+    {
+      "index": 340,
+      "start": 872.199,
+      "end": 874.389,
+      "duration": 2.19,
+      "text": "it's a legitimate option strictly"
+    },
+    {
+      "index": 341,
+      "start": 874.399,
+      "end": 876.949,
+      "duration": 2.55,
+      "text": "speaking now this example is a little on"
+    },
+    {
+      "index": 342,
+      "start": 876.959,
+      "end": 879.03,
+      "duration": 2.071,
+      "text": "the bit on the frivolous side but the"
+    },
+    {
+      "index": 343,
+      "start": 879.04,
+      "end": 881.43,
+      "duration": 2.39,
+      "text": "issue that comes up here is a basic one"
+    },
+    {
+      "index": 344,
+      "start": 881.44,
+      "end": 883.99,
+      "duration": 2.55,
+      "text": "that shows up anywhere in science and"
+    },
+    {
+      "index": 345,
+      "start": 884.0,
+      "end": 885.91,
+      "duration": 1.91,
+      "text": "engineering whenever you're dealing with"
+    },
+    {
+      "index": 346,
+      "start": 885.92,
+      "end": 888.59,
+      "duration": 2.67,
+      "text": "a model or with a situation there are"
+    },
+    {
+      "index": 347,
+      "start": 888.6,
+      "end": 890.79,
+      "duration": 2.19,
+      "text": "zillions of details in that situation"
+    },
+    {
+      "index": 348,
+      "start": 890.8,
+      "end": 892.87,
+      "duration": 2.07,
+      "text": "and when you come up with a model you"
+    },
+    {
+      "index": 349,
+      "start": 892.88,
+      "end": 895.43,
+      "duration": 2.55,
+      "text": "choose some of those details that you"
+    },
+    {
+      "index": 350,
+      "start": 895.44,
+      "end": 898.59,
+      "duration": 3.15,
+      "text": "keep in your model and some that you say"
+    },
+    {
+      "index": 351,
+      "start": 898.6,
+      "end": 900.749,
+      "duration": 2.149,
+      "text": "well these are irrelevant or maybe there"
+    },
+    {
+      "index": 352,
+      "start": 900.759,
+      "end": 903.23,
+      "duration": 2.471,
+      "text": "are small effects I can like neglect"
+    },
+    {
+      "index": 353,
+      "start": 903.24,
+      "end": 905.269,
+      "duration": 2.029,
+      "text": "them and you keep them outside your"
+    },
+    {
+      "index": 354,
+      "start": 905.279,
+      "end": 907.67,
+      "duration": 2.391,
+      "text": "model so there's definitely when you go"
+    },
+    {
+      "index": 355,
+      "start": 907.68,
+      "end": 909.43,
+      "duration": 1.75,
+      "text": "to the real world there's definitely an"
+    },
+    {
+      "index": 356,
+      "start": 909.44,
+      "end": 911.99,
+      "duration": 2.55,
+      "text": "element of art and some judgment that"
+    },
+    {
+      "index": 357,
+      "start": 912.0,
+      "end": 914.71,
+      "duration": 2.71,
+      "text": "you need to do in order to set up an"
+    },
+    {
+      "index": 358,
+      "start": 914.72,
+      "end": 919.23,
+      "duration": 4.51,
+      "text": "appropriate sample"
+    },
+    {
+      "index": 359,
+      "start": 922.35,
+      "end": 922.36,
+      "duration": 0.01,
+      "text": "space so an easy example"
+    },
+    {
+      "index": 360,
+      "start": 922.36,
+      "end": 925.67,
+      "duration": 3.31,
+      "text": "now so of course the elementary examples"
+    },
+    {
+      "index": 361,
+      "start": 925.68,
+      "end": 929.35,
+      "duration": 3.67,
+      "text": "are coins cards dice"
+    },
+    {
+      "index": 362,
+      "start": 929.36,
+      "end": 931.59,
+      "duration": 2.23,
+      "text": "so let's deal with dyes but to keep the"
+    },
+    {
+      "index": 363,
+      "start": 931.6,
+      "end": 934.55,
+      "duration": 2.95,
+      "text": "diagram small instead of a six-sided Dy"
+    },
+    {
+      "index": 364,
+      "start": 934.56,
+      "end": 936.509,
+      "duration": 1.949,
+      "text": "we're going to think about a Dy that"
+    },
+    {
+      "index": 365,
+      "start": 936.519,
+      "end": 939.15,
+      "duration": 2.631,
+      "text": "only has four faces so you can do that"
+    },
+    {
+      "index": 366,
+      "start": 939.16,
+      "end": 940.79,
+      "duration": 1.63,
+      "text": "with a tetrahedr and doesn't really"
+    },
+    {
+      "index": 367,
+      "start": 940.8,
+      "end": 942.829,
+      "duration": 2.029,
+      "text": "matter basically it's a die that when"
+    },
+    {
+      "index": 368,
+      "start": 942.839,
+      "end": 944.99,
+      "duration": 2.151,
+      "text": "you roll it you get a result which is"
+    },
+    {
+      "index": 369,
+      "start": 945.0,
+      "end": 948.069,
+      "duration": 3.069,
+      "text": "one two three or four however the"
+    },
+    {
+      "index": 370,
+      "start": 948.079,
+      "end": 950.55,
+      "duration": 2.471,
+      "text": "experiment that I'm going to think about"
+    },
+    {
+      "index": 371,
+      "start": 950.56,
+      "end": 955.11,
+      "duration": 4.55,
+      "text": "will consist of two rolls of a"
+    },
+    {
+      "index": 372,
+      "start": 955.12,
+      "end": 958.55,
+      "duration": 3.43,
+      "text": "Dy crucial Point here I'm rolling the Dy"
+    },
+    {
+      "index": 373,
+      "start": 958.56,
+      "end": 959.55,
+      "duration": 0.99,
+      "text": "twice"
+    },
+    {
+      "index": 374,
+      "start": 959.56,
+      "end": 962.189,
+      "duration": 2.629,
+      "text": "but I'm thinking of this as just one"
+    },
+    {
+      "index": 375,
+      "start": 962.199,
+      "end": 965.629,
+      "duration": 3.43,
+      "text": "experiment not two different experiments"
+    },
+    {
+      "index": 376,
+      "start": 965.639,
+      "end": 969.309,
+      "duration": 3.67,
+      "text": "not a repetition of twice of the same"
+    },
+    {
+      "index": 377,
+      "start": 969.319,
+      "end": 971.99,
+      "duration": 2.671,
+      "text": "experiment so it's one big experiment"
+    },
+    {
+      "index": 378,
+      "start": 972.0,
+      "end": 973.91,
+      "duration": 1.91,
+      "text": "during that big experiment various"
+    },
+    {
+      "index": 379,
+      "start": 973.92,
+      "end": 976.23,
+      "duration": 2.31,
+      "text": "things will happen such as I'm rolling"
+    },
+    {
+      "index": 380,
+      "start": 976.24,
+      "end": 980.15,
+      "duration": 3.91,
+      "text": "the D once and then I'm rolling the die"
+    },
+    {
+      "index": 381,
+      "start": 980.16,
+      "end": 983.949,
+      "duration": 3.789,
+      "text": "twice okay so what's the sample space"
+    },
+    {
+      "index": 382,
+      "start": 983.959,
+      "end": 986.15,
+      "duration": 2.191,
+      "text": "for that experiment well the sample"
+    },
+    {
+      "index": 383,
+      "start": 986.16,
+      "end": 988.629,
+      "duration": 2.469,
+      "text": "space consists of the possible outcomes"
+    },
+    {
+      "index": 384,
+      "start": 988.639,
+      "end": 991.23,
+      "duration": 2.591,
+      "text": "one one possible outcome is that your"
+    },
+    {
+      "index": 385,
+      "start": 991.24,
+      "end": 994.309,
+      "duration": 3.069,
+      "text": "first role resulted in two and the"
+    },
+    {
+      "index": 386,
+      "start": 994.319,
+      "end": 997.23,
+      "duration": 2.911,
+      "text": "second role resulted in three in which"
+    },
+    {
+      "index": 387,
+      "start": 997.24,
+      "end": 999.99,
+      "duration": 2.75,
+      "text": "case the outcome that you get is this"
+    },
+    {
+      "index": 388,
+      "start": 1000.0,
+      "end": 1003.47,
+      "duration": 3.47,
+      "text": "one a two followed by three this is one"
+    },
+    {
+      "index": 389,
+      "start": 1003.48,
+      "end": 1004.87,
+      "duration": 1.39,
+      "text": "possible"
+    },
+    {
+      "index": 390,
+      "start": 1004.88,
+      "end": 1008.389,
+      "duration": 3.509,
+      "text": "outcome the way I'm describing things"
+    },
+    {
+      "index": 391,
+      "start": 1008.399,
+      "end": 1010.949,
+      "duration": 2.55,
+      "text": "this outcome is to be distinguished from"
+    },
+    {
+      "index": 392,
+      "start": 1010.959,
+      "end": 1014.069,
+      "duration": 3.11,
+      "text": "this outcome here where a three is"
+    },
+    {
+      "index": 393,
+      "start": 1014.079,
+      "end": 1016.069,
+      "duration": 1.99,
+      "text": "followed by"
+    },
+    {
+      "index": 394,
+      "start": 1016.079,
+      "end": 1018.91,
+      "duration": 2.831,
+      "text": "two if you're playing Bon it does"
+    },
+    {
+      "index": 395,
+      "start": 1018.92,
+      "end": 1021.509,
+      "duration": 2.589,
+      "text": "doesn't matter which one of the two"
+    },
+    {
+      "index": 396,
+      "start": 1021.519,
+      "end": 1024.51,
+      "duration": 2.991,
+      "text": "happened but if you're do dealing with a"
+    },
+    {
+      "index": 397,
+      "start": 1024.52,
+      "end": 1026.189,
+      "duration": 1.669,
+      "text": "probabilistic model that he wants to"
+    },
+    {
+      "index": 398,
+      "start": 1026.199,
+      "end": 1028.51,
+      "duration": 2.311,
+      "text": "keep track of everything that happens in"
+    },
+    {
+      "index": 399,
+      "start": 1028.52,
+      "end": 1030.11,
+      "duration": 1.59,
+      "text": "this composite"
+    },
+    {
+      "index": 400,
+      "start": 1030.12,
+      "end": 1033.029,
+      "duration": 2.909,
+      "text": "experiment there are good reasons for"
+    },
+    {
+      "index": 401,
+      "start": 1033.039,
+      "end": 1034.99,
+      "duration": 1.951,
+      "text": "distinguishing between these two"
+    },
+    {
+      "index": 402,
+      "start": 1035.0,
+      "end": 1037.71,
+      "duration": 2.71,
+      "text": "outcomes I mean when this happens it's"
+    },
+    {
+      "index": 403,
+      "start": 1037.72,
+      "end": 1039.75,
+      "duration": 2.03,
+      "text": "definitely something different from that"
+    },
+    {
+      "index": 404,
+      "start": 1039.76,
+      "end": 1041.909,
+      "duration": 2.149,
+      "text": "happening a two followed by a three is"
+    },
+    {
+      "index": 405,
+      "start": 1041.919,
+      "end": 1044.39,
+      "duration": 2.471,
+      "text": "different from a three followed by a two"
+    },
+    {
+      "index": 406,
+      "start": 1044.4,
+      "end": 1046.99,
+      "duration": 2.59,
+      "text": "so this is the correct sample space for"
+    },
+    {
+      "index": 407,
+      "start": 1047.0,
+      "end": 1049.07,
+      "duration": 2.07,
+      "text": "this experiment where we roll the DI"
+    },
+    {
+      "index": 408,
+      "start": 1049.08,
+      "end": 1052.71,
+      "duration": 3.63,
+      "text": "twice it has a total of 16 elements and"
+    },
+    {
+      "index": 409,
+      "start": 1052.72,
+      "end": 1055.27,
+      "duration": 2.55,
+      "text": "it's of course a finite"
+    },
+    {
+      "index": 410,
+      "start": 1055.28,
+      "end": 1058.63,
+      "duration": 3.35,
+      "text": "set sometimes instead of describing"
+    },
+    {
+      "index": 411,
+      "start": 1058.64,
+      "end": 1061.83,
+      "duration": 3.19,
+      "text": "sample spaces in terms of lists or sets"
+    },
+    {
+      "index": 412,
+      "start": 1061.84,
+      "end": 1065.47,
+      "duration": 3.63,
+      "text": "or diagrams of this kind it's useful to"
+    },
+    {
+      "index": 413,
+      "start": 1065.48,
+      "end": 1067.23,
+      "duration": 1.75,
+      "text": "describe the experiment in some"
+    },
+    {
+      "index": 414,
+      "start": 1067.24,
+      "end": 1069.63,
+      "duration": 2.39,
+      "text": "sequential way whenever you have an"
+    },
+    {
+      "index": 415,
+      "start": 1069.64,
+      "end": 1071.63,
+      "duration": 1.99,
+      "text": "experiment that consists of multiple"
+    },
+    {
+      "index": 416,
+      "start": 1071.64,
+      "end": 1074.39,
+      "duration": 2.75,
+      "text": "stages it might be useful at least"
+    },
+    {
+      "index": 417,
+      "start": 1074.4,
+      "end": 1077.63,
+      "duration": 3.23,
+      "text": "visually to give a diagram that shows"
+    },
+    {
+      "index": 418,
+      "start": 1077.64,
+      "end": 1080.63,
+      "duration": 2.99,
+      "text": "you how those stages evolve and that's"
+    },
+    {
+      "index": 419,
+      "start": 1080.64,
+      "end": 1083.11,
+      "duration": 2.47,
+      "text": "what we do by using a sequential"
+    },
+    {
+      "index": 420,
+      "start": 1083.12,
+      "end": 1086.27,
+      "duration": 3.15,
+      "text": "description or a tree based description"
+    },
+    {
+      "index": 421,
+      "start": 1086.28,
+      "end": 1088.71,
+      "duration": 2.43,
+      "text": "by drawing a tree of the possible"
+    },
+    {
+      "index": 422,
+      "start": 1088.72,
+      "end": 1091.63,
+      "duration": 2.91,
+      "text": "Evolutions during our experiment so in"
+    },
+    {
+      "index": 423,
+      "start": 1091.64,
+      "end": 1093.789,
+      "duration": 2.149,
+      "text": "this tree I'm thinking of a first stage"
+    },
+    {
+      "index": 424,
+      "start": 1093.799,
+      "end": 1096.87,
+      "duration": 3.071,
+      "text": "in which I roll the first die and there"
+    },
+    {
+      "index": 425,
+      "start": 1096.88,
+      "end": 1099.43,
+      "duration": 2.55,
+      "text": "are four possible results one two three"
+    },
+    {
+      "index": 426,
+      "start": 1099.44,
+      "end": 1102.149,
+      "duration": 2.709,
+      "text": "and four and given what happened in the"
+    },
+    {
+      "index": 427,
+      "start": 1102.159,
+      "end": 1104.35,
+      "duration": 2.191,
+      "text": "first in let's say in the first roll"
+    },
+    {
+      "index": 428,
+      "start": 1104.36,
+      "end": 1107.23,
+      "duration": 2.87,
+      "text": "suppose I got a one then I'm rolling the"
+    },
+    {
+      "index": 429,
+      "start": 1107.24,
+      "end": 1109.71,
+      "duration": 2.47,
+      "text": "second die and the four possibilities"
+    },
+    {
+      "index": 430,
+      "start": 1109.72,
+      "end": 1112.029,
+      "duration": 2.309,
+      "text": "for what may happen to the second die"
+    },
+    {
+      "index": 431,
+      "start": 1112.039,
+      "end": 1114.51,
+      "duration": 2.471,
+      "text": "and the possible results are 1 two 3 and"
+    },
+    {
+      "index": 432,
+      "start": 1114.52,
+      "end": 1117.11,
+      "duration": 2.59,
+      "text": "four again so what's the relation"
+    },
+    {
+      "index": 433,
+      "start": 1117.12,
+      "end": 1119.63,
+      "duration": 2.51,
+      "text": "between the two diagrams well for"
+    },
+    {
+      "index": 434,
+      "start": 1119.64,
+      "end": 1121.99,
+      "duration": 2.35,
+      "text": "example the outcome two followed by"
+    },
+    {
+      "index": 435,
+      "start": 1122.0,
+      "end": 1125.95,
+      "duration": 3.95,
+      "text": "three corresponds to this path on the"
+    },
+    {
+      "index": 436,
+      "start": 1125.96,
+      "end": 1128.71,
+      "duration": 2.75,
+      "text": "tree so this path corresponds to two"
+    },
+    {
+      "index": 437,
+      "start": 1128.72,
+      "end": 1131.83,
+      "duration": 3.11,
+      "text": "followed by a three any path is"
+    },
+    {
+      "index": 438,
+      "start": 1131.84,
+      "end": 1134.149,
+      "duration": 2.309,
+      "text": "associated to a particular outcome any"
+    },
+    {
+      "index": 439,
+      "start": 1134.159,
+      "end": 1136.549,
+      "duration": 2.39,
+      "text": "outcome is associated to a particular"
+    },
+    {
+      "index": 440,
+      "start": 1136.559,
+      "end": 1139.39,
+      "duration": 2.831,
+      "text": "path and instead of path you may want to"
+    },
+    {
+      "index": 441,
+      "start": 1139.4,
+      "end": 1141.31,
+      "duration": 1.91,
+      "text": "think in terms of the leaves of this"
+    },
+    {
+      "index": 442,
+      "start": 1141.32,
+      "end": 1144.11,
+      "duration": 2.79,
+      "text": "diagram same thing think of each one of"
+    },
+    {
+      "index": 443,
+      "start": 1144.12,
+      "end": 1146.95,
+      "duration": 2.83,
+      "text": "the leaves as being one possible"
+    },
+    {
+      "index": 444,
+      "start": 1146.96,
+      "end": 1149.35,
+      "duration": 2.39,
+      "text": "outcome and of course we have 16"
+    },
+    {
+      "index": 445,
+      "start": 1149.36,
+      "end": 1152.75,
+      "duration": 3.39,
+      "text": "outcomes here we have 16 outcomes here"
+    },
+    {
+      "index": 446,
+      "start": 1152.76,
+      "end": 1154.75,
+      "duration": 1.99,
+      "text": "uh maybe you noticed a subtlety that I"
+    },
+    {
+      "index": 447,
+      "start": 1154.76,
+      "end": 1156.95,
+      "duration": 2.19,
+      "text": "used in my language I said I roll the"
+    },
+    {
+      "index": 448,
+      "start": 1156.96,
+      "end": 1159.95,
+      "duration": 2.99,
+      "text": "first die and the result that I get is a"
+    },
+    {
+      "index": 449,
+      "start": 1159.96,
+      "end": 1162.99,
+      "duration": 3.03,
+      "text": "two I didn't use the word outcome I want"
+    },
+    {
+      "index": 450,
+      "start": 1163.0,
+      "end": 1166.27,
+      "duration": 3.27,
+      "text": "to reserve the word outcome to mean the"
+    },
+    {
+      "index": 451,
+      "start": 1166.28,
+      "end": 1169.07,
+      "duration": 2.79,
+      "text": "overall outcome at the end of the"
+    },
+    {
+      "index": 452,
+      "start": 1169.08,
+      "end": 1174.31,
+      "duration": 5.23,
+      "text": "overall experiment so 2 comma 3 is the"
+    },
+    {
+      "index": 453,
+      "start": 1174.32,
+      "end": 1177.07,
+      "duration": 2.75,
+      "text": "outcome of the experiment the experiment"
+    },
+    {
+      "index": 454,
+      "start": 1177.08,
+      "end": 1180.029,
+      "duration": 2.949,
+      "text": "consisted of stages two was the result"
+    },
+    {
+      "index": 455,
+      "start": 1180.039,
+      "end": 1182.029,
+      "duration": 1.99,
+      "text": "in the first stage three was the result"
+    },
+    {
+      "index": 456,
+      "start": 1182.039,
+      "end": 1184.31,
+      "duration": 2.271,
+      "text": "in the second stage you put all those"
+    },
+    {
+      "index": 457,
+      "start": 1184.32,
+      "end": 1186.59,
+      "duration": 2.27,
+      "text": "results together and you get your"
+    },
+    {
+      "index": 458,
+      "start": 1186.6,
+      "end": 1188.95,
+      "duration": 2.35,
+      "text": "outcome okay perhaps we are splitting"
+    },
+    {
+      "index": 459,
+      "start": 1188.96,
+      "end": 1192.43,
+      "duration": 3.47,
+      "text": "hairs here but it's useful to keep the"
+    },
+    {
+      "index": 460,
+      "start": 1192.44,
+      "end": 1195.47,
+      "duration": 3.03,
+      "text": "concepts to keep the concepts"
+    },
+    {
+      "index": 461,
+      "start": 1195.48,
+      "end": 1198.43,
+      "duration": 2.95,
+      "text": "right what's special about this example"
+    },
+    {
+      "index": 462,
+      "start": 1198.44,
+      "end": 1201.029,
+      "duration": 2.589,
+      "text": "is that besides being trivial it has a"
+    },
+    {
+      "index": 463,
+      "start": 1201.039,
+      "end": 1204.19,
+      "duration": 3.151,
+      "text": "sample space which is finite there's 16"
+    },
+    {
+      "index": 464,
+      "start": 1204.2,
+      "end": 1206.47,
+      "duration": 2.27,
+      "text": "possible total outcomes not every"
+    },
+    {
+      "index": 465,
+      "start": 1206.48,
+      "end": 1209.23,
+      "duration": 2.75,
+      "text": "experiment has a finite sample space"
+    },
+    {
+      "index": 466,
+      "start": 1209.24,
+      "end": 1211.19,
+      "duration": 1.95,
+      "text": "Here's an experiment in which the sample"
+    },
+    {
+      "index": 467,
+      "start": 1211.2,
+      "end": 1213.95,
+      "duration": 2.75,
+      "text": "space is infinite so you are you're"
+    },
+    {
+      "index": 468,
+      "start": 1213.96,
+      "end": 1216.909,
+      "duration": 2.949,
+      "text": "playing darts and the target is this"
+    },
+    {
+      "index": 469,
+      "start": 1216.919,
+      "end": 1219.35,
+      "duration": 2.431,
+      "text": "square and you're a perfect you're"
+    },
+    {
+      "index": 470,
+      "start": 1219.36,
+      "end": 1221.51,
+      "duration": 2.15,
+      "text": "perfect at that game so you're sure that"
+    },
+    {
+      "index": 471,
+      "start": 1221.52,
+      "end": 1225.11,
+      "duration": 3.59,
+      "text": "your darts will always fall inside the"
+    },
+    {
+      "index": 472,
+      "start": 1225.12,
+      "end": 1228.07,
+      "duration": 2.95,
+      "text": "square so but where exactly your Dart"
+    },
+    {
+      "index": 473,
+      "start": 1228.08,
+      "end": 1229.75,
+      "duration": 1.67,
+      "text": "will fall ins inside that square that"
+    },
+    {
+      "index": 474,
+      "start": 1229.76,
+      "end": 1232.27,
+      "duration": 2.51,
+      "text": "itself is random we don't know what it's"
+    },
+    {
+      "index": 475,
+      "start": 1232.28,
+      "end": 1235.029,
+      "duration": 2.749,
+      "text": "going to be it's uncertain so all the"
+    },
+    {
+      "index": 476,
+      "start": 1235.039,
+      "end": 1237.549,
+      "duration": 2.51,
+      "text": "possible points inside the square are"
+    },
+    {
+      "index": 477,
+      "start": 1237.559,
+      "end": 1239.95,
+      "duration": 2.391,
+      "text": "possible outcomes of the experiment so a"
+    },
+    {
+      "index": 478,
+      "start": 1239.96,
+      "end": 1241.71,
+      "duration": 1.75,
+      "text": "typical outcome of the experiment is"
+    },
+    {
+      "index": 479,
+      "start": 1241.72,
+      "end": 1244.51,
+      "duration": 2.79,
+      "text": "going to be a pair of numbers X Y where"
+    },
+    {
+      "index": 480,
+      "start": 1244.52,
+      "end": 1247.149,
+      "duration": 2.629,
+      "text": "X and Y are real numbers between zero"
+    },
+    {
+      "index": 481,
+      "start": 1247.159,
+      "end": 1250.029,
+      "duration": 2.87,
+      "text": "and one now there's infinitely many real"
+    },
+    {
+      "index": 482,
+      "start": 1250.039,
+      "end": 1252.83,
+      "duration": 2.791,
+      "text": "numbers there's infinitely many points"
+    },
+    {
+      "index": 483,
+      "start": 1252.84,
+      "end": 1255.39,
+      "duration": 2.55,
+      "text": "in the Square so this is an example in"
+    },
+    {
+      "index": 484,
+      "start": 1255.4,
+      "end": 1258.35,
+      "duration": 2.95,
+      "text": "which our sample space is an infinite"
+    },
+    {
+      "index": 485,
+      "start": 1258.36,
+      "end": 1261.75,
+      "duration": 3.39,
+      "text": "set"
+    },
+    {
+      "index": 486,
+      "start": 1264.029,
+      "end": 1264.039,
+      "duration": 0.01,
+      "text": "okay so we're going to revisit this"
+    },
+    {
+      "index": 487,
+      "start": 1264.039,
+      "end": 1265.71,
+      "duration": 1.671,
+      "text": "example a little"
+    },
+    {
+      "index": 488,
+      "start": 1265.72,
+      "end": 1268.99,
+      "duration": 3.27,
+      "text": "later okay so these are two examples of"
+    },
+    {
+      "index": 489,
+      "start": 1269.0,
+      "end": 1272.71,
+      "duration": 3.71,
+      "text": "what a sample space might be in simple"
+    },
+    {
+      "index": 490,
+      "start": 1272.72,
+      "end": 1276.31,
+      "duration": 3.59,
+      "text": "experiments now the more important order"
+    },
+    {
+      "index": 491,
+      "start": 1276.32,
+      "end": 1278.59,
+      "duration": 2.27,
+      "text": "of business is now to look at those"
+    },
+    {
+      "index": 492,
+      "start": 1278.6,
+      "end": 1280.75,
+      "duration": 2.15,
+      "text": "possible outcomes and make some"
+    },
+    {
+      "index": 493,
+      "start": 1280.76,
+      "end": 1282.87,
+      "duration": 2.11,
+      "text": "statements about their relative"
+    },
+    {
+      "index": 494,
+      "start": 1282.88,
+      "end": 1285.39,
+      "duration": 2.51,
+      "text": "likelihoods which outcome is more likely"
+    },
+    {
+      "index": 495,
+      "start": 1285.4,
+      "end": 1289.029,
+      "duration": 3.629,
+      "text": "to occur to occur compared to the other"
+    },
+    {
+      "index": 496,
+      "start": 1289.039,
+      "end": 1292.59,
+      "duration": 3.551,
+      "text": "and the way we do this is by assigning"
+    },
+    {
+      "index": 497,
+      "start": 1292.6,
+      "end": 1295.31,
+      "duration": 2.71,
+      "text": "probabilities to the"
+    },
+    {
+      "index": 498,
+      "start": 1295.32,
+      "end": 1299.43,
+      "duration": 4.11,
+      "text": "outcomes well not exactly suppose that"
+    },
+    {
+      "index": 499,
+      "start": 1299.44,
+      "end": 1301.789,
+      "duration": 2.349,
+      "text": "all you were to do was to assign"
+    },
+    {
+      "index": 500,
+      "start": 1301.799,
+      "end": 1304.43,
+      "duration": 2.631,
+      "text": "probabilities to individual outcomes if"
+    },
+    {
+      "index": 501,
+      "start": 1304.44,
+      "end": 1308.31,
+      "duration": 3.87,
+      "text": "you go back to this example and you"
+    },
+    {
+      "index": 502,
+      "start": 1308.32,
+      "end": 1310.47,
+      "duration": 2.15,
+      "text": "consider one particular outcome let's"
+    },
+    {
+      "index": 503,
+      "start": 1310.48,
+      "end": 1313.07,
+      "duration": 2.59,
+      "text": "say this point what would be the"
+    },
+    {
+      "index": 504,
+      "start": 1313.08,
+      "end": 1315.59,
+      "duration": 2.51,
+      "text": "probability that you hit exactly this"
+    },
+    {
+      "index": 505,
+      "start": 1315.6,
+      "end": 1318.669,
+      "duration": 3.069,
+      "text": "point to infinite precision"
+    },
+    {
+      "index": 506,
+      "start": 1318.679,
+      "end": 1320.35,
+      "duration": 1.671,
+      "text": "intuitively that probability would be"
+    },
+    {
+      "index": 507,
+      "start": 1320.36,
+      "end": 1323.43,
+      "duration": 3.07,
+      "text": "zero so any individual point in this"
+    },
+    {
+      "index": 508,
+      "start": 1323.44,
+      "end": 1326.43,
+      "duration": 2.99,
+      "text": "diagram in any reasonable model should"
+    },
+    {
+      "index": 509,
+      "start": 1326.44,
+      "end": 1329.31,
+      "duration": 2.87,
+      "text": "have zero probability so if you just"
+    },
+    {
+      "index": 510,
+      "start": 1329.32,
+      "end": 1331.83,
+      "duration": 2.51,
+      "text": "tell me that any individual outcome has"
+    },
+    {
+      "index": 511,
+      "start": 1331.84,
+      "end": 1333.83,
+      "duration": 1.99,
+      "text": "zero probability you're not really"
+    },
+    {
+      "index": 512,
+      "start": 1333.84,
+      "end": 1337.43,
+      "duration": 3.59,
+      "text": "telling me much to work with for that"
+    },
+    {
+      "index": 513,
+      "start": 1337.44,
+      "end": 1340.07,
+      "duration": 2.63,
+      "text": "reason what instead we're going to do is"
+    },
+    {
+      "index": 514,
+      "start": 1340.08,
+      "end": 1343.19,
+      "duration": 3.11,
+      "text": "to assign probabilities to subsets of"
+    },
+    {
+      "index": 515,
+      "start": 1343.2,
+      "end": 1345.71,
+      "duration": 2.51,
+      "text": "the sample space as opposed to assigning"
+    },
+    {
+      "index": 516,
+      "start": 1345.72,
+      "end": 1349.149,
+      "duration": 3.429,
+      "text": "probabilities to individual outcomes"
+    },
+    {
+      "index": 517,
+      "start": 1349.159,
+      "end": 1351.43,
+      "duration": 2.271,
+      "text": "so here's the"
+    },
+    {
+      "index": 518,
+      "start": 1351.44,
+      "end": 1354.51,
+      "duration": 3.07,
+      "text": "picture we have our sample space which"
+    },
+    {
+      "index": 519,
+      "start": 1354.52,
+      "end": 1358.59,
+      "duration": 4.07,
+      "text": "is Omega and we consider some subset of"
+    },
+    {
+      "index": 520,
+      "start": 1358.6,
+      "end": 1360.95,
+      "duration": 2.35,
+      "text": "the sample space call it"
+    },
+    {
+      "index": 521,
+      "start": 1360.96,
+      "end": 1365.23,
+      "duration": 4.27,
+      "text": "a and I want to assign a num a number a"
+    },
+    {
+      "index": 522,
+      "start": 1365.24,
+      "end": 1368.19,
+      "duration": 2.95,
+      "text": "numerical probability to this particular"
+    },
+    {
+      "index": 523,
+      "start": 1368.2,
+      "end": 1372.31,
+      "duration": 4.11,
+      "text": "subset which uh represents my belief"
+    },
+    {
+      "index": 524,
+      "start": 1372.32,
+      "end": 1377.269,
+      "duration": 4.949,
+      "text": "about How likely this set is to occur"
+    },
+    {
+      "index": 525,
+      "start": 1377.279,
+      "end": 1379.789,
+      "duration": 2.51,
+      "text": "okay what do we mean to occur"
+    },
+    {
+      "index": 526,
+      "start": 1379.799,
+      "end": 1381.71,
+      "duration": 1.911,
+      "text": "and I'm introducing here a language"
+    },
+    {
+      "index": 527,
+      "start": 1381.72,
+      "end": 1383.71,
+      "duration": 1.99,
+      "text": "that's being used in probability Theory"
+    },
+    {
+      "index": 528,
+      "start": 1383.72,
+      "end": 1385.75,
+      "duration": 2.03,
+      "text": "when we talk about subsets of the sample"
+    },
+    {
+      "index": 529,
+      "start": 1385.76,
+      "end": 1388.95,
+      "duration": 3.19,
+      "text": "space we usually call them events as"
+    },
+    {
+      "index": 530,
+      "start": 1388.96,
+      "end": 1391.83,
+      "duration": 2.87,
+      "text": "opposed to subsets and the reason is"
+    },
+    {
+      "index": 531,
+      "start": 1391.84,
+      "end": 1393.669,
+      "duration": 1.829,
+      "text": "because it works nicely with the"
+    },
+    {
+      "index": 532,
+      "start": 1393.679,
+      "end": 1396.71,
+      "duration": 3.031,
+      "text": "language that describes what's going on"
+    },
+    {
+      "index": 533,
+      "start": 1396.72,
+      "end": 1399.71,
+      "duration": 2.99,
+      "text": "so the outcome is a point the outcome is"
+    },
+    {
+      "index": 534,
+      "start": 1399.72,
+      "end": 1403.87,
+      "duration": 4.15,
+      "text": "random the outcome may be inside this"
+    },
+    {
+      "index": 535,
+      "start": 1403.88,
+      "end": 1407.83,
+      "duration": 3.95,
+      "text": "set in which case we say that event a"
+    },
+    {
+      "index": 536,
+      "start": 1407.84,
+      "end": 1409.269,
+      "duration": 1.429,
+      "text": "occurred"
+    },
+    {
+      "index": 537,
+      "start": 1409.279,
+      "end": 1411.71,
+      "duration": 2.431,
+      "text": "if we get an outcome inside here or the"
+    },
+    {
+      "index": 538,
+      "start": 1411.72,
+      "end": 1414.63,
+      "duration": 2.91,
+      "text": "outcome may fall outside the set in"
+    },
+    {
+      "index": 539,
+      "start": 1414.64,
+      "end": 1417.669,
+      "duration": 3.029,
+      "text": "which case we say that event a did not"
+    },
+    {
+      "index": 540,
+      "start": 1417.679,
+      "end": 1419.71,
+      "duration": 2.031,
+      "text": "occur so we're going to assign"
+    },
+    {
+      "index": 541,
+      "start": 1419.72,
+      "end": 1421.549,
+      "duration": 1.829,
+      "text": "probabilities to"
+    },
+    {
+      "index": 542,
+      "start": 1421.559,
+      "end": 1424.99,
+      "duration": 3.431,
+      "text": "events and now how should we do this"
+    },
+    {
+      "index": 543,
+      "start": 1425.0,
+      "end": 1427.35,
+      "duration": 2.35,
+      "text": "assignment well probabilities are meant"
+    },
+    {
+      "index": 544,
+      "start": 1427.36,
+      "end": 1429.549,
+      "duration": 2.189,
+      "text": "to describe your beliefs about which"
+    },
+    {
+      "index": 545,
+      "start": 1429.559,
+      "end": 1432.19,
+      "duration": 2.631,
+      "text": "sets are more likely to occur versus"
+    },
+    {
+      "index": 546,
+      "start": 1432.2,
+      "end": 1434.19,
+      "duration": 1.99,
+      "text": "other set so there's many ways that you"
+    },
+    {
+      "index": 547,
+      "start": 1434.2,
+      "end": 1436.39,
+      "duration": 2.19,
+      "text": "can assign those probabilities but there"
+    },
+    {
+      "index": 548,
+      "start": 1436.4,
+      "end": 1439.43,
+      "duration": 3.03,
+      "text": "are some ground rules for this game"
+    },
+    {
+      "index": 549,
+      "start": 1439.44,
+      "end": 1441.63,
+      "duration": 2.19,
+      "text": "first we want probabilities to be"
+    },
+    {
+      "index": 550,
+      "start": 1441.64,
+      "end": 1443.75,
+      "duration": 2.11,
+      "text": "numbers between zero and one because"
+    },
+    {
+      "index": 551,
+      "start": 1443.76,
+      "end": 1445.63,
+      "duration": 1.87,
+      "text": "that's the usual"
+    },
+    {
+      "index": 552,
+      "start": 1445.64,
+      "end": 1448.19,
+      "duration": 2.55,
+      "text": "convention uh so probability of zero"
+    },
+    {
+      "index": 553,
+      "start": 1448.2,
+      "end": 1449.909,
+      "duration": 1.709,
+      "text": "means we're certain that something is"
+    },
+    {
+      "index": 554,
+      "start": 1449.919,
+      "end": 1451.75,
+      "duration": 1.831,
+      "text": "not going to happen probability of one"
+    },
+    {
+      "index": 555,
+      "start": 1451.76,
+      "end": 1453.39,
+      "duration": 1.63,
+      "text": "means that we're essentially certain"
+    },
+    {
+      "index": 556,
+      "start": 1453.4,
+      "end": 1455.07,
+      "duration": 1.67,
+      "text": "that something is not going to happen so"
+    },
+    {
+      "index": 557,
+      "start": 1455.08,
+      "end": 1457.669,
+      "duration": 2.589,
+      "text": "we want numbers between zero and one we"
+    },
+    {
+      "index": 558,
+      "start": 1457.679,
+      "end": 1460.39,
+      "duration": 2.711,
+      "text": "also want a few other things and those"
+    },
+    {
+      "index": 559,
+      "start": 1460.4,
+      "end": 1461.99,
+      "duration": 1.59,
+      "text": "few other things are going to be"
+    },
+    {
+      "index": 560,
+      "start": 1462.0,
+      "end": 1465.63,
+      "duration": 3.63,
+      "text": "encapsulated in a set of axioms what"
+    },
+    {
+      "index": 561,
+      "start": 1465.64,
+      "end": 1467.99,
+      "duration": 2.35,
+      "text": "axioms means in this context it's the"
+    },
+    {
+      "index": 562,
+      "start": 1468.0,
+      "end": 1470.47,
+      "duration": 2.47,
+      "text": "ground rules that any legitimate"
+    },
+    {
+      "index": 563,
+      "start": 1470.48,
+      "end": 1473.75,
+      "duration": 3.27,
+      "text": "probabilistic model should obey you have"
+    },
+    {
+      "index": 564,
+      "start": 1473.76,
+      "end": 1475.87,
+      "duration": 2.11,
+      "text": "a choice of how what kind of"
+    },
+    {
+      "index": 565,
+      "start": 1475.88,
+      "end": 1478.11,
+      "duration": 2.23,
+      "text": "probabilities you use but no matter what"
+    },
+    {
+      "index": 566,
+      "start": 1478.12,
+      "end": 1480.909,
+      "duration": 2.789,
+      "text": "you use they should obey certain"
+    },
+    {
+      "index": 567,
+      "start": 1480.919,
+      "end": 1483.59,
+      "duration": 2.671,
+      "text": "consistency properties because if they"
+    },
+    {
+      "index": 568,
+      "start": 1483.6,
+      "end": 1485.51,
+      "duration": 1.91,
+      "text": "obey those properties then you can go"
+    },
+    {
+      "index": 569,
+      "start": 1485.52,
+      "end": 1487.63,
+      "duration": 2.11,
+      "text": "ahead and do useful calculations and do"
+    },
+    {
+      "index": 570,
+      "start": 1487.64,
+      "end": 1490.19,
+      "duration": 2.55,
+      "text": "some useful reasoning so what are these"
+    },
+    {
+      "index": 571,
+      "start": 1490.2,
+      "end": 1493.07,
+      "duration": 2.87,
+      "text": "properties first probabilities should be"
+    },
+    {
+      "index": 572,
+      "start": 1493.08,
+      "end": 1494.11,
+      "duration": 1.03,
+      "text": "non-"
+    },
+    {
+      "index": 573,
+      "start": 1494.12,
+      "end": 1497.47,
+      "duration": 3.35,
+      "text": "negative okay uh that's our convention"
+    },
+    {
+      "index": 574,
+      "start": 1497.48,
+      "end": 1498.99,
+      "duration": 1.51,
+      "text": "we want probability to be numbers"
+    },
+    {
+      "index": 575,
+      "start": 1499.0,
+      "end": 1500.87,
+      "duration": 1.87,
+      "text": "between zero and one so they should"
+    },
+    {
+      "index": 576,
+      "start": 1500.88,
+      "end": 1502.269,
+      "duration": 1.389,
+      "text": "certainly be non- negative the"
+    },
+    {
+      "index": 577,
+      "start": 1502.279,
+      "end": 1504.31,
+      "duration": 2.031,
+      "text": "probability that event a occurs should"
+    },
+    {
+      "index": 578,
+      "start": 1504.32,
+      "end": 1506.75,
+      "duration": 2.43,
+      "text": "be a non- negative number what's the"
+    },
+    {
+      "index": 579,
+      "start": 1506.76,
+      "end": 1509.35,
+      "duration": 2.59,
+      "text": "second Axiom the probability of the"
+    },
+    {
+      "index": 580,
+      "start": 1509.36,
+      "end": 1513.95,
+      "duration": 4.59,
+      "text": "entire sample space is equal to one why"
+    },
+    {
+      "index": 581,
+      "start": 1513.96,
+      "end": 1517.389,
+      "duration": 3.429,
+      "text": "does this make sense well the outcome is"
+    },
+    {
+      "index": 582,
+      "start": 1517.399,
+      "end": 1520.149,
+      "duration": 2.75,
+      "text": "certain to be an element of the sample"
+    },
+    {
+      "index": 583,
+      "start": 1520.159,
+      "end": 1522.83,
+      "duration": 2.671,
+      "text": "space because we set up a sample space"
+    },
+    {
+      "index": 584,
+      "start": 1522.84,
+      "end": 1524.83,
+      "duration": 1.99,
+      "text": "which is collectively exhaustive no"
+    },
+    {
+      "index": 585,
+      "start": 1524.84,
+      "end": 1527.11,
+      "duration": 2.27,
+      "text": "matter what no matter what the outcome"
+    },
+    {
+      "index": 586,
+      "start": 1527.12,
+      "end": 1528.669,
+      "duration": 1.549,
+      "text": "is it's going to be an element of the"
+    },
+    {
+      "index": 587,
+      "start": 1528.679,
+      "end": 1531.549,
+      "duration": 2.87,
+      "text": "sample space we're certain that event"
+    },
+    {
+      "index": 588,
+      "start": 1531.559,
+      "end": 1534.63,
+      "duration": 3.071,
+      "text": "Omega is going to occur therefore we"
+    },
+    {
+      "index": 589,
+      "start": 1534.64,
+      "end": 1536.909,
+      "duration": 2.269,
+      "text": "require we represent this certainty by"
+    },
+    {
+      "index": 590,
+      "start": 1536.919,
+      "end": 1538.909,
+      "duration": 1.99,
+      "text": "saying that the probability of Omega is"
+    },
+    {
+      "index": 591,
+      "start": 1538.919,
+      "end": 1540.63,
+      "duration": 1.711,
+      "text": "equal to"
+    },
+    {
+      "index": 592,
+      "start": 1540.64,
+      "end": 1545.1,
+      "duration": 4.46,
+      "text": "one pretty straightforward so"
+    },
+    {
+      "index": 593,
+      "start": 1545.11,
+      "end": 1546.23,
+      "duration": 1.12,
+      "text": "[Applause]"
+    },
+    {
+      "index": 594,
+      "start": 1546.24,
+      "end": 1549.549,
+      "duration": 3.309,
+      "text": "far the more interesting axium is the"
+    },
+    {
+      "index": 595,
+      "start": 1549.559,
+      "end": 1551.07,
+      "duration": 1.511,
+      "text": "third"
+    },
+    {
+      "index": 596,
+      "start": 1551.08,
+      "end": 1554.31,
+      "duration": 3.23,
+      "text": "rule uh before getting into it just a"
+    },
+    {
+      "index": 597,
+      "start": 1554.32,
+      "end": 1557.71,
+      "duration": 3.39,
+      "text": "quick reminder if you have two sets a"
+    },
+    {
+      "index": 598,
+      "start": 1557.72,
+      "end": 1559.43,
+      "duration": 1.71,
+      "text": "and b"
+    },
+    {
+      "index": 599,
+      "start": 1559.44,
+      "end": 1562.87,
+      "duration": 3.43,
+      "text": "the intersection of A and B consists of"
+    },
+    {
+      "index": 600,
+      "start": 1562.88,
+      "end": 1566.029,
+      "duration": 3.149,
+      "text": "those elements that belong both to a and"
+    },
+    {
+      "index": 601,
+      "start": 1566.039,
+      "end": 1569.83,
+      "duration": 3.791,
+      "text": "to B and we denote it this way when you"
+    },
+    {
+      "index": 602,
+      "start": 1569.84,
+      "end": 1571.71,
+      "duration": 1.87,
+      "text": "think probabilistically the way to think"
+    },
+    {
+      "index": 603,
+      "start": 1571.72,
+      "end": 1574.269,
+      "duration": 2.549,
+      "text": "of intersection is by using the word"
+    },
+    {
+      "index": 604,
+      "start": 1574.279,
+      "end": 1578.47,
+      "duration": 4.191,
+      "text": "end this event this intersection is the"
+    },
+    {
+      "index": 605,
+      "start": 1578.48,
+      "end": 1582.59,
+      "duration": 4.11,
+      "text": "event that a occurred and B occurred if"
+    },
+    {
+      "index": 606,
+      "start": 1582.6,
+      "end": 1584.63,
+      "duration": 2.03,
+      "text": "I get an outcome inside here a has"
+    },
+    {
+      "index": 607,
+      "start": 1584.64,
+      "end": 1587.11,
+      "duration": 2.47,
+      "text": "occurred and B has occurred at the same"
+    },
+    {
+      "index": 608,
+      "start": 1587.12,
+      "end": 1590.07,
+      "duration": 2.95,
+      "text": "time so you may find the word end to be"
+    },
+    {
+      "index": 609,
+      "start": 1590.08,
+      "end": 1592.789,
+      "duration": 2.709,
+      "text": "a little more convenient than the word"
+    },
+    {
+      "index": 610,
+      "start": 1592.799,
+      "end": 1595.35,
+      "duration": 2.551,
+      "text": "intersection and similarly we have some"
+    },
+    {
+      "index": 611,
+      "start": 1595.36,
+      "end": 1598.669,
+      "duration": 3.309,
+      "text": "notation for the union of two"
+    },
+    {
+      "index": 612,
+      "start": 1598.679,
+      "end": 1602.83,
+      "duration": 4.151,
+      "text": "events which we write this way the union"
+    },
+    {
+      "index": 613,
+      "start": 1602.84,
+      "end": 1605.389,
+      "duration": 2.549,
+      "text": "of two sets or two events is the"
+    },
+    {
+      "index": 614,
+      "start": 1605.399,
+      "end": 1607.75,
+      "duration": 2.351,
+      "text": "collection of all elements that belong"
+    },
+    {
+      "index": 615,
+      "start": 1607.76,
+      "end": 1610.029,
+      "duration": 2.269,
+      "text": "either to the first set or to the second"
+    },
+    {
+      "index": 616,
+      "start": 1610.039,
+      "end": 1612.669,
+      "duration": 2.63,
+      "text": "or to both when you talk about events"
+    },
+    {
+      "index": 617,
+      "start": 1612.679,
+      "end": 1615.83,
+      "duration": 3.151,
+      "text": "you can use the word or so this is the"
+    },
+    {
+      "index": 618,
+      "start": 1615.84,
+      "end": 1620.029,
+      "duration": 4.189,
+      "text": "event that a occurred or or be occurred"
+    },
+    {
+      "index": 619,
+      "start": 1620.039,
+      "end": 1622.549,
+      "duration": 2.51,
+      "text": "and this or means that it could also be"
+    },
+    {
+      "index": 620,
+      "start": 1622.559,
+      "end": 1628.029,
+      "duration": 5.47,
+      "text": "that both of them"
+    },
+    {
+      "index": 621,
+      "start": 1630.31,
+      "end": 1630.32,
+      "duration": 0.01,
+      "text": "occurred okay so now that we have this"
+    },
+    {
+      "index": 622,
+      "start": 1630.32,
+      "end": 1632.549,
+      "duration": 2.229,
+      "text": "notation what does the first the third"
+    },
+    {
+      "index": 623,
+      "start": 1632.559,
+      "end": 1637.19,
+      "duration": 4.631,
+      "text": "Axiom say the third axum says that if we"
+    },
+    {
+      "index": 624,
+      "start": 1637.2,
+      "end": 1640.75,
+      "duration": 3.55,
+      "text": "have two events A and B that have no"
+    },
+    {
+      "index": 625,
+      "start": 1640.76,
+      "end": 1642.31,
+      "duration": 1.55,
+      "text": "common"
+    },
+    {
+      "index": 626,
+      "start": 1642.32,
+      "end": 1648.549,
+      "duration": 6.229,
+      "text": "elements so here's a here's B and and"
+    },
+    {
+      "index": 627,
+      "start": 1648.559,
+      "end": 1651.31,
+      "duration": 2.751,
+      "text": "perhaps this is our big sample space the"
+    },
+    {
+      "index": 628,
+      "start": 1651.32,
+      "end": 1653.669,
+      "duration": 2.349,
+      "text": "two events have no common elements so"
+    },
+    {
+      "index": 629,
+      "start": 1653.679,
+      "end": 1655.549,
+      "duration": 1.87,
+      "text": "the intersection of the two events is"
+    },
+    {
+      "index": 630,
+      "start": 1655.559,
+      "end": 1658.07,
+      "duration": 2.511,
+      "text": "the empty set there's nothing in their"
+    },
+    {
+      "index": 631,
+      "start": 1658.08,
+      "end": 1660.83,
+      "duration": 2.75,
+      "text": "intersection then the total probability"
+    },
+    {
+      "index": 632,
+      "start": 1660.84,
+      "end": 1663.63,
+      "duration": 2.79,
+      "text": "of a together with B has to be equal to"
+    },
+    {
+      "index": 633,
+      "start": 1663.64,
+      "end": 1666.59,
+      "duration": 2.95,
+      "text": "the sum of the individual probabilities"
+    },
+    {
+      "index": 634,
+      "start": 1666.6,
+      "end": 1669.47,
+      "duration": 2.87,
+      "text": "so the probability that a occurs or B"
+    },
+    {
+      "index": 635,
+      "start": 1669.48,
+      "end": 1671.269,
+      "duration": 1.789,
+      "text": "occurs is equal to the probability that"
+    },
+    {
+      "index": 636,
+      "start": 1671.279,
+      "end": 1674.029,
+      "duration": 2.75,
+      "text": "a occurs plus the probability that b"
+    },
+    {
+      "index": 637,
+      "start": 1674.039,
+      "end": 1677.47,
+      "duration": 3.431,
+      "text": "occurs so think of probability as being"
+    },
+    {
+      "index": 638,
+      "start": 1677.48,
+      "end": 1678.87,
+      "duration": 1.39,
+      "text": "cream cheese"
+    },
+    {
+      "index": 639,
+      "start": 1678.88,
+      "end": 1681.99,
+      "duration": 3.11,
+      "text": "you have one pound of cream cheese the"
+    },
+    {
+      "index": 640,
+      "start": 1682.0,
+      "end": 1684.43,
+      "duration": 2.43,
+      "text": "total probability assigned to the entire"
+    },
+    {
+      "index": 641,
+      "start": 1684.44,
+      "end": 1686.549,
+      "duration": 2.109,
+      "text": "sample space and that cream cheese is"
+    },
+    {
+      "index": 642,
+      "start": 1686.559,
+      "end": 1692.75,
+      "duration": 6.191,
+      "text": "spread out over this uh over this set"
+    },
+    {
+      "index": 643,
+      "start": 1692.76,
+      "end": 1695.389,
+      "duration": 2.629,
+      "text": "the probability of a is how much cream"
+    },
+    {
+      "index": 644,
+      "start": 1695.399,
+      "end": 1697.669,
+      "duration": 2.27,
+      "text": "cheese sits on top of a probability of B"
+    },
+    {
+      "index": 645,
+      "start": 1697.679,
+      "end": 1700.43,
+      "duration": 2.751,
+      "text": "is how much sits on top of B the"
+    },
+    {
+      "index": 646,
+      "start": 1700.44,
+      "end": 1704.549,
+      "duration": 4.109,
+      "text": "probability of a union B is the total"
+    },
+    {
+      "index": 647,
+      "start": 1704.559,
+      "end": 1706.83,
+      "duration": 2.271,
+      "text": "amount of cream cheese sitting on top of"
+    },
+    {
+      "index": 648,
+      "start": 1706.84,
+      "end": 1708.63,
+      "duration": 1.79,
+      "text": "this and that"
+    },
+    {
+      "index": 649,
+      "start": 1708.64,
+      "end": 1710.75,
+      "duration": 2.11,
+      "text": "which is obviously the sum of how much"
+    },
+    {
+      "index": 650,
+      "start": 1710.76,
+      "end": 1712.669,
+      "duration": 1.909,
+      "text": "is sitting here and how much is sitting"
+    },
+    {
+      "index": 651,
+      "start": 1712.679,
+      "end": 1715.149,
+      "duration": 2.47,
+      "text": "there so probabilities behave like cream"
+    },
+    {
+      "index": 652,
+      "start": 1715.159,
+      "end": 1718.63,
+      "duration": 3.471,
+      "text": "cheese or they behave like mass for"
+    },
+    {
+      "index": 653,
+      "start": 1718.64,
+      "end": 1723.71,
+      "duration": 5.07,
+      "text": "example the total mass uh over the mass"
+    },
+    {
+      "index": 654,
+      "start": 1723.72,
+      "end": 1727.149,
+      "duration": 3.429,
+      "text": "of a set if you think of some material"
+    },
+    {
+      "index": 655,
+      "start": 1727.159,
+      "end": 1729.669,
+      "duration": 2.51,
+      "text": "object the mass of this set consisting"
+    },
+    {
+      "index": 656,
+      "start": 1729.679,
+      "end": 1731.75,
+      "duration": 2.071,
+      "text": "of two pieces is obviously the sum of"
+    },
+    {
+      "index": 657,
+      "start": 1731.76,
+      "end": 1734.389,
+      "duration": 2.629,
+      "text": "the two masses so this property is a"
+    },
+    {
+      "index": 658,
+      "start": 1734.399,
+      "end": 1736.95,
+      "duration": 2.551,
+      "text": "very intuitive one it's a pretty natural"
+    },
+    {
+      "index": 659,
+      "start": 1736.96,
+      "end": 1739.35,
+      "duration": 2.39,
+      "text": "one to have"
+    },
+    {
+      "index": 660,
+      "start": 1739.36,
+      "end": 1742.63,
+      "duration": 3.27,
+      "text": "okay uh are these axioms enough for what"
+    },
+    {
+      "index": 661,
+      "start": 1742.64,
+      "end": 1745.95,
+      "duration": 3.31,
+      "text": "we want to do I mentioned a while ago"
+    },
+    {
+      "index": 662,
+      "start": 1745.96,
+      "end": 1748.23,
+      "duration": 2.27,
+      "text": "that we want probabilities to be numbers"
+    },
+    {
+      "index": 663,
+      "start": 1748.24,
+      "end": 1750.87,
+      "duration": 2.63,
+      "text": "between zero and one here's an axium"
+    },
+    {
+      "index": 664,
+      "start": 1750.88,
+      "end": 1752.35,
+      "duration": 1.47,
+      "text": "that tells you that probabilities are"
+    },
+    {
+      "index": 665,
+      "start": 1752.36,
+      "end": 1754.909,
+      "duration": 2.549,
+      "text": "non- negative should we have another"
+    },
+    {
+      "index": 666,
+      "start": 1754.919,
+      "end": 1758.11,
+      "duration": 3.191,
+      "text": "Axiom that tells us that probabilities"
+    },
+    {
+      "index": 667,
+      "start": 1758.12,
+      "end": 1761.99,
+      "duration": 3.87,
+      "text": "are less than or equal to one it's a"
+    },
+    {
+      "index": 668,
+      "start": 1762.0,
+      "end": 1764.07,
+      "duration": 2.07,
+      "text": "desirable property we would like to have"
+    },
+    {
+      "index": 669,
+      "start": 1764.08,
+      "end": 1765.269,
+      "duration": 1.189,
+      "text": "it in our"
+    },
+    {
+      "index": 670,
+      "start": 1765.279,
+      "end": 1769.149,
+      "duration": 3.87,
+      "text": "hands okay why is it not in that l"
+    },
+    {
+      "index": 671,
+      "start": 1769.159,
+      "end": 1771.63,
+      "duration": 2.471,
+      "text": "well the people who are in the axum"
+    },
+    {
+      "index": 672,
+      "start": 1771.64,
+      "end": 1773.95,
+      "duration": 2.31,
+      "text": "making business are mathematicians and"
+    },
+    {
+      "index": 673,
+      "start": 1773.96,
+      "end": 1776.389,
+      "duration": 2.429,
+      "text": "mathematicians tend to be pretty laconic"
+    },
+    {
+      "index": 674,
+      "start": 1776.399,
+      "end": 1778.389,
+      "duration": 1.99,
+      "text": "you don't say something if you don't"
+    },
+    {
+      "index": 675,
+      "start": 1778.399,
+      "end": 1781.31,
+      "duration": 2.911,
+      "text": "have to say it and this is a CA this is"
+    },
+    {
+      "index": 676,
+      "start": 1781.32,
+      "end": 1784.19,
+      "duration": 2.87,
+      "text": "the case here we don't need that extra"
+    },
+    {
+      "index": 677,
+      "start": 1784.2,
+      "end": 1786.87,
+      "duration": 2.67,
+      "text": "Axiom because we can derive it from the"
+    },
+    {
+      "index": 678,
+      "start": 1786.88,
+      "end": 1789.909,
+      "duration": 3.029,
+      "text": "existing axioms here's how it"
+    },
+    {
+      "index": 679,
+      "start": 1789.919,
+      "end": 1792.99,
+      "duration": 3.071,
+      "text": "goes one is the probability of the"
+    },
+    {
+      "index": 680,
+      "start": 1793.0,
+      "end": 1796.59,
+      "duration": 3.59,
+      "text": "entire sample space here we're using the"
+    },
+    {
+      "index": 681,
+      "start": 1796.6,
+      "end": 1800.31,
+      "duration": 3.71,
+      "text": "second axom"
+    },
+    {
+      "index": 682,
+      "start": 1805.23,
+      "end": 1805.24,
+      "duration": 0.01,
+      "text": "now the sample space is consists of a"
+    },
+    {
+      "index": 683,
+      "start": 1805.24,
+      "end": 1808.029,
+      "duration": 2.789,
+      "text": "together with the complement of a okay"
+    },
+    {
+      "index": 684,
+      "start": 1808.039,
+      "end": 1809.99,
+      "duration": 1.951,
+      "text": "so this"
+    },
+    {
+      "index": 685,
+      "start": 1810.0,
+      "end": 1812.789,
+      "duration": 2.789,
+      "text": "is uh when we I write the complement of"
+    },
+    {
+      "index": 686,
+      "start": 1812.799,
+      "end": 1815.23,
+      "duration": 2.431,
+      "text": "a I mean the complement of a inside the"
+    },
+    {
+      "index": 687,
+      "start": 1815.24,
+      "end": 1819.83,
+      "duration": 4.59,
+      "text": "set Omega so we have omega here's a"
+    },
+    {
+      "index": 688,
+      "start": 1819.84,
+      "end": 1822.029,
+      "duration": 2.189,
+      "text": "here's the complement of a and the"
+    },
+    {
+      "index": 689,
+      "start": 1822.039,
+      "end": 1826.99,
+      "duration": 4.951,
+      "text": "overall set is Omega Okay now what's the"
+    },
+    {
+      "index": 690,
+      "start": 1827.0,
+      "end": 1828.789,
+      "duration": 1.789,
+      "text": "next step what should I do next which"
+    },
+    {
+      "index": 691,
+      "start": 1828.799,
+      "end": 1830.269,
+      "duration": 1.47,
+      "text": "axum should I"
+    },
+    {
+      "index": 692,
+      "start": 1830.279,
+      "end": 1834.23,
+      "duration": 3.951,
+      "text": "use we use axium three because a set and"
+    },
+    {
+      "index": 693,
+      "start": 1834.24,
+      "end": 1836.71,
+      "duration": 2.47,
+      "text": "the complement of that set are disjoined"
+    },
+    {
+      "index": 694,
+      "start": 1836.72,
+      "end": 1839.029,
+      "duration": 2.309,
+      "text": "they don't have any common elements so"
+    },
+    {
+      "index": 695,
+      "start": 1839.039,
+      "end": 1840.83,
+      "duration": 1.791,
+      "text": "Axiom 3"
+    },
+    {
+      "index": 696,
+      "start": 1840.84,
+      "end": 1844.07,
+      "duration": 3.23,
+      "text": "applies and tells me that this is the"
+    },
+    {
+      "index": 697,
+      "start": 1844.08,
+      "end": 1846.59,
+      "duration": 2.51,
+      "text": "probability of a plus the probability of"
+    },
+    {
+      "index": 698,
+      "start": 1846.6,
+      "end": 1850.07,
+      "duration": 3.47,
+      "text": "a complement in particular the"
+    },
+    {
+      "index": 699,
+      "start": 1850.08,
+      "end": 1854.029,
+      "duration": 3.949,
+      "text": "probability of a is equal to 1 minus the"
+    },
+    {
+      "index": 700,
+      "start": 1854.039,
+      "end": 1855.99,
+      "duration": 1.951,
+      "text": "probability of a"
+    },
+    {
+      "index": 701,
+      "start": 1856.0,
+      "end": 1858.75,
+      "duration": 2.75,
+      "text": "complement and this is less than or"
+    },
+    {
+      "index": 702,
+      "start": 1858.76,
+      "end": 1862.549,
+      "duration": 3.789,
+      "text": "equal to one"
+    },
+    {
+      "index": 703,
+      "start": 1862.559,
+      "end": 1865.71,
+      "duration": 3.151,
+      "text": "why because probabilities are non-"
+    },
+    {
+      "index": 704,
+      "start": 1865.72,
+      "end": 1869.149,
+      "duration": 3.429,
+      "text": "negative by the first"
+    },
+    {
+      "index": 705,
+      "start": 1869.159,
+      "end": 1871.95,
+      "duration": 2.791,
+      "text": "AUM okay so we got the conclusion that"
+    },
+    {
+      "index": 706,
+      "start": 1871.96,
+      "end": 1874.029,
+      "duration": 2.069,
+      "text": "we wanted probabilities are always less"
+    },
+    {
+      "index": 707,
+      "start": 1874.039,
+      "end": 1876.509,
+      "duration": 2.47,
+      "text": "than or equal to one and this is a"
+    },
+    {
+      "index": 708,
+      "start": 1876.519,
+      "end": 1878.47,
+      "duration": 1.951,
+      "text": "simple consequence of the three aums"
+    },
+    {
+      "index": 709,
+      "start": 1878.48,
+      "end": 1881.71,
+      "duration": 3.23,
+      "text": "that we have this is a really nice"
+    },
+    {
+      "index": 710,
+      "start": 1881.72,
+      "end": 1884.789,
+      "duration": 3.069,
+      "text": "argument because it actually uses each"
+    },
+    {
+      "index": 711,
+      "start": 1884.799,
+      "end": 1887.19,
+      "duration": 2.391,
+      "text": "one of those axioms the argument is"
+    },
+    {
+      "index": 712,
+      "start": 1887.2,
+      "end": 1888.95,
+      "duration": 1.75,
+      "text": "simple but you you have to use all these"
+    },
+    {
+      "index": 713,
+      "start": 1888.96,
+      "end": 1891.47,
+      "duration": 2.51,
+      "text": "three properties to get the conclusion"
+    },
+    {
+      "index": 714,
+      "start": 1891.48,
+      "end": 1894.87,
+      "duration": 3.39,
+      "text": "that you want okay so we can get"
+    },
+    {
+      "index": 715,
+      "start": 1894.88,
+      "end": 1897.269,
+      "duration": 2.389,
+      "text": "interesting things out of our axioms can"
+    },
+    {
+      "index": 716,
+      "start": 1897.279,
+      "end": 1900.35,
+      "duration": 3.071,
+      "text": "we get some more interesting ones how"
+    },
+    {
+      "index": 717,
+      "start": 1900.36,
+      "end": 1903.549,
+      "duration": 3.189,
+      "text": "about the union of three"
+    },
+    {
+      "index": 718,
+      "start": 1903.559,
+      "end": 1906.149,
+      "duration": 2.59,
+      "text": "sets what kind of probability should it"
+    },
+    {
+      "index": 719,
+      "start": 1906.159,
+      "end": 1909.909,
+      "duration": 3.75,
+      "text": "have so here's an event consisting of"
+    },
+    {
+      "index": 720,
+      "start": 1909.919,
+      "end": 1913.909,
+      "duration": 3.99,
+      "text": "three of three pieces and I want to say"
+    },
+    {
+      "index": 721,
+      "start": 1913.919,
+      "end": 1916.269,
+      "duration": 2.35,
+      "text": "something about the probability of a"
+    },
+    {
+      "index": 722,
+      "start": 1916.279,
+      "end": 1921.149,
+      "duration": 4.87,
+      "text": "union B Union C what I would like to say"
+    },
+    {
+      "index": 723,
+      "start": 1921.159,
+      "end": 1923.75,
+      "duration": 2.591,
+      "text": "is that this probability is equal to the"
+    },
+    {
+      "index": 724,
+      "start": 1923.76,
+      "end": 1926.19,
+      "duration": 2.43,
+      "text": "sum of the three individual"
+    },
+    {
+      "index": 725,
+      "start": 1926.2,
+      "end": 1929.31,
+      "duration": 3.11,
+      "text": "probabilities how can I do it I have an"
+    },
+    {
+      "index": 726,
+      "start": 1929.32,
+      "end": 1931.71,
+      "duration": 2.39,
+      "text": "axium that tells me that I can do it for"
+    },
+    {
+      "index": 727,
+      "start": 1931.72,
+      "end": 1934.029,
+      "duration": 2.309,
+      "text": "two events I don't have an axium for"
+    },
+    {
+      "index": 728,
+      "start": 1934.039,
+      "end": 1936.83,
+      "duration": 2.791,
+      "text": "three events well maybe I can massage"
+    },
+    {
+      "index": 729,
+      "start": 1936.84,
+      "end": 1939.71,
+      "duration": 2.87,
+      "text": "things and still be able to use that"
+    },
+    {
+      "index": 730,
+      "start": 1939.72,
+      "end": 1943.75,
+      "duration": 4.03,
+      "text": "axium and here's the trick the union of"
+    },
+    {
+      "index": 731,
+      "start": 1943.76,
+      "end": 1947.269,
+      "duration": 3.509,
+      "text": "three sets you can think of it as"
+    },
+    {
+      "index": 732,
+      "start": 1947.279,
+      "end": 1950.549,
+      "duration": 3.27,
+      "text": "forming the union of the first two sets"
+    },
+    {
+      "index": 733,
+      "start": 1950.559,
+      "end": 1954.71,
+      "duration": 4.151,
+      "text": "and then taking the union with the third"
+    },
+    {
+      "index": 734,
+      "start": 1954.72,
+      "end": 1958.19,
+      "duration": 3.47,
+      "text": "set okay so taking unions you can take"
+    },
+    {
+      "index": 735,
+      "start": 1958.2,
+      "end": 1960.75,
+      "duration": 2.55,
+      "text": "the unions in any order that you want so"
+    },
+    {
+      "index": 736,
+      "start": 1960.76,
+      "end": 1965.59,
+      "duration": 4.83,
+      "text": "here we have the union of two sets now A"
+    },
+    {
+      "index": 737,
+      "start": 1965.6,
+      "end": 1967.269,
+      "duration": 1.669,
+      "text": "B C are"
+    },
+    {
+      "index": 738,
+      "start": 1967.279,
+      "end": 1970.23,
+      "duration": 2.951,
+      "text": "disjointed by assumption or that's how I"
+    },
+    {
+      "index": 739,
+      "start": 1970.24,
+      "end": 1974.11,
+      "duration": 3.87,
+      "text": "drew it so if a B and C are disjointed"
+    },
+    {
+      "index": 740,
+      "start": 1974.12,
+      "end": 1978.47,
+      "duration": 4.35,
+      "text": "then a union B is disjointed from C so"
+    },
+    {
+      "index": 741,
+      "start": 1978.48,
+      "end": 1980.629,
+      "duration": 2.149,
+      "text": "here we have the union of two disjoint"
+    },
+    {
+      "index": 742,
+      "start": 1980.639,
+      "end": 1983.99,
+      "duration": 3.351,
+      "text": "sets so by the additivity axum the"
+    },
+    {
+      "index": 743,
+      "start": 1984.0,
+      "end": 1986.43,
+      "duration": 2.43,
+      "text": "probability of that Union is going to be"
+    },
+    {
+      "index": 744,
+      "start": 1986.44,
+      "end": 1989.35,
+      "duration": 2.91,
+      "text": "the probability of the first set plus"
+    },
+    {
+      "index": 745,
+      "start": 1989.36,
+      "end": 1992.269,
+      "duration": 2.909,
+      "text": "the probability of the second set and"
+    },
+    {
+      "index": 746,
+      "start": 1992.279,
+      "end": 1994.629,
+      "duration": 2.35,
+      "text": "now I can use the additivity axium once"
+    },
+    {
+      "index": 747,
+      "start": 1994.639,
+      "end": 1997.549,
+      "duration": 2.91,
+      "text": "more to write that this is probability"
+    },
+    {
+      "index": 748,
+      "start": 1997.559,
+      "end": 2000.789,
+      "duration": 3.23,
+      "text": "of a plus probability of B plus"
+    },
+    {
+      "index": 749,
+      "start": 2000.799,
+      "end": 2002.35,
+      "duration": 1.551,
+      "text": "probability of"
+    },
+    {
+      "index": 750,
+      "start": 2002.36,
+      "end": 2005.509,
+      "duration": 3.149,
+      "text": "C so by using this axum which was stated"
+    },
+    {
+      "index": 751,
+      "start": 2005.519,
+      "end": 2008.269,
+      "duration": 2.75,
+      "text": "for two sets we can actually derive"
+    },
+    {
+      "index": 752,
+      "start": 2008.279,
+      "end": 2010.87,
+      "duration": 2.591,
+      "text": "a similar property for the union of"
+    },
+    {
+      "index": 753,
+      "start": 2010.88,
+      "end": 2013.11,
+      "duration": 2.23,
+      "text": "three disjointed sets and then you can"
+    },
+    {
+      "index": 754,
+      "start": 2013.12,
+      "end": 2015.029,
+      "duration": 1.909,
+      "text": "repeat this argument as many times as"
+    },
+    {
+      "index": 755,
+      "start": 2015.039,
+      "end": 2017.83,
+      "duration": 2.791,
+      "text": "you want it's valid for the union of 10"
+    },
+    {
+      "index": 756,
+      "start": 2017.84,
+      "end": 2019.99,
+      "duration": 2.15,
+      "text": "disjoint sets for the union of 100"
+    },
+    {
+      "index": 757,
+      "start": 2020.0,
+      "end": 2022.909,
+      "duration": 2.909,
+      "text": "disjoint sets for the union of any"
+    },
+    {
+      "index": 758,
+      "start": 2022.919,
+      "end": 2027.629,
+      "duration": 4.71,
+      "text": "finite number of sets so if A1 up to i n"
+    },
+    {
+      "index": 759,
+      "start": 2027.639,
+      "end": 2030.149,
+      "duration": 2.51,
+      "text": "are"
+    },
+    {
+      "index": 760,
+      "start": 2034.549,
+      "end": 2034.559,
+      "duration": 0.01,
+      "text": "disjointed then the probability of A1"
+    },
+    {
+      "index": 761,
+      "start": 2034.559,
+      "end": 2038.909,
+      "duration": 4.35,
+      "text": "Union a n is equal to the sum of the"
+    },
+    {
+      "index": 762,
+      "start": 2038.919,
+      "end": 2043.59,
+      "duration": 4.671,
+      "text": "probabilities of the individual"
+    },
+    {
+      "index": 763,
+      "start": 2048.43,
+      "end": 2048.44,
+      "duration": 0.01,
+      "text": "sets Okay special case of this is when"
+    },
+    {
+      "index": 764,
+      "start": 2048.44,
+      "end": 2051.51,
+      "duration": 3.07,
+      "text": "we're dealing with finite sets suppose I"
+    },
+    {
+      "index": 765,
+      "start": 2051.52,
+      "end": 2054.71,
+      "duration": 3.19,
+      "text": "have just a finite set of outcomes I put"
+    },
+    {
+      "index": 766,
+      "start": 2054.72,
+      "end": 2057.109,
+      "duration": 2.389,
+      "text": "them together in a set and I'm"
+    },
+    {
+      "index": 767,
+      "start": 2057.119,
+      "end": 2058.869,
+      "duration": 1.75,
+      "text": "interesting in the probability of that"
+    },
+    {
+      "index": 768,
+      "start": 2058.879,
+      "end": 2062.43,
+      "duration": 3.551,
+      "text": "set so here's our sample space there's"
+    },
+    {
+      "index": 769,
+      "start": 2062.44,
+      "end": 2065.629,
+      "duration": 3.189,
+      "text": "lots of outcomes but I'm taking a few of"
+    },
+    {
+      "index": 770,
+      "start": 2065.639,
+      "end": 2070.109,
+      "duration": 4.47,
+      "text": "these and I form a set set out of them"
+    },
+    {
+      "index": 771,
+      "start": 2070.119,
+      "end": 2072.909,
+      "duration": 2.79,
+      "text": "this is a set consisting of in this"
+    },
+    {
+      "index": 772,
+      "start": 2072.919,
+      "end": 2076.03,
+      "duration": 3.111,
+      "text": "picture of three elements in general it"
+    },
+    {
+      "index": 773,
+      "start": 2076.04,
+      "end": 2080.43,
+      "duration": 4.39,
+      "text": "consists of K elements now a finite set"
+    },
+    {
+      "index": 774,
+      "start": 2080.44,
+      "end": 2083.669,
+      "duration": 3.229,
+      "text": "I can write it as a union of single"
+    },
+    {
+      "index": 775,
+      "start": 2083.679,
+      "end": 2086.47,
+      "duration": 2.791,
+      "text": "element sets so this set here is the"
+    },
+    {
+      "index": 776,
+      "start": 2086.48,
+      "end": 2089.51,
+      "duration": 3.03,
+      "text": "union of this one element set together"
+    },
+    {
+      "index": 777,
+      "start": 2089.52,
+      "end": 2091.71,
+      "duration": 2.19,
+      "text": "with this one element set together with"
+    },
+    {
+      "index": 778,
+      "start": 2091.72,
+      "end": 2094.75,
+      "duration": 3.03,
+      "text": "that one element set so the total"
+    },
+    {
+      "index": 779,
+      "start": 2094.76,
+      "end": 2096.629,
+      "duration": 1.869,
+      "text": "probability of this set is going to be"
+    },
+    {
+      "index": 780,
+      "start": 2096.639,
+      "end": 2100.19,
+      "duration": 3.551,
+      "text": "the sum of the probabilities of the one"
+    },
+    {
+      "index": 781,
+      "start": 2100.2,
+      "end": 2101.63,
+      "duration": 1.43,
+      "text": "element"
+    },
+    {
+      "index": 782,
+      "start": 2101.64,
+      "end": 2105.79,
+      "duration": 4.15,
+      "text": "sets now probability of a one element"
+    },
+    {
+      "index": 783,
+      "start": 2105.8,
+      "end": 2109.349,
+      "duration": 3.549,
+      "text": "set you need to use the brackets here"
+    },
+    {
+      "index": 784,
+      "start": 2109.359,
+      "end": 2111.349,
+      "duration": 1.99,
+      "text": "because probabilities are assigned to"
+    },
+    {
+      "index": 785,
+      "start": 2111.359,
+      "end": 2114.71,
+      "duration": 3.351,
+      "text": "sets but this gets kind of tuse so here"
+    },
+    {
+      "index": 786,
+      "start": 2114.72,
+      "end": 2117.55,
+      "duration": 2.83,
+      "text": "one abuses notation a little bit and we"
+    },
+    {
+      "index": 787,
+      "start": 2117.56,
+      "end": 2119.95,
+      "duration": 2.39,
+      "text": "get rid of those brackets and just write"
+    },
+    {
+      "index": 788,
+      "start": 2119.96,
+      "end": 2123.31,
+      "duration": 3.35,
+      "text": "probability of this single individual"
+    },
+    {
+      "index": 789,
+      "start": 2123.32,
+      "end": 2126.03,
+      "duration": 2.71,
+      "text": "outcome in any case conclusion from this"
+    },
+    {
+      "index": 790,
+      "start": 2126.04,
+      "end": 2129.99,
+      "duration": 3.95,
+      "text": "exercise is that the total probability"
+    },
+    {
+      "index": 791,
+      "start": 2130.0,
+      "end": 2133.51,
+      "duration": 3.51,
+      "text": "of a finite collection of possible"
+    },
+    {
+      "index": 792,
+      "start": 2133.52,
+      "end": 2136.71,
+      "duration": 3.19,
+      "text": "outcomes the total probability is equal"
+    },
+    {
+      "index": 793,
+      "start": 2136.72,
+      "end": 2139.03,
+      "duration": 2.31,
+      "text": "to the sum of the probabilities of"
+    },
+    {
+      "index": 794,
+      "start": 2139.04,
+      "end": 2141.27,
+      "duration": 2.23,
+      "text": "individual"
+    },
+    {
+      "index": 795,
+      "start": 2141.28,
+      "end": 2143.79,
+      "duration": 2.51,
+      "text": "elements so these are basically the"
+    },
+    {
+      "index": 796,
+      "start": 2143.8,
+      "end": 2147.79,
+      "duration": 3.99,
+      "text": "axioms of probability Theory or well"
+    },
+    {
+      "index": 797,
+      "start": 2147.8,
+      "end": 2150.79,
+      "duration": 2.99,
+      "text": "they're almost the axioms there are some"
+    },
+    {
+      "index": 798,
+      "start": 2150.8,
+      "end": 2153.39,
+      "duration": 2.59,
+      "text": "subtleties that are involved here one"
+    },
+    {
+      "index": 799,
+      "start": 2153.4,
+      "end": 2157.27,
+      "duration": 3.87,
+      "text": "subtlety is that this axium here is"
+    },
+    {
+      "index": 800,
+      "start": 2157.28,
+      "end": 2159.55,
+      "duration": 2.27,
+      "text": "doesn't doesn't quite do the job for"
+    },
+    {
+      "index": 801,
+      "start": 2159.56,
+      "end": 2161.79,
+      "duration": 2.23,
+      "text": "everything we would like to do and we're"
+    },
+    {
+      "index": 802,
+      "start": 2161.8,
+      "end": 2163.43,
+      "duration": 1.63,
+      "text": "going to come back to this at the end of"
+    },
+    {
+      "index": 803,
+      "start": 2163.44,
+      "end": 2167.79,
+      "duration": 4.35,
+      "text": "the lecture a second subtlety is has to"
+    },
+    {
+      "index": 804,
+      "start": 2167.8,
+      "end": 2171.55,
+      "duration": 3.75,
+      "text": "do with weird sets we said that an event"
+    },
+    {
+      "index": 805,
+      "start": 2171.56,
+      "end": 2173.75,
+      "duration": 2.19,
+      "text": "is a subset of the sample space and we"
+    },
+    {
+      "index": 806,
+      "start": 2173.76,
+      "end": 2175.79,
+      "duration": 2.03,
+      "text": "assign probabilities to"
+    },
+    {
+      "index": 807,
+      "start": 2175.8,
+      "end": 2178.51,
+      "duration": 2.71,
+      "text": "events does this mean that we are going"
+    },
+    {
+      "index": 808,
+      "start": 2178.52,
+      "end": 2180.95,
+      "duration": 2.43,
+      "text": "to assign probability to every possible"
+    },
+    {
+      "index": 809,
+      "start": 2180.96,
+      "end": 2184.71,
+      "duration": 3.75,
+      "text": "subset of the sample space ideally we"
+    },
+    {
+      "index": 810,
+      "start": 2184.72,
+      "end": 2187.67,
+      "duration": 2.95,
+      "text": "would wish to do that unfortunately this"
+    },
+    {
+      "index": 811,
+      "start": 2187.68,
+      "end": 2190.23,
+      "duration": 2.55,
+      "text": "is not always possible if you take a"
+    },
+    {
+      "index": 812,
+      "start": 2190.24,
+      "end": 2193.47,
+      "duration": 3.23,
+      "text": "sample space such as the"
+    },
+    {
+      "index": 813,
+      "start": 2193.48,
+      "end": 2196.91,
+      "duration": 3.43,
+      "text": "square the square has nice subsets those"
+    },
+    {
+      "index": 814,
+      "start": 2196.92,
+      "end": 2198.75,
+      "duration": 1.83,
+      "text": "that you can describe by cutting it with"
+    },
+    {
+      "index": 815,
+      "start": 2198.76,
+      "end": 2201.55,
+      "duration": 2.79,
+      "text": "lines and so on but it does have some"
+    },
+    {
+      "index": 816,
+      "start": 2201.56,
+      "end": 2205.47,
+      "duration": 3.91,
+      "text": "very ugly subsets as well that are that"
+    },
+    {
+      "index": 817,
+      "start": 2205.48,
+      "end": 2207.79,
+      "duration": 2.31,
+      "text": "are impossible to visualize impossible"
+    },
+    {
+      "index": 818,
+      "start": 2207.8,
+      "end": 2210.51,
+      "duration": 2.71,
+      "text": "to imagine but they do exist and those"
+    },
+    {
+      "index": 819,
+      "start": 2210.52,
+      "end": 2212.87,
+      "duration": 2.35,
+      "text": "very weird scent sets are such that"
+    },
+    {
+      "index": 820,
+      "start": 2212.88,
+      "end": 2214.75,
+      "duration": 1.87,
+      "text": "there's no way to assign probabilities"
+    },
+    {
+      "index": 821,
+      "start": 2214.76,
+      "end": 2216.87,
+      "duration": 2.11,
+      "text": "to them in a way that's consistent with"
+    },
+    {
+      "index": 822,
+      "start": 2216.88,
+      "end": 2219.87,
+      "duration": 2.99,
+      "text": "the AUM probability okay so this is a"
+    },
+    {
+      "index": 823,
+      "start": 2219.88,
+      "end": 2222.27,
+      "duration": 2.39,
+      "text": "very very fine point that you can"
+    },
+    {
+      "index": 824,
+      "start": 2222.28,
+      "end": 2224.87,
+      "duration": 2.59,
+      "text": "immediately forget for the rest of this"
+    },
+    {
+      "index": 825,
+      "start": 2224.88,
+      "end": 2227.55,
+      "duration": 2.67,
+      "text": "class uh you will only encounter these"
+    },
+    {
+      "index": 826,
+      "start": 2227.56,
+      "end": 2230.75,
+      "duration": 3.19,
+      "text": "sets if you end up doing doctoral work"
+    },
+    {
+      "index": 827,
+      "start": 2230.76,
+      "end": 2232.47,
+      "duration": 1.71,
+      "text": "on the theoretical aspects of"
+    },
+    {
+      "index": 828,
+      "start": 2232.48,
+      "end": 2236.51,
+      "duration": 4.03,
+      "text": "probability Theory so uh so it's just a"
+    },
+    {
+      "index": 829,
+      "start": 2236.52,
+      "end": 2239.15,
+      "duration": 2.63,
+      "text": "mathematical subtlety uh that some very"
+    },
+    {
+      "index": 830,
+      "start": 2239.16,
+      "end": 2241.309,
+      "duration": 2.149,
+      "text": "weird sets do not have probabilities"
+    },
+    {
+      "index": 831,
+      "start": 2241.319,
+      "end": 2243.55,
+      "duration": 2.231,
+      "text": "assigned to them but we're not going to"
+    },
+    {
+      "index": 832,
+      "start": 2243.56,
+      "end": 2245.43,
+      "duration": 1.87,
+      "text": "encounter these sets and they do not"
+    },
+    {
+      "index": 833,
+      "start": 2245.44,
+      "end": 2249.55,
+      "duration": 4.11,
+      "text": "show up in any applications"
+    },
+    {
+      "index": 834,
+      "start": 2252.349,
+      "end": 2252.359,
+      "duration": 0.01,
+      "text": "okay so now let's revisit our examples"
+    },
+    {
+      "index": 835,
+      "start": 2252.359,
+      "end": 2255.15,
+      "duration": 2.791,
+      "text": "let's go back to the D example we have"
+    },
+    {
+      "index": 836,
+      "start": 2255.16,
+      "end": 2258.87,
+      "duration": 3.71,
+      "text": "our sample space now we need to assign a"
+    },
+    {
+      "index": 837,
+      "start": 2258.88,
+      "end": 2262.309,
+      "duration": 3.429,
+      "text": "probability law there's lots of possible"
+    },
+    {
+      "index": 838,
+      "start": 2262.319,
+      "end": 2264.95,
+      "duration": 2.631,
+      "text": "probability laws that you can assign I'm"
+    },
+    {
+      "index": 839,
+      "start": 2264.96,
+      "end": 2267.19,
+      "duration": 2.23,
+      "text": "picking one here"
+    },
+    {
+      "index": 840,
+      "start": 2267.2,
+      "end": 2269.63,
+      "duration": 2.43,
+      "text": "arbitrarily in which I say that every"
+    },
+    {
+      "index": 841,
+      "start": 2269.64,
+      "end": 2271.309,
+      "duration": 1.669,
+      "text": "possible outcome has the same"
+    },
+    {
+      "index": 842,
+      "start": 2271.319,
+      "end": 2274.589,
+      "duration": 3.27,
+      "text": "probability of 1 over"
+    },
+    {
+      "index": 843,
+      "start": 2274.599,
+      "end": 2278.51,
+      "duration": 3.911,
+      "text": "16 okay why do I make this model well"
+    },
+    {
+      "index": 844,
+      "start": 2278.52,
+      "end": 2280.27,
+      "duration": 1.75,
+      "text": "empirically if you have well"
+    },
+    {
+      "index": 845,
+      "start": 2280.28,
+      "end": 2283.43,
+      "duration": 3.15,
+      "text": "manufactured dice they tend to behave"
+    },
+    {
+      "index": 846,
+      "start": 2283.44,
+      "end": 2286.19,
+      "duration": 2.75,
+      "text": "that way we will be coming back to this"
+    },
+    {
+      "index": 847,
+      "start": 2286.2,
+      "end": 2289.67,
+      "duration": 3.47,
+      "text": "kind of story later in this class but"
+    },
+    {
+      "index": 848,
+      "start": 2289.68,
+      "end": 2292.15,
+      "duration": 2.47,
+      "text": "I'm not saying that this is the only"
+    },
+    {
+      "index": 849,
+      "start": 2292.16,
+      "end": 2294.069,
+      "duration": 1.909,
+      "text": "probability lot that there can be you"
+    },
+    {
+      "index": 850,
+      "start": 2294.079,
+      "end": 2296.829,
+      "duration": 2.75,
+      "text": "might have weird di in which certain"
+    },
+    {
+      "index": 851,
+      "start": 2296.839,
+      "end": 2299.39,
+      "duration": 2.551,
+      "text": "outcomes are more likely than others but"
+    },
+    {
+      "index": 852,
+      "start": 2299.4,
+      "end": 2301.27,
+      "duration": 1.87,
+      "text": "to keep things simple let's take every"
+    },
+    {
+      "index": 853,
+      "start": 2301.28,
+      "end": 2302.95,
+      "duration": 1.67,
+      "text": "outcome to have the same probability of"
+    },
+    {
+      "index": 854,
+      "start": 2302.96,
+      "end": 2307.109,
+      "duration": 4.149,
+      "text": "one over 16 okay so let's now now that"
+    },
+    {
+      "index": 855,
+      "start": 2307.119,
+      "end": 2309.069,
+      "duration": 1.95,
+      "text": "we have in our hands the sample space"
+    },
+    {
+      "index": 856,
+      "start": 2309.079,
+      "end": 2311.349,
+      "duration": 2.27,
+      "text": "and the probability law we can actually"
+    },
+    {
+      "index": 857,
+      "start": 2311.359,
+      "end": 2314.069,
+      "duration": 2.71,
+      "text": "solve any problem there is we can answer"
+    },
+    {
+      "index": 858,
+      "start": 2314.079,
+      "end": 2316.069,
+      "duration": 1.99,
+      "text": "any question that could be posed to us"
+    },
+    {
+      "index": 859,
+      "start": 2316.079,
+      "end": 2318.47,
+      "duration": 2.391,
+      "text": "for example what's the probability that"
+    },
+    {
+      "index": 860,
+      "start": 2318.48,
+      "end": 2321.069,
+      "duration": 2.589,
+      "text": "the outcome which is this pair is either"
+    },
+    {
+      "index": 861,
+      "start": 2321.079,
+      "end": 2325.069,
+      "duration": 3.99,
+      "text": "1 one or one two we're talking here"
+    },
+    {
+      "index": 862,
+      "start": 2325.079,
+      "end": 2328.75,
+      "duration": 3.671,
+      "text": "about this particular event one one or"
+    },
+    {
+      "index": 863,
+      "start": 2328.76,
+      "end": 2331.71,
+      "duration": 2.95,
+      "text": "one two so it's an event consisting of"
+    },
+    {
+      "index": 864,
+      "start": 2331.72,
+      "end": 2334.39,
+      "duration": 2.67,
+      "text": "these two items according to what we"
+    },
+    {
+      "index": 865,
+      "start": 2334.4,
+      "end": 2336.67,
+      "duration": 2.27,
+      "text": "were just discussing the probability of"
+    },
+    {
+      "index": 866,
+      "start": 2336.68,
+      "end": 2338.99,
+      "duration": 2.31,
+      "text": "a finite collection of outcomes is the"
+    },
+    {
+      "index": 867,
+      "start": 2339.0,
+      "end": 2341.19,
+      "duration": 2.19,
+      "text": "sum of their individual probabilities"
+    },
+    {
+      "index": 868,
+      "start": 2341.2,
+      "end": 2342.87,
+      "duration": 1.67,
+      "text": "each one of them has probability one"
+    },
+    {
+      "index": 869,
+      "start": 2342.88,
+      "end": 2345.67,
+      "duration": 2.79,
+      "text": "over 16 so the probability of this is 2"
+    },
+    {
+      "index": 870,
+      "start": 2345.68,
+      "end": 2346.79,
+      "duration": 1.11,
+      "text": "over"
+    },
+    {
+      "index": 871,
+      "start": 2346.8,
+      "end": 2349.79,
+      "duration": 2.99,
+      "text": "16 how about the probability of the"
+    },
+    {
+      "index": 872,
+      "start": 2349.8,
+      "end": 2352.75,
+      "duration": 2.95,
+      "text": "event that X is equal to 1 x is the"
+    },
+    {
+      "index": 873,
+      "start": 2352.76,
+      "end": 2354.95,
+      "duration": 2.19,
+      "text": "first rle so that's the probability that"
+    },
+    {
+      "index": 874,
+      "start": 2354.96,
+      "end": 2358.47,
+      "duration": 3.51,
+      "text": "the first R uh is equal to one notice"
+    },
+    {
+      "index": 875,
+      "start": 2358.48,
+      "end": 2362.349,
+      "duration": 3.869,
+      "text": "the syntax that's being used here uh"
+    },
+    {
+      "index": 876,
+      "start": 2362.359,
+      "end": 2365.39,
+      "duration": 3.031,
+      "text": "probabilities are assigned to subsets to"
+    },
+    {
+      "index": 877,
+      "start": 2365.4,
+      "end": 2368.87,
+      "duration": 3.47,
+      "text": "sets so we think of this as meaning the"
+    },
+    {
+      "index": 878,
+      "start": 2368.88,
+      "end": 2372.75,
+      "duration": 3.87,
+      "text": "set of all outcomes such that X is equal"
+    },
+    {
+      "index": 879,
+      "start": 2372.76,
+      "end": 2375.15,
+      "duration": 2.39,
+      "text": "to one how do you answer this question"
+    },
+    {
+      "index": 880,
+      "start": 2375.16,
+      "end": 2376.95,
+      "duration": 1.79,
+      "text": "you go back to the picture and you try"
+    },
+    {
+      "index": 881,
+      "start": 2376.96,
+      "end": 2379.91,
+      "duration": 2.95,
+      "text": "to visualize or identify this event of"
+    },
+    {
+      "index": 882,
+      "start": 2379.92,
+      "end": 2384.47,
+      "duration": 4.55,
+      "text": "Interest X is equal to 1 corresponds to"
+    },
+    {
+      "index": 883,
+      "start": 2384.48,
+      "end": 2386.39,
+      "duration": 1.91,
+      "text": "this event here these are all the"
+    },
+    {
+      "index": 884,
+      "start": 2386.4,
+      "end": 2388.91,
+      "duration": 2.51,
+      "text": "outcomes at which X is equal to one"
+    },
+    {
+      "index": 885,
+      "start": 2388.92,
+      "end": 2390.75,
+      "duration": 1.83,
+      "text": "there's four outcomes each one has"
+    },
+    {
+      "index": 886,
+      "start": 2390.76,
+      "end": 2393.71,
+      "duration": 2.95,
+      "text": "probability one over 16 so the answer is"
+    },
+    {
+      "index": 887,
+      "start": 2393.72,
+      "end": 2395.99,
+      "duration": 2.27,
+      "text": "4 over"
+    },
+    {
+      "index": 888,
+      "start": 2396.0,
+      "end": 2397.829,
+      "duration": 1.829,
+      "text": "16 okay"
+    },
+    {
+      "index": 889,
+      "start": 2397.839,
+      "end": 2400.19,
+      "duration": 2.351,
+      "text": "how about"
+    },
+    {
+      "index": 890,
+      "start": 2400.2,
+      "end": 2405.829,
+      "duration": 5.629,
+      "text": "the probability that x + y is"
+    },
+    {
+      "index": 891,
+      "start": 2405.839,
+      "end": 2408.51,
+      "duration": 2.671,
+      "text": "odd okay that will take a little bit"
+    },
+    {
+      "index": 892,
+      "start": 2408.52,
+      "end": 2411.27,
+      "duration": 2.75,
+      "text": "more work but you go to the sample space"
+    },
+    {
+      "index": 893,
+      "start": 2411.28,
+      "end": 2413.71,
+      "duration": 2.43,
+      "text": "and you identify all the outcomes at"
+    },
+    {
+      "index": 894,
+      "start": 2413.72,
+      "end": 2417.109,
+      "duration": 3.389,
+      "text": "which the sum is an odd number so that's"
+    },
+    {
+      "index": 895,
+      "start": 2417.119,
+      "end": 2420.27,
+      "duration": 3.151,
+      "text": "a place where the the sum is odd these"
+    },
+    {
+      "index": 896,
+      "start": 2420.28,
+      "end": 2423.71,
+      "duration": 3.43,
+      "text": "are other"
+    },
+    {
+      "index": 897,
+      "start": 2426.99,
+      "end": 2427.0,
+      "duration": 0.01,
+      "text": "places and I guess that exhausts all the"
+    },
+    {
+      "index": 898,
+      "start": 2427.0,
+      "end": 2430.15,
+      "duration": 3.15,
+      "text": "possible outcomes at which we have an"
+    },
+    {
+      "index": 899,
+      "start": 2430.16,
+      "end": 2433.67,
+      "duration": 3.51,
+      "text": "odd sum uh we count them how many are"
+    },
+    {
+      "index": 900,
+      "start": 2433.68,
+      "end": 2435.51,
+      "duration": 1.83,
+      "text": "there there's a total of eight of them"
+    },
+    {
+      "index": 901,
+      "start": 2435.52,
+      "end": 2437.87,
+      "duration": 2.35,
+      "text": "each one has probability 1 over 16 total"
+    },
+    {
+      "index": 902,
+      "start": 2437.88,
+      "end": 2441.27,
+      "duration": 3.39,
+      "text": "probability is 8 over 16 and harder"
+    },
+    {
+      "index": 903,
+      "start": 2441.28,
+      "end": 2442.71,
+      "duration": 1.43,
+      "text": "question what's the probability that the"
+    },
+    {
+      "index": 904,
+      "start": 2442.72,
+      "end": 2445.87,
+      "duration": 3.15,
+      "text": "minimum of the two rols is equal to two"
+    },
+    {
+      "index": 905,
+      "start": 2445.88,
+      "end": 2447.23,
+      "duration": 1.35,
+      "text": "this is something that you probably"
+    },
+    {
+      "index": 906,
+      "start": 2447.24,
+      "end": 2450.23,
+      "duration": 2.99,
+      "text": "couldn't do in your head without the"
+    },
+    {
+      "index": 907,
+      "start": 2450.24,
+      "end": 2452.75,
+      "duration": 2.51,
+      "text": "help of a diagram but once you have a"
+    },
+    {
+      "index": 908,
+      "start": 2452.76,
+      "end": 2455.349,
+      "duration": 2.589,
+      "text": "diagram things are simple you ask the"
+    },
+    {
+      "index": 909,
+      "start": 2455.359,
+      "end": 2458.43,
+      "duration": 3.071,
+      "text": "question okay this is an event that the"
+    },
+    {
+      "index": 910,
+      "start": 2458.44,
+      "end": 2461.19,
+      "duration": 2.75,
+      "text": "minimum of the two rols is equal to two"
+    },
+    {
+      "index": 911,
+      "start": 2461.2,
+      "end": 2463.55,
+      "duration": 2.35,
+      "text": "this can happen in several ways what are"
+    },
+    {
+      "index": 912,
+      "start": 2463.56,
+      "end": 2465.39,
+      "duration": 1.83,
+      "text": "the several ways that it can happen go"
+    },
+    {
+      "index": 913,
+      "start": 2465.4,
+      "end": 2467.95,
+      "duration": 2.55,
+      "text": "to the diagram and try to identify them"
+    },
+    {
+      "index": 914,
+      "start": 2467.96,
+      "end": 2470.43,
+      "duration": 2.47,
+      "text": "so the minimum is equal to two if both"
+    },
+    {
+      "index": 915,
+      "start": 2470.44,
+      "end": 2472.55,
+      "duration": 2.11,
+      "text": "of them are"
+    },
+    {
+      "index": 916,
+      "start": 2472.56,
+      "end": 2476.19,
+      "duration": 3.63,
+      "text": "twos and or it could be that X is two"
+    },
+    {
+      "index": 917,
+      "start": 2476.2,
+      "end": 2481.23,
+      "duration": 5.03,
+      "text": "and Y is bigger or Y is two and X is"
+    },
+    {
+      "index": 918,
+      "start": 2481.24,
+      "end": 2485.75,
+      "duration": 4.51,
+      "text": "bigger okay I guess we rediscovered that"
+    },
+    {
+      "index": 919,
+      "start": 2485.76,
+      "end": 2489.79,
+      "duration": 4.03,
+      "text": "uh yellow and blue make green so we see"
+    },
+    {
+      "index": 920,
+      "start": 2489.8,
+      "end": 2493.069,
+      "duration": 3.269,
+      "text": "here that there's a total of five"
+    },
+    {
+      "index": 921,
+      "start": 2493.079,
+      "end": 2495.87,
+      "duration": 2.791,
+      "text": "possible outcomes the probability of"
+    },
+    {
+      "index": 922,
+      "start": 2495.88,
+      "end": 2500.349,
+      "duration": 4.469,
+      "text": "this event is 5 over"
+    },
+    {
+      "index": 923,
+      "start": 2500.359,
+      "end": 2504.55,
+      "duration": 4.191,
+      "text": "16 simple"
+    },
+    {
+      "index": 924,
+      "start": 2506.91,
+      "end": 2506.92,
+      "duration": 0.01,
+      "text": "example but the procedure that we"
+    },
+    {
+      "index": 925,
+      "start": 2506.92,
+      "end": 2508.71,
+      "duration": 1.79,
+      "text": "followed in this example actually"
+    },
+    {
+      "index": 926,
+      "start": 2508.72,
+      "end": 2512.51,
+      "duration": 3.79,
+      "text": "applies to any probability model you"
+    },
+    {
+      "index": 927,
+      "start": 2512.52,
+      "end": 2514.99,
+      "duration": 2.47,
+      "text": "might ever encounter you set up your"
+    },
+    {
+      "index": 928,
+      "start": 2515.0,
+      "end": 2517.71,
+      "duration": 2.71,
+      "text": "sample space you make a state M that"
+    },
+    {
+      "index": 929,
+      "start": 2517.72,
+      "end": 2519.67,
+      "duration": 1.95,
+      "text": "describes the probability law over that"
+    },
+    {
+      "index": 930,
+      "start": 2519.68,
+      "end": 2521.55,
+      "duration": 1.87,
+      "text": "sample space then somebody asks you"
+    },
+    {
+      "index": 931,
+      "start": 2521.56,
+      "end": 2524.15,
+      "duration": 2.59,
+      "text": "questions about various events you go to"
+    },
+    {
+      "index": 932,
+      "start": 2524.16,
+      "end": 2527.23,
+      "duration": 3.07,
+      "text": "your pictures identify those events pin"
+    },
+    {
+      "index": 933,
+      "start": 2527.24,
+      "end": 2529.95,
+      "duration": 2.71,
+      "text": "them down and then start kind of"
+    },
+    {
+      "index": 934,
+      "start": 2529.96,
+      "end": 2531.91,
+      "duration": 1.95,
+      "text": "counting and calculating the total"
+    },
+    {
+      "index": 935,
+      "start": 2531.92,
+      "end": 2534.109,
+      "duration": 2.189,
+      "text": "probability for those outcomes that you"
+    },
+    {
+      "index": 936,
+      "start": 2534.119,
+      "end": 2535.63,
+      "duration": 1.511,
+      "text": "are"
+    },
+    {
+      "index": 937,
+      "start": 2535.64,
+      "end": 2538.19,
+      "duration": 2.55,
+      "text": "considering uh this example is a special"
+    },
+    {
+      "index": 938,
+      "start": 2538.2,
+      "end": 2540.19,
+      "duration": 1.99,
+      "text": "case of what is called the discrete"
+    },
+    {
+      "index": 939,
+      "start": 2540.2,
+      "end": 2543.67,
+      "duration": 3.47,
+      "text": "uniform law the uh model obeys the"
+    },
+    {
+      "index": 940,
+      "start": 2543.68,
+      "end": 2546.71,
+      "duration": 3.03,
+      "text": "discrete uniform law if all outcomes are"
+    },
+    {
+      "index": 941,
+      "start": 2546.72,
+      "end": 2549.39,
+      "duration": 2.67,
+      "text": "equally likely it doesn't have to be"
+    },
+    {
+      "index": 942,
+      "start": 2549.4,
+      "end": 2552.03,
+      "duration": 2.63,
+      "text": "that way that's just one example of a"
+    },
+    {
+      "index": 943,
+      "start": 2552.04,
+      "end": 2554.549,
+      "duration": 2.509,
+      "text": "probability law but when things are that"
+    },
+    {
+      "index": 944,
+      "start": 2554.559,
+      "end": 2557.87,
+      "duration": 3.311,
+      "text": "way if all outcomes are equally likely"
+    },
+    {
+      "index": 945,
+      "start": 2557.88,
+      "end": 2561.23,
+      "duration": 3.35,
+      "text": "and we have n of"
+    },
+    {
+      "index": 946,
+      "start": 2565.91,
+      "end": 2565.92,
+      "duration": 0.01,
+      "text": "them and and you have a set a that has"
+    },
+    {
+      "index": 947,
+      "start": 2565.92,
+      "end": 2567.99,
+      "duration": 2.07,
+      "text": "little n"
+    },
+    {
+      "index": 948,
+      "start": 2568.0,
+      "end": 2570.87,
+      "duration": 2.87,
+      "text": "elements then each one of those elements"
+    },
+    {
+      "index": 949,
+      "start": 2570.88,
+      "end": 2574.39,
+      "duration": 3.51,
+      "text": "has probability 1 / capital N since all"
+    },
+    {
+      "index": 950,
+      "start": 2574.4,
+      "end": 2576.79,
+      "duration": 2.39,
+      "text": "outcomes are equally likely and for"
+    },
+    {
+      "index": 951,
+      "start": 2576.8,
+      "end": 2579.03,
+      "duration": 2.23,
+      "text": "probab to add up to one each one must"
+    },
+    {
+      "index": 952,
+      "start": 2579.04,
+      "end": 2581.43,
+      "duration": 2.39,
+      "text": "have this much probability and there's"
+    },
+    {
+      "index": 953,
+      "start": 2581.44,
+      "end": 2583.829,
+      "duration": 2.389,
+      "text": "little n elements that gives you the"
+    },
+    {
+      "index": 954,
+      "start": 2583.839,
+      "end": 2586.589,
+      "duration": 2.75,
+      "text": "probability of the event of Interest so"
+    },
+    {
+      "index": 955,
+      "start": 2586.599,
+      "end": 2588.27,
+      "duration": 1.671,
+      "text": "problems like the one in the previous"
+    },
+    {
+      "index": 956,
+      "start": 2588.28,
+      "end": 2590.069,
+      "duration": 1.789,
+      "text": "slid and more generally of the type"
+    },
+    {
+      "index": 957,
+      "start": 2590.079,
+      "end": 2592.069,
+      "duration": 1.99,
+      "text": "described here under a discrete uniform"
+    },
+    {
+      "index": 958,
+      "start": 2592.079,
+      "end": 2594.51,
+      "duration": 2.431,
+      "text": "law these problems reduce to just"
+    },
+    {
+      "index": 959,
+      "start": 2594.52,
+      "end": 2596.589,
+      "duration": 2.069,
+      "text": "counting how many elements are there in"
+    },
+    {
+      "index": 960,
+      "start": 2596.599,
+      "end": 2598.63,
+      "duration": 2.031,
+      "text": "my sample space how many elements are"
+    },
+    {
+      "index": 961,
+      "start": 2598.64,
+      "end": 2601.15,
+      "duration": 2.51,
+      "text": "there inside the event of Interest"
+    },
+    {
+      "index": 962,
+      "start": 2601.16,
+      "end": 2603.39,
+      "duration": 2.23,
+      "text": "counting is generally simple but for"
+    },
+    {
+      "index": 963,
+      "start": 2603.4,
+      "end": 2606.03,
+      "duration": 2.63,
+      "text": "some problems it gets pretty complicated"
+    },
+    {
+      "index": 964,
+      "start": 2606.04,
+      "end": 2608.109,
+      "duration": 2.069,
+      "text": "and uh you a couple of weeks we're going"
+    },
+    {
+      "index": 965,
+      "start": 2608.119,
+      "end": 2610.27,
+      "duration": 2.151,
+      "text": "to have to spend the whole lecture just"
+    },
+    {
+      "index": 966,
+      "start": 2610.28,
+      "end": 2612.23,
+      "duration": 1.95,
+      "text": "on the subject of how to count"
+    },
+    {
+      "index": 967,
+      "start": 2612.24,
+      "end": 2614.51,
+      "duration": 2.27,
+      "text": "systematically now the procedure we"
+    },
+    {
+      "index": 968,
+      "start": 2614.52,
+      "end": 2617.069,
+      "duration": 2.549,
+      "text": "followed in the previous example is the"
+    },
+    {
+      "index": 969,
+      "start": 2617.079,
+      "end": 2618.99,
+      "duration": 1.911,
+      "text": "same as the procedure you would follow"
+    },
+    {
+      "index": 970,
+      "start": 2619.0,
+      "end": 2621.549,
+      "duration": 2.549,
+      "text": "in continuous probability problems so"
+    },
+    {
+      "index": 971,
+      "start": 2621.559,
+      "end": 2623.79,
+      "duration": 2.231,
+      "text": "going back to our Dart problem we get a"
+    },
+    {
+      "index": 972,
+      "start": 2623.8,
+      "end": 2626.79,
+      "duration": 2.99,
+      "text": "random Point inside this Square that's"
+    },
+    {
+      "index": 973,
+      "start": 2626.8,
+      "end": 2629.03,
+      "duration": 2.23,
+      "text": "our sample space we need to assign a"
+    },
+    {
+      "index": 974,
+      "start": 2629.04,
+      "end": 2631.71,
+      "duration": 2.67,
+      "text": "probability law for lack of imagination"
+    },
+    {
+      "index": 975,
+      "start": 2631.72,
+      "end": 2634.15,
+      "duration": 2.43,
+      "text": "I'm taking the probability law to be the"
+    },
+    {
+      "index": 976,
+      "start": 2634.16,
+      "end": 2637.99,
+      "duration": 3.83,
+      "text": "area of a subset so if we have two"
+    },
+    {
+      "index": 977,
+      "start": 2638.0,
+      "end": 2641.03,
+      "duration": 3.03,
+      "text": "subsets of the sample space that have"
+    },
+    {
+      "index": 978,
+      "start": 2641.04,
+      "end": 2644.67,
+      "duration": 3.63,
+      "text": "equal areas then I'm postulating that"
+    },
+    {
+      "index": 979,
+      "start": 2644.68,
+      "end": 2646.67,
+      "duration": 1.99,
+      "text": "they are equally likely to occur the"
+    },
+    {
+      "index": 980,
+      "start": 2646.68,
+      "end": 2648.27,
+      "duration": 1.59,
+      "text": "probability that I fall here is the same"
+    },
+    {
+      "index": 981,
+      "start": 2648.28,
+      "end": 2650.589,
+      "duration": 2.309,
+      "text": "as the probability that I fall"
+    },
+    {
+      "index": 982,
+      "start": 2650.599,
+      "end": 2653.27,
+      "duration": 2.671,
+      "text": "there the model doesn't have to be that"
+    },
+    {
+      "index": 983,
+      "start": 2653.28,
+      "end": 2655.309,
+      "duration": 2.029,
+      "text": "way but if I have sort of complete"
+    },
+    {
+      "index": 984,
+      "start": 2655.319,
+      "end": 2656.91,
+      "duration": 1.591,
+      "text": "ignorance of which points are more"
+    },
+    {
+      "index": 985,
+      "start": 2656.92,
+      "end": 2659.27,
+      "duration": 2.35,
+      "text": "likely than others that might be the"
+    },
+    {
+      "index": 986,
+      "start": 2659.28,
+      "end": 2662.75,
+      "duration": 3.47,
+      "text": "reasonable model to use so equal areas"
+    },
+    {
+      "index": 987,
+      "start": 2662.76,
+      "end": 2665.47,
+      "duration": 2.71,
+      "text": "mean equal probabilities uh if the area"
+    },
+    {
+      "index": 988,
+      "start": 2665.48,
+      "end": 2667.23,
+      "duration": 1.75,
+      "text": "is twice as large the probabilties going"
+    },
+    {
+      "index": 989,
+      "start": 2667.24,
+      "end": 2671.27,
+      "duration": 4.03,
+      "text": "to be twice as big so this is our"
+    },
+    {
+      "index": 990,
+      "start": 2671.28,
+      "end": 2674.51,
+      "duration": 3.23,
+      "text": "model uh we can now answer questions"
+    },
+    {
+      "index": 991,
+      "start": 2674.52,
+      "end": 2676.23,
+      "duration": 1.71,
+      "text": "let's answer the easy one what's the"
+    },
+    {
+      "index": 992,
+      "start": 2676.24,
+      "end": 2679.109,
+      "duration": 2.869,
+      "text": "probability that the outcome is exactly"
+    },
+    {
+      "index": 993,
+      "start": 2679.119,
+      "end": 2683.349,
+      "duration": 4.23,
+      "text": "this point that of course is zero"
+    },
+    {
+      "index": 994,
+      "start": 2683.359,
+      "end": 2687.71,
+      "duration": 4.351,
+      "text": "because a single point has zero area and"
+    },
+    {
+      "index": 995,
+      "start": 2687.72,
+      "end": 2689.63,
+      "duration": 1.91,
+      "text": "since probability is equal to area"
+    },
+    {
+      "index": 996,
+      "start": 2689.64,
+      "end": 2692.19,
+      "duration": 2.55,
+      "text": "that's zero probability how about the"
+    },
+    {
+      "index": 997,
+      "start": 2692.2,
+      "end": 2694.75,
+      "duration": 2.55,
+      "text": "probability that the sum of the"
+    },
+    {
+      "index": 998,
+      "start": 2694.76,
+      "end": 2697.549,
+      "duration": 2.789,
+      "text": "coordinates of the point that we got got"
+    },
+    {
+      "index": 999,
+      "start": 2697.559,
+      "end": 2700.51,
+      "duration": 2.951,
+      "text": "is less than or equal to 1/2 how do you"
+    },
+    {
+      "index": 1000,
+      "start": 2700.52,
+      "end": 2702.47,
+      "duration": 1.95,
+      "text": "deal with it well you look at the"
+    },
+    {
+      "index": 1001,
+      "start": 2702.48,
+      "end": 2704.99,
+      "duration": 2.51,
+      "text": "picture again at your sample space and"
+    },
+    {
+      "index": 1002,
+      "start": 2705.0,
+      "end": 2706.829,
+      "duration": 1.829,
+      "text": "try to describe the event that you're"
+    },
+    {
+      "index": 1003,
+      "start": 2706.839,
+      "end": 2709.75,
+      "duration": 2.911,
+      "text": "talking about the sum being less than"
+    },
+    {
+      "index": 1004,
+      "start": 2709.76,
+      "end": 2712.829,
+      "duration": 3.069,
+      "text": "1/2 corresponds to getting an outcome"
+    },
+    {
+      "index": 1005,
+      "start": 2712.839,
+      "end": 2715.71,
+      "duration": 2.871,
+      "text": "that's below this line where this line"
+    },
+    {
+      "index": 1006,
+      "start": 2715.72,
+      "end": 2720.349,
+      "duration": 4.629,
+      "text": "is the line where X + Y = to 12 so the"
+    },
+    {
+      "index": 1007,
+      "start": 2720.359,
+      "end": 2722.67,
+      "duration": 2.311,
+      "text": "intercepts of that line with the axis"
+    },
+    {
+      "index": 1008,
+      "start": 2722.68,
+      "end": 2724.87,
+      "duration": 2.19,
+      "text": "are 1/2 and"
+    },
+    {
+      "index": 1009,
+      "start": 2724.88,
+      "end": 2728.67,
+      "duration": 3.79,
+      "text": "1/2 so you describe the event visually"
+    },
+    {
+      "index": 1010,
+      "start": 2728.68,
+      "end": 2730.75,
+      "duration": 2.07,
+      "text": "and then you use your probability law"
+    },
+    {
+      "index": 1011,
+      "start": 2730.76,
+      "end": 2732.39,
+      "duration": 1.63,
+      "text": "the probability law that we have is that"
+    },
+    {
+      "index": 1012,
+      "start": 2732.4,
+      "end": 2735.549,
+      "duration": 3.149,
+      "text": "the probability of a set is equal to the"
+    },
+    {
+      "index": 1013,
+      "start": 2735.559,
+      "end": 2737.589,
+      "duration": 2.03,
+      "text": "area of that set so all we need to find"
+    },
+    {
+      "index": 1014,
+      "start": 2737.599,
+      "end": 2740.87,
+      "duration": 3.271,
+      "text": "is the area of this triangle which is 12"
+    },
+    {
+      "index": 1015,
+      "start": 2740.88,
+      "end": 2744.67,
+      "duration": 3.79,
+      "text": "* 1 12 *"
+    },
+    {
+      "index": 1016,
+      "start": 2744.68,
+      "end": 2748.03,
+      "duration": 3.35,
+      "text": "1/2 equals to 1/"
+    },
+    {
+      "index": 1017,
+      "start": 2748.04,
+      "end": 2751.23,
+      "duration": 3.19,
+      "text": "18 okay moral from these two examples is"
+    },
+    {
+      "index": 1018,
+      "start": 2751.24,
+      "end": 2752.95,
+      "duration": 1.71,
+      "text": "that it's always useful to have a"
+    },
+    {
+      "index": 1019,
+      "start": 2752.96,
+      "end": 2755.47,
+      "duration": 2.51,
+      "text": "picture and work with a picture to"
+    },
+    {
+      "index": 1020,
+      "start": 2755.48,
+      "end": 2757.91,
+      "duration": 2.43,
+      "text": "visualize the event that you're talking"
+    },
+    {
+      "index": 1021,
+      "start": 2757.92,
+      "end": 2760.23,
+      "duration": 2.31,
+      "text": "about and once you have a probability"
+    },
+    {
+      "index": 1022,
+      "start": 2760.24,
+      "end": 2762.63,
+      "duration": 2.39,
+      "text": "law in your hands then it's a matter of"
+    },
+    {
+      "index": 1023,
+      "start": 2762.64,
+      "end": 2765.109,
+      "duration": 2.469,
+      "text": "calculation to find the probabilities of"
+    },
+    {
+      "index": 1024,
+      "start": 2765.119,
+      "end": 2767.39,
+      "duration": 2.271,
+      "text": "an event of Interest the calculations we"
+    },
+    {
+      "index": 1025,
+      "start": 2767.4,
+      "end": 2769.39,
+      "duration": 1.99,
+      "text": "did in these two examples of course were"
+    },
+    {
+      "index": 1026,
+      "start": 2769.4,
+      "end": 2771.63,
+      "duration": 2.23,
+      "text": "very simple sometimes calculations may"
+    },
+    {
+      "index": 1027,
+      "start": 2771.64,
+      "end": 2775.03,
+      "duration": 3.39,
+      "text": "be a lot harder but it's a different"
+    },
+    {
+      "index": 1028,
+      "start": 2775.04,
+      "end": 2777.23,
+      "duration": 2.19,
+      "text": "business it's a business of calculus for"
+    },
+    {
+      "index": 1029,
+      "start": 2777.24,
+      "end": 2779.99,
+      "duration": 2.75,
+      "text": "example or being good in algebra and so"
+    },
+    {
+      "index": 1030,
+      "start": 2780.0,
+      "end": 2783.03,
+      "duration": 3.03,
+      "text": "on as far as probability is concerned uh"
+    },
+    {
+      "index": 1031,
+      "start": 2783.04,
+      "end": 2785.109,
+      "duration": 2.069,
+      "text": "it's clear what you will be doing and"
+    },
+    {
+      "index": 1032,
+      "start": 2785.119,
+      "end": 2786.95,
+      "duration": 1.831,
+      "text": "then maybe you're faced with a harder"
+    },
+    {
+      "index": 1033,
+      "start": 2786.96,
+      "end": 2789.51,
+      "duration": 2.55,
+      "text": "algebraic part to actually carry out the"
+    },
+    {
+      "index": 1034,
+      "start": 2789.52,
+      "end": 2791.99,
+      "duration": 2.47,
+      "text": "calculations the area of a triangle is"
+    },
+    {
+      "index": 1035,
+      "start": 2792.0,
+      "end": 2794.309,
+      "duration": 2.309,
+      "text": "easy to compute if I had put down a very"
+    },
+    {
+      "index": 1036,
+      "start": 2794.319,
+      "end": 2796.99,
+      "duration": 2.671,
+      "text": "complicated shape then you might need to"
+    },
+    {
+      "index": 1037,
+      "start": 2797.0,
+      "end": 2799.27,
+      "duration": 2.27,
+      "text": "solve a hard integration problem to find"
+    },
+    {
+      "index": 1038,
+      "start": 2799.28,
+      "end": 2801.549,
+      "duration": 2.269,
+      "text": "the area of that shape but that's stuff"
+    },
+    {
+      "index": 1039,
+      "start": 2801.559,
+      "end": 2803.349,
+      "duration": 1.79,
+      "text": "that belongs to another class that you"
+    },
+    {
+      "index": 1040,
+      "start": 2803.359,
+      "end": 2806.829,
+      "duration": 3.47,
+      "text": "have presumably Mastered by now good"
+    },
+    {
+      "index": 1041,
+      "start": 2806.839,
+      "end": 2808.549,
+      "duration": 1.71,
+      "text": "okay so now let me spend just a couple"
+    },
+    {
+      "index": 1042,
+      "start": 2808.559,
+      "end": 2810.549,
+      "duration": 1.99,
+      "text": "of minutes to return to a point that I"
+    },
+    {
+      "index": 1043,
+      "start": 2810.559,
+      "end": 2813.79,
+      "duration": 3.231,
+      "text": "raised before I was saying that the axum"
+    },
+    {
+      "index": 1044,
+      "start": 2813.8,
+      "end": 2815.349,
+      "duration": 1.549,
+      "text": "that we had about"
+    },
+    {
+      "index": 1045,
+      "start": 2815.359,
+      "end": 2818.75,
+      "duration": 3.391,
+      "text": "additivity might not not quite be enough"
+    },
+    {
+      "index": 1046,
+      "start": 2818.76,
+      "end": 2820.43,
+      "duration": 1.67,
+      "text": "let's illustrate what I mean by the"
+    },
+    {
+      "index": 1047,
+      "start": 2820.44,
+      "end": 2822.23,
+      "duration": 1.79,
+      "text": "following example think of the"
+    },
+    {
+      "index": 1048,
+      "start": 2822.24,
+      "end": 2824.19,
+      "duration": 1.95,
+      "text": "experiment where you keep flipping a"
+    },
+    {
+      "index": 1049,
+      "start": 2824.2,
+      "end": 2826.67,
+      "duration": 2.47,
+      "text": "coin and you wait until you obtain heads"
+    },
+    {
+      "index": 1050,
+      "start": 2826.68,
+      "end": 2828.829,
+      "duration": 2.149,
+      "text": "for the first time what's the sample"
+    },
+    {
+      "index": 1051,
+      "start": 2828.839,
+      "end": 2831.39,
+      "duration": 2.551,
+      "text": "space of this experiment you might have"
+    },
+    {
+      "index": 1052,
+      "start": 2831.4,
+      "end": 2832.99,
+      "duration": 1.59,
+      "text": "it might happen in the first flip it"
+    },
+    {
+      "index": 1053,
+      "start": 2833.0,
+      "end": 2835.43,
+      "duration": 2.43,
+      "text": "might happen in the 10th flip heads for"
+    },
+    {
+      "index": 1054,
+      "start": 2835.44,
+      "end": 2837.109,
+      "duration": 1.669,
+      "text": "the first time might occur in the"
+    },
+    {
+      "index": 1055,
+      "start": 2837.119,
+      "end": 2839.79,
+      "duration": 2.671,
+      "text": "millionth flip so the outcome of this"
+    },
+    {
+      "index": 1056,
+      "start": 2839.8,
+      "end": 2841.75,
+      "duration": 1.95,
+      "text": "experiment is going to be an integer and"
+    },
+    {
+      "index": 1057,
+      "start": 2841.76,
+      "end": 2843.95,
+      "duration": 2.19,
+      "text": "there's no bound to that integer you"
+    },
+    {
+      "index": 1058,
+      "start": 2843.96,
+      "end": 2846.069,
+      "duration": 2.109,
+      "text": "might have to wait very much until that"
+    },
+    {
+      "index": 1059,
+      "start": 2846.079,
+      "end": 2848.43,
+      "duration": 2.351,
+      "text": "happens so the natural sample space is"
+    },
+    {
+      "index": 1060,
+      "start": 2848.44,
+      "end": 2850.99,
+      "duration": 2.55,
+      "text": "the set of all possible integers"
+    },
+    {
+      "index": 1061,
+      "start": 2851.0,
+      "end": 2854.63,
+      "duration": 3.63,
+      "text": "somebody tells you uh some information"
+    },
+    {
+      "index": 1062,
+      "start": 2854.64,
+      "end": 2856.43,
+      "duration": 1.79,
+      "text": "about the probability law the"
+    },
+    {
+      "index": 1063,
+      "start": 2856.44,
+      "end": 2858.75,
+      "duration": 2.31,
+      "text": "probability that you have to wait for n"
+    },
+    {
+      "index": 1064,
+      "start": 2858.76,
+      "end": 2861.67,
+      "duration": 2.91,
+      "text": "flips is equal 2 to the minus n where"
+    },
+    {
+      "index": 1065,
+      "start": 2861.68,
+      "end": 2864.27,
+      "duration": 2.59,
+      "text": "did this come that's a separate story"
+    },
+    {
+      "index": 1066,
+      "start": 2864.28,
+      "end": 2866.51,
+      "duration": 2.23,
+      "text": "where did it come from somebody tells"
+    },
+    {
+      "index": 1067,
+      "start": 2866.52,
+      "end": 2869.069,
+      "duration": 2.549,
+      "text": "this to us and they ask and those"
+    },
+    {
+      "index": 1068,
+      "start": 2869.079,
+      "end": 2870.99,
+      "duration": 1.911,
+      "text": "probabilities are plotted here as a"
+    },
+    {
+      "index": 1069,
+      "start": 2871.0,
+      "end": 2873.03,
+      "duration": 2.03,
+      "text": "function of N and you're asked to find"
+    },
+    {
+      "index": 1070,
+      "start": 2873.04,
+      "end": 2874.87,
+      "duration": 1.83,
+      "text": "the probability that the outcome is an"
+    },
+    {
+      "index": 1071,
+      "start": 2874.88,
+      "end": 2877.549,
+      "duration": 2.669,
+      "text": "even number how do you bow how do you go"
+    },
+    {
+      "index": 1072,
+      "start": 2877.559,
+      "end": 2880.069,
+      "duration": 2.51,
+      "text": "about calculating that probability so"
+    },
+    {
+      "index": 1073,
+      "start": 2880.079,
+      "end": 2881.829,
+      "duration": 1.75,
+      "text": "the probability of being an even number"
+    },
+    {
+      "index": 1074,
+      "start": 2881.839,
+      "end": 2884.589,
+      "duration": 2.75,
+      "text": "is the probability of the subset that"
+    },
+    {
+      "index": 1075,
+      "start": 2884.599,
+      "end": 2888.71,
+      "duration": 4.111,
+      "text": "consists of just the even numbers so it"
+    },
+    {
+      "index": 1076,
+      "start": 2888.72,
+      "end": 2891.109,
+      "duration": 2.389,
+      "text": "would be a subset of this kind that"
+    },
+    {
+      "index": 1077,
+      "start": 2891.119,
+      "end": 2894.309,
+      "duration": 3.19,
+      "text": "includes two four and so one so any"
+    },
+    {
+      "index": 1078,
+      "start": 2894.319,
+      "end": 2897.63,
+      "duration": 3.311,
+      "text": "reasonable person would say well the"
+    },
+    {
+      "index": 1079,
+      "start": 2897.64,
+      "end": 2899.67,
+      "duration": 2.03,
+      "text": "probability of obtaining an outcome"
+    },
+    {
+      "index": 1080,
+      "start": 2899.68,
+      "end": 2902.43,
+      "duration": 2.75,
+      "text": "that's either two or four or six and so"
+    },
+    {
+      "index": 1081,
+      "start": 2902.44,
+      "end": 2904.71,
+      "duration": 2.27,
+      "text": "on is equal to the probability of"
+    },
+    {
+      "index": 1082,
+      "start": 2904.72,
+      "end": 2906.79,
+      "duration": 2.07,
+      "text": "obtaining a two plus the probability of"
+    },
+    {
+      "index": 1083,
+      "start": 2906.8,
+      "end": 2908.95,
+      "duration": 2.15,
+      "text": "obtaining a four plus the probability of"
+    },
+    {
+      "index": 1084,
+      "start": 2908.96,
+      "end": 2911.39,
+      "duration": 2.43,
+      "text": "obtaining a six and so on these"
+    },
+    {
+      "index": 1085,
+      "start": 2911.4,
+      "end": 2914.75,
+      "duration": 3.35,
+      "text": "probabilities are given to us so here I"
+    },
+    {
+      "index": 1086,
+      "start": 2914.76,
+      "end": 2916.95,
+      "duration": 2.19,
+      "text": "have to do my algebra I add this"
+    },
+    {
+      "index": 1087,
+      "start": 2916.96,
+      "end": 2919.829,
+      "duration": 2.869,
+      "text": "geometric series and I get an answer of"
+    },
+    {
+      "index": 1088,
+      "start": 2919.839,
+      "end": 2922.43,
+      "duration": 2.591,
+      "text": "1/3 that's what any reasonable person"
+    },
+    {
+      "index": 1089,
+      "start": 2922.44,
+      "end": 2925.829,
+      "duration": 3.389,
+      "text": "would do but a person who only knows the"
+    },
+    {
+      "index": 1090,
+      "start": 2925.839,
+      "end": 2929.27,
+      "duration": 3.431,
+      "text": "axioms that I posted just a little"
+    },
+    {
+      "index": 1091,
+      "start": 2929.28,
+      "end": 2932.43,
+      "duration": 3.15,
+      "text": "earlier may get stuck they would get"
+    },
+    {
+      "index": 1092,
+      "start": 2932.44,
+      "end": 2934.75,
+      "duration": 2.31,
+      "text": "stuck at this point how do how do we"
+    },
+    {
+      "index": 1093,
+      "start": 2934.76,
+      "end": 2939.069,
+      "duration": 4.309,
+      "text": "justify this"
+    },
+    {
+      "index": 1094,
+      "start": 2941.829,
+      "end": 2941.839,
+      "duration": 0.01,
+      "text": "we had this property for the union of"
+    },
+    {
+      "index": 1095,
+      "start": 2941.839,
+      "end": 2944.63,
+      "duration": 2.791,
+      "text": "disjointed sets and the corresponding"
+    },
+    {
+      "index": 1096,
+      "start": 2944.64,
+      "end": 2947.27,
+      "duration": 2.63,
+      "text": "property that tells us that the total"
+    },
+    {
+      "index": 1097,
+      "start": 2947.28,
+      "end": 2950.19,
+      "duration": 2.91,
+      "text": "probability of finitely many things"
+    },
+    {
+      "index": 1098,
+      "start": 2950.2,
+      "end": 2952.789,
+      "duration": 2.589,
+      "text": "outcomes is the sum of their individual"
+    },
+    {
+      "index": 1099,
+      "start": 2952.799,
+      "end": 2956.03,
+      "duration": 3.231,
+      "text": "probabilities but here we're using it on"
+    },
+    {
+      "index": 1100,
+      "start": 2956.04,
+      "end": 2958.67,
+      "duration": 2.63,
+      "text": "an infinite collection the probability"
+    },
+    {
+      "index": 1101,
+      "start": 2958.68,
+      "end": 2962.349,
+      "duration": 3.669,
+      "text": "of infinitely many points is equal to"
+    },
+    {
+      "index": 1102,
+      "start": 2962.359,
+      "end": 2964.349,
+      "duration": 1.99,
+      "text": "the prob to the sum of the probabilities"
+    },
+    {
+      "index": 1103,
+      "start": 2964.359,
+      "end": 2967.51,
+      "duration": 3.151,
+      "text": "of each one of these to justify by this"
+    },
+    {
+      "index": 1104,
+      "start": 2967.52,
+      "end": 2970.109,
+      "duration": 2.589,
+      "text": "step we need to introduce one additional"
+    },
+    {
+      "index": 1105,
+      "start": 2970.119,
+      "end": 2972.789,
+      "duration": 2.67,
+      "text": "rule an additional axum that tells us"
+    },
+    {
+      "index": 1106,
+      "start": 2972.799,
+      "end": 2976.19,
+      "duration": 3.391,
+      "text": "that this step is actually legitimate"
+    },
+    {
+      "index": 1107,
+      "start": 2976.2,
+      "end": 2978.309,
+      "duration": 2.109,
+      "text": "and this is the countable additivity"
+    },
+    {
+      "index": 1108,
+      "start": 2978.319,
+      "end": 2981.349,
+      "duration": 3.03,
+      "text": "axium which is a little stronger or"
+    },
+    {
+      "index": 1109,
+      "start": 2981.359,
+      "end": 2983.43,
+      "duration": 2.071,
+      "text": "quite a bit stronger than the additivity"
+    },
+    {
+      "index": 1110,
+      "start": 2983.44,
+      "end": 2986.27,
+      "duration": 2.83,
+      "text": "axium we had before it tells us that if"
+    },
+    {
+      "index": 1111,
+      "start": 2986.28,
+      "end": 2989.309,
+      "duration": 3.029,
+      "text": "we have a sequence of sets that are"
+    },
+    {
+      "index": 1112,
+      "start": 2989.319,
+      "end": 2991.67,
+      "duration": 2.351,
+      "text": "disjoined and we want to find their"
+    },
+    {
+      "index": 1113,
+      "start": 2991.68,
+      "end": 2992.87,
+      "duration": 1.19,
+      "text": "total"
+    },
+    {
+      "index": 1114,
+      "start": 2992.88,
+      "end": 2996.069,
+      "duration": 3.189,
+      "text": "probability then we are allowed to add"
+    },
+    {
+      "index": 1115,
+      "start": 2996.079,
+      "end": 2998.67,
+      "duration": 2.591,
+      "text": "their indiv visual probabilities so the"
+    },
+    {
+      "index": 1116,
+      "start": 2998.68,
+      "end": 3001.589,
+      "duration": 2.909,
+      "text": "picture might be as follows we have a"
+    },
+    {
+      "index": 1117,
+      "start": 3001.599,
+      "end": 3007.67,
+      "duration": 6.071,
+      "text": "sequence of sets A1 A2 A3 and so on I"
+    },
+    {
+      "index": 1118,
+      "start": 3007.68,
+      "end": 3009.27,
+      "duration": 1.59,
+      "text": "guess in order to fit them inside the"
+    },
+    {
+      "index": 1119,
+      "start": 3009.28,
+      "end": 3010.91,
+      "duration": 1.63,
+      "text": "sample space the sets need to get"
+    },
+    {
+      "index": 1120,
+      "start": 3010.92,
+      "end": 3012.67,
+      "duration": 1.75,
+      "text": "smaller and smaller"
+    },
+    {
+      "index": 1121,
+      "start": 3012.68,
+      "end": 3015.87,
+      "duration": 3.19,
+      "text": "perhaps uh they are disjointed we have a"
+    },
+    {
+      "index": 1122,
+      "start": 3015.88,
+      "end": 3017.91,
+      "duration": 2.03,
+      "text": "sequence of such sets the total"
+    },
+    {
+      "index": 1123,
+      "start": 3017.92,
+      "end": 3020.95,
+      "duration": 3.03,
+      "text": "probability of falling anywhere inside"
+    },
+    {
+      "index": 1124,
+      "start": 3020.96,
+      "end": 3023.71,
+      "duration": 2.75,
+      "text": "one of those sets is the sum of their"
+    },
+    {
+      "index": 1125,
+      "start": 3023.72,
+      "end": 3024.99,
+      "duration": 1.27,
+      "text": "individual"
+    },
+    {
+      "index": 1126,
+      "start": 3025.0,
+      "end": 3028.63,
+      "duration": 3.63,
+      "text": "probabilities key s that's involved here"
+    },
+    {
+      "index": 1127,
+      "start": 3028.64,
+      "end": 3031.67,
+      "duration": 3.03,
+      "text": "is that we're talking about a sequence"
+    },
+    {
+      "index": 1128,
+      "start": 3031.68,
+      "end": 3035.63,
+      "duration": 3.95,
+      "text": "of events if by sequence we mean that"
+    },
+    {
+      "index": 1129,
+      "start": 3035.64,
+      "end": 3038.589,
+      "duration": 2.949,
+      "text": "these events can be arranged in order I"
+    },
+    {
+      "index": 1130,
+      "start": 3038.599,
+      "end": 3041.309,
+      "duration": 2.71,
+      "text": "can tell you the first event the second"
+    },
+    {
+      "index": 1131,
+      "start": 3041.319,
+      "end": 3043.91,
+      "duration": 2.591,
+      "text": "event the third event and so on so if"
+    },
+    {
+      "index": 1132,
+      "start": 3043.92,
+      "end": 3045.95,
+      "duration": 2.03,
+      "text": "you have such a collection of events"
+    },
+    {
+      "index": 1133,
+      "start": 3045.96,
+      "end": 3048.71,
+      "duration": 2.75,
+      "text": "that can be ordered as first second"
+    },
+    {
+      "index": 1134,
+      "start": 3048.72,
+      "end": 3051.63,
+      "duration": 2.91,
+      "text": "third and so on then you can add their"
+    },
+    {
+      "index": 1135,
+      "start": 3051.64,
+      "end": 3054.109,
+      "duration": 2.469,
+      "text": "probabilities you can find to find the"
+    },
+    {
+      "index": 1136,
+      "start": 3054.119,
+      "end": 3056.349,
+      "duration": 2.23,
+      "text": "probability of their Union so this point"
+    },
+    {
+      "index": 1137,
+      "start": 3056.359,
+      "end": 3057.47,
+      "duration": 1.111,
+      "text": "is actually actually a little more"
+    },
+    {
+      "index": 1138,
+      "start": 3057.48,
+      "end": 3059.349,
+      "duration": 1.869,
+      "text": "subtle that you might appreciate at this"
+    },
+    {
+      "index": 1139,
+      "start": 3059.359,
+      "end": 3061.71,
+      "duration": 2.351,
+      "text": "point and I'm going to return to it at"
+    },
+    {
+      "index": 1140,
+      "start": 3061.72,
+      "end": 3064.39,
+      "duration": 2.67,
+      "text": "the beginning of the next lecture for"
+    },
+    {
+      "index": 1141,
+      "start": 3064.4,
+      "end": 3067.829,
+      "duration": 3.429,
+      "text": "now enjoy the first week of classes and"
+    },
+    {
+      "index": 1142,
+      "start": 3067.839,
+      "end": 3072.44,
+      "duration": 4.601,
+      "text": "have a good weekend thank you"
+    }
+  ],
+  "course": {
+    "category": "Physics",
+    "title": "Electricity and Magnetism",
+    "source_url": "https://www.youtube.com/playlist?list=PLUl4u3cNGP61MdtwGTqZA0MreSaDybji8"
+  }
+}

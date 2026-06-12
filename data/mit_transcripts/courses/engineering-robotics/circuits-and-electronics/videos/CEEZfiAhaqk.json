@@ -1,0 +1,7263 @@
+{
+  "video": {
+    "id": "CEEZfiAhaqk",
+    "title": "Lecture 37 - System Design Example",
+    "url": "https://www.youtube.com/watch?v=CEEZfiAhaqk",
+    "channel": "nptelhrd",
+    "duration": 3058,
+    "language": "en"
+  },
+  "segment_count": 1035,
+  "segments": [
+    {
+      "index": 0,
+      "start": 20.46,
+      "end": 20.47,
+      "duration": 0.01,
+      "text": "[Applause]"
+    },
+    {
+      "index": 1,
+      "start": 20.47,
+      "end": 23.509,
+      "duration": 3.039,
+      "text": "[Music]"
+    },
+    {
+      "index": 2,
+      "start": 23.519,
+      "end": 26.669,
+      "duration": 3.15,
+      "text": "oh oh"
+    },
+    {
+      "index": 3,
+      "start": 26.679,
+      "end": 28.349,
+      "duration": 1.67,
+      "text": "sh"
+    },
+    {
+      "index": 4,
+      "start": 28.359,
+      "end": 32.09,
+      "duration": 3.731,
+      "text": "sh sh on"
+    },
+    {
+      "index": 5,
+      "start": 32.1,
+      "end": 65.03,
+      "duration": 32.93,
+      "text": "[Music]"
+    },
+    {
+      "index": 6,
+      "start": 107.23,
+      "end": 107.24,
+      "duration": 0.01,
+      "text": "seen design of"
+    },
+    {
+      "index": 7,
+      "start": 107.24,
+      "end": 110.109,
+      "duration": 2.869,
+      "text": "circuits sometimes even"
+    },
+    {
+      "index": 8,
+      "start": 110.119,
+      "end": 113.27,
+      "duration": 3.151,
+      "text": "subsystems using different types of"
+    },
+    {
+      "index": 9,
+      "start": 113.28,
+      "end": 115.749,
+      "duration": 2.469,
+      "text": "isas small scale integrate circuits"
+    },
+    {
+      "index": 10,
+      "start": 115.759,
+      "end": 117.99,
+      "duration": 2.231,
+      "text": "medium scale integrate circuits and"
+    },
+    {
+      "index": 11,
+      "start": 118.0,
+      "end": 120.429,
+      "duration": 2.429,
+      "text": "large scale integrate circuits in the"
+    },
+    {
+      "index": 12,
+      "start": 120.439,
+      "end": 122.069,
+      "duration": 1.63,
+      "text": "case of combination"
+    },
+    {
+      "index": 13,
+      "start": 122.079,
+      "end": 125.109,
+      "duration": 3.03,
+      "text": "logic apart from gate"
+    },
+    {
+      "index": 14,
+      "start": 125.119,
+      "end": 127.23,
+      "duration": 2.111,
+      "text": "implementation we also seen how to"
+    },
+    {
+      "index": 15,
+      "start": 127.24,
+      "end": 128.869,
+      "duration": 1.629,
+      "text": "implement circuits using"
+    },
+    {
+      "index": 16,
+      "start": 128.879,
+      "end": 131.27,
+      "duration": 2.391,
+      "text": "multiplexers and programmable"
+    },
+    {
+      "index": 17,
+      "start": 131.28,
+      "end": 133.869,
+      "duration": 2.589,
+      "text": "devices the case of sequential circuits"
+    },
+    {
+      "index": 18,
+      "start": 133.879,
+      "end": 138.91,
+      "duration": 5.031,
+      "text": "we talked about flip flops counters and"
+    },
+    {
+      "index": 19,
+      "start": 138.92,
+      "end": 141.43,
+      "duration": 2.51,
+      "text": "registers we had taken some examples"
+    },
+    {
+      "index": 20,
+      "start": 141.44,
+      "end": 142.79,
+      "duration": 1.35,
+      "text": "sometimes"
+    },
+    {
+      "index": 21,
+      "start": 142.8,
+      "end": 148.83,
+      "duration": 6.03,
+      "text": "uh uh example such as um code"
+    },
+    {
+      "index": 22,
+      "start": 153.03,
+      "end": 153.04,
+      "duration": 0.01,
+      "text": "converter or um pattern generation"
+    },
+    {
+      "index": 23,
+      "start": 153.04,
+      "end": 155.589,
+      "duration": 2.549,
+      "text": "pattern uh"
+    },
+    {
+      "index": 24,
+      "start": 155.599,
+      "end": 159.71,
+      "duration": 4.111,
+      "text": "recognition looking for a particular"
+    },
+    {
+      "index": 25,
+      "start": 159.72,
+      "end": 163.71,
+      "duration": 3.99,
+      "text": "pattern we we did not really uh this"
+    },
+    {
+      "index": 26,
+      "start": 163.72,
+      "end": 165.43,
+      "duration": 1.71,
+      "text": "were simply examples to illustrate"
+    },
+    {
+      "index": 27,
+      "start": 165.44,
+      "end": 166.83,
+      "duration": 1.39,
+      "text": "various design"
+    },
+    {
+      "index": 28,
+      "start": 166.84,
+      "end": 169.869,
+      "duration": 3.029,
+      "text": "techniques using combination logic"
+    },
+    {
+      "index": 29,
+      "start": 169.879,
+      "end": 171.83,
+      "duration": 1.951,
+      "text": "building blocks like Gates and"
+    },
+    {
+      "index": 30,
+      "start": 171.84,
+      "end": 174.509,
+      "duration": 2.669,
+      "text": "sequential logic building blocks like"
+    },
+    {
+      "index": 31,
+      "start": 174.519,
+      "end": 175.79,
+      "duration": 1.271,
+      "text": "flip"
+    },
+    {
+      "index": 32,
+      "start": 175.8,
+      "end": 178.83,
+      "duration": 3.03,
+      "text": "flops and also to implement to"
+    },
+    {
+      "index": 33,
+      "start": 178.84,
+      "end": 181.71,
+      "duration": 2.87,
+      "text": "illustrate the concept of using msis and"
+    },
+    {
+      "index": 34,
+      "start": 181.72,
+      "end": 185.35,
+      "duration": 3.63,
+      "text": "lsis for"
+    },
+    {
+      "index": 35,
+      "start": 187.789,
+      "end": 187.799,
+      "duration": 0.01,
+      "text": "implementing these"
+    },
+    {
+      "index": 36,
+      "start": 187.799,
+      "end": 189.869,
+      "duration": 2.07,
+      "text": "circuits some of them you can call them"
+    },
+    {
+      "index": 37,
+      "start": 189.879,
+      "end": 192.03,
+      "duration": 2.151,
+      "text": "as sub system subsystems because of"
+    },
+    {
+      "index": 38,
+      "start": 192.04,
+      "end": 194.35,
+      "duration": 2.31,
+      "text": "their complexity but in the digital"
+    },
+    {
+      "index": 39,
+      "start": 194.36,
+      "end": 196.83,
+      "duration": 2.47,
+      "text": "system"
+    },
+    {
+      "index": 40,
+      "start": 200.35,
+      "end": 200.36,
+      "duration": 0.01,
+      "text": "design a wide variety of most of the uh"
+    },
+    {
+      "index": 41,
+      "start": 200.36,
+      "end": 201.99,
+      "duration": 1.63,
+      "text": "devices today most of the applications"
+    },
+    {
+      "index": 42,
+      "start": 202.0,
+      "end": 204.91,
+      "duration": 2.91,
+      "text": "today in electronics or digital"
+    },
+    {
+      "index": 43,
+      "start": 204.92,
+      "end": 207.83,
+      "duration": 2.91,
+      "text": "systems be a traffic light controller or"
+    },
+    {
+      "index": 44,
+      "start": 207.84,
+      "end": 209.83,
+      "duration": 1.99,
+      "text": "a controller to elevate the uh to"
+    },
+    {
+      "index": 45,
+      "start": 209.84,
+      "end": 213.07,
+      "duration": 3.23,
+      "text": "control controller to control the"
+    },
+    {
+      "index": 46,
+      "start": 213.08,
+      "end": 215.07,
+      "duration": 1.99,
+      "text": "movement of a lift or an"
+    },
+    {
+      "index": 47,
+      "start": 215.08,
+      "end": 218.949,
+      "duration": 3.869,
+      "text": "elevator or a chemical plant control a"
+    },
+    {
+      "index": 48,
+      "start": 218.959,
+      "end": 221.07,
+      "duration": 2.111,
+      "text": "chemical plant flow of"
+    },
+    {
+      "index": 49,
+      "start": 221.08,
+      "end": 224.509,
+      "duration": 3.429,
+      "text": "fluids and controlling of levels of uh"
+    },
+    {
+      "index": 50,
+      "start": 224.519,
+      "end": 226.149,
+      "duration": 1.63,
+      "text": "various"
+    },
+    {
+      "index": 51,
+      "start": 226.159,
+      "end": 228.35,
+      "duration": 2.191,
+      "text": "fluids it could be an automotive"
+    },
+    {
+      "index": 52,
+      "start": 228.36,
+      "end": 230.789,
+      "duration": 2.429,
+      "text": "electronics it could be a simple home"
+    },
+    {
+      "index": 53,
+      "start": 230.799,
+      "end": 233.35,
+      "duration": 2.551,
+      "text": "appliance like washing machine or remote"
+    },
+    {
+      "index": 54,
+      "start": 233.36,
+      "end": 235.83,
+      "duration": 2.47,
+      "text": "control of a TV can be a little more"
+    },
+    {
+      "index": 55,
+      "start": 235.84,
+      "end": 240.03,
+      "duration": 4.19,
+      "text": "complex device such as uh flight control"
+    },
+    {
+      "index": 56,
+      "start": 240.04,
+      "end": 240.949,
+      "duration": 0.909,
+      "text": "in"
+    },
+    {
+      "index": 57,
+      "start": 240.959,
+      "end": 243.71,
+      "duration": 2.751,
+      "text": "aircraft or"
+    },
+    {
+      "index": 58,
+      "start": 243.72,
+      "end": 247.589,
+      "duration": 3.869,
+      "text": "for flight simulation or for rocket"
+    },
+    {
+      "index": 59,
+      "start": 247.599,
+      "end": 250.149,
+      "duration": 2.55,
+      "text": "launch or it could be a simple computer"
+    },
+    {
+      "index": 60,
+      "start": 250.159,
+      "end": 251.47,
+      "duration": 1.311,
+      "text": "or a"
+    },
+    {
+      "index": 61,
+      "start": 251.48,
+      "end": 254.75,
+      "duration": 3.27,
+      "text": "calculator whatever the system the the"
+    },
+    {
+      "index": 62,
+      "start": 254.76,
+      "end": 256.99,
+      "duration": 2.23,
+      "text": "complexity appears to be"
+    },
+    {
+      "index": 63,
+      "start": 257.0,
+      "end": 259.11,
+      "duration": 2.11,
+      "text": "formidable when you ask to design let"
+    },
+    {
+      "index": 64,
+      "start": 259.12,
+      "end": 260.99,
+      "duration": 1.87,
+      "text": "say"
+    },
+    {
+      "index": 65,
+      "start": 261.0,
+      "end": 264.83,
+      "duration": 3.83,
+      "text": "a huge system in a digital system you'll"
+    },
+    {
+      "index": 66,
+      "start": 264.84,
+      "end": 266.43,
+      "duration": 1.59,
+      "text": "be overwhelmed with the complexity of"
+    },
+    {
+      "index": 67,
+      "start": 266.44,
+      "end": 270.27,
+      "duration": 3.83,
+      "text": "the system but if you think for a while"
+    },
+    {
+      "index": 68,
+      "start": 270.28,
+      "end": 271.59,
+      "duration": 1.31,
+      "text": "all the tools that have developed in"
+    },
+    {
+      "index": 69,
+      "start": 271.6,
+      "end": 272.71,
+      "duration": 1.11,
+      "text": "this course so"
+    },
+    {
+      "index": 70,
+      "start": 272.72,
+      "end": 276.95,
+      "duration": 4.23,
+      "text": "far basic implementation of combination"
+    },
+    {
+      "index": 71,
+      "start": 276.96,
+      "end": 278.749,
+      "duration": 1.789,
+      "text": "building blocks"
+    },
+    {
+      "index": 72,
+      "start": 278.759,
+      "end": 283.27,
+      "duration": 4.511,
+      "text": "using SSI LSI MSI components basic"
+    },
+    {
+      "index": 73,
+      "start": 283.28,
+      "end": 286.67,
+      "duration": 3.39,
+      "text": "implementation of sequential uh building"
+    },
+    {
+      "index": 74,
+      "start": 286.68,
+      "end": 290.189,
+      "duration": 3.509,
+      "text": "uh circuits sequential circuits using"
+    },
+    {
+      "index": 75,
+      "start": 290.199,
+      "end": 292.51,
+      "duration": 2.311,
+      "text": "building blocks such as flip flops and"
+    },
+    {
+      "index": 76,
+      "start": 292.52,
+      "end": 294.99,
+      "duration": 2.47,
+      "text": "registers these are the the same"
+    },
+    {
+      "index": 77,
+      "start": 295.0,
+      "end": 296.27,
+      "duration": 1.27,
+      "text": "techniques we'll be using again and"
+    },
+    {
+      "index": 78,
+      "start": 296.28,
+      "end": 298.629,
+      "duration": 2.349,
+      "text": "again we talked about minimization"
+    },
+    {
+      "index": 79,
+      "start": 298.639,
+      "end": 302.909,
+      "duration": 4.27,
+      "text": "using Coram Ms for gate reduction then"
+    },
+    {
+      "index": 80,
+      "start": 302.919,
+      "end": 305.59,
+      "duration": 2.671,
+      "text": "we talked about multiplexor base design"
+    },
+    {
+      "index": 81,
+      "start": 305.6,
+      "end": 307.99,
+      "duration": 2.39,
+      "text": "we also combined the combinational and"
+    },
+    {
+      "index": 82,
+      "start": 308.0,
+      "end": 309.11,
+      "duration": 1.11,
+      "text": "sequen"
+    },
+    {
+      "index": 83,
+      "start": 309.12,
+      "end": 312.07,
+      "duration": 2.95,
+      "text": "Sh designs together in a single IC like"
+    },
+    {
+      "index": 84,
+      "start": 312.08,
+      "end": 313.67,
+      "duration": 1.59,
+      "text": "a programmable array"
+    },
+    {
+      "index": 85,
+      "start": 313.68,
+      "end": 317.31,
+      "duration": 3.63,
+      "text": "logic device where there was there is"
+    },
+    {
+      "index": 86,
+      "start": 317.32,
+      "end": 320.23,
+      "duration": 2.91,
+      "text": "scope for putting a"
+    },
+    {
+      "index": 87,
+      "start": 320.24,
+      "end": 322.749,
+      "duration": 2.509,
+      "text": "combinational part and a sequential part"
+    },
+    {
+      "index": 88,
+      "start": 322.759,
+      "end": 323.83,
+      "duration": 1.071,
+      "text": "in the same"
+    },
+    {
+      "index": 89,
+      "start": 323.84,
+      "end": 326.909,
+      "duration": 3.069,
+      "text": "circuit so really when the system is"
+    },
+    {
+      "index": 90,
+      "start": 326.919,
+      "end": 328.83,
+      "duration": 1.911,
+      "text": "given to you if you start analyzing the"
+    },
+    {
+      "index": 91,
+      "start": 328.84,
+      "end": 330.43,
+      "duration": 1.59,
+      "text": "requirements"
+    },
+    {
+      "index": 92,
+      "start": 330.44,
+      "end": 332.87,
+      "duration": 2.43,
+      "text": "if you identify clearly"
+    },
+    {
+      "index": 93,
+      "start": 332.88,
+      "end": 335.07,
+      "duration": 2.19,
+      "text": "the"
+    },
+    {
+      "index": 94,
+      "start": 335.08,
+      "end": 337.11,
+      "duration": 2.03,
+      "text": "specifications if you identify clearly"
+    },
+    {
+      "index": 95,
+      "start": 337.12,
+      "end": 339.39,
+      "duration": 2.27,
+      "text": "the input signals available and the"
+    },
+    {
+      "index": 96,
+      "start": 339.4,
+      "end": 341.23,
+      "duration": 1.83,
+      "text": "output signals"
+    },
+    {
+      "index": 97,
+      "start": 341.24,
+      "end": 346.15,
+      "duration": 4.91,
+      "text": "required we must be able to come up with"
+    },
+    {
+      "index": 98,
+      "start": 348.15,
+      "end": 348.16,
+      "duration": 0.01,
+      "text": "a state"
+    },
+    {
+      "index": 99,
+      "start": 348.16,
+      "end": 350.23,
+      "duration": 2.07,
+      "text": "graph and once you have a state graph"
+    },
+    {
+      "index": 100,
+      "start": 350.24,
+      "end": 351.67,
+      "duration": 1.43,
+      "text": "you know how to implement"
+    },
+    {
+      "index": 101,
+      "start": 351.68,
+      "end": 354.749,
+      "duration": 3.069,
+      "text": "it of course it may become very large"
+    },
+    {
+      "index": 102,
+      "start": 354.759,
+      "end": 357.11,
+      "duration": 2.351,
+      "text": "problem with a large number of states"
+    },
+    {
+      "index": 103,
+      "start": 357.12,
+      "end": 358.71,
+      "duration": 1.59,
+      "text": "and we have to go for some techniques"
+    },
+    {
+      "index": 104,
+      "start": 358.72,
+      "end": 361.59,
+      "duration": 2.87,
+      "text": "like cplds and"
+    },
+    {
+      "index": 105,
+      "start": 361.6,
+      "end": 364.35,
+      "duration": 2.75,
+      "text": "fpgas but"
+    },
+    {
+      "index": 106,
+      "start": 364.36,
+      "end": 366.71,
+      "duration": 2.35,
+      "text": "conceptually we have most of the tools"
+    },
+    {
+      "index": 107,
+      "start": 366.72,
+      "end": 368.23,
+      "duration": 1.51,
+      "text": "most of the techniques available to us"
+    },
+    {
+      "index": 108,
+      "start": 368.24,
+      "end": 371.39,
+      "duration": 3.15,
+      "text": "now to illustrate this point we going to"
+    },
+    {
+      "index": 109,
+      "start": 371.4,
+      "end": 373.27,
+      "duration": 1.87,
+      "text": "look at some of these"
+    },
+    {
+      "index": 110,
+      "start": 373.28,
+      "end": 375.71,
+      "duration": 2.43,
+      "text": "examples how it is important to"
+    },
+    {
+      "index": 111,
+      "start": 375.72,
+      "end": 379.27,
+      "duration": 3.55,
+      "text": "understand the design requirements how"
+    },
+    {
+      "index": 112,
+      "start": 379.28,
+      "end": 382.909,
+      "duration": 3.629,
+      "text": "it is possible required to understand"
+    },
+    {
+      "index": 113,
+      "start": 382.919,
+      "end": 386.309,
+      "duration": 3.39,
+      "text": "fully the system you're going to design"
+    },
+    {
+      "index": 114,
+      "start": 386.319,
+      "end": 388.27,
+      "duration": 1.951,
+      "text": "the input requirements and output"
+    },
+    {
+      "index": 115,
+      "start": 388.28,
+      "end": 390.71,
+      "duration": 2.43,
+      "text": "requirements and how this can be met"
+    },
+    {
+      "index": 116,
+      "start": 390.72,
+      "end": 394.029,
+      "duration": 3.309,
+      "text": "easily and how to build them using these"
+    },
+    {
+      "index": 117,
+      "start": 394.039,
+      "end": 397.029,
+      "duration": 2.99,
+      "text": "components so you have to identify the"
+    },
+    {
+      "index": 118,
+      "start": 397.039,
+      "end": 401.189,
+      "duration": 4.15,
+      "text": "circuit the system requirements very"
+    },
+    {
+      "index": 119,
+      "start": 401.199,
+      "end": 403.43,
+      "duration": 2.231,
+      "text": "clearly uh before you can choose the"
+    },
+    {
+      "index": 120,
+      "start": 403.44,
+      "end": 404.79,
+      "duration": 1.35,
+      "text": "components once you choose the"
+    },
+    {
+      "index": 121,
+      "start": 404.8,
+      "end": 405.99,
+      "duration": 1.19,
+      "text": "components you should know how to use"
+    },
+    {
+      "index": 122,
+      "start": 406.0,
+      "end": 408.43,
+      "duration": 2.43,
+      "text": "them properly then the design become"
+    },
+    {
+      "index": 123,
+      "start": 408.44,
+      "end": 410.23,
+      "duration": 1.79,
+      "text": "straightforward this approach is called"
+    },
+    {
+      "index": 124,
+      "start": 410.24,
+      "end": 413.07,
+      "duration": 2.83,
+      "text": "top down design"
+    },
+    {
+      "index": 125,
+      "start": 413.08,
+      "end": 415.23,
+      "duration": 2.15,
+      "text": "approach take an example of a computer"
+    },
+    {
+      "index": 126,
+      "start": 415.24,
+      "end": 417.55,
+      "duration": 2.31,
+      "text": "design a computer looks formidable when"
+    },
+    {
+      "index": 127,
+      "start": 417.56,
+      "end": 419.309,
+      "duration": 1.749,
+      "text": "when I ask you to build a computer like"
+    },
+    {
+      "index": 128,
+      "start": 419.319,
+      "end": 420.309,
+      "duration": 0.99,
+      "text": "a"
+    },
+    {
+      "index": 129,
+      "start": 420.319,
+      "end": 422.35,
+      "duration": 2.031,
+      "text": "calculator but on the other hand if you"
+    },
+    {
+      "index": 130,
+      "start": 422.36,
+      "end": 424.589,
+      "duration": 2.229,
+      "text": "start thinking of computer as a"
+    },
+    {
+      "index": 131,
+      "start": 424.599,
+      "end": 426.79,
+      "duration": 2.191,
+      "text": "collection of building blocks such as"
+    },
+    {
+      "index": 132,
+      "start": 426.8,
+      "end": 430.67,
+      "duration": 3.87,
+      "text": "arithmetic logic unit memory unit input"
+    },
+    {
+      "index": 133,
+      "start": 430.68,
+      "end": 431.869,
+      "duration": 1.189,
+      "text": "unit output"
+    },
+    {
+      "index": 134,
+      "start": 431.879,
+      "end": 435.309,
+      "duration": 3.43,
+      "text": "unit then functionally understand each"
+    },
+    {
+      "index": 135,
+      "start": 435.319,
+      "end": 437.39,
+      "duration": 2.071,
+      "text": "one of those and look at the arithmetic"
+    },
+    {
+      "index": 136,
+      "start": 437.4,
+      "end": 439.95,
+      "duration": 2.55,
+      "text": "logic unit as an example after all it"
+    },
+    {
+      "index": 137,
+      "start": 439.96,
+      "end": 441.79,
+      "duration": 1.83,
+      "text": "contains arithmetic and logic functions"
+    },
+    {
+      "index": 138,
+      "start": 441.8,
+      "end": 444.83,
+      "duration": 3.03,
+      "text": "and we know how to implement arithmetic"
+    },
+    {
+      "index": 139,
+      "start": 444.84,
+      "end": 447.23,
+      "duration": 2.39,
+      "text": "functions it can be gate oriented it can"
+    },
+    {
+      "index": 140,
+      "start": 447.24,
+      "end": 450.51,
+      "duration": 3.27,
+      "text": "be multiplexor oriented it can be uh MSI"
+    },
+    {
+      "index": 141,
+      "start": 450.52,
+      "end": 454.029,
+      "duration": 3.509,
+      "text": "for adder or MSI for Adder subtractor"
+    },
+    {
+      "index": 142,
+      "start": 454.039,
+      "end": 455.589,
+      "duration": 1.55,
+      "text": "likewise logic functions we know how to"
+    },
+    {
+      "index": 143,
+      "start": 455.599,
+      "end": 457.309,
+      "duration": 1.71,
+      "text": "implement and we should know how to"
+    },
+    {
+      "index": 144,
+      "start": 457.319,
+      "end": 459.95,
+      "duration": 2.631,
+      "text": "combine in the same block an arithmetic"
+    },
+    {
+      "index": 145,
+      "start": 459.96,
+      "end": 462.11,
+      "duration": 2.15,
+      "text": "and logic"
+    },
+    {
+      "index": 146,
+      "start": 462.12,
+      "end": 466.189,
+      "duration": 4.069,
+      "text": "function so when you go top down and uh"
+    },
+    {
+      "index": 147,
+      "start": 466.199,
+      "end": 469.79,
+      "duration": 3.591,
+      "text": "down and down you'll be able to identify"
+    },
+    {
+      "index": 148,
+      "start": 469.8,
+      "end": 472.469,
+      "duration": 2.669,
+      "text": "break a system into subsystem a sub"
+    },
+    {
+      "index": 149,
+      "start": 472.479,
+      "end": 475.749,
+      "duration": 3.27,
+      "text": "subsystem into a units functional units"
+    },
+    {
+      "index": 150,
+      "start": 475.759,
+      "end": 477.83,
+      "duration": 2.071,
+      "text": "functional units can be either available"
+    },
+    {
+      "index": 151,
+      "start": 477.84,
+      "end": 479.749,
+      "duration": 1.909,
+      "text": "can be can be available comp component"
+    },
+    {
+      "index": 152,
+      "start": 479.759,
+      "end": 483.07,
+      "duration": 3.311,
+      "text": "which are available readily as SSI or Ms"
+    },
+    {
+      "index": 153,
+      "start": 483.08,
+      "end": 486.67,
+      "duration": 3.59,
+      "text": "SSI MSI or LSI or we build them using"
+    },
+    {
+      "index": 154,
+      "start": 486.68,
+      "end": 488.43,
+      "duration": 1.75,
+      "text": "SSI and"
+    },
+    {
+      "index": 155,
+      "start": 488.44,
+      "end": 490.35,
+      "duration": 1.91,
+      "text": "MSI and then of course comes the"
+    },
+    {
+      "index": 156,
+      "start": 490.36,
+      "end": 492.23,
+      "duration": 1.87,
+      "text": "interconnection and controlling of them"
+    },
+    {
+      "index": 157,
+      "start": 492.24,
+      "end": 493.67,
+      "duration": 1.43,
+      "text": "that is where the state graph comes into"
+    },
+    {
+      "index": 158,
+      "start": 493.68,
+      "end": 496.189,
+      "duration": 2.509,
+      "text": "picture how do you control what is the"
+    },
+    {
+      "index": 159,
+      "start": 496.199,
+      "end": 498.07,
+      "duration": 1.871,
+      "text": "sequence of events that take place and"
+    },
+    {
+      "index": 160,
+      "start": 498.08,
+      "end": 500.99,
+      "duration": 2.91,
+      "text": "how the signals from one unit feed into"
+    },
+    {
+      "index": 161,
+      "start": 501.0,
+      "end": 503.23,
+      "duration": 2.23,
+      "text": "the other next unit and how"
+    },
+    {
+      "index": 162,
+      "start": 503.24,
+      "end": 505.99,
+      "duration": 2.75,
+      "text": "the output of the second unit affects"
+    },
+    {
+      "index": 163,
+      "start": 506.0,
+      "end": 508.589,
+      "duration": 2.589,
+      "text": "the third unit and so forth so it's"
+    },
+    {
+      "index": 164,
+      "start": 508.599,
+      "end": 510.07,
+      "duration": 1.471,
+      "text": "clearly the understanding of the"
+    },
+    {
+      "index": 165,
+      "start": 510.08,
+      "end": 511.79,
+      "duration": 1.71,
+      "text": "specification of the problem and drawing"
+    },
+    {
+      "index": 166,
+      "start": 511.8,
+      "end": 516.75,
+      "duration": 4.95,
+      "text": "a proper State graph once you have that"
+    },
+    {
+      "index": 167,
+      "start": 516.76,
+      "end": 519.87,
+      "duration": 3.11,
+      "text": "rest Falls rest of the design Falls in"
+    },
+    {
+      "index": 168,
+      "start": 519.88,
+      "end": 525.11,
+      "duration": 5.23,
+      "text": "place and we'll have the soon realize"
+    },
+    {
+      "index": 169,
+      "start": 525.12,
+      "end": 527.35,
+      "duration": 2.23,
+      "text": "that we have a power"
+    },
+    {
+      "index": 170,
+      "start": 527.36,
+      "end": 529.99,
+      "duration": 2.63,
+      "text": "whole a power to design a whole range of"
+    },
+    {
+      "index": 171,
+      "start": 530.0,
+      "end": 531.829,
+      "duration": 1.829,
+      "text": "digital"
+    },
+    {
+      "index": 172,
+      "start": 531.839,
+      "end": 534.71,
+      "duration": 2.871,
+      "text": "systems we are going to illustrate this"
+    },
+    {
+      "index": 173,
+      "start": 534.72,
+      "end": 536.389,
+      "duration": 1.669,
+      "text": "concept by means of two example one is"
+    },
+    {
+      "index": 174,
+      "start": 536.399,
+      "end": 538.15,
+      "duration": 1.751,
+      "text": "one is a simple example second one will"
+    },
+    {
+      "index": 175,
+      "start": 538.16,
+      "end": 541.389,
+      "duration": 3.229,
+      "text": "be slightly more involved I'll tell you"
+    },
+    {
+      "index": 176,
+      "start": 541.399,
+      "end": 542.75,
+      "duration": 1.351,
+      "text": "why it is slightly more involved not"
+    },
+    {
+      "index": 177,
+      "start": 542.76,
+      "end": 544.67,
+      "duration": 1.91,
+      "text": "because it is bigger in size because"
+    },
+    {
+      "index": 178,
+      "start": 544.68,
+      "end": 546.35,
+      "duration": 1.67,
+      "text": "it's slightly different concept we going"
+    },
+    {
+      "index": 179,
+      "start": 546.36,
+      "end": 547.91,
+      "duration": 1.55,
+      "text": "to talk about"
+    },
+    {
+      "index": 180,
+      "start": 547.92,
+      "end": 550.269,
+      "duration": 2.349,
+      "text": "there in the first example we'll"
+    },
+    {
+      "index": 181,
+      "start": 550.279,
+      "end": 551.949,
+      "duration": 1.67,
+      "text": "consider a traffic light"
+    },
+    {
+      "index": 182,
+      "start": 551.959,
+      "end": 553.99,
+      "duration": 2.031,
+      "text": "controller we know that traffic lights"
+    },
+    {
+      "index": 183,
+      "start": 554.0,
+      "end": 556.03,
+      "duration": 2.03,
+      "text": "are installed in Road"
+    },
+    {
+      "index": 184,
+      "start": 556.04,
+      "end": 558.269,
+      "duration": 2.229,
+      "text": "Junctions and they they come with a"
+    },
+    {
+      "index": 185,
+      "start": 558.279,
+      "end": 561.23,
+      "duration": 2.951,
+      "text": "variety of features it could be a simple"
+    },
+    {
+      "index": 186,
+      "start": 561.24,
+      "end": 564.47,
+      "duration": 3.23,
+      "text": "two-way intersection where one street is"
+    },
+    {
+      "index": 187,
+      "start": 564.48,
+      "end": 566.35,
+      "duration": 1.87,
+      "text": "red for one street is green for a while"
+    },
+    {
+      "index": 188,
+      "start": 566.36,
+      "end": 567.79,
+      "duration": 1.43,
+      "text": "and the other street is red and then"
+    },
+    {
+      "index": 189,
+      "start": 567.8,
+      "end": 571.43,
+      "duration": 3.63,
+      "text": "after some time they switch"
+    },
+    {
+      "index": 190,
+      "start": 575.949,
+      "end": 575.959,
+      "duration": 0.01,
+      "text": "then there can be a street with turn"
+    },
+    {
+      "index": 191,
+      "start": 575.959,
+      "end": 579.35,
+      "duration": 3.391,
+      "text": "signals so there has be in addition to"
+    },
+    {
+      "index": 192,
+      "start": 579.36,
+      "end": 581.79,
+      "duration": 2.43,
+      "text": "Main Street and side street signals we"
+    },
+    {
+      "index": 193,
+      "start": 581.8,
+      "end": 583.389,
+      "duration": 1.589,
+      "text": "need to have a turning signal when you"
+    },
+    {
+      "index": 194,
+      "start": 583.399,
+      "end": 584.55,
+      "duration": 1.151,
+      "text": "have a turning signal you have to make"
+    },
+    {
+      "index": 195,
+      "start": 584.56,
+      "end": 586.63,
+      "duration": 2.07,
+      "text": "sure some traffic is allowed in a"
+    },
+    {
+      "index": 196,
+      "start": 586.64,
+      "end": 588.91,
+      "duration": 2.27,
+      "text": "certain direction not allowed in certain"
+    },
+    {
+      "index": 197,
+      "start": 588.92,
+      "end": 590.35,
+      "duration": 1.43,
+      "text": "other direction because it will collide"
+    },
+    {
+      "index": 198,
+      "start": 590.36,
+      "end": 591.43,
+      "duration": 1.07,
+      "text": "with the traffic coming from the"
+    },
+    {
+      "index": 199,
+      "start": 591.44,
+      "end": 593.55,
+      "duration": 2.11,
+      "text": "opposite"
+    },
+    {
+      "index": 200,
+      "start": 593.56,
+      "end": 597.03,
+      "duration": 3.47,
+      "text": "direction we can add to that some pestan"
+    },
+    {
+      "index": 201,
+      "start": 597.04,
+      "end": 598.91,
+      "duration": 1.87,
+      "text": "Crossings there are several ways in"
+    },
+    {
+      "index": 202,
+      "start": 598.92,
+      "end": 600.67,
+      "duration": 1.75,
+      "text": "which you can control this timing of the"
+    },
+    {
+      "index": 203,
+      "start": 600.68,
+      "end": 603.15,
+      "duration": 2.47,
+      "text": "signals you can have a set timing for"
+    },
+    {
+      "index": 204,
+      "start": 603.16,
+      "end": 605.15,
+      "duration": 1.99,
+      "text": "example Main Street signal will be on"
+    },
+    {
+      "index": 205,
+      "start": 605.16,
+      "end": 608.269,
+      "duration": 3.109,
+      "text": "for a while let us say 2 minutes or 1"
+    },
+    {
+      "index": 206,
+      "start": 608.279,
+      "end": 609.91,
+      "duration": 1.631,
+      "text": "minute and side she signal will be on"
+    },
+    {
+      "index": 207,
+      "start": 609.92,
+      "end": 613.43,
+      "duration": 3.51,
+      "text": "for 30 seconds and then it will repeat"
+    },
+    {
+      "index": 208,
+      "start": 613.44,
+      "end": 615.069,
+      "duration": 1.629,
+      "text": "or you can have"
+    },
+    {
+      "index": 209,
+      "start": 615.079,
+      "end": 618.55,
+      "duration": 3.471,
+      "text": "a timing based on the requirement Main"
+    },
+    {
+      "index": 210,
+      "start": 618.56,
+      "end": 620.91,
+      "duration": 2.35,
+      "text": "Street will be on green and side street"
+    },
+    {
+      "index": 211,
+      "start": 620.92,
+      "end": 624.79,
+      "duration": 3.87,
+      "text": "will be red all the time until there's a"
+    },
+    {
+      "index": 212,
+      "start": 624.8,
+      "end": 627.59,
+      "duration": 2.79,
+      "text": "traffic detected in the side streate"
+    },
+    {
+      "index": 213,
+      "start": 627.6,
+      "end": 630.35,
+      "duration": 2.75,
+      "text": "that can be done by means of sensors"
+    },
+    {
+      "index": 214,
+      "start": 630.36,
+      "end": 632.069,
+      "duration": 1.709,
+      "text": "or switches you can put some light"
+    },
+    {
+      "index": 215,
+      "start": 632.079,
+      "end": 634.55,
+      "duration": 2.471,
+      "text": "switches or sensors in the side"
+    },
+    {
+      "index": 216,
+      "start": 634.56,
+      "end": 637.269,
+      "duration": 2.709,
+      "text": "streate whenever there's a need the side"
+    },
+    {
+      "index": 217,
+      "start": 637.279,
+      "end": 639.55,
+      "duration": 2.271,
+      "text": "street can go red uh can go green rest"
+    },
+    {
+      "index": 218,
+      "start": 639.56,
+      "end": 641.91,
+      "duration": 2.35,
+      "text": "of time can stay red and then you have"
+    },
+    {
+      "index": 219,
+      "start": 641.92,
+      "end": 643.31,
+      "duration": 1.39,
+      "text": "to make sure that this doesn't happen"
+    },
+    {
+      "index": 220,
+      "start": 643.32,
+      "end": 644.79,
+      "duration": 1.47,
+      "text": "very frequently because we don't want to"
+    },
+    {
+      "index": 221,
+      "start": 644.8,
+      "end": 646.389,
+      "duration": 1.589,
+      "text": "interrupt the main main road traffic"
+    },
+    {
+      "index": 222,
+      "start": 646.399,
+      "end": 648.79,
+      "duration": 2.391,
+      "text": "very frequently so we may have to put a"
+    },
+    {
+      "index": 223,
+      "start": 648.8,
+      "end": 652.069,
+      "duration": 3.269,
+      "text": "condition that if a side side street"
+    },
+    {
+      "index": 224,
+      "start": 652.079,
+      "end": 655.15,
+      "duration": 3.071,
+      "text": "traffic occurs if traffic occurs in side"
+    },
+    {
+      "index": 225,
+      "start": 655.16,
+      "end": 659.35,
+      "duration": 4.19,
+      "text": "street and if you not switch the"
+    },
+    {
+      "index": 226,
+      "start": 659.36,
+      "end": 660.87,
+      "duration": 1.51,
+      "text": "if the main street has been on for at"
+    },
+    {
+      "index": 227,
+      "start": 660.88,
+      "end": 662.829,
+      "duration": 1.949,
+      "text": "least for a given amount of time then"
+    },
+    {
+      "index": 228,
+      "start": 662.839,
+      "end": 664.47,
+      "duration": 1.631,
+      "text": "and only then it will be recognized and"
+    },
+    {
+      "index": 229,
+      "start": 664.48,
+      "end": 666.389,
+      "duration": 1.909,
+      "text": "the lives will change so you can go on"
+    },
+    {
+      "index": 230,
+      "start": 666.399,
+      "end": 667.829,
+      "duration": 1.43,
+      "text": "in certain conditions and making it more"
+    },
+    {
+      "index": 231,
+      "start": 667.839,
+      "end": 670.19,
+      "duration": 2.351,
+      "text": "and more complex and then you can have a"
+    },
+    {
+      "index": 232,
+      "start": 670.2,
+      "end": 671.629,
+      "duration": 1.429,
+      "text": "pestan switch As I"
+    },
+    {
+      "index": 233,
+      "start": 671.639,
+      "end": 674.59,
+      "duration": 2.951,
+      "text": "said sometimes the traffic is so fast"
+    },
+    {
+      "index": 234,
+      "start": 674.6,
+      "end": 677.509,
+      "duration": 2.909,
+      "text": "and the pestan are left with no option"
+    },
+    {
+      "index": 235,
+      "start": 677.519,
+      "end": 680.55,
+      "duration": 3.031,
+      "text": "to cross the street safely so there you"
+    },
+    {
+      "index": 236,
+      "start": 680.56,
+      "end": 682.71,
+      "duration": 2.15,
+      "text": "can install some pestan switches and"
+    },
+    {
+      "index": 237,
+      "start": 682.72,
+      "end": 684.71,
+      "duration": 1.99,
+      "text": "once in a while again not too frequently"
+    },
+    {
+      "index": 238,
+      "start": 684.72,
+      "end": 687.11,
+      "duration": 2.39,
+      "text": "once in you can detect The Pedestrian"
+    },
+    {
+      "index": 239,
+      "start": 687.12,
+      "end": 689.79,
+      "duration": 2.67,
+      "text": "switch and if it is on"
+    },
+    {
+      "index": 240,
+      "start": 689.8,
+      "end": 691.55,
+      "duration": 1.75,
+      "text": "the traffic can be halted to let the"
+    },
+    {
+      "index": 241,
+      "start": 691.56,
+      "end": 694.509,
+      "duration": 2.949,
+      "text": "pestan cross so some of these"
+    },
+    {
+      "index": 242,
+      "start": 694.519,
+      "end": 696.55,
+      "duration": 2.031,
+      "text": "examples some of these features can be"
+    },
+    {
+      "index": 243,
+      "start": 696.56,
+      "end": 698.71,
+      "duration": 2.15,
+      "text": "built in and you can decide on the"
+    },
+    {
+      "index": 244,
+      "start": 698.72,
+      "end": 701.23,
+      "duration": 2.51,
+      "text": "timing sequence"
+    },
+    {
+      "index": 245,
+      "start": 701.24,
+      "end": 703.269,
+      "duration": 2.029,
+      "text": "Etc"
+    },
+    {
+      "index": 246,
+      "start": 703.279,
+      "end": 705.91,
+      "duration": 2.631,
+      "text": "and this will be listed B simple example"
+    },
+    {
+      "index": 247,
+      "start": 705.92,
+      "end": 708.269,
+      "duration": 2.349,
+      "text": "we will"
+    },
+    {
+      "index": 248,
+      "start": 708.279,
+      "end": 711.91,
+      "duration": 3.631,
+      "text": "take so in this Co class and maybe a"
+    },
+    {
+      "index": 249,
+      "start": 711.92,
+      "end": 714.389,
+      "duration": 2.469,
+      "text": "subsequent one or two classes we'll talk"
+    },
+    {
+      "index": 250,
+      "start": 714.399,
+      "end": 715.71,
+      "duration": 1.311,
+      "text": "about system"
+    },
+    {
+      "index": 251,
+      "start": 715.72,
+      "end": 717.75,
+      "duration": 2.03,
+      "text": "design and the first system we are going"
+    },
+    {
+      "index": 252,
+      "start": 717.76,
+      "end": 722.35,
+      "duration": 4.59,
+      "text": "to design is a traffic controller"
+    },
+    {
+      "index": 253,
+      "start": 724.87,
+      "end": 724.88,
+      "duration": 0.01,
+      "text": "to make it simple as I"
+    },
+    {
+      "index": 254,
+      "start": 724.88,
+      "end": 727.389,
+      "duration": 2.509,
+      "text": "said I'm going to assume an intersection"
+    },
+    {
+      "index": 255,
+      "start": 727.399,
+      "end": 730.75,
+      "duration": 3.351,
+      "text": "of a main street and a side street this"
+    },
+    {
+      "index": 256,
+      "start": 730.76,
+      "end": 732.47,
+      "duration": 1.71,
+      "text": "street I'm calling a main"
+    },
+    {
+      "index": 257,
+      "start": 732.48,
+      "end": 735.87,
+      "duration": 3.39,
+      "text": "street where traffic is allowed in both"
+    },
+    {
+      "index": 258,
+      "start": 735.88,
+      "end": 740.629,
+      "duration": 4.749,
+      "text": "directions and this is a side street"
+    },
+    {
+      "index": 259,
+      "start": 740.639,
+      "end": 744.59,
+      "duration": 3.951,
+      "text": "normally Main Street traffic is main tra"
+    },
+    {
+      "index": 260,
+      "start": 744.6,
+      "end": 745.949,
+      "duration": 1.349,
+      "text": "main streat traffic is allowed that"
+    },
+    {
+      "index": 261,
+      "start": 745.959,
+      "end": 747.189,
+      "duration": 1.23,
+      "text": "means there's a"
+    },
+    {
+      "index": 262,
+      "start": 747.199,
+      "end": 750.269,
+      "duration": 3.07,
+      "text": "green in both directions"
+    },
+    {
+      "index": 263,
+      "start": 750.279,
+      "end": 753.43,
+      "duration": 3.151,
+      "text": "and the side street can turn take uh"
+    },
+    {
+      "index": 264,
+      "start": 753.44,
+      "end": 754.67,
+      "duration": 1.23,
+      "text": "left turn"
+    },
+    {
+      "index": 265,
+      "start": 754.68,
+      "end": 757.389,
+      "duration": 2.709,
+      "text": "here from Main to side or side to main"
+    },
+    {
+      "index": 266,
+      "start": 757.399,
+      "end": 759.91,
+      "duration": 2.511,
+      "text": "left turn that means even when the"
+    },
+    {
+      "index": 267,
+      "start": 759.92,
+      "end": 762.91,
+      "duration": 2.99,
+      "text": "traffic is on here one can turn make a"
+    },
+    {
+      "index": 268,
+      "start": 762.92,
+      "end": 766.269,
+      "duration": 3.349,
+      "text": "turn from this street to the street or"
+    },
+    {
+      "index": 269,
+      "start": 766.279,
+      "end": 767.43,
+      "duration": 1.151,
+      "text": "from this street to this street of"
+    },
+    {
+      "index": 270,
+      "start": 767.44,
+      "end": 769.03,
+      "duration": 1.59,
+      "text": "course safely making sure that you don't"
+    },
+    {
+      "index": 271,
+      "start": 769.04,
+      "end": 771.75,
+      "duration": 2.71,
+      "text": "collide with the oncoming traffic from"
+    },
+    {
+      "index": 272,
+      "start": 771.76,
+      "end": 774.629,
+      "duration": 2.869,
+      "text": "this direction so this I'll"
+    },
+    {
+      "index": 273,
+      "start": 774.639,
+      "end": 776.31,
+      "duration": 1.671,
+      "text": "call"
+    },
+    {
+      "index": 274,
+      "start": 776.32,
+      "end": 778.829,
+      "duration": 2.509,
+      "text": "this one state there are several States"
+    },
+    {
+      "index": 275,
+      "start": 778.839,
+      "end": 784.91,
+      "duration": 6.071,
+      "text": "in which this lights can uh exist the"
+    },
+    {
+      "index": 276,
+      "start": 784.92,
+      "end": 789.55,
+      "duration": 4.63,
+      "text": "first state in which it it is found"
+    },
+    {
+      "index": 277,
+      "start": 789.56,
+      "end": 793.629,
+      "duration": 4.069,
+      "text": "is green on this side green on this"
+    },
+    {
+      "index": 278,
+      "start": 793.639,
+      "end": 795.949,
+      "duration": 2.31,
+      "text": "side this traffic is not allowed the"
+    },
+    {
+      "index": 279,
+      "start": 795.959,
+      "end": 797.55,
+      "duration": 1.591,
+      "text": "turning signal is"
+    },
+    {
+      "index": 280,
+      "start": 797.56,
+      "end": 801.03,
+      "duration": 3.47,
+      "text": "red side to this this also this see a"
+    },
+    {
+      "index": 281,
+      "start": 801.04,
+      "end": 803.43,
+      "duration": 2.39,
+      "text": "turning can happen from Main to side or"
+    },
+    {
+      "index": 282,
+      "start": 803.44,
+      "end": 806.629,
+      "duration": 3.189,
+      "text": "from side to main both signals should be"
+    },
+    {
+      "index": 283,
+      "start": 806.639,
+      "end": 809.99,
+      "duration": 3.351,
+      "text": "red normally so to identify this I'm"
+    },
+    {
+      "index": 284,
+      "start": 810.0,
+      "end": 812.189,
+      "duration": 2.189,
+      "text": "going to call these lights M1 is a light"
+    },
+    {
+      "index": 285,
+      "start": 812.199,
+      "end": 814.31,
+      "duration": 2.111,
+      "text": "for the"
+    },
+    {
+      "index": 286,
+      "start": 814.32,
+      "end": 817.59,
+      "duration": 3.27,
+      "text": "green M1 is a light for traffic for from"
+    },
+    {
+      "index": 287,
+      "start": 817.6,
+      "end": 821.11,
+      "duration": 3.51,
+      "text": "left to right on the main streate M2 is"
+    },
+    {
+      "index": 288,
+      "start": 821.12,
+      "end": 823.03,
+      "duration": 1.91,
+      "text": "the light for traffic from right to left"
+    },
+    {
+      "index": 289,
+      "start": 823.04,
+      "end": 824.79,
+      "duration": 1.75,
+      "text": "of the main streate M1 and M2 are the"
+    },
+    {
+      "index": 290,
+      "start": 824.8,
+      "end": 827.43,
+      "duration": 2.63,
+      "text": "normal main street lights both are"
+    },
+    {
+      "index": 291,
+      "start": 827.44,
+      "end": 829.389,
+      "duration": 1.949,
+      "text": "normally on"
+    },
+    {
+      "index": 292,
+      "start": 829.399,
+      "end": 832.99,
+      "duration": 3.591,
+      "text": "Green Mt is the turn signal for turning"
+    },
+    {
+      "index": 293,
+      "start": 833.0,
+      "end": 834.67,
+      "duration": 1.67,
+      "text": "from the Main Street into the side"
+    },
+    {
+      "index": 294,
+      "start": 834.68,
+      "end": 836.91,
+      "duration": 2.23,
+      "text": "street Mt M"
+    },
+    {
+      "index": 295,
+      "start": 836.92,
+      "end": 839.829,
+      "duration": 2.909,
+      "text": "turn main main turn"
+    },
+    {
+      "index": 296,
+      "start": 839.839,
+      "end": 842.23,
+      "duration": 2.391,
+      "text": "that means turn from Main and S is the"
+    },
+    {
+      "index": 297,
+      "start": 842.24,
+      "end": 843.23,
+      "duration": 0.99,
+      "text": "side"
+    },
+    {
+      "index": 298,
+      "start": 843.24,
+      "end": 846.71,
+      "duration": 3.47,
+      "text": "signal which is used to turn from side"
+    },
+    {
+      "index": 299,
+      "start": 846.72,
+      "end": 851.749,
+      "duration": 5.029,
+      "text": "into main so normally M1 is green M2 is"
+    },
+    {
+      "index": 300,
+      "start": 851.759,
+      "end": 855.87,
+      "duration": 4.111,
+      "text": "green M2 is red s is red that's why I"
+    },
+    {
+      "index": 301,
+      "start": 855.88,
+      "end": 859.47,
+      "duration": 3.59,
+      "text": "wrote here M1 Green Mt red Mt is the"
+    },
+    {
+      "index": 302,
+      "start": 859.48,
+      "end": 862.949,
+      "duration": 3.469,
+      "text": "turn signal M2 main two second signal of"
+    },
+    {
+      "index": 303,
+      "start": 862.959,
+      "end": 866.55,
+      "duration": 3.591,
+      "text": "the main green Sr side is red this is"
+    },
+    {
+      "index": 304,
+      "start": 866.56,
+      "end": 872.03,
+      "duration": 5.47,
+      "text": "the first state just usually available"
+    },
+    {
+      "index": 305,
+      "start": 874.47,
+      "end": 874.48,
+      "duration": 0.01,
+      "text": "State as I said at this point I can"
+    },
+    {
+      "index": 306,
+      "start": 874.48,
+      "end": 876.87,
+      "duration": 2.39,
+      "text": "decide to wait for a traffic condition"
+    },
+    {
+      "index": 307,
+      "start": 876.88,
+      "end": 880.35,
+      "duration": 3.47,
+      "text": "to be detected or I can go for a"
+    },
+    {
+      "index": 308,
+      "start": 880.36,
+      "end": 883.23,
+      "duration": 2.87,
+      "text": "timing so let the traffic be on for a"
+    },
+    {
+      "index": 309,
+      "start": 883.24,
+      "end": 885.949,
+      "duration": 2.709,
+      "text": "while to make this problem simpler I'm"
+    },
+    {
+      "index": 310,
+      "start": 885.959,
+      "end": 888.749,
+      "duration": 2.79,
+      "text": "going to make it as a Time"
+    },
+    {
+      "index": 311,
+      "start": 888.759,
+      "end": 892.03,
+      "duration": 3.271,
+      "text": "dependent change in lights rather than a"
+    },
+    {
+      "index": 312,
+      "start": 892.04,
+      "end": 895.069,
+      "duration": 3.029,
+      "text": "sensor dependent that means after a"
+    },
+    {
+      "index": 313,
+      "start": 895.079,
+      "end": 898.31,
+      "duration": 3.231,
+      "text": "while the time for which the main is"
+    },
+    {
+      "index": 314,
+      "start": 898.32,
+      "end": 900.749,
+      "duration": 2.429,
+      "text": "green is called called TMG I'm calling"
+    },
+    {
+      "index": 315,
+      "start": 900.759,
+      "end": 904.749,
+      "duration": 3.99,
+      "text": "TMG after the time TMG has elapsed that"
+    },
+    {
+      "index": 316,
+      "start": 904.759,
+      "end": 909.15,
+      "duration": 4.391,
+      "text": "means time t for which the main is green"
+    },
+    {
+      "index": 317,
+      "start": 909.16,
+      "end": 910.87,
+      "duration": 1.71,
+      "text": "after that interval of"
+    },
+    {
+      "index": 318,
+      "start": 910.88,
+      "end": 914.23,
+      "duration": 3.35,
+      "text": "time we have to prepare to let the Main"
+    },
+    {
+      "index": 319,
+      "start": 914.24,
+      "end": 916.35,
+      "duration": 2.11,
+      "text": "Street traffic go into the side"
+    },
+    {
+      "index": 320,
+      "start": 916.36,
+      "end": 918.59,
+      "duration": 2.23,
+      "text": "street that means we should prepare to"
+    },
+    {
+      "index": 321,
+      "start": 918.6,
+      "end": 922.67,
+      "duration": 4.07,
+      "text": "take mt to Green but I can't abruptly do"
+    },
+    {
+      "index": 322,
+      "start": 922.68,
+      "end": 925.189,
+      "duration": 2.509,
+      "text": "that because in order to do that I need"
+    },
+    {
+      "index": 323,
+      "start": 925.199,
+      "end": 930.309,
+      "duration": 5.11,
+      "text": "to make M2 rad you can't make M to Red"
+    },
+    {
+      "index": 324,
+      "start": 930.319,
+      "end": 932.79,
+      "duration": 2.471,
+      "text": "from Green suddenly because that will"
+    },
+    {
+      "index": 325,
+      "start": 932.8,
+      "end": 934.23,
+      "duration": 1.43,
+      "text": "create problems for people who are"
+    },
+    {
+      "index": 326,
+      "start": 934.24,
+      "end": 938.189,
+      "duration": 3.949,
+      "text": "traveling the fast rate highp speeded"
+    },
+    {
+      "index": 327,
+      "start": 938.199,
+      "end": 940.389,
+      "duration": 2.19,
+      "text": "Vehicles so you go through an"
+    },
+    {
+      "index": 328,
+      "start": 940.399,
+      "end": 942.91,
+      "duration": 2.511,
+      "text": "intermediate light called Amber or red"
+    },
+    {
+      "index": 329,
+      "start": 942.92,
+      "end": 944.43,
+      "duration": 1.51,
+      "text": "or yellow some people call it yellow"
+    },
+    {
+      "index": 330,
+      "start": 944.44,
+      "end": 946.55,
+      "duration": 2.11,
+      "text": "some people call it Amber so this is the"
+    },
+    {
+      "index": 331,
+      "start": 946.56,
+      "end": 948.269,
+      "duration": 1.709,
+      "text": "disposition of the lights we have a"
+    },
+    {
+      "index": 332,
+      "start": 948.279,
+      "end": 950.069,
+      "duration": 1.79,
+      "text": "green light yellow light and a red light"
+    },
+    {
+      "index": 333,
+      "start": 950.079,
+      "end": 952.03,
+      "duration": 1.951,
+      "text": "in each of these each of these lights"
+    },
+    {
+      "index": 334,
+      "start": 952.04,
+      "end": 955.67,
+      "duration": 3.63,
+      "text": "when I say M1 M2 MTS each of this are"
+    },
+    {
+      "index": 335,
+      "start": 955.68,
+      "end": 957.87,
+      "duration": 2.19,
+      "text": "fitting with three individ independent"
+    },
+    {
+      "index": 336,
+      "start": 957.88,
+      "end": 961.43,
+      "duration": 3.55,
+      "text": "lights green green yellow"
+    },
+    {
+      "index": 337,
+      "start": 961.44,
+      "end": 964.829,
+      "duration": 3.389,
+      "text": "red so before you make this"
+    },
+    {
+      "index": 338,
+      "start": 964.839,
+      "end": 968.55,
+      "duration": 3.711,
+      "text": "turn I need to make M2 green I'm I'm"
+    },
+    {
+      "index": 339,
+      "start": 968.56,
+      "end": 969.87,
+      "duration": 1.31,
+      "text": "sorry M2"
+    },
+    {
+      "index": 340,
+      "start": 969.88,
+      "end": 974.11,
+      "duration": 4.23,
+      "text": "yellow so M1 continue to be Green Mt"
+    },
+    {
+      "index": 341,
+      "start": 974.12,
+      "end": 975.829,
+      "duration": 1.709,
+      "text": "will be continuing to be red Mt will"
+    },
+    {
+      "index": 342,
+      "start": 975.839,
+      "end": 978.55,
+      "duration": 2.711,
+      "text": "continue to be red side will be continue"
+    },
+    {
+      "index": 343,
+      "start": 978.56,
+      "end": 982.23,
+      "duration": 3.67,
+      "text": "to be red but M2 will change from green"
+    },
+    {
+      "index": 344,
+      "start": 982.24,
+      "end": 985.509,
+      "duration": 3.269,
+      "text": "to Yellow that is my second state my"
+    },
+    {
+      "index": 345,
+      "start": 985.519,
+      "end": 990.389,
+      "duration": 4.87,
+      "text": "second state will have M1 green Mt red"
+    },
+    {
+      "index": 346,
+      "start": 990.399,
+      "end": 993.87,
+      "duration": 3.471,
+      "text": "M2 yellow side red that means I'm"
+    },
+    {
+      "index": 347,
+      "start": 993.88,
+      "end": 995.99,
+      "duration": 2.11,
+      "text": "preparing for the Turning from Main"
+    },
+    {
+      "index": 348,
+      "start": 996.0,
+      "end": 998.79,
+      "duration": 2.79,
+      "text": "Street into side street by switching on"
+    },
+    {
+      "index": 349,
+      "start": 998.8,
+      "end": 1001.43,
+      "duration": 2.63,
+      "text": "the turn signal as green but not"
+    },
+    {
+      "index": 350,
+      "start": 1001.44,
+      "end": 1004.03,
+      "duration": 2.59,
+      "text": "immediately but after a while again the"
+    },
+    {
+      "index": 351,
+      "start": 1004.04,
+      "end": 1007.189,
+      "duration": 3.149,
+      "text": "yellow light how long should I keep it"
+    },
+    {
+      "index": 352,
+      "start": 1007.199,
+      "end": 1008.55,
+      "duration": 1.351,
+      "text": "that depends on the traffic flow"
+    },
+    {
+      "index": 353,
+      "start": 1008.56,
+      "end": 1009.949,
+      "duration": 1.389,
+      "text": "conditions and the speed of the vehicles"
+    },
+    {
+      "index": 354,
+      "start": 1009.959,
+      "end": 1012.55,
+      "duration": 2.591,
+      "text": "Etc normally the Main Street yellow has"
+    },
+    {
+      "index": 355,
+      "start": 1012.56,
+      "end": 1014.15,
+      "duration": 1.59,
+      "text": "be longer than the side street because"
+    },
+    {
+      "index": 356,
+      "start": 1014.16,
+      "end": 1017.03,
+      "duration": 2.87,
+      "text": "Main Street traffic is faster compared"
+    },
+    {
+      "index": 357,
+      "start": 1017.04,
+      "end": 1019.15,
+      "duration": 2.11,
+      "text": "to side street traffic"
+    },
+    {
+      "index": 358,
+      "start": 1019.16,
+      "end": 1020.749,
+      "duration": 1.589,
+      "text": "a vehicle which is coming at a faster"
+    },
+    {
+      "index": 359,
+      "start": 1020.759,
+      "end": 1022.99,
+      "duration": 2.231,
+      "text": "rate needs more time to stop so yellow"
+    },
+    {
+      "index": 360,
+      "start": 1023.0,
+      "end": 1024.35,
+      "duration": 1.35,
+      "text": "for the main street should be longer"
+    },
+    {
+      "index": 361,
+      "start": 1024.36,
+      "end": 1026.71,
+      "duration": 2.35,
+      "text": "than yellow for the side streate but"
+    },
+    {
+      "index": 362,
+      "start": 1026.72,
+      "end": 1028.429,
+      "duration": 1.709,
+      "text": "with not we not go into all those lities"
+    },
+    {
+      "index": 363,
+      "start": 1028.439,
+      "end": 1030.39,
+      "duration": 1.951,
+      "text": "we can always incorporate all these"
+    },
+    {
+      "index": 364,
+      "start": 1030.4,
+      "end": 1033.63,
+      "duration": 3.23,
+      "text": "features changes later on so to make the"
+    },
+    {
+      "index": 365,
+      "start": 1033.64,
+      "end": 1035.47,
+      "duration": 1.83,
+      "text": "problem I say Sir to keep this"
+    },
+    {
+      "index": 366,
+      "start": 1035.48,
+      "end": 1037.63,
+      "duration": 2.15,
+      "text": "specification simple I'm going to call"
+    },
+    {
+      "index": 367,
+      "start": 1037.64,
+      "end": 1041.59,
+      "duration": 3.95,
+      "text": "it Ty Ty is a yellow the time for which"
+    },
+    {
+      "index": 368,
+      "start": 1041.6,
+      "end": 1042.909,
+      "duration": 1.309,
+      "text": "any light is going to be yellow whether"
+    },
+    {
+      "index": 369,
+      "start": 1042.919,
+      "end": 1046.23,
+      "duration": 3.311,
+      "text": "it's a main Light Side light turn light"
+    },
+    {
+      "index": 370,
+      "start": 1046.24,
+      "end": 1047.51,
+      "duration": 1.27,
+      "text": "whichever is the light is going to be"
+    },
+    {
+      "index": 371,
+      "start": 1047.52,
+      "end": 1049.71,
+      "duration": 2.19,
+      "text": "yellow the time for it will be yellow"
+    },
+    {
+      "index": 372,
+      "start": 1049.72,
+      "end": 1053.39,
+      "duration": 3.67,
+      "text": "before it becomes red we'll call it Ty"
+    },
+    {
+      "index": 373,
+      "start": 1053.4,
+      "end": 1057.95,
+      "duration": 4.55,
+      "text": "so after Ty from here state two S 2"
+    },
+    {
+      "index": 374,
+      "start": 1057.96,
+      "end": 1060.83,
+      "duration": 2.87,
+      "text": "after the elapse of Ty we go to the"
+    },
+    {
+      "index": 375,
+      "start": 1060.84,
+      "end": 1061.71,
+      "duration": 0.87,
+      "text": "third"
+    },
+    {
+      "index": 376,
+      "start": 1061.72,
+      "end": 1064.669,
+      "duration": 2.949,
+      "text": "state the third state I have a main"
+    },
+    {
+      "index": 377,
+      "start": 1064.679,
+      "end": 1067.669,
+      "duration": 2.99,
+      "text": "continues to flow there's no"
+    },
+    {
+      "index": 378,
+      "start": 1067.679,
+      "end": 1072.59,
+      "duration": 4.911,
+      "text": "problem but M2 is now red because from"
+    },
+    {
+      "index": 379,
+      "start": 1072.6,
+      "end": 1075.029,
+      "duration": 2.429,
+      "text": "left to right traffic is no problem from"
+    },
+    {
+      "index": 380,
+      "start": 1075.039,
+      "end": 1076.83,
+      "duration": 1.791,
+      "text": "right to left I cannot allow traffic"
+    },
+    {
+      "index": 381,
+      "start": 1076.84,
+      "end": 1079.149,
+      "duration": 2.309,
+      "text": "because I have to allow the traffic from"
+    },
+    {
+      "index": 382,
+      "start": 1079.159,
+      "end": 1081.029,
+      "duration": 1.87,
+      "text": "Main to side that means I need to allow"
+    },
+    {
+      "index": 383,
+      "start": 1081.039,
+      "end": 1082.11,
+      "duration": 1.071,
+      "text": "for"
+    },
+    {
+      "index": 384,
+      "start": 1082.12,
+      "end": 1085.19,
+      "duration": 3.07,
+      "text": "this turn if you want to allow for this"
+    },
+    {
+      "index": 385,
+      "start": 1085.2,
+      "end": 1088.07,
+      "duration": 2.87,
+      "text": "turn I need to block this traffic that"
+    },
+    {
+      "index": 386,
+      "start": 1088.08,
+      "end": 1090.23,
+      "duration": 2.15,
+      "text": "means I become M2 should become green"
+    },
+    {
+      "index": 387,
+      "start": 1090.24,
+      "end": 1092.789,
+      "duration": 2.549,
+      "text": "red M2 should become red M1 will"
+    },
+    {
+      "index": 388,
+      "start": 1092.799,
+      "end": 1094.35,
+      "duration": 1.551,
+      "text": "continue to be"
+    },
+    {
+      "index": 389,
+      "start": 1094.36,
+      "end": 1098.43,
+      "duration": 4.07,
+      "text": "Green Mt will now become green from red"
+    },
+    {
+      "index": 390,
+      "start": 1098.44,
+      "end": 1100.75,
+      "duration": 2.31,
+      "text": "red it will become green so that the"
+    },
+    {
+      "index": 391,
+      "start": 1100.76,
+      "end": 1103.43,
+      "duration": 2.67,
+      "text": "traffic will be allowed side of course"
+    },
+    {
+      "index": 392,
+      "start": 1103.44,
+      "end": 1106.95,
+      "duration": 3.51,
+      "text": "remains this light again we canot allow"
+    },
+    {
+      "index": 393,
+      "start": 1106.96,
+      "end": 1108.549,
+      "duration": 1.589,
+      "text": "the traffic from side to the main in"
+    },
+    {
+      "index": 394,
+      "start": 1108.559,
+      "end": 1110.669,
+      "duration": 2.11,
+      "text": "this Direction you cannot allow it so it"
+    },
+    {
+      "index": 395,
+      "start": 1110.679,
+      "end": 1114.71,
+      "duration": 4.031,
+      "text": "continues to be red so site red M2 red"
+    },
+    {
+      "index": 396,
+      "start": 1114.72,
+      "end": 1119.669,
+      "duration": 4.949,
+      "text": "Mt green M1"
+    },
+    {
+      "index": 397,
+      "start": 1122.43,
+      "end": 1122.44,
+      "duration": 0.01,
+      "text": "green this period this is the third"
+    },
+    {
+      "index": 398,
+      "start": 1122.44,
+      "end": 1124.39,
+      "duration": 1.95,
+      "text": "state in which the the circuit will be"
+    },
+    {
+      "index": 399,
+      "start": 1124.4,
+      "end": 1126.87,
+      "duration": 2.47,
+      "text": "found this traffic light controller will"
+    },
+    {
+      "index": 400,
+      "start": 1126.88,
+      "end": 1129.549,
+      "duration": 2.669,
+      "text": "be found this is third"
+    },
+    {
+      "index": 401,
+      "start": 1129.559,
+      "end": 1132.789,
+      "duration": 3.23,
+      "text": "state and how long do you want this turn"
+    },
+    {
+      "index": 402,
+      "start": 1132.799,
+      "end": 1135.87,
+      "duration": 3.071,
+      "text": "signal to be on that is called TTG I'm"
+    },
+    {
+      "index": 403,
+      "start": 1135.88,
+      "end": 1139.47,
+      "duration": 3.59,
+      "text": "calling it TG stands for turning green"
+    },
+    {
+      "index": 404,
+      "start": 1139.48,
+      "end": 1142.11,
+      "duration": 2.63,
+      "text": "turning signal green t is the time time"
+    },
+    {
+      "index": 405,
+      "start": 1142.12,
+      "end": 1143.39,
+      "duration": 1.27,
+      "text": "for which the turning signal green is"
+    },
+    {
+      "index": 406,
+      "start": 1143.4,
+      "end": 1146.75,
+      "duration": 3.35,
+      "text": "called TTG so for the period"
+    },
+    {
+      "index": 407,
+      "start": 1146.76,
+      "end": 1149.51,
+      "duration": 2.75,
+      "text": "TTG this conditions will"
+    },
+    {
+      "index": 408,
+      "start": 1149.52,
+      "end": 1152.909,
+      "duration": 3.389,
+      "text": "prevail at the elapse of TTG at the end"
+    },
+    {
+      "index": 409,
+      "start": 1152.919,
+      "end": 1154.669,
+      "duration": 1.75,
+      "text": "of"
+    },
+    {
+      "index": 410,
+      "start": 1154.679,
+      "end": 1157.35,
+      "duration": 2.671,
+      "text": "TTG what will happen"
+    },
+    {
+      "index": 411,
+      "start": 1157.36,
+      "end": 1161.83,
+      "duration": 4.47,
+      "text": "is I should stop this traffic from side"
+    },
+    {
+      "index": 412,
+      "start": 1161.84,
+      "end": 1165.75,
+      "duration": 3.91,
+      "text": "to red side to I mean main to side and"
+    },
+    {
+      "index": 413,
+      "start": 1165.76,
+      "end": 1166.99,
+      "duration": 1.23,
+      "text": "let"
+    },
+    {
+      "index": 414,
+      "start": 1167.0,
+      "end": 1169.59,
+      "duration": 2.59,
+      "text": "the the other side Street this side"
+    },
+    {
+      "index": 415,
+      "start": 1169.6,
+      "end": 1171.549,
+      "duration": 1.949,
+      "text": "street traffic back into the main so"
+    },
+    {
+      "index": 416,
+      "start": 1171.559,
+      "end": 1174.19,
+      "duration": 2.631,
+      "text": "originally I allowed from Main to side"
+    },
+    {
+      "index": 417,
+      "start": 1174.2,
+      "end": 1176.789,
+      "duration": 2.589,
+      "text": "now I should allow from side to main so"
+    },
+    {
+      "index": 418,
+      "start": 1176.799,
+      "end": 1180.669,
+      "duration": 3.87,
+      "text": "TTG has to be turned off or made green"
+    },
+    {
+      "index": 419,
+      "start": 1180.679,
+      "end": 1183.549,
+      "duration": 2.87,
+      "text": "and S should be"
+    },
+    {
+      "index": 420,
+      "start": 1185.63,
+      "end": 1185.64,
+      "duration": 0.01,
+      "text": "made this should be made red and this"
+    },
+    {
+      "index": 421,
+      "start": 1185.64,
+      "end": 1188.43,
+      "duration": 2.79,
+      "text": "should be made green but I can't make it"
+    },
+    {
+      "index": 422,
+      "start": 1188.44,
+      "end": 1190.39,
+      "duration": 1.95,
+      "text": "red directly from Green we have to go"
+    },
+    {
+      "index": 423,
+      "start": 1190.4,
+      "end": 1192.99,
+      "duration": 2.59,
+      "text": "through yellow so this state state"
+    },
+    {
+      "index": 424,
+      "start": 1193.0,
+      "end": 1196.83,
+      "duration": 3.83,
+      "text": "fourth is"
+    },
+    {
+      "index": 425,
+      "start": 1199.63,
+      "end": 1199.64,
+      "duration": 0.01,
+      "text": "main main turn turning signal in the"
+    },
+    {
+      "index": 426,
+      "start": 1199.64,
+      "end": 1206.029,
+      "duration": 6.389,
+      "text": "main road will be"
+    },
+    {
+      "index": 427,
+      "start": 1210.23,
+      "end": 1210.24,
+      "duration": 0.01,
+      "text": "yellow M1 is yellow why I making M1"
+    },
+    {
+      "index": 428,
+      "start": 1210.24,
+      "end": 1211.39,
+      "duration": 1.15,
+      "text": "yellow"
+    },
+    {
+      "index": 429,
+      "start": 1211.4,
+      "end": 1214.51,
+      "duration": 3.11,
+      "text": "because unlike in the case where the"
+    },
+    {
+      "index": 430,
+      "start": 1214.52,
+      "end": 1217.07,
+      "duration": 2.55,
+      "text": "traffic from Main to side is organized"
+    },
+    {
+      "index": 431,
+      "start": 1217.08,
+      "end": 1219.47,
+      "duration": 2.39,
+      "text": "because I'm assuming that the main"
+    },
+    {
+      "index": 432,
+      "start": 1219.48,
+      "end": 1222.51,
+      "duration": 3.03,
+      "text": "street is Flowing like"
+    },
+    {
+      "index": 433,
+      "start": 1222.52,
+      "end": 1225.789,
+      "duration": 3.269,
+      "text": "this it's a side lane so it's a two two"
+    },
+    {
+      "index": 434,
+      "start": 1225.799,
+      "end": 1227.27,
+      "duration": 1.471,
+      "text": "lanes of"
+    },
+    {
+      "index": 435,
+      "start": 1227.28,
+      "end": 1229.789,
+      "duration": 2.509,
+      "text": "traffic and those who want to turnone"
+    },
+    {
+      "index": 436,
+      "start": 1229.799,
+      "end": 1238.59,
+      "duration": 8.791,
+      "text": "are already standing here in a separate"
+    },
+    {
+      "index": 437,
+      "start": 1241.789,
+      "end": 1241.799,
+      "duration": 0.01,
+      "text": "Lane I need not stop"
+    },
+    {
+      "index": 438,
+      "start": 1241.799,
+      "end": 1245.39,
+      "duration": 3.591,
+      "text": "this for letting this on on the other"
+    },
+    {
+      "index": 439,
+      "start": 1245.4,
+      "end": 1248.029,
+      "duration": 2.629,
+      "text": "hand when I'm turning from here to"
+    },
+    {
+      "index": 440,
+      "start": 1248.039,
+      "end": 1251.71,
+      "duration": 3.671,
+      "text": "here I cannot let this happen"
+    },
+    {
+      "index": 441,
+      "start": 1251.72,
+      "end": 1256.51,
+      "duration": 4.79,
+      "text": "here because we don't know the how well"
+    },
+    {
+      "index": 442,
+      "start": 1256.52,
+      "end": 1259.75,
+      "duration": 3.23,
+      "text": "this lanes are in this state supposing"
+    },
+    {
+      "index": 443,
+      "start": 1259.76,
+      "end": 1262.43,
+      "duration": 2.67,
+      "text": "this lanes are not well defined there's"
+    },
+    {
+      "index": 444,
+      "start": 1262.44,
+      "end": 1264.51,
+      "duration": 2.07,
+      "text": "a possibility that this traffic coming"
+    },
+    {
+      "index": 445,
+      "start": 1264.52,
+      "end": 1266.47,
+      "duration": 1.95,
+      "text": "from the side road into the main road"
+    },
+    {
+      "index": 446,
+      "start": 1266.48,
+      "end": 1268.47,
+      "duration": 1.99,
+      "text": "May collide with the traffic which is"
+    },
+    {
+      "index": 447,
+      "start": 1268.48,
+      "end": 1270.83,
+      "duration": 2.35,
+      "text": "going directly from Main Road from left"
+    },
+    {
+      "index": 448,
+      "start": 1270.84,
+      "end": 1273.83,
+      "duration": 2.99,
+      "text": "to right in order to avoid this while I"
+    },
+    {
+      "index": 449,
+      "start": 1273.84,
+      "end": 1277.75,
+      "duration": 3.91,
+      "text": "am allowing this traffic to continue"
+    },
+    {
+      "index": 450,
+      "start": 1277.76,
+      "end": 1279.31,
+      "duration": 1.55,
+      "text": "when this is"
+    },
+    {
+      "index": 451,
+      "start": 1279.32,
+      "end": 1281.87,
+      "duration": 2.55,
+      "text": "allowed I am not allowing this traffic"
+    },
+    {
+      "index": 452,
+      "start": 1281.88,
+      "end": 1285.549,
+      "duration": 3.669,
+      "text": "to continue when this is allowed so from"
+    },
+    {
+      "index": 453,
+      "start": 1285.559,
+      "end": 1288.59,
+      "duration": 3.031,
+      "text": "Main to side I'm allowing the main seat"
+    },
+    {
+      "index": 454,
+      "start": 1288.6,
+      "end": 1290.909,
+      "duration": 2.309,
+      "text": "traffic from left to"
+    },
+    {
+      "index": 455,
+      "start": 1290.919,
+      "end": 1294.47,
+      "duration": 3.551,
+      "text": "right whereas from sight to main I'm not"
+    },
+    {
+      "index": 456,
+      "start": 1294.48,
+      "end": 1295.95,
+      "duration": 1.47,
+      "text": "allowing the Main Street traffic from"
+    },
+    {
+      "index": 457,
+      "start": 1295.96,
+      "end": 1297.549,
+      "duration": 1.589,
+      "text": "left to right that means I don't want"
+    },
+    {
+      "index": 458,
+      "start": 1297.559,
+      "end": 1299.11,
+      "duration": 1.551,
+      "text": "this"
+    },
+    {
+      "index": 459,
+      "start": 1299.12,
+      "end": 1302.269,
+      "duration": 3.149,
+      "text": "happen which means I should not only"
+    },
+    {
+      "index": 460,
+      "start": 1302.279,
+      "end": 1304.07,
+      "duration": 1.791,
+      "text": "make this"
+    },
+    {
+      "index": 461,
+      "start": 1304.08,
+      "end": 1307.35,
+      "duration": 3.27,
+      "text": "Mt red I should also make M1 red the"
+    },
+    {
+      "index": 462,
+      "start": 1307.36,
+      "end": 1309.59,
+      "duration": 2.23,
+      "text": "main main red should be main should be"
+    },
+    {
+      "index": 463,
+      "start": 1309.6,
+      "end": 1311.909,
+      "duration": 2.309,
+      "text": "red T should be red but cannot be both"
+    },
+    {
+      "index": 464,
+      "start": 1311.919,
+      "end": 1313.35,
+      "duration": 1.431,
+      "text": "made red immediately they have to go"
+    },
+    {
+      "index": 465,
+      "start": 1313.36,
+      "end": 1316.11,
+      "duration": 2.75,
+      "text": "through yellow so this state makes M1"
+    },
+    {
+      "index": 466,
+      "start": 1316.12,
+      "end": 1319.59,
+      "duration": 3.47,
+      "text": "yellow M2 yellow this continues to be R"
+    },
+    {
+      "index": 467,
+      "start": 1319.6,
+      "end": 1321.87,
+      "duration": 2.27,
+      "text": "of course this continues to be R this is"
+    },
+    {
+      "index": 468,
+      "start": 1321.88,
+      "end": 1323.31,
+      "duration": 1.43,
+      "text": "the condition which there's a warning to"
+    },
+    {
+      "index": 469,
+      "start": 1323.32,
+      "end": 1326.149,
+      "duration": 2.829,
+      "text": "the main road users whether they"
+    },
+    {
+      "index": 470,
+      "start": 1326.159,
+      "end": 1328.47,
+      "duration": 2.311,
+      "text": "directly going or"
+    },
+    {
+      "index": 471,
+      "start": 1328.48,
+      "end": 1330.99,
+      "duration": 2.51,
+      "text": "turning now the light is going to be"
+    },
+    {
+      "index": 472,
+      "start": 1331.0,
+      "end": 1334.75,
+      "duration": 3.75,
+      "text": "switched off to Red so be careful either"
+    },
+    {
+      "index": 473,
+      "start": 1334.76,
+      "end": 1337.43,
+      "duration": 2.67,
+      "text": "stop"
+    },
+    {
+      "index": 474,
+      "start": 1337.44,
+      "end": 1341.11,
+      "duration": 3.67,
+      "text": "stop prepare to stop so that condition"
+    },
+    {
+      "index": 475,
+      "start": 1341.12,
+      "end": 1343.99,
+      "duration": 2.87,
+      "text": "is called State condition four or state"
+    },
+    {
+      "index": 476,
+      "start": 1344.0,
+      "end": 1345.99,
+      "duration": 1.99,
+      "text": "four which will again last for the"
+    },
+    {
+      "index": 477,
+      "start": 1346.0,
+      "end": 1347.99,
+      "duration": 1.99,
+      "text": "period of T I'm not again distinguishing"
+    },
+    {
+      "index": 478,
+      "start": 1348.0,
+      "end": 1349.35,
+      "duration": 1.35,
+      "text": "between the yellow"
+    },
+    {
+      "index": 479,
+      "start": 1349.36,
+      "end": 1351.35,
+      "duration": 1.99,
+      "text": "timing on the main sheet or the side"
+    },
+    {
+      "index": 480,
+      "start": 1351.36,
+      "end": 1353.99,
+      "duration": 2.63,
+      "text": "sheet of return signal so T is a time"
+    },
+    {
+      "index": 481,
+      "start": 1354.0,
+      "end": 1356.149,
+      "duration": 2.149,
+      "text": "period I'm maning for this condition to"
+    },
+    {
+      "index": 482,
+      "start": 1356.159,
+      "end": 1361.19,
+      "duration": 5.031,
+      "text": "lapse elapse to for this uh Ty is the"
+    },
+    {
+      "index": 483,
+      "start": 1361.2,
+      "end": 1362.75,
+      "duration": 1.55,
+      "text": "time for which I'm allowing this"
+    },
+    {
+      "index": 484,
+      "start": 1362.76,
+      "end": 1364.99,
+      "duration": 2.23,
+      "text": "condition to last so after the end of"
+    },
+    {
+      "index": 485,
+      "start": 1365.0,
+      "end": 1366.029,
+      "duration": 1.029,
+      "text": "this"
+    },
+    {
+      "index": 486,
+      "start": 1366.039,
+      "end": 1369.31,
+      "duration": 3.271,
+      "text": "Ty main one will become red so that Main"
+    },
+    {
+      "index": 487,
+      "start": 1369.32,
+      "end": 1370.59,
+      "duration": 1.27,
+      "text": "Street traffic from left to right will"
+    },
+    {
+      "index": 488,
+      "start": 1370.6,
+      "end": 1375.39,
+      "duration": 4.79,
+      "text": "be halted M2 Mt will be stopped the"
+    },
+    {
+      "index": 489,
+      "start": 1375.4,
+      "end": 1378.51,
+      "duration": 3.11,
+      "text": "traffic from left to right which also"
+    },
+    {
+      "index": 490,
+      "start": 1378.52,
+      "end": 1380.149,
+      "duration": 1.629,
+      "text": "going into turn that also will be"
+    },
+    {
+      "index": 491,
+      "start": 1380.159,
+      "end": 1385.31,
+      "duration": 5.151,
+      "text": "stopped so M1 is red Mt is red M2 is"
+    },
+    {
+      "index": 492,
+      "start": 1385.32,
+      "end": 1388.11,
+      "duration": 2.79,
+      "text": "already red no problem now side now we"
+    },
+    {
+      "index": 493,
+      "start": 1388.12,
+      "end": 1390.99,
+      "duration": 2.87,
+      "text": "are now made way this is stop this is"
+    },
+    {
+      "index": 494,
+      "start": 1391.0,
+      "end": 1393.95,
+      "duration": 2.95,
+      "text": "STO we are loving traffic from side to"
+    },
+    {
+      "index": 495,
+      "start": 1393.96,
+      "end": 1396.669,
+      "duration": 2.709,
+      "text": "Red so s to Red is allowed that means s"
+    },
+    {
+      "index": 496,
+      "start": 1396.679,
+      "end": 1400.23,
+      "duration": 3.551,
+      "text": "becomes green all the while I'm"
+    },
+    {
+      "index": 497,
+      "start": 1400.24,
+      "end": 1402.789,
+      "duration": 2.549,
+      "text": "allowing this free"
+    },
+    {
+      "index": 498,
+      "start": 1402.799,
+      "end": 1405.83,
+      "duration": 3.031,
+      "text": "traffic from side to from side to main"
+    },
+    {
+      "index": 499,
+      "start": 1405.84,
+      "end": 1408.149,
+      "duration": 2.309,
+      "text": "on the left hand side there's no problem"
+    },
+    {
+      "index": 500,
+      "start": 1408.159,
+      "end": 1410.23,
+      "duration": 2.071,
+      "text": "side left to the"
+    },
+    {
+      "index": 501,
+      "start": 1410.24,
+      "end": 1413.59,
+      "duration": 3.35,
+      "text": "main this is not being hindered by"
+    },
+    {
+      "index": 502,
+      "start": 1413.6,
+      "end": 1417.47,
+      "duration": 3.87,
+      "text": "anybody is always"
+    },
+    {
+      "index": 503,
+      "start": 1419.95,
+      "end": 1419.96,
+      "duration": 0.01,
+      "text": "on so what is called free"
+    },
+    {
+      "index": 504,
+      "start": 1419.96,
+      "end": 1424.51,
+      "duration": 4.55,
+      "text": "left in our traffic poll in our system"
+    },
+    {
+      "index": 505,
+      "start": 1424.52,
+      "end": 1425.63,
+      "duration": 1.11,
+      "text": "in our"
+    },
+    {
+      "index": 506,
+      "start": 1425.64,
+      "end": 1428.07,
+      "duration": 2.43,
+      "text": "roads when say free left means he can"
+    },
+    {
+      "index": 507,
+      "start": 1428.08,
+      "end": 1430.63,
+      "duration": 2.55,
+      "text": "always turn without having to wait for"
+    },
+    {
+      "index": 508,
+      "start": 1430.64,
+      "end": 1431.789,
+      "duration": 1.149,
+      "text": "any signal of course you have to make"
+    },
+    {
+      "index": 509,
+      "start": 1431.799,
+      "end": 1434.59,
+      "duration": 2.791,
+      "text": "sure that there is safe it is safe to"
+    },
+    {
+      "index": 510,
+      "start": 1434.6,
+      "end": 1436.39,
+      "duration": 1.79,
+      "text": "turn make sure that is no traffic is"
+    },
+    {
+      "index": 511,
+      "start": 1436.4,
+      "end": 1438.99,
+      "duration": 2.59,
+      "text": "coming onward that you will not collide"
+    },
+    {
+      "index": 512,
+      "start": 1439.0,
+      "end": 1441.99,
+      "duration": 2.99,
+      "text": "with anybody or any vehicle as long as"
+    },
+    {
+      "index": 513,
+      "start": 1442.0,
+      "end": 1443.51,
+      "duration": 1.51,
+      "text": "it is safe we can turn without having to"
+    },
+    {
+      "index": 514,
+      "start": 1443.52,
+      "end": 1445.909,
+      "duration": 2.389,
+      "text": "wait for a signal such a condition is"
+    },
+    {
+      "index": 515,
+      "start": 1445.919,
+      "end": 1447.43,
+      "duration": 1.511,
+      "text": "somehow we call"
+    },
+    {
+      "index": 516,
+      "start": 1447.44,
+      "end": 1451.71,
+      "duration": 4.27,
+      "text": "free turn or free left in our parland I"
+    },
+    {
+      "index": 517,
+      "start": 1451.72,
+      "end": 1453.75,
+      "duration": 2.03,
+      "text": "find this peculiar"
+    },
+    {
+      "index": 518,
+      "start": 1453.76,
+      "end": 1456.75,
+      "duration": 2.99,
+      "text": "coinage in our traffic elect in our"
+    },
+    {
+      "index": 519,
+      "start": 1456.76,
+      "end": 1458.19,
+      "duration": 1.43,
+      "text": "cities in"
+    },
+    {
+      "index": 520,
+      "start": 1458.2,
+      "end": 1460.789,
+      "duration": 2.589,
+      "text": "India anyway so we have the free left"
+    },
+    {
+      "index": 521,
+      "start": 1460.799,
+      "end": 1464.11,
+      "duration": 3.311,
+      "text": "here free left free left free"
+    },
+    {
+      "index": 522,
+      "start": 1464.12,
+      "end": 1467.75,
+      "duration": 3.63,
+      "text": "left free left free left here this is"
+    },
+    {
+      "index": 523,
+      "start": 1467.76,
+      "end": 1470.669,
+      "duration": 2.909,
+      "text": "free left"
+    },
+    {
+      "index": 524,
+      "start": 1474.029,
+      "end": 1474.039,
+      "duration": 0.01,
+      "text": "but not here once"
+    },
+    {
+      "index": 525,
+      "start": 1474.039,
+      "end": 1476.35,
+      "duration": 2.311,
+      "text": "once this is not a free left anymore"
+    },
+    {
+      "index": 526,
+      "start": 1476.36,
+      "end": 1479.59,
+      "duration": 3.23,
+      "text": "because this red is M2 is controlling"
+    },
+    {
+      "index": 527,
+      "start": 1479.6,
+      "end": 1481.669,
+      "duration": 2.069,
+      "text": "not only direct traffic is also the side"
+    },
+    {
+      "index": 528,
+      "start": 1481.679,
+      "end": 1485.71,
+      "duration": 4.031,
+      "text": "Traffic main to side from left to from"
+    },
+    {
+      "index": 529,
+      "start": 1485.72,
+      "end": 1488.51,
+      "duration": 2.79,
+      "text": "right to left right to left Main and"
+    },
+    {
+      "index": 530,
+      "start": 1488.52,
+      "end": 1490.35,
+      "duration": 1.83,
+      "text": "right to left side both are controlled"
+    },
+    {
+      "index": 531,
+      "start": 1490.36,
+      "end": 1493.59,
+      "duration": 3.23,
+      "text": "by M2 so it is not free left when this"
+    },
+    {
+      "index": 532,
+      "start": 1493.6,
+      "end": 1495.95,
+      "duration": 2.35,
+      "text": "is on this can also go when this is on"
+    },
+    {
+      "index": 533,
+      "start": 1495.96,
+      "end": 1498.51,
+      "duration": 2.55,
+      "text": "this can also go when I'm stopping this"
+    },
+    {
+      "index": 534,
+      "start": 1498.52,
+      "end": 1499.95,
+      "duration": 1.43,
+      "text": "this also cannot happen because I don't"
+    },
+    {
+      "index": 535,
+      "start": 1499.96,
+      "end": 1501.789,
+      "duration": 1.829,
+      "text": "want this to go on collide with this"
+    },
+    {
+      "index": 536,
+      "start": 1501.799,
+      "end": 1503.11,
+      "duration": 1.311,
+      "text": "similarly when I stopping this this"
+    },
+    {
+      "index": 537,
+      "start": 1503.12,
+      "end": 1504.47,
+      "duration": 1.35,
+      "text": "cannot"
+    },
+    {
+      "index": 538,
+      "start": 1504.48,
+      "end": 1507.31,
+      "duration": 2.83,
+      "text": "go now at the end of t as I said now"
+    },
+    {
+      "index": 539,
+      "start": 1507.32,
+      "end": 1510.31,
+      "duration": 2.99,
+      "text": "side is green this is only traffic"
+    },
+    {
+      "index": 540,
+      "start": 1510.32,
+      "end": 1513.269,
+      "duration": 2.949,
+      "text": "allowed apart from the free left here"
+    },
+    {
+      "index": 541,
+      "start": 1513.279,
+      "end": 1515.51,
+      "duration": 2.231,
+      "text": "this road cannot this traffic cannot go"
+    },
+    {
+      "index": 542,
+      "start": 1515.52,
+      "end": 1518.389,
+      "duration": 2.869,
+      "text": "farther cannot turn this traffic cannot"
+    },
+    {
+      "index": 543,
+      "start": 1518.399,
+      "end": 1522.63,
+      "duration": 4.231,
+      "text": "go farther cannot turn this is State"
+    },
+    {
+      "index": 544,
+      "start": 1522.64,
+      "end": 1525.669,
+      "duration": 3.029,
+      "text": "five and this will last for a while"
+    },
+    {
+      "index": 545,
+      "start": 1525.679,
+      "end": 1528.31,
+      "duration": 2.631,
+      "text": "where we want to prepare it depends on"
+    },
+    {
+      "index": 546,
+      "start": 1528.32,
+      "end": 1531.149,
+      "duration": 2.829,
+      "text": "on the time we want the side green to be"
+    },
+    {
+      "index": 547,
+      "start": 1531.159,
+      "end": 1533.71,
+      "duration": 2.551,
+      "text": "active so decide what the period for"
+    },
+    {
+      "index": 548,
+      "start": 1533.72,
+      "end": 1537.31,
+      "duration": 3.59,
+      "text": "which the side green is on so when SG is"
+    },
+    {
+      "index": 549,
+      "start": 1537.32,
+      "end": 1540.63,
+      "duration": 3.31,
+      "text": "on this will be like this at the end of"
+    },
+    {
+      "index": 550,
+      "start": 1540.64,
+      "end": 1543.43,
+      "duration": 2.79,
+      "text": "the period SG we call it"
+    },
+    {
+      "index": 551,
+      "start": 1543.44,
+      "end": 1546.51,
+      "duration": 3.07,
+      "text": "tsg time for which the side is green"
+    },
+    {
+      "index": 552,
+      "start": 1546.52,
+      "end": 1548.95,
+      "duration": 2.43,
+      "text": "tsg we'll go back to this condition"
+    },
+    {
+      "index": 553,
+      "start": 1548.96,
+      "end": 1551.669,
+      "duration": 2.709,
+      "text": "where we'll have to prepare for to make"
+    },
+    {
+      "index": 554,
+      "start": 1551.679,
+      "end": 1555.63,
+      "duration": 3.951,
+      "text": "this red that means the side to main"
+    },
+    {
+      "index": 555,
+      "start": 1555.64,
+      "end": 1558.029,
+      "duration": 2.389,
+      "text": "will have to be halted and we have to"
+    },
+    {
+      "index": 556,
+      "start": 1558.039,
+      "end": 1560.59,
+      "duration": 2.551,
+      "text": "let this traffic flow freely in both the"
+    },
+    {
+      "index": 557,
+      "start": 1560.6,
+      "end": 1562.59,
+      "duration": 1.99,
+      "text": "directions because that is the condition"
+    },
+    {
+      "index": 558,
+      "start": 1562.6,
+      "end": 1565.35,
+      "duration": 2.75,
+      "text": "which we want most of the time so for"
+    },
+    {
+      "index": 559,
+      "start": 1565.36,
+      "end": 1569.389,
+      "duration": 4.029,
+      "text": "that what I need to do is to make side"
+    },
+    {
+      "index": 560,
+      "start": 1569.399,
+      "end": 1571.789,
+      "duration": 2.39,
+      "text": "red but side cannot be made red abruptly"
+    },
+    {
+      "index": 561,
+      "start": 1571.799,
+      "end": 1574.35,
+      "duration": 2.551,
+      "text": "it has to be made red first it has to be"
+    },
+    {
+      "index": 562,
+      "start": 1574.36,
+      "end": 1577.669,
+      "duration": 3.309,
+      "text": "made yellow first and then red so this"
+    },
+    {
+      "index": 563,
+      "start": 1577.679,
+      "end": 1579.87,
+      "duration": 2.191,
+      "text": "condition we have this continues to be"
+    },
+    {
+      "index": 564,
+      "start": 1579.88,
+      "end": 1582.029,
+      "duration": 2.149,
+      "text": "red this continues to be red this"
+    },
+    {
+      "index": 565,
+      "start": 1582.039,
+      "end": 1585.47,
+      "duration": 3.431,
+      "text": "continues to be red but side becomes"
+    },
+    {
+      "index": 566,
+      "start": 1585.48,
+      "end": 1587.95,
+      "duration": 2.47,
+      "text": "yellow once this happens we know that"
+    },
+    {
+      "index": 567,
+      "start": 1587.96,
+      "end": 1590.99,
+      "duration": 3.03,
+      "text": "this side road traffic has to stop once"
+    },
+    {
+      "index": 568,
+      "start": 1591.0,
+      "end": 1591.83,
+      "duration": 0.83,
+      "text": "it's"
+    },
+    {
+      "index": 569,
+      "start": 1591.84,
+      "end": 1594.75,
+      "duration": 2.91,
+      "text": "yellow the traffic here will have to"
+    },
+    {
+      "index": 570,
+      "start": 1594.76,
+      "end": 1597.269,
+      "duration": 2.509,
+      "text": "prepare to stop so at the end of the"
+    },
+    {
+      "index": 571,
+      "start": 1597.279,
+      "end": 1601.99,
+      "duration": 4.711,
+      "text": "period of Ty after Ty we go to one one"
+    },
+    {
+      "index": 572,
+      "start": 1602.0,
+      "end": 1604.87,
+      "duration": 2.87,
+      "text": "is what one is when left to right"
+    },
+    {
+      "index": 573,
+      "start": 1604.88,
+      "end": 1606.75,
+      "duration": 1.87,
+      "text": "traffic is allowed to the main street"
+    },
+    {
+      "index": 574,
+      "start": 1606.76,
+      "end": 1607.99,
+      "duration": 1.23,
+      "text": "right to left traffic is allowed in the"
+    },
+    {
+      "index": 575,
+      "start": 1608.0,
+      "end": 1610.669,
+      "duration": 2.669,
+      "text": "Main Street no turning is allowed from"
+    },
+    {
+      "index": 576,
+      "start": 1610.679,
+      "end": 1612.83,
+      "duration": 2.151,
+      "text": "Main to side no traffic is allowed from"
+    },
+    {
+      "index": 577,
+      "start": 1612.84,
+      "end": 1614.71,
+      "duration": 1.87,
+      "text": "no tur is allowed from side to"
+    },
+    {
+      "index": 578,
+      "start": 1614.72,
+      "end": 1618.83,
+      "duration": 4.11,
+      "text": "main but this free left"
+    },
+    {
+      "index": 579,
+      "start": 1618.84,
+      "end": 1621.549,
+      "duration": 2.709,
+      "text": "and this left this are allowed that is"
+    },
+    {
+      "index": 580,
+      "start": 1621.559,
+      "end": 1624.11,
+      "duration": 2.551,
+      "text": "correspond exactly this state this S1"
+    },
+    {
+      "index": 581,
+      "start": 1624.12,
+      "end": 1625.43,
+      "duration": 1.31,
+      "text": "state is nothing"
+    },
+    {
+      "index": 582,
+      "start": 1625.44,
+      "end": 1630.029,
+      "duration": 4.589,
+      "text": "but"
+    },
+    {
+      "index": 583,
+      "start": 1634.59,
+      "end": 1634.6,
+      "duration": 0.01,
+      "text": "main Left Right main right"
+    },
+    {
+      "index": 584,
+      "start": 1634.6,
+      "end": 1645.99,
+      "duration": 11.39,
+      "text": "left this traffic not"
+    },
+    {
+      "index": 585,
+      "start": 1655.35,
+      "end": 1655.36,
+      "duration": 0.01,
+      "text": "this is allowed as it always and this is"
+    },
+    {
+      "index": 586,
+      "start": 1655.36,
+      "end": 1658.389,
+      "duration": 3.029,
+      "text": "allowed as long as this is this turn is"
+    },
+    {
+      "index": 587,
+      "start": 1658.399,
+      "end": 1659.87,
+      "duration": 1.471,
+      "text": "allowed as long as this turn is this"
+    },
+    {
+      "index": 588,
+      "start": 1659.88,
+      "end": 1662.35,
+      "duration": 2.47,
+      "text": "traffic is"
+    },
+    {
+      "index": 589,
+      "start": 1664.83,
+      "end": 1664.84,
+      "duration": 0.01,
+      "text": "allowed so six stairs under which in"
+    },
+    {
+      "index": 590,
+      "start": 1664.84,
+      "end": 1666.909,
+      "duration": 2.069,
+      "text": "which this circuit can"
+    },
+    {
+      "index": 591,
+      "start": 1666.919,
+      "end": 1669.47,
+      "duration": 2.551,
+      "text": "exist this problem is"
+    },
+    {
+      "index": 592,
+      "start": 1669.48,
+      "end": 1672.59,
+      "duration": 3.11,
+      "text": "a example of how a specification has"
+    },
+    {
+      "index": 593,
+      "start": 1672.6,
+      "end": 1674.19,
+      "duration": 1.59,
+      "text": "been"
+    },
+    {
+      "index": 594,
+      "start": 1674.2,
+      "end": 1677.59,
+      "duration": 3.39,
+      "text": "translated into a state machine EST"
+    },
+    {
+      "index": 595,
+      "start": 1677.6,
+      "end": 1680.83,
+      "duration": 3.23,
+      "text": "State machine means a state diagram and"
+    },
+    {
+      "index": 596,
+      "start": 1680.84,
+      "end": 1682.31,
+      "duration": 1.47,
+      "text": "for that I need a very clear"
+    },
+    {
+      "index": 597,
+      "start": 1682.32,
+      "end": 1684.029,
+      "duration": 1.709,
+      "text": "understanding of the problem these"
+    },
+    {
+      "index": 598,
+      "start": 1684.039,
+      "end": 1686.35,
+      "duration": 2.311,
+      "text": "figures give a very good understanding"
+    },
+    {
+      "index": 599,
+      "start": 1686.36,
+      "end": 1688.75,
+      "duration": 2.39,
+      "text": "of the requirement what are the various"
+    },
+    {
+      "index": 600,
+      "start": 1688.76,
+      "end": 1692.87,
+      "duration": 4.11,
+      "text": "inputs and outputs inputs are Ty the"
+    },
+    {
+      "index": 601,
+      "start": 1692.88,
+      "end": 1693.87,
+      "duration": 0.99,
+      "text": "lell"
+    },
+    {
+      "index": 602,
+      "start": 1693.88,
+      "end": 1699.269,
+      "duration": 5.389,
+      "text": "time TMG main Green"
+    },
+    {
+      "index": 603,
+      "start": 1700.789,
+      "end": 1700.799,
+      "duration": 0.01,
+      "text": "Time"
+    },
+    {
+      "index": 604,
+      "start": 1700.799,
+      "end": 1704.35,
+      "duration": 3.551,
+      "text": "TTG turn green"
+    },
+    {
+      "index": 605,
+      "start": 1704.36,
+      "end": 1709.549,
+      "duration": 5.189,
+      "text": "time tsg Side Green time so"
+    },
+    {
+      "index": 606,
+      "start": 1709.559,
+      "end": 1714.87,
+      "duration": 5.311,
+      "text": "Ty TMG TTG and tsg are the four inputs"
+    },
+    {
+      "index": 607,
+      "start": 1714.88,
+      "end": 1717.75,
+      "duration": 2.87,
+      "text": "to the system what are the outputs each"
+    },
+    {
+      "index": 608,
+      "start": 1717.76,
+      "end": 1722.23,
+      "duration": 4.47,
+      "text": "each light M1 M2 the main lights Mt turn"
+    },
+    {
+      "index": 609,
+      "start": 1722.24,
+      "end": 1724.83,
+      "duration": 2.59,
+      "text": "light s side light each of them can have"
+    },
+    {
+      "index": 610,
+      "start": 1724.84,
+      "end": 1727.789,
+      "duration": 2.949,
+      "text": "a green yellow red so these are the"
+    },
+    {
+      "index": 611,
+      "start": 1727.799,
+      "end": 1730.11,
+      "duration": 2.311,
+      "text": "output so there are four lights each"
+    },
+    {
+      "index": 612,
+      "start": 1730.12,
+      "end": 1731.789,
+      "duration": 1.669,
+      "text": "with three"
+    },
+    {
+      "index": 613,
+      "start": 1731.799,
+      "end": 1733.909,
+      "duration": 2.11,
+      "text": "combinations and four"
+    },
+    {
+      "index": 614,
+      "start": 1733.919,
+      "end": 1736.19,
+      "duration": 2.271,
+      "text": "outputs these are the inputs and outputs"
+    },
+    {
+      "index": 615,
+      "start": 1736.2,
+      "end": 1737.83,
+      "duration": 1.63,
+      "text": "and the circuit can exist in various"
+    },
+    {
+      "index": 616,
+      "start": 1737.84,
+      "end": 1738.83,
+      "duration": 0.99,
+      "text": "conditions"
+    },
+    {
+      "index": 617,
+      "start": 1738.84,
+      "end": 1741.389,
+      "duration": 2.549,
+      "text": "and move from state to state depending"
+    },
+    {
+      "index": 618,
+      "start": 1741.399,
+      "end": 1743.269,
+      "duration": 1.87,
+      "text": "on"
+    },
+    {
+      "index": 619,
+      "start": 1743.279,
+      "end": 1747.63,
+      "duration": 4.351,
+      "text": "the"
+    },
+    {
+      "index": 620,
+      "start": 1749.87,
+      "end": 1749.88,
+      "duration": 0.01,
+      "text": "conditions that becomes a state graph"
+    },
+    {
+      "index": 621,
+      "start": 1749.88,
+      "end": 1751.71,
+      "duration": 1.83,
+      "text": "and once you have a state graph you know"
+    },
+    {
+      "index": 622,
+      "start": 1751.72,
+      "end": 1754.149,
+      "duration": 2.429,
+      "text": "how to implement it so the problem"
+    },
+    {
+      "index": 623,
+      "start": 1754.159,
+      "end": 1756.029,
+      "duration": 1.87,
+      "text": "translation the translation of the"
+    },
+    {
+      "index": 624,
+      "start": 1756.039,
+      "end": 1757.75,
+      "duration": 1.711,
+      "text": "problem from specification word"
+    },
+    {
+      "index": 625,
+      "start": 1757.76,
+      "end": 1760.19,
+      "duration": 2.43,
+      "text": "description as they call it from a clear"
+    },
+    {
+      "index": 626,
+      "start": 1760.2,
+      "end": 1763.07,
+      "duration": 2.87,
+      "text": "description of the problem in words"
+    },
+    {
+      "index": 627,
+      "start": 1763.08,
+      "end": 1766.149,
+      "duration": 3.069,
+      "text": "English"
+    },
+    {
+      "index": 628,
+      "start": 1769.789,
+      "end": 1769.799,
+      "duration": 0.01,
+      "text": "sentences to drawing of the state graph"
+    },
+    {
+      "index": 629,
+      "start": 1769.799,
+      "end": 1772.669,
+      "duration": 2.87,
+      "text": "is the most critical Thing Once that is"
+    },
+    {
+      "index": 630,
+      "start": 1772.679,
+      "end": 1774.149,
+      "duration": 1.47,
+      "text": "done the rest is easy because we know"
+    },
+    {
+      "index": 631,
+      "start": 1774.159,
+      "end": 1775.149,
+      "duration": 0.99,
+      "text": "the"
+    },
+    {
+      "index": 632,
+      "start": 1775.159,
+      "end": 1778.19,
+      "duration": 3.031,
+      "text": "procedure how to do implementation"
+    },
+    {
+      "index": 633,
+      "start": 1778.2,
+      "end": 1781.35,
+      "duration": 3.15,
+      "text": "using standard techniques we can use"
+    },
+    {
+      "index": 634,
+      "start": 1781.36,
+      "end": 1783.509,
+      "duration": 2.149,
+      "text": "Gates we can use multiplexes we can use"
+    },
+    {
+      "index": 635,
+      "start": 1783.519,
+      "end": 1786.99,
+      "duration": 3.471,
+      "text": "ROM prompts we can have PLS PS we can"
+    },
+    {
+      "index": 636,
+      "start": 1787.0,
+      "end": 1790.47,
+      "duration": 3.47,
+      "text": "use flip flops for State variables or"
+    },
+    {
+      "index": 637,
+      "start": 1790.48,
+      "end": 1792.07,
+      "duration": 1.59,
+      "text": "you can use a register we can have shift"
+    },
+    {
+      "index": 638,
+      "start": 1792.08,
+      "end": 1795.63,
+      "duration": 3.55,
+      "text": "register can use a counter"
+    },
+    {
+      "index": 639,
+      "start": 1795.64,
+      "end": 1797.789,
+      "duration": 2.149,
+      "text": "whatever so this is the algorithm they"
+    },
+    {
+      "index": 640,
+      "start": 1797.799,
+      "end": 1799.31,
+      "duration": 1.511,
+      "text": "call it so this is called algorithm they"
+    },
+    {
+      "index": 641,
+      "start": 1799.32,
+      "end": 1800.87,
+      "duration": 1.55,
+      "text": "call it algorithm is the procedure the"
+    },
+    {
+      "index": 642,
+      "start": 1800.88,
+      "end": 1803.909,
+      "duration": 3.029,
+      "text": "step by step operation the sequential"
+    },
+    {
+      "index": 643,
+      "start": 1803.919,
+      "end": 1805.909,
+      "duration": 1.99,
+      "text": "operation these diagrams are only an"
+    },
+    {
+      "index": 644,
+      "start": 1805.919,
+      "end": 1807.95,
+      "duration": 2.031,
+      "text": "illustration to help us to understand"
+    },
+    {
+      "index": 645,
+      "start": 1807.96,
+      "end": 1810.909,
+      "duration": 2.949,
+      "text": "the problem the word problem is"
+    },
+    {
+      "index": 646,
+      "start": 1810.919,
+      "end": 1813.669,
+      "duration": 2.75,
+      "text": "translated into this this is the"
+    },
+    {
+      "index": 647,
+      "start": 1813.679,
+      "end": 1815.87,
+      "duration": 2.191,
+      "text": "sequence of"
+    },
+    {
+      "index": 648,
+      "start": 1815.88,
+      "end": 1820.11,
+      "duration": 4.23,
+      "text": "events this sequence of events is a"
+    },
+    {
+      "index": 649,
+      "start": 1820.12,
+      "end": 1822.43,
+      "duration": 2.31,
+      "text": "description in"
+    },
+    {
+      "index": 650,
+      "start": 1822.44,
+      "end": 1825.11,
+      "duration": 2.67,
+      "text": "an algorithmic sense if those of you are"
+    },
+    {
+      "index": 651,
+      "start": 1825.12,
+      "end": 1826.509,
+      "duration": 1.389,
+      "text": "familiar with programming computer"
+    },
+    {
+      "index": 652,
+      "start": 1826.519,
+      "end": 1828.909,
+      "duration": 2.39,
+      "text": "programming you'll call it a code a"
+    },
+    {
+      "index": 653,
+      "start": 1828.919,
+      "end": 1831.149,
+      "duration": 2.23,
+      "text": "program it's not a program in the sense"
+    },
+    {
+      "index": 654,
+      "start": 1831.159,
+      "end": 1832.83,
+      "duration": 1.671,
+      "text": "it doesn't use syntax of a particular"
+    },
+    {
+      "index": 655,
+      "start": 1832.84,
+      "end": 1835.47,
+      "duration": 2.63,
+      "text": "language like C language or anything it"
+    },
+    {
+      "index": 656,
+      "start": 1835.48,
+      "end": 1837.95,
+      "duration": 2.47,
+      "text": "is looks like a program but it's not a"
+    },
+    {
+      "index": 657,
+      "start": 1837.96,
+      "end": 1839.99,
+      "duration": 2.03,
+      "text": "program you can call it a pseudo code if"
+    },
+    {
+      "index": 658,
+      "start": 1840.0,
+      "end": 1845.23,
+      "duration": 5.23,
+      "text": "you want a pseudo"
+    },
+    {
+      "index": 659,
+      "start": 1849.23,
+      "end": 1849.24,
+      "duration": 0.01,
+      "text": "code pseudo code is a program but not"
+    },
+    {
+      "index": 660,
+      "start": 1849.24,
+      "end": 1850.95,
+      "duration": 1.71,
+      "text": "using an syntax of any particular"
+    },
+    {
+      "index": 661,
+      "start": 1850.96,
+      "end": 1852.909,
+      "duration": 1.949,
+      "text": "language it's an English"
+    },
+    {
+      "index": 662,
+      "start": 1852.919,
+      "end": 1855.629,
+      "duration": 2.71,
+      "text": "description or you can also call it"
+    },
+    {
+      "index": 663,
+      "start": 1855.639,
+      "end": 1859.909,
+      "duration": 4.27,
+      "text": "a algorithm what is an"
+    },
+    {
+      "index": 664,
+      "start": 1859.919,
+      "end": 1862.83,
+      "duration": 2.911,
+      "text": "algorithm algorithm is a step by"
+    },
+    {
+      "index": 665,
+      "start": 1862.84,
+      "end": 1866.71,
+      "duration": 3.87,
+      "text": "step algorithm is a step by step um"
+    },
+    {
+      "index": 666,
+      "start": 1866.72,
+      "end": 1868.909,
+      "duration": 2.189,
+      "text": "behavior of the circuit based on the"
+    },
+    {
+      "index": 667,
+      "start": 1868.919,
+      "end": 1871.549,
+      "duration": 2.63,
+      "text": "various conditions of input and what"
+    },
+    {
+      "index": 668,
+      "start": 1871.559,
+      "end": 1873.47,
+      "duration": 1.911,
+      "text": "conditions output are possible so what"
+    },
+    {
+      "index": 669,
+      "start": 1873.48,
+      "end": 1876.19,
+      "duration": 2.71,
+      "text": "are these steps again to go through"
+    },
+    {
+      "index": 670,
+      "start": 1876.2,
+      "end": 1879.87,
+      "duration": 3.67,
+      "text": "normally the circuit is with main one"
+    },
+    {
+      "index": 671,
+      "start": 1879.88,
+      "end": 1885.11,
+      "duration": 5.23,
+      "text": "green main two green main turn red side"
+    },
+    {
+      "index": 672,
+      "start": 1885.12,
+      "end": 1887.509,
+      "duration": 2.389,
+      "text": "red this condition allow for a period"
+    },
+    {
+      "index": 673,
+      "start": 1887.519,
+      "end": 1891.509,
+      "duration": 3.99,
+      "text": "called t mg main green time after the"
+    },
+    {
+      "index": 674,
+      "start": 1891.519,
+      "end": 1893.23,
+      "duration": 1.711,
+      "text": "end of main green"
+    },
+    {
+      "index": 675,
+      "start": 1893.24,
+      "end": 1896.31,
+      "duration": 3.07,
+      "text": "time this M1 continues to be green M2"
+    },
+    {
+      "index": 676,
+      "start": 1896.32,
+      "end": 1898.95,
+      "duration": 2.63,
+      "text": "turns yellow to"
+    },
+    {
+      "index": 677,
+      "start": 1898.96,
+      "end": 1903.59,
+      "duration": 4.63,
+      "text": "start to start stopping the traffic from"
+    },
+    {
+      "index": 678,
+      "start": 1903.6,
+      "end": 1905.95,
+      "duration": 2.35,
+      "text": "right to left on the Main"
+    },
+    {
+      "index": 679,
+      "start": 1905.96,
+      "end": 1910.269,
+      "duration": 4.309,
+      "text": "Street MTR R turn signal is still right"
+    },
+    {
+      "index": 680,
+      "start": 1910.279,
+      "end": 1914.669,
+      "duration": 4.39,
+      "text": "still red still red signal is still red"
+    },
+    {
+      "index": 681,
+      "start": 1914.679,
+      "end": 1915.909,
+      "duration": 1.23,
+      "text": "then you allow this condition for a"
+    },
+    {
+      "index": 682,
+      "start": 1915.919,
+      "end": 1918.23,
+      "duration": 2.311,
+      "text": "period called yellow T yellow which is"
+    },
+    {
+      "index": 683,
+      "start": 1918.24,
+      "end": 1920.029,
+      "duration": 1.789,
+      "text": "uniform for all the yellow lights even"
+    },
+    {
+      "index": 684,
+      "start": 1920.039,
+      "end": 1922.95,
+      "duration": 2.911,
+      "text": "though main yellow is normally more than"
+    },
+    {
+      "index": 685,
+      "start": 1922.96,
+      "end": 1924.47,
+      "duration": 1.51,
+      "text": "the side yellow but we are keeping it"
+    },
+    {
+      "index": 686,
+      "start": 1924.48,
+      "end": 1927.029,
+      "duration": 2.549,
+      "text": "equal to make it simple after the period"
+    },
+    {
+      "index": 687,
+      "start": 1927.039,
+      "end": 1928.07,
+      "duration": 1.031,
+      "text": "of T"
+    },
+    {
+      "index": 688,
+      "start": 1928.08,
+      "end": 1930.269,
+      "duration": 2.189,
+      "text": "yellow main one continues to be green"
+    },
+    {
+      "index": 689,
+      "start": 1930.279,
+      "end": 1932.11,
+      "duration": 1.831,
+      "text": "that means left to right traffic is"
+    },
+    {
+      "index": 690,
+      "start": 1932.12,
+      "end": 1934.669,
+      "duration": 2.549,
+      "text": "allowed but right to left left traffic"
+    },
+    {
+      "index": 691,
+      "start": 1934.679,
+      "end": 1937.549,
+      "duration": 2.87,
+      "text": "is stopped M2 becomes"
+    },
+    {
+      "index": 692,
+      "start": 1937.559,
+      "end": 1941.629,
+      "duration": 4.07,
+      "text": "red MTG turn light is allowed turning"
+    },
+    {
+      "index": 693,
+      "start": 1941.639,
+      "end": 1943.35,
+      "duration": 1.711,
+      "text": "traffic from Main to Green is main to"
+    },
+    {
+      "index": 694,
+      "start": 1943.36,
+      "end": 1946.19,
+      "duration": 2.83,
+      "text": "side is allowed by a green light side"
+    },
+    {
+      "index": 695,
+      "start": 1946.2,
+      "end": 1948.87,
+      "duration": 2.67,
+      "text": "red that mean turning from turning"
+    },
+    {
+      "index": 696,
+      "start": 1948.88,
+      "end": 1951.19,
+      "duration": 2.31,
+      "text": "traffic from side to main is not"
+    },
+    {
+      "index": 697,
+      "start": 1951.2,
+      "end": 1953.31,
+      "duration": 2.11,
+      "text": "allowed this condition will last for a"
+    },
+    {
+      "index": 698,
+      "start": 1953.32,
+      "end": 1957.19,
+      "duration": 3.87,
+      "text": "period called TTG TG standing for TG"
+    },
+    {
+      "index": 699,
+      "start": 1957.2,
+      "end": 1960.509,
+      "duration": 3.309,
+      "text": "stands for turn green the period for"
+    },
+    {
+      "index": 700,
+      "start": 1960.519,
+      "end": 1963.47,
+      "duration": 2.951,
+      "text": "which it is green is called TTG after"
+    },
+    {
+      "index": 701,
+      "start": 1963.48,
+      "end": 1969.11,
+      "duration": 5.63,
+      "text": "the elapse of TTG I have main one"
+    },
+    {
+      "index": 702,
+      "start": 1969.12,
+      "end": 1973.029,
+      "duration": 3.909,
+      "text": "yellow main turn yellow I'm going to"
+    },
+    {
+      "index": 703,
+      "start": 1973.039,
+      "end": 1975.909,
+      "duration": 2.87,
+      "text": "stop the traffic from left to right on"
+    },
+    {
+      "index": 704,
+      "start": 1975.919,
+      "end": 1977.95,
+      "duration": 2.031,
+      "text": "the main state"
+    },
+    {
+      "index": 705,
+      "start": 1977.96,
+      "end": 1980.23,
+      "duration": 2.27,
+      "text": "and also the turn traffic from Main to"
+    },
+    {
+      "index": 706,
+      "start": 1980.24,
+      "end": 1983.99,
+      "duration": 3.75,
+      "text": "side to allow the side to main traffic"
+    },
+    {
+      "index": 707,
+      "start": 1984.0,
+      "end": 1985.31,
+      "duration": 1.31,
+      "text": "in order to do that I need to go through"
+    },
+    {
+      "index": 708,
+      "start": 1985.32,
+      "end": 1986.71,
+      "duration": 1.39,
+      "text": "an yellow"
+    },
+    {
+      "index": 709,
+      "start": 1986.72,
+      "end": 1991.95,
+      "duration": 5.23,
+      "text": "sequence so M1 yellow M2 Mt yellow M2"
+    },
+    {
+      "index": 710,
+      "start": 1991.96,
+      "end": 1993.789,
+      "duration": 1.829,
+      "text": "continues to be red because the traffic"
+    },
+    {
+      "index": 711,
+      "start": 1993.799,
+      "end": 1996.669,
+      "duration": 2.87,
+      "text": "from left to right right to left is"
+    },
+    {
+      "index": 712,
+      "start": 1996.679,
+      "end": 1998.35,
+      "duration": 1.671,
+      "text": "still not allowed because once there is"
+    },
+    {
+      "index": 713,
+      "start": 1998.36,
+      "end": 2001.269,
+      "duration": 2.909,
+      "text": "a sight to main traffic I cannot allow"
+    },
+    {
+      "index": 714,
+      "start": 2001.279,
+      "end": 2003.83,
+      "duration": 2.551,
+      "text": "the traffic this traffic I cannot allow"
+    },
+    {
+      "index": 715,
+      "start": 2003.84,
+      "end": 2006.87,
+      "duration": 3.03,
+      "text": "this traffic from right to left"
+    },
+    {
+      "index": 716,
+      "start": 2006.88,
+      "end": 2009.11,
+      "duration": 2.23,
+      "text": "continues be that"
+    },
+    {
+      "index": 717,
+      "start": 2009.12,
+      "end": 2010.71,
+      "duration": 1.59,
+      "text": "sight traffic is still red of course we"
+    },
+    {
+      "index": 718,
+      "start": 2010.72,
+      "end": 2012.389,
+      "duration": 1.669,
+      "text": "have not cleared"
+    },
+    {
+      "index": 719,
+      "start": 2012.399,
+      "end": 2016.31,
+      "duration": 3.911,
+      "text": "it this condition provides for a time of"
+    },
+    {
+      "index": 720,
+      "start": 2016.32,
+      "end": 2018.909,
+      "duration": 2.589,
+      "text": "Ty the time for which the yellow signal"
+    },
+    {
+      "index": 721,
+      "start": 2018.919,
+      "end": 2021.83,
+      "duration": 2.911,
+      "text": "is defined at the end of"
+    },
+    {
+      "index": 722,
+      "start": 2021.84,
+      "end": 2026.549,
+      "duration": 4.709,
+      "text": "Ty both the main one right and"
+    },
+    {
+      "index": 723,
+      "start": 2026.559,
+      "end": 2029.43,
+      "duration": 2.871,
+      "text": "the turn signal from Main both become"
+    },
+    {
+      "index": 724,
+      "start": 2029.44,
+      "end": 2031.75,
+      "duration": 2.31,
+      "text": "red that means we are cutting off the"
+    },
+    {
+      "index": 725,
+      "start": 2031.76,
+      "end": 2034.909,
+      "duration": 3.149,
+      "text": "traffic from left to right as well as"
+    },
+    {
+      "index": 726,
+      "start": 2034.919,
+      "end": 2038.99,
+      "duration": 4.071,
+      "text": "cutting off the traffic from Main to"
+    },
+    {
+      "index": 727,
+      "start": 2039.0,
+      "end": 2040.909,
+      "duration": 1.909,
+      "text": "side"
+    },
+    {
+      "index": 728,
+      "start": 2040.919,
+      "end": 2045.95,
+      "duration": 5.031,
+      "text": "M1 red Mt red M2 is anywhere red side is"
+    },
+    {
+      "index": 729,
+      "start": 2045.96,
+      "end": 2048.349,
+      "duration": 2.389,
+      "text": "allowed green that means the first time"
+    },
+    {
+      "index": 730,
+      "start": 2048.359,
+      "end": 2061.71,
+      "duration": 13.351,
+      "text": "and the only time side traffic is"
+    },
+    {
+      "index": 731,
+      "start": 2066.069,
+      "end": 2066.079,
+      "duration": 0.01,
+      "text": "allowed and this condition will"
+    },
+    {
+      "index": 732,
+      "start": 2066.079,
+      "end": 2069.869,
+      "duration": 3.79,
+      "text": "will exist for a period of tsg SG"
+    },
+    {
+      "index": 733,
+      "start": 2069.879,
+      "end": 2073.55,
+      "duration": 3.671,
+      "text": "standing SG stands for Side Green and T"
+    },
+    {
+      "index": 734,
+      "start": 2073.56,
+      "end": 2076.31,
+      "duration": 2.75,
+      "text": "stands for time tsg is time for which"
+    },
+    {
+      "index": 735,
+      "start": 2076.32,
+      "end": 2080.03,
+      "duration": 3.71,
+      "text": "the side is green at that period Side"
+    },
+    {
+      "index": 736,
+      "start": 2080.04,
+      "end": 2082.629,
+      "duration": 2.589,
+      "text": "Green will have to become yellow become"
+    },
+    {
+      "index": 737,
+      "start": 2082.639,
+      "end": 2085.589,
+      "duration": 2.95,
+      "text": "eventually red"
+    },
+    {
+      "index": 738,
+      "start": 2085.599,
+      "end": 2087.79,
+      "duration": 2.191,
+      "text": "so after this"
+    },
+    {
+      "index": 739,
+      "start": 2087.8,
+      "end": 2090.909,
+      "duration": 3.109,
+      "text": "period side becomes yellow so that we"
+    },
+    {
+      "index": 740,
+      "start": 2090.919,
+      "end": 2093.75,
+      "duration": 2.831,
+      "text": "can become red later on but since it is"
+    },
+    {
+      "index": 741,
+      "start": 2093.76,
+      "end": 2096.19,
+      "duration": 2.43,
+      "text": "still yellow traffic is not completely"
+    },
+    {
+      "index": 742,
+      "start": 2096.2,
+      "end": 2098.589,
+      "duration": 2.389,
+      "text": "halted so I can not allow any other"
+    },
+    {
+      "index": 743,
+      "start": 2098.599,
+      "end": 2100.67,
+      "duration": 2.071,
+      "text": "traffic to any other light to change so"
+    },
+    {
+      "index": 744,
+      "start": 2100.68,
+      "end": 2103.47,
+      "duration": 2.79,
+      "text": "M1 has to continue to be red M2 has to"
+    },
+    {
+      "index": 745,
+      "start": 2103.48,
+      "end": 2106.63,
+      "duration": 3.15,
+      "text": "continue to be red Mt has to be continue"
+    },
+    {
+      "index": 746,
+      "start": 2106.64,
+      "end": 2108.31,
+      "duration": 1.67,
+      "text": "M2 has to"
+    },
+    {
+      "index": 747,
+      "start": 2108.32,
+      "end": 2114.95,
+      "duration": 6.63,
+      "text": "remain M2 has to continue to remain red"
+    },
+    {
+      "index": 748,
+      "start": 2114.96,
+      "end": 2116.95,
+      "duration": 1.99,
+      "text": "side will become yellow and this"
+    },
+    {
+      "index": 749,
+      "start": 2116.96,
+      "end": 2119.27,
+      "duration": 2.31,
+      "text": "condition will last for a period of Ty y"
+    },
+    {
+      "index": 750,
+      "start": 2119.28,
+      "end": 2121.67,
+      "duration": 2.39,
+      "text": "Ty stands for the yellow light"
+    },
+    {
+      "index": 751,
+      "start": 2121.68,
+      "end": 2125.91,
+      "duration": 4.23,
+      "text": "period in this case from site to main so"
+    },
+    {
+      "index": 752,
+      "start": 2125.92,
+      "end": 2128.39,
+      "duration": 2.47,
+      "text": "after Ty we go back to one which is the"
+    },
+    {
+      "index": 753,
+      "start": 2128.4,
+      "end": 2131.51,
+      "duration": 3.11,
+      "text": "our first primary interest main one"
+    },
+    {
+      "index": 754,
+      "start": 2131.52,
+      "end": 2133.829,
+      "duration": 2.309,
+      "text": "green and Main two green both directions"
+    },
+    {
+      "index": 755,
+      "start": 2133.839,
+      "end": 2136.27,
+      "duration": 2.431,
+      "text": "traffic no turning on this side no"
+    },
+    {
+      "index": 756,
+      "start": 2136.28,
+      "end": 2140.19,
+      "duration": 3.91,
+      "text": "turning in this side so this is the"
+    },
+    {
+      "index": 757,
+      "start": 2140.2,
+      "end": 2143.15,
+      "duration": 2.95,
+      "text": "algorithm you can call it algorithm"
+    },
+    {
+      "index": 758,
+      "start": 2143.16,
+      "end": 2146.069,
+      "duration": 2.909,
+      "text": "algorithm is a procedure a stepbystep"
+    },
+    {
+      "index": 759,
+      "start": 2146.079,
+      "end": 2150.23,
+      "duration": 4.151,
+      "text": "procedure of the events of the behavior"
+    },
+    {
+      "index": 760,
+      "start": 2150.24,
+      "end": 2151.19,
+      "duration": 0.95,
+      "text": "of the"
+    },
+    {
+      "index": 761,
+      "start": 2151.2,
+      "end": 2153.95,
+      "duration": 2.75,
+      "text": "circuit pseudo code is people use it"
+    },
+    {
+      "index": 762,
+      "start": 2153.96,
+      "end": 2155.67,
+      "duration": 1.71,
+      "text": "because pseudo code is something like it"
+    },
+    {
+      "index": 763,
+      "start": 2155.68,
+      "end": 2157.829,
+      "duration": 2.149,
+      "text": "looks like a program computer program"
+    },
+    {
+      "index": 764,
+      "start": 2157.839,
+      "end": 2159.349,
+      "duration": 1.51,
+      "text": "but it's not a program in any sense"
+    },
+    {
+      "index": 765,
+      "start": 2159.359,
+      "end": 2160.75,
+      "duration": 1.391,
+      "text": "because programm requires some Syntax"
+    },
+    {
+      "index": 766,
+      "start": 2160.76,
+      "end": 2163.39,
+      "duration": 2.63,
+      "text": "for a particular language C language it"
+    },
+    {
+      "index": 767,
+      "start": 2163.4,
+      "end": 2166.19,
+      "duration": 2.79,
+      "text": "is not that C++ it's not like"
+    },
+    {
+      "index": 768,
+      "start": 2166.2,
+      "end": 2168.27,
+      "duration": 2.07,
+      "text": "that but really it is a sequence of"
+    },
+    {
+      "index": 769,
+      "start": 2168.28,
+      "end": 2169.43,
+      "duration": 1.15,
+      "text": "event that take"
+    },
+    {
+      "index": 770,
+      "start": 2169.44,
+      "end": 2172.39,
+      "duration": 2.95,
+      "text": "place and each of these sequences"
+    },
+    {
+      "index": 771,
+      "start": 2172.4,
+      "end": 2174.75,
+      "duration": 2.35,
+      "text": "correspond to one state of the machine"
+    },
+    {
+      "index": 772,
+      "start": 2174.76,
+      "end": 2176.43,
+      "duration": 1.67,
+      "text": "so we have a state machine in which the"
+    },
+    {
+      "index": 773,
+      "start": 2176.44,
+      "end": 2179.829,
+      "duration": 3.389,
+      "text": "circuit has to exist in each of these"
+    },
+    {
+      "index": 774,
+      "start": 2179.839,
+      "end": 2183.15,
+      "duration": 3.311,
+      "text": "states and they go from each one of the"
+    },
+    {
+      "index": 775,
+      "start": 2183.16,
+      "end": 2185.71,
+      "duration": 2.55,
+      "text": "states to another state based on certain"
+    },
+    {
+      "index": 776,
+      "start": 2185.72,
+      "end": 2189.15,
+      "duration": 3.43,
+      "text": "input conditions defined by the timing"
+    },
+    {
+      "index": 777,
+      "start": 2189.16,
+      "end": 2191.51,
+      "duration": 2.35,
+      "text": "Ty y"
+    },
+    {
+      "index": 778,
+      "start": 2191.52,
+      "end": 2193.349,
+      "duration": 1.829,
+      "text": "TTG"
+    },
+    {
+      "index": 779,
+      "start": 2193.359,
+      "end": 2195.55,
+      "duration": 2.191,
+      "text": "TMG"
+    },
+    {
+      "index": 780,
+      "start": 2195.56,
+      "end": 2197.829,
+      "duration": 2.269,
+      "text": "T"
+    },
+    {
+      "index": 781,
+      "start": 2197.839,
+      "end": 2200.39,
+      "duration": 2.551,
+      "text": "SG we can put additional conditions like"
+    },
+    {
+      "index": 782,
+      "start": 2200.4,
+      "end": 2203.23,
+      "duration": 2.83,
+      "text": "pestan switches traffic flow conditions"
+    },
+    {
+      "index": 783,
+      "start": 2203.24,
+      "end": 2205.51,
+      "duration": 2.27,
+      "text": "by sensors and all that but we are not"
+    },
+    {
+      "index": 784,
+      "start": 2205.52,
+      "end": 2207.15,
+      "duration": 1.63,
+      "text": "doing all that now in this case to make"
+    },
+    {
+      "index": 785,
+      "start": 2207.16,
+      "end": 2207.87,
+      "duration": 0.71,
+      "text": "it"
+    },
+    {
+      "index": 786,
+      "start": 2207.88,
+      "end": 2210.23,
+      "duration": 2.35,
+      "text": "simple so how is the state graph going"
+    },
+    {
+      "index": 787,
+      "start": 2210.24,
+      "end": 2213.069,
+      "duration": 2.829,
+      "text": "to look like first of all let us see the"
+    },
+    {
+      "index": 788,
+      "start": 2213.079,
+      "end": 2223.99,
+      "duration": 10.911,
+      "text": "St graph is"
+    },
+    {
+      "index": 789,
+      "start": 2225.67,
+      "end": 2225.68,
+      "duration": 0.01,
+      "text": "first of all you have to see what the St"
+    },
+    {
+      "index": 790,
+      "start": 2225.68,
+      "end": 2228.79,
+      "duration": 3.11,
+      "text": "gra is a more graph or M graph this is a"
+    },
+    {
+      "index": 791,
+      "start": 2228.8,
+      "end": 2234.99,
+      "duration": 6.19,
+      "text": "more graph why is a more"
+    },
+    {
+      "index": 792,
+      "start": 2238.63,
+      "end": 2238.64,
+      "duration": 0.01,
+      "text": "graph more graph defines outputs for"
+    },
+    {
+      "index": 793,
+      "start": 2238.64,
+      "end": 2242.829,
+      "duration": 4.189,
+      "text": "States M graph defines outputs for state"
+    },
+    {
+      "index": 794,
+      "start": 2242.839,
+      "end": 2245.39,
+      "duration": 2.551,
+      "text": "and a particular input combination in"
+    },
+    {
+      "index": 795,
+      "start": 2245.4,
+      "end": 2249.67,
+      "duration": 4.27,
+      "text": "this particular case States Define the"
+    },
+    {
+      "index": 796,
+      "start": 2249.68,
+      "end": 2251.95,
+      "duration": 2.27,
+      "text": "outputs the circuit can exist in all"
+    },
+    {
+      "index": 797,
+      "start": 2251.96,
+      "end": 2254.19,
+      "duration": 2.23,
+      "text": "these five states or six states 1 2 3 4"
+    },
+    {
+      "index": 798,
+      "start": 2254.2,
+      "end": 2255.71,
+      "duration": 1.51,
+      "text": "5 six and each"
+    },
+    {
+      "index": 799,
+      "start": 2255.72,
+      "end": 2261.03,
+      "duration": 5.31,
+      "text": "state outputs are frozen these are the"
+    },
+    {
+      "index": 800,
+      "start": 2263.95,
+      "end": 2263.96,
+      "duration": 0.01,
+      "text": "outputs so when the outputs are given"
+    },
+    {
+      "index": 801,
+      "start": 2263.96,
+      "end": 2267.15,
+      "duration": 3.19,
+      "text": "fixed corresponding to states there a"
+    },
+    {
+      "index": 802,
+      "start": 2267.16,
+      "end": 2270.51,
+      "duration": 3.35,
+      "text": "more sh graph so we already said that"
+    },
+    {
+      "index": 803,
+      "start": 2270.52,
+      "end": 2276.23,
+      "duration": 5.71,
+      "text": "there are six states S1 S2 S3 S4 S5"
+    },
+    {
+      "index": 804,
+      "start": 2278.27,
+      "end": 2278.28,
+      "duration": 0.01,
+      "text": "S6 if"
+    },
+    {
+      "index": 805,
+      "start": 2278.28,
+      "end": 2281.23,
+      "duration": 2.95,
+      "text": "S1 the"
+    },
+    {
+      "index": 806,
+      "start": 2281.24,
+      "end": 2284.349,
+      "duration": 3.109,
+      "text": "circuits there's a timer which goes this"
+    },
+    {
+      "index": 807,
+      "start": 2284.359,
+      "end": 2286.55,
+      "duration": 2.191,
+      "text": "timer is called mg"
+    },
+    {
+      "index": 808,
+      "start": 2286.56,
+      "end": 2290.27,
+      "duration": 3.71,
+      "text": "TMG as long as TMG is not elapsed is not"
+    },
+    {
+      "index": 809,
+      "start": 2290.28,
+      "end": 2292.87,
+      "duration": 2.59,
+      "text": "over the circuit remains in the state"
+    },
+    {
+      "index": 810,
+      "start": 2292.88,
+      "end": 2296.069,
+      "duration": 3.189,
+      "text": "TMG can be several clock Cycles see the"
+    },
+    {
+      "index": 811,
+      "start": 2296.079,
+      "end": 2297.63,
+      "duration": 1.551,
+      "text": "clock cycle is different from the State"
+    },
+    {
+      "index": 812,
+      "start": 2297.64,
+      "end": 2298.79,
+      "duration": 1.15,
+      "text": "Cycles"
+    },
+    {
+      "index": 813,
+      "start": 2298.8,
+      "end": 2301.27,
+      "duration": 2.47,
+      "text": "because"
+    },
+    {
+      "index": 814,
+      "start": 2301.28,
+      "end": 2303.71,
+      "duration": 2.43,
+      "text": "once this circuit need not be very high"
+    },
+    {
+      "index": 815,
+      "start": 2303.72,
+      "end": 2306.23,
+      "duration": 2.51,
+      "text": "speed circuit when you try to decide"
+    },
+    {
+      "index": 816,
+      "start": 2306.24,
+      "end": 2308.43,
+      "duration": 2.19,
+      "text": "what clock what frequency the clock"
+    },
+    {
+      "index": 817,
+      "start": 2308.44,
+      "end": 2310.75,
+      "duration": 2.31,
+      "text": "should the circuit operate need not be"
+    },
+    {
+      "index": 818,
+      "start": 2310.76,
+      "end": 2312.39,
+      "duration": 1.63,
+      "text": "very high is not like a Pentium"
+    },
+    {
+      "index": 819,
+      "start": 2312.4,
+      "end": 2313.589,
+      "duration": 1.189,
+      "text": "processor anything we are talking about"
+    },
+    {
+      "index": 820,
+      "start": 2313.599,
+      "end": 2315.309,
+      "duration": 1.71,
+      "text": "traffic lights"
+    },
+    {
+      "index": 821,
+      "start": 2315.319,
+      "end": 2320.19,
+      "duration": 4.871,
+      "text": "which it change slowly we talk of at"
+    },
+    {
+      "index": 822,
+      "start": 2320.2,
+      "end": 2322.91,
+      "duration": 2.71,
+      "text": "least one minute for the main Main"
+    },
+    {
+      "index": 823,
+      "start": 2322.92,
+      "end": 2326.71,
+      "duration": 3.79,
+      "text": "Street Green and about 30 seconds for"
+    },
+    {
+      "index": 824,
+      "start": 2326.72,
+      "end": 2329.51,
+      "duration": 2.79,
+      "text": "the side street green and yellow maybe"
+    },
+    {
+      "index": 825,
+      "start": 2329.52,
+      "end": 2331.069,
+      "duration": 1.549,
+      "text": "10 seconds 15 seconds 20 seconds"
+    },
+    {
+      "index": 826,
+      "start": 2331.079,
+      "end": 2333.67,
+      "duration": 2.591,
+      "text": "depending on the conditions so when"
+    },
+    {
+      "index": 827,
+      "start": 2333.68,
+      "end": 2335.51,
+      "duration": 1.83,
+      "text": "you're talking about that this frequency"
+    },
+    {
+      "index": 828,
+      "start": 2335.52,
+      "end": 2337.43,
+      "duration": 1.91,
+      "text": "at which the circuits have to work the"
+    },
+    {
+      "index": 829,
+      "start": 2337.44,
+      "end": 2340.829,
+      "duration": 3.389,
+      "text": "clocks have to be fed for the circuits"
+    },
+    {
+      "index": 830,
+      "start": 2340.839,
+      "end": 2343.03,
+      "duration": 2.191,
+      "text": "need not be very very"
+    },
+    {
+      "index": 831,
+      "start": 2343.04,
+      "end": 2346.109,
+      "duration": 3.069,
+      "text": "high but still it will be several clock"
+    },
+    {
+      "index": 832,
+      "start": 2346.119,
+      "end": 2348.829,
+      "duration": 2.71,
+      "text": "Cycles in each of these tering timing"
+    },
+    {
+      "index": 833,
+      "start": 2348.839,
+      "end": 2350.63,
+      "duration": 1.791,
+      "text": "intervals because we'll have a timing"
+    },
+    {
+      "index": 834,
+      "start": 2350.64,
+      "end": 2352.87,
+      "duration": 2.23,
+      "text": "interval which will be several clock"
+    },
+    {
+      "index": 835,
+      "start": 2352.88,
+      "end": 2355.23,
+      "duration": 2.35,
+      "text": "periods of the clock that defeat as the"
+    },
+    {
+      "index": 836,
+      "start": 2355.24,
+      "end": 2357.95,
+      "duration": 2.71,
+      "text": "system clock so you have a system"
+    },
+    {
+      "index": 837,
+      "start": 2357.96,
+      "end": 2360.55,
+      "duration": 2.59,
+      "text": "clock which is counted and when a"
+    },
+    {
+      "index": 838,
+      "start": 2360.56,
+      "end": 2361.95,
+      "duration": 1.39,
+      "text": "particular count is reached we'll call"
+    },
+    {
+      "index": 839,
+      "start": 2361.96,
+      "end": 2362.75,
+      "duration": 0.79,
+      "text": "it"
+    },
+    {
+      "index": 840,
+      "start": 2362.76,
+      "end": 2366.03,
+      "duration": 3.27,
+      "text": "TMG so we Define for this given time"
+    },
+    {
+      "index": 841,
+      "start": 2366.04,
+      "end": 2368.069,
+      "duration": 2.029,
+      "text": "depending on the time mg TMG let us say"
+    },
+    {
+      "index": 842,
+      "start": 2368.079,
+      "end": 2371.27,
+      "duration": 3.191,
+      "text": "is 1 minute 60"
+    },
+    {
+      "index": 843,
+      "start": 2371.28,
+      "end": 2374.79,
+      "duration": 3.51,
+      "text": "seconds assuming you have a clock period"
+    },
+    {
+      "index": 844,
+      "start": 2374.8,
+      "end": 2379.47,
+      "duration": 4.67,
+      "text": "of 1 second is too large I'm just saying"
+    },
+    {
+      "index": 845,
+      "start": 2379.48,
+      "end": 2382.19,
+      "duration": 2.71,
+      "text": "an example 60 such clock Cycles should"
+    },
+    {
+      "index": 846,
+      "start": 2382.2,
+      "end": 2384.15,
+      "duration": 1.95,
+      "text": "exist because for TMG so you keep"
+    },
+    {
+      "index": 847,
+      "start": 2384.16,
+      "end": 2387.79,
+      "duration": 3.63,
+      "text": "counting when 60 counts are reached TMG"
+    },
+    {
+      "index": 848,
+      "start": 2387.8,
+      "end": 2389.95,
+      "duration": 2.15,
+      "text": "becomes on when TMG becomes on the"
+    },
+    {
+      "index": 849,
+      "start": 2389.96,
+      "end": 2392.63,
+      "duration": 2.67,
+      "text": "circuit goes from the state in this St"
+    },
+    {
+      "index": 850,
+      "start": 2392.64,
+      "end": 2401.23,
+      "duration": 8.59,
+      "text": "that's what I mean so there will be a"
+    },
+    {
+      "index": 851,
+      "start": 2412.43,
+      "end": 2412.44,
+      "duration": 0.01,
+      "text": "counter the counter counts the system"
+    },
+    {
+      "index": 852,
+      "start": 2412.44,
+      "end": 2416.55,
+      "duration": 4.11,
+      "text": "clock and comes up with these values"
+    },
+    {
+      "index": 853,
+      "start": 2416.56,
+      "end": 2418.67,
+      "duration": 2.11,
+      "text": "TMG"
+    },
+    {
+      "index": 854,
+      "start": 2418.68,
+      "end": 2420.829,
+      "duration": 2.149,
+      "text": "TTG"
+    },
+    {
+      "index": 855,
+      "start": 2420.839,
+      "end": 2423.55,
+      "duration": 2.711,
+      "text": "tsg"
+    },
+    {
+      "index": 856,
+      "start": 2423.56,
+      "end": 2426.15,
+      "duration": 2.59,
+      "text": "T these are the signals that used as the"
+    },
+    {
+      "index": 857,
+      "start": 2426.16,
+      "end": 2429.23,
+      "duration": 3.07,
+      "text": "signals this can be several clock cycles"
+    },
+    {
+      "index": 858,
+      "start": 2429.24,
+      "end": 2431.39,
+      "duration": 2.15,
+      "text": "of the system clock which can itself be"
+    },
+    {
+      "index": 859,
+      "start": 2431.4,
+      "end": 2433.15,
+      "duration": 1.75,
+      "text": "very very small clock very very low"
+    },
+    {
+      "index": 860,
+      "start": 2433.16,
+      "end": 2435.67,
+      "duration": 2.51,
+      "text": "frequency clock need not be very high so"
+    },
+    {
+      "index": 861,
+      "start": 2435.68,
+      "end": 2438.43,
+      "duration": 2.75,
+      "text": "we have S1 the circuit remains in S1"
+    },
+    {
+      "index": 862,
+      "start": 2438.44,
+      "end": 2442.19,
+      "duration": 3.75,
+      "text": "until TMG is reached when TMG is reached"
+    },
+    {
+      "index": 863,
+      "start": 2442.2,
+      "end": 2443.15,
+      "duration": 0.95,
+      "text": "it goes to"
+    },
+    {
+      "index": 864,
+      "start": 2443.16,
+      "end": 2448.03,
+      "duration": 4.87,
+      "text": "S2 S2 is the yellow state so it will"
+    },
+    {
+      "index": 865,
+      "start": 2448.04,
+      "end": 2450.349,
+      "duration": 2.309,
+      "text": "remain in S2 until t"
+    },
+    {
+      "index": 866,
+      "start": 2450.359,
+      "end": 2454.99,
+      "duration": 4.631,
+      "text": "y becomes High until the time when T is"
+    },
+    {
+      "index": 867,
+      "start": 2455.0,
+      "end": 2459.109,
+      "duration": 4.109,
+      "text": "not there it is remains in this state"
+    },
+    {
+      "index": 868,
+      "start": 2459.119,
+      "end": 2463.71,
+      "duration": 4.591,
+      "text": "so this is the main green this is main"
+    },
+    {
+      "index": 869,
+      "start": 2463.72,
+      "end": 2466.51,
+      "duration": 2.79,
+      "text": "yellow then when it is over we go for"
+    },
+    {
+      "index": 870,
+      "start": 2466.52,
+      "end": 2468.87,
+      "duration": 2.35,
+      "text": "the turn signal so become turn green"
+    },
+    {
+      "index": 871,
+      "start": 2468.88,
+      "end": 2470.63,
+      "duration": 1.75,
+      "text": "after"
+    },
+    {
+      "index": 872,
+      "start": 2470.64,
+      "end": 2476.069,
+      "duration": 5.429,
+      "text": "Ty the turn signal becomes green so TTG"
+    },
+    {
+      "index": 873,
+      "start": 2476.079,
+      "end": 2477.349,
+      "duration": 1.27,
+      "text": "is the period for which it is going to"
+    },
+    {
+      "index": 874,
+      "start": 2477.359,
+      "end": 2480.39,
+      "duration": 3.031,
+      "text": "be green so until TTG elapses the"
+    },
+    {
+      "index": 875,
+      "start": 2480.4,
+      "end": 2482.23,
+      "duration": 1.83,
+      "text": "circuit remains in S3"
+    },
+    {
+      "index": 876,
+      "start": 2482.24,
+      "end": 2485.349,
+      "duration": 3.109,
+      "text": "state after"
+    },
+    {
+      "index": 877,
+      "start": 2485.359,
+      "end": 2488.91,
+      "duration": 3.551,
+      "text": "TTG it goes to"
+    },
+    {
+      "index": 878,
+      "start": 2488.92,
+      "end": 2490.19,
+      "duration": 1.27,
+      "text": "t"
+    },
+    {
+      "index": 879,
+      "start": 2490.2,
+      "end": 2492.27,
+      "duration": 2.07,
+      "text": "y it goes to"
+    },
+    {
+      "index": 880,
+      "start": 2492.28,
+      "end": 2495.069,
+      "duration": 2.789,
+      "text": "S4 S4 is again yellow St correspond to"
+    },
+    {
+      "index": 881,
+      "start": 2495.079,
+      "end": 2497.51,
+      "duration": 2.431,
+      "text": "that light the turn"
+    },
+    {
+      "index": 882,
+      "start": 2497.52,
+      "end": 2500.99,
+      "duration": 3.47,
+      "text": "signal turn signal light has to be"
+    },
+    {
+      "index": 883,
+      "start": 2501.0,
+      "end": 2505.47,
+      "duration": 4.47,
+      "text": "yellow that time is called the Ty so in"
+    },
+    {
+      "index": 884,
+      "start": 2505.48,
+      "end": 2509.63,
+      "duration": 4.15,
+      "text": "S4 it remains until T"
+    },
+    {
+      "index": 885,
+      "start": 2514.589,
+      "end": 2514.599,
+      "duration": 0.01,
+      "text": "is reach until Ty is reached it remains"
+    },
+    {
+      "index": 886,
+      "start": 2514.599,
+      "end": 2518.63,
+      "duration": 4.031,
+      "text": "in S4 Ty bar and then it goes to tsg"
+    },
+    {
+      "index": 887,
+      "start": 2518.64,
+      "end": 2520.43,
+      "duration": 1.79,
+      "text": "Side"
+    },
+    {
+      "index": 888,
+      "start": 2520.44,
+      "end": 2524.67,
+      "duration": 4.23,
+      "text": "Green so Side Green will last for period"
+    },
+    {
+      "index": 889,
+      "start": 2524.68,
+      "end": 2528.19,
+      "duration": 3.51,
+      "text": "called tsg so in S5 the circuit will"
+    },
+    {
+      "index": 890,
+      "start": 2528.2,
+      "end": 2531.19,
+      "duration": 2.99,
+      "text": "remain as long as tsg is not reached"
+    },
+    {
+      "index": 891,
+      "start": 2531.2,
+      "end": 2534.39,
+      "duration": 3.19,
+      "text": "when tsg is reached it goes to s six"
+    },
+    {
+      "index": 892,
+      "start": 2534.4,
+      "end": 2538.069,
+      "duration": 3.669,
+      "text": "which is yellow State for the side Light"
+    },
+    {
+      "index": 893,
+      "start": 2538.079,
+      "end": 2541.589,
+      "duration": 3.51,
+      "text": "Side Light Side yellow so if that is"
+    },
+    {
+      "index": 894,
+      "start": 2541.599,
+      "end": 2545.91,
+      "duration": 4.311,
+      "text": "condition is Ty this"
+    },
+    {
+      "index": 895,
+      "start": 2550.95,
+      "end": 2550.96,
+      "duration": 0.01,
+      "text": "is as as long as Ty is not reached in"
+    },
+    {
+      "index": 896,
+      "start": 2550.96,
+      "end": 2554.39,
+      "duration": 3.43,
+      "text": "SX it will continue to be a side yellow"
+    },
+    {
+      "index": 897,
+      "start": 2554.4,
+      "end": 2557.23,
+      "duration": 2.83,
+      "text": "and at the end of t y goes back to S1 so"
+    },
+    {
+      "index": 898,
+      "start": 2557.24,
+      "end": 2560.95,
+      "duration": 3.71,
+      "text": "this will repeat so this is my state"
+    },
+    {
+      "index": 899,
+      "start": 2560.96,
+      "end": 2563.75,
+      "duration": 2.79,
+      "text": "diagram with"
+    },
+    {
+      "index": 900,
+      "start": 2563.76,
+      "end": 2566.589,
+      "duration": 2.829,
+      "text": "inputs as I said"
+    },
+    {
+      "index": 901,
+      "start": 2566.599,
+      "end": 2570.549,
+      "duration": 3.95,
+      "text": "TMG TTG tsg and"
+    },
+    {
+      "index": 902,
+      "start": 2570.559,
+      "end": 2573.99,
+      "duration": 3.431,
+      "text": "Ty outputs are already defined each of"
+    },
+    {
+      "index": 903,
+      "start": 2574.0,
+      "end": 2577.829,
+      "duration": 3.829,
+      "text": "these output States S1 S2 S3 S4 S5 S6"
+    },
+    {
+      "index": 904,
+      "start": 2577.839,
+      "end": 2579.95,
+      "duration": 2.111,
+      "text": "I already defined outputs here for"
+    },
+    {
+      "index": 905,
+      "start": 2579.96,
+      "end": 2584.19,
+      "duration": 4.23,
+      "text": "example S1 the outputs are m1g mtrr M2 G"
+    },
+    {
+      "index": 906,
+      "start": 2584.2,
+      "end": 2588.39,
+      "duration": 4.19,
+      "text": "Sr in S2 the outputs are M1 G MTR R M2 y"
+    },
+    {
+      "index": 907,
+      "start": 2588.4,
+      "end": 2593.39,
+      "duration": 4.99,
+      "text": "Sr so outputs are not drawn normally in"
+    },
+    {
+      "index": 908,
+      "start": 2593.4,
+      "end": 2596.23,
+      "duration": 2.83,
+      "text": "a more circuit I should write the output"
+    },
+    {
+      "index": 909,
+      "start": 2596.24,
+      "end": 2599.23,
+      "duration": 2.99,
+      "text": "in the state States because the states"
+    },
+    {
+      "index": 910,
+      "start": 2599.24,
+      "end": 2600.95,
+      "duration": 1.71,
+      "text": "circles are too small and I already used"
+    },
+    {
+      "index": 911,
+      "start": 2600.96,
+      "end": 2602.75,
+      "duration": 1.79,
+      "text": "this to write the"
+    },
+    {
+      "index": 912,
+      "start": 2602.76,
+      "end": 2606.87,
+      "duration": 4.11,
+      "text": "state um label I don't have space to"
+    },
+    {
+      "index": 913,
+      "start": 2606.88,
+      "end": 2609.549,
+      "duration": 2.669,
+      "text": "write the all the list of outputs in"
+    },
+    {
+      "index": 914,
+      "start": 2609.559,
+      "end": 2610.91,
+      "duration": 1.351,
+      "text": "each of the states but we know we have"
+    },
+    {
+      "index": 915,
+      "start": 2610.92,
+      "end": 2612.829,
+      "duration": 1.909,
+      "text": "already listed them"
+    },
+    {
+      "index": 916,
+      "start": 2612.839,
+      "end": 2616.15,
+      "duration": 3.311,
+      "text": "there so this will do this extra State I"
+    },
+    {
+      "index": 917,
+      "start": 2616.16,
+      "end": 2618.03,
+      "duration": 1.87,
+      "text": "here don't worry about it this will do"
+    },
+    {
+      "index": 918,
+      "start": 2618.04,
+      "end": 2620.349,
+      "duration": 2.309,
+      "text": "it goes on repeating in Six States"
+    },
+    {
+      "index": 919,
+      "start": 2620.359,
+      "end": 2623.27,
+      "duration": 2.911,
+      "text": "assuming it goes forever but normally in"
+    },
+    {
+      "index": 920,
+      "start": 2623.28,
+      "end": 2626.71,
+      "duration": 3.43,
+      "text": "any condition any any practical Des"
+    },
+    {
+      "index": 921,
+      "start": 2626.72,
+      "end": 2629.109,
+      "duration": 2.389,
+      "text": "problem we don't design for something to"
+    },
+    {
+      "index": 922,
+      "start": 2629.119,
+      "end": 2631.109,
+      "duration": 1.99,
+      "text": "go on forever there's always an"
+    },
+    {
+      "index": 923,
+      "start": 2631.119,
+      "end": 2633.71,
+      "duration": 2.591,
+      "text": "interruption the power supply failure or"
+    },
+    {
+      "index": 924,
+      "start": 2633.72,
+      "end": 2635.549,
+      "duration": 1.829,
+      "text": "the power switched off at the"
+    },
+    {
+      "index": 925,
+      "start": 2635.559,
+      "end": 2637.63,
+      "duration": 2.071,
+      "text": "night or"
+    },
+    {
+      "index": 926,
+      "start": 2637.64,
+      "end": 2639.47,
+      "duration": 1.83,
+      "text": "some resetting condition exist because"
+    },
+    {
+      "index": 927,
+      "start": 2639.48,
+      "end": 2641.19,
+      "duration": 1.71,
+      "text": "of you want to stop the traffic light"
+    },
+    {
+      "index": 928,
+      "start": 2641.2,
+      "end": 2644.069,
+      "duration": 2.869,
+      "text": "for some reason so what we can do is"
+    },
+    {
+      "index": 929,
+      "start": 2644.079,
+      "end": 2646.67,
+      "duration": 2.591,
+      "text": "there are couple of things suppose this"
+    },
+    {
+      "index": 930,
+      "start": 2646.68,
+      "end": 2648.67,
+      "duration": 1.99,
+      "text": "the night you don't want the supply to"
+    },
+    {
+      "index": 931,
+      "start": 2648.68,
+      "end": 2650.349,
+      "duration": 1.669,
+      "text": "be on you can switch off all the lights"
+    },
+    {
+      "index": 932,
+      "start": 2650.359,
+      "end": 2652.99,
+      "duration": 2.631,
+      "text": "in which case there a master switch"
+    },
+    {
+      "index": 933,
+      "start": 2653.0,
+      "end": 2654.99,
+      "duration": 1.99,
+      "text": "where all the lights are"
+    },
+    {
+      "index": 934,
+      "start": 2655.0,
+      "end": 2657.39,
+      "duration": 2.39,
+      "text": "off but there's nothing like off here"
+    },
+    {
+      "index": 935,
+      "start": 2657.4,
+      "end": 2662.47,
+      "duration": 5.07,
+      "text": "know because only three"
+    },
+    {
+      "index": 936,
+      "start": 2665.23,
+      "end": 2665.24,
+      "duration": 0.01,
+      "text": "lights green yellow"
+    },
+    {
+      "index": 937,
+      "start": 2665.24,
+      "end": 2667.79,
+      "duration": 2.55,
+      "text": "red so all of them be off the power"
+    },
+    {
+      "index": 938,
+      "start": 2667.8,
+      "end": 2669.43,
+      "duration": 1.63,
+      "text": "should be off so you can switch out the"
+    },
+    {
+      "index": 939,
+      "start": 2669.44,
+      "end": 2671.63,
+      "duration": 2.19,
+      "text": "power or you can define a state called"
+    },
+    {
+      "index": 940,
+      "start": 2671.64,
+      "end": 2673.109,
+      "duration": 1.469,
+      "text": "initial state in which you can have a"
+    },
+    {
+      "index": 941,
+      "start": 2673.119,
+      "end": 2675.309,
+      "duration": 2.19,
+      "text": "blinking red something like that you"
+    },
+    {
+      "index": 942,
+      "start": 2675.319,
+      "end": 2677.349,
+      "duration": 2.03,
+      "text": "might have seen it in busy streets at"
+    },
+    {
+      "index": 943,
+      "start": 2677.359,
+      "end": 2679.79,
+      "duration": 2.431,
+      "text": "the end of the day at the night late in"
+    },
+    {
+      "index": 944,
+      "start": 2679.8,
+      "end": 2682.63,
+      "duration": 2.83,
+      "text": "the night you will see the main"
+    },
+    {
+      "index": 945,
+      "start": 2682.64,
+      "end": 2686.79,
+      "duration": 4.15,
+      "text": "streate uh this um yellow will blink"
+    },
+    {
+      "index": 946,
+      "start": 2686.8,
+      "end": 2689.829,
+      "duration": 3.029,
+      "text": "that means proceed cautiously and ins"
+    },
+    {
+      "index": 947,
+      "start": 2689.839,
+      "end": 2692.27,
+      "duration": 2.431,
+      "text": "side streets red will flash saying that"
+    },
+    {
+      "index": 948,
+      "start": 2692.28,
+      "end": 2694.309,
+      "duration": 2.029,
+      "text": "stop and go when you when you see a"
+    },
+    {
+      "index": 949,
+      "start": 2694.319,
+      "end": 2697.829,
+      "duration": 3.51,
+      "text": "flash red flashing red light"
+    },
+    {
+      "index": 950,
+      "start": 2697.839,
+      "end": 2699.27,
+      "duration": 1.431,
+      "text": "and we trying to enter from a side seat"
+    },
+    {
+      "index": 951,
+      "start": 2699.28,
+      "end": 2702.549,
+      "duration": 3.269,
+      "text": "to main seat the red flash red indicate"
+    },
+    {
+      "index": 952,
+      "start": 2702.559,
+      "end": 2703.829,
+      "duration": 1.27,
+      "text": "that you should stop look for the"
+    },
+    {
+      "index": 953,
+      "start": 2703.839,
+      "end": 2705.67,
+      "duration": 1.831,
+      "text": "traffic in both directions and then when"
+    },
+    {
+      "index": 954,
+      "start": 2705.68,
+      "end": 2707.79,
+      "duration": 2.11,
+      "text": "proceed if you see a flashing yellow in"
+    },
+    {
+      "index": 955,
+      "start": 2707.8,
+      "end": 2709.589,
+      "duration": 1.789,
+      "text": "the main seate you know your side seat"
+    },
+    {
+      "index": 956,
+      "start": 2709.599,
+      "end": 2711.71,
+      "duration": 2.111,
+      "text": "is approaching there may be a traffic"
+    },
+    {
+      "index": 957,
+      "start": 2711.72,
+      "end": 2715.349,
+      "duration": 3.629,
+      "text": "There Be watchful so proceed cautiously"
+    },
+    {
+      "index": 958,
+      "start": 2715.359,
+      "end": 2717.069,
+      "duration": 1.71,
+      "text": "that is a blinking yellow so you want to"
+    },
+    {
+      "index": 959,
+      "start": 2717.079,
+      "end": 2719.109,
+      "duration": 2.03,
+      "text": "put all those conditions you can"
+    },
+    {
+      "index": 960,
+      "start": 2719.119,
+      "end": 2721.43,
+      "duration": 2.311,
+      "text": "introduce an extra State called State"
+    },
+    {
+      "index": 961,
+      "start": 2721.44,
+      "end": 2722.549,
+      "duration": 1.109,
+      "text": "this could be the state in which the"
+    },
+    {
+      "index": 962,
+      "start": 2722.559,
+      "end": 2724.47,
+      "duration": 1.911,
+      "text": "circuit is switched on for the first"
+    },
+    {
+      "index": 963,
+      "start": 2724.48,
+      "end": 2727.549,
+      "duration": 3.069,
+      "text": "time because we are going to finally"
+    },
+    {
+      "index": 964,
+      "start": 2727.559,
+      "end": 2730.03,
+      "duration": 2.471,
+      "text": "have flip flops to implement so flip"
+    },
+    {
+      "index": 965,
+      "start": 2730.04,
+      "end": 2731.91,
+      "duration": 1.87,
+      "text": "flops can be zero or one Whatever"
+    },
+    {
+      "index": 966,
+      "start": 2731.92,
+      "end": 2733.829,
+      "duration": 1.909,
+      "text": "combination so you'll find them in any"
+    },
+    {
+      "index": 967,
+      "start": 2733.839,
+      "end": 2736.39,
+      "duration": 2.551,
+      "text": "of these combinations so make sure that"
+    },
+    {
+      "index": 968,
+      "start": 2736.4,
+      "end": 2737.589,
+      "duration": 1.189,
+      "text": "as soon"
+    },
+    {
+      "index": 969,
+      "start": 2737.599,
+      "end": 2741.71,
+      "duration": 4.111,
+      "text": "as you put a reset state from that state"
+    },
+    {
+      "index": 970,
+      "start": 2741.72,
+      "end": 2743.71,
+      "duration": 1.99,
+      "text": "it goes to S1 so this initial state is"
+    },
+    {
+      "index": 971,
+      "start": 2743.72,
+      "end": 2745.71,
+      "duration": 1.99,
+      "text": "an optional State you don't have to have"
+    },
+    {
+      "index": 972,
+      "start": 2745.72,
+      "end": 2747.47,
+      "duration": 1.75,
+      "text": "it initial State you can have some"
+    },
+    {
+      "index": 973,
+      "start": 2747.48,
+      "end": 2750.27,
+      "duration": 2.79,
+      "text": "blinking condition or whatever condition"
+    },
+    {
+      "index": 974,
+      "start": 2750.28,
+      "end": 2753.87,
+      "duration": 3.59,
+      "text": "it goes here so this is the state"
+    },
+    {
+      "index": 975,
+      "start": 2753.88,
+      "end": 2757.71,
+      "duration": 3.83,
+      "text": "graph uh with three variables because"
+    },
+    {
+      "index": 976,
+      "start": 2757.72,
+      "end": 2768.829,
+      "duration": 11.109,
+      "text": "there are six"
+    },
+    {
+      "index": 977,
+      "start": 2771.63,
+      "end": 2771.64,
+      "duration": 0.01,
+      "text": "states leaving out"
+    },
+    {
+      "index": 978,
+      "start": 2771.64,
+      "end": 2774.15,
+      "duration": 2.51,
+      "text": "unit with without this there are six"
+    },
+    {
+      "index": 979,
+      "start": 2774.16,
+      "end": 2778.51,
+      "duration": 4.35,
+      "text": "states that means three"
+    },
+    {
+      "index": 980,
+      "start": 2791.349,
+      "end": 2791.359,
+      "duration": 0.01,
+      "text": "and 12 outputs four lights"
+    },
+    {
+      "index": 981,
+      "start": 2791.359,
+      "end": 2794.71,
+      "duration": 3.351,
+      "text": "each three colors but actually this 12"
+    },
+    {
+      "index": 982,
+      "start": 2794.72,
+      "end": 2797.27,
+      "duration": 2.55,
+      "text": "output some of them are redundant for"
+    },
+    {
+      "index": 983,
+      "start": 2797.28,
+      "end": 2799.829,
+      "duration": 2.549,
+      "text": "example some lights are complement of"
+    },
+    {
+      "index": 984,
+      "start": 2799.839,
+      "end": 2801.71,
+      "duration": 1.871,
+      "text": "other"
+    },
+    {
+      "index": 985,
+      "start": 2801.72,
+      "end": 2803.51,
+      "duration": 1.79,
+      "text": "lights so you can make some"
+    },
+    {
+      "index": 986,
+      "start": 2803.52,
+      "end": 2805.47,
+      "duration": 1.95,
+      "text": "simplification on this Twilights you can"
+    },
+    {
+      "index": 987,
+      "start": 2805.48,
+      "end": 2806.99,
+      "duration": 1.51,
+      "text": "you can remove but then finally the"
+    },
+    {
+      "index": 988,
+      "start": 2807.0,
+      "end": 2809.87,
+      "duration": 2.87,
+      "text": "lights are there 12 lights are there the"
+    },
+    {
+      "index": 989,
+      "start": 2809.88,
+      "end": 2811.95,
+      "duration": 2.07,
+      "text": "logic of one light may be compliment to"
+    },
+    {
+      "index": 990,
+      "start": 2811.96,
+      "end": 2814.549,
+      "duration": 2.589,
+      "text": "the"
+    },
+    {
+      "index": 991,
+      "start": 2817.23,
+      "end": 2817.24,
+      "duration": 0.01,
+      "text": "other there's no need to have sometimes"
+    },
+    {
+      "index": 992,
+      "start": 2817.24,
+      "end": 2818.349,
+      "duration": 1.109,
+      "text": "separate"
+    },
+    {
+      "index": 993,
+      "start": 2818.359,
+      "end": 2820.43,
+      "duration": 2.071,
+      "text": "lights sometimes you can have the same"
+    },
+    {
+      "index": 994,
+      "start": 2820.44,
+      "end": 2822.67,
+      "duration": 2.23,
+      "text": "signal going from for two different"
+    },
+    {
+      "index": 995,
+      "start": 2822.68,
+      "end": 2824.71,
+      "duration": 2.03,
+      "text": "lights if one is a compliment to the"
+    },
+    {
+      "index": 996,
+      "start": 2824.72,
+      "end": 2827.15,
+      "duration": 2.43,
+      "text": "other but I'm not taking all that into"
+    },
+    {
+      "index": 997,
+      "start": 2827.16,
+      "end": 2828.829,
+      "duration": 1.669,
+      "text": "account right now right now I'm looking"
+    },
+    {
+      "index": 998,
+      "start": 2828.839,
+      "end": 2831.99,
+      "duration": 3.151,
+      "text": "at the bar uh State graph saying there"
+    },
+    {
+      "index": 999,
+      "start": 2832.0,
+      "end": 2835.23,
+      "duration": 3.23,
+      "text": "are four inputs six 12 output Six States"
+    },
+    {
+      "index": 1000,
+      "start": 2835.24,
+      "end": 2836.75,
+      "duration": 1.51,
+      "text": "Six States requires three variables that"
+    },
+    {
+      "index": 1001,
+      "start": 2836.76,
+      "end": 2838.43,
+      "duration": 1.67,
+      "text": "means four input variable plus three"
+    },
+    {
+      "index": 1002,
+      "start": 2838.44,
+      "end": 2844.03,
+      "duration": 5.59,
+      "text": "state"
+    },
+    {
+      "index": 1003,
+      "start": 2846.349,
+      "end": 2846.359,
+      "duration": 0.01,
+      "text": "variables so you can have a combination"
+    },
+    {
+      "index": 1004,
+      "start": 2846.359,
+      "end": 2849.75,
+      "duration": 3.391,
+      "text": "of"
+    },
+    {
+      "index": 1005,
+      "start": 2857.63,
+      "end": 2857.64,
+      "duration": 0.01,
+      "text": "be a c are three state"
+    },
+    {
+      "index": 1006,
+      "start": 2857.64,
+      "end": 2862.03,
+      "duration": 4.39,
+      "text": "variables four input"
+    },
+    {
+      "index": 1007,
+      "start": 2865.549,
+      "end": 2865.559,
+      "duration": 0.01,
+      "text": "variables T TMG"
+    },
+    {
+      "index": 1008,
+      "start": 2865.559,
+      "end": 2869.99,
+      "duration": 4.431,
+      "text": "TTG tsg Ty and then three output"
+    },
+    {
+      "index": 1009,
+      "start": 2870.0,
+      "end": 2888.87,
+      "duration": 18.87,
+      "text": "variables"
+    },
+    {
+      "index": 1010,
+      "start": 2909.23,
+      "end": 2909.24,
+      "duration": 0.01,
+      "text": "you know you can implemented using"
+    },
+    {
+      "index": 1011,
+      "start": 2909.24,
+      "end": 2910.87,
+      "duration": 1.63,
+      "text": "combination logic flip flops and"
+    },
+    {
+      "index": 1012,
+      "start": 2910.88,
+      "end": 2912.349,
+      "duration": 1.469,
+      "text": "combination logic this combination logic"
+    },
+    {
+      "index": 1013,
+      "start": 2912.359,
+      "end": 2916.109,
+      "duration": 3.75,
+      "text": "can be Gates multiplexes proms or you"
+    },
+    {
+      "index": 1014,
+      "start": 2916.119,
+      "end": 2918.109,
+      "duration": 1.99,
+      "text": "can put the whole thing in a p program"
+    },
+    {
+      "index": 1015,
+      "start": 2918.119,
+      "end": 2920.95,
+      "duration": 2.831,
+      "text": "ARR logic so if it's a prom solution the"
+    },
+    {
+      "index": 1016,
+      "start": 2920.96,
+      "end": 2925.549,
+      "duration": 4.589,
+      "text": "size would"
+    },
+    {
+      "index": 1017,
+      "start": 2928.109,
+      "end": 2928.119,
+      "duration": 0.01,
+      "text": "be so"
+    },
+    {
+      "index": 1018,
+      "start": 2928.119,
+      "end": 2930.309,
+      "duration": 2.19,
+      "text": "prom 2^"
+    },
+    {
+      "index": 1019,
+      "start": 2930.319,
+      "end": 2934.109,
+      "duration": 3.79,
+      "text": "7 12 +"
+    },
+    {
+      "index": 1020,
+      "start": 2937.23,
+      "end": 2937.24,
+      "duration": 0.01,
+      "text": "3 I'm assuming no reduction in the sign"
+    },
+    {
+      "index": 1021,
+      "start": 2937.24,
+      "end": 2938.789,
+      "duration": 1.549,
+      "text": "if I can combine some of these outputs I"
+    },
+    {
+      "index": 1022,
+      "start": 2938.799,
+      "end": 2940.19,
+      "duration": 1.391,
+      "text": "can reduce the size but I don't want to"
+    },
+    {
+      "index": 1023,
+      "start": 2940.2,
+      "end": 2943.069,
+      "duration": 2.869,
+      "text": "really do it without doing any com"
+    },
+    {
+      "index": 1024,
+      "start": 2943.079,
+      "end": 2945.829,
+      "duration": 2.75,
+      "text": "compression compaction of the outputs I"
+    },
+    {
+      "index": 1025,
+      "start": 2945.839,
+      "end": 2947.75,
+      "duration": 1.911,
+      "text": "have 12 outputs for this and three for"
+    },
+    {
+      "index": 1026,
+      "start": 2947.76,
+      "end": 2952.069,
+      "duration": 4.309,
+      "text": "here 15 outputs 4 + 3 is 7 inputs so 2^"
+    },
+    {
+      "index": 1027,
+      "start": 2952.079,
+      "end": 2955.109,
+      "duration": 3.03,
+      "text": "7 into 15 bits is the size of the"
+    },
+    {
+      "index": 1028,
+      "start": 2955.119,
+      "end": 2957.87,
+      "duration": 2.751,
+      "text": "prom plus three D flip"
+    },
+    {
+      "index": 1029,
+      "start": 2957.88,
+      "end": 2961.27,
+      "duration": 3.39,
+      "text": "flops can do the"
+    },
+    {
+      "index": 1030,
+      "start": 2961.28,
+      "end": 2963.71,
+      "duration": 2.43,
+      "text": "job we can look at some of the other"
+    },
+    {
+      "index": 1031,
+      "start": 2963.72,
+      "end": 2965.95,
+      "duration": 2.23,
+      "text": "implementations next lecture"
+    },
+    {
+      "index": 1032,
+      "start": 2965.96,
+      "end": 3025.63,
+      "duration": 59.67,
+      "text": "[Music]"
+    },
+    {
+      "index": 1033,
+      "start": 3025.64,
+      "end": 3029.38,
+      "duration": 3.74,
+      "text": "the the"
+    },
+    {
+      "index": 1034,
+      "start": 3029.39,
+      "end": 3056.67,
+      "duration": 27.28,
+      "text": "[Music]"
+    }
+  ],
+  "course": {
+    "category": "Engineering & Robotics",
+    "title": "Circuits and Electronics",
+    "source_url": "https://www.youtube.com/playlist?list=PL803563859BF7ED8C"
+  }
+}

@@ -1,0 +1,942 @@
+{
+  "video": {
+    "id": "_Fo3Jq1blKk",
+    "title": "Linear Systems of Equations | MIT 18.03SC Differential Equations, Fall 2011",
+    "url": "https://www.youtube.com/watch?v=_Fo3Jq1blKk",
+    "channel": "MIT OpenCourseWare",
+    "duration": 393,
+    "language": "en"
+  },
+  "segment_count": 132,
+  "segments": [
+    {
+      "index": 0,
+      "start": 7.47,
+      "end": 7.48,
+      "duration": 0.01,
+      "text": "welcome in this recitation so we're"
+    },
+    {
+      "index": 1,
+      "start": 7.48,
+      "end": 9.11,
+      "duration": 1.63,
+      "text": "going to talk about linear systems of"
+    },
+    {
+      "index": 2,
+      "start": 9.12,
+      "end": 12.87,
+      "duration": 3.75,
+      "text": "equations so in the first question we"
+    },
+    {
+      "index": 3,
+      "start": 12.88,
+      "end": 15.27,
+      "duration": 2.39,
+      "text": "are given a system of equations x dot"
+    },
+    {
+      "index": 4,
+      "start": 15.28,
+      "end": 20.349,
+      "duration": 5.069,
+      "text": "equal 6 6x + 5 y y dot equal equal x + 2"
+    },
+    {
+      "index": 5,
+      "start": 20.359,
+      "end": 22.95,
+      "duration": 2.591,
+      "text": "y we're asked to write this system in"
+    },
+    {
+      "index": 6,
+      "start": 22.96,
+      "end": 26.029,
+      "duration": 3.069,
+      "text": "Matrix form the second part asks us to"
+    },
+    {
+      "index": 7,
+      "start": 26.039,
+      "end": 27.99,
+      "duration": 1.951,
+      "text": "convert a differential equation of"
+    },
+    {
+      "index": 8,
+      "start": 28.0,
+      "end": 31.589,
+      "duration": 3.589,
+      "text": "second order x dot dot Plus 8 x dot + 7"
+    },
+    {
+      "index": 9,
+      "start": 31.599,
+      "end": 35.43,
+      "duration": 3.831,
+      "text": "xal to0 into M Matrix form uh basically"
+    },
+    {
+      "index": 10,
+      "start": 35.44,
+      "end": 37.31,
+      "duration": 1.87,
+      "text": "into a system of Odes similar to the"
+    },
+    {
+      "index": 11,
+      "start": 37.32,
+      "end": 39.83,
+      "duration": 2.51,
+      "text": "first part in the second in the third"
+    },
+    {
+      "index": 12,
+      "start": 39.84,
+      "end": 41.27,
+      "duration": 1.43,
+      "text": "part of the problem we're asked to"
+    },
+    {
+      "index": 13,
+      "start": 41.28,
+      "end": 44.389,
+      "duration": 3.109,
+      "text": "interpret the population model X do = 2x"
+    },
+    {
+      "index": 14,
+      "start": 44.399,
+      "end": 49.59,
+      "duration": 5.191,
+      "text": "- 3 y y dot equals xus y so here X and Y"
+    },
+    {
+      "index": 15,
+      "start": 49.6,
+      "end": 52.51,
+      "duration": 2.91,
+      "text": "are modeling either a prey or predator"
+    },
+    {
+      "index": 16,
+      "start": 52.52,
+      "end": 54.389,
+      "duration": 1.869,
+      "text": "and you're asked to think about the"
+    },
+    {
+      "index": 17,
+      "start": 54.399,
+      "end": 57.349,
+      "duration": 2.95,
+      "text": "interpretation of this system to to"
+    },
+    {
+      "index": 18,
+      "start": 57.359,
+      "end": 59.59,
+      "duration": 2.231,
+      "text": "determine which of X or Y is the pre or"
+    },
+    {
+      "index": 19,
+      "start": 59.6,
+      "end": 60.59,
+      "duration": 0.99,
+      "text": "the predator"
+    },
+    {
+      "index": 20,
+      "start": 60.6,
+      "end": 62.15,
+      "duration": 1.55,
+      "text": "so why don't you take a few minutes"
+    },
+    {
+      "index": 21,
+      "start": 62.16,
+      "end": 63.63,
+      "duration": 1.47,
+      "text": "think about these three questions and"
+    },
+    {
+      "index": 22,
+      "start": 63.64,
+      "end": 74.149,
+      "duration": 10.509,
+      "text": "I'll be right"
+    },
+    {
+      "index": 23,
+      "start": 78.429,
+      "end": 78.439,
+      "duration": 0.01,
+      "text": "back welcome back okay so for the first"
+    },
+    {
+      "index": 24,
+      "start": 78.439,
+      "end": 80.789,
+      "duration": 2.35,
+      "text": "question basically we're just asked to"
+    },
+    {
+      "index": 25,
+      "start": 80.799,
+      "end": 83.749,
+      "duration": 2.95,
+      "text": "write this system in Matrix form so we"
+    },
+    {
+      "index": 26,
+      "start": 83.759,
+      "end": 88.03,
+      "duration": 4.271,
+      "text": "have X Y derivative for that left hand"
+    },
+    {
+      "index": 27,
+      "start": 88.04,
+      "end": 90.749,
+      "duration": 2.709,
+      "text": "side we need to write this in the form"
+    },
+    {
+      "index": 28,
+      "start": 90.759,
+      "end": 92.31,
+      "duration": 1.551,
+      "text": "of a matrix"
+    },
+    {
+      "index": 29,
+      "start": 92.32,
+      "end": 95.95,
+      "duration": 3.63,
+      "text": "multiplying X and Y so here we would"
+    },
+    {
+      "index": 30,
+      "start": 95.96,
+      "end": 98.63,
+      "duration": 2.67,
+      "text": "have"
+    },
+    {
+      "index": 31,
+      "start": 101.51,
+      "end": 101.52,
+      "duration": 0.01,
+      "text": "65 one"
+    },
+    {
+      "index": 32,
+      "start": 101.52,
+      "end": 104.389,
+      "duration": 2.869,
+      "text": "two and that would be our system of"
+    },
+    {
+      "index": 33,
+      "start": 104.399,
+      "end": 106.709,
+      "duration": 2.31,
+      "text": "differential equations in Matrix form"
+    },
+    {
+      "index": 34,
+      "start": 106.719,
+      "end": 108.23,
+      "duration": 1.511,
+      "text": "and what we would be solving for would"
+    },
+    {
+      "index": 35,
+      "start": 108.24,
+      "end": 109.95,
+      "duration": 1.71,
+      "text": "be the vector"
+    },
+    {
+      "index": 36,
+      "start": 109.96,
+      "end": 113.23,
+      "duration": 3.27,
+      "text": "XY the second part of the problem we"
+    },
+    {
+      "index": 37,
+      "start": 113.24,
+      "end": 115.789,
+      "duration": 2.549,
+      "text": "need to do the opposite go"
+    },
+    {
+      "index": 38,
+      "start": 115.799,
+      "end": 118.27,
+      "duration": 2.471,
+      "text": "from the second order differential"
+    },
+    {
+      "index": 39,
+      "start": 118.28,
+      "end": 122.709,
+      "duration": 4.429,
+      "text": "equation"
+    },
+    {
+      "index": 40,
+      "start": 125.63,
+      "end": 125.64,
+      "duration": 0.01,
+      "text": "into Matrix form so to do that we"
+    },
+    {
+      "index": 41,
+      "start": 125.64,
+      "end": 129.109,
+      "duration": 3.469,
+      "text": "introduce a new"
+    },
+    {
+      "index": 42,
+      "start": 133.07,
+      "end": 133.08,
+      "duration": 0.01,
+      "text": "variable y equal x dot and from that"
+    },
+    {
+      "index": 43,
+      "start": 133.08,
+      "end": 135.19,
+      "duration": 2.11,
+      "text": "point we can then"
+    },
+    {
+      "index": 44,
+      "start": 135.2,
+      "end": 137.91,
+      "duration": 2.71,
+      "text": "write uh x dot dot so if I'm going to"
+    },
+    {
+      "index": 45,
+      "start": 137.92,
+      "end": 140.99,
+      "duration": 3.07,
+      "text": "just start with what we know about the"
+    },
+    {
+      "index": 46,
+      "start": 141.0,
+      "end": 145.03,
+      "duration": 4.03,
+      "text": "equation x do dot equals let me write it"
+    },
+    {
+      "index": 47,
+      "start": 145.04,
+      "end": 147.79,
+      "duration": 2.75,
+      "text": "in a system first before I I do it in a"
+    },
+    {
+      "index": 48,
+      "start": 147.8,
+      "end": 151.19,
+      "duration": 3.39,
+      "text": "vector form"
+    },
+    {
+      "index": 49,
+      "start": 154.91,
+      "end": 154.92,
+      "duration": 0.01,
+      "text": "we would write x dot dot equal - 7"
+    },
+    {
+      "index": 50,
+      "start": 154.92,
+      "end": 158.79,
+      "duration": 3.87,
+      "text": "x - 8 x dot but we introduced a new"
+    },
+    {
+      "index": 51,
+      "start": 158.8,
+      "end": 162.43,
+      "duration": 3.63,
+      "text": "variable X do equals to Y so we have -"
+    },
+    {
+      "index": 52,
+      "start": 162.44,
+      "end": 167.91,
+      "duration": 5.47,
+      "text": "7x minus 8 y so now the other equation"
+    },
+    {
+      "index": 53,
+      "start": 167.92,
+      "end": 169.79,
+      "duration": 1.87,
+      "text": "we need is the one that tells us what"
+    },
+    {
+      "index": 54,
+      "start": 169.8,
+      "end": 174.67,
+      "duration": 4.87,
+      "text": "this Y is so we have x dot equals to Y"
+    },
+    {
+      "index": 55,
+      "start": 174.68,
+      "end": 176.149,
+      "duration": 1.469,
+      "text": "which is the new variable that we"
+    },
+    {
+      "index": 56,
+      "start": 176.159,
+      "end": 178.75,
+      "duration": 2.591,
+      "text": "introduced here and so we go from a"
+    },
+    {
+      "index": 57,
+      "start": 178.76,
+      "end": 181.149,
+      "duration": 2.389,
+      "text": "second order differential equation into"
+    },
+    {
+      "index": 58,
+      "start": 181.159,
+      "end": 183.309,
+      "duration": 2.15,
+      "text": "a system of two differential equations"
+    },
+    {
+      "index": 59,
+      "start": 183.319,
+      "end": 185.55,
+      "duration": 2.231,
+      "text": "that we can write now in vectorial form"
+    },
+    {
+      "index": 60,
+      "start": 185.56,
+      "end": 187.509,
+      "duration": 1.949,
+      "text": "and Matrix form like we did for the"
+    },
+    {
+      "index": 61,
+      "start": 187.519,
+      "end": 190.309,
+      "duration": 2.79,
+      "text": "first part as"
+    },
+    {
+      "index": 62,
+      "start": 190.319,
+      "end": 195.509,
+      "duration": 5.19,
+      "text": "x x dot which is just y I'm just going"
+    },
+    {
+      "index": 63,
+      "start": 195.519,
+      "end": 199.509,
+      "duration": 3.99,
+      "text": "to write this like"
+    },
+    {
+      "index": 64,
+      "start": 205.07,
+      "end": 205.08,
+      "duration": 0.01,
+      "text": "this is just from what we defined equals"
+    },
+    {
+      "index": 65,
+      "start": 205.08,
+      "end": 210.309,
+      "duration": 5.229,
+      "text": "to again X Y like we did previously"
+    },
+    {
+      "index": 66,
+      "start": 210.319,
+      "end": 212.309,
+      "duration": 1.99,
+      "text": "and now we have to read off our system"
+    },
+    {
+      "index": 67,
+      "start": 212.319,
+      "end": 214.67,
+      "duration": 2.351,
+      "text": "to find the coefficient of this Matrix"
+    },
+    {
+      "index": 68,
+      "start": 214.68,
+      "end": 217.949,
+      "duration": 3.269,
+      "text": "so X do equals to y means that there is"
+    },
+    {
+      "index": 69,
+      "start": 217.959,
+      "end": 220.949,
+      "duration": 2.99,
+      "text": "zero coefficient in front of the X a one"
+    },
+    {
+      "index": 70,
+      "start": 220.959,
+      "end": 222.63,
+      "duration": 1.671,
+      "text": "in front of the"
+    },
+    {
+      "index": 71,
+      "start": 222.64,
+      "end": 227.149,
+      "duration": 4.509,
+      "text": "y x dot dot equals - 7 x so we will have"
+    },
+    {
+      "index": 72,
+      "start": 227.159,
+      "end": 229.789,
+      "duration": 2.63,
+      "text": "a minus 7 multiplying the X and A minus"
+    },
+    {
+      "index": 73,
+      "start": 229.799,
+      "end": 232.75,
+      "duration": 2.951,
+      "text": "8 multiplying the"
+    },
+    {
+      "index": 74,
+      "start": 232.76,
+      "end": 236.39,
+      "duration": 3.63,
+      "text": "Y and so that's how we convert a"
+    },
+    {
+      "index": 75,
+      "start": 236.4,
+      "end": 239.19,
+      "duration": 2.79,
+      "text": "differential equation second order into"
+    },
+    {
+      "index": 76,
+      "start": 239.2,
+      "end": 242.03,
+      "duration": 2.83,
+      "text": "a system of uh of differential equations"
+    },
+    {
+      "index": 77,
+      "start": 242.04,
+      "end": 244.19,
+      "duration": 2.15,
+      "text": "in Matrix form and this Matrix would be"
+    },
+    {
+      "index": 78,
+      "start": 244.2,
+      "end": 246.149,
+      "duration": 1.949,
+      "text": "called referred to the companion Matrix"
+    },
+    {
+      "index": 79,
+      "start": 246.159,
+      "end": 247.589,
+      "duration": 1.43,
+      "text": "of this differential"
+    },
+    {
+      "index": 80,
+      "start": 247.599,
+      "end": 253.229,
+      "duration": 5.63,
+      "text": "equation okay so that ends the second"
+    },
+    {
+      "index": 81,
+      "start": 256.67,
+      "end": 256.68,
+      "duration": 0.01,
+      "text": "part so now for the third"
+    },
+    {
+      "index": 82,
+      "start": 256.68,
+      "end": 260.31,
+      "duration": 3.63,
+      "text": "question we're asked to"
+    },
+    {
+      "index": 83,
+      "start": 260.32,
+      "end": 263.189,
+      "duration": 2.869,
+      "text": "interpret this population"
+    },
+    {
+      "index": 84,
+      "start": 263.199,
+      "end": 270.51,
+      "duration": 7.311,
+      "text": "Dynamics system of equation minus 3 y"
+    },
+    {
+      "index": 85,
+      "start": 273.07,
+      "end": 273.08,
+      "duration": 0.01,
+      "text": "dot = xus"
+    },
+    {
+      "index": 86,
+      "start": 273.08,
+      "end": 276.189,
+      "duration": 3.109,
+      "text": "y so the question was we have two"
+    },
+    {
+      "index": 87,
+      "start": 276.199,
+      "end": 278.43,
+      "duration": 2.231,
+      "text": "species which one is the prey which one"
+    },
+    {
+      "index": 88,
+      "start": 278.44,
+      "end": 280.71,
+      "duration": 2.27,
+      "text": "is the Predator so how do we go about"
+    },
+    {
+      "index": 89,
+      "start": 280.72,
+      "end": 283.83,
+      "duration": 3.11,
+      "text": "figuring this out let's look at how x"
+    },
+    {
+      "index": 90,
+      "start": 283.84,
+      "end": 286.469,
+      "duration": 2.629,
+      "text": "dot varies with Y or basically the"
+    },
+    {
+      "index": 91,
+      "start": 286.479,
+      "end": 288.71,
+      "duration": 2.231,
+      "text": "variable X varies with Y here we can see"
+    },
+    {
+      "index": 92,
+      "start": 288.72,
+      "end": 290.55,
+      "duration": 1.83,
+      "text": "that we have a coefficient that is minus"
+    },
+    {
+      "index": 93,
+      "start": 290.56,
+      "end": 292.39,
+      "duration": 1.83,
+      "text": "three that is negative which means that"
+    },
+    {
+      "index": 94,
+      "start": 292.4,
+      "end": 296.71,
+      "duration": 4.31,
+      "text": "when y increases we have a more and more"
+    },
+    {
+      "index": 95,
+      "start": 296.72,
+      "end": 298.99,
+      "duration": 2.27,
+      "text": "negative x dot which means that the"
+    },
+    {
+      "index": 96,
+      "start": 299.0,
+      "end": 301.07,
+      "duration": 2.07,
+      "text": "value of x goes down so as the"
+    },
+    {
+      "index": 97,
+      "start": 301.08,
+      "end": 302.87,
+      "duration": 1.79,
+      "text": "population y increases we have a"
+    },
+    {
+      "index": 98,
+      "start": 302.88,
+      "end": 305.31,
+      "duration": 2.43,
+      "text": "decrease of population X which suggests"
+    },
+    {
+      "index": 99,
+      "start": 305.32,
+      "end": 307.87,
+      "duration": 2.55,
+      "text": "then Y is is a predator eating up"
+    },
+    {
+      "index": 100,
+      "start": 307.88,
+      "end": 311.189,
+      "duration": 3.309,
+      "text": "population X and if you look at the"
+    },
+    {
+      "index": 101,
+      "start": 311.199,
+      "end": 314.35,
+      "duration": 3.151,
+      "text": "equation for y we have x minus y and"
+    },
+    {
+      "index": 102,
+      "start": 314.36,
+      "end": 316.39,
+      "duration": 2.03,
+      "text": "here what we see is that when X"
+    },
+    {
+      "index": 103,
+      "start": 316.4,
+      "end": 319.59,
+      "duration": 3.19,
+      "text": "increases the population y then"
+    },
+    {
+      "index": 104,
+      "start": 319.6,
+      "end": 322.39,
+      "duration": 2.79,
+      "text": "increases so that definitely confirms"
+    },
+    {
+      "index": 105,
+      "start": 322.4,
+      "end": 325.59,
+      "duration": 3.19,
+      "text": "that Y is our Predator that basically"
+    },
+    {
+      "index": 106,
+      "start": 325.6,
+      "end": 329.07,
+      "duration": 3.47,
+      "text": "increases by feeding on the population X"
+    },
+    {
+      "index": 107,
+      "start": 329.08,
+      "end": 332.43,
+      "duration": 3.35,
+      "text": "and as it feeds on population X the"
+    },
+    {
+      "index": 108,
+      "start": 332.44,
+      "end": 334.55,
+      "duration": 2.11,
+      "text": "population x uh as it feeds on"
+    },
+    {
+      "index": 109,
+      "start": 334.56,
+      "end": 336.67,
+      "duration": 2.11,
+      "text": "population X Y increases which means"
+    },
+    {
+      "index": 110,
+      "start": 336.68,
+      "end": 337.87,
+      "duration": 1.19,
+      "text": "that here this term becomes more and"
+    },
+    {
+      "index": 111,
+      "start": 337.88,
+      "end": 339.39,
+      "duration": 1.51,
+      "text": "more negative which means that X"
+    },
+    {
+      "index": 112,
+      "start": 339.4,
+      "end": 341.95,
+      "duration": 2.55,
+      "text": "decreases in turn okay and these two"
+    },
+    {
+      "index": 113,
+      "start": 341.96,
+      "end": 344.029,
+      "duration": 2.069,
+      "text": "terms could be modeling for example here"
+    },
+    {
+      "index": 114,
+      "start": 344.039,
+      "end": 346.71,
+      "duration": 2.671,
+      "text": "just a growth of the population so birth"
+    },
+    {
+      "index": 115,
+      "start": 346.72,
+      "end": 349.309,
+      "duration": 2.589,
+      "text": "THM of the prey and this minus y here"
+    },
+    {
+      "index": 116,
+      "start": 349.319,
+      "end": 350.87,
+      "duration": 1.551,
+      "text": "could be just modeling for example a"
+    },
+    {
+      "index": 117,
+      "start": 350.88,
+      "end": 354.309,
+      "duration": 3.429,
+      "text": "death rate of this Predator uh and so we"
+    },
+    {
+      "index": 118,
+      "start": 354.319,
+      "end": 355.83,
+      "duration": 1.511,
+      "text": "have"
+    },
+    {
+      "index": 119,
+      "start": 355.84,
+      "end": 362.39,
+      "duration": 6.55,
+      "text": "X prey and Y"
+    },
+    {
+      "index": 120,
+      "start": 366.749,
+      "end": 366.759,
+      "duration": 0.01,
+      "text": "Predator okay so from this recitation we"
+    },
+    {
+      "index": 121,
+      "start": 366.759,
+      "end": 369.11,
+      "duration": 2.351,
+      "text": "learned how to convert a system of"
+    },
+    {
+      "index": 122,
+      "start": 369.12,
+      "end": 371.629,
+      "duration": 2.509,
+      "text": "differential equations to Matrix form we"
+    },
+    {
+      "index": 123,
+      "start": 371.639,
+      "end": 374.309,
+      "duration": 2.67,
+      "text": "learned how to convert a second order"
+    },
+    {
+      "index": 124,
+      "start": 374.319,
+      "end": 376.55,
+      "duration": 2.231,
+      "text": "differential equation into also Matrix"
+    },
+    {
+      "index": 125,
+      "start": 376.56,
+      "end": 378.15,
+      "duration": 1.59,
+      "text": "form basically system differential"
+    },
+    {
+      "index": 126,
+      "start": 378.16,
+      "end": 379.99,
+      "duration": 1.83,
+      "text": "equation introducing notion of companion"
+    },
+    {
+      "index": 127,
+      "start": 380.0,
+      "end": 382.909,
+      "duration": 2.909,
+      "text": "Matrix and we learn how to interpret a"
+    },
+    {
+      "index": 128,
+      "start": 382.919,
+      "end": 384.83,
+      "duration": 1.911,
+      "text": "system of differential equations in"
+    },
+    {
+      "index": 129,
+      "start": 384.84,
+      "end": 387.589,
+      "duration": 2.749,
+      "text": "terms of what what populations could it"
+    },
+    {
+      "index": 130,
+      "start": 387.599,
+      "end": 389.27,
+      "duration": 1.671,
+      "text": "be modeling or what Dynamics could it be"
+    },
+    {
+      "index": 131,
+      "start": 389.28,
+      "end": 393.599,
+      "duration": 4.319,
+      "text": "modeling so that ends the recation"
+    }
+  ],
+  "course": {
+    "category": "Mathematics",
+    "title": "Differential Equations",
+    "source_url": "https://www.youtube.com/playlist?list=PL64BDFBDA2AF24F7E"
+  }
+}

@@ -2,8 +2,7 @@
 
 from __future__ import annotations
 
-import json
-
+from demo_auth import get_current_user_id, require_login
 from shared import (
     job_repo,
     log_ui_action,
@@ -19,7 +18,7 @@ except ImportError as exc:  # pragma: no cover
     raise RuntimeError("Install streamlit to run the demo UI.") from exc
 
 from backend.src.core.config import settings
-from backend.src.models.schemas import MatchThresholds, job_from_dict, job_to_dict, match_result_to_dict
+from backend.src.models.schemas import MatchThresholds, job_from_dict, job_to_dict
 from backend.src.services.document_reader import extract_text_from_bytes
 from backend.src.services.jd_parser import (
     parse_jd_form_with_metadata,
@@ -30,14 +29,17 @@ from backend.src.services.matching import match_students_for_job
 
 
 st.set_page_config(page_title="JD Workspace", layout="wide")
+user = require_login("enterprise")
 render_parser_status_sidebar()
+company_user_id = get_current_user_id()
+st.page_link("pages/0_Home.py", label="Back to Dashboard")
 st.title("JD Workspace")
 
 tab_parse, tab_manage, tab_match = st.tabs(["Parse JD", "Manage Jobs", "Match Students"])
 
 with tab_parse:
     input_mode = st.radio("Input mode", ["Form", "Upload", "Raw text"], horizontal=True)
-    company_id = st.text_input("Company ID", value="company_demo")
+    company_id = st.text_input("Company ID", value=company_user_id, disabled=True)
 
     if input_mode == "Form":
         form = {
@@ -91,15 +93,11 @@ with tab_parse:
                 st.info("Last parse used the local fallback/mock parser because the selected LLM is not configured.")
         st.subheader("Review parsed job")
         render_parsed_job_review(st.session_state["draft_job"], key_prefix="draft-job")
-        st.subheader("Edit JSON before saving")
-        edited = st.text_area(
-            "Validated job JSON",
-            value=json.dumps(st.session_state["draft_job"], indent=2, ensure_ascii=False),
-            height=420,
-        )
-        if st.button("Validate and save job"):
+        if st.button("Save job"):
             try:
-                job = job_from_dict(json.loads(edited))
+                job_data = dict(st.session_state["draft_job"])
+                job_data["company_id"] = company_user_id
+                job = job_from_dict(job_data)
                 job_repo.save(job)
                 log_ui_action("save_job", job.job_id)
                 st.success(f"Saved {job.job_id}")
@@ -108,7 +106,7 @@ with tab_parse:
                 st.error(str(exc))
 
 with tab_manage:
-    jobs = job_repo.list()
+    jobs = [job for job in job_repo.list() if job.company_id == company_user_id]
     if not jobs:
         st.info("No jobs saved yet.")
     for job in jobs:
@@ -129,7 +127,7 @@ with tab_manage:
                 st.rerun()
 
 with tab_match:
-    jobs = [job for job in job_repo.list() if job.status == "open"]
+    jobs = [job for job in job_repo.list() if job.company_id == company_user_id and job.status == "open"]
     if not jobs:
         st.info("Open at least one job before running matching.")
     else:
@@ -157,4 +155,3 @@ with tab_match:
                 ],
                 width="stretch",
             )
-            st.json([match_result_to_dict(result) for result in results])

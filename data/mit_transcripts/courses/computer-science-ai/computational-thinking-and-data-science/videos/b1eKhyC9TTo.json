@@ -1,0 +1,8537 @@
+{
+  "video": {
+    "id": "b1eKhyC9TTo",
+    "title": "7. Symmetry, Infinite Number of Coupled Oscillators",
+    "url": "https://www.youtube.com/watch?v=b1eKhyC9TTo",
+    "channel": "MIT OpenCourseWare",
+    "duration": 4480,
+    "language": "en"
+  },
+  "segment_count": 1217,
+  "segments": [
+    {
+      "index": 0,
+      "start": 2.729,
+      "end": 2.739,
+      "duration": 0.01,
+      "text": "the following content is provided under"
+    },
+    {
+      "index": 1,
+      "start": 2.739,
+      "end": 5.309,
+      "duration": 2.57,
+      "text": "a Creative Commons license your support"
+    },
+    {
+      "index": 2,
+      "start": 5.319,
+      "end": 7.559,
+      "duration": 2.24,
+      "text": "will help MIT OpenCourseWare continue to"
+    },
+    {
+      "index": 3,
+      "start": 7.569,
+      "end": 9.39,
+      "duration": 1.821,
+      "text": "offer high quality educational resources"
+    },
+    {
+      "index": 4,
+      "start": 9.4,
+      "end": 10.47,
+      "duration": 1.07,
+      "text": "for free"
+    },
+    {
+      "index": 5,
+      "start": 10.48,
+      "end": 12.66,
+      "duration": 2.18,
+      "text": "to make a donation or to view additional"
+    },
+    {
+      "index": 6,
+      "start": 12.67,
+      "end": 14.7,
+      "duration": 2.03,
+      "text": "materials from hundreds of MIT courses"
+    },
+    {
+      "index": 7,
+      "start": 14.71,
+      "end": 22.65,
+      "duration": 7.94,
+      "text": "visit MIT opencourseware at ocw.mit.edu"
+    },
+    {
+      "index": 8,
+      "start": 25.509,
+      "end": 25.519,
+      "duration": 0.01,
+      "text": "so I'm back"
+    },
+    {
+      "index": 9,
+      "start": 25.519,
+      "end": 30.58,
+      "duration": 5.061,
+      "text": "welcome back also to al-suri so today"
+    },
+    {
+      "index": 10,
+      "start": 30.59,
+      "end": 33.729,
+      "duration": 3.139,
+      "text": "what we are going to do is to is"
+    },
+    {
+      "index": 11,
+      "start": 33.739,
+      "end": 37.03,
+      "duration": 3.291,
+      "text": "something really interesting so it's to"
+    },
+    {
+      "index": 12,
+      "start": 37.04,
+      "end": 40.149,
+      "duration": 3.109,
+      "text": "understand how we use symmetry to help"
+    },
+    {
+      "index": 13,
+      "start": 40.159,
+      "end": 45.34,
+      "duration": 5.181,
+      "text": "us with prediction of physical"
+    },
+    {
+      "index": 14,
+      "start": 45.35,
+      "end": 50.259,
+      "duration": 4.909,
+      "text": "situations so so first I will go through"
+    },
+    {
+      "index": 15,
+      "start": 50.269,
+      "end": 54.389,
+      "duration": 4.12,
+      "text": "two concrete examples of symmetry and"
+    },
+    {
+      "index": 16,
+      "start": 54.399,
+      "end": 56.83,
+      "duration": 2.431,
+      "text": "see what we can learn from there and"
+    },
+    {
+      "index": 17,
+      "start": 56.84,
+      "end": 59.669,
+      "duration": 2.829,
+      "text": "also today we are going to go to"
+    },
+    {
+      "index": 18,
+      "start": 59.679,
+      "end": 61.65,
+      "duration": 1.971,
+      "text": "infinite number of coupled oscillators"
+    },
+    {
+      "index": 19,
+      "start": 61.66,
+      "end": 64.57,
+      "duration": 2.91,
+      "text": "okay okay I think we are done with"
+    },
+    {
+      "index": 20,
+      "start": 64.58,
+      "end": 68.71,
+      "duration": 4.13,
+      "text": "finite numbers okay all right so what we"
+    },
+    {
+      "index": 21,
+      "start": 68.72,
+      "end": 71.02,
+      "duration": 2.3,
+      "text": "have learned last time when Pollock was"
+    },
+    {
+      "index": 22,
+      "start": 71.03,
+      "end": 74.29,
+      "duration": 3.26,
+      "text": "giving the lecture I hope we have"
+    },
+    {
+      "index": 23,
+      "start": 74.3,
+      "end": 77.499,
+      "duration": 3.199,
+      "text": "learned a driving force can excite a"
+    },
+    {
+      "index": 24,
+      "start": 77.509,
+      "end": 80.26,
+      "duration": 2.751,
+      "text": "specific normal mode right so if you"
+    },
+    {
+      "index": 25,
+      "start": 80.27,
+      "end": 82.96,
+      "duration": 2.69,
+      "text": "type the system at the frequency"
+    },
+    {
+      "index": 26,
+      "start": 82.97,
+      "end": 85.63,
+      "duration": 2.66,
+      "text": "persistent like then the system will"
+    },
+    {
+      "index": 27,
+      "start": 85.64,
+      "end": 89.2,
+      "duration": 3.56,
+      "text": "respond and the other day at driving"
+    },
+    {
+      "index": 28,
+      "start": 89.21,
+      "end": 92.38,
+      "duration": 3.17,
+      "text": "frequency with large amplitude okay and"
+    },
+    {
+      "index": 29,
+      "start": 92.39,
+      "end": 95.59,
+      "duration": 3.2,
+      "text": "also we have learned that the full"
+    },
+    {
+      "index": 30,
+      "start": 95.6,
+      "end": 98.56,
+      "duration": 2.96,
+      "text": "solution of a coupled oscillator is"
+    },
+    {
+      "index": 31,
+      "start": 98.57,
+      "end": 100.45,
+      "duration": 1.88,
+      "text": "actually pretty similar to the situation"
+    },
+    {
+      "index": 32,
+      "start": 100.46,
+      "end": 107.499,
+      "duration": 7.039,
+      "text": "we got from single oscillator so you"
+    },
+    {
+      "index": 33,
+      "start": 107.509,
+      "end": 110.2,
+      "duration": 2.691,
+      "text": "have particular solution and homogeneous"
+    },
+    {
+      "index": 34,
+      "start": 110.21,
+      "end": 113.2,
+      "duration": 2.99,
+      "text": "solution and the full solution will be a"
+    },
+    {
+      "index": 35,
+      "start": 113.21,
+      "end": 116.279,
+      "duration": 3.069,
+      "text": "superposition of the two country"
+    },
+    {
+      "index": 36,
+      "start": 116.289,
+      "end": 119.999,
+      "duration": 3.71,
+      "text": "component and all the unknown"
+    },
+    {
+      "index": 37,
+      "start": 120.009,
+      "end": 123.55,
+      "duration": 3.541,
+      "text": "coefficients are in the homogenous part"
+    },
+    {
+      "index": 38,
+      "start": 123.56,
+      "end": 124.51,
+      "duration": 0.95,
+      "text": "of the solution"
+    },
+    {
+      "index": 39,
+      "start": 124.52,
+      "end": 128.139,
+      "duration": 3.619,
+      "text": "okay and today I hope I can help you and"
+    },
+    {
+      "index": 40,
+      "start": 128.149,
+      "end": 131.56,
+      "duration": 3.411,
+      "text": "convince you that symmetry actually can"
+    },
+    {
+      "index": 41,
+      "start": 131.57,
+      "end": 134.17,
+      "duration": 2.6,
+      "text": "help us to solve the normal modes"
+    },
+    {
+      "index": 42,
+      "start": 134.18,
+      "end": 137.5,
+      "duration": 3.32,
+      "text": "without knowing the detail or a nice one"
+    },
+    {
+      "index": 43,
+      "start": 137.51,
+      "end": 139.9,
+      "duration": 2.39,
+      "text": "make a matrix actually so that is"
+    },
+    {
+      "index": 44,
+      "start": 139.91,
+      "end": 141.97,
+      "duration": 2.06,
+      "text": "actually something really cool and I"
+    },
+    {
+      "index": 45,
+      "start": 141.98,
+      "end": 143.71,
+      "duration": 1.73,
+      "text": "would like to talk about that in this"
+    },
+    {
+      "index": 46,
+      "start": 143.72,
+      "end": 146.77,
+      "duration": 3.05,
+      "text": "lecture today so this is actually what"
+    },
+    {
+      "index": 47,
+      "start": 146.78,
+      "end": 149.47,
+      "duration": 2.69,
+      "text": "we have been doing so far right so we"
+    },
+    {
+      "index": 48,
+      "start": 149.48,
+      "end": 152.62,
+      "duration": 3.14,
+      "text": "write everything in terms of matrix so"
+    },
+    {
+      "index": 49,
+      "start": 152.63,
+      "end": 155.32,
+      "duration": 2.69,
+      "text": "we start from the equation of motion and"
+    },
+    {
+      "index": 50,
+      "start": 155.33,
+      "end": 158.95,
+      "duration": 3.62,
+      "text": "X double dot equal to minus KX and then"
+    },
+    {
+      "index": 51,
+      "start": 158.96,
+      "end": 162.52,
+      "duration": 3.56,
+      "text": "we write everything in a complex"
+    },
+    {
+      "index": 52,
+      "start": 162.53,
+      "end": 166.09,
+      "duration": 3.56,
+      "text": "notation exponential I Omega T plus Phi"
+    },
+    {
+      "index": 53,
+      "start": 166.1,
+      "end": 169.96,
+      "duration": 3.86,
+      "text": "times a a they should be back to right"
+    },
+    {
+      "index": 54,
+      "start": 169.97,
+      "end": 172.6,
+      "duration": 2.63,
+      "text": "so it's actually a 1 a 2 a series it"
+    },
+    {
+      "index": 55,
+      "start": 172.61,
+      "end": 174.85,
+      "duration": 2.24,
+      "text": "says with the amplitude of the"
+    },
+    {
+      "index": 56,
+      "start": 174.86,
+      "end": 177.04,
+      "duration": 2.18,
+      "text": "oscillation of the first second and"
+    },
+    {
+      "index": 57,
+      "start": 177.05,
+      "end": 179.47,
+      "duration": 2.42,
+      "text": "third etcetera I said to a component of"
+    },
+    {
+      "index": 58,
+      "start": 179.48,
+      "end": 183.37,
+      "duration": 3.89,
+      "text": "the system right then we actually found"
+    },
+    {
+      "index": 59,
+      "start": 183.38,
+      "end": 185.95,
+      "duration": 2.57,
+      "text": "that in the end of the day we are"
+    },
+    {
+      "index": 60,
+      "start": 185.96,
+      "end": 188.67,
+      "duration": 2.71,
+      "text": "actually solving this problem like"
+    },
+    {
+      "index": 61,
+      "start": 188.68,
+      "end": 192.28,
+      "duration": 3.6,
+      "text": "eigenvalue problem right so basically we"
+    },
+    {
+      "index": 62,
+      "start": 192.29,
+      "end": 196.0,
+      "duration": 3.71,
+      "text": "have M minus 1 K matrix describe how"
+    },
+    {
+      "index": 63,
+      "start": 196.01,
+      "end": 199.21,
+      "duration": 3.2,
+      "text": "each component in the system interact"
+    },
+    {
+      "index": 64,
+      "start": 199.22,
+      "end": 203.02,
+      "duration": 3.8,
+      "text": "with each other okay then what is this"
+    },
+    {
+      "index": 65,
+      "start": 203.03,
+      "end": 205.78,
+      "duration": 2.75,
+      "text": "with the angular frequency of the normal"
+    },
+    {
+      "index": 66,
+      "start": 205.79,
+      "end": 208.48,
+      "duration": 2.69,
+      "text": "modes essentially coming from this"
+    },
+    {
+      "index": 67,
+      "start": 208.49,
+      "end": 212.29,
+      "duration": 3.8,
+      "text": "eigenvalue problem M minus 1 K a equal"
+    },
+    {
+      "index": 68,
+      "start": 212.3,
+      "end": 215.38,
+      "duration": 3.08,
+      "text": "to Omega square a then you just go ahead"
+    },
+    {
+      "index": 69,
+      "start": 215.39,
+      "end": 218.26,
+      "duration": 2.87,
+      "text": "and solve the eigenvalue problem then"
+    },
+    {
+      "index": 70,
+      "start": 218.27,
+      "end": 220.36,
+      "duration": 2.09,
+      "text": "you will be able to figure out what are"
+    },
+    {
+      "index": 71,
+      "start": 220.37,
+      "end": 222.04,
+      "duration": 1.67,
+      "text": "the normal mode frequencies and"
+    },
+    {
+      "index": 72,
+      "start": 222.05,
+      "end": 225.1,
+      "duration": 3.05,
+      "text": "therefore what are the relative the"
+    },
+    {
+      "index": 73,
+      "start": 225.11,
+      "end": 228.61,
+      "duration": 3.5,
+      "text": "ratio of the amplitude in the normal"
+    },
+    {
+      "index": 74,
+      "start": 228.62,
+      "end": 231.61,
+      "duration": 2.99,
+      "text": "mode which is actually a vector okay the"
+    },
+    {
+      "index": 75,
+      "start": 231.62,
+      "end": 234.1,
+      "duration": 2.48,
+      "text": "eye contact okay so that's issue what we"
+    },
+    {
+      "index": 76,
+      "start": 234.11,
+      "end": 239.89,
+      "duration": 5.78,
+      "text": "have been doing okay and today what I am"
+    },
+    {
+      "index": 77,
+      "start": 239.9,
+      "end": 242.53,
+      "duration": 2.63,
+      "text": "going to do is to introduce you a very"
+    },
+    {
+      "index": 78,
+      "start": 242.54,
+      "end": 245.59,
+      "duration": 3.05,
+      "text": "important concept in physics not only in"
+    },
+    {
+      "index": 79,
+      "start": 245.6,
+      "end": 248.59,
+      "duration": 2.99,
+      "text": "physics but also in mathematics and also"
+    },
+    {
+      "index": 80,
+      "start": 248.6,
+      "end": 252.12,
+      "duration": 3.52,
+      "text": "art right so you see symmetry in the art"
+    },
+    {
+      "index": 81,
+      "start": 252.13,
+      "end": 254.59,
+      "duration": 2.46,
+      "text": "you can see here there are several"
+    },
+    {
+      "index": 82,
+      "start": 254.6,
+      "end": 257.289,
+      "duration": 2.689,
+      "text": "graphs here and you can see that there"
+    },
+    {
+      "index": 83,
+      "start": 257.299,
+      "end": 260.08,
+      "duration": 2.781,
+      "text": "the parent symmetry you have rotational"
+    },
+    {
+      "index": 84,
+      "start": 260.09,
+      "end": 262.18,
+      "duration": 2.09,
+      "text": "symmetry"
+    },
+    {
+      "index": 85,
+      "start": 264.28,
+      "end": 264.29,
+      "duration": 0.01,
+      "text": "they are your fracturing symmetry and"
+    },
+    {
+      "index": 86,
+      "start": 264.29,
+      "end": 267.96,
+      "duration": 3.67,
+      "text": "you can see that when we build the"
+    },
+    {
+      "index": 87,
+      "start": 267.97,
+      "end": 270.49,
+      "duration": 2.52,
+      "text": "particle detector visible lower-right"
+    },
+    {
+      "index": 88,
+      "start": 270.5,
+      "end": 274.48,
+      "duration": 3.98,
+      "text": "bra is a cns detector camera so noise in"
+    },
+    {
+      "index": 89,
+      "start": 274.49,
+      "end": 277.18,
+      "duration": 2.69,
+      "text": "the Large Hadron Collider we also try to"
+    },
+    {
+      "index": 90,
+      "start": 277.19,
+      "end": 280.27,
+      "duration": 3.08,
+      "text": "build this detector symmetric right"
+    },
+    {
+      "index": 91,
+      "start": 280.28,
+      "end": 282.73,
+      "duration": 2.45,
+      "text": "because otherwise if I get a very"
+    },
+    {
+      "index": 92,
+      "start": 282.74,
+      "end": 285.19,
+      "duration": 2.45,
+      "text": "complicated shape of the data then the"
+    },
+    {
+      "index": 93,
+      "start": 285.2,
+      "end": 287.71,
+      "duration": 2.51,
+      "text": "analysis of the data will be really"
+    },
+    {
+      "index": 94,
+      "start": 287.72,
+      "end": 288.67,
+      "duration": 0.95,
+      "text": "complicated"
+    },
+    {
+      "index": 95,
+      "start": 288.68,
+      "end": 291.48,
+      "duration": 2.8,
+      "text": "so therefore everybody like symmetry and"
+    },
+    {
+      "index": 96,
+      "start": 291.49,
+      "end": 295.81,
+      "duration": 4.32,
+      "text": "everybody don't like really chaos right"
+    },
+    {
+      "index": 97,
+      "start": 295.82,
+      "end": 298.18,
+      "duration": 2.36,
+      "text": "okay so that's really nice"
+    },
+    {
+      "index": 98,
+      "start": 298.19,
+      "end": 302.59,
+      "duration": 4.4,
+      "text": "the question is how do we speak the"
+    },
+    {
+      "index": 99,
+      "start": 302.6,
+      "end": 306.07,
+      "duration": 3.47,
+      "text": "language not let the natural speak how"
+    },
+    {
+      "index": 100,
+      "start": 306.08,
+      "end": 310.54,
+      "duration": 4.46,
+      "text": "do we actually describe symmetry that's"
+    },
+    {
+      "index": 101,
+      "start": 310.55,
+      "end": 312.969,
+      "duration": 2.419,
+      "text": "actually the question I'm asking and I'm"
+    },
+    {
+      "index": 102,
+      "start": 312.979,
+      "end": 315.189,
+      "duration": 2.21,
+      "text": "going to show you that okay we can issue"
+    },
+    {
+      "index": 103,
+      "start": 315.199,
+      "end": 318.43,
+      "duration": 3.231,
+      "text": "use mathematics to describe a symmetry"
+    },
+    {
+      "index": 104,
+      "start": 318.44,
+      "end": 323.37,
+      "duration": 4.93,
+      "text": "so before we go to infinite number of"
+    },
+    {
+      "index": 105,
+      "start": 323.38,
+      "end": 326.77,
+      "duration": 3.39,
+      "text": "oscillator that me give you a concrete"
+    },
+    {
+      "index": 106,
+      "start": 326.78,
+      "end": 331.27,
+      "duration": 4.49,
+      "text": "example of symmetry and then see if we"
+    },
+    {
+      "index": 107,
+      "start": 331.28,
+      "end": 334.09,
+      "duration": 2.81,
+      "text": "can understand how to use the math to"
+    },
+    {
+      "index": 108,
+      "start": 334.1,
+      "end": 339.43,
+      "duration": 5.33,
+      "text": "describe symmetry okay so there's a two"
+    },
+    {
+      "index": 109,
+      "start": 339.44,
+      "end": 342.909,
+      "duration": 3.469,
+      "text": "component system two pendulums which we"
+    },
+    {
+      "index": 110,
+      "start": 342.919,
+      "end": 345.689,
+      "duration": 2.77,
+      "text": "work together in the last few lectures"
+    },
+    {
+      "index": 111,
+      "start": 345.699,
+      "end": 348.61,
+      "duration": 2.911,
+      "text": "that they are coupled to each other"
+    },
+    {
+      "index": 112,
+      "start": 348.62,
+      "end": 351.58,
+      "duration": 2.96,
+      "text": "and there is a parent symmetry of this"
+    },
+    {
+      "index": 113,
+      "start": 351.59,
+      "end": 353.89,
+      "duration": 2.3,
+      "text": "system can somebody tell me what is the"
+    },
+    {
+      "index": 114,
+      "start": 353.9,
+      "end": 356.32,
+      "duration": 2.42,
+      "text": "same symmetry you can see from this"
+    },
+    {
+      "index": 115,
+      "start": 356.33,
+      "end": 363.18,
+      "duration": 6.85,
+      "text": "system somebody anybody"
+    },
+    {
+      "index": 116,
+      "start": 367.149,
+      "end": 367.159,
+      "duration": 0.01,
+      "text": "so if you refract this system as I show"
+    },
+    {
+      "index": 117,
+      "start": 367.159,
+      "end": 370.75,
+      "duration": 3.591,
+      "text": "you in the leg in that slide you can see"
+    },
+    {
+      "index": 118,
+      "start": 370.76,
+      "end": 374.649,
+      "duration": 3.889,
+      "text": "that if you reflect this picture it"
+    },
+    {
+      "index": 119,
+      "start": 374.659,
+      "end": 377.71,
+      "duration": 3.051,
+      "text": "looks identical right so that is"
+    },
+    {
+      "index": 120,
+      "start": 377.72,
+      "end": 379.659,
+      "duration": 1.939,
+      "text": "actually really good news"
+    },
+    {
+      "index": 121,
+      "start": 379.669,
+      "end": 383.29,
+      "duration": 3.621,
+      "text": "that means if I do this in refraction x1"
+    },
+    {
+      "index": 122,
+      "start": 383.3,
+      "end": 386.2,
+      "duration": 2.9,
+      "text": "go to minus x2 you have a minus sign"
+    },
+    {
+      "index": 123,
+      "start": 386.21,
+      "end": 387.64,
+      "duration": 1.43,
+      "text": "because you can see that you have the"
+    },
+    {
+      "index": 124,
+      "start": 387.65,
+      "end": 389.74,
+      "duration": 2.09,
+      "text": "refraction the amplitude change sign"
+    },
+    {
+      "index": 125,
+      "start": 389.75,
+      "end": 394.87,
+      "duration": 5.12,
+      "text": "right x2 co 2 minus x1 the system looks"
+    },
+    {
+      "index": 126,
+      "start": 394.88,
+      "end": 397.51,
+      "duration": 2.63,
+      "text": "identical and the physics should not"
+    },
+    {
+      "index": 127,
+      "start": 397.52,
+      "end": 399.7,
+      "duration": 2.18,
+      "text": "change okay so that's actually what we"
+    },
+    {
+      "index": 128,
+      "start": 399.71,
+      "end": 403.18,
+      "duration": 3.47,
+      "text": "can learn from but there so that means"
+    },
+    {
+      "index": 129,
+      "start": 403.19,
+      "end": 408.52,
+      "duration": 5.33,
+      "text": "if I have I to this refraction then I"
+    },
+    {
+      "index": 130,
+      "start": 408.53,
+      "end": 414.61,
+      "duration": 6.08,
+      "text": "can have actually defined X tilde P this"
+    },
+    {
+      "index": 131,
+      "start": 414.62,
+      "end": 421.39,
+      "duration": 6.77,
+      "text": "is equal to minus x2 minus x1 okay to be"
+    },
+    {
+      "index": 132,
+      "start": 421.4,
+      "end": 426.73,
+      "duration": 5.33,
+      "text": "with eggs okay and this is also going to"
+    },
+    {
+      "index": 133,
+      "start": 426.74,
+      "end": 429.939,
+      "duration": 3.199,
+      "text": "be the solution of the equation of"
+    },
+    {
+      "index": 134,
+      "start": 429.949,
+      "end": 433.09,
+      "duration": 3.141,
+      "text": "motion if the original X is already a"
+    },
+    {
+      "index": 135,
+      "start": 433.1,
+      "end": 436.45,
+      "duration": 3.35,
+      "text": "solution okay so that's the power of the"
+    },
+    {
+      "index": 136,
+      "start": 436.46,
+      "end": 439.8,
+      "duration": 3.34,
+      "text": "refraction symmetry okay if X is a"
+    },
+    {
+      "index": 137,
+      "start": 439.81,
+      "end": 445.06,
+      "duration": 5.25,
+      "text": "solution then I do this refraction and I"
+    },
+    {
+      "index": 138,
+      "start": 445.07,
+      "end": 449.909,
+      "duration": 4.839,
+      "text": "can figure out that X tilde is also a"
+    },
+    {
+      "index": 139,
+      "start": 449.919,
+      "end": 456.31,
+      "duration": 6.391,
+      "text": "solution okay so how do I actually how"
+    },
+    {
+      "index": 140,
+      "start": 456.32,
+      "end": 458.74,
+      "duration": 2.42,
+      "text": "do I actually describe the symmetry in"
+    },
+    {
+      "index": 141,
+      "start": 458.75,
+      "end": 461.26,
+      "duration": 2.51,
+      "text": "the form of mathematics what we actually"
+    },
+    {
+      "index": 142,
+      "start": 461.27,
+      "end": 466.45,
+      "duration": 5.18,
+      "text": "do is to define s-matrix symmetry matrix"
+    },
+    {
+      "index": 143,
+      "start": 466.46,
+      "end": 470.01,
+      "duration": 3.55,
+      "text": "and in this case when we talk about"
+    },
+    {
+      "index": 144,
+      "start": 470.02,
+      "end": 472.689,
+      "duration": 2.669,
+      "text": "reflection symmetry is actually defined"
+    },
+    {
+      "index": 145,
+      "start": 472.699,
+      "end": 476.589,
+      "duration": 3.89,
+      "text": "as 0 minus 1 minus 1 0 this is actually"
+    },
+    {
+      "index": 146,
+      "start": 476.599,
+      "end": 481.06,
+      "duration": 4.461,
+      "text": "a 2 by 2 matrix and if I do this"
+    },
+    {
+      "index": 147,
+      "start": 481.07,
+      "end": 485.529,
+      "duration": 4.459,
+      "text": "operation s operation this X matrix then"
+    },
+    {
+      "index": 148,
+      "start": 485.539,
+      "end": 487.99,
+      "duration": 2.451,
+      "text": "that especially going to give you the X"
+    },
+    {
+      "index": 149,
+      "start": 488.0,
+      "end": 491.35,
+      "duration": 3.35,
+      "text": "tilde okay so that's the issue the the"
+    },
+    {
+      "index": 150,
+      "start": 491.36,
+      "end": 496.21,
+      "duration": 4.85,
+      "text": "row of the symmetry matrix ok any"
+    },
+    {
+      "index": 151,
+      "start": 496.22,
+      "end": 502.87,
+      "duration": 6.65,
+      "text": "questions ok so now we have defined a"
+    },
+    {
+      "index": 152,
+      "start": 502.88,
+      "end": 505.87,
+      "duration": 2.99,
+      "text": "symmetry matrix and though then you can"
+    },
+    {
+      "index": 153,
+      "start": 505.88,
+      "end": 510.129,
+      "duration": 4.249,
+      "text": "ask why do we as you care and why do we"
+    },
+    {
+      "index": 154,
+      "start": 510.139,
+      "end": 512.35,
+      "duration": 2.211,
+      "text": "actually introduce symmetry matrix right"
+    },
+    {
+      "index": 155,
+      "start": 512.36,
+      "end": 514.63,
+      "duration": 2.27,
+      "text": "because I can always write down the X"
+    },
+    {
+      "index": 156,
+      "start": 514.64,
+      "end": 517.62,
+      "duration": 2.98,
+      "text": "tilde in that way that is because I"
+    },
+    {
+      "index": 157,
+      "start": 517.63,
+      "end": 520.899,
+      "duration": 3.269,
+      "text": "think by the end of this lecture you"
+    },
+    {
+      "index": 158,
+      "start": 520.909,
+      "end": 526.54,
+      "duration": 5.631,
+      "text": "you'll find that if s matrix describe"
+    },
+    {
+      "index": 159,
+      "start": 526.55,
+      "end": 529.66,
+      "duration": 3.11,
+      "text": "the symmetry of the system ok"
+    },
+    {
+      "index": 160,
+      "start": 529.67,
+      "end": 533.519,
+      "duration": 3.849,
+      "text": "that will mean as matrix will come mute"
+    },
+    {
+      "index": 161,
+      "start": 533.529,
+      "end": 537.37,
+      "duration": 3.841,
+      "text": "with ms1 key metrics which you don't"
+    },
+    {
+      "index": 162,
+      "start": 537.38,
+      "end": 539.14,
+      "duration": 1.76,
+      "text": "know commute yet but I will introduce"
+    },
+    {
+      "index": 163,
+      "start": 539.15,
+      "end": 542.35,
+      "duration": 3.2,
+      "text": "you that means n minus 1 K metric and s"
+    },
+    {
+      "index": 164,
+      "start": 542.36,
+      "end": 547.12,
+      "duration": 4.76,
+      "text": "can actually swap Freedy okay if that"
+    },
+    {
+      "index": 165,
+      "start": 547.13,
+      "end": 552.55,
+      "duration": 5.42,
+      "text": "happens then s matrix will share the"
+    },
+    {
+      "index": 166,
+      "start": 552.56,
+      "end": 555.3,
+      "duration": 2.74,
+      "text": "same sets of eigenvectors"
+    },
+    {
+      "index": 167,
+      "start": 555.31,
+      "end": 559.12,
+      "duration": 3.81,
+      "text": "as the N minus 1 K metrics what does"
+    },
+    {
+      "index": 168,
+      "start": 559.13,
+      "end": 562.36,
+      "duration": 3.23,
+      "text": "that mean that means okay before we're"
+    },
+    {
+      "index": 169,
+      "start": 562.37,
+      "end": 564.699,
+      "duration": 2.329,
+      "text": "doing this solution right we are solving"
+    },
+    {
+      "index": 170,
+      "start": 564.709,
+      "end": 567.999,
+      "duration": 3.29,
+      "text": "n minus 1 K matrix eigen value problem"
+    },
+    {
+      "index": 171,
+      "start": 568.009,
+      "end": 571.15,
+      "duration": 3.141,
+      "text": "right and then we get an eigen vector"
+    },
+    {
+      "index": 172,
+      "start": 571.16,
+      "end": 574.12,
+      "duration": 2.96,
+      "text": "which is the amplitude ratio of normal"
+    },
+    {
+      "index": 173,
+      "start": 574.13,
+      "end": 577.749,
+      "duration": 3.619,
+      "text": "modes and that means you have an"
+    },
+    {
+      "index": 174,
+      "start": 577.759,
+      "end": 581.22,
+      "duration": 3.461,
+      "text": "alternative way to get the normal mode"
+    },
+    {
+      "index": 175,
+      "start": 581.23,
+      "end": 584.62,
+      "duration": 3.39,
+      "text": "you can solve the eigen value problem of"
+    },
+    {
+      "index": 176,
+      "start": 584.63,
+      "end": 585.61,
+      "duration": 0.98,
+      "text": "asthmatics"
+    },
+    {
+      "index": 177,
+      "start": 585.62,
+      "end": 588.449,
+      "duration": 2.829,
+      "text": "then you can get the same set of"
+    },
+    {
+      "index": 178,
+      "start": 588.459,
+      "end": 592.48,
+      "duration": 4.021,
+      "text": "amplitude ratios as M minus 1 made ok"
+    },
+    {
+      "index": 179,
+      "start": 592.49,
+      "end": 595.449,
+      "duration": 2.959,
+      "text": "matrix eigenvalue problem okay and that"
+    },
+    {
+      "index": 180,
+      "start": 595.459,
+      "end": 599.259,
+      "duration": 3.8,
+      "text": "usually the eigenvalue problem of s"
+    },
+    {
+      "index": 181,
+      "start": 599.269,
+      "end": 603.37,
+      "duration": 4.101,
+      "text": "matrix it's far much easier than n minus"
+    },
+    {
+      "index": 182,
+      "start": 603.38,
+      "end": 606.579,
+      "duration": 3.199,
+      "text": "1 K matrix ok so that's actually why we"
+    },
+    {
+      "index": 183,
+      "start": 606.589,
+      "end": 609.519,
+      "duration": 2.93,
+      "text": "are doing this ok so now I would like to"
+    },
+    {
+      "index": 184,
+      "start": 609.529,
+      "end": 617.62,
+      "duration": 8.091,
+      "text": "convince you that s matrix and M minus 1"
+    },
+    {
+      "index": 185,
+      "start": 617.63,
+      "end": 629.58,
+      "duration": 11.95,
+      "text": "K matrix will share I come back"
+    },
+    {
+      "index": 186,
+      "start": 636.87,
+      "end": 636.88,
+      "duration": 0.01,
+      "text": "okay so let's go ahead and prove this or"
+    },
+    {
+      "index": 187,
+      "start": 636.88,
+      "end": 641.29,
+      "duration": 4.41,
+      "text": "demonstrate this idea okay so the"
+    },
+    {
+      "index": 188,
+      "start": 641.3,
+      "end": 643.66,
+      "duration": 2.36,
+      "text": "original equation motion looks like this"
+    },
+    {
+      "index": 189,
+      "start": 643.67,
+      "end": 650.34,
+      "duration": 6.67,
+      "text": "X double dot okay equal to n minus 1 K X"
+    },
+    {
+      "index": 190,
+      "start": 650.35,
+      "end": 653.46,
+      "duration": 3.11,
+      "text": "right so that is actually the original"
+    },
+    {
+      "index": 191,
+      "start": 653.47,
+      "end": 657.67,
+      "duration": 4.2,
+      "text": "equation of motion okay and if this"
+    },
+    {
+      "index": 192,
+      "start": 657.68,
+      "end": 662.14,
+      "duration": 4.46,
+      "text": "system satisfy the refraction symmetry"
+    },
+    {
+      "index": 193,
+      "start": 662.15,
+      "end": 666.97,
+      "duration": 4.82,
+      "text": "that means X tilde is also a solution"
+    },
+    {
+      "index": 194,
+      "start": 666.98,
+      "end": 670.9,
+      "duration": 3.92,
+      "text": "right therefore what does that mean that"
+    },
+    {
+      "index": 195,
+      "start": 670.91,
+      "end": 675.31,
+      "duration": 4.4,
+      "text": "means X tilde power dot will be also"
+    },
+    {
+      "index": 196,
+      "start": 675.32,
+      "end": 683.62,
+      "duration": 8.3,
+      "text": "equal to M s 1 K X because it's also a"
+    },
+    {
+      "index": 197,
+      "start": 683.63,
+      "end": 685.75,
+      "duration": 2.12,
+      "text": "solution to the equation of motion right"
+    },
+    {
+      "index": 198,
+      "start": 685.76,
+      "end": 691.21,
+      "duration": 5.45,
+      "text": "that's a pretty nature okay now I can"
+    },
+    {
+      "index": 199,
+      "start": 691.22,
+      "end": 694.24,
+      "duration": 3.02,
+      "text": "actually use this expression X tilde is"
+    },
+    {
+      "index": 200,
+      "start": 694.25,
+      "end": 698.77,
+      "duration": 4.52,
+      "text": "equal to s times X right those things"
+    },
+    {
+      "index": 201,
+      "start": 698.78,
+      "end": 701.43,
+      "duration": 2.65,
+      "text": "are metrics okay just to be careful okay"
+    },
+    {
+      "index": 202,
+      "start": 701.44,
+      "end": 705.82,
+      "duration": 4.38,
+      "text": "that means I can write this like this s"
+    },
+    {
+      "index": 203,
+      "start": 705.83,
+      "end": 718.95,
+      "duration": 13.12,
+      "text": "X double dot equal to n minus 1 K s ok"
+    },
+    {
+      "index": 204,
+      "start": 718.96,
+      "end": 722.5,
+      "duration": 3.54,
+      "text": "there's no matrix I can also replace I'm"
+    },
+    {
+      "index": 205,
+      "start": 722.51,
+      "end": 725.98,
+      "duration": 3.47,
+      "text": "just replacing X tilde by SX ok"
+    },
+    {
+      "index": 206,
+      "start": 725.99,
+      "end": 730.75,
+      "duration": 4.76,
+      "text": "and also I call this su one I call this"
+    },
+    {
+      "index": 207,
+      "start": 730.76,
+      "end": 735.1,
+      "duration": 4.34,
+      "text": "as u - ok I can multiply X from the left"
+    },
+    {
+      "index": 208,
+      "start": 735.11,
+      "end": 740.41,
+      "duration": 5.3,
+      "text": "hand side of one okay and see what will"
+    },
+    {
+      "index": 209,
+      "start": 740.42,
+      "end": 742.93,
+      "duration": 2.51,
+      "text": "happen so if I do that then what I am"
+    },
+    {
+      "index": 210,
+      "start": 742.94,
+      "end": 747.37,
+      "duration": 4.43,
+      "text": "going to get is s X double dot ok that"
+    },
+    {
+      "index": 211,
+      "start": 747.38,
+      "end": 753.62,
+      "duration": 6.24,
+      "text": "would be equal to s n minus 1 K X"
+    },
+    {
+      "index": 212,
+      "start": 755.259,
+      "end": 755.269,
+      "duration": 0.01,
+      "text": "[Music]"
+    },
+    {
+      "index": 213,
+      "start": 755.269,
+      "end": 761.03,
+      "duration": 5.761,
+      "text": "okay if you compare this equation and"
+    },
+    {
+      "index": 214,
+      "start": 761.04,
+      "end": 763.4,
+      "duration": 2.36,
+      "text": "the equation number three this two"
+    },
+    {
+      "index": 215,
+      "start": 763.41,
+      "end": 766.28,
+      "duration": 2.87,
+      "text": "equation you will see that lap inside is"
+    },
+    {
+      "index": 216,
+      "start": 766.29,
+      "end": 770.889,
+      "duration": 4.599,
+      "text": "the same right right hand side huh"
+    },
+    {
+      "index": 217,
+      "start": 770.899,
+      "end": 773.259,
+      "duration": 2.36,
+      "text": "something interesting is happening"
+    },
+    {
+      "index": 218,
+      "start": 773.269,
+      "end": 778.34,
+      "duration": 5.071,
+      "text": "Emmons 1k s must be equal to s and minus"
+    },
+    {
+      "index": 219,
+      "start": 778.35,
+      "end": 781.879,
+      "duration": 3.529,
+      "text": "one tape right what does that mean this"
+    },
+    {
+      "index": 220,
+      "start": 781.889,
+      "end": 785.269,
+      "duration": 3.38,
+      "text": "means that they understand a minus 1 K s"
+    },
+    {
+      "index": 221,
+      "start": 785.279,
+      "end": 793.429,
+      "duration": 8.15,
+      "text": "is equal to s M minus 1 K so if I say"
+    },
+    {
+      "index": 222,
+      "start": 793.439,
+      "end": 796.46,
+      "duration": 3.021,
+      "text": "this system satisfies a symmetry it is"
+    },
+    {
+      "index": 223,
+      "start": 796.47,
+      "end": 801.259,
+      "duration": 4.789,
+      "text": "quite 5s metrics that means X tilde"
+    },
+    {
+      "index": 224,
+      "start": 801.269,
+      "end": 803.499,
+      "duration": 2.23,
+      "text": "which essentially the transformed"
+    },
+    {
+      "index": 225,
+      "start": 803.509,
+      "end": 809.119,
+      "duration": 5.61,
+      "text": "amplitude will be also a solution to the"
+    },
+    {
+      "index": 226,
+      "start": 809.129,
+      "end": 812.65,
+      "duration": 3.521,
+      "text": "equation of motion and therefore an"
+    },
+    {
+      "index": 227,
+      "start": 812.66,
+      "end": 817.91,
+      "duration": 5.25,
+      "text": "inevitable consequence is that M minus 1"
+    },
+    {
+      "index": 228,
+      "start": 817.92,
+      "end": 822.549,
+      "duration": 4.629,
+      "text": "K s will be equal to s ms 1k usually"
+    },
+    {
+      "index": 229,
+      "start": 822.559,
+      "end": 825.799,
+      "duration": 3.24,
+      "text": "when you start the physics we write this"
+    },
+    {
+      "index": 230,
+      "start": 825.809,
+      "end": 835.489,
+      "duration": 9.68,
+      "text": "in terms of communicator okay so we call"
+    },
+    {
+      "index": 231,
+      "start": 835.499,
+      "end": 837.769,
+      "duration": 2.27,
+      "text": "this as these two things as you commute"
+    },
+    {
+      "index": 232,
+      "start": 837.779,
+      "end": 841.309,
+      "duration": 3.53,
+      "text": "okay so communicator is actually defined"
+    },
+    {
+      "index": 233,
+      "start": 841.319,
+      "end": 845.389,
+      "duration": 4.07,
+      "text": "as a bracket of a and B this is a should"
+    },
+    {
+      "index": 234,
+      "start": 845.399,
+      "end": 852.199,
+      "duration": 6.8,
+      "text": "equal defined us ap minus VA okay if if"
+    },
+    {
+      "index": 235,
+      "start": 852.209,
+      "end": 856.28,
+      "duration": 4.071,
+      "text": "a and the P commute okay it's just new"
+    },
+    {
+      "index": 236,
+      "start": 856.29,
+      "end": 859.22,
+      "duration": 2.93,
+      "text": "word probably for most of you if they"
+    },
+    {
+      "index": 237,
+      "start": 859.23,
+      "end": 864.47,
+      "duration": 5.24,
+      "text": "can mute that means a see in the bracket"
+    },
+    {
+      "index": 238,
+      "start": 864.48,
+      "end": 872.389,
+      "duration": 7.909,
+      "text": "is equal to 0 okay so this expression I"
+    },
+    {
+      "index": 239,
+      "start": 872.399,
+      "end": 874.989,
+      "duration": 2.59,
+      "text": "can actually write it down like this"
+    },
+    {
+      "index": 240,
+      "start": 874.999,
+      "end": 880.939,
+      "duration": 5.94,
+      "text": "commutator of s M minus 1 K that is"
+    },
+    {
+      "index": 241,
+      "start": 880.949,
+      "end": 884.239,
+      "duration": 3.29,
+      "text": "equal to 0 and you will see this really"
+    },
+    {
+      "index": 242,
+      "start": 884.249,
+      "end": 888.0,
+      "duration": 3.751,
+      "text": "a lot when you study quantum physics"
+    },
+    {
+      "index": 243,
+      "start": 888.01,
+      "end": 890.43,
+      "duration": 2.42,
+      "text": "okay so I hope this I should give you"
+    },
+    {
+      "index": 244,
+      "start": 890.44,
+      "end": 895.46,
+      "duration": 5.02,
+      "text": "some flavor about commutator okay so now"
+    },
+    {
+      "index": 245,
+      "start": 895.47,
+      "end": 897.75,
+      "duration": 2.28,
+      "text": "that's actually pretty nice"
+    },
+    {
+      "index": 246,
+      "start": 897.76,
+      "end": 901.35,
+      "duration": 3.59,
+      "text": "this means that like commute okay if I"
+    },
+    {
+      "index": 247,
+      "start": 901.36,
+      "end": 912.95,
+      "duration": 11.59,
+      "text": "take X of T this is equal to a 1 cosine"
+    },
+    {
+      "index": 248,
+      "start": 912.96,
+      "end": 920.85,
+      "duration": 7.89,
+      "text": "Omega 1 okay so this means that a is"
+    },
+    {
+      "index": 249,
+      "start": 920.86,
+      "end": 924.72,
+      "duration": 3.86,
+      "text": "actually in sorry X is actually a"
+    },
+    {
+      "index": 250,
+      "start": 924.73,
+      "end": 927.03,
+      "duration": 2.3,
+      "text": "solution which is a normal mode a"
+    },
+    {
+      "index": 251,
+      "start": 927.04,
+      "end": 929.27,
+      "duration": 2.23,
+      "text": "solution right and a is actually"
+    },
+    {
+      "index": 252,
+      "start": 929.28,
+      "end": 932.91,
+      "duration": 3.63,
+      "text": "amplitude the vector the the amplitude"
+    },
+    {
+      "index": 253,
+      "start": 932.92,
+      "end": 935.18,
+      "duration": 2.26,
+      "text": "factor over the first normal mode and"
+    },
+    {
+      "index": 254,
+      "start": 935.19,
+      "end": 940.7,
+      "duration": 5.51,
+      "text": "Omega 1 is actually the first normal"
+    },
+    {
+      "index": 255,
+      "start": 940.71,
+      "end": 944.96,
+      "duration": 4.25,
+      "text": "frequency okay if this is the case okay"
+    },
+    {
+      "index": 256,
+      "start": 944.97,
+      "end": 957.33,
+      "duration": 12.36,
+      "text": "then I will have X tilde of T will be"
+    },
+    {
+      "index": 257,
+      "start": 957.34,
+      "end": 964.29,
+      "duration": 6.95,
+      "text": "also proportional to a 1 cosine Omega 1t"
+    },
+    {
+      "index": 258,
+      "start": 964.3,
+      "end": 969.06,
+      "duration": 4.76,
+      "text": "right because if I actually exchange x1"
+    },
+    {
+      "index": 259,
+      "start": 969.07,
+      "end": 972.33,
+      "duration": 3.26,
+      "text": "x2 their answer that same frequency is"
+    },
+    {
+      "index": 260,
+      "start": 972.34,
+      "end": 976.23,
+      "duration": 3.89,
+      "text": "not going to change right therefore"
+    },
+    {
+      "index": 261,
+      "start": 976.24,
+      "end": 980.46,
+      "duration": 4.22,
+      "text": "since this system is in the same normal"
+    },
+    {
+      "index": 262,
+      "start": 980.47,
+      "end": 983.48,
+      "duration": 3.01,
+      "text": "mode with angular frequency Omega 1"
+    },
+    {
+      "index": 263,
+      "start": 983.49,
+      "end": 988.02,
+      "duration": 4.53,
+      "text": "therefore the amplitude ratio of the"
+    },
+    {
+      "index": 264,
+      "start": 988.03,
+      "end": 992.03,
+      "duration": 4.0,
+      "text": "first and second oscillator will stay"
+    },
+    {
+      "index": 265,
+      "start": 992.04,
+      "end": 994.95,
+      "duration": 2.91,
+      "text": "constant right because you are in one of"
+    },
+    {
+      "index": 266,
+      "start": 994.96,
+      "end": 998.61,
+      "duration": 3.65,
+      "text": "the normal mode right therefore I can"
+    },
+    {
+      "index": 267,
+      "start": 998.62,
+      "end": 1002.0,
+      "duration": 3.38,
+      "text": "conclude that X tilde it's going to be"
+    },
+    {
+      "index": 268,
+      "start": 1002.01,
+      "end": 1005.36,
+      "duration": 3.35,
+      "text": "proportional to this expression because"
+    },
+    {
+      "index": 269,
+      "start": 1005.37,
+      "end": 1006.59,
+      "duration": 1.22,
+      "text": "they are innocent normal mode"
+    },
+    {
+      "index": 270,
+      "start": 1006.6,
+      "end": 1009.44,
+      "duration": 2.84,
+      "text": "oscillating at the same frequency okay"
+    },
+    {
+      "index": 271,
+      "start": 1009.45,
+      "end": 1013.0,
+      "duration": 3.55,
+      "text": "is that too fast everybody is following"
+    },
+    {
+      "index": 272,
+      "start": 1013.01,
+      "end": 1015.61,
+      "duration": 2.6,
+      "text": "ok so that's nice"
+    },
+    {
+      "index": 273,
+      "start": 1015.62,
+      "end": 1020.59,
+      "duration": 4.97,
+      "text": "so this means that SX"
+    },
+    {
+      "index": 274,
+      "start": 1020.6,
+      "end": 1030.51,
+      "duration": 9.91,
+      "text": "teehee okay will be equal to s a1 cosine"
+    },
+    {
+      "index": 275,
+      "start": 1030.52,
+      "end": 1034.51,
+      "duration": 3.99,
+      "text": "Omega 1 P okay so this is actually"
+    },
+    {
+      "index": 276,
+      "start": 1034.52,
+      "end": 1036.579,
+      "duration": 2.059,
+      "text": "coming from here right I am repressing"
+    },
+    {
+      "index": 277,
+      "start": 1036.589,
+      "end": 1040.829,
+      "duration": 4.24,
+      "text": "so I am decreasing X tilde is X based on"
+    },
+    {
+      "index": 278,
+      "start": 1040.839,
+      "end": 1044.22,
+      "duration": 3.381,
+      "text": "this definition okay"
+    },
+    {
+      "index": 279,
+      "start": 1044.23,
+      "end": 1047.29,
+      "duration": 3.06,
+      "text": "then again I'd replace I write X"
+    },
+    {
+      "index": 280,
+      "start": 1047.3,
+      "end": 1051.18,
+      "duration": 3.88,
+      "text": "explicitly which is 1/8 cosine Omega 1t"
+    },
+    {
+      "index": 281,
+      "start": 1051.19,
+      "end": 1054.22,
+      "duration": 3.03,
+      "text": "okay then you get this expression and"
+    },
+    {
+      "index": 282,
+      "start": 1054.23,
+      "end": 1057.97,
+      "duration": 3.74,
+      "text": "from this above the expression above you"
+    },
+    {
+      "index": 283,
+      "start": 1057.98,
+      "end": 1059.56,
+      "duration": 1.58,
+      "text": "see that we will conclude that this is"
+    },
+    {
+      "index": 284,
+      "start": 1059.57,
+      "end": 1066.21,
+      "duration": 6.64,
+      "text": "proportional to a1 cosine Omega 1t"
+    },
+    {
+      "index": 285,
+      "start": 1066.22,
+      "end": 1072.37,
+      "duration": 6.15,
+      "text": "that's very nice that means s a cosine"
+    },
+    {
+      "index": 286,
+      "start": 1072.38,
+      "end": 1075.91,
+      "duration": 3.53,
+      "text": "Omega 1 T is proportional to a1 cosine"
+    },
+    {
+      "index": 287,
+      "start": 1075.92,
+      "end": 1078.91,
+      "duration": 2.99,
+      "text": "Omega P and you can actually I cancel"
+    },
+    {
+      "index": 288,
+      "start": 1078.92,
+      "end": 1083.2,
+      "duration": 4.28,
+      "text": "this now you see that as a 1 is"
+    },
+    {
+      "index": 289,
+      "start": 1083.21,
+      "end": 1088.33,
+      "duration": 5.12,
+      "text": "proportional to a 1 or I can write it as"
+    },
+    {
+      "index": 290,
+      "start": 1088.34,
+      "end": 1097.15,
+      "duration": 8.81,
+      "text": "as a 1 is equal to theta what does that"
+    },
+    {
+      "index": 291,
+      "start": 1097.16,
+      "end": 1097.89,
+      "duration": 0.73,
+      "text": "mean"
+    },
+    {
+      "index": 292,
+      "start": 1097.9,
+      "end": 1104.89,
+      "duration": 6.99,
+      "text": "this means that a 1 okay originally what"
+    },
+    {
+      "index": 293,
+      "start": 1104.9,
+      "end": 1107.83,
+      "duration": 2.93,
+      "text": "with a one coming from a 1 is the"
+    },
+    {
+      "index": 294,
+      "start": 1107.84,
+      "end": 1112.06,
+      "duration": 4.22,
+      "text": "amplitude of all the components in the"
+    },
+    {
+      "index": 295,
+      "start": 1112.07,
+      "end": 1115.96,
+      "duration": 3.89,
+      "text": "first normal mode right that's coming"
+    },
+    {
+      "index": 296,
+      "start": 1115.97,
+      "end": 1118.84,
+      "duration": 2.87,
+      "text": "from the eigenvalue problem which we"
+    },
+    {
+      "index": 297,
+      "start": 1118.85,
+      "end": 1122.23,
+      "duration": 3.38,
+      "text": "actually does in this slide I can value"
+    },
+    {
+      "index": 298,
+      "start": 1122.24,
+      "end": 1125.38,
+      "duration": 3.14,
+      "text": "problem MS 1 ka equal to Omega square a"
+    },
+    {
+      "index": 299,
+      "start": 1125.39,
+      "end": 1127.69,
+      "duration": 2.3,
+      "text": "will give you the solution of normal"
+    },
+    {
+      "index": 300,
+      "start": 1127.7,
+      "end": 1132.18,
+      "duration": 4.48,
+      "text": "mode and there are vectors which is an"
+    },
+    {
+      "index": 301,
+      "start": 1132.19,
+      "end": 1136.45,
+      "duration": 4.26,
+      "text": "amplitude ratios of all the components"
+    },
+    {
+      "index": 302,
+      "start": 1136.46,
+      "end": 1140.11,
+      "duration": 3.65,
+      "text": "in the system right so that means a1 is"
+    },
+    {
+      "index": 303,
+      "start": 1140.12,
+      "end": 1144.07,
+      "duration": 3.95,
+      "text": "not only n minus 1 K matrix eigen"
+    },
+    {
+      "index": 304,
+      "start": 1144.08,
+      "end": 1148.15,
+      "duration": 4.07,
+      "text": "vectors it's also eigen vector of s"
+    },
+    {
+      "index": 305,
+      "start": 1148.16,
+      "end": 1151.899,
+      "duration": 3.739,
+      "text": "matrix ok"
+    },
+    {
+      "index": 306,
+      "start": 1151.909,
+      "end": 1154.449,
+      "duration": 2.54,
+      "text": "so that is actually a very good news and"
+    },
+    {
+      "index": 307,
+      "start": 1154.459,
+      "end": 1156.759,
+      "duration": 2.3,
+      "text": "I can also do the same thing for a tool"
+    },
+    {
+      "index": 308,
+      "start": 1156.769,
+      "end": 1160.079,
+      "duration": 3.31,
+      "text": "to prove that it also worked for a to"
+    },
+    {
+      "index": 309,
+      "start": 1160.089,
+      "end": 1162.879,
+      "duration": 2.79,
+      "text": "activation is identical so I am NOT"
+    },
+    {
+      "index": 310,
+      "start": 1162.889,
+      "end": 1164.919,
+      "duration": 2.03,
+      "text": "going to do that again so that means"
+    },
+    {
+      "index": 311,
+      "start": 1164.929,
+      "end": 1170.109,
+      "duration": 5.18,
+      "text": "actually starting from starting from"
+    },
+    {
+      "index": 312,
+      "start": 1170.119,
+      "end": 1171.669,
+      "duration": 1.55,
+      "text": "here okay"
+    },
+    {
+      "index": 313,
+      "start": 1171.679,
+      "end": 1177.219,
+      "duration": 5.54,
+      "text": "if X and X tilde oppose solution to the"
+    },
+    {
+      "index": 314,
+      "start": 1177.229,
+      "end": 1180.489,
+      "duration": 3.26,
+      "text": "equation motion okay I will conclude"
+    },
+    {
+      "index": 315,
+      "start": 1180.499,
+      "end": 1184.539,
+      "duration": 4.04,
+      "text": "that as matrix and the N minus 1 K"
+    },
+    {
+      "index": 316,
+      "start": 1184.549,
+      "end": 1186.219,
+      "duration": 1.67,
+      "text": "matrix they commute"
+    },
+    {
+      "index": 317,
+      "start": 1186.229,
+      "end": 1190.319,
+      "duration": 4.09,
+      "text": "okay to how to tell if assistance"
+    },
+    {
+      "index": 318,
+      "start": 1190.329,
+      "end": 1194.799,
+      "duration": 4.47,
+      "text": "satisfy a specific symmetry defined by"
+    },
+    {
+      "index": 319,
+      "start": 1194.809,
+      "end": 1197.199,
+      "duration": 2.39,
+      "text": "my symmetry metrics in spite this way"
+    },
+    {
+      "index": 320,
+      "start": 1197.209,
+      "end": 1200.229,
+      "duration": 3.02,
+      "text": "you can check if M is 1 K and the S"
+    },
+    {
+      "index": 321,
+      "start": 1200.239,
+      "end": 1204.519,
+      "duration": 4.28,
+      "text": "commute if they commute that means this"
+    },
+    {
+      "index": 322,
+      "start": 1204.529,
+      "end": 1207.819,
+      "duration": 3.29,
+      "text": "system actually satisfy this symmetry"
+    },
+    {
+      "index": 323,
+      "start": 1207.829,
+      "end": 1211.839,
+      "duration": 4.01,
+      "text": "and also the consequence is that from"
+    },
+    {
+      "index": 324,
+      "start": 1211.849,
+      "end": 1216.309,
+      "duration": 4.46,
+      "text": "there you can clue that if you have so"
+    },
+    {
+      "index": 325,
+      "start": 1216.319,
+      "end": 1219.609,
+      "duration": 3.29,
+      "text": "will have a set of eigen vectors from M"
+    },
+    {
+      "index": 326,
+      "start": 1219.619,
+      "end": 1222.219,
+      "duration": 2.6,
+      "text": "s 1 K matrix eigen value problem and"
+    },
+    {
+      "index": 327,
+      "start": 1222.229,
+      "end": 1226.809,
+      "duration": 4.58,
+      "text": "that is going to be also the eigenvector"
+    },
+    {
+      "index": 328,
+      "start": 1226.819,
+      "end": 1238.779,
+      "duration": 11.96,
+      "text": "of s okay any questions okay so M minus"
+    },
+    {
+      "index": 329,
+      "start": 1238.789,
+      "end": 1254.15,
+      "duration": 15.361,
+      "text": "1 K eigen vectors ah also s I come back"
+    },
+    {
+      "index": 330,
+      "start": 1256.22,
+      "end": 1256.23,
+      "duration": 0.01,
+      "text": "okay that's actually what we have"
+    },
+    {
+      "index": 331,
+      "start": 1256.23,
+      "end": 1260.63,
+      "duration": 4.4,
+      "text": "learned from this small exercise now you"
+    },
+    {
+      "index": 332,
+      "start": 1260.64,
+      "end": 1263.15,
+      "duration": 2.51,
+      "text": "can say wait wait this is actually now"
+    },
+    {
+      "index": 333,
+      "start": 1263.16,
+      "end": 1264.02,
+      "duration": 0.86,
+      "text": "we would need right"
+    },
+    {
+      "index": 334,
+      "start": 1264.03,
+      "end": 1266.84,
+      "duration": 2.81,
+      "text": "I would like we would like to argue that"
+    },
+    {
+      "index": 335,
+      "start": 1266.85,
+      "end": 1271.669,
+      "duration": 4.819,
+      "text": "s matrix I can stop s matrix eigenvalue"
+    },
+    {
+      "index": 336,
+      "start": 1271.679,
+      "end": 1273.74,
+      "duration": 2.061,
+      "text": "problem then I can learn about a"
+    },
+    {
+      "index": 337,
+      "start": 1273.75,
+      "end": 1276.289,
+      "duration": 2.539,
+      "text": "solution of n minus 1 K matrix by this"
+    },
+    {
+      "index": 338,
+      "start": 1276.299,
+      "end": 1278.09,
+      "duration": 1.791,
+      "text": "logic essentially in the opposite"
+    },
+    {
+      "index": 339,
+      "start": 1278.1,
+      "end": 1280.25,
+      "duration": 2.15,
+      "text": "direction right you said okay you solve"
+    },
+    {
+      "index": 340,
+      "start": 1280.26,
+      "end": 1282.68,
+      "duration": 2.42,
+      "text": "things already then actually is also s"
+    },
+    {
+      "index": 341,
+      "start": 1282.69,
+      "end": 1285.71,
+      "duration": 3.02,
+      "text": "matrix eigenvalue problem so now what"
+    },
+    {
+      "index": 342,
+      "start": 1285.72,
+      "end": 1289.039,
+      "duration": 3.319,
+      "text": "I'm going to do is to reverse the logic"
+    },
+    {
+      "index": 343,
+      "start": 1289.049,
+      "end": 1292.669,
+      "duration": 3.62,
+      "text": "and see if it works okay again to see"
+    },
+    {
+      "index": 344,
+      "start": 1292.679,
+      "end": 1293.57,
+      "duration": 0.891,
+      "text": "what will happen"
+    },
+    {
+      "index": 345,
+      "start": 1293.58,
+      "end": 1297.95,
+      "duration": 4.37,
+      "text": "okay so now I would like to prove that"
+    },
+    {
+      "index": 346,
+      "start": 1297.96,
+      "end": 1301.549,
+      "duration": 3.589,
+      "text": "if I saw s matrix eigenvalue problem"
+    },
+    {
+      "index": 347,
+      "start": 1301.559,
+      "end": 1306.26,
+      "duration": 4.701,
+      "text": "i have also solved the eigenvectors for"
+    },
+    {
+      "index": 348,
+      "start": 1306.27,
+      "end": 1309.74,
+      "duration": 3.47,
+      "text": "msy Hemet run the logic in the opposite"
+    },
+    {
+      "index": 349,
+      "start": 1309.75,
+      "end": 1313.909,
+      "duration": 4.159,
+      "text": "direction okay so if i really v'n two"
+    },
+    {
+      "index": 350,
+      "start": 1313.919,
+      "end": 1320.779,
+      "duration": 6.86,
+      "text": "things one s a is equal to beta a number"
+    },
+    {
+      "index": 351,
+      "start": 1320.789,
+      "end": 1327.31,
+      "duration": 6.521,
+      "text": "two s matrix and the M minus 1 K matrix"
+    },
+    {
+      "index": 352,
+      "start": 1327.32,
+      "end": 1330.68,
+      "duration": 3.36,
+      "text": "commute okay if those are like even"
+    },
+    {
+      "index": 353,
+      "start": 1330.69,
+      "end": 1333.529,
+      "duration": 2.839,
+      "text": "conditions okay then I can as we"
+    },
+    {
+      "index": 354,
+      "start": 1333.539,
+      "end": 1339.5,
+      "duration": 5.961,
+      "text": "conclude that s M minus 1 K hey okay I"
+    },
+    {
+      "index": 355,
+      "start": 1339.51,
+      "end": 1342.98,
+      "duration": 3.47,
+      "text": "can as you construct this expression I"
+    },
+    {
+      "index": 356,
+      "start": 1342.99,
+      "end": 1346.789,
+      "duration": 3.799,
+      "text": "write down s n minus 1 K a ok because"
+    },
+    {
+      "index": 357,
+      "start": 1346.799,
+      "end": 1350.6,
+      "duration": 3.801,
+      "text": "they commute right they can expect in a"
+    },
+    {
+      "index": 358,
+      "start": 1350.61,
+      "end": 1355.07,
+      "duration": 4.46,
+      "text": "to swap em s 1 K and as safely without"
+    },
+    {
+      "index": 359,
+      "start": 1355.08,
+      "end": 1357.38,
+      "duration": 2.3,
+      "text": "actually introducing any more turns and"
+    },
+    {
+      "index": 360,
+      "start": 1357.39,
+      "end": 1365.18,
+      "duration": 7.79,
+      "text": "this will be equal to n minus 1 K s a ok"
+    },
+    {
+      "index": 361,
+      "start": 1365.19,
+      "end": 1370.19,
+      "duration": 5.0,
+      "text": "and s a from the first expression as n"
+    },
+    {
+      "index": 362,
+      "start": 1370.2,
+      "end": 1375.01,
+      "duration": 4.81,
+      "text": "is equal to Beta Beta is a number okay"
+    },
+    {
+      "index": 363,
+      "start": 1375.02,
+      "end": 1377.71,
+      "duration": 2.69,
+      "text": "therefore this expression will become"
+    },
+    {
+      "index": 364,
+      "start": 1377.72,
+      "end": 1384.14,
+      "duration": 6.42,
+      "text": "beta n minus 1 K a so beta can penetrate"
+    },
+    {
+      "index": 365,
+      "start": 1384.15,
+      "end": 1387.529,
+      "duration": 3.379,
+      "text": "su matrix because beta is just a number"
+    },
+    {
+      "index": 366,
+      "start": 1387.539,
+      "end": 1390.019,
+      "duration": 2.48,
+      "text": "is the eigenvalue it's an eigenvalue or"
+    },
+    {
+      "index": 367,
+      "start": 1390.029,
+      "end": 1396.669,
+      "duration": 6.64,
+      "text": "s matrix okay so what does this mean"
+    },
+    {
+      "index": 368,
+      "start": 1400.549,
+      "end": 1400.559,
+      "duration": 0.01,
+      "text": "okay so so so what does it mean"
+    },
+    {
+      "index": 369,
+      "start": 1400.559,
+      "end": 1404.869,
+      "duration": 4.31,
+      "text": "so this means that if you look at this"
+    },
+    {
+      "index": 370,
+      "start": 1404.879,
+      "end": 1409.82,
+      "duration": 4.941,
+      "text": "this part and that part you look at the"
+    },
+    {
+      "index": 371,
+      "start": 1409.83,
+      "end": 1411.499,
+      "duration": 1.669,
+      "text": "beginning and at the end of the"
+    },
+    {
+      "index": 372,
+      "start": 1411.509,
+      "end": 1413.989,
+      "duration": 2.48,
+      "text": "expression you immediately conclude that"
+    },
+    {
+      "index": 373,
+      "start": 1413.999,
+      "end": 1420.889,
+      "duration": 6.89,
+      "text": "n minus 1 K a ok this expression is also"
+    },
+    {
+      "index": 374,
+      "start": 1420.899,
+      "end": 1425.989,
+      "duration": 5.09,
+      "text": "an eigenvector of s matrix right so you"
+    },
+    {
+      "index": 375,
+      "start": 1425.999,
+      "end": 1431.81,
+      "duration": 5.811,
+      "text": "have s matrix acting n minus 1 T a and"
+    },
+    {
+      "index": 376,
+      "start": 1431.82,
+      "end": 1434.33,
+      "duration": 2.51,
+      "text": "that will give you something"
+    },
+    {
+      "index": 377,
+      "start": 1434.34,
+      "end": 1438.499,
+      "duration": 4.159,
+      "text": "proportional to n minus 1 K a you see"
+    },
+    {
+      "index": 378,
+      "start": 1438.509,
+      "end": 1441.229,
+      "duration": 2.72,
+      "text": "it's a metric right it's actually not"
+    },
+    {
+      "index": 379,
+      "start": 1441.239,
+      "end": 1443.239,
+      "duration": 2.0,
+      "text": "magic but it says she's just you know"
+    },
+    {
+      "index": 380,
+      "start": 1443.249,
+      "end": 1447.07,
+      "duration": 3.821,
+      "text": "already a logical extension right okay"
+    },
+    {
+      "index": 381,
+      "start": 1447.08,
+      "end": 1450.589,
+      "duration": 3.509,
+      "text": "well cool so that means this is also an"
+    },
+    {
+      "index": 382,
+      "start": 1450.599,
+      "end": 1454.43,
+      "duration": 3.831,
+      "text": "eigenvector OS right and also another"
+    },
+    {
+      "index": 383,
+      "start": 1454.44,
+      "end": 1455.989,
+      "duration": 1.549,
+      "text": "thing which is interesting is that they"
+    },
+    {
+      "index": 384,
+      "start": 1455.999,
+      "end": 1460.31,
+      "duration": 4.311,
+      "text": "share the same I come back I can value"
+    },
+    {
+      "index": 385,
+      "start": 1460.32,
+      "end": 1469.06,
+      "duration": 8.74,
+      "text": "beta right listen I can value right okay"
+    },
+    {
+      "index": 386,
+      "start": 1469.07,
+      "end": 1473.989,
+      "duration": 4.919,
+      "text": "so if I can values of s so you can get"
+    },
+    {
+      "index": 387,
+      "start": 1473.999,
+      "end": 1475.909,
+      "duration": 1.91,
+      "text": "several I can value right in this case"
+    },
+    {
+      "index": 388,
+      "start": 1475.919,
+      "end": 1478.549,
+      "duration": 2.63,
+      "text": "two by two matrix you will get how many"
+    },
+    {
+      "index": 389,
+      "start": 1478.559,
+      "end": 1482.69,
+      "duration": 4.131,
+      "text": "to write to eigen values if those two"
+    },
+    {
+      "index": 390,
+      "start": 1482.7,
+      "end": 1485.45,
+      "duration": 2.75,
+      "text": "eigen values are different then I can"
+    },
+    {
+      "index": 391,
+      "start": 1485.46,
+      "end": 1492.049,
+      "duration": 6.589,
+      "text": "conclude that n minus 1 K a okay must be"
+    },
+    {
+      "index": 392,
+      "start": 1492.059,
+      "end": 1496.999,
+      "duration": 4.94,
+      "text": "proportional to a right because though"
+    },
+    {
+      "index": 393,
+      "start": 1497.009,
+      "end": 1499.489,
+      "duration": 2.48,
+      "text": "because this is actually the same eigen"
+    },
+    {
+      "index": 394,
+      "start": 1499.499,
+      "end": 1502.489,
+      "duration": 2.99,
+      "text": "value problem and listen I can well do"
+    },
+    {
+      "index": 395,
+      "start": 1502.499,
+      "end": 1506.089,
+      "duration": 3.59,
+      "text": "beta since all the eigen values from the"
+    },
+    {
+      "index": 396,
+      "start": 1506.099,
+      "end": 1508.58,
+      "duration": 2.481,
+      "text": "solution of eigen value problem of as a"
+    },
+    {
+      "index": 397,
+      "start": 1508.59,
+      "end": 1512.45,
+      "duration": 3.86,
+      "text": "equal to beta a those eigen values are"
+    },
+    {
+      "index": 398,
+      "start": 1512.46,
+      "end": 1514.46,
+      "duration": 2.0,
+      "text": "all different therefore I can argue that"
+    },
+    {
+      "index": 399,
+      "start": 1514.47,
+      "end": 1519.45,
+      "duration": 4.98,
+      "text": "n minus 1 ka is proportional to a ok"
+    },
+    {
+      "index": 400,
+      "start": 1519.46,
+      "end": 1525.68,
+      "duration": 6.22,
+      "text": "therefore M minus 1 K a is equal to"
+    },
+    {
+      "index": 401,
+      "start": 1525.69,
+      "end": 1531.78,
+      "duration": 6.09,
+      "text": "Omega square Omega square is actually"
+    },
+    {
+      "index": 402,
+      "start": 1531.79,
+      "end": 1538.08,
+      "duration": 6.29,
+      "text": "some constant ok this is really amazing"
+    },
+    {
+      "index": 403,
+      "start": 1538.09,
+      "end": 1540.63,
+      "duration": 2.54,
+      "text": "because that means even the two"
+    },
+    {
+      "index": 404,
+      "start": 1540.64,
+      "end": 1543.86,
+      "duration": 3.22,
+      "text": "condition the first one I can figure out"
+    },
+    {
+      "index": 405,
+      "start": 1543.87,
+      "end": 1547.38,
+      "duration": 3.51,
+      "text": "that I can value and eigen vectors of s"
+    },
+    {
+      "index": 406,
+      "start": 1547.39,
+      "end": 1551.31,
+      "duration": 3.92,
+      "text": "matrix second if s matrix and then n"
+    },
+    {
+      "index": 407,
+      "start": 1551.32,
+      "end": 1554.28,
+      "duration": 2.96,
+      "text": "minus 1 K matrix interaction matrix they"
+    },
+    {
+      "index": 408,
+      "start": 1554.29,
+      "end": 1559.44,
+      "duration": 5.15,
+      "text": "commute then I can actually already"
+    },
+    {
+      "index": 409,
+      "start": 1559.45,
+      "end": 1562.94,
+      "duration": 3.49,
+      "text": "figure out what are the eigen vectors of"
+    },
+    {
+      "index": 410,
+      "start": 1562.95,
+      "end": 1570.42,
+      "duration": 7.47,
+      "text": "n minus 1 K matrix ok and another thing"
+    },
+    {
+      "index": 411,
+      "start": 1570.43,
+      "end": 1574.41,
+      "duration": 3.98,
+      "text": "which we learn from here is that wow"
+    },
+    {
+      "index": 412,
+      "start": 1574.42,
+      "end": 1577.44,
+      "duration": 3.02,
+      "text": "that's good because the eigenvectors are"
+    },
+    {
+      "index": 413,
+      "start": 1577.45,
+      "end": 1579.84,
+      "duration": 2.39,
+      "text": "already saw therefore i just have to"
+    },
+    {
+      "index": 414,
+      "start": 1579.85,
+      "end": 1583.62,
+      "duration": 3.77,
+      "text": "calculate this i just it's just a normal"
+    },
+    {
+      "index": 415,
+      "start": 1583.63,
+      "end": 1585.33,
+      "duration": 1.7,
+      "text": "operation it's not the eigenvalue"
+    },
+    {
+      "index": 416,
+      "start": 1585.34,
+      "end": 1588.12,
+      "duration": 2.78,
+      "text": "problem anymore i just multiply MS 1 k"
+    },
+    {
+      "index": 417,
+      "start": 1588.13,
+      "end": 1591.33,
+      "duration": 3.2,
+      "text": "times a then i can actually get the"
+    },
+    {
+      "index": 418,
+      "start": 1591.34,
+      "end": 1593.94,
+      "duration": 2.6,
+      "text": "value Omega square you see that's"
+    },
+    {
+      "index": 419,
+      "start": 1593.95,
+      "end": 1595.86,
+      "duration": 1.91,
+      "text": "actually much easier than solving like"
+    },
+    {
+      "index": 420,
+      "start": 1595.87,
+      "end": 1598.29,
+      "duration": 2.42,
+      "text": "um where the problem of M minus 1 K"
+    },
+    {
+      "index": 421,
+      "start": 1598.3,
+      "end": 1606.08,
+      "duration": 7.78,
+      "text": "matrix ok that says very good news"
+    },
+    {
+      "index": 422,
+      "start": 1606.09,
+      "end": 1610.05,
+      "duration": 3.96,
+      "text": "finally I think the most important"
+    },
+    {
+      "index": 423,
+      "start": 1610.06,
+      "end": 1616.83,
+      "duration": 6.77,
+      "text": "consequence is that sorry for this the"
+    },
+    {
+      "index": 424,
+      "start": 1616.84,
+      "end": 1621.42,
+      "duration": 4.58,
+      "text": "most important consequence is that once"
+    },
+    {
+      "index": 425,
+      "start": 1621.43,
+      "end": 1626.15,
+      "duration": 4.72,
+      "text": "we solve this system which satisfy the"
+    },
+    {
+      "index": 426,
+      "start": 1626.16,
+      "end": 1629.97,
+      "duration": 3.81,
+      "text": "symmetry described by this s matrix we"
+    },
+    {
+      "index": 427,
+      "start": 1629.98,
+      "end": 1634.16,
+      "duration": 4.18,
+      "text": "have solved all the possible systems"
+    },
+    {
+      "index": 428,
+      "start": 1634.17,
+      "end": 1637.53,
+      "duration": 3.36,
+      "text": "which satisfy the same symmetry for"
+    },
+    {
+      "index": 429,
+      "start": 1637.54,
+      "end": 1641.7,
+      "duration": 4.16,
+      "text": "example in this case I solve a type of"
+    },
+    {
+      "index": 430,
+      "start": 1641.71,
+      "end": 1644.58,
+      "duration": 2.87,
+      "text": "pendulum problem ok they look symmetric"
+    },
+    {
+      "index": 431,
+      "start": 1644.59,
+      "end": 1649.26,
+      "duration": 4.67,
+      "text": "right and I can of course I can draw"
+    },
+    {
+      "index": 432,
+      "start": 1649.27,
+      "end": 1651.35,
+      "duration": 2.08,
+      "text": "another one which is like this"
+    },
+    {
+      "index": 433,
+      "start": 1651.36,
+      "end": 1654.14,
+      "duration": 2.78,
+      "text": "it's my circular and there are two wars"
+    },
+    {
+      "index": 434,
+      "start": 1654.15,
+      "end": 1656.23,
+      "duration": 2.08,
+      "text": "which essentially there are three"
+    },
+    {
+      "index": 435,
+      "start": 1656.24,
+      "end": 1659.48,
+      "duration": 3.24,
+      "text": "Springs connected to the wall this"
+    },
+    {
+      "index": 436,
+      "start": 1659.49,
+      "end": 1661.64,
+      "duration": 2.15,
+      "text": "problem is already also solved right"
+    },
+    {
+      "index": 437,
+      "start": 1661.65,
+      "end": 1663.76,
+      "duration": 2.11,
+      "text": "because it also satisfies the same"
+    },
+    {
+      "index": 438,
+      "start": 1663.77,
+      "end": 1666.56,
+      "duration": 2.79,
+      "text": "symmetry and of course I can add more"
+    },
+    {
+      "index": 439,
+      "start": 1666.57,
+      "end": 1672.77,
+      "duration": 6.2,
+      "text": "like like this called crazy more this is"
+    },
+    {
+      "index": 440,
+      "start": 1672.78,
+      "end": 1675.29,
+      "duration": 2.51,
+      "text": "also solved right because this is also"
+    },
+    {
+      "index": 441,
+      "start": 1675.3,
+      "end": 1678.53,
+      "duration": 3.23,
+      "text": "symmetric right I can add more okay"
+    },
+    {
+      "index": 442,
+      "start": 1678.54,
+      "end": 1681.23,
+      "duration": 2.69,
+      "text": "right that is right it's also symmetric"
+    },
+    {
+      "index": 443,
+      "start": 1681.24,
+      "end": 1686.51,
+      "duration": 5.27,
+      "text": "right and this let's see the eigenvector"
+    },
+    {
+      "index": 444,
+      "start": 1686.52,
+      "end": 1689.9,
+      "duration": 3.38,
+      "text": "of this n minus 1 k matrix eigenvalue"
+    },
+    {
+      "index": 445,
+      "start": 1689.91,
+      "end": 1692.63,
+      "duration": 2.72,
+      "text": "problem will be identical to what we"
+    },
+    {
+      "index": 446,
+      "start": 1692.64,
+      "end": 1695.69,
+      "duration": 3.05,
+      "text": "have already saw here okay so that"
+    },
+    {
+      "index": 447,
+      "start": 1695.7,
+      "end": 1698.03,
+      "duration": 2.33,
+      "text": "essentially is really amazing if you"
+    },
+    {
+      "index": 448,
+      "start": 1698.04,
+      "end": 1700.82,
+      "duration": 2.78,
+      "text": "speak the right language and the cut"
+    },
+    {
+      "index": 449,
+      "start": 1700.83,
+      "end": 1703.25,
+      "duration": 2.42,
+      "text": "into the pattern in the right angle you"
+    },
+    {
+      "index": 450,
+      "start": 1703.26,
+      "end": 1706.63,
+      "duration": 3.37,
+      "text": "actually found out AG you can solve a"
+    },
+    {
+      "index": 451,
+      "start": 1706.64,
+      "end": 1711.77,
+      "duration": 5.13,
+      "text": "multiple problem at one time okay any"
+    },
+    {
+      "index": 452,
+      "start": 1711.78,
+      "end": 1716.18,
+      "duration": 4.4,
+      "text": "questions okay"
+    },
+    {
+      "index": 453,
+      "start": 1716.19,
+      "end": 1719.62,
+      "duration": 3.43,
+      "text": "so so that is actually very nice and"
+    },
+    {
+      "index": 454,
+      "start": 1719.63,
+      "end": 1721.88,
+      "duration": 2.25,
+      "text": "this is actually a very important"
+    },
+    {
+      "index": 455,
+      "start": 1721.89,
+      "end": 1726.38,
+      "duration": 4.49,
+      "text": "preparation to the the next step"
+    },
+    {
+      "index": 456,
+      "start": 1726.39,
+      "end": 1729.47,
+      "duration": 3.08,
+      "text": "actually so now we have understood"
+    },
+    {
+      "index": 457,
+      "start": 1729.48,
+      "end": 1732.59,
+      "duration": 3.11,
+      "text": "coupled oscillator and we have learned a"
+    },
+    {
+      "index": 458,
+      "start": 1732.6,
+      "end": 1734.33,
+      "duration": 1.73,
+      "text": "little bit about symmetry right"
+    },
+    {
+      "index": 459,
+      "start": 1734.34,
+      "end": 1737.84,
+      "duration": 3.5,
+      "text": "therefore I would like to go to Infini"
+    },
+    {
+      "index": 460,
+      "start": 1737.85,
+      "end": 1741.38,
+      "duration": 3.53,
+      "text": "number of coupled oscillators okay"
+    },
+    {
+      "index": 461,
+      "start": 1741.39,
+      "end": 1743.63,
+      "duration": 2.24,
+      "text": "so that is actually the next step which"
+    },
+    {
+      "index": 462,
+      "start": 1743.64,
+      "end": 1749.54,
+      "duration": 5.9,
+      "text": "we are going to move on in the three so"
+    },
+    {
+      "index": 463,
+      "start": 1749.55,
+      "end": 1751.97,
+      "duration": 2.42,
+      "text": "this is actually why example infinite"
+    },
+    {
+      "index": 464,
+      "start": 1751.98,
+      "end": 1753.35,
+      "duration": 1.37,
+      "text": "system okay"
+    },
+    {
+      "index": 465,
+      "start": 1753.36,
+      "end": 1756.62,
+      "duration": 3.26,
+      "text": "and I cannot write the whole universe"
+    },
+    {
+      "index": 466,
+      "start": 1756.63,
+      "end": 1757.97,
+      "duration": 1.34,
+      "text": "right because it is infinite so I"
+    },
+    {
+      "index": 467,
+      "start": 1757.98,
+      "end": 1760.49,
+      "duration": 2.51,
+      "text": "couldn't include everything in the in"
+    },
+    {
+      "index": 468,
+      "start": 1760.5,
+      "end": 1762.47,
+      "duration": 1.97,
+      "text": "the slide but this is your example"
+    },
+    {
+      "index": 469,
+      "start": 1762.48,
+      "end": 1769.91,
+      "duration": 7.43,
+      "text": "system okay looks hopeful is right in"
+    },
+    {
+      "index": 470,
+      "start": 1769.92,
+      "end": 1772.45,
+      "duration": 2.53,
+      "text": "general we don't know how to solve"
+    },
+    {
+      "index": 471,
+      "start": 1772.46,
+      "end": 1774.35,
+      "duration": 1.89,
+      "text": "infinite system because if you have"
+    },
+    {
+      "index": 472,
+      "start": 1774.36,
+      "end": 1776.12,
+      "duration": 1.76,
+      "text": "symphony number of things they are"
+    },
+    {
+      "index": 473,
+      "start": 1776.13,
+      "end": 1779.83,
+      "duration": 3.7,
+      "text": "connected to each other in random ways"
+    },
+    {
+      "index": 474,
+      "start": 1779.84,
+      "end": 1784.28,
+      "duration": 4.44,
+      "text": "then the see the problem become really"
+    },
+    {
+      "index": 475,
+      "start": 1784.29,
+      "end": 1787.67,
+      "duration": 3.38,
+      "text": "pree Katie okay in general I don't know"
+    },
+    {
+      "index": 476,
+      "start": 1787.68,
+      "end": 1789.61,
+      "duration": 1.93,
+      "text": "how to solve this problem"
+    },
+    {
+      "index": 477,
+      "start": 1789.62,
+      "end": 1794.78,
+      "duration": 5.16,
+      "text": "okay and if you are at a Bui major the"
+    },
+    {
+      "index": 478,
+      "start": 1794.79,
+      "end": 1796.34,
+      "duration": 1.55,
+      "text": "first thing maybe you would like to do"
+    },
+    {
+      "index": 479,
+      "start": 1796.35,
+      "end": 1799.43,
+      "duration": 3.08,
+      "text": "is now I have this picture and I can put"
+    },
+    {
+      "index": 480,
+      "start": 1799.44,
+      "end": 1801.56,
+      "duration": 2.12,
+      "text": "everything in my computer and see how"
+    },
+    {
+      "index": 481,
+      "start": 1801.57,
+      "end": 1803.57,
+      "duration": 2.0,
+      "text": "things evolve as a function of time"
+    },
+    {
+      "index": 482,
+      "start": 1803.58,
+      "end": 1806.96,
+      "duration": 3.38,
+      "text": "right of course we can rely on the"
+    },
+    {
+      "index": 483,
+      "start": 1806.97,
+      "end": 1808.7,
+      "duration": 1.73,
+      "text": "computers and see what we can learn from"
+    },
+    {
+      "index": 484,
+      "start": 1808.71,
+      "end": 1812.18,
+      "duration": 3.47,
+      "text": "it and if you met you are a major of"
+    },
+    {
+      "index": 485,
+      "start": 1812.19,
+      "end": 1815.12,
+      "duration": 2.93,
+      "text": "mathematics you say no this is not the"
+    },
+    {
+      "index": 486,
+      "start": 1815.13,
+      "end": 1819.44,
+      "duration": 4.31,
+      "text": "problem I am going to work on okay I"
+    },
+    {
+      "index": 487,
+      "start": 1819.45,
+      "end": 1823.79,
+      "duration": 4.34,
+      "text": "don't care but as a physicist what we"
+    },
+    {
+      "index": 488,
+      "start": 1823.8,
+      "end": 1826.25,
+      "duration": 2.45,
+      "text": "are going to do is that how we look at"
+    },
+    {
+      "index": 489,
+      "start": 1826.26,
+      "end": 1830.09,
+      "duration": 3.83,
+      "text": "these infinities then okay interesting"
+    },
+    {
+      "index": 490,
+      "start": 1830.1,
+      "end": 1830.84,
+      "duration": 0.74,
+      "text": "right"
+    },
+    {
+      "index": 491,
+      "start": 1830.85,
+      "end": 1832.97,
+      "duration": 2.12,
+      "text": "there's a lot of things a lot of small"
+    },
+    {
+      "index": 492,
+      "start": 1832.98,
+      "end": 1835.85,
+      "duration": 2.87,
+      "text": "balls connected to big balls right super"
+    },
+    {
+      "index": 493,
+      "start": 1835.86,
+      "end": 1837.53,
+      "duration": 1.67,
+      "text": "big one and protein since in log scale"
+    },
+    {
+      "index": 494,
+      "start": 1837.54,
+      "end": 1840.29,
+      "duration": 2.75,
+      "text": "so those poles are really really large"
+    },
+    {
+      "index": 495,
+      "start": 1840.3,
+      "end": 1842.33,
+      "duration": 2.03,
+      "text": "compared to the all the other ports"
+    },
+    {
+      "index": 496,
+      "start": 1842.34,
+      "end": 1844.7,
+      "duration": 2.36,
+      "text": "connected to this system therefore as a"
+    },
+    {
+      "index": 497,
+      "start": 1844.71,
+      "end": 1847.64,
+      "duration": 2.93,
+      "text": "physicist I'm going to ignore all the"
+    },
+    {
+      "index": 498,
+      "start": 1847.65,
+      "end": 1854.86,
+      "duration": 7.21,
+      "text": "other boys oh if I do that then it began"
+    },
+    {
+      "index": 499,
+      "start": 1854.87,
+      "end": 1858.23,
+      "duration": 3.36,
+      "text": "this is some kind of symmetry you can"
+    },
+    {
+      "index": 500,
+      "start": 1858.24,
+      "end": 1860.9,
+      "duration": 2.66,
+      "text": "let you see from here right what I did I"
+    },
+    {
+      "index": 501,
+      "start": 1860.91,
+      "end": 1864.41,
+      "duration": 3.5,
+      "text": "see the symmetry you see there are three"
+    },
+    {
+      "index": 502,
+      "start": 1864.42,
+      "end": 1864.98,
+      "duration": 0.56,
+      "text": "poles"
+    },
+    {
+      "index": 503,
+      "start": 1864.99,
+      "end": 1867.02,
+      "duration": 2.03,
+      "text": "they're connected to each other they are"
+    },
+    {
+      "index": 504,
+      "start": 1867.03,
+      "end": 1870.95,
+      "duration": 3.92,
+      "text": "equally spaced we have a translation"
+    },
+    {
+      "index": 505,
+      "start": 1870.96,
+      "end": 1874.46,
+      "duration": 3.5,
+      "text": "symmetry you see so you can see that"
+    },
+    {
+      "index": 506,
+      "start": 1874.47,
+      "end": 1876.53,
+      "duration": 2.06,
+      "text": "actually that's actually how we actually"
+    },
+    {
+      "index": 507,
+      "start": 1876.54,
+      "end": 1878.72,
+      "duration": 2.18,
+      "text": "think about a problem of course"
+    },
+    {
+      "index": 508,
+      "start": 1878.73,
+      "end": 1881.0,
+      "duration": 2.27,
+      "text": "different few have different kind of"
+    },
+    {
+      "index": 509,
+      "start": 1881.01,
+      "end": 1883.25,
+      "duration": 2.24,
+      "text": "thinking and a different kind of problem"
+    },
+    {
+      "index": 510,
+      "start": 1883.26,
+      "end": 1885.5,
+      "duration": 2.24,
+      "text": "they would like to focus on but as a"
+    },
+    {
+      "index": 511,
+      "start": 1885.51,
+      "end": 1887.69,
+      "duration": 2.18,
+      "text": "position I would like to know how this"
+    },
+    {
+      "index": 512,
+      "start": 1887.7,
+      "end": 1889.52,
+      "duration": 1.82,
+      "text": "system will work and that is actually"
+    },
+    {
+      "index": 513,
+      "start": 1889.53,
+      "end": 1893.39,
+      "duration": 3.86,
+      "text": "what I'm going to do okay so that's very"
+    },
+    {
+      "index": 514,
+      "start": 1893.4,
+      "end": 1898.55,
+      "duration": 5.15,
+      "text": "nice we are going to discuss infinite"
+    },
+    {
+      "index": 515,
+      "start": 1898.56,
+      "end": 1901.25,
+      "duration": 2.69,
+      "text": "system so what is actually the infinite"
+    },
+    {
+      "index": 516,
+      "start": 1901.26,
+      "end": 1904.36,
+      "duration": 3.1,
+      "text": "system I am going to talk about"
+    },
+    {
+      "index": 517,
+      "start": 1904.37,
+      "end": 1908.62,
+      "duration": 4.25,
+      "text": "essentially there's infinite system with"
+    },
+    {
+      "index": 518,
+      "start": 1908.63,
+      "end": 1912.94,
+      "duration": 4.31,
+      "text": "space translation symmetry"
+    },
+    {
+      "index": 519,
+      "start": 1912.95,
+      "end": 1915.64,
+      "duration": 2.69,
+      "text": "so to save some time I have already"
+    },
+    {
+      "index": 520,
+      "start": 1915.65,
+      "end": 1918.79,
+      "duration": 3.14,
+      "text": "written right I have already written"
+    },
+    {
+      "index": 521,
+      "start": 1918.8,
+      "end": 1925.06,
+      "duration": 6.26,
+      "text": "founded the matrix involving this system"
+    },
+    {
+      "index": 522,
+      "start": 1925.07,
+      "end": 1926.4,
+      "duration": 1.33,
+      "text": "here"
+    },
+    {
+      "index": 523,
+      "start": 1926.41,
+      "end": 1930.67,
+      "duration": 4.26,
+      "text": "what I'm interested is mass-spring"
+    },
+    {
+      "index": 524,
+      "start": 1930.68,
+      "end": 1934.27,
+      "duration": 3.59,
+      "text": "system okay infinite number of mass and"
+    },
+    {
+      "index": 525,
+      "start": 1934.28,
+      "end": 1939.01,
+      "duration": 4.73,
+      "text": "spring and they actually satisfy space"
+    },
+    {
+      "index": 526,
+      "start": 1939.02,
+      "end": 1944.32,
+      "duration": 5.3,
+      "text": "translation symmetry okay they are"
+    },
+    {
+      "index": 527,
+      "start": 1944.33,
+      "end": 1948.01,
+      "duration": 3.68,
+      "text": "connected to each other by Springs with"
+    },
+    {
+      "index": 528,
+      "start": 1948.02,
+      "end": 1952.18,
+      "duration": 4.16,
+      "text": "natural ends a and spring constant K"
+    },
+    {
+      "index": 529,
+      "start": 1952.19,
+      "end": 1954.82,
+      "duration": 2.63,
+      "text": "okay and there are infinite number of"
+    },
+    {
+      "index": 530,
+      "start": 1954.83,
+      "end": 1958.24,
+      "duration": 3.41,
+      "text": "them actually line up from the left-hand"
+    },
+    {
+      "index": 531,
+      "start": 1958.25,
+      "end": 1960.52,
+      "duration": 2.27,
+      "text": "side of the edge of the universe to the"
+    },
+    {
+      "index": 532,
+      "start": 1960.53,
+      "end": 1962.23,
+      "duration": 1.7,
+      "text": "right-hand side edge of the universe"
+    },
+    {
+      "index": 533,
+      "start": 1962.24,
+      "end": 1965.05,
+      "duration": 2.81,
+      "text": "okay I prepared this system ok took me a"
+    },
+    {
+      "index": 534,
+      "start": 1965.06,
+      "end": 1970.03,
+      "duration": 4.97,
+      "text": "long time okay all right it's very"
+    },
+    {
+      "index": 535,
+      "start": 1970.04,
+      "end": 1971.95,
+      "duration": 1.91,
+      "text": "difficult to describe this kind of"
+    },
+    {
+      "index": 536,
+      "start": 1971.96,
+      "end": 1974.65,
+      "duration": 2.69,
+      "text": "system right so the first thing we have"
+    },
+    {
+      "index": 537,
+      "start": 1974.66,
+      "end": 1977.23,
+      "duration": 2.57,
+      "text": "done from ao3 is that in order to"
+    },
+    {
+      "index": 538,
+      "start": 1977.24,
+      "end": 1980.05,
+      "duration": 2.81,
+      "text": "describe this system I need to define a"
+    },
+    {
+      "index": 539,
+      "start": 1980.06,
+      "end": 1983.59,
+      "duration": 3.53,
+      "text": "coordinate system right and also help"
+    },
+    {
+      "index": 540,
+      "start": 1983.6,
+      "end": 1986.08,
+      "duration": 2.48,
+      "text": "everything properly labeled so I"
+    },
+    {
+      "index": 541,
+      "start": 1986.09,
+      "end": 1990.16,
+      "duration": 4.07,
+      "text": "introduce a label say minus 1 j j plus 1"
+    },
+    {
+      "index": 542,
+      "start": 1990.17,
+      "end": 1994.96,
+      "duration": 4.79,
+      "text": "j plus 2 just to name each little math I"
+    },
+    {
+      "index": 543,
+      "start": 1994.97,
+      "end": 1997.44,
+      "duration": 2.47,
+      "text": "am talking about okay no other purpose"
+    },
+    {
+      "index": 544,
+      "start": 1997.45,
+      "end": 2000.78,
+      "duration": 3.33,
+      "text": "then once I have the label I can"
+    },
+    {
+      "index": 545,
+      "start": 2000.79,
+      "end": 2004.65,
+      "duration": 3.86,
+      "text": "actually write everything Express the"
+    },
+    {
+      "index": 546,
+      "start": 2004.66,
+      "end": 2008.49,
+      "duration": 3.83,
+      "text": "displacement or total mass as XT minus 1"
+    },
+    {
+      "index": 547,
+      "start": 2008.5,
+      "end": 2014.28,
+      "duration": 5.78,
+      "text": "X a X a + 1 XA plus 2 that's just a"
+    },
+    {
+      "index": 548,
+      "start": 2014.29,
+      "end": 2016.02,
+      "duration": 1.73,
+      "text": "displacement from the equilibrium"
+    },
+    {
+      "index": 549,
+      "start": 2016.03,
+      "end": 2022.26,
+      "duration": 6.23,
+      "text": "position of the mass okay and this"
+    },
+    {
+      "index": 550,
+      "start": 2022.27,
+      "end": 2024.39,
+      "duration": 2.12,
+      "text": "system will have an equation of motion"
+    },
+    {
+      "index": 551,
+      "start": 2024.4,
+      "end": 2029.07,
+      "duration": 4.67,
+      "text": "looks like this so if now I focus the"
+    },
+    {
+      "index": 552,
+      "start": 2029.08,
+      "end": 2033.54,
+      "duration": 4.46,
+      "text": "detailed mass check ok then I can I"
+    },
+    {
+      "index": 553,
+      "start": 2033.55,
+      "end": 2035.9,
+      "duration": 2.35,
+      "text": "should write down the equation of motion"
+    },
+    {
+      "index": 554,
+      "start": 2035.91,
+      "end": 2040.59,
+      "duration": 4.68,
+      "text": "there are two Springs there are there"
+    },
+    {
+      "index": 555,
+      "start": 2040.6,
+      "end": 2044.19,
+      "duration": 3.59,
+      "text": "are two Springs connected to this mass"
+    },
+    {
+      "index": 556,
+      "start": 2044.2,
+      "end": 2044.91,
+      "duration": 0.71,
+      "text": "right"
+    },
+    {
+      "index": 557,
+      "start": 2044.92,
+      "end": 2046.409,
+      "duration": 1.489,
+      "text": "therefore you are"
+    },
+    {
+      "index": 558,
+      "start": 2046.419,
+      "end": 2051.24,
+      "duration": 4.821,
+      "text": "to have tools spring force right since"
+    },
+    {
+      "index": 559,
+      "start": 2051.25,
+      "end": 2053.22,
+      "duration": 1.97,
+      "text": "this is usually idealized the Springs"
+    },
+    {
+      "index": 560,
+      "start": 2053.23,
+      "end": 2056.339,
+      "duration": 3.109,
+      "text": "with spring constant capital K therefore"
+    },
+    {
+      "index": 561,
+      "start": 2056.349,
+      "end": 2058.47,
+      "duration": 2.121,
+      "text": "I can write down immediately the"
+    },
+    {
+      "index": 562,
+      "start": 2058.48,
+      "end": 2061.909,
+      "duration": 3.429,
+      "text": "equation of motion is actually equal to"
+    },
+    {
+      "index": 563,
+      "start": 2061.919,
+      "end": 2067.889,
+      "duration": 5.97,
+      "text": "MX double dot J is equal to minus k XA"
+    },
+    {
+      "index": 564,
+      "start": 2067.899,
+      "end": 2072.299,
+      "duration": 4.4,
+      "text": "minus XA minus 1 minus this disaster"
+    },
+    {
+      "index": 565,
+      "start": 2072.309,
+      "end": 2075.659,
+      "duration": 3.35,
+      "text": "that the right hand side spring force"
+    },
+    {
+      "index": 566,
+      "start": 2075.669,
+      "end": 2080.52,
+      "duration": 4.851,
+      "text": "minus k xj minus XA plus 1 we have done"
+    },
+    {
+      "index": 567,
+      "start": 2080.53,
+      "end": 2083.569,
+      "duration": 3.039,
+      "text": "this exercise before I with a simpler"
+    },
+    {
+      "index": 568,
+      "start": 2083.579,
+      "end": 2088.559,
+      "duration": 4.98,
+      "text": "problem ok as you Joe I can collect all"
+    },
+    {
+      "index": 569,
+      "start": 2088.569,
+      "end": 2093.329,
+      "duration": 4.76,
+      "text": "the terms associated with XA minus 1 XA"
+    },
+    {
+      "index": 570,
+      "start": 2093.339,
+      "end": 2097.559,
+      "duration": 4.22,
+      "text": "and the XA plus 1 together then I get"
+    },
+    {
+      "index": 571,
+      "start": 2097.569,
+      "end": 2099.569,
+      "duration": 2.0,
+      "text": "this expression which is really looks"
+    },
+    {
+      "index": 572,
+      "start": 2099.579,
+      "end": 2100.559,
+      "duration": 0.98,
+      "text": "nice"
+    },
+    {
+      "index": 573,
+      "start": 2100.569,
+      "end": 2105.66,
+      "duration": 5.091,
+      "text": "okay and I assume that this system is"
+    },
+    {
+      "index": 574,
+      "start": 2105.67,
+      "end": 2109.73,
+      "duration": 4.06,
+      "text": "actually undergoing some kind of"
+    },
+    {
+      "index": 575,
+      "start": 2109.74,
+      "end": 2113.849,
+      "duration": 4.109,
+      "text": "oscillation okay therefore I assume that"
+    },
+    {
+      "index": 576,
+      "start": 2113.859,
+      "end": 2116.76,
+      "duration": 2.901,
+      "text": "this is a solution X J will be equal to"
+    },
+    {
+      "index": 577,
+      "start": 2116.77,
+      "end": 2122.099,
+      "duration": 5.329,
+      "text": "AJ is the amplitude of J's mass okay"
+    },
+    {
+      "index": 578,
+      "start": 2122.109,
+      "end": 2126.299,
+      "duration": 4.19,
+      "text": "cosine Omega T plus Phi Omega is a"
+    },
+    {
+      "index": 579,
+      "start": 2126.309,
+      "end": 2128.16,
+      "duration": 1.851,
+      "text": "should the oscillation frequency and"
+    },
+    {
+      "index": 580,
+      "start": 2128.17,
+      "end": 2131.22,
+      "duration": 3.05,
+      "text": "finally the face and I don't know what"
+    },
+    {
+      "index": 581,
+      "start": 2131.23,
+      "end": 2134.43,
+      "duration": 3.2,
+      "text": "is actually Omega and AJ yet okay we"
+    },
+    {
+      "index": 582,
+      "start": 2134.44,
+      "end": 2137.25,
+      "duration": 2.81,
+      "text": "would like to figure that out and let's"
+    },
+    {
+      "index": 583,
+      "start": 2137.26,
+      "end": 2141.109,
+      "duration": 3.849,
+      "text": "do job okay you can issued it right down"
+    },
+    {
+      "index": 584,
+      "start": 2141.119,
+      "end": 2145.289,
+      "duration": 4.17,
+      "text": "the n matrix okay and matrix is actually"
+    },
+    {
+      "index": 585,
+      "start": 2145.299,
+      "end": 2146.069,
+      "duration": 0.77,
+      "text": "really simple"
+    },
+    {
+      "index": 586,
+      "start": 2146.079,
+      "end": 2150.45,
+      "duration": 4.371,
+      "text": "in the diagonal turns ago no turns out o"
+    },
+    {
+      "index": 587,
+      "start": 2150.46,
+      "end": 2153.95,
+      "duration": 3.49,
+      "text": "N and the off diagonal terms are all 0"
+    },
+    {
+      "index": 588,
+      "start": 2153.96,
+      "end": 2157.41,
+      "duration": 3.45,
+      "text": "right and you don't really need to copy"
+    },
+    {
+      "index": 589,
+      "start": 2157.42,
+      "end": 2159.059,
+      "duration": 1.639,
+      "text": "them because we are organizing the"
+    },
+    {
+      "index": 590,
+      "start": 2159.069,
+      "end": 2162.93,
+      "duration": 3.861,
+      "text": "lecture note n minus 1 K matrix hi I"
+    },
+    {
+      "index": 591,
+      "start": 2162.94,
+      "end": 2165.569,
+      "duration": 2.629,
+      "text": "have already arranged my turns here"
+    },
+    {
+      "index": 592,
+      "start": 2165.579,
+      "end": 2168.089,
+      "duration": 2.51,
+      "text": "therefore it looks like this you have a"
+    },
+    {
+      "index": 593,
+      "start": 2168.099,
+      "end": 2170.339,
+      "duration": 2.24,
+      "text": "strange structure you have three turns"
+    },
+    {
+      "index": 594,
+      "start": 2170.349,
+      "end": 2176.43,
+      "duration": 6.081,
+      "text": "kind of in the diagonal turns and this"
+    },
+    {
+      "index": 595,
+      "start": 2176.44,
+      "end": 2179.819,
+      "duration": 3.379,
+      "text": "issue is shifting as a function of"
+    },
+    {
+      "index": 596,
+      "start": 2179.829,
+      "end": 2184.259,
+      "duration": 4.43,
+      "text": "number of rows and the OD other part of"
+    },
+    {
+      "index": 597,
+      "start": 2184.269,
+      "end": 2188.849,
+      "duration": 4.58,
+      "text": "the metrics actually zero okay it's an"
+    },
+    {
+      "index": 598,
+      "start": 2188.859,
+      "end": 2192.799,
+      "duration": 3.94,
+      "text": "infinite as Infini dimension matrix"
+    },
+    {
+      "index": 599,
+      "start": 2192.809,
+      "end": 2196.2,
+      "duration": 3.391,
+      "text": "finally I would like to also write my a"
+    },
+    {
+      "index": 600,
+      "start": 2196.21,
+      "end": 2199.95,
+      "duration": 3.74,
+      "text": "matrix is the vector of M produced right"
+    },
+    {
+      "index": 601,
+      "start": 2199.96,
+      "end": 2202.859,
+      "duration": 2.899,
+      "text": "so you have many many numbers AJ AJ plus"
+    },
+    {
+      "index": 602,
+      "start": 2202.869,
+      "end": 2207.749,
+      "duration": 4.88,
+      "text": "one eight eight plus two okay etcetera"
+    },
+    {
+      "index": 603,
+      "start": 2207.759,
+      "end": 2213.14,
+      "duration": 5.381,
+      "text": "etcetera okay now very easy right"
+    },
+    {
+      "index": 604,
+      "start": 2213.15,
+      "end": 2216.66,
+      "duration": 3.51,
+      "text": "the question is actually can be solved"
+    },
+    {
+      "index": 605,
+      "start": 2216.67,
+      "end": 2217.019,
+      "duration": 0.349,
+      "text": "right"
+    },
+    {
+      "index": 606,
+      "start": 2217.029,
+      "end": 2218.999,
+      "duration": 1.97,
+      "text": "you just have to solve the n minus 1 K"
+    },
+    {
+      "index": 607,
+      "start": 2219.009,
+      "end": 2223.049,
+      "duration": 4.04,
+      "text": "matrix right that's easy right it is an"
+    },
+    {
+      "index": 608,
+      "start": 2223.059,
+      "end": 2225.569,
+      "duration": 2.51,
+      "text": "infinite number times infinite number of"
+    },
+    {
+      "index": 609,
+      "start": 2225.579,
+      "end": 2228.749,
+      "duration": 3.17,
+      "text": "metrics right super easy no actually not"
+    },
+    {
+      "index": 610,
+      "start": 2228.759,
+      "end": 2234.15,
+      "duration": 5.391,
+      "text": "right so we are in trouble I don't know"
+    },
+    {
+      "index": 611,
+      "start": 2234.16,
+      "end": 2238.62,
+      "duration": 4.46,
+      "text": "how to solve this problem okay what can"
+    },
+    {
+      "index": 612,
+      "start": 2238.63,
+      "end": 2245.269,
+      "duration": 6.639,
+      "text": "we do anybody have any suggestion to me"
+    },
+    {
+      "index": 613,
+      "start": 2247.92,
+      "end": 2247.93,
+      "duration": 0.01,
+      "text": "yeah math department is coming in to"
+    },
+    {
+      "index": 614,
+      "start": 2247.93,
+      "end": 2251.069,
+      "duration": 3.139,
+      "text": "help yes but they're actually people"
+    },
+    {
+      "index": 615,
+      "start": 2251.079,
+      "end": 2254.339,
+      "duration": 3.26,
+      "text": "asking that we learn some concept which"
+    },
+    {
+      "index": 616,
+      "start": 2254.349,
+      "end": 2257.759,
+      "duration": 3.41,
+      "text": "we just learned like there's a what what"
+    },
+    {
+      "index": 617,
+      "start": 2257.769,
+      "end": 2261.18,
+      "duration": 3.411,
+      "text": "kind of property of this sister symmetry"
+    },
+    {
+      "index": 618,
+      "start": 2261.19,
+      "end": 2261.93,
+      "duration": 0.74,
+      "text": "all right"
+    },
+    {
+      "index": 619,
+      "start": 2261.94,
+      "end": 2265.68,
+      "duration": 3.74,
+      "text": "we have symmetry okay so this n minus 1"
+    },
+    {
+      "index": 620,
+      "start": 2265.69,
+      "end": 2269.88,
+      "duration": 4.19,
+      "text": "K matrix looks horrible right but if I'd"
+    },
+    {
+      "index": 621,
+      "start": 2269.89,
+      "end": 2274.98,
+      "duration": 5.09,
+      "text": "write down the symmetric matrix actually"
+    },
+    {
+      "index": 622,
+      "start": 2274.99,
+      "end": 2279.99,
+      "duration": 5.0,
+      "text": "it looks slightly better okay so what is"
+    },
+    {
+      "index": 623,
+      "start": 2280.0,
+      "end": 2282.69,
+      "duration": 2.69,
+      "text": "actually the symmetry matrix okay so one"
+    },
+    {
+      "index": 624,
+      "start": 2282.7,
+      "end": 2284.88,
+      "duration": 2.18,
+      "text": "observation we can make from this system"
+    },
+    {
+      "index": 625,
+      "start": 2284.89,
+      "end": 2290.13,
+      "duration": 5.24,
+      "text": "is that if I shipped this system a to"
+    },
+    {
+      "index": 626,
+      "start": 2290.14,
+      "end": 2292.859,
+      "duration": 2.719,
+      "text": "the left okay I shipped this these two"
+    },
+    {
+      "index": 627,
+      "start": 2292.869,
+      "end": 2295.98,
+      "duration": 3.111,
+      "text": "masts to laughing I should all the math"
+    },
+    {
+      "index": 628,
+      "start": 2295.99,
+      "end": 2298.319,
+      "duration": 2.329,
+      "text": "I have to hire many many students to"
+    },
+    {
+      "index": 629,
+      "start": 2298.329,
+      "end": 2300.329,
+      "duration": 2.0,
+      "text": "smooth all the mess from lapin side of"
+    },
+    {
+      "index": 630,
+      "start": 2300.339,
+      "end": 2302.22,
+      "duration": 1.881,
+      "text": "the universe to right hand side of the"
+    },
+    {
+      "index": 631,
+      "start": 2302.23,
+      "end": 2304.62,
+      "duration": 2.39,
+      "text": "universe okay and after they have done"
+    },
+    {
+      "index": 632,
+      "start": 2304.63,
+      "end": 2307.759,
+      "duration": 3.129,
+      "text": "that the system looks the same right"
+    },
+    {
+      "index": 633,
+      "start": 2307.769,
+      "end": 2311.069,
+      "duration": 3.3,
+      "text": "that's very good okay after all the hard"
+    },
+    {
+      "index": 634,
+      "start": 2311.079,
+      "end": 2312.77,
+      "duration": 1.691,
+      "text": "work right"
+    },
+    {
+      "index": 635,
+      "start": 2312.78,
+      "end": 2315.86,
+      "duration": 3.08,
+      "text": "so what is issue going to be the"
+    },
+    {
+      "index": 636,
+      "start": 2315.87,
+      "end": 2319.53,
+      "duration": 3.66,
+      "text": "symmetry matrix okay now I would like to"
+    },
+    {
+      "index": 637,
+      "start": 2319.54,
+      "end": 2322.8,
+      "duration": 3.26,
+      "text": "achieve something which is a prong equal"
+    },
+    {
+      "index": 638,
+      "start": 2322.81,
+      "end": 2326.96,
+      "duration": 4.15,
+      "text": "to s and that this s actually shipped"
+    },
+    {
+      "index": 639,
+      "start": 2326.97,
+      "end": 2332.13,
+      "duration": 5.16,
+      "text": "the mass by a distance of a right so"
+    },
+    {
+      "index": 640,
+      "start": 2332.14,
+      "end": 2333.69,
+      "duration": 1.55,
+      "text": "what would be the function of phony over"
+    },
+    {
+      "index": 641,
+      "start": 2333.7,
+      "end": 2336.71,
+      "duration": 3.01,
+      "text": "this s matrix we were looks like this"
+    },
+    {
+      "index": 642,
+      "start": 2336.72,
+      "end": 2350.36,
+      "duration": 13.64,
+      "text": "it's going to be 0 1 0 0 0 0 0 1 0 0 0"
+    },
+    {
+      "index": 643,
+      "start": 2352.28,
+      "end": 2352.29,
+      "duration": 0.01,
+      "text": "exactly"
+    },
+    {
+      "index": 644,
+      "start": 2352.29,
+      "end": 2357.72,
+      "duration": 5.43,
+      "text": "ok so the next two diagonal turn is all"
+    },
+    {
+      "index": 645,
+      "start": 2357.73,
+      "end": 2362.36,
+      "duration": 4.63,
+      "text": "one all the rest of the component is 0"
+    },
+    {
+      "index": 646,
+      "start": 2362.37,
+      "end": 2367.58,
+      "duration": 5.21,
+      "text": "ok and this looks a lot more friendly"
+    },
+    {
+      "index": 647,
+      "start": 2367.59,
+      "end": 2370.56,
+      "duration": 2.97,
+      "text": "compared to a mess 1 K matrix right see"
+    },
+    {
+      "index": 648,
+      "start": 2370.57,
+      "end": 2373.08,
+      "duration": 2.51,
+      "text": "oh this is is this horrible thing to do"
+    },
+    {
+      "index": 649,
+      "start": 2373.09,
+      "end": 2375.57,
+      "duration": 2.48,
+      "text": "because this is an infinite number of"
+    },
+    {
+      "index": 650,
+      "start": 2375.58,
+      "end": 2378.21,
+      "duration": 2.63,
+      "text": "times in terminal number dimension"
+    },
+    {
+      "index": 651,
+      "start": 2378.22,
+      "end": 2385.71,
+      "duration": 7.49,
+      "text": "matrix ok so we would like to find the"
+    },
+    {
+      "index": 652,
+      "start": 2385.72,
+      "end": 2391.56,
+      "duration": 5.84,
+      "text": "eigen vectors of s matrix ok so this"
+    },
+    {
+      "index": 653,
+      "start": 2391.57,
+      "end": 2394.62,
+      "duration": 3.05,
+      "text": "means that if I manage you to solve the"
+    },
+    {
+      "index": 654,
+      "start": 2394.63,
+      "end": 2396.69,
+      "duration": 2.06,
+      "text": "eigenvalue problem assuming that ok I"
+    },
+    {
+      "index": 655,
+      "start": 2396.7,
+      "end": 2398.94,
+      "duration": 2.24,
+      "text": "haven't solve it but I assuming that I"
+    },
+    {
+      "index": 656,
+      "start": 2398.95,
+      "end": 2399.96,
+      "duration": 1.01,
+      "text": "can solve it"
+    },
+    {
+      "index": 657,
+      "start": 2399.97,
+      "end": 2402.93,
+      "duration": 2.96,
+      "text": "ok then what I'm going to do is going to"
+    },
+    {
+      "index": 658,
+      "start": 2402.94,
+      "end": 2406.85,
+      "duration": 3.91,
+      "text": "get this essay will be equal to theta"
+    },
+    {
+      "index": 659,
+      "start": 2406.86,
+      "end": 2411.6,
+      "duration": 4.74,
+      "text": "where a is actually eigen vector of s"
+    },
+    {
+      "index": 660,
+      "start": 2411.61,
+      "end": 2417.96,
+      "duration": 6.35,
+      "text": "matrix ok and and then si we just learn"
+    },
+    {
+      "index": 661,
+      "start": 2417.97,
+      "end": 2420.39,
+      "duration": 2.42,
+      "text": "from here right it's actually equal to a"
+    },
+    {
+      "index": 662,
+      "start": 2420.4,
+      "end": 2429.3,
+      "duration": 8.9,
+      "text": "prime so beta is the eigen value and a"
+    },
+    {
+      "index": 663,
+      "start": 2429.31,
+      "end": 2434.67,
+      "duration": 5.36,
+      "text": "is actually the eigenvector"
+    },
+    {
+      "index": 664,
+      "start": 2438.81,
+      "end": 2438.82,
+      "duration": 0.01,
+      "text": "so that means originally I have a which"
+    },
+    {
+      "index": 665,
+      "start": 2438.82,
+      "end": 2443.19,
+      "duration": 4.37,
+      "text": "is something sensing a say it a plus one"
+    },
+    {
+      "index": 666,
+      "start": 2443.2,
+      "end": 2447.66,
+      "duration": 4.46,
+      "text": "it's a plus two proper bra okay and the"
+    },
+    {
+      "index": 667,
+      "start": 2447.67,
+      "end": 2453.54,
+      "duration": 5.87,
+      "text": "apron after I actually multiply a by s"
+    },
+    {
+      "index": 668,
+      "start": 2453.55,
+      "end": 2457.26,
+      "duration": 3.71,
+      "text": "matrix I get a prompt which looks like"
+    },
+    {
+      "index": 669,
+      "start": 2457.27,
+      "end": 2458.75,
+      "duration": 1.48,
+      "text": "this"
+    },
+    {
+      "index": 670,
+      "start": 2458.76,
+      "end": 2469.01,
+      "duration": 10.25,
+      "text": "hey J plus 1 J plus 2 J plus 3 okay so"
+    },
+    {
+      "index": 671,
+      "start": 2469.02,
+      "end": 2472.71,
+      "duration": 3.69,
+      "text": "what I'm going to do is what actually"
+    },
+    {
+      "index": 672,
+      "start": 2472.72,
+      "end": 2476.48,
+      "duration": 3.76,
+      "text": "this S matrix does is to shift the a"
+    },
+    {
+      "index": 673,
+      "start": 2476.49,
+      "end": 2483.21,
+      "duration": 6.72,
+      "text": "component by one one row right okay so"
+    },
+    {
+      "index": 674,
+      "start": 2483.22,
+      "end": 2485.61,
+      "duration": 2.39,
+      "text": "then we basically get this expression"
+    },
+    {
+      "index": 675,
+      "start": 2485.62,
+      "end": 2486.15,
+      "duration": 0.53,
+      "text": "okay"
+    },
+    {
+      "index": 676,
+      "start": 2486.16,
+      "end": 2490.44,
+      "duration": 4.28,
+      "text": "and of course a1 is equal to beta which"
+    },
+    {
+      "index": 677,
+      "start": 2490.45,
+      "end": 2493.17,
+      "duration": 2.72,
+      "text": "is a constant I say right so if you"
+    },
+    {
+      "index": 678,
+      "start": 2493.18,
+      "end": 2499.2,
+      "duration": 6.02,
+      "text": "compare for example here okay you can"
+    },
+    {
+      "index": 679,
+      "start": 2499.21,
+      "end": 2506.0,
+      "duration": 6.79,
+      "text": "get that AJ prime will be equal to beta"
+    },
+    {
+      "index": 680,
+      "start": 2506.01,
+      "end": 2510.66,
+      "duration": 4.65,
+      "text": "AJ which is actually equal to AJ plus"
+    },
+    {
+      "index": 681,
+      "start": 2510.67,
+      "end": 2514.68,
+      "duration": 4.01,
+      "text": "one by AJ prime is actually equal to AJ"
+    },
+    {
+      "index": 682,
+      "start": 2514.69,
+      "end": 2517.08,
+      "duration": 2.39,
+      "text": "plus one maybe it's just what shifting"
+    },
+    {
+      "index": 683,
+      "start": 2517.09,
+      "end": 2521.78,
+      "duration": 4.69,
+      "text": "one you need you know label right okay"
+    },
+    {
+      "index": 684,
+      "start": 2521.79,
+      "end": 2525.21,
+      "duration": 3.42,
+      "text": "so so this is the expression I am"
+    },
+    {
+      "index": 685,
+      "start": 2525.22,
+      "end": 2529.14,
+      "duration": 3.92,
+      "text": "looking for okay we don't know yet what"
+    },
+    {
+      "index": 686,
+      "start": 2529.15,
+      "end": 2530.1,
+      "duration": 0.95,
+      "text": "is H beta"
+    },
+    {
+      "index": 687,
+      "start": 2530.11,
+      "end": 2533.31,
+      "duration": 3.2,
+      "text": "okay beta I sound number assuming that I"
+    },
+    {
+      "index": 688,
+      "start": 2533.32,
+      "end": 2536.09,
+      "duration": 2.77,
+      "text": "can solve the eigenvalue problem okay"
+    },
+    {
+      "index": 689,
+      "start": 2536.1,
+      "end": 2542.19,
+      "duration": 6.09,
+      "text": "but I do now if I have 8 0 if a 0 is"
+    },
+    {
+      "index": 690,
+      "start": 2542.2,
+      "end": 2543.42,
+      "duration": 1.22,
+      "text": "equal to 0"
+    },
+    {
+      "index": 691,
+      "start": 2543.43,
+      "end": 2548.4,
+      "duration": 4.97,
+      "text": "okay from this this expression okay that"
+    },
+    {
+      "index": 692,
+      "start": 2548.41,
+      "end": 2553.26,
+      "duration": 4.85,
+      "text": "means a 1 will be a 0 is equal to 1 if a"
+    },
+    {
+      "index": 693,
+      "start": 2553.27,
+      "end": 2555.63,
+      "duration": 2.36,
+      "text": "0 is 0 then everything is 0 right and"
+    },
+    {
+      "index": 694,
+      "start": 2555.64,
+      "end": 2557.16,
+      "duration": 1.52,
+      "text": "it's not right"
+    },
+    {
+      "index": 695,
+      "start": 2557.17,
+      "end": 2560.19,
+      "duration": 3.02,
+      "text": "ok n 0 is equal to 1 then something will"
+    },
+    {
+      "index": 696,
+      "start": 2560.2,
+      "end": 2562.89,
+      "duration": 2.69,
+      "text": "happen a 1 will be equal to beta right"
+    },
+    {
+      "index": 697,
+      "start": 2562.9,
+      "end": 2565.38,
+      "duration": 2.48,
+      "text": "from this expression right because beta"
+    },
+    {
+      "index": 698,
+      "start": 2565.39,
+      "end": 2568.39,
+      "duration": 3.0,
+      "text": "IJ is equal to 8 a plus 1"
+    },
+    {
+      "index": 699,
+      "start": 2568.4,
+      "end": 2571.859,
+      "duration": 3.459,
+      "text": "a two will be equal to beta square etc"
+    },
+    {
+      "index": 700,
+      "start": 2571.869,
+      "end": 2574.72,
+      "duration": 2.851,
+      "text": "etc and I can say that"
+    },
+    {
+      "index": 701,
+      "start": 2574.73,
+      "end": 2582.63,
+      "duration": 7.9,
+      "text": "AJ if I assume a 0 if 0 is equal to 1"
+    },
+    {
+      "index": 702,
+      "start": 2582.64,
+      "end": 2589.44,
+      "duration": 6.8,
+      "text": "then AJ will be equal to beta 2 details"
+    },
+    {
+      "index": 703,
+      "start": 2589.45,
+      "end": 2594.819,
+      "duration": 5.369,
+      "text": "ok I going too fast here everybody is"
+    },
+    {
+      "index": 704,
+      "start": 2594.829,
+      "end": 2601.599,
+      "duration": 6.77,
+      "text": "following your question no good and"
+    },
+    {
+      "index": 705,
+      "start": 2601.609,
+      "end": 2605.349,
+      "duration": 3.74,
+      "text": "study we found that we have already"
+    },
+    {
+      "index": 706,
+      "start": 2605.359,
+      "end": 2607.68,
+      "duration": 2.321,
+      "text": "solved that I can build your problem"
+    },
+    {
+      "index": 707,
+      "start": 2607.69,
+      "end": 2610.779,
+      "duration": 3.089,
+      "text": "right because I have already the"
+    },
+    {
+      "index": 708,
+      "start": 2610.789,
+      "end": 2613.45,
+      "duration": 2.661,
+      "text": "expression for the AJ which is actually"
+    },
+    {
+      "index": 709,
+      "start": 2613.46,
+      "end": 2616.48,
+      "duration": 3.02,
+      "text": "in the form of beta to the tail right so"
+    },
+    {
+      "index": 710,
+      "start": 2616.49,
+      "end": 2619.48,
+      "duration": 2.99,
+      "text": "beta is son I should some kind of number"
+    },
+    {
+      "index": 711,
+      "start": 2619.49,
+      "end": 2622.44,
+      "duration": 2.95,
+      "text": "okay and the infinite number of beta"
+    },
+    {
+      "index": 712,
+      "start": 2622.45,
+      "end": 2626.62,
+      "duration": 4.17,
+      "text": "actually can satisfy this eigenvalue"
+    },
+    {
+      "index": 713,
+      "start": 2626.63,
+      "end": 2629.38,
+      "duration": 2.75,
+      "text": "problem no matter what kind of weight I"
+    },
+    {
+      "index": 714,
+      "start": 2629.39,
+      "end": 2635.5,
+      "duration": 6.11,
+      "text": "choose it can be wine can be to 3.14 can"
+    },
+    {
+      "index": 715,
+      "start": 2635.51,
+      "end": 2637.359,
+      "duration": 1.849,
+      "text": "be PI okay"
+    },
+    {
+      "index": 716,
+      "start": 2637.369,
+      "end": 2639.76,
+      "duration": 2.391,
+      "text": "and what I'm going to get is the"
+    },
+    {
+      "index": 717,
+      "start": 2639.77,
+      "end": 2643.839,
+      "duration": 4.069,
+      "text": "corresponding AJ corresponding a vector"
+    },
+    {
+      "index": 718,
+      "start": 2643.849,
+      "end": 2647.289,
+      "duration": 3.44,
+      "text": "which will satisfy this expression okay"
+    },
+    {
+      "index": 719,
+      "start": 2647.299,
+      "end": 2651.67,
+      "duration": 4.371,
+      "text": "so that means some magic happen we have"
+    },
+    {
+      "index": 720,
+      "start": 2651.68,
+      "end": 2654.069,
+      "duration": 2.389,
+      "text": "already solved the eigenvalue poppin"
+    },
+    {
+      "index": 721,
+      "start": 2654.079,
+      "end": 2658.72,
+      "duration": 4.641,
+      "text": "without really deriving you know a lot"
+    },
+    {
+      "index": 722,
+      "start": 2658.73,
+      "end": 2661.9,
+      "duration": 3.17,
+      "text": "of deviation right a second e another"
+    },
+    {
+      "index": 723,
+      "start": 2661.91,
+      "end": 2663.789,
+      "duration": 1.879,
+      "text": "thing which we learn is that they are"
+    },
+    {
+      "index": 724,
+      "start": 2663.799,
+      "end": 2668.92,
+      "duration": 5.121,
+      "text": "infinite number of eigen value which"
+    },
+    {
+      "index": 725,
+      "start": 2668.93,
+      "end": 2672.7,
+      "duration": 3.77,
+      "text": "satisfy the this item value problem the"
+    },
+    {
+      "index": 726,
+      "start": 2672.71,
+      "end": 2676.41,
+      "duration": 3.7,
+      "text": "question is does that make sense or not"
+    },
+    {
+      "index": 727,
+      "start": 2676.42,
+      "end": 2679.329,
+      "duration": 2.909,
+      "text": "infinite number of eigen values can"
+    },
+    {
+      "index": 728,
+      "start": 2679.339,
+      "end": 2682.15,
+      "duration": 2.811,
+      "text": "actually satisfy this infinitely long"
+    },
+    {
+      "index": 729,
+      "start": 2682.16,
+      "end": 2686.019,
+      "duration": 3.859,
+      "text": "system it's kind of making sense right"
+    },
+    {
+      "index": 730,
+      "start": 2686.029,
+      "end": 2688.69,
+      "duration": 2.661,
+      "text": "because we have work on one oscillator"
+    },
+    {
+      "index": 731,
+      "start": 2688.7,
+      "end": 2692.319,
+      "duration": 3.619,
+      "text": "you have one no more more - oscillator"
+    },
+    {
+      "index": 732,
+      "start": 2692.329,
+      "end": 2693.97,
+      "duration": 1.641,
+      "text": "you have to know more more"
+    },
+    {
+      "index": 733,
+      "start": 2693.98,
+      "end": 2695.71,
+      "duration": 1.73,
+      "text": "three oscillator you have seen no more"
+    },
+    {
+      "index": 734,
+      "start": 2695.72,
+      "end": 2697.96,
+      "duration": 2.24,
+      "text": "more infinite number of oscillators"
+    },
+    {
+      "index": 735,
+      "start": 2697.97,
+      "end": 2700.63,
+      "duration": 2.66,
+      "text": "you should have infinite number no more"
+    },
+    {
+      "index": 736,
+      "start": 2700.64,
+      "end": 2702.37,
+      "duration": 1.73,
+      "text": "mode right"
+    },
+    {
+      "index": 737,
+      "start": 2702.38,
+      "end": 2705.7,
+      "duration": 3.32,
+      "text": "okay so that is actually a very very"
+    },
+    {
+      "index": 738,
+      "start": 2705.71,
+      "end": 2710.35,
+      "duration": 4.64,
+      "text": "good news because we have already saw"
+    },
+    {
+      "index": 739,
+      "start": 2710.36,
+      "end": 2713.9,
+      "duration": 3.54,
+      "text": "the problem and we also know the"
+    },
+    {
+      "index": 740,
+      "start": 2713.91,
+      "end": 2718.52,
+      "duration": 4.61,
+      "text": "functional form of eigenvectors okay so"
+    },
+    {
+      "index": 741,
+      "start": 2718.53,
+      "end": 2720.92,
+      "duration": 2.39,
+      "text": "let's take a look at those example"
+    },
+    {
+      "index": 742,
+      "start": 2720.93,
+      "end": 2723.86,
+      "duration": 2.93,
+      "text": "system which are actually close to"
+    },
+    {
+      "index": 743,
+      "start": 2723.87,
+      "end": 2728.08,
+      "duration": 4.21,
+      "text": "infinitely long so here you have"
+    },
+    {
+      "index": 744,
+      "start": 2728.09,
+      "end": 2731.21,
+      "duration": 3.12,
+      "text": "pelipper machine which usually app can"
+    },
+    {
+      "index": 745,
+      "start": 2731.22,
+      "end": 2735.01,
+      "duration": 3.79,
+      "text": "have have actually multiple coupled"
+    },
+    {
+      "index": 746,
+      "start": 2735.02,
+      "end": 2737.84,
+      "duration": 2.82,
+      "text": "oscillators each of each one of them can"
+    },
+    {
+      "index": 747,
+      "start": 2737.85,
+      "end": 2740.18,
+      "duration": 2.33,
+      "text": "also they up and down and you can see"
+    },
+    {
+      "index": 748,
+      "start": 2740.19,
+      "end": 2744.62,
+      "duration": 4.43,
+      "text": "that huh if I actually try to move them"
+    },
+    {
+      "index": 749,
+      "start": 2744.63,
+      "end": 2749.87,
+      "duration": 5.24,
+      "text": "up and down they're complicated kind of"
+    },
+    {
+      "index": 750,
+      "start": 2749.88,
+      "end": 2753.11,
+      "duration": 3.23,
+      "text": "motion can occur from this system"
+    },
+    {
+      "index": 751,
+      "start": 2753.12,
+      "end": 2756.17,
+      "duration": 3.05,
+      "text": "actually if I do this and you see the"
+    },
+    {
+      "index": 752,
+      "start": 2756.18,
+      "end": 2758.72,
+      "duration": 2.54,
+      "text": "idea something similar to wave is"
+    },
+    {
+      "index": 753,
+      "start": 2758.73,
+      "end": 2760.94,
+      "duration": 2.21,
+      "text": "happening and if I do this continuously"
+    },
+    {
+      "index": 754,
+      "start": 2760.95,
+      "end": 2767.51,
+      "duration": 6.56,
+      "text": "oh some kind of kind of like a standing"
+    },
+    {
+      "index": 755,
+      "start": 2767.52,
+      "end": 2770.78,
+      "duration": 3.26,
+      "text": "wave is produced right and this system"
+    },
+    {
+      "index": 756,
+      "start": 2770.79,
+      "end": 2773.27,
+      "duration": 2.48,
+      "text": "is actually really really hard to"
+    },
+    {
+      "index": 757,
+      "start": 2773.28,
+      "end": 2776.48,
+      "duration": 3.2,
+      "text": "describe right if if I if I look at how"
+    },
+    {
+      "index": 758,
+      "start": 2776.49,
+      "end": 2779.27,
+      "duration": 2.78,
+      "text": "how many since this system can actually"
+    },
+    {
+      "index": 759,
+      "start": 2779.28,
+      "end": 2780.55,
+      "duration": 1.27,
+      "text": "do okay"
+    },
+    {
+      "index": 760,
+      "start": 2780.56,
+      "end": 2784.52,
+      "duration": 3.96,
+      "text": "another example is actually okay so you"
+    },
+    {
+      "index": 761,
+      "start": 2784.53,
+      "end": 2785.99,
+      "duration": 1.46,
+      "text": "can say come on this is actually not"
+    },
+    {
+      "index": 762,
+      "start": 2786.0,
+      "end": 2789.08,
+      "duration": 3.08,
+      "text": "infinitely long sister right you have to"
+    },
+    {
+      "index": 763,
+      "start": 2789.09,
+      "end": 2792.05,
+      "duration": 2.96,
+      "text": "find a number right so how about I use"
+    },
+    {
+      "index": 764,
+      "start": 2792.06,
+      "end": 2795.74,
+      "duration": 3.68,
+      "text": "this system as a demonstration this is"
+    },
+    {
+      "index": 765,
+      "start": 2795.75,
+      "end": 2799.73,
+      "duration": 3.98,
+      "text": "actually a much nicer or much better"
+    },
+    {
+      "index": 766,
+      "start": 2799.74,
+      "end": 2804.77,
+      "duration": 5.03,
+      "text": "approximation okay to to an infinitely"
+    },
+    {
+      "index": 767,
+      "start": 2804.78,
+      "end": 2808.66,
+      "duration": 3.88,
+      "text": "long system you can see that okay each"
+    },
+    {
+      "index": 768,
+      "start": 2808.67,
+      "end": 2812.39,
+      "duration": 3.72,
+      "text": "mass each okay I can say for example"
+    },
+    {
+      "index": 769,
+      "start": 2812.4,
+      "end": 2815.09,
+      "duration": 2.69,
+      "text": "each small component of the spring it's"
+    },
+    {
+      "index": 770,
+      "start": 2815.1,
+      "end": 2818.09,
+      "duration": 2.99,
+      "text": "actually can be considered as a small"
+    },
+    {
+      "index": 771,
+      "start": 2818.1,
+      "end": 2821.75,
+      "duration": 3.65,
+      "text": "and in my in my right and the issue act"
+    },
+    {
+      "index": 772,
+      "start": 2821.76,
+      "end": 2823.49,
+      "duration": 1.73,
+      "text": "now I can actually instead of"
+    },
+    {
+      "index": 773,
+      "start": 2823.5,
+      "end": 2825.95,
+      "duration": 2.45,
+      "text": "oscillating then pactum force I"
+    },
+    {
+      "index": 774,
+      "start": 2825.96,
+      "end": 2829.7,
+      "duration": 3.74,
+      "text": "oscillate an upside down okay you can"
+    },
+    {
+      "index": 775,
+      "start": 2829.71,
+      "end": 2831.62,
+      "duration": 1.91,
+      "text": "see that hand they are interesting kind"
+    },
+    {
+      "index": 776,
+      "start": 2831.63,
+      "end": 2834.779,
+      "duration": 3.149,
+      "text": "of motion I can have okay"
+    },
+    {
+      "index": 777,
+      "start": 2834.789,
+      "end": 2840.449,
+      "duration": 5.66,
+      "text": "this which is like a standing wave I can"
+    },
+    {
+      "index": 778,
+      "start": 2840.459,
+      "end": 2844.079,
+      "duration": 3.62,
+      "text": "I can do this I can stop this system and"
+    },
+    {
+      "index": 779,
+      "start": 2844.089,
+      "end": 2847.819,
+      "duration": 3.73,
+      "text": "like produce whoo I can produce a wave"
+    },
+    {
+      "index": 780,
+      "start": 2847.829,
+      "end": 2851.819,
+      "duration": 3.99,
+      "text": "and it goes back and forth and I can do"
+    },
+    {
+      "index": 781,
+      "start": 2851.829,
+      "end": 2853.699,
+      "duration": 1.87,
+      "text": "this like crazy then you see that"
+    },
+    {
+      "index": 782,
+      "start": 2853.709,
+      "end": 2857.13,
+      "duration": 3.421,
+      "text": "exciting a much higher frequency normal"
+    },
+    {
+      "index": 783,
+      "start": 2857.14,
+      "end": 2859.949,
+      "duration": 2.809,
+      "text": "mode right and that's really complicated"
+    },
+    {
+      "index": 784,
+      "start": 2859.959,
+      "end": 2864.569,
+      "duration": 4.61,
+      "text": "and I the question is how can we"
+    },
+    {
+      "index": 785,
+      "start": 2864.579,
+      "end": 2867.749,
+      "duration": 3.17,
+      "text": "actually understand this kind of system"
+    },
+    {
+      "index": 786,
+      "start": 2867.759,
+      "end": 2871.109,
+      "duration": 3.35,
+      "text": "it seems that this system is so much so"
+    },
+    {
+      "index": 787,
+      "start": 2871.119,
+      "end": 2874.289,
+      "duration": 3.17,
+      "text": "complicated and have infinite amount of"
+    },
+    {
+      "index": 788,
+      "start": 2874.299,
+      "end": 2878.069,
+      "duration": 3.77,
+      "text": "possibilities right so how are we going"
+    },
+    {
+      "index": 789,
+      "start": 2878.079,
+      "end": 2881.849,
+      "duration": 3.77,
+      "text": "to understand this very good news is"
+    },
+    {
+      "index": 790,
+      "start": 2881.859,
+      "end": 2884.88,
+      "duration": 3.021,
+      "text": "that we have solved the normal mode of"
+    },
+    {
+      "index": 791,
+      "start": 2884.89,
+      "end": 2887.699,
+      "duration": 2.809,
+      "text": "this kind of system right so the normal"
+    },
+    {
+      "index": 792,
+      "start": 2887.709,
+      "end": 2891.409,
+      "duration": 3.7,
+      "text": "mode looks like this AJ equal to beta J"
+    },
+    {
+      "index": 793,
+      "start": 2891.419,
+      "end": 2897.179,
+      "duration": 5.76,
+      "text": "ok and the following lecture the rest of"
+    },
+    {
+      "index": 794,
+      "start": 2897.189,
+      "end": 2899.88,
+      "duration": 2.691,
+      "text": "the lecture is to understand what does"
+    },
+    {
+      "index": 795,
+      "start": 2899.89,
+      "end": 2906.929,
+      "duration": 7.039,
+      "text": "that mean and also make petitions ok so"
+    },
+    {
+      "index": 796,
+      "start": 2906.939,
+      "end": 2910.259,
+      "duration": 3.32,
+      "text": "so now we have actually the eigen"
+    },
+    {
+      "index": 797,
+      "start": 2910.269,
+      "end": 2913.62,
+      "duration": 3.351,
+      "text": "vectors ok that's really nice so from"
+    },
+    {
+      "index": 798,
+      "start": 2913.63,
+      "end": 2917.159,
+      "duration": 3.529,
+      "text": "our previous discussion if this system"
+    },
+    {
+      "index": 799,
+      "start": 2917.169,
+      "end": 2921.359,
+      "duration": 4.19,
+      "text": "actually satisfy the symmetry have the"
+    },
+    {
+      "index": 800,
+      "start": 2921.369,
+      "end": 2923.729,
+      "duration": 2.36,
+      "text": "symmetry it is quite by the S matrix"
+    },
+    {
+      "index": 801,
+      "start": 2923.739,
+      "end": 2927.359,
+      "duration": 3.62,
+      "text": "which I have here that means n minus 1 K"
+    },
+    {
+      "index": 802,
+      "start": 2927.369,
+      "end": 2930.809,
+      "duration": 3.44,
+      "text": "matrix where share the same sets of"
+    },
+    {
+      "index": 803,
+      "start": 2930.819,
+      "end": 2934.919,
+      "duration": 4.1,
+      "text": "eigenvectors as matrix right so what"
+    },
+    {
+      "index": 804,
+      "start": 2934.929,
+      "end": 2937.979,
+      "duration": 3.05,
+      "text": "this actually the rest part of the work"
+    },
+    {
+      "index": 805,
+      "start": 2937.989,
+      "end": 2941.509,
+      "duration": 3.52,
+      "text": "is to evaluate this n minus 1 K"
+    },
+    {
+      "index": 806,
+      "start": 2941.519,
+      "end": 2945.559,
+      "duration": 4.04,
+      "text": "multiplied by a and that will give you"
+    },
+    {
+      "index": 807,
+      "start": 2945.569,
+      "end": 2951.659,
+      "duration": 6.09,
+      "text": "Omega square H ok so I just need to"
+    },
+    {
+      "index": 808,
+      "start": 2951.669,
+      "end": 2956.069,
+      "duration": 4.4,
+      "text": "multiply M minus 1 K matrix by a what is"
+    },
+    {
+      "index": 809,
+      "start": 2956.079,
+      "end": 2960.029,
+      "duration": 3.95,
+      "text": "a is here right now what decision M"
+    },
+    {
+      "index": 810,
+      "start": 2960.039,
+      "end": 2963.39,
+      "duration": 3.351,
+      "text": "minus 1 K matrix and when M minus 1 K"
+    },
+    {
+      "index": 811,
+      "start": 2963.4,
+      "end": 2966.209,
+      "duration": 2.809,
+      "text": "matrix is here have a kind of"
+    },
+    {
+      "index": 812,
+      "start": 2966.219,
+      "end": 2967.89,
+      "duration": 1.671,
+      "text": "complicated structure"
+    },
+    {
+      "index": 813,
+      "start": 2967.9,
+      "end": 2971.43,
+      "duration": 3.53,
+      "text": "okay on the other hand if I only focus"
+    },
+    {
+      "index": 814,
+      "start": 2971.44,
+      "end": 2974.7,
+      "duration": 3.26,
+      "text": "on the taste object okay the object"
+    },
+    {
+      "index": 815,
+      "start": 2974.71,
+      "end": 2976.859,
+      "duration": 2.149,
+      "text": "which is named they have the label say"
+    },
+    {
+      "index": 816,
+      "start": 2976.869,
+      "end": 2978.769,
+      "duration": 1.9,
+      "text": "okay then"
+    },
+    {
+      "index": 817,
+      "start": 2978.779,
+      "end": 2982.319,
+      "duration": 3.54,
+      "text": "actually I can write down okay the right"
+    },
+    {
+      "index": 818,
+      "start": 2982.329,
+      "end": 2986.43,
+      "duration": 4.101,
+      "text": "hand side is a she's just Omega square a"
+    },
+    {
+      "index": 819,
+      "start": 2986.44,
+      "end": 2989.4,
+      "duration": 2.96,
+      "text": "say alright because this is actually"
+    },
+    {
+      "index": 820,
+      "start": 2989.41,
+      "end": 2992.46,
+      "duration": 3.05,
+      "text": "just if I only focus on that there's a"
+    },
+    {
+      "index": 821,
+      "start": 2992.47,
+      "end": 2993.69,
+      "duration": 1.22,
+      "text": "component okay"
+    },
+    {
+      "index": 822,
+      "start": 2993.7,
+      "end": 2999.71,
+      "duration": 6.01,
+      "text": "lamp inside essentially just ms 1k a x a"
+    },
+    {
+      "index": 823,
+      "start": 2999.72,
+      "end": 3003.44,
+      "duration": 3.72,
+      "text": "right okay so basically only there are"
+    },
+    {
+      "index": 824,
+      "start": 3003.45,
+      "end": 3006.739,
+      "duration": 3.289,
+      "text": "only three turns coming to pray right if"
+    },
+    {
+      "index": 825,
+      "start": 3006.749,
+      "end": 3010.4,
+      "duration": 3.651,
+      "text": "this is a 2-1 so 18 minus one will"
+    },
+    {
+      "index": 826,
+      "start": 3010.41,
+      "end": 3014.45,
+      "duration": 4.04,
+      "text": "multiply 5 minus K over N AJ work"
+    },
+    {
+      "index": 827,
+      "start": 3014.46,
+      "end": 3018.859,
+      "duration": 4.399,
+      "text": "multiplied by 2 K over N and AJ past one"
+    },
+    {
+      "index": 828,
+      "start": 3018.869,
+      "end": 3021.079,
+      "duration": 2.21,
+      "text": "will multiply by minus K over N right"
+    },
+    {
+      "index": 829,
+      "start": 3021.089,
+      "end": 3024.17,
+      "duration": 3.081,
+      "text": "the rest of the turns are all 0"
+    },
+    {
+      "index": 830,
+      "start": 3024.18,
+      "end": 3026.87,
+      "duration": 2.69,
+      "text": "okay it's actually not as complicated as"
+    },
+    {
+      "index": 831,
+      "start": 3026.88,
+      "end": 3030.14,
+      "duration": 3.26,
+      "text": "we sought ok so if I write it down"
+    },
+    {
+      "index": 832,
+      "start": 3030.15,
+      "end": 3033.349,
+      "duration": 3.199,
+      "text": "explicitly the left hand side part then"
+    },
+    {
+      "index": 833,
+      "start": 3033.359,
+      "end": 3038.66,
+      "duration": 5.301,
+      "text": "what I'm going to get is minus K over N"
+    },
+    {
+      "index": 834,
+      "start": 3038.67,
+      "end": 3044.289,
+      "duration": 5.619,
+      "text": "capital K over N AJ minus one price to"
+    },
+    {
+      "index": 835,
+      "start": 3044.299,
+      "end": 3053.72,
+      "duration": 9.421,
+      "text": "capital K over N AJ minus capital K over"
+    },
+    {
+      "index": 836,
+      "start": 3053.73,
+      "end": 3060.47,
+      "duration": 6.74,
+      "text": "N it's a plus 1 okay so this is actually"
+    },
+    {
+      "index": 837,
+      "start": 3060.48,
+      "end": 3063.2,
+      "duration": 2.72,
+      "text": "the day's time okay now I can define"
+    },
+    {
+      "index": 838,
+      "start": 3063.21,
+      "end": 3068.229,
+      "duration": 5.019,
+      "text": "Omega 0 square equal it's defined as"
+    },
+    {
+      "index": 839,
+      "start": 3068.239,
+      "end": 3074.66,
+      "duration": 6.421,
+      "text": "capital K over N if I do that then"
+    },
+    {
+      "index": 840,
+      "start": 3074.67,
+      "end": 3079.509,
+      "duration": 4.839,
+      "text": "basically I can I can see that Omega"
+    },
+    {
+      "index": 841,
+      "start": 3079.519,
+      "end": 3087.2,
+      "duration": 7.681,
+      "text": "square AJ would be equal to Omega 0"
+    },
+    {
+      "index": 842,
+      "start": 3087.21,
+      "end": 3090.349,
+      "duration": 3.139,
+      "text": "square okay I'm taking all the way over"
+    },
+    {
+      "index": 843,
+      "start": 3090.359,
+      "end": 3092.749,
+      "duration": 2.39,
+      "text": "and out of the game and the lighted tag"
+    },
+    {
+      "index": 844,
+      "start": 3092.759,
+      "end": 3096.1,
+      "duration": 3.341,
+      "text": "is Omega 0 square okay"
+    },
+    {
+      "index": 845,
+      "start": 3096.11,
+      "end": 3106.63,
+      "duration": 10.52,
+      "text": "- 8a minus 1 plus 2 AJ - AJ possible"
+    },
+    {
+      "index": 846,
+      "start": 3106.64,
+      "end": 3111.62,
+      "duration": 4.98,
+      "text": "okay and also we know from the previous"
+    },
+    {
+      "index": 847,
+      "start": 3111.63,
+      "end": 3116.12,
+      "duration": 4.49,
+      "text": "discussion s matrix and the N minus 1 K"
+    },
+    {
+      "index": 848,
+      "start": 3116.13,
+      "end": 3118.46,
+      "duration": 2.33,
+      "text": "matrix should share the same sets of"
+    },
+    {
+      "index": 849,
+      "start": 3118.47,
+      "end": 3121.52,
+      "duration": 3.05,
+      "text": "eigenvectors therefore I can actually"
+    },
+    {
+      "index": 850,
+      "start": 3121.53,
+      "end": 3123.71,
+      "duration": 2.18,
+      "text": "try to proc in one of the eigenvector"
+    },
+    {
+      "index": 851,
+      "start": 3123.72,
+      "end": 3128.03,
+      "duration": 4.31,
+      "text": "from s matrix right AJ equal to beta J"
+    },
+    {
+      "index": 852,
+      "start": 3128.04,
+      "end": 3131.53,
+      "duration": 3.49,
+      "text": "okay I can Proctor then basically I get"
+    },
+    {
+      "index": 853,
+      "start": 3131.54,
+      "end": 3138.05,
+      "duration": 6.51,
+      "text": "Omega 0 square minus P minus beta J"
+    },
+    {
+      "index": 854,
+      "start": 3138.06,
+      "end": 3145.46,
+      "duration": 7.4,
+      "text": "minus 1 plus 2 beta 2 DJ minus beta J"
+    },
+    {
+      "index": 855,
+      "start": 3145.47,
+      "end": 3150.8,
+      "duration": 5.33,
+      "text": "plus 1 and the left hand side will be"
+    },
+    {
+      "index": 856,
+      "start": 3150.81,
+      "end": 3154.4,
+      "duration": 3.59,
+      "text": "knitting like Omega square beta to the"
+    },
+    {
+      "index": 857,
+      "start": 3154.41,
+      "end": 3163.23,
+      "duration": 8.82,
+      "text": "chain okay questions okay"
+    },
+    {
+      "index": 858,
+      "start": 3163.24,
+      "end": 3166.62,
+      "duration": 3.38,
+      "text": "so now I can cancel I can actually"
+    },
+    {
+      "index": 859,
+      "start": 3166.63,
+      "end": 3168.87,
+      "duration": 2.24,
+      "text": "divide everything by beta to each a"
+    },
+    {
+      "index": 860,
+      "start": 3168.88,
+      "end": 3171.06,
+      "duration": 2.18,
+      "text": "right I can get rid of a tattoo it's a"
+    },
+    {
+      "index": 861,
+      "start": 3171.07,
+      "end": 3174.9,
+      "duration": 3.83,
+      "text": "then basically I get omega squared equal"
+    },
+    {
+      "index": 862,
+      "start": 3174.91,
+      "end": 3181.05,
+      "duration": 6.14,
+      "text": "to Omega 0 square minus 1 over beta plus"
+    },
+    {
+      "index": 863,
+      "start": 3181.06,
+      "end": 3182.01,
+      "duration": 0.95,
+      "text": "2"
+    },
+    {
+      "index": 864,
+      "start": 3182.02,
+      "end": 3191.94,
+      "duration": 9.92,
+      "text": "- okay and as we discussed before beta"
+    },
+    {
+      "index": 865,
+      "start": 3191.95,
+      "end": 3198.03,
+      "duration": 6.08,
+      "text": "can have any value okay and also you can"
+    },
+    {
+      "index": 866,
+      "start": 3198.04,
+      "end": 3201.75,
+      "duration": 3.71,
+      "text": "see from here that huh once I know the"
+    },
+    {
+      "index": 867,
+      "start": 3201.76,
+      "end": 3206.28,
+      "duration": 4.52,
+      "text": "icon value of s matrix and eigen vector"
+    },
+    {
+      "index": 868,
+      "start": 3206.29,
+      "end": 3210.03,
+      "duration": 3.74,
+      "text": "or matrix I also know what this entry"
+    },
+    {
+      "index": 869,
+      "start": 3210.04,
+      "end": 3213.99,
+      "duration": 3.95,
+      "text": "the corresponding angular frequency of"
+    },
+    {
+      "index": 870,
+      "start": 3214.0,
+      "end": 3218.099,
+      "duration": 4.099,
+      "text": "the normal model right by using n minus"
+    },
+    {
+      "index": 871,
+      "start": 3218.109,
+      "end": 3221.94,
+      "duration": 3.831,
+      "text": "1 K times a you can figure out what is"
+    },
+    {
+      "index": 872,
+      "start": 3221.95,
+      "end": 3224.97,
+      "duration": 3.02,
+      "text": "actually the corresponding Omega the"
+    },
+    {
+      "index": 873,
+      "start": 3224.98,
+      "end": 3229.14,
+      "duration": 4.16,
+      "text": "normal mode frequency okay so that is"
+    },
+    {
+      "index": 874,
+      "start": 3229.15,
+      "end": 3233.43,
+      "duration": 4.28,
+      "text": "actually pretty nice but on the other"
+    },
+    {
+      "index": 875,
+      "start": 3233.44,
+      "end": 3237.089,
+      "duration": 3.649,
+      "text": "hand if you step back and the sync about"
+    },
+    {
+      "index": 876,
+      "start": 3237.099,
+      "end": 3240.75,
+      "duration": 3.651,
+      "text": "what we have been doing okay so very"
+    },
+    {
+      "index": 877,
+      "start": 3240.76,
+      "end": 3243.81,
+      "duration": 3.05,
+      "text": "good you have a beta which is a random"
+    },
+    {
+      "index": 878,
+      "start": 3243.82,
+      "end": 3248.01,
+      "duration": 4.19,
+      "text": "value you can evaluate this is C then"
+    },
+    {
+      "index": 879,
+      "start": 3248.02,
+      "end": 3252.45,
+      "duration": 4.43,
+      "text": "you can get the corresponding Omega with"
+    },
+    {
+      "index": 880,
+      "start": 3252.46,
+      "end": 3254.88,
+      "duration": 2.42,
+      "text": "that but this something doesn't feel"
+    },
+    {
+      "index": 881,
+      "start": 3254.89,
+      "end": 3259.7,
+      "duration": 4.81,
+      "text": "right right for example if you have beta"
+    },
+    {
+      "index": 882,
+      "start": 3259.71,
+      "end": 3265.349,
+      "duration": 5.639,
+      "text": "equal to 2 what is going to happen if"
+    },
+    {
+      "index": 883,
+      "start": 3265.359,
+      "end": 3267.24,
+      "duration": 1.881,
+      "text": "you have beta equal to 2 what does that"
+    },
+    {
+      "index": 884,
+      "start": 3267.25,
+      "end": 3273.57,
+      "duration": 6.32,
+      "text": "mean that means a day will be equal to 2"
+    },
+    {
+      "index": 885,
+      "start": 3273.58,
+      "end": 3279.54,
+      "duration": 5.96,
+      "text": "to DJ okay that's very dangerous"
+    },
+    {
+      "index": 886,
+      "start": 3279.55,
+      "end": 3286.77,
+      "duration": 7.22,
+      "text": "hey that means okay so I am I deployed"
+    },
+    {
+      "index": 887,
+      "start": 3286.78,
+      "end": 3289.44,
+      "duration": 2.66,
+      "text": "the whole system okay from the lapin"
+    },
+    {
+      "index": 888,
+      "start": 3289.45,
+      "end": 3291.329,
+      "duration": 1.879,
+      "text": "side of the new universe to the"
+    },
+    {
+      "index": 889,
+      "start": 3291.339,
+      "end": 3293.579,
+      "duration": 2.24,
+      "text": "right-hand side of the universe okay so"
+    },
+    {
+      "index": 890,
+      "start": 3293.589,
+      "end": 3297.009,
+      "duration": 3.42,
+      "text": "now means if I go to the the"
+    },
+    {
+      "index": 891,
+      "start": 3297.019,
+      "end": 3298.599,
+      "duration": 1.58,
+      "text": "your right-hand side of the universe"
+    },
+    {
+      "index": 892,
+      "start": 3298.609,
+      "end": 3304.389,
+      "duration": 5.78,
+      "text": "okay the amplitude explode right it's"
+    },
+    {
+      "index": 893,
+      "start": 3304.399,
+      "end": 3307.229,
+      "duration": 2.83,
+      "text": "actually two to the infini number right"
+    },
+    {
+      "index": 894,
+      "start": 3307.239,
+      "end": 3310.179,
+      "duration": 2.94,
+      "text": "okay it's now physics doesn't sound like"
+    },
+    {
+      "index": 895,
+      "start": 3310.189,
+      "end": 3313.829,
+      "duration": 3.64,
+      "text": "a physical system to me right if"
+    },
+    {
+      "index": 896,
+      "start": 3313.839,
+      "end": 3316.539,
+      "duration": 2.7,
+      "text": "actually beta is greater than one then"
+    },
+    {
+      "index": 897,
+      "start": 3316.549,
+      "end": 3319.959,
+      "duration": 3.41,
+      "text": "the right-hand side edge of the universe"
+    },
+    {
+      "index": 898,
+      "start": 3319.969,
+      "end": 3324.909,
+      "duration": 4.94,
+      "text": "the Emperor to there will explode okay"
+    },
+    {
+      "index": 899,
+      "start": 3324.919,
+      "end": 3327.399,
+      "duration": 2.48,
+      "text": "doesn't sound right right so I don't"
+    },
+    {
+      "index": 900,
+      "start": 3327.409,
+      "end": 3330.189,
+      "duration": 2.78,
+      "text": "like that okay maybe you like it but I I"
+    },
+    {
+      "index": 901,
+      "start": 3330.199,
+      "end": 3333.669,
+      "duration": 3.47,
+      "text": "don't like it for the moment on the"
+    },
+    {
+      "index": 902,
+      "start": 3333.679,
+      "end": 3339.009,
+      "duration": 5.33,
+      "text": "other hand if the beta okay again it's"
+    },
+    {
+      "index": 903,
+      "start": 3339.019,
+      "end": 3342.699,
+      "duration": 3.68,
+      "text": "not one but some other than one what is"
+    },
+    {
+      "index": 904,
+      "start": 3342.709,
+      "end": 3345.519,
+      "duration": 2.81,
+      "text": "going to happen if the beta is smoother"
+    },
+    {
+      "index": 905,
+      "start": 3345.529,
+      "end": 3348.429,
+      "duration": 2.9,
+      "text": "than one what is going to happen is that"
+    },
+    {
+      "index": 906,
+      "start": 3348.439,
+      "end": 3349.329,
+      "duration": 0.89,
+      "text": "huh okay"
+    },
+    {
+      "index": 907,
+      "start": 3349.339,
+      "end": 3351.999,
+      "duration": 2.66,
+      "text": "the right-hand side universe is fine is"
+    },
+    {
+      "index": 908,
+      "start": 3352.009,
+      "end": 3353.949,
+      "duration": 1.94,
+      "text": "finite because the amplitudes become"
+    },
+    {
+      "index": 909,
+      "start": 3353.959,
+      "end": 3356.169,
+      "duration": 2.21,
+      "text": "smaller and smaller but the Lavin's are"
+    },
+    {
+      "index": 910,
+      "start": 3356.179,
+      "end": 3358.929,
+      "duration": 2.75,
+      "text": "part of the universe the amplitude still"
+    },
+    {
+      "index": 911,
+      "start": 3358.939,
+      "end": 3363.929,
+      "duration": 4.99,
+      "text": "explode right so what does that mean"
+    },
+    {
+      "index": 912,
+      "start": 3363.939,
+      "end": 3369.579,
+      "duration": 5.64,
+      "text": "this means that if beta if the absolute"
+    },
+    {
+      "index": 913,
+      "start": 3369.589,
+      "end": 3374.559,
+      "duration": 4.97,
+      "text": "value of beta is not equal to one the"
+    },
+    {
+      "index": 914,
+      "start": 3374.569,
+      "end": 3378.879,
+      "duration": 4.31,
+      "text": "amplitude at some point goes to infinity"
+    },
+    {
+      "index": 915,
+      "start": 3378.889,
+      "end": 3382.509,
+      "duration": 3.62,
+      "text": "okay so that's actually not very nice"
+    },
+    {
+      "index": 916,
+      "start": 3382.519,
+      "end": 3385.449,
+      "duration": 2.93,
+      "text": "that's because AJ is actually"
+    },
+    {
+      "index": 917,
+      "start": 3385.459,
+      "end": 3389.649,
+      "duration": 4.19,
+      "text": "proportional to beta to you take okay so"
+    },
+    {
+      "index": 918,
+      "start": 3389.659,
+      "end": 3392.589,
+      "duration": 2.93,
+      "text": "in the discussion we have here we"
+    },
+    {
+      "index": 919,
+      "start": 3392.599,
+      "end": 3396.749,
+      "duration": 4.15,
+      "text": "consider beta equal to one case"
+    },
+    {
+      "index": 920,
+      "start": 3396.759,
+      "end": 3400.539,
+      "duration": 3.78,
+      "text": "okay otherwise this actually things will"
+    },
+    {
+      "index": 921,
+      "start": 3400.549,
+      "end": 3401.499,
+      "duration": 0.95,
+      "text": "explode"
+    },
+    {
+      "index": 922,
+      "start": 3401.509,
+      "end": 3405.129,
+      "duration": 3.62,
+      "text": "okay so if the absolute value of beta is"
+    },
+    {
+      "index": 923,
+      "start": 3405.139,
+      "end": 3410.489,
+      "duration": 5.35,
+      "text": "equal to one in general beta can be"
+    },
+    {
+      "index": 924,
+      "start": 3410.499,
+      "end": 3416.319,
+      "duration": 5.82,
+      "text": "exponential I smoke a a right then"
+    },
+    {
+      "index": 925,
+      "start": 3416.329,
+      "end": 3418.989,
+      "duration": 2.66,
+      "text": "usually you can edges get absolute value"
+    },
+    {
+      "index": 926,
+      "start": 3418.999,
+      "end": 3423.37,
+      "duration": 4.371,
+      "text": "of one okay if beta is equal to one that"
+    },
+    {
+      "index": 927,
+      "start": 3423.38,
+      "end": 3426.129,
+      "duration": 2.749,
+      "text": "means the amplitude of all the"
+    },
+    {
+      "index": 928,
+      "start": 3426.139,
+      "end": 3429.5,
+      "duration": 3.361,
+      "text": "oscillators are the same okay"
+    },
+    {
+      "index": 929,
+      "start": 3429.51,
+      "end": 3432.8,
+      "duration": 3.29,
+      "text": "all right so now if if we accept this we"
+    },
+    {
+      "index": 930,
+      "start": 3432.81,
+      "end": 3436.099,
+      "duration": 3.289,
+      "text": "only limit ourselves to the discussion"
+    },
+    {
+      "index": 931,
+      "start": 3436.109,
+      "end": 3440.39,
+      "duration": 4.281,
+      "text": "of beta absolute beta value of beta"
+    },
+    {
+      "index": 932,
+      "start": 3440.4,
+      "end": 3442.91,
+      "duration": 2.51,
+      "text": "equal to 1 then beta can be written as"
+    },
+    {
+      "index": 933,
+      "start": 3442.92,
+      "end": 3446.15,
+      "duration": 3.23,
+      "text": "exponential I K a that if I practice"
+    },
+    {
+      "index": 934,
+      "start": 3446.16,
+      "end": 3449.359,
+      "duration": 3.199,
+      "text": "back into this basically what you are"
+    },
+    {
+      "index": 935,
+      "start": 3449.369,
+      "end": 3452.57,
+      "duration": 3.201,
+      "text": "going to get is Omega square is equal to"
+    },
+    {
+      "index": 936,
+      "start": 3452.58,
+      "end": 3463.39,
+      "duration": 10.81,
+      "text": "Omega 0 square 2 minus exponential I K a"
+    },
+    {
+      "index": 937,
+      "start": 3469.25,
+      "end": 3469.26,
+      "duration": 0.01,
+      "text": "plus exponential minus I K right because"
+    },
+    {
+      "index": 938,
+      "start": 3469.26,
+      "end": 3472.57,
+      "duration": 3.31,
+      "text": "you have minus 1 over beta the beta"
+    },
+    {
+      "index": 939,
+      "start": 3472.58,
+      "end": 3475.73,
+      "duration": 3.15,
+      "text": "therefore you have exponential I K a and"
+    },
+    {
+      "index": 940,
+      "start": 3475.74,
+      "end": 3479.09,
+      "duration": 3.35,
+      "text": "the exponential minus I theta ok it's a"
+    },
+    {
+      "index": 941,
+      "start": 3479.1,
+      "end": 3483.17,
+      "duration": 4.07,
+      "text": "lot of math in this the this lecture but"
+    },
+    {
+      "index": 942,
+      "start": 3483.18,
+      "end": 3486.95,
+      "duration": 3.77,
+      "text": "I we are getting all over to it ok all"
+    },
+    {
+      "index": 943,
+      "start": 3486.96,
+      "end": 3489.74,
+      "duration": 2.78,
+      "text": "right so that essentially we actually"
+    },
+    {
+      "index": 944,
+      "start": 3489.75,
+      "end": 3492.349,
+      "duration": 2.599,
+      "text": "can identify this and this issue can be"
+    },
+    {
+      "index": 945,
+      "start": 3492.359,
+      "end": 3498.41,
+      "duration": 6.051,
+      "text": "written as 2 Omega 0 Square 1 minus"
+    },
+    {
+      "index": 946,
+      "start": 3498.42,
+      "end": 3506.15,
+      "duration": 7.73,
+      "text": "cosine K ok we have arrived a"
+    },
+    {
+      "index": 947,
+      "start": 3506.16,
+      "end": 3512.17,
+      "duration": 6.01,
+      "text": "surprisingly simple expression"
+    },
+    {
+      "index": 948,
+      "start": 3515.269,
+      "end": 3515.279,
+      "duration": 0.01,
+      "text": "so let's take a look at this expression"
+    },
+    {
+      "index": 949,
+      "start": 3515.279,
+      "end": 3521.799,
+      "duration": 6.52,
+      "text": "carefully so that means for each given K"
+    },
+    {
+      "index": 950,
+      "start": 3521.809,
+      "end": 3525.26,
+      "duration": 3.451,
+      "text": "small K okay then we have a"
+    },
+    {
+      "index": 951,
+      "start": 3525.27,
+      "end": 3528.16,
+      "duration": 2.89,
+      "text": "corresponding angular frequency Omega"
+    },
+    {
+      "index": 952,
+      "start": 3528.17,
+      "end": 3533.21,
+      "duration": 5.04,
+      "text": "square okay so still there are infinite"
+    },
+    {
+      "index": 953,
+      "start": 3533.22,
+      "end": 3538.299,
+      "duration": 5.079,
+      "text": "number of we are infinite number of"
+    },
+    {
+      "index": 954,
+      "start": 3538.309,
+      "end": 3546.2,
+      "duration": 7.891,
+      "text": "possible normal modes okay from this so"
+    },
+    {
+      "index": 955,
+      "start": 3546.21,
+      "end": 3549.5,
+      "duration": 3.29,
+      "text": "if I take a look at the amplitude okay"
+    },
+    {
+      "index": 956,
+      "start": 3549.51,
+      "end": 3553.099,
+      "duration": 3.589,
+      "text": "so if I I select a K value okay"
+    },
+    {
+      "index": 957,
+      "start": 3553.109,
+      "end": 3560.12,
+      "duration": 7.011,
+      "text": "small K value if I if K is given I can"
+    },
+    {
+      "index": 958,
+      "start": 3560.13,
+      "end": 3562.88,
+      "duration": 2.75,
+      "text": "actually calculate that K is found in a"
+    },
+    {
+      "index": 959,
+      "start": 3562.89,
+      "end": 3565.67,
+      "duration": 2.78,
+      "text": "day so that a day I can actually define"
+    },
+    {
+      "index": 960,
+      "start": 3565.68,
+      "end": 3570.95,
+      "duration": 5.27,
+      "text": "as a superposition of exponential I take"
+    },
+    {
+      "index": 961,
+      "start": 3570.96,
+      "end": 3577.579,
+      "duration": 6.619,
+      "text": "K a and minus exponential I J okay"
+    },
+    {
+      "index": 962,
+      "start": 3577.589,
+      "end": 3585.59,
+      "duration": 8.001,
+      "text": "and now will give you a sinusoidal shape"
+    },
+    {
+      "index": 963,
+      "start": 3589.8,
+      "end": 3589.81,
+      "duration": 0.01,
+      "text": "so if I give you the K okay basically"
+    },
+    {
+      "index": 964,
+      "start": 3589.81,
+      "end": 3594.24,
+      "duration": 4.43,
+      "text": "you will see that if I give you it okay"
+    },
+    {
+      "index": 965,
+      "start": 3594.25,
+      "end": 3596.64,
+      "duration": 2.39,
+      "text": "then you you get a corresponding beta"
+    },
+    {
+      "index": 966,
+      "start": 3596.65,
+      "end": 3599.61,
+      "duration": 2.96,
+      "text": "right and the you get you are going to"
+    },
+    {
+      "index": 967,
+      "start": 3599.62,
+      "end": 3602.43,
+      "duration": 2.81,
+      "text": "get Omega the corresponding Omega square"
+    },
+    {
+      "index": 968,
+      "start": 3602.44,
+      "end": 3606.66,
+      "duration": 4.22,
+      "text": "but one interesting C of this expression"
+    },
+    {
+      "index": 969,
+      "start": 3606.67,
+      "end": 3609.96,
+      "duration": 3.29,
+      "text": "is that if you keep beta or keep you"
+    },
+    {
+      "index": 970,
+      "start": 3609.97,
+      "end": 3613.56,
+      "duration": 3.59,
+      "text": "keep one over beta you are going to get"
+    },
+    {
+      "index": 971,
+      "start": 3613.57,
+      "end": 3620.06,
+      "duration": 6.49,
+      "text": "the same Omega therefore I can now use"
+    },
+    {
+      "index": 972,
+      "start": 3620.07,
+      "end": 3624.63,
+      "duration": 4.56,
+      "text": "superposition principle basically I can"
+    },
+    {
+      "index": 973,
+      "start": 3624.64,
+      "end": 3628.8,
+      "duration": 4.16,
+      "text": "actually add this to solution together"
+    },
+    {
+      "index": 974,
+      "start": 3628.81,
+      "end": 3630.72,
+      "duration": 1.91,
+      "text": "since they are going to be oscillating"
+    },
+    {
+      "index": 975,
+      "start": 3630.73,
+      "end": 3632.91,
+      "duration": 2.18,
+      "text": "at the same frequency then what I am"
+    },
+    {
+      "index": 976,
+      "start": 3632.92,
+      "end": 3635.19,
+      "duration": 2.27,
+      "text": "going to get is that huh interesting"
+    },
+    {
+      "index": 977,
+      "start": 3635.2,
+      "end": 3639.27,
+      "duration": 4.07,
+      "text": "thing happen the AJ the amplitude as a"
+    },
+    {
+      "index": 978,
+      "start": 3639.28,
+      "end": 3641.91,
+      "duration": 2.63,
+      "text": "function of J is like a sinusoidal"
+    },
+    {
+      "index": 979,
+      "start": 3641.92,
+      "end": 3645.45,
+      "duration": 3.53,
+      "text": "function okay so that is essentially"
+    },
+    {
+      "index": 980,
+      "start": 3645.46,
+      "end": 3649.38,
+      "duration": 3.92,
+      "text": "what is a really predicted to infinite"
+    },
+    {
+      "index": 981,
+      "start": 3649.39,
+      "end": 3652.17,
+      "duration": 2.78,
+      "text": "long system for example if I do this you"
+    },
+    {
+      "index": 982,
+      "start": 3652.18,
+      "end": 3654.51,
+      "duration": 2.33,
+      "text": "can see that hi indeed I can see"
+    },
+    {
+      "index": 983,
+      "start": 3654.52,
+      "end": 3658.44,
+      "duration": 3.92,
+      "text": "sinusoidal shape okay and and you can"
+    },
+    {
+      "index": 984,
+      "start": 3658.45,
+      "end": 3660.57,
+      "duration": 2.12,
+      "text": "see that this sinusoidal shape is"
+    },
+    {
+      "index": 985,
+      "start": 3660.58,
+      "end": 3663.51,
+      "duration": 2.93,
+      "text": "actually oscillating up and down like a"
+    },
+    {
+      "index": 986,
+      "start": 3663.52,
+      "end": 3667.32,
+      "duration": 3.8,
+      "text": "know like a standing wave and that is"
+    },
+    {
+      "index": 987,
+      "start": 3667.33,
+      "end": 3671.85,
+      "duration": 4.52,
+      "text": "actually exactly this expression so that"
+    },
+    {
+      "index": 988,
+      "start": 3671.86,
+      "end": 3674.28,
+      "duration": 2.42,
+      "text": "tells you something really interesting"
+    },
+    {
+      "index": 989,
+      "start": 3674.29,
+      "end": 3678.36,
+      "duration": 4.07,
+      "text": "that means this sign so little shape is"
+    },
+    {
+      "index": 990,
+      "start": 3678.37,
+      "end": 3682.85,
+      "duration": 4.48,
+      "text": "associated with what associated with"
+    },
+    {
+      "index": 991,
+      "start": 3682.86,
+      "end": 3688.23,
+      "duration": 5.37,
+      "text": "translation symmetry right all I have"
+    },
+    {
+      "index": 992,
+      "start": 3688.24,
+      "end": 3691.46,
+      "duration": 3.22,
+      "text": "been doing is to require this"
+    },
+    {
+      "index": 993,
+      "start": 3691.47,
+      "end": 3694.47,
+      "duration": 3.0,
+      "text": "translation symmetry then you already"
+    },
+    {
+      "index": 994,
+      "start": 3694.48,
+      "end": 3698.64,
+      "duration": 4.16,
+      "text": "get the amplitude AJ and if you choose"
+    },
+    {
+      "index": 995,
+      "start": 3698.65,
+      "end": 3703.7,
+      "duration": 5.05,
+      "text": "the physical beta value then you already"
+    },
+    {
+      "index": 996,
+      "start": 3703.71,
+      "end": 3707.43,
+      "duration": 3.72,
+      "text": "immediately arrive a solution which is"
+    },
+    {
+      "index": 997,
+      "start": 3707.44,
+      "end": 3713.1,
+      "duration": 5.66,
+      "text": "actually like sinusoidal shape that"
+    },
+    {
+      "index": 998,
+      "start": 3713.11,
+      "end": 3718.93,
+      "duration": 5.82,
+      "text": "sounds really amazing to you"
+    },
+    {
+      "index": 999,
+      "start": 3722.39,
+      "end": 3722.4,
+      "duration": 0.01,
+      "text": "okay so I think it's time to good to"
+    },
+    {
+      "index": 1000,
+      "start": 3722.4,
+      "end": 3724.19,
+      "duration": 1.79,
+      "text": "take a five-minute break because I can"
+    },
+    {
+      "index": 1001,
+      "start": 3724.2,
+      "end": 3726.56,
+      "duration": 2.36,
+      "text": "see that you are overwhelmed by the mess"
+    },
+    {
+      "index": 1002,
+      "start": 3726.57,
+      "end": 3727.1,
+      "duration": 0.53,
+      "text": "already"
+    },
+    {
+      "index": 1003,
+      "start": 3727.11,
+      "end": 3729.65,
+      "duration": 2.54,
+      "text": "and of course let's come back in five"
+    },
+    {
+      "index": 1004,
+      "start": 3729.66,
+      "end": 3731.27,
+      "duration": 1.61,
+      "text": "minutes then we can discuss some more"
+    },
+    {
+      "index": 1005,
+      "start": 3731.28,
+      "end": 3733.55,
+      "duration": 2.27,
+      "text": "about what we have learned from this"
+    },
+    {
+      "index": 1006,
+      "start": 3733.56,
+      "end": 3736.13,
+      "duration": 2.57,
+      "text": "mathematics and if you have any"
+    },
+    {
+      "index": 1007,
+      "start": 3736.14,
+      "end": 3742.94,
+      "duration": 6.8,
+      "text": "questions"
+    },
+    {
+      "index": 1008,
+      "start": 3745.17,
+      "end": 3745.18,
+      "duration": 0.01,
+      "text": "okay so"
+    },
+    {
+      "index": 1009,
+      "start": 3745.18,
+      "end": 3747.66,
+      "duration": 2.48,
+      "text": "everybody of course you are welcome to"
+    },
+    {
+      "index": 1010,
+      "start": 3747.67,
+      "end": 3749.7,
+      "duration": 2.03,
+      "text": "come back here and the prayer with the"
+    },
+    {
+      "index": 1011,
+      "start": 3749.71,
+      "end": 3753.569,
+      "duration": 3.859,
+      "text": "demonstration okay so so very good so"
+    },
+    {
+      "index": 1012,
+      "start": 3753.579,
+      "end": 3755.849,
+      "duration": 2.27,
+      "text": "during the break there are several"
+    },
+    {
+      "index": 1013,
+      "start": 3755.859,
+      "end": 3760.44,
+      "duration": 4.581,
+      "text": "questions asked which i think is no"
+    },
+    {
+      "index": 1014,
+      "start": 3760.45,
+      "end": 3762.299,
+      "duration": 1.849,
+      "text": "those are very good questions and that's"
+    },
+    {
+      "index": 1015,
+      "start": 3762.309,
+      "end": 3765.12,
+      "duration": 2.811,
+      "text": "actually the purpose of this break so"
+    },
+    {
+      "index": 1016,
+      "start": 3765.13,
+      "end": 3767.97,
+      "duration": 2.84,
+      "text": "it's a long day already right a lot of"
+    },
+    {
+      "index": 1017,
+      "start": 3767.98,
+      "end": 3769.799,
+      "duration": 1.819,
+      "text": "mathematics and I hope everybody"
+    },
+    {
+      "index": 1018,
+      "start": 3769.809,
+      "end": 3771.109,
+      "duration": 1.3,
+      "text": "survived"
+    },
+    {
+      "index": 1019,
+      "start": 3771.119,
+      "end": 3774.75,
+      "duration": 3.631,
+      "text": "okay no dead body yet okay you can see"
+    },
+    {
+      "index": 1020,
+      "start": 3774.76,
+      "end": 3777.779,
+      "duration": 3.019,
+      "text": "that here I'm doing something really"
+    },
+    {
+      "index": 1021,
+      "start": 3777.789,
+      "end": 3782.73,
+      "duration": 4.941,
+      "text": "crazy here so okay consider okay I think"
+    },
+    {
+      "index": 1022,
+      "start": 3782.74,
+      "end": 3785.309,
+      "duration": 2.569,
+      "text": "most of you cut this point beta naught"
+    },
+    {
+      "index": 1023,
+      "start": 3785.319,
+      "end": 3787.65,
+      "duration": 2.331,
+      "text": "equal to Y is now nice something is pro"
+    },
+    {
+      "index": 1024,
+      "start": 3787.66,
+      "end": 3789.72,
+      "duration": 2.06,
+      "text": "at the edge of the universe so I don't"
+    },
+    {
+      "index": 1025,
+      "start": 3789.73,
+      "end": 3792.18,
+      "duration": 2.45,
+      "text": "like that therefore I consider only the"
+    },
+    {
+      "index": 1026,
+      "start": 3792.19,
+      "end": 3795.63,
+      "duration": 3.44,
+      "text": "case which you have absolute value beta"
+    },
+    {
+      "index": 1027,
+      "start": 3795.64,
+      "end": 3798.329,
+      "duration": 2.689,
+      "text": "equal to 1 and then we say okay you can"
+    },
+    {
+      "index": 1028,
+      "start": 3798.339,
+      "end": 3800.7,
+      "duration": 2.361,
+      "text": "be plus 1 and minus 1 but that's"
+    },
+    {
+      "index": 1029,
+      "start": 3800.71,
+      "end": 3802.62,
+      "duration": 1.91,
+      "text": "actually not the whole story right you"
+    },
+    {
+      "index": 1030,
+      "start": 3802.63,
+      "end": 3805.68,
+      "duration": 3.05,
+      "text": "can have in general beta equal to"
+    },
+    {
+      "index": 1031,
+      "start": 3805.69,
+      "end": 3808.95,
+      "duration": 3.26,
+      "text": "exponential I some number all right"
+    },
+    {
+      "index": 1032,
+      "start": 3808.96,
+      "end": 3813.72,
+      "duration": 4.76,
+      "text": "sounds real number okay and and I write"
+    },
+    {
+      "index": 1033,
+      "start": 3813.73,
+      "end": 3817.529,
+      "duration": 3.799,
+      "text": "here a very fancy expression beta equal"
+    },
+    {
+      "index": 1034,
+      "start": 3817.539,
+      "end": 3822.12,
+      "duration": 4.581,
+      "text": "to exponential I K a why i ka it's a"
+    },
+    {
+      "index": 1035,
+      "start": 3822.13,
+      "end": 3824.67,
+      "duration": 2.54,
+      "text": "very good question right what is a I"
+    },
+    {
+      "index": 1036,
+      "start": 3824.68,
+      "end": 3827.579,
+      "duration": 2.899,
+      "text": "think most of us you already forgot what"
+    },
+    {
+      "index": 1037,
+      "start": 3827.589,
+      "end": 3832.789,
+      "duration": 5.2,
+      "text": "is a a is actually the natural length of"
+    },
+    {
+      "index": 1038,
+      "start": 3832.799,
+      "end": 3838.049,
+      "duration": 5.25,
+      "text": "the spring okay so I was going to pass"
+    },
+    {
+      "index": 1039,
+      "start": 3838.059,
+      "end": 3839.519,
+      "duration": 1.46,
+      "text": "because I would like to get to a break"
+    },
+    {
+      "index": 1040,
+      "start": 3839.529,
+      "end": 3843.539,
+      "duration": 4.01,
+      "text": "to hear your questions so what is a is"
+    },
+    {
+      "index": 1041,
+      "start": 3843.549,
+      "end": 3847.559,
+      "duration": 4.01,
+      "text": "the natural length okay and the K what"
+    },
+    {
+      "index": 1042,
+      "start": 3847.569,
+      "end": 3849.96,
+      "duration": 2.391,
+      "text": "is K later you will figure that out"
+    },
+    {
+      "index": 1043,
+      "start": 3849.97,
+      "end": 3855.96,
+      "duration": 5.99,
+      "text": "you'll find that HK is wave number okay"
+    },
+    {
+      "index": 1044,
+      "start": 3855.97,
+      "end": 3858.029,
+      "duration": 2.059,
+      "text": "so that is actually much more meaningful"
+    },
+    {
+      "index": 1045,
+      "start": 3858.039,
+      "end": 3861.42,
+      "duration": 3.381,
+      "text": "now right after the explanation so you"
+    },
+    {
+      "index": 1046,
+      "start": 3861.43,
+      "end": 3863.279,
+      "duration": 1.849,
+      "text": "can see that beta is equal to"
+    },
+    {
+      "index": 1047,
+      "start": 3863.289,
+      "end": 3865.92,
+      "duration": 2.631,
+      "text": "exponential ice on number and I call it"
+    },
+    {
+      "index": 1048,
+      "start": 3865.93,
+      "end": 3869.4,
+      "duration": 3.47,
+      "text": "ka a pencil name of this number and it"
+    },
+    {
+      "index": 1049,
+      "start": 3869.41,
+      "end": 3872.549,
+      "duration": 3.139,
+      "text": "has some physical meaning okay another"
+    },
+    {
+      "index": 1050,
+      "start": 3872.559,
+      "end": 3875.78,
+      "duration": 3.221,
+      "text": "thing which is interesting is that"
+    },
+    {
+      "index": 1051,
+      "start": 3875.79,
+      "end": 3880.45,
+      "duration": 4.66,
+      "text": "if I plug in beta equal to a poor beta"
+    },
+    {
+      "index": 1052,
+      "start": 3880.46,
+      "end": 3884.27,
+      "duration": 3.81,
+      "text": "equal to 1 over a ok into the same"
+    },
+    {
+      "index": 1053,
+      "start": 3884.28,
+      "end": 3888.71,
+      "duration": 4.43,
+      "text": "expression ok if I practice either beta"
+    },
+    {
+      "index": 1054,
+      "start": 3888.72,
+      "end": 3891.35,
+      "duration": 2.63,
+      "text": "a or equal over beta equal to 1 moreover"
+    },
+    {
+      "index": 1055,
+      "start": 3891.36,
+      "end": 3894.49,
+      "duration": 3.13,
+      "text": "a to this expression I'm going to get"
+    },
+    {
+      "index": 1056,
+      "start": 3894.5,
+      "end": 3900.32,
+      "duration": 5.82,
+      "text": "exactly the same Omega so that means ok"
+    },
+    {
+      "index": 1057,
+      "start": 3900.33,
+      "end": 3904.28,
+      "duration": 3.95,
+      "text": "both of them will be both value will be"
+    },
+    {
+      "index": 1058,
+      "start": 3904.29,
+      "end": 3907.67,
+      "duration": 3.38,
+      "text": "oscillating at the same frequency okay"
+    },
+    {
+      "index": 1059,
+      "start": 3907.68,
+      "end": 3911.06,
+      "duration": 3.38,
+      "text": "so if you choose beta equal to a choose"
+    },
+    {
+      "index": 1060,
+      "start": 3911.07,
+      "end": 3913.97,
+      "duration": 2.9,
+      "text": "a beta equal to mine 1 minus ay they are"
+    },
+    {
+      "index": 1061,
+      "start": 3913.98,
+      "end": 3916.13,
+      "duration": 2.15,
+      "text": "oscillating at the same frequency what"
+    },
+    {
+      "index": 1062,
+      "start": 3916.14,
+      "end": 3918.29,
+      "duration": 2.15,
+      "text": "does that mean that means linear"
+    },
+    {
+      "index": 1063,
+      "start": 3918.3,
+      "end": 3922.76,
+      "duration": 4.46,
+      "text": "combination of eigenvector coming from"
+    },
+    {
+      "index": 1064,
+      "start": 3922.77,
+      "end": 3926.0,
+      "duration": 3.23,
+      "text": "beta equal to a and eigenvector coming"
+    },
+    {
+      "index": 1065,
+      "start": 3926.01,
+      "end": 3928.22,
+      "duration": 2.21,
+      "text": "from beta equal to 1 over a linear"
+    },
+    {
+      "index": 1066,
+      "start": 3928.23,
+      "end": 3930.56,
+      "duration": 2.33,
+      "text": "combination of those eigenvectors are"
+    },
+    {
+      "index": 1067,
+      "start": 3930.57,
+      "end": 3938.54,
+      "duration": 7.97,
+      "text": "also eigen vectors the of the n minus 1"
+    },
+    {
+      "index": 1068,
+      "start": 3938.55,
+      "end": 3943.13,
+      "duration": 4.58,
+      "text": "K matrix okay and that's actually where"
+    },
+    {
+      "index": 1069,
+      "start": 3943.14,
+      "end": 3947.42,
+      "duration": 4.28,
+      "text": "okay those are different eigen vectors"
+    },
+    {
+      "index": 1070,
+      "start": 3947.43,
+      "end": 3950.66,
+      "duration": 3.23,
+      "text": "for s but the linear combination of"
+    },
+    {
+      "index": 1071,
+      "start": 3950.67,
+      "end": 3956.27,
+      "duration": 5.6,
+      "text": "these vectors the same are all the eigen"
+    },
+    {
+      "index": 1072,
+      "start": 3956.28,
+      "end": 3958.58,
+      "duration": 2.3,
+      "text": "vector of n minus 1 K matrix and the"
+    },
+    {
+      "index": 1073,
+      "start": 3958.59,
+      "end": 3961.42,
+      "duration": 2.83,
+      "text": "with the same eigen value Omega square"
+    },
+    {
+      "index": 1074,
+      "start": 3961.43,
+      "end": 3963.89,
+      "duration": 2.46,
+      "text": "okay so that's another thing which is"
+    },
+    {
+      "index": 1075,
+      "start": 3963.9,
+      "end": 3968.54,
+      "duration": 4.64,
+      "text": "important and finally I said that there"
+    },
+    {
+      "index": 1076,
+      "start": 3968.55,
+      "end": 3970.99,
+      "duration": 2.44,
+      "text": "are infinite number of choice oh tape"
+    },
+    {
+      "index": 1077,
+      "start": 3971.0,
+      "end": 3973.82,
+      "duration": 2.82,
+      "text": "that's bad right because you can choose"
+    },
+    {
+      "index": 1078,
+      "start": 3973.83,
+      "end": 3976.1,
+      "duration": 2.27,
+      "text": "our little number then you get a"
+    },
+    {
+      "index": 1079,
+      "start": 3976.11,
+      "end": 3978.14,
+      "duration": 2.03,
+      "text": "corresponding beta then you get a"
+    },
+    {
+      "index": 1080,
+      "start": 3978.15,
+      "end": 3980.69,
+      "duration": 2.54,
+      "text": "corresponding Omega so you have infinite"
+    },
+    {
+      "index": 1081,
+      "start": 3980.7,
+      "end": 3984.89,
+      "duration": 4.19,
+      "text": "number of normal modes secondly if I"
+    },
+    {
+      "index": 1082,
+      "start": 3984.9,
+      "end": 3988.31,
+      "duration": 3.41,
+      "text": "give you okay okay if I give you a K or"
+    },
+    {
+      "index": 1083,
+      "start": 3988.32,
+      "end": 3991.19,
+      "duration": 2.87,
+      "text": "I can give you another value which is"
+    },
+    {
+      "index": 1084,
+      "start": 3991.2,
+      "end": 3995.93,
+      "duration": 4.73,
+      "text": "minus K okay then I will that means you"
+    },
+    {
+      "index": 1085,
+      "start": 3995.94,
+      "end": 3999.76,
+      "duration": 3.82,
+      "text": "will get beta and 1 over beta right"
+    },
+    {
+      "index": 1086,
+      "start": 3999.77,
+      "end": 4003.43,
+      "duration": 3.66,
+      "text": "minus K will give you 1 over beta right"
+    },
+    {
+      "index": 1087,
+      "start": 4003.44,
+      "end": 4007.87,
+      "duration": 4.43,
+      "text": "and the answer I mentioned before big"
+    },
+    {
+      "index": 1088,
+      "start": 4007.88,
+      "end": 4009.64,
+      "duration": 1.76,
+      "text": "high equal to a and beta equal to"
+    },
+    {
+      "index": 1089,
+      "start": 4009.65,
+      "end": 4013.029,
+      "duration": 3.379,
+      "text": "I will give you the same Omega therefore"
+    },
+    {
+      "index": 1090,
+      "start": 4013.039,
+      "end": 4017.289,
+      "duration": 4.25,
+      "text": "a linear combination of the vectors are"
+    },
+    {
+      "index": 1091,
+      "start": 4017.299,
+      "end": 4021.66,
+      "duration": 4.361,
+      "text": "also eigen vector of ms1 kinetics"
+    },
+    {
+      "index": 1092,
+      "start": 4021.67,
+      "end": 4024.64,
+      "duration": 2.97,
+      "text": "nothing to what I am doing here right so"
+    },
+    {
+      "index": 1093,
+      "start": 4024.65,
+      "end": 4027.97,
+      "duration": 3.32,
+      "text": "in order to show you a real amplitude"
+    },
+    {
+      "index": 1094,
+      "start": 4027.98,
+      "end": 4030.87,
+      "duration": 2.89,
+      "text": "and doing a linear combination of"
+    },
+    {
+      "index": 1095,
+      "start": 4030.88,
+      "end": 4033.97,
+      "duration": 3.09,
+      "text": "explanation I take a a and the"
+    },
+    {
+      "index": 1096,
+      "start": 4033.98,
+      "end": 4037.299,
+      "duration": 3.319,
+      "text": "explanation - I take it's just a choice"
+    },
+    {
+      "index": 1097,
+      "start": 4037.309,
+      "end": 4040.21,
+      "duration": 2.901,
+      "text": "okay of course you can say okay I choose"
+    },
+    {
+      "index": 1098,
+      "start": 4040.22,
+      "end": 4043.18,
+      "duration": 2.96,
+      "text": "price and / - then you get the cosine"
+    },
+    {
+      "index": 1099,
+      "start": 4043.19,
+      "end": 4045.67,
+      "duration": 2.48,
+      "text": "right but if I choose this expression"
+    },
+    {
+      "index": 1100,
+      "start": 4045.68,
+      "end": 4048.099,
+      "duration": 2.419,
+      "text": "then what I'm going to get is that huh"
+    },
+    {
+      "index": 1101,
+      "start": 4048.109,
+      "end": 4052.42,
+      "duration": 4.311,
+      "text": "since both of them post vectors are"
+    },
+    {
+      "index": 1102,
+      "start": 4052.43,
+      "end": 4053.789,
+      "duration": 1.359,
+      "text": "corresponding to the same eigenvalue"
+    },
+    {
+      "index": 1103,
+      "start": 4053.799,
+      "end": 4057.339,
+      "duration": 3.54,
+      "text": "Omega square therefore linear"
+    },
+    {
+      "index": 1104,
+      "start": 4057.349,
+      "end": 4060.849,
+      "duration": 3.5,
+      "text": "combination of them also oscillate at"
+    },
+    {
+      "index": 1105,
+      "start": 4060.859,
+      "end": 4063.37,
+      "duration": 2.511,
+      "text": "the angular frequency of Omega therefore"
+    },
+    {
+      "index": 1106,
+      "start": 4063.38,
+      "end": 4066.01,
+      "duration": 2.63,
+      "text": "if I calculate this and make it real"
+    },
+    {
+      "index": 1107,
+      "start": 4066.02,
+      "end": 4069.16,
+      "duration": 3.14,
+      "text": "then I found out the amplitude as a"
+    },
+    {
+      "index": 1108,
+      "start": 4069.17,
+      "end": 4071.47,
+      "duration": 2.3,
+      "text": "function would say essentially a"
+    },
+    {
+      "index": 1109,
+      "start": 4071.48,
+      "end": 4074.76,
+      "duration": 3.28,
+      "text": "sinusoidal function which is sine say K"
+    },
+    {
+      "index": 1110,
+      "start": 4074.77,
+      "end": 4079.21,
+      "duration": 4.44,
+      "text": "okay so what does that mean this means"
+    },
+    {
+      "index": 1111,
+      "start": 4079.22,
+      "end": 4088.359,
+      "duration": 9.139,
+      "text": "that if I plot the eight if I prod AJ as"
+    },
+    {
+      "index": 1112,
+      "start": 4088.369,
+      "end": 4093.43,
+      "duration": 5.061,
+      "text": "a function of J this is actually what I"
+    },
+    {
+      "index": 1113,
+      "start": 4093.44,
+      "end": 4097.63,
+      "duration": 4.19,
+      "text": "am going to get this is a sign so dito"
+    },
+    {
+      "index": 1114,
+      "start": 4097.64,
+      "end": 4103.39,
+      "duration": 5.75,
+      "text": "shape okay and we know that XJ is"
+    },
+    {
+      "index": 1115,
+      "start": 4103.4,
+      "end": 4107.53,
+      "duration": 4.13,
+      "text": "actually equal to eight a cosine Omega T"
+    },
+    {
+      "index": 1116,
+      "start": 4107.54,
+      "end": 4113.41,
+      "duration": 5.87,
+      "text": "plus Phi right Omega I can actually"
+    },
+    {
+      "index": 1117,
+      "start": 4113.42,
+      "end": 4116.26,
+      "duration": 2.84,
+      "text": "evaluate that right from here right just"
+    },
+    {
+      "index": 1118,
+      "start": 4116.27,
+      "end": 4116.89,
+      "duration": 0.62,
+      "text": "a reminder"
+    },
+    {
+      "index": 1119,
+      "start": 4116.9,
+      "end": 4120.459,
+      "duration": 3.559,
+      "text": "and what we are going to get is when"
+    },
+    {
+      "index": 1120,
+      "start": 4120.469,
+      "end": 4124.079,
+      "duration": 3.61,
+      "text": "this system is in normal mode okay"
+    },
+    {
+      "index": 1121,
+      "start": 4124.089,
+      "end": 4126.82,
+      "duration": 2.731,
+      "text": "actually this is this system is still a"
+    },
+    {
+      "index": 1122,
+      "start": 4126.83,
+      "end": 4131.979,
+      "duration": 5.149,
+      "text": "discrete system so I actually would like"
+    },
+    {
+      "index": 1123,
+      "start": 4131.989,
+      "end": 4134.74,
+      "duration": 2.751,
+      "text": "to point out that as a function of H as"
+    },
+    {
+      "index": 1124,
+      "start": 4134.75,
+      "end": 4140.019,
+      "duration": 5.269,
+      "text": "a function say only discrete location"
+    },
+    {
+      "index": 1125,
+      "start": 4140.029,
+      "end": 4143.079,
+      "duration": 3.05,
+      "text": "have have mass right so you"
+    },
+    {
+      "index": 1126,
+      "start": 4143.089,
+      "end": 4146.289,
+      "duration": 3.2,
+      "text": "see that those are individual mess they"
+    },
+    {
+      "index": 1127,
+      "start": 4146.299,
+      "end": 4150.039,
+      "duration": 3.74,
+      "text": "are oscillating up and down okay and"
+    },
+    {
+      "index": 1128,
+      "start": 4150.049,
+      "end": 4152.8,
+      "duration": 2.751,
+      "text": "there you can see that okay since they"
+    },
+    {
+      "index": 1129,
+      "start": 4152.81,
+      "end": 4155.519,
+      "duration": 2.709,
+      "text": "are oscillating up and down there for"
+    },
+    {
+      "index": 1130,
+      "start": 4155.529,
+      "end": 4159.37,
+      "duration": 3.841,
+      "text": "the oscillation essentially going up and"
+    },
+    {
+      "index": 1131,
+      "start": 4159.38,
+      "end": 4164.95,
+      "duration": 5.57,
+      "text": "down therefore what is the what is"
+    },
+    {
+      "index": 1132,
+      "start": 4164.96,
+      "end": 4167.079,
+      "duration": 2.119,
+      "text": "situated normal more of this liquid in"
+    },
+    {
+      "index": 1133,
+      "start": 4167.089,
+      "end": 4169.72,
+      "duration": 2.631,
+      "text": "the long system the normal more are"
+    },
+    {
+      "index": 1134,
+      "start": 4169.73,
+      "end": 4173.109,
+      "duration": 3.379,
+      "text": "issued the standing waves but I actually"
+    },
+    {
+      "index": 1135,
+      "start": 4173.119,
+      "end": 4177.399,
+      "duration": 4.28,
+      "text": "only appear in the discrete value of T"
+    },
+    {
+      "index": 1136,
+      "start": 4177.409,
+      "end": 4179.999,
+      "duration": 2.59,
+      "text": "and it has a functional form of"
+    },
+    {
+      "index": 1137,
+      "start": 4180.009,
+      "end": 4182.499,
+      "duration": 2.49,
+      "text": "something like a sinusoidal shape or"
+    },
+    {
+      "index": 1138,
+      "start": 4182.509,
+      "end": 4185.47,
+      "duration": 2.961,
+      "text": "cosine okay so that's actually what we"
+    },
+    {
+      "index": 1139,
+      "start": 4185.48,
+      "end": 4188.019,
+      "duration": 2.539,
+      "text": "we learned unless you can you can see"
+    },
+    {
+      "index": 1140,
+      "start": 4188.029,
+      "end": 4192.149,
+      "duration": 4.12,
+      "text": "that from here so if I isolate is it"
+    },
+    {
+      "index": 1141,
+      "start": 4192.159,
+      "end": 4199.959,
+      "duration": 7.8,
+      "text": "it's unselected and pre - okay not quite"
+    },
+    {
+      "index": 1142,
+      "start": 4199.969,
+      "end": 4205.51,
+      "duration": 5.541,
+      "text": "get it yeah so you see that okay it's"
+    },
+    {
+      "index": 1143,
+      "start": 4205.52,
+      "end": 4207.939,
+      "duration": 2.419,
+      "text": "roughly like a standing wave with a"
+    },
+    {
+      "index": 1144,
+      "start": 4207.949,
+      "end": 4212.26,
+      "duration": 4.311,
+      "text": "fixed frequency okay I would like to"
+    },
+    {
+      "index": 1145,
+      "start": 4212.27,
+      "end": 4216.18,
+      "duration": 3.91,
+      "text": "discuss with you as really interesting"
+    },
+    {
+      "index": 1146,
+      "start": 4216.19,
+      "end": 4221.5,
+      "duration": 5.31,
+      "text": "selection so if I now take a look at so"
+    },
+    {
+      "index": 1147,
+      "start": 4221.51,
+      "end": 4223.479,
+      "duration": 1.969,
+      "text": "we have went through a lot of mess right"
+    },
+    {
+      "index": 1148,
+      "start": 4223.489,
+      "end": 4225.43,
+      "duration": 1.941,
+      "text": "so now it's the time to enjoy what we"
+    },
+    {
+      "index": 1149,
+      "start": 4225.44,
+      "end": 4229.629,
+      "duration": 4.189,
+      "text": "have learned right so if I now take an"
+    },
+    {
+      "index": 1150,
+      "start": 4229.639,
+      "end": 4234.339,
+      "duration": 4.7,
+      "text": "extreme value consign ka okay equal to"
+    },
+    {
+      "index": 1151,
+      "start": 4234.349,
+      "end": 4238.75,
+      "duration": 4.401,
+      "text": "minus one okay then I am reaching the"
+    },
+    {
+      "index": 1152,
+      "start": 4238.76,
+      "end": 4244.629,
+      "duration": 5.869,
+      "text": "Maxima oscillation frequency right so if"
+    },
+    {
+      "index": 1153,
+      "start": 4244.639,
+      "end": 4250.93,
+      "duration": 6.291,
+      "text": "I choose cosine K small K a equal to"
+    },
+    {
+      "index": 1154,
+      "start": 4250.94,
+      "end": 4254.05,
+      "duration": 3.11,
+      "text": "minus one okay what is going to happen"
+    },
+    {
+      "index": 1155,
+      "start": 4254.06,
+      "end": 4256.78,
+      "duration": 2.72,
+      "text": "is like this this is as a function"
+    },
+    {
+      "index": 1156,
+      "start": 4256.79,
+      "end": 4260.859,
+      "duration": 4.069,
+      "text": "though say byproduct AJ as a function"
+    },
+    {
+      "index": 1157,
+      "start": 4260.869,
+      "end": 4263.589,
+      "duration": 2.72,
+      "text": "say what you are going to get is 19 like"
+    },
+    {
+      "index": 1158,
+      "start": 4263.599,
+      "end": 4267.81,
+      "duration": 4.211,
+      "text": "this those are actually the amplitude of"
+    },
+    {
+      "index": 1159,
+      "start": 4267.82,
+      "end": 4270.7,
+      "duration": 2.88,
+      "text": "individual mass so you can see that if"
+    },
+    {
+      "index": 1160,
+      "start": 4270.71,
+      "end": 4275.74,
+      "duration": 5.03,
+      "text": "cosine ka is equal to minus 1 Omega"
+    },
+    {
+      "index": 1161,
+      "start": 4275.75,
+      "end": 4276.799,
+      "duration": 1.049,
+      "text": "square"
+    },
+    {
+      "index": 1162,
+      "start": 4276.809,
+      "end": 4280.43,
+      "duration": 3.621,
+      "text": "based on that expression 1 minus minus 1"
+    },
+    {
+      "index": 1163,
+      "start": 4280.44,
+      "end": 4284.779,
+      "duration": 4.339,
+      "text": "you get 2 therefore you get Omega square"
+    },
+    {
+      "index": 1164,
+      "start": 4284.789,
+      "end": 4289.7,
+      "duration": 4.911,
+      "text": "equal to 4 Omega 0 square ok and if you"
+    },
+    {
+      "index": 1165,
+      "start": 4289.71,
+      "end": 4293.72,
+      "duration": 4.01,
+      "text": "prat the AJ as a functional J that is"
+    },
+    {
+      "index": 1166,
+      "start": 4293.73,
+      "end": 4295.879,
+      "duration": 2.149,
+      "text": "actually what going you are going to get"
+    },
+    {
+      "index": 1167,
+      "start": 4295.889,
+      "end": 4299.39,
+      "duration": 3.501,
+      "text": "you actually have Maxima stretch to the"
+    },
+    {
+      "index": 1168,
+      "start": 4299.4,
+      "end": 4301.669,
+      "duration": 2.269,
+      "text": "system right you can see that it's"
+    },
+    {
+      "index": 1169,
+      "start": 4301.679,
+      "end": 4303.919,
+      "duration": 2.24,
+      "text": "actually positive negative positive"
+    },
+    {
+      "index": 1170,
+      "start": 4303.929,
+      "end": 4306.709,
+      "duration": 2.78,
+      "text": "negative positive negative that will"
+    },
+    {
+      "index": 1171,
+      "start": 4306.719,
+      "end": 4309.83,
+      "duration": 3.111,
+      "text": "reach the maximum speed of the"
+    },
+    {
+      "index": 1172,
+      "start": 4309.84,
+      "end": 4313.39,
+      "duration": 3.55,
+      "text": "oscillation and of course we cannot demo"
+    },
+    {
+      "index": 1173,
+      "start": 4313.4,
+      "end": 4317.649,
+      "duration": 4.249,
+      "text": "we cannot demo maximum Pony number"
+    },
+    {
+      "index": 1174,
+      "start": 4317.659,
+      "end": 4320.359,
+      "duration": 2.7,
+      "text": "oscillator but of course I can't demo a"
+    },
+    {
+      "index": 1175,
+      "start": 4320.369,
+      "end": 4324.229,
+      "duration": 3.86,
+      "text": "system with ten oscillators so you can"
+    },
+    {
+      "index": 1176,
+      "start": 4324.239,
+      "end": 4327.859,
+      "duration": 3.62,
+      "text": "see that now I maximize the amplitude of"
+    },
+    {
+      "index": 1177,
+      "start": 4327.869,
+      "end": 4332.51,
+      "duration": 4.641,
+      "text": "the highest frequency normal more and"
+    },
+    {
+      "index": 1178,
+      "start": 4332.52,
+      "end": 4336.229,
+      "duration": 3.709,
+      "text": "then I let go and you see that this is"
+    },
+    {
+      "index": 1179,
+      "start": 4336.239,
+      "end": 4338.629,
+      "duration": 2.39,
+      "text": "actually exactly what is going to happen"
+    },
+    {
+      "index": 1180,
+      "start": 4338.639,
+      "end": 4342.109,
+      "duration": 3.47,
+      "text": "when I have cosine ka equal to minus 1"
+    },
+    {
+      "index": 1181,
+      "start": 4342.119,
+      "end": 4346.97,
+      "duration": 4.851,
+      "text": "then the the the wetlands is very small"
+    },
+    {
+      "index": 1182,
+      "start": 4346.98,
+      "end": 4350.649,
+      "duration": 3.669,
+      "text": "and you actually reach the maximum speed"
+    },
+    {
+      "index": 1183,
+      "start": 4350.659,
+      "end": 4352.91,
+      "duration": 2.251,
+      "text": "makes my speed is actually to be"
+    },
+    {
+      "index": 1184,
+      "start": 4352.92,
+      "end": 4356.209,
+      "duration": 3.289,
+      "text": "compared with for example a lower"
+    },
+    {
+      "index": 1185,
+      "start": 4356.219,
+      "end": 4359.479,
+      "duration": 3.26,
+      "text": "frequency mode like this one right this"
+    },
+    {
+      "index": 1186,
+      "start": 4359.489,
+      "end": 4362.12,
+      "duration": 2.631,
+      "text": "is actually oscillating at much lower"
+    },
+    {
+      "index": 1187,
+      "start": 4362.13,
+      "end": 4365.959,
+      "duration": 3.829,
+      "text": "frequency and there you can ask okay"
+    },
+    {
+      "index": 1188,
+      "start": 4365.969,
+      "end": 4368.149,
+      "duration": 2.18,
+      "text": "does that make sense if I have this"
+    },
+    {
+      "index": 1189,
+      "start": 4368.159,
+      "end": 4375.169,
+      "duration": 7.01,
+      "text": "really really zigzag shape why this"
+    },
+    {
+      "index": 1190,
+      "start": 4375.179,
+      "end": 4377.689,
+      "duration": 2.51,
+      "text": "system should be oscillating at the"
+    },
+    {
+      "index": 1191,
+      "start": 4377.699,
+      "end": 4382.359,
+      "duration": 4.66,
+      "text": "highest possible frequency why is that"
+    },
+    {
+      "index": 1192,
+      "start": 4382.369,
+      "end": 4385.91,
+      "duration": 3.541,
+      "text": "you also make sense right if you have"
+    },
+    {
+      "index": 1193,
+      "start": 4385.92,
+      "end": 4388.58,
+      "duration": 2.66,
+      "text": "that set up then you are stretching this"
+    },
+    {
+      "index": 1194,
+      "start": 4388.59,
+      "end": 4393.02,
+      "duration": 4.43,
+      "text": "system to the maximum possible amount"
+    },
+    {
+      "index": 1195,
+      "start": 4393.03,
+      "end": 4397.31,
+      "duration": 4.28,
+      "text": "right so so actually now the louder the"
+    },
+    {
+      "index": 1196,
+      "start": 4397.32,
+      "end": 4400.1,
+      "duration": 2.78,
+      "text": "spring looks like this stretching is"
+    },
+    {
+      "index": 1197,
+      "start": 4400.11,
+      "end": 4400.85,
+      "duration": 0.74,
+      "text": "really hard"
+    },
+    {
+      "index": 1198,
+      "start": 4400.86,
+      "end": 4404.149,
+      "duration": 3.289,
+      "text": "and therefore the restoring force is"
+    },
+    {
+      "index": 1199,
+      "start": 4404.159,
+      "end": 4408.259,
+      "duration": 4.1,
+      "text": "going to be large therefore you get high"
+    },
+    {
+      "index": 1200,
+      "start": 4408.269,
+      "end": 4409.379,
+      "duration": 1.11,
+      "text": "frequency"
+    },
+    {
+      "index": 1201,
+      "start": 4409.389,
+      "end": 4414.62,
+      "duration": 5.231,
+      "text": "okay okay so I hope you actually enjoy"
+    },
+    {
+      "index": 1202,
+      "start": 4414.63,
+      "end": 4418.169,
+      "duration": 3.539,
+      "text": "the lecture today is a lot of"
+    },
+    {
+      "index": 1203,
+      "start": 4418.179,
+      "end": 4420.6,
+      "duration": 2.421,
+      "text": "mathematics but what we have learned is"
+    },
+    {
+      "index": 1204,
+      "start": 4420.61,
+      "end": 4424.77,
+      "duration": 4.16,
+      "text": "really a lot we learned how to issue the"
+    },
+    {
+      "index": 1205,
+      "start": 4424.78,
+      "end": 4429.72,
+      "duration": 4.94,
+      "text": "described system how to actually solve a"
+    },
+    {
+      "index": 1206,
+      "start": 4429.73,
+      "end": 4434.939,
+      "duration": 5.209,
+      "text": "system without HD touching the MS 1k"
+    },
+    {
+      "index": 1207,
+      "start": 4434.949,
+      "end": 4437.629,
+      "duration": 2.68,
+      "text": "metrics we can actually already get the"
+    },
+    {
+      "index": 1208,
+      "start": 4437.639,
+      "end": 4441.54,
+      "duration": 3.901,
+      "text": "eigenvectors and using n minus 1 k"
+    },
+    {
+      "index": 1209,
+      "start": 4441.55,
+      "end": 4446.31,
+      "duration": 4.76,
+      "text": "matrix we can actually evaluate Omega as"
+    },
+    {
+      "index": 1210,
+      "start": 4446.32,
+      "end": 4450.629,
+      "duration": 4.309,
+      "text": "a function of the input parameter from s"
+    },
+    {
+      "index": 1211,
+      "start": 4450.639,
+      "end": 4454.83,
+      "duration": 4.191,
+      "text": "I can value and the next lectures we are"
+    },
+    {
+      "index": 1212,
+      "start": 4454.84,
+      "end": 4457.5,
+      "duration": 2.66,
+      "text": "going to discuss more examples and make"
+    },
+    {
+      "index": 1213,
+      "start": 4457.51,
+      "end": 4460.05,
+      "duration": 2.54,
+      "text": "the whole system continues thank you"
+    },
+    {
+      "index": 1214,
+      "start": 4460.06,
+      "end": 4462.33,
+      "duration": 2.27,
+      "text": "very much if you have any more questions"
+    },
+    {
+      "index": 1215,
+      "start": 4462.34,
+      "end": 4464.97,
+      "duration": 2.63,
+      "text": "I'll be very happy to answer your"
+    },
+    {
+      "index": 1216,
+      "start": 4464.98,
+      "end": 4474.68,
+      "duration": 9.7,
+      "text": "questions"
+    }
+  ],
+  "course": {
+    "category": "Computer Science & AI",
+    "title": "Computational Thinking and Data Science",
+    "source_url": "https://www.youtube.com/playlist?list=PLUl4u3cNGP61R5sPDPKVfcFlu95wSs2Kx"
+  }
+}

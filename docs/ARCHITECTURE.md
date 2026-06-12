@@ -21,6 +21,11 @@ graph TB
     JDPage --> Matcher["Rule-Based Matching Engine"]
     Matcher --> JobStore
     Matcher --> StudentProvider["Mock Student Profile Provider"]
+    CVPage["CV Analysis Page"] --> CVParser["CV Input and Parser Flow"]
+    CVParser --> Reader
+    CVParser --> LLM
+    CVParser --> StudentStore["Local JSON Student Store"]
+    StudentProvider --> StudentStore
     Matcher --> Results["Ranked Match Results"]
     API["FastAPI App"] --> JDRouter["JD Matching Router"]
     API --> StudentRouter["Student Profile Router Skeleton"]
@@ -37,13 +42,15 @@ The backend uses one FastAPI app that composes agent-style routers.
 backend/src/
   api/
     main.py              FastAPI app composition
-  agents/
+    agents/
     jd_matching/         JD parsing, job management, matching routes
+    cv_analysis/         CV parsing and student profile storage routes
     student_profile/     Small student profile API skeleton
   core/                  settings and paths
   models/                shared dataclasses and validation helpers
   provider/              shared LLM provider adapters
   services/              shared parser, storage, document reader, matching logic
+  core/auth.py           demo role-based authorization helpers
 ```
 
 This keeps the current demo simple while still giving each future task a clear place to live.
@@ -59,11 +66,14 @@ If the selected LLM provider is not configured or fails, the system uses a deter
 | Name | Responsibility |
 |------|----------------|
 | `jd_matching` | Parse JD, save and manage jobs, run matching for open jobs. |
+| `cv_analysis` | Parse CV uploads/text into student skill profiles and save local student JSON. |
 | `student_profile` | Skeleton API for student profile summaries and future integration. |
 | Document reader | Extract text from PDF, DOCX, or TXT uploads. |
 | Schema validator | Check required fields, data types, score ranges, and skill requirements. |
 | Matching engine | Rank students for one open job using deterministic rules. |
 | Student profile provider | Return mock student profiles now; can be replaced by an API provider later. |
+| Demo auth | Enforce basic `student` and `enterprise` role boundaries through request headers. |
+| YouTube RAG pipeline | Crawl video or playlist transcripts, clean captions, and build timestamped overlapping chunks. |
 
 ## State
 
@@ -143,7 +153,15 @@ Agent catalog:
 
 - `GET /`
 - `GET /agents/jd-matching/health`
+- `GET /agents/cv-analysis/health`
 - `GET /agents/student-profile/health`
+
+Protected endpoints expect:
+
+- `X-Demo-Role: enterprise` for JD parsing, job management, matching, and student list access.
+- `X-Demo-Role: student` for CV parsing and owned student profile management.
+- `X-Demo-Role: teacher` for school/teacher-owned transcript pipeline workflows.
+- `X-Demo-User-Id` is optional but used to tag CV-derived student profile ownership.
 
 JD matching:
 
@@ -159,6 +177,15 @@ JD matching:
 - `GET /students/mock`
 - `POST /jobs/{job_id}/match`
 
+CV analysis:
+
+- `POST /students/cv/parse`
+- `POST /students/cv/parse-upload`
+- `POST /students`
+- `GET /students`
+- `GET /students/{student_id}`
+- `DELETE /students/{student_id}`
+
 Student profile skeleton:
 
 - `GET /agents/student-profile/students/{student_id}/summary`
@@ -169,8 +196,20 @@ Streamlit UI:
 
 - Home page with project stats and link to JD Workspace.
 - JD Workspace page with parse, manage, and matching tabs.
+- CV Analysis page with upload/text parsing, JSON review/edit, and saved student management.
+- Teacher RAG Pipeline page with YouTube video/playlist input and RAG chunk output report.
 
-A CV page is intentionally not included yet because real CV parsing/profile work is not implemented.
+Matching reads mock student profiles plus locally saved CV-derived student profiles.
+
+## YouTube RAG Data
+
+The teacher-owned transcript pipeline accepts a single YouTube video URL or playlist URL. It writes three output layers:
+
+- `raw`: timestamped transcript JSON from YouTube captions.
+- `cleaned`: normalized transcript JSON with boilerplate removal and course metadata.
+- `chunks`: JSONL RAG documents using window slicing with overlap.
+
+Each chunk includes source metadata such as category, course title, video title, video URL, timestamp URL, start/end time, and segment range.
 
 ## Risks
 

@@ -1,0 +1,7011 @@
+{
+  "video": {
+    "id": "5-PI4T25OXI",
+    "title": "Lecture 15 - ARRAY MULTIPLIER",
+    "url": "https://www.youtube.com/watch?v=5-PI4T25OXI",
+    "channel": "nptelhrd",
+    "duration": 3176,
+    "language": "en"
+  },
+  "segment_count": 999,
+  "segments": [
+    {
+      "index": 0,
+      "start": 23.509,
+      "end": 23.519,
+      "duration": 0.01,
+      "text": "[Music]"
+    },
+    {
+      "index": 1,
+      "start": 23.519,
+      "end": 26.71,
+      "duration": 3.191,
+      "text": "oh oh"
+    },
+    {
+      "index": 2,
+      "start": 26.72,
+      "end": 28.39,
+      "duration": 1.67,
+      "text": "sh"
+    },
+    {
+      "index": 3,
+      "start": 28.4,
+      "end": 32.179,
+      "duration": 3.779,
+      "text": "sh sh"
+    },
+    {
+      "index": 4,
+      "start": 88.78,
+      "end": 88.79,
+      "duration": 0.01,
+      "text": "[Applause]"
+    },
+    {
+      "index": 5,
+      "start": 88.79,
+      "end": 109.59,
+      "duration": 20.8,
+      "text": "[Music]"
+    },
+    {
+      "index": 6,
+      "start": 112.35,
+      "end": 112.36,
+      "duration": 0.01,
+      "text": "we have been looking at the"
+    },
+    {
+      "index": 7,
+      "start": 112.36,
+      "end": 117.709,
+      "duration": 5.349,
+      "text": "circuits for arithmetic operations"
+    },
+    {
+      "index": 8,
+      "start": 117.719,
+      "end": 121.19,
+      "duration": 3.471,
+      "text": "we first C considered adders which are"
+    },
+    {
+      "index": 9,
+      "start": 121.2,
+      "end": 122.63,
+      "duration": 1.43,
+      "text": "the most"
+    },
+    {
+      "index": 10,
+      "start": 122.64,
+      "end": 124.83,
+      "duration": 2.19,
+      "text": "fundamental arithmetic operation which"
+    },
+    {
+      "index": 11,
+      "start": 124.84,
+      "end": 128.19,
+      "duration": 3.35,
+      "text": "are the most fundamental arithmetic"
+    },
+    {
+      "index": 12,
+      "start": 128.2,
+      "end": 130.07,
+      "duration": 1.87,
+      "text": "operations and we also talked about"
+    },
+    {
+      "index": 13,
+      "start": 130.08,
+      "end": 133.309,
+      "duration": 3.229,
+      "text": "speeding up of adders one example we"
+    },
+    {
+      "index": 14,
+      "start": 133.319,
+      "end": 135.869,
+      "duration": 2.55,
+      "text": "took was the carry look ahead then we"
+    },
+    {
+      "index": 15,
+      "start": 135.879,
+      "end": 138.11,
+      "duration": 2.231,
+      "text": "talked about subtractors and subtraction"
+    },
+    {
+      "index": 16,
+      "start": 138.12,
+      "end": 141.55,
+      "duration": 3.43,
+      "text": "being a complement addition was uh taken"
+    },
+    {
+      "index": 17,
+      "start": 141.56,
+      "end": 144.67,
+      "duration": 3.11,
+      "text": "to account while designing"
+    },
+    {
+      "index": 18,
+      "start": 144.68,
+      "end": 147.71,
+      "duration": 3.03,
+      "text": "subtractors then the most widely"
+    },
+    {
+      "index": 19,
+      "start": 147.72,
+      "end": 150.869,
+      "duration": 3.149,
+      "text": "used next most widely used operation in"
+    },
+    {
+      "index": 20,
+      "start": 150.879,
+      "end": 155.589,
+      "duration": 4.71,
+      "text": "the arithmetics arithmetic um"
+    },
+    {
+      "index": 21,
+      "start": 155.599,
+      "end": 158.27,
+      "duration": 2.671,
+      "text": "computations is multiplication so we"
+    },
+    {
+      "index": 22,
+      "start": 158.28,
+      "end": 160.149,
+      "duration": 1.869,
+      "text": "like to see"
+    },
+    {
+      "index": 23,
+      "start": 160.159,
+      "end": 162.19,
+      "duration": 2.031,
+      "text": "multipliers of course there are"
+    },
+    {
+      "index": 24,
+      "start": 162.2,
+      "end": 163.63,
+      "duration": 1.43,
+      "text": "different types of multipliers depending"
+    },
+    {
+      "index": 25,
+      "start": 163.64,
+      "end": 165.03,
+      "duration": 1.39,
+      "text": "on the speed and Hardware it's always"
+    },
+    {
+      "index": 26,
+      "start": 165.04,
+      "end": 165.71,
+      "duration": 0.67,
+      "text": "the"
+    },
+    {
+      "index": 27,
+      "start": 165.72,
+      "end": 168.35,
+      "duration": 2.63,
+      "text": "tradeoff more"
+    },
+    {
+      "index": 28,
+      "start": 168.36,
+      "end": 171.509,
+      "duration": 3.149,
+      "text": "Hardware faster Multiplication is"
+    },
+    {
+      "index": 29,
+      "start": 171.519,
+      "end": 173.47,
+      "duration": 1.951,
+      "text": "possible but you need to spend more"
+    },
+    {
+      "index": 30,
+      "start": 173.48,
+      "end": 176.19,
+      "duration": 2.71,
+      "text": "money if you want to go for"
+    },
+    {
+      "index": 31,
+      "start": 176.2,
+      "end": 179.07,
+      "duration": 2.87,
+      "text": "a smaller circuit with less Hardware"
+    },
+    {
+      "index": 32,
+      "start": 179.08,
+      "end": 180.47,
+      "duration": 1.39,
+      "text": "then it will take more time"
+    },
+    {
+      "index": 33,
+      "start": 180.48,
+      "end": 183.07,
+      "duration": 2.59,
+      "text": "time basically the multiplication we"
+    },
+    {
+      "index": 34,
+      "start": 183.08,
+      "end": 185.71,
+      "duration": 2.63,
+      "text": "understand as we understand from our"
+    },
+    {
+      "index": 35,
+      "start": 185.72,
+      "end": 189.99,
+      "duration": 4.27,
+      "text": "paper and pencil method is to do"
+    },
+    {
+      "index": 36,
+      "start": 190.0,
+      "end": 193.91,
+      "duration": 3.91,
+      "text": "this uh shift and add that is we take"
+    },
+    {
+      "index": 37,
+      "start": 193.92,
+      "end": 196.75,
+      "duration": 2.83,
+      "text": "the two"
+    },
+    {
+      "index": 38,
+      "start": 196.76,
+      "end": 199.07,
+      "duration": 2.31,
+      "text": "operant one is called the multiplic the"
+    },
+    {
+      "index": 39,
+      "start": 199.08,
+      "end": 202.27,
+      "duration": 3.19,
+      "text": "other is called the multiplier each"
+    },
+    {
+      "index": 40,
+      "start": 202.28,
+      "end": 204.11,
+      "duration": 1.83,
+      "text": "digit of the multiplier in case in case"
+    },
+    {
+      "index": 41,
+      "start": 204.12,
+      "end": 206.47,
+      "duration": 2.35,
+      "text": "of decimal numbers each digit of the"
+    },
+    {
+      "index": 42,
+      "start": 206.48,
+      "end": 207.869,
+      "duration": 1.389,
+      "text": "multiplier is"
+    },
+    {
+      "index": 43,
+      "start": 207.879,
+      "end": 211.35,
+      "duration": 3.471,
+      "text": "Multiplied with the multiplicand you"
+    },
+    {
+      "index": 44,
+      "start": 211.36,
+      "end": 214.149,
+      "duration": 2.789,
+      "text": "write the result which you'll call"
+    },
+    {
+      "index": 45,
+      "start": 214.159,
+      "end": 217.229,
+      "duration": 3.07,
+      "text": "partial product then we take the second"
+    },
+    {
+      "index": 46,
+      "start": 217.239,
+      "end": 219.509,
+      "duration": 2.27,
+      "text": "digit of the multiplier and multiply"
+    },
+    {
+      "index": 47,
+      "start": 219.519,
+      "end": 222.27,
+      "duration": 2.751,
+      "text": "again with the same multiple"
+    },
+    {
+      "index": 48,
+      "start": 222.28,
+      "end": 226.309,
+      "duration": 4.029,
+      "text": "cand write it down from the first"
+    },
+    {
+      "index": 49,
+      "start": 226.319,
+      "end": 228.11,
+      "duration": 1.791,
+      "text": "product partial product but in this when"
+    },
+    {
+      "index": 50,
+      "start": 228.12,
+      "end": 230.91,
+      "duration": 2.79,
+      "text": "we do that we do the shifting because we"
+    },
+    {
+      "index": 51,
+      "start": 230.92,
+      "end": 232.91,
+      "duration": 1.99,
+      "text": "have taken the second position of the"
+    },
+    {
+      "index": 52,
+      "start": 232.92,
+      "end": 235.949,
+      "duration": 3.029,
+      "text": "multiplier while we write the partial"
+    },
+    {
+      "index": 53,
+      "start": 235.959,
+      "end": 240.03,
+      "duration": 4.071,
+      "text": "product we write it with a left shift"
+    },
+    {
+      "index": 54,
+      "start": 240.04,
+      "end": 244.429,
+      "duration": 4.389,
+      "text": "shift of one digit position to the left"
+    },
+    {
+      "index": 55,
+      "start": 244.439,
+      "end": 246.19,
+      "duration": 1.751,
+      "text": "we continue to do that till we exhaust"
+    },
+    {
+      "index": 56,
+      "start": 246.2,
+      "end": 249.069,
+      "duration": 2.869,
+      "text": "all the digits of the multiplier finally"
+    },
+    {
+      "index": 57,
+      "start": 249.079,
+      "end": 251.71,
+      "duration": 2.631,
+      "text": "we add the whole thing to get the final"
+    },
+    {
+      "index": 58,
+      "start": 251.72,
+      "end": 254.03,
+      "duration": 2.31,
+      "text": "product this is an algorithm which are"
+    },
+    {
+      "index": 59,
+      "start": 254.04,
+      "end": 256.629,
+      "duration": 2.589,
+      "text": "used to which are familiar with in"
+    },
+    {
+      "index": 60,
+      "start": 256.639,
+      "end": 259.789,
+      "duration": 3.15,
+      "text": "our hand computations it's called the"
+    },
+    {
+      "index": 61,
+      "start": 259.799,
+      "end": 262.15,
+      "duration": 2.351,
+      "text": "shift and add algorithm because we have"
+    },
+    {
+      "index": 62,
+      "start": 262.16,
+      "end": 266.51,
+      "duration": 4.35,
+      "text": "to add it after shifting it all the"
+    },
+    {
+      "index": 63,
+      "start": 266.52,
+      "end": 268.35,
+      "duration": 1.83,
+      "text": "partial products are added together to"
+    },
+    {
+      "index": 64,
+      "start": 268.36,
+      "end": 269.99,
+      "duration": 1.63,
+      "text": "get the final product but before for"
+    },
+    {
+      "index": 65,
+      "start": 270.0,
+      "end": 272.31,
+      "duration": 2.31,
+      "text": "doing so we have to shift each of the"
+    },
+    {
+      "index": 66,
+      "start": 272.32,
+      "end": 274.71,
+      "duration": 2.39,
+      "text": "partial products each of the partial"
+    },
+    {
+      "index": 67,
+      "start": 274.72,
+      "end": 277.11,
+      "duration": 2.39,
+      "text": "products to one bit position to the"
+    },
+    {
+      "index": 68,
+      "start": 277.12,
+      "end": 279.39,
+      "duration": 2.27,
+      "text": "left because the other method of doing"
+    },
+    {
+      "index": 69,
+      "start": 279.4,
+      "end": 283.07,
+      "duration": 3.67,
+      "text": "it would be to multiply the M add the"
+    },
+    {
+      "index": 70,
+      "start": 283.08,
+      "end": 286.11,
+      "duration": 3.03,
+      "text": "multiplic multiplier times that is if"
+    },
+    {
+      "index": 71,
+      "start": 286.12,
+      "end": 288.31,
+      "duration": 2.19,
+      "text": "you want to multiply a number n by"
+    },
+    {
+      "index": 72,
+      "start": 288.32,
+      "end": 292.55,
+      "duration": 4.23,
+      "text": "another number M I can add n m times"
+    },
+    {
+      "index": 73,
+      "start": 292.56,
+      "end": 293.909,
+      "duration": 1.349,
+      "text": "then also I can de product that's a very"
+    },
+    {
+      "index": 74,
+      "start": 293.919,
+      "end": 296.909,
+      "duration": 2.99,
+      "text": "slow process I need to do n additions so"
+    },
+    {
+      "index": 75,
+      "start": 296.919,
+      "end": 300.15,
+      "duration": 3.231,
+      "text": "shift and add is by far considered to be"
+    },
+    {
+      "index": 76,
+      "start": 300.16,
+      "end": 301.95,
+      "duration": 1.79,
+      "text": "uh much faster and more efficient method"
+    },
+    {
+      "index": 77,
+      "start": 301.96,
+      "end": 304.35,
+      "duration": 2.39,
+      "text": "of multiplication which is been used in"
+    },
+    {
+      "index": 78,
+      "start": 304.36,
+      "end": 307.35,
+      "duration": 2.99,
+      "text": "computers but as we go for higher and"
+    },
+    {
+      "index": 79,
+      "start": 307.36,
+      "end": 309.87,
+      "duration": 2.51,
+      "text": "higher"
+    },
+    {
+      "index": 80,
+      "start": 311.99,
+      "end": 312.0,
+      "duration": 0.01,
+      "text": "speed whether the shifting has be done"
+    },
+    {
+      "index": 81,
+      "start": 312.0,
+      "end": 313.749,
+      "duration": 1.749,
+      "text": "one at a time or all at the same time"
+    },
+    {
+      "index": 82,
+      "start": 313.759,
+      "end": 316.469,
+      "duration": 2.71,
+      "text": "because suppose we have only one Adder"
+    },
+    {
+      "index": 83,
+      "start": 316.479,
+      "end": 321.39,
+      "duration": 4.911,
+      "text": "so we can get one partial"
+    },
+    {
+      "index": 84,
+      "start": 324.67,
+      "end": 324.68,
+      "duration": 0.01,
+      "text": "product keep in a register or keep it in"
+    },
+    {
+      "index": 85,
+      "start": 324.68,
+      "end": 325.67,
+      "duration": 0.99,
+      "text": "a"
+    },
+    {
+      "index": 86,
+      "start": 325.68,
+      "end": 327.79,
+      "duration": 2.11,
+      "text": "storage then get the second paral"
+    },
+    {
+      "index": 87,
+      "start": 327.8,
+      "end": 330.35,
+      "duration": 2.55,
+      "text": "product shift it and add it using one"
+    },
+    {
+      "index": 88,
+      "start": 330.36,
+      "end": 333.39,
+      "duration": 3.03,
+      "text": "Adder then that result I will keep in a"
+    },
+    {
+      "index": 89,
+      "start": 333.4,
+      "end": 335.51,
+      "duration": 2.11,
+      "text": "storage then get the second partial"
+    },
+    {
+      "index": 90,
+      "start": 335.52,
+      "end": 338.029,
+      "duration": 2.509,
+      "text": "product or third partial product again"
+    },
+    {
+      "index": 91,
+      "start": 338.039,
+      "end": 340.71,
+      "duration": 2.671,
+      "text": "add it to the same Adder so with one"
+    },
+    {
+      "index": 92,
+      "start": 340.72,
+      "end": 343.11,
+      "duration": 2.39,
+      "text": "Adder I can in theory I can accomplish"
+    },
+    {
+      "index": 93,
+      "start": 343.12,
+      "end": 345.55,
+      "duration": 2.43,
+      "text": "the shift and add algorithm if you have"
+    },
+    {
+      "index": 94,
+      "start": 345.56,
+      "end": 350.189,
+      "duration": 4.629,
+      "text": "enough storage facility to store the"
+    },
+    {
+      "index": 95,
+      "start": 350.199,
+      "end": 353.07,
+      "duration": 2.871,
+      "text": "multiplier multiplicate and the partial"
+    },
+    {
+      "index": 96,
+      "start": 353.08,
+      "end": 355.67,
+      "duration": 2.59,
+      "text": "results I can accomplish the whole"
+    },
+    {
+      "index": 97,
+      "start": 355.68,
+      "end": 357.99,
+      "duration": 2.31,
+      "text": "multiplication in a series of additions"
+    },
+    {
+      "index": 98,
+      "start": 358.0,
+      "end": 360.83,
+      "duration": 2.83,
+      "text": "one after the other on the other hand if"
+    },
+    {
+      "index": 99,
+      "start": 360.84,
+      "end": 363.909,
+      "duration": 3.069,
+      "text": "I have a series of adders if all the"
+    },
+    {
+      "index": 100,
+      "start": 363.919,
+      "end": 365.15,
+      "duration": 1.231,
+      "text": "partial products can be added at the"
+    },
+    {
+      "index": 101,
+      "start": 365.16,
+      "end": 366.43,
+      "duration": 1.27,
+      "text": "same"
+    },
+    {
+      "index": 102,
+      "start": 366.44,
+      "end": 369.07,
+      "duration": 2.63,
+      "text": "time I can get the result much faster"
+    },
+    {
+      "index": 103,
+      "start": 369.08,
+      "end": 371.469,
+      "duration": 2.389,
+      "text": "because all adds can be added all the"
+    },
+    {
+      "index": 104,
+      "start": 371.479,
+      "end": 372.589,
+      "duration": 1.11,
+      "text": "partial products can be added at the"
+    },
+    {
+      "index": 105,
+      "start": 372.599,
+      "end": 373.35,
+      "duration": 0.751,
+      "text": "same"
+    },
+    {
+      "index": 106,
+      "start": 373.36,
+      "end": 376.909,
+      "duration": 3.549,
+      "text": "time so one is a"
+    },
+    {
+      "index": 107,
+      "start": 376.919,
+      "end": 381.11,
+      "duration": 4.191,
+      "text": "Serial operation one after the other Mar"
+    },
+    {
+      "index": 108,
+      "start": 381.12,
+      "end": 384.23,
+      "duration": 3.11,
+      "text": "products are added one at a time till we"
+    },
+    {
+      "index": 109,
+      "start": 384.24,
+      "end": 388.51,
+      "duration": 4.27,
+      "text": "complete the process of partial product"
+    },
+    {
+      "index": 110,
+      "start": 388.52,
+      "end": 390.469,
+      "duration": 1.949,
+      "text": "addition other is to have all the"
+    },
+    {
+      "index": 111,
+      "start": 390.479,
+      "end": 393.71,
+      "duration": 3.231,
+      "text": "partial products feeding onto the adders"
+    },
+    {
+      "index": 112,
+      "start": 393.72,
+      "end": 396.309,
+      "duration": 2.589,
+      "text": "at the same time and then getting the"
+    },
+    {
+      "index": 113,
+      "start": 396.319,
+      "end": 399.23,
+      "duration": 2.911,
+      "text": "sum in one one stroke such multipliers"
+    },
+    {
+      "index": 114,
+      "start": 399.24,
+      "end": 402.71,
+      "duration": 3.47,
+      "text": "are again as I said expensive in terms"
+    },
+    {
+      "index": 115,
+      "start": 402.72,
+      "end": 406.11,
+      "duration": 3.39,
+      "text": "of Hardware but faster so it's always"
+    },
+    {
+      "index": 116,
+      "start": 406.12,
+      "end": 409.99,
+      "duration": 3.87,
+      "text": "the it's always the the conflict between"
+    },
+    {
+      "index": 117,
+      "start": 410.0,
+      "end": 410.749,
+      "duration": 0.749,
+      "text": "the"
+    },
+    {
+      "index": 118,
+      "start": 410.759,
+      "end": 413.79,
+      "duration": 3.031,
+      "text": "hardware you want to spend you want to"
+    },
+    {
+      "index": 119,
+      "start": 413.8,
+      "end": 415.95,
+      "duration": 2.15,
+      "text": "use on the time you want to"
+    },
+    {
+      "index": 120,
+      "start": 415.96,
+      "end": 418.629,
+      "duration": 2.669,
+      "text": "allow of course this is only a simple"
+    },
+    {
+      "index": 121,
+      "start": 418.639,
+      "end": 420.39,
+      "duration": 1.751,
+      "text": "scheme there are other schemes in which"
+    },
+    {
+      "index": 122,
+      "start": 420.4,
+      "end": 422.99,
+      "duration": 2.59,
+      "text": "you can even make these things faster"
+    },
+    {
+      "index": 123,
+      "start": 423.0,
+      "end": 424.79,
+      "duration": 1.79,
+      "text": "for example shift and AD can be made"
+    },
+    {
+      "index": 124,
+      "start": 424.8,
+      "end": 427.35,
+      "duration": 2.55,
+      "text": "slightly Faster by some Innovation"
+    },
+    {
+      "index": 125,
+      "start": 427.36,
+      "end": 431.39,
+      "duration": 4.03,
+      "text": "similarly this all parallel all adders"
+    },
+    {
+      "index": 126,
+      "start": 431.4,
+      "end": 434.029,
+      "duration": 2.629,
+      "text": "at the same time that can also be"
+    },
+    {
+      "index": 127,
+      "start": 434.039,
+      "end": 436.07,
+      "duration": 2.031,
+      "text": "speeded up by some Innovation so"
+    },
+    {
+      "index": 128,
+      "start": 436.08,
+      "end": 438.589,
+      "duration": 2.509,
+      "text": "speeding up like this carry liad from"
+    },
+    {
+      "index": 129,
+      "start": 438.599,
+      "end": 441.629,
+      "duration": 3.03,
+      "text": "the straight Adder to the carry add and"
+    },
+    {
+      "index": 130,
+      "start": 441.639,
+      "end": 443.79,
+      "duration": 2.151,
+      "text": "many other add schemes which are faster"
+    },
+    {
+      "index": 131,
+      "start": 443.8,
+      "end": 445.95,
+      "duration": 2.15,
+      "text": "we can also have multiplier schemes"
+    },
+    {
+      "index": 132,
+      "start": 445.96,
+      "end": 447.869,
+      "duration": 1.909,
+      "text": "which are faster than the basic things"
+    },
+    {
+      "index": 133,
+      "start": 447.879,
+      "end": 450.309,
+      "duration": 2.43,
+      "text": "in basic thing though there are only"
+    },
+    {
+      "index": 134,
+      "start": 450.319,
+      "end": 452.189,
+      "duration": 1.87,
+      "text": "three things we can recognize one is the"
+    },
+    {
+      "index": 135,
+      "start": 452.199,
+      "end": 454.79,
+      "duration": 2.591,
+      "text": "repeated addition which is"
+    },
+    {
+      "index": 136,
+      "start": 454.8,
+      "end": 457.189,
+      "duration": 2.389,
+      "text": "inefficient we have the shift and add"
+    },
+    {
+      "index": 137,
+      "start": 457.199,
+      "end": 460.629,
+      "duration": 3.43,
+      "text": "with a set of adders we repeatedly do it"
+    },
+    {
+      "index": 138,
+      "start": 460.639,
+      "end": 462.43,
+      "duration": 1.791,
+      "text": "or a shift an ad in which we'll have use"
+    },
+    {
+      "index": 139,
+      "start": 462.44,
+      "end": 464.95,
+      "duration": 2.51,
+      "text": "several adders working all at the same"
+    },
+    {
+      "index": 140,
+      "start": 464.96,
+      "end": 467.469,
+      "duration": 2.509,
+      "text": "time these are the three schemes within"
+    },
+    {
+      "index": 141,
+      "start": 467.479,
+      "end": 469.909,
+      "duration": 2.43,
+      "text": "each one we can speed up using many"
+    },
+    {
+      "index": 142,
+      "start": 469.919,
+      "end": 471.149,
+      "duration": 1.23,
+      "text": "techniques which we are not going to get"
+    },
+    {
+      "index": 143,
+      "start": 471.159,
+      "end": 473.95,
+      "duration": 2.791,
+      "text": "into in this course so what we'll do"
+    },
+    {
+      "index": 144,
+      "start": 473.96,
+      "end": 475.99,
+      "duration": 2.03,
+      "text": "today is to look at a circuit which will"
+    },
+    {
+      "index": 145,
+      "start": 476.0,
+      "end": 478.909,
+      "duration": 2.909,
+      "text": "do the shift and add all at once such an"
+    },
+    {
+      "index": 146,
+      "start": 478.919,
+      "end": 481.39,
+      "duration": 2.471,
+      "text": "ADD multiplier is called a array"
+    },
+    {
+      "index": 147,
+      "start": 481.4,
+      "end": 485.029,
+      "duration": 3.629,
+      "text": "multiplier or a parallel"
+    },
+    {
+      "index": 148,
+      "start": 486.99,
+      "end": 487.0,
+      "duration": 0.01,
+      "text": "multiplier why is it called an array"
+    },
+    {
+      "index": 149,
+      "start": 487.0,
+      "end": 491.149,
+      "duration": 4.149,
+      "text": "multiplier because it reads an array of"
+    },
+    {
+      "index": 150,
+      "start": 491.159,
+      "end": 495.23,
+      "duration": 4.071,
+      "text": "adds array is a lot of elements so we'll"
+    },
+    {
+      "index": 151,
+      "start": 495.24,
+      "end": 497.39,
+      "duration": 2.15,
+      "text": "see when you look at the circuit diagram"
+    },
+    {
+      "index": 152,
+      "start": 497.4,
+      "end": 499.11,
+      "duration": 1.71,
+      "text": "you will know why it is called an array"
+    },
+    {
+      "index": 153,
+      "start": 499.12,
+      "end": 503.629,
+      "duration": 4.509,
+      "text": "multiplier array"
+    },
+    {
+      "index": 154,
+      "start": 506.27,
+      "end": 506.28,
+      "duration": 0.01,
+      "text": "multiplier even ARR multiplier uses only"
+    },
+    {
+      "index": 155,
+      "start": 506.28,
+      "end": 508.43,
+      "duration": 2.15,
+      "text": "shift and AD"
+    },
+    {
+      "index": 156,
+      "start": 508.44,
+      "end": 523.67,
+      "duration": 15.23,
+      "text": "algorithm that means I have"
+    },
+    {
+      "index": 157,
+      "start": 527.509,
+      "end": 527.519,
+      "duration": 0.01,
+      "text": "to I have to have the"
+    },
+    {
+      "index": 158,
+      "start": 527.519,
+      "end": 530.389,
+      "duration": 2.87,
+      "text": "numbers put in the proper positions with"
+    },
+    {
+      "index": 159,
+      "start": 530.399,
+      "end": 534.23,
+      "duration": 3.831,
+      "text": "AER shifting in order to get the final"
+    },
+    {
+      "index": 160,
+      "start": 534.24,
+      "end": 536.19,
+      "duration": 1.95,
+      "text": "result which is correct let's take a"
+    },
+    {
+      "index": 161,
+      "start": 536.2,
+      "end": 539.19,
+      "duration": 2.99,
+      "text": "simple example of two 4bit numbers I let"
+    },
+    {
+      "index": 162,
+      "start": 539.2,
+      "end": 541.63,
+      "duration": 2.43,
+      "text": "us say I want to multiply two numbers A"
+    },
+    {
+      "index": 163,
+      "start": 541.64,
+      "end": 547.509,
+      "duration": 5.869,
+      "text": "and B each four bits A3 A2 A1 a0 is my"
+    },
+    {
+      "index": 164,
+      "start": 547.519,
+      "end": 548.47,
+      "duration": 0.951,
+      "text": "first"
+    },
+    {
+      "index": 165,
+      "start": 548.48,
+      "end": 554.509,
+      "duration": 6.029,
+      "text": "number B3 B2 B1 B 0 is my second"
+    },
+    {
+      "index": 166,
+      "start": 554.519,
+      "end": 559.87,
+      "duration": 5.351,
+      "text": "number I"
+    },
+    {
+      "index": 167,
+      "start": 563.069,
+      "end": 563.079,
+      "duration": 0.01,
+      "text": "multiply all A's and all B's are either"
+    },
+    {
+      "index": 168,
+      "start": 563.079,
+      "end": 565.11,
+      "duration": 2.031,
+      "text": "one or zero right these are binary"
+    },
+    {
+      "index": 169,
+      "start": 565.12,
+      "end": 567.949,
+      "duration": 2.829,
+      "text": "numbers so A's and B's can only take"
+    },
+    {
+      "index": 170,
+      "start": 567.959,
+      "end": 571.23,
+      "duration": 3.271,
+      "text": "values of 0 and one so first I have to"
+    },
+    {
+      "index": 171,
+      "start": 571.24,
+      "end": 574.15,
+      "duration": 2.91,
+      "text": "multiply in a traditional multiplier"
+    },
+    {
+      "index": 172,
+      "start": 574.16,
+      "end": 575.59,
+      "duration": 1.43,
+      "text": "paper and pencil multiplier retion"
+    },
+    {
+      "index": 173,
+      "start": 575.6,
+      "end": 578.11,
+      "duration": 2.51,
+      "text": "standard multiplication what do you do"
+    },
+    {
+      "index": 174,
+      "start": 578.12,
+      "end": 580.23,
+      "duration": 2.11,
+      "text": "you take the first digit of the multipli"
+    },
+    {
+      "index": 175,
+      "start": 580.24,
+      "end": 582.509,
+      "duration": 2.269,
+      "text": "multipli this is called multiplicand"
+    },
+    {
+      "index": 176,
+      "start": 582.519,
+      "end": 583.91,
+      "duration": 1.391,
+      "text": "This is called multiplier I think you"
+    },
+    {
+      "index": 177,
+      "start": 583.92,
+      "end": 596.23,
+      "duration": 12.31,
+      "text": "know that multipli multip"
+    },
+    {
+      "index": 178,
+      "start": 598.47,
+      "end": 598.48,
+      "duration": 0.01,
+      "text": "multiplier you take one digit in the"
+    },
+    {
+      "index": 179,
+      "start": 598.48,
+      "end": 600.67,
+      "duration": 2.19,
+      "text": "decimal system you take one digit of the"
+    },
+    {
+      "index": 180,
+      "start": 600.68,
+      "end": 603.43,
+      "duration": 2.75,
+      "text": "multiplier and multiply it with the"
+    },
+    {
+      "index": 181,
+      "start": 603.44,
+      "end": 605.55,
+      "duration": 2.11,
+      "text": "multiplic and write the result which is"
+    },
+    {
+      "index": 182,
+      "start": 605.56,
+      "end": 607.11,
+      "duration": 1.55,
+      "text": "why called a partial product because"
+    },
+    {
+      "index": 183,
+      "start": 607.12,
+      "end": 608.43,
+      "duration": 1.31,
+      "text": "it's not a complete product I will call"
+    },
+    {
+      "index": 184,
+      "start": 608.44,
+      "end": 610.15,
+      "duration": 1.71,
+      "text": "it partial product or intermediate"
+    },
+    {
+      "index": 185,
+      "start": 610.16,
+      "end": 613.47,
+      "duration": 3.31,
+      "text": "product then I take the second position"
+    },
+    {
+      "index": 186,
+      "start": 613.48,
+      "end": 616.75,
+      "duration": 3.27,
+      "text": "of the digit of the multiplier again"
+    },
+    {
+      "index": 187,
+      "start": 616.76,
+      "end": 619.829,
+      "duration": 3.069,
+      "text": "multiply this by the same number and"
+    },
+    {
+      "index": 188,
+      "start": 619.839,
+      "end": 622.91,
+      "duration": 3.071,
+      "text": "write the partial result but with a"
+    },
+    {
+      "index": 189,
+      "start": 622.92,
+      "end": 625.069,
+      "duration": 2.149,
+      "text": "shift keep on doing it till I have"
+    },
+    {
+      "index": 190,
+      "start": 625.079,
+      "end": 627.19,
+      "duration": 2.111,
+      "text": "exhausted all the bits all the digits of"
+    },
+    {
+      "index": 191,
+      "start": 627.2,
+      "end": 627.91,
+      "duration": 0.71,
+      "text": "the"
+    },
+    {
+      "index": 192,
+      "start": 627.92,
+      "end": 630.03,
+      "duration": 2.11,
+      "text": "multiplier and I have have this partial"
+    },
+    {
+      "index": 193,
+      "start": 630.04,
+      "end": 633.829,
+      "duration": 3.789,
+      "text": "products with proper shifting then add"
+    },
+    {
+      "index": 194,
+      "start": 633.839,
+      "end": 636.55,
+      "duration": 2.711,
+      "text": "column by column this is why this is how"
+    },
+    {
+      "index": 195,
+      "start": 636.56,
+      "end": 638.23,
+      "duration": 1.67,
+      "text": "we do it now we will do exactly the same"
+    },
+    {
+      "index": 196,
+      "start": 638.24,
+      "end": 642.069,
+      "duration": 3.829,
+      "text": "way here except this multiplications are"
+    },
+    {
+      "index": 197,
+      "start": 642.079,
+      "end": 644.79,
+      "duration": 2.711,
+      "text": "only one bit"
+    },
+    {
+      "index": 198,
+      "start": 644.8,
+      "end": 647.31,
+      "duration": 2.51,
+      "text": "multiplications now so if I multiply"
+    },
+    {
+      "index": 199,
+      "start": 647.32,
+      "end": 652.71,
+      "duration": 5.39,
+      "text": "this by B 0 this will be A3 B"
+    },
+    {
+      "index": 200,
+      "start": 652.72,
+      "end": 654.87,
+      "duration": 2.15,
+      "text": "0 A2 B"
+    },
+    {
+      "index": 201,
+      "start": 654.88,
+      "end": 660.19,
+      "duration": 5.31,
+      "text": "0 A1 B 0 a a0 b 0 that is the first"
+    },
+    {
+      "index": 202,
+      "start": 660.2,
+      "end": 661.99,
+      "duration": 1.79,
+      "text": "partial"
+    },
+    {
+      "index": 203,
+      "start": 662.0,
+      "end": 664.87,
+      "duration": 2.87,
+      "text": "product first partial product second"
+    },
+    {
+      "index": 204,
+      "start": 664.88,
+      "end": 666.069,
+      "duration": 1.189,
+      "text": "partial product will be obtained by"
+    },
+    {
+      "index": 205,
+      "start": 666.079,
+      "end": 668.829,
+      "duration": 2.75,
+      "text": "multiplying B1"
+    },
+    {
+      "index": 206,
+      "start": 668.839,
+      "end": 672.509,
+      "duration": 3.67,
+      "text": "by but uh multiplying a by again B1"
+    },
+    {
+      "index": 207,
+      "start": 672.519,
+      "end": 674.35,
+      "duration": 1.831,
+      "text": "which will"
+    },
+    {
+      "index": 208,
+      "start": 674.36,
+      "end": 677.069,
+      "duration": 2.709,
+      "text": "be A3"
+    },
+    {
+      "index": 209,
+      "start": 677.079,
+      "end": 679.23,
+      "duration": 2.151,
+      "text": "B1 A2"
+    },
+    {
+      "index": 210,
+      "start": 679.24,
+      "end": 684.629,
+      "duration": 5.389,
+      "text": "B1 A1 B1 a0 B1 same thing except that I"
+    },
+    {
+      "index": 211,
+      "start": 684.639,
+      "end": 686.11,
+      "duration": 1.471,
+      "text": "have to shift it correspond to this"
+    },
+    {
+      "index": 212,
+      "start": 686.12,
+      "end": 688.389,
+      "duration": 2.269,
+      "text": "position of second bit position of the"
+    },
+    {
+      "index": 213,
+      "start": 688.399,
+      "end": 691.91,
+      "duration": 3.511,
+      "text": "B1 and it shift the depos product when I"
+    },
+    {
+      "index": 214,
+      "start": 691.92,
+      "end": 693.43,
+      "duration": 1.51,
+      "text": "write it"
+    },
+    {
+      "index": 215,
+      "start": 693.44,
+      "end": 696.15,
+      "duration": 2.71,
+      "text": "down third is I'm going to multiply the"
+    },
+    {
+      "index": 216,
+      "start": 696.16,
+      "end": 699.75,
+      "duration": 3.59,
+      "text": "same A3 A2 A1 a0 by B2 I'll shift it"
+    },
+    {
+      "index": 217,
+      "start": 699.76,
+      "end": 701.629,
+      "duration": 1.869,
+      "text": "again"
+    },
+    {
+      "index": 218,
+      "start": 701.639,
+      "end": 711.71,
+      "duration": 10.071,
+      "text": "A3 B2 A2 B2 A1 B2 a0 B2 and"
+    },
+    {
+      "index": 219,
+      "start": 715.15,
+      "end": 715.16,
+      "duration": 0.01,
+      "text": "finally I'm sorry this should be"
+    },
+    {
+      "index": 220,
+      "start": 715.16,
+      "end": 718.23,
+      "duration": 3.07,
+      "text": "B3 A3"
+    },
+    {
+      "index": 221,
+      "start": 718.24,
+      "end": 720.87,
+      "duration": 2.63,
+      "text": "B3 a 2"
+    },
+    {
+      "index": 222,
+      "start": 720.88,
+      "end": 726.069,
+      "duration": 5.189,
+      "text": "B3 A1 B3 a0"
+    },
+    {
+      "index": 223,
+      "start": 728.67,
+      "end": 728.68,
+      "duration": 0.01,
+      "text": "B3 add them all"
+    },
+    {
+      "index": 224,
+      "start": 728.68,
+      "end": 733.069,
+      "duration": 4.389,
+      "text": "up so this will result in one"
+    },
+    {
+      "index": 225,
+      "start": 733.079,
+      "end": 735.629,
+      "duration": 2.55,
+      "text": "number and then I'll just this is the"
+    },
+    {
+      "index": 226,
+      "start": 735.639,
+      "end": 738.509,
+      "duration": 2.87,
+      "text": "same as a0 B"
+    },
+    {
+      "index": 227,
+      "start": 741.79,
+      "end": 741.8,
+      "duration": 0.01,
+      "text": "0 and then this will be"
+    },
+    {
+      "index": 228,
+      "start": 741.8,
+      "end": 745.71,
+      "duration": 3.91,
+      "text": "added I write the result here this also"
+    },
+    {
+      "index": 229,
+      "start": 745.72,
+      "end": 747.23,
+      "duration": 1.51,
+      "text": "can have a carry because this is one"
+    },
+    {
+      "index": 230,
+      "start": 747.24,
+      "end": 749.629,
+      "duration": 2.389,
+      "text": "this a bit this a bit a0 B 0 be one or"
+    },
+    {
+      "index": 231,
+      "start": 749.639,
+      "end": 753.949,
+      "duration": 4.31,
+      "text": "zero again each partial each product a0"
+    },
+    {
+      "index": 232,
+      "start": 753.959,
+      "end": 757.189,
+      "duration": 3.23,
+      "text": "b0 a a i"
+    },
+    {
+      "index": 233,
+      "start": 757.199,
+      "end": 760.99,
+      "duration": 3.791,
+      "text": "BJ is a bit Z or one so it can be us Z"
+    },
+    {
+      "index": 234,
+      "start": 761.0,
+      "end": 763.67,
+      "duration": 2.67,
+      "text": "or one if both are one there will be a"
+    },
+    {
+      "index": 235,
+      "start": 763.68,
+      "end": 766.43,
+      "duration": 2.75,
+      "text": "carry right so I need to put the result"
+    },
+    {
+      "index": 236,
+      "start": 766.44,
+      "end": 773.389,
+      "duration": 6.949,
+      "text": "and take the carry into"
+    },
+    {
+      "index": 237,
+      "start": 776.23,
+      "end": 776.24,
+      "duration": 0.01,
+      "text": "this add this"
+    },
+    {
+      "index": 238,
+      "start": 776.24,
+      "end": 780.43,
+      "duration": 4.19,
+      "text": "three then take the carry here"
+    },
+    {
+      "index": 239,
+      "start": 780.44,
+      "end": 783.71,
+      "duration": 3.27,
+      "text": "put the result here take the carry here"
+    },
+    {
+      "index": 240,
+      "start": 783.72,
+      "end": 785.99,
+      "duration": 2.27,
+      "text": "put the result here take the carry here"
+    },
+    {
+      "index": 241,
+      "start": 786.0,
+      "end": 788.03,
+      "duration": 2.03,
+      "text": "put the result here take the carry here"
+    },
+    {
+      "index": 242,
+      "start": 788.04,
+      "end": 790.269,
+      "duration": 2.229,
+      "text": "put the result here and I may get one"
+    },
+    {
+      "index": 243,
+      "start": 790.279,
+      "end": 791.71,
+      "duration": 1.431,
+      "text": "more"
+    },
+    {
+      "index": 244,
+      "start": 791.72,
+      "end": 795.069,
+      "duration": 3.349,
+      "text": "carry finally because this one"
+    },
+    {
+      "index": 245,
+      "start": 795.079,
+      "end": 798.67,
+      "duration": 3.591,
+      "text": "bit the carry of this will go into this"
+    },
+    {
+      "index": 246,
+      "start": 798.68,
+      "end": 800.509,
+      "duration": 1.829,
+      "text": "that can itself generate a carry so how"
+    },
+    {
+      "index": 247,
+      "start": 800.519,
+      "end": 803.55,
+      "duration": 3.031,
+      "text": "many bits will be there in the product 1"
+    },
+    {
+      "index": 248,
+      "start": 803.56,
+      "end": 807.35,
+      "duration": 3.79,
+      "text": "2 3 4 5 6 7 there can be an eighth bit"
+    },
+    {
+      "index": 249,
+      "start": 807.36,
+      "end": 810.59,
+      "duration": 3.23,
+      "text": "because there can be a carry here so we"
+    },
+    {
+      "index": 250,
+      "start": 810.6,
+      "end": 813.87,
+      "duration": 3.27,
+      "text": "have two 4bit numbers the result is can"
+    },
+    {
+      "index": 251,
+      "start": 813.88,
+      "end": 816.31,
+      "duration": 2.43,
+      "text": "be up to 8 Bits not necessarily 8 Bits"
+    },
+    {
+      "index": 252,
+      "start": 816.32,
+      "end": 818.269,
+      "duration": 1.949,
+      "text": "can be depending on the numbers"
+    },
+    {
+      "index": 253,
+      "start": 818.279,
+      "end": 819.629,
+      "duration": 1.35,
+      "text": "depending on the magnitud of numbers the"
+    },
+    {
+      "index": 254,
+      "start": 819.639,
+      "end": 821.829,
+      "duration": 2.19,
+      "text": "number will be having fewer bits can"
+    },
+    {
+      "index": 255,
+      "start": 821.839,
+      "end": 824.15,
+      "duration": 2.311,
+      "text": "have fewer bits but the maximum number"
+    },
+    {
+      "index": 256,
+      "start": 824.16,
+      "end": 825.79,
+      "duration": 1.63,
+      "text": "of bits you can have is eight bits so"
+    },
+    {
+      "index": 257,
+      "start": 825.8,
+      "end": 828.03,
+      "duration": 2.23,
+      "text": "we'll call this p 0 product bit one"
+    },
+    {
+      "index": 258,
+      "start": 828.04,
+      "end": 831.23,
+      "duration": 3.19,
+      "text": "product"
+    },
+    {
+      "index": 259,
+      "start": 837.31,
+      "end": 837.32,
+      "duration": 0.01,
+      "text": "bit P3 P4 P5 P6"
+    },
+    {
+      "index": 260,
+      "start": 837.32,
+      "end": 842.43,
+      "duration": 5.11,
+      "text": "p7 this is P2 P3 P4 P5 P6"
+    },
+    {
+      "index": 261,
+      "start": 842.44,
+      "end": 846.71,
+      "duration": 4.27,
+      "text": "p7 so 8 Bits p 0 to p7 a maximum of 8"
+    },
+    {
+      "index": 262,
+      "start": 846.72,
+      "end": 849.389,
+      "duration": 2.669,
+      "text": "Bits can be there first thing you should"
+    },
+    {
+      "index": 263,
+      "start": 849.399,
+      "end": 851.509,
+      "duration": 2.11,
+      "text": "know about multiplication is when you"
+    },
+    {
+      "index": 264,
+      "start": 851.519,
+      "end": 854.269,
+      "duration": 2.75,
+      "text": "add when you multiply two numbers the"
+    },
+    {
+      "index": 265,
+      "start": 854.279,
+      "end": 855.99,
+      "duration": 1.711,
+      "text": "total number of bits that are resulting"
+    },
+    {
+      "index": 266,
+      "start": 856.0,
+      "end": 859.43,
+      "duration": 3.43,
+      "text": "is the sum of the number of bits the two"
+    },
+    {
+      "index": 267,
+      "start": 859.44,
+      "end": 861.87,
+      "duration": 2.43,
+      "text": "operands the oper one oper is called"
+    },
+    {
+      "index": 268,
+      "start": 861.88,
+      "end": 863.55,
+      "duration": 1.67,
+      "text": "multiply the other operand is called"
+    },
+    {
+      "index": 269,
+      "start": 863.56,
+      "end": 865.59,
+      "duration": 2.03,
+      "text": "multip"
+    },
+    {
+      "index": 270,
+      "start": 865.6,
+      "end": 868.67,
+      "duration": 3.07,
+      "text": "multiplicand sum total of the number of"
+    },
+    {
+      "index": 271,
+      "start": 868.68,
+      "end": 871.59,
+      "duration": 2.91,
+      "text": "bits in these two numbers will be the"
+    },
+    {
+      "index": 272,
+      "start": 871.6,
+      "end": 872.91,
+      "duration": 1.31,
+      "text": "maximum number of bits you can have in"
+    },
+    {
+      "index": 273,
+      "start": 872.92,
+      "end": 874.87,
+      "duration": 1.95,
+      "text": "the product the case of addition we saw"
+    },
+    {
+      "index": 274,
+      "start": 874.88,
+      "end": 876.87,
+      "duration": 1.99,
+      "text": "that when you add two numbers of the"
+    },
+    {
+      "index": 275,
+      "start": 876.88,
+      "end": 878.91,
+      "duration": 2.03,
+      "text": "same number of bits the result can"
+    },
+    {
+      "index": 276,
+      "start": 878.92,
+      "end": 883.749,
+      "duration": 4.829,
+      "text": "exceed by one bit here it can it is a"
+    },
+    {
+      "index": 277,
+      "start": 883.759,
+      "end": 885.71,
+      "duration": 1.951,
+      "text": "sum of these"
+    },
+    {
+      "index": 278,
+      "start": 885.72,
+      "end": 888.15,
+      "duration": 2.43,
+      "text": "two now the question is multiplication"
+    },
+    {
+      "index": 279,
+      "start": 888.16,
+      "end": 889.59,
+      "duration": 1.43,
+      "text": "is very simple as I said I have"
+    },
+    {
+      "index": 280,
+      "start": 889.6,
+      "end": 893.829,
+      "duration": 4.229,
+      "text": "depending on I have to add A3 B 0 A2 b0"
+    },
+    {
+      "index": 281,
+      "start": 893.839,
+      "end": 898.269,
+      "duration": 4.43,
+      "text": "A1 B 0 a 0 B 0 with A3 B1 A2 B1 A1 B1 a0"
+    },
+    {
+      "index": 282,
+      "start": 898.279,
+      "end": 901.59,
+      "duration": 3.311,
+      "text": "b b 0 at the first step if I have a 4bit"
+    },
+    {
+      "index": 283,
+      "start": 901.6,
+      "end": 904.189,
+      "duration": 2.589,
+      "text": "adder with an appropriate"
+    },
+    {
+      "index": 284,
+      "start": 904.199,
+      "end": 907.43,
+      "duration": 3.231,
+      "text": "shifting of the bit positions I can"
+    },
+    {
+      "index": 285,
+      "start": 907.44,
+      "end": 911.03,
+      "duration": 3.59,
+      "text": "carry out this first partial product"
+    },
+    {
+      "index": 286,
+      "start": 911.04,
+      "end": 914.15,
+      "duration": 3.11,
+      "text": "summation then I can use the"
+    },
+    {
+      "index": 287,
+      "start": 914.16,
+      "end": 917.749,
+      "duration": 3.589,
+      "text": "same 4bit and shift the results"
+    },
+    {
+      "index": 288,
+      "start": 917.759,
+      "end": 920.11,
+      "duration": 2.351,
+      "text": "appropriately to get the sum of these"
+    },
+    {
+      "index": 289,
+      "start": 920.12,
+      "end": 922.99,
+      "duration": 2.87,
+      "text": "two whatever I got as the sum of this"
+    },
+    {
+      "index": 290,
+      "start": 923.0,
+      "end": 925.79,
+      "duration": 2.79,
+      "text": "can be added to this I can repeat it so"
+    },
+    {
+      "index": 291,
+      "start": 925.8,
+      "end": 927.35,
+      "duration": 1.55,
+      "text": "I can do repeated"
+    },
+    {
+      "index": 292,
+      "start": 927.36,
+      "end": 930.71,
+      "duration": 3.35,
+      "text": "additions using the same"
+    },
+    {
+      "index": 293,
+      "start": 930.72,
+      "end": 933.15,
+      "duration": 2.43,
+      "text": "Adder where I'll take one row of the"
+    },
+    {
+      "index": 294,
+      "start": 933.16,
+      "end": 934.309,
+      "duration": 1.149,
+      "text": "partial product and another row of"
+    },
+    {
+      "index": 295,
+      "start": 934.319,
+      "end": 935.509,
+      "duration": 1.19,
+      "text": "partial product first complete the"
+    },
+    {
+      "index": 296,
+      "start": 935.519,
+      "end": 937.949,
+      "duration": 2.43,
+      "text": "addition take the result feed it as the"
+    },
+    {
+      "index": 297,
+      "start": 937.959,
+      "end": 940.069,
+      "duration": 2.11,
+      "text": "input take the one more row of the"
+    },
+    {
+      "index": 298,
+      "start": 940.079,
+      "end": 943.55,
+      "duration": 3.471,
+      "text": "partial product add them get the result"
+    },
+    {
+      "index": 299,
+      "start": 943.56,
+      "end": 945.99,
+      "duration": 2.43,
+      "text": "put it as the input take the one more"
+    },
+    {
+      "index": 300,
+      "start": 946.0,
+      "end": 947.59,
+      "duration": 1.59,
+      "text": "one more row of the take one more row of"
+    },
+    {
+      "index": 301,
+      "start": 947.6,
+      "end": 949.91,
+      "duration": 2.31,
+      "text": "the partial product and complete the"
+    },
+    {
+      "index": 302,
+      "start": 949.92,
+      "end": 951.67,
+      "duration": 1.75,
+      "text": "addition this"
+    },
+    {
+      "index": 303,
+      "start": 951.68,
+      "end": 954.069,
+      "duration": 2.389,
+      "text": "is the algorithm both techniques are"
+    },
+    {
+      "index": 304,
+      "start": 954.079,
+      "end": 957.91,
+      "duration": 3.831,
+      "text": "shift and add shift and add with"
+    },
+    {
+      "index": 305,
+      "start": 957.92,
+      "end": 961.59,
+      "duration": 3.67,
+      "text": "one multip one Adder not a single bit"
+    },
+    {
+      "index": 306,
+      "start": 961.6,
+      "end": 964.23,
+      "duration": 2.63,
+      "text": "Adder there should be as many bits I"
+    },
+    {
+      "index": 307,
+      "start": 964.24,
+      "end": 966.71,
+      "duration": 2.47,
+      "text": "need to add four bits right so I need to"
+    },
+    {
+      "index": 308,
+      "start": 966.72,
+      "end": 970.269,
+      "duration": 3.549,
+      "text": "have a multiply Adder which is four bit"
+    },
+    {
+      "index": 309,
+      "start": 970.279,
+      "end": 972.79,
+      "duration": 2.511,
+      "text": "Adder on the other hand I can have at"
+    },
+    {
+      "index": 310,
+      "start": 972.8,
+      "end": 974.189,
+      "duration": 1.389,
+      "text": "the same time I can add these two"
+    },
+    {
+      "index": 311,
+      "start": 974.199,
+      "end": 975.949,
+      "duration": 1.75,
+      "text": "numbers the result of this can flow into"
+    },
+    {
+      "index": 312,
+      "start": 975.959,
+      "end": 978.55,
+      "duration": 2.591,
+      "text": "this result can can flow into this I can"
+    },
+    {
+      "index": 313,
+      "start": 978.56,
+      "end": 981.15,
+      "duration": 2.59,
+      "text": "have many adders so that I can complete"
+    },
+    {
+      "index": 314,
+      "start": 981.16,
+      "end": 985.11,
+      "duration": 3.95,
+      "text": "additions as fast as"
+    },
+    {
+      "index": 315,
+      "start": 987.71,
+      "end": 987.72,
+      "duration": 0.01,
+      "text": "possible this second version is called"
+    },
+    {
+      "index": 316,
+      "start": 987.72,
+      "end": 989.749,
+      "duration": 2.029,
+      "text": "the array multiply because I need an"
+    },
+    {
+      "index": 317,
+      "start": 989.759,
+      "end": 992.189,
+      "duration": 2.43,
+      "text": "array of adders rather than a single"
+    },
+    {
+      "index": 318,
+      "start": 992.199,
+      "end": 994.91,
+      "duration": 2.711,
+      "text": "Adder I need an array of"
+    },
+    {
+      "index": 319,
+      "start": 994.92,
+      "end": 997.629,
+      "duration": 2.709,
+      "text": "adders this is called array multiplier"
+    },
+    {
+      "index": 320,
+      "start": 997.639,
+      "end": 1000.03,
+      "duration": 2.391,
+      "text": "that is most widely used multiplier"
+    },
+    {
+      "index": 321,
+      "start": 1000.04,
+      "end": 1002.749,
+      "duration": 2.709,
+      "text": "today when the cost of these devices as"
+    },
+    {
+      "index": 322,
+      "start": 1002.759,
+      "end": 1005.629,
+      "duration": 2.87,
+      "text": "technology has improved earlier on we"
+    },
+    {
+      "index": 323,
+      "start": 1005.639,
+      "end": 1007.71,
+      "duration": 2.071,
+      "text": "used to do this shift and"
+    },
+    {
+      "index": 324,
+      "start": 1007.72,
+      "end": 1011.79,
+      "duration": 4.07,
+      "text": "add in fact it was so expensive they"
+    },
+    {
+      "index": 325,
+      "start": 1011.8,
+      "end": 1014.99,
+      "duration": 3.19,
+      "text": "used to take one single bit Adder do the"
+    },
+    {
+      "index": 326,
+      "start": 1015.0,
+      "end": 1017.67,
+      "duration": 2.67,
+      "text": "first shift first bit"
+    },
+    {
+      "index": 327,
+      "start": 1017.68,
+      "end": 1020.069,
+      "duration": 2.389,
+      "text": "addition and and then the second bit"
+    },
+    {
+      "index": 328,
+      "start": 1020.079,
+      "end": 1022.03,
+      "duration": 1.951,
+      "text": "Edition then this third bit Edition and"
+    },
+    {
+      "index": 329,
+      "start": 1022.04,
+      "end": 1024.829,
+      "duration": 2.789,
+      "text": "complete the one row go to the next"
+    },
+    {
+      "index": 330,
+      "start": 1024.839,
+      "end": 1027.63,
+      "duration": 2.791,
+      "text": "row that is called bit"
+    },
+    {
+      "index": 331,
+      "start": 1027.64,
+      "end": 1030.669,
+      "duration": 3.029,
+      "text": "serial bit serial addition is bit by bit"
+    },
+    {
+      "index": 332,
+      "start": 1030.679,
+      "end": 1033.63,
+      "duration": 2.951,
+      "text": "serial you will add then you go to this"
+    },
+    {
+      "index": 333,
+      "start": 1033.64,
+      "end": 1036.23,
+      "duration": 2.59,
+      "text": "second stage where I have a parallel M"
+    },
+    {
+      "index": 334,
+      "start": 1036.24,
+      "end": 1037.909,
+      "duration": 1.669,
+      "text": "parallel adder with four bits or six"
+    },
+    {
+      "index": 335,
+      "start": 1037.919,
+      "end": 1039.069,
+      "duration": 1.15,
+      "text": "bits or eight bits or whatever is the"
+    },
+    {
+      "index": 336,
+      "start": 1039.079,
+      "end": 1041.27,
+      "duration": 2.191,
+      "text": "number of bits I need to complete my"
+    },
+    {
+      "index": 337,
+      "start": 1041.28,
+      "end": 1043.11,
+      "duration": 1.83,
+      "text": "partial product addition of one row to"
+    },
+    {
+      "index": 338,
+      "start": 1043.12,
+      "end": 1047.47,
+      "duration": 4.35,
+      "text": "another row I'll take row by row so row"
+    },
+    {
+      "index": 339,
+      "start": 1047.48,
+      "end": 1051.07,
+      "duration": 3.59,
+      "text": "serial instead of bit serial I have row"
+    },
+    {
+      "index": 340,
+      "start": 1051.08,
+      "end": 1053.71,
+      "duration": 2.63,
+      "text": "serial shift and AD algorithm a shift"
+    },
+    {
+      "index": 341,
+      "start": 1053.72,
+      "end": 1056.15,
+      "duration": 2.43,
+      "text": "and AD Hardware but now I don't even"
+    },
+    {
+      "index": 342,
+      "start": 1056.16,
+      "end": 1057.669,
+      "duration": 1.509,
+      "text": "have to do that because technology has"
+    },
+    {
+      "index": 343,
+      "start": 1057.679,
+      "end": 1060.59,
+      "duration": 2.911,
+      "text": "become so"
+    },
+    {
+      "index": 344,
+      "start": 1060.6,
+      "end": 1063.59,
+      "duration": 2.99,
+      "text": "inexpensive cost of uh these things are"
+    },
+    {
+      "index": 345,
+      "start": 1063.6,
+      "end": 1065.99,
+      "duration": 2.39,
+      "text": "not at all concerned today the size is"
+    },
+    {
+      "index": 346,
+      "start": 1066.0,
+      "end": 1068.35,
+      "duration": 2.35,
+      "text": "not a concern power distrib not a"
+    },
+    {
+      "index": 347,
+      "start": 1068.36,
+      "end": 1070.789,
+      "duration": 2.429,
+      "text": "concern we are able to have large ICS"
+    },
+    {
+      "index": 348,
+      "start": 1070.799,
+      "end": 1073.07,
+      "duration": 2.271,
+      "text": "integrated circuits in which all of"
+    },
+    {
+      "index": 349,
+      "start": 1073.08,
+      "end": 1075.47,
+      "duration": 2.39,
+      "text": "these things are"
+    },
+    {
+      "index": 350,
+      "start": 1075.48,
+      "end": 1077.63,
+      "duration": 2.15,
+      "text": "packed so in that case why do you have"
+    },
+    {
+      "index": 351,
+      "start": 1077.64,
+      "end": 1079.35,
+      "duration": 1.71,
+      "text": "to do all this one by one and delay the"
+    },
+    {
+      "index": 352,
+      "start": 1079.36,
+      "end": 1081.43,
+      "duration": 2.07,
+      "text": "whole process if you have a it's"
+    },
+    {
+      "index": 353,
+      "start": 1081.44,
+      "end": 1083.59,
+      "duration": 2.15,
+      "text": "resources so question of resources if I"
+    },
+    {
+      "index": 354,
+      "start": 1083.6,
+      "end": 1085.669,
+      "duration": 2.069,
+      "text": "have enough resources to commit to my"
+    },
+    {
+      "index": 355,
+      "start": 1085.679,
+      "end": 1087.99,
+      "duration": 2.311,
+      "text": "project I can get it done as fast as"
+    },
+    {
+      "index": 356,
+      "start": 1088.0,
+      "end": 1091.029,
+      "duration": 3.029,
+      "text": "possible of course under certain"
+    },
+    {
+      "index": 357,
+      "start": 1091.039,
+      "end": 1092.99,
+      "duration": 1.951,
+      "text": "constraints assuming that all of them"
+    },
+    {
+      "index": 358,
+      "start": 1093.0,
+      "end": 1095.71,
+      "duration": 2.71,
+      "text": "can be done parall I cannot commit a lot"
+    },
+    {
+      "index": 359,
+      "start": 1095.72,
+      "end": 1099.909,
+      "duration": 4.189,
+      "text": "of resources and do a project fast"
+    },
+    {
+      "index": 360,
+      "start": 1099.919,
+      "end": 1103.43,
+      "duration": 3.511,
+      "text": "if my project implementation is a Serial"
+    },
+    {
+      "index": 361,
+      "start": 1103.44,
+      "end": 1105.47,
+      "duration": 2.03,
+      "text": "sequential First Step has to be"
+    },
+    {
+      "index": 362,
+      "start": 1105.48,
+      "end": 1106.83,
+      "duration": 1.35,
+      "text": "completed before Second Step can be"
+    },
+    {
+      "index": 363,
+      "start": 1106.84,
+      "end": 1109.35,
+      "duration": 2.51,
+      "text": "taken up if that is the requirement of"
+    },
+    {
+      "index": 364,
+      "start": 1109.36,
+      "end": 1111.27,
+      "duration": 1.91,
+      "text": "my project I cannot do it even though I"
+    },
+    {
+      "index": 365,
+      "start": 1111.28,
+      "end": 1113.87,
+      "duration": 2.59,
+      "text": "have lot of resources in this case we're"
+    },
+    {
+      "index": 366,
+      "start": 1113.88,
+      "end": 1115.51,
+      "duration": 1.63,
+      "text": "assuming that all these additions can be"
+    },
+    {
+      "index": 367,
+      "start": 1115.52,
+      "end": 1117.71,
+      "duration": 2.19,
+      "text": "carried at the same time if I have"
+    },
+    {
+      "index": 368,
+      "start": 1117.72,
+      "end": 1119.029,
+      "duration": 1.309,
+      "text": "enough number of"
+    },
+    {
+      "index": 369,
+      "start": 1119.039,
+      "end": 1121.39,
+      "duration": 2.351,
+      "text": "adders I can feed all these partial"
+    },
+    {
+      "index": 370,
+      "start": 1121.4,
+      "end": 1123.75,
+      "duration": 2.35,
+      "text": "products or partial this product terms"
+    },
+    {
+      "index": 371,
+      "start": 1123.76,
+      "end": 1125.07,
+      "duration": 1.31,
+      "text": "these are called Product terms each"
+    },
+    {
+      "index": 372,
+      "start": 1125.08,
+      "end": 1126.39,
+      "duration": 1.31,
+      "text": "individual term I will got a product"
+    },
+    {
+      "index": 373,
+      "start": 1126.4,
+      "end": 1130.43,
+      "duration": 4.03,
+      "text": "term a0 B 0 A1 B 0 A2 b0 A3 b0 each one"
+    },
+    {
+      "index": 374,
+      "start": 1130.44,
+      "end": 1132.51,
+      "duration": 2.07,
+      "text": "of them is a product term I'll Fe all"
+    },
+    {
+      "index": 375,
+      "start": 1132.52,
+      "end": 1133.99,
+      "duration": 1.47,
+      "text": "these product terms of the appropriate"
+    },
+    {
+      "index": 376,
+      "start": 1134.0,
+      "end": 1136.75,
+      "duration": 2.75,
+      "text": "position with appropriate shifting in my"
+    },
+    {
+      "index": 377,
+      "start": 1136.76,
+      "end": 1138.83,
+      "duration": 2.07,
+      "text": "ADD array is why it's called array"
+    },
+    {
+      "index": 378,
+      "start": 1138.84,
+      "end": 1141.549,
+      "duration": 2.709,
+      "text": "multiplier array of adders and get the"
+    },
+    {
+      "index": 379,
+      "start": 1141.559,
+      "end": 1144.149,
+      "duration": 2.59,
+      "text": "result as fast as possible such an add"
+    },
+    {
+      "index": 380,
+      "start": 1144.159,
+      "end": 1145.83,
+      "duration": 1.671,
+      "text": "is called an multiplier is called an"
+    },
+    {
+      "index": 381,
+      "start": 1145.84,
+      "end": 1147.51,
+      "duration": 1.67,
+      "text": "array"
+    },
+    {
+      "index": 382,
+      "start": 1147.52,
+      "end": 1149.909,
+      "duration": 2.389,
+      "text": "multiplier but how are you going to get"
+    },
+    {
+      "index": 383,
+      "start": 1149.919,
+      "end": 1152.71,
+      "duration": 2.791,
+      "text": "a z b0 and gate you know when you have"
+    },
+    {
+      "index": 384,
+      "start": 1152.72,
+      "end": 1155.51,
+      "duration": 2.79,
+      "text": "two numbers Z and one multiplied by"
+    },
+    {
+      "index": 385,
+      "start": 1155.52,
+      "end": 1157.11,
+      "duration": 1.59,
+      "text": "another number is also zero and one the"
+    },
+    {
+      "index": 386,
+      "start": 1157.12,
+      "end": 1159.149,
+      "duration": 2.029,
+      "text": "only case the result will be one is when"
+    },
+    {
+      "index": 387,
+      "start": 1159.159,
+      "end": 1162.07,
+      "duration": 2.911,
+      "text": "both are one all other cases the result"
+    },
+    {
+      "index": 388,
+      "start": 1162.08,
+      "end": 1164.47,
+      "duration": 2.39,
+      "text": "is a zero is it not the same as and"
+    },
+    {
+      "index": 389,
+      "start": 1164.48,
+      "end": 1170.47,
+      "duration": 5.99,
+      "text": "operation I have a and b a i and BJ"
+    },
+    {
+      "index": 390,
+      "start": 1170.48,
+      "end": 1175.789,
+      "duration": 5.309,
+      "text": "my individual"
+    },
+    {
+      "index": 391,
+      "start": 1178.07,
+      "end": 1178.08,
+      "duration": 0.01,
+      "text": "product"
+    },
+    {
+      "index": 392,
+      "start": 1178.08,
+      "end": 1180.27,
+      "duration": 2.19,
+      "text": "AI"
+    },
+    {
+      "index": 393,
+      "start": 1180.28,
+      "end": 1183.87,
+      "duration": 3.59,
+      "text": "BJ will give me a i"
+    },
+    {
+      "index": 394,
+      "start": 1183.88,
+      "end": 1186.83,
+      "duration": 2.95,
+      "text": "BJ if both are zero or one of them is"
+    },
+    {
+      "index": 395,
+      "start": 1186.84,
+      "end": 1188.39,
+      "duration": 1.55,
+      "text": "zero the output is zero if both are one"
+    },
+    {
+      "index": 396,
+      "start": 1188.4,
+      "end": 1192.35,
+      "duration": 3.95,
+      "text": "the output is one so each of"
+    },
+    {
+      "index": 397,
+      "start": 1192.36,
+      "end": 1194.63,
+      "duration": 2.27,
+      "text": "these product terms can be generated"
+    },
+    {
+      "index": 398,
+      "start": 1194.64,
+      "end": 1196.27,
+      "duration": 1.63,
+      "text": "using an and"
+    },
+    {
+      "index": 399,
+      "start": 1196.28,
+      "end": 1199.27,
+      "duration": 2.99,
+      "text": "gate so First Resource I need to for my"
+    },
+    {
+      "index": 400,
+      "start": 1199.28,
+      "end": 1204.789,
+      "duration": 5.509,
+      "text": "multiplier is as many and Gates as there"
+    },
+    {
+      "index": 401,
+      "start": 1215.99,
+      "end": 1216.0,
+      "duration": 0.01,
+      "text": "many I to generate a Ai and BJ for each"
+    },
+    {
+      "index": 402,
+      "start": 1216.0,
+      "end": 1220.71,
+      "duration": 4.71,
+      "text": "I IAL 0 to 3 J is equal 0 to 3 so 4 * 4"
+    },
+    {
+      "index": 403,
+      "start": 1220.72,
+      "end": 1223.149,
+      "duration": 2.429,
+      "text": "16 product terms you need to generate so"
+    },
+    {
+      "index": 404,
+      "start": 1223.159,
+      "end": 1225.99,
+      "duration": 2.831,
+      "text": "I need to have 16 and"
+    },
+    {
+      "index": 405,
+      "start": 1226.0,
+      "end": 1231.75,
+      "duration": 5.75,
+      "text": "Gates so my"
+    },
+    {
+      "index": 406,
+      "start": 1234.47,
+      "end": 1234.48,
+      "duration": 0.01,
+      "text": "assuming I have 16 and gates in which"
+    },
+    {
+      "index": 407,
+      "start": 1234.48,
+      "end": 1237.23,
+      "duration": 2.75,
+      "text": "I'll appropriately feed a0 A1 A2 A3 and"
+    },
+    {
+      "index": 408,
+      "start": 1237.24,
+      "end": 1240.11,
+      "duration": 2.87,
+      "text": "B 0 B1 B2 B3 proper"
+    },
+    {
+      "index": 409,
+      "start": 1240.12,
+      "end": 1243.63,
+      "duration": 3.51,
+      "text": "combinations I'll get a i b g where I"
+    },
+    {
+      "index": 410,
+      "start": 1243.64,
+      "end": 1245.95,
+      "duration": 2.31,
+      "text": "can vary from 0 to 3 and J can VAR from"
+    },
+    {
+      "index": 411,
+      "start": 1245.96,
+      "end": 1248.669,
+      "duration": 2.709,
+      "text": "0 to three so in other words I can go"
+    },
+    {
+      "index": 412,
+      "start": 1248.679,
+      "end": 1252.99,
+      "duration": 4.311,
+      "text": "have from a0 to a0 B 0 to A3 B3 all the"
+    },
+    {
+      "index": 413,
+      "start": 1253.0,
+      "end": 1256.19,
+      "duration": 3.19,
+      "text": "16 terms are available to me at one"
+    },
+    {
+      "index": 414,
+      "start": 1256.2,
+      "end": 1258.39,
+      "duration": 2.19,
+      "text": "stroke with that assumption I will go"
+    },
+    {
+      "index": 415,
+      "start": 1258.4,
+      "end": 1260.029,
+      "duration": 1.629,
+      "text": "and show you how to do the addition"
+    },
+    {
+      "index": 416,
+      "start": 1260.039,
+      "end": 1261.99,
+      "duration": 1.951,
+      "text": "process this is the circuit for which"
+    },
+    {
+      "index": 417,
+      "start": 1262.0,
+      "end": 1264.75,
+      "duration": 2.75,
+      "text": "you'll do this this is the Circuit of"
+    },
+    {
+      "index": 418,
+      "start": 1264.76,
+      "end": 1267.75,
+      "duration": 2.99,
+      "text": "the array multiplier I already assumed"
+    },
+    {
+      "index": 419,
+      "start": 1267.76,
+      "end": 1269.47,
+      "duration": 1.71,
+      "text": "all these product terms are available to"
+    },
+    {
+      "index": 420,
+      "start": 1269.48,
+      "end": 1272.23,
+      "duration": 2.75,
+      "text": "you using and Gates all in needs so if"
+    },
+    {
+      "index": 421,
+      "start": 1272.24,
+      "end": 1275.11,
+      "duration": 2.87,
+      "text": "you want to just show this in one one"
+    },
+    {
+      "index": 422,
+      "start": 1275.12,
+      "end": 1287.51,
+      "duration": 12.39,
+      "text": "case you can show"
+    },
+    {
+      "index": 423,
+      "start": 1293.07,
+      "end": 1293.08,
+      "duration": 0.01,
+      "text": "I didn't want to clutter this drawing"
+    },
+    {
+      "index": 424,
+      "start": 1293.08,
+      "end": 1294.669,
+      "duration": 1.589,
+      "text": "with all these and gates in each of"
+    },
+    {
+      "index": 425,
+      "start": 1294.679,
+      "end": 1296.95,
+      "duration": 2.271,
+      "text": "these so I just put an arrow with this"
+    },
+    {
+      "index": 426,
+      "start": 1296.96,
+      "end": 1298.549,
+      "duration": 1.589,
+      "text": "product term you have to assume that"
+    },
+    {
+      "index": 427,
+      "start": 1298.559,
+      "end": 1300.23,
+      "duration": 1.671,
+      "text": "each of this product term is coming from"
+    },
+    {
+      "index": 428,
+      "start": 1300.24,
+      "end": 1304.669,
+      "duration": 4.429,
+      "text": "a from an end gate like this so this end"
+    },
+    {
+      "index": 429,
+      "start": 1304.679,
+      "end": 1306.35,
+      "duration": 1.671,
+      "text": "gate will give you a0 B"
+    },
+    {
+      "index": 430,
+      "start": 1306.36,
+      "end": 1308.71,
+      "duration": 2.35,
+      "text": "0"
+    },
+    {
+      "index": 431,
+      "start": 1308.72,
+      "end": 1311.63,
+      "duration": 2.91,
+      "text": "and this a0 B"
+    },
+    {
+      "index": 432,
+      "start": 1311.64,
+      "end": 1315.23,
+      "duration": 3.59,
+      "text": "0 does not require any more additions"
+    },
+    {
+      "index": 433,
+      "start": 1315.24,
+      "end": 1317.11,
+      "duration": 1.87,
+      "text": "the last row the least significant"
+    },
+    {
+      "index": 434,
+      "start": 1317.12,
+      "end": 1319.59,
+      "duration": 2.47,
+      "text": "column the least significant column"
+    },
+    {
+      "index": 435,
+      "start": 1319.6,
+      "end": 1322.31,
+      "duration": 2.71,
+      "text": "this becomes the partial product P0 not"
+    },
+    {
+      "index": 436,
+      "start": 1322.32,
+      "end": 1325.19,
+      "duration": 2.87,
+      "text": "this partial product this the first bit"
+    },
+    {
+      "index": 437,
+      "start": 1325.2,
+      "end": 1327.99,
+      "duration": 2.79,
+      "text": "of the product term first bit of the"
+    },
+    {
+      "index": 438,
+      "start": 1328.0,
+      "end": 1330.549,
+      "duration": 2.549,
+      "text": "product term p 0 is nothing but the a0 B"
+    },
+    {
+      "index": 439,
+      "start": 1330.559,
+      "end": 1333.07,
+      "duration": 2.511,
+      "text": "0 so that is why I said a0 B 0 is"
+    },
+    {
+      "index": 440,
+      "start": 1333.08,
+      "end": 1337.63,
+      "duration": 4.55,
+      "text": "nothing but p 0 here we take the second"
+    },
+    {
+      "index": 441,
+      "start": 1337.64,
+      "end": 1342.63,
+      "duration": 4.99,
+      "text": "column I need to add A1 B 0 to a0 B 0 a0"
+    },
+    {
+      "index": 442,
+      "start": 1342.64,
+      "end": 1347.51,
+      "duration": 4.87,
+      "text": "B 0 and A1 b0 have to be"
+    },
+    {
+      "index": 443,
+      "start": 1349.71,
+      "end": 1349.72,
+      "duration": 0.01,
+      "text": "added"
+    },
+    {
+      "index": 444,
+      "start": 1349.72,
+      "end": 1355.63,
+      "duration": 5.91,
+      "text": "okay a0 B1 A1 B 0 and a0"
+    },
+    {
+      "index": 445,
+      "start": 1360.51,
+      "end": 1360.52,
+      "duration": 0.01,
+      "text": "B1 A1 B 0 a0 B1 to be added these two"
+    },
+    {
+      "index": 446,
+      "start": 1360.52,
+      "end": 1363.63,
+      "duration": 3.11,
+      "text": "product terms are available to"
+    },
+    {
+      "index": 447,
+      "start": 1363.64,
+      "end": 1367.63,
+      "duration": 3.99,
+      "text": "me I put it in adder and get the"
+    },
+    {
+      "index": 448,
+      "start": 1367.64,
+      "end": 1370.71,
+      "duration": 3.07,
+      "text": "result this add needs to be a half adder"
+    },
+    {
+      "index": 449,
+      "start": 1370.72,
+      "end": 1374.029,
+      "duration": 3.309,
+      "text": "because I have only two terms no carry"
+    },
+    {
+      "index": 450,
+      "start": 1374.039,
+      "end": 1376.47,
+      "duration": 2.431,
+      "text": "two inputs no carry so I need a half"
+    },
+    {
+      "index": 451,
+      "start": 1376.48,
+      "end": 1380.669,
+      "duration": 4.189,
+      "text": "adder the sum goes to one the carry is"
+    },
+    {
+      "index": 452,
+      "start": 1380.679,
+      "end": 1384.87,
+      "duration": 4.191,
+      "text": "proed on to the see the carry from"
+    },
+    {
+      "index": 453,
+      "start": 1384.88,
+      "end": 1386.87,
+      "duration": 1.99,
+      "text": "this this"
+    },
+    {
+      "index": 454,
+      "start": 1386.88,
+      "end": 1389.11,
+      "duration": 2.23,
+      "text": "column has to go to the next column"
+    },
+    {
+      "index": 455,
+      "start": 1389.12,
+      "end": 1391.95,
+      "duration": 2.83,
+      "text": "remember that when I add the partial"
+    },
+    {
+      "index": 456,
+      "start": 1391.96,
+      "end": 1393.75,
+      "duration": 1.79,
+      "text": "product of this"
+    },
+    {
+      "index": 457,
+      "start": 1393.76,
+      "end": 1397.029,
+      "duration": 3.269,
+      "text": "column to get the product"
+    },
+    {
+      "index": 458,
+      "start": 1397.039,
+      "end": 1399.43,
+      "duration": 2.391,
+      "text": "term correspond to this"
+    },
+    {
+      "index": 459,
+      "start": 1399.44,
+      "end": 1401.75,
+      "duration": 2.31,
+      "text": "column the carry from here should go"
+    },
+    {
+      "index": 460,
+      "start": 1401.76,
+      "end": 1405.43,
+      "duration": 3.67,
+      "text": "into the the next column so my carry has"
+    },
+    {
+      "index": 461,
+      "start": 1405.44,
+      "end": 1407.909,
+      "duration": 2.469,
+      "text": "to travel to the next bit position"
+    },
+    {
+      "index": 462,
+      "start": 1407.919,
+      "end": 1409.71,
+      "duration": 1.791,
+      "text": "horizontally"
+    },
+    {
+      "index": 463,
+      "start": 1409.72,
+      "end": 1411.029,
+      "duration": 1.309,
+      "text": "Carry has to travel to the next bit"
+    },
+    {
+      "index": 464,
+      "start": 1411.039,
+      "end": 1412.51,
+      "duration": 1.471,
+      "text": "question horizontally so this is the"
+    },
+    {
+      "index": 465,
+      "start": 1412.52,
+      "end": 1413.71,
+      "duration": 1.19,
+      "text": "carry of this"
+    },
+    {
+      "index": 466,
+      "start": 1413.72,
+      "end": 1416.549,
+      "duration": 2.829,
+      "text": "Adder this is the half add I put with h"
+    },
+    {
+      "index": 467,
+      "start": 1416.559,
+      "end": 1419.669,
+      "duration": 3.11,
+      "text": "symbol H half"
+    },
+    {
+      "index": 468,
+      "start": 1419.679,
+      "end": 1427.669,
+      "duration": 7.99,
+      "text": "add and this is"
+    },
+    {
+      "index": 469,
+      "start": 1434.87,
+      "end": 1434.88,
+      "duration": 0.01,
+      "text": "column I will have to First add A2 B 0"
+    },
+    {
+      "index": 470,
+      "start": 1434.88,
+      "end": 1437.11,
+      "duration": 2.23,
+      "text": "to A1 B2 A1"
+    },
+    {
+      "index": 471,
+      "start": 1437.12,
+      "end": 1440.95,
+      "duration": 3.83,
+      "text": "B1 along along with the carry from the"
+    },
+    {
+      "index": 472,
+      "start": 1440.96,
+      "end": 1442.95,
+      "duration": 1.99,
+      "text": "previous"
+    },
+    {
+      "index": 473,
+      "start": 1442.96,
+      "end": 1445.51,
+      "duration": 2.55,
+      "text": "column and then to that sum I should add"
+    },
+    {
+      "index": 474,
+      "start": 1445.52,
+      "end": 1447.63,
+      "duration": 2.11,
+      "text": "a0"
+    },
+    {
+      "index": 475,
+      "start": 1447.64,
+      "end": 1451.59,
+      "duration": 3.95,
+      "text": "B1 take it as a P2 term the product term"
+    },
+    {
+      "index": 476,
+      "start": 1451.6,
+      "end": 1454.909,
+      "duration": 3.309,
+      "text": "bit number P2 P2 bit of the product"
+    },
+    {
+      "index": 477,
+      "start": 1454.919,
+      "end": 1457.269,
+      "duration": 2.35,
+      "text": "total product and if there's any carry"
+    },
+    {
+      "index": 478,
+      "start": 1457.279,
+      "end": 1458.63,
+      "duration": 1.351,
+      "text": "resulting from that I need to go to the"
+    },
+    {
+      "index": 479,
+      "start": 1458.64,
+      "end": 1459.87,
+      "duration": 1.23,
+      "text": "next stage so there may be a carry"
+    },
+    {
+      "index": 480,
+      "start": 1459.88,
+      "end": 1461.83,
+      "duration": 1.95,
+      "text": "resulting from here there may carry"
+    },
+    {
+      "index": 481,
+      "start": 1461.84,
+      "end": 1464.51,
+      "duration": 2.67,
+      "text": "resulting from here so doing two"
+    },
+    {
+      "index": 482,
+      "start": 1464.52,
+      "end": 1466.23,
+      "duration": 1.71,
+      "text": "additions Two Carries can generate each"
+    },
+    {
+      "index": 483,
+      "start": 1466.24,
+      "end": 1468.95,
+      "duration": 2.71,
+      "text": "of these carries have to go to the next"
+    },
+    {
+      "index": 484,
+      "start": 1468.96,
+      "end": 1471.95,
+      "duration": 2.99,
+      "text": "column the carry is always one weight"
+    },
+    {
+      "index": 485,
+      "start": 1471.96,
+      "end": 1477.23,
+      "duration": 5.27,
+      "text": "higher bit position wise one Higher"
+    },
+    {
+      "index": 486,
+      "start": 1477.24,
+      "end": 1480.07,
+      "duration": 2.83,
+      "text": "hierarchy so the carry from here go to"
+    },
+    {
+      "index": 487,
+      "start": 1480.08,
+      "end": 1482.669,
+      "duration": 2.589,
+      "text": "here carry from this has to go into this"
+    },
+    {
+      "index": 488,
+      "start": 1482.679,
+      "end": 1486.87,
+      "duration": 4.191,
+      "text": "so that is why I'm having here A1 B1 A2"
+    },
+    {
+      "index": 489,
+      "start": 1486.88,
+      "end": 1488.47,
+      "duration": 1.59,
+      "text": "B"
+    },
+    {
+      "index": 490,
+      "start": 1488.48,
+      "end": 1493.51,
+      "duration": 5.03,
+      "text": "0 adding to the carry of the"
+    },
+    {
+      "index": 491,
+      "start": 1496.35,
+      "end": 1496.36,
+      "duration": 0.01,
+      "text": "previous the sum goes into"
+    },
+    {
+      "index": 492,
+      "start": 1496.36,
+      "end": 1499.07,
+      "duration": 2.71,
+      "text": "this to add the comp complete the"
+    },
+    {
+      "index": 493,
+      "start": 1499.08,
+      "end": 1501.549,
+      "duration": 2.469,
+      "text": "partial complete the product on P2 I"
+    },
+    {
+      "index": 494,
+      "start": 1501.559,
+      "end": 1503.75,
+      "duration": 2.191,
+      "text": "need to add a0 B2"
+    },
+    {
+      "index": 495,
+      "start": 1503.76,
+      "end": 1505.87,
+      "duration": 2.11,
+      "text": "further but the carry has to go to the"
+    },
+    {
+      "index": 496,
+      "start": 1505.88,
+      "end": 1509.029,
+      "duration": 3.149,
+      "text": "next bit position so this is my carry"
+    },
+    {
+      "index": 497,
+      "start": 1509.039,
+      "end": 1510.35,
+      "duration": 1.311,
+      "text": "this is my"
+    },
+    {
+      "index": 498,
+      "start": 1510.36,
+      "end": 1513.909,
+      "duration": 3.549,
+      "text": "sum and with this sum I add a0 B2 to get"
+    },
+    {
+      "index": 499,
+      "start": 1513.919,
+      "end": 1516.549,
+      "duration": 2.63,
+      "text": "the sum which is my P2 and this carry"
+    },
+    {
+      "index": 500,
+      "start": 1516.559,
+      "end": 1518.149,
+      "duration": 1.59,
+      "text": "into this so the carries have to go into"
+    },
+    {
+      "index": 501,
+      "start": 1518.159,
+      "end": 1520.63,
+      "duration": 2.471,
+      "text": "the next positions some have to go some"
+    },
+    {
+      "index": 502,
+      "start": 1520.64,
+      "end": 1523.47,
+      "duration": 2.83,
+      "text": "has to travel vertically carries have to"
+    },
+    {
+      "index": 503,
+      "start": 1523.48,
+      "end": 1527.31,
+      "duration": 3.83,
+      "text": "travel"
+    },
+    {
+      "index": 504,
+      "start": 1528.95,
+      "end": 1528.96,
+      "duration": 0.01,
+      "text": "horizontally"
+    },
+    {
+      "index": 505,
+      "start": 1528.96,
+      "end": 1531.47,
+      "duration": 2.51,
+      "text": "do you understand"
+    },
+    {
+      "index": 506,
+      "start": 1531.48,
+      "end": 1534.269,
+      "duration": 2.789,
+      "text": "this that is all now I don't have to"
+    },
+    {
+      "index": 507,
+      "start": 1534.279,
+      "end": 1536.19,
+      "duration": 1.911,
+      "text": "keep on explaining all these"
+    },
+    {
+      "index": 508,
+      "start": 1536.2,
+      "end": 1538.83,
+      "duration": 2.63,
+      "text": "terms you"
+    },
+    {
+      "index": 509,
+      "start": 1538.84,
+      "end": 1543.07,
+      "duration": 4.23,
+      "text": "take each row each column take two terms"
+    },
+    {
+      "index": 510,
+      "start": 1543.08,
+      "end": 1545.269,
+      "duration": 2.189,
+      "text": "at a time if there is been a carry from"
+    },
+    {
+      "index": 511,
+      "start": 1545.279,
+      "end": 1546.669,
+      "duration": 1.39,
+      "text": "the previous"
+    },
+    {
+      "index": 512,
+      "start": 1546.679,
+      "end": 1550.07,
+      "duration": 3.391,
+      "text": "position put it on the top of it add it"
+    },
+    {
+      "index": 513,
+      "start": 1550.08,
+      "end": 1552.669,
+      "duration": 2.589,
+      "text": "get a sum if that is the last addition"
+    },
+    {
+      "index": 514,
+      "start": 1552.679,
+      "end": 1553.669,
+      "duration": 0.99,
+      "text": "take it as"
+    },
+    {
+      "index": 515,
+      "start": 1553.679,
+      "end": 1556.63,
+      "duration": 2.951,
+      "text": "the particular bit of the product if it"
+    },
+    {
+      "index": 516,
+      "start": 1556.64,
+      "end": 1558.71,
+      "duration": 2.07,
+      "text": "is not the last addition go to the next"
+    },
+    {
+      "index": 517,
+      "start": 1558.72,
+      "end": 1562.31,
+      "duration": 3.59,
+      "text": "term in the same column keep on adding"
+    },
+    {
+      "index": 518,
+      "start": 1562.32,
+      "end": 1564.83,
+      "duration": 2.51,
+      "text": "some some some in all those columns will"
+    },
+    {
+      "index": 519,
+      "start": 1564.84,
+      "end": 1567.35,
+      "duration": 2.51,
+      "text": "added one after the other and any carry"
+    },
+    {
+      "index": 520,
+      "start": 1567.36,
+      "end": 1569.19,
+      "duration": 1.83,
+      "text": "generated has to be pushed into the next"
+    },
+    {
+      "index": 521,
+      "start": 1569.2,
+      "end": 1570.51,
+      "duration": 1.31,
+      "text": "bit"
+    },
+    {
+      "index": 522,
+      "start": 1570.52,
+      "end": 1575.75,
+      "duration": 5.23,
+      "text": "position whatever the"
+    },
+    {
+      "index": 523,
+      "start": 1580.35,
+      "end": 1580.36,
+      "duration": 0.01,
+      "text": "stage so a0 B1 A2 B 0 added to this"
+    },
+    {
+      "index": 524,
+      "start": 1580.36,
+      "end": 1583.31,
+      "duration": 2.95,
+      "text": "previous carry gets a sum and this carry"
+    },
+    {
+      "index": 525,
+      "start": 1583.32,
+      "end": 1586.71,
+      "duration": 3.39,
+      "text": "to this sum I a0 B2 to get the product"
+    },
+    {
+      "index": 526,
+      "start": 1586.72,
+      "end": 1589.51,
+      "duration": 2.79,
+      "text": "bit P2"
+    },
+    {
+      "index": 527,
+      "start": 1589.52,
+      "end": 1591.389,
+      "duration": 1.869,
+      "text": "this carry goes into this I'm having A2"
+    },
+    {
+      "index": 528,
+      "start": 1591.399,
+      "end": 1594.63,
+      "duration": 3.231,
+      "text": "B1 A3 B 0 into this"
+    },
+    {
+      "index": 529,
+      "start": 1594.64,
+      "end": 1597.63,
+      "duration": 2.99,
+      "text": "carry carry also Tak account provides"
+    },
+    {
+      "index": 530,
+      "start": 1597.64,
+      "end": 1599.19,
+      "duration": 1.55,
+      "text": "another carry which has to go to the"
+    },
+    {
+      "index": 531,
+      "start": 1599.2,
+      "end": 1600.75,
+      "duration": 1.55,
+      "text": "next bit"
+    },
+    {
+      "index": 532,
+      "start": 1600.76,
+      "end": 1604.789,
+      "duration": 4.029,
+      "text": "position A1"
+    },
+    {
+      "index": 533,
+      "start": 1612.549,
+      "end": 1612.559,
+      "duration": 0.01,
+      "text": "sum this will give"
+    },
+    {
+      "index": 534,
+      "start": 1612.559,
+      "end": 1615.07,
+      "duration": 2.511,
+      "text": "me along with this"
+    },
+    {
+      "index": 535,
+      "start": 1615.08,
+      "end": 1617.31,
+      "duration": 2.23,
+      "text": "carry make sure that never have more"
+    },
+    {
+      "index": 536,
+      "start": 1617.32,
+      "end": 1618.71,
+      "duration": 1.39,
+      "text": "than three inputs they add because you"
+    },
+    {
+      "index": 537,
+      "start": 1618.72,
+      "end": 1620.11,
+      "duration": 1.39,
+      "text": "can have two inputs it's called half"
+    },
+    {
+      "index": 538,
+      "start": 1620.12,
+      "end": 1623.51,
+      "duration": 3.39,
+      "text": "adder three input it becomes a full"
+    },
+    {
+      "index": 539,
+      "start": 1623.52,
+      "end": 1627.669,
+      "duration": 4.149,
+      "text": "adder you cannot have more than three so"
+    },
+    {
+      "index": 540,
+      "start": 1627.679,
+      "end": 1629.75,
+      "duration": 2.071,
+      "text": "this is a half"
+    },
+    {
+      "index": 541,
+      "start": 1629.76,
+      "end": 1632.71,
+      "duration": 2.95,
+      "text": "adder because I have the sum from here"
+    },
+    {
+      "index": 542,
+      "start": 1632.72,
+      "end": 1635.83,
+      "duration": 3.11,
+      "text": "and this new term sum from here new term"
+    },
+    {
+      "index": 543,
+      "start": 1635.84,
+      "end": 1637.43,
+      "duration": 1.59,
+      "text": "this is a half"
+    },
+    {
+      "index": 544,
+      "start": 1637.44,
+      "end": 1640.789,
+      "duration": 3.349,
+      "text": "adder this is a half"
+    },
+    {
+      "index": 545,
+      "start": 1640.799,
+      "end": 1644.269,
+      "duration": 3.47,
+      "text": "add all these are half adders this has"
+    },
+    {
+      "index": 546,
+      "start": 1644.279,
+      "end": 1645.99,
+      "duration": 1.711,
+      "text": "be a full adder because I need a carry"
+    },
+    {
+      "index": 547,
+      "start": 1646.0,
+      "end": 1649.43,
+      "duration": 3.43,
+      "text": "in these two terms carry out and sum"
+    },
+    {
+      "index": 548,
+      "start": 1649.44,
+      "end": 1651.95,
+      "duration": 2.51,
+      "text": "full add will have a carry in two bits"
+    },
+    {
+      "index": 549,
+      "start": 1651.96,
+      "end": 1655.59,
+      "duration": 3.63,
+      "text": "as inputs carry out sum as the output so"
+    },
+    {
+      "index": 550,
+      "start": 1655.6,
+      "end": 1660.11,
+      "duration": 4.51,
+      "text": "this full adder so full"
+    },
+    {
+      "index": 551,
+      "start": 1677.269,
+      "end": 1677.279,
+      "duration": 0.01,
+      "text": "ladder so carry from here is pushed into"
+    },
+    {
+      "index": 552,
+      "start": 1677.279,
+      "end": 1679.71,
+      "duration": 2.431,
+      "text": "this next column"
+    },
+    {
+      "index": 553,
+      "start": 1679.72,
+      "end": 1684.59,
+      "duration": 4.87,
+      "text": "A3 B1 is the first value in this column"
+    },
+    {
+      "index": 554,
+      "start": 1684.6,
+      "end": 1686.87,
+      "duration": 2.27,
+      "text": "A3"
+    },
+    {
+      "index": 555,
+      "start": 1686.88,
+      "end": 1689.31,
+      "duration": 2.43,
+      "text": "B1 you draw it this way it's convenient"
+    },
+    {
+      "index": 556,
+      "start": 1689.32,
+      "end": 1692.23,
+      "duration": 2.91,
+      "text": "I could have always pushed this full add"
+    },
+    {
+      "index": 557,
+      "start": 1692.24,
+      "end": 1694.029,
+      "duration": 1.789,
+      "text": "here because this carry is coming a new"
+    },
+    {
+      "index": 558,
+      "start": 1694.039,
+      "end": 1696.43,
+      "duration": 2.391,
+      "text": "term but then if you don't keep that"
+    },
+    {
+      "index": 559,
+      "start": 1696.44,
+      "end": 1698.19,
+      "duration": 1.75,
+      "text": "symmetry of the"
+    },
+    {
+      "index": 560,
+      "start": 1698.2,
+      "end": 1700.149,
+      "duration": 1.949,
+      "text": "drawing it is very difficult to"
+    },
+    {
+      "index": 561,
+      "start": 1700.159,
+      "end": 1701.83,
+      "duration": 1.671,
+      "text": "understand what is happening so it's"
+    },
+    {
+      "index": 562,
+      "start": 1701.84,
+      "end": 1706.789,
+      "duration": 4.949,
+      "text": "better to map you drawing the hardware"
+    },
+    {
+      "index": 563,
+      "start": 1706.799,
+      "end": 1708.669,
+      "duration": 1.87,
+      "text": "the circuit"
+    },
+    {
+      "index": 564,
+      "start": 1708.679,
+      "end": 1709.549,
+      "duration": 0.87,
+      "text": "or the"
+    },
+    {
+      "index": 565,
+      "start": 1709.559,
+      "end": 1711.669,
+      "duration": 2.11,
+      "text": "schematic the exactly same way as the"
+    },
+    {
+      "index": 566,
+      "start": 1711.679,
+      "end": 1713.11,
+      "duration": 1.431,
+      "text": "bits appear in"
+    },
+    {
+      "index": 567,
+      "start": 1713.12,
+      "end": 1715.669,
+      "duration": 2.549,
+      "text": "your multiplication so this"
+    },
+    {
+      "index": 568,
+      "start": 1715.679,
+      "end": 1717.59,
+      "duration": 1.911,
+      "text": "multiplication can be taken as a"
+    },
+    {
+      "index": 569,
+      "start": 1717.6,
+      "end": 1720.549,
+      "duration": 2.949,
+      "text": "reference for drawing"
+    },
+    {
+      "index": 570,
+      "start": 1720.559,
+      "end": 1722.509,
+      "duration": 1.95,
+      "text": "this that is why otherwise I could have"
+    },
+    {
+      "index": 571,
+      "start": 1722.519,
+      "end": 1724.19,
+      "duration": 1.671,
+      "text": "pushed it here it is not going to harm"
+    },
+    {
+      "index": 572,
+      "start": 1724.2,
+      "end": 1726.31,
+      "duration": 2.11,
+      "text": "me because the carry anyway will be"
+    },
+    {
+      "index": 573,
+      "start": 1726.32,
+      "end": 1727.509,
+      "duration": 1.189,
+      "text": "there the new ter will be there and then"
+    },
+    {
+      "index": 574,
+      "start": 1727.519,
+      "end": 1730.83,
+      "duration": 3.311,
+      "text": "I can push it done it becom sort of"
+    },
+    {
+      "index": 575,
+      "start": 1730.84,
+      "end": 1734.43,
+      "duration": 3.59,
+      "text": "confusing after some time and it it is"
+    },
+    {
+      "index": 576,
+      "start": 1734.44,
+      "end": 1736.63,
+      "duration": 2.19,
+      "text": "as symmetric as something else this is"
+    },
+    {
+      "index": 577,
+      "start": 1736.64,
+      "end": 1739.909,
+      "duration": 3.269,
+      "text": "is also better to look look at this way"
+    },
+    {
+      "index": 578,
+      "start": 1739.919,
+      "end": 1740.99,
+      "duration": 1.071,
+      "text": "you know when it's"
+    },
+    {
+      "index": 579,
+      "start": 1741.0,
+      "end": 1744.269,
+      "duration": 3.269,
+      "text": "symmetrical so this goes here this carry"
+    },
+    {
+      "index": 580,
+      "start": 1744.279,
+      "end": 1746.95,
+      "duration": 2.671,
+      "text": "goes here so this is a full adder it"
+    },
+    {
+      "index": 581,
+      "start": 1746.96,
+      "end": 1749.83,
+      "duration": 2.87,
+      "text": "push to the next stage so this addition"
+    },
+    {
+      "index": 582,
+      "start": 1749.84,
+      "end": 1753.07,
+      "duration": 3.23,
+      "text": "process the carry will go into"
+    },
+    {
+      "index": 583,
+      "start": 1753.08,
+      "end": 1756.95,
+      "duration": 3.87,
+      "text": "this A3 B2 will be added to this carry"
+    },
+    {
+      "index": 584,
+      "start": 1756.96,
+      "end": 1758.11,
+      "duration": 1.15,
+      "text": "and this"
+    },
+    {
+      "index": 585,
+      "start": 1758.12,
+      "end": 1760.789,
+      "duration": 2.669,
+      "text": "carry and then this will continue and"
+    },
+    {
+      "index": 586,
+      "start": 1760.799,
+      "end": 1762.669,
+      "duration": 1.87,
+      "text": "then the finally this will be"
+    },
+    {
+      "index": 587,
+      "start": 1762.679,
+      "end": 1767.31,
+      "duration": 4.631,
+      "text": "the the last adding addition of these"
+    },
+    {
+      "index": 588,
+      "start": 1767.32,
+      "end": 1768.99,
+      "duration": 1.67,
+      "text": "two terms"
+    },
+    {
+      "index": 589,
+      "start": 1769.0,
+      "end": 1771.43,
+      "duration": 2.43,
+      "text": "that will go into this so this will be"
+    },
+    {
+      "index": 590,
+      "start": 1771.44,
+      "end": 1775.19,
+      "duration": 3.75,
+      "text": "the last Adder where A3 B3 will be put"
+    },
+    {
+      "index": 591,
+      "start": 1775.2,
+      "end": 1777.269,
+      "duration": 2.069,
+      "text": "along with the carry from the previous"
+    },
+    {
+      "index": 592,
+      "start": 1777.279,
+      "end": 1780.63,
+      "duration": 3.351,
+      "text": "position and this may generate a carry"
+    },
+    {
+      "index": 593,
+      "start": 1780.64,
+      "end": 1782.389,
+      "duration": 1.749,
+      "text": "because there's a bit here a bit here"
+    },
+    {
+      "index": 594,
+      "start": 1782.399,
+      "end": 1784.909,
+      "duration": 2.51,
+      "text": "and a bit here a full adder so there is"
+    },
+    {
+      "index": 595,
+      "start": 1784.919,
+      "end": 1786.549,
+      "duration": 1.63,
+      "text": "there may be a carry here so you have to"
+    },
+    {
+      "index": 596,
+      "start": 1786.559,
+      "end": 1788.87,
+      "duration": 2.311,
+      "text": "put an extra carry so this is the sum of"
+    },
+    {
+      "index": 597,
+      "start": 1788.88,
+      "end": 1790.35,
+      "duration": 1.47,
+      "text": "the last full adder and carry of the"
+    },
+    {
+      "index": 598,
+      "start": 1790.36,
+      "end": 1797.029,
+      "duration": 6.669,
+      "text": "last full"
+    },
+    {
+      "index": 599,
+      "start": 1798.99,
+      "end": 1799.0,
+      "duration": 0.01,
+      "text": "adder"
+    },
+    {
+      "index": 600,
+      "start": 1799.0,
+      "end": 1805.509,
+      "duration": 6.509,
+      "text": "so in this notation is H is half"
+    },
+    {
+      "index": 601,
+      "start": 1814.389,
+      "end": 1814.399,
+      "duration": 0.01,
+      "text": "adder s is"
+    },
+    {
+      "index": 602,
+      "start": 1814.399,
+      "end": 1820.99,
+      "duration": 6.591,
+      "text": "sum C is"
+    },
+    {
+      "index": 603,
+      "start": 1823.35,
+      "end": 1823.36,
+      "duration": 0.01,
+      "text": "car this is this multipli is called"
+    },
+    {
+      "index": 604,
+      "start": 1823.36,
+      "end": 1825.389,
+      "duration": 2.029,
+      "text": "array multi this is the most elementary"
+    },
+    {
+      "index": 605,
+      "start": 1825.399,
+      "end": 1827.59,
+      "duration": 2.191,
+      "text": "form of array multiplier you can make"
+    },
+    {
+      "index": 606,
+      "start": 1827.6,
+      "end": 1830.59,
+      "duration": 2.99,
+      "text": "change in this the speeding up is"
+    },
+    {
+      "index": 607,
+      "start": 1830.6,
+      "end": 1832.63,
+      "duration": 2.03,
+      "text": "possible also we are not talking about"
+    },
+    {
+      "index": 608,
+      "start": 1832.64,
+      "end": 1834.43,
+      "duration": 1.79,
+      "text": "sign the"
+    },
+    {
+      "index": 609,
+      "start": 1834.44,
+      "end": 1836.83,
+      "duration": 2.39,
+      "text": "numbers if the numbers are should the"
+    },
+    {
+      "index": 610,
+      "start": 1836.84,
+      "end": 1838.909,
+      "duration": 2.069,
+      "text": "numbers be"
+    },
+    {
+      "index": 611,
+      "start": 1838.919,
+      "end": 1841.63,
+      "duration": 2.711,
+      "text": "all uh unsigned numbers or sign numbers"
+    },
+    {
+      "index": 612,
+      "start": 1841.64,
+      "end": 1843.71,
+      "duration": 2.07,
+      "text": "if sign numbers are the represented two"
+    },
+    {
+      "index": 613,
+      "start": 1843.72,
+      "end": 1846.07,
+      "duration": 2.35,
+      "text": "complement how is it going to handle"
+    },
+    {
+      "index": 614,
+      "start": 1846.08,
+      "end": 1848.83,
+      "duration": 2.75,
+      "text": "because when you multiply two numbers"
+    },
+    {
+      "index": 615,
+      "start": 1848.84,
+      "end": 1850.43,
+      "duration": 1.59,
+      "text": "the product the sum of the product"
+    },
+    {
+      "index": 616,
+      "start": 1850.44,
+      "end": 1854.269,
+      "duration": 3.829,
+      "text": "depends on the signs of the individual"
+    },
+    {
+      "index": 617,
+      "start": 1854.279,
+      "end": 1857.269,
+      "duration": 2.99,
+      "text": "numbers right if one of the numbers is"
+    },
+    {
+      "index": 618,
+      "start": 1857.279,
+      "end": 1860.35,
+      "duration": 3.071,
+      "text": "negative the product is negative if both"
+    },
+    {
+      "index": 619,
+      "start": 1860.36,
+      "end": 1861.629,
+      "duration": 1.269,
+      "text": "the numbers are positive or both the"
+    },
+    {
+      "index": 620,
+      "start": 1861.639,
+      "end": 1866.83,
+      "duration": 5.191,
+      "text": "numbers are negative sum is product is"
+    },
+    {
+      "index": 621,
+      "start": 1866.84,
+      "end": 1869.629,
+      "duration": 2.789,
+      "text": "positive is it not product sign of the"
+    },
+    {
+      "index": 622,
+      "start": 1869.639,
+      "end": 1872.35,
+      "duration": 2.711,
+      "text": "product is positive if both numbers have"
+    },
+    {
+      "index": 623,
+      "start": 1872.36,
+      "end": 1874.87,
+      "duration": 2.51,
+      "text": "same sign if the numbers have different"
+    },
+    {
+      "index": 624,
+      "start": 1874.88,
+      "end": 1877.509,
+      "duration": 2.629,
+      "text": "signs up then the product will be"
+    },
+    {
+      "index": 625,
+      "start": 1877.519,
+      "end": 1879.31,
+      "duration": 1.791,
+      "text": "negative so all these things will be"
+    },
+    {
+      "index": 626,
+      "start": 1879.32,
+      "end": 1881.83,
+      "duration": 2.51,
+      "text": "taken into account so I am not getting"
+    },
+    {
+      "index": 627,
+      "start": 1881.84,
+      "end": 1884.83,
+      "duration": 2.99,
+      "text": "it all those details so this can be"
+    },
+    {
+      "index": 628,
+      "start": 1884.84,
+      "end": 1887.509,
+      "duration": 2.669,
+      "text": "improved further for speeding up can"
+    },
+    {
+      "index": 629,
+      "start": 1887.519,
+      "end": 1890.269,
+      "duration": 2.75,
+      "text": "improved for handling sign numbers and"
+    },
+    {
+      "index": 630,
+      "start": 1890.279,
+      "end": 1892.95,
+      "duration": 2.671,
+      "text": "unsign numbers for sign number this"
+    },
+    {
+      "index": 631,
+      "start": 1892.96,
+      "end": 1895.99,
+      "duration": 3.03,
+      "text": "unsign number for sign numbers and I can"
+    },
+    {
+      "index": 632,
+      "start": 1896.0,
+      "end": 1901.75,
+      "duration": 5.75,
+      "text": "do it for 8 Bits 16 bits whatever you"
+    },
+    {
+      "index": 633,
+      "start": 1901.76,
+      "end": 1906.11,
+      "duration": 4.35,
+      "text": "want so in general now I have used I"
+    },
+    {
+      "index": 634,
+      "start": 1906.12,
+      "end": 1908.629,
+      "duration": 2.509,
+      "text": "have used 4x4 multiplier this is called"
+    },
+    {
+      "index": 635,
+      "start": 1908.639,
+      "end": 1916.83,
+      "duration": 8.191,
+      "text": "4x4 array multiplier this is the"
+    },
+    {
+      "index": 636,
+      "start": 1918.59,
+      "end": 1918.6,
+      "duration": 0.01,
+      "text": "name"
+    },
+    {
+      "index": 637,
+      "start": 1918.6,
+      "end": 1920.629,
+      "duration": 2.029,
+      "text": "what are the what is the hardware"
+    },
+    {
+      "index": 638,
+      "start": 1920.639,
+      "end": 1925.83,
+      "duration": 5.191,
+      "text": "required 16 and"
+    },
+    {
+      "index": 639,
+      "start": 1935.83,
+      "end": 1935.84,
+      "duration": 0.01,
+      "text": "totally four 4 * 3 12 adders out of"
+    },
+    {
+      "index": 640,
+      "start": 1935.84,
+      "end": 1938.75,
+      "duration": 2.91,
+      "text": "which four are half adders eight are"
+    },
+    {
+      "index": 641,
+      "start": 1938.76,
+      "end": 1939.509,
+      "duration": 0.749,
+      "text": "full"
+    },
+    {
+      "index": 642,
+      "start": 1939.519,
+      "end": 1942.389,
+      "duration": 2.87,
+      "text": "adders four half"
+    },
+    {
+      "index": 643,
+      "start": 1942.399,
+      "end": 1944.87,
+      "duration": 2.471,
+      "text": "adders eight full"
+    },
+    {
+      "index": 644,
+      "start": 1944.88,
+      "end": 1957.43,
+      "duration": 12.55,
+      "text": "adders total of 12 adders"
+    },
+    {
+      "index": 645,
+      "start": 1959.389,
+      "end": 1959.399,
+      "duration": 0.01,
+      "text": "so you want to generalize this if you"
+    },
+    {
+      "index": 646,
+      "start": 1959.399,
+      "end": 1961.029,
+      "duration": 1.63,
+      "text": "want to call it m by"
+    },
+    {
+      "index": 647,
+      "start": 1961.039,
+      "end": 1963.43,
+      "duration": 2.391,
+      "text": "n m is the number of bits in the"
+    },
+    {
+      "index": 648,
+      "start": 1963.44,
+      "end": 1965.19,
+      "duration": 1.75,
+      "text": "multiplic and N is the number of bits in"
+    },
+    {
+      "index": 649,
+      "start": 1965.2,
+      "end": 1967.19,
+      "duration": 1.99,
+      "text": "the multiplier first number is called"
+    },
+    {
+      "index": 650,
+      "start": 1967.2,
+      "end": 1968.389,
+      "duration": 1.189,
+      "text": "multiplic second number is called"
+    },
+    {
+      "index": 651,
+      "start": 1968.399,
+      "end": 1973.11,
+      "duration": 4.711,
+      "text": "multiplier in this case b is n n is four"
+    },
+    {
+      "index": 652,
+      "start": 1973.12,
+      "end": 1976.95,
+      "duration": 3.83,
+      "text": "for b n is a number of bits for B it is"
+    },
+    {
+      "index": 653,
+      "start": 1976.96,
+      "end": 1979.31,
+      "duration": 2.35,
+      "text": "four a is also is four so here in this"
+    },
+    {
+      "index": 654,
+      "start": 1979.32,
+      "end": 1984.11,
+      "duration": 4.79,
+      "text": "case m is four n is"
+    },
+    {
+      "index": 655,
+      "start": 1987.509,
+      "end": 1987.519,
+      "duration": 0.01,
+      "text": "four but what I mean by m is number of"
+    },
+    {
+      "index": 656,
+      "start": 1987.519,
+      "end": 1991.35,
+      "duration": 3.831,
+      "text": "bits of"
+    },
+    {
+      "index": 657,
+      "start": 1996.269,
+      "end": 1996.279,
+      "duration": 0.01,
+      "text": "a number of bits of B is called"
+    },
+    {
+      "index": 658,
+      "start": 1996.279,
+      "end": 1998.75,
+      "duration": 2.471,
+      "text": "n it's only a notation you can do it the"
+    },
+    {
+      "index": 659,
+      "start": 1998.76,
+      "end": 2002.87,
+      "duration": 4.11,
+      "text": "other way also or you can use it PQ XY"
+    },
+    {
+      "index": 660,
+      "start": 2002.88,
+      "end": 2006.75,
+      "duration": 3.87,
+      "text": "I'm just to keep the notation"
+    },
+    {
+      "index": 661,
+      "start": 2006.76,
+      "end": 2009.19,
+      "duration": 2.43,
+      "text": "straight so if you want to generalize"
+    },
+    {
+      "index": 662,
+      "start": 2009.2,
+      "end": 2016.789,
+      "duration": 7.589,
+      "text": "that there m * n and"
+    },
+    {
+      "index": 663,
+      "start": 2019.549,
+      "end": 2019.559,
+      "duration": 0.01,
+      "text": "GES there a half in each"
+    },
+    {
+      "index": 664,
+      "start": 2019.559,
+      "end": 2022.07,
+      "duration": 2.511,
+      "text": "row one half in each"
+    },
+    {
+      "index": 665,
+      "start": 2022.08,
+      "end": 2024.43,
+      "duration": 2.35,
+      "text": "row the each row corresponds to the"
+    },
+    {
+      "index": 666,
+      "start": 2024.44,
+      "end": 2026.629,
+      "duration": 2.189,
+      "text": "multiplier bit know each multiplier bit"
+    },
+    {
+      "index": 667,
+      "start": 2026.639,
+      "end": 2027.909,
+      "duration": 1.27,
+      "text": "gives to"
+    },
+    {
+      "index": 668,
+      "start": 2027.919,
+      "end": 2030.47,
+      "duration": 2.551,
+      "text": "product each multiplier bit gives you"
+    },
+    {
+      "index": 669,
+      "start": 2030.48,
+      "end": 2032.95,
+      "duration": 2.47,
+      "text": "gives rise to a partial product row so"
+    },
+    {
+      "index": 670,
+      "start": 2032.96,
+      "end": 2034.909,
+      "duration": 1.949,
+      "text": "half V sum of the half V same as the"
+    },
+    {
+      "index": 671,
+      "start": 2034.919,
+      "end": 2040.149,
+      "duration": 5.23,
+      "text": "number of bits in the m"
+    },
+    {
+      "index": 672,
+      "start": 2042.71,
+      "end": 2042.72,
+      "duration": 0.01,
+      "text": "player right"
+    },
+    {
+      "index": 673,
+      "start": 2042.72,
+      "end": 2053.27,
+      "duration": 10.55,
+      "text": "so n is the number of a"
+    },
+    {
+      "index": 674,
+      "start": 2060.79,
+      "end": 2060.8,
+      "duration": 0.01,
+      "text": "adders n rows but each row since we are"
+    },
+    {
+      "index": 675,
+      "start": 2060.8,
+      "end": 2064.75,
+      "duration": 3.95,
+      "text": "going to have only one less add because"
+    },
+    {
+      "index": 676,
+      "start": 2064.76,
+      "end": 2066.71,
+      "duration": 1.95,
+      "text": "of this first you have taken this into"
+    },
+    {
+      "index": 677,
+      "start": 2066.72,
+      "end": 2069.909,
+      "duration": 3.189,
+      "text": "account one bit one less adder in each"
+    },
+    {
+      "index": 678,
+      "start": 2069.919,
+      "end": 2073.03,
+      "duration": 3.111,
+      "text": "row one less than the number of bits so"
+    },
+    {
+      "index": 679,
+      "start": 2073.04,
+      "end": 2075.149,
+      "duration": 2.109,
+      "text": "the n Bits there are only n minus one"
+    },
+    {
+      "index": 680,
+      "start": 2075.159,
+      "end": 2078.47,
+      "duration": 3.311,
+      "text": "adders in each row but there are M rows"
+    },
+    {
+      "index": 681,
+      "start": 2078.48,
+      "end": 2081.99,
+      "duration": 3.51,
+      "text": "so total number of add"
+    },
+    {
+      "index": 682,
+      "start": 2102.27,
+      "end": 2102.28,
+      "duration": 0.01,
+      "text": "so out of"
+    },
+    {
+      "index": 683,
+      "start": 2102.28,
+      "end": 2107.31,
+      "duration": 5.03,
+      "text": "each oh number of I'm sorry n is number"
+    },
+    {
+      "index": 684,
+      "start": 2107.32,
+      "end": 2112.349,
+      "duration": 5.029,
+      "text": "of half m is number of I I"
+    },
+    {
+      "index": 685,
+      "start": 2115.43,
+      "end": 2115.44,
+      "duration": 0.01,
+      "text": "use that is okay as long"
+    },
+    {
+      "index": 686,
+      "start": 2115.44,
+      "end": 2122.829,
+      "duration": 7.389,
+      "text": "as that means it is M minus"
+    },
+    {
+      "index": 687,
+      "start": 2133.109,
+      "end": 2133.119,
+      "duration": 0.01,
+      "text": "so the remaining is full add that means"
+    },
+    {
+      "index": 688,
+      "start": 2133.119,
+      "end": 2137.27,
+      "duration": 4.151,
+      "text": "total adders is MN -"
+    },
+    {
+      "index": 689,
+      "start": 2137.28,
+      "end": 2144.069,
+      "duration": 6.789,
+      "text": "n minus n so full address is MN"
+    },
+    {
+      "index": 690,
+      "start": 2144.079,
+      "end": 2147.109,
+      "duration": 3.03,
+      "text": "minus 2"
+    },
+    {
+      "index": 691,
+      "start": 2147.119,
+      "end": 2149.589,
+      "duration": 2.47,
+      "text": "N"
+    },
+    {
+      "index": 692,
+      "start": 2149.599,
+      "end": 2151.87,
+      "duration": 2.271,
+      "text": "or M"
+    },
+    {
+      "index": 693,
+      "start": 2151.88,
+      "end": 2156.63,
+      "duration": 4.75,
+      "text": "into n into nus"
+    },
+    {
+      "index": 694,
+      "start": 2166.47,
+      "end": 2166.48,
+      "duration": 0.01,
+      "text": "of isn't that number of full address is"
+    },
+    {
+      "index": 695,
+      "start": 2166.48,
+      "end": 2167.99,
+      "duration": 1.51,
+      "text": "total number of add minus number of half"
+    },
+    {
+      "index": 696,
+      "start": 2168.0,
+      "end": 2170.15,
+      "duration": 2.15,
+      "text": "address why there's a problem"
+    },
+    {
+      "index": 697,
+      "start": 2170.16,
+      "end": 2173.79,
+      "duration": 3.63,
+      "text": "here this is MN minus"
+    },
+    {
+      "index": 698,
+      "start": 2173.8,
+      "end": 2177.87,
+      "duration": 4.07,
+      "text": "2N plus n become mnus"
+    },
+    {
+      "index": 699,
+      "start": 2177.88,
+      "end": 2181.19,
+      "duration": 3.31,
+      "text": "n just generalize so you have an idea so"
+    },
+    {
+      "index": 700,
+      "start": 2181.2,
+      "end": 2183.39,
+      "duration": 2.19,
+      "text": "I can do an 8 by 8 multiplier I can even"
+    },
+    {
+      "index": 701,
+      "start": 2183.4,
+      "end": 2188.67,
+      "duration": 5.27,
+      "text": "make a m and n need not be same"
+    },
+    {
+      "index": 702,
+      "start": 2188.68,
+      "end": 2190.47,
+      "duration": 1.79,
+      "text": "is it not that is why I given you as M"
+    },
+    {
+      "index": 703,
+      "start": 2190.48,
+      "end": 2192.39,
+      "duration": 1.91,
+      "text": "and N otherwise I would put n and n squ"
+    },
+    {
+      "index": 704,
+      "start": 2192.4,
+      "end": 2194.63,
+      "duration": 2.23,
+      "text": "and all that I would given so I can have"
+    },
+    {
+      "index": 705,
+      "start": 2194.64,
+      "end": 2195.67,
+      "duration": 1.03,
+      "text": "different number of bits for the"
+    },
+    {
+      "index": 706,
+      "start": 2195.68,
+      "end": 2197.71,
+      "duration": 2.03,
+      "text": "multiplier and for the"
+    },
+    {
+      "index": 707,
+      "start": 2197.72,
+      "end": 2200.91,
+      "duration": 3.19,
+      "text": "multiplicand so if you know this type of"
+    },
+    {
+      "index": 708,
+      "start": 2200.92,
+      "end": 2203.63,
+      "duration": 2.71,
+      "text": "idea of the products number"
+    },
+    {
+      "index": 709,
+      "start": 2203.64,
+      "end": 2208.51,
+      "duration": 4.87,
+      "text": "of number of gates and number of hard"
+    },
+    {
+      "index": 710,
+      "start": 2208.52,
+      "end": 2210.75,
+      "duration": 2.23,
+      "text": "adders half adders full adders have an"
+    },
+    {
+      "index": 711,
+      "start": 2210.76,
+      "end": 2213.23,
+      "duration": 2.47,
+      "text": "estimate of the hardware the beauty is"
+    },
+    {
+      "index": 712,
+      "start": 2213.24,
+      "end": 2214.589,
+      "duration": 1.349,
+      "text": "the whole thing is available as a single"
+    },
+    {
+      "index": 713,
+      "start": 2214.599,
+      "end": 2217.349,
+      "duration": 2.75,
+      "text": "chip not even a 4x4 even bigger than"
+    },
+    {
+      "index": 714,
+      "start": 2217.359,
+      "end": 2218.99,
+      "duration": 1.631,
+      "text": "that"
+    },
+    {
+      "index": 715,
+      "start": 2219.0,
+      "end": 2221.47,
+      "duration": 2.47,
+      "text": "and I as I said this speeding up extra"
+    },
+    {
+      "index": 716,
+      "start": 2221.48,
+      "end": 2223.829,
+      "duration": 2.349,
+      "text": "circuit for speeding"
+    },
+    {
+      "index": 717,
+      "start": 2223.839,
+      "end": 2226.43,
+      "duration": 2.591,
+      "text": "up as I said speeding up always comes at"
+    },
+    {
+      "index": 718,
+      "start": 2226.44,
+      "end": 2230.39,
+      "duration": 3.95,
+      "text": "the cost of something else remember"
+    },
+    {
+      "index": 719,
+      "start": 2230.4,
+      "end": 2234.47,
+      "duration": 4.07,
+      "text": "that and also signing signed numbers two"
+    },
+    {
+      "index": 720,
+      "start": 2234.48,
+      "end": 2236.109,
+      "duration": 1.629,
+      "text": "two comp"
+    },
+    {
+      "index": 721,
+      "start": 2236.119,
+      "end": 2239.27,
+      "duration": 3.151,
+      "text": "numbers this unsign multiplication sign"
+    },
+    {
+      "index": 722,
+      "start": 2239.28,
+      "end": 2242.43,
+      "duration": 3.15,
+      "text": "multiplier with speed up larger number"
+    },
+    {
+      "index": 723,
+      "start": 2242.44,
+      "end": 2244.91,
+      "duration": 2.47,
+      "text": "of bits these things are available today"
+    },
+    {
+      "index": 724,
+      "start": 2244.92,
+      "end": 2246.309,
+      "duration": 1.389,
+      "text": "fortunately is"
+    },
+    {
+      "index": 725,
+      "start": 2246.319,
+      "end": 2249.19,
+      "duration": 2.871,
+      "text": "Hardware I I is so you can just plug it"
+    },
+    {
+      "index": 726,
+      "start": 2249.2,
+      "end": 2252.19,
+      "duration": 2.99,
+      "text": "in and use it just take it plug it into"
+    },
+    {
+      "index": 727,
+      "start": 2252.2,
+      "end": 2253.95,
+      "duration": 1.75,
+      "text": "your circuit and use the circuit for"
+    },
+    {
+      "index": 728,
+      "start": 2253.96,
+      "end": 2255.95,
+      "duration": 1.99,
+      "text": "multiplication"
+    },
+    {
+      "index": 729,
+      "start": 2255.96,
+      "end": 2259.27,
+      "duration": 3.31,
+      "text": "purpose now we are talking about this as"
+    },
+    {
+      "index": 730,
+      "start": 2259.28,
+      "end": 2262.91,
+      "duration": 3.63,
+      "text": "a Improvement as an improvement"
+    },
+    {
+      "index": 731,
+      "start": 2262.92,
+      "end": 2265.309,
+      "duration": 2.389,
+      "text": "from bit serial forget about it bit"
+    },
+    {
+      "index": 732,
+      "start": 2265.319,
+      "end": 2267.71,
+      "duration": 2.391,
+      "text": "serial is old and"
+    },
+    {
+      "index": 733,
+      "start": 2267.72,
+      "end": 2270.79,
+      "duration": 3.07,
+      "text": "days that is you take only one full one"
+    },
+    {
+      "index": 734,
+      "start": 2270.8,
+      "end": 2275.23,
+      "duration": 4.43,
+      "text": "bit full adder give a z b0 whatever a0"
+    },
+    {
+      "index": 735,
+      "start": 2275.24,
+      "end": 2277.03,
+      "duration": 1.79,
+      "text": "b0 for example you want to take one"
+    },
+    {
+      "index": 736,
+      "start": 2277.04,
+      "end": 2278.589,
+      "duration": 1.549,
+      "text": "addition"
+    },
+    {
+      "index": 737,
+      "start": 2278.599,
+      "end": 2281.71,
+      "duration": 3.111,
+      "text": "let us take this addition A1 B 0 a0 B1"
+    },
+    {
+      "index": 738,
+      "start": 2281.72,
+      "end": 2285.47,
+      "duration": 3.75,
+      "text": "you put a 0 B 0 A1 B 0 a0 B1 into the"
+    },
+    {
+      "index": 739,
+      "start": 2285.48,
+      "end": 2290.03,
+      "duration": 4.55,
+      "text": "full L get the thing Su and the carry"
+    },
+    {
+      "index": 740,
+      "start": 2290.04,
+      "end": 2292.069,
+      "duration": 2.029,
+      "text": "you should have some way of storing the"
+    },
+    {
+      "index": 741,
+      "start": 2292.079,
+      "end": 2295.55,
+      "duration": 3.471,
+      "text": "carry till the new bits are put in the"
+    },
+    {
+      "index": 742,
+      "start": 2295.56,
+      "end": 2296.99,
+      "duration": 1.43,
+      "text": "same full because I have only one full"
+    },
+    {
+      "index": 743,
+      "start": 2297.0,
+      "end": 2300.109,
+      "duration": 3.109,
+      "text": "add remember to this full add I let to"
+    },
+    {
+      "index": 744,
+      "start": 2300.119,
+      "end": 2303.67,
+      "duration": 3.551,
+      "text": "get these two numbers I should have a"
+    },
+    {
+      "index": 745,
+      "start": 2303.68,
+      "end": 2306.87,
+      "duration": 3.19,
+      "text": "way of keeping this carry till the time"
+    },
+    {
+      "index": 746,
+      "start": 2306.88,
+      "end": 2309.99,
+      "duration": 3.11,
+      "text": "adding it the right time and also"
+    },
+    {
+      "index": 747,
+      "start": 2310.0,
+      "end": 2312.95,
+      "duration": 2.95,
+      "text": "keeping the partial products in storage"
+    },
+    {
+      "index": 748,
+      "start": 2312.96,
+      "end": 2316.27,
+      "duration": 3.31,
+      "text": "spaces and all that it was necessary"
+    },
+    {
+      "index": 749,
+      "start": 2316.28,
+      "end": 2319.39,
+      "duration": 3.11,
+      "text": "when adders were expensive but adders"
+    },
+    {
+      "index": 750,
+      "start": 2319.4,
+      "end": 2320.91,
+      "duration": 1.51,
+      "text": "became very cheap when the integrated"
+    },
+    {
+      "index": 751,
+      "start": 2320.92,
+      "end": 2323.71,
+      "duration": 2.79,
+      "text": "circuit technology"
+    },
+    {
+      "index": 752,
+      "start": 2323.72,
+      "end": 2329.55,
+      "duration": 5.83,
+      "text": "became so um easy to fabricate and so"
+    },
+    {
+      "index": 753,
+      "start": 2329.56,
+      "end": 2331.75,
+      "duration": 2.19,
+      "text": "inexpensive so nobody talks of bit"
+    },
+    {
+      "index": 754,
+      "start": 2331.76,
+      "end": 2334.309,
+      "duration": 2.549,
+      "text": "serial multiplier"
+    },
+    {
+      "index": 755,
+      "start": 2334.319,
+      "end": 2337.63,
+      "duration": 3.311,
+      "text": "today but the the debate was until"
+    },
+    {
+      "index": 756,
+      "start": 2337.64,
+      "end": 2340.43,
+      "duration": 2.79,
+      "text": "recently until recently the debate was"
+    },
+    {
+      "index": 757,
+      "start": 2340.44,
+      "end": 2342.79,
+      "duration": 2.35,
+      "text": "between partial product one partial"
+    },
+    {
+      "index": 758,
+      "start": 2342.8,
+      "end": 2345.51,
+      "duration": 2.71,
+      "text": "product at a time I have one multibit"
+    },
+    {
+      "index": 759,
+      "start": 2345.52,
+      "end": 2347.91,
+      "duration": 2.39,
+      "text": "Adder not a single bit Adder as in the"
+    },
+    {
+      "index": 760,
+      "start": 2347.92,
+      "end": 2350.87,
+      "duration": 2.95,
+      "text": "case of bit serial Adder one multi-bit"
+    },
+    {
+      "index": 761,
+      "start": 2350.88,
+      "end": 2353.87,
+      "duration": 2.99,
+      "text": "Adder which will be repeatedly used for"
+    },
+    {
+      "index": 762,
+      "start": 2353.88,
+      "end": 2355.55,
+      "duration": 1.67,
+      "text": "first adding this to this and then"
+    },
+    {
+      "index": 763,
+      "start": 2355.56,
+      "end": 2357.23,
+      "duration": 1.67,
+      "text": "adding this to this and adding this to"
+    },
+    {
+      "index": 764,
+      "start": 2357.24,
+      "end": 2359.349,
+      "duration": 2.109,
+      "text": "this and adding this to this that is"
+    },
+    {
+      "index": 765,
+      "start": 2359.359,
+      "end": 2361.109,
+      "duration": 1.75,
+      "text": "called as I"
+    },
+    {
+      "index": 766,
+      "start": 2361.119,
+      "end": 2363.43,
+      "duration": 2.311,
+      "text": "said"
+    },
+    {
+      "index": 767,
+      "start": 2363.44,
+      "end": 2368.67,
+      "duration": 5.23,
+      "text": "um serial par what"
+    },
+    {
+      "index": 768,
+      "start": 2368.68,
+      "end": 2372.109,
+      "duration": 3.429,
+      "text": "row serial right row serial row serial"
+    },
+    {
+      "index": 769,
+      "start": 2372.119,
+      "end": 2373.75,
+      "duration": 1.631,
+      "text": "was until recently being used because"
+    },
+    {
+      "index": 770,
+      "start": 2373.76,
+      "end": 2376.19,
+      "duration": 2.43,
+      "text": "the expensive nature of this array"
+    },
+    {
+      "index": 771,
+      "start": 2376.2,
+      "end": 2379.39,
+      "duration": 3.19,
+      "text": "multipliers because it requires this is"
+    },
+    {
+      "index": 772,
+      "start": 2379.4,
+      "end": 2381.43,
+      "duration": 2.03,
+      "text": "not see again as I said in the classroom"
+    },
+    {
+      "index": 773,
+      "start": 2381.44,
+      "end": 2383.67,
+      "duration": 2.23,
+      "text": "we can do a 4x4 in textbook you will"
+    },
+    {
+      "index": 774,
+      "start": 2383.68,
+      "end": 2384.47,
+      "duration": 0.79,
+      "text": "find"
+    },
+    {
+      "index": 775,
+      "start": 2384.48,
+      "end": 2387.55,
+      "duration": 3.07,
+      "text": "4x4 but you want to do a real job four"
+    },
+    {
+      "index": 776,
+      "start": 2387.56,
+      "end": 2391.23,
+      "duration": 3.67,
+      "text": "bits is only 16 0 to 15"
+    },
+    {
+      "index": 777,
+      "start": 2391.24,
+      "end": 2395.47,
+      "duration": 4.23,
+      "text": "numbers and out of the you you signed"
+    },
+    {
+      "index": 778,
+      "start": 2395.48,
+      "end": 2398.51,
+      "duration": 3.03,
+      "text": "arithmetic it is"
+    },
+    {
+      "index": 779,
+      "start": 2398.52,
+      "end": 2402.069,
+      "duration": 3.549,
+      "text": "plus or minus 7 if this case of ordinary"
+    },
+    {
+      "index": 780,
+      "start": 2402.079,
+      "end": 2404.43,
+      "duration": 2.351,
+      "text": "sign sign magnitude"
+    },
+    {
+      "index": 781,
+      "start": 2404.44,
+      "end": 2407.79,
+      "duration": 3.35,
+      "text": "representation get two compliment it is"
+    },
+    {
+      "index": 782,
+      "start": 2407.8,
+      "end": 2410.87,
+      "duration": 3.07,
+      "text": "minus 8 to + 7 such a small range nobody"
+    },
+    {
+      "index": 783,
+      "start": 2410.88,
+      "end": 2414.51,
+      "duration": 3.63,
+      "text": "UNS a multiplier you can do it by mental"
+    },
+    {
+      "index": 784,
+      "start": 2414.52,
+      "end": 2416.309,
+      "duration": 1.789,
+      "text": "Su by"
+    },
+    {
+      "index": 785,
+      "start": 2416.319,
+      "end": 2418.91,
+      "duration": 2.591,
+      "text": "tables so we are talking of here 16 bit"
+    },
+    {
+      "index": 786,
+      "start": 2418.92,
+      "end": 2421.95,
+      "duration": 3.03,
+      "text": "multipliers 32bit multipliers 64 bit"
+    },
+    {
+      "index": 787,
+      "start": 2421.96,
+      "end": 2424.15,
+      "duration": 2.19,
+      "text": "multipliers so it's all exponentially it"
+    },
+    {
+      "index": 788,
+      "start": 2424.16,
+      "end": 2426.309,
+      "duration": 2.149,
+      "text": "grows you know the number of gates and"
+    },
+    {
+      "index": 789,
+      "start": 2426.319,
+      "end": 2429.63,
+      "duration": 3.311,
+      "text": "full adders and all that"
+    },
+    {
+      "index": 790,
+      "start": 2432.349,
+      "end": 2432.359,
+      "duration": 0.01,
+      "text": "it becomes cost effective to do this it"
+    },
+    {
+      "index": 791,
+      "start": 2432.359,
+      "end": 2434.55,
+      "duration": 2.191,
+      "text": "become because the speed has such become"
+    },
+    {
+      "index": 792,
+      "start": 2434.56,
+      "end": 2436.75,
+      "duration": 2.19,
+      "text": "such a critical issue today we talking"
+    },
+    {
+      "index": 793,
+      "start": 2436.76,
+      "end": 2438.91,
+      "duration": 2.15,
+      "text": "of computers which have to work in"
+    },
+    {
+      "index": 794,
+      "start": 2438.92,
+      "end": 2440.87,
+      "duration": 1.95,
+      "text": "nanc clock"
+    },
+    {
+      "index": 795,
+      "start": 2440.88,
+      "end": 2443.91,
+      "duration": 3.03,
+      "text": "Cycles so naturally I need to have a"
+    },
+    {
+      "index": 796,
+      "start": 2443.92,
+      "end": 2446.63,
+      "duration": 2.71,
+      "text": "hardware for multiplication it should be"
+    },
+    {
+      "index": 797,
+      "start": 2446.64,
+      "end": 2449.109,
+      "duration": 2.469,
+      "text": "very very fast the only way to achieve"
+    },
+    {
+      "index": 798,
+      "start": 2449.119,
+      "end": 2451.95,
+      "duration": 2.831,
+      "text": "is to have this all of them available at"
+    },
+    {
+      "index": 799,
+      "start": 2451.96,
+      "end": 2454.23,
+      "duration": 2.27,
+      "text": "the same time so commit as much"
+    },
+    {
+      "index": 800,
+      "start": 2454.24,
+      "end": 2456.47,
+      "duration": 2.23,
+      "text": "resources as possible to get the job"
+    },
+    {
+      "index": 801,
+      "start": 2456.48,
+      "end": 2459.15,
+      "duration": 2.67,
+      "text": "done as quickly as Possible having said"
+    },
+    {
+      "index": 802,
+      "start": 2459.16,
+      "end": 2461.91,
+      "duration": 2.75,
+      "text": "that is it all that fast we'll have to"
+    },
+    {
+      "index": 803,
+      "start": 2461.92,
+      "end": 2464.75,
+      "duration": 2.83,
+      "text": "see because after all that are adders"
+    },
+    {
+      "index": 804,
+      "start": 2464.76,
+      "end": 2467.03,
+      "duration": 2.27,
+      "text": "adders suffer from"
+    },
+    {
+      "index": 805,
+      "start": 2467.04,
+      "end": 2470.63,
+      "duration": 3.59,
+      "text": "what carry propagation we saw it in"
+    },
+    {
+      "index": 806,
+      "start": 2470.64,
+      "end": 2474.75,
+      "duration": 4.11,
+      "text": "adders carry propagation is a big issue"
+    },
+    {
+      "index": 807,
+      "start": 2474.76,
+      "end": 2476.309,
+      "duration": 1.549,
+      "text": "here also there's a carry"
+    },
+    {
+      "index": 808,
+      "start": 2476.319,
+      "end": 2479.67,
+      "duration": 3.351,
+      "text": "propagation this Carry has to go here"
+    },
+    {
+      "index": 809,
+      "start": 2479.68,
+      "end": 2482.349,
+      "duration": 2.669,
+      "text": "and then trigger this this sun will go"
+    },
+    {
+      "index": 810,
+      "start": 2482.359,
+      "end": 2484.51,
+      "duration": 2.151,
+      "text": "of course there's no worry because I"
+    },
+    {
+      "index": 811,
+      "start": 2484.52,
+      "end": 2486.95,
+      "duration": 2.43,
+      "text": "don't until I have p7 I cannot use this"
+    },
+    {
+      "index": 812,
+      "start": 2486.96,
+      "end": 2489.03,
+      "duration": 2.07,
+      "text": "product"
+    },
+    {
+      "index": 813,
+      "start": 2489.04,
+      "end": 2492.109,
+      "duration": 3.069,
+      "text": "so let me see how quickly can I get"
+    },
+    {
+      "index": 814,
+      "start": 2492.119,
+      "end": 2494.63,
+      "duration": 2.511,
+      "text": "p7 I cannot use the full product until"
+    },
+    {
+      "index": 815,
+      "start": 2494.64,
+      "end": 2497.99,
+      "duration": 3.35,
+      "text": "all the bits are in place is that right"
+    },
+    {
+      "index": 816,
+      "start": 2498.0,
+      "end": 2500.55,
+      "duration": 2.55,
+      "text": "so even though it is some may take more"
+    },
+    {
+      "index": 817,
+      "start": 2500.56,
+      "end": 2503.79,
+      "duration": 3.23,
+      "text": "time once this car is available here"
+    },
+    {
+      "index": 818,
+      "start": 2503.8,
+      "end": 2504.99,
+      "duration": 1.19,
+      "text": "this will be"
+    },
+    {
+      "index": 819,
+      "start": 2505.0,
+      "end": 2507.43,
+      "duration": 2.43,
+      "text": "fired this sum will go here carry will"
+    },
+    {
+      "index": 820,
+      "start": 2507.44,
+      "end": 2509.23,
+      "duration": 1.79,
+      "text": "go here I will not worry about this path"
+    },
+    {
+      "index": 821,
+      "start": 2509.24,
+      "end": 2511.39,
+      "duration": 2.15,
+      "text": "anymore I'll worry about what happens to"
+    },
+    {
+      "index": 822,
+      "start": 2511.4,
+      "end": 2513.51,
+      "duration": 2.11,
+      "text": "this carry how fast can I get it here"
+    },
+    {
+      "index": 823,
+      "start": 2513.52,
+      "end": 2515.27,
+      "duration": 1.75,
+      "text": "similarly how fast can I get this carry"
+    },
+    {
+      "index": 824,
+      "start": 2515.28,
+      "end": 2517.309,
+      "duration": 2.029,
+      "text": "here how fast can I get this carry here"
+    },
+    {
+      "index": 825,
+      "start": 2517.319,
+      "end": 2519.55,
+      "duration": 2.231,
+      "text": "here how fast can I get this carry here"
+    },
+    {
+      "index": 826,
+      "start": 2519.56,
+      "end": 2521.71,
+      "duration": 2.15,
+      "text": "how fast can I get this carry here so"
+    },
+    {
+      "index": 827,
+      "start": 2521.72,
+      "end": 2526.67,
+      "duration": 4.95,
+      "text": "number of carries is 1 2 3 4 5"
+    },
+    {
+      "index": 828,
+      "start": 2526.68,
+      "end": 2530.99,
+      "duration": 4.31,
+      "text": "6 if I call TC as a carry time or carry"
+    },
+    {
+      "index": 829,
+      "start": 2531.0,
+      "end": 2537.47,
+      "duration": 6.47,
+      "text": "propagation"
+    },
+    {
+      "index": 830,
+      "start": 2540.79,
+      "end": 2540.8,
+      "duration": 0.01,
+      "text": "time and T is"
+    },
+    {
+      "index": 831,
+      "start": 2540.8,
+      "end": 2544.349,
+      "duration": 3.549,
+      "text": "as some propagation"
+    },
+    {
+      "index": 832,
+      "start": 2544.359,
+      "end": 2548.39,
+      "duration": 4.031,
+      "text": "time of a full adder of an Adder I will"
+    },
+    {
+      "index": 833,
+      "start": 2548.4,
+      "end": 2549.75,
+      "duration": 1.35,
+      "text": "say I will not worry about full add or"
+    },
+    {
+      "index": 834,
+      "start": 2549.76,
+      "end": 2552.589,
+      "duration": 2.829,
+      "text": "half add in fact to be for symmetry sake"
+    },
+    {
+      "index": 835,
+      "start": 2552.599,
+      "end": 2554.589,
+      "duration": 1.99,
+      "text": "I always say have uniformity don't worry"
+    },
+    {
+      "index": 836,
+      "start": 2554.599,
+      "end": 2557.829,
+      "duration": 3.23,
+      "text": "about a few full half adders and we"
+    },
+    {
+      "index": 837,
+      "start": 2557.839,
+      "end": 2560.03,
+      "duration": 2.191,
+      "text": "talking about 64 by 64 or something like"
+    },
+    {
+      "index": 838,
+      "start": 2560.04,
+      "end": 2563.63,
+      "duration": 3.59,
+      "text": "that you talking of so many adders a"
+    },
+    {
+      "index": 839,
+      "start": 2563.64,
+      "end": 2565.47,
+      "duration": 1.83,
+      "text": "small number of them needs to be half"
+    },
+    {
+      "index": 840,
+      "start": 2565.48,
+      "end": 2568.03,
+      "duration": 2.55,
+      "text": "adder need not be taken into account you"
+    },
+    {
+      "index": 841,
+      "start": 2568.04,
+      "end": 2570.349,
+      "duration": 2.309,
+      "text": "can all have them all full adders with"
+    },
+    {
+      "index": 842,
+      "start": 2570.359,
+      "end": 2572.71,
+      "duration": 2.351,
+      "text": "carry zero that's not a big issue so we"
+    },
+    {
+      "index": 843,
+      "start": 2572.72,
+      "end": 2574.549,
+      "duration": 1.829,
+      "text": "will not worry about propagation"
+    },
+    {
+      "index": 844,
+      "start": 2574.559,
+      "end": 2576.67,
+      "duration": 2.111,
+      "text": "separately we'll call it TC is the carry"
+    },
+    {
+      "index": 845,
+      "start": 2576.68,
+      "end": 2578.829,
+      "duration": 2.149,
+      "text": "propagation and T is the Su propagation"
+    },
+    {
+      "index": 846,
+      "start": 2578.839,
+      "end": 2580.589,
+      "duration": 1.75,
+      "text": "time of an Adder whether it's full add"
+    },
+    {
+      "index": 847,
+      "start": 2580.599,
+      "end": 2583.99,
+      "duration": 3.391,
+      "text": "off add we assume to be them to be the"
+    },
+    {
+      "index": 848,
+      "start": 2584.0,
+      "end": 2585.63,
+      "duration": 1.63,
+      "text": "same"
+    },
+    {
+      "index": 849,
+      "start": 2585.64,
+      "end": 2591.309,
+      "duration": 5.669,
+      "text": "the the speed would then be"
+    },
+    {
+      "index": 850,
+      "start": 2594.349,
+      "end": 2594.359,
+      "duration": 0.01,
+      "text": "here this is available after"
+    },
+    {
+      "index": 851,
+      "start": 2594.359,
+      "end": 2598.39,
+      "duration": 4.031,
+      "text": "TC this is available TS so this is Avail"
+    },
+    {
+      "index": 852,
+      "start": 2598.4,
+      "end": 2601.23,
+      "duration": 2.83,
+      "text": "this is available after TS TS is the"
+    },
+    {
+      "index": 853,
+      "start": 2601.24,
+      "end": 2603.549,
+      "duration": 2.309,
+      "text": "sometime this is available instantly I'm"
+    },
+    {
+      "index": 854,
+      "start": 2603.559,
+      "end": 2605.79,
+      "duration": 2.231,
+      "text": "not considering the add time if you"
+    },
+    {
+      "index": 855,
+      "start": 2605.8,
+      "end": 2607.79,
+      "duration": 1.99,
+      "text": "consider add time is an extra time ta is"
+    },
+    {
+      "index": 856,
+      "start": 2607.8,
+      "end": 2620.27,
+      "duration": 12.47,
+      "text": "the and gate"
+    },
+    {
+      "index": 857,
+      "start": 2623.349,
+      "end": 2623.359,
+      "duration": 0.01,
+      "text": "time so ta is common to all all product"
+    },
+    {
+      "index": 858,
+      "start": 2623.359,
+      "end": 2625.309,
+      "duration": 1.95,
+      "text": "terms are available after ta so I will"
+    },
+    {
+      "index": 859,
+      "start": 2625.319,
+      "end": 2627.43,
+      "duration": 2.111,
+      "text": "not worry about it now finally I can add"
+    },
+    {
+      "index": 860,
+      "start": 2627.44,
+      "end": 2629.87,
+      "duration": 2.43,
+      "text": "this ta isn't that finally I can add my"
+    },
+    {
+      "index": 861,
+      "start": 2629.88,
+      "end": 2632.79,
+      "duration": 2.91,
+      "text": "ta so I will not put ta plus ta plus and"
+    },
+    {
+      "index": 862,
+      "start": 2632.8,
+      "end": 2634.71,
+      "duration": 1.91,
+      "text": "all that so this is immediately"
+    },
+    {
+      "index": 863,
+      "start": 2634.72,
+      "end": 2638.39,
+      "duration": 3.67,
+      "text": "available after ta this is T A Plus Ts"
+    },
+    {
+      "index": 864,
+      "start": 2638.4,
+      "end": 2640.67,
+      "duration": 2.27,
+      "text": "this will be TC"
+    },
+    {
+      "index": 865,
+      "start": 2640.68,
+      "end": 2644.069,
+      "duration": 3.389,
+      "text": "plus 1 TS 1 TC 1"
+    },
+    {
+      "index": 866,
+      "start": 2644.079,
+      "end": 2649.39,
+      "duration": 5.311,
+      "text": "TS oh TC plus 2"
+    },
+    {
+      "index": 867,
+      "start": 2653.03,
+      "end": 2653.04,
+      "duration": 0.01,
+      "text": "TS this is 2 TC"
+    },
+    {
+      "index": 868,
+      "start": 2653.04,
+      "end": 2659.109,
+      "duration": 6.069,
+      "text": "plus 3 TS because one TC second TC TS TS"
+    },
+    {
+      "index": 869,
+      "start": 2659.119,
+      "end": 2662.87,
+      "duration": 3.751,
+      "text": "TS this will be 3"
+    },
+    {
+      "index": 870,
+      "start": 2662.88,
+      "end": 2666.03,
+      "duration": 3.15,
+      "text": "TC"
+    },
+    {
+      "index": 871,
+      "start": 2677.15,
+      "end": 2677.16,
+      "duration": 0.01,
+      "text": "TS this is 4"
+    },
+    {
+      "index": 872,
+      "start": 2677.16,
+      "end": 2680.27,
+      "duration": 3.11,
+      "text": "tc+ 2"
+    },
+    {
+      "index": 873,
+      "start": 2680.28,
+      "end": 2683.51,
+      "duration": 3.23,
+      "text": "TS this is 5"
+    },
+    {
+      "index": 874,
+      "start": 2683.52,
+      "end": 2688.549,
+      "duration": 5.029,
+      "text": "TC plus 1"
+    },
+    {
+      "index": 875,
+      "start": 2697.51,
+      "end": 2697.52,
+      "duration": 0.01,
+      "text": "6tc so this term is available after 6tc"
+    },
+    {
+      "index": 876,
+      "start": 2697.52,
+      "end": 2700.71,
+      "duration": 3.19,
+      "text": "after the multiplication has started"
+    },
+    {
+      "index": 877,
+      "start": 2700.72,
+      "end": 2704.99,
+      "duration": 4.27,
+      "text": "this term is 5 TC plus TC TS after the"
+    },
+    {
+      "index": 878,
+      "start": 2705.0,
+      "end": 2707.47,
+      "duration": 2.47,
+      "text": "multip started etc"
+    },
+    {
+      "index": 879,
+      "start": 2707.48,
+      "end": 2710.91,
+      "duration": 3.43,
+      "text": "etc usually TC is more than TS because"
+    },
+    {
+      "index": 880,
+      "start": 2710.92,
+      "end": 2713.39,
+      "duration": 2.47,
+      "text": "it's not first if if you assume that of"
+    },
+    {
+      "index": 881,
+      "start": 2713.4,
+      "end": 2715.589,
+      "duration": 2.189,
+      "text": "course you can always make an add in"
+    },
+    {
+      "index": 882,
+      "start": 2715.599,
+      "end": 2722.03,
+      "duration": 6.431,
+      "text": "which TC is faster than TS so if TC"
+    },
+    {
+      "index": 883,
+      "start": 2722.04,
+      "end": 2724.069,
+      "duration": 2.029,
+      "text": "is if"
+    },
+    {
+      "index": 884,
+      "start": 2724.079,
+      "end": 2728.67,
+      "duration": 4.591,
+      "text": "TC is greater than"
+    },
+    {
+      "index": 885,
+      "start": 2728.68,
+      "end": 2732.51,
+      "duration": 3.83,
+      "text": "TS if TC is greater than TS I will not"
+    },
+    {
+      "index": 886,
+      "start": 2732.52,
+      "end": 2734.349,
+      "duration": 1.829,
+      "text": "worry about this TS because I'm already"
+    },
+    {
+      "index": 887,
+      "start": 2734.359,
+      "end": 2737.67,
+      "duration": 3.311,
+      "text": "getting it 6 TC is the largest number of"
+    },
+    {
+      "index": 888,
+      "start": 2737.68,
+      "end": 2742.71,
+      "duration": 5.03,
+      "text": "TCS so the propagation time is 6 TC the"
+    },
+    {
+      "index": 889,
+      "start": 2742.72,
+      "end": 2750.069,
+      "duration": 7.349,
+      "text": "add time total add time"
+    },
+    {
+      "index": 890,
+      "start": 2752.19,
+      "end": 2752.2,
+      "duration": 0.01,
+      "text": "is TA a"
+    },
+    {
+      "index": 891,
+      "start": 2752.2,
+      "end": 2754.43,
+      "duration": 2.23,
+      "text": "+ 6t"
+    },
+    {
+      "index": 892,
+      "start": 2754.44,
+      "end": 2757.27,
+      "duration": 2.83,
+      "text": "C and 6 is only a number for this"
+    },
+    {
+      "index": 893,
+      "start": 2757.28,
+      "end": 2759.109,
+      "duration": 1.829,
+      "text": "particular combination in general it"
+    },
+    {
+      "index": 894,
+      "start": 2759.119,
+      "end": 2762.87,
+      "duration": 3.751,
+      "text": "will"
+    },
+    {
+      "index": 895,
+      "start": 2765.349,
+      "end": 2765.359,
+      "duration": 0.01,
+      "text": "be n minus"
+    },
+    {
+      "index": 896,
+      "start": 2765.359,
+      "end": 2771.27,
+      "duration": 5.911,
+      "text": "1+ M minus 1 1 less for n 1 less for m"
+    },
+    {
+      "index": 897,
+      "start": 2771.28,
+      "end": 2774.43,
+      "duration": 3.15,
+      "text": "so this will"
+    },
+    {
+      "index": 898,
+      "start": 2790.95,
+      "end": 2790.96,
+      "duration": 0.01,
+      "text": "this is the time at which I'll get the"
+    },
+    {
+      "index": 899,
+      "start": 2790.96,
+      "end": 2792.75,
+      "duration": 1.79,
+      "text": "final"
+    },
+    {
+      "index": 900,
+      "start": 2792.76,
+      "end": 2795.829,
+      "duration": 3.069,
+      "text": "result it's not called total time"
+    },
+    {
+      "index": 901,
+      "start": 2795.839,
+      "end": 2805.79,
+      "duration": 9.951,
+      "text": "multiplication"
+    },
+    {
+      "index": 902,
+      "start": 2809.87,
+      "end": 2809.88,
+      "duration": 0.01,
+      "text": "time is this for this particular case or"
+    },
+    {
+      "index": 903,
+      "start": 2809.88,
+      "end": 2815.829,
+      "duration": 5.949,
+      "text": "in general it is"
+    },
+    {
+      "index": 904,
+      "start": 2817.43,
+      "end": 2817.44,
+      "duration": 0.01,
+      "text": "this"
+    },
+    {
+      "index": 905,
+      "start": 2817.44,
+      "end": 2819.99,
+      "duration": 2.55,
+      "text": "if on the other hand you have a circuit"
+    },
+    {
+      "index": 906,
+      "start": 2820.0,
+      "end": 2822.069,
+      "duration": 2.069,
+      "text": "which is efficient because many times"
+    },
+    {
+      "index": 907,
+      "start": 2822.079,
+      "end": 2825.15,
+      "duration": 3.071,
+      "text": "you make a circuit TC is faster than TS"
+    },
+    {
+      "index": 908,
+      "start": 2825.16,
+      "end": 2828.75,
+      "duration": 3.59,
+      "text": "why because TC has to carry on TS is"
+    },
+    {
+      "index": 909,
+      "start": 2828.76,
+      "end": 2832.23,
+      "duration": 3.47,
+      "text": "only local TS is a local phenomena some"
+    },
+    {
+      "index": 910,
+      "start": 2832.24,
+      "end": 2834.43,
+      "duration": 2.19,
+      "text": "propagation is local phenomena"
+    },
+    {
+      "index": 911,
+      "start": 2834.44,
+      "end": 2836.829,
+      "duration": 2.389,
+      "text": "phenomenon carry propagation is a global"
+    },
+    {
+      "index": 912,
+      "start": 2836.839,
+      "end": 2838.47,
+      "duration": 1.631,
+      "text": "phenomenon it has to"
+    },
+    {
+      "index": 913,
+      "start": 2838.48,
+      "end": 2840.99,
+      "duration": 2.51,
+      "text": "go because of that many times we want to"
+    },
+    {
+      "index": 914,
+      "start": 2841.0,
+      "end": 2843.63,
+      "duration": 2.63,
+      "text": "optimize the circuit configuration that"
+    },
+    {
+      "index": 915,
+      "start": 2843.64,
+      "end": 2845.99,
+      "duration": 2.35,
+      "text": "TC becomes smaller than TS if that is"
+    },
+    {
+      "index": 916,
+      "start": 2846.0,
+      "end": 2848.79,
+      "duration": 2.79,
+      "text": "the case what will happen if"
+    },
+    {
+      "index": 917,
+      "start": 2848.8,
+      "end": 2851.91,
+      "duration": 3.11,
+      "text": "TC is less than"
+    },
+    {
+      "index": 918,
+      "start": 2851.92,
+      "end": 2865.87,
+      "duration": 13.95,
+      "text": "TS then the propagation time will"
+    },
+    {
+      "index": 919,
+      "start": 2868.23,
+      "end": 2868.24,
+      "duration": 0.01,
+      "text": "be"
+    },
+    {
+      "index": 920,
+      "start": 2868.24,
+      "end": 2869.87,
+      "duration": 1.63,
+      "text": "ta"
+    },
+    {
+      "index": 921,
+      "start": 2869.88,
+      "end": 2873.15,
+      "duration": 3.27,
+      "text": "plus 3T C+"
+    },
+    {
+      "index": 922,
+      "start": 2873.16,
+      "end": 2875.829,
+      "duration": 2.669,
+      "text": "3ts or in general it"
+    },
+    {
+      "index": 923,
+      "start": 2875.839,
+      "end": 2878.39,
+      "duration": 2.551,
+      "text": "is Ta A"
+    },
+    {
+      "index": 924,
+      "start": 2878.4,
+      "end": 2883.87,
+      "duration": 5.47,
+      "text": "+"
+    },
+    {
+      "index": 925,
+      "start": 2886.79,
+      "end": 2886.8,
+      "duration": 0.01,
+      "text": "nus1"
+    },
+    {
+      "index": 926,
+      "start": 2886.8,
+      "end": 2896.71,
+      "duration": 9.91,
+      "text": "ts+ m-1"
+    },
+    {
+      "index": 927,
+      "start": 2899.03,
+      "end": 2899.04,
+      "duration": 0.01,
+      "text": "TC same as"
+    },
+    {
+      "index": 928,
+      "start": 2899.04,
+      "end": 2902.23,
+      "duration": 3.19,
+      "text": "this that is why I wrote"
+    },
+    {
+      "index": 929,
+      "start": 2902.24,
+      "end": 2904.71,
+      "duration": 2.47,
+      "text": "both so"
+    },
+    {
+      "index": 930,
+      "start": 2904.72,
+      "end": 2908.589,
+      "duration": 3.869,
+      "text": "this this also important TS even though"
+    },
+    {
+      "index": 931,
+      "start": 2908.599,
+      "end": 2910.349,
+      "duration": 1.75,
+      "text": "this car would have propagated I to wait"
+    },
+    {
+      "index": 932,
+      "start": 2910.359,
+      "end": 2913.43,
+      "duration": 3.071,
+      "text": "for this in 3 TC this will available"
+    },
+    {
+      "index": 933,
+      "start": 2913.44,
+      "end": 2914.349,
+      "duration": 0.909,
+      "text": "after"
+    },
+    {
+      "index": 934,
+      "start": 2914.359,
+      "end": 2917.47,
+      "duration": 3.111,
+      "text": "this 3tc is common between these two"
+    },
+    {
+      "index": 935,
+      "start": 2917.48,
+      "end": 2918.95,
+      "duration": 1.47,
+      "text": "this 6tc this"
+    },
+    {
+      "index": 936,
+      "start": 2918.96,
+      "end": 2923.47,
+      "duration": 4.51,
+      "text": "3tc but after this time under 3tc time"
+    },
+    {
+      "index": 937,
+      "start": 2923.48,
+      "end": 2925.349,
+      "duration": 1.869,
+      "text": "this is available whereas under 3 TS"
+    },
+    {
+      "index": 938,
+      "start": 2925.359,
+      "end": 2927.67,
+      "duration": 2.311,
+      "text": "time only this is available now TS is"
+    },
+    {
+      "index": 939,
+      "start": 2927.68,
+      "end": 2929.27,
+      "duration": 1.59,
+      "text": "larger than TC that means this is going"
+    },
+    {
+      "index": 940,
+      "start": 2929.28,
+      "end": 2932.91,
+      "duration": 3.63,
+      "text": "to be P4 is going to be the last not P6"
+    },
+    {
+      "index": 941,
+      "start": 2932.92,
+      "end": 2934.95,
+      "duration": 2.03,
+      "text": "earlier we said p7 was the last to"
+    },
+    {
+      "index": 942,
+      "start": 2934.96,
+      "end": 2937.589,
+      "duration": 2.629,
+      "text": "arrive now because 3 is common between"
+    },
+    {
+      "index": 943,
+      "start": 2937.599,
+      "end": 2938.39,
+      "duration": 0.791,
+      "text": "these"
+    },
+    {
+      "index": 944,
+      "start": 2938.4,
+      "end": 2941.47,
+      "duration": 3.07,
+      "text": "two 3tc after this this is available p7"
+    },
+    {
+      "index": 945,
+      "start": 2941.48,
+      "end": 2943.39,
+      "duration": 1.91,
+      "text": "is slightly earlier available because TC"
+    },
+    {
+      "index": 946,
+      "start": 2943.4,
+      "end": 2946.75,
+      "duration": 3.35,
+      "text": "is smaller than TS whereas 3 TS is going"
+    },
+    {
+      "index": 947,
+      "start": 2946.76,
+      "end": 2948.95,
+      "duration": 2.19,
+      "text": "to take a little more time so P4 will be"
+    },
+    {
+      "index": 948,
+      "start": 2948.96,
+      "end": 2950.71,
+      "duration": 1.75,
+      "text": "the last to arrive so I have to take"
+    },
+    {
+      "index": 949,
+      "start": 2950.72,
+      "end": 2955.47,
+      "duration": 4.75,
+      "text": "that into account again nus1 nus one"
+    },
+    {
+      "index": 950,
+      "start": 2955.48,
+      "end": 2957.15,
+      "duration": 1.67,
+      "text": "formula"
+    },
+    {
+      "index": 951,
+      "start": 2957.16,
+      "end": 2960.15,
+      "duration": 2.99,
+      "text": "so why did they say all this about the"
+    },
+    {
+      "index": 952,
+      "start": 2960.16,
+      "end": 2962.39,
+      "duration": 2.23,
+      "text": "speeds I said I committing a lot of"
+    },
+    {
+      "index": 953,
+      "start": 2962.4,
+      "end": 2965.71,
+      "duration": 3.31,
+      "text": "Hardware here instead of"
+    },
+    {
+      "index": 954,
+      "start": 2965.72,
+      "end": 2968.91,
+      "duration": 3.19,
+      "text": "a row serial"
+    },
+    {
+      "index": 955,
+      "start": 2968.92,
+      "end": 2971.589,
+      "duration": 2.669,
+      "text": "addition I'm having an"
+    },
+    {
+      "index": 956,
+      "start": 2971.599,
+      "end": 2974.829,
+      "duration": 3.23,
+      "text": "array of instantaneous addition I hope"
+    },
+    {
+      "index": 957,
+      "start": 2974.839,
+      "end": 2978.15,
+      "duration": 3.311,
+      "text": "to achieve"
+    },
+    {
+      "index": 958,
+      "start": 2978.16,
+      "end": 2980.87,
+      "duration": 2.71,
+      "text": "instantaneous moment the numbers A and B"
+    },
+    {
+      "index": 959,
+      "start": 2980.88,
+      "end": 2982.27,
+      "duration": 1.39,
+      "text": "number a and number B are given I want"
+    },
+    {
+      "index": 960,
+      "start": 2982.28,
+      "end": 2985.51,
+      "duration": 3.23,
+      "text": "the product P which is a * B but of"
+    },
+    {
+      "index": 961,
+      "start": 2985.52,
+      "end": 2987.99,
+      "duration": 2.47,
+      "text": "course it is limited by Hardware which"
+    },
+    {
+      "index": 962,
+      "start": 2988.0,
+      "end": 2989.27,
+      "duration": 1.27,
+      "text": "is and"
+    },
+    {
+      "index": 963,
+      "start": 2989.28,
+      "end": 2992.99,
+      "duration": 3.71,
+      "text": "Gates and array of adders and we have to"
+    },
+    {
+      "index": 964,
+      "start": 2993.0,
+      "end": 2994.87,
+      "duration": 1.87,
+      "text": "make sure that this faster than this of"
+    },
+    {
+      "index": 965,
+      "start": 2994.88,
+      "end": 2996.23,
+      "duration": 1.35,
+      "text": "course there are techniques to speed it"
+    },
+    {
+      "index": 966,
+      "start": 2996.24,
+      "end": 2997.789,
+      "duration": 1.549,
+      "text": "up as I'm not going to discuss those"
+    },
+    {
+      "index": 967,
+      "start": 2997.799,
+      "end": 3000.63,
+      "duration": 2.831,
+      "text": "things in this class but the point is"
+    },
+    {
+      "index": 968,
+      "start": 3000.64,
+      "end": 3002.349,
+      "duration": 1.709,
+      "text": "you have to see whether the resources"
+    },
+    {
+      "index": 969,
+      "start": 3002.359,
+      "end": 3004.67,
+      "duration": 2.311,
+      "text": "committed are able to get the what you"
+    },
+    {
+      "index": 970,
+      "start": 3004.68,
+      "end": 3006.549,
+      "duration": 1.869,
+      "text": "want if in spite of that you are not"
+    },
+    {
+      "index": 971,
+      "start": 3006.559,
+      "end": 3009.87,
+      "duration": 3.311,
+      "text": "able to get this speeds going to"
+    },
+    {
+      "index": 972,
+      "start": 3009.88,
+      "end": 3012.67,
+      "duration": 2.79,
+      "text": "get I don't want to use it see before"
+    },
+    {
+      "index": 973,
+      "start": 3012.68,
+      "end": 3014.03,
+      "duration": 1.35,
+      "text": "committing a lot of resource you have to"
+    },
+    {
+      "index": 974,
+      "start": 3014.04,
+      "end": 3015.27,
+      "duration": 1.23,
+      "text": "make sure that you'll get the job done"
+    },
+    {
+      "index": 975,
+      "start": 3015.28,
+      "end": 3017.91,
+      "duration": 2.63,
+      "text": "in the time required if you cannot still"
+    },
+    {
+      "index": 976,
+      "start": 3017.92,
+      "end": 3020.47,
+      "duration": 2.55,
+      "text": "meet the deadline what is the point in"
+    },
+    {
+      "index": 977,
+      "start": 3020.48,
+      "end": 3022.87,
+      "duration": 2.39,
+      "text": "committing lot of resource to that so I"
+    },
+    {
+      "index": 978,
+      "start": 3022.88,
+      "end": 3025.51,
+      "duration": 2.63,
+      "text": "can think of another way of improving"
+    },
+    {
+      "index": 979,
+      "start": 3025.52,
+      "end": 3027.109,
+      "duration": 1.589,
+      "text": "can I get some more resource and speed"
+    },
+    {
+      "index": 980,
+      "start": 3027.119,
+      "end": 3029.63,
+      "duration": 2.511,
+      "text": "it up or reach a point know the"
+    },
+    {
+      "index": 981,
+      "start": 3029.64,
+      "end": 3031.63,
+      "duration": 1.99,
+      "text": "technology cannot deliver what I want so"
+    },
+    {
+      "index": 982,
+      "start": 3031.64,
+      "end": 3033.63,
+      "duration": 1.99,
+      "text": "I will go back and do the old way old"
+    },
+    {
+      "index": 983,
+      "start": 3033.64,
+      "end": 3035.51,
+      "duration": 1.87,
+      "text": "fashioned way something like"
+    },
+    {
+      "index": 984,
+      "start": 3035.52,
+      "end": 3039.109,
+      "duration": 3.589,
+      "text": "that okay with this I will conclude the"
+    },
+    {
+      "index": 985,
+      "start": 3039.119,
+      "end": 3042.43,
+      "duration": 3.311,
+      "text": "arithmetic circuits we talked about"
+    },
+    {
+      "index": 986,
+      "start": 3042.44,
+      "end": 3045.95,
+      "duration": 3.51,
+      "text": "adders sing half adder full adder"
+    },
+    {
+      "index": 987,
+      "start": 3045.96,
+      "end": 3047.51,
+      "duration": 1.55,
+      "text": "multi-bit"
+    },
+    {
+      "index": 988,
+      "start": 3047.52,
+      "end": 3050.109,
+      "duration": 2.589,
+      "text": "adders fast adders carry look at an"
+    },
+    {
+      "index": 989,
+      "start": 3050.119,
+      "end": 3052.19,
+      "duration": 2.071,
+      "text": "example only there are many other fast"
+    },
+    {
+      "index": 990,
+      "start": 3052.2,
+      "end": 3053.67,
+      "duration": 1.47,
+      "text": "techniques which are not considered in"
+    },
+    {
+      "index": 991,
+      "start": 3053.68,
+      "end": 3055.99,
+      "duration": 2.31,
+      "text": "this class we talked about subtractors"
+    },
+    {
+      "index": 992,
+      "start": 3056.0,
+      "end": 3058.549,
+      "duration": 2.549,
+      "text": "and subtractors being two compliment"
+    },
+    {
+      "index": 993,
+      "start": 3058.559,
+      "end": 3060.789,
+      "duration": 2.23,
+      "text": "aders we talked about multipliers and"
+    },
+    {
+      "index": 994,
+      "start": 3060.799,
+      "end": 3062.91,
+      "duration": 2.111,
+      "text": "different schemes and one of them just"
+    },
+    {
+      "index": 995,
+      "start": 3062.92,
+      "end": 3064.829,
+      "duration": 1.909,
+      "text": "tell you the flavor just to give you the"
+    },
+    {
+      "index": 996,
+      "start": 3064.839,
+      "end": 3069.32,
+      "duration": 4.481,
+      "text": "flare for multiplication"
+    },
+    {
+      "index": 997,
+      "start": 3085.549,
+      "end": 3085.559,
+      "duration": 0.01,
+      "text": "[Music]"
+    },
+    {
+      "index": 998,
+      "start": 3085.559,
+      "end": 3089.57,
+      "duration": 4.011,
+      "text": "Hardware"
+    }
+  ],
+  "course": {
+    "category": "Engineering & Robotics",
+    "title": "Circuits and Electronics",
+    "source_url": "https://www.youtube.com/playlist?list=PL803563859BF7ED8C"
+  }
+}

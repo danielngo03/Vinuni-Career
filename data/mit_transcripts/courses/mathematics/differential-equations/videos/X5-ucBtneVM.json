@@ -1,0 +1,1635 @@
+{
+  "video": {
+    "id": "X5-ucBtneVM",
+    "title": "Euler's Method | MIT 18.03SC Differential Equations, Fall 2011",
+    "url": "https://www.youtube.com/watch?v=X5-ucBtneVM",
+    "channel": "MIT OpenCourseWare",
+    "duration": 616,
+    "language": "en"
+  },
+  "segment_count": 231,
+  "segments": [
+    {
+      "index": 0,
+      "start": 7.87,
+      "end": 7.88,
+      "duration": 0.01,
+      "text": "Hi everyone. Welcome back."
+    },
+    {
+      "index": 1,
+      "start": 7.88,
+      "end": 9.83,
+      "duration": 1.95,
+      "text": "So today, I'd like to tackle a problem"
+    },
+    {
+      "index": 2,
+      "start": 9.84,
+      "end": 12.19,
+      "duration": 2.35,
+      "text": "in numerics, numerical integration of"
+    },
+    {
+      "index": 3,
+      "start": 12.2,
+      "end": 13.27,
+      "duration": 1.07,
+      "text": "ODEs."
+    },
+    {
+      "index": 4,
+      "start": 13.28,
+      "end": 15.47,
+      "duration": 2.19,
+      "text": "Specifically on Euler's method."
+    },
+    {
+      "index": 5,
+      "start": 15.48,
+      "end": 16.55,
+      "duration": 1.07,
+      "text": "And the problem we're interested in"
+    },
+    {
+      "index": 6,
+      "start": 16.56,
+      "end": 18.15,
+      "duration": 1.59,
+      "text": "considering today is"
+    },
+    {
+      "index": 7,
+      "start": 18.16,
+      "end": 20.11,
+      "duration": 1.95,
+      "text": "the ODE y prime equals y squared minus"
+    },
+    {
+      "index": 8,
+      "start": 20.12,
+      "end": 21.71,
+      "duration": 1.59,
+      "text": "xy."
+    },
+    {
+      "index": 9,
+      "start": 21.72,
+      "end": 24.27,
+      "duration": 2.55,
+      "text": "And we're interested in integrating the"
+    },
+    {
+      "index": 10,
+      "start": 24.28,
+      "end": 25.99,
+      "duration": 1.71,
+      "text": "solution that starts at y of 0 is equal"
+    },
+    {
+      "index": 11,
+      "start": 26.0,
+      "end": 27.79,
+      "duration": 1.79,
+      "text": "to -1."
+    },
+    {
+      "index": 12,
+      "start": 27.8,
+      "end": 30.35,
+      "duration": 2.55,
+      "text": "Using a step size of 0.5."
+    },
+    {
+      "index": 13,
+      "start": 30.36,
+      "end": 32.83,
+      "duration": 2.47,
+      "text": "And we want to integrate it to y of 1."
+    },
+    {
+      "index": 14,
+      "start": 32.84,
+      "end": 34.55,
+      "duration": 1.71,
+      "text": "And then for the second part, we're"
+    },
+    {
+      "index": 15,
+      "start": 34.56,
+      "end": 35.91,
+      "duration": 1.35,
+      "text": "interested in"
+    },
+    {
+      "index": 16,
+      "start": 35.92,
+      "end": 37.91,
+      "duration": 1.99,
+      "text": "if our first step of integration either"
+    },
+    {
+      "index": 17,
+      "start": 37.92,
+      "end": 39.95,
+      "duration": 2.03,
+      "text": "overestimates or underestimates the"
+    },
+    {
+      "index": 18,
+      "start": 39.96,
+      "end": 41.55,
+      "duration": 1.59,
+      "text": "exact solution."
+    },
+    {
+      "index": 19,
+      "start": 41.56,
+      "end": 42.71,
+      "duration": 1.15,
+      "text": "So I'll let you think about this and"
+    },
+    {
+      "index": 20,
+      "start": 42.72,
+      "end": 44.23,
+      "duration": 1.51,
+      "text": "work it out for yourself and I'll come"
+    },
+    {
+      "index": 21,
+      "start": 44.24,
+      "end": 57.91,
+      "duration": 13.67,
+      "text": "back in a moment."
+    },
+    {
+      "index": 22,
+      "start": 58.99,
+      "end": 59.0,
+      "duration": 0.01,
+      "text": "Hi everyone."
+    },
+    {
+      "index": 23,
+      "start": 59.0,
+      "end": 60.43,
+      "duration": 1.43,
+      "text": "Welcome back."
+    },
+    {
+      "index": 24,
+      "start": 60.44,
+      "end": 62.03,
+      "duration": 1.59,
+      "text": "So as I mentioned before,"
+    },
+    {
+      "index": 25,
+      "start": 62.04,
+      "end": 63.59,
+      "duration": 1.55,
+      "text": "this is a problem in numerics. And"
+    },
+    {
+      "index": 26,
+      "start": 63.6,
+      "end": 64.99,
+      "duration": 1.39,
+      "text": "specifically, whenever you're given an"
+    },
+    {
+      "index": 27,
+      "start": 65.0,
+      "end": 66.91,
+      "duration": 1.91,
+      "text": "ODE, you can almost always numerically"
+    },
+    {
+      "index": 28,
+      "start": 66.92,
+      "end": 68.83,
+      "duration": 1.91,
+      "text": "integrate it on a computer."
+    },
+    {
+      "index": 29,
+      "start": 68.84,
+      "end": 70.39,
+      "duration": 1.55,
+      "text": "And this is quite possibly the simplest"
+    },
+    {
+      "index": 30,
+      "start": 70.4,
+      "end": 73.59,
+      "duration": 3.19,
+      "text": "algorithm for numerical integration."
+    },
+    {
+      "index": 31,
+      "start": 73.6,
+      "end": 75.55,
+      "duration": 1.95,
+      "text": "So specifically, what we do is we take"
+    },
+    {
+      "index": 32,
+      "start": 75.56,
+      "end": 77.55,
+      "duration": 1.99,
+      "text": "the the left-hand side, the derivative y"
+    },
+    {
+      "index": 33,
+      "start": 77.56,
+      "end": 79.15,
+      "duration": 1.59,
+      "text": "prime, and we approximate it using a"
+    },
+    {
+      "index": 34,
+      "start": 79.16,
+      "end": 80.83,
+      "duration": 1.67,
+      "text": "very simple finite different formula"
+    },
+    {
+      "index": 35,
+      "start": 80.84,
+      "end": 86.43,
+      "duration": 5.59,
+      "text": "finite difference formula."
+    },
+    {
+      "index": 36,
+      "start": 88.87,
+      "end": 88.88,
+      "duration": 0.01,
+      "text": "So if I take y prime and approximate it"
+    },
+    {
+      "index": 37,
+      "start": 88.88,
+      "end": 91.83,
+      "duration": 2.95,
+      "text": "as y of n plus 1 minus y of n divided by"
+    },
+    {
+      "index": 38,
+      "start": 91.84,
+      "end": 93.51,
+      "duration": 1.67,
+      "text": "h,"
+    },
+    {
+      "index": 39,
+      "start": 93.52,
+      "end": 99.51,
+      "duration": 5.99,
+      "text": "where h is the step size,"
+    },
+    {
+      "index": 40,
+      "start": 105.63,
+      "end": 105.64,
+      "duration": 0.01,
+      "text": "the continuous ODE using this simple"
+    },
+    {
+      "index": 41,
+      "start": 105.64,
+      "end": 109.39,
+      "duration": 3.75,
+      "text": "formula. So here, h, as I mentioned,"
+    },
+    {
+      "index": 42,
+      "start": 109.4,
+      "end": 114.11,
+      "duration": 4.71,
+      "text": "is the step size."
+    },
+    {
+      "index": 43,
+      "start": 115.27,
+      "end": 115.28,
+      "duration": 0.01,
+      "text": "f"
+    },
+    {
+      "index": 44,
+      "start": 115.28,
+      "end": 118.55,
+      "duration": 3.27,
+      "text": "in this case"
+    },
+    {
+      "index": 45,
+      "start": 127.19,
+      "end": 127.2,
+      "duration": 0.01,
+      "text": "And we see that y of n plus 1 minus y of"
+    },
+    {
+      "index": 46,
+      "start": 127.2,
+      "end": 129.469,
+      "duration": 2.269,
+      "text": "n divided by h is an approximation to y"
+    },
+    {
+      "index": 47,
+      "start": 129.479,
+      "end": 132.15,
+      "duration": 2.671,
+      "text": "prime."
+    },
+    {
+      "index": 48,
+      "start": 133.71,
+      "end": 133.72,
+      "duration": 0.01,
+      "text": "Okay."
+    },
+    {
+      "index": 49,
+      "start": 133.72,
+      "end": 135.67,
+      "duration": 1.95,
+      "text": "In addition, we can also write down x of"
+    },
+    {
+      "index": 50,
+      "start": 135.68,
+      "end": 138.11,
+      "duration": 2.43,
+      "text": "n plus 1"
+    },
+    {
+      "index": 51,
+      "start": 138.12,
+      "end": 142.79,
+      "duration": 4.67,
+      "text": "is just equal to x of n plus h."
+    },
+    {
+      "index": 52,
+      "start": 144.91,
+      "end": 144.92,
+      "duration": 0.01,
+      "text": "Okay. And I'm using subscripts n here"
+    },
+    {
+      "index": 53,
+      "start": 144.92,
+      "end": 147.11,
+      "duration": 2.19,
+      "text": "just to denote the the step of the"
+    },
+    {
+      "index": 54,
+      "start": 147.12,
+      "end": 148.67,
+      "duration": 1.55,
+      "text": "algorithm."
+    },
+    {
+      "index": 55,
+      "start": 148.68,
+      "end": 151.27,
+      "duration": 2.59,
+      "text": "So for part A, we're asked to integrate"
+    },
+    {
+      "index": 56,
+      "start": 151.28,
+      "end": 152.91,
+      "duration": 1.63,
+      "text": "the solution that starts at y of 0 is"
+    },
+    {
+      "index": 57,
+      "start": 152.92,
+      "end": 154.43,
+      "duration": 1.51,
+      "text": "equal to -1"
+    },
+    {
+      "index": 58,
+      "start": 154.44,
+      "end": 156.55,
+      "duration": 2.11,
+      "text": "to y of 1."
+    },
+    {
+      "index": 59,
+      "start": 156.56,
+      "end": 158.19,
+      "duration": 1.63,
+      "text": "So what this means"
+    },
+    {
+      "index": 60,
+      "start": 158.2,
+      "end": 160.43,
+      "duration": 2.23,
+      "text": "for part A"
+    },
+    {
+      "index": 61,
+      "start": 160.44,
+      "end": 162.47,
+      "duration": 2.03,
+      "text": "is we want x of 0"
+    },
+    {
+      "index": 62,
+      "start": 162.48,
+      "end": 164.83,
+      "duration": 2.35,
+      "text": "to be 0."
+    },
+    {
+      "index": 63,
+      "start": 164.84,
+      "end": 166.87,
+      "duration": 2.03,
+      "text": "And we want y of 0"
+    },
+    {
+      "index": 64,
+      "start": 166.88,
+      "end": 172.83,
+      "duration": 5.95,
+      "text": "to be -1."
+    },
+    {
+      "index": 65,
+      "start": 175.15,
+      "end": 175.16,
+      "duration": 0.01,
+      "text": "Now to further integrate this equation,"
+    },
+    {
+      "index": 66,
+      "start": 175.16,
+      "end": 176.59,
+      "duration": 1.43,
+      "text": "the quickest way to do it, especially if"
+    },
+    {
+      "index": 67,
+      "start": 176.6,
+      "end": 178.11,
+      "duration": 1.51,
+      "text": "you're in a test scenario, is to build a"
+    },
+    {
+      "index": 68,
+      "start": 178.12,
+      "end": 181.39,
+      "duration": 3.27,
+      "text": "table."
+    },
+    {
+      "index": 69,
+      "start": 183.59,
+      "end": 183.6,
+      "duration": 0.01,
+      "text": "So a nice table to build"
+    },
+    {
+      "index": 70,
+      "start": 183.6,
+      "end": 186.63,
+      "duration": 3.03,
+      "text": "is one that has a column n,"
+    },
+    {
+      "index": 71,
+      "start": 186.64,
+      "end": 189.67,
+      "duration": 3.03,
+      "text": "x of n,"
+    },
+    {
+      "index": 72,
+      "start": 192.15,
+      "end": 192.16,
+      "duration": 0.01,
+      "text": "y of n."
+    },
+    {
+      "index": 73,
+      "start": 192.16,
+      "end": 196.15,
+      "duration": 3.99,
+      "text": "I'm going to write f of n."
+    },
+    {
+      "index": 74,
+      "start": 199.71,
+      "end": 199.72,
+      "duration": 0.01,
+      "text": "f of n is to denote f"
+    },
+    {
+      "index": 75,
+      "start": 199.72,
+      "end": 204.63,
+      "duration": 4.91,
+      "text": "evaluated at x of n and y of n."
+    },
+    {
+      "index": 76,
+      "start": 206.23,
+      "end": 206.24,
+      "duration": 0.01,
+      "text": "And then it's also useful to write down"
+    },
+    {
+      "index": 77,
+      "start": 206.24,
+      "end": 208.47,
+      "duration": 2.23,
+      "text": "h"
+    },
+    {
+      "index": 78,
+      "start": 208.48,
+      "end": 210.03,
+      "duration": 1.55,
+      "text": "times f of n."
+    },
+    {
+      "index": 79,
+      "start": 210.04,
+      "end": 213.35,
+      "duration": 3.31,
+      "text": "Because the quantity h times f of n"
+    },
+    {
+      "index": 80,
+      "start": 213.36,
+      "end": 215.71,
+      "duration": 2.35,
+      "text": "comes up in the addition of y of n plus"
+    },
+    {
+      "index": 81,
+      "start": 215.72,
+      "end": 218.23,
+      "duration": 2.51,
+      "text": "1 is equal to y of n plus h times f of"
+    },
+    {
+      "index": 82,
+      "start": 218.24,
+      "end": 222.91,
+      "duration": 4.67,
+      "text": "n."
+    },
+    {
+      "index": 83,
+      "start": 224.11,
+      "end": 224.12,
+      "duration": 0.01,
+      "text": "Okay. And in the problem under"
+    },
+    {
+      "index": 84,
+      "start": 224.12,
+      "end": 226.11,
+      "duration": 1.99,
+      "text": "consideration,"
+    },
+    {
+      "index": 85,
+      "start": 226.12,
+      "end": 227.19,
+      "duration": 1.07,
+      "text": "I'm just going to fill in the first two"
+    },
+    {
+      "index": 86,
+      "start": 227.2,
+      "end": 228.95,
+      "duration": 1.75,
+      "text": "columns because they're the easiest. We"
+    },
+    {
+      "index": 87,
+      "start": 228.96,
+      "end": 232.39,
+      "duration": 3.43,
+      "text": "have n is equal to 0, 1, and 2."
+    },
+    {
+      "index": 88,
+      "start": 232.4,
+      "end": 235.23,
+      "duration": 2.83,
+      "text": "x of n is starting off at 0. So x of 0"
+    },
+    {
+      "index": 89,
+      "start": 235.24,
+      "end": 237.07,
+      "duration": 1.83,
+      "text": "is 0."
+    },
+    {
+      "index": 90,
+      "start": 237.08,
+      "end": 239.11,
+      "duration": 2.03,
+      "text": "x of 1 is going to be"
+    },
+    {
+      "index": 91,
+      "start": 239.12,
+      "end": 241.43,
+      "duration": 2.31,
+      "text": "0.5."
+    },
+    {
+      "index": 92,
+      "start": 241.44,
+      "end": 242.63,
+      "duration": 1.19,
+      "text": "And then"
+    },
+    {
+      "index": 93,
+      "start": 242.64,
+      "end": 246.15,
+      "duration": 3.51,
+      "text": "x of 2 is equal to 1."
+    },
+    {
+      "index": 94,
+      "start": 248.31,
+      "end": 248.32,
+      "duration": 0.01,
+      "text": "In addition, we're also told that y of 0"
+    },
+    {
+      "index": 95,
+      "start": 248.32,
+      "end": 251.27,
+      "duration": 2.95,
+      "text": "is equal to -1."
+    },
+    {
+      "index": 96,
+      "start": 251.28,
+      "end": 254.27,
+      "duration": 2.99,
+      "text": "Okay. And now for f of n,"
+    },
+    {
+      "index": 97,
+      "start": 254.28,
+      "end": 259.349,
+      "duration": 5.069,
+      "text": "I'll just use the side here."
+    },
+    {
+      "index": 98,
+      "start": 278.63,
+      "end": 278.64,
+      "duration": 0.01,
+      "text": "So we can fill in a"
+    },
+    {
+      "index": 99,
+      "start": 278.64,
+      "end": 280.47,
+      "duration": 1.83,
+      "text": "0.1 here."
+    },
+    {
+      "index": 100,
+      "start": 280.48,
+      "end": 283.03,
+      "duration": 2.55,
+      "text": "Which means that h times f of 1"
+    },
+    {
+      "index": 101,
+      "start": 283.04,
+      "end": 286.91,
+      "duration": 3.87,
+      "text": "is going to be 0.5."
+    },
+    {
+      "index": 102,
+      "start": 290.11,
+      "end": 290.12,
+      "duration": 0.01,
+      "text": "And now with h of f of n, we can fill in"
+    },
+    {
+      "index": 103,
+      "start": 290.12,
+      "end": 292.51,
+      "duration": 2.39,
+      "text": "y of 1."
+    },
+    {
+      "index": 104,
+      "start": 292.52,
+      "end": 295.15,
+      "duration": 2.63,
+      "text": "So y of 1 is just going to be y of 0"
+    },
+    {
+      "index": 105,
+      "start": 295.16,
+      "end": 297.63,
+      "duration": 2.47,
+      "text": "plus 0.5."
+    },
+    {
+      "index": 106,
+      "start": 297.64,
+      "end": 299.79,
+      "duration": 2.15,
+      "text": "And y of 0 is -1."
+    },
+    {
+      "index": 107,
+      "start": 299.8,
+      "end": 305.87,
+      "duration": 6.07,
+      "text": "So this is going to be -0.5."
+    },
+    {
+      "index": 108,
+      "start": 312.35,
+      "end": 312.36,
+      "duration": 0.01,
+      "text": "So this is going to be y of 1 squared"
+    },
+    {
+      "index": 109,
+      "start": 312.36,
+      "end": 316.39,
+      "duration": 4.03,
+      "text": "minus x of 1 y of 1."
+    },
+    {
+      "index": 110,
+      "start": 318.51,
+      "end": 318.52,
+      "duration": 0.01,
+      "text": "Now y of 1 squared,"
+    },
+    {
+      "index": 111,
+      "start": 318.52,
+      "end": 323.27,
+      "duration": 4.75,
+      "text": "this is -0.5 squared."
+    },
+    {
+      "index": 112,
+      "start": 326.87,
+      "end": 326.88,
+      "duration": 0.01,
+      "text": "x of 1 is 0.5."
+    },
+    {
+      "index": 113,
+      "start": 326.88,
+      "end": 331.83,
+      "duration": 4.95,
+      "text": "And y of 1 is again -0.5."
+    },
+    {
+      "index": 114,
+      "start": 336.15,
+      "end": 336.16,
+      "duration": 0.01,
+      "text": "So this gives us 1/4 plus 1/4."
+    },
+    {
+      "index": 115,
+      "start": 336.16,
+      "end": 341.19,
+      "duration": 5.03,
+      "text": "Which together is just 0.5."
+    },
+    {
+      "index": 116,
+      "start": 344.27,
+      "end": 344.28,
+      "duration": 0.01,
+      "text": "So we have 0.5 in this square now."
+    },
+    {
+      "index": 117,
+      "start": 344.28,
+      "end": 347.87,
+      "duration": 3.59,
+      "text": "And then h times 0.5 is 0.5 squared."
+    },
+    {
+      "index": 118,
+      "start": 347.88,
+      "end": 351.91,
+      "duration": 4.03,
+      "text": "Which is just 0.25."
+    },
+    {
+      "index": 119,
+      "start": 353.35,
+      "end": 353.36,
+      "duration": 0.01,
+      "text": "Okay."
+    },
+    {
+      "index": 120,
+      "start": 353.36,
+      "end": 356.27,
+      "duration": 2.91,
+      "text": "Now y of 2 is just going to be y of 1"
+    },
+    {
+      "index": 121,
+      "start": 356.28,
+      "end": 358.83,
+      "duration": 2.55,
+      "text": "plus h times f of 1."
+    },
+    {
+      "index": 122,
+      "start": 358.84,
+      "end": 362.55,
+      "duration": 3.71,
+      "text": "So we know h of f of 1 is 0.25."
+    },
+    {
+      "index": 123,
+      "start": 362.56,
+      "end": 366.07,
+      "duration": 3.51,
+      "text": "And y of 1 is just -0.5."
+    },
+    {
+      "index": 124,
+      "start": 366.08,
+      "end": 368.43,
+      "duration": 2.35,
+      "text": "So this is going to be 0.25,"
+    },
+    {
+      "index": 125,
+      "start": 368.44,
+      "end": 370.59,
+      "duration": 2.15,
+      "text": "-0.25."
+    },
+    {
+      "index": 126,
+      "start": 370.6,
+      "end": 372.35,
+      "duration": 1.75,
+      "text": "Okay."
+    },
+    {
+      "index": 127,
+      "start": 372.36,
+      "end": 374.27,
+      "duration": 1.91,
+      "text": "And we note that"
+    },
+    {
+      "index": 128,
+      "start": 374.28,
+      "end": 377.15,
+      "duration": 2.87,
+      "text": "this is the answer we're looking for."
+    },
+    {
+      "index": 129,
+      "start": 377.16,
+      "end": 380.79,
+      "duration": 3.63,
+      "text": "So just to conclude,"
+    },
+    {
+      "index": 130,
+      "start": 384.19,
+      "end": 384.2,
+      "duration": 0.01,
+      "text": "our approximation y of 2,"
+    },
+    {
+      "index": 131,
+      "start": 384.2,
+      "end": 386.95,
+      "duration": 2.75,
+      "text": "which is approximately"
+    },
+    {
+      "index": 132,
+      "start": 386.96,
+      "end": 389.79,
+      "duration": 2.83,
+      "text": "y evaluated at 1,"
+    },
+    {
+      "index": 133,
+      "start": 389.8,
+      "end": 396.19,
+      "duration": 6.39,
+      "text": "is going to be 0, -0.25."
+    },
+    {
+      "index": 134,
+      "start": 403.51,
+      "end": 403.52,
+      "duration": 0.01,
+      "text": "does our approximation -0.25"
+    },
+    {
+      "index": 135,
+      "start": 403.52,
+      "end": 405.99,
+      "duration": 2.47,
+      "text": "overestimate or underestimate the actual"
+    },
+    {
+      "index": 136,
+      "start": 406.0,
+      "end": 408.99,
+      "duration": 2.99,
+      "text": "exact solution of the ODE?"
+    },
+    {
+      "index": 137,
+      "start": 409.0,
+      "end": 411.31,
+      "duration": 2.31,
+      "text": "Now in general, what you want to do is"
+    },
+    {
+      "index": 138,
+      "start": 411.32,
+      "end": 413.07,
+      "duration": 1.75,
+      "text": "you want to take the second derivative."
+    },
+    {
+      "index": 139,
+      "start": 413.08,
+      "end": 414.27,
+      "duration": 1.19,
+      "text": "However, for this problem, we're only"
+    },
+    {
+      "index": 140,
+      "start": 414.28,
+      "end": 415.99,
+      "duration": 1.71,
+      "text": "going to consider the first step. So our"
+    },
+    {
+      "index": 141,
+      "start": 416.0,
+      "end": 417.83,
+      "duration": 1.83,
+      "text": "first step, does it overestimate or"
+    },
+    {
+      "index": 142,
+      "start": 417.84,
+      "end": 420.71,
+      "duration": 2.87,
+      "text": "underestimate the exact solution?"
+    },
+    {
+      "index": 143,
+      "start": 420.72,
+      "end": 422.47,
+      "duration": 1.75,
+      "text": "And to do this, what we want to do is we"
+    },
+    {
+      "index": 144,
+      "start": 422.48,
+      "end": 424.55,
+      "duration": 2.07,
+      "text": "want to take a look at the concavity."
+    },
+    {
+      "index": 145,
+      "start": 424.56,
+      "end": 427.19,
+      "duration": 2.63,
+      "text": "So we want to look at y double prime."
+    },
+    {
+      "index": 146,
+      "start": 427.2,
+      "end": 429.19,
+      "duration": 1.99,
+      "text": "So y double prime"
+    },
+    {
+      "index": 147,
+      "start": 429.2,
+      "end": 431.95,
+      "duration": 2.75,
+      "text": "is going to be d by dx"
+    },
+    {
+      "index": 148,
+      "start": 431.96,
+      "end": 434.39,
+      "duration": 2.43,
+      "text": "of y prime. And we know from the ODE y"
+    },
+    {
+      "index": 149,
+      "start": 434.4,
+      "end": 438.19,
+      "duration": 3.79,
+      "text": "prime is y squared minus xy."
+    },
+    {
+      "index": 150,
+      "start": 440.95,
+      "end": 440.96,
+      "duration": 0.01,
+      "text": "So I can work this out"
+    },
+    {
+      "index": 151,
+      "start": 440.96,
+      "end": 442.47,
+      "duration": 1.51,
+      "text": "to be 2y"
+    },
+    {
+      "index": 152,
+      "start": 442.48,
+      "end": 443.59,
+      "duration": 1.11,
+      "text": "y prime"
+    },
+    {
+      "index": 153,
+      "start": 443.6,
+      "end": 445.15,
+      "duration": 1.55,
+      "text": "just using the chain rule"
+    },
+    {
+      "index": 154,
+      "start": 445.16,
+      "end": 446.19,
+      "duration": 1.03,
+      "text": "minus"
+    },
+    {
+      "index": 155,
+      "start": 446.2,
+      "end": 447.63,
+      "duration": 1.43,
+      "text": "y"
+    },
+    {
+      "index": 156,
+      "start": 447.64,
+      "end": 449.55,
+      "duration": 1.91,
+      "text": "minus"
+    },
+    {
+      "index": 157,
+      "start": 449.56,
+      "end": 451.99,
+      "duration": 2.43,
+      "text": "xy"
+    },
+    {
+      "index": 158,
+      "start": 452.0,
+      "end": 453.91,
+      "duration": 1.91,
+      "text": "And at the first step,"
+    },
+    {
+      "index": 159,
+      "start": 453.92,
+      "end": 455.63,
+      "duration": 1.71,
+      "text": "we're interested in evaluating this"
+    },
+    {
+      "index": 160,
+      "start": 455.64,
+      "end": 457.59,
+      "duration": 1.95,
+      "text": "quantity"
+    },
+    {
+      "index": 161,
+      "start": 457.6,
+      "end": 460.03,
+      "duration": 2.43,
+      "text": "at the point x equals 0,"
+    },
+    {
+      "index": 162,
+      "start": 460.04,
+      "end": 462.35,
+      "duration": 2.31,
+      "text": "y is equal to -1. So this is the first"
+    },
+    {
+      "index": 163,
+      "start": 462.36,
+      "end": 465.39,
+      "duration": 3.03,
+      "text": "step."
+    },
+    {
+      "index": 164,
+      "start": 472.07,
+      "end": 472.08,
+      "duration": 0.01,
+      "text": "this simplifies to"
+    },
+    {
+      "index": 165,
+      "start": 472.08,
+      "end": 474.79,
+      "duration": 2.71,
+      "text": "-2 y prime"
+    },
+    {
+      "index": 166,
+      "start": 474.8,
+      "end": 476.47,
+      "duration": 1.67,
+      "text": "plus 1."
+    },
+    {
+      "index": 167,
+      "start": 476.48,
+      "end": 479.55,
+      "duration": 3.07,
+      "text": "This term right here drops off."
+    },
+    {
+      "index": 168,
+      "start": 479.56,
+      "end": 481.67,
+      "duration": 2.11,
+      "text": "And y prime specifically is going to be"
+    },
+    {
+      "index": 169,
+      "start": 481.68,
+      "end": 482.99,
+      "duration": 1.31,
+      "text": "y squared"
+    },
+    {
+      "index": 170,
+      "start": 483.0,
+      "end": 485.11,
+      "duration": 2.11,
+      "text": "minus xy. So we get"
+    },
+    {
+      "index": 171,
+      "start": 485.12,
+      "end": 486.55,
+      "duration": 1.43,
+      "text": "2"
+    },
+    {
+      "index": 172,
+      "start": 486.56,
+      "end": 488.99,
+      "duration": 2.43,
+      "text": "y squared is going to be 1"
+    },
+    {
+      "index": 173,
+      "start": 489.0,
+      "end": 490.67,
+      "duration": 1.67,
+      "text": "minus 0"
+    },
+    {
+      "index": 174,
+      "start": 490.68,
+      "end": 492.31,
+      "duration": 1.63,
+      "text": "plus 1."
+    },
+    {
+      "index": 175,
+      "start": 492.32,
+      "end": 493.59,
+      "duration": 1.27,
+      "text": "So together, this is going to give us"
+    },
+    {
+      "index": 176,
+      "start": 493.6,
+      "end": 495.87,
+      "duration": 2.27,
+      "text": "minus 1."
+    },
+    {
+      "index": 177,
+      "start": 495.88,
+      "end": 499.43,
+      "duration": 3.55,
+      "text": "And we note that this is less than 0."
+    },
+    {
+      "index": 178,
+      "start": 499.44,
+      "end": 501.47,
+      "duration": 2.03,
+      "text": "Okay."
+    },
+    {
+      "index": 179,
+      "start": 501.48,
+      "end": 503.39,
+      "duration": 1.91,
+      "text": "So we've just shown that the concavity"
+    },
+    {
+      "index": 180,
+      "start": 503.4,
+      "end": 505.95,
+      "duration": 2.55,
+      "text": "at the at our starting point x equals 0,"
+    },
+    {
+      "index": 181,
+      "start": 505.96,
+      "end": 509.83,
+      "duration": 3.87,
+      "text": "y is equal to -1 is less than 0."
+    },
+    {
+      "index": 182,
+      "start": 509.84,
+      "end": 511.43,
+      "duration": 1.59,
+      "text": "So what this means is that our our"
+    },
+    {
+      "index": 183,
+      "start": 511.44,
+      "end": 512.79,
+      "duration": 1.35,
+      "text": "initial approximation is going to"
+    },
+    {
+      "index": 184,
+      "start": 512.8,
+      "end": 515.35,
+      "duration": 2.55,
+      "text": "overestimate the solution."
+    },
+    {
+      "index": 185,
+      "start": 515.36,
+      "end": 516.31,
+      "duration": 0.95,
+      "text": "We can see that it's going to"
+    },
+    {
+      "index": 186,
+      "start": 516.32,
+      "end": 522.87,
+      "duration": 6.55,
+      "text": "overestimate it just by a quick sketch."
+    },
+    {
+      "index": 187,
+      "start": 525.91,
+      "end": 525.92,
+      "duration": 0.01,
+      "text": "For example, if I were to plot y and x,"
+    },
+    {
+      "index": 188,
+      "start": 525.92,
+      "end": 528.19,
+      "duration": 2.27,
+      "text": "we're starting off at this point x is"
+    },
+    {
+      "index": 189,
+      "start": 528.2,
+      "end": 529.47,
+      "duration": 1.27,
+      "text": "equal to 0,"
+    },
+    {
+      "index": 190,
+      "start": 529.48,
+      "end": 531.31,
+      "duration": 1.83,
+      "text": "y is equal to -1."
+    },
+    {
+      "index": 191,
+      "start": 531.32,
+      "end": 533.31,
+      "duration": 1.99,
+      "text": "So this is y 0"
+    },
+    {
+      "index": 192,
+      "start": 533.32,
+      "end": 536.35,
+      "duration": 3.03,
+      "text": "is equal to -1."
+    },
+    {
+      "index": 193,
+      "start": 536.36,
+      "end": 537.99,
+      "duration": 1.63,
+      "text": "We know the solution, the exact solution"
+    },
+    {
+      "index": 194,
+      "start": 538.0,
+      "end": 539.67,
+      "duration": 1.67,
+      "text": "is increasing"
+    },
+    {
+      "index": 195,
+      "start": 539.68,
+      "end": 542.75,
+      "duration": 3.07,
+      "text": "and it's concave down because the"
+    },
+    {
+      "index": 196,
+      "start": 542.76,
+      "end": 545.15,
+      "duration": 2.39,
+      "text": "second derivative is -1."
+    },
+    {
+      "index": 197,
+      "start": 545.16,
+      "end": 547.19,
+      "duration": 2.03,
+      "text": "And by Euler's formula, what we're doing"
+    },
+    {
+      "index": 198,
+      "start": 547.2,
+      "end": 549.15,
+      "duration": 1.95,
+      "text": "is we're approximating the solution"
+    },
+    {
+      "index": 199,
+      "start": 549.16,
+      "end": 550.87,
+      "duration": 1.71,
+      "text": "using a tangent line"
+    },
+    {
+      "index": 200,
+      "start": 550.88,
+      "end": 552.67,
+      "duration": 1.79,
+      "text": "at this point. So we can see that our"
+    },
+    {
+      "index": 201,
+      "start": 552.68,
+      "end": 554.31,
+      "duration": 1.63,
+      "text": "approximate solution,"
+    },
+    {
+      "index": 202,
+      "start": 554.32,
+      "end": 556.95,
+      "duration": 2.63,
+      "text": "when we take one step to go from here to"
+    },
+    {
+      "index": 203,
+      "start": 556.96,
+      "end": 558.15,
+      "duration": 1.19,
+      "text": "here."
+    },
+    {
+      "index": 204,
+      "start": 558.16,
+      "end": 560.27,
+      "duration": 2.11,
+      "text": "So this is x of 0."
+    },
+    {
+      "index": 205,
+      "start": 560.28,
+      "end": 563.11,
+      "duration": 2.83,
+      "text": "This is x of 1."
+    },
+    {
+      "index": 206,
+      "start": 563.12,
+      "end": 564.87,
+      "duration": 1.75,
+      "text": "Our solution,"
+    },
+    {
+      "index": 207,
+      "start": 564.88,
+      "end": 569.31,
+      "duration": 4.43,
+      "text": "which is now going to be y of 1 here,"
+    },
+    {
+      "index": 208,
+      "start": 571.43,
+      "end": 571.44,
+      "duration": 0.01,
+      "text": "is going to overestimate the curve. And"
+    },
+    {
+      "index": 209,
+      "start": 571.44,
+      "end": 572.95,
+      "duration": 1.51,
+      "text": "the reason it overestimates it, I'll"
+    },
+    {
+      "index": 210,
+      "start": 572.96,
+      "end": 575.35,
+      "duration": 2.39,
+      "text": "just reiterate again, is because our"
+    },
+    {
+      "index": 211,
+      "start": 575.36,
+      "end": 577.59,
+      "duration": 2.23,
+      "text": "solution is concave down."
+    },
+    {
+      "index": 212,
+      "start": 577.6,
+      "end": 580.03,
+      "duration": 2.43,
+      "text": "Okay. So this concludes the problem."
+    },
+    {
+      "index": 213,
+      "start": 580.04,
+      "end": 582.47,
+      "duration": 2.43,
+      "text": "And just to reiterate, when dealing with"
+    },
+    {
+      "index": 214,
+      "start": 582.48,
+      "end": 584.31,
+      "duration": 1.83,
+      "text": "Euler's method, the best thing to do is"
+    },
+    {
+      "index": 215,
+      "start": 584.32,
+      "end": 586.27,
+      "duration": 1.95,
+      "text": "just to build a table like this and you"
+    },
+    {
+      "index": 216,
+      "start": 586.28,
+      "end": 589.51,
+      "duration": 3.23,
+      "text": "can quickly work it out."
+    },
+    {
+      "index": 217,
+      "start": 592.91,
+      "end": 592.92,
+      "duration": 0.01,
+      "text": "Secondly, if you're asked questions on"
+    },
+    {
+      "index": 218,
+      "start": 592.92,
+      "end": 595.35,
+      "duration": 2.43,
+      "text": "if your numerical solution overestimates"
+    },
+    {
+      "index": 219,
+      "start": 595.36,
+      "end": 597.55,
+      "duration": 2.19,
+      "text": "or underestimates the exact solution,"
+    },
+    {
+      "index": 220,
+      "start": 597.56,
+      "end": 598.59,
+      "duration": 1.03,
+      "text": "typically what you want to do is you"
+    },
+    {
+      "index": 221,
+      "start": 598.6,
+      "end": 600.91,
+      "duration": 2.31,
+      "text": "want to look at the concavity."
+    },
+    {
+      "index": 222,
+      "start": 600.92,
+      "end": 602.43,
+      "duration": 1.51,
+      "text": "And then you can always just sketch a"
+    },
+    {
+      "index": 223,
+      "start": 602.44,
+      "end": 605.11,
+      "duration": 2.67,
+      "text": "quick diagram on the back of a notepad"
+    },
+    {
+      "index": 224,
+      "start": 605.12,
+      "end": 606.71,
+      "duration": 1.59,
+      "text": "to see if"
+    },
+    {
+      "index": 225,
+      "start": 606.72,
+      "end": 607.87,
+      "duration": 1.15,
+      "text": "the uh"
+    },
+    {
+      "index": 226,
+      "start": 607.88,
+      "end": 609.43,
+      "duration": 1.55,
+      "text": "the solution overestimates or"
+    },
+    {
+      "index": 227,
+      "start": 609.44,
+      "end": 611.55,
+      "duration": 2.11,
+      "text": "underestimates the exact solution."
+    },
+    {
+      "index": 228,
+      "start": 611.56,
+      "end": 612.59,
+      "duration": 1.03,
+      "text": "Okay?"
+    },
+    {
+      "index": 229,
+      "start": 612.6,
+      "end": 614.03,
+      "duration": 1.43,
+      "text": "So, I'd like to conclude here, and I'll"
+    },
+    {
+      "index": 230,
+      "start": 614.04,
+      "end": 616.72,
+      "duration": 2.68,
+      "text": "see you next time."
+    }
+  ],
+  "course": {
+    "category": "Mathematics",
+    "title": "Differential Equations",
+    "source_url": "https://www.youtube.com/playlist?list=PL64BDFBDA2AF24F7E"
+  }
+}

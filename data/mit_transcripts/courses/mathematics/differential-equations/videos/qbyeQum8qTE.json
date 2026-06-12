@@ -1,0 +1,1565 @@
+{
+  "video": {
+    "id": "qbyeQum8qTE",
+    "title": "Matrix Exponentials | MIT 18.03SC Differential Equations, Fall 2011",
+    "url": "https://www.youtube.com/watch?v=qbyeQum8qTE",
+    "channel": "MIT OpenCourseWare",
+    "duration": 714,
+    "language": "en"
+  },
+  "segment_count": 221,
+  "segments": [
+    {
+      "index": 0,
+      "start": 8.43,
+      "end": 8.44,
+      "duration": 0.01,
+      "text": "Welcome to this recitation on matrix"
+    },
+    {
+      "index": 1,
+      "start": 8.44,
+      "end": 10.79,
+      "duration": 2.35,
+      "text": "exponential. So here we're given matrix"
+    },
+    {
+      "index": 2,
+      "start": 10.8,
+      "end": 12.43,
+      "duration": 1.63,
+      "text": "A with entry"
+    },
+    {
+      "index": 3,
+      "start": 12.44,
+      "end": 15.35,
+      "duration": 2.91,
+      "text": "6512 and we're asked to compute the"
+    },
+    {
+      "index": 4,
+      "start": 15.36,
+      "end": 17.75,
+      "duration": 2.39,
+      "text": "matrix exponential exponential a t and"
+    },
+    {
+      "index": 5,
+      "start": 17.76,
+      "end": 19.67,
+      "duration": 1.91,
+      "text": "to use it to solve the initial value"
+    },
+    {
+      "index": 6,
+      "start": 19.68,
+      "end": 23.91,
+      "duration": 4.23,
+      "text": "problem u u prime of tals a ut where"
+    },
+    {
+      "index": 7,
+      "start": 23.92,
+      "end": 26.23,
+      "duration": 2.31,
+      "text": "here u are basically vectors with"
+    },
+    {
+      "index": 8,
+      "start": 26.24,
+      "end": 29.509,
+      "duration": 3.269,
+      "text": "initial condition u of 0= 41. So, why"
+    },
+    {
+      "index": 9,
+      "start": 29.519,
+      "end": 31.429,
+      "duration": 1.91,
+      "text": "don't you pause the video, work through"
+    },
+    {
+      "index": 10,
+      "start": 31.439,
+      "end": 43.31,
+      "duration": 11.871,
+      "text": "the problem, and I'll be right"
+    },
+    {
+      "index": 11,
+      "start": 49.11,
+      "end": 49.12,
+      "duration": 0.01,
+      "text": "back. Welcome back. Okay, so first to uh"
+    },
+    {
+      "index": 12,
+      "start": 49.12,
+      "end": 50.549,
+      "duration": 1.429,
+      "text": "go ahead and compute the matrix"
+    },
+    {
+      "index": 13,
+      "start": 50.559,
+      "end": 53.35,
+      "duration": 2.791,
+      "text": "exponential, we need to identify the aen"
+    },
+    {
+      "index": 14,
+      "start": 53.36,
+      "end": 56.95,
+      "duration": 3.59,
+      "text": "values of the matrix A and its AEN"
+    },
+    {
+      "index": 15,
+      "start": 56.96,
+      "end": 59.47,
+      "duration": 2.51,
+      "text": "vectors. So this is a"
+    },
+    {
+      "index": 16,
+      "start": 59.48,
+      "end": 62.189,
+      "duration": 2.709,
+      "text": "matrix just rewrite it"
+    },
+    {
+      "index": 17,
+      "start": 62.199,
+      "end": 69.789,
+      "duration": 7.59,
+      "text": "here that we saw before and it's a"
+    },
+    {
+      "index": 18,
+      "start": 73.75,
+      "end": 73.76,
+      "duration": 0.01,
+      "text": "values are again solution of 6 - lambda"
+    },
+    {
+      "index": 19,
+      "start": 73.76,
+      "end": 80.749,
+      "duration": 6.989,
+      "text": "5 1 2 - lambda = 0 which gives us"
+    },
+    {
+      "index": 20,
+      "start": 80.759,
+      "end": 86.749,
+      "duration": 5.99,
+      "text": "6 2 - lambda - 5 ="
+    },
+    {
+      "index": 21,
+      "start": 86.759,
+      "end": 92.469,
+      "duration": 5.71,
+      "text": "0 lambda square - 8 lambda and we have a"
+    },
+    {
+      "index": 22,
+      "start": 92.479,
+      "end": 94.59,
+      "duration": 2.111,
+      "text": "12 -"
+    },
+    {
+      "index": 23,
+      "start": 94.6,
+      "end": 98.59,
+      "duration": 3.99,
+      "text": "5. So you can verify that the two egg"
+    },
+    {
+      "index": 24,
+      "start": 98.6,
+      "end": 101.71,
+      "duration": 3.11,
+      "text": "values be 1 and"
+    },
+    {
+      "index": 25,
+      "start": 101.72,
+      "end": 104.109,
+      "duration": 2.389,
+      "text": "7. So"
+    },
+    {
+      "index": 26,
+      "start": 104.119,
+      "end": 108.91,
+      "duration": 4.791,
+      "text": "yeah plus or minus just write"
+    },
+    {
+      "index": 27,
+      "start": 108.92,
+      "end": 114.91,
+      "duration": 5.99,
+      "text": "them la 1 = to 1 and lda 2 = to 7. So"
+    },
+    {
+      "index": 28,
+      "start": 114.92,
+      "end": 118.03,
+      "duration": 3.11,
+      "text": "now we need to seek the AEN vectors"
+    },
+    {
+      "index": 29,
+      "start": 118.04,
+      "end": 120.31,
+      "duration": 2.27,
+      "text": "associated to each one of the AEN"
+    },
+    {
+      "index": 30,
+      "start": 120.32,
+      "end": 122.389,
+      "duration": 2.069,
+      "text": "values. So the idea here is to basically"
+    },
+    {
+      "index": 31,
+      "start": 122.399,
+      "end": 124.709,
+      "duration": 2.31,
+      "text": "move toward a diagonalization of the"
+    },
+    {
+      "index": 32,
+      "start": 124.719,
+      "end": 128.07,
+      "duration": 3.351,
+      "text": "matrix A. So let's seek the AEN vectors"
+    },
+    {
+      "index": 33,
+      "start": 128.08,
+      "end": 129.949,
+      "duration": 1.869,
+      "text": "and here I'm"
+    },
+    {
+      "index": 34,
+      "start": 129.959,
+      "end": 132.47,
+      "duration": 2.511,
+      "text": "just going to give them to you and you"
+    },
+    {
+      "index": 35,
+      "start": 132.48,
+      "end": 136.07,
+      "duration": 3.59,
+      "text": "can verify the the the calculation. Uh"
+    },
+    {
+      "index": 36,
+      "start": 136.08,
+      "end": 137.91,
+      "duration": 1.83,
+      "text": "and this calculation was performed in a"
+    },
+    {
+      "index": 37,
+      "start": 137.92,
+      "end": 141.11,
+      "duration": 3.19,
+      "text": "previous recitation. So the aen vectors"
+    },
+    {
+      "index": 38,
+      "start": 141.12,
+      "end": 147.55,
+      "duration": 6.43,
+      "text": "v1 associated to the aen value lambda"
+    },
+    {
+      "index": 39,
+      "start": 151.63,
+      "end": 151.64,
+      "duration": 0.01,
+      "text": "1 was for example one minus"
+    },
+    {
+      "index": 40,
+      "start": 151.64,
+      "end": 155.47,
+      "duration": 3.83,
+      "text": "one and the other"
+    },
+    {
+      "index": 41,
+      "start": 159.509,
+      "end": 159.519,
+      "duration": 0.01,
+      "text": "one that we found again this is one form"
+    },
+    {
+      "index": 42,
+      "start": 159.519,
+      "end": 163.63,
+      "duration": 4.111,
+      "text": "of the aen vector was one and"
+    },
+    {
+      "index": 43,
+      "start": 163.64,
+      "end": 170.309,
+      "duration": 6.669,
+      "text": "five minus five five and"
+    },
+    {
+      "index": 44,
+      "start": 172.309,
+      "end": 172.319,
+      "duration": 0.01,
+      "text": "So these are from the notes of the"
+    },
+    {
+      "index": 45,
+      "start": 172.319,
+      "end": 174.71,
+      "duration": 2.391,
+      "text": "previous recitation. So you can verify"
+    },
+    {
+      "index": 46,
+      "start": 174.72,
+      "end": 177.83,
+      "duration": 3.11,
+      "text": "that these are the two agon vectors and"
+    },
+    {
+      "index": 47,
+      "start": 177.84,
+      "end": 181.19,
+      "duration": 3.35,
+      "text": "uh from this point then we can rewrite"
+    },
+    {
+      "index": 48,
+      "start": 181.2,
+      "end": 185.19,
+      "duration": 3.99,
+      "text": "the solution if if you recall I'm just"
+    },
+    {
+      "index": 49,
+      "start": 185.2,
+      "end": 187.83,
+      "duration": 2.63,
+      "text": "going to go through the steps toward"
+    },
+    {
+      "index": 50,
+      "start": 187.84,
+      "end": 189.35,
+      "duration": 1.51,
+      "text": "getting to the definition of the"
+    },
+    {
+      "index": 51,
+      "start": 189.36,
+      "end": 191.67,
+      "duration": 2.31,
+      "text": "exponential matrix. So here if we didn't"
+    },
+    {
+      "index": 52,
+      "start": 191.68,
+      "end": 192.869,
+      "duration": 1.189,
+      "text": "know anything about the exponential"
+    },
+    {
+      "index": 53,
+      "start": 192.879,
+      "end": 195.03,
+      "duration": 2.151,
+      "text": "matrix we'd be able to write this"
+    },
+    {
+      "index": 54,
+      "start": 195.04,
+      "end": 198.11,
+      "duration": 3.07,
+      "text": "solution as C1"
+    },
+    {
+      "index": 55,
+      "start": 198.12,
+      "end": 201.149,
+      "duration": 3.029,
+      "text": "exponential T"
+    },
+    {
+      "index": 56,
+      "start": 201.159,
+      "end": 203.79,
+      "duration": 2.631,
+      "text": "v1 plus"
+    },
+    {
+      "index": 57,
+      "start": 203.8,
+      "end": 206.83,
+      "duration": 3.03,
+      "text": "C2 exponential"
+    },
+    {
+      "index": 58,
+      "start": 206.84,
+      "end": 208.75,
+      "duration": 1.91,
+      "text": "70"
+    },
+    {
+      "index": 59,
+      "start": 208.76,
+      "end": 211.949,
+      "duration": 3.189,
+      "text": "V2 which basically gives"
+    },
+    {
+      "index": 60,
+      "start": 211.959,
+      "end": 214.949,
+      "duration": 2.99,
+      "text": "us here if I write it in this form for"
+    },
+    {
+      "index": 61,
+      "start": 214.959,
+      "end": 219.47,
+      "duration": 4.511,
+      "text": "example uh an exponential"
+    },
+    {
+      "index": 62,
+      "start": 219.48,
+      "end": 223.71,
+      "duration": 4.23,
+      "text": "t minus exponential"
+    },
+    {
+      "index": 63,
+      "start": 226.03,
+      "end": 226.04,
+      "duration": 0.01,
+      "text": "t and an"
+    },
+    {
+      "index": 64,
+      "start": 226.04,
+      "end": 229.11,
+      "duration": 3.07,
+      "text": "exponential 5t multiplied by the entry"
+    },
+    {
+      "index": 65,
+      "start": 229.12,
+      "end": 230.99,
+      "duration": 1.87,
+      "text": "of this vector an"
+    },
+    {
+      "index": 66,
+      "start": 231.0,
+      "end": 234.35,
+      "duration": 3.35,
+      "text": "exponential 70t here"
+    },
+    {
+      "index": 67,
+      "start": 234.36,
+      "end": 238.47,
+      "duration": 4.11,
+      "text": "multiplying c1 c2. So this is where the"
+    },
+    {
+      "index": 68,
+      "start": 238.48,
+      "end": 241.91,
+      "duration": 3.43,
+      "text": "idea of the um of the um matrix"
+    },
+    {
+      "index": 69,
+      "start": 241.92,
+      "end": 247.63,
+      "duration": 5.71,
+      "text": "exponential come from. We're basically"
+    },
+    {
+      "index": 70,
+      "start": 250.869,
+      "end": 250.879,
+      "duration": 0.01,
+      "text": "introducing a matrix f of t for which we"
+    },
+    {
+      "index": 71,
+      "start": 250.879,
+      "end": 254.39,
+      "duration": 3.511,
+      "text": "can write u equals 5 oft multiply by the"
+    },
+    {
+      "index": 72,
+      "start": 254.4,
+      "end": 257.71,
+      "duration": 3.31,
+      "text": "c1 c2 uh general"
+    },
+    {
+      "index": 73,
+      "start": 257.72,
+      "end": 261.469,
+      "duration": 3.749,
+      "text": "constants. So f of"
+    },
+    {
+      "index": 74,
+      "start": 261.479,
+      "end": 264.31,
+      "duration": 2.831,
+      "text": "t would then be equal to this matrix."
+    },
+    {
+      "index": 75,
+      "start": 264.32,
+      "end": 265.79,
+      "duration": 1.47,
+      "text": "But what we"
+    },
+    {
+      "index": 76,
+      "start": 265.8,
+      "end": 268.71,
+      "duration": 2.91,
+      "text": "want is an in is to be able to solve an"
+    },
+    {
+      "index": 77,
+      "start": 268.72,
+      "end": 270.909,
+      "duration": 2.189,
+      "text": "initial value"
+    },
+    {
+      "index": 78,
+      "start": 270.919,
+      "end": 274.31,
+      "duration": 3.391,
+      "text": "problem for which"
+    },
+    {
+      "index": 79,
+      "start": 274.32,
+      "end": 277.59,
+      "duration": 3.27,
+      "text": "um so let me just for which e of a of"
+    },
+    {
+      "index": 80,
+      "start": 277.6,
+      "end": 280.23,
+      "duration": 2.63,
+      "text": "zero applied to our initial conditions"
+    },
+    {
+      "index": 81,
+      "start": 280.24,
+      "end": 281.629,
+      "duration": 1.389,
+      "text": "would give us"
+    },
+    {
+      "index": 82,
+      "start": 281.639,
+      "end": 284.67,
+      "duration": 3.031,
+      "text": "back our initial"
+    },
+    {
+      "index": 83,
+      "start": 284.68,
+      "end": 287.909,
+      "duration": 3.229,
+      "text": "condition. Okay. So we're seeking for a"
+    },
+    {
+      "index": 84,
+      "start": 287.919,
+      "end": 290.87,
+      "duration": 2.951,
+      "text": "form for this exponential matrix that"
+    },
+    {
+      "index": 85,
+      "start": 290.88,
+      "end": 293.35,
+      "duration": 2.47,
+      "text": "would allow us to do this."
+    },
+    {
+      "index": 86,
+      "start": 293.36,
+      "end": 294.67,
+      "duration": 1.31,
+      "text": "So the way that"
+    },
+    {
+      "index": 87,
+      "start": 294.68,
+      "end": 298.59,
+      "duration": 3.91,
+      "text": "we define the exponential the matrix"
+    },
+    {
+      "index": 88,
+      "start": 298.6,
+      "end": 301.469,
+      "duration": 2.869,
+      "text": "exponential give us exponential"
+    },
+    {
+      "index": 89,
+      "start": 301.479,
+      "end": 303.99,
+      "duration": 2.511,
+      "text": "a and I won't go into the proof but"
+    },
+    {
+      "index": 90,
+      "start": 304.0,
+      "end": 305.67,
+      "duration": 1.67,
+      "text": "we're just going to check it together"
+    },
+    {
+      "index": 91,
+      "start": 305.68,
+      "end": 309.43,
+      "duration": 3.75,
+      "text": "multiplied by 5 of 0 minus one. So let's"
+    },
+    {
+      "index": 92,
+      "start": 309.44,
+      "end": 312.67,
+      "duration": 3.23,
+      "text": "check that if we use this form of the"
+    },
+    {
+      "index": 93,
+      "start": 312.68,
+      "end": 314.87,
+      "duration": 2.19,
+      "text": "exponential matrix exponential we would"
+    },
+    {
+      "index": 94,
+      "start": 314.88,
+      "end": 317.87,
+      "duration": 2.99,
+      "text": "have"
+    },
+    {
+      "index": 95,
+      "start": 322.909,
+      "end": 322.919,
+      "duration": 0.01,
+      "text": "e we would have that at"
+    },
+    {
+      "index": 96,
+      "start": 322.919,
+      "end": 325.71,
+      "duration": 2.791,
+      "text": "zero applied to"
+    },
+    {
+      "index": 97,
+      "start": 325.72,
+      "end": 327.629,
+      "duration": 1.909,
+      "text": "u0 we"
+    },
+    {
+      "index": 98,
+      "start": 327.639,
+      "end": 330.83,
+      "duration": 3.191,
+      "text": "have 5"
+    },
+    {
+      "index": 99,
+      "start": 330.84,
+      "end": 334.189,
+      "duration": 3.349,
+      "text": "0 5 0 -"
+    },
+    {
+      "index": 100,
+      "start": 334.199,
+      "end": 338.31,
+      "duration": 4.111,
+      "text": "1 applied to u 0. This is a matrix with"
+    },
+    {
+      "index": 101,
+      "start": 338.32,
+      "end": 340.71,
+      "duration": 2.39,
+      "text": "its inverse which gives us the identity"
+    },
+    {
+      "index": 102,
+      "start": 340.72,
+      "end": 345.189,
+      "duration": 4.469,
+      "text": "and so basically this gives us back"
+    },
+    {
+      "index": 103,
+      "start": 345.199,
+      "end": 349.11,
+      "duration": 3.911,
+      "text": "u of zero. So basically just as a quick"
+    },
+    {
+      "index": 104,
+      "start": 349.12,
+      "end": 350.55,
+      "duration": 1.43,
+      "text": "I mean you don't need to do that when"
+    },
+    {
+      "index": 105,
+      "start": 350.56,
+      "end": 351.67,
+      "duration": 1.11,
+      "text": "you're asked to find the matrix"
+    },
+    {
+      "index": 106,
+      "start": 351.68,
+      "end": 353.99,
+      "duration": 2.31,
+      "text": "exponential but just as to remember"
+    },
+    {
+      "index": 107,
+      "start": 354.0,
+      "end": 356.55,
+      "duration": 2.55,
+      "text": "where it's coming from you have the you"
+    },
+    {
+      "index": 108,
+      "start": 356.56,
+      "end": 358.95,
+      "duration": 2.39,
+      "text": "write down your system in in matrix form"
+    },
+    {
+      "index": 109,
+      "start": 358.96,
+      "end": 361.189,
+      "duration": 2.229,
+      "text": "you identify the matrix 5 of t and then"
+    },
+    {
+      "index": 110,
+      "start": 361.199,
+      "end": 363.71,
+      "duration": 2.511,
+      "text": "you recall why you"
+    },
+    {
+      "index": 111,
+      "start": 363.72,
+      "end": 366.39,
+      "duration": 2.67,
+      "text": "want the matrix exponential to have this"
+    },
+    {
+      "index": 112,
+      "start": 366.4,
+      "end": 367.83,
+      "duration": 1.43,
+      "text": "form basically to be able to solve"
+    },
+    {
+      "index": 113,
+      "start": 367.84,
+      "end": 370.95,
+      "duration": 3.11,
+      "text": "initial value problems for which the"
+    },
+    {
+      "index": 114,
+      "start": 370.96,
+      "end": 374.23,
+      "duration": 3.27,
+      "text": "value u of t is uh projected to u of"
+    },
+    {
+      "index": 115,
+      "start": 374.24,
+      "end": 377.189,
+      "duration": 2.949,
+      "text": "zero when u we take t equals z for the"
+    },
+    {
+      "index": 116,
+      "start": 377.199,
+      "end": 378.11,
+      "duration": 0.911,
+      "text": "matrix"
+    },
+    {
+      "index": 117,
+      "start": 378.12,
+      "end": 380.39,
+      "duration": 2.27,
+      "text": "exponential. Okay. So now let's go back"
+    },
+    {
+      "index": 118,
+      "start": 380.4,
+      "end": 383.189,
+      "duration": 2.789,
+      "text": "to our problem. So let's compute this"
+    },
+    {
+      "index": 119,
+      "start": 383.199,
+      "end": 386.39,
+      "duration": 3.191,
+      "text": "matrix exponential. We have five of t."
+    },
+    {
+      "index": 120,
+      "start": 386.4,
+      "end": 388.87,
+      "duration": 2.47,
+      "text": "So now from this formula we know that we"
+    },
+    {
+      "index": 121,
+      "start": 388.88,
+      "end": 390.749,
+      "duration": 1.869,
+      "text": "need five of"
+    },
+    {
+      "index": 122,
+      "start": 390.759,
+      "end": 393.11,
+      "duration": 2.351,
+      "text": "zero. So that's give us basically"
+    },
+    {
+      "index": 123,
+      "start": 393.12,
+      "end": 394.51,
+      "duration": 1.39,
+      "text": "exponential of"
+    },
+    {
+      "index": 124,
+      "start": 394.52,
+      "end": 396.749,
+      "duration": 2.229,
+      "text": "zero"
+    },
+    {
+      "index": 125,
+      "start": 396.759,
+      "end": 399.07,
+      "duration": 2.311,
+      "text": "five minus"
+    },
+    {
+      "index": 126,
+      "start": 399.08,
+      "end": 401.07,
+      "duration": 1.99,
+      "text": "one and"
+    },
+    {
+      "index": 127,
+      "start": 401.08,
+      "end": 404.71,
+      "duration": 3.63,
+      "text": "one. We need to find its inverse. So"
+    },
+    {
+      "index": 128,
+      "start": 404.72,
+      "end": 408.83,
+      "duration": 4.11,
+      "text": "recall"
+    },
+    {
+      "index": 129,
+      "start": 413.029,
+      "end": 413.039,
+      "duration": 0.01,
+      "text": "that the inverse of a 2x two matrix is"
+    },
+    {
+      "index": 130,
+      "start": 413.039,
+      "end": 418.99,
+      "duration": 5.951,
+      "text": "basically just the"
+    },
+    {
+      "index": 131,
+      "start": 422.15,
+      "end": 422.16,
+      "duration": 0.01,
+      "text": "determinant minus b minus c and"
+    },
+    {
+      "index": 132,
+      "start": 422.16,
+      "end": 425.029,
+      "duration": 2.869,
+      "text": "reversing the diagonal entries. Okay. So"
+    },
+    {
+      "index": 133,
+      "start": 425.039,
+      "end": 426.589,
+      "duration": 1.55,
+      "text": "we can just apply"
+    },
+    {
+      "index": 134,
+      "start": 426.599,
+      "end": 429.95,
+      "duration": 3.351,
+      "text": "this to get our five of 0 minus"
+    },
+    {
+      "index": 135,
+      "start": 429.96,
+      "end": 432.39,
+      "duration": 2.43,
+      "text": "one. So here our determinant is"
+    },
+    {
+      "index": 136,
+      "start": 432.4,
+      "end": 435.11,
+      "duration": 2.71,
+      "text": "basically"
+    },
+    {
+      "index": 137,
+      "start": 435.12,
+      "end": 437.71,
+      "duration": 2.59,
+      "text": "1 + 5 which is 1 /"
+    },
+    {
+      "index": 138,
+      "start": 437.72,
+      "end": 442.029,
+      "duration": 4.309,
+      "text": "6 and then the entries are simply 1"
+    },
+    {
+      "index": 139,
+      "start": 442.039,
+      "end": 446.55,
+      "duration": 4.511,
+      "text": "one minus 5 and one. So now we're just"
+    },
+    {
+      "index": 140,
+      "start": 446.56,
+      "end": 448.55,
+      "duration": 1.99,
+      "text": "left with a multiplication of two"
+    },
+    {
+      "index": 141,
+      "start": 448.56,
+      "end": 451.27,
+      "duration": 2.71,
+      "text": "matrices to get our matrix exponential."
+    },
+    {
+      "index": 142,
+      "start": 451.28,
+      "end": 458.83,
+      "duration": 7.55,
+      "text": "Okay, so a matrix"
+    },
+    {
+      "index": 143,
+      "start": 462.629,
+      "end": 462.639,
+      "duration": 0.01,
+      "text": "exponential would give us this 16."
+    },
+    {
+      "index": 144,
+      "start": 462.639,
+      "end": 466.15,
+      "duration": 3.511,
+      "text": "And we now have to multiply the entries."
+    },
+    {
+      "index": 145,
+      "start": 466.16,
+      "end": 467.909,
+      "duration": 1.749,
+      "text": "So I'm not going to rewrite everything."
+    },
+    {
+      "index": 146,
+      "start": 467.919,
+      "end": 470.469,
+      "duration": 2.55,
+      "text": "I'm just going to use the space here. So"
+    },
+    {
+      "index": 147,
+      "start": 470.479,
+      "end": 472.43,
+      "duration": 1.951,
+      "text": "we have exponential"
+    },
+    {
+      "index": 148,
+      "start": 472.44,
+      "end": 475.309,
+      "duration": 2.869,
+      "text": "t multiplying"
+    },
+    {
+      "index": 149,
+      "start": 475.319,
+      "end": 480.51,
+      "duration": 5.191,
+      "text": "one + 5 exponential"
+    },
+    {
+      "index": 150,
+      "start": 486.07,
+      "end": 486.08,
+      "duration": 0.01,
+      "text": "70. Yeah. 70. Then we have exponential t"
+    },
+    {
+      "index": 151,
+      "start": 486.08,
+      "end": 490.71,
+      "duration": 4.63,
+      "text": "minus 5 for this entry."
+    },
+    {
+      "index": 152,
+      "start": 504.71,
+      "end": 504.72,
+      "duration": 0.01,
+      "text": "uh 70. Thank you. Uh then for the second"
+    },
+    {
+      "index": 153,
+      "start": 504.72,
+      "end": 507.029,
+      "duration": 2.309,
+      "text": "entry we basically have minus"
+    },
+    {
+      "index": 154,
+      "start": 507.039,
+      "end": 510.35,
+      "duration": 3.311,
+      "text": "exponential"
+    },
+    {
+      "index": 155,
+      "start": 532.59,
+      "end": 532.6,
+      "duration": 0.01,
+      "text": "Okay, so we're done with the matrix"
+    },
+    {
+      "index": 156,
+      "start": 532.6,
+      "end": 534.79,
+      "duration": 2.19,
+      "text": "exponential. So now we were asked to"
+    },
+    {
+      "index": 157,
+      "start": 534.8,
+      "end": 537.03,
+      "duration": 2.23,
+      "text": "solve for the initial value problem with"
+    },
+    {
+      "index": 158,
+      "start": 537.04,
+      "end": 540.55,
+      "duration": 3.51,
+      "text": "initial condition one uh four and one."
+    },
+    {
+      "index": 159,
+      "start": 540.56,
+      "end": 542.949,
+      "duration": 2.389,
+      "text": "So how do we go about that? Well, recall"
+    },
+    {
+      "index": 160,
+      "start": 542.959,
+      "end": 545.67,
+      "duration": 2.711,
+      "text": "that I just reminded you what what did"
+    },
+    {
+      "index": 161,
+      "start": 545.68,
+      "end": 547.35,
+      "duration": 1.67,
+      "text": "we want to use this matrix exponential"
+    },
+    {
+      "index": 162,
+      "start": 547.36,
+      "end": 549.99,
+      "duration": 2.63,
+      "text": "for? And what we wanted it for is to be"
+    },
+    {
+      "index": 163,
+      "start": 550.0,
+      "end": 552.55,
+      "duration": 2.55,
+      "text": "able to basically project an initial"
+    },
+    {
+      "index": 164,
+      "start": 552.56,
+      "end": 556.11,
+      "duration": 3.55,
+      "text": "condition into a solution u t times"
+    },
+    {
+      "index": 165,
+      "start": 556.12,
+      "end": 559.35,
+      "duration": 3.23,
+      "text": "later. And we constructed this matrix to"
+    },
+    {
+      "index": 166,
+      "start": 559.36,
+      "end": 561.91,
+      "duration": 2.55,
+      "text": "be able to basically give us this"
+    },
+    {
+      "index": 167,
+      "start": 561.92,
+      "end": 563.91,
+      "duration": 1.99,
+      "text": "solution by just multiplying the matrix"
+    },
+    {
+      "index": 168,
+      "start": 563.92,
+      "end": 565.75,
+      "duration": 1.83,
+      "text": "by the initial value vector. So"
+    },
+    {
+      "index": 169,
+      "start": 565.76,
+      "end": 567.829,
+      "duration": 2.069,
+      "text": "basically to find the solution of this"
+    },
+    {
+      "index": 170,
+      "start": 567.839,
+      "end": 569.829,
+      "duration": 1.99,
+      "text": "initial value problem, we simply need to"
+    },
+    {
+      "index": 171,
+      "start": 569.839,
+      "end": 572.949,
+      "duration": 3.11,
+      "text": "multiply this matrix by the initial ve"
+    },
+    {
+      "index": 172,
+      "start": 572.959,
+      "end": 575.59,
+      "duration": 2.631,
+      "text": "vector uh that we were given. And I'm"
+    },
+    {
+      "index": 173,
+      "start": 575.6,
+      "end": 576.59,
+      "duration": 0.99,
+      "text": "just going"
+    },
+    {
+      "index": 174,
+      "start": 576.6,
+      "end": 580.35,
+      "duration": 3.75,
+      "text": "to write it here to not have to rewrite"
+    },
+    {
+      "index": 175,
+      "start": 580.36,
+      "end": 583.99,
+      "duration": 3.63,
+      "text": "everything. And it was four and one. And"
+    },
+    {
+      "index": 176,
+      "start": 584.0,
+      "end": 586.87,
+      "duration": 2.87,
+      "text": "this is"
+    },
+    {
+      "index": 177,
+      "start": 586.88,
+      "end": 587.71,
+      "duration": 0.83,
+      "text": "u of"
+    },
+    {
+      "index": 178,
+      "start": 587.72,
+      "end": 590.79,
+      "duration": 3.07,
+      "text": "zero. Uh so let me just do a dash here"
+    },
+    {
+      "index": 179,
+      "start": 590.8,
+      "end": 592.79,
+      "duration": 1.99,
+      "text": "just so that we can do the computation"
+    },
+    {
+      "index": 180,
+      "start": 592.8,
+      "end": 595.47,
+      "duration": 2.67,
+      "text": "and we would end up with a"
+    },
+    {
+      "index": 181,
+      "start": 595.48,
+      "end": 598.47,
+      "duration": 2.99,
+      "text": "solution of t. I'm going to keep it in"
+    },
+    {
+      "index": 182,
+      "start": 598.48,
+      "end": 600.59,
+      "duration": 2.11,
+      "text": "matrix form for"
+    },
+    {
+      "index": 183,
+      "start": 600.6,
+      "end": 604.55,
+      "duration": 3.95,
+      "text": "now. So we end up with exponential t"
+    },
+    {
+      "index": 184,
+      "start": 604.56,
+      "end": 606.11,
+      "duration": 1.55,
+      "text": "four exponential"
+    },
+    {
+      "index": 185,
+      "start": 606.12,
+      "end": 609.829,
+      "duration": 3.709,
+      "text": "t minus 5 exponential t. So minus one"
+    },
+    {
+      "index": 186,
+      "start": 609.839,
+      "end": 613.79,
+      "duration": 3.951,
+      "text": "exponential t and we have 16."
+    },
+    {
+      "index": 187,
+      "start": 613.8,
+      "end": 618.15,
+      "duration": 4.35,
+      "text": "Here five exponential 70 multiply. So we"
+    },
+    {
+      "index": 188,
+      "start": 618.16,
+      "end": 623.389,
+      "duration": 5.229,
+      "text": "have 20 + 5 so"
+    },
+    {
+      "index": 189,
+      "start": 625.47,
+      "end": 625.48,
+      "duration": 0.01,
+      "text": "25"
+    },
+    {
+      "index": 190,
+      "start": 625.48,
+      "end": 627.63,
+      "duration": 2.15,
+      "text": "exponential"
+    },
+    {
+      "index": 191,
+      "start": 627.64,
+      "end": 632.63,
+      "duration": 4.99,
+      "text": "70. Uh then for the for the second entry"
+    },
+    {
+      "index": 192,
+      "start": 632.64,
+      "end": 634.79,
+      "duration": 2.15,
+      "text": "of the vector solution we have minus"
+    },
+    {
+      "index": 193,
+      "start": 634.8,
+      "end": 637.75,
+      "duration": 2.95,
+      "text": "exponential here minus 4 that we add to"
+    },
+    {
+      "index": 194,
+      "start": 637.76,
+      "end": 639.71,
+      "duration": 1.95,
+      "text": "a"
+    },
+    {
+      "index": 195,
+      "start": 639.72,
+      "end": 643.829,
+      "duration": 4.109,
+      "text": "five and here a seven multiplied by four"
+    },
+    {
+      "index": 196,
+      "start": 643.839,
+      "end": 646.389,
+      "duration": 2.55,
+      "text": "that we add to a one. So we have"
+    },
+    {
+      "index": 197,
+      "start": 646.399,
+      "end": 648.269,
+      "duration": 1.87,
+      "text": "basically +"
+    },
+    {
+      "index": 198,
+      "start": 648.279,
+      "end": 649.949,
+      "duration": 1.67,
+      "text": "5"
+    },
+    {
+      "index": 199,
+      "start": 649.959,
+      "end": 653.91,
+      "duration": 3.951,
+      "text": "exponential 7T and that basically gives"
+    },
+    {
+      "index": 200,
+      "start": 653.92,
+      "end": 656.55,
+      "duration": 2.63,
+      "text": "us one way of writing the solution and"
+    },
+    {
+      "index": 201,
+      "start": 656.56,
+      "end": 659.63,
+      "duration": 3.07,
+      "text": "we can split this then if we"
+    },
+    {
+      "index": 202,
+      "start": 659.64,
+      "end": 666.829,
+      "duration": 7.189,
+      "text": "will into two solutions two two"
+    },
+    {
+      "index": 203,
+      "start": 671.63,
+      "end": 671.64,
+      "duration": 0.01,
+      "text": "vectors yeah plus t minus"
+    },
+    {
+      "index": 204,
+      "start": 671.64,
+      "end": 673.47,
+      "duration": 1.83,
+      "text": "one"
+    },
+    {
+      "index": 205,
+      "start": 673.48,
+      "end": 675.389,
+      "duration": 1.909,
+      "text": "7"
+    },
+    {
+      "index": 206,
+      "start": 675.399,
+      "end": 680.43,
+      "duration": 5.031,
+      "text": "25 but this form is as valid. Yes, thank"
+    },
+    {
+      "index": 207,
+      "start": 680.44,
+      "end": 683.269,
+      "duration": 2.829,
+      "text": "you. Okay, so that ends the library's"
+    },
+    {
+      "index": 208,
+      "start": 683.279,
+      "end": 685.35,
+      "duration": 2.071,
+      "text": "calculations but basically the key point"
+    },
+    {
+      "index": 209,
+      "start": 685.36,
+      "end": 687.19,
+      "duration": 1.83,
+      "text": "here was just to remember where is the"
+    },
+    {
+      "index": 210,
+      "start": 687.2,
+      "end": 689.59,
+      "duration": 2.39,
+      "text": "matrix exponential coming from uh"
+    },
+    {
+      "index": 211,
+      "start": 689.6,
+      "end": 692.23,
+      "duration": 2.63,
+      "text": "basically from the the the aen values"
+    },
+    {
+      "index": 212,
+      "start": 692.24,
+      "end": 695.509,
+      "duration": 3.269,
+      "text": "and vectors of the original matrix"
+    },
+    {
+      "index": 213,
+      "start": 695.519,
+      "end": 698.31,
+      "duration": 2.791,
+      "text": "present in the system. And where is the"
+    },
+    {
+      "index": 214,
+      "start": 698.32,
+      "end": 700.069,
+      "duration": 1.749,
+      "text": "definition coming from? Why do we define"
+    },
+    {
+      "index": 215,
+      "start": 700.079,
+      "end": 703.59,
+      "duration": 3.511,
+      "text": "it as five of t 5 minus one of zero and"
+    },
+    {
+      "index": 216,
+      "start": 703.6,
+      "end": 705.509,
+      "duration": 1.909,
+      "text": "how to use it then to compute the"
+    },
+    {
+      "index": 217,
+      "start": 705.519,
+      "end": 708.23,
+      "duration": 2.711,
+      "text": "solutions given an initial value uh to"
+    },
+    {
+      "index": 218,
+      "start": 708.24,
+      "end": 710.15,
+      "duration": 1.91,
+      "text": "basically answer give the solution to an"
+    },
+    {
+      "index": 219,
+      "start": 710.16,
+      "end": 712.23,
+      "duration": 2.07,
+      "text": "initial value problem. So that ends this"
+    },
+    {
+      "index": 220,
+      "start": 712.24,
+      "end": 715.24,
+      "duration": 3.0,
+      "text": "recitation."
+    }
+  ],
+  "course": {
+    "category": "Mathematics",
+    "title": "Differential Equations",
+    "source_url": "https://www.youtube.com/playlist?list=PL64BDFBDA2AF24F7E"
+  }
+}

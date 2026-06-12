@@ -1,0 +1,6318 @@
+{
+  "video": {
+    "id": "nHlE7EgJFds",
+    "title": "10. The Four Fundamental Subspaces",
+    "url": "https://www.youtube.com/watch?v=nHlE7EgJFds",
+    "channel": "MIT OpenCourseWare",
+    "duration": 2960,
+    "language": "en"
+  },
+  "segment_count": 900,
+  "segments": [
+    {
+      "index": 0,
+      "start": 13.15,
+      "end": 13.16,
+      "duration": 0.01,
+      "text": "okay here is lecture 10 in linear"
+    },
+    {
+      "index": 1,
+      "start": 13.16,
+      "end": 15.99,
+      "duration": 2.83,
+      "text": "algebra uh two important things to do in"
+    },
+    {
+      "index": 2,
+      "start": 16.0,
+      "end": 19.31,
+      "duration": 3.31,
+      "text": "this lecture one is to correct an error"
+    },
+    {
+      "index": 3,
+      "start": 19.32,
+      "end": 20.71,
+      "duration": 1.39,
+      "text": "from lecture"
+    },
+    {
+      "index": 4,
+      "start": 20.72,
+      "end": 24.269,
+      "duration": 3.549,
+      "text": "nine so the Blackboard with that awful"
+    },
+    {
+      "index": 5,
+      "start": 24.279,
+      "end": 28.23,
+      "duration": 3.951,
+      "text": "error is still with us and the second"
+    },
+    {
+      "index": 6,
+      "start": 28.24,
+      "end": 31.63,
+      "duration": 3.39,
+      "text": "the big thing to do is to tell you about"
+    },
+    {
+      "index": 7,
+      "start": 31.64,
+      "end": 32.95,
+      "duration": 1.31,
+      "text": "the four"
+    },
+    {
+      "index": 8,
+      "start": 32.96,
+      "end": 36.069,
+      "duration": 3.109,
+      "text": "subspaces that come with a matrix we've"
+    },
+    {
+      "index": 9,
+      "start": 36.079,
+      "end": 39.03,
+      "duration": 2.951,
+      "text": "seen two subspaces the column space and"
+    },
+    {
+      "index": 10,
+      "start": 39.04,
+      "end": 42.51,
+      "duration": 3.47,
+      "text": "the null space there's two to go okay"
+    },
+    {
+      "index": 11,
+      "start": 42.52,
+      "end": 45.95,
+      "duration": 3.43,
+      "text": "first of all and this is a great way to"
+    },
+    {
+      "index": 12,
+      "start": 45.96,
+      "end": 49.63,
+      "duration": 3.67,
+      "text": "recap and correct the previous"
+    },
+    {
+      "index": 13,
+      "start": 49.64,
+      "end": 53.43,
+      "duration": 3.79,
+      "text": "lecture so you remember I was just doing"
+    },
+    {
+      "index": 14,
+      "start": 53.44,
+      "end": 56.31,
+      "duration": 2.87,
+      "text": "R3 I couldn't have taken a simpler"
+    },
+    {
+      "index": 15,
+      "start": 56.32,
+      "end": 58.229,
+      "duration": 1.909,
+      "text": "example than"
+    },
+    {
+      "index": 16,
+      "start": 58.239,
+      "end": 62.27,
+      "duration": 4.031,
+      "text": "R3 and I wrote down the standard basis"
+    },
+    {
+      "index": 17,
+      "start": 62.28,
+      "end": 65.75,
+      "duration": 3.47,
+      "text": "that that's the standard"
+    },
+    {
+      "index": 18,
+      "start": 69.99,
+      "end": 70.0,
+      "duration": 0.01,
+      "text": "basis that basis the obvious basis for"
+    },
+    {
+      "index": 19,
+      "start": 70.0,
+      "end": 73.95,
+      "duration": 3.95,
+      "text": "the whole three-dimensional space and"
+    },
+    {
+      "index": 20,
+      "start": 73.96,
+      "end": 77.03,
+      "duration": 3.07,
+      "text": "then I wanted to make the point that"
+    },
+    {
+      "index": 21,
+      "start": 77.04,
+      "end": 80.71,
+      "duration": 3.67,
+      "text": "there was nothing special"
+    },
+    {
+      "index": 22,
+      "start": 80.72,
+      "end": 83.429,
+      "duration": 2.709,
+      "text": "nothing about that basis that another"
+    },
+    {
+      "index": 23,
+      "start": 83.439,
+      "end": 86.23,
+      "duration": 2.791,
+      "text": "basis couldn't have it could have linear"
+    },
+    {
+      "index": 24,
+      "start": 86.24,
+      "end": 88.55,
+      "duration": 2.31,
+      "text": "Independence it could span a space there"
+    },
+    {
+      "index": 25,
+      "start": 88.56,
+      "end": 91.149,
+      "duration": 2.589,
+      "text": "are lots of other bases so I started"
+    },
+    {
+      "index": 26,
+      "start": 91.159,
+      "end": 94.83,
+      "duration": 3.671,
+      "text": "with these vectors 112 and 225 and those"
+    },
+    {
+      "index": 27,
+      "start": 94.84,
+      "end": 95.789,
+      "duration": 0.949,
+      "text": "were"
+    },
+    {
+      "index": 28,
+      "start": 95.799,
+      "end": 99.55,
+      "duration": 3.751,
+      "text": "independent and then I said 337 wouldn't"
+    },
+    {
+      "index": 29,
+      "start": 99.56,
+      "end": 103.71,
+      "duration": 4.15,
+      "text": "do because 337 is the sum of those so in"
+    },
+    {
+      "index": 30,
+      "start": 103.72,
+      "end": 106.91,
+      "duration": 3.19,
+      "text": "my innocence I put in"
+    },
+    {
+      "index": 31,
+      "start": 106.92,
+      "end": 112.35,
+      "duration": 5.43,
+      "text": "338 I figured probably if 337 is on the"
+    },
+    {
+      "index": 32,
+      "start": 112.36,
+      "end": 115.149,
+      "duration": 2.789,
+      "text": "plane is which I know it's in the plane"
+    },
+    {
+      "index": 33,
+      "start": 115.159,
+      "end": 118.23,
+      "duration": 3.071,
+      "text": "with these two then probably 338 sticks"
+    },
+    {
+      "index": 34,
+      "start": 118.24,
+      "end": 120.749,
+      "duration": 2.509,
+      "text": "a little bit out of the plane and it's"
+    },
+    {
+      "index": 35,
+      "start": 120.759,
+      "end": 122.87,
+      "duration": 2.111,
+      "text": "independent and it gives a basis but"
+    },
+    {
+      "index": 36,
+      "start": 122.88,
+      "end": 124.35,
+      "duration": 1.47,
+      "text": "after"
+    },
+    {
+      "index": 37,
+      "start": 124.36,
+      "end": 127.91,
+      "duration": 3.55,
+      "text": "class to my"
+    },
+    {
+      "index": 38,
+      "start": 130.43,
+      "end": 130.44,
+      "duration": 0.01,
+      "text": "sorrow student tells me wait a minute"
+    },
+    {
+      "index": 39,
+      "start": 130.44,
+      "end": 134.19,
+      "duration": 3.75,
+      "text": "that B that third Vector 338 is not"
+    },
+    {
+      "index": 40,
+      "start": 134.2,
+      "end": 137.79,
+      "duration": 3.59,
+      "text": "independent and why did she say that she"
+    },
+    {
+      "index": 41,
+      "start": 137.8,
+      "end": 139.19,
+      "duration": 1.39,
+      "text": "didn't"
+    },
+    {
+      "index": 42,
+      "start": 139.2,
+      "end": 143.35,
+      "duration": 4.15,
+      "text": "actually take the time didn't have to to"
+    },
+    {
+      "index": 43,
+      "start": 143.36,
+      "end": 147.47,
+      "duration": 4.11,
+      "text": "find what combination of this one and"
+    },
+    {
+      "index": 44,
+      "start": 147.48,
+      "end": 150.03,
+      "duration": 2.55,
+      "text": "this one gives 338"
+    },
+    {
+      "index": 45,
+      "start": 150.04,
+      "end": 152.11,
+      "duration": 2.07,
+      "text": "she did something"
+    },
+    {
+      "index": 46,
+      "start": 152.12,
+      "end": 155.11,
+      "duration": 2.99,
+      "text": "else in other words she looked ahead"
+    },
+    {
+      "index": 47,
+      "start": 155.12,
+      "end": 157.19,
+      "duration": 2.07,
+      "text": "because she said wait a minute if I look"
+    },
+    {
+      "index": 48,
+      "start": 157.2,
+      "end": 160.03,
+      "duration": 2.83,
+      "text": "at that"
+    },
+    {
+      "index": 49,
+      "start": 162.39,
+      "end": 162.4,
+      "duration": 0.01,
+      "text": "matrix it's not"
+    },
+    {
+      "index": 50,
+      "start": 162.4,
+      "end": 166.11,
+      "duration": 3.71,
+      "text": "invertible that third column can't be"
+    },
+    {
+      "index": 51,
+      "start": 166.12,
+      "end": 167.79,
+      "duration": 1.67,
+      "text": "independent of the first two because"
+    },
+    {
+      "index": 52,
+      "start": 167.8,
+      "end": 170.309,
+      "duration": 2.509,
+      "text": "when I look at that matrix it's got two"
+    },
+    {
+      "index": 53,
+      "start": 170.319,
+      "end": 172.03,
+      "duration": 1.711,
+      "text": "identical"
+    },
+    {
+      "index": 54,
+      "start": 172.04,
+      "end": 175.55,
+      "duration": 3.51,
+      "text": "rows I have a square"
+    },
+    {
+      "index": 55,
+      "start": 175.56,
+      "end": 182.19,
+      "duration": 6.63,
+      "text": "Matrix its rows are obviously dependent"
+    },
+    {
+      "index": 56,
+      "start": 185.71,
+      "end": 185.72,
+      "duration": 0.01,
+      "text": "and that makes the columns"
+    },
+    {
+      "index": 57,
+      "start": 185.72,
+      "end": 188.869,
+      "duration": 3.149,
+      "text": "dependent so there's my error when I"
+    },
+    {
+      "index": 58,
+      "start": 188.879,
+      "end": 192.149,
+      "duration": 3.27,
+      "text": "look at the Matrix a that has those"
+    },
+    {
+      "index": 59,
+      "start": 192.159,
+      "end": 193.309,
+      "duration": 1.15,
+      "text": "three"
+    },
+    {
+      "index": 60,
+      "start": 193.319,
+      "end": 195.509,
+      "duration": 2.19,
+      "text": "columns those three columns can't be"
+    },
+    {
+      "index": 61,
+      "start": 195.519,
+      "end": 197.47,
+      "duration": 1.951,
+      "text": "independent because that Matrix is not"
+    },
+    {
+      "index": 62,
+      "start": 197.48,
+      "end": 201.27,
+      "duration": 3.79,
+      "text": "invertible because it's got two equal"
+    },
+    {
+      "index": 63,
+      "start": 201.28,
+      "end": 206.27,
+      "duration": 4.99,
+      "text": "rows and today's lecture will con reach"
+    },
+    {
+      "index": 64,
+      "start": 206.28,
+      "end": 210.47,
+      "duration": 4.19,
+      "text": "the conclusion the great conclusion"
+    },
+    {
+      "index": 65,
+      "start": 210.48,
+      "end": 211.47,
+      "duration": 0.99,
+      "text": "that"
+    },
+    {
+      "index": 66,
+      "start": 211.48,
+      "end": 217.07,
+      "duration": 5.59,
+      "text": "connects the column space with the row"
+    },
+    {
+      "index": 67,
+      "start": 220.949,
+      "end": 220.959,
+      "duration": 0.01,
+      "text": "space so those are the row space is now"
+    },
+    {
+      "index": 68,
+      "start": 220.959,
+      "end": 223.309,
+      "duration": 2.35,
+      "text": "going to be another one of my"
+    },
+    {
+      "index": 69,
+      "start": 223.319,
+      "end": 226.509,
+      "duration": 3.19,
+      "text": "fundamental subspaces the row space of"
+    },
+    {
+      "index": 70,
+      "start": 226.519,
+      "end": 229.789,
+      "duration": 3.27,
+      "text": "this Matrix or of this one well the row"
+    },
+    {
+      "index": 71,
+      "start": 229.799,
+      "end": 231.99,
+      "duration": 2.191,
+      "text": "space of this one is"
+    },
+    {
+      "index": 72,
+      "start": 232.0,
+      "end": 235.11,
+      "duration": 3.11,
+      "text": "okay but the row space of this one I'm"
+    },
+    {
+      "index": 73,
+      "start": 235.12,
+      "end": 237.35,
+      "duration": 2.23,
+      "text": "looking at the rows of the Matrix oh"
+    },
+    {
+      "index": 74,
+      "start": 237.36,
+      "end": 240.55,
+      "duration": 3.19,
+      "text": "anyway I'll have two equal rows"
+    },
+    {
+      "index": 75,
+      "start": 240.56,
+      "end": 242.99,
+      "duration": 2.43,
+      "text": "and the row space will be only two"
+    },
+    {
+      "index": 76,
+      "start": 243.0,
+      "end": 245.71,
+      "duration": 2.71,
+      "text": "dimensional the rank of the Matrix with"
+    },
+    {
+      "index": 77,
+      "start": 245.72,
+      "end": 249.229,
+      "duration": 3.509,
+      "text": "these columns will only be two so only"
+    },
+    {
+      "index": 78,
+      "start": 249.239,
+      "end": 251.75,
+      "duration": 2.511,
+      "text": "two of those columns columns can be"
+    },
+    {
+      "index": 79,
+      "start": 251.76,
+      "end": 253.229,
+      "duration": 1.469,
+      "text": "independent"
+    },
+    {
+      "index": 80,
+      "start": 253.239,
+      "end": 256.11,
+      "duration": 2.871,
+      "text": "too the rows tell me something about the"
+    },
+    {
+      "index": 81,
+      "start": 256.12,
+      "end": 258.509,
+      "duration": 2.389,
+      "text": "columns in other words something that I"
+    },
+    {
+      "index": 82,
+      "start": 258.519,
+      "end": 261.749,
+      "duration": 3.23,
+      "text": "should have noticed and I didn't okay so"
+    },
+    {
+      "index": 83,
+      "start": 261.759,
+      "end": 265.23,
+      "duration": 3.471,
+      "text": "now let me pin down these four"
+    },
+    {
+      "index": 84,
+      "start": 265.24,
+      "end": 266.43,
+      "duration": 1.19,
+      "text": "fundamental"
+    },
+    {
+      "index": 85,
+      "start": 266.44,
+      "end": 275.55,
+      "duration": 9.11,
+      "text": "subspaces so here are the four fun FAL"
+    },
+    {
+      "index": 86,
+      "start": 278.55,
+      "end": 278.56,
+      "duration": 0.01,
+      "text": "subspaces this is really the heart of"
+    },
+    {
+      "index": 87,
+      "start": 278.56,
+      "end": 281.15,
+      "duration": 2.59,
+      "text": "this approach to linear algebra to see"
+    },
+    {
+      "index": 88,
+      "start": 281.16,
+      "end": 284.43,
+      "duration": 3.27,
+      "text": "these four subspaces how they're related"
+    },
+    {
+      "index": 89,
+      "start": 284.44,
+      "end": 290.469,
+      "duration": 6.029,
+      "text": "so what are they the column"
+    },
+    {
+      "index": 90,
+      "start": 300.55,
+      "end": 300.56,
+      "duration": 0.01,
+      "text": "space inovate"
+    },
+    {
+      "index": 91,
+      "start": 300.56,
+      "end": 304.11,
+      "duration": 3.55,
+      "text": "and now comes the row space something"
+    },
+    {
+      "index": 92,
+      "start": 304.12,
+      "end": 307.67,
+      "duration": 3.55,
+      "text": "new the row space what's in"
+    },
+    {
+      "index": 93,
+      "start": 307.68,
+      "end": 311.189,
+      "duration": 3.509,
+      "text": "that it's all combinations of the"
+    },
+    {
+      "index": 94,
+      "start": 311.199,
+      "end": 314.59,
+      "duration": 3.391,
+      "text": "rows that's natural we want a space so"
+    },
+    {
+      "index": 95,
+      "start": 314.6,
+      "end": 316.83,
+      "duration": 2.23,
+      "text": "we have to take all combinations and we"
+    },
+    {
+      "index": 96,
+      "start": 316.84,
+      "end": 320.99,
+      "duration": 4.15,
+      "text": "start with the rows so the rows span the"
+    },
+    {
+      "index": 97,
+      "start": 321.0,
+      "end": 324.07,
+      "duration": 3.07,
+      "text": "row space are the rows a basis for the"
+    },
+    {
+      "index": 98,
+      "start": 324.08,
+      "end": 325.189,
+      "duration": 1.109,
+      "text": "row"
+    },
+    {
+      "index": 99,
+      "start": 325.199,
+      "end": 328.15,
+      "duration": 2.951,
+      "text": "space maybe so maybe"
+    },
+    {
+      "index": 100,
+      "start": 328.16,
+      "end": 331.749,
+      "duration": 3.589,
+      "text": "no the row are a basis for the row space"
+    },
+    {
+      "index": 101,
+      "start": 331.759,
+      "end": 333.749,
+      "duration": 1.99,
+      "text": "when they're independent but if they're"
+    },
+    {
+      "index": 102,
+      "start": 333.759,
+      "end": 336.99,
+      "duration": 3.231,
+      "text": "dependent as in"
+    },
+    {
+      "index": 103,
+      "start": 341.99,
+      "end": 342.0,
+      "duration": 0.01,
+      "text": "this example my error from last"
+    },
+    {
+      "index": 104,
+      "start": 342.0,
+      "end": 344.59,
+      "duration": 2.59,
+      "text": "time they're not those three rows are"
+    },
+    {
+      "index": 105,
+      "start": 344.6,
+      "end": 346.79,
+      "duration": 2.19,
+      "text": "not a basis the row space would would"
+    },
+    {
+      "index": 106,
+      "start": 346.8,
+      "end": 349.029,
+      "duration": 2.229,
+      "text": "only be two dimensional I only need two"
+    },
+    {
+      "index": 107,
+      "start": 349.039,
+      "end": 351.55,
+      "duration": 2.511,
+      "text": "rows for a basis so the row space now"
+    },
+    {
+      "index": 108,
+      "start": 351.56,
+      "end": 354.51,
+      "duration": 2.95,
+      "text": "what's in it it's all combinations of"
+    },
+    {
+      "index": 109,
+      "start": 354.52,
+      "end": 357.629,
+      "duration": 3.109,
+      "text": "the rows of a all"
+    },
+    {
+      "index": 110,
+      "start": 357.639,
+      "end": 360.59,
+      "duration": 2.951,
+      "text": "combinations of the rows of"
+    },
+    {
+      "index": 111,
+      "start": 360.6,
+      "end": 363.95,
+      "duration": 3.35,
+      "text": "a but I don't like working with row"
+    },
+    {
+      "index": 112,
+      "start": 363.96,
+      "end": 366.15,
+      "duration": 2.19,
+      "text": "vectors all my vectors have been column"
+    },
+    {
+      "index": 113,
+      "start": 366.16,
+      "end": 368.71,
+      "duration": 2.55,
+      "text": "vectors I'd like to stay with column"
+    },
+    {
+      "index": 114,
+      "start": 368.72,
+      "end": 372.15,
+      "duration": 3.43,
+      "text": "vectors how can I get to column"
+    },
+    {
+      "index": 115,
+      "start": 372.16,
+      "end": 375.39,
+      "duration": 3.23,
+      "text": "vectors out of these rows I transpose"
+    },
+    {
+      "index": 116,
+      "start": 375.4,
+      "end": 378.749,
+      "duration": 3.349,
+      "text": "The Matrix so if that's okay with you"
+    },
+    {
+      "index": 117,
+      "start": 378.759,
+      "end": 380.83,
+      "duration": 2.071,
+      "text": "I'm going to transpose The Matrix and"
+    },
+    {
+      "index": 118,
+      "start": 380.84,
+      "end": 383.99,
+      "duration": 3.15,
+      "text": "I'm going to say all"
+    },
+    {
+      "index": 119,
+      "start": 384.0,
+      "end": 389.83,
+      "duration": 5.83,
+      "text": "combinations of the columns"
+    },
+    {
+      "index": 120,
+      "start": 397.95,
+      "end": 397.96,
+      "duration": 0.01,
+      "text": "transpose and that allows me to use the"
+    },
+    {
+      "index": 121,
+      "start": 397.96,
+      "end": 399.029,
+      "duration": 1.069,
+      "text": "convenient"
+    },
+    {
+      "index": 122,
+      "start": 399.039,
+      "end": 406.309,
+      "duration": 7.27,
+      "text": "notation the column space of a"
+    },
+    {
+      "index": 123,
+      "start": 410.029,
+      "end": 410.039,
+      "duration": 0.01,
+      "text": "transpose nothing no mathematics went on"
+    },
+    {
+      "index": 124,
+      "start": 410.039,
+      "end": 412.589,
+      "duration": 2.55,
+      "text": "there we just got some vectors that were"
+    },
+    {
+      "index": 125,
+      "start": 412.599,
+      "end": 417.309,
+      "duration": 4.71,
+      "text": "lying down to stand up but it means that"
+    },
+    {
+      "index": 126,
+      "start": 417.319,
+      "end": 420.39,
+      "duration": 3.071,
+      "text": "we can use this Colum space of a"
+    },
+    {
+      "index": 127,
+      "start": 420.4,
+      "end": 423.55,
+      "duration": 3.15,
+      "text": "transpose that's telling me in a nice"
+    },
+    {
+      "index": 128,
+      "start": 423.56,
+      "end": 424.79,
+      "duration": 1.23,
+      "text": "Matrix"
+    },
+    {
+      "index": 129,
+      "start": 424.8,
+      "end": 428.11,
+      "duration": 3.31,
+      "text": "notation what the row space"
+    },
+    {
+      "index": 130,
+      "start": 428.12,
+      "end": 431.39,
+      "duration": 3.27,
+      "text": "is okay and"
+    },
+    {
+      "index": 131,
+      "start": 431.4,
+      "end": 435.55,
+      "duration": 4.15,
+      "text": "finally is another null space the fourth"
+    },
+    {
+      "index": 132,
+      "start": 435.56,
+      "end": 440.07,
+      "duration": 4.51,
+      "text": "ve the fourth fundamental space will be"
+    },
+    {
+      "index": 133,
+      "start": 440.08,
+      "end": 442.629,
+      "duration": 2.549,
+      "text": "the null space of a transpose the fourth"
+    },
+    {
+      "index": 134,
+      "start": 442.639,
+      "end": 447.07,
+      "duration": 4.431,
+      "text": "guy is the null"
+    },
+    {
+      "index": 135,
+      "start": 450.11,
+      "end": 450.12,
+      "duration": 0.01,
+      "text": "space of a transpose"
+    },
+    {
+      "index": 136,
+      "start": 450.12,
+      "end": 455.15,
+      "duration": 5.03,
+      "text": "and of course my notation is n of a"
+    },
+    {
+      "index": 137,
+      "start": 455.16,
+      "end": 459.029,
+      "duration": 3.869,
+      "text": "transpose that's the null space of a"
+    },
+    {
+      "index": 138,
+      "start": 459.039,
+      "end": 462.589,
+      "duration": 3.55,
+      "text": "transpose yeah we don't have a perfect"
+    },
+    {
+      "index": 139,
+      "start": 462.599,
+      "end": 466.23,
+      "duration": 3.631,
+      "text": "name for this space as us as a"
+    },
+    {
+      "index": 140,
+      "start": 466.24,
+      "end": 470.11,
+      "duration": 3.87,
+      "text": "connecting with a but our usual name is"
+    },
+    {
+      "index": 141,
+      "start": 470.12,
+      "end": 472.43,
+      "duration": 2.31,
+      "text": "the left null space and I'll show you"
+    },
+    {
+      "index": 142,
+      "start": 472.44,
+      "end": 477.39,
+      "duration": 4.95,
+      "text": "why in a moment so often I call this the"
+    },
+    {
+      "index": 143,
+      "start": 477.4,
+      "end": 480.07,
+      "duration": 2.67,
+      "text": "just to write that word the"
+    },
+    {
+      "index": 144,
+      "start": 480.08,
+      "end": 484.589,
+      "duration": 4.509,
+      "text": "left null"
+    },
+    {
+      "index": 145,
+      "start": 492.39,
+      "end": 492.4,
+      "duration": 0.01,
+      "text": "a so just the way we have the row space"
+    },
+    {
+      "index": 146,
+      "start": 492.4,
+      "end": 495.07,
+      "duration": 2.67,
+      "text": "of a and we switch it to the column"
+    },
+    {
+      "index": 147,
+      "start": 495.08,
+      "end": 498.51,
+      "duration": 3.43,
+      "text": "space of a transpose so we have this"
+    },
+    {
+      "index": 148,
+      "start": 498.52,
+      "end": 502.589,
+      "duration": 4.069,
+      "text": "space of guys that I call the left null"
+    },
+    {
+      "index": 149,
+      "start": 502.599,
+      "end": 505.71,
+      "duration": 3.111,
+      "text": "space of a but the good notation is it's"
+    },
+    {
+      "index": 150,
+      "start": 505.72,
+      "end": 508.869,
+      "duration": 3.149,
+      "text": "the null space of a transpose okay those"
+    },
+    {
+      "index": 151,
+      "start": 508.879,
+      "end": 511.949,
+      "duration": 3.07,
+      "text": "are for"
+    },
+    {
+      "index": 152,
+      "start": 514.35,
+      "end": 514.36,
+      "duration": 0.01,
+      "text": "spaces where are those"
+    },
+    {
+      "index": 153,
+      "start": 514.36,
+      "end": 517.949,
+      "duration": 3.589,
+      "text": "spaces what what big space are they in"
+    },
+    {
+      "index": 154,
+      "start": 517.959,
+      "end": 526.75,
+      "duration": 8.791,
+      "text": "for when a is m"
+    },
+    {
+      "index": 155,
+      "start": 531.31,
+      "end": 531.32,
+      "duration": 0.01,
+      "text": "byn in that case the null space of"
+    },
+    {
+      "index": 156,
+      "start": 531.32,
+      "end": 534.949,
+      "duration": 3.629,
+      "text": "a what's in the null space of a vectors"
+    },
+    {
+      "index": 157,
+      "start": 534.959,
+      "end": 538.269,
+      "duration": 3.31,
+      "text": "with n components solutions to ax equals"
+    },
+    {
+      "index": 158,
+      "start": 538.279,
+      "end": 543.79,
+      "duration": 5.511,
+      "text": "z so the null's space of a is n"
+    },
+    {
+      "index": 159,
+      "start": 547.19,
+      "end": 547.2,
+      "duration": 0.01,
+      "text": "RN what's in the column space of a well"
+    },
+    {
+      "index": 160,
+      "start": 547.2,
+      "end": 549.59,
+      "duration": 2.39,
+      "text": "columns how many components do those"
+    },
+    {
+      "index": 161,
+      "start": 549.6,
+      "end": 551.87,
+      "duration": 2.27,
+      "text": "columns have"
+    },
+    {
+      "index": 162,
+      "start": 551.88,
+      "end": 556.19,
+      "duration": 4.31,
+      "text": "M so this column space is in"
+    },
+    {
+      "index": 163,
+      "start": 556.2,
+      "end": 558.63,
+      "duration": 2.43,
+      "text": "r"
+    },
+    {
+      "index": 164,
+      "start": 558.64,
+      "end": 561.35,
+      "duration": 2.71,
+      "text": "m what about the column space of a"
+    },
+    {
+      "index": 165,
+      "start": 561.36,
+      "end": 563.91,
+      "duration": 2.55,
+      "text": "transpose which are just a disguised way"
+    },
+    {
+      "index": 166,
+      "start": 563.92,
+      "end": 565.91,
+      "duration": 1.99,
+      "text": "of saying the rows of"
+    },
+    {
+      "index": 167,
+      "start": 565.92,
+      "end": 571.55,
+      "duration": 5.63,
+      "text": "a the rows of a in this 3x6 Matrix have"
+    },
+    {
+      "index": 168,
+      "start": 571.56,
+      "end": 573.87,
+      "duration": 2.31,
+      "text": "six"
+    },
+    {
+      "index": 169,
+      "start": 573.88,
+      "end": 577.069,
+      "duration": 3.189,
+      "text": "components n components these the column"
+    },
+    {
+      "index": 170,
+      "start": 577.079,
+      "end": 581.949,
+      "duration": 4.87,
+      "text": "spaces n r"
+    },
+    {
+      "index": 171,
+      "start": 585.35,
+      "end": 585.36,
+      "duration": 0.01,
+      "text": "n and the null space of a"
+    },
+    {
+      "index": 172,
+      "start": 585.36,
+      "end": 588.19,
+      "duration": 2.83,
+      "text": "transpose I see that this fourth space"
+    },
+    {
+      "index": 173,
+      "start": 588.2,
+      "end": 590.31,
+      "duration": 2.11,
+      "text": "is already"
+    },
+    {
+      "index": 174,
+      "start": 590.32,
+      "end": 594.63,
+      "duration": 4.31,
+      "text": "getting second you know second class"
+    },
+    {
+      "index": 175,
+      "start": 594.64,
+      "end": 596.67,
+      "duration": 2.03,
+      "text": "citizen treatment and it doesn't deserve"
+    },
+    {
+      "index": 176,
+      "start": 596.68,
+      "end": 601.59,
+      "duration": 4.91,
+      "text": "it it it should be there it is there and"
+    },
+    {
+      "index": 177,
+      "start": 601.6,
+      "end": 604.43,
+      "duration": 2.83,
+      "text": "shouldn't be squeezed the null space of"
+    },
+    {
+      "index": 178,
+      "start": 604.44,
+      "end": 605.63,
+      "duration": 1.19,
+      "text": "a"
+    },
+    {
+      "index": 179,
+      "start": 605.64,
+      "end": 608.31,
+      "duration": 2.67,
+      "text": "transpose well if the null space of a"
+    },
+    {
+      "index": 180,
+      "start": 608.32,
+      "end": 610.87,
+      "duration": 2.55,
+      "text": "had vectors with n components the null"
+    },
+    {
+      "index": 181,
+      "start": 610.88,
+      "end": 613.87,
+      "duration": 2.99,
+      "text": "space of a transposed will be in"
+    },
+    {
+      "index": 182,
+      "start": 613.88,
+      "end": 618.63,
+      "duration": 4.75,
+      "text": "RM I want to draw a picture of the four"
+    },
+    {
+      "index": 183,
+      "start": 618.64,
+      "end": 623.71,
+      "duration": 5.07,
+      "text": "spaces"
+    },
+    {
+      "index": 184,
+      "start": 634.03,
+      "end": 634.04,
+      "duration": 0.01,
+      "text": "okay let me"
+    },
+    {
+      "index": 185,
+      "start": 634.04,
+      "end": 637.67,
+      "duration": 3.63,
+      "text": "put n dimensional space over on this"
+    },
+    {
+      "index": 186,
+      "start": 637.68,
+      "end": 642.67,
+      "duration": 4.99,
+      "text": "side then which were the subspaces in RN"
+    },
+    {
+      "index": 187,
+      "start": 642.68,
+      "end": 647.47,
+      "duration": 4.79,
+      "text": "the null space was and the row space was"
+    },
+    {
+      "index": 188,
+      "start": 647.48,
+      "end": 652.59,
+      "duration": 5.11,
+      "text": "so here we have the can I make that"
+    },
+    {
+      "index": 189,
+      "start": 652.6,
+      "end": 656.19,
+      "duration": 3.59,
+      "text": "picture of the row"
+    },
+    {
+      "index": 190,
+      "start": 659.35,
+      "end": 659.36,
+      "duration": 0.01,
+      "text": "space and can I make this kind of"
+    },
+    {
+      "index": 191,
+      "start": 659.36,
+      "end": 665.15,
+      "duration": 5.79,
+      "text": "picture of the null"
+    },
+    {
+      "index": 192,
+      "start": 667.829,
+      "end": 667.839,
+      "duration": 0.01,
+      "text": "space that's just meant to be a sketch"
+    },
+    {
+      "index": 193,
+      "start": 667.839,
+      "end": 673.59,
+      "duration": 5.751,
+      "text": "to remind you that they're in this which"
+    },
+    {
+      "index": 194,
+      "start": 673.6,
+      "end": 676.43,
+      "duration": 2.83,
+      "text": "how what type of vectors are in it"
+    },
+    {
+      "index": 195,
+      "start": 676.44,
+      "end": 680.19,
+      "duration": 3.75,
+      "text": "vectors with n components over here in"
+    },
+    {
+      "index": 196,
+      "start": 680.2,
+      "end": 682.069,
+      "duration": 1.869,
+      "text": "in"
+    },
+    {
+      "index": 197,
+      "start": 682.079,
+      "end": 684.67,
+      "duration": 2.591,
+      "text": "inside consisting of vectors with M"
+    },
+    {
+      "index": 198,
+      "start": 684.68,
+      "end": 692.43,
+      "duration": 7.75,
+      "text": "components is the column space"
+    },
+    {
+      "index": 199,
+      "start": 695.11,
+      "end": 695.12,
+      "duration": 0.01,
+      "text": "and what I'm calling"
+    },
+    {
+      "index": 200,
+      "start": 695.12,
+      "end": 699.91,
+      "duration": 4.79,
+      "text": "the null space of a transpose those are"
+    },
+    {
+      "index": 201,
+      "start": 699.92,
+      "end": 701.79,
+      "duration": 1.87,
+      "text": "the ones with M"
+    },
+    {
+      "index": 202,
+      "start": 701.8,
+      "end": 703.75,
+      "duration": 1.95,
+      "text": "components"
+    },
+    {
+      "index": 203,
+      "start": 703.76,
+      "end": 707.069,
+      "duration": 3.309,
+      "text": "okay to understand these spaces is our"
+    },
+    {
+      "index": 204,
+      "start": 707.079,
+      "end": 710.15,
+      "duration": 3.071,
+      "text": "is our job now because by understanding"
+    },
+    {
+      "index": 205,
+      "start": 710.16,
+      "end": 713.509,
+      "duration": 3.349,
+      "text": "those spaces we know everything about"
+    },
+    {
+      "index": 206,
+      "start": 713.519,
+      "end": 715.629,
+      "duration": 2.11,
+      "text": "this half of linear"
+    },
+    {
+      "index": 207,
+      "start": 715.639,
+      "end": 718.19,
+      "duration": 2.551,
+      "text": "algebra what do I mean by understanding"
+    },
+    {
+      "index": 208,
+      "start": 718.2,
+      "end": 721.91,
+      "duration": 3.71,
+      "text": "those spaces I would like to know a"
+    },
+    {
+      "index": 209,
+      "start": 721.92,
+      "end": 726.55,
+      "duration": 4.63,
+      "text": "basis for those"
+    },
+    {
+      "index": 210,
+      "start": 729.23,
+      "end": 729.24,
+      "duration": 0.01,
+      "text": "spaces for each one of those spaces how"
+    },
+    {
+      "index": 211,
+      "start": 729.24,
+      "end": 731.75,
+      "duration": 2.51,
+      "text": "would I create construct a basis what"
+    },
+    {
+      "index": 212,
+      "start": 731.76,
+      "end": 734.43,
+      "duration": 2.67,
+      "text": "systematic way would produce a"
+    },
+    {
+      "index": 213,
+      "start": 734.44,
+      "end": 744.069,
+      "duration": 9.629,
+      "text": "basis and what's their"
+    },
+    {
+      "index": 214,
+      "start": 749.99,
+      "end": 750.0,
+      "duration": 0.01,
+      "text": "okay so for each of the four spaces I"
+    },
+    {
+      "index": 215,
+      "start": 750.0,
+      "end": 751.509,
+      "duration": 1.509,
+      "text": "have to answer those"
+    },
+    {
+      "index": 216,
+      "start": 751.519,
+      "end": 754.99,
+      "duration": 3.471,
+      "text": "questions how do I produce a basis and"
+    },
+    {
+      "index": 217,
+      "start": 755.0,
+      "end": 757.59,
+      "duration": 2.59,
+      "text": "then which has a somewhat long"
+    },
+    {
+      "index": 218,
+      "start": 757.6,
+      "end": 760.11,
+      "duration": 2.51,
+      "text": "answer and what's the"
+    },
+    {
+      "index": 219,
+      "start": 760.12,
+      "end": 762.389,
+      "duration": 2.269,
+      "text": "dimension which is just a number so it"
+    },
+    {
+      "index": 220,
+      "start": 762.399,
+      "end": 764.509,
+      "duration": 2.11,
+      "text": "has a real short answer can I give you"
+    },
+    {
+      "index": 221,
+      "start": 764.519,
+      "end": 768.389,
+      "duration": 3.87,
+      "text": "the short answer first I shouldn't do it"
+    },
+    {
+      "index": 222,
+      "start": 768.399,
+      "end": 772.31,
+      "duration": 3.911,
+      "text": "but here it is I can tell you the"
+    },
+    {
+      "index": 223,
+      "start": 772.32,
+      "end": 775.15,
+      "duration": 2.83,
+      "text": "dimension of the column"
+    },
+    {
+      "index": 224,
+      "start": 775.16,
+      "end": 777.55,
+      "duration": 2.39,
+      "text": "space let me start with this guy what's"
+    },
+    {
+      "index": 225,
+      "start": 777.56,
+      "end": 783.23,
+      "duration": 5.67,
+      "text": "its Dimension I have an M byn Matrix the"
+    },
+    {
+      "index": 226,
+      "start": 783.24,
+      "end": 785.99,
+      "duration": 2.75,
+      "text": "dimension of the column"
+    },
+    {
+      "index": 227,
+      "start": 786.0,
+      "end": 788.189,
+      "duration": 2.189,
+      "text": "space is the"
+    },
+    {
+      "index": 228,
+      "start": 788.199,
+      "end": 792.629,
+      "duration": 4.43,
+      "text": "rank"
+    },
+    {
+      "index": 229,
+      "start": 795.55,
+      "end": 795.56,
+      "duration": 0.01,
+      "text": "R we actually got to that at the end of"
+    },
+    {
+      "index": 230,
+      "start": 795.56,
+      "end": 799.43,
+      "duration": 3.87,
+      "text": "the last lecture but only for an example"
+    },
+    {
+      "index": 231,
+      "start": 799.44,
+      "end": 801.509,
+      "duration": 2.069,
+      "text": "so I really have to"
+    },
+    {
+      "index": 232,
+      "start": 801.519,
+      "end": 805.189,
+      "duration": 3.67,
+      "text": "say okay what's going on there I should"
+    },
+    {
+      "index": 233,
+      "start": 805.199,
+      "end": 806.829,
+      "duration": 1.63,
+      "text": "produce a"
+    },
+    {
+      "index": 234,
+      "start": 806.839,
+      "end": 809.31,
+      "duration": 2.471,
+      "text": "basis and then I just look to see how"
+    },
+    {
+      "index": 235,
+      "start": 809.32,
+      "end": 811.35,
+      "duration": 2.03,
+      "text": "many vectors I needed in that basis and"
+    },
+    {
+      "index": 236,
+      "start": 811.36,
+      "end": 813.389,
+      "duration": 2.029,
+      "text": "the answer will be"
+    },
+    {
+      "index": 237,
+      "start": 813.399,
+      "end": 817.35,
+      "duration": 3.951,
+      "text": "R actually I'll do that before I get on"
+    },
+    {
+      "index": 238,
+      "start": 817.36,
+      "end": 818.23,
+      "duration": 0.87,
+      "text": "to the"
+    },
+    {
+      "index": 239,
+      "start": 818.24,
+      "end": 822.269,
+      "duration": 4.029,
+      "text": "others what's a basis for the column"
+    },
+    {
+      "index": 240,
+      "start": 822.279,
+      "end": 825.189,
+      "duration": 2.91,
+      "text": "space that we've done all the work of"
+    },
+    {
+      "index": 241,
+      "start": 825.199,
+      "end": 826.55,
+      "duration": 1.351,
+      "text": "row"
+    },
+    {
+      "index": 242,
+      "start": 826.56,
+      "end": 830.189,
+      "duration": 3.629,
+      "text": "reduction identifying the pivot columns"
+    },
+    {
+      "index": 243,
+      "start": 830.199,
+      "end": 832.31,
+      "duration": 2.111,
+      "text": "the ones that have pivots the ones that"
+    },
+    {
+      "index": 244,
+      "start": 832.32,
+      "end": 835.47,
+      "duration": 3.15,
+      "text": "end up with pivots but now I the pivot"
+    },
+    {
+      "index": 245,
+      "start": 835.48,
+      "end": 837.59,
+      "duration": 2.11,
+      "text": "columns I'm interested in are columns of"
+    },
+    {
+      "index": 246,
+      "start": 837.6,
+      "end": 840.67,
+      "duration": 3.07,
+      "text": "a the original a"
+    },
+    {
+      "index": 247,
+      "start": 840.68,
+      "end": 843.35,
+      "duration": 2.67,
+      "text": "and those pivot columns there are R of"
+    },
+    {
+      "index": 248,
+      "start": 843.36,
+      "end": 846.59,
+      "duration": 3.23,
+      "text": "them the rank R counts those those are a"
+    },
+    {
+      "index": 249,
+      "start": 846.6,
+      "end": 850.15,
+      "duration": 3.55,
+      "text": "basis so if I answer this question for"
+    },
+    {
+      "index": 250,
+      "start": 850.16,
+      "end": 852.59,
+      "duration": 2.43,
+      "text": "the column"
+    },
+    {
+      "index": 251,
+      "start": 852.6,
+      "end": 855.91,
+      "duration": 3.31,
+      "text": "space the answer will be a basis is the"
+    },
+    {
+      "index": 252,
+      "start": 855.92,
+      "end": 857.59,
+      "duration": 1.67,
+      "text": "pivot"
+    },
+    {
+      "index": 253,
+      "start": 857.6,
+      "end": 861.11,
+      "duration": 3.51,
+      "text": "columns and the dimension is the rank"
+    },
+    {
+      "index": 254,
+      "start": 861.12,
+      "end": 864.71,
+      "duration": 3.59,
+      "text": "R and there are pivot columns and"
+    },
+    {
+      "index": 255,
+      "start": 864.72,
+      "end": 869.11,
+      "duration": 4.39,
+      "text": "everything great okay so that space we"
+    },
+    {
+      "index": 256,
+      "start": 869.12,
+      "end": 871.59,
+      "duration": 2.47,
+      "text": "pretty well"
+    },
+    {
+      "index": 257,
+      "start": 871.6,
+      "end": 873.67,
+      "duration": 2.07,
+      "text": "understand I probably have a little"
+    },
+    {
+      "index": 258,
+      "start": 873.68,
+      "end": 877.509,
+      "duration": 3.829,
+      "text": "going back to see that to"
+    },
+    {
+      "index": 259,
+      "start": 877.519,
+      "end": 880.11,
+      "duration": 2.591,
+      "text": "prove that this is a right answer but"
+    },
+    {
+      "index": 260,
+      "start": 880.12,
+      "end": 884.03,
+      "duration": 3.91,
+      "text": "you know it's the right answer now let"
+    },
+    {
+      "index": 261,
+      "start": 884.04,
+      "end": 888.59,
+      "duration": 4.55,
+      "text": "me look at the row"
+    },
+    {
+      "index": 262,
+      "start": 890.71,
+      "end": 890.72,
+      "duration": 0.01,
+      "text": "space"
+    },
+    {
+      "index": 263,
+      "start": 890.72,
+      "end": 893.189,
+      "duration": 2.469,
+      "text": "okay shall I tell you the dimension of"
+    },
+    {
+      "index": 264,
+      "start": 893.199,
+      "end": 894.31,
+      "duration": 1.111,
+      "text": "the row"
+    },
+    {
+      "index": 265,
+      "start": 894.32,
+      "end": 897.55,
+      "duration": 3.23,
+      "text": "space yes before we do even an example"
+    },
+    {
+      "index": 266,
+      "start": 897.56,
+      "end": 899.03,
+      "duration": 1.47,
+      "text": "let me tell you the dimension of the row"
+    },
+    {
+      "index": 267,
+      "start": 899.04,
+      "end": 904.03,
+      "duration": 4.99,
+      "text": "row space its Dimension is also R the"
+    },
+    {
+      "index": 268,
+      "start": 904.04,
+      "end": 906.03,
+      "duration": 1.99,
+      "text": "row space and the column space have the"
+    },
+    {
+      "index": 269,
+      "start": 906.04,
+      "end": 908.47,
+      "duration": 2.43,
+      "text": "same Dimension that's a wonderful fact"
+    },
+    {
+      "index": 270,
+      "start": 908.48,
+      "end": 909.509,
+      "duration": 1.029,
+      "text": "the"
+    },
+    {
+      "index": 271,
+      "start": 909.519,
+      "end": 912.189,
+      "duration": 2.67,
+      "text": "dimension of the column space of a"
+    },
+    {
+      "index": 272,
+      "start": 912.199,
+      "end": 916.31,
+      "duration": 4.111,
+      "text": "transpose that's the row space is"
+    },
+    {
+      "index": 273,
+      "start": 916.32,
+      "end": 921.11,
+      "duration": 4.79,
+      "text": "r that that space is R"
+    },
+    {
+      "index": 274,
+      "start": 924.03,
+      "end": 924.04,
+      "duration": 0.01,
+      "text": "dimensional and so is this"
+    },
+    {
+      "index": 275,
+      "start": 924.04,
+      "end": 926.389,
+      "duration": 2.349,
+      "text": "one"
+    },
+    {
+      "index": 276,
+      "start": 926.399,
+      "end": 930.509,
+      "duration": 4.11,
+      "text": "okay that's the that's the sort of"
+    },
+    {
+      "index": 277,
+      "start": 930.519,
+      "end": 935.91,
+      "duration": 5.391,
+      "text": "insight that got used in this example if"
+    },
+    {
+      "index": 278,
+      "start": 935.92,
+      "end": 939.189,
+      "duration": 3.269,
+      "text": "those if those if those are the three"
+    },
+    {
+      "index": 279,
+      "start": 939.199,
+      "end": 942.15,
+      "duration": 2.951,
+      "text": "columns of a matrix let me make them the"
+    },
+    {
+      "index": 280,
+      "start": 942.16,
+      "end": 944.59,
+      "duration": 2.43,
+      "text": "three columns of a matrix by just"
+    },
+    {
+      "index": 281,
+      "start": 944.6,
+      "end": 946.15,
+      "duration": 1.55,
+      "text": "erasing some"
+    },
+    {
+      "index": 282,
+      "start": 946.16,
+      "end": 948.15,
+      "duration": 1.99,
+      "text": "brackets okay those are the three"
+    },
+    {
+      "index": 283,
+      "start": 948.16,
+      "end": 950.309,
+      "duration": 2.149,
+      "text": "columns of a"
+    },
+    {
+      "index": 284,
+      "start": 950.319,
+      "end": 953.069,
+      "duration": 2.75,
+      "text": "matrix the rank of that Matrix if I look"
+    },
+    {
+      "index": 285,
+      "start": 953.079,
+      "end": 956.509,
+      "duration": 3.43,
+      "text": "at the columns it wasn't obvious to me"
+    },
+    {
+      "index": 286,
+      "start": 956.519,
+      "end": 959.11,
+      "duration": 2.591,
+      "text": "anyway but if I look at the rows it's"
+    },
+    {
+      "index": 287,
+      "start": 959.12,
+      "end": 960.189,
+      "duration": 1.069,
+      "text": "now it's"
+    },
+    {
+      "index": 288,
+      "start": 960.199,
+      "end": 963.23,
+      "duration": 3.031,
+      "text": "obvious the row space of that Matrix"
+    },
+    {
+      "index": 289,
+      "start": 963.24,
+      "end": 965.35,
+      "duration": 2.11,
+      "text": "obviously is two-dimensional because I"
+    },
+    {
+      "index": 290,
+      "start": 965.36,
+      "end": 968.509,
+      "duration": 3.149,
+      "text": "can I I see a basis for the row space"
+    },
+    {
+      "index": 291,
+      "start": 968.519,
+      "end": 971.35,
+      "duration": 2.831,
+      "text": "this row and that row and of course"
+    },
+    {
+      "index": 292,
+      "start": 971.36,
+      "end": 972.87,
+      "duration": 1.51,
+      "text": "strictly speaking I'm supposed to"
+    },
+    {
+      "index": 293,
+      "start": 972.88,
+      "end": 975.23,
+      "duration": 2.35,
+      "text": "transpose those guys make them stand"
+    },
+    {
+      "index": 294,
+      "start": 975.24,
+      "end": 978.389,
+      "duration": 3.149,
+      "text": "up but the rank is two and therefore the"
+    },
+    {
+      "index": 295,
+      "start": 978.399,
+      "end": 980.67,
+      "duration": 2.271,
+      "text": "column space is two-dimensional by this"
+    },
+    {
+      "index": 296,
+      "start": 980.68,
+      "end": 983.069,
+      "duration": 2.389,
+      "text": "wonderful fact that the row space and"
+    },
+    {
+      "index": 297,
+      "start": 983.079,
+      "end": 985.55,
+      "duration": 2.471,
+      "text": "column space have the same Dimension and"
+    },
+    {
+      "index": 298,
+      "start": 985.56,
+      "end": 987.55,
+      "duration": 1.99,
+      "text": "therefore there are only two pivot"
+    },
+    {
+      "index": 299,
+      "start": 987.56,
+      "end": 989.71,
+      "duration": 2.15,
+      "text": "columns not three"
+    },
+    {
+      "index": 300,
+      "start": 989.72,
+      "end": 993.47,
+      "duration": 3.75,
+      "text": "and uh those the three columns are"
+    },
+    {
+      "index": 301,
+      "start": 993.48,
+      "end": 998.069,
+      "duration": 4.589,
+      "text": "dependent okay now let"
+    },
+    {
+      "index": 302,
+      "start": 998.079,
+      "end": 1001.23,
+      "duration": 3.151,
+      "text": "me bury that"
+    },
+    {
+      "index": 303,
+      "start": 1001.24,
+      "end": 1004.47,
+      "duration": 3.23,
+      "text": "error and talk about the row"
+    },
+    {
+      "index": 304,
+      "start": 1004.48,
+      "end": 1006.629,
+      "duration": 2.149,
+      "text": "space well I'm going to give you the"
+    },
+    {
+      "index": 305,
+      "start": 1006.639,
+      "end": 1008.91,
+      "duration": 2.271,
+      "text": "dimensions of all the spaces because"
+    },
+    {
+      "index": 306,
+      "start": 1008.92,
+      "end": 1011.629,
+      "duration": 2.709,
+      "text": "that's the the such a nice"
+    },
+    {
+      "index": 307,
+      "start": 1011.639,
+      "end": 1015.389,
+      "duration": 3.75,
+      "text": "answer okay so let me come back"
+    },
+    {
+      "index": 308,
+      "start": 1015.399,
+      "end": 1018.11,
+      "duration": 2.711,
+      "text": "here so we have this great fact to"
+    },
+    {
+      "index": 309,
+      "start": 1018.12,
+      "end": 1020.35,
+      "duration": 2.23,
+      "text": "establish"
+    },
+    {
+      "index": 310,
+      "start": 1020.36,
+      "end": 1023.59,
+      "duration": 3.23,
+      "text": "that the row space the its Dimension is"
+    },
+    {
+      "index": 311,
+      "start": 1023.6,
+      "end": 1025.35,
+      "duration": 1.75,
+      "text": "also the"
+    },
+    {
+      "index": 312,
+      "start": 1025.36,
+      "end": 1028.99,
+      "duration": 3.63,
+      "text": "rank okay what about the null"
+    },
+    {
+      "index": 313,
+      "start": 1029.0,
+      "end": 1032.75,
+      "duration": 3.75,
+      "text": "space what's the basis for the null"
+    },
+    {
+      "index": 314,
+      "start": 1032.76,
+      "end": 1035.309,
+      "duration": 2.549,
+      "text": "space what's the dimension of the null"
+    },
+    {
+      "index": 315,
+      "start": 1035.319,
+      "end": 1038.15,
+      "duration": 2.831,
+      "text": "space let me I'll put that answer up"
+    },
+    {
+      "index": 316,
+      "start": 1038.16,
+      "end": 1043.23,
+      "duration": 5.07,
+      "text": "here for the null"
+    },
+    {
+      "index": 317,
+      "start": 1045.829,
+      "end": 1045.839,
+      "duration": 0.01,
+      "text": "space well how how have we constructed"
+    },
+    {
+      "index": 318,
+      "start": 1045.839,
+      "end": 1046.829,
+      "duration": 0.99,
+      "text": "the null"
+    },
+    {
+      "index": 319,
+      "start": 1046.839,
+      "end": 1049.47,
+      "duration": 2.631,
+      "text": "space we took the Matrix"
+    },
+    {
+      "index": 320,
+      "start": 1049.48,
+      "end": 1052.71,
+      "duration": 3.23,
+      "text": "a we did those row operations to get it"
+    },
+    {
+      "index": 321,
+      "start": 1052.72,
+      "end": 1056.39,
+      "duration": 3.67,
+      "text": "into a form U or or even further we got"
+    },
+    {
+      "index": 322,
+      "start": 1056.4,
+      "end": 1058.87,
+      "duration": 2.47,
+      "text": "it into the reduced form"
+    },
+    {
+      "index": 323,
+      "start": 1058.88,
+      "end": 1062.549,
+      "duration": 3.669,
+      "text": "R and then we read off special"
+    },
+    {
+      "index": 324,
+      "start": 1062.559,
+      "end": 1065.07,
+      "duration": 2.511,
+      "text": "Solutions special Solutions and every"
+    },
+    {
+      "index": 325,
+      "start": 1065.08,
+      "end": 1067.11,
+      "duration": 2.03,
+      "text": "special solution came from a free"
+    },
+    {
+      "index": 326,
+      "start": 1067.12,
+      "end": 1069.669,
+      "duration": 2.549,
+      "text": "variable and those special Solutions are"
+    },
+    {
+      "index": 327,
+      "start": 1069.679,
+      "end": 1072.63,
+      "duration": 2.951,
+      "text": "in the null space and the great thing is"
+    },
+    {
+      "index": 328,
+      "start": 1072.64,
+      "end": 1075.27,
+      "duration": 2.63,
+      "text": "there are a basis for it so for the null"
+    },
+    {
+      "index": 329,
+      "start": 1075.28,
+      "end": 1082.47,
+      "duration": 7.19,
+      "text": "space a basis will be the special"
+    },
+    {
+      "index": 330,
+      "start": 1086.149,
+      "end": 1086.159,
+      "duration": 0.01,
+      "text": "Solutions and there's one for every free"
+    },
+    {
+      "index": 331,
+      "start": 1086.159,
+      "end": 1088.549,
+      "duration": 2.39,
+      "text": "variable right for each free variable we"
+    },
+    {
+      "index": 332,
+      "start": 1088.559,
+      "end": 1091.43,
+      "duration": 2.871,
+      "text": "give that variable the value one the"
+    },
+    {
+      "index": 333,
+      "start": 1091.44,
+      "end": 1093.83,
+      "duration": 2.39,
+      "text": "other free variable zero we get the"
+    },
+    {
+      "index": 334,
+      "start": 1093.84,
+      "end": 1097.39,
+      "duration": 3.55,
+      "text": "pivot variables we get a a vector in the"
+    },
+    {
+      "index": 335,
+      "start": 1097.4,
+      "end": 1099.71,
+      "duration": 2.31,
+      "text": "in we get a special"
+    },
+    {
+      "index": 336,
+      "start": 1099.72,
+      "end": 1102.59,
+      "duration": 2.87,
+      "text": "solution so we get allog together n"
+    },
+    {
+      "index": 337,
+      "start": 1102.6,
+      "end": 1107.07,
+      "duration": 4.47,
+      "text": "minus r of them CU that's the number"
+    },
+    {
+      "index": 338,
+      "start": 1107.08,
+      "end": 1110.27,
+      "duration": 3.19,
+      "text": "of free variabl"
+    },
+    {
+      "index": 339,
+      "start": 1110.28,
+      "end": 1111.549,
+      "duration": 1.269,
+      "text": "if we have"
+    },
+    {
+      "index": 340,
+      "start": 1111.559,
+      "end": 1116.549,
+      "duration": 4.99,
+      "text": "R this is this is the dimension is R is"
+    },
+    {
+      "index": 341,
+      "start": 1116.559,
+      "end": 1118.71,
+      "duration": 2.151,
+      "text": "the number of pivot variables this is"
+    },
+    {
+      "index": 342,
+      "start": 1118.72,
+      "end": 1121.149,
+      "duration": 2.429,
+      "text": "the number of free variables so the"
+    },
+    {
+      "index": 343,
+      "start": 1121.159,
+      "end": 1123.549,
+      "duration": 2.39,
+      "text": "beauty is that those special Solutions"
+    },
+    {
+      "index": 344,
+      "start": 1123.559,
+      "end": 1124.99,
+      "duration": 1.431,
+      "text": "do form a"
+    },
+    {
+      "index": 345,
+      "start": 1125.0,
+      "end": 1129.549,
+      "duration": 4.549,
+      "text": "basis and tell us immediately that the"
+    },
+    {
+      "index": 346,
+      "start": 1129.559,
+      "end": 1132.39,
+      "duration": 2.831,
+      "text": "dimension of the null"
+    },
+    {
+      "index": 347,
+      "start": 1132.4,
+      "end": 1134.71,
+      "duration": 2.31,
+      "text": "space is"
+    },
+    {
+      "index": 348,
+      "start": 1134.72,
+      "end": 1137.83,
+      "duration": 3.11,
+      "text": "n i better write this well because it's"
+    },
+    {
+      "index": 349,
+      "start": 1137.84,
+      "end": 1143.99,
+      "duration": 6.15,
+      "text": "so nice n minus r and you see the nice"
+    },
+    {
+      "index": 350,
+      "start": 1144.0,
+      "end": 1147.23,
+      "duration": 3.23,
+      "text": "thing that the two dimensions in this n"
+    },
+    {
+      "index": 351,
+      "start": 1147.24,
+      "end": 1151.19,
+      "duration": 3.95,
+      "text": "dimensional space one Subspace is R"
+    },
+    {
+      "index": 352,
+      "start": 1151.2,
+      "end": 1154.35,
+      "duration": 3.15,
+      "text": "dimensional to be proved that's the row"
+    },
+    {
+      "index": 353,
+      "start": 1154.36,
+      "end": 1157.87,
+      "duration": 3.51,
+      "text": "space the other Subspace is n minus r"
+    },
+    {
+      "index": 354,
+      "start": 1157.88,
+      "end": 1160.19,
+      "duration": 2.31,
+      "text": "dimensional that's the null"
+    },
+    {
+      "index": 355,
+      "start": 1160.2,
+      "end": 1163.51,
+      "duration": 3.31,
+      "text": "space and the two Dimensions like"
+    },
+    {
+      "index": 356,
+      "start": 1163.52,
+      "end": 1167.149,
+      "duration": 3.629,
+      "text": "together give n the sum of R and N minus"
+    },
+    {
+      "index": 357,
+      "start": 1167.159,
+      "end": 1171.95,
+      "duration": 4.791,
+      "text": "r is n and that's just great it it it's"
+    },
+    {
+      "index": 358,
+      "start": 1171.96,
+      "end": 1174.63,
+      "duration": 2.67,
+      "text": "really copying the fact that we have n"
+    },
+    {
+      "index": 359,
+      "start": 1174.64,
+      "end": 1177.87,
+      "duration": 3.23,
+      "text": "variables R of them our pivot variables"
+    },
+    {
+      "index": 360,
+      "start": 1177.88,
+      "end": 1180.51,
+      "duration": 2.63,
+      "text": "and N minus r free variables and N all"
+    },
+    {
+      "index": 361,
+      "start": 1180.52,
+      "end": 1182.87,
+      "duration": 2.35,
+      "text": "together okay and now what's the"
+    },
+    {
+      "index": 362,
+      "start": 1182.88,
+      "end": 1184.31,
+      "duration": 1.43,
+      "text": "dimension of"
+    },
+    {
+      "index": 363,
+      "start": 1184.32,
+      "end": 1187.63,
+      "duration": 3.31,
+      "text": "this poor Mis begotten fourth"
+    },
+    {
+      "index": 364,
+      "start": 1187.64,
+      "end": 1190.71,
+      "duration": 3.07,
+      "text": "Subspace it's got to"
+    },
+    {
+      "index": 365,
+      "start": 1190.72,
+      "end": 1195.07,
+      "duration": 4.35,
+      "text": "be M minus r the"
+    },
+    {
+      "index": 366,
+      "start": 1195.08,
+      "end": 1198.87,
+      "duration": 3.79,
+      "text": "dimension of this left null space left"
+    },
+    {
+      "index": 367,
+      "start": 1198.88,
+      "end": 1204.27,
+      "duration": 5.39,
+      "text": "out practically is M minus"
+    },
+    {
+      "index": 368,
+      "start": 1204.28,
+      "end": 1207.789,
+      "duration": 3.509,
+      "text": "r well that's really just saying that"
+    },
+    {
+      "index": 369,
+      "start": 1207.799,
+      "end": 1212.11,
+      "duration": 4.311,
+      "text": "this again the sum of that plus that is"
+    },
+    {
+      "index": 370,
+      "start": 1212.12,
+      "end": 1216.51,
+      "duration": 4.39,
+      "text": "M and M is correct it's the number of"
+    },
+    {
+      "index": 371,
+      "start": 1216.52,
+      "end": 1220.029,
+      "duration": 3.509,
+      "text": "columns in a"
+    },
+    {
+      "index": 372,
+      "start": 1220.039,
+      "end": 1222.549,
+      "duration": 2.51,
+      "text": "transpose a transpose is just as good a"
+    },
+    {
+      "index": 373,
+      "start": 1222.559,
+      "end": 1224.75,
+      "duration": 2.191,
+      "text": "matrix is"
+    },
+    {
+      "index": 374,
+      "start": 1224.76,
+      "end": 1227.27,
+      "duration": 2.51,
+      "text": "a it just happens to"
+    },
+    {
+      "index": 375,
+      "start": 1227.28,
+      "end": 1232.47,
+      "duration": 5.19,
+      "text": "be n by m it happens to have M columns"
+    },
+    {
+      "index": 376,
+      "start": 1232.48,
+      "end": 1236.149,
+      "duration": 3.669,
+      "text": "so it will have"
+    },
+    {
+      "index": 377,
+      "start": 1240.75,
+      "end": 1240.76,
+      "duration": 0.01,
+      "text": "M variables when I go to ax equals z and"
+    },
+    {
+      "index": 378,
+      "start": 1240.76,
+      "end": 1244.87,
+      "duration": 4.11,
+      "text": "M of them and and R of them will be"
+    },
+    {
+      "index": 379,
+      "start": 1244.88,
+      "end": 1247.029,
+      "duration": 2.149,
+      "text": "pivot variables and M minus r will be"
+    },
+    {
+      "index": 380,
+      "start": 1247.039,
+      "end": 1248.07,
+      "duration": 1.031,
+      "text": "free"
+    },
+    {
+      "index": 381,
+      "start": 1248.08,
+      "end": 1251.19,
+      "duration": 3.11,
+      "text": "variables it a transposes as good a"
+    },
+    {
+      "index": 382,
+      "start": 1251.2,
+      "end": 1254.47,
+      "duration": 3.27,
+      "text": "matrix as a it follows the same rule"
+    },
+    {
+      "index": 383,
+      "start": 1254.48,
+      "end": 1257.59,
+      "duration": 3.11,
+      "text": "that the this plus the dimension this"
+    },
+    {
+      "index": 384,
+      "start": 1257.6,
+      "end": 1260.07,
+      "duration": 2.47,
+      "text": "Dimension plus this Dimension adds up to"
+    },
+    {
+      "index": 385,
+      "start": 1260.08,
+      "end": 1261.99,
+      "duration": 1.91,
+      "text": "the number of"
+    },
+    {
+      "index": 386,
+      "start": 1262.0,
+      "end": 1265.909,
+      "duration": 3.909,
+      "text": "columns and over here a transpose has M"
+    },
+    {
+      "index": 387,
+      "start": 1265.919,
+      "end": 1268.51,
+      "duration": 2.591,
+      "text": "columns"
+    },
+    {
+      "index": 388,
+      "start": 1268.52,
+      "end": 1271.59,
+      "duration": 3.07,
+      "text": "okay okay so I gave you the easy answer"
+    },
+    {
+      "index": 389,
+      "start": 1271.6,
+      "end": 1272.669,
+      "duration": 1.069,
+      "text": "the"
+    },
+    {
+      "index": 390,
+      "start": 1272.679,
+      "end": 1275.31,
+      "duration": 2.631,
+      "text": "dimensions now can"
+    },
+    {
+      "index": 391,
+      "start": 1275.32,
+      "end": 1280.11,
+      "duration": 4.79,
+      "text": "I go back to check on a"
+    },
+    {
+      "index": 392,
+      "start": 1280.12,
+      "end": 1283.669,
+      "duration": 3.549,
+      "text": "basis we would like to think that say"
+    },
+    {
+      "index": 393,
+      "start": 1283.679,
+      "end": 1285.35,
+      "duration": 1.671,
+      "text": "the row"
+    },
+    {
+      "index": 394,
+      "start": 1285.36,
+      "end": 1287.71,
+      "duration": 2.35,
+      "text": "space because we've got a basis for the"
+    },
+    {
+      "index": 395,
+      "start": 1287.72,
+      "end": 1289.19,
+      "duration": 1.47,
+      "text": "column space"
+    },
+    {
+      "index": 396,
+      "start": 1289.2,
+      "end": 1292.029,
+      "duration": 2.829,
+      "text": "the pivot columns give a basis for the"
+    },
+    {
+      "index": 397,
+      "start": 1292.039,
+      "end": 1294.669,
+      "duration": 2.63,
+      "text": "column space now I'm asking you to look"
+    },
+    {
+      "index": 398,
+      "start": 1294.679,
+      "end": 1298.71,
+      "duration": 4.031,
+      "text": "at the row space and I you could say"
+    },
+    {
+      "index": 399,
+      "start": 1298.72,
+      "end": 1300.83,
+      "duration": 2.11,
+      "text": "okay I can produce a basis for the row"
+    },
+    {
+      "index": 400,
+      "start": 1300.84,
+      "end": 1304.35,
+      "duration": 3.51,
+      "text": "Space by transposing my Matrix making"
+    },
+    {
+      "index": 401,
+      "start": 1304.36,
+      "end": 1307.87,
+      "duration": 3.51,
+      "text": "those columns then doing elimination row"
+    },
+    {
+      "index": 402,
+      "start": 1307.88,
+      "end": 1311.83,
+      "duration": 3.95,
+      "text": "reduction and checking out the pivot"
+    },
+    {
+      "index": 403,
+      "start": 1311.84,
+      "end": 1315.51,
+      "duration": 3.67,
+      "text": "columns in this transposed Matrix but"
+    },
+    {
+      "index": 404,
+      "start": 1315.52,
+      "end": 1317.75,
+      "duration": 2.23,
+      "text": "that means you had to do all that row"
+    },
+    {
+      "index": 405,
+      "start": 1317.76,
+      "end": 1319.71,
+      "duration": 1.95,
+      "text": "reduction on a"
+    },
+    {
+      "index": 406,
+      "start": 1319.72,
+      "end": 1322.87,
+      "duration": 3.15,
+      "text": "transpose it ought to be possible if we"
+    },
+    {
+      "index": 407,
+      "start": 1322.88,
+      "end": 1324.47,
+      "duration": 1.59,
+      "text": "take a matrix"
+    },
+    {
+      "index": 408,
+      "start": 1324.48,
+      "end": 1327.43,
+      "duration": 2.95,
+      "text": "a let me take the Matrix maybe we had"
+    },
+    {
+      "index": 409,
+      "start": 1327.44,
+      "end": 1330.31,
+      "duration": 2.87,
+      "text": "this Matrix in the last lecture 1 one"
+    },
+    {
+      "index": 410,
+      "start": 1330.32,
+      "end": 1341.149,
+      "duration": 10.829,
+      "text": "one 2 1 2 3 2 3 one one"
+    },
+    {
+      "index": 411,
+      "start": 1344.99,
+      "end": 1345.0,
+      "duration": 0.01,
+      "text": "okay that that Matrix was so easy we"
+    },
+    {
+      "index": 412,
+      "start": 1345.0,
+      "end": 1348.07,
+      "duration": 3.07,
+      "text": "spotted its pivot columns one and two"
+    },
+    {
+      "index": 413,
+      "start": 1348.08,
+      "end": 1351.31,
+      "duration": 3.23,
+      "text": "without actually doing row reduction but"
+    },
+    {
+      "index": 414,
+      "start": 1351.32,
+      "end": 1353.99,
+      "duration": 2.67,
+      "text": "now let's do the job"
+    },
+    {
+      "index": 415,
+      "start": 1354.0,
+      "end": 1356.71,
+      "duration": 2.71,
+      "text": "properly so I subtract this away from"
+    },
+    {
+      "index": 416,
+      "start": 1356.72,
+      "end": 1361.789,
+      "duration": 5.069,
+      "text": "this to produce a zero so 1 2 3 1 is"
+    },
+    {
+      "index": 417,
+      "start": 1361.799,
+      "end": 1364.549,
+      "duration": 2.75,
+      "text": "fine subtracting that away leaves me"
+    },
+    {
+      "index": 418,
+      "start": 1364.559,
+      "end": 1368.269,
+      "duration": 3.71,
+      "text": "min-1 - one Z right and subtracting that"
+    },
+    {
+      "index": 419,
+      "start": 1368.279,
+      "end": 1372.31,
+      "duration": 4.031,
+      "text": "from the last row oh well that's"
+    },
+    {
+      "index": 420,
+      "start": 1375.789,
+      "end": 1375.799,
+      "duration": 0.01,
+      "text": "easy okay I'm doing row"
+    },
+    {
+      "index": 421,
+      "start": 1375.799,
+      "end": 1379.149,
+      "duration": 3.35,
+      "text": "reduction now I've the First Column is"
+    },
+    {
+      "index": 422,
+      "start": 1379.159,
+      "end": 1383.23,
+      "duration": 4.071,
+      "text": "all set the second column I now see the"
+    },
+    {
+      "index": 423,
+      "start": 1383.24,
+      "end": 1387.87,
+      "duration": 4.63,
+      "text": "pivot and I can clean up if I uh"
+    },
+    {
+      "index": 424,
+      "start": 1387.88,
+      "end": 1389.59,
+      "duration": 1.71,
+      "text": "actually"
+    },
+    {
+      "index": 425,
+      "start": 1389.6,
+      "end": 1392.43,
+      "duration": 2.83,
+      "text": "okay why don't I make the pivot into a"
+    },
+    {
+      "index": 426,
+      "start": 1392.44,
+      "end": 1396.39,
+      "duration": 3.95,
+      "text": "one I'll multiply that row through by by"
+    },
+    {
+      "index": 427,
+      "start": 1396.4,
+      "end": 1401.149,
+      "duration": 4.749,
+      "text": "minus one and then I have one"
+    },
+    {
+      "index": 428,
+      "start": 1403.87,
+      "end": 1403.88,
+      "duration": 0.01,
+      "text": "that was an elementary operation I'm"
+    },
+    {
+      "index": 429,
+      "start": 1403.88,
+      "end": 1406.909,
+      "duration": 3.029,
+      "text": "allowed multiply a row by a number and"
+    },
+    {
+      "index": 430,
+      "start": 1406.919,
+      "end": 1408.909,
+      "duration": 1.99,
+      "text": "now I'll do elimination two of those"
+    },
+    {
+      "index": 431,
+      "start": 1408.919,
+      "end": 1411.23,
+      "duration": 2.311,
+      "text": "away from that we'll knock this guy out"
+    },
+    {
+      "index": 432,
+      "start": 1411.24,
+      "end": 1414.31,
+      "duration": 3.07,
+      "text": "and make this into a one so that's now a"
+    },
+    {
+      "index": 433,
+      "start": 1414.32,
+      "end": 1415.75,
+      "duration": 1.43,
+      "text": "zero and that's a"
+    },
+    {
+      "index": 434,
+      "start": 1415.76,
+      "end": 1421.47,
+      "duration": 5.71,
+      "text": "one okay done that's"
+    },
+    {
+      "index": 435,
+      "start": 1425.83,
+      "end": 1425.84,
+      "duration": 0.01,
+      "text": "R I'm seeing the identity Matrix here"
+    },
+    {
+      "index": 436,
+      "start": 1425.84,
+      "end": 1432.47,
+      "duration": 6.63,
+      "text": "I'm seeing Zer below and I'm seeing F"
+    },
+    {
+      "index": 437,
+      "start": 1435.31,
+      "end": 1435.32,
+      "duration": 0.01,
+      "text": "there"
+    },
+    {
+      "index": 438,
+      "start": 1435.32,
+      "end": 1440.149,
+      "duration": 4.829,
+      "text": "okay what about its row space"
+    },
+    {
+      "index": 439,
+      "start": 1440.159,
+      "end": 1442.31,
+      "duration": 2.151,
+      "text": "what happened to its row space well what"
+    },
+    {
+      "index": 440,
+      "start": 1442.32,
+      "end": 1444.99,
+      "duration": 2.67,
+      "text": "Happ let me first ask just because this"
+    },
+    {
+      "index": 441,
+      "start": 1445.0,
+      "end": 1447.11,
+      "duration": 2.11,
+      "text": "sometimes something does happen its"
+    },
+    {
+      "index": 442,
+      "start": 1447.12,
+      "end": 1449.269,
+      "duration": 2.149,
+      "text": "column space"
+    },
+    {
+      "index": 443,
+      "start": 1449.279,
+      "end": 1452.43,
+      "duration": 3.151,
+      "text": "changed the column space of"
+    },
+    {
+      "index": 444,
+      "start": 1452.44,
+      "end": 1457.909,
+      "duration": 5.469,
+      "text": "R is not the column space of a"
+    },
+    {
+      "index": 445,
+      "start": 1457.919,
+      "end": 1460.99,
+      "duration": 3.071,
+      "text": "right because 111 is certainly in the"
+    },
+    {
+      "index": 446,
+      "start": 1461.0,
+      "end": 1463.31,
+      "duration": 2.31,
+      "text": "column space of a and certainly not in"
+    },
+    {
+      "index": 447,
+      "start": 1463.32,
+      "end": 1465.389,
+      "duration": 2.069,
+      "text": "the column space of"
+    },
+    {
+      "index": 448,
+      "start": 1465.399,
+      "end": 1469.669,
+      "duration": 4.27,
+      "text": "r i did row operations"
+    },
+    {
+      "index": 449,
+      "start": 1469.679,
+      "end": 1472.669,
+      "duration": 2.99,
+      "text": "those row operations preserve the row"
+    },
+    {
+      "index": 450,
+      "start": 1472.679,
+      "end": 1475.71,
+      "duration": 3.031,
+      "text": "space so the row so the column spaces"
+    },
+    {
+      "index": 451,
+      "start": 1475.72,
+      "end": 1480.59,
+      "duration": 4.87,
+      "text": "are different different column spaces"
+    },
+    {
+      "index": 452,
+      "start": 1480.6,
+      "end": 1484.909,
+      "duration": 4.309,
+      "text": "different column"
+    },
+    {
+      "index": 453,
+      "start": 1488.789,
+      "end": 1488.799,
+      "duration": 0.01,
+      "text": "spaces but I believe that they have the"
+    },
+    {
+      "index": 454,
+      "start": 1488.799,
+      "end": 1493.909,
+      "duration": 5.11,
+      "text": "same row"
+    },
+    {
+      "index": 455,
+      "start": 1502.31,
+      "end": 1502.32,
+      "duration": 0.01,
+      "text": "I believe that the row space of that"
+    },
+    {
+      "index": 456,
+      "start": 1502.32,
+      "end": 1504.909,
+      "duration": 2.589,
+      "text": "Matrix and the row space of this Matrix"
+    },
+    {
+      "index": 457,
+      "start": 1504.919,
+      "end": 1507.47,
+      "duration": 2.551,
+      "text": "are identical they have exactly the same"
+    },
+    {
+      "index": 458,
+      "start": 1507.48,
+      "end": 1508.59,
+      "duration": 1.11,
+      "text": "vectors in"
+    },
+    {
+      "index": 459,
+      "start": 1508.6,
+      "end": 1511.75,
+      "duration": 3.15,
+      "text": "them those vectors are vectors with four"
+    },
+    {
+      "index": 460,
+      "start": 1511.76,
+      "end": 1513.35,
+      "duration": 1.59,
+      "text": "components"
+    },
+    {
+      "index": 461,
+      "start": 1513.36,
+      "end": 1516.95,
+      "duration": 3.59,
+      "text": "right they're all combinations of those"
+    },
+    {
+      "index": 462,
+      "start": 1516.96,
+      "end": 1519.789,
+      "duration": 2.829,
+      "text": "rows or I believe you get the same thing"
+    },
+    {
+      "index": 463,
+      "start": 1519.799,
+      "end": 1523.669,
+      "duration": 3.87,
+      "text": "by taking all combinations of these"
+    },
+    {
+      "index": 464,
+      "start": 1523.679,
+      "end": 1526.389,
+      "duration": 2.71,
+      "text": "rows and if"
+    },
+    {
+      "index": 465,
+      "start": 1526.399,
+      "end": 1529.95,
+      "duration": 3.551,
+      "text": "true what's a basis"
+    },
+    {
+      "index": 466,
+      "start": 1529.96,
+      "end": 1532.389,
+      "duration": 2.429,
+      "text": "what's a basis for the row space of R"
+    },
+    {
+      "index": 467,
+      "start": 1532.399,
+      "end": 1534.19,
+      "duration": 1.791,
+      "text": "and it'll be a basis for the row space"
+    },
+    {
+      "index": 468,
+      "start": 1534.2,
+      "end": 1541.389,
+      "duration": 7.189,
+      "text": "of the original"
+    },
+    {
+      "index": 469,
+      "start": 1544.389,
+      "end": 1544.399,
+      "duration": 0.01,
+      "text": "a but it's obviously a basis for the row"
+    },
+    {
+      "index": 470,
+      "start": 1544.399,
+      "end": 1546.35,
+      "duration": 1.951,
+      "text": "space of R what's a basis for the row"
+    },
+    {
+      "index": 471,
+      "start": 1546.36,
+      "end": 1550.83,
+      "duration": 4.47,
+      "text": "space of that Matrix the first two"
+    },
+    {
+      "index": 472,
+      "start": 1556.47,
+      "end": 1556.48,
+      "duration": 0.01,
+      "text": "rows so a basis for the row so a basis"
+    },
+    {
+      "index": 473,
+      "start": 1556.48,
+      "end": 1560.19,
+      "duration": 3.71,
+      "text": "is for the row"
+    },
+    {
+      "index": 474,
+      "start": 1560.2,
+      "end": 1564.789,
+      "duration": 4.589,
+      "text": "space of a or of R"
+    },
+    {
+      "index": 475,
+      "start": 1564.799,
+      "end": 1568.63,
+      "duration": 3.831,
+      "text": "is is the"
+    },
+    {
+      "index": 476,
+      "start": 1568.64,
+      "end": 1571.669,
+      "duration": 3.029,
+      "text": "first R"
+    },
+    {
+      "index": 477,
+      "start": 1571.679,
+      "end": 1577.23,
+      "duration": 5.551,
+      "text": "rows of R not of"
+    },
+    {
+      "index": 478,
+      "start": 1577.24,
+      "end": 1581.11,
+      "duration": 3.87,
+      "text": "a sometimes it's true for a but not"
+    },
+    {
+      "index": 479,
+      "start": 1581.12,
+      "end": 1585.789,
+      "duration": 4.669,
+      "text": "necessarily but R we definitely"
+    },
+    {
+      "index": 480,
+      "start": 1585.799,
+      "end": 1590.23,
+      "duration": 4.431,
+      "text": "have a matrix here who row space we can"
+    },
+    {
+      "index": 481,
+      "start": 1590.24,
+      "end": 1591.51,
+      "duration": 1.27,
+      "text": "we can"
+    },
+    {
+      "index": 482,
+      "start": 1591.52,
+      "end": 1595.11,
+      "duration": 3.59,
+      "text": "identify the row space is spanned by the"
+    },
+    {
+      "index": 483,
+      "start": 1595.12,
+      "end": 1596.389,
+      "duration": 1.269,
+      "text": "three"
+    },
+    {
+      "index": 484,
+      "start": 1596.399,
+      "end": 1599.47,
+      "duration": 3.071,
+      "text": "rows but if we want a basis we want"
+    },
+    {
+      "index": 485,
+      "start": 1599.48,
+      "end": 1603.07,
+      "duration": 3.59,
+      "text": "independence so out goes Row three the"
+    },
+    {
+      "index": 486,
+      "start": 1603.08,
+      "end": 1605.59,
+      "duration": 2.51,
+      "text": "Bas the row space is also spanned by the"
+    },
+    {
+      "index": 487,
+      "start": 1605.6,
+      "end": 1607.59,
+      "duration": 1.99,
+      "text": "first two rows this guy didn't"
+    },
+    {
+      "index": 488,
+      "start": 1607.6,
+      "end": 1610.19,
+      "duration": 2.59,
+      "text": "contribute anything and of course over"
+    },
+    {
+      "index": 489,
+      "start": 1610.2,
+      "end": 1612.71,
+      "duration": 2.51,
+      "text": "here this 1 two 3 1 and the bottom"
+    },
+    {
+      "index": 490,
+      "start": 1612.72,
+      "end": 1615.51,
+      "duration": 2.79,
+      "text": "didn't contribute anything we had it"
+    },
+    {
+      "index": 491,
+      "start": 1615.52,
+      "end": 1619.11,
+      "duration": 3.59,
+      "text": "already so th this here's a basis"
+    },
+    {
+      "index": 492,
+      "start": 1619.12,
+      "end": 1623.75,
+      "duration": 4.63,
+      "text": "one11 and"
+    },
+    {
+      "index": 493,
+      "start": 1626.389,
+      "end": 1626.399,
+      "duration": 0.01,
+      "text": "0110 I believe those are in the row"
+    },
+    {
+      "index": 494,
+      "start": 1626.399,
+      "end": 1628.43,
+      "duration": 2.031,
+      "text": "space I know they're independent why are"
+    },
+    {
+      "index": 495,
+      "start": 1628.44,
+      "end": 1629.789,
+      "duration": 1.349,
+      "text": "they in the row"
+    },
+    {
+      "index": 496,
+      "start": 1629.799,
+      "end": 1632.909,
+      "duration": 3.11,
+      "text": "space why are those two vectors in the"
+    },
+    {
+      "index": 497,
+      "start": 1632.919,
+      "end": 1636.31,
+      "duration": 3.391,
+      "text": "row space because all those operations"
+    },
+    {
+      "index": 498,
+      "start": 1636.32,
+      "end": 1639.909,
+      "duration": 3.589,
+      "text": "we did which started with these"
+    },
+    {
+      "index": 499,
+      "start": 1639.919,
+      "end": 1644.07,
+      "duration": 4.151,
+      "text": "rows and took combinations of them I"
+    },
+    {
+      "index": 500,
+      "start": 1644.08,
+      "end": 1646.83,
+      "duration": 2.75,
+      "text": "took this row minus this"
+    },
+    {
+      "index": 501,
+      "start": 1646.84,
+      "end": 1649.47,
+      "duration": 2.63,
+      "text": "row that gave me something that's still"
+    },
+    {
+      "index": 502,
+      "start": 1649.48,
+      "end": 1652.71,
+      "duration": 3.23,
+      "text": "in the row space that's the point when I"
+    },
+    {
+      "index": 503,
+      "start": 1652.72,
+      "end": 1656.269,
+      "duration": 3.549,
+      "text": "took a a row minus a multiple of another"
+    },
+    {
+      "index": 504,
+      "start": 1656.279,
+      "end": 1658.71,
+      "duration": 2.431,
+      "text": "row I'm staying in the row space the row"
+    },
+    {
+      "index": 505,
+      "start": 1658.72,
+      "end": 1660.31,
+      "duration": 1.59,
+      "text": "space is not"
+    },
+    {
+      "index": 506,
+      "start": 1660.32,
+      "end": 1662.71,
+      "duration": 2.39,
+      "text": "changing my little basis for it is"
+    },
+    {
+      "index": 507,
+      "start": 1662.72,
+      "end": 1665.63,
+      "duration": 2.91,
+      "text": "changing and I've ended up with uh sort"
+    },
+    {
+      "index": 508,
+      "start": 1665.64,
+      "end": 1668.43,
+      "duration": 2.79,
+      "text": "of the best"
+    },
+    {
+      "index": 509,
+      "start": 1671.549,
+      "end": 1671.559,
+      "duration": 0.01,
+      "text": "basis if The Columns of the identity"
+    },
+    {
+      "index": 510,
+      "start": 1671.559,
+      "end": 1676.07,
+      "duration": 4.511,
+      "text": "Matrix are the best basis for R3 or"
+    },
+    {
+      "index": 511,
+      "start": 1676.08,
+      "end": 1679.789,
+      "duration": 3.709,
+      "text": "RN the rows of this Matrix are the best"
+    },
+    {
+      "index": 512,
+      "start": 1679.799,
+      "end": 1683.269,
+      "duration": 3.47,
+      "text": "basis for the row space best in the"
+    },
+    {
+      "index": 513,
+      "start": 1683.279,
+      "end": 1686.23,
+      "duration": 2.951,
+      "text": "sense of being as clean as I can make it"
+    },
+    {
+      "index": 514,
+      "start": 1686.24,
+      "end": 1688.549,
+      "duration": 2.309,
+      "text": "starting off with the identity and then"
+    },
+    {
+      "index": 515,
+      "start": 1688.559,
+      "end": 1690.71,
+      "duration": 2.151,
+      "text": "finishing up with whatever has to be in"
+    },
+    {
+      "index": 516,
+      "start": 1690.72,
+      "end": 1695.23,
+      "duration": 4.51,
+      "text": "there okay do you see then that the"
+    },
+    {
+      "index": 517,
+      "start": 1695.24,
+      "end": 1697.99,
+      "duration": 2.75,
+      "text": "dimension is R for sure because we've"
+    },
+    {
+      "index": 518,
+      "start": 1698.0,
+      "end": 1699.909,
+      "duration": 1.909,
+      "text": "got our"
+    },
+    {
+      "index": 519,
+      "start": 1699.919,
+      "end": 1703.75,
+      "duration": 3.831,
+      "text": "pivots our nonzero rows we've got the"
+    },
+    {
+      "index": 520,
+      "start": 1703.76,
+      "end": 1706.83,
+      "duration": 3.07,
+      "text": "right number of vectors R they're in the"
+    },
+    {
+      "index": 521,
+      "start": 1706.84,
+      "end": 1709.029,
+      "duration": 2.189,
+      "text": "row space they're in"
+    },
+    {
+      "index": 522,
+      "start": 1709.039,
+      "end": 1712.43,
+      "duration": 3.391,
+      "text": "independent that's it they are a basis"
+    },
+    {
+      "index": 523,
+      "start": 1712.44,
+      "end": 1715.35,
+      "duration": 2.91,
+      "text": "for the row space and we can even pin"
+    },
+    {
+      "index": 524,
+      "start": 1715.36,
+      "end": 1718.47,
+      "duration": 3.11,
+      "text": "that down further how do I know that"
+    },
+    {
+      "index": 525,
+      "start": 1718.48,
+      "end": 1721.71,
+      "duration": 3.23,
+      "text": "every row of a is a combination how do I"
+    },
+    {
+      "index": 526,
+      "start": 1721.72,
+      "end": 1723.99,
+      "duration": 2.27,
+      "text": "know they span the row"
+    },
+    {
+      "index": 527,
+      "start": 1724.0,
+      "end": 1727.269,
+      "duration": 3.269,
+      "text": "space Oh well somebody says I've got the"
+    },
+    {
+      "index": 528,
+      "start": 1727.279,
+      "end": 1728.99,
+      "duration": 1.711,
+      "text": "right number of them so they must but"
+    },
+    {
+      "index": 529,
+      "start": 1729.0,
+      "end": 1731.71,
+      "duration": 2.71,
+      "text": "that and that's true but let me just say"
+    },
+    {
+      "index": 530,
+      "start": 1731.72,
+      "end": 1734.549,
+      "duration": 2.829,
+      "text": "how do I know that this row is a"
+    },
+    {
+      "index": 531,
+      "start": 1734.559,
+      "end": 1736.35,
+      "duration": 1.791,
+      "text": "combination of"
+    },
+    {
+      "index": 532,
+      "start": 1736.36,
+      "end": 1740.789,
+      "duration": 4.429,
+      "text": "these by just reversing the steps of row"
+    },
+    {
+      "index": 533,
+      "start": 1740.799,
+      "end": 1743.509,
+      "duration": 2.71,
+      "text": "reduction if I just reverse the steps"
+    },
+    {
+      "index": 534,
+      "start": 1743.519,
+      "end": 1747.549,
+      "duration": 4.03,
+      "text": "and go from a from R back to"
+    },
+    {
+      "index": 535,
+      "start": 1747.559,
+      "end": 1750.11,
+      "duration": 2.551,
+      "text": "a then what do I what am I doing I'm"
+    },
+    {
+      "index": 536,
+      "start": 1750.12,
+      "end": 1752.47,
+      "duration": 2.35,
+      "text": "starting with these rows I'm taking"
+    },
+    {
+      "index": 537,
+      "start": 1752.48,
+      "end": 1754.75,
+      "duration": 2.27,
+      "text": "combinations of"
+    },
+    {
+      "index": 538,
+      "start": 1754.76,
+      "end": 1758.909,
+      "duration": 4.149,
+      "text": "them after a couple of steps undoing the"
+    },
+    {
+      "index": 539,
+      "start": 1758.919,
+      "end": 1761.71,
+      "duration": 2.791,
+      "text": "subtractions that I did before I'm back"
+    },
+    {
+      "index": 540,
+      "start": 1761.72,
+      "end": 1763.87,
+      "duration": 2.15,
+      "text": "to these rows so these rows are"
+    },
+    {
+      "index": 541,
+      "start": 1763.88,
+      "end": 1766.07,
+      "duration": 2.19,
+      "text": "combinations of those rows those rows"
+    },
+    {
+      "index": 542,
+      "start": 1766.08,
+      "end": 1768.509,
+      "duration": 2.429,
+      "text": "are combinations of those rows the two"
+    },
+    {
+      "index": 543,
+      "start": 1768.519,
+      "end": 1772.63,
+      "duration": 4.111,
+      "text": "row spaces are the same the bases are"
+    },
+    {
+      "index": 544,
+      "start": 1772.64,
+      "end": 1773.99,
+      "duration": 1.35,
+      "text": "the"
+    },
+    {
+      "index": 545,
+      "start": 1774.0,
+      "end": 1778.509,
+      "duration": 4.509,
+      "text": "same and the natural basis is this guy"
+    },
+    {
+      "index": 546,
+      "start": 1778.519,
+      "end": 1780.47,
+      "duration": 1.951,
+      "text": "is that all right for the row"
+    },
+    {
+      "index": 547,
+      "start": 1780.48,
+      "end": 1784.509,
+      "duration": 4.029,
+      "text": "space the row space is sitting there in"
+    },
+    {
+      "index": 548,
+      "start": 1784.519,
+      "end": 1788.11,
+      "duration": 3.591,
+      "text": "R in its cleanest possible"
+    },
+    {
+      "index": 549,
+      "start": 1788.12,
+      "end": 1792.87,
+      "duration": 4.75,
+      "text": "form okay now what about the fourth"
+    },
+    {
+      "index": 550,
+      "start": 1792.88,
+      "end": 1799.59,
+      "duration": 6.71,
+      "text": "guy the null space of a transpose"
+    },
+    {
+      "index": 551,
+      "start": 1802.59,
+      "end": 1802.6,
+      "duration": 0.01,
+      "text": "first of all why do I call that the left"
+    },
+    {
+      "index": 552,
+      "start": 1802.6,
+      "end": 1805.75,
+      "duration": 3.15,
+      "text": "null space so let"
+    },
+    {
+      "index": 553,
+      "start": 1805.76,
+      "end": 1810.87,
+      "duration": 5.11,
+      "text": "me save that and bring that"
+    },
+    {
+      "index": 554,
+      "start": 1810.88,
+      "end": 1813.07,
+      "duration": 2.19,
+      "text": "down"
+    },
+    {
+      "index": 555,
+      "start": 1813.08,
+      "end": 1817.95,
+      "duration": 4.87,
+      "text": "okay so the fourth"
+    },
+    {
+      "index": 556,
+      "start": 1825.789,
+      "end": 1825.799,
+      "duration": 0.01,
+      "text": "transpose so it got it has in it vectors"
+    },
+    {
+      "index": 557,
+      "start": 1825.799,
+      "end": 1828.83,
+      "duration": 3.031,
+      "text": "let me call them y so that a transpose"
+    },
+    {
+      "index": 558,
+      "start": 1828.84,
+      "end": 1830.07,
+      "duration": 1.23,
+      "text": "yal"
+    },
+    {
+      "index": 559,
+      "start": 1830.08,
+      "end": 1835.75,
+      "duration": 5.67,
+      "text": "0 if a transpose y equals 0 then Y is in"
+    },
+    {
+      "index": 560,
+      "start": 1835.76,
+      "end": 1838.83,
+      "duration": 3.07,
+      "text": "the null space of a transpose of"
+    },
+    {
+      "index": 561,
+      "start": 1838.84,
+      "end": 1842.95,
+      "duration": 4.11,
+      "text": "course so this is a"
+    },
+    {
+      "index": 562,
+      "start": 1842.96,
+      "end": 1846.95,
+      "duration": 3.99,
+      "text": "matrix time a column"
+    },
+    {
+      "index": 563,
+      "start": 1846.96,
+      "end": 1849.549,
+      "duration": 2.589,
+      "text": "equaling"
+    },
+    {
+      "index": 564,
+      "start": 1849.559,
+      "end": 1856.029,
+      "duration": 6.47,
+      "text": "Z and now because I want y to sit on the"
+    },
+    {
+      "index": 565,
+      "start": 1856.039,
+      "end": 1859.83,
+      "duration": 3.791,
+      "text": "left and I want a instead of a"
+    },
+    {
+      "index": 566,
+      "start": 1859.84,
+      "end": 1862.549,
+      "duration": 2.709,
+      "text": "transpose I I'll just transpose that"
+    },
+    {
+      "index": 567,
+      "start": 1862.559,
+      "end": 1865.149,
+      "duration": 2.59,
+      "text": "equation can I just transpose"
+    },
+    {
+      "index": 568,
+      "start": 1865.159,
+      "end": 1869.59,
+      "duration": 4.431,
+      "text": "that on the right it makes the zero"
+    },
+    {
+      "index": 569,
+      "start": 1869.6,
+      "end": 1873.59,
+      "duration": 3.99,
+      "text": "Vector lie"
+    },
+    {
+      "index": 570,
+      "start": 1876.83,
+      "end": 1876.84,
+      "duration": 0.01,
+      "text": "down and on the"
+    },
+    {
+      "index": 571,
+      "start": 1876.84,
+      "end": 1880.43,
+      "duration": 3.59,
+      "text": "left that's a product a a transpose time"
+    },
+    {
+      "index": 572,
+      "start": 1880.44,
+      "end": 1883.509,
+      "duration": 3.069,
+      "text": "y if I take the transpose then they come"
+    },
+    {
+      "index": 573,
+      "start": 1883.519,
+      "end": 1886.909,
+      "duration": 3.39,
+      "text": "in opposite order right so it's y"
+    },
+    {
+      "index": 574,
+      "start": 1886.919,
+      "end": 1892.149,
+      "duration": 5.23,
+      "text": "transpose time a transpose"
+    },
+    {
+      "index": 575,
+      "start": 1894.47,
+      "end": 1894.48,
+      "duration": 0.01,
+      "text": "but nobody's going to leave it"
+    },
+    {
+      "index": 576,
+      "start": 1894.48,
+      "end": 1897.549,
+      "duration": 3.069,
+      "text": "like that that's a transpose transpose"
+    },
+    {
+      "index": 577,
+      "start": 1897.559,
+      "end": 1900.909,
+      "duration": 3.35,
+      "text": "is just a of course when I transposed a"
+    },
+    {
+      "index": 578,
+      "start": 1900.919,
+      "end": 1904.07,
+      "duration": 3.151,
+      "text": "transpose I got back to a now do you see"
+    },
+    {
+      "index": 579,
+      "start": 1904.08,
+      "end": 1908.95,
+      "duration": 4.87,
+      "text": "what I have now I have a row"
+    },
+    {
+      "index": 580,
+      "start": 1908.96,
+      "end": 1911.23,
+      "duration": 2.27,
+      "text": "Vector y"
+    },
+    {
+      "index": 581,
+      "start": 1911.24,
+      "end": 1915.549,
+      "duration": 4.309,
+      "text": "transpose multiplying"
+    },
+    {
+      "index": 582,
+      "start": 1918.83,
+      "end": 1918.84,
+      "duration": 0.01,
+      "text": "a and multiplying from the left that's"
+    },
+    {
+      "index": 583,
+      "start": 1918.84,
+      "end": 1921.35,
+      "duration": 2.51,
+      "text": "why I call it the left null"
+    },
+    {
+      "index": 584,
+      "start": 1921.36,
+      "end": 1925.23,
+      "duration": 3.87,
+      "text": "space but by making it putting it on the"
+    },
+    {
+      "index": 585,
+      "start": 1925.24,
+      "end": 1927.909,
+      "duration": 2.669,
+      "text": "left I had to make it into a row instead"
+    },
+    {
+      "index": 586,
+      "start": 1927.919,
+      "end": 1933.029,
+      "duration": 5.11,
+      "text": "of a column vector and so my convention"
+    },
+    {
+      "index": 587,
+      "start": 1933.039,
+      "end": 1935.83,
+      "duration": 2.791,
+      "text": "is I usually don't do that I usually"
+    },
+    {
+      "index": 588,
+      "start": 1935.84,
+      "end": 1940.43,
+      "duration": 4.59,
+      "text": "stay with a transpose y equals z okay"
+    },
+    {
+      "index": 589,
+      "start": 1940.44,
+      "end": 1942.509,
+      "duration": 2.069,
+      "text": "and you might"
+    },
+    {
+      "index": 590,
+      "start": 1942.519,
+      "end": 1945.59,
+      "duration": 3.071,
+      "text": "ask how do we get a"
+    },
+    {
+      "index": 591,
+      "start": 1945.6,
+      "end": 1948.35,
+      "duration": 2.75,
+      "text": "basis or I might ask"
+    },
+    {
+      "index": 592,
+      "start": 1948.36,
+      "end": 1950.87,
+      "duration": 2.51,
+      "text": "how do we get a basis for this fourth"
+    },
+    {
+      "index": 593,
+      "start": 1950.88,
+      "end": 1955.31,
+      "duration": 4.43,
+      "text": "space this left null"
+    },
+    {
+      "index": 594,
+      "start": 1959.11,
+      "end": 1959.12,
+      "duration": 0.01,
+      "text": "space okay I'll do it the"
+    },
+    {
+      "index": 595,
+      "start": 1959.12,
+      "end": 1968.83,
+      "duration": 9.71,
+      "text": "example as always ah not that"
+    },
+    {
+      "index": 596,
+      "start": 1972.509,
+      "end": 1972.519,
+      "duration": 0.01,
+      "text": "one the left n space is not jumping out"
+    },
+    {
+      "index": 597,
+      "start": 1972.519,
+      "end": 1975.669,
+      "duration": 3.15,
+      "text": "at me here"
+    },
+    {
+      "index": 598,
+      "start": 1975.679,
+      "end": 1979.549,
+      "duration": 3.87,
+      "text": "the the I know which are the free V free"
+    },
+    {
+      "index": 599,
+      "start": 1979.559,
+      "end": 1981.549,
+      "duration": 1.99,
+      "text": "variables the special Solutions but"
+    },
+    {
+      "index": 600,
+      "start": 1981.559,
+      "end": 1984.19,
+      "duration": 2.631,
+      "text": "those are special solutions to ax equals"
+    },
+    {
+      "index": 601,
+      "start": 1984.2,
+      "end": 1986.35,
+      "duration": 2.15,
+      "text": "z and now I'm looking at a transpose and"
+    },
+    {
+      "index": 602,
+      "start": 1986.36,
+      "end": 1990.23,
+      "duration": 3.87,
+      "text": "I'm not seeing it here so but somehow"
+    },
+    {
+      "index": 603,
+      "start": 1990.24,
+      "end": 1992.549,
+      "duration": 2.309,
+      "text": "you feel that the work that you did"
+    },
+    {
+      "index": 604,
+      "start": 1992.559,
+      "end": 1997.029,
+      "duration": 4.47,
+      "text": "which simplified a to R should have"
+    },
+    {
+      "index": 605,
+      "start": 1997.039,
+      "end": 1999.83,
+      "duration": 2.791,
+      "text": "revealed the left null space"
+    },
+    {
+      "index": 606,
+      "start": 1999.84,
+      "end": 2002.789,
+      "duration": 2.949,
+      "text": "to and it's slightly"
+    },
+    {
+      "index": 607,
+      "start": 2002.799,
+      "end": 2007.35,
+      "duration": 4.551,
+      "text": "less immediate but it's there so from a"
+    },
+    {
+      "index": 608,
+      "start": 2007.36,
+      "end": 2011.789,
+      "duration": 4.429,
+      "text": "to R are I took some steps and I guess"
+    },
+    {
+      "index": 609,
+      "start": 2011.799,
+      "end": 2014.909,
+      "duration": 3.11,
+      "text": "I'm interested in what were those steps"
+    },
+    {
+      "index": 610,
+      "start": 2014.919,
+      "end": 2016.629,
+      "duration": 1.71,
+      "text": "or what were all of them together I"
+    },
+    {
+      "index": 611,
+      "start": 2016.639,
+      "end": 2020.35,
+      "duration": 3.711,
+      "text": "don't I'm not interested in"
+    },
+    {
+      "index": 612,
+      "start": 2020.36,
+      "end": 2023.269,
+      "duration": 2.909,
+      "text": "what particular ones they were I'm"
+    },
+    {
+      "index": 613,
+      "start": 2023.279,
+      "end": 2025.669,
+      "duration": 2.39,
+      "text": "interested in what was the whole Matrix"
+    },
+    {
+      "index": 614,
+      "start": 2025.679,
+      "end": 2030.549,
+      "duration": 4.87,
+      "text": "that took me from a to"
+    },
+    {
+      "index": 615,
+      "start": 2034.47,
+      "end": 2034.48,
+      "duration": 0.01,
+      "text": "R how would you find"
+    },
+    {
+      "index": 616,
+      "start": 2034.48,
+      "end": 2038.509,
+      "duration": 4.029,
+      "text": "that do you remember gaus Jordan"
+    },
+    {
+      "index": 617,
+      "start": 2038.519,
+      "end": 2041.19,
+      "duration": 2.671,
+      "text": "where you tack on the identity"
+    },
+    {
+      "index": 618,
+      "start": 2041.2,
+      "end": 2044.43,
+      "duration": 3.23,
+      "text": "Matrix let's do that again so I I'll do"
+    },
+    {
+      "index": 619,
+      "start": 2044.44,
+      "end": 2047.909,
+      "duration": 3.469,
+      "text": "it above here so this is"
+    },
+    {
+      "index": 620,
+      "start": 2047.919,
+      "end": 2052.51,
+      "duration": 4.591,
+      "text": "now this is now the idea"
+    },
+    {
+      "index": 621,
+      "start": 2052.52,
+      "end": 2055.47,
+      "duration": 2.95,
+      "text": "of I take the Matrix"
+    },
+    {
+      "index": 622,
+      "start": 2055.48,
+      "end": 2059.31,
+      "duration": 3.83,
+      "text": "a which is m"
+    },
+    {
+      "index": 623,
+      "start": 2062.069,
+      "end": 2062.079,
+      "duration": 0.01,
+      "text": "byn in gaus Jordan when we saw them"
+    },
+    {
+      "index": 624,
+      "start": 2062.079,
+      "end": 2064.79,
+      "duration": 2.711,
+      "text": "before a was a square invertible Matrix"
+    },
+    {
+      "index": 625,
+      "start": 2064.8,
+      "end": 2067.829,
+      "duration": 3.029,
+      "text": "and we were finding its inverse"
+    },
+    {
+      "index": 626,
+      "start": 2067.839,
+      "end": 2069.589,
+      "duration": 1.75,
+      "text": "now the Matrix isn't Square it's"
+    },
+    {
+      "index": 627,
+      "start": 2069.599,
+      "end": 2071.47,
+      "duration": 1.871,
+      "text": "probably"
+    },
+    {
+      "index": 628,
+      "start": 2071.48,
+      "end": 2074.75,
+      "duration": 3.27,
+      "text": "rectangular but I'll still tack on the"
+    },
+    {
+      "index": 629,
+      "start": 2074.76,
+      "end": 2077.389,
+      "duration": 2.629,
+      "text": "identity Matrix and of course since"
+    },
+    {
+      "index": 630,
+      "start": 2077.399,
+      "end": 2081.23,
+      "duration": 3.831,
+      "text": "these have length M it better be M by"
+    },
+    {
+      "index": 631,
+      "start": 2081.24,
+      "end": 2083.629,
+      "duration": 2.389,
+      "text": "m and now I'll"
+    },
+    {
+      "index": 632,
+      "start": 2083.639,
+      "end": 2091.629,
+      "duration": 7.99,
+      "text": "do the reduced row Echelon form of this"
+    },
+    {
+      "index": 633,
+      "start": 2094.389,
+      "end": 2094.399,
+      "duration": 0.01,
+      "text": "Matrix"
+    },
+    {
+      "index": 634,
+      "start": 2094.399,
+      "end": 2101.63,
+      "duration": 7.231,
+      "text": "and what do I get"
+    },
+    {
+      "index": 635,
+      "start": 2103.99,
+      "end": 2104.0,
+      "duration": 0.01,
+      "text": "the reduced row Echelon form starts with"
+    },
+    {
+      "index": 636,
+      "start": 2104.0,
+      "end": 2105.87,
+      "duration": 1.87,
+      "text": "these columns starts with the first"
+    },
+    {
+      "index": 637,
+      "start": 2105.88,
+      "end": 2110.589,
+      "duration": 4.709,
+      "text": "columns works like mad and produces"
+    },
+    {
+      "index": 638,
+      "start": 2110.599,
+      "end": 2113.91,
+      "duration": 3.311,
+      "text": "R of course still that same size M byn"
+    },
+    {
+      "index": 639,
+      "start": 2113.92,
+      "end": 2116.55,
+      "duration": 2.63,
+      "text": "and we did it before and"
+    },
+    {
+      "index": 640,
+      "start": 2116.56,
+      "end": 2119.51,
+      "duration": 2.95,
+      "text": "then whatever it did to get R something"
+    },
+    {
+      "index": 641,
+      "start": 2119.52,
+      "end": 2121.39,
+      "duration": 1.87,
+      "text": "else is going to show up"
+    },
+    {
+      "index": 642,
+      "start": 2121.4,
+      "end": 2123.87,
+      "duration": 2.47,
+      "text": "here let me call it"
+    },
+    {
+      "index": 643,
+      "start": 2123.88,
+      "end": 2128.51,
+      "duration": 4.63,
+      "text": "e m by m it's whatever you do you see"
+    },
+    {
+      "index": 644,
+      "start": 2128.52,
+      "end": 2130.55,
+      "duration": 2.03,
+      "text": "that e is just going to contain a record"
+    },
+    {
+      "index": 645,
+      "start": 2130.56,
+      "end": 2131.63,
+      "duration": 1.07,
+      "text": "of what we"
+    },
+    {
+      "index": 646,
+      "start": 2131.64,
+      "end": 2136.03,
+      "duration": 4.39,
+      "text": "did we did whatever it took to get a to"
+    },
+    {
+      "index": 647,
+      "start": 2136.04,
+      "end": 2137.91,
+      "duration": 1.87,
+      "text": "become"
+    },
+    {
+      "index": 648,
+      "start": 2137.92,
+      "end": 2140.829,
+      "duration": 2.909,
+      "text": "R and at the same time we were doing it"
+    },
+    {
+      "index": 649,
+      "start": 2140.839,
+      "end": 2143.349,
+      "duration": 2.51,
+      "text": "to the identity"
+    },
+    {
+      "index": 650,
+      "start": 2143.359,
+      "end": 2145.71,
+      "duration": 2.351,
+      "text": "Matrix so we started with the identity"
+    },
+    {
+      "index": 651,
+      "start": 2145.72,
+      "end": 2150.39,
+      "duration": 4.67,
+      "text": "Matrix we buzzed along so we took"
+    },
+    {
+      "index": 652,
+      "start": 2150.4,
+      "end": 2154.23,
+      "duration": 3.83,
+      "text": "some all this row red reduction amounted"
+    },
+    {
+      "index": 653,
+      "start": 2154.24,
+      "end": 2156.63,
+      "duration": 2.39,
+      "text": "to multiplying on the left by some"
+    },
+    {
+      "index": 654,
+      "start": 2156.64,
+      "end": 2159.19,
+      "duration": 2.55,
+      "text": "Matrix some series of Elementary"
+    },
+    {
+      "index": 655,
+      "start": 2159.2,
+      "end": 2161.63,
+      "duration": 2.43,
+      "text": "matrices that all together gave us one"
+    },
+    {
+      "index": 656,
+      "start": 2161.64,
+      "end": 2164.75,
+      "duration": 3.11,
+      "text": "Matrix and that Matrix is"
+    },
+    {
+      "index": 657,
+      "start": 2164.76,
+      "end": 2168.95,
+      "duration": 4.19,
+      "text": "e so all this row reduction stuff"
+    },
+    {
+      "index": 658,
+      "start": 2168.96,
+      "end": 2171.95,
+      "duration": 2.99,
+      "text": "amounted to multiplying by E how do I"
+    },
+    {
+      "index": 659,
+      "start": 2171.96,
+      "end": 2174.03,
+      "duration": 2.07,
+      "text": "know that it's certainly amounted to"
+    },
+    {
+      "index": 660,
+      "start": 2174.04,
+      "end": 2175.67,
+      "duration": 1.63,
+      "text": "multiply by"
+    },
+    {
+      "index": 661,
+      "start": 2175.68,
+      "end": 2179.23,
+      "duration": 3.55,
+      "text": "something and that something took I to e"
+    },
+    {
+      "index": 662,
+      "start": 2179.24,
+      "end": 2182.589,
+      "duration": 3.349,
+      "text": "so that something was e so now look at"
+    },
+    {
+      "index": 663,
+      "start": 2182.599,
+      "end": 2184.39,
+      "duration": 1.791,
+      "text": "the first part"
+    },
+    {
+      "index": 664,
+      "start": 2184.4,
+      "end": 2189.67,
+      "duration": 5.27,
+      "text": "E A is r"
+    },
+    {
+      "index": 665,
+      "start": 2193.309,
+      "end": 2193.319,
+      "duration": 0.01,
+      "text": "no big deal all I've said"
+    },
+    {
+      "index": 666,
+      "start": 2193.319,
+      "end": 2195.829,
+      "duration": 2.51,
+      "text": "is that"
+    },
+    {
+      "index": 667,
+      "start": 2195.839,
+      "end": 2198.91,
+      "duration": 3.071,
+      "text": "the row reduction steps that we all know"
+    },
+    {
+      "index": 668,
+      "start": 2198.92,
+      "end": 2201.589,
+      "duration": 2.669,
+      "text": "well taking a to"
+    },
+    {
+      "index": 669,
+      "start": 2201.599,
+      "end": 2203.27,
+      "duration": 1.671,
+      "text": "R"
+    },
+    {
+      "index": 670,
+      "start": 2203.28,
+      "end": 2206.309,
+      "duration": 3.029,
+      "text": "are in a in some Matrix and I can find"
+    },
+    {
+      "index": 671,
+      "start": 2206.319,
+      "end": 2208.91,
+      "duration": 2.591,
+      "text": "out what that Matrix is by just tacking"
+    },
+    {
+      "index": 672,
+      "start": 2208.92,
+      "end": 2211.91,
+      "duration": 2.99,
+      "text": "I on and seeing what comes out what"
+    },
+    {
+      "index": 673,
+      "start": 2211.92,
+      "end": 2213.51,
+      "duration": 1.59,
+      "text": "comes out is"
+    },
+    {
+      "index": 674,
+      "start": 2213.52,
+      "end": 2216.87,
+      "duration": 3.35,
+      "text": "e let's just review the invertible"
+    },
+    {
+      "index": 675,
+      "start": 2216.88,
+      "end": 2219.829,
+      "duration": 2.949,
+      "text": "square case what happened"
+    },
+    {
+      "index": 676,
+      "start": 2219.839,
+      "end": 2222.27,
+      "duration": 2.431,
+      "text": "then cuz I was interested in it in"
+    },
+    {
+      "index": 677,
+      "start": 2222.28,
+      "end": 2225.829,
+      "duration": 3.549,
+      "text": "Chapter 2 also when a was square and"
+    },
+    {
+      "index": 678,
+      "start": 2225.839,
+      "end": 2229.39,
+      "duration": 3.551,
+      "text": "invertible I took AI I did row row"
+    },
+    {
+      "index": 679,
+      "start": 2229.4,
+      "end": 2231.43,
+      "duration": 2.03,
+      "text": "elimination what what was the r that"
+    },
+    {
+      "index": 680,
+      "start": 2231.44,
+      "end": 2233.71,
+      "duration": 2.27,
+      "text": "came out it was"
+    },
+    {
+      "index": 681,
+      "start": 2233.72,
+      "end": 2239.75,
+      "duration": 6.03,
+      "text": "I so in chapter two in chapter"
+    },
+    {
+      "index": 682,
+      "start": 2247.63,
+      "end": 2247.64,
+      "duration": 0.01,
+      "text": "I the row the reduced row Echelon form"
+    },
+    {
+      "index": 683,
+      "start": 2247.64,
+      "end": 2250.069,
+      "duration": 2.429,
+      "text": "of a nice invertible Square Matrix is"
+    },
+    {
+      "index": 684,
+      "start": 2250.079,
+      "end": 2254.109,
+      "duration": 4.03,
+      "text": "the identity so if R was I in that case"
+    },
+    {
+      "index": 685,
+      "start": 2254.119,
+      "end": 2258.309,
+      "duration": 4.19,
+      "text": "then e was then e"
+    },
+    {
+      "index": 686,
+      "start": 2260.47,
+      "end": 2260.48,
+      "duration": 0.01,
+      "text": "was a"
+    },
+    {
+      "index": 687,
+      "start": 2260.48,
+      "end": 2263.47,
+      "duration": 2.99,
+      "text": "inverse because EA is"
+    },
+    {
+      "index": 688,
+      "start": 2263.48,
+      "end": 2269.79,
+      "duration": 6.31,
+      "text": "I good that's that was good and easy now"
+    },
+    {
+      "index": 689,
+      "start": 2269.8,
+      "end": 2271.63,
+      "duration": 1.83,
+      "text": "what I'm saying is that there's still is"
+    },
+    {
+      "index": 690,
+      "start": 2271.64,
+      "end": 2274.75,
+      "duration": 3.11,
+      "text": "an e it's not a inverse anymore because"
+    },
+    {
+      "index": 691,
+      "start": 2274.76,
+      "end": 2276.47,
+      "duration": 1.71,
+      "text": "a is rectangular it hasn't got an"
+    },
+    {
+      "index": 692,
+      "start": 2276.48,
+      "end": 2281.75,
+      "duration": 5.27,
+      "text": "inverse but there is still some Matrix"
+    },
+    {
+      "index": 693,
+      "start": 2285.75,
+      "end": 2285.76,
+      "duration": 0.01,
+      "text": "e that connected this to this oh I"
+    },
+    {
+      "index": 694,
+      "start": 2285.76,
+      "end": 2287.349,
+      "duration": 1.589,
+      "text": "should have figured out in advance what"
+    },
+    {
+      "index": 695,
+      "start": 2287.359,
+      "end": 2288.19,
+      "duration": 0.831,
+      "text": "it"
+    },
+    {
+      "index": 696,
+      "start": 2288.2,
+      "end": 2290.79,
+      "duration": 2.59,
+      "text": "was"
+    },
+    {
+      "index": 697,
+      "start": 2290.8,
+      "end": 2293.87,
+      "duration": 3.07,
+      "text": "shoot I didn't I did those steps and"
+    },
+    {
+      "index": 698,
+      "start": 2293.88,
+      "end": 2295.91,
+      "duration": 2.03,
+      "text": "sort of erased as I"
+    },
+    {
+      "index": 699,
+      "start": 2295.92,
+      "end": 2299.27,
+      "duration": 3.35,
+      "text": "went and uh I should have done them to"
+    },
+    {
+      "index": 700,
+      "start": 2299.28,
+      "end": 2301.43,
+      "duration": 2.15,
+      "text": "the identity too can I do"
+    },
+    {
+      "index": 701,
+      "start": 2301.44,
+      "end": 2304.109,
+      "duration": 2.669,
+      "text": "that can I do that I'll keep the"
+    },
+    {
+      "index": 702,
+      "start": 2304.119,
+      "end": 2306.03,
+      "duration": 1.911,
+      "text": "identity Matrix like I'm supposed to do"
+    },
+    {
+      "index": 703,
+      "start": 2306.04,
+      "end": 2308.71,
+      "duration": 2.67,
+      "text": "and I'll do this same operations on it"
+    },
+    {
+      "index": 704,
+      "start": 2308.72,
+      "end": 2311.589,
+      "duration": 2.869,
+      "text": "and see what I end up with okay so I'm"
+    },
+    {
+      "index": 705,
+      "start": 2311.599,
+      "end": 2313.19,
+      "duration": 1.591,
+      "text": "starting with the identity which I'll"
+    },
+    {
+      "index": 706,
+      "start": 2313.2,
+      "end": 2315.99,
+      "duration": 2.79,
+      "text": "write in"
+    },
+    {
+      "index": 707,
+      "start": 2319.79,
+      "end": 2319.8,
+      "duration": 0.01,
+      "text": "light light enough"
+    },
+    {
+      "index": 708,
+      "start": 2319.8,
+      "end": 2323.71,
+      "duration": 3.91,
+      "text": "but okay what did I do I subtracted that"
+    },
+    {
+      "index": 709,
+      "start": 2323.72,
+      "end": 2325.67,
+      "duration": 1.95,
+      "text": "Row from that one and that Row from that"
+    },
+    {
+      "index": 710,
+      "start": 2325.68,
+      "end": 2327.99,
+      "duration": 2.31,
+      "text": "one okay I'll do that to the identity so"
+    },
+    {
+      "index": 711,
+      "start": 2328.0,
+      "end": 2332.03,
+      "duration": 4.03,
+      "text": "I subtract that first row from row two"
+    },
+    {
+      "index": 712,
+      "start": 2332.04,
+      "end": 2334.349,
+      "duration": 2.309,
+      "text": "and Row three"
+    },
+    {
+      "index": 713,
+      "start": 2334.359,
+      "end": 2337.069,
+      "duration": 2.71,
+      "text": "good then I think I multiply do you"
+    },
+    {
+      "index": 714,
+      "start": 2337.079,
+      "end": 2339.23,
+      "duration": 2.151,
+      "text": "remember remember I multiplied Row Two"
+    },
+    {
+      "index": 715,
+      "start": 2339.24,
+      "end": 2340.79,
+      "duration": 1.55,
+      "text": "by"
+    },
+    {
+      "index": 716,
+      "start": 2340.8,
+      "end": 2344.309,
+      "duration": 3.509,
+      "text": "minus1 let me just do"
+    },
+    {
+      "index": 717,
+      "start": 2344.319,
+      "end": 2347.47,
+      "duration": 3.151,
+      "text": "that then what did I do I"
+    },
+    {
+      "index": 718,
+      "start": 2347.48,
+      "end": 2353.79,
+      "duration": 6.31,
+      "text": "subtracted two of row two away from Row"
+    },
+    {
+      "index": 719,
+      "start": 2353.8,
+      "end": 2356.75,
+      "duration": 2.95,
+      "text": "one I better do that subtract two of"
+    },
+    {
+      "index": 720,
+      "start": 2356.76,
+      "end": 2359.829,
+      "duration": 3.069,
+      "text": "this away from this that's minus one two"
+    },
+    {
+      "index": 721,
+      "start": 2359.839,
+      "end": 2364.15,
+      "duration": 4.311,
+      "text": "of these away leaves a plus two and"
+    },
+    {
+      "index": 722,
+      "start": 2364.16,
+      "end": 2368.349,
+      "duration": 4.189,
+      "text": "zero I believe that's e"
+    },
+    {
+      "index": 723,
+      "start": 2368.359,
+      "end": 2372.47,
+      "duration": 4.111,
+      "text": "the way to check is to see"
+    },
+    {
+      "index": 724,
+      "start": 2372.48,
+      "end": 2376.51,
+      "duration": 4.03,
+      "text": "multiply that e by this a just to see"
+    },
+    {
+      "index": 725,
+      "start": 2376.52,
+      "end": 2379.55,
+      "duration": 3.03,
+      "text": "did I do it"
+    },
+    {
+      "index": 726,
+      "start": 2384.03,
+      "end": 2384.04,
+      "duration": 0.01,
+      "text": "right so I believe e was min-1 2"
+    },
+    {
+      "index": 727,
+      "start": 2384.04,
+      "end": 2386.91,
+      "duration": 2.87,
+      "text": "0 1 - 1"
+    },
+    {
+      "index": 728,
+      "start": 2386.92,
+      "end": 2392.19,
+      "duration": 5.27,
+      "text": "0 and - one 0"
+    },
+    {
+      "index": 729,
+      "start": 2394.91,
+      "end": 2394.92,
+      "duration": 0.01,
+      "text": "1 okay that's my"
+    },
+    {
+      "index": 730,
+      "start": 2394.92,
+      "end": 2399.109,
+      "duration": 4.189,
+      "text": "e that's my a and that's are all"
+    },
+    {
+      "index": 731,
+      "start": 2399.119,
+      "end": 2403.03,
+      "duration": 3.911,
+      "text": "right all I'm struggling to do is right"
+    },
+    {
+      "index": 732,
+      "start": 2403.04,
+      "end": 2406.79,
+      "duration": 3.75,
+      "text": "the reason I wanted this blasted e"
+    },
+    {
+      "index": 733,
+      "start": 2406.8,
+      "end": 2410.27,
+      "duration": 3.47,
+      "text": "was so that I could figure out the left"
+    },
+    {
+      "index": 734,
+      "start": 2410.28,
+      "end": 2411.71,
+      "duration": 1.43,
+      "text": "null"
+    },
+    {
+      "index": 735,
+      "start": 2411.72,
+      "end": 2415.99,
+      "duration": 4.27,
+      "text": "space Not only it's Dimension which I"
+    },
+    {
+      "index": 736,
+      "start": 2416.0,
+      "end": 2418.309,
+      "duration": 2.309,
+      "text": "know actually what is the dimension of"
+    },
+    {
+      "index": 737,
+      "start": 2418.319,
+      "end": 2422.109,
+      "duration": 3.79,
+      "text": "the left null space Here's my"
+    },
+    {
+      "index": 738,
+      "start": 2427.55,
+      "end": 2427.56,
+      "duration": 0.01,
+      "text": "Matrix what's the rank of the Matrix two"
+    },
+    {
+      "index": 739,
+      "start": 2427.56,
+      "end": 2429.349,
+      "duration": 1.789,
+      "text": "and the dimension of the null of the"
+    },
+    {
+      "index": 740,
+      "start": 2429.359,
+      "end": 2433.51,
+      "duration": 4.151,
+      "text": "left null space is supposed to be M - R"
+    },
+    {
+      "index": 741,
+      "start": 2433.52,
+      "end": 2436.589,
+      "duration": 3.069,
+      "text": "3 - 2 1 I believe that the left null"
+    },
+    {
+      "index": 742,
+      "start": 2436.599,
+      "end": 2439.99,
+      "duration": 3.391,
+      "text": "space is onedimensional there is one"
+    },
+    {
+      "index": 743,
+      "start": 2440.0,
+      "end": 2443.51,
+      "duration": 3.51,
+      "text": "combination of those three rows that"
+    },
+    {
+      "index": 744,
+      "start": 2443.52,
+      "end": 2445.109,
+      "duration": 1.589,
+      "text": "produces the zero"
+    },
+    {
+      "index": 745,
+      "start": 2445.119,
+      "end": 2448.91,
+      "duration": 3.791,
+      "text": "row there is a there's a a basis a basis"
+    },
+    {
+      "index": 746,
+      "start": 2448.92,
+      "end": 2449.75,
+      "duration": 0.83,
+      "text": "for"
+    },
+    {
+      "index": 747,
+      "start": 2449.76,
+      "end": 2452.95,
+      "duration": 3.19,
+      "text": "the left no space has only got one"
+    },
+    {
+      "index": 748,
+      "start": 2452.96,
+      "end": 2455.829,
+      "duration": 2.869,
+      "text": "vector in it and what is that Vector"
+    },
+    {
+      "index": 749,
+      "start": 2455.839,
+      "end": 2459.55,
+      "duration": 3.711,
+      "text": "it's here in the L last row of e but ah"
+    },
+    {
+      "index": 750,
+      "start": 2459.56,
+      "end": 2461.67,
+      "duration": 2.11,
+      "text": "we could have seen it earlier what"
+    },
+    {
+      "index": 751,
+      "start": 2461.68,
+      "end": 2464.03,
+      "duration": 2.35,
+      "text": "combination of those rows gives the zero"
+    },
+    {
+      "index": 752,
+      "start": 2464.04,
+      "end": 2468.03,
+      "duration": 3.99,
+      "text": "row minus one of that plus one of"
+    },
+    {
+      "index": 753,
+      "start": 2468.04,
+      "end": 2471.75,
+      "duration": 3.71,
+      "text": "that so A basis for the left null"
+    },
+    {
+      "index": 754,
+      "start": 2471.76,
+      "end": 2475.349,
+      "duration": 3.589,
+      "text": "space of this Matrix I'm looking for"
+    },
+    {
+      "index": 755,
+      "start": 2475.359,
+      "end": 2477.829,
+      "duration": 2.47,
+      "text": "combinations of rows that give the zero"
+    },
+    {
+      "index": 756,
+      "start": 2477.839,
+      "end": 2480.99,
+      "duration": 3.151,
+      "text": "row if I'm looking at the left null"
+    },
+    {
+      "index": 757,
+      "start": 2481.0,
+      "end": 2483.55,
+      "duration": 2.55,
+      "text": "space for the null space I'm looking at"
+    },
+    {
+      "index": 758,
+      "start": 2483.56,
+      "end": 2485.75,
+      "duration": 2.19,
+      "text": "combinations of columns to get the zero"
+    },
+    {
+      "index": 759,
+      "start": 2485.76,
+      "end": 2487.71,
+      "duration": 1.95,
+      "text": "column now I'm look looking at"
+    },
+    {
+      "index": 760,
+      "start": 2487.72,
+      "end": 2489.99,
+      "duration": 2.27,
+      "text": "combinations of these three rows to get"
+    },
+    {
+      "index": 761,
+      "start": 2490.0,
+      "end": 2493.03,
+      "duration": 3.03,
+      "text": "the zero row and of course there is my"
+    },
+    {
+      "index": 762,
+      "start": 2493.04,
+      "end": 2496.349,
+      "duration": 3.309,
+      "text": "zero row and here is my Vector that"
+    },
+    {
+      "index": 763,
+      "start": 2496.359,
+      "end": 2499.51,
+      "duration": 3.151,
+      "text": "produced it minus one of that row and"
+    },
+    {
+      "index": 764,
+      "start": 2499.52,
+      "end": 2503.27,
+      "duration": 3.75,
+      "text": "one of that row obvious okay so in that"
+    },
+    {
+      "index": 765,
+      "start": 2503.28,
+      "end": 2506.069,
+      "duration": 2.789,
+      "text": "example and actually in all examples we"
+    },
+    {
+      "index": 766,
+      "start": 2506.079,
+      "end": 2509.829,
+      "duration": 3.75,
+      "text": "have seen how to produce a basis for the"
+    },
+    {
+      "index": 767,
+      "start": 2509.839,
+      "end": 2512.51,
+      "duration": 2.671,
+      "text": "left null space I won't ask you that all"
+    },
+    {
+      "index": 768,
+      "start": 2512.52,
+      "end": 2513.39,
+      "duration": 0.87,
+      "text": "the"
+    },
+    {
+      "index": 769,
+      "start": 2513.4,
+      "end": 2516.47,
+      "duration": 3.07,
+      "text": "time because it did it it didn't come"
+    },
+    {
+      "index": 770,
+      "start": 2516.48,
+      "end": 2519.67,
+      "duration": 3.19,
+      "text": "out immediately from R we had to keep"
+    },
+    {
+      "index": 771,
+      "start": 2519.68,
+      "end": 2524.15,
+      "duration": 4.47,
+      "text": "track of e for that left null space but"
+    },
+    {
+      "index": 772,
+      "start": 2524.16,
+      "end": 2526.23,
+      "duration": 2.07,
+      "text": "at least it didn't require us to"
+    },
+    {
+      "index": 773,
+      "start": 2526.24,
+      "end": 2529.349,
+      "duration": 3.109,
+      "text": "transpose The Matrix and start all over"
+    },
+    {
+      "index": 774,
+      "start": 2529.359,
+      "end": 2532.349,
+      "duration": 2.99,
+      "text": "again okay those are the four subspaces"
+    },
+    {
+      "index": 775,
+      "start": 2532.359,
+      "end": 2534.47,
+      "duration": 2.111,
+      "text": "can I review"
+    },
+    {
+      "index": 776,
+      "start": 2534.48,
+      "end": 2537.27,
+      "duration": 2.79,
+      "text": "them the row space and the null space"
+    },
+    {
+      "index": 777,
+      "start": 2537.28,
+      "end": 2542.349,
+      "duration": 5.069,
+      "text": "are in RN their Dimensions add to n the"
+    },
+    {
+      "index": 778,
+      "start": 2542.359,
+      "end": 2546.069,
+      "duration": 3.71,
+      "text": "column space and the left null space are"
+    },
+    {
+      "index": 779,
+      "start": 2546.079,
+      "end": 2547.67,
+      "duration": 1.591,
+      "text": "in RM"
+    },
+    {
+      "index": 780,
+      "start": 2547.68,
+      "end": 2550.069,
+      "duration": 2.389,
+      "text": "and their Dimensions add to"
+    },
+    {
+      "index": 781,
+      "start": 2550.079,
+      "end": 2552.75,
+      "duration": 2.671,
+      "text": "M"
+    },
+    {
+      "index": 782,
+      "start": 2552.76,
+      "end": 2559.03,
+      "duration": 6.27,
+      "text": "okay so let me close these last"
+    },
+    {
+      "index": 783,
+      "start": 2559.04,
+      "end": 2562.67,
+      "duration": 3.63,
+      "text": "minutes by pushing you a little bit more"
+    },
+    {
+      "index": 784,
+      "start": 2562.68,
+      "end": 2565.43,
+      "duration": 2.75,
+      "text": "to a"
+    },
+    {
+      "index": 785,
+      "start": 2568.589,
+      "end": 2568.599,
+      "duration": 0.01,
+      "text": "new type of vector"
+    },
+    {
+      "index": 786,
+      "start": 2568.599,
+      "end": 2571.63,
+      "duration": 3.031,
+      "text": "space all our Vector spaces all the ones"
+    },
+    {
+      "index": 787,
+      "start": 2571.64,
+      "end": 2573.87,
+      "duration": 2.23,
+      "text": "that we took seriously have been"
+    },
+    {
+      "index": 788,
+      "start": 2573.88,
+      "end": 2578.19,
+      "duration": 4.31,
+      "text": "subspaces of some real"
+    },
+    {
+      "index": 789,
+      "start": 2578.2,
+      "end": 2582.309,
+      "duration": 4.109,
+      "text": "three or n dimensional space now I'm"
+    },
+    {
+      "index": 790,
+      "start": 2582.319,
+      "end": 2585.27,
+      "duration": 2.951,
+      "text": "going to write down another Vector space"
+    },
+    {
+      "index": 791,
+      "start": 2585.28,
+      "end": 2593.19,
+      "duration": 7.91,
+      "text": "a new Vector"
+    },
+    {
+      "index": 792,
+      "start": 2596.309,
+      "end": 2596.319,
+      "duration": 0.01,
+      "text": "space say"
+    },
+    {
+      "index": 793,
+      "start": 2596.319,
+      "end": 2605.39,
+      "duration": 9.071,
+      "text": "all 3x3"
+    },
+    {
+      "index": 794,
+      "start": 2613.549,
+      "end": 2613.559,
+      "duration": 0.01,
+      "text": "vectors is that all right I'm just"
+    },
+    {
+      "index": 795,
+      "start": 2613.559,
+      "end": 2615.67,
+      "duration": 2.111,
+      "text": "naming them you can put quotes around"
+    },
+    {
+      "index": 796,
+      "start": 2615.68,
+      "end": 2619.15,
+      "duration": 3.47,
+      "text": "vectors every 3x3 Matrix is one of my"
+    },
+    {
+      "index": 797,
+      "start": 2619.16,
+      "end": 2621.51,
+      "duration": 2.35,
+      "text": "vectors now how am I entitled to call"
+    },
+    {
+      "index": 798,
+      "start": 2621.52,
+      "end": 2624.03,
+      "duration": 2.51,
+      "text": "those things vectors and they look very"
+    },
+    {
+      "index": 799,
+      "start": 2624.04,
+      "end": 2625.549,
+      "duration": 1.509,
+      "text": "much like"
+    },
+    {
+      "index": 800,
+      "start": 2625.559,
+      "end": 2627.95,
+      "duration": 2.391,
+      "text": "matrices but they're vectors in my"
+    },
+    {
+      "index": 801,
+      "start": 2627.96,
+      "end": 2630.67,
+      "duration": 2.71,
+      "text": "Vector space because they obey the rules"
+    },
+    {
+      "index": 802,
+      "start": 2630.68,
+      "end": 2633.069,
+      "duration": 2.389,
+      "text": "all I'm supposed to be able to do with"
+    },
+    {
+      "index": 803,
+      "start": 2633.079,
+      "end": 2638.109,
+      "duration": 5.03,
+      "text": "vectors is add them I can add matrices"
+    },
+    {
+      "index": 804,
+      "start": 2638.119,
+      "end": 2639.75,
+      "duration": 1.631,
+      "text": "I'm supposed to be able to multiply them"
+    },
+    {
+      "index": 805,
+      "start": 2639.76,
+      "end": 2642.829,
+      "duration": 3.069,
+      "text": "by scalar numbers like seven well I can"
+    },
+    {
+      "index": 806,
+      "start": 2642.839,
+      "end": 2646.63,
+      "duration": 3.791,
+      "text": "multiply a matrix by"
+    },
+    {
+      "index": 807,
+      "start": 2649.95,
+      "end": 2649.96,
+      "duration": 0.01,
+      "text": "seven and that and I can take"
+    },
+    {
+      "index": 808,
+      "start": 2649.96,
+      "end": 2652.63,
+      "duration": 2.67,
+      "text": "combinations of matrices I can take"
+    },
+    {
+      "index": 809,
+      "start": 2652.64,
+      "end": 2654.75,
+      "duration": 2.11,
+      "text": "three of one Matrix minus five of"
+    },
+    {
+      "index": 810,
+      "start": 2654.76,
+      "end": 2658.349,
+      "duration": 3.589,
+      "text": "another Matrix and those combinations"
+    },
+    {
+      "index": 811,
+      "start": 2658.359,
+      "end": 2661.43,
+      "duration": 3.071,
+      "text": "there's a zero Matrix The Matrix that"
+    },
+    {
+      "index": 812,
+      "start": 2661.44,
+      "end": 2664.43,
+      "duration": 2.99,
+      "text": "has all zeros in it if I add that to"
+    },
+    {
+      "index": 813,
+      "start": 2664.44,
+      "end": 2666.23,
+      "duration": 1.79,
+      "text": "another Matrix it doesn't change it all"
+    },
+    {
+      "index": 814,
+      "start": 2666.24,
+      "end": 2668.67,
+      "duration": 2.43,
+      "text": "the good stuff if multiply matrix by one"
+    },
+    {
+      "index": 815,
+      "start": 2668.68,
+      "end": 2670.99,
+      "duration": 2.31,
+      "text": "it doesn't change it all those eight"
+    },
+    {
+      "index": 816,
+      "start": 2671.0,
+      "end": 2673.43,
+      "duration": 2.43,
+      "text": "rules for a vector space that we never"
+    },
+    {
+      "index": 817,
+      "start": 2673.44,
+      "end": 2676.51,
+      "duration": 3.07,
+      "text": "wrote down all easily"
+    },
+    {
+      "index": 818,
+      "start": 2676.52,
+      "end": 2680.15,
+      "duration": 3.63,
+      "text": "satisfied so now we have a"
+    },
+    {
+      "index": 819,
+      "start": 2680.16,
+      "end": 2682.549,
+      "duration": 2.389,
+      "text": "different now of course you can say you"
+    },
+    {
+      "index": 820,
+      "start": 2682.559,
+      "end": 2685.39,
+      "duration": 2.831,
+      "text": "can multiply those"
+    },
+    {
+      "index": 821,
+      "start": 2685.4,
+      "end": 2688.27,
+      "duration": 2.87,
+      "text": "matrices I don't care for the moment I'm"
+    },
+    {
+      "index": 822,
+      "start": 2688.28,
+      "end": 2690.19,
+      "duration": 1.91,
+      "text": "only thinking of these matrices as"
+    },
+    {
+      "index": 823,
+      "start": 2690.2,
+      "end": 2693.75,
+      "duration": 3.55,
+      "text": "forming a vector space so I am only"
+    },
+    {
+      "index": 824,
+      "start": 2693.76,
+      "end": 2697.309,
+      "duration": 3.549,
+      "text": "doing a plus b"
+    },
+    {
+      "index": 825,
+      "start": 2697.319,
+      "end": 2705.95,
+      "duration": 8.631,
+      "text": "and C * a I'm not interested in a for"
+    },
+    {
+      "index": 826,
+      "start": 2710.829,
+      "end": 2710.839,
+      "duration": 0.01,
+      "text": "now the fact that I can multiply is not"
+    },
+    {
+      "index": 827,
+      "start": 2710.839,
+      "end": 2714.109,
+      "duration": 3.27,
+      "text": "relevant to the to a vector space okay"
+    },
+    {
+      "index": 828,
+      "start": 2714.119,
+      "end": 2717.23,
+      "duration": 3.111,
+      "text": "so I have 3x3"
+    },
+    {
+      "index": 829,
+      "start": 2720.589,
+      "end": 2720.599,
+      "duration": 0.01,
+      "text": "matrices and how about"
+    },
+    {
+      "index": 830,
+      "start": 2720.599,
+      "end": 2724.99,
+      "duration": 4.391,
+      "text": "subspaces what's tell me a Subspace of"
+    },
+    {
+      "index": 831,
+      "start": 2725.0,
+      "end": 2727.23,
+      "duration": 2.23,
+      "text": "this Matrix space let me call the this"
+    },
+    {
+      "index": 832,
+      "start": 2727.24,
+      "end": 2729.23,
+      "duration": 1.99,
+      "text": "Matrix space"
+    },
+    {
+      "index": 833,
+      "start": 2729.24,
+      "end": 2732.63,
+      "duration": 3.39,
+      "text": "m that's my Matrix space my space of all"
+    },
+    {
+      "index": 834,
+      "start": 2732.64,
+      "end": 2735.95,
+      "duration": 3.31,
+      "text": "3x3 matrices tell me a Subspace of"
+    },
+    {
+      "index": 835,
+      "start": 2735.96,
+      "end": 2739.27,
+      "duration": 3.31,
+      "text": "it okay uh what about the tri upper"
+    },
+    {
+      "index": 836,
+      "start": 2739.28,
+      "end": 2742.349,
+      "duration": 3.069,
+      "text": "triangular matrices so"
+    },
+    {
+      "index": 837,
+      "start": 2742.359,
+      "end": 2744.19,
+      "duration": 1.831,
+      "text": "subspaces"
+    },
+    {
+      "index": 838,
+      "start": 2744.2,
+      "end": 2749.63,
+      "duration": 5.43,
+      "text": "subspaces of"
+    },
+    {
+      "index": 839,
+      "start": 2772.95,
+      "end": 2772.96,
+      "duration": 0.01,
+      "text": "matrices the intersection of two"
+    },
+    {
+      "index": 840,
+      "start": 2772.96,
+      "end": 2775.829,
+      "duration": 2.869,
+      "text": "subspaces is supposed to be a Subspace"
+    },
+    {
+      "index": 841,
+      "start": 2775.839,
+      "end": 2778.51,
+      "duration": 2.671,
+      "text": "we gave a little effort to the proof of"
+    },
+    {
+      "index": 842,
+      "start": 2778.52,
+      "end": 2781.79,
+      "duration": 3.27,
+      "text": "that fact if I look at the matrices that"
+    },
+    {
+      "index": 843,
+      "start": 2781.8,
+      "end": 2784.63,
+      "duration": 2.83,
+      "text": "are in this Subspace they're symmetric"
+    },
+    {
+      "index": 844,
+      "start": 2784.64,
+      "end": 2786.309,
+      "duration": 1.669,
+      "text": "and they're also in this Subspace"
+    },
+    {
+      "index": 845,
+      "start": 2786.319,
+      "end": 2787.829,
+      "duration": 1.51,
+      "text": "they're upper"
+    },
+    {
+      "index": 846,
+      "start": 2787.839,
+      "end": 2790.23,
+      "duration": 2.391,
+      "text": "triangular what do they look"
+    },
+    {
+      "index": 847,
+      "start": 2790.24,
+      "end": 2793.47,
+      "duration": 3.23,
+      "text": "like well if they're symmetric but they"
+    },
+    {
+      "index": 848,
+      "start": 2793.48,
+      "end": 2795.349,
+      "duration": 1.869,
+      "text": "have zeros below the diagonal they"
+    },
+    {
+      "index": 849,
+      "start": 2795.359,
+      "end": 2797.71,
+      "duration": 2.351,
+      "text": "better have zeros above the diagonal so"
+    },
+    {
+      "index": 850,
+      "start": 2797.72,
+      "end": 2803.75,
+      "duration": 6.03,
+      "text": "the intersection would be diagonal"
+    },
+    {
+      "index": 851,
+      "start": 2806.069,
+      "end": 2806.079,
+      "duration": 0.01,
+      "text": "matrices that's another"
+    },
+    {
+      "index": 852,
+      "start": 2806.079,
+      "end": 2809.99,
+      "duration": 3.911,
+      "text": "Subspace smaller than"
+    },
+    {
+      "index": 853,
+      "start": 2810.0,
+      "end": 2812.71,
+      "duration": 2.71,
+      "text": "those how can I use the word"
+    },
+    {
+      "index": 854,
+      "start": 2812.72,
+      "end": 2815.23,
+      "duration": 2.51,
+      "text": "smaller well I'm now entitled to use the"
+    },
+    {
+      "index": 855,
+      "start": 2815.24,
+      "end": 2818.109,
+      "duration": 2.869,
+      "text": "word smaller I mean"
+    },
+    {
+      "index": 856,
+      "start": 2818.119,
+      "end": 2820.549,
+      "duration": 2.43,
+      "text": "well one way to say is okay these are"
+    },
+    {
+      "index": 857,
+      "start": 2820.559,
+      "end": 2823.549,
+      "duration": 2.99,
+      "text": "contained in those these are contained"
+    },
+    {
+      "index": 858,
+      "start": 2823.559,
+      "end": 2827.589,
+      "duration": 4.03,
+      "text": "in those but more precisely I could give"
+    },
+    {
+      "index": 859,
+      "start": 2827.599,
+      "end": 2830.71,
+      "duration": 3.111,
+      "text": "the dimension of these"
+    },
+    {
+      "index": 860,
+      "start": 2830.72,
+      "end": 2833.63,
+      "duration": 2.91,
+      "text": "spaces so I could we can compute let's"
+    },
+    {
+      "index": 861,
+      "start": 2833.64,
+      "end": 2835.67,
+      "duration": 2.03,
+      "text": "compute it next time the dimension of"
+    },
+    {
+      "index": 862,
+      "start": 2835.68,
+      "end": 2837.79,
+      "duration": 2.11,
+      "text": "all upper of the Subspace of upper"
+    },
+    {
+      "index": 863,
+      "start": 2837.8,
+      "end": 2841.47,
+      "duration": 3.67,
+      "text": "triangular 3x3 matrices the dimension of"
+    },
+    {
+      "index": 864,
+      "start": 2841.48,
+      "end": 2844.589,
+      "duration": 3.109,
+      "text": "symmetric 3x3 matrices the dimension of"
+    },
+    {
+      "index": 865,
+      "start": 2844.599,
+      "end": 2847.67,
+      "duration": 3.071,
+      "text": "diagonal 3x3 matrices"
+    },
+    {
+      "index": 866,
+      "start": 2847.68,
+      "end": 2849.79,
+      "duration": 2.11,
+      "text": "well to produce Dimension that means I'm"
+    },
+    {
+      "index": 867,
+      "start": 2849.8,
+      "end": 2852.03,
+      "duration": 2.23,
+      "text": "supposed to produce a"
+    },
+    {
+      "index": 868,
+      "start": 2852.04,
+      "end": 2854.47,
+      "duration": 2.43,
+      "text": "basis and then I just count how many"
+    },
+    {
+      "index": 869,
+      "start": 2854.48,
+      "end": 2857.19,
+      "duration": 2.71,
+      "text": "Vector how many I needed in the basis"
+    },
+    {
+      "index": 870,
+      "start": 2857.2,
+      "end": 2859.87,
+      "duration": 2.67,
+      "text": "let me give you the answer for this one"
+    },
+    {
+      "index": 871,
+      "start": 2859.88,
+      "end": 2862.549,
+      "duration": 2.669,
+      "text": "what's the dimension the dimension of"
+    },
+    {
+      "index": 872,
+      "start": 2862.559,
+      "end": 2865.47,
+      "duration": 2.911,
+      "text": "this say this Subspace let me call it D"
+    },
+    {
+      "index": 873,
+      "start": 2865.48,
+      "end": 2868.51,
+      "duration": 3.03,
+      "text": "all diagonal matrices the"
+    },
+    {
+      "index": 874,
+      "start": 2868.52,
+      "end": 2870.63,
+      "duration": 2.11,
+      "text": "dimension of"
+    },
+    {
+      "index": 875,
+      "start": 2870.64,
+      "end": 2873.549,
+      "duration": 2.909,
+      "text": "this Subspace"
+    },
+    {
+      "index": 876,
+      "start": 2873.559,
+      "end": 2878.23,
+      "duration": 4.671,
+      "text": "is as I write you're working it out"
+    },
+    {
+      "index": 877,
+      "start": 2878.24,
+      "end": 2883.549,
+      "duration": 5.309,
+      "text": "three because here's"
+    },
+    {
+      "index": 878,
+      "start": 2883.559,
+      "end": 2885.27,
+      "duration": 1.711,
+      "text": "a"
+    },
+    {
+      "index": 879,
+      "start": 2885.28,
+      "end": 2889.069,
+      "duration": 3.789,
+      "text": "matrix in this it's a diagonal matrix"
+    },
+    {
+      "index": 880,
+      "start": 2889.079,
+      "end": 2894.51,
+      "duration": 5.431,
+      "text": "here's another"
+    },
+    {
+      "index": 881,
+      "start": 2902.069,
+      "end": 2902.079,
+      "duration": 0.01,
+      "text": "one better make a diagonal let me put a"
+    },
+    {
+      "index": 882,
+      "start": 2902.079,
+      "end": 2904.99,
+      "duration": 2.911,
+      "text": "seven"
+    },
+    {
+      "index": 883,
+      "start": 2908.069,
+      "end": 2908.079,
+      "duration": 0.01,
+      "text": "there that was not a very great choice"
+    },
+    {
+      "index": 884,
+      "start": 2908.079,
+      "end": 2910.39,
+      "duration": 2.311,
+      "text": "but it's three diagonal"
+    },
+    {
+      "index": 885,
+      "start": 2910.4,
+      "end": 2913.03,
+      "duration": 2.63,
+      "text": "matrices and I believe that they're a"
+    },
+    {
+      "index": 886,
+      "start": 2913.04,
+      "end": 2915.19,
+      "duration": 2.15,
+      "text": "basis I believe that those three"
+    },
+    {
+      "index": 887,
+      "start": 2915.2,
+      "end": 2916.75,
+      "duration": 1.55,
+      "text": "matrices are"
+    },
+    {
+      "index": 888,
+      "start": 2916.76,
+      "end": 2919.51,
+      "duration": 2.75,
+      "text": "independent and I believe that any"
+    },
+    {
+      "index": 889,
+      "start": 2919.52,
+      "end": 2921.47,
+      "duration": 1.95,
+      "text": "diagonal matrix is a combination of"
+    },
+    {
+      "index": 890,
+      "start": 2921.48,
+      "end": 2924.829,
+      "duration": 3.349,
+      "text": "those three so they span the Subspace of"
+    },
+    {
+      "index": 891,
+      "start": 2924.839,
+      "end": 2926.15,
+      "duration": 1.311,
+      "text": "diagonal"
+    },
+    {
+      "index": 892,
+      "start": 2926.16,
+      "end": 2929.589,
+      "duration": 3.429,
+      "text": "matrices do you see that idea it's like"
+    },
+    {
+      "index": 893,
+      "start": 2929.599,
+      "end": 2935.349,
+      "duration": 5.75,
+      "text": "stretching the idea from RN to r n byn"
+    },
+    {
+      "index": 894,
+      "start": 2935.359,
+      "end": 2937.43,
+      "duration": 2.071,
+      "text": "3x3"
+    },
+    {
+      "index": 895,
+      "start": 2937.44,
+      "end": 2940.95,
+      "duration": 3.51,
+      "text": "but if we can still add we can still"
+    },
+    {
+      "index": 896,
+      "start": 2940.96,
+      "end": 2943.27,
+      "duration": 2.31,
+      "text": "multiply by numbers and we just ignore"
+    },
+    {
+      "index": 897,
+      "start": 2943.28,
+      "end": 2945.71,
+      "duration": 2.43,
+      "text": "the fact that we can multiply two"
+    },
+    {
+      "index": 898,
+      "start": 2945.72,
+      "end": 2949.67,
+      "duration": 3.95,
+      "text": "matrices together okay thank you that's"
+    },
+    {
+      "index": 899,
+      "start": 2949.68,
+      "end": 2953.28,
+      "duration": 3.6,
+      "text": "lecture 10"
+    }
+  ],
+  "course": {
+    "category": "Mathematics",
+    "title": "Linear Algebra - Gilbert Strang",
+    "source_url": "https://www.youtube.com/playlist?list=PL49CF3715CB9EF31D"
+  }
+}

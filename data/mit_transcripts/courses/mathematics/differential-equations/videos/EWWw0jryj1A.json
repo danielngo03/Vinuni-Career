@@ -1,0 +1,4771 @@
+{
+  "video": {
+    "id": "EWWw0jryj1A",
+    "title": "Lec 15 | MIT 18.03 Differential Equations, Spring 2006",
+    "url": "https://www.youtube.com/watch?v=EWWw0jryj1A",
+    "channel": "MIT OpenCourseWare",
+    "duration": 2971,
+    "language": "en"
+  },
+  "segment_count": 679,
+  "segments": [
+    {
+      "index": 0,
+      "start": 25.0,
+      "end": 26.0,
+      "duration": 1.0,
+      "text": "Well, let's get started."
+    },
+    {
+      "index": 1,
+      "start": 38.0,
+      "end": 42.0,
+      "duration": 4.0,
+      "text": "The topic for today is --"
+    },
+    {
+      "index": 2,
+      "start": 58.0,
+      "end": 59.604,
+      "duration": 1.604,
+      "text": "Sorry. Thank you."
+    },
+    {
+      "index": 3,
+      "start": 59.604,
+      "end": 65.019,
+      "duration": 5.415,
+      "text": "For today and the next two lectures, we are going to be"
+    },
+    {
+      "index": 4,
+      "start": 65.019,
+      "end": 70.334,
+      "duration": 5.315,
+      "text": "studying Fourier series. Today will be an introduction"
+    },
+    {
+      "index": 5,
+      "start": 70.334,
+      "end": 75.047,
+      "duration": 4.713,
+      "text": "explaining what they are. And, I calculate them,"
+    },
+    {
+      "index": 6,
+      "start": 75.047,
+      "end": 81.164,
+      "duration": 6.117,
+      "text": "but I thought before we do that I ought to least give a couple"
+    },
+    {
+      "index": 7,
+      "start": 81.164,
+      "end": 86.779,
+      "duration": 5.615,
+      "text": "minutes oversight of why and where we're going with them,"
+    },
+    {
+      "index": 8,
+      "start": 86.779,
+      "end": 94.0,
+      "duration": 7.221,
+      "text": "and why they're coming into the course at this place at all."
+    },
+    {
+      "index": 9,
+      "start": 94.0,
+      "end": 99.83,
+      "duration": 5.83,
+      "text": "So, the situation up to now is that we've been trying to solve"
+    },
+    {
+      "index": 10,
+      "start": 99.83,
+      "end": 105.566,
+      "duration": 5.736,
+      "text": "equations of the form y double prime plus a y prime,"
+    },
+    {
+      "index": 11,
+      "start": 105.566,
+      "end": 110.25,
+      "duration": 4.684,
+      "text": "constant coefficient second-order equations,"
+    },
+    {
+      "index": 12,
+      "start": 110.25,
+      "end": 115.125,
+      "duration": 4.875,
+      "text": "and the f of t was the input. So, we are considering"
+    },
+    {
+      "index": 13,
+      "start": 115.125,
+      "end": 120.0,
+      "duration": 4.875,
+      "text": "inhomogeneous equations. This is the input."
+    },
+    {
+      "index": 14,
+      "start": 120.0,
+      "end": 125.129,
+      "duration": 5.129,
+      "text": "And so far, the response, then, is the solution equals"
+    },
+    {
+      "index": 15,
+      "start": 125.129,
+      "end": 129.29,
+      "duration": 4.161,
+      "text": "the corresponding solution, y of t,"
+    },
+    {
+      "index": 16,
+      "start": 129.29,
+      "end": 135.193,
+      "duration": 5.903,
+      "text": "maybe with some given initial conditions to pick out a special"
+    },
+    {
+      "index": 17,
+      "start": 135.193,
+      "end": 140.612,
+      "duration": 5.419,
+      "text": "one we call the response, the response to that particular"
+    },
+    {
+      "index": 18,
+      "start": 140.612,
+      "end": 143.709,
+      "duration": 3.097,
+      "text": "input. And now, over the last few"
+    },
+    {
+      "index": 19,
+      "start": 143.709,
+      "end": 150.0,
+      "duration": 6.291,
+      "text": "days, the inputs have been, however, extremely special."
+    },
+    {
+      "index": 20,
+      "start": 150.0,
+      "end": 155.0,
+      "duration": 5.0,
+      "text": "For input, the basic input has been an exponential,"
+    },
+    {
+      "index": 21,
+      "start": 155.0,
+      "end": 159.8,
+      "duration": 4.8,
+      "text": "or sines and cosines. And, the trouble is that we"
+    },
+    {
+      "index": 22,
+      "start": 159.8,
+      "end": 165.0,
+      "duration": 5.2,
+      "text": "learn how to solve those. But the point is that those"
+    },
+    {
+      "index": 23,
+      "start": 165.0,
+      "end": 169.8,
+      "duration": 4.8,
+      "text": "seem extremely special. Now, the point of Fourier"
+    },
+    {
+      "index": 24,
+      "start": 169.8,
+      "end": 177.0,
+      "duration": 7.2,
+      "text": "series is to show you that they are not as special as they look."
+    },
+    {
+      "index": 25,
+      "start": 177.0,
+      "end": 181.555,
+      "duration": 4.555,
+      "text": "The reason is that, let's put it this way,"
+    },
+    {
+      "index": 26,
+      "start": 181.555,
+      "end": 187.444,
+      "duration": 5.889,
+      "text": "that any reasonable f of t which is periodic,"
+    },
+    {
+      "index": 27,
+      "start": 187.444,
+      "end": 192.111,
+      "duration": 4.667,
+      "text": "it doesn't have to be even very reasonable."
+    },
+    {
+      "index": 28,
+      "start": 192.111,
+      "end": 195.666,
+      "duration": 3.555,
+      "text": "It can be somewhat discontinuous,"
+    },
+    {
+      "index": 29,
+      "start": 195.666,
+      "end": 199.555,
+      "duration": 3.889,
+      "text": "although not terribly discontinuous,"
+    },
+    {
+      "index": 30,
+      "start": 199.555,
+      "end": 206.111,
+      "duration": 6.556,
+      "text": "which is periodic with period, maybe not the minimal period,"
+    },
+    {
+      "index": 31,
+      "start": 206.111,
+      "end": 212.37,
+      "duration": 6.259,
+      "text": "but some period two pi. Of course, sine t"
+    },
+    {
+      "index": 32,
+      "start": 212.37,
+      "end": 216.772,
+      "duration": 4.402,
+      "text": "and cosine t have the exact period two pi,"
+    },
+    {
+      "index": 33,
+      "start": 216.772,
+      "end": 221.597,
+      "duration": 4.825,
+      "text": "but if I change the frequency to an integer frequency like"
+    },
+    {
+      "index": 34,
+      "start": 221.597,
+      "end": 225.407,
+      "duration": 3.81,
+      "text": "sine 2t or sine 26 t,"
+    },
+    {
+      "index": 35,
+      "start": 225.407,
+      "end": 229.894,
+      "duration": 4.487,
+      "text": "two pie would still be a period, although would not be"
+    },
+    {
+      "index": 36,
+      "start": 229.894,
+      "end": 233.195,
+      "duration": 3.301,
+      "text": "the period. The period would be shorter."
+    },
+    {
+      "index": 37,
+      "start": 233.195,
+      "end": 236.497,
+      "duration": 3.302,
+      "text": "The point is, such a thing can always be"
+    },
+    {
+      "index": 38,
+      "start": 236.497,
+      "end": 242.0,
+      "duration": 5.503,
+      "text": "represented as an infinite sum of sines and cosines."
+    },
+    {
+      "index": 39,
+      "start": 242.0,
+      "end": 244.341,
+      "duration": 2.341,
+      "text": "So, it's going to look like this."
+    },
+    {
+      "index": 40,
+      "start": 244.341,
+      "end": 247.926,
+      "duration": 3.585,
+      "text": "There's a constant term you have to put out front."
+    },
+    {
+      "index": 41,
+      "start": 247.926,
+      "end": 250.707,
+      "duration": 2.781,
+      "text": "And then, the rest, instead of writing,"
+    },
+    {
+      "index": 42,
+      "start": 250.707,
+      "end": 254.292,
+      "duration": 3.585,
+      "text": "it's rather long to write unless you use summation"
+    },
+    {
+      "index": 43,
+      "start": 254.292,
+      "end": 255.756,
+      "duration": 1.464,
+      "text": "notation. So, I will."
+    },
+    {
+      "index": 44,
+      "start": 255.756,
+      "end": 260.365,
+      "duration": 4.609,
+      "text": "So, it's a sum from n equal one to infinity integer values of n,"
+    },
+    {
+      "index": 45,
+      "start": 260.365,
+      "end": 263.146,
+      "duration": 2.781,
+      "text": "in other words, of a sine and a cosine."
+    },
+    {
+      "index": 46,
+      "start": 263.146,
+      "end": 265.926,
+      "duration": 2.78,
+      "text": "It's customary to put the cosine first,"
+    },
+    {
+      "index": 47,
+      "start": 265.926,
+      "end": 269.731,
+      "duration": 3.805,
+      "text": "and with the frequency, the n indicates the frequency"
+    },
+    {
+      "index": 48,
+      "start": 269.731,
+      "end": 275.794,
+      "duration": 6.063,
+      "text": "of the thing. And, the bn is sine nt."
+    },
+    {
+      "index": 49,
+      "start": 275.794,
+      "end": 280.766,
+      "duration": 4.972,
+      "text": "Now, why does that solve the"
+    },
+    {
+      "index": 50,
+      "start": 280.766,
+      "end": 287.046,
+      "duration": 6.28,
+      "text": "problem of general inputs for periodic functions,"
+    },
+    {
+      "index": 51,
+      "start": 287.046,
+      "end": 294.242,
+      "duration": 7.196,
+      "text": "at least if the period is two pi or some fraction of it?"
+    },
+    {
+      "index": 52,
+      "start": 294.242,
+      "end": 300.0,
+      "duration": 5.758,
+      "text": "Well, you could think of it this way."
+    },
+    {
+      "index": 53,
+      "start": 300.0,
+      "end": 311.538,
+      "duration": 11.538,
+      "text": "I'll make a little table. I'll make a little table."
+    },
+    {
+      "index": 54,
+      "start": 311.538,
+      "end": 321.692,
+      "duration": 10.154,
+      "text": "Let's look at, let's put over here the input,"
+    },
+    {
+      "index": 55,
+      "start": 321.692,
+      "end": 330.0,
+      "duration": 8.308,
+      "text": "and here, I'll put the response."
+    },
+    {
+      "index": 56,
+      "start": 330.0,
+      "end": 334.743,
+      "duration": 4.743,
+      "text": "Okay, suppose the input is the function sine nt."
+    },
+    {
+      "index": 57,
+      "start": 334.743,
+      "end": 338.844,
+      "duration": 4.101,
+      "text": "Well, in other words, if you just solve the problem,"
+    },
+    {
+      "index": 58,
+      "start": 338.844,
+      "end": 343.507,
+      "duration": 4.663,
+      "text": "you put a sine nt here, you know how to get the"
+    },
+    {
+      "index": 59,
+      "start": 343.507,
+      "end": 347.527,
+      "duration": 4.02,
+      "text": "answer, find a particular solution, in other words."
+    },
+    {
+      "index": 60,
+      "start": 347.527,
+      "end": 351.467,
+      "duration": 3.94,
+      "text": "In fact, you do it by converting this to a complex"
+    },
+    {
+      "index": 61,
+      "start": 351.467,
+      "end": 355.889,
+      "duration": 4.422,
+      "text": "exponential, and then all the rigmarole we've been going"
+    },
+    {
+      "index": 62,
+      "start": 355.889,
+      "end": 358.703,
+      "duration": 2.814,
+      "text": "through. So, let's call the response"
+    },
+    {
+      "index": 63,
+      "start": 358.703,
+      "end": 362.0,
+      "duration": 3.297,
+      "text": "something. Let's call it y."
+    },
+    {
+      "index": 64,
+      "start": 362.0,
+      "end": 365.487,
+      "duration": 3.487,
+      "text": "I'd better index it by n because it, of course,"
+    },
+    {
+      "index": 65,
+      "start": 365.487,
+      "end": 369.278,
+      "duration": 3.791,
+      "text": "is a response to this particular periodic function."
+    },
+    {
+      "index": 66,
+      "start": 369.278,
+      "end": 372.993,
+      "duration": 3.715,
+      "text": "So, n of t, and if the input is cosine nt,"
+    },
+    {
+      "index": 67,
+      "start": 372.993,
+      "end": 376.557,
+      "duration": 3.564,
+      "text": "that also will have a response, yn."
+    },
+    {
+      "index": 68,
+      "start": 376.557,
+      "end": 380.424,
+      "duration": 3.867,
+      "text": "Now, I really can't call them both by the same name."
+    },
+    {
+      "index": 69,
+      "start": 380.424,
+      "end": 385.125,
+      "duration": 4.701,
+      "text": "So, why don't we put a little s up here to indicate that that's"
+    },
+    {
+      "index": 70,
+      "start": 385.125,
+      "end": 389.219,
+      "duration": 4.094,
+      "text": "the response to the sine. And here, I'll put a little c"
+    },
+    {
+      "index": 71,
+      "start": 389.219,
+      "end": 392.327,
+      "duration": 3.108,
+      "text": "to indicate what the answer to the cosine."
+    },
+    {
+      "index": 72,
+      "start": 392.327,
+      "end": 396.573,
+      "duration": 4.246,
+      "text": "You're feeding cosine nt, what you get out is"
+    },
+    {
+      "index": 73,
+      "start": 396.573,
+      "end": 399.926,
+      "duration": 3.353,
+      "text": "this function. Now what?"
+    },
+    {
+      "index": 74,
+      "start": 399.926,
+      "end": 404.25,
+      "duration": 4.324,
+      "text": "Well, by the way, notice that if n is zero,"
+    },
+    {
+      "index": 75,
+      "start": 404.25,
+      "end": 408.573,
+      "duration": 4.323,
+      "text": "it's going to take care of a constant term,"
+    },
+    {
+      "index": 76,
+      "start": 408.573,
+      "end": 410.529,
+      "duration": 1.956,
+      "text": "too. In other words,"
+    },
+    {
+      "index": 77,
+      "start": 410.529,
+      "end": 416.705,
+      "duration": 6.176,
+      "text": "the reason there is a constant term out front is because that"
+    },
+    {
+      "index": 78,
+      "start": 416.705,
+      "end": 422.573,
+      "duration": 5.868,
+      "text": "corresponds to cosine of zero t, which is one."
+    },
+    {
+      "index": 79,
+      "start": 422.573,
+      "end": 428.544,
+      "duration": 5.971,
+      "text": "Now, suppose I input instead an cosine nt."
+    },
+    {
+      "index": 80,
+      "start": 428.544,
+      "end": 434.0,
+      "duration": 5.456,
+      "text": "All you do is multiply the answer by an."
+    },
+    {
+      "index": 81,
+      "start": 434.0,
+      "end": 436.664,
+      "duration": 2.664,
+      "text": "Same here. Multiply the input by bn."
+    },
+    {
+      "index": 82,
+      "start": 436.664,
+      "end": 440.926,
+      "duration": 4.262,
+      "text": "You multiply the response. That's because the equation is"
+    },
+    {
+      "index": 83,
+      "start": 440.926,
+      "end": 444.656,
+      "duration": 3.73,
+      "text": "a linear equation. And now, what am I going to do?"
+    },
+    {
+      "index": 84,
+      "start": 444.656,
+      "end": 448.461,
+      "duration": 3.805,
+      "text": "I'm going to add them up. If I add them up from the"
+    },
+    {
+      "index": 85,
+      "start": 448.461,
+      "end": 452.572,
+      "duration": 4.111,
+      "text": "different ends and take a count also, the n equals zero"
+    },
+    {
+      "index": 86,
+      "start": 452.572,
+      "end": 455.692,
+      "duration": 3.12,
+      "text": "corresponding to this first constant term,"
+    },
+    {
+      "index": 87,
+      "start": 455.692,
+      "end": 460.259,
+      "duration": 4.567,
+      "text": "the sum of all these according to my Fourier formula is going"
+    },
+    {
+      "index": 88,
+      "start": 460.259,
+      "end": 465.223,
+      "duration": 4.964,
+      "text": "to be f of t. What's the sum of this,"
+    },
+    {
+      "index": 89,
+      "start": 465.223,
+      "end": 470.249,
+      "duration": 5.026,
+      "text": "the corresponding responses? Well, that's going to be"
+    },
+    {
+      "index": 90,
+      "start": 470.249,
+      "end": 476.144,
+      "duration": 5.895,
+      "text": "summation a n y n c t plus b n y n,"
+    },
+    {
+      "index": 91,
+      "start": 476.144,
+      "end": 479.334,
+      "duration": 3.19,
+      "text": "the response to the sine."
+    },
+    {
+      "index": 92,
+      "start": 479.334,
+      "end": 485.037,
+      "duration": 5.703,
+      "text": "That will be the sum from one to infinity, and there will be"
+    },
+    {
+      "index": 93,
+      "start": 485.037,
+      "end": 490.771,
+      "duration": 5.734,
+      "text": "some sort of constant term here. Let's just call it c1."
+    },
+    {
+      "index": 94,
+      "start": 490.771,
+      "end": 494.475,
+      "duration": 3.704,
+      "text": "So, in other words, if this input produces that"
+    },
+    {
+      "index": 95,
+      "start": 494.475,
+      "end": 498.742,
+      "duration": 4.267,
+      "text": "response, and these are things which we can calculate,"
+    },
+    {
+      "index": 96,
+      "start": 498.742,
+      "end": 502.285,
+      "duration": 3.543,
+      "text": "we're led by this formula, Fourier's formula,"
+    },
+    {
+      "index": 97,
+      "start": 502.285,
+      "end": 507.358,
+      "duration": 5.073,
+      "text": "to the response to things which otherwise we would have not been"
+    },
+    {
+      "index": 98,
+      "start": 507.358,
+      "end": 511.142,
+      "duration": 3.784,
+      "text": "able to calculate, namely, any periodic function"
+    },
+    {
+      "index": 99,
+      "start": 511.142,
+      "end": 515.088,
+      "duration": 3.946,
+      "text": "of period two pi will have, the procedure will be,"
+    },
+    {
+      "index": 100,
+      "start": 515.088,
+      "end": 520.0,
+      "duration": 4.912,
+      "text": "you've got a periodic function of period two pi."
+    },
+    {
+      "index": 101,
+      "start": 520.0,
+      "end": 523.909,
+      "duration": 3.909,
+      "text": "Find its Fourier series, and I'll show you how to do"
+    },
+    {
+      "index": 102,
+      "start": 523.909,
+      "end": 526.592,
+      "duration": 2.683,
+      "text": "that today. Find its Fourier series,"
+    },
+    {
+      "index": 103,
+      "start": 526.592,
+      "end": 530.885,
+      "duration": 4.293,
+      "text": "and then the response to that general f of t will be this"
+    },
+    {
+      "index": 104,
+      "start": 530.885,
+      "end": 535.331,
+      "duration": 4.446,
+      "text": "infinite series of functions, where these things are things"
+    },
+    {
+      "index": 105,
+      "start": 535.331,
+      "end": 537.86,
+      "duration": 2.529,
+      "text": "you already know how to calculate."
+    },
+    {
+      "index": 106,
+      "start": 537.86,
+      "end": 542.0,
+      "duration": 4.14,
+      "text": "They are the responses to sines and cosines."
+    },
+    {
+      "index": 107,
+      "start": 542.0,
+      "end": 546.369,
+      "duration": 4.369,
+      "text": "And, you just formed the sum with those coefficients."
+    },
+    {
+      "index": 108,
+      "start": 546.369,
+      "end": 550.823,
+      "duration": 4.454,
+      "text": "Now, why does that work? It works by the superposition"
+    },
+    {
+      "index": 109,
+      "start": 550.823,
+      "end": 553.092,
+      "duration": 2.269,
+      "text": "principle. So, this is true."
+    },
+    {
+      "index": 110,
+      "start": 553.092,
+      "end": 557.966,
+      "duration": 4.874,
+      "text": "The reason I can do the adding and multiplying by constant,"
+    },
+    {
+      "index": 111,
+      "start": 557.966,
+      "end": 561.075,
+      "duration": 3.109,
+      "text": "I'm using the superposition principle."
+    },
+    {
+      "index": 112,
+      "start": 561.075,
+      "end": 565.613,
+      "duration": 4.538,
+      "text": "If this input produces that response, then the sum of a"
+    },
+    {
+      "index": 113,
+      "start": 565.613,
+      "end": 572.0,
+      "duration": 6.387,
+      "text": "bunch of inputs produces the sum of the corresponding responses."
+    },
+    {
+      "index": 114,
+      "start": 572.0,
+      "end": 578.31,
+      "duration": 6.31,
+      "text": "And, why is that? Why can I use the superposition"
+    },
+    {
+      "index": 115,
+      "start": 578.31,
+      "end": 583.043,
+      "duration": 4.733,
+      "text": "principle? Because the ODE is linear."
+    },
+    {
+      "index": 116,
+      "start": 583.043,
+      "end": 587.513,
+      "duration": 4.47,
+      "text": "It's okay, since the ODE is linear."
+    },
+    {
+      "index": 117,
+      "start": 587.513,
+      "end": 591.589,
+      "duration": 4.076,
+      "text": "That's what makes all this work."
+    },
+    {
+      "index": 118,
+      "start": 591.589,
+      "end": 599.609,
+      "duration": 8.02,
+      "text": "Now, so what we're going to do today is I will show you how to"
+    },
+    {
+      "index": 119,
+      "start": 599.609,
+      "end": 607.125,
+      "duration": 7.516,
+      "text": "calculate those Fourier series. I will not be able to use it to"
+    },
+    {
+      "index": 120,
+      "start": 607.125,
+      "end": 609.867,
+      "duration": 2.742,
+      "text": "actually solve any differential equation."
+    },
+    {
+      "index": 121,
+      "start": 609.867,
+      "end": 613.706,
+      "duration": 3.839,
+      "text": "It will take us pretty much all the period to show how to"
+    },
+    {
+      "index": 122,
+      "start": 613.706,
+      "end": 617.34,
+      "duration": 3.634,
+      "text": "calculate a Fourier series. And, okay, so I'm going to"
+    },
+    {
+      "index": 123,
+      "start": 617.34,
+      "end": 619.945,
+      "duration": 2.605,
+      "text": "solve differential equations on Monday."
+    },
+    {
+      "index": 124,
+      "start": 619.945,
+      "end": 622.482,
+      "duration": 2.537,
+      "text": "Wrong. I probably won't even get to it"
+    },
+    {
+      "index": 125,
+      "start": 622.482,
+      "end": 626.801,
+      "duration": 4.319,
+      "text": "then because the calculation of a Fourier series is a sufficient"
+    },
+    {
+      "index": 126,
+      "start": 626.801,
+      "end": 630.846,
+      "duration": 4.045,
+      "text": "amount of work that you really want to know all the possible"
+    },
+    {
+      "index": 127,
+      "start": 630.846,
+      "end": 635.036,
+      "duration": 4.19,
+      "text": "tricks and shortcuts there are. Unfortunately,"
+    },
+    {
+      "index": 128,
+      "start": 635.036,
+      "end": 637.33,
+      "duration": 2.294,
+      "text": "they are not very clever tricks."
+    },
+    {
+      "index": 129,
+      "start": 637.33,
+      "end": 641.622,
+      "duration": 4.292,
+      "text": "They are just obvious things. But, it will take me a period"
+    },
+    {
+      "index": 130,
+      "start": 641.622,
+      "end": 645.766,
+      "duration": 4.144,
+      "text": "to point out those obvious things, obvious in my sense if"
+    },
+    {
+      "index": 131,
+      "start": 645.766,
+      "end": 647.69,
+      "duration": 1.924,
+      "text": "not in yours. And, finally,"
+    },
+    {
+      "index": 132,
+      "start": 647.69,
+      "end": 650.502,
+      "duration": 2.812,
+      "text": "the third day, we'll solve differential"
+    },
+    {
+      "index": 133,
+      "start": 650.502,
+      "end": 653.388,
+      "duration": 2.886,
+      "text": "equations. I will actually carry out the"
+    },
+    {
+      "index": 134,
+      "start": 653.388,
+      "end": 656.201,
+      "duration": 2.813,
+      "text": "program. But the main thing we're going"
+    },
+    {
+      "index": 135,
+      "start": 656.201,
+      "end": 660.345,
+      "duration": 4.144,
+      "text": "to get out of it is another approach to resonance because"
+    },
+    {
+      "index": 136,
+      "start": 660.345,
+      "end": 665.007,
+      "duration": 4.662,
+      "text": "the things that we are going to be interested in are picking out"
+    },
+    {
+      "index": 137,
+      "start": 665.007,
+      "end": 668.781,
+      "duration": 3.774,
+      "text": "which of these terms may possibly produce resonance,"
+    },
+    {
+      "index": 138,
+      "start": 668.781,
+      "end": 673.0,
+      "duration": 4.219,
+      "text": "and therefore a very crazy response."
+    },
+    {
+      "index": 139,
+      "start": 673.0,
+      "end": 676.679,
+      "duration": 3.679,
+      "text": "Some of the terms in the response suddenly get a much"
+    },
+    {
+      "index": 140,
+      "start": 676.679,
+      "end": 681.067,
+      "duration": 4.388,
+      "text": "bigger amplitude than this than you would normally have thought"
+    },
+    {
+      "index": 141,
+      "start": 681.067,
+      "end": 684.889,
+      "duration": 3.822,
+      "text": "they had because it's picking out resonant terms in the"
+    },
+    {
+      "index": 142,
+      "start": 684.889,
+      "end": 688.569,
+      "duration": 3.68,
+      "text": "Fourier series of the input. Okay, well, that's a big"
+    },
+    {
+      "index": 143,
+      "start": 688.569,
+      "end": 690.55,
+      "duration": 1.981,
+      "text": "mouthfu. Let's get started on"
+    },
+    {
+      "index": 144,
+      "start": 690.55,
+      "end": 693.098,
+      "duration": 2.548,
+      "text": "calculating. So, the program today is"
+    },
+    {
+      "index": 145,
+      "start": 693.098,
+      "end": 700.34,
+      "duration": 7.242,
+      "text": "calculate the Fourier series. Given f of t periodic,"
+    },
+    {
+      "index": 146,
+      "start": 700.34,
+      "end": 707.34,
+      "duration": 7.0,
+      "text": "having two pi as a period, find its Fourier series."
+    },
+    {
+      "index": 147,
+      "start": 707.34,
+      "end": 712.94,
+      "duration": 5.6,
+      "text": "How, in other words, do I calculate those"
+    },
+    {
+      "index": 148,
+      "start": 712.94,
+      "end": 717.0,
+      "duration": 4.06,
+      "text": "coefficients, an and bn."
+    },
+    {
+      "index": 149,
+      "start": 717.0,
+      "end": 720.451,
+      "duration": 3.451,
+      "text": "Now, the answer is not immediately apparent,"
+    },
+    {
+      "index": 150,
+      "start": 720.451,
+      "end": 723.02,
+      "duration": 2.569,
+      "text": "and it's really quite remarkable."
+    },
+    {
+      "index": 151,
+      "start": 723.02,
+      "end": 725.99,
+      "duration": 2.97,
+      "text": "I think it's quite remarkable, anyway."
+    },
+    {
+      "index": 152,
+      "start": 725.99,
+      "end": 730.004,
+      "duration": 4.014,
+      "text": "It's one of the basic things of higher mathematics."
+    },
+    {
+      "index": 153,
+      "start": 730.004,
+      "end": 734.339,
+      "duration": 4.335,
+      "text": "And, what it depends upon are certain things called the"
+    },
+    {
+      "index": 154,
+      "start": 734.339,
+      "end": 738.433,
+      "duration": 4.094,
+      "text": "orthogonality relations. So, this is the place where"
+    },
+    {
+      "index": 155,
+      "start": 738.433,
+      "end": 741.644,
+      "duration": 3.211,
+      "text": "you've got to learn what such things are."
+    },
+    {
+      "index": 156,
+      "start": 741.644,
+      "end": 745.979,
+      "duration": 4.335,
+      "text": "Well, I think it would be a good idea to have a general"
+    },
+    {
+      "index": 157,
+      "start": 745.979,
+      "end": 749.752,
+      "duration": 3.773,
+      "text": "definition, rather than immediately get into the"
+    },
+    {
+      "index": 158,
+      "start": 749.752,
+      "end": 754.878,
+      "duration": 5.126,
+      "text": "specifics. So, I'm going to call u of x,"
+    },
+    {
+      "index": 159,
+      "start": 754.878,
+      "end": 759.504,
+      "duration": 4.626,
+      "text": "u of t, I think I will use,"
+    },
+    {
+      "index": 160,
+      "start": 759.504,
+      "end": 765.775,
+      "duration": 6.271,
+      "text": "since Fourier analysis is most often applied when the variable"
+    },
+    {
+      "index": 161,
+      "start": 765.775,
+      "end": 771.738,
+      "duration": 5.963,
+      "text": "is time, I think I will stick to independent variable t all"
+    },
+    {
+      "index": 162,
+      "start": 771.738,
+      "end": 776.056,
+      "duration": 4.318,
+      "text": "period long, if I remember to, at any rate."
+    },
+    {
+      "index": 163,
+      "start": 776.056,
+      "end": 781.607,
+      "duration": 5.551,
+      "text": "So, these are two continuous, or not very discontinuous"
+    },
+    {
+      "index": 164,
+      "start": 781.607,
+      "end": 787.589,
+      "duration": 5.982,
+      "text": "functions on minus pi. Let's make them periodic."
+    },
+    {
+      "index": 165,
+      "start": 787.589,
+      "end": 792.042,
+      "duration": 4.453,
+      "text": "Let's say two pi is a period. So, functions,"
+    },
+    {
+      "index": 166,
+      "start": 792.042,
+      "end": 796.6,
+      "duration": 4.558,
+      "text": "for example like those guys, sine t, sine nt,"
+    },
+    {
+      "index": 167,
+      "start": 796.6,
+      "end": 800.535,
+      "duration": 3.935,
+      "text": "sine 22t,"
+    },
+    {
+      "index": 168,
+      "start": 800.535,
+      "end": 803.953,
+      "duration": 3.418,
+      "text": "and so on, say two pi is a period."
+    },
+    {
+      "index": 169,
+      "start": 803.953,
+      "end": 808.821,
+      "duration": 4.868,
+      "text": "Well, I want them really on the whole real axis,"
+    },
+    {
+      "index": 170,
+      "start": 808.821,
+      "end": 814.0,
+      "duration": 5.179,
+      "text": "not there. Define for all real numbers."
+    },
+    {
+      "index": 171,
+      "start": 814.0,
+      "end": 819.293,
+      "duration": 5.293,
+      "text": "Then, I say that they are orthogonal, perpendicular."
+    },
+    {
+      "index": 172,
+      "start": 819.293,
+      "end": 824.794,
+      "duration": 5.501,
+      "text": "But nobody says perpendicular. Orthogonal is the word,"
+    },
+    {
+      "index": 173,
+      "start": 824.794,
+      "end": 829.777,
+      "duration": 4.983,
+      "text": "orthogonal on the interval minus pi to pi"
+    },
+    {
+      "index": 174,
+      "start": 829.777,
+      "end": 834.448,
+      "duration": 4.671,
+      "text": "if the integral, so, two are orthogonal."
+    },
+    {
+      "index": 175,
+      "start": 834.448,
+      "end": 840.156,
+      "duration": 5.708,
+      "text": "Well, these two functions, if the integral from minus pi"
+    },
+    {
+      "index": 176,
+      "start": 840.156,
+      "end": 846.073,
+      "duration": 5.917,
+      "text": "to pi of u of t v of t, the product is zero,"
+    },
+    {
+      "index": 177,
+      "start": 846.073,
+      "end": 852.093,
+      "duration": 6.02,
+      "text": "that's called the orthogonality condition on minus pi to pi."
+    },
+    {
+      "index": 178,
+      "start": 852.093,
+      "end": 856.725,
+      "duration": 4.632,
+      "text": "Now, well, it's just the"
+    },
+    {
+      "index": 179,
+      "start": 856.725,
+      "end": 859.313,
+      "duration": 2.588,
+      "text": "definition. I would love to go into a"
+    },
+    {
+      "index": 180,
+      "start": 859.313,
+      "end": 863.196,
+      "duration": 3.883,
+      "text": "little song and dance now on what the definition really"
+    },
+    {
+      "index": 181,
+      "start": 863.196,
+      "end": 867.366,
+      "duration": 4.17,
+      "text": "means, and what its application, why the word orthogonal is"
+    },
+    {
+      "index": 182,
+      "start": 867.366,
+      "end": 871.464,
+      "duration": 4.098,
+      "text": "used, because it really does have something to do with two"
+    },
+    {
+      "index": 183,
+      "start": 871.464,
+      "end": 875.777,
+      "duration": 4.313,
+      "text": "vectors being orthogonal in the sense in which you live it in"
+    },
+    {
+      "index": 184,
+      "start": 875.777,
+      "end": 879.385,
+      "duration": 3.608,
+      "text": "18.02. I'll have to put that on the"
+    },
+    {
+      "index": 185,
+      "start": 879.385,
+      "end": 883.559,
+      "duration": 4.174,
+      "text": "ice for the moment, and whether I get to it or not"
+    },
+    {
+      "index": 186,
+      "start": 883.559,
+      "end": 888.5,
+      "duration": 4.941,
+      "text": "depends on how fast I talk. But, you probably prefer I talk"
+    },
+    {
+      "index": 187,
+      "start": 888.5,
+      "end": 890.885,
+      "duration": 2.385,
+      "text": "slowly. So, let's compromise."
+    },
+    {
+      "index": 188,
+      "start": 890.885,
+      "end": 895.655,
+      "duration": 4.77,
+      "text": "Anyway, that's the condition. And now, what I say is that"
+    },
+    {
+      "index": 189,
+      "start": 895.655,
+      "end": 898.892,
+      "duration": 3.237,
+      "text": "Fourier, that blue Fourier series,"
+    },
+    {
+      "index": 190,
+      "start": 898.892,
+      "end": 901.631,
+      "duration": 2.739,
+      "text": "-- -- what finding the"
+    },
+    {
+      "index": 191,
+      "start": 901.631,
+      "end": 906.696,
+      "duration": 5.065,
+      "text": "coefficients an and bn depends upon is this theorem that the"
+    },
+    {
+      "index": 192,
+      "start": 906.696,
+      "end": 911.417,
+      "duration": 4.721,
+      "text": "collection of functions, as I look at this collection of"
+    },
+    {
+      "index": 193,
+      "start": 911.417,
+      "end": 916.482,
+      "duration": 5.065,
+      "text": "functions, sine nt for any value of the integer,"
+    },
+    {
+      "index": 194,
+      "start": 916.482,
+      "end": 921.719,
+      "duration": 5.237,
+      "text": "n, of course I can assume n is a positive integer because sine"
+    },
+    {
+      "index": 195,
+      "start": 921.719,
+      "end": 926.87,
+      "duration": 5.151,
+      "text": "of minus nt is the same as sine of nt."
+    },
+    {
+      "index": 196,
+      "start": 926.87,
+      "end": 930.389,
+      "duration": 3.519,
+      "text": "And, cosine mt, let's give it a different,"
+    },
+    {
+      "index": 197,
+      "start": 930.389,
+      "end": 934.939,
+      "duration": 4.55,
+      "text": "so I don't want you to think they are exactly the same"
+    },
+    {
+      "index": 198,
+      "start": 934.939,
+      "end": 940.206,
+      "duration": 5.267,
+      "text": "integers. So, this is a big collection of"
+    },
+    {
+      "index": 199,
+      "start": 940.206,
+      "end": 945.172,
+      "duration": 4.966,
+      "text": "functions, as n runs from one to infinity-- Here,"
+    },
+    {
+      "index": 200,
+      "start": 945.172,
+      "end": 951.275,
+      "duration": 6.103,
+      "text": "I could let m be run from zero to infinity because cosine of"
+    },
+    {
+      "index": 201,
+      "start": 951.275,
+      "end": 954.793,
+      "duration": 3.518,
+      "text": "zero t means something."
+    },
+    {
+      "index": 202,
+      "start": 954.793,
+      "end": 959.241,
+      "duration": 4.448,
+      "text": "It's a constant, one-- that any two distinct"
+    },
+    {
+      "index": 203,
+      "start": 959.241,
+      "end": 964.413,
+      "duration": 5.172,
+      "text": "ones, two distinct, you know, how can two things be"
+    },
+    {
+      "index": 204,
+      "start": 964.413,
+      "end": 968.5,
+      "duration": 4.087,
+      "text": "not different? Well, you know,"
+    },
+    {
+      "index": 205,
+      "start": 968.5,
+      "end": 972.0,
+      "duration": 3.5,
+      "text": "you talk about two coincident roots."
+    },
+    {
+      "index": 206,
+      "start": 972.0,
+      "end": 976.1,
+      "duration": 4.1,
+      "text": "I'm just killing, doing a little overkill."
+    },
+    {
+      "index": 207,
+      "start": 976.1,
+      "end": 982.299,
+      "duration": 6.199,
+      "text": "Any two distinct ones of these, two distinct members of the set"
+    },
+    {
+      "index": 208,
+      "start": 982.299,
+      "end": 985.799,
+      "duration": 3.5,
+      "text": "of this collection of, I don't know,"
+    },
+    {
+      "index": 209,
+      "start": 985.799,
+      "end": 991.0,
+      "duration": 5.201,
+      "text": "there's no way to say that, any two distinct ones are"
+    },
+    {
+      "index": 210,
+      "start": 991.0,
+      "end": 996.899,
+      "duration": 5.899,
+      "text": "orthogonal on this interval. Of course, they all have two pi"
+    },
+    {
+      "index": 211,
+      "start": 996.899,
+      "end": 1003.2,
+      "duration": 6.301,
+      "text": "as a period for all of them. So, they form into this general"
+    },
+    {
+      "index": 212,
+      "start": 1003.2,
+      "end": 1007.529,
+      "duration": 4.329,
+      "text": "category that I'm talking about, but any two distinct ones are"
+    },
+    {
+      "index": 213,
+      "start": 1007.529,
+      "end": 1011.219,
+      "duration": 3.69,
+      "text": "orthogonal on the interval for minus pi to pi."
+    },
+    {
+      "index": 214,
+      "start": 1011.219,
+      "end": 1013.703,
+      "duration": 2.484,
+      "text": "So, if I integrate from minus"
+    },
+    {
+      "index": 215,
+      "start": 1013.703,
+      "end": 1017.251,
+      "duration": 3.548,
+      "text": "pi to pi sine of three t times cosine of four t dt,"
+    },
+    {
+      "index": 216,
+      "start": 1017.251,
+      "end": 1020.374,
+      "duration": 3.123,
+      "text": "answer is zero."
+    },
+    {
+      "index": 217,
+      "start": 1020.374,
+      "end": 1025.44,
+      "duration": 5.066,
+      "text": "If I integrate sine of 3t times"
+    },
+    {
+      "index": 218,
+      "start": 1025.44,
+      "end": 1029.533,
+      "duration": 4.093,
+      "text": "the sine of 60t, answer is zero."
+    },
+    {
+      "index": 219,
+      "start": 1029.533,
+      "end": 1033.862,
+      "duration": 4.329,
+      "text": "The same thing with two cosines, or a sine and a cosine."
+    },
+    {
+      "index": 220,
+      "start": 1033.862,
+      "end": 1037.956,
+      "duration": 4.094,
+      "text": "The only time you don't get zero is if you integrate,"
+    },
+    {
+      "index": 221,
+      "start": 1037.956,
+      "end": 1040.947,
+      "duration": 2.991,
+      "text": "if you make the two functions the same."
+    },
+    {
+      "index": 222,
+      "start": 1040.947,
+      "end": 1045.276,
+      "duration": 4.329,
+      "text": "Now, how do you know that you could not possibly get the"
+    },
+    {
+      "index": 223,
+      "start": 1045.276,
+      "end": 1050.0,
+      "duration": 4.724,
+      "text": "answer is zero if the two functions are the same?"
+    },
+    {
+      "index": 224,
+      "start": 1050.0,
+      "end": 1055.14,
+      "duration": 5.14,
+      "text": "If the two functions are the same, then I'm integrating a"
+    },
+    {
+      "index": 225,
+      "start": 1055.14,
+      "end": 1058.354,
+      "duration": 3.214,
+      "text": "square. A square is always positive."
+    },
+    {
+      "index": 226,
+      "start": 1058.354,
+      "end": 1063.219,
+      "duration": 4.865,
+      "text": "I'm integrating a square. A square is always positive,"
+    },
+    {
+      "index": 227,
+      "start": 1063.219,
+      "end": 1067.167,
+      "duration": 3.948,
+      "text": "and therefore I cannot get the answer, zero."
+    },
+    {
+      "index": 228,
+      "start": 1067.167,
+      "end": 1071.94,
+      "duration": 4.773,
+      "text": "But, in the other cases, I might get the answer zero."
+    },
+    {
+      "index": 229,
+      "start": 1071.94,
+      "end": 1074.878,
+      "duration": 2.938,
+      "text": "And the theorem is you always do."
+    },
+    {
+      "index": 230,
+      "start": 1074.878,
+      "end": 1080.427,
+      "duration": 5.549,
+      "text": "Okay, so, why is this? Well, there are three ways to"
+    },
+    {
+      "index": 231,
+      "start": 1080.427,
+      "end": 1083.525,
+      "duration": 3.098,
+      "text": "prove this. It's like many fundamental"
+    },
+    {
+      "index": 232,
+      "start": 1083.525,
+      "end": 1087.544,
+      "duration": 4.019,
+      "text": "facts in mathematics. There are different ways of"
+    },
+    {
+      "index": 233,
+      "start": 1087.544,
+      "end": 1090.976,
+      "duration": 3.432,
+      "text": "going about it. By the way, along with the"
+    },
+    {
+      "index": 234,
+      "start": 1090.976,
+      "end": 1094.66,
+      "duration": 3.684,
+      "text": "theorem, I probably should have included, so,"
+    },
+    {
+      "index": 235,
+      "start": 1094.66,
+      "end": 1098.26,
+      "duration": 3.6,
+      "text": "I'm far away. But you might as well include,"
+    },
+    {
+      "index": 236,
+      "start": 1098.26,
+      "end": 1103.116,
+      "duration": 4.856,
+      "text": "because we're going to need it. What happens if you use the"
+    },
+    {
+      "index": 237,
+      "start": 1103.116,
+      "end": 1106.213,
+      "duration": 3.097,
+      "text": "same function? If I take U equal to V,"
+    },
+    {
+      "index": 238,
+      "start": 1106.213,
+      "end": 1109.144,
+      "duration": 2.931,
+      "text": "and in that case, as I've indicated,"
+    },
+    {
+      "index": 239,
+      "start": 1109.144,
+      "end": 1114.0,
+      "duration": 4.856,
+      "text": "you're not going to get the answer, zero."
+    },
+    {
+      "index": 240,
+      "start": 1114.0,
+      "end": 1117.471,
+      "duration": 3.471,
+      "text": "But, what you will get is, so, in other words,"
+    },
+    {
+      "index": 241,
+      "start": 1117.471,
+      "end": 1121.097,
+      "duration": 3.626,
+      "text": "I'm just asking, what is the sine of"
+    },
+    {
+      "index": 242,
+      "start": 1121.097,
+      "end": 1124.724,
+      "duration": 3.627,
+      "text": "n t squared. That's a case where two of them"
+    },
+    {
+      "index": 243,
+      "start": 1124.724,
+      "end": 1127.578,
+      "duration": 2.854,
+      "text": "are the same. I use the same function."
+    },
+    {
+      "index": 244,
+      "start": 1127.578,
+      "end": 1130.047,
+      "duration": 2.469,
+      "text": "What's that? Well, the answer is,"
+    },
+    {
+      "index": 245,
+      "start": 1130.047,
+      "end": 1134.83,
+      "duration": 4.783,
+      "text": "it's the same as what you will get if you integrate the cosine,"
+    },
+    {
+      "index": 246,
+      "start": 1134.83,
+      "end": 1138.456,
+      "duration": 3.626,
+      "text": "cosine squared n t dt."
+    },
+    {
+      "index": 247,
+      "start": 1138.456,
+      "end": 1142.428,
+      "duration": 3.972,
+      "text": "And, the answer to either one"
+    },
+    {
+      "index": 248,
+      "start": 1142.428,
+      "end": 1146.114,
+      "duration": 3.686,
+      "text": "of these is pi. That's something you know how"
+    },
+    {
+      "index": 249,
+      "start": 1146.114,
+      "end": 1149.631,
+      "duration": 3.517,
+      "text": "to do from 18.01 or the equivalent thereof."
+    },
+    {
+      "index": 250,
+      "start": 1149.631,
+      "end": 1154.741,
+      "duration": 5.11,
+      "text": "You can integrate sine squared. It's one of the things you had"
+    },
+    {
+      "index": 251,
+      "start": 1154.741,
+      "end": 1159.85,
+      "duration": 5.109,
+      "text": "to learn for whatever exam you took on methods of integration."
+    },
+    {
+      "index": 252,
+      "start": 1159.85,
+      "end": 1163.703,
+      "duration": 3.853,
+      "text": "Anyway, so I'm not going to calculate this out."
+    },
+    {
+      "index": 253,
+      "start": 1163.703,
+      "end": 1167.472,
+      "duration": 3.769,
+      "text": "The answer turns out to be pi. All right, now,"
+    },
+    {
+      "index": 254,
+      "start": 1167.472,
+      "end": 1173.0,
+      "duration": 5.528,
+      "text": "the ways to prove it are you can use trig identities."
+    },
+    {
+      "index": 255,
+      "start": 1173.0,
+      "end": 1177.119,
+      "duration": 4.119,
+      "text": "And, I'm asking you in one of the early problems in the"
+    },
+    {
+      "index": 256,
+      "start": 1177.119,
+      "end": 1181.163,
+      "duration": 4.044,
+      "text": "problem set, identities, identities for the product of"
+    },
+    {
+      "index": 257,
+      "start": 1181.163,
+      "end": 1184.367,
+      "duration": 3.204,
+      "text": "sine and cosine, expressing it in a form in"
+    },
+    {
+      "index": 258,
+      "start": 1184.367,
+      "end": 1188.869,
+      "duration": 4.502,
+      "text": "which it's easy to integrate, and you can prove it that way."
+    },
+    {
+      "index": 259,
+      "start": 1188.869,
+      "end": 1191.997,
+      "duration": 3.128,
+      "text": "Or, you can use, if you have forgotten the"
+    },
+    {
+      "index": 260,
+      "start": 1191.997,
+      "end": 1196.422,
+      "duration": 4.425,
+      "text": "trigonometric identities and want to get some more exercise"
+    },
+    {
+      "index": 261,
+      "start": 1196.422,
+      "end": 1201.0,
+      "duration": 4.578,
+      "text": "with complex-- you can use complex exponentials."
+    },
+    {
+      "index": 262,
+      "start": 1201.0,
+      "end": 1205.481,
+      "duration": 4.481,
+      "text": "So, I'm asking you how to, in another part of the same"
+    },
+    {
+      "index": 263,
+      "start": 1205.481,
+      "end": 1209.877,
+      "duration": 4.396,
+      "text": "problem I'm asking you how to do it, do one of these,"
+    },
+    {
+      "index": 264,
+      "start": 1209.877,
+      "end": 1213.174,
+      "duration": 3.297,
+      "text": "at any rate, using complex exponentials."
+    },
+    {
+      "index": 265,
+      "start": 1213.174,
+      "end": 1218.078,
+      "duration": 4.904,
+      "text": "And now, I'm going to use a mysterious third method another"
+    },
+    {
+      "index": 266,
+      "start": 1218.078,
+      "end": 1220.53,
+      "duration": 2.452,
+      "text": "way. I'm going to use the ODE."
+    },
+    {
+      "index": 267,
+      "start": 1220.53,
+      "end": 1224.504,
+      "duration": 3.974,
+      "text": "I'm going to do that because this is the method."
+    },
+    {
+      "index": 268,
+      "start": 1224.504,
+      "end": 1230.0,
+      "duration": 5.496,
+      "text": "It's not just sines and cosines which are orthogonal."
+    },
+    {
+      "index": 269,
+      "start": 1230.0,
+      "end": 1233.228,
+      "duration": 3.228,
+      "text": "There are masses of orthogonal functions out there."
+    },
+    {
+      "index": 270,
+      "start": 1233.228,
+      "end": 1236.328,
+      "duration": 3.1,
+      "text": "And, the way they are discovered, and the way you"
+    },
+    {
+      "index": 271,
+      "start": 1236.328,
+      "end": 1240.396,
+      "duration": 4.068,
+      "text": "prove they're orthogonal is not with trig identities and complex"
+    },
+    {
+      "index": 272,
+      "start": 1240.396,
+      "end": 1244.206,
+      "duration": 3.81,
+      "text": "exponentials because those only work with sines and cosines."
+    },
+    {
+      "index": 273,
+      "start": 1244.206,
+      "end": 1246.466,
+      "duration": 2.26,
+      "text": "It is, instead, by going back to the"
+    },
+    {
+      "index": 274,
+      "start": 1246.466,
+      "end": 1248.856,
+      "duration": 2.39,
+      "text": "differential equation that they solve."
+    },
+    {
+      "index": 275,
+      "start": 1248.856,
+      "end": 1252.214,
+      "duration": 3.358,
+      "text": "And that's, therefore, the method here that I'm going"
+    },
+    {
+      "index": 276,
+      "start": 1252.214,
+      "end": 1256.282,
+      "duration": 4.068,
+      "text": "to use here because this is the method which generalizes to many"
+    },
+    {
+      "index": 277,
+      "start": 1256.282,
+      "end": 1259.769,
+      "duration": 3.487,
+      "text": "other differential equations other than the simple ones"
+    },
+    {
+      "index": 278,
+      "start": 1259.769,
+      "end": 1265.0,
+      "duration": 5.231,
+      "text": "satisfied by sines and cosines. But anyway, that is the source."
+    },
+    {
+      "index": 279,
+      "start": 1265.0,
+      "end": 1269.537,
+      "duration": 4.537,
+      "text": "So, the way the proof of these orthogonality conditions goes,"
+    },
+    {
+      "index": 280,
+      "start": 1269.537,
+      "end": 1274.0,
+      "duration": 4.463,
+      "text": "so I'm not going to do that. And, I'm going to assume that m"
+    },
+    {
+      "index": 281,
+      "start": 1274.0,
+      "end": 1278.31,
+      "duration": 4.31,
+      "text": "is different from n so that I'm not in either of these two"
+    },
+    {
+      "index": 282,
+      "start": 1278.31,
+      "end": 1280.428,
+      "duration": 2.118,
+      "text": "cases. What it depends on is,"
+    },
+    {
+      "index": 283,
+      "start": 1280.428,
+      "end": 1283.907,
+      "duration": 3.479,
+      "text": "what's the differential equation that all these"
+    },
+    {
+      "index": 284,
+      "start": 1283.907,
+      "end": 1286.932,
+      "duration": 3.025,
+      "text": "functions satisfy? Well, it's a different"
+    },
+    {
+      "index": 285,
+      "start": 1286.932,
+      "end": 1290.789,
+      "duration": 3.857,
+      "text": "differential equation depending upon the value of n,"
+    },
+    {
+      "index": 286,
+      "start": 1290.789,
+      "end": 1295.007,
+      "duration": 4.218,
+      "text": "-- -- but they look at essentially"
+    },
+    {
+      "index": 287,
+      "start": 1295.007,
+      "end": 1298.791,
+      "duration": 3.784,
+      "text": "the same. These satisfy the differential"
+    },
+    {
+      "index": 288,
+      "start": 1298.791,
+      "end": 1303.641,
+      "duration": 4.85,
+      "text": "equation, in other words, what they have in common."
+    },
+    {
+      "index": 289,
+      "start": 1303.641,
+      "end": 1308.007,
+      "duration": 4.366,
+      "text": "The differential equation is, let's call it u."
+    },
+    {
+      "index": 290,
+      "start": 1308.007,
+      "end": 1312.276,
+      "duration": 4.269,
+      "text": "It looks better. It's going to look better if"
+    },
+    {
+      "index": 291,
+      "start": 1312.276,
+      "end": 1316.253,
+      "duration": 3.977,
+      "text": "you let me call it u. u double prime plus,"
+    },
+    {
+      "index": 292,
+      "start": 1316.253,
+      "end": 1320.522,
+      "duration": 4.269,
+      "text": "well, n squared, so for the function sine n t"
+    },
+    {
+      "index": 293,
+      "start": 1320.522,
+      "end": 1325.179,
+      "duration": 4.657,
+      "text": "cosine n t, satisfy u double"
+    },
+    {
+      "index": 294,
+      "start": 1325.179,
+      "end": 1331.0,
+      "duration": 5.821,
+      "text": "prime plus n squared times u."
+    },
+    {
+      "index": 295,
+      "start": 1331.0,
+      "end": 1333.413,
+      "duration": 2.413,
+      "text": "In other words, the frequency is n,"
+    },
+    {
+      "index": 296,
+      "start": 1333.413,
+      "end": 1336.04,
+      "duration": 2.627,
+      "text": "and therefore, this is a square of the"
+    },
+    {
+      "index": 297,
+      "start": 1336.04,
+      "end": 1339.092,
+      "duration": 3.052,
+      "text": "frequency is what you put here, equals zero."
+    },
+    {
+      "index": 298,
+      "start": 1339.092,
+      "end": 1342.145,
+      "duration": 3.053,
+      "text": "In other words, what these functions have in"
+    },
+    {
+      "index": 299,
+      "start": 1342.145,
+      "end": 1346.333,
+      "duration": 4.188,
+      "text": "common is that they satisfy differential equations that look"
+    },
+    {
+      "index": 300,
+      "start": 1346.333,
+      "end": 1348.817,
+      "duration": 2.484,
+      "text": "like that. And the only thing that's"
+    },
+    {
+      "index": 301,
+      "start": 1348.817,
+      "end": 1352.509,
+      "duration": 3.692,
+      "text": "allowed to vary is the frequency, which is allowed to"
+    },
+    {
+      "index": 302,
+      "start": 1352.509,
+      "end": 1356.891,
+      "duration": 4.382,
+      "text": "change. The frequency is in this"
+    },
+    {
+      "index": 303,
+      "start": 1356.891,
+      "end": 1362.313,
+      "duration": 5.422,
+      "text": "coefficient of u. Now, the remarkable thing is"
+    },
+    {
+      "index": 304,
+      "start": 1362.313,
+      "end": 1369.301,
+      "duration": 6.988,
+      "text": "that's all you need to know. The fact that they satisfy the"
+    },
+    {
+      "index": 305,
+      "start": 1369.301,
+      "end": 1375.566,
+      "duration": 6.265,
+      "text": "differential equation, that's all you need to know to"
+    },
+    {
+      "index": 306,
+      "start": 1375.566,
+      "end": 1379.903,
+      "duration": 4.337,
+      "text": "prove the orthogonality relationship."
+    },
+    {
+      "index": 307,
+      "start": 1379.903,
+      "end": 1386.501,
+      "duration": 6.598,
+      "text": "Okay, let's try to do it. Well, I need some notation."
+    },
+    {
+      "index": 308,
+      "start": 1386.501,
+      "end": 1391.875,
+      "duration": 5.374,
+      "text": "So, I'm going to let un and vm be any two of the functions."
+    },
+    {
+      "index": 309,
+      "start": 1391.875,
+      "end": 1396.137,
+      "duration": 4.262,
+      "text": "In other words, I'll assume m is different from"
+    },
+    {
+      "index": 310,
+      "start": 1396.137,
+      "end": 1397.434,
+      "duration": 1.297,
+      "text": "n. For example,"
+    },
+    {
+      "index": 311,
+      "start": 1397.434,
+      "end": 1402.53,
+      "duration": 5.096,
+      "text": "this one could be sine nt, and that could be"
+    },
+    {
+      "index": 312,
+      "start": 1402.53,
+      "end": 1406.884,
+      "duration": 4.354,
+      "text": "sine of mt, or this could be sine nt"
+    },
+    {
+      "index": 313,
+      "start": 1406.884,
+      "end": 1413.0,
+      "duration": 6.116,
+      "text": "and that could be cosine of mt."
+    },
+    {
+      "index": 314,
+      "start": 1413.0,
+      "end": 1415.79,
+      "duration": 2.79,
+      "text": "You get the idea. Any two of those in the"
+    },
+    {
+      "index": 315,
+      "start": 1415.79,
+      "end": 1420.046,
+      "duration": 4.256,
+      "text": "subscript indicates whether what the n or the m is that are in"
+    },
+    {
+      "index": 316,
+      "start": 1420.046,
+      "end": 1422.558,
+      "duration": 2.512,
+      "text": "that. Any two, and I mean really two,"
+    },
+    {
+      "index": 317,
+      "start": 1422.558,
+      "end": 1425.348,
+      "duration": 2.79,
+      "text": "distinct, well, if I say that m is not n,"
+    },
+    {
+      "index": 318,
+      "start": 1425.348,
+      "end": 1428.209,
+      "duration": 2.861,
+      "text": "then they positively have to be different."
+    },
+    {
+      "index": 319,
+      "start": 1428.209,
+      "end": 1431.209,
+      "duration": 3.0,
+      "text": "So, again, it's overkill with my two's-ness."
+    },
+    {
+      "index": 320,
+      "start": 1431.209,
+      "end": 1433.86,
+      "duration": 2.651,
+      "text": "And, what I'm going to calculate, well,"
+    },
+    {
+      "index": 321,
+      "start": 1433.86,
+      "end": 1436.023,
+      "duration": 2.163,
+      "text": "first of all, from the equation,"
+    },
+    {
+      "index": 322,
+      "start": 1436.023,
+      "end": 1440.0,
+      "duration": 3.977,
+      "text": "I'm going to write the equation this way."
+    },
+    {
+      "index": 323,
+      "start": 1440.0,
+      "end": 1447.094,
+      "duration": 7.094,
+      "text": "It says that u double prime is equal to minus n squared u."
+    },
+    {
+      "index": 324,
+      "start": 1447.094,
+      "end": 1451.557,
+      "duration": 4.463,
+      "text": "That's true for any of these"
+    },
+    {
+      "index": 325,
+      "start": 1451.557,
+      "end": 1453.96,
+      "duration": 2.403,
+      "text": "guys. Of course, here,"
+    },
+    {
+      "index": 326,
+      "start": 1453.96,
+      "end": 1460.94,
+      "duration": 6.98,
+      "text": "it would be v double prime is equal to minus m squared"
+    },
+    {
+      "index": 327,
+      "start": 1460.94,
+      "end": 1466.203,
+      "duration": 5.263,
+      "text": "times v. You have to make those simple"
+    },
+    {
+      "index": 328,
+      "start": 1466.203,
+      "end": 1470.781,
+      "duration": 4.578,
+      "text": "adjustments. And now, what we're going to"
+    },
+    {
+      "index": 329,
+      "start": 1470.781,
+      "end": 1477.303,
+      "duration": 6.522,
+      "text": "calculate is the integral from minus pi to pi of un double"
+    },
+    {
+      "index": 330,
+      "start": 1477.303,
+      "end": 1483.482,
+      "duration": 6.179,
+      "text": "prime times vm dt."
+    },
+    {
+      "index": 331,
+      "start": 1483.482,
+      "end": 1488.047,
+      "duration": 4.565,
+      "text": "Now, just bear with me."
+    },
+    {
+      "index": 332,
+      "start": 1488.047,
+      "end": 1493.031,
+      "duration": 4.984,
+      "text": "Why am I going to do that? I can't explain what I'm going"
+    },
+    {
+      "index": 333,
+      "start": 1493.031,
+      "end": 1496.146,
+      "duration": 3.115,
+      "text": "to do that. But you won't ask me the"
+    },
+    {
+      "index": 334,
+      "start": 1496.146,
+      "end": 1499.884,
+      "duration": 3.738,
+      "text": "question in five minutes. But the point is,"
+    },
+    {
+      "index": 335,
+      "start": 1499.884,
+      "end": 1505.267,
+      "duration": 5.383,
+      "text": "this is highly un-symmetric. The u is differentiated twice."
+    },
+    {
+      "index": 336,
+      "start": 1505.267,
+      "end": 1508.365,
+      "duration": 3.098,
+      "text": "The v isn't. So, those two functions-- but"
+    },
+    {
+      "index": 337,
+      "start": 1508.365,
+      "end": 1512.899,
+      "duration": 4.534,
+      "text": "there is a way of turning them into an expression which looks"
+    },
+    {
+      "index": 338,
+      "start": 1512.899,
+      "end": 1516.224,
+      "duration": 3.325,
+      "text": "extremely symmetric, where they are the same."
+    },
+    {
+      "index": 339,
+      "start": 1516.224,
+      "end": 1520.608,
+      "duration": 4.384,
+      "text": "And the way to do that is I want to get rid of one of these"
+    },
+    {
+      "index": 340,
+      "start": 1520.608,
+      "end": 1525.142,
+      "duration": 4.534,
+      "text": "primes here and put one on here. The way to do that is if you"
+    },
+    {
+      "index": 341,
+      "start": 1525.142,
+      "end": 1529.827,
+      "duration": 4.685,
+      "text": "want to integrate one of these guys, and differentiate this one"
+    },
+    {
+      "index": 342,
+      "start": 1529.827,
+      "end": 1533.984,
+      "duration": 4.157,
+      "text": "to make them look the same, that's called integration by"
+    },
+    {
+      "index": 343,
+      "start": 1533.984,
+      "end": 1538.14,
+      "duration": 4.156,
+      "text": "parts, the most important theoretical method you learned"
+    },
+    {
+      "index": 344,
+      "start": 1538.14,
+      "end": 1542.372,
+      "duration": 4.232,
+      "text": "in 18.01 even though you didn't know that it was the most"
+    },
+    {
+      "index": 345,
+      "start": 1542.372,
+      "end": 1547.83,
+      "duration": 5.458,
+      "text": "important theoretical method. Okay, we're going to use it now"
+    },
+    {
+      "index": 346,
+      "start": 1547.83,
+      "end": 1551.431,
+      "duration": 3.601,
+      "text": "as a basis for Fourier series. Okay, so I'm going to integrate"
+    },
+    {
+      "index": 347,
+      "start": 1551.431,
+      "end": 1553.616,
+      "duration": 2.185,
+      "text": "by parts. Now, the first thing you do,"
+    },
+    {
+      "index": 348,
+      "start": 1553.616,
+      "end": 1556.922,
+      "duration": 3.306,
+      "text": "of course, when you integrate by parts is you just do the"
+    },
+    {
+      "index": 349,
+      "start": 1556.922,
+      "end": 1559.343,
+      "duration": 2.421,
+      "text": "integration. You don't do differentiation."
+    },
+    {
+      "index": 350,
+      "start": 1559.343,
+      "end": 1562.0,
+      "duration": 2.657,
+      "text": "So, the first thing looks like this."
+    },
+    {
+      "index": 351,
+      "start": 1562.0,
+      "end": 1568.021,
+      "duration": 6.021,
+      "text": "And, that's to be evaluated between negative pi and pi."
+    },
+    {
+      "index": 352,
+      "start": 1568.021,
+      "end": 1572.928,
+      "duration": 4.907,
+      "text": "In doing integration by parts between limits,"
+    },
+    {
+      "index": 353,
+      "start": 1572.928,
+      "end": 1576.496,
+      "duration": 3.568,
+      "text": "minus what you get by doing both."
+    },
+    {
+      "index": 354,
+      "start": 1576.496,
+      "end": 1580.399,
+      "duration": 3.903,
+      "text": "You do both, the integration and the"
+    },
+    {
+      "index": 355,
+      "start": 1580.399,
+      "end": 1584.971,
+      "duration": 4.572,
+      "text": "differentiation. And, again, evaluate that"
+    },
+    {
+      "index": 356,
+      "start": 1584.971,
+      "end": 1589.766,
+      "duration": 4.795,
+      "text": "between limits. Now, I'm just going to BS my"
+    },
+    {
+      "index": 357,
+      "start": 1589.766,
+      "end": 1594.158,
+      "duration": 4.392,
+      "text": "way through this. This is zero."
+    },
+    {
+      "index": 358,
+      "start": 1594.158,
+      "end": 1599.15,
+      "duration": 4.992,
+      "text": "I don't care what the un's, which un you picked and which"
+    },
+    {
+      "index": 359,
+      "start": 1599.15,
+      "end": 1603.161,
+      "duration": 4.011,
+      "text": "vm you picked. The answer here is always going"
+    },
+    {
+      "index": 360,
+      "start": 1603.161,
+      "end": 1606.727,
+      "duration": 3.566,
+      "text": "to be zero. Instead of wasting six boards"
+    },
+    {
+      "index": 361,
+      "start": 1606.727,
+      "end": 1611.54,
+      "duration": 4.813,
+      "text": "trying to write out the argument, let me wave my hands."
+    },
+    {
+      "index": 362,
+      "start": 1611.54,
+      "end": 1614.125,
+      "duration": 2.585,
+      "text": "Okay, it's clear, for example,"
+    },
+    {
+      "index": 363,
+      "start": 1614.125,
+      "end": 1617.601,
+      "duration": 3.476,
+      "text": "that a v is a sine, sine mt."
+    },
+    {
+      "index": 364,
+      "start": 1617.601,
+      "end": 1622.86,
+      "duration": 5.259,
+      "text": "Of course it's zero because the sine vanishes at both pi and"
+    },
+    {
+      "index": 365,
+      "start": 1622.86,
+      "end": 1626.81,
+      "duration": 3.95,
+      "text": "minus pi. If the un were a cosine,"
+    },
+    {
+      "index": 366,
+      "start": 1626.81,
+      "end": 1629.977,
+      "duration": 3.167,
+      "text": "after I differentiate it, it became a sine."
+    },
+    {
+      "index": 367,
+      "start": 1629.977,
+      "end": 1634.125,
+      "duration": 4.148,
+      "text": "And so, now it's this side guy that's zero at both ends."
+    },
+    {
+      "index": 368,
+      "start": 1634.125,
+      "end": 1638.65,
+      "duration": 4.525,
+      "text": "So, the only case in which we might have a little doubt is if"
+    },
+    {
+      "index": 369,
+      "start": 1638.65,
+      "end": 1641.893,
+      "duration": 3.243,
+      "text": "this is a cosine, and after differentiation,"
+    },
+    {
+      "index": 370,
+      "start": 1641.893,
+      "end": 1644.684,
+      "duration": 2.791,
+      "text": "this is also a cosine. In other words,"
+    },
+    {
+      "index": 371,
+      "start": 1644.684,
+      "end": 1648.681,
+      "duration": 3.997,
+      "text": "it might look like cosine, after, this cosine nt times"
+    },
+    {
+      "index": 372,
+      "start": 1648.681,
+      "end": 1654.511,
+      "duration": 5.83,
+      "text": "cosine mt. But, I claim that that's zero,"
+    },
+    {
+      "index": 373,
+      "start": 1654.511,
+      "end": 1655.181,
+      "duration": 0.67,
+      "text": "too. Why?"
+    },
+    {
+      "index": 374,
+      "start": 1655.181,
+      "end": 1659.619,
+      "duration": 4.438,
+      "text": "Because the cosines are even functions, and therefore,"
+    },
+    {
+      "index": 375,
+      "start": 1659.619,
+      "end": 1662.717,
+      "duration": 3.098,
+      "text": "they have the same value at both ends."
+    },
+    {
+      "index": 376,
+      "start": 1662.717,
+      "end": 1666.318,
+      "duration": 3.601,
+      "text": "So, if I subtract the value evaluated at pi,"
+    },
+    {
+      "index": 377,
+      "start": 1666.318,
+      "end": 1671.342,
+      "duration": 5.024,
+      "text": "and subtract the value of minus pi, again zero because I have"
+    },
+    {
+      "index": 378,
+      "start": 1671.342,
+      "end": 1676.282,
+      "duration": 4.94,
+      "text": "the same value at both ends. So, by this entirely convincing"
+    },
+    {
+      "index": 379,
+      "start": 1676.282,
+      "end": 1680.971,
+      "duration": 4.689,
+      "text": "argument, no matter what combination of sines and cosines"
+    },
+    {
+      "index": 380,
+      "start": 1680.971,
+      "end": 1687.0,
+      "duration": 6.029,
+      "text": "I have here, the answer to that part will always be zero."
+    },
+    {
+      "index": 381,
+      "start": 1687.0,
+      "end": 1691.327,
+      "duration": 4.327,
+      "text": "So, by calculation, but thought calculation;"
+    },
+    {
+      "index": 382,
+      "start": 1691.327,
+      "end": 1696.056,
+      "duration": 4.729,
+      "text": "it's just a waste of time to write anything out."
+    },
+    {
+      "index": 383,
+      "start": 1696.056,
+      "end": 1700.484,
+      "duration": 4.428,
+      "text": "You stare at it until you agree that it's so."
+    },
+    {
+      "index": 384,
+      "start": 1700.484,
+      "end": 1705.415,
+      "duration": 4.931,
+      "text": "And now, I've taken, by this integration by parts,"
+    },
+    {
+      "index": 385,
+      "start": 1705.415,
+      "end": 1710.345,
+      "duration": 4.93,
+      "text": "I've taken this highly un-symmetric expression and"
+    },
+    {
+      "index": 386,
+      "start": 1710.345,
+      "end": 1715.578,
+      "duration": 5.233,
+      "text": "turned it into something in which the u and the v are"
+    },
+    {
+      "index": 387,
+      "start": 1715.578,
+      "end": 1720.705,
+      "duration": 5.127,
+      "text": "treated exactly alike. Well, good, that's nice,"
+    },
+    {
+      "index": 388,
+      "start": 1720.705,
+      "end": 1723.334,
+      "duration": 2.629,
+      "text": "but why? Why did I go to this trouble?"
+    },
+    {
+      "index": 389,
+      "start": 1723.334,
+      "end": 1727.597,
+      "duration": 4.263,
+      "text": "Okay, now we're going to use the fact that this satisfies the"
+    },
+    {
+      "index": 390,
+      "start": 1727.597,
+      "end": 1730.226,
+      "duration": 2.629,
+      "text": "differential equation, in other words,"
+    },
+    {
+      "index": 391,
+      "start": 1730.226,
+      "end": 1733.921,
+      "duration": 3.695,
+      "text": "that u double prime is equal to minus n,"
+    },
+    {
+      "index": 392,
+      "start": 1733.921,
+      "end": 1736.834,
+      "duration": 2.913,
+      "text": "I'm sorry, I should have subscripted this."
+    },
+    {
+      "index": 393,
+      "start": 1736.834,
+      "end": 1740.031,
+      "duration": 3.197,
+      "text": "If that's the solution, then this is equal to,"
+    },
+    {
+      "index": 394,
+      "start": 1740.031,
+      "end": 1742.589,
+      "duration": 2.558,
+      "text": "times. You have to put in a subscript"
+    },
+    {
+      "index": 395,
+      "start": 1742.589,
+      "end": 1746.0,
+      "duration": 3.411,
+      "text": "otherwise. The n wouldn't matter."
+    },
+    {
+      "index": 396,
+      "start": 1746.0,
+      "end": 1750.071,
+      "duration": 4.071,
+      "text": "All right, I'm now going to take that expression,"
+    },
+    {
+      "index": 397,
+      "start": 1750.071,
+      "end": 1755.077,
+      "duration": 5.006,
+      "text": "and evaluate it differently. un double prime vm dt"
+    },
+    {
+      "index": 398,
+      "start": 1755.077,
+      "end": 1758.385,
+      "duration": 3.308,
+      "text": "is equal to, well, un double prime,"
+    },
+    {
+      "index": 399,
+      "start": 1758.385,
+      "end": 1762.966,
+      "duration": 4.581,
+      "text": "because it satisfies the differential equation is equal"
+    },
+    {
+      "index": 400,
+      "start": 1762.966,
+      "end": 1765.087,
+      "duration": 2.121,
+      "text": "to that. So, what is this?"
+    },
+    {
+      "index": 401,
+      "start": 1765.087,
+      "end": 1769.753,
+      "duration": 4.666,
+      "text": "This is minus n squared times the integral from"
+    },
+    {
+      "index": 402,
+      "start": 1769.753,
+      "end": 1773.57,
+      "duration": 3.817,
+      "text": "negative pi to pi, and I'm replacing un double"
+    },
+    {
+      "index": 403,
+      "start": 1773.57,
+      "end": 1779.0,
+      "duration": 5.43,
+      "text": "prime by minus n squared un."
+    },
+    {
+      "index": 404,
+      "start": 1779.0,
+      "end": 1783.187,
+      "duration": 4.187,
+      "text": "I pulled the minus n squared out."
+    },
+    {
+      "index": 405,
+      "start": 1783.187,
+      "end": 1787.987,
+      "duration": 4.8,
+      "text": "So, it's un here, and the other factor is vm dt."
+    },
+    {
+      "index": 406,
+      "start": 1787.987,
+      "end": 1790.642,
+      "duration": 2.655,
+      "text": "Now, that's the proof. Huh?"
+    },
+    {
+      "index": 407,
+      "start": 1790.642,
+      "end": 1794.012,
+      "duration": 3.37,
+      "text": "What do you mean that's the proof?"
+    },
+    {
+      "index": 408,
+      "start": 1794.012,
+      "end": 1799.936,
+      "duration": 5.924,
+      "text": "Okay, well, I'll first state it, why intuitively that's the"
+    },
+    {
+      "index": 409,
+      "start": 1799.936,
+      "end": 1806.189,
+      "duration": 6.253,
+      "text": "end of the argument. And then, I'll spell it out a"
+    },
+    {
+      "index": 410,
+      "start": 1806.189,
+      "end": 1811.357,
+      "duration": 5.168,
+      "text": "little more detail, but the more detail you make"
+    },
+    {
+      "index": 411,
+      "start": 1811.357,
+      "end": 1816.305,
+      "duration": 4.948,
+      "text": "for this, the more obscure it gets instead of,"
+    },
+    {
+      "index": 412,
+      "start": 1816.305,
+      "end": 1822.573,
+      "duration": 6.268,
+      "text": "look, I just showed you that this is symmetric in u and v,"
+    },
+    {
+      "index": 413,
+      "start": 1822.573,
+      "end": 1826.202,
+      "duration": 3.629,
+      "text": "after you massage it a little bit."
+    },
+    {
+      "index": 414,
+      "start": 1826.202,
+      "end": 1830.601,
+      "duration": 4.399,
+      "text": "Here, I'm calculating it a different way."
+    },
+    {
+      "index": 415,
+      "start": 1830.601,
+      "end": 1837.866,
+      "duration": 7.265,
+      "text": "Is this symmetric in u and v? Well, the answer is yes or no."
+    },
+    {
+      "index": 416,
+      "start": 1837.866,
+      "end": 1840.923,
+      "duration": 3.057,
+      "text": "Is this symmetric at u and v? No."
+    },
+    {
+      "index": 417,
+      "start": 1840.923,
+      "end": 1842.929,
+      "duration": 2.006,
+      "text": "Why? Because of the n."
+    },
+    {
+      "index": 418,
+      "start": 1842.929,
+      "end": 1846.656,
+      "duration": 3.727,
+      "text": "The n favors u. We have what is called a"
+    },
+    {
+      "index": 419,
+      "start": 1846.656,
+      "end": 1850.095,
+      "duration": 3.439,
+      "text": "paradox. This thing is symmetric in u"
+    },
+    {
+      "index": 420,
+      "start": 1850.095,
+      "end": 1855.732,
+      "duration": 5.637,
+      "text": "and v because I can show it is. And, it's not symmetric in u"
+    },
+    {
+      "index": 421,
+      "start": 1855.732,
+      "end": 1861.464,
+      "duration": 5.732,
+      "text": "and v because I can show it is. I can show it's not symmetric"
+    },
+    {
+      "index": 422,
+      "start": 1861.464,
+      "end": 1869.905,
+      "duration": 8.441,
+      "text": "because it favors the n. Now, there's only one possible"
+    },
+    {
+      "index": 423,
+      "start": 1869.905,
+      "end": 1879.389,
+      "duration": 9.484,
+      "text": "resolution of that paradox. Both would be symmetric if what"
+    },
+    {
+      "index": 424,
+      "start": 1879.389,
+      "end": 1882.169,
+      "duration": 2.78,
+      "text": "were true? Pardon?"
+    },
+    {
+      "index": 425,
+      "start": 1882.169,
+      "end": 1889.201,
+      "duration": 7.032,
+      "text": "Negative pi. All right, let me write it this"
+    },
+    {
+      "index": 426,
+      "start": 1889.201,
+      "end": 1892.403,
+      "duration": 3.202,
+      "text": "way. Okay, never mind."
+    },
+    {
+      "index": 427,
+      "start": 1892.403,
+      "end": 1897.44,
+      "duration": 5.037,
+      "text": "You see, the only way this can happen is if this expression is"
+    },
+    {
+      "index": 428,
+      "start": 1897.44,
+      "end": 1899.091,
+      "duration": 1.651,
+      "text": "zero. In other words,"
+    },
+    {
+      "index": 429,
+      "start": 1899.091,
+      "end": 1904.128,
+      "duration": 5.037,
+      "text": "the only way something can be both symmetric and not symmetric"
+    },
+    {
+      "index": 430,
+      "start": 1904.128,
+      "end": 1908.917,
+      "duration": 4.789,
+      "text": "is if it's zero all the time. And, that's what we're trying"
+    },
+    {
+      "index": 431,
+      "start": 1908.917,
+      "end": 1913.623,
+      "duration": 4.706,
+      "text": "to prove, that this is zero. But, instead of doing it that"
+    },
+    {
+      "index": 432,
+      "start": 1913.623,
+      "end": 1917.174,
+      "duration": 3.551,
+      "text": "way, let me show you. This is equal to that,"
+    },
+    {
+      "index": 433,
+      "start": 1917.174,
+      "end": 1920.889,
+      "duration": 3.715,
+      "text": "and therefore, two things according to Euclid,"
+    },
+    {
+      "index": 434,
+      "start": 1920.889,
+      "end": 1927.0,
+      "duration": 6.111,
+      "text": "two things equal to the same thing are equal to each other."
+    },
+    {
+      "index": 435,
+      "start": 1927.0,
+      "end": 1929.539,
+      "duration": 2.539,
+      "text": "So, this equals that, which, in turn,"
+    },
+    {
+      "index": 436,
+      "start": 1929.539,
+      "end": 1932.503,
+      "duration": 2.964,
+      "text": "therefore, equals what I would have gotten."
+    },
+    {
+      "index": 437,
+      "start": 1932.503,
+      "end": 1935.677,
+      "duration": 3.174,
+      "text": "I'm just saying the symmetry of different way,"
+    },
+    {
+      "index": 438,
+      "start": 1935.677,
+      "end": 1939.558,
+      "duration": 3.881,
+      "text": "what I would have gotten if I had done this calculation."
+    },
+    {
+      "index": 439,
+      "start": 1939.558,
+      "end": 1943.72,
+      "duration": 4.162,
+      "text": "And, that turns out to be minus m squared times the integral"
+    },
+    {
+      "index": 440,
+      "start": 1943.72,
+      "end": 1948.024,
+      "duration": 4.304,
+      "text": "from minus pi to pi of un vm dt."
+    },
+    {
+      "index": 441,
+      "start": 1948.024,
+      "end": 1953.155,
+      "duration": 5.131,
+      "text": "So, these two are equal because"
+    },
+    {
+      "index": 442,
+      "start": 1953.155,
+      "end": 1958.244,
+      "duration": 5.089,
+      "text": "they are both equal to this. This is equal to that."
+    },
+    {
+      "index": 443,
+      "start": 1958.244,
+      "end": 1962.926,
+      "duration": 4.682,
+      "text": "This equals that. Therefore, how can this equal"
+    },
+    {
+      "index": 444,
+      "start": 1962.926,
+      "end": 1966.183,
+      "duration": 3.257,
+      "text": "that unless the integral is zero?"
+    },
+    {
+      "index": 445,
+      "start": 1966.183,
+      "end": 1970.254,
+      "duration": 4.071,
+      "text": "How's that? Remember, m is different from"
+    },
+    {
+      "index": 446,
+      "start": 1970.254,
+      "end": 1972.9,
+      "duration": 2.646,
+      "text": "n. So, what this proves is,"
+    },
+    {
+      "index": 447,
+      "start": 1972.9,
+      "end": 1979.007,
+      "duration": 6.107,
+      "text": "therefore, the integral from negative pi to pi of un vm dt is"
+    },
+    {
+      "index": 448,
+      "start": 1979.007,
+      "end": 1985.012,
+      "duration": 6.005,
+      "text": "equal to zero,"
+    },
+    {
+      "index": 449,
+      "start": 1985.012,
+      "end": 1990.0,
+      "duration": 4.988,
+      "text": "at least if m is different from n."
+    },
+    {
+      "index": 450,
+      "start": 1990.0,
+      "end": 1992.805,
+      "duration": 2.805,
+      "text": "Now, there is one case I didn't include."
+    },
+    {
+      "index": 451,
+      "start": 1992.805,
+      "end": 1996.978,
+      "duration": 4.173,
+      "text": "Which case didn't I include? un times un is not supposed to"
+    },
+    {
+      "index": 452,
+      "start": 1996.978,
+      "end": 1998.776,
+      "duration": 1.798,
+      "text": "be zero. So, in that case,"
+    },
+    {
+      "index": 453,
+      "start": 1998.776,
+      "end": 2002.661,
+      "duration": 3.885,
+      "text": "I don't have to worry about, but there is a case that I"
+    },
+    {
+      "index": 454,
+      "start": 2002.661,
+      "end": 2004.028,
+      "duration": 1.367,
+      "text": "didn't. For example,"
+    },
+    {
+      "index": 455,
+      "start": 2004.028,
+      "end": 2008.417,
+      "duration": 4.389,
+      "text": "something like the cosine of nt times the sine of nt."
+    },
+    {
+      "index": 456,
+      "start": 2008.417,
+      "end": 2012.83,
+      "duration": 4.413,
+      "text": "Here, the m is the same as the"
+    },
+    {
+      "index": 457,
+      "start": 2012.83,
+      "end": 2014.15,
+      "duration": 1.32,
+      "text": "n. Nonetheless,"
+    },
+    {
+      "index": 458,
+      "start": 2014.15,
+      "end": 2019.811,
+      "duration": 5.661,
+      "text": "I am claiming that this is zero because these aren't the same"
+    },
+    {
+      "index": 459,
+      "start": 2019.811,
+      "end": 2022.169,
+      "duration": 2.358,
+      "text": "function. One is a cosine."
+    },
+    {
+      "index": 460,
+      "start": 2022.169,
+      "end": 2026.132,
+      "duration": 3.963,
+      "text": "Why is that zero? Can you see mentally that"
+    },
+    {
+      "index": 461,
+      "start": 2026.132,
+      "end": 2028.113,
+      "duration": 1.981,
+      "text": "that's zero? Mentally?"
+    },
+    {
+      "index": 462,
+      "start": 2028.113,
+      "end": 2032.075,
+      "duration": 3.962,
+      "text": "Well, this is trying to be in another life,"
+    },
+    {
+      "index": 463,
+      "start": 2032.075,
+      "end": 2037.358,
+      "duration": 5.283,
+      "text": "it's trying to be one half the sine of two nt, right?"
+    },
+    {
+      "index": 464,
+      "start": 2037.358,
+      "end": 2042.015,
+      "duration": 4.657,
+      "text": "And obviously the integral of"
+    },
+    {
+      "index": 465,
+      "start": 2042.015,
+      "end": 2046.255,
+      "duration": 4.24,
+      "text": "sine of two nt is zero between minus pi and pi"
+    },
+    {
+      "index": 466,
+      "start": 2046.255,
+      "end": 2049.73,
+      "duration": 3.475,
+      "text": "because you integrate it,"
+    },
+    {
+      "index": 467,
+      "start": 2049.73,
+      "end": 2053.692,
+      "duration": 3.962,
+      "text": "and it turns out to be zero. You integrate it to a cosine,"
+    },
+    {
+      "index": 468,
+      "start": 2053.692,
+      "end": 2056.264,
+      "duration": 2.572,
+      "text": "which has the same value of both ends."
+    },
+    {
+      "index": 469,
+      "start": 2056.264,
+      "end": 2058.419,
+      "duration": 2.155,
+      "text": "Well, that was a lot of talking."
+    },
+    {
+      "index": 470,
+      "start": 2058.419,
+      "end": 2062.311,
+      "duration": 3.892,
+      "text": "If this proof is too abstract for you, I won't ask you to"
+    },
+    {
+      "index": 471,
+      "start": 2062.311,
+      "end": 2065.786,
+      "duration": 3.475,
+      "text": "reproduce it on an exam. You can go with the proofs"
+    },
+    {
+      "index": 472,
+      "start": 2065.786,
+      "end": 2071.0,
+      "duration": 5.214,
+      "text": "using trigonometric identities, and/or complex exponentials."
+    },
+    {
+      "index": 473,
+      "start": 2071.0,
+      "end": 2074.709,
+      "duration": 3.709,
+      "text": "But, you ought to know at least one of those,"
+    },
+    {
+      "index": 474,
+      "start": 2074.709,
+      "end": 2079.261,
+      "duration": 4.552,
+      "text": "and for the problem set I'm asking you to fool around a"
+    },
+    {
+      "index": 475,
+      "start": 2079.261,
+      "end": 2081.959,
+      "duration": 2.698,
+      "text": "little with at least two of them."
+    },
+    {
+      "index": 476,
+      "start": 2081.959,
+      "end": 2087.101,
+      "duration": 5.142,
+      "text": "Okay, now, what has this got to do with the problem we started"
+    },
+    {
+      "index": 477,
+      "start": 2087.101,
+      "end": 2090.979,
+      "duration": 3.878,
+      "text": "with originally? The problem is to explain this"
+    },
+    {
+      "index": 478,
+      "start": 2090.979,
+      "end": 2093.593,
+      "duration": 2.614,
+      "text": "blue series. So, our problem is,"
+    },
+    {
+      "index": 479,
+      "start": 2093.593,
+      "end": 2097.386,
+      "duration": 3.793,
+      "text": "how, from this, am I going to get the terms of"
+    },
+    {
+      "index": 480,
+      "start": 2097.386,
+      "end": 2102.549,
+      "duration": 5.163,
+      "text": "this blue series? So, given f of t,"
+    },
+    {
+      "index": 481,
+      "start": 2102.549,
+      "end": 2106.568,
+      "duration": 4.019,
+      "text": "two pi s a period. Find the an and the bn."
+    },
+    {
+      "index": 482,
+      "start": 2106.568,
+      "end": 2111.176,
+      "duration": 4.608,
+      "text": "Okay, let's focus on the an. The bn is the same."
+    },
+    {
+      "index": 483,
+      "start": 2111.176,
+      "end": 2116.764,
+      "duration": 5.588,
+      "text": "Once you know how to do one, you know how to do the other."
+    },
+    {
+      "index": 484,
+      "start": 2116.764,
+      "end": 2121.274,
+      "duration": 4.51,
+      "text": "So, here's the idea. Again, it goes back to the"
+    },
+    {
+      "index": 485,
+      "start": 2121.274,
+      "end": 2126.372,
+      "duration": 5.098,
+      "text": "something you learned at the very beginning of 18.02,"
+    },
+    {
+      "index": 486,
+      "start": 2126.372,
+      "end": 2132.719,
+      "duration": 6.347,
+      "text": "but I don't think it took. But maybe some of you will"
+    },
+    {
+      "index": 487,
+      "start": 2132.719,
+      "end": 2136.904,
+      "duration": 4.185,
+      "text": "recognize it. So, what I'm going to do is"
+    },
+    {
+      "index": 488,
+      "start": 2136.904,
+      "end": 2140.88,
+      "duration": 3.976,
+      "text": "write it. Here's the term we're looking"
+    },
+    {
+      "index": 489,
+      "start": 2140.88,
+      "end": 2145.692,
+      "duration": 4.812,
+      "text": "for here, this one. Okay, and there are others."
+    },
+    {
+      "index": 490,
+      "start": 2145.692,
+      "end": 2150.295,
+      "duration": 4.603,
+      "text": "It's an infinite series that goes on forever."
+    },
+    {
+      "index": 491,
+      "start": 2150.295,
+      "end": 2156.258,
+      "duration": 5.963,
+      "text": "And now, to make the argument, I've got to put it one more"
+    },
+    {
+      "index": 492,
+      "start": 2156.258,
+      "end": 2160.024,
+      "duration": 3.766,
+      "text": "term here. So, I'm going to put in ak"
+    },
+    {
+      "index": 493,
+      "start": 2160.024,
+      "end": 2167.059,
+      "duration": 7.035,
+      "text": "cosine kt. I don't mean to imply that that"
+    },
+    {
+      "index": 494,
+      "start": 2167.059,
+      "end": 2171.993,
+      "duration": 4.934,
+      "text": "k could be more than n, in which case I should have"
+    },
+    {
+      "index": 495,
+      "start": 2171.993,
+      "end": 2176.532,
+      "duration": 4.539,
+      "text": "written it here. I could have also used equally"
+    },
+    {
+      "index": 496,
+      "start": 2176.532,
+      "end": 2182.355,
+      "duration": 5.823,
+      "text": "well bk sine kt here, and I could have put it"
+    },
+    {
+      "index": 497,
+      "start": 2182.355,
+      "end": 2185.809,
+      "duration": 3.454,
+      "text": "there. This is just some other term."
+    },
+    {
+      "index": 498,
+      "start": 2185.809,
+      "end": 2190.052,
+      "duration": 4.243,
+      "text": "This is the an, and this is the one we want."
+    },
+    {
+      "index": 499,
+      "start": 2190.052,
+      "end": 2195.445,
+      "duration": 5.393,
+      "text": "And, this is some other term. Okay, all right,"
+    },
+    {
+      "index": 500,
+      "start": 2195.445,
+      "end": 2198.516,
+      "duration": 3.071,
+      "text": "now, what you do is, to get the an,"
+    },
+    {
+      "index": 501,
+      "start": 2198.516,
+      "end": 2202.941,
+      "duration": 4.425,
+      "text": "what you do is you multiply everything through by,"
+    },
+    {
+      "index": 502,
+      "start": 2202.941,
+      "end": 2206.735,
+      "duration": 3.794,
+      "text": "you focus on the one you want, so it's dot,"
+    },
+    {
+      "index": 503,
+      "start": 2206.735,
+      "end": 2210.8,
+      "duration": 4.065,
+      "text": "dot, dot, dot, and you multiply by cosine"
+    },
+    {
+      "index": 504,
+      "start": 2210.8,
+      "end": 2214.593,
+      "duration": 3.793,
+      "text": "nt. So, it's ak cosine kt times"
+    },
+    {
+      "index": 505,
+      "start": 2214.593,
+      "end": 2217.483,
+      "duration": 2.89,
+      "text": "cosine nt."
+    },
+    {
+      "index": 506,
+      "start": 2217.483,
+      "end": 2222.0,
+      "duration": 4.517,
+      "text": "Of course, that gets multiplied, too."
+    },
+    {
+      "index": 507,
+      "start": 2222.0,
+      "end": 2226.753,
+      "duration": 4.753,
+      "text": "But, the one we want also gets multiplied, an."
+    },
+    {
+      "index": 508,
+      "start": 2226.753,
+      "end": 2231.401,
+      "duration": 4.648,
+      "text": "And, it becomes, when I multiply by cosine nt,"
+    },
+    {
+      "index": 509,
+      "start": 2231.401,
+      "end": 2236.26,
+      "duration": 4.859,
+      "text": "cosine squared nt,"
+    },
+    {
+      "index": 510,
+      "start": 2236.26,
+      "end": 2241.542,
+      "duration": 5.282,
+      "text": "and now, I hope you can see what's going to happen."
+    },
+    {
+      "index": 511,
+      "start": 2241.542,
+      "end": 2246.612,
+      "duration": 5.07,
+      "text": "Now, oops, I didn't multiply the f of t,"
+    },
+    {
+      "index": 512,
+      "start": 2246.612,
+      "end": 2250.204,
+      "duration": 3.592,
+      "text": "sorry. It's the oldest trick in the"
+    },
+    {
+      "index": 513,
+      "start": 2250.204,
+      "end": 2255.017,
+      "duration": 4.813,
+      "text": "book. I now integrate everything from"
+    },
+    {
+      "index": 514,
+      "start": 2255.017,
+      "end": 2258.327,
+      "duration": 3.31,
+      "text": "minus, so I don't endlessly recopy."
+    },
+    {
+      "index": 515,
+      "start": 2258.327,
+      "end": 2262.902,
+      "duration": 4.575,
+      "text": "I'll integrate by putting it up in yellow chalk,"
+    },
+    {
+      "index": 516,
+      "start": 2262.902,
+      "end": 2266.407,
+      "duration": 3.505,
+      "text": "and you are left to your own devices."
+    },
+    {
+      "index": 517,
+      "start": 2266.407,
+      "end": 2270.982,
+      "duration": 4.575,
+      "text": "This is definitely a colored pen type of course."
+    },
+    {
+      "index": 518,
+      "start": 2270.982,
+      "end": 2275.946,
+      "duration": 4.964,
+      "text": "Okay, so, you want to integrate from minus pi to pi?"
+    },
+    {
+      "index": 519,
+      "start": 2275.946,
+      "end": 2279.159,
+      "duration": 3.213,
+      "text": "Good. Just integrate everything on"
+    },
+    {
+      "index": 520,
+      "start": 2279.159,
+      "end": 2285.0,
+      "duration": 5.841,
+      "text": "the right hand side, also, from minus pi to pi."
+    },
+    {
+      "index": 521,
+      "start": 2285.0,
+      "end": 2290.723,
+      "duration": 5.723,
+      "text": "Plus, these are the guys just to indicate that I haven't,"
+    },
+    {
+      "index": 522,
+      "start": 2290.723,
+      "end": 2293.074,
+      "duration": 2.351,
+      "text": "they are out there, too."
+    },
+    {
+      "index": 523,
+      "start": 2293.074,
+      "end": 2296.549,
+      "duration": 3.475,
+      "text": "And now, what happens? What's this?"
+    },
+    {
+      "index": 524,
+      "start": 2296.549,
+      "end": 2300.024,
+      "duration": 3.475,
+      "text": "Zero. Every term is zero because of"
+    },
+    {
+      "index": 525,
+      "start": 2300.024,
+      "end": 2305.441,
+      "duration": 5.417,
+      "text": "the orthogonality relations. They are all of the form,"
+    },
+    {
+      "index": 526,
+      "start": 2305.441,
+      "end": 2311.165,
+      "duration": 5.724,
+      "text": "a constant times cosine nt times something different from"
+    },
+    {
+      "index": 527,
+      "start": 2311.165,
+      "end": 2315.458,
+      "duration": 4.293,
+      "text": "cosine nt, sine kt,"
+    },
+    {
+      "index": 528,
+      "start": 2315.458,
+      "end": 2322.0,
+      "duration": 6.542,
+      "text": "cosine kt, or even that constant term."
+    },
+    {
+      "index": 529,
+      "start": 2322.0,
+      "end": 2326.5,
+      "duration": 4.5,
+      "text": "All of the other terms are zero, and the only one which"
+    },
+    {
+      "index": 530,
+      "start": 2326.5,
+      "end": 2330.083,
+      "duration": 3.583,
+      "text": "survives is this one. And, what's its value?"
+    },
+    {
+      "index": 531,
+      "start": 2330.083,
+      "end": 2334.25,
+      "duration": 4.167,
+      "text": "The integral from minus pi to pi of cosine squared,"
+    },
+    {
+      "index": 532,
+      "start": 2334.25,
+      "end": 2337.583,
+      "duration": 3.333,
+      "text": "I put that up somewhere. It's right here,"
+    },
+    {
+      "index": 533,
+      "start": 2337.583,
+      "end": 2340.0,
+      "duration": 2.417,
+      "text": "down there? It is pi."
+    },
+    {
+      "index": 534,
+      "start": 2340.0,
+      "end": 2344.9,
+      "duration": 4.9,
+      "text": "So, this term turns into an pi, an, dragged along,"
+    },
+    {
+      "index": 535,
+      "start": 2344.9,
+      "end": 2350.8,
+      "duration": 5.9,
+      "text": "but this, the integral of the square of the cosine turns out"
+    },
+    {
+      "index": 536,
+      "start": 2350.8,
+      "end": 2354.699,
+      "duration": 3.899,
+      "text": "to be pi. And so, the end result is that"
+    },
+    {
+      "index": 537,
+      "start": 2354.699,
+      "end": 2358.199,
+      "duration": 3.5,
+      "text": "we get a formula for an. What is an?"
+    },
+    {
+      "index": 538,
+      "start": 2358.199,
+      "end": 2360.599,
+      "duration": 2.4,
+      "text": "an is, well, an times pi,"
+    },
+    {
+      "index": 539,
+      "start": 2360.599,
+      "end": 2365.8,
+      "duration": 5.201,
+      "text": "all these terms of zero, and nothing is left but this"
+    },
+    {
+      "index": 540,
+      "start": 2365.8,
+      "end": 2368.699,
+      "duration": 2.899,
+      "text": "left-hand side. And therefore,"
+    },
+    {
+      "index": 541,
+      "start": 2368.699,
+      "end": 2374.599,
+      "duration": 5.9,
+      "text": "an times pi is the integral from negative pi to pi of f of t"
+    },
+    {
+      "index": 542,
+      "start": 2374.599,
+      "end": 2380.8,
+      "duration": 6.201,
+      "text": "times cosine nt dt."
+    },
+    {
+      "index": 543,
+      "start": 2380.8,
+      "end": 2385.951,
+      "duration": 5.151,
+      "text": "But, that's an times pi."
+    },
+    {
+      "index": 544,
+      "start": 2385.951,
+      "end": 2390.424,
+      "duration": 4.473,
+      "text": "Therefore, if I want just an, I have to divide it by pi."
+    },
+    {
+      "index": 545,
+      "start": 2390.424,
+      "end": 2394.165,
+      "duration": 3.741,
+      "text": "And, that's the formula for the coefficient an."
+    },
+    {
+      "index": 546,
+      "start": 2394.165,
+      "end": 2397.987,
+      "duration": 3.822,
+      "text": "The argument is exactly the same if you want bn,"
+    },
+    {
+      "index": 547,
+      "start": 2397.987,
+      "end": 2402.298,
+      "duration": 4.311,
+      "text": "but I will write it down for the sake of completeness,"
+    },
+    {
+      "index": 548,
+      "start": 2402.298,
+      "end": 2405.469,
+      "duration": 3.171,
+      "text": "as they say, and to give you a chance to"
+    },
+    {
+      "index": 549,
+      "start": 2405.469,
+      "end": 2409.698,
+      "duration": 4.229,
+      "text": "digest what I've done, you know, 30 seconds to digest"
+    },
+    {
+      "index": 550,
+      "start": 2409.698,
+      "end": 2412.888,
+      "duration": 3.19,
+      "text": "it. Sine nt dt."
+    },
+    {
+      "index": 551,
+      "start": 2412.888,
+      "end": 2416.085,
+      "duration": 3.197,
+      "text": "And, that's because the argument is the same."
+    },
+    {
+      "index": 552,
+      "start": 2416.085,
+      "end": 2420.226,
+      "duration": 4.141,
+      "text": "And, the integral of sine squared nt is also"
+    },
+    {
+      "index": 553,
+      "start": 2420.226,
+      "end": 2422.26,
+      "duration": 2.034,
+      "text": "pi. So, there's no difference"
+    },
+    {
+      "index": 554,
+      "start": 2422.26,
+      "end": 2424.73,
+      "duration": 2.47,
+      "text": "there. Now, there's only one little"
+    },
+    {
+      "index": 555,
+      "start": 2424.73,
+      "end": 2427.564,
+      "duration": 2.834,
+      "text": "caution. It have to be a little careful."
+    },
+    {
+      "index": 556,
+      "start": 2427.564,
+      "end": 2429.67,
+      "duration": 2.106,
+      "text": "This is n one, two, and so on,"
+    },
+    {
+      "index": 557,
+      "start": 2429.67,
+      "end": 2433.012,
+      "duration": 3.342,
+      "text": "and this is also n one, two, and unfortunately,"
+    },
+    {
+      "index": 558,
+      "start": 2433.012,
+      "end": 2435.846,
+      "duration": 2.834,
+      "text": "the constant term is a slight exception."
+    },
+    {
+      "index": 559,
+      "start": 2435.846,
+      "end": 2439.405,
+      "duration": 3.559,
+      "text": "We better look at that specifically because if you"
+    },
+    {
+      "index": 560,
+      "start": 2439.405,
+      "end": 2442.529,
+      "duration": 3.124,
+      "text": "forget it, you can get them to gross, gross,"
+    },
+    {
+      "index": 561,
+      "start": 2442.529,
+      "end": 2448.479,
+      "duration": 5.95,
+      "text": "gross errors. How about the constant term?"
+    },
+    {
+      "index": 562,
+      "start": 2448.479,
+      "end": 2454.816,
+      "duration": 6.337,
+      "text": "Suppose I repeat the argument for that in miniature."
+    },
+    {
+      "index": 563,
+      "start": 2454.816,
+      "end": 2461.899,
+      "duration": 7.083,
+      "text": "There is a constant term plus other stuff, a typical other"
+    },
+    {
+      "index": 564,
+      "start": 2461.899,
+      "end": 2466.0,
+      "duration": 4.101,
+      "text": "stuff, an cosine, let's say."
+    },
+    {
+      "index": 565,
+      "start": 2466.0,
+      "end": 2470.067,
+      "duration": 4.067,
+      "text": "How am I going to get that constant term?"
+    },
+    {
+      "index": 566,
+      "start": 2470.067,
+      "end": 2476.067,
+      "duration": 6.0,
+      "text": "Well, if you think of this as sort of like a constant times,"
+    },
+    {
+      "index": 567,
+      "start": 2476.067,
+      "end": 2482.271,
+      "duration": 6.204,
+      "text": "the reason is the constant is because it's being multiplied by"
+    },
+    {
+      "index": 568,
+      "start": 2482.271,
+      "end": 2487.559,
+      "duration": 5.288,
+      "text": "cosine zero t. So, that suggests I should"
+    },
+    {
+      "index": 569,
+      "start": 2487.559,
+      "end": 2491.252,
+      "duration": 3.693,
+      "text": "multiply by one. In other words,"
+    },
+    {
+      "index": 570,
+      "start": 2491.252,
+      "end": 2496.013,
+      "duration": 4.761,
+      "text": "what I should do is simply integrate this from negative pi"
+    },
+    {
+      "index": 571,
+      "start": 2496.013,
+      "end": 2500.774,
+      "duration": 4.761,
+      "text": "to pi, f of t dt."
+    },
+    {
+      "index": 572,
+      "start": 2500.774,
+      "end": 2504.45,
+      "duration": 3.676,
+      "text": "What's the answer? Well, this integrated from"
+    },
+    {
+      "index": 573,
+      "start": 2504.45,
+      "end": 2509.294,
+      "duration": 4.844,
+      "text": "minus pi to pi is how much? It's c zero times two pi,"
+    },
+    {
+      "index": 574,
+      "start": 2509.294,
+      "end": 2512.719,
+      "duration": 3.425,
+      "text": "right? And, the other terms all give"
+    },
+    {
+      "index": 575,
+      "start": 2512.719,
+      "end": 2515.392,
+      "duration": 2.673,
+      "text": "me zero. Every other term is zero"
+    },
+    {
+      "index": 576,
+      "start": 2515.392,
+      "end": 2520.069,
+      "duration": 4.677,
+      "text": "because if you integrate cosine nt or sine nt"
+    },
+    {
+      "index": 577,
+      "start": 2520.069,
+      "end": 2526.0,
+      "duration": 5.931,
+      "text": "over a complete period, you always get zero."
+    },
+    {
+      "index": 578,
+      "start": 2526.0,
+      "end": 2530.012,
+      "duration": 4.012,
+      "text": "There is as much area above the axis or below."
+    },
+    {
+      "index": 579,
+      "start": 2530.012,
+      "end": 2533.312,
+      "duration": 3.3,
+      "text": "Or, you can look at two special cases."
+    },
+    {
+      "index": 580,
+      "start": 2533.312,
+      "end": 2538.394,
+      "duration": 5.082,
+      "text": "Anyway, you always get zero. It's the same thing with sine"
+    },
+    {
+      "index": 581,
+      "start": 2538.394,
+      "end": 2541.426,
+      "duration": 3.032,
+      "text": "here. So, the answer is that c zero"
+    },
+    {
+      "index": 582,
+      "start": 2541.426,
+      "end": 2544.904,
+      "duration": 3.478,
+      "text": "is equal to, is a little special."
+    },
+    {
+      "index": 583,
+      "start": 2544.904,
+      "end": 2550.165,
+      "duration": 5.261,
+      "text": "You don't just put n equals zero here because then"
+    },
+    {
+      "index": 584,
+      "start": 2550.165,
+      "end": 2556.79,
+      "duration": 6.625,
+      "text": "you would lose a factor of two. So, c zero should be one"
+    },
+    {
+      "index": 585,
+      "start": 2556.79,
+      "end": 2560.662,
+      "duration": 3.872,
+      "text": "over two pi times this integral."
+    },
+    {
+      "index": 586,
+      "start": 2560.662,
+      "end": 2564.893,
+      "duration": 4.231,
+      "text": "Now, there are two kinds of people in the world,"
+    },
+    {
+      "index": 587,
+      "start": 2564.893,
+      "end": 2570.475,
+      "duration": 5.582,
+      "text": "the ones who learn two separate formulas, and the ones who just"
+    },
+    {
+      "index": 588,
+      "start": 2570.475,
+      "end": 2575.877,
+      "duration": 5.402,
+      "text": "learn two separate notations. So, what most people do is they"
+    },
+    {
+      "index": 589,
+      "start": 2575.877,
+      "end": 2582.0,
+      "duration": 6.123,
+      "text": "say, look, I want this to be always the formula for a zero."
+    },
+    {
+      "index": 590,
+      "start": 2582.0,
+      "end": 2587.192,
+      "duration": 5.192,
+      "text": "That means, even when n is zero, I want this to be the"
+    },
+    {
+      "index": 591,
+      "start": 2587.192,
+      "end": 2590.406,
+      "duration": 3.214,
+      "text": "formula. Well, then you are not going to"
+    },
+    {
+      "index": 592,
+      "start": 2590.406,
+      "end": 2594.692,
+      "duration": 4.286,
+      "text": "get the right leading term. Instead of getting c zero,"
+    },
+    {
+      "index": 593,
+      "start": 2594.692,
+      "end": 2598.895,
+      "duration": 4.203,
+      "text": "you're going to get twice it, and therefore,"
+    },
+    {
+      "index": 594,
+      "start": 2598.895,
+      "end": 2601.697,
+      "duration": 2.802,
+      "text": "the formula is, the Fourier series,"
+    },
+    {
+      "index": 595,
+      "start": 2601.697,
+      "end": 2604.417,
+      "duration": 2.72,
+      "text": "therefore, isn't written this way."
+    },
+    {
+      "index": 596,
+      "start": 2604.417,
+      "end": 2608.456,
+      "duration": 4.039,
+      "text": "It's written-- If you want an a zero there,"
+    },
+    {
+      "index": 597,
+      "start": 2608.456,
+      "end": 2614.146,
+      "duration": 5.69,
+      "text": "calculate it by this formula. Then, you've got to write not c"
+    },
+    {
+      "index": 598,
+      "start": 2614.146,
+      "end": 2617.124,
+      "duration": 2.978,
+      "text": "zero, but a zero over two."
+    },
+    {
+      "index": 599,
+      "start": 2617.124,
+      "end": 2621.071,
+      "duration": 3.947,
+      "text": "I think you will be happiest if I have to give you advice."
+    },
+    {
+      "index": 600,
+      "start": 2621.071,
+      "end": 2625.087,
+      "duration": 4.016,
+      "text": "I think you'll be happiest remembering a single formula for"
+    },
+    {
+      "index": 601,
+      "start": 2625.087,
+      "end": 2628.065,
+      "duration": 2.978,
+      "text": "the an's and bn's, in which case you have to"
+    },
+    {
+      "index": 602,
+      "start": 2628.065,
+      "end": 2632.012,
+      "duration": 3.947,
+      "text": "remember that the constant leading term is a zero over two"
+    },
+    {
+      "index": 603,
+      "start": 2632.012,
+      "end": 2635.197,
+      "duration": 3.185,
+      "text": "if you insist on using that formula."
+    },
+    {
+      "index": 604,
+      "start": 2635.197,
+      "end": 2639.421,
+      "duration": 4.224,
+      "text": "Otherwise, you have to learn a special formula for the leading"
+    },
+    {
+      "index": 605,
+      "start": 2639.421,
+      "end": 2643.645,
+      "duration": 4.224,
+      "text": "coefficient, namely one over two pi instead of one"
+    },
+    {
+      "index": 606,
+      "start": 2643.645,
+      "end": 2648.073,
+      "duration": 4.428,
+      "text": "over pi. Well, am I really going to"
+    },
+    {
+      "index": 607,
+      "start": 2648.073,
+      "end": 2651.423,
+      "duration": 3.35,
+      "text": "calculate a Fourier series in four minutes?"
+    },
+    {
+      "index": 608,
+      "start": 2651.423,
+      "end": 2654.613,
+      "duration": 3.19,
+      "text": "Not very likely, but I'll give it a brave"
+    },
+    {
+      "index": 609,
+      "start": 2654.613,
+      "end": 2657.723,
+      "duration": 3.11,
+      "text": "college try. Anyway, you will be doing a"
+    },
+    {
+      "index": 610,
+      "start": 2657.723,
+      "end": 2661.552,
+      "duration": 3.829,
+      "text": "great deal of it, and your book has lots and lots"
+    },
+    {
+      "index": 611,
+      "start": 2661.552,
+      "end": 2663.944,
+      "duration": 2.392,
+      "text": "of examples, too many, in fact."
+    },
+    {
+      "index": 612,
+      "start": 2663.944,
+      "end": 2668.65,
+      "duration": 4.706,
+      "text": "It ruined all the good examples by calculating them for you."
+    },
+    {
+      "index": 613,
+      "start": 2668.65,
+      "end": 2674.225,
+      "duration": 5.575,
+      "text": "But, I will at least outline. Do you want me to spend three"
+    },
+    {
+      "index": 614,
+      "start": 2674.225,
+      "end": 2678.828,
+      "duration": 4.603,
+      "text": "minutes outlining a calculation just so you have something to"
+    },
+    {
+      "index": 615,
+      "start": 2678.828,
+      "end": 2682.127,
+      "duration": 3.299,
+      "text": "work on in the next boring class you are in?"
+    },
+    {
+      "index": 616,
+      "start": 2682.127,
+      "end": 2686.501,
+      "duration": 4.374,
+      "text": "Let's see, so I'll just put a few key things on the board."
+    },
+    {
+      "index": 617,
+      "start": 2686.501,
+      "end": 2689.57,
+      "duration": 3.069,
+      "text": "I would advise you to sit still for this."
+    },
+    {
+      "index": 618,
+      "start": 2689.57,
+      "end": 2694.097,
+      "duration": 4.527,
+      "text": "Otherwise you're going to hack it, and take twice as long as"
+    },
+    {
+      "index": 619,
+      "start": 2694.097,
+      "end": 2698.624,
+      "duration": 4.527,
+      "text": "you should, even though I knew you've been up to 3:00 in the"
+    },
+    {
+      "index": 620,
+      "start": 2698.624,
+      "end": 2703.173,
+      "duration": 4.549,
+      "text": "morning doing your problem set. Cheer up."
+    },
+    {
+      "index": 621,
+      "start": 2703.173,
+      "end": 2708.26,
+      "duration": 5.087,
+      "text": "I got up at 6:00 to make up the new one."
+    },
+    {
+      "index": 622,
+      "start": 2708.26,
+      "end": 2713.478,
+      "duration": 5.218,
+      "text": "So, we're even. This should be zero here."
+    },
+    {
+      "index": 623,
+      "start": 2713.478,
+      "end": 2717.391,
+      "duration": 3.913,
+      "text": "So, here's minus pi. Here's pi."
+    },
+    {
+      "index": 624,
+      "start": 2717.391,
+      "end": 2724.304,
+      "duration": 6.913,
+      "text": "Here's one, negative one. The function starts out like"
+    },
+    {
+      "index": 625,
+      "start": 2724.304,
+      "end": 2731.869,
+      "duration": 7.565,
+      "text": "that, and now to be periodic, it then has to continue on in"
+    },
+    {
+      "index": 626,
+      "start": 2731.869,
+      "end": 2737.774,
+      "duration": 5.905,
+      "text": "the same way. So, I think that's enough of"
+    },
+    {
+      "index": 627,
+      "start": 2737.774,
+      "end": 2742.234,
+      "duration": 4.46,
+      "text": "its path through life to indicate how it runs."
+    },
+    {
+      "index": 628,
+      "start": 2742.234,
+      "end": 2748.279,
+      "duration": 6.045,
+      "text": "This is a typical square-away function, sometimes it's called."
+    },
+    {
+      "index": 629,
+      "start": 2748.279,
+      "end": 2753.432,
+      "duration": 5.153,
+      "text": "It's an odd function. It goes equally above and below"
+    },
+    {
+      "index": 630,
+      "start": 2753.432,
+      "end": 2756.207,
+      "duration": 2.775,
+      "text": "the axis. Now, the integrals,"
+    },
+    {
+      "index": 631,
+      "start": 2756.207,
+      "end": 2760.765,
+      "duration": 4.558,
+      "text": "when you calculate them, the an is going to be,"
+    },
+    {
+      "index": 632,
+      "start": 2760.765,
+      "end": 2768.0,
+      "duration": 7.235,
+      "text": "okay, look, the an is going to turn out to be zero."
+    },
+    {
+      "index": 633,
+      "start": 2768.0,
+      "end": 2771.072,
+      "duration": 3.072,
+      "text": "Let me, instead, and you will get that with a"
+    },
+    {
+      "index": 634,
+      "start": 2771.072,
+      "end": 2774.004,
+      "duration": 2.932,
+      "text": "little hacking. I'm much more worried about"
+    },
+    {
+      "index": 635,
+      "start": 2774.004,
+      "end": 2777.985,
+      "duration": 3.981,
+      "text": "what you'll do with the bn's. Also, next Monday you'll see"
+    },
+    {
+      "index": 636,
+      "start": 2777.985,
+      "end": 2782.174,
+      "duration": 4.189,
+      "text": "intuitively that the an is zero, in which case you won't even"
+    },
+    {
+      "index": 637,
+      "start": 2782.174,
+      "end": 2785.456,
+      "duration": 3.282,
+      "text": "bother trying to calculate it. How about the bn,"
+    },
+    {
+      "index": 638,
+      "start": 2785.456,
+      "end": 2786.922,
+      "duration": 1.466,
+      "text": "though? Well, you see,"
+    },
+    {
+      "index": 639,
+      "start": 2786.922,
+      "end": 2789.506,
+      "duration": 2.584,
+      "text": "because the function is discontinuous,"
+    },
+    {
+      "index": 640,
+      "start": 2789.506,
+      "end": 2792.788,
+      "duration": 3.282,
+      "text": "so, this is my input. My f of t is that"
+    },
+    {
+      "index": 641,
+      "start": 2792.788,
+      "end": 2797.619,
+      "duration": 4.831,
+      "text": "orange discontinuous function. The bn is going to be,"
+    },
+    {
+      "index": 642,
+      "start": 2797.619,
+      "end": 2800.049,
+      "duration": 2.43,
+      "text": "I have to break it into two parts."
+    },
+    {
+      "index": 643,
+      "start": 2800.049,
+      "end": 2803.509,
+      "duration": 3.46,
+      "text": "In the first part, the function is negative one."
+    },
+    {
+      "index": 644,
+      "start": 2803.509,
+      "end": 2807.263,
+      "duration": 3.754,
+      "text": "And there, I will be integrating from minus pi to pi"
+    },
+    {
+      "index": 645,
+      "start": 2807.263,
+      "end": 2810.503,
+      "duration": 3.24,
+      "text": "of the function, which is minus one times the"
+    },
+    {
+      "index": 646,
+      "start": 2810.503,
+      "end": 2814.552,
+      "duration": 4.049,
+      "text": "sine of nt dt."
+    },
+    {
+      "index": 647,
+      "start": 2814.552,
+      "end": 2817.276,
+      "duration": 2.724,
+      "text": "And then, there's another part,"
+    },
+    {
+      "index": 648,
+      "start": 2817.276,
+      "end": 2822.704,
+      "duration": 5.428,
+      "text": "sorry, minus pi to zero. The other part I integrate from"
+    },
+    {
+      "index": 649,
+      "start": 2822.704,
+      "end": 2826.805,
+      "duration": 4.101,
+      "text": "zero to pi of what? Well, f of t is now plus one."
+    },
+    {
+      "index": 650,
+      "start": 2826.805,
+      "end": 2830.731,
+      "duration": 3.926,
+      "text": "And so, I simply integrate sine"
+    },
+    {
+      "index": 651,
+      "start": 2830.731,
+      "end": 2834.57,
+      "duration": 3.839,
+      "text": "nt dt. Now, each of these is a"
+    },
+    {
+      "index": 652,
+      "start": 2834.57,
+      "end": 2839.281,
+      "duration": 4.711,
+      "text": "perfectly simple integral. The only question is how you"
+    },
+    {
+      "index": 653,
+      "start": 2839.281,
+      "end": 2841.463,
+      "duration": 2.182,
+      "text": "combine them. So, this is,"
+    },
+    {
+      "index": 654,
+      "start": 2841.463,
+      "end": 2846.087,
+      "duration": 4.624,
+      "text": "after you calculate it, it will be (one minus cosine n"
+    },
+    {
+      "index": 655,
+      "start": 2846.087,
+      "end": 2849.402,
+      "duration": 3.315,
+      "text": "pi) all over n."
+    },
+    {
+      "index": 656,
+      "start": 2849.402,
+      "end": 2854.812,
+      "duration": 5.41,
+      "text": "And, this part will turn out to be (one minus cosine n pi) over"
+    },
+    {
+      "index": 657,
+      "start": 2854.812,
+      "end": 2860.961,
+      "duration": 6.149,
+      "text": "n also. And therefore,"
+    },
+    {
+      "index": 658,
+      "start": 2860.961,
+      "end": 2868.949,
+      "duration": 7.988,
+      "text": "the answer will be two minus two cosine, two over n times,"
+    },
+    {
+      "index": 659,
+      "start": 2868.949,
+      "end": 2875.394,
+      "duration": 6.445,
+      "text": "right, two minus, two times (one minus cosine n"
+    },
+    {
+      "index": 660,
+      "start": 2875.394,
+      "end": 2881.0,
+      "duration": 5.606,
+      "text": "pi) over n."
+    },
+    {
+      "index": 661,
+      "start": 2881.0,
+      "end": 2883.661,
+      "duration": 2.661,
+      "text": "No, okay, now, what's this?"
+    },
+    {
+      "index": 662,
+      "start": 2883.661,
+      "end": 2889.496,
+      "duration": 5.835,
+      "text": "This is minus one if n is odd. It's plus one if n is even."
+    },
+    {
+      "index": 663,
+      "start": 2889.496,
+      "end": 2895.637,
+      "duration": 6.141,
+      "text": "Now, either you can work with it this way, or you can combine"
+    },
+    {
+      "index": 664,
+      "start": 2895.637,
+      "end": 2899.732,
+      "duration": 4.095,
+      "text": "the two of them into a single expression."
+    },
+    {
+      "index": 665,
+      "start": 2899.732,
+      "end": 2906.078,
+      "duration": 6.346,
+      "text": "Its minus one to the nth power takes care of both of"
+    },
+    {
+      "index": 666,
+      "start": 2906.078,
+      "end": 2909.251,
+      "duration": 3.173,
+      "text": "them. But, the way the answer is"
+    },
+    {
+      "index": 667,
+      "start": 2909.251,
+      "end": 2914.165,
+      "duration": 4.914,
+      "text": "normally expressed, it would be minus two over n,"
+    },
+    {
+      "index": 668,
+      "start": 2914.165,
+      "end": 2917.236,
+      "duration": 3.071,
+      "text": "two over n times, if n is even,"
+    },
+    {
+      "index": 669,
+      "start": 2917.236,
+      "end": 2921.166,
+      "duration": 3.93,
+      "text": "I get zero. If n is odd,"
+    },
+    {
+      "index": 670,
+      "start": 2921.166,
+      "end": 2923.5,
+      "duration": 2.334,
+      "text": "I get two. So, times two,"
+    },
+    {
+      "index": 671,
+      "start": 2923.5,
+      "end": 2926.805,
+      "duration": 3.305,
+      "text": "if n is odd, and zero if n is even."
+    },
+    {
+      "index": 672,
+      "start": 2926.805,
+      "end": 2930.111,
+      "duration": 3.306,
+      "text": "So, it's four over n, or it's zero,"
+    },
+    {
+      "index": 673,
+      "start": 2930.111,
+      "end": 2935.944,
+      "duration": 5.833,
+      "text": "and the final series is a sum of those coefficients times the"
+    },
+    {
+      "index": 674,
+      "start": 2935.944,
+      "end": 2941.583,
+      "duration": 5.639,
+      "text": "appropriate-- cosine or sine? Sine terms because the cosine"
+    },
+    {
+      "index": 675,
+      "start": 2941.583,
+      "end": 2948.0,
+      "duration": 6.417,
+      "text": "terms were all coefficients, all turned out to be zero."
+    },
+    {
+      "index": 676,
+      "start": 2948.0,
+      "end": 2953.694,
+      "duration": 5.694,
+      "text": "I'm sorry I didn't have the chance to do that calculation in"
+    },
+    {
+      "index": 677,
+      "start": 2953.694,
+      "end": 2956.879,
+      "duration": 3.185,
+      "text": "detail. But, I think that's enough"
+    },
+    {
+      "index": 678,
+      "start": 2956.879,
+      "end": 2960.545,
+      "duration": 3.666,
+      "text": "sketch for you to be able to do the rest of it yourself."
+    }
+  ],
+  "course": {
+    "category": "Mathematics",
+    "title": "Differential Equations",
+    "source_url": "https://www.youtube.com/playlist?list=PL64BDFBDA2AF24F7E"
+  }
+}

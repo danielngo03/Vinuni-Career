@@ -1,0 +1,6157 @@
+{
+  "video": {
+    "id": "3eiio3Tw7UQ",
+    "title": "19. Weak Law of Large Numbers",
+    "url": "https://www.youtube.com/watch?v=3eiio3Tw7UQ",
+    "channel": "MIT OpenCourseWare",
+    "duration": 3012,
+    "language": "en"
+  },
+  "segment_count": 877,
+  "segments": [
+    {
+      "index": 0,
+      "start": 0.04,
+      "end": 2.46,
+      "duration": 2.42,
+      "text": "The following content is provided under a Creative"
+    },
+    {
+      "index": 1,
+      "start": 2.46,
+      "end": 3.87,
+      "duration": 1.41,
+      "text": "Commons license."
+    },
+    {
+      "index": 2,
+      "start": 3.87,
+      "end": 6.91,
+      "duration": 3.04,
+      "text": "Your support will help MIT OpenCourseWare continue to"
+    },
+    {
+      "index": 3,
+      "start": 6.91,
+      "end": 10.56,
+      "duration": 3.65,
+      "text": "offer high quality educational resources for free."
+    },
+    {
+      "index": 4,
+      "start": 10.56,
+      "end": 13.46,
+      "duration": 2.9,
+      "text": "To make a donation or view additional materials from"
+    },
+    {
+      "index": 5,
+      "start": 13.46,
+      "end": 17.39,
+      "duration": 3.93,
+      "text": "hundreds of MIT courses, visit MIT OpenCourseWare at"
+    },
+    {
+      "index": 6,
+      "start": 17.39,
+      "end": 18.64,
+      "duration": 1.25,
+      "text": "ocw.mit.edu."
+    },
+    {
+      "index": 7,
+      "start": 21.86,
+      "end": 25.13,
+      "duration": 3.27,
+      "text": "JOHN TSITSIKLIS: We're going to start today a new unit."
+    },
+    {
+      "index": 8,
+      "start": 25.13,
+      "end": 29.32,
+      "duration": 4.19,
+      "text": "so we will be talking about limit theorems."
+    },
+    {
+      "index": 9,
+      "start": 29.32,
+      "end": 33.58,
+      "duration": 4.26,
+      "text": "So just to introduce the topic, let's think of the"
+    },
+    {
+      "index": 10,
+      "start": 33.58,
+      "end": 35.56,
+      "duration": 1.98,
+      "text": "following situation."
+    },
+    {
+      "index": 11,
+      "start": 35.56,
+      "end": 37.58,
+      "duration": 2.02,
+      "text": "There's a population of penguins down"
+    },
+    {
+      "index": 12,
+      "start": 37.58,
+      "end": 38.97,
+      "duration": 1.39,
+      "text": "at the South Pole."
+    },
+    {
+      "index": 13,
+      "start": 38.97,
+      "end": 42.74,
+      "duration": 3.77,
+      "text": "And if you were to pick a penguin at random and measure"
+    },
+    {
+      "index": 14,
+      "start": 42.74,
+      "end": 46.93,
+      "duration": 4.19,
+      "text": "their height, the expected value of their height would be"
+    },
+    {
+      "index": 15,
+      "start": 46.93,
+      "end": 50.02,
+      "duration": 3.09,
+      "text": "the average of the heights of the different penguins in the"
+    },
+    {
+      "index": 16,
+      "start": 50.02,
+      "end": 50.97,
+      "duration": 0.95,
+      "text": "population."
+    },
+    {
+      "index": 17,
+      "start": 50.97,
+      "end": 53.43,
+      "duration": 2.46,
+      "text": "So suppose when you pick one, every"
+    },
+    {
+      "index": 18,
+      "start": 53.43,
+      "end": 55.21,
+      "duration": 1.78,
+      "text": "penguin is equally likely."
+    },
+    {
+      "index": 19,
+      "start": 55.21,
+      "end": 58.02,
+      "duration": 2.81,
+      "text": "Then the expected value is just the average of all the"
+    },
+    {
+      "index": 20,
+      "start": 58.02,
+      "end": 59.34,
+      "duration": 1.32,
+      "text": "penguins out there."
+    },
+    {
+      "index": 21,
+      "start": 59.34,
+      "end": 61.65,
+      "duration": 2.31,
+      "text": "So your boss asks you to find out what that the"
+    },
+    {
+      "index": 22,
+      "start": 61.65,
+      "end": 63.02,
+      "duration": 1.37,
+      "text": "expected value is."
+    },
+    {
+      "index": 23,
+      "start": 63.02,
+      "end": 64.98,
+      "duration": 1.96,
+      "text": "One way would be to go and measure"
+    },
+    {
+      "index": 24,
+      "start": 64.98,
+      "end": 66.54,
+      "duration": 1.56,
+      "text": "each and every penguin."
+    },
+    {
+      "index": 25,
+      "start": 66.54,
+      "end": 68.6,
+      "duration": 2.06,
+      "text": "That might be a little time consuming."
+    },
+    {
+      "index": 26,
+      "start": 68.6,
+      "end": 73.12,
+      "duration": 4.52,
+      "text": "So alternatively, what you can do is to go and pick penguins"
+    },
+    {
+      "index": 27,
+      "start": 73.12,
+      "end": 77.45,
+      "duration": 4.33,
+      "text": "at random, pick a few of them, let's say a number n of them."
+    },
+    {
+      "index": 28,
+      "start": 77.45,
+      "end": 80.42,
+      "duration": 2.97,
+      "text": "So you measure the height of each one."
+    },
+    {
+      "index": 29,
+      "start": 80.42,
+      "end": 85.92,
+      "duration": 5.5,
+      "text": "And then you calculate the average of the heights of"
+    },
+    {
+      "index": 30,
+      "start": 85.92,
+      "end": 89.05,
+      "duration": 3.13,
+      "text": "those penguins that you have collected."
+    },
+    {
+      "index": 31,
+      "start": 89.05,
+      "end": 93.1,
+      "duration": 4.05,
+      "text": "So this is your estimate of the expected value."
+    },
+    {
+      "index": 32,
+      "start": 93.1,
+      "end": 101.01,
+      "duration": 7.91,
+      "text": "Now, we called this the sample mean, which is the mean value,"
+    },
+    {
+      "index": 33,
+      "start": 101.01,
+      "end": 104.43,
+      "duration": 3.42,
+      "text": "but within the sample that you have collected."
+    },
+    {
+      "index": 34,
+      "start": 104.43,
+      "end": 108.09,
+      "duration": 3.66,
+      "text": "This is something that's sort of feels the same as the"
+    },
+    {
+      "index": 35,
+      "start": 108.09,
+      "end": 112.14,
+      "duration": 4.05,
+      "text": "expected value, which is again, the mean."
+    },
+    {
+      "index": 36,
+      "start": 112.14,
+      "end": 114.4,
+      "duration": 2.26,
+      "text": "But the expected value's a different kind of mean."
+    },
+    {
+      "index": 37,
+      "start": 114.4,
+      "end": 117.87,
+      "duration": 3.47,
+      "text": "The expected value is the mean over the entire population,"
+    },
+    {
+      "index": 38,
+      "start": 117.87,
+      "end": 121.68,
+      "duration": 3.81,
+      "text": "whereas the sample mean is the average over the smaller"
+    },
+    {
+      "index": 39,
+      "start": 121.68,
+      "end": 123.94,
+      "duration": 2.26,
+      "text": "sample that you have measured."
+    },
+    {
+      "index": 40,
+      "start": 123.94,
+      "end": 126.33,
+      "duration": 2.39,
+      "text": "The expected value is a number."
+    },
+    {
+      "index": 41,
+      "start": 126.33,
+      "end": 129.22,
+      "duration": 2.89,
+      "text": "The sample mean is a random variable."
+    },
+    {
+      "index": 42,
+      "start": 129.22,
+      "end": 131.72,
+      "duration": 2.5,
+      "text": "It's a random variable because the sample you have"
+    },
+    {
+      "index": 43,
+      "start": 131.72,
+      "end": 135.01,
+      "duration": 3.29,
+      "text": "collected is random."
+    },
+    {
+      "index": 44,
+      "start": 135.01,
+      "end": 138.52,
+      "duration": 3.51,
+      "text": "Now, we think that this is a reasonable way of estimating"
+    },
+    {
+      "index": 45,
+      "start": 138.52,
+      "end": 139.9,
+      "duration": 1.38,
+      "text": "the expectation."
+    },
+    {
+      "index": 46,
+      "start": 139.9,
+      "end": 145.71,
+      "duration": 5.81,
+      "text": "So in the limit as n goes to infinity, it's plausible that"
+    },
+    {
+      "index": 47,
+      "start": 145.71,
+      "end": 149.17,
+      "duration": 3.46,
+      "text": "the sample mean, the estimate that we are constructing,"
+    },
+    {
+      "index": 48,
+      "start": 149.17,
+      "end": 153.79,
+      "duration": 4.62,
+      "text": "should somehow get close to the expected value."
+    },
+    {
+      "index": 49,
+      "start": 153.79,
+      "end": 154.56,
+      "duration": 0.77,
+      "text": "What does this mean?"
+    },
+    {
+      "index": 50,
+      "start": 154.56,
+      "end": 156.16,
+      "duration": 1.6,
+      "text": "What does it mean to get close?"
+    },
+    {
+      "index": 51,
+      "start": 156.16,
+      "end": 157.62,
+      "duration": 1.46,
+      "text": "In what sense?"
+    },
+    {
+      "index": 52,
+      "start": 157.62,
+      "end": 159.44,
+      "duration": 1.82,
+      "text": "And is this statement true?"
+    },
+    {
+      "index": 53,
+      "start": 159.44,
+      "end": 164.16,
+      "duration": 4.72,
+      "text": "This is the kind of statement that we deal with when dealing"
+    },
+    {
+      "index": 54,
+      "start": 164.16,
+      "end": 165.71,
+      "duration": 1.55,
+      "text": "with limit theorems."
+    },
+    {
+      "index": 55,
+      "start": 165.71,
+      "end": 169.5,
+      "duration": 3.79,
+      "text": "That's the subject of limit theorems, when what happens if"
+    },
+    {
+      "index": 56,
+      "start": 169.5,
+      "end": 172.02,
+      "duration": 2.52,
+      "text": "you're dealing with lots and lots of random variables, and"
+    },
+    {
+      "index": 57,
+      "start": 172.02,
+      "end": 174.62,
+      "duration": 2.6,
+      "text": "perhaps take averages and so on."
+    },
+    {
+      "index": 58,
+      "start": 174.62,
+      "end": 177.28,
+      "duration": 2.66,
+      "text": "So why do we bother about this?"
+    },
+    {
+      "index": 59,
+      "start": 177.28,
+      "end": 181.2,
+      "duration": 3.92,
+      "text": "Well, if you're in the sampling business, it would be"
+    },
+    {
+      "index": 60,
+      "start": 181.2,
+      "end": 184.87,
+      "duration": 3.67,
+      "text": "reassuring to know that this particular way of estimating"
+    },
+    {
+      "index": 61,
+      "start": 184.87,
+      "end": 186.88,
+      "duration": 2.01,
+      "text": "the expected value actually gets you"
+    },
+    {
+      "index": 62,
+      "start": 186.88,
+      "end": 188.85,
+      "duration": 1.97,
+      "text": "close to the true answer."
+    },
+    {
+      "index": 63,
+      "start": 188.85,
+      "end": 191.89,
+      "duration": 3.04,
+      "text": "There's also a higher level reason, which is a little more"
+    },
+    {
+      "index": 64,
+      "start": 191.89,
+      "end": 193.66,
+      "duration": 1.77,
+      "text": "abstract and mathematical."
+    },
+    {
+      "index": 65,
+      "start": 193.66,
+      "end": 197.11,
+      "duration": 3.45,
+      "text": "So probability problems are easy to deal with if you're"
+    },
+    {
+      "index": 66,
+      "start": 197.11,
+      "end": 200.04,
+      "duration": 2.93,
+      "text": "having in your hands one or two random variables."
+    },
+    {
+      "index": 67,
+      "start": 200.04,
+      "end": 203.52,
+      "duration": 3.48,
+      "text": "You can write down their mass functions, joints density"
+    },
+    {
+      "index": 68,
+      "start": 203.52,
+      "end": 204.93,
+      "duration": 1.41,
+      "text": "functions, and so on."
+    },
+    {
+      "index": 69,
+      "start": 204.93,
+      "end": 207.5,
+      "duration": 2.57,
+      "text": "You can calculate on paper or on a computer,"
+    },
+    {
+      "index": 70,
+      "start": 207.5,
+      "end": 209.43,
+      "duration": 1.93,
+      "text": "you can get the answers."
+    },
+    {
+      "index": 71,
+      "start": 209.43,
+      "end": 213.51,
+      "duration": 4.08,
+      "text": "Probability problems become computationally intractable if"
+    },
+    {
+      "index": 72,
+      "start": 213.51,
+      "end": 216.76,
+      "duration": 3.25,
+      "text": "you're dealing, let's say, with 100 random variables and"
+    },
+    {
+      "index": 73,
+      "start": 216.76,
+      "end": 220.28,
+      "duration": 3.52,
+      "text": "you're trying to get the exact answers for anything."
+    },
+    {
+      "index": 74,
+      "start": 220.28,
+      "end": 223.05,
+      "duration": 2.77,
+      "text": "So in principle, the same formulas that we have, they"
+    },
+    {
+      "index": 75,
+      "start": 223.05,
+      "end": 224.23,
+      "duration": 1.18,
+      "text": "still apply."
+    },
+    {
+      "index": 76,
+      "start": 224.23,
+      "end": 227.36,
+      "duration": 3.13,
+      "text": "But they involve summations over large ranges of"
+    },
+    {
+      "index": 77,
+      "start": 227.36,
+      "end": 228.83,
+      "duration": 1.47,
+      "text": "combinations of indices."
+    },
+    {
+      "index": 78,
+      "start": 228.83,
+      "end": 231.31,
+      "duration": 2.48,
+      "text": "And that makes life extremely difficult."
+    },
+    {
+      "index": 79,
+      "start": 231.31,
+      "end": 235.1,
+      "duration": 3.79,
+      "text": "But when you push the envelope and you go to a situation"
+    },
+    {
+      "index": 80,
+      "start": 235.1,
+      "end": 238.48,
+      "duration": 3.38,
+      "text": "where you're dealing with a very, very large number of"
+    },
+    {
+      "index": 81,
+      "start": 238.48,
+      "end": 242.13,
+      "duration": 3.65,
+      "text": "variables, then you can start taking limits."
+    },
+    {
+      "index": 82,
+      "start": 242.13,
+      "end": 245.2,
+      "duration": 3.07,
+      "text": "And when you take limits, wonderful things happen."
+    },
+    {
+      "index": 83,
+      "start": 245.2,
+      "end": 248.03,
+      "duration": 2.83,
+      "text": "Many formulas start simplifying, and you can"
+    },
+    {
+      "index": 84,
+      "start": 248.03,
+      "end": 251.77,
+      "duration": 3.74,
+      "text": "actually get useful answers by considering those limits."
+    },
+    {
+      "index": 85,
+      "start": 251.77,
+      "end": 255.45,
+      "duration": 3.68,
+      "text": "And that's sort of the big reason why looking at limit"
+    },
+    {
+      "index": 86,
+      "start": 255.45,
+      "end": 257.82,
+      "duration": 2.37,
+      "text": "theorems is a useful thing to do."
+    },
+    {
+      "index": 87,
+      "start": 257.82,
+      "end": 260.99,
+      "duration": 3.17,
+      "text": "So what we're going to do today, first we're going to"
+    },
+    {
+      "index": 88,
+      "start": 260.99,
+      "end": 267.11,
+      "duration": 6.12,
+      "text": "start with a useful, simple tool that allows us to relates"
+    },
+    {
+      "index": 89,
+      "start": 267.11,
+      "end": 270.29,
+      "duration": 3.18,
+      "text": "probabilities with expected values."
+    },
+    {
+      "index": 90,
+      "start": 270.29,
+      "end": 273.23,
+      "duration": 2.94,
+      "text": "The Markov inequality is the first inequality we're going"
+    },
+    {
+      "index": 91,
+      "start": 273.23,
+      "end": 273.84,
+      "duration": 0.61,
+      "text": "to write down."
+    },
+    {
+      "index": 92,
+      "start": 273.84,
+      "end": 277.65,
+      "duration": 3.81,
+      "text": "And then using that, we're going to get the Chebyshev's"
+    },
+    {
+      "index": 93,
+      "start": 277.65,
+      "end": 279.76,
+      "duration": 2.11,
+      "text": "inequality, a related inequality."
+    },
+    {
+      "index": 94,
+      "start": 279.76,
+      "end": 283.76,
+      "duration": 4.0,
+      "text": "Then we need to define what do we mean by convergence when we"
+    },
+    {
+      "index": 95,
+      "start": 283.76,
+      "end": 285.27,
+      "duration": 1.51,
+      "text": "talk about random variables."
+    },
+    {
+      "index": 96,
+      "start": 285.27,
+      "end": 288.31,
+      "duration": 3.04,
+      "text": "It's a notion that's a generalization of the notion"
+    },
+    {
+      "index": 97,
+      "start": 288.31,
+      "end": 291.0,
+      "duration": 2.69,
+      "text": "of the usual convergence of limits of"
+    },
+    {
+      "index": 98,
+      "start": 291.0,
+      "end": 292.69,
+      "duration": 1.69,
+      "text": "a sequence of numbers."
+    },
+    {
+      "index": 99,
+      "start": 292.69,
+      "end": 295.71,
+      "duration": 3.02,
+      "text": "And once we have our notion of convergence, we're going to"
+    },
+    {
+      "index": 100,
+      "start": 295.71,
+      "end": 300.86,
+      "duration": 5.15,
+      "text": "see that, indeed, the sample mean converges to the true"
+    },
+    {
+      "index": 101,
+      "start": 300.86,
+      "end": 304.38,
+      "duration": 3.52,
+      "text": "mean, converges to the expected value of the X's."
+    },
+    {
+      "index": 102,
+      "start": 304.38,
+      "end": 308.84,
+      "duration": 4.46,
+      "text": "And this statement is called the weak law of large numbers."
+    },
+    {
+      "index": 103,
+      "start": 308.84,
+      "end": 311.65,
+      "duration": 2.81,
+      "text": "The reason it's called the weak law is because there's"
+    },
+    {
+      "index": 104,
+      "start": 311.65,
+      "end": 314.64,
+      "duration": 2.99,
+      "text": "also a strong law, which is a statement with the same"
+    },
+    {
+      "index": 105,
+      "start": 314.64,
+      "end": 316.57,
+      "duration": 1.93,
+      "text": "flavor, but with a somewhat different"
+    },
+    {
+      "index": 106,
+      "start": 316.57,
+      "end": 318.41,
+      "duration": 1.84,
+      "text": "mathematical content."
+    },
+    {
+      "index": 107,
+      "start": 318.41,
+      "end": 320.79,
+      "duration": 2.38,
+      "text": "But it's a little more abstract, and we will not be"
+    },
+    {
+      "index": 108,
+      "start": 320.79,
+      "end": 321.68,
+      "duration": 0.89,
+      "text": "getting into this."
+    },
+    {
+      "index": 109,
+      "start": 321.68,
+      "end": 326.07,
+      "duration": 4.39,
+      "text": "So the weak law is all that you're going to get."
+    },
+    {
+      "index": 110,
+      "start": 326.07,
+      "end": 328.57,
+      "duration": 2.5,
+      "text": "All right."
+    },
+    {
+      "index": 111,
+      "start": 328.57,
+      "end": 331.05,
+      "duration": 2.48,
+      "text": "So now we start our digression."
+    },
+    {
+      "index": 112,
+      "start": 331.05,
+      "end": 338.22,
+      "duration": 7.17,
+      "text": "And our first tool will be the so-called Markov inequality."
+    },
+    {
+      "index": 113,
+      "start": 345.05,
+      "end": 348.04,
+      "duration": 2.99,
+      "text": "So let's take a random variable that's always"
+    },
+    {
+      "index": 114,
+      "start": 348.04,
+      "end": 348.87,
+      "duration": 0.83,
+      "text": "non-negative."
+    },
+    {
+      "index": 115,
+      "start": 348.87,
+      "end": 351.79,
+      "duration": 2.92,
+      "text": "No matter what, it gets no negative values."
+    },
+    {
+      "index": 116,
+      "start": 351.79,
+      "end": 353.71,
+      "duration": 1.92,
+      "text": "To keep things simple, let's assume it's a"
+    },
+    {
+      "index": 117,
+      "start": 353.71,
+      "end": 355.5,
+      "duration": 1.79,
+      "text": "discrete random variable."
+    },
+    {
+      "index": 118,
+      "start": 355.5,
+      "end": 359.77,
+      "duration": 4.27,
+      "text": "So the expected value is the sum over all possible values"
+    },
+    {
+      "index": 119,
+      "start": 359.77,
+      "end": 361.46,
+      "duration": 1.69,
+      "text": "that a random variable can take."
+    },
+    {
+      "index": 120,
+      "start": 364.44,
+      "end": 366.6,
+      "duration": 2.16,
+      "text": "The values of the random variables that can take"
+    },
+    {
+      "index": 121,
+      "start": 366.6,
+      "end": 370.85,
+      "duration": 4.25,
+      "text": "weighted according to their corresponding probabilities."
+    },
+    {
+      "index": 122,
+      "start": 370.85,
+      "end": 373.7,
+      "duration": 2.85,
+      "text": "Now, this is a sum over all x's."
+    },
+    {
+      "index": 123,
+      "start": 373.7,
+      "end": 376.64,
+      "duration": 2.94,
+      "text": "But x takes non-negative values."
+    },
+    {
+      "index": 124,
+      "start": 376.64,
+      "end": 379.78,
+      "duration": 3.14,
+      "text": "And the PMF is also non-negative."
+    },
+    {
+      "index": 125,
+      "start": 379.78,
+      "end": 384.31,
+      "duration": 4.53,
+      "text": "So if I take a sum over fewer things, I'm going to get a"
+    },
+    {
+      "index": 126,
+      "start": 384.31,
+      "end": 385.55,
+      "duration": 1.24,
+      "text": "smaller value."
+    },
+    {
+      "index": 127,
+      "start": 385.55,
+      "end": 389.18,
+      "duration": 3.63,
+      "text": "So the sum when I add over everything is less than or"
+    },
+    {
+      "index": 128,
+      "start": 389.18,
+      "end": 393.255,
+      "duration": 4.075,
+      "text": "equal to the sum that I will get if I only add those terms"
+    },
+    {
+      "index": 129,
+      "start": 393.255,
+      "end": 395.62,
+      "duration": 2.365,
+      "text": "that are bigger than a certain constant."
+    },
+    {
+      "index": 130,
+      "start": 398.6,
+      "end": 405.14,
+      "duration": 6.54,
+      "text": "Now, if I'm adding over x's that are bigger than a, the x"
+    },
+    {
+      "index": 131,
+      "start": 405.14,
+      "end": 408.63,
+      "duration": 3.49,
+      "text": "that shows up up there will always be larger"
+    },
+    {
+      "index": 132,
+      "start": 408.63,
+      "end": 410.49,
+      "duration": 1.86,
+      "text": "than or equal to a."
+    },
+    {
+      "index": 133,
+      "start": 410.49,
+      "end": 412.37,
+      "duration": 1.88,
+      "text": "So we get this inequality."
+    },
+    {
+      "index": 134,
+      "start": 418.17,
+      "end": 419.98,
+      "duration": 1.81,
+      "text": "And now, a is a constant."
+    },
+    {
+      "index": 135,
+      "start": 419.98,
+      "end": 422.87,
+      "duration": 2.89,
+      "text": "I can pull it outside the summation."
+    },
+    {
+      "index": 136,
+      "start": 422.87,
+      "end": 425.32,
+      "duration": 2.45,
+      "text": "And then I'm left with the probabilities of all the x's"
+    },
+    {
+      "index": 137,
+      "start": 425.32,
+      "end": 426.99,
+      "duration": 1.67,
+      "text": "that are bigger than a."
+    },
+    {
+      "index": 138,
+      "start": 426.99,
+      "end": 428.85,
+      "duration": 1.86,
+      "text": "And that's just the probability of"
+    },
+    {
+      "index": 139,
+      "start": 428.85,
+      "end": 430.25,
+      "duration": 1.4,
+      "text": "being bigger than a."
+    },
+    {
+      "index": 140,
+      "start": 435.54,
+      "end": 438.14,
+      "duration": 2.6,
+      "text": "OK, so that's the Markov inequality."
+    },
+    {
+      "index": 141,
+      "start": 438.14,
+      "end": 443.8,
+      "duration": 5.66,
+      "text": "Basically tells us that the expected value is larger than"
+    },
+    {
+      "index": 142,
+      "start": 443.8,
+      "end": 446.24,
+      "duration": 2.44,
+      "text": "or equal to this number."
+    },
+    {
+      "index": 143,
+      "start": 446.24,
+      "end": 450.26,
+      "duration": 4.02,
+      "text": "It relates expected values to probabilities."
+    },
+    {
+      "index": 144,
+      "start": 450.26,
+      "end": 454.66,
+      "duration": 4.4,
+      "text": "It tells us that if the expected value is small, then"
+    },
+    {
+      "index": 145,
+      "start": 454.66,
+      "end": 459.25,
+      "duration": 4.59,
+      "text": "the probability that x is big is also going to be small."
+    },
+    {
+      "index": 146,
+      "start": 459.25,
+      "end": 462.24,
+      "duration": 2.99,
+      "text": "So it's translates a statement about smallness of expected"
+    },
+    {
+      "index": 147,
+      "start": 462.24,
+      "end": 466.205,
+      "duration": 3.965,
+      "text": "values to a statement about smallness of probabilities."
+    },
+    {
+      "index": 148,
+      "start": 469.02,
+      "end": 469.93,
+      "duration": 0.91,
+      "text": "OK."
+    },
+    {
+      "index": 149,
+      "start": 469.93,
+      "end": 474.21,
+      "duration": 4.28,
+      "text": "What we actually need is a somewhat different version of"
+    },
+    {
+      "index": 150,
+      "start": 474.21,
+      "end": 477.24,
+      "duration": 3.03,
+      "text": "this same statement."
+    },
+    {
+      "index": 151,
+      "start": 477.24,
+      "end": 483.01,
+      "duration": 5.77,
+      "text": "And what we're going to do is to apply this inequality to a"
+    },
+    {
+      "index": 152,
+      "start": 483.01,
+      "end": 488.15,
+      "duration": 5.14,
+      "text": "non-negative random variable of a special type."
+    },
+    {
+      "index": 153,
+      "start": 488.15,
+      "end": 493.33,
+      "duration": 5.18,
+      "text": "And you can think of applying this same calculation to a"
+    },
+    {
+      "index": 154,
+      "start": 493.33,
+      "end": 498.8,
+      "duration": 5.47,
+      "text": "random variable of this form, (X minus mu)-squared, where mu"
+    },
+    {
+      "index": 155,
+      "start": 498.8,
+      "end": 501.87,
+      "duration": 3.07,
+      "text": "is the expected value of X."
+    },
+    {
+      "index": 156,
+      "start": 501.87,
+      "end": 504.075,
+      "duration": 2.205,
+      "text": "Now, this is a non-negative random variable."
+    },
+    {
+      "index": 157,
+      "start": 515.419,
+      "end": 517.919,
+      "duration": 2.5,
+      "text": "So, the expected value of this random variable, which is the"
+    },
+    {
+      "index": 158,
+      "start": 517.919,
+      "end": 522.22,
+      "duration": 4.301,
+      "text": "variance, by following the same thinking as we had in"
+    },
+    {
+      "index": 159,
+      "start": 522.22,
+      "end": 532.88,
+      "duration": 10.66,
+      "text": "that derivation up to there, is bigger than the probability"
+    },
+    {
+      "index": 160,
+      "start": 532.88,
+      "end": 538.21,
+      "duration": 5.33,
+      "text": "that this random variable is bigger than some--"
+    },
+    {
+      "index": 161,
+      "start": 538.21,
+      "end": 544.76,
+      "duration": 6.55,
+      "text": "let me use a-squared instead of an a"
+    },
+    {
+      "index": 162,
+      "start": 544.76,
+      "end": 546.585,
+      "duration": 1.825,
+      "text": "times the value a-squared."
+    },
+    {
+      "index": 163,
+      "start": 552.42,
+      "end": 556.31,
+      "duration": 3.89,
+      "text": "So now of course, this probability is the same as the"
+    },
+    {
+      "index": 164,
+      "start": 556.31,
+      "end": 563.44,
+      "duration": 7.13,
+      "text": "probability that the absolute value of X minus mu is bigger"
+    },
+    {
+      "index": 165,
+      "start": 563.44,
+      "end": 567.19,
+      "duration": 3.75,
+      "text": "than a times a-squared."
+    },
+    {
+      "index": 166,
+      "start": 567.19,
+      "end": 574.86,
+      "duration": 7.67,
+      "text": "And this side is equal to the variance of X. So this relates"
+    },
+    {
+      "index": 167,
+      "start": 574.86,
+      "end": 580.89,
+      "duration": 6.03,
+      "text": "the variance of X to the probability that our random"
+    },
+    {
+      "index": 168,
+      "start": 580.89,
+      "end": 585.2,
+      "duration": 4.31,
+      "text": "variable is far away from its mean."
+    },
+    {
+      "index": 169,
+      "start": 585.2,
+      "end": 590.59,
+      "duration": 5.39,
+      "text": "If the variance is small, then it means that the probability"
+    },
+    {
+      "index": 170,
+      "start": 590.59,
+      "end": 594.635,
+      "duration": 4.045,
+      "text": "of being far away from the mean is also small."
+    },
+    {
+      "index": 171,
+      "start": 597.24,
+      "end": 602.22,
+      "duration": 4.98,
+      "text": "So I derived this by applying the Markov inequality to this"
+    },
+    {
+      "index": 172,
+      "start": 602.22,
+      "end": 604.95,
+      "duration": 2.73,
+      "text": "particular non-negative random variable."
+    },
+    {
+      "index": 173,
+      "start": 604.95,
+      "end": 609.5,
+      "duration": 4.55,
+      "text": "Or just to reinforce, perhaps, the message, and increase your"
+    },
+    {
+      "index": 174,
+      "start": 609.5,
+      "end": 613.45,
+      "duration": 3.95,
+      "text": "confidence in this inequality, let's just look at the"
+    },
+    {
+      "index": 175,
+      "start": 613.45,
+      "end": 616.98,
+      "duration": 3.53,
+      "text": "derivation once more, where I'm going, here, to start from"
+    },
+    {
+      "index": 176,
+      "start": 616.98,
+      "end": 620.89,
+      "duration": 3.91,
+      "text": "first principles, but use the same idea as the one that was"
+    },
+    {
+      "index": 177,
+      "start": 620.89,
+      "end": 623.48,
+      "duration": 2.59,
+      "text": "used in the proof out here."
+    },
+    {
+      "index": 178,
+      "start": 623.48,
+      "end": 623.685,
+      "duration": 0.205,
+      "text": "Ok."
+    },
+    {
+      "index": 179,
+      "start": 623.685,
+      "end": 626.92,
+      "duration": 3.235,
+      "text": "So just for variety, now let's think of X as being a"
+    },
+    {
+      "index": 180,
+      "start": 626.92,
+      "end": 628.76,
+      "duration": 1.84,
+      "text": "continuous random variable."
+    },
+    {
+      "index": 181,
+      "start": 628.76,
+      "end": 631.52,
+      "duration": 2.76,
+      "text": "The derivation is the same whether it's discrete or"
+    },
+    {
+      "index": 182,
+      "start": 631.52,
+      "end": 632.51,
+      "duration": 0.99,
+      "text": "continuous."
+    },
+    {
+      "index": 183,
+      "start": 632.51,
+      "end": 635.99,
+      "duration": 3.48,
+      "text": "So by definition, the variance is the integral, is this"
+    },
+    {
+      "index": 184,
+      "start": 635.99,
+      "end": 638.13,
+      "duration": 2.14,
+      "text": "particular integral."
+    },
+    {
+      "index": 185,
+      "start": 638.13,
+      "end": 643.92,
+      "duration": 5.79,
+      "text": "Now, the integral is going to become smaller if I integrate,"
+    },
+    {
+      "index": 186,
+      "start": 643.92,
+      "end": 647.13,
+      "duration": 3.21,
+      "text": "instead of integrating over the full range, I only"
+    },
+    {
+      "index": 187,
+      "start": 647.13,
+      "end": 651.07,
+      "duration": 3.94,
+      "text": "integrate over x's that are far away from the mean."
+    },
+    {
+      "index": 188,
+      "start": 651.07,
+      "end": 652.7,
+      "duration": 1.63,
+      "text": "So mu is the mean."
+    },
+    {
+      "index": 189,
+      "start": 652.7,
+      "end": 654.345,
+      "duration": 1.645,
+      "text": "Think of c as some big number."
+    },
+    {
+      "index": 190,
+      "start": 659.67,
+      "end": 662.21,
+      "duration": 2.54,
+      "text": "These are x's that are far away from the mean to the"
+    },
+    {
+      "index": 191,
+      "start": 662.21,
+      "end": 665.41,
+      "duration": 3.2,
+      "text": "left, from minus infinity to mu minus c."
+    },
+    {
+      "index": 192,
+      "start": 665.41,
+      "end": 669.03,
+      "duration": 3.62,
+      "text": "And these are the x's that are far away from the mean on the"
+    },
+    {
+      "index": 193,
+      "start": 669.03,
+      "end": 671.21,
+      "duration": 2.18,
+      "text": "positive side."
+    },
+    {
+      "index": 194,
+      "start": 671.21,
+      "end": 673.42,
+      "duration": 2.21,
+      "text": "So by integrating over fewer stuff, I'm"
+    },
+    {
+      "index": 195,
+      "start": 673.42,
+      "end": 675.58,
+      "duration": 2.16,
+      "text": "getting a smaller integral."
+    },
+    {
+      "index": 196,
+      "start": 675.58,
+      "end": 681.97,
+      "duration": 6.39,
+      "text": "Now, for any x in this range, this distance, x minus mu, is"
+    },
+    {
+      "index": 197,
+      "start": 681.97,
+      "end": 683.22,
+      "duration": 1.25,
+      "text": "at least c."
+    },
+    {
+      "index": 198,
+      "start": 683.22,
+      "end": 686.32,
+      "duration": 3.1,
+      "text": "So that squared is at least c squared."
+    },
+    {
+      "index": 199,
+      "start": 686.32,
+      "end": 688.91,
+      "duration": 2.59,
+      "text": "So this term over this range of integration"
+    },
+    {
+      "index": 200,
+      "start": 688.91,
+      "end": 690.52,
+      "duration": 1.61,
+      "text": "is at least c squared."
+    },
+    {
+      "index": 201,
+      "start": 690.52,
+      "end": 693.25,
+      "duration": 2.73,
+      "text": "So I can take it outside the integral."
+    },
+    {
+      "index": 202,
+      "start": 693.25,
+      "end": 696.4,
+      "duration": 3.15,
+      "text": "And I'm left just with the integral of the density."
+    },
+    {
+      "index": 203,
+      "start": 696.4,
+      "end": 698.48,
+      "duration": 2.08,
+      "text": "Same thing on the other side."
+    },
+    {
+      "index": 204,
+      "start": 698.48,
+      "end": 701.77,
+      "duration": 3.29,
+      "text": "And so what factors out is this term c squared."
+    },
+    {
+      "index": 205,
+      "start": 701.77,
+      "end": 705.36,
+      "duration": 3.59,
+      "text": "And inside, we're left with the probability of being to"
+    },
+    {
+      "index": 206,
+      "start": 705.36,
+      "end": 709.06,
+      "duration": 3.7,
+      "text": "the left of mu minus c, and then the probability of being"
+    },
+    {
+      "index": 207,
+      "start": 709.06,
+      "end": 712.31,
+      "duration": 3.25,
+      "text": "to the right of mu plus c, which is the same as the"
+    },
+    {
+      "index": 208,
+      "start": 712.31,
+      "end": 715.37,
+      "duration": 3.06,
+      "text": "probability that the absolute value of the distance from the"
+    },
+    {
+      "index": 209,
+      "start": 715.37,
+      "end": 718.77,
+      "duration": 3.4,
+      "text": "mean is larger than or equal to c."
+    },
+    {
+      "index": 210,
+      "start": 718.77,
+      "end": 724.82,
+      "duration": 6.05,
+      "text": "So that's the same inequality that we proved there, except"
+    },
+    {
+      "index": 211,
+      "start": 724.82,
+      "end": 726.06,
+      "duration": 1.24,
+      "text": "that here I'm using c."
+    },
+    {
+      "index": 212,
+      "start": 726.06,
+      "end": 730.53,
+      "duration": 4.47,
+      "text": "There I used a, but it's exactly the same one."
+    },
+    {
+      "index": 213,
+      "start": 730.53,
+      "end": 732.96,
+      "duration": 2.43,
+      "text": "This inequality was maybe better to understand if you"
+    },
+    {
+      "index": 214,
+      "start": 732.96,
+      "end": 736.79,
+      "duration": 3.83,
+      "text": "take that term and send it to the other side and"
+    },
+    {
+      "index": 215,
+      "start": 736.79,
+      "end": 738.78,
+      "duration": 1.99,
+      "text": "write it this form."
+    },
+    {
+      "index": 216,
+      "start": 738.78,
+      "end": 740.01,
+      "duration": 1.23,
+      "text": "What does it tell us?"
+    },
+    {
+      "index": 217,
+      "start": 740.01,
+      "end": 745.75,
+      "duration": 5.74,
+      "text": "It tells us that if c is a big number, it tells us that the"
+    },
+    {
+      "index": 218,
+      "start": 745.75,
+      "end": 750.75,
+      "duration": 5.0,
+      "text": "probability of being more than c away from the mean is going"
+    },
+    {
+      "index": 219,
+      "start": 750.75,
+      "end": 752.33,
+      "duration": 1.58,
+      "text": "to be a small number."
+    },
+    {
+      "index": 220,
+      "start": 752.33,
+      "end": 754.78,
+      "duration": 2.45,
+      "text": "When c is big, this is small."
+    },
+    {
+      "index": 221,
+      "start": 754.78,
+      "end": 755.97,
+      "duration": 1.19,
+      "text": "Now, this is intuitive."
+    },
+    {
+      "index": 222,
+      "start": 755.97,
+      "end": 758.29,
+      "duration": 2.32,
+      "text": "The variance is a measure of the spread of the"
+    },
+    {
+      "index": 223,
+      "start": 758.29,
+      "end": 760.96,
+      "duration": 2.67,
+      "text": "distribution, how wide it is."
+    },
+    {
+      "index": 224,
+      "start": 760.96,
+      "end": 763.96,
+      "duration": 3.0,
+      "text": "It tells us that if the variance is small, the"
+    },
+    {
+      "index": 225,
+      "start": 763.96,
+      "end": 766.32,
+      "duration": 2.36,
+      "text": "distribution is not very wide."
+    },
+    {
+      "index": 226,
+      "start": 766.32,
+      "end": 769.02,
+      "duration": 2.7,
+      "text": "And mathematically, this translates to this statement"
+    },
+    {
+      "index": 227,
+      "start": 769.02,
+      "end": 772.36,
+      "duration": 3.34,
+      "text": "that when the variance is small, the probability of"
+    },
+    {
+      "index": 228,
+      "start": 772.36,
+      "end": 774.88,
+      "duration": 2.52,
+      "text": "being far away is going to be small."
+    },
+    {
+      "index": 229,
+      "start": 774.88,
+      "end": 778.37,
+      "duration": 3.49,
+      "text": "And the further away you're looking, that is, if c is a"
+    },
+    {
+      "index": 230,
+      "start": 778.37,
+      "end": 780.33,
+      "duration": 1.96,
+      "text": "bigger number, that probability"
+    },
+    {
+      "index": 231,
+      "start": 780.33,
+      "end": 781.765,
+      "duration": 1.435,
+      "text": "also becomes small."
+    },
+    {
+      "index": 232,
+      "start": 784.93,
+      "end": 787.88,
+      "duration": 2.95,
+      "text": "Maybe an even more intuitive way to think about the content"
+    },
+    {
+      "index": 233,
+      "start": 787.88,
+      "end": 793.23,
+      "duration": 5.35,
+      "text": "of this inequality is to, instead of c, use the number"
+    },
+    {
+      "index": 234,
+      "start": 793.23,
+      "end": 796.91,
+      "duration": 3.68,
+      "text": "k, where k is positive and sigma is"
+    },
+    {
+      "index": 235,
+      "start": 796.91,
+      "end": 798.53,
+      "duration": 1.62,
+      "text": "the standard deviation."
+    },
+    {
+      "index": 236,
+      "start": 798.53,
+      "end": 802.67,
+      "duration": 4.14,
+      "text": "So let's just plug k sigma in the place of c."
+    },
+    {
+      "index": 237,
+      "start": 802.67,
+      "end": 805.3,
+      "duration": 2.63,
+      "text": "So this becomes k sigma squared."
+    },
+    {
+      "index": 238,
+      "start": 805.3,
+      "end": 807.13,
+      "duration": 1.83,
+      "text": "These sigma squared's cancel."
+    },
+    {
+      "index": 239,
+      "start": 807.13,
+      "end": 809.77,
+      "duration": 2.64,
+      "text": "We're left with 1 over k-square."
+    },
+    {
+      "index": 240,
+      "start": 809.77,
+      "end": 811.69,
+      "duration": 1.92,
+      "text": "Now, what is this?"
+    },
+    {
+      "index": 241,
+      "start": 811.69,
+      "end": 816.26,
+      "duration": 4.57,
+      "text": "This is the event that you are k standard deviations away"
+    },
+    {
+      "index": 242,
+      "start": 816.26,
+      "end": 817.77,
+      "duration": 1.51,
+      "text": "from the mean."
+    },
+    {
+      "index": 243,
+      "start": 817.77,
+      "end": 820.6,
+      "duration": 2.83,
+      "text": "So for example, this statement here tells you that if you"
+    },
+    {
+      "index": 244,
+      "start": 820.6,
+      "end": 824.9,
+      "duration": 4.3,
+      "text": "look at the test scores from a quiz, what fraction of the"
+    },
+    {
+      "index": 245,
+      "start": 824.9,
+      "end": 829.9,
+      "duration": 5.0,
+      "text": "class are 3 standard deviations away from the mean?"
+    },
+    {
+      "index": 246,
+      "start": 829.9,
+      "end": 833.0,
+      "duration": 3.1,
+      "text": "It's possible, but it's not going to be a lot of people."
+    },
+    {
+      "index": 247,
+      "start": 833.0,
+      "end": 837.93,
+      "duration": 4.93,
+      "text": "It's going to be at most, 1/9 of the class that can be 3"
+    },
+    {
+      "index": 248,
+      "start": 837.93,
+      "end": 842.19,
+      "duration": 4.26,
+      "text": "standard deviations or more away from the mean."
+    },
+    {
+      "index": 249,
+      "start": 842.19,
+      "end": 845.25,
+      "duration": 3.06,
+      "text": "So the Chebyshev inequality is a really useful one."
+    },
+    {
+      "index": 250,
+      "start": 847.86,
+      "end": 851.3,
+      "duration": 3.44,
+      "text": "It comes in handy whenever you want to relate probabilities"
+    },
+    {
+      "index": 251,
+      "start": 851.3,
+      "end": 852.8,
+      "duration": 1.5,
+      "text": "and expected values."
+    },
+    {
+      "index": 252,
+      "start": 852.8,
+      "end": 856.39,
+      "duration": 3.59,
+      "text": "So if you know that your expected values or, in"
+    },
+    {
+      "index": 253,
+      "start": 856.39,
+      "end": 859.26,
+      "duration": 2.87,
+      "text": "particular, that your variance is small, this tells you"
+    },
+    {
+      "index": 254,
+      "start": 859.26,
+      "end": 863.08,
+      "duration": 3.82,
+      "text": "something about tailed probabilities."
+    },
+    {
+      "index": 255,
+      "start": 863.08,
+      "end": 865.53,
+      "duration": 2.45,
+      "text": "So this is the end of our first digression."
+    },
+    {
+      "index": 256,
+      "start": 865.53,
+      "end": 868.32,
+      "duration": 2.79,
+      "text": "We have this inequality in our hands."
+    },
+    {
+      "index": 257,
+      "start": 868.32,
+      "end": 871.17,
+      "duration": 2.85,
+      "text": "Our second digression is talk about limits."
+    },
+    {
+      "index": 258,
+      "start": 874.68,
+      "end": 877.19,
+      "duration": 2.51,
+      "text": "We want to eventually talk about limits of random"
+    },
+    {
+      "index": 259,
+      "start": 877.19,
+      "end": 879.75,
+      "duration": 2.56,
+      "text": "variables, but as a warm up, we're going to start with"
+    },
+    {
+      "index": 260,
+      "start": 879.75,
+      "end": 882.44,
+      "duration": 2.69,
+      "text": "limits of sequences."
+    },
+    {
+      "index": 261,
+      "start": 882.44,
+      "end": 887.67,
+      "duration": 5.23,
+      "text": "So you're given a sequence of numbers, a1,"
+    },
+    {
+      "index": 262,
+      "start": 887.67,
+      "end": 890.5,
+      "duration": 2.83,
+      "text": "a2, a3, and so on."
+    },
+    {
+      "index": 263,
+      "start": 890.5,
+      "end": 894.16,
+      "duration": 3.66,
+      "text": "And we want to define the notion that a sequence"
+    },
+    {
+      "index": 264,
+      "start": 894.16,
+      "end": 896.47,
+      "duration": 2.31,
+      "text": "converges to a number."
+    },
+    {
+      "index": 265,
+      "start": 896.47,
+      "end": 904.71,
+      "duration": 8.24,
+      "text": "You sort of know what this means, but let's just go"
+    },
+    {
+      "index": 266,
+      "start": 904.71,
+      "end": 906.51,
+      "duration": 1.8,
+      "text": "through it some more."
+    },
+    {
+      "index": 267,
+      "start": 906.51,
+      "end": 909.89,
+      "duration": 3.38,
+      "text": "So here's a."
+    },
+    {
+      "index": 268,
+      "start": 909.89,
+      "end": 916.2,
+      "duration": 6.31,
+      "text": "We have our sequence of values as n increases."
+    },
+    {
+      "index": 269,
+      "start": 916.2,
+      "end": 920.29,
+      "duration": 4.09,
+      "text": "What do we mean by the sequence converging to a is"
+    },
+    {
+      "index": 270,
+      "start": 920.29,
+      "end": 923.55,
+      "duration": 3.26,
+      "text": "that when you look at those values, they get closer and"
+    },
+    {
+      "index": 271,
+      "start": 923.55,
+      "end": 925.14,
+      "duration": 1.59,
+      "text": "closer to a."
+    },
+    {
+      "index": 272,
+      "start": 925.14,
+      "end": 929.57,
+      "duration": 4.43,
+      "text": "So this value here is your typical a sub n."
+    },
+    {
+      "index": 273,
+      "start": 929.57,
+      "end": 933.88,
+      "duration": 4.31,
+      "text": "They get closer and closer to a, and they stay closer."
+    },
+    {
+      "index": 274,
+      "start": 933.88,
+      "end": 936.86,
+      "duration": 2.98,
+      "text": "So let's try to make that more precise."
+    },
+    {
+      "index": 275,
+      "start": 936.86,
+      "end": 940.75,
+      "duration": 3.89,
+      "text": "What it means is let's fix a sense of what"
+    },
+    {
+      "index": 276,
+      "start": 940.75,
+      "end": 942.25,
+      "duration": 1.5,
+      "text": "it means to be close."
+    },
+    {
+      "index": 277,
+      "start": 942.25,
+      "end": 947.54,
+      "duration": 5.29,
+      "text": "Let me look at an interval that goes from a - epsilon to"
+    },
+    {
+      "index": 278,
+      "start": 947.54,
+      "end": 950.34,
+      "duration": 2.8,
+      "text": "a + epsilon."
+    },
+    {
+      "index": 279,
+      "start": 950.34,
+      "end": 957.28,
+      "duration": 6.94,
+      "text": "Then if my sequence converges to a, this means that as n"
+    },
+    {
+      "index": 280,
+      "start": 957.28,
+      "end": 962.81,
+      "duration": 5.53,
+      "text": "increases, eventually the values of the sequence that I"
+    },
+    {
+      "index": 281,
+      "start": 962.81,
+      "end": 966.42,
+      "duration": 3.61,
+      "text": "get stay inside this band."
+    },
+    {
+      "index": 282,
+      "start": 966.42,
+      "end": 970.43,
+      "duration": 4.01,
+      "text": "Since they converge to a, this means that eventually they"
+    },
+    {
+      "index": 283,
+      "start": 970.43,
+      "end": 974.13,
+      "duration": 3.7,
+      "text": "will be smaller than a + epsilon and"
+    },
+    {
+      "index": 284,
+      "start": 974.13,
+      "end": 976.31,
+      "duration": 2.18,
+      "text": "bigger than a - epsilon."
+    },
+    {
+      "index": 285,
+      "start": 976.31,
+      "end": 981.32,
+      "duration": 5.01,
+      "text": "So convergence means that given a band of positive"
+    },
+    {
+      "index": 286,
+      "start": 981.32,
+      "end": 985.69,
+      "duration": 4.37,
+      "text": "length around the number a, the values of the sequence"
+    },
+    {
+      "index": 287,
+      "start": 985.69,
+      "end": 988.72,
+      "duration": 3.03,
+      "text": "that you get eventually get inside and"
+    },
+    {
+      "index": 288,
+      "start": 988.72,
+      "end": 991.3,
+      "duration": 2.58,
+      "text": "stay inside that band."
+    },
+    {
+      "index": 289,
+      "start": 991.3,
+      "end": 994.06,
+      "duration": 2.76,
+      "text": "So that's sort of the picture definition of"
+    },
+    {
+      "index": 290,
+      "start": 994.06,
+      "end": 995.84,
+      "duration": 1.78,
+      "text": "what convergence means."
+    },
+    {
+      "index": 291,
+      "start": 995.84,
+      "end": 1000.46,
+      "duration": 4.62,
+      "text": "So now let's translate this into a mathematical statement."
+    },
+    {
+      "index": 292,
+      "start": 1000.46,
+      "end": 1005.61,
+      "duration": 5.15,
+      "text": "Given a band of positive length, no matter how wide"
+    },
+    {
+      "index": 293,
+      "start": 1005.61,
+      "end": 1010.69,
+      "duration": 5.08,
+      "text": "that band is or how narrow it is, so for every epsilon"
+    },
+    {
+      "index": 294,
+      "start": 1010.69,
+      "end": 1016.5,
+      "duration": 5.81,
+      "text": "positive, eventually the sequence gets inside the band."
+    },
+    {
+      "index": 295,
+      "start": 1016.5,
+      "end": 1018.46,
+      "duration": 1.96,
+      "text": "What does eventually mean?"
+    },
+    {
+      "index": 296,
+      "start": 1018.46,
+      "end": 1021.41,
+      "duration": 2.95,
+      "text": "There exists a time, so that after that"
+    },
+    {
+      "index": 297,
+      "start": 1021.41,
+      "end": 1023.51,
+      "duration": 2.1,
+      "text": "time something happens."
+    },
+    {
+      "index": 298,
+      "start": 1023.51,
+      "end": 1027.23,
+      "duration": 3.72,
+      "text": "And the something that happens is that after that time, we"
+    },
+    {
+      "index": 299,
+      "start": 1027.23,
+      "end": 1029.52,
+      "duration": 2.29,
+      "text": "are inside that band."
+    },
+    {
+      "index": 300,
+      "start": 1029.52,
+      "end": 1032.06,
+      "duration": 2.54,
+      "text": "So this is a formal mathematical definition, which"
+    },
+    {
+      "index": 301,
+      "start": 1032.06,
+      "end": 1037.25,
+      "duration": 5.19,
+      "text": "actually translates what I was telling in the wordy way"
+    },
+    {
+      "index": 302,
+      "start": 1037.25,
+      "end": 1040.14,
+      "duration": 2.89,
+      "text": "before, and showing in terms of the picture."
+    },
+    {
+      "index": 303,
+      "start": 1040.14,
+      "end": 1045.14,
+      "duration": 5.0,
+      "text": "Given a certain band, even if it's narrow, eventually, after"
+    },
+    {
+      "index": 304,
+      "start": 1045.14,
+      "end": 1048.52,
+      "duration": 3.38,
+      "text": "a certain time n0, the values of the sequence are going to"
+    },
+    {
+      "index": 305,
+      "start": 1048.52,
+      "end": 1050.24,
+      "duration": 1.72,
+      "text": "stay inside this band."
+    },
+    {
+      "index": 306,
+      "start": 1050.24,
+      "end": 1055.77,
+      "duration": 5.53,
+      "text": "Now, if I were to take epsilon to be very small, this thing"
+    },
+    {
+      "index": 307,
+      "start": 1055.77,
+      "end": 1058.13,
+      "duration": 2.36,
+      "text": "would still be true that eventually I'm going to get"
+    },
+    {
+      "index": 308,
+      "start": 1058.13,
+      "end": 1062.4,
+      "duration": 4.27,
+      "text": "inside of the band, except that I may have to wait longer"
+    },
+    {
+      "index": 309,
+      "start": 1062.4,
+      "end": 1065.77,
+      "duration": 3.37,
+      "text": "for the values to get inside here."
+    },
+    {
+      "index": 310,
+      "start": 1065.77,
+      "end": 1068.4,
+      "duration": 2.63,
+      "text": "All right, that's what it means for a deterministic"
+    },
+    {
+      "index": 311,
+      "start": 1068.4,
+      "end": 1071.35,
+      "duration": 2.95,
+      "text": "sequence to converge to something."
+    },
+    {
+      "index": 312,
+      "start": 1071.35,
+      "end": 1074.15,
+      "duration": 2.8,
+      "text": "Now, how about random variables."
+    },
+    {
+      "index": 313,
+      "start": 1074.15,
+      "end": 1077.34,
+      "duration": 3.19,
+      "text": "What does it mean for a sequence of random variables"
+    },
+    {
+      "index": 314,
+      "start": 1077.34,
+      "end": 1080.28,
+      "duration": 2.94,
+      "text": "to converge to a number?"
+    },
+    {
+      "index": 315,
+      "start": 1080.28,
+      "end": 1082.6,
+      "duration": 2.32,
+      "text": "We're just going to twist a little bit of the word"
+    },
+    {
+      "index": 316,
+      "start": 1082.6,
+      "end": 1083.31,
+      "duration": 0.71,
+      "text": "definition."
+    },
+    {
+      "index": 317,
+      "start": 1083.31,
+      "end": 1088.39,
+      "duration": 5.08,
+      "text": "For numbers, we said that eventually the numbers get"
+    },
+    {
+      "index": 318,
+      "start": 1088.39,
+      "end": 1090.18,
+      "duration": 1.79,
+      "text": "inside that band."
+    },
+    {
+      "index": 319,
+      "start": 1090.18,
+      "end": 1093.27,
+      "duration": 3.09,
+      "text": "But if instead of numbers we have random variables with a"
+    },
+    {
+      "index": 320,
+      "start": 1093.27,
+      "end": 1098.08,
+      "duration": 4.81,
+      "text": "certain distribution, so here instead of a_n we're dealing"
+    },
+    {
+      "index": 321,
+      "start": 1098.08,
+      "end": 1100.75,
+      "duration": 2.67,
+      "text": "with a random variable that has a distribution, let's say,"
+    },
+    {
+      "index": 322,
+      "start": 1100.75,
+      "end": 1106.65,
+      "duration": 5.9,
+      "text": "of this kind, what we want is that this distribution gets"
+    },
+    {
+      "index": 323,
+      "start": 1106.65,
+      "end": 1111.46,
+      "duration": 4.81,
+      "text": "inside this band, so it gets concentrated inside here."
+    },
+    {
+      "index": 324,
+      "start": 1111.46,
+      "end": 1113.15,
+      "duration": 1.69,
+      "text": "What does it means that the distribution"
+    },
+    {
+      "index": 325,
+      "start": 1113.15,
+      "end": 1114.85,
+      "duration": 1.7,
+      "text": "gets inside this band?"
+    },
+    {
+      "index": 326,
+      "start": 1114.85,
+      "end": 1116.91,
+      "duration": 2.06,
+      "text": "I mean a random variable has a distribution."
+    },
+    {
+      "index": 327,
+      "start": 1116.91,
+      "end": 1120.13,
+      "duration": 3.22,
+      "text": "It may have some tails, so maybe not the entire"
+    },
+    {
+      "index": 328,
+      "start": 1120.13,
+      "end": 1123.92,
+      "duration": 3.79,
+      "text": "distribution gets concentrated inside of the band."
+    },
+    {
+      "index": 329,
+      "start": 1123.92,
+      "end": 1128.66,
+      "duration": 4.74,
+      "text": "But we want that more and more of this distribution is"
+    },
+    {
+      "index": 330,
+      "start": 1128.66,
+      "end": 1130.82,
+      "duration": 2.16,
+      "text": "concentrated in this band."
+    },
+    {
+      "index": 331,
+      "start": 1130.82,
+      "end": 1131.73,
+      "duration": 0.91,
+      "text": "So that --"
+    },
+    {
+      "index": 332,
+      "start": 1131.73,
+      "end": 1133.13,
+      "duration": 1.4,
+      "text": "in a sense that --"
+    },
+    {
+      "index": 333,
+      "start": 1133.13,
+      "end": 1137.07,
+      "duration": 3.94,
+      "text": "the probability of falling outside the band converges to"
+    },
+    {
+      "index": 334,
+      "start": 1137.07,
+      "end": 1140.41,
+      "duration": 3.34,
+      "text": "0 -- becomes smaller and smaller."
+    },
+    {
+      "index": 335,
+      "start": 1140.41,
+      "end": 1145.66,
+      "duration": 5.25,
+      "text": "So in words, we're going to say that the sequence random"
+    },
+    {
+      "index": 336,
+      "start": 1145.66,
+      "end": 1149.07,
+      "duration": 3.41,
+      "text": "variables or a sequence of probability distributions,"
+    },
+    {
+      "index": 337,
+      "start": 1149.07,
+      "end": 1152.06,
+      "duration": 2.99,
+      "text": "that would be the same, converges to a particular"
+    },
+    {
+      "index": 338,
+      "start": 1152.06,
+      "end": 1155.07,
+      "duration": 3.01,
+      "text": "number a if the following is true."
+    },
+    {
+      "index": 339,
+      "start": 1155.07,
+      "end": 1162.32,
+      "duration": 7.25,
+      "text": "If I consider a small band around a, then the probability"
+    },
+    {
+      "index": 340,
+      "start": 1162.32,
+      "end": 1166.3,
+      "duration": 3.98,
+      "text": "that my random variable falls outside this band, which is"
+    },
+    {
+      "index": 341,
+      "start": 1166.3,
+      "end": 1169.53,
+      "duration": 3.23,
+      "text": "the area under this curve, this probability becomes"
+    },
+    {
+      "index": 342,
+      "start": 1169.53,
+      "end": 1172.62,
+      "duration": 3.09,
+      "text": "smaller and smaller as n goes to infinity."
+    },
+    {
+      "index": 343,
+      "start": 1172.62,
+      "end": 1175.37,
+      "duration": 2.75,
+      "text": "The probability of being outside this band"
+    },
+    {
+      "index": 344,
+      "start": 1175.37,
+      "end": 1178.57,
+      "duration": 3.2,
+      "text": "converges to 0."
+    },
+    {
+      "index": 345,
+      "start": 1178.57,
+      "end": 1180.62,
+      "duration": 2.05,
+      "text": "So that's the intuitive idea."
+    },
+    {
+      "index": 346,
+      "start": 1180.62,
+      "end": 1185.08,
+      "duration": 4.46,
+      "text": "So in the beginning, maybe our distribution is sitting"
+    },
+    {
+      "index": 347,
+      "start": 1185.08,
+      "end": 1186.59,
+      "duration": 1.51,
+      "text": "everywhere."
+    },
+    {
+      "index": 348,
+      "start": 1186.59,
+      "end": 1189.49,
+      "duration": 2.9,
+      "text": "As n increases, the distribution starts to get"
+    },
+    {
+      "index": 349,
+      "start": 1189.49,
+      "end": 1191.56,
+      "duration": 2.07,
+      "text": "concentrating inside the band."
+    },
+    {
+      "index": 350,
+      "start": 1191.56,
+      "end": 1197.3,
+      "duration": 5.74,
+      "text": "When a is even bigger, our distribution is even more"
+    },
+    {
+      "index": 351,
+      "start": 1197.3,
+      "end": 1200.31,
+      "duration": 3.01,
+      "text": "inside that band, so that these outside probabilities"
+    },
+    {
+      "index": 352,
+      "start": 1200.31,
+      "end": 1202.46,
+      "duration": 2.15,
+      "text": "become smaller and smaller."
+    },
+    {
+      "index": 353,
+      "start": 1202.46,
+      "end": 1203.86,
+      "duration": 1.4,
+      "text": "So the corresponding mathematical"
+    },
+    {
+      "index": 354,
+      "start": 1203.86,
+      "end": 1206.76,
+      "duration": 2.9,
+      "text": "statement is the following."
+    },
+    {
+      "index": 355,
+      "start": 1206.76,
+      "end": 1213.73,
+      "duration": 6.97,
+      "text": "I fix a band around a, a +/- epsilon."
+    },
+    {
+      "index": 356,
+      "start": 1213.73,
+      "end": 1218.17,
+      "duration": 4.44,
+      "text": "Given that band, the probability of falling outside"
+    },
+    {
+      "index": 357,
+      "start": 1218.17,
+      "end": 1221.35,
+      "duration": 3.18,
+      "text": "this band, this probability converges to 0."
+    },
+    {
+      "index": 358,
+      "start": 1221.35,
+      "end": 1223.6,
+      "duration": 2.25,
+      "text": "Or another way to say it is that the limit of this"
+    },
+    {
+      "index": 359,
+      "start": 1223.6,
+      "end": 1226.56,
+      "duration": 2.96,
+      "text": "probability is equal to 0."
+    },
+    {
+      "index": 360,
+      "start": 1226.56,
+      "end": 1229.72,
+      "duration": 3.16,
+      "text": "If you were to translate this into a complete mathematical"
+    },
+    {
+      "index": 361,
+      "start": 1229.72,
+      "end": 1231.8,
+      "duration": 2.08,
+      "text": "statement, you would have to write down the"
+    },
+    {
+      "index": 362,
+      "start": 1231.8,
+      "end": 1234.15,
+      "duration": 2.35,
+      "text": "following messy thing."
+    },
+    {
+      "index": 363,
+      "start": 1234.15,
+      "end": 1237.22,
+      "duration": 3.07,
+      "text": "For every epsilon positive --"
+    },
+    {
+      "index": 364,
+      "start": 1237.22,
+      "end": 1239.48,
+      "duration": 2.26,
+      "text": "that's this statement --"
+    },
+    {
+      "index": 365,
+      "start": 1239.48,
+      "end": 1241.24,
+      "duration": 1.76,
+      "text": "the limit is 0."
+    },
+    {
+      "index": 366,
+      "start": 1241.24,
+      "end": 1244.61,
+      "duration": 3.37,
+      "text": "What does it mean that the limit of something is 0?"
+    },
+    {
+      "index": 367,
+      "start": 1244.61,
+      "end": 1247.67,
+      "duration": 3.06,
+      "text": "We flip back to the previous slide."
+    },
+    {
+      "index": 368,
+      "start": 1247.67,
+      "end": 1248.11,
+      "duration": 0.44,
+      "text": "Why?"
+    },
+    {
+      "index": 369,
+      "start": 1248.11,
+      "end": 1251.43,
+      "duration": 3.32,
+      "text": "Because a probability is a number."
+    },
+    {
+      "index": 370,
+      "start": 1251.43,
+      "end": 1254.72,
+      "duration": 3.29,
+      "text": "So here we're talking about a sequence of numbers"
+    },
+    {
+      "index": 371,
+      "start": 1254.72,
+      "end": 1256.34,
+      "duration": 1.62,
+      "text": "convergent to 0."
+    },
+    {
+      "index": 372,
+      "start": 1256.34,
+      "end": 1258.19,
+      "duration": 1.85,
+      "text": "What does it mean for a sequence of numbers to"
+    },
+    {
+      "index": 373,
+      "start": 1258.19,
+      "end": 1259.18,
+      "duration": 0.99,
+      "text": "converge to 0?"
+    },
+    {
+      "index": 374,
+      "start": 1259.18,
+      "end": 1265.32,
+      "duration": 6.14,
+      "text": "It means that for any epsilon prime positive, there exists"
+    },
+    {
+      "index": 375,
+      "start": 1265.32,
+      "end": 1271.23,
+      "duration": 5.91,
+      "text": "some n0 such that for every n bigger than n0 the"
+    },
+    {
+      "index": 376,
+      "start": 1271.23,
+      "end": 1272.77,
+      "duration": 1.54,
+      "text": "following is true --"
+    },
+    {
+      "index": 377,
+      "start": 1272.77,
+      "end": 1276.45,
+      "duration": 3.68,
+      "text": "that this probability is less than or"
+    },
+    {
+      "index": 378,
+      "start": 1276.45,
+      "end": 1277.86,
+      "duration": 1.41,
+      "text": "equal to epsilon prime."
+    },
+    {
+      "index": 379,
+      "start": 1280.61,
+      "end": 1287.66,
+      "duration": 7.05,
+      "text": "So the mathematical statement is a little hard to parse."
+    },
+    {
+      "index": 380,
+      "start": 1287.66,
+      "end": 1292.27,
+      "duration": 4.61,
+      "text": "For every size of that band, and then you take the"
+    },
+    {
+      "index": 381,
+      "start": 1292.27,
+      "end": 1294.99,
+      "duration": 2.72,
+      "text": "definition of what it means for the limit of a sequence of"
+    },
+    {
+      "index": 382,
+      "start": 1294.99,
+      "end": 1297.72,
+      "duration": 2.73,
+      "text": "numbers to converge to 0."
+    },
+    {
+      "index": 383,
+      "start": 1297.72,
+      "end": 1302.34,
+      "duration": 4.62,
+      "text": "But it's a lot easier to describe this in words and,"
+    },
+    {
+      "index": 384,
+      "start": 1302.34,
+      "end": 1305.01,
+      "duration": 2.67,
+      "text": "basically, think in terms of this picture."
+    },
+    {
+      "index": 385,
+      "start": 1305.01,
+      "end": 1308.69,
+      "duration": 3.68,
+      "text": "That as n increases, the probability of falling outside"
+    },
+    {
+      "index": 386,
+      "start": 1308.69,
+      "end": 1311.305,
+      "duration": 2.615,
+      "text": "those bands just become smaller and smaller."
+    },
+    {
+      "index": 387,
+      "start": 1311.305,
+      "end": 1316.59,
+      "duration": 5.285,
+      "text": "So the statement is that our distribution gets concentrated"
+    },
+    {
+      "index": 388,
+      "start": 1316.59,
+      "end": 1321.34,
+      "duration": 4.75,
+      "text": "in arbitrarily narrow little bands around that"
+    },
+    {
+      "index": 389,
+      "start": 1321.34,
+      "end": 1325.05,
+      "duration": 3.71,
+      "text": "particular number a."
+    },
+    {
+      "index": 390,
+      "start": 1325.05,
+      "end": 1325.35,
+      "duration": 0.3,
+      "text": "OK."
+    },
+    {
+      "index": 391,
+      "start": 1325.35,
+      "end": 1327.79,
+      "duration": 2.44,
+      "text": "So let's look at an example."
+    },
+    {
+      "index": 392,
+      "start": 1327.79,
+      "end": 1331.66,
+      "duration": 3.87,
+      "text": "Suppose a random variable Yn has a discrete distribution of"
+    },
+    {
+      "index": 393,
+      "start": 1331.66,
+      "end": 1333.72,
+      "duration": 2.06,
+      "text": "this particular type."
+    },
+    {
+      "index": 394,
+      "start": 1333.72,
+      "end": 1337.15,
+      "duration": 3.43,
+      "text": "Does it converge to something?"
+    },
+    {
+      "index": 395,
+      "start": 1337.15,
+      "end": 1339.57,
+      "duration": 2.42,
+      "text": "Well, the probability distribution of this random"
+    },
+    {
+      "index": 396,
+      "start": 1339.57,
+      "end": 1342.37,
+      "duration": 2.8,
+      "text": "variable gets concentrated at 0 --"
+    },
+    {
+      "index": 397,
+      "start": 1342.37,
+      "end": 1346.52,
+      "duration": 4.15,
+      "text": "there's more and more probability of being at 0."
+    },
+    {
+      "index": 398,
+      "start": 1346.52,
+      "end": 1349.71,
+      "duration": 3.19,
+      "text": "If I fix a band around 0 --"
+    },
+    {
+      "index": 399,
+      "start": 1349.71,
+      "end": 1354.85,
+      "duration": 5.14,
+      "text": "so if I take the band from minus epsilon to epsilon and"
+    },
+    {
+      "index": 400,
+      "start": 1354.85,
+      "end": 1356.52,
+      "duration": 1.67,
+      "text": "look at that band--"
+    },
+    {
+      "index": 401,
+      "start": 1356.52,
+      "end": 1362.35,
+      "duration": 5.83,
+      "text": "the probability of falling outside this band is 1/n."
+    },
+    {
+      "index": 402,
+      "start": 1362.35,
+      "end": 1365.78,
+      "duration": 3.43,
+      "text": "As n goes to infinity, that probability goes to 0."
+    },
+    {
+      "index": 403,
+      "start": 1365.78,
+      "end": 1370.55,
+      "duration": 4.77,
+      "text": "So in this case, we do have convergence."
+    },
+    {
+      "index": 404,
+      "start": 1370.55,
+      "end": 1376.78,
+      "duration": 6.23,
+      "text": "And Yn converges in probability to the number 0."
+    },
+    {
+      "index": 405,
+      "start": 1376.78,
+      "end": 1380.31,
+      "duration": 3.53,
+      "text": "So this just captures the facts obvious from this"
+    },
+    {
+      "index": 406,
+      "start": 1380.31,
+      "end": 1383.68,
+      "duration": 3.37,
+      "text": "picture, that more and more of our probability distribution"
+    },
+    {
+      "index": 407,
+      "start": 1383.68,
+      "end": 1387.63,
+      "duration": 3.95,
+      "text": "gets concentrated around 0, as n goes to infinity."
+    },
+    {
+      "index": 408,
+      "start": 1387.63,
+      "end": 1390.33,
+      "duration": 2.7,
+      "text": "Now, an interesting thing to notice is the following, that"
+    },
+    {
+      "index": 409,
+      "start": 1390.33,
+      "end": 1395.39,
+      "duration": 5.06,
+      "text": "even though Yn converges to 0, if you were to write down the"
+    },
+    {
+      "index": 410,
+      "start": 1395.39,
+      "end": 1400.44,
+      "duration": 5.05,
+      "text": "expected value for Yn, what would it be?"
+    },
+    {
+      "index": 411,
+      "start": 1400.44,
+      "end": 1404.41,
+      "duration": 3.97,
+      "text": "It's going to be n times the probability of this value,"
+    },
+    {
+      "index": 412,
+      "start": 1404.41,
+      "end": 1406.24,
+      "duration": 1.83,
+      "text": "which is 1/n."
+    },
+    {
+      "index": 413,
+      "start": 1406.24,
+      "end": 1409.23,
+      "duration": 2.99,
+      "text": "So the expected value turns out to be 1."
+    },
+    {
+      "index": 414,
+      "start": 1409.23,
+      "end": 1414.3,
+      "duration": 5.07,
+      "text": "And if you were to look at the expected value of Yn-squared,"
+    },
+    {
+      "index": 415,
+      "start": 1414.3,
+      "end": 1418.19,
+      "duration": 3.89,
+      "text": "this would be 0."
+    },
+    {
+      "index": 416,
+      "start": 1418.19,
+      "end": 1421.77,
+      "duration": 3.58,
+      "text": "times this probability, and then n-squared times this"
+    },
+    {
+      "index": 417,
+      "start": 1421.77,
+      "end": 1425.72,
+      "duration": 3.95,
+      "text": "probability, which is equal to n."
+    },
+    {
+      "index": 418,
+      "start": 1425.72,
+      "end": 1429.85,
+      "duration": 4.13,
+      "text": "And this actually goes to infinity."
+    },
+    {
+      "index": 419,
+      "start": 1429.85,
+      "end": 1433.58,
+      "duration": 3.73,
+      "text": "So we have this, perhaps, strange situation where a"
+    },
+    {
+      "index": 420,
+      "start": 1433.58,
+      "end": 1438.03,
+      "duration": 4.45,
+      "text": "random variable goes to 0, but the expected value of this"
+    },
+    {
+      "index": 421,
+      "start": 1438.03,
+      "end": 1441.14,
+      "duration": 3.11,
+      "text": "random variable does not go to 0."
+    },
+    {
+      "index": 422,
+      "start": 1441.14,
+      "end": 1444.57,
+      "duration": 3.43,
+      "text": "And the second moment of that random variable actually goes"
+    },
+    {
+      "index": 423,
+      "start": 1444.57,
+      "end": 1445.79,
+      "duration": 1.22,
+      "text": "to infinity."
+    },
+    {
+      "index": 424,
+      "start": 1445.79,
+      "end": 1448.74,
+      "duration": 2.95,
+      "text": "So this tells us that convergence in probability"
+    },
+    {
+      "index": 425,
+      "start": 1448.74,
+      "end": 1451.38,
+      "duration": 2.64,
+      "text": "tells you something, but it doesn't tell"
+    },
+    {
+      "index": 426,
+      "start": 1451.38,
+      "end": 1453.31,
+      "duration": 1.93,
+      "text": "you the whole story."
+    },
+    {
+      "index": 427,
+      "start": 1453.31,
+      "end": 1457.26,
+      "duration": 3.95,
+      "text": "Convergence to 0 of a random variable doesn't imply"
+    },
+    {
+      "index": 428,
+      "start": 1457.26,
+      "end": 1460.63,
+      "duration": 3.37,
+      "text": "anything about convergence of expected values or of"
+    },
+    {
+      "index": 429,
+      "start": 1460.63,
+      "end": 1463.42,
+      "duration": 2.79,
+      "text": "variances and so on."
+    },
+    {
+      "index": 430,
+      "start": 1463.42,
+      "end": 1466.06,
+      "duration": 2.64,
+      "text": "So the reason is that convergence in probability"
+    },
+    {
+      "index": 431,
+      "start": 1466.06,
+      "end": 1468.47,
+      "duration": 2.41,
+      "text": "tells you that this tail probability"
+    },
+    {
+      "index": 432,
+      "start": 1468.47,
+      "end": 1470.4,
+      "duration": 1.93,
+      "text": "here is very small."
+    },
+    {
+      "index": 433,
+      "start": 1470.4,
+      "end": 1474.44,
+      "duration": 4.04,
+      "text": "But it doesn't tell you how far does this tail go."
+    },
+    {
+      "index": 434,
+      "start": 1474.44,
+      "end": 1479.39,
+      "duration": 4.95,
+      "text": "As in this example, the tail probability is small, but that"
+    },
+    {
+      "index": 435,
+      "start": 1479.39,
+      "end": 1483.41,
+      "duration": 4.02,
+      "text": "tail acts far away, so it gives a disproportionate"
+    },
+    {
+      "index": 436,
+      "start": 1483.41,
+      "end": 1485.95,
+      "duration": 2.54,
+      "text": "contribution to the expected value or the"
+    },
+    {
+      "index": 437,
+      "start": 1485.95,
+      "end": 1487.2,
+      "duration": 1.25,
+      "text": "expected value squared."
+    },
+    {
+      "index": 438,
+      "start": 1493.34,
+      "end": 1493.65,
+      "duration": 0.31,
+      "text": "OK."
+    },
+    {
+      "index": 439,
+      "start": 1493.65,
+      "end": 1499.0,
+      "duration": 5.35,
+      "text": "So now we've got everything that we need to go back to the"
+    },
+    {
+      "index": 440,
+      "start": 1499.0,
+      "end": 1502.9,
+      "duration": 3.9,
+      "text": "sample mean and study its properties."
+    },
+    {
+      "index": 441,
+      "start": 1502.9,
+      "end": 1505.46,
+      "duration": 2.56,
+      "text": "So the sad thing is that we have a"
+    },
+    {
+      "index": 442,
+      "start": 1505.46,
+      "end": 1507.32,
+      "duration": 1.86,
+      "text": "sequence of random variables."
+    },
+    {
+      "index": 443,
+      "start": 1507.32,
+      "end": 1508.35,
+      "duration": 1.03,
+      "text": "They're independent."
+    },
+    {
+      "index": 444,
+      "start": 1508.35,
+      "end": 1510.45,
+      "duration": 2.1,
+      "text": "They have the same distribution."
+    },
+    {
+      "index": 445,
+      "start": 1510.45,
+      "end": 1512.79,
+      "duration": 2.34,
+      "text": "And we assume that they have a finite mean"
+    },
+    {
+      "index": 446,
+      "start": 1512.79,
+      "end": 1514.48,
+      "duration": 1.69,
+      "text": "and a finite variance."
+    },
+    {
+      "index": 447,
+      "start": 1514.48,
+      "end": 1518.43,
+      "duration": 3.95,
+      "text": "We're looking at the sample mean."
+    },
+    {
+      "index": 448,
+      "start": 1518.43,
+      "end": 1521.67,
+      "duration": 3.24,
+      "text": "Now in principle, you can calculate the probability"
+    },
+    {
+      "index": 449,
+      "start": 1521.67,
+      "end": 1525.09,
+      "duration": 3.42,
+      "text": "distribution of the sample mean, because we know how to"
+    },
+    {
+      "index": 450,
+      "start": 1525.09,
+      "end": 1526.95,
+      "duration": 1.86,
+      "text": "find the distributions of sums of"
+    },
+    {
+      "index": 451,
+      "start": 1526.95,
+      "end": 1528.32,
+      "duration": 1.37,
+      "text": "independent random variables."
+    },
+    {
+      "index": 452,
+      "start": 1528.32,
+      "end": 1531.03,
+      "duration": 2.71,
+      "text": "You use the convolution formula over and over."
+    },
+    {
+      "index": 453,
+      "start": 1531.03,
+      "end": 1532.87,
+      "duration": 1.84,
+      "text": "But this is pretty complicated, so"
+    },
+    {
+      "index": 454,
+      "start": 1532.87,
+      "end": 1534.73,
+      "duration": 1.86,
+      "text": "let's not look at that."
+    },
+    {
+      "index": 455,
+      "start": 1534.73,
+      "end": 1538.92,
+      "duration": 4.19,
+      "text": "Let's just look at expected values, variances, and the"
+    },
+    {
+      "index": 456,
+      "start": 1538.92,
+      "end": 1542.61,
+      "duration": 3.69,
+      "text": "probabilities that the sample mean is far away"
+    },
+    {
+      "index": 457,
+      "start": 1542.61,
+      "end": 1544.31,
+      "duration": 1.7,
+      "text": "from the true mean."
+    },
+    {
+      "index": 458,
+      "start": 1544.31,
+      "end": 1547.47,
+      "duration": 3.16,
+      "text": "So what is the expected value of this random variable?"
+    },
+    {
+      "index": 459,
+      "start": 1547.47,
+      "end": 1551.26,
+      "duration": 3.79,
+      "text": "The expected value of a sum of random variables is the sum of"
+    },
+    {
+      "index": 460,
+      "start": 1551.26,
+      "end": 1552.51,
+      "duration": 1.25,
+      "text": "the expected values."
+    },
+    {
+      "index": 461,
+      "start": 1556.32,
+      "end": 1560.32,
+      "duration": 4.0,
+      "text": "And then we have this factor of n in the denominator."
+    },
+    {
+      "index": 462,
+      "start": 1560.32,
+      "end": 1567.04,
+      "duration": 6.72,
+      "text": "Each one of these expected values is mu, so we get mu."
+    },
+    {
+      "index": 463,
+      "start": 1567.04,
+      "end": 1573.96,
+      "duration": 6.92,
+      "text": "So the sample mean, the average value of this Mn in"
+    },
+    {
+      "index": 464,
+      "start": 1573.96,
+      "end": 1578.57,
+      "duration": 4.61,
+      "text": "expectation is the same as the true mean inside our"
+    },
+    {
+      "index": 465,
+      "start": 1578.57,
+      "end": 1580.62,
+      "duration": 2.05,
+      "text": "population."
+    },
+    {
+      "index": 466,
+      "start": 1580.62,
+      "end": 1586.56,
+      "duration": 5.94,
+      "text": "Now here, this is a fine conceptual point, there's two"
+    },
+    {
+      "index": 467,
+      "start": 1586.56,
+      "end": 1589.92,
+      "duration": 3.36,
+      "text": "kinds of averages involved when you write down this"
+    },
+    {
+      "index": 468,
+      "start": 1589.92,
+      "end": 1591.28,
+      "duration": 1.36,
+      "text": "expression."
+    },
+    {
+      "index": 469,
+      "start": 1591.28,
+      "end": 1593.31,
+      "duration": 2.03,
+      "text": "We understand that expectations are"
+    },
+    {
+      "index": 470,
+      "start": 1593.31,
+      "end": 1596.47,
+      "duration": 3.16,
+      "text": "some kind of average."
+    },
+    {
+      "index": 471,
+      "start": 1596.47,
+      "end": 1600.25,
+      "duration": 3.78,
+      "text": "The sample mean is also an average over the values that"
+    },
+    {
+      "index": 472,
+      "start": 1600.25,
+      "end": 1602.24,
+      "duration": 1.99,
+      "text": "we have observed."
+    },
+    {
+      "index": 473,
+      "start": 1602.24,
+      "end": 1605.22,
+      "duration": 2.98,
+      "text": "But it's two different kinds of averages."
+    },
+    {
+      "index": 474,
+      "start": 1605.22,
+      "end": 1610.46,
+      "duration": 5.24,
+      "text": "The sample mean is the average of the heights of the penguins"
+    },
+    {
+      "index": 475,
+      "start": 1610.46,
+      "end": 1614.33,
+      "duration": 3.87,
+      "text": "that we collected over a single expedition."
+    },
+    {
+      "index": 476,
+      "start": 1614.33,
+      "end": 1619.6,
+      "duration": 5.27,
+      "text": "The expected value is to be thought of as follows, my"
+    },
+    {
+      "index": 477,
+      "start": 1619.6,
+      "end": 1622.06,
+      "duration": 2.46,
+      "text": "probabilistic experiment is one expedition"
+    },
+    {
+      "index": 478,
+      "start": 1622.06,
+      "end": 1624.16,
+      "duration": 2.1,
+      "text": "to the South Pole."
+    },
+    {
+      "index": 479,
+      "start": 1624.16,
+      "end": 1629.76,
+      "duration": 5.6,
+      "text": "Expected value here means thinking on the average over a"
+    },
+    {
+      "index": 480,
+      "start": 1629.76,
+      "end": 1632.62,
+      "duration": 2.86,
+      "text": "huge number of expeditions."
+    },
+    {
+      "index": 481,
+      "start": 1632.62,
+      "end": 1636.27,
+      "duration": 3.65,
+      "text": "So my expedition is a random experiment, I collect random"
+    },
+    {
+      "index": 482,
+      "start": 1636.27,
+      "end": 1638.52,
+      "duration": 2.25,
+      "text": "samples, and they record Mn."
+    },
+    {
+      "index": 483,
+      "start": 1641.23,
+      "end": 1647.17,
+      "duration": 5.94,
+      "text": "The average result of an expedition is what we would"
+    },
+    {
+      "index": 484,
+      "start": 1647.17,
+      "end": 1651.06,
+      "duration": 3.89,
+      "text": "get if we were to carry out a zillion expeditions and"
+    },
+    {
+      "index": 485,
+      "start": 1651.06,
+      "end": 1655.05,
+      "duration": 3.99,
+      "text": "average the averages that we get at each particular"
+    },
+    {
+      "index": 486,
+      "start": 1655.05,
+      "end": 1656.09,
+      "duration": 1.04,
+      "text": "expedition."
+    },
+    {
+      "index": 487,
+      "start": 1656.09,
+      "end": 1659.86,
+      "duration": 3.77,
+      "text": "So this Mn is the average during a single expedition."
+    },
+    {
+      "index": 488,
+      "start": 1659.86,
+      "end": 1664.09,
+      "duration": 4.23,
+      "text": "This expectation is the average over an imagined"
+    },
+    {
+      "index": 489,
+      "start": 1664.09,
+      "end": 1666.125,
+      "duration": 2.035,
+      "text": "infinite sequence of expeditions."
+    },
+    {
+      "index": 490,
+      "start": 1669.76,
+      "end": 1672.83,
+      "duration": 3.07,
+      "text": "And of course, the other thing to always keep in mind is that"
+    },
+    {
+      "index": 491,
+      "start": 1672.83,
+      "end": 1676.91,
+      "duration": 4.08,
+      "text": "expectations give you numbers, whereas the sample mean is"
+    },
+    {
+      "index": 492,
+      "start": 1676.91,
+      "end": 1680.21,
+      "duration": 3.3,
+      "text": "actually a random variable."
+    },
+    {
+      "index": 493,
+      "start": 1680.21,
+      "end": 1680.486,
+      "duration": 0.276,
+      "text": "All right."
+    },
+    {
+      "index": 494,
+      "start": 1680.486,
+      "end": 1683.31,
+      "duration": 2.824,
+      "text": "So this random variable, how random is it?"
+    },
+    {
+      "index": 495,
+      "start": 1683.31,
+      "end": 1685.61,
+      "duration": 2.3,
+      "text": "How big is its variance?"
+    },
+    {
+      "index": 496,
+      "start": 1685.61,
+      "end": 1690.04,
+      "duration": 4.43,
+      "text": "So the variance of a sum of random variables is the sum of"
+    },
+    {
+      "index": 497,
+      "start": 1690.04,
+      "end": 1692.37,
+      "duration": 2.33,
+      "text": "the variances."
+    },
+    {
+      "index": 498,
+      "start": 1692.37,
+      "end": 1696.61,
+      "duration": 4.24,
+      "text": "But since we're dividing by n, when you calculate variances"
+    },
+    {
+      "index": 499,
+      "start": 1696.61,
+      "end": 1699.58,
+      "duration": 2.97,
+      "text": "this brings in a factor of n-squared."
+    },
+    {
+      "index": 500,
+      "start": 1699.58,
+      "end": 1701.215,
+      "duration": 1.635,
+      "text": "So the variance is sigma-squared over n."
+    },
+    {
+      "index": 501,
+      "start": 1704.34,
+      "end": 1706.87,
+      "duration": 2.53,
+      "text": "And in particular, the variance of the sample mean"
+    },
+    {
+      "index": 502,
+      "start": 1706.87,
+      "end": 1708.62,
+      "duration": 1.75,
+      "text": "becomes smaller and smaller."
+    },
+    {
+      "index": 503,
+      "start": 1708.62,
+      "end": 1711.17,
+      "duration": 2.55,
+      "text": "It means that when you estimate that average height"
+    },
+    {
+      "index": 504,
+      "start": 1711.17,
+      "end": 1714.57,
+      "duration": 3.4,
+      "text": "of penguins, if you take a large sample, then your"
+    },
+    {
+      "index": 505,
+      "start": 1714.57,
+      "end": 1717.53,
+      "duration": 2.96,
+      "text": "estimate is not going to be too random."
+    },
+    {
+      "index": 506,
+      "start": 1717.53,
+      "end": 1721.12,
+      "duration": 3.59,
+      "text": "The randomness in your estimates become small if you"
+    },
+    {
+      "index": 507,
+      "start": 1721.12,
+      "end": 1723.25,
+      "duration": 2.13,
+      "text": "have a large sample size."
+    },
+    {
+      "index": 508,
+      "start": 1723.25,
+      "end": 1726.09,
+      "duration": 2.84,
+      "text": "Having a large sample size kind of removes the randomness"
+    },
+    {
+      "index": 509,
+      "start": 1726.09,
+      "end": 1727.93,
+      "duration": 1.84,
+      "text": "from your experiment."
+    },
+    {
+      "index": 510,
+      "start": 1727.93,
+      "end": 1732.69,
+      "duration": 4.76,
+      "text": "Now let's apply the Chebyshev inequality to say something"
+    },
+    {
+      "index": 511,
+      "start": 1732.69,
+      "end": 1736.02,
+      "duration": 3.33,
+      "text": "about tail probabilities for the sample mean."
+    },
+    {
+      "index": 512,
+      "start": 1736.02,
+      "end": 1739.61,
+      "duration": 3.59,
+      "text": "The probability that you are more than epsilon away from"
+    },
+    {
+      "index": 513,
+      "start": 1739.61,
+      "end": 1743.65,
+      "duration": 4.04,
+      "text": "the true mean is less than or equal to the variance of this"
+    },
+    {
+      "index": 514,
+      "start": 1743.65,
+      "end": 1747.03,
+      "duration": 3.38,
+      "text": "quantity divided by this number squared."
+    },
+    {
+      "index": 515,
+      "start": 1747.03,
+      "end": 1749.86,
+      "duration": 2.83,
+      "text": "So that's just the translation of the Chebyshev inequality to"
+    },
+    {
+      "index": 516,
+      "start": 1749.86,
+      "end": 1752.32,
+      "duration": 2.46,
+      "text": "the particular context we've got here."
+    },
+    {
+      "index": 517,
+      "start": 1752.32,
+      "end": 1753.59,
+      "duration": 1.27,
+      "text": "We found the variance."
+    },
+    {
+      "index": 518,
+      "start": 1753.59,
+      "end": 1755.1,
+      "duration": 1.51,
+      "text": "It's sigma-squared over n."
+    },
+    {
+      "index": 519,
+      "start": 1755.1,
+      "end": 1758.34,
+      "duration": 3.24,
+      "text": "So we end up with this expression."
+    },
+    {
+      "index": 520,
+      "start": 1758.34,
+      "end": 1760.49,
+      "duration": 2.15,
+      "text": "So what does this expression do?"
+    },
+    {
+      "index": 521,
+      "start": 1765.57,
+      "end": 1772.37,
+      "duration": 6.8,
+      "text": "For any given epsilon, if I fix epsilon, then this"
+    },
+    {
+      "index": 522,
+      "start": 1772.37,
+      "end": 1776.63,
+      "duration": 4.26,
+      "text": "probability, which is less than sigma-squared over n"
+    },
+    {
+      "index": 523,
+      "start": 1776.63,
+      "end": 1780.55,
+      "duration": 3.92,
+      "text": "epsilon-squared, converges to 0 as n goes to infinity."
+    },
+    {
+      "index": 524,
+      "start": 1784.73,
+      "end": 1788.05,
+      "duration": 3.32,
+      "text": "And this is just the definition of convergence in"
+    },
+    {
+      "index": 525,
+      "start": 1788.05,
+      "end": 1789.69,
+      "duration": 1.64,
+      "text": "probability."
+    },
+    {
+      "index": 526,
+      "start": 1789.69,
+      "end": 1794.31,
+      "duration": 4.62,
+      "text": "If this happens, that the probability of being more than"
+    },
+    {
+      "index": 527,
+      "start": 1794.31,
+      "end": 1797.59,
+      "duration": 3.28,
+      "text": "epsilon away from the mean, that probability goes to 0,"
+    },
+    {
+      "index": 528,
+      "start": 1797.59,
+      "end": 1801.51,
+      "duration": 3.92,
+      "text": "and this is true no matter how I choose my epsilon, then by"
+    },
+    {
+      "index": 529,
+      "start": 1801.51,
+      "end": 1804.49,
+      "duration": 2.98,
+      "text": "definition we have convergence in probability."
+    },
+    {
+      "index": 530,
+      "start": 1804.49,
+      "end": 1808.05,
+      "duration": 3.56,
+      "text": "So we have proved that the sample mean converges in"
+    },
+    {
+      "index": 531,
+      "start": 1808.05,
+      "end": 1811.43,
+      "duration": 3.38,
+      "text": "probability to the true mean."
+    },
+    {
+      "index": 532,
+      "start": 1811.43,
+      "end": 1816.21,
+      "duration": 4.78,
+      "text": "And this is what the weak law of large numbers tells us."
+    },
+    {
+      "index": 533,
+      "start": 1816.21,
+      "end": 1821.06,
+      "duration": 4.85,
+      "text": "So in some vague sense, it tells us that the sample"
+    },
+    {
+      "index": 534,
+      "start": 1821.06,
+      "end": 1824.35,
+      "duration": 3.29,
+      "text": "means, when you take the average of many, many"
+    },
+    {
+      "index": 535,
+      "start": 1824.35,
+      "end": 1828.15,
+      "duration": 3.8,
+      "text": "measurements in your sample, then the sample mean is a good"
+    },
+    {
+      "index": 536,
+      "start": 1828.15,
+      "end": 1831.87,
+      "duration": 3.72,
+      "text": "estimate of the true mean in the sense that it approaches"
+    },
+    {
+      "index": 537,
+      "start": 1831.87,
+      "end": 1836.38,
+      "duration": 4.51,
+      "text": "the true mean as your sample size increases."
+    },
+    {
+      "index": 538,
+      "start": 1836.38,
+      "end": 1839.22,
+      "duration": 2.84,
+      "text": "It approaches the true mean, but of course in a very"
+    },
+    {
+      "index": 539,
+      "start": 1839.22,
+      "end": 1842.54,
+      "duration": 3.32,
+      "text": "specific sense, in probability, according to this"
+    },
+    {
+      "index": 540,
+      "start": 1842.54,
+      "end": 1846.55,
+      "duration": 4.01,
+      "text": "notion of convergence that we have used."
+    },
+    {
+      "index": 541,
+      "start": 1846.55,
+      "end": 1851.06,
+      "duration": 4.51,
+      "text": "So since we're talking about sampling, let's go over an"
+    },
+    {
+      "index": 542,
+      "start": 1851.06,
+      "end": 1856.15,
+      "duration": 5.09,
+      "text": "example, which is the typical situation faced by someone"
+    },
+    {
+      "index": 543,
+      "start": 1856.15,
+      "end": 1858.11,
+      "duration": 1.96,
+      "text": "who's constructing a poll."
+    },
+    {
+      "index": 544,
+      "start": 1858.11,
+      "end": 1862.68,
+      "duration": 4.57,
+      "text": "So you're interested in some property of the population."
+    },
+    {
+      "index": 545,
+      "start": 1862.68,
+      "end": 1865.59,
+      "duration": 2.91,
+      "text": "So what fraction of the population"
+    },
+    {
+      "index": 546,
+      "start": 1865.59,
+      "end": 1868.38,
+      "duration": 2.79,
+      "text": "prefers Coke to Pepsi?"
+    },
+    {
+      "index": 547,
+      "start": 1868.38,
+      "end": 1871.08,
+      "duration": 2.7,
+      "text": "So there's a number f, which is that fraction of the"
+    },
+    {
+      "index": 548,
+      "start": 1871.08,
+      "end": 1872.46,
+      "duration": 1.38,
+      "text": "population."
+    },
+    {
+      "index": 549,
+      "start": 1872.46,
+      "end": 1876.26,
+      "duration": 3.8,
+      "text": "And so this is an exact number."
+    },
+    {
+      "index": 550,
+      "start": 1876.26,
+      "end": 1880.25,
+      "duration": 3.99,
+      "text": "So out of a population of 100 million, 20 million prefer"
+    },
+    {
+      "index": 551,
+      "start": 1880.25,
+      "end": 1885.59,
+      "duration": 5.34,
+      "text": "Coke, then f would be 0.2."
+    },
+    {
+      "index": 552,
+      "start": 1885.59,
+      "end": 1887.97,
+      "duration": 2.38,
+      "text": "We want to find out what that fraction is."
+    },
+    {
+      "index": 553,
+      "start": 1887.97,
+      "end": 1890.59,
+      "duration": 2.62,
+      "text": "We cannot ask everyone."
+    },
+    {
+      "index": 554,
+      "start": 1890.59,
+      "end": 1894.25,
+      "duration": 3.66,
+      "text": "What we're going to do is to take a random sample of people"
+    },
+    {
+      "index": 555,
+      "start": 1894.25,
+      "end": 1897.3,
+      "duration": 3.05,
+      "text": "and ask them for their preferences."
+    },
+    {
+      "index": 556,
+      "start": 1897.3,
+      "end": 1902.69,
+      "duration": 5.39,
+      "text": "So the ith person either says yes for Coke or no."
+    },
+    {
+      "index": 557,
+      "start": 1902.69,
+      "end": 1906.43,
+      "duration": 3.74,
+      "text": "And we record that by putting a 1 each time that we get a"
+    },
+    {
+      "index": 558,
+      "start": 1906.43,
+      "end": 1909.16,
+      "duration": 2.73,
+      "text": "yes answer."
+    },
+    {
+      "index": 559,
+      "start": 1909.16,
+      "end": 1911.85,
+      "duration": 2.69,
+      "text": "And then we form the average of these x's."
+    },
+    {
+      "index": 560,
+      "start": 1911.85,
+      "end": 1913.07,
+      "duration": 1.22,
+      "text": "What is this average?"
+    },
+    {
+      "index": 561,
+      "start": 1913.07,
+      "end": 1917.0,
+      "duration": 3.93,
+      "text": "It's the number of 1's that we got divided by n."
+    },
+    {
+      "index": 562,
+      "start": 1917.0,
+      "end": 1922.59,
+      "duration": 5.59,
+      "text": "So this is a fraction, but calculated only on the basis"
+    },
+    {
+      "index": 563,
+      "start": 1922.59,
+      "end": 1924.88,
+      "duration": 2.29,
+      "text": "of the sample that we have."
+    },
+    {
+      "index": 564,
+      "start": 1924.88,
+      "end": 1930.26,
+      "duration": 5.38,
+      "text": "So you can think of this as being an estimate, f_hat,"
+    },
+    {
+      "index": 565,
+      "start": 1930.26,
+      "end": 1933.12,
+      "duration": 2.86,
+      "text": "based on the sample that we have."
+    },
+    {
+      "index": 566,
+      "start": 1933.12,
+      "end": 1937.155,
+      "duration": 4.035,
+      "text": "Now, even though we used the lower case letter here, this"
+    },
+    {
+      "index": 567,
+      "start": 1937.155,
+      "end": 1940.59,
+      "duration": 3.435,
+      "text": "f_hat is, of course, a random variable."
+    },
+    {
+      "index": 568,
+      "start": 1940.59,
+      "end": 1943.3,
+      "duration": 2.71,
+      "text": "f is a number."
+    },
+    {
+      "index": 569,
+      "start": 1943.3,
+      "end": 1947.57,
+      "duration": 4.27,
+      "text": "This is the true fraction in the overall population."
+    },
+    {
+      "index": 570,
+      "start": 1947.57,
+      "end": 1950.38,
+      "duration": 2.81,
+      "text": "f_hat is the estimate that we get by using"
+    },
+    {
+      "index": 571,
+      "start": 1950.38,
+      "end": 1952.3,
+      "duration": 1.92,
+      "text": "our particular sample."
+    },
+    {
+      "index": 572,
+      "start": 1952.3,
+      "end": 1952.41,
+      "duration": 0.11,
+      "text": "Ok."
+    },
+    {
+      "index": 573,
+      "start": 1952.41,
+      "end": 1958.76,
+      "duration": 6.35,
+      "text": "So your boss told you, I need to know what f is, but go and"
+    },
+    {
+      "index": 574,
+      "start": 1958.76,
+      "end": 1960.15,
+      "duration": 1.39,
+      "text": "do some sampling."
+    },
+    {
+      "index": 575,
+      "start": 1960.15,
+      "end": 1962.72,
+      "duration": 2.57,
+      "text": "What are you going to respond?"
+    },
+    {
+      "index": 576,
+      "start": 1962.72,
+      "end": 1966.36,
+      "duration": 3.64,
+      "text": "Unless I ask everyone in the whole population, there's no"
+    },
+    {
+      "index": 577,
+      "start": 1966.36,
+      "end": 1971.18,
+      "duration": 4.82,
+      "text": "way for me to know f exactly."
+    },
+    {
+      "index": 578,
+      "start": 1971.18,
+      "end": 1971.89,
+      "duration": 0.71,
+      "text": "Right?"
+    },
+    {
+      "index": 579,
+      "start": 1971.89,
+      "end": 1974.56,
+      "duration": 2.67,
+      "text": "There's no way."
+    },
+    {
+      "index": 580,
+      "start": 1974.56,
+      "end": 1979.04,
+      "duration": 4.48,
+      "text": "OK, so the boss tells you, well OK, then that'll me f"
+    },
+    {
+      "index": 581,
+      "start": 1979.04,
+      "end": 1980.86,
+      "duration": 1.82,
+      "text": "within an accuracy."
+    },
+    {
+      "index": 582,
+      "start": 1980.86,
+      "end": 1990.91,
+      "duration": 10.05,
+      "text": "I want an answer from you, that's your answer, which is"
+    },
+    {
+      "index": 583,
+      "start": 1990.91,
+      "end": 1994.93,
+      "duration": 4.02,
+      "text": "close to the correct answer within 1 % point."
+    },
+    {
+      "index": 584,
+      "start": 1994.93,
+      "end": 2000.26,
+      "duration": 5.33,
+      "text": "So if the true f is 0.4, your answer should be somewhere"
+    },
+    {
+      "index": 585,
+      "start": 2000.26,
+      "end": 2002.5,
+      "duration": 2.24,
+      "text": "between 0.39 and 0.41."
+    },
+    {
+      "index": 586,
+      "start": 2002.5,
+      "end": 2005.52,
+      "duration": 3.02,
+      "text": "I want a really accurate answer."
+    },
+    {
+      "index": 587,
+      "start": 2005.52,
+      "end": 2007.58,
+      "duration": 2.06,
+      "text": "What are you going to say?"
+    },
+    {
+      "index": 588,
+      "start": 2007.58,
+      "end": 2011.36,
+      "duration": 3.78,
+      "text": "Well, there's no guarantee that my answer"
+    },
+    {
+      "index": 589,
+      "start": 2011.36,
+      "end": 2013.23,
+      "duration": 1.87,
+      "text": "will be within 1 %."
+    },
+    {
+      "index": 590,
+      "start": 2013.23,
+      "end": 2017.32,
+      "duration": 4.09,
+      "text": "Maybe I'm unlucky and I just happen to sample the wrong set"
+    },
+    {
+      "index": 591,
+      "start": 2017.32,
+      "end": 2020.45,
+      "duration": 3.13,
+      "text": "of people and my answer comes out to be wrong."
+    },
+    {
+      "index": 592,
+      "start": 2020.45,
+      "end": 2025.8,
+      "duration": 5.35,
+      "text": "So I cannot give you a hard guarantee that this inequality"
+    },
+    {
+      "index": 593,
+      "start": 2025.8,
+      "end": 2027.24,
+      "duration": 1.44,
+      "text": "will be satisfied."
+    },
+    {
+      "index": 594,
+      "start": 2027.24,
+      "end": 2031.99,
+      "duration": 4.75,
+      "text": "But perhaps, I can give you a guarantee that this inequality"
+    },
+    {
+      "index": 595,
+      "start": 2031.99,
+      "end": 2035.68,
+      "duration": 3.69,
+      "text": "will be satisfied, this accuracy requirement will be"
+    },
+    {
+      "index": 596,
+      "start": 2035.68,
+      "end": 2039.34,
+      "duration": 3.66,
+      "text": "satisfied, with high confidence."
+    },
+    {
+      "index": 597,
+      "start": 2039.34,
+      "end": 2042.52,
+      "duration": 3.18,
+      "text": "That is, there's going to be a smaller probability that"
+    },
+    {
+      "index": 598,
+      "start": 2042.52,
+      "end": 2044.42,
+      "duration": 1.9,
+      "text": "things go wrong, that I'm unlikely"
+    },
+    {
+      "index": 599,
+      "start": 2044.42,
+      "end": 2047.03,
+      "duration": 2.61,
+      "text": "and I use a bad sample."
+    },
+    {
+      "index": 600,
+      "start": 2047.03,
+      "end": 2050.75,
+      "duration": 3.72,
+      "text": "But leaving aside that smaller probability of being unlucky,"
+    },
+    {
+      "index": 601,
+      "start": 2050.75,
+      "end": 2053.989,
+      "duration": 3.239,
+      "text": "my answer will be accurate within the accuracy"
+    },
+    {
+      "index": 602,
+      "start": 2053.989,
+      "end": 2056.1,
+      "duration": 2.111,
+      "text": "requirement that you have."
+    },
+    {
+      "index": 603,
+      "start": 2056.1,
+      "end": 2060.5,
+      "duration": 4.4,
+      "text": "So these two numbers are the usual specs that one has when"
+    },
+    {
+      "index": 604,
+      "start": 2060.5,
+      "end": 2062.01,
+      "duration": 1.51,
+      "text": "designing polls."
+    },
+    {
+      "index": 605,
+      "start": 2062.01,
+      "end": 2067.37,
+      "duration": 5.36,
+      "text": "So this number is the accuracy that we want."
+    },
+    {
+      "index": 606,
+      "start": 2067.37,
+      "end": 2069.3,
+      "duration": 1.93,
+      "text": "It's the desired accuracy."
+    },
+    {
+      "index": 607,
+      "start": 2069.3,
+      "end": 2075.239,
+      "duration": 5.939,
+      "text": "And this number has to do with the confidence that we want."
+    },
+    {
+      "index": 608,
+      "start": 2075.239,
+      "end": 2080.21,
+      "duration": 4.971,
+      "text": "So 1 minus that number, we could call it the confidence"
+    },
+    {
+      "index": 609,
+      "start": 2080.21,
+      "end": 2083.5,
+      "duration": 3.29,
+      "text": "that we want out of our sample."
+    },
+    {
+      "index": 610,
+      "start": 2083.5,
+      "end": 2087.82,
+      "duration": 4.32,
+      "text": "So this is really 1 minus confidence."
+    },
+    {
+      "index": 611,
+      "start": 2087.82,
+      "end": 2091.83,
+      "duration": 4.01,
+      "text": "So now your job is to figure out how large an n, how large"
+    },
+    {
+      "index": 612,
+      "start": 2091.83,
+      "end": 2096.219,
+      "duration": 4.389,
+      "text": "a sample should you be using, in order to satisfy the specs"
+    },
+    {
+      "index": 613,
+      "start": 2096.219,
+      "end": 2099.06,
+      "duration": 2.841,
+      "text": "that your boss gave you."
+    },
+    {
+      "index": 614,
+      "start": 2099.06,
+      "end": 2102.56,
+      "duration": 3.5,
+      "text": "All you know at this stage is the Chebyshev inequality."
+    },
+    {
+      "index": 615,
+      "start": 2102.56,
+      "end": 2105.21,
+      "duration": 2.65,
+      "text": "So you just try to use it."
+    },
+    {
+      "index": 616,
+      "start": 2105.21,
+      "end": 2109.78,
+      "duration": 4.57,
+      "text": "The probability of getting an answer that's more than 0.01"
+    },
+    {
+      "index": 617,
+      "start": 2109.78,
+      "end": 2114.78,
+      "duration": 5.0,
+      "text": "away from the true answer is, by Chebyshev's inequality, the"
+    },
+    {
+      "index": 618,
+      "start": 2114.78,
+      "end": 2120.17,
+      "duration": 5.39,
+      "text": "variance of this random variable divided by this"
+    },
+    {
+      "index": 619,
+      "start": 2120.17,
+      "end": 2121.54,
+      "duration": 1.37,
+      "text": "number squared."
+    },
+    {
+      "index": 620,
+      "start": 2121.54,
+      "end": 2125.87,
+      "duration": 4.33,
+      "text": "The variance, as we argued a little earlier, is the"
+    },
+    {
+      "index": 621,
+      "start": 2125.87,
+      "end": 2129.19,
+      "duration": 3.32,
+      "text": "variance of the x's divided by n."
+    },
+    {
+      "index": 622,
+      "start": 2129.19,
+      "end": 2131.83,
+      "duration": 2.64,
+      "text": "So we get this expression."
+    },
+    {
+      "index": 623,
+      "start": 2131.83,
+      "end": 2135.23,
+      "duration": 3.4,
+      "text": "So we would like this number to be less"
+    },
+    {
+      "index": 624,
+      "start": 2135.23,
+      "end": 2138.33,
+      "duration": 3.1,
+      "text": "than or equal to 0.05."
+    },
+    {
+      "index": 625,
+      "start": 2138.33,
+      "end": 2141.62,
+      "duration": 3.29,
+      "text": "OK, here we hit a little bit off a difficulty."
+    },
+    {
+      "index": 626,
+      "start": 2141.62,
+      "end": 2149.04,
+      "duration": 7.42,
+      "text": "The variance, (sigma_x)-squared, what is it?"
+    },
+    {
+      "index": 627,
+      "start": 2149.04,
+      "end": 2154.01,
+      "duration": 4.97,
+      "text": "(Sigma_x)-squared is, if you remember the variance of a"
+    },
+    {
+      "index": 628,
+      "start": 2154.01,
+      "end": 2158.01,
+      "duration": 4.0,
+      "text": "Bernoulli random variable, is this quantity."
+    },
+    {
+      "index": 629,
+      "start": 2158.01,
+      "end": 2159.73,
+      "duration": 1.72,
+      "text": "But we don't know it."
+    },
+    {
+      "index": 630,
+      "start": 2159.73,
+      "end": 2162.88,
+      "duration": 3.15,
+      "text": "f is what we're trying to estimate in the first place."
+    },
+    {
+      "index": 631,
+      "start": 2162.88,
+      "end": 2166.79,
+      "duration": 3.91,
+      "text": "So the variance is not known, so I cannot plug in a number"
+    },
+    {
+      "index": 632,
+      "start": 2166.79,
+      "end": 2168.08,
+      "duration": 1.29,
+      "text": "inside here."
+    },
+    {
+      "index": 633,
+      "start": 2168.08,
+      "end": 2172.34,
+      "duration": 4.26,
+      "text": "What I can do is to be conservative and use an upper"
+    },
+    {
+      "index": 634,
+      "start": 2172.34,
+      "end": 2174.05,
+      "duration": 1.71,
+      "text": "bound of the variance."
+    },
+    {
+      "index": 635,
+      "start": 2174.05,
+      "end": 2177.28,
+      "duration": 3.23,
+      "text": "How large can this number get?"
+    },
+    {
+      "index": 636,
+      "start": 2177.28,
+      "end": 2180.09,
+      "duration": 2.81,
+      "text": "Well, you can plot f times (1-f)."
+    },
+    {
+      "index": 637,
+      "start": 2185.95,
+      "end": 2186.75,
+      "duration": 0.8,
+      "text": "It's a parabola."
+    },
+    {
+      "index": 638,
+      "start": 2186.75,
+      "end": 2189.42,
+      "duration": 2.67,
+      "text": "It has a root at 0 and at 1."
+    },
+    {
+      "index": 639,
+      "start": 2189.42,
+      "end": 2194.45,
+      "duration": 5.03,
+      "text": "So the maximum value is going to be, by symmetry, at 1/2 and"
+    },
+    {
+      "index": 640,
+      "start": 2194.45,
+      "end": 2199.35,
+      "duration": 4.9,
+      "text": "when f is 1/2, then this variance becomes 1/4."
+    },
+    {
+      "index": 641,
+      "start": 2199.35,
+      "end": 2202.34,
+      "duration": 2.99,
+      "text": "So I don't know (sigma_x)-squared, but I'm"
+    },
+    {
+      "index": 642,
+      "start": 2202.34,
+      "end": 2205.48,
+      "duration": 3.14,
+      "text": "going to use the worst case value for (sigma_x)-squared,"
+    },
+    {
+      "index": 643,
+      "start": 2205.48,
+      "end": 2208.48,
+      "duration": 3.0,
+      "text": "which is 4."
+    },
+    {
+      "index": 644,
+      "start": 2208.48,
+      "end": 2213.32,
+      "duration": 4.84,
+      "text": "And this is now an inequality that I know to be always true."
+    },
+    {
+      "index": 645,
+      "start": 2213.32,
+      "end": 2216.91,
+      "duration": 3.59,
+      "text": "I've got my specs, and my specs tell me that I want this"
+    },
+    {
+      "index": 646,
+      "start": 2216.91,
+      "end": 2219.8,
+      "duration": 2.89,
+      "text": "number to be less than 0.05."
+    },
+    {
+      "index": 647,
+      "start": 2219.8,
+      "end": 2224.98,
+      "duration": 5.18,
+      "text": "And given what I know, the best thing I can do is to say,"
+    },
+    {
+      "index": 648,
+      "start": 2224.98,
+      "end": 2227.86,
+      "duration": 2.88,
+      "text": "OK, I'm going to take this number and make"
+    },
+    {
+      "index": 649,
+      "start": 2227.86,
+      "end": 2234.07,
+      "duration": 6.21,
+      "text": "it less than 0.05."
+    },
+    {
+      "index": 650,
+      "start": 2234.07,
+      "end": 2240.86,
+      "duration": 6.79,
+      "text": "If I choose my n so that this is less than 0.05, then I'm"
+    },
+    {
+      "index": 651,
+      "start": 2240.86,
+      "end": 2244.89,
+      "duration": 4.03,
+      "text": "certain that this probability is also less than 0.05."
+    },
+    {
+      "index": 652,
+      "start": 2244.89,
+      "end": 2248.72,
+      "duration": 3.83,
+      "text": "What does it take for this inequality to be true?"
+    },
+    {
+      "index": 653,
+      "start": 2248.72,
+      "end": 2256.37,
+      "duration": 7.65,
+      "text": "You can solve for n here, and you find that to satisfy this"
+    },
+    {
+      "index": 654,
+      "start": 2256.37,
+      "end": 2260.78,
+      "duration": 4.41,
+      "text": "inequality, n should be larger than or equal to 50,000."
+    },
+    {
+      "index": 655,
+      "start": 2260.78,
+      "end": 2264.25,
+      "duration": 3.47,
+      "text": "So you can just let n be equal to 50,000."
+    },
+    {
+      "index": 656,
+      "start": 2264.25,
+      "end": 2267.92,
+      "duration": 3.67,
+      "text": "So the Chebyshev inequality tells us that if you take n"
+    },
+    {
+      "index": 657,
+      "start": 2267.92,
+      "end": 2271.94,
+      "duration": 4.02,
+      "text": "equal to 50,000, then by the Chebyshev inequality, we're"
+    },
+    {
+      "index": 658,
+      "start": 2271.94,
+      "end": 2277.85,
+      "duration": 5.91,
+      "text": "guaranteed to satisfy the specs that we were given."
+    },
+    {
+      "index": 659,
+      "start": 2277.85,
+      "end": 2277.96,
+      "duration": 0.11,
+      "text": "Ok."
+    },
+    {
+      "index": 660,
+      "start": 2277.96,
+      "end": 2283.95,
+      "duration": 5.99,
+      "text": "Now, 50,000 is a bit of a large sample size."
+    },
+    {
+      "index": 661,
+      "start": 2283.95,
+      "end": 2285.98,
+      "duration": 2.03,
+      "text": "Right?"
+    },
+    {
+      "index": 662,
+      "start": 2285.98,
+      "end": 2289.49,
+      "duration": 3.51,
+      "text": "If you read anything in the newspapers where they say so"
+    },
+    {
+      "index": 663,
+      "start": 2289.49,
+      "end": 2293.23,
+      "duration": 3.74,
+      "text": "much of the voters think this and that, this was determined"
+    },
+    {
+      "index": 664,
+      "start": 2293.23,
+      "end": 2299.83,
+      "duration": 6.6,
+      "text": "on the basis of a sample of 1,200 likely voters or so."
+    },
+    {
+      "index": 665,
+      "start": 2299.83,
+      "end": 2303.43,
+      "duration": 3.6,
+      "text": "So the numbers that you will typically see in these news"
+    },
+    {
+      "index": 666,
+      "start": 2303.43,
+      "end": 2307.59,
+      "duration": 4.16,
+      "text": "items about polling, they usually involve sample sizes"
+    },
+    {
+      "index": 667,
+      "start": 2307.59,
+      "end": 2310.08,
+      "duration": 2.49,
+      "text": "about the 1,000 or so."
+    },
+    {
+      "index": 668,
+      "start": 2310.08,
+      "end": 2315.25,
+      "duration": 5.17,
+      "text": "You will never see a sample size of 50,000."
+    },
+    {
+      "index": 669,
+      "start": 2315.25,
+      "end": 2317.23,
+      "duration": 1.98,
+      "text": "That's too much."
+    },
+    {
+      "index": 670,
+      "start": 2317.23,
+      "end": 2321.67,
+      "duration": 4.44,
+      "text": "So where can we cut some corners?"
+    },
+    {
+      "index": 671,
+      "start": 2321.67,
+      "end": 2326.39,
+      "duration": 4.72,
+      "text": "Well, we can cut corners basically in three places."
+    },
+    {
+      "index": 672,
+      "start": 2326.39,
+      "end": 2329.95,
+      "duration": 3.56,
+      "text": "This requirement is a little too tight."
+    },
+    {
+      "index": 673,
+      "start": 2329.95,
+      "end": 2333.53,
+      "duration": 3.58,
+      "text": "Newspaper stories will usually tell you, we have an accuracy"
+    },
+    {
+      "index": 674,
+      "start": 2333.53,
+      "end": 2338.8,
+      "duration": 5.27,
+      "text": "of +/- 3 % points, instead of 1 % point."
+    },
+    {
+      "index": 675,
+      "start": 2338.8,
+      "end": 2343.77,
+      "duration": 4.97,
+      "text": "And because this number comes up as a square, by making it 3"
+    },
+    {
+      "index": 676,
+      "start": 2343.77,
+      "end": 2349.0,
+      "duration": 5.23,
+      "text": "% points instead of 1, saves you a factor of 10."
+    },
+    {
+      "index": 677,
+      "start": 2349.0,
+      "end": 2352.79,
+      "duration": 3.79,
+      "text": "Then, the five percent confidence, I guess that's"
+    },
+    {
+      "index": 678,
+      "start": 2352.79,
+      "end": 2355.18,
+      "duration": 2.39,
+      "text": "usually OK."
+    },
+    {
+      "index": 679,
+      "start": 2355.18,
+      "end": 2359.4,
+      "duration": 4.22,
+      "text": "If we use that factor of 10, then we make our sample that"
+    },
+    {
+      "index": 680,
+      "start": 2359.4,
+      "end": 2363.73,
+      "duration": 4.33,
+      "text": "we gain from here, then we get a sample size of 10,000."
+    },
+    {
+      "index": 681,
+      "start": 2363.73,
+      "end": 2365.98,
+      "duration": 2.25,
+      "text": "And that's, again, a little too big."
+    },
+    {
+      "index": 682,
+      "start": 2365.98,
+      "end": 2368.14,
+      "duration": 2.16,
+      "text": "So where can we fix things?"
+    },
+    {
+      "index": 683,
+      "start": 2368.14,
+      "end": 2371.14,
+      "duration": 3.0,
+      "text": "Well, it turns out that this inequality that we're using"
+    },
+    {
+      "index": 684,
+      "start": 2371.14,
+      "end": 2374.66,
+      "duration": 3.52,
+      "text": "here, Chebyshev's inequality, is just an inequality."
+    },
+    {
+      "index": 685,
+      "start": 2374.66,
+      "end": 2376.89,
+      "duration": 2.23,
+      "text": "It's not that tight."
+    },
+    {
+      "index": 686,
+      "start": 2376.89,
+      "end": 2378.85,
+      "duration": 1.96,
+      "text": "It's not very accurate."
+    },
+    {
+      "index": 687,
+      "start": 2378.85,
+      "end": 2382.8,
+      "duration": 3.95,
+      "text": "Maybe there's a better way of calculating or estimating this"
+    },
+    {
+      "index": 688,
+      "start": 2382.8,
+      "end": 2386.76,
+      "duration": 3.96,
+      "text": "quantity, which is smaller than this."
+    },
+    {
+      "index": 689,
+      "start": 2386.76,
+      "end": 2389.77,
+      "duration": 3.01,
+      "text": "And using a more accurate inequality or a more accurate"
+    },
+    {
+      "index": 690,
+      "start": 2389.77,
+      "end": 2395.32,
+      "duration": 5.55,
+      "text": "bound, then we can convince ourselves that we can settle"
+    },
+    {
+      "index": 691,
+      "start": 2395.32,
+      "end": 2397.8,
+      "duration": 2.48,
+      "text": "with a smaller sample size."
+    },
+    {
+      "index": 692,
+      "start": 2397.8,
+      "end": 2401.77,
+      "duration": 3.97,
+      "text": "This more accurate kind of inequality comes out of a"
+    },
+    {
+      "index": 693,
+      "start": 2401.77,
+      "end": 2404.14,
+      "duration": 2.37,
+      "text": "difference limit theorem, which is the next limit"
+    },
+    {
+      "index": 694,
+      "start": 2404.14,
+      "end": 2406.03,
+      "duration": 1.89,
+      "text": "theorem we're going to consider."
+    },
+    {
+      "index": 695,
+      "start": 2406.03,
+      "end": 2408.31,
+      "duration": 2.28,
+      "text": "We're going to start the discussion today, but we're"
+    },
+    {
+      "index": 696,
+      "start": 2408.31,
+      "end": 2412.15,
+      "duration": 3.84,
+      "text": "going to continue with it next week."
+    },
+    {
+      "index": 697,
+      "start": 2412.15,
+      "end": 2418.75,
+      "duration": 6.6,
+      "text": "Before I tell you exactly what that other limit theorem says,"
+    },
+    {
+      "index": 698,
+      "start": 2418.75,
+      "end": 2420.8,
+      "duration": 2.05,
+      "text": "let me give you the big picture of"
+    },
+    {
+      "index": 699,
+      "start": 2420.8,
+      "end": 2424.76,
+      "duration": 3.96,
+      "text": "what's involved here."
+    },
+    {
+      "index": 700,
+      "start": 2424.76,
+      "end": 2429.17,
+      "duration": 4.41,
+      "text": "We're dealing with sums of i.i.d random variables."
+    },
+    {
+      "index": 701,
+      "start": 2429.17,
+      "end": 2432.3,
+      "duration": 3.13,
+      "text": "Each X has a distribution of its own."
+    },
+    {
+      "index": 702,
+      "start": 2434.84,
+      "end": 2441.19,
+      "duration": 6.35,
+      "text": "So suppose that X has a distribution which is"
+    },
+    {
+      "index": 703,
+      "start": 2441.19,
+      "end": 2443.09,
+      "duration": 1.9,
+      "text": "something like this."
+    },
+    {
+      "index": 704,
+      "start": 2443.09,
+      "end": 2448.56,
+      "duration": 5.47,
+      "text": "This is the density of X. If I add lots of X's together, what"
+    },
+    {
+      "index": 705,
+      "start": 2448.56,
+      "end": 2451.46,
+      "duration": 2.9,
+      "text": "kind of distribution do I expect?"
+    },
+    {
+      "index": 706,
+      "start": 2451.46,
+      "end": 2455.17,
+      "duration": 3.71,
+      "text": "The mean is going to be n times the mean of an"
+    },
+    {
+      "index": 707,
+      "start": 2455.17,
+      "end": 2460.56,
+      "duration": 5.39,
+      "text": "individual X. So if this is mu, I'm going to get a mean of"
+    },
+    {
+      "index": 708,
+      "start": 2460.56,
+      "end": 2462.73,
+      "duration": 2.17,
+      "text": "n times mu."
+    },
+    {
+      "index": 709,
+      "start": 2462.73,
+      "end": 2466.62,
+      "duration": 3.89,
+      "text": "But my variance will also increase."
+    },
+    {
+      "index": 710,
+      "start": 2466.62,
+      "end": 2468.05,
+      "duration": 1.43,
+      "text": "When I add the random variables,"
+    },
+    {
+      "index": 711,
+      "start": 2468.05,
+      "end": 2470.19,
+      "duration": 2.14,
+      "text": "I'm adding the variances."
+    },
+    {
+      "index": 712,
+      "start": 2470.19,
+      "end": 2473.37,
+      "duration": 3.18,
+      "text": "So since the variance increases, we're going to get"
+    },
+    {
+      "index": 713,
+      "start": 2473.37,
+      "end": 2477.61,
+      "duration": 4.24,
+      "text": "a distribution that's pretty wide."
+    },
+    {
+      "index": 714,
+      "start": 2477.61,
+      "end": 2483.24,
+      "duration": 5.63,
+      "text": "So this is the density of X1 plus all the way to Xn."
+    },
+    {
+      "index": 715,
+      "start": 2483.24,
+      "end": 2487.64,
+      "duration": 4.4,
+      "text": "So as n increases, my distribution shifts, because"
+    },
+    {
+      "index": 716,
+      "start": 2487.64,
+      "end": 2488.77,
+      "duration": 1.13,
+      "text": "the mean is positive."
+    },
+    {
+      "index": 717,
+      "start": 2488.77,
+      "end": 2490.61,
+      "duration": 1.84,
+      "text": "So I keep adding things."
+    },
+    {
+      "index": 718,
+      "start": 2490.61,
+      "end": 2493.87,
+      "duration": 3.26,
+      "text": "And also, my distribution becomes wider and wider."
+    },
+    {
+      "index": 719,
+      "start": 2493.87,
+      "end": 2496.08,
+      "duration": 2.21,
+      "text": "The variance increases."
+    },
+    {
+      "index": 720,
+      "start": 2496.08,
+      "end": 2499.26,
+      "duration": 3.18,
+      "text": "Well, we started a different scaling."
+    },
+    {
+      "index": 721,
+      "start": 2499.26,
+      "end": 2502.98,
+      "duration": 3.72,
+      "text": "We started a scaled version of this quantity when we looked"
+    },
+    {
+      "index": 722,
+      "start": 2502.98,
+      "end": 2506.18,
+      "duration": 3.2,
+      "text": "at the weak law of large numbers."
+    },
+    {
+      "index": 723,
+      "start": 2506.18,
+      "end": 2509.58,
+      "duration": 3.4,
+      "text": "In the weak law of large numbers, we take this random"
+    },
+    {
+      "index": 724,
+      "start": 2509.58,
+      "end": 2512.14,
+      "duration": 2.56,
+      "text": "variable and divide it by n."
+    },
+    {
+      "index": 725,
+      "start": 2512.14,
+      "end": 2516.3,
+      "duration": 4.16,
+      "text": "And what the weak law tells us is that we're going to get a"
+    },
+    {
+      "index": 726,
+      "start": 2516.3,
+      "end": 2521.05,
+      "duration": 4.75,
+      "text": "distribution that's very highly concentrated around the"
+    },
+    {
+      "index": 727,
+      "start": 2521.05,
+      "end": 2523.65,
+      "duration": 2.6,
+      "text": "true mean, which is mu."
+    },
+    {
+      "index": 728,
+      "start": 2523.65,
+      "end": 2527.52,
+      "duration": 3.87,
+      "text": "So this here would be the density of X1 plus"
+    },
+    {
+      "index": 729,
+      "start": 2527.52,
+      "end": 2532.63,
+      "duration": 5.11,
+      "text": "Xn divided by n."
+    },
+    {
+      "index": 730,
+      "start": 2532.63,
+      "end": 2536.66,
+      "duration": 4.03,
+      "text": "Because I've divided by n, the mean has become the original"
+    },
+    {
+      "index": 731,
+      "start": 2536.66,
+      "end": 2539.41,
+      "duration": 2.75,
+      "text": "mean, which is mu."
+    },
+    {
+      "index": 732,
+      "start": 2539.41,
+      "end": 2542.62,
+      "duration": 3.21,
+      "text": "But the weak law of large numbers tells us that the"
+    },
+    {
+      "index": 733,
+      "start": 2542.62,
+      "end": 2546.65,
+      "duration": 4.03,
+      "text": "distribution of this random variable is very concentrated"
+    },
+    {
+      "index": 734,
+      "start": 2546.65,
+      "end": 2547.81,
+      "duration": 1.16,
+      "text": "around the mean."
+    },
+    {
+      "index": 735,
+      "start": 2547.81,
+      "end": 2549.85,
+      "duration": 2.04,
+      "text": "So we get a distribution that's very"
+    },
+    {
+      "index": 736,
+      "start": 2549.85,
+      "end": 2551.52,
+      "duration": 1.67,
+      "text": "narrow in this kind."
+    },
+    {
+      "index": 737,
+      "start": 2551.52,
+      "end": 2554.23,
+      "duration": 2.71,
+      "text": "In the limit, this distribution becomes one"
+    },
+    {
+      "index": 738,
+      "start": 2554.23,
+      "end": 2557.57,
+      "duration": 3.34,
+      "text": "that's just concentrated on top of mu."
+    },
+    {
+      "index": 739,
+      "start": 2557.57,
+      "end": 2560.93,
+      "duration": 3.36,
+      "text": "So it's sort of a degenerate distribution."
+    },
+    {
+      "index": 740,
+      "start": 2560.93,
+      "end": 2566.07,
+      "duration": 5.14,
+      "text": "So these are two extremes, no scaling for the sum, a scaling"
+    },
+    {
+      "index": 741,
+      "start": 2566.07,
+      "end": 2567.74,
+      "duration": 1.67,
+      "text": "where we divide by n."
+    },
+    {
+      "index": 742,
+      "start": 2567.74,
+      "end": 2570.68,
+      "duration": 2.94,
+      "text": "In this extreme, we get the trivial case of a distribution"
+    },
+    {
+      "index": 743,
+      "start": 2570.68,
+      "end": 2572.86,
+      "duration": 2.18,
+      "text": "that flattens out completely."
+    },
+    {
+      "index": 744,
+      "start": 2572.86,
+      "end": 2576.07,
+      "duration": 3.21,
+      "text": "In this scaling, we get a distribution that gets"
+    },
+    {
+      "index": 745,
+      "start": 2576.07,
+      "end": 2579.15,
+      "duration": 3.08,
+      "text": "concentrated around a single point."
+    },
+    {
+      "index": 746,
+      "start": 2579.15,
+      "end": 2582.03,
+      "duration": 2.88,
+      "text": "Again, we look at some intermediate scaling that"
+    },
+    {
+      "index": 747,
+      "start": 2582.03,
+      "end": 2584.05,
+      "duration": 2.02,
+      "text": "makes things more interesting."
+    },
+    {
+      "index": 748,
+      "start": 2584.05,
+      "end": 2589.7,
+      "duration": 5.65,
+      "text": "Things do become interesting if we scale by dividing the"
+    },
+    {
+      "index": 749,
+      "start": 2589.7,
+      "end": 2594.52,
+      "duration": 4.82,
+      "text": "sum by square root of n instead of dividing by n."
+    },
+    {
+      "index": 750,
+      "start": 2594.52,
+      "end": 2597.21,
+      "duration": 2.69,
+      "text": "What effect does this have?"
+    },
+    {
+      "index": 751,
+      "start": 2597.21,
+      "end": 2602.51,
+      "duration": 5.3,
+      "text": "When we scale by dividing by square root of n, the variance"
+    },
+    {
+      "index": 752,
+      "start": 2602.51,
+      "end": 2608.05,
+      "duration": 5.54,
+      "text": "of Sn over square root of n is going to be the variance of Sn"
+    },
+    {
+      "index": 753,
+      "start": 2608.05,
+      "end": 2610.76,
+      "duration": 2.71,
+      "text": "over sum divided by n."
+    },
+    {
+      "index": 754,
+      "start": 2610.76,
+      "end": 2612.78,
+      "duration": 2.02,
+      "text": "That's how variances behave."
+    },
+    {
+      "index": 755,
+      "start": 2612.78,
+      "end": 2617.37,
+      "duration": 4.59,
+      "text": "The variance of Sn is n sigma-squared, divide by n,"
+    },
+    {
+      "index": 756,
+      "start": 2617.37,
+      "end": 2621.33,
+      "duration": 3.96,
+      "text": "which is sigma squared, which means that when we scale in"
+    },
+    {
+      "index": 757,
+      "start": 2621.33,
+      "end": 2625.94,
+      "duration": 4.61,
+      "text": "this particular way, as n changes, the"
+    },
+    {
+      "index": 758,
+      "start": 2625.94,
+      "end": 2628.23,
+      "duration": 2.29,
+      "text": "variance doesn't change."
+    },
+    {
+      "index": 759,
+      "start": 2628.23,
+      "end": 2630.3,
+      "duration": 2.07,
+      "text": "So the width of our distribution"
+    },
+    {
+      "index": 760,
+      "start": 2630.3,
+      "end": 2632.19,
+      "duration": 1.89,
+      "text": "will be sort of constant."
+    },
+    {
+      "index": 761,
+      "start": 2632.19,
+      "end": 2636.36,
+      "duration": 4.17,
+      "text": "The distribution changes shape, but it doesn't become"
+    },
+    {
+      "index": 762,
+      "start": 2636.36,
+      "end": 2639.91,
+      "duration": 3.55,
+      "text": "narrower as was the case here."
+    },
+    {
+      "index": 763,
+      "start": 2639.91,
+      "end": 2644.55,
+      "duration": 4.64,
+      "text": "It doesn't become wider, kind of keeps the same width."
+    },
+    {
+      "index": 764,
+      "start": 2644.55,
+      "end": 2649.26,
+      "duration": 4.71,
+      "text": "So perhaps in the limit, this distribution is going to take"
+    },
+    {
+      "index": 765,
+      "start": 2649.26,
+      "end": 2651.08,
+      "duration": 1.82,
+      "text": "an interesting shape."
+    },
+    {
+      "index": 766,
+      "start": 2651.08,
+      "end": 2654.17,
+      "duration": 3.09,
+      "text": "And that's indeed the case."
+    },
+    {
+      "index": 767,
+      "start": 2654.17,
+      "end": 2659.8,
+      "duration": 5.63,
+      "text": "So let's do what we did before."
+    },
+    {
+      "index": 768,
+      "start": 2659.8,
+      "end": 2665.11,
+      "duration": 5.31,
+      "text": "So we're looking at the sum, and we want to divide the sum"
+    },
+    {
+      "index": 769,
+      "start": 2665.11,
+      "end": 2668.86,
+      "duration": 3.75,
+      "text": "by something that goes like square root of n."
+    },
+    {
+      "index": 770,
+      "start": 2668.86,
+      "end": 2673.14,
+      "duration": 4.28,
+      "text": "So the variance of Sn is n sigma squared."
+    },
+    {
+      "index": 771,
+      "start": 2673.14,
+      "end": 2678.24,
+      "duration": 5.1,
+      "text": "The variance of the sigma Sn is the square root of that."
+    },
+    {
+      "index": 772,
+      "start": 2678.24,
+      "end": 2679.57,
+      "duration": 1.33,
+      "text": "It's this number."
+    },
+    {
+      "index": 773,
+      "start": 2679.57,
+      "end": 2683.93,
+      "duration": 4.36,
+      "text": "So effectively, we're scaling by order of square root n."
+    },
+    {
+      "index": 774,
+      "start": 2683.93,
+      "end": 2687.57,
+      "duration": 3.64,
+      "text": "Now, I'm doing another thing here."
+    },
+    {
+      "index": 775,
+      "start": 2687.57,
+      "end": 2692.35,
+      "duration": 4.78,
+      "text": "If my random variable has a positive mean, then this"
+    },
+    {
+      "index": 776,
+      "start": 2692.35,
+      "end": 2695.47,
+      "duration": 3.12,
+      "text": "quantity is going to have a mean that's"
+    },
+    {
+      "index": 777,
+      "start": 2695.47,
+      "end": 2696.95,
+      "duration": 1.48,
+      "text": "positive and growing."
+    },
+    {
+      "index": 778,
+      "start": 2696.95,
+      "end": 2699.45,
+      "duration": 2.5,
+      "text": "It's going to be shifting to the right."
+    },
+    {
+      "index": 779,
+      "start": 2699.45,
+      "end": 2701.35,
+      "duration": 1.9,
+      "text": "Why is that?"
+    },
+    {
+      "index": 780,
+      "start": 2701.35,
+      "end": 2704.37,
+      "duration": 3.02,
+      "text": "Sn has a mean that's proportional to n."
+    },
+    {
+      "index": 781,
+      "start": 2704.37,
+      "end": 2709.51,
+      "duration": 5.14,
+      "text": "When I divide by square root n, then it means that the mean"
+    },
+    {
+      "index": 782,
+      "start": 2709.51,
+      "end": 2711.99,
+      "duration": 2.48,
+      "text": "scales like square root of n."
+    },
+    {
+      "index": 783,
+      "start": 2711.99,
+      "end": 2714.74,
+      "duration": 2.75,
+      "text": "So my distribution would still keep shifting"
+    },
+    {
+      "index": 784,
+      "start": 2714.74,
+      "end": 2716.72,
+      "duration": 1.98,
+      "text": "after I do this division."
+    },
+    {
+      "index": 785,
+      "start": 2716.72,
+      "end": 2720.86,
+      "duration": 4.14,
+      "text": "I want to keep my distribution in place, so I subtract out"
+    },
+    {
+      "index": 786,
+      "start": 2720.86,
+      "end": 2723.92,
+      "duration": 3.06,
+      "text": "the mean of Sn."
+    },
+    {
+      "index": 787,
+      "start": 2723.92,
+      "end": 2729.58,
+      "duration": 5.66,
+      "text": "So what we're doing here is a standard technique or"
+    },
+    {
+      "index": 788,
+      "start": 2729.58,
+      "end": 2732.67,
+      "duration": 3.09,
+      "text": "transformation where you take a random variable and you"
+    },
+    {
+      "index": 789,
+      "start": 2732.67,
+      "end": 2734.89,
+      "duration": 2.22,
+      "text": "so-called standardize it."
+    },
+    {
+      "index": 790,
+      "start": 2734.89,
+      "end": 2738.5,
+      "duration": 3.61,
+      "text": "I remove the mean of that random variable and I divide"
+    },
+    {
+      "index": 791,
+      "start": 2738.5,
+      "end": 2740.1,
+      "duration": 1.6,
+      "text": "by the standard deviation."
+    },
+    {
+      "index": 792,
+      "start": 2740.1,
+      "end": 2743.03,
+      "duration": 2.93,
+      "text": "This results in a random variable that has 0 mean and"
+    },
+    {
+      "index": 793,
+      "start": 2743.03,
+      "end": 2744.96,
+      "duration": 1.93,
+      "text": "unit variance."
+    },
+    {
+      "index": 794,
+      "start": 2744.96,
+      "end": 2749.88,
+      "duration": 4.92,
+      "text": "What Zn measures is the following, Zn tells me how"
+    },
+    {
+      "index": 795,
+      "start": 2749.88,
+      "end": 2755.52,
+      "duration": 5.64,
+      "text": "many standard deviations am I away from the mean."
+    },
+    {
+      "index": 796,
+      "start": 2755.52,
+      "end": 2759.38,
+      "duration": 3.86,
+      "text": "Sn minus (n times expected value of X) tells me how much"
+    },
+    {
+      "index": 797,
+      "start": 2759.38,
+      "end": 2762.98,
+      "duration": 3.6,
+      "text": "is Sn away from the mean value of Sn."
+    },
+    {
+      "index": 798,
+      "start": 2762.98,
+      "end": 2766.25,
+      "duration": 3.27,
+      "text": "And by dividing by the standard deviation of Sn --"
+    },
+    {
+      "index": 799,
+      "start": 2766.25,
+      "end": 2769.83,
+      "duration": 3.58,
+      "text": "this tells me how many standard deviations away from"
+    },
+    {
+      "index": 800,
+      "start": 2769.83,
+      "end": 2772.55,
+      "duration": 2.72,
+      "text": "the mean am I."
+    },
+    {
+      "index": 801,
+      "start": 2772.55,
+      "end": 2775.36,
+      "duration": 2.81,
+      "text": "So we're going to look at this random variable, which is just"
+    },
+    {
+      "index": 802,
+      "start": 2775.36,
+      "end": 2777.26,
+      "duration": 1.9,
+      "text": "a transformation Zn."
+    },
+    {
+      "index": 803,
+      "start": 2777.26,
+      "end": 2780.84,
+      "duration": 3.58,
+      "text": "It's a linear transformation of Sn."
+    },
+    {
+      "index": 804,
+      "start": 2780.84,
+      "end": 2784.74,
+      "duration": 3.9,
+      "text": "S And we're going to compare this random variable to a"
+    },
+    {
+      "index": 805,
+      "start": 2784.74,
+      "end": 2787.23,
+      "duration": 2.49,
+      "text": "standard normal random variable."
+    },
+    {
+      "index": 806,
+      "start": 2787.23,
+      "end": 2790.61,
+      "duration": 3.38,
+      "text": "So a standard normal is the random variable that you are"
+    },
+    {
+      "index": 807,
+      "start": 2790.61,
+      "end": 2795.2,
+      "duration": 4.59,
+      "text": "familiar with, given by the usual formula, and for which"
+    },
+    {
+      "index": 808,
+      "start": 2795.2,
+      "end": 2797.4,
+      "duration": 2.2,
+      "text": "we have tables for it."
+    },
+    {
+      "index": 809,
+      "start": 2797.4,
+      "end": 2800.4,
+      "duration": 3.0,
+      "text": "This Zn has 0 mean and unit variance."
+    },
+    {
+      "index": 810,
+      "start": 2800.4,
+      "end": 2804.22,
+      "duration": 3.82,
+      "text": "So in that respect, it has the same statistics as the"
+    },
+    {
+      "index": 811,
+      "start": 2804.22,
+      "end": 2805.655,
+      "duration": 1.435,
+      "text": "standard normal."
+    },
+    {
+      "index": 812,
+      "start": 2805.655,
+      "end": 2808.96,
+      "duration": 3.305,
+      "text": "The distribution of Zn could be anything --"
+    },
+    {
+      "index": 813,
+      "start": 2808.96,
+      "end": 2810.77,
+      "duration": 1.81,
+      "text": "can be pretty messy."
+    },
+    {
+      "index": 814,
+      "start": 2810.77,
+      "end": 2813.32,
+      "duration": 2.55,
+      "text": "But there is this amazing theorem called the central"
+    },
+    {
+      "index": 815,
+      "start": 2813.32,
+      "end": 2818.25,
+      "duration": 4.93,
+      "text": "limit theorem that tells us that the distribution of Zn"
+    },
+    {
+      "index": 816,
+      "start": 2818.25,
+      "end": 2821.93,
+      "duration": 3.68,
+      "text": "approaches the distribution of the standard normal in the"
+    },
+    {
+      "index": 817,
+      "start": 2821.93,
+      "end": 2826.27,
+      "duration": 4.34,
+      "text": "following sense, that probability is that you can"
+    },
+    {
+      "index": 818,
+      "start": 2826.27,
+      "end": 2827.08,
+      "duration": 0.81,
+      "text": "calculate --"
+    },
+    {
+      "index": 819,
+      "start": 2827.08,
+      "end": 2827.93,
+      "duration": 0.85,
+      "text": "of this type --"
+    },
+    {
+      "index": 820,
+      "start": 2827.93,
+      "end": 2830.35,
+      "duration": 2.42,
+      "text": "that you can calculate for Zn --"
+    },
+    {
+      "index": 821,
+      "start": 2830.35,
+      "end": 2833.33,
+      "duration": 2.98,
+      "text": "is the limit becomes the same as the probabilities that you"
+    },
+    {
+      "index": 822,
+      "start": 2833.33,
+      "end": 2837.59,
+      "duration": 4.26,
+      "text": "would get from the standard normal tables for Z."
+    },
+    {
+      "index": 823,
+      "start": 2837.59,
+      "end": 2839.75,
+      "duration": 2.16,
+      "text": "It's a statement about the cumulative"
+    },
+    {
+      "index": 824,
+      "start": 2839.75,
+      "end": 2841.96,
+      "duration": 2.21,
+      "text": "distribution functions."
+    },
+    {
+      "index": 825,
+      "start": 2841.96,
+      "end": 2845.06,
+      "duration": 3.1,
+      "text": "This quantity, as a function of c, is the cumulative"
+    },
+    {
+      "index": 826,
+      "start": 2845.06,
+      "end": 2847.92,
+      "duration": 2.86,
+      "text": "distribution function of the random variable Zn."
+    },
+    {
+      "index": 827,
+      "start": 2847.92,
+      "end": 2850.86,
+      "duration": 2.94,
+      "text": "This is the cumulative distribution function of the"
+    },
+    {
+      "index": 828,
+      "start": 2850.86,
+      "end": 2852.19,
+      "duration": 1.33,
+      "text": "standard normal."
+    },
+    {
+      "index": 829,
+      "start": 2852.19,
+      "end": 2854.53,
+      "duration": 2.34,
+      "text": "The central limit theorem tells us that the cumulative"
+    },
+    {
+      "index": 830,
+      "start": 2854.53,
+      "end": 2859.34,
+      "duration": 4.81,
+      "text": "distribution function of the sum of a number of random"
+    },
+    {
+      "index": 831,
+      "start": 2859.34,
+      "end": 2863.04,
+      "duration": 3.7,
+      "text": "variables, after they're appropriately standardized,"
+    },
+    {
+      "index": 832,
+      "start": 2863.04,
+      "end": 2866.48,
+      "duration": 3.44,
+      "text": "approaches the cumulative distribution function over the"
+    },
+    {
+      "index": 833,
+      "start": 2866.48,
+      "end": 2870.58,
+      "duration": 4.1,
+      "text": "standard normal distribution."
+    },
+    {
+      "index": 834,
+      "start": 2870.58,
+      "end": 2873.62,
+      "duration": 3.04,
+      "text": "In particular, this tells us that we can calculate"
+    },
+    {
+      "index": 835,
+      "start": 2873.62,
+      "end": 2879.48,
+      "duration": 5.86,
+      "text": "probabilities for Zn when n is large by calculating instead"
+    },
+    {
+      "index": 836,
+      "start": 2879.48,
+      "end": 2882.8,
+      "duration": 3.32,
+      "text": "probabilities for Z. And that's going to be a good"
+    },
+    {
+      "index": 837,
+      "start": 2882.8,
+      "end": 2884.02,
+      "duration": 1.22,
+      "text": "approximation."
+    },
+    {
+      "index": 838,
+      "start": 2884.02,
+      "end": 2887.67,
+      "duration": 3.65,
+      "text": "Probabilities for Z are easy to calculate because they're"
+    },
+    {
+      "index": 839,
+      "start": 2887.67,
+      "end": 2889.25,
+      "duration": 1.58,
+      "text": "well tabulated."
+    },
+    {
+      "index": 840,
+      "start": 2889.25,
+      "end": 2892.82,
+      "duration": 3.57,
+      "text": "So we get a very nice shortcut for calculating"
+    },
+    {
+      "index": 841,
+      "start": 2892.82,
+      "end": 2894.99,
+      "duration": 2.17,
+      "text": "probabilities for Zn."
+    },
+    {
+      "index": 842,
+      "start": 2894.99,
+      "end": 2897.99,
+      "duration": 3.0,
+      "text": "Now, it's not Zn that you're interested in."
+    },
+    {
+      "index": 843,
+      "start": 2897.99,
+      "end": 2900.89,
+      "duration": 2.9,
+      "text": "What you're interested in is Sn."
+    },
+    {
+      "index": 844,
+      "start": 2900.89,
+      "end": 2903.82,
+      "duration": 2.93,
+      "text": "And Sn --"
+    },
+    {
+      "index": 845,
+      "start": 2903.82,
+      "end": 2909.08,
+      "duration": 5.26,
+      "text": "inverting this relation here --"
+    },
+    {
+      "index": 846,
+      "start": 2909.08,
+      "end": 2918.33,
+      "duration": 9.25,
+      "text": "Sn is square root n sigma Zn plus n expected"
+    },
+    {
+      "index": 847,
+      "start": 2918.33,
+      "end": 2922.602,
+      "duration": 4.272,
+      "text": "value of X. All right."
+    },
+    {
+      "index": 848,
+      "start": 2922.602,
+      "end": 2926.62,
+      "duration": 4.018,
+      "text": "Now, if you can calculate probabilities for Zn, even"
+    },
+    {
+      "index": 849,
+      "start": 2926.62,
+      "end": 2929.38,
+      "duration": 2.76,
+      "text": "approximately, then you can certainly calculate"
+    },
+    {
+      "index": 850,
+      "start": 2929.38,
+      "end": 2933.29,
+      "duration": 3.91,
+      "text": "probabilities for Sn, because one is a linear"
+    },
+    {
+      "index": 851,
+      "start": 2933.29,
+      "end": 2935.206,
+      "duration": 1.916,
+      "text": "function of the other."
+    },
+    {
+      "index": 852,
+      "start": 2935.206,
+      "end": 2938.71,
+      "duration": 3.504,
+      "text": "And we're going to do a little bit of that next time."
+    },
+    {
+      "index": 853,
+      "start": 2938.71,
+      "end": 2942.22,
+      "duration": 3.51,
+      "text": "You're going to get, also, some practice in recitation."
+    },
+    {
+      "index": 854,
+      "start": 2942.22,
+      "end": 2944.975,
+      "duration": 2.755,
+      "text": "At a more vague level, you could describe the central"
+    },
+    {
+      "index": 855,
+      "start": 2944.975,
+      "end": 2948.27,
+      "duration": 3.295,
+      "text": "limit theorem as saying the following, when n is large,"
+    },
+    {
+      "index": 856,
+      "start": 2948.27,
+      "end": 2952.16,
+      "duration": 3.89,
+      "text": "you can pretend that Zn is a standard normal random"
+    },
+    {
+      "index": 857,
+      "start": 2952.16,
+      "end": 2955.44,
+      "duration": 3.28,
+      "text": "variable and do the calculations as if Zn was"
+    },
+    {
+      "index": 858,
+      "start": 2955.44,
+      "end": 2956.68,
+      "duration": 1.24,
+      "text": "standard normal."
+    },
+    {
+      "index": 859,
+      "start": 2956.68,
+      "end": 2961.53,
+      "duration": 4.85,
+      "text": "Now, pretending that Zn is normal is the same as"
+    },
+    {
+      "index": 860,
+      "start": 2961.53,
+      "end": 2965.9,
+      "duration": 4.37,
+      "text": "pretending that Sn is normal, because Sn is a linear"
+    },
+    {
+      "index": 861,
+      "start": 2965.9,
+      "end": 2967.7,
+      "duration": 1.8,
+      "text": "function of Zn."
+    },
+    {
+      "index": 862,
+      "start": 2967.7,
+      "end": 2970.4,
+      "duration": 2.7,
+      "text": "And we know that linear functions of normal random"
+    },
+    {
+      "index": 863,
+      "start": 2970.4,
+      "end": 2972.14,
+      "duration": 1.74,
+      "text": "variables are normal."
+    },
+    {
+      "index": 864,
+      "start": 2972.14,
+      "end": 2976.29,
+      "duration": 4.15,
+      "text": "So the central limit theorem essentially tells us that we"
+    },
+    {
+      "index": 865,
+      "start": 2976.29,
+      "end": 2980.07,
+      "duration": 3.78,
+      "text": "can pretend that Sn is a normal random variable and do"
+    },
+    {
+      "index": 866,
+      "start": 2980.07,
+      "end": 2984.76,
+      "duration": 4.69,
+      "text": "the calculations just as if it were a normal random variable."
+    },
+    {
+      "index": 867,
+      "start": 2984.76,
+      "end": 2987.02,
+      "duration": 2.26,
+      "text": "Mathematically speaking though, the central limit"
+    },
+    {
+      "index": 868,
+      "start": 2987.02,
+      "end": 2990.48,
+      "duration": 3.46,
+      "text": "theorem does not talk about the distribution of Sn,"
+    },
+    {
+      "index": 869,
+      "start": 2990.48,
+      "end": 2994.94,
+      "duration": 4.46,
+      "text": "because the distribution of Sn becomes degenerate in the"
+    },
+    {
+      "index": 870,
+      "start": 2994.94,
+      "end": 2997.65,
+      "duration": 2.71,
+      "text": "limit, just a very flat and long thing."
+    },
+    {
+      "index": 871,
+      "start": 2997.65,
+      "end": 2999.81,
+      "duration": 2.16,
+      "text": "So strictly speaking mathematically, it's a"
+    },
+    {
+      "index": 872,
+      "start": 2999.81,
+      "end": 3003.06,
+      "duration": 3.25,
+      "text": "statement about cumulative distributions of Zn's."
+    },
+    {
+      "index": 873,
+      "start": 3003.06,
+      "end": 3006.42,
+      "duration": 3.36,
+      "text": "Practically, the way you use it is by just pretending that"
+    },
+    {
+      "index": 874,
+      "start": 3006.42,
+      "end": 3008.415,
+      "duration": 1.995,
+      "text": "Sn is normal."
+    },
+    {
+      "index": 875,
+      "start": 3008.415,
+      "end": 3009.4,
+      "duration": 0.985,
+      "text": "Very good."
+    },
+    {
+      "index": 876,
+      "start": 3009.4,
+      "end": 3011.08,
+      "duration": 1.68,
+      "text": "Enjoy the Thanksgiving Holiday."
+    }
+  ],
+  "course": {
+    "category": "Physics",
+    "title": "Electricity and Magnetism",
+    "source_url": "https://www.youtube.com/playlist?list=PLUl4u3cNGP61MdtwGTqZA0MreSaDybji8"
+  }
+}

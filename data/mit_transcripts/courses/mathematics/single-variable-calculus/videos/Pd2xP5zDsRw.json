@@ -1,0 +1,5275 @@
+{
+  "video": {
+    "id": "Pd2xP5zDsRw",
+    "title": "Lec 20 | MIT 18.01 Single Variable Calculus, Fall 2007",
+    "url": "https://www.youtube.com/watch?v=Pd2xP5zDsRw",
+    "channel": "MIT OpenCourseWare",
+    "duration": 2970,
+    "language": "en"
+  },
+  "segment_count": 751,
+  "segments": [
+    {
+      "index": 0,
+      "start": 0.0,
+      "end": 2.33,
+      "duration": 2.33,
+      "text": "The following content is provided under a Creative"
+    },
+    {
+      "index": 1,
+      "start": 2.33,
+      "end": 3.62,
+      "duration": 1.29,
+      "text": "Commons license."
+    },
+    {
+      "index": 2,
+      "start": 3.62,
+      "end": 6.58,
+      "duration": 2.96,
+      "text": "Your support will help MIT OpenCourseWare continue to"
+    },
+    {
+      "index": 3,
+      "start": 6.58,
+      "end": 9.95,
+      "duration": 3.37,
+      "text": "offer high quality educational resources for free."
+    },
+    {
+      "index": 4,
+      "start": 9.95,
+      "end": 13.04,
+      "duration": 3.09,
+      "text": "To make a donation, or to view additional materials from"
+    },
+    {
+      "index": 5,
+      "start": 13.04,
+      "end": 16.54,
+      "duration": 3.5,
+      "text": "hundreds of MIT courses, visit MIT OpenCourseWare at"
+    },
+    {
+      "index": 6,
+      "start": 16.54,
+      "end": 22.18,
+      "duration": 5.64,
+      "text": "ocw.mit.edu."
+    },
+    {
+      "index": 7,
+      "start": 22.18,
+      "end": 24.52,
+      "duration": 2.34,
+      "text": "PROFESSOR: To begin today I want to remind you, I need to"
+    },
+    {
+      "index": 8,
+      "start": 24.52,
+      "end": 27.72,
+      "duration": 3.2,
+      "text": "write it down on the board at least twice, of the"
+    },
+    {
+      "index": 9,
+      "start": 27.72,
+      "end": 33.23,
+      "duration": 5.51,
+      "text": "fundamental theorem of calculus."
+    },
+    {
+      "index": 10,
+      "start": 33.23,
+      "end": 38.87,
+      "duration": 5.64,
+      "text": "We called it FTC 1 because it's the first version of the"
+    },
+    {
+      "index": 11,
+      "start": 38.87,
+      "end": 39.62,
+      "duration": 0.75,
+      "text": "fundamental theorem."
+    },
+    {
+      "index": 12,
+      "start": 39.62,
+      "end": 43.15,
+      "duration": 3.53,
+      "text": "We'll be talking about another version, called the second"
+    },
+    {
+      "index": 13,
+      "start": 43.15,
+      "end": 44.94,
+      "duration": 1.79,
+      "text": "version, today."
+    },
+    {
+      "index": 14,
+      "start": 44.94,
+      "end": 58.01,
+      "duration": 13.07,
+      "text": "And what it says is this: If F' = f, then the integral from"
+    },
+    {
+      "index": 15,
+      "start": 58.01,
+      "end": 66.41,
+      "duration": 8.4,
+      "text": "a to b of f (x) dx = F ( b) - F ( a)."
+    },
+    {
+      "index": 16,
+      "start": 66.41,
+      "end": 70.75,
+      "duration": 4.34,
+      "text": "So that's the fundamental theorem of calculus."
+    },
+    {
+      "index": 17,
+      "start": 70.75,
+      "end": 77.82,
+      "duration": 7.07,
+      "text": "And the way we used it last time was, this was used to"
+    },
+    {
+      "index": 18,
+      "start": 77.82,
+      "end": 82.09,
+      "duration": 4.27,
+      "text": "evaluate integrals."
+    },
+    {
+      "index": 19,
+      "start": 82.09,
+      "end": 88.11,
+      "duration": 6.02,
+      "text": "Not surprisingly, that's how we used it."
+    },
+    {
+      "index": 20,
+      "start": 88.11,
+      "end": 95.67,
+      "duration": 7.56,
+      "text": "But today, I want to reverse that point of view."
+    },
+    {
+      "index": 21,
+      "start": 95.67,
+      "end": 99.19,
+      "duration": 3.52,
+      "text": "We're going to read the equation backwards, and we're"
+    },
+    {
+      "index": 22,
+      "start": 99.19,
+      "end": 109.24,
+      "duration": 10.05,
+      "text": "going to write it this way."
+    },
+    {
+      "index": 23,
+      "start": 109.24,
+      "end": 121.11,
+      "duration": 11.87,
+      "text": "And we're going to use f to understand capital F. Or in"
+    },
+    {
+      "index": 24,
+      "start": 121.11,
+      "end": 124.37,
+      "duration": 3.26,
+      "text": "other words, the derivative."
+    },
+    {
+      "index": 25,
+      "start": 124.37,
+      "end": 127.7,
+      "duration": 3.33,
+      "text": "To understand the function."
+    },
+    {
+      "index": 26,
+      "start": 127.7,
+      "end": 131.29,
+      "duration": 3.59,
+      "text": "So that's the reversal of point of view"
+    },
+    {
+      "index": 27,
+      "start": 131.29,
+      "end": 133.38,
+      "duration": 2.09,
+      "text": "that I'd like to make."
+    },
+    {
+      "index": 28,
+      "start": 133.38,
+      "end": 136.31,
+      "duration": 2.93,
+      "text": "And we'll make this point in various ways."
+    },
+    {
+      "index": 29,
+      "start": 136.31,
+      "end": 156.46,
+      "duration": 20.15,
+      "text": "So information about F, about F', gives us information about"
+    },
+    {
+      "index": 30,
+      "start": 156.46,
+      "end": 158.77,
+      "duration": 2.31,
+      "text": "F. Now, since there were questions about the mean value"
+    },
+    {
+      "index": 31,
+      "start": 158.77,
+      "end": 162.04,
+      "duration": 3.27,
+      "text": "theorem, I'm going to illustrate this first by"
+    },
+    {
+      "index": 32,
+      "start": 162.04,
+      "end": 165.63,
+      "duration": 3.59,
+      "text": "making a comparison between the fundamental theorem of"
+    },
+    {
+      "index": 33,
+      "start": 165.63,
+      "end": 170.6,
+      "duration": 4.97,
+      "text": "calculus and the mean value theorem."
+    },
+    {
+      "index": 34,
+      "start": 170.6,
+      "end": 175.54,
+      "duration": 4.94,
+      "text": "So we're going to compare this fundamental theorem of"
+    },
+    {
+      "index": 35,
+      "start": 175.54,
+      "end": 181.55,
+      "duration": 6.01,
+      "text": "calculus with what we call the mean value theorem."
+    },
+    {
+      "index": 36,
+      "start": 181.55,
+      "end": 182.98,
+      "duration": 1.43,
+      "text": "And in order to do that, I'm going to"
+    },
+    {
+      "index": 37,
+      "start": 182.98,
+      "end": 185.07,
+      "duration": 2.09,
+      "text": "introduce a couple of notations."
+    },
+    {
+      "index": 38,
+      "start": 185.07,
+      "end": 191.82,
+      "duration": 6.75,
+      "text": "I'll write delta F as F ( b ) - F ( a)."
+    },
+    {
+      "index": 39,
+      "start": 191.82,
+      "end": 197.77,
+      "duration": 5.95,
+      "text": "And another highly imaginative notation, delta x = b - a."
+    },
+    {
+      "index": 40,
+      "start": 197.77,
+      "end": 201.76,
+      "duration": 3.99,
+      "text": "So here's the change in f, there's the change in x."
+    },
+    {
+      "index": 41,
+      "start": 201.76,
+      "end": 207.42,
+      "duration": 5.66,
+      "text": "And then, this fundamental theorem can be written, of"
+    },
+    {
+      "index": 42,
+      "start": 207.42,
+      "end": 210.8,
+      "duration": 3.38,
+      "text": "course, right up above there is the formula."
+    },
+    {
+      "index": 43,
+      "start": 210.8,
+      "end": 218.11,
+      "duration": 7.31,
+      "text": "And it's the formula for delta F. So this is what we call the"
+    },
+    {
+      "index": 44,
+      "start": 218.11,
+      "end": 224.09,
+      "duration": 5.98,
+      "text": "fundamental theorem of calculus."
+    },
+    {
+      "index": 45,
+      "start": 224.09,
+      "end": 231.81,
+      "duration": 7.72,
+      "text": "I'm going to divide by delta x, now."
+    },
+    {
+      "index": 46,
+      "start": 231.81,
+      "end": 236.69,
+      "duration": 4.88,
+      "text": "And If I divide by delta x, that's the same thing as 1 / b"
+    },
+    {
+      "index": 47,
+      "start": 236.69,
+      "end": 242.88,
+      "duration": 6.19,
+      "text": "- a times the integral from a to b of f ( x) dx."
+    },
+    {
+      "index": 48,
+      "start": 242.88,
+      "end": 245.11,
+      "duration": 2.23,
+      "text": "So I've just rewritten the formula here."
+    },
+    {
+      "index": 49,
+      "start": 245.11,
+      "end": 251.96,
+      "duration": 6.85,
+      "text": "And this expression here, on the right-hand side, is a"
+    },
+    {
+      "index": 50,
+      "start": 251.96,
+      "end": 253.65,
+      "duration": 1.69,
+      "text": "fairly important one."
+    },
+    {
+      "index": 51,
+      "start": 253.65,
+      "end": 263.37,
+      "duration": 9.72,
+      "text": "This is the average of f."
+    },
+    {
+      "index": 52,
+      "start": 263.37,
+      "end": 269.49,
+      "duration": 6.12,
+      "text": "That's the average value of f."
+    },
+    {
+      "index": 53,
+      "start": 269.49,
+      "end": 273.61,
+      "duration": 4.12,
+      "text": "Now, so this is going to permit me to make the"
+    },
+    {
+      "index": 54,
+      "start": 273.61,
+      "end": 277.11,
+      "duration": 3.5,
+      "text": "comparison between the mean value theorem, which we don't"
+    },
+    {
+      "index": 55,
+      "start": 277.11,
+      "end": 278.63,
+      "duration": 1.52,
+      "text": "have stated yet here."
+    },
+    {
+      "index": 56,
+      "start": 278.63,
+      "end": 281.01,
+      "duration": 2.38,
+      "text": "And the fundamental theorem."
+    },
+    {
+      "index": 57,
+      "start": 281.01,
+      "end": 289.13,
+      "duration": 8.12,
+      "text": "And I'll do it in the form of inequalities."
+    },
+    {
+      "index": 58,
+      "start": 289.13,
+      "end": 291.55,
+      "duration": 2.42,
+      "text": "So right in the middle here, I'm going to put the"
+    },
+    {
+      "index": 59,
+      "start": 291.55,
+      "end": 292.37,
+      "duration": 0.82,
+      "text": "fundamental theorem."
+    },
+    {
+      "index": 60,
+      "start": 292.37,
+      "end": 297.07,
+      "duration": 4.7,
+      "text": "It says that delta F in this notation is equal to, well if"
+    },
+    {
+      "index": 61,
+      "start": 297.07,
+      "end": 300.65,
+      "duration": 3.58,
+      "text": "I multiply by delta x again, I can write it as the average of"
+    },
+    {
+      "index": 62,
+      "start": 300.65,
+      "end": 304.87,
+      "duration": 4.22,
+      "text": "F. So I'm going to write it as the average of F' here."
+    },
+    {
+      "index": 63,
+      "start": 304.87,
+      "end": 307.1,
+      "duration": 2.23,
+      "text": "Times delta x."
+    },
+    {
+      "index": 64,
+      "start": 307.1,
+      "end": 310.79,
+      "duration": 3.69,
+      "text": "So we have this factor here, which is the average of F', or"
+    },
+    {
+      "index": 65,
+      "start": 310.79,
+      "end": 313.81,
+      "duration": 3.02,
+      "text": "the average of little f, it's the same thing."
+    },
+    {
+      "index": 66,
+      "start": 313.81,
+      "end": 315.43,
+      "duration": 1.62,
+      "text": "And then I multiplied through again."
+    },
+    {
+      "index": 67,
+      "start": 315.43,
+      "end": 320.81,
+      "duration": 5.38,
+      "text": "So I put the thing in the red box."
+    },
+    {
+      "index": 68,
+      "start": 320.81,
+      "end": 329.97,
+      "duration": 9.16,
+      "text": "Here."
+    },
+    {
+      "index": 69,
+      "start": 329.97,
+      "end": 337.19,
+      "duration": 7.22,
+      "text": "Isn't what the average of big F."
+    },
+    {
+      "index": 70,
+      "start": 337.19,
+      "end": 341.37,
+      "duration": 4.18,
+      "text": "So the question is, why is this the average of little f"
+    },
+    {
+      "index": 71,
+      "start": 341.37,
+      "end": 347.03,
+      "duration": 5.66,
+      "text": "rather than the average of big F. So the average of a"
+    },
+    {
+      "index": 72,
+      "start": 347.03,
+      "end": 350.13,
+      "duration": 3.1,
+      "text": "function is the typical value."
+    },
+    {
+      "index": 73,
+      "start": 350.13,
+      "end": 356.52,
+      "duration": 6.39,
+      "text": "If, for example, little f were constant, little f were"
+    },
+    {
+      "index": 74,
+      "start": 356.52,
+      "end": 361.26,
+      "duration": 4.74,
+      "text": "constant, then this integral would be, so the question is"
+    },
+    {
+      "index": 75,
+      "start": 361.26,
+      "end": 363.92,
+      "duration": 2.66,
+      "text": "why is this the average."
+    },
+    {
+      "index": 76,
+      "start": 363.92,
+      "end": 368.97,
+      "duration": 5.05,
+      "text": "And I'll take a little second to explain that."
+    },
+    {
+      "index": 77,
+      "start": 368.97,
+      "end": 373.05,
+      "duration": 4.08,
+      "text": "But I think I'll explain it over here."
+    },
+    {
+      "index": 78,
+      "start": 373.05,
+      "end": 379.01,
+      "duration": 5.96,
+      "text": "Because I'm going to erase it."
+    },
+    {
+      "index": 79,
+      "start": 379.01,
+      "end": 387.27,
+      "duration": 8.26,
+      "text": "So the idea of an average is the following."
+    },
+    {
+      "index": 80,
+      "start": 387.27,
+      "end": 392.281,
+      "duration": 5.011,
+      "text": "For example, imagine that a = 0 and b = n,"
+    },
+    {
+      "index": 81,
+      "start": 392.281,
+      "end": 393.6,
+      "duration": 1.319,
+      "text": "let's say for example."
+    },
+    {
+      "index": 82,
+      "start": 393.6,
+      "end": 406.85,
+      "duration": 13.25,
+      "text": "And so we might sum the function from 1 to n."
+    },
+    {
+      "index": 83,
+      "start": 406.85,
+      "end": 409.52,
+      "duration": 2.67,
+      "text": "Now, that would be the sum of the values from 1 to n."
+    },
+    {
+      "index": 84,
+      "start": 409.52,
+      "end": 414.96,
+      "duration": 5.44,
+      "text": "But the average is, we divide by n here."
+    },
+    {
+      "index": 85,
+      "start": 414.96,
+      "end": 416.14,
+      "duration": 1.18,
+      "text": "So this is the average."
+    },
+    {
+      "index": 86,
+      "start": 416.14,
+      "end": 421.76,
+      "duration": 5.62,
+      "text": "And this is a kind of Riemann sum, representing the integral"
+    },
+    {
+      "index": 87,
+      "start": 421.76,
+      "end": 426.29,
+      "duration": 4.53,
+      "text": "from 0 to n, of f (x) dx."
+    },
+    {
+      "index": 88,
+      "start": 426.29,
+      "end": 430.7,
+      "duration": 4.41,
+      "text": "Where the increment, delta x, is 1."
+    },
+    {
+      "index": 89,
+      "start": 430.7,
+      "end": 433.47,
+      "duration": 2.77,
+      "text": "So this is the notion of an average value here."
+    },
+    {
+      "index": 90,
+      "start": 433.47,
+      "end": 435.84,
+      "duration": 2.37,
+      "text": "But in the continuum setting as opposed to"
+    },
+    {
+      "index": 91,
+      "start": 435.84,
+      "end": 440.57,
+      "duration": 4.73,
+      "text": "the discrete setting."
+    },
+    {
+      "index": 92,
+      "start": 440.57,
+      "end": 444.87,
+      "duration": 4.3,
+      "text": "Whereas what's on the left-hand side is"
+    },
+    {
+      "index": 93,
+      "start": 444.87,
+      "end": 446.84,
+      "duration": 1.97,
+      "text": "the change in f."
+    },
+    {
+      "index": 94,
+      "start": 446.84,
+      "end": 451.79,
+      "duration": 4.95,
+      "text": "The capital F. And this is the average of the little f."
+    },
+    {
+      "index": 95,
+      "start": 451.79,
+      "end": 453.86,
+      "duration": 2.07,
+      "text": "So an average is a sum."
+    },
+    {
+      "index": 96,
+      "start": 453.86,
+      "end": 459.52,
+      "duration": 5.66,
+      "text": "And it's like an integral."
+    },
+    {
+      "index": 97,
+      "start": 459.52,
+      "end": 462.72,
+      "duration": 3.2,
+      "text": "So, in other words what I have here is that the change in f"
+    },
+    {
+      "index": 98,
+      "start": 462.72,
+      "end": 466.25,
+      "duration": 3.53,
+      "text": "is the average of its infinitesimal change times the"
+    },
+    {
+      "index": 99,
+      "start": 466.25,
+      "end": 470.0,
+      "duration": 3.75,
+      "text": "amount of time elapsed, if you like."
+    },
+    {
+      "index": 100,
+      "start": 470.0,
+      "end": 476.1,
+      "duration": 6.1,
+      "text": "So this is the statement of the fundamental theorem."
+    },
+    {
+      "index": 101,
+      "start": 476.1,
+      "end": 476.96,
+      "duration": 0.86,
+      "text": "Just rewritten."
+    },
+    {
+      "index": 102,
+      "start": 476.96,
+      "end": 478.45,
+      "duration": 1.49,
+      "text": "Exactly what I wrote there."
+    },
+    {
+      "index": 103,
+      "start": 478.45,
+      "end": 481.78,
+      "duration": 3.33,
+      "text": "But I multiplied back by delta x."
+    },
+    {
+      "index": 104,
+      "start": 481.78,
+      "end": 487.53,
+      "duration": 5.75,
+      "text": "Now, let me compare this with the mean value theorem."
+    },
+    {
+      "index": 105,
+      "start": 487.53,
+      "end": 493.59,
+      "duration": 6.06,
+      "text": "The mean values theorem also is an equation."
+    },
+    {
+      "index": 106,
+      "start": 493.59,
+      "end": 496.42,
+      "duration": 2.83,
+      "text": "The mean value theorem says that this is equal to"
+    },
+    {
+      "index": 107,
+      "start": 496.42,
+      "end": 501.56,
+      "duration": 5.14,
+      "text": "F' (c) delta x."
+    },
+    {
+      "index": 108,
+      "start": 501.56,
+      "end": 503.27,
+      "duration": 1.71,
+      "text": "Now, I pulled a fast one on you."
+    },
+    {
+      "index": 109,
+      "start": 503.27,
+      "end": 506.56,
+      "duration": 3.29,
+      "text": "I used capital F's here to make the analogy clear."
+    },
+    {
+      "index": 110,
+      "start": 506.56,
+      "end": 510.8,
+      "duration": 4.24,
+      "text": "But the role of the letter is important to make the"
+    },
+    {
+      "index": 111,
+      "start": 510.8,
+      "end": 512.2,
+      "duration": 1.4,
+      "text": "transition to this comparison."
+    },
+    {
+      "index": 112,
+      "start": 512.2,
+      "end": 515.01,
+      "duration": 2.81,
+      "text": "We're talking about the function capital F here."
+    },
+    {
+      "index": 113,
+      "start": 515.01,
+      "end": 516.62,
+      "duration": 1.61,
+      "text": "And its derivative."
+    },
+    {
+      "index": 114,
+      "start": 516.62,
+      "end": 518.51,
+      "duration": 1.89,
+      "text": "Now, this is true."
+    },
+    {
+      "index": 115,
+      "start": 518.51,
+      "end": 522.51,
+      "duration": 4.0,
+      "text": "So now I claim that this thing is fairly specific."
+    },
+    {
+      "index": 116,
+      "start": 522.51,
+      "end": 527.75,
+      "duration": 5.24,
+      "text": "Whereas this, unfortunately, is a little bit vague."
+    },
+    {
+      "index": 117,
+      "start": 527.75,
+      "end": 531.36,
+      "duration": 3.61,
+      "text": "And the reason why it's vague is that c is just somewhere in"
+    },
+    {
+      "index": 118,
+      "start": 531.36,
+      "end": 532.79,
+      "duration": 1.43,
+      "text": "the interval."
+    },
+    {
+      "index": 119,
+      "start": 532.79,
+      "end": 541.01,
+      "duration": 8.22,
+      "text": "So some c - sorry, this is some c, in between a and b."
+    },
+    {
+      "index": 120,
+      "start": 541.01,
+      "end": 544.93,
+      "duration": 3.92,
+      "text": "So really, since we don't know where this thing is, we don't"
+    },
+    {
+      "index": 121,
+      "start": 544.93,
+      "end": 547.69,
+      "duration": 2.76,
+      "text": "know which of the values it is, we can't say what it is."
+    },
+    {
+      "index": 122,
+      "start": 547.69,
+      "end": 552.41,
+      "duration": 4.72,
+      "text": "All we can do is say well for sure it's less than the"
+    },
+    {
+      "index": 123,
+      "start": 552.41,
+      "end": 553.28,
+      "duration": 0.87,
+      "text": "largest value."
+    },
+    {
+      "index": 124,
+      "start": 553.28,
+      "end": 558.09,
+      "duration": 4.81,
+      "text": "Say, (the maximum of F' ) delta x."
+    },
+    {
+      "index": 125,
+      "start": 558.09,
+      "end": 561.01,
+      "duration": 2.92,
+      "text": "And the only thing we can say for sure on the other end is"
+    },
+    {
+      "index": 126,
+      "start": 561.01,
+      "end": 564.41,
+      "duration": 3.4,
+      "text": "that it's less than or equal to - sorry, it's greater than"
+    },
+    {
+      "index": 127,
+      "start": 564.41,
+      "end": 567.41,
+      "duration": 3.0,
+      "text": "or equal to, (the minimum of F' ) delta x."
+    },
+    {
+      "index": 128,
+      "start": 567.41,
+      "end": 569.09,
+      "duration": 1.68,
+      "text": "Over that same interval."
+    },
+    {
+      "index": 129,
+      "start": 569.09,
+      "end": 579.65,
+      "duration": 10.56,
+      "text": "This is over 0 less than - sorry, a < x < b."
+    },
+    {
+      "index": 130,
+      "start": 579.65,
+      "end": 582.11,
+      "duration": 2.46,
+      "text": "So that means that the fundamental theorem of"
+    },
+    {
+      "index": 131,
+      "start": 582.11,
+      "end": 585.95,
+      "duration": 3.84,
+      "text": "calculus is a much more specific thing."
+    },
+    {
+      "index": 132,
+      "start": 585.95,
+      "end": 588.46,
+      "duration": 2.51,
+      "text": "And indeed it gives the same conclusion."
+    },
+    {
+      "index": 133,
+      "start": 588.46,
+      "end": 590.23,
+      "duration": 1.77,
+      "text": "It's much stronger than the mean value theorem."
+    },
+    {
+      "index": 134,
+      "start": 590.23,
+      "end": 592.33,
+      "duration": 2.1,
+      "text": "It's way better than the mean value theorem."
+    },
+    {
+      "index": 135,
+      "start": 592.33,
+      "end": 596.41,
+      "duration": 4.08,
+      "text": "In fact, as soon as we have integrals, we can abandon the"
+    },
+    {
+      "index": 136,
+      "start": 596.41,
+      "end": 597.28,
+      "duration": 0.87,
+      "text": "mean value theorem."
+    },
+    {
+      "index": 137,
+      "start": 597.28,
+      "end": 598.55,
+      "duration": 1.27,
+      "text": "We don't want it."
+    },
+    {
+      "index": 138,
+      "start": 598.55,
+      "end": 600.81,
+      "duration": 2.26,
+      "text": "It's too simple-minded."
+    },
+    {
+      "index": 139,
+      "start": 600.81,
+      "end": 603.86,
+      "duration": 3.05,
+      "text": "And what we have is something much more sophisticated, which"
+    },
+    {
+      "index": 140,
+      "start": 603.86,
+      "end": 604.94,
+      "duration": 1.08,
+      "text": "we can use."
+    },
+    {
+      "index": 141,
+      "start": 604.94,
+      "end": 605.76,
+      "duration": 0.82,
+      "text": "Which is this."
+    },
+    {
+      "index": 142,
+      "start": 605.76,
+      "end": 608.94,
+      "duration": 3.18,
+      "text": "So it's obvious that if this is the average, the average is"
+    },
+    {
+      "index": 143,
+      "start": 608.94,
+      "end": 609.96,
+      "duration": 1.02,
+      "text": "less than the maximum."
+    },
+    {
+      "index": 144,
+      "start": 609.96,
+      "end": 615.19,
+      "duration": 5.23,
+      "text": "So it's obvious that it works just as well to draw this"
+    },
+    {
+      "index": 145,
+      "start": 615.19,
+      "end": 615.95,
+      "duration": 0.76,
+      "text": "conclusion."
+    },
+    {
+      "index": 146,
+      "start": 615.95,
+      "end": 620.01,
+      "duration": 4.06,
+      "text": "And similarly over here with the minimum."
+    },
+    {
+      "index": 147,
+      "start": 620.01,
+      "end": 622.91,
+      "duration": 2.9,
+      "text": "OK, the average is always bigger than the minimum and"
+    },
+    {
+      "index": 148,
+      "start": 622.91,
+      "end": 625.43,
+      "duration": 2.52,
+      "text": "smaller than the max."
+    },
+    {
+      "index": 149,
+      "start": 625.43,
+      "end": 628.68,
+      "duration": 3.25,
+      "text": "So this is the connection, if you like."
+    },
+    {
+      "index": 150,
+      "start": 628.68,
+      "end": 632.66,
+      "duration": 3.98,
+      "text": "And I'm going to elaborate just one step further by"
+    },
+    {
+      "index": 151,
+      "start": 632.66,
+      "end": 636.34,
+      "duration": 3.68,
+      "text": "talking about the problem that you had on the exam."
+    },
+    {
+      "index": 152,
+      "start": 636.34,
+      "end": 639.64,
+      "duration": 3.3,
+      "text": "So there was an Exam 2 problem."
+    },
+    {
+      "index": 153,
+      "start": 639.64,
+      "end": 643.59,
+      "duration": 3.95,
+      "text": "And I'll show you how it works using the mean value theorem"
+    },
+    {
+      "index": 154,
+      "start": 643.59,
+      "end": 645.61,
+      "duration": 2.02,
+      "text": "and how it works using integrals."
+    },
+    {
+      "index": 155,
+      "start": 645.61,
+      "end": 648.88,
+      "duration": 3.27,
+      "text": "But I'm going to have to use this notation capital F. So"
+    },
+    {
+      "index": 156,
+      "start": 648.88,
+      "end": 652.45,
+      "duration": 3.57,
+      "text": "capital F', as opposed to the little f, which was what was"
+    },
+    {
+      "index": 157,
+      "start": 652.45,
+      "end": 655.27,
+      "duration": 2.82,
+      "text": "the notation that was on your exam."
+    },
+    {
+      "index": 158,
+      "start": 655.27,
+      "end": 657.62,
+      "duration": 2.35,
+      "text": "So we had this situation here."
+    },
+    {
+      "index": 159,
+      "start": 657.62,
+      "end": 661.38,
+      "duration": 3.76,
+      "text": "These were the givens of the problem."
+    },
+    {
+      "index": 160,
+      "start": 661.38,
+      "end": 671.87,
+      "duration": 10.49,
+      "text": "And then the question was, the mean value theorem says, or"
+    },
+    {
+      "index": 161,
+      "start": 671.87,
+      "end": 674.16,
+      "duration": 2.29,
+      "text": "implies, if you like, it doesn't say it,"
+    },
+    {
+      "index": 162,
+      "start": 674.16,
+      "end": 680.11,
+      "duration": 5.95,
+      "text": "but it implies it."
+    },
+    {
+      "index": 163,
+      "start": 680.11,
+      "end": 698.69,
+      "duration": 18.58,
+      "text": "Implies a < capital F ( 4) < b, for which a and b?"
+    },
+    {
+      "index": 164,
+      "start": 698.69,
+      "end": 703.33,
+      "duration": 4.64,
+      "text": "So let's take a look at what it says."
+    },
+    {
+      "index": 165,
+      "start": 703.33,
+      "end": 713.62,
+      "duration": 10.29,
+      "text": "Well, the mean value theorem says that F( 4) - F (0) = F' ("
+    },
+    {
+      "index": 166,
+      "start": 713.62,
+      "end": 717.24,
+      "duration": 3.62,
+      "text": "c)( 4 - 0)."
+    },
+    {
+      "index": 167,
+      "start": 717.24,
+      "end": 723.77,
+      "duration": 6.53,
+      "text": "This is this (F') delta x, this is the change in x."
+    },
+    {
+      "index": 168,
+      "start": 723.77,
+      "end": 732.75,
+      "duration": 8.98,
+      "text": "And that's the same thing as (1 / 1 + c )( 4)."
+    },
+    {
+      "index": 169,
+      "start": 732.75,
+      "end": 741.06,
+      "duration": 8.31,
+      "text": "And so the range of values of this number here is from (1 /"
+    },
+    {
+      "index": 170,
+      "start": 741.06,
+      "end": 744.63,
+      "duration": 3.57,
+      "text": "1 plus 0)( 4), that's 4."
+    },
+    {
+      "index": 171,
+      "start": 744.63,
+      "end": 748.0,
+      "duration": 3.37,
+      "text": "To, that's the largest value, to the smallest that it gets,"
+    },
+    {
+      "index": 172,
+      "start": 748.0,
+      "end": 752.51,
+      "duration": 4.51,
+      "text": "which is (1 / 1 + 4)( 4)."
+    },
+    {
+      "index": 173,
+      "start": 752.51,
+      "end": 761.02,
+      "duration": 8.51,
+      "text": "That's the range."
+    },
+    {
+      "index": 174,
+      "start": 761.02,
+      "end": 773.78,
+      "duration": 12.76,
+      "text": "And so the conclusion is that F (4) - f ( 0 ) is between,"
+    },
+    {
+      "index": 175,
+      "start": 773.78,
+      "end": 775.09,
+      "duration": 1.31,
+      "text": "well, let's see."
+    },
+    {
+      "index": 176,
+      "start": 775.09,
+      "end": 779.04,
+      "duration": 3.95,
+      "text": "It's between 4 and 4/5."
+    },
+    {
+      "index": 177,
+      "start": 779.04,
+      "end": 781.85,
+      "duration": 2.81,
+      "text": "Which are those two numbers down there."
+    },
+    {
+      "index": 178,
+      "start": 781.85,
+      "end": 784.68,
+      "duration": 2.83,
+      "text": "And if you remember that F ( 0) was 1, this is the same as"
+    },
+    {
+      "index": 179,
+      "start": 784.68,
+      "end": 795.68,
+      "duration": 11.0,
+      "text": "F ( 4), is between 5 and 9/5."
+    },
+    {
+      "index": 180,
+      "start": 795.68,
+      "end": 799.74,
+      "duration": 4.06,
+      "text": "So that's the way that you were supposed to solve the"
+    },
+    {
+      "index": 181,
+      "start": 799.74,
+      "end": 802.57,
+      "duration": 2.83,
+      "text": "problem on the exam."
+    },
+    {
+      "index": 182,
+      "start": 802.57,
+      "end": 806.49,
+      "duration": 3.92,
+      "text": "On the other hand, let's compare to what you would do"
+    },
+    {
+      "index": 183,
+      "start": 806.49,
+      "end": 811.14,
+      "duration": 4.65,
+      "text": "with the fundamental theorem of calculus."
+    },
+    {
+      "index": 184,
+      "start": 811.14,
+      "end": 813.68,
+      "duration": 2.54,
+      "text": "With the fundamentals theorem of calculus, we have the"
+    },
+    {
+      "index": 185,
+      "start": 813.68,
+      "end": 814.9,
+      "duration": 1.22,
+      "text": "following formula."
+    },
+    {
+      "index": 186,
+      "start": 814.9,
+      "end": 826.1,
+      "duration": 11.2,
+      "text": "F( 4) - F ( 0) = the integral from 0 to 4 of dx / 1 + x."
+    },
+    {
+      "index": 187,
+      "start": 826.1,
+      "end": 832.7,
+      "duration": 6.6,
+      "text": "That's what the fundamental theorem says."
+    },
+    {
+      "index": 188,
+      "start": 832.7,
+      "end": 836.92,
+      "duration": 4.22,
+      "text": "And now I claim that we can get these same types of"
+    },
+    {
+      "index": 189,
+      "start": 836.92,
+      "end": 840.78,
+      "duration": 3.86,
+      "text": "results by a very elementary observation."
+    },
+    {
+      "index": 190,
+      "start": 840.78,
+      "end": 842.82,
+      "duration": 2.04,
+      "text": "It's really the same observation that I made up"
+    },
+    {
+      "index": 191,
+      "start": 842.82,
+      "end": 846.11,
+      "duration": 3.29,
+      "text": "here, that the average is less than or equal to the maximum."
+    },
+    {
+      "index": 192,
+      "start": 846.11,
+      "end": 851.81,
+      "duration": 5.7,
+      "text": "Which is that the biggest this can ever be is, let's see."
+    },
+    {
+      "index": 193,
+      "start": 851.81,
+      "end": 855.28,
+      "duration": 3.47,
+      "text": "The biggest it is when x is 0, that's 1."
+    },
+    {
+      "index": 194,
+      "start": 855.28,
+      "end": 860.36,
+      "duration": 5.08,
+      "text": "So the biggest it ever gets is this."
+    },
+    {
+      "index": 195,
+      "start": 860.36,
+      "end": 865.11,
+      "duration": 4.75,
+      "text": "And that's equal to 4."
+    },
+    {
+      "index": 196,
+      "start": 865.11,
+      "end": 865.66,
+      "duration": 0.55,
+      "text": "Right?"
+    },
+    {
+      "index": 197,
+      "start": 865.66,
+      "end": 870.91,
+      "duration": 5.25,
+      "text": "On the other hand, the smallest it ever gets to be,"
+    },
+    {
+      "index": 198,
+      "start": 870.91,
+      "end": 876.77,
+      "duration": 5.86,
+      "text": "it's equal to this."
+    },
+    {
+      "index": 199,
+      "start": 876.77,
+      "end": 879.8,
+      "duration": 3.03,
+      "text": "The smallest it ever gets to be is the integral from"
+    },
+    {
+      "index": 200,
+      "start": 879.8,
+      "end": 882.4,
+      "duration": 2.6,
+      "text": "0 to 4 of 1/5 dx."
+    },
+    {
+      "index": 201,
+      "start": 882.4,
+      "end": 884.22,
+      "duration": 1.82,
+      "text": "Because that's the lowest value that"
+    },
+    {
+      "index": 202,
+      "start": 884.22,
+      "end": 886.11,
+      "duration": 1.89,
+      "text": "the integrand takes."
+    },
+    {
+      "index": 203,
+      "start": 886.11,
+      "end": 888.39,
+      "duration": 2.28,
+      "text": "When x = 4, it's 1/5."
+    },
+    {
+      "index": 204,
+      "start": 888.39,
+      "end": 894.27,
+      "duration": 5.88,
+      "text": "And that's equal to 4/5."
+    },
+    {
+      "index": 205,
+      "start": 894.27,
+      "end": 897.72,
+      "duration": 3.45,
+      "text": "Now, there's a little tiny detail which is that really we"
+    },
+    {
+      "index": 206,
+      "start": 897.72,
+      "end": 900.39,
+      "duration": 2.67,
+      "text": "know that this is the area of some rectangle and this is"
+    },
+    {
+      "index": 207,
+      "start": 900.39,
+      "end": 901.56,
+      "duration": 1.17,
+      "text": "strictly smaller."
+    },
+    {
+      "index": 208,
+      "start": 901.56,
+      "end": 903.52,
+      "duration": 1.96,
+      "text": "And we know that these inequalities"
+    },
+    {
+      "index": 209,
+      "start": 903.52,
+      "end": 905.21,
+      "duration": 1.69,
+      "text": "are actually strict."
+    },
+    {
+      "index": 210,
+      "start": 905.21,
+      "end": 907.62,
+      "duration": 2.41,
+      "text": "But that's a minor point."
+    },
+    {
+      "index": 211,
+      "start": 907.62,
+      "end": 912.27,
+      "duration": 4.65,
+      "text": "And certainly not one that we'll pay close attention to."
+    },
+    {
+      "index": 212,
+      "start": 912.27,
+      "end": 917.91,
+      "duration": 5.64,
+      "text": "But now, let me show you what this looks like geometrically."
+    },
+    {
+      "index": 213,
+      "start": 917.91,
+      "end": 919.7,
+      "duration": 1.79,
+      "text": "So geometrically, we interpret this as the"
+    },
+    {
+      "index": 214,
+      "start": 919.7,
+      "end": 922.27,
+      "duration": 2.57,
+      "text": "area under a curve."
+    },
+    {
+      "index": 215,
+      "start": 922.27,
+      "end": 931.85,
+      "duration": 9.58,
+      "text": "Here's a piece of the curve y = 1/1 + x."
+    },
+    {
+      "index": 216,
+      "start": 931.85,
+      "end": 937.13,
+      "duration": 5.28,
+      "text": "And it's going up to 4 and starting at 0 here."
+    },
+    {
+      "index": 217,
+      "start": 937.13,
+      "end": 942.57,
+      "duration": 5.44,
+      "text": "And the first estimate that we made; that is, the upper"
+    },
+    {
+      "index": 218,
+      "start": 942.57,
+      "end": 953.2,
+      "duration": 10.63,
+      "text": "bound, was by trapping this in this big rectangle here."
+    },
+    {
+      "index": 219,
+      "start": 953.2,
+      "end": 956.64,
+      "duration": 3.44,
+      "text": "We compared it to the constant function, which was 1 all the"
+    },
+    {
+      "index": 220,
+      "start": 956.64,
+      "end": 957.99,
+      "duration": 1.35,
+      "text": "way across."
+    },
+    {
+      "index": 221,
+      "start": 957.99,
+      "end": 960.3,
+      "duration": 2.31,
+      "text": "This is y = 1."
+    },
+    {
+      "index": 222,
+      "start": 960.3,
+      "end": 966.06,
+      "duration": 5.76,
+      "text": "And then we also trapped it from underneath by the"
+    },
+    {
+      "index": 223,
+      "start": 966.06,
+      "end": 968.6,
+      "duration": 2.54,
+      "text": "function which was at the bottom."
+    },
+    {
+      "index": 224,
+      "start": 968.6,
+      "end": 974.43,
+      "duration": 5.83,
+      "text": "And this was y = 1/5."
+    },
+    {
+      "index": 225,
+      "start": 974.43,
+      "end": 979.98,
+      "duration": 5.55,
+      "text": "And so what this really is is, these things are the simplest"
+    },
+    {
+      "index": 226,
+      "start": 979.98,
+      "end": 981.06,
+      "duration": 1.08,
+      "text": "possible Riemann sum."
+    },
+    {
+      "index": 227,
+      "start": 981.06,
+      "end": 982.86,
+      "duration": 1.8,
+      "text": "Sort of a silly Riemann sum."
+    },
+    {
+      "index": 228,
+      "start": 982.86,
+      "end": 994.39,
+      "duration": 11.53,
+      "text": "This is a Riemann sum with one rectangle."
+    },
+    {
+      "index": 229,
+      "start": 994.39,
+      "end": 996.42,
+      "duration": 2.03,
+      "text": "This is the simplest possible one."
+    },
+    {
+      "index": 230,
+      "start": 996.42,
+      "end": 998.58,
+      "duration": 2.16,
+      "text": "And so this is a very, very crude estimate."
+    },
+    {
+      "index": 231,
+      "start": 998.58,
+      "end": 1000.97,
+      "duration": 2.39,
+      "text": "You can see it misses by a mile."
+    },
+    {
+      "index": 232,
+      "start": 1000.97,
+      "end": 1003.18,
+      "duration": 2.21,
+      "text": "The larger and the smaller values are off"
+    },
+    {
+      "index": 233,
+      "start": 1003.18,
+      "end": 1006.37,
+      "duration": 3.19,
+      "text": "by a factor of 5."
+    },
+    {
+      "index": 234,
+      "start": 1006.37,
+      "end": 1009.48,
+      "duration": 3.11,
+      "text": "But this one is called the, this one is the"
+    },
+    {
+      "index": 235,
+      "start": 1009.48,
+      "end": 1013.39,
+      "duration": 3.91,
+      "text": "lower Riemann sum."
+    },
+    {
+      "index": 236,
+      "start": 1013.39,
+      "end": 1019.56,
+      "duration": 6.17,
+      "text": "And that one is less than our actual integral."
+    },
+    {
+      "index": 237,
+      "start": 1019.56,
+      "end": 1034.1,
+      "duration": 14.54,
+      "text": "Which is less than the upper Riemann sum."
+    },
+    {
+      "index": 238,
+      "start": 1034.1,
+      "end": 1038.74,
+      "duration": 4.64,
+      "text": "And you should, by now, have looked at those upper and"
+    },
+    {
+      "index": 239,
+      "start": 1038.74,
+      "end": 1040.67,
+      "duration": 1.93,
+      "text": "lower sums on your homework."
+    },
+    {
+      "index": 240,
+      "start": 1040.67,
+      "end": 1042.63,
+      "duration": 1.96,
+      "text": "So it's just the rectangles underneath and the"
+    },
+    {
+      "index": 241,
+      "start": 1042.63,
+      "end": 1045.39,
+      "duration": 2.76,
+      "text": "rectangles on top."
+    },
+    {
+      "index": 242,
+      "start": 1045.39,
+      "end": 1048.15,
+      "duration": 2.76,
+      "text": "So at this point, we can literally abandon the mean"
+    },
+    {
+      "index": 243,
+      "start": 1048.15,
+      "end": 1048.73,
+      "duration": 0.58,
+      "text": "value theorem."
+    },
+    {
+      "index": 244,
+      "start": 1048.73,
+      "end": 1050.93,
+      "duration": 2.2,
+      "text": "Because we have a much better way of getting at things."
+    },
+    {
+      "index": 245,
+      "start": 1050.93,
+      "end": 1053.33,
+      "duration": 2.4,
+      "text": "If we chop things up into more rectangles, we'll get much"
+    },
+    {
+      "index": 246,
+      "start": 1053.33,
+      "end": 1055.55,
+      "duration": 2.22,
+      "text": "better numerical approximations."
+    },
+    {
+      "index": 247,
+      "start": 1055.55,
+      "end": 1058.64,
+      "duration": 3.09,
+      "text": "And if we use simpleminded expressions with integrals,"
+    },
+    {
+      "index": 248,
+      "start": 1058.64,
+      "end": 1060.94,
+      "duration": 2.3,
+      "text": "we'll be able to figure out any bound we could get using"
+    },
+    {
+      "index": 249,
+      "start": 1060.94,
+      "end": 1062.61,
+      "duration": 1.67,
+      "text": "the mean value theorem."
+    },
+    {
+      "index": 250,
+      "start": 1062.61,
+      "end": 1065.79,
+      "duration": 3.18,
+      "text": "So that's not the relevance of the mean value theorem."
+    },
+    {
+      "index": 251,
+      "start": 1065.79,
+      "end": 1069.07,
+      "duration": 3.28,
+      "text": "I'll explain to you why we talked about it, even, in a"
+    },
+    {
+      "index": 252,
+      "start": 1069.07,
+      "end": 1071.31,
+      "duration": 2.24,
+      "text": "few minutes."
+    },
+    {
+      "index": 253,
+      "start": 1071.31,
+      "end": 1080.04,
+      "duration": 8.73,
+      "text": "OK, are there any questions before we go on?"
+    },
+    {
+      "index": 254,
+      "start": 1080.04,
+      "end": 1080.29,
+      "duration": 0.25,
+      "text": "Yeah."
+    },
+    {
+      "index": 255,
+      "start": 1080.29,
+      "end": 1087.0,
+      "duration": 6.71,
+      "text": "STUDENT: [INAUDIBLE]"
+    },
+    {
+      "index": 256,
+      "start": 1087.0,
+      "end": 1089.91,
+      "duration": 2.91,
+      "text": "PROFESSOR: I knew that the range of c was from 0 to 4, I"
+    },
+    {
+      "index": 257,
+      "start": 1089.91,
+      "end": 1091.98,
+      "duration": 2.07,
+      "text": "should have said that right here."
+    },
+    {
+      "index": 258,
+      "start": 1091.98,
+      "end": 1093.715,
+      "duration": 1.735,
+      "text": "This is true for this theorem."
+    },
+    {
+      "index": 259,
+      "start": 1093.715,
+      "end": 1096.19,
+      "duration": 2.475,
+      "text": "The mean value theorem comes with an extra"
+    },
+    {
+      "index": 260,
+      "start": 1096.19,
+      "end": 1097.95,
+      "duration": 1.76,
+      "text": "statement, which I missed."
+    },
+    {
+      "index": 261,
+      "start": 1097.95,
+      "end": 1101.96,
+      "duration": 4.01,
+      "text": "Which is that this is for some c between 0 and 4."
+    },
+    {
+      "index": 262,
+      "start": 1101.96,
+      "end": 1103.69,
+      "duration": 1.73,
+      "text": "So I know the range is between 0 and 4."
+    },
+    {
+      "index": 263,
+      "start": 1103.69,
+      "end": 1105.69,
+      "duration": 2.0,
+      "text": "The reason why it's between 0 and 4 is that 's part of the"
+    },
+    {
+      "index": 264,
+      "start": 1105.69,
+      "end": 1107.56,
+      "duration": 1.87,
+      "text": "mean value theorem."
+    },
+    {
+      "index": 265,
+      "start": 1107.56,
+      "end": 1109.61,
+      "duration": 2.05,
+      "text": "We started at 0, we ended at 4."
+    },
+    {
+      "index": 266,
+      "start": 1109.61,
+      "end": 1112.42,
+      "duration": 2.81,
+      "text": "So the c has to be somewhere in between."
+    },
+    {
+      "index": 267,
+      "start": 1112.42,
+      "end": 1122.24,
+      "duration": 9.82,
+      "text": "That's part of the mean value theorem."
+    },
+    {
+      "index": 268,
+      "start": 1122.24,
+      "end": 1122.89,
+      "duration": 0.65,
+      "text": "STUDENT: [INAUDIBLE]"
+    },
+    {
+      "index": 269,
+      "start": 1122.89,
+      "end": 1124.6,
+      "duration": 1.71,
+      "text": "PROFESSOR: The question is, do you exclude any values that"
+    },
+    {
+      "index": 270,
+      "start": 1124.6,
+      "end": 1125.82,
+      "duration": 1.22,
+      "text": "are above 4 and below 0."
+    },
+    {
+      "index": 271,
+      "start": 1125.82,
+      "end": 1127.21,
+      "duration": 1.39,
+      "text": "Yes, absolutely."
+    },
+    {
+      "index": 272,
+      "start": 1127.21,
+      "end": 1129.86,
+      "duration": 2.65,
+      "text": "The point is that in order to figure out how F changes,"
+    },
+    {
+      "index": 273,
+      "start": 1129.86,
+      "end": 1132.76,
+      "duration": 2.9,
+      "text": "capital F changes, between 0 and 4, you need only pay"
+    },
+    {
+      "index": 274,
+      "start": 1132.76,
+      "end": 1134.15,
+      "duration": 1.39,
+      "text": "attention to the values in between."
+    },
+    {
+      "index": 275,
+      "start": 1134.15,
+      "end": 1136.21,
+      "duration": 2.06,
+      "text": "You don't have to pay any attention to what the function"
+    },
+    {
+      "index": 276,
+      "start": 1136.21,
+      "end": 1139.74,
+      "duration": 3.53,
+      "text": "is doing below 0 or above 4."
+    },
+    {
+      "index": 277,
+      "start": 1139.74,
+      "end": 1147.09,
+      "duration": 7.35,
+      "text": "Those things are strictly irrelevant."
+    },
+    {
+      "index": 278,
+      "start": 1147.09,
+      "end": 1156.78,
+      "duration": 9.69,
+      "text": "STUDENT: [INAUDIBLE]"
+    },
+    {
+      "index": 279,
+      "start": 1156.78,
+      "end": 1158.27,
+      "duration": 1.49,
+      "text": "PROFESSOR: Yeah, I mean it's strictly in"
+    },
+    {
+      "index": 280,
+      "start": 1158.27,
+      "end": 1159.95,
+      "duration": 1.68,
+      "text": "between these two numbers."
+    },
+    {
+      "index": 281,
+      "start": 1159.95,
+      "end": 1163.42,
+      "duration": 3.47,
+      "text": "I have to understand what the lowest and the highest one is."
+    },
+    {
+      "index": 282,
+      "start": 1163.42,
+      "end": 1164.7,
+      "duration": 1.28,
+      "text": "STUDENT: [INAUDIBLE]"
+    },
+    {
+      "index": 283,
+      "start": 1164.7,
+      "end": 1175.2,
+      "duration": 10.5,
+      "text": "PROFESSOR: It's approaching that, so."
+    },
+    {
+      "index": 284,
+      "start": 1175.2,
+      "end": 1175.53,
+      "duration": 0.33,
+      "text": "OK."
+    },
+    {
+      "index": 285,
+      "start": 1175.53,
+      "end": 1180.05,
+      "duration": 4.52,
+      "text": "So now, the next thing that we're going to talk about is,"
+    },
+    {
+      "index": 286,
+      "start": 1180.05,
+      "end": 1182.4,
+      "duration": 2.35,
+      "text": "since I've got that 1 up there, that Fundamental"
+    },
+    {
+      "index": 287,
+      "start": 1182.4,
+      "end": 1205.07,
+      "duration": 22.67,
+      "text": "Theorem of Calculus 1, I need to talk about version 2."
+    },
+    {
+      "index": 288,
+      "start": 1205.07,
+      "end": 1215.53,
+      "duration": 10.46,
+      "text": "So here is the Fundamental Theorem of Calculus version 2."
+    },
+    {
+      "index": 289,
+      "start": 1215.53,
+      "end": 1220.9,
+      "duration": 5.37,
+      "text": "I'm going to start out with a function little f, and I'm"
+    },
+    {
+      "index": 290,
+      "start": 1220.9,
+      "end": 1228.2,
+      "duration": 7.3,
+      "text": "going to assume that it's continuous."
+    },
+    {
+      "index": 291,
+      "start": 1228.2,
+      "end": 1230.69,
+      "duration": 2.49,
+      "text": "And then I'm going to define a new function, which is defined"
+    },
+    {
+      "index": 292,
+      "start": 1230.69,
+      "end": 1232.79,
+      "duration": 2.1,
+      "text": "as a definite integral."
+    },
+    {
+      "index": 293,
+      "start": 1232.79,
+      "end": 1240.31,
+      "duration": 7.52,
+      "text": "G ( x ) is the integral from a to x of f ( t ) dt."
+    },
+    {
+      "index": 294,
+      "start": 1240.31,
+      "end": 1242.84,
+      "duration": 2.53,
+      "text": "Now, I want to emphasize here because it's the first time"
+    },
+    {
+      "index": 295,
+      "start": 1242.84,
+      "end": 1244.83,
+      "duration": 1.99,
+      "text": "that I'm writing something like this, that this is a"
+    },
+    {
+      "index": 296,
+      "start": 1244.83,
+      "end": 1247.3,
+      "duration": 2.47,
+      "text": "fairly complicated gadget."
+    },
+    {
+      "index": 297,
+      "start": 1247.3,
+      "end": 1252.11,
+      "duration": 4.81,
+      "text": "It plays a very basic and very fundamental, but simple role"
+    },
+    {
+      "index": 298,
+      "start": 1252.11,
+      "end": 1254.49,
+      "duration": 2.38,
+      "text": "but it nevertheless is a little complicated."
+    },
+    {
+      "index": 299,
+      "start": 1254.49,
+      "end": 1258.37,
+      "duration": 3.88,
+      "text": "What's happening here is that the upper limit I've now"
+    },
+    {
+      "index": 300,
+      "start": 1258.37,
+      "end": 1265.84,
+      "duration": 7.47,
+      "text": "called x, and the variable t is ranging between a and x,"
+    },
+    {
+      "index": 301,
+      "start": 1265.84,
+      "end": 1268.25,
+      "duration": 2.41,
+      "text": "and that the a and the x are fixed when I"
+    },
+    {
+      "index": 302,
+      "start": 1268.25,
+      "end": 1272.29,
+      "duration": 4.04,
+      "text": "calculate the integral."
+    },
+    {
+      "index": 303,
+      "start": 1272.29,
+      "end": 1274.73,
+      "duration": 2.44,
+      "text": "And the t is what's called the dummy variable."
+    },
+    {
+      "index": 304,
+      "start": 1274.73,
+      "end": 1276.29,
+      "duration": 1.56,
+      "text": "It's the variable of integration."
+    },
+    {
+      "index": 305,
+      "start": 1276.29,
+      "end": 1281.42,
+      "duration": 5.13,
+      "text": "You'll see a lot of people who will mix this x with this t."
+    },
+    {
+      "index": 306,
+      "start": 1281.42,
+      "end": 1285.79,
+      "duration": 4.37,
+      "text": "And if you do that, you will get confused, potentially"
+    },
+    {
+      "index": 307,
+      "start": 1285.79,
+      "end": 1288.15,
+      "duration": 2.36,
+      "text": "hopelessly confused, in this class."
+    },
+    {
+      "index": 308,
+      "start": 1288.15,
+      "end": 1290.38,
+      "duration": 2.23,
+      "text": "In 18.02 you will be completely"
+    },
+    {
+      "index": 309,
+      "start": 1290.38,
+      "end": 1292.31,
+      "duration": 1.93,
+      "text": "lost if you do that."
+    },
+    {
+      "index": 310,
+      "start": 1292.31,
+      "end": 1293.72,
+      "duration": 1.41,
+      "text": "So don't do it."
+    },
+    {
+      "index": 311,
+      "start": 1293.72,
+      "end": 1298.41,
+      "duration": 4.69,
+      "text": "Don't mix these two guys up."
+    },
+    {
+      "index": 312,
+      "start": 1298.41,
+      "end": 1302.51,
+      "duration": 4.1,
+      "text": "It's actually done by many people in textbooks, and it's"
+    },
+    {
+      "index": 313,
+      "start": 1302.51,
+      "end": 1303.13,
+      "duration": 0.62,
+      "text": "fairly careless."
+    },
+    {
+      "index": 314,
+      "start": 1303.13,
+      "end": 1305.23,
+      "duration": 2.1,
+      "text": "Especially in old-fashioned textbooks."
+    },
+    {
+      "index": 315,
+      "start": 1305.23,
+      "end": 1308.61,
+      "duration": 3.38,
+      "text": "But don't do it."
+    },
+    {
+      "index": 316,
+      "start": 1308.61,
+      "end": 1310.57,
+      "duration": 1.96,
+      "text": "So here we have this G ( x)."
+    },
+    {
+      "index": 317,
+      "start": 1310.57,
+      "end": 1316.25,
+      "duration": 5.68,
+      "text": "Now, remember, this G ( x) really does make sense."
+    },
+    {
+      "index": 318,
+      "start": 1316.25,
+      "end": 1320.49,
+      "duration": 4.24,
+      "text": "If you give me an a, and you give me an x, I can figure out"
+    },
+    {
+      "index": 319,
+      "start": 1320.49,
+      "end": 1322.83,
+      "duration": 2.34,
+      "text": "what this is, because I can figure out the Riemann sum."
+    },
+    {
+      "index": 320,
+      "start": 1322.83,
+      "end": 1325.09,
+      "duration": 2.26,
+      "text": "So of course I need to know what the function is, too."
+    },
+    {
+      "index": 321,
+      "start": 1325.09,
+      "end": 1327.37,
+      "duration": 2.28,
+      "text": "But anyway, we have a numerical procedure for"
+    },
+    {
+      "index": 322,
+      "start": 1327.37,
+      "end": 1329.92,
+      "duration": 2.55,
+      "text": "figuring out what the function g is."
+    },
+    {
+      "index": 323,
+      "start": 1329.92,
+      "end": 1333.09,
+      "duration": 3.17,
+      "text": "Now, as is suggested by this mysterious letter x being in"
+    },
+    {
+      "index": 324,
+      "start": 1333.09,
+      "end": 1336.35,
+      "duration": 3.26,
+      "text": "the place where it is, I'm actually going to vary x."
+    },
+    {
+      "index": 325,
+      "start": 1336.35,
+      "end": 1340.0,
+      "duration": 3.65,
+      "text": "So the conclusion is that if this is true, and this is just"
+    },
+    {
+      "index": 326,
+      "start": 1340.0,
+      "end": 1341.87,
+      "duration": 1.87,
+      "text": "a parenthesism not part of the theorem."
+    },
+    {
+      "index": 327,
+      "start": 1341.87,
+      "end": 1345.77,
+      "duration": 3.9,
+      "text": "It's just an indication of what the notation means."
+    },
+    {
+      "index": 328,
+      "start": 1345.77,
+      "end": 1360.43,
+      "duration": 14.66,
+      "text": "Then G' = f."
+    },
+    {
+      "index": 329,
+      "start": 1360.43,
+      "end": 1363.03,
+      "duration": 2.6,
+      "text": "Let me first explain what the significance of this theorem"
+    },
+    {
+      "index": 330,
+      "start": 1363.03,
+      "end": 1367.83,
+      "duration": 4.8,
+      "text": "is, from the point of view of differential equations."
+    },
+    {
+      "index": 331,
+      "start": 1367.83,
+      "end": 1384.42,
+      "duration": 16.59,
+      "text": "G ( x) solves the differential equation y' = f ( x)."
+    },
+    {
+      "index": 332,
+      "start": 1384.42,
+      "end": 1389.96,
+      "duration": 5.54,
+      "text": "So y' = f, you put the x in if I got it here, with the"
+    },
+    {
+      "index": 333,
+      "start": 1389.96,
+      "end": 1393.24,
+      "duration": 3.28,
+      "text": "condition y ( a) = 0."
+    },
+    {
+      "index": 334,
+      "start": 1393.24,
+      "end": 1399.0,
+      "duration": 5.76,
+      "text": "So it solves this pair of conditions here."
+    },
+    {
+      "index": 335,
+      "start": 1399.0,
+      "end": 1401.86,
+      "duration": 2.86,
+      "text": "The rate of change, and the initial position"
+    },
+    {
+      "index": 336,
+      "start": 1401.86,
+      "end": 1403.28,
+      "duration": 1.42,
+      "text": "is specified here."
+    },
+    {
+      "index": 337,
+      "start": 1403.28,
+      "end": 1409.66,
+      "duration": 6.38,
+      "text": "Because when you integrate from a to a, you get 0 always."
+    },
+    {
+      "index": 338,
+      "start": 1409.66,
+      "end": 1413.66,
+      "duration": 4.0,
+      "text": "And what this theorem says is you can"
+    },
+    {
+      "index": 339,
+      "start": 1413.66,
+      "end": 1415.7,
+      "duration": 2.04,
+      "text": "always solve that equation."
+    },
+    {
+      "index": 340,
+      "start": 1415.7,
+      "end": 1416.67,
+      "duration": 0.97,
+      "text": "When we did differential"
+    },
+    {
+      "index": 341,
+      "start": 1416.67,
+      "end": 1418.13,
+      "duration": 1.46,
+      "text": "equations, I said that already."
+    },
+    {
+      "index": 342,
+      "start": 1418.13,
+      "end": 1419.99,
+      "duration": 1.86,
+      "text": "I said we'll treat these as always solved."
+    },
+    {
+      "index": 343,
+      "start": 1419.99,
+      "end": 1421.53,
+      "duration": 1.54,
+      "text": "Well, here's the reason."
+    },
+    {
+      "index": 344,
+      "start": 1421.53,
+      "end": 1423.16,
+      "duration": 1.63,
+      "text": "We have a numerical procedure for"
+    },
+    {
+      "index": 345,
+      "start": 1423.16,
+      "end": 1425.08,
+      "duration": 1.92,
+      "text": "computing things like this."
+    },
+    {
+      "index": 346,
+      "start": 1425.08,
+      "end": 1429.33,
+      "duration": 4.25,
+      "text": "We could always solve this equation."
+    },
+    {
+      "index": 347,
+      "start": 1429.33,
+      "end": 1434.53,
+      "duration": 5.2,
+      "text": "And the formula is a fairly complicated gadget, but so far"
+    },
+    {
+      "index": 348,
+      "start": 1434.53,
+      "end": 1438.4,
+      "duration": 3.87,
+      "text": "just associated with Riemann sums."
+    },
+    {
+      "index": 349,
+      "start": 1438.4,
+      "end": 1441.0,
+      "duration": 2.6,
+      "text": "Alright, now."
+    },
+    {
+      "index": 350,
+      "start": 1441.0,
+      "end": 1453.82,
+      "duration": 12.82,
+      "text": "Let's just do one example."
+    },
+    {
+      "index": 351,
+      "start": 1453.82,
+      "end": 1457.61,
+      "duration": 3.79,
+      "text": "Unfortunately, not a complicated example and maybe"
+    },
+    {
+      "index": 352,
+      "start": 1457.61,
+      "end": 1459.58,
+      "duration": 1.97,
+      "text": "not persuasive as to why you would care"
+    },
+    {
+      "index": 353,
+      "start": 1459.58,
+      "end": 1461.23,
+      "duration": 1.65,
+      "text": "about this just yet."
+    },
+    {
+      "index": 354,
+      "start": 1461.23,
+      "end": 1463.67,
+      "duration": 2.44,
+      "text": "But nevertheless very important."
+    },
+    {
+      "index": 355,
+      "start": 1463.67,
+      "end": 1466.47,
+      "duration": 2.8,
+      "text": "Because this is the quiz question which everybody gets"
+    },
+    {
+      "index": 356,
+      "start": 1466.47,
+      "end": 1469.53,
+      "duration": 3.06,
+      "text": "wrong until they practice it."
+    },
+    {
+      "index": 357,
+      "start": 1469.53,
+      "end": 1478.71,
+      "duration": 9.18,
+      "text": "So the integral from, say 1 to x of dt / t ^2."
+    },
+    {
+      "index": 358,
+      "start": 1478.71,
+      "end": 1485.42,
+      "duration": 6.71,
+      "text": "Let's try this one here."
+    },
+    {
+      "index": 359,
+      "start": 1485.42,
+      "end": 1496.65,
+      "duration": 11.23,
+      "text": "So here's an example of this theorem, I claim."
+    },
+    {
+      "index": 360,
+      "start": 1496.65,
+      "end": 1501.02,
+      "duration": 4.37,
+      "text": "Now, this is a question which challenges your ability to"
+    },
+    {
+      "index": 361,
+      "start": 1501.02,
+      "end": 1504.74,
+      "duration": 3.72,
+      "text": "understand what the question means."
+    },
+    {
+      "index": 362,
+      "start": 1504.74,
+      "end": 1506.8,
+      "duration": 2.06,
+      "text": "Because it's got a lot of symbols."
+    },
+    {
+      "index": 363,
+      "start": 1506.8,
+      "end": 1509.73,
+      "duration": 2.93,
+      "text": "It's got the integration and it's got the differentiation."
+    },
+    {
+      "index": 364,
+      "start": 1509.73,
+      "end": 1515.7,
+      "duration": 5.97,
+      "text": "However, what it really is an exercise in recopying."
+    },
+    {
+      "index": 365,
+      "start": 1515.7,
+      "end": 1520.66,
+      "duration": 4.96,
+      "text": "You look at it and you write down the answer."
+    },
+    {
+      "index": 366,
+      "start": 1520.66,
+      "end": 1525.72,
+      "duration": 5.06,
+      "text": "And the reason is that, by definition, this function in"
+    },
+    {
+      "index": 367,
+      "start": 1525.72,
+      "end": 1530.74,
+      "duration": 5.02,
+      "text": "here is a function of the form G ( x) of the"
+    },
+    {
+      "index": 368,
+      "start": 1530.74,
+      "end": 1534.32,
+      "duration": 3.58,
+      "text": "theorem over here."
+    },
+    {
+      "index": 369,
+      "start": 1534.32,
+      "end": 1535.92,
+      "duration": 1.6,
+      "text": "So this is the G ( x)."
+    },
+    {
+      "index": 370,
+      "start": 1535.92,
+      "end": 1542.98,
+      "duration": 7.06,
+      "text": "And by definition, we said that G' ( x) = f(x)."
+    },
+    {
+      "index": 371,
+      "start": 1542.98,
+      "end": 1546.17,
+      "duration": 3.19,
+      "text": "Well, what's the f ( x)?"
+    },
+    {
+      "index": 372,
+      "start": 1546.17,
+      "end": 1547.01,
+      "duration": 0.84,
+      "text": "Look inside here."
+    },
+    {
+      "index": 373,
+      "start": 1547.01,
+      "end": 1548.76,
+      "duration": 1.75,
+      "text": "It's what's called the integrand."
+    },
+    {
+      "index": 374,
+      "start": 1548.76,
+      "end": 1553.64,
+      "duration": 4.88,
+      "text": "This is the integral from 0 to x of f ( t ) dt, right?"
+    },
+    {
+      "index": 375,
+      "start": 1553.64,
+      "end": 1560.71,
+      "duration": 7.07,
+      "text": "Where f ( t) = 1 / t^2."
+    },
+    {
+      "index": 376,
+      "start": 1560.71,
+      "end": 1562.91,
+      "duration": 2.2,
+      "text": "So your ability is challenged."
+    },
+    {
+      "index": 377,
+      "start": 1562.91,
+      "end": 1566.43,
+      "duration": 3.52,
+      "text": "You have to take that 1 / t ^2 and you have to plug in the"
+    },
+    {
+      "index": 378,
+      "start": 1566.43,
+      "end": 1569.96,
+      "duration": 3.53,
+      "text": "letter x, instead of t for it."
+    },
+    {
+      "index": 379,
+      "start": 1569.96,
+      "end": 1571.48,
+      "duration": 1.52,
+      "text": "And then write it down."
+    },
+    {
+      "index": 380,
+      "start": 1571.48,
+      "end": 1578.12,
+      "duration": 6.64,
+      "text": "As I say, this is an exercise in recopying what's there."
+    },
+    {
+      "index": 381,
+      "start": 1578.12,
+      "end": 1579.97,
+      "duration": 1.85,
+      "text": "So this is quite easy to do, right?"
+    },
+    {
+      "index": 382,
+      "start": 1579.97,
+      "end": 1581.75,
+      "duration": 1.78,
+      "text": "I mean, you just look and you write it down."
+    },
+    {
+      "index": 383,
+      "start": 1581.75,
+      "end": 1585.49,
+      "duration": 3.74,
+      "text": "But nevertheless, it looks like a long,"
+    },
+    {
+      "index": 384,
+      "start": 1585.49,
+      "end": 1588.35,
+      "duration": 2.86,
+      "text": "elaborate object here."
+    },
+    {
+      "index": 385,
+      "start": 1588.35,
+      "end": 1588.76,
+      "duration": 0.41,
+      "text": "Pardon me?"
+    },
+    {
+      "index": 386,
+      "start": 1588.76,
+      "end": 1590.59,
+      "duration": 1.83,
+      "text": "STUDENT: [INAUDIBLE]"
+    },
+    {
+      "index": 387,
+      "start": 1590.59,
+      "end": 1592.94,
+      "duration": 2.35,
+      "text": "PROFESSOR: So the question was, why did I integrate."
+    },
+    {
+      "index": 388,
+      "start": 1592.94,
+      "end": 1594.0,
+      "duration": 1.06,
+      "text": "STUDENT: [INAUDIBLE]"
+    },
+    {
+      "index": 389,
+      "start": 1594.0,
+      "end": 1596.99,
+      "duration": 2.99,
+      "text": "PROFESSOR: Why did I not integrate?"
+    },
+    {
+      "index": 390,
+      "start": 1596.99,
+      "end": 1597.72,
+      "duration": 0.73,
+      "text": "Ah."
+    },
+    {
+      "index": 391,
+      "start": 1597.72,
+      "end": 1598.87,
+      "duration": 1.15,
+      "text": "Very good question."
+    },
+    {
+      "index": 392,
+      "start": 1598.87,
+      "end": 1601.01,
+      "duration": 2.14,
+      "text": "Why did I not integrate."
+    },
+    {
+      "index": 393,
+      "start": 1601.01,
+      "end": 1605.3,
+      "duration": 4.29,
+      "text": "The reason why I didn't integrate is I didn't need to."
+    },
+    {
+      "index": 394,
+      "start": 1605.3,
+      "end": 1608.89,
+      "duration": 3.59,
+      "text": "Just as when you take the - sorry, the derivative of"
+    },
+    {
+      "index": 395,
+      "start": 1608.89,
+      "end": 1610.61,
+      "duration": 1.72,
+      "text": "something, you take the antiderivative, you get back"
+    },
+    {
+      "index": 396,
+      "start": 1610.61,
+      "end": 1611.75,
+      "duration": 1.14,
+      "text": "to the thing."
+    },
+    {
+      "index": 397,
+      "start": 1611.75,
+      "end": 1614.65,
+      "duration": 2.9,
+      "text": "So, in this case, we're taking the antiderivative of"
+    },
+    {
+      "index": 398,
+      "start": 1614.65,
+      "end": 1616.03,
+      "duration": 1.38,
+      "text": "something and we're differentiating."
+    },
+    {
+      "index": 399,
+      "start": 1616.03,
+      "end": 1618.38,
+      "duration": 2.35,
+      "text": "So we end back in the same place where we started."
+    },
+    {
+      "index": 400,
+      "start": 1618.38,
+      "end": 1621.78,
+      "duration": 3.4,
+      "text": "We started with f ( t), we're ending with f."
+    },
+    {
+      "index": 401,
+      "start": 1621.78,
+      "end": 1624.99,
+      "duration": 3.21,
+      "text": "Little f."
+    },
+    {
+      "index": 402,
+      "start": 1624.99,
+      "end": 1626.95,
+      "duration": 1.96,
+      "text": "So you integrate, and then differentiate."
+    },
+    {
+      "index": 403,
+      "start": 1626.95,
+      "end": 1629.41,
+      "duration": 2.46,
+      "text": "And you get back to the same place."
+    },
+    {
+      "index": 404,
+      "start": 1629.41,
+      "end": 1631.96,
+      "duration": 2.55,
+      "text": "Now, the only difference between this and the other"
+    },
+    {
+      "index": 405,
+      "start": 1631.96,
+      "end": 1634.88,
+      "duration": 2.92,
+      "text": "version is, in this case when you differentiate and"
+    },
+    {
+      "index": 406,
+      "start": 1634.88,
+      "end": 1638.43,
+      "duration": 3.55,
+      "text": "integrate you could be off by a constant."
+    },
+    {
+      "index": 407,
+      "start": 1638.43,
+      "end": 1639.91,
+      "duration": 1.48,
+      "text": "That's what that shift, why there are two"
+    },
+    {
+      "index": 408,
+      "start": 1639.91,
+      "end": 1641.42,
+      "duration": 1.51,
+      "text": "pieces to this one."
+    },
+    {
+      "index": 409,
+      "start": 1641.42,
+      "end": 1643.02,
+      "duration": 1.6,
+      "text": "But there's never an extra piece here."
+    },
+    {
+      "index": 410,
+      "start": 1643.02,
+      "end": 1645.06,
+      "duration": 2.04,
+      "text": "There's no + c here."
+    },
+    {
+      "index": 411,
+      "start": 1645.06,
+      "end": 1646.89,
+      "duration": 1.83,
+      "text": "When you integrate and differentiate, you kill"
+    },
+    {
+      "index": 412,
+      "start": 1646.89,
+      "end": 1648.08,
+      "duration": 1.19,
+      "text": "whatever the constant is."
+    },
+    {
+      "index": 413,
+      "start": 1648.08,
+      "end": 1651.92,
+      "duration": 3.84,
+      "text": "Because the derivative of a constant is 0."
+    },
+    {
+      "index": 414,
+      "start": 1651.92,
+      "end": 1656.43,
+      "duration": 4.51,
+      "text": "So no matter what the constant is hiding inside of g, you're"
+    },
+    {
+      "index": 415,
+      "start": 1656.43,
+      "end": 1657.71,
+      "duration": 1.28,
+      "text": "getting the same result."
+    },
+    {
+      "index": 416,
+      "start": 1657.71,
+      "end": 1661.14,
+      "duration": 3.43,
+      "text": "So this is the basic idea."
+    },
+    {
+      "index": 417,
+      "start": 1661.14,
+      "end": 1667.45,
+      "duration": 6.31,
+      "text": "Now, I just want to double-check it, using the"
+    },
+    {
+      "index": 418,
+      "start": 1667.45,
+      "end": 1672.17,
+      "duration": 4.72,
+      "text": "Fundamental Theorem of Calculus 1 here."
+    },
+    {
+      "index": 419,
+      "start": 1672.17,
+      "end": 1673.79,
+      "duration": 1.62,
+      "text": "So let's actually evaluate the integral."
+    },
+    {
+      "index": 420,
+      "start": 1673.79,
+      "end": 1675.82,
+      "duration": 2.03,
+      "text": "So now I'm going to do what you've suggested, which is I'm"
+    },
+    {
+      "index": 421,
+      "start": 1675.82,
+      "end": 1677.37,
+      "duration": 1.55,
+      "text": "just going to check whether it's true."
+    },
+    {
+      "index": 422,
+      "start": 1677.37,
+      "end": 1679.89,
+      "duration": 2.52,
+      "text": "No, no I am because I'm going just double-check that it's"
+    },
+    {
+      "index": 423,
+      "start": 1679.89,
+      "end": 1681.12,
+      "duration": 1.23,
+      "text": "consistent."
+    },
+    {
+      "index": 424,
+      "start": 1681.12,
+      "end": 1683.93,
+      "duration": 2.81,
+      "text": "It certainly is slower this way, and we're not going to"
+    },
+    {
+      "index": 425,
+      "start": 1683.93,
+      "end": 1685.39,
+      "duration": 1.46,
+      "text": "want to do this all the time, but we might"
+    },
+    {
+      "index": 426,
+      "start": 1685.39,
+      "end": 1686.81,
+      "duration": 1.42,
+      "text": "as well check one."
+    },
+    {
+      "index": 427,
+      "start": 1686.81,
+      "end": 1689.37,
+      "duration": 2.56,
+      "text": "So this is our integral."
+    },
+    {
+      "index": 428,
+      "start": 1689.37,
+      "end": 1690.86,
+      "duration": 1.49,
+      "text": "And we know how to do it."
+    },
+    {
+      "index": 429,
+      "start": 1690.86,
+      "end": 1693.26,
+      "duration": 2.4,
+      "text": "No, I need to do it."
+    },
+    {
+      "index": 430,
+      "start": 1693.26,
+      "end": 1697.82,
+      "duration": 4.56,
+      "text": "And this is - t ^ - 1, evaluated at 1 and x."
+    },
+    {
+      "index": 431,
+      "start": 1697.82,
+      "end": 1702.48,
+      "duration": 4.66,
+      "text": "Again, there's something subliminally here for you to"
+    },
+    {
+      "index": 432,
+      "start": 1702.48,
+      "end": 1703.3,
+      "duration": 0.82,
+      "text": "think about."
+    },
+    {
+      "index": 433,
+      "start": 1703.3,
+      "end": 1705.98,
+      "duration": 2.68,
+      "text": "Which is that, remember, its t is ranging"
+    },
+    {
+      "index": 434,
+      "start": 1705.98,
+      "end": 1708.84,
+      "duration": 2.86,
+      "text": "between 1 and t = x."
+    },
+    {
+      "index": 435,
+      "start": 1708.84,
+      "end": 1711.28,
+      "duration": 2.44,
+      "text": "And this is one of the big reasons why this letter t has"
+    },
+    {
+      "index": 436,
+      "start": 1711.28,
+      "end": 1712.86,
+      "duration": 1.58,
+      "text": "to be different from x."
+    },
+    {
+      "index": 437,
+      "start": 1712.86,
+      "end": 1715.37,
+      "duration": 2.51,
+      "text": "Because here it's 1 and there it's x."
+    },
+    {
+      "index": 438,
+      "start": 1715.37,
+      "end": 1717.21,
+      "duration": 1.84,
+      "text": "It's not x."
+    },
+    {
+      "index": 439,
+      "start": 1717.21,
+      "end": 1718.89,
+      "duration": 1.68,
+      "text": "So you can't put an x here."
+    },
+    {
+      "index": 440,
+      "start": 1718.89,
+      "end": 1724.13,
+      "duration": 5.24,
+      "text": "Again, this is t = 1 and this is t = x over there."
+    },
+    {
+      "index": 441,
+      "start": 1724.13,
+      "end": 1728.63,
+      "duration": 4.5,
+      "text": "And now if I plug that in, I get what?"
+    },
+    {
+      "index": 442,
+      "start": 1728.63,
+      "end": 1735.86,
+      "duration": 7.23,
+      "text": "I get - 1 / x, and then I get - ( - 1)."
+    },
+    {
+      "index": 443,
+      "start": 1735.86,
+      "end": 1739.09,
+      "duration": 3.23,
+      "text": "So this is, let me get rid of those little t's there."
+    },
+    {
+      "index": 444,
+      "start": 1739.09,
+      "end": 1745.69,
+      "duration": 6.6,
+      "text": "This is a little easier to read."
+    },
+    {
+      "index": 445,
+      "start": 1745.69,
+      "end": 1747.03,
+      "duration": 1.34,
+      "text": "And so now let's check it."
+    },
+    {
+      "index": 446,
+      "start": 1747.03,
+      "end": 1747.73,
+      "duration": 0.7,
+      "text": "It's d / dx."
+    },
+    {
+      "index": 447,
+      "start": 1747.73,
+      "end": 1749.28,
+      "duration": 1.55,
+      "text": "So here's what G ( x) is."
+    },
+    {
+      "index": 448,
+      "start": 1749.28,
+      "end": 1752.26,
+      "duration": 2.98,
+      "text": "G ( x) = 1 - 1 / x."
+    },
+    {
+      "index": 449,
+      "start": 1752.26,
+      "end": 1754.86,
+      "duration": 2.6,
+      "text": "That's what G( x) is."
+    },
+    {
+      "index": 450,
+      "start": 1754.86,
+      "end": 1760.5,
+      "duration": 5.64,
+      "text": "And if I differentiate that, I get + 1 / x ^2."
+    },
+    {
+      "index": 451,
+      "start": 1760.5,
+      "end": 1766.17,
+      "duration": 5.67,
+      "text": "That's it."
+    },
+    {
+      "index": 452,
+      "start": 1766.17,
+      "end": 1780.81,
+      "duration": 14.64,
+      "text": "You see the constant washed away."
+    },
+    {
+      "index": 453,
+      "start": 1780.81,
+      "end": 1782.07,
+      "duration": 1.26,
+      "text": "So now, here's my job."
+    },
+    {
+      "index": 454,
+      "start": 1782.07,
+      "end": 1785.33,
+      "duration": 3.26,
+      "text": "My job is to prove these theorems. I never did prove"
+    },
+    {
+      "index": 455,
+      "start": 1785.33,
+      "end": 1786.14,
+      "duration": 0.81,
+      "text": "them for you."
+    },
+    {
+      "index": 456,
+      "start": 1786.14,
+      "end": 1787.21,
+      "duration": 1.07,
+      "text": "So, I'm going to prove the"
+    },
+    {
+      "index": 457,
+      "start": 1787.21,
+      "end": 1789.34,
+      "duration": 2.13,
+      "text": "Fundamental Theorem of Calculus."
+    },
+    {
+      "index": 458,
+      "start": 1789.34,
+      "end": 1793.42,
+      "duration": 4.08,
+      "text": "But I'm going to do 2 first. And then I'm going to do 1."
+    },
+    {
+      "index": 459,
+      "start": 1793.42,
+      "end": 1796.49,
+      "duration": 3.07,
+      "text": "And it's just going to take me just one blackboard."
+    },
+    {
+      "index": 460,
+      "start": 1796.49,
+      "end": 1800.31,
+      "duration": 3.82,
+      "text": "It's not that hard."
+    },
+    {
+      "index": 461,
+      "start": 1800.31,
+      "end": 1803.15,
+      "duration": 2.84,
+      "text": "The proof is by picture."
+    },
+    {
+      "index": 462,
+      "start": 1803.15,
+      "end": 1808.31,
+      "duration": 5.16,
+      "text": "And, using the interpretation as area under the curve."
+    },
+    {
+      "index": 463,
+      "start": 1808.31,
+      "end": 1813.65,
+      "duration": 5.34,
+      "text": "So if here's the value of a, and this is the graph of the"
+    },
+    {
+      "index": 464,
+      "start": 1813.65,
+      "end": 1822.55,
+      "duration": 8.9,
+      "text": "function y equals f of x."
+    },
+    {
+      "index": 465,
+      "start": 1822.55,
+      "end": 1826.38,
+      "duration": 3.83,
+      "text": "Then I want to draw three vertical lines."
+    },
+    {
+      "index": 466,
+      "start": 1826.38,
+      "end": 1829.33,
+      "duration": 2.95,
+      "text": "One of them is going to be at x."
+    },
+    {
+      "index": 467,
+      "start": 1829.33,
+      "end": 1833.79,
+      "duration": 4.46,
+      "text": "And one of them is going to be at x + delta x."
+    },
+    {
+      "index": 468,
+      "start": 1833.79,
+      "end": 1837.39,
+      "duration": 3.6,
+      "text": "So here I have the interval from 0 to x, and next I have"
+    },
+    {
+      "index": 469,
+      "start": 1837.39,
+      "end": 1842.9,
+      "duration": 5.51,
+      "text": "the interval from x to delta x more than that."
+    },
+    {
+      "index": 470,
+      "start": 1842.9,
+      "end": 1850.36,
+      "duration": 7.46,
+      "text": "And now the pieces that I've got are the area of this part."
+    },
+    {
+      "index": 471,
+      "start": 1850.36,
+      "end": 1853.43,
+      "duration": 3.07,
+      "text": "So this has area which has a name."
+    },
+    {
+      "index": 472,
+      "start": 1853.43,
+      "end": 1855.86,
+      "duration": 2.43,
+      "text": "It's called G ( x )."
+    },
+    {
+      "index": 473,
+      "start": 1855.86,
+      "end": 1860.9,
+      "duration": 5.04,
+      "text": "By definition, G( x ), which is sitting right over here in"
+    },
+    {
+      "index": 474,
+      "start": 1860.9,
+      "end": 1865.5,
+      "duration": 4.6,
+      "text": "the fundamental theorem, is the integral from a to x of"
+    },
+    {
+      "index": 475,
+      "start": 1865.5,
+      "end": 1866.1,
+      "duration": 0.6,
+      "text": "this function."
+    },
+    {
+      "index": 476,
+      "start": 1866.1,
+      "end": 1867.89,
+      "duration": 1.79,
+      "text": "So it's the area under the curve."
+    },
+    {
+      "index": 477,
+      "start": 1867.89,
+      "end": 1870.4,
+      "duration": 2.51,
+      "text": "So that area is G ( x )."
+    },
+    {
+      "index": 478,
+      "start": 1870.4,
+      "end": 1881.7,
+      "duration": 11.3,
+      "text": "Now this other chunk here, I claim that this is delta G."
+    },
+    {
+      "index": 479,
+      "start": 1881.7,
+      "end": 1884.98,
+      "duration": 3.28,
+      "text": "This is the change in G. It's the value of G ( x ) that is"
+    },
+    {
+      "index": 480,
+      "start": 1884.98,
+      "end": 1887.93,
+      "duration": 2.95,
+      "text": "the area of the whole business all the way up to x + delta x"
+    },
+    {
+      "index": 481,
+      "start": 1887.93,
+      "end": 1890.53,
+      "duration": 2.6,
+      "text": "- the first part, G ( x )."
+    },
+    {
+      "index": 482,
+      "start": 1890.53,
+      "end": 1891.64,
+      "duration": 1.11,
+      "text": "So it's what's left over."
+    },
+    {
+      "index": 483,
+      "start": 1891.64,
+      "end": 1899.78,
+      "duration": 8.14,
+      "text": "It's the incremental amount of area there."
+    },
+    {
+      "index": 484,
+      "start": 1899.78,
+      "end": 1905.1,
+      "duration": 5.32,
+      "text": "And now I am going to carry out a pretty standard"
+    },
+    {
+      "index": 485,
+      "start": 1905.1,
+      "end": 1906.52,
+      "duration": 1.42,
+      "text": "estimation here."
+    },
+    {
+      "index": 486,
+      "start": 1906.52,
+      "end": 1908.85,
+      "duration": 2.33,
+      "text": "This is practically a rectangle."
+    },
+    {
+      "index": 487,
+      "start": 1908.85,
+      "end": 1911.59,
+      "duration": 2.74,
+      "text": "And it's got a base of delta x, and so we need to figure"
+    },
+    {
+      "index": 488,
+      "start": 1911.59,
+      "end": 1915.32,
+      "duration": 3.73,
+      "text": "out what its height is."
+    },
+    {
+      "index": 489,
+      "start": 1915.32,
+      "end": 1922.45,
+      "duration": 7.13,
+      "text": "This is delta G, and it's approximately its base times"
+    },
+    {
+      "index": 490,
+      "start": 1922.45,
+      "end": 1925.34,
+      "duration": 2.89,
+      "text": "its height."
+    },
+    {
+      "index": 491,
+      "start": 1925.34,
+      "end": 1926.82,
+      "duration": 1.48,
+      "text": "But what is the height?"
+    },
+    {
+      "index": 492,
+      "start": 1926.82,
+      "end": 1930.39,
+      "duration": 3.57,
+      "text": "Well, the height is maybe either this segment or this"
+    },
+    {
+      "index": 493,
+      "start": 1930.39,
+      "end": 1931.92,
+      "duration": 1.53,
+      "text": "segment or something in between."
+    },
+    {
+      "index": 494,
+      "start": 1931.92,
+      "end": 1933.72,
+      "duration": 1.8,
+      "text": "But they're all about the same."
+    },
+    {
+      "index": 495,
+      "start": 1933.72,
+      "end": 1937.07,
+      "duration": 3.35,
+      "text": "So I'm just going to put in the value at the first point."
+    },
+    {
+      "index": 496,
+      "start": 1937.07,
+      "end": 1939.43,
+      "duration": 2.36,
+      "text": "That's the left end there."
+    },
+    {
+      "index": 497,
+      "start": 1939.43,
+      "end": 1945.55,
+      "duration": 6.12,
+      "text": "So that's this height here, is f ( x )."
+    },
+    {
+      "index": 498,
+      "start": 1945.55,
+      "end": 1948.33,
+      "duration": 2.78,
+      "text": "So this is f (x), and so really I approximate it by"
+    },
+    {
+      "index": 499,
+      "start": 1948.33,
+      "end": 1950.05,
+      "duration": 1.72,
+      "text": "that rectangle there."
+    },
+    {
+      "index": 500,
+      "start": 1950.05,
+      "end": 1954.79,
+      "duration": 4.74,
+      "text": "And now if I divide and take the limit, as delta x goes to"
+    },
+    {
+      "index": 501,
+      "start": 1954.79,
+      "end": 1963.12,
+      "duration": 8.33,
+      "text": "0 of delta G / delta x, it's going to equal f ( x )."
+    },
+    {
+      "index": 502,
+      "start": 1963.12,
+      "end": 1968.92,
+      "duration": 5.8,
+      "text": "And this is where I'm using the fact that f is continuous."
+    },
+    {
+      "index": 503,
+      "start": 1968.92,
+      "end": 1971.96,
+      "duration": 3.04,
+      "text": "Because I need the values nearby to be similar to the"
+    },
+    {
+      "index": 504,
+      "start": 1971.96,
+      "end": 1979.69,
+      "duration": 7.73,
+      "text": "value in the limit."
+    },
+    {
+      "index": 505,
+      "start": 1979.69,
+      "end": 1980.65,
+      "duration": 0.96,
+      "text": "OK, that's the end."
+    },
+    {
+      "index": 506,
+      "start": 1980.65,
+      "end": 1985.02,
+      "duration": 4.37,
+      "text": "This the end of the proof, so I'll put a nice little q.e.d."
+    },
+    {
+      "index": 507,
+      "start": 1985.02,
+      "end": 1990.8,
+      "duration": 5.78,
+      "text": "here."
+    },
+    {
+      "index": 508,
+      "start": 1990.8,
+      "end": 1994.75,
+      "duration": 3.95,
+      "text": "So we've done Fundamental Theorem of Calculus 2, and now"
+    },
+    {
+      "index": 509,
+      "start": 1994.75,
+      "end": 2018.42,
+      "duration": 23.67,
+      "text": "we're ready for Fundamental Theorem of Calculus 1."
+    },
+    {
+      "index": 510,
+      "start": 2018.42,
+      "end": 2024.58,
+      "duration": 6.16,
+      "text": "So now I still have it on the blackboard to remind you."
+    },
+    {
+      "index": 511,
+      "start": 2024.58,
+      "end": 2028.69,
+      "duration": 4.11,
+      "text": "It says that the integral of the derivative is the"
+    },
+    {
+      "index": 512,
+      "start": 2028.69,
+      "end": 2030.98,
+      "duration": 2.29,
+      "text": "function, at least the difference between the values"
+    },
+    {
+      "index": 513,
+      "start": 2030.98,
+      "end": 2034.83,
+      "duration": 3.85,
+      "text": "of the function at two places."
+    },
+    {
+      "index": 514,
+      "start": 2034.83,
+      "end": 2044.3,
+      "duration": 9.47,
+      "text": "So the place where we start is with this"
+    },
+    {
+      "index": 515,
+      "start": 2044.3,
+      "end": 2048.04,
+      "duration": 3.74,
+      "text": "property that F' = f."
+    },
+    {
+      "index": 516,
+      "start": 2048.04,
+      "end": 2050.6,
+      "duration": 2.56,
+      "text": "That's the starting, that's the hypothesis."
+    },
+    {
+      "index": 517,
+      "start": 2050.6,
+      "end": 2053.77,
+      "duration": 3.17,
+      "text": "Now, unfortunately, I'm going to have to assume something"
+    },
+    {
+      "index": 518,
+      "start": 2053.77,
+      "end": 2057.73,
+      "duration": 3.96,
+      "text": "extra in order to use the Fundamental Theorem of"
+    },
+    {
+      "index": 519,
+      "start": 2057.73,
+      "end": 2064.41,
+      "duration": 6.68,
+      "text": "Calculus 2, which is I'm going to assume that f is"
+    },
+    {
+      "index": 520,
+      "start": 2064.41,
+      "end": 2067.98,
+      "duration": 3.57,
+      "text": "continuous."
+    },
+    {
+      "index": 521,
+      "start": 2067.98,
+      "end": 2071.38,
+      "duration": 3.4,
+      "text": "That's not really necessary, but that's just a very minor"
+    },
+    {
+      "index": 522,
+      "start": 2071.38,
+      "end": 2074.28,
+      "duration": 2.9,
+      "text": "technical point, which I'm just going to ignore."
+    },
+    {
+      "index": 523,
+      "start": 2074.28,
+      "end": 2080.61,
+      "duration": 6.33,
+      "text": "So we're going to start with F' = f."
+    },
+    {
+      "index": 524,
+      "start": 2080.61,
+      "end": 2086.53,
+      "duration": 5.92,
+      "text": "And then I'm going to go somewhere else."
+    },
+    {
+      "index": 525,
+      "start": 2086.53,
+      "end": 2093.58,
+      "duration": 7.05,
+      "text": "I'm going to define a new function, G (x), which is the"
+    },
+    {
+      "index": 526,
+      "start": 2093.58,
+      "end": 2100.13,
+      "duration": 6.55,
+      "text": "integral from a to x of f ( t ) dt."
+    },
+    {
+      "index": 527,
+      "start": 2100.13,
+      "end": 2104.56,
+      "duration": 4.43,
+      "text": "This is where we needed all of the labor of Riemann's sums."
+    },
+    {
+      "index": 528,
+      "start": 2104.56,
+      "end": 2107.17,
+      "duration": 2.61,
+      "text": "Because otherwise we don't have a way of making sense out"
+    },
+    {
+      "index": 529,
+      "start": 2107.17,
+      "end": 2110.34,
+      "duration": 3.17,
+      "text": "of what this even means."
+    },
+    {
+      "index": 530,
+      "start": 2110.34,
+      "end": 2114.69,
+      "duration": 4.35,
+      "text": "So hiding behind this one sentence is the fact that we"
+    },
+    {
+      "index": 531,
+      "start": 2114.69,
+      "end": 2116.05,
+      "duration": 1.36,
+      "text": "actually have a number."
+    },
+    {
+      "index": 532,
+      "start": 2116.05,
+      "end": 2118.43,
+      "duration": 2.38,
+      "text": "We have a formula for such functions."
+    },
+    {
+      "index": 533,
+      "start": 2118.43,
+      "end": 2121.45,
+      "duration": 3.02,
+      "text": "So there is a function g (x) which, once you've produced a"
+    },
+    {
+      "index": 534,
+      "start": 2121.45,
+      "end": 2127.42,
+      "duration": 5.97,
+      "text": "little f for me, I can cook up a function capital G for you."
+    },
+    {
+      "index": 535,
+      "start": 2127.42,
+      "end": 2130.86,
+      "duration": 3.44,
+      "text": "Now, we're going to apply this Fundamental Theorem of"
+    },
+    {
+      "index": 536,
+      "start": 2130.86,
+      "end": 2134.65,
+      "duration": 3.79,
+      "text": "Calculus 2, the one that we've already checked."
+    },
+    {
+      "index": 537,
+      "start": 2134.65,
+      "end": 2136.03,
+      "duration": 1.38,
+      "text": "So what does it say?"
+    },
+    {
+      "index": 538,
+      "start": 2136.03,
+      "end": 2146.51,
+      "duration": 10.48,
+      "text": "It says that G' = f."
+    },
+    {
+      "index": 539,
+      "start": 2146.51,
+      "end": 2149.82,
+      "duration": 3.31,
+      "text": "And so now we're in the following situation."
+    },
+    {
+      "index": 540,
+      "start": 2149.82,
+      "end": 2158.08,
+      "duration": 8.26,
+      "text": "We know that F' ( x ) = G' ( x)."
+    },
+    {
+      "index": 541,
+      "start": 2158.08,
+      "end": 2160.36,
+      "duration": 2.28,
+      "text": "That's what we've got so far."
+    },
+    {
+      "index": 542,
+      "start": 2160.36,
+      "end": 2166.65,
+      "duration": 6.29,
+      "text": "And now we have one last step to get a good connection"
+    },
+    {
+      "index": 543,
+      "start": 2166.65,
+      "end": 2170.38,
+      "duration": 3.73,
+      "text": "between F and G. Which is that we can conclude that F ( x ) ="
+    },
+    {
+      "index": 544,
+      "start": 2170.38,
+      "end": 2172.17,
+      "duration": 1.79,
+      "text": "G ( x) + c."
+    },
+    {
+      "index": 545,
+      "start": 2180.44,
+      "end": 2188.73,
+      "duration": 8.29,
+      "text": "Now, this little step may seem innocuous but I remind you"
+    },
+    {
+      "index": 546,
+      "start": 2188.73,
+      "end": 2192.61,
+      "duration": 3.88,
+      "text": "that this is the spot that requires"
+    },
+    {
+      "index": 547,
+      "start": 2192.61,
+      "end": 2196.03,
+      "duration": 3.42,
+      "text": "the mean value theorem."
+    },
+    {
+      "index": 548,
+      "start": 2196.03,
+      "end": 2200.22,
+      "duration": 4.19,
+      "text": "So in order not too lie to you, we actually tell you what"
+    },
+    {
+      "index": 549,
+      "start": 2200.22,
+      "end": 2202.68,
+      "duration": 2.46,
+      "text": "the underpinnings of all of calculus are."
+    },
+    {
+      "index": 550,
+      "start": 2202.68,
+      "end": 2205.72,
+      "duration": 3.04,
+      "text": "And they're this: the fact, if you like, that if two"
+    },
+    {
+      "index": 551,
+      "start": 2205.72,
+      "end": 2207.11,
+      "duration": 1.39,
+      "text": "functions have the same derivative,"
+    },
+    {
+      "index": 552,
+      "start": 2207.11,
+      "end": 2208.43,
+      "duration": 1.32,
+      "text": "they differ by a constant."
+    },
+    {
+      "index": 553,
+      "start": 2208.43,
+      "end": 2210.75,
+      "duration": 2.32,
+      "text": "Or that if a function has derivative 0,"
+    },
+    {
+      "index": 554,
+      "start": 2210.75,
+      "end": 2213.96,
+      "duration": 3.21,
+      "text": "it's a constant itself."
+    },
+    {
+      "index": 555,
+      "start": 2213.96,
+      "end": 2218.11,
+      "duration": 4.15,
+      "text": "Now, that is the fundamental step that's needed, the"
+    },
+    {
+      "index": 556,
+      "start": 2218.11,
+      "end": 2219.74,
+      "duration": 1.63,
+      "text": "underlying step that's needed."
+    },
+    {
+      "index": 557,
+      "start": 2219.74,
+      "end": 2222.63,
+      "duration": 2.89,
+      "text": "And, unfortunately, there aren't any proofs of it that"
+    },
+    {
+      "index": 558,
+      "start": 2222.63,
+      "end": 2226.05,
+      "duration": 3.42,
+      "text": "are less complicated than using the mean value theorem."
+    },
+    {
+      "index": 559,
+      "start": 2226.05,
+      "end": 2228.19,
+      "duration": 2.14,
+      "text": "And so that's why we talk a little bit about the mean"
+    },
+    {
+      "index": 560,
+      "start": 2228.19,
+      "end": 2230.63,
+      "duration": 2.44,
+      "text": "value theorem, because we don't want to lie to you about"
+    },
+    {
+      "index": 561,
+      "start": 2230.63,
+      "end": 2231.78,
+      "duration": 1.15,
+      "text": "what's really going on."
+    },
+    {
+      "index": 562,
+      "start": 2231.78,
+      "end": 2232.23,
+      "duration": 0.45,
+      "text": "Yes."
+    },
+    {
+      "index": 563,
+      "start": 2232.23,
+      "end": 2239.07,
+      "duration": 6.84,
+      "text": "STUDENT: [INAUDIBLE]"
+    },
+    {
+      "index": 564,
+      "start": 2239.07,
+      "end": 2244.21,
+      "duration": 5.14,
+      "text": "PROFESSOR: The question is how did I get from here, to here."
+    },
+    {
+      "index": 565,
+      "start": 2244.21,
+      "end": 2248.16,
+      "duration": 3.95,
+      "text": "And the answer is that if G' is little f, and we also know"
+    },
+    {
+      "index": 566,
+      "start": 2248.16,
+      "end": 2252.95,
+      "duration": 4.79,
+      "text": "that F' is little f, then F' is G'."
+    },
+    {
+      "index": 567,
+      "start": 2252.95,
+      "end": 2257.09,
+      "duration": 4.14,
+      "text": "OK."
+    },
+    {
+      "index": 568,
+      "start": 2257.09,
+      "end": 2270.71,
+      "duration": 13.62,
+      "text": "Other questions?"
+    },
+    {
+      "index": 569,
+      "start": 2270.71,
+      "end": 2272.75,
+      "duration": 2.04,
+      "text": "Alright, so we're almost done."
+    },
+    {
+      "index": 570,
+      "start": 2272.75,
+      "end": 2277.4,
+      "duration": 4.65,
+      "text": "I just have to work out the arithmetic here."
+    },
+    {
+      "index": 571,
+      "start": 2277.4,
+      "end": 2284.81,
+      "duration": 7.41,
+      "text": "So I start with F(b) - F ( a)."
+    },
+    {
+      "index": 572,
+      "start": 2284.81,
+      "end": 2298.13,
+      "duration": 13.32,
+      "text": "And that's equal to (G ( b) + c) - (G (a) + c)."
+    },
+    {
+      "index": 573,
+      "start": 2298.13,
+      "end": 2300.97,
+      "duration": 2.84,
+      "text": "And then I cancel the c's."
+    },
+    {
+      "index": 574,
+      "start": 2300.97,
+      "end": 2303.31,
+      "duration": 2.34,
+      "text": "So I have here G(b) - G(a)."
+    },
+    {
+      "index": 575,
+      "start": 2309.96,
+      "end": 2312.665,
+      "duration": 2.705,
+      "text": "And now I just have to check what each of these is."
+    },
+    {
+      "index": 576,
+      "start": 2312.665,
+      "end": 2315.09,
+      "duration": 2.425,
+      "text": "So Remember the definition of G here."
+    },
+    {
+      "index": 577,
+      "start": 2315.09,
+      "end": 2318.1,
+      "duration": 3.01,
+      "text": "G ( b) is just what we want."
+    },
+    {
+      "index": 578,
+      "start": 2318.1,
+      "end": 2322.46,
+      "duration": 4.36,
+      "text": "The integral from a to b of f(x) dx."
+    },
+    {
+      "index": 579,
+      "start": 2322.46,
+      "end": 2326.43,
+      "duration": 3.97,
+      "text": "Well I called it f ( t) dt, that's the same as f(x) dx"
+    },
+    {
+      "index": 580,
+      "start": 2326.43,
+      "end": 2329.9,
+      "duration": 3.47,
+      "text": "now, because I have the limit being b and I'm allowed to use"
+    },
+    {
+      "index": 581,
+      "start": 2329.9,
+      "end": 2332.9,
+      "duration": 3.0,
+      "text": "x as the dummy variable."
+    },
+    {
+      "index": 582,
+      "start": 2332.9,
+      "end": 2335.78,
+      "duration": 2.88,
+      "text": "Now the other one, I claim, is 0."
+    },
+    {
+      "index": 583,
+      "start": 2335.78,
+      "end": 2339.68,
+      "duration": 3.9,
+      "text": "Because it's the integral from a to a."
+    },
+    {
+      "index": 584,
+      "start": 2339.68,
+      "end": 2343.49,
+      "duration": 3.81,
+      "text": "This one is the integral from a to a."
+    },
+    {
+      "index": 585,
+      "start": 2343.49,
+      "end": 2346.51,
+      "duration": 3.02,
+      "text": "Which gives us 0."
+    },
+    {
+      "index": 586,
+      "start": 2346.51,
+      "end": 2349.37,
+      "duration": 2.86,
+      "text": "So this is just this - 0, and that's the end."
+    },
+    {
+      "index": 587,
+      "start": 2349.37,
+      "end": 2353.46,
+      "duration": 4.09,
+      "text": "That's it."
+    },
+    {
+      "index": 588,
+      "start": 2353.46,
+      "end": 2360.37,
+      "duration": 6.91,
+      "text": "I started with F( b) - F( a), I got to the integral."
+    },
+    {
+      "index": 589,
+      "start": 2360.37,
+      "end": 2360.77,
+      "duration": 0.4,
+      "text": "Question?"
+    },
+    {
+      "index": 590,
+      "start": 2360.77,
+      "end": 2367.37,
+      "duration": 6.6,
+      "text": "STUDENT: [INAUDIBLE]"
+    },
+    {
+      "index": 591,
+      "start": 2367.37,
+      "end": 2372.07,
+      "duration": 4.7,
+      "text": "PROFESSOR: How did I get from F ( b) - F (a), is (G ( b) +"
+    },
+    {
+      "index": 592,
+      "start": 2372.07,
+      "end": 2375.43,
+      "duration": 3.36,
+      "text": "c) - (G( a) + c), that's the question."
+    },
+    {
+      "index": 593,
+      "start": 2375.43,
+      "end": 2380.19,
+      "duration": 4.76,
+      "text": "STUDENT: [INAUDIBLE]"
+    },
+    {
+      "index": 594,
+      "start": 2380.19,
+      "end": 2384.16,
+      "duration": 3.97,
+      "text": "PROFESSOR: Oh, sorry this is an equals sign."
+    },
+    {
+      "index": 595,
+      "start": 2384.16,
+      "end": 2387.09,
+      "duration": 2.93,
+      "text": "Sorry, the second line didn't draw."
+    },
+    {
+      "index": 596,
+      "start": 2387.09,
+      "end": 2388.64,
+      "duration": 1.55,
+      "text": "OK, equals."
+    },
+    {
+      "index": 597,
+      "start": 2388.64,
+      "end": 2393.24,
+      "duration": 4.6,
+      "text": "Because we're plugging in for f (x) the formula for it."
+    },
+    {
+      "index": 598,
+      "start": 2393.24,
+      "end": 2393.64,
+      "duration": 0.4,
+      "text": "Yes."
+    },
+    {
+      "index": 599,
+      "start": 2393.64,
+      "end": 2397.31,
+      "duration": 3.67,
+      "text": "STUDENT: [INAUDIBLE]"
+    },
+    {
+      "index": 600,
+      "start": 2397.31,
+      "end": 2399.63,
+      "duration": 2.32,
+      "text": "PROFESSOR: This step here?"
+    },
+    {
+      "index": 601,
+      "start": 2399.63,
+      "end": 2404.73,
+      "duration": 5.1,
+      "text": "Or this one? there's"
+    },
+    {
+      "index": 602,
+      "start": 2404.73,
+      "end": 2409.52,
+      "duration": 4.79,
+      "text": "STUDENT: [INAUDIBLE]"
+    },
+    {
+      "index": 603,
+      "start": 2409.52,
+      "end": 2410.1,
+      "duration": 0.58,
+      "text": "PROFESSOR: Right."
+    },
+    {
+      "index": 604,
+      "start": 2410.1,
+      "end": 2412.09,
+      "duration": 1.99,
+      "text": "So that was a good question."
+    },
+    {
+      "index": 605,
+      "start": 2412.09,
+      "end": 2415.54,
+      "duration": 3.45,
+      "text": "But the answer is that that's the statement that we're"
+    },
+    {
+      "index": 606,
+      "start": 2415.54,
+      "end": 2416.3,
+      "duration": 0.76,
+      "text": "aiming for."
+    },
+    {
+      "index": 607,
+      "start": 2416.3,
+      "end": 2418.28,
+      "duration": 1.98,
+      "text": "That's the Fundamental Theorem of Calculus 1, which"
+    },
+    {
+      "index": 608,
+      "start": 2418.28,
+      "end": 2419.95,
+      "duration": 1.67,
+      "text": "we don't know yet."
+    },
+    {
+      "index": 609,
+      "start": 2419.95,
+      "end": 2422.03,
+      "duration": 2.08,
+      "text": "So we're trying to prove it, and that's why we haven't, we"
+    },
+    {
+      "index": 610,
+      "start": 2422.03,
+      "end": 2425.95,
+      "duration": 3.92,
+      "text": "can't assume it."
+    },
+    {
+      "index": 611,
+      "start": 2425.95,
+      "end": 2433.27,
+      "duration": 7.32,
+      "text": "OK, so let me just notice that in the example that we had,"
+    },
+    {
+      "index": 612,
+      "start": 2433.27,
+      "end": 2436.41,
+      "duration": 3.14,
+      "text": "before we go on to something else here."
+    },
+    {
+      "index": 613,
+      "start": 2436.41,
+      "end": 2448.53,
+      "duration": 12.12,
+      "text": "In the example above, what we had was the following thing."
+    },
+    {
+      "index": 614,
+      "start": 2448.53,
+      "end": 2458.07,
+      "duration": 9.54,
+      "text": "We had, say, F ( x ) = - 1 / x."
+    },
+    {
+      "index": 615,
+      "start": 2458.07,
+      "end": 2461.89,
+      "duration": 3.82,
+      "text": "So F' (x) = 1 / x ^2."
+    },
+    {
+      "index": 616,
+      "start": 2461.89,
+      "end": 2468.85,
+      "duration": 6.96,
+      "text": "And, say, G ( x) = 1 - (1 / x)."
+    },
+    {
+      "index": 617,
+      "start": 2468.85,
+      "end": 2472.22,
+      "duration": 3.37,
+      "text": "And you can see that either way you do that, if you"
+    },
+    {
+      "index": 618,
+      "start": 2472.22,
+      "end": 2475.26,
+      "duration": 3.04,
+      "text": "integrate from 1 to 2, let's say, which is what we had over"
+    },
+    {
+      "index": 619,
+      "start": 2475.26,
+      "end": 2486.16,
+      "duration": 10.9,
+      "text": "there, dt / t ^2, you're going to get either - 1 / t, 1 to 2"
+    },
+    {
+      "index": 620,
+      "start": 2486.16,
+      "end": 2491.2,
+      "duration": 5.04,
+      "text": "or, if you like, 1 - (1 / t), 1 to 2."
+    },
+    {
+      "index": 621,
+      "start": 2491.2,
+      "end": 2493.93,
+      "duration": 2.73,
+      "text": "So this is the F version, this is the G version."
+    },
+    {
+      "index": 622,
+      "start": 2493.93,
+      "end": 2496.75,
+      "duration": 2.82,
+      "text": "And that's what plays itself out here, in"
+    },
+    {
+      "index": 623,
+      "start": 2496.75,
+      "end": 2505.41,
+      "duration": 8.66,
+      "text": "this general proof."
+    },
+    {
+      "index": 624,
+      "start": 2505.41,
+      "end": 2509.64,
+      "duration": 4.23,
+      "text": "Alright."
+    },
+    {
+      "index": 625,
+      "start": 2509.64,
+      "end": 2515.56,
+      "duration": 5.92,
+      "text": "So now I want to go back to the theme for today, which is"
+    },
+    {
+      "index": 626,
+      "start": 2515.56,
+      "end": 2521.29,
+      "duration": 5.73,
+      "text": "using little f to understand capital F. In other words,"
+    },
+    {
+      "index": 627,
+      "start": 2521.29,
+      "end": 2526.49,
+      "duration": 5.2,
+      "text": "using the derivative of f to understand capital F. And I"
+    },
+    {
+      "index": 628,
+      "start": 2526.49,
+      "end": 2542.63,
+      "duration": 16.14,
+      "text": "want to illustrate it by some more complicated examples."
+    },
+    {
+      "index": 629,
+      "start": 2542.63,
+      "end": 2546.98,
+      "duration": 4.35,
+      "text": "So I guess I just erased it, but we just took the"
+    },
+    {
+      "index": 630,
+      "start": 2546.98,
+      "end": 2549.74,
+      "duration": 2.76,
+      "text": "antiderivative of 1 / t ^2."
+    },
+    {
+      "index": 631,
+      "start": 2549.74,
+      "end": 2552.32,
+      "duration": 2.58,
+      "text": "And there's all of the powers work easily."
+    },
+    {
+      "index": 632,
+      "start": 2552.32,
+      "end": 2559.19,
+      "duration": 6.87,
+      "text": "But one, and the tricky one is the power 1 / x."
+    },
+    {
+      "index": 633,
+      "start": 2559.19,
+      "end": 2561.06,
+      "duration": 1.87,
+      "text": "So let's consider the differential equation"
+    },
+    {
+      "index": 634,
+      "start": 2561.06,
+      "end": 2564.55,
+      "duration": 3.49,
+      "text": "L' ( x) = 1 / x."
+    },
+    {
+      "index": 635,
+      "start": 2564.55,
+      "end": 2574.49,
+      "duration": 9.94,
+      "text": "And say, with the initial value L (1) = 0."
+    },
+    {
+      "index": 636,
+      "start": 2574.49,
+      "end": 2576.25,
+      "duration": 1.76,
+      "text": "The solution, so the Fundamental Theorem of"
+    },
+    {
+      "index": 637,
+      "start": 2576.25,
+      "end": 2585.87,
+      "duration": 9.62,
+      "text": "Calculus 2 tells us the solution is"
+    },
+    {
+      "index": 638,
+      "start": 2585.87,
+      "end": 2587.33,
+      "duration": 1.46,
+      "text": "this function here."
+    },
+    {
+      "index": 639,
+      "start": 2587.33,
+      "end": 2594.07,
+      "duration": 6.74,
+      "text": "L( x) equals the integral from 1 to x, dt / t."
+    },
+    {
+      "index": 640,
+      "start": 2594.07,
+      "end": 2596.49,
+      "duration": 2.42,
+      "text": "That's how we solve all such equations."
+    },
+    {
+      "index": 641,
+      "start": 2596.49,
+      "end": 2599.29,
+      "duration": 2.8,
+      "text": "We just integrate, take the definite integral."
+    },
+    {
+      "index": 642,
+      "start": 2599.29,
+      "end": 2607.4,
+      "duration": 8.11,
+      "text": "And I'm starting at 1 because I insisted that L( 1 ) be 0."
+    },
+    {
+      "index": 643,
+      "start": 2607.4,
+      "end": 2611.1,
+      "duration": 3.7,
+      "text": "So that's the solution to the problem."
+    },
+    {
+      "index": 644,
+      "start": 2611.1,
+      "end": 2614.37,
+      "duration": 3.27,
+      "text": "And now the thing that's interesting here is that we"
+    },
+    {
+      "index": 645,
+      "start": 2614.37,
+      "end": 2615.72,
+      "duration": 1.35,
+      "text": "started from a polynomial."
+    },
+    {
+      "index": 646,
+      "start": 2615.72,
+      "end": 2618.06,
+      "duration": 2.34,
+      "text": "Or we started from a rational, a ratio of polynomials; that"
+    },
+    {
+      "index": 647,
+      "start": 2618.06,
+      "end": 2620.46,
+      "duration": 2.4,
+      "text": "is, 1 / t or 1 / x."
+    },
+    {
+      "index": 648,
+      "start": 2620.46,
+      "end": 2623.18,
+      "duration": 2.72,
+      "text": "And we get to a function which is actually what's known as a"
+    },
+    {
+      "index": 649,
+      "start": 2623.18,
+      "end": 2624.99,
+      "duration": 1.81,
+      "text": "transcendental function."
+    },
+    {
+      "index": 650,
+      "start": 2624.99,
+      "end": 2626.46,
+      "duration": 1.47,
+      "text": "It's not an algebraic function."
+    },
+    {
+      "index": 651,
+      "start": 2626.46,
+      "end": 2627.08,
+      "duration": 0.62,
+      "text": "Yeah, question."
+    },
+    {
+      "index": 652,
+      "start": 2627.08,
+      "end": 2637.0,
+      "duration": 9.92,
+      "text": "STUDENT: [INAUDIBLE]"
+    },
+    {
+      "index": 653,
+      "start": 2637.0,
+      "end": 2644.97,
+      "duration": 7.97,
+      "text": "PROFESSOR: The question is why is this equal to that."
+    },
+    {
+      "index": 654,
+      "start": 2644.97,
+      "end": 2649.46,
+      "duration": 4.49,
+      "text": "And the answer is, it's for the same reason that this is"
+    },
+    {
+      "index": 655,
+      "start": 2649.46,
+      "end": 2650.2,
+      "duration": 0.74,
+      "text": "equal to that."
+    },
+    {
+      "index": 656,
+      "start": 2650.2,
+      "end": 2654.03,
+      "duration": 3.83,
+      "text": "It's the same reason as this."
+    },
+    {
+      "index": 657,
+      "start": 2654.03,
+      "end": 2656.76,
+      "duration": 2.73,
+      "text": "It's that the 1's cancel."
+    },
+    {
+      "index": 658,
+      "start": 2656.76,
+      "end": 2659.41,
+      "duration": 2.65,
+      "text": "We're taken the value of something at 2 minus"
+    },
+    {
+      "index": 659,
+      "start": 2659.41,
+      "end": 2660.3,
+      "duration": 0.89,
+      "text": "the value at 1."
+    },
+    {
+      "index": 660,
+      "start": 2660.3,
+      "end": 2662.5,
+      "duration": 2.2,
+      "text": "The value at 2 minus the value at 1."
+    },
+    {
+      "index": 661,
+      "start": 2662.5,
+      "end": 2665.15,
+      "duration": 2.65,
+      "text": "And you'll get a 1 in the one case, and you get a 1 in the"
+    },
+    {
+      "index": 662,
+      "start": 2665.15,
+      "end": 2665.47,
+      "duration": 0.32,
+      "text": "other case."
+    },
+    {
+      "index": 663,
+      "start": 2665.47,
+      "end": 2667.58,
+      "duration": 2.11,
+      "text": "And you subtract them and they will cancel."
+    },
+    {
+      "index": 664,
+      "start": 2667.58,
+      "end": 2668.62,
+      "duration": 1.04,
+      "text": "They'll give you 0."
+    },
+    {
+      "index": 665,
+      "start": 2668.62,
+      "end": 2671.38,
+      "duration": 2.76,
+      "text": "These two things really are equal."
+    },
+    {
+      "index": 666,
+      "start": 2671.38,
+      "end": 2673.87,
+      "duration": 2.49,
+      "text": "This is not a function evaluated at one place, it's"
+    },
+    {
+      "index": 667,
+      "start": 2673.87,
+      "end": 2676.1,
+      "duration": 2.23,
+      "text": "the difference between the function evaluated at 2 and"
+    },
+    {
+      "index": 668,
+      "start": 2676.1,
+      "end": 2677.025,
+      "duration": 0.925,
+      "text": "the value at 1."
+    },
+    {
+      "index": 669,
+      "start": 2677.025,
+      "end": 2679.57,
+      "duration": 2.545,
+      "text": "And whenever you subtract two things like that,"
+    },
+    {
+      "index": 670,
+      "start": 2679.57,
+      "end": 2680.9,
+      "duration": 1.33,
+      "text": "constants drop out."
+    },
+    {
+      "index": 671,
+      "start": 2680.9,
+      "end": 2683.96,
+      "duration": 3.06,
+      "text": "STUDENT: [INAUDIBLE]"
+    },
+    {
+      "index": 672,
+      "start": 2683.96,
+      "end": 2684.37,
+      "duration": 0.41,
+      "text": "PROFESSOR: That's right."
+    },
+    {
+      "index": 673,
+      "start": 2684.37,
+      "end": 2686.3,
+      "duration": 1.93,
+      "text": "If I put 2, here if I put c here, it would"
+    },
+    {
+      "index": 674,
+      "start": 2686.3,
+      "end": 2687.37,
+      "duration": 1.07,
+      "text": "have been the same."
+    },
+    {
+      "index": 675,
+      "start": 2687.37,
+      "end": 2689.01,
+      "duration": 1.64,
+      "text": "It would just have dropped out."
+    },
+    {
+      "index": 676,
+      "start": 2689.01,
+      "end": 2690.64,
+      "duration": 1.63,
+      "text": "It's not there."
+    },
+    {
+      "index": 677,
+      "start": 2690.64,
+      "end": 2693.26,
+      "duration": 2.62,
+      "text": "And that's exactly this arithmetic right here."
+    },
+    {
+      "index": 678,
+      "start": 2693.26,
+      "end": 2695.52,
+      "duration": 2.26,
+      "text": "It doesn't matter which antiderivative you take."
+    },
+    {
+      "index": 679,
+      "start": 2695.52,
+      "end": 2697.85,
+      "duration": 2.33,
+      "text": "When you take the differences, the c's will cancel."
+    },
+    {
+      "index": 680,
+      "start": 2697.85,
+      "end": 2703.13,
+      "duration": 5.28,
+      "text": "You always get the same answer in the end."
+    },
+    {
+      "index": 681,
+      "start": 2703.13,
+      "end": 2705.14,
+      "duration": 2.01,
+      "text": "That's exactly why I wrote this down, so that"
+    },
+    {
+      "index": 682,
+      "start": 2705.14,
+      "end": 2706.29,
+      "duration": 1.15,
+      "text": "you would see that."
+    },
+    {
+      "index": 683,
+      "start": 2706.29,
+      "end": 2712.89,
+      "duration": 6.6,
+      "text": "It doesn't matter which one you do."
+    },
+    {
+      "index": 684,
+      "start": 2712.89,
+      "end": 2721.54,
+      "duration": 8.65,
+      "text": "So, we still have a couple of minutes left here."
+    },
+    {
+      "index": 685,
+      "start": 2721.54,
+      "end": 2723.63,
+      "duration": 2.09,
+      "text": "This is actually, so let me go back."
+    },
+    {
+      "index": 686,
+      "start": 2723.63,
+      "end": 2729.72,
+      "duration": 6.09,
+      "text": "So here's the antiderivative of 1 / x, with value 1 at 0."
+    },
+    {
+      "index": 687,
+      "start": 2729.72,
+      "end": 2732.18,
+      "duration": 2.46,
+      "text": "Now, in disguise, we know what this function is."
+    },
+    {
+      "index": 688,
+      "start": 2732.18,
+      "end": 2735.41,
+      "duration": 3.23,
+      "text": "We know this function is the logarithm function."
+    },
+    {
+      "index": 689,
+      "start": 2735.41,
+      "end": 2740.09,
+      "duration": 4.68,
+      "text": "But this is actually a better way of deriving all of the"
+    },
+    {
+      "index": 690,
+      "start": 2740.09,
+      "end": 2742.03,
+      "duration": 1.94,
+      "text": "formulas for the logarithm."
+    },
+    {
+      "index": 691,
+      "start": 2742.03,
+      "end": 2743.97,
+      "duration": 1.94,
+      "text": "This is a much quicker and more efficient"
+    },
+    {
+      "index": 692,
+      "start": 2743.97,
+      "end": 2744.85,
+      "duration": 0.88,
+      "text": "way of doing it."
+    },
+    {
+      "index": 693,
+      "start": 2744.85,
+      "end": 2747.28,
+      "duration": 2.43,
+      "text": "We had to do it by very laborious processes."
+    },
+    {
+      "index": 694,
+      "start": 2747.28,
+      "end": 2751.69,
+      "duration": 4.41,
+      "text": "This will allow us to do it very easily."
+    },
+    {
+      "index": 695,
+      "start": 2751.69,
+      "end": 2756.04,
+      "duration": 4.35,
+      "text": "And so, I'm going to do that next time."
+    },
+    {
+      "index": 696,
+      "start": 2756.04,
+      "end": 2759.59,
+      "duration": 3.55,
+      "text": "But rather than do that now, I'm going to point out to you"
+    },
+    {
+      "index": 697,
+      "start": 2759.59,
+      "end": 2770.28,
+      "duration": 10.69,
+      "text": "that we can also get truly new functions."
+    },
+    {
+      "index": 698,
+      "start": 2770.28,
+      "end": 2772.13,
+      "duration": 1.85,
+      "text": "OK, so there are all kinds of new functions."
+    },
+    {
+      "index": 699,
+      "start": 2772.13,
+      "end": 2775.86,
+      "duration": 3.73,
+      "text": "So this is the first example of this kind would be, for"
+    },
+    {
+      "index": 700,
+      "start": 2775.86,
+      "end": 2783.06,
+      "duration": 7.2,
+      "text": "example, to solve the equation y' = e ^ - x^2 with y( 0 ) ="
+    },
+    {
+      "index": 701,
+      "start": 2783.06,
+      "end": 2785.14,
+      "duration": 2.08,
+      "text": "0, let's say."
+    },
+    {
+      "index": 702,
+      "start": 2785.14,
+      "end": 2788.86,
+      "duration": 3.72,
+      "text": "Now, the solution to that is a function which again I can"
+    },
+    {
+      "index": 703,
+      "start": 2788.86,
+      "end": 2790.38,
+      "duration": 1.52,
+      "text": "write down by the fundamental theorem."
+    },
+    {
+      "index": 704,
+      "start": 2790.38,
+      "end": 2808.16,
+      "duration": 17.78,
+      "text": "It's the integral from 0 to x of e ^ - t^2 dt."
+    },
+    {
+      "index": 705,
+      "start": 2808.16,
+      "end": 2812.37,
+      "duration": 4.21,
+      "text": "This is a very famous function."
+    },
+    {
+      "index": 706,
+      "start": 2812.37,
+      "end": 2815.82,
+      "duration": 3.45,
+      "text": "This shape here is known as the bell curve."
+    },
+    {
+      "index": 707,
+      "start": 2815.82,
+      "end": 2817.01,
+      "duration": 1.19,
+      "text": "And it's the thing that comes up in"
+    },
+    {
+      "index": 708,
+      "start": 2817.01,
+      "end": 2819.17,
+      "duration": 2.16,
+      "text": "probability all the time."
+    },
+    {
+      "index": 709,
+      "start": 2819.17,
+      "end": 2821.88,
+      "duration": 2.71,
+      "text": "This shape e ^ - x^2."
+    },
+    {
+      "index": 710,
+      "start": 2821.88,
+      "end": 2824.59,
+      "duration": 2.71,
+      "text": "And our function is geometrically just the area"
+    },
+    {
+      "index": 711,
+      "start": 2824.59,
+      "end": 2826.31,
+      "duration": 1.72,
+      "text": "under the curve here."
+    },
+    {
+      "index": 712,
+      "start": 2826.31,
+      "end": 2829.08,
+      "duration": 2.77,
+      "text": "This is F (x)."
+    },
+    {
+      "index": 713,
+      "start": 2829.08,
+      "end": 2832.35,
+      "duration": 3.27,
+      "text": "If this place is x."
+    },
+    {
+      "index": 714,
+      "start": 2832.35,
+      "end": 2834.34,
+      "duration": 1.99,
+      "text": "So I have a geometric definition, I have a way of"
+    },
+    {
+      "index": 715,
+      "start": 2834.34,
+      "end": 2837.03,
+      "duration": 2.69,
+      "text": "constructing what it is by Riemann's sums. And I have a"
+    },
+    {
+      "index": 716,
+      "start": 2837.03,
+      "end": 2838.81,
+      "duration": 1.78,
+      "text": "function here."
+    },
+    {
+      "index": 717,
+      "start": 2838.81,
+      "end": 2846.07,
+      "duration": 7.26,
+      "text": "But the curious thing about F ( x ) is that F ( x ) cannot"
+    },
+    {
+      "index": 718,
+      "start": 2846.07,
+      "end": 2854.47,
+      "duration": 8.4,
+      "text": "be expressed in terms of any function you've seen"
+    },
+    {
+      "index": 719,
+      "start": 2854.47,
+      "end": 2855.36,
+      "duration": 0.89,
+      "text": "previously."
+    },
+    {
+      "index": 720,
+      "start": 2855.36,
+      "end": 2864.21,
+      "duration": 8.85,
+      "text": "So logs, exponentials, trig functions, cannot be."
+    },
+    {
+      "index": 721,
+      "start": 2864.21,
+      "end": 2871.6,
+      "duration": 7.39,
+      "text": "It's a totally new function."
+    },
+    {
+      "index": 722,
+      "start": 2871.6,
+      "end": 2874.78,
+      "duration": 3.18,
+      "text": "Nevertheless, we'll be able to get any possible piece of"
+    },
+    {
+      "index": 723,
+      "start": 2874.78,
+      "end": 2876.91,
+      "duration": 2.13,
+      "text": "information we would want to, out of this function."
+    },
+    {
+      "index": 724,
+      "start": 2876.91,
+      "end": 2879.61,
+      "duration": 2.7,
+      "text": "It's perfectly acceptable function, it will work just"
+    },
+    {
+      "index": 725,
+      "start": 2879.61,
+      "end": 2880.25,
+      "duration": 0.64,
+      "text": "great for us."
+    },
+    {
+      "index": 726,
+      "start": 2880.25,
+      "end": 2881.7,
+      "duration": 1.45,
+      "text": "Just like any other function."
+    },
+    {
+      "index": 727,
+      "start": 2881.7,
+      "end": 2883.54,
+      "duration": 1.84,
+      "text": "Just like the ln."
+    },
+    {
+      "index": 728,
+      "start": 2883.54,
+      "end": 2887.06,
+      "duration": 3.52,
+      "text": "And what this is analogous to is the"
+    },
+    {
+      "index": 729,
+      "start": 2887.06,
+      "end": 2888.89,
+      "duration": 1.83,
+      "text": "following kind of thing."
+    },
+    {
+      "index": 730,
+      "start": 2888.89,
+      "end": 2892.65,
+      "duration": 3.76,
+      "text": "If you take the circle, the ancient Greeks, if you like,"
+    },
+    {
+      "index": 731,
+      "start": 2892.65,
+      "end": 2897.84,
+      "duration": 5.19,
+      "text": "already understood that if you have a circle of radius 1,"
+    },
+    {
+      "index": 732,
+      "start": 2897.84,
+      "end": 2903.29,
+      "duration": 5.45,
+      "text": "then its area is pi."
+    },
+    {
+      "index": 733,
+      "start": 2903.29,
+      "end": 2905.64,
+      "duration": 2.35,
+      "text": "So that's a geometric construction of what you could"
+    },
+    {
+      "index": 734,
+      "start": 2905.64,
+      "end": 2911.43,
+      "duration": 5.79,
+      "text": "call a new number."
+    },
+    {
+      "index": 735,
+      "start": 2911.43,
+      "end": 2914.28,
+      "duration": 2.85,
+      "text": "Which is outside of the realm of what you might expect."
+    },
+    {
+      "index": 736,
+      "start": 2914.28,
+      "end": 2920.66,
+      "duration": 6.38,
+      "text": "And the weird thing about this number pi is that it is not"
+    },
+    {
+      "index": 737,
+      "start": 2920.66,
+      "end": 2930.93,
+      "duration": 10.27,
+      "text": "the root of an algebraic equation with rational"
+    },
+    {
+      "index": 738,
+      "start": 2930.93,
+      "end": 2937.26,
+      "duration": 6.33,
+      "text": "coefficients."
+    },
+    {
+      "index": 739,
+      "start": 2937.26,
+      "end": 2940.54,
+      "duration": 3.28,
+      "text": "It's what's called transcendental."
+    },
+    {
+      "index": 740,
+      "start": 2940.54,
+      "end": 2942.36,
+      "duration": 1.82,
+      "text": "Meaning, it's just completely outside of"
+    },
+    {
+      "index": 741,
+      "start": 2942.36,
+      "end": 2944.05,
+      "duration": 1.69,
+      "text": "the realm of algebra."
+    },
+    {
+      "index": 742,
+      "start": 2944.05,
+      "end": 2947.27,
+      "duration": 3.22,
+      "text": "And, indeed, the logarithm function is called a"
+    },
+    {
+      "index": 743,
+      "start": 2947.27,
+      "end": 2950.04,
+      "duration": 2.77,
+      "text": "transcendental function, because it's completely out of"
+    },
+    {
+      "index": 744,
+      "start": 2950.04,
+      "end": 2951.35,
+      "duration": 1.31,
+      "text": "the realm of algebra."
+    },
+    {
+      "index": 745,
+      "start": 2951.35,
+      "end": 2954.88,
+      "duration": 3.53,
+      "text": "It's only in calculus that you come up with"
+    },
+    {
+      "index": 746,
+      "start": 2954.88,
+      "end": 2956.19,
+      "duration": 1.31,
+      "text": "this kind of thing."
+    },
+    {
+      "index": 747,
+      "start": 2956.19,
+      "end": 2961.02,
+      "duration": 4.83,
+      "text": "So these kinds of functions will have access to a huge"
+    },
+    {
+      "index": 748,
+      "start": 2961.02,
+      "end": 2964.18,
+      "duration": 3.16,
+      "text": "class of new functions here, all of which are important"
+    },
+    {
+      "index": 749,
+      "start": 2964.18,
+      "end": 2966.73,
+      "duration": 2.55,
+      "text": "tools in science and engineering."
+    },
+    {
+      "index": 750,
+      "start": 2966.73,
+      "end": 2969.61,
+      "duration": 2.88,
+      "text": "So, see you next time."
+    }
+  ],
+  "course": {
+    "category": "Mathematics",
+    "title": "Single Variable Calculus",
+    "source_url": "https://www.youtube.com/playlist?list=PL590CCC2BC5AF3BC1"
+  }
+}

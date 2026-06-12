@@ -1,0 +1,1754 @@
+{
+  "video": {
+    "id": "IrRgAWI6bmw",
+    "title": "Linear Equations | MIT 18.03SC Differential Equations, Fall 2011",
+    "url": "https://www.youtube.com/watch?v=IrRgAWI6bmw",
+    "channel": "MIT OpenCourseWare",
+    "duration": 641,
+    "language": "en"
+  },
+  "segment_count": 248,
+  "segments": [
+    {
+      "index": 0,
+      "start": 7.87,
+      "end": 7.88,
+      "duration": 0.01,
+      "text": "Hi everyone."
+    },
+    {
+      "index": 1,
+      "start": 7.88,
+      "end": 9.99,
+      "duration": 2.11,
+      "text": "So, today I'd like to take a look at"
+    },
+    {
+      "index": 2,
+      "start": 10.0,
+      "end": 11.79,
+      "duration": 1.79,
+      "text": "linear equations, linear first-order"
+    },
+    {
+      "index": 3,
+      "start": 11.8,
+      "end": 13.67,
+      "duration": 1.87,
+      "text": "differential equations."
+    },
+    {
+      "index": 4,
+      "start": 13.68,
+      "end": 16.43,
+      "duration": 2.75,
+      "text": "And specifically, we're going to look at"
+    },
+    {
+      "index": 5,
+      "start": 16.44,
+      "end": 18.39,
+      "duration": 1.95,
+      "text": "just exactly what is a linear equation."
+    },
+    {
+      "index": 6,
+      "start": 18.4,
+      "end": 19.87,
+      "duration": 1.47,
+      "text": "So, for example, which of these"
+    },
+    {
+      "index": 7,
+      "start": 19.88,
+      "end": 21.39,
+      "duration": 1.51,
+      "text": "equations are linear?"
+    },
+    {
+      "index": 8,
+      "start": 21.4,
+      "end": 22.75,
+      "duration": 1.35,
+      "text": "And then second of all, we're going to"
+    },
+    {
+      "index": 9,
+      "start": 22.76,
+      "end": 25.03,
+      "duration": 2.27,
+      "text": "take a look at superposition."
+    },
+    {
+      "index": 10,
+      "start": 25.04,
+      "end": 25.83,
+      "duration": 0.79,
+      "text": "And I"
+    },
+    {
+      "index": 11,
+      "start": 25.84,
+      "end": 27.83,
+      "duration": 1.99,
+      "text": "uh we ask to consider the differential"
+    },
+    {
+      "index": 12,
+      "start": 27.84,
+      "end": 29.95,
+      "duration": 2.11,
+      "text": "equation y dot plus y squared equals"
+    },
+    {
+      "index": 13,
+      "start": 29.96,
+      "end": 31.87,
+      "duration": 1.91,
+      "text": "some function q of t, and just to"
+    },
+    {
+      "index": 14,
+      "start": 31.88,
+      "end": 34.11,
+      "duration": 2.23,
+      "text": "demonstrate that this equation does not"
+    },
+    {
+      "index": 15,
+      "start": 34.12,
+      "end": 36.55,
+      "duration": 2.43,
+      "text": "satisfy the superposition principle."
+    },
+    {
+      "index": 16,
+      "start": 36.56,
+      "end": 37.47,
+      "duration": 0.91,
+      "text": "So, I'll let you take a look at this"
+    },
+    {
+      "index": 17,
+      "start": 37.48,
+      "end": 38.83,
+      "duration": 1.35,
+      "text": "problem and try and work it out for"
+    },
+    {
+      "index": 18,
+      "start": 38.84,
+      "end": 54.83,
+      "duration": 15.99,
+      "text": "yourself, and I'll be back in a minute."
+    },
+    {
+      "index": 19,
+      "start": 57.11,
+      "end": 57.12,
+      "duration": 0.01,
+      "text": "Hi everyone. Welcome back."
+    },
+    {
+      "index": 20,
+      "start": 57.12,
+      "end": 58.31,
+      "duration": 1.19,
+      "text": "All right."
+    },
+    {
+      "index": 21,
+      "start": 58.32,
+      "end": 60.07,
+      "duration": 1.75,
+      "text": "So, we're asked to figure out which of"
+    },
+    {
+      "index": 22,
+      "start": 60.08,
+      "end": 62.03,
+      "duration": 1.95,
+      "text": "these equations are linear."
+    },
+    {
+      "index": 23,
+      "start": 62.04,
+      "end": 67.31,
+      "duration": 5.27,
+      "text": "So, just to recap,"
+    },
+    {
+      "index": 24,
+      "start": 68.51,
+      "end": 68.52,
+      "duration": 0.01,
+      "text": "what does it mean for an equation to be"
+    },
+    {
+      "index": 25,
+      "start": 68.52,
+      "end": 69.63,
+      "duration": 1.11,
+      "text": "linear? What does it mean for a"
+    },
+    {
+      "index": 26,
+      "start": 69.64,
+      "end": 72.23,
+      "duration": 2.59,
+      "text": "first-order equation to be linear?"
+    },
+    {
+      "index": 27,
+      "start": 72.24,
+      "end": 73.15,
+      "duration": 0.91,
+      "text": "Well,"
+    },
+    {
+      "index": 28,
+      "start": 73.16,
+      "end": 74.91,
+      "duration": 1.75,
+      "text": "it means that we can write it"
+    },
+    {
+      "index": 29,
+      "start": 74.92,
+      "end": 77.71,
+      "duration": 2.79,
+      "text": "in the general form."
+    },
+    {
+      "index": 30,
+      "start": 77.72,
+      "end": 83.51,
+      "duration": 5.79,
+      "text": "So, if it if it's a function of x, dy dx"
+    },
+    {
+      "index": 31,
+      "start": 85.47,
+      "end": 85.48,
+      "duration": 0.01,
+      "text": "plus some general function of x, and"
+    },
+    {
+      "index": 32,
+      "start": 85.48,
+      "end": 87.67,
+      "duration": 2.19,
+      "text": "this could be anything,"
+    },
+    {
+      "index": 33,
+      "start": 87.68,
+      "end": 88.99,
+      "duration": 1.31,
+      "text": "but the point is that it's multiplied"
+    },
+    {
+      "index": 34,
+      "start": 89.0,
+      "end": 92.51,
+      "duration": 3.51,
+      "text": "just by y."
+    },
+    {
+      "index": 35,
+      "start": 94.27,
+      "end": 94.28,
+      "duration": 0.01,
+      "text": "And then it can equal some arbitrary"
+    },
+    {
+      "index": 36,
+      "start": 94.28,
+      "end": 97.23,
+      "duration": 2.95,
+      "text": "function q of x on the right-hand side."
+    },
+    {
+      "index": 37,
+      "start": 97.24,
+      "end": 99.07,
+      "duration": 1.83,
+      "text": "So, every first-order linear equation"
+    },
+    {
+      "index": 38,
+      "start": 99.08,
+      "end": 103.63,
+      "duration": 4.55,
+      "text": "can be rewritten in this form."
+    },
+    {
+      "index": 39,
+      "start": 105.59,
+      "end": 105.6,
+      "duration": 0.01,
+      "text": "So, let's tackle part A."
+    },
+    {
+      "index": 40,
+      "start": 105.6,
+      "end": 108.31,
+      "duration": 2.71,
+      "text": "All right. y dot plus ky"
+    },
+    {
+      "index": 41,
+      "start": 108.32,
+      "end": 111.43,
+      "duration": 3.11,
+      "text": "equals zero or y dot equals ky."
+    },
+    {
+      "index": 42,
+      "start": 111.44,
+      "end": 114.67,
+      "duration": 3.23,
+      "text": "We can just rewrite it as"
+    },
+    {
+      "index": 43,
+      "start": 117.35,
+      "end": 117.36,
+      "duration": 0.01,
+      "text": "y dot equals negative ky."
+    },
+    {
+      "index": 44,
+      "start": 117.36,
+      "end": 120.27,
+      "duration": 2.91,
+      "text": "Note that just some constant k"
+    },
+    {
+      "index": 45,
+      "start": 120.28,
+      "end": 122.07,
+      "duration": 1.79,
+      "text": "is a function of time."
+    },
+    {
+      "index": 46,
+      "start": 122.08,
+      "end": 123.39,
+      "duration": 1.31,
+      "text": "It's a constant function of time, but it"
+    },
+    {
+      "index": 47,
+      "start": 123.4,
+      "end": 124.55,
+      "duration": 1.15,
+      "text": "can just be thought of as a function of"
+    },
+    {
+      "index": 48,
+      "start": 124.56,
+      "end": 125.63,
+      "duration": 1.07,
+      "text": "time. Same with the right-hand side,"
+    },
+    {
+      "index": 49,
+      "start": 125.64,
+      "end": 126.75,
+      "duration": 1.11,
+      "text": "it's zero."
+    },
+    {
+      "index": 50,
+      "start": 126.76,
+      "end": 129.109,
+      "duration": 2.349,
+      "text": "And so, this equation has the same form"
+    },
+    {
+      "index": 51,
+      "start": 129.119,
+      "end": 130.87,
+      "duration": 1.751,
+      "text": "as our general uh first-order linear"
+    },
+    {
+      "index": 52,
+      "start": 130.88,
+      "end": 133.27,
+      "duration": 2.39,
+      "text": "equation."
+    },
+    {
+      "index": 53,
+      "start": 133.28,
+      "end": 137.03,
+      "duration": 3.75,
+      "text": "So, this is a linear equation."
+    },
+    {
+      "index": 54,
+      "start": 138.91,
+      "end": 138.92,
+      "duration": 0.01,
+      "text": "Take a look at question two,"
+    },
+    {
+      "index": 55,
+      "start": 138.92,
+      "end": 140.47,
+      "duration": 1.55,
+      "text": "part two."
+    },
+    {
+      "index": 56,
+      "start": 140.48,
+      "end": 142.75,
+      "duration": 2.27,
+      "text": "We have y dot"
+    },
+    {
+      "index": 57,
+      "start": 142.76,
+      "end": 144.75,
+      "duration": 1.99,
+      "text": "plus y squared t."
+    },
+    {
+      "index": 58,
+      "start": 144.76,
+      "end": 146.19,
+      "duration": 1.43,
+      "text": "I'll bring the y to the right or the"
+    },
+    {
+      "index": 59,
+      "start": 146.2,
+      "end": 148.75,
+      "duration": 2.55,
+      "text": "left-hand side."
+    },
+    {
+      "index": 60,
+      "start": 148.76,
+      "end": 150.95,
+      "duration": 2.19,
+      "text": "If we do that, we get this."
+    },
+    {
+      "index": 61,
+      "start": 150.96,
+      "end": 152.99,
+      "duration": 2.03,
+      "text": "And just by comparing this to our"
+    },
+    {
+      "index": 62,
+      "start": 153.0,
+      "end": 155.83,
+      "duration": 2.83,
+      "text": "generic first-order linear ODE, we note"
+    },
+    {
+      "index": 63,
+      "start": 155.84,
+      "end": 157.71,
+      "duration": 1.87,
+      "text": "that it's not of this form."
+    },
+    {
+      "index": 64,
+      "start": 157.72,
+      "end": 159.35,
+      "duration": 1.63,
+      "text": "So, specifically,"
+    },
+    {
+      "index": 65,
+      "start": 159.36,
+      "end": 161.19,
+      "duration": 1.83,
+      "text": "this is the term this is the bad term in"
+    },
+    {
+      "index": 66,
+      "start": 161.2,
+      "end": 162.51,
+      "duration": 1.31,
+      "text": "question."
+    },
+    {
+      "index": 67,
+      "start": 162.52,
+      "end": 165.87,
+      "duration": 3.35,
+      "text": "We see that it's y squared times t."
+    },
+    {
+      "index": 68,
+      "start": 165.88,
+      "end": 167.47,
+      "duration": 1.59,
+      "text": "Notice how we can't we're not allowed to"
+    },
+    {
+      "index": 69,
+      "start": 167.48,
+      "end": 169.87,
+      "duration": 2.39,
+      "text": "have any term that's y squared"
+    },
+    {
+      "index": 70,
+      "start": 169.88,
+      "end": 172.63,
+      "duration": 2.75,
+      "text": "uh in our first-order linear equation."
+    },
+    {
+      "index": 71,
+      "start": 172.64,
+      "end": 178.95,
+      "duration": 6.31,
+      "text": "Now, I will say this, just as an aside,"
+    },
+    {
+      "index": 72,
+      "start": 180.03,
+      "end": 180.04,
+      "duration": 0.01,
+      "text": "this equation's also known as a"
+    },
+    {
+      "index": 73,
+      "start": 180.04,
+      "end": 181.75,
+      "duration": 1.71,
+      "text": "Bernoulli equation."
+    },
+    {
+      "index": 74,
+      "start": 181.76,
+      "end": 183.83,
+      "duration": 2.07,
+      "text": "And as an aside, if you were to make a"
+    },
+    {
+      "index": 75,
+      "start": 183.84,
+      "end": 186.07,
+      "duration": 2.23,
+      "text": "substitution u"
+    },
+    {
+      "index": 76,
+      "start": 186.08,
+      "end": 189.03,
+      "duration": 2.95,
+      "text": "equals 1 over y"
+    },
+    {
+      "index": 77,
+      "start": 189.04,
+      "end": 191.55,
+      "duration": 2.51,
+      "text": "and rewrote this equation in terms of u"
+    },
+    {
+      "index": 78,
+      "start": 191.56,
+      "end": 193.79,
+      "duration": 2.23,
+      "text": "as the independent variable, you'd find"
+    },
+    {
+      "index": 79,
+      "start": 193.8,
+      "end": 195.99,
+      "duration": 2.19,
+      "text": "out that this equation would be linear"
+    },
+    {
+      "index": 80,
+      "start": 196.0,
+      "end": 197.79,
+      "duration": 1.79,
+      "text": "in terms of u."
+    },
+    {
+      "index": 81,
+      "start": 197.8,
+      "end": 199.51,
+      "duration": 1.71,
+      "text": "But as it's written now in terms of y,"
+    },
+    {
+      "index": 82,
+      "start": 199.52,
+      "end": 201.79,
+      "duration": 2.27,
+      "text": "it's not linear."
+    },
+    {
+      "index": 83,
+      "start": 201.8,
+      "end": 202.87,
+      "duration": 1.07,
+      "text": "So, this is a kind of an interesting"
+    },
+    {
+      "index": 84,
+      "start": 202.88,
+      "end": 204.95,
+      "duration": 2.07,
+      "text": "point that sometimes we can get lucky"
+    },
+    {
+      "index": 85,
+      "start": 204.96,
+      "end": 207.11,
+      "duration": 2.15,
+      "text": "and do a non-linear transformation and"
+    },
+    {
+      "index": 86,
+      "start": 207.12,
+      "end": 209.07,
+      "duration": 1.95,
+      "text": "convert a non-linear equation into a"
+    },
+    {
+      "index": 87,
+      "start": 209.08,
+      "end": 214.19,
+      "duration": 5.11,
+      "text": "linear one."
+    },
+    {
+      "index": 88,
+      "start": 215.99,
+      "end": 216.0,
+      "duration": 0.01,
+      "text": "Okay."
+    },
+    {
+      "index": 89,
+      "start": 216.0,
+      "end": 221.79,
+      "duration": 5.79,
+      "text": "So, for part three, we have"
+    },
+    {
+      "index": 90,
+      "start": 229.55,
+      "end": 229.56,
+      "duration": 0.01,
+      "text": "equals x cubed."
+    },
+    {
+      "index": 91,
+      "start": 229.56,
+      "end": 231.31,
+      "duration": 1.75,
+      "text": "So, again, we see that this is a linear"
+    },
+    {
+      "index": 92,
+      "start": 231.32,
+      "end": 234.59,
+      "duration": 3.27,
+      "text": "equation because we can identify"
+    },
+    {
+      "index": 93,
+      "start": 234.6,
+      "end": 238.95,
+      "duration": 4.35,
+      "text": "p of x with cosine x,"
+    },
+    {
+      "index": 94,
+      "start": 245.03,
+      "end": 245.04,
+      "duration": 0.01,
+      "text": "So, this equation has the general form"
+    },
+    {
+      "index": 95,
+      "start": 245.04,
+      "end": 250.19,
+      "duration": 5.15,
+      "text": "of a linear ODE."
+    },
+    {
+      "index": 96,
+      "start": 252.19,
+      "end": 252.2,
+      "duration": 0.01,
+      "text": "For part four,"
+    },
+    {
+      "index": 97,
+      "start": 252.2,
+      "end": 253.39,
+      "duration": 1.19,
+      "text": "well, if we take a look at it right"
+    },
+    {
+      "index": 98,
+      "start": 253.4,
+      "end": 255.51,
+      "duration": 2.11,
+      "text": "away, y dot divided by y is equal to t"
+    },
+    {
+      "index": 99,
+      "start": 255.52,
+      "end": 257.59,
+      "duration": 2.07,
+      "text": "squared."
+    },
+    {
+      "index": 100,
+      "start": 257.6,
+      "end": 258.949,
+      "duration": 1.349,
+      "text": "It doesn't appear to be linear, but of"
+    },
+    {
+      "index": 101,
+      "start": 258.959,
+      "end": 261.789,
+      "duration": 2.83,
+      "text": "course, we can multiply through by y"
+    },
+    {
+      "index": 102,
+      "start": 261.799,
+      "end": 265.39,
+      "duration": 3.591,
+      "text": "and rewrite things."
+    },
+    {
+      "index": 103,
+      "start": 267.03,
+      "end": 267.04,
+      "duration": 0.01,
+      "text": "And of course, this equation is"
+    },
+    {
+      "index": 104,
+      "start": 267.04,
+      "end": 269.79,
+      "duration": 2.75,
+      "text": "equivalent to y dot minus t squared y"
+    },
+    {
+      "index": 105,
+      "start": 269.8,
+      "end": 272.07,
+      "duration": 2.27,
+      "text": "equals zero,"
+    },
+    {
+      "index": 106,
+      "start": 272.08,
+      "end": 275.47,
+      "duration": 3.39,
+      "text": "uh which again is linear because"
+    },
+    {
+      "index": 107,
+      "start": 275.48,
+      "end": 278.63,
+      "duration": 3.15,
+      "text": "p of t"
+    },
+    {
+      "index": 108,
+      "start": 280.07,
+      "end": 280.08,
+      "duration": 0.01,
+      "text": "can be identified with negative t"
+    },
+    {
+      "index": 109,
+      "start": 280.08,
+      "end": 282.23,
+      "duration": 2.15,
+      "text": "squared, and q of t can be identified"
+    },
+    {
+      "index": 110,
+      "start": 282.24,
+      "end": 285.07,
+      "duration": 2.83,
+      "text": "with zero."
+    },
+    {
+      "index": 111,
+      "start": 293.95,
+      "end": 293.96,
+      "duration": 0.01,
+      "text": "for part five, we have"
+    },
+    {
+      "index": 112,
+      "start": 293.96,
+      "end": 295.23,
+      "duration": 1.27,
+      "text": "x squared"
+    },
+    {
+      "index": 113,
+      "start": 295.24,
+      "end": 296.55,
+      "duration": 1.31,
+      "text": "y"
+    },
+    {
+      "index": 114,
+      "start": 296.56,
+      "end": 298.43,
+      "duration": 1.87,
+      "text": "y prime"
+    },
+    {
+      "index": 115,
+      "start": 298.44,
+      "end": 303.63,
+      "duration": 5.19,
+      "text": "plus 4x"
+    },
+    {
+      "index": 116,
+      "start": 308.55,
+      "end": 308.56,
+      "duration": 0.01,
+      "text": "And again, if we were to try and write"
+    },
+    {
+      "index": 117,
+      "start": 308.56,
+      "end": 311.15,
+      "duration": 2.59,
+      "text": "it in the general form"
+    },
+    {
+      "index": 118,
+      "start": 311.16,
+      "end": 313.07,
+      "duration": 1.91,
+      "text": "of a linear ODE"
+    },
+    {
+      "index": 119,
+      "start": 313.08,
+      "end": 317.79,
+      "duration": 4.71,
+      "text": "which we have here,"
+    },
+    {
+      "index": 120,
+      "start": 326.91,
+      "end": 326.92,
+      "duration": 0.01,
+      "text": "4x divided by x squared y"
+    },
+    {
+      "index": 121,
+      "start": 326.92,
+      "end": 332.71,
+      "duration": 5.79,
+      "text": "minus x cubed divided by x squared y"
+    },
+    {
+      "index": 122,
+      "start": 332.72,
+      "end": 334.47,
+      "duration": 1.75,
+      "text": "equals zero."
+    },
+    {
+      "index": 123,
+      "start": 334.48,
+      "end": 335.83,
+      "duration": 1.35,
+      "text": "And because there's a y on the"
+    },
+    {
+      "index": 124,
+      "start": 335.84,
+      "end": 337.51,
+      "duration": 1.67,
+      "text": "denominator here,"
+    },
+    {
+      "index": 125,
+      "start": 337.52,
+      "end": 338.79,
+      "duration": 1.27,
+      "text": "this equation doesn't have the general"
+    },
+    {
+      "index": 126,
+      "start": 338.8,
+      "end": 341.95,
+      "duration": 3.15,
+      "text": "form of a first-order linear equation."
+    },
+    {
+      "index": 127,
+      "start": 341.96,
+      "end": 343.19,
+      "duration": 1.23,
+      "text": "Now again,"
+    },
+    {
+      "index": 128,
+      "start": 343.2,
+      "end": 344.87,
+      "duration": 1.67,
+      "text": "uh I I note that if you were to make a"
+    },
+    {
+      "index": 129,
+      "start": 344.88,
+      "end": 346.63,
+      "duration": 1.75,
+      "text": "substitution"
+    },
+    {
+      "index": 130,
+      "start": 346.64,
+      "end": 348.19,
+      "duration": 1.55,
+      "text": "u"
+    },
+    {
+      "index": 131,
+      "start": 348.2,
+      "end": 351.43,
+      "duration": 3.23,
+      "text": "equal y squared,"
+    },
+    {
+      "index": 132,
+      "start": 352.63,
+      "end": 352.64,
+      "duration": 0.01,
+      "text": "that substitution would make this"
+    },
+    {
+      "index": 133,
+      "start": 352.64,
+      "end": 356.55,
+      "duration": 3.91,
+      "text": "equation linear."
+    },
+    {
+      "index": 134,
+      "start": 362.43,
+      "end": 362.44,
+      "duration": 0.01,
+      "text": "So, for part B, we're given a"
+    },
+    {
+      "index": 135,
+      "start": 362.44,
+      "end": 366.43,
+      "duration": 3.99,
+      "text": "differential equation y dot"
+    },
+    {
+      "index": 136,
+      "start": 368.27,
+      "end": 368.28,
+      "duration": 0.01,
+      "text": "plus y squared"
+    },
+    {
+      "index": 137,
+      "start": 368.28,
+      "end": 371.87,
+      "duration": 3.59,
+      "text": "is equal to q of t."
+    },
+    {
+      "index": 138,
+      "start": 373.79,
+      "end": 373.8,
+      "duration": 0.01,
+      "text": "And we want to show that this uh this"
+    },
+    {
+      "index": 139,
+      "start": 373.8,
+      "end": 374.95,
+      "duration": 1.15,
+      "text": "equation doesn't satisfy the"
+    },
+    {
+      "index": 140,
+      "start": 374.96,
+      "end": 377.27,
+      "duration": 2.31,
+      "text": "superposition principle."
+    },
+    {
+      "index": 141,
+      "start": 377.28,
+      "end": 379.27,
+      "duration": 1.99,
+      "text": "Now, you might note that this equation's"
+    },
+    {
+      "index": 142,
+      "start": 379.28,
+      "end": 381.23,
+      "duration": 1.95,
+      "text": "not linear."
+    },
+    {
+      "index": 143,
+      "start": 381.24,
+      "end": 384.07,
+      "duration": 2.83,
+      "text": "So, and uh second of all, we know that"
+    },
+    {
+      "index": 144,
+      "start": 384.08,
+      "end": 385.19,
+      "duration": 1.11,
+      "text": "linear equations satisfy the"
+    },
+    {
+      "index": 145,
+      "start": 385.2,
+      "end": 389.19,
+      "duration": 3.99,
+      "text": "superposition principle."
+    },
+    {
+      "index": 146,
+      "start": 391.63,
+      "end": 391.64,
+      "duration": 0.01,
+      "text": "So, we're we we need to exploit the fact"
+    },
+    {
+      "index": 147,
+      "start": 391.64,
+      "end": 393.83,
+      "duration": 2.19,
+      "text": "that it's a non-linear equation"
+    },
+    {
+      "index": 148,
+      "start": 393.84,
+      "end": 395.95,
+      "duration": 2.11,
+      "text": "to make it fail uh the superposition"
+    },
+    {
+      "index": 149,
+      "start": 395.96,
+      "end": 397.39,
+      "duration": 1.43,
+      "text": "principle."
+    },
+    {
+      "index": 150,
+      "start": 397.4,
+      "end": 399.59,
+      "duration": 2.19,
+      "text": "And just as an example, what we can do"
+    },
+    {
+      "index": 151,
+      "start": 399.6,
+      "end": 401.63,
+      "duration": 2.03,
+      "text": "is I can just pick a couple right-hand"
+    },
+    {
+      "index": 152,
+      "start": 401.64,
+      "end": 403.19,
+      "duration": 1.55,
+      "text": "sides q"
+    },
+    {
+      "index": 153,
+      "start": 403.2,
+      "end": 404.11,
+      "duration": 0.91,
+      "text": "uh"
+    },
+    {
+      "index": 154,
+      "start": 404.12,
+      "end": 407.99,
+      "duration": 3.87,
+      "text": "as examples of uh this ODE."
+    },
+    {
+      "index": 155,
+      "start": 408.0,
+      "end": 410.99,
+      "duration": 2.99,
+      "text": "So, we can imagine we have a solution y1"
+    },
+    {
+      "index": 156,
+      "start": 411.0,
+      "end": 413.67,
+      "duration": 2.67,
+      "text": "which solves the ODE"
+    },
+    {
+      "index": 157,
+      "start": 413.68,
+      "end": 416.39,
+      "duration": 2.71,
+      "text": "y1 dot plus y1 squared"
+    },
+    {
+      "index": 158,
+      "start": 416.4,
+      "end": 418.35,
+      "duration": 1.95,
+      "text": "equals I'm just going to say one on the"
+    },
+    {
+      "index": 159,
+      "start": 418.36,
+      "end": 420.55,
+      "duration": 2.19,
+      "text": "right-hand side."
+    },
+    {
+      "index": 160,
+      "start": 420.56,
+      "end": 425.59,
+      "duration": 5.03,
+      "text": "And I can also take another function y2"
+    },
+    {
+      "index": 161,
+      "start": 425.6,
+      "end": 427.11,
+      "duration": 1.51,
+      "text": "which say satisfies this differential"
+    },
+    {
+      "index": 162,
+      "start": 427.12,
+      "end": 428.55,
+      "duration": 1.43,
+      "text": "equation,"
+    },
+    {
+      "index": 163,
+      "start": 428.56,
+      "end": 430.43,
+      "duration": 1.87,
+      "text": "say t. So, all I've done is I've just"
+    },
+    {
+      "index": 164,
+      "start": 430.44,
+      "end": 433.07,
+      "duration": 2.63,
+      "text": "picked one q1 on the right-hand side and"
+    },
+    {
+      "index": 165,
+      "start": 433.08,
+      "end": 436.27,
+      "duration": 3.19,
+      "text": "another function q2, and I imagine"
+    },
+    {
+      "index": 166,
+      "start": 436.28,
+      "end": 438.07,
+      "duration": 1.79,
+      "text": "that I have a solution y1 which"
+    },
+    {
+      "index": 167,
+      "start": 438.08,
+      "end": 440.67,
+      "duration": 2.59,
+      "text": "satisfies this differential equation"
+    },
+    {
+      "index": 168,
+      "start": 440.68,
+      "end": 442.51,
+      "duration": 1.83,
+      "text": "and y2 which satisfies this differential"
+    },
+    {
+      "index": 169,
+      "start": 442.52,
+      "end": 444.63,
+      "duration": 2.11,
+      "text": "equation."
+    },
+    {
+      "index": 170,
+      "start": 444.64,
+      "end": 445.71,
+      "duration": 1.07,
+      "text": "So, what does the superposition"
+    },
+    {
+      "index": 171,
+      "start": 445.72,
+      "end": 448.63,
+      "duration": 2.91,
+      "text": "principle say?"
+    },
+    {
+      "index": 172,
+      "start": 457.59,
+      "end": 457.6,
+      "duration": 0.01,
+      "text": "says"
+    },
+    {
+      "index": 173,
+      "start": 457.6,
+      "end": 460.27,
+      "duration": 2.67,
+      "text": "that if y1 solves this equation and y2"
+    },
+    {
+      "index": 174,
+      "start": 460.28,
+      "end": 462.31,
+      "duration": 2.03,
+      "text": "solves this equation,"
+    },
+    {
+      "index": 175,
+      "start": 462.32,
+      "end": 465.47,
+      "duration": 3.15,
+      "text": "then the function y"
+    },
+    {
+      "index": 176,
+      "start": 465.48,
+      "end": 467.59,
+      "duration": 2.11,
+      "text": "equals y1"
+    },
+    {
+      "index": 177,
+      "start": 467.6,
+      "end": 470.31,
+      "duration": 2.71,
+      "text": "plus y2"
+    },
+    {
+      "index": 178,
+      "start": 470.32,
+      "end": 471.91,
+      "duration": 1.59,
+      "text": "must solve"
+    },
+    {
+      "index": 179,
+      "start": 471.92,
+      "end": 475.63,
+      "duration": 3.71,
+      "text": "the equation"
+    },
+    {
+      "index": 180,
+      "start": 478.79,
+      "end": 478.8,
+      "duration": 0.01,
+      "text": "y dot plus y squared"
+    },
+    {
+      "index": 181,
+      "start": 478.8,
+      "end": 481.59,
+      "duration": 2.79,
+      "text": "equals the sum of the right-hand side, 1"
+    },
+    {
+      "index": 182,
+      "start": 481.6,
+      "end": 484.35,
+      "duration": 2.75,
+      "text": "plus t."
+    },
+    {
+      "index": 183,
+      "start": 486.79,
+      "end": 486.8,
+      "duration": 0.01,
+      "text": "So, if we try and substitute in"
+    },
+    {
+      "index": 184,
+      "start": 486.8,
+      "end": 490.31,
+      "duration": 3.51,
+      "text": "y1 plus y2 into this equation,"
+    },
+    {
+      "index": 185,
+      "start": 490.32,
+      "end": 492.51,
+      "duration": 2.19,
+      "text": "we're going to come to a contradiction."
+    },
+    {
+      "index": 186,
+      "start": 492.52,
+      "end": 494.15,
+      "duration": 1.63,
+      "text": "So, let's do that now."
+    },
+    {
+      "index": 187,
+      "start": 494.16,
+      "end": 497.11,
+      "duration": 2.95,
+      "text": "So, we take d by dt"
+    },
+    {
+      "index": 188,
+      "start": 497.12,
+      "end": 500.19,
+      "duration": 3.07,
+      "text": "of y1 plus y2."
+    },
+    {
+      "index": 189,
+      "start": 500.2,
+      "end": 504.27,
+      "duration": 4.07,
+      "text": "And I'm going to add it to y1 plus y2"
+    },
+    {
+      "index": 190,
+      "start": 504.28,
+      "end": 507.75,
+      "duration": 3.47,
+      "text": "quantity squared."
+    },
+    {
+      "index": 191,
+      "start": 509.43,
+      "end": 509.44,
+      "duration": 0.01,
+      "text": "Okay."
+    },
+    {
+      "index": 192,
+      "start": 509.44,
+      "end": 510.59,
+      "duration": 1.15,
+      "text": "And now what I can do is I can just"
+    },
+    {
+      "index": 193,
+      "start": 510.6,
+      "end": 513.75,
+      "duration": 3.15,
+      "text": "simplify this. So, I get y1 dot"
+    },
+    {
+      "index": 194,
+      "start": 513.76,
+      "end": 516.55,
+      "duration": 2.79,
+      "text": "plus y2 dot."
+    },
+    {
+      "index": 195,
+      "start": 516.56,
+      "end": 519.31,
+      "duration": 2.75,
+      "text": "And I can expand out this square."
+    },
+    {
+      "index": 196,
+      "start": 519.32,
+      "end": 521.55,
+      "duration": 2.23,
+      "text": "So, I get y1 squared"
+    },
+    {
+      "index": 197,
+      "start": 521.56,
+      "end": 523.99,
+      "duration": 2.43,
+      "text": "plus y2 squared"
+    },
+    {
+      "index": 198,
+      "start": 524.0,
+      "end": 528.83,
+      "duration": 4.83,
+      "text": "plus 2 y1 y2."
+    },
+    {
+      "index": 199,
+      "start": 529.91,
+      "end": 529.92,
+      "duration": 0.01,
+      "text": "And now what I'm going to do is I'm"
+    },
+    {
+      "index": 200,
+      "start": 529.92,
+      "end": 533.67,
+      "duration": 3.75,
+      "text": "going to combine the term y1"
+    },
+    {
+      "index": 201,
+      "start": 533.68,
+      "end": 536.51,
+      "duration": 2.83,
+      "text": "with y1 squared."
+    },
+    {
+      "index": 202,
+      "start": 536.52,
+      "end": 538.47,
+      "duration": 1.95,
+      "text": "And by construction,"
+    },
+    {
+      "index": 203,
+      "start": 538.48,
+      "end": 541.43,
+      "duration": 2.95,
+      "text": "y1 dot plus y1 squared is equal to one"
+    },
+    {
+      "index": 204,
+      "start": 541.44,
+      "end": 543.39,
+      "duration": 1.95,
+      "text": "because I assumed that it satisfied this"
+    },
+    {
+      "index": 205,
+      "start": 543.4,
+      "end": 545.95,
+      "duration": 2.55,
+      "text": "differential equation."
+    },
+    {
+      "index": 206,
+      "start": 545.96,
+      "end": 547.23,
+      "duration": 1.27,
+      "text": "And then"
+    },
+    {
+      "index": 207,
+      "start": 547.24,
+      "end": 548.55,
+      "duration": 1.31,
+      "text": "in addition,"
+    },
+    {
+      "index": 208,
+      "start": 548.56,
+      "end": 552.91,
+      "duration": 4.35,
+      "text": "by construction, y2 dot plus y2 squared"
+    },
+    {
+      "index": 209,
+      "start": 552.92,
+      "end": 555.19,
+      "duration": 2.27,
+      "text": "satisfies"
+    },
+    {
+      "index": 210,
+      "start": 555.2,
+      "end": 556.55,
+      "duration": 1.35,
+      "text": "uh the right-hand side of the second"
+    },
+    {
+      "index": 211,
+      "start": 556.56,
+      "end": 557.63,
+      "duration": 1.07,
+      "text": "equation"
+    },
+    {
+      "index": 212,
+      "start": 557.64,
+      "end": 561.11,
+      "duration": 3.47,
+      "text": "with t."
+    },
+    {
+      "index": 213,
+      "start": 568.35,
+      "end": 568.36,
+      "duration": 0.01,
+      "text": "but I'm left over with this other piece,"
+    },
+    {
+      "index": 214,
+      "start": 568.36,
+      "end": 571.99,
+      "duration": 3.63,
+      "text": "2 y1 y2."
+    },
+    {
+      "index": 215,
+      "start": 572.0,
+      "end": 573.07,
+      "duration": 1.07,
+      "text": "Okay."
+    },
+    {
+      "index": 216,
+      "start": 573.08,
+      "end": 575.87,
+      "duration": 2.79,
+      "text": "So, in general, if I take a function"
+    },
+    {
+      "index": 217,
+      "start": 575.88,
+      "end": 577.83,
+      "duration": 1.95,
+      "text": "which solves this differential equation"
+    },
+    {
+      "index": 218,
+      "start": 577.84,
+      "end": 579.31,
+      "duration": 1.47,
+      "text": "and another function which solves this"
+    },
+    {
+      "index": 219,
+      "start": 579.32,
+      "end": 580.91,
+      "duration": 1.59,
+      "text": "differential equation,"
+    },
+    {
+      "index": 220,
+      "start": 580.92,
+      "end": 582.55,
+      "duration": 1.63,
+      "text": "and I add them together"
+    },
+    {
+      "index": 221,
+      "start": 582.56,
+      "end": 584.95,
+      "duration": 2.39,
+      "text": "and plug it into the left-hand side of"
+    },
+    {
+      "index": 222,
+      "start": 584.96,
+      "end": 586.63,
+      "duration": 1.67,
+      "text": "this differential equation, I get"
+    },
+    {
+      "index": 223,
+      "start": 586.64,
+      "end": 588.87,
+      "duration": 2.23,
+      "text": "something which is 1 plus t"
+    },
+    {
+      "index": 224,
+      "start": 588.88,
+      "end": 591.67,
+      "duration": 2.79,
+      "text": "plus some other stuff."
+    },
+    {
+      "index": 225,
+      "start": 591.68,
+      "end": 594.23,
+      "duration": 2.55,
+      "text": "And if it did satisfy the principle of"
+    },
+    {
+      "index": 226,
+      "start": 594.24,
+      "end": 596.15,
+      "duration": 1.91,
+      "text": "superposition,"
+    },
+    {
+      "index": 227,
+      "start": 596.16,
+      "end": 598.47,
+      "duration": 2.31,
+      "text": "it must satisfy"
+    },
+    {
+      "index": 228,
+      "start": 598.48,
+      "end": 601.71,
+      "duration": 3.23,
+      "text": "it must equal 1 + t."
+    },
+    {
+      "index": 229,
+      "start": 601.72,
+      "end": 603.27,
+      "duration": 1.55,
+      "text": "So, we arrive at a contradiction because"
+    },
+    {
+      "index": 230,
+      "start": 603.28,
+      "end": 606.31,
+      "duration": 3.03,
+      "text": "it doesn't equal 1 + t. In fact, it"
+    },
+    {
+      "index": 231,
+      "start": 606.32,
+      "end": 608.35,
+      "duration": 2.03,
+      "text": "fails to equal 1 + t"
+    },
+    {
+      "index": 232,
+      "start": 608.36,
+      "end": 611.43,
+      "duration": 3.07,
+      "text": "by this term 2y1y2."
+    },
+    {
+      "index": 233,
+      "start": 611.44,
+      "end": 613.47,
+      "duration": 2.03,
+      "text": "And this term comes directly from the"
+    },
+    {
+      "index": 234,
+      "start": 613.48,
+      "end": 615.15,
+      "duration": 1.67,
+      "text": "fact that we had a non-linearity in the"
+    },
+    {
+      "index": 235,
+      "start": 615.16,
+      "end": 617.47,
+      "duration": 2.31,
+      "text": "equation."
+    },
+    {
+      "index": 236,
+      "start": 617.48,
+      "end": 619.99,
+      "duration": 2.51,
+      "text": "So, this is just one illustration of the"
+    },
+    {
+      "index": 237,
+      "start": 620.0,
+      "end": 622.07,
+      "duration": 2.07,
+      "text": "fact that a non-linear equation doesn't"
+    },
+    {
+      "index": 238,
+      "start": 622.08,
+      "end": 623.71,
+      "duration": 1.63,
+      "text": "necessarily satisfy the super"
+    },
+    {
+      "index": 239,
+      "start": 623.72,
+      "end": 625.43,
+      "duration": 1.71,
+      "text": "superposition principle."
+    },
+    {
+      "index": 240,
+      "start": 625.44,
+      "end": 627.43,
+      "duration": 1.99,
+      "text": "Whereas every linear equation satisfies"
+    },
+    {
+      "index": 241,
+      "start": 627.44,
+      "end": 629.51,
+      "duration": 2.07,
+      "text": "the superposition principle. This is one"
+    },
+    {
+      "index": 242,
+      "start": 629.52,
+      "end": 631.91,
+      "duration": 2.39,
+      "text": "reason we love linear equations and we"
+    },
+    {
+      "index": 243,
+      "start": 631.92,
+      "end": 634.75,
+      "duration": 2.83,
+      "text": "study them extensively."
+    },
+    {
+      "index": 244,
+      "start": 634.76,
+      "end": 635.87,
+      "duration": 1.11,
+      "text": "Okay."
+    },
+    {
+      "index": 245,
+      "start": 635.88,
+      "end": 636.75,
+      "duration": 0.87,
+      "text": "So,"
+    },
+    {
+      "index": 246,
+      "start": 636.76,
+      "end": 639.51,
+      "duration": 2.75,
+      "text": "I'd just like to conclude here and I'll"
+    },
+    {
+      "index": 247,
+      "start": 639.52,
+      "end": 642.24,
+      "duration": 2.72,
+      "text": "see you next time."
+    }
+  ],
+  "course": {
+    "category": "Mathematics",
+    "title": "Differential Equations",
+    "source_url": "https://www.youtube.com/playlist?list=PL64BDFBDA2AF24F7E"
+  }
+}

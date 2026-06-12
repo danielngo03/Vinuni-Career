@@ -1,0 +1,4617 @@
+{
+  "video": {
+    "id": "UJG0f0BSX14",
+    "title": "Lec 31 | MIT 18.03 Differential Equations, Spring 2006",
+    "url": "https://www.youtube.com/watch?v=UJG0f0BSX14",
+    "channel": "MIT OpenCourseWare",
+    "duration": 2831,
+    "language": "en"
+  },
+  "segment_count": 657,
+  "segments": [
+    {
+      "index": 0,
+      "start": 8.0,
+      "end": 14.692,
+      "duration": 6.692,
+      "text": "So the topic for today is we have a system like the kind we"
+    },
+    {
+      "index": 1,
+      "start": 14.692,
+      "end": 20.346,
+      "duration": 5.654,
+      "text": "have been studying, but there is now a difference."
+    },
+    {
+      "index": 2,
+      "start": 20.346,
+      "end": 25.653,
+      "duration": 5.307,
+      "text": "A system of first order differential equations,"
+    },
+    {
+      "index": 3,
+      "start": 25.653,
+      "end": 30.615,
+      "duration": 4.962,
+      "text": "just two of them. It is an autonomous system"
+    },
+    {
+      "index": 4,
+      "start": 30.615,
+      "end": 36.153,
+      "duration": 5.538,
+      "text": "meaning, of course, that there is no t explicitly"
+    },
+    {
+      "index": 5,
+      "start": 36.153,
+      "end": 42.269,
+      "duration": 6.116,
+      "text": "on the right-hand side. But what makes this different,"
+    },
+    {
+      "index": 6,
+      "start": 42.269,
+      "end": 47.0,
+      "duration": 4.731,
+      "text": "now, is that it is nonlinear."
+    },
+    {
+      "index": 7,
+      "start": 56.0,
+      "end": 59.112,
+      "duration": 3.112,
+      "text": "In other words, the functions on the right-hand"
+    },
+    {
+      "index": 8,
+      "start": 59.112,
+      "end": 63.172,
+      "duration": 4.06,
+      "text": "side are no longer simple things like ax plus by,"
+    },
+    {
+      "index": 9,
+      "start": 63.172,
+      "end": 67.46,
+      "duration": 4.288,
+      "text": "cx plus dy. Those are the kind we have been"
+    },
+    {
+      "index": 10,
+      "start": 67.46,
+      "end": 70.555,
+      "duration": 3.095,
+      "text": "studying. But we are going to allow them"
+    },
+    {
+      "index": 11,
+      "start": 70.555,
+      "end": 73.65,
+      "duration": 3.095,
+      "text": "to have quadratic terms, sines, cosines,"
+    },
+    {
+      "index": 12,
+      "start": 73.65,
+      "end": 78.333,
+      "duration": 4.683,
+      "text": "different stuff there that are not linear functions anymore."
+    },
+    {
+      "index": 13,
+      "start": 78.333,
+      "end": 81.984,
+      "duration": 3.651,
+      "text": "And the problem is, if it's a linear system you"
+    },
+    {
+      "index": 14,
+      "start": 81.984,
+      "end": 86.825,
+      "duration": 4.841,
+      "text": "know how to get a sketch of its trajectories without using the"
+    },
+    {
+      "index": 15,
+      "start": 86.825,
+      "end": 93.222,
+      "duration": 6.397,
+      "text": "computer by using eigenlines. You were very good at that on"
+    },
+    {
+      "index": 16,
+      "start": 93.222,
+      "end": 98.666,
+      "duration": 5.444,
+      "text": "the exam on Friday. Most of you could do that very"
+    },
+    {
+      "index": 17,
+      "start": 98.666,
+      "end": 102.555,
+      "duration": 3.889,
+      "text": "well. But what do you do if you have"
+    },
+    {
+      "index": 18,
+      "start": 102.555,
+      "end": 107.777,
+      "duration": 5.222,
+      "text": "a nonlinear system? The problem is to sketch its"
+    },
+    {
+      "index": 19,
+      "start": 107.777,
+      "end": 110.0,
+      "duration": 2.223,
+      "text": "trajectories."
+    },
+    {
+      "index": 20,
+      "start": 120.0,
+      "end": 123.416,
+      "duration": 3.416,
+      "text": "In general, there are not analytic formulas for the"
+    },
+    {
+      "index": 21,
+      "start": 123.416,
+      "end": 126.15,
+      "duration": 2.734,
+      "text": "solutions to nonlinear systems like that."
+    },
+    {
+      "index": 22,
+      "start": 126.15,
+      "end": 128.61,
+      "duration": 2.46,
+      "text": "There are only computer-drawn things."
+    },
+    {
+      "index": 23,
+      "start": 128.61,
+      "end": 132.232,
+      "duration": 3.622,
+      "text": "But sometimes you have to get qualitative information,"
+    },
+    {
+      "index": 24,
+      "start": 132.232,
+      "end": 135.034,
+      "duration": 2.802,
+      "text": "a quick idea of how the trajectories look."
+    },
+    {
+      "index": 25,
+      "start": 135.034,
+      "end": 138.656,
+      "duration": 3.622,
+      "text": "And, especially on Friday, I will give you examples of"
+    },
+    {
+      "index": 26,
+      "start": 138.656,
+      "end": 142.824,
+      "duration": 4.168,
+      "text": "stuff that you can do that the computer cannot do very well at"
+    },
+    {
+      "index": 27,
+      "start": 142.824,
+      "end": 144.874,
+      "duration": 2.05,
+      "text": "all. Okay, so the problem is to"
+    },
+    {
+      "index": 28,
+      "start": 144.874,
+      "end": 148.633,
+      "duration": 3.759,
+      "text": "sketch those trajectories. Now, what I am going to do is"
+    },
+    {
+      "index": 29,
+      "start": 148.633,
+      "end": 153.061,
+      "duration": 4.428,
+      "text": "-- The way I will give the lecture"
+    },
+    {
+      "index": 30,
+      "start": 153.061,
+      "end": 159.086,
+      "duration": 6.025,
+      "text": "is, this is the general problem. We have to do two things sort"
+    },
+    {
+      "index": 31,
+      "start": 159.086,
+      "end": 162.938,
+      "duration": 3.852,
+      "text": "of simultaneously. I will give a general"
+    },
+    {
+      "index": 32,
+      "start": 162.938,
+      "end": 168.567,
+      "duration": 5.629,
+      "text": "explanation using x and y, but then, as we do each step of"
+    },
+    {
+      "index": 33,
+      "start": 168.567,
+      "end": 174.691,
+      "duration": 6.124,
+      "text": "the process and talk about it in general, I would like to carry"
+    },
+    {
+      "index": 34,
+      "start": 174.691,
+      "end": 180.222,
+      "duration": 5.531,
+      "text": "it out on a specific example. And so we will do it with a"
+    },
+    {
+      "index": 35,
+      "start": 180.222,
+      "end": 184.962,
+      "duration": 4.74,
+      "text": "specific example. The example I am going to carry"
+    },
+    {
+      "index": 36,
+      "start": 184.962,
+      "end": 190.0,
+      "duration": 5.038,
+      "text": "out is that of the nonlinear pendulum."
+    },
+    {
+      "index": 37,
+      "start": 190.0,
+      "end": 193.892,
+      "duration": 3.892,
+      "text": "I am using this because it illustrates virtually"
+    },
+    {
+      "index": 38,
+      "start": 193.892,
+      "end": 196.211,
+      "duration": 2.319,
+      "text": "everything. And, in addition,"
+    },
+    {
+      "index": 39,
+      "start": 196.211,
+      "end": 200.435,
+      "duration": 4.224,
+      "text": "it has the great advantage that, since we know how a"
+    },
+    {
+      "index": 40,
+      "start": 200.435,
+      "end": 203.334,
+      "duration": 2.899,
+      "text": "pendulum swings, we will be able to,"
+    },
+    {
+      "index": 41,
+      "start": 203.334,
+      "end": 206.398,
+      "duration": 3.064,
+      "text": "when we get the answer, verify it and,"
+    },
+    {
+      "index": 42,
+      "start": 206.398,
+      "end": 210.539,
+      "duration": 4.141,
+      "text": "at various stages of the procedure, verify that the"
+    },
+    {
+      "index": 43,
+      "start": 210.539,
+      "end": 214.266,
+      "duration": 3.727,
+      "text": "mathematics is, in fact, in agreement with our"
+    },
+    {
+      "index": 44,
+      "start": 214.266,
+      "end": 219.076,
+      "duration": 4.81,
+      "text": "physical intuition. It is going to be a lightly"
+    },
+    {
+      "index": 45,
+      "start": 219.076,
+      "end": 223.615,
+      "duration": 4.539,
+      "text": "damped pendulum because I am going to have to put in numbers"
+    },
+    {
+      "index": 46,
+      "start": 223.615,
+      "end": 228.461,
+      "duration": 4.846,
+      "text": "in order to do the calculations. And that seems like a good case"
+    },
+    {
+      "index": 47,
+      "start": 228.461,
+      "end": 231.769,
+      "duration": 3.308,
+      "text": "which illustrates several types of behavior."
+    },
+    {
+      "index": 48,
+      "start": 231.769,
+      "end": 235.23,
+      "duration": 3.461,
+      "text": "Let's first of all, before we talk in general,"
+    },
+    {
+      "index": 49,
+      "start": 235.23,
+      "end": 240.894,
+      "duration": 5.664,
+      "text": "remind you of the pendulum. The pendulum I am talking about"
+    },
+    {
+      "index": 50,
+      "start": 240.894,
+      "end": 244.162,
+      "duration": 3.268,
+      "text": "has the vertex from which it swings."
+    },
+    {
+      "index": 51,
+      "start": 244.162,
+      "end": 248.084,
+      "duration": 3.922,
+      "text": "This is a rigid rod. It is not one of these"
+    },
+    {
+      "index": 52,
+      "start": 248.084,
+      "end": 252.099,
+      "duration": 4.015,
+      "text": "string-type pendulums. There is a mass here."
+    },
+    {
+      "index": 53,
+      "start": 252.099,
+      "end": 257.608,
+      "duration": 5.509,
+      "text": "The rigid rod is of length l. And so it swings in a circular"
+    },
+    {
+      "index": 54,
+      "start": 257.608,
+      "end": 261.53,
+      "duration": 3.922,
+      "text": "orbit like that back and forth in a circle."
+    },
+    {
+      "index": 55,
+      "start": 261.53,
+      "end": 267.132,
+      "duration": 5.602,
+      "text": "And let's put in the vertical distance, the vertical position"
+    },
+    {
+      "index": 56,
+      "start": 267.132,
+      "end": 270.766,
+      "duration": 3.634,
+      "text": "rather. And now, as variables,"
+    },
+    {
+      "index": 57,
+      "start": 270.766,
+      "end": 275.262,
+      "duration": 4.496,
+      "text": "of course normally we use neutral variables like x and y."
+    },
+    {
+      "index": 58,
+      "start": 275.262,
+      "end": 279.759,
+      "duration": 4.497,
+      "text": "But here x and y are not relevant variables to describing"
+    },
+    {
+      "index": 59,
+      "start": 279.759,
+      "end": 284.094,
+      "duration": 4.335,
+      "text": "the way the mass moves. The obviously relevant variable"
+    },
+    {
+      "index": 60,
+      "start": 284.094,
+      "end": 287.868,
+      "duration": 3.774,
+      "text": "is theta, this angle. Now, I am taking it in the"
+    },
+    {
+      "index": 61,
+      "start": 287.868,
+      "end": 290.919,
+      "duration": 3.051,
+      "text": "positive direction. Here theta is zero."
+    },
+    {
+      "index": 62,
+      "start": 290.919,
+      "end": 293.81,
+      "duration": 2.891,
+      "text": "As it swings, theta becomes positive."
+    },
+    {
+      "index": 63,
+      "start": 293.81,
+      "end": 297.985,
+      "duration": 4.175,
+      "text": "Over here, when it is horizontal, theta has the value"
+    },
+    {
+      "index": 64,
+      "start": 297.985,
+      "end": 302.0,
+      "duration": 4.015,
+      "text": "pi over two and then so on it goes."
+    },
+    {
+      "index": 65,
+      "start": 302.0,
+      "end": 306.142,
+      "duration": 4.142,
+      "text": "Values here correspond to negative values of theta."
+    },
+    {
+      "index": 66,
+      "start": 306.142,
+      "end": 310.449,
+      "duration": 4.307,
+      "text": "That is how it swings. Now, just to remind you of the"
+    },
+    {
+      "index": 67,
+      "start": 310.449,
+      "end": 315.337,
+      "duration": 4.888,
+      "text": "equation that this satisfies, it satisfies F equals ma,"
+    },
+    {
+      "index": 68,
+      "start": 315.337,
+      "end": 319.893,
+      "duration": 4.556,
+      "text": "rather ma equals F. Now, the acceleration is along"
+    },
+    {
+      "index": 69,
+      "start": 319.893,
+      "end": 323.869,
+      "duration": 3.976,
+      "text": "the circular path. And that is different from the"
+    },
+    {
+      "index": 70,
+      "start": 323.869,
+      "end": 328.094,
+      "duration": 4.225,
+      "text": "angular acceleration. I have to put in the factor of"
+    },
+    {
+      "index": 71,
+      "start": 328.094,
+      "end": 332.755,
+      "duration": 4.661,
+      "text": "the length. You had that a lot in 8.01 so I"
+    },
+    {
+      "index": 72,
+      "start": 332.755,
+      "end": 335.6,
+      "duration": 2.845,
+      "text": "am simply going to write it down."
+    },
+    {
+      "index": 73,
+      "start": 335.6,
+      "end": 338.8,
+      "duration": 3.2,
+      "text": "It is the mass. Therefore, the linear"
+    },
+    {
+      "index": 74,
+      "start": 338.8,
+      "end": 344.044,
+      "duration": 5.244,
+      "text": "acceleration along the circular path is equal to the angular"
+    },
+    {
+      "index": 75,
+      "start": 344.044,
+      "end": 348.133,
+      "duration": 4.089,
+      "text": "acceleration times l. It is l times theta prime"
+    },
+    {
+      "index": 76,
+      "start": 348.133,
+      "end": 351.155,
+      "duration": 3.022,
+      "text": "prime, or double dot if you prefer."
+    },
+    {
+      "index": 77,
+      "start": 351.155,
+      "end": 355.511,
+      "duration": 4.356,
+      "text": "And so this much of it is the acceleration vector."
+    },
+    {
+      "index": 78,
+      "start": 355.511,
+      "end": 360.933,
+      "duration": 5.422,
+      "text": "Now, once the force is acting on it, well, there is a force of"
+    },
+    {
+      "index": 79,
+      "start": 360.933,
+      "end": 366.0,
+      "duration": 5.067,
+      "text": "gravity which is pulling it straight down."
+    },
+    {
+      "index": 80,
+      "start": 366.0,
+      "end": 369.757,
+      "duration": 3.757,
+      "text": "But, of course, that is not the relevant force."
+    },
+    {
+      "index": 81,
+      "start": 369.757,
+      "end": 374.414,
+      "duration": 4.657,
+      "text": "I am interested in the force that acts along that circular"
+    },
+    {
+      "index": 82,
+      "start": 374.414,
+      "end": 377.354,
+      "duration": 2.94,
+      "text": "line. And that will not be all of the"
+    },
+    {
+      "index": 83,
+      "start": 377.354,
+      "end": 381.439,
+      "duration": 4.085,
+      "text": "pink line but only its component in that direction."
+    },
+    {
+      "index": 84,
+      "start": 381.439,
+      "end": 385.115,
+      "duration": 3.676,
+      "text": "And the component, I fill out the little right"
+    },
+    {
+      "index": 85,
+      "start": 385.115,
+      "end": 388.056,
+      "duration": 2.941,
+      "text": "triangle. And then the way to get the"
+    },
+    {
+      "index": 86,
+      "start": 388.056,
+      "end": 392.794,
+      "duration": 4.738,
+      "text": "component in that direction, the vertical pink part has the"
+    },
+    {
+      "index": 87,
+      "start": 392.794,
+      "end": 396.709,
+      "duration": 3.915,
+      "text": "magnitude mg. But, since I only want this"
+    },
+    {
+      "index": 88,
+      "start": 396.709,
+      "end": 399.875,
+      "duration": 3.166,
+      "text": "part, I have to multiply by the sign of this angle."
+    },
+    {
+      "index": 89,
+      "start": 399.875,
+      "end": 403.611,
+      "duration": 3.736,
+      "text": "Now, sometimes I have given on a diagnostic test to students"
+    },
+    {
+      "index": 90,
+      "start": 403.611,
+      "end": 405.954,
+      "duration": 2.343,
+      "text": "when they enter to what angle is that?"
+    },
+    {
+      "index": 91,
+      "start": 405.954,
+      "end": 408.676,
+      "duration": 2.722,
+      "text": "But, of course, anybody can guess it must be"
+    },
+    {
+      "index": 92,
+      "start": 408.676,
+      "end": 410.703,
+      "duration": 2.027,
+      "text": "theta. Otherwise, why would he be"
+    },
+    {
+      "index": 93,
+      "start": 410.703,
+      "end": 412.982,
+      "duration": 2.279,
+      "text": "asking it? So this is still the angle"
+    },
+    {
+      "index": 94,
+      "start": 412.982,
+      "end": 414.818,
+      "duration": 1.836,
+      "text": "theta. You can prove these two"
+    },
+    {
+      "index": 95,
+      "start": 414.818,
+      "end": 417.858,
+      "duration": 3.04,
+      "text": "triangles are similar. One of them I haven't even"
+    },
+    {
+      "index": 96,
+      "start": 417.858,
+      "end": 421.53,
+      "duration": 3.672,
+      "text": "written in, but it would be the right triangle whose leg is"
+    },
+    {
+      "index": 97,
+      "start": 421.53,
+      "end": 426.48,
+      "duration": 4.95,
+      "text": "perpendicular to it. So the right angle is here."
+    },
+    {
+      "index": 98,
+      "start": 426.48,
+      "end": 431.533,
+      "duration": 5.053,
+      "text": "If that is theta then the length of this small pink line"
+    },
+    {
+      "index": 99,
+      "start": 431.533,
+      "end": 435.851,
+      "duration": 4.318,
+      "text": "is mg times the sine of theta."
+    },
+    {
+      "index": 100,
+      "start": 435.851,
+      "end": 440.445,
+      "duration": 4.594,
+      "text": "That is the force due gravity. It is mg sine theta."
+    },
+    {
+      "index": 101,
+      "start": 440.445,
+      "end": 445.865,
+      "duration": 5.42,
+      "text": "Except in what direction is it? It is acting in the negative"
+    },
+    {
+      "index": 102,
+      "start": 445.865,
+      "end": 450.0,
+      "duration": 4.135,
+      "text": "direction. This is theta increasing."
+    },
+    {
+      "index": 103,
+      "start": 450.0,
+      "end": 455.335,
+      "duration": 5.335,
+      "text": "This is the opposite direction, so I should put a negative sign"
+    },
+    {
+      "index": 104,
+      "start": 455.335,
+      "end": 459.293,
+      "duration": 3.958,
+      "text": "in front of it. But that is not the only force."
+    },
+    {
+      "index": 105,
+      "start": 459.293,
+      "end": 464.026,
+      "duration": 4.733,
+      "text": "There is also a damping force that goes with a velocity."
+    },
+    {
+      "index": 106,
+      "start": 464.026,
+      "end": 468.845,
+      "duration": 4.819,
+      "text": "And that also occurs if the angular velocity is positive,"
+    },
+    {
+      "index": 107,
+      "start": 468.845,
+      "end": 472.718,
+      "duration": 3.873,
+      "text": "the angle theta is increasing, in other words,"
+    },
+    {
+      "index": 108,
+      "start": 472.718,
+      "end": 479.0,
+      "duration": 6.282,
+      "text": "the damping force resists that. It is opposite to the velocity."
+    },
+    {
+      "index": 109,
+      "start": 479.0,
+      "end": 482.514,
+      "duration": 3.514,
+      "text": "So the velocity is going to be l times theta prime."
+    },
+    {
+      "index": 110,
+      "start": 482.514,
+      "end": 485.256,
+      "duration": 2.742,
+      "text": "There is my velocity v. Linear velocity,"
+    },
+    {
+      "index": 111,
+      "start": 485.256,
+      "end": 488.7,
+      "duration": 3.444,
+      "text": "not angular velocity. And so this is going to be a"
+    },
+    {
+      "index": 112,
+      "start": 488.7,
+      "end": 491.653,
+      "duration": 2.953,
+      "text": "negative times some constant times that c1."
+    },
+    {
+      "index": 113,
+      "start": 491.653,
+      "end": 495.659,
+      "duration": 4.006,
+      "text": "Now, that is the equation. But let's make it look a little"
+    },
+    {
+      "index": 114,
+      "start": 495.659,
+      "end": 499.034,
+      "duration": 3.375,
+      "text": "better by getting rid of some of these constants."
+    },
+    {
+      "index": 115,
+      "start": 499.034,
+      "end": 503.321,
+      "duration": 4.287,
+      "text": "If I write it out this way and put everything on the left-hand"
+    },
+    {
+      "index": 116,
+      "start": 503.321,
+      "end": 507.328,
+      "duration": 4.007,
+      "text": "side, the way it is usually done in writing a second order"
+    },
+    {
+      "index": 117,
+      "start": 507.328,
+      "end": 512.06,
+      "duration": 4.732,
+      "text": "differential equation. Theta I am going to divide"
+    },
+    {
+      "index": 118,
+      "start": 512.06,
+      "end": 517.132,
+      "duration": 5.072,
+      "text": "through by ml and put everything on the left-hand side and in the"
+    },
+    {
+      "index": 119,
+      "start": 517.132,
+      "end": 520.144,
+      "duration": 3.012,
+      "text": "right order. Next should come the theta"
+    },
+    {
+      "index": 120,
+      "start": 520.144,
+      "end": 523.393,
+      "duration": 3.249,
+      "text": "prime term. And so that is going to be c1l"
+    },
+    {
+      "index": 121,
+      "start": 523.393,
+      "end": 526.167,
+      "duration": 2.774,
+      "text": "divided by ml, so that is c1 over m."
+    },
+    {
+      "index": 122,
+      "start": 526.167,
+      "end": 528.703,
+      "duration": 2.536,
+      "text": "The l's cancel out. And, finally,"
+    },
+    {
+      "index": 123,
+      "start": 528.703,
+      "end": 533.062,
+      "duration": 4.359,
+      "text": "the last term on the right, I will move this over to the"
+    },
+    {
+      "index": 124,
+      "start": 533.062,
+      "end": 537.184,
+      "duration": 4.122,
+      "text": "left, but remember everything is being divided by ml,"
+    },
+    {
+      "index": 125,
+      "start": 537.184,
+      "end": 541.226,
+      "duration": 4.042,
+      "text": "so the m's cancel out, and it is plus g over l times"
+    },
+    {
+      "index": 126,
+      "start": 541.226,
+      "end": 545.851,
+      "duration": 4.625,
+      "text": "the sine of theta. That is our differential"
+    },
+    {
+      "index": 127,
+      "start": 545.851,
+      "end": 548.859,
+      "duration": 3.008,
+      "text": "equation. But let's make it look still a"
+    },
+    {
+      "index": 128,
+      "start": 548.859,
+      "end": 553.409,
+      "duration": 4.55,
+      "text": "little bit better by lumping these constants and giving them"
+    },
+    {
+      "index": 129,
+      "start": 553.409,
+      "end": 556.571,
+      "duration": 3.162,
+      "text": "new names. It is going to be finally theta"
+    },
+    {
+      "index": 130,
+      "start": 556.571,
+      "end": 559.811,
+      "duration": 3.24,
+      "text": "double prime. I will simply call this thing"
+    },
+    {
+      "index": 131,
+      "start": 559.811,
+      "end": 563.744,
+      "duration": 3.933,
+      "text": "the damping constant. I will lump those two together"
+    },
+    {
+      "index": 132,
+      "start": 563.744,
+      "end": 567.369,
+      "duration": 3.625,
+      "text": "into single damping constant. And then g over l,"
+    },
+    {
+      "index": 133,
+      "start": 567.369,
+      "end": 569.76,
+      "duration": 2.391,
+      "text": "I will lump those together, too."
+    },
+    {
+      "index": 134,
+      "start": 569.76,
+      "end": 574.696,
+      "duration": 4.936,
+      "text": "And we usually call that k. It is k sine theta."
+    },
+    {
+      "index": 135,
+      "start": 574.696,
+      "end": 577.78,
+      "duration": 3.084,
+      "text": "Now, this is a second-order"
+    },
+    {
+      "index": 136,
+      "start": 577.78,
+      "end": 580.865,
+      "duration": 3.085,
+      "text": "different equation, but it is not linear."
+    },
+    {
+      "index": 137,
+      "start": 580.865,
+      "end": 585.26,
+      "duration": 4.395,
+      "text": "If this were a month and a half ago and I said solve that,"
+    },
+    {
+      "index": 138,
+      "start": 585.26,
+      "end": 587.881,
+      "duration": 2.621,
+      "text": "you would stare at me. But, anyway,"
+    },
+    {
+      "index": 139,
+      "start": 587.881,
+      "end": 590.889,
+      "duration": 3.008,
+      "text": "you couldn't solve that. And nobody can,"
+    },
+    {
+      "index": 140,
+      "start": 590.889,
+      "end": 594.05,
+      "duration": 3.161,
+      "text": "in some sense. It is a nonlinear equation."
+    },
+    {
+      "index": 141,
+      "start": 594.05,
+      "end": 596.672,
+      "duration": 2.622,
+      "text": "It doesn't have any exact solution."
+    },
+    {
+      "index": 142,
+      "start": 596.672,
+      "end": 601.375,
+      "duration": 4.703,
+      "text": "The only thing you could do is look for a solution in infinite"
+    },
+    {
+      "index": 143,
+      "start": 601.375,
+      "end": 606.742,
+      "duration": 5.367,
+      "text": "series or something like that. Well, what do you do?"
+    },
+    {
+      "index": 144,
+      "start": 606.742,
+      "end": 611.141,
+      "duration": 4.399,
+      "text": "You throw it on the computer, that is the easy answer,"
+    },
+    {
+      "index": 145,
+      "start": 611.141,
+      "end": 615.705,
+      "duration": 4.564,
+      "text": "but what does the computer do? Well, the first thing the"
+    },
+    {
+      "index": 146,
+      "start": 615.705,
+      "end": 620.85,
+      "duration": 5.145,
+      "text": "computer does is turns it into a system because the computer is"
+    },
+    {
+      "index": 147,
+      "start": 620.85,
+      "end": 625.0,
+      "duration": 4.15,
+      "text": "going to use numerical methods to solve it."
+    },
+    {
+      "index": 148,
+      "start": 625.0,
+      "end": 628.299,
+      "duration": 3.299,
+      "text": "But only those methods, the formulas it uses,"
+    },
+    {
+      "index": 149,
+      "start": 628.299,
+      "end": 632.875,
+      "duration": 4.576,
+      "text": "Euler or modified or improved Euler or the Runge-Cutta method,"
+    },
+    {
+      "index": 150,
+      "start": 632.875,
+      "end": 636.774,
+      "duration": 3.899,
+      "text": "they are always expressed not for single higher-order"
+    },
+    {
+      "index": 151,
+      "start": 636.774,
+      "end": 641.125,
+      "duration": 4.351,
+      "text": "equations, but instead they always assume that the equation"
+    },
+    {
+      "index": 152,
+      "start": 641.125,
+      "end": 644.274,
+      "duration": 3.149,
+      "text": "has been converted to a first order system."
+    },
+    {
+      "index": 153,
+      "start": 644.274,
+      "end": 648.475,
+      "duration": 4.201,
+      "text": "Let's do that for the computer, even though it will do it"
+    },
+    {
+      "index": 154,
+      "start": 648.475,
+      "end": 650.875,
+      "duration": 2.4,
+      "text": "itself if nobody tells it not to."
+    },
+    {
+      "index": 155,
+      "start": 650.875,
+      "end": 654.85,
+      "duration": 3.975,
+      "text": "Theta prime is equal to, now I have to figure out what"
+    },
+    {
+      "index": 156,
+      "start": 654.85,
+      "end": 660.066,
+      "duration": 5.216,
+      "text": "new variable to introduce. Normally we use x prime and"
+    },
+    {
+      "index": 157,
+      "start": 660.066,
+      "end": 663.282,
+      "duration": 3.216,
+      "text": "call that y. That really doesn't seem to be"
+    },
+    {
+      "index": 158,
+      "start": 663.282,
+      "end": 667.11,
+      "duration": 3.828,
+      "text": "very suitable here. But what do the physicists call"
+    },
+    {
+      "index": 159,
+      "start": 667.11,
+      "end": 669.559,
+      "duration": 2.449,
+      "text": "it? This is the angular velocity."
+    },
+    {
+      "index": 160,
+      "start": 669.559,
+      "end": 673.081,
+      "duration": 3.522,
+      "text": "And the standard designation for that is omega."
+    },
+    {
+      "index": 161,
+      "start": 673.081,
+      "end": 676.832,
+      "duration": 3.751,
+      "text": "Two Greek letters. I told you this was going to be"
+    },
+    {
+      "index": 162,
+      "start": 676.832,
+      "end": 679.052,
+      "duration": 2.22,
+      "text": "hard. Omega prime equals what?"
+    },
+    {
+      "index": 163,
+      "start": 679.052,
+      "end": 683.186,
+      "duration": 4.134,
+      "text": "Well, omega prime equals, now you do it in the standard"
+    },
+    {
+      "index": 164,
+      "start": 683.186,
+      "end": 687.473,
+      "duration": 4.287,
+      "text": "way, you convert the system, but remember you have to put"
+    },
+    {
+      "index": 165,
+      "start": 687.473,
+      "end": 692.256,
+      "duration": 4.783,
+      "text": "the theta first. So it is minus k sine theta."
+    },
+    {
+      "index": 166,
+      "start": 692.256,
+      "end": 696.101,
+      "duration": 3.845,
+      "text": "The theta first and then the"
+    },
+    {
+      "index": 167,
+      "start": 696.101,
+      "end": 699.444,
+      "duration": 3.343,
+      "text": "omega term first. So minus c times omega,"
+    },
+    {
+      "index": 168,
+      "start": 699.444,
+      "end": 702.704,
+      "duration": 3.26,
+      "text": "minus c theta prime, but theta prime is,"
+    },
+    {
+      "index": 169,
+      "start": 702.704,
+      "end": 704.292,
+      "duration": 1.588,
+      "text": "in real life, omega."
+    },
+    {
+      "index": 170,
+      "start": 704.292,
+      "end": 707.385,
+      "duration": 3.093,
+      "text": "And now we have our acceptable system."
+    },
+    {
+      "index": 171,
+      "start": 707.385,
+      "end": 711.814,
+      "duration": 4.429,
+      "text": "The only problem is I have not put in any numbers yet."
+    },
+    {
+      "index": 172,
+      "start": 711.814,
+      "end": 718.0,
+      "duration": 6.186,
+      "text": "The numbers I am going to put in will make it lightly damped."
+    },
+    {
+      "index": 173,
+      "start": 718.0,
+      "end": 720.739,
+      "duration": 2.739,
+      "text": "I am going to give c, think of it here,"
+    },
+    {
+      "index": 174,
+      "start": 720.739,
+      "end": 723.695,
+      "duration": 2.956,
+      "text": "this is the damping, and this is the stuff"
+    },
+    {
+      "index": 175,
+      "start": 723.695,
+      "end": 726.506,
+      "duration": 2.811,
+      "text": "representing, well, if I want to make it"
+    },
+    {
+      "index": 176,
+      "start": 726.506,
+      "end": 730.471,
+      "duration": 3.965,
+      "text": "lightly damped all I am saying is that c should be small"
+    },
+    {
+      "index": 177,
+      "start": 730.471,
+      "end": 733.787,
+      "duration": 3.316,
+      "text": "compared with k, but it doesn't have to be very"
+    },
+    {
+      "index": 178,
+      "start": 733.787,
+      "end": 736.382,
+      "duration": 2.595,
+      "text": "small. I am going to take c equal one"
+    },
+    {
+      "index": 179,
+      "start": 736.382,
+      "end": 740.491,
+      "duration": 4.109,
+      "text": "and k equal two, and that will make it"
+    },
+    {
+      "index": 180,
+      "start": 740.491,
+      "end": 743.951,
+      "duration": 3.46,
+      "text": "lightly enough damped. This is the lightly damped"
+    },
+    {
+      "index": 181,
+      "start": 743.951,
+      "end": 746.619,
+      "duration": 2.668,
+      "text": "value, values which give underdamping."
+    },
+    {
+      "index": 182,
+      "start": 746.619,
+      "end": 749.646,
+      "duration": 3.027,
+      "text": "In other words, they are going to allow the"
+    },
+    {
+      "index": 183,
+      "start": 749.646,
+      "end": 754.26,
+      "duration": 4.614,
+      "text": "pendulum to swing back and forth instead of strictly going ug and"
+    },
+    {
+      "index": 184,
+      "start": 754.26,
+      "end": 758.851,
+      "duration": 4.591,
+      "text": "ending up there. Finally, therefore,"
+    },
+    {
+      "index": 185,
+      "start": 758.851,
+      "end": 764.796,
+      "duration": 5.945,
+      "text": "the system that we are going to calculate is where theta prime"
+    },
+    {
+      "index": 186,
+      "start": 764.796,
+      "end": 770.449,
+      "duration": 5.653,
+      "text": "equals omega and omega prime equals negative two sine theta"
+    },
+    {
+      "index": 187,
+      "start": 770.449,
+      "end": 774.055,
+      "duration": 3.606,
+      "text": "minus omega."
+    },
+    {
+      "index": 188,
+      "start": 774.055,
+      "end": 777.076,
+      "duration": 3.021,
+      "text": "And now what do we do with that?"
+    },
+    {
+      "index": 189,
+      "start": 777.076,
+      "end": 781.744,
+      "duration": 4.668,
+      "text": "There is our example. That is our system that"
+    },
+    {
+      "index": 190,
+      "start": 781.744,
+      "end": 785.156,
+      "duration": 3.412,
+      "text": "represents a pendulum swinging back and forth,"
+    },
+    {
+      "index": 191,
+      "start": 785.156,
+      "end": 788.189,
+      "duration": 3.033,
+      "text": "damped away. And now let's go back to the"
+    },
+    {
+      "index": 192,
+      "start": 788.189,
+      "end": 790.54,
+      "duration": 2.351,
+      "text": "general theory. And, in general,"
+    },
+    {
+      "index": 193,
+      "start": 790.54,
+      "end": 795.09,
+      "duration": 4.55,
+      "text": "if you have a nonlinear system,"
+    },
+    {
+      "index": 194,
+      "start": 795.09,
+      "end": 796.0,
+      "duration": 0.91,
+      "text": "how do you go about analyzing it?"
+    },
+    {
+      "index": 195,
+      "start": 802.0,
+      "end": 807.133,
+      "duration": 5.133,
+      "text": "The first step is to find the simplest possible solutions,"
+    },
+    {
+      "index": 196,
+      "start": 807.133,
+      "end": 811.637,
+      "duration": 4.504,
+      "text": "solutions that you hope can be found by inspection."
+    },
+    {
+      "index": 197,
+      "start": 811.637,
+      "end": 816.23,
+      "duration": 4.593,
+      "text": "Now, what would they be? They are the solutions that"
+    },
+    {
+      "index": 198,
+      "start": 816.23,
+      "end": 820.824,
+      "duration": 4.594,
+      "text": "consist of a single point. How could a solution be a"
+    },
+    {
+      "index": 199,
+      "start": 820.824,
+      "end": 824.427,
+      "duration": 3.603,
+      "text": "single point? Well, like the origin for a"
+    },
+    {
+      "index": 200,
+      "start": 824.427,
+      "end": 827.759,
+      "duration": 3.332,
+      "text": "linear system, those points which form"
+    },
+    {
+      "index": 201,
+      "start": 827.759,
+      "end": 832.983,
+      "duration": 5.224,
+      "text": "solutions all by themselves are called the critical points."
+    },
+    {
+      "index": 202,
+      "start": 832.983,
+      "end": 837.487,
+      "duration": 4.504,
+      "text": "I am looking for the critical points of the system."
+    },
+    {
+      "index": 203,
+      "start": 837.487,
+      "end": 843.956,
+      "duration": 6.469,
+      "text": "That is the first step. The definition is a critical"
+    },
+    {
+      "index": 204,
+      "start": 843.956,
+      "end": 846.701,
+      "duration": 2.745,
+      "text": "point x zero, y zero."
+    },
+    {
+      "index": 205,
+      "start": 846.701,
+      "end": 850.608,
+      "duration": 3.907,
+      "text": "For that to be a critical point"
+    },
+    {
+      "index": 206,
+      "start": 850.608,
+      "end": 855.254,
+      "duration": 4.646,
+      "text": "means that it makes the right-hand side zero."
+    },
+    {
+      "index": 207,
+      "start": 855.254,
+      "end": 859.9,
+      "duration": 4.646,
+      "text": "The f is zero there, and the g is zero there."
+    },
+    {
+      "index": 208,
+      "start": 859.9,
+      "end": 865.602,
+      "duration": 5.702,
+      "text": "See the significance of that? If you have such a point,"
+    },
+    {
+      "index": 209,
+      "start": 865.602,
+      "end": 871.515,
+      "duration": 5.913,
+      "text": "let's say there is a critical point, what is the velocity"
+    },
+    {
+      "index": 210,
+      "start": 871.515,
+      "end": 876.575,
+      "duration": 5.06,
+      "text": "field at that point? Well, it is given by the"
+    },
+    {
+      "index": 211,
+      "start": 876.575,
+      "end": 880.449,
+      "duration": 3.874,
+      "text": "vectors on the right-hand side, but the components are zero."
+    },
+    {
+      "index": 212,
+      "start": 880.449,
+      "end": 883.929,
+      "duration": 3.48,
+      "text": "That means, at this point the velocity vector is zero."
+    },
+    {
+      "index": 213,
+      "start": 883.929,
+      "end": 886.752,
+      "duration": 2.823,
+      "text": "Well, that means if a solution starts there,"
+    },
+    {
+      "index": 214,
+      "start": 886.752,
+      "end": 889.575,
+      "duration": 2.823,
+      "text": "you put the mouse there and tell it to move,"
+    },
+    {
+      "index": 215,
+      "start": 889.575,
+      "end": 892.661,
+      "duration": 3.086,
+      "text": "where do you go? It has no reason to go anywhere"
+    },
+    {
+      "index": 216,
+      "start": 892.661,
+      "end": 895.222,
+      "duration": 2.561,
+      "text": "since the velocity vector is zero there."
+    },
+    {
+      "index": 217,
+      "start": 895.222,
+      "end": 898.767,
+      "duration": 3.545,
+      "text": "So it sits there for all time. And indeed it solves the"
+    },
+    {
+      "index": 218,
+      "start": 898.767,
+      "end": 903.375,
+      "duration": 4.608,
+      "text": "system, doesn't it? It makes the right-hand side"
+    },
+    {
+      "index": 219,
+      "start": 903.375,
+      "end": 908.381,
+      "duration": 5.006,
+      "text": "zero and it makes the left-hand side zero because x equals x"
+    },
+    {
+      "index": 220,
+      "start": 908.381,
+      "end": 912.284,
+      "duration": 3.903,
+      "text": "zero, y equals y zero for"
+    },
+    {
+      "index": 221,
+      "start": 912.284,
+      "end": 915.678,
+      "duration": 3.394,
+      "text": "all time. If that is true for all time it"
+    },
+    {
+      "index": 222,
+      "start": 915.678,
+      "end": 920.939,
+      "duration": 5.261,
+      "text": "sits there then the derivatives, with respect to time are zero,"
+    },
+    {
+      "index": 223,
+      "start": 920.939,
+      "end": 925.69,
+      "duration": 4.751,
+      "text": "so the left-hand sides are zero, the right-hand sides are"
+    },
+    {
+      "index": 224,
+      "start": 925.69,
+      "end": 932.21,
+      "duration": 6.52,
+      "text": "zero and everybody is happy. Well, these are great points."
+    },
+    {
+      "index": 225,
+      "start": 932.21,
+      "end": 937.302,
+      "duration": 5.092,
+      "text": "How do I find them? Well, by looking for points"
+    },
+    {
+      "index": 226,
+      "start": 937.302,
+      "end": 941.066,
+      "duration": 3.764,
+      "text": "that make these two functions zero."
+    },
+    {
+      "index": 227,
+      "start": 941.066,
+      "end": 946.822,
+      "duration": 5.756,
+      "text": "I find them by solving simultaneously the equations f"
+    },
+    {
+      "index": 228,
+      "start": 946.822,
+      "end": 952.911,
+      "duration": 6.089,
+      "text": "of (x, y) equals zero and g of (x, y) equals zero."
+    },
+    {
+      "index": 229,
+      "start": 955.568,
+      "end": 961.057,
+      "duration": 5.489,
+      "text": "A pair of equations. But the trouble is those are"
+    },
+    {
+      "index": 230,
+      "start": 961.057,
+      "end": 964.732,
+      "duration": 3.675,
+      "text": "not linear equations. Linear equations you know how"
+    },
+    {
+      "index": 231,
+      "start": 964.732,
+      "end": 967.893,
+      "duration": 3.161,
+      "text": "to solve, but they are not linear equations."
+    },
+    {
+      "index": 232,
+      "start": 967.893,
+      "end": 971.861,
+      "duration": 3.968,
+      "text": "They are nonlinear equations that you don't know how to"
+    },
+    {
+      "index": 233,
+      "start": 971.861,
+      "end": 973.772,
+      "duration": 1.911,
+      "text": "solve. And, to some extent,"
+    },
+    {
+      "index": 234,
+      "start": 973.772,
+      "end": 977.815,
+      "duration": 4.043,
+      "text": "nobody else does either. There are very fat books in the"
+    },
+    {
+      "index": 235,
+      "start": 977.815,
+      "end": 982.224,
+      "duration": 4.409,
+      "text": "library whose topic is how to solve just a pair of equations,"
+    },
+    {
+      "index": 236,
+      "start": 982.224,
+      "end": 985.752,
+      "duration": 3.528,
+      "text": "f of (x, y) equals zero, g of (x, y) equals zero."
+    },
+    {
+      "index": 237,
+      "start": 985.752,
+      "end": 990.089,
+      "duration": 4.337,
+      "text": "And it is quite a hard problem. It is even a hard problem by"
+    },
+    {
+      "index": 238,
+      "start": 990.089,
+      "end": 993.418,
+      "duration": 3.329,
+      "text": "computer. Because, if you know"
+    },
+    {
+      "index": 239,
+      "start": 993.418,
+      "end": 996.752,
+      "duration": 3.334,
+      "text": "approximately where the solution is going to be,"
+    },
+    {
+      "index": 240,
+      "start": 996.752,
+      "end": 1000.583,
+      "duration": 3.831,
+      "text": "you can make up the little screen and then the computer"
+    },
+    {
+      "index": 241,
+      "start": 1000.583,
+      "end": 1003.917,
+      "duration": 3.334,
+      "text": "will find it for you. Or, even without a screen,"
+    },
+    {
+      "index": 242,
+      "start": 1003.917,
+      "end": 1007.535,
+      "duration": 3.618,
+      "text": "it will calculate it by Newton's method or something"
+    },
+    {
+      "index": 243,
+      "start": 1007.535,
+      "end": 1010.16,
+      "duration": 2.625,
+      "text": "else, it will zero in. The problem is,"
+    },
+    {
+      "index": 244,
+      "start": 1010.16,
+      "end": 1014.416,
+      "duration": 4.256,
+      "text": "if you don't know in advance roughly where the critical point"
+    },
+    {
+      "index": 245,
+      "start": 1014.416,
+      "end": 1018.318,
+      "duration": 3.902,
+      "text": "is that you are looking for, there are a lot of numbers."
+    },
+    {
+      "index": 246,
+      "start": 1018.318,
+      "end": 1023.0,
+      "duration": 4.682,
+      "text": "They go to infinity that way and infinity that way."
+    },
+    {
+      "index": 247,
+      "start": 1023.0,
+      "end": 1026.587,
+      "duration": 3.587,
+      "text": "In general, it is almost an impossible problem."
+    },
+    {
+      "index": 248,
+      "start": 1026.587,
+      "end": 1031.189,
+      "duration": 4.602,
+      "text": "The only thing that makes it possible is that these problems"
+    },
+    {
+      "index": 249,
+      "start": 1031.189,
+      "end": 1035.557,
+      "duration": 4.368,
+      "text": "always come from the real world and one has some physical"
+    },
+    {
+      "index": 250,
+      "start": 1035.557,
+      "end": 1039.222,
+      "duration": 3.665,
+      "text": "feeling, one hopes, for where the critical point"
+    },
+    {
+      "index": 251,
+      "start": 1039.222,
+      "end": 1041.718,
+      "duration": 2.496,
+      "text": "is. I am going to assume breezily"
+    },
+    {
+      "index": 252,
+      "start": 1041.718,
+      "end": 1046.632,
+      "duration": 4.914,
+      "text": "and cheerily we can solve those. And I am only going to give you"
+    },
+    {
+      "index": 253,
+      "start": 1046.632,
+      "end": 1051.0,
+      "duration": 4.368,
+      "text": "examples where it is possible to solve them."
+    },
+    {
+      "index": 254,
+      "start": 1051.0,
+      "end": 1053.501,
+      "duration": 2.501,
+      "text": "But even there, you have to watch out."
+    },
+    {
+      "index": 255,
+      "start": 1053.501,
+      "end": 1057.624,
+      "duration": 4.123,
+      "text": "There is a certain trickiness that will be talked about in the"
+    },
+    {
+      "index": 256,
+      "start": 1057.624,
+      "end": 1061.072,
+      "duration": 3.448,
+      "text": "recitations tomorrow. Okay, so we found the critical"
+    },
+    {
+      "index": 257,
+      "start": 1061.072,
+      "end": 1063.438,
+      "duration": 2.366,
+      "text": "points. Let's do it for our example."
+    },
+    {
+      "index": 258,
+      "start": 1063.438,
+      "end": 1067.426,
+      "duration": 3.988,
+      "text": "Let's find the critical point. What is the pair of equations"
+    },
+    {
+      "index": 259,
+      "start": 1067.426,
+      "end": 1070.603,
+      "duration": 3.177,
+      "text": "we have to solve? We have to solve the equations"
+    },
+    {
+      "index": 260,
+      "start": 1070.603,
+      "end": 1073.578,
+      "duration": 2.975,
+      "text": "omega equals zero, minus two sine theta minus"
+    },
+    {
+      "index": 261,
+      "start": 1073.578,
+      "end": 1076.755,
+      "duration": 3.177,
+      "text": "omega equals zero."
+    },
+    {
+      "index": 262,
+      "start": 1076.755,
+      "end": 1080.0,
+      "duration": 3.245,
+      "text": "Now, it is not always this easy."
+    },
+    {
+      "index": 263,
+      "start": 1080.0,
+      "end": 1083.523,
+      "duration": 3.523,
+      "text": "But the solution is omega is zero."
+    },
+    {
+      "index": 264,
+      "start": 1083.523,
+      "end": 1087.793,
+      "duration": 4.27,
+      "text": "If omega is zero, then sine theta is zero,"
+    },
+    {
+      "index": 265,
+      "start": 1087.793,
+      "end": 1092.918,
+      "duration": 5.125,
+      "text": "and sine theta is zero at the"
+    },
+    {
+      "index": 266,
+      "start": 1092.918,
+      "end": 1098.683,
+      "duration": 5.765,
+      "text": "integral multiples of pi. The critical points are omega"
+    },
+    {
+      "index": 267,
+      "start": 1098.683,
+      "end": 1104.555,
+      "duration": 5.872,
+      "text": "is always zero and theta is zero, or it could be plus or"
+    },
+    {
+      "index": 268,
+      "start": 1104.555,
+      "end": 1110.0,
+      "duration": 5.445,
+      "text": "minus pi, plus or minus two pi and so on."
+    },
+    {
+      "index": 269,
+      "start": 1110.0,
+      "end": 1112.573,
+      "duration": 2.573,
+      "text": "In other words, there are an infinity of"
+    },
+    {
+      "index": 270,
+      "start": 1112.573,
+      "end": 1114.883,
+      "duration": 2.31,
+      "text": "critical points. That seems a little"
+    },
+    {
+      "index": 271,
+      "start": 1114.883,
+      "end": 1116.928,
+      "duration": 2.045,
+      "text": "discouraging. On the other hand,"
+    },
+    {
+      "index": 272,
+      "start": 1116.928,
+      "end": 1120.426,
+      "duration": 3.498,
+      "text": "there are really only two. There are really physically"
+    },
+    {
+      "index": 273,
+      "start": 1120.426,
+      "end": 1124.055,
+      "duration": 3.629,
+      "text": "only two because omega equals zero means the mass is not"
+    },
+    {
+      "index": 274,
+      "start": 1124.055,
+      "end": 1126.431,
+      "duration": 2.376,
+      "text": "moving. The angular velocity is zero,"
+    },
+    {
+      "index": 275,
+      "start": 1126.431,
+      "end": 1129.73,
+      "duration": 3.299,
+      "text": "so it is only the theta position which is changing."
+    },
+    {
+      "index": 276,
+      "start": 1129.73,
+      "end": 1132.502,
+      "duration": 2.772,
+      "text": "Now, what are the possible theta positions?"
+    },
+    {
+      "index": 277,
+      "start": 1132.502,
+      "end": 1136.0,
+      "duration": 3.498,
+      "text": "Well, here is our nonlinear pendulum."
+    },
+    {
+      "index": 278,
+      "start": 1136.0,
+      "end": 1139.776,
+      "duration": 3.776,
+      "text": "Here is the critical point, theta equals zero,"
+    },
+    {
+      "index": 279,
+      "start": 1139.776,
+      "end": 1143.888,
+      "duration": 4.112,
+      "text": "omega equals zero. Theta equals zero means the rod"
+    },
+    {
+      "index": 280,
+      "start": 1143.888,
+      "end": 1147.496,
+      "duration": 3.608,
+      "text": "is vertical. Omega equals zero means that it"
+    },
+    {
+      "index": 281,
+      "start": 1147.496,
+      "end": 1150.937,
+      "duration": 3.441,
+      "text": "is not moving, despite the fact that it is"
+    },
+    {
+      "index": 282,
+      "start": 1150.937,
+      "end": 1154.125,
+      "duration": 3.188,
+      "text": "moving. Theoretically it is not moving."
+    },
+    {
+      "index": 283,
+      "start": 1154.125,
+      "end": 1158.993,
+      "duration": 4.868,
+      "text": "Now, what is the other one? Well, there is theta equals pi."
+    },
+    {
+      "index": 284,
+      "start": 1158.993,
+      "end": 1161.93,
+      "duration": 2.937,
+      "text": "Theta is now, starting from zero and"
+    },
+    {
+      "index": 285,
+      "start": 1161.93,
+      "end": 1165.454,
+      "duration": 3.524,
+      "text": "increasing, I hope, through positive theta."
+    },
+    {
+      "index": 286,
+      "start": 1165.454,
+      "end": 1169.818,
+      "duration": 4.364,
+      "text": "And when it gets to pi, it is sticking straight up in"
+    },
+    {
+      "index": 287,
+      "start": 1169.818,
+      "end": 1174.245,
+      "duration": 4.427,
+      "text": "the air. And so the claim is that"
+    },
+    {
+      "index": 288,
+      "start": 1174.245,
+      "end": 1180.138,
+      "duration": 5.893,
+      "text": "another critical point is theta equals pi and omega equals zero."
+    },
+    {
+      "index": 289,
+      "start": 1180.138,
+      "end": 1184.161,
+      "duration": 4.023,
+      "text": "In other words, if it gets to this position,"
+    },
+    {
+      "index": 290,
+      "start": 1184.161,
+      "end": 1189.68,
+      "duration": 5.519,
+      "text": "it starts out in this position and stays there for all time,"
+    },
+    {
+      "index": 291,
+      "start": 1189.68,
+      "end": 1193.609,
+      "duration": 3.929,
+      "text": "as you see. [LAUGHTER] But my point is what"
+    },
+    {
+      "index": 292,
+      "start": 1193.609,
+      "end": 1197.445,
+      "duration": 3.836,
+      "text": "about negative pi? That is the same as pi."
+    },
+    {
+      "index": 293,
+      "start": 1197.445,
+      "end": 1203.803,
+      "duration": 6.358,
+      "text": "Two pi is the same as zero. So physically there really are"
+    },
+    {
+      "index": 294,
+      "start": 1203.803,
+      "end": 1208.196,
+      "duration": 4.393,
+      "text": "only two critical points, this one and that one."
+    },
+    {
+      "index": 295,
+      "start": 1208.196,
+      "end": 1213.149,
+      "duration": 4.953,
+      "text": "And they obviously have something very different about"
+    },
+    {
+      "index": 296,
+      "start": 1213.149,
+      "end": 1216.42,
+      "duration": 3.271,
+      "text": "them. This critical point is stable."
+    },
+    {
+      "index": 297,
+      "start": 1216.42,
+      "end": 1221.28,
+      "duration": 4.86,
+      "text": "If I start near there, I approach that critical point"
+    },
+    {
+      "index": 298,
+      "start": 1221.28,
+      "end": 1225.205,
+      "duration": 3.925,
+      "text": "in infinite time. This one, if I start near"
+    },
+    {
+      "index": 299,
+      "start": 1225.205,
+      "end": 1231.0,
+      "duration": 5.795,
+      "text": "there, I do not stay near there. I always leave it."
+    },
+    {
+      "index": 300,
+      "start": 1231.0,
+      "end": 1238.078,
+      "duration": 7.078,
+      "text": "Of the two critical points, physically it is clear that the"
+    },
+    {
+      "index": 301,
+      "start": 1238.078,
+      "end": 1244.303,
+      "duration": 6.225,
+      "text": "critical point is zero, zero and the other guys that"
+    },
+    {
+      "index": 302,
+      "start": 1244.303,
+      "end": 1249.062,
+      "duration": 4.759,
+      "text": "look like it, two pi zero and so on is a"
+    },
+    {
+      "index": 303,
+      "start": 1249.062,
+      "end": 1253.822,
+      "duration": 4.76,
+      "text": "stable critical point. Whereas, pi zero,"
+    },
+    {
+      "index": 304,
+      "start": 1253.822,
+      "end": 1259.314,
+      "duration": 5.492,
+      "text": "when theta is sticking straight up in the air,"
+    },
+    {
+      "index": 305,
+      "start": 1259.314,
+      "end": 1263.117,
+      "duration": 3.803,
+      "text": "is unstable. Now, of course,"
+    },
+    {
+      "index": 306,
+      "start": 1263.117,
+      "end": 1266.393,
+      "duration": 3.276,
+      "text": "we will want to see that mathematically also,"
+    },
+    {
+      "index": 307,
+      "start": 1266.393,
+      "end": 1270.042,
+      "duration": 3.649,
+      "text": "but basically there are just physically two point."
+    },
+    {
+      "index": 308,
+      "start": 1270.042,
+      "end": 1272.574,
+      "duration": 2.532,
+      "text": "There are just two critical points."
+    },
+    {
+      "index": 309,
+      "start": 1272.574,
+      "end": 1276.744,
+      "duration": 4.17,
+      "text": "Well, that raises the question what about all the others?"
+    },
+    {
+      "index": 310,
+      "start": 1276.744,
+      "end": 1279.574,
+      "duration": 2.83,
+      "text": "As you will see, we have to have those."
+    },
+    {
+      "index": 311,
+      "start": 1279.574,
+      "end": 1282.627,
+      "duration": 3.053,
+      "text": "They are an essential part of the problem."
+    },
+    {
+      "index": 312,
+      "start": 1282.627,
+      "end": 1286.946,
+      "duration": 4.319,
+      "text": "They are not just redundant baggage that is trailing along."
+    },
+    {
+      "index": 313,
+      "start": 1286.946,
+      "end": 1293.452,
+      "duration": 6.506,
+      "text": "They are really important. But you will see that when we"
+    },
+    {
+      "index": 314,
+      "start": 1293.452,
+      "end": 1300.0,
+      "duration": 6.548,
+      "text": "talk about finally how the trajectories look and how the"
+    },
+    {
+      "index": 315,
+      "start": 1300.0,
+      "end": 1303.928,
+      "duration": 3.928,
+      "text": "solutions look. Now what do we do?"
+    },
+    {
+      "index": 316,
+      "start": 1303.928,
+      "end": 1310.952,
+      "duration": 7.024,
+      "text": "Well, we found the critical points, and now the work begins."
+    },
+    {
+      "index": 317,
+      "start": 1310.952,
+      "end": 1316.071,
+      "duration": 5.119,
+      "text": "Virtually all the work is in this next step."
+    },
+    {
+      "index": 318,
+      "start": 1316.071,
+      "end": 1320.0,
+      "duration": 3.929,
+      "text": "What do we do? Step two."
+    },
+    {
+      "index": 319,
+      "start": 1320.0,
+      "end": 1325.687,
+      "duration": 5.687,
+      "text": "I can only describe it in general terms,"
+    },
+    {
+      "index": 320,
+      "start": 1325.687,
+      "end": 1333.708,
+      "duration": 8.021,
+      "text": "but here is what you do. For each critical point x zero,"
+    },
+    {
+      "index": 321,
+      "start": 1333.708,
+      "end": 1341.145,
+      "duration": 7.437,
+      "text": "y zero, a procedure that has to be done at each one,"
+    },
+    {
+      "index": 322,
+      "start": 1341.145,
+      "end": 1348.0,
+      "duration": 6.855,
+      "text": "you linearize the system near that point."
+    },
+    {
+      "index": 323,
+      "start": 1348.0,
+      "end": 1352.869,
+      "duration": 4.869,
+      "text": "In other words, you may find a linear system,"
+    },
+    {
+      "index": 324,
+      "start": 1352.869,
+      "end": 1357.075,
+      "duration": 4.206,
+      "text": "the good kind, the kind you know about,"
+    },
+    {
+      "index": 325,
+      "start": 1357.075,
+      "end": 1363.715,
+      "duration": 6.64,
+      "text": "which is a good approximation to the nonlinear system at that"
+    },
+    {
+      "index": 326,
+      "start": 1363.715,
+      "end": 1368.584,
+      "duration": 4.869,
+      "text": "critical point. Plot the trajectories of this"
+    },
+    {
+      "index": 327,
+      "start": 1368.584,
+      "end": 1373.233,
+      "duration": 4.649,
+      "text": "linearized system. And you do that near the"
+    },
+    {
+      "index": 328,
+      "start": 1373.233,
+      "end": 1376.0,
+      "duration": 2.767,
+      "text": "critical point."
+    },
+    {
+      "index": 329,
+      "start": 1384.0,
+      "end": 1385.989,
+      "duration": 1.989,
+      "text": "How do you plot the trajectories?"
+    },
+    {
+      "index": 330,
+      "start": 1385.989,
+      "end": 1389.658,
+      "duration": 3.669,
+      "text": "Well, that you knew how to do on Friday so I am assuming you"
+    },
+    {
+      "index": 331,
+      "start": 1389.658,
+      "end": 1391.709,
+      "duration": 2.051,
+      "text": "still know how to do it on Monday."
+    },
+    {
+      "index": 332,
+      "start": 1391.709,
+      "end": 1394.321,
+      "duration": 2.612,
+      "text": "In other words, if the system is linear you"
+    },
+    {
+      "index": 333,
+      "start": 1394.321,
+      "end": 1396.87,
+      "duration": 2.549,
+      "text": "know how to plot the trajectories of it by"
+    },
+    {
+      "index": 334,
+      "start": 1396.87,
+      "end": 1400.165,
+      "duration": 3.295,
+      "text": "calculating eigenvalues and eigenvectors and maybe the"
+    },
+    {
+      "index": 335,
+      "start": 1400.165,
+      "end": 1402.466,
+      "duration": 2.301,
+      "text": "direction of motion if it is a spiral."
+    },
+    {
+      "index": 336,
+      "start": 1402.466,
+      "end": 1405.948,
+      "duration": 3.482,
+      "text": "I will give you a couple of examples of that when we work"
+    },
+    {
+      "index": 337,
+      "start": 1405.948,
+      "end": 1409.635,
+      "duration": 3.687,
+      "text": "out the pendulum. But, on the other hand,"
+    },
+    {
+      "index": 338,
+      "start": 1409.635,
+      "end": 1413.688,
+      "duration": 4.053,
+      "text": "how do I line arise a system? Well, there are two methods."
+    },
+    {
+      "index": 339,
+      "start": 1413.688,
+      "end": 1417.884,
+      "duration": 4.196,
+      "text": "There is one method the book gives you, which by and large I"
+    },
+    {
+      "index": 340,
+      "start": 1417.884,
+      "end": 1421.44,
+      "duration": 3.556,
+      "text": "do not want you to use, although I will give you an"
+    },
+    {
+      "index": 341,
+      "start": 1421.44,
+      "end": 1424.497,
+      "duration": 3.057,
+      "text": "example of it now. I want you to use another"
+    },
+    {
+      "index": 342,
+      "start": 1424.497,
+      "end": 1426.773,
+      "duration": 2.276,
+      "text": "method because it is much faster."
+    },
+    {
+      "index": 343,
+      "start": 1426.773,
+      "end": 1430.684,
+      "duration": 3.911,
+      "text": "Especially if you have to handle several critical points"
+    },
+    {
+      "index": 344,
+      "start": 1430.684,
+      "end": 1434.453,
+      "duration": 3.769,
+      "text": "it is much, much faster. Let's first carry this out on"
+    },
+    {
+      "index": 345,
+      "start": 1434.453,
+      "end": 1437.582,
+      "duration": 3.129,
+      "text": "an easy case, and then I will show you how to"
+    },
+    {
+      "index": 346,
+      "start": 1437.582,
+      "end": 1442.766,
+      "duration": 5.184,
+      "text": "do it in general. Just this once I will use the"
+    },
+    {
+      "index": 347,
+      "start": 1442.766,
+      "end": 1448.203,
+      "duration": 5.437,
+      "text": "book's method because I think it is the method which would"
+    },
+    {
+      "index": 348,
+      "start": 1448.203,
+      "end": 1453.355,
+      "duration": 5.152,
+      "text": "naturally occur to you. Let's linearize this example at"
+    },
+    {
+      "index": 349,
+      "start": 1453.355,
+      "end": 1455.263,
+      "duration": 1.908,
+      "text": "the point zero, zero."
+    },
+    {
+      "index": 350,
+      "start": 1455.263,
+      "end": 1458.697,
+      "duration": 3.434,
+      "text": "What should be the linearized system?"
+    },
+    {
+      "index": 351,
+      "start": 1458.697,
+      "end": 1463.085,
+      "duration": 4.388,
+      "text": "In other words, it's only the nonlinear terms I"
+    },
+    {
+      "index": 352,
+      "start": 1463.085,
+      "end": 1469.0,
+      "duration": 5.915,
+      "text": "have to worry about. Well, the minus omega is fine."
+    },
+    {
+      "index": 353,
+      "start": 1469.0,
+      "end": 1473.833,
+      "duration": 4.833,
+      "text": "It is that stupid sine theta that I don't like."
+    },
+    {
+      "index": 354,
+      "start": 1473.833,
+      "end": 1477.722,
+      "duration": 3.889,
+      "text": "But if theta is small, in other words,"
+    },
+    {
+      "index": 355,
+      "start": 1477.722,
+      "end": 1482.871,
+      "duration": 5.149,
+      "text": "if I stay near zero, I could replace sine theta by"
+    },
+    {
+      "index": 356,
+      "start": 1482.871,
+      "end": 1486.654,
+      "duration": 3.783,
+      "text": "theta. The linearized system is minus"
+    },
+    {
+      "index": 357,
+      "start": 1486.654,
+      "end": 1489.701,
+      "duration": 3.047,
+      "text": "two. You replace sine theta by"
+    },
+    {
+      "index": 358,
+      "start": 1489.701,
+      "end": 1495.691,
+      "duration": 5.99,
+      "text": "theta, since sine theta is approximately theta if theta is"
+    },
+    {
+      "index": 359,
+      "start": 1495.691,
+      "end": 1502.114,
+      "duration": 6.423,
+      "text": "small, if theta is near zero. It is the first term of its"
+    },
+    {
+      "index": 360,
+      "start": 1502.114,
+      "end": 1506.344,
+      "duration": 4.23,
+      "text": "Taylor series you can think of, or it's just the linear"
+    },
+    {
+      "index": 361,
+      "start": 1506.344,
+      "end": 1510.104,
+      "duration": 3.76,
+      "text": "approximation starts out sine theta equals theta."
+    },
+    {
+      "index": 362,
+      "start": 1510.104,
+      "end": 1512.767,
+      "duration": 2.663,
+      "text": "That is it. Or, you draw a picture."
+    },
+    {
+      "index": 363,
+      "start": 1512.767,
+      "end": 1516.214,
+      "duration": 3.447,
+      "text": "I don't know. There are a millions of ways to"
+    },
+    {
+      "index": 364,
+      "start": 1516.214,
+      "end": 1517.78,
+      "duration": 1.566,
+      "text": "do it. So we have it."
+    },
+    {
+      "index": 365,
+      "start": 1517.78,
+      "end": 1521.305,
+      "duration": 3.525,
+      "text": "Now what do I do? Okay, now we will plot that."
+    },
+    {
+      "index": 366,
+      "start": 1521.305,
+      "end": 1525.613,
+      "duration": 4.308,
+      "text": "The matrix, let's do our little routine, in other words."
+    },
+    {
+      "index": 367,
+      "start": 1525.613,
+      "end": 1530.0,
+      "duration": 4.387,
+      "text": "I am writing right to left for no reason."
+    },
+    {
+      "index": 368,
+      "start": 1530.0,
+      "end": 1534.408,
+      "duration": 4.408,
+      "text": "The matrix is, now I am just going to make"
+    },
+    {
+      "index": 369,
+      "start": 1534.408,
+      "end": 1539.247,
+      "duration": 4.839,
+      "text": "marks on a board the way you did on your exam,"
+    },
+    {
+      "index": 370,
+      "start": 1539.247,
+      "end": 1543.548,
+      "duration": 4.301,
+      "text": "zero, one. [LAUGHTER] I don't know what I"
+    },
+    {
+      "index": 371,
+      "start": 1543.548,
+      "end": 1547.419,
+      "duration": 3.871,
+      "text": "am doing, but you know. Negative two,"
+    },
+    {
+      "index": 372,
+      "start": 1547.419,
+      "end": 1551.505,
+      "duration": 4.086,
+      "text": "negative one, and then I write down the"
+    },
+    {
+      "index": 373,
+      "start": 1551.505,
+      "end": 1555.591,
+      "duration": 4.086,
+      "text": "eigen-whatchamacallits. Lambda squared,"
+    },
+    {
+      "index": 374,
+      "start": 1555.591,
+      "end": 1560.0,
+      "duration": 4.409,
+      "text": "plus lambda, minus the trace."
+    },
+    {
+      "index": 375,
+      "start": 1560.0,
+      "end": 1565.389,
+      "duration": 5.389,
+      "text": "The determinant is minus, minus two, so it is plus two"
+    },
+    {
+      "index": 376,
+      "start": 1565.389,
+      "end": 1569.254,
+      "duration": 3.865,
+      "text": "equals zero. And then, since it doesn't"
+    },
+    {
+      "index": 377,
+      "start": 1569.254,
+      "end": 1574.847,
+      "duration": 5.593,
+      "text": "occur to me how to factor this, I will use the quadratic"
+    },
+    {
+      "index": 378,
+      "start": 1574.847,
+      "end": 1578.305,
+      "duration": 3.458,
+      "text": "formula. It is negative one plus or"
+    },
+    {
+      "index": 379,
+      "start": 1578.305,
+      "end": 1582.881,
+      "duration": 4.576,
+      "text": "minus the square root of, b squared minus 4ac,"
+    },
+    {
+      "index": 380,
+      "start": 1582.881,
+      "end": 1584.915,
+      "duration": 2.034,
+      "text": "minus seven. Complex."
+    },
+    {
+      "index": 381,
+      "start": 1584.915,
+      "end": 1590.0,
+      "duration": 5.085,
+      "text": "That means it is going to be a spiral."
+    },
+    {
+      "index": 382,
+      "start": 1590.0,
+      "end": 1594.653,
+      "duration": 4.653,
+      "text": "I am going to get a spiral. Will it be a source or a sink"
+    },
+    {
+      "index": 383,
+      "start": 1594.653,
+      "end": 1599.224,
+      "duration": 4.571,
+      "text": "since they are complex roots? Complex eigenvalues give a"
+    },
+    {
+      "index": 384,
+      "start": 1599.224,
+      "end": 1601.385,
+      "duration": 2.161,
+      "text": "spiral. A source or a sink?"
+    },
+    {
+      "index": 385,
+      "start": 1601.385,
+      "end": 1604.875,
+      "duration": 3.49,
+      "text": "I tell that from the sine of the real part."
+    },
+    {
+      "index": 386,
+      "start": 1604.875,
+      "end": 1607.7,
+      "duration": 2.825,
+      "text": "The real part is negative one-half."
+    },
+    {
+      "index": 387,
+      "start": 1607.7,
+      "end": 1612.52,
+      "duration": 4.82,
+      "text": "Therefore, the amplitude is shrinking like e to the minus t"
+    },
+    {
+      "index": 388,
+      "start": 1612.52,
+      "end": 1615.761,
+      "duration": 3.241,
+      "text": "over two. And, therefore,"
+    },
+    {
+      "index": 389,
+      "start": 1615.761,
+      "end": 1620.0,
+      "duration": 4.239,
+      "text": "the spiral is coming into the origin."
+    },
+    {
+      "index": 390,
+      "start": 1620.0,
+      "end": 1625.931,
+      "duration": 5.931,
+      "text": "It is a spiral sink since lambda equals minus one-half"
+    },
+    {
+      "index": 391,
+      "start": 1625.931,
+      "end": 1630.072,
+      "duration": 4.141,
+      "text": "plus some number times i. Spiral sink."
+    },
+    {
+      "index": 392,
+      "start": 1630.072,
+      "end": 1635.779,
+      "duration": 5.707,
+      "text": "And the other thing to determine is its direction of"
+    },
+    {
+      "index": 393,
+      "start": 1635.779,
+      "end": 1641.935,
+      "duration": 6.156,
+      "text": "motion, which will be what? I determine its direction of"
+    },
+    {
+      "index": 394,
+      "start": 1641.935,
+      "end": 1648.649,
+      "duration": 6.714,
+      "text": "motion by putting in a single vector from the velocity field."
+    },
+    {
+      "index": 395,
+      "start": 1648.649,
+      "end": 1652.285,
+      "duration": 3.636,
+      "text": "Here it is. The vector at one,"
+    },
+    {
+      "index": 396,
+      "start": 1652.285,
+      "end": 1656.428,
+      "duration": 4.143,
+      "text": "zero will be the same as the first column of the"
+    },
+    {
+      "index": 397,
+      "start": 1656.428,
+      "end": 1658.071,
+      "duration": 1.643,
+      "text": "matrix. So that is zero,"
+    },
+    {
+      "index": 398,
+      "start": 1658.071,
+      "end": 1659.785,
+      "duration": 1.714,
+      "text": "negative two."
+    },
+    {
+      "index": 399,
+      "start": 1659.785,
+      "end": 1662.642,
+      "duration": 2.857,
+      "text": "Here is a vector from the velocity field,"
+    },
+    {
+      "index": 400,
+      "start": 1662.642,
+      "end": 1666.857,
+      "duration": 4.215,
+      "text": "and that shows that the motion is clockwise and is spiraling"
+    },
+    {
+      "index": 401,
+      "start": 1666.857,
+      "end": 1669.285,
+      "duration": 2.428,
+      "text": "into the origin. That is a picture,"
+    },
+    {
+      "index": 402,
+      "start": 1669.285,
+      "end": 1672.285,
+      "duration": 3.0,
+      "text": "therefore, at the origin of how that looks."
+    },
+    {
+      "index": 403,
+      "start": 1672.285,
+      "end": 1675.357,
+      "duration": 3.072,
+      "text": "Now, it is of the utmost importance for your"
+    },
+    {
+      "index": 404,
+      "start": 1675.357,
+      "end": 1679.5,
+      "duration": 4.143,
+      "text": "understanding of what comes now that you understand in what"
+    },
+    {
+      "index": 405,
+      "start": 1679.5,
+      "end": 1683.857,
+      "duration": 4.357,
+      "text": "sense this picture corresponds to the physical behavior of the"
+    },
+    {
+      "index": 406,
+      "start": 1683.857,
+      "end": 1688.58,
+      "duration": 4.723,
+      "text": "pendulum. Let's start it over here."
+    },
+    {
+      "index": 407,
+      "start": 1688.58,
+      "end": 1693.327,
+      "duration": 4.747,
+      "text": "What is it doing? That means that theta is some"
+    },
+    {
+      "index": 408,
+      "start": 1693.327,
+      "end": 1696.217,
+      "duration": 2.89,
+      "text": "number like one, for example."
+    },
+    {
+      "index": 409,
+      "start": 1696.217,
+      "end": 1700.861,
+      "duration": 4.644,
+      "text": "Let's make it smaller. Let's say a little bit."
+    },
+    {
+      "index": 410,
+      "start": 1700.861,
+      "end": 1706.64,
+      "duration": 5.779,
+      "text": "And this is the omega access. If it starts over here that"
+    },
+    {
+      "index": 411,
+      "start": 1706.64,
+      "end": 1712.213,
+      "duration": 5.573,
+      "text": "means the angular velocity is zero and theta is a small"
+    },
+    {
+      "index": 412,
+      "start": 1712.213,
+      "end": 1717.327,
+      "duration": 5.114,
+      "text": "positive number. Theta is a small positive"
+    },
+    {
+      "index": 413,
+      "start": 1717.327,
+      "end": 1720.679,
+      "duration": 3.352,
+      "text": "number. The angular velocity is zero."
+    },
+    {
+      "index": 414,
+      "start": 1720.679,
+      "end": 1724.775,
+      "duration": 4.096,
+      "text": "It's velocity zero, theta small and positive."
+    },
+    {
+      "index": 415,
+      "start": 1724.775,
+      "end": 1730.362,
+      "duration": 5.587,
+      "text": "I release it and it does that. What does this have to do with"
+    },
+    {
+      "index": 416,
+      "start": 1730.362,
+      "end": 1734.086,
+      "duration": 3.724,
+      "text": "the spiral? Well, the spiral is exactly a"
+    },
+    {
+      "index": 417,
+      "start": 1734.086,
+      "end": 1737.344,
+      "duration": 3.258,
+      "text": "mathematical picture of this motion."
+    },
+    {
+      "index": 418,
+      "start": 1737.344,
+      "end": 1742.0,
+      "duration": 4.656,
+      "text": "What happens? Theta starts to decrease."
+    },
+    {
+      "index": 419,
+      "start": 1742.0,
+      "end": 1746.256,
+      "duration": 4.256,
+      "text": "And the angular velocity increases but in the negative"
+    },
+    {
+      "index": 420,
+      "start": 1746.256,
+      "end": 1748.987,
+      "duration": 2.731,
+      "text": "direction. This is negative angular"
+    },
+    {
+      "index": 421,
+      "start": 1748.987,
+      "end": 1751.316,
+      "duration": 2.329,
+      "text": "velocity. Theta is decreasing."
+    },
+    {
+      "index": 422,
+      "start": 1751.316,
+      "end": 1754.769,
+      "duration": 3.453,
+      "text": "The angular velocity gets bigger and bigger."
+    },
+    {
+      "index": 423,
+      "start": 1754.769,
+      "end": 1758.383,
+      "duration": 3.614,
+      "text": "And it is biggest, most negative when theta is"
+    },
+    {
+      "index": 424,
+      "start": 1758.383,
+      "end": 1760.953,
+      "duration": 2.57,
+      "text": "zero. It has reached the vertical"
+    },
+    {
+      "index": 425,
+      "start": 1760.953,
+      "end": 1764.808,
+      "duration": 3.855,
+      "text": "position is when the angular velocity is biggest."
+    },
+    {
+      "index": 426,
+      "start": 1764.808,
+      "end": 1767.86,
+      "duration": 3.052,
+      "text": "It continues then. Theta gets negative,"
+    },
+    {
+      "index": 427,
+      "start": 1767.86,
+      "end": 1773.0,
+      "duration": 5.14,
+      "text": "but the angular velocity then decreases to zero."
+    },
+    {
+      "index": 428,
+      "start": 1777.0,
+      "end": 1781.319,
+      "duration": 4.319,
+      "text": "Now the angular velocity is zero and theta is at its most"
+    },
+    {
+      "index": 429,
+      "start": 1781.319,
+      "end": 1786.024,
+      "duration": 4.705,
+      "text": "negative, and then it reverses. Angular velocity gets positive"
+    },
+    {
+      "index": 430,
+      "start": 1786.024,
+      "end": 1788.724,
+      "duration": 2.7,
+      "text": "as theta increases again, and so on."
+    },
+    {
+      "index": 431,
+      "start": 1788.724,
+      "end": 1792.735,
+      "duration": 4.011,
+      "text": "These represent the successive swings back and forth."
+    },
+    {
+      "index": 432,
+      "start": 1792.735,
+      "end": 1797.132,
+      "duration": 4.397,
+      "text": "Notice the fact that it is damped is reflected in the fact"
+    },
+    {
+      "index": 433,
+      "start": 1797.132,
+      "end": 1801.528,
+      "duration": 4.396,
+      "text": "that each successive swing, the biggest that theta gets is"
+    },
+    {
+      "index": 434,
+      "start": 1801.528,
+      "end": 1805.0,
+      "duration": 3.472,
+      "text": "a little less than it was before."
+    },
+    {
+      "index": 435,
+      "start": 1805.0,
+      "end": 1808.169,
+      "duration": 3.169,
+      "text": "In other words, this point is not quite as far"
+    },
+    {
+      "index": 436,
+      "start": 1808.169,
+      "end": 1811.338,
+      "duration": 3.169,
+      "text": "out as that one. And this one isn't as far out"
+    },
+    {
+      "index": 437,
+      "start": 1811.338,
+      "end": 1813.239,
+      "duration": 1.901,
+      "text": "as that one. In other words,"
+    },
+    {
+      "index": 438,
+      "start": 1813.239,
+      "end": 1815.0,
+      "duration": 1.761,
+      "text": "it is spiraling in."
+    },
+    {
+      "index": 439,
+      "start": 1820.0,
+      "end": 1826.525,
+      "duration": 6.525,
+      "text": "Well, I hope that is clear because we now have to go to the"
+    },
+    {
+      "index": 440,
+      "start": 1826.525,
+      "end": 1831.311,
+      "duration": 4.786,
+      "text": "next critical point. And now we have a little"
+    },
+    {
+      "index": 441,
+      "start": 1831.311,
+      "end": 1834.393,
+      "duration": 3.082,
+      "text": "problem. If I want to do the next"
+    },
+    {
+      "index": 442,
+      "start": 1834.393,
+      "end": 1838.535,
+      "duration": 4.142,
+      "text": "critical point, so what I want to do now is,"
+    },
+    {
+      "index": 443,
+      "start": 1838.535,
+      "end": 1842.484,
+      "duration": 3.949,
+      "text": "in other words, I want to linearize at the"
+    },
+    {
+      "index": 444,
+      "start": 1842.484,
+      "end": 1848.456,
+      "duration": 5.972,
+      "text": "point pi zero where theta is pi and the thing is sticking up in"
+    },
+    {
+      "index": 445,
+      "start": 1848.456,
+      "end": 1850.767,
+      "duration": 2.311,
+      "text": "the air. The question is,"
+    },
+    {
+      "index": 446,
+      "start": 1850.767,
+      "end": 1855.968,
+      "duration": 5.201,
+      "text": "how am I going to do that? This trick of replacing sine"
+    },
+    {
+      "index": 447,
+      "start": 1855.968,
+      "end": 1859.725,
+      "duration": 3.757,
+      "text": "theta by theta, that doesn't work at pi."
+    },
+    {
+      "index": 448,
+      "start": 1859.725,
+      "end": 1863.0,
+      "duration": 3.275,
+      "text": "That works at zero."
+    },
+    {
+      "index": 449,
+      "start": 1868.0,
+      "end": 1871.282,
+      "duration": 3.282,
+      "text": "Now we have to go to the next step of the method."
+    },
+    {
+      "index": 450,
+      "start": 1871.282,
+      "end": 1874.7,
+      "duration": 3.418,
+      "text": "The way to do this, in general, as you will read in"
+    },
+    {
+      "index": 451,
+      "start": 1874.7,
+      "end": 1877.846,
+      "duration": 3.146,
+      "text": "the notes because, as I say, this is not in the"
+    },
+    {
+      "index": 452,
+      "start": 1877.846,
+      "end": 1880.17,
+      "duration": 2.324,
+      "text": "book, is to calculate the Jacobian."
+    },
+    {
+      "index": 453,
+      "start": 1880.17,
+      "end": 1883.316,
+      "duration": 3.146,
+      "text": "I mean the Jacobian matrix. The Jacobian is the"
+    },
+    {
+      "index": 454,
+      "start": 1883.316,
+      "end": 1886.188,
+      "duration": 2.872,
+      "text": "determinant. I mean, before you put the two"
+    },
+    {
+      "index": 455,
+      "start": 1886.188,
+      "end": 1889.675,
+      "duration": 3.487,
+      "text": "bars down and made a determinant, you called it just"
+    },
+    {
+      "index": 456,
+      "start": 1889.675,
+      "end": 1894.33,
+      "duration": 4.655,
+      "text": "the Jacobian matrix. And the formula for it is,"
+    },
+    {
+      "index": 457,
+      "start": 1894.33,
+      "end": 1899.707,
+      "duration": 5.377,
+      "text": "it is calculated from f and g. The top line is the partial of"
+    },
+    {
+      "index": 458,
+      "start": 1899.707,
+      "end": 1904.367,
+      "duration": 4.66,
+      "text": "f with respect to x and y, and the bottom line is the"
+    },
+    {
+      "index": 459,
+      "start": 1904.367,
+      "end": 1907.594,
+      "duration": 3.227,
+      "text": "partial of g with respect to x and y."
+    },
+    {
+      "index": 460,
+      "start": 1907.594,
+      "end": 1911.0,
+      "duration": 3.406,
+      "text": "So that is the Jacobian matrix."
+    },
+    {
+      "index": 461,
+      "start": 1917.0,
+      "end": 1922.378,
+      "duration": 5.378,
+      "text": "I hope I get a chance at the end of the period to explain to"
+    },
+    {
+      "index": 462,
+      "start": 1922.378,
+      "end": 1927.757,
+      "duration": 5.379,
+      "text": "you why, but I am most anxious right now to at least get you"
+    },
+    {
+      "index": 463,
+      "start": 1927.757,
+      "end": 1931.495,
+      "duration": 3.738,
+      "text": "familiar with the algorithm, how to do it."
+    },
+    {
+      "index": 464,
+      "start": 1931.495,
+      "end": 1937.148,
+      "duration": 5.653,
+      "text": "The notes describe the y of it, if we don't get a chance to get"
+    },
+    {
+      "index": 465,
+      "start": 1937.148,
+      "end": 1940.886,
+      "duration": 3.738,
+      "text": "to it, but I hope we will. What do you do?"
+    },
+    {
+      "index": 466,
+      "start": 1940.886,
+      "end": 1945.535,
+      "duration": 4.649,
+      "text": "The Jacobian matrix. You calculate it at the point x"
+    },
+    {
+      "index": 467,
+      "start": 1945.535,
+      "end": 1949.0,
+      "duration": 3.465,
+      "text": "zero, y zero."
+    },
+    {
+      "index": 468,
+      "start": 1949.0,
+      "end": 1952.615,
+      "duration": 3.615,
+      "text": "I will indicate that by putting a subscript zero on it."
+    },
+    {
+      "index": 469,
+      "start": 1952.615,
+      "end": 1955.695,
+      "duration": 3.08,
+      "text": "This means without the subscript zero it is the"
+    },
+    {
+      "index": 470,
+      "start": 1955.695,
+      "end": 1959.11,
+      "duration": 3.415,
+      "text": "Jacobian matrix calculated out of those four partial"
+    },
+    {
+      "index": 471,
+      "start": 1959.11,
+      "end": 1961.788,
+      "duration": 2.678,
+      "text": "derivatives. When I put a subscript zero,"
+    },
+    {
+      "index": 472,
+      "start": 1961.788,
+      "end": 1965.604,
+      "duration": 3.816,
+      "text": "I mean I evaluated it at the critical point by plugging in"
+    },
+    {
+      "index": 473,
+      "start": 1965.604,
+      "end": 1967.948,
+      "duration": 2.344,
+      "text": "each entry as a function of x and y."
+    },
+    {
+      "index": 474,
+      "start": 1967.948,
+      "end": 1972.099,
+      "duration": 4.151,
+      "text": "You plug in for x equals x zero, y equals y zero,"
+    },
+    {
+      "index": 475,
+      "start": 1972.099,
+      "end": 1974.643,
+      "duration": 2.544,
+      "text": "and you get a numerical matrix."
+    },
+    {
+      "index": 476,
+      "start": 1974.643,
+      "end": 1980.0,
+      "duration": 5.357,
+      "text": "That is the matrix which is the matrix of the linearized system."
+    },
+    {
+      "index": 477,
+      "start": 1980.0,
+      "end": 1983.0,
+      "duration": 3.0,
+      "text": "This is the matrix of the linearized system."
+    },
+    {
+      "index": 478,
+      "start": 1988.0,
+      "end": 1991.496,
+      "duration": 3.496,
+      "text": "Trust me, it is. Now, since I don't expect you"
+    },
+    {
+      "index": 479,
+      "start": 1991.496,
+      "end": 1996.391,
+      "duration": 4.895,
+      "text": "to trust me, let's calculate it. Here, we got the matrix another"
+    },
+    {
+      "index": 480,
+      "start": 1996.391,
+      "end": 2001.364,
+      "duration": 4.973,
+      "text": "way, by this procedure of saying sine theta is theta-- What would"
+    },
+    {
+      "index": 481,
+      "start": 2001.364,
+      "end": 2005.793,
+      "duration": 4.429,
+      "text": "we have gotten if we had done it instead by the linearized"
+    },
+    {
+      "index": 482,
+      "start": 2005.793,
+      "end": 2007.969,
+      "duration": 2.176,
+      "text": "system? Let's do it that way."
+    },
+    {
+      "index": 483,
+      "start": 2007.969,
+      "end": 2011.0,
+      "duration": 3.031,
+      "text": "Let's do it via the Jacobian."
+    },
+    {
+      "index": 484,
+      "start": 2017.0,
+      "end": 2023.0,
+      "duration": 6.0,
+      "text": "I need to know the Jacobian of the system, which I have"
+    },
+    {
+      "index": 485,
+      "start": 2023.0,
+      "end": 2027.888,
+      "duration": 4.888,
+      "text": "conveniently covered up. There is the system."
+    },
+    {
+      "index": 486,
+      "start": 2027.888,
+      "end": 2032.444,
+      "duration": 4.556,
+      "text": "The Jacobian matrix is what? The top line,"
+    },
+    {
+      "index": 487,
+      "start": 2032.444,
+      "end": 2039.0,
+      "duration": 6.556,
+      "text": "I take the partial derivative of omega first with respect to"
+    },
+    {
+      "index": 488,
+      "start": 2039.0,
+      "end": 2044.0,
+      "duration": 5.0,
+      "text": "theta and then with respect to omega."
+    },
+    {
+      "index": 489,
+      "start": 2044.0,
+      "end": 2048.318,
+      "duration": 4.318,
+      "text": "I then take the second line on the right-hand side."
+    },
+    {
+      "index": 490,
+      "start": 2048.318,
+      "end": 2052.292,
+      "duration": 3.974,
+      "text": "I take its partial with respect to theta first."
+    },
+    {
+      "index": 491,
+      "start": 2052.292,
+      "end": 2056.697,
+      "duration": 4.405,
+      "text": "That is negative two cosine theta."
+    },
+    {
+      "index": 492,
+      "start": 2056.697,
+      "end": 2060.757,
+      "duration": 4.06,
+      "text": "And, thinking ahead, I erase the one and move it"
+    },
+    {
+      "index": 493,
+      "start": 2060.757,
+      "end": 2064.99,
+      "duration": 4.233,
+      "text": "over a little bit. And what is the partial of that"
+    },
+    {
+      "index": 494,
+      "start": 2064.99,
+      "end": 2070.0,
+      "duration": 5.01,
+      "text": "thing with respect to omega? It is negative one."
+    },
+    {
+      "index": 495,
+      "start": 2070.0,
+      "end": 2075.322,
+      "duration": 5.322,
+      "text": "Does everyone see how I calculated that Jacobian matrix?"
+    },
+    {
+      "index": 496,
+      "start": 2075.322,
+      "end": 2080.935,
+      "duration": 5.613,
+      "text": "And now I want to evaluate it. Let's do our old case first."
+    },
+    {
+      "index": 497,
+      "start": 2080.935,
+      "end": 2085.193,
+      "duration": 4.258,
+      "text": "At zero, zero what would this have"
+    },
+    {
+      "index": 498,
+      "start": 2085.193,
+      "end": 2089.258,
+      "duration": 4.065,
+      "text": "amounted to? This would have given me zero,"
+    },
+    {
+      "index": 499,
+      "start": 2089.258,
+      "end": 2092.548,
+      "duration": 3.29,
+      "text": "one. The cosine of theta at zero is"
+    },
+    {
+      "index": 500,
+      "start": 2092.548,
+      "end": 2096.612,
+      "duration": 4.064,
+      "text": "one, so this is negative two, negative one."
+    },
+    {
+      "index": 501,
+      "start": 2096.612,
+      "end": 2100.0,
+      "duration": 3.388,
+      "text": "I'm screwed. [LAUGHTER]"
+    },
+    {
+      "index": 502,
+      "start": 2100.0,
+      "end": 2104.166,
+      "duration": 4.166,
+      "text": "That is the same as that. Now you see it,"
+    },
+    {
+      "index": 503,
+      "start": 2104.166,
+      "end": 2108.437,
+      "duration": 4.271,
+      "text": "now you don't. We got our old answer back."
+    },
+    {
+      "index": 504,
+      "start": 2108.437,
+      "end": 2114.375,
+      "duration": 5.938,
+      "text": "That should give us enough confidence to use it in the new"
+    },
+    {
+      "index": 505,
+      "start": 2114.375,
+      "end": 2120.312,
+      "duration": 5.937,
+      "text": "case, where I don't have an old answer to compare it with."
+    },
+    {
+      "index": 506,
+      "start": 2120.312,
+      "end": 2123.854,
+      "duration": 3.542,
+      "text": "What is it going to be at pi, zero?"
+    },
+    {
+      "index": 507,
+      "start": 2123.854,
+      "end": 2130.0,
+      "duration": 6.146,
+      "text": "The answer is J zero is now going to be --"
+    },
+    {
+      "index": 508,
+      "start": 2130.0,
+      "end": 2134.818,
+      "duration": 4.818,
+      "text": "Well, everything is the same. Zero, one, negative one."
+    },
+    {
+      "index": 509,
+      "start": 2134.818,
+      "end": 2138.181,
+      "duration": 3.363,
+      "text": "And here cosine of pi is negative one,"
+    },
+    {
+      "index": 510,
+      "start": 2138.181,
+      "end": 2141.909,
+      "duration": 3.728,
+      "text": "so negative two times negative one is two."
+    },
+    {
+      "index": 511,
+      "start": 2141.909,
+      "end": 2146.818,
+      "duration": 4.909,
+      "text": "Everything is the same, except there is a two there now"
+    },
+    {
+      "index": 512,
+      "start": 2146.818,
+      "end": 2151.454,
+      "duration": 4.636,
+      "text": "instead of negative two. Lambda squared plus lambda,"
+    },
+    {
+      "index": 513,
+      "start": 2151.454,
+      "end": 2154.727,
+      "duration": 3.273,
+      "text": "the determinant, is now negative two."
+    },
+    {
+      "index": 514,
+      "start": 2154.727,
+      "end": 2160.09,
+      "duration": 5.363,
+      "text": "And this factors into lambda plus two times"
+    },
+    {
+      "index": 515,
+      "start": 2160.09,
+      "end": 2164.0,
+      "duration": 3.91,
+      "text": "lambda minus one."
+    },
+    {
+      "index": 516,
+      "start": 2168.0,
+      "end": 2172.807,
+      "duration": 4.807,
+      "text": "So lambda equals one. The corresponding eigenvector."
+    },
+    {
+      "index": 517,
+      "start": 2172.807,
+      "end": 2177.237,
+      "duration": 4.43,
+      "text": "I subtract one here, so the equation is minus a1"
+    },
+    {
+      "index": 518,
+      "start": 2177.237,
+      "end": 2180.254,
+      "duration": 3.017,
+      "text": "plus a2 is zero."
+    },
+    {
+      "index": 519,
+      "start": 2180.254,
+      "end": 2184.59,
+      "duration": 4.336,
+      "text": "The solution is one, one, e to the t."
+    },
+    {
+      "index": 520,
+      "start": 2184.59,
+      "end": 2188.831,
+      "duration": 4.241,
+      "text": "And for the other one, it's lambda is equal to"
+    },
+    {
+      "index": 521,
+      "start": 2188.831,
+      "end": 2193.512,
+      "duration": 4.681,
+      "text": "negative two. This is the sort of stuff you"
+    },
+    {
+      "index": 522,
+      "start": 2193.512,
+      "end": 2198.797,
+      "duration": 5.285,
+      "text": "can do, so I am doing it fast. Zero minus negative two is two."
+    },
+    {
+      "index": 523,
+      "start": 2198.797,
+      "end": 2203.909,
+      "duration": 5.112,
+      "text": "So the equation is 2a1 plus a2 equals zero."
+    },
+    {
+      "index": 524,
+      "start": 2203.909,
+      "end": 2208.068,
+      "duration": 4.159,
+      "text": "And the solution is now, I give a1 the value one,"
+    },
+    {
+      "index": 525,
+      "start": 2208.068,
+      "end": 2212.4,
+      "duration": 4.332,
+      "text": "a2 will be negative two, and that is times e to the"
+    },
+    {
+      "index": 526,
+      "start": 2212.4,
+      "end": 2215.0,
+      "duration": 2.6,
+      "text": "minus 2t."
+    },
+    {
+      "index": 527,
+      "start": 2220.0,
+      "end": 2225.589,
+      "duration": 5.589,
+      "text": "Well, what does the thing then actually look like?"
+    },
+    {
+      "index": 528,
+      "start": 2225.589,
+      "end": 2231.634,
+      "duration": 6.045,
+      "text": "What I am now going to do is, I drew a picture before,"
+    },
+    {
+      "index": 529,
+      "start": 2231.634,
+      "end": 2237.68,
+      "duration": 6.046,
+      "text": "that spiral picture we had before of the way the thing"
+    },
+    {
+      "index": 530,
+      "start": 2237.68,
+      "end": 2242.357,
+      "duration": 4.677,
+      "text": "looked at the point zero, zero."
+    },
+    {
+      "index": 531,
+      "start": 2242.357,
+      "end": 2247.718,
+      "duration": 5.361,
+      "text": "So at the point pi, zero how does it"
+    },
+    {
+      "index": 532,
+      "start": 2247.718,
+      "end": 2252.939,
+      "duration": 5.221,
+      "text": "look, now? Well, it looks like the origin,"
+    },
+    {
+      "index": 533,
+      "start": 2252.939,
+      "end": 2257.301,
+      "duration": 4.362,
+      "text": "but I am thinking of it really as the point pi,"
+    },
+    {
+      "index": 534,
+      "start": 2257.301,
+      "end": 2259.198,
+      "duration": 1.897,
+      "text": "zero. In other words,"
+    },
+    {
+      "index": 535,
+      "start": 2259.198,
+      "end": 2264.318,
+      "duration": 5.12,
+      "text": "I am thinking of a linear variable change sliding along"
+    },
+    {
+      "index": 536,
+      "start": 2264.318,
+      "end": 2270.103,
+      "duration": 5.785,
+      "text": "the axis so that the point pi, zero now looks like"
+    },
+    {
+      "index": 537,
+      "start": 2270.103,
+      "end": 2273.706,
+      "duration": 3.603,
+      "text": "the origin. If I do that then those two"
+    },
+    {
+      "index": 538,
+      "start": 2273.706,
+      "end": 2276.836,
+      "duration": 3.13,
+      "text": "basic solutions, there is the one,"
+    },
+    {
+      "index": 539,
+      "start": 2276.836,
+      "end": 2283.0,
+      "duration": 6.164,
+      "text": "one solution which is going out that way."
+    },
+    {
+      "index": 540,
+      "start": 2283.0,
+      "end": 2287.126,
+      "duration": 4.126,
+      "text": "And it is going out this way. But the other guy is coming in"
+    },
+    {
+      "index": 541,
+      "start": 2287.126,
+      "end": 2289.505,
+      "duration": 2.379,
+      "text": "along the vector one, negative two."
+    },
+    {
+      "index": 542,
+      "start": 2289.505,
+      "end": 2292.023,
+      "duration": 2.518,
+      "text": "So one, negative two looks like this."
+    },
+    {
+      "index": 543,
+      "start": 2292.023,
+      "end": 2295.45,
+      "duration": 3.427,
+      "text": "This guy is coming in at a somewhat sharper angle,"
+    },
+    {
+      "index": 544,
+      "start": 2295.45,
+      "end": 2299.367,
+      "duration": 3.917,
+      "text": "coming in because it is e to the negative 2t."
+    },
+    {
+      "index": 545,
+      "start": 2299.367,
+      "end": 2302.515,
+      "duration": 3.148,
+      "text": "And we recognize this, of course, as a saddle."
+    },
+    {
+      "index": 546,
+      "start": 2302.515,
+      "end": 2306.362,
+      "duration": 3.847,
+      "text": "And I would complete the trajectories by putting in some"
+    },
+    {
+      "index": 547,
+      "start": 2306.362,
+      "end": 2310.0,
+      "duration": 3.638,
+      "text": "of the typical saddle lines like that."
+    },
+    {
+      "index": 548,
+      "start": 2310.0,
+      "end": 2316.02,
+      "duration": 6.02,
+      "text": "Now, I say that, too, gives a picture of what is"
+    },
+    {
+      "index": 549,
+      "start": 2316.02,
+      "end": 2321.272,
+      "duration": 5.252,
+      "text": "happening to the pendulum near that point."
+    },
+    {
+      "index": 550,
+      "start": 2321.272,
+      "end": 2324.987,
+      "duration": 3.715,
+      "text": "Let's, for example, look here."
+    },
+    {
+      "index": 551,
+      "start": 2324.987,
+      "end": 2329.727,
+      "duration": 4.74,
+      "text": "What is happening here? This is theta,"
+    },
+    {
+      "index": 552,
+      "start": 2329.727,
+      "end": 2335.363,
+      "duration": 5.636,
+      "text": "or really it is theta minus pi, is this axis."
+    },
+    {
+      "index": 553,
+      "start": 2335.363,
+      "end": 2341.0,
+      "duration": 5.637,
+      "text": "In other words, this will be zero."
+    },
+    {
+      "index": 554,
+      "start": 2341.0,
+      "end": 2348.026,
+      "duration": 7.026,
+      "text": "When theta is pi this will correspond to the point zero."
+    },
+    {
+      "index": 555,
+      "start": 2348.026,
+      "end": 2352.37,
+      "duration": 4.344,
+      "text": "Here is omega. What is theta doing?"
+    },
+    {
+      "index": 556,
+      "start": 2352.37,
+      "end": 2358.885,
+      "duration": 6.515,
+      "text": "Starting up there this represents a value of theta a"
+    },
+    {
+      "index": 557,
+      "start": 2358.885,
+      "end": 2365.656,
+      "duration": 6.771,
+      "text": "little bit less than pi, a little bit to the negative."
+    },
+    {
+      "index": 558,
+      "start": 2365.656,
+      "end": 2373.517,
+      "duration": 7.861,
+      "text": "A little bit less than pi. Here is pi, so a little bit"
+    },
+    {
+      "index": 559,
+      "start": 2373.517,
+      "end": 2380.291,
+      "duration": 6.774,
+      "text": "less than pi is over here. A little bit less than pi."
+    },
+    {
+      "index": 560,
+      "start": 2380.291,
+      "end": 2384.98,
+      "duration": 4.689,
+      "text": "A little bit less. And omega is zero."
+    },
+    {
+      "index": 561,
+      "start": 2384.98,
+      "end": 2390.582,
+      "duration": 5.602,
+      "text": "What happened? Theta started decreasing ever"
+    },
+    {
+      "index": 562,
+      "start": 2390.582,
+      "end": 2396.314,
+      "duration": 5.732,
+      "text": "more rapidly so that the omega was zero here,"
+    },
+    {
+      "index": 563,
+      "start": 2396.314,
+      "end": 2404.0,
+      "duration": 7.686,
+      "text": "now omega is negative and gets much more negative."
+    },
+    {
+      "index": 564,
+      "start": 2404.0,
+      "end": 2409.039,
+      "duration": 5.039,
+      "text": "In other words, both theta decreases from that"
+    },
+    {
+      "index": 565,
+      "start": 2409.039,
+      "end": 2414.639,
+      "duration": 5.6,
+      "text": "point and omega decreases also. What happened here?"
+    },
+    {
+      "index": 566,
+      "start": 2414.639,
+      "end": 2419.119,
+      "duration": 4.48,
+      "text": "Here, theta is a little bit more than pi."
+    },
+    {
+      "index": 567,
+      "start": 2419.119,
+      "end": 2423.039,
+      "duration": 3.92,
+      "text": "Now it is a little bit more than pi."
+    },
+    {
+      "index": 568,
+      "start": 2423.039,
+      "end": 2429.648,
+      "duration": 6.609,
+      "text": "Theta now increases until it gets to 2pi and then oscillates"
+    },
+    {
+      "index": 569,
+      "start": 2429.648,
+      "end": 2433.678,
+      "duration": 4.03,
+      "text": "around 2pi. So theta increases."
+    },
+    {
+      "index": 570,
+      "start": 2433.678,
+      "end": 2437.564,
+      "duration": 3.886,
+      "text": "And omega increases, too, because the angular"
+    },
+    {
+      "index": 571,
+      "start": 2437.564,
+      "end": 2442.599,
+      "duration": 5.035,
+      "text": "velocity started at zero but, as theta gets more positive,"
+    },
+    {
+      "index": 572,
+      "start": 2442.599,
+      "end": 2446.22,
+      "duration": 3.621,
+      "text": "omega gets positive, too, because theta is"
+    },
+    {
+      "index": 573,
+      "start": 2446.22,
+      "end": 2449.665,
+      "duration": 3.445,
+      "text": "increasing. So omega increases and theta"
+    },
+    {
+      "index": 574,
+      "start": 2449.665,
+      "end": 2452.757,
+      "duration": 3.092,
+      "text": "increases and it goes off like that."
+    },
+    {
+      "index": 575,
+      "start": 2452.757,
+      "end": 2458.145,
+      "duration": 5.388,
+      "text": "Well, the final step is to put them all together to be the big"
+    },
+    {
+      "index": 576,
+      "start": 2458.145,
+      "end": 2463.467,
+      "duration": 5.322,
+      "text": "picture. Here we are for three,"
+    },
+    {
+      "index": 577,
+      "start": 2463.467,
+      "end": 2472.295,
+      "duration": 8.828,
+      "text": "let's say, the big picture. Plot trajectories around each"
+    },
+    {
+      "index": 578,
+      "start": 2472.295,
+      "end": 2477.339,
+      "duration": 5.044,
+      "text": "critical point and then add some."
+    },
+    {
+      "index": 579,
+      "start": 2477.339,
+      "end": 2485.694,
+      "duration": 8.355,
+      "text": "It's that last step that can cause you a little grief,"
+    },
+    {
+      "index": 580,
+      "start": 2485.694,
+      "end": 2492.0,
+      "duration": 6.306,
+      "text": "but we will see how it works out."
+    },
+    {
+      "index": 581,
+      "start": 2492.0,
+      "end": 2494.688,
+      "duration": 2.688,
+      "text": "Add some more, according to your best"
+    },
+    {
+      "index": 582,
+      "start": 2494.688,
+      "end": 2497.674,
+      "duration": 2.986,
+      "text": "judgment. Let's make a big picture now of"
+    },
+    {
+      "index": 583,
+      "start": 2497.674,
+      "end": 2501.258,
+      "duration": 3.584,
+      "text": "our pendulum the way it apparently ought to look."
+    },
+    {
+      "index": 584,
+      "start": 2501.258,
+      "end": 2505.365,
+      "duration": 4.107,
+      "text": "Nice big axis since we are going to accommodate a lot of"
+    },
+    {
+      "index": 585,
+      "start": 2505.365,
+      "end": 2508.874,
+      "duration": 3.509,
+      "text": "critical points here. Let's put in some critical"
+    },
+    {
+      "index": 586,
+      "start": 2508.874,
+      "end": 2510.815,
+      "duration": 1.941,
+      "text": "points. Here is the origin."
+    },
+    {
+      "index": 587,
+      "start": 2510.815,
+      "end": 2515.295,
+      "duration": 4.48,
+      "text": "And now here is the one at pi, let's say, here is one at 2pi."
+    },
+    {
+      "index": 588,
+      "start": 2515.295,
+      "end": 2520.0,
+      "duration": 4.705,
+      "text": "I am going to add some of these others, 3pi, 4pi."
+    },
+    {
+      "index": 589,
+      "start": 2520.0,
+      "end": 2525.116,
+      "duration": 5.116,
+      "text": "I won't in their values. You can figure out what I mean."
+    },
+    {
+      "index": 590,
+      "start": 2525.116,
+      "end": 2528.279,
+      "duration": 3.163,
+      "text": "Zero here. And then here it will be"
+    },
+    {
+      "index": 591,
+      "start": 2528.279,
+      "end": 2531.441,
+      "duration": 3.162,
+      "text": "negative pi, and here negative 2pi."
+    },
+    {
+      "index": 592,
+      "start": 2531.441,
+      "end": 2535.906,
+      "duration": 4.465,
+      "text": "I guess I can stop there. That is the theta axis,"
+    },
+    {
+      "index": 593,
+      "start": 2535.906,
+      "end": 2541.209,
+      "duration": 5.303,
+      "text": "and here is the omega axis. And now, at each one of these,"
+    },
+    {
+      "index": 594,
+      "start": 2541.209,
+      "end": 2545.674,
+      "duration": 4.465,
+      "text": "I stay nearby and I draw the linear trajectories,"
+    },
+    {
+      "index": 595,
+      "start": 2545.674,
+      "end": 2552.0,
+      "duration": 6.326,
+      "text": "the trajectories of the corresponding linearized system."
+    },
+    {
+      "index": 596,
+      "start": 2552.0,
+      "end": 2555.65,
+      "duration": 3.65,
+      "text": "We decided here that the spiral went clockwise."
+    },
+    {
+      "index": 597,
+      "start": 2555.65,
+      "end": 2560.174,
+      "duration": 4.524,
+      "text": "Now, this point is physically, of course, the same as that"
+    },
+    {
+      "index": 598,
+      "start": 2560.174,
+      "end": 2562.0,
+      "duration": 1.826,
+      "text": "one. But mathematically,"
+    },
+    {
+      "index": 599,
+      "start": 2562.0,
+      "end": 2567.0,
+      "duration": 5.0,
+      "text": "the Jacobian matrix is the same also because if theta is 2pi the"
+    },
+    {
+      "index": 600,
+      "start": 2567.0,
+      "end": 2571.285,
+      "duration": 4.285,
+      "text": "cosine of 2pi is also one. And this is the same matrix."
+    },
+    {
+      "index": 601,
+      "start": 2571.285,
+      "end": 2574.777,
+      "duration": 3.492,
+      "text": "So the analysis is identical. And, therefore,"
+    },
+    {
+      "index": 602,
+      "start": 2574.777,
+      "end": 2579.539,
+      "duration": 4.762,
+      "text": "this point will also correspond to a counterclockwise spiral,"
+    },
+    {
+      "index": 603,
+      "start": 2579.539,
+      "end": 2584.606,
+      "duration": 5.067,
+      "text": "as will this one. I am sorry, a clockwise spiral."
+    },
+    {
+      "index": 604,
+      "start": 2584.606,
+      "end": 2588.222,
+      "duration": 3.616,
+      "text": "Here, too, all of these points are the same."
+    },
+    {
+      "index": 605,
+      "start": 2588.222,
+      "end": 2592.594,
+      "duration": 4.372,
+      "text": "The behavior near them, clockwise spirals everywhere."
+    },
+    {
+      "index": 606,
+      "start": 2592.594,
+      "end": 2597.303,
+      "duration": 4.709,
+      "text": "How about the other ones? Well, the other ones correspond"
+    },
+    {
+      "index": 607,
+      "start": 2597.303,
+      "end": 2601.255,
+      "duration": 3.952,
+      "text": "to these saddles, so let's draw them efficiently"
+    },
+    {
+      "index": 608,
+      "start": 2601.255,
+      "end": 2606.636,
+      "duration": 5.381,
+      "text": "by doing the same thing on every one, mass production of saddles."
+    },
+    {
+      "index": 609,
+      "start": 2606.636,
+      "end": 2610.0,
+      "duration": 3.364,
+      "text": "There. And these guys go out."
+    },
+    {
+      "index": 610,
+      "start": 2610.0,
+      "end": 2615.299,
+      "duration": 5.299,
+      "text": "And the other guys come in, etc."
+    },
+    {
+      "index": 611,
+      "start": 2615.299,
+      "end": 2624.358,
+      "duration": 9.059,
+      "text": "And so here we have a little bit there, a little here,"
+    },
+    {
+      "index": 612,
+      "start": 2624.358,
+      "end": 2630.0,
+      "duration": 5.642,
+      "text": "there, everywhere, etc."
+    },
+    {
+      "index": 613,
+      "start": 2638.0,
+      "end": 2641.897,
+      "duration": 3.897,
+      "text": "Now what? Now you pray for inspiration."
+    },
+    {
+      "index": 614,
+      "start": 2641.897,
+      "end": 2648.256,
+      "duration": 6.359,
+      "text": "And what you have to do is add trajectories that are compatible"
+    },
+    {
+      "index": 615,
+      "start": 2648.256,
+      "end": 2653.282,
+      "duration": 5.026,
+      "text": "with the ones you have. Let's start with this guy."
+    },
+    {
+      "index": 616,
+      "start": 2653.282,
+      "end": 2658.205,
+      "duration": 4.923,
+      "text": "Where is it going? Well, a trajectory either goes"
+    },
+    {
+      "index": 617,
+      "start": 2658.205,
+      "end": 2662.923,
+      "duration": 4.718,
+      "text": "off to infinity, but generally they get trapped"
+    },
+    {
+      "index": 618,
+      "start": 2662.923,
+      "end": 2668.256,
+      "duration": 5.333,
+      "text": "around critical points. This guy must be surely doing"
+    },
+    {
+      "index": 619,
+      "start": 2668.256,
+      "end": 2672.128,
+      "duration": 3.872,
+      "text": "this. How about this one?"
+    },
+    {
+      "index": 620,
+      "start": 2672.128,
+      "end": 2675.487,
+      "duration": 3.359,
+      "text": "Yeah, sure. How about this one?"
+    },
+    {
+      "index": 621,
+      "start": 2675.487,
+      "end": 2678.512,
+      "duration": 3.025,
+      "text": "Why not? How about that one?"
+    },
+    {
+      "index": 622,
+      "start": 2678.512,
+      "end": 2682.32,
+      "duration": 3.808,
+      "text": "Yeah. But notice you are in trouble"
+    },
+    {
+      "index": 623,
+      "start": 2682.32,
+      "end": 2689.376,
+      "duration": 7.056,
+      "text": "when two arrows you want to put in are near each other and going"
+    },
+    {
+      "index": 624,
+      "start": 2689.376,
+      "end": 2694.304,
+      "duration": 4.928,
+      "text": "in opposite directions. That you cannot have."
+    },
+    {
+      "index": 625,
+      "start": 2694.304,
+      "end": 2699.003,
+      "duration": 4.699,
+      "text": "Continuity forbids it. But notice if I,"
+    },
+    {
+      "index": 626,
+      "start": 2699.003,
+      "end": 2701.45,
+      "duration": 2.447,
+      "text": "for example, had gotten these eigenlines"
+    },
+    {
+      "index": 627,
+      "start": 2701.45,
+      "end": 2705.215,
+      "duration": 3.765,
+      "text": "wrong, if I made this come in and those go out because I made"
+    },
+    {
+      "index": 628,
+      "start": 2705.215,
+      "end": 2708.917,
+      "duration": 3.702,
+      "text": "a simple error in drawing the thing, I would have said but I"
+    },
+    {
+      "index": 629,
+      "start": 2708.917,
+      "end": 2712.933,
+      "duration": 4.016,
+      "text": "cannot draw this picture because this spiral wants to go that way"
+    },
+    {
+      "index": 630,
+      "start": 2712.933,
+      "end": 2716.258,
+      "duration": 3.325,
+      "text": "but this, right next to it, wants to go the other way."
+    },
+    {
+      "index": 631,
+      "start": 2716.258,
+      "end": 2719.521,
+      "duration": 3.263,
+      "text": "That is the way you would know if you made a mistake."
+    },
+    {
+      "index": 632,
+      "start": 2719.521,
+      "end": 2722.909,
+      "duration": 3.388,
+      "text": "If you didn't make a mistake you won't have any trouble"
+    },
+    {
+      "index": 633,
+      "start": 2722.909,
+      "end": 2726.235,
+      "duration": 3.326,
+      "text": "filling these things out. The directions of motions of"
+    },
+    {
+      "index": 634,
+      "start": 2726.235,
+      "end": 2730.0,
+      "duration": 3.765,
+      "text": "the spirals, everything will be compatible."
+    },
+    {
+      "index": 635,
+      "start": 2730.0,
+      "end": 2733.021,
+      "duration": 3.021,
+      "text": "Okay. What is this guy doing?"
+    },
+    {
+      "index": 636,
+      "start": 2733.021,
+      "end": 2737.446,
+      "duration": 4.425,
+      "text": "Oh, well, it must be joining up with that."
+    },
+    {
+      "index": 637,
+      "start": 2737.446,
+      "end": 2742.517,
+      "duration": 5.071,
+      "text": "How about this one? Well, it must be coming back"
+    },
+    {
+      "index": 638,
+      "start": 2742.517,
+      "end": 2745.215,
+      "duration": 2.698,
+      "text": "there. How about this one?"
+    },
+    {
+      "index": 639,
+      "start": 2745.215,
+      "end": 2748.561,
+      "duration": 3.346,
+      "text": "Well, trajectories cannot cross."
+    },
+    {
+      "index": 640,
+      "start": 2748.561,
+      "end": 2753.525,
+      "duration": 4.964,
+      "text": "This guy cannot cross so it must be doing this."
+    },
+    {
+      "index": 641,
+      "start": 2753.525,
+      "end": 2757.194,
+      "duration": 3.669,
+      "text": "All right. What is that trajectory?"
+    },
+    {
+      "index": 642,
+      "start": 2757.194,
+      "end": 2763.768,
+      "duration": 6.574,
+      "text": "Starts zero. Omega, on the other hand,"
+    },
+    {
+      "index": 643,
+      "start": 2763.768,
+      "end": 2770.251,
+      "duration": 6.483,
+      "text": "is big and positive. Omega big and positive."
+    },
+    {
+      "index": 644,
+      "start": 2770.251,
+      "end": 2775.678,
+      "duration": 5.427,
+      "text": "[LAUGHTER] I am scared. Omega starts."
+    },
+    {
+      "index": 645,
+      "start": 2775.678,
+      "end": 2781.256,
+      "duration": 5.578,
+      "text": "Theta is zero. Omega big and positive."
+    },
+    {
+      "index": 646,
+      "start": 2781.256,
+      "end": 2788.19,
+      "duration": 6.934,
+      "text": "It went around, slowed up, but continued beyond"
+    },
+    {
+      "index": 647,
+      "start": 2788.19,
+      "end": 2790.911,
+      "duration": 2.721,
+      "text": "pi. And, in fact,"
+    },
+    {
+      "index": 648,
+      "start": 2790.911,
+      "end": 2793.714,
+      "duration": 2.803,
+      "text": "went too far. It continued to go here and"
+    },
+    {
+      "index": 649,
+      "start": 2793.714,
+      "end": 2796.097,
+      "duration": 2.383,
+      "text": "then finally wound around that one."
+    },
+    {
+      "index": 650,
+      "start": 2796.097,
+      "end": 2800.091,
+      "duration": 3.994,
+      "text": "Now do you see why we had to have all the critical points?"
+    },
+    {
+      "index": 651,
+      "start": 2800.091,
+      "end": 2802.894,
+      "duration": 2.803,
+      "text": "You have to have all the critical points."
+    },
+    {
+      "index": 652,
+      "start": 2802.894,
+      "end": 2807.169,
+      "duration": 4.275,
+      "text": "And not just the two physicals ones because the other critical"
+    },
+    {
+      "index": 653,
+      "start": 2807.169,
+      "end": 2811.514,
+      "duration": 4.345,
+      "text": "points are necessary to describe a complicated motion that goes"
+    },
+    {
+      "index": 654,
+      "start": 2811.514,
+      "end": 2816.0,
+      "duration": 4.486,
+      "text": "round and round and round until finally it crashes."
+    },
+    {
+      "index": 655,
+      "start": 2816.0,
+      "end": 2819.526,
+      "duration": 3.526,
+      "text": "You are going to practice drawing these pictures and"
+    },
+    {
+      "index": 656,
+      "start": 2819.526,
+      "end": 2822.192,
+      "duration": 2.666,
+      "text": "interpreting them in recitation tomorrow."
+    }
+  ],
+  "course": {
+    "category": "Mathematics",
+    "title": "Differential Equations",
+    "source_url": "https://www.youtube.com/playlist?list=PL64BDFBDA2AF24F7E"
+  }
+}

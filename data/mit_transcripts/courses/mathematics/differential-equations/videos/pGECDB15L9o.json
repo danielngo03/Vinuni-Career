@@ -1,0 +1,1537 @@
+{
+  "video": {
+    "id": "pGECDB15L9o",
+    "title": "Undetermined Coefficients | MIT 18.03SC Differential Equations, Fall 2011",
+    "url": "https://www.youtube.com/watch?v=pGECDB15L9o",
+    "channel": "MIT OpenCourseWare",
+    "duration": 642,
+    "language": "en"
+  },
+  "segment_count": 217,
+  "segments": [
+    {
+      "index": 0,
+      "start": 9.07,
+      "end": 9.08,
+      "duration": 0.01,
+      "text": "hi everyone welcome back so today I'd"
+    },
+    {
+      "index": 1,
+      "start": 9.08,
+      "end": 11.589,
+      "duration": 2.509,
+      "text": "like to tackle a problem in undetermined"
+    },
+    {
+      "index": 2,
+      "start": 11.599,
+      "end": 14.07,
+      "duration": 2.471,
+      "text": "coefficients specifically find a"
+    },
+    {
+      "index": 3,
+      "start": 14.08,
+      "end": 15.35,
+      "duration": 1.27,
+      "text": "particular solution to each of the"
+    },
+    {
+      "index": 4,
+      "start": 15.36,
+      "end": 17.189,
+      "duration": 1.829,
+      "text": "following equations using undetermined"
+    },
+    {
+      "index": 5,
+      "start": 17.199,
+      "end": 20.109,
+      "duration": 2.91,
+      "text": "coefficients so for part A we have X do"
+    },
+    {
+      "index": 6,
+      "start": 20.119,
+      "end": 25.63,
+      "duration": 5.511,
+      "text": "+ 3x = T ^2 + T and for B we have X do"
+    },
+    {
+      "index": 7,
+      "start": 25.64,
+      "end": 29.23,
+      "duration": 3.59,
+      "text": "dot plus x dotal t 4 so I'll let you"
+    },
+    {
+      "index": 8,
+      "start": 29.24,
+      "end": 30.95,
+      "duration": 1.71,
+      "text": "work this problem out and I'll come back"
+    },
+    {
+      "index": 9,
+      "start": 30.96,
+      "end": 41.75,
+      "duration": 10.79,
+      "text": "in a"
+    },
+    {
+      "index": 10,
+      "start": 45.63,
+      "end": 45.64,
+      "duration": 0.01,
+      "text": "minute hi everyone welcome back okay so"
+    },
+    {
+      "index": 11,
+      "start": 45.64,
+      "end": 47.31,
+      "duration": 1.67,
+      "text": "we're asked to solve this problem using"
+    },
+    {
+      "index": 12,
+      "start": 47.32,
+      "end": 48.47,
+      "duration": 1.15,
+      "text": "uh the method of undetermined"
+    },
+    {
+      "index": 13,
+      "start": 48.48,
+      "end": 50.63,
+      "duration": 2.15,
+      "text": "coefficients and specifically the"
+    },
+    {
+      "index": 14,
+      "start": 50.64,
+      "end": 53.43,
+      "duration": 2.79,
+      "text": "observation is if we have a differential"
+    },
+    {
+      "index": 15,
+      "start": 53.44,
+      "end": 55.189,
+      "duration": 1.749,
+      "text": "equation with constant"
+    },
+    {
+      "index": 16,
+      "start": 55.199,
+      "end": 57.11,
+      "duration": 1.911,
+      "text": "coefficients and we have a forcing on"
+    },
+    {
+      "index": 17,
+      "start": 57.12,
+      "end": 58.75,
+      "duration": 1.63,
+      "text": "the right hand side which is a"
+    },
+    {
+      "index": 18,
+      "start": 58.76,
+      "end": 61.11,
+      "duration": 2.35,
+      "text": "polinomial then then there's always"
+    },
+    {
+      "index": 19,
+      "start": 61.12,
+      "end": 63.67,
+      "duration": 2.55,
+      "text": "going to be a particular solution which"
+    },
+    {
+      "index": 20,
+      "start": 63.68,
+      "end": 65.99,
+      "duration": 2.31,
+      "text": "is a polinomial that has the form"
+    },
+    {
+      "index": 21,
+      "start": 66.0,
+      "end": 68.07,
+      "duration": 2.07,
+      "text": "of some"
+    },
+    {
+      "index": 22,
+      "start": 68.08,
+      "end": 70.87,
+      "duration": 2.79,
+      "text": "constant time T ^ of"
+    },
+    {
+      "index": 23,
+      "start": 70.88,
+      "end": 74.07,
+      "duration": 3.19,
+      "text": "R plus"
+    },
+    {
+      "index": 24,
+      "start": 74.08,
+      "end": 81.03,
+      "duration": 6.95,
+      "text": "constant T Rus 1 plus a constant C Rus 2"
+    },
+    {
+      "index": 25,
+      "start": 81.04,
+      "end": 84.55,
+      "duration": 3.51,
+      "text": "t rus2 plus dot dot"
+    },
+    {
+      "index": 26,
+      "start": 84.56,
+      "end": 91.03,
+      "duration": 6.47,
+      "text": "dot plus C1 T and then possibly Plus c0"
+    },
+    {
+      "index": 27,
+      "start": 91.04,
+      "end": 93.749,
+      "duration": 2.709,
+      "text": "and typically the problem is to find out"
+    },
+    {
+      "index": 28,
+      "start": 93.759,
+      "end": 96.35,
+      "duration": 2.591,
+      "text": "what's the highest order uh polinomial"
+    },
+    {
+      "index": 29,
+      "start": 96.36,
+      "end": 97.31,
+      "duration": 0.95,
+      "text": "that we should"
+    },
+    {
+      "index": 30,
+      "start": 97.32,
+      "end": 100.63,
+      "duration": 3.31,
+      "text": "guess these constants C are sometimes"
+    },
+    {
+      "index": 31,
+      "start": 100.64,
+      "end": 101.749,
+      "duration": 1.109,
+      "text": "they're well they're referred to as the"
+    },
+    {
+      "index": 32,
+      "start": 101.759,
+      "end": 102.99,
+      "duration": 1.231,
+      "text": "undetermined"
+    },
+    {
+      "index": 33,
+      "start": 103.0,
+      "end": 105.23,
+      "duration": 2.23,
+      "text": "coefficients and these are the constants"
+    },
+    {
+      "index": 34,
+      "start": 105.24,
+      "end": 108.87,
+      "duration": 3.63,
+      "text": "that we uh we seek to solve so for our"
+    },
+    {
+      "index": 35,
+      "start": 108.88,
+      "end": 111.03,
+      "duration": 2.15,
+      "text": "first differential equation we have x"
+    },
+    {
+      "index": 36,
+      "start": 111.04,
+      "end": 114.63,
+      "duration": 3.59,
+      "text": "dot +"
+    },
+    {
+      "index": 37,
+      "start": 118.109,
+      "end": 118.119,
+      "duration": 0.01,
+      "text": "3x = T ^2 +"
+    },
+    {
+      "index": 38,
+      "start": 118.119,
+      "end": 120.99,
+      "duration": 2.871,
+      "text": "T and the power that we should guess for"
+    },
+    {
+      "index": 39,
+      "start": 121.0,
+      "end": 123.469,
+      "duration": 2.469,
+      "text": "a solution R it's always going to be at"
+    },
+    {
+      "index": 40,
+      "start": 123.479,
+      "end": 125.19,
+      "duration": 1.711,
+      "text": "least as high as the highest power on"
+    },
+    {
+      "index": 41,
+      "start": 125.2,
+      "end": 127.029,
+      "duration": 1.829,
+      "text": "the right hand side so the right hand"
+    },
+    {
+      "index": 42,
+      "start": 127.039,
+      "end": 129.27,
+      "duration": 2.231,
+      "text": "side tells us at least the largest r"
+    },
+    {
+      "index": 43,
+      "start": 129.28,
+      "end": 130.749,
+      "duration": 1.469,
+      "text": "that we should we should at least start"
+    },
+    {
+      "index": 44,
+      "start": 130.759,
+      "end": 131.99,
+      "duration": 1.231,
+      "text": "our guess"
+    },
+    {
+      "index": 45,
+      "start": 132.0,
+      "end": 134.19,
+      "duration": 2.19,
+      "text": "at and then sometimes we have to knock"
+    },
+    {
+      "index": 46,
+      "start": 134.2,
+      "end": 137.19,
+      "duration": 2.99,
+      "text": "it up a few uh orders depending on what"
+    },
+    {
+      "index": 47,
+      "start": 137.2,
+      "end": 138.83,
+      "duration": 1.63,
+      "text": "the lowest order derivative on the left"
+    },
+    {
+      "index": 48,
+      "start": 138.84,
+      "end": 142.509,
+      "duration": 3.669,
+      "text": "hand side is so in this case uh the term"
+    },
+    {
+      "index": 49,
+      "start": 142.519,
+      "end": 145.949,
+      "duration": 3.43,
+      "text": "on the left hand side the uh there's no"
+    },
+    {
+      "index": 50,
+      "start": 145.959,
+      "end": 148.589,
+      "duration": 2.63,
+      "text": "derivative term and so what we can do"
+    },
+    {
+      "index": 51,
+      "start": 148.599,
+      "end": 150.11,
+      "duration": 1.511,
+      "text": "for this case is we can just take is"
+    },
+    {
+      "index": 52,
+      "start": 150.12,
+      "end": 151.67,
+      "duration": 1.55,
+      "text": "equal to two The Power of the polinomial"
+    },
+    {
+      "index": 53,
+      "start": 151.68,
+      "end": 153.07,
+      "duration": 1.39,
+      "text": "on the right hand"
+    },
+    {
+      "index": 54,
+      "start": 153.08,
+      "end": 156.27,
+      "duration": 3.19,
+      "text": "side so we're going to seek an a guess"
+    },
+    {
+      "index": 55,
+      "start": 156.28,
+      "end": 157.63,
+      "duration": 1.35,
+      "text": "or an"
+    },
+    {
+      "index": 56,
+      "start": 157.64,
+      "end": 161.03,
+      "duration": 3.39,
+      "text": "anets which is some constant"
+    },
+    {
+      "index": 57,
+      "start": 161.04,
+      "end": 163.19,
+      "duration": 2.15,
+      "text": "a * T ^"
+    },
+    {
+      "index": 58,
+      "start": 163.2,
+      "end": 169.11,
+      "duration": 5.91,
+      "text": "2+ B * t plus some constant C and again"
+    },
+    {
+      "index": 59,
+      "start": 169.12,
+      "end": 171.91,
+      "duration": 2.79,
+      "text": "I've taken our the highest polinomial"
+    },
+    {
+      "index": 60,
+      "start": 171.92,
+      "end": 173.949,
+      "duration": 2.029,
+      "text": "that we should guess to be two because"
+    },
+    {
+      "index": 61,
+      "start": 173.959,
+      "end": 176.229,
+      "duration": 2.27,
+      "text": "the right hand side is two in this"
+    },
+    {
+      "index": 62,
+      "start": 176.239,
+      "end": 178.19,
+      "duration": 1.951,
+      "text": "case so now what we do is we just"
+    },
+    {
+      "index": 63,
+      "start": 178.2,
+      "end": 180.67,
+      "duration": 2.47,
+      "text": "substitute this in into the differential"
+    },
+    {
+      "index": 64,
+      "start": 180.68,
+      "end": 182.75,
+      "duration": 2.07,
+      "text": "equations the differential equation and"
+    },
+    {
+      "index": 65,
+      "start": 182.76,
+      "end": 185.39,
+      "duration": 2.63,
+      "text": "we choose our a b and c to construct"
+    },
+    {
+      "index": 66,
+      "start": 185.4,
+      "end": 187.869,
+      "duration": 2.469,
+      "text": "this as a solution all right so let's go"
+    },
+    {
+      "index": 67,
+      "start": 187.879,
+      "end": 189.99,
+      "duration": 2.111,
+      "text": "ahead and do that so taking its"
+    },
+    {
+      "index": 68,
+      "start": 190.0,
+      "end": 196.149,
+      "duration": 6.149,
+      "text": "derivative we have 2 a t plus"
+    },
+    {
+      "index": 69,
+      "start": 200.27,
+      "end": 200.28,
+      "duration": 0.01,
+      "text": "b then we have 3 * a t ^"
+    },
+    {
+      "index": 70,
+      "start": 200.28,
+      "end": 202.309,
+      "duration": 2.029,
+      "text": "2 +"
+    },
+    {
+      "index": 71,
+      "start": 202.319,
+      "end": 204.19,
+      "duration": 1.871,
+      "text": "BT +"
+    },
+    {
+      "index": 72,
+      "start": 204.2,
+      "end": 208.309,
+      "duration": 4.109,
+      "text": "C and we want this to be equal to T ^2 +"
+    },
+    {
+      "index": 73,
+      "start": 208.319,
+      "end": 210.27,
+      "duration": 1.951,
+      "text": "T and now the only only way that the"
+    },
+    {
+      "index": 74,
+      "start": 210.28,
+      "end": 211.509,
+      "duration": 1.229,
+      "text": "left hand side is going to equal the"
+    },
+    {
+      "index": 75,
+      "start": 211.519,
+      "end": 213.509,
+      "duration": 1.99,
+      "text": "right hand side is if the coefficients"
+    },
+    {
+      "index": 76,
+      "start": 213.519,
+      "end": 216.309,
+      "duration": 2.79,
+      "text": "in front of each polinomial are the"
+    },
+    {
+      "index": 77,
+      "start": 216.319,
+      "end": 219.11,
+      "duration": 2.791,
+      "text": "same so in the left hand side we only"
+    },
+    {
+      "index": 78,
+      "start": 219.12,
+      "end": 222.589,
+      "duration": 3.469,
+      "text": "have one term that has a t^ squ in it"
+    },
+    {
+      "index": 79,
+      "start": 222.599,
+      "end": 224.589,
+      "duration": 1.99,
+      "text": "and that must therefore equal the T squ"
+    },
+    {
+      "index": 80,
+      "start": 224.599,
+      "end": 227.229,
+      "duration": 2.63,
+      "text": "term on the right hand side so these two"
+    },
+    {
+      "index": 81,
+      "start": 227.239,
+      "end": 230.55,
+      "duration": 3.311,
+      "text": "terms have to be equal to each other so"
+    },
+    {
+      "index": 82,
+      "start": 230.56,
+      "end": 232.229,
+      "duration": 1.669,
+      "text": "we end up getting that 3"
+    },
+    {
+      "index": 83,
+      "start": 232.239,
+      "end": 234.67,
+      "duration": 2.431,
+      "text": "a has to be equal"
+    },
+    {
+      "index": 84,
+      "start": 234.68,
+      "end": 240.99,
+      "duration": 6.31,
+      "text": "one and so a is equal to 1/3"
+    },
+    {
+      "index": 85,
+      "start": 243.589,
+      "end": 243.599,
+      "duration": 0.01,
+      "text": "and now what we do is we collect terms"
+    },
+    {
+      "index": 86,
+      "start": 243.599,
+      "end": 246.99,
+      "duration": 3.391,
+      "text": "uh uh with uh Power of"
+    },
+    {
+      "index": 87,
+      "start": 247.0,
+      "end": 250.149,
+      "duration": 3.149,
+      "text": "T this gives us"
+    },
+    {
+      "index": 88,
+      "start": 250.159,
+      "end": 252.63,
+      "duration": 2.471,
+      "text": "3B plus 2"
+    },
+    {
+      "index": 89,
+      "start": 252.64,
+      "end": 255.55,
+      "duration": 2.91,
+      "text": "a on the left hand side so that's this"
+    },
+    {
+      "index": 90,
+      "start": 255.56,
+      "end": 258.229,
+      "duration": 2.669,
+      "text": "term and this"
+    },
+    {
+      "index": 91,
+      "start": 258.239,
+      "end": 260.55,
+      "duration": 2.311,
+      "text": "term and we want that to equal t on the"
+    },
+    {
+      "index": 92,
+      "start": 260.56,
+      "end": 261.469,
+      "duration": 0.909,
+      "text": "right hand"
+    },
+    {
+      "index": 93,
+      "start": 261.479,
+      "end": 265.03,
+      "duration": 3.551,
+      "text": "side or just one now we already know"
+    },
+    {
+      "index": 94,
+      "start": 265.04,
+      "end": 266.39,
+      "duration": 1.35,
+      "text": "that a is equal to"
+    },
+    {
+      "index": 95,
+      "start": 266.4,
+      "end": 270.11,
+      "duration": 3.71,
+      "text": "1/3 so we end up getting that 3B"
+    },
+    {
+      "index": 96,
+      "start": 270.12,
+      "end": 273.55,
+      "duration": 3.43,
+      "text": "is equal to 1 -"
+    },
+    {
+      "index": 97,
+      "start": 273.56,
+      "end": 278.39,
+      "duration": 4.83,
+      "text": "2/3 which is equal to"
+    },
+    {
+      "index": 98,
+      "start": 280.469,
+      "end": 280.479,
+      "duration": 0.01,
+      "text": "1/3 3B is"
+    },
+    {
+      "index": 99,
+      "start": 280.479,
+      "end": 285.55,
+      "duration": 5.071,
+      "text": "1/3 which means that b is equal to 1"
+    },
+    {
+      "index": 100,
+      "start": 288.71,
+      "end": 288.72,
+      "duration": 0.01,
+      "text": "nth okay and now lastly uh to determine"
+    },
+    {
+      "index": 101,
+      "start": 288.72,
+      "end": 293.39,
+      "duration": 4.67,
+      "text": "C we see that b plus 3 C must be"
+    },
+    {
+      "index": 102,
+      "start": 293.4,
+      "end": 298.31,
+      "duration": 4.91,
+      "text": "zero so b + 3 C is"
+    },
+    {
+      "index": 103,
+      "start": 298.32,
+      "end": 302.67,
+      "duration": 4.35,
+      "text": "zero or C is equal to"
+    },
+    {
+      "index": 104,
+      "start": 305.029,
+      "end": 305.039,
+      "duration": 0.01,
+      "text": "-27th so notice how we always start with"
+    },
+    {
+      "index": 105,
+      "start": 305.039,
+      "end": 308.15,
+      "duration": 3.111,
+      "text": "the highest power in this case a is the"
+    },
+    {
+      "index": 106,
+      "start": 308.16,
+      "end": 310.469,
+      "duration": 2.309,
+      "text": "coefficient in front of"
+    },
+    {
+      "index": 107,
+      "start": 310.479,
+      "end": 312.95,
+      "duration": 2.471,
+      "text": "t^2 uh that lets us solve for a and then"
+    },
+    {
+      "index": 108,
+      "start": 312.96,
+      "end": 315.11,
+      "duration": 2.15,
+      "text": "the rest of the det uh the undetermined"
+    },
+    {
+      "index": 109,
+      "start": 315.12,
+      "end": 316.909,
+      "duration": 1.789,
+      "text": "coefficients we can solve for almost"
+    },
+    {
+      "index": 110,
+      "start": 316.919,
+      "end": 320.83,
+      "duration": 3.911,
+      "text": "like a giant"
+    },
+    {
+      "index": 111,
+      "start": 323.59,
+      "end": 323.6,
+      "duration": 0.01,
+      "text": "zipper okay so the particular solution"
+    },
+    {
+      "index": 112,
+      "start": 323.6,
+      "end": 325.51,
+      "duration": 1.91,
+      "text": "that we've just"
+    },
+    {
+      "index": 113,
+      "start": 325.52,
+      "end": 328.79,
+      "duration": 3.27,
+      "text": "constructed when the dust settles is 1/3"
+    },
+    {
+      "index": 114,
+      "start": 328.8,
+      "end": 330.909,
+      "duration": 2.109,
+      "text": "t^2"
+    },
+    {
+      "index": 115,
+      "start": 330.919,
+      "end": 333.71,
+      "duration": 2.791,
+      "text": "+ 1"
+    },
+    {
+      "index": 116,
+      "start": 335.87,
+      "end": 335.88,
+      "duration": 0.01,
+      "text": "9th"
+    },
+    {
+      "index": 117,
+      "start": 335.88,
+      "end": 338.99,
+      "duration": 3.11,
+      "text": "tus"
+    },
+    {
+      "index": 118,
+      "start": 341.71,
+      "end": 341.72,
+      "duration": 0.01,
+      "text": "127th okay so this concludes part"
+    },
+    {
+      "index": 119,
+      "start": 341.72,
+      "end": 344.029,
+      "duration": 2.309,
+      "text": "A for Part"
+    },
+    {
+      "index": 120,
+      "start": 344.039,
+      "end": 346.55,
+      "duration": 2.511,
+      "text": "B we have the differential equation x"
+    },
+    {
+      "index": 121,
+      "start": 346.56,
+      "end": 351.43,
+      "duration": 4.87,
+      "text": "dot dot plus x"
+    },
+    {
+      "index": 122,
+      "start": 358.79,
+      "end": 358.8,
+      "duration": 0.01,
+      "text": "4 and in this case we know that the"
+    },
+    {
+      "index": 123,
+      "start": 358.8,
+      "end": 361.029,
+      "duration": 2.229,
+      "text": "right hand side is uh a power of"
+    },
+    {
+      "index": 124,
+      "start": 361.039,
+      "end": 363.35,
+      "duration": 2.311,
+      "text": "four so we we should guess at least a"
+    },
+    {
+      "index": 125,
+      "start": 363.36,
+      "end": 365.909,
+      "duration": 2.549,
+      "text": "fourth order polinomial however we see"
+    },
+    {
+      "index": 126,
+      "start": 365.919,
+      "end": 368.469,
+      "duration": 2.55,
+      "text": "that there's no uh uh constant multiple"
+    },
+    {
+      "index": 127,
+      "start": 368.479,
+      "end": 371.23,
+      "duration": 2.751,
+      "text": "of X in fact the lowest order derivative"
+    },
+    {
+      "index": 128,
+      "start": 371.24,
+      "end": 373.469,
+      "duration": 2.229,
+      "text": "is one so what this means is we should"
+    },
+    {
+      "index": 129,
+      "start": 373.479,
+      "end": 374.909,
+      "duration": 1.43,
+      "text": "actually knock the solution that we"
+    },
+    {
+      "index": 130,
+      "start": 374.919,
+      "end": 377.029,
+      "duration": 2.11,
+      "text": "guess up one order"
+    },
+    {
+      "index": 131,
+      "start": 377.039,
+      "end": 380.189,
+      "duration": 3.15,
+      "text": "polinomial so we should try and guess X"
+    },
+    {
+      "index": 132,
+      "start": 380.199,
+      "end": 388.55,
+      "duration": 8.351,
+      "text": "is equal to a t 5th plus b t 4 plus c t"
+    },
+    {
+      "index": 133,
+      "start": 388.56,
+      "end": 393.589,
+      "duration": 5.029,
+      "text": "cubed plus d t ^2 + e"
+    },
+    {
+      "index": 134,
+      "start": 393.599,
+      "end": 396.51,
+      "duration": 2.911,
+      "text": "t and we can leave out an F term we can"
+    },
+    {
+      "index": 135,
+      "start": 396.52,
+      "end": 398.67,
+      "duration": 2.15,
+      "text": "leave out a constant because if we just"
+    },
+    {
+      "index": 136,
+      "start": 398.68,
+      "end": 400.629,
+      "duration": 1.949,
+      "text": "substitute that in the left hand side we"
+    },
+    {
+      "index": 137,
+      "start": 400.639,
+      "end": 403.309,
+      "duration": 2.67,
+      "text": "see that the x dot dot is going to"
+    },
+    {
+      "index": 138,
+      "start": 403.319,
+      "end": 405.79,
+      "duration": 2.471,
+      "text": "vanish and x dot is going to vanish so"
+    },
+    {
+      "index": 139,
+      "start": 405.8,
+      "end": 408.629,
+      "duration": 2.829,
+      "text": "we can omit any constant"
+    },
+    {
+      "index": 140,
+      "start": 408.639,
+      "end": 411.629,
+      "duration": 2.99,
+      "text": "term okay so let's seek this andat and"
+    },
+    {
+      "index": 141,
+      "start": 411.639,
+      "end": 414.43,
+      "duration": 2.791,
+      "text": "plug it into the differential equation"
+    },
+    {
+      "index": 142,
+      "start": 414.44,
+      "end": 416.43,
+      "duration": 1.99,
+      "text": "and if we do that we get 20"
+    },
+    {
+      "index": 143,
+      "start": 416.44,
+      "end": 420.07,
+      "duration": 3.63,
+      "text": "a t cubed"
+    },
+    {
+      "index": 144,
+      "start": 420.08,
+      "end": 422.35,
+      "duration": 2.27,
+      "text": "in this is plugging into the x dot dot"
+    },
+    {
+      "index": 145,
+      "start": 422.36,
+      "end": 425.469,
+      "duration": 3.109,
+      "text": "term this term is going to give us"
+    },
+    {
+      "index": 146,
+      "start": 425.479,
+      "end": 427.27,
+      "duration": 1.791,
+      "text": "12b"
+    },
+    {
+      "index": 147,
+      "start": 427.28,
+      "end": 430.469,
+      "duration": 3.189,
+      "text": "t^2 plus 6"
+    },
+    {
+      "index": 148,
+      "start": 430.479,
+      "end": 432.189,
+      "duration": 1.71,
+      "text": "c"
+    },
+    {
+      "index": 149,
+      "start": 432.199,
+      "end": 440.189,
+      "duration": 7.99,
+      "text": "t plus"
+    },
+    {
+      "index": 150,
+      "start": 442.589,
+      "end": 442.599,
+      "duration": 0.01,
+      "text": "d and then the x dot term is going to"
+    },
+    {
+      "index": 151,
+      "start": 442.599,
+      "end": 444.15,
+      "duration": 1.551,
+      "text": "give us 5"
+    },
+    {
+      "index": 152,
+      "start": 444.16,
+      "end": 447.589,
+      "duration": 3.429,
+      "text": "a t"
+    },
+    {
+      "index": 153,
+      "start": 447.599,
+      "end": 450.309,
+      "duration": 2.71,
+      "text": "4 plus"
+    },
+    {
+      "index": 154,
+      "start": 450.319,
+      "end": 450.67,
+      "duration": 0.351,
+      "text": "4"
+    },
+    {
+      "index": 155,
+      "start": 450.68,
+      "end": 452.07,
+      "duration": 1.39,
+      "text": "[Music]"
+    },
+    {
+      "index": 156,
+      "start": 452.08,
+      "end": 454.629,
+      "duration": 2.549,
+      "text": "b t"
+    },
+    {
+      "index": 157,
+      "start": 454.639,
+      "end": 457.79,
+      "duration": 3.151,
+      "text": "cubed + 3 c t"
+    },
+    {
+      "index": 158,
+      "start": 457.8,
+      "end": 459.79,
+      "duration": 1.99,
+      "text": "^2 plus"
+    },
+    {
+      "index": 159,
+      "start": 459.8,
+      "end": 462.39,
+      "duration": 2.59,
+      "text": "2dt oh"
+    },
+    {
+      "index": 160,
+      "start": 462.4,
+      "end": 463.99,
+      "duration": 1.59,
+      "text": "sorry"
+    },
+    {
+      "index": 161,
+      "start": 464.0,
+      "end": 468.23,
+      "duration": 4.23,
+      "text": "2dt plus"
+    },
+    {
+      "index": 162,
+      "start": 470.629,
+      "end": 470.639,
+      "duration": 0.01,
+      "text": "e and we want the sum of these two terms"
+    },
+    {
+      "index": 163,
+      "start": 470.639,
+      "end": 472.029,
+      "duration": 1.39,
+      "text": "to"
+    },
+    {
+      "index": 164,
+      "start": 472.039,
+      "end": 476.83,
+      "duration": 4.791,
+      "text": "equal t to the"
+    },
+    {
+      "index": 165,
+      "start": 479.67,
+      "end": 479.68,
+      "duration": 0.01,
+      "text": "4 okay so again what we do is we start"
+    },
+    {
+      "index": 166,
+      "start": 479.68,
+      "end": 481.67,
+      "duration": 1.99,
+      "text": "with the highest power we see that on"
+    },
+    {
+      "index": 167,
+      "start": 481.68,
+      "end": 484.27,
+      "duration": 2.59,
+      "text": "the left hand side we have 5 a must be"
+    },
+    {
+      "index": 168,
+      "start": 484.28,
+      "end": 486.309,
+      "duration": 2.029,
+      "text": "equated with just"
+    },
+    {
+      "index": 169,
+      "start": 486.319,
+      "end": 489.23,
+      "duration": 2.911,
+      "text": "one so we have 5"
+    },
+    {
+      "index": 170,
+      "start": 489.24,
+      "end": 494.83,
+      "duration": 5.59,
+      "text": "a is equal to 1 or a is equal to"
+    },
+    {
+      "index": 171,
+      "start": 504.189,
+      "end": 504.199,
+      "duration": 0.01,
+      "text": "a plus 4"
+    },
+    {
+      "index": 172,
+      "start": 504.199,
+      "end": 506.67,
+      "duration": 2.471,
+      "text": "b equals the zero"
+    },
+    {
+      "index": 173,
+      "start": 506.68,
+      "end": 509.029,
+      "duration": 2.349,
+      "text": "polinomial or the zero which is the"
+    },
+    {
+      "index": 174,
+      "start": 509.039,
+      "end": 512.67,
+      "duration": 3.631,
+      "text": "coefficient of T cubed and this gives us"
+    },
+    {
+      "index": 175,
+      "start": 512.68,
+      "end": 514.949,
+      "duration": 2.269,
+      "text": "B is equal to5"
+    },
+    {
+      "index": 176,
+      "start": 514.959,
+      "end": 520.029,
+      "duration": 5.07,
+      "text": "a which"
+    },
+    {
+      "index": 177,
+      "start": 524.79,
+      "end": 524.8,
+      "duration": 0.01,
+      "text": "is1 okay and now for the quadratic terms"
+    },
+    {
+      "index": 178,
+      "start": 524.8,
+      "end": 526.03,
+      "duration": 1.23,
+      "text": "we have 12"
+    },
+    {
+      "index": 179,
+      "start": 526.04,
+      "end": 529.15,
+      "duration": 3.11,
+      "text": "B plus 3 C is"
+    },
+    {
+      "index": 180,
+      "start": 529.16,
+      "end": 533.63,
+      "duration": 4.47,
+      "text": "Zer so C is going to equal"
+    },
+    {
+      "index": 181,
+      "start": 538.15,
+      "end": 538.16,
+      "duration": 0.01,
+      "text": "-4b which is-4 * 1 which just gives us"
+    },
+    {
+      "index": 182,
+      "start": 538.16,
+      "end": 544.949,
+      "duration": 6.789,
+      "text": "four"
+    },
+    {
+      "index": 183,
+      "start": 548.949,
+      "end": 548.959,
+      "duration": 0.01,
+      "text": "uh the linear term is going to give us 6"
+    },
+    {
+      "index": 184,
+      "start": 548.959,
+      "end": 551.91,
+      "duration": 2.951,
+      "text": "C +"
+    },
+    {
+      "index": 185,
+      "start": 551.92,
+      "end": 554.47,
+      "duration": 2.55,
+      "text": "2D equals"
+    },
+    {
+      "index": 186,
+      "start": 554.48,
+      "end": 559.829,
+      "duration": 5.349,
+      "text": "z which gives us D is equal to -3"
+    },
+    {
+      "index": 187,
+      "start": 562.87,
+      "end": 562.88,
+      "duration": 0.01,
+      "text": "C which gives us"
+    },
+    {
+      "index": 188,
+      "start": 562.88,
+      "end": 565.269,
+      "duration": 2.389,
+      "text": "-12 and then the last"
+    },
+    {
+      "index": 189,
+      "start": 565.279,
+      "end": 568.069,
+      "duration": 2.79,
+      "text": "term is D plus"
+    },
+    {
+      "index": 190,
+      "start": 568.079,
+      "end": 569.949,
+      "duration": 1.87,
+      "text": "e is"
+    },
+    {
+      "index": 191,
+      "start": 569.959,
+      "end": 574.11,
+      "duration": 4.151,
+      "text": "Z which gives us e is equal to"
+    },
+    {
+      "index": 192,
+      "start": 574.12,
+      "end": 576.79,
+      "duration": 2.67,
+      "text": "12 so at the end of the day we end up"
+    },
+    {
+      "index": 193,
+      "start": 576.8,
+      "end": 580.03,
+      "duration": 3.23,
+      "text": "with a particular"
+    },
+    {
+      "index": 194,
+      "start": 583.71,
+      "end": 583.72,
+      "duration": 0.01,
+      "text": "solution which is a polinomial of"
+    },
+    {
+      "index": 195,
+      "start": 583.72,
+      "end": 586.23,
+      "duration": 2.51,
+      "text": "1/5 T"
+    },
+    {
+      "index": 196,
+      "start": 586.24,
+      "end": 593.47,
+      "duration": 7.23,
+      "text": "5 minus t 4 plus C which is 4 T"
+    },
+    {
+      "index": 197,
+      "start": 593.48,
+      "end": 599.87,
+      "duration": 6.39,
+      "text": "cubed plus d which is -12 T ^2 plus e"
+    },
+    {
+      "index": 198,
+      "start": 599.88,
+      "end": 602.91,
+      "duration": 3.03,
+      "text": "which is 12 *"
+    },
+    {
+      "index": 199,
+      "start": 602.92,
+      "end": 606.23,
+      "duration": 3.31,
+      "text": "T and by construction this polinomial"
+    },
+    {
+      "index": 200,
+      "start": 606.24,
+      "end": 607.949,
+      "duration": 1.709,
+      "text": "solves the differential equation with"
+    },
+    {
+      "index": 201,
+      "start": 607.959,
+      "end": 609.47,
+      "duration": 1.511,
+      "text": "the forcing of T the four on the right"
+    },
+    {
+      "index": 202,
+      "start": 609.48,
+      "end": 610.43,
+      "duration": 0.95,
+      "text": "hand"
+    },
+    {
+      "index": 203,
+      "start": 610.44,
+      "end": 614.829,
+      "duration": 4.389,
+      "text": "side okay so just a recap uh when we're"
+    },
+    {
+      "index": 204,
+      "start": 614.839,
+      "end": 616.389,
+      "duration": 1.55,
+      "text": "uh faced with an undetermined"
+    },
+    {
+      "index": 205,
+      "start": 616.399,
+      "end": 618.67,
+      "duration": 2.271,
+      "text": "coefficient problem what we have to do"
+    },
+    {
+      "index": 206,
+      "start": 618.68,
+      "end": 620.949,
+      "duration": 2.269,
+      "text": "is we just guess a solution which is a"
+    },
+    {
+      "index": 207,
+      "start": 620.959,
+      "end": 622.99,
+      "duration": 2.031,
+      "text": "polinomial and the main difficulty is"
+    },
+    {
+      "index": 208,
+      "start": 623.0,
+      "end": 625.15,
+      "duration": 2.15,
+      "text": "just guessing the highest power of the"
+    },
+    {
+      "index": 209,
+      "start": 625.16,
+      "end": 627.43,
+      "duration": 2.27,
+      "text": "polinomial and that's always going to be"
+    },
+    {
+      "index": 210,
+      "start": 627.44,
+      "end": 629.11,
+      "duration": 1.67,
+      "text": "at least as big as the polinomial on the"
+    },
+    {
+      "index": 211,
+      "start": 629.12,
+      "end": 631.31,
+      "duration": 2.19,
+      "text": "right right hand side but as we saw in"
+    },
+    {
+      "index": 212,
+      "start": 631.32,
+      "end": 633.03,
+      "duration": 1.71,
+      "text": "Part B we sometimes have to knock it up"
+    },
+    {
+      "index": 213,
+      "start": 633.04,
+      "end": 635.79,
+      "duration": 2.75,
+      "text": "a few uh orders depending on what the"
+    },
+    {
+      "index": 214,
+      "start": 635.8,
+      "end": 638.55,
+      "duration": 2.75,
+      "text": "differential equation actually is okay"
+    },
+    {
+      "index": 215,
+      "start": 638.56,
+      "end": 640.23,
+      "duration": 1.67,
+      "text": "so I'd like to conclude here and I'll"
+    },
+    {
+      "index": 216,
+      "start": 640.24,
+      "end": 643.72,
+      "duration": 3.48,
+      "text": "see you next time"
+    }
+  ],
+  "course": {
+    "category": "Mathematics",
+    "title": "Differential Equations",
+    "source_url": "https://www.youtube.com/playlist?list=PL64BDFBDA2AF24F7E"
+  }
+}

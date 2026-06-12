@@ -1,0 +1,557 @@
+{
+  "video": {
+    "id": "QaOHeMnpnmU",
+    "title": "Functions as Arguments",
+    "url": "https://www.youtube.com/watch?v=QaOHeMnpnmU",
+    "channel": "MIT OpenCourseWare",
+    "duration": 213,
+    "language": "en"
+  },
+  "segment_count": 77,
+  "segments": [
+    {
+      "index": 0,
+      "start": 2.59,
+      "end": 2.6,
+      "duration": 0.01,
+      "text": "The following content is provided under"
+    },
+    {
+      "index": 1,
+      "start": 2.6,
+      "end": 5.31,
+      "duration": 2.71,
+      "text": "a Creative Commons license. Your support"
+    },
+    {
+      "index": 2,
+      "start": 5.32,
+      "end": 7.59,
+      "duration": 2.27,
+      "text": "will help MIT OpenCourseWare continue to"
+    },
+    {
+      "index": 3,
+      "start": 7.6,
+      "end": 9.95,
+      "duration": 2.35,
+      "text": "offer high-quality educational resources"
+    },
+    {
+      "index": 4,
+      "start": 9.96,
+      "end": 11.23,
+      "duration": 1.27,
+      "text": "for free."
+    },
+    {
+      "index": 5,
+      "start": 11.24,
+      "end": 13.39,
+      "duration": 2.15,
+      "text": "To make a donation or view additional"
+    },
+    {
+      "index": 6,
+      "start": 13.4,
+      "end": 16.07,
+      "duration": 2.67,
+      "text": "materials from hundreds of MIT courses,"
+    },
+    {
+      "index": 7,
+      "start": 16.08,
+      "end": 23.31,
+      "duration": 7.23,
+      "text": "visit MIT OpenCourseWare at ocw.mit.edu."
+    },
+    {
+      "index": 8,
+      "start": 26.59,
+      "end": 26.6,
+      "duration": 0.01,
+      "text": "So, here's um here's some code."
+    },
+    {
+      "index": 9,
+      "start": 26.6,
+      "end": 28.79,
+      "duration": 2.19,
+      "text": "I'm defining a function function named"
+    },
+    {
+      "index": 10,
+      "start": 28.8,
+      "end": 30.71,
+      "duration": 1.91,
+      "text": "sq."
+    },
+    {
+      "index": 11,
+      "start": 30.72,
+      "end": 33.35,
+      "duration": 2.63,
+      "text": "And it takes in two parameters."
+    },
+    {
+      "index": 12,
+      "start": 33.36,
+      "end": 35.71,
+      "duration": 2.35,
+      "text": "I'm defining a function named f, takes"
+    },
+    {
+      "index": 13,
+      "start": 35.72,
+      "end": 37.51,
+      "duration": 1.79,
+      "text": "in one parameter."
+    },
+    {
+      "index": 14,
+      "start": 37.52,
+      "end": 40.39,
+      "duration": 2.87,
+      "text": "And then I'm doing these two lines."
+    },
+    {
+      "index": 15,
+      "start": 40.4,
+      "end": 42.03,
+      "duration": 1.63,
+      "text": "The first one is just calling function"
+    },
+    {
+      "index": 16,
+      "start": 42.04,
+      "end": 43.55,
+      "duration": 1.51,
+      "text": "sq."
+    },
+    {
+      "index": 17,
+      "start": 43.56,
+      "end": 45.11,
+      "duration": 1.55,
+      "text": "And the next one is just printing the"
+    },
+    {
+      "index": 18,
+      "start": 45.12,
+      "end": 48.55,
+      "duration": 3.43,
+      "text": "value."
+    },
+    {
+      "index": 19,
+      "start": 51.15,
+      "end": 51.16,
+      "duration": 0.01,
+      "text": "So, let's first see"
+    },
+    {
+      "index": 20,
+      "start": 51.16,
+      "end": 54.55,
+      "duration": 3.39,
+      "text": "what uh nice. Okay."
+    },
+    {
+      "index": 21,
+      "start": 54.56,
+      "end": 55.75,
+      "duration": 1.19,
+      "text": "Uh"
+    },
+    {
+      "index": 22,
+      "start": 55.76,
+      "end": 61.83,
+      "duration": 6.07,
+      "text": "let's work through it."
+    },
+    {
+      "index": 23,
+      "start": 66.91,
+      "end": 66.92,
+      "duration": 0.01,
+      "text": "the first things we see here is two"
+    },
+    {
+      "index": 24,
+      "start": 66.92,
+      "end": 68.75,
+      "duration": 1.83,
+      "text": "function definitions, right? So, we"
+    },
+    {
+      "index": 25,
+      "start": 68.76,
+      "end": 70.51,
+      "duration": 1.75,
+      "text": "don't currently care about what's inside"
+    },
+    {
+      "index": 26,
+      "start": 70.52,
+      "end": 72.43,
+      "duration": 1.91,
+      "text": "them right now because we haven't made a"
+    },
+    {
+      "index": 27,
+      "start": 72.44,
+      "end": 73.91,
+      "duration": 1.47,
+      "text": "function call yet."
+    },
+    {
+      "index": 28,
+      "start": 73.92,
+      "end": 76.35,
+      "duration": 2.43,
+      "text": "So, the first thing we do is we have the"
+    },
+    {
+      "index": 29,
+      "start": 76.36,
+      "end": 78.27,
+      "duration": 1.91,
+      "text": "function call"
+    },
+    {
+      "index": 30,
+      "start": 78.28,
+      "end": 81.23,
+      "duration": 2.95,
+      "text": "calc equal sq f and two."
+    },
+    {
+      "index": 31,
+      "start": 81.24,
+      "end": 85.43,
+      "duration": 4.19,
+      "text": "Okay? So, inside sq,"
+    },
+    {
+      "index": 32,
+      "start": 85.44,
+      "end": 88.71,
+      "duration": 3.27,
+      "text": "we're going to have func"
+    },
+    {
+      "index": 33,
+      "start": 88.72,
+      "end": 92.55,
+      "duration": 3.83,
+      "text": "and x."
+    },
+    {
+      "index": 34,
+      "start": 95.83,
+      "end": 95.84,
+      "duration": 0.01,
+      "text": "And func is going to get mapped to f and"
+    },
+    {
+      "index": 35,
+      "start": 95.84,
+      "end": 98.87,
+      "duration": 3.03,
+      "text": "x is going to get mapped to two."
+    },
+    {
+      "index": 36,
+      "start": 98.88,
+      "end": 99.59,
+      "duration": 0.71,
+      "text": "Right?"
+    },
+    {
+      "index": 37,
+      "start": 99.6,
+      "end": 101.51,
+      "duration": 1.91,
+      "text": "We're taking the variables in order and"
+    },
+    {
+      "index": 38,
+      "start": 101.52,
+      "end": 103.47,
+      "duration": 1.95,
+      "text": "mapping them to those. So, f is func is"
+    },
+    {
+      "index": 39,
+      "start": 103.48,
+      "end": 106.51,
+      "duration": 3.03,
+      "text": "f and x is two."
+    },
+    {
+      "index": 40,
+      "start": 106.52,
+      "end": 108.83,
+      "duration": 2.31,
+      "text": "First thing the function does, sq, is"
+    },
+    {
+      "index": 41,
+      "start": 108.84,
+      "end": 111.11,
+      "duration": 2.27,
+      "text": "create this variable y is equal to x"
+    },
+    {
+      "index": 42,
+      "start": 111.12,
+      "end": 112.55,
+      "duration": 1.43,
+      "text": "squared."
+    },
+    {
+      "index": 43,
+      "start": 112.56,
+      "end": 115.79,
+      "duration": 3.23,
+      "text": "So, we're going to have y is equal to"
+    },
+    {
+      "index": 44,
+      "start": 115.8,
+      "end": 119.39,
+      "duration": 3.59,
+      "text": "four."
+    },
+    {
+      "index": 45,
+      "start": 122.91,
+      "end": 122.92,
+      "duration": 0.01,
+      "text": "And then we're going to return funk y."
+    },
+    {
+      "index": 46,
+      "start": 122.92,
+      "end": 124.35,
+      "duration": 1.43,
+      "text": "So,"
+    },
+    {
+      "index": 47,
+      "start": 124.36,
+      "end": 126.35,
+      "duration": 1.99,
+      "text": "funk of y,"
+    },
+    {
+      "index": 48,
+      "start": 126.36,
+      "end": 128.91,
+      "duration": 2.55,
+      "text": "this is going to be we're just replacing"
+    },
+    {
+      "index": 49,
+      "start": 128.92,
+      "end": 132.91,
+      "duration": 3.99,
+      "text": "the parameters f of four."
+    },
+    {
+      "index": 50,
+      "start": 132.92,
+      "end": 134.91,
+      "duration": 1.99,
+      "text": "Right?"
+    },
+    {
+      "index": 51,
+      "start": 134.92,
+      "end": 138.75,
+      "duration": 3.83,
+      "text": "So, now this is another function call."
+    },
+    {
+      "index": 52,
+      "start": 141.11,
+      "end": 141.12,
+      "duration": 0.01,
+      "text": "We know what f is. Python This program"
+    },
+    {
+      "index": 53,
+      "start": 141.12,
+      "end": 144.03,
+      "duration": 2.91,
+      "text": "knows what f is. F is going to be this"
+    },
+    {
+      "index": 54,
+      "start": 144.04,
+      "end": 147.19,
+      "duration": 3.15,
+      "text": "part right here, which returns x"
+    },
+    {
+      "index": 55,
+      "start": 147.2,
+      "end": 149.27,
+      "duration": 2.07,
+      "text": "squared."
+    },
+    {
+      "index": 56,
+      "start": 149.28,
+      "end": 150.19,
+      "duration": 0.91,
+      "text": "Okay?"
+    },
+    {
+      "index": 57,
+      "start": 150.2,
+      "end": 156.11,
+      "duration": 5.91,
+      "text": "So, in f,"
+    },
+    {
+      "index": 58,
+      "start": 158.39,
+      "end": 158.4,
+      "duration": 0.01,
+      "text": "x gets mapped to whatever variable we"
+    },
+    {
+      "index": 59,
+      "start": 158.4,
+      "end": 159.67,
+      "duration": 1.27,
+      "text": "put in,"
+    },
+    {
+      "index": 60,
+      "start": 159.68,
+      "end": 165.35,
+      "duration": 5.67,
+      "text": "which in this case is four."
+    },
+    {
+      "index": 61,
+      "start": 167.83,
+      "end": 167.84,
+      "duration": 0.01,
+      "text": "And we're going to return"
+    },
+    {
+      "index": 62,
+      "start": 167.84,
+      "end": 169.35,
+      "duration": 1.51,
+      "text": "to whoever called us, which is over"
+    },
+    {
+      "index": 63,
+      "start": 169.36,
+      "end": 171.47,
+      "duration": 2.11,
+      "text": "here, four squared,"
+    },
+    {
+      "index": 64,
+      "start": 171.48,
+      "end": 174.79,
+      "duration": 3.31,
+      "text": "which is 16."
+    },
+    {
+      "index": 65,
+      "start": 177.11,
+      "end": 177.12,
+      "duration": 0.01,
+      "text": "Okay? So, f of four gets replaced with"
+    },
+    {
+      "index": 66,
+      "start": 177.12,
+      "end": 182.15,
+      "duration": 5.03,
+      "text": "16."
+    },
+    {
+      "index": 67,
+      "start": 183.99,
+      "end": 184.0,
+      "duration": 0.01,
+      "text": "And"
+    },
+    {
+      "index": 68,
+      "start": 184.0,
+      "end": 186.509,
+      "duration": 2.509,
+      "text": "f of four was up here,"
+    },
+    {
+      "index": 69,
+      "start": 186.519,
+      "end": 188.19,
+      "duration": 1.671,
+      "text": "right? We're just popping out of scopes"
+    },
+    {
+      "index": 70,
+      "start": 188.2,
+      "end": 191.229,
+      "duration": 3.029,
+      "text": "now. So, f of four was up here. So, then"
+    },
+    {
+      "index": 71,
+      "start": 191.239,
+      "end": 192.31,
+      "duration": 1.071,
+      "text": "this"
+    },
+    {
+      "index": 72,
+      "start": 192.32,
+      "end": 194.83,
+      "duration": 2.51,
+      "text": "that line there, return funk y,"
+    },
+    {
+      "index": 73,
+      "start": 194.84,
+      "end": 197.59,
+      "duration": 2.75,
+      "text": "is going to return 16."
+    },
+    {
+      "index": 74,
+      "start": 197.6,
+      "end": 199.99,
+      "duration": 2.39,
+      "text": "And whoever called us was down here,"
+    },
+    {
+      "index": 75,
+      "start": 200.0,
+      "end": 202.27,
+      "duration": 2.27,
+      "text": "calc is equal to 16. And then we're just"
+    },
+    {
+      "index": 76,
+      "start": 202.28,
+      "end": 206.91,
+      "duration": 4.63,
+      "text": "printing calc."
+    }
+  ],
+  "course": {
+    "category": "Computer Science & AI",
+    "title": "Introduction to Computer Science and Programming in Python",
+    "source_url": "https://www.youtube.com/playlist?list=PLUl4u3cNGP63WbdFxL8giv4yhgdMGaZNA"
+  }
+}

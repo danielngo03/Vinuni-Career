@@ -1,0 +1,46 @@
+{
+  "student_id": "mock-student-ai-001",
+  "name": "Mock Student AI",
+  "skills": {
+    "Python": {
+      "score": 8,
+      "confidence": 0.9,
+      "evidence": [
+        "Built a sentiment classification notebook",
+        "Implemented FastAPI model inference endpoint"
+      ]
+    },
+    "Machine Learning": {
+      "score": 8,
+      "confidence": 0.85,
+      "evidence": [
+        "Completed supervised learning project",
+        "Evaluated precision and recall on model outputs"
+      ]
+    },
+    "LLM": {
+      "score": 7,
+      "confidence": 0.8,
+      "evidence": [
+        "Created prompt evaluation scripts",
+        "Tested retrieval augmented QA prototype"
+      ]
+    },
+    "SQL": {
+      "score": 6,
+      "confidence": 0.75,
+      "evidence": [
+        "Queried project experiment logs"
+      ]
+    }
+  },
+  "metadata": {
+    "owner_user_id": "mock_student_ai",
+    "major": "Computer Science",
+    "year": "3",
+    "email": "mock.ai@student.edu",
+    "is_mock": true,
+    "mock_type": "student_profile",
+    "mock_source": "local_demo_seed"
+  }
+}

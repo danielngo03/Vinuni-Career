@@ -1,0 +1,2881 @@
+{
+  "video": {
+    "id": "oEskbXrhkkk",
+    "title": "Trace-Determinant Diagram | MIT 18.03SC Differential Equations, Fall 2011",
+    "url": "https://www.youtube.com/watch?v=oEskbXrhkkk",
+    "channel": "MIT OpenCourseWare",
+    "duration": 1136,
+    "language": "en"
+  },
+  "segment_count": 409,
+  "segments": [
+    {
+      "index": 0,
+      "start": 8.15,
+      "end": 8.16,
+      "duration": 0.01,
+      "text": "Welcome to this recitation on the trace"
+    },
+    {
+      "index": 1,
+      "start": 8.16,
+      "end": 10.39,
+      "duration": 2.23,
+      "text": "determinant diagram. So here you're"
+    },
+    {
+      "index": 2,
+      "start": 10.4,
+      "end": 12.87,
+      "duration": 2.47,
+      "text": "asked to label the regions and lines of"
+    },
+    {
+      "index": 3,
+      "start": 12.88,
+      "end": 15.27,
+      "duration": 2.39,
+      "text": "the trace determinant diagram for a 2x"
+    },
+    {
+      "index": 4,
+      "start": 15.28,
+      "end": 17.51,
+      "duration": 2.23,
+      "text": "two general system written in the form x"
+    },
+    {
+      "index": 5,
+      "start": 17.52,
+      "end": 20.63,
+      "duration": 3.11,
+      "text": "prime equals ax and to indicate the"
+    },
+    {
+      "index": 6,
+      "start": 20.64,
+      "end": 23.67,
+      "duration": 3.03,
+      "text": "stability on your diagram. Um so here as"
+    },
+    {
+      "index": 7,
+      "start": 23.68,
+      "end": 26.15,
+      "duration": 2.47,
+      "text": "a reminder this system is simply a"
+    },
+    {
+      "index": 8,
+      "start": 26.16,
+      "end": 28.71,
+      "duration": 2.55,
+      "text": "system of uh two differential equations"
+    },
+    {
+      "index": 9,
+      "start": 28.72,
+      "end": 31.99,
+      "duration": 3.27,
+      "text": "in vector form xy the derivative of xy="
+    },
+    {
+      "index": 10,
+      "start": 32.0,
+      "end": 35.11,
+      "duration": 3.11,
+      "text": "a bcd a 2x2 matrix multiplying the"
+    },
+    {
+      "index": 11,
+      "start": 35.12,
+      "end": 38.069,
+      "duration": 2.949,
+      "text": "vector xy or in other in other in"
+    },
+    {
+      "index": 12,
+      "start": 38.079,
+      "end": 41.43,
+      "duration": 3.351,
+      "text": "another form uh it would be x dot= f of"
+    },
+    {
+      "index": 13,
+      "start": 41.44,
+      "end": 45.19,
+      "duration": 3.75,
+      "text": "xy and y dot= j of xy where the t"
+    },
+    {
+      "index": 14,
+      "start": 45.2,
+      "end": 47.19,
+      "duration": 1.99,
+      "text": "wouldn't appear in f and j here"
+    },
+    {
+      "index": 15,
+      "start": 47.2,
+      "end": 48.709,
+      "duration": 1.509,
+      "text": "functions which means that this system"
+    },
+    {
+      "index": 16,
+      "start": 48.719,
+      "end": 50.709,
+      "duration": 1.99,
+      "text": "would be autonomous and we're dealing"
+    },
+    {
+      "index": 17,
+      "start": 50.719,
+      "end": 53.189,
+      "duration": 2.47,
+      "text": "with linear systems. So, why don't you"
+    },
+    {
+      "index": 18,
+      "start": 53.199,
+      "end": 54.95,
+      "duration": 1.751,
+      "text": "pause the video, take a few minutes to"
+    },
+    {
+      "index": 19,
+      "start": 54.96,
+      "end": 56.47,
+      "duration": 1.51,
+      "text": "remind yourself what the trace"
+    },
+    {
+      "index": 20,
+      "start": 56.48,
+      "end": 58.63,
+      "duration": 2.15,
+      "text": "determinant diagram is and how to label"
+    },
+    {
+      "index": 21,
+      "start": 58.64,
+      "end": 69.95,
+      "duration": 11.31,
+      "text": "it, and I'll be right"
+    },
+    {
+      "index": 22,
+      "start": 73.109,
+      "end": 73.119,
+      "duration": 0.01,
+      "text": "back. Welcome back. Okay, so let's"
+    },
+    {
+      "index": 23,
+      "start": 73.119,
+      "end": 74.789,
+      "duration": 1.67,
+      "text": "remind ourselves where this trace"
+    },
+    {
+      "index": 24,
+      "start": 74.799,
+      "end": 77.23,
+      "duration": 2.431,
+      "text": "determinant diagram comes from. So"
+    },
+    {
+      "index": 25,
+      "start": 77.24,
+      "end": 79.59,
+      "duration": 2.35,
+      "text": "initially what we saw before was to"
+    },
+    {
+      "index": 26,
+      "start": 79.6,
+      "end": 81.67,
+      "duration": 2.07,
+      "text": "solve this system we need to find the"
+    },
+    {
+      "index": 27,
+      "start": 81.68,
+      "end": 86.19,
+      "duration": 4.51,
+      "text": "aen values of the matrix"
+    },
+    {
+      "index": 28,
+      "start": 90.95,
+      "end": 90.96,
+      "duration": 0.01,
+      "text": "A. The AEN values are solutions of this"
+    },
+    {
+      "index": 29,
+      "start": 90.96,
+      "end": 92.87,
+      "duration": 1.91,
+      "text": "equation which can be written in the"
+    },
+    {
+      "index": 30,
+      "start": 92.88,
+      "end": 94.51,
+      "duration": 1.63,
+      "text": "form lambda"
+    },
+    {
+      "index": 31,
+      "start": 94.52,
+      "end": 97.31,
+      "duration": 2.79,
+      "text": "square minus trace of"
+    },
+    {
+      "index": 32,
+      "start": 97.32,
+      "end": 101.67,
+      "duration": 4.35,
+      "text": "lambda plus determinant of A equals to"
+    },
+    {
+      "index": 33,
+      "start": 101.68,
+      "end": 105.19,
+      "duration": 3.51,
+      "text": "zero. Let's call this D and this T."
+    },
+    {
+      "index": 34,
+      "start": 105.2,
+      "end": 107.429,
+      "duration": 2.229,
+      "text": "Okay. And the trace of a is just the sum"
+    },
+    {
+      "index": 35,
+      "start": 107.439,
+      "end": 109.51,
+      "duration": 2.071,
+      "text": "of the diagonals of the matrix. And the"
+    },
+    {
+      "index": 36,
+      "start": 109.52,
+      "end": 112.069,
+      "duration": 2.549,
+      "text": "determinant is just in this case for 2x"
+    },
+    {
+      "index": 37,
+      "start": 112.079,
+      "end": 118.03,
+      "duration": 5.951,
+      "text": "two a d minus c b. Okay. So the"
+    },
+    {
+      "index": 38,
+      "start": 118.04,
+      "end": 121.749,
+      "duration": 3.709,
+      "text": "solutions for let's call them or plus"
+    },
+    {
+      "index": 39,
+      "start": 121.759,
+      "end": 125.389,
+      "duration": 3.63,
+      "text": "and minus"
+    },
+    {
+      "index": 40,
+      "start": 128.949,
+      "end": 128.959,
+      "duration": 0.01,
+      "text": "maybe for this uh second order polomial"
+    },
+    {
+      "index": 41,
+      "start": 128.959,
+      "end": 132.03,
+      "duration": 3.071,
+      "text": "will simply be"
+    },
+    {
+      "index": 42,
+      "start": 132.04,
+      "end": 135.99,
+      "duration": 3.95,
+      "text": "t plus of minus"
+    },
+    {
+      "index": 43,
+      "start": 136.0,
+      "end": 138.07,
+      "duration": 2.07,
+      "text": "the root of our the determinant of"
+    },
+    {
+      "index": 44,
+      "start": 138.08,
+      "end": 141.07,
+      "duration": 2.99,
+      "text": "second order polomial which"
+    },
+    {
+      "index": 45,
+      "start": 141.08,
+      "end": 145.99,
+      "duration": 4.91,
+      "text": "is t ^2 minus 4d. Okay. So the sign of t"
+    },
+    {
+      "index": 46,
+      "start": 146.0,
+      "end": 147.67,
+      "duration": 1.67,
+      "text": "^ square minus 4d is going to determine"
+    },
+    {
+      "index": 47,
+      "start": 147.68,
+      "end": 150.55,
+      "duration": 2.87,
+      "text": "whether we're dealing with real values"
+    },
+    {
+      "index": 48,
+      "start": 150.56,
+      "end": 154.07,
+      "duration": 3.51,
+      "text": "or imaginary or complex values or uh"
+    },
+    {
+      "index": 49,
+      "start": 154.08,
+      "end": 156.47,
+      "duration": 2.39,
+      "text": "simply repeated values if we have this"
+    },
+    {
+      "index": 50,
+      "start": 156.48,
+      "end": 158.55,
+      "duration": 2.07,
+      "text": "determinant under the root being equal"
+    },
+    {
+      "index": 51,
+      "start": 158.56,
+      "end": 161.47,
+      "duration": 2.91,
+      "text": "to zero."
+    },
+    {
+      "index": 52,
+      "start": 161.48,
+      "end": 165.509,
+      "duration": 4.029,
+      "text": "Okay. So just as a reminder here if uh"
+    },
+    {
+      "index": 53,
+      "start": 165.519,
+      "end": 167.47,
+      "duration": 1.951,
+      "text": "we"
+    },
+    {
+      "index": 54,
+      "start": 167.48,
+      "end": 172.15,
+      "duration": 4.67,
+      "text": "have t ^² over 4 equals to d we are in"
+    },
+    {
+      "index": 55,
+      "start": 172.16,
+      "end": 174.71,
+      "duration": 2.55,
+      "text": "the case well this is equal to zero"
+    },
+    {
+      "index": 56,
+      "start": 174.72,
+      "end": 178.07,
+      "duration": 3.35,
+      "text": "lambda plus or minus are the same and"
+    },
+    {
+      "index": 57,
+      "start": 178.08,
+      "end": 181.19,
+      "duration": 3.11,
+      "text": "they're just equal to the trace over"
+    },
+    {
+      "index": 58,
+      "start": 181.2,
+      "end": 183.03,
+      "duration": 1.83,
+      "text": "two. So the sign of the trace is going"
+    },
+    {
+      "index": 59,
+      "start": 183.04,
+      "end": 184.55,
+      "duration": 1.51,
+      "text": "to determine whether we have two"
+    },
+    {
+      "index": 60,
+      "start": 184.56,
+      "end": 186.47,
+      "duration": 1.91,
+      "text": "repeated negative aen values or two"
+    },
+    {
+      "index": 61,
+      "start": 186.48,
+      "end": 189.589,
+      "duration": 3.109,
+      "text": "repeated positive aen values. Now if we"
+    },
+    {
+      "index": 62,
+      "start": 189.599,
+      "end": 193.83,
+      "duration": 4.231,
+      "text": "have that the determinant"
+    },
+    {
+      "index": 63,
+      "start": 196.63,
+      "end": 196.64,
+      "duration": 0.01,
+      "text": "of the matrix A is larger than T ^"
+    },
+    {
+      "index": 64,
+      "start": 196.64,
+      "end": 199.43,
+      "duration": 2.79,
+      "text": "square over 4 then we are above the"
+    },
+    {
+      "index": 65,
+      "start": 199.44,
+      "end": 201.19,
+      "duration": 1.75,
+      "text": "curve determined by this equation which"
+    },
+    {
+      "index": 66,
+      "start": 201.2,
+      "end": 203.63,
+      "duration": 2.43,
+      "text": "is a parabola that I'll draw in a"
+    },
+    {
+      "index": 67,
+      "start": 203.64,
+      "end": 207.589,
+      "duration": 3.949,
+      "text": "minute and in this case we have the"
+    },
+    {
+      "index": 68,
+      "start": 207.599,
+      "end": 209.83,
+      "duration": 2.231,
+      "text": "number under the root being negative so"
+    },
+    {
+      "index": 69,
+      "start": 209.84,
+      "end": 212.509,
+      "duration": 2.669,
+      "text": "we're dealing with complex"
+    },
+    {
+      "index": 70,
+      "start": 212.519,
+      "end": 214.789,
+      "duration": 2.27,
+      "text": "values and basically they're just"
+    },
+    {
+      "index": 71,
+      "start": 214.799,
+      "end": 217.43,
+      "duration": 2.631,
+      "text": "complex conjugate of each other okay and"
+    },
+    {
+      "index": 72,
+      "start": 217.44,
+      "end": 219.99,
+      "duration": 2.55,
+      "text": "you can notice here that the trace would"
+    },
+    {
+      "index": 73,
+      "start": 220.0,
+      "end": 223.35,
+      "duration": 3.35,
+      "text": "be also the sum of the two agon values"
+    },
+    {
+      "index": 74,
+      "start": 223.36,
+      "end": 227.47,
+      "duration": 4.11,
+      "text": "and basically we would just have two"
+    },
+    {
+      "index": 75,
+      "start": 227.48,
+      "end": 230.71,
+      "duration": 3.23,
+      "text": "times the real part of lambda plus or"
+    },
+    {
+      "index": 76,
+      "start": 230.72,
+      "end": 233.71,
+      "duration": 2.99,
+      "text": "minus. Okay, just as a"
+    },
+    {
+      "index": 77,
+      "start": 233.72,
+      "end": 237.35,
+      "duration": 3.63,
+      "text": "note and in the third case where we have"
+    },
+    {
+      "index": 78,
+      "start": 237.36,
+      "end": 240.67,
+      "duration": 3.31,
+      "text": "that the determinant is below t ^2 over"
+    },
+    {
+      "index": 79,
+      "start": 240.68,
+      "end": 243.83,
+      "duration": 3.15,
+      "text": "4, we are in the case where this number"
+    },
+    {
+      "index": 80,
+      "start": 243.84,
+      "end": 245.83,
+      "duration": 1.99,
+      "text": "under the root is positive. So we're"
+    },
+    {
+      "index": 81,
+      "start": 245.84,
+      "end": 249.27,
+      "duration": 3.43,
+      "text": "dealing with two relean values. Um so"
+    },
+    {
+      "index": 82,
+      "start": 249.28,
+      "end": 253.75,
+      "duration": 4.47,
+      "text": "here I should mention real lambda plus"
+    },
+    {
+      "index": 83,
+      "start": 253.76,
+      "end": 257.43,
+      "duration": 3.67,
+      "text": "lda minus real and we can have multiple"
+    },
+    {
+      "index": 84,
+      "start": 257.44,
+      "end": 262.31,
+      "duration": 4.87,
+      "text": "cases. We can have lambda um plus larger"
+    },
+    {
+      "index": 85,
+      "start": 262.32,
+      "end": 264.87,
+      "duration": 2.55,
+      "text": "than lambda minus both positive. We can"
+    },
+    {
+      "index": 86,
+      "start": 264.88,
+      "end": 267.87,
+      "duration": 2.99,
+      "text": "have lambda plus less than lambda"
+    },
+    {
+      "index": 87,
+      "start": 267.88,
+      "end": 270.469,
+      "duration": 2.589,
+      "text": "minus both negative or we can have"
+    },
+    {
+      "index": 88,
+      "start": 270.479,
+      "end": 273.55,
+      "duration": 3.071,
+      "text": "lambda plus positive and lambda"
+    },
+    {
+      "index": 89,
+      "start": 273.56,
+      "end": 276.23,
+      "duration": 2.67,
+      "text": "minus negative and each case will give"
+    },
+    {
+      "index": 90,
+      "start": 276.24,
+      "end": 278.55,
+      "duration": 2.31,
+      "text": "us a different uh a different behavior"
+    },
+    {
+      "index": 91,
+      "start": 278.56,
+      "end": 280.95,
+      "duration": 2.39,
+      "text": "of the system. So let's summarize first"
+    },
+    {
+      "index": 92,
+      "start": 280.96,
+      "end": 282.67,
+      "duration": 1.71,
+      "text": "summarize this in this"
+    },
+    {
+      "index": 93,
+      "start": 282.68,
+      "end": 285.909,
+      "duration": 3.229,
+      "text": "following determinant trace diagram and"
+    },
+    {
+      "index": 94,
+      "start": 285.919,
+      "end": 290.11,
+      "duration": 4.191,
+      "text": "then we'll start labeling this"
+    },
+    {
+      "index": 95,
+      "start": 292.99,
+      "end": 293.0,
+      "duration": 0.01,
+      "text": "diagram. Oops. I should"
+    },
+    {
+      "index": 96,
+      "start": 293.0,
+      "end": 298.99,
+      "duration": 5.99,
+      "text": "probably keep a little more space"
+    },
+    {
+      "index": 97,
+      "start": 301.15,
+      "end": 301.16,
+      "duration": 0.01,
+      "text": "here. Still have more"
+    },
+    {
+      "index": 98,
+      "start": 301.16,
+      "end": 306.15,
+      "duration": 4.99,
+      "text": "space. So this is basically d= t ^² over"
+    },
+    {
+      "index": 99,
+      "start": 306.16,
+      "end": 309.749,
+      "duration": 3.589,
+      "text": "4 in our trace."
+    },
+    {
+      "index": 100,
+      "start": 309.759,
+      "end": 315.029,
+      "duration": 5.27,
+      "text": "determinant diagram. I'm going to also"
+    },
+    {
+      "index": 101,
+      "start": 315.039,
+      "end": 316.35,
+      "duration": 1.311,
+      "text": "erase this"
+    },
+    {
+      "index": 102,
+      "start": 316.36,
+      "end": 320.31,
+      "duration": 3.95,
+      "text": "part and just keep it in dots. Okay."
+    },
+    {
+      "index": 103,
+      "start": 320.32,
+      "end": 323.27,
+      "duration": 2.95,
+      "text": "Okay. So, in the first case that we"
+    },
+    {
+      "index": 104,
+      "start": 323.28,
+      "end": 325.029,
+      "duration": 1.749,
+      "text": "looked at, we are in the case where we"
+    },
+    {
+      "index": 105,
+      "start": 325.039,
+      "end": 327.67,
+      "duration": 2.631,
+      "text": "are right on this parabola. Okay. So,"
+    },
+    {
+      "index": 106,
+      "start": 327.68,
+      "end": 329.67,
+      "duration": 1.99,
+      "text": "that's the case where we have lambda"
+    },
+    {
+      "index": 107,
+      "start": 329.68,
+      "end": 332.55,
+      "duration": 2.87,
+      "text": "plus equal lambda minus. And you can see"
+    },
+    {
+      "index": 108,
+      "start": 332.56,
+      "end": 335.27,
+      "duration": 2.71,
+      "text": "that if the trace is positive, so if we"
+    },
+    {
+      "index": 109,
+      "start": 335.28,
+      "end": 336.469,
+      "duration": 1.189,
+      "text": "we are on the right hand side of the"
+    },
+    {
+      "index": 110,
+      "start": 336.479,
+      "end": 338.07,
+      "duration": 1.591,
+      "text": "diagram, then we're going to have two"
+    },
+    {
+      "index": 111,
+      "start": 338.08,
+      "end": 342.23,
+      "duration": 4.15,
+      "text": "positive AEN values that are both real."
+    },
+    {
+      "index": 112,
+      "start": 342.24,
+      "end": 344.629,
+      "duration": 2.389,
+      "text": "Okay. And they are repeated. So we can"
+    },
+    {
+      "index": 113,
+      "start": 344.639,
+      "end": 346.71,
+      "duration": 2.071,
+      "text": "have multiple cases. We can have the"
+    },
+    {
+      "index": 114,
+      "start": 346.72,
+      "end": 349.51,
+      "duration": 2.79,
+      "text": "case where we have a defective matrix"
+    },
+    {
+      "index": 115,
+      "start": 349.52,
+      "end": 351.67,
+      "duration": 2.15,
+      "text": "where basically here we only have one"
+    },
+    {
+      "index": 116,
+      "start": 351.68,
+      "end": 353.67,
+      "duration": 1.99,
+      "text": "aen vector associated with this repeated"
+    },
+    {
+      "index": 117,
+      "start": 353.68,
+      "end": 356.31,
+      "duration": 2.63,
+      "text": "aen value and we have a defective case"
+    },
+    {
+      "index": 118,
+      "start": 356.32,
+      "end": 358.23,
+      "duration": 1.91,
+      "text": "where we need to come up with a second"
+    },
+    {
+      "index": 119,
+      "start": 358.24,
+      "end": 360.629,
+      "duration": 2.389,
+      "text": "agon vector using the generalized agon"
+    },
+    {
+      "index": 120,
+      "start": 360.639,
+      "end": 362.31,
+      "duration": 1.671,
+      "text": "vector formula and I'm not going to"
+    },
+    {
+      "index": 121,
+      "start": 362.32,
+      "end": 364.15,
+      "duration": 1.83,
+      "text": "write this here but I'm going to just do"
+    },
+    {
+      "index": 122,
+      "start": 364.16,
+      "end": 365.15,
+      "duration": 0.99,
+      "text": "the"
+    },
+    {
+      "index": 123,
+      "start": 365.16,
+      "end": 368.71,
+      "duration": 3.55,
+      "text": "diagram. So for example we would have"
+    },
+    {
+      "index": 124,
+      "start": 368.72,
+      "end": 371.55,
+      "duration": 2.83,
+      "text": "one direction"
+    },
+    {
+      "index": 125,
+      "start": 371.56,
+      "end": 374.15,
+      "duration": 2.59,
+      "text": "V1 where we would have in this case"
+    },
+    {
+      "index": 126,
+      "start": 374.16,
+      "end": 378.11,
+      "duration": 3.95,
+      "text": "lambda 1 and lambda minus"
+    },
+    {
+      "index": 127,
+      "start": 378.12,
+      "end": 382.55,
+      "duration": 4.43,
+      "text": "positive. So in the phase space in yx"
+    },
+    {
+      "index": 128,
+      "start": 382.56,
+      "end": 384.309,
+      "duration": 1.749,
+      "text": "the little diagram would show us that"
+    },
+    {
+      "index": 129,
+      "start": 384.319,
+      "end": 385.99,
+      "duration": 1.671,
+      "text": "the solution are escaping from the"
+    },
+    {
+      "index": 130,
+      "start": 386.0,
+      "end": 388.07,
+      "duration": 2.07,
+      "text": "critical point or the equilibrium point."
+    },
+    {
+      "index": 131,
+      "start": 388.08,
+      "end": 389.83,
+      "duration": 1.75,
+      "text": "And the second solution that we built"
+    },
+    {
+      "index": 132,
+      "start": 389.84,
+      "end": 392.55,
+      "duration": 2.71,
+      "text": "would have a dependence in v1 and tv1"
+    },
+    {
+      "index": 133,
+      "start": 392.56,
+      "end": 395.909,
+      "duration": 3.349,
+      "text": "plus a second agon vector v2 also also"
+    },
+    {
+      "index": 134,
+      "start": 395.919,
+      "end": 398.71,
+      "duration": 2.791,
+      "text": "directed by the positive aen value. And"
+    },
+    {
+      "index": 135,
+      "start": 398.72,
+      "end": 400.99,
+      "duration": 2.27,
+      "text": "so we would have a solution for"
+    },
+    {
+      "index": 136,
+      "start": 401.0,
+      "end": 404.59,
+      "duration": 3.59,
+      "text": "example that would look like"
+    },
+    {
+      "index": 137,
+      "start": 404.6,
+      "end": 408.87,
+      "duration": 4.27,
+      "text": "this with the solution escaping from the"
+    },
+    {
+      "index": 138,
+      "start": 408.88,
+      "end": 410.629,
+      "duration": 1.749,
+      "text": "critical point because again we are in"
+    },
+    {
+      "index": 139,
+      "start": 410.639,
+      "end": 412.469,
+      "duration": 1.83,
+      "text": "the case where the two values are"
+    },
+    {
+      "index": 140,
+      "start": 412.479,
+      "end": 414.79,
+      "duration": 2.311,
+      "text": "positive. And so here we could have it"
+    },
+    {
+      "index": 141,
+      "start": 414.8,
+      "end": 417.189,
+      "duration": 2.389,
+      "text": "in this form or we can also have it have"
+    },
+    {
+      "index": 142,
+      "start": 417.199,
+      "end": 419.67,
+      "duration": 2.471,
+      "text": "the diagram uh in in the other direction"
+    },
+    {
+      "index": 143,
+      "start": 419.68,
+      "end": 421.35,
+      "duration": 1.67,
+      "text": "and I'll do it in the other direction on"
+    },
+    {
+      "index": 144,
+      "start": 421.36,
+      "end": 424.309,
+      "duration": 2.949,
+      "text": "the other wing of the of the of the uh"
+    },
+    {
+      "index": 145,
+      "start": 424.319,
+      "end": 428.749,
+      "duration": 4.43,
+      "text": "diagram. So this is the defective"
+    },
+    {
+      "index": 146,
+      "start": 431.55,
+      "end": 431.56,
+      "duration": 0.01,
+      "text": "case"
+    },
+    {
+      "index": 147,
+      "start": 431.56,
+      "end": 434.469,
+      "duration": 2.909,
+      "text": "defective node. The other possibility"
+    },
+    {
+      "index": 148,
+      "start": 434.479,
+      "end": 437.189,
+      "duration": 2.71,
+      "text": "that we could have on this uh parabola"
+    },
+    {
+      "index": 149,
+      "start": 437.199,
+      "end": 439.029,
+      "duration": 1.83,
+      "text": "and I'm going to just do it here will be"
+    },
+    {
+      "index": 150,
+      "start": 439.039,
+      "end": 442.55,
+      "duration": 3.511,
+      "text": "the case where we actually have all the"
+    },
+    {
+      "index": 151,
+      "start": 442.56,
+      "end": 445.51,
+      "duration": 2.95,
+      "text": "a all the direction could be a vectors"
+    },
+    {
+      "index": 152,
+      "start": 445.52,
+      "end": 447.67,
+      "duration": 2.15,
+      "text": "for this uh associated with this aen"
+    },
+    {
+      "index": 153,
+      "start": 447.68,
+      "end": 449.029,
+      "duration": 1.349,
+      "text": "value and this would be for example for"
+    },
+    {
+      "index": 154,
+      "start": 449.039,
+      "end": 452.15,
+      "duration": 3.111,
+      "text": "a diagonal matrix in which case all the"
+    },
+    {
+      "index": 155,
+      "start": 452.16,
+      "end": 456.27,
+      "duration": 4.11,
+      "text": "directions would be"
+    },
+    {
+      "index": 156,
+      "start": 458.629,
+      "end": 458.639,
+      "duration": 0.01,
+      "text": "escaping all the trajectories would be"
+    },
+    {
+      "index": 157,
+      "start": 458.639,
+      "end": 461.11,
+      "duration": 2.471,
+      "text": "escaping from the critical point and"
+    },
+    {
+      "index": 158,
+      "start": 461.12,
+      "end": 463.23,
+      "duration": 2.11,
+      "text": "this would be a"
+    },
+    {
+      "index": 159,
+      "start": 463.24,
+      "end": 465.51,
+      "duration": 2.27,
+      "text": "star. Obviously here we are in the"
+    },
+    {
+      "index": 160,
+      "start": 465.52,
+      "end": 468.11,
+      "duration": 2.59,
+      "text": "instable"
+    },
+    {
+      "index": 161,
+      "start": 470.87,
+      "end": 470.88,
+      "duration": 0.01,
+      "text": "case for the defective node and we are"
+    },
+    {
+      "index": 162,
+      "start": 470.88,
+      "end": 473.79,
+      "duration": 2.91,
+      "text": "also in the"
+    },
+    {
+      "index": 163,
+      "start": 476.07,
+      "end": 476.08,
+      "duration": 0.01,
+      "text": "unstable case for the star because all"
+    },
+    {
+      "index": 164,
+      "start": 476.08,
+      "end": 478.23,
+      "duration": 2.15,
+      "text": "the solutions are escaping are basically"
+    },
+    {
+      "index": 165,
+      "start": 478.24,
+      "end": 480.55,
+      "duration": 2.31,
+      "text": "going away. So if I start at equilibrium"
+    },
+    {
+      "index": 166,
+      "start": 480.56,
+      "end": 482.23,
+      "duration": 1.67,
+      "text": "the solution and I perturb it a little"
+    },
+    {
+      "index": 167,
+      "start": 482.24,
+      "end": 483.749,
+      "duration": 1.509,
+      "text": "bit the solutions would want to escape"
+    },
+    {
+      "index": 168,
+      "start": 483.759,
+      "end": 487.189,
+      "duration": 3.43,
+      "text": "from that equilibrium point. Okay. So on"
+    },
+    {
+      "index": 169,
+      "start": 487.199,
+      "end": 488.95,
+      "duration": 1.751,
+      "text": "the other side here it would be exactly"
+    },
+    {
+      "index": 170,
+      "start": 488.96,
+      "end": 491.07,
+      "duration": 2.11,
+      "text": "the same"
+    },
+    {
+      "index": 171,
+      "start": 491.08,
+      "end": 494.15,
+      "duration": 3.07,
+      "text": "structure except that I would have"
+    },
+    {
+      "index": 172,
+      "start": 494.16,
+      "end": 496.23,
+      "duration": 2.07,
+      "text": "stability because the trace is negative."
+    },
+    {
+      "index": 173,
+      "start": 496.24,
+      "end": 501.469,
+      "duration": 5.229,
+      "text": "So I would have"
+    },
+    {
+      "index": 174,
+      "start": 504.029,
+      "end": 504.039,
+      "duration": 0.01,
+      "text": "asmtoically"
+    },
+    {
+      "index": 175,
+      "start": 504.039,
+      "end": 506.869,
+      "duration": 2.83,
+      "text": "stable star. Why asically? because"
+    },
+    {
+      "index": 176,
+      "start": 506.879,
+      "end": 508.71,
+      "duration": 1.831,
+      "text": "basically it's when t goes to infinity"
+    },
+    {
+      "index": 177,
+      "start": 508.72,
+      "end": 510.55,
+      "duration": 1.83,
+      "text": "that the trajectories reach the critical"
+    },
+    {
+      "index": 178,
+      "start": 510.56,
+      "end": 512.709,
+      "duration": 2.149,
+      "text": "point. Okay. And this is again in the"
+    },
+    {
+      "index": 179,
+      "start": 512.719,
+      "end": 515.149,
+      "duration": 2.43,
+      "text": "face base yx"
+    },
+    {
+      "index": 180,
+      "start": 515.159,
+      "end": 518.709,
+      "duration": 3.55,
+      "text": "diagram for the defective node we would"
+    },
+    {
+      "index": 181,
+      "start": 518.719,
+      "end": 522.389,
+      "duration": 3.67,
+      "text": "have this time for example direction v1"
+    },
+    {
+      "index": 182,
+      "start": 522.399,
+      "end": 525.11,
+      "duration": 2.711,
+      "text": "attracting the solutions the array v1"
+    },
+    {
+      "index": 183,
+      "start": 525.12,
+      "end": 528.07,
+      "duration": 2.95,
+      "text": "and the the new trajectory that we will"
+    },
+    {
+      "index": 184,
+      "start": 528.08,
+      "end": 530.71,
+      "duration": 2.63,
+      "text": "be uh constructing based on v_sub1 would"
+    },
+    {
+      "index": 185,
+      "start": 530.72,
+      "end": 533.67,
+      "duration": 2.95,
+      "text": "again we be be dv v1 plus v2 a"
+    },
+    {
+      "index": 186,
+      "start": 533.68,
+      "end": 536.15,
+      "duration": 2.47,
+      "text": "generalized egg vector. both of them"
+    },
+    {
+      "index": 187,
+      "start": 536.16,
+      "end": 538.79,
+      "duration": 2.63,
+      "text": "would uh give us solutions that convert"
+    },
+    {
+      "index": 188,
+      "start": 538.8,
+      "end": 540.79,
+      "duration": 1.99,
+      "text": "toward the equilibrium because the two"
+    },
+    {
+      "index": 189,
+      "start": 540.8,
+      "end": 543.91,
+      "duration": 3.11,
+      "text": "values here are negative. And so we have"
+    },
+    {
+      "index": 190,
+      "start": 543.92,
+      "end": 546.91,
+      "duration": 2.99,
+      "text": "that"
+    },
+    {
+      "index": 191,
+      "start": 551.99,
+      "end": 552.0,
+      "duration": 0.01,
+      "text": "for large time the solution follows v1"
+    },
+    {
+      "index": 192,
+      "start": 552.0,
+      "end": 554.87,
+      "duration": 2.87,
+      "text": "and for uh large time minus infinity it"
+    },
+    {
+      "index": 193,
+      "start": 554.88,
+      "end": 556.71,
+      "duration": 1.83,
+      "text": "follows v1 and for plus infinity it's"
+    },
+    {
+      "index": 194,
+      "start": 556.72,
+      "end": 558.389,
+      "duration": 1.669,
+      "text": "going toward the equilibrium point also"
+    },
+    {
+      "index": 195,
+      "start": 558.399,
+      "end": 561.91,
+      "duration": 3.511,
+      "text": "follows v1. So the solutions would have"
+    },
+    {
+      "index": 196,
+      "start": 561.92,
+      "end": 565.75,
+      "duration": 3.83,
+      "text": "to look like this."
+    },
+    {
+      "index": 197,
+      "start": 565.76,
+      "end": 572.11,
+      "duration": 6.35,
+      "text": "for example, and this would be"
+    },
+    {
+      "index": 198,
+      "start": 574.67,
+      "end": 574.68,
+      "duration": 0.01,
+      "text": "asically"
+    },
+    {
+      "index": 199,
+      "start": 574.68,
+      "end": 578.03,
+      "duration": 3.35,
+      "text": "stable defective"
+    },
+    {
+      "index": 200,
+      "start": 578.04,
+      "end": 581.03,
+      "duration": 2.99,
+      "text": "node. Okay, so we're done with this uh"
+    },
+    {
+      "index": 201,
+      "start": 581.04,
+      "end": 583.35,
+      "duration": 2.31,
+      "text": "with the points on the parabola. So now"
+    },
+    {
+      "index": 202,
+      "start": 583.36,
+      "end": 585.03,
+      "duration": 1.67,
+      "text": "let's look at the other points and I'll"
+    },
+    {
+      "index": 203,
+      "start": 585.04,
+      "end": 588.07,
+      "duration": 3.03,
+      "text": "go maybe a bit less in the details. Um"
+    },
+    {
+      "index": 204,
+      "start": 588.08,
+      "end": 590.43,
+      "duration": 2.35,
+      "text": "so for"
+    },
+    {
+      "index": 205,
+      "start": 590.44,
+      "end": 592.79,
+      "duration": 2.35,
+      "text": "the the case where we have the"
+    },
+    {
+      "index": 206,
+      "start": 592.8,
+      "end": 595.35,
+      "duration": 2.55,
+      "text": "determinant larger than t ^ square over"
+    },
+    {
+      "index": 207,
+      "start": 595.36,
+      "end": 597.99,
+      "duration": 2.63,
+      "text": "4 so we are just above this parabola now"
+    },
+    {
+      "index": 208,
+      "start": 598.0,
+      "end": 602.15,
+      "duration": 4.15,
+      "text": "we have the case uh where we have two"
+    },
+    {
+      "index": 209,
+      "start": 602.16,
+      "end": 604.47,
+      "duration": 2.31,
+      "text": "complex values there are two complex"
+    },
+    {
+      "index": 210,
+      "start": 604.48,
+      "end": 607.19,
+      "duration": 2.71,
+      "text": "conjugates so let's assume that we can"
+    },
+    {
+      "index": 211,
+      "start": 607.2,
+      "end": 610.23,
+      "duration": 3.03,
+      "text": "then just expand our our solution and"
+    },
+    {
+      "index": 212,
+      "start": 610.24,
+      "end": 612.55,
+      "duration": 2.31,
+      "text": "write it in terms of the exponential in"
+    },
+    {
+      "index": 213,
+      "start": 612.56,
+      "end": 616.63,
+      "duration": 4.07,
+      "text": "terms of the real part of the aen value."
+    },
+    {
+      "index": 214,
+      "start": 616.64,
+      "end": 618.31,
+      "duration": 1.67,
+      "text": "So it would be determined again the"
+    },
+    {
+      "index": 215,
+      "start": 618.32,
+      "end": 619.99,
+      "duration": 1.67,
+      "text": "trace will give us the sign of the real"
+    },
+    {
+      "index": 216,
+      "start": 620.0,
+      "end": 621.67,
+      "duration": 1.67,
+      "text": "part of the aen value multiplying a"
+    },
+    {
+      "index": 217,
+      "start": 621.68,
+      "end": 623.829,
+      "duration": 2.149,
+      "text": "cosine and a sign. So we have something"
+    },
+    {
+      "index": 218,
+      "start": 623.839,
+      "end": 627.03,
+      "duration": 3.191,
+      "text": "that is rotating uh in the in phase"
+    },
+    {
+      "index": 219,
+      "start": 627.04,
+      "end": 629.11,
+      "duration": 2.07,
+      "text": "space because we have basically a"
+    },
+    {
+      "index": 220,
+      "start": 629.12,
+      "end": 631.35,
+      "duration": 2.23,
+      "text": "periodicity but the distance to the"
+    },
+    {
+      "index": 221,
+      "start": 631.36,
+      "end": 633.269,
+      "duration": 1.909,
+      "text": "critical point is changing and it's"
+    },
+    {
+      "index": 222,
+      "start": 633.279,
+      "end": 635.03,
+      "duration": 1.751,
+      "text": "either growing if we have a positive"
+    },
+    {
+      "index": 223,
+      "start": 635.04,
+      "end": 637.11,
+      "duration": 2.07,
+      "text": "real part for our aen values. So if we"
+    },
+    {
+      "index": 224,
+      "start": 637.12,
+      "end": 640.55,
+      "duration": 3.43,
+      "text": "are on this side or decaying uh if we"
+    },
+    {
+      "index": 225,
+      "start": 640.56,
+      "end": 642.79,
+      "duration": 2.23,
+      "text": "are on the left side of the diagram. So"
+    },
+    {
+      "index": 226,
+      "start": 642.8,
+      "end": 646.069,
+      "duration": 3.269,
+      "text": "that gives us typically spirals."
+    },
+    {
+      "index": 227,
+      "start": 646.079,
+      "end": 648.03,
+      "duration": 1.951,
+      "text": "So for"
+    },
+    {
+      "index": 228,
+      "start": 648.04,
+      "end": 651.23,
+      "duration": 3.19,
+      "text": "example that would be a"
+    },
+    {
+      "index": 229,
+      "start": 651.24,
+      "end": 654.55,
+      "duration": 3.31,
+      "text": "spiral going toward zero uh toward the"
+    },
+    {
+      "index": 230,
+      "start": 654.56,
+      "end": 656.47,
+      "duration": 1.91,
+      "text": "equilibrium point in phase space. And"
+    },
+    {
+      "index": 231,
+      "start": 656.48,
+      "end": 658.47,
+      "duration": 1.99,
+      "text": "here we would be in the case where we"
+    },
+    {
+      "index": 232,
+      "start": 658.48,
+      "end": 660.99,
+      "duration": 2.51,
+      "text": "have"
+    },
+    {
+      "index": 233,
+      "start": 663.35,
+      "end": 663.36,
+      "duration": 0.01,
+      "text": "instability due to the fact that the"
+    },
+    {
+      "index": 234,
+      "start": 663.36,
+      "end": 665.03,
+      "duration": 1.67,
+      "text": "real part of the aen value determining"
+    },
+    {
+      "index": 235,
+      "start": 665.04,
+      "end": 667.11,
+      "duration": 2.07,
+      "text": "the stability is positive and so the"
+    },
+    {
+      "index": 236,
+      "start": 667.12,
+      "end": 670.79,
+      "duration": 3.67,
+      "text": "solution of the trajectories escape from"
+    },
+    {
+      "index": 237,
+      "start": 670.8,
+      "end": 673.91,
+      "duration": 3.11,
+      "text": "the critical point. And similarly here"
+    },
+    {
+      "index": 238,
+      "start": 673.92,
+      "end": 676.389,
+      "duration": 2.469,
+      "text": "we could have the exam the same"
+    },
+    {
+      "index": 239,
+      "start": 676.399,
+      "end": 677.75,
+      "duration": 1.351,
+      "text": "structure but I'm just going to draw it"
+    },
+    {
+      "index": 240,
+      "start": 677.76,
+      "end": 679.47,
+      "duration": 1.71,
+      "text": "in another"
+    },
+    {
+      "index": 241,
+      "start": 679.48,
+      "end": 682.31,
+      "duration": 2.83,
+      "text": "direction where here we would have"
+    },
+    {
+      "index": 242,
+      "start": 682.32,
+      "end": 685.67,
+      "duration": 3.35,
+      "text": "stability. Oops, they should not cross."
+    },
+    {
+      "index": 243,
+      "start": 685.68,
+      "end": 690.67,
+      "duration": 4.99,
+      "text": "This is not the right way to draw"
+    },
+    {
+      "index": 244,
+      "start": 694.31,
+      "end": 694.32,
+      "duration": 0.01,
+      "text": "this. And it would be going toward the"
+    },
+    {
+      "index": 245,
+      "start": 694.32,
+      "end": 696.47,
+      "duration": 2.15,
+      "text": "critical point. So here just a quick"
+    },
+    {
+      "index": 246,
+      "start": 696.48,
+      "end": 698.63,
+      "duration": 2.15,
+      "text": "note you can have this trajectory being"
+    },
+    {
+      "index": 247,
+      "start": 698.64,
+      "end": 700.389,
+      "duration": 1.749,
+      "text": "drawn this way. So here we have"
+    },
+    {
+      "index": 248,
+      "start": 700.399,
+      "end": 703.35,
+      "duration": 2.951,
+      "text": "basically a ca a clockwise motion but we"
+    },
+    {
+      "index": 249,
+      "start": 703.36,
+      "end": 705.269,
+      "duration": 1.909,
+      "text": "could also have it be drawn in the other"
+    },
+    {
+      "index": 250,
+      "start": 705.279,
+      "end": 707.99,
+      "duration": 2.711,
+      "text": "way for both cases giving us another"
+    },
+    {
+      "index": 251,
+      "start": 708.0,
+      "end": 710.71,
+      "duration": 2.71,
+      "text": "another uh direction of rotation face"
+    },
+    {
+      "index": 252,
+      "start": 710.72,
+      "end": 712.71,
+      "duration": 1.99,
+      "text": "and the direction that you choose will"
+    },
+    {
+      "index": 253,
+      "start": 712.72,
+      "end": 717.19,
+      "duration": 4.47,
+      "text": "be determined by uh the lowest left"
+    },
+    {
+      "index": 254,
+      "start": 717.2,
+      "end": 720.23,
+      "duration": 3.03,
+      "text": "entry of your matrix A and I will just"
+    },
+    {
+      "index": 255,
+      "start": 720.24,
+      "end": 722.55,
+      "duration": 2.31,
+      "text": "explain quickly how how we do that okay"
+    },
+    {
+      "index": 256,
+      "start": 722.56,
+      "end": 724.31,
+      "duration": 1.75,
+      "text": "so we have basically here in stable"
+    },
+    {
+      "index": 257,
+      "start": 724.32,
+      "end": 725.949,
+      "duration": 1.629,
+      "text": "spiral"
+    },
+    {
+      "index": 258,
+      "start": 725.959,
+      "end": 732.269,
+      "duration": 6.31,
+      "text": "mode and here it's again asmtoically"
+    },
+    {
+      "index": 259,
+      "start": 735.31,
+      "end": 735.32,
+      "duration": 0.01,
+      "text": "stable uh"
+    },
+    {
+      "index": 260,
+      "start": 735.32,
+      "end": 738.15,
+      "duration": 2.83,
+      "text": "spiral. So what happens now if we are in"
+    },
+    {
+      "index": 261,
+      "start": 738.16,
+      "end": 739.509,
+      "duration": 1.349,
+      "text": "this case we're still above the"
+    },
+    {
+      "index": 262,
+      "start": 739.519,
+      "end": 742.949,
+      "duration": 3.43,
+      "text": "parabola. So we have still complex um"
+    },
+    {
+      "index": 263,
+      "start": 742.959,
+      "end": 747.829,
+      "duration": 4.87,
+      "text": "complex uh eggen values. However we have"
+    },
+    {
+      "index": 264,
+      "start": 747.839,
+      "end": 750.23,
+      "duration": 2.391,
+      "text": "now the fact that the trace is equal to"
+    },
+    {
+      "index": 265,
+      "start": 750.24,
+      "end": 752.47,
+      "duration": 2.23,
+      "text": "zero which means that the egg values"
+    },
+    {
+      "index": 266,
+      "start": 752.48,
+      "end": 754.389,
+      "duration": 1.909,
+      "text": "don't have any real part. So basically"
+    },
+    {
+      "index": 267,
+      "start": 754.399,
+      "end": 757.43,
+      "duration": 3.031,
+      "text": "we have pure oscillation and in fa in"
+    },
+    {
+      "index": 268,
+      "start": 757.44,
+      "end": 758.949,
+      "duration": 1.509,
+      "text": "the phase space that corresponds to"
+    },
+    {
+      "index": 269,
+      "start": 758.959,
+      "end": 761.91,
+      "duration": 2.951,
+      "text": "closed trajectories that could be"
+    },
+    {
+      "index": 270,
+      "start": 761.92,
+      "end": 764.55,
+      "duration": 2.63,
+      "text": "circles or ellipses basically. And so"
+    },
+    {
+      "index": 271,
+      "start": 764.56,
+      "end": 767.47,
+      "duration": 2.91,
+      "text": "for example we would"
+    },
+    {
+      "index": 272,
+      "start": 767.48,
+      "end": 770.069,
+      "duration": 2.589,
+      "text": "have something of this form that would"
+    },
+    {
+      "index": 273,
+      "start": 770.079,
+      "end": 773.15,
+      "duration": 3.071,
+      "text": "be called the"
+    },
+    {
+      "index": 274,
+      "start": 776.509,
+      "end": 776.519,
+      "duration": 0.01,
+      "text": "center. And here again you can have"
+    },
+    {
+      "index": 275,
+      "start": 776.519,
+      "end": 779.67,
+      "duration": 3.151,
+      "text": "either counterclockwise or a clockwise"
+    },
+    {
+      "index": 276,
+      "start": 779.68,
+      "end": 782.949,
+      "duration": 3.269,
+      "text": "rotation in phase space depending on uh"
+    },
+    {
+      "index": 277,
+      "start": 782.959,
+      "end": 785.59,
+      "duration": 2.631,
+      "text": "the the signs of the entries of your"
+    },
+    {
+      "index": 278,
+      "start": 785.6,
+      "end": 787.829,
+      "duration": 2.229,
+      "text": "matrix."
+    },
+    {
+      "index": 279,
+      "start": 787.839,
+      "end": 789.15,
+      "duration": 1.311,
+      "text": "So"
+    },
+    {
+      "index": 280,
+      "start": 789.16,
+      "end": 792.389,
+      "duration": 3.229,
+      "text": "uh one thing I want to note is that here"
+    },
+    {
+      "index": 281,
+      "start": 792.399,
+      "end": 795.269,
+      "duration": 2.87,
+      "text": "the stability for the center is simply"
+    },
+    {
+      "index": 282,
+      "start": 795.279,
+      "end": 797.75,
+      "duration": 2.471,
+      "text": "we say that it's simply stable and not"
+    },
+    {
+      "index": 283,
+      "start": 797.76,
+      "end": 800.31,
+      "duration": 2.55,
+      "text": "astoically stable because the solution"
+    },
+    {
+      "index": 284,
+      "start": 800.32,
+      "end": 802.629,
+      "duration": 2.309,
+      "text": "never actually reaches the the uh"
+    },
+    {
+      "index": 285,
+      "start": 802.639,
+      "end": 804.949,
+      "duration": 2.31,
+      "text": "critical point but stays in the region"
+    },
+    {
+      "index": 286,
+      "start": 804.959,
+      "end": 807.59,
+      "duration": 2.631,
+      "text": "around the critical point. So we're left"
+    },
+    {
+      "index": 287,
+      "start": 807.6,
+      "end": 811.11,
+      "duration": 3.51,
+      "text": "with a few other cases that are now all"
+    },
+    {
+      "index": 288,
+      "start": 811.12,
+      "end": 813.509,
+      "duration": 2.389,
+      "text": "below the parabola and for that we just"
+    },
+    {
+      "index": 289,
+      "start": 813.519,
+      "end": 816.629,
+      "duration": 3.11,
+      "text": "have real aen values. Okay. So let's"
+    },
+    {
+      "index": 290,
+      "start": 816.639,
+      "end": 818.87,
+      "duration": 2.231,
+      "text": "look at the case where the aen values"
+    },
+    {
+      "index": 291,
+      "start": 818.88,
+      "end": 821.75,
+      "duration": 2.87,
+      "text": "have two different signs. So for that we"
+    },
+    {
+      "index": 292,
+      "start": 821.76,
+      "end": 823.11,
+      "duration": 1.35,
+      "text": "have to have the determinant being"
+    },
+    {
+      "index": 293,
+      "start": 823.12,
+      "end": 825.269,
+      "duration": 2.149,
+      "text": "negative. So it's this whole lower part"
+    },
+    {
+      "index": 294,
+      "start": 825.279,
+      "end": 827.269,
+      "duration": 1.99,
+      "text": "of the diagram because the determinant"
+    },
+    {
+      "index": 295,
+      "start": 827.279,
+      "end": 829.03,
+      "duration": 1.751,
+      "text": "is the product of the two aen values. So"
+    },
+    {
+      "index": 296,
+      "start": 829.04,
+      "end": 830.23,
+      "duration": 1.19,
+      "text": "if they have different signs we're in"
+    },
+    {
+      "index": 297,
+      "start": 830.24,
+      "end": 832.19,
+      "duration": 1.95,
+      "text": "this region. So in this"
+    },
+    {
+      "index": 298,
+      "start": 832.2,
+      "end": 836.71,
+      "duration": 4.51,
+      "text": "case we could have for example uh one"
+    },
+    {
+      "index": 299,
+      "start": 836.72,
+      "end": 839.71,
+      "duration": 2.99,
+      "text": "aen"
+    },
+    {
+      "index": 300,
+      "start": 843.99,
+      "end": 844.0,
+      "duration": 0.01,
+      "text": "value with associated vector v1 being"
+    },
+    {
+      "index": 301,
+      "start": 844.0,
+      "end": 846.47,
+      "duration": 2.47,
+      "text": "negative. So the trajectories on along"
+    },
+    {
+      "index": 302,
+      "start": 846.48,
+      "end": 848.15,
+      "duration": 1.67,
+      "text": "this ray would be going toward the"
+    },
+    {
+      "index": 303,
+      "start": 848.16,
+      "end": 852.43,
+      "duration": 4.27,
+      "text": "equilibrium point and then um and then"
+    },
+    {
+      "index": 304,
+      "start": 852.44,
+      "end": 855.67,
+      "duration": 3.23,
+      "text": "another the other a value would be"
+    },
+    {
+      "index": 305,
+      "start": 855.68,
+      "end": 858.629,
+      "duration": 2.949,
+      "text": "positive. So for example, lambda 2 here"
+    },
+    {
+      "index": 306,
+      "start": 858.639,
+      "end": 861.509,
+      "duration": 2.87,
+      "text": "would correspond to this other agon"
+    },
+    {
+      "index": 307,
+      "start": 861.519,
+      "end": 865.03,
+      "duration": 3.511,
+      "text": "vector uh v2. And so here we would have"
+    },
+    {
+      "index": 308,
+      "start": 865.04,
+      "end": 868.79,
+      "duration": 3.75,
+      "text": "solutions that would be close to v1 when"
+    },
+    {
+      "index": 309,
+      "start": 868.8,
+      "end": 870.67,
+      "duration": 1.87,
+      "text": "we're coming for example from minus"
+    },
+    {
+      "index": 310,
+      "start": 870.68,
+      "end": 873.03,
+      "duration": 2.35,
+      "text": "infinity approaching the critical point"
+    },
+    {
+      "index": 311,
+      "start": 873.04,
+      "end": 876.069,
+      "duration": 3.029,
+      "text": "and then going back toward uh"
+    },
+    {
+      "index": 312,
+      "start": 876.079,
+      "end": 878.31,
+      "duration": 2.231,
+      "text": "approaching v2 when we go at t plus"
+    },
+    {
+      "index": 313,
+      "start": 878.32,
+      "end": 880.829,
+      "duration": 2.509,
+      "text": "infinity for example. And so it gives"
+    },
+    {
+      "index": 314,
+      "start": 880.839,
+      "end": 888.75,
+      "duration": 7.911,
+      "text": "us pseudo hyperbolas form here of this"
+    },
+    {
+      "index": 315,
+      "start": 897.509,
+      "end": 897.519,
+      "duration": 0.01,
+      "text": "unstable because all the solutions uh do"
+    },
+    {
+      "index": 316,
+      "start": 897.519,
+      "end": 899.35,
+      "duration": 1.831,
+      "text": "not go to the critical point but we have"
+    },
+    {
+      "index": 317,
+      "start": 899.36,
+      "end": 901.43,
+      "duration": 2.07,
+      "text": "some stable manifolds. For example, the"
+    },
+    {
+      "index": 318,
+      "start": 901.44,
+      "end": 903.67,
+      "duration": 2.23,
+      "text": "V1 if we start on this ray we would be"
+    },
+    {
+      "index": 319,
+      "start": 903.68,
+      "end": 905.189,
+      "duration": 1.509,
+      "text": "going toward the critical point and if"
+    },
+    {
+      "index": 320,
+      "start": 905.199,
+      "end": 906.47,
+      "duration": 1.271,
+      "text": "we start the critical point itself it"
+    },
+    {
+      "index": 321,
+      "start": 906.48,
+      "end": 907.99,
+      "duration": 1.51,
+      "text": "would stay in the critical point but it"
+    },
+    {
+      "index": 322,
+      "start": 908.0,
+      "end": 910.23,
+      "duration": 2.23,
+      "text": "is unstable. So now what happened in"
+    },
+    {
+      "index": 323,
+      "start": 910.24,
+      "end": 912.47,
+      "duration": 2.23,
+      "text": "these two different regions to finish."
+    },
+    {
+      "index": 324,
+      "start": 912.48,
+      "end": 914.31,
+      "duration": 1.83,
+      "text": "So in these two different regions and"
+    },
+    {
+      "index": 325,
+      "start": 914.32,
+      "end": 915.59,
+      "duration": 1.27,
+      "text": "I'm going to have a little bit more"
+    },
+    {
+      "index": 326,
+      "start": 915.6,
+      "end": 917.71,
+      "duration": 2.11,
+      "text": "space"
+    },
+    {
+      "index": 327,
+      "start": 917.72,
+      "end": 920.389,
+      "duration": 2.669,
+      "text": "here. Oh yeah thank you. And this would"
+    },
+    {
+      "index": 328,
+      "start": 920.399,
+      "end": 925.79,
+      "duration": 5.391,
+      "text": "be a saddle and it's just because of the"
+    },
+    {
+      "index": 329,
+      "start": 928.71,
+      "end": 928.72,
+      "duration": 0.01,
+      "text": "shape. So going to just add a little bit"
+    },
+    {
+      "index": 330,
+      "start": 928.72,
+      "end": 931.43,
+      "duration": 2.71,
+      "text": "of space here."
+    },
+    {
+      "index": 331,
+      "start": 931.44,
+      "end": 933.31,
+      "duration": 1.87,
+      "text": "so that we can complete the"
+    },
+    {
+      "index": 332,
+      "start": 933.32,
+      "end": 935.91,
+      "duration": 2.59,
+      "text": "diagram. So we are be basically looking"
+    },
+    {
+      "index": 333,
+      "start": 935.92,
+      "end": 938.31,
+      "duration": 2.39,
+      "text": "at the regions uh here in the in the"
+    },
+    {
+      "index": 334,
+      "start": 938.32,
+      "end": 940.949,
+      "duration": 2.629,
+      "text": "wedge where we're below the parabola and"
+    },
+    {
+      "index": 335,
+      "start": 940.959,
+      "end": 943.03,
+      "duration": 2.071,
+      "text": "I'm looking for another color but maybe"
+    },
+    {
+      "index": 336,
+      "start": 943.04,
+      "end": 945.509,
+      "duration": 2.469,
+      "text": "I'll just use white."
+    },
+    {
+      "index": 337,
+      "start": 945.519,
+      "end": 947.829,
+      "duration": 2.31,
+      "text": "Okay, so now we are in the case where we"
+    },
+    {
+      "index": 338,
+      "start": 947.839,
+      "end": 949.23,
+      "duration": 1.391,
+      "text": "would"
+    },
+    {
+      "index": 339,
+      "start": 949.24,
+      "end": 952.509,
+      "duration": 3.269,
+      "text": "have two aen values both real so no"
+    },
+    {
+      "index": 340,
+      "start": 952.519,
+      "end": 956.15,
+      "duration": 3.631,
+      "text": "oscillation but let's say both positive"
+    },
+    {
+      "index": 341,
+      "start": 956.16,
+      "end": 957.91,
+      "duration": 1.75,
+      "text": "because we're basically on this on the"
+    },
+    {
+      "index": 342,
+      "start": 957.92,
+      "end": 960.15,
+      "duration": 2.23,
+      "text": "region where the trace is positive okay"
+    },
+    {
+      "index": 343,
+      "start": 960.16,
+      "end": 963.03,
+      "duration": 2.87,
+      "text": "so let's say that we have one ray v1 one"
+    },
+    {
+      "index": 344,
+      "start": 963.04,
+      "end": 965.67,
+      "duration": 2.63,
+      "text": "ray v2 the trajectories are going away"
+    },
+    {
+      "index": 345,
+      "start": 965.68,
+      "end": 967.99,
+      "duration": 2.31,
+      "text": "from the critical point because the two"
+    },
+    {
+      "index": 346,
+      "start": 968.0,
+      "end": 971.43,
+      "duration": 3.43,
+      "text": "aen values are positive okay and now"
+    },
+    {
+      "index": 347,
+      "start": 971.44,
+      "end": 973.749,
+      "duration": 2.309,
+      "text": "what what do the other trajectories do"
+    },
+    {
+      "index": 348,
+      "start": 973.759,
+      "end": 976.389,
+      "duration": 2.63,
+      "text": "where they follow"
+    },
+    {
+      "index": 349,
+      "start": 976.399,
+      "end": 980.43,
+      "duration": 4.031,
+      "text": "uh so for example there would be"
+    },
+    {
+      "index": 350,
+      "start": 980.44,
+      "end": 983.91,
+      "duration": 3.47,
+      "text": "following V2 and I'm going to explain"
+    },
+    {
+      "index": 351,
+      "start": 983.92,
+      "end": 985.59,
+      "duration": 1.67,
+      "text": "how so here we're in the case where"
+    },
+    {
+      "index": 352,
+      "start": 985.6,
+      "end": 987.79,
+      "duration": 2.19,
+      "text": "obviously we're"
+    },
+    {
+      "index": 353,
+      "start": 987.8,
+      "end": 990.31,
+      "duration": 2.51,
+      "text": "unstable because again the solution the"
+    },
+    {
+      "index": 354,
+      "start": 990.32,
+      "end": 991.67,
+      "duration": 1.35,
+      "text": "trajectories are going away from the"
+    },
+    {
+      "index": 355,
+      "start": 991.68,
+      "end": 994.55,
+      "duration": 2.87,
+      "text": "critical point and here how do you pick"
+    },
+    {
+      "index": 356,
+      "start": 994.56,
+      "end": 997.43,
+      "duration": 2.87,
+      "text": "uh which uh ray do you follow when you"
+    },
+    {
+      "index": 357,
+      "start": 997.44,
+      "end": 999.43,
+      "duration": 1.99,
+      "text": "get close to the critical point where in"
+    },
+    {
+      "index": 358,
+      "start": 999.44,
+      "end": 1001.749,
+      "duration": 2.309,
+      "text": "this case we would be in the situation"
+    },
+    {
+      "index": 359,
+      "start": 1001.759,
+      "end": 1006.71,
+      "duration": 4.951,
+      "text": "where we have lambda 2 um lambda 2"
+    },
+    {
+      "index": 360,
+      "start": 1006.72,
+      "end": 1009.749,
+      "duration": 3.029,
+      "text": "smaller than lambda 1 larger than zero."
+    },
+    {
+      "index": 361,
+      "start": 1009.759,
+      "end": 1012.55,
+      "duration": 2.791,
+      "text": "So basically the lambda 2 that is the"
+    },
+    {
+      "index": 362,
+      "start": 1012.56,
+      "end": 1014.389,
+      "duration": 1.829,
+      "text": "closer to zero and that's also the case"
+    },
+    {
+      "index": 363,
+      "start": 1014.399,
+      "end": 1016.71,
+      "duration": 2.311,
+      "text": "for the positive and the negative uh aen"
+    },
+    {
+      "index": 364,
+      "start": 1016.72,
+      "end": 1019.509,
+      "duration": 2.789,
+      "text": "values is the one that determines the"
+    },
+    {
+      "index": 365,
+      "start": 1019.519,
+      "end": 1021.59,
+      "duration": 2.071,
+      "text": "solution closer to critical point and"
+    },
+    {
+      "index": 366,
+      "start": 1021.6,
+      "end": 1024.71,
+      "duration": 3.11,
+      "text": "the larger in absolute value agon value"
+    },
+    {
+      "index": 367,
+      "start": 1024.72,
+      "end": 1027.429,
+      "duration": 2.709,
+      "text": "uh and its array then determines the"
+    },
+    {
+      "index": 368,
+      "start": 1027.439,
+      "end": 1031.909,
+      "duration": 4.47,
+      "text": "behavior um u determines the behavior."
+    },
+    {
+      "index": 369,
+      "start": 1031.919,
+      "end": 1033.669,
+      "duration": 1.75,
+      "text": "Oh, sorry. There's a mistake here. It"
+    },
+    {
+      "index": 370,
+      "start": 1033.679,
+      "end": 1035.949,
+      "duration": 2.27,
+      "text": "should be lambda"
+    },
+    {
+      "index": 371,
+      "start": 1035.959,
+      "end": 1038.47,
+      "duration": 2.511,
+      "text": "one. I said I said it, but I think I"
+    },
+    {
+      "index": 372,
+      "start": 1038.48,
+      "end": 1040.789,
+      "duration": 2.309,
+      "text": "wrote it reversely. Yeah, the smaller"
+    },
+    {
+      "index": 373,
+      "start": 1040.799,
+      "end": 1043.029,
+      "duration": 2.23,
+      "text": "the aen value closer to zero is the one"
+    },
+    {
+      "index": 374,
+      "start": 1043.039,
+      "end": 1044.63,
+      "duration": 1.591,
+      "text": "that determines the behavior at zero. So"
+    },
+    {
+      "index": 375,
+      "start": 1044.64,
+      "end": 1046.47,
+      "duration": 1.83,
+      "text": "here when we're going to infinity, the"
+    },
+    {
+      "index": 376,
+      "start": 1046.48,
+      "end": 1048.39,
+      "duration": 1.91,
+      "text": "larger aen value lambda 2 will determine"
+    },
+    {
+      "index": 377,
+      "start": 1048.4,
+      "end": 1050.23,
+      "duration": 1.83,
+      "text": "the behavior and the trajectories were"
+    },
+    {
+      "index": 378,
+      "start": 1050.24,
+      "end": 1052.71,
+      "duration": 2.47,
+      "text": "become more and more parallel to v2. So"
+    },
+    {
+      "index": 379,
+      "start": 1052.72,
+      "end": 1054.47,
+      "duration": 1.75,
+      "text": "what happened on this side? then it"
+    },
+    {
+      "index": 380,
+      "start": 1054.48,
+      "end": 1056.63,
+      "duration": 2.15,
+      "text": "would be exactly the same diagram and"
+    },
+    {
+      "index": 381,
+      "start": 1056.64,
+      "end": 1058.029,
+      "duration": 1.389,
+      "text": "I'm just going to do"
+    },
+    {
+      "index": 382,
+      "start": 1058.039,
+      "end": 1061.39,
+      "duration": 3.351,
+      "text": "it similarly with the"
+    },
+    {
+      "index": 383,
+      "start": 1061.4,
+      "end": 1063.87,
+      "duration": 2.47,
+      "text": "same let's say"
+    },
+    {
+      "index": 384,
+      "start": 1063.88,
+      "end": 1070.99,
+      "duration": 7.11,
+      "text": "B2 here except that we would"
+    },
+    {
+      "index": 385,
+      "start": 1074.87,
+      "end": 1074.88,
+      "duration": 0.01,
+      "text": "have our uh direction going trajectories"
+    },
+    {
+      "index": 386,
+      "start": 1074.88,
+      "end": 1080.99,
+      "duration": 6.11,
+      "text": "going toward the critical"
+    },
+    {
+      "index": 387,
+      "start": 1083.83,
+      "end": 1083.84,
+      "duration": 0.01,
+      "text": "point and the trajectories here again"
+    },
+    {
+      "index": 388,
+      "start": 1083.84,
+      "end": 1086.07,
+      "duration": 2.23,
+      "text": "would be closer to v1. So which means"
+    },
+    {
+      "index": 389,
+      "start": 1086.08,
+      "end": 1087.75,
+      "duration": 1.67,
+      "text": "that we would have a case where we have"
+    },
+    {
+      "index": 390,
+      "start": 1087.76,
+      "end": 1091.19,
+      "duration": 3.43,
+      "text": "lambda 1 less than zero and larger than"
+    },
+    {
+      "index": 391,
+      "start": 1091.2,
+      "end": 1094.23,
+      "duration": 3.03,
+      "text": "lambda 2. So that finishes roughly the"
+    },
+    {
+      "index": 392,
+      "start": 1094.24,
+      "end": 1097.51,
+      "duration": 3.27,
+      "text": "diagram. I didn't detail a few"
+    },
+    {
+      "index": 393,
+      "start": 1097.52,
+      "end": 1099.909,
+      "duration": 2.389,
+      "text": "borderline regions for example the"
+    },
+    {
+      "index": 394,
+      "start": 1099.919,
+      "end": 1101.75,
+      "duration": 1.831,
+      "text": "region where the determinant equals to"
+    },
+    {
+      "index": 395,
+      "start": 1101.76,
+      "end": 1104.63,
+      "duration": 2.87,
+      "text": "zero and uh we will discuss that in in"
+    },
+    {
+      "index": 396,
+      "start": 1104.64,
+      "end": 1107.43,
+      "duration": 2.79,
+      "text": "another recitation and the case also at"
+    },
+    {
+      "index": 397,
+      "start": 1107.44,
+      "end": 1109.35,
+      "duration": 1.91,
+      "text": "which uh the determinant and the trace"
+    },
+    {
+      "index": 398,
+      "start": 1109.36,
+      "end": 1110.95,
+      "duration": 1.59,
+      "text": "are equal to zero. So we'll detail that"
+    },
+    {
+      "index": 399,
+      "start": 1110.96,
+      "end": 1114.23,
+      "duration": 3.27,
+      "text": "also but try to uh think about it to"
+    },
+    {
+      "index": 400,
+      "start": 1114.24,
+      "end": 1116.549,
+      "duration": 2.309,
+      "text": "complete the diagram. Okay. So the key"
+    },
+    {
+      "index": 401,
+      "start": 1116.559,
+      "end": 1118.95,
+      "duration": 2.391,
+      "text": "points here were to remember what is the"
+    },
+    {
+      "index": 402,
+      "start": 1118.96,
+      "end": 1121.19,
+      "duration": 2.23,
+      "text": "determinant trace diagram how to"
+    },
+    {
+      "index": 403,
+      "start": 1121.2,
+      "end": 1124.15,
+      "duration": 2.95,
+      "text": "interpret uh the how to basically deduce"
+    },
+    {
+      "index": 404,
+      "start": 1124.16,
+      "end": 1126.549,
+      "duration": 2.389,
+      "text": "the nature of the aen values based on t"
+    },
+    {
+      "index": 405,
+      "start": 1126.559,
+      "end": 1129.83,
+      "duration": 3.271,
+      "text": "and d their sign and where to place uh"
+    },
+    {
+      "index": 406,
+      "start": 1129.84,
+      "end": 1131.669,
+      "duration": 1.829,
+      "text": "the different structures on this"
+    },
+    {
+      "index": 407,
+      "start": 1131.679,
+      "end": 1134.15,
+      "duration": 2.471,
+      "text": "determinant trace diagram. And that ends"
+    },
+    {
+      "index": 408,
+      "start": 1134.16,
+      "end": 1137.2,
+      "duration": 3.04,
+      "text": "this recitation."
+    }
+  ],
+  "course": {
+    "category": "Mathematics",
+    "title": "Differential Equations",
+    "source_url": "https://www.youtube.com/playlist?list=PL64BDFBDA2AF24F7E"
+  }
+}

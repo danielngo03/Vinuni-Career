@@ -1,0 +1,6479 @@
+{
+  "video": {
+    "id": "IZqwi0wJovM",
+    "title": "23. Differential Equations and exp(At)",
+    "url": "https://www.youtube.com/watch?v=IZqwi0wJovM",
+    "channel": "MIT OpenCourseWare",
+    "duration": 3063,
+    "language": "en"
+  },
+  "segment_count": 923,
+  "segments": [
+    {
+      "index": 0,
+      "start": 11.99,
+      "end": 12.0,
+      "duration": 0.01,
+      "text": "and lift off on differential equations"
+    },
+    {
+      "index": 1,
+      "start": 12.0,
+      "end": 17.15,
+      "duration": 5.15,
+      "text": "so this section is about how to solve a"
+    },
+    {
+      "index": 2,
+      "start": 17.16,
+      "end": 21.87,
+      "duration": 4.71,
+      "text": "system of first order first derivative"
+    },
+    {
+      "index": 3,
+      "start": 21.88,
+      "end": 25.669,
+      "duration": 3.789,
+      "text": "constant coefficient linear"
+    },
+    {
+      "index": 4,
+      "start": 25.679,
+      "end": 27.83,
+      "duration": 2.151,
+      "text": "equation"
+    },
+    {
+      "index": 5,
+      "start": 27.84,
+      "end": 31.31,
+      "duration": 3.47,
+      "text": "and if we do it right it turns directly"
+    },
+    {
+      "index": 6,
+      "start": 31.32,
+      "end": 34.709,
+      "duration": 3.389,
+      "text": "into linear algebra the the key idea is"
+    },
+    {
+      "index": 7,
+      "start": 34.719,
+      "end": 37.59,
+      "duration": 2.871,
+      "text": "the solutions to constant coefficient"
+    },
+    {
+      "index": 8,
+      "start": 37.6,
+      "end": 40.67,
+      "duration": 3.07,
+      "text": "linear equations are"
+    },
+    {
+      "index": 9,
+      "start": 40.68,
+      "end": 43.709,
+      "duration": 3.029,
+      "text": "exponentials so if you look for an"
+    },
+    {
+      "index": 10,
+      "start": 43.719,
+      "end": 46.229,
+      "duration": 2.51,
+      "text": "exponential then all you have to find is"
+    },
+    {
+      "index": 11,
+      "start": 46.239,
+      "end": 48.709,
+      "duration": 2.47,
+      "text": "what's up there in the exponent and what"
+    },
+    {
+      "index": 12,
+      "start": 48.719,
+      "end": 51.47,
+      "duration": 2.751,
+      "text": "multiplies the exponential and that's"
+    },
+    {
+      "index": 13,
+      "start": 51.48,
+      "end": 55.63,
+      "duration": 4.15,
+      "text": "the linear algebra so and the result one"
+    },
+    {
+      "index": 14,
+      "start": 55.64,
+      "end": 58.349,
+      "duration": 2.709,
+      "text": "thing we will find it's it's completely"
+    },
+    {
+      "index": 15,
+      "start": 58.359,
+      "end": 62.189,
+      "duration": 3.83,
+      "text": "parallel to powers of a matrix so the"
+    },
+    {
+      "index": 16,
+      "start": 62.199,
+      "end": 65.149,
+      "duration": 2.95,
+      "text": "last lecture was about how would you"
+    },
+    {
+      "index": 17,
+      "start": 65.159,
+      "end": 68.95,
+      "duration": 3.791,
+      "text": "compute a to the k or a to the 100 how"
+    },
+    {
+      "index": 18,
+      "start": 68.96,
+      "end": 71.27,
+      "duration": 2.31,
+      "text": "how do you compute High powers of a"
+    },
+    {
+      "index": 19,
+      "start": 71.28,
+      "end": 75.39,
+      "duration": 4.11,
+      "text": "matrix now uh it's not Powers anymore"
+    },
+    {
+      "index": 20,
+      "start": 75.4,
+      "end": 77.67,
+      "duration": 2.27,
+      "text": "but it's"
+    },
+    {
+      "index": 21,
+      "start": 77.68,
+      "end": 80.069,
+      "duration": 2.389,
+      "text": "exponentials that's the natural thing"
+    },
+    {
+      "index": 22,
+      "start": 80.079,
+      "end": 83.55,
+      "duration": 3.471,
+      "text": "for differential equation okay but can I"
+    },
+    {
+      "index": 23,
+      "start": 83.56,
+      "end": 85.71,
+      "duration": 2.15,
+      "text": "begin with an"
+    },
+    {
+      "index": 24,
+      "start": 85.72,
+      "end": 87.91,
+      "duration": 2.19,
+      "text": "example and I'll just go through the"
+    },
+    {
+      "index": 25,
+      "start": 87.92,
+      "end": 90.469,
+      "duration": 2.549,
+      "text": "mechanics how would I solve"
+    },
+    {
+      "index": 26,
+      "start": 90.479,
+      "end": 92.71,
+      "duration": 2.231,
+      "text": "the differential equ two differential"
+    },
+    {
+      "index": 27,
+      "start": 92.72,
+      "end": 94.91,
+      "duration": 2.19,
+      "text": "equations so I'm going to make it I'll"
+    },
+    {
+      "index": 28,
+      "start": 94.92,
+      "end": 97.389,
+      "duration": 2.469,
+      "text": "have a 2X two Matrix and the"
+    },
+    {
+      "index": 29,
+      "start": 97.399,
+      "end": 101.469,
+      "duration": 4.07,
+      "text": "coefficients are min-1 2 1 minus 2 and I"
+    },
+    {
+      "index": 30,
+      "start": 101.479,
+      "end": 104.149,
+      "duration": 2.67,
+      "text": "better give you some initial condition"
+    },
+    {
+      "index": 31,
+      "start": 104.159,
+      "end": 108.789,
+      "duration": 4.63,
+      "text": "so suppose it starts U at time zero this"
+    },
+    {
+      "index": 32,
+      "start": 108.799,
+      "end": 113.31,
+      "duration": 4.511,
+      "text": "is U1 U2 let it let it suppose"
+    },
+    {
+      "index": 33,
+      "start": 113.32,
+      "end": 118.069,
+      "duration": 4.749,
+      "text": "everything is in U1 at time zero so orig"
+    },
+    {
+      "index": 34,
+      "start": 118.079,
+      "end": 120.389,
+      "duration": 2.31,
+      "text": "at at the start it's all in"
+    },
+    {
+      "index": 35,
+      "start": 120.399,
+      "end": 124.63,
+      "duration": 4.231,
+      "text": "1 but what happens as time goes"
+    },
+    {
+      "index": 36,
+      "start": 124.64,
+      "end": 129.229,
+      "duration": 4.589,
+      "text": "on du2 DT will will be positive because"
+    },
+    {
+      "index": 37,
+      "start": 129.239,
+      "end": 133.03,
+      "duration": 3.791,
+      "text": "of that U1 term so flow will move into"
+    },
+    {
+      "index": 38,
+      "start": 133.04,
+      "end": 136.79,
+      "duration": 3.75,
+      "text": "the U2 component and it will go out of"
+    },
+    {
+      "index": 39,
+      "start": 136.8,
+      "end": 140.15,
+      "duration": 3.35,
+      "text": "the U1 component so we'll just follow"
+    },
+    {
+      "index": 40,
+      "start": 140.16,
+      "end": 144.63,
+      "duration": 4.47,
+      "text": "that movement as time goes forward by"
+    },
+    {
+      "index": 41,
+      "start": 144.64,
+      "end": 147.67,
+      "duration": 3.03,
+      "text": "looking at the igen values and igen"
+    },
+    {
+      "index": 42,
+      "start": 147.68,
+      "end": 150.229,
+      "duration": 2.549,
+      "text": "vectors of that Matrix"
+    },
+    {
+      "index": 43,
+      "start": 150.239,
+      "end": 152.71,
+      "duration": 2.471,
+      "text": "that's the first job before you do"
+    },
+    {
+      "index": 44,
+      "start": 152.72,
+      "end": 155.869,
+      "duration": 3.149,
+      "text": "anything else find the find the Matrix"
+    },
+    {
+      "index": 45,
+      "start": 155.879,
+      "end": 159.589,
+      "duration": 3.71,
+      "text": "and its igen values and ion vectors so"
+    },
+    {
+      "index": 46,
+      "start": 159.599,
+      "end": 161.589,
+      "duration": 1.99,
+      "text": "let me do"
+    },
+    {
+      "index": 47,
+      "start": 161.599,
+      "end": 164.39,
+      "duration": 2.791,
+      "text": "that okay so here's our"
+    },
+    {
+      "index": 48,
+      "start": 164.4,
+      "end": 167.229,
+      "duration": 2.829,
+      "text": "Matrix maybe you can tell me right away"
+    },
+    {
+      "index": 49,
+      "start": 167.239,
+      "end": 170.79,
+      "duration": 3.551,
+      "text": "what what are the igen values and I and"
+    },
+    {
+      "index": 50,
+      "start": 170.8,
+      "end": 174.71,
+      "duration": 3.91,
+      "text": "I values anyway uh and then we can check"
+    },
+    {
+      "index": 51,
+      "start": 174.72,
+      "end": 177.11,
+      "duration": 2.39,
+      "text": "but can you spot any of the igen values"
+    },
+    {
+      "index": 52,
+      "start": 177.12,
+      "end": 178.99,
+      "duration": 1.87,
+      "text": "of that Matrix we're looking for two"
+    },
+    {
+      "index": 53,
+      "start": 179.0,
+      "end": 180.79,
+      "duration": 1.79,
+      "text": "igen values"
+    },
+    {
+      "index": 54,
+      "start": 180.8,
+      "end": 183.309,
+      "duration": 2.509,
+      "text": "do you see I mean if I just wrote that"
+    },
+    {
+      "index": 55,
+      "start": 183.319,
+      "end": 185.27,
+      "duration": 1.951,
+      "text": "Matrix down what what do you notice"
+    },
+    {
+      "index": 56,
+      "start": 185.28,
+      "end": 186.67,
+      "duration": 1.39,
+      "text": "about"
+    },
+    {
+      "index": 57,
+      "start": 186.68,
+      "end": 190.27,
+      "duration": 3.59,
+      "text": "it it's singular right that that's a"
+    },
+    {
+      "index": 58,
+      "start": 190.28,
+      "end": 192.55,
+      "duration": 2.27,
+      "text": "singular Matrix that tells me right away"
+    },
+    {
+      "index": 59,
+      "start": 192.56,
+      "end": 196.47,
+      "duration": 3.91,
+      "text": "that one of the igen values is Lambda"
+    },
+    {
+      "index": 60,
+      "start": 196.48,
+      "end": 200.229,
+      "duration": 3.749,
+      "text": "equals zero I can that's a singular"
+    },
+    {
+      "index": 61,
+      "start": 200.239,
+      "end": 203.949,
+      "duration": 3.71,
+      "text": "Matrix the the second column is min-2"
+    },
+    {
+      "index": 62,
+      "start": 203.959,
+      "end": 206.27,
+      "duration": 2.311,
+      "text": "times the First Column the determinant"
+    },
+    {
+      "index": 63,
+      "start": 206.28,
+      "end": 209.429,
+      "duration": 3.149,
+      "text": "is zero it's it's singular so zero is an"
+    },
+    {
+      "index": 64,
+      "start": 209.439,
+      "end": 212.589,
+      "duration": 3.15,
+      "text": "i value and the other I value will"
+    },
+    {
+      "index": 65,
+      "start": 212.599,
+      "end": 214.63,
+      "duration": 2.031,
+      "text": "be from the"
+    },
+    {
+      "index": 66,
+      "start": 214.64,
+      "end": 217.429,
+      "duration": 2.789,
+      "text": "trace I look at the trace the sum down"
+    },
+    {
+      "index": 67,
+      "start": 217.439,
+      "end": 220.35,
+      "duration": 2.911,
+      "text": "the diagonal is minus three that has to"
+    },
+    {
+      "index": 68,
+      "start": 220.36,
+      "end": 223.99,
+      "duration": 3.63,
+      "text": "agree with the sum of the IG value so"
+    },
+    {
+      "index": 69,
+      "start": 224.0,
+      "end": 227.07,
+      "duration": 3.07,
+      "text": "that second value better be minus three"
+    },
+    {
+      "index": 70,
+      "start": 227.08,
+      "end": 229.67,
+      "duration": 2.59,
+      "text": "I could of course I could compute why"
+    },
+    {
+      "index": 71,
+      "start": 229.68,
+      "end": 231.67,
+      "duration": 1.99,
+      "text": "don't I over here compute the"
+    },
+    {
+      "index": 72,
+      "start": 231.68,
+      "end": 234.91,
+      "duration": 3.23,
+      "text": "determinant of a minus Lambda I the"
+    },
+    {
+      "index": 73,
+      "start": 234.92,
+      "end": 240.71,
+      "duration": 5.79,
+      "text": "determinant of this Min -1 - Lambda 2 1"
+    },
+    {
+      "index": 74,
+      "start": 240.72,
+      "end": 244.83,
+      "duration": 4.11,
+      "text": "- 2 - Lambda Matrix but we know what's"
+    },
+    {
+      "index": 75,
+      "start": 244.84,
+      "end": 247.309,
+      "duration": 2.469,
+      "text": "coming when I do that multiplication I"
+    },
+    {
+      "index": 76,
+      "start": 247.319,
+      "end": 248.71,
+      "duration": 1.391,
+      "text": "get a Lambda"
+    },
+    {
+      "index": 77,
+      "start": 248.72,
+      "end": 252.429,
+      "duration": 3.709,
+      "text": "squar I get a 2 Lambda and a one Lambda"
+    },
+    {
+      "index": 78,
+      "start": 252.439,
+      "end": 255.27,
+      "duration": 2.831,
+      "text": "that's a three Lambda and then the now"
+    },
+    {
+      "index": 79,
+      "start": 255.28,
+      "end": 256.949,
+      "duration": 1.669,
+      "text": "I'm going to get the determinant which"
+    },
+    {
+      "index": 80,
+      "start": 256.959,
+      "end": 260.83,
+      "duration": 3.871,
+      "text": "is 2 minus 2 which is zero"
+    },
+    {
+      "index": 81,
+      "start": 260.84,
+      "end": 264.59,
+      "duration": 3.75,
+      "text": "so there's my characteristic polinomial"
+    },
+    {
+      "index": 82,
+      "start": 264.6,
+      "end": 265.51,
+      "duration": 0.91,
+      "text": "this"
+    },
+    {
+      "index": 83,
+      "start": 265.52,
+      "end": 268.15,
+      "duration": 2.63,
+      "text": "determinant and of course I factor that"
+    },
+    {
+      "index": 84,
+      "start": 268.16,
+      "end": 271.909,
+      "duration": 3.749,
+      "text": "into Lambda * Lambda +"
+    },
+    {
+      "index": 85,
+      "start": 271.919,
+      "end": 275.27,
+      "duration": 3.351,
+      "text": "3 and I get the two igen values that we"
+    },
+    {
+      "index": 86,
+      "start": 275.28,
+      "end": 276.51,
+      "duration": 1.23,
+      "text": "saw"
+    },
+    {
+      "index": 87,
+      "start": 276.52,
+      "end": 279.35,
+      "duration": 2.83,
+      "text": "coming what else do I need the IG"
+    },
+    {
+      "index": 88,
+      "start": 279.36,
+      "end": 282.43,
+      "duration": 3.07,
+      "text": "vectors so before I even think about the"
+    },
+    {
+      "index": 89,
+      "start": 282.44,
+      "end": 284.79,
+      "duration": 2.35,
+      "text": "differential equation or what how to"
+    },
+    {
+      "index": 90,
+      "start": 284.8,
+      "end": 287.55,
+      "duration": 2.75,
+      "text": "solve it let me find the IG vectors for"
+    },
+    {
+      "index": 91,
+      "start": 287.56,
+      "end": 291.87,
+      "duration": 4.31,
+      "text": "this Matrix okay so take Lambda equals"
+    },
+    {
+      "index": 92,
+      "start": 291.88,
+      "end": 295.31,
+      "duration": 3.43,
+      "text": "z so that that's the first igon value"
+    },
+    {
+      "index": 93,
+      "start": 295.32,
+      "end": 298.35,
+      "duration": 3.03,
+      "text": "Lambda 1 equals 0 and the second igon"
+    },
+    {
+      "index": 94,
+      "start": 298.36,
+      "end": 302.23,
+      "duration": 3.87,
+      "text": "value will be Lambda 2 ="
+    },
+    {
+      "index": 95,
+      "start": 302.24,
+      "end": 304.07,
+      "duration": 1.83,
+      "text": "-3 by the"
+    },
+    {
+      "index": 96,
+      "start": 304.08,
+      "end": 307.43,
+      "duration": 3.35,
+      "text": "way I I already know something important"
+    },
+    {
+      "index": 97,
+      "start": 307.44,
+      "end": 310.39,
+      "duration": 2.95,
+      "text": "about this the igen values are telling"
+    },
+    {
+      "index": 98,
+      "start": 310.4,
+      "end": 313.79,
+      "duration": 3.39,
+      "text": "me something you'll see how it comes out"
+    },
+    {
+      "index": 99,
+      "start": 313.8,
+      "end": 318.11,
+      "duration": 4.31,
+      "text": "but let me point to these numbers are"
+    },
+    {
+      "index": 100,
+      "start": 318.12,
+      "end": 321.79,
+      "duration": 3.67,
+      "text": "this igen value a negative igen value is"
+    },
+    {
+      "index": 101,
+      "start": 321.8,
+      "end": 324.35,
+      "duration": 2.55,
+      "text": "going to disappear there's going to be"
+    },
+    {
+      "index": 102,
+      "start": 324.36,
+      "end": 327.629,
+      "duration": 3.269,
+      "text": "an e to the minus 3T in the"
+    },
+    {
+      "index": 103,
+      "start": 327.639,
+      "end": 331.35,
+      "duration": 3.711,
+      "text": "answer that e to Theus 3T as time goes"
+    },
+    {
+      "index": 104,
+      "start": 331.36,
+      "end": 334.67,
+      "duration": 3.31,
+      "text": "on is going to be very very small the"
+    },
+    {
+      "index": 105,
+      "start": 334.68,
+      "end": 337.43,
+      "duration": 2.75,
+      "text": "other part of the answer will will will"
+    },
+    {
+      "index": 106,
+      "start": 337.44,
+      "end": 341.71,
+      "duration": 4.27,
+      "text": "involve an e to the 0 t but e to the 0 t"
+    },
+    {
+      "index": 107,
+      "start": 341.72,
+      "end": 345.749,
+      "duration": 4.029,
+      "text": "is one and that's a constant so I'm"
+    },
+    {
+      "index": 108,
+      "start": 345.759,
+      "end": 348.469,
+      "duration": 2.71,
+      "text": "expecting that this solution will have"
+    },
+    {
+      "index": 109,
+      "start": 348.479,
+      "end": 351.51,
+      "duration": 3.031,
+      "text": "two parts an e to the 0o T part and an e"
+    },
+    {
+      "index": 110,
+      "start": 351.52,
+      "end": 354.95,
+      "duration": 3.43,
+      "text": "to the minus 3 T part and the and as"
+    },
+    {
+      "index": 111,
+      "start": 354.96,
+      "end": 357.23,
+      "duration": 2.27,
+      "text": "time goes on the second part will"
+    },
+    {
+      "index": 112,
+      "start": 357.24,
+      "end": 359.23,
+      "duration": 1.99,
+      "text": "disappear and the first part will be a"
+    },
+    {
+      "index": 113,
+      "start": 359.24,
+      "end": 363.79,
+      "duration": 4.55,
+      "text": "steady state it won't move it will be at"
+    },
+    {
+      "index": 114,
+      "start": 363.8,
+      "end": 367.15,
+      "duration": 3.35,
+      "text": "the end of as T approaches Infinity this"
+    },
+    {
+      "index": 115,
+      "start": 367.16,
+      "end": 370.189,
+      "duration": 3.029,
+      "text": "part disappears and this is the the the"
+    },
+    {
+      "index": 116,
+      "start": 370.199,
+      "end": 373.43,
+      "duration": 3.231,
+      "text": "e to the zero T part is what I get and"
+    },
+    {
+      "index": 117,
+      "start": 373.44,
+      "end": 375.909,
+      "duration": 2.469,
+      "text": "I'm very interested in these steady stat"
+    },
+    {
+      "index": 118,
+      "start": 375.919,
+      "end": 378.589,
+      "duration": 2.67,
+      "text": "so that's I I get a steady state when I"
+    },
+    {
+      "index": 119,
+      "start": 378.599,
+      "end": 381.15,
+      "duration": 2.551,
+      "text": "have a zero IG value okay what about"
+    },
+    {
+      "index": 120,
+      "start": 381.16,
+      "end": 383.83,
+      "duration": 2.67,
+      "text": "those IG vectors so what's the igon"
+    },
+    {
+      "index": 121,
+      "start": 383.84,
+      "end": 386.629,
+      "duration": 2.789,
+      "text": "vector that goes with IG value zero okay"
+    },
+    {
+      "index": 122,
+      "start": 386.639,
+      "end": 389.79,
+      "duration": 3.151,
+      "text": "the Matrix is singular as it is the"
+    },
+    {
+      "index": 123,
+      "start": 389.8,
+      "end": 393.27,
+      "duration": 3.47,
+      "text": "Vector is is the guy in the null space"
+    },
+    {
+      "index": 124,
+      "start": 393.28,
+      "end": 395.909,
+      "duration": 2.629,
+      "text": "so what Vector is in the null space of"
+    },
+    {
+      "index": 125,
+      "start": 395.919,
+      "end": 397.11,
+      "duration": 1.191,
+      "text": "that"
+    },
+    {
+      "index": 126,
+      "start": 397.12,
+      "end": 399.87,
+      "duration": 2.75,
+      "text": "Matrix uh let's see I guess I probably"
+    },
+    {
+      "index": 127,
+      "start": 399.88,
+      "end": 403.55,
+      "duration": 3.67,
+      "text": "give the free variable the value one and"
+    },
+    {
+      "index": 128,
+      "start": 403.56,
+      "end": 405.99,
+      "duration": 2.43,
+      "text": "I realize that if I want to get zero I"
+    },
+    {
+      "index": 129,
+      "start": 406.0,
+      "end": 407.79,
+      "duration": 1.79,
+      "text": "need a two up"
+    },
+    {
+      "index": 130,
+      "start": 407.8,
+      "end": 411.909,
+      "duration": 4.109,
+      "text": "here okay so ax1 is"
+    },
+    {
+      "index": 131,
+      "start": 411.919,
+      "end": 418.27,
+      "duration": 6.351,
+      "text": "0x1 ax1 is 0x1 fine okay what about the"
+    },
+    {
+      "index": 132,
+      "start": 418.28,
+      "end": 420.95,
+      "duration": 2.67,
+      "text": "other igen value Lambda 2 is"
+    },
+    {
+      "index": 133,
+      "start": 420.96,
+      "end": 424.43,
+      "duration": 3.47,
+      "text": "-3 okay how do I get the other I value"
+    },
+    {
+      "index": 134,
+      "start": 424.44,
+      "end": 428.189,
+      "duration": 3.749,
+      "text": "then for the moment can I mentally do it"
+    },
+    {
+      "index": 135,
+      "start": 428.199,
+      "end": 430.79,
+      "duration": 2.591,
+      "text": "I subtract minus"
+    },
+    {
+      "index": 136,
+      "start": 430.8,
+      "end": 433.589,
+      "duration": 2.789,
+      "text": "three along the diagonal which means I"
+    },
+    {
+      "index": 137,
+      "start": 433.599,
+      "end": 436.15,
+      "duration": 2.551,
+      "text": "add three can I I'll just do it with an"
+    },
+    {
+      "index": 138,
+      "start": 436.16,
+      "end": 438.67,
+      "duration": 2.51,
+      "text": "erase erase for the moment so I'm going"
+    },
+    {
+      "index": 139,
+      "start": 438.68,
+      "end": 441.39,
+      "duration": 2.71,
+      "text": "to add three to the diagonal so this"
+    },
+    {
+      "index": 140,
+      "start": 441.4,
+      "end": 444.67,
+      "duration": 3.27,
+      "text": "minus one will become a"
+    },
+    {
+      "index": 141,
+      "start": 444.68,
+      "end": 447.629,
+      "duration": 2.949,
+      "text": "two and I'll make it in big loopy"
+    },
+    {
+      "index": 142,
+      "start": 447.639,
+      "end": 450.71,
+      "duration": 3.071,
+      "text": "letters and when I add three to this guy"
+    },
+    {
+      "index": 143,
+      "start": 450.72,
+      "end": 453.11,
+      "duration": 2.39,
+      "text": "the minus two becomes well I can't make"
+    },
+    {
+      "index": 144,
+      "start": 453.12,
+      "end": 458.07,
+      "duration": 4.95,
+      "text": "one very loopy but how's that okay uh"
+    },
+    {
+      "index": 145,
+      "start": 458.08,
+      "end": 461.67,
+      "duration": 3.59,
+      "text": "now that's a minus 3 I A+ 3 I sorry"
+    },
+    {
+      "index": 146,
+      "start": 461.68,
+      "end": 464.029,
+      "duration": 2.349,
+      "text": "that's a + 3 I it's supposed to be"
+    },
+    {
+      "index": 147,
+      "start": 464.039,
+      "end": 467.55,
+      "duration": 3.511,
+      "text": "singular right if if if things if I did"
+    },
+    {
+      "index": 148,
+      "start": 467.56,
+      "end": 470.43,
+      "duration": 2.87,
+      "text": "it right this Matrix should be singular"
+    },
+    {
+      "index": 149,
+      "start": 470.44,
+      "end": 473.95,
+      "duration": 3.51,
+      "text": "and the X2 the I Vector should be in its"
+    },
+    {
+      "index": 150,
+      "start": 473.96,
+      "end": 477.029,
+      "duration": 3.069,
+      "text": "null space okay what do I get for the"
+    },
+    {
+      "index": 151,
+      "start": 477.039,
+      "end": 480.79,
+      "duration": 3.751,
+      "text": "null space of this maybe minus1 one or 1"
+    },
+    {
+      "index": 152,
+      "start": 480.8,
+      "end": 483.95,
+      "duration": 3.15,
+      "text": "minus one doesn't matter those are both"
+    },
+    {
+      "index": 153,
+      "start": 483.96,
+      "end": 486.83,
+      "duration": 2.87,
+      "text": "perfectly good right that's in the null"
+    },
+    {
+      "index": 154,
+      "start": 486.84,
+      "end": 488.99,
+      "duration": 2.15,
+      "text": "space of this now"
+    },
+    {
+      "index": 155,
+      "start": 489.0,
+      "end": 494.35,
+      "duration": 5.35,
+      "text": "I'll because a * that Vector is 3 * that"
+    },
+    {
+      "index": 156,
+      "start": 494.36,
+      "end": 495.629,
+      "duration": 1.269,
+      "text": "Vector"
+    },
+    {
+      "index": 157,
+      "start": 495.639,
+      "end": 499.869,
+      "duration": 4.23,
+      "text": "ax2 is - 3"
+    },
+    {
+      "index": 158,
+      "start": 499.879,
+      "end": 501.71,
+      "duration": 1.831,
+      "text": "X2"
+    },
+    {
+      "index": 159,
+      "start": 501.72,
+      "end": 504.79,
+      "duration": 3.07,
+      "text": "good okay can I get a again so we see"
+    },
+    {
+      "index": 160,
+      "start": 504.8,
+      "end": 507.83,
+      "duration": 3.03,
+      "text": "that correctly that was a minus one and"
+    },
+    {
+      "index": 161,
+      "start": 507.84,
+      "end": 510.909,
+      "duration": 3.069,
+      "text": "that was a minus two"
+    },
+    {
+      "index": 162,
+      "start": 510.919,
+      "end": 512.509,
+      "duration": 1.59,
+      "text": "good"
+    },
+    {
+      "index": 163,
+      "start": 512.519,
+      "end": 516.55,
+      "duration": 4.031,
+      "text": "okay that that's the first job I values"
+    },
+    {
+      "index": 164,
+      "start": 516.56,
+      "end": 519.389,
+      "duration": 2.829,
+      "text": "and igen vectors and already the igen"
+    },
+    {
+      "index": 165,
+      "start": 519.399,
+      "end": 522.79,
+      "duration": 3.391,
+      "text": "values are telling me the most important"
+    },
+    {
+      "index": 166,
+      "start": 522.8,
+      "end": 524.829,
+      "duration": 2.029,
+      "text": "information about the answer but now"
+    },
+    {
+      "index": 167,
+      "start": 524.839,
+      "end": 530.63,
+      "duration": 5.791,
+      "text": "what is the answer the answer is the"
+    },
+    {
+      "index": 168,
+      "start": 533.63,
+      "end": 533.64,
+      "duration": 0.01,
+      "text": "solution will be U of"
+    },
+    {
+      "index": 169,
+      "start": 533.64,
+      "end": 537.949,
+      "duration": 4.309,
+      "text": "T okay now now I use those igen values"
+    },
+    {
+      "index": 170,
+      "start": 537.959,
+      "end": 541.75,
+      "duration": 3.791,
+      "text": "and igen vectors the solution is some"
+    },
+    {
+      "index": 171,
+      "start": 541.76,
+      "end": 545.43,
+      "duration": 3.67,
+      "text": "there are two I values so so there are"
+    },
+    {
+      "index": 172,
+      "start": 545.44,
+      "end": 548.91,
+      "duration": 3.47,
+      "text": "going to be two special Solutions here"
+    },
+    {
+      "index": 173,
+      "start": 548.92,
+      "end": 552.509,
+      "duration": 3.589,
+      "text": "two pure exponential Solutions the first"
+    },
+    {
+      "index": 174,
+      "start": 552.519,
+      "end": 556.99,
+      "duration": 4.471,
+      "text": "one is going to be e the Lambda 1T"
+    },
+    {
+      "index": 175,
+      "start": 557.0,
+      "end": 560.11,
+      "duration": 3.11,
+      "text": "X1 and the SEC so that solves the"
+    },
+    {
+      "index": 176,
+      "start": 560.12,
+      "end": 564.47,
+      "duration": 4.35,
+      "text": "equation and so does this one they both"
+    },
+    {
+      "index": 177,
+      "start": 564.48,
+      "end": 568.35,
+      "duration": 3.87,
+      "text": "are solutions to the differential"
+    },
+    {
+      "index": 178,
+      "start": 568.36,
+      "end": 571.79,
+      "duration": 3.43,
+      "text": "equation that's the general solution the"
+    },
+    {
+      "index": 179,
+      "start": 571.8,
+      "end": 574.11,
+      "duration": 2.31,
+      "text": "general solution is a combination of"
+    },
+    {
+      "index": 180,
+      "start": 574.12,
+      "end": 577.71,
+      "duration": 3.59,
+      "text": "that pure exponential solution and that"
+    },
+    {
+      "index": 181,
+      "start": 577.72,
+      "end": 580.35,
+      "duration": 2.63,
+      "text": "pure exponential solution can I just see"
+    },
+    {
+      "index": 182,
+      "start": 580.36,
+      "end": 583.31,
+      "duration": 2.95,
+      "text": "that those guys do solve the equation so"
+    },
+    {
+      "index": 183,
+      "start": 583.32,
+      "end": 586.389,
+      "duration": 3.069,
+      "text": "let me just check check on this one for"
+    },
+    {
+      "index": 184,
+      "start": 586.399,
+      "end": 589.35,
+      "duration": 2.951,
+      "text": "example"
+    },
+    {
+      "index": 185,
+      "start": 589.36,
+      "end": 592.59,
+      "duration": 3.23,
+      "text": "check I want to check that the my"
+    },
+    {
+      "index": 186,
+      "start": 592.6,
+      "end": 595.35,
+      "duration": 2.75,
+      "text": "equation let's remember the equation du"
+    },
+    {
+      "index": 187,
+      "start": 595.36,
+      "end": 600.949,
+      "duration": 5.589,
+      "text": "DT is au I plug in"
+    },
+    {
+      "index": 188,
+      "start": 603.63,
+      "end": 603.64,
+      "duration": 0.01,
+      "text": "e to the Lambda 1"
+    },
+    {
+      "index": 189,
+      "start": 603.64,
+      "end": 606.31,
+      "duration": 2.67,
+      "text": "tx1 and let's just see that that the"
+    },
+    {
+      "index": 190,
+      "start": 606.32,
+      "end": 610.43,
+      "duration": 4.11,
+      "text": "equation's okay I believe this is a"
+    },
+    {
+      "index": 191,
+      "start": 610.44,
+      "end": 613.19,
+      "duration": 2.75,
+      "text": "solution to that equation so just plug"
+    },
+    {
+      "index": 192,
+      "start": 613.2,
+      "end": 616.19,
+      "duration": 2.99,
+      "text": "it in on the left hand side I take the"
+    },
+    {
+      "index": 193,
+      "start": 616.2,
+      "end": 619.11,
+      "duration": 2.91,
+      "text": "time derivative so the left hand side"
+    },
+    {
+      "index": 194,
+      "start": 619.12,
+      "end": 623.99,
+      "duration": 4.87,
+      "text": "will be Lambda 1 e to the Lambda 1"
+    },
+    {
+      "index": 195,
+      "start": 624.0,
+      "end": 626.99,
+      "duration": 2.99,
+      "text": "tx1 right the time derivative this is"
+    },
+    {
+      "index": 196,
+      "start": 627.0,
+      "end": 629.31,
+      "duration": 2.31,
+      "text": "the term that depends on time it's just"
+    },
+    {
+      "index": 197,
+      "start": 629.32,
+      "end": 632.59,
+      "duration": 3.27,
+      "text": "just ordinary exponential its derivative"
+    },
+    {
+      "index": 198,
+      "start": 632.6,
+      "end": 635.23,
+      "duration": 2.63,
+      "text": "brings down a Lambda 1 on the other side"
+    },
+    {
+      "index": 199,
+      "start": 635.24,
+      "end": 639.79,
+      "duration": 4.55,
+      "text": "of the equation it's a * this thing a *"
+    },
+    {
+      "index": 200,
+      "start": 639.8,
+      "end": 641.87,
+      "duration": 2.07,
+      "text": "e the Lambda 1"
+    },
+    {
+      "index": 201,
+      "start": 641.88,
+      "end": 645.43,
+      "duration": 3.55,
+      "text": "tx1 and does that check out do we have"
+    },
+    {
+      "index": 202,
+      "start": 645.44,
+      "end": 649.069,
+      "duration": 3.629,
+      "text": "equality there yes because e to the"
+    },
+    {
+      "index": 203,
+      "start": 649.079,
+      "end": 651.67,
+      "duration": 2.591,
+      "text": "Lambda 1 T appears on both"
+    },
+    {
+      "index": 204,
+      "start": 651.68,
+      "end": 655.15,
+      "duration": 3.47,
+      "text": "sides and the other one is ax1 equal"
+    },
+    {
+      "index": 205,
+      "start": 655.16,
+      "end": 660.35,
+      "duration": 5.19,
+      "text": "Lambda 1x1 check do so we've come to the"
+    },
+    {
+      "index": 206,
+      "start": 660.36,
+      "end": 661.629,
+      "duration": 1.269,
+      "text": "first point to"
+    },
+    {
+      "index": 207,
+      "start": 661.639,
+      "end": 664.949,
+      "duration": 3.31,
+      "text": "remember these Pure"
+    },
+    {
+      "index": 208,
+      "start": 664.959,
+      "end": 668.87,
+      "duration": 3.911,
+      "text": "Solutions those Pure Solutions are the"
+    },
+    {
+      "index": 209,
+      "start": 668.88,
+      "end": 671.91,
+      "duration": 3.03,
+      "text": "those pure exponentials are the"
+    },
+    {
+      "index": 210,
+      "start": 671.92,
+      "end": 674.67,
+      "duration": 2.75,
+      "text": "differential equations analog of last"
+    },
+    {
+      "index": 211,
+      "start": 674.68,
+      "end": 679.91,
+      "duration": 5.23,
+      "text": "time we had pure Powers last time so so"
+    },
+    {
+      "index": 212,
+      "start": 679.92,
+      "end": 684.23,
+      "duration": 4.31,
+      "text": "last time the the analog was Lambda"
+    },
+    {
+      "index": 213,
+      "start": 684.24,
+      "end": 688.23,
+      "duration": 3.99,
+      "text": "Lambda 1 to the K power X1 some amount"
+    },
+    {
+      "index": 214,
+      "start": 688.24,
+      "end": 692.91,
+      "duration": 4.67,
+      "text": "of that plus some amount of Lambda 2 to"
+    },
+    {
+      "index": 215,
+      "start": 692.92,
+      "end": 696.55,
+      "duration": 3.63,
+      "text": "the K power X2 that was our formula from"
+    },
+    {
+      "index": 216,
+      "start": 696.56,
+      "end": 700.03,
+      "duration": 3.47,
+      "text": "last time I put it up just so you your"
+    },
+    {
+      "index": 217,
+      "start": 700.04,
+      "end": 703.35,
+      "duration": 3.31,
+      "text": "eye compares those two formulas powers"
+    },
+    {
+      "index": 218,
+      "start": 703.36,
+      "end": 706.59,
+      "duration": 3.23,
+      "text": "of Lambda in the in the difference"
+    },
+    {
+      "index": 219,
+      "start": 706.6,
+      "end": 708.949,
+      "duration": 2.349,
+      "text": "equation that this was in the this was"
+    },
+    {
+      "index": 220,
+      "start": 708.959,
+      "end": 714.59,
+      "duration": 5.631,
+      "text": "for the equation u k + 1 = a"
+    },
+    {
+      "index": 221,
+      "start": 714.6,
+      "end": 718.069,
+      "duration": 3.469,
+      "text": "UK that was for the finite step stepping"
+    },
+    {
+      "index": 222,
+      "start": 718.079,
+      "end": 719.949,
+      "duration": 1.87,
+      "text": "by one"
+    },
+    {
+      "index": 223,
+      "start": 719.959,
+      "end": 722.23,
+      "duration": 2.271,
+      "text": "and we got powers now this is the one"
+    },
+    {
+      "index": 224,
+      "start": 722.24,
+      "end": 726.03,
+      "duration": 3.79,
+      "text": "we're interested in the exponentials so"
+    },
+    {
+      "index": 225,
+      "start": 726.04,
+      "end": 729.11,
+      "duration": 3.07,
+      "text": "so that's that's the solution what are"
+    },
+    {
+      "index": 226,
+      "start": 729.12,
+      "end": 733.069,
+      "duration": 3.949,
+      "text": "C1 and C2 then we're through what are C1"
+    },
+    {
+      "index": 227,
+      "start": 733.079,
+      "end": 735.949,
+      "duration": 2.87,
+      "text": "and C2 well of course we know these"
+    },
+    {
+      "index": 228,
+      "start": 735.959,
+      "end": 738.949,
+      "duration": 2.99,
+      "text": "actual things let me just let me come"
+    },
+    {
+      "index": 229,
+      "start": 738.959,
+      "end": 740.91,
+      "duration": 1.951,
+      "text": "back to"
+    },
+    {
+      "index": 230,
+      "start": 740.92,
+      "end": 744.629,
+      "duration": 3.709,
+      "text": "this C1 is we haven't figured out yet"
+    },
+    {
+      "index": 231,
+      "start": 744.639,
+      "end": 747.75,
+      "duration": 3.111,
+      "text": "but e to the Lambda 1 T the Lambda 1 is"
+    },
+    {
+      "index": 232,
+      "start": 747.76,
+      "end": 750.11,
+      "duration": 2.35,
+      "text": "zero so that's just a one"
+    },
+    {
+      "index": 233,
+      "start": 750.12,
+      "end": 756.55,
+      "duration": 6.43,
+      "text": "* X1 which is 21 so it's C1 time this"
+    },
+    {
+      "index": 234,
+      "start": 756.56,
+      "end": 759.47,
+      "duration": 2.91,
+      "text": "one that's not moving times the vector"
+    },
+    {
+      "index": 235,
+      "start": 759.48,
+      "end": 761.189,
+      "duration": 1.709,
+      "text": "the I Vector"
+    },
+    {
+      "index": 236,
+      "start": 761.199,
+      "end": 763.11,
+      "duration": 1.911,
+      "text": "21 and"
+    },
+    {
+      "index": 237,
+      "start": 763.12,
+      "end": 766.71,
+      "duration": 3.59,
+      "text": "C2 times what's e to the Lambda 2"
+    },
+    {
+      "index": 238,
+      "start": 766.72,
+      "end": 769.47,
+      "duration": 2.75,
+      "text": "T Lambda 2"
+    },
+    {
+      "index": 239,
+      "start": 769.48,
+      "end": 773.269,
+      "duration": 3.789,
+      "text": "is minus 3 so this is the term that has"
+    },
+    {
+      "index": 240,
+      "start": 773.279,
+      "end": 777.67,
+      "duration": 4.391,
+      "text": "the minus 3T and its I Vector is this 1"
+    },
+    {
+      "index": 241,
+      "start": 777.68,
+      "end": 781.509,
+      "duration": 3.829,
+      "text": "minus one"
+    },
+    {
+      "index": 242,
+      "start": 784.35,
+      "end": 784.36,
+      "duration": 0.01,
+      "text": "so this"
+    },
+    {
+      "index": 243,
+      "start": 784.36,
+      "end": 786.99,
+      "duration": 2.63,
+      "text": "Vector solves the equation and any"
+    },
+    {
+      "index": 244,
+      "start": 787.0,
+      "end": 789.91,
+      "duration": 2.91,
+      "text": "multiple of it this Vector solves the"
+    },
+    {
+      "index": 245,
+      "start": 789.92,
+      "end": 792.55,
+      "duration": 2.63,
+      "text": "equation if it's got that factor e the"
+    },
+    {
+      "index": 246,
+      "start": 792.56,
+      "end": 793.55,
+      "duration": 0.99,
+      "text": "minus"
+    },
+    {
+      "index": 247,
+      "start": 793.56,
+      "end": 796.91,
+      "duration": 3.35,
+      "text": "3T we've got the answer except for C1"
+    },
+    {
+      "index": 248,
+      "start": 796.92,
+      "end": 800.949,
+      "duration": 4.029,
+      "text": "and C2 so so everything I've done is"
+    },
+    {
+      "index": 249,
+      "start": 800.959,
+      "end": 803.509,
+      "duration": 2.55,
+      "text": "immediate as soon as you know the igen"
+    },
+    {
+      "index": 250,
+      "start": 803.519,
+      "end": 806.269,
+      "duration": 2.75,
+      "text": "values and igen vectors so how do we get"
+    },
+    {
+      "index": 251,
+      "start": 806.279,
+      "end": 809.75,
+      "duration": 3.471,
+      "text": "C1 and C2 that has to come from the"
+    },
+    {
+      "index": 252,
+      "start": 809.76,
+      "end": 815.43,
+      "duration": 5.67,
+      "text": "initial condition so now I now I use U"
+    },
+    {
+      "index": 253,
+      "start": 815.44,
+      "end": 820.71,
+      "duration": 5.27,
+      "text": "of0 is given as one"
+    },
+    {
+      "index": 254,
+      "start": 823.99,
+      "end": 824.0,
+      "duration": 0.01,
+      "text": "Z so this is the initial condition that"
+    },
+    {
+      "index": 255,
+      "start": 824.0,
+      "end": 827.15,
+      "duration": 3.15,
+      "text": "we'll find C1 and C2 so let me do that"
+    },
+    {
+      "index": 256,
+      "start": 827.16,
+      "end": 830.069,
+      "duration": 2.909,
+      "text": "on the board"
+    },
+    {
+      "index": 257,
+      "start": 839.269,
+      "end": 839.279,
+      "duration": 0.01,
+      "text": "then I get C1"
+    },
+    {
+      "index": 258,
+      "start": 839.279,
+      "end": 841.59,
+      "duration": 2.311,
+      "text": "times this"
+    },
+    {
+      "index": 259,
+      "start": 841.6,
+      "end": 845.47,
+      "duration": 3.87,
+      "text": "guy plus C2 and now I'm at time zero so"
+    },
+    {
+      "index": 260,
+      "start": 845.48,
+      "end": 847.829,
+      "duration": 2.349,
+      "text": "that's a one and this is a one"
+    },
+    {
+      "index": 261,
+      "start": 847.839,
+      "end": 851.43,
+      "duration": 3.591,
+      "text": "-1 and that's supposed to agree with U"
+    },
+    {
+      "index": 262,
+      "start": 851.44,
+      "end": 858.71,
+      "duration": 7.27,
+      "text": "of 0 1"
+    },
+    {
+      "index": 263,
+      "start": 863.23,
+      "end": 863.24,
+      "duration": 0.01,
+      "text": "0 okay that should be two equations that"
+    },
+    {
+      "index": 264,
+      "start": 863.24,
+      "end": 865.43,
+      "duration": 2.19,
+      "text": "should give me C1 and C2 and then I'm"
+    },
+    {
+      "index": 265,
+      "start": 865.44,
+      "end": 870.43,
+      "duration": 4.99,
+      "text": "through so what are C1 and C2 let's see"
+    },
+    {
+      "index": 266,
+      "start": 870.44,
+      "end": 873.069,
+      "duration": 2.629,
+      "text": "I guess we could actually spot them by I"
+    },
+    {
+      "index": 267,
+      "start": 873.079,
+      "end": 875.99,
+      "duration": 2.911,
+      "text": "or we could solve two equations in two"
+    },
+    {
+      "index": 268,
+      "start": 876.0,
+      "end": 879.189,
+      "duration": 3.189,
+      "text": "unknowns uh let's see if these were both"
+    },
+    {
+      "index": 269,
+      "start": 879.199,
+      "end": 881.67,
+      "duration": 2.471,
+      "text": "ones so I'm just adding then I would get"
+    },
+    {
+      "index": 270,
+      "start": 881.68,
+      "end": 885.509,
+      "duration": 3.829,
+      "text": "three zero so what's this what's the"
+    },
+    {
+      "index": 271,
+      "start": 885.519,
+      "end": 889.03,
+      "duration": 3.511,
+      "text": "solution"
+    },
+    {
+      "index": 272,
+      "start": 892.629,
+      "end": 892.639,
+      "duration": 0.01,
+      "text": "then if if if C1 and C2 are both ones I"
+    },
+    {
+      "index": 273,
+      "start": 892.639,
+      "end": 895.509,
+      "duration": 2.87,
+      "text": "get three Zer so I want like one3 of"
+    },
+    {
+      "index": 274,
+      "start": 895.519,
+      "end": 898.03,
+      "duration": 2.511,
+      "text": "that because I want to get one zero so I"
+    },
+    {
+      "index": 275,
+      "start": 898.04,
+      "end": 899.91,
+      "duration": 1.87,
+      "text": "think it's C1 ="
+    },
+    {
+      "index": 276,
+      "start": 899.92,
+      "end": 904.43,
+      "duration": 4.51,
+      "text": "A3 C2 equal"
+    },
+    {
+      "index": 277,
+      "start": 908.43,
+      "end": 908.44,
+      "duration": 0.01,
+      "text": "A3 so finally I have the answer let me"
+    },
+    {
+      "index": 278,
+      "start": 908.44,
+      "end": 911.03,
+      "duration": 2.59,
+      "text": "keep it in the in this board here"
+    },
+    {
+      "index": 279,
+      "start": 911.04,
+      "end": 913.99,
+      "duration": 2.95,
+      "text": "finally the answer"
+    },
+    {
+      "index": 280,
+      "start": 914.0,
+      "end": 916.43,
+      "duration": 2.43,
+      "text": "is 1/3 of"
+    },
+    {
+      "index": 281,
+      "start": 916.44,
+      "end": 918.35,
+      "duration": 1.91,
+      "text": "this"
+    },
+    {
+      "index": 282,
+      "start": 918.36,
+      "end": 923.31,
+      "duration": 4.95,
+      "text": "plus 1/3 of"
+    },
+    {
+      "index": 283,
+      "start": 926.829,
+      "end": 926.839,
+      "duration": 0.01,
+      "text": "this do you see what what's actually"
+    },
+    {
+      "index": 284,
+      "start": 926.839,
+      "end": 929.629,
+      "duration": 2.79,
+      "text": "happening with this flow this flow"
+    },
+    {
+      "index": 285,
+      "start": 929.639,
+      "end": 932.15,
+      "duration": 2.511,
+      "text": "started out at the solution started out"
+    },
+    {
+      "index": 286,
+      "start": 932.16,
+      "end": 935.79,
+      "duration": 3.63,
+      "text": "at one Z started at one"
+    },
+    {
+      "index": 287,
+      "start": 935.8,
+      "end": 940.309,
+      "duration": 4.509,
+      "text": "Z then as time went on people moved"
+    },
+    {
+      "index": 288,
+      "start": 940.319,
+      "end": 943.11,
+      "duration": 2.791,
+      "text": "essentially some fraction of this one"
+    },
+    {
+      "index": 289,
+      "start": 943.12,
+      "end": 945.389,
+      "duration": 2.269,
+      "text": "moved"
+    },
+    {
+      "index": 290,
+      "start": 945.399,
+      "end": 947.389,
+      "duration": 1.99,
+      "text": "here"
+    },
+    {
+      "index": 291,
+      "start": 947.399,
+      "end": 951.43,
+      "duration": 4.031,
+      "text": "and and in the limit there's there's the"
+    },
+    {
+      "index": 292,
+      "start": 951.44,
+      "end": 954.03,
+      "duration": 2.59,
+      "text": "limit as right as T goes to Infinity as"
+    },
+    {
+      "index": 293,
+      "start": 954.04,
+      "end": 957.35,
+      "duration": 3.31,
+      "text": "T gets very large this disappears and"
+    },
+    {
+      "index": 294,
+      "start": 957.36,
+      "end": 959.949,
+      "duration": 2.589,
+      "text": "this is the steady state so the steady"
+    },
+    {
+      "index": 295,
+      "start": 959.959,
+      "end": 967.629,
+      "duration": 7.67,
+      "text": "state is so the steady"
+    },
+    {
+      "index": 296,
+      "start": 971.389,
+      "end": 971.399,
+      "duration": 0.01,
+      "text": "state U we could call it U at Infinity"
+    },
+    {
+      "index": 297,
+      "start": 971.399,
+      "end": 978.949,
+      "duration": 7.55,
+      "text": "is 13 of 2 and one it's it's 2/3"
+    },
+    {
+      "index": 298,
+      "start": 982.949,
+      "end": 982.959,
+      "duration": 0.01,
+      "text": "1/3 so that's the we really I mean"
+    },
+    {
+      "index": 299,
+      "start": 982.959,
+      "end": 986.79,
+      "duration": 3.831,
+      "text": "you're getting like total uh insight"
+    },
+    {
+      "index": 300,
+      "start": 986.8,
+      "end": 990.15,
+      "duration": 3.35,
+      "text": "into the behavior of this solution what"
+    },
+    {
+      "index": 301,
+      "start": 990.16,
+      "end": 993.55,
+      "duration": 3.39,
+      "text": "the differential equation does of course"
+    },
+    {
+      "index": 302,
+      "start": 993.56,
+      "end": 996.749,
+      "duration": 3.189,
+      "text": "we don't wouldn't always have a steady"
+    },
+    {
+      "index": 303,
+      "start": 996.759,
+      "end": 999.79,
+      "duration": 3.031,
+      "text": "state sometimes we would approach"
+    },
+    {
+      "index": 304,
+      "start": 999.8,
+      "end": 1002.629,
+      "duration": 2.829,
+      "text": "zero sometimes we would blow up can we"
+    },
+    {
+      "index": 305,
+      "start": 1002.639,
+      "end": 1005.389,
+      "duration": 2.75,
+      "text": "straighten out those those cases the"
+    },
+    {
+      "index": 306,
+      "start": 1005.399,
+      "end": 1008.79,
+      "duration": 3.391,
+      "text": "igen values should tell us so when do we"
+    },
+    {
+      "index": 307,
+      "start": 1008.8,
+      "end": 1013.71,
+      "duration": 4.91,
+      "text": "get uh so so let me ask first when do we"
+    },
+    {
+      "index": 308,
+      "start": 1013.72,
+      "end": 1016.35,
+      "duration": 2.63,
+      "text": "get"
+    },
+    {
+      "index": 309,
+      "start": 1021.87,
+      "end": 1021.88,
+      "duration": 0.01,
+      "text": "stability that's U of T going to"
+    },
+    {
+      "index": 310,
+      "start": 1021.88,
+      "end": 1024.829,
+      "duration": 2.949,
+      "text": "zero when when would the solution go to"
+    },
+    {
+      "index": 311,
+      "start": 1024.839,
+      "end": 1026.59,
+      "duration": 1.751,
+      "text": "zero no matter what the initial"
+    },
+    {
+      "index": 312,
+      "start": 1026.6,
+      "end": 1028.27,
+      "duration": 1.67,
+      "text": "condition"
+    },
+    {
+      "index": 313,
+      "start": 1028.28,
+      "end": 1031.669,
+      "duration": 3.389,
+      "text": "is negative igen values right negative"
+    },
+    {
+      "index": 314,
+      "start": 1031.679,
+      "end": 1034.59,
+      "duration": 2.911,
+      "text": "igen values but now I have to I have to"
+    },
+    {
+      "index": 315,
+      "start": 1034.6,
+      "end": 1037.51,
+      "duration": 2.91,
+      "text": "ask you for one more step suppose the"
+    },
+    {
+      "index": 316,
+      "start": 1037.52,
+      "end": 1040.59,
+      "duration": 3.07,
+      "text": "igen values are complex numbers because"
+    },
+    {
+      "index": 317,
+      "start": 1040.6,
+      "end": 1044.949,
+      "duration": 4.349,
+      "text": "we know they could be then we want"
+    },
+    {
+      "index": 318,
+      "start": 1044.959,
+      "end": 1049.95,
+      "duration": 4.991,
+      "text": "stability this this we we want we need"
+    },
+    {
+      "index": 319,
+      "start": 1049.96,
+      "end": 1053.71,
+      "duration": 3.75,
+      "text": "all these e to the Lambda T is all going"
+    },
+    {
+      "index": 320,
+      "start": 1053.72,
+      "end": 1055.07,
+      "duration": 1.35,
+      "text": "to"
+    },
+    {
+      "index": 321,
+      "start": 1055.08,
+      "end": 1058.99,
+      "duration": 3.91,
+      "text": "zero and somehow that asks us to have"
+    },
+    {
+      "index": 322,
+      "start": 1059.0,
+      "end": 1062.549,
+      "duration": 3.549,
+      "text": "Lambda negative but suppose Lambda is a"
+    },
+    {
+      "index": 323,
+      "start": 1062.559,
+      "end": 1065.87,
+      "duration": 3.311,
+      "text": "complex number then what's the test what"
+    },
+    {
+      "index": 324,
+      "start": 1065.88,
+      "end": 1068.99,
+      "duration": 3.11,
+      "text": "if Lambda is a complex number"
+    },
+    {
+      "index": 325,
+      "start": 1069.0,
+      "end": 1072.47,
+      "duration": 3.47,
+      "text": "like uh suppose Lambda is negative plus"
+    },
+    {
+      "index": 326,
+      "start": 1072.48,
+      "end": 1079.83,
+      "duration": 7.35,
+      "text": "an imaginary part say Lambda is -3 + 6 I"
+    },
+    {
+      "index": 327,
+      "start": 1079.84,
+      "end": 1081.83,
+      "duration": 1.99,
+      "text": "what what happens then can we just like"
+    },
+    {
+      "index": 328,
+      "start": 1081.84,
+      "end": 1086.669,
+      "duration": 4.829,
+      "text": "do a a case here if if this Lambda is -3"
+    },
+    {
+      "index": 329,
+      "start": 1086.679,
+      "end": 1090.51,
+      "duration": 3.831,
+      "text": "+ 6 i"
+    },
+    {
+      "index": 330,
+      "start": 1090.52,
+      "end": 1093.11,
+      "duration": 2.59,
+      "text": "t how big is that"
+    },
+    {
+      "index": 331,
+      "start": 1093.12,
+      "end": 1096.47,
+      "duration": 3.35,
+      "text": "number does this does this imaginary"
+    },
+    {
+      "index": 332,
+      "start": 1096.48,
+      "end": 1100.07,
+      "duration": 3.59,
+      "text": "part play a play a play a role here or"
+    },
+    {
+      "index": 333,
+      "start": 1100.08,
+      "end": 1103.87,
+      "duration": 3.79,
+      "text": "not but how big is what's the absolute"
+    },
+    {
+      "index": 334,
+      "start": 1103.88,
+      "end": 1107.47,
+      "duration": 3.59,
+      "text": "value of that of that"
+    },
+    {
+      "index": 335,
+      "start": 1113.07,
+      "end": 1113.08,
+      "duration": 0.01,
+      "text": "quantity it's just eus 3 T right because"
+    },
+    {
+      "index": 336,
+      "start": 1113.08,
+      "end": 1116.549,
+      "duration": 3.469,
+      "text": "this other part this the the the magnit"
+    },
+    {
+      "index": 337,
+      "start": 1116.559,
+      "end": 1120.43,
+      "duration": 3.871,
+      "text": "the this e to the 6 i t what that that"
+    },
+    {
+      "index": 338,
+      "start": 1120.44,
+      "end": 1123.75,
+      "duration": 3.31,
+      "text": "has absolute value"
+    },
+    {
+      "index": 339,
+      "start": 1128.149,
+      "end": 1128.159,
+      "duration": 0.01,
+      "text": "one right that's just this cine of 6t +"
+    },
+    {
+      "index": 340,
+      "start": 1128.159,
+      "end": 1132.35,
+      "duration": 4.191,
+      "text": "I sin of 6t and the absolute value"
+    },
+    {
+      "index": 341,
+      "start": 1132.36,
+      "end": 1136.27,
+      "duration": 3.91,
+      "text": "squared will be cos s + sin 2 will be 1"
+    },
+    {
+      "index": 342,
+      "start": 1136.28,
+      "end": 1138.87,
+      "duration": 2.59,
+      "text": "this is this complex number is running"
+    },
+    {
+      "index": 343,
+      "start": 1138.88,
+      "end": 1140.31,
+      "duration": 1.43,
+      "text": "around the unit"
+    },
+    {
+      "index": 344,
+      "start": 1140.32,
+      "end": 1143.87,
+      "duration": 3.55,
+      "text": "circle this com this the it's the real"
+    },
+    {
+      "index": 345,
+      "start": 1143.88,
+      "end": 1145.35,
+      "duration": 1.47,
+      "text": "part that matters this is what I'm"
+    },
+    {
+      "index": 346,
+      "start": 1145.36,
+      "end": 1148.31,
+      "duration": 2.95,
+      "text": "trying to do real part of"
+    },
+    {
+      "index": 347,
+      "start": 1148.32,
+      "end": 1151.83,
+      "duration": 3.51,
+      "text": "Lambda has to be negative if Lambda is a"
+    },
+    {
+      "index": 348,
+      "start": 1151.84,
+      "end": 1155.23,
+      "duration": 3.39,
+      "text": "complex number it's the real part the"
+    },
+    {
+      "index": 349,
+      "start": 1155.24,
+      "end": 1158.63,
+      "duration": 3.39,
+      "text": "minus three that either makes us go to"
+    },
+    {
+      "index": 350,
+      "start": 1158.64,
+      "end": 1161.23,
+      "duration": 2.59,
+      "text": "zero or"
+    },
+    {
+      "index": 351,
+      "start": 1161.24,
+      "end": 1165.029,
+      "duration": 3.789,
+      "text": "doesn't uh or let or or blows up the"
+    },
+    {
+      "index": 352,
+      "start": 1165.039,
+      "end": 1167.43,
+      "duration": 2.391,
+      "text": "imaginary part won't will just like"
+    },
+    {
+      "index": 353,
+      "start": 1167.44,
+      "end": 1169.87,
+      "duration": 2.43,
+      "text": "oscillate between the the two"
+    },
+    {
+      "index": 354,
+      "start": 1169.88,
+      "end": 1173.39,
+      "duration": 3.51,
+      "text": "components okay so that's stability and"
+    },
+    {
+      "index": 355,
+      "start": 1173.4,
+      "end": 1181.11,
+      "duration": 7.71,
+      "text": "what about uh what about a steady"
+    },
+    {
+      "index": 356,
+      "start": 1185.07,
+      "end": 1185.08,
+      "duration": 0.01,
+      "text": "state when would we have uh a steady"
+    },
+    {
+      "index": 357,
+      "start": 1185.08,
+      "end": 1187.549,
+      "duration": 2.469,
+      "text": "state always in the same direction so"
+    },
+    {
+      "index": 358,
+      "start": 1187.559,
+      "end": 1192.27,
+      "duration": 4.711,
+      "text": "let me I'll take this part away when so"
+    },
+    {
+      "index": 359,
+      "start": 1192.28,
+      "end": 1194.31,
+      "duration": 2.03,
+      "text": "that was like checking that it's that"
+    },
+    {
+      "index": 360,
+      "start": 1194.32,
+      "end": 1197.87,
+      "duration": 3.55,
+      "text": "it's the real part that we care about uh"
+    },
+    {
+      "index": 361,
+      "start": 1197.88,
+      "end": 1200.71,
+      "duration": 2.83,
+      "text": "now we have a steady state"
+    },
+    {
+      "index": 362,
+      "start": 1200.72,
+      "end": 1207.549,
+      "duration": 6.829,
+      "text": "when when Lambda one is zero and the"
+    },
+    {
+      "index": 363,
+      "start": 1207.559,
+      "end": 1211.43,
+      "duration": 3.871,
+      "text": "other I values have"
+    },
+    {
+      "index": 364,
+      "start": 1211.44,
+      "end": 1214.43,
+      "duration": 2.99,
+      "text": "what so I'm looking like that example"
+    },
+    {
+      "index": 365,
+      "start": 1214.44,
+      "end": 1215.99,
+      "duration": 1.55,
+      "text": "was like"
+    },
+    {
+      "index": 366,
+      "start": 1216.0,
+      "end": 1219.71,
+      "duration": 3.71,
+      "text": "perfect for a steady state we have a"
+    },
+    {
+      "index": 367,
+      "start": 1219.72,
+      "end": 1222.909,
+      "duration": 3.189,
+      "text": "zero I value and the other IG values we"
+    },
+    {
+      "index": 368,
+      "start": 1222.919,
+      "end": 1226.35,
+      "duration": 3.431,
+      "text": "want those to disappear so the other en"
+    },
+    {
+      "index": 369,
+      "start": 1226.36,
+      "end": 1230.789,
+      "duration": 4.429,
+      "text": "values have real part"
+    },
+    {
+      "index": 370,
+      "start": 1234.63,
+      "end": 1234.64,
+      "duration": 0.01,
+      "text": "negative and we blow up for"
+    },
+    {
+      "index": 371,
+      "start": 1234.64,
+      "end": 1238.149,
+      "duration": 3.509,
+      "text": "sure we blow"
+    },
+    {
+      "index": 372,
+      "start": 1238.159,
+      "end": 1241.39,
+      "duration": 3.231,
+      "text": "up if"
+    },
+    {
+      "index": 373,
+      "start": 1241.4,
+      "end": 1248.029,
+      "duration": 6.629,
+      "text": "any real part of Lambda is"
+    },
+    {
+      "index": 374,
+      "start": 1251.23,
+      "end": 1251.24,
+      "duration": 0.01,
+      "text": "positive so if I if I reverse the sign"
+    },
+    {
+      "index": 375,
+      "start": 1251.24,
+      "end": 1253.23,
+      "duration": 1.99,
+      "text": "of a of the Matrix"
+    },
+    {
+      "index": 376,
+      "start": 1253.24,
+      "end": 1256.19,
+      "duration": 2.95,
+      "text": "a suppose instead of the Matrix I had"
+    },
+    {
+      "index": 377,
+      "start": 1256.2,
+      "end": 1259.07,
+      "duration": 2.87,
+      "text": "the a that I had I changed it I changed"
+    },
+    {
+      "index": 378,
+      "start": 1259.08,
+      "end": 1261.83,
+      "duration": 2.75,
+      "text": "all its signs what would that do to the"
+    },
+    {
+      "index": 379,
+      "start": 1261.84,
+      "end": 1265.47,
+      "duration": 3.63,
+      "text": "igen values and igen vectors well if I"
+    },
+    {
+      "index": 380,
+      "start": 1265.48,
+      "end": 1267.669,
+      "duration": 2.189,
+      "text": "if if I know the IG values and IG"
+    },
+    {
+      "index": 381,
+      "start": 1267.679,
+      "end": 1270.63,
+      "duration": 2.951,
+      "text": "vectors of a tell me about minus"
+    },
+    {
+      "index": 382,
+      "start": 1270.64,
+      "end": 1273.669,
+      "duration": 3.029,
+      "text": "a what happens to the IG"
+    },
+    {
+      "index": 383,
+      "start": 1273.679,
+      "end": 1277.31,
+      "duration": 3.631,
+      "text": "values for minus a they'll all change"
+    },
+    {
+      "index": 384,
+      "start": 1277.32,
+      "end": 1281.31,
+      "duration": 3.99,
+      "text": "sign so I'll have blow up this instead"
+    },
+    {
+      "index": 385,
+      "start": 1281.32,
+      "end": 1283.63,
+      "duration": 2.31,
+      "text": "of the e to the minus 3T if I change"
+    },
+    {
+      "index": 386,
+      "start": 1283.64,
+      "end": 1286.23,
+      "duration": 2.59,
+      "text": "that to minus if I change the signs in"
+    },
+    {
+      "index": 387,
+      "start": 1286.24,
+      "end": 1289.51,
+      "duration": 3.27,
+      "text": "that Matrix I would change the trace to"
+    },
+    {
+      "index": 388,
+      "start": 1289.52,
+      "end": 1292.51,
+      "duration": 2.99,
+      "text": "plus three I would have an e to the plus"
+    },
+    {
+      "index": 389,
+      "start": 1292.52,
+      "end": 1295.11,
+      "duration": 2.59,
+      "text": "3 T and I would have blow"
+    },
+    {
+      "index": 390,
+      "start": 1295.12,
+      "end": 1298.75,
+      "duration": 3.63,
+      "text": "up of course the zero I value would stay"
+    },
+    {
+      "index": 391,
+      "start": 1298.76,
+      "end": 1302.029,
+      "duration": 3.269,
+      "text": "at zero but the other guy is taking off"
+    },
+    {
+      "index": 392,
+      "start": 1302.039,
+      "end": 1305.87,
+      "duration": 3.831,
+      "text": "in if I reversed all the signs okay so"
+    },
+    {
+      "index": 393,
+      "start": 1305.88,
+      "end": 1310.029,
+      "duration": 4.149,
+      "text": "this is this is the the stability"
+    },
+    {
+      "index": 394,
+      "start": 1310.039,
+      "end": 1313.63,
+      "duration": 3.591,
+      "text": "picture and for a 2X two"
+    },
+    {
+      "index": 395,
+      "start": 1313.64,
+      "end": 1317.789,
+      "duration": 4.149,
+      "text": "Matrix uh we can actually pin down even"
+    },
+    {
+      "index": 396,
+      "start": 1317.799,
+      "end": 1319.269,
+      "duration": 1.47,
+      "text": "more"
+    },
+    {
+      "index": 397,
+      "start": 1319.279,
+      "end": 1322.43,
+      "duration": 3.151,
+      "text": "closely what that means can I can I do"
+    },
+    {
+      "index": 398,
+      "start": 1322.44,
+      "end": 1326.269,
+      "duration": 3.829,
+      "text": "that let me do that I want to for a 2 by"
+    },
+    {
+      "index": 399,
+      "start": 1326.279,
+      "end": 1328.07,
+      "duration": 1.791,
+      "text": "two"
+    },
+    {
+      "index": 400,
+      "start": 1328.08,
+      "end": 1331.149,
+      "duration": 3.069,
+      "text": "Matrix I can tell whether the real part"
+    },
+    {
+      "index": 401,
+      "start": 1331.159,
+      "end": 1334.35,
+      "duration": 3.191,
+      "text": "of the igen values is negative well let"
+    },
+    {
+      "index": 402,
+      "start": 1334.36,
+      "end": 1337.269,
+      "duration": 2.909,
+      "text": "me let me tell you what I have in mind"
+    },
+    {
+      "index": 403,
+      "start": 1337.279,
+      "end": 1342.149,
+      "duration": 4.87,
+      "text": "for that so 2x two stability let me this"
+    },
+    {
+      "index": 404,
+      "start": 1342.159,
+      "end": 1344.59,
+      "duration": 2.431,
+      "text": "is just a little"
+    },
+    {
+      "index": 405,
+      "start": 1344.6,
+      "end": 1351.149,
+      "duration": 6.549,
+      "text": "comment 2 by two stability"
+    },
+    {
+      "index": 406,
+      "start": 1355.83,
+      "end": 1355.84,
+      "duration": 0.01,
+      "text": "so my Matrix now is just a b c"
+    },
+    {
+      "index": 407,
+      "start": 1355.84,
+      "end": 1360.11,
+      "duration": 4.27,
+      "text": "d and and I'm looking for the real parts"
+    },
+    {
+      "index": 408,
+      "start": 1360.12,
+      "end": 1366.71,
+      "duration": 6.59,
+      "text": "of both igen values to be"
+    },
+    {
+      "index": 409,
+      "start": 1374.07,
+      "end": 1374.08,
+      "duration": 0.01,
+      "text": "okay what how can I tell from looking at"
+    },
+    {
+      "index": 410,
+      "start": 1374.08,
+      "end": 1377.149,
+      "duration": 3.069,
+      "text": "the Matrix without Computing its igen"
+    },
+    {
+      "index": 411,
+      "start": 1377.159,
+      "end": 1378.95,
+      "duration": 1.791,
+      "text": "values"
+    },
+    {
+      "index": 412,
+      "start": 1378.96,
+      "end": 1382.669,
+      "duration": 3.709,
+      "text": "whether the two L values are negative or"
+    },
+    {
+      "index": 413,
+      "start": 1382.679,
+      "end": 1385.029,
+      "duration": 2.35,
+      "text": "at least their real parts are negative"
+    },
+    {
+      "index": 414,
+      "start": 1385.039,
+      "end": 1387.23,
+      "duration": 2.191,
+      "text": "what would that tell me about the trace"
+    },
+    {
+      "index": 415,
+      "start": 1387.24,
+      "end": 1389.87,
+      "duration": 2.63,
+      "text": "so so the"
+    },
+    {
+      "index": 416,
+      "start": 1389.88,
+      "end": 1393.83,
+      "duration": 3.95,
+      "text": "trace that's this a plus"
+    },
+    {
+      "index": 417,
+      "start": 1393.84,
+      "end": 1397.149,
+      "duration": 3.309,
+      "text": "d what Can you tell me about the"
+    },
+    {
+      "index": 418,
+      "start": 1397.159,
+      "end": 1401.11,
+      "duration": 3.951,
+      "text": "trace in the case of a 2X two stable"
+    },
+    {
+      "index": 419,
+      "start": 1401.12,
+      "end": 1404.549,
+      "duration": 3.429,
+      "text": "Matrix that means the igen values are"
+    },
+    {
+      "index": 420,
+      "start": 1404.559,
+      "end": 1406.95,
+      "duration": 2.391,
+      "text": "negative or at least the real parts of"
+    },
+    {
+      "index": 421,
+      "start": 1406.96,
+      "end": 1409.029,
+      "duration": 2.069,
+      "text": "those igen values are negative"
+    },
+    {
+      "index": 422,
+      "start": 1409.039,
+      "end": 1411.75,
+      "duration": 2.711,
+      "text": "then when I take the when I look at the"
+    },
+    {
+      "index": 423,
+      "start": 1411.76,
+      "end": 1415.029,
+      "duration": 3.269,
+      "text": "Matrix and and find its Trace what what"
+    },
+    {
+      "index": 424,
+      "start": 1415.039,
+      "end": 1418.35,
+      "duration": 3.311,
+      "text": "do I know about that it's negative right"
+    },
+    {
+      "index": 425,
+      "start": 1418.36,
+      "end": 1421.149,
+      "duration": 2.789,
+      "text": "this is the sum of the this equals this"
+    },
+    {
+      "index": 426,
+      "start": 1421.159,
+      "end": 1425.95,
+      "duration": 4.791,
+      "text": "equals Lambda 1 + Lambda 2 so it's"
+    },
+    {
+      "index": 427,
+      "start": 1425.96,
+      "end": 1428.59,
+      "duration": 2.63,
+      "text": "negative the two I values by the way"
+    },
+    {
+      "index": 428,
+      "start": 1428.6,
+      "end": 1432.47,
+      "duration": 3.87,
+      "text": "will have if they're complex will have"
+    },
+    {
+      "index": 429,
+      "start": 1432.48,
+      "end": 1436.35,
+      "duration": 3.87,
+      "text": "plus 6 I and minus 6 I the complex parts"
+    },
+    {
+      "index": 430,
+      "start": 1436.36,
+      "end": 1440.07,
+      "duration": 3.71,
+      "text": "will will be conjugates of each other"
+    },
+    {
+      "index": 431,
+      "start": 1440.08,
+      "end": 1443.07,
+      "duration": 2.99,
+      "text": "and disappear when we add and the trace"
+    },
+    {
+      "index": 432,
+      "start": 1443.08,
+      "end": 1445.789,
+      "duration": 2.709,
+      "text": "will be negative okay the trace has to"
+    },
+    {
+      "index": 433,
+      "start": 1445.799,
+      "end": 1447.95,
+      "duration": 2.151,
+      "text": "be negative is that"
+    },
+    {
+      "index": 434,
+      "start": 1447.96,
+      "end": 1451.029,
+      "duration": 3.069,
+      "text": "enough is a negative Trace enough to"
+    },
+    {
+      "index": 435,
+      "start": 1451.039,
+      "end": 1453.59,
+      "duration": 2.551,
+      "text": "make the Matrix"
+    },
+    {
+      "index": 436,
+      "start": 1453.6,
+      "end": 1456.75,
+      "duration": 3.15,
+      "text": "stable shouldn't be enough right can I"
+    },
+    {
+      "index": 437,
+      "start": 1456.76,
+      "end": 1458.75,
+      "duration": 1.99,
+      "text": "can you make what's a matrix that has a"
+    },
+    {
+      "index": 438,
+      "start": 1458.76,
+      "end": 1462.909,
+      "duration": 4.149,
+      "text": "negative Trace but still it's not"
+    },
+    {
+      "index": 439,
+      "start": 1462.919,
+      "end": 1465.549,
+      "duration": 2.63,
+      "text": "stable so it it has a blow it still has"
+    },
+    {
+      "index": 440,
+      "start": 1465.559,
+      "end": 1469.31,
+      "duration": 3.751,
+      "text": "a blow up factor and uh and a and a"
+    },
+    {
+      "index": 441,
+      "start": 1469.32,
+      "end": 1473.11,
+      "duration": 3.79,
+      "text": "Decay one so what would be so just just"
+    },
+    {
+      "index": 442,
+      "start": 1473.12,
+      "end": 1476.47,
+      "duration": 3.35,
+      "text": "to see maybe I just put that here uh"
+    },
+    {
+      "index": 443,
+      "start": 1476.48,
+      "end": 1478.63,
+      "duration": 2.15,
+      "text": "this now I'm looking for an example"
+    },
+    {
+      "index": 444,
+      "start": 1478.64,
+      "end": 1482.669,
+      "duration": 4.029,
+      "text": "where the trace could be negative but"
+    },
+    {
+      "index": 445,
+      "start": 1482.679,
+      "end": 1487.11,
+      "duration": 4.431,
+      "text": "still blow"
+    },
+    {
+      "index": 446,
+      "start": 1489.23,
+      "end": 1489.24,
+      "duration": 0.01,
+      "text": "up of"
+    },
+    {
+      "index": 447,
+      "start": 1489.24,
+      "end": 1491.87,
+      "duration": 2.63,
+      "text": "course yeah let's just take"
+    },
+    {
+      "index": 448,
+      "start": 1491.88,
+      "end": 1499.35,
+      "duration": 7.47,
+      "text": "one oh look let me let me make it -201"
+    },
+    {
+      "index": 449,
+      "start": 1502.63,
+      "end": 1502.64,
+      "duration": 0.01,
+      "text": "okay there's a case where that Matrix"
+    },
+    {
+      "index": 450,
+      "start": 1502.64,
+      "end": 1506.07,
+      "duration": 3.43,
+      "text": "has negative Trace I know it's values of"
+    },
+    {
+      "index": 451,
+      "start": 1506.08,
+      "end": 1508.47,
+      "duration": 2.39,
+      "text": "course they're minus 2 and one and it"
+    },
+    {
+      "index": 452,
+      "start": 1508.48,
+      "end": 1511.549,
+      "duration": 3.069,
+      "text": "blows up it's got It's got A plus one I"
+    },
+    {
+      "index": 453,
+      "start": 1511.559,
+      "end": 1514.669,
+      "duration": 3.11,
+      "text": "value here so there'll be an e to the"
+    },
+    {
+      "index": 454,
+      "start": 1514.679,
+      "end": 1518.31,
+      "duration": 3.631,
+      "text": "plus T in the solution and it'll blow up"
+    },
+    {
+      "index": 455,
+      "start": 1518.32,
+      "end": 1521.23,
+      "duration": 2.91,
+      "text": "if it has any second component at all I"
+    },
+    {
+      "index": 456,
+      "start": 1521.24,
+      "end": 1522.87,
+      "duration": 1.63,
+      "text": "need another"
+    },
+    {
+      "index": 457,
+      "start": 1522.88,
+      "end": 1527.11,
+      "duration": 4.23,
+      "text": "condition and it's a condition on the"
+    },
+    {
+      "index": 458,
+      "start": 1527.12,
+      "end": 1529.59,
+      "duration": 2.47,
+      "text": "determin and and what's that condition"
+    },
+    {
+      "index": 459,
+      "start": 1529.6,
+      "end": 1533.029,
+      "duration": 3.429,
+      "text": "if I know that the two I values suppose"
+    },
+    {
+      "index": 460,
+      "start": 1533.039,
+      "end": 1536.07,
+      "duration": 3.031,
+      "text": "I know they're negative both negative"
+    },
+    {
+      "index": 461,
+      "start": 1536.08,
+      "end": 1538.669,
+      "duration": 2.589,
+      "text": "what does that tell me about the"
+    },
+    {
+      "index": 462,
+      "start": 1538.679,
+      "end": 1542.07,
+      "duration": 3.391,
+      "text": "determinant let me ask again if I know"
+    },
+    {
+      "index": 463,
+      "start": 1542.08,
+      "end": 1544.51,
+      "duration": 2.43,
+      "text": "both the I values are"
+    },
+    {
+      "index": 464,
+      "start": 1544.52,
+      "end": 1546.99,
+      "duration": 2.47,
+      "text": "negative then I know the trace is"
+    },
+    {
+      "index": 465,
+      "start": 1547.0,
+      "end": 1551.71,
+      "duration": 4.71,
+      "text": "negative but the determinant is"
+    },
+    {
+      "index": 466,
+      "start": 1551.72,
+      "end": 1554.07,
+      "duration": 2.35,
+      "text": "positive cuz it's the product of the two"
+    },
+    {
+      "index": 467,
+      "start": 1554.08,
+      "end": 1555.43,
+      "duration": 1.35,
+      "text": "I"
+    },
+    {
+      "index": 468,
+      "start": 1555.44,
+      "end": 1559.269,
+      "duration": 3.829,
+      "text": "vales so this determinant is Lambda 1 *"
+    },
+    {
+      "index": 469,
+      "start": 1559.279,
+      "end": 1563.43,
+      "duration": 4.151,
+      "text": "Lambda 2 this is this is Lambda 1 *"
+    },
+    {
+      "index": 470,
+      "start": 1563.44,
+      "end": 1566.549,
+      "duration": 3.109,
+      "text": "Lambda 2 and if they're both negative"
+    },
+    {
+      "index": 471,
+      "start": 1566.559,
+      "end": 1568.87,
+      "duration": 2.311,
+      "text": "the product is positive so positive"
+    },
+    {
+      "index": 472,
+      "start": 1568.88,
+      "end": 1570.83,
+      "duration": 1.95,
+      "text": "determinant negative"
+    },
+    {
+      "index": 473,
+      "start": 1570.84,
+      "end": 1574.909,
+      "duration": 4.069,
+      "text": "Trace I can easily track down the this"
+    },
+    {
+      "index": 474,
+      "start": 1574.919,
+      "end": 1577.95,
+      "duration": 3.031,
+      "text": "condition also for the if if there's an"
+    },
+    {
+      "index": 475,
+      "start": 1577.96,
+      "end": 1581.19,
+      "duration": 3.23,
+      "text": "imaginary part hanging around okay so"
+    },
+    {
+      "index": 476,
+      "start": 1581.2,
+      "end": 1585.71,
+      "duration": 4.51,
+      "text": "that's a like a small but quite useful"
+    },
+    {
+      "index": 477,
+      "start": 1585.72,
+      "end": 1588.909,
+      "duration": 3.189,
+      "text": "uh because 2 by two is always important"
+    },
+    {
+      "index": 478,
+      "start": 1588.919,
+      "end": 1596.19,
+      "duration": 7.271,
+      "text": "uh uh comment on uh stability okay so uh"
+    },
+    {
+      "index": 479,
+      "start": 1596.2,
+      "end": 1599.31,
+      "duration": 3.11,
+      "text": "let's just look at the picture"
+    },
+    {
+      "index": 480,
+      "start": 1599.32,
+      "end": 1603.07,
+      "duration": 3.75,
+      "text": "again okay the main part of my lecture"
+    },
+    {
+      "index": 481,
+      "start": 1603.08,
+      "end": 1604.99,
+      "duration": 1.91,
+      "text": "the the one thing you want to be able to"
+    },
+    {
+      "index": 482,
+      "start": 1605.0,
+      "end": 1608.87,
+      "duration": 3.87,
+      "text": "like just do automatically is this step"
+    },
+    {
+      "index": 483,
+      "start": 1608.88,
+      "end": 1610.669,
+      "duration": 1.789,
+      "text": "of solving the"
+    },
+    {
+      "index": 484,
+      "start": 1610.679,
+      "end": 1613.75,
+      "duration": 3.071,
+      "text": "system find the igon values find the IG"
+    },
+    {
+      "index": 485,
+      "start": 1613.76,
+      "end": 1616.909,
+      "duration": 3.149,
+      "text": "vectors find the coefficients and notice"
+    },
+    {
+      "index": 486,
+      "start": 1616.919,
+      "end": 1619.269,
+      "duration": 2.35,
+      "text": "what what's the Matrix"
+    },
+    {
+      "index": 487,
+      "start": 1619.279,
+      "end": 1622.19,
+      "duration": 2.911,
+      "text": "in this linear system here I can't help"
+    },
+    {
+      "index": 488,
+      "start": 1622.2,
+      "end": 1625.269,
+      "duration": 3.069,
+      "text": "if if I if I have equations like"
+    },
+    {
+      "index": 489,
+      "start": 1625.279,
+      "end": 1627.909,
+      "duration": 2.63,
+      "text": "that that's that's my equation's column"
+    },
+    {
+      "index": 490,
+      "start": 1627.919,
+      "end": 1630.71,
+      "duration": 2.791,
+      "text": "at a time what's the Matrix form of that"
+    },
+    {
+      "index": 491,
+      "start": 1630.72,
+      "end": 1635.149,
+      "duration": 4.429,
+      "text": "equation so so this this uh system of"
+    },
+    {
+      "index": 492,
+      "start": 1635.159,
+      "end": 1637.87,
+      "duration": 2.711,
+      "text": "equations"
+    },
+    {
+      "index": 493,
+      "start": 1637.88,
+      "end": 1640.669,
+      "duration": 2.789,
+      "text": "is is some"
+    },
+    {
+      "index": 494,
+      "start": 1640.679,
+      "end": 1646.269,
+      "duration": 5.59,
+      "text": "Matrix multiplying C1 C2 to give U of"
+    },
+    {
+      "index": 495,
+      "start": 1646.279,
+      "end": 1649.31,
+      "duration": 3.031,
+      "text": "Zer one Z"
+    },
+    {
+      "index": 496,
+      "start": 1649.32,
+      "end": 1653.149,
+      "duration": 3.829,
+      "text": "what's the Matrix well it's obviously"
+    },
+    {
+      "index": 497,
+      "start": 1653.159,
+      "end": 1656.71,
+      "duration": 3.551,
+      "text": "21 1 minus one but we have a name or at"
+    },
+    {
+      "index": 498,
+      "start": 1656.72,
+      "end": 1659.509,
+      "duration": 2.789,
+      "text": "least a letter actually a name for that"
+    },
+    {
+      "index": 499,
+      "start": 1659.519,
+      "end": 1662.509,
+      "duration": 2.99,
+      "text": "Matrix what what Matrix are we are we"
+    },
+    {
+      "index": 500,
+      "start": 1662.519,
+      "end": 1665.23,
+      "duration": 2.711,
+      "text": "are we dealing with here in this step of"
+    },
+    {
+      "index": 501,
+      "start": 1665.24,
+      "end": 1666.389,
+      "duration": 1.149,
+      "text": "finding the"
+    },
+    {
+      "index": 502,
+      "start": 1666.399,
+      "end": 1671.75,
+      "duration": 5.351,
+      "text": "C's its letter is s it's the I Vector"
+    },
+    {
+      "index": 503,
+      "start": 1671.76,
+      "end": 1674.83,
+      "duration": 3.07,
+      "text": "Matrix of course these are the I vectors"
+    },
+    {
+      "index": 504,
+      "start": 1674.84,
+      "end": 1677.389,
+      "duration": 2.549,
+      "text": "they're in The Columns of our Matrix so"
+    },
+    {
+      "index": 505,
+      "start": 1677.399,
+      "end": 1681.149,
+      "duration": 3.75,
+      "text": "this is SC equals U of"
+    },
+    {
+      "index": 506,
+      "start": 1681.159,
+      "end": 1685.87,
+      "duration": 4.711,
+      "text": "0 is the is the uh that step where you"
+    },
+    {
+      "index": 507,
+      "start": 1685.88,
+      "end": 1690.11,
+      "duration": 4.23,
+      "text": "find the actual uh coefficients you find"
+    },
+    {
+      "index": 508,
+      "start": 1690.12,
+      "end": 1694.43,
+      "duration": 4.31,
+      "text": "out how much of each uh pure exponential"
+    },
+    {
+      "index": 509,
+      "start": 1694.44,
+      "end": 1696.19,
+      "duration": 1.75,
+      "text": "is in the"
+    },
+    {
+      "index": 510,
+      "start": 1696.2,
+      "end": 1698.549,
+      "duration": 2.349,
+      "text": "solution by getting it right at the"
+    },
+    {
+      "index": 511,
+      "start": 1698.559,
+      "end": 1701.07,
+      "duration": 2.511,
+      "text": "start then it stays right"
+    },
+    {
+      "index": 512,
+      "start": 1701.08,
+      "end": 1703.149,
+      "duration": 2.069,
+      "text": "forever you're you're seeing this"
+    },
+    {
+      "index": 513,
+      "start": 1703.159,
+      "end": 1705.47,
+      "duration": 2.311,
+      "text": "picture that that each each pure"
+    },
+    {
+      "index": 514,
+      "start": 1705.48,
+      "end": 1708.11,
+      "duration": 2.63,
+      "text": "exponential goes on its own way when"
+    },
+    {
+      "index": 515,
+      "start": 1708.12,
+      "end": 1711.07,
+      "duration": 2.95,
+      "text": "once you start it from U of0 so you"
+    },
+    {
+      "index": 516,
+      "start": 1711.08,
+      "end": 1714.35,
+      "duration": 3.27,
+      "text": "start it by figuring out how much each"
+    },
+    {
+      "index": 517,
+      "start": 1714.36,
+      "end": 1716.87,
+      "duration": 2.51,
+      "text": "one is present in U of0 and then off"
+    },
+    {
+      "index": 518,
+      "start": 1716.88,
+      "end": 1722.07,
+      "duration": 5.19,
+      "text": "they go okay so um so that's a system of"
+    },
+    {
+      "index": 519,
+      "start": 1722.08,
+      "end": 1725.909,
+      "duration": 3.829,
+      "text": "two equations in two unknowns"
+    },
+    {
+      "index": 520,
+      "start": 1725.919,
+      "end": 1727.43,
+      "duration": 1.511,
+      "text": "coupled"
+    },
+    {
+      "index": 521,
+      "start": 1727.44,
+      "end": 1731.31,
+      "duration": 3.87,
+      "text": "uh the The Matrix sort of couples U1 and"
+    },
+    {
+      "index": 522,
+      "start": 1731.32,
+      "end": 1735.23,
+      "duration": 3.91,
+      "text": "U2 and the igen values and igen vectors"
+    },
+    {
+      "index": 523,
+      "start": 1735.24,
+      "end": 1738.789,
+      "duration": 3.549,
+      "text": "uncouple it diagonalize it actually okay"
+    },
+    {
+      "index": 524,
+      "start": 1738.799,
+      "end": 1743.549,
+      "duration": 4.75,
+      "text": "now can I can I think in terms of s and"
+    },
+    {
+      "index": 525,
+      "start": 1743.559,
+      "end": 1746.75,
+      "duration": 3.191,
+      "text": "Lambda so I want to write the solution"
+    },
+    {
+      "index": 526,
+      "start": 1746.76,
+      "end": 1751.269,
+      "duration": 4.509,
+      "text": "down again in terms of s and Lambda okay"
+    },
+    {
+      "index": 527,
+      "start": 1751.279,
+      "end": 1754.07,
+      "duration": 2.791,
+      "text": "I'll do that on this far"
+    },
+    {
+      "index": 528,
+      "start": 1754.08,
+      "end": 1759.549,
+      "duration": 5.469,
+      "text": "board okay so I'm coming back"
+    },
+    {
+      "index": 529,
+      "start": 1764.07,
+      "end": 1764.08,
+      "duration": 0.01,
+      "text": "to I'm coming back to our equation"
+    },
+    {
+      "index": 530,
+      "start": 1764.08,
+      "end": 1772.31,
+      "duration": 8.23,
+      "text": "DT equals AU"
+    },
+    {
+      "index": 531,
+      "start": 1775.99,
+      "end": 1776.0,
+      "duration": 0.01,
+      "text": "now this this Matrix a couples them the"
+    },
+    {
+      "index": 532,
+      "start": 1776.0,
+      "end": 1779.029,
+      "duration": 3.029,
+      "text": "whole point of I vectors is to uncouple"
+    },
+    {
+      "index": 533,
+      "start": 1779.039,
+      "end": 1783.269,
+      "duration": 4.23,
+      "text": "so one way to see that is introduce"
+    },
+    {
+      "index": 534,
+      "start": 1783.279,
+      "end": 1789.789,
+      "duration": 6.51,
+      "text": "set u equal a not a It's s the I Vector"
+    },
+    {
+      "index": 535,
+      "start": 1789.799,
+      "end": 1793.549,
+      "duration": 3.75,
+      "text": "Matrix that"
+    },
+    {
+      "index": 536,
+      "start": 1797.19,
+      "end": 1797.2,
+      "duration": 0.01,
+      "text": "uncouples so I'm I'm taking this"
+    },
+    {
+      "index": 537,
+      "start": 1797.2,
+      "end": 1801.029,
+      "duration": 3.829,
+      "text": "equation as I'm given coupled with with"
+    },
+    {
+      "index": 538,
+      "start": 1801.039,
+      "end": 1803.43,
+      "duration": 2.391,
+      "text": "a has is probably full of"
+    },
+    {
+      "index": 539,
+      "start": 1803.44,
+      "end": 1806.59,
+      "duration": 3.15,
+      "text": "nonzeros but I'm by uncoupling it I mean"
+    },
+    {
+      "index": 540,
+      "start": 1806.6,
+      "end": 1808.87,
+      "duration": 2.27,
+      "text": "I'm diagonalizing it if I can get a"
+    },
+    {
+      "index": 541,
+      "start": 1808.88,
+      "end": 1813.47,
+      "duration": 4.59,
+      "text": "diagonal matrix I'm I'm in okay so I"
+    },
+    {
+      "index": 542,
+      "start": 1813.48,
+      "end": 1817.75,
+      "duration": 4.27,
+      "text": "plug that in this is a"
+    },
+    {
+      "index": 543,
+      "start": 1817.76,
+      "end": 1824.75,
+      "duration": 6.99,
+      "text": "SV and this is s"
+    },
+    {
+      "index": 544,
+      "start": 1828.11,
+      "end": 1828.12,
+      "duration": 0.01,
+      "text": "dvdt s is a constant it's this is the I"
+    },
+    {
+      "index": 545,
+      "start": 1828.12,
+      "end": 1828.99,
+      "duration": 0.87,
+      "text": "Vector"
+    },
+    {
+      "index": 546,
+      "start": 1829.0,
+      "end": 1833.95,
+      "duration": 4.95,
+      "text": "Matrix this is the IG Vector"
+    },
+    {
+      "index": 547,
+      "start": 1836.43,
+      "end": 1836.44,
+      "duration": 0.01,
+      "text": "Matrix okay now I'm going to bring s"
+    },
+    {
+      "index": 548,
+      "start": 1836.44,
+      "end": 1839.35,
+      "duration": 2.91,
+      "text": "inverse over"
+    },
+    {
+      "index": 549,
+      "start": 1848.75,
+      "end": 1848.76,
+      "duration": 0.01,
+      "text": "got that combination s inverse as s"
+    },
+    {
+      "index": 550,
+      "start": 1848.76,
+      "end": 1852.549,
+      "duration": 3.789,
+      "text": "is Lambda the diagonal"
+    },
+    {
+      "index": 551,
+      "start": 1852.559,
+      "end": 1856.59,
+      "duration": 4.031,
+      "text": "matrix that's that's the point that that"
+    },
+    {
+      "index": 552,
+      "start": 1856.6,
+      "end": 1858.509,
+      "duration": 1.909,
+      "text": "in if I'm using the"
+    },
+    {
+      "index": 553,
+      "start": 1858.519,
+      "end": 1860.789,
+      "duration": 2.27,
+      "text": "igen vectors as my"
+    },
+    {
+      "index": 554,
+      "start": 1860.799,
+      "end": 1864.95,
+      "duration": 4.151,
+      "text": "basis then my system of equations is"
+    },
+    {
+      "index": 555,
+      "start": 1864.96,
+      "end": 1868.909,
+      "duration": 3.949,
+      "text": "just diagonal each there's no coupling"
+    },
+    {
+      "index": 556,
+      "start": 1868.919,
+      "end": 1874.11,
+      "duration": 5.191,
+      "text": "anymore dv1 DT is Lambda 1 V1 so let's"
+    },
+    {
+      "index": 557,
+      "start": 1874.12,
+      "end": 1877.43,
+      "duration": 3.31,
+      "text": "just write that down dv1"
+    },
+    {
+      "index": 558,
+      "start": 1877.44,
+      "end": 1880.35,
+      "duration": 2.91,
+      "text": "DT is Lambda 1"
+    },
+    {
+      "index": 559,
+      "start": 1880.36,
+      "end": 1886.43,
+      "duration": 6.07,
+      "text": "V1 and so on for all n of the equations"
+    },
+    {
+      "index": 560,
+      "start": 1886.44,
+      "end": 1888.35,
+      "duration": 1.91,
+      "text": "it's a system of equations but they're"
+    },
+    {
+      "index": 561,
+      "start": 1888.36,
+      "end": 1891.99,
+      "duration": 3.63,
+      "text": "not connected so they're easy to solve"
+    },
+    {
+      "index": 562,
+      "start": 1892.0,
+      "end": 1895.87,
+      "duration": 3.87,
+      "text": "and why don't I just write down the"
+    },
+    {
+      "index": 563,
+      "start": 1903.87,
+      "end": 1903.88,
+      "duration": 0.01,
+      "text": "solution V well V is now some e to the"
+    },
+    {
+      "index": 564,
+      "start": 1903.88,
+      "end": 1905.669,
+      "duration": 1.789,
+      "text": "Lambda 1"
+    },
+    {
+      "index": 565,
+      "start": 1905.679,
+      "end": 1908.59,
+      "duration": 2.911,
+      "text": "t uh well"
+    },
+    {
+      "index": 566,
+      "start": 1908.6,
+      "end": 1913.149,
+      "duration": 4.549,
+      "text": "okay I guess my idea here now is to"
+    },
+    {
+      "index": 567,
+      "start": 1913.159,
+      "end": 1918.549,
+      "duration": 5.39,
+      "text": "use uh the natural notation V of t"
+    },
+    {
+      "index": 568,
+      "start": 1918.559,
+      "end": 1923.75,
+      "duration": 5.191,
+      "text": "is e to the Lambda t v"
+    },
+    {
+      "index": 569,
+      "start": 1923.76,
+      "end": 1926.669,
+      "duration": 2.909,
+      "text": "of0 and U of"
+    },
+    {
+      "index": 570,
+      "start": 1926.679,
+      "end": 1929.549,
+      "duration": 2.87,
+      "text": "T will be"
+    },
+    {
+      "index": 571,
+      "start": 1929.559,
+      "end": 1935.19,
+      "duration": 5.631,
+      "text": "s e to the Lambda t s inverse U of"
+    },
+    {
+      "index": 572,
+      "start": 1935.2,
+      "end": 1939.99,
+      "duration": 4.79,
+      "text": "zero this is the this is the uh formula"
+    },
+    {
+      "index": 573,
+      "start": 1940.0,
+      "end": 1944.269,
+      "duration": 4.269,
+      "text": "I'm headed"
+    },
+    {
+      "index": 574,
+      "start": 1948.07,
+      "end": 1948.08,
+      "duration": 0.01,
+      "text": "for this this Matrix s e to the Lambda t"
+    },
+    {
+      "index": 575,
+      "start": 1948.08,
+      "end": 1949.19,
+      "duration": 1.11,
+      "text": "s"
+    },
+    {
+      "index": 576,
+      "start": 1949.2,
+      "end": 1952.59,
+      "duration": 3.39,
+      "text": "inverse that's my exponential that's my"
+    },
+    {
+      "index": 577,
+      "start": 1952.6,
+      "end": 1954.149,
+      "duration": 1.549,
+      "text": "e to the a"
+    },
+    {
+      "index": 578,
+      "start": 1954.159,
+      "end": 1956.389,
+      "duration": 2.23,
+      "text": "t is this"
+    },
+    {
+      "index": 579,
+      "start": 1956.399,
+      "end": 1962.509,
+      "duration": 6.11,
+      "text": "s e to the Lambda t s"
+    },
+    {
+      "index": 580,
+      "start": 1965.549,
+      "end": 1965.559,
+      "duration": 0.01,
+      "text": "inverse so my my job really now is to"
+    },
+    {
+      "index": 581,
+      "start": 1965.559,
+      "end": 1968.35,
+      "duration": 2.791,
+      "text": "explain what's going on with this Matrix"
+    },
+    {
+      "index": 582,
+      "start": 1968.36,
+      "end": 1970.549,
+      "duration": 2.189,
+      "text": "up in the exponential what does that"
+    },
+    {
+      "index": 583,
+      "start": 1970.559,
+      "end": 1973.789,
+      "duration": 3.23,
+      "text": "mean what do it mean to say e to a"
+    },
+    {
+      "index": 584,
+      "start": 1973.799,
+      "end": 1978.19,
+      "duration": 4.391,
+      "text": "matrix"
+    },
+    {
+      "index": 585,
+      "start": 1979.83,
+      "end": 1979.84,
+      "duration": 0.01,
+      "text": "this ought to be easier because this is"
+    },
+    {
+      "index": 586,
+      "start": 1979.84,
+      "end": 1982.669,
+      "duration": 2.829,
+      "text": "e to a diagonal matrix but still it's a"
+    },
+    {
+      "index": 587,
+      "start": 1982.679,
+      "end": 1986.47,
+      "duration": 3.791,
+      "text": "matrix what what do what do we mean by e"
+    },
+    {
+      "index": 588,
+      "start": 1986.48,
+      "end": 1989.149,
+      "duration": 2.669,
+      "text": "to the a t because"
+    },
+    {
+      "index": 589,
+      "start": 1989.159,
+      "end": 1993.43,
+      "duration": 4.271,
+      "text": "really e to the a t is my answer here my"
+    },
+    {
+      "index": 590,
+      "start": 1993.44,
+      "end": 1997.629,
+      "duration": 4.189,
+      "text": "my answer to this equation"
+    },
+    {
+      "index": 591,
+      "start": 2001.669,
+      "end": 2001.679,
+      "duration": 0.01,
+      "text": "is this U of T this this is my this is"
+    },
+    {
+      "index": 592,
+      "start": 2001.679,
+      "end": 2005.149,
+      "duration": 3.47,
+      "text": "my e to the A T U of"
+    },
+    {
+      "index": 593,
+      "start": 2005.159,
+      "end": 2007.99,
+      "duration": 2.831,
+      "text": "zero so it's"
+    },
+    {
+      "index": 594,
+      "start": 2008.0,
+      "end": 2010.909,
+      "duration": 2.909,
+      "text": "my my job is really now to to say what"
+    },
+    {
+      "index": 595,
+      "start": 2010.919,
+      "end": 2012.149,
+      "duration": 1.23,
+      "text": "what does that mean what's the"
+    },
+    {
+      "index": 596,
+      "start": 2012.159,
+      "end": 2015.909,
+      "duration": 3.75,
+      "text": "exponential of a matrix and why is that"
+    },
+    {
+      "index": 597,
+      "start": 2015.919,
+      "end": 2017.549,
+      "duration": 1.63,
+      "text": "formula"
+    },
+    {
+      "index": 598,
+      "start": 2017.559,
+      "end": 2020.029,
+      "duration": 2.47,
+      "text": "correct okay so I'll put that on the"
+    },
+    {
+      "index": 599,
+      "start": 2020.039,
+      "end": 2021.149,
+      "duration": 1.11,
+      "text": "board"
+    },
+    {
+      "index": 600,
+      "start": 2021.159,
+      "end": 2024.07,
+      "duration": 2.911,
+      "text": "underneath what's the exponential of a"
+    },
+    {
+      "index": 601,
+      "start": 2024.08,
+      "end": 2027.75,
+      "duration": 3.67,
+      "text": "matrix let me come back here so I'm"
+    },
+    {
+      "index": 602,
+      "start": 2027.76,
+      "end": 2033.95,
+      "duration": 6.19,
+      "text": "talking about Matrix"
+    },
+    {
+      "index": 603,
+      "start": 2038.669,
+      "end": 2038.679,
+      "duration": 0.01,
+      "text": "exponentials e to the a t okay"
+    },
+    {
+      "index": 604,
+      "start": 2038.679,
+      "end": 2040.07,
+      "duration": 1.391,
+      "text": "how are we going to define the"
+    },
+    {
+      "index": 605,
+      "start": 2040.08,
+      "end": 2043.59,
+      "duration": 3.51,
+      "text": "exponential of a of of"
+    },
+    {
+      "index": 606,
+      "start": 2043.6,
+      "end": 2047.71,
+      "duration": 4.11,
+      "text": "something the trick the the idea is the"
+    },
+    {
+      "index": 607,
+      "start": 2047.72,
+      "end": 2050.99,
+      "duration": 3.27,
+      "text": "the thing to go back to is"
+    },
+    {
+      "index": 608,
+      "start": 2051.0,
+      "end": 2054.909,
+      "duration": 3.909,
+      "text": "exponential there's a power series for"
+    },
+    {
+      "index": 609,
+      "start": 2054.919,
+      "end": 2057.589,
+      "duration": 2.67,
+      "text": "exponentials that's how you you the good"
+    },
+    {
+      "index": 610,
+      "start": 2057.599,
+      "end": 2061.23,
+      "duration": 3.631,
+      "text": "way to define e to the x is the power"
+    },
+    {
+      "index": 611,
+      "start": 2061.24,
+      "end": 2067.389,
+      "duration": 6.149,
+      "text": "series 1 + x + 12 x^2 6 x cubed and"
+    },
+    {
+      "index": 612,
+      "start": 2067.399,
+      "end": 2069.79,
+      "duration": 2.391,
+      "text": "we'll do do it now when the when we have"
+    },
+    {
+      "index": 613,
+      "start": 2069.8,
+      "end": 2073.629,
+      "duration": 3.829,
+      "text": "a matrix so the one becomes the identity"
+    },
+    {
+      "index": 614,
+      "start": 2073.639,
+      "end": 2075.669,
+      "duration": 2.03,
+      "text": "the x is"
+    },
+    {
+      "index": 615,
+      "start": 2075.679,
+      "end": 2081.75,
+      "duration": 6.071,
+      "text": "a the x squ is a t^ 2ar and I divide by"
+    },
+    {
+      "index": 616,
+      "start": 2081.76,
+      "end": 2086.79,
+      "duration": 5.03,
+      "text": "two the the cube the X cube is a cubed"
+    },
+    {
+      "index": 617,
+      "start": 2086.8,
+      "end": 2089.829,
+      "duration": 3.029,
+      "text": "over 6 and what's the general term in"
+    },
+    {
+      "index": 618,
+      "start": 2089.839,
+      "end": 2096.349,
+      "duration": 6.51,
+      "text": "here a to the N power divided by and it"
+    },
+    {
+      "index": 619,
+      "start": 2096.359,
+      "end": 2100.47,
+      "duration": 4.111,
+      "text": "goes on but what do I divide"
+    },
+    {
+      "index": 620,
+      "start": 2100.48,
+      "end": 2104.31,
+      "duration": 3.83,
+      "text": "by so you see the pattern here I divided"
+    },
+    {
+      "index": 621,
+      "start": 2104.32,
+      "end": 2107.95,
+      "duration": 3.63,
+      "text": "by one here I divided by one by two by"
+    },
+    {
+      "index": 622,
+      "start": 2107.96,
+      "end": 2113.109,
+      "duration": 5.149,
+      "text": "six those are the factorials it's n"
+    },
+    {
+      "index": 623,
+      "start": 2116.15,
+      "end": 2116.16,
+      "duration": 0.01,
+      "text": "factorial that was like the the the one"
+    },
+    {
+      "index": 624,
+      "start": 2116.16,
+      "end": 2119.349,
+      "duration": 3.189,
+      "text": "beautiful tayor"
+    },
+    {
+      "index": 625,
+      "start": 2122.23,
+      "end": 2122.24,
+      "duration": 0.01,
+      "text": "series the one beautiful tayor series"
+    },
+    {
+      "index": 626,
+      "start": 2122.24,
+      "end": 2123.589,
+      "duration": 1.349,
+      "text": "well there are two there are two"
+    },
+    {
+      "index": 627,
+      "start": 2123.599,
+      "end": 2126.15,
+      "duration": 2.551,
+      "text": "beautiful tayor Series in this world the"
+    },
+    {
+      "index": 628,
+      "start": 2126.16,
+      "end": 2131.39,
+      "duration": 5.23,
+      "text": "tayor series for e x is the sum with X"
+    },
+    {
+      "index": 629,
+      "start": 2131.4,
+      "end": 2134.109,
+      "duration": 2.709,
+      "text": "to the N Over N"
+    },
+    {
+      "index": 630,
+      "start": 2134.119,
+      "end": 2136.67,
+      "duration": 2.551,
+      "text": "factorial and all I'm doing is doing the"
+    },
+    {
+      "index": 631,
+      "start": 2136.68,
+      "end": 2139.069,
+      "duration": 2.389,
+      "text": "same thing for matrices the other"
+    },
+    {
+      "index": 632,
+      "start": 2139.079,
+      "end": 2143.349,
+      "duration": 4.27,
+      "text": "beautiful tailor series is just the sum"
+    },
+    {
+      "index": 633,
+      "start": 2143.359,
+      "end": 2144.95,
+      "duration": 1.591,
+      "text": "of x to the"
+    },
+    {
+      "index": 634,
+      "start": 2144.96,
+      "end": 2148.39,
+      "duration": 3.43,
+      "text": "N not divided by n factorial can you do"
+    },
+    {
+      "index": 635,
+      "start": 2148.4,
+      "end": 2152.27,
+      "duration": 3.87,
+      "text": "you know what function that one is so if"
+    },
+    {
+      "index": 636,
+      "start": 2152.28,
+      "end": 2154.829,
+      "duration": 2.549,
+      "text": "I take this is the series all these sums"
+    },
+    {
+      "index": 637,
+      "start": 2154.839,
+      "end": 2158.15,
+      "duration": 3.311,
+      "text": "are going from zero to Infinity"
+    },
+    {
+      "index": 638,
+      "start": 2158.16,
+      "end": 2160.27,
+      "duration": 2.11,
+      "text": "what what function have I got this is"
+    },
+    {
+      "index": 639,
+      "start": 2160.28,
+      "end": 2162.109,
+      "duration": 1.829,
+      "text": "like a side"
+    },
+    {
+      "index": 640,
+      "start": 2162.119,
+      "end": 2166.95,
+      "duration": 4.831,
+      "text": "comment this is 1 + x + x^2 + x Cub + x"
+    },
+    {
+      "index": 641,
+      "start": 2166.96,
+      "end": 2169.87,
+      "duration": 2.91,
+      "text": "4 not divided by anything what what's"
+    },
+    {
+      "index": 642,
+      "start": 2169.88,
+      "end": 2170.75,
+      "duration": 0.87,
+      "text": "that"
+    },
+    {
+      "index": 643,
+      "start": 2170.76,
+      "end": 2174.67,
+      "duration": 3.91,
+      "text": "function 1 + x + x^2 + x Cub + X4"
+    },
+    {
+      "index": 644,
+      "start": 2174.68,
+      "end": 2179.15,
+      "duration": 4.47,
+      "text": "forever is 1 over 1 - x it's the"
+    },
+    {
+      "index": 645,
+      "start": 2179.16,
+      "end": 2180.829,
+      "duration": 1.669,
+      "text": "geometric"
+    },
+    {
+      "index": 646,
+      "start": 2180.839,
+      "end": 2184.67,
+      "duration": 3.831,
+      "text": "series the nicest power series of all so"
+    },
+    {
+      "index": 647,
+      "start": 2184.68,
+      "end": 2186.47,
+      "duration": 1.79,
+      "text": "actually of course there would be a"
+    },
+    {
+      "index": 648,
+      "start": 2186.48,
+      "end": 2188.63,
+      "duration": 2.15,
+      "text": "similar thing here"
+    },
+    {
+      "index": 649,
+      "start": 2188.64,
+      "end": 2194.55,
+      "duration": 5.91,
+      "text": "uh if I if I wanted IUS a t inverse"
+    },
+    {
+      "index": 650,
+      "start": 2194.56,
+      "end": 2195.71,
+      "duration": 1.15,
+      "text": "would"
+    },
+    {
+      "index": 651,
+      "start": 2195.72,
+      "end": 2197.99,
+      "duration": 2.27,
+      "text": "be now I've got"
+    },
+    {
+      "index": 652,
+      "start": 2198.0,
+      "end": 2200.15,
+      "duration": 2.15,
+      "text": "matrices I've got to have matrices"
+    },
+    {
+      "index": 653,
+      "start": 2200.16,
+      "end": 2202.47,
+      "duration": 2.31,
+      "text": "everywhere but it's just like that"
+    },
+    {
+      "index": 654,
+      "start": 2202.48,
+      "end": 2205.069,
+      "duration": 2.589,
+      "text": "series with and just like this one"
+    },
+    {
+      "index": 655,
+      "start": 2205.079,
+      "end": 2210.67,
+      "duration": 5.591,
+      "text": "without the divisions it's I + a t + a"
+    },
+    {
+      "index": 656,
+      "start": 2210.68,
+      "end": 2211.91,
+      "duration": 1.23,
+      "text": "t^"
+    },
+    {
+      "index": 657,
+      "start": 2211.92,
+      "end": 2214.47,
+      "duration": 2.55,
+      "text": "2 plus a"
+    },
+    {
+      "index": 658,
+      "start": 2214.48,
+      "end": 2219.15,
+      "duration": 4.67,
+      "text": "cubed and forever"
+    },
+    {
+      "index": 659,
+      "start": 2222.03,
+      "end": 2222.04,
+      "duration": 0.01,
+      "text": "so that's actually a a reasonable way to"
+    },
+    {
+      "index": 660,
+      "start": 2222.04,
+      "end": 2225.349,
+      "duration": 3.309,
+      "text": "find the inverse of a matrix if I chop"
+    },
+    {
+      "index": 661,
+      "start": 2225.359,
+      "end": 2226.51,
+      "duration": 1.151,
+      "text": "it"
+    },
+    {
+      "index": 662,
+      "start": 2226.52,
+      "end": 2230.069,
+      "duration": 3.549,
+      "text": "off well it's reasonable if T is small"
+    },
+    {
+      "index": 663,
+      "start": 2230.079,
+      "end": 2234.829,
+      "duration": 4.75,
+      "text": "if T is a small number then then t^2 is"
+    },
+    {
+      "index": 664,
+      "start": 2234.839,
+      "end": 2238.349,
+      "duration": 3.51,
+      "text": "extremely small T Cub is even smaller so"
+    },
+    {
+      "index": 665,
+      "start": 2238.359,
+      "end": 2242.589,
+      "duration": 4.23,
+      "text": "approximately that inverse is I + a t i"
+    },
+    {
+      "index": 666,
+      "start": 2242.599,
+      "end": 2245.15,
+      "duration": 2.551,
+      "text": "can keep more terms if I like do you see"
+    },
+    {
+      "index": 667,
+      "start": 2245.16,
+      "end": 2248.109,
+      "duration": 2.949,
+      "text": "what I'm doing I'm just saying we can"
+    },
+    {
+      "index": 668,
+      "start": 2248.119,
+      "end": 2251.23,
+      "duration": 3.111,
+      "text": "can do the same thing for matrices that"
+    },
+    {
+      "index": 669,
+      "start": 2251.24,
+      "end": 2252.95,
+      "duration": 1.71,
+      "text": "we do for ordinary"
+    },
+    {
+      "index": 670,
+      "start": 2252.96,
+      "end": 2255.75,
+      "duration": 2.79,
+      "text": "functions and the good thing about the"
+    },
+    {
+      "index": 671,
+      "start": 2255.76,
+      "end": 2258.67,
+      "duration": 2.91,
+      "text": "exponential Series so in a way this"
+    },
+    {
+      "index": 672,
+      "start": 2258.68,
+      "end": 2261.069,
+      "duration": 2.389,
+      "text": "series is better than this"
+    },
+    {
+      "index": 673,
+      "start": 2261.079,
+      "end": 2264.67,
+      "duration": 3.591,
+      "text": "one why because this one always"
+    },
+    {
+      "index": 674,
+      "start": 2264.68,
+      "end": 2266.87,
+      "duration": 2.19,
+      "text": "converges I'm dividing by these bigger"
+    },
+    {
+      "index": 675,
+      "start": 2266.88,
+      "end": 2270.55,
+      "duration": 3.67,
+      "text": "and bigger numbers so whatever Matrix a"
+    },
+    {
+      "index": 676,
+      "start": 2270.56,
+      "end": 2275.069,
+      "duration": 4.509,
+      "text": "and however large T is that series these"
+    },
+    {
+      "index": 677,
+      "start": 2275.079,
+      "end": 2278.71,
+      "duration": 3.631,
+      "text": "terms go to zero the series adds up to a"
+    },
+    {
+      "index": 678,
+      "start": 2278.72,
+      "end": 2282.349,
+      "duration": 3.629,
+      "text": "finite sum e to the a is a is is"
+    },
+    {
+      "index": 679,
+      "start": 2282.359,
+      "end": 2283.51,
+      "duration": 1.151,
+      "text": "completely"
+    },
+    {
+      "index": 680,
+      "start": 2283.52,
+      "end": 2286.43,
+      "duration": 2.91,
+      "text": "defined whereas the second"
+    },
+    {
+      "index": 681,
+      "start": 2286.44,
+      "end": 2291.63,
+      "duration": 5.19,
+      "text": "guy could fail right if a t is Big"
+    },
+    {
+      "index": 682,
+      "start": 2291.64,
+      "end": 2294.19,
+      "duration": 2.55,
+      "text": "somehow if a has an igen value larger"
+    },
+    {
+      "index": 683,
+      "start": 2294.2,
+      "end": 2296.87,
+      "duration": 2.67,
+      "text": "than one then when I Square it it'll"
+    },
+    {
+      "index": 684,
+      "start": 2296.88,
+      "end": 2299.27,
+      "duration": 2.39,
+      "text": "have that IG value squared when I Cube"
+    },
+    {
+      "index": 685,
+      "start": 2299.28,
+      "end": 2302.349,
+      "duration": 3.069,
+      "text": "it the I value will be cubed that series"
+    },
+    {
+      "index": 686,
+      "start": 2302.359,
+      "end": 2303.589,
+      "duration": 1.23,
+      "text": "will blow"
+    },
+    {
+      "index": 687,
+      "start": 2303.599,
+      "end": 2307.19,
+      "duration": 3.591,
+      "text": "up unless the I values of a are smaller"
+    },
+    {
+      "index": 688,
+      "start": 2307.2,
+      "end": 2310.15,
+      "duration": 2.95,
+      "text": "than one so when the igen values of a"
+    },
+    {
+      "index": 689,
+      "start": 2310.16,
+      "end": 2312.829,
+      "duration": 2.669,
+      "text": "are smaller than one so I better put"
+    },
+    {
+      "index": 690,
+      "start": 2312.839,
+      "end": 2317.349,
+      "duration": 4.51,
+      "text": "that in the all IG values of at below"
+    },
+    {
+      "index": 691,
+      "start": 2317.359,
+      "end": 2320.47,
+      "duration": 3.111,
+      "text": "one then that series converges and gives"
+    },
+    {
+      "index": 692,
+      "start": 2320.48,
+      "end": 2324.51,
+      "duration": 4.03,
+      "text": "me the inverse okay so this is the guy"
+    },
+    {
+      "index": 693,
+      "start": 2324.52,
+      "end": 2327.15,
+      "duration": 2.63,
+      "text": "I'm I'm chiefly interested in and I"
+    },
+    {
+      "index": 694,
+      "start": 2327.16,
+      "end": 2328.71,
+      "duration": 1.55,
+      "text": "wanted"
+    },
+    {
+      "index": 695,
+      "start": 2328.72,
+      "end": 2333.47,
+      "duration": 4.75,
+      "text": "to connect it to oh okay what's how do I"
+    },
+    {
+      "index": 696,
+      "start": 2333.48,
+      "end": 2336.829,
+      "duration": 3.349,
+      "text": "how do I get this is my like main thing"
+    },
+    {
+      "index": 697,
+      "start": 2336.839,
+      "end": 2338.23,
+      "duration": 1.391,
+      "text": "now to do"
+    },
+    {
+      "index": 698,
+      "start": 2338.24,
+      "end": 2342.71,
+      "duration": 4.47,
+      "text": "how how do I get e to the a t how do I"
+    },
+    {
+      "index": 699,
+      "start": 2342.72,
+      "end": 2349.43,
+      "duration": 6.71,
+      "text": "see that e to the a is the same as"
+    },
+    {
+      "index": 700,
+      "start": 2352.63,
+      "end": 2352.64,
+      "duration": 0.01,
+      "text": "this in other words I can find e to the"
+    },
+    {
+      "index": 701,
+      "start": 2352.64,
+      "end": 2357.79,
+      "duration": 5.15,
+      "text": "a by finding s and Lambda because now e"
+    },
+    {
+      "index": 702,
+      "start": 2357.8,
+      "end": 2360.39,
+      "duration": 2.59,
+      "text": "to the Lambda T is"
+    },
+    {
+      "index": 703,
+      "start": 2360.4,
+      "end": 2363.75,
+      "duration": 3.35,
+      "text": "easy Lambda is a diagonal matrix and we"
+    },
+    {
+      "index": 704,
+      "start": 2363.76,
+      "end": 2365.79,
+      "duration": 2.03,
+      "text": "can write down e to the Lambda T and"
+    },
+    {
+      "index": 705,
+      "start": 2365.8,
+      "end": 2368.43,
+      "duration": 2.63,
+      "text": "will right in a minute but how do you"
+    },
+    {
+      "index": 706,
+      "start": 2368.44,
+      "end": 2371.349,
+      "duration": 2.909,
+      "text": "see what do you see that we're hoping"
+    },
+    {
+      "index": 707,
+      "start": 2371.359,
+      "end": 2372.23,
+      "duration": 0.871,
+      "text": "for"
+    },
+    {
+      "index": 708,
+      "start": 2372.24,
+      "end": 2376.91,
+      "duration": 4.67,
+      "text": "a we're hoping that we can compute e to"
+    },
+    {
+      "index": 709,
+      "start": 2376.92,
+      "end": 2380.55,
+      "duration": 3.63,
+      "text": "the a from s and"
+    },
+    {
+      "index": 710,
+      "start": 2380.56,
+      "end": 2383.349,
+      "duration": 2.789,
+      "text": "Lambda and I have to look at that"
+    },
+    {
+      "index": 711,
+      "start": 2383.359,
+      "end": 2385.79,
+      "duration": 2.431,
+      "text": "definition and say okay how how do I get"
+    },
+    {
+      "index": 712,
+      "start": 2385.8,
+      "end": 2388.75,
+      "duration": 2.95,
+      "text": "an s in a Lambda to come out of that"
+    },
+    {
+      "index": 713,
+      "start": 2388.76,
+      "end": 2391.43,
+      "duration": 2.67,
+      "text": "okay can do you see how I I I want to"
+    },
+    {
+      "index": 714,
+      "start": 2391.44,
+      "end": 2394.23,
+      "duration": 2.79,
+      "text": "connect that to that from that"
+    },
+    {
+      "index": 715,
+      "start": 2394.24,
+      "end": 2397.43,
+      "duration": 3.19,
+      "text": "definition so let me erase this uh the"
+    },
+    {
+      "index": 716,
+      "start": 2397.44,
+      "end": 2398.79,
+      "duration": 1.35,
+      "text": "geometric"
+    },
+    {
+      "index": 717,
+      "start": 2398.8,
+      "end": 2403.23,
+      "duration": 4.43,
+      "text": "series which"
+    },
+    {
+      "index": 718,
+      "start": 2406.55,
+      "end": 2406.56,
+      "duration": 0.01,
+      "text": "isn't part of the differential"
+    },
+    {
+      "index": 719,
+      "start": 2406.56,
+      "end": 2409.71,
+      "duration": 3.15,
+      "text": "equations case"
+    },
+    {
+      "index": 720,
+      "start": 2409.72,
+      "end": 2413.19,
+      "duration": 3.47,
+      "text": "and get the S and the Lambda into this"
+    },
+    {
+      "index": 721,
+      "start": 2413.2,
+      "end": 2418.15,
+      "duration": 4.95,
+      "text": "picture oh okay uh here we go"
+    },
+    {
+      "index": 722,
+      "start": 2418.16,
+      "end": 2421.95,
+      "duration": 3.79,
+      "text": "um so identity is"
+    },
+    {
+      "index": 723,
+      "start": 2421.96,
+      "end": 2423.829,
+      "duration": 1.869,
+      "text": "fine"
+    },
+    {
+      "index": 724,
+      "start": 2423.839,
+      "end": 2426.91,
+      "duration": 3.071,
+      "text": "now all right you you you can see how"
+    },
+    {
+      "index": 725,
+      "start": 2426.92,
+      "end": 2431.03,
+      "duration": 4.11,
+      "text": "how how am I going to get a replaced by"
+    },
+    {
+      "index": 726,
+      "start": 2431.04,
+      "end": 2433.67,
+      "duration": 2.63,
+      "text": "S and S's and lambdas well I use the"
+    },
+    {
+      "index": 727,
+      "start": 2433.68,
+      "end": 2435.51,
+      "duration": 1.83,
+      "text": "fundamental formula of this whole"
+    },
+    {
+      "index": 728,
+      "start": 2435.52,
+      "end": 2441.91,
+      "duration": 6.39,
+      "text": "chapter a is s Lambda s inverse and then"
+    },
+    {
+      "index": 729,
+      "start": 2441.92,
+      "end": 2444.71,
+      "duration": 2.79,
+      "text": "times T that's a"
+    },
+    {
+      "index": 730,
+      "start": 2444.72,
+      "end": 2447.91,
+      "duration": 3.19,
+      "text": "t okay what's a 2"
+    },
+    {
+      "index": 731,
+      "start": 2447.92,
+      "end": 2452.069,
+      "duration": 4.149,
+      "text": "T I can I've got to divide by two I've"
+    },
+    {
+      "index": 732,
+      "start": 2452.079,
+      "end": 2452.91,
+      "duration": 0.831,
+      "text": "got the"
+    },
+    {
+      "index": 733,
+      "start": 2452.92,
+      "end": 2455.51,
+      "duration": 2.59,
+      "text": "t^2 and I've got an A"
+    },
+    {
+      "index": 734,
+      "start": 2455.52,
+      "end": 2457.91,
+      "duration": 2.39,
+      "text": "Squared all right"
+    },
+    {
+      "index": 735,
+      "start": 2457.92,
+      "end": 2461.51,
+      "duration": 3.59,
+      "text": "so I've got to there's a there's"
+    },
+    {
+      "index": 736,
+      "start": 2461.52,
+      "end": 2465.27,
+      "duration": 3.75,
+      "text": "a now Square it so what happens when I"
+    },
+    {
+      "index": 737,
+      "start": 2465.28,
+      "end": 2468.309,
+      "duration": 3.029,
+      "text": "Square it we've seen that before when I"
+    },
+    {
+      "index": 738,
+      "start": 2468.319,
+      "end": 2473.91,
+      "duration": 5.591,
+      "text": "Square it I get S Lambda squared s"
+    },
+    {
+      "index": 739,
+      "start": 2473.92,
+      "end": 2475.069,
+      "duration": 1.149,
+      "text": "inverse"
+    },
+    {
+      "index": 740,
+      "start": 2475.079,
+      "end": 2478.91,
+      "duration": 3.831,
+      "text": "right when I square that thing the the"
+    },
+    {
+      "index": 741,
+      "start": 2478.92,
+      "end": 2482.829,
+      "duration": 3.909,
+      "text": "there's an S an S cancels out an S"
+    },
+    {
+      "index": 742,
+      "start": 2482.839,
+      "end": 2485.51,
+      "duration": 2.671,
+      "text": "inverse I'm left with the S on the left"
+    },
+    {
+      "index": 743,
+      "start": 2485.52,
+      "end": 2487.79,
+      "duration": 2.27,
+      "text": "the S inverse on the right and Lambda"
+    },
+    {
+      "index": 744,
+      "start": 2487.8,
+      "end": 2490.63,
+      "duration": 2.83,
+      "text": "squar in the middle and so"
+    },
+    {
+      "index": 745,
+      "start": 2490.64,
+      "end": 2495.63,
+      "duration": 4.99,
+      "text": "on the next one will be S Lambda cubed s"
+    },
+    {
+      "index": 746,
+      "start": 2495.64,
+      "end": 2502.91,
+      "duration": 7.27,
+      "text": "inverse * T Cub over 3 factorial and"
+    },
+    {
+      "index": 747,
+      "start": 2506.67,
+      "end": 2506.68,
+      "duration": 0.01,
+      "text": "now what do I do now I want to pull an S"
+    },
+    {
+      "index": 748,
+      "start": 2506.68,
+      "end": 2509.91,
+      "duration": 3.23,
+      "text": "out from everything I want an S"
+    },
+    {
+      "index": 749,
+      "start": 2509.92,
+      "end": 2514.51,
+      "duration": 4.59,
+      "text": "out of the whole thing oh look I better"
+    },
+    {
+      "index": 750,
+      "start": 2514.52,
+      "end": 2517.589,
+      "duration": 3.069,
+      "text": "write the identity how I I want to be"
+    },
+    {
+      "index": 751,
+      "start": 2517.599,
+      "end": 2520.87,
+      "duration": 3.271,
+      "text": "able to pull an S out and an S inverse"
+    },
+    {
+      "index": 752,
+      "start": 2520.88,
+      "end": 2522.91,
+      "duration": 2.03,
+      "text": "out from the other side so I just write"
+    },
+    {
+      "index": 753,
+      "start": 2522.92,
+      "end": 2526.19,
+      "duration": 3.27,
+      "text": "the identity as s * s inverse so I have"
+    },
+    {
+      "index": 754,
+      "start": 2526.2,
+      "end": 2530.67,
+      "duration": 4.47,
+      "text": "an S there and an S inverse from this"
+    },
+    {
+      "index": 755,
+      "start": 2530.68,
+      "end": 2535.069,
+      "duration": 4.389,
+      "text": "side and what have I got in the"
+    },
+    {
+      "index": 756,
+      "start": 2537.67,
+      "end": 2537.68,
+      "duration": 0.01,
+      "text": "middle if I pull out an S and an S"
+    },
+    {
+      "index": 757,
+      "start": 2537.68,
+      "end": 2539.39,
+      "duration": 1.71,
+      "text": "inverse what have I got in the middle"
+    },
+    {
+      "index": 758,
+      "start": 2539.4,
+      "end": 2543.79,
+      "duration": 4.39,
+      "text": "I've got the identity a Lambda t a"
+    },
+    {
+      "index": 759,
+      "start": 2543.8,
+      "end": 2548.549,
+      "duration": 4.749,
+      "text": "Lambda 2 t^2 over 2 I've got e to the"
+    },
+    {
+      "index": 760,
+      "start": 2548.559,
+      "end": 2549.829,
+      "duration": 1.27,
+      "text": "Lambda"
+    },
+    {
+      "index": 761,
+      "start": 2549.839,
+      "end": 2553.069,
+      "duration": 3.23,
+      "text": "T that's what's in the middle that's my"
+    },
+    {
+      "index": 762,
+      "start": 2553.079,
+      "end": 2555.549,
+      "duration": 2.47,
+      "text": "formula for E to the a"
+    },
+    {
+      "index": 763,
+      "start": 2555.559,
+      "end": 2559.51,
+      "duration": 3.951,
+      "text": "t oh now I have to ask you does this"
+    },
+    {
+      "index": 764,
+      "start": 2559.52,
+      "end": 2561.27,
+      "duration": 1.75,
+      "text": "formula always"
+    },
+    {
+      "index": 765,
+      "start": 2561.28,
+      "end": 2564.39,
+      "duration": 3.11,
+      "text": "work this formula always"
+    },
+    {
+      "index": 766,
+      "start": 2564.4,
+      "end": 2567.63,
+      "duration": 3.23,
+      "text": "works well except it's an infinite"
+    },
+    {
+      "index": 767,
+      "start": 2567.64,
+      "end": 2571.75,
+      "duration": 4.11,
+      "text": "series but what do I mean by always work"
+    },
+    {
+      "index": 768,
+      "start": 2571.76,
+      "end": 2574.87,
+      "duration": 3.11,
+      "text": "and this one doesn't always work and I"
+    },
+    {
+      "index": 769,
+      "start": 2574.88,
+      "end": 2577.79,
+      "duration": 2.91,
+      "text": "just have to remind you of what"
+    },
+    {
+      "index": 770,
+      "start": 2577.8,
+      "end": 2580.39,
+      "duration": 2.59,
+      "text": "assumption is built into this formula"
+    },
+    {
+      "index": 771,
+      "start": 2580.4,
+      "end": 2582.549,
+      "duration": 2.149,
+      "text": "that's not built into the"
+    },
+    {
+      "index": 772,
+      "start": 2582.559,
+      "end": 2586.79,
+      "duration": 4.231,
+      "text": "original the assumption that a can be"
+    },
+    {
+      "index": 773,
+      "start": 2586.8,
+      "end": 2589.109,
+      "duration": 2.309,
+      "text": "diagonalized you remember that there are"
+    },
+    {
+      "index": 774,
+      "start": 2589.119,
+      "end": 2591.27,
+      "duration": 2.151,
+      "text": "some"
+    },
+    {
+      "index": 775,
+      "start": 2591.28,
+      "end": 2594.829,
+      "duration": 3.549,
+      "text": "small some subset of matrices that don't"
+    },
+    {
+      "index": 776,
+      "start": 2594.839,
+      "end": 2597.95,
+      "duration": 3.111,
+      "text": "have an independent igon vectors so we"
+    },
+    {
+      "index": 777,
+      "start": 2597.96,
+      "end": 2599.71,
+      "duration": 1.75,
+      "text": "don't have an S inverse for those"
+    },
+    {
+      "index": 778,
+      "start": 2599.72,
+      "end": 2602.75,
+      "duration": 3.03,
+      "text": "matrices and the whole diagonalization"
+    },
+    {
+      "index": 779,
+      "start": 2602.76,
+      "end": 2603.75,
+      "duration": 0.99,
+      "text": "breaks"
+    },
+    {
+      "index": 780,
+      "start": 2603.76,
+      "end": 2606.75,
+      "duration": 2.99,
+      "text": "down we could still make it triangular"
+    },
+    {
+      "index": 781,
+      "start": 2606.76,
+      "end": 2608.27,
+      "duration": 1.51,
+      "text": "I'll tell you you about that but"
+    },
+    {
+      "index": 782,
+      "start": 2608.28,
+      "end": 2611.27,
+      "duration": 2.99,
+      "text": "diagonal we can't do for those"
+    },
+    {
+      "index": 783,
+      "start": 2611.28,
+      "end": 2613.95,
+      "duration": 2.67,
+      "text": "particular degenerate matrices that"
+    },
+    {
+      "index": 784,
+      "start": 2613.96,
+      "end": 2616.349,
+      "duration": 2.389,
+      "text": "don't have enough independent igen"
+    },
+    {
+      "index": 785,
+      "start": 2616.359,
+      "end": 2620.43,
+      "duration": 4.071,
+      "text": "vectors but otherwise this is golden"
+    },
+    {
+      "index": 786,
+      "start": 2620.44,
+      "end": 2622.75,
+      "duration": 2.31,
+      "text": "okay so that's the formula that's the"
+    },
+    {
+      "index": 787,
+      "start": 2622.76,
+      "end": 2625.71,
+      "duration": 2.95,
+      "text": "Matrix exponential now it just remains"
+    },
+    {
+      "index": 788,
+      "start": 2625.72,
+      "end": 2628.63,
+      "duration": 2.91,
+      "text": "for me to say what is e to the Lambda T"
+    },
+    {
+      "index": 789,
+      "start": 2628.64,
+      "end": 2631.91,
+      "duration": 3.27,
+      "text": "can I just do that let me just put that"
+    },
+    {
+      "index": 790,
+      "start": 2631.92,
+      "end": 2634.349,
+      "duration": 2.429,
+      "text": "in the corner"
+    },
+    {
+      "index": 791,
+      "start": 2634.359,
+      "end": 2637.99,
+      "duration": 3.631,
+      "text": "here what is the exponential"
+    },
+    {
+      "index": 792,
+      "start": 2638.0,
+      "end": 2641.109,
+      "duration": 3.109,
+      "text": "of a diagonal"
+    },
+    {
+      "index": 793,
+      "start": 2641.119,
+      "end": 2644.47,
+      "duration": 3.351,
+      "text": "matrix remember Lambda"
+    },
+    {
+      "index": 794,
+      "start": 2644.48,
+      "end": 2649.109,
+      "duration": 4.629,
+      "text": "is diagonal Lambda 1 down to Lambda"
+    },
+    {
+      "index": 795,
+      "start": 2649.119,
+      "end": 2651.63,
+      "duration": 2.511,
+      "text": "n what's the exponential of that"
+    },
+    {
+      "index": 796,
+      "start": 2651.64,
+      "end": 2653.47,
+      "duration": 1.83,
+      "text": "diagonal"
+    },
+    {
+      "index": 797,
+      "start": 2653.48,
+      "end": 2656.19,
+      "duration": 2.71,
+      "text": "matrix because our whole point"
+    },
+    {
+      "index": 798,
+      "start": 2656.2,
+      "end": 2659.91,
+      "duration": 3.71,
+      "text": "is that this ought to be simple our our"
+    },
+    {
+      "index": 799,
+      "start": 2659.92,
+      "end": 2661.67,
+      "duration": 1.75,
+      "text": "whole point is that when to take the"
+    },
+    {
+      "index": 800,
+      "start": 2661.68,
+      "end": 2664.79,
+      "duration": 3.11,
+      "text": "exponential of a diagonal matrix ought"
+    },
+    {
+      "index": 801,
+      "start": 2664.8,
+      "end": 2667.549,
+      "duration": 2.749,
+      "text": "to be completely decou"
+    },
+    {
+      "index": 802,
+      "start": 2667.559,
+      "end": 2669.349,
+      "duration": 1.79,
+      "text": "it ought to be diagonal in other words"
+    },
+    {
+      "index": 803,
+      "start": 2669.359,
+      "end": 2673.99,
+      "duration": 4.631,
+      "text": "and it is it's just e to the Lambda 1"
+    },
+    {
+      "index": 804,
+      "start": 2674.0,
+      "end": 2679.23,
+      "duration": 5.23,
+      "text": "t e to the Lambda 2T e to the Lambda n t"
+    },
+    {
+      "index": 805,
+      "start": 2679.24,
+      "end": 2680.95,
+      "duration": 1.71,
+      "text": "all"
+    },
+    {
+      "index": 806,
+      "start": 2680.96,
+      "end": 2684.67,
+      "duration": 3.71,
+      "text": "zeros so so if we have a diagonal"
+    },
+    {
+      "index": 807,
+      "start": 2684.68,
+      "end": 2687.71,
+      "duration": 3.03,
+      "text": "matrix and I plug it into this"
+    },
+    {
+      "index": 808,
+      "start": 2687.72,
+      "end": 2689.63,
+      "duration": 1.91,
+      "text": "exponential"
+    },
+    {
+      "index": 809,
+      "start": 2689.64,
+      "end": 2692.63,
+      "duration": 2.99,
+      "text": "formula everything's diagonal and the"
+    },
+    {
+      "index": 810,
+      "start": 2692.64,
+      "end": 2695.069,
+      "duration": 2.429,
+      "text": "diagonal terms are just the ordinary"
+    },
+    {
+      "index": 811,
+      "start": 2695.079,
+      "end": 2698.109,
+      "duration": 3.03,
+      "text": "scalar exponentials e to the Lambda"
+    },
+    {
+      "index": 812,
+      "start": 2698.119,
+      "end": 2701.27,
+      "duration": 3.151,
+      "text": "1T okay so that's"
+    },
+    {
+      "index": 813,
+      "start": 2701.28,
+      "end": 2704.43,
+      "duration": 3.15,
+      "text": "that's in a sense I'm doing here on this"
+    },
+    {
+      "index": 814,
+      "start": 2704.44,
+      "end": 2707.51,
+      "duration": 3.07,
+      "text": "board with with like"
+    },
+    {
+      "index": 815,
+      "start": 2707.52,
+      "end": 2711.39,
+      "duration": 3.87,
+      "text": "formulas what I did on the in in the"
+    },
+    {
+      "index": 816,
+      "start": 2711.4,
+      "end": 2714.71,
+      "duration": 3.31,
+      "text": "first half of the lecture with specific"
+    },
+    {
+      "index": 817,
+      "start": 2714.72,
+      "end": 2718.069,
+      "duration": 3.349,
+      "text": "Matrix a and specific igen values and"
+    },
+    {
+      "index": 818,
+      "start": 2718.079,
+      "end": 2720.549,
+      "duration": 2.47,
+      "text": "igen vectors the so let me show you the"
+    },
+    {
+      "index": 819,
+      "start": 2720.559,
+      "end": 2725.39,
+      "duration": 4.831,
+      "text": "formulas again but the so you I guess"
+    },
+    {
+      "index": 820,
+      "start": 2725.4,
+      "end": 2727.109,
+      "duration": 1.709,
+      "text": "what should you know from this M from"
+    },
+    {
+      "index": 821,
+      "start": 2727.119,
+      "end": 2730.109,
+      "duration": 2.99,
+      "text": "this lecture you should know what this"
+    },
+    {
+      "index": 822,
+      "start": 2730.119,
+      "end": 2732.309,
+      "duration": 2.19,
+      "text": "Matrix exponential"
+    },
+    {
+      "index": 823,
+      "start": 2732.319,
+      "end": 2736.71,
+      "duration": 4.391,
+      "text": "is and like when does it go to zero tell"
+    },
+    {
+      "index": 824,
+      "start": 2736.72,
+      "end": 2738.75,
+      "duration": 2.03,
+      "text": "me again now the answer to that when"
+    },
+    {
+      "index": 825,
+      "start": 2738.76,
+      "end": 2741.829,
+      "duration": 3.069,
+      "text": "does e to the a t approach get smaller"
+    },
+    {
+      "index": 826,
+      "start": 2741.839,
+      "end": 2744.549,
+      "duration": 2.71,
+      "text": "and smaller as T"
+    },
+    {
+      "index": 827,
+      "start": 2744.559,
+      "end": 2747.589,
+      "duration": 3.03,
+      "text": "increases well the S and the S inverse"
+    },
+    {
+      "index": 828,
+      "start": 2747.599,
+      "end": 2750.309,
+      "duration": 2.71,
+      "text": "aren't moving it's this one that has to"
+    },
+    {
+      "index": 829,
+      "start": 2750.319,
+      "end": 2753.51,
+      "duration": 3.191,
+      "text": "get smaller and smaller and that one has"
+    },
+    {
+      "index": 830,
+      "start": 2753.52,
+      "end": 2758.069,
+      "duration": 4.549,
+      "text": "this simple diagonal form and it goes to"
+    },
+    {
+      "index": 831,
+      "start": 2758.079,
+      "end": 2761.75,
+      "duration": 3.671,
+      "text": "zero provided every one of these lambdas"
+    },
+    {
+      "index": 832,
+      "start": 2761.76,
+      "end": 2763.75,
+      "duration": 1.99,
+      "text": "I I need to have each one of these guys"
+    },
+    {
+      "index": 833,
+      "start": 2763.76,
+      "end": 2768.19,
+      "duration": 4.43,
+      "text": "go to zero so I need every real part of"
+    },
+    {
+      "index": 834,
+      "start": 2768.2,
+      "end": 2771.67,
+      "duration": 3.47,
+      "text": "every I value"
+    },
+    {
+      "index": 835,
+      "start": 2774.27,
+      "end": 2774.28,
+      "duration": 0.01,
+      "text": "negative right if the real part is"
+    },
+    {
+      "index": 836,
+      "start": 2774.28,
+      "end": 2778.39,
+      "duration": 4.11,
+      "text": "negative that that takes the exponential"
+    },
+    {
+      "index": 837,
+      "start": 2778.4,
+      "end": 2781.549,
+      "duration": 3.149,
+      "text": "that Force the exponential goes to zero"
+    },
+    {
+      "index": 838,
+      "start": 2781.559,
+      "end": 2783.95,
+      "duration": 2.391,
+      "text": "okay so that that's really the the"
+    },
+    {
+      "index": 839,
+      "start": 2783.96,
+      "end": 2787.23,
+      "duration": 3.27,
+      "text": "difference if I can just uh"
+    },
+    {
+      "index": 840,
+      "start": 2787.24,
+      "end": 2790.069,
+      "duration": 2.829,
+      "text": "draw the here here's a"
+    },
+    {
+      "index": 841,
+      "start": 2790.079,
+      "end": 2793.87,
+      "duration": 3.791,
+      "text": "picture of the of the this is the"
+    },
+    {
+      "index": 842,
+      "start": 2793.88,
+      "end": 2795.79,
+      "duration": 1.91,
+      "text": "complex"
+    },
+    {
+      "index": 843,
+      "start": 2795.8,
+      "end": 2799.109,
+      "duration": 3.309,
+      "text": "plane here's the real axis and here's"
+    },
+    {
+      "index": 844,
+      "start": 2799.119,
+      "end": 2801.109,
+      "duration": 1.99,
+      "text": "the imaginary"
+    },
+    {
+      "index": 845,
+      "start": 2801.119,
+      "end": 2804.069,
+      "duration": 2.95,
+      "text": "axis and where do the ion values have to"
+    },
+    {
+      "index": 846,
+      "start": 2804.079,
+      "end": 2806.63,
+      "duration": 2.551,
+      "text": "be for stability in differential"
+    },
+    {
+      "index": 847,
+      "start": 2806.64,
+      "end": 2809.15,
+      "duration": 2.51,
+      "text": "equations they have to be over"
+    },
+    {
+      "index": 848,
+      "start": 2809.16,
+      "end": 2813.109,
+      "duration": 3.949,
+      "text": "here in the left half plane so the left"
+    },
+    {
+      "index": 849,
+      "start": 2813.119,
+      "end": 2815.43,
+      "duration": 2.311,
+      "text": "half plane is this plane real part of"
+    },
+    {
+      "index": 850,
+      "start": 2815.44,
+      "end": 2818.79,
+      "duration": 3.35,
+      "text": "Lambda Less Than Zero"
+    },
+    {
+      "index": 851,
+      "start": 2818.8,
+      "end": 2820.99,
+      "duration": 2.19,
+      "text": "where do the M where do the igen values"
+    },
+    {
+      "index": 852,
+      "start": 2821.0,
+      "end": 2824.47,
+      "duration": 3.47,
+      "text": "have to be for powers of the Matrix to"
+    },
+    {
+      "index": 853,
+      "start": 2824.48,
+      "end": 2825.51,
+      "duration": 1.03,
+      "text": "go to"
+    },
+    {
+      "index": 854,
+      "start": 2825.52,
+      "end": 2828.63,
+      "duration": 3.11,
+      "text": "zero powers on The Matrix go to zero if"
+    },
+    {
+      "index": 855,
+      "start": 2828.64,
+      "end": 2833.27,
+      "duration": 4.63,
+      "text": "the igen values are in here so this is"
+    },
+    {
+      "index": 856,
+      "start": 2833.28,
+      "end": 2838.15,
+      "duration": 4.87,
+      "text": "the stability region for Powers this is"
+    },
+    {
+      "index": 857,
+      "start": 2838.16,
+      "end": 2840.589,
+      "duration": 2.429,
+      "text": "the region absolute value of Lambda less"
+    },
+    {
+      "index": 858,
+      "start": 2840.599,
+      "end": 2841.549,
+      "duration": 0.95,
+      "text": "than"
+    },
+    {
+      "index": 859,
+      "start": 2841.559,
+      "end": 2845.39,
+      "duration": 3.831,
+      "text": "one that's the stability for that tells"
+    },
+    {
+      "index": 860,
+      "start": 2845.4,
+      "end": 2848.309,
+      "duration": 2.909,
+      "text": "us that the powers of AO to Z this tells"
+    },
+    {
+      "index": 861,
+      "start": 2848.319,
+      "end": 2850.43,
+      "duration": 2.111,
+      "text": "us that the exponential of a goes to"
+    },
+    {
+      "index": 862,
+      "start": 2850.44,
+      "end": 2854.71,
+      "duration": 4.27,
+      "text": "zero okay one final example let me just"
+    },
+    {
+      "index": 863,
+      "start": 2854.72,
+      "end": 2857.309,
+      "duration": 2.589,
+      "text": "write down how to deal with a with a"
+    },
+    {
+      "index": 864,
+      "start": 2857.319,
+      "end": 2858.549,
+      "duration": 1.23,
+      "text": "final"
+    },
+    {
+      "index": 865,
+      "start": 2858.559,
+      "end": 2863.43,
+      "duration": 4.871,
+      "text": "example let's"
+    },
+    {
+      "index": 866,
+      "start": 2867.91,
+      "end": 2867.92,
+      "duration": 0.01,
+      "text": "see so my final example will be a single"
+    },
+    {
+      "index": 867,
+      "start": 2867.92,
+      "end": 2872.79,
+      "duration": 4.87,
+      "text": "equation uble prime plus a Buu Prime +"
+    },
+    {
+      "index": 868,
+      "start": 2872.8,
+      "end": 2877.03,
+      "duration": 4.23,
+      "text": "kuu equal Z"
+    },
+    {
+      "index": 869,
+      "start": 2877.04,
+      "end": 2880.069,
+      "duration": 3.029,
+      "text": "one equation second"
+    },
+    {
+      "index": 870,
+      "start": 2880.079,
+      "end": 2882.71,
+      "duration": 2.631,
+      "text": "order how do"
+    },
+    {
+      "index": 871,
+      "start": 2882.72,
+      "end": 2885.91,
+      "duration": 3.19,
+      "text": "I and maybe I should have use I'll use I"
+    },
+    {
+      "index": 872,
+      "start": 2885.92,
+      "end": 2889.03,
+      "duration": 3.11,
+      "text": "prefer to use y here because that's what"
+    },
+    {
+      "index": 873,
+      "start": 2889.04,
+      "end": 2891.27,
+      "duration": 2.23,
+      "text": "you see in differential"
+    },
+    {
+      "index": 874,
+      "start": 2891.28,
+      "end": 2894.75,
+      "duration": 3.47,
+      "text": "equations and I want you to be a vector"
+    },
+    {
+      "index": 875,
+      "start": 2894.76,
+      "end": 2900.43,
+      "duration": 5.67,
+      "text": "so how do I change one second order"
+    },
+    {
+      "index": 876,
+      "start": 2906.43,
+      "end": 2906.44,
+      "duration": 0.01,
+      "text": "equation into uh 2x two first order"
+    },
+    {
+      "index": 877,
+      "start": 2906.44,
+      "end": 2908.27,
+      "duration": 1.83,
+      "text": "system"
+    },
+    {
+      "index": 878,
+      "start": 2908.28,
+      "end": 2910.829,
+      "duration": 2.549,
+      "text": "just the way I did for Fibonacci I'll"
+    },
+    {
+      "index": 879,
+      "start": 2910.839,
+      "end": 2913.15,
+      "duration": 2.311,
+      "text": "let U"
+    },
+    {
+      "index": 880,
+      "start": 2913.16,
+      "end": 2917.069,
+      "duration": 3.909,
+      "text": "be y Prime and"
+    },
+    {
+      "index": 881,
+      "start": 2917.079,
+      "end": 2920.27,
+      "duration": 3.191,
+      "text": "Y what I'm going to do is I'm going to"
+    },
+    {
+      "index": 882,
+      "start": 2920.28,
+      "end": 2922.75,
+      "duration": 2.47,
+      "text": "add uh an extra"
+    },
+    {
+      "index": 883,
+      "start": 2922.76,
+      "end": 2925.67,
+      "duration": 2.91,
+      "text": "equation Y Prime equals y"
+    },
+    {
+      "index": 884,
+      "start": 2925.68,
+      "end": 2929.75,
+      "duration": 4.07,
+      "text": "Prime so I take this so"
+    },
+    {
+      "index": 885,
+      "start": 2929.76,
+      "end": 2935.43,
+      "duration": 5.67,
+      "text": "by so using this as the vector unknown"
+    },
+    {
+      "index": 886,
+      "start": 2935.44,
+      "end": 2939.23,
+      "duration": 3.79,
+      "text": "now my equation is is U Prime my first"
+    },
+    {
+      "index": 887,
+      "start": 2939.24,
+      "end": 2942.47,
+      "duration": 3.23,
+      "text": "order system is U Prime that'll be y"
+    },
+    {
+      "index": 888,
+      "start": 2942.48,
+      "end": 2947.27,
+      "duration": 4.79,
+      "text": "Prime y Prime the derivative of U okay"
+    },
+    {
+      "index": 889,
+      "start": 2947.28,
+      "end": 2950.069,
+      "duration": 2.789,
+      "text": "now the differential equation is telling"
+    },
+    {
+      "index": 890,
+      "start": 2950.079,
+      "end": 2953.829,
+      "duration": 3.75,
+      "text": "me that y Prime is so I'm I'm just"
+    },
+    {
+      "index": 891,
+      "start": 2953.839,
+      "end": 2956.349,
+      "duration": 2.51,
+      "text": "looking for what's this"
+    },
+    {
+      "index": 892,
+      "start": 2956.359,
+      "end": 2960.109,
+      "duration": 3.75,
+      "text": "Matrix y Prime y I'm looking for the"
+    },
+    {
+      "index": 893,
+      "start": 2960.119,
+      "end": 2962.19,
+      "duration": 2.071,
+      "text": "Matrix"
+    },
+    {
+      "index": 894,
+      "start": 2962.2,
+      "end": 2964.39,
+      "duration": 2.19,
+      "text": "a what's the"
+    },
+    {
+      "index": 895,
+      "start": 2964.4,
+      "end": 2967.43,
+      "duration": 3.03,
+      "text": "Matrix in case I have a single first"
+    },
+    {
+      "index": 896,
+      "start": 2967.44,
+      "end": 2969.27,
+      "duration": 1.83,
+      "text": "order equation and I want to make it"
+    },
+    {
+      "index": 897,
+      "start": 2969.28,
+      "end": 2973.03,
+      "duration": 3.75,
+      "text": "into a 2X two system okay simple the the"
+    },
+    {
+      "index": 898,
+      "start": 2973.04,
+      "end": 2975.39,
+      "duration": 2.35,
+      "text": "first row of the Matrix is given by the"
+    },
+    {
+      "index": 899,
+      "start": 2975.4,
+      "end": 2982.15,
+      "duration": 6.75,
+      "text": "equation so y Prime is - b y Prime - k y"
+    },
+    {
+      "index": 900,
+      "start": 2982.16,
+      "end": 2985.109,
+      "duration": 2.949,
+      "text": "no problem and what's the second row of"
+    },
+    {
+      "index": 901,
+      "start": 2985.119,
+      "end": 2986.15,
+      "duration": 1.031,
+      "text": "the"
+    },
+    {
+      "index": 902,
+      "start": 2986.16,
+      "end": 2989.349,
+      "duration": 3.189,
+      "text": "Matrix then we're done the second row of"
+    },
+    {
+      "index": 903,
+      "start": 2989.359,
+      "end": 2991.63,
+      "duration": 2.271,
+      "text": "the Matrix I want just to be the trivial"
+    },
+    {
+      "index": 904,
+      "start": 2991.64,
+      "end": 2994.789,
+      "duration": 3.149,
+      "text": "equation Y Prime equals y Prime so I"
+    },
+    {
+      "index": 905,
+      "start": 2994.799,
+      "end": 2999.23,
+      "duration": 4.431,
+      "text": "need a one and a zero there"
+    },
+    {
+      "index": 906,
+      "start": 3001.589,
+      "end": 3001.599,
+      "duration": 0.01,
+      "text": "so matrices like"
+    },
+    {
+      "index": 907,
+      "start": 3001.599,
+      "end": 3005.91,
+      "duration": 4.311,
+      "text": "these the the general case if I had a 5x"
+    },
+    {
+      "index": 908,
+      "start": 3005.92,
+      "end": 3009.349,
+      "duration": 3.429,
+      "text": "five if I had a fifth order equation and"
+    },
+    {
+      "index": 909,
+      "start": 3009.359,
+      "end": 3012.51,
+      "duration": 3.151,
+      "text": "I wanted a 5x5 Matrix I would see the"
+    },
+    {
+      "index": 910,
+      "start": 3012.52,
+      "end": 3015.39,
+      "duration": 2.87,
+      "text": "coefficients of the equation up there"
+    },
+    {
+      "index": 911,
+      "start": 3015.4,
+      "end": 3018.43,
+      "duration": 3.03,
+      "text": "and then my four trivial equations would"
+    },
+    {
+      "index": 912,
+      "start": 3018.44,
+      "end": 3020.27,
+      "duration": 1.83,
+      "text": "put ones"
+    },
+    {
+      "index": 913,
+      "start": 3020.28,
+      "end": 3024.03,
+      "duration": 3.75,
+      "text": "here this is the the kind of Matrix that"
+    },
+    {
+      "index": 914,
+      "start": 3024.04,
+      "end": 3027.95,
+      "duration": 3.91,
+      "text": "goes from a fifth order"
+    },
+    {
+      "index": 915,
+      "start": 3027.96,
+      "end": 3030.309,
+      "duration": 2.349,
+      "text": "to uh"
+    },
+    {
+      "index": 916,
+      "start": 3030.319,
+      "end": 3034.19,
+      "duration": 3.871,
+      "text": "5x5 first"
+    },
+    {
+      "index": 917,
+      "start": 3038.47,
+      "end": 3038.48,
+      "duration": 0.01,
+      "text": "order so the and the igen values will"
+    },
+    {
+      "index": 918,
+      "start": 3038.48,
+      "end": 3040.63,
+      "duration": 2.15,
+      "text": "come out in a natural way connected to"
+    },
+    {
+      "index": 919,
+      "start": 3040.64,
+      "end": 3043.069,
+      "duration": 2.429,
+      "text": "the differential equation okay that's"
+    },
+    {
+      "index": 920,
+      "start": 3043.079,
+      "end": 3047.069,
+      "duration": 3.99,
+      "text": "differential equations uh the a parallel"
+    },
+    {
+      "index": 921,
+      "start": 3047.079,
+      "end": 3049.99,
+      "duration": 2.911,
+      "text": "lecture compared to powers of a matrix"
+    },
+    {
+      "index": 922,
+      "start": 3050.0,
+      "end": 3055.119,
+      "duration": 5.119,
+      "text": "we can now do exponentials thanks"
+    }
+  ],
+  "course": {
+    "category": "Mathematics",
+    "title": "Linear Algebra - Gilbert Strang",
+    "source_url": "https://www.youtube.com/playlist?list=PL49CF3715CB9EF31D"
+  }
+}

@@ -1,0 +1,6976 @@
+{
+  "video": {
+    "id": "xrypSZU8cBE",
+    "title": "Lec 19: Vector fields and line integrals in the plane | MIT 18.02 Multivariable Calculus, Fall 2007",
+    "url": "https://www.youtube.com/watch?v=xrypSZU8cBE",
+    "channel": "MIT OpenCourseWare",
+    "duration": 3069,
+    "language": "en"
+  },
+  "segment_count": 994,
+  "segments": [
+    {
+      "index": 0,
+      "start": 1.9100000000000001,
+      "end": 1.92,
+      "duration": 0.01,
+      "text": "The following content is provided under"
+    },
+    {
+      "index": 1,
+      "start": 1.92,
+      "end": 4.309,
+      "duration": 2.389,
+      "text": "a Creative Common license. Your support"
+    },
+    {
+      "index": 2,
+      "start": 4.319,
+      "end": 6.55,
+      "duration": 2.231,
+      "text": "will help MIT Open Courseware continue"
+    },
+    {
+      "index": 3,
+      "start": 6.5600000000000005,
+      "end": 8.39,
+      "duration": 1.83,
+      "text": "to offer highquality educational"
+    },
+    {
+      "index": 4,
+      "start": 8.4,
+      "end": 11.03,
+      "duration": 2.63,
+      "text": "resources for free. To make a donation"
+    },
+    {
+      "index": 5,
+      "start": 11.04,
+      "end": 12.87,
+      "duration": 1.83,
+      "text": "or to view additional materials from"
+    },
+    {
+      "index": 6,
+      "start": 12.88,
+      "end": 16.07,
+      "duration": 3.19,
+      "text": "hundreds of MIT courses, visit MIT Open"
+    },
+    {
+      "index": 7,
+      "start": 16.08,
+      "end": 22.15,
+      "duration": 6.07,
+      "text": "Courseware at ocw.mmit.edu."
+    },
+    {
+      "index": 8,
+      "start": 25.109,
+      "end": 25.119,
+      "duration": 0.01,
+      "text": "Okay, so today we have a new topic and"
+    },
+    {
+      "index": 9,
+      "start": 25.119,
+      "end": 27.029,
+      "duration": 1.91,
+      "text": "we're going to start to learn about"
+    },
+    {
+      "index": 10,
+      "start": 27.039,
+      "end": 29.429,
+      "duration": 2.39,
+      "text": "vector fields"
+    },
+    {
+      "index": 11,
+      "start": 29.439,
+      "end": 32.79,
+      "duration": 3.351,
+      "text": "and line integrals."
+    },
+    {
+      "index": 12,
+      "start": 32.8,
+      "end": 36.63,
+      "duration": 3.83,
+      "text": "So"
+    },
+    {
+      "index": 13,
+      "start": 37.99,
+      "end": 38.0,
+      "duration": 0.01,
+      "text": "last week we've been doing double"
+    },
+    {
+      "index": 14,
+      "start": 38.0,
+      "end": 41.19,
+      "duration": 3.19,
+      "text": "integrals. For today we just forget all"
+    },
+    {
+      "index": 15,
+      "start": 41.2,
+      "end": 43.03,
+      "duration": 1.83,
+      "text": "of that. But don't actually forget it,"
+    },
+    {
+      "index": 16,
+      "start": 43.04,
+      "end": 44.389,
+      "duration": 1.349,
+      "text": "you know, put it away in a corner of"
+    },
+    {
+      "index": 17,
+      "start": 44.399,
+      "end": 46.31,
+      "duration": 1.911,
+      "text": "your mind. It's going to come back next"
+    },
+    {
+      "index": 18,
+      "start": 46.32,
+      "end": 48.549,
+      "duration": 2.229,
+      "text": "week. But what we do today, we're going"
+    },
+    {
+      "index": 19,
+      "start": 48.559,
+      "end": 49.91,
+      "duration": 1.351,
+      "text": "to do line integrals. And these are"
+    },
+    {
+      "index": 20,
+      "start": 49.92,
+      "end": 51.99,
+      "duration": 2.07,
+      "text": "completely different things. So it helps"
+    },
+    {
+      "index": 21,
+      "start": 52.0,
+      "end": 54.15,
+      "duration": 2.15,
+      "text": "actually if you don't think of double"
+    },
+    {
+      "index": 22,
+      "start": 54.16,
+      "end": 55.67,
+      "duration": 1.51,
+      "text": "integrals at all while doing line"
+    },
+    {
+      "index": 23,
+      "start": 55.68,
+      "end": 57.91,
+      "duration": 2.23,
+      "text": "integrals."
+    },
+    {
+      "index": 24,
+      "start": 57.92,
+      "end": 59.27,
+      "duration": 1.35,
+      "text": "So anyway, let's start with vector"
+    },
+    {
+      "index": 25,
+      "start": 59.28,
+      "end": 62.63,
+      "duration": 3.35,
+      "text": "fields. So what's a vector field?"
+    },
+    {
+      "index": 26,
+      "start": 62.64,
+      "end": 66.71,
+      "duration": 4.07,
+      "text": "Well, a vector field is something that's"
+    },
+    {
+      "index": 27,
+      "start": 66.72,
+      "end": 69.19,
+      "duration": 2.47,
+      "text": "of a form"
+    },
+    {
+      "index": 28,
+      "start": 69.2,
+      "end": 74.07,
+      "duration": 4.87,
+      "text": "well it's a vector but where m and n the"
+    },
+    {
+      "index": 29,
+      "start": 74.08,
+      "end": 78.87,
+      "duration": 4.79,
+      "text": "components"
+    },
+    {
+      "index": 30,
+      "start": 81.83,
+      "end": 81.84,
+      "duration": 0.01,
+      "text": "actually depend on x and y on the point"
+    },
+    {
+      "index": 31,
+      "start": 81.84,
+      "end": 87.03,
+      "duration": 5.19,
+      "text": "where you are. So they are functions"
+    },
+    {
+      "index": 32,
+      "start": 90.63,
+      "end": 90.64,
+      "duration": 0.01,
+      "text": "of x and y."
+    },
+    {
+      "index": 33,
+      "start": 90.64,
+      "end": 92.789,
+      "duration": 2.149,
+      "text": "So what that means concretely is that at"
+    },
+    {
+      "index": 34,
+      "start": 92.799,
+      "end": 94.789,
+      "duration": 1.99,
+      "text": "any point in at every point in the plane"
+    },
+    {
+      "index": 35,
+      "start": 94.799,
+      "end": 97.51,
+      "duration": 2.711,
+      "text": "you have a vector. Okay. So in a corn"
+    },
+    {
+      "index": 36,
+      "start": 97.52,
+      "end": 99.67,
+      "duration": 2.15,
+      "text": "field at everywhere you have corn in a"
+    },
+    {
+      "index": 37,
+      "start": 99.68,
+      "end": 101.03,
+      "duration": 1.35,
+      "text": "vector field everywhere you have a"
+    },
+    {
+      "index": 38,
+      "start": 101.04,
+      "end": 102.95,
+      "duration": 1.91,
+      "text": "vector."
+    },
+    {
+      "index": 39,
+      "start": 102.96,
+      "end": 106.63,
+      "duration": 3.67,
+      "text": "That's how it works. Okay. So"
+    },
+    {
+      "index": 40,
+      "start": 106.64,
+      "end": 109.109,
+      "duration": 2.469,
+      "text": "a good example of a vector field. I"
+    },
+    {
+      "index": 41,
+      "start": 109.119,
+      "end": 110.87,
+      "duration": 1.751,
+      "text": "don't know if you've seen these maps"
+    },
+    {
+      "index": 42,
+      "start": 110.88,
+      "end": 114.31,
+      "duration": 3.43,
+      "text": "that show the wind"
+    },
+    {
+      "index": 43,
+      "start": 114.32,
+      "end": 117.67,
+      "duration": 3.35,
+      "text": "but so here's some cool images done by"
+    },
+    {
+      "index": 44,
+      "start": 117.68,
+      "end": 122.63,
+      "duration": 4.95,
+      "text": "NAZA. So, actually that's"
+    },
+    {
+      "index": 45,
+      "start": 122.64,
+      "end": 125.27,
+      "duration": 2.63,
+      "text": "that's a picture of the wind patterns um"
+    },
+    {
+      "index": 46,
+      "start": 125.28,
+      "end": 126.95,
+      "duration": 1.67,
+      "text": "of the coast of California with Santa"
+    },
+    {
+      "index": 47,
+      "start": 126.96,
+      "end": 128.229,
+      "duration": 1.269,
+      "text": "Ana winds in case you're wondering"
+    },
+    {
+      "index": 48,
+      "start": 128.239,
+      "end": 131.11,
+      "duration": 2.871,
+      "text": "what's been going on recently. Uh so you"
+    },
+    {
+      "index": 49,
+      "start": 131.12,
+      "end": 133.03,
+      "duration": 1.91,
+      "text": "have all of these vectors that show you"
+    },
+    {
+      "index": 50,
+      "start": 133.04,
+      "end": 136.15,
+      "duration": 3.11,
+      "text": "the velocity of the air"
+    },
+    {
+      "index": 51,
+      "start": 136.16,
+      "end": 137.67,
+      "duration": 1.51,
+      "text": "basically at every point. I mean, of"
+    },
+    {
+      "index": 52,
+      "start": 137.68,
+      "end": 139.19,
+      "duration": 1.51,
+      "text": "course, you don't draw it at every point"
+    },
+    {
+      "index": 53,
+      "start": 139.2,
+      "end": 141.19,
+      "duration": 1.99,
+      "text": "because, you know, if you draw a vector"
+    },
+    {
+      "index": 54,
+      "start": 141.2,
+      "end": 143.589,
+      "duration": 2.389,
+      "text": "at absolutely all the points of a plane,"
+    },
+    {
+      "index": 55,
+      "start": 143.599,
+      "end": 145.91,
+      "duration": 2.311,
+      "text": "then you just fill up everything and you"
+    },
+    {
+      "index": 56,
+      "start": 145.92,
+      "end": 147.91,
+      "duration": 1.99,
+      "text": "wouldn't see anything. So you just, you"
+    },
+    {
+      "index": 57,
+      "start": 147.92,
+      "end": 150.55,
+      "duration": 2.63,
+      "text": "know, choose points and you draw the"
+    },
+    {
+      "index": 58,
+      "start": 150.56,
+      "end": 153.589,
+      "duration": 3.029,
+      "text": "vectors at those points. So here's"
+    },
+    {
+      "index": 59,
+      "start": 153.599,
+      "end": 157.67,
+      "duration": 4.071,
+      "text": "another cool image of upside down."
+    },
+    {
+      "index": 60,
+      "start": 157.68,
+      "end": 160.309,
+      "duration": 2.629,
+      "text": "That's a hurricane of the coast of"
+    },
+    {
+      "index": 61,
+      "start": 160.319,
+      "end": 162.949,
+      "duration": 2.63,
+      "text": "Mexico with the winds spiraling around"
+    },
+    {
+      "index": 62,
+      "start": 162.959,
+      "end": 165.67,
+      "duration": 2.711,
+      "text": "the hurricane."
+    },
+    {
+      "index": 63,
+      "start": 165.68,
+      "end": 167.99,
+      "duration": 2.31,
+      "text": "So"
+    },
+    {
+      "index": 64,
+      "start": 168.0,
+      "end": 169.43,
+      "duration": 1.43,
+      "text": "anyway, it's kind of hard to see, you"
+    },
+    {
+      "index": 65,
+      "start": 169.44,
+      "end": 170.47,
+      "duration": 1.03,
+      "text": "know, you don't really see all the"
+    },
+    {
+      "index": 66,
+      "start": 170.48,
+      "end": 172.949,
+      "duration": 2.469,
+      "text": "vectors. Actually, I guess the autofocus"
+    },
+    {
+      "index": 67,
+      "start": 172.959,
+      "end": 179.11,
+      "duration": 6.151,
+      "text": "is having trouble with it."
+    },
+    {
+      "index": 68,
+      "start": 180.71,
+      "end": 180.72,
+      "duration": 0.01,
+      "text": "Yeah, I can't really do it. So, I guess"
+    },
+    {
+      "index": 69,
+      "start": 180.72,
+      "end": 184.309,
+      "duration": 3.589,
+      "text": "I'll go back to the previous one."
+    },
+    {
+      "index": 70,
+      "start": 184.319,
+      "end": 188.55,
+      "duration": 4.231,
+      "text": "But, um,"
+    },
+    {
+      "index": 71,
+      "start": 191.03,
+      "end": 191.04,
+      "duration": 0.01,
+      "text": "okay."
+    },
+    {
+      "index": 72,
+      "start": 191.04,
+      "end": 195.11,
+      "duration": 4.07,
+      "text": "So, anyway, a vector field"
+    },
+    {
+      "index": 73,
+      "start": 195.12,
+      "end": 205.75,
+      "duration": 10.63,
+      "text": "is something where at each point"
+    },
+    {
+      "index": 74,
+      "start": 209.43,
+      "end": 209.44,
+      "duration": 0.01,
+      "text": "In the plane we have"
+    },
+    {
+      "index": 75,
+      "start": 209.44,
+      "end": 217.11,
+      "duration": 7.67,
+      "text": "a vector f"
+    },
+    {
+      "index": 76,
+      "start": 229.83,
+      "end": 229.84,
+      "duration": 0.01,
+      "text": "So"
+    },
+    {
+      "index": 77,
+      "start": 229.84,
+      "end": 232.63,
+      "duration": 2.79,
+      "text": "this occurs in real life when you look"
+    },
+    {
+      "index": 78,
+      "start": 232.64,
+      "end": 234.789,
+      "duration": 2.149,
+      "text": "at velocity fields in a fluid. For"
+    },
+    {
+      "index": 79,
+      "start": 234.799,
+      "end": 236.309,
+      "duration": 1.51,
+      "text": "example, the wind. That's what these"
+    },
+    {
+      "index": 80,
+      "start": 236.319,
+      "end": 238.55,
+      "duration": 2.231,
+      "text": "pictures show. You know, at every point"
+    },
+    {
+      "index": 81,
+      "start": 238.56,
+      "end": 240.47,
+      "duration": 1.91,
+      "text": "you have a velocity of a fluid that's"
+    },
+    {
+      "index": 82,
+      "start": 240.48,
+      "end": 243.91,
+      "duration": 3.43,
+      "text": "moving. Another example is force fields."
+    },
+    {
+      "index": 83,
+      "start": 243.92,
+      "end": 245.27,
+      "duration": 1.35,
+      "text": "So now force fields are not something"
+    },
+    {
+      "index": 84,
+      "start": 245.28,
+      "end": 247.75,
+      "duration": 2.47,
+      "text": "out of Star Wars. Okay? It's just you"
+    },
+    {
+      "index": 85,
+      "start": 247.76,
+      "end": 249.11,
+      "duration": 1.35,
+      "text": "know if you look at gravitational"
+    },
+    {
+      "index": 86,
+      "start": 249.12,
+      "end": 251.429,
+      "duration": 2.309,
+      "text": "attraction you know you know that if you"
+    },
+    {
+      "index": 87,
+      "start": 251.439,
+      "end": 253.589,
+      "duration": 2.15,
+      "text": "have a mass somewhere well it will be"
+    },
+    {
+      "index": 88,
+      "start": 253.599,
+      "end": 255.11,
+      "duration": 1.511,
+      "text": "attracted to fall down because of a"
+    },
+    {
+      "index": 89,
+      "start": 255.12,
+      "end": 257.27,
+      "duration": 2.15,
+      "text": "gravity field of the earth which means"
+    },
+    {
+      "index": 90,
+      "start": 257.28,
+      "end": 259.11,
+      "duration": 1.83,
+      "text": "that at every point you have a vector"
+    },
+    {
+      "index": 91,
+      "start": 259.12,
+      "end": 261.59,
+      "duration": 2.47,
+      "text": "that's pointing down and same thing in"
+    },
+    {
+      "index": 92,
+      "start": 261.6,
+      "end": 263.83,
+      "duration": 2.23,
+      "text": "space you have the gravitational field"
+    },
+    {
+      "index": 93,
+      "start": 263.84,
+      "end": 267.11,
+      "duration": 3.27,
+      "text": "of planets stars and so on. So that's"
+    },
+    {
+      "index": 94,
+      "start": 267.12,
+      "end": 268.55,
+      "duration": 1.43,
+      "text": "also an example of a vector field"
+    },
+    {
+      "index": 95,
+      "start": 268.56,
+      "end": 270.95,
+      "duration": 2.39,
+      "text": "because wherever you go you would have"
+    },
+    {
+      "index": 96,
+      "start": 270.96,
+      "end": 273.909,
+      "duration": 2.949,
+      "text": "that vector and what it is depends on"
+    },
+    {
+      "index": 97,
+      "start": 273.919,
+      "end": 276.71,
+      "duration": 2.791,
+      "text": "where you are."
+    },
+    {
+      "index": 98,
+      "start": 276.72,
+      "end": 280.55,
+      "duration": 3.83,
+      "text": "So the examples from the real world"
+    },
+    {
+      "index": 99,
+      "start": 280.56,
+      "end": 284.07,
+      "duration": 3.51,
+      "text": "are things like velocity"
+    },
+    {
+      "index": 100,
+      "start": 284.08,
+      "end": 288.07,
+      "duration": 3.99,
+      "text": "in a fluid"
+    },
+    {
+      "index": 101,
+      "start": 290.79,
+      "end": 290.8,
+      "duration": 0.01,
+      "text": "or"
+    },
+    {
+      "index": 102,
+      "start": 290.8,
+      "end": 294.95,
+      "duration": 4.15,
+      "text": "force field"
+    },
+    {
+      "index": 103,
+      "start": 296.629,
+      "end": 296.639,
+      "duration": 0.01,
+      "text": "where you have a force that depends on"
+    },
+    {
+      "index": 104,
+      "start": 296.639,
+      "end": 299.35,
+      "duration": 2.711,
+      "text": "the point where you are. So we're going"
+    },
+    {
+      "index": 105,
+      "start": 299.36,
+      "end": 301.909,
+      "duration": 2.549,
+      "text": "to try to study vector fields"
+    },
+    {
+      "index": 106,
+      "start": 301.919,
+      "end": 304.39,
+      "duration": 2.471,
+      "text": "mathematically. So we won't really care"
+    },
+    {
+      "index": 107,
+      "start": 304.4,
+      "end": 307.43,
+      "duration": 3.03,
+      "text": "what they are most of the time. But as"
+    },
+    {
+      "index": 108,
+      "start": 307.44,
+      "end": 309.27,
+      "duration": 1.83,
+      "text": "we'll explore with them define"
+    },
+    {
+      "index": 109,
+      "start": 309.28,
+      "end": 311.35,
+      "duration": 2.07,
+      "text": "quantities and so on, we'll very often"
+    },
+    {
+      "index": 110,
+      "start": 311.36,
+      "end": 314.39,
+      "duration": 3.03,
+      "text": "use these motivations to justify why we"
+    },
+    {
+      "index": 111,
+      "start": 314.4,
+      "end": 318.15,
+      "duration": 3.75,
+      "text": "would care about certain quantities."
+    },
+    {
+      "index": 112,
+      "start": 318.16,
+      "end": 319.909,
+      "duration": 1.749,
+      "text": "Okay, so the first thing we have to"
+    },
+    {
+      "index": 113,
+      "start": 319.919,
+      "end": 321.83,
+      "duration": 1.911,
+      "text": "figure out is how do we draw a vector"
+    },
+    {
+      "index": 114,
+      "start": 321.84,
+      "end": 324.15,
+      "duration": 2.31,
+      "text": "field? You know, how do you generate a"
+    },
+    {
+      "index": 115,
+      "start": 324.16,
+      "end": 326.39,
+      "duration": 2.23,
+      "text": "plot like that?"
+    },
+    {
+      "index": 116,
+      "start": 326.4,
+      "end": 330.31,
+      "duration": 3.91,
+      "text": "So"
+    },
+    {
+      "index": 117,
+      "start": 333.11,
+      "end": 333.12,
+      "duration": 0.01,
+      "text": "let's practice drawing a few vector"
+    },
+    {
+      "index": 118,
+      "start": 333.12,
+      "end": 336.71,
+      "duration": 3.59,
+      "text": "fields. Well,"
+    },
+    {
+      "index": 119,
+      "start": 336.72,
+      "end": 338.39,
+      "duration": 1.67,
+      "text": "let's start with let's say our very"
+    },
+    {
+      "index": 120,
+      "start": 338.4,
+      "end": 341.59,
+      "duration": 3.19,
+      "text": "first vector field will be just 2 I + J."
+    },
+    {
+      "index": 121,
+      "start": 341.6,
+      "end": 343.189,
+      "duration": 1.589,
+      "text": "So it's kind of a silly vector field"
+    },
+    {
+      "index": 122,
+      "start": 343.199,
+      "end": 344.95,
+      "duration": 1.751,
+      "text": "because it doesn't actually depend on X"
+    },
+    {
+      "index": 123,
+      "start": 344.96,
+      "end": 346.469,
+      "duration": 1.509,
+      "text": "and Y. So that means it's the same"
+    },
+    {
+      "index": 124,
+      "start": 346.479,
+      "end": 349.029,
+      "duration": 2.55,
+      "text": "vector everywhere."
+    },
+    {
+      "index": 125,
+      "start": 349.039,
+      "end": 351.67,
+      "duration": 2.631,
+      "text": "Okay. So"
+    },
+    {
+      "index": 126,
+      "start": 351.68,
+      "end": 355.189,
+      "duration": 3.509,
+      "text": "I take picture of a plane and I take the"
+    },
+    {
+      "index": 127,
+      "start": 355.199,
+      "end": 358.71,
+      "duration": 3.511,
+      "text": "vector 2 comma 1. I guess it points in"
+    },
+    {
+      "index": 128,
+      "start": 358.72,
+      "end": 360.23,
+      "duration": 1.51,
+      "text": "that direction. It's two units to the"
+    },
+    {
+      "index": 129,
+      "start": 360.24,
+      "end": 362.55,
+      "duration": 2.31,
+      "text": "right, one up. And I just put that"
+    },
+    {
+      "index": 130,
+      "start": 362.56,
+      "end": 364.87,
+      "duration": 2.31,
+      "text": "vector everywhere."
+    },
+    {
+      "index": 131,
+      "start": 364.88,
+      "end": 369.35,
+      "duration": 4.47,
+      "text": "Okay. So you know,"
+    },
+    {
+      "index": 132,
+      "start": 369.36,
+      "end": 372.39,
+      "duration": 3.03,
+      "text": "you just put it at a few points all over"
+    },
+    {
+      "index": 133,
+      "start": 372.4,
+      "end": 374.23,
+      "duration": 1.83,
+      "text": "the place and when you think you have"
+    },
+    {
+      "index": 134,
+      "start": 374.24,
+      "end": 375.59,
+      "duration": 1.35,
+      "text": "enough so that you understand what's"
+    },
+    {
+      "index": 135,
+      "start": 375.6,
+      "end": 378.07,
+      "duration": 2.47,
+      "text": "going on, then you stop."
+    },
+    {
+      "index": 136,
+      "start": 378.08,
+      "end": 379.67,
+      "duration": 1.59,
+      "text": "So here probably we don't need that"
+    },
+    {
+      "index": 137,
+      "start": 379.68,
+      "end": 380.95,
+      "duration": 1.27,
+      "text": "many. I mean here I think we get the"
+    },
+    {
+      "index": 138,
+      "start": 380.96,
+      "end": 384.629,
+      "duration": 3.669,
+      "text": "picture. Okay."
+    },
+    {
+      "index": 139,
+      "start": 395.11,
+      "end": 395.12,
+      "duration": 0.01,
+      "text": "Now let's try to look at slightly more"
+    },
+    {
+      "index": 140,
+      "start": 395.12,
+      "end": 397.35,
+      "duration": 2.23,
+      "text": "interesting examples. Okay. Let's say I"
+    },
+    {
+      "index": 141,
+      "start": 397.36,
+      "end": 401.83,
+      "duration": 4.47,
+      "text": "give you the vector field X times I hat."
+    },
+    {
+      "index": 142,
+      "start": 401.84,
+      "end": 406.309,
+      "duration": 4.469,
+      "text": "Okay. So there's no J component."
+    },
+    {
+      "index": 143,
+      "start": 409.83,
+      "end": 409.84,
+      "duration": 0.01,
+      "text": "So, how would you draw that? Maybe I"
+    },
+    {
+      "index": 144,
+      "start": 409.84,
+      "end": 414.71,
+      "duration": 4.87,
+      "text": "don't need that much."
+    },
+    {
+      "index": 145,
+      "start": 421.67,
+      "end": 421.68,
+      "duration": 0.01,
+      "text": "so first of all, we know that this guy"
+    },
+    {
+      "index": 146,
+      "start": 421.68,
+      "end": 423.589,
+      "duration": 1.909,
+      "text": "is only in the I direction. So, it's"
+    },
+    {
+      "index": 147,
+      "start": 423.599,
+      "end": 425.43,
+      "duration": 1.831,
+      "text": "always horizontal, right? It doesn't"
+    },
+    {
+      "index": 148,
+      "start": 425.44,
+      "end": 426.87,
+      "duration": 1.43,
+      "text": "have a J component. So, everywhere it"
+    },
+    {
+      "index": 149,
+      "start": 426.88,
+      "end": 429.35,
+      "duration": 2.47,
+      "text": "will be a horizontal vector. Now, the"
+    },
+    {
+      "index": 150,
+      "start": 429.36,
+      "end": 432.23,
+      "duration": 2.87,
+      "text": "question is how long is it? Well, how"
+    },
+    {
+      "index": 151,
+      "start": 432.24,
+      "end": 436.07,
+      "duration": 3.83,
+      "text": "long it is depends on X. So for example,"
+    },
+    {
+      "index": 152,
+      "start": 436.08,
+      "end": 438.39,
+      "duration": 2.31,
+      "text": "if x is zero, then this will be actually"
+    },
+    {
+      "index": 153,
+      "start": 438.4,
+      "end": 440.55,
+      "duration": 2.15,
+      "text": "the zero vector."
+    },
+    {
+      "index": 154,
+      "start": 440.56,
+      "end": 443.27,
+      "duration": 2.71,
+      "text": "So x is zero, that's here. See on the y-"
+    },
+    {
+      "index": 155,
+      "start": 443.28,
+      "end": 445.99,
+      "duration": 2.71,
+      "text": "axis, maybe I should take a different"
+    },
+    {
+      "index": 156,
+      "start": 446.0,
+      "end": 448.39,
+      "duration": 2.39,
+      "text": "color."
+    },
+    {
+      "index": 157,
+      "start": 448.4,
+      "end": 451.27,
+      "duration": 2.87,
+      "text": "So if I'm on the y- axis, I actually"
+    },
+    {
+      "index": 158,
+      "start": 451.28,
+      "end": 454.469,
+      "duration": 3.189,
+      "text": "have the zero vector."
+    },
+    {
+      "index": 159,
+      "start": 454.479,
+      "end": 457.35,
+      "duration": 2.871,
+      "text": "Now if x becomes positive small, then I"
+    },
+    {
+      "index": 160,
+      "start": 457.36,
+      "end": 458.87,
+      "duration": 1.51,
+      "text": "will have actually a small positive"
+    },
+    {
+      "index": 161,
+      "start": 458.88,
+      "end": 462.87,
+      "duration": 3.99,
+      "text": "multiple of i. So I will be going a"
+    },
+    {
+      "index": 162,
+      "start": 462.88,
+      "end": 465.029,
+      "duration": 2.149,
+      "text": "little bit to the right."
+    },
+    {
+      "index": 163,
+      "start": 465.039,
+      "end": 467.27,
+      "duration": 2.231,
+      "text": "And then if I increase x then this guy"
+    },
+    {
+      "index": 164,
+      "start": 467.28,
+      "end": 469.99,
+      "duration": 2.71,
+      "text": "becomes larger. So I get a longer vector"
+    },
+    {
+      "index": 165,
+      "start": 470.0,
+      "end": 472.629,
+      "duration": 2.629,
+      "text": "to the right."
+    },
+    {
+      "index": 166,
+      "start": 472.639,
+      "end": 474.79,
+      "duration": 2.151,
+      "text": "If x is negative then my vector field"
+    },
+    {
+      "index": 167,
+      "start": 474.8,
+      "end": 484.23,
+      "duration": 9.43,
+      "text": "points to the left instead. So"
+    },
+    {
+      "index": 168,
+      "start": 490.39,
+      "end": 490.4,
+      "duration": 0.01,
+      "text": "Okay."
+    },
+    {
+      "index": 169,
+      "start": 490.4,
+      "end": 495.99,
+      "duration": 5.59,
+      "text": "Any questions about that picture?"
+    },
+    {
+      "index": 170,
+      "start": 496.0,
+      "end": 498.15,
+      "duration": 2.15,
+      "text": "No. Okay. So, usually we're not going to"
+    },
+    {
+      "index": 171,
+      "start": 498.16,
+      "end": 500.15,
+      "duration": 1.99,
+      "text": "try to have, you know, very accurate,"
+    },
+    {
+      "index": 172,
+      "start": 500.16,
+      "end": 502.39,
+      "duration": 2.23,
+      "text": "you know, we won't actually take time to"
+    },
+    {
+      "index": 173,
+      "start": 502.4,
+      "end": 504.869,
+      "duration": 2.469,
+      "text": "plot a vector field very carefully. I if"
+    },
+    {
+      "index": 174,
+      "start": 504.879,
+      "end": 507.35,
+      "duration": 2.471,
+      "text": "we need to, computers can do it for us."
+    },
+    {
+      "index": 175,
+      "start": 507.36,
+      "end": 510.15,
+      "duration": 2.79,
+      "text": "Um, but it's useful to have an idea of"
+    },
+    {
+      "index": 176,
+      "start": 510.16,
+      "end": 511.909,
+      "duration": 1.749,
+      "text": "what the vector field does roughly. You"
+    },
+    {
+      "index": 177,
+      "start": 511.919,
+      "end": 513.19,
+      "duration": 1.271,
+      "text": "know, whether it's getting larger and"
+    },
+    {
+      "index": 178,
+      "start": 513.2,
+      "end": 515.509,
+      "duration": 2.309,
+      "text": "larger, in what direction it's pointing,"
+    },
+    {
+      "index": 179,
+      "start": 515.519,
+      "end": 519.19,
+      "duration": 3.671,
+      "text": "what are the general features?"
+    },
+    {
+      "index": 180,
+      "start": 519.2,
+      "end": 525.91,
+      "duration": 6.71,
+      "text": "So just to you know do a couple more"
+    },
+    {
+      "index": 181,
+      "start": 527.19,
+      "end": 527.2,
+      "duration": 0.01,
+      "text": "and actually you'll see very quickly"
+    },
+    {
+      "index": 182,
+      "start": 527.2,
+      "end": 529.59,
+      "duration": 2.39,
+      "text": "that the examples I take in lecture are"
+    },
+    {
+      "index": 183,
+      "start": 529.6,
+      "end": 531.43,
+      "duration": 1.83,
+      "text": "pretty much always the same ones. So you"
+    },
+    {
+      "index": 184,
+      "start": 531.44,
+      "end": 532.949,
+      "duration": 1.509,
+      "text": "know"
+    },
+    {
+      "index": 185,
+      "start": 532.959,
+      "end": 534.949,
+      "duration": 1.99,
+      "text": "we'll be playing a lot with these"
+    },
+    {
+      "index": 186,
+      "start": 534.959,
+      "end": 537.43,
+      "duration": 2.471,
+      "text": "particular vector fields just because"
+    },
+    {
+      "index": 187,
+      "start": 537.44,
+      "end": 540.31,
+      "duration": 2.87,
+      "text": "they're good examples."
+    },
+    {
+      "index": 188,
+      "start": 540.32,
+      "end": 544.31,
+      "duration": 3.99,
+      "text": "So let's say I give you X I plus YJ. So"
+    },
+    {
+      "index": 189,
+      "start": 544.32,
+      "end": 545.829,
+      "duration": 1.509,
+      "text": "that one has an interesting geometric"
+    },
+    {
+      "index": 190,
+      "start": 545.839,
+      "end": 548.31,
+      "duration": 2.471,
+      "text": "signification the significance"
+    },
+    {
+      "index": 191,
+      "start": 548.32,
+      "end": 553.35,
+      "duration": 5.03,
+      "text": "if I take a point XY"
+    },
+    {
+      "index": 192,
+      "start": 555.35,
+      "end": 555.36,
+      "duration": 0.01,
+      "text": "you know so there I want to take the"
+    },
+    {
+      "index": 193,
+      "start": 555.36,
+      "end": 558.15,
+      "duration": 2.79,
+      "text": "vector XY"
+    },
+    {
+      "index": 194,
+      "start": 558.16,
+      "end": 561.43,
+      "duration": 3.27,
+      "text": "how do I do that well it's the same as"
+    },
+    {
+      "index": 195,
+      "start": 561.44,
+      "end": 563.67,
+      "duration": 2.23,
+      "text": "the vector from the origin to this point"
+    },
+    {
+      "index": 196,
+      "start": 563.68,
+      "end": 567.03,
+      "duration": 3.35,
+      "text": "so I take this vector and I copy it so"
+    },
+    {
+      "index": 197,
+      "start": 567.04,
+      "end": 570.23,
+      "duration": 3.19,
+      "text": "that it starts at my given point okay so"
+    },
+    {
+      "index": 198,
+      "start": 570.24,
+      "end": 572.63,
+      "duration": 2.39,
+      "text": "it looks like that and you know same"
+    },
+    {
+      "index": 199,
+      "start": 572.64,
+      "end": 580.31,
+      "duration": 7.67,
+      "text": "thing at every point."
+    },
+    {
+      "index": 200,
+      "start": 583.269,
+      "end": 583.279,
+      "duration": 0.01,
+      "text": "Oops. So, it's a vector field that's"
+    },
+    {
+      "index": 201,
+      "start": 583.279,
+      "end": 586.31,
+      "duration": 3.031,
+      "text": "pointing radially"
+    },
+    {
+      "index": 202,
+      "start": 586.32,
+      "end": 589.03,
+      "duration": 2.71,
+      "text": "away from the origin"
+    },
+    {
+      "index": 203,
+      "start": 589.04,
+      "end": 592.15,
+      "duration": 3.11,
+      "text": "and its magnitude increases with"
+    },
+    {
+      "index": 204,
+      "start": 592.16,
+      "end": 598.63,
+      "duration": 6.47,
+      "text": "distance from the origin."
+    },
+    {
+      "index": 205,
+      "start": 599.99,
+      "end": 600.0,
+      "duration": 0.01,
+      "text": "Okay? So, you don't have to draw, you"
+    },
+    {
+      "index": 206,
+      "start": 600.0,
+      "end": 604.31,
+      "duration": 4.31,
+      "text": "know, as many as me. Uh"
+    },
+    {
+      "index": 207,
+      "start": 604.32,
+      "end": 606.15,
+      "duration": 1.83,
+      "text": "but so the idea is this vector field"
+    },
+    {
+      "index": 208,
+      "start": 606.16,
+      "end": 607.91,
+      "duration": 1.75,
+      "text": "everywhere points away from the origin"
+    },
+    {
+      "index": 209,
+      "start": 607.92,
+      "end": 609.75,
+      "duration": 1.83,
+      "text": "and its magnitude is equal to the"
+    },
+    {
+      "index": 210,
+      "start": 609.76,
+      "end": 613.91,
+      "duration": 4.15,
+      "text": "distance from the origin."
+    },
+    {
+      "index": 211,
+      "start": 615.509,
+      "end": 615.519,
+      "duration": 0.01,
+      "text": "So you know if this were for example"
+    },
+    {
+      "index": 212,
+      "start": 615.519,
+      "end": 617.829,
+      "duration": 2.31,
+      "text": "velocity fields well that would tell you"
+    },
+    {
+      "index": 213,
+      "start": 617.839,
+      "end": 619.59,
+      "duration": 1.751,
+      "text": "you know you would see visually what's"
+    },
+    {
+      "index": 214,
+      "start": 619.6,
+      "end": 621.269,
+      "duration": 1.669,
+      "text": "happening to your fluid like here maybe"
+    },
+    {
+      "index": 215,
+      "start": 621.279,
+      "end": 624.069,
+      "duration": 2.79,
+      "text": "you have a source at the origin that's"
+    },
+    {
+      "index": 216,
+      "start": 624.079,
+      "end": 626.389,
+      "duration": 2.31,
+      "text": "spewing fluid out and it's flowing all"
+    },
+    {
+      "index": 217,
+      "start": 626.399,
+      "end": 631.509,
+      "duration": 5.11,
+      "text": "the way away from that."
+    },
+    {
+      "index": 218,
+      "start": 641.829,
+      "end": 641.839,
+      "duration": 0.01,
+      "text": "Let's say I give you"
+    },
+    {
+      "index": 219,
+      "start": 641.839,
+      "end": 645.509,
+      "duration": 3.67,
+      "text": "minus y comma x."
+    },
+    {
+      "index": 220,
+      "start": 645.519,
+      "end": 649.269,
+      "duration": 3.75,
+      "text": "What does that look like?"
+    },
+    {
+      "index": 221,
+      "start": 649.279,
+      "end": 650.389,
+      "duration": 1.11,
+      "text": "That's that's an interesting one"
+    },
+    {
+      "index": 222,
+      "start": 650.399,
+      "end": 657.11,
+      "duration": 6.711,
+      "text": "actually. It's"
+    },
+    {
+      "index": 223,
+      "start": 658.87,
+      "end": 658.88,
+      "duration": 0.01,
+      "text": "a nice one. So, let's see. So let's say"
+    },
+    {
+      "index": 224,
+      "start": 658.88,
+      "end": 662.47,
+      "duration": 3.59,
+      "text": "that I have a point xy here."
+    },
+    {
+      "index": 225,
+      "start": 662.48,
+      "end": 664.389,
+      "duration": 1.909,
+      "text": "Okay. So"
+    },
+    {
+      "index": 226,
+      "start": 664.399,
+      "end": 667.35,
+      "duration": 2.951,
+      "text": "this vector here is x comm y. But the"
+    },
+    {
+      "index": 227,
+      "start": 667.36,
+      "end": 670.949,
+      "duration": 3.589,
+      "text": "vector I want is - y comma x. So what"
+    },
+    {
+      "index": 228,
+      "start": 670.959,
+      "end": 674.069,
+      "duration": 3.11,
+      "text": "does that look like compared to"
+    },
+    {
+      "index": 229,
+      "start": 674.079,
+      "end": 676.47,
+      "duration": 2.391,
+      "text": "yeah it's perpendicular to the position"
+    },
+    {
+      "index": 230,
+      "start": 676.48,
+      "end": 678.55,
+      "duration": 2.07,
+      "text": "to this vector. Okay. If I rotate this"
+    },
+    {
+      "index": 231,
+      "start": 678.56,
+      "end": 681.59,
+      "duration": 3.03,
+      "text": "vector. So let me maybe draw a picture"
+    },
+    {
+      "index": 232,
+      "start": 681.6,
+      "end": 684.71,
+      "duration": 3.11,
+      "text": "on the side."
+    },
+    {
+      "index": 233,
+      "start": 684.72,
+      "end": 688.069,
+      "duration": 3.349,
+      "text": "If I take the vector xy,"
+    },
+    {
+      "index": 234,
+      "start": 688.079,
+      "end": 691.269,
+      "duration": 3.19,
+      "text": "then the vector with components - y and"
+    },
+    {
+      "index": 235,
+      "start": 691.279,
+      "end": 697.35,
+      "duration": 6.071,
+      "text": "x is going to be like this"
+    },
+    {
+      "index": 236,
+      "start": 697.36,
+      "end": 699.75,
+      "duration": 2.39,
+      "text": "is the vector that I get by rotating by"
+    },
+    {
+      "index": 237,
+      "start": 699.76,
+      "end": 709.75,
+      "duration": 9.99,
+      "text": "90° counterclockwise."
+    },
+    {
+      "index": 238,
+      "start": 711.19,
+      "end": 711.2,
+      "duration": 0.01,
+      "text": "And of course, I don't want to put that"
+    },
+    {
+      "index": 239,
+      "start": 711.2,
+      "end": 712.949,
+      "duration": 1.749,
+      "text": "vector at the origin. I want to put it"
+    },
+    {
+      "index": 240,
+      "start": 712.959,
+      "end": 714.949,
+      "duration": 1.99,
+      "text": "at the point xy. Okay. So in fact what I"
+    },
+    {
+      "index": 241,
+      "start": 714.959,
+      "end": 719.269,
+      "duration": 4.31,
+      "text": "will draw is something like this."
+    },
+    {
+      "index": 242,
+      "start": 719.279,
+      "end": 721.43,
+      "duration": 2.151,
+      "text": "Okay. And similarly here it would be"
+    },
+    {
+      "index": 243,
+      "start": 721.44,
+      "end": 730.15,
+      "duration": 8.71,
+      "text": "like that like that."
+    },
+    {
+      "index": 244,
+      "start": 732.23,
+      "end": 732.24,
+      "duration": 0.01,
+      "text": "And if I'm closer to the origin then it"
+    },
+    {
+      "index": 245,
+      "start": 732.24,
+      "end": 738.79,
+      "duration": 6.55,
+      "text": "looks a bit the same but it's shorter."
+    },
+    {
+      "index": 246,
+      "start": 741.59,
+      "end": 741.6,
+      "duration": 0.01,
+      "text": "Okay. And at the origin it's zero. And"
+    },
+    {
+      "index": 247,
+      "start": 741.6,
+      "end": 743.91,
+      "duration": 2.31,
+      "text": "when I'm further away, it becomes even"
+    },
+    {
+      "index": 248,
+      "start": 743.92,
+      "end": 747.19,
+      "duration": 3.27,
+      "text": "larger. So see this vector field, if it"
+    },
+    {
+      "index": 249,
+      "start": 747.2,
+      "end": 749.509,
+      "duration": 2.309,
+      "text": "was the motion of a fluid, it would"
+    },
+    {
+      "index": 250,
+      "start": 749.519,
+      "end": 752.23,
+      "duration": 2.711,
+      "text": "correspond to a fluid that's just going"
+    },
+    {
+      "index": 251,
+      "start": 752.24,
+      "end": 756.069,
+      "duration": 3.829,
+      "text": "around the origin in circles rotating at"
+    },
+    {
+      "index": 252,
+      "start": 756.079,
+      "end": 758.55,
+      "duration": 2.471,
+      "text": "uniform speed."
+    },
+    {
+      "index": 253,
+      "start": 758.56,
+      "end": 761.03,
+      "duration": 2.47,
+      "text": "Okay, so"
+    },
+    {
+      "index": 254,
+      "start": 761.04,
+      "end": 766.949,
+      "duration": 5.909,
+      "text": "this is actually the velocity field"
+    },
+    {
+      "index": 255,
+      "start": 768.79,
+      "end": 768.8,
+      "duration": 0.01,
+      "text": "for"
+    },
+    {
+      "index": 256,
+      "start": 768.8,
+      "end": 774.47,
+      "duration": 5.67,
+      "text": "uniform rotation."
+    },
+    {
+      "index": 257,
+      "start": 776.55,
+      "end": 776.56,
+      "duration": 0.01,
+      "text": "And if you figure out, you know, how"
+    },
+    {
+      "index": 258,
+      "start": 776.56,
+      "end": 779.509,
+      "duration": 2.949,
+      "text": "long does it take for a piece, a"
+    },
+    {
+      "index": 259,
+      "start": 779.519,
+      "end": 781.67,
+      "duration": 2.151,
+      "text": "particle of fluid to go all the way"
+    },
+    {
+      "index": 260,
+      "start": 781.68,
+      "end": 785.19,
+      "duration": 3.51,
+      "text": "around, well, that will be actually 2 pi"
+    },
+    {
+      "index": 261,
+      "start": 785.2,
+      "end": 787.99,
+      "duration": 2.79,
+      "text": "because the length of a circle is 2 pi"
+    },
+    {
+      "index": 262,
+      "start": 788.0,
+      "end": 791.509,
+      "duration": 3.509,
+      "text": "times the radius. So that's actually at"
+    },
+    {
+      "index": 263,
+      "start": 791.519,
+      "end": 796.47,
+      "duration": 4.951,
+      "text": "unit angular velocity,"
+    },
+    {
+      "index": 264,
+      "start": 804.55,
+      "end": 804.56,
+      "duration": 0.01,
+      "text": "Okay, so that's why this guy comes up"
+    },
+    {
+      "index": 265,
+      "start": 804.56,
+      "end": 809.269,
+      "duration": 4.709,
+      "text": "quite a lot in real life."
+    },
+    {
+      "index": 266,
+      "start": 811.03,
+      "end": 811.04,
+      "duration": 0.01,
+      "text": "Okay, and you know, you can imagine lots"
+    },
+    {
+      "index": 267,
+      "start": 811.04,
+      "end": 813.75,
+      "duration": 2.71,
+      "text": "of variations on these. Of course, you"
+    },
+    {
+      "index": 268,
+      "start": 813.76,
+      "end": 815.43,
+      "duration": 1.67,
+      "text": "can also imagine vector fields given by"
+    },
+    {
+      "index": 269,
+      "start": 815.44,
+      "end": 817.19,
+      "duration": 1.75,
+      "text": "much more complicated formulas and then"
+    },
+    {
+      "index": 270,
+      "start": 817.2,
+      "end": 819.19,
+      "duration": 1.99,
+      "text": "you'll have a hard time drawing them. So"
+    },
+    {
+      "index": 271,
+      "start": 819.2,
+      "end": 820.629,
+      "duration": 1.429,
+      "text": "maybe you'll use a computer or maybe"
+    },
+    {
+      "index": 272,
+      "start": 820.639,
+      "end": 823.43,
+      "duration": 2.791,
+      "text": "you'll just give up and just do whatever"
+    },
+    {
+      "index": 273,
+      "start": 823.44,
+      "end": 825.509,
+      "duration": 2.069,
+      "text": "calculation you have to do without"
+    },
+    {
+      "index": 274,
+      "start": 825.519,
+      "end": 827.59,
+      "duration": 2.071,
+      "text": "trying to visualize the vector field."
+    },
+    {
+      "index": 275,
+      "start": 827.6,
+      "end": 829.43,
+      "duration": 1.83,
+      "text": "But if you have a nice simple one, then"
+    },
+    {
+      "index": 276,
+      "start": 829.44,
+      "end": 831.75,
+      "duration": 2.31,
+      "text": "it's worth doing it because sometimes it"
+    },
+    {
+      "index": 277,
+      "start": 831.76,
+      "end": 833.59,
+      "duration": 1.83,
+      "text": "will give you insight about what we're"
+    },
+    {
+      "index": 278,
+      "start": 833.6,
+      "end": 837.43,
+      "duration": 3.83,
+      "text": "going to compute next."
+    },
+    {
+      "index": 279,
+      "start": 839.189,
+      "end": 839.199,
+      "duration": 0.01,
+      "text": "Okay. Any questions first about these"
+    },
+    {
+      "index": 280,
+      "start": 839.199,
+      "end": 843.75,
+      "duration": 4.551,
+      "text": "pictures?"
+    },
+    {
+      "index": 281,
+      "start": 859.269,
+      "end": 859.279,
+      "duration": 0.01,
+      "text": "y and you're asking if it should be y"
+    },
+    {
+      "index": 282,
+      "start": 859.279,
+      "end": 860.629,
+      "duration": 1.35,
+      "text": "and"
+    },
+    {
+      "index": 283,
+      "start": 860.639,
+      "end": 864.47,
+      "duration": 3.831,
+      "text": "uh so yx I think would be the other way"
+    },
+    {
+      "index": 284,
+      "start": 864.48,
+      "end": 869.11,
+      "duration": 4.63,
+      "text": "around. See for example if I"
+    },
+    {
+      "index": 285,
+      "start": 869.12,
+      "end": 871.91,
+      "duration": 2.79,
+      "text": "if I'm at this point then y is positive"
+    },
+    {
+      "index": 286,
+      "start": 871.92,
+      "end": 875.59,
+      "duration": 3.67,
+      "text": "and x is zero. So if I take yx"
+    },
+    {
+      "index": 287,
+      "start": 875.6,
+      "end": 878.31,
+      "duration": 2.71,
+      "text": "I guess a positive first component and"
+    },
+    {
+      "index": 288,
+      "start": 878.32,
+      "end": 881.67,
+      "duration": 3.35,
+      "text": "zero for the second one. So yx would be"
+    },
+    {
+      "index": 289,
+      "start": 881.68,
+      "end": 884.069,
+      "duration": 2.389,
+      "text": "rotation at unit speed in the opposite"
+    },
+    {
+      "index": 290,
+      "start": 884.079,
+      "end": 887.269,
+      "duration": 3.19,
+      "text": "direction. Okay. So yeah, and there's a"
+    },
+    {
+      "index": 291,
+      "start": 887.279,
+      "end": 888.79,
+      "duration": 1.511,
+      "text": "lot of tweaks you can do to it. But so"
+    },
+    {
+      "index": 292,
+      "start": 888.8,
+      "end": 890.31,
+      "duration": 1.51,
+      "text": "if you flip the signs, you get rotation"
+    },
+    {
+      "index": 293,
+      "start": 890.32,
+      "end": 894.87,
+      "duration": 4.55,
+      "text": "in the other direction."
+    },
+    {
+      "index": 294,
+      "start": 901.509,
+      "end": 901.519,
+      "duration": 0.01,
+      "text": "how do I know?"
+    },
+    {
+      "index": 295,
+      "start": 901.519,
+      "end": 903.03,
+      "duration": 1.511,
+      "text": "H how do I know that it's at unit"
+    },
+    {
+      "index": 296,
+      "start": 903.04,
+      "end": 905.67,
+      "duration": 2.63,
+      "text": "angular velocity? Well, that's because"
+    },
+    {
+      "index": 297,
+      "start": 905.68,
+      "end": 908.71,
+      "duration": 3.03,
+      "text": "if my angular velocity is one, then that"
+    },
+    {
+      "index": 298,
+      "start": 908.72,
+      "end": 911.509,
+      "duration": 2.789,
+      "text": "means that the speed, the actual speed"
+    },
+    {
+      "index": 299,
+      "start": 911.519,
+      "end": 913.11,
+      "duration": 1.591,
+      "text": "is equal to the distance from the"
+    },
+    {
+      "index": 300,
+      "start": 913.12,
+      "end": 914.949,
+      "duration": 1.829,
+      "text": "origin,"
+    },
+    {
+      "index": 301,
+      "start": 914.959,
+      "end": 917.59,
+      "duration": 2.631,
+      "text": "right? Because the length, I mean the"
+    },
+    {
+      "index": 302,
+      "start": 917.6,
+      "end": 919.35,
+      "duration": 1.75,
+      "text": "arc length on a circle of a certain"
+    },
+    {
+      "index": 303,
+      "start": 919.36,
+      "end": 922.15,
+      "duration": 2.79,
+      "text": "radius is equal to the radius times the"
+    },
+    {
+      "index": 304,
+      "start": 922.16,
+      "end": 925.03,
+      "duration": 2.87,
+      "text": "angle. So if the angle varies at rate"
+    },
+    {
+      "index": 305,
+      "start": 925.04,
+      "end": 927.99,
+      "duration": 2.95,
+      "text": "one, then I travel at speed equal to the"
+    },
+    {
+      "index": 306,
+      "start": 928.0,
+      "end": 929.829,
+      "duration": 1.829,
+      "text": "radius. And that's what I do here. The"
+    },
+    {
+      "index": 307,
+      "start": 929.839,
+      "end": 932.23,
+      "duration": 2.391,
+      "text": "length of this vector is equal to the"
+    },
+    {
+      "index": 308,
+      "start": 932.24,
+      "end": 934.389,
+      "duration": 2.149,
+      "text": "distance from the origin."
+    },
+    {
+      "index": 309,
+      "start": 934.399,
+      "end": 936.71,
+      "duration": 2.311,
+      "text": "I mean, it's not obvious on the picture,"
+    },
+    {
+      "index": 310,
+      "start": 936.72,
+      "end": 939.269,
+      "duration": 2.549,
+      "text": "but really the vector that I put here is"
+    },
+    {
+      "index": 311,
+      "start": 939.279,
+      "end": 941.91,
+      "duration": 2.631,
+      "text": "the same as this vector rotated. So, it"
+    },
+    {
+      "index": 312,
+      "start": 941.92,
+      "end": 944.87,
+      "duration": 2.95,
+      "text": "has the same length. So, that's why the"
+    },
+    {
+      "index": 313,
+      "start": 944.88,
+      "end": 946.949,
+      "duration": 2.069,
+      "text": "angular velocity is one. It doesn't"
+    },
+    {
+      "index": 314,
+      "start": 946.959,
+      "end": 954.629,
+      "duration": 7.67,
+      "text": "really matter much anyway. But,"
+    },
+    {
+      "index": 315,
+      "start": 956.31,
+      "end": 956.32,
+      "duration": 0.01,
+      "text": "okay."
+    },
+    {
+      "index": 316,
+      "start": 956.32,
+      "end": 958.31,
+      "duration": 1.99,
+      "text": "So, now what are we going to do with"
+    },
+    {
+      "index": 317,
+      "start": 958.32,
+      "end": 959.99,
+      "duration": 1.67,
+      "text": "vector fields? Well, we're going to do a"
+    },
+    {
+      "index": 318,
+      "start": 960.0,
+      "end": 966.79,
+      "duration": 6.79,
+      "text": "lot of things, but uh let's, you know,"
+    },
+    {
+      "index": 319,
+      "start": 970.23,
+      "end": 970.24,
+      "duration": 0.01,
+      "text": "let's start somewhere. So, one thing you"
+    },
+    {
+      "index": 320,
+      "start": 970.24,
+      "end": 973.59,
+      "duration": 3.35,
+      "text": "might want to do with a vector field is"
+    },
+    {
+      "index": 321,
+      "start": 973.6,
+      "end": 975.99,
+      "duration": 2.39,
+      "text": "so I'm going to think for now of the"
+    },
+    {
+      "index": 322,
+      "start": 976.0,
+      "end": 980.389,
+      "duration": 4.389,
+      "text": "situation where we have a force. Okay?"
+    },
+    {
+      "index": 323,
+      "start": 980.399,
+      "end": 981.91,
+      "duration": 1.511,
+      "text": "So"
+    },
+    {
+      "index": 324,
+      "start": 981.92,
+      "end": 984.389,
+      "duration": 2.469,
+      "text": "if you have a force"
+    },
+    {
+      "index": 325,
+      "start": 984.399,
+      "end": 986.389,
+      "duration": 1.99,
+      "text": "exerted on a particle and that particle"
+    },
+    {
+      "index": 326,
+      "start": 986.399,
+      "end": 988.71,
+      "duration": 2.311,
+      "text": "moves on some trajectory"
+    },
+    {
+      "index": 327,
+      "start": 988.72,
+      "end": 990.55,
+      "duration": 1.83,
+      "text": "then probably you've seen in physics"
+    },
+    {
+      "index": 328,
+      "start": 990.56,
+      "end": 993.269,
+      "duration": 2.709,
+      "text": "that the work done by the force"
+    },
+    {
+      "index": 329,
+      "start": 993.279,
+      "end": 996.71,
+      "duration": 3.431,
+      "text": "corresponds to the force dot product"
+    },
+    {
+      "index": 330,
+      "start": 996.72,
+      "end": 999.269,
+      "duration": 2.549,
+      "text": "with the the displacement vector how"
+    },
+    {
+      "index": 331,
+      "start": 999.279,
+      "end": 1002.47,
+      "duration": 3.191,
+      "text": "much you have moved your particle."
+    },
+    {
+      "index": 332,
+      "start": 1002.48,
+      "end": 1004.629,
+      "duration": 2.149,
+      "text": "And of course if you do just a you know"
+    },
+    {
+      "index": 333,
+      "start": 1004.639,
+      "end": 1006.31,
+      "duration": 1.671,
+      "text": "straight line trajectory or if the force"
+    },
+    {
+      "index": 334,
+      "start": 1006.32,
+      "end": 1008.71,
+      "duration": 2.39,
+      "text": "is constant that works well but if"
+    },
+    {
+      "index": 335,
+      "start": 1008.72,
+      "end": 1009.99,
+      "duration": 1.27,
+      "text": "you're moving on a complicated"
+    },
+    {
+      "index": 336,
+      "start": 1010.0,
+      "end": 1012.15,
+      "duration": 2.15,
+      "text": "trajectory and the force keeps changing"
+    },
+    {
+      "index": 337,
+      "start": 1012.16,
+      "end": 1014.71,
+      "duration": 2.55,
+      "text": "then actually you want to integrate that"
+    },
+    {
+      "index": 338,
+      "start": 1014.72,
+      "end": 1020.47,
+      "duration": 5.75,
+      "text": "over time. So"
+    },
+    {
+      "index": 339,
+      "start": 1024.069,
+      "end": 1024.079,
+      "duration": 0.01,
+      "text": "okay so we're going to the first"
+    },
+    {
+      "index": 340,
+      "start": 1024.079,
+      "end": 1026.39,
+      "duration": 2.311,
+      "text": "thing we'll do is learn how to compute"
+    },
+    {
+      "index": 341,
+      "start": 1026.4,
+      "end": 1029.27,
+      "duration": 2.87,
+      "text": "the work done by a vector field. And"
+    },
+    {
+      "index": 342,
+      "start": 1029.28,
+      "end": 1031.909,
+      "duration": 2.629,
+      "text": "mathematically that's called"
+    },
+    {
+      "index": 343,
+      "start": 1031.919,
+      "end": 1039.35,
+      "duration": 7.431,
+      "text": "a line integral."
+    },
+    {
+      "index": 344,
+      "start": 1043.51,
+      "end": 1043.52,
+      "duration": 0.01,
+      "text": "Okay. So physically remember the work"
+    },
+    {
+      "index": 345,
+      "start": 1043.52,
+      "end": 1045.51,
+      "duration": 1.99,
+      "text": "done by a force is the force times the"
+    },
+    {
+      "index": 346,
+      "start": 1045.52,
+      "end": 1047.909,
+      "duration": 2.389,
+      "text": "distance."
+    },
+    {
+      "index": 347,
+      "start": 1047.919,
+      "end": 1049.83,
+      "duration": 1.911,
+      "text": "And more precisely,"
+    },
+    {
+      "index": 348,
+      "start": 1049.84,
+      "end": 1051.909,
+      "duration": 2.069,
+      "text": "it's actually"
+    },
+    {
+      "index": 349,
+      "start": 1051.919,
+      "end": 1054.07,
+      "duration": 2.151,
+      "text": "the dotproduct between the force as a"
+    },
+    {
+      "index": 350,
+      "start": 1054.08,
+      "end": 1056.789,
+      "duration": 2.709,
+      "text": "vector and"
+    },
+    {
+      "index": 351,
+      "start": 1056.799,
+      "end": 1060.15,
+      "duration": 3.351,
+      "text": "the displacement vector"
+    },
+    {
+      "index": 352,
+      "start": 1060.16,
+      "end": 1061.909,
+      "duration": 1.749,
+      "text": "for a small motion. So say that you know"
+    },
+    {
+      "index": 353,
+      "start": 1061.919,
+      "end": 1065.19,
+      "duration": 3.271,
+      "text": "your point is moving from here to here."
+    },
+    {
+      "index": 354,
+      "start": 1065.2,
+      "end": 1068.39,
+      "duration": 3.19,
+      "text": "You have the displacement"
+    },
+    {
+      "index": 355,
+      "start": 1068.4,
+      "end": 1070.23,
+      "duration": 1.83,
+      "text": "delta R. That's just the change in the"
+    },
+    {
+      "index": 356,
+      "start": 1070.24,
+      "end": 1071.909,
+      "duration": 1.669,
+      "text": "position vector. That's the vector from"
+    },
+    {
+      "index": 357,
+      "start": 1071.919,
+      "end": 1074.71,
+      "duration": 2.791,
+      "text": "the old position to the new position."
+    },
+    {
+      "index": 358,
+      "start": 1074.72,
+      "end": 1077.27,
+      "duration": 2.55,
+      "text": "And then you have your force that's"
+    },
+    {
+      "index": 359,
+      "start": 1077.28,
+      "end": 1080.07,
+      "duration": 2.79,
+      "text": "being exerted and you do the dot product"
+    },
+    {
+      "index": 360,
+      "start": 1080.08,
+      "end": 1081.59,
+      "duration": 1.51,
+      "text": "between them and that will give you the"
+    },
+    {
+      "index": 361,
+      "start": 1081.6,
+      "end": 1086.31,
+      "duration": 4.71,
+      "text": "work of the force during this motion."
+    },
+    {
+      "index": 362,
+      "start": 1086.32,
+      "end": 1088.87,
+      "duration": 2.55,
+      "text": "And the physical significance of this"
+    },
+    {
+      "index": 363,
+      "start": 1088.88,
+      "end": 1091.35,
+      "duration": 2.47,
+      "text": "well the work tells you basically how"
+    },
+    {
+      "index": 364,
+      "start": 1091.36,
+      "end": 1093.11,
+      "duration": 1.75,
+      "text": "much energy you have to provide to"
+    },
+    {
+      "index": 365,
+      "start": 1093.12,
+      "end": 1095.669,
+      "duration": 2.549,
+      "text": "actually perform this motion. Okay, just"
+    },
+    {
+      "index": 366,
+      "start": 1095.679,
+      "end": 1097.43,
+      "duration": 1.751,
+      "text": "in case you haven't seen this in 801"
+    },
+    {
+      "index": 367,
+      "start": 1097.44,
+      "end": 1100.23,
+      "duration": 2.79,
+      "text": "yet. I'm hoping all of you have heard"
+    },
+    {
+      "index": 368,
+      "start": 1100.24,
+      "end": 1102.549,
+      "duration": 2.309,
+      "text": "about work somewhere. But in case it's"
+    },
+    {
+      "index": 369,
+      "start": 1102.559,
+      "end": 1104.15,
+      "duration": 1.591,
+      "text": "completely mysterious, that's the amount"
+    },
+    {
+      "index": 370,
+      "start": 1104.16,
+      "end": 1106.549,
+      "duration": 2.389,
+      "text": "of energy you have to provide. Sorry,"
+    },
+    {
+      "index": 371,
+      "start": 1106.559,
+      "end": 1107.909,
+      "duration": 1.35,
+      "text": "actually no, that's the amount of energy"
+    },
+    {
+      "index": 372,
+      "start": 1107.919,
+      "end": 1110.07,
+      "duration": 2.151,
+      "text": "provided by the force. Sorry. Right. So"
+    },
+    {
+      "index": 373,
+      "start": 1110.08,
+      "end": 1112.39,
+      "duration": 2.31,
+      "text": "if the force goes along the motion, it"
+    },
+    {
+      "index": 374,
+      "start": 1112.4,
+      "end": 1113.83,
+      "duration": 1.43,
+      "text": "actually pushes the particle. It"
+    },
+    {
+      "index": 375,
+      "start": 1113.84,
+      "end": 1117.029,
+      "duration": 3.189,
+      "text": "provides energy to it to do that motion."
+    },
+    {
+      "index": 376,
+      "start": 1117.039,
+      "end": 1119.11,
+      "duration": 2.071,
+      "text": "And conversely, if you're trying to go"
+    },
+    {
+      "index": 377,
+      "start": 1119.12,
+      "end": 1120.63,
+      "duration": 1.51,
+      "text": "against the force, then you have to"
+    },
+    {
+      "index": 378,
+      "start": 1120.64,
+      "end": 1123.029,
+      "duration": 2.389,
+      "text": "provide energy to the particle to be"
+    },
+    {
+      "index": 379,
+      "start": 1123.039,
+      "end": 1125.59,
+      "duration": 2.551,
+      "text": "able to do that."
+    },
+    {
+      "index": 380,
+      "start": 1125.6,
+      "end": 1127.35,
+      "duration": 1.75,
+      "text": "So in particular the work you know if"
+    },
+    {
+      "index": 381,
+      "start": 1127.36,
+      "end": 1128.87,
+      "duration": 1.51,
+      "text": "this is the only force that's taking"
+    },
+    {
+      "index": 382,
+      "start": 1128.88,
+      "end": 1130.87,
+      "duration": 1.99,
+      "text": "place then the work will be the"
+    },
+    {
+      "index": 383,
+      "start": 1130.88,
+      "end": 1132.95,
+      "duration": 2.07,
+      "text": "variation in kinetic energy of a"
+    },
+    {
+      "index": 384,
+      "start": 1132.96,
+      "end": 1136.789,
+      "duration": 3.829,
+      "text": "particle along the motion."
+    },
+    {
+      "index": 385,
+      "start": 1136.799,
+      "end": 1139.27,
+      "duration": 2.471,
+      "text": "So now that's a good description for a"
+    },
+    {
+      "index": 386,
+      "start": 1139.28,
+      "end": 1141.029,
+      "duration": 1.749,
+      "text": "small motion but let's say that my"
+    },
+    {
+      "index": 387,
+      "start": 1141.039,
+      "end": 1142.789,
+      "duration": 1.75,
+      "text": "particle is not just doing that but you"
+    },
+    {
+      "index": 388,
+      "start": 1142.799,
+      "end": 1144.63,
+      "duration": 1.831,
+      "text": "know it's doing you know something"
+    },
+    {
+      "index": 389,
+      "start": 1144.64,
+      "end": 1146.23,
+      "duration": 1.59,
+      "text": "complicated"
+    },
+    {
+      "index": 390,
+      "start": 1146.24,
+      "end": 1149.51,
+      "duration": 3.27,
+      "text": "and my force keeps changing. So somehow"
+    },
+    {
+      "index": 391,
+      "start": 1149.52,
+      "end": 1151.27,
+      "duration": 1.75,
+      "text": "maybe you know I have a different force"
+    },
+    {
+      "index": 392,
+      "start": 1151.28,
+      "end": 1154.71,
+      "duration": 3.43,
+      "text": "at every point."
+    },
+    {
+      "index": 393,
+      "start": 1156.47,
+      "end": 1156.48,
+      "duration": 0.01,
+      "text": "So then I want to find the total work"
+    },
+    {
+      "index": 394,
+      "start": 1156.48,
+      "end": 1160.07,
+      "duration": 3.59,
+      "text": "done along the motion. Well, what I have"
+    },
+    {
+      "index": 395,
+      "start": 1160.08,
+      "end": 1162.71,
+      "duration": 2.63,
+      "text": "to do is I have to cut my trajectory"
+    },
+    {
+      "index": 396,
+      "start": 1162.72,
+      "end": 1165.35,
+      "duration": 2.63,
+      "text": "into these little pieces, you know, and"
+    },
+    {
+      "index": 397,
+      "start": 1165.36,
+      "end": 1169.19,
+      "duration": 3.83,
+      "text": "for each of them I have a vector along"
+    },
+    {
+      "index": 398,
+      "start": 1169.2,
+      "end": 1171.27,
+      "duration": 2.07,
+      "text": "the trajectory. I have the force. I do"
+    },
+    {
+      "index": 399,
+      "start": 1171.28,
+      "end": 1175.909,
+      "duration": 4.629,
+      "text": "the dot product and I sum them together."
+    },
+    {
+      "index": 400,
+      "start": 1179.27,
+      "end": 1179.28,
+      "duration": 0.01,
+      "text": "And of course the actual answer"
+    },
+    {
+      "index": 401,
+      "start": 1179.28,
+      "end": 1180.63,
+      "duration": 1.35,
+      "text": "well to get the actual answer I should"
+    },
+    {
+      "index": 402,
+      "start": 1180.64,
+      "end": 1182.23,
+      "duration": 1.59,
+      "text": "actually cut into smaller and smaller"
+    },
+    {
+      "index": 403,
+      "start": 1182.24,
+      "end": 1185.029,
+      "duration": 2.789,
+      "text": "pieces and sum all of the small"
+    },
+    {
+      "index": 404,
+      "start": 1185.039,
+      "end": 1187.11,
+      "duration": 2.071,
+      "text": "contributions to work. So in fact it's"
+    },
+    {
+      "index": 405,
+      "start": 1187.12,
+      "end": 1192.87,
+      "duration": 5.75,
+      "text": "going to be an integral."
+    },
+    {
+      "index": 406,
+      "start": 1196.39,
+      "end": 1196.4,
+      "duration": 0.01,
+      "text": "Okay. So"
+    },
+    {
+      "index": 407,
+      "start": 1196.4,
+      "end": 1197.99,
+      "duration": 1.59,
+      "text": "along"
+    },
+    {
+      "index": 408,
+      "start": 1198.0,
+      "end": 1201.83,
+      "duration": 3.83,
+      "text": "some trajectory"
+    },
+    {
+      "index": 409,
+      "start": 1204.47,
+      "end": 1204.48,
+      "duration": 0.01,
+      "text": "let's call C the trajectory for curve."
+    },
+    {
+      "index": 410,
+      "start": 1204.48,
+      "end": 1209.19,
+      "duration": 4.71,
+      "text": "you know, it's some curve. And here, um,"
+    },
+    {
+      "index": 411,
+      "start": 1209.2,
+      "end": 1212.63,
+      "duration": 3.43,
+      "text": "the work"
+    },
+    {
+      "index": 412,
+      "start": 1229.51,
+      "end": 1229.52,
+      "duration": 0.01,
+      "text": "which well, we write this using the"
+    },
+    {
+      "index": 413,
+      "start": 1229.52,
+      "end": 1234.39,
+      "duration": 4.87,
+      "text": "notation integral along C of F. DL."
+    },
+    {
+      "index": 414,
+      "start": 1234.4,
+      "end": 1235.75,
+      "duration": 1.35,
+      "text": "Okay. So we have to decode this"
+    },
+    {
+      "index": 415,
+      "start": 1235.76,
+      "end": 1238.63,
+      "duration": 2.87,
+      "text": "notation."
+    },
+    {
+      "index": 416,
+      "start": 1238.64,
+      "end": 1241.43,
+      "duration": 2.79,
+      "text": "So"
+    },
+    {
+      "index": 417,
+      "start": 1241.44,
+      "end": 1243.75,
+      "duration": 2.31,
+      "text": "one way to decode this is to say it's a"
+    },
+    {
+      "index": 418,
+      "start": 1243.76,
+      "end": 1249.99,
+      "duration": 6.23,
+      "text": "limit as we cut"
+    },
+    {
+      "index": 419,
+      "start": 1253.029,
+      "end": 1253.039,
+      "duration": 0.01,
+      "text": "into smaller and smaller pieces"
+    },
+    {
+      "index": 420,
+      "start": 1253.039,
+      "end": 1255.59,
+      "duration": 2.551,
+      "text": "of the sum over each piece of the"
+    },
+    {
+      "index": 421,
+      "start": 1255.6,
+      "end": 1259.35,
+      "duration": 3.75,
+      "text": "trajectory of the force at the given"
+    },
+    {
+      "index": 422,
+      "start": 1259.36,
+      "end": 1263.669,
+      "duration": 4.309,
+      "text": "point. Dot product with"
+    },
+    {
+      "index": 423,
+      "start": 1263.679,
+      "end": 1270.95,
+      "duration": 7.271,
+      "text": "that small vector along the trajectory"
+    },
+    {
+      "index": 424,
+      "start": 1273.669,
+      "end": 1273.679,
+      "duration": 0.01,
+      "text": "and"
+    },
+    {
+      "index": 425,
+      "start": 1273.679,
+      "end": 1274.87,
+      "duration": 1.191,
+      "text": "well that's not how we're going to"
+    },
+    {
+      "index": 426,
+      "start": 1274.88,
+      "end": 1276.39,
+      "duration": 1.51,
+      "text": "compute it. You know to compute it we do"
+    },
+    {
+      "index": 427,
+      "start": 1276.4,
+      "end": 1278.39,
+      "duration": 1.99,
+      "text": "things differently. So how can we"
+    },
+    {
+      "index": 428,
+      "start": 1278.4,
+      "end": 1283.27,
+      "duration": 4.87,
+      "text": "actually compute it? Well"
+    },
+    {
+      "index": 429,
+      "start": 1283.28,
+      "end": 1286.149,
+      "duration": 2.869,
+      "text": "what we can do is say that actually we"
+    },
+    {
+      "index": 430,
+      "start": 1286.159,
+      "end": 1289.029,
+      "duration": 2.87,
+      "text": "are cutting things"
+    },
+    {
+      "index": 431,
+      "start": 1289.039,
+      "end": 1292.149,
+      "duration": 3.11,
+      "text": "into know small time intervals. So the"
+    },
+    {
+      "index": 432,
+      "start": 1292.159,
+      "end": 1293.83,
+      "duration": 1.671,
+      "text": "way that we split our trajectory is we"
+    },
+    {
+      "index": 433,
+      "start": 1293.84,
+      "end": 1296.63,
+      "duration": 2.79,
+      "text": "just take you know a picture every say"
+    },
+    {
+      "index": 434,
+      "start": 1296.64,
+      "end": 1298.149,
+      "duration": 1.509,
+      "text": "millisecond."
+    },
+    {
+      "index": 435,
+      "start": 1298.159,
+      "end": 1299.83,
+      "duration": 1.671,
+      "text": "So every millisecond we have a new"
+    },
+    {
+      "index": 436,
+      "start": 1299.84,
+      "end": 1304.87,
+      "duration": 5.03,
+      "text": "position and the motion you know the"
+    },
+    {
+      "index": 437,
+      "start": 1304.88,
+      "end": 1306.549,
+      "duration": 1.669,
+      "text": "amount by which you have moved during"
+    },
+    {
+      "index": 438,
+      "start": 1306.559,
+      "end": 1308.63,
+      "duration": 2.071,
+      "text": "each small time interval is basically"
+    },
+    {
+      "index": 439,
+      "start": 1308.64,
+      "end": 1312.39,
+      "duration": 3.75,
+      "text": "the velocity vector times the amount of"
+    },
+    {
+      "index": 440,
+      "start": 1312.4,
+      "end": 1314.23,
+      "duration": 1.83,
+      "text": "time."
+    },
+    {
+      "index": 441,
+      "start": 1314.24,
+      "end": 1316.149,
+      "duration": 1.909,
+      "text": "So"
+    },
+    {
+      "index": 442,
+      "start": 1316.159,
+      "end": 1318.95,
+      "duration": 2.791,
+      "text": "in fact"
+    },
+    {
+      "index": 443,
+      "start": 1318.96,
+      "end": 1321.35,
+      "duration": 2.39,
+      "text": "let me just rewrite this as you know you"
+    },
+    {
+      "index": 444,
+      "start": 1321.36,
+      "end": 1323.75,
+      "duration": 2.39,
+      "text": "do the dot product between the force and"
+    },
+    {
+      "index": 445,
+      "start": 1323.76,
+      "end": 1329.19,
+      "duration": 5.43,
+      "text": "how much you have moved."
+    },
+    {
+      "index": 446,
+      "start": 1331.51,
+      "end": 1331.52,
+      "duration": 0.01,
+      "text": "Well, if I just rewrite it this way,"
+    },
+    {
+      "index": 447,
+      "start": 1331.52,
+      "end": 1334.789,
+      "duration": 3.269,
+      "text": "nothing's happened. But what this thing"
+    },
+    {
+      "index": 448,
+      "start": 1334.799,
+      "end": 1342.71,
+      "duration": 7.911,
+      "text": "is actually is the velocity vector"
+    },
+    {
+      "index": 449,
+      "start": 1350.47,
+      "end": 1350.48,
+      "duration": 0.01,
+      "text": "So what I'm trying to say is that I can"
+    },
+    {
+      "index": 450,
+      "start": 1350.48,
+      "end": 1353.43,
+      "duration": 2.95,
+      "text": "actually compute my integral by"
+    },
+    {
+      "index": 451,
+      "start": 1353.44,
+      "end": 1355.19,
+      "duration": 1.75,
+      "text": "integrating"
+    },
+    {
+      "index": 452,
+      "start": 1355.2,
+      "end": 1358.63,
+      "duration": 3.43,
+      "text": "f dotproduct with"
+    },
+    {
+      "index": 453,
+      "start": 1358.64,
+      "end": 1361.11,
+      "duration": 2.47,
+      "text": "drdt"
+    },
+    {
+      "index": 454,
+      "start": 1361.12,
+      "end": 1364.71,
+      "duration": 3.59,
+      "text": "over time from time you know whatever"
+    },
+    {
+      "index": 455,
+      "start": 1364.72,
+      "end": 1366.87,
+      "duration": 2.15,
+      "text": "the initial time"
+    },
+    {
+      "index": 456,
+      "start": 1366.88,
+      "end": 1369.83,
+      "duration": 2.95,
+      "text": "to whatever the final time is I"
+    },
+    {
+      "index": 457,
+      "start": 1369.84,
+      "end": 1375.99,
+      "duration": 6.15,
+      "text": "integrate f dotproduct velocity dt"
+    },
+    {
+      "index": 458,
+      "start": 1376.0,
+      "end": 1377.99,
+      "duration": 1.99,
+      "text": "and of"
+    },
+    {
+      "index": 459,
+      "start": 1378.0,
+      "end": 1380.39,
+      "duration": 2.39,
+      "text": "I mean here when I say f I mean f at the"
+    },
+    {
+      "index": 460,
+      "start": 1380.4,
+      "end": 1383.75,
+      "duration": 3.35,
+      "text": "point on the trajectory at time t"
+    },
+    {
+      "index": 461,
+      "start": 1383.76,
+      "end": 1386.47,
+      "duration": 2.71,
+      "text": "right this guy depends on x and y"
+    },
+    {
+      "index": 462,
+      "start": 1386.48,
+      "end": 1391.029,
+      "duration": 4.549,
+      "text": "therefore it depends on t"
+    },
+    {
+      "index": 463,
+      "start": 1393.51,
+      "end": 1393.52,
+      "duration": 0.01,
+      "text": "okay I see a lot of confused faces so"
+    },
+    {
+      "index": 464,
+      "start": 1393.52,
+      "end": 1395.75,
+      "duration": 2.23,
+      "text": "let's do an example and then I will ask"
+    },
+    {
+      "index": 465,
+      "start": 1395.76,
+      "end": 1402.39,
+      "duration": 6.63,
+      "text": "you oh okay"
+    },
+    {
+      "index": 466,
+      "start": 1405.51,
+      "end": 1405.52,
+      "duration": 0.01,
+      "text": "so now yes that would be probably um"
+    },
+    {
+      "index": 467,
+      "start": 1405.52,
+      "end": 1407.909,
+      "duration": 2.389,
+      "text": "yeah so here I need to put a limit as"
+    },
+    {
+      "index": 468,
+      "start": 1407.919,
+      "end": 1410.47,
+      "duration": 2.551,
+      "text": "delta t tends to zero. I cut my"
+    },
+    {
+      "index": 469,
+      "start": 1410.48,
+      "end": 1412.23,
+      "duration": 1.75,
+      "text": "trajectory into smaller and smaller time"
+    },
+    {
+      "index": 470,
+      "start": 1412.24,
+      "end": 1414.549,
+      "duration": 2.309,
+      "text": "intervals. For each time interval, I"
+    },
+    {
+      "index": 471,
+      "start": 1414.559,
+      "end": 1416.31,
+      "duration": 1.751,
+      "text": "have a small"
+    },
+    {
+      "index": 472,
+      "start": 1416.32,
+      "end": 1418.23,
+      "duration": 1.91,
+      "text": "motion which is essentially velocity"
+    },
+    {
+      "index": 473,
+      "start": 1418.24,
+      "end": 1420.47,
+      "duration": 2.23,
+      "text": "times delta t. And then I dot that with"
+    },
+    {
+      "index": 474,
+      "start": 1420.48,
+      "end": 1425.51,
+      "duration": 5.03,
+      "text": "a force and I sum them."
+    },
+    {
+      "index": 475,
+      "start": 1432.95,
+      "end": 1432.96,
+      "duration": 0.01,
+      "text": "Let's say that we do"
+    },
+    {
+      "index": 476,
+      "start": 1432.96,
+      "end": 1437.909,
+      "duration": 4.949,
+      "text": "we want to find the work of this force."
+    },
+    {
+      "index": 477,
+      "start": 1437.919,
+      "end": 1439.669,
+      "duration": 1.75,
+      "text": "So I guess that's the last example that"
+    },
+    {
+      "index": 478,
+      "start": 1439.679,
+      "end": 1442.07,
+      "duration": 2.391,
+      "text": "we had. Okay. So it's a force field that"
+    },
+    {
+      "index": 479,
+      "start": 1442.08,
+      "end": 1444.07,
+      "duration": 1.99,
+      "text": "tries to make everything can rotate"
+    },
+    {
+      "index": 480,
+      "start": 1444.08,
+      "end": 1446.789,
+      "duration": 2.709,
+      "text": "somehow. Your force points along these"
+    },
+    {
+      "index": 481,
+      "start": 1446.799,
+      "end": 1449.11,
+      "duration": 2.311,
+      "text": "circles."
+    },
+    {
+      "index": 482,
+      "start": 1449.12,
+      "end": 1451.909,
+      "duration": 2.789,
+      "text": "And let's say that our trajectory, our"
+    },
+    {
+      "index": 483,
+      "start": 1451.919,
+      "end": 1454.47,
+      "duration": 2.551,
+      "text": "particle is moving"
+    },
+    {
+      "index": 484,
+      "start": 1454.48,
+      "end": 1457.51,
+      "duration": 3.03,
+      "text": "along the parametric curve"
+    },
+    {
+      "index": 485,
+      "start": 1457.52,
+      "end": 1460.789,
+      "duration": 3.269,
+      "text": "x= t, y= t ^2"
+    },
+    {
+      "index": 486,
+      "start": 1460.799,
+      "end": 1463.83,
+      "duration": 3.031,
+      "text": "for t going from 0 to 1."
+    },
+    {
+      "index": 487,
+      "start": 1463.84,
+      "end": 1466.31,
+      "duration": 2.47,
+      "text": "Okay, so"
+    },
+    {
+      "index": 488,
+      "start": 1466.32,
+      "end": 1468.07,
+      "duration": 1.75,
+      "text": "what that looks like? Well, maybe I"
+    },
+    {
+      "index": 489,
+      "start": 1468.08,
+      "end": 1470.95,
+      "duration": 2.87,
+      "text": "should draw a new picture."
+    },
+    {
+      "index": 490,
+      "start": 1470.96,
+      "end": 1479.43,
+      "duration": 8.47,
+      "text": "So our vector field"
+    },
+    {
+      "index": 491,
+      "start": 1482.549,
+      "end": 1482.559,
+      "duration": 0.01,
+      "text": "Oh well, whatever. And our trajectory,"
+    },
+    {
+      "index": 492,
+      "start": 1482.559,
+      "end": 1485.59,
+      "duration": 3.031,
+      "text": "if you try to plot this, when you see y"
+    },
+    {
+      "index": 493,
+      "start": 1485.6,
+      "end": 1488.149,
+      "duration": 2.549,
+      "text": "is actually x squ. So it's a piece of"
+    },
+    {
+      "index": 494,
+      "start": 1488.159,
+      "end": 1489.669,
+      "duration": 1.51,
+      "text": "parabola"
+    },
+    {
+      "index": 495,
+      "start": 1489.679,
+      "end": 1494.63,
+      "duration": 4.951,
+      "text": "that goes from the origin to 1 one."
+    },
+    {
+      "index": 496,
+      "start": 1494.64,
+      "end": 1498.07,
+      "duration": 3.43,
+      "text": "Okay, that's what our curve looks like."
+    },
+    {
+      "index": 497,
+      "start": 1498.08,
+      "end": 1499.59,
+      "duration": 1.51,
+      "text": "Okay, so we're trying to find the work"
+    },
+    {
+      "index": 498,
+      "start": 1499.6,
+      "end": 1504.47,
+      "duration": 4.87,
+      "text": "done by our force along this trajectory."
+    },
+    {
+      "index": 499,
+      "start": 1504.48,
+      "end": 1506.789,
+      "duration": 2.309,
+      "text": "I should point out I mean you know if"
+    },
+    {
+      "index": 500,
+      "start": 1506.799,
+      "end": 1508.149,
+      "duration": 1.35,
+      "text": "you're asking me how did you get this"
+    },
+    {
+      "index": 501,
+      "start": 1508.159,
+      "end": 1509.669,
+      "duration": 1.51,
+      "text": "that's actually the wrong question I"
+    },
+    {
+      "index": 502,
+      "start": 1509.679,
+      "end": 1512.39,
+      "duration": 2.711,
+      "text": "didn't you know this is all part of the"
+    },
+    {
+      "index": 503,
+      "start": 1512.4,
+      "end": 1514.149,
+      "duration": 1.749,
+      "text": "data I have a force and I have a"
+    },
+    {
+      "index": 504,
+      "start": 1514.159,
+      "end": 1515.99,
+      "duration": 1.831,
+      "text": "trajectory and I want to find what's the"
+    },
+    {
+      "index": 505,
+      "start": 1516.0,
+      "end": 1517.75,
+      "duration": 1.75,
+      "text": "work done along that trajectory these"
+    },
+    {
+      "index": 506,
+      "start": 1517.76,
+      "end": 1519.19,
+      "duration": 1.43,
+      "text": "two guys I can choose completely"
+    },
+    {
+      "index": 507,
+      "start": 1519.2,
+      "end": 1523.75,
+      "duration": 4.55,
+      "text": "independently of each other"
+    },
+    {
+      "index": 508,
+      "start": 1525.269,
+      "end": 1525.279,
+      "duration": 0.01,
+      "text": "so"
+    },
+    {
+      "index": 509,
+      "start": 1525.279,
+      "end": 1530.149,
+      "duration": 4.87,
+      "text": "the integral along C of FD dr"
+    },
+    {
+      "index": 510,
+      "start": 1530.159,
+      "end": 1533.269,
+      "duration": 3.11,
+      "text": "will be well it's the integral from time"
+    },
+    {
+      "index": 511,
+      "start": 1533.279,
+      "end": 1538.31,
+      "duration": 5.031,
+      "text": "0 to time 1 of f dot the velocity vector"
+    },
+    {
+      "index": 512,
+      "start": 1538.32,
+      "end": 1539.83,
+      "duration": 1.51,
+      "text": "drdt"
+    },
+    {
+      "index": 513,
+      "start": 1539.84,
+      "end": 1542.149,
+      "duration": 2.309,
+      "text": "* dt."
+    },
+    {
+      "index": 514,
+      "start": 1542.159,
+      "end": 1543.909,
+      "duration": 1.75,
+      "text": "So that will be the integral from 0 to"
+    },
+    {
+      "index": 515,
+      "start": 1543.919,
+      "end": 1547.11,
+      "duration": 3.191,
+      "text": "one of"
+    },
+    {
+      "index": 516,
+      "start": 1547.12,
+      "end": 1550.789,
+      "duration": 3.669,
+      "text": "okay let's try to figure it out. So what"
+    },
+    {
+      "index": 517,
+      "start": 1550.799,
+      "end": 1555.59,
+      "duration": 4.791,
+      "text": "is f?"
+    },
+    {
+      "index": 518,
+      "start": 1557.51,
+      "end": 1557.52,
+      "duration": 0.01,
+      "text": "f"
+    },
+    {
+      "index": 519,
+      "start": 1557.52,
+      "end": 1561.99,
+      "duration": 4.47,
+      "text": "at a point xy is minus y comma x. But if"
+    },
+    {
+      "index": 520,
+      "start": 1562.0,
+      "end": 1564.31,
+      "duration": 2.31,
+      "text": "I take the point where I am at time t,"
+    },
+    {
+      "index": 521,
+      "start": 1564.32,
+      "end": 1567.43,
+      "duration": 3.11,
+      "text": "then x is t and y is t ^2. Okay. So here"
+    },
+    {
+      "index": 522,
+      "start": 1567.44,
+      "end": 1574.07,
+      "duration": 6.63,
+      "text": "I plug x= t, y = t ^2. That will give me"
+    },
+    {
+      "index": 523,
+      "start": 1574.08,
+      "end": 1577.75,
+      "duration": 3.67,
+      "text": "t ^2 and t. Okay. So here I will put t"
+    },
+    {
+      "index": 524,
+      "start": 1577.76,
+      "end": 1580.07,
+      "duration": 2.31,
+      "text": "^2 t"
+    },
+    {
+      "index": 525,
+      "start": 1580.08,
+      "end": 1582.31,
+      "duration": 2.23,
+      "text": "dot product. What is the velocity"
+    },
+    {
+      "index": 526,
+      "start": 1582.32,
+      "end": 1584.07,
+      "duration": 1.75,
+      "text": "vector?"
+    },
+    {
+      "index": 527,
+      "start": 1584.08,
+      "end": 1587.909,
+      "duration": 3.829,
+      "text": "Well, dx dt"
+    },
+    {
+      "index": 528,
+      "start": 1587.919,
+      "end": 1591.909,
+      "duration": 3.99,
+      "text": "is just one. dy dt"
+    },
+    {
+      "index": 529,
+      "start": 1591.919,
+      "end": 1596.07,
+      "duration": 4.151,
+      "text": "is 2t. So the velocity vector is 1 and"
+    },
+    {
+      "index": 530,
+      "start": 1596.08,
+      "end": 1597.83,
+      "duration": 1.75,
+      "text": "2t"
+    },
+    {
+      "index": 531,
+      "start": 1597.84,
+      "end": 1600.87,
+      "duration": 3.03,
+      "text": "dt."
+    },
+    {
+      "index": 532,
+      "start": 1603.11,
+      "end": 1603.12,
+      "duration": 0.01,
+      "text": "Okay."
+    },
+    {
+      "index": 533,
+      "start": 1603.12,
+      "end": 1606.23,
+      "duration": 3.11,
+      "text": "So now we have to continue"
+    },
+    {
+      "index": 534,
+      "start": 1606.24,
+      "end": 1609.909,
+      "duration": 3.669,
+      "text": "calculation. We get integral from 0 to 1"
+    },
+    {
+      "index": 535,
+      "start": 1609.919,
+      "end": 1612.549,
+      "duration": 2.63,
+      "text": "of what is this dot product? Well, it's"
+    },
+    {
+      "index": 536,
+      "start": 1612.559,
+      "end": 1617.75,
+      "duration": 5.191,
+      "text": "- t ^2 + 2 t ^2. I get t ^2. Well, maybe"
+    },
+    {
+      "index": 537,
+      "start": 1617.76,
+      "end": 1623.43,
+      "duration": 5.67,
+      "text": "I'll write it t ^2 + 2t ^2 dt. That ends"
+    },
+    {
+      "index": 538,
+      "start": 1623.44,
+      "end": 1626.47,
+      "duration": 3.03,
+      "text": "up being integral from 0 to 1 of t ^2"
+    },
+    {
+      "index": 539,
+      "start": 1626.48,
+      "end": 1630.149,
+      "duration": 3.669,
+      "text": "dt, which you all know how to integrate"
+    },
+    {
+      "index": 540,
+      "start": 1630.159,
+      "end": 1632.39,
+      "duration": 2.231,
+      "text": "and get 1/3."
+    },
+    {
+      "index": 541,
+      "start": 1632.4,
+      "end": 1635.269,
+      "duration": 2.869,
+      "text": "Okay."
+    },
+    {
+      "index": 542,
+      "start": 1635.279,
+      "end": 1637.99,
+      "duration": 2.711,
+      "text": "So that's the work done by the force"
+    },
+    {
+      "index": 543,
+      "start": 1638.0,
+      "end": 1640.149,
+      "duration": 2.149,
+      "text": "along this curve. Yes. How did you get"
+    },
+    {
+      "index": 544,
+      "start": 1640.159,
+      "end": 1643.51,
+      "duration": 3.351,
+      "text": "the t?"
+    },
+    {
+      "index": 545,
+      "start": 1643.52,
+      "end": 1645.51,
+      "duration": 1.99,
+      "text": "Well, I got it by just taking the dot"
+    },
+    {
+      "index": 546,
+      "start": 1645.52,
+      "end": 1647.51,
+      "duration": 1.99,
+      "text": "product between the force and the"
+    },
+    {
+      "index": 547,
+      "start": 1647.52,
+      "end": 1649.029,
+      "duration": 1.509,
+      "text": "velocity."
+    },
+    {
+      "index": 548,
+      "start": 1649.039,
+      "end": 1650.95,
+      "duration": 1.911,
+      "text": "Okay,"
+    },
+    {
+      "index": 549,
+      "start": 1650.96,
+      "end": 1653.909,
+      "duration": 2.949,
+      "text": "sorry. That's in case you're wondering,"
+    },
+    {
+      "index": 550,
+      "start": 1653.919,
+      "end": 1663.669,
+      "duration": 9.75,
+      "text": "things go like this."
+    },
+    {
+      "index": 551,
+      "start": 1665.51,
+      "end": 1665.52,
+      "duration": 0.01,
+      "text": "Okay, any questions on how we did this"
+    },
+    {
+      "index": 552,
+      "start": 1665.52,
+      "end": 1669.99,
+      "duration": 4.47,
+      "text": "calculation?"
+    },
+    {
+      "index": 553,
+      "start": 1681.59,
+      "end": 1681.6,
+      "duration": 0.01,
+      "text": "Ah, why can't you just do fdr? Well,"
+    },
+    {
+      "index": 554,
+      "start": 1681.6,
+      "end": 1683.35,
+      "duration": 1.75,
+      "text": "soon we'll be able to. We don't know yet"
+    },
+    {
+      "index": 555,
+      "start": 1683.36,
+      "end": 1686.23,
+      "duration": 2.87,
+      "text": "what dr means or how to use it as a"
+    },
+    {
+      "index": 556,
+      "start": 1686.24,
+      "end": 1690.149,
+      "duration": 3.909,
+      "text": "symbol. Okay, because"
+    },
+    {
+      "index": 557,
+      "start": 1690.159,
+      "end": 1691.909,
+      "duration": 1.75,
+      "text": "you know we haven't said yet. I mean,"
+    },
+    {
+      "index": 558,
+      "start": 1691.919,
+      "end": 1694.149,
+      "duration": 2.23,
+      "text": "see this is a d vector r. That's kind of"
+    },
+    {
+      "index": 559,
+      "start": 1694.159,
+      "end": 1695.83,
+      "duration": 1.671,
+      "text": "a strange"
+    },
+    {
+      "index": 560,
+      "start": 1695.84,
+      "end": 1698.549,
+      "duration": 2.709,
+      "text": "thing to have. I mean, certainly R is"
+    },
+    {
+      "index": 561,
+      "start": 1698.559,
+      "end": 1700.95,
+      "duration": 2.391,
+      "text": "not a usual variable."
+    },
+    {
+      "index": 562,
+      "start": 1700.96,
+      "end": 1702.549,
+      "duration": 1.589,
+      "text": "I mean, we have to be careful about, you"
+    },
+    {
+      "index": 563,
+      "start": 1702.559,
+      "end": 1703.909,
+      "duration": 1.35,
+      "text": "know, what are the rules? What does this"
+    },
+    {
+      "index": 564,
+      "start": 1703.919,
+      "end": 1707.11,
+      "duration": 3.191,
+      "text": "symbol mean? So, I mean, we're going to"
+    },
+    {
+      "index": 565,
+      "start": 1707.12,
+      "end": 1709.269,
+      "duration": 2.149,
+      "text": "see that right now. And then we can do"
+    },
+    {
+      "index": 566,
+      "start": 1709.279,
+      "end": 1711.029,
+      "duration": 1.75,
+      "text": "it actually in a slightly more efficient"
+    },
+    {
+      "index": 567,
+      "start": 1711.039,
+      "end": 1713.029,
+      "duration": 1.99,
+      "text": "way."
+    },
+    {
+      "index": 568,
+      "start": 1713.039,
+      "end": 1714.71,
+      "duration": 1.671,
+      "text": "But you can't just use I mean, R is not"
+    },
+    {
+      "index": 569,
+      "start": 1714.72,
+      "end": 1716.63,
+      "duration": 1.91,
+      "text": "a scalar quantity. R is a position"
+    },
+    {
+      "index": 570,
+      "start": 1716.64,
+      "end": 1719.19,
+      "duration": 2.55,
+      "text": "vector, right? So, you can't integrate F"
+    },
+    {
+      "index": 571,
+      "start": 1719.2,
+      "end": 1721.269,
+      "duration": 2.069,
+      "text": "with respect to R. We don't know how to"
+    },
+    {
+      "index": 572,
+      "start": 1721.279,
+      "end": 1727.43,
+      "duration": 6.151,
+      "text": "do that."
+    },
+    {
+      "index": 573,
+      "start": 1730.07,
+      "end": 1730.08,
+      "duration": 0.01,
+      "text": "Okay."
+    },
+    {
+      "index": 574,
+      "start": 1730.08,
+      "end": 1732.63,
+      "duration": 2.55,
+      "text": "So, oh yes, sorry, I can't see people up"
+    },
+    {
+      "index": 575,
+      "start": 1732.64,
+      "end": 1734.47,
+      "duration": 1.83,
+      "text": "there because of the spotlights, but"
+    },
+    {
+      "index": 576,
+      "start": 1734.48,
+      "end": 1737.35,
+      "duration": 2.87,
+      "text": "yes,"
+    },
+    {
+      "index": 577,
+      "start": 1737.36,
+      "end": 1741.43,
+      "duration": 4.07,
+      "text": "if I were to do"
+    },
+    {
+      "index": 578,
+      "start": 1751.19,
+      "end": 1751.2,
+      "duration": 0.01,
+      "text": "Mhm. Okay. So question is if I took a"
+    },
+    {
+      "index": 579,
+      "start": 1751.2,
+      "end": 1752.95,
+      "duration": 1.75,
+      "text": "different trajectory from the origin to"
+    },
+    {
+      "index": 580,
+      "start": 1752.96,
+      "end": 1755.029,
+      "duration": 2.069,
+      "text": "that point one one would happen. Well"
+    },
+    {
+      "index": 581,
+      "start": 1755.039,
+      "end": 1756.389,
+      "duration": 1.35,
+      "text": "the answer is I would get something"
+    },
+    {
+      "index": 582,
+      "start": 1756.399,
+      "end": 1758.23,
+      "duration": 1.831,
+      "text": "different."
+    },
+    {
+      "index": 583,
+      "start": 1758.24,
+      "end": 1759.909,
+      "duration": 1.669,
+      "text": "Okay. So for example let me try to"
+    },
+    {
+      "index": 584,
+      "start": 1759.919,
+      "end": 1761.99,
+      "duration": 2.071,
+      "text": "convince you of that. For example, say"
+    },
+    {
+      "index": 585,
+      "start": 1762.0,
+      "end": 1766.31,
+      "duration": 4.31,
+      "text": "that I chose"
+    },
+    {
+      "index": 586,
+      "start": 1768.95,
+      "end": 1768.96,
+      "duration": 0.01,
+      "text": "say I chose to instead go like this and"
+    },
+    {
+      "index": 587,
+      "start": 1768.96,
+      "end": 1771.75,
+      "duration": 2.79,
+      "text": "then around like that. Then you know"
+    },
+    {
+      "index": 588,
+      "start": 1771.76,
+      "end": 1773.59,
+      "duration": 1.83,
+      "text": "first I wouldn't do any work because"
+    },
+    {
+      "index": 589,
+      "start": 1773.6,
+      "end": 1775.909,
+      "duration": 2.309,
+      "text": "here the force is perpendicular to my"
+    },
+    {
+      "index": 590,
+      "start": 1775.919,
+      "end": 1777.99,
+      "duration": 2.071,
+      "text": "motion and then I would be going against"
+    },
+    {
+      "index": 591,
+      "start": 1778.0,
+      "end": 1780.47,
+      "duration": 2.47,
+      "text": "the force all the way around. So I"
+    },
+    {
+      "index": 592,
+      "start": 1780.48,
+      "end": 1782.549,
+      "duration": 2.069,
+      "text": "should get something that's negative."
+    },
+    {
+      "index": 593,
+      "start": 1782.559,
+      "end": 1784.87,
+      "duration": 2.311,
+      "text": "Okay, even if you don't see that, just"
+    },
+    {
+      "index": 594,
+      "start": 1784.88,
+      "end": 1786.549,
+      "duration": 1.669,
+      "text": "you know accept at face value what I'm"
+    },
+    {
+      "index": 595,
+      "start": 1786.559,
+      "end": 1788.95,
+      "duration": 2.391,
+      "text": "going to say now the value of a line"
+    },
+    {
+      "index": 596,
+      "start": 1788.96,
+      "end": 1791.669,
+      "duration": 2.709,
+      "text": "integral in general depends on how we"
+    },
+    {
+      "index": 597,
+      "start": 1791.679,
+      "end": 1794.149,
+      "duration": 2.47,
+      "text": "got from point A to point B and that's"
+    },
+    {
+      "index": 598,
+      "start": 1794.159,
+      "end": 1796.95,
+      "duration": 2.791,
+      "text": "why we have to compute it by using the"
+    },
+    {
+      "index": 599,
+      "start": 1796.96,
+      "end": 1799.029,
+      "duration": 2.069,
+      "text": "parametric equation for the curve. It"
+    },
+    {
+      "index": 600,
+      "start": 1799.039,
+      "end": 1813.11,
+      "duration": 14.071,
+      "text": "really depends on what curve you choose."
+    },
+    {
+      "index": 601,
+      "start": 1823.75,
+      "end": 1823.76,
+      "duration": 0.01,
+      "text": "Ah, so yes. What happens when the force"
+    },
+    {
+      "index": 602,
+      "start": 1823.76,
+      "end": 1826.31,
+      "duration": 2.55,
+      "text": "infllects the trajectory? Well, then"
+    },
+    {
+      "index": 603,
+      "start": 1826.32,
+      "end": 1827.59,
+      "duration": 1.27,
+      "text": "actually you'd have to solve a"
+    },
+    {
+      "index": 604,
+      "start": 1827.6,
+      "end": 1829.19,
+      "duration": 1.59,
+      "text": "differential equation telling you how"
+    },
+    {
+      "index": 605,
+      "start": 1829.2,
+      "end": 1831.35,
+      "duration": 2.15,
+      "text": "the particle moves to find what the"
+    },
+    {
+      "index": 606,
+      "start": 1831.36,
+      "end": 1833.83,
+      "duration": 2.47,
+      "text": "trajectory is. Uh so that's something"
+    },
+    {
+      "index": 607,
+      "start": 1833.84,
+      "end": 1836.47,
+      "duration": 2.63,
+      "text": "that would you know be a very useful"
+    },
+    {
+      "index": 608,
+      "start": 1836.48,
+      "end": 1838.23,
+      "duration": 1.75,
+      "text": "topic and that's probably more like what"
+    },
+    {
+      "index": 609,
+      "start": 1838.24,
+      "end": 1840.07,
+      "duration": 1.83,
+      "text": "you will do in 1803 although maybe you"
+    },
+    {
+      "index": 610,
+      "start": 1840.08,
+      "end": 1842.95,
+      "duration": 2.87,
+      "text": "actually know how to do it in this case."
+    },
+    {
+      "index": 611,
+      "start": 1842.96,
+      "end": 1845.11,
+      "duration": 2.15,
+      "text": "Uh so what we're trying to develop here"
+    },
+    {
+      "index": 612,
+      "start": 1845.12,
+      "end": 1847.669,
+      "duration": 2.549,
+      "text": "is a method to figure out if we know"
+    },
+    {
+      "index": 613,
+      "start": 1847.679,
+      "end": 1849.75,
+      "duration": 2.071,
+      "text": "what the trajectory is what the work"
+    },
+    {
+      "index": 614,
+      "start": 1849.76,
+      "end": 1851.669,
+      "duration": 1.909,
+      "text": "will be. It doesn't tell us what the"
+    },
+    {
+      "index": 615,
+      "start": 1851.679,
+      "end": 1854.47,
+      "duration": 2.791,
+      "text": "trajectory will be. But of course we"
+    },
+    {
+      "index": 616,
+      "start": 1854.48,
+      "end": 1856.87,
+      "duration": 2.39,
+      "text": "could also find that."
+    },
+    {
+      "index": 617,
+      "start": 1856.88,
+      "end": 1858.47,
+      "duration": 1.59,
+      "text": "But here see I'm not assuming for"
+    },
+    {
+      "index": 618,
+      "start": 1858.48,
+      "end": 1860.87,
+      "duration": 2.39,
+      "text": "example that the particle is moving just"
+    },
+    {
+      "index": 619,
+      "start": 1860.88,
+      "end": 1862.63,
+      "duration": 1.75,
+      "text": "based on that force. Maybe actually I'm"
+    },
+    {
+      "index": 620,
+      "start": 1862.64,
+      "end": 1864.23,
+      "duration": 1.59,
+      "text": "here to, you know, hold it in my hand"
+    },
+    {
+      "index": 621,
+      "start": 1864.24,
+      "end": 1866.789,
+      "duration": 2.549,
+      "text": "and force it to go where it's going. Or"
+    },
+    {
+      "index": 622,
+      "start": 1866.799,
+      "end": 1868.71,
+      "duration": 1.911,
+      "text": "maybe there's some rail that's taking it"
+    },
+    {
+      "index": 623,
+      "start": 1868.72,
+      "end": 1872.71,
+      "duration": 3.99,
+      "text": "on that trajectory or whatever. So I can"
+    },
+    {
+      "index": 624,
+      "start": 1872.72,
+      "end": 1875.11,
+      "duration": 2.39,
+      "text": "really do it along any trajectory. And"
+    },
+    {
+      "index": 625,
+      "start": 1875.12,
+      "end": 1876.87,
+      "duration": 1.75,
+      "text": "if I wanted to, if I knew that it's the"
+    },
+    {
+      "index": 626,
+      "start": 1876.88,
+      "end": 1878.149,
+      "duration": 1.269,
+      "text": "case, then I could try to find the"
+    },
+    {
+      "index": 627,
+      "start": 1878.159,
+      "end": 1880.389,
+      "duration": 2.23,
+      "text": "trajectory based on what the force is."
+    },
+    {
+      "index": 628,
+      "start": 1880.399,
+      "end": 1885.909,
+      "duration": 5.51,
+      "text": "But that's not what we are doing here."
+    },
+    {
+      "index": 629,
+      "start": 1888.07,
+      "end": 1888.08,
+      "duration": 0.01,
+      "text": "Okay."
+    },
+    {
+      "index": 630,
+      "start": 1888.08,
+      "end": 1892.789,
+      "duration": 4.709,
+      "text": "So"
+    },
+    {
+      "index": 631,
+      "start": 1895.75,
+      "end": 1895.76,
+      "duration": 0.01,
+      "text": "next"
+    },
+    {
+      "index": 632,
+      "start": 1895.76,
+      "end": 1897.669,
+      "duration": 1.909,
+      "text": "okay so let's try to make sense I mean"
+    },
+    {
+      "index": 633,
+      "start": 1897.679,
+      "end": 1900.549,
+      "duration": 2.87,
+      "text": "you asked a while ago and just a few"
+    },
+    {
+      "index": 634,
+      "start": 1900.559,
+      "end": 1902.87,
+      "duration": 2.311,
+      "text": "minutes ago what what can we do directly"
+    },
+    {
+      "index": 635,
+      "start": 1902.88,
+      "end": 1907.029,
+      "duration": 4.149,
+      "text": "with dr so dr see becomes somehow a"
+    },
+    {
+      "index": 636,
+      "start": 1907.039,
+      "end": 1909.59,
+      "duration": 2.551,
+      "text": "vector I mean when I replace it by drdt"
+    },
+    {
+      "index": 637,
+      "start": 1909.6,
+      "end": 1912.549,
+      "duration": 2.949,
+      "text": "* dt it becomes something that's a"
+    },
+    {
+      "index": 638,
+      "start": 1912.559,
+      "end": 1918.389,
+      "duration": 5.83,
+      "text": "vector but with a dt next to it So"
+    },
+    {
+      "index": 639,
+      "start": 1918.399,
+      "end": 1923.269,
+      "duration": 4.87,
+      "text": "in fact"
+    },
+    {
+      "index": 640,
+      "start": 1925.43,
+      "end": 1925.44,
+      "duration": 0.01,
+      "text": "well it's not really new but uh let's"
+    },
+    {
+      "index": 641,
+      "start": 1925.44,
+      "end": 1932.149,
+      "duration": 6.709,
+      "text": "see another another way to do it."
+    },
+    {
+      "index": 642,
+      "start": 1935.83,
+      "end": 1935.84,
+      "duration": 0.01,
+      "text": "Let's say that our force has components"
+    },
+    {
+      "index": 643,
+      "start": 1935.84,
+      "end": 1938.549,
+      "duration": 2.709,
+      "text": "m and n."
+    },
+    {
+      "index": 644,
+      "start": 1938.559,
+      "end": 1942.07,
+      "duration": 3.511,
+      "text": "I claim that we can write symbolically"
+    },
+    {
+      "index": 645,
+      "start": 1942.08,
+      "end": 1945.43,
+      "duration": 3.35,
+      "text": "vector dr stands for it's a vector whose"
+    },
+    {
+      "index": 646,
+      "start": 1945.44,
+      "end": 1948.71,
+      "duration": 3.27,
+      "text": "components are dx and dy."
+    },
+    {
+      "index": 647,
+      "start": 1948.72,
+      "end": 1950.31,
+      "duration": 1.59,
+      "text": "Okay. So now that's a strange kind of"
+    },
+    {
+      "index": 648,
+      "start": 1950.32,
+      "end": 1952.149,
+      "duration": 1.829,
+      "text": "vector. I mean it's not a real vector of"
+    },
+    {
+      "index": 649,
+      "start": 1952.159,
+      "end": 1954.63,
+      "duration": 2.471,
+      "text": "course but as a notation it's a pretty"
+    },
+    {
+      "index": 650,
+      "start": 1954.64,
+      "end": 1956.31,
+      "duration": 1.67,
+      "text": "good notation"
+    },
+    {
+      "index": 651,
+      "start": 1956.32,
+      "end": 1961.029,
+      "duration": 4.709,
+      "text": "because it tells us that fd dr"
+    },
+    {
+      "index": 652,
+      "start": 1961.039,
+      "end": 1963.11,
+      "duration": 2.071,
+      "text": "is"
+    },
+    {
+      "index": 653,
+      "start": 1963.12,
+      "end": 1967.669,
+      "duration": 4.549,
+      "text": "m dx plus n dy."
+    },
+    {
+      "index": 654,
+      "start": 1967.679,
+      "end": 1970.149,
+      "duration": 2.47,
+      "text": "And so in fact"
+    },
+    {
+      "index": 655,
+      "start": 1970.159,
+      "end": 1973.99,
+      "duration": 3.831,
+      "text": "we'll very often write instead of fdr"
+    },
+    {
+      "index": 656,
+      "start": 1974.0,
+      "end": 1976.549,
+      "duration": 2.549,
+      "text": "line integral along c we'll write the"
+    },
+    {
+      "index": 657,
+      "start": 1976.559,
+      "end": 1980.07,
+      "duration": 3.511,
+      "text": "line integral along c of m dx"
+    },
+    {
+      "index": 658,
+      "start": 1980.08,
+      "end": 1982.95,
+      "duration": 2.87,
+      "text": "plus n dy."
+    },
+    {
+      "index": 659,
+      "start": 1982.96,
+      "end": 1984.87,
+      "duration": 1.91,
+      "text": "And so in this language of course what"
+    },
+    {
+      "index": 660,
+      "start": 1984.88,
+      "end": 1987.35,
+      "duration": 2.47,
+      "text": "we're integrating now rather than a"
+    },
+    {
+      "index": 661,
+      "start": 1987.36,
+      "end": 1989.99,
+      "duration": 2.63,
+      "text": "vector field becomes a differential. But"
+    },
+    {
+      "index": 662,
+      "start": 1990.0,
+      "end": 1991.269,
+      "duration": 1.269,
+      "text": "you should think of the two as being"
+    },
+    {
+      "index": 663,
+      "start": 1991.279,
+      "end": 1992.789,
+      "duration": 1.51,
+      "text": "pretty much the same thing right? It's"
+    },
+    {
+      "index": 664,
+      "start": 1992.799,
+      "end": 1994.47,
+      "duration": 1.671,
+      "text": "like when you compare the gradient of a"
+    },
+    {
+      "index": 665,
+      "start": 1994.48,
+      "end": 1996.47,
+      "duration": 1.99,
+      "text": "function and it's differential. They are"
+    },
+    {
+      "index": 666,
+      "start": 1996.48,
+      "end": 1997.99,
+      "duration": 1.51,
+      "text": "different notations but they have the"
+    },
+    {
+      "index": 667,
+      "start": 1998.0,
+      "end": 2001.35,
+      "duration": 3.35,
+      "text": "same content."
+    },
+    {
+      "index": 668,
+      "start": 2003.669,
+      "end": 2003.679,
+      "duration": 0.01,
+      "text": "Okay. So now there still remains the"
+    },
+    {
+      "index": 669,
+      "start": 2003.679,
+      "end": 2005.99,
+      "duration": 2.311,
+      "text": "question how do we compute this kind of"
+    },
+    {
+      "index": 670,
+      "start": 2006.0,
+      "end": 2008.63,
+      "duration": 2.63,
+      "text": "integral because it's more subtle than"
+    },
+    {
+      "index": 671,
+      "start": 2008.64,
+      "end": 2011.669,
+      "duration": 3.029,
+      "text": "the notation suggests right because m"
+    },
+    {
+      "index": 672,
+      "start": 2011.679,
+      "end": 2015.59,
+      "duration": 3.911,
+      "text": "and n both depend on x and y. And if you"
+    },
+    {
+      "index": 673,
+      "start": 2015.6,
+      "end": 2017.35,
+      "duration": 1.75,
+      "text": "just integrate it with respect to x"
+    },
+    {
+      "index": 674,
+      "start": 2017.36,
+      "end": 2020.31,
+      "duration": 2.95,
+      "text": "you'd be left with y's in there. And you"
+    },
+    {
+      "index": 675,
+      "start": 2020.32,
+      "end": 2021.669,
+      "duration": 1.349,
+      "text": "don't want to be left with y's. You want"
+    },
+    {
+      "index": 676,
+      "start": 2021.679,
+      "end": 2023.99,
+      "duration": 2.311,
+      "text": "a number at the end. And see the catch"
+    },
+    {
+      "index": 677,
+      "start": 2024.0,
+      "end": 2026.47,
+      "duration": 2.47,
+      "text": "is along the curve X and Y are actually"
+    },
+    {
+      "index": 678,
+      "start": 2026.48,
+      "end": 2030.789,
+      "duration": 4.309,
+      "text": "related to each other. So"
+    },
+    {
+      "index": 679,
+      "start": 2030.799,
+      "end": 2032.47,
+      "duration": 1.671,
+      "text": "whenever we write this we have two"
+    },
+    {
+      "index": 680,
+      "start": 2032.48,
+      "end": 2035.43,
+      "duration": 2.95,
+      "text": "variables X and Y but in fact along the"
+    },
+    {
+      "index": 681,
+      "start": 2035.44,
+      "end": 2039.11,
+      "duration": 3.67,
+      "text": "curve C we have only one parameter could"
+    },
+    {
+      "index": 682,
+      "start": 2039.12,
+      "end": 2042.07,
+      "duration": 2.95,
+      "text": "be X could be Y could be time whatever"
+    },
+    {
+      "index": 683,
+      "start": 2042.08,
+      "end": 2043.75,
+      "duration": 1.67,
+      "text": "you want but we have to actually express"
+    },
+    {
+      "index": 684,
+      "start": 2043.76,
+      "end": 2045.11,
+      "duration": 1.35,
+      "text": "everything in terms of that one"
+    },
+    {
+      "index": 685,
+      "start": 2045.12,
+      "end": 2048.31,
+      "duration": 3.19,
+      "text": "parameter and then we get a usual single"
+    },
+    {
+      "index": 686,
+      "start": 2048.32,
+      "end": 2050.869,
+      "duration": 2.549,
+      "text": "variable integral."
+    },
+    {
+      "index": 687,
+      "start": 2050.879,
+      "end": 2055.669,
+      "duration": 4.79,
+      "text": "Okay. So how do we evaluate things in"
+    },
+    {
+      "index": 688,
+      "start": 2055.679,
+      "end": 2058.31,
+      "duration": 2.631,
+      "text": "this language? Well, we do it by"
+    },
+    {
+      "index": 689,
+      "start": 2058.32,
+      "end": 2060.71,
+      "duration": 2.39,
+      "text": "substituting a parameter into"
+    },
+    {
+      "index": 690,
+      "start": 2060.72,
+      "end": 2088.149,
+      "duration": 27.429,
+      "text": "everything."
+    },
+    {
+      "index": 691,
+      "start": 2090.47,
+      "end": 2090.48,
+      "duration": 0.01,
+      "text": "Okay, so"
+    },
+    {
+      "index": 692,
+      "start": 2090.48,
+      "end": 2096.869,
+      "duration": 6.389,
+      "text": "the method to evaluate"
+    },
+    {
+      "index": 693,
+      "start": 2100.069,
+      "end": 2100.079,
+      "duration": 0.01,
+      "text": "is to express"
+    },
+    {
+      "index": 694,
+      "start": 2100.079,
+      "end": 2111.03,
+      "duration": 10.951,
+      "text": "X and Y in terms of a single variable."
+    },
+    {
+      "index": 695,
+      "start": 2113.19,
+      "end": 2113.2,
+      "duration": 0.01,
+      "text": "and then"
+    },
+    {
+      "index": 696,
+      "start": 2113.2,
+      "end": 2118.47,
+      "duration": 5.27,
+      "text": "substitute that variable."
+    },
+    {
+      "index": 697,
+      "start": 2121.67,
+      "end": 2121.68,
+      "duration": 0.01,
+      "text": "Okay, so let's for example redo the one"
+    },
+    {
+      "index": 698,
+      "start": 2121.68,
+      "end": 2124.23,
+      "duration": 2.55,
+      "text": "we had up there just using this new"
+    },
+    {
+      "index": 699,
+      "start": 2124.24,
+      "end": 2125.67,
+      "duration": 1.43,
+      "text": "notations. You'll see it's the same"
+    },
+    {
+      "index": 700,
+      "start": 2125.68,
+      "end": 2127.03,
+      "duration": 1.35,
+      "text": "calculation but with different"
+    },
+    {
+      "index": 701,
+      "start": 2127.04,
+      "end": 2128.79,
+      "duration": 1.75,
+      "text": "notations."
+    },
+    {
+      "index": 702,
+      "start": 2128.8,
+      "end": 2133.349,
+      "duration": 4.549,
+      "text": "So"
+    },
+    {
+      "index": 703,
+      "start": 2136.15,
+      "end": 2136.16,
+      "duration": 0.01,
+      "text": "in that example that we had"
+    },
+    {
+      "index": 704,
+      "start": 2136.16,
+      "end": 2139.91,
+      "duration": 3.75,
+      "text": "our vector field f"
+    },
+    {
+      "index": 705,
+      "start": 2139.92,
+      "end": 2141.589,
+      "duration": 1.669,
+      "text": "was"
+    },
+    {
+      "index": 706,
+      "start": 2141.599,
+      "end": 2145.67,
+      "duration": 4.071,
+      "text": "- y comma x. So what we're integrating"
+    },
+    {
+      "index": 707,
+      "start": 2145.68,
+      "end": 2147.91,
+      "duration": 2.23,
+      "text": "is - ydx"
+    },
+    {
+      "index": 708,
+      "start": 2147.92,
+      "end": 2151.67,
+      "duration": 3.75,
+      "text": "plus x dy."
+    },
+    {
+      "index": 709,
+      "start": 2153.75,
+      "end": 2153.76,
+      "duration": 0.01,
+      "text": "Okay."
+    },
+    {
+      "index": 710,
+      "start": 2153.76,
+      "end": 2155.829,
+      "duration": 2.069,
+      "text": "And see if we have just this we don't"
+    },
+    {
+      "index": 711,
+      "start": 2155.839,
+      "end": 2158.23,
+      "duration": 2.391,
+      "text": "know how to integrate that. I mean,"
+    },
+    {
+      "index": 712,
+      "start": 2158.24,
+      "end": 2159.99,
+      "duration": 1.75,
+      "text": "well, you could try to come up with like"
+    },
+    {
+      "index": 713,
+      "start": 2160.0,
+      "end": 2161.829,
+      "duration": 1.829,
+      "text": "negativexy or something like that, but"
+    },
+    {
+      "index": 714,
+      "start": 2161.839,
+      "end": 2163.27,
+      "duration": 1.431,
+      "text": "that actually doesn't make sense. It"
+    },
+    {
+      "index": 715,
+      "start": 2163.28,
+      "end": 2165.75,
+      "duration": 2.47,
+      "text": "doesn't work."
+    },
+    {
+      "index": 716,
+      "start": 2165.76,
+      "end": 2167.589,
+      "duration": 1.829,
+      "text": "So,"
+    },
+    {
+      "index": 717,
+      "start": 2167.599,
+      "end": 2169.829,
+      "duration": 2.23,
+      "text": "what we'll do"
+    },
+    {
+      "index": 718,
+      "start": 2169.839,
+      "end": 2172.55,
+      "duration": 2.711,
+      "text": "is we'll actually have to express"
+    },
+    {
+      "index": 719,
+      "start": 2172.56,
+      "end": 2176.23,
+      "duration": 3.67,
+      "text": "everything"
+    },
+    {
+      "index": 720,
+      "start": 2178.55,
+      "end": 2178.56,
+      "duration": 0.01,
+      "text": "in terms of a same variable because it's"
+    },
+    {
+      "index": 721,
+      "start": 2178.56,
+      "end": 2179.99,
+      "duration": 1.43,
+      "text": "a single integral. We should have only"
+    },
+    {
+      "index": 722,
+      "start": 2180.0,
+      "end": 2182.15,
+      "duration": 2.15,
+      "text": "one variable."
+    },
+    {
+      "index": 723,
+      "start": 2182.16,
+      "end": 2184.31,
+      "duration": 2.15,
+      "text": "and what that variable will be. Well, if"
+    },
+    {
+      "index": 724,
+      "start": 2184.32,
+      "end": 2185.91,
+      "duration": 1.59,
+      "text": "we just do it the same way, that would"
+    },
+    {
+      "index": 725,
+      "start": 2185.92,
+      "end": 2189.67,
+      "duration": 3.75,
+      "text": "just be T."
+    },
+    {
+      "index": 726,
+      "start": 2191.109,
+      "end": 2191.119,
+      "duration": 0.01,
+      "text": "So, how do we express everything in"
+    },
+    {
+      "index": 727,
+      "start": 2191.119,
+      "end": 2194.47,
+      "duration": 3.351,
+      "text": "terms of t?"
+    },
+    {
+      "index": 728,
+      "start": 2196.87,
+      "end": 2196.88,
+      "duration": 0.01,
+      "text": "Well, we use the parametric equation. We"
+    },
+    {
+      "index": 729,
+      "start": 2196.88,
+      "end": 2203.67,
+      "duration": 6.79,
+      "text": "know that x is t and y is t ^2."
+    },
+    {
+      "index": 730,
+      "start": 2203.68,
+      "end": 2205.99,
+      "duration": 2.31,
+      "text": "Okay, so we know what to do with these"
+    },
+    {
+      "index": 731,
+      "start": 2206.0,
+      "end": 2208.55,
+      "duration": 2.55,
+      "text": "two guys. What about dx and dy? Well,"
+    },
+    {
+      "index": 732,
+      "start": 2208.56,
+      "end": 2211.19,
+      "duration": 2.63,
+      "text": "it's easy. We just differentiate."
+    },
+    {
+      "index": 733,
+      "start": 2211.2,
+      "end": 2213.589,
+      "duration": 2.389,
+      "text": "dx becomes dt."
+    },
+    {
+      "index": 734,
+      "start": 2213.599,
+      "end": 2220.31,
+      "duration": 6.711,
+      "text": "dy becomes 2t dt."
+    },
+    {
+      "index": 735,
+      "start": 2222.069,
+      "end": 2222.079,
+      "duration": 0.01,
+      "text": "Okay, I'm just saying in a different"
+    },
+    {
+      "index": 736,
+      "start": 2222.079,
+      "end": 2223.99,
+      "duration": 1.911,
+      "text": "language what I said over there with"
+    },
+    {
+      "index": 737,
+      "start": 2224.0,
+      "end": 2226.95,
+      "duration": 2.95,
+      "text": "dxdt equals 1, dydt equals 2t. It's the"
+    },
+    {
+      "index": 738,
+      "start": 2226.96,
+      "end": 2229.589,
+      "duration": 2.629,
+      "text": "same thing but written slightly"
+    },
+    {
+      "index": 739,
+      "start": 2229.599,
+      "end": 2231.51,
+      "duration": 1.911,
+      "text": "differently."
+    },
+    {
+      "index": 740,
+      "start": 2231.52,
+      "end": 2234.55,
+      "duration": 3.03,
+      "text": "So now,"
+    },
+    {
+      "index": 741,
+      "start": 2234.56,
+      "end": 2236.79,
+      "duration": 2.23,
+      "text": "so I'm going to do it again. Um I'm"
+    },
+    {
+      "index": 742,
+      "start": 2236.8,
+      "end": 2238.79,
+      "duration": 1.99,
+      "text": "going to switch from one bot to the next"
+    },
+    {
+      "index": 743,
+      "start": 2238.8,
+      "end": 2240.31,
+      "duration": 1.51,
+      "text": "one."
+    },
+    {
+      "index": 744,
+      "start": 2240.32,
+      "end": 2245.27,
+      "duration": 4.95,
+      "text": "My integral becomes the integral / c of"
+    },
+    {
+      "index": 745,
+      "start": 2245.28,
+      "end": 2249.91,
+      "duration": 4.63,
+      "text": "- y is minus t ^2 dt"
+    },
+    {
+      "index": 746,
+      "start": 2249.92,
+      "end": 2257.19,
+      "duration": 7.27,
+      "text": "plus x is t * dy is 2t dt."
+    },
+    {
+      "index": 747,
+      "start": 2257.2,
+      "end": 2259.03,
+      "duration": 1.83,
+      "text": "Okay."
+    },
+    {
+      "index": 748,
+      "start": 2259.04,
+      "end": 2262.31,
+      "duration": 3.27,
+      "text": "And now that I have only t left, it's"
+    },
+    {
+      "index": 749,
+      "start": 2262.32,
+      "end": 2265.27,
+      "duration": 2.95,
+      "text": "fine to say, oh, I have a usual single"
+    },
+    {
+      "index": 750,
+      "start": 2265.28,
+      "end": 2268.47,
+      "duration": 3.19,
+      "text": "variable integral over a variable t that"
+    },
+    {
+      "index": 751,
+      "start": 2268.48,
+      "end": 2271.19,
+      "duration": 2.71,
+      "text": "goes from 0 to one. So now I can say"
+    },
+    {
+      "index": 752,
+      "start": 2271.2,
+      "end": 2275.03,
+      "duration": 3.83,
+      "text": "yes, this is the integral from 0 to 1 of"
+    },
+    {
+      "index": 753,
+      "start": 2275.04,
+      "end": 2276.95,
+      "duration": 1.91,
+      "text": "that stuff. Well, I can simplify a bit"
+    },
+    {
+      "index": 754,
+      "start": 2276.96,
+      "end": 2281.19,
+      "duration": 4.23,
+      "text": "becomes just t ^2 dt and I can compute"
+    },
+    {
+      "index": 755,
+      "start": 2281.2,
+      "end": 2284.15,
+      "duration": 2.95,
+      "text": "it."
+    },
+    {
+      "index": 756,
+      "start": 2284.16,
+      "end": 2286.47,
+      "duration": 2.31,
+      "text": "Uh I have negative t ^2 and then I have"
+    },
+    {
+      "index": 757,
+      "start": 2286.48,
+      "end": 2288.55,
+      "duration": 2.07,
+      "text": "plus 2 t^2. So I end up with positive"
+    },
+    {
+      "index": 758,
+      "start": 2288.56,
+      "end": 2290.63,
+      "duration": 2.07,
+      "text": "t^2."
+    },
+    {
+      "index": 759,
+      "start": 2290.64,
+      "end": 2296.87,
+      "duration": 6.23,
+      "text": "Okay, it's the same as up there."
+    },
+    {
+      "index": 760,
+      "start": 2300.23,
+      "end": 2300.24,
+      "duration": 0.01,
+      "text": "Okay, any questions?"
+    },
+    {
+      "index": 761,
+      "start": 2300.24,
+      "end": 2307.75,
+      "duration": 7.51,
+      "text": "Yes."
+    },
+    {
+      "index": 762,
+      "start": 2309.91,
+      "end": 2309.92,
+      "duration": 0.01,
+      "text": "Uh when no when when you do dy so what"
+    },
+    {
+      "index": 763,
+      "start": 2309.92,
+      "end": 2312.79,
+      "duration": 2.87,
+      "text": "is dy? dy is the derivative of y. It's"
+    },
+    {
+      "index": 764,
+      "start": 2312.8,
+      "end": 2315.19,
+      "duration": 2.39,
+      "text": "the differential of y. y is t ^2. So I"
+    },
+    {
+      "index": 765,
+      "start": 2315.2,
+      "end": 2319.75,
+      "duration": 4.55,
+      "text": "get 2t ddt. Okay, so I plug dt for dx, I"
+    },
+    {
+      "index": 766,
+      "start": 2319.76,
+      "end": 2325.67,
+      "duration": 5.91,
+      "text": "plug 2tdt for dy and so on."
+    },
+    {
+      "index": 767,
+      "start": 2329.349,
+      "end": 2329.359,
+      "duration": 0.01,
+      "text": "Okay, and that's the general method. So"
+    },
+    {
+      "index": 768,
+      "start": 2329.359,
+      "end": 2331.67,
+      "duration": 2.311,
+      "text": "if you are given a curve, then you first"
+    },
+    {
+      "index": 769,
+      "start": 2331.68,
+      "end": 2334.31,
+      "duration": 2.63,
+      "text": "have to figure out how do you express x"
+    },
+    {
+      "index": 770,
+      "start": 2334.32,
+      "end": 2337.19,
+      "duration": 2.87,
+      "text": "and y in terms of the same thing."
+    },
+    {
+      "index": 771,
+      "start": 2337.2,
+      "end": 2339.27,
+      "duration": 2.07,
+      "text": "And you get to choose in general what"
+    },
+    {
+      "index": 772,
+      "start": 2339.28,
+      "end": 2341.19,
+      "duration": 1.91,
+      "text": "parameter we use. Okay, you choose to"
+    },
+    {
+      "index": 773,
+      "start": 2341.2,
+      "end": 2342.79,
+      "duration": 1.59,
+      "text": "parameterize your curve in whatever way"
+    },
+    {
+      "index": 774,
+      "start": 2342.8,
+      "end": 2353.43,
+      "duration": 10.63,
+      "text": "you want. So"
+    },
+    {
+      "index": 775,
+      "start": 2363.75,
+      "end": 2363.76,
+      "duration": 0.01,
+      "text": "this line integral depends"
+    },
+    {
+      "index": 776,
+      "start": 2363.76,
+      "end": 2369.43,
+      "duration": 5.67,
+      "text": "on the trajectory"
+    },
+    {
+      "index": 777,
+      "start": 2372.63,
+      "end": 2372.64,
+      "duration": 0.01,
+      "text": "C but not"
+    },
+    {
+      "index": 778,
+      "start": 2372.64,
+      "end": 2380.31,
+      "duration": 7.67,
+      "text": "on the parameter. ization."
+    },
+    {
+      "index": 779,
+      "start": 2382.069,
+      "end": 2382.079,
+      "duration": 0.01,
+      "text": "Okay. So you can choose whichever"
+    },
+    {
+      "index": 780,
+      "start": 2382.079,
+      "end": 2386.15,
+      "duration": 4.071,
+      "text": "variable you want. So for example"
+    },
+    {
+      "index": 781,
+      "start": 2386.16,
+      "end": 2389.349,
+      "duration": 3.189,
+      "text": "what you could do"
+    },
+    {
+      "index": 782,
+      "start": 2389.359,
+      "end": 2391.19,
+      "duration": 1.831,
+      "text": "is you know when you know that you have"
+    },
+    {
+      "index": 783,
+      "start": 2391.2,
+      "end": 2393.43,
+      "duration": 2.23,
+      "text": "that trajectory you could also choose to"
+    },
+    {
+      "index": 784,
+      "start": 2393.44,
+      "end": 2396.55,
+      "duration": 3.11,
+      "text": "parameterize it as x="
+    },
+    {
+      "index": 785,
+      "start": 2396.56,
+      "end": 2401.43,
+      "duration": 4.87,
+      "text": "say I don't know x= sin theta and y ="
+    },
+    {
+      "index": 786,
+      "start": 2401.44,
+      "end": 2405.589,
+      "duration": 4.149,
+      "text": "sin square theta because y is x^2 where"
+    },
+    {
+      "index": 787,
+      "start": 2405.599,
+      "end": 2409.75,
+      "duration": 4.151,
+      "text": "theta goes from 0 to pi / 2 and then you"
+    },
+    {
+      "index": 788,
+      "start": 2409.76,
+      "end": 2413.27,
+      "duration": 3.51,
+      "text": "could get dx and dy in terms of d theta"
+    },
+    {
+      "index": 789,
+      "start": 2413.28,
+      "end": 2416.069,
+      "duration": 2.789,
+      "text": "and you'd be able to do it with a lot of"
+    },
+    {
+      "index": 790,
+      "start": 2416.079,
+      "end": 2418.79,
+      "duration": 2.711,
+      "text": "trig and you would get the same answer."
+    },
+    {
+      "index": 791,
+      "start": 2418.8,
+      "end": 2420.39,
+      "duration": 1.59,
+      "text": "So that would be a harder way to get the"
+    },
+    {
+      "index": 792,
+      "start": 2420.4,
+      "end": 2423.99,
+      "duration": 3.59,
+      "text": "same thing. Okay. So what you should do"
+    },
+    {
+      "index": 793,
+      "start": 2424.0,
+      "end": 2426.47,
+      "duration": 2.47,
+      "text": "in practice is use you know the most"
+    },
+    {
+      "index": 794,
+      "start": 2426.48,
+      "end": 2429.19,
+      "duration": 2.71,
+      "text": "reasonable way to parameterize your your"
+    },
+    {
+      "index": 795,
+      "start": 2429.2,
+      "end": 2430.95,
+      "duration": 1.75,
+      "text": "curve. If you know that here you have a"
+    },
+    {
+      "index": 796,
+      "start": 2430.96,
+      "end": 2433.67,
+      "duration": 2.71,
+      "text": "piece of parabola y= x^2 there's no way"
+    },
+    {
+      "index": 797,
+      "start": 2433.68,
+      "end": 2436.47,
+      "duration": 2.79,
+      "text": "you will put s and sin^ squ. You know"
+    },
+    {
+      "index": 798,
+      "start": 2436.48,
+      "end": 2439.27,
+      "duration": 2.79,
+      "text": "you could set I mean x= t y= t square is"
+    },
+    {
+      "index": 799,
+      "start": 2439.28,
+      "end": 2441.27,
+      "duration": 1.99,
+      "text": "very reasonable. You can even take a"
+    },
+    {
+      "index": 800,
+      "start": 2441.28,
+      "end": 2442.79,
+      "duration": 1.51,
+      "text": "small shortcut and say that your"
+    },
+    {
+      "index": 801,
+      "start": 2442.8,
+      "end": 2445.829,
+      "duration": 3.029,
+      "text": "variable will be just x. So that means x"
+    },
+    {
+      "index": 802,
+      "start": 2445.839,
+      "end": 2448.31,
+      "duration": 2.471,
+      "text": "you just keep it you know as it is and"
+    },
+    {
+      "index": 803,
+      "start": 2448.32,
+      "end": 2452.63,
+      "duration": 4.31,
+      "text": "then when you have y you set y = x^2 d y"
+    },
+    {
+      "index": 804,
+      "start": 2452.64,
+      "end": 2454.71,
+      "duration": 2.07,
+      "text": "= 2x dx and then you have an integral"
+    },
+    {
+      "index": 805,
+      "start": 2454.72,
+      "end": 2459.589,
+      "duration": 4.869,
+      "text": "over x that works."
+    },
+    {
+      "index": 806,
+      "start": 2462.71,
+      "end": 2462.72,
+      "duration": 0.01,
+      "text": "Okay. So this one is"
+    },
+    {
+      "index": 807,
+      "start": 2462.72,
+      "end": 2468.95,
+      "duration": 6.23,
+      "text": "not practical"
+    },
+    {
+      "index": 808,
+      "start": 2470.15,
+      "end": 2470.16,
+      "duration": 0.01,
+      "text": "but"
+    },
+    {
+      "index": 809,
+      "start": 2470.16,
+      "end": 2498.63,
+      "duration": 28.47,
+      "text": "You know, you get to choose."
+    },
+    {
+      "index": 810,
+      "start": 2506.23,
+      "end": 2506.24,
+      "duration": 0.01,
+      "text": "So now let me tell you a bit more about"
+    },
+    {
+      "index": 811,
+      "start": 2506.24,
+      "end": 2509.829,
+      "duration": 3.589,
+      "text": "the geometry."
+    },
+    {
+      "index": 812,
+      "start": 2511.75,
+      "end": 2511.76,
+      "duration": 0.01,
+      "text": "So"
+    },
+    {
+      "index": 813,
+      "start": 2511.76,
+      "end": 2514.55,
+      "duration": 2.79,
+      "text": "we've said"
+    },
+    {
+      "index": 814,
+      "start": 2514.56,
+      "end": 2516.309,
+      "duration": 1.749,
+      "text": "you know here's how we compute it in"
+    },
+    {
+      "index": 815,
+      "start": 2516.319,
+      "end": 2517.75,
+      "duration": 1.431,
+      "text": "general and that's the general method"
+    },
+    {
+      "index": 816,
+      "start": 2517.76,
+      "end": 2519.75,
+      "duration": 1.99,
+      "text": "for computing a line integral for work."
+    },
+    {
+      "index": 817,
+      "start": 2519.76,
+      "end": 2522.47,
+      "duration": 2.71,
+      "text": "You can always do this. Try to find a"
+    },
+    {
+      "index": 818,
+      "start": 2522.48,
+      "end": 2524.63,
+      "duration": 2.15,
+      "text": "parameter the simplest one express"
+    },
+    {
+      "index": 819,
+      "start": 2524.64,
+      "end": 2526.55,
+      "duration": 1.91,
+      "text": "everything in terms of that variable and"
+    },
+    {
+      "index": 820,
+      "start": 2526.56,
+      "end": 2528.79,
+      "duration": 2.23,
+      "text": "then you have an integral to compute."
+    },
+    {
+      "index": 821,
+      "start": 2528.8,
+      "end": 2530.95,
+      "duration": 2.15,
+      "text": "But sometimes you can actually save a"
+    },
+    {
+      "index": 822,
+      "start": 2530.96,
+      "end": 2532.23,
+      "duration": 1.27,
+      "text": "lot of work by just thinking"
+    },
+    {
+      "index": 823,
+      "start": 2532.24,
+      "end": 2535.67,
+      "duration": 3.43,
+      "text": "geometrically about what this all does."
+    },
+    {
+      "index": 824,
+      "start": 2535.68,
+      "end": 2539.27,
+      "duration": 3.59,
+      "text": "Okay. So let me tell you about"
+    },
+    {
+      "index": 825,
+      "start": 2539.28,
+      "end": 2541.19,
+      "duration": 1.91,
+      "text": "the geometric"
+    },
+    {
+      "index": 826,
+      "start": 2541.2,
+      "end": 2546.069,
+      "duration": 4.869,
+      "text": "approach."
+    },
+    {
+      "index": 827,
+      "start": 2548.87,
+      "end": 2548.88,
+      "duration": 0.01,
+      "text": "So so"
+    },
+    {
+      "index": 828,
+      "start": 2548.88,
+      "end": 2551.43,
+      "duration": 2.55,
+      "text": "one thing I want to remind you of first"
+    },
+    {
+      "index": 829,
+      "start": 2551.44,
+      "end": 2555.829,
+      "duration": 4.389,
+      "text": "is what is this vector dr? Well what is"
+    },
+    {
+      "index": 830,
+      "start": 2555.839,
+      "end": 2558.309,
+      "duration": 2.47,
+      "text": "vector delta r?"
+    },
+    {
+      "index": 831,
+      "start": 2558.319,
+      "end": 2559.99,
+      "duration": 1.671,
+      "text": "You know if I take a very small piece of"
+    },
+    {
+      "index": 832,
+      "start": 2560.0,
+      "end": 2561.829,
+      "duration": 1.829,
+      "text": "a trajectory"
+    },
+    {
+      "index": 833,
+      "start": 2561.839,
+      "end": 2564.71,
+      "duration": 2.871,
+      "text": "then my vector delta r will be tangent"
+    },
+    {
+      "index": 834,
+      "start": 2564.72,
+      "end": 2567.03,
+      "duration": 2.31,
+      "text": "to the trajectory."
+    },
+    {
+      "index": 835,
+      "start": 2567.04,
+      "end": 2569.43,
+      "duration": 2.39,
+      "text": "So it will be going in the same"
+    },
+    {
+      "index": 836,
+      "start": 2569.44,
+      "end": 2573.829,
+      "duration": 4.389,
+      "text": "direction as the unit tangent vector t."
+    },
+    {
+      "index": 837,
+      "start": 2573.839,
+      "end": 2577.27,
+      "duration": 3.431,
+      "text": "And what is its length? Well, its length"
+    },
+    {
+      "index": 838,
+      "start": 2577.28,
+      "end": 2579.829,
+      "duration": 2.549,
+      "text": "is the arc length along the trajectory"
+    },
+    {
+      "index": 839,
+      "start": 2579.839,
+      "end": 2582.55,
+      "duration": 2.711,
+      "text": "which is what we called delta s."
+    },
+    {
+      "index": 840,
+      "start": 2582.56,
+      "end": 2584.47,
+      "duration": 1.91,
+      "text": "Remember s was distance along the"
+    },
+    {
+      "index": 841,
+      "start": 2584.48,
+      "end": 2586.63,
+      "duration": 2.15,
+      "text": "trajectory."
+    },
+    {
+      "index": 842,
+      "start": 2586.64,
+      "end": 2588.63,
+      "duration": 1.99,
+      "text": "So"
+    },
+    {
+      "index": 843,
+      "start": 2588.64,
+      "end": 2592.47,
+      "duration": 3.83,
+      "text": "we can write vector dr. So we said it's"
+    },
+    {
+      "index": 844,
+      "start": 2592.48,
+      "end": 2602.069,
+      "duration": 9.589,
+      "text": "dx comma dy but that's also t * ds."
+    },
+    {
+      "index": 845,
+      "start": 2605.43,
+      "end": 2605.44,
+      "duration": 0.01,
+      "text": "It's a vector whose direction is tangent"
+    },
+    {
+      "index": 846,
+      "start": 2605.44,
+      "end": 2607.75,
+      "duration": 2.31,
+      "text": "to the curve and whose length element is"
+    },
+    {
+      "index": 847,
+      "start": 2607.76,
+      "end": 2611.51,
+      "duration": 3.75,
+      "text": "actually the arklength element."
+    },
+    {
+      "index": 848,
+      "start": 2611.52,
+      "end": 2613.589,
+      "duration": 2.069,
+      "text": "I mean if you you know if you don't like"
+    },
+    {
+      "index": 849,
+      "start": 2613.599,
+      "end": 2618.63,
+      "duration": 5.031,
+      "text": "this notation think about"
+    },
+    {
+      "index": 850,
+      "start": 2621.43,
+      "end": 2621.44,
+      "duration": 0.01,
+      "text": "divide everything by dt"
+    },
+    {
+      "index": 851,
+      "start": 2621.44,
+      "end": 2623.75,
+      "duration": 2.31,
+      "text": "then what we're saying is d rdt that's a"
+    },
+    {
+      "index": 852,
+      "start": 2623.76,
+      "end": 2626.39,
+      "duration": 2.63,
+      "text": "velocity vector while in coordinates the"
+    },
+    {
+      "index": 853,
+      "start": 2626.4,
+      "end": 2629.03,
+      "duration": 2.63,
+      "text": "velocity vector is dxdt"
+    },
+    {
+      "index": 854,
+      "start": 2629.04,
+      "end": 2631.109,
+      "duration": 2.069,
+      "text": "dydt"
+    },
+    {
+      "index": 855,
+      "start": 2631.119,
+      "end": 2633.67,
+      "duration": 2.551,
+      "text": "but more geometrically"
+    },
+    {
+      "index": 856,
+      "start": 2633.68,
+      "end": 2635.589,
+      "duration": 1.909,
+      "text": "the direction of a velocity vector is"
+    },
+    {
+      "index": 857,
+      "start": 2635.599,
+      "end": 2637.589,
+      "duration": 1.99,
+      "text": "tangent to the trajectory and its"
+    },
+    {
+      "index": 858,
+      "start": 2637.599,
+      "end": 2645.27,
+      "duration": 7.671,
+      "text": "magnitude is speed dst."
+    },
+    {
+      "index": 859,
+      "start": 2653.829,
+      "end": 2653.839,
+      "duration": 0.01,
+      "text": "Okay, so"
+    },
+    {
+      "index": 860,
+      "start": 2653.839,
+      "end": 2657.43,
+      "duration": 3.591,
+      "text": "if I say this, that means"
+    },
+    {
+      "index": 861,
+      "start": 2657.44,
+      "end": 2661.91,
+      "duration": 4.47,
+      "text": "that my line integral"
+    },
+    {
+      "index": 862,
+      "start": 2664.15,
+      "end": 2664.16,
+      "duration": 0.01,
+      "text": "f"
+    },
+    {
+      "index": 863,
+      "start": 2664.16,
+      "end": 2666.63,
+      "duration": 2.47,
+      "text": "well I said I can write it as integral"
+    },
+    {
+      "index": 864,
+      "start": 2666.64,
+      "end": 2668.95,
+      "duration": 2.31,
+      "text": "of m dx plus n dy. That's what's that's"
+    },
+    {
+      "index": 865,
+      "start": 2668.96,
+      "end": 2670.39,
+      "duration": 1.43,
+      "text": "what I will do if I want to actually"
+    },
+    {
+      "index": 866,
+      "start": 2670.4,
+      "end": 2673.19,
+      "duration": 2.79,
+      "text": "compute it by computing the integral."
+    },
+    {
+      "index": 867,
+      "start": 2673.2,
+      "end": 2674.63,
+      "duration": 1.43,
+      "text": "But if instead I want to think about it"
+    },
+    {
+      "index": 868,
+      "start": 2674.64,
+      "end": 2679.03,
+      "duration": 4.39,
+      "text": "geometrically, I could rewrite it as ft"
+    },
+    {
+      "index": 869,
+      "start": 2679.04,
+      "end": 2682.95,
+      "duration": 3.91,
+      "text": "ds."
+    },
+    {
+      "index": 870,
+      "start": 2684.79,
+      "end": 2684.8,
+      "duration": 0.01,
+      "text": "Okay. So now you can think of this you"
+    },
+    {
+      "index": 871,
+      "start": 2684.8,
+      "end": 2687.67,
+      "duration": 2.87,
+      "text": "know ft t is a scalar quantity. It's the"
+    },
+    {
+      "index": 872,
+      "start": 2687.68,
+      "end": 2691.51,
+      "duration": 3.83,
+      "text": "tangent component of my force. So I take"
+    },
+    {
+      "index": 873,
+      "start": 2691.52,
+      "end": 2693.75,
+      "duration": 2.23,
+      "text": "my force and I project it to the tangent"
+    },
+    {
+      "index": 874,
+      "start": 2693.76,
+      "end": 2695.91,
+      "duration": 2.15,
+      "text": "direction to the trajectory and then I"
+    },
+    {
+      "index": 875,
+      "start": 2695.92,
+      "end": 2699.99,
+      "duration": 4.07,
+      "text": "integrate that along the curve."
+    },
+    {
+      "index": 876,
+      "start": 2700.0,
+      "end": 2704.309,
+      "duration": 4.309,
+      "text": "It's still the same thing."
+    },
+    {
+      "index": 877,
+      "start": 2706.069,
+      "end": 2706.079,
+      "duration": 0.01,
+      "text": "And sometimes it's easier to do it this"
+    },
+    {
+      "index": 878,
+      "start": 2706.079,
+      "end": 2711.75,
+      "duration": 5.671,
+      "text": "way. So here's an example."
+    },
+    {
+      "index": 879,
+      "start": 2714.23,
+      "end": 2714.24,
+      "duration": 0.01,
+      "text": "Let's say so you know this is bound to"
+    },
+    {
+      "index": 880,
+      "start": 2714.24,
+      "end": 2716.55,
+      "duration": 2.31,
+      "text": "be easier only when the field and the"
+    },
+    {
+      "index": 881,
+      "start": 2716.56,
+      "end": 2718.63,
+      "duration": 2.07,
+      "text": "curve are relatively simple and have a"
+    },
+    {
+      "index": 882,
+      "start": 2718.64,
+      "end": 2720.15,
+      "duration": 1.51,
+      "text": "geometric relation to each other. you"
+    },
+    {
+      "index": 883,
+      "start": 2720.16,
+      "end": 2721.51,
+      "duration": 1.35,
+      "text": "know, if I give you an evil formula"
+    },
+    {
+      "index": 884,
+      "start": 2721.52,
+      "end": 2725.589,
+      "duration": 4.069,
+      "text": "with, you know, x cub + y to the 5th or"
+    },
+    {
+      "index": 885,
+      "start": 2725.599,
+      "end": 2727.109,
+      "duration": 1.51,
+      "text": "whatever, there's very little chance"
+    },
+    {
+      "index": 886,
+      "start": 2727.119,
+      "end": 2728.71,
+      "duration": 1.591,
+      "text": "that you will be able to simplify it"
+    },
+    {
+      "index": 887,
+      "start": 2728.72,
+      "end": 2732.309,
+      "duration": 3.589,
+      "text": "that way. But let's say that I'm doing"
+    },
+    {
+      "index": 888,
+      "start": 2732.319,
+      "end": 2735.67,
+      "duration": 3.351,
+      "text": "say my trajectory is just a circle of"
+    },
+    {
+      "index": 889,
+      "start": 2735.68,
+      "end": 2738.71,
+      "duration": 3.03,
+      "text": "radius a"
+    },
+    {
+      "index": 890,
+      "start": 2738.72,
+      "end": 2741.91,
+      "duration": 3.19,
+      "text": "centered at the origin."
+    },
+    {
+      "index": 891,
+      "start": 2741.92,
+      "end": 2742.87,
+      "duration": 0.95,
+      "text": "Let's say I'm doing that"
+    },
+    {
+      "index": 892,
+      "start": 2742.88,
+      "end": 2749.91,
+      "duration": 7.03,
+      "text": "counterclockwise."
+    },
+    {
+      "index": 893,
+      "start": 2753.75,
+      "end": 2753.76,
+      "duration": 0.01,
+      "text": "And let's say that my vector field"
+    },
+    {
+      "index": 894,
+      "start": 2753.76,
+      "end": 2757.43,
+      "duration": 3.67,
+      "text": "is x i + yj."
+    },
+    {
+      "index": 895,
+      "start": 2757.44,
+      "end": 2760.63,
+      "duration": 3.19,
+      "text": "Okay. So what does that look like?"
+    },
+    {
+      "index": 896,
+      "start": 2760.64,
+      "end": 2762.309,
+      "duration": 1.669,
+      "text": "Well,"
+    },
+    {
+      "index": 897,
+      "start": 2762.319,
+      "end": 2767.03,
+      "duration": 4.711,
+      "text": "so my trajectory is just this circle."
+    },
+    {
+      "index": 898,
+      "start": 2767.04,
+      "end": 2769.67,
+      "duration": 2.63,
+      "text": "My vector field, remember x i plus y,"
+    },
+    {
+      "index": 899,
+      "start": 2769.68,
+      "end": 2772.79,
+      "duration": 3.11,
+      "text": "that's the one that's pointing radially"
+    },
+    {
+      "index": 900,
+      "start": 2772.8,
+      "end": 2776.309,
+      "duration": 3.509,
+      "text": "from the origin."
+    },
+    {
+      "index": 901,
+      "start": 2777.99,
+      "end": 2778.0,
+      "duration": 0.01,
+      "text": "So hopefully if you have good physics"
+    },
+    {
+      "index": 902,
+      "start": 2778.0,
+      "end": 2779.51,
+      "duration": 1.51,
+      "text": "intuition here, you already know what"
+    },
+    {
+      "index": 903,
+      "start": 2779.52,
+      "end": 2781.51,
+      "duration": 1.99,
+      "text": "the work is going to be, right? It's"
+    },
+    {
+      "index": 904,
+      "start": 2781.52,
+      "end": 2783.349,
+      "duration": 1.829,
+      "text": "going to be"
+    },
+    {
+      "index": 905,
+      "start": 2783.359,
+      "end": 2785.589,
+      "duration": 2.23,
+      "text": "zero because the force is perpendicular"
+    },
+    {
+      "index": 906,
+      "start": 2785.599,
+      "end": 2787.51,
+      "duration": 1.911,
+      "text": "to the motion."
+    },
+    {
+      "index": 907,
+      "start": 2787.52,
+      "end": 2793.67,
+      "duration": 6.15,
+      "text": "Well,"
+    },
+    {
+      "index": 908,
+      "start": 2795.829,
+      "end": 2795.839,
+      "duration": 0.01,
+      "text": "now we can say it directly by saying"
+    },
+    {
+      "index": 909,
+      "start": 2795.839,
+      "end": 2798.95,
+      "duration": 3.111,
+      "text": "well if we take any point of a circle"
+    },
+    {
+      "index": 910,
+      "start": 2798.96,
+      "end": 2800.87,
+      "duration": 1.91,
+      "text": "sorry"
+    },
+    {
+      "index": 911,
+      "start": 2800.88,
+      "end": 2802.39,
+      "duration": 1.51,
+      "text": "so you know if you have any point of a"
+    },
+    {
+      "index": 912,
+      "start": 2802.4,
+      "end": 2805.67,
+      "duration": 3.27,
+      "text": "circle then the tangent vector"
+    },
+    {
+      "index": 913,
+      "start": 2805.68,
+      "end": 2809.67,
+      "duration": 3.99,
+      "text": "to the circle will be tangent well it's"
+    },
+    {
+      "index": 914,
+      "start": 2809.68,
+      "end": 2812.15,
+      "duration": 2.47,
+      "text": "tangent to the circle so that means it's"
+    },
+    {
+      "index": 915,
+      "start": 2812.16,
+      "end": 2815.27,
+      "duration": 3.11,
+      "text": "perpendicular to the radial direction"
+    },
+    {
+      "index": 916,
+      "start": 2815.28,
+      "end": 2818.79,
+      "duration": 3.51,
+      "text": "while the force is pointing"
+    },
+    {
+      "index": 917,
+      "start": 2818.8,
+      "end": 2821.349,
+      "duration": 2.549,
+      "text": "in the radial direction. So you have a"
+    },
+    {
+      "index": 918,
+      "start": 2821.359,
+      "end": 2827.589,
+      "duration": 6.23,
+      "text": "right angle between them."
+    },
+    {
+      "index": 919,
+      "start": 2829.19,
+      "end": 2829.2,
+      "duration": 0.01,
+      "text": "So"
+    },
+    {
+      "index": 920,
+      "start": 2829.2,
+      "end": 2832.47,
+      "duration": 3.27,
+      "text": "f is perpendicular to t."
+    },
+    {
+      "index": 921,
+      "start": 2832.48,
+      "end": 2837.19,
+      "duration": 4.71,
+      "text": "So f t is zero. And the line integral of"
+    },
+    {
+      "index": 922,
+      "start": 2837.2,
+      "end": 2842.069,
+      "duration": 4.869,
+      "text": "ft t ds is just zero."
+    },
+    {
+      "index": 923,
+      "start": 2842.079,
+      "end": 2845.43,
+      "duration": 3.351,
+      "text": "See that's much easier than writing well"
+    },
+    {
+      "index": 924,
+      "start": 2845.44,
+      "end": 2848.63,
+      "duration": 3.19,
+      "text": "this is integral of x dx + y d y what do"
+    },
+    {
+      "index": 925,
+      "start": 2848.64,
+      "end": 2851.03,
+      "duration": 2.39,
+      "text": "we do? Well we probably we set x= a"
+    },
+    {
+      "index": 926,
+      "start": 2851.04,
+      "end": 2853.829,
+      "duration": 2.789,
+      "text": "cosine theta y= a sin theta. We get a"
+    },
+    {
+      "index": 927,
+      "start": 2853.839,
+      "end": 2855.99,
+      "duration": 2.151,
+      "text": "bunch of trick things. Oh it cancels out"
+    },
+    {
+      "index": 928,
+      "start": 2856.0,
+      "end": 2858.95,
+      "duration": 2.95,
+      "text": "to zero. It's not much harder but we"
+    },
+    {
+      "index": 929,
+      "start": 2858.96,
+      "end": 2861.03,
+      "duration": 2.07,
+      "text": "saved time by not even thinking about"
+    },
+    {
+      "index": 930,
+      "start": 2861.04,
+      "end": 2864.71,
+      "duration": 3.67,
+      "text": "how to parameterize things."
+    },
+    {
+      "index": 931,
+      "start": 2864.72,
+      "end": 2866.95,
+      "duration": 2.23,
+      "text": "Let's just do a last one. That was first"
+    },
+    {
+      "index": 932,
+      "start": 2866.96,
+      "end": 2869.91,
+      "duration": 2.95,
+      "text": "one."
+    },
+    {
+      "index": 933,
+      "start": 2869.92,
+      "end": 2872.23,
+      "duration": 2.31,
+      "text": "Let's say now that I take the same curve"
+    },
+    {
+      "index": 934,
+      "start": 2872.24,
+      "end": 2875.589,
+      "duration": 3.349,
+      "text": "C,"
+    },
+    {
+      "index": 935,
+      "start": 2877.43,
+      "end": 2877.44,
+      "duration": 0.01,
+      "text": "but now my vector field is the one that"
+    },
+    {
+      "index": 936,
+      "start": 2877.44,
+      "end": 2880.47,
+      "duration": 3.03,
+      "text": "rotates"
+    },
+    {
+      "index": 937,
+      "start": 2883.829,
+      "end": 2883.839,
+      "duration": 0.01,
+      "text": "- Yi + XJ."
+    },
+    {
+      "index": 938,
+      "start": 2883.839,
+      "end": 2886.39,
+      "duration": 2.551,
+      "text": "Okay. So"
+    },
+    {
+      "index": 939,
+      "start": 2886.4,
+      "end": 2891.51,
+      "duration": 5.11,
+      "text": "that means"
+    },
+    {
+      "index": 940,
+      "start": 2899.91,
+      "end": 2899.92,
+      "duration": 0.01,
+      "text": "the tension vector goes like this"
+    },
+    {
+      "index": 941,
+      "start": 2899.92,
+      "end": 2905.67,
+      "duration": 5.75,
+      "text": "and my vector field is also going"
+    },
+    {
+      "index": 942,
+      "start": 2905.68,
+      "end": 2908.39,
+      "duration": 2.71,
+      "text": "around. So in fact at this point the"
+    },
+    {
+      "index": 943,
+      "start": 2908.4,
+      "end": 2911.19,
+      "duration": 2.79,
+      "text": "vector field will also be going in the"
+    },
+    {
+      "index": 944,
+      "start": 2911.2,
+      "end": 2915.19,
+      "duration": 3.99,
+      "text": "same direction."
+    },
+    {
+      "index": 945,
+      "start": 2918.47,
+      "end": 2918.48,
+      "duration": 0.01,
+      "text": "Okay, so now"
+    },
+    {
+      "index": 946,
+      "start": 2918.48,
+      "end": 2922.47,
+      "duration": 3.99,
+      "text": "F is actually parallel to the tangent"
+    },
+    {
+      "index": 947,
+      "start": 2922.48,
+      "end": 2927.19,
+      "duration": 4.71,
+      "text": "direction. So that means that the dot"
+    },
+    {
+      "index": 948,
+      "start": 2927.2,
+      "end": 2929.27,
+      "duration": 2.07,
+      "text": "product F dot T, remember that's the"
+    },
+    {
+      "index": 949,
+      "start": 2929.28,
+      "end": 2932.23,
+      "duration": 2.95,
+      "text": "component of F in this direction that"
+    },
+    {
+      "index": 950,
+      "start": 2932.24,
+      "end": 2935.67,
+      "duration": 3.43,
+      "text": "will be the same as the length of F,"
+    },
+    {
+      "index": 951,
+      "start": 2935.68,
+      "end": 2938.71,
+      "duration": 3.03,
+      "text": "right? But what's the length of F on"
+    },
+    {
+      "index": 952,
+      "start": 2938.72,
+      "end": 2942.309,
+      "duration": 3.589,
+      "text": "this circle if this radius is A? It's"
+    },
+    {
+      "index": 953,
+      "start": 2942.319,
+      "end": 2944.069,
+      "duration": 1.75,
+      "text": "just going to be a. That's what we said"
+    },
+    {
+      "index": 954,
+      "start": 2944.079,
+      "end": 2946.87,
+      "duration": 2.791,
+      "text": "earlier about this vector field."
+    },
+    {
+      "index": 955,
+      "start": 2946.88,
+      "end": 2949.99,
+      "duration": 3.11,
+      "text": "So at every point this dot product is a."
+    },
+    {
+      "index": 956,
+      "start": 2950.0,
+      "end": 2952.23,
+      "duration": 2.23,
+      "text": "Now we know how to integrate that quite"
+    },
+    {
+      "index": 957,
+      "start": 2952.24,
+      "end": 2965.109,
+      "duration": 12.869,
+      "text": "quickly"
+    },
+    {
+      "index": 958,
+      "start": 2967.27,
+      "end": 2967.28,
+      "duration": 0.01,
+      "text": "because that becomes the integral of a"
+    },
+    {
+      "index": 959,
+      "start": 2967.28,
+      "end": 2970.39,
+      "duration": 3.11,
+      "text": "ds. But a is a constant so we can take"
+    },
+    {
+      "index": 960,
+      "start": 2970.4,
+      "end": 2972.87,
+      "duration": 2.47,
+      "text": "it out. And now what do we get when we"
+    },
+    {
+      "index": 961,
+      "start": 2972.88,
+      "end": 2976.15,
+      "duration": 3.27,
+      "text": "integrate ds along c? Well, we should"
+    },
+    {
+      "index": 962,
+      "start": 2976.16,
+      "end": 2977.75,
+      "duration": 1.59,
+      "text": "get the total length of the curve."
+    },
+    {
+      "index": 963,
+      "start": 2977.76,
+      "end": 2979.43,
+      "duration": 1.67,
+      "text": "Right? If we sum all the little pieces"
+    },
+    {
+      "index": 964,
+      "start": 2979.44,
+      "end": 2984.39,
+      "duration": 4.95,
+      "text": "of arc length,"
+    },
+    {
+      "index": 965,
+      "start": 2986.069,
+      "end": 2986.079,
+      "duration": 0.01,
+      "text": "but we know that the length of a circle"
+    },
+    {
+      "index": 966,
+      "start": 2986.079,
+      "end": 2989.589,
+      "duration": 3.51,
+      "text": "of radius a is 2 pi a. So we get 2 pi a^"
+    },
+    {
+      "index": 967,
+      "start": 2989.599,
+      "end": 2992.309,
+      "duration": 2.71,
+      "text": "2."
+    },
+    {
+      "index": 968,
+      "start": 2992.319,
+      "end": 2996.87,
+      "duration": 4.551,
+      "text": "If we were to compute that"
+    },
+    {
+      "index": 969,
+      "start": 2999.349,
+      "end": 2999.359,
+      "duration": 0.01,
+      "text": "by hand,"
+    },
+    {
+      "index": 970,
+      "start": 2999.359,
+      "end": 3002.47,
+      "duration": 3.111,
+      "text": "well, what would we do? We'd set So, we"
+    },
+    {
+      "index": 971,
+      "start": 3002.48,
+      "end": 3004.71,
+      "duration": 2.23,
+      "text": "would be computing integral of minus y"
+    },
+    {
+      "index": 972,
+      "start": 3004.72,
+      "end": 3008.79,
+      "duration": 4.07,
+      "text": "dx + x d y. We'd probably set since"
+    },
+    {
+      "index": 973,
+      "start": 3008.8,
+      "end": 3013.03,
+      "duration": 4.23,
+      "text": "we're on a circle x= a cos theta y = a"
+    },
+    {
+      "index": 974,
+      "start": 3013.04,
+      "end": 3014.95,
+      "duration": 1.91,
+      "text": "sin theta"
+    },
+    {
+      "index": 975,
+      "start": 3014.96,
+      "end": 3018.47,
+      "duration": 3.51,
+      "text": "for theta between 0 and 2 pi."
+    },
+    {
+      "index": 976,
+      "start": 3018.48,
+      "end": 3021.27,
+      "duration": 2.79,
+      "text": "So then we would get dx and dy out of"
+    },
+    {
+      "index": 977,
+      "start": 3021.28,
+      "end": 3024.309,
+      "duration": 3.029,
+      "text": "these."
+    },
+    {
+      "index": 978,
+      "start": 3026.549,
+      "end": 3026.559,
+      "duration": 0.01,
+      "text": "So y is"
+    },
+    {
+      "index": 979,
+      "start": 3026.559,
+      "end": 3031.51,
+      "duration": 4.951,
+      "text": "a sin theta. dx is a sin theta d theta."
+    },
+    {
+      "index": 980,
+      "start": 3031.52,
+      "end": 3035.03,
+      "duration": 3.51,
+      "text": "If you differentiate a cosine plus a cos"
+    },
+    {
+      "index": 981,
+      "start": 3035.04,
+      "end": 3037.109,
+      "duration": 2.069,
+      "text": "theta"
+    },
+    {
+      "index": 982,
+      "start": 3037.119,
+      "end": 3040.39,
+      "duration": 3.271,
+      "text": "a cos theta d theta."
+    },
+    {
+      "index": 983,
+      "start": 3040.4,
+      "end": 3042.23,
+      "duration": 1.83,
+      "text": "Well, you'll just end up with integral"
+    },
+    {
+      "index": 984,
+      "start": 3042.24,
+      "end": 3047.03,
+      "duration": 4.79,
+      "text": "from 0 to 2 pi of a^ 2 * sin square"
+    },
+    {
+      "index": 985,
+      "start": 3047.04,
+      "end": 3051.75,
+      "duration": 4.71,
+      "text": "theta plus cosine square theta d theta"
+    },
+    {
+      "index": 986,
+      "start": 3051.76,
+      "end": 3053.91,
+      "duration": 2.15,
+      "text": "that becomes just one and you get the"
+    },
+    {
+      "index": 987,
+      "start": 3053.92,
+      "end": 3055.829,
+      "duration": 1.909,
+      "text": "same answer. It took about the same"
+    },
+    {
+      "index": 988,
+      "start": 3055.839,
+      "end": 3057.43,
+      "duration": 1.591,
+      "text": "amount of time because I did this one"
+    },
+    {
+      "index": 989,
+      "start": 3057.44,
+      "end": 3059.589,
+      "duration": 2.149,
+      "text": "rushing very quickly. Okay, but normally"
+    },
+    {
+      "index": 990,
+      "start": 3059.599,
+      "end": 3062.549,
+      "duration": 2.95,
+      "text": "it takes about you know at least twice"
+    },
+    {
+      "index": 991,
+      "start": 3062.559,
+      "end": 3063.99,
+      "duration": 1.431,
+      "text": "the amount of time to do it with a"
+    },
+    {
+      "index": 992,
+      "start": 3064.0,
+      "end": 3066.23,
+      "duration": 2.23,
+      "text": "calculation. So that tells you sometimes"
+    },
+    {
+      "index": 993,
+      "start": 3066.24,
+      "end": 3070.04,
+      "duration": 3.8,
+      "text": "it's worth thinking geometrically."
+    }
+  ],
+  "course": {
+    "category": "Mathematics",
+    "title": "Multivariable Calculus",
+    "source_url": "https://www.youtube.com/playlist?list=PL4C4C8A7D06566F38"
+  }
+}

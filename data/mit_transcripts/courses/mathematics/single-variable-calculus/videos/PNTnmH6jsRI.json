@@ -1,0 +1,5142 @@
+{
+  "video": {
+    "id": "PNTnmH6jsRI",
+    "title": "Lec 35 | MIT 18.01 Single Variable Calculus, Fall 2007",
+    "url": "https://www.youtube.com/watch?v=PNTnmH6jsRI",
+    "channel": "MIT OpenCourseWare",
+    "duration": 2923,
+    "language": "en"
+  },
+  "segment_count": 732,
+  "segments": [
+    {
+      "index": 0,
+      "start": 0.0,
+      "end": 2.23,
+      "duration": 2.23,
+      "text": "The following content is provided under a Creative"
+    },
+    {
+      "index": 1,
+      "start": 2.23,
+      "end": 2.65,
+      "duration": 0.42,
+      "text": "Commons license."
+    },
+    {
+      "index": 2,
+      "start": 2.65,
+      "end": 6.52,
+      "duration": 3.87,
+      "text": "Your support will help MIT OpenCourseWare continue to"
+    },
+    {
+      "index": 3,
+      "start": 6.52,
+      "end": 9.576,
+      "duration": 3.056,
+      "text": "offer high quality educational resources for free."
+    },
+    {
+      "index": 4,
+      "start": 9.576,
+      "end": 13.795,
+      "duration": 4.219,
+      "text": "To make a donation or to view additional materials from"
+    },
+    {
+      "index": 5,
+      "start": 13.795,
+      "end": 19.18,
+      "duration": 5.385,
+      "text": "hundreds of MIT courses, visit MIT OpenCourseWare at"
+    },
+    {
+      "index": 6,
+      "start": 19.18,
+      "end": 21.66,
+      "duration": 2.48,
+      "text": "ocw.mit.edu."
+    },
+    {
+      "index": 7,
+      "start": 21.66,
+      "end": 24.43,
+      "duration": 2.77,
+      "text": "PROFESSOR: So we're through with techniques of"
+    },
+    {
+      "index": 8,
+      "start": 24.43,
+      "end": 26.73,
+      "duration": 2.3,
+      "text": "integration, which is really the most technical thing that"
+    },
+    {
+      "index": 9,
+      "start": 26.73,
+      "end": 28.04,
+      "duration": 1.31,
+      "text": "we're going to be doing."
+    },
+    {
+      "index": 10,
+      "start": 28.04,
+      "end": 33.2,
+      "duration": 5.16,
+      "text": "And now we're just clearing up a few"
+    },
+    {
+      "index": 11,
+      "start": 33.2,
+      "end": 37.08,
+      "duration": 3.88,
+      "text": "loose ends about calculus."
+    },
+    {
+      "index": 12,
+      "start": 37.08,
+      "end": 40.81,
+      "duration": 3.73,
+      "text": "And the one we're going to talk about today will allow us"
+    },
+    {
+      "index": 13,
+      "start": 40.81,
+      "end": 45.53,
+      "duration": 4.72,
+      "text": "to deal with infinity."
+    },
+    {
+      "index": 14,
+      "start": 45.53,
+      "end": 50.94,
+      "duration": 5.41,
+      "text": "And it's what's known as L'Hopital's Rule."
+    },
+    {
+      "index": 15,
+      "start": 50.94,
+      "end": 55.99,
+      "duration": 5.05,
+      "text": "Here's L'Hopital's Rule."
+    },
+    {
+      "index": 16,
+      "start": 55.99,
+      "end": 61.36,
+      "duration": 5.37,
+      "text": "And that's what we're going to do today."
+    },
+    {
+      "index": 17,
+      "start": 61.36,
+      "end": 74.99,
+      "duration": 13.63,
+      "text": "L'Hopital's Rule it's also known as L'Hospital's Rule."
+    },
+    {
+      "index": 18,
+      "start": 74.99,
+      "end": 79.84,
+      "duration": 4.85,
+      "text": "That's the same name, since the circumflex is what you put"
+    },
+    {
+      "index": 19,
+      "start": 79.84,
+      "end": 85.61,
+      "duration": 5.77,
+      "text": "in French to omit the s."
+    },
+    {
+      "index": 20,
+      "start": 85.61,
+      "end": 87.29,
+      "duration": 1.68,
+      "text": "So it's the same thing, and it's still pronounced"
+    },
+    {
+      "index": 21,
+      "start": 87.29,
+      "end": 89.84,
+      "duration": 2.55,
+      "text": "L'Hopital, even if it's got an s in it."
+    },
+    {
+      "index": 22,
+      "start": 89.84,
+      "end": 92.16,
+      "duration": 2.32,
+      "text": "Alright, so that's the first thing you need"
+    },
+    {
+      "index": 23,
+      "start": 92.16,
+      "end": 93.65,
+      "duration": 1.49,
+      "text": "to know about it."
+    },
+    {
+      "index": 24,
+      "start": 93.65,
+      "end": 102.04,
+      "duration": 8.39,
+      "text": "And what this method does is, it's a convenient way to"
+    },
+    {
+      "index": 25,
+      "start": 102.04,
+      "end": 115.41,
+      "duration": 13.37,
+      "text": "calculate limits including some new ones."
+    },
+    {
+      "index": 26,
+      "start": 115.41,
+      "end": 122.67,
+      "duration": 7.26,
+      "text": "So it'll be convenient for the old ones."
+    },
+    {
+      "index": 27,
+      "start": 122.67,
+      "end": 129.31,
+      "duration": 6.64,
+      "text": "There are going to be some new ones and, as an example, you"
+    },
+    {
+      "index": 28,
+      "start": 129.31,
+      "end": 134.91,
+      "duration": 5.6,
+      "text": "can calculate x ln x as x goes to infinity."
+    },
+    {
+      "index": 29,
+      "start": 134.91,
+      "end": 137.1,
+      "duration": 2.19,
+      "text": "You could, whoops, that's not a very interesting one, let's"
+    },
+    {
+      "index": 30,
+      "start": 137.1,
+      "end": 140.47,
+      "duration": 3.37,
+      "text": "try x goes to 0 from the positive side."
+    },
+    {
+      "index": 31,
+      "start": 140.47,
+      "end": 146.59,
+      "duration": 6.12,
+      "text": "And you can calculate, for example, x e^ - x, as x goes"
+    },
+    {
+      "index": 32,
+      "start": 146.59,
+      "end": 150.19,
+      "duration": 3.6,
+      "text": "to infinity."
+    },
+    {
+      "index": 33,
+      "start": 150.19,
+      "end": 157.34,
+      "duration": 7.15,
+      "text": "And, well, maybe I should include a few others."
+    },
+    {
+      "index": 34,
+      "start": 157.34,
+      "end": 166.55,
+      "duration": 9.21,
+      "text": "Maybe something like ln x / x as x goes to infinity."
+    },
+    {
+      "index": 35,
+      "start": 166.55,
+      "end": 170.58,
+      "duration": 4.03,
+      "text": "So these are some examples of things which, in fact, if you"
+    },
+    {
+      "index": 36,
+      "start": 170.58,
+      "end": 172.38,
+      "duration": 1.8,
+      "text": "plug into your calculator, you can see what's"
+    },
+    {
+      "index": 37,
+      "start": 172.38,
+      "end": 173.22,
+      "duration": 0.84,
+      "text": "happening with these."
+    },
+    {
+      "index": 38,
+      "start": 173.22,
+      "end": 176.43,
+      "duration": 3.21,
+      "text": "But if you want to understand them systematically, it's much"
+    },
+    {
+      "index": 39,
+      "start": 176.43,
+      "end": 180.14,
+      "duration": 3.71,
+      "text": "better to have this tool of L'Hopital's Rule."
+    },
+    {
+      "index": 40,
+      "start": 180.14,
+      "end": 182.97,
+      "duration": 2.83,
+      "text": "And certainly there isn't a proof just based on a"
+    },
+    {
+      "index": 41,
+      "start": 182.97,
+      "end": 185.31,
+      "duration": 2.34,
+      "text": "calculation in a calculator."
+    },
+    {
+      "index": 42,
+      "start": 185.31,
+      "end": 187.76,
+      "duration": 2.45,
+      "text": "So now here's the idea."
+    },
+    {
+      "index": 43,
+      "start": 187.76,
+      "end": 191.75,
+      "duration": 3.99,
+      "text": "I'll illustrate the idea first with an example."
+    },
+    {
+      "index": 44,
+      "start": 191.75,
+      "end": 193.38,
+      "duration": 1.63,
+      "text": "And then we'll make it systematic."
+    },
+    {
+      "index": 45,
+      "start": 193.38,
+      "end": 195.02,
+      "duration": 1.64,
+      "text": "And then we're going to generalize it."
+    },
+    {
+      "index": 46,
+      "start": 195.02,
+      "end": 198.84,
+      "duration": 3.82,
+      "text": "We'll make it much more, so when it includes these new"
+    },
+    {
+      "index": 47,
+      "start": 198.84,
+      "end": 201.33,
+      "duration": 2.49,
+      "text": "limits, there are some little pieces of trickiness that you"
+    },
+    {
+      "index": 48,
+      "start": 201.33,
+      "end": 203.05,
+      "duration": 1.72,
+      "text": "have to understand."
+    },
+    {
+      "index": 49,
+      "start": 203.05,
+      "end": 208.85,
+      "duration": 5.8,
+      "text": "So, let's just take an example that you could have done in"
+    },
+    {
+      "index": 50,
+      "start": 208.85,
+      "end": 211.07,
+      "duration": 2.22,
+      "text": "the very first unit of this class."
+    },
+    {
+      "index": 51,
+      "start": 211.07,
+      "end": 221.23,
+      "duration": 10.16,
+      "text": "The limit as x goes to 1 of x ^ 10 - 1 / x ^2 - 1."
+    },
+    {
+      "index": 52,
+      "start": 221.23,
+      "end": 225.37,
+      "duration": 4.14,
+      "text": "So that's a limit that we could've handled."
+    },
+    {
+      "index": 53,
+      "start": 225.37,
+      "end": 228.11,
+      "duration": 2.74,
+      "text": "And the thing that's interesting, I mean, if you"
+    },
+    {
+      "index": 54,
+      "start": 228.11,
+      "end": 230.07,
+      "duration": 1.96,
+      "text": "like this is in this category that we mentioned at the"
+    },
+    {
+      "index": 55,
+      "start": 230.07,
+      "end": 232.48,
+      "duration": 2.41,
+      "text": "beginning of the course of interesting limits."
+    },
+    {
+      "index": 56,
+      "start": 232.48,
+      "end": 235.75,
+      "duration": 3.27,
+      "text": "What's interesting about it is that if you do this silly"
+    },
+    {
+      "index": 57,
+      "start": 235.75,
+      "end": 240.7,
+      "duration": 4.95,
+      "text": "thing, which is just plug in x = 1, at x = 1 you're"
+    },
+    {
+      "index": 58,
+      "start": 240.7,
+      "end": 242.48,
+      "duration": 1.78,
+      "text": "going to get 0 / 0."
+    },
+    {
+      "index": 59,
+      "start": 242.48,
+      "end": 252.72,
+      "duration": 10.24,
+      "text": "And that's what we call an indeterminate form."
+    },
+    {
+      "index": 60,
+      "start": 252.72,
+      "end": 255.34,
+      "duration": 2.62,
+      "text": "It's just unclear what it is."
+    },
+    {
+      "index": 61,
+      "start": 255.34,
+      "end": 258.15,
+      "duration": 2.81,
+      "text": "From that plugging, in you just can't get it."
+    },
+    {
+      "index": 62,
+      "start": 258.15,
+      "end": 259.49,
+      "duration": 1.34,
+      "text": "Now, on the other hand, there's a"
+    },
+    {
+      "index": 63,
+      "start": 259.49,
+      "end": 261.36,
+      "duration": 1.87,
+      "text": "trick for doing this."
+    },
+    {
+      "index": 64,
+      "start": 261.36,
+      "end": 263.96,
+      "duration": 2.6,
+      "text": "And this is the trick that we did at the"
+    },
+    {
+      "index": 65,
+      "start": 263.96,
+      "end": 265.35,
+      "duration": 1.39,
+      "text": "beginning of the class."
+    },
+    {
+      "index": 66,
+      "start": 265.35,
+      "end": 272.04,
+      "duration": 6.69,
+      "text": "And the idea is I can divide in the numerator and"
+    },
+    {
+      "index": 67,
+      "start": 272.04,
+      "end": 276.23,
+      "duration": 4.19,
+      "text": "denominator by x - 1."
+    },
+    {
+      "index": 68,
+      "start": 276.23,
+      "end": 283.06,
+      "duration": 6.83,
+      "text": "So this limit is unchanged, if I try to cancel the hidden"
+    },
+    {
+      "index": 69,
+      "start": 283.06,
+      "end": 286.4,
+      "duration": 3.34,
+      "text": "factor x - 1 in the numerator and denominator."
+    },
+    {
+      "index": 70,
+      "start": 286.4,
+      "end": 291.63,
+      "duration": 5.23,
+      "text": "Now, we can actually carry out these ratios of polynomials"
+    },
+    {
+      "index": 71,
+      "start": 291.63,
+      "end": 294.58,
+      "duration": 2.95,
+      "text": "and calculate them by long division in algebra."
+    },
+    {
+      "index": 72,
+      "start": 294.58,
+      "end": 295.66,
+      "duration": 1.08,
+      "text": "That's very, very long."
+    },
+    {
+      "index": 73,
+      "start": 295.66,
+      "end": 297.11,
+      "duration": 1.45,
+      "text": "We want to do this with calculus."
+    },
+    {
+      "index": 74,
+      "start": 297.11,
+      "end": 301.17,
+      "duration": 4.06,
+      "text": "And we already have. We already know that this ratio"
+    },
+    {
+      "index": 75,
+      "start": 301.17,
+      "end": 303.42,
+      "duration": 2.25,
+      "text": "is what's called a difference quotient."
+    },
+    {
+      "index": 76,
+      "start": 303.42,
+      "end": 306.38,
+      "duration": 2.96,
+      "text": "And then in the limit, it tends to the derivative of"
+    },
+    {
+      "index": 77,
+      "start": 306.38,
+      "end": 308.34,
+      "duration": 1.96,
+      "text": "this function."
+    },
+    {
+      "index": 78,
+      "start": 308.34,
+      "end": 312.39,
+      "duration": 4.05,
+      "text": "So the idea is that this is actually equal to, in the"
+    },
+    {
+      "index": 79,
+      "start": 312.39,
+      "end": 315.4,
+      "duration": 3.01,
+      "text": "limit, now let's just study one piece of it."
+    },
+    {
+      "index": 80,
+      "start": 315.4,
+      "end": 321.15,
+      "duration": 5.75,
+      "text": "So if I have a function f ( x), which is x ^ 10 - 1, and"
+    },
+    {
+      "index": 81,
+      "start": 321.15,
+      "end": 326.71,
+      "duration": 5.56,
+      "text": "the value at 1 happens to be equal to 0, then this"
+    },
+    {
+      "index": 82,
+      "start": 326.71,
+      "end": 332.35,
+      "duration": 5.64,
+      "text": "expression that we have, which is in disguise, this is in"
+    },
+    {
+      "index": 83,
+      "start": 332.35,
+      "end": 338.3,
+      "duration": 5.95,
+      "text": "disguise the difference quotient, tends to, as x goes"
+    },
+    {
+      "index": 84,
+      "start": 338.3,
+      "end": 343.03,
+      "duration": 4.73,
+      "text": "to 1, the derivative, which is f' ( 1)."
+    },
+    {
+      "index": 85,
+      "start": 343.03,
+      "end": 343.62,
+      "duration": 0.59,
+      "text": "That's what it is."
+    },
+    {
+      "index": 86,
+      "start": 343.62,
+      "end": 346.09,
+      "duration": 2.47,
+      "text": "So we know what the numerator goes to, and similarly we'll"
+    },
+    {
+      "index": 87,
+      "start": 346.09,
+      "end": 347.65,
+      "duration": 1.56,
+      "text": "know what the denominator goes to."
+    },
+    {
+      "index": 88,
+      "start": 347.65,
+      "end": 351.58,
+      "duration": 3.93,
+      "text": "But what is that?"
+    },
+    {
+      "index": 89,
+      "start": 351.58,
+      "end": 358.46,
+      "duration": 6.88,
+      "text": "Well, f ' (x) = 10x ^ 9."
+    },
+    {
+      "index": 90,
+      "start": 358.46,
+      "end": 360.61,
+      "duration": 2.15,
+      "text": "So we know what the answer is."
+    },
+    {
+      "index": 91,
+      "start": 360.61,
+      "end": 363.55,
+      "duration": 2.94,
+      "text": "In the numerator it's 10x ^ 9."
+    },
+    {
+      "index": 92,
+      "start": 363.55,
+      "end": 366.47,
+      "duration": 2.92,
+      "text": "In the denominator, it's going to be 2x, that's the"
+    },
+    {
+      "index": 93,
+      "start": 366.47,
+      "end": 368.34,
+      "duration": 1.87,
+      "text": "derivative of x ^2 - 1."
+    },
+    {
+      "index": 94,
+      "start": 368.34,
+      "end": 373.93,
+      "duration": 5.59,
+      "text": "And then were going to have to evaluate that at x = 1."
+    },
+    {
+      "index": 95,
+      "start": 373.93,
+      "end": 378.16,
+      "duration": 4.23,
+      "text": "And so it's going to be 10/2, which is 5."
+    },
+    {
+      "index": 96,
+      "start": 378.16,
+      "end": 379.35,
+      "duration": 1.19,
+      "text": "So the answer is 5."
+    },
+    {
+      "index": 97,
+      "start": 379.35,
+      "end": 383.05,
+      "duration": 3.7,
+      "text": "And it's pretty easy to get from our techniques and"
+    },
+    {
+      "index": 98,
+      "start": 383.05,
+      "end": 386.58,
+      "duration": 3.53,
+      "text": "knowledge of derivatives, using this rather clever"
+    },
+    {
+      "index": 99,
+      "start": 386.58,
+      "end": 387.51,
+      "duration": 0.93,
+      "text": "algebraic trick."
+    },
+    {
+      "index": 100,
+      "start": 387.51,
+      "end": 393.54,
+      "duration": 6.03,
+      "text": "This business of dividing by x - 1."
+    },
+    {
+      "index": 101,
+      "start": 393.54,
+      "end": 398.03,
+      "duration": 4.49,
+      "text": "What I want to do now is just carry this method out"
+    },
+    {
+      "index": 102,
+      "start": 398.03,
+      "end": 399.42,
+      "duration": 1.39,
+      "text": "systematically."
+    },
+    {
+      "index": 103,
+      "start": 399.42,
+      "end": 404.29,
+      "duration": 4.87,
+      "text": "And that's going to give us the approach to what's known"
+    },
+    {
+      "index": 104,
+      "start": 404.29,
+      "end": 405.26,
+      "duration": 0.97,
+      "text": "as L'Hopital's Rule."
+    },
+    {
+      "index": 105,
+      "start": 405.26,
+      "end": 408.86,
+      "duration": 3.6,
+      "text": "What my main subject for today."
+    },
+    {
+      "index": 106,
+      "start": 408.86,
+      "end": 410.04,
+      "duration": 1.18,
+      "text": "So here's the idea."
+    },
+    {
+      "index": 107,
+      "start": 410.04,
+      "end": 413.53,
+      "duration": 3.49,
+      "text": "Suppose we're considering, in general, a limit as x goes to"
+    },
+    {
+      "index": 108,
+      "start": 413.53,
+      "end": 418.86,
+      "duration": 5.33,
+      "text": "some number a of f ( x) / g ( x)."
+    },
+    {
+      "index": 109,
+      "start": 418.86,
+      "end": 422.33,
+      "duration": 3.47,
+      "text": "And suppose it's the bad case where we can't decide."
+    },
+    {
+      "index": 110,
+      "start": 422.33,
+      "end": 429.2,
+      "duration": 6.87,
+      "text": "So it's in determinate. f ( a) = g ( a) = 0."
+    },
+    {
+      "index": 111,
+      "start": 429.2,
+      "end": 431.73,
+      "duration": 2.53,
+      "text": "So it would be 0 / 0."
+    },
+    {
+      "index": 112,
+      "start": 431.73,
+      "end": 433.58,
+      "duration": 1.85,
+      "text": "Now we're just going to do exactly the same"
+    },
+    {
+      "index": 113,
+      "start": 433.58,
+      "end": 435.52,
+      "duration": 1.94,
+      "text": "thing we did over here."
+    },
+    {
+      "index": 114,
+      "start": 435.52,
+      "end": 439.17,
+      "duration": 3.65,
+      "text": "Namely, we're going to divide a numerator and denominator,"
+    },
+    {
+      "index": 115,
+      "start": 439.17,
+      "end": 441.01,
+      "duration": 1.84,
+      "text": "and we're going to repeat that argument."
+    },
+    {
+      "index": 116,
+      "start": 441.01,
+      "end": 445.39,
+      "duration": 4.38,
+      "text": "So we have here f ( x) / x - a."
+    },
+    {
+      "index": 117,
+      "start": 445.39,
+      "end": 450.24,
+      "duration": 4.85,
+      "text": "And g (x) / x - a also."
+    },
+    {
+      "index": 118,
+      "start": 450.24,
+      "end": 453.2,
+      "duration": 2.96,
+      "text": "I haven't changed anything yet."
+    },
+    {
+      "index": 119,
+      "start": 453.2,
+      "end": 458.12,
+      "duration": 4.92,
+      "text": "And now I'm going to write it in this suggestive form."
+    },
+    {
+      "index": 120,
+      "start": 458.12,
+      "end": 461.05,
+      "duration": 2.93,
+      "text": "Namely, I'm going to take separately the limit in the"
+    },
+    {
+      "index": 121,
+      "start": 461.05,
+      "end": 462.33,
+      "duration": 1.28,
+      "text": "numerator and the denominator."
+    },
+    {
+      "index": 122,
+      "start": 462.33,
+      "end": 464.46,
+      "duration": 2.13,
+      "text": "And I'm going to make one more shift."
+    },
+    {
+      "index": 123,
+      "start": 464.46,
+      "end": 467.25,
+      "duration": 2.79,
+      "text": "So I'm going to take the limit, as x goes to a in the"
+    },
+    {
+      "index": 124,
+      "start": 467.25,
+      "end": 469.96,
+      "duration": 2.71,
+      "text": "numerator, but I'm going to write it as f ( x) -"
+    },
+    {
+      "index": 125,
+      "start": 469.96,
+      "end": 473.27,
+      "duration": 3.31,
+      "text": "f ( a) / x - a."
+    },
+    {
+      "index": 126,
+      "start": 473.27,
+      "end": 474.87,
+      "duration": 1.6,
+      "text": "So that's the way I'm going to write the numerator, and I've"
+    },
+    {
+      "index": 127,
+      "start": 474.87,
+      "end": 477.58,
+      "duration": 2.71,
+      "text": "got to draw a much longer line here."
+    },
+    {
+      "index": 128,
+      "start": 477.58,
+      "end": 479.72,
+      "duration": 2.14,
+      "text": "So why am I allowed to do that?"
+    },
+    {
+      "index": 129,
+      "start": 479.72,
+      "end": 482.69,
+      "duration": 2.97,
+      "text": "That's because f (a) = 0."
+    },
+    {
+      "index": 130,
+      "start": 482.69,
+      "end": 487.0,
+      "duration": 4.31,
+      "text": "So I didn't change this numerator of the numerator any"
+    },
+    {
+      "index": 131,
+      "start": 487.0,
+      "end": 492.21,
+      "duration": 5.21,
+      "text": "by subtracting. f ( a) = 0."
+    },
+    {
+      "index": 132,
+      "start": 492.21,
+      "end": 499.26,
+      "duration": 7.05,
+      "text": "And I'll do the same thing to the denominator."
+    },
+    {
+      "index": 133,
+      "start": 499.26,
+      "end": 502.65,
+      "duration": 3.39,
+      "text": "Again, g ( a) = 0, so this is OK."
+    },
+    {
+      "index": 134,
+      "start": 502.65,
+      "end": 505.76,
+      "duration": 3.11,
+      "text": "And lo and behold, I know what these limits are."
+    },
+    {
+      "index": 135,
+      "start": 505.76,
+      "end": 514.11,
+      "duration": 8.35,
+      "text": "This is f ' (a) / g '(a)."
+    },
+    {
+      "index": 136,
+      "start": 514.11,
+      "end": 514.66,
+      "duration": 0.55,
+      "text": "So that's it."
+    },
+    {
+      "index": 137,
+      "start": 514.66,
+      "end": 516.88,
+      "duration": 2.22,
+      "text": "That's the technique and this evaluates the limit."
+    },
+    {
+      "index": 138,
+      "start": 516.88,
+      "end": 518.07,
+      "duration": 1.19,
+      "text": "And it's not so difficult."
+    },
+    {
+      "index": 139,
+      "start": 518.07,
+      "end": 520.31,
+      "duration": 2.24,
+      "text": "The formula's pretty straightforward here."
+    },
+    {
+      "index": 140,
+      "start": 520.31,
+      "end": 531.41,
+      "duration": 11.1,
+      "text": "And it works, provided that g ' (a) is not 0."
+    },
+    {
+      "index": 141,
+      "start": 531.41,
+      "end": 532.59,
+      "duration": 1.18,
+      "text": "Yeah, question."
+    },
+    {
+      "index": 142,
+      "start": 532.59,
+      "end": 545.04,
+      "duration": 12.45,
+      "text": "STUDENT: [INAUDIBLE]"
+    },
+    {
+      "index": 143,
+      "start": 545.04,
+      "end": 550.9,
+      "duration": 5.86,
+      "text": "PROFESSOR: The question is, is there a more intuitive way of"
+    },
+    {
+      "index": 144,
+      "start": 550.9,
+      "end": 554.21,
+      "duration": 3.31,
+      "text": "understanding this procedure."
+    },
+    {
+      "index": 145,
+      "start": 554.21,
+      "end": 561.65,
+      "duration": 7.44,
+      "text": "And I think the short answer is that there are other,"
+    },
+    {
+      "index": 146,
+      "start": 561.65,
+      "end": 562.6,
+      "duration": 0.95,
+      "text": "similar, ways."
+    },
+    {
+      "index": 147,
+      "start": 562.6,
+      "end": 565.52,
+      "duration": 2.92,
+      "text": "I don't consider them to be more intuitive."
+    },
+    {
+      "index": 148,
+      "start": 565.52,
+      "end": 568.18,
+      "duration": 2.66,
+      "text": "I will be mentioning one of them, which is the idea of"
+    },
+    {
+      "index": 149,
+      "start": 568.18,
+      "end": 573.28,
+      "duration": 5.1,
+      "text": "linearization, which goes back to what we did in Unit 2."
+    },
+    {
+      "index": 150,
+      "start": 573.28,
+      "end": 575.48,
+      "duration": 2.2,
+      "text": "I think it's very important to understand all of these, more"
+    },
+    {
+      "index": 151,
+      "start": 575.48,
+      "end": 576.81,
+      "duration": 1.33,
+      "text": "or less, at once."
+    },
+    {
+      "index": 152,
+      "start": 576.81,
+      "end": 579.53,
+      "duration": 2.72,
+      "text": "But I wouldn't claim that any of these methods is a more"
+    },
+    {
+      "index": 153,
+      "start": 579.53,
+      "end": 581.89,
+      "duration": 2.36,
+      "text": "intuitive one than the other."
+    },
+    {
+      "index": 154,
+      "start": 581.89,
+      "end": 583.83,
+      "duration": 1.94,
+      "text": "But basically what's happening is, we're looking at the"
+    },
+    {
+      "index": 155,
+      "start": 583.83,
+      "end": 586.34,
+      "duration": 2.51,
+      "text": "linear approximation to f, at a."
+    },
+    {
+      "index": 156,
+      "start": 586.34,
+      "end": 588.98,
+      "duration": 2.64,
+      "text": "And the linear approximation to g at a."
+    },
+    {
+      "index": 157,
+      "start": 588.98,
+      "end": 592.88,
+      "duration": 3.9,
+      "text": "That's what underlies this."
+    },
+    {
+      "index": 158,
+      "start": 592.88,
+      "end": 596.63,
+      "duration": 3.75,
+      "text": "So now I get to formulate for you L'Hopital's Rule at least"
+    },
+    {
+      "index": 159,
+      "start": 596.63,
+      "end": 599.43,
+      "duration": 2.8,
+      "text": "in what I would call the easy version or, if you"
+    },
+    {
+      "index": 160,
+      "start": 599.43,
+      "end": 600.52,
+      "duration": 1.09,
+      "text": "like, Version 1."
+    },
+    {
+      "index": 161,
+      "start": 600.52,
+      "end": 610.29,
+      "duration": 9.77,
+      "text": "So here's L'Hopital's Rule."
+    },
+    {
+      "index": 162,
+      "start": 610.29,
+      "end": 615.29,
+      "duration": 5.0,
+      "text": "Version 1."
+    },
+    {
+      "index": 163,
+      "start": 615.29,
+      "end": 618.48,
+      "duration": 3.19,
+      "text": "It's not going to be quite the same as what we just did."
+    },
+    {
+      "index": 164,
+      "start": 618.48,
+      "end": 620.67,
+      "duration": 2.19,
+      "text": "It's going to be much, much better."
+    },
+    {
+      "index": 165,
+      "start": 620.67,
+      "end": 622.86,
+      "duration": 2.19,
+      "text": "And more useful."
+    },
+    {
+      "index": 166,
+      "start": 622.86,
+      "end": 625.84,
+      "duration": 2.98,
+      "text": "And what is going to take care of is this problem that the"
+    },
+    {
+      "index": 167,
+      "start": 625.84,
+      "end": 629.73,
+      "duration": 3.89,
+      "text": "denominator is not 0."
+    },
+    {
+      "index": 168,
+      "start": 629.73,
+      "end": 631.42,
+      "duration": 1.69,
+      "text": "So now here's what we're going to do."
+    },
+    {
+      "index": 169,
+      "start": 631.42,
+      "end": 635.0,
+      "duration": 3.58,
+      "text": "We're going to say that it turns out that the limit a x"
+    },
+    {
+      "index": 170,
+      "start": 635.0,
+      "end": 644.48,
+      "duration": 9.48,
+      "text": "goes to a of f(x) / g ( x) = the limit as x goes to a to a"
+    },
+    {
+      "index": 171,
+      "start": 644.48,
+      "end": 648.21,
+      "duration": 3.73,
+      "text": "f '(x) / g' (x)."
+    },
+    {
+      "index": 172,
+      "start": 648.21,
+      "end": 650.16,
+      "duration": 1.95,
+      "text": "Now, that looks practically the same as"
+    },
+    {
+      "index": 173,
+      "start": 650.16,
+      "end": 651.38,
+      "duration": 1.22,
+      "text": "what we said before."
+    },
+    {
+      "index": 174,
+      "start": 651.38,
+      "end": 655.31,
+      "duration": 3.93,
+      "text": "And I have to make sure that you understand when it works."
+    },
+    {
+      "index": 175,
+      "start": 655.31,
+      "end": 662.82,
+      "duration": 7.51,
+      "text": "So it works provided this is one of these undefined"
+    },
+    {
+      "index": 176,
+      "start": 662.82,
+      "end": 663.43,
+      "duration": 0.61,
+      "text": "expressions."
+    },
+    {
+      "index": 177,
+      "start": 663.43,
+      "end": 666.7,
+      "duration": 3.27,
+      "text": "In other words, f ( a) = g ( a) = 0."
+    },
+    {
+      "index": 178,
+      "start": 666.7,
+      "end": 671.32,
+      "duration": 4.62,
+      "text": "So we have a 0 / 0 expression, indeterminant."
+    },
+    {
+      "index": 179,
+      "start": 671.32,
+      "end": 675.28,
+      "duration": 3.96,
+      "text": "And, also, we need one more assumption."
+    },
+    {
+      "index": 180,
+      "start": 675.28,
+      "end": 690.36,
+      "duration": 15.08,
+      "text": "And the right-hand side, the right-hand limit exists."
+    },
+    {
+      "index": 181,
+      "start": 690.36,
+      "end": 693.51,
+      "duration": 3.15,
+      "text": "Now, this is practically the same thing as"
+    },
+    {
+      "index": 182,
+      "start": 693.51,
+      "end": 695.31,
+      "duration": 1.8,
+      "text": "what I said over here."
+    },
+    {
+      "index": 183,
+      "start": 695.31,
+      "end": 701.05,
+      "duration": 5.74,
+      "text": "Namely, I took the ratio of these functions, x ^ 10 - 1"
+    },
+    {
+      "index": 184,
+      "start": 701.05,
+      "end": 702.54,
+      "duration": 1.49,
+      "text": "and x ^2 - 1."
+    },
+    {
+      "index": 185,
+      "start": 702.54,
+      "end": 705.46,
+      "duration": 2.92,
+      "text": "I took their derivatives, which is what I did right"
+    },
+    {
+      "index": 186,
+      "start": 705.46,
+      "end": 706.18,
+      "duration": 0.72,
+      "text": "here, right."
+    },
+    {
+      "index": 187,
+      "start": 706.18,
+      "end": 708.48,
+      "duration": 2.3,
+      "text": "I just differentiated them and I took the ratio."
+    },
+    {
+      "index": 188,
+      "start": 708.48,
+      "end": 711.68,
+      "duration": 3.2,
+      "text": "This is way easier than the quotient rule, and is nothing"
+    },
+    {
+      "index": 189,
+      "start": 711.68,
+      "end": 713.78,
+      "duration": 2.1,
+      "text": "like the quotient rule."
+    },
+    {
+      "index": 190,
+      "start": 713.78,
+      "end": 716.9,
+      "duration": 3.12,
+      "text": "Don't think quotient rule."
+    },
+    {
+      "index": 191,
+      "start": 718.07,
+      "end": 720.36,
+      "duration": 2.29,
+      "text": "So we differentiate the numerator and denominator"
+    },
+    {
+      "index": 192,
+      "start": 720.36,
+      "end": 722.4,
+      "duration": 2.04,
+      "text": "separately."
+    },
+    {
+      "index": 193,
+      "start": 722.4,
+      "end": 728.03,
+      "duration": 5.63,
+      "text": "And then I take the limit as x goes to 1 and I get 5."
+    },
+    {
+      "index": 194,
+      "start": 728.03,
+      "end": 729.94,
+      "duration": 1.91,
+      "text": "So that's what I'm claiming over here."
+    },
+    {
+      "index": 195,
+      "start": 729.94,
+      "end": 732.275,
+      "duration": 2.335,
+      "text": "I take these functions, I replace them with this ratio"
+    },
+    {
+      "index": 196,
+      "start": 732.275,
+      "end": 734.0,
+      "duration": 1.725,
+      "text": "of derivatives, and then I take the limit"
+    },
+    {
+      "index": 197,
+      "start": 734.0,
+      "end": 735.65,
+      "duration": 1.65,
+      "text": "instead, over here."
+    },
+    {
+      "index": 198,
+      "start": 735.65,
+      "end": 738.02,
+      "duration": 2.37,
+      "text": "And it turned out that the functions got much simpler"
+    },
+    {
+      "index": 199,
+      "start": 738.02,
+      "end": 739.12,
+      "duration": 1.1,
+      "text": "when I differentiated them."
+    },
+    {
+      "index": 200,
+      "start": 739.12,
+      "end": 741.79,
+      "duration": 2.67,
+      "text": "I started with this messy object and I got this much"
+    },
+    {
+      "index": 201,
+      "start": 741.79,
+      "end": 745.52,
+      "duration": 3.73,
+      "text": "easier object that I could easily evaluate."
+    },
+    {
+      "index": 202,
+      "start": 745.52,
+      "end": 749.83,
+      "duration": 4.31,
+      "text": "So that's the big game that's happening here."
+    },
+    {
+      "index": 203,
+      "start": 749.83,
+      "end": 753.495,
+      "duration": 3.665,
+      "text": "It works, if this limit makes sense and this limit exists."
+    },
+    {
+      "index": 204,
+      "start": 753.495,
+      "end": 758.13,
+      "duration": 4.635,
+      "text": "Now, notice I didn't claim that g, that the denominator,"
+    },
+    {
+      "index": 205,
+      "start": 758.13,
+      "end": 760.26,
+      "duration": 2.13,
+      "text": "had to be non-0."
+    },
+    {
+      "index": 206,
+      "start": 760.26,
+      "end": 762.07,
+      "duration": 1.81,
+      "text": "So that's what's going to help us a little"
+    },
+    {
+      "index": 207,
+      "start": 762.07,
+      "end": 763.43,
+      "duration": 1.36,
+      "text": "bit in a few examples."
+    },
+    {
+      "index": 208,
+      "start": 763.43,
+      "end": 765.65,
+      "duration": 2.22,
+      "text": "So let me give you a couple of examples and"
+    },
+    {
+      "index": 209,
+      "start": 765.65,
+      "end": 766.57,
+      "duration": 0.92,
+      "text": "then we'll go further."
+    },
+    {
+      "index": 210,
+      "start": 766.57,
+      "end": 768.47,
+      "duration": 1.9,
+      "text": "Now, this is only Version 1."
+    },
+    {
+      "index": 211,
+      "start": 768.47,
+      "end": 771.34,
+      "duration": 2.87,
+      "text": "But first we have to understand how this one works."
+    },
+    {
+      "index": 212,
+      "start": 771.34,
+      "end": 776.3,
+      "duration": 4.96,
+      "text": "So here's another example."
+    },
+    {
+      "index": 213,
+      "start": 776.3,
+      "end": 786.4,
+      "duration": 10.1,
+      "text": "Take the limit as x goes to 0, of sin 5x / sin 2x."
+    },
+    {
+      "index": 214,
+      "start": 786.4,
+      "end": 790.06,
+      "duration": 3.66,
+      "text": "This is another kind of example of a limit that we"
+    },
+    {
+      "index": 215,
+      "start": 790.06,
+      "end": 792.35,
+      "duration": 2.29,
+      "text": "discussed in the first part of the course."
+    },
+    {
+      "index": 216,
+      "start": 792.35,
+      "end": 793.93,
+      "duration": 1.58,
+      "text": "Unfortunately, now we're reviewing stuff."
+    },
+    {
+      "index": 217,
+      "start": 793.93,
+      "end": 795.98,
+      "duration": 2.05,
+      "text": "So this should reinforce what you did there."
+    },
+    {
+      "index": 218,
+      "start": 795.98,
+      "end": 800.33,
+      "duration": 4.35,
+      "text": "This will be an easier way of thinking about it."
+    },
+    {
+      "index": 219,
+      "start": 800.33,
+      "end": 805.05,
+      "duration": 4.72,
+      "text": "So by L'Hopital's Rule, so here's the step."
+    },
+    {
+      "index": 220,
+      "start": 805.05,
+      "end": 807.87,
+      "duration": 2.82,
+      "text": "We're going to take one of these steps."
+    },
+    {
+      "index": 221,
+      "start": 807.87,
+      "end": 811.56,
+      "duration": 3.69,
+      "text": "This is the limit, as x goes to 1, of the derivatives here."
+    },
+    {
+      "index": 222,
+      "start": 811.56,
+      "end": 823.22,
+      "duration": 11.66,
+      "text": "So that's 5 cos 5x / 2 cos 2x."
+    },
+    {
+      "index": 223,
+      "start": 823.22,
+      "end": 826.735,
+      "duration": 3.515,
+      "text": "The limit was 1 over there, but now it's 0. a"
+    },
+    {
+      "index": 224,
+      "start": 826.735,
+      "end": 828.53,
+      "duration": 1.795,
+      "text": "is 0 in this case."
+    },
+    {
+      "index": 225,
+      "start": 828.53,
+      "end": 831.5,
+      "duration": 2.97,
+      "text": "This is the number a."
+    },
+    {
+      "index": 226,
+      "start": 831.5,
+      "end": 834.93,
+      "duration": 3.43,
+      "text": "Thank you."
+    },
+    {
+      "index": 227,
+      "start": 834.93,
+      "end": 838.76,
+      "duration": 3.83,
+      "text": "So the limit as x goes to 0 is the same as the limit of the"
+    },
+    {
+      "index": 228,
+      "start": 838.76,
+      "end": 841.4,
+      "duration": 2.64,
+      "text": "derivatives."
+    },
+    {
+      "index": 229,
+      "start": 841.4,
+      "end": 842.62,
+      "duration": 1.22,
+      "text": "And that's easy to evaluate."
+    },
+    {
+      "index": 230,
+      "start": 842.62,
+      "end": 844.91,
+      "duration": 2.29,
+      "text": "Cosine of 0 = 1, right."
+    },
+    {
+      "index": 231,
+      "start": 844.91,
+      "end": 850.55,
+      "duration": 5.64,
+      "text": "This is equal to 5 (cos (5* 0)."
+    },
+    {
+      "index": 232,
+      "start": 850.55,
+      "end": 852.84,
+      "duration": 2.29,
+      "text": "And that's a multiplication sign."
+    },
+    {
+      "index": 233,
+      "start": 852.84,
+      "end": 854.66,
+      "duration": 1.82,
+      "text": "Maybe I should just write this as 0."
+    },
+    {
+      "index": 234,
+      "start": 854.66,
+      "end": 857.24,
+      "duration": 2.58,
+      "text": "Divided by 2 cos 0."
+    },
+    {
+      "index": 235,
+      "start": 857.24,
+      "end": 864.44,
+      "duration": 7.2,
+      "text": "But you know that that's 5/2."
+    },
+    {
+      "index": 236,
+      "start": 864.44,
+      "end": 867.34,
+      "duration": 2.9,
+      "text": "So this is how L'Hopital's method works."
+    },
+    {
+      "index": 237,
+      "start": 867.34,
+      "end": 873.66,
+      "duration": 6.32,
+      "text": "It's pretty painless."
+    },
+    {
+      "index": 238,
+      "start": 873.66,
+      "end": 876.54,
+      "duration": 2.88,
+      "text": "I'm going to give you another example, which shows that it"
+    },
+    {
+      "index": 239,
+      "start": 876.54,
+      "end": 879.01,
+      "duration": 2.47,
+      "text": "works a little better than the method that"
+    },
+    {
+      "index": 240,
+      "start": 879.01,
+      "end": 885.55,
+      "duration": 6.54,
+      "text": "I started out with."
+    },
+    {
+      "index": 241,
+      "start": 885.55,
+      "end": 888.38,
+      "duration": 2.83,
+      "text": "Here's what happens if we consider the function"
+    },
+    {
+      "index": 242,
+      "start": 888.38,
+      "end": 895.47,
+      "duration": 7.09,
+      "text": "cos x - 1 / x ^2."
+    },
+    {
+      "index": 243,
+      "start": 895.47,
+      "end": 897.94,
+      "duration": 2.47,
+      "text": "That was a little harder to deal with."
+    },
+    {
+      "index": 244,
+      "start": 897.94,
+      "end": 903.06,
+      "duration": 5.12,
+      "text": "And again, this is one of these 0 / 0 things near x = 0."
+    },
+    {
+      "index": 245,
+      "start": 903.06,
+      "end": 911.2,
+      "duration": 8.14,
+      "text": "As x tends to 0, this goes to an indeterminate form here."
+    },
+    {
+      "index": 246,
+      "start": 911.2,
+      "end": 914.37,
+      "duration": 3.17,
+      "text": "Now, according to our method, this is equivalent to, now I'm"
+    },
+    {
+      "index": 247,
+      "start": 914.37,
+      "end": 916.63,
+      "duration": 2.26,
+      "text": "going to use this little wiggle because I don't want to"
+    },
+    {
+      "index": 248,
+      "start": 916.63,
+      "end": 920.03,
+      "duration": 3.4,
+      "text": "write limit, limit, limit, limit a million times."
+    },
+    {
+      "index": 249,
+      "start": 920.03,
+      "end": 922.33,
+      "duration": 2.3,
+      "text": "So I'm going to use a little wiggle here."
+    },
+    {
+      "index": 250,
+      "start": 922.33,
+      "end": 926.84,
+      "duration": 4.51,
+      "text": "So as x goes to 0, this is going to behave the same way"
+    },
+    {
+      "index": 251,
+      "start": 926.84,
+      "end": 930.39,
+      "duration": 3.55,
+      "text": "as differentiating numerator and denominator."
+    },
+    {
+      "index": 252,
+      "start": 930.39,
+      "end": 933.64,
+      "duration": 3.25,
+      "text": "So again this is going to be - sin x in the numerator."
+    },
+    {
+      "index": 253,
+      "start": 933.64,
+      "end": 942.11,
+      "duration": 8.47,
+      "text": "In the denominator, it's going to be 2x."
+    },
+    {
+      "index": 254,
+      "start": 942.11,
+      "end": 947.14,
+      "duration": 5.03,
+      "text": "Now, notice that we still haven't won yet."
+    },
+    {
+      "index": 255,
+      "start": 947.14,
+      "end": 951.06,
+      "duration": 3.92,
+      "text": "Because this is still of 0 / 0 type."
+    },
+    {
+      "index": 256,
+      "start": 951.06,
+      "end": 954.0,
+      "duration": 2.94,
+      "text": "When you plug in x = 0 you still get 0."
+    },
+    {
+      "index": 257,
+      "start": 954.0,
+      "end": 957.27,
+      "duration": 3.27,
+      "text": "But that doesn't damage the method."
+    },
+    {
+      "index": 258,
+      "start": 957.27,
+      "end": 960.63,
+      "duration": 3.36,
+      "text": "That doesn't make the method fail."
+    },
+    {
+      "index": 259,
+      "start": 960.63,
+      "end": 963.27,
+      "duration": 2.64,
+      "text": "This 0 / 0, we can apply L'Hopital's"
+    },
+    {
+      "index": 260,
+      "start": 963.27,
+      "end": 970.41,
+      "duration": 7.14,
+      "text": "Rule a second time."
+    },
+    {
+      "index": 261,
+      "start": 970.41,
+      "end": 973.12,
+      "duration": 2.71,
+      "text": "And as x goes to 0 this is the same thing as, again,"
+    },
+    {
+      "index": 262,
+      "start": 973.12,
+      "end": 974.86,
+      "duration": 1.74,
+      "text": "differentiating the numerator and denominator."
+    },
+    {
+      "index": 263,
+      "start": 974.86,
+      "end": 979.9,
+      "duration": 5.04,
+      "text": "So here I get - cos x in the numerator, and I get 2 in the"
+    },
+    {
+      "index": 264,
+      "start": 979.9,
+      "end": 982.48,
+      "duration": 2.58,
+      "text": "denominator."
+    },
+    {
+      "index": 265,
+      "start": 982.48,
+      "end": 984.3,
+      "duration": 1.82,
+      "text": "Again this is way easier than"
+    },
+    {
+      "index": 266,
+      "start": 984.3,
+      "end": 986.26,
+      "duration": 1.96,
+      "text": "differentiating ratios of functions."
+    },
+    {
+      "index": 267,
+      "start": 986.26,
+      "end": 989.24,
+      "duration": 2.98,
+      "text": "We're only differentiating the numerator and the denominator"
+    },
+    {
+      "index": 268,
+      "start": 989.24,
+      "end": 993.06,
+      "duration": 3.82,
+      "text": "separately."
+    },
+    {
+      "index": 269,
+      "start": 993.06,
+      "end": 995.96,
+      "duration": 2.9,
+      "text": "And now this is the end."
+    },
+    {
+      "index": 270,
+      "start": 995.96,
+      "end": 1008.66,
+      "duration": 12.7,
+      "text": "As x goes to 0, this is - cos 0 / 2, which is - 1/2."
+    },
+    {
+      "index": 271,
+      "start": 1008.66,
+      "end": 1013.71,
+      "duration": 5.05,
+      "text": "Now, the justification for this comes only when you win"
+    },
+    {
+      "index": 272,
+      "start": 1013.71,
+      "end": 1016.13,
+      "duration": 2.42,
+      "text": "in the end and get the limit."
+    },
+    {
+      "index": 273,
+      "start": 1016.13,
+      "end": 1018.82,
+      "duration": 2.69,
+      "text": "Because what the theorem says is that if one of these limits"
+    },
+    {
+      "index": 274,
+      "start": 1018.82,
+      "end": 1021.58,
+      "duration": 2.76,
+      "text": "exists, then the preceding one exists."
+    },
+    {
+      "index": 275,
+      "start": 1021.58,
+      "end": 1023.1,
+      "duration": 1.52,
+      "text": "And once the preceding one exists, then the"
+    },
+    {
+      "index": 276,
+      "start": 1023.1,
+      "end": 1023.98,
+      "duration": 0.88,
+      "text": "one before it exists."
+    },
+    {
+      "index": 277,
+      "start": 1023.98,
+      "end": 1029.48,
+      "duration": 5.5,
+      "text": "So once we know that this one exists, that works backwards."
+    },
+    {
+      "index": 278,
+      "start": 1029.48,
+      "end": 1031.95,
+      "duration": 2.47,
+      "text": "It applies to the preceding limit, which then applies to"
+    },
+    {
+      "index": 279,
+      "start": 1031.95,
+      "end": 1035.03,
+      "duration": 3.08,
+      "text": "the very first one."
+    },
+    {
+      "index": 280,
+      "start": 1035.03,
+      "end": 1038.0,
+      "duration": 2.97,
+      "text": "And the logical structure here is a little subtle, which is"
+    },
+    {
+      "index": 281,
+      "start": 1038.0,
+      "end": 1042.46,
+      "duration": 4.46,
+      "text": "that if the right side exists, then the left side will also"
+    },
+    {
+      "index": 282,
+      "start": 1042.46,
+      "end": 1046.38,
+      "duration": 3.92,
+      "text": "exist. Yeah, question."
+    },
+    {
+      "index": 283,
+      "start": 1046.38,
+      "end": 1052.62,
+      "duration": 6.24,
+      "text": "STUDENT: [INAUDIBLE]"
+    },
+    {
+      "index": 284,
+      "start": 1052.62,
+      "end": 1054.41,
+      "duration": 1.79,
+      "text": "PROFESSOR: Why does the right-hand limit have to"
+    },
+    {
+      "index": 285,
+      "start": 1054.41,
+      "end": 1057.12,
+      "duration": 2.71,
+      "text": "exist, isn't it just the derivative that has to exist?"
+    },
+    {
+      "index": 286,
+      "start": 1057.12,
+      "end": 1058.47,
+      "duration": 1.35,
+      "text": "No."
+    },
+    {
+      "index": 287,
+      "start": 1058.47,
+      "end": 1060.5,
+      "duration": 2.03,
+      "text": "The derivative of the numerator has to exist. The"
+    },
+    {
+      "index": 288,
+      "start": 1060.5,
+      "end": 1063.42,
+      "duration": 2.92,
+      "text": "derivative of the denominator has to exist. And this limit"
+    },
+    {
+      "index": 289,
+      "start": 1063.42,
+      "end": 1067.39,
+      "duration": 3.97,
+      "text": "has to exist. What doesn't have to exist, by the way, I"
+    },
+    {
+      "index": 290,
+      "start": 1067.39,
+      "end": 1071.08,
+      "duration": 3.69,
+      "text": "never said that f prime of a has to exist. In fact, it's"
+    },
+    {
+      "index": 291,
+      "start": 1071.08,
+      "end": 1073.69,
+      "duration": 2.61,
+      "text": "much, much more subtle."
+    },
+    {
+      "index": 292,
+      "start": 1073.69,
+      "end": 1076.38,
+      "duration": 2.69,
+      "text": "I'm not claiming that f ' (a) exists, because in order to"
+    },
+    {
+      "index": 293,
+      "start": 1076.38,
+      "end": 1081.99,
+      "duration": 5.61,
+      "text": "evaluate this limit, f ' (a) need not exist. What has to"
+    },
+    {
+      "index": 294,
+      "start": 1081.99,
+      "end": 1086.05,
+      "duration": 4.06,
+      "text": "happen is that nearby, for x not equal to a, these things"
+    },
+    {
+      "index": 295,
+      "start": 1086.05,
+      "end": 1090.06,
+      "duration": 4.01,
+      "text": "exist. And then the limit has to exist. So there's no"
+    },
+    {
+      "index": 296,
+      "start": 1090.06,
+      "end": 1093.63,
+      "duration": 3.57,
+      "text": "requirements that the limits exist. In fact, that's exactly"
+    },
+    {
+      "index": 297,
+      "start": 1093.63,
+      "end": 1096.86,
+      "duration": 3.23,
+      "text": "going to be the point when we evaluate these limits here."
+    },
+    {
+      "index": 298,
+      "start": 1096.86,
+      "end": 1102.76,
+      "duration": 5.9,
+      "text": "Is we don't have to evaluate it right at the end."
+    },
+    {
+      "index": 299,
+      "start": 1102.76,
+      "end": 1106.54,
+      "duration": 3.78,
+      "text": "STUDENT: [INAUDIBLE]"
+    },
+    {
+      "index": 300,
+      "start": 1106.54,
+      "end": 1110.05,
+      "duration": 3.51,
+      "text": "PROFESSOR: So the question that you're asking is, why is"
+    },
+    {
+      "index": 301,
+      "start": 1110.05,
+      "end": 1111.97,
+      "duration": 1.92,
+      "text": "this the hypothesis of the theorem?"
+    },
+    {
+      "index": 302,
+      "start": 1111.97,
+      "end": 1114.7,
+      "duration": 2.73,
+      "text": "In other words, why does this work?"
+    },
+    {
+      "index": 303,
+      "start": 1114.7,
+      "end": 1117.37,
+      "duration": 2.67,
+      "text": "Well, the answer is that this is a theorem that's true."
+    },
+    {
+      "index": 304,
+      "start": 1117.37,
+      "end": 1120.05,
+      "duration": 2.68,
+      "text": "If you drop this hypothesis, it's totally false."
+    },
+    {
+      "index": 305,
+      "start": 1120.05,
+      "end": 1122.52,
+      "duration": 2.47,
+      "text": "And if you don't have this hypothesis, you can't use the"
+    },
+    {
+      "index": 306,
+      "start": 1122.52,
+      "end": 1124.82,
+      "duration": 2.3,
+      "text": "theorem and you will get the wrong answer."
+    },
+    {
+      "index": 307,
+      "start": 1124.82,
+      "end": 1128.32,
+      "duration": 3.5,
+      "text": "I mean, it's hard to express it any further than that."
+    },
+    {
+      "index": 308,
+      "start": 1128.32,
+      "end": 1132.04,
+      "duration": 3.72,
+      "text": "So look, in many cases we tell you formulas."
+    },
+    {
+      "index": 309,
+      "start": 1132.04,
+      "end": 1136.28,
+      "duration": 4.24,
+      "text": "And in many cases it's so obvious when they're true that"
+    },
+    {
+      "index": 310,
+      "start": 1136.28,
+      "end": 1139.61,
+      "duration": 3.33,
+      "text": "we don't have to worry about what we say."
+    },
+    {
+      "index": 311,
+      "start": 1139.61,
+      "end": 1141.98,
+      "duration": 2.37,
+      "text": "And indeed, there's something implicit here."
+    },
+    {
+      "index": 312,
+      "start": 1141.98,
+      "end": 1144.55,
+      "duration": 2.57,
+      "text": "I'm saying well, you know, if I wrote this symbol down, it"
+    },
+    {
+      "index": 313,
+      "start": 1144.55,
+      "end": 1146.37,
+      "duration": 1.82,
+      "text": "must mean that the thing exists."
+    },
+    {
+      "index": 314,
+      "start": 1146.37,
+      "end": 1148.28,
+      "duration": 1.91,
+      "text": "So that's a subtle point."
+    },
+    {
+      "index": 315,
+      "start": 1148.28,
+      "end": 1151.85,
+      "duration": 3.57,
+      "text": "But what I'm emphasizing is that you don't need to know in"
+    },
+    {
+      "index": 316,
+      "start": 1151.85,
+      "end": 1153.73,
+      "duration": 1.88,
+      "text": "advance that this one exists."
+    },
+    {
+      "index": 317,
+      "start": 1153.73,
+      "end": 1158.02,
+      "duration": 4.29,
+      "text": "You do need to know in advance that that one exists."
+    },
+    {
+      "index": 318,
+      "start": 1158.02,
+      "end": 1159.85,
+      "duration": 1.83,
+      "text": "Essentially, yeah."
+    },
+    {
+      "index": 319,
+      "start": 1159.85,
+      "end": 1164.62,
+      "duration": 4.77,
+      "text": "So that's the direction that it goes."
+    },
+    {
+      "index": 320,
+      "start": 1164.62,
+      "end": 1168.1,
+      "duration": 3.48,
+      "text": "You can't get away with not having this exist and still"
+    },
+    {
+      "index": 321,
+      "start": 1168.1,
+      "end": 1177.74,
+      "duration": 9.64,
+      "text": "have the statement be true."
+    },
+    {
+      "index": 322,
+      "start": 1177.74,
+      "end": 1178.6,
+      "duration": 0.86,
+      "text": "Alright, another question."
+    },
+    {
+      "index": 323,
+      "start": 1178.6,
+      "end": 1179.74,
+      "duration": 1.14,
+      "text": "Thank you."
+    },
+    {
+      "index": 324,
+      "start": 1179.74,
+      "end": 1187.7,
+      "duration": 7.96,
+      "text": "STUDENT: [INAUDIBLE]"
+    },
+    {
+      "index": 325,
+      "start": 1187.7,
+      "end": 1193.08,
+      "duration": 5.38,
+      "text": "PROFESSOR: So I'm getting a little ahead of myself, but"
+    },
+    {
+      "index": 326,
+      "start": 1193.08,
+      "end": 1194.61,
+      "duration": 1.53,
+      "text": "let me just say."
+    },
+    {
+      "index": 327,
+      "start": 1194.61,
+      "end": 1199.67,
+      "duration": 5.06,
+      "text": "In these situations here, when x is going to 0 and x is going"
+    },
+    {
+      "index": 328,
+      "start": 1199.67,
+      "end": 1200.12,
+      "duration": 0.45,
+      "text": "to infinity."
+    },
+    {
+      "index": 329,
+      "start": 1200.12,
+      "end": 1202.9,
+      "duration": 2.78,
+      "text": "For instance, here when x goes to 0, the logarithm is"
+    },
+    {
+      "index": 330,
+      "start": 1202.9,
+      "end": 1206.34,
+      "duration": 3.44,
+      "text": "undefined at x = 0."
+    },
+    {
+      "index": 331,
+      "start": 1206.34,
+      "end": 1208.24,
+      "duration": 1.9,
+      "text": "Nevertheless, this theorem applies."
+    },
+    {
+      "index": 332,
+      "start": 1208.24,
+      "end": 1210.17,
+      "duration": 1.93,
+      "text": "And we'll be able to use it."
+    },
+    {
+      "index": 333,
+      "start": 1210.17,
+      "end": 1212.52,
+      "duration": 2.35,
+      "text": "Over here, as x goes to infinity, neither of these --"
+    },
+    {
+      "index": 334,
+      "start": 1212.52,
+      "end": 1215.54,
+      "duration": 3.02,
+      "text": "well, actually, come to think of it, e^ -x, if you like,"
+    },
+    {
+      "index": 335,
+      "start": 1215.54,
+      "end": 1217.89,
+      "duration": 2.35,
+      "text": "it's equal to 0 at infinity."
+    },
+    {
+      "index": 336,
+      "start": 1217.89,
+      "end": 1221.22,
+      "duration": 3.33,
+      "text": "If you want to say that it has a value."
+    },
+    {
+      "index": 337,
+      "start": 1221.22,
+      "end": 1225.7,
+      "duration": 4.48,
+      "text": "But in fact, these expressions don't necessarily have values."
+    },
+    {
+      "index": 338,
+      "start": 1225.7,
+      "end": 1227.34,
+      "duration": 1.64,
+      "text": "At the ends."
+    },
+    {
+      "index": 339,
+      "start": 1227.34,
+      "end": 1233.16,
+      "duration": 5.82,
+      "text": "And nevertheless, the theorem applies."
+    },
+    {
+      "index": 340,
+      "start": 1233.16,
+      "end": 1236.93,
+      "duration": 3.77,
+      "text": "I mean, it can exist. It's perfectly OK for it to exist."
+    },
+    {
+      "index": 341,
+      "start": 1236.93,
+      "end": 1237.91,
+      "duration": 0.98,
+      "text": "It's no problem."
+    },
+    {
+      "index": 342,
+      "start": 1237.91,
+      "end": 1239.22,
+      "duration": 1.31,
+      "text": "It just doesn't need to exists."
+    },
+    {
+      "index": 343,
+      "start": 1239.22,
+      "end": 1245.08,
+      "duration": 5.86,
+      "text": "It isn't forced to exist."
+    },
+    {
+      "index": 344,
+      "start": 1245.08,
+      "end": 1250.09,
+      "duration": 5.01,
+      "text": "So here's a calculation which we just did."
+    },
+    {
+      "index": 345,
+      "start": 1250.09,
+      "end": 1251.46,
+      "duration": 1.37,
+      "text": "And we evaluated this."
+    },
+    {
+      "index": 346,
+      "start": 1251.46,
+      "end": 1258.05,
+      "duration": 6.59,
+      "text": "Now, I want to make a comparison with the method of"
+    },
+    {
+      "index": 347,
+      "start": 1258.05,
+      "end": 1266.77,
+      "duration": 8.72,
+      "text": "approximation."
+    },
+    {
+      "index": 348,
+      "start": 1266.77,
+      "end": 1269.99,
+      "duration": 3.22,
+      "text": "In the method of approximations, this Example"
+    },
+    {
+      "index": 349,
+      "start": 1269.99,
+      "end": 1274.78,
+      "duration": 4.79,
+      "text": "2, which was the example with the sine function, we would"
+    },
+    {
+      "index": 350,
+      "start": 1274.78,
+      "end": 1276.82,
+      "duration": 2.04,
+      "text": "use the following property."
+    },
+    {
+      "index": 351,
+      "start": 1276.82,
+      "end": 1279.37,
+      "duration": 2.55,
+      "text": "We would use sin u is approximately u."
+    },
+    {
+      "index": 352,
+      "start": 1279.37,
+      "end": 1282.12,
+      "duration": 2.75,
+      "text": "We would use that linear approximation."
+    },
+    {
+      "index": 353,
+      "start": 1282.12,
+      "end": 1289.16,
+      "duration": 7.04,
+      "text": "And then what we would have here is that sin 5x / sin 2x"
+    },
+    {
+      "index": 354,
+      "start": 1289.16,
+      "end": 1295.61,
+      "duration": 6.45,
+      "text": "is approximately 5x / 2x, which is of course 5/2."
+    },
+    {
+      "index": 355,
+      "start": 1295.61,
+      "end": 1298.49,
+      "duration": 2.88,
+      "text": "And this is true when u is approximately 0, and this is"
+    },
+    {
+      "index": 356,
+      "start": 1298.49,
+      "end": 1301.55,
+      "duration": 3.06,
+      "text": "true certainly as x goes to 0, it's going"
+    },
+    {
+      "index": 357,
+      "start": 1301.55,
+      "end": 1305.88,
+      "duration": 4.33,
+      "text": "to be a valid limit."
+    },
+    {
+      "index": 358,
+      "start": 1305.88,
+      "end": 1310.64,
+      "duration": 4.76,
+      "text": "So that's very similar to Example 2."
+    },
+    {
+      "index": 359,
+      "start": 1310.64,
+      "end": 1316.53,
+      "duration": 5.89,
+      "text": "In Example 3, we managed to look at this expression cos x"
+    },
+    {
+      "index": 360,
+      "start": 1316.53,
+      "end": 1319.64,
+      "duration": 3.11,
+      "text": "- 1 / x ^2."
+    },
+    {
+      "index": 361,
+      "start": 1319.64,
+      "end": 1323.51,
+      "duration": 3.87,
+      "text": "And for this one, you have to remember the approximation"
+    },
+    {
+      "index": 362,
+      "start": 1323.51,
+      "end": 1327.94,
+      "duration": 4.43,
+      "text": "near x = 0 to the cosine function."
+    },
+    {
+      "index": 363,
+      "start": 1327.94,
+      "end": 1335.58,
+      "duration": 7.64,
+      "text": "And that's 1 - x ^2 / 2."
+    },
+    {
+      "index": 364,
+      "start": 1335.58,
+      "end": 1338.85,
+      "duration": 3.27,
+      "text": "So that was the approximation, the quadratic approximation to"
+    },
+    {
+      "index": 365,
+      "start": 1338.85,
+      "end": 1340.25,
+      "duration": 1.4,
+      "text": "the cosine function."
+    },
+    {
+      "index": 366,
+      "start": 1340.25,
+      "end": 1342.78,
+      "duration": 2.53,
+      "text": "And now, sure enough, this simplifies."
+    },
+    {
+      "index": 367,
+      "start": 1342.78,
+      "end": 1352.63,
+      "duration": 9.85,
+      "text": "This becomes - x ^2 / 2 / x ^2, which is - 1/2."
+    },
+    {
+      "index": 368,
+      "start": 1352.63,
+      "end": 1354.62,
+      "duration": 1.99,
+      "text": "So we get the same answer, which is a good thing."
+    },
+    {
+      "index": 369,
+      "start": 1354.62,
+      "end": 1356.45,
+      "duration": 1.83,
+      "text": "Because both of these methods are valid."
+    },
+    {
+      "index": 370,
+      "start": 1356.45,
+      "end": 1359.52,
+      "duration": 3.07,
+      "text": "They're consistent."
+    },
+    {
+      "index": 371,
+      "start": 1359.52,
+      "end": 1361.6,
+      "duration": 2.08,
+      "text": "You can see that neither of them is"
+    },
+    {
+      "index": 372,
+      "start": 1361.6,
+      "end": 1362.94,
+      "duration": 1.34,
+      "text": "particularly a lot longer."
+    },
+    {
+      "index": 373,
+      "start": 1362.94,
+      "end": 1365.49,
+      "duration": 2.55,
+      "text": "You may have trouble remembering this property."
+    },
+    {
+      "index": 374,
+      "start": 1365.49,
+      "end": 1371.05,
+      "duration": 5.56,
+      "text": "But in fact it's something that you can easily derive."
+    },
+    {
+      "index": 375,
+      "start": 1371.05,
+      "end": 1374.705,
+      "duration": 3.655,
+      "text": "And, indeed, it's related to the second derivative of the"
+    },
+    {
+      "index": 376,
+      "start": 1374.705,
+      "end": 1376.54,
+      "duration": 1.835,
+      "text": "cosine, as is this calculation here."
+    },
+    {
+      "index": 377,
+      "start": 1376.54,
+      "end": 1384.26,
+      "duration": 7.72,
+      "text": "They're almost the same amount of numerical content to them."
+    },
+    {
+      "index": 378,
+      "start": 1384.26,
+      "end": 1392.24,
+      "duration": 7.98,
+      "text": "So now what I'd like to do is explain to you why L'Hopital's"
+    },
+    {
+      "index": 379,
+      "start": 1392.24,
+      "end": 1394.97,
+      "duration": 2.73,
+      "text": "Rule works better in some cases."
+    },
+    {
+      "index": 380,
+      "start": 1394.97,
+      "end": 1400.35,
+      "duration": 5.38,
+      "text": "And the real value that it has is in handling these other"
+    },
+    {
+      "index": 381,
+      "start": 1400.35,
+      "end": 1405.55,
+      "duration": 5.2,
+      "text": "more exotic limits."
+    },
+    {
+      "index": 382,
+      "start": 1405.55,
+      "end": 1413.96,
+      "duration": 8.41,
+      "text": "So now we're going to do L'Hopital's Rule over again."
+    },
+    {
+      "index": 383,
+      "start": 1413.96,
+      "end": 1415.36,
+      "duration": 1.4,
+      "text": "And I'll handle these functions."
+    },
+    {
+      "index": 384,
+      "start": 1415.36,
+      "end": 1420.68,
+      "duration": 5.32,
+      "text": "But I'll have to rewrite them, but we'll just do that."
+    },
+    {
+      "index": 385,
+      "start": 1420.68,
+      "end": 1422.1,
+      "duration": 1.42,
+      "text": "So here's the property."
+    },
+    {
+      "index": 386,
+      "start": 1422.1,
+      "end": 1428.26,
+      "duration": 6.16,
+      "text": "That the limit as x goes to a of f ( x) / g (x) is equal to"
+    },
+    {
+      "index": 387,
+      "start": 1428.26,
+      "end": 1434.73,
+      "duration": 6.47,
+      "text": "the limit as x goes to a of f ' ( x) / g '(x)."
+    },
+    {
+      "index": 388,
+      "start": 1434.73,
+      "end": 1435.98,
+      "duration": 1.25,
+      "text": "That's the property."
+    },
+    {
+      "index": 389,
+      "start": 1435.98,
+      "end": 1437.99,
+      "duration": 2.01,
+      "text": "And this is what we'll always be using."
+    },
+    {
+      "index": 390,
+      "start": 1437.99,
+      "end": 1439.49,
+      "duration": 1.5,
+      "text": "Very convenient thing."
+    },
+    {
+      "index": 391,
+      "start": 1439.49,
+      "end": 1444.66,
+      "duration": 5.17,
+      "text": "And remember it was true provided that f ("
+    },
+    {
+      "index": 392,
+      "start": 1444.66,
+      "end": 1451.53,
+      "duration": 6.87,
+      "text": "a) = g (a) = 0."
+    },
+    {
+      "index": 393,
+      "start": 1451.53,
+      "end": 1463.24,
+      "duration": 11.71,
+      "text": "And that the right-hand side exists."
+    },
+    {
+      "index": 394,
+      "start": 1463.24,
+      "end": 1465.6,
+      "duration": 2.36,
+      "text": "But I claim that it works better, and"
+    },
+    {
+      "index": 395,
+      "start": 1465.6,
+      "end": 1466.34,
+      "duration": 0.74,
+      "text": "I'll get rid of these."
+    },
+    {
+      "index": 396,
+      "start": 1466.34,
+      "end": 1469.98,
+      "duration": 3.64,
+      "text": "But I'll write them again to show you that"
+    },
+    {
+      "index": 397,
+      "start": 1469.98,
+      "end": 1470.99,
+      "duration": 1.01,
+      "text": "it works for these."
+    },
+    {
+      "index": 398,
+      "start": 1470.99,
+      "end": 1483.68,
+      "duration": 12.69,
+      "text": "So there are other cases."
+    },
+    {
+      "index": 399,
+      "start": 1483.68,
+      "end": 1487.25,
+      "duration": 3.57,
+      "text": "And the other cases that are allowed are this."
+    },
+    {
+      "index": 400,
+      "start": 1487.25,
+      "end": 1491.23,
+      "duration": 3.98,
+      "text": "First of all, as indicated by what I just erased, you can"
+    },
+    {
+      "index": 401,
+      "start": 1491.23,
+      "end": 1493.57,
+      "duration": 2.34,
+      "text": "allow a to be equal to plus or minus infinity."
+    },
+    {
+      "index": 402,
+      "start": 1493.57,
+      "end": 1497.68,
+      "duration": 4.11,
+      "text": "It's also OK."
+    },
+    {
+      "index": 403,
+      "start": 1497.68,
+      "end": 1503.82,
+      "duration": 6.14,
+      "text": "So you can take the limit going to the"
+    },
+    {
+      "index": 404,
+      "start": 1503.82,
+      "end": 1505.11,
+      "duration": 1.29,
+      "text": "far ends of the universe."
+    },
+    {
+      "index": 405,
+      "start": 1505.11,
+      "end": 1506.63,
+      "duration": 1.52,
+      "text": "Both left and right."
+    },
+    {
+      "index": 406,
+      "start": 1506.63,
+      "end": 1512.265,
+      "duration": 5.635,
+      "text": "And then the other thing that you can do is, you can allow f"
+    },
+    {
+      "index": 407,
+      "start": 1512.265,
+      "end": 1519.69,
+      "duration": 7.425,
+      "text": "( a) and g (a) to be plus or minus infinity."
+    },
+    {
+      "index": 408,
+      "start": 1519.69,
+      "end": 1522.54,
+      "duration": 2.85,
+      "text": "Is OK."
+    },
+    {
+      "index": 409,
+      "start": 1522.54,
+      "end": 1526.67,
+      "duration": 4.13,
+      "text": "So now, the point is that we can handle not just the 0 / 0"
+    },
+    {
+      "index": 410,
+      "start": 1526.67,
+      "end": 1533.78,
+      "duration": 7.11,
+      "text": "case, but also the infinity / infinity case."
+    },
+    {
+      "index": 411,
+      "start": 1533.78,
+      "end": 1537.02,
+      "duration": 3.24,
+      "text": "That's a very powerful tool, and quite different from the"
+    },
+    {
+      "index": 412,
+      "start": 1537.02,
+      "end": 1542.05,
+      "duration": 5.03,
+      "text": "other cases."
+    },
+    {
+      "index": 413,
+      "start": 1542.05,
+      "end": 1549.61,
+      "duration": 7.56,
+      "text": "And the third thing is that the right-hand side doesn't"
+    },
+    {
+      "index": 414,
+      "start": 1549.61,
+      "end": 1556.5,
+      "duration": 6.89,
+      "text": "really quite have to exist, in the ordinary sense."
+    },
+    {
+      "index": 415,
+      "start": 1556.5,
+      "end": 1560.46,
+      "duration": 3.96,
+      "text": "Or, it could be plus or minus infinity."
+    },
+    {
+      "index": 416,
+      "start": 1560.46,
+      "end": 1561.97,
+      "duration": 1.51,
+      "text": "That's also OK."
+    },
+    {
+      "index": 417,
+      "start": 1561.97,
+      "end": 1564.27,
+      "duration": 2.3,
+      "text": "That's still information."
+    },
+    {
+      "index": 418,
+      "start": 1564.27,
+      "end": 1570.62,
+      "duration": 6.35,
+      "text": "So if we can see where it goes, then we're still good."
+    },
+    {
+      "index": 419,
+      "start": 1570.62,
+      "end": 1572.92,
+      "duration": 2.3,
+      "text": "If it goes to plus infinity, if it goes to 0, if it goes to"
+    },
+    {
+      "index": 420,
+      "start": 1572.92,
+      "end": 1575.49,
+      "duration": 2.57,
+      "text": "a finite number, if it goes to minus infinity, all of that"
+    },
+    {
+      "index": 421,
+      "start": 1575.49,
+      "end": 1576.39,
+      "duration": 0.9,
+      "text": "will be OK."
+    },
+    {
+      "index": 422,
+      "start": 1576.39,
+      "end": 1579.55,
+      "duration": 3.16,
+      "text": "It just if it oscillates wildly that we'll be lost. And"
+    },
+    {
+      "index": 423,
+      "start": 1579.55,
+      "end": 1587.5,
+      "duration": 7.95,
+      "text": "those calculations we'll never encounter."
+    },
+    {
+      "index": 424,
+      "start": 1587.5,
+      "end": 1589.71,
+      "duration": 2.21,
+      "text": "So this basically handles everything that you could"
+    },
+    {
+      "index": 425,
+      "start": 1589.71,
+      "end": 1592.05,
+      "duration": 2.34,
+      "text": "possibly hope for."
+    },
+    {
+      "index": 426,
+      "start": 1592.05,
+      "end": 1597.05,
+      "duration": 5.0,
+      "text": "And it's a very convenient process."
+    },
+    {
+      "index": 427,
+      "start": 1597.05,
+      "end": 1600.51,
+      "duration": 3.46,
+      "text": "So let me carry out a few examples."
+    },
+    {
+      "index": 428,
+      "start": 1600.51,
+      "end": 1604.76,
+      "duration": 4.25,
+      "text": "And, let's see, I guess the first one that I wanted to do"
+    },
+    {
+      "index": 429,
+      "start": 1604.76,
+      "end": 1607.64,
+      "duration": 2.88,
+      "text": "was x ln x."
+    },
+    {
+      "index": 430,
+      "start": 1607.64,
+      "end": 1609.3,
+      "duration": 1.66,
+      "text": "So what example are we up to."
+    },
+    {
+      "index": 431,
+      "start": 1609.3,
+      "end": 1617.15,
+      "duration": 7.85,
+      "text": "Example 3, so Example 4 is coming up."
+    },
+    {
+      "index": 432,
+      "start": 1617.15,
+      "end": 1619.56,
+      "duration": 2.41,
+      "text": "Example 4, this is one of the ones that I wrote at the"
+    },
+    {
+      "index": 433,
+      "start": 1619.56,
+      "end": 1626.43,
+      "duration": 6.87,
+      "text": "beginning of the lecture, x ln x."
+    },
+    {
+      "index": 434,
+      "start": 1626.43,
+      "end": 1632.93,
+      "duration": 6.5,
+      "text": "This one was on our homework problem."
+    },
+    {
+      "index": 435,
+      "start": 1632.93,
+      "end": 1637.74,
+      "duration": 4.81,
+      "text": "In the limits of some calculation."
+    },
+    {
+      "index": 436,
+      "start": 1637.74,
+      "end": 1646.17,
+      "duration": 8.43,
+      "text": "But so this one, you have to look at it first to think"
+    },
+    {
+      "index": 437,
+      "start": 1646.17,
+      "end": 1647.02,
+      "duration": 0.85,
+      "text": "about what it's doing."
+    },
+    {
+      "index": 438,
+      "start": 1647.02,
+      "end": 1649.53,
+      "duration": 2.51,
+      "text": "It's an indeterminate form, but it sort of looks like it's"
+    },
+    {
+      "index": 439,
+      "start": 1649.53,
+      "end": 1650.98,
+      "duration": 1.45,
+      "text": "the wrong type."
+    },
+    {
+      "index": 440,
+      "start": 1650.98,
+      "end": 1653.07,
+      "duration": 2.09,
+      "text": "So why is it in an indeterminate form."
+    },
+    {
+      "index": 441,
+      "start": 1653.07,
+      "end": 1658.6,
+      "duration": 5.53,
+      "text": "This one goes to 0, and this one goes to minus infinity."
+    },
+    {
+      "index": 442,
+      "start": 1658.6,
+      "end": 1660.46,
+      "duration": 1.86,
+      "text": "So, excuse me, this is a product."
+    },
+    {
+      "index": 443,
+      "start": 1660.46,
+      "end": 1666.21,
+      "duration": 5.75,
+      "text": "It's 0 times minus infinity."
+    },
+    {
+      "index": 444,
+      "start": 1666.21,
+      "end": 1668.01,
+      "duration": 1.8,
+      "text": "So that's an indeterminate form, because we don't know"
+    },
+    {
+      "index": 445,
+      "start": 1668.01,
+      "end": 1670.2,
+      "duration": 2.19,
+      "text": "whether the 0 wins or the infinity this could keep"
+    },
+    {
+      "index": 446,
+      "start": 1670.2,
+      "end": 1671.85,
+      "duration": 1.65,
+      "text": "getting smaller and smaller and smaller, and this could be"
+    },
+    {
+      "index": 447,
+      "start": 1671.85,
+      "end": 1672.89,
+      "duration": 1.04,
+      "text": "getting bigger and bigger bigger."
+    },
+    {
+      "index": 448,
+      "start": 1672.89,
+      "end": 1675.42,
+      "duration": 2.53,
+      "text": "The product could be anything in between."
+    },
+    {
+      "index": 449,
+      "start": 1675.42,
+      "end": 1677.74,
+      "duration": 2.32,
+      "text": "We just don't know."
+    },
+    {
+      "index": 450,
+      "start": 1677.74,
+      "end": 1684.27,
+      "duration": 6.53,
+      "text": "So the first step is to write this as a ratio of things,"
+    },
+    {
+      "index": 451,
+      "start": 1684.27,
+      "end": 1686.84,
+      "duration": 2.57,
+      "text": "rather than a product of things."
+    },
+    {
+      "index": 452,
+      "start": 1686.84,
+      "end": 1689.77,
+      "duration": 2.93,
+      "text": "And it turns out that the way to do that is to use the"
+    },
+    {
+      "index": 453,
+      "start": 1689.77,
+      "end": 1693.22,
+      "duration": 3.45,
+      "text": "logarithm in the numerator, and the 1 / x in the"
+    },
+    {
+      "index": 454,
+      "start": 1693.22,
+      "end": 1694.36,
+      "duration": 1.14,
+      "text": "denominator."
+    },
+    {
+      "index": 455,
+      "start": 1694.36,
+      "end": 1698.04,
+      "duration": 3.68,
+      "text": "So this is a choice that I'm making here."
+    },
+    {
+      "index": 456,
+      "start": 1698.04,
+      "end": 1703.8,
+      "duration": 5.76,
+      "text": "Now, I've just converted it to a limit of the type minus"
+    },
+    {
+      "index": 457,
+      "start": 1703.8,
+      "end": 1708.1,
+      "duration": 4.3,
+      "text": "infinity divided by infinity."
+    },
+    {
+      "index": 458,
+      "start": 1708.1,
+      "end": 1710.83,
+      "duration": 2.73,
+      "text": "Because the numerator is going to minus infinity as x goes to"
+    },
+    {
+      "index": 459,
+      "start": 1710.83,
+      "end": 1717.55,
+      "duration": 6.72,
+      "text": "0 plus and the denominator 1 / x is going to plus infinity."
+    },
+    {
+      "index": 460,
+      "start": 1717.55,
+      "end": 1720.3,
+      "duration": 2.75,
+      "text": "Again, there's a competitions, but now it's one of the forms"
+    },
+    {
+      "index": 461,
+      "start": 1720.3,
+      "end": 1724.21,
+      "duration": 3.91,
+      "text": "to which L'Hopital's Rule applies."
+    },
+    {
+      "index": 462,
+      "start": 1724.21,
+      "end": 1729.4,
+      "duration": 5.19,
+      "text": "Now I'm just going to apply L'Hopital's Rule."
+    },
+    {
+      "index": 463,
+      "start": 1729.4,
+      "end": 1734.67,
+      "duration": 5.27,
+      "text": "And what it says is that I differentiate here."
+    },
+    {
+      "index": 464,
+      "start": 1734.67,
+      "end": 1736.5,
+      "duration": 1.83,
+      "text": "So I just differentiate a numerator and denominator."
+    },
+    {
+      "index": 465,
+      "start": 1736.5,
+      "end": 1738.9,
+      "duration": 2.4,
+      "text": "Applying L'Hopital's Rule is a breeze."
+    },
+    {
+      "index": 466,
+      "start": 1738.9,
+      "end": 1743.71,
+      "duration": 4.81,
+      "text": "You just differentiate, differentiate."
+    },
+    {
+      "index": 467,
+      "start": 1743.71,
+      "end": 1746.81,
+      "duration": 3.1,
+      "text": "And now it just simplifies and we're done."
+    },
+    {
+      "index": 468,
+      "start": 1746.81,
+      "end": 1752.26,
+      "duration": 5.45,
+      "text": "This is the limit as x goes to 0 plus of,"
+    },
+    {
+      "index": 469,
+      "start": 1752.26,
+      "end": 1754.18,
+      "duration": 1.92,
+      "text": "well, the x^2's cancel."
+    },
+    {
+      "index": 470,
+      "start": 1754.18,
+      "end": 1760.36,
+      "duration": 6.18,
+      "text": "This is the same as just - x. x factors cancel."
+    },
+    {
+      "index": 471,
+      "start": 1760.36,
+      "end": 1761.82,
+      "duration": 1.46,
+      "text": "And so that's 0."
+    },
+    {
+      "index": 472,
+      "start": 1761.82,
+      "end": 1764.17,
+      "duration": 2.35,
+      "text": "The answer is that it's 0."
+    },
+    {
+      "index": 473,
+      "start": 1764.17,
+      "end": 1770.65,
+      "duration": 6.48,
+      "text": "So x goes to 0 faster then ln n goes to minus infinity."
+    },
+    {
+      "index": 474,
+      "start": 1770.65,
+      "end": 1776.4,
+      "duration": 5.75,
+      "text": "This 0 was the winner."
+    },
+    {
+      "index": 475,
+      "start": 1776.4,
+      "end": 1777.43,
+      "duration": 1.03,
+      "text": "Something you can't"
+    },
+    {
+      "index": 476,
+      "start": 1777.43,
+      "end": 1784.24,
+      "duration": 6.81,
+      "text": "necessarily predict in advance."
+    },
+    {
+      "index": 477,
+      "start": 1784.24,
+      "end": 1789.92,
+      "duration": 5.68,
+      "text": "So let's do the other two examples that I wrote down."
+    },
+    {
+      "index": 478,
+      "start": 1789.92,
+      "end": 1793.23,
+      "duration": 3.31,
+      "text": "I'm going to do them in slightly more generality,"
+    },
+    {
+      "index": 479,
+      "start": 1793.23,
+      "end": 1798.59,
+      "duration": 5.36,
+      "text": "because they're the most fundamental rate properties"
+    },
+    {
+      "index": 480,
+      "start": 1798.59,
+      "end": 1801.22,
+      "duration": 2.63,
+      "text": "that you're going to need to know for the next section."
+    },
+    {
+      "index": 481,
+      "start": 1801.22,
+      "end": 1803.0,
+      "duration": 1.78,
+      "text": "Which is improper integrals."
+    },
+    {
+      "index": 482,
+      "start": 1803.0,
+      "end": 1807.39,
+      "duration": 4.39,
+      "text": "And also they're just very important for physical math,"
+    },
+    {
+      "index": 483,
+      "start": 1807.39,
+      "end": 1810.39,
+      "duration": 3.0,
+      "text": "and any other kind of thing, basically."
+    },
+    {
+      "index": 484,
+      "start": 1810.39,
+      "end": 1812.34,
+      "duration": 1.95,
+      "text": "So here, let's just do these."
+    },
+    {
+      "index": 485,
+      "start": 1812.34,
+      "end": 1816.7,
+      "duration": 4.36,
+      "text": "So let's see, which one do I want to do first. So I wrote"
+    },
+    {
+      "index": 486,
+      "start": 1816.7,
+      "end": 1822.4,
+      "duration": 5.7,
+      "text": "down the limit of x e^2 - x, but I'm going to make it even"
+    },
+    {
+      "index": 487,
+      "start": 1822.4,
+      "end": 1822.97,
+      "duration": 0.57,
+      "text": "more general."
+    },
+    {
+      "index": 488,
+      "start": 1822.97,
+      "end": 1826.692,
+      "duration": 3.722,
+      "text": "I'm going to make it any negative power here, where p"
+    },
+    {
+      "index": 489,
+      "start": 1826.692,
+      "end": 1830.19,
+      "duration": 3.498,
+      "text": "is some positive constant."
+    },
+    {
+      "index": 490,
+      "start": 1830.19,
+      "end": 1835.68,
+      "duration": 5.49,
+      "text": "Now again, this is a product of functions, not a quotient,"
+    },
+    {
+      "index": 491,
+      "start": 1835.68,
+      "end": 1837.35,
+      "duration": 1.67,
+      "text": "a ratio, of functions."
+    },
+    {
+      "index": 492,
+      "start": 1837.35,
+      "end": 1841.01,
+      "duration": 3.66,
+      "text": "And so I need to rewrite it."
+    },
+    {
+      "index": 493,
+      "start": 1841.01,
+      "end": 1850.67,
+      "duration": 9.66,
+      "text": "I'm going to write it as x / e ^ p x."
+    },
+    {
+      "index": 494,
+      "start": 1850.67,
+      "end": 1853.06,
+      "duration": 2.39,
+      "text": "And now I'm going to apply, well, so it's of this form"
+    },
+    {
+      "index": 495,
+      "start": 1853.06,
+      "end": 1858.42,
+      "duration": 5.36,
+      "text": "infinity / infinity."
+    },
+    {
+      "index": 496,
+      "start": 1858.42,
+      "end": 1862.48,
+      "duration": 4.06,
+      "text": "And now that's the same as the limit as x goes to infinity of"
+    },
+    {
+      "index": 497,
+      "start": 1862.48,
+      "end": 1867.52,
+      "duration": 5.04,
+      "text": "1 / p e^ px."
+    },
+    {
+      "index": 498,
+      "start": 1867.52,
+      "end": 1868.67,
+      "duration": 1.15,
+      "text": "So where does that go?"
+    },
+    {
+      "index": 499,
+      "start": 1868.67,
+      "end": 1870.25,
+      "duration": 1.58,
+      "text": "As x goes to infinity."
+    },
+    {
+      "index": 500,
+      "start": 1870.25,
+      "end": 1872.71,
+      "duration": 2.46,
+      "text": "Now we can decide."
+    },
+    {
+      "index": 501,
+      "start": 1872.71,
+      "end": 1874.43,
+      "duration": 1.72,
+      "text": "The 1 stays where it is."
+    },
+    {
+      "index": 502,
+      "start": 1874.43,
+      "end": 1883.44,
+      "duration": 9.01,
+      "text": "And this, as x goes to infinity, goes to infinity."
+    },
+    {
+      "index": 503,
+      "start": 1883.44,
+      "end": 1887.08,
+      "duration": 3.64,
+      "text": "So the answer is 0."
+    },
+    {
+      "index": 504,
+      "start": 1887.08,
+      "end": 1908.5,
+      "duration": 21.42,
+      "text": "And the conclusion is that x grows more slowly then e ^ px."
+    },
+    {
+      "index": 505,
+      "start": 1908.5,
+      "end": 1909.1,
+      "duration": 0.6,
+      "text": "As x goes to infinity."
+    },
+    {
+      "index": 506,
+      "start": 1909.1,
+      "end": 1910.98,
+      "duration": 1.88,
+      "text": "Remember, p is positive here, of course."
+    },
+    {
+      "index": 507,
+      "start": 1910.98,
+      "end": 1913.99,
+      "duration": 3.01,
+      "text": "It's the increasing exponentials."
+    },
+    {
+      "index": 508,
+      "start": 1913.99,
+      "end": 1923.08,
+      "duration": 9.09,
+      "text": "Not the decreasing ones."
+    },
+    {
+      "index": 509,
+      "start": 1923.08,
+      "end": 1928.53,
+      "duration": 5.45,
+      "text": "Let's do a variant of this."
+    },
+    {
+      "index": 510,
+      "start": 1928.53,
+      "end": 1930.69,
+      "duration": 2.16,
+      "text": "I'll do it the opposite way."
+    },
+    {
+      "index": 511,
+      "start": 1930.69,
+      "end": 1933.58,
+      "duration": 2.89,
+      "text": "So I'm going to call this example 5 '."
+    },
+    {
+      "index": 512,
+      "start": 1933.58,
+      "end": 1935.9,
+      "duration": 2.32,
+      "text": "It really doesn't give us any more information, but it gives"
+    },
+    {
+      "index": 513,
+      "start": 1935.9,
+      "end": 1938.28,
+      "duration": 2.38,
+      "text": "you just a little bit more practice."
+    },
+    {
+      "index": 514,
+      "start": 1938.28,
+      "end": 1947.8,
+      "duration": 9.52,
+      "text": "So suppose I look at things the other way. e^ px divided"
+    },
+    {
+      "index": 515,
+      "start": 1947.8,
+      "end": 1955.26,
+      "duration": 7.46,
+      "text": "by, say, x^ 100."
+    },
+    {
+      "index": 516,
+      "start": 1955.26,
+      "end": 1962.01,
+      "duration": 6.75,
+      "text": "Now, this is an infinity / infinity example, again."
+    },
+    {
+      "index": 517,
+      "start": 1962.01,
+      "end": 1964.82,
+      "duration": 2.81,
+      "text": "And you can work out what it's doing."
+    },
+    {
+      "index": 518,
+      "start": 1964.82,
+      "end": 1968.03,
+      "duration": 3.21,
+      "text": "But there are two ways of thinking about this."
+    },
+    {
+      "index": 519,
+      "start": 1968.03,
+      "end": 1969.48,
+      "duration": 1.45,
+      "text": "There's the slow way and the fast way."
+    },
+    {
+      "index": 520,
+      "start": 1969.48,
+      "end": 1974.39,
+      "duration": 4.91,
+      "text": "The slow way is to differentiate this 100 times."
+    },
+    {
+      "index": 521,
+      "start": 1974.39,
+      "end": 1975.53,
+      "duration": 1.14,
+      "text": "That is, right?"
+    },
+    {
+      "index": 522,
+      "start": 1975.53,
+      "end": 1977.29,
+      "duration": 1.76,
+      "text": "Apply L'Hopital's Rule over and over and"
+    },
+    {
+      "index": 523,
+      "start": 1977.29,
+      "end": 1978.49,
+      "duration": 1.2,
+      "text": "over again."
+    },
+    {
+      "index": 524,
+      "start": 1978.49,
+      "end": 1980.43,
+      "duration": 1.94,
+      "text": "All the way."
+    },
+    {
+      "index": 525,
+      "start": 1980.43,
+      "end": 1982.15,
+      "duration": 1.72,
+      "text": "It's clear that you could do it, but"
+    },
+    {
+      "index": 526,
+      "start": 1982.15,
+      "end": 1983.57,
+      "duration": 1.42,
+      "text": "it's kind of a nuisance."
+    },
+    {
+      "index": 527,
+      "start": 1983.57,
+      "end": 1986.85,
+      "duration": 3.28,
+      "text": "So there's a much cleverer trick here."
+    },
+    {
+      "index": 528,
+      "start": 1986.85,
+      "end": 1991.75,
+      "duration": 4.9,
+      "text": "Which is to change this to (the limit as x goes to"
+    },
+    {
+      "index": 529,
+      "start": 1991.75,
+      "end": 2005.85,
+      "duration": 14.1,
+      "text": "infinity of the e ^ px / 100 / x) ^ 100."
+    },
+    {
+      "index": 530,
+      "start": 2005.85,
+      "end": 2010.7,
+      "duration": 4.85,
+      "text": "So if you do that, then we just have one"
+    },
+    {
+      "index": 531,
+      "start": 2010.7,
+      "end": 2014.54,
+      "duration": 3.84,
+      "text": "L'Hopital's Rule step here."
+    },
+    {
+      "index": 532,
+      "start": 2014.54,
+      "end": 2024.13,
+      "duration": 9.59,
+      "text": "And that one is that this is the same as (x goes to"
+    },
+    {
+      "index": 533,
+      "start": 2024.13,
+      "end": 2035.83,
+      "duration": 11.7,
+      "text": "infinity of, well it's p / 100 e^ p x / 100 / 1) ^ 100."
+    },
+    {
+      "index": 534,
+      "start": 2035.83,
+      "end": 2042.48,
+      "duration": 6.65,
+      "text": "That's our L'Hopital's step."
+    },
+    {
+      "index": 535,
+      "start": 2042.48,
+      "end": 2049.31,
+      "duration": 6.83,
+      "text": "And of course, that's (infinity / 1 ) ^ 100."
+    },
+    {
+      "index": 536,
+      "start": 2049.31,
+      "end": 2050.41,
+      "duration": 1.1,
+      "text": "Which is infinity."
+    },
+    {
+      "index": 537,
+      "start": 2050.41,
+      "end": 2054.36,
+      "duration": 3.95,
+      "text": "Now, again I did this in a slightly different way to show"
+    },
+    {
+      "index": 538,
+      "start": 2054.36,
+      "end": 2056.8,
+      "duration": 2.44,
+      "text": "you that it works with infinity as well."
+    },
+    {
+      "index": 539,
+      "start": 2056.8,
+      "end": 2058.4,
+      "duration": 1.6,
+      "text": "So that was this other case."
+    },
+    {
+      "index": 540,
+      "start": 2058.4,
+      "end": 2061.01,
+      "duration": 2.61,
+      "text": "The right-hand side can exist, or it can be"
+    },
+    {
+      "index": 541,
+      "start": 2061.01,
+      "end": 2062.46,
+      "duration": 1.45,
+      "text": "plus or minus infinity."
+    },
+    {
+      "index": 542,
+      "start": 2062.46,
+      "end": 2065.24,
+      "duration": 2.78,
+      "text": "And that applies to this limit."
+    },
+    {
+      "index": 543,
+      "start": 2065.24,
+      "end": 2067.99,
+      "duration": 2.75,
+      "text": "And therefore, to the original limit."
+    },
+    {
+      "index": 544,
+      "start": 2067.99,
+      "end": 2075.55,
+      "duration": 7.56,
+      "text": "And the conclusion here is that e ^ px, p > 0, grows"
+    },
+    {
+      "index": 545,
+      "start": 2075.55,
+      "end": 2086.34,
+      "duration": 10.79,
+      "text": "faster than any power of x."
+    },
+    {
+      "index": 546,
+      "start": 2086.34,
+      "end": 2089.6,
+      "duration": 3.26,
+      "text": "I picked x ^ 100, but obviously it didn't matter"
+    },
+    {
+      "index": 547,
+      "start": 2089.6,
+      "end": 2092.67,
+      "duration": 3.07,
+      "text": "what power I picked."
+    },
+    {
+      "index": 548,
+      "start": 2092.67,
+      "end": 2102.05,
+      "duration": 9.38,
+      "text": "The exponents beat all the powers."
+    },
+    {
+      "index": 549,
+      "start": 2102.05,
+      "end": 2104.34,
+      "duration": 2.29,
+      "text": "So we have one more of the ones that I gave at the"
+    },
+    {
+      "index": 550,
+      "start": 2104.34,
+      "end": 2107.78,
+      "duration": 3.44,
+      "text": "beginning to take care of."
+    },
+    {
+      "index": 551,
+      "start": 2107.78,
+      "end": 2111.33,
+      "duration": 3.55,
+      "text": "And that one is the logarithm."
+    },
+    {
+      "index": 552,
+      "start": 2111.33,
+      "end": 2115.72,
+      "duration": 4.39,
+      "text": "And its behavior at infinity."
+    },
+    {
+      "index": 553,
+      "start": 2115.72,
+      "end": 2118.7,
+      "duration": 2.98,
+      "text": "So I'll do a slightly variant on that one, too."
+    },
+    {
+      "index": 554,
+      "start": 2118.7,
+      "end": 2125.08,
+      "duration": 6.38,
+      "text": "So we have Example 6, which is ln x, and instead of dividing"
+    },
+    {
+      "index": 555,
+      "start": 2125.08,
+      "end": 2127.78,
+      "duration": 2.7,
+      "text": "by x, I'm going to divide by x^ 1/3."
+    },
+    {
+      "index": 556,
+      "start": 2127.78,
+      "end": 2130.65,
+      "duration": 2.87,
+      "text": "I could divide by any positive power of x, we'll just do this"
+    },
+    {
+      "index": 557,
+      "start": 2130.65,
+      "end": 2132.17,
+      "duration": 1.52,
+      "text": "example here."
+    },
+    {
+      "index": 558,
+      "start": 2132.17,
+      "end": 2138.34,
+      "duration": 6.17,
+      "text": "So now this, as x goes to infinity, is of the form"
+    },
+    {
+      "index": 559,
+      "start": 2138.34,
+      "end": 2143.23,
+      "duration": 4.89,
+      "text": "infinity / infinity."
+    },
+    {
+      "index": 560,
+      "start": 2143.23,
+      "end": 2147.53,
+      "duration": 4.3,
+      "text": "And so it's equivalent to what happens when I differentiate"
+    },
+    {
+      "index": 561,
+      "start": 2147.53,
+      "end": 2149.25,
+      "duration": 1.72,
+      "text": "numerator and denominator separately."
+    },
+    {
+      "index": 562,
+      "start": 2149.25,
+      "end": 2160.32,
+      "duration": 11.07,
+      "text": "And that's 1 / x, and here I have 1/3 x ^ - 2/3."
+    },
+    {
+      "index": 563,
+      "start": 2160.32,
+      "end": 2163.47,
+      "duration": 3.15,
+      "text": "1 / x, and then 1/3 x^ - 2/3."
+    },
+    {
+      "index": 564,
+      "start": 2163.47,
+      "end": 2165.92,
+      "duration": 2.45,
+      "text": "Now, when the dust settles here and you get your"
+    },
+    {
+      "index": 565,
+      "start": 2165.92,
+      "end": 2170.56,
+      "duration": 4.64,
+      "text": "exponents right, we have an x^ - 1, and this is an x ^ + 2/3,"
+    },
+    {
+      "index": 566,
+      "start": 2170.56,
+      "end": 2172.5,
+      "duration": 1.94,
+      "text": "and that's a 1/3 becomes a 3."
+    },
+    {
+      "index": 567,
+      "start": 2172.5,
+      "end": 2179.26,
+      "duration": 6.76,
+      "text": "So this is what it is."
+    },
+    {
+      "index": 568,
+      "start": 2179.26,
+      "end": 2186.48,
+      "duration": 7.22,
+      "text": "And that's equal to 3x ^ - 1/3."
+    },
+    {
+      "index": 569,
+      "start": 2186.48,
+      "end": 2187.83,
+      "duration": 1.35,
+      "text": "Which we can decide."
+    },
+    {
+      "index": 570,
+      "start": 2187.83,
+      "end": 2190.15,
+      "duration": 2.32,
+      "text": "It goes to 0."
+    },
+    {
+      "index": 571,
+      "start": 2190.15,
+      "end": 2197.24,
+      "duration": 7.09,
+      "text": "As x goes to infinity."
+    },
+    {
+      "index": 572,
+      "start": 2197.24,
+      "end": 2209.91,
+      "duration": 12.67,
+      "text": "And so the conclusion is that ln x grows more slowly as x"
+    },
+    {
+      "index": 573,
+      "start": 2209.91,
+      "end": 2228.69,
+      "duration": 18.78,
+      "text": "goes to infinity, than x ^ 1/3 or any positive power of x."
+    },
+    {
+      "index": 574,
+      "start": 2228.69,
+      "end": 2235.5,
+      "duration": 6.81,
+      "text": "So any x ^ p, p positive, will work."
+    },
+    {
+      "index": 575,
+      "start": 2235.5,
+      "end": 2237.67,
+      "duration": 2.17,
+      "text": "So ln is really slow, going to infinity."
+    },
+    {
+      "index": 576,
+      "start": 2237.67,
+      "end": 2240.55,
+      "duration": 2.88,
+      "text": "It's very, very gradual."
+    },
+    {
+      "index": 577,
+      "start": 2240.55,
+      "end": 2241.42,
+      "duration": 0.87,
+      "text": "Yeah, question."
+    },
+    {
+      "index": 578,
+      "start": 2241.42,
+      "end": 2265.97,
+      "duration": 24.55,
+      "text": "STUDENT: [INAUDIBLE]"
+    },
+    {
+      "index": 579,
+      "start": 2265.97,
+      "end": 2268.23,
+      "duration": 2.26,
+      "text": "PROFESSOR: The question is, how many"
+    },
+    {
+      "index": 580,
+      "start": 2268.23,
+      "end": 2270.63,
+      "duration": 2.4,
+      "text": "hypotheses do you need here?"
+    },
+    {
+      "index": 581,
+      "start": 2270.63,
+      "end": 2277.76,
+      "duration": 7.13,
+      "text": "So I said that, and I think what you were asking is, if I"
+    },
+    {
+      "index": 582,
+      "start": 2277.76,
+      "end": 2282.94,
+      "duration": 5.18,
+      "text": "have this hypothesis, can I also have this hypothesis."
+    },
+    {
+      "index": 583,
+      "start": 2282.94,
+      "end": 2284.87,
+      "duration": 1.93,
+      "text": "That's OK."
+    },
+    {
+      "index": 584,
+      "start": 2284.87,
+      "end": 2288.84,
+      "duration": 3.97,
+      "text": "I can have this hypothesis combined with this one."
+    },
+    {
+      "index": 585,
+      "start": 2288.84,
+      "end": 2291.28,
+      "duration": 2.44,
+      "text": "I need something about f (a) and g ( a)."
+    },
+    {
+      "index": 586,
+      "start": 2291.28,
+      "end": 2294.91,
+      "duration": 3.63,
+      "text": "I can't assume nothing about f(a) and g(a)."
+    },
+    {
+      "index": 587,
+      "start": 2294.91,
+      "end": 2297.37,
+      "duration": 2.46,
+      "text": "So in other words, I have to be faced with either an"
+    },
+    {
+      "index": 588,
+      "start": 2297.37,
+      "end": 2304.18,
+      "duration": 6.81,
+      "text": "infinity / infinity, or a 0 / 0 situation."
+    },
+    {
+      "index": 589,
+      "start": 2304.18,
+      "end": 2306.65,
+      "duration": 2.47,
+      "text": "So let's see."
+    },
+    {
+      "index": 590,
+      "start": 2306.65,
+      "end": 2315.16,
+      "duration": 8.51,
+      "text": "A rule applies in the 0 / 0, or infinity / infinity case."
+    },
+    {
+      "index": 591,
+      "start": 2315.16,
+      "end": 2320.91,
+      "duration": 5.75,
+      "text": "These are the only two cases that it applies in."
+    },
+    {
+      "index": 592,
+      "start": 2320.91,
+      "end": 2325.37,
+      "duration": 4.46,
+      "text": "And a can be anything."
+    },
+    {
+      "index": 593,
+      "start": 2325.37,
+      "end": 2328.88,
+      "duration": 3.51,
+      "text": "Including infinity."
+    },
+    {
+      "index": 594,
+      "start": 2328.88,
+      "end": 2331.23,
+      "duration": 2.35,
+      "text": "Plus or minus infinity."
+    },
+    {
+      "index": 595,
+      "start": 2331.23,
+      "end": 2333.39,
+      "duration": 2.16,
+      "text": "The rule applies in these two cases."
+    },
+    {
+      "index": 596,
+      "start": 2333.39,
+      "end": 2338.31,
+      "duration": 4.92,
+      "text": "So in other words, this is what f ( a) / g ( a) is."
+    },
+    {
+      "index": 597,
+      "start": 2338.31,
+      "end": 2340.75,
+      "duration": 2.44,
+      "text": "Either one of these."
+    },
+    {
+      "index": 598,
+      "start": 2340.75,
+      "end": 2342.54,
+      "duration": 1.79,
+      "text": "And in fact, it can be plus or minus."
+    },
+    {
+      "index": 599,
+      "start": 2342.54,
+      "end": 2346.46,
+      "duration": 3.92,
+      "text": "STUDENT: [INAUDIBLE]"
+    },
+    {
+      "index": 600,
+      "start": 2346.46,
+      "end": 2350.29,
+      "duration": 3.83,
+      "text": "PROFESSOR: And the right-hand side has to be something."
+    },
+    {
+      "index": 601,
+      "start": 2350.29,
+      "end": 2361.25,
+      "duration": 10.96,
+      "text": "It has to be either finite or plus or minus infinity."
+    },
+    {
+      "index": 602,
+      "start": 2361.25,
+      "end": 2363.69,
+      "duration": 2.44,
+      "text": "So you need something."
+    },
+    {
+      "index": 603,
+      "start": 2363.69,
+      "end": 2366.74,
+      "duration": 3.05,
+      "text": "You need a specific value of a, you need to decide whether"
+    },
+    {
+      "index": 604,
+      "start": 2366.74,
+      "end": 2368.07,
+      "duration": 1.33,
+      "text": "it's an indeterminate form."
+    },
+    {
+      "index": 605,
+      "start": 2368.07,
+      "end": 2371.39,
+      "duration": 3.32,
+      "text": "And you need the right-hand limit to exist. It's not hard"
+    },
+    {
+      "index": 606,
+      "start": 2371.39,
+      "end": 2373.53,
+      "duration": 2.14,
+      "text": "to impose this."
+    },
+    {
+      "index": 607,
+      "start": 2373.53,
+      "end": 2376.423,
+      "duration": 2.893,
+      "text": "Because when you look at the right-hand side, you'll want"
+    },
+    {
+      "index": 608,
+      "start": 2376.423,
+      "end": 2377.35,
+      "duration": 0.927,
+      "text": "to be calculating it."
+    },
+    {
+      "index": 609,
+      "start": 2377.35,
+      "end": 2378.6,
+      "duration": 1.25,
+      "text": "So you want to know what it is."
+    },
+    {
+      "index": 610,
+      "start": 2378.6,
+      "end": 2387.64,
+      "duration": 9.04,
+      "text": "So you'll never have problems confirming this hypothesis."
+    },
+    {
+      "index": 611,
+      "start": 2387.64,
+      "end": 2391.28,
+      "duration": 3.64,
+      "text": "Alright."
+    },
+    {
+      "index": 612,
+      "start": 2391.28,
+      "end": 2394.48,
+      "duration": 3.2,
+      "text": "Let me give you one more example here."
+    },
+    {
+      "index": 613,
+      "start": 2394.48,
+      "end": 2396.6,
+      "duration": 2.12,
+      "text": "Which is just slightly trickier."
+    },
+    {
+      "index": 614,
+      "start": 2396.6,
+      "end": 2415.13,
+      "duration": 18.53,
+      "text": "Which involves, so here's another indeterminate form."
+    },
+    {
+      "index": 615,
+      "start": 2415.13,
+      "end": 2416.78,
+      "duration": 1.65,
+      "text": "That's going to be 0 ^ 0."
+    },
+    {
+      "index": 616,
+      "start": 2420.53,
+      "end": 2422.58,
+      "duration": 2.05,
+      "text": "So there are lots of these things where you just don't"
+    },
+    {
+      "index": 617,
+      "start": 2422.58,
+      "end": 2423.69,
+      "duration": 1.11,
+      "text": "know what to do."
+    },
+    {
+      "index": 618,
+      "start": 2423.69,
+      "end": 2427.73,
+      "duration": 4.04,
+      "text": "And they come out in various different ways."
+    },
+    {
+      "index": 619,
+      "start": 2427.73,
+      "end": 2432.39,
+      "duration": 4.66,
+      "text": "The simplest example of this is the limit as x goes to 0"
+    },
+    {
+      "index": 620,
+      "start": 2432.39,
+      "end": 2441.43,
+      "duration": 9.04,
+      "text": "from above of x ^ x."
+    },
+    {
+      "index": 621,
+      "start": 2441.43,
+      "end": 2445.36,
+      "duration": 3.93,
+      "text": "In order to work out what's happening with this one, we"
+    },
+    {
+      "index": 622,
+      "start": 2445.36,
+      "end": 2447.61,
+      "duration": 2.25,
+      "text": "have to use a trick."
+    },
+    {
+      "index": 623,
+      "start": 2447.61,
+      "end": 2452.65,
+      "duration": 5.04,
+      "text": "And the trick is this is a moving exponent."
+    },
+    {
+      "index": 624,
+      "start": 2452.65,
+      "end": 2456.22,
+      "duration": 3.57,
+      "text": "And so it's appropriate to use base e."
+    },
+    {
+      "index": 625,
+      "start": 2456.22,
+      "end": 2459.01,
+      "duration": 2.79,
+      "text": "This is something that we did way back in the first unit."
+    },
+    {
+      "index": 626,
+      "start": 2459.01,
+      "end": 2466.9,
+      "duration": 7.89,
+      "text": "So, since we have a moving exponent, we're"
+    },
+    {
+      "index": 627,
+      "start": 2466.9,
+      "end": 2471.83,
+      "duration": 4.93,
+      "text": "going to use base e."
+    },
+    {
+      "index": 628,
+      "start": 2471.83,
+      "end": 2473.69,
+      "duration": 1.86,
+      "text": "That's the good base to use whenever you"
+    },
+    {
+      "index": 629,
+      "start": 2473.69,
+      "end": 2475.6,
+      "duration": 1.91,
+      "text": "have a moving exponent."
+    },
+    {
+      "index": 630,
+      "start": 2475.6,
+      "end": 2481.53,
+      "duration": 5.93,
+      "text": "And so rewrite this as x^ x = e ^ x ln x."
+    },
+    {
+      "index": 631,
+      "start": 2481.53,
+      "end": 2483.96,
+      "duration": 2.43,
+      "text": "And now, in order to figure out what's happening, we"
+    },
+    {
+      "index": 632,
+      "start": 2483.96,
+      "end": 2485.25,
+      "duration": 1.29,
+      "text": "really only have to know what's"
+    },
+    {
+      "index": 633,
+      "start": 2485.25,
+      "end": 2492.14,
+      "duration": 6.89,
+      "text": "going on with the exponent."
+    },
+    {
+      "index": 634,
+      "start": 2492.14,
+      "end": 2494.1,
+      "duration": 1.96,
+      "text": "So remember, actually we already did this."
+    },
+    {
+      "index": 635,
+      "start": 2494.1,
+      "end": 2496.1,
+      "duration": 2.0,
+      "text": "But I'm going to do it once more for you."
+    },
+    {
+      "index": 636,
+      "start": 2496.1,
+      "end": 2499.34,
+      "duration": 3.24,
+      "text": "This is ln x / (1 / x)."
+    },
+    {
+      "index": 637,
+      "start": 2499.34,
+      "end": 2503.36,
+      "duration": 4.02,
+      "text": "And that's equivalent, as x goes to 0, to using"
+    },
+    {
+      "index": 638,
+      "start": 2503.36,
+      "end": 2511.45,
+      "duration": 8.09,
+      "text": "L'Hopital's Rule to 1 / x, and this is - 1 / x ^2, which is -"
+    },
+    {
+      "index": 639,
+      "start": 2511.45,
+      "end": 2514.35,
+      "duration": 2.9,
+      "text": "x, which goes to 0."
+    },
+    {
+      "index": 640,
+      "start": 2514.35,
+      "end": 2518.03,
+      "duration": 3.68,
+      "text": "As x goes to 0."
+    },
+    {
+      "index": 641,
+      "start": 2518.03,
+      "end": 2521.67,
+      "duration": 3.64,
+      "text": "And so what we have here is that this one is going to be"
+    },
+    {
+      "index": 642,
+      "start": 2521.67,
+      "end": 2526.2,
+      "duration": 4.53,
+      "text": "equivalent to, well, it's going to tend to"
+    },
+    {
+      "index": 643,
+      "start": 2526.2,
+      "end": 2527.52,
+      "duration": 1.32,
+      "text": "what we got over here."
+    },
+    {
+      "index": 644,
+      "start": 2527.52,
+      "end": 2530.17,
+      "duration": 2.65,
+      "text": "It's e ^ 0."
+    },
+    {
+      "index": 645,
+      "start": 2530.17,
+      "end": 2533.98,
+      "duration": 3.81,
+      "text": "That exponent is what we want."
+    },
+    {
+      "index": 646,
+      "start": 2533.98,
+      "end": 2538.25,
+      "duration": 4.27,
+      "text": "As x goes to 0."
+    },
+    {
+      "index": 647,
+      "start": 2538.25,
+      "end": 2547.19,
+      "duration": 8.94,
+      "text": "So that's the answer This limit happens to be 1."
+    },
+    {
+      "index": 648,
+      "start": 2547.19,
+      "end": 2550.05,
+      "duration": 2.86,
+      "text": "That's actually relatively easy to do, given all of the"
+    },
+    {
+      "index": 649,
+      "start": 2550.05,
+      "end": 2562.7,
+      "duration": 12.65,
+      "text": "power that we have at our hands."
+    },
+    {
+      "index": 650,
+      "start": 2562.7,
+      "end": 2569.31,
+      "duration": 6.61,
+      "text": "Now, let me give you one more example."
+    },
+    {
+      "index": 651,
+      "start": 2569.31,
+      "end": 2572.36,
+      "duration": 3.05,
+      "text": "Suppose you're trying to understand the limit"
+    },
+    {
+      "index": 652,
+      "start": 2572.36,
+      "end": 2579.06,
+      "duration": 6.7,
+      "text": "of sin x / x ^2."
+    },
+    {
+      "index": 653,
+      "start": 2579.06,
+      "end": 2586.32,
+      "duration": 7.26,
+      "text": "If you apply L'Hopital's Rule, as x goes to 0, you're going"
+    },
+    {
+      "index": 654,
+      "start": 2586.32,
+      "end": 2591.66,
+      "duration": 5.34,
+      "text": "to get cos x / 2x."
+    },
+    {
+      "index": 655,
+      "start": 2591.66,
+      "end": 2599.27,
+      "duration": 7.61,
+      "text": "And if you apply L'Hopital's Rule again, as x goes to 0,"
+    },
+    {
+      "index": 656,
+      "start": 2599.27,
+      "end": 2604.92,
+      "duration": 5.65,
+      "text": "you're going to get the - sin x / 2."
+    },
+    {
+      "index": 657,
+      "start": 2604.92,
+      "end": 2615.84,
+      "duration": 10.92,
+      "text": "And this, as x goes to 0, goes to 0."
+    },
+    {
+      "index": 658,
+      "start": 2615.84,
+      "end": 2619.82,
+      "duration": 3.98,
+      "text": "On the other hand, if you look at the linear approximation"
+    },
+    {
+      "index": 659,
+      "start": 2619.82,
+      "end": 2629.62,
+      "duration": 9.8,
+      "text": "method, linear approximation says that sin x is"
+    },
+    {
+      "index": 660,
+      "start": 2629.62,
+      "end": 2635.09,
+      "duration": 5.47,
+      "text": "approximately x near 0."
+    },
+    {
+      "index": 661,
+      "start": 2635.09,
+      "end": 2639.56,
+      "duration": 4.47,
+      "text": "So that should be x / x ^2."
+    },
+    {
+      "index": 662,
+      "start": 2639.56,
+      "end": 2644.9,
+      "duration": 5.34,
+      "text": "Which is 1 / x, which goes to infinity."
+    },
+    {
+      "index": 663,
+      "start": 2644.9,
+      "end": 2648.98,
+      "duration": 4.08,
+      "text": "As x goes to 0, at least from one side, minus infinity to"
+    },
+    {
+      "index": 664,
+      "start": 2648.98,
+      "end": 2653.1,
+      "duration": 4.12,
+      "text": "the other side."
+    },
+    {
+      "index": 665,
+      "start": 2653.1,
+      "end": 2657.32,
+      "duration": 4.22,
+      "text": "So there's something fishy going on here, right?"
+    },
+    {
+      "index": 666,
+      "start": 2657.32,
+      "end": 2659.33,
+      "duration": 2.01,
+      "text": "So this is fishy."
+    },
+    {
+      "index": 667,
+      "start": 2659.33,
+      "end": 2661.52,
+      "duration": 2.19,
+      "text": "Or maybe this is fishy, I don't know."
+    },
+    {
+      "index": 668,
+      "start": 2661.52,
+      "end": 2666.42,
+      "duration": 4.9,
+      "text": "So, tell me what's wrong here."
+    },
+    {
+      "index": 669,
+      "start": 2666.42,
+      "end": 2666.75,
+      "duration": 0.33,
+      "text": "Yeah."
+    },
+    {
+      "index": 670,
+      "start": 2666.75,
+      "end": 2677.12,
+      "duration": 10.37,
+      "text": "STUDENT: [INAUDIBLE]"
+    },
+    {
+      "index": 671,
+      "start": 2677.12,
+      "end": 2678.23,
+      "duration": 1.11,
+      "text": "PROFESSOR: OK."
+    },
+    {
+      "index": 672,
+      "start": 2678.23,
+      "end": 2683.07,
+      "duration": 4.84,
+      "text": "So the claim is that the second application of"
+    },
+    {
+      "index": 673,
+      "start": 2683.07,
+      "end": 2691.95,
+      "duration": 8.88,
+      "text": "L'Hopital's Rule, this one, is wrong."
+    },
+    {
+      "index": 674,
+      "start": 2691.95,
+      "end": 2694.62,
+      "duration": 2.67,
+      "text": "And that's correct."
+    },
+    {
+      "index": 675,
+      "start": 2694.62,
+      "end": 2696.7,
+      "duration": 2.08,
+      "text": "And this is where you have to watch out,"
+    },
+    {
+      "index": 676,
+      "start": 2696.7,
+      "end": 2698.5,
+      "duration": 1.8,
+      "text": "with L'Hopital's Rule."
+    },
+    {
+      "index": 677,
+      "start": 2698.5,
+      "end": 2699.92,
+      "duration": 1.42,
+      "text": "This is exactly where you have to watch out."
+    },
+    {
+      "index": 678,
+      "start": 2699.92,
+      "end": 2703.58,
+      "duration": 3.66,
+      "text": "You have to apply the test. Here it's an"
+    },
+    {
+      "index": 679,
+      "start": 2703.58,
+      "end": 2703.82,
+      "duration": 0.24,
+      "text": "indeterminate form."
+    },
+    {
+      "index": 680,
+      "start": 2703.82,
+      "end": 2708.26,
+      "duration": 4.44,
+      "text": "It's 0 / 0 before I applied the rule."
+    },
+    {
+      "index": 681,
+      "start": 2708.26,
+      "end": 2711.29,
+      "duration": 3.03,
+      "text": "But in order to apply the rule the second time, it still has"
+    },
+    {
+      "index": 682,
+      "start": 2711.29,
+      "end": 2712.41,
+      "duration": 1.12,
+      "text": "to be 0 / 0."
+    },
+    {
+      "index": 683,
+      "start": 2712.41,
+      "end": 2714.17,
+      "duration": 1.76,
+      "text": "But this one isn't."
+    },
+    {
+      "index": 684,
+      "start": 2714.17,
+      "end": 2719.29,
+      "duration": 5.12,
+      "text": "This one is 1 / 0."
+    },
+    {
+      "index": 685,
+      "start": 2719.29,
+      "end": 2720.65,
+      "duration": 1.36,
+      "text": "It's no longer an indeterminate form."
+    },
+    {
+      "index": 686,
+      "start": 2720.65,
+      "end": 2722.91,
+      "duration": 2.26,
+      "text": "It's actually infinite."
+    },
+    {
+      "index": 687,
+      "start": 2722.91,
+      "end": 2724.97,
+      "duration": 2.06,
+      "text": "Either plus or minus, depending on the sign of the"
+    },
+    {
+      "index": 688,
+      "start": 2724.97,
+      "end": 2725.52,
+      "duration": 0.55,
+      "text": "denominator."
+    },
+    {
+      "index": 689,
+      "start": 2725.52,
+      "end": 2727.97,
+      "duration": 2.45,
+      "text": "Which is just what this answer is."
+    },
+    {
+      "index": 690,
+      "start": 2727.97,
+      "end": 2730.55,
+      "duration": 2.58,
+      "text": "So the linear approximation is safe."
+    },
+    {
+      "index": 691,
+      "start": 2730.55,
+      "end": 2735.16,
+      "duration": 4.61,
+      "text": "And we just applied L'Hopital's Rule wrong."
+    },
+    {
+      "index": 692,
+      "start": 2735.16,
+      "end": 2755.76,
+      "duration": 20.6,
+      "text": "So the moral of the story here is look before you L'Hop."
+    },
+    {
+      "index": 693,
+      "start": 2755.76,
+      "end": 2758.26,
+      "duration": 2.5,
+      "text": "Alright."
+    },
+    {
+      "index": 694,
+      "start": 2758.26,
+      "end": 2769.85,
+      "duration": 11.59,
+      "text": "Now, let me say one more thing."
+    },
+    {
+      "index": 695,
+      "start": 2769.85,
+      "end": 2782.9,
+      "duration": 13.05,
+      "text": "I need to pile it on just a little bit, sorry."
+    },
+    {
+      "index": 696,
+      "start": 2782.9,
+      "end": 2796.7,
+      "duration": 13.8,
+      "text": "So don't use it as a crutch."
+    },
+    {
+      "index": 697,
+      "start": 2796.7,
+      "end": 2799.69,
+      "duration": 2.99,
+      "text": "We don't want to just get ourselves so weak, after being"
+    },
+    {
+      "index": 698,
+      "start": 2799.69,
+      "end": 2801.58,
+      "duration": 1.89,
+      "text": "in the hospital for all this time, that we"
+    },
+    {
+      "index": 699,
+      "start": 2801.58,
+      "end": 2815.56,
+      "duration": 13.98,
+      "text": "can't use, I'm sorry."
+    },
+    {
+      "index": 700,
+      "start": 2815.56,
+      "end": 2820.7,
+      "duration": 5.14,
+      "text": "So remember that you shouldn't have lost your senses."
+    },
+    {
+      "index": 701,
+      "start": 2820.7,
+      "end": 2829.77,
+      "duration": 9.07,
+      "text": "If you have something like this, so"
+    },
+    {
+      "index": 702,
+      "start": 2829.77,
+      "end": 2832.21,
+      "duration": 2.44,
+      "text": "we'll do this one here."
+    },
+    {
+      "index": 703,
+      "start": 2832.21,
+      "end": 2835.47,
+      "duration": 3.26,
+      "text": "Suppose you're trying to understand what this does as x"
+    },
+    {
+      "index": 704,
+      "start": 2835.47,
+      "end": 2838.2,
+      "duration": 2.73,
+      "text": "goes to infinity."
+    },
+    {
+      "index": 705,
+      "start": 2838.2,
+      "end": 2843.77,
+      "duration": 5.57,
+      "text": "Now, you could L'Hopital's Rule five"
+    },
+    {
+      "index": 706,
+      "start": 2843.77,
+      "end": 2845.7,
+      "duration": 1.93,
+      "text": "times, or four times."
+    },
+    {
+      "index": 707,
+      "start": 2845.7,
+      "end": 2850.04,
+      "duration": 4.34,
+      "text": "And get the answer here."
+    },
+    {
+      "index": 708,
+      "start": 2850.04,
+      "end": 2853.26,
+      "duration": 3.22,
+      "text": "But really, you should realize that the main terms are"
+    },
+    {
+      "index": 709,
+      "start": 2853.26,
+      "end": 2854.87,
+      "duration": 1.61,
+      "text": "sitting there right in front of you."
+    },
+    {
+      "index": 710,
+      "start": 2854.87,
+      "end": 2856.47,
+      "duration": 1.6,
+      "text": "And that there's some algebra that you can"
+    },
+    {
+      "index": 711,
+      "start": 2856.47,
+      "end": 2858.49,
+      "duration": 2.02,
+      "text": "do to simplify this."
+    },
+    {
+      "index": 712,
+      "start": 2858.49,
+      "end": 2865.45,
+      "duration": 6.96,
+      "text": "Namely, it's the same as 1 + 2 / x + 1 / x^ 5."
+    },
+    {
+      "index": 713,
+      "start": 2868.06,
+      "end": 2871.51,
+      "duration": 3.45,
+      "text": "And then in the denominator, well, let's see."
+    },
+    {
+      "index": 714,
+      "start": 2871.51,
+      "end": 2873.11,
+      "duration": 1.6,
+      "text": "It's x."
+    },
+    {
+      "index": 715,
+      "start": 2873.11,
+      "end": 2877.965,
+      "duration": 4.855,
+      "text": "So this would be dividing by 1 / x^ 5 in both numerator and"
+    },
+    {
+      "index": 716,
+      "start": 2877.965,
+      "end": 2878.24,
+      "duration": 0.275,
+      "text": "denominator."
+    },
+    {
+      "index": 717,
+      "start": 2878.24,
+      "end": 2884.41,
+      "duration": 6.17,
+      "text": "And here you have 1 / x + 2 over, sorry I overshot."
+    },
+    {
+      "index": 718,
+      "start": 2884.41,
+      "end": 2886.25,
+      "duration": 1.84,
+      "text": "But that's OK."
+    },
+    {
+      "index": 719,
+      "start": 2886.25,
+      "end": 2889.11,
+      "duration": 2.86,
+      "text": "2 / x^ 5 here."
+    },
+    {
+      "index": 720,
+      "start": 2889.11,
+      "end": 2892.65,
+      "duration": 3.54,
+      "text": "So these are the main term, if you like."
+    },
+    {
+      "index": 721,
+      "start": 2892.65,
+      "end": 2898.59,
+      "duration": 5.94,
+      "text": "And it's the same as 1 / 1 / x, which is the same as x, and"
+    },
+    {
+      "index": 722,
+      "start": 2898.59,
+      "end": 2901.49,
+      "duration": 2.9,
+      "text": "it goes to infinity."
+    },
+    {
+      "index": 723,
+      "start": 2901.49,
+      "end": 2902.93,
+      "duration": 1.44,
+      "text": "As x goes to infinity."
+    },
+    {
+      "index": 724,
+      "start": 2902.93,
+      "end": 2908.04,
+      "duration": 5.11,
+      "text": "Or, if you like, much more simply, just x ^ 5 / x^ 4 is"
+    },
+    {
+      "index": 725,
+      "start": 2908.04,
+      "end": 2909.23,
+      "duration": 1.19,
+      "text": "the main term."
+    },
+    {
+      "index": 726,
+      "start": 2909.23,
+      "end": 2910.52,
+      "duration": 1.29,
+      "text": "Which is x."
+    },
+    {
+      "index": 727,
+      "start": 2910.52,
+      "end": 2911.59,
+      "duration": 1.07,
+      "text": "Which goes to infinity."
+    },
+    {
+      "index": 728,
+      "start": 2911.59,
+      "end": 2916.11,
+      "duration": 4.52,
+      "text": "So don't forget your basic algebra when you're doing this"
+    },
+    {
+      "index": 729,
+      "start": 2916.11,
+      "end": 2917.21,
+      "duration": 1.1,
+      "text": "kind of stuff."
+    },
+    {
+      "index": 730,
+      "start": 2917.21,
+      "end": 2920.64,
+      "duration": 3.43,
+      "text": "Use these things and don't use L'Hopital's Rule."
+    },
+    {
+      "index": 731,
+      "start": 2920.64,
+      "end": 2922.76,
+      "duration": 2.12,
+      "text": "OK, see you next time."
+    }
+  ],
+  "course": {
+    "category": "Mathematics",
+    "title": "Single Variable Calculus",
+    "source_url": "https://www.youtube.com/playlist?list=PL590CCC2BC5AF3BC1"
+  }
+}

@@ -16,11 +16,18 @@ except ImportError as exc:  # pragma: no cover
     raise RuntimeError("Install streamlit to run the demo UI.") from exc
 
 from backend.src.core.config import settings
-from backend.src.services.storage import JsonJobRepository, MockStudentProfileProvider
+from backend.src.services.storage import (
+    CombinedStudentProfileProvider,
+    JsonJobRepository,
+    JsonStudentRepository,
+    MockStudentProfileProvider,
+)
 
 
 job_repo = JsonJobRepository(settings.jobs_dir)
-student_provider = MockStudentProfileProvider(settings.mock_students_path)
+student_repo = JsonStudentRepository(settings.students_dir)
+mock_student_provider = MockStudentProfileProvider(settings.mock_students_path)
+student_provider = CombinedStudentProfileProvider(student_repo, mock_student_provider)
 
 logging.basicConfig(
     level=getattr(logging, getattr(settings, "log_level", "INFO").upper(), logging.INFO),
@@ -66,7 +73,35 @@ def render_parser_status_sidebar() -> None:
             st.sidebar.error("LLM failed, used fallback")
         else:
             st.sidebar.info("Used fallback/mock parser")
-        st.sidebar.json(metadata)
+
+
+def render_demo_role_sidebar() -> str:
+    st.sidebar.header("Demo User")
+    role = st.sidebar.radio(
+        "Role",
+        ["enterprise", "student"],
+        index=0,
+        horizontal=True,
+        key="demo_role",
+    )
+    user_id_default = "company_demo" if role == "enterprise" else "student_demo"
+    st.sidebar.text_input("User ID", value=user_id_default, key=f"demo_user_id_{role}")
+    return role
+
+
+def get_demo_user_id(role: str | None = None) -> str:
+    selected_role = role or st.session_state.get("demo_role", "enterprise")
+    default = "company_demo" if selected_role == "enterprise" else "student_demo"
+    return str(st.session_state.get(f"demo_user_id_{selected_role}", default)).strip() or default
+
+
+def require_demo_role(*allowed_roles: str) -> str:
+    role = render_demo_role_sidebar()
+    if role not in allowed_roles:
+        allowed = ", ".join(allowed_roles)
+        st.warning(f"This page is available for: {allowed}.")
+        st.stop()
+    return role
 
 
 def log_ui_action(action: str, detail: str) -> None:
@@ -106,7 +141,7 @@ def render_parsed_job_review(job_data: dict[str, Any], key_prefix: str) -> None:
     benefits = job_data.get("benefits", [])
     raw_text = job_data.get("raw_text", "")
 
-    tab_overview, tab_requirements, tab_raw = st.tabs(["Job info", "Skills & benefits", "Raw JD"])
+    tab_overview, tab_requirements, tab_description = st.tabs(["Job info", "Skills & benefits", "Job description"])
 
     with tab_overview:
         col_title, col_status, col_location = st.columns(3)
@@ -141,11 +176,58 @@ def render_parsed_job_review(job_data: dict[str, Any], key_prefix: str) -> None:
         else:
             st.info("No benefits detected.")
 
-    with tab_raw:
-        st.text_area(
-            "Original job description",
-            value=str(raw_text),
-            height=320,
-            disabled=True,
-            key=f"{key_prefix}-raw-text",
+    with tab_description:
+        description = str(raw_text).strip()
+        if description:
+            st.text_area(
+                "Job description",
+                value=description,
+                height=320,
+                disabled=True,
+                key=f"{key_prefix}-job-description",
+            )
+        else:
+            st.info("No job description text saved.")
+
+
+def render_student_profile_review(student_data: dict[str, Any], key_prefix: str) -> None:
+    metadata = student_data.get("metadata", {})
+    if not isinstance(metadata, dict):
+        metadata = {}
+    skills = student_data.get("skills", {})
+
+    tab_overview, tab_skills = st.tabs(["Student info", "Skills"])
+
+    with tab_overview:
+        col_name, col_id, col_skill_count = st.columns(3)
+        col_name.metric("Name", str(student_data.get("name", "Unnamed Student")))
+        col_id.metric("Student ID", str(student_data.get("student_id", "")))
+        col_skill_count.metric("Skills", len(skills) if isinstance(skills, dict) else 0)
+        overview_fields = ["email", "phone", "major", "year"]
+        st.dataframe(
+            [{"field": field, "value": metadata.get(field, "")} for field in overview_fields],
+            hide_index=True,
+            width="stretch",
         )
+
+        for section in ["education", "projects", "experience"]:
+            values = metadata.get(section, [])
+            if values:
+                st.caption(section.title())
+                st.write(values)
+
+    with tab_skills:
+        skill_rows = [
+            {
+                "skill": skill_name,
+                "score": skill.get("score"),
+                "confidence": skill.get("confidence"),
+                "evidence": "; ".join(str(item) for item in skill.get("evidence", [])),
+            }
+            for skill_name, skill in skills.items()
+            if isinstance(skill, dict)
+        ]
+        if skill_rows:
+            st.dataframe(skill_rows, hide_index=True, width="stretch")
+        else:
+            st.info("No skills detected.")

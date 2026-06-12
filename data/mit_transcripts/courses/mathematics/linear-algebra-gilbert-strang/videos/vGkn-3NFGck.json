@@ -1,0 +1,6633 @@
+{
+  "video": {
+    "id": "vGkn-3NFGck",
+    "title": "Lec 31 | MIT 18.06 Linear Algebra, Spring 2005",
+    "url": "https://www.youtube.com/watch?v=vGkn-3NFGck",
+    "channel": "MIT OpenCourseWare",
+    "duration": 3013,
+    "language": "en"
+  },
+  "segment_count": 945,
+  "segments": [
+    {
+      "index": 0,
+      "start": 11.11,
+      "end": 11.12,
+      "duration": 0.01,
+      "text": "Okay. Uh so coming near the end of the"
+    },
+    {
+      "index": 1,
+      "start": 11.12,
+      "end": 15.19,
+      "duration": 4.07,
+      "text": "course, uh this lecture"
+    },
+    {
+      "index": 2,
+      "start": 15.2,
+      "end": 20.07,
+      "duration": 4.87,
+      "text": "will be a mixture of the linear algebra"
+    },
+    {
+      "index": 3,
+      "start": 20.08,
+      "end": 23.189,
+      "duration": 3.109,
+      "text": "that comes with a change of basis. And a"
+    },
+    {
+      "index": 4,
+      "start": 23.199,
+      "end": 25.349,
+      "duration": 2.15,
+      "text": "change of basis from one basis to"
+    },
+    {
+      "index": 5,
+      "start": 25.359,
+      "end": 28.87,
+      "duration": 3.511,
+      "text": "another basis is something you really do"
+    },
+    {
+      "index": 6,
+      "start": 28.88,
+      "end": 31.83,
+      "duration": 2.95,
+      "text": "in applications. And I would like to"
+    },
+    {
+      "index": 7,
+      "start": 31.84,
+      "end": 34.31,
+      "duration": 2.47,
+      "text": "talk about those applications. I got a"
+    },
+    {
+      "index": 8,
+      "start": 34.32,
+      "end": 37.03,
+      "duration": 2.71,
+      "text": "little bit involved with compression,"
+    },
+    {
+      "index": 9,
+      "start": 37.04,
+      "end": 39.11,
+      "duration": 2.07,
+      "text": "compressing a signal, compressing an"
+    },
+    {
+      "index": 10,
+      "start": 39.12,
+      "end": 42.549,
+      "duration": 3.429,
+      "text": "image. And that's exactly"
+    },
+    {
+      "index": 11,
+      "start": 42.559,
+      "end": 46.869,
+      "duration": 4.31,
+      "text": "change of basis. And then the main theme"
+    },
+    {
+      "index": 12,
+      "start": 46.879,
+      "end": 48.95,
+      "duration": 2.071,
+      "text": "in this chapter"
+    },
+    {
+      "index": 13,
+      "start": 48.96,
+      "end": 51.67,
+      "duration": 2.71,
+      "text": "is the connection between a linear"
+    },
+    {
+      "index": 14,
+      "start": 51.68,
+      "end": 53.99,
+      "duration": 2.31,
+      "text": "transformation"
+    },
+    {
+      "index": 15,
+      "start": 54.0,
+      "end": 56.869,
+      "duration": 2.869,
+      "text": "which doesn't have to have coordinates"
+    },
+    {
+      "index": 16,
+      "start": 56.879,
+      "end": 59.27,
+      "duration": 2.391,
+      "text": "and the matrix"
+    },
+    {
+      "index": 17,
+      "start": 59.28,
+      "end": 61.91,
+      "duration": 2.63,
+      "text": "that tells us that transformation with"
+    },
+    {
+      "index": 18,
+      "start": 61.92,
+      "end": 65.189,
+      "duration": 3.269,
+      "text": "respect to coordinates. So the matrix is"
+    },
+    {
+      "index": 19,
+      "start": 65.199,
+      "end": 67.109,
+      "duration": 1.91,
+      "text": "the coordinatebased"
+    },
+    {
+      "index": 20,
+      "start": 67.119,
+      "end": 69.67,
+      "duration": 2.551,
+      "text": "description of the of the linear"
+    },
+    {
+      "index": 21,
+      "start": 69.68,
+      "end": 73.429,
+      "duration": 3.749,
+      "text": "transformation. Uh let me start out with"
+    },
+    {
+      "index": 22,
+      "start": 73.439,
+      "end": 76.469,
+      "duration": 3.03,
+      "text": "the nice part which is some just to tell"
+    },
+    {
+      "index": 23,
+      "start": 76.479,
+      "end": 78.789,
+      "duration": 2.31,
+      "text": "you something about image compression."
+    },
+    {
+      "index": 24,
+      "start": 78.799,
+      "end": 80.87,
+      "duration": 2.071,
+      "text": "Those of you well everybody's going to"
+    },
+    {
+      "index": 25,
+      "start": 80.88,
+      "end": 83.35,
+      "duration": 2.47,
+      "text": "meet compression because you know that"
+    },
+    {
+      "index": 26,
+      "start": 83.36,
+      "end": 85.67,
+      "duration": 2.31,
+      "text": "the amount of data"
+    },
+    {
+      "index": 27,
+      "start": 85.68,
+      "end": 87.83,
+      "duration": 2.15,
+      "text": "that we're getting"
+    },
+    {
+      "index": 28,
+      "start": 87.84,
+      "end": 91.27,
+      "duration": 3.43,
+      "text": "well the these lectures are compressed"
+    },
+    {
+      "index": 29,
+      "start": 91.28,
+      "end": 95.429,
+      "duration": 4.149,
+      "text": "uh so that actually probably you see my"
+    },
+    {
+      "index": 30,
+      "start": 95.439,
+      "end": 98.789,
+      "duration": 3.35,
+      "text": "motion as jer jerky shall I use that"
+    },
+    {
+      "index": 31,
+      "start": 98.799,
+      "end": 100.95,
+      "duration": 2.151,
+      "text": "word? Have you have you looked on the"
+    },
+    {
+      "index": 32,
+      "start": 100.96,
+      "end": 104.63,
+      "duration": 3.67,
+      "text": "web? I I I I should like to find a"
+    },
+    {
+      "index": 33,
+      "start": 104.64,
+      "end": 107.83,
+      "duration": 3.19,
+      "text": "better word. Uh compressed. Let's see."
+    },
+    {
+      "index": 34,
+      "start": 107.84,
+      "end": 111.59,
+      "duration": 3.75,
+      "text": "So my the the the complete signal is of"
+    },
+    {
+      "index": 35,
+      "start": 111.6,
+      "end": 114.55,
+      "duration": 2.95,
+      "text": "course in those video cameras and in the"
+    },
+    {
+      "index": 36,
+      "start": 114.56,
+      "end": 116.87,
+      "duration": 2.31,
+      "text": "video tape, but that goes to the bottom"
+    },
+    {
+      "index": 37,
+      "start": 116.88,
+      "end": 121.03,
+      "duration": 4.15,
+      "text": "of building nine. And out of that comes"
+    },
+    {
+      "index": 38,
+      "start": 121.04,
+      "end": 123.35,
+      "duration": 2.31,
+      "text": "a jumpy motion"
+    },
+    {
+      "index": 39,
+      "start": 123.36,
+      "end": 126.87,
+      "duration": 3.51,
+      "text": "because it uses a standard system for"
+    },
+    {
+      "index": 40,
+      "start": 126.88,
+      "end": 129.19,
+      "duration": 2.31,
+      "text": "compressing images."
+    },
+    {
+      "index": 41,
+      "start": 129.2,
+      "end": 132.63,
+      "duration": 3.43,
+      "text": "And uh you'll notice that the stuff that"
+    },
+    {
+      "index": 42,
+      "start": 132.64,
+      "end": 135.83,
+      "duration": 3.19,
+      "text": "sits on the board comes very clearly,"
+    },
+    {
+      "index": 43,
+      "start": 135.84,
+      "end": 139.51,
+      "duration": 3.67,
+      "text": "but it's my motion that that"
+    },
+    {
+      "index": 44,
+      "start": 139.52,
+      "end": 142.229,
+      "duration": 2.709,
+      "text": "that needs a whole lot of bits, right?"
+    },
+    {
+      "index": 45,
+      "start": 142.239,
+      "end": 144.71,
+      "duration": 2.471,
+      "text": "So, and if I were to run up and back up"
+    },
+    {
+      "index": 46,
+      "start": 144.72,
+      "end": 147.99,
+      "duration": 3.27,
+      "text": "there and back, uh that would need too"
+    },
+    {
+      "index": 47,
+      "start": 148.0,
+      "end": 151.75,
+      "duration": 3.75,
+      "text": "many bits and they I'd be compressed"
+    },
+    {
+      "index": 48,
+      "start": 151.76,
+      "end": 154.39,
+      "duration": 2.63,
+      "text": "even more. So, what does compression"
+    },
+    {
+      "index": 49,
+      "start": 154.4,
+      "end": 157.589,
+      "duration": 3.189,
+      "text": "mean? Can I let me just think of a still"
+    },
+    {
+      "index": 50,
+      "start": 157.599,
+      "end": 159.589,
+      "duration": 1.99,
+      "text": "image"
+    },
+    {
+      "index": 51,
+      "start": 159.599,
+      "end": 162.15,
+      "duration": 2.551,
+      "text": "and and of course satellites. Oh,"
+    },
+    {
+      "index": 52,
+      "start": 162.16,
+      "end": 165.03,
+      "duration": 2.87,
+      "text": "there's and and computations of the"
+    },
+    {
+      "index": 53,
+      "start": 165.04,
+      "end": 169.35,
+      "duration": 4.31,
+      "text": "climate, computations of combustion, the"
+    },
+    {
+      "index": 54,
+      "start": 169.36,
+      "end": 172.71,
+      "duration": 3.35,
+      "text": "computers and sensors of all kinds are"
+    },
+    {
+      "index": 55,
+      "start": 172.72,
+      "end": 175.19,
+      "duration": 2.47,
+      "text": "just giving us overwhelming amounts of"
+    },
+    {
+      "index": 56,
+      "start": 175.2,
+      "end": 176.79,
+      "duration": 1.59,
+      "text": "data."
+    },
+    {
+      "index": 57,
+      "start": 176.8,
+      "end": 180.47,
+      "duration": 3.67,
+      "text": "The web is too. Now, some compression"
+    },
+    {
+      "index": 58,
+      "start": 180.48,
+      "end": 183.67,
+      "duration": 3.19,
+      "text": "can be done with no loss. lossless"
+    },
+    {
+      "index": 59,
+      "start": 183.68,
+      "end": 186.47,
+      "duration": 2.79,
+      "text": "compression is possible just using sort"
+    },
+    {
+      "index": 60,
+      "start": 186.48,
+      "end": 189.27,
+      "duration": 2.79,
+      "text": "of the fact that uh there's there are"
+    },
+    {
+      "index": 61,
+      "start": 189.28,
+      "end": 192.309,
+      "duration": 3.029,
+      "text": "redundancies but I'm talking here about"
+    },
+    {
+      "index": 62,
+      "start": 192.319,
+      "end": 195.83,
+      "duration": 3.511,
+      "text": "lossy compression so I'm talking about"
+    },
+    {
+      "index": 63,
+      "start": 195.84,
+      "end": 198.949,
+      "duration": 3.109,
+      "text": "here's an image"
+    },
+    {
+      "index": 64,
+      "start": 198.959,
+      "end": 201.43,
+      "duration": 2.471,
+      "text": "and what does an image consist of it"
+    },
+    {
+      "index": 65,
+      "start": 201.44,
+      "end": 204.79,
+      "duration": 3.35,
+      "text": "consists of a lot of little pixels right"
+    },
+    {
+      "index": 66,
+      "start": 204.8,
+      "end": 206.949,
+      "duration": 2.149,
+      "text": "maybe 512"
+    },
+    {
+      "index": 67,
+      "start": 206.959,
+      "end": 209.27,
+      "duration": 2.311,
+      "text": "x 512"
+    },
+    {
+      "index": 68,
+      "start": 209.28,
+      "end": 212.63,
+      "duration": 3.35,
+      "text": "to the 9th by 2 to the 9th pixels And"
+    },
+    {
+      "index": 69,
+      "start": 212.64,
+      "end": 217.589,
+      "duration": 4.949,
+      "text": "each so th this is pixel number one one."
+    },
+    {
+      "index": 70,
+      "start": 217.599,
+      "end": 220.39,
+      "duration": 2.791,
+      "text": "So that's a pixel."
+    },
+    {
+      "index": 71,
+      "start": 220.4,
+      "end": 222.229,
+      "duration": 1.829,
+      "text": "And"
+    },
+    {
+      "index": 72,
+      "start": 222.239,
+      "end": 225.35,
+      "duration": 3.111,
+      "text": "if we're in black and white, the typical"
+    },
+    {
+      "index": 73,
+      "start": 225.36,
+      "end": 229.83,
+      "duration": 4.47,
+      "text": "pixel would tell us a grayscale"
+    },
+    {
+      "index": 74,
+      "start": 229.84,
+      "end": 232.789,
+      "duration": 2.949,
+      "text": "from 0 to 255."
+    },
+    {
+      "index": 75,
+      "start": 232.799,
+      "end": 237.509,
+      "duration": 4.71,
+      "text": "So a pixel is usually a value of a a one"
+    },
+    {
+      "index": 76,
+      "start": 237.519,
+      "end": 242.309,
+      "duration": 4.79,
+      "text": "of the x i. So this is be the E pixel."
+    },
+    {
+      "index": 77,
+      "start": 242.319,
+      "end": 245.19,
+      "duration": 2.871,
+      "text": "It it's usually a real number on a scale"
+    },
+    {
+      "index": 78,
+      "start": 245.2,
+      "end": 248.149,
+      "duration": 2.949,
+      "text": "from 0 to 255. In other words, two to"
+    },
+    {
+      "index": 79,
+      "start": 248.159,
+      "end": 250.309,
+      "duration": 2.15,
+      "text": "the eth possibilities."
+    },
+    {
+      "index": 80,
+      "start": 250.319,
+      "end": 253.03,
+      "duration": 2.711,
+      "text": "So usually that's the that's the"
+    },
+    {
+      "index": 81,
+      "start": 253.04,
+      "end": 254.71,
+      "duration": 1.67,
+      "text": "standard."
+    },
+    {
+      "index": 82,
+      "start": 254.72,
+      "end": 257.03,
+      "duration": 2.31,
+      "text": "Uh"
+    },
+    {
+      "index": 83,
+      "start": 257.04,
+      "end": 262.71,
+      "duration": 5.67,
+      "text": "so so that that's eight eight bits."
+    },
+    {
+      "index": 84,
+      "start": 266.15,
+      "end": 266.16,
+      "duration": 0.01,
+      "text": "But then we have that for every every"
+    },
+    {
+      "index": 85,
+      "start": 266.16,
+      "end": 269.27,
+      "duration": 3.11,
+      "text": "pixel. So we have 512 squared pixels."
+    },
+    {
+      "index": 86,
+      "start": 269.28,
+      "end": 272.07,
+      "duration": 2.79,
+      "text": "We're we're really operating. X is a"
+    },
+    {
+      "index": 87,
+      "start": 272.08,
+      "end": 275.51,
+      "duration": 3.43,
+      "text": "vector in Rn."
+    },
+    {
+      "index": 88,
+      "start": 275.52,
+      "end": 281.11,
+      "duration": 5.59,
+      "text": "But what is N? N is 512 squared."
+    },
+    {
+      "index": 89,
+      "start": 281.12,
+      "end": 284.39,
+      "duration": 3.27,
+      "text": "That's that's our problem right there."
+    },
+    {
+      "index": 90,
+      "start": 284.4,
+      "end": 289.03,
+      "duration": 4.63,
+      "text": "We're a pixel is a vector that gives us"
+    },
+    {
+      "index": 91,
+      "start": 289.04,
+      "end": 293.03,
+      "duration": 3.99,
+      "text": "the information about the image."
+    },
+    {
+      "index": 92,
+      "start": 293.04,
+      "end": 297.11,
+      "duration": 4.07,
+      "text": "I'm sorry. a an the image that comes"
+    },
+    {
+      "index": 93,
+      "start": 297.12,
+      "end": 300.79,
+      "duration": 3.67,
+      "text": "through is f is a vector of of that"
+    },
+    {
+      "index": 94,
+      "start": 300.8,
+      "end": 303.83,
+      "duration": 3.03,
+      "text": "length that that's the information we"
+    },
+    {
+      "index": 95,
+      "start": 303.84,
+      "end": 305.749,
+      "duration": 1.909,
+      "text": "have about the image. If it's a color"
+    },
+    {
+      "index": 96,
+      "start": 305.759,
+      "end": 308.23,
+      "duration": 2.471,
+      "text": "image, we would have three times that"
+    },
+    {
+      "index": 97,
+      "start": 308.24,
+      "end": 311.11,
+      "duration": 2.87,
+      "text": "length because we'd have we'd need three"
+    },
+    {
+      "index": 98,
+      "start": 311.12,
+      "end": 313.43,
+      "duration": 2.31,
+      "text": "coordinates to get color. So, it would"
+    },
+    {
+      "index": 99,
+      "start": 313.44,
+      "end": 316.79,
+      "duration": 3.35,
+      "text": "be 3 * 512."
+    },
+    {
+      "index": 100,
+      "start": 316.8,
+      "end": 318.95,
+      "duration": 2.15,
+      "text": "It's an enormous amount of information"
+    },
+    {
+      "index": 101,
+      "start": 318.96,
+      "end": 321.67,
+      "duration": 2.71,
+      "text": "and we couldn't send out the image for"
+    },
+    {
+      "index": 102,
+      "start": 321.68,
+      "end": 325.27,
+      "duration": 3.59,
+      "text": "these lectures without compressing it."
+    },
+    {
+      "index": 103,
+      "start": 325.28,
+      "end": 328.39,
+      "duration": 3.11,
+      "text": "We c we it would be would overload the"
+    },
+    {
+      "index": 104,
+      "start": 328.4,
+      "end": 331.909,
+      "duration": 3.509,
+      "text": "system. So it has to be compressed. The"
+    },
+    {
+      "index": 105,
+      "start": 331.919,
+      "end": 334.469,
+      "duration": 2.55,
+      "text": "standard compression"
+    },
+    {
+      "index": 106,
+      "start": 334.479,
+      "end": 337.11,
+      "duration": 2.631,
+      "text": "and still used in in the with these"
+    },
+    {
+      "index": 107,
+      "start": 337.12,
+      "end": 342.95,
+      "duration": 5.83,
+      "text": "lectures is uh called JPEG."
+    },
+    {
+      "index": 108,
+      "start": 342.96,
+      "end": 344.629,
+      "duration": 1.669,
+      "text": "I think that stands for a joint"
+    },
+    {
+      "index": 109,
+      "start": 344.639,
+      "end": 347.51,
+      "duration": 2.871,
+      "text": "photographic experts group. They"
+    },
+    {
+      "index": 110,
+      "start": 347.52,
+      "end": 350.629,
+      "duration": 3.109,
+      "text": "established a system of compression. And"
+    },
+    {
+      "index": 111,
+      "start": 350.639,
+      "end": 353.11,
+      "duration": 2.471,
+      "text": "I just want to tell you what it's about."
+    },
+    {
+      "index": 112,
+      "start": 353.12,
+      "end": 356.469,
+      "duration": 3.349,
+      "text": "It's a change of basis. What what's what"
+    },
+    {
+      "index": 113,
+      "start": 356.479,
+      "end": 359.43,
+      "duration": 2.951,
+      "text": "basis do we have? The the current basis"
+    },
+    {
+      "index": 114,
+      "start": 359.44,
+      "end": 361.99,
+      "duration": 2.55,
+      "text": "we have is you could say the standard"
+    },
+    {
+      "index": 115,
+      "start": 362.0,
+      "end": 365.43,
+      "duration": 3.43,
+      "text": "basis is every pixel"
+    },
+    {
+      "index": 116,
+      "start": 365.44,
+      "end": 368.71,
+      "duration": 3.27,
+      "text": "give a value. So that's like we have a"
+    },
+    {
+      "index": 117,
+      "start": 368.72,
+      "end": 370.629,
+      "duration": 1.909,
+      "text": "vector x"
+    },
+    {
+      "index": 118,
+      "start": 370.639,
+      "end": 375.67,
+      "duration": 5.031,
+      "text": "which is 512 squared long and in the ice"
+    },
+    {
+      "index": 119,
+      "start": 375.68,
+      "end": 379.909,
+      "duration": 4.229,
+      "text": "position we get a number like 121 or"
+    },
+    {
+      "index": 120,
+      "start": 379.919,
+      "end": 382.87,
+      "duration": 2.951,
+      "text": "something. The next the pixel next to it"
+    },
+    {
+      "index": 121,
+      "start": 382.88,
+      "end": 385.43,
+      "duration": 2.55,
+      "text": "might be 124"
+    },
+    {
+      "index": 122,
+      "start": 385.44,
+      "end": 388.95,
+      "duration": 3.51,
+      "text": "maybe where uh maybe where the where my"
+    },
+    {
+      "index": 123,
+      "start": 388.96,
+      "end": 392.469,
+      "duration": 3.509,
+      "text": "tie uh begins to enter. So if it was"
+    },
+    {
+      "index": 124,
+      "start": 392.479,
+      "end": 395.67,
+      "duration": 3.191,
+      "text": "mostly blue shirt, uh this would be"
+    },
+    {
+      "index": 125,
+      "start": 395.68,
+      "end": 398.15,
+      "duration": 2.47,
+      "text": "slight difference in shading but pretty"
+    },
+    {
+      "index": 126,
+      "start": 398.16,
+      "end": 400.71,
+      "duration": 2.55,
+      "text": "close. Then the tie would be a different"
+    },
+    {
+      "index": 127,
+      "start": 400.72,
+      "end": 403.59,
+      "duration": 2.87,
+      "text": "color. So So we might have quite a few"
+    },
+    {
+      "index": 128,
+      "start": 403.6,
+      "end": 405.909,
+      "duration": 2.309,
+      "text": "pixels"
+    },
+    {
+      "index": 129,
+      "start": 405.919,
+      "end": 408.15,
+      "duration": 2.231,
+      "text": "for the blue shirt and a whole lot more"
+    },
+    {
+      "index": 130,
+      "start": 408.16,
+      "end": 410.23,
+      "duration": 2.07,
+      "text": "for the blackboard"
+    },
+    {
+      "index": 131,
+      "start": 410.24,
+      "end": 414.39,
+      "duration": 4.15,
+      "text": "that are very close and that's what are"
+    },
+    {
+      "index": 132,
+      "start": 414.4,
+      "end": 417.11,
+      "duration": 2.71,
+      "text": "very correlated and that's what gives us"
+    },
+    {
+      "index": 133,
+      "start": 417.12,
+      "end": 419.51,
+      "duration": 2.39,
+      "text": "the possibility of compression. For"
+    },
+    {
+      "index": 134,
+      "start": 419.52,
+      "end": 423.189,
+      "duration": 3.669,
+      "text": "example, before the lecture starts, if"
+    },
+    {
+      "index": 135,
+      "start": 423.199,
+      "end": 425.83,
+      "duration": 2.631,
+      "text": "we had a blank blackboard,"
+    },
+    {
+      "index": 136,
+      "start": 425.84,
+      "end": 428.629,
+      "duration": 2.789,
+      "text": "then there's an image, but it would make"
+    },
+    {
+      "index": 137,
+      "start": 428.639,
+      "end": 435.029,
+      "duration": 6.39,
+      "text": "no sense to take that image and"
+    },
+    {
+      "index": 138,
+      "start": 435.039,
+      "end": 438.39,
+      "duration": 3.351,
+      "text": "tell you what it is pixel by pixel. I"
+    },
+    {
+      "index": 139,
+      "start": 438.4,
+      "end": 441.35,
+      "duration": 2.95,
+      "text": "mean there is a case in which all pixel"
+    },
+    {
+      "index": 140,
+      "start": 441.36,
+      "end": 444.629,
+      "duration": 3.269,
+      "text": "values all gray levels are the same or"
+    },
+    {
+      "index": 141,
+      "start": 444.639,
+      "end": 446.55,
+      "duration": 1.911,
+      "text": "practically the same depending on the"
+    },
+    {
+      "index": 142,
+      "start": 446.56,
+      "end": 448.469,
+      "duration": 1.909,
+      "text": "erasing of the board but extremely"
+    },
+    {
+      "index": 143,
+      "start": 448.479,
+      "end": 453.189,
+      "duration": 4.71,
+      "text": "close. And so that's an image where"
+    },
+    {
+      "index": 144,
+      "start": 453.199,
+      "end": 455.67,
+      "duration": 2.471,
+      "text": "the standard basis is lousy. That's"
+    },
+    {
+      "index": 145,
+      "start": 455.68,
+      "end": 459.029,
+      "duration": 3.349,
+      "text": "that's the basic fact that that the"
+    },
+    {
+      "index": 146,
+      "start": 459.039,
+      "end": 461.35,
+      "duration": 2.311,
+      "text": "standard basis which gives the value of"
+    },
+    {
+      "index": 147,
+      "start": 461.36,
+      "end": 464.39,
+      "duration": 3.03,
+      "text": "every pixel makes no use of the fact"
+    },
+    {
+      "index": 148,
+      "start": 464.4,
+      "end": 467.99,
+      "duration": 3.59,
+      "text": "that we're getting a whole lot of pixels"
+    },
+    {
+      "index": 149,
+      "start": 468.0,
+      "end": 471.27,
+      "duration": 3.27,
+      "text": "whose gray levels the neighboring pixels"
+    },
+    {
+      "index": 150,
+      "start": 471.28,
+      "end": 473.83,
+      "duration": 2.55,
+      "text": "tend to have the same gray level as the"
+    },
+    {
+      "index": 151,
+      "start": 473.84,
+      "end": 477.189,
+      "duration": 3.349,
+      "text": "as the as their as their neighbors."
+    },
+    {
+      "index": 152,
+      "start": 477.199,
+      "end": 478.95,
+      "duration": 1.751,
+      "text": "So to take how do we take advantage of"
+    },
+    {
+      "index": 153,
+      "start": 478.96,
+      "end": 481.749,
+      "duration": 2.789,
+      "text": "that fact? Well, one basis vector that"
+    },
+    {
+      "index": 154,
+      "start": 481.759,
+      "end": 484.469,
+      "duration": 2.71,
+      "text": "would be extremely nice to in one vector"
+    },
+    {
+      "index": 155,
+      "start": 484.479,
+      "end": 486.71,
+      "duration": 2.231,
+      "text": "that would be extremely nice to include"
+    },
+    {
+      "index": 156,
+      "start": 486.72,
+      "end": 490.23,
+      "duration": 3.51,
+      "text": "in the basis would be"
+    },
+    {
+      "index": 157,
+      "start": 490.24,
+      "end": 492.869,
+      "duration": 2.629,
+      "text": "a vector of all ones"
+    },
+    {
+      "index": 158,
+      "start": 492.879,
+      "end": 495.11,
+      "duration": 2.231,
+      "text": "that's not in our standard basis. So our"
+    },
+    {
+      "index": 159,
+      "start": 495.12,
+      "end": 497.11,
+      "duration": 1.99,
+      "text": "so let me just write again the standard"
+    },
+    {
+      "index": 160,
+      "start": 497.12,
+      "end": 499.909,
+      "duration": 2.789,
+      "text": "basis"
+    },
+    {
+      "index": 161,
+      "start": 499.919,
+      "end": 503.51,
+      "duration": 3.591,
+      "text": "would is is our is our"
+    },
+    {
+      "index": 162,
+      "start": 503.52,
+      "end": 506.95,
+      "duration": 3.43,
+      "text": "one and all the rest zeros."
+    },
+    {
+      "index": 163,
+      "start": 506.96,
+      "end": 509.909,
+      "duration": 2.949,
+      "text": "0 one and all the rest zeros. Everybody"
+    },
+    {
+      "index": 164,
+      "start": 509.919,
+      "end": 513.909,
+      "duration": 3.99,
+      "text": "knows what these standard basis is."
+    },
+    {
+      "index": 165,
+      "start": 513.919,
+      "end": 516.55,
+      "duration": 2.631,
+      "text": "Now any other basis"
+    },
+    {
+      "index": 166,
+      "start": 516.56,
+      "end": 520.709,
+      "duration": 4.149,
+      "text": "for our so this is for this very"
+    },
+    {
+      "index": 167,
+      "start": 520.719,
+      "end": 523.909,
+      "duration": 3.19,
+      "text": "highdimensional space now I'm going to"
+    },
+    {
+      "index": 168,
+      "start": 523.919,
+      "end": 528.79,
+      "duration": 4.871,
+      "text": "speak about a better basis better basis"
+    },
+    {
+      "index": 169,
+      "start": 528.8,
+      "end": 532.55,
+      "duration": 3.75,
+      "text": "and let me just emphasize one vector"
+    },
+    {
+      "index": 170,
+      "start": 532.56,
+      "end": 534.47,
+      "duration": 1.91,
+      "text": "that would be extremely nice to have in"
+    },
+    {
+      "index": 171,
+      "start": 534.48,
+      "end": 539.75,
+      "duration": 5.27,
+      "text": "that basis is the vector of all ones."
+    },
+    {
+      "index": 172,
+      "start": 542.15,
+      "end": 542.16,
+      "duration": 0.01,
+      "text": "Why is that? Let me just say again"
+    },
+    {
+      "index": 173,
+      "start": 542.16,
+      "end": 545.35,
+      "duration": 3.19,
+      "text": "because that vector of all ones"
+    },
+    {
+      "index": 174,
+      "start": 545.36,
+      "end": 550.15,
+      "duration": 4.79,
+      "text": "by itself one vector is is able to"
+    },
+    {
+      "index": 175,
+      "start": 550.16,
+      "end": 552.79,
+      "duration": 2.63,
+      "text": "completely give the information on a"
+    },
+    {
+      "index": 176,
+      "start": 552.8,
+      "end": 555.91,
+      "duration": 3.11,
+      "text": "solid image."
+    },
+    {
+      "index": 177,
+      "start": 555.92,
+      "end": 557.75,
+      "duration": 1.83,
+      "text": "Of course our image won't be solid."
+    },
+    {
+      "index": 178,
+      "start": 557.76,
+      "end": 563.509,
+      "duration": 5.749,
+      "text": "It'll have a mix of uh of uh solid and"
+    },
+    {
+      "index": 179,
+      "start": 563.519,
+      "end": 565.59,
+      "duration": 2.071,
+      "text": "and"
+    },
+    {
+      "index": 180,
+      "start": 565.6,
+      "end": 568.71,
+      "duration": 3.11,
+      "text": "signal. So that one vector but that"
+    },
+    {
+      "index": 181,
+      "start": 568.72,
+      "end": 570.55,
+      "duration": 1.83,
+      "text": "having that one vector in the basis is"
+    },
+    {
+      "index": 182,
+      "start": 570.56,
+      "end": 573.43,
+      "duration": 2.87,
+      "text": "is is going to save us a whole lot. Now"
+    },
+    {
+      "index": 183,
+      "start": 573.44,
+      "end": 575.03,
+      "duration": 1.59,
+      "text": "the question is what other vectors"
+    },
+    {
+      "index": 184,
+      "start": 575.04,
+      "end": 579.43,
+      "duration": 4.39,
+      "text": "should be in the basis? The the extreme"
+    },
+    {
+      "index": 185,
+      "start": 579.44,
+      "end": 583.03,
+      "duration": 3.59,
+      "text": "vector in the basis might be a vector of"
+    },
+    {
+      "index": 186,
+      "start": 583.04,
+      "end": 587.43,
+      "duration": 4.39,
+      "text": "1 - one 1 - one 1 minus one. That would"
+    },
+    {
+      "index": 187,
+      "start": 587.44,
+      "end": 590.07,
+      "duration": 2.63,
+      "text": "be a vector that shows I mean that's"
+    },
+    {
+      "index": 188,
+      "start": 590.08,
+      "end": 592.79,
+      "duration": 2.71,
+      "text": "like a checkerboard vector right? That's"
+    },
+    {
+      "index": 189,
+      "start": 592.8,
+      "end": 595.829,
+      "duration": 3.029,
+      "text": "a vector that would if if we had if if"
+    },
+    {
+      "index": 190,
+      "start": 595.839,
+      "end": 598.389,
+      "duration": 2.55,
+      "text": "the image"
+    },
+    {
+      "index": 191,
+      "start": 598.399,
+      "end": 600.63,
+      "duration": 2.231,
+      "text": "was like a huge checkerboard of plus"
+    },
+    {
+      "index": 192,
+      "start": 600.64,
+      "end": 603.75,
+      "duration": 3.11,
+      "text": "minus plus minus plus minus that vector"
+    },
+    {
+      "index": 193,
+      "start": 603.76,
+      "end": 606.87,
+      "duration": 3.11,
+      "text": "would carry the whole signal. But much"
+    },
+    {
+      "index": 194,
+      "start": 606.88,
+      "end": 610.07,
+      "duration": 3.19,
+      "text": "more common would be maybe to have half"
+    },
+    {
+      "index": 195,
+      "start": 610.08,
+      "end": 613.99,
+      "duration": 3.91,
+      "text": "the image uh darker and the other half"
+    },
+    {
+      "index": 196,
+      "start": 614.0,
+      "end": 616.389,
+      "duration": 2.389,
+      "text": "lighter. So another im another vector"
+    },
+    {
+      "index": 197,
+      "start": 616.399,
+      "end": 618.71,
+      "duration": 2.311,
+      "text": "that might be quite useful in here would"
+    },
+    {
+      "index": 198,
+      "start": 618.72,
+      "end": 624.949,
+      "duration": 6.229,
+      "text": "be half ones and half minus ones."
+    },
+    {
+      "index": 199,
+      "start": 627.99,
+      "end": 628.0,
+      "duration": 0.01,
+      "text": "I'm just trying to get across the idea"
+    },
+    {
+      "index": 200,
+      "start": 628.0,
+      "end": 630.55,
+      "duration": 2.55,
+      "text": "of"
+    },
+    {
+      "index": 201,
+      "start": 630.56,
+      "end": 633.829,
+      "duration": 3.269,
+      "text": "that a basis could be that first of all"
+    },
+    {
+      "index": 202,
+      "start": 633.839,
+      "end": 638.23,
+      "duration": 4.391,
+      "text": "we've got the basis is at our disposal"
+    },
+    {
+      "index": 203,
+      "start": 638.24,
+      "end": 640.55,
+      "duration": 2.31,
+      "text": "like we're free to choose that and it's"
+    },
+    {
+      "index": 204,
+      "start": 640.56,
+      "end": 643.269,
+      "duration": 2.709,
+      "text": "a billion dollar decision what we"
+    },
+    {
+      "index": 205,
+      "start": 643.279,
+      "end": 648.069,
+      "duration": 4.79,
+      "text": "choose. Uh so um"
+    },
+    {
+      "index": 206,
+      "start": 648.079,
+      "end": 650.949,
+      "duration": 2.87,
+      "text": "and TV people would rather would prefer"
+    },
+    {
+      "index": 207,
+      "start": 650.959,
+      "end": 653.99,
+      "duration": 3.031,
+      "text": "one basis based on the way the the"
+    },
+    {
+      "index": 208,
+      "start": 654.0,
+      "end": 657.11,
+      "duration": 3.11,
+      "text": "signal is scanned and movie people would"
+    },
+    {
+      "index": 209,
+      "start": 657.12,
+      "end": 659.509,
+      "duration": 2.389,
+      "text": "prefer another. I mean there's giant"
+    },
+    {
+      "index": 210,
+      "start": 659.519,
+      "end": 661.11,
+      "duration": 1.591,
+      "text": "politics"
+    },
+    {
+      "index": 211,
+      "start": 661.12,
+      "end": 663.829,
+      "duration": 2.709,
+      "text": "in this question that really reduces to"
+    },
+    {
+      "index": 212,
+      "start": 663.839,
+      "end": 666.63,
+      "duration": 2.791,
+      "text": "a to a linear algebra problem what basis"
+    },
+    {
+      "index": 213,
+      "start": 666.64,
+      "end": 670.79,
+      "duration": 4.15,
+      "text": "to choose. I'll just mention the best"
+    },
+    {
+      "index": 214,
+      "start": 670.8,
+      "end": 675.509,
+      "duration": 4.709,
+      "text": "known basis which is which JPEG uses"
+    },
+    {
+      "index": 215,
+      "start": 675.519,
+      "end": 678.949,
+      "duration": 3.43,
+      "text": "let me put that here uh is the forier"
+    },
+    {
+      "index": 216,
+      "start": 678.959,
+      "end": 681.59,
+      "duration": 2.631,
+      "text": "basis."
+    },
+    {
+      "index": 217,
+      "start": 681.6,
+      "end": 684.31,
+      "duration": 2.71,
+      "text": "So when you"
+    },
+    {
+      "index": 218,
+      "start": 684.32,
+      "end": 686.63,
+      "duration": 2.31,
+      "text": "when you use the forier basis that"
+    },
+    {
+      "index": 219,
+      "start": 686.64,
+      "end": 689.91,
+      "duration": 3.27,
+      "text": "includes this is the constant vector the"
+    },
+    {
+      "index": 220,
+      "start": 689.92,
+      "end": 692.87,
+      "duration": 2.95,
+      "text": "DC vector if we're electrical engineers"
+    },
+    {
+      "index": 221,
+      "start": 692.88,
+      "end": 696.23,
+      "duration": 3.35,
+      "text": "this the the vector of all ones so it"
+    },
+    {
+      "index": 222,
+      "start": 696.24,
+      "end": 699.11,
+      "duration": 2.87,
+      "text": "would include one one one"
+    },
+    {
+      "index": 223,
+      "start": 699.12,
+      "end": 704.71,
+      "duration": 5.59,
+      "text": "often 8 by 8 is a good choice"
+    },
+    {
+      "index": 224,
+      "start": 708.47,
+      "end": 708.48,
+      "duration": 0.01,
+      "text": "8 by 8 is a is a good choice so"
+    },
+    {
+      "index": 225,
+      "start": 708.48,
+      "end": 711.829,
+      "duration": 3.349,
+      "text": "what do I mean by this 8 by 8 I mean"
+    },
+    {
+      "index": 226,
+      "start": 711.839,
+      "end": 716.55,
+      "duration": 4.711,
+      "text": "that the big signal which is 512 x 512"
+    },
+    {
+      "index": 227,
+      "start": 716.56,
+      "end": 720.23,
+      "duration": 3.67,
+      "text": "gets broken down and JPEG does this into"
+    },
+    {
+      "index": 228,
+      "start": 720.24,
+      "end": 722.63,
+      "duration": 2.39,
+      "text": "8 by8 blocks"
+    },
+    {
+      "index": 229,
+      "start": 722.64,
+      "end": 725.67,
+      "duration": 3.03,
+      "text": "and we sort of this is too much to deal"
+    },
+    {
+      "index": 230,
+      "start": 725.68,
+      "end": 728.71,
+      "duration": 3.03,
+      "text": "with at once. So what JPEG does is take"
+    },
+    {
+      "index": 231,
+      "start": 728.72,
+      "end": 733.67,
+      "duration": 4.95,
+      "text": "this 8 by8 block which is 64"
+    },
+    {
+      "index": 232,
+      "start": 733.68,
+      "end": 736.31,
+      "duration": 2.63,
+      "text": "coefficients 64"
+    },
+    {
+      "index": 233,
+      "start": 736.32,
+      "end": 738.389,
+      "duration": 2.069,
+      "text": "uh pixels"
+    },
+    {
+      "index": 234,
+      "start": 738.399,
+      "end": 741.11,
+      "duration": 2.711,
+      "text": "and changes the basis on the on that"
+    },
+    {
+      "index": 235,
+      "start": 741.12,
+      "end": 744.949,
+      "duration": 3.829,
+      "text": "piece and then now let's see I was going"
+    },
+    {
+      "index": 236,
+      "start": 744.959,
+      "end": 747.35,
+      "duration": 2.391,
+      "text": "to write down forier so you remember"
+    },
+    {
+      "index": 237,
+      "start": 747.36,
+      "end": 750.55,
+      "duration": 3.19,
+      "text": "forier is is this vector of all ones and"
+    },
+    {
+      "index": 238,
+      "start": 750.56,
+      "end": 755.269,
+      "duration": 4.709,
+      "text": "then uh the vector oh well actually I"
+    },
+    {
+      "index": 239,
+      "start": 755.279,
+      "end": 758.23,
+      "duration": 2.951,
+      "text": "gave a lecture earlier about the fier"
+    },
+    {
+      "index": 240,
+      "start": 758.24,
+      "end": 762.23,
+      "duration": 3.99,
+      "text": "matrix. These this matrix whose columns"
+    },
+    {
+      "index": 241,
+      "start": 762.24,
+      "end": 766.79,
+      "duration": 4.55,
+      "text": "are powers of a of a"
+    },
+    {
+      "index": 242,
+      "start": 766.8,
+      "end": 768.389,
+      "duration": 1.589,
+      "text": "uh"
+    },
+    {
+      "index": 243,
+      "start": 768.399,
+      "end": 771.35,
+      "duration": 2.951,
+      "text": "complex number w I won't repeat that"
+    },
+    {
+      "index": 244,
+      "start": 771.36,
+      "end": 773.59,
+      "duration": 2.23,
+      "text": "because I'm not I don't want to go into"
+    },
+    {
+      "index": 245,
+      "start": 773.6,
+      "end": 777.509,
+      "duration": 3.909,
+      "text": "the details of the fier basis"
+    },
+    {
+      "index": 246,
+      "start": 777.519,
+      "end": 780.629,
+      "duration": 3.11,
+      "text": "just to tell you how compression works."
+    },
+    {
+      "index": 247,
+      "start": 780.639,
+      "end": 783.91,
+      "duration": 3.271,
+      "text": "So what happens in JPEG? What happens to"
+    },
+    {
+      "index": 248,
+      "start": 783.92,
+      "end": 788.949,
+      "duration": 5.029,
+      "text": "the video to a to each image of of of"
+    },
+    {
+      "index": 249,
+      "start": 788.959,
+      "end": 791.11,
+      "duration": 2.151,
+      "text": "these lectures?"
+    },
+    {
+      "index": 250,
+      "start": 791.12,
+      "end": 796.31,
+      "duration": 5.19,
+      "text": "The it gets broken into 8 by8 blocks."
+    },
+    {
+      "index": 251,
+      "start": 796.32,
+      "end": 800.55,
+      "duration": 4.23,
+      "text": "Okay. Within each block we have 64"
+    },
+    {
+      "index": 252,
+      "start": 800.56,
+      "end": 803.43,
+      "duration": 2.87,
+      "text": "coefficients, 64 basis vectors, 64"
+    },
+    {
+      "index": 253,
+      "start": 803.44,
+      "end": 806.79,
+      "duration": 3.35,
+      "text": "pixels and we change basis in"
+    },
+    {
+      "index": 254,
+      "start": 806.8,
+      "end": 812.15,
+      "duration": 5.35,
+      "text": "64dimensional space using these furier"
+    },
+    {
+      "index": 255,
+      "start": 812.16,
+      "end": 815.03,
+      "duration": 2.87,
+      "text": "vectors."
+    },
+    {
+      "index": 256,
+      "start": 815.04,
+      "end": 818.31,
+      "duration": 3.27,
+      "text": "Just no that was a lossless step. Let"
+    },
+    {
+      "index": 257,
+      "start": 818.32,
+      "end": 821.59,
+      "duration": 3.27,
+      "text": "let me let me emphasize in comes the"
+    },
+    {
+      "index": 258,
+      "start": 821.6,
+      "end": 824.55,
+      "duration": 2.95,
+      "text": "signal"
+    },
+    {
+      "index": 259,
+      "start": 824.56,
+      "end": 826.23,
+      "duration": 1.67,
+      "text": "X."
+    },
+    {
+      "index": 260,
+      "start": 826.24,
+      "end": 828.79,
+      "duration": 2.55,
+      "text": "We change basis. This is the basis"
+    },
+    {
+      "index": 261,
+      "start": 828.8,
+      "end": 831.59,
+      "duration": 2.79,
+      "text": "change. Change basis. Choose a better"
+    },
+    {
+      "index": 262,
+      "start": 831.6,
+      "end": 834.069,
+      "duration": 2.469,
+      "text": "basis."
+    },
+    {
+      "index": 263,
+      "start": 834.079,
+      "end": 842.79,
+      "duration": 8.711,
+      "text": "So it produces um the um coefficients"
+    },
+    {
+      "index": 264,
+      "start": 847.67,
+      "end": 847.68,
+      "duration": 0.01,
+      "text": "C. So 64 pixels come in, 64 coefficients"
+    },
+    {
+      "index": 265,
+      "start": 847.68,
+      "end": 851.189,
+      "duration": 3.509,
+      "text": "come out. Now comes the compression."
+    },
+    {
+      "index": 266,
+      "start": 851.199,
+      "end": 856.23,
+      "duration": 5.031,
+      "text": "Now come this was lossless."
+    },
+    {
+      "index": 267,
+      "start": 860.55,
+      "end": 860.56,
+      "duration": 0.01,
+      "text": "It's just we know that R64 has plenty of"
+    },
+    {
+      "index": 268,
+      "start": 860.56,
+      "end": 863.509,
+      "duration": 2.949,
+      "text": "bases and"
+    },
+    {
+      "index": 269,
+      "start": 863.519,
+      "end": 868.389,
+      "duration": 4.87,
+      "text": "we've chosen one. Now in that basis we"
+    },
+    {
+      "index": 270,
+      "start": 868.399,
+      "end": 871.99,
+      "duration": 3.591,
+      "text": "write we write the signal in that basis"
+    },
+    {
+      "index": 271,
+      "start": 872.0,
+      "end": 873.829,
+      "duration": 1.829,
+      "text": "and that's what my lecture that's the"
+    },
+    {
+      "index": 272,
+      "start": 873.839,
+      "end": 876.389,
+      "duration": 2.55,
+      "text": "math part of my lecture. Now here's the"
+    },
+    {
+      "index": 273,
+      "start": 876.399,
+      "end": 878.79,
+      "duration": 2.391,
+      "text": "application part. The next part is going"
+    },
+    {
+      "index": 274,
+      "start": 878.8,
+      "end": 883.75,
+      "duration": 4.95,
+      "text": "to be the compression step"
+    },
+    {
+      "index": 275,
+      "start": 885.99,
+      "end": 886.0,
+      "duration": 0.01,
+      "text": "and that's lossy."
+    },
+    {
+      "index": 276,
+      "start": 886.0,
+      "end": 888.069,
+      "duration": 2.069,
+      "text": "We're going to lose information. And"
+    },
+    {
+      "index": 277,
+      "start": 888.079,
+      "end": 890.389,
+      "duration": 2.31,
+      "text": "what what will actually happen at that"
+    },
+    {
+      "index": 278,
+      "start": 890.399,
+      "end": 892.31,
+      "duration": 1.911,
+      "text": "step?"
+    },
+    {
+      "index": 279,
+      "start": 892.32,
+      "end": 895.59,
+      "duration": 3.27,
+      "text": "Well, one thing we could do is just"
+    },
+    {
+      "index": 280,
+      "start": 895.6,
+      "end": 898.949,
+      "duration": 3.349,
+      "text": "throw away the small coefficients. So"
+    },
+    {
+      "index": 281,
+      "start": 898.959,
+      "end": 900.87,
+      "duration": 1.911,
+      "text": "that would be that's called"
+    },
+    {
+      "index": 282,
+      "start": 900.88,
+      "end": 903.59,
+      "duration": 2.71,
+      "text": "thresholding. We set some threshold."
+    },
+    {
+      "index": 283,
+      "start": 903.6,
+      "end": 906.87,
+      "duration": 3.27,
+      "text": "every coefficient, every basis vector"
+    },
+    {
+      "index": 284,
+      "start": 906.88,
+      "end": 908.87,
+      "duration": 1.99,
+      "text": "that's not in there more than the"
+    },
+    {
+      "index": 285,
+      "start": 908.88,
+      "end": 911.35,
+      "duration": 2.47,
+      "text": "threshold value"
+    },
+    {
+      "index": 286,
+      "start": 911.36,
+      "end": 913.67,
+      "duration": 2.31,
+      "text": "and we set them threshold so that our"
+    },
+    {
+      "index": 287,
+      "start": 913.68,
+      "end": 915.67,
+      "duration": 1.99,
+      "text": "eye can't see the difference whether we"
+    },
+    {
+      "index": 288,
+      "start": 915.68,
+      "end": 919.35,
+      "duration": 3.67,
+      "text": "throw away that uh or can hardly see the"
+    },
+    {
+      "index": 289,
+      "start": 919.36,
+      "end": 921.189,
+      "duration": 1.829,
+      "text": "difference whether we throw away that"
+    },
+    {
+      "index": 290,
+      "start": 921.199,
+      "end": 923.67,
+      "duration": 2.471,
+      "text": "little bit of that basis vector or keep"
+    },
+    {
+      "index": 291,
+      "start": 923.68,
+      "end": 927.99,
+      "duration": 4.31,
+      "text": "it. So this compression step produces"
+    },
+    {
+      "index": 292,
+      "start": 928.0,
+      "end": 930.47,
+      "duration": 2.47,
+      "text": "a compressed set of coefficients. Let me"
+    },
+    {
+      "index": 293,
+      "start": 930.48,
+      "end": 932.949,
+      "duration": 2.469,
+      "text": "I'll just keep going here."
+    },
+    {
+      "index": 294,
+      "start": 932.959,
+      "end": 935.829,
+      "duration": 2.87,
+      "text": "So, so it keeps going. This compression"
+    },
+    {
+      "index": 295,
+      "start": 935.839,
+      "end": 940.31,
+      "duration": 4.471,
+      "text": "step produces some coefficients C hat"
+    },
+    {
+      "index": 296,
+      "start": 940.32,
+      "end": 945.269,
+      "duration": 4.949,
+      "text": "and with lots of with many zeros."
+    },
+    {
+      "index": 297,
+      "start": 945.279,
+      "end": 948.47,
+      "duration": 3.191,
+      "text": "So that's where the compression came."
+    },
+    {
+      "index": 298,
+      "start": 948.48,
+      "end": 951.35,
+      "duration": 2.87,
+      "text": "Probably there is enough of this vector"
+    },
+    {
+      "index": 299,
+      "start": 951.36,
+      "end": 953.67,
+      "duration": 2.31,
+      "text": "of all ones. We we very seldom throw"
+    },
+    {
+      "index": 300,
+      "start": 953.68,
+      "end": 956.87,
+      "duration": 3.19,
+      "text": "that away. Usually its coefficient will"
+    },
+    {
+      "index": 301,
+      "start": 956.88,
+      "end": 959.269,
+      "duration": 2.389,
+      "text": "be large. But the coefficient of"
+    },
+    {
+      "index": 302,
+      "start": 959.279,
+      "end": 962.23,
+      "duration": 2.951,
+      "text": "something like this, that quickly"
+    },
+    {
+      "index": 303,
+      "start": 962.24,
+      "end": 964.87,
+      "duration": 2.63,
+      "text": "alternating vector, there's probably"
+    },
+    {
+      "index": 304,
+      "start": 964.88,
+      "end": 966.79,
+      "duration": 1.91,
+      "text": "very little of that in any smooth"
+    },
+    {
+      "index": 305,
+      "start": 966.8,
+      "end": 970.949,
+      "duration": 4.149,
+      "text": "signal. I mean, that's high frequency,"
+    },
+    {
+      "index": 306,
+      "start": 970.959,
+      "end": 973.43,
+      "duration": 2.471,
+      "text": "zero frequency. This stuff is the"
+    },
+    {
+      "index": 307,
+      "start": 973.44,
+      "end": 977.03,
+      "duration": 3.59,
+      "text": "highest frequency we could have. And"
+    },
+    {
+      "index": 308,
+      "start": 977.04,
+      "end": 979.99,
+      "duration": 2.95,
+      "text": "there's a if the noise, the the jitter"
+    },
+    {
+      "index": 309,
+      "start": 980.0,
+      "end": 984.47,
+      "duration": 4.47,
+      "text": "is producing that sort of output. But a"
+    },
+    {
+      "index": 310,
+      "start": 984.48,
+      "end": 988.15,
+      "duration": 3.67,
+      "text": "smooth lecture like this one is uh has"
+    },
+    {
+      "index": 311,
+      "start": 988.16,
+      "end": 990.87,
+      "duration": 2.71,
+      "text": "very little of that highest frequency,"
+    },
+    {
+      "index": 312,
+      "start": 990.88,
+      "end": 993.509,
+      "duration": 2.629,
+      "text": "very little noise in this lecture. Okay."
+    },
+    {
+      "index": 313,
+      "start": 993.519,
+      "end": 997.11,
+      "duration": 3.591,
+      "text": "So, so we throw away whatever there is"
+    },
+    {
+      "index": 314,
+      "start": 997.12,
+      "end": 999.99,
+      "duration": 2.87,
+      "text": "and we we're left with just a few"
+    },
+    {
+      "index": 315,
+      "start": 1000.0,
+      "end": 1004.31,
+      "duration": 4.31,
+      "text": "coefficients and then we reconstruct"
+    },
+    {
+      "index": 316,
+      "start": 1004.32,
+      "end": 1007.03,
+      "duration": 2.71,
+      "text": "a signal"
+    },
+    {
+      "index": 317,
+      "start": 1007.04,
+      "end": 1009.43,
+      "duration": 2.39,
+      "text": "using those coefficients. We take the"
+    },
+    {
+      "index": 318,
+      "start": 1009.44,
+      "end": 1012.71,
+      "duration": 3.27,
+      "text": "those coefficients times their basis"
+    },
+    {
+      "index": 319,
+      "start": 1012.72,
+      "end": 1017.67,
+      "duration": 4.95,
+      "text": "vectors. But this sum doesn't have 64"
+    },
+    {
+      "index": 320,
+      "start": 1017.68,
+      "end": 1020.389,
+      "duration": 2.709,
+      "text": "terms anymore. Probably it has about two"
+    },
+    {
+      "index": 321,
+      "start": 1020.399,
+      "end": 1023.509,
+      "duration": 3.11,
+      "text": "or three terms. So that would if we say"
+    },
+    {
+      "index": 322,
+      "start": 1023.519,
+      "end": 1026.47,
+      "duration": 2.951,
+      "text": "it has three terms from 64 down to"
+    },
+    {
+      "index": 323,
+      "start": 1026.48,
+      "end": 1029.75,
+      "duration": 3.27,
+      "text": "three. That's compression of 21 to one."
+    },
+    {
+      "index": 324,
+      "start": 1029.76,
+      "end": 1031.51,
+      "duration": 1.75,
+      "text": "That's the kind of compression you're"
+    },
+    {
+      "index": 325,
+      "start": 1031.52,
+      "end": 1034.789,
+      "duration": 3.269,
+      "text": "looking for. And everybody is looking"
+    },
+    {
+      "index": 326,
+      "start": 1034.799,
+      "end": 1037.59,
+      "duration": 2.791,
+      "text": "for that sort of compression. Um let's"
+    },
+    {
+      "index": 327,
+      "start": 1037.6,
+      "end": 1040.47,
+      "duration": 2.87,
+      "text": "see. I guess I met the problem with the"
+    },
+    {
+      "index": 328,
+      "start": 1040.48,
+      "end": 1043.99,
+      "duration": 3.51,
+      "text": "FBI and fingerprints."
+    },
+    {
+      "index": 329,
+      "start": 1044.0,
+      "end": 1046.23,
+      "duration": 2.23,
+      "text": "So, there's a whole lot of still images."
+    },
+    {
+      "index": 330,
+      "start": 1046.24,
+      "end": 1048.23,
+      "duration": 1.99,
+      "text": "You know, you with your thumb, you make"
+    },
+    {
+      "index": 331,
+      "start": 1048.24,
+      "end": 1054.31,
+      "duration": 6.07,
+      "text": "these inky marks which um go somewhere."
+    },
+    {
+      "index": 332,
+      "start": 1054.32,
+      "end": 1056.95,
+      "duration": 2.63,
+      "text": "Uh used to go to Washington and get"
+    },
+    {
+      "index": 333,
+      "start": 1056.96,
+      "end": 1059.51,
+      "duration": 2.55,
+      "text": "stored in a big file. So Washington had"
+    },
+    {
+      "index": 334,
+      "start": 1059.52,
+      "end": 1062.549,
+      "duration": 3.029,
+      "text": "a file of 30 million"
+    },
+    {
+      "index": 335,
+      "start": 1062.559,
+      "end": 1066.47,
+      "duration": 3.911,
+      "text": "murderers, uh, cheaters on quizzes,"
+    },
+    {
+      "index": 336,
+      "start": 1066.48,
+      "end": 1070.71,
+      "duration": 4.23,
+      "text": "other stuff. Uh, and, uh,"
+    },
+    {
+      "index": 337,
+      "start": 1070.72,
+      "end": 1072.71,
+      "duration": 1.99,
+      "text": "and actually"
+    },
+    {
+      "index": 338,
+      "start": 1072.72,
+      "end": 1075.27,
+      "duration": 2.55,
+      "text": "there was no way to retrieve them in"
+    },
+    {
+      "index": 339,
+      "start": 1075.28,
+      "end": 1077.909,
+      "duration": 2.629,
+      "text": "time. Like so, so suppose you're at the"
+    },
+    {
+      "index": 340,
+      "start": 1077.919,
+      "end": 1080.47,
+      "duration": 2.551,
+      "text": "police station, they say, \"Okay, this"
+    },
+    {
+      "index": 341,
+      "start": 1080.48,
+      "end": 1083.029,
+      "duration": 2.549,
+      "text": "person may have done this. Check with"
+    },
+    {
+      "index": 342,
+      "start": 1083.039,
+      "end": 1085.19,
+      "duration": 2.151,
+      "text": "Washington. Have they got are his fing"
+    },
+    {
+      "index": 343,
+      "start": 1085.2,
+      "end": 1088.39,
+      "duration": 3.19,
+      "text": "his or her fingerprints on file?\" Well,"
+    },
+    {
+      "index": 344,
+      "start": 1088.4,
+      "end": 1091.27,
+      "duration": 2.87,
+      "text": "Washington won't know the answer within"
+    },
+    {
+      "index": 345,
+      "start": 1091.28,
+      "end": 1094.39,
+      "duration": 3.11,
+      "text": "a week with if it's got filing cabinets"
+    },
+    {
+      "index": 346,
+      "start": 1094.4,
+      "end": 1097.11,
+      "duration": 2.71,
+      "text": "full of fingerprints. So, of course, the"
+    },
+    {
+      "index": 347,
+      "start": 1097.12,
+      "end": 1101.35,
+      "duration": 4.23,
+      "text": "natural step is digitize them."
+    },
+    {
+      "index": 348,
+      "start": 1101.36,
+      "end": 1104.71,
+      "duration": 3.35,
+      "text": "So, all fingerprints are now digitized."
+    },
+    {
+      "index": 349,
+      "start": 1104.72,
+      "end": 1108.07,
+      "duration": 3.35,
+      "text": "So, now it's it's at least electronic."
+    },
+    {
+      "index": 350,
+      "start": 1108.08,
+      "end": 1110.71,
+      "duration": 2.63,
+      "text": "But still, there's too much information"
+    },
+    {
+      "index": 351,
+      "start": 1110.72,
+      "end": 1112.71,
+      "duration": 1.99,
+      "text": "in each"
+    },
+    {
+      "index": 352,
+      "start": 1112.72,
+      "end": 1114.71,
+      "duration": 1.99,
+      "text": "each one. I mean you can't search"
+    },
+    {
+      "index": 353,
+      "start": 1114.72,
+      "end": 1119.51,
+      "duration": 4.79,
+      "text": "through that many uh fingerprints if you"
+    },
+    {
+      "index": 354,
+      "start": 1119.52,
+      "end": 1124.549,
+      "duration": 5.029,
+      "text": "if if the digital image is 512 squared x"
+    },
+    {
+      "index": 355,
+      "start": 1124.559,
+      "end": 1127.99,
+      "duration": 3.431,
+      "text": "512 squared if it's that many pixels. So"
+    },
+    {
+      "index": 356,
+      "start": 1128.0,
+      "end": 1130.789,
+      "duration": 2.789,
+      "text": "you get compressed. So the FBI had to"
+    },
+    {
+      "index": 357,
+      "start": 1130.799,
+      "end": 1134.31,
+      "duration": 3.511,
+      "text": "decide what basis to choose for"
+    },
+    {
+      "index": 358,
+      "start": 1134.32,
+      "end": 1136.23,
+      "duration": 1.91,
+      "text": "compression of fingerprints. And then"
+    },
+    {
+      "index": 359,
+      "start": 1136.24,
+      "end": 1138.87,
+      "duration": 2.63,
+      "text": "they built a big new facility in West"
+    },
+    {
+      "index": 360,
+      "start": 1138.88,
+      "end": 1142.23,
+      "duration": 3.35,
+      "text": "Virginia and that's where fingerprints"
+    },
+    {
+      "index": 361,
+      "start": 1142.24,
+      "end": 1144.71,
+      "duration": 2.47,
+      "text": "now are sent. So if you I think if you"
+    },
+    {
+      "index": 362,
+      "start": 1144.72,
+      "end": 1146.39,
+      "duration": 1.67,
+      "text": "get your fingerprints done now at the"
+    },
+    {
+      "index": 363,
+      "start": 1146.4,
+      "end": 1148.789,
+      "duration": 2.389,
+      "text": "police station, if it's an up-to-date"
+    },
+    {
+      "index": 364,
+      "start": 1148.799,
+      "end": 1150.549,
+      "duration": 1.75,
+      "text": "police station, it's it happens"
+    },
+    {
+      "index": 365,
+      "start": 1150.559,
+      "end": 1153.11,
+      "duration": 2.551,
+      "text": "digitally and the signal is sent"
+    },
+    {
+      "index": 366,
+      "start": 1153.12,
+      "end": 1155.51,
+      "duration": 2.39,
+      "text": "digitally. And then in West Virginia,"
+    },
+    {
+      "index": 367,
+      "start": 1155.52,
+      "end": 1160.549,
+      "duration": 5.029,
+      "text": "it's compressed and indexed. And then if"
+    },
+    {
+      "index": 368,
+      "start": 1160.559,
+      "end": 1163.59,
+      "duration": 3.031,
+      "text": "they want to find you, they can do it"
+    },
+    {
+      "index": 369,
+      "start": 1163.6,
+      "end": 1166.789,
+      "duration": 3.189,
+      "text": "within minutes instead of within a week."
+    },
+    {
+      "index": 370,
+      "start": 1166.799,
+      "end": 1170.07,
+      "duration": 3.271,
+      "text": "Okay. So this compression is comes up"
+    },
+    {
+      "index": 371,
+      "start": 1170.08,
+      "end": 1173.75,
+      "duration": 3.67,
+      "text": "for signals for images for video which"
+    },
+    {
+      "index": 372,
+      "start": 1173.76,
+      "end": 1176.549,
+      "duration": 2.789,
+      "text": "is like these lectures. Uh there's"
+    },
+    {
+      "index": 373,
+      "start": 1176.559,
+      "end": 1178.47,
+      "duration": 1.911,
+      "text": "another aspect."
+    },
+    {
+      "index": 374,
+      "start": 1178.48,
+      "end": 1182.31,
+      "duration": 3.83,
+      "text": "You could treat the video as one still"
+    },
+    {
+      "index": 375,
+      "start": 1182.32,
+      "end": 1185.51,
+      "duration": 3.19,
+      "text": "image after another one and compress"
+    },
+    {
+      "index": 376,
+      "start": 1185.52,
+      "end": 1190.15,
+      "duration": 4.63,
+      "text": "each one and then run them in and make a"
+    },
+    {
+      "index": 377,
+      "start": 1190.16,
+      "end": 1193.99,
+      "duration": 3.83,
+      "text": "video. But that misses well, you can see"
+    },
+    {
+      "index": 378,
+      "start": 1194.0,
+      "end": 1197.83,
+      "duration": 3.83,
+      "text": "why that's not optimal in video. So for"
+    },
+    {
+      "index": 379,
+      "start": 1197.84,
+      "end": 1200.71,
+      "duration": 2.87,
+      "text": "in in a video thing, you you you you"
+    },
+    {
+      "index": 380,
+      "start": 1200.72,
+      "end": 1205.51,
+      "duration": 4.79,
+      "text": "have a a a sequence of images. So video"
+    },
+    {
+      "index": 381,
+      "start": 1205.52,
+      "end": 1210.47,
+      "duration": 4.95,
+      "text": "is really a sequence of images."
+    },
+    {
+      "index": 382,
+      "start": 1212.39,
+      "end": 1212.4,
+      "duration": 0.01,
+      "text": "But"
+    },
+    {
+      "index": 383,
+      "start": 1212.4,
+      "end": 1216.87,
+      "duration": 4.47,
+      "text": "what about one image to the next image?"
+    },
+    {
+      "index": 384,
+      "start": 1216.88,
+      "end": 1218.95,
+      "duration": 2.07,
+      "text": "They're they're extremely correlated. I"
+    },
+    {
+      "index": 385,
+      "start": 1218.96,
+      "end": 1220.789,
+      "duration": 1.829,
+      "text": "mean that I'm getting an image every"
+    },
+    {
+      "index": 386,
+      "start": 1220.799,
+      "end": 1223.669,
+      "duration": 2.87,
+      "text": "split second. And although I'm moving"
+    },
+    {
+      "index": 387,
+      "start": 1223.679,
+      "end": 1227.19,
+      "duration": 3.511,
+      "text": "slightly, that's what's producing the uh"
+    },
+    {
+      "index": 388,
+      "start": 1227.2,
+      "end": 1232.07,
+      "duration": 4.87,
+      "text": "jumpy motion on the video, but"
+    },
+    {
+      "index": 389,
+      "start": 1232.08,
+      "end": 1235.83,
+      "duration": 3.75,
+      "text": "I'm not like, you know, each each image"
+    },
+    {
+      "index": 390,
+      "start": 1235.84,
+      "end": 1237.99,
+      "duration": 2.15,
+      "text": "in the sequence is pretty close to the"
+    },
+    {
+      "index": 391,
+      "start": 1238.0,
+      "end": 1241.19,
+      "duration": 3.19,
+      "text": "one before. So you have to use like"
+    },
+    {
+      "index": 392,
+      "start": 1241.2,
+      "end": 1244.39,
+      "duration": 3.19,
+      "text": "prediction and correction. I mean, you"
+    },
+    {
+      "index": 393,
+      "start": 1244.4,
+      "end": 1248.63,
+      "duration": 4.23,
+      "text": "my the image of me one instant, one time"
+    },
+    {
+      "index": 394,
+      "start": 1248.64,
+      "end": 1251.029,
+      "duration": 2.389,
+      "text": "step later, you would assume would be"
+    },
+    {
+      "index": 395,
+      "start": 1251.039,
+      "end": 1253.19,
+      "duration": 2.151,
+      "text": "the same. and then plus a small"
+    },
+    {
+      "index": 396,
+      "start": 1253.2,
+      "end": 1256.789,
+      "duration": 3.589,
+      "text": "correction and you would only code and"
+    },
+    {
+      "index": 397,
+      "start": 1256.799,
+      "end": 1260.07,
+      "duration": 3.271,
+      "text": "digitize the correction and compress the"
+    },
+    {
+      "index": 398,
+      "start": 1260.08,
+      "end": 1263.59,
+      "duration": 3.51,
+      "text": "correction. So a sequence of images"
+    },
+    {
+      "index": 399,
+      "start": 1263.6,
+      "end": 1268.87,
+      "duration": 5.27,
+      "text": "that's highly correlated and the"
+    },
+    {
+      "index": 400,
+      "start": 1268.88,
+      "end": 1271.59,
+      "duration": 2.71,
+      "text": "the problem in compression is always to"
+    },
+    {
+      "index": 401,
+      "start": 1271.6,
+      "end": 1275.59,
+      "duration": 3.99,
+      "text": "use this correlation this fact that in"
+    },
+    {
+      "index": 402,
+      "start": 1275.6,
+      "end": 1279.029,
+      "duration": 3.429,
+      "text": "time or in space things don't change"
+    },
+    {
+      "index": 403,
+      "start": 1279.039,
+      "end": 1282.39,
+      "duration": 3.351,
+      "text": "instantly. they they they're very often"
+    },
+    {
+      "index": 404,
+      "start": 1282.4,
+      "end": 1286.95,
+      "duration": 4.55,
+      "text": "smooth changes and uh you can predict"
+    },
+    {
+      "index": 405,
+      "start": 1286.96,
+      "end": 1289.75,
+      "duration": 2.79,
+      "text": "one value from the previous value. Okay,"
+    },
+    {
+      "index": 406,
+      "start": 1289.76,
+      "end": 1293.83,
+      "duration": 4.07,
+      "text": "so that's the those are applications"
+    },
+    {
+      "index": 407,
+      "start": 1293.84,
+      "end": 1297.029,
+      "duration": 3.189,
+      "text": "which are pure linear algebra. I could"
+    },
+    {
+      "index": 408,
+      "start": 1297.039,
+      "end": 1299.99,
+      "duration": 2.951,
+      "text": "uh well maybe I maybe you'll allow me to"
+    },
+    {
+      "index": 409,
+      "start": 1300.0,
+      "end": 1304.47,
+      "duration": 4.47,
+      "text": "tell you the um and the book describes"
+    },
+    {
+      "index": 410,
+      "start": 1304.48,
+      "end": 1309.11,
+      "duration": 4.63,
+      "text": "the new basis that's uh the competition"
+    },
+    {
+      "index": 411,
+      "start": 1309.12,
+      "end": 1311.51,
+      "duration": 2.39,
+      "text": "for furier. So the competition for"
+    },
+    {
+      "index": 412,
+      "start": 1311.52,
+      "end": 1315.59,
+      "duration": 4.07,
+      "text": "furier is called wavelets"
+    },
+    {
+      "index": 413,
+      "start": 1315.6,
+      "end": 1318.149,
+      "duration": 2.549,
+      "text": "and I can describe what that basis is"
+    },
+    {
+      "index": 414,
+      "start": 1318.159,
+      "end": 1321.99,
+      "duration": 3.831,
+      "text": "like say in the 8 by8 case. So the 8 by8"
+    },
+    {
+      "index": 415,
+      "start": 1322.0,
+      "end": 1325.11,
+      "duration": 3.11,
+      "text": "wavelet basis is the bas is the vector"
+    },
+    {
+      "index": 416,
+      "start": 1325.12,
+      "end": 1328.149,
+      "duration": 3.029,
+      "text": "of all ones 8 1's."
+    },
+    {
+      "index": 417,
+      "start": 1328.159,
+      "end": 1331.51,
+      "duration": 3.351,
+      "text": "Then the vector of four ones and four"
+    },
+    {
+      "index": 418,
+      "start": 1331.52,
+      "end": 1333.75,
+      "duration": 2.23,
+      "text": "minus 1's"
+    },
+    {
+      "index": 419,
+      "start": 1333.76,
+      "end": 1336.549,
+      "duration": 2.789,
+      "text": "then the vector of"
+    },
+    {
+      "index": 420,
+      "start": 1336.559,
+      "end": 1339.27,
+      "duration": 2.711,
+      "text": "two ones and two minus 1's and four"
+    },
+    {
+      "index": 421,
+      "start": 1339.28,
+      "end": 1341.43,
+      "duration": 2.15,
+      "text": "zeros."
+    },
+    {
+      "index": 422,
+      "start": 1341.44,
+      "end": 1345.59,
+      "duration": 4.15,
+      "text": "And also the vector of four zeros and"
+    },
+    {
+      "index": 423,
+      "start": 1345.6,
+      "end": 1348.47,
+      "duration": 2.87,
+      "text": "two ones and two minus1's."
+    },
+    {
+      "index": 424,
+      "start": 1348.48,
+      "end": 1350.789,
+      "duration": 2.309,
+      "text": "So now I'm up to four and I need four"
+    },
+    {
+      "index": 425,
+      "start": 1350.799,
+      "end": 1353.909,
+      "duration": 3.11,
+      "text": "more right for R8."
+    },
+    {
+      "index": 426,
+      "start": 1353.919,
+      "end": 1356.789,
+      "duration": 2.87,
+      "text": "So the next basis factor will be one"
+    },
+    {
+      "index": 427,
+      "start": 1356.799,
+      "end": 1360.47,
+      "duration": 3.671,
+      "text": "minus one and six zeros"
+    },
+    {
+      "index": 428,
+      "start": 1360.48,
+      "end": 1362.71,
+      "duration": 2.23,
+      "text": "and then"
+    },
+    {
+      "index": 429,
+      "start": 1362.72,
+      "end": 1364.71,
+      "duration": 1.99,
+      "text": "three more like that with the one minus"
+    },
+    {
+      "index": 430,
+      "start": 1364.72,
+      "end": 1367.909,
+      "duration": 3.189,
+      "text": "one there and there and there. So those"
+    },
+    {
+      "index": 431,
+      "start": 1367.919,
+      "end": 1370.149,
+      "duration": 2.23,
+      "text": "are eight vectors"
+    },
+    {
+      "index": 432,
+      "start": 1370.159,
+      "end": 1373.029,
+      "duration": 2.87,
+      "text": "in eight dimensional space. Those are"
+    },
+    {
+      "index": 433,
+      "start": 1373.039,
+      "end": 1375.75,
+      "duration": 2.711,
+      "text": "those are called wavelets."
+    },
+    {
+      "index": 434,
+      "start": 1375.76,
+      "end": 1379.909,
+      "duration": 4.149,
+      "text": "and you and it's a very simple wavelet"
+    },
+    {
+      "index": 435,
+      "start": 1379.919,
+      "end": 1383.75,
+      "duration": 3.831,
+      "text": "choice. It's more sophisticated choice."
+    },
+    {
+      "index": 436,
+      "start": 1383.76,
+      "end": 1386.39,
+      "duration": 2.63,
+      "text": "This is a little jumpy to jump between"
+    },
+    {
+      "index": 437,
+      "start": 1386.4,
+      "end": 1390.63,
+      "duration": 4.23,
+      "text": "one and minus one. Um and actually you"
+    },
+    {
+      "index": 438,
+      "start": 1390.64,
+      "end": 1393.83,
+      "duration": 3.19,
+      "text": "can see now uh suppose you compare the"
+    },
+    {
+      "index": 439,
+      "start": 1393.84,
+      "end": 1396.87,
+      "duration": 3.03,
+      "text": "wavelet basis with the fier basis above."
+    },
+    {
+      "index": 440,
+      "start": 1396.88,
+      "end": 1401.029,
+      "duration": 4.149,
+      "text": "How could I write this guy which is in"
+    },
+    {
+      "index": 441,
+      "start": 1401.039,
+      "end": 1403.669,
+      "duration": 2.63,
+      "text": "the forier basis? It's an it's a vector"
+    },
+    {
+      "index": 442,
+      "start": 1403.679,
+      "end": 1407.75,
+      "duration": 4.071,
+      "text": "in R8. How would I write that as a"
+    },
+    {
+      "index": 443,
+      "start": 1407.76,
+      "end": 1410.87,
+      "duration": 3.11,
+      "text": "combination of the wavelet basis? Do you"
+    },
+    {
+      "index": 444,
+      "start": 1410.88,
+      "end": 1412.71,
+      "duration": 1.83,
+      "text": "have I told you enough about the wavelet"
+    },
+    {
+      "index": 445,
+      "start": 1412.72,
+      "end": 1415.11,
+      "duration": 2.39,
+      "text": "basis that you can see how does this"
+    },
+    {
+      "index": 446,
+      "start": 1415.12,
+      "end": 1417.75,
+      "duration": 2.63,
+      "text": "very fast guy"
+    },
+    {
+      "index": 447,
+      "start": 1417.76,
+      "end": 1420.63,
+      "duration": 2.87,
+      "text": "what combination of the wavelet basis is"
+    },
+    {
+      "index": 448,
+      "start": 1420.64,
+      "end": 1423.909,
+      "duration": 3.269,
+      "text": "that very fast guy? It would be this"
+    },
+    {
+      "index": 449,
+      "start": 1423.919,
+      "end": 1427.11,
+      "duration": 3.191,
+      "text": "one. It would be the sum of these four."
+    },
+    {
+      "index": 450,
+      "start": 1427.12,
+      "end": 1429.19,
+      "duration": 2.07,
+      "text": "Right? That very fast guy will be that"
+    },
+    {
+      "index": 451,
+      "start": 1429.2,
+      "end": 1432.149,
+      "duration": 2.949,
+      "text": "one minus one and the next one and the"
+    },
+    {
+      "index": 452,
+      "start": 1432.159,
+      "end": 1434.47,
+      "duration": 2.311,
+      "text": "next one and the next one. So this is"
+    },
+    {
+      "index": 453,
+      "start": 1434.48,
+      "end": 1439.51,
+      "duration": 5.03,
+      "text": "the sum of those last four wavelets."
+    },
+    {
+      "index": 454,
+      "start": 1439.52,
+      "end": 1443.43,
+      "duration": 3.91,
+      "text": "This one we've kept and so on. So uh"
+    },
+    {
+      "index": 455,
+      "start": 1443.44,
+      "end": 1446.07,
+      "duration": 2.63,
+      "text": "each well every well that's what a basis"
+    },
+    {
+      "index": 456,
+      "start": 1446.08,
+      "end": 1448.789,
+      "duration": 2.709,
+      "text": "does. Every vector in R8 is some"
+    },
+    {
+      "index": 457,
+      "start": 1448.799,
+      "end": 1451.75,
+      "duration": 2.951,
+      "text": "combination of those. And for the linear"
+    },
+    {
+      "index": 458,
+      "start": 1451.76,
+      "end": 1454.95,
+      "duration": 3.19,
+      "text": "algebra we h so the linear algebra is"
+    },
+    {
+      "index": 459,
+      "start": 1454.96,
+      "end": 1459.19,
+      "duration": 4.23,
+      "text": "this step. Find the coefficients."
+    },
+    {
+      "index": 460,
+      "start": 1459.2,
+      "end": 1461.909,
+      "duration": 2.709,
+      "text": "That's that's the step we want to take."
+    },
+    {
+      "index": 461,
+      "start": 1461.919,
+      "end": 1464.39,
+      "duration": 2.471,
+      "text": "What if I give you the basis like this"
+    },
+    {
+      "index": 462,
+      "start": 1464.4,
+      "end": 1468.07,
+      "duration": 3.67,
+      "text": "wavelet basis"
+    },
+    {
+      "index": 463,
+      "start": 1472.07,
+      "end": 1472.08,
+      "duration": 0.01,
+      "text": "and I give you the pixel? So here are"
+    },
+    {
+      "index": 464,
+      "start": 1472.08,
+      "end": 1478.789,
+      "duration": 6.709,
+      "text": "the pixel values P1 P2 down to P8."
+    },
+    {
+      "index": 465,
+      "start": 1480.63,
+      "end": 1480.64,
+      "duration": 0.01,
+      "text": "What's what's the job? What's the linear"
+    },
+    {
+      "index": 466,
+      "start": 1480.64,
+      "end": 1483.83,
+      "duration": 3.19,
+      "text": "algebra here? So this is these are the"
+    },
+    {
+      "index": 467,
+      "start": 1483.84,
+      "end": 1486.07,
+      "duration": 2.23,
+      "text": "values. This is in the standard basis,"
+    },
+    {
+      "index": 468,
+      "start": 1486.08,
+      "end": 1492.07,
+      "duration": 5.99,
+      "text": "right? Those are just the values at"
+    },
+    {
+      "index": 469,
+      "start": 1492.08,
+      "end": 1495.029,
+      "duration": 2.949,
+      "text": "eight successive points. I guess I'm"
+    },
+    {
+      "index": 470,
+      "start": 1495.039,
+      "end": 1497.11,
+      "duration": 2.071,
+      "text": "dropping down to one dimension. Instead"
+    },
+    {
+      "index": 471,
+      "start": 1497.12,
+      "end": 1500.149,
+      "duration": 3.029,
+      "text": "of 8 by 8, I'm just going to take eight"
+    },
+    {
+      "index": 472,
+      "start": 1500.159,
+      "end": 1504.47,
+      "duration": 4.311,
+      "text": "pixel values along that first top row."
+    },
+    {
+      "index": 473,
+      "start": 1504.48,
+      "end": 1507.59,
+      "duration": 3.11,
+      "text": "So I what do I want to do in the"
+    },
+    {
+      "index": 474,
+      "start": 1507.6,
+      "end": 1509.909,
+      "duration": 2.309,
+      "text": "standard basis? Here are the pixel"
+    },
+    {
+      "index": 475,
+      "start": 1509.919,
+      "end": 1513.43,
+      "duration": 3.511,
+      "text": "values. I want to write that as a"
+    },
+    {
+      "index": 476,
+      "start": 1513.44,
+      "end": 1518.87,
+      "duration": 5.43,
+      "text": "combination of C1 * this guy plus C2 *"
+    },
+    {
+      "index": 477,
+      "start": 1518.88,
+      "end": 1521.83,
+      "duration": 2.95,
+      "text": "this guy plus C3 these are the"
+    },
+    {
+      "index": 478,
+      "start": 1521.84,
+      "end": 1525.83,
+      "duration": 3.99,
+      "text": "coefficients plus C4 * this one. Do you"
+    },
+    {
+      "index": 479,
+      "start": 1525.84,
+      "end": 1528.07,
+      "duration": 2.23,
+      "text": "see what I'm doing? I want to write this"
+    },
+    {
+      "index": 480,
+      "start": 1528.08,
+      "end": 1532.23,
+      "duration": 4.15,
+      "text": "vector P as a combination of C1 * the"
+    },
+    {
+      "index": 481,
+      "start": 1532.24,
+      "end": 1539.59,
+      "duration": 7.35,
+      "text": "first wavelet plus C8 * 8 wavelet."
+    },
+    {
+      "index": 482,
+      "start": 1542.71,
+      "end": 1542.72,
+      "duration": 0.01,
+      "text": "That's the That's the transform step."
+    },
+    {
+      "index": 483,
+      "start": 1542.72,
+      "end": 1544.549,
+      "duration": 1.829,
+      "text": "That's the lossless step. That's the"
+    },
+    {
+      "index": 484,
+      "start": 1544.559,
+      "end": 1547.51,
+      "duration": 2.951,
+      "text": "step from P. Oh, I'm calling it P here"
+    },
+    {
+      "index": 485,
+      "start": 1547.52,
+      "end": 1551.029,
+      "duration": 3.509,
+      "text": "and I called it X there. So, let me at"
+    },
+    {
+      "index": 486,
+      "start": 1551.039,
+      "end": 1552.95,
+      "duration": 1.911,
+      "text": "the risk of moving and therefore making"
+    },
+    {
+      "index": 487,
+      "start": 1552.96,
+      "end": 1557.43,
+      "duration": 4.47,
+      "text": "this jumpy. Suppose the signal I'm now"
+    },
+    {
+      "index": 488,
+      "start": 1557.44,
+      "end": 1560.95,
+      "duration": 3.51,
+      "text": "calling P the P set of pixel values and"
+    },
+    {
+      "index": 489,
+      "start": 1560.96,
+      "end": 1564.149,
+      "duration": 3.189,
+      "text": "I'm looking for the coefficients. Okay,"
+    },
+    {
+      "index": 490,
+      "start": 1564.159,
+      "end": 1566.549,
+      "duration": 2.39,
+      "text": "tell me how to do it."
+    },
+    {
+      "index": 491,
+      "start": 1566.559,
+      "end": 1569.51,
+      "duration": 2.951,
+      "text": "How do I find the if if I give you eight"
+    },
+    {
+      "index": 492,
+      "start": 1569.52,
+      "end": 1572.95,
+      "duration": 3.43,
+      "text": "basis vectors"
+    },
+    {
+      "index": 493,
+      "start": 1575.75,
+      "end": 1575.76,
+      "duration": 0.01,
+      "text": "and I give you the input signal and I"
+    },
+    {
+      "index": 494,
+      "start": 1575.76,
+      "end": 1578.39,
+      "duration": 2.63,
+      "text": "ask for the coefficients,"
+    },
+    {
+      "index": 495,
+      "start": 1578.4,
+      "end": 1580.63,
+      "duration": 2.23,
+      "text": "what do I do? What's the what's the"
+    },
+    {
+      "index": 496,
+      "start": 1580.64,
+      "end": 1582.149,
+      "duration": 1.509,
+      "text": "step?"
+    },
+    {
+      "index": 497,
+      "start": 1582.159,
+      "end": 1585.51,
+      "duration": 3.351,
+      "text": "I want I'm trying to solve this."
+    },
+    {
+      "index": 498,
+      "start": 1585.52,
+      "end": 1587.35,
+      "duration": 1.83,
+      "text": "I I I want to know the eight"
+    },
+    {
+      "index": 499,
+      "start": 1587.36,
+      "end": 1588.95,
+      "duration": 1.59,
+      "text": "coefficients."
+    },
+    {
+      "index": 500,
+      "start": 1588.96,
+      "end": 1591.51,
+      "duration": 2.55,
+      "text": "So I'm changing from the standard basis"
+    },
+    {
+      "index": 501,
+      "start": 1591.52,
+      "end": 1594.789,
+      "duration": 3.269,
+      "text": "which is just the eight grayscale values"
+    },
+    {
+      "index": 502,
+      "start": 1594.799,
+      "end": 1597.59,
+      "duration": 2.791,
+      "text": "to the to the wavelet basis where the"
+    },
+    {
+      "index": 503,
+      "start": 1597.6,
+      "end": 1599.59,
+      "duration": 1.99,
+      "text": "same vector is represented by eight"
+    },
+    {
+      "index": 504,
+      "start": 1599.6,
+      "end": 1601.669,
+      "duration": 2.069,
+      "text": "numbers."
+    },
+    {
+      "index": 505,
+      "start": 1601.679,
+      "end": 1603.269,
+      "duration": 1.59,
+      "text": "It's got to take eight numbers to tell"
+    },
+    {
+      "index": 506,
+      "start": 1603.279,
+      "end": 1605.909,
+      "duration": 2.63,
+      "text": "you a vector in R8 and those eight"
+    },
+    {
+      "index": 507,
+      "start": 1605.919,
+      "end": 1607.59,
+      "duration": 1.671,
+      "text": "numbers are the coefficients of the"
+    },
+    {
+      "index": 508,
+      "start": 1607.6,
+      "end": 1609.51,
+      "duration": 1.91,
+      "text": "basis."
+    },
+    {
+      "index": 509,
+      "start": 1609.52,
+      "end": 1613.43,
+      "duration": 3.91,
+      "text": "Look, we've done this thing before. What"
+    },
+    {
+      "index": 510,
+      "start": 1613.44,
+      "end": 1616.549,
+      "duration": 3.109,
+      "text": "do we here? There is the equation in"
+    },
+    {
+      "index": 511,
+      "start": 1616.559,
+      "end": 1619.269,
+      "duration": 2.71,
+      "text": "vector notation."
+    },
+    {
+      "index": 512,
+      "start": 1619.279,
+      "end": 1622.39,
+      "duration": 3.111,
+      "text": "We want to see it as a matrix. This is a"
+    },
+    {
+      "index": 513,
+      "start": 1622.4,
+      "end": 1626.31,
+      "duration": 3.91,
+      "text": "combination of columns of the wavelet"
+    },
+    {
+      "index": 514,
+      "start": 1626.32,
+      "end": 1631.19,
+      "duration": 4.87,
+      "text": "matrix. Right? This is P equals"
+    },
+    {
+      "index": 515,
+      "start": 1631.2,
+      "end": 1634.95,
+      "duration": 3.75,
+      "text": "C1 C2 down to C8."
+    },
+    {
+      "index": 516,
+      "start": 1634.96,
+      "end": 1637.59,
+      "duration": 2.63,
+      "text": "And these guys are the columns. I mean"
+    },
+    {
+      "index": 517,
+      "start": 1637.6,
+      "end": 1640.07,
+      "duration": 2.47,
+      "text": "this is the step that we constantly"
+    },
+    {
+      "index": 518,
+      "start": 1640.08,
+      "end": 1642.07,
+      "duration": 1.99,
+      "text": "taking in this course. The first basis"
+    },
+    {
+      "index": 519,
+      "start": 1642.08,
+      "end": 1644.63,
+      "duration": 2.55,
+      "text": "vector goes in the first column. The"
+    },
+    {
+      "index": 520,
+      "start": 1644.64,
+      "end": 1647.43,
+      "duration": 2.79,
+      "text": "second basis vector goes in the second"
+    },
+    {
+      "index": 521,
+      "start": 1647.44,
+      "end": 1650.789,
+      "duration": 3.349,
+      "text": "column and so on. The eight columns of"
+    },
+    {
+      "index": 522,
+      "start": 1650.799,
+      "end": 1654.39,
+      "duration": 3.591,
+      "text": "this wavelet matrix are the eight basis"
+    },
+    {
+      "index": 523,
+      "start": 1654.4,
+      "end": 1660.789,
+      "duration": 6.389,
+      "text": "vectors. This is a wavelet matrix W."
+    },
+    {
+      "index": 524,
+      "start": 1662.39,
+      "end": 1662.4,
+      "duration": 0.01,
+      "text": "So"
+    },
+    {
+      "index": 525,
+      "start": 1662.4,
+      "end": 1665.59,
+      "duration": 3.19,
+      "text": "the step to change basis. So now I'm"
+    },
+    {
+      "index": 526,
+      "start": 1665.6,
+      "end": 1669.669,
+      "duration": 4.069,
+      "text": "finally coming to this change of basis."
+    },
+    {
+      "index": 527,
+      "start": 1669.679,
+      "end": 1672.549,
+      "duration": 2.87,
+      "text": "So the change of basis let let me stay"
+    },
+    {
+      "index": 528,
+      "start": 1672.559,
+      "end": 1674.389,
+      "duration": 1.83,
+      "text": "with this"
+    },
+    {
+      "index": 529,
+      "start": 1674.399,
+      "end": 1676.549,
+      "duration": 2.15,
+      "text": "board but well let me just go above it"
+    },
+    {
+      "index": 530,
+      "start": 1676.559,
+      "end": 1678.63,
+      "duration": 2.071,
+      "text": "here."
+    },
+    {
+      "index": 531,
+      "start": 1678.64,
+      "end": 1680.549,
+      "duration": 1.909,
+      "text": "U"
+    },
+    {
+      "index": 532,
+      "start": 1680.559,
+      "end": 1683.99,
+      "duration": 3.431,
+      "text": "so the standard basis we know"
+    },
+    {
+      "index": 533,
+      "start": 1684.0,
+      "end": 1687.909,
+      "duration": 3.909,
+      "text": "the wavelet basis we have here and the"
+    },
+    {
+      "index": 534,
+      "start": 1687.919,
+      "end": 1692.31,
+      "duration": 4.391,
+      "text": "transform is simply"
+    },
+    {
+      "index": 535,
+      "start": 1692.32,
+      "end": 1696.789,
+      "duration": 4.469,
+      "text": "solve the equations P= WC."
+    },
+    {
+      "index": 536,
+      "start": 1696.799,
+      "end": 1702.23,
+      "duration": 5.431,
+      "text": "So the coefficients are W inverse P."
+    },
+    {
+      "index": 537,
+      "start": 1702.24,
+      "end": 1707.19,
+      "duration": 4.95,
+      "text": "Right? This shows a critical point. A"
+    },
+    {
+      "index": 538,
+      "start": 1707.2,
+      "end": 1711.99,
+      "duration": 4.79,
+      "text": "good basis has a nice fast inverse. So"
+    },
+    {
+      "index": 539,
+      "start": 1712.0,
+      "end": 1714.549,
+      "duration": 2.549,
+      "text": "good means"
+    },
+    {
+      "index": 540,
+      "start": 1714.559,
+      "end": 1717.83,
+      "duration": 3.271,
+      "text": "good basis means what?"
+    },
+    {
+      "index": 541,
+      "start": 1717.84,
+      "end": 1719.909,
+      "duration": 2.069,
+      "text": "And so this is like the billion-dollar"
+    },
+    {
+      "index": 542,
+      "start": 1719.919,
+      "end": 1721.75,
+      "duration": 1.831,
+      "text": "competition. And it's not over yet."
+    },
+    {
+      "index": 543,
+      "start": 1721.76,
+      "end": 1723.909,
+      "duration": 2.149,
+      "text": "People are going to come up with better"
+    },
+    {
+      "index": 544,
+      "start": 1723.919,
+      "end": 1726.31,
+      "duration": 2.391,
+      "text": "bases than these."
+    },
+    {
+      "index": 545,
+      "start": 1726.32,
+      "end": 1730.87,
+      "duration": 4.55,
+      "text": "So a good basis will be first good thing"
+    },
+    {
+      "index": 546,
+      "start": 1730.88,
+      "end": 1733.43,
+      "duration": 2.55,
+      "text": "would be fast."
+    },
+    {
+      "index": 547,
+      "start": 1733.44,
+      "end": 1736.95,
+      "duration": 3.51,
+      "text": "I have to be able to multiply by W fast"
+    },
+    {
+      "index": 548,
+      "start": 1736.96,
+      "end": 1741.029,
+      "duration": 4.069,
+      "text": "and multiply by W by its inverse fast."
+    },
+    {
+      "index": 549,
+      "start": 1741.039,
+      "end": 1743.669,
+      "duration": 2.63,
+      "text": "That's if if a basis doesn't allow you"
+    },
+    {
+      "index": 550,
+      "start": 1743.679,
+      "end": 1746.23,
+      "duration": 2.551,
+      "text": "to do that fast then it's going to take"
+    },
+    {
+      "index": 551,
+      "start": 1746.24,
+      "end": 1748.87,
+      "duration": 2.63,
+      "text": "so much time that that you can't afford"
+    },
+    {
+      "index": 552,
+      "start": 1748.88,
+      "end": 1752.389,
+      "duration": 3.509,
+      "text": "it. So these bases"
+    },
+    {
+      "index": 553,
+      "start": 1752.399,
+      "end": 1755.99,
+      "duration": 3.591,
+      "text": "the fier basis everybody said okay I"
+    },
+    {
+      "index": 554,
+      "start": 1756.0,
+      "end": 1758.07,
+      "duration": 2.07,
+      "text": "know how to deal quickly with the forier"
+    },
+    {
+      "index": 555,
+      "start": 1758.08,
+      "end": 1761.35,
+      "duration": 3.27,
+      "text": "basis because we have something called"
+    },
+    {
+      "index": 556,
+      "start": 1761.36,
+      "end": 1763.99,
+      "duration": 2.63,
+      "text": "the fastforier transform there's so"
+    },
+    {
+      "index": 557,
+      "start": 1764.0,
+      "end": 1767.029,
+      "duration": 3.029,
+      "text": "there's a fft that came in my earlier"
+    },
+    {
+      "index": 558,
+      "start": 1767.039,
+      "end": 1769.51,
+      "duration": 2.471,
+      "text": "lecture and comes in the last chapter of"
+    },
+    {
+      "index": 559,
+      "start": 1769.52,
+      "end": 1773.19,
+      "duration": 3.67,
+      "text": "the book so change of basis is done if"
+    },
+    {
+      "index": 560,
+      "start": 1773.2,
+      "end": 1776.149,
+      "duration": 2.949,
+      "text": "for the fiery basis is done fast by the"
+    },
+    {
+      "index": 561,
+      "start": 1776.159,
+      "end": 1780.87,
+      "duration": 4.711,
+      "text": "FFT and there's a fast wavelet transform"
+    },
+    {
+      "index": 562,
+      "start": 1780.88,
+      "end": 1783.83,
+      "duration": 2.95,
+      "text": "I can change"
+    },
+    {
+      "index": 563,
+      "start": 1783.84,
+      "end": 1788.07,
+      "duration": 4.23,
+      "text": "for this wavelet example. This matrix is"
+    },
+    {
+      "index": 564,
+      "start": 1788.08,
+      "end": 1791.75,
+      "duration": 3.67,
+      "text": "easy to invert. It's just somebody had a"
+    },
+    {
+      "index": 565,
+      "start": 1791.76,
+      "end": 1794.549,
+      "duration": 2.789,
+      "text": "smart idea in choosing that wavelet"
+    },
+    {
+      "index": 566,
+      "start": 1794.559,
+      "end": 1798.07,
+      "duration": 3.511,
+      "text": "basis and inverting it. It has a nice"
+    },
+    {
+      "index": 567,
+      "start": 1798.08,
+      "end": 1799.909,
+      "duration": 1.829,
+      "text": "inverse. Actually, you can see why it"
+    },
+    {
+      "index": 568,
+      "start": 1799.919,
+      "end": 1802.149,
+      "duration": 2.23,
+      "text": "has a nice inverse. Do you see any"
+    },
+    {
+      "index": 569,
+      "start": 1802.159,
+      "end": 1806.31,
+      "duration": 4.151,
+      "text": "property of these eight basis vectors?"
+    },
+    {
+      "index": 570,
+      "start": 1806.32,
+      "end": 1808.07,
+      "duration": 1.75,
+      "text": "Well, I've only written five of them,"
+    },
+    {
+      "index": 571,
+      "start": 1808.08,
+      "end": 1810.789,
+      "duration": 2.709,
+      "text": "but if you see that property for those"
+    },
+    {
+      "index": 572,
+      "start": 1810.799,
+      "end": 1813.269,
+      "duration": 2.47,
+      "text": "five, you'll see it for the three"
+    },
+    {
+      "index": 573,
+      "start": 1813.279,
+      "end": 1815.35,
+      "duration": 2.071,
+      "text": "remaining. What if I give you those"
+    },
+    {
+      "index": 574,
+      "start": 1815.36,
+      "end": 1817.59,
+      "duration": 2.23,
+      "text": "eight vectors"
+    },
+    {
+      "index": 575,
+      "start": 1817.6,
+      "end": 1820.95,
+      "duration": 3.35,
+      "text": "and ask what's a nice property? Well,"
+    },
+    {
+      "index": 576,
+      "start": 1820.96,
+      "end": 1823.11,
+      "duration": 2.15,
+      "text": "you would say first they're all ones and"
+    },
+    {
+      "index": 577,
+      "start": 1823.12,
+      "end": 1825.669,
+      "duration": 2.549,
+      "text": "minus ones and zeros."
+    },
+    {
+      "index": 578,
+      "start": 1825.679,
+      "end": 1828.47,
+      "duration": 2.791,
+      "text": "So, every multiplication is very fast"
+    },
+    {
+      "index": 579,
+      "start": 1828.48,
+      "end": 1832.63,
+      "duration": 4.15,
+      "text": "using just uh in binary."
+    },
+    {
+      "index": 580,
+      "start": 1832.64,
+      "end": 1834.23,
+      "duration": 1.59,
+      "text": "But what's the other great property of"
+    },
+    {
+      "index": 581,
+      "start": 1834.24,
+      "end": 1837.75,
+      "duration": 3.51,
+      "text": "those vectors? Does anybody see it?"
+    },
+    {
+      "index": 582,
+      "start": 1837.76,
+      "end": 1840.549,
+      "duration": 2.789,
+      "text": "So, of course, when I think about a"
+    },
+    {
+      "index": 583,
+      "start": 1840.559,
+      "end": 1843.11,
+      "duration": 2.551,
+      "text": "basis, one nice property, I don't have"
+    },
+    {
+      "index": 584,
+      "start": 1843.12,
+      "end": 1845.35,
+      "duration": 2.23,
+      "text": "to have it, but I'm happy if it's there,"
+    },
+    {
+      "index": 585,
+      "start": 1845.36,
+      "end": 1848.87,
+      "duration": 3.51,
+      "text": "is that they're orthogonal."
+    },
+    {
+      "index": 586,
+      "start": 1848.88,
+      "end": 1851.11,
+      "duration": 2.23,
+      "text": "If the basis vectors are orthogonal,"
+    },
+    {
+      "index": 587,
+      "start": 1851.12,
+      "end": 1853.59,
+      "duration": 2.47,
+      "text": "then I'm in good shape. And these are,"
+    },
+    {
+      "index": 588,
+      "start": 1853.6,
+      "end": 1855.51,
+      "duration": 1.91,
+      "text": "do you see that? Take the dotproduct of"
+    },
+    {
+      "index": 589,
+      "start": 1855.52,
+      "end": 1858.71,
+      "duration": 3.19,
+      "text": "that with that, you get four pluses and"
+    },
+    {
+      "index": 590,
+      "start": 1858.72,
+      "end": 1861.269,
+      "duration": 2.549,
+      "text": "four minus 1's, you get zero. Take the"
+    },
+    {
+      "index": 591,
+      "start": 1861.279,
+      "end": 1863.43,
+      "duration": 2.151,
+      "text": "dotproduct of that with that, you get"
+    },
+    {
+      "index": 592,
+      "start": 1863.44,
+      "end": 1866.23,
+      "duration": 2.79,
+      "text": "two + 1's and two minus 1's or the"
+    },
+    {
+      "index": 593,
+      "start": 1866.24,
+      "end": 1868.549,
+      "duration": 2.309,
+      "text": "dotproduct of that with that. Two + 1's"
+    },
+    {
+      "index": 594,
+      "start": 1868.559,
+      "end": 1871.75,
+      "duration": 3.191,
+      "text": "and two minus 1's. You you can easily"
+    },
+    {
+      "index": 595,
+      "start": 1871.76,
+      "end": 1874.149,
+      "duration": 2.389,
+      "text": "check that that's an orthogonal basis."
+    },
+    {
+      "index": 596,
+      "start": 1874.159,
+      "end": 1878.149,
+      "duration": 3.99,
+      "text": "It's not orthonormal."
+    },
+    {
+      "index": 597,
+      "start": 1878.159,
+      "end": 1881.99,
+      "duration": 3.831,
+      "text": "I could to fix it up. I should divide by"
+    },
+    {
+      "index": 598,
+      "start": 1882.0,
+      "end": 1883.99,
+      "duration": 1.99,
+      "text": "the length to make them unit vectors."
+    },
+    {
+      "index": 599,
+      "start": 1884.0,
+      "end": 1886.95,
+      "duration": 2.95,
+      "text": "Let's suppose I do that. So somewhere in"
+    },
+    {
+      "index": 600,
+      "start": 1886.96,
+      "end": 1889.269,
+      "duration": 2.309,
+      "text": "here I've got to account for the fact"
+    },
+    {
+      "index": 601,
+      "start": 1889.279,
+      "end": 1892.389,
+      "duration": 3.11,
+      "text": "that this has length square<unk> of 8"
+    },
+    {
+      "index": 602,
+      "start": 1892.399,
+      "end": 1894.549,
+      "duration": 2.15,
+      "text": "that has length square<unk> of 4 that"
+    },
+    {
+      "index": 603,
+      "start": 1894.559,
+      "end": 1897.83,
+      "duration": 3.271,
+      "text": "has length square<unk> of two but that's"
+    },
+    {
+      "index": 604,
+      "start": 1897.84,
+      "end": 1901.11,
+      "duration": 3.27,
+      "text": "just a constant factor that's easy to so"
+    },
+    {
+      "index": 605,
+      "start": 1901.12,
+      "end": 1904.71,
+      "duration": 3.59,
+      "text": "suppose we've done that then"
+    },
+    {
+      "index": 606,
+      "start": 1904.72,
+      "end": 1907.509,
+      "duration": 2.789,
+      "text": "tell me what's w inverse"
+    },
+    {
+      "index": 607,
+      "start": 1907.519,
+      "end": 1912.549,
+      "duration": 5.03,
+      "text": "that's what chapter 4 section 4.4 was"
+    },
+    {
+      "index": 608,
+      "start": 1912.559,
+      "end": 1917.029,
+      "duration": 4.47,
+      "text": "about. If we have orthonormal columns,"
+    },
+    {
+      "index": 609,
+      "start": 1917.039,
+      "end": 1920.47,
+      "duration": 3.431,
+      "text": "what then the inverse is the same as"
+    },
+    {
+      "index": 610,
+      "start": 1920.48,
+      "end": 1922.31,
+      "duration": 1.83,
+      "text": "the transpose."
+    },
+    {
+      "index": 611,
+      "start": 1922.32,
+      "end": 1924.87,
+      "duration": 2.55,
+      "text": "So if we have a fast way to multiply by"
+    },
+    {
+      "index": 612,
+      "start": 1924.88,
+      "end": 1928.149,
+      "duration": 3.269,
+      "text": "W, which we do, the inverse is going to"
+    },
+    {
+      "index": 613,
+      "start": 1928.159,
+      "end": 1929.99,
+      "duration": 1.831,
+      "text": "look just the same and we'll have a fast"
+    },
+    {
+      "index": 614,
+      "start": 1930.0,
+      "end": 1935.35,
+      "duration": 5.35,
+      "text": "way to do W inverse. So that's uh the"
+    },
+    {
+      "index": 615,
+      "start": 1935.36,
+      "end": 1937.75,
+      "duration": 2.39,
+      "text": "wavelet basis passes this requirement"
+    },
+    {
+      "index": 616,
+      "start": 1937.76,
+      "end": 1941.509,
+      "duration": 3.749,
+      "text": "for fast. We can use it fast. But"
+    },
+    {
+      "index": 617,
+      "start": 1941.519,
+      "end": 1943.669,
+      "duration": 2.15,
+      "text": "there's a second requirement. Is it any"
+    },
+    {
+      "index": 618,
+      "start": 1943.679,
+      "end": 1946.71,
+      "duration": 3.031,
+      "text": "good? Because the very fastest thing we"
+    },
+    {
+      "index": 619,
+      "start": 1946.72,
+      "end": 1949.029,
+      "duration": 2.309,
+      "text": "could do would be not to change basis at"
+    },
+    {
+      "index": 620,
+      "start": 1949.039,
+      "end": 1951.75,
+      "duration": 2.711,
+      "text": "all. Right? The fastest thing would be"
+    },
+    {
+      "index": 621,
+      "start": 1951.76,
+      "end": 1953.99,
+      "duration": 2.23,
+      "text": "okay, stay with a standard basis, stay"
+    },
+    {
+      "index": 622,
+      "start": 1954.0,
+      "end": 1957.19,
+      "duration": 3.19,
+      "text": "with eight pixel values. But that was"
+    },
+    {
+      "index": 623,
+      "start": 1957.2,
+      "end": 1960.389,
+      "duration": 3.189,
+      "text": "poor from compression point of view."
+    },
+    {
+      "index": 624,
+      "start": 1960.399,
+      "end": 1963.19,
+      "duration": 2.791,
+      "text": "Right? Those eight pixel values, if I"
+    },
+    {
+      "index": 625,
+      "start": 1963.2,
+      "end": 1965.83,
+      "duration": 2.63,
+      "text": "just took those eight numbers,"
+    },
+    {
+      "index": 626,
+      "start": 1965.84,
+      "end": 1969.029,
+      "duration": 3.189,
+      "text": "I can't throw some of those away. I I if"
+    },
+    {
+      "index": 627,
+      "start": 1969.039,
+      "end": 1972.47,
+      "duration": 3.431,
+      "text": "I throw away 90%"
+    },
+    {
+      "index": 628,
+      "start": 1972.48,
+      "end": 1975.269,
+      "duration": 2.789,
+      "text": "if I compressed 10 to one and throw away"
+    },
+    {
+      "index": 629,
+      "start": 1975.279,
+      "end": 1978.23,
+      "duration": 2.951,
+      "text": "90% of my pixel values, well, my"
+    },
+    {
+      "index": 630,
+      "start": 1978.24,
+      "end": 1980.71,
+      "duration": 2.47,
+      "text": "picture's just gone dark."
+    },
+    {
+      "index": 631,
+      "start": 1980.72,
+      "end": 1983.669,
+      "duration": 2.949,
+      "text": "Whereas the basis that was good, the"
+    },
+    {
+      "index": 632,
+      "start": 1983.679,
+      "end": 1986.71,
+      "duration": 3.031,
+      "text": "wavelet basis or the fier basis, if I"
+    },
+    {
+      "index": 633,
+      "start": 1986.72,
+      "end": 1988.95,
+      "duration": 2.23,
+      "text": "throw away"
+    },
+    {
+      "index": 634,
+      "start": 1988.96,
+      "end": 1992.95,
+      "duration": 3.99,
+      "text": "C5, C6, C7 and C8, all I'm throwing away"
+    },
+    {
+      "index": 635,
+      "start": 1992.96,
+      "end": 1995.99,
+      "duration": 3.03,
+      "text": "is little blips that are probably there"
+    },
+    {
+      "index": 636,
+      "start": 1996.0,
+      "end": 1998.95,
+      "duration": 2.95,
+      "text": "in very small amounts."
+    },
+    {
+      "index": 637,
+      "start": 1998.96,
+      "end": 2001.83,
+      "duration": 2.87,
+      "text": "So the second property that we need is"
+    },
+    {
+      "index": 638,
+      "start": 2001.84,
+      "end": 2005.19,
+      "duration": 3.35,
+      "text": "good compression. So, so first it it has"
+    },
+    {
+      "index": 639,
+      "start": 2005.2,
+      "end": 2010.23,
+      "duration": 5.03,
+      "text": "to be fast and secondly uh it has to be"
+    },
+    {
+      "index": 640,
+      "start": 2010.24,
+      "end": 2012.87,
+      "duration": 2.63,
+      "text": "a few basis factors"
+    },
+    {
+      "index": 641,
+      "start": 2012.88,
+      "end": 2016.87,
+      "duration": 3.99,
+      "text": "should come close to the signal. So, so"
+    },
+    {
+      "index": 642,
+      "start": 2016.88,
+      "end": 2018.63,
+      "duration": 1.75,
+      "text": "a few"
+    },
+    {
+      "index": 643,
+      "start": 2018.64,
+      "end": 2021.75,
+      "duration": 3.11,
+      "text": "few is enough. Can I write it that way?"
+    },
+    {
+      "index": 644,
+      "start": 2021.76,
+      "end": 2024.31,
+      "duration": 2.55,
+      "text": "A few basis vectors"
+    },
+    {
+      "index": 645,
+      "start": 2024.32,
+      "end": 2028.149,
+      "duration": 3.829,
+      "text": "are enough to"
+    },
+    {
+      "index": 646,
+      "start": 2031.75,
+      "end": 2031.76,
+      "duration": 0.01,
+      "text": "reproduce the image just exactly as on"
+    },
+    {
+      "index": 647,
+      "start": 2031.76,
+      "end": 2035.59,
+      "duration": 3.83,
+      "text": "the video of these 1806 lectures."
+    },
+    {
+      "index": 648,
+      "start": 2035.6,
+      "end": 2037.19,
+      "duration": 1.59,
+      "text": "Uh I don't know what the compression"
+    },
+    {
+      "index": 649,
+      "start": 2037.2,
+      "end": 2041.509,
+      "duration": 4.309,
+      "text": "rate is. I'll ask uh David who who does"
+    },
+    {
+      "index": 650,
+      "start": 2041.519,
+      "end": 2043.59,
+      "duration": 2.071,
+      "text": "the compression. And by the way, I'll"
+    },
+    {
+      "index": 651,
+      "start": 2043.6,
+      "end": 2045.59,
+      "duration": 1.99,
+      "text": "try to get"
+    },
+    {
+      "index": 652,
+      "start": 2045.6,
+      "end": 2047.59,
+      "duration": 1.99,
+      "text": "the lectures"
+    },
+    {
+      "index": 653,
+      "start": 2047.6,
+      "end": 2050.149,
+      "duration": 2.549,
+      "text": "uh that are relevant for the quiz up"
+    },
+    {
+      "index": 654,
+      "start": 2050.159,
+      "end": 2053.829,
+      "duration": 3.67,
+      "text": "onto the web uh in time. So I'll send"
+    },
+    {
+      "index": 655,
+      "start": 2053.839,
+      "end": 2057.829,
+      "duration": 3.99,
+      "text": "him a message today. Uh so at the point"
+    },
+    {
+      "index": 656,
+      "start": 2057.839,
+      "end": 2060.71,
+      "duration": 2.871,
+      "text": "so he's using the forier basis because"
+    },
+    {
+      "index": 657,
+      "start": 2060.72,
+      "end": 2064.55,
+      "duration": 3.83,
+      "text": "the JPEG so JPEG 2000 which will be the"
+    },
+    {
+      "index": 658,
+      "start": 2064.56,
+      "end": 2067.829,
+      "duration": 3.269,
+      "text": "next standard for image compression will"
+    },
+    {
+      "index": 659,
+      "start": 2067.839,
+      "end": 2070.31,
+      "duration": 2.471,
+      "text": "include wavelengths. So I mean you're"
+    },
+    {
+      "index": 660,
+      "start": 2070.32,
+      "end": 2071.589,
+      "duration": 1.269,
+      "text": "you're actually getting a kind of"
+    },
+    {
+      "index": 661,
+      "start": 2071.599,
+      "end": 2073.109,
+      "duration": 1.51,
+      "text": "up-to-date"
+    },
+    {
+      "index": 662,
+      "start": 2073.119,
+      "end": 2078.31,
+      "duration": 5.191,
+      "text": "uh picture of where this big world of"
+    },
+    {
+      "index": 663,
+      "start": 2078.32,
+      "end": 2082.869,
+      "duration": 4.549,
+      "text": "signal and image processing is. Uh that"
+    },
+    {
+      "index": 664,
+      "start": 2082.879,
+      "end": 2086.149,
+      "duration": 3.27,
+      "text": "furier is what everybody knew and what"
+    },
+    {
+      "index": 665,
+      "start": 2086.159,
+      "end": 2090.149,
+      "duration": 3.99,
+      "text": "people automatically used. And the new"
+    },
+    {
+      "index": 666,
+      "start": 2090.159,
+      "end": 2092.71,
+      "duration": 2.551,
+      "text": "new one is wavelets"
+    },
+    {
+      "index": 667,
+      "start": 2092.72,
+      "end": 2094.47,
+      "duration": 1.75,
+      "text": "where this is the simplest set of"
+    },
+    {
+      "index": 668,
+      "start": 2094.48,
+      "end": 2097.829,
+      "duration": 3.349,
+      "text": "wavelets. And this isn't the one that"
+    },
+    {
+      "index": 669,
+      "start": 2097.839,
+      "end": 2100.95,
+      "duration": 3.111,
+      "text": "the FBI uses. By the way, the FBI uses a"
+    },
+    {
+      "index": 670,
+      "start": 2100.96,
+      "end": 2103.75,
+      "duration": 2.79,
+      "text": "more a more a smoother wavelet. Instead"
+    },
+    {
+      "index": 671,
+      "start": 2103.76,
+      "end": 2106.23,
+      "duration": 2.47,
+      "text": "of jumping from one to minus one, it's a"
+    },
+    {
+      "index": 672,
+      "start": 2106.24,
+      "end": 2110.23,
+      "duration": 3.99,
+      "text": "smooth uh cutoff. Um"
+    },
+    {
+      "index": 673,
+      "start": 2110.24,
+      "end": 2113.589,
+      "duration": 3.349,
+      "text": "and uh that's what will be in in JPEG"
+    },
+    {
+      "index": 674,
+      "start": 2113.599,
+      "end": 2115.109,
+      "duration": 1.51,
+      "text": "2000."
+    },
+    {
+      "index": 675,
+      "start": 2115.119,
+      "end": 2117.43,
+      "duration": 2.311,
+      "text": "Okay. So that's that application. Now"
+    },
+    {
+      "index": 676,
+      "start": 2117.44,
+      "end": 2121.67,
+      "duration": 4.23,
+      "text": "let me come to my uh"
+    },
+    {
+      "index": 677,
+      "start": 2121.68,
+      "end": 2123.91,
+      "duration": 2.23,
+      "text": "the the math the linear algebra part of"
+    },
+    {
+      "index": 678,
+      "start": 2123.92,
+      "end": 2125.829,
+      "duration": 1.909,
+      "text": "the lecture."
+    },
+    {
+      "index": 679,
+      "start": 2125.839,
+      "end": 2128.31,
+      "duration": 2.471,
+      "text": "Well, we've actually seen a change of"
+    },
+    {
+      "index": 680,
+      "start": 2128.32,
+      "end": 2129.91,
+      "duration": 1.59,
+      "text": "basis."
+    },
+    {
+      "index": 681,
+      "start": 2129.92,
+      "end": 2133.03,
+      "duration": 3.11,
+      "text": "So let let me just review that change of"
+    },
+    {
+      "index": 682,
+      "start": 2133.04,
+      "end": 2136.15,
+      "duration": 3.11,
+      "text": "basis idea and then the I and then the"
+    },
+    {
+      "index": 683,
+      "start": 2136.16,
+      "end": 2139.19,
+      "duration": 3.03,
+      "text": "transformation to a matrix. Okay. So so"
+    },
+    {
+      "index": 684,
+      "start": 2139.2,
+      "end": 2142.47,
+      "duration": 3.27,
+      "text": "this I I hope you see that these"
+    },
+    {
+      "index": 685,
+      "start": 2142.48,
+      "end": 2146.47,
+      "duration": 3.99,
+      "text": "applications are really big. Now I have"
+    },
+    {
+      "index": 686,
+      "start": 2146.48,
+      "end": 2149.19,
+      "duration": 2.71,
+      "text": "to talk a little about change of basis"
+    },
+    {
+      "index": 687,
+      "start": 2149.2,
+      "end": 2151.51,
+      "duration": 2.31,
+      "text": "and a little bit about that the the"
+    },
+    {
+      "index": 688,
+      "start": 2151.52,
+      "end": 2153.99,
+      "duration": 2.47,
+      "text": "matrix. Okay."
+    },
+    {
+      "index": 689,
+      "start": 2154.0,
+      "end": 2155.99,
+      "duration": 1.99,
+      "text": "Okay."
+    },
+    {
+      "index": 690,
+      "start": 2156.0,
+      "end": 2161.91,
+      "duration": 5.91,
+      "text": "Okay. So change of basis"
+    },
+    {
+      "index": 691,
+      "start": 2167.109,
+      "end": 2167.119,
+      "duration": 0.01,
+      "text": "basically uh forgive that pun. Okay. I"
+    },
+    {
+      "index": 692,
+      "start": 2167.119,
+      "end": 2172.79,
+      "duration": 5.671,
+      "text": "have I have uh I have my vector"
+    },
+    {
+      "index": 693,
+      "start": 2172.8,
+      "end": 2176.069,
+      "duration": 3.269,
+      "text": "in one basis and I want to change to a"
+    },
+    {
+      "index": 694,
+      "start": 2176.079,
+      "end": 2177.99,
+      "duration": 1.911,
+      "text": "different one. Actually you saw it for"
+    },
+    {
+      "index": 695,
+      "start": 2178.0,
+      "end": 2182.63,
+      "duration": 4.63,
+      "text": "the wavelet case. So I need the the ma I"
+    },
+    {
+      "index": 696,
+      "start": 2182.64,
+      "end": 2185.67,
+      "duration": 3.03,
+      "text": "let the matrix W"
+    },
+    {
+      "index": 697,
+      "start": 2185.68,
+      "end": 2191.349,
+      "duration": 5.669,
+      "text": "the columns of W"
+    },
+    {
+      "index": 698,
+      "start": 2203.75,
+      "end": 2203.76,
+      "duration": 0.01,
+      "text": "Then the change of basis involves just"
+    },
+    {
+      "index": 699,
+      "start": 2203.76,
+      "end": 2206.79,
+      "duration": 3.03,
+      "text": "as it did there w inverse. So we have"
+    },
+    {
+      "index": 700,
+      "start": 2206.8,
+      "end": 2215.349,
+      "duration": 8.549,
+      "text": "the vector vector say x in the old basis"
+    },
+    {
+      "index": 701,
+      "start": 2218.47,
+      "end": 2218.48,
+      "duration": 0.01,
+      "text": "and we that converts to a vector let's"
+    },
+    {
+      "index": 702,
+      "start": 2218.48,
+      "end": 2224.069,
+      "duration": 5.589,
+      "text": "say c in the new basis"
+    },
+    {
+      "index": 703,
+      "start": 2226.39,
+      "end": 2226.4,
+      "duration": 0.01,
+      "text": "and the relation is exactly what we had"
+    },
+    {
+      "index": 704,
+      "start": 2226.4,
+      "end": 2229.51,
+      "duration": 3.11,
+      "text": "there that"
+    },
+    {
+      "index": 705,
+      "start": 2229.52,
+      "end": 2234.87,
+      "duration": 5.35,
+      "text": "x is wc"
+    },
+    {
+      "index": 706,
+      "start": 2238.71,
+      "end": 2238.72,
+      "duration": 0.01,
+      "text": "that's the that's the uh"
+    },
+    {
+      "index": 707,
+      "start": 2238.72,
+      "end": 2240.39,
+      "duration": 1.67,
+      "text": "um"
+    },
+    {
+      "index": 708,
+      "start": 2240.4,
+      "end": 2242.47,
+      "duration": 2.07,
+      "text": "that's the that's the step we have to"
+    },
+    {
+      "index": 709,
+      "start": 2242.48,
+      "end": 2245.349,
+      "duration": 2.869,
+      "text": "take. There's a matrix W that gives us a"
+    },
+    {
+      "index": 710,
+      "start": 2245.359,
+      "end": 2249.349,
+      "duration": 3.99,
+      "text": "change of basis. Okay, I what I want to"
+    },
+    {
+      "index": 711,
+      "start": 2249.359,
+      "end": 2252.95,
+      "duration": 3.591,
+      "text": "do is"
+    },
+    {
+      "index": 712,
+      "start": 2255.51,
+      "end": 2255.52,
+      "duration": 0.01,
+      "text": "think about mat transformations and"
+    },
+    {
+      "index": 713,
+      "start": 2255.52,
+      "end": 2258.069,
+      "duration": 2.549,
+      "text": "matrices."
+    },
+    {
+      "index": 714,
+      "start": 2258.079,
+      "end": 2260.15,
+      "duration": 2.071,
+      "text": "So here here's here's the question that"
+    },
+    {
+      "index": 715,
+      "start": 2260.16,
+      "end": 2263.99,
+      "duration": 3.83,
+      "text": "that to complete this lecture."
+    },
+    {
+      "index": 716,
+      "start": 2264.0,
+      "end": 2266.39,
+      "duration": 2.39,
+      "text": "Suppose I have"
+    },
+    {
+      "index": 717,
+      "start": 2266.4,
+      "end": 2270.95,
+      "duration": 4.55,
+      "text": "a a linear transformation T."
+    },
+    {
+      "index": 718,
+      "start": 2273.67,
+      "end": 2273.68,
+      "duration": 0.01,
+      "text": "So it's it's a it's we we would think of"
+    },
+    {
+      "index": 719,
+      "start": 2273.68,
+      "end": 2277.349,
+      "duration": 3.669,
+      "text": "it as an a as a n byn matrix"
+    },
+    {
+      "index": 720,
+      "start": 2277.359,
+      "end": 2280.31,
+      "duration": 2.951,
+      "text": "and it's computed with respect to a"
+    },
+    {
+      "index": 721,
+      "start": 2280.32,
+      "end": 2282.47,
+      "duration": 2.15,
+      "text": "certain basis."
+    },
+    {
+      "index": 722,
+      "start": 2282.48,
+      "end": 2285.51,
+      "duration": 3.03,
+      "text": "So t so no sorry I've got the"
+    },
+    {
+      "index": 723,
+      "start": 2285.52,
+      "end": 2288.71,
+      "duration": 3.19,
+      "text": "transformation t period that's taking"
+    },
+    {
+      "index": 724,
+      "start": 2288.72,
+      "end": 2290.23,
+      "duration": 1.51,
+      "text": "eight dimensional space to eight"
+    },
+    {
+      "index": 725,
+      "start": 2290.24,
+      "end": 2292.31,
+      "duration": 2.07,
+      "text": "dimensional space."
+    },
+    {
+      "index": 726,
+      "start": 2292.32,
+      "end": 2296.069,
+      "duration": 3.749,
+      "text": "Now let's get matrices in there. Okay."
+    },
+    {
+      "index": 727,
+      "start": 2296.079,
+      "end": 2303.19,
+      "duration": 7.111,
+      "text": "So, so with respect to with respect to"
+    },
+    {
+      "index": 728,
+      "start": 2308.39,
+      "end": 2308.4,
+      "duration": 0.01,
+      "text": "a f a first base is say v1 up to v8."
+    },
+    {
+      "index": 729,
+      "start": 2308.4,
+      "end": 2311.19,
+      "duration": 2.79,
+      "text": "It has"
+    },
+    {
+      "index": 730,
+      "start": 2311.2,
+      "end": 2313.27,
+      "duration": 2.07,
+      "text": "a matrix"
+    },
+    {
+      "index": 731,
+      "start": 2313.28,
+      "end": 2315.51,
+      "duration": 2.23,
+      "text": "a."
+    },
+    {
+      "index": 732,
+      "start": 2315.52,
+      "end": 2319.43,
+      "duration": 3.91,
+      "text": "I'm just setting up letters here"
+    },
+    {
+      "index": 733,
+      "start": 2319.44,
+      "end": 2323.75,
+      "duration": 4.31,
+      "text": "with respect to"
+    },
+    {
+      "index": 734,
+      "start": 2327.43,
+      "end": 2327.44,
+      "duration": 0.01,
+      "text": "a second basis. Say I'll make it U1 up"
+    },
+    {
+      "index": 735,
+      "start": 2327.44,
+      "end": 2332.87,
+      "duration": 5.43,
+      "text": "to or W1 since I've used W's. W1 up to"
+    },
+    {
+      "index": 736,
+      "start": 2332.88,
+      "end": 2335.75,
+      "duration": 2.87,
+      "text": "W8."
+    },
+    {
+      "index": 737,
+      "start": 2335.76,
+      "end": 2337.91,
+      "duration": 2.15,
+      "text": "It has"
+    },
+    {
+      "index": 738,
+      "start": 2337.92,
+      "end": 2342.63,
+      "duration": 4.71,
+      "text": "a matrix B. And my question is, what's"
+    },
+    {
+      "index": 739,
+      "start": 2342.64,
+      "end": 2345.829,
+      "duration": 3.189,
+      "text": "the connection between A and B?"
+    },
+    {
+      "index": 740,
+      "start": 2345.839,
+      "end": 2349.27,
+      "duration": 3.431,
+      "text": "How is the matrix? The transformation T"
+    },
+    {
+      "index": 741,
+      "start": 2349.28,
+      "end": 2351.19,
+      "duration": 1.91,
+      "text": "is settled."
+    },
+    {
+      "index": 742,
+      "start": 2351.2,
+      "end": 2355.589,
+      "duration": 4.389,
+      "text": "We could say it's a rotation"
+    },
+    {
+      "index": 743,
+      "start": 2355.599,
+      "end": 2357.67,
+      "duration": 2.071,
+      "text": "for example. So that would be one"
+    },
+    {
+      "index": 744,
+      "start": 2357.68,
+      "end": 2359.27,
+      "duration": 1.59,
+      "text": "transformation of eight dimensional"
+    },
+    {
+      "index": 745,
+      "start": 2359.28,
+      "end": 2363.03,
+      "duration": 3.75,
+      "text": "space. Just spin it a little or project"
+    },
+    {
+      "index": 746,
+      "start": 2363.04,
+      "end": 2364.71,
+      "duration": 1.67,
+      "text": "it"
+    },
+    {
+      "index": 747,
+      "start": 2364.72,
+      "end": 2368.95,
+      "duration": 4.23,
+      "text": "or or uh whatever"
+    },
+    {
+      "index": 748,
+      "start": 2368.96,
+      "end": 2371.19,
+      "duration": 2.23,
+      "text": "whatever linear transformation we've"
+    },
+    {
+      "index": 749,
+      "start": 2371.2,
+      "end": 2375.19,
+      "duration": 3.99,
+      "text": "got. Now we have to remember so so first"
+    },
+    {
+      "index": 750,
+      "start": 2375.2,
+      "end": 2378.15,
+      "duration": 2.95,
+      "text": "my first step is to remind you how you"
+    },
+    {
+      "index": 751,
+      "start": 2378.16,
+      "end": 2381.349,
+      "duration": 3.189,
+      "text": "create that matrix A."
+    },
+    {
+      "index": 752,
+      "start": 2381.359,
+      "end": 2384.23,
+      "duration": 2.871,
+      "text": "Then my second step is we would use the"
+    },
+    {
+      "index": 753,
+      "start": 2384.24,
+      "end": 2387.51,
+      "duration": 3.27,
+      "text": "same method to create B. But because it"
+    },
+    {
+      "index": 754,
+      "start": 2387.52,
+      "end": 2389.589,
+      "duration": 2.069,
+      "text": "came from the same transformation"
+    },
+    {
+      "index": 755,
+      "start": 2389.599,
+      "end": 2391.43,
+      "duration": 1.831,
+      "text": "there's got to be a relation between A"
+    },
+    {
+      "index": 756,
+      "start": 2391.44,
+      "end": 2393.829,
+      "duration": 2.389,
+      "text": "and B. What's the what's the relation"
+    },
+    {
+      "index": 757,
+      "start": 2393.839,
+      "end": 2399.27,
+      "duration": 5.431,
+      "text": "between A and B? And let me jump to the"
+    },
+    {
+      "index": 758,
+      "start": 2399.28,
+      "end": 2402.23,
+      "duration": 2.95,
+      "text": "answer on that one."
+    },
+    {
+      "index": 759,
+      "start": 2402.24,
+      "end": 2404.47,
+      "duration": 2.23,
+      "text": "that if I have if I have the same"
+    },
+    {
+      "index": 760,
+      "start": 2404.48,
+      "end": 2406.63,
+      "duration": 2.15,
+      "text": "transformation"
+    },
+    {
+      "index": 761,
+      "start": 2406.64,
+      "end": 2409.75,
+      "duration": 3.11,
+      "text": "and I'm compute its matrix in one basis"
+    },
+    {
+      "index": 762,
+      "start": 2409.76,
+      "end": 2412.87,
+      "duration": 3.11,
+      "text": "and then I compute it in another basis"
+    },
+    {
+      "index": 763,
+      "start": 2412.88,
+      "end": 2416.95,
+      "duration": 4.07,
+      "text": "those two matrices are similar."
+    },
+    {
+      "index": 764,
+      "start": 2416.96,
+      "end": 2419.589,
+      "duration": 2.629,
+      "text": "So these two matrices are similar. Now"
+    },
+    {
+      "index": 765,
+      "start": 2419.599,
+      "end": 2422.23,
+      "duration": 2.631,
+      "text": "do you remember what similar matrices"
+    },
+    {
+      "index": 766,
+      "start": 2422.24,
+      "end": 2425.27,
+      "duration": 3.03,
+      "text": "meant? Similar A is similar. The two"
+    },
+    {
+      "index": 767,
+      "start": 2425.28,
+      "end": 2428.15,
+      "duration": 2.87,
+      "text": "matrices are similar."
+    },
+    {
+      "index": 768,
+      "start": 2428.16,
+      "end": 2431.27,
+      "duration": 3.11,
+      "text": "similar."
+    },
+    {
+      "index": 769,
+      "start": 2435.03,
+      "end": 2435.04,
+      "duration": 0.01,
+      "text": "And what do I mean by that? I mean that"
+    },
+    {
+      "index": 770,
+      "start": 2435.04,
+      "end": 2437.91,
+      "duration": 2.87,
+      "text": "I take the matrix B"
+    },
+    {
+      "index": 771,
+      "start": 2437.92,
+      "end": 2440.71,
+      "duration": 2.79,
+      "text": "and I can compute it"
+    },
+    {
+      "index": 772,
+      "start": 2440.72,
+      "end": 2443.43,
+      "duration": 2.71,
+      "text": "from the matrix A"
+    },
+    {
+      "index": 773,
+      "start": 2443.44,
+      "end": 2445.109,
+      "duration": 1.669,
+      "text": "using"
+    },
+    {
+      "index": 774,
+      "start": 2445.119,
+      "end": 2449.03,
+      "duration": 3.911,
+      "text": "some similarity some matrix M on one"
+    },
+    {
+      "index": 775,
+      "start": 2449.04,
+      "end": 2452.71,
+      "duration": 3.67,
+      "text": "side and M inverse on the other and this"
+    },
+    {
+      "index": 776,
+      "start": 2452.72,
+      "end": 2457.829,
+      "duration": 5.109,
+      "text": "M will be the change of basis matrix."
+    },
+    {
+      "index": 777,
+      "start": 2457.839,
+      "end": 2460.55,
+      "duration": 2.711,
+      "text": "I'm I I'm having I'm this this part of"
+    },
+    {
+      "index": 778,
+      "start": 2460.56,
+      "end": 2463.99,
+      "duration": 3.43,
+      "text": "the lecture is admittedly compressed."
+    },
+    {
+      "index": 779,
+      "start": 2464.0,
+      "end": 2466.39,
+      "duration": 2.39,
+      "text": "What I wanted you to what I it's really"
+    },
+    {
+      "index": 780,
+      "start": 2466.4,
+      "end": 2468.47,
+      "duration": 2.07,
+      "text": "the"
+    },
+    {
+      "index": 781,
+      "start": 2468.48,
+      "end": 2472.63,
+      "duration": 4.15,
+      "text": "the conclusion that I want you to spot."
+    },
+    {
+      "index": 782,
+      "start": 2472.64,
+      "end": 2474.71,
+      "duration": 2.07,
+      "text": "Now I have to go back and say what does"
+    },
+    {
+      "index": 783,
+      "start": 2474.72,
+      "end": 2477.349,
+      "duration": 2.629,
+      "text": "it mean"
+    },
+    {
+      "index": 784,
+      "start": 2477.359,
+      "end": 2480.069,
+      "duration": 2.71,
+      "text": "for A to be the matrix of this"
+    },
+    {
+      "index": 785,
+      "start": 2480.079,
+      "end": 2482.47,
+      "duration": 2.391,
+      "text": "transformation T? Can I So I have to"
+    },
+    {
+      "index": 786,
+      "start": 2482.48,
+      "end": 2484.23,
+      "duration": 1.75,
+      "text": "remind you what that meant. That was in"
+    },
+    {
+      "index": 787,
+      "start": 2484.24,
+      "end": 2486.23,
+      "duration": 1.99,
+      "text": "the last lecture."
+    },
+    {
+      "index": 788,
+      "start": 2486.24,
+      "end": 2488.79,
+      "duration": 2.55,
+      "text": "Then"
+    },
+    {
+      "index": 789,
+      "start": 2488.8,
+      "end": 2491.349,
+      "duration": 2.549,
+      "text": "then this is the conclusion that if I"
+    },
+    {
+      "index": 790,
+      "start": 2491.359,
+      "end": 2494.79,
+      "duration": 3.431,
+      "text": "change to a different basis we now know"
+    },
+    {
+      "index": 791,
+      "start": 2494.8,
+      "end": 2496.95,
+      "duration": 2.15,
+      "text": "see if I change to a different basis two"
+    },
+    {
+      "index": 792,
+      "start": 2496.96,
+      "end": 2499.91,
+      "duration": 2.95,
+      "text": "things happen. Every vector has new"
+    },
+    {
+      "index": 793,
+      "start": 2499.92,
+      "end": 2501.829,
+      "duration": 1.909,
+      "text": "coordinates"
+    },
+    {
+      "index": 794,
+      "start": 2501.839,
+      "end": 2504.39,
+      "duration": 2.551,
+      "text": "there. The rule is this one between the"
+    },
+    {
+      "index": 795,
+      "start": 2504.4,
+      "end": 2507.03,
+      "duration": 2.63,
+      "text": "old coordinates and the new ones. Every"
+    },
+    {
+      "index": 796,
+      "start": 2507.04,
+      "end": 2510.15,
+      "duration": 3.11,
+      "text": "matrix changes every transformation has"
+    },
+    {
+      "index": 797,
+      "start": 2510.16,
+      "end": 2513.75,
+      "duration": 3.59,
+      "text": "a new matrix and the new matrix is"
+    },
+    {
+      "index": 798,
+      "start": 2513.76,
+      "end": 2516.309,
+      "duration": 2.549,
+      "text": "related this way. The M could be the"
+    },
+    {
+      "index": 799,
+      "start": 2516.319,
+      "end": 2519.43,
+      "duration": 3.111,
+      "text": "same as the W. The M there could be the"
+    },
+    {
+      "index": 800,
+      "start": 2519.44,
+      "end": 2523.67,
+      "duration": 4.23,
+      "text": "W here. Okay. So, can I in the remaining"
+    },
+    {
+      "index": 801,
+      "start": 2523.68,
+      "end": 2525.43,
+      "duration": 1.75,
+      "text": "minutes"
+    },
+    {
+      "index": 802,
+      "start": 2525.44,
+      "end": 2528.71,
+      "duration": 3.27,
+      "text": "recapture my lecture, the end of my"
+    },
+    {
+      "index": 803,
+      "start": 2528.72,
+      "end": 2529.99,
+      "duration": 1.27,
+      "text": "lecture that was just before"
+    },
+    {
+      "index": 804,
+      "start": 2530.0,
+      "end": 2531.51,
+      "duration": 1.51,
+      "text": "Thanksgiving"
+    },
+    {
+      "index": 805,
+      "start": 2531.52,
+      "end": 2535.75,
+      "duration": 4.23,
+      "text": "uh about the matrix. Okay,"
+    },
+    {
+      "index": 806,
+      "start": 2535.76,
+      "end": 2539.03,
+      "duration": 3.27,
+      "text": "what's the matrix?"
+    },
+    {
+      "index": 807,
+      "start": 2539.04,
+      "end": 2541.829,
+      "duration": 2.789,
+      "text": "And I'll just take one basis. So, so now"
+    },
+    {
+      "index": 808,
+      "start": 2541.839,
+      "end": 2544.79,
+      "duration": 2.951,
+      "text": "I'm going to this this part is going to"
+    },
+    {
+      "index": 809,
+      "start": 2544.8,
+      "end": 2547.43,
+      "duration": 2.63,
+      "text": "go onto this board here. What is the"
+    },
+    {
+      "index": 810,
+      "start": 2547.44,
+      "end": 2552.95,
+      "duration": 5.51,
+      "text": "matrix? What is a"
+    },
+    {
+      "index": 811,
+      "start": 2554.79,
+      "end": 2554.8,
+      "duration": 0.01,
+      "text": "Okay,"
+    },
+    {
+      "index": 812,
+      "start": 2554.8,
+      "end": 2556.55,
+      "duration": 1.75,
+      "text": "using"
+    },
+    {
+      "index": 813,
+      "start": 2556.56,
+      "end": 2559.51,
+      "duration": 2.95,
+      "text": "a basis"
+    },
+    {
+      "index": 814,
+      "start": 2559.52,
+      "end": 2563.349,
+      "duration": 3.829,
+      "text": "V1 up to V8."
+    },
+    {
+      "index": 815,
+      "start": 2563.359,
+      "end": 2566.39,
+      "duration": 3.031,
+      "text": "Okay, what's the point?"
+    },
+    {
+      "index": 816,
+      "start": 2566.4,
+      "end": 2569.51,
+      "duration": 3.11,
+      "text": "The point is if I know what the"
+    },
+    {
+      "index": 817,
+      "start": 2569.52,
+      "end": 2572.71,
+      "duration": 3.19,
+      "text": "transformation does to those eight basis"
+    },
+    {
+      "index": 818,
+      "start": 2572.72,
+      "end": 2577.03,
+      "duration": 4.31,
+      "text": "vectors, I know it completely. I know T."
+    },
+    {
+      "index": 819,
+      "start": 2577.04,
+      "end": 2579.43,
+      "duration": 2.39,
+      "text": "I know that I know everything about T. I"
+    },
+    {
+      "index": 820,
+      "start": 2579.44,
+      "end": 2585.27,
+      "duration": 5.83,
+      "text": "know T completely"
+    },
+    {
+      "index": 821,
+      "start": 2586.95,
+      "end": 2586.96,
+      "duration": 0.01,
+      "text": "from"
+    },
+    {
+      "index": 822,
+      "start": 2586.96,
+      "end": 2588.47,
+      "duration": 1.51,
+      "text": "knowing"
+    },
+    {
+      "index": 823,
+      "start": 2588.48,
+      "end": 2592.39,
+      "duration": 3.91,
+      "text": "T of what T does to V1, what T does to"
+    },
+    {
+      "index": 824,
+      "start": 2592.4,
+      "end": 2597.99,
+      "duration": 5.59,
+      "text": "V2, what T does to V8."
+    },
+    {
+      "index": 825,
+      "start": 2601.19,
+      "end": 2601.2,
+      "duration": 0.01,
+      "text": "Why is that? It's because t is a linear"
+    },
+    {
+      "index": 826,
+      "start": 2601.2,
+      "end": 2603.19,
+      "duration": 1.99,
+      "text": "transformation."
+    },
+    {
+      "index": 827,
+      "start": 2603.2,
+      "end": 2606.15,
+      "duration": 2.95,
+      "text": "So that if I know what these outputs"
+    },
+    {
+      "index": 828,
+      "start": 2606.16,
+      "end": 2608.71,
+      "duration": 2.55,
+      "text": "are. So these are the inputs v1 up to"
+    },
+    {
+      "index": 829,
+      "start": 2608.72,
+      "end": 2610.95,
+      "duration": 2.23,
+      "text": "v8. These are the outputs from the"
+    },
+    {
+      "index": 830,
+      "start": 2610.96,
+      "end": 2613.99,
+      "duration": 3.03,
+      "text": "transformation like everyone rotated,"
+    },
+    {
+      "index": 831,
+      "start": 2614.0,
+      "end": 2615.99,
+      "duration": 1.99,
+      "text": "everyone projected, whatever"
+    },
+    {
+      "index": 832,
+      "start": 2616.0,
+      "end": 2618.87,
+      "duration": 2.87,
+      "text": "transformation I've done."
+    },
+    {
+      "index": 833,
+      "start": 2618.88,
+      "end": 2622.069,
+      "duration": 3.189,
+      "text": "Then why is it that I know everything?"
+    },
+    {
+      "index": 834,
+      "start": 2622.079,
+      "end": 2625.51,
+      "duration": 3.431,
+      "text": "How does linearity work? Why? This is"
+    },
+    {
+      "index": 835,
+      "start": 2625.52,
+      "end": 2628.95,
+      "duration": 3.43,
+      "text": "because because"
+    },
+    {
+      "index": 836,
+      "start": 2628.96,
+      "end": 2632.55,
+      "duration": 3.59,
+      "text": "every"
+    },
+    {
+      "index": 837,
+      "start": 2636.15,
+      "end": 2636.16,
+      "duration": 0.01,
+      "text": "X is some combination of these basis"
+    },
+    {
+      "index": 838,
+      "start": 2636.16,
+      "end": 2643.91,
+      "duration": 7.75,
+      "text": "vectors, right? C1, V1, C2, V2, C8, V8."
+    },
+    {
+      "index": 839,
+      "start": 2643.92,
+      "end": 2645.99,
+      "duration": 2.07,
+      "text": "That's they were a basis. That's the"
+    },
+    {
+      "index": 840,
+      "start": 2646.0,
+      "end": 2648.23,
+      "duration": 2.23,
+      "text": "whole point of a basis that every vector"
+    },
+    {
+      "index": 841,
+      "start": 2648.24,
+      "end": 2650.79,
+      "duration": 2.55,
+      "text": "is a combination of the basis vectors in"
+    },
+    {
+      "index": 842,
+      "start": 2650.8,
+      "end": 2654.39,
+      "duration": 3.59,
+      "text": "exactly one way. And then what is t of"
+    },
+    {
+      "index": 843,
+      "start": 2654.4,
+      "end": 2659.51,
+      "duration": 5.11,
+      "text": "x?"
+    },
+    {
+      "index": 844,
+      "start": 2662.23,
+      "end": 2662.24,
+      "duration": 0.01,
+      "text": "The point is I'm I I claim that we know"
+    },
+    {
+      "index": 845,
+      "start": 2662.24,
+      "end": 2665.51,
+      "duration": 3.27,
+      "text": "t of x completely for every x because"
+    },
+    {
+      "index": 846,
+      "start": 2665.52,
+      "end": 2667.91,
+      "duration": 2.39,
+      "text": "every x is a combination of those. And"
+    },
+    {
+      "index": 847,
+      "start": 2667.92,
+      "end": 2670.15,
+      "duration": 2.23,
+      "text": "now we use the linear transformation"
+    },
+    {
+      "index": 848,
+      "start": 2670.16,
+      "end": 2673.51,
+      "duration": 3.35,
+      "text": "part to say that the output from X has"
+    },
+    {
+      "index": 849,
+      "start": 2673.52,
+      "end": 2679.27,
+      "duration": 5.75,
+      "text": "to be C1 * the output from V1 plus C2 *"
+    },
+    {
+      "index": 850,
+      "start": 2679.28,
+      "end": 2683.27,
+      "duration": 3.99,
+      "text": "the output from V2 and so on"
+    },
+    {
+      "index": 851,
+      "start": 2683.28,
+      "end": 2686.55,
+      "duration": 3.27,
+      "text": "up through C8 times the output from V8."
+    },
+    {
+      "index": 852,
+      "start": 2686.56,
+      "end": 2689.99,
+      "duration": 3.43,
+      "text": "So this is like just saying okay"
+    },
+    {
+      "index": 853,
+      "start": 2690.0,
+      "end": 2692.39,
+      "duration": 2.39,
+      "text": "we know"
+    },
+    {
+      "index": 854,
+      "start": 2692.4,
+      "end": 2695.91,
+      "duration": 3.51,
+      "text": "everything when we know what t does to"
+    },
+    {
+      "index": 855,
+      "start": 2695.92,
+      "end": 2699.99,
+      "duration": 4.07,
+      "text": "each basis vector. Okay so those are the"
+    },
+    {
+      "index": 856,
+      "start": 2700.0,
+      "end": 2704.87,
+      "duration": 4.87,
+      "text": "eight things we need now but we need we"
+    },
+    {
+      "index": 857,
+      "start": 2704.88,
+      "end": 2708.39,
+      "duration": 3.51,
+      "text": "need these answers in this basis."
+    },
+    {
+      "index": 858,
+      "start": 2708.4,
+      "end": 2712.309,
+      "duration": 3.909,
+      "text": "So t so this first output"
+    },
+    {
+      "index": 859,
+      "start": 2712.319,
+      "end": 2714.39,
+      "duration": 2.071,
+      "text": "is some combination of the eight basis"
+    },
+    {
+      "index": 860,
+      "start": 2714.4,
+      "end": 2717.51,
+      "duration": 3.11,
+      "text": "vectors. So write"
+    },
+    {
+      "index": 861,
+      "start": 2717.52,
+      "end": 2720.23,
+      "duration": 2.71,
+      "text": "so write"
+    },
+    {
+      "index": 862,
+      "start": 2720.24,
+      "end": 2723.349,
+      "duration": 3.109,
+      "text": "t times the first acting on the first"
+    },
+    {
+      "index": 863,
+      "start": 2723.359,
+      "end": 2725.43,
+      "duration": 2.071,
+      "text": "input. In other words, write the first"
+    },
+    {
+      "index": 864,
+      "start": 2725.44,
+      "end": 2727.91,
+      "duration": 2.47,
+      "text": "output as a combination of the basis"
+    },
+    {
+      "index": 865,
+      "start": 2727.92,
+      "end": 2730.39,
+      "duration": 2.47,
+      "text": "vectors. Say a1"
+    },
+    {
+      "index": 866,
+      "start": 2730.4,
+      "end": 2741.75,
+      "duration": 11.35,
+      "text": "1 v1 plus a 21 v2 and so on. A 81 v8."
+    },
+    {
+      "index": 867,
+      "start": 2744.95,
+      "end": 2744.96,
+      "duration": 0.01,
+      "text": "Write t of v2"
+    },
+    {
+      "index": 868,
+      "start": 2744.96,
+      "end": 2751.349,
+      "duration": 6.389,
+      "text": "as some combination a12 of v1 a2 of v2"
+    },
+    {
+      "index": 869,
+      "start": 2751.359,
+      "end": 2755.829,
+      "duration": 4.47,
+      "text": "and so on. I'm creating the matrix a"
+    },
+    {
+      "index": 870,
+      "start": 2755.839,
+      "end": 2758.95,
+      "duration": 3.111,
+      "text": "column by column. Those numbers go in"
+    },
+    {
+      "index": 871,
+      "start": 2758.96,
+      "end": 2761.51,
+      "duration": 2.55,
+      "text": "the first column. These numbers go in"
+    },
+    {
+      "index": 872,
+      "start": 2761.52,
+      "end": 2765.43,
+      "duration": 3.91,
+      "text": "the second column. The matrix A"
+    },
+    {
+      "index": 873,
+      "start": 2765.44,
+      "end": 2768.63,
+      "duration": 3.19,
+      "text": "that th this this is our matrix that"
+    },
+    {
+      "index": 874,
+      "start": 2768.64,
+      "end": 2772.55,
+      "duration": 3.91,
+      "text": "represents T in this basis is these"
+    },
+    {
+      "index": 875,
+      "start": 2772.56,
+      "end": 2774.39,
+      "duration": 1.83,
+      "text": "numbers"
+    },
+    {
+      "index": 876,
+      "start": 2774.4,
+      "end": 2778.15,
+      "duration": 3.75,
+      "text": "A11 down to A18"
+    },
+    {
+      "index": 877,
+      "start": 2778.16,
+      "end": 2785.03,
+      "duration": 6.87,
+      "text": "A21 down to A28 and so on. Okay,"
+    },
+    {
+      "index": 878,
+      "start": 2785.04,
+      "end": 2787.349,
+      "duration": 2.309,
+      "text": "that's the recipe. In other words, if I"
+    },
+    {
+      "index": 879,
+      "start": 2787.359,
+      "end": 2791.03,
+      "duration": 3.671,
+      "text": "give you a transformation and a basis,"
+    },
+    {
+      "index": 880,
+      "start": 2791.04,
+      "end": 2793.109,
+      "duration": 2.069,
+      "text": "so that's what I have to give you. The"
+    },
+    {
+      "index": 881,
+      "start": 2793.119,
+      "end": 2797.589,
+      "duration": 4.47,
+      "text": "inputs are the basis and to tell you"
+    },
+    {
+      "index": 882,
+      "start": 2797.599,
+      "end": 2801.109,
+      "duration": 3.51,
+      "text": "what the transformation is. And then you"
+    },
+    {
+      "index": 883,
+      "start": 2801.119,
+      "end": 2805.27,
+      "duration": 4.151,
+      "text": "tell me you you compute t for each"
+    },
+    {
+      "index": 884,
+      "start": 2805.28,
+      "end": 2807.19,
+      "duration": 1.91,
+      "text": "basis,"
+    },
+    {
+      "index": 885,
+      "start": 2807.2,
+      "end": 2810.23,
+      "duration": 3.03,
+      "text": "expand that result in the basis, and"
+    },
+    {
+      "index": 886,
+      "start": 2810.24,
+      "end": 2813.829,
+      "duration": 3.589,
+      "text": "that gives you the 64 numbers that go"
+    },
+    {
+      "index": 887,
+      "start": 2813.839,
+      "end": 2815.91,
+      "duration": 2.071,
+      "text": "into the matrix A."
+    },
+    {
+      "index": 888,
+      "start": 2815.92,
+      "end": 2819.829,
+      "duration": 3.909,
+      "text": "Let me suppose let's close with the best"
+    },
+    {
+      "index": 889,
+      "start": 2819.839,
+      "end": 2824.95,
+      "duration": 5.111,
+      "text": "example of all. Suppose V1 to V8"
+    },
+    {
+      "index": 890,
+      "start": 2824.96,
+      "end": 2828.87,
+      "duration": 3.91,
+      "text": "this basis is the igen vectors."
+    },
+    {
+      "index": 891,
+      "start": 2828.88,
+      "end": 2831.109,
+      "duration": 2.229,
+      "text": "Suppose"
+    },
+    {
+      "index": 892,
+      "start": 2831.119,
+      "end": 2839.99,
+      "duration": 8.871,
+      "text": "we have an igen vector basis."
+    },
+    {
+      "index": 893,
+      "start": 2845.51,
+      "end": 2845.52,
+      "duration": 0.01,
+      "text": "So that t of vi is just is in the same"
+    },
+    {
+      "index": 894,
+      "start": 2845.52,
+      "end": 2849.19,
+      "duration": 3.67,
+      "text": "direction as vi. Now my question is what"
+    },
+    {
+      "index": 895,
+      "start": 2849.2,
+      "end": 2855.349,
+      "duration": 6.149,
+      "text": "is a?"
+    },
+    {
+      "index": 896,
+      "start": 2857.589,
+      "end": 2857.599,
+      "duration": 0.01,
+      "text": "Can you carry through the steps? Let's"
+    },
+    {
+      "index": 897,
+      "start": 2857.599,
+      "end": 2859.349,
+      "duration": 1.75,
+      "text": "let's do them together because we can do"
+    },
+    {
+      "index": 898,
+      "start": 2859.359,
+      "end": 2863.27,
+      "duration": 3.911,
+      "text": "it in one minute."
+    },
+    {
+      "index": 899,
+      "start": 2867.75,
+      "end": 2867.76,
+      "duration": 0.01,
+      "text": "So we've chosen this perfect basis and"
+    },
+    {
+      "index": 900,
+      "start": 2867.76,
+      "end": 2869.51,
+      "duration": 1.75,
+      "text": "actually"
+    },
+    {
+      "index": 901,
+      "start": 2869.52,
+      "end": 2872.63,
+      "duration": 3.11,
+      "text": "with signal image processing"
+    },
+    {
+      "index": 902,
+      "start": 2872.64,
+      "end": 2875.829,
+      "duration": 3.189,
+      "text": "they might look for the igen vectors but"
+    },
+    {
+      "index": 903,
+      "start": 2875.839,
+      "end": 2878.309,
+      "duration": 2.47,
+      "text": "that would take more calculation time"
+    },
+    {
+      "index": 904,
+      "start": 2878.319,
+      "end": 2880.79,
+      "duration": 2.471,
+      "text": "than just saying okay we'll use the"
+    },
+    {
+      "index": 905,
+      "start": 2880.8,
+      "end": 2883.67,
+      "duration": 2.87,
+      "text": "wavelet basis or okay we'll use the fier"
+    },
+    {
+      "index": 906,
+      "start": 2883.68,
+      "end": 2886.55,
+      "duration": 2.87,
+      "text": "basis but the very best basis is the"
+    },
+    {
+      "index": 907,
+      "start": 2886.56,
+      "end": 2888.95,
+      "duration": 2.39,
+      "text": "igen vector basis. Okay, what's the"
+    },
+    {
+      "index": 908,
+      "start": 2888.96,
+      "end": 2891.99,
+      "duration": 3.03,
+      "text": "matrix? So, what's the first column of"
+    },
+    {
+      "index": 909,
+      "start": 2892.0,
+      "end": 2895.109,
+      "duration": 3.109,
+      "text": "the matrix?"
+    },
+    {
+      "index": 910,
+      "start": 2895.119,
+      "end": 2897.67,
+      "duration": 2.551,
+      "text": "How do I get the first column? I take"
+    },
+    {
+      "index": 911,
+      "start": 2897.68,
+      "end": 2901.99,
+      "duration": 4.31,
+      "text": "the first basis vector V1."
+    },
+    {
+      "index": 912,
+      "start": 2904.23,
+      "end": 2904.24,
+      "duration": 0.01,
+      "text": "I op I I look to see what does the"
+    },
+    {
+      "index": 913,
+      "start": 2904.24,
+      "end": 2906.87,
+      "duration": 2.63,
+      "text": "transformation do to it."
+    },
+    {
+      "index": 914,
+      "start": 2906.88,
+      "end": 2910.15,
+      "duration": 3.27,
+      "text": "The output is lambda 1 V1."
+    },
+    {
+      "index": 915,
+      "start": 2910.16,
+      "end": 2912.95,
+      "duration": 2.79,
+      "text": "I express that output as a combination."
+    },
+    {
+      "index": 916,
+      "start": 2912.96,
+      "end": 2916.47,
+      "duration": 3.51,
+      "text": "So, the so the first input"
+    },
+    {
+      "index": 917,
+      "start": 2916.48,
+      "end": 2919.589,
+      "duration": 3.109,
+      "text": "is V1."
+    },
+    {
+      "index": 918,
+      "start": 2919.599,
+      "end": 2925.589,
+      "duration": 5.99,
+      "text": "It's it's out its output is"
+    },
+    {
+      "index": 919,
+      "start": 2930.87,
+      "end": 2930.88,
+      "duration": 0.01,
+      "text": "lambda 1 v1. Now write lambda 1 v1 as a"
+    },
+    {
+      "index": 920,
+      "start": 2930.88,
+      "end": 2932.47,
+      "duration": 1.59,
+      "text": "combination of the basis vectors. Well,"
+    },
+    {
+      "index": 921,
+      "start": 2932.48,
+      "end": 2935.43,
+      "duration": 2.95,
+      "text": "it's already done. It's just lambda 1"
+    },
+    {
+      "index": 922,
+      "start": 2935.44,
+      "end": 2937.51,
+      "duration": 2.07,
+      "text": "times the first basis vector and 0 times"
+    },
+    {
+      "index": 923,
+      "start": 2937.52,
+      "end": 2940.309,
+      "duration": 2.789,
+      "text": "the others. So this first column will"
+    },
+    {
+      "index": 924,
+      "start": 2940.319,
+      "end": 2944.39,
+      "duration": 4.071,
+      "text": "have lambda 1 and zeros."
+    },
+    {
+      "index": 925,
+      "start": 2944.4,
+      "end": 2948.23,
+      "duration": 3.83,
+      "text": "Okay. Second input"
+    },
+    {
+      "index": 926,
+      "start": 2948.24,
+      "end": 2950.87,
+      "duration": 2.63,
+      "text": "is V2."
+    },
+    {
+      "index": 927,
+      "start": 2950.88,
+      "end": 2953.03,
+      "duration": 2.15,
+      "text": "Output"
+    },
+    {
+      "index": 928,
+      "start": 2953.04,
+      "end": 2957.19,
+      "duration": 4.15,
+      "text": "is lambda 2 V2. Okay, write that output"
+    },
+    {
+      "index": 929,
+      "start": 2957.2,
+      "end": 2959.43,
+      "duration": 2.23,
+      "text": "as a combination of the V's. It's"
+    },
+    {
+      "index": 930,
+      "start": 2959.44,
+      "end": 2962.15,
+      "duration": 2.71,
+      "text": "already done. It's just lambda 2 * the"
+    },
+    {
+      "index": 931,
+      "start": 2962.16,
+      "end": 2964.63,
+      "duration": 2.47,
+      "text": "second V. So we need in the second"
+    },
+    {
+      "index": 932,
+      "start": 2964.64,
+      "end": 2967.99,
+      "duration": 3.35,
+      "text": "column we have lambda 2 * the second V."
+    },
+    {
+      "index": 933,
+      "start": 2968.0,
+      "end": 2970.79,
+      "duration": 2.79,
+      "text": "Well, you see what's coming that in that"
+    },
+    {
+      "index": 934,
+      "start": 2970.8,
+      "end": 2974.79,
+      "duration": 3.99,
+      "text": "basis in the igen vector basis,"
+    },
+    {
+      "index": 935,
+      "start": 2974.8,
+      "end": 2977.51,
+      "duration": 2.71,
+      "text": "the matrix is diagonal."
+    },
+    {
+      "index": 936,
+      "start": 2977.52,
+      "end": 2980.71,
+      "duration": 3.19,
+      "text": "So that's the perfect basis."
+    },
+    {
+      "index": 937,
+      "start": 2980.72,
+      "end": 2982.71,
+      "duration": 1.99,
+      "text": "That's the basis we'd love to have for"
+    },
+    {
+      "index": 938,
+      "start": 2982.72,
+      "end": 2985.51,
+      "duration": 2.79,
+      "text": "image processing, but to find the igen"
+    },
+    {
+      "index": 939,
+      "start": 2985.52,
+      "end": 2988.63,
+      "duration": 3.11,
+      "text": "vectors of our pixel matrix would be too"
+    },
+    {
+      "index": 940,
+      "start": 2988.64,
+      "end": 2992.79,
+      "duration": 4.15,
+      "text": "expensive. So we do something cheaper"
+    },
+    {
+      "index": 941,
+      "start": 2992.8,
+      "end": 2995.75,
+      "duration": 2.95,
+      "text": "and close which is to choose a good"
+    },
+    {
+      "index": 942,
+      "start": 2995.76,
+      "end": 2999.03,
+      "duration": 3.27,
+      "text": "basis like like wavelets. Okay. Thanks."
+    },
+    {
+      "index": 943,
+      "start": 2999.04,
+      "end": 3004.47,
+      "duration": 5.43,
+      "text": "So a quiz review on Wednesday all day."
+    },
+    {
+      "index": 944,
+      "start": 3004.48,
+      "end": 3007.48,
+      "duration": 3.0,
+      "text": "Thanks."
+    }
+  ],
+  "course": {
+    "category": "Mathematics",
+    "title": "Linear Algebra - Gilbert Strang",
+    "source_url": "https://www.youtube.com/playlist?list=PL49CF3715CB9EF31D"
+  }
+}

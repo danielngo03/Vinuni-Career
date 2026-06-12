@@ -1,0 +1,6731 @@
+{
+  "video": {
+    "id": "mHfn_7ym6to",
+    "title": "8. Continuous Random Variables",
+    "url": "https://www.youtube.com/watch?v=mHfn_7ym6to",
+    "channel": "MIT OpenCourseWare",
+    "duration": 3028,
+    "language": "en"
+  },
+  "segment_count": 959,
+  "segments": [
+    {
+      "index": 0,
+      "start": 0.04,
+      "end": 2.46,
+      "duration": 2.42,
+      "text": "The following content is provided under a Creative"
+    },
+    {
+      "index": 1,
+      "start": 2.46,
+      "end": 3.87,
+      "duration": 1.41,
+      "text": "Commons license."
+    },
+    {
+      "index": 2,
+      "start": 3.87,
+      "end": 6.91,
+      "duration": 3.04,
+      "text": "Your support will help MIT OpenCourseWare continue to"
+    },
+    {
+      "index": 3,
+      "start": 6.91,
+      "end": 10.56,
+      "duration": 3.65,
+      "text": "offer high-quality educational resources for free."
+    },
+    {
+      "index": 4,
+      "start": 10.56,
+      "end": 13.46,
+      "duration": 2.9,
+      "text": "To make a donation or view additional materials from"
+    },
+    {
+      "index": 5,
+      "start": 13.46,
+      "end": 19.29,
+      "duration": 5.83,
+      "text": "hundreds of MIT courses, visit MIT OpenCourseWare at"
+    },
+    {
+      "index": 6,
+      "start": 19.29,
+      "end": 20.54,
+      "duration": 1.25,
+      "text": "ocw.mit.edu."
+    },
+    {
+      "index": 7,
+      "start": 22.64,
+      "end": 22.99,
+      "duration": 0.35,
+      "text": "JOHN TSITSIKLIS: OK."
+    },
+    {
+      "index": 8,
+      "start": 22.99,
+      "end": 24.02,
+      "duration": 1.03,
+      "text": "We can start."
+    },
+    {
+      "index": 9,
+      "start": 24.02,
+      "end": 26.54,
+      "duration": 2.52,
+      "text": "Good morning."
+    },
+    {
+      "index": 10,
+      "start": 26.54,
+      "end": 29.6,
+      "duration": 3.06,
+      "text": "So we're going to start now a new unit."
+    },
+    {
+      "index": 11,
+      "start": 29.6,
+      "end": 32.2,
+      "duration": 2.6,
+      "text": "For the next couple of lectures, we will be talking"
+    },
+    {
+      "index": 12,
+      "start": 32.2,
+      "end": 34.56,
+      "duration": 2.36,
+      "text": "about continuous random variables."
+    },
+    {
+      "index": 13,
+      "start": 34.56,
+      "end": 36.52,
+      "duration": 1.96,
+      "text": "So this is new material which is not going"
+    },
+    {
+      "index": 14,
+      "start": 36.52,
+      "end": 37.4,
+      "duration": 0.88,
+      "text": "to be in the quiz."
+    },
+    {
+      "index": 15,
+      "start": 37.4,
+      "end": 41.17,
+      "duration": 3.77,
+      "text": "You are going to have a long break next week without any"
+    },
+    {
+      "index": 16,
+      "start": 41.17,
+      "end": 45.23,
+      "duration": 4.06,
+      "text": "lecture, just a quiz and recitation and tutorial."
+    },
+    {
+      "index": 17,
+      "start": 45.23,
+      "end": 48.5,
+      "duration": 3.27,
+      "text": "So what's going to happen in this new unit?"
+    },
+    {
+      "index": 18,
+      "start": 48.5,
+      "end": 52.76,
+      "duration": 4.26,
+      "text": "Basically, we want to do everything that we did for"
+    },
+    {
+      "index": 19,
+      "start": 52.76,
+      "end": 56.61,
+      "duration": 3.85,
+      "text": "discrete random variables, reintroduce the same sort of"
+    },
+    {
+      "index": 20,
+      "start": 56.61,
+      "end": 59.51,
+      "duration": 2.9,
+      "text": "concepts but see how they apply and how they need to be"
+    },
+    {
+      "index": 21,
+      "start": 59.51,
+      "end": 62.84,
+      "duration": 3.33,
+      "text": "modified in order to talk about random variables that"
+    },
+    {
+      "index": 22,
+      "start": 62.84,
+      "end": 64.7,
+      "duration": 1.86,
+      "text": "take continuous values."
+    },
+    {
+      "index": 23,
+      "start": 64.7,
+      "end": 66.61,
+      "duration": 1.91,
+      "text": "At some level, it's all the same."
+    },
+    {
+      "index": 24,
+      "start": 66.61,
+      "end": 70.34,
+      "duration": 3.73,
+      "text": "At some level, it's quite a bit harder because when things"
+    },
+    {
+      "index": 25,
+      "start": 70.34,
+      "end": 72.49,
+      "duration": 2.15,
+      "text": "are continuous, calculus comes in."
+    },
+    {
+      "index": 26,
+      "start": 72.49,
+      "end": 74.77,
+      "duration": 2.28,
+      "text": "So the calculations that you have to do on the side"
+    },
+    {
+      "index": 27,
+      "start": 74.77,
+      "end": 77.76,
+      "duration": 2.99,
+      "text": "sometimes need a little bit more thinking."
+    },
+    {
+      "index": 28,
+      "start": 77.76,
+      "end": 80.3,
+      "duration": 2.54,
+      "text": "In terms of new concepts, there's not going to be a"
+    },
+    {
+      "index": 29,
+      "start": 80.3,
+      "end": 84.2,
+      "duration": 3.9,
+      "text": "whole lot today, some analogs of things we have done."
+    },
+    {
+      "index": 30,
+      "start": 84.2,
+      "end": 87.11,
+      "duration": 2.91,
+      "text": "We're going to introduce the concept of cumulative"
+    },
+    {
+      "index": 31,
+      "start": 87.11,
+      "end": 89.95,
+      "duration": 2.84,
+      "text": "distribution functions, which allows us to deal with"
+    },
+    {
+      "index": 32,
+      "start": 89.95,
+      "end": 92.75,
+      "duration": 2.8,
+      "text": "discrete and continuous random variables, all"
+    },
+    {
+      "index": 33,
+      "start": 92.75,
+      "end": 94.56,
+      "duration": 1.81,
+      "text": "of them in one shot."
+    },
+    {
+      "index": 34,
+      "start": 94.56,
+      "end": 97.89,
+      "duration": 3.33,
+      "text": "And finally, introduce a famous kind of continuous"
+    },
+    {
+      "index": 35,
+      "start": 97.89,
+      "end": 101.9,
+      "duration": 4.01,
+      "text": "random variable, the normal random variable."
+    },
+    {
+      "index": 36,
+      "start": 101.9,
+      "end": 103.97,
+      "duration": 2.07,
+      "text": "OK, so what's the story?"
+    },
+    {
+      "index": 37,
+      "start": 103.97,
+      "end": 106.97,
+      "duration": 3.0,
+      "text": "Continuous random variables are random variables that take"
+    },
+    {
+      "index": 38,
+      "start": 106.97,
+      "end": 110.35,
+      "duration": 3.38,
+      "text": "values over the continuum."
+    },
+    {
+      "index": 39,
+      "start": 110.35,
+      "end": 113.47,
+      "duration": 3.12,
+      "text": "So the numerical value of the random variable can be any"
+    },
+    {
+      "index": 40,
+      "start": 113.47,
+      "end": 115.24,
+      "duration": 1.77,
+      "text": "real number."
+    },
+    {
+      "index": 41,
+      "start": 115.24,
+      "end": 118.6,
+      "duration": 3.36,
+      "text": "They don't take values just in a discrete set."
+    },
+    {
+      "index": 42,
+      "start": 118.6,
+      "end": 120.66,
+      "duration": 2.06,
+      "text": "So we have our sample space."
+    },
+    {
+      "index": 43,
+      "start": 120.66,
+      "end": 122.02,
+      "duration": 1.36,
+      "text": "The experiment happens."
+    },
+    {
+      "index": 44,
+      "start": 122.02,
+      "end": 125.73,
+      "duration": 3.71,
+      "text": "We get some omega, a sample point in the sample space."
+    },
+    {
+      "index": 45,
+      "start": 125.73,
+      "end": 130.07,
+      "duration": 4.34,
+      "text": "And once that point is determined, it determines the"
+    },
+    {
+      "index": 46,
+      "start": 130.07,
+      "end": 132.5,
+      "duration": 2.43,
+      "text": "numerical value of the random variable."
+    },
+    {
+      "index": 47,
+      "start": 132.5,
+      "end": 135.37,
+      "duration": 2.87,
+      "text": "Remember, random variables are functions on the sample space."
+    },
+    {
+      "index": 48,
+      "start": 135.37,
+      "end": 137.02,
+      "duration": 1.65,
+      "text": "You pick a sample point."
+    },
+    {
+      "index": 49,
+      "start": 137.02,
+      "end": 139.69,
+      "duration": 2.67,
+      "text": "This determines the numerical value of the random variable."
+    },
+    {
+      "index": 50,
+      "start": 139.69,
+      "end": 143.5,
+      "duration": 3.81,
+      "text": "So that numerical value is going to be some real number"
+    },
+    {
+      "index": 51,
+      "start": 143.5,
+      "end": 146.01,
+      "duration": 2.51,
+      "text": "on that line."
+    },
+    {
+      "index": 52,
+      "start": 146.01,
+      "end": 148.55,
+      "duration": 2.54,
+      "text": "Now we want to say something about the distribution of the"
+    },
+    {
+      "index": 53,
+      "start": 148.55,
+      "end": 149.29,
+      "duration": 0.74,
+      "text": "random variable."
+    },
+    {
+      "index": 54,
+      "start": 149.29,
+      "end": 151.97,
+      "duration": 2.68,
+      "text": "We want to say which values are more likely than others to"
+    },
+    {
+      "index": 55,
+      "start": 151.97,
+      "end": 154.06,
+      "duration": 2.09,
+      "text": "occur in a certain sense."
+    },
+    {
+      "index": 56,
+      "start": 154.06,
+      "end": 156.91,
+      "duration": 2.85,
+      "text": "For example, you may be interested in a particular"
+    },
+    {
+      "index": 57,
+      "start": 156.91,
+      "end": 160.09,
+      "duration": 3.18,
+      "text": "event, the event that the random variable takes values"
+    },
+    {
+      "index": 58,
+      "start": 160.09,
+      "end": 162.36,
+      "duration": 2.27,
+      "text": "in the interval from a to b."
+    },
+    {
+      "index": 59,
+      "start": 162.36,
+      "end": 163.95,
+      "duration": 1.59,
+      "text": "And we want to say something about the"
+    },
+    {
+      "index": 60,
+      "start": 163.95,
+      "end": 165.82,
+      "duration": 1.87,
+      "text": "probability of that event."
+    },
+    {
+      "index": 61,
+      "start": 165.82,
+      "end": 168.51,
+      "duration": 2.69,
+      "text": "In principle, how is this done?"
+    },
+    {
+      "index": 62,
+      "start": 168.51,
+      "end": 172.01,
+      "duration": 3.5,
+      "text": "You go back to the sample space, and you find all those"
+    },
+    {
+      "index": 63,
+      "start": 172.01,
+      "end": 176.79,
+      "duration": 4.78,
+      "text": "outcomes for which the value of the random variable happens"
+    },
+    {
+      "index": 64,
+      "start": 176.79,
+      "end": 178.5,
+      "duration": 1.71,
+      "text": "to be in that interval."
+    },
+    {
+      "index": 65,
+      "start": 178.5,
+      "end": 181.87,
+      "duration": 3.37,
+      "text": "The probability that the random variable falls here is"
+    },
+    {
+      "index": 66,
+      "start": 181.87,
+      "end": 186.07,
+      "duration": 4.2,
+      "text": "the same as the probability of all outcomes that make the"
+    },
+    {
+      "index": 67,
+      "start": 186.07,
+      "end": 188.29,
+      "duration": 2.22,
+      "text": "random variable to fall in there."
+    },
+    {
+      "index": 68,
+      "start": 188.29,
+      "end": 191.19,
+      "duration": 2.9,
+      "text": "So in principle, you can work on the original sample space,"
+    },
+    {
+      "index": 69,
+      "start": 191.19,
+      "end": 194.75,
+      "duration": 3.56,
+      "text": "find the probability of this event, and you would be done."
+    },
+    {
+      "index": 70,
+      "start": 194.75,
+      "end": 198.81,
+      "duration": 4.06,
+      "text": "But similar to what happened in chapter 2, we want to kind"
+    },
+    {
+      "index": 71,
+      "start": 198.81,
+      "end": 202.91,
+      "duration": 4.1,
+      "text": "of push the sample space in the background and just work"
+    },
+    {
+      "index": 72,
+      "start": 202.91,
+      "end": 206.89,
+      "duration": 3.98,
+      "text": "directly on the real axis and talk about"
+    },
+    {
+      "index": 73,
+      "start": 206.89,
+      "end": 208.64,
+      "duration": 1.75,
+      "text": "probabilities up here."
+    },
+    {
+      "index": 74,
+      "start": 208.64,
+      "end": 212.43,
+      "duration": 3.79,
+      "text": "So we want now a way to specify probabilities, how"
+    },
+    {
+      "index": 75,
+      "start": 212.43,
+      "end": 218.34,
+      "duration": 5.91,
+      "text": "they are bunched together, or arranged, along the real line."
+    },
+    {
+      "index": 76,
+      "start": 218.34,
+      "end": 220.98,
+      "duration": 2.64,
+      "text": "So what did we do for discrete random variables?"
+    },
+    {
+      "index": 77,
+      "start": 220.98,
+      "end": 224.1,
+      "duration": 3.12,
+      "text": "We introduced PMFs, probability mass functions."
+    },
+    {
+      "index": 78,
+      "start": 224.1,
+      "end": 227.1,
+      "duration": 3.0,
+      "text": "And the way that we described the random variable was by"
+    },
+    {
+      "index": 79,
+      "start": 227.1,
+      "end": 230.3,
+      "duration": 3.2,
+      "text": "saying this point has so much mass on top of it, that point"
+    },
+    {
+      "index": 80,
+      "start": 230.3,
+      "end": 232.79,
+      "duration": 2.49,
+      "text": "has so much mass on top of it, and so on."
+    },
+    {
+      "index": 81,
+      "start": 232.79,
+      "end": 237.61,
+      "duration": 4.82,
+      "text": "And so we assigned a total amount of 1 unit of"
+    },
+    {
+      "index": 82,
+      "start": 237.61,
+      "end": 238.67,
+      "duration": 1.06,
+      "text": "probability."
+    },
+    {
+      "index": 83,
+      "start": 238.67,
+      "end": 241.81,
+      "duration": 3.14,
+      "text": "We assigned it to different masses, which we put at"
+    },
+    {
+      "index": 84,
+      "start": 241.81,
+      "end": 244.87,
+      "duration": 3.06,
+      "text": "different points on the real axis."
+    },
+    {
+      "index": 85,
+      "start": 244.87,
+      "end": 248.07,
+      "duration": 3.2,
+      "text": "So that's what you do if somebody gives you a pound of"
+    },
+    {
+      "index": 86,
+      "start": 248.07,
+      "end": 251.91,
+      "duration": 3.84,
+      "text": "discrete stuff, a pound of mass in little chunks."
+    },
+    {
+      "index": 87,
+      "start": 251.91,
+      "end": 255.3,
+      "duration": 3.39,
+      "text": "And you place those chunks at a few points."
+    },
+    {
+      "index": 88,
+      "start": 255.3,
+      "end": 260.89,
+      "duration": 5.59,
+      "text": "Now, in the continuous case, this total unit of probability"
+    },
+    {
+      "index": 89,
+      "start": 260.89,
+      "end": 265.44,
+      "duration": 4.55,
+      "text": "mass does not sit just on discrete points but is spread"
+    },
+    {
+      "index": 90,
+      "start": 265.44,
+      "end": 268.14,
+      "duration": 2.7,
+      "text": "all over the real axis."
+    },
+    {
+      "index": 91,
+      "start": 268.14,
+      "end": 271.28,
+      "duration": 3.14,
+      "text": "So now we're going to have a unit of mass that spreads on"
+    },
+    {
+      "index": 92,
+      "start": 271.28,
+      "end": 272.51,
+      "duration": 1.23,
+      "text": "top of the real axis."
+    },
+    {
+      "index": 93,
+      "start": 272.51,
+      "end": 276.02,
+      "duration": 3.51,
+      "text": "How do we describe masses that are continuously spread?"
+    },
+    {
+      "index": 94,
+      "start": 276.02,
+      "end": 279.68,
+      "duration": 3.66,
+      "text": "The way we describe them is by specifying densities."
+    },
+    {
+      "index": 95,
+      "start": 279.68,
+      "end": 283.8,
+      "duration": 4.12,
+      "text": "That is, how thick is the mass that's sitting here?"
+    },
+    {
+      "index": 96,
+      "start": 283.8,
+      "end": 286.21,
+      "duration": 2.41,
+      "text": "How dense is the mass that's sitting there?"
+    },
+    {
+      "index": 97,
+      "start": 286.21,
+      "end": 288.26,
+      "duration": 2.05,
+      "text": "So that's exactly what we're going to do."
+    },
+    {
+      "index": 98,
+      "start": 288.26,
+      "end": 290.93,
+      "duration": 2.67,
+      "text": "We're going to introduce the concept of a probability"
+    },
+    {
+      "index": 99,
+      "start": 290.93,
+      "end": 295.34,
+      "duration": 4.41,
+      "text": "density function that tells us how probabilities accumulate"
+    },
+    {
+      "index": 100,
+      "start": 295.34,
+      "end": 299.27,
+      "duration": 3.93,
+      "text": "at different parts of the real axis."
+    },
+    {
+      "index": 101,
+      "start": 303.78,
+      "end": 307.87,
+      "duration": 4.09,
+      "text": "So here's an example or a picture of a possible"
+    },
+    {
+      "index": 102,
+      "start": 307.87,
+      "end": 310.21,
+      "duration": 2.34,
+      "text": "probability density function."
+    },
+    {
+      "index": 103,
+      "start": 310.21,
+      "end": 313.21,
+      "duration": 3.0,
+      "text": "What does that density function kind of convey"
+    },
+    {
+      "index": 104,
+      "start": 313.21,
+      "end": 314.29,
+      "duration": 1.08,
+      "text": "intuitively?"
+    },
+    {
+      "index": 105,
+      "start": 314.29,
+      "end": 317.51,
+      "duration": 3.22,
+      "text": "Well, that these x's are relatively"
+    },
+    {
+      "index": 106,
+      "start": 317.51,
+      "end": 319.16,
+      "duration": 1.65,
+      "text": "less likely to occur."
+    },
+    {
+      "index": 107,
+      "start": 319.16,
+      "end": 322.12,
+      "duration": 2.96,
+      "text": "Those x's are somewhat more likely to occur because the"
+    },
+    {
+      "index": 108,
+      "start": 322.12,
+      "end": 324.93,
+      "duration": 2.81,
+      "text": "density is higher."
+    },
+    {
+      "index": 109,
+      "start": 324.93,
+      "end": 327.95,
+      "duration": 3.02,
+      "text": "Now, for a more formal definition, we're going to say"
+    },
+    {
+      "index": 110,
+      "start": 327.95,
+      "end": 335.62,
+      "duration": 7.67,
+      "text": "that a random variable X is said to be continuous if it"
+    },
+    {
+      "index": 111,
+      "start": 335.62,
+      "end": 338.56,
+      "duration": 2.94,
+      "text": "can be described by a density function in"
+    },
+    {
+      "index": 112,
+      "start": 338.56,
+      "end": 340.78,
+      "duration": 2.22,
+      "text": "the following sense."
+    },
+    {
+      "index": 113,
+      "start": 340.78,
+      "end": 342.91,
+      "duration": 2.13,
+      "text": "We have a density function."
+    },
+    {
+      "index": 114,
+      "start": 342.91,
+      "end": 347.83,
+      "duration": 4.92,
+      "text": "And we calculate probabilities of falling inside an interval"
+    },
+    {
+      "index": 115,
+      "start": 347.83,
+      "end": 352.58,
+      "duration": 4.75,
+      "text": "by finding the area under the curve that sits"
+    },
+    {
+      "index": 116,
+      "start": 352.58,
+      "end": 354.94,
+      "duration": 2.36,
+      "text": "on top of that interval."
+    },
+    {
+      "index": 117,
+      "start": 354.94,
+      "end": 357.8,
+      "duration": 2.86,
+      "text": "So that's sort of the defining relation for"
+    },
+    {
+      "index": 118,
+      "start": 357.8,
+      "end": 359.19,
+      "duration": 1.39,
+      "text": "continuous random variables."
+    },
+    {
+      "index": 119,
+      "start": 359.19,
+      "end": 360.86,
+      "duration": 1.67,
+      "text": "It's an implicit definition."
+    },
+    {
+      "index": 120,
+      "start": 360.86,
+      "end": 363.87,
+      "duration": 3.01,
+      "text": "And it tells us a random variable is continuous if we"
+    },
+    {
+      "index": 121,
+      "start": 363.87,
+      "end": 366.56,
+      "duration": 2.69,
+      "text": "can calculate probabilities this way."
+    },
+    {
+      "index": 122,
+      "start": 366.56,
+      "end": 369.52,
+      "duration": 2.96,
+      "text": "So the probability of falling in this interval is the area"
+    },
+    {
+      "index": 123,
+      "start": 369.52,
+      "end": 370.5,
+      "duration": 0.98,
+      "text": "under this curve."
+    },
+    {
+      "index": 124,
+      "start": 370.5,
+      "end": 374.95,
+      "duration": 4.45,
+      "text": "Mathematically, it's the integral of the density over"
+    },
+    {
+      "index": 125,
+      "start": 374.95,
+      "end": 377.02,
+      "duration": 2.07,
+      "text": "this particular interval."
+    },
+    {
+      "index": 126,
+      "start": 377.02,
+      "end": 380.41,
+      "duration": 3.39,
+      "text": "If the density happens to be constant over that interval,"
+    },
+    {
+      "index": 127,
+      "start": 380.41,
+      "end": 383.61,
+      "duration": 3.2,
+      "text": "the area under the curve would be the length of the interval"
+    },
+    {
+      "index": 128,
+      "start": 383.61,
+      "end": 386.44,
+      "duration": 2.83,
+      "text": "times the height of the density, which"
+    },
+    {
+      "index": 129,
+      "start": 386.44,
+      "end": 388.17,
+      "duration": 1.73,
+      "text": "sort of makes sense."
+    },
+    {
+      "index": 130,
+      "start": 388.17,
+      "end": 392.02,
+      "duration": 3.85,
+      "text": "Now, because the density is not constant but it kind of"
+    },
+    {
+      "index": 131,
+      "start": 392.02,
+      "end": 395.72,
+      "duration": 3.7,
+      "text": "moves around, what you need is to write down an integral."
+    },
+    {
+      "index": 132,
+      "start": 395.72,
+      "end": 399.1,
+      "duration": 3.38,
+      "text": "Now, this formula is very much analogous to what you would do"
+    },
+    {
+      "index": 133,
+      "start": 399.1,
+      "end": 401.03,
+      "duration": 1.93,
+      "text": "for discrete random variables."
+    },
+    {
+      "index": 134,
+      "start": 401.03,
+      "end": 404.14,
+      "duration": 3.11,
+      "text": "For a discrete random variable, how do you calculate"
+    },
+    {
+      "index": 135,
+      "start": 404.14,
+      "end": 405.61,
+      "duration": 1.47,
+      "text": "this probability?"
+    },
+    {
+      "index": 136,
+      "start": 405.61,
+      "end": 408.8,
+      "duration": 3.19,
+      "text": "You look at all x's in this interval."
+    },
+    {
+      "index": 137,
+      "start": 408.8,
+      "end": 414.06,
+      "duration": 5.26,
+      "text": "And you add the probability mass function over that range."
+    },
+    {
+      "index": 138,
+      "start": 414.06,
+      "end": 419.66,
+      "duration": 5.6,
+      "text": "So just for comparison, this would be the formula for the"
+    },
+    {
+      "index": 139,
+      "start": 419.66,
+      "end": 421.59,
+      "duration": 1.93,
+      "text": "discrete case--"
+    },
+    {
+      "index": 140,
+      "start": 421.59,
+      "end": 425.62,
+      "duration": 4.03,
+      "text": "the sum over all x's in the interval from a to b over the"
+    },
+    {
+      "index": 141,
+      "start": 425.62,
+      "end": 429.42,
+      "duration": 3.8,
+      "text": "probability mass function."
+    },
+    {
+      "index": 142,
+      "start": 429.42,
+      "end": 432.65,
+      "duration": 3.23,
+      "text": "And there is a syntactic analogy that's happening here"
+    },
+    {
+      "index": 143,
+      "start": 432.65,
+      "end": 436.16,
+      "duration": 3.51,
+      "text": "and which will be a persistent theme when we deal with"
+    },
+    {
+      "index": 144,
+      "start": 436.16,
+      "end": 438.92,
+      "duration": 2.76,
+      "text": "continuous random variables."
+    },
+    {
+      "index": 145,
+      "start": 438.92,
+      "end": 442.62,
+      "duration": 3.7,
+      "text": "Sums get replaced by integrals."
+    },
+    {
+      "index": 146,
+      "start": 442.62,
+      "end": 444.11,
+      "duration": 1.49,
+      "text": "In the discrete case, you add."
+    },
+    {
+      "index": 147,
+      "start": 444.11,
+      "end": 446.92,
+      "duration": 2.81,
+      "text": "In the continuous case, you integrate."
+    },
+    {
+      "index": 148,
+      "start": 446.92,
+      "end": 451.6,
+      "duration": 4.68,
+      "text": "Mass functions get replaced by density functions."
+    },
+    {
+      "index": 149,
+      "start": 451.6,
+      "end": 455.5,
+      "duration": 3.9,
+      "text": "So you can take pretty much any formula from the discrete"
+    },
+    {
+      "index": 150,
+      "start": 455.5,
+      "end": 460.02,
+      "duration": 4.52,
+      "text": "case and translate it to a continuous analog of that"
+    },
+    {
+      "index": 151,
+      "start": 460.02,
+      "end": 461.48,
+      "duration": 1.46,
+      "text": "formula, as we're going to see."
+    },
+    {
+      "index": 152,
+      "start": 463.99,
+      "end": 465.24,
+      "duration": 1.25,
+      "text": "OK."
+    },
+    {
+      "index": 153,
+      "start": 467.25,
+      "end": 470.04,
+      "duration": 2.79,
+      "text": "So let's take this now as our model."
+    },
+    {
+      "index": 154,
+      "start": 470.04,
+      "end": 473.22,
+      "duration": 3.18,
+      "text": "What is the probability that the random variable takes a"
+    },
+    {
+      "index": 155,
+      "start": 473.22,
+      "end": 478.44,
+      "duration": 5.22,
+      "text": "specific value if we have a continuous random variable?"
+    },
+    {
+      "index": 156,
+      "start": 478.44,
+      "end": 480.2,
+      "duration": 1.76,
+      "text": "Well, this would be the case."
+    },
+    {
+      "index": 157,
+      "start": 480.2,
+      "end": 482.88,
+      "duration": 2.68,
+      "text": "It's a case of a trivial interval, where the two end"
+    },
+    {
+      "index": 158,
+      "start": 482.88,
+      "end": 484.66,
+      "duration": 1.78,
+      "text": "points coincide."
+    },
+    {
+      "index": 159,
+      "start": 484.66,
+      "end": 487.67,
+      "duration": 3.01,
+      "text": "So it would be the integral from a to itself."
+    },
+    {
+      "index": 160,
+      "start": 487.67,
+      "end": 490.52,
+      "duration": 2.85,
+      "text": "So you're integrating just over a single point."
+    },
+    {
+      "index": 161,
+      "start": 490.52,
+      "end": 492.79,
+      "duration": 2.27,
+      "text": "Now, when you integrate over a single point, the"
+    },
+    {
+      "index": 162,
+      "start": 492.79,
+      "end": 494.6,
+      "duration": 1.81,
+      "text": "integral is just 0."
+    },
+    {
+      "index": 163,
+      "start": 494.6,
+      "end": 497.98,
+      "duration": 3.38,
+      "text": "The area under the curve, if you're only looking at a"
+    },
+    {
+      "index": 164,
+      "start": 497.98,
+      "end": 499.56,
+      "duration": 1.58,
+      "text": "single point, it's 0."
+    },
+    {
+      "index": 165,
+      "start": 499.56,
+      "end": 502.67,
+      "duration": 3.11,
+      "text": "So big property of continuous random variables is that any"
+    },
+    {
+      "index": 166,
+      "start": 502.67,
+      "end": 506.94,
+      "duration": 4.27,
+      "text": "individual point has 0 probability."
+    },
+    {
+      "index": 167,
+      "start": 506.94,
+      "end": 510.74,
+      "duration": 3.8,
+      "text": "In particular, when you look at the value of the density,"
+    },
+    {
+      "index": 168,
+      "start": 510.74,
+      "end": 515.299,
+      "duration": 4.559,
+      "text": "the density does not tell you the probability of that point."
+    },
+    {
+      "index": 169,
+      "start": 515.299,
+      "end": 517.86,
+      "duration": 2.561,
+      "text": "The point itself has 0 probability."
+    },
+    {
+      "index": 170,
+      "start": 517.86,
+      "end": 522.409,
+      "duration": 4.549,
+      "text": "So the density tells you something a little different."
+    },
+    {
+      "index": 171,
+      "start": 522.409,
+      "end": 524.645,
+      "duration": 2.236,
+      "text": "We are going to see shortly what that is."
+    },
+    {
+      "index": 172,
+      "start": 527.39,
+      "end": 532.07,
+      "duration": 4.68,
+      "text": "Before we get there, can the density be"
+    },
+    {
+      "index": 173,
+      "start": 532.07,
+      "end": 534.41,
+      "duration": 2.34,
+      "text": "an arbitrary function?"
+    },
+    {
+      "index": 174,
+      "start": 534.41,
+      "end": 536.16,
+      "duration": 1.75,
+      "text": "Almost, but not quite."
+    },
+    {
+      "index": 175,
+      "start": 536.16,
+      "end": 537.65,
+      "duration": 1.49,
+      "text": "There are two things that we want."
+    },
+    {
+      "index": 176,
+      "start": 537.65,
+      "end": 540.31,
+      "duration": 2.66,
+      "text": "First, since densities are used to calculate"
+    },
+    {
+      "index": 177,
+      "start": 540.31,
+      "end": 542.69,
+      "duration": 2.38,
+      "text": "probabilities, and since probabilities must be"
+    },
+    {
+      "index": 178,
+      "start": 542.69,
+      "end": 546.84,
+      "duration": 4.15,
+      "text": "non-negative, the density should also be non-negative."
+    },
+    {
+      "index": 179,
+      "start": 546.84,
+      "end": 550.96,
+      "duration": 4.12,
+      "text": "Otherwise you would be getting negative probabilities, which"
+    },
+    {
+      "index": 180,
+      "start": 550.96,
+      "end": 553.36,
+      "duration": 2.4,
+      "text": "is not a good thing."
+    },
+    {
+      "index": 181,
+      "start": 553.36,
+      "end": 556.93,
+      "duration": 3.57,
+      "text": "So that's a basic property that any density function"
+    },
+    {
+      "index": 182,
+      "start": 556.93,
+      "end": 558.64,
+      "duration": 1.71,
+      "text": "should obey."
+    },
+    {
+      "index": 183,
+      "start": 558.64,
+      "end": 561.97,
+      "duration": 3.33,
+      "text": "The second property that we need is that the overall"
+    },
+    {
+      "index": 184,
+      "start": 561.97,
+      "end": 565.21,
+      "duration": 3.24,
+      "text": "probability of the entire real line should be equal to 1."
+    },
+    {
+      "index": 185,
+      "start": 565.21,
+      "end": 567.98,
+      "duration": 2.77,
+      "text": "So if you ask me, what is the probability that x falls"
+    },
+    {
+      "index": 186,
+      "start": 567.98,
+      "end": 570.76,
+      "duration": 2.78,
+      "text": "between minus infinity and plus infinity, well, we are"
+    },
+    {
+      "index": 187,
+      "start": 570.76,
+      "end": 573.59,
+      "duration": 2.83,
+      "text": "sure that x is going to fall in that range."
+    },
+    {
+      "index": 188,
+      "start": 573.59,
+      "end": 577.4,
+      "duration": 3.81,
+      "text": "So the probability of that event should be 1."
+    },
+    {
+      "index": 189,
+      "start": 577.4,
+      "end": 580.48,
+      "duration": 3.08,
+      "text": "So the probability of being between minus infinity and"
+    },
+    {
+      "index": 190,
+      "start": 580.48,
+      "end": 583.6,
+      "duration": 3.12,
+      "text": "plus infinity should be 1, which means that the integral"
+    },
+    {
+      "index": 191,
+      "start": 583.6,
+      "end": 586.41,
+      "duration": 2.81,
+      "text": "from minus infinity to plus infinity should be 1."
+    },
+    {
+      "index": 192,
+      "start": 586.41,
+      "end": 590.46,
+      "duration": 4.05,
+      "text": "So that just tells us that there's 1 unit of total"
+    },
+    {
+      "index": 193,
+      "start": 590.46,
+      "end": 594.69,
+      "duration": 4.23,
+      "text": "probability that's being spread over our space."
+    },
+    {
+      "index": 194,
+      "start": 594.69,
+      "end": 599.0,
+      "duration": 4.31,
+      "text": "Now, what's the best way to think intuitively about what"
+    },
+    {
+      "index": 195,
+      "start": 599.0,
+      "end": 601.48,
+      "duration": 2.48,
+      "text": "the density function does?"
+    },
+    {
+      "index": 196,
+      "start": 601.48,
+      "end": 606.47,
+      "duration": 4.99,
+      "text": "The interpretation that I find most natural and easy to"
+    },
+    {
+      "index": 197,
+      "start": 606.47,
+      "end": 610.3,
+      "duration": 3.83,
+      "text": "convey the meaning of a density is to look at"
+    },
+    {
+      "index": 198,
+      "start": 610.3,
+      "end": 613.22,
+      "duration": 2.92,
+      "text": "probabilities of small intervals."
+    },
+    {
+      "index": 199,
+      "start": 613.22,
+      "end": 618.85,
+      "duration": 5.63,
+      "text": "So let us take an x somewhere here and then x plus delta"
+    },
+    {
+      "index": 200,
+      "start": 618.85,
+      "end": 620.23,
+      "duration": 1.38,
+      "text": "just next to it."
+    },
+    {
+      "index": 201,
+      "start": 620.23,
+      "end": 623.05,
+      "duration": 2.82,
+      "text": "So delta is a small number."
+    },
+    {
+      "index": 202,
+      "start": 623.05,
+      "end": 626.46,
+      "duration": 3.41,
+      "text": "And let's look at the probability of the event that"
+    },
+    {
+      "index": 203,
+      "start": 626.46,
+      "end": 629.75,
+      "duration": 3.29,
+      "text": "we get a value in that range."
+    },
+    {
+      "index": 204,
+      "start": 629.75,
+      "end": 632.22,
+      "duration": 2.47,
+      "text": "For continuous random variables, the way we find the"
+    },
+    {
+      "index": 205,
+      "start": 632.22,
+      "end": 635.27,
+      "duration": 3.05,
+      "text": "probability of falling in that range is by integrating the"
+    },
+    {
+      "index": 206,
+      "start": 635.27,
+      "end": 637.55,
+      "duration": 2.28,
+      "text": "density over that range."
+    },
+    {
+      "index": 207,
+      "start": 637.55,
+      "end": 641.61,
+      "duration": 4.06,
+      "text": "So we're drawing this picture."
+    },
+    {
+      "index": 208,
+      "start": 641.61,
+      "end": 646.06,
+      "duration": 4.45,
+      "text": "And we want to take the area under this curve."
+    },
+    {
+      "index": 209,
+      "start": 646.06,
+      "end": 650.76,
+      "duration": 4.7,
+      "text": "Now, what happens if delta is a fairly small number?"
+    },
+    {
+      "index": 210,
+      "start": 650.76,
+      "end": 655.03,
+      "duration": 4.27,
+      "text": "If delta is pretty small, our density is not going to change"
+    },
+    {
+      "index": 211,
+      "start": 655.03,
+      "end": 657.04,
+      "duration": 2.01,
+      "text": "much over that range."
+    },
+    {
+      "index": 212,
+      "start": 657.04,
+      "end": 659.33,
+      "duration": 2.29,
+      "text": "So you can pretend that the density is"
+    },
+    {
+      "index": 213,
+      "start": 659.33,
+      "end": 661.23,
+      "duration": 1.9,
+      "text": "approximately constant."
+    },
+    {
+      "index": 214,
+      "start": 661.23,
+      "end": 664.55,
+      "duration": 3.32,
+      "text": "And so to find the area under the curve, you just take the"
+    },
+    {
+      "index": 215,
+      "start": 664.55,
+      "end": 667.76,
+      "duration": 3.21,
+      "text": "base times the height."
+    },
+    {
+      "index": 216,
+      "start": 667.76,
+      "end": 670.63,
+      "duration": 2.87,
+      "text": "And it doesn't matter where exactly you take the height in"
+    },
+    {
+      "index": 217,
+      "start": 670.63,
+      "end": 673.14,
+      "duration": 2.51,
+      "text": "that interval, because the density doesn't change very"
+    },
+    {
+      "index": 218,
+      "start": 673.14,
+      "end": 675.37,
+      "duration": 2.23,
+      "text": "much over that interval."
+    },
+    {
+      "index": 219,
+      "start": 675.37,
+      "end": 679.76,
+      "duration": 4.39,
+      "text": "And so the integral becomes just base times the height."
+    },
+    {
+      "index": 220,
+      "start": 679.76,
+      "end": 684.02,
+      "duration": 4.26,
+      "text": "So for small intervals, the probability of a small"
+    },
+    {
+      "index": 221,
+      "start": 684.02,
+      "end": 690.17,
+      "duration": 6.15,
+      "text": "interval is approximately the density times delta."
+    },
+    {
+      "index": 222,
+      "start": 690.17,
+      "end": 692.34,
+      "duration": 2.17,
+      "text": "So densities essentially give us"
+    },
+    {
+      "index": 223,
+      "start": 692.34,
+      "end": 694.67,
+      "duration": 2.33,
+      "text": "probabilities of small intervals."
+    },
+    {
+      "index": 224,
+      "start": 694.67,
+      "end": 698.1,
+      "duration": 3.43,
+      "text": "And if you want to think about it a little differently, you"
+    },
+    {
+      "index": 225,
+      "start": 698.1,
+      "end": 701.02,
+      "duration": 2.92,
+      "text": "can take that delta from here and send it to"
+    },
+    {
+      "index": 226,
+      "start": 701.02,
+      "end": 703.96,
+      "duration": 2.94,
+      "text": "the denominator there."
+    },
+    {
+      "index": 227,
+      "start": 703.96,
+      "end": 708.88,
+      "duration": 4.92,
+      "text": "And what this tells you is that the density is"
+    },
+    {
+      "index": 228,
+      "start": 708.88,
+      "end": 715.27,
+      "duration": 6.39,
+      "text": "probability per unit length for intervals of small length."
+    },
+    {
+      "index": 229,
+      "start": 715.27,
+      "end": 719.86,
+      "duration": 4.59,
+      "text": "So the units of density are probability per unit length."
+    },
+    {
+      "index": 230,
+      "start": 719.86,
+      "end": 721.42,
+      "duration": 1.56,
+      "text": "Densities are not probabilities."
+    },
+    {
+      "index": 231,
+      "start": 721.42,
+      "end": 724.43,
+      "duration": 3.01,
+      "text": "They are rates at which probabilities accumulate,"
+    },
+    {
+      "index": 232,
+      "start": 724.43,
+      "end": 726.78,
+      "duration": 2.35,
+      "text": "probabilities per unit length."
+    },
+    {
+      "index": 233,
+      "start": 726.78,
+      "end": 729.78,
+      "duration": 3.0,
+      "text": "And since densities are not probabilities, they don't have"
+    },
+    {
+      "index": 234,
+      "start": 729.78,
+      "end": 731.96,
+      "duration": 2.18,
+      "text": "to be less than 1."
+    },
+    {
+      "index": 235,
+      "start": 731.96,
+      "end": 734.73,
+      "duration": 2.77,
+      "text": "Ordinary probabilities always must be less than 1."
+    },
+    {
+      "index": 236,
+      "start": 734.73,
+      "end": 738.0,
+      "duration": 3.27,
+      "text": "But density is a different kind of thing."
+    },
+    {
+      "index": 237,
+      "start": 738.0,
+      "end": 740.53,
+      "duration": 2.53,
+      "text": "It can get pretty big in some places."
+    },
+    {
+      "index": 238,
+      "start": 740.53,
+      "end": 743.68,
+      "duration": 3.15,
+      "text": "It can even sort of blow up in some places."
+    },
+    {
+      "index": 239,
+      "start": 743.68,
+      "end": 747.62,
+      "duration": 3.94,
+      "text": "As long as the total area under the curve is 1, other"
+    },
+    {
+      "index": 240,
+      "start": 747.62,
+      "end": 752.83,
+      "duration": 5.21,
+      "text": "than that, the curve can do anything that it wants."
+    },
+    {
+      "index": 241,
+      "start": 752.83,
+      "end": 755.93,
+      "duration": 3.1,
+      "text": "Now, the density prescribes for us the"
+    },
+    {
+      "index": 242,
+      "start": 755.93,
+      "end": 761.62,
+      "duration": 5.69,
+      "text": "probability of intervals."
+    },
+    {
+      "index": 243,
+      "start": 761.62,
+      "end": 764.71,
+      "duration": 3.09,
+      "text": "Sometimes we may want to find the probability of more"
+    },
+    {
+      "index": 244,
+      "start": 764.71,
+      "end": 766.54,
+      "duration": 1.83,
+      "text": "general sets."
+    },
+    {
+      "index": 245,
+      "start": 766.54,
+      "end": 767.78,
+      "duration": 1.24,
+      "text": "How would we do that?"
+    },
+    {
+      "index": 246,
+      "start": 767.78,
+      "end": 771.58,
+      "duration": 3.8,
+      "text": "Well, for nice sets, you will just integrate the density"
+    },
+    {
+      "index": 247,
+      "start": 771.58,
+      "end": 774.26,
+      "duration": 2.68,
+      "text": "over that nice set."
+    },
+    {
+      "index": 248,
+      "start": 774.26,
+      "end": 776.64,
+      "duration": 2.38,
+      "text": "I'm not quite defining what \"nice\" means."
+    },
+    {
+      "index": 249,
+      "start": 776.64,
+      "end": 779.14,
+      "duration": 2.5,
+      "text": "That's a pretty technical topic in the theory of"
+    },
+    {
+      "index": 250,
+      "start": 779.14,
+      "end": 780.16,
+      "duration": 1.02,
+      "text": "probability."
+    },
+    {
+      "index": 251,
+      "start": 780.16,
+      "end": 784.53,
+      "duration": 4.37,
+      "text": "But for our purposes, usually we will take b to be something"
+    },
+    {
+      "index": 252,
+      "start": 784.53,
+      "end": 786.5,
+      "duration": 1.97,
+      "text": "like a union of intervals."
+    },
+    {
+      "index": 253,
+      "start": 786.5,
+      "end": 790.2,
+      "duration": 3.7,
+      "text": "So how do you find the probability of falling in the"
+    },
+    {
+      "index": 254,
+      "start": 790.2,
+      "end": 791.69,
+      "duration": 1.49,
+      "text": "union of two intervals?"
+    },
+    {
+      "index": 255,
+      "start": 791.69,
+      "end": 794.18,
+      "duration": 2.49,
+      "text": "Well, you find the probability of falling in that interval"
+    },
+    {
+      "index": 256,
+      "start": 794.18,
+      "end": 796.24,
+      "duration": 2.06,
+      "text": "plus the probability of falling in that interval."
+    },
+    {
+      "index": 257,
+      "start": 796.24,
+      "end": 799.15,
+      "duration": 2.91,
+      "text": "So it's the integral over this interval plus the integral"
+    },
+    {
+      "index": 258,
+      "start": 799.15,
+      "end": 800.5,
+      "duration": 1.35,
+      "text": "over that interval."
+    },
+    {
+      "index": 259,
+      "start": 800.5,
+      "end": 804.37,
+      "duration": 3.87,
+      "text": "And you think of this as just integrating over the union of"
+    },
+    {
+      "index": 260,
+      "start": 804.37,
+      "end": 805.73,
+      "duration": 1.36,
+      "text": "the two intervals."
+    },
+    {
+      "index": 261,
+      "start": 805.73,
+      "end": 808.58,
+      "duration": 2.85,
+      "text": "So once you can calculate probabilities of intervals,"
+    },
+    {
+      "index": 262,
+      "start": 808.58,
+      "end": 810.59,
+      "duration": 2.01,
+      "text": "then usually you are in business, and you can"
+    },
+    {
+      "index": 263,
+      "start": 810.59,
+      "end": 814.0,
+      "duration": 3.41,
+      "text": "calculate anything else you might want."
+    },
+    {
+      "index": 264,
+      "start": 814.0,
+      "end": 816.33,
+      "duration": 2.33,
+      "text": "So the probability density function is a complete"
+    },
+    {
+      "index": 265,
+      "start": 816.33,
+      "end": 819.53,
+      "duration": 3.2,
+      "text": "description of any statistical information we might be"
+    },
+    {
+      "index": 266,
+      "start": 819.53,
+      "end": 824.425,
+      "duration": 4.895,
+      "text": "interested in for a continuous random variable."
+    },
+    {
+      "index": 267,
+      "start": 824.425,
+      "end": 824.88,
+      "duration": 0.455,
+      "text": "OK."
+    },
+    {
+      "index": 268,
+      "start": 824.88,
+      "end": 827.33,
+      "duration": 2.45,
+      "text": "So now we can start walking through the concepts and the"
+    },
+    {
+      "index": 269,
+      "start": 827.33,
+      "end": 831.73,
+      "duration": 4.4,
+      "text": "definitions that we have for discrete random variables and"
+    },
+    {
+      "index": 270,
+      "start": 831.73,
+      "end": 834.23,
+      "duration": 2.5,
+      "text": "translate them to the continuous case."
+    },
+    {
+      "index": 271,
+      "start": 834.23,
+      "end": 838.96,
+      "duration": 4.73,
+      "text": "The first big concept is the concept of the expectation."
+    },
+    {
+      "index": 272,
+      "start": 838.96,
+      "end": 841.68,
+      "duration": 2.72,
+      "text": "One can start with a mathematical definition."
+    },
+    {
+      "index": 273,
+      "start": 841.68,
+      "end": 844.81,
+      "duration": 3.13,
+      "text": "And here we put down a definition by"
+    },
+    {
+      "index": 274,
+      "start": 844.81,
+      "end": 847.73,
+      "duration": 2.92,
+      "text": "just translating notation."
+    },
+    {
+      "index": 275,
+      "start": 847.73,
+      "end": 851.16,
+      "duration": 3.43,
+      "text": "Wherever we have a sum in the discrete case, we"
+    },
+    {
+      "index": 276,
+      "start": 851.16,
+      "end": 853.06,
+      "duration": 1.9,
+      "text": "now write an integral."
+    },
+    {
+      "index": 277,
+      "start": 853.06,
+      "end": 856.31,
+      "duration": 3.25,
+      "text": "And wherever we had the probability mass function, we"
+    },
+    {
+      "index": 278,
+      "start": 856.31,
+      "end": 860.57,
+      "duration": 4.26,
+      "text": "now throw in the probability density function."
+    },
+    {
+      "index": 279,
+      "start": 860.57,
+      "end": 862.01,
+      "duration": 1.44,
+      "text": "This formula--"
+    },
+    {
+      "index": 280,
+      "start": 862.01,
+      "end": 864.2,
+      "duration": 2.19,
+      "text": "you may have seen it in freshman physics--"
+    },
+    {
+      "index": 281,
+      "start": 864.2,
+      "end": 868.19,
+      "duration": 3.99,
+      "text": "basically, it again gives you the center of gravity of the"
+    },
+    {
+      "index": 282,
+      "start": 868.19,
+      "end": 871.15,
+      "duration": 2.96,
+      "text": "picture that you have when you have the density."
+    },
+    {
+      "index": 283,
+      "start": 871.15,
+      "end": 876.46,
+      "duration": 5.31,
+      "text": "It's the center of gravity of the object sitting underneath"
+    },
+    {
+      "index": 284,
+      "start": 876.46,
+      "end": 878.22,
+      "duration": 1.76,
+      "text": "the probability density function."
+    },
+    {
+      "index": 285,
+      "start": 878.22,
+      "end": 880.9,
+      "duration": 2.68,
+      "text": "So that the interpretation still applies."
+    },
+    {
+      "index": 286,
+      "start": 880.9,
+      "end": 884.12,
+      "duration": 3.22,
+      "text": "It's also true that our conceptual interpretation of"
+    },
+    {
+      "index": 287,
+      "start": 884.12,
+      "end": 887.82,
+      "duration": 3.7,
+      "text": "what an expectation means is also valid in this case."
+    },
+    {
+      "index": 288,
+      "start": 887.82,
+      "end": 891.77,
+      "duration": 3.95,
+      "text": "That is, if you repeat an experiment a zillion times,"
+    },
+    {
+      "index": 289,
+      "start": 891.77,
+      "end": 894.1,
+      "duration": 2.33,
+      "text": "each time drawing an independent sample of your"
+    },
+    {
+      "index": 290,
+      "start": 894.1,
+      "end": 898.5,
+      "duration": 4.4,
+      "text": "random variable x, in the long run, the average that you are"
+    },
+    {
+      "index": 291,
+      "start": 898.5,
+      "end": 901.86,
+      "duration": 3.36,
+      "text": "going to get should be the expectation."
+    },
+    {
+      "index": 292,
+      "start": 901.86,
+      "end": 904.74,
+      "duration": 2.88,
+      "text": "One can reason in a hand-waving way, sort of"
+    },
+    {
+      "index": 293,
+      "start": 904.74,
+      "end": 907.44,
+      "duration": 2.7,
+      "text": "intuitively, the way we did it for the case of discrete"
+    },
+    {
+      "index": 294,
+      "start": 907.44,
+      "end": 908.77,
+      "duration": 1.33,
+      "text": "random variables."
+    },
+    {
+      "index": 295,
+      "start": 908.77,
+      "end": 911.94,
+      "duration": 3.17,
+      "text": "But this is also a theorem of some sort."
+    },
+    {
+      "index": 296,
+      "start": 911.94,
+      "end": 915.3,
+      "duration": 3.36,
+      "text": "It's a limit theorem that we're going to visit later on"
+    },
+    {
+      "index": 297,
+      "start": 915.3,
+      "end": 917.53,
+      "duration": 2.23,
+      "text": "in this class."
+    },
+    {
+      "index": 298,
+      "start": 917.53,
+      "end": 920.7,
+      "duration": 3.17,
+      "text": "Having defined the expectation and having claimed that the"
+    },
+    {
+      "index": 299,
+      "start": 920.7,
+      "end": 923.1,
+      "duration": 2.4,
+      "text": "interpretation of the expectation is that same as"
+    },
+    {
+      "index": 300,
+      "start": 923.1,
+      "end": 926.81,
+      "duration": 3.71,
+      "text": "before, then we can start taking just any formula you've"
+    },
+    {
+      "index": 301,
+      "start": 926.81,
+      "end": 928.58,
+      "duration": 1.77,
+      "text": "seen before and just translate it."
+    },
+    {
+      "index": 302,
+      "start": 928.58,
+      "end": 931.2,
+      "duration": 2.62,
+      "text": "So for example, to find the expected value of a function"
+    },
+    {
+      "index": 303,
+      "start": 931.2,
+      "end": 935.43,
+      "duration": 4.23,
+      "text": "of a continuous random variable, you do not have to"
+    },
+    {
+      "index": 304,
+      "start": 935.43,
+      "end": 939.13,
+      "duration": 3.7,
+      "text": "find the PDF or PMF of g(X)."
+    },
+    {
+      "index": 305,
+      "start": 939.13,
+      "end": 943.04,
+      "duration": 3.91,
+      "text": "You can just work directly with the original distribution"
+    },
+    {
+      "index": 306,
+      "start": 943.04,
+      "end": 944.99,
+      "duration": 1.95,
+      "text": "of the random variable capital X."
+    },
+    {
+      "index": 307,
+      "start": 944.99,
+      "end": 948.57,
+      "duration": 3.58,
+      "text": "And this formula is the same as for the discrete case."
+    },
+    {
+      "index": 308,
+      "start": 948.57,
+      "end": 950.88,
+      "duration": 2.31,
+      "text": "Sums get replaced by integrals."
+    },
+    {
+      "index": 309,
+      "start": 950.88,
+      "end": 954.34,
+      "duration": 3.46,
+      "text": "And PMFs get replaced by PDFs."
+    },
+    {
+      "index": 310,
+      "start": 954.34,
+      "end": 957.05,
+      "duration": 2.71,
+      "text": "And in particular, the variance of a random variable"
+    },
+    {
+      "index": 311,
+      "start": 957.05,
+      "end": 959.08,
+      "duration": 2.03,
+      "text": "is defined again the same way."
+    },
+    {
+      "index": 312,
+      "start": 959.08,
+      "end": 963.39,
+      "duration": 4.31,
+      "text": "The variance is the expected value, the average of the"
+    },
+    {
+      "index": 313,
+      "start": 963.39,
+      "end": 967.92,
+      "duration": 4.53,
+      "text": "distance of X from the mean and then squared."
+    },
+    {
+      "index": 314,
+      "start": 967.92,
+      "end": 970.69,
+      "duration": 2.77,
+      "text": "So it's the expected value for a random variable that takes"
+    },
+    {
+      "index": 315,
+      "start": 970.69,
+      "end": 972.5,
+      "duration": 1.81,
+      "text": "these numerical values."
+    },
+    {
+      "index": 316,
+      "start": 972.5,
+      "end": 977.25,
+      "duration": 4.75,
+      "text": "And same formula as before, integral and F instead of"
+    },
+    {
+      "index": 317,
+      "start": 977.25,
+      "end": 979.42,
+      "duration": 2.17,
+      "text": "summation, and the P."
+    },
+    {
+      "index": 318,
+      "start": 979.42,
+      "end": 983.09,
+      "duration": 3.67,
+      "text": "And the formulas that we have derived or formulas that you"
+    },
+    {
+      "index": 319,
+      "start": 983.09,
+      "end": 986.26,
+      "duration": 3.17,
+      "text": "have seen for the discrete case, they all go through the"
+    },
+    {
+      "index": 320,
+      "start": 986.26,
+      "end": 987.09,
+      "duration": 0.83,
+      "text": "continuous case."
+    },
+    {
+      "index": 321,
+      "start": 987.09,
+      "end": 991.99,
+      "duration": 4.9,
+      "text": "So for example, the useful relation for variances, which"
+    },
+    {
+      "index": 322,
+      "start": 991.99,
+      "end": 997.41,
+      "duration": 5.42,
+      "text": "is this one, remains true."
+    },
+    {
+      "index": 323,
+      "start": 997.41,
+      "end": 997.85,
+      "duration": 0.44,
+      "text": "All right."
+    },
+    {
+      "index": 324,
+      "start": 997.85,
+      "end": 999.79,
+      "duration": 1.94,
+      "text": "So time for an example."
+    },
+    {
+      "index": 325,
+      "start": 999.79,
+      "end": 1003.5,
+      "duration": 3.71,
+      "text": "The most simple example of a continuous random variable"
+    },
+    {
+      "index": 326,
+      "start": 1003.5,
+      "end": 1005.17,
+      "duration": 1.67,
+      "text": "that there is, is the so-called"
+    },
+    {
+      "index": 327,
+      "start": 1005.17,
+      "end": 1008.67,
+      "duration": 3.5,
+      "text": "uniform random variable."
+    },
+    {
+      "index": 328,
+      "start": 1008.67,
+      "end": 1011.94,
+      "duration": 3.27,
+      "text": "So the uniform random variable is described by a density"
+    },
+    {
+      "index": 329,
+      "start": 1011.94,
+      "end": 1015.54,
+      "duration": 3.6,
+      "text": "which is 0 except over an interval."
+    },
+    {
+      "index": 330,
+      "start": 1015.54,
+      "end": 1018.36,
+      "duration": 2.82,
+      "text": "And over that interval, it is constant."
+    },
+    {
+      "index": 331,
+      "start": 1018.36,
+      "end": 1020.19,
+      "duration": 1.83,
+      "text": "What is it meant to convey?"
+    },
+    {
+      "index": 332,
+      "start": 1020.19,
+      "end": 1024.829,
+      "duration": 4.639,
+      "text": "It's trying to convey the idea that all x's in this range are"
+    },
+    {
+      "index": 333,
+      "start": 1024.829,
+      "end": 1026.54,
+      "duration": 1.711,
+      "text": "equally likely."
+    },
+    {
+      "index": 334,
+      "start": 1026.54,
+      "end": 1028.39,
+      "duration": 1.85,
+      "text": "Well, that doesn't say very much."
+    },
+    {
+      "index": 335,
+      "start": 1028.39,
+      "end": 1031.17,
+      "duration": 2.78,
+      "text": "Any individual x has 0 probability."
+    },
+    {
+      "index": 336,
+      "start": 1031.17,
+      "end": 1033.46,
+      "duration": 2.29,
+      "text": "So it's conveying a little more than that."
+    },
+    {
+      "index": 337,
+      "start": 1033.46,
+      "end": 1038.0,
+      "duration": 4.54,
+      "text": "What it is saying is that if I take an interval of a given"
+    },
+    {
+      "index": 338,
+      "start": 1038.0,
+      "end": 1042.089,
+      "duration": 4.089,
+      "text": "length delta, and I take another interval of the same"
+    },
+    {
+      "index": 339,
+      "start": 1042.089,
+      "end": 1046.29,
+      "duration": 4.201,
+      "text": "length, delta, under the uniform distribution, these"
+    },
+    {
+      "index": 340,
+      "start": 1046.29,
+      "end": 1049.29,
+      "duration": 3.0,
+      "text": "two intervals are going to have the same probability."
+    },
+    {
+      "index": 341,
+      "start": 1049.29,
+      "end": 1054.67,
+      "duration": 5.38,
+      "text": "So being uniform means that intervals of same length have"
+    },
+    {
+      "index": 342,
+      "start": 1054.67,
+      "end": 1055.72,
+      "duration": 1.05,
+      "text": "the same probability."
+    },
+    {
+      "index": 343,
+      "start": 1055.72,
+      "end": 1060.39,
+      "duration": 4.67,
+      "text": "So no interval is more likely than any other to occur."
+    },
+    {
+      "index": 344,
+      "start": 1060.39,
+      "end": 1064.2,
+      "duration": 3.81,
+      "text": "And in that sense, it conveys the idea of sort of complete"
+    },
+    {
+      "index": 345,
+      "start": 1064.2,
+      "end": 1065.1,
+      "duration": 0.9,
+      "text": "randomness."
+    },
+    {
+      "index": 346,
+      "start": 1065.1,
+      "end": 1068.43,
+      "duration": 3.33,
+      "text": "Any little interval in our range is equally likely as any"
+    },
+    {
+      "index": 347,
+      "start": 1068.43,
+      "end": 1069.83,
+      "duration": 1.4,
+      "text": "other little interval."
+    },
+    {
+      "index": 348,
+      "start": 1069.83,
+      "end": 1070.26,
+      "duration": 0.43,
+      "text": "All right."
+    },
+    {
+      "index": 349,
+      "start": 1070.26,
+      "end": 1073.87,
+      "duration": 3.61,
+      "text": "So what's the formula for this density?"
+    },
+    {
+      "index": 350,
+      "start": 1073.87,
+      "end": 1075.28,
+      "duration": 1.41,
+      "text": "I only told you the range."
+    },
+    {
+      "index": 351,
+      "start": 1075.28,
+      "end": 1077.49,
+      "duration": 2.21,
+      "text": "What's the height?"
+    },
+    {
+      "index": 352,
+      "start": 1077.49,
+      "end": 1080.34,
+      "duration": 2.85,
+      "text": "Well, the area under the density must be equal to 1."
+    },
+    {
+      "index": 353,
+      "start": 1080.34,
+      "end": 1082.7,
+      "duration": 2.36,
+      "text": "Total probability is equal to 1."
+    },
+    {
+      "index": 354,
+      "start": 1082.7,
+      "end": 1087.1,
+      "duration": 4.4,
+      "text": "And so the height, inescapably, is going to be 1"
+    },
+    {
+      "index": 355,
+      "start": 1087.1,
+      "end": 1089.48,
+      "duration": 2.38,
+      "text": "over (b minus a)."
+    },
+    {
+      "index": 356,
+      "start": 1089.48,
+      "end": 1094.88,
+      "duration": 5.4,
+      "text": "That's the height that makes the density integrate to 1."
+    },
+    {
+      "index": 357,
+      "start": 1094.88,
+      "end": 1096.61,
+      "duration": 1.73,
+      "text": "So that's the formula."
+    },
+    {
+      "index": 358,
+      "start": 1096.61,
+      "end": 1101.24,
+      "duration": 4.63,
+      "text": "And if you don't want to lose one point in your exam, you"
+    },
+    {
+      "index": 359,
+      "start": 1101.24,
+      "end": 1105.946,
+      "duration": 4.706,
+      "text": "have to say that it's also 0, otherwise."
+    },
+    {
+      "index": 360,
+      "start": 1105.946,
+      "end": 1107.794,
+      "duration": 1.848,
+      "text": "OK."
+    },
+    {
+      "index": 361,
+      "start": 1107.794,
+      "end": 1108.26,
+      "duration": 0.466,
+      "text": "All right?"
+    },
+    {
+      "index": 362,
+      "start": 1108.26,
+      "end": 1111.76,
+      "duration": 3.5,
+      "text": "That's sort of the complete answer."
+    },
+    {
+      "index": 363,
+      "start": 1111.76,
+      "end": 1115.59,
+      "duration": 3.83,
+      "text": "How about the expected value of this random variable?"
+    },
+    {
+      "index": 364,
+      "start": 1115.59,
+      "end": 1116.06,
+      "duration": 0.47,
+      "text": "OK."
+    },
+    {
+      "index": 365,
+      "start": 1116.06,
+      "end": 1119.73,
+      "duration": 3.67,
+      "text": "You can find the expected value in two different ways."
+    },
+    {
+      "index": 366,
+      "start": 1119.73,
+      "end": 1122.4,
+      "duration": 2.67,
+      "text": "One is to start with the definition."
+    },
+    {
+      "index": 367,
+      "start": 1122.4,
+      "end": 1125.22,
+      "duration": 2.82,
+      "text": "And so you integrate over the range of"
+    },
+    {
+      "index": 368,
+      "start": 1125.22,
+      "end": 1127.185,
+      "duration": 1.965,
+      "text": "interest times the density."
+    },
+    {
+      "index": 369,
+      "start": 1130.35,
+      "end": 1135.46,
+      "duration": 5.11,
+      "text": "And you figure out what that integral is going to be."
+    },
+    {
+      "index": 370,
+      "start": 1135.46,
+      "end": 1137.8,
+      "duration": 2.34,
+      "text": "Or you can be a little more clever."
+    },
+    {
+      "index": 371,
+      "start": 1137.8,
+      "end": 1141.29,
+      "duration": 3.49,
+      "text": "Since the center-of-gravity interpretation is still true,"
+    },
+    {
+      "index": 372,
+      "start": 1141.29,
+      "end": 1143.89,
+      "duration": 2.6,
+      "text": "it must be the center of gravity of this picture."
+    },
+    {
+      "index": 373,
+      "start": 1143.89,
+      "end": 1146.68,
+      "duration": 2.79,
+      "text": "And the center of gravity is, of course, the midpoint."
+    },
+    {
+      "index": 374,
+      "start": 1146.68,
+      "end": 1151.74,
+      "duration": 5.06,
+      "text": "Whenever you have symmetry, the mean is always the"
+    },
+    {
+      "index": 375,
+      "start": 1151.74,
+      "end": 1160.63,
+      "duration": 8.89,
+      "text": "midpoint of the diagram that gives you the PDF."
+    },
+    {
+      "index": 376,
+      "start": 1160.63,
+      "end": 1162.18,
+      "duration": 1.55,
+      "text": "OK."
+    },
+    {
+      "index": 377,
+      "start": 1162.18,
+      "end": 1164.87,
+      "duration": 2.69,
+      "text": "So that's the expected value of X."
+    },
+    {
+      "index": 378,
+      "start": 1164.87,
+      "end": 1167.99,
+      "duration": 3.12,
+      "text": "Finally, regarding the variance, well, there you will"
+    },
+    {
+      "index": 379,
+      "start": 1167.99,
+      "end": 1170.24,
+      "duration": 2.25,
+      "text": "have to do a little bit of calculus."
+    },
+    {
+      "index": 380,
+      "start": 1170.24,
+      "end": 1173.46,
+      "duration": 3.22,
+      "text": "We can write down the definition."
+    },
+    {
+      "index": 381,
+      "start": 1173.46,
+      "end": 1175.93,
+      "duration": 2.47,
+      "text": "So it's an integral instead of a sum."
+    },
+    {
+      "index": 382,
+      "start": 1175.93,
+      "end": 1180.59,
+      "duration": 4.66,
+      "text": "A typical value of the random variable minus the expected"
+    },
+    {
+      "index": 383,
+      "start": 1180.59,
+      "end": 1184.28,
+      "duration": 3.69,
+      "text": "value, squared, times the density."
+    },
+    {
+      "index": 384,
+      "start": 1184.28,
+      "end": 1185.65,
+      "duration": 1.37,
+      "text": "And we integrate."
+    },
+    {
+      "index": 385,
+      "start": 1185.65,
+      "end": 1188.82,
+      "duration": 3.17,
+      "text": "You do this integral, and you find it's (b minus a) squared"
+    },
+    {
+      "index": 386,
+      "start": 1188.82,
+      "end": 1192.66,
+      "duration": 3.84,
+      "text": "over that number, which happens to be 12."
+    },
+    {
+      "index": 387,
+      "start": 1192.66,
+      "end": 1196.14,
+      "duration": 3.48,
+      "text": "Maybe more interesting is the standard deviation itself."
+    },
+    {
+      "index": 388,
+      "start": 1199.14,
+      "end": 1202.76,
+      "duration": 3.62,
+      "text": "And you see that the standard deviation is proportional to"
+    },
+    {
+      "index": 389,
+      "start": 1202.76,
+      "end": 1205.28,
+      "duration": 2.52,
+      "text": "the width of that interval."
+    },
+    {
+      "index": 390,
+      "start": 1205.28,
+      "end": 1207.85,
+      "duration": 2.57,
+      "text": "This agrees with our intuition, that the standard"
+    },
+    {
+      "index": 391,
+      "start": 1207.85,
+      "end": 1212.73,
+      "duration": 4.88,
+      "text": "deviation is meant to capture a sense of how spread out our"
+    },
+    {
+      "index": 392,
+      "start": 1212.73,
+      "end": 1214.0,
+      "duration": 1.27,
+      "text": "distribution is."
+    },
+    {
+      "index": 393,
+      "start": 1214.0,
+      "end": 1217.37,
+      "duration": 3.37,
+      "text": "And the standard deviation has the same units as the random"
+    },
+    {
+      "index": 394,
+      "start": 1217.37,
+      "end": 1219.04,
+      "duration": 1.67,
+      "text": "variable itself."
+    },
+    {
+      "index": 395,
+      "start": 1219.04,
+      "end": 1222.86,
+      "duration": 3.82,
+      "text": "So it's sort of good to-- you can interpret it in a"
+    },
+    {
+      "index": 396,
+      "start": 1222.86,
+      "end": 1227.18,
+      "duration": 4.32,
+      "text": "reasonable way based on that picture."
+    },
+    {
+      "index": 397,
+      "start": 1227.18,
+      "end": 1230.89,
+      "duration": 3.71,
+      "text": "OK, yes."
+    },
+    {
+      "index": 398,
+      "start": 1230.89,
+      "end": 1238.28,
+      "duration": 7.39,
+      "text": "Now, let's go up one level and think about the following."
+    },
+    {
+      "index": 399,
+      "start": 1238.28,
+      "end": 1241.74,
+      "duration": 3.46,
+      "text": "So we have formulas for the discrete case, formulas for"
+    },
+    {
+      "index": 400,
+      "start": 1241.74,
+      "end": 1242.69,
+      "duration": 0.95,
+      "text": "the continuous case."
+    },
+    {
+      "index": 401,
+      "start": 1242.69,
+      "end": 1244.42,
+      "duration": 1.73,
+      "text": "So you can write them side by side."
+    },
+    {
+      "index": 402,
+      "start": 1244.42,
+      "end": 1247.1,
+      "duration": 2.68,
+      "text": "One has sums, the other has integrals."
+    },
+    {
+      "index": 403,
+      "start": 1247.1,
+      "end": 1249.45,
+      "duration": 2.35,
+      "text": "Suppose you want to make an argument and say that"
+    },
+    {
+      "index": 404,
+      "start": 1249.45,
+      "end": 1252.16,
+      "duration": 2.71,
+      "text": "something is true for every random variable."
+    },
+    {
+      "index": 405,
+      "start": 1252.16,
+      "end": 1255.77,
+      "duration": 3.61,
+      "text": "You would essentially need to do two separate proofs, for"
+    },
+    {
+      "index": 406,
+      "start": 1255.77,
+      "end": 1257.51,
+      "duration": 1.74,
+      "text": "discrete and for continuous."
+    },
+    {
+      "index": 407,
+      "start": 1257.51,
+      "end": 1260.4,
+      "duration": 2.89,
+      "text": "Is there some way of dealing with random variables just one"
+    },
+    {
+      "index": 408,
+      "start": 1260.4,
+      "end": 1265.13,
+      "duration": 4.73,
+      "text": "at a time, in one shot, using a sort of uniform notation?"
+    },
+    {
+      "index": 409,
+      "start": 1265.13,
+      "end": 1267.99,
+      "duration": 2.86,
+      "text": "Is there a unifying concept?"
+    },
+    {
+      "index": 410,
+      "start": 1267.99,
+      "end": 1270.17,
+      "duration": 2.18,
+      "text": "Luckily, there is one."
+    },
+    {
+      "index": 411,
+      "start": 1270.17,
+      "end": 1272.4,
+      "duration": 2.23,
+      "text": "It's the notion of the cumulative distribution"
+    },
+    {
+      "index": 412,
+      "start": 1272.4,
+      "end": 1273.85,
+      "duration": 1.45,
+      "text": "function of a random variable."
+    },
+    {
+      "index": 413,
+      "start": 1276.4,
+      "end": 1280.73,
+      "duration": 4.33,
+      "text": "And it's a concept that applies equally well to"
+    },
+    {
+      "index": 414,
+      "start": 1280.73,
+      "end": 1282.89,
+      "duration": 2.16,
+      "text": "discrete and continuous random variables."
+    },
+    {
+      "index": 415,
+      "start": 1282.89,
+      "end": 1286.21,
+      "duration": 3.32,
+      "text": "So it's an object that we can use to describe distributions"
+    },
+    {
+      "index": 416,
+      "start": 1286.21,
+      "end": 1289.34,
+      "duration": 3.13,
+      "text": "in both cases, using just one piece of notation."
+    },
+    {
+      "index": 417,
+      "start": 1292.07,
+      "end": 1293.6,
+      "duration": 1.53,
+      "text": "So what's the definition?"
+    },
+    {
+      "index": 418,
+      "start": 1293.6,
+      "end": 1296.29,
+      "duration": 2.69,
+      "text": "It's the probability that the random variable takes values"
+    },
+    {
+      "index": 419,
+      "start": 1296.29,
+      "end": 1299.03,
+      "duration": 2.74,
+      "text": "less than a certain number little x."
+    },
+    {
+      "index": 420,
+      "start": 1299.03,
+      "end": 1301.44,
+      "duration": 2.41,
+      "text": "So you go to the diagram, and you see what's the probability"
+    },
+    {
+      "index": 421,
+      "start": 1301.44,
+      "end": 1304.06,
+      "duration": 2.62,
+      "text": "that I'm falling to the left of this."
+    },
+    {
+      "index": 422,
+      "start": 1304.06,
+      "end": 1307.68,
+      "duration": 3.62,
+      "text": "And you specify those probabilities for all x's."
+    },
+    {
+      "index": 423,
+      "start": 1307.68,
+      "end": 1311.4,
+      "duration": 3.72,
+      "text": "In the continuous case, you calculate those probabilities"
+    },
+    {
+      "index": 424,
+      "start": 1311.4,
+      "end": 1313.09,
+      "duration": 1.69,
+      "text": "using the integral formula."
+    },
+    {
+      "index": 425,
+      "start": 1313.09,
+      "end": 1315.73,
+      "duration": 2.64,
+      "text": "So you integrate from here up to x."
+    },
+    {
+      "index": 426,
+      "start": 1315.73,
+      "end": 1318.85,
+      "duration": 3.12,
+      "text": "In the discrete case, to find the probability to the left of"
+    },
+    {
+      "index": 427,
+      "start": 1318.85,
+      "end": 1322.79,
+      "duration": 3.94,
+      "text": "some point, you go here, and you add probabilities again"
+    },
+    {
+      "index": 428,
+      "start": 1322.79,
+      "end": 1323.98,
+      "duration": 1.19,
+      "text": "from the left."
+    },
+    {
+      "index": 429,
+      "start": 1323.98,
+      "end": 1326.77,
+      "duration": 2.79,
+      "text": "So the way that the cumulative distribution function is"
+    },
+    {
+      "index": 430,
+      "start": 1326.77,
+      "end": 1330.01,
+      "duration": 3.24,
+      "text": "calculated is a little different in the continuous"
+    },
+    {
+      "index": 431,
+      "start": 1330.01,
+      "end": 1330.85,
+      "duration": 0.84,
+      "text": "and discrete case."
+    },
+    {
+      "index": 432,
+      "start": 1330.85,
+      "end": 1331.99,
+      "duration": 1.14,
+      "text": "In one case you integrate."
+    },
+    {
+      "index": 433,
+      "start": 1331.99,
+      "end": 1333.44,
+      "duration": 1.45,
+      "text": "In the other, you sum."
+    },
+    {
+      "index": 434,
+      "start": 1333.44,
+      "end": 1338.34,
+      "duration": 4.9,
+      "text": "But leaving aside how it's being calculated, what the"
+    },
+    {
+      "index": 435,
+      "start": 1338.34,
+      "end": 1342.53,
+      "duration": 4.19,
+      "text": "concept is, it's the same concept in both cases."
+    },
+    {
+      "index": 436,
+      "start": 1342.53,
+      "end": 1345.81,
+      "duration": 3.28,
+      "text": "So let's see what the shape of the cumulative distribution"
+    },
+    {
+      "index": 437,
+      "start": 1345.81,
+      "end": 1348.36,
+      "duration": 2.55,
+      "text": "function would be in the two cases."
+    },
+    {
+      "index": 438,
+      "start": 1348.36,
+      "end": 1354.1,
+      "duration": 5.74,
+      "text": "So here what we want is to record for every little x the"
+    },
+    {
+      "index": 439,
+      "start": 1354.1,
+      "end": 1356.76,
+      "duration": 2.66,
+      "text": "probability of falling to the left of x."
+    },
+    {
+      "index": 440,
+      "start": 1356.76,
+      "end": 1358.24,
+      "duration": 1.48,
+      "text": "So let's start here."
+    },
+    {
+      "index": 441,
+      "start": 1358.24,
+      "end": 1361.58,
+      "duration": 3.34,
+      "text": "Probability of falling to the left of here is 0--"
+    },
+    {
+      "index": 442,
+      "start": 1361.58,
+      "end": 1363.55,
+      "duration": 1.97,
+      "text": "0, 0, 0."
+    },
+    {
+      "index": 443,
+      "start": 1363.55,
+      "end": 1367.28,
+      "duration": 3.73,
+      "text": "Once we get here and we start moving to the right, the"
+    },
+    {
+      "index": 444,
+      "start": 1367.28,
+      "end": 1371.75,
+      "duration": 4.47,
+      "text": "probability of falling to the left of here is the area of"
+    },
+    {
+      "index": 445,
+      "start": 1371.75,
+      "end": 1373.61,
+      "duration": 1.86,
+      "text": "this little rectangle."
+    },
+    {
+      "index": 446,
+      "start": 1373.61,
+      "end": 1377.59,
+      "duration": 3.98,
+      "text": "And the area of that little rectangle increases linearly"
+    },
+    {
+      "index": 447,
+      "start": 1377.59,
+      "end": 1379.29,
+      "duration": 1.7,
+      "text": "as I keep moving."
+    },
+    {
+      "index": 448,
+      "start": 1379.29,
+      "end": 1383.78,
+      "duration": 4.49,
+      "text": "So accordingly, the CDF increases linearly until I get"
+    },
+    {
+      "index": 449,
+      "start": 1383.78,
+      "end": 1384.87,
+      "duration": 1.09,
+      "text": "to that point."
+    },
+    {
+      "index": 450,
+      "start": 1384.87,
+      "end": 1388.67,
+      "duration": 3.8,
+      "text": "At that point, what's the value of my CDF?"
+    },
+    {
+      "index": 451,
+      "start": 1388.67,
+      "end": 1389.02,
+      "duration": 0.35,
+      "text": "1."
+    },
+    {
+      "index": 452,
+      "start": 1389.02,
+      "end": 1391.4,
+      "duration": 2.38,
+      "text": "I have accumulated all the probability there is."
+    },
+    {
+      "index": 453,
+      "start": 1391.4,
+      "end": 1393.18,
+      "duration": 1.78,
+      "text": "I have integrated it."
+    },
+    {
+      "index": 454,
+      "start": 1393.18,
+      "end": 1395.89,
+      "duration": 2.71,
+      "text": "This total area has to be equal to 1."
+    },
+    {
+      "index": 455,
+      "start": 1395.89,
+      "end": 1398.78,
+      "duration": 2.89,
+      "text": "So it reaches 1, and then there's no more probability to"
+    },
+    {
+      "index": 456,
+      "start": 1398.78,
+      "end": 1400.04,
+      "duration": 1.26,
+      "text": "be accumulated."
+    },
+    {
+      "index": 457,
+      "start": 1400.04,
+      "end": 1403.17,
+      "duration": 3.13,
+      "text": "It just stays at 1."
+    },
+    {
+      "index": 458,
+      "start": 1403.17,
+      "end": 1408.05,
+      "duration": 4.88,
+      "text": "So the value here is equal to 1."
+    },
+    {
+      "index": 459,
+      "start": 1408.05,
+      "end": 1410.27,
+      "duration": 2.22,
+      "text": "OK."
+    },
+    {
+      "index": 460,
+      "start": 1410.27,
+      "end": 1416.716,
+      "duration": 6.446,
+      "text": "How would you find the density if somebody gave you the CDF?"
+    },
+    {
+      "index": 461,
+      "start": 1416.716,
+      "end": 1419.57,
+      "duration": 2.854,
+      "text": "The CDF is the integral of the density."
+    },
+    {
+      "index": 462,
+      "start": 1419.57,
+      "end": 1423.82,
+      "duration": 4.25,
+      "text": "Therefore, the density is the derivative of the CDF."
+    },
+    {
+      "index": 463,
+      "start": 1423.82,
+      "end": 1426.19,
+      "duration": 2.37,
+      "text": "So you look at this picture and take the derivative."
+    },
+    {
+      "index": 464,
+      "start": 1426.19,
+      "end": 1428.58,
+      "duration": 2.39,
+      "text": "Derivative is 0 here, 0 here."
+    },
+    {
+      "index": 465,
+      "start": 1428.58,
+      "end": 1431.33,
+      "duration": 2.75,
+      "text": "And it's a constant up there, which"
+    },
+    {
+      "index": 466,
+      "start": 1431.33,
+      "end": 1433.12,
+      "duration": 1.79,
+      "text": "corresponds to that constant."
+    },
+    {
+      "index": 467,
+      "start": 1433.12,
+      "end": 1436.9,
+      "duration": 3.78,
+      "text": "So more generally, and an important thing to know, is"
+    },
+    {
+      "index": 468,
+      "start": 1436.9,
+      "end": 1444.25,
+      "duration": 7.35,
+      "text": "that the derivative of the CDF is equal to the density--"
+    },
+    {
+      "index": 469,
+      "start": 1450.21,
+      "end": 1454.17,
+      "duration": 3.96,
+      "text": "almost, with a little bit of an exception."
+    },
+    {
+      "index": 470,
+      "start": 1454.17,
+      "end": 1455.8,
+      "duration": 1.63,
+      "text": "What's the exception?"
+    },
+    {
+      "index": 471,
+      "start": 1455.8,
+      "end": 1459.2,
+      "duration": 3.4,
+      "text": "At those places where the CDF does not have a derivative--"
+    },
+    {
+      "index": 472,
+      "start": 1459.2,
+      "end": 1461.52,
+      "duration": 2.32,
+      "text": "here where it has a corner--"
+    },
+    {
+      "index": 473,
+      "start": 1461.52,
+      "end": 1463.72,
+      "duration": 2.2,
+      "text": "the derivative is undefined."
+    },
+    {
+      "index": 474,
+      "start": 1463.72,
+      "end": 1466.03,
+      "duration": 2.31,
+      "text": "And in some sense, the density is also"
+    },
+    {
+      "index": 475,
+      "start": 1466.03,
+      "end": 1467.46,
+      "duration": 1.43,
+      "text": "ambiguous at that point."
+    },
+    {
+      "index": 476,
+      "start": 1467.46,
+      "end": 1471.86,
+      "duration": 4.4,
+      "text": "Is my density at the endpoint, is it 0 or is it 1?"
+    },
+    {
+      "index": 477,
+      "start": 1471.86,
+      "end": 1473.33,
+      "duration": 1.47,
+      "text": "It doesn't really matter."
+    },
+    {
+      "index": 478,
+      "start": 1473.33,
+      "end": 1476.67,
+      "duration": 3.34,
+      "text": "If you change the density at just a single point, it's not"
+    },
+    {
+      "index": 479,
+      "start": 1476.67,
+      "end": 1479.0,
+      "duration": 2.33,
+      "text": "going to affect the value of any"
+    },
+    {
+      "index": 480,
+      "start": 1479.0,
+      "end": 1481.53,
+      "duration": 2.53,
+      "text": "integral you ever calculate."
+    },
+    {
+      "index": 481,
+      "start": 1481.53,
+      "end": 1484.9,
+      "duration": 3.37,
+      "text": "So the value of the density at the endpoint, you can leave it"
+    },
+    {
+      "index": 482,
+      "start": 1484.9,
+      "end": 1487.39,
+      "duration": 2.49,
+      "text": "as being ambiguous, or you can specify it."
+    },
+    {
+      "index": 483,
+      "start": 1487.39,
+      "end": 1489.13,
+      "duration": 1.74,
+      "text": "It doesn't matter."
+    },
+    {
+      "index": 484,
+      "start": 1489.13,
+      "end": 1493.59,
+      "duration": 4.46,
+      "text": "So at all places where the CDF has a derivative,"
+    },
+    {
+      "index": 485,
+      "start": 1493.59,
+      "end": 1494.97,
+      "duration": 1.38,
+      "text": "this will be true."
+    },
+    {
+      "index": 486,
+      "start": 1494.97,
+      "end": 1498.47,
+      "duration": 3.5,
+      "text": "At those places where you have corners, which do show up"
+    },
+    {
+      "index": 487,
+      "start": 1498.47,
+      "end": 1501.74,
+      "duration": 3.27,
+      "text": "sometimes, well, you don't really care."
+    },
+    {
+      "index": 488,
+      "start": 1501.74,
+      "end": 1503.64,
+      "duration": 1.9,
+      "text": "How about the discrete case?"
+    },
+    {
+      "index": 489,
+      "start": 1503.64,
+      "end": 1507.45,
+      "duration": 3.81,
+      "text": "In the discrete case, the CDF has a more peculiar shape."
+    },
+    {
+      "index": 490,
+      "start": 1507.45,
+      "end": 1508.87,
+      "duration": 1.42,
+      "text": "So let's do the calculation."
+    },
+    {
+      "index": 491,
+      "start": 1508.87,
+      "end": 1510.44,
+      "duration": 1.57,
+      "text": "We want to find the probability of b"
+    },
+    {
+      "index": 492,
+      "start": 1510.44,
+      "end": 1511.92,
+      "duration": 1.48,
+      "text": "to the left of here."
+    },
+    {
+      "index": 493,
+      "start": 1511.92,
+      "end": 1513.97,
+      "duration": 2.05,
+      "text": "That probability is 0, 0, 0."
+    },
+    {
+      "index": 494,
+      "start": 1513.97,
+      "end": 1516.17,
+      "duration": 2.2,
+      "text": "Once we cross that point, the probability of being to the"
+    },
+    {
+      "index": 495,
+      "start": 1516.17,
+      "end": 1519.14,
+      "duration": 2.97,
+      "text": "left of here is 1/6."
+    },
+    {
+      "index": 496,
+      "start": 1519.14,
+      "end": 1522.03,
+      "duration": 2.89,
+      "text": "So as soon as we cross the point 1, we get the"
+    },
+    {
+      "index": 497,
+      "start": 1522.03,
+      "end": 1525.74,
+      "duration": 3.71,
+      "text": "probability of 1/6, which means that the size of the"
+    },
+    {
+      "index": 498,
+      "start": 1525.74,
+      "end": 1529.23,
+      "duration": 3.49,
+      "text": "jump that we have here is 1/6."
+    },
+    {
+      "index": 499,
+      "start": 1529.23,
+      "end": 1531.02,
+      "duration": 1.79,
+      "text": "Now, question."
+    },
+    {
+      "index": 500,
+      "start": 1531.02,
+      "end": 1535.175,
+      "duration": 4.155,
+      "text": "At this point 1, which is the correct value of the CDF?"
+    },
+    {
+      "index": 501,
+      "start": 1535.175,
+      "end": 1539.09,
+      "duration": 3.915,
+      "text": "Is it 0, or is it 1/6?"
+    },
+    {
+      "index": 502,
+      "start": 1539.09,
+      "end": 1540.56,
+      "duration": 1.47,
+      "text": "It's 1/6 because--"
+    },
+    {
+      "index": 503,
+      "start": 1540.56,
+      "end": 1542.54,
+      "duration": 1.98,
+      "text": "you need to look carefully at the definitions, the"
+    },
+    {
+      "index": 504,
+      "start": 1542.54,
+      "end": 1546.18,
+      "duration": 3.64,
+      "text": "probability of x being less than or equal to little x."
+    },
+    {
+      "index": 505,
+      "start": 1546.18,
+      "end": 1549.23,
+      "duration": 3.05,
+      "text": "If I take little x to be 1, it's the probability that"
+    },
+    {
+      "index": 506,
+      "start": 1549.23,
+      "end": 1551.9,
+      "duration": 2.67,
+      "text": "capital X is less than or equal to 1."
+    },
+    {
+      "index": 507,
+      "start": 1551.9,
+      "end": 1555.73,
+      "duration": 3.83,
+      "text": "So it includes the event that x is equal to 1."
+    },
+    {
+      "index": 508,
+      "start": 1555.73,
+      "end": 1558.13,
+      "duration": 2.4,
+      "text": "So it includes this probability here."
+    },
+    {
+      "index": 509,
+      "start": 1558.13,
+      "end": 1562.71,
+      "duration": 4.58,
+      "text": "So at jump points, the correct value of the CDF is going to"
+    },
+    {
+      "index": 510,
+      "start": 1562.71,
+      "end": 1564.65,
+      "duration": 1.94,
+      "text": "be this one."
+    },
+    {
+      "index": 511,
+      "start": 1564.65,
+      "end": 1568.13,
+      "duration": 3.48,
+      "text": "And now as I trace, x is going to the right."
+    },
+    {
+      "index": 512,
+      "start": 1568.13,
+      "end": 1572.75,
+      "duration": 4.62,
+      "text": "As soon as I cross this point, I have added another 3/6"
+    },
+    {
+      "index": 513,
+      "start": 1572.75,
+      "end": 1574.18,
+      "duration": 1.43,
+      "text": "probability."
+    },
+    {
+      "index": 514,
+      "start": 1574.18,
+      "end": 1580.35,
+      "duration": 6.17,
+      "text": "So that 3/6 causes a jump to the CDF."
+    },
+    {
+      "index": 515,
+      "start": 1580.35,
+      "end": 1583.28,
+      "duration": 2.93,
+      "text": "And that determines the new value."
+    },
+    {
+      "index": 516,
+      "start": 1583.28,
+      "end": 1587.86,
+      "duration": 4.58,
+      "text": "And finally, once I cross the last point, I get"
+    },
+    {
+      "index": 517,
+      "start": 1587.86,
+      "end": 1591.631,
+      "duration": 3.771,
+      "text": "another jump of 2/6."
+    },
+    {
+      "index": 518,
+      "start": 1591.631,
+      "end": 1595.9,
+      "duration": 4.269,
+      "text": "A general moral from these two examples and these pictures."
+    },
+    {
+      "index": 519,
+      "start": 1595.9,
+      "end": 1599.27,
+      "duration": 3.37,
+      "text": "CDFs are well defined in both cases."
+    },
+    {
+      "index": 520,
+      "start": 1599.27,
+      "end": 1602.49,
+      "duration": 3.22,
+      "text": "For the case of continuous random variables, the CDF will"
+    },
+    {
+      "index": 521,
+      "start": 1602.49,
+      "end": 1605.0,
+      "duration": 2.51,
+      "text": "be a continuous function."
+    },
+    {
+      "index": 522,
+      "start": 1605.0,
+      "end": 1606.33,
+      "duration": 1.33,
+      "text": "It starts from 0."
+    },
+    {
+      "index": 523,
+      "start": 1606.33,
+      "end": 1609.76,
+      "duration": 3.43,
+      "text": "It eventually goes to 1 and goes smoothly--"
+    },
+    {
+      "index": 524,
+      "start": 1609.76,
+      "end": 1614.1,
+      "duration": 4.34,
+      "text": "well, continuously from smaller to higher values."
+    },
+    {
+      "index": 525,
+      "start": 1614.1,
+      "end": 1615.2,
+      "duration": 1.1,
+      "text": "It can only go up."
+    },
+    {
+      "index": 526,
+      "start": 1615.2,
+      "end": 1618.3,
+      "duration": 3.1,
+      "text": "It cannot go down since we're accumulating more and more"
+    },
+    {
+      "index": 527,
+      "start": 1618.3,
+      "end": 1620.23,
+      "duration": 1.93,
+      "text": "probability as we are going to the right."
+    },
+    {
+      "index": 528,
+      "start": 1620.23,
+      "end": 1623.16,
+      "duration": 2.93,
+      "text": "In the discrete case, again it starts from 0,"
+    },
+    {
+      "index": 529,
+      "start": 1623.16,
+      "end": 1624.61,
+      "duration": 1.45,
+      "text": "and it goes to 1."
+    },
+    {
+      "index": 530,
+      "start": 1624.61,
+      "end": 1627.74,
+      "duration": 3.13,
+      "text": "But it does it in a staircase manner."
+    },
+    {
+      "index": 531,
+      "start": 1627.74,
+      "end": 1633.05,
+      "duration": 5.31,
+      "text": "And you get a jump at each place where the PMF assigns a"
+    },
+    {
+      "index": 532,
+      "start": 1633.05,
+      "end": 1634.66,
+      "duration": 1.61,
+      "text": "positive mass."
+    },
+    {
+      "index": 533,
+      "start": 1634.66,
+      "end": 1639.56,
+      "duration": 4.9,
+      "text": "So jumps in the CDF are associated with point masses"
+    },
+    {
+      "index": 534,
+      "start": 1639.56,
+      "end": 1640.33,
+      "duration": 0.77,
+      "text": "in our distribution."
+    },
+    {
+      "index": 535,
+      "start": 1640.33,
+      "end": 1643.57,
+      "duration": 3.24,
+      "text": "In the continuous case, we don't have any point masses,"
+    },
+    {
+      "index": 536,
+      "start": 1643.57,
+      "end": 1645.47,
+      "duration": 1.9,
+      "text": "so we do not have any jumps either."
+    },
+    {
+      "index": 537,
+      "start": 1650.39,
+      "end": 1653.3,
+      "duration": 2.91,
+      "text": "Now, besides saving us notation--"
+    },
+    {
+      "index": 538,
+      "start": 1653.3,
+      "end": 1656.02,
+      "duration": 2.72,
+      "text": "we don't have to deal with discrete"
+    },
+    {
+      "index": 539,
+      "start": 1656.02,
+      "end": 1659.0,
+      "duration": 2.98,
+      "text": "and continuous twice--"
+    },
+    {
+      "index": 540,
+      "start": 1659.0,
+      "end": 1663.24,
+      "duration": 4.24,
+      "text": "CDFs give us actually a little more flexibility."
+    },
+    {
+      "index": 541,
+      "start": 1663.24,
+      "end": 1666.84,
+      "duration": 3.6,
+      "text": "Not all random variables are continuous or discrete."
+    },
+    {
+      "index": 542,
+      "start": 1666.84,
+      "end": 1669.79,
+      "duration": 2.95,
+      "text": "You can cook up random variables that are kind of"
+    },
+    {
+      "index": 543,
+      "start": 1669.79,
+      "end": 1673.41,
+      "duration": 3.62,
+      "text": "neither or a mixture of the two."
+    },
+    {
+      "index": 544,
+      "start": 1673.41,
+      "end": 1679.54,
+      "duration": 6.13,
+      "text": "An example would be, let's say you play a game."
+    },
+    {
+      "index": 545,
+      "start": 1679.54,
+      "end": 1683.62,
+      "duration": 4.08,
+      "text": "And with a certain probability, you get a certain"
+    },
+    {
+      "index": 546,
+      "start": 1683.62,
+      "end": 1685.69,
+      "duration": 2.07,
+      "text": "number of dollars in your hands."
+    },
+    {
+      "index": 547,
+      "start": 1685.69,
+      "end": 1687.0,
+      "duration": 1.31,
+      "text": "So you flip a coin."
+    },
+    {
+      "index": 548,
+      "start": 1687.0,
+      "end": 1694.12,
+      "duration": 7.12,
+      "text": "And with probability 1/2, you get a reward of 1/2 dollars."
+    },
+    {
+      "index": 549,
+      "start": 1694.12,
+      "end": 1698.43,
+      "duration": 4.31,
+      "text": "And with probability 1/2, you are led to a dark room where"
+    },
+    {
+      "index": 550,
+      "start": 1698.43,
+      "end": 1700.58,
+      "duration": 2.15,
+      "text": "you spin a wheel of fortune."
+    },
+    {
+      "index": 551,
+      "start": 1700.58,
+      "end": 1703.41,
+      "duration": 2.83,
+      "text": "And that wheel of fortune gives you a random reward"
+    },
+    {
+      "index": 552,
+      "start": 1703.41,
+      "end": 1705.61,
+      "duration": 2.2,
+      "text": "between 0 and 1."
+    },
+    {
+      "index": 553,
+      "start": 1705.61,
+      "end": 1708.6,
+      "duration": 2.99,
+      "text": "So any of these outcomes is possible."
+    },
+    {
+      "index": 554,
+      "start": 1708.6,
+      "end": 1711.1,
+      "duration": 2.5,
+      "text": "And the amount that you're going to get,"
+    },
+    {
+      "index": 555,
+      "start": 1711.1,
+      "end": 1713.93,
+      "duration": 2.83,
+      "text": "let's say, is uniform."
+    },
+    {
+      "index": 556,
+      "start": 1713.93,
+      "end": 1715.64,
+      "duration": 1.71,
+      "text": "So you flip a coin."
+    },
+    {
+      "index": 557,
+      "start": 1715.64,
+      "end": 1718.36,
+      "duration": 2.72,
+      "text": "And depending on the outcome of the coin, either you get a"
+    },
+    {
+      "index": 558,
+      "start": 1718.36,
+      "end": 1723.53,
+      "duration": 5.17,
+      "text": "certain value or you get a value that ranges over a"
+    },
+    {
+      "index": 559,
+      "start": 1723.53,
+      "end": 1725.36,
+      "duration": 1.83,
+      "text": "continuous interval."
+    },
+    {
+      "index": 560,
+      "start": 1725.36,
+      "end": 1728.38,
+      "duration": 3.02,
+      "text": "So what kind of random variable is it?"
+    },
+    {
+      "index": 561,
+      "start": 1728.38,
+      "end": 1730.28,
+      "duration": 1.9,
+      "text": "Is it continuous?"
+    },
+    {
+      "index": 562,
+      "start": 1730.28,
+      "end": 1734.1,
+      "duration": 3.82,
+      "text": "Well, continuous random variables assign 0 probability"
+    },
+    {
+      "index": 563,
+      "start": 1734.1,
+      "end": 1736.18,
+      "duration": 2.08,
+      "text": "to individual points."
+    },
+    {
+      "index": 564,
+      "start": 1736.18,
+      "end": 1738.02,
+      "duration": 1.84,
+      "text": "Is it the case here?"
+    },
+    {
+      "index": 565,
+      "start": 1738.02,
+      "end": 1740.68,
+      "duration": 2.66,
+      "text": "No, because you have positive probability of"
+    },
+    {
+      "index": 566,
+      "start": 1740.68,
+      "end": 1744.74,
+      "duration": 4.06,
+      "text": "obtaining 1/2 dollar."
+    },
+    {
+      "index": 567,
+      "start": 1744.74,
+      "end": 1747.04,
+      "duration": 2.3,
+      "text": "So our random variable is not continuous."
+    },
+    {
+      "index": 568,
+      "start": 1747.04,
+      "end": 1748.22,
+      "duration": 1.18,
+      "text": "Is it discrete?"
+    },
+    {
+      "index": 569,
+      "start": 1748.22,
+      "end": 1751.6,
+      "duration": 3.38,
+      "text": "It's not discrete, because our random variable can take"
+    },
+    {
+      "index": 570,
+      "start": 1751.6,
+      "end": 1754.26,
+      "duration": 2.66,
+      "text": "values also over a continuous range."
+    },
+    {
+      "index": 571,
+      "start": 1754.26,
+      "end": 1756.78,
+      "duration": 2.52,
+      "text": "So we call such a random variable a"
+    },
+    {
+      "index": 572,
+      "start": 1756.78,
+      "end": 1759.38,
+      "duration": 2.6,
+      "text": "mixed random variable."
+    },
+    {
+      "index": 573,
+      "start": 1759.38,
+      "end": 1767.2,
+      "duration": 7.82,
+      "text": "If you were to draw its distribution very loosely,"
+    },
+    {
+      "index": 574,
+      "start": 1767.2,
+      "end": 1773.74,
+      "duration": 6.54,
+      "text": "probably you would want to draw a picture like this one,"
+    },
+    {
+      "index": 575,
+      "start": 1773.74,
+      "end": 1776.71,
+      "duration": 2.97,
+      "text": "which kind of conveys the idea of what's going on."
+    },
+    {
+      "index": 576,
+      "start": 1776.71,
+      "end": 1779.69,
+      "duration": 2.98,
+      "text": "So just think of this as a drawing of masses that are"
+    },
+    {
+      "index": 577,
+      "start": 1779.69,
+      "end": 1781.84,
+      "duration": 2.15,
+      "text": "sitting over a table."
+    },
+    {
+      "index": 578,
+      "start": 1781.84,
+      "end": 1787.94,
+      "duration": 6.1,
+      "text": "We place an object that weighs half a pound, but it's an"
+    },
+    {
+      "index": 579,
+      "start": 1787.94,
+      "end": 1790.23,
+      "duration": 2.29,
+      "text": "object that takes zero space."
+    },
+    {
+      "index": 580,
+      "start": 1790.23,
+      "end": 1793.72,
+      "duration": 3.49,
+      "text": "So half a pound is just sitting on top of that point."
+    },
+    {
+      "index": 581,
+      "start": 1793.72,
+      "end": 1797.98,
+      "duration": 4.26,
+      "text": "And we take another half-pound of probability and spread it"
+    },
+    {
+      "index": 582,
+      "start": 1797.98,
+      "end": 1800.74,
+      "duration": 2.76,
+      "text": "uniformly over that interval."
+    },
+    {
+      "index": 583,
+      "start": 1800.74,
+      "end": 1804.82,
+      "duration": 4.08,
+      "text": "So this is like a piece that comes from mass functions."
+    },
+    {
+      "index": 584,
+      "start": 1804.82,
+      "end": 1808.06,
+      "duration": 3.24,
+      "text": "And that's a piece that looks more like a density function."
+    },
+    {
+      "index": 585,
+      "start": 1808.06,
+      "end": 1810.92,
+      "duration": 2.86,
+      "text": "And we just throw them together in the picture."
+    },
+    {
+      "index": 586,
+      "start": 1810.92,
+      "end": 1813.15,
+      "duration": 2.23,
+      "text": "I'm not trying to associate any formal"
+    },
+    {
+      "index": 587,
+      "start": 1813.15,
+      "end": 1814.31,
+      "duration": 1.16,
+      "text": "meaning with this picture."
+    },
+    {
+      "index": 588,
+      "start": 1814.31,
+      "end": 1818.41,
+      "duration": 4.1,
+      "text": "It's just a schematic of how probabilities are distributed,"
+    },
+    {
+      "index": 589,
+      "start": 1818.41,
+      "end": 1820.86,
+      "duration": 2.45,
+      "text": "help us visualize what's going on."
+    },
+    {
+      "index": 590,
+      "start": 1820.86,
+      "end": 1826.08,
+      "duration": 5.22,
+      "text": "Now, if you have taken classes on systems and all of that,"
+    },
+    {
+      "index": 591,
+      "start": 1826.08,
+      "end": 1829.89,
+      "duration": 3.81,
+      "text": "you may have seen the concept of an impulse function."
+    },
+    {
+      "index": 592,
+      "start": 1829.89,
+      "end": 1833.63,
+      "duration": 3.74,
+      "text": "And you my start saying that, oh, I should treat this"
+    },
+    {
+      "index": 593,
+      "start": 1833.63,
+      "end": 1836.19,
+      "duration": 2.56,
+      "text": "mathematically as a so-called impulse function."
+    },
+    {
+      "index": 594,
+      "start": 1836.19,
+      "end": 1839.4,
+      "duration": 3.21,
+      "text": "But we do not need this for our purposes in this class."
+    },
+    {
+      "index": 595,
+      "start": 1839.4,
+      "end": 1843.86,
+      "duration": 4.46,
+      "text": "Just think of this as a nice picture that conveys what's"
+    },
+    {
+      "index": 596,
+      "start": 1843.86,
+      "end": 1846.2,
+      "duration": 2.34,
+      "text": "going on in this particular case."
+    },
+    {
+      "index": 597,
+      "start": 1846.2,
+      "end": 1851.74,
+      "duration": 5.54,
+      "text": "So now, what would the CDF look like in this case?"
+    },
+    {
+      "index": 598,
+      "start": 1851.74,
+      "end": 1855.55,
+      "duration": 3.81,
+      "text": "The CDF is always well defined, no matter what kind"
+    },
+    {
+      "index": 599,
+      "start": 1855.55,
+      "end": 1857.22,
+      "duration": 1.67,
+      "text": "of random variable you have."
+    },
+    {
+      "index": 600,
+      "start": 1857.22,
+      "end": 1859.54,
+      "duration": 2.32,
+      "text": "So the fact that it's not continuous, it's not discrete"
+    },
+    {
+      "index": 601,
+      "start": 1859.54,
+      "end": 1861.87,
+      "duration": 2.33,
+      "text": "shouldn't be a problem as long as we can calculate"
+    },
+    {
+      "index": 602,
+      "start": 1861.87,
+      "end": 1864.12,
+      "duration": 2.25,
+      "text": "probabilities of this kind."
+    },
+    {
+      "index": 603,
+      "start": 1864.12,
+      "end": 1867.6,
+      "duration": 3.48,
+      "text": "So the probability of falling to the left here is 0."
+    },
+    {
+      "index": 604,
+      "start": 1867.6,
+      "end": 1870.85,
+      "duration": 3.25,
+      "text": "Once I start crossing there, the probability of falling to"
+    },
+    {
+      "index": 605,
+      "start": 1870.85,
+      "end": 1873.89,
+      "duration": 3.04,
+      "text": "the left of a point increases linearly with"
+    },
+    {
+      "index": 606,
+      "start": 1873.89,
+      "end": 1875.61,
+      "duration": 1.72,
+      "text": "how far I have gone."
+    },
+    {
+      "index": 607,
+      "start": 1875.61,
+      "end": 1877.9,
+      "duration": 2.29,
+      "text": "So we get this linear increase."
+    },
+    {
+      "index": 608,
+      "start": 1877.9,
+      "end": 1881.25,
+      "duration": 3.35,
+      "text": "But as soon as I cross that point, I accumulate another"
+    },
+    {
+      "index": 609,
+      "start": 1881.25,
+      "end": 1884.22,
+      "duration": 2.97,
+      "text": "1/2 unit of probability instantly."
+    },
+    {
+      "index": 610,
+      "start": 1884.22,
+      "end": 1887.86,
+      "duration": 3.64,
+      "text": "And once I accumulate that 1/2 unit, it means that my CDF is"
+    },
+    {
+      "index": 611,
+      "start": 1887.86,
+      "end": 1890.32,
+      "duration": 2.46,
+      "text": "going to have a jump of 1/2."
+    },
+    {
+      "index": 612,
+      "start": 1890.32,
+      "end": 1893.78,
+      "duration": 3.46,
+      "text": "And then afterwards, I still keep accumulating probability"
+    },
+    {
+      "index": 613,
+      "start": 1893.78,
+      "end": 1896.76,
+      "duration": 2.98,
+      "text": "at a fixed rate, the rate being the density."
+    },
+    {
+      "index": 614,
+      "start": 1896.76,
+      "end": 1899.64,
+      "duration": 2.88,
+      "text": "And I keep accumulating, again, at a linear rate until"
+    },
+    {
+      "index": 615,
+      "start": 1899.64,
+      "end": 1902.16,
+      "duration": 2.52,
+      "text": "I settle to 1."
+    },
+    {
+      "index": 616,
+      "start": 1902.16,
+      "end": 1906.24,
+      "duration": 4.08,
+      "text": "So this is a CDF that has certain pieces where it"
+    },
+    {
+      "index": 617,
+      "start": 1906.24,
+      "end": 1908.06,
+      "duration": 1.82,
+      "text": "increases continuously."
+    },
+    {
+      "index": 618,
+      "start": 1908.06,
+      "end": 1910.28,
+      "duration": 2.22,
+      "text": "And that corresponds to the continuous part of our"
+    },
+    {
+      "index": 619,
+      "start": 1910.28,
+      "end": 1911.39,
+      "duration": 1.11,
+      "text": "randomize variable."
+    },
+    {
+      "index": 620,
+      "start": 1911.39,
+      "end": 1915.09,
+      "duration": 3.7,
+      "text": "And it also has some places where it has discrete jumps."
+    },
+    {
+      "index": 621,
+      "start": 1915.09,
+      "end": 1917.5,
+      "duration": 2.41,
+      "text": "And those district jumps correspond to places in which"
+    },
+    {
+      "index": 622,
+      "start": 1917.5,
+      "end": 1920.99,
+      "duration": 3.49,
+      "text": "we have placed a positive mass."
+    },
+    {
+      "index": 623,
+      "start": 1920.99,
+      "end": 1921.78,
+      "duration": 0.79,
+      "text": "And by the--"
+    },
+    {
+      "index": 624,
+      "start": 1921.78,
+      "end": 1923.75,
+      "duration": 1.97,
+      "text": "OK, yeah."
+    },
+    {
+      "index": 625,
+      "start": 1923.75,
+      "end": 1926.58,
+      "duration": 2.83,
+      "text": "So this little 0 shouldn't be there."
+    },
+    {
+      "index": 626,
+      "start": 1926.58,
+      "end": 1928.04,
+      "duration": 1.46,
+      "text": "So let's cross it out."
+    },
+    {
+      "index": 627,
+      "start": 1930.98,
+      "end": 1931.78,
+      "duration": 0.8,
+      "text": "All right."
+    },
+    {
+      "index": 628,
+      "start": 1931.78,
+      "end": 1935.83,
+      "duration": 4.05,
+      "text": "So finally, we're going to take the remaining time and"
+    },
+    {
+      "index": 629,
+      "start": 1935.83,
+      "end": 1937.61,
+      "duration": 1.78,
+      "text": "introduce our new friend."
+    },
+    {
+      "index": 630,
+      "start": 1937.61,
+      "end": 1943.08,
+      "duration": 5.47,
+      "text": "It's going to be the Gaussian or normal distribution."
+    },
+    {
+      "index": 631,
+      "start": 1943.08,
+      "end": 1947.69,
+      "duration": 4.61,
+      "text": "So it's the most important distribution there is in all"
+    },
+    {
+      "index": 632,
+      "start": 1947.69,
+      "end": 1948.94,
+      "duration": 1.25,
+      "text": "of probability theory."
+    },
+    {
+      "index": 633,
+      "start": 1948.94,
+      "end": 1951.23,
+      "duration": 2.29,
+      "text": "It's plays a very central role."
+    },
+    {
+      "index": 634,
+      "start": 1951.23,
+      "end": 1954.34,
+      "duration": 3.11,
+      "text": "It shows up all over the place."
+    },
+    {
+      "index": 635,
+      "start": 1954.34,
+      "end": 1957.87,
+      "duration": 3.53,
+      "text": "We'll see later in the class in more detail"
+    },
+    {
+      "index": 636,
+      "start": 1957.87,
+      "end": 1959.45,
+      "duration": 1.58,
+      "text": "why it shows up."
+    },
+    {
+      "index": 637,
+      "start": 1959.45,
+      "end": 1962.115,
+      "duration": 2.665,
+      "text": "But the quick preview is the following."
+    },
+    {
+      "index": 638,
+      "start": 1962.115,
+      "end": 1966.22,
+      "duration": 4.105,
+      "text": "If you have a phenomenon in which you measure a certain"
+    },
+    {
+      "index": 639,
+      "start": 1966.22,
+      "end": 1970.97,
+      "duration": 4.75,
+      "text": "quantity, but that quantity is made up of lots and lots of"
+    },
+    {
+      "index": 640,
+      "start": 1970.97,
+      "end": 1972.82,
+      "duration": 1.85,
+      "text": "random contributions--"
+    },
+    {
+      "index": 641,
+      "start": 1972.82,
+      "end": 1975.87,
+      "duration": 3.05,
+      "text": "so your random variable is actually the sum of lots and"
+    },
+    {
+      "index": 642,
+      "start": 1975.87,
+      "end": 1979.57,
+      "duration": 3.7,
+      "text": "lots of independent little random variables--"
+    },
+    {
+      "index": 643,
+      "start": 1979.57,
+      "end": 1984.29,
+      "duration": 4.72,
+      "text": "then invariability, no matter what kind of distribution the"
+    },
+    {
+      "index": 644,
+      "start": 1984.29,
+      "end": 1988.26,
+      "duration": 3.97,
+      "text": "little random variables have, their sum will turn out to"
+    },
+    {
+      "index": 645,
+      "start": 1988.26,
+      "end": 1991.5,
+      "duration": 3.24,
+      "text": "have approximately a normal distribution."
+    },
+    {
+      "index": 646,
+      "start": 1991.5,
+      "end": 1994.49,
+      "duration": 2.99,
+      "text": "So this makes the normal distribution to arise very"
+    },
+    {
+      "index": 647,
+      "start": 1994.49,
+      "end": 1996.68,
+      "duration": 2.19,
+      "text": "naturally in lots and lots of contexts."
+    },
+    {
+      "index": 648,
+      "start": 1996.68,
+      "end": 2001.21,
+      "duration": 4.53,
+      "text": "Whenever you have noise that's comprised of lots of different"
+    },
+    {
+      "index": 649,
+      "start": 2001.21,
+      "end": 2006.31,
+      "duration": 5.1,
+      "text": "independent pieces of noise, then the end result will be a"
+    },
+    {
+      "index": 650,
+      "start": 2006.31,
+      "end": 2008.65,
+      "duration": 2.34,
+      "text": "random variable that's normal."
+    },
+    {
+      "index": 651,
+      "start": 2008.65,
+      "end": 2011.25,
+      "duration": 2.6,
+      "text": "So we are going to come back to that topic later."
+    },
+    {
+      "index": 652,
+      "start": 2011.25,
+      "end": 2014.62,
+      "duration": 3.37,
+      "text": "But that's the preview comment, basically to argue"
+    },
+    {
+      "index": 653,
+      "start": 2014.62,
+      "end": 2017.43,
+      "duration": 2.81,
+      "text": "that it's an important one."
+    },
+    {
+      "index": 654,
+      "start": 2017.43,
+      "end": 2017.69,
+      "duration": 0.26,
+      "text": "OK."
+    },
+    {
+      "index": 655,
+      "start": 2017.69,
+      "end": 2018.81,
+      "duration": 1.12,
+      "text": "And there's a special case."
+    },
+    {
+      "index": 656,
+      "start": 2018.81,
+      "end": 2021.03,
+      "duration": 2.22,
+      "text": "If you are dealing with a binomial distribution, which"
+    },
+    {
+      "index": 657,
+      "start": 2021.03,
+      "end": 2024.61,
+      "duration": 3.58,
+      "text": "is the sum of lots of Bernoulli random variables,"
+    },
+    {
+      "index": 658,
+      "start": 2024.61,
+      "end": 2027.2,
+      "duration": 2.59,
+      "text": "again you would expect that the binomial would start"
+    },
+    {
+      "index": 659,
+      "start": 2027.2,
+      "end": 2031.17,
+      "duration": 3.97,
+      "text": "looking like a normal if you have many, many-- a large"
+    },
+    {
+      "index": 660,
+      "start": 2031.17,
+      "end": 2033.15,
+      "duration": 1.98,
+      "text": "number of point fields."
+    },
+    {
+      "index": 661,
+      "start": 2033.15,
+      "end": 2033.53,
+      "duration": 0.38,
+      "text": "All right."
+    },
+    {
+      "index": 662,
+      "start": 2033.53,
+      "end": 2036.56,
+      "duration": 3.03,
+      "text": "So what's the math involved here?"
+    },
+    {
+      "index": 663,
+      "start": 2036.56,
+      "end": 2042.37,
+      "duration": 5.81,
+      "text": "Let's parse the formula for the density of the normal."
+    },
+    {
+      "index": 664,
+      "start": 2042.37,
+      "end": 2047.11,
+      "duration": 4.74,
+      "text": "What we start with is the function X squared over 2."
+    },
+    {
+      "index": 665,
+      "start": 2047.11,
+      "end": 2049.75,
+      "duration": 2.64,
+      "text": "And if you are to plot X squared over 2, it's a"
+    },
+    {
+      "index": 666,
+      "start": 2049.75,
+      "end": 2052.84,
+      "duration": 3.09,
+      "text": "parabola, and it has this shape --"
+    },
+    {
+      "index": 667,
+      "start": 2052.84,
+      "end": 2054.86,
+      "duration": 2.02,
+      "text": "X squared over 2."
+    },
+    {
+      "index": 668,
+      "start": 2054.86,
+      "end": 2056.79,
+      "duration": 1.93,
+      "text": "Then what do we do?"
+    },
+    {
+      "index": 669,
+      "start": 2056.79,
+      "end": 2060.21,
+      "duration": 3.42,
+      "text": "We take the negative exponential of this."
+    },
+    {
+      "index": 670,
+      "start": 2060.21,
+      "end": 2064.6,
+      "duration": 4.39,
+      "text": "So when X squared over 2 is 0, then negative"
+    },
+    {
+      "index": 671,
+      "start": 2064.6,
+      "end": 2068.98,
+      "duration": 4.38,
+      "text": "exponential is 1."
+    },
+    {
+      "index": 672,
+      "start": 2068.98,
+      "end": 2072.739,
+      "duration": 3.759,
+      "text": "When X squared over 2 increases, the negative"
+    },
+    {
+      "index": 673,
+      "start": 2072.739,
+      "end": 2077.13,
+      "duration": 4.391,
+      "text": "exponential of that falls off, and it falls off pretty fast."
+    },
+    {
+      "index": 674,
+      "start": 2077.13,
+      "end": 2079.63,
+      "duration": 2.5,
+      "text": "So as this goes up, the formula for the"
+    },
+    {
+      "index": 675,
+      "start": 2079.63,
+      "end": 2081.15,
+      "duration": 1.52,
+      "text": "density goes down."
+    },
+    {
+      "index": 676,
+      "start": 2081.15,
+      "end": 2085.06,
+      "duration": 3.91,
+      "text": "And because exponentials are pretty strong in how quickly"
+    },
+    {
+      "index": 677,
+      "start": 2085.06,
+      "end": 2089.53,
+      "duration": 4.47,
+      "text": "they fall off, this means that the tails of this distribution"
+    },
+    {
+      "index": 678,
+      "start": 2089.53,
+      "end": 2093.37,
+      "duration": 3.84,
+      "text": "actually do go down pretty fast."
+    },
+    {
+      "index": 679,
+      "start": 2093.37,
+      "end": 2093.659,
+      "duration": 0.289,
+      "text": "OK."
+    },
+    {
+      "index": 680,
+      "start": 2093.659,
+      "end": 2097.8,
+      "duration": 4.141,
+      "text": "So that explains the shape of the normal PDF."
+    },
+    {
+      "index": 681,
+      "start": 2097.8,
+      "end": 2102.34,
+      "duration": 4.54,
+      "text": "How about this factor 1 over square root 2 pi?"
+    },
+    {
+      "index": 682,
+      "start": 2102.34,
+      "end": 2105.54,
+      "duration": 3.2,
+      "text": "Where does this come from?"
+    },
+    {
+      "index": 683,
+      "start": 2105.54,
+      "end": 2108.76,
+      "duration": 3.22,
+      "text": "Well, the integral has to be equal to 1."
+    },
+    {
+      "index": 684,
+      "start": 2108.76,
+      "end": 2114.62,
+      "duration": 5.86,
+      "text": "So you have to go and do your calculus exercise and find the"
+    },
+    {
+      "index": 685,
+      "start": 2114.62,
+      "end": 2118.35,
+      "duration": 3.73,
+      "text": "integral of this the minus X squared over 2 function and"
+    },
+    {
+      "index": 686,
+      "start": 2118.35,
+      "end": 2122.24,
+      "duration": 3.89,
+      "text": "then figure out, what constant do I need to put in front so"
+    },
+    {
+      "index": 687,
+      "start": 2122.24,
+      "end": 2124.25,
+      "duration": 2.01,
+      "text": "that the integral is equal to 1?"
+    },
+    {
+      "index": 688,
+      "start": 2124.25,
+      "end": 2126.82,
+      "duration": 2.57,
+      "text": "How do you evaluate that integral?"
+    },
+    {
+      "index": 689,
+      "start": 2126.82,
+      "end": 2130.76,
+      "duration": 3.94,
+      "text": "Either you go to Mathematica or Wolfram's Alpha or"
+    },
+    {
+      "index": 690,
+      "start": 2130.76,
+      "end": 2133.34,
+      "duration": 2.58,
+      "text": "whatever, and it tells you what it is."
+    },
+    {
+      "index": 691,
+      "start": 2133.34,
+      "end": 2137.26,
+      "duration": 3.92,
+      "text": "Or it's a very beautiful calculus exercise that you may"
+    },
+    {
+      "index": 692,
+      "start": 2137.26,
+      "end": 2139.05,
+      "duration": 1.79,
+      "text": "have seen at some point."
+    },
+    {
+      "index": 693,
+      "start": 2139.05,
+      "end": 2142.19,
+      "duration": 3.14,
+      "text": "You throw in another exponential of this kind, you"
+    },
+    {
+      "index": 694,
+      "start": 2142.19,
+      "end": 2146.52,
+      "duration": 4.33,
+      "text": "bring in polar coordinates, and somehow the answer comes"
+    },
+    {
+      "index": 695,
+      "start": 2146.52,
+      "end": 2148.01,
+      "duration": 1.49,
+      "text": "beautifully out there."
+    },
+    {
+      "index": 696,
+      "start": 2148.01,
+      "end": 2151.91,
+      "duration": 3.9,
+      "text": "But in any case, this is the constant that you need to make"
+    },
+    {
+      "index": 697,
+      "start": 2151.91,
+      "end": 2156.07,
+      "duration": 4.16,
+      "text": "it integrate to 1 and to be a legitimate density."
+    },
+    {
+      "index": 698,
+      "start": 2156.07,
+      "end": 2158.55,
+      "duration": 2.48,
+      "text": "We call this the standard normal."
+    },
+    {
+      "index": 699,
+      "start": 2158.55,
+      "end": 2162.28,
+      "duration": 3.73,
+      "text": "And for the standard normal, what is the expected value?"
+    },
+    {
+      "index": 700,
+      "start": 2162.28,
+      "end": 2165.78,
+      "duration": 3.5,
+      "text": "Well, the symmetry, so it's equal to 0."
+    },
+    {
+      "index": 701,
+      "start": 2165.78,
+      "end": 2167.49,
+      "duration": 1.71,
+      "text": "What is the variance?"
+    },
+    {
+      "index": 702,
+      "start": 2167.49,
+      "end": 2169.74,
+      "duration": 2.25,
+      "text": "Well, here there's no shortcut."
+    },
+    {
+      "index": 703,
+      "start": 2169.74,
+      "end": 2172.49,
+      "duration": 2.75,
+      "text": "You have to do another calculus exercise."
+    },
+    {
+      "index": 704,
+      "start": 2172.49,
+      "end": 2177.08,
+      "duration": 4.59,
+      "text": "And you find that the variance is equal to 1."
+    },
+    {
+      "index": 705,
+      "start": 2177.08,
+      "end": 2177.75,
+      "duration": 0.67,
+      "text": "OK."
+    },
+    {
+      "index": 706,
+      "start": 2177.75,
+      "end": 2181.72,
+      "duration": 3.97,
+      "text": "So this is a normal that's centered around 0."
+    },
+    {
+      "index": 707,
+      "start": 2181.72,
+      "end": 2184.99,
+      "duration": 3.27,
+      "text": "How about other types of normals that are centered at"
+    },
+    {
+      "index": 708,
+      "start": 2184.99,
+      "end": 2186.76,
+      "duration": 1.77,
+      "text": "different places?"
+    },
+    {
+      "index": 709,
+      "start": 2186.76,
+      "end": 2189.73,
+      "duration": 2.97,
+      "text": "So we can do the same kind of thing."
+    },
+    {
+      "index": 710,
+      "start": 2189.73,
+      "end": 2194.08,
+      "duration": 4.35,
+      "text": "Instead of centering it at 0, we can take some place where"
+    },
+    {
+      "index": 711,
+      "start": 2194.08,
+      "end": 2199.64,
+      "duration": 5.56,
+      "text": "we want to center it, write down a quadratic such as (X"
+    },
+    {
+      "index": 712,
+      "start": 2199.64,
+      "end": 2204.05,
+      "duration": 4.41,
+      "text": "minus mu) squared, and then take the negative"
+    },
+    {
+      "index": 713,
+      "start": 2204.05,
+      "end": 2205.94,
+      "duration": 1.89,
+      "text": "exponential of that."
+    },
+    {
+      "index": 714,
+      "start": 2205.94,
+      "end": 2213.79,
+      "duration": 7.85,
+      "text": "And that gives us a normal density that's centered at mu."
+    },
+    {
+      "index": 715,
+      "start": 2213.79,
+      "end": 2221.19,
+      "duration": 7.4,
+      "text": "Now, I may wish to control the width of my density."
+    },
+    {
+      "index": 716,
+      "start": 2221.19,
+      "end": 2224.82,
+      "duration": 3.63,
+      "text": "To control the width of my density, equivalently I can"
+    },
+    {
+      "index": 717,
+      "start": 2224.82,
+      "end": 2227.72,
+      "duration": 2.9,
+      "text": "control the width of my parabola."
+    },
+    {
+      "index": 718,
+      "start": 2227.72,
+      "end": 2235.43,
+      "duration": 7.71,
+      "text": "If my parabola is narrower, if my parabola looks like this,"
+    },
+    {
+      "index": 719,
+      "start": 2235.43,
+      "end": 2237.99,
+      "duration": 2.56,
+      "text": "what's going to happen to the density?"
+    },
+    {
+      "index": 720,
+      "start": 2237.99,
+      "end": 2240.55,
+      "duration": 2.56,
+      "text": "It's going to fall off much faster."
+    },
+    {
+      "index": 721,
+      "start": 2246.62,
+      "end": 2246.92,
+      "duration": 0.3,
+      "text": "OK."
+    },
+    {
+      "index": 722,
+      "start": 2246.92,
+      "end": 2251.15,
+      "duration": 4.23,
+      "text": "How do I make my parabola narrower or wider?"
+    },
+    {
+      "index": 723,
+      "start": 2251.15,
+      "end": 2255.3,
+      "duration": 4.15,
+      "text": "I do it by putting in a constant down here."
+    },
+    {
+      "index": 724,
+      "start": 2255.3,
+      "end": 2259.89,
+      "duration": 4.59,
+      "text": "So by putting a sigma here, this stretches or widens my"
+    },
+    {
+      "index": 725,
+      "start": 2259.89,
+      "end": 2262.84,
+      "duration": 2.95,
+      "text": "parabola by a factor of sigma."
+    },
+    {
+      "index": 726,
+      "start": 2262.84,
+      "end": 2263.54,
+      "duration": 0.7,
+      "text": "Let's see."
+    },
+    {
+      "index": 727,
+      "start": 2263.54,
+      "end": 2264.78,
+      "duration": 1.24,
+      "text": "Which way does it go?"
+    },
+    {
+      "index": 728,
+      "start": 2264.78,
+      "end": 2269.33,
+      "duration": 4.55,
+      "text": "If sigma is very small, this is a big number."
+    },
+    {
+      "index": 729,
+      "start": 2269.33,
+      "end": 2275.08,
+      "duration": 5.75,
+      "text": "My parabola goes up quickly, which means my normal falls"
+    },
+    {
+      "index": 730,
+      "start": 2275.08,
+      "end": 2276.73,
+      "duration": 1.65,
+      "text": "off very fast."
+    },
+    {
+      "index": 731,
+      "start": 2276.73,
+      "end": 2282.63,
+      "duration": 5.9,
+      "text": "So small sigma corresponds to a narrower density."
+    },
+    {
+      "index": 732,
+      "start": 2282.63,
+      "end": 2288.87,
+      "duration": 6.24,
+      "text": "And so it, therefore, should be intuitive that the standard"
+    },
+    {
+      "index": 733,
+      "start": 2288.87,
+      "end": 2291.52,
+      "duration": 2.65,
+      "text": "deviation is proportional to sigma."
+    },
+    {
+      "index": 734,
+      "start": 2291.52,
+      "end": 2293.38,
+      "duration": 1.86,
+      "text": "Because that's the amount by which you"
+    },
+    {
+      "index": 735,
+      "start": 2293.38,
+      "end": 2295.08,
+      "duration": 1.7,
+      "text": "are scaling the picture."
+    },
+    {
+      "index": 736,
+      "start": 2295.08,
+      "end": 2297.32,
+      "duration": 2.24,
+      "text": "And indeed, the standard deviation is sigma."
+    },
+    {
+      "index": 737,
+      "start": 2297.32,
+      "end": 2301.47,
+      "duration": 4.15,
+      "text": "And so the variance is sigma squared."
+    },
+    {
+      "index": 738,
+      "start": 2301.47,
+      "end": 2306.59,
+      "duration": 5.12,
+      "text": "So all that we have done here to create a general normal"
+    },
+    {
+      "index": 739,
+      "start": 2306.59,
+      "end": 2311.18,
+      "duration": 4.59,
+      "text": "with a given mean and variance is to take this picture, shift"
+    },
+    {
+      "index": 740,
+      "start": 2311.18,
+      "end": 2315.6,
+      "duration": 4.42,
+      "text": "it in space so that the mean sits at mu instead of 0, and"
+    },
+    {
+      "index": 741,
+      "start": 2315.6,
+      "end": 2318.88,
+      "duration": 3.28,
+      "text": "then scale it by a factor of sigma."
+    },
+    {
+      "index": 742,
+      "start": 2318.88,
+      "end": 2321.13,
+      "duration": 2.25,
+      "text": "This gives us a normal with a given"
+    },
+    {
+      "index": 743,
+      "start": 2321.13,
+      "end": 2322.56,
+      "duration": 1.43,
+      "text": "mean and a given variance."
+    },
+    {
+      "index": 744,
+      "start": 2322.56,
+      "end": 2327.67,
+      "duration": 5.11,
+      "text": "And the formula for it is this one."
+    },
+    {
+      "index": 745,
+      "start": 2327.67,
+      "end": 2328.81,
+      "duration": 1.14,
+      "text": "All right."
+    },
+    {
+      "index": 746,
+      "start": 2328.81,
+      "end": 2332.23,
+      "duration": 3.42,
+      "text": "Now, normal random variables have some wonderful"
+    },
+    {
+      "index": 747,
+      "start": 2332.23,
+      "end": 2334.16,
+      "duration": 1.93,
+      "text": "properties."
+    },
+    {
+      "index": 748,
+      "start": 2334.16,
+      "end": 2340.19,
+      "duration": 6.03,
+      "text": "And one of them is that they behave nicely when you take"
+    },
+    {
+      "index": 749,
+      "start": 2340.19,
+      "end": 2342.74,
+      "duration": 2.55,
+      "text": "linear functions of them."
+    },
+    {
+      "index": 750,
+      "start": 2342.74,
+      "end": 2347.19,
+      "duration": 4.45,
+      "text": "So let's fix some constants a and b, suppose that X is"
+    },
+    {
+      "index": 751,
+      "start": 2347.19,
+      "end": 2353.84,
+      "duration": 6.65,
+      "text": "normal, and look at this linear function Y."
+    },
+    {
+      "index": 752,
+      "start": 2353.84,
+      "end": 2357.34,
+      "duration": 3.5,
+      "text": "What is the expected value of Y?"
+    },
+    {
+      "index": 753,
+      "start": 2357.34,
+      "end": 2359.22,
+      "duration": 1.88,
+      "text": "Here we don't need anything special."
+    },
+    {
+      "index": 754,
+      "start": 2359.22,
+      "end": 2362.92,
+      "duration": 3.7,
+      "text": "We know that the expected value of a linear function is"
+    },
+    {
+      "index": 755,
+      "start": 2362.92,
+      "end": 2366.69,
+      "duration": 3.77,
+      "text": "the linear function of the expectation."
+    },
+    {
+      "index": 756,
+      "start": 2366.69,
+      "end": 2370.57,
+      "duration": 3.88,
+      "text": "So the expected value is this."
+    },
+    {
+      "index": 757,
+      "start": 2370.57,
+      "end": 2373.23,
+      "duration": 2.66,
+      "text": "How about the variance?"
+    },
+    {
+      "index": 758,
+      "start": 2373.23,
+      "end": 2376.43,
+      "duration": 3.2,
+      "text": "We know that the variance of a linear function doesn't care"
+    },
+    {
+      "index": 759,
+      "start": 2376.43,
+      "end": 2377.91,
+      "duration": 1.48,
+      "text": "about the constant term."
+    },
+    {
+      "index": 760,
+      "start": 2377.91,
+      "end": 2380.88,
+      "duration": 2.97,
+      "text": "But the variance gets multiplied by a squared."
+    },
+    {
+      "index": 761,
+      "start": 2380.88,
+      "end": 2386.88,
+      "duration": 6.0,
+      "text": "So we get these variance, where sigma squared is the"
+    },
+    {
+      "index": 762,
+      "start": 2386.88,
+      "end": 2389.07,
+      "duration": 2.19,
+      "text": "variance of the original normal."
+    },
+    {
+      "index": 763,
+      "start": 2389.07,
+      "end": 2393.73,
+      "duration": 4.66,
+      "text": "So have we used so far the property that X is normal?"
+    },
+    {
+      "index": 764,
+      "start": 2393.73,
+      "end": 2395.17,
+      "duration": 1.44,
+      "text": "No, we haven't."
+    },
+    {
+      "index": 765,
+      "start": 2395.17,
+      "end": 2399.65,
+      "duration": 4.48,
+      "text": "This calculation here is true in general when you take a"
+    },
+    {
+      "index": 766,
+      "start": 2399.65,
+      "end": 2402.65,
+      "duration": 3.0,
+      "text": "linear function of a random variable."
+    },
+    {
+      "index": 767,
+      "start": 2402.65,
+      "end": 2408.73,
+      "duration": 6.08,
+      "text": "But if X is normal, we get the other additional fact that Y"
+    },
+    {
+      "index": 768,
+      "start": 2408.73,
+      "end": 2410.93,
+      "duration": 2.2,
+      "text": "is also going to be normal."
+    },
+    {
+      "index": 769,
+      "start": 2410.93,
+      "end": 2414.3,
+      "duration": 3.37,
+      "text": "So that's the nontrivial part of the fact that"
+    },
+    {
+      "index": 770,
+      "start": 2414.3,
+      "end": 2416.07,
+      "duration": 1.77,
+      "text": "I'm claiming here."
+    },
+    {
+      "index": 771,
+      "start": 2416.07,
+      "end": 2419.7,
+      "duration": 3.63,
+      "text": "So linear functions of normal random variables are"
+    },
+    {
+      "index": 772,
+      "start": 2419.7,
+      "end": 2423.02,
+      "duration": 3.32,
+      "text": "themselves normal."
+    },
+    {
+      "index": 773,
+      "start": 2423.02,
+      "end": 2426.68,
+      "duration": 3.66,
+      "text": "How do we convince ourselves about it?"
+    },
+    {
+      "index": 774,
+      "start": 2426.68,
+      "end": 2427.08,
+      "duration": 0.4,
+      "text": "OK."
+    },
+    {
+      "index": 775,
+      "start": 2427.08,
+      "end": 2431.39,
+      "duration": 4.31,
+      "text": "It's something that we will do formerly in about two or three"
+    },
+    {
+      "index": 776,
+      "start": 2431.39,
+      "end": 2433.39,
+      "duration": 2.0,
+      "text": "lectures from today."
+    },
+    {
+      "index": 777,
+      "start": 2433.39,
+      "end": 2435.31,
+      "duration": 1.92,
+      "text": "So we're going to prove it."
+    },
+    {
+      "index": 778,
+      "start": 2435.31,
+      "end": 2439.77,
+      "duration": 4.46,
+      "text": "But if you think about it intuitively, normal means this"
+    },
+    {
+      "index": 779,
+      "start": 2439.77,
+      "end": 2442.07,
+      "duration": 2.3,
+      "text": "particular bell-shaped curve."
+    },
+    {
+      "index": 780,
+      "start": 2442.07,
+      "end": 2445.55,
+      "duration": 3.48,
+      "text": "And that bell-shaped curve could be sitting anywhere and"
+    },
+    {
+      "index": 781,
+      "start": 2445.55,
+      "end": 2447.91,
+      "duration": 2.36,
+      "text": "could be scaled in any way."
+    },
+    {
+      "index": 782,
+      "start": 2447.91,
+      "end": 2451.19,
+      "duration": 3.28,
+      "text": "So you start with a bell-shaped curve."
+    },
+    {
+      "index": 783,
+      "start": 2451.19,
+      "end": 2455.37,
+      "duration": 4.18,
+      "text": "If you take X, which is bell shaped, and you multiply it by"
+    },
+    {
+      "index": 784,
+      "start": 2455.37,
+      "end": 2457.5,
+      "duration": 2.13,
+      "text": "a constant, what does that do?"
+    },
+    {
+      "index": 785,
+      "start": 2457.5,
+      "end": 2461.26,
+      "duration": 3.76,
+      "text": "Multiplying by a constant is just like scaling the axis or"
+    },
+    {
+      "index": 786,
+      "start": 2461.26,
+      "end": 2463.75,
+      "duration": 2.49,
+      "text": "changing the units with which you're measuring it."
+    },
+    {
+      "index": 787,
+      "start": 2463.75,
+      "end": 2468.88,
+      "duration": 5.13,
+      "text": "So it will take a bell shape and spread it or narrow it."
+    },
+    {
+      "index": 788,
+      "start": 2468.88,
+      "end": 2470.85,
+      "duration": 1.97,
+      "text": "But it will still be a bell shape."
+    },
+    {
+      "index": 789,
+      "start": 2470.85,
+      "end": 2473.44,
+      "duration": 2.59,
+      "text": "And then when you add the constant, you just take that"
+    },
+    {
+      "index": 790,
+      "start": 2473.44,
+      "end": 2476.26,
+      "duration": 2.82,
+      "text": "bell and move it elsewhere."
+    },
+    {
+      "index": 791,
+      "start": 2476.26,
+      "end": 2479.97,
+      "duration": 3.71,
+      "text": "So under linear transformations, bell shapes"
+    },
+    {
+      "index": 792,
+      "start": 2479.97,
+      "end": 2483.36,
+      "duration": 3.39,
+      "text": "will remain bell shapes, just sitting at a different place"
+    },
+    {
+      "index": 793,
+      "start": 2483.36,
+      "end": 2485.09,
+      "duration": 1.73,
+      "text": "and with a different width."
+    },
+    {
+      "index": 794,
+      "start": 2485.09,
+      "end": 2490.49,
+      "duration": 5.4,
+      "text": "And that sort of the intuition of why normals remain normals"
+    },
+    {
+      "index": 795,
+      "start": 2490.49,
+      "end": 2492.096,
+      "duration": 1.606,
+      "text": "under this kind of transformation."
+    },
+    {
+      "index": 796,
+      "start": 2495.1,
+      "end": 2496.77,
+      "duration": 1.67,
+      "text": "So why is this useful?"
+    },
+    {
+      "index": 797,
+      "start": 2496.77,
+      "end": 2497.96,
+      "duration": 1.19,
+      "text": "Well, OK."
+    },
+    {
+      "index": 798,
+      "start": 2497.96,
+      "end": 2499.89,
+      "duration": 1.93,
+      "text": "We have a formula for the density."
+    },
+    {
+      "index": 799,
+      "start": 2499.89,
+      "end": 2503.75,
+      "duration": 3.86,
+      "text": "But usually we want to calculate probabilities."
+    },
+    {
+      "index": 800,
+      "start": 2503.75,
+      "end": 2505.76,
+      "duration": 2.01,
+      "text": "How will you calculate probabilities?"
+    },
+    {
+      "index": 801,
+      "start": 2505.76,
+      "end": 2508.67,
+      "duration": 2.91,
+      "text": "If I ask you, what's the probability that the normal is"
+    },
+    {
+      "index": 802,
+      "start": 2508.67,
+      "end": 2511.38,
+      "duration": 2.71,
+      "text": "less than 3, how do you find it?"
+    },
+    {
+      "index": 803,
+      "start": 2511.38,
+      "end": 2514.83,
+      "duration": 3.45,
+      "text": "You need to integrate the density from minus"
+    },
+    {
+      "index": 804,
+      "start": 2514.83,
+      "end": 2517.3,
+      "duration": 2.47,
+      "text": "infinity up to 3."
+    },
+    {
+      "index": 805,
+      "start": 2517.3,
+      "end": 2523.23,
+      "duration": 5.93,
+      "text": "Unfortunately, the integral of the expression that shows up"
+    },
+    {
+      "index": 806,
+      "start": 2523.23,
+      "end": 2526.72,
+      "duration": 3.49,
+      "text": "that you would have to calculate, an integral of this"
+    },
+    {
+      "index": 807,
+      "start": 2526.72,
+      "end": 2532.69,
+      "duration": 5.97,
+      "text": "kind from, let's say, minus infinity to some number, is"
+    },
+    {
+      "index": 808,
+      "start": 2532.69,
+      "end": 2536.27,
+      "duration": 3.58,
+      "text": "something that's not known in closed form."
+    },
+    {
+      "index": 809,
+      "start": 2536.27,
+      "end": 2543.49,
+      "duration": 7.22,
+      "text": "So if you're looking for a closed-form formula for this--"
+    },
+    {
+      "index": 810,
+      "start": 2543.49,
+      "end": 2545.04,
+      "duration": 1.55,
+      "text": "X bar--"
+    },
+    {
+      "index": 811,
+      "start": 2545.04,
+      "end": 2547.89,
+      "duration": 2.85,
+      "text": "if you're looking for a closed-form formula that gives"
+    },
+    {
+      "index": 812,
+      "start": 2547.89,
+      "end": 2552.01,
+      "duration": 4.12,
+      "text": "you the value of this integral as a function of X bar, you're"
+    },
+    {
+      "index": 813,
+      "start": 2552.01,
+      "end": 2554.46,
+      "duration": 2.45,
+      "text": "not going to find it."
+    },
+    {
+      "index": 814,
+      "start": 2554.46,
+      "end": 2556.15,
+      "duration": 1.69,
+      "text": "So what can we do?"
+    },
+    {
+      "index": 815,
+      "start": 2556.15,
+      "end": 2558.79,
+      "duration": 2.64,
+      "text": "Well, since it's a useful integral, we can"
+    },
+    {
+      "index": 816,
+      "start": 2558.79,
+      "end": 2560.88,
+      "duration": 2.09,
+      "text": "just tabulate it."
+    },
+    {
+      "index": 817,
+      "start": 2560.88,
+      "end": 2566.07,
+      "duration": 5.19,
+      "text": "Calculate it once and for all, for all values of X bar up to"
+    },
+    {
+      "index": 818,
+      "start": 2566.07,
+      "end": 2570.44,
+      "duration": 4.37,
+      "text": "some precision, and have that table, and use it."
+    },
+    {
+      "index": 819,
+      "start": 2570.44,
+      "end": 2573.01,
+      "duration": 2.57,
+      "text": "That's what one does."
+    },
+    {
+      "index": 820,
+      "start": 2573.01,
+      "end": 2574.885,
+      "duration": 1.875,
+      "text": "OK, but now there is a catch."
+    },
+    {
+      "index": 821,
+      "start": 2574.885,
+      "end": 2579.6,
+      "duration": 4.715,
+      "text": "Are we going to write down a table for every conceivable"
+    },
+    {
+      "index": 822,
+      "start": 2579.6,
+      "end": 2581.87,
+      "duration": 2.27,
+      "text": "type of normal distribution--"
+    },
+    {
+      "index": 823,
+      "start": 2581.87,
+      "end": 2585.115,
+      "duration": 3.245,
+      "text": "that is, for every possible mean and every variance?"
+    },
+    {
+      "index": 824,
+      "start": 2585.115,
+      "end": 2587.4,
+      "duration": 2.285,
+      "text": "I guess that would be a pretty long table."
+    },
+    {
+      "index": 825,
+      "start": 2587.4,
+      "end": 2589.54,
+      "duration": 2.14,
+      "text": "You don't want to do that."
+    },
+    {
+      "index": 826,
+      "start": 2589.54,
+      "end": 2592.82,
+      "duration": 3.28,
+      "text": "Fortunately, it's enough to have a table with the"
+    },
+    {
+      "index": 827,
+      "start": 2592.82,
+      "end": 2597.59,
+      "duration": 4.77,
+      "text": "numerical values only for the standard normal."
+    },
+    {
+      "index": 828,
+      "start": 2597.59,
+      "end": 2600.88,
+      "duration": 3.29,
+      "text": "And once you have those, you can use them in a clever way"
+    },
+    {
+      "index": 829,
+      "start": 2600.88,
+      "end": 2604.0,
+      "duration": 3.12,
+      "text": "to calculate probabilities for the more general case."
+    },
+    {
+      "index": 830,
+      "start": 2604.0,
+      "end": 2606.09,
+      "duration": 2.09,
+      "text": "So let's see how this is done."
+    },
+    {
+      "index": 831,
+      "start": 2606.09,
+      "end": 2610.61,
+      "duration": 4.52,
+      "text": "So our starting point is that someone has graciously"
+    },
+    {
+      "index": 832,
+      "start": 2610.61,
+      "end": 2616.52,
+      "duration": 5.91,
+      "text": "calculated for us the values of the CDF, the cumulative"
+    },
+    {
+      "index": 833,
+      "start": 2616.52,
+      "end": 2620.35,
+      "duration": 3.83,
+      "text": "distribution function, that is the probability of falling"
+    },
+    {
+      "index": 834,
+      "start": 2620.35,
+      "end": 2624.12,
+      "duration": 3.77,
+      "text": "below a certain point for the standard normal"
+    },
+    {
+      "index": 835,
+      "start": 2624.12,
+      "end": 2626.61,
+      "duration": 2.49,
+      "text": "and at various places."
+    },
+    {
+      "index": 836,
+      "start": 2626.61,
+      "end": 2628.77,
+      "duration": 2.16,
+      "text": "How do we read this table?"
+    },
+    {
+      "index": 837,
+      "start": 2628.77,
+      "end": 2635.84,
+      "duration": 7.07,
+      "text": "The probability that X is less than, let's say,"
+    },
+    {
+      "index": 838,
+      "start": 2635.84,
+      "end": 2639.17,
+      "duration": 3.33,
+      "text": "0.63 is this number."
+    },
+    {
+      "index": 839,
+      "start": 2639.17,
+      "end": 2644.61,
+      "duration": 5.44,
+      "text": "This number, 0.7357, is the probability that the standard"
+    },
+    {
+      "index": 840,
+      "start": 2644.61,
+      "end": 2648.07,
+      "duration": 3.46,
+      "text": "normal is below 0.63."
+    },
+    {
+      "index": 841,
+      "start": 2648.07,
+      "end": 2651.377,
+      "duration": 3.307,
+      "text": "So the table refers to the standard normal."
+    },
+    {
+      "index": 842,
+      "start": 2655.99,
+      "end": 2659.6,
+      "duration": 3.61,
+      "text": "But someone, let's say, gives us some other numbers and"
+    },
+    {
+      "index": 843,
+      "start": 2659.6,
+      "end": 2662.14,
+      "duration": 2.54,
+      "text": "tells us we're dealing with a normal with a certain mean and"
+    },
+    {
+      "index": 844,
+      "start": 2662.14,
+      "end": 2663.53,
+      "duration": 1.39,
+      "text": "a certain variance."
+    },
+    {
+      "index": 845,
+      "start": 2663.53,
+      "end": 2666.555,
+      "duration": 3.025,
+      "text": "And we want to calculate the probability that the value of"
+    },
+    {
+      "index": 846,
+      "start": 2666.555,
+      "end": 2668.74,
+      "duration": 2.185,
+      "text": "that random variable is less than or equal to 3."
+    },
+    {
+      "index": 847,
+      "start": 2668.74,
+      "end": 2670.47,
+      "duration": 1.73,
+      "text": "How are we going to do it?"
+    },
+    {
+      "index": 848,
+      "start": 2670.47,
+      "end": 2676.21,
+      "duration": 5.74,
+      "text": "Well, there's a standard trick, which is so-called"
+    },
+    {
+      "index": 849,
+      "start": 2676.21,
+      "end": 2679.48,
+      "duration": 3.27,
+      "text": "standardizing a random variable."
+    },
+    {
+      "index": 850,
+      "start": 2679.48,
+      "end": 2681.35,
+      "duration": 1.87,
+      "text": "Standardizing a random variable"
+    },
+    {
+      "index": 851,
+      "start": 2681.35,
+      "end": 2683.08,
+      "duration": 1.73,
+      "text": "stands for the following."
+    },
+    {
+      "index": 852,
+      "start": 2683.08,
+      "end": 2684.49,
+      "duration": 1.41,
+      "text": "You look at the random variable, and you"
+    },
+    {
+      "index": 853,
+      "start": 2684.49,
+      "end": 2686.28,
+      "duration": 1.79,
+      "text": "subtract the mean."
+    },
+    {
+      "index": 854,
+      "start": 2686.28,
+      "end": 2690.69,
+      "duration": 4.41,
+      "text": "This makes it a random variable with 0 mean."
+    },
+    {
+      "index": 855,
+      "start": 2690.69,
+      "end": 2694.27,
+      "duration": 3.58,
+      "text": "And then if I divide by the standard deviation, what"
+    },
+    {
+      "index": 856,
+      "start": 2694.27,
+      "end": 2698.22,
+      "duration": 3.95,
+      "text": "happens to the variance of this random variable?"
+    },
+    {
+      "index": 857,
+      "start": 2698.22,
+      "end": 2703.86,
+      "duration": 5.64,
+      "text": "Dividing by a number divides the variance by sigma squared."
+    },
+    {
+      "index": 858,
+      "start": 2703.86,
+      "end": 2707.3,
+      "duration": 3.44,
+      "text": "The original variance of X was sigma squared."
+    },
+    {
+      "index": 859,
+      "start": 2707.3,
+      "end": 2711.74,
+      "duration": 4.44,
+      "text": "So when I divide by sigma, I end up with unit variance."
+    },
+    {
+      "index": 860,
+      "start": 2711.74,
+      "end": 2714.92,
+      "duration": 3.18,
+      "text": "So after I do this transformation, I get a random"
+    },
+    {
+      "index": 861,
+      "start": 2714.92,
+      "end": 2719.19,
+      "duration": 4.27,
+      "text": "variable that has 0 mean and unit variance."
+    },
+    {
+      "index": 862,
+      "start": 2719.19,
+      "end": 2720.65,
+      "duration": 1.46,
+      "text": "It is also normal."
+    },
+    {
+      "index": 863,
+      "start": 2720.65,
+      "end": 2723.58,
+      "duration": 2.93,
+      "text": "Why is its normal?"
+    },
+    {
+      "index": 864,
+      "start": 2723.58,
+      "end": 2728.89,
+      "duration": 5.31,
+      "text": "Because this expression is a linear function of the X that"
+    },
+    {
+      "index": 865,
+      "start": 2728.89,
+      "end": 2730.12,
+      "duration": 1.23,
+      "text": "I started with."
+    },
+    {
+      "index": 866,
+      "start": 2730.12,
+      "end": 2732.7,
+      "duration": 2.58,
+      "text": "It's a linear function of a normal random variable."
+    },
+    {
+      "index": 867,
+      "start": 2732.7,
+      "end": 2734.62,
+      "duration": 1.92,
+      "text": "Therefore, it is normal."
+    },
+    {
+      "index": 868,
+      "start": 2734.62,
+      "end": 2737.09,
+      "duration": 2.47,
+      "text": "And it is a standard normal."
+    },
+    {
+      "index": 869,
+      "start": 2737.09,
+      "end": 2741.46,
+      "duration": 4.37,
+      "text": "So by taking a general normal random variable and doing this"
+    },
+    {
+      "index": 870,
+      "start": 2741.46,
+      "end": 2747.2,
+      "duration": 5.74,
+      "text": "standardization, you end up with a standard normal to"
+    },
+    {
+      "index": 871,
+      "start": 2747.2,
+      "end": 2749.58,
+      "duration": 2.38,
+      "text": "which you can then apply the table."
+    },
+    {
+      "index": 872,
+      "start": 2752.1,
+      "end": 2756.18,
+      "duration": 4.08,
+      "text": "Sometimes one calls this the normalized score."
+    },
+    {
+      "index": 873,
+      "start": 2756.18,
+      "end": 2759.1,
+      "duration": 2.92,
+      "text": "If you're thinking about test results, how would you"
+    },
+    {
+      "index": 874,
+      "start": 2759.1,
+      "end": 2760.78,
+      "duration": 1.68,
+      "text": "interpret this number?"
+    },
+    {
+      "index": 875,
+      "start": 2760.78,
+      "end": 2765.44,
+      "duration": 4.66,
+      "text": "It tells you how many standard deviations are you"
+    },
+    {
+      "index": 876,
+      "start": 2765.44,
+      "end": 2767.9,
+      "duration": 2.46,
+      "text": "away from the mean."
+    },
+    {
+      "index": 877,
+      "start": 2767.9,
+      "end": 2770.47,
+      "duration": 2.57,
+      "text": "This is how much you are away from the mean."
+    },
+    {
+      "index": 878,
+      "start": 2770.47,
+      "end": 2773.08,
+      "duration": 2.61,
+      "text": "And you count it in terms of how many standard"
+    },
+    {
+      "index": 879,
+      "start": 2773.08,
+      "end": 2774.39,
+      "duration": 1.31,
+      "text": "deviations it is."
+    },
+    {
+      "index": 880,
+      "start": 2774.39,
+      "end": 2779.68,
+      "duration": 5.29,
+      "text": "So this number being equal to 3 tells you that X happens to"
+    },
+    {
+      "index": 881,
+      "start": 2779.68,
+      "end": 2783.16,
+      "duration": 3.48,
+      "text": "be 3 standard deviations above the mean."
+    },
+    {
+      "index": 882,
+      "start": 2783.16,
+      "end": 2786.03,
+      "duration": 2.87,
+      "text": "And I guess if you're looking at your quiz scores, very"
+    },
+    {
+      "index": 883,
+      "start": 2786.03,
+      "end": 2790.69,
+      "duration": 4.66,
+      "text": "often that's the kind of number that you think about."
+    },
+    {
+      "index": 884,
+      "start": 2790.69,
+      "end": 2792.13,
+      "duration": 1.44,
+      "text": "So it's a useful quantity."
+    },
+    {
+      "index": 885,
+      "start": 2792.13,
+      "end": 2795.12,
+      "duration": 2.99,
+      "text": "But it's also useful for doing the calculation we're now"
+    },
+    {
+      "index": 886,
+      "start": 2795.12,
+      "end": 2796.05,
+      "duration": 0.93,
+      "text": "going to do."
+    },
+    {
+      "index": 887,
+      "start": 2796.05,
+      "end": 2800.91,
+      "duration": 4.86,
+      "text": "So suppose that X has a mean of 2 and a variance of 16, so"
+    },
+    {
+      "index": 888,
+      "start": 2800.91,
+      "end": 2803.6,
+      "duration": 2.69,
+      "text": "a standard deviation of 4."
+    },
+    {
+      "index": 889,
+      "start": 2803.6,
+      "end": 2806.03,
+      "duration": 2.43,
+      "text": "And we're going to calculate the probability of this event."
+    },
+    {
+      "index": 890,
+      "start": 2806.03,
+      "end": 2809.9,
+      "duration": 3.87,
+      "text": "This event is described in terms of this X that has ugly"
+    },
+    {
+      "index": 891,
+      "start": 2809.9,
+      "end": 2811.53,
+      "duration": 1.63,
+      "text": "means and variances."
+    },
+    {
+      "index": 892,
+      "start": 2811.53,
+      "end": 2815.39,
+      "duration": 3.86,
+      "text": "But we can take this event and rewrite it as"
+    },
+    {
+      "index": 893,
+      "start": 2815.39,
+      "end": 2817.07,
+      "duration": 1.68,
+      "text": "an equivalent event."
+    },
+    {
+      "index": 894,
+      "start": 2817.07,
+      "end": 2821.47,
+      "duration": 4.4,
+      "text": "X less than 3 is this same as X minus 2 being less than 3"
+    },
+    {
+      "index": 895,
+      "start": 2821.47,
+      "end": 2826.41,
+      "duration": 4.94,
+      "text": "minus 2, which is the same as this ratio being less than"
+    },
+    {
+      "index": 896,
+      "start": 2826.41,
+      "end": 2828.44,
+      "duration": 2.03,
+      "text": "that ratio."
+    },
+    {
+      "index": 897,
+      "start": 2828.44,
+      "end": 2831.46,
+      "duration": 3.02,
+      "text": "So I'm subtracting from both sides of the inequality the"
+    },
+    {
+      "index": 898,
+      "start": 2831.46,
+      "end": 2834.17,
+      "duration": 2.71,
+      "text": "mean and then dividing by the standard deviation."
+    },
+    {
+      "index": 899,
+      "start": 2834.17,
+      "end": 2836.19,
+      "duration": 2.02,
+      "text": "This event is the same as that event."
+    },
+    {
+      "index": 900,
+      "start": 2836.19,
+      "end": 2839.43,
+      "duration": 3.24,
+      "text": "Why do we like this better than that?"
+    },
+    {
+      "index": 901,
+      "start": 2839.43,
+      "end": 2843.67,
+      "duration": 4.24,
+      "text": "We like it because this is the standardized, or normalized,"
+    },
+    {
+      "index": 902,
+      "start": 2843.67,
+      "end": 2848.66,
+      "duration": 4.99,
+      "text": "version of X. We know that this is standard normal."
+    },
+    {
+      "index": 903,
+      "start": 2848.66,
+      "end": 2850.65,
+      "duration": 1.99,
+      "text": "And so we're asking the question, what's the"
+    },
+    {
+      "index": 904,
+      "start": 2850.65,
+      "end": 2854.13,
+      "duration": 3.48,
+      "text": "probability that the standard normal is less than this"
+    },
+    {
+      "index": 905,
+      "start": 2854.13,
+      "end": 2857.3,
+      "duration": 3.17,
+      "text": "number, which is 1/4?"
+    },
+    {
+      "index": 906,
+      "start": 2857.3,
+      "end": 2865.38,
+      "duration": 8.08,
+      "text": "So that's the key property, that this is normal (0, 1)."
+    },
+    {
+      "index": 907,
+      "start": 2865.38,
+      "end": 2868.47,
+      "duration": 3.09,
+      "text": "And so we can look up now with the table and ask for the"
+    },
+    {
+      "index": 908,
+      "start": 2868.47,
+      "end": 2871.01,
+      "duration": 2.54,
+      "text": "probability that the standard normal random variable"
+    },
+    {
+      "index": 909,
+      "start": 2871.01,
+      "end": 2873.17,
+      "duration": 2.16,
+      "text": "is less than 0.25."
+    },
+    {
+      "index": 910,
+      "start": 2873.17,
+      "end": 2875.13,
+      "duration": 1.96,
+      "text": "Where is that going to be?"
+    },
+    {
+      "index": 911,
+      "start": 2875.13,
+      "end": 2881.39,
+      "duration": 6.26,
+      "text": "0.2, 0.25, it's here."
+    },
+    {
+      "index": 912,
+      "start": 2881.39,
+      "end": 2889.6,
+      "duration": 8.21,
+      "text": "So the answer is 0.987."
+    },
+    {
+      "index": 913,
+      "start": 2889.6,
+      "end": 2895.57,
+      "duration": 5.97,
+      "text": "So I guess this is just a drill that you could learn in"
+    },
+    {
+      "index": 914,
+      "start": 2895.57,
+      "end": 2896.19,
+      "duration": 0.62,
+      "text": "high school."
+    },
+    {
+      "index": 915,
+      "start": 2896.19,
+      "end": 2898.99,
+      "duration": 2.8,
+      "text": "You didn't have to come here to learn about it."
+    },
+    {
+      "index": 916,
+      "start": 2898.99,
+      "end": 2902.03,
+      "duration": 3.04,
+      "text": "But it's a drill that's very useful when we will be"
+    },
+    {
+      "index": 917,
+      "start": 2902.03,
+      "end": 2904.06,
+      "duration": 2.03,
+      "text": "calculating normal probabilities all the time."
+    },
+    {
+      "index": 918,
+      "start": 2904.06,
+      "end": 2907.3,
+      "duration": 3.24,
+      "text": "So make sure you know how to use the table and how to"
+    },
+    {
+      "index": 919,
+      "start": 2907.3,
+      "end": 2910.35,
+      "duration": 3.05,
+      "text": "massage a general normal random variable into a"
+    },
+    {
+      "index": 920,
+      "start": 2910.35,
+      "end": 2913.38,
+      "duration": 3.03,
+      "text": "standard normal random variable."
+    },
+    {
+      "index": 921,
+      "start": 2913.38,
+      "end": 2913.79,
+      "duration": 0.41,
+      "text": "OK."
+    },
+    {
+      "index": 922,
+      "start": 2913.79,
+      "end": 2917.45,
+      "duration": 3.66,
+      "text": "So just one more minute to look at the big picture and"
+    },
+    {
+      "index": 923,
+      "start": 2917.45,
+      "end": 2920.94,
+      "duration": 3.49,
+      "text": "take stock of what we have done so far"
+    },
+    {
+      "index": 924,
+      "start": 2920.94,
+      "end": 2922.97,
+      "duration": 2.03,
+      "text": "and where we're going."
+    },
+    {
+      "index": 925,
+      "start": 2922.97,
+      "end": 2927.84,
+      "duration": 4.87,
+      "text": "Chapter 2 was this part of the picture, where we dealt with"
+    },
+    {
+      "index": 926,
+      "start": 2927.84,
+      "end": 2930.46,
+      "duration": 2.62,
+      "text": "discrete random variables."
+    },
+    {
+      "index": 927,
+      "start": 2930.46,
+      "end": 2934.59,
+      "duration": 4.13,
+      "text": "And this time, today, we started talking about"
+    },
+    {
+      "index": 928,
+      "start": 2934.59,
+      "end": 2936.41,
+      "duration": 1.82,
+      "text": "continuous random variables."
+    },
+    {
+      "index": 929,
+      "start": 2936.41,
+      "end": 2940.305,
+      "duration": 3.895,
+      "text": "And we introduced the density function, which is the analog"
+    },
+    {
+      "index": 930,
+      "start": 2940.305,
+      "end": 2943.16,
+      "duration": 2.855,
+      "text": "of the probability mass function."
+    },
+    {
+      "index": 931,
+      "start": 2943.16,
+      "end": 2945.79,
+      "duration": 2.63,
+      "text": "We have the concepts of expectation and"
+    },
+    {
+      "index": 932,
+      "start": 2945.79,
+      "end": 2947.09,
+      "duration": 1.3,
+      "text": "variance and CDF."
+    },
+    {
+      "index": 933,
+      "start": 2947.09,
+      "end": 2950.29,
+      "duration": 3.2,
+      "text": "And this kind of notation applies to both discrete and"
+    },
+    {
+      "index": 934,
+      "start": 2950.29,
+      "end": 2951.72,
+      "duration": 1.43,
+      "text": "continuous cases."
+    },
+    {
+      "index": 935,
+      "start": 2951.72,
+      "end": 2957.31,
+      "duration": 5.59,
+      "text": "They are calculated the same way in both cases except that"
+    },
+    {
+      "index": 936,
+      "start": 2957.31,
+      "end": 2959.77,
+      "duration": 2.46,
+      "text": "in the continuous case, you use sums."
+    },
+    {
+      "index": 937,
+      "start": 2959.77,
+      "end": 2962.74,
+      "duration": 2.97,
+      "text": "In the discrete case, you use integrals."
+    },
+    {
+      "index": 938,
+      "start": 2962.74,
+      "end": 2965.32,
+      "duration": 2.58,
+      "text": "So on that side, you have integrals."
+    },
+    {
+      "index": 939,
+      "start": 2965.32,
+      "end": 2967.5,
+      "duration": 2.18,
+      "text": "In this case, you have sums."
+    },
+    {
+      "index": 940,
+      "start": 2967.5,
+      "end": 2970.2,
+      "duration": 2.7,
+      "text": "In this case, you always have Fs in your formulas."
+    },
+    {
+      "index": 941,
+      "start": 2970.2,
+      "end": 2973.5,
+      "duration": 3.3,
+      "text": "In this case, you always have Ps in your formulas."
+    },
+    {
+      "index": 942,
+      "start": 2973.5,
+      "end": 2977.89,
+      "duration": 4.39,
+      "text": "So what's there that's left for us to do is to look at"
+    },
+    {
+      "index": 943,
+      "start": 2977.89,
+      "end": 2982.46,
+      "duration": 4.57,
+      "text": "these two concepts, joint probability mass functions and"
+    },
+    {
+      "index": 944,
+      "start": 2982.46,
+      "end": 2987.41,
+      "duration": 4.95,
+      "text": "conditional mass functions, and figure out what would be"
+    },
+    {
+      "index": 945,
+      "start": 2987.41,
+      "end": 2991.08,
+      "duration": 3.67,
+      "text": "the equivalent concepts on the continuous side."
+    },
+    {
+      "index": 946,
+      "start": 2991.08,
+      "end": 2995.24,
+      "duration": 4.16,
+      "text": "So we will need some notion of a joint density when we're"
+    },
+    {
+      "index": 947,
+      "start": 2995.24,
+      "end": 2997.51,
+      "duration": 2.27,
+      "text": "dealing with multiple random variables."
+    },
+    {
+      "index": 948,
+      "start": 2997.51,
+      "end": 3000.31,
+      "duration": 2.8,
+      "text": "And we will also need the concept of conditional"
+    },
+    {
+      "index": 949,
+      "start": 3000.31,
+      "end": 3003.43,
+      "duration": 3.12,
+      "text": "density, again for the case of continuous random variables."
+    },
+    {
+      "index": 950,
+      "start": 3003.43,
+      "end": 3007.84,
+      "duration": 4.41,
+      "text": "The intuition and the meaning of these objects is going to"
+    },
+    {
+      "index": 951,
+      "start": 3007.84,
+      "end": 3014.12,
+      "duration": 6.28,
+      "text": "be exactly the same as here, only a little subtler because"
+    },
+    {
+      "index": 952,
+      "start": 3014.12,
+      "end": 3016.0,
+      "duration": 1.88,
+      "text": "densities are not probabilities."
+    },
+    {
+      "index": 953,
+      "start": 3016.0,
+      "end": 3018.63,
+      "duration": 2.63,
+      "text": "They're rates at which probabilities accumulate."
+    },
+    {
+      "index": 954,
+      "start": 3018.63,
+      "end": 3022.03,
+      "duration": 3.4,
+      "text": "So that adds a little bit of potential confusion here,"
+    },
+    {
+      "index": 955,
+      "start": 3022.03,
+      "end": 3024.68,
+      "duration": 2.65,
+      "text": "which, hopefully, we will fully resolve in the next"
+    },
+    {
+      "index": 956,
+      "start": 3024.68,
+      "end": 3026.49,
+      "duration": 1.81,
+      "text": "couple of sections."
+    },
+    {
+      "index": 957,
+      "start": 3026.49,
+      "end": 3027.31,
+      "duration": 0.82,
+      "text": "All right."
+    },
+    {
+      "index": 958,
+      "start": 3027.31,
+      "end": 3028.56,
+      "duration": 1.25,
+      "text": "Thank you."
+    }
+  ],
+  "course": {
+    "category": "Physics",
+    "title": "Electricity and Magnetism",
+    "source_url": "https://www.youtube.com/playlist?list=PLUl4u3cNGP61MdtwGTqZA0MreSaDybji8"
+  }
+}

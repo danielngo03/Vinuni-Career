@@ -1,0 +1,4848 @@
+{
+  "video": {
+    "id": "RMBGQtwkoyU",
+    "title": "Lec 26: Spherical coordinates; surface area | MIT 18.02 Multivariable Calculus, Fall 2007",
+    "url": "https://www.youtube.com/watch?v=RMBGQtwkoyU",
+    "channel": "MIT OpenCourseWare",
+    "duration": 3065,
+    "language": "en"
+  },
+  "segment_count": 690,
+  "segments": [
+    {
+      "index": 0,
+      "start": 1.0,
+      "end": 3.0,
+      "duration": 2.0,
+      "text": "The following content is provided under a Creative"
+    },
+    {
+      "index": 1,
+      "start": 3.0,
+      "end": 5.0,
+      "duration": 2.0,
+      "text": "Commons license. Your support will help MIT"
+    },
+    {
+      "index": 2,
+      "start": 5.0,
+      "end": 8.0,
+      "duration": 3.0,
+      "text": "OpenCourseWare continue to offer high quality educational"
+    },
+    {
+      "index": 3,
+      "start": 8.0,
+      "end": 13.0,
+      "duration": 5.0,
+      "text": "resources for free. To make a donation or to view"
+    },
+    {
+      "index": 4,
+      "start": 13.0,
+      "end": 18.0,
+      "duration": 5.0,
+      "text": "additional materials from hundreds of MIT courses,"
+    },
+    {
+      "index": 5,
+      "start": 18.0,
+      "end": 23.0,
+      "duration": 5.0,
+      "text": "visit MIT OpenCourseWare at ocw.mit.edu."
+    },
+    {
+      "index": 6,
+      "start": 23.0,
+      "end": 27.0,
+      "duration": 4.0,
+      "text": "So, last week we learned how to do triple integrals in"
+    },
+    {
+      "index": 7,
+      "start": 27.0,
+      "end": 31.0,
+      "duration": 4.0,
+      "text": "rectangular and cylindrical coordinates."
+    },
+    {
+      "index": 8,
+      "start": 31.0,
+      "end": 41.0,
+      "duration": 10.0,
+      "text": "And, now we have to learn about spherical coordinates,"
+    },
+    {
+      "index": 9,
+      "start": 41.0,
+      "end": 49.0,
+      "duration": 8.0,
+      "text": "which you will see are a lot of fun."
+    },
+    {
+      "index": 10,
+      "start": 49.0,
+      "end": 53.0,
+      "duration": 4.0,
+      "text": "So, what's the idea of spherical coordinates?"
+    },
+    {
+      "index": 11,
+      "start": 53.0,
+      "end": 58.0,
+      "duration": 5.0,
+      "text": "Well, you're going to represent a point in space using the"
+    },
+    {
+      "index": 12,
+      "start": 58.0,
+      "end": 62.0,
+      "duration": 4.0,
+      "text": "distance to the origin and two angles."
+    },
+    {
+      "index": 13,
+      "start": 62.0,
+      "end": 66.0,
+      "duration": 4.0,
+      "text": "So, in a way, you can think of these as a"
+    },
+    {
+      "index": 14,
+      "start": 66.0,
+      "end": 69.0,
+      "duration": 3.0,
+      "text": "space analog of polar coordinates because you just use"
+    },
+    {
+      "index": 15,
+      "start": 69.0,
+      "end": 72.0,
+      "duration": 3.0,
+      "text": "distance to the origin, and then you have to use angles"
+    },
+    {
+      "index": 16,
+      "start": 72.0,
+      "end": 75.0,
+      "duration": 3.0,
+      "text": "to determine in which direction you're going."
+    },
+    {
+      "index": 17,
+      "start": 75.0,
+      "end": 82.0,
+      "duration": 7.0,
+      "text": "So, somehow they are more polar than cylindrical coordinates."
+    },
+    {
+      "index": 18,
+      "start": 82.0,
+      "end": 85.0,
+      "duration": 3.0,
+      "text": "So, how do we do that? So, let's say that you have a"
+    },
+    {
+      "index": 19,
+      "start": 85.0,
+      "end": 89.0,
+      "duration": 4.0,
+      "text": "point in space at coordinates x, y, z."
+    },
+    {
+      "index": 20,
+      "start": 89.0,
+      "end": 92.0,
+      "duration": 3.0,
+      "text": "Then, instead of using x, y, z, you will use,"
+    },
+    {
+      "index": 21,
+      "start": 92.0,
+      "end": 97.0,
+      "duration": 5.0,
+      "text": "well, one thing you'll use is the distance from the origin."
+    },
+    {
+      "index": 22,
+      "start": 97.0,
+      "end": 101.0,
+      "duration": 4.0,
+      "text": "OK, and that is denoted by the Greek letter which looks like a"
+    },
+    {
+      "index": 23,
+      "start": 101.0,
+      "end": 103.0,
+      "duration": 2.0,
+      "text": "curly p, but actually it's the Greek R."
+    },
+    {
+      "index": 24,
+      "start": 103.0,
+      "end": 117.0,
+      "duration": 14.0,
+      "text": "So -- That's the distance from the origin."
+    },
+    {
+      "index": 25,
+      "start": 117.0,
+      "end": 122.0,
+      "duration": 5.0,
+      "text": "And so, that can take values anywhere between zero and"
+    },
+    {
+      "index": 26,
+      "start": 122.0,
+      "end": 126.0,
+      "duration": 4.0,
+      "text": "infinity. Then, we have to use two other"
+    },
+    {
+      "index": 27,
+      "start": 126.0,
+      "end": 129.0,
+      "duration": 3.0,
+      "text": "angles. And, so for that,"
+    },
+    {
+      "index": 28,
+      "start": 129.0,
+      "end": 136.0,
+      "duration": 7.0,
+      "text": "let me actually draw the vertical half plane that"
+    },
+    {
+      "index": 29,
+      "start": 136.0,
+      "end": 142.0,
+      "duration": 6.0,
+      "text": "contains our point starting from the z axis."
+    },
+    {
+      "index": 30,
+      "start": 142.0,
+      "end": 145.0,
+      "duration": 3.0,
+      "text": "OK, so then we have two new angles."
+    },
+    {
+      "index": 31,
+      "start": 145.0,
+      "end": 147.0,
+      "duration": 2.0,
+      "text": "Well, one of them is not really new."
+    },
+    {
+      "index": 32,
+      "start": 147.0,
+      "end": 150.0,
+      "duration": 3.0,
+      "text": "One is new. That's phi is the angle"
+    },
+    {
+      "index": 33,
+      "start": 150.0,
+      "end": 154.0,
+      "duration": 4.0,
+      "text": "downwards from the z axis. And the other one,"
+    },
+    {
+      "index": 34,
+      "start": 154.0,
+      "end": 159.0,
+      "duration": 5.0,
+      "text": "theta, is the angle counterclockwise from the x"
+    },
+    {
+      "index": 35,
+      "start": 159.0,
+      "end": 171.0,
+      "duration": 12.0,
+      "text": "axis. OK, so phi, let me do it better."
+    },
+    {
+      "index": 36,
+      "start": 171.0,
+      "end": 174.0,
+      "duration": 3.0,
+      "text": "So, there's two ways to draw the letter phi,"
+    },
+    {
+      "index": 37,
+      "start": 174.0,
+      "end": 176.0,
+      "duration": 2.0,
+      "text": "by the way. And, I recommend this one"
+    },
+    {
+      "index": 38,
+      "start": 176.0,
+      "end": 178.0,
+      "duration": 2.0,
+      "text": "because it doesn't look like a rho."
+    },
+    {
+      "index": 39,
+      "start": 178.0,
+      "end": 187.0,
+      "duration": 9.0,
+      "text": "So, that's easier. That's the angle that you have"
+    },
+    {
+      "index": 40,
+      "start": 187.0,
+      "end": 193.0,
+      "duration": 6.0,
+      "text": "to go down from the positive z axis."
+    },
+    {
+      "index": 41,
+      "start": 193.0,
+      "end": 197.0,
+      "duration": 4.0,
+      "text": "And, so that angle varies from zero"
+    },
+    {
+      "index": 42,
+      "start": 197.0,
+      "end": 203.0,
+      "duration": 6.0,
+      "text": "when you're on the z axis, increase to pi over two when"
+    },
+    {
+      "index": 43,
+      "start": 203.0,
+      "end": 208.0,
+      "duration": 5.0,
+      "text": "you are on the xy plane all the way to pi or 180� when you are"
+    },
+    {
+      "index": 44,
+      "start": 208.0,
+      "end": 218.0,
+      "duration": 10.0,
+      "text": "on the negative z axis. It doesn't go beyond that."
+    },
+    {
+      "index": 45,
+      "start": 218.0,
+      "end": 224.0,
+      "duration": 6.0,
+      "text": "OK, so -- Phi is always between zero and pi."
+    },
+    {
+      "index": 46,
+      "start": 224.0,
+      "end": 226.0,
+      "duration": 2.0,
+      "text": "And, finally, the last one,"
+    },
+    {
+      "index": 47,
+      "start": 226.0,
+      "end": 231.0,
+      "duration": 5.0,
+      "text": "theta, is just going to be the same as before."
+    },
+    {
+      "index": 48,
+      "start": 231.0,
+      "end": 235.0,
+      "duration": 4.0,
+      "text": "So, it's the angle after you project to the xy plane."
+    },
+    {
+      "index": 49,
+      "start": 235.0,
+      "end": 240.0,
+      "duration": 5.0,
+      "text": "That's the angle counterclockwise from the x"
+    },
+    {
+      "index": 50,
+      "start": 240.0,
+      "end": 242.0,
+      "duration": 2.0,
+      "text": "axis. OK, so that's a little bit"
+    },
+    {
+      "index": 51,
+      "start": 242.0,
+      "end": 245.0,
+      "duration": 3.0,
+      "text": "overwhelming not just because of the new letters,"
+    },
+    {
+      "index": 52,
+      "start": 245.0,
+      "end": 247.0,
+      "duration": 2.0,
+      "text": "but also because there is a lot of angles in there."
+    },
+    {
+      "index": 53,
+      "start": 247.0,
+      "end": 251.0,
+      "duration": 4.0,
+      "text": "So, let me just try to, you know, suggest two things"
+    },
+    {
+      "index": 54,
+      "start": 251.0,
+      "end": 253.0,
+      "duration": 2.0,
+      "text": "that might help you a little bit."
+    },
+    {
+      "index": 55,
+      "start": 253.0,
+      "end": 257.0,
+      "duration": 4.0,
+      "text": "So, one is, these are called spherical coordinates because if"
+    },
+    {
+      "index": 56,
+      "start": 257.0,
+      "end": 261.0,
+      "duration": 4.0,
+      "text": "you fix the value of rho, then you are moving on a sphere"
+    },
+    {
+      "index": 57,
+      "start": 261.0,
+      "end": 267.0,
+      "duration": 6.0,
+      "text": "centered at the origin. OK, so let's look at what"
+    },
+    {
+      "index": 58,
+      "start": 267.0,
+      "end": 274.0,
+      "duration": 7.0,
+      "text": "happens on a sphere centered at the origin, so,"
+    },
+    {
+      "index": 59,
+      "start": 274.0,
+      "end": 281.0,
+      "duration": 7.0,
+      "text": "with equation rho equals a. Well, then phi measures how far"
+    },
+    {
+      "index": 60,
+      "start": 281.0,
+      "end": 284.0,
+      "duration": 3.0,
+      "text": "south you are going, measures the distance from the"
+    },
+    {
+      "index": 61,
+      "start": 284.0,
+      "end": 286.0,
+      "duration": 2.0,
+      "text": "North Pole. So,"
+    },
+    {
+      "index": 62,
+      "start": 286.0,
+      "end": 288.0,
+      "duration": 2.0,
+      "text": "if you've learned about latitude and longitude in"
+    },
+    {
+      "index": 63,
+      "start": 288.0,
+      "end": 291.0,
+      "duration": 3.0,
+      "text": "geography, well, phi and theta you can"
+    },
+    {
+      "index": 64,
+      "start": 291.0,
+      "end": 294.0,
+      "duration": 3.0,
+      "text": "think of as latitude and longitude except with slightly"
+    },
+    {
+      "index": 65,
+      "start": 294.0,
+      "end": 299.0,
+      "duration": 5.0,
+      "text": "different conventions. OK, so, phi is more or less the"
+    },
+    {
+      "index": 66,
+      "start": 299.0,
+      "end": 305.0,
+      "duration": 6.0,
+      "text": "same thing as latitude in the sense that it measures how far"
+    },
+    {
+      "index": 67,
+      "start": 305.0,
+      "end": 309.0,
+      "duration": 4.0,
+      "text": "north or south you are. The only difference is in"
+    },
+    {
+      "index": 68,
+      "start": 309.0,
+      "end": 312.0,
+      "duration": 3.0,
+      "text": "geography, latitude is zero on the equator"
+    },
+    {
+      "index": 69,
+      "start": 312.0,
+      "end": 316.0,
+      "duration": 4.0,
+      "text": "and becomes something north, something south,"
+    },
+    {
+      "index": 70,
+      "start": 316.0,
+      "end": 318.0,
+      "duration": 2.0,
+      "text": "depending on how far you go from the equator."
+    },
+    {
+      "index": 71,
+      "start": 318.0,
+      "end": 321.0,
+      "duration": 3.0,
+      "text": "Here, you measure a latitude starting from the North Pole"
+    },
+    {
+      "index": 72,
+      "start": 321.0,
+      "end": 324.0,
+      "duration": 3.0,
+      "text": "which is zero, increasing all the way to the"
+    },
+    {
+      "index": 73,
+      "start": 324.0,
+      "end": 329.0,
+      "duration": 5.0,
+      "text": "South Pole, which is at pi. And, theta or you can think of"
+    },
+    {
+      "index": 74,
+      "start": 329.0,
+      "end": 333.0,
+      "duration": 4.0,
+      "text": "as longitude, which measures how far you are"
+    },
+    {
+      "index": 75,
+      "start": 333.0,
+      "end": 336.0,
+      "duration": 3.0,
+      "text": "east or west. So, the Greenwich Meridian"
+    },
+    {
+      "index": 76,
+      "start": 336.0,
+      "end": 339.0,
+      "duration": 3.0,
+      "text": "would be here, now, the one on the x axis."
+    },
+    {
+      "index": 77,
+      "start": 339.0,
+      "end": 346.0,
+      "duration": 7.0,
+      "text": "That's the one you use as the origin for longitude,"
+    },
+    {
+      "index": 78,
+      "start": 346.0,
+      "end": 348.0,
+      "duration": 2.0,
+      "text": "OK? Now, if you don't like"
+    },
+    {
+      "index": 79,
+      "start": 348.0,
+      "end": 351.0,
+      "duration": 3.0,
+      "text": "geography, here's another way to think about it."
+    },
+    {
+      "index": 80,
+      "start": 351.0,
+      "end": 356.0,
+      "duration": 5.0,
+      "text": "So -- Let's start again from cylindrical coordinates,"
+    },
+    {
+      "index": 81,
+      "start": 356.0,
+      "end": 362.0,
+      "duration": 6.0,
+      "text": "which hopefully you're kind of comfortable with now."
+    },
+    {
+      "index": 82,
+      "start": 362.0,
+      "end": 366.0,
+      "duration": 4.0,
+      "text": "OK, so you know about cylindrical coordinates where we"
+    },
+    {
+      "index": 83,
+      "start": 366.0,
+      "end": 369.0,
+      "duration": 3.0,
+      "text": "have the z coordinates stay z, and the xy plane we do R and"
+    },
+    {
+      "index": 84,
+      "start": 369.0,
+      "end": 373.0,
+      "duration": 4.0,
+      "text": "theta polar coordinates. And now, let's think about what"
+    },
+    {
+      "index": 85,
+      "start": 373.0,
+      "end": 378.0,
+      "duration": 5.0,
+      "text": "happens when you look at just one of these vertical planes"
+    },
+    {
+      "index": 86,
+      "start": 378.0,
+      "end": 381.0,
+      "duration": 3.0,
+      "text": "containing the z axis. So, you have the z axis,"
+    },
+    {
+      "index": 87,
+      "start": 381.0,
+      "end": 385.0,
+      "duration": 4.0,
+      "text": "and then you have the direction away from the z axis,"
+    },
+    {
+      "index": 88,
+      "start": 385.0,
+      "end": 389.0,
+      "duration": 4.0,
+      "text": "which I will call r, just because that's what r"
+    },
+    {
+      "index": 89,
+      "start": 389.0,
+      "end": 392.0,
+      "duration": 3.0,
+      "text": "measures. Of course, r goes all around"
+    },
+    {
+      "index": 90,
+      "start": 392.0,
+      "end": 395.0,
+      "duration": 3.0,
+      "text": "the z axis, but I'm just doing a slice through one of these"
+    },
+    {
+      "index": 91,
+      "start": 395.0,
+      "end": 399.0,
+      "duration": 4.0,
+      "text": "vertical half planes, fixing the value of theta."
+    },
+    {
+      "index": 92,
+      "start": 399.0,
+      "end": 403.0,
+      "duration": 4.0,
+      "text": "Then, r of course is a polar coordinate seen from the point"
+    },
+    {
+      "index": 93,
+      "start": 403.0,
+      "end": 406.0,
+      "duration": 3.0,
+      "text": "of view of the xy plane. But here, it looks more like"
+    },
+    {
+      "index": 94,
+      "start": 406.0,
+      "end": 408.0,
+      "duration": 2.0,
+      "text": "you have rectangular coordinates again."
+    },
+    {
+      "index": 95,
+      "start": 408.0,
+      "end": 411.0,
+      "duration": 3.0,
+      "text": "So the idea of spherical coordinate is you're going to"
+    },
+    {
+      "index": 96,
+      "start": 411.0,
+      "end": 414.0,
+      "duration": 3.0,
+      "text": "polar coordinates again in the rz plane."
+    },
+    {
+      "index": 97,
+      "start": 414.0,
+      "end": 421.0,
+      "duration": 7.0,
+      "text": "OK, so if I have a point here, then rho will be the distance"
+    },
+    {
+      "index": 98,
+      "start": 421.0,
+      "end": 426.0,
+      "duration": 5.0,
+      "text": "from the origin. And phi will be the angle,"
+    },
+    {
+      "index": 99,
+      "start": 426.0,
+      "end": 430.0,
+      "duration": 4.0,
+      "text": "except it's measured from the positive z axis,"
+    },
+    {
+      "index": 100,
+      "start": 430.0,
+      "end": 436.0,
+      "duration": 6.0,
+      "text": "not from the horizontal axis. But, the idea in here,"
+    },
+    {
+      "index": 101,
+      "start": 436.0,
+      "end": 438.0,
+      "duration": 2.0,
+      "text": "see, let me put that between quotes"
+    },
+    {
+      "index": 102,
+      "start": 438.0,
+      "end": 441.0,
+      "duration": 3.0,
+      "text": "because I'm not sure how correct that is,"
+    },
+    {
+      "index": 103,
+      "start": 441.0,
+      "end": 448.0,
+      "duration": 7.0,
+      "text": "but in a way, you can think of this as polar"
+    },
+    {
+      "index": 104,
+      "start": 448.0,
+      "end": 454.0,
+      "duration": 6.0,
+      "text": "coordinates in the rz plane. So, in particular,"
+    },
+    {
+      "index": 105,
+      "start": 454.0,
+      "end": 458.0,
+      "duration": 4.0,
+      "text": "that's the key to understanding how to switch between spherical"
+    },
+    {
+      "index": 106,
+      "start": 458.0,
+      "end": 461.0,
+      "duration": 3.0,
+      "text": "coordinates and cylindrical coordinates,"
+    },
+    {
+      "index": 107,
+      "start": 461.0,
+      "end": 464.0,
+      "duration": 3.0,
+      "text": "and then all the way to x, y, z if you want,"
+    },
+    {
+      "index": 108,
+      "start": 464.0,
+      "end": 468.0,
+      "duration": 4.0,
+      "text": "right, because this picture here tells"
+    },
+    {
+      "index": 109,
+      "start": 468.0,
+      "end": 473.0,
+      "duration": 5.0,
+      "text": "us how to express z and r in terms of rho and phi."
+    },
+    {
+      "index": 110,
+      "start": 473.0,
+      "end": 483.0,
+      "duration": 10.0,
+      "text": "So, let's see how that works. If I project here or here,"
+    },
+    {
+      "index": 111,
+      "start": 483.0,
+      "end": 492.0,
+      "duration": 9.0,
+      "text": "so, this line is z. But, it's also rho times cosine"
+    },
+    {
+      "index": 112,
+      "start": 492.0,
+      "end": 499.0,
+      "duration": 7.0,
+      "text": "phi. So, I get z equals rho cos phi."
+    },
+    {
+      "index": 113,
+      "start": 499.0,
+      "end": 501.0,
+      "duration": 2.0,
+      "text": "And, if I look at r, it's the same thing,"
+    },
+    {
+      "index": 114,
+      "start": 501.0,
+      "end": 511.0,
+      "duration": 10.0,
+      "text": "but on the other side. So, r will be rho sine phi."
+    },
+    {
+      "index": 115,
+      "start": 511.0,
+      "end": 514.0,
+      "duration": 3.0,
+      "text": "OK, so you can use this to switch back and forth between"
+    },
+    {
+      "index": 116,
+      "start": 514.0,
+      "end": 517.0,
+      "duration": 3.0,
+      "text": "spherical and cylindrical. And of course,"
+    },
+    {
+      "index": 117,
+      "start": 517.0,
+      "end": 523.0,
+      "duration": 6.0,
+      "text": "if you remember what x and y were in terms of r and theta,"
+    },
+    {
+      "index": 118,
+      "start": 523.0,
+      "end": 529.0,
+      "duration": 6.0,
+      "text": "you can also keep doing this to figure out, oops."
+    },
+    {
+      "index": 119,
+      "start": 529.0,
+      "end": 537.0,
+      "duration": 8.0,
+      "text": "So, x is r cos theta. That becomes rho sine phi cos"
+    },
+    {
+      "index": 120,
+      "start": 537.0,
+      "end": 541.0,
+      "duration": 4.0,
+      "text": "theta. Y is r sine theta."
+    },
+    {
+      "index": 121,
+      "start": 541.0,
+      "end": 546.0,
+      "duration": 5.0,
+      "text": "So, that becomes rho sine phi sine theta."
+    },
+    {
+      "index": 122,
+      "start": 546.0,
+      "end": 555.0,
+      "duration": 9.0,
+      "text": "And z is rho cos phi. But, basically you don't really"
+    },
+    {
+      "index": 123,
+      "start": 555.0,
+      "end": 559.0,
+      "duration": 4.0,
+      "text": "need to remember these formulas as long as you remember how to"
+    },
+    {
+      "index": 124,
+      "start": 559.0,
+      "end": 562.0,
+      "duration": 3.0,
+      "text": "express r in terms of rho sine phi,"
+    },
+    {
+      "index": 125,
+      "start": 562.0,
+      "end": 569.0,
+      "duration": 7.0,
+      "text": "and x equals r cos theta. So, now, of course,"
+    },
+    {
+      "index": 126,
+      "start": 569.0,
+      "end": 571.0,
+      "duration": 2.0,
+      "text": "we're going to use spherical coordinates in situations where"
+    },
+    {
+      "index": 127,
+      "start": 571.0,
+      "end": 573.0,
+      "duration": 2.0,
+      "text": "we have a lot of symmetry, and in particular,"
+    },
+    {
+      "index": 128,
+      "start": 573.0,
+      "end": 575.0,
+      "duration": 2.0,
+      "text": "where the z axis plays a special role."
+    },
+    {
+      "index": 129,
+      "start": 575.0,
+      "end": 578.0,
+      "duration": 3.0,
+      "text": "Actually, that's the same with cylindrical coordinates."
+    },
+    {
+      "index": 130,
+      "start": 578.0,
+      "end": 580.0,
+      "duration": 2.0,
+      "text": "Cylindrical and secure coordinates are set up so that"
+    },
+    {
+      "index": 131,
+      "start": 580.0,
+      "end": 584.0,
+      "duration": 4.0,
+      "text": "the z axis plays a special role. So, that means whenever you"
+    },
+    {
+      "index": 132,
+      "start": 584.0,
+      "end": 587.0,
+      "duration": 3.0,
+      "text": "have a geometric problem, and you are not told how to"
+    },
+    {
+      "index": 133,
+      "start": 587.0,
+      "end": 591.0,
+      "duration": 4.0,
+      "text": "choose your coordinates, it's probably wiser to try to"
+    },
+    {
+      "index": 134,
+      "start": 591.0,
+      "end": 597.0,
+      "duration": 6.0,
+      "text": "center things on the z axis. That's where these coordinates"
+    },
+    {
+      "index": 135,
+      "start": 597.0,
+      "end": 601.0,
+      "duration": 4.0,
+      "text": "are the best adapted. And,"
+    },
+    {
+      "index": 136,
+      "start": 601.0,
+      "end": 603.0,
+      "duration": 2.0,
+      "text": "in case you ever need to switch backwards,"
+    },
+    {
+      "index": 137,
+      "start": 603.0,
+      "end": 607.0,
+      "duration": 4.0,
+      "text": "I just want to point out, so, rho is the square root of r"
+    },
+    {
+      "index": 138,
+      "start": 607.0,
+      "end": 611.0,
+      "duration": 4.0,
+      "text": "squared plus z squared, which means it's the square"
+    },
+    {
+      "index": 139,
+      "start": 611.0,
+      "end": 615.0,
+      "duration": 4.0,
+      "text": "root of x squared plus y squared plus z squared."
+    },
+    {
+      "index": 140,
+      "start": 615.0,
+      "end": 620.0,
+      "duration": 5.0,
+      "text": "OK, so that's basically all the formulas about spherical"
+    },
+    {
+      "index": 141,
+      "start": 620.0,
+      "end": 628.0,
+      "duration": 8.0,
+      "text": "coordinates. OK, any questions about that?"
+    },
+    {
+      "index": 142,
+      "start": 628.0,
+      "end": 631.0,
+      "duration": 3.0,
+      "text": "OK, let's see, who had seen spherical"
+    },
+    {
+      "index": 143,
+      "start": 631.0,
+      "end": 634.0,
+      "duration": 3.0,
+      "text": "coordinates before just to see? OK, that's not very many."
+    },
+    {
+      "index": 144,
+      "start": 634.0,
+      "end": 636.0,
+      "duration": 2.0,
+      "text": "So, I'm sure for, one of you saw it twice."
+    },
+    {
+      "index": 145,
+      "start": 636.0,
+      "end": 642.0,
+      "duration": 6.0,
+      "text": "That's great. Sorry, oops,"
+    },
+    {
+      "index": 146,
+      "start": 642.0,
+      "end": 649.0,
+      "duration": 7.0,
+      "text": "OK, so let's just look quickly at equations of some of the"
+    },
+    {
+      "index": 147,
+      "start": 649.0,
+      "end": 654.0,
+      "duration": 5.0,
+      "text": "things. So, as I've said,"
+    },
+    {
+      "index": 148,
+      "start": 654.0,
+      "end": 662.0,
+      "duration": 8.0,
+      "text": "if I set rho equals a, that will be just a sphere of"
+    },
+    {
+      "index": 149,
+      "start": 662.0,
+      "end": 671.0,
+      "duration": 9.0,
+      "text": "radius a centered at the origin. More interesting things:"
+    },
+    {
+      "index": 150,
+      "start": 671.0,
+      "end": 674.0,
+      "duration": 3.0,
+      "text": "let's say I give you phi equals pi over four."
+    },
+    {
+      "index": 151,
+      "start": 674.0,
+      "end": 678.0,
+      "duration": 4.0,
+      "text": "What do you think that looks like?"
+    },
+    {
+      "index": 152,
+      "start": 678.0,
+      "end": 689.0,
+      "duration": 11.0,
+      "text": "Actually, let's take a quick poll on things."
+    },
+    {
+      "index": 153,
+      "start": 689.0,
+      "end": 691.0,
+      "duration": 2.0,
+      "text": "OK, yeah, everyone seems to be saying it's a cone,"
+    },
+    {
+      "index": 154,
+      "start": 691.0,
+      "end": 693.0,
+      "duration": 2.0,
+      "text": "and that's indeed the correct answer."
+    },
+    {
+      "index": 155,
+      "start": 693.0,
+      "end": 701.0,
+      "duration": 8.0,
+      "text": "So, how do we see that? Well, remember,"
+    },
+    {
+      "index": 156,
+      "start": 701.0,
+      "end": 704.0,
+      "duration": 3.0,
+      "text": "phi is the angle downward from the z axis."
+    },
+    {
+      "index": 157,
+      "start": 704.0,
+      "end": 709.0,
+      "duration": 5.0,
+      "text": "So, let's say that I'm going to look first at what happens if"
+    },
+    {
+      "index": 158,
+      "start": 709.0,
+      "end": 713.0,
+      "duration": 4.0,
+      "text": "I'm in the right half of a plane of a blackboard,"
+    },
+    {
+      "index": 159,
+      "start": 713.0,
+      "end": 716.0,
+      "duration": 3.0,
+      "text": "so, in the yz plane. Then, phi is the angle downward"
+    },
+    {
+      "index": 160,
+      "start": 716.0,
+      "end": 718.0,
+      "duration": 2.0,
+      "text": "from here. So, if I want to get pi over"
+    },
+    {
+      "index": 161,
+      "start": 718.0,
+      "end": 721.0,
+      "duration": 3.0,
+      "text": "four, that's 45�. That means I'm going to go"
+    },
+    {
+      "index": 162,
+      "start": 721.0,
+      "end": 723.0,
+      "duration": 2.0,
+      "text": "diagonally like this. Of course, if I'm in the left"
+    },
+    {
+      "index": 163,
+      "start": 723.0,
+      "end": 726.0,
+      "duration": 3.0,
+      "text": "half of a plane of a blackboard, it's going to be the same."
+    },
+    {
+      "index": 164,
+      "start": 726.0,
+      "end": 730.0,
+      "duration": 4.0,
+      "text": "I also take pi over four. And, I get the other half."
+    },
+    {
+      "index": 165,
+      "start": 730.0,
+      "end": 733.0,
+      "duration": 3.0,
+      "text": "And, because the equation does not involve theta,"
+    },
+    {
+      "index": 166,
+      "start": 733.0,
+      "end": 737.0,
+      "duration": 4.0,
+      "text": "it's all the same if I rotate my vertical plane around the z"
+    },
+    {
+      "index": 167,
+      "start": 737.0,
+      "end": 741.0,
+      "duration": 4.0,
+      "text": "axis. So, I get the same picture in"
+    },
+    {
+      "index": 168,
+      "start": 741.0,
+      "end": 747.0,
+      "duration": 6.0,
+      "text": "any of these vertical half planes, actually."
+    },
+    {
+      "index": 169,
+      "start": 747.0,
+      "end": 752.0,
+      "duration": 5.0,
+      "text": "OK, now, so this is phi equals pi over four."
+    },
+    {
+      "index": 170,
+      "start": 752.0,
+      "end": 755.0,
+      "duration": 3.0,
+      "text": "And, just in case, to point out to you what's"
+    },
+    {
+      "index": 171,
+      "start": 755.0,
+      "end": 759.0,
+      "duration": 4.0,
+      "text": "going on, when phi equals pi over four, cosine and sine are"
+    },
+    {
+      "index": 172,
+      "start": 759.0,
+      "end": 762.0,
+      "duration": 3.0,
+      "text": "equal to each other. They are both one over root two."
+    },
+    {
+      "index": 173,
+      "start": 762.0,
+      "end": 766.0,
+      "duration": 4.0,
+      "text": "So, you can find, again, the equation of this"
+    },
+    {
+      "index": 174,
+      "start": 766.0,
+      "end": 771.0,
+      "duration": 5.0,
+      "text": "thing in cylindrical coordinates, which I'll remind"
+    },
+    {
+      "index": 175,
+      "start": 771.0,
+      "end": 774.0,
+      "duration": 3.0,
+      "text": "you was z equals r. OK, in general,"
+    },
+    {
+      "index": 176,
+      "start": 774.0,
+      "end": 778.0,
+      "duration": 4.0,
+      "text": "phi equals some given number, or z equals some number times"
+    },
+    {
+      "index": 177,
+      "start": 778.0,
+      "end": 781.0,
+      "duration": 3.0,
+      "text": "r. That will be a cone centered on"
+    },
+    {
+      "index": 178,
+      "start": 781.0,
+      "end": 784.0,
+      "duration": 3.0,
+      "text": "the z axis. OK, a special case:"
+    },
+    {
+      "index": 179,
+      "start": 784.0,
+      "end": 787.0,
+      "duration": 3.0,
+      "text": "what if I say phi equals pi over two?"
+    },
+    {
+      "index": 180,
+      "start": 787.0,
+      "end": 789.0,
+      "duration": 2.0,
+      "text": "Yeah, it's just going to be the xy plane."
+    },
+    {
+      "index": 181,
+      "start": 789.0,
+      "end": 793.0,
+      "duration": 4.0,
+      "text": "OK, that's the flattest of all cones."
+    },
+    {
+      "index": 182,
+      "start": 793.0,
+      "end": 800.0,
+      "duration": 7.0,
+      "text": "OK, so phi equals pi over two is going to be just the xy"
+    },
+    {
+      "index": 183,
+      "start": 800.0,
+      "end": 802.0,
+      "duration": 2.0,
+      "text": "plane. And, in general,"
+    },
+    {
+      "index": 184,
+      "start": 802.0,
+      "end": 804.0,
+      "duration": 2.0,
+      "text": "if phi is less than pi over two, then you are in the upper"
+    },
+    {
+      "index": 185,
+      "start": 804.0,
+      "end": 808.0,
+      "duration": 4.0,
+      "text": "half space. If phi is more than pi over"
+    },
+    {
+      "index": 186,
+      "start": 808.0,
+      "end": 812.0,
+      "duration": 4.0,
+      "text": "two, you'll be in the lower half space."
+    },
+    {
+      "index": 187,
+      "start": 812.0,
+      "end": 816.0,
+      "duration": 4.0,
+      "text": "OK, so that's pretty much all we need to know at this point."
+    },
+    {
+      "index": 188,
+      "start": 816.0,
+      "end": 825.0,
+      "duration": 9.0,
+      "text": "So, what's next? Well, remember we were trying"
+    },
+    {
+      "index": 189,
+      "start": 825.0,
+      "end": 832.0,
+      "duration": 7.0,
+      "text": "to do triple integrals. So now we're going to triple"
+    },
+    {
+      "index": 190,
+      "start": 832.0,
+      "end": 839.0,
+      "duration": 7.0,
+      "text": "integrals in spherical coordinates."
+    },
+    {
+      "index": 191,
+      "start": 839.0,
+      "end": 841.0,
+      "duration": 2.0,
+      "text": "And, for that, we first need to understand"
+    },
+    {
+      "index": 192,
+      "start": 841.0,
+      "end": 846.0,
+      "duration": 5.0,
+      "text": "what the volume element is. What will be dV?"
+    },
+    {
+      "index": 193,
+      "start": 846.0,
+      "end": 852.0,
+      "duration": 6.0,
+      "text": "OK, so dV will be something, d rho, d phi,"
+    },
+    {
+      "index": 194,
+      "start": 852.0,
+      "end": 858.0,
+      "duration": 6.0,
+      "text": "d theta, or in any order that you want."
+    },
+    {
+      "index": 195,
+      "start": 858.0,
+      "end": 863.0,
+      "duration": 5.0,
+      "text": "But, this one is usually the most convenient."
+    },
+    {
+      "index": 196,
+      "start": 863.0,
+      "end": 867.0,
+      "duration": 4.0,
+      "text": "So, to find out what it is, well, we should look at how we"
+    },
+    {
+      "index": 197,
+      "start": 867.0,
+      "end": 869.0,
+      "duration": 2.0,
+      "text": "are going to be slicing things now."
+    },
+    {
+      "index": 198,
+      "start": 869.0,
+      "end": 872.0,
+      "duration": 3.0,
+      "text": "OK, so if you integrate d rho, d phi, d theta,"
+    },
+    {
+      "index": 199,
+      "start": 872.0,
+      "end": 877.0,
+      "duration": 5.0,
+      "text": "it means that you are actually slicing your solid into little"
+    },
+    {
+      "index": 200,
+      "start": 877.0,
+      "end": 880.0,
+      "duration": 3.0,
+      "text": "pieces that live, somehow,"
+    },
+    {
+      "index": 201,
+      "start": 880.0,
+      "end": 885.0,
+      "duration": 5.0,
+      "text": "if you set an interval of rows, OK,"
+    },
+    {
+      "index": 202,
+      "start": 885.0,
+      "end": 888.0,
+      "duration": 3.0,
+      "text": "sorry, maybe I should, so, if you first integrate over"
+    },
+    {
+      "index": 203,
+      "start": 888.0,
+      "end": 891.0,
+      "duration": 3.0,
+      "text": "rho, it means that you will actually"
+    },
+    {
+      "index": 204,
+      "start": 891.0,
+      "end": 897.0,
+      "duration": 6.0,
+      "text": "choose first the direction from the origin even by phi and"
+    },
+    {
+      "index": 205,
+      "start": 897.0,
+      "end": 900.0,
+      "duration": 3.0,
+      "text": "theta. And, in that direction,"
+    },
+    {
+      "index": 206,
+      "start": 900.0,
+      "end": 904.0,
+      "duration": 4.0,
+      "text": "you will try to figure out, how far does your region"
+    },
+    {
+      "index": 207,
+      "start": 904.0,
+      "end": 907.0,
+      "duration": 3.0,
+      "text": "extend? And, of course,"
+    },
+    {
+      "index": 208,
+      "start": 907.0,
+      "end": 911.0,
+      "duration": 4.0,
+      "text": "how far that goes might depend on phi and theta."
+    },
+    {
+      "index": 209,
+      "start": 911.0,
+      "end": 916.0,
+      "duration": 5.0,
+      "text": "Then, you will vary phi. So, you have to know,"
+    },
+    {
+      "index": 210,
+      "start": 916.0,
+      "end": 921.0,
+      "duration": 5.0,
+      "text": "for a given value of theta, how far down does your solid"
+    },
+    {
+      "index": 211,
+      "start": 921.0,
+      "end": 922.0,
+      "duration": 1.0,
+      "text": "extend? And, finally,"
+    },
+    {
+      "index": 212,
+      "start": 922.0,
+      "end": 925.0,
+      "duration": 3.0,
+      "text": "the value of theta will correspond to,"
+    },
+    {
+      "index": 213,
+      "start": 925.0,
+      "end": 928.0,
+      "duration": 3.0,
+      "text": "in which directions around the z axis do we go?"
+    },
+    {
+      "index": 214,
+      "start": 928.0,
+      "end": 931.0,
+      "duration": 3.0,
+      "text": "So, we're going to see that in examples."
+    },
+    {
+      "index": 215,
+      "start": 931.0,
+      "end": 934.0,
+      "duration": 3.0,
+      "text": "But before we can do that, we need to get the volume"
+    },
+    {
+      "index": 216,
+      "start": 934.0,
+      "end": 936.0,
+      "duration": 2.0,
+      "text": "element. So, what I would like to"
+    },
+    {
+      "index": 217,
+      "start": 936.0,
+      "end": 940.0,
+      "duration": 4.0,
+      "text": "suggest is that we need to figure out,"
+    },
+    {
+      "index": 218,
+      "start": 940.0,
+      "end": 946.0,
+      "duration": 6.0,
+      "text": "what is the volume of a small piece of solid which corresponds"
+    },
+    {
+      "index": 219,
+      "start": 946.0,
+      "end": 949.0,
+      "duration": 3.0,
+      "text": "to a certain change, delta rho,"
+    },
+    {
+      "index": 220,
+      "start": 949.0,
+      "end": 952.0,
+      "duration": 3.0,
+      "text": "delta phi, and delta theta?"
+    },
+    {
+      "index": 221,
+      "start": 952.0,
+      "end": 956.0,
+      "duration": 4.0,
+      "text": "So, delta rho means that you have two concentric spheres,"
+    },
+    {
+      "index": 222,
+      "start": 956.0,
+      "end": 961.0,
+      "duration": 5.0,
+      "text": "and you are looking at a very thin shell in between them."
+    },
+    {
+      "index": 223,
+      "start": 961.0,
+      "end": 965.0,
+      "duration": 4.0,
+      "text": "And then, you would be looking at a piece of that spherical"
+    },
+    {
+      "index": 224,
+      "start": 965.0,
+      "end": 968.0,
+      "duration": 3.0,
+      "text": "shell corresponding to small values of phi and theta."
+    },
+    {
+      "index": 225,
+      "start": 968.0,
+      "end": 974.0,
+      "duration": 6.0,
+      "text": "So, because I am stretching the limits of my ability to draw on"
+    },
+    {
+      "index": 226,
+      "start": 974.0,
+      "end": 978.0,
+      "duration": 4.0,
+      "text": "the board, here's a picture. I'm going to try to reproduce"
+    },
+    {
+      "index": 227,
+      "start": 978.0,
+      "end": 981.0,
+      "duration": 3.0,
+      "text": "on the board, but so let's start by looking"
+    },
+    {
+      "index": 228,
+      "start": 981.0,
+      "end": 984.0,
+      "duration": 3.0,
+      "text": "just at what happens on the sphere of radius a,"
+    },
+    {
+      "index": 229,
+      "start": 984.0,
+      "end": 988.0,
+      "duration": 4.0,
+      "text": "and let's try to figure out the surface area elements on the"
+    },
+    {
+      "index": 230,
+      "start": 988.0,
+      "end": 990.0,
+      "duration": 2.0,
+      "text": "sphere in terms of phi and theta."
+    },
+    {
+      "index": 231,
+      "start": 990.0,
+      "end": 999.0,
+      "duration": 9.0,
+      "text": "And then, we'll add the rho direction."
+    },
+    {
+      "index": 232,
+      "start": 999.0,
+      "end": 1009.0,
+      "duration": 10.0,
+      "text": "OK, so -- So, let me say, let's start by"
+    },
+    {
+      "index": 233,
+      "start": 1009.0,
+      "end": 1022.0,
+      "duration": 13.0,
+      "text": "understanding surface area on a sphere of radius a."
+    },
+    {
+      "index": 234,
+      "start": 1022.0,
+      "end": 1032.0,
+      "duration": 10.0,
+      "text": "So, that means we'll be looking at a little piece of the sphere"
+    },
+    {
+      "index": 235,
+      "start": 1032.0,
+      "end": 1041.0,
+      "duration": 9.0,
+      "text": "corresponding to angles delta phi and in that direction here"
+    },
+    {
+      "index": 236,
+      "start": 1041.0,
+      "end": 1046.0,
+      "duration": 5.0,
+      "text": "delta theta. OK, so when you draw a map of"
+    },
+    {
+      "index": 237,
+      "start": 1046.0,
+      "end": 1049.0,
+      "duration": 3.0,
+      "text": "the world on a globe, that's exactly what the grid"
+    },
+    {
+      "index": 238,
+      "start": 1049.0,
+      "end": 1053.0,
+      "duration": 4.0,
+      "text": "lines form for you. So, what's the area of this guy?"
+    },
+    {
+      "index": 239,
+      "start": 1053.0,
+      "end": 1055.0,
+      "duration": 2.0,
+      "text": "Well, of course, all the sides are curvy."
+    },
+    {
+      "index": 240,
+      "start": 1055.0,
+      "end": 1057.0,
+      "duration": 2.0,
+      "text": "They are all on the sphere. None of them are straight."
+    },
+    {
+      "index": 241,
+      "start": 1057.0,
+      "end": 1061.0,
+      "duration": 4.0,
+      "text": "But still, if it's small enough and it looks like a rectangle,"
+    },
+    {
+      "index": 242,
+      "start": 1061.0,
+      "end": 1066.0,
+      "duration": 5.0,
+      "text": "so let's just try to figure out, what are the sides of your"
+    },
+    {
+      "index": 243,
+      "start": 1066.0,
+      "end": 1069.0,
+      "duration": 3.0,
+      "text": "rectangle? OK, so, let's see,"
+    },
+    {
+      "index": 244,
+      "start": 1069.0,
+      "end": 1075.0,
+      "duration": 6.0,
+      "text": "well, I think I need to draw a bigger picture of this guy."
+    },
+    {
+      "index": 245,
+      "start": 1075.0,
+      "end": 1079.0,
+      "duration": 4.0,
+      "text": "OK, so this guy, so that's a piece of what's"
+    },
+    {
+      "index": 246,
+      "start": 1079.0,
+      "end": 1085.0,
+      "duration": 6.0,
+      "text": "called a parallel in geography. That's a circle that goes"
+    },
+    {
+      "index": 247,
+      "start": 1085.0,
+      "end": 1087.0,
+      "duration": 2.0,
+      "text": "east-west. So now,"
+    },
+    {
+      "index": 248,
+      "start": 1087.0,
+      "end": 1090.0,
+      "duration": 3.0,
+      "text": "this parallel as a circle of radius,"
+    },
+    {
+      "index": 249,
+      "start": 1090.0,
+      "end": 1094.0,
+      "duration": 4.0,
+      "text": "well, the radius is less than a because if your vertical is to"
+    },
+    {
+      "index": 250,
+      "start": 1094.0,
+      "end": 1097.0,
+      "duration": 3.0,
+      "text": "the North Pole, it will be actually much"
+    },
+    {
+      "index": 251,
+      "start": 1097.0,
+      "end": 1099.0,
+      "duration": 2.0,
+      "text": "smaller. So, that's why when you say"
+    },
+    {
+      "index": 252,
+      "start": 1099.0,
+      "end": 1102.0,
+      "duration": 3.0,
+      "text": "you're going around the world it depends on whether you do it at"
+    },
+    {
+      "index": 253,
+      "start": 1102.0,
+      "end": 1108.0,
+      "duration": 6.0,
+      "text": "the equator or the North Pole. It's much easier at the North"
+    },
+    {
+      "index": 254,
+      "start": 1108.0,
+      "end": 1113.0,
+      "duration": 5.0,
+      "text": "Pole. So, anyway, this is a piece of"
+    },
+    {
+      "index": 255,
+      "start": 1113.0,
+      "end": 1120.0,
+      "duration": 7.0,
+      "text": "a circle of radius, well, the radius is what I"
+    },
+    {
+      "index": 256,
+      "start": 1120.0,
+      "end": 1129.0,
+      "duration": 9.0,
+      "text": "would call r because that's the distance from the z axis."
+    },
+    {
+      "index": 257,
+      "start": 1129.0,
+      "end": 1131.0,
+      "duration": 2.0,
+      "text": "OK, that's actually pretty hard to see now."
+    },
+    {
+      "index": 258,
+      "start": 1131.0,
+      "end": 1138.0,
+      "duration": 7.0,
+      "text": "So if you can see it better on this one, then so this guy here,"
+    },
+    {
+      "index": 259,
+      "start": 1138.0,
+      "end": 1143.0,
+      "duration": 5.0,
+      "text": "this length is r. And, r is just rho,"
+    },
+    {
+      "index": 260,
+      "start": 1143.0,
+      "end": 1147.0,
+      "duration": 4.0,
+      "text": "well, what was a times sine phi."
+    },
+    {
+      "index": 261,
+      "start": 1147.0,
+      "end": 1149.0,
+      "duration": 2.0,
+      "text": "Remember, we have this angle phi in here."
+    },
+    {
+      "index": 262,
+      "start": 1149.0,
+      "end": 1154.0,
+      "duration": 5.0,
+      "text": "I should use some color. It's getting very cluttered."
+    },
+    {
+      "index": 263,
+      "start": 1154.0,
+      "end": 1159.0,
+      "duration": 5.0,
+      "text": "So, we have this phi, and so r is going to be rho"
+    },
+    {
+      "index": 264,
+      "start": 1159.0,
+      "end": 1161.0,
+      "duration": 2.0,
+      "text": "sine phi. That rho is a."
+    },
+    {
+      "index": 265,
+      "start": 1161.0,
+      "end": 1169.0,
+      "duration": 8.0,
+      "text": "So, let me just put a sine phi. OK, and the corresponding angle"
+    },
+    {
+      "index": 266,
+      "start": 1169.0,
+      "end": 1172.0,
+      "duration": 3.0,
+      "text": "is going to be measured by theta."
+    },
+    {
+      "index": 267,
+      "start": 1172.0,
+      "end": 1188.0,
+      "duration": 16.0,
+      "text": "So, the length of this is going to be a sine phi delta theta."
+    },
+    {
+      "index": 268,
+      "start": 1188.0,
+      "end": 1194.0,
+      "duration": 6.0,
+      "text": "That's for this side. Now, what about that side,"
+    },
+    {
+      "index": 269,
+      "start": 1194.0,
+      "end": 1196.0,
+      "duration": 2.0,
+      "text": "the north-south side? Well, if you're moving"
+    },
+    {
+      "index": 270,
+      "start": 1196.0,
+      "end": 1198.0,
+      "duration": 2.0,
+      "text": "north-south, it's not like east-west."
+    },
+    {
+      "index": 271,
+      "start": 1198.0,
+      "end": 1201.0,
+      "duration": 3.0,
+      "text": "You always have to go all the way from the North Pole to the"
+    },
+    {
+      "index": 272,
+      "start": 1201.0,
+      "end": 1204.0,
+      "duration": 3.0,
+      "text": "South Pole. So, that's actually a great"
+    },
+    {
+      "index": 273,
+      "start": 1204.0,
+      "end": 1208.0,
+      "duration": 4.0,
+      "text": "circle meridian of length, well, I mean,"
+    },
+    {
+      "index": 274,
+      "start": 1208.0,
+      "end": 1213.0,
+      "duration": 5.0,
+      "text": "well, the radius is the radius of the sphere."
+    },
+    {
+      "index": 275,
+      "start": 1213.0,
+      "end": 1222.0,
+      "duration": 9.0,
+      "text": "Total length is 2pi a. So, this is a piece of a circle"
+    },
+    {
+      "index": 276,
+      "start": 1222.0,
+      "end": 1227.0,
+      "duration": 5.0,
+      "text": "of radius a. And so, now,"
+    },
+    {
+      "index": 277,
+      "start": 1227.0,
+      "end": 1234.0,
+      "duration": 7.0,
+      "text": "the length of this one is going to be a delta phi."
+    },
+    {
+      "index": 278,
+      "start": 1234.0,
+      "end": 1241.0,
+      "duration": 7.0,
+      "text": "OK, so, just to recap, this is a sine phi delta theta."
+    },
+    {
+      "index": 279,
+      "start": 1241.0,
+      "end": 1246.0,
+      "duration": 5.0,
+      "text": "And, this guy here is a delta phi."
+    },
+    {
+      "index": 280,
+      "start": 1246.0,
+      "end": 1259.0,
+      "duration": 13.0,
+      "text": "So, you can't read it because it's -- And so,"
+    },
+    {
+      "index": 281,
+      "start": 1259.0,
+      "end": 1262.0,
+      "duration": 3.0,
+      "text": "that tells us if I take a small piece of the sphere,"
+    },
+    {
+      "index": 282,
+      "start": 1262.0,
+      "end": 1266.0,
+      "duration": 4.0,
+      "text": "then its surface area, delta s,"
+    },
+    {
+      "index": 283,
+      "start": 1266.0,
+      "end": 1275.0,
+      "duration": 9.0,
+      "text": "is going to be approximately a sine phi delta theta times a"
+    },
+    {
+      "index": 284,
+      "start": 1275.0,
+      "end": 1282.0,
+      "duration": 7.0,
+      "text": "delta phi, which I'm going to rewrite as a"
+    },
+    {
+      "index": 285,
+      "start": 1282.0,
+      "end": 1287.0,
+      "duration": 5.0,
+      "text": "squared sine phi delta phi delta theta."
+    },
+    {
+      "index": 286,
+      "start": 1287.0,
+      "end": 1291.0,
+      "duration": 4.0,
+      "text": "So, what that means is, say that I want to integrate"
+    },
+    {
+      "index": 287,
+      "start": 1291.0,
+      "end": 1294.0,
+      "duration": 3.0,
+      "text": "something just on the surface of a sphere."
+    },
+    {
+      "index": 288,
+      "start": 1294.0,
+      "end": 1297.0,
+      "duration": 3.0,
+      "text": "Well, I would use phi and theta as my coordinates."
+    },
+    {
+      "index": 289,
+      "start": 1297.0,
+      "end": 1306.0,
+      "duration": 9.0,
+      "text": "And then, to know how big a piece of a sphere is,"
+    },
+    {
+      "index": 290,
+      "start": 1306.0,
+      "end": 1315.0,
+      "duration": 9.0,
+      "text": "I would just take a squared sine phi d phi d theta."
+    },
+    {
+      "index": 291,
+      "start": 1315.0,
+      "end": 1319.0,
+      "duration": 4.0,
+      "text": "OK, so that's the surface element in a sphere."
+    },
+    {
+      "index": 292,
+      "start": 1319.0,
+      "end": 1323.0,
+      "duration": 4.0,
+      "text": "And now, what about going back into the third dimension,"
+    },
+    {
+      "index": 293,
+      "start": 1323.0,
+      "end": 1325.0,
+      "duration": 2.0,
+      "text": "so, adding some depth to these things?"
+    },
+    {
+      "index": 294,
+      "start": 1325.0,
+      "end": 1330.0,
+      "duration": 5.0,
+      "text": "Well, I'm not going to try to draw a picture because you've"
+    },
+    {
+      "index": 295,
+      "start": 1330.0,
+      "end": 1337.0,
+      "duration": 7.0,
+      "text": "seen that's slightly tricky. Well, let me try anyway just"
+    },
+    {
+      "index": 296,
+      "start": 1337.0,
+      "end": 1344.0,
+      "duration": 7.0,
+      "text": "you can have fun with my completely unreadable diagrams."
+    },
+    {
+      "index": 297,
+      "start": 1344.0,
+      "end": 1348.0,
+      "duration": 4.0,
+      "text": "So anyway, if you look at, now, something that's a bit"
+    },
+    {
+      "index": 298,
+      "start": 1348.0,
+      "end": 1353.0,
+      "duration": 5.0,
+      "text": "like that piece of sphere, but with some thickness to it."
+    },
+    {
+      "index": 299,
+      "start": 1353.0,
+      "end": 1358.0,
+      "duration": 5.0,
+      "text": "The thickness will be delta rho, and so the volume will be"
+    },
+    {
+      "index": 300,
+      "start": 1358.0,
+      "end": 1364.0,
+      "duration": 6.0,
+      "text": "roughly the area of the thing on the sphere times the thickness."
+    },
+    {
+      "index": 301,
+      "start": 1364.0,
+      "end": 1368.0,
+      "duration": 4.0,
+      "text": "So, I claim that we will get basically the volume element"
+    },
+    {
+      "index": 302,
+      "start": 1368.0,
+      "end": 1371.0,
+      "duration": 3.0,
+      "text": "just by multiplying things by d rho."
+    },
+    {
+      "index": 303,
+      "start": 1371.0,
+      "end": 1390.0,
+      "duration": 19.0,
+      "text": "So, let's see that. So now, if I have a sphere of"
+    },
+    {
+      "index": 304,
+      "start": 1390.0,
+      "end": 1399.0,
+      "duration": 9.0,
+      "text": "radius rho, and another one that's slightly bigger of radius"
+    },
+    {
+      "index": 305,
+      "start": 1399.0,
+      "end": 1407.0,
+      "duration": 8.0,
+      "text": "rho plus delta rho, and then I have a little box in"
+    },
+    {
+      "index": 306,
+      "start": 1407.0,
+      "end": 1409.0,
+      "duration": 2.0,
+      "text": "here. Then,"
+    },
+    {
+      "index": 307,
+      "start": 1409.0,
+      "end": 1414.0,
+      "duration": 5.0,
+      "text": "I know that the volume of this thing will be essentially,"
+    },
+    {
+      "index": 308,
+      "start": 1414.0,
+      "end": 1418.0,
+      "duration": 4.0,
+      "text": "well, its thickness, the thickness is going to be"
+    },
+    {
+      "index": 309,
+      "start": 1418.0,
+      "end": 1422.0,
+      "duration": 4.0,
+      "text": "delta rho times the area of its base,"
+    },
+    {
+      "index": 310,
+      "start": 1422.0,
+      "end": 1424.0,
+      "duration": 2.0,
+      "text": "although it doesn't really matter,"
+    },
+    {
+      "index": 311,
+      "start": 1424.0,
+      "end": 1428.0,
+      "duration": 4.0,
+      "text": "which is what we've called delta s."
+    },
+    {
+      "index": 312,
+      "start": 1428.0,
+      "end": 1435.0,
+      "duration": 7.0,
+      "text": "OK, so we will get, sorry, a becomes rho now."
+    },
+    {
+      "index": 313,
+      "start": 1435.0,
+      "end": 1437.0,
+      "duration": 2.0,
+      "text": "Square sine phi, delta rho,"
+    },
+    {
+      "index": 314,
+      "start": 1437.0,
+      "end": 1440.0,
+      "duration": 3.0,
+      "text": "delta phi, delta theta,"
+    },
+    {
+      "index": 315,
+      "start": 1440.0,
+      "end": 1444.0,
+      "duration": 4.0,
+      "text": "and so out of that we get the volume element and spherical"
+    },
+    {
+      "index": 316,
+      "start": 1444.0,
+      "end": 1448.0,
+      "duration": 4.0,
+      "text": "coordinates, which is rho squared sine phi d"
+    },
+    {
+      "index": 317,
+      "start": 1448.0,
+      "end": 1449.0,
+      "duration": 1.0,
+      "text": "rho, d phi,"
+    },
+    {
+      "index": 318,
+      "start": 1449.0,
+      "end": 1454.0,
+      "duration": 5.0,
+      "text": "d theta. And, that's a formula that you"
+    },
+    {
+      "index": 319,
+      "start": 1454.0,
+      "end": 1457.0,
+      "duration": 3.0,
+      "text": "should remember. OK, so whenever we integrate a"
+    },
+    {
+      "index": 320,
+      "start": 1457.0,
+      "end": 1460.0,
+      "duration": 3.0,
+      "text": "function, and we decide to switch to"
+    },
+    {
+      "index": 321,
+      "start": 1460.0,
+      "end": 1465.0,
+      "duration": 5.0,
+      "text": "spherical coordinates, then dx dy dz or r dr d theta"
+    },
+    {
+      "index": 322,
+      "start": 1465.0,
+      "end": 1473.0,
+      "duration": 8.0,
+      "text": "dz will become rho squared sine phi d rho d phi d theta."
+    },
+    {
+      "index": 323,
+      "start": 1473.0,
+      "end": 1480.0,
+      "duration": 7.0,
+      "text": "OK, any questions on that? No?"
+    },
+    {
+      "index": 324,
+      "start": 1480.0,
+      "end": 1498.0,
+      "duration": 18.0,
+      "text": "OK, so let's -- Let's see how that works."
+    },
+    {
+      "index": 325,
+      "start": 1498.0,
+      "end": 1504.0,
+      "duration": 6.0,
+      "text": "So, as an example, remember at the end of the last"
+    },
+    {
+      "index": 326,
+      "start": 1504.0,
+      "end": 1511.0,
+      "duration": 7.0,
+      "text": "lecture, I tried to set up an example where we were looking at"
+    },
+    {
+      "index": 327,
+      "start": 1511.0,
+      "end": 1516.0,
+      "duration": 5.0,
+      "text": "a sphere sliced by a slanted plane."
+    },
+    {
+      "index": 328,
+      "start": 1516.0,
+      "end": 1520.0,
+      "duration": 4.0,
+      "text": "And now, we're going to try to find the volume of that"
+    },
+    {
+      "index": 329,
+      "start": 1520.0,
+      "end": 1523.0,
+      "duration": 3.0,
+      "text": "spherical cap again, but using spherical coordinates"
+    },
+    {
+      "index": 330,
+      "start": 1523.0,
+      "end": 1526.0,
+      "duration": 3.0,
+      "text": "instead. So, I'm going to just be"
+    },
+    {
+      "index": 331,
+      "start": 1526.0,
+      "end": 1529.0,
+      "duration": 3.0,
+      "text": "smarter than last time. So, last time,"
+    },
+    {
+      "index": 332,
+      "start": 1529.0,
+      "end": 1533.0,
+      "duration": 4.0,
+      "text": "we had set up these things with a slanted plane that was cutting"
+    },
+    {
+      "index": 333,
+      "start": 1533.0,
+      "end": 1535.0,
+      "duration": 2.0,
+      "text": "things diagonally. And,"
+    },
+    {
+      "index": 334,
+      "start": 1535.0,
+      "end": 1537.0,
+      "duration": 2.0,
+      "text": "if I just want to find the volume of this cap,"
+    },
+    {
+      "index": 335,
+      "start": 1537.0,
+      "end": 1541.0,
+      "duration": 4.0,
+      "text": "then maybe it makes more sense to rotate things so that my"
+    },
+    {
+      "index": 336,
+      "start": 1541.0,
+      "end": 1545.0,
+      "duration": 4.0,
+      "text": "plane is actually horizontal, and things are going to be"
+    },
+    {
+      "index": 337,
+      "start": 1545.0,
+      "end": 1549.0,
+      "duration": 4.0,
+      "text": "centered on the z axis. So, in case you see that it's"
+    },
+    {
+      "index": 338,
+      "start": 1549.0,
+      "end": 1552.0,
+      "duration": 3.0,
+      "text": "the same, then that's great. If not, then it doesn't really"
+    },
+    {
+      "index": 339,
+      "start": 1552.0,
+      "end": 1555.0,
+      "duration": 3.0,
+      "text": "matter. You can just think of this as a"
+    },
+    {
+      "index": 340,
+      "start": 1555.0,
+      "end": 1561.0,
+      "duration": 6.0,
+      "text": "new example. So, I'm going to try to find"
+    },
+    {
+      "index": 341,
+      "start": 1561.0,
+      "end": 1570.0,
+      "duration": 9.0,
+      "text": "the volume of a portion of the unit sphere -- -- that lies"
+    },
+    {
+      "index": 342,
+      "start": 1570.0,
+      "end": 1580.0,
+      "duration": 10.0,
+      "text": "above the horizontal plane, z equals one over root two."
+    },
+    {
+      "index": 343,
+      "start": 1580.0,
+      "end": 1582.0,
+      "duration": 2.0,
+      "text": "OK, one over root two was the distance from the origin to our"
+    },
+    {
+      "index": 344,
+      "start": 1582.0,
+      "end": 1584.0,
+      "duration": 2.0,
+      "text": "slanted plane. So, after you rotate,"
+    },
+    {
+      "index": 345,
+      "start": 1584.0,
+      "end": 1588.0,
+      "duration": 4.0,
+      "text": "that say you get this value. Anyway, it's not very important."
+    },
+    {
+      "index": 346,
+      "start": 1588.0,
+      "end": 1591.0,
+      "duration": 3.0,
+      "text": "You can just treat that as a good example if you want."
+    },
+    {
+      "index": 347,
+      "start": 1591.0,
+      "end": 1596.0,
+      "duration": 5.0,
+      "text": "OK, so we can compute this in actually pretty much any"
+    },
+    {
+      "index": 348,
+      "start": 1596.0,
+      "end": 1599.0,
+      "duration": 3.0,
+      "text": "coordinate system. And also, of course,"
+    },
+    {
+      "index": 349,
+      "start": 1599.0,
+      "end": 1602.0,
+      "duration": 3.0,
+      "text": "we can set up not only the volume, but we can try to find"
+    },
+    {
+      "index": 350,
+      "start": 1602.0,
+      "end": 1604.0,
+      "duration": 2.0,
+      "text": "the moment of inertia about the central axis,"
+    },
+    {
+      "index": 351,
+      "start": 1604.0,
+      "end": 1607.0,
+      "duration": 3.0,
+      "text": "or all sorts of things. But, we are just doing the"
+    },
+    {
+      "index": 352,
+      "start": 1607.0,
+      "end": 1609.0,
+      "duration": 2.0,
+      "text": "volume for simplicity. So, actually,"
+    },
+    {
+      "index": 353,
+      "start": 1609.0,
+      "end": 1612.0,
+      "duration": 3.0,
+      "text": "this would go pretty well in cylindrical coordinates."
+    },
+    {
+      "index": 354,
+      "start": 1612.0,
+      "end": 1615.0,
+      "duration": 3.0,
+      "text": "But let's do it in spherical coordinates because that's the"
+    },
+    {
+      "index": 355,
+      "start": 1615.0,
+      "end": 1617.0,
+      "duration": 2.0,
+      "text": "topic of today. A good exercise:"
+    },
+    {
+      "index": 356,
+      "start": 1617.0,
+      "end": 1621.0,
+      "duration": 4.0,
+      "text": "do it in cylindrical and see if you get the same thing."
+    },
+    {
+      "index": 357,
+      "start": 1621.0,
+      "end": 1628.0,
+      "duration": 7.0,
+      "text": "So, how do we do that? Well, we have to figure out how"
+    },
+    {
+      "index": 358,
+      "start": 1628.0,
+      "end": 1634.0,
+      "duration": 6.0,
+      "text": "to set up our triple integral in spherical coordinates."
+    },
+    {
+      "index": 359,
+      "start": 1634.0,
+      "end": 1638.0,
+      "duration": 4.0,
+      "text": "So, remember we'll be integrating one dV."
+    },
+    {
+      "index": 360,
+      "start": 1638.0,
+      "end": 1648.0,
+      "duration": 10.0,
+      "text": "So, dV will become rho squared sign phi d rho d phi d theta."
+    },
+    {
+      "index": 361,
+      "start": 1648.0,
+      "end": 1652.0,
+      "duration": 4.0,
+      "text": "And, now as we start, we're already facing some"
+    },
+    {
+      "index": 362,
+      "start": 1652.0,
+      "end": 1655.0,
+      "duration": 3.0,
+      "text": "serious problem. We want to set up the bounds"
+    },
+    {
+      "index": 363,
+      "start": 1655.0,
+      "end": 1657.0,
+      "duration": 2.0,
+      "text": "for rho for a given, phi and theta."
+    },
+    {
+      "index": 364,
+      "start": 1657.0,
+      "end": 1659.0,
+      "duration": 2.0,
+      "text": "So, that means we choose latitude/longitude."
+    },
+    {
+      "index": 365,
+      "start": 1659.0,
+      "end": 1662.0,
+      "duration": 3.0,
+      "text": "We choose which direction we want to aim for,"
+    },
+    {
+      "index": 366,
+      "start": 1662.0,
+      "end": 1665.0,
+      "duration": 3.0,
+      "text": "you know, which point of the sphere we want to aim at."
+    },
+    {
+      "index": 367,
+      "start": 1665.0,
+      "end": 1670.0,
+      "duration": 5.0,
+      "text": "And, we are going to shoot a ray from the origin towards this"
+    },
+    {
+      "index": 368,
+      "start": 1670.0,
+      "end": 1675.0,
+      "duration": 5.0,
+      "text": "point, and we want to know what portion of the ray is in our"
+    },
+    {
+      "index": 369,
+      "start": 1675.0,
+      "end": 1683.0,
+      "duration": 8.0,
+      "text": "solid. So -- We are going to choose a"
+    },
+    {
+      "index": 370,
+      "start": 1683.0,
+      "end": 1691.0,
+      "duration": 8.0,
+      "text": "value of phi and theta. And, we are going to try to"
+    },
+    {
+      "index": 371,
+      "start": 1691.0,
+      "end": 1696.0,
+      "duration": 5.0,
+      "text": "figure out what part of our ray is inside this side."
+    },
+    {
+      "index": 372,
+      "start": 1696.0,
+      "end": 1700.0,
+      "duration": 4.0,
+      "text": "So, what should be clear is at which point we leave the solid,"
+    },
+    {
+      "index": 373,
+      "start": 1700.0,
+      "end": 1703.0,
+      "duration": 3.0,
+      "text": "right? What's the value of rho here?"
+    },
+    {
+      "index": 374,
+      "start": 1703.0,
+      "end": 1705.0,
+      "duration": 2.0,
+      "text": "It's just one. The sphere is rho equals one."
+    },
+    {
+      "index": 375,
+      "start": 1705.0,
+      "end": 1709.0,
+      "duration": 4.0,
+      "text": "That's pretty good. The question is,"
+    },
+    {
+      "index": 376,
+      "start": 1709.0,
+      "end": 1713.0,
+      "duration": 4.0,
+      "text": "where do we enter the region? So, we enter the region when we"
+    },
+    {
+      "index": 377,
+      "start": 1713.0,
+      "end": 1718.0,
+      "duration": 5.0,
+      "text": "go through this plane. And, the plane is z equals one"
+    },
+    {
+      "index": 378,
+      "start": 1718.0,
+      "end": 1721.0,
+      "duration": 3.0,
+      "text": "over root two. So, what does that tell us"
+    },
+    {
+      "index": 379,
+      "start": 1721.0,
+      "end": 1724.0,
+      "duration": 3.0,
+      "text": "about rho? Well, it tells us,"
+    },
+    {
+      "index": 380,
+      "start": 1724.0,
+      "end": 1730.0,
+      "duration": 6.0,
+      "text": "so remember, z is rho cosine phi."
+    },
+    {
+      "index": 381,
+      "start": 1730.0,
+      "end": 1735.0,
+      "duration": 5.0,
+      "text": "So, the plane is z equals one over root two."
+    },
+    {
+      "index": 382,
+      "start": 1735.0,
+      "end": 1740.0,
+      "duration": 5.0,
+      "text": "That means rho cosine phi is one over root two."
+    },
+    {
+      "index": 383,
+      "start": 1740.0,
+      "end": 1745.0,
+      "duration": 5.0,
+      "text": "That means rho equals one over root two cosine phi or,"
+    },
+    {
+      "index": 384,
+      "start": 1745.0,
+      "end": 1751.0,
+      "duration": 6.0,
+      "text": "as some of you know it, one over root two times second"
+    },
+    {
+      "index": 385,
+      "start": 1751.0,
+      "end": 1757.0,
+      "duration": 6.0,
+      "text": "phi. OK, so if we want to set up the"
+    },
+    {
+      "index": 386,
+      "start": 1757.0,
+      "end": 1767.0,
+      "duration": 10.0,
+      "text": "bounds, then we'll start with one over root two second phi all"
+    },
+    {
+      "index": 387,
+      "start": 1767.0,
+      "end": 1772.0,
+      "duration": 5.0,
+      "text": "the way to one. Now, what's next?"
+    },
+    {
+      "index": 388,
+      "start": 1772.0,
+      "end": 1775.0,
+      "duration": 3.0,
+      "text": "Well, so we've done, I think that's basically the"
+    },
+    {
+      "index": 389,
+      "start": 1775.0,
+      "end": 1778.0,
+      "duration": 3.0,
+      "text": "hardest part of the job. Next, we have to figure out,"
+    },
+    {
+      "index": 390,
+      "start": 1778.0,
+      "end": 1781.0,
+      "duration": 3.0,
+      "text": "what's the range for phi? So, the range for phi,"
+    },
+    {
+      "index": 391,
+      "start": 1781.0,
+      "end": 1784.0,
+      "duration": 3.0,
+      "text": "well, we have to figure out how far to the north and to the"
+    },
+    {
+      "index": 392,
+      "start": 1784.0,
+      "end": 1788.0,
+      "duration": 4.0,
+      "text": "south our region goes. Well, the lower bound for phi"
+    },
+    {
+      "index": 393,
+      "start": 1788.0,
+      "end": 1791.0,
+      "duration": 3.0,
+      "text": "is pretty easy, right, because we go all the"
+    },
+    {
+      "index": 394,
+      "start": 1791.0,
+      "end": 1796.0,
+      "duration": 5.0,
+      "text": "way to the North Pole direction. So, phi starts at zero."
+    },
+    {
+      "index": 395,
+      "start": 1796.0,
+      "end": 1799.0,
+      "duration": 3.0,
+      "text": "The question is, where does it stop?"
+    },
+    {
+      "index": 396,
+      "start": 1799.0,
+      "end": 1802.0,
+      "duration": 3.0,
+      "text": "To find out where it stops, we have to figure out,"
+    },
+    {
+      "index": 397,
+      "start": 1802.0,
+      "end": 1806.0,
+      "duration": 4.0,
+      "text": "what is the value of phi when we hit the edge of the region?"
+    },
+    {
+      "index": 398,
+      "start": 1806.0,
+      "end": 1810.0,
+      "duration": 4.0,
+      "text": "OK, so maybe you see it. Maybe you don't."
+    },
+    {
+      "index": 399,
+      "start": 1810.0,
+      "end": 1815.0,
+      "duration": 5.0,
+      "text": "One way to do it geometrically is to just, it's always great to"
+    },
+    {
+      "index": 400,
+      "start": 1815.0,
+      "end": 1819.0,
+      "duration": 4.0,
+      "text": "draw a slice of your region. So, if you slice these things"
+    },
+    {
+      "index": 401,
+      "start": 1819.0,
+      "end": 1822.0,
+      "duration": 3.0,
+      "text": "by a vertical plane, or actually even better,"
+    },
+    {
+      "index": 402,
+      "start": 1822.0,
+      "end": 1825.0,
+      "duration": 3.0,
+      "text": "a vertical half plane, something to delete one half of"
+    },
+    {
+      "index": 403,
+      "start": 1825.0,
+      "end": 1828.0,
+      "duration": 3.0,
+      "text": "the picture. So, I'm going to draw these r"
+    },
+    {
+      "index": 404,
+      "start": 1828.0,
+      "end": 1833.0,
+      "duration": 5.0,
+      "text": "and z directions as before. So, my sphere is here."
+    },
+    {
+      "index": 405,
+      "start": 1833.0,
+      "end": 1838.0,
+      "duration": 5.0,
+      "text": "My plane is here at one over root two."
+    },
+    {
+      "index": 406,
+      "start": 1838.0,
+      "end": 1843.0,
+      "duration": 5.0,
+      "text": "And, my solid is here. So now, the question is what is"
+    },
+    {
+      "index": 407,
+      "start": 1843.0,
+      "end": 1849.0,
+      "duration": 6.0,
+      "text": "the value of phi when I'm going to stop hitting the region?"
+    },
+    {
+      "index": 408,
+      "start": 1849.0,
+      "end": 1854.0,
+      "duration": 5.0,
+      "text": "And, if you try to figure out first what is this direction"
+    },
+    {
+      "index": 409,
+      "start": 1854.0,
+      "end": 1857.0,
+      "duration": 3.0,
+      "text": "here, that's also one over root two."
+    },
+    {
+      "index": 410,
+      "start": 1857.0,
+      "end": 1863.0,
+      "duration": 6.0,
+      "text": "And so, this is actually 45�, also known as pi over four."
+    },
+    {
+      "index": 411,
+      "start": 1863.0,
+      "end": 1869.0,
+      "duration": 6.0,
+      "text": "The other way to think about it is at this point,"
+    },
+    {
+      "index": 412,
+      "start": 1869.0,
+      "end": 1876.0,
+      "duration": 7.0,
+      "text": "well, rho is equal to one because you are on the sphere."
+    },
+    {
+      "index": 413,
+      "start": 1876.0,
+      "end": 1882.0,
+      "duration": 6.0,
+      "text": "But, you are also on the plane. So, rho cos phi is one over"
+    },
+    {
+      "index": 414,
+      "start": 1882.0,
+      "end": 1886.0,
+      "duration": 4.0,
+      "text": "root two. So, if you plug rho equals one"
+    },
+    {
+      "index": 415,
+      "start": 1886.0,
+      "end": 1891.0,
+      "duration": 5.0,
+      "text": "into here, you get cos phi equals one over root two which"
+    },
+    {
+      "index": 416,
+      "start": 1891.0,
+      "end": 1894.0,
+      "duration": 3.0,
+      "text": "gives you phi equals pi over four."
+    },
+    {
+      "index": 417,
+      "start": 1894.0,
+      "end": 1897.0,
+      "duration": 3.0,
+      "text": "That's the other way to do it. You can do it either by"
+    },
+    {
+      "index": 418,
+      "start": 1897.0,
+      "end": 1899.0,
+      "duration": 2.0,
+      "text": "calculation or by looking at the picture."
+    },
+    {
+      "index": 419,
+      "start": 1899.0,
+      "end": 1903.0,
+      "duration": 4.0,
+      "text": "OK, so either way, we've decided that phi goes"
+    },
+    {
+      "index": 420,
+      "start": 1903.0,
+      "end": 1908.0,
+      "duration": 5.0,
+      "text": "from zero to pi over four. So, this is pi over four."
+    },
+    {
+      "index": 421,
+      "start": 1908.0,
+      "end": 1914.0,
+      "duration": 6.0,
+      "text": "Finally, what about theta? Well, because we go all around"
+    },
+    {
+      "index": 422,
+      "start": 1914.0,
+      "end": 1920.0,
+      "duration": 6.0,
+      "text": "the z axis we are going to go just zero to 2pi."
+    },
+    {
+      "index": 423,
+      "start": 1920.0,
+      "end": 1926.0,
+      "duration": 6.0,
+      "text": "OK, any questions about these bounds?"
+    },
+    {
+      "index": 424,
+      "start": 1926.0,
+      "end": 1930.0,
+      "duration": 4.0,
+      "text": "OK, so note how the equation of this horizontal plane in"
+    },
+    {
+      "index": 425,
+      "start": 1930.0,
+      "end": 1933.0,
+      "duration": 3.0,
+      "text": "spherical coordinates has become a little bit weird."
+    },
+    {
+      "index": 426,
+      "start": 1933.0,
+      "end": 1936.0,
+      "duration": 3.0,
+      "text": "But, if you remember how we do"
+    },
+    {
+      "index": 427,
+      "start": 1936.0,
+      "end": 1939.0,
+      "duration": 3.0,
+      "text": "things, say that you have a line in"
+    },
+    {
+      "index": 428,
+      "start": 1939.0,
+      "end": 1941.0,
+      "duration": 2.0,
+      "text": "polar coordinates, and that line does not pass"
+    },
+    {
+      "index": 429,
+      "start": 1941.0,
+      "end": 1943.0,
+      "duration": 2.0,
+      "text": "through the origin, then you also end up with"
+    },
+    {
+      "index": 430,
+      "start": 1943.0,
+      "end": 1946.0,
+      "duration": 3.0,
+      "text": "something like that. You get something like r equals"
+    },
+    {
+      "index": 431,
+      "start": 1946.0,
+      "end": 1951.0,
+      "duration": 5.0,
+      "text": "a second theta or a cos second theta for horizontal or vertical"
+    },
+    {
+      "index": 432,
+      "start": 1951.0,
+      "end": 1953.0,
+      "duration": 2.0,
+      "text": "lines. And so, it's not surprising you"
+    },
+    {
+      "index": 433,
+      "start": 1953.0,
+      "end": 1958.0,
+      "duration": 5.0,
+      "text": "should get this. That's in line with the idea"
+    },
+    {
+      "index": 434,
+      "start": 1958.0,
+      "end": 1964.0,
+      "duration": 6.0,
+      "text": "that we are just doing again, polar coordinates in the rz"
+    },
+    {
+      "index": 435,
+      "start": 1964.0,
+      "end": 1966.0,
+      "duration": 2.0,
+      "text": "directions. So of course,"
+    },
+    {
+      "index": 436,
+      "start": 1966.0,
+      "end": 1968.0,
+      "duration": 2.0,
+      "text": "in general, things can be very messy."
+    },
+    {
+      "index": 437,
+      "start": 1968.0,
+      "end": 1971.0,
+      "duration": 3.0,
+      "text": "But, generally speaking, the kinds of regions that we"
+    },
+    {
+      "index": 438,
+      "start": 1971.0,
+      "end": 1975.0,
+      "duration": 4.0,
+      "text": "will be setting up things for are no more complicated or no"
+    },
+    {
+      "index": 439,
+      "start": 1975.0,
+      "end": 1979.0,
+      "duration": 4.0,
+      "text": "less complicated than what we would do in the plane in polar"
+    },
+    {
+      "index": 440,
+      "start": 1979.0,
+      "end": 1980.0,
+      "duration": 1.0,
+      "text": "coordinates. OK, so there's,"
+    },
+    {
+      "index": 441,
+      "start": 1980.0,
+      "end": 1983.0,
+      "duration": 3.0,
+      "text": "you know, a small list of things that you should know how"
+    },
+    {
+      "index": 442,
+      "start": 1983.0,
+      "end": 1987.0,
+      "duration": 4.0,
+      "text": "to set up. But, you won't have some"
+    },
+    {
+      "index": 443,
+      "start": 1987.0,
+      "end": 1998.0,
+      "duration": 11.0,
+      "text": "really, really strange thing. Yes?"
+    },
+    {
+      "index": 444,
+      "start": 1998.0,
+      "end": 2000.0,
+      "duration": 2.0,
+      "text": "D rho? Oh, you mean the bounds for rho?"
+    },
+    {
+      "index": 445,
+      "start": 2000.0,
+      "end": 2003.0,
+      "duration": 3.0,
+      "text": "Yes. So, in the inner integral,"
+    },
+    {
+      "index": 446,
+      "start": 2003.0,
+      "end": 2006.0,
+      "duration": 3.0,
+      "text": "we are going to fix values of phi and theta."
+    },
+    {
+      "index": 447,
+      "start": 2006.0,
+      "end": 2009.0,
+      "duration": 3.0,
+      "text": "So, that means we fix in advance the direction in which"
+    },
+    {
+      "index": 448,
+      "start": 2009.0,
+      "end": 2011.0,
+      "duration": 2.0,
+      "text": "we are going to shoot a ray from the origin."
+    },
+    {
+      "index": 449,
+      "start": 2011.0,
+      "end": 2015.0,
+      "duration": 4.0,
+      "text": "So now, as we shoot this ray, we are going to hit our region"
+    },
+    {
+      "index": 450,
+      "start": 2015.0,
+      "end": 2017.0,
+      "duration": 2.0,
+      "text": "somewhere. And, we are going to exit,"
+    },
+    {
+      "index": 451,
+      "start": 2017.0,
+      "end": 2020.0,
+      "duration": 3.0,
+      "text": "again, somewhere else. OK, so first of all we have to"
+    },
+    {
+      "index": 452,
+      "start": 2020.0,
+      "end": 2023.0,
+      "duration": 3.0,
+      "text": "figure out where we enter, where we leave."
+    },
+    {
+      "index": 453,
+      "start": 2023.0,
+      "end": 2026.0,
+      "duration": 3.0,
+      "text": "Well, we enter when the ray hits the flat face,"
+    },
+    {
+      "index": 454,
+      "start": 2026.0,
+      "end": 2030.0,
+      "duration": 4.0,
+      "text": "when we hit the plane. And, we would leave when we hit"
+    },
+    {
+      "index": 455,
+      "start": 2030.0,
+      "end": 2032.0,
+      "duration": 2.0,
+      "text": "the sphere. So, the lower bound will be"
+    },
+    {
+      "index": 456,
+      "start": 2032.0,
+      "end": 2036.0,
+      "duration": 4.0,
+      "text": "given by the plane. The upper bound will be given"
+    },
+    {
+      "index": 457,
+      "start": 2036.0,
+      "end": 2038.0,
+      "duration": 2.0,
+      "text": "by the sphere. So now, you have to get"
+    },
+    {
+      "index": 458,
+      "start": 2038.0,
+      "end": 2041.0,
+      "duration": 3.0,
+      "text": "spherical coordinate equations for both the plane and the"
+    },
+    {
+      "index": 459,
+      "start": 2041.0,
+      "end": 2042.0,
+      "duration": 1.0,
+      "text": "sphere. For the sphere, that's easy."
+    },
+    {
+      "index": 460,
+      "start": 2042.0,
+      "end": 2045.0,
+      "duration": 3.0,
+      "text": "That's rho equals one. For the plane,"
+    },
+    {
+      "index": 461,
+      "start": 2045.0,
+      "end": 2048.0,
+      "duration": 3.0,
+      "text": "you start with z equals one over root two."
+    },
+    {
+      "index": 462,
+      "start": 2048.0,
+      "end": 2051.0,
+      "duration": 3.0,
+      "text": "And, you switch it into spherical coordinates."
+    },
+    {
+      "index": 463,
+      "start": 2051.0,
+      "end": 2054.0,
+      "duration": 3.0,
+      "text": "And then, you solve for rho. And, that's how you get these"
+    },
+    {
+      "index": 464,
+      "start": 2054.0,
+      "end": 2059.0,
+      "duration": 5.0,
+      "text": "bounds. Is that OK?"
+    },
+    {
+      "index": 465,
+      "start": 2059.0,
+      "end": 2066.0,
+      "duration": 7.0,
+      "text": "All right, so that's the setup part."
+    },
+    {
+      "index": 466,
+      "start": 2066.0,
+      "end": 2069.0,
+      "duration": 3.0,
+      "text": "And, of course, the evaluation part goes as"
+    },
+    {
+      "index": 467,
+      "start": 2069.0,
+      "end": 2070.0,
+      "duration": 1.0,
+      "text": "usual."
+    },
+    {
+      "index": 468,
+      "start": 2082.0,
+      "end": 2086.0,
+      "duration": 4.0,
+      "text": "And, since I'm running short of time, I'm not going to actually"
+    },
+    {
+      "index": 469,
+      "start": 2086.0,
+      "end": 2092.0,
+      "duration": 6.0,
+      "text": "do the evaluation. I'm going to let you figure out"
+    },
+    {
+      "index": 470,
+      "start": 2092.0,
+      "end": 2098.0,
+      "duration": 6.0,
+      "text": "how it goes. Let me just say in case you"
+    },
+    {
+      "index": 471,
+      "start": 2098.0,
+      "end": 2107.0,
+      "duration": 9.0,
+      "text": "want to check your answers, so, at the end you get 2pi over"
+    },
+    {
+      "index": 472,
+      "start": 2107.0,
+      "end": 2113.0,
+      "duration": 6.0,
+      "text": "three minus 5pi over six root two."
+    },
+    {
+      "index": 473,
+      "start": 2113.0,
+      "end": 2117.0,
+      "duration": 4.0,
+      "text": "Yes, it looks quite complicated. That's basically because you"
+    },
+    {
+      "index": 474,
+      "start": 2117.0,
+      "end": 2120.0,
+      "duration": 3.0,
+      "text": "get one over, well, you get a second square"
+    },
+    {
+      "index": 475,
+      "start": 2120.0,
+      "end": 2123.0,
+      "duration": 3.0,
+      "text": "when you integrate C. When you integrate rho squared,"
+    },
+    {
+      "index": 476,
+      "start": 2123.0,
+      "end": 2124.0,
+      "duration": 1.0,
+      "text": "you will get rho cubed over three."
+    },
+    {
+      "index": 477,
+      "start": 2124.0,
+      "end": 2127.0,
+      "duration": 3.0,
+      "text": "But that rho cubed will give you a second cube for the lower"
+    },
+    {
+      "index": 478,
+      "start": 2127.0,
+      "end": 2129.0,
+      "duration": 2.0,
+      "text": "bound. And, when you integrate sine"
+    },
+    {
+      "index": 479,
+      "start": 2129.0,
+      "end": 2131.0,
+      "duration": 2.0,
+      "text": "phi second cubed phi, you do a substitution."
+    },
+    {
+      "index": 480,
+      "start": 2131.0,
+      "end": 2137.0,
+      "duration": 6.0,
+      "text": "You see that integrates to one over second squared with a"
+    },
+    {
+      "index": 481,
+      "start": 2137.0,
+      "end": 2142.0,
+      "duration": 5.0,
+      "text": "factor in front. So, in the second square,"
+    },
+    {
+      "index": 482,
+      "start": 2142.0,
+      "end": 2149.0,
+      "duration": 7.0,
+      "text": "when you plug in, no, that's not quite all of it."
+    },
+    {
+      "index": 483,
+      "start": 2149.0,
+      "end": 2151.0,
+      "duration": 2.0,
+      "text": "Yeah, well, the second square is one thing,"
+    },
+    {
+      "index": 484,
+      "start": 2151.0,
+      "end": 2153.0,
+      "duration": 2.0,
+      "text": "and also the other bound you get sine phi which integrates to"
+    },
+    {
+      "index": 485,
+      "start": 2153.0,
+      "end": 2156.0,
+      "duration": 3.0,
+      "text": "cosine phi. So, anyways,"
+    },
+    {
+      "index": 486,
+      "start": 2156.0,
+      "end": 2164.0,
+      "duration": 8.0,
+      "text": "you get lots of things. OK, enough about it."
+    },
+    {
+      "index": 487,
+      "start": 2164.0,
+      "end": 2167.0,
+      "duration": 3.0,
+      "text": "So, next, I have to tell you about applications."
+    },
+    {
+      "index": 488,
+      "start": 2167.0,
+      "end": 2173.0,
+      "duration": 6.0,
+      "text": "And, of course, well, there's the same"
+    },
+    {
+      "index": 489,
+      "start": 2173.0,
+      "end": 2174.0,
+      "duration": 1.0,
+      "text": "applications that we've seen that last time,"
+    },
+    {
+      "index": 490,
+      "start": 2174.0,
+      "end": 2176.0,
+      "duration": 2.0,
+      "text": "finding volumes, finding masses,"
+    },
+    {
+      "index": 491,
+      "start": 2176.0,
+      "end": 2179.0,
+      "duration": 3.0,
+      "text": "finding average values of functions."
+    },
+    {
+      "index": 492,
+      "start": 2179.0,
+      "end": 2182.0,
+      "duration": 3.0,
+      "text": "In particular, now, we could say to find the"
+    },
+    {
+      "index": 493,
+      "start": 2182.0,
+      "end": 2186.0,
+      "duration": 4.0,
+      "text": "average distance of a point in this solid to the origin."
+    },
+    {
+      "index": 494,
+      "start": 2186.0,
+      "end": 2188.0,
+      "duration": 2.0,
+      "text": "Well, spherical coordinates become"
+    },
+    {
+      "index": 495,
+      "start": 2188.0,
+      "end": 2192.0,
+      "duration": 4.0,
+      "text": "appealing because the function you are averaging is just rho"
+    },
+    {
+      "index": 496,
+      "start": 2192.0,
+      "end": 2195.0,
+      "duration": 3.0,
+      "text": "while in other coordinate systems it's a more complicated"
+    },
+    {
+      "index": 497,
+      "start": 2195.0,
+      "end": 2197.0,
+      "duration": 2.0,
+      "text": "function. So, if you are asked to find"
+    },
+    {
+      "index": 498,
+      "start": 2197.0,
+      "end": 2201.0,
+      "duration": 4.0,
+      "text": "the average distance from the origin, spherical coordinates"
+    },
+    {
+      "index": 499,
+      "start": 2201.0,
+      "end": 2203.0,
+      "duration": 2.0,
+      "text": "can be interesting. Also,"
+    },
+    {
+      "index": 500,
+      "start": 2203.0,
+      "end": 2207.0,
+      "duration": 4.0,
+      "text": "well, there's moments of inertia,"
+    },
+    {
+      "index": 501,
+      "start": 2207.0,
+      "end": 2210.0,
+      "duration": 3.0,
+      "text": "preferably the one about the z axis because if you have to"
+    },
+    {
+      "index": 502,
+      "start": 2210.0,
+      "end": 2212.0,
+      "duration": 2.0,
+      "text": "integrate something that involves x or y,"
+    },
+    {
+      "index": 503,
+      "start": 2212.0,
+      "end": 2215.0,
+      "duration": 3.0,
+      "text": "then your integrand will contain that awful rho sine phi"
+    },
+    {
+      "index": 504,
+      "start": 2215.0,
+      "end": 2217.0,
+      "duration": 2.0,
+      "text": "sine theta or rho sine phi cosine theta,"
+    },
+    {
+      "index": 505,
+      "start": 2217.0,
+      "end": 2220.0,
+      "duration": 3.0,
+      "text": "and then it won't be much fun to evaluate."
+    },
+    {
+      "index": 506,
+      "start": 2220.0,
+      "end": 2225.0,
+      "duration": 5.0,
+      "text": "So, that anyway, there's the usual ones."
+    },
+    {
+      "index": 507,
+      "start": 2225.0,
+      "end": 2228.0,
+      "duration": 3.0,
+      "text": "And then there's a new one. So, in physics,"
+    },
+    {
+      "index": 508,
+      "start": 2228.0,
+      "end": 2236.0,
+      "duration": 8.0,
+      "text": "you've probably seen things about gravitational attraction."
+    },
+    {
+      "index": 509,
+      "start": 2236.0,
+      "end": 2239.0,
+      "duration": 3.0,
+      "text": "If not, well, it's what causes apples to fall"
+    },
+    {
+      "index": 510,
+      "start": 2239.0,
+      "end": 2242.0,
+      "duration": 3.0,
+      "text": "and other things like that as well."
+    },
+    {
+      "index": 511,
+      "start": 2242.0,
+      "end": 2246.0,
+      "duration": 4.0,
+      "text": "So, anyway, physics tells you that if you have two masses,"
+    },
+    {
+      "index": 512,
+      "start": 2246.0,
+      "end": 2250.0,
+      "duration": 4.0,
+      "text": "then they attract each other with a force that's directed"
+    },
+    {
+      "index": 513,
+      "start": 2250.0,
+      "end": 2253.0,
+      "duration": 3.0,
+      "text": "towards each other. And in intensity,"
+    },
+    {
+      "index": 514,
+      "start": 2253.0,
+      "end": 2257.0,
+      "duration": 4.0,
+      "text": "it's proportional to the two masses, and inversely"
+    },
+    {
+      "index": 515,
+      "start": 2257.0,
+      "end": 2261.0,
+      "duration": 4.0,
+      "text": "proportional to the square of the distance between them."
+    },
+    {
+      "index": 516,
+      "start": 2261.0,
+      "end": 2265.0,
+      "duration": 4.0,
+      "text": "So, if you have a given solid with"
+    },
+    {
+      "index": 517,
+      "start": 2265.0,
+      "end": 2270.0,
+      "duration": 5.0,
+      "text": "a certain mass distribution, and you want to know how it"
+    },
+    {
+      "index": 518,
+      "start": 2270.0,
+      "end": 2273.0,
+      "duration": 3.0,
+      "text": "attracts something else that you will put nearby,"
+    },
+    {
+      "index": 519,
+      "start": 2273.0,
+      "end": 2278.0,
+      "duration": 5.0,
+      "text": "then you actually have to, the first approximation will be"
+    },
+    {
+      "index": 520,
+      "start": 2278.0,
+      "end": 2279.0,
+      "duration": 1.0,
+      "text": "to say, well, let's just put a point"
+    },
+    {
+      "index": 521,
+      "start": 2279.0,
+      "end": 2282.0,
+      "duration": 3.0,
+      "text": "mass at its center of mass. But, if you're solid is"
+    },
+    {
+      "index": 522,
+      "start": 2282.0,
+      "end": 2284.0,
+      "duration": 2.0,
+      "text": "actually not homogenous, or has a weird shape,"
+    },
+    {
+      "index": 523,
+      "start": 2284.0,
+      "end": 2287.0,
+      "duration": 3.0,
+      "text": "then that's not actually the exact answer."
+    },
+    {
+      "index": 524,
+      "start": 2287.0,
+      "end": 2289.0,
+      "duration": 2.0,
+      "text": "So, in general, you would have to just take"
+    },
+    {
+      "index": 525,
+      "start": 2289.0,
+      "end": 2292.0,
+      "duration": 3.0,
+      "text": "every single piece of your object and figure out how it"
+    },
+    {
+      "index": 526,
+      "start": 2292.0,
+      "end": 2294.0,
+      "duration": 2.0,
+      "text": "attracts you, and then compute the sum of"
+    },
+    {
+      "index": 527,
+      "start": 2294.0,
+      "end": 2295.0,
+      "duration": 1.0,
+      "text": "these. So, for example,"
+    },
+    {
+      "index": 528,
+      "start": 2295.0,
+      "end": 2298.0,
+      "duration": 3.0,
+      "text": "if you want to understand why anything that you drop in this"
+    },
+    {
+      "index": 529,
+      "start": 2298.0,
+      "end": 2301.0,
+      "duration": 3.0,
+      "text": "room will fall down, you have to understand that"
+    },
+    {
+      "index": 530,
+      "start": 2301.0,
+      "end": 2304.0,
+      "duration": 3.0,
+      "text": "Boston is actually attracting it towards Boston."
+    },
+    {
+      "index": 531,
+      "start": 2304.0,
+      "end": 2306.0,
+      "duration": 2.0,
+      "text": "And, Somerville's attracting it towards Somerville,"
+    },
+    {
+      "index": 532,
+      "start": 2306.0,
+      "end": 2309.0,
+      "duration": 3.0,
+      "text": "and lots of things like that. And, China, which is much"
+    },
+    {
+      "index": 533,
+      "start": 2309.0,
+      "end": 2313.0,
+      "duration": 4.0,
+      "text": "further on the other side is going to attract towards China."
+    },
+    {
+      "index": 534,
+      "start": 2313.0,
+      "end": 2315.0,
+      "duration": 2.0,
+      "text": "But, there's a lot of stuff on the other side of the Earth."
+    },
+    {
+      "index": 535,
+      "start": 2315.0,
+      "end": 2317.0,
+      "duration": 2.0,
+      "text": "And so, overall, it's supposed to end up just"
+    },
+    {
+      "index": 536,
+      "start": 2317.0,
+      "end": 2321.0,
+      "duration": 4.0,
+      "text": "going down. OK, so now, how to find this"
+    },
+    {
+      "index": 537,
+      "start": 2321.0,
+      "end": 2327.0,
+      "duration": 6.0,
+      "text": "out, well, you have to just integrate over the entire Earth."
+    },
+    {
+      "index": 538,
+      "start": 2327.0,
+      "end": 2332.0,
+      "duration": 5.0,
+      "text": "OK, so let's try to see how that goes."
+    },
+    {
+      "index": 539,
+      "start": 2332.0,
+      "end": 2336.0,
+      "duration": 4.0,
+      "text": "So, the setup that's going to be easiest for us to do"
+    },
+    {
+      "index": 540,
+      "start": 2336.0,
+      "end": 2341.0,
+      "duration": 5.0,
+      "text": "computations is going to be that we are going to be the test mass"
+    },
+    {
+      "index": 541,
+      "start": 2341.0,
+      "end": 2344.0,
+      "duration": 3.0,
+      "text": "that's going to be falling. And, we are going to put"
+    },
+    {
+      "index": 542,
+      "start": 2344.0,
+      "end": 2347.0,
+      "duration": 3.0,
+      "text": "ourselves at the origin. And, the solid that's going to"
+    },
+    {
+      "index": 543,
+      "start": 2347.0,
+      "end": 2350.0,
+      "duration": 3.0,
+      "text": "attract us is going to be wherever we want in space."
+    },
+    {
+      "index": 544,
+      "start": 2350.0,
+      "end": 2353.0,
+      "duration": 3.0,
+      "text": "You'll see, putting yourself at the origin is going to be"
+    },
+    {
+      "index": 545,
+      "start": 2353.0,
+      "end": 2355.0,
+      "duration": 2.0,
+      "text": "better. Well, you have to put something"
+    },
+    {
+      "index": 546,
+      "start": 2355.0,
+      "end": 2357.0,
+      "duration": 2.0,
+      "text": "at the origin. And, the one that will stay a"
+    },
+    {
+      "index": 547,
+      "start": 2357.0,
+      "end": 2361.0,
+      "duration": 4.0,
+      "text": "point mass, I mean, in my case not really a point,"
+    },
+    {
+      "index": 548,
+      "start": 2361.0,
+      "end": 2364.0,
+      "duration": 3.0,
+      "text": "but anyway, let's say that I'm a point."
+    },
+    {
+      "index": 549,
+      "start": 2364.0,
+      "end": 2367.0,
+      "duration": 3.0,
+      "text": "And then, I have a solid attracting me."
+    },
+    {
+      "index": 550,
+      "start": 2367.0,
+      "end": 2372.0,
+      "duration": 5.0,
+      "text": "Well, so then if I take a small piece"
+    },
+    {
+      "index": 551,
+      "start": 2372.0,
+      "end": 2377.0,
+      "duration": 5.0,
+      "text": "of it with the mass delta M, then that portion of the solid"
+    },
+    {
+      "index": 552,
+      "start": 2377.0,
+      "end": 2382.0,
+      "duration": 5.0,
+      "text": "exerts a force on me, which is going to be directed"
+    },
+    {
+      "index": 553,
+      "start": 2382.0,
+      "end": 2387.0,
+      "duration": 5.0,
+      "text": "towards it, and we'll have intensity."
+    },
+    {
+      "index": 554,
+      "start": 2387.0,
+      "end": 2399.0,
+      "duration": 12.0,
+      "text": "So, the gravitational force -- -- exerted by the mass delta M"
+    },
+    {
+      "index": 555,
+      "start": 2399.0,
+      "end": 2409.0,
+      "duration": 10.0,
+      "text": "at the point of x, y, z in space on a mass at the"
+    },
+    {
+      "index": 556,
+      "start": 2409.0,
+      "end": 2413.0,
+      "duration": 4.0,
+      "text": "origin. Well, we know how to express"
+    },
+    {
+      "index": 557,
+      "start": 2413.0,
+      "end": 2416.0,
+      "duration": 3.0,
+      "text": "that. Physics tells us that the"
+    },
+    {
+      "index": 558,
+      "start": 2416.0,
+      "end": 2421.0,
+      "duration": 5.0,
+      "text": "magnitude of this force is going to be, well, G is just a"
+    },
+    {
+      "index": 559,
+      "start": 2421.0,
+      "end": 2423.0,
+      "duration": 2.0,
+      "text": "constant. It's the gravitational"
+    },
+    {
+      "index": 560,
+      "start": 2423.0,
+      "end": 2427.0,
+      "duration": 4.0,
+      "text": "constant, and its value depends on which unit system you use."
+    },
+    {
+      "index": 561,
+      "start": 2427.0,
+      "end": 2433.0,
+      "duration": 6.0,
+      "text": "Usually it's pretty small, times the mass delta M,"
+    },
+    {
+      "index": 562,
+      "start": 2433.0,
+      "end": 2439.0,
+      "duration": 6.0,
+      "text": "times the test mass little m, divided by the square of the"
+    },
+    {
+      "index": 563,
+      "start": 2439.0,
+      "end": 2443.0,
+      "duration": 4.0,
+      "text": "distance. And, the distance from U to"
+    },
+    {
+      "index": 564,
+      "start": 2443.0,
+      "end": 2448.0,
+      "duration": 5.0,
+      "text": "that thing is conveniently called rho since we've been"
+    },
+    {
+      "index": 565,
+      "start": 2448.0,
+      "end": 2451.0,
+      "duration": 3.0,
+      "text": "introducing spherical coordinates."
+    },
+    {
+      "index": 566,
+      "start": 2451.0,
+      "end": 2454.0,
+      "duration": 3.0,
+      "text": "So, that's the size, that's the magnitude of the"
+    },
+    {
+      "index": 567,
+      "start": 2454.0,
+      "end": 2456.0,
+      "duration": 2.0,
+      "text": "force. We also need to know the"
+    },
+    {
+      "index": 568,
+      "start": 2456.0,
+      "end": 2461.0,
+      "duration": 5.0,
+      "text": "direction of the force. And, the direction is going to"
+    },
+    {
+      "index": 569,
+      "start": 2461.0,
+      "end": 2467.0,
+      "duration": 6.0,
+      "text": "be towards that point. So, the direction of the force"
+    },
+    {
+      "index": 570,
+      "start": 2467.0,
+      "end": 2471.0,
+      "duration": 4.0,
+      "text": "is going to be that of x, y, z."
+    },
+    {
+      "index": 571,
+      "start": 2471.0,
+      "end": 2473.0,
+      "duration": 2.0,
+      "text": "But if I want a unit vector, then I should scale this down"
+    },
+    {
+      "index": 572,
+      "start": 2473.0,
+      "end": 2482.0,
+      "duration": 9.0,
+      "text": "to length one. So, let me divide this by rho"
+    },
+    {
+      "index": 573,
+      "start": 2482.0,
+      "end": 2492.0,
+      "duration": 10.0,
+      "text": "to get a unit vector. So, that means that the force"
+    },
+    {
+      "index": 574,
+      "start": 2492.0,
+      "end": 2500.0,
+      "duration": 8.0,
+      "text": "I'm getting from this guy is actually going to be G delta M m"
+    },
+    {
+      "index": 575,
+      "start": 2500.0,
+      "end": 2504.0,
+      "duration": 4.0,
+      "text": "over rho cubed times x, y, z."
+    },
+    {
+      "index": 576,
+      "start": 2504.0,
+      "end": 2510.0,
+      "duration": 6.0,
+      "text": "I'm just multiplying the magnitude by the unit vector in"
+    },
+    {
+      "index": 577,
+      "start": 2510.0,
+      "end": 2514.0,
+      "duration": 4.0,
+      "text": "the correct direction. OK, so now if I have not just"
+    },
+    {
+      "index": 578,
+      "start": 2514.0,
+      "end": 2516.0,
+      "duration": 2.0,
+      "text": "that little p is delta M, but an entire solid,"
+    },
+    {
+      "index": 579,
+      "start": 2516.0,
+      "end": 2519.0,
+      "duration": 3.0,
+      "text": "then I have to sum all these guys together."
+    },
+    {
+      "index": 580,
+      "start": 2519.0,
+      "end": 2524.0,
+      "duration": 5.0,
+      "text": "And, I will get the vector that gives me the total force"
+    },
+    {
+      "index": 581,
+      "start": 2524.0,
+      "end": 2526.0,
+      "duration": 2.0,
+      "text": "exerted, OK? So, of course,"
+    },
+    {
+      "index": 582,
+      "start": 2526.0,
+      "end": 2529.0,
+      "duration": 3.0,
+      "text": "there's actually three different calculations in one"
+    },
+    {
+      "index": 583,
+      "start": 2529.0,
+      "end": 2532.0,
+      "duration": 3.0,
+      "text": "because you have to sum the x components to get the x"
+    },
+    {
+      "index": 584,
+      "start": 2532.0,
+      "end": 2536.0,
+      "duration": 4.0,
+      "text": "components of a total force. Same with the y,"
+    },
+    {
+      "index": 585,
+      "start": 2536.0,
+      "end": 2548.0,
+      "duration": 12.0,
+      "text": "and same with the z. So, let me first write down the"
+    },
+    {
+      "index": 586,
+      "start": 2548.0,
+      "end": 2556.0,
+      "duration": 8.0,
+      "text": "actual formula. So, if you integrate over the"
+    },
+    {
+      "index": 587,
+      "start": 2556.0,
+      "end": 2559.0,
+      "duration": 3.0,
+      "text": "entire solid, oh, and I have to remind you,"
+    },
+    {
+      "index": 588,
+      "start": 2559.0,
+      "end": 2562.0,
+      "duration": 3.0,
+      "text": "well, what's the mass, delta M of a small piece of"
+    },
+    {
+      "index": 589,
+      "start": 2562.0,
+      "end": 2565.0,
+      "duration": 3.0,
+      "text": "volume delta V? Well, it's the density times"
+    },
+    {
+      "index": 590,
+      "start": 2565.0,
+      "end": 2568.0,
+      "duration": 3.0,
+      "text": "the volume. So, the mass is going to be,"
+    },
+    {
+      "index": 591,
+      "start": 2568.0,
+      "end": 2574.0,
+      "duration": 6.0,
+      "text": "sorry, density is delta. There is a lot of Greek letters"
+    },
+    {
+      "index": 592,
+      "start": 2574.0,
+      "end": 2584.0,
+      "duration": 10.0,
+      "text": "there, times the volume element. So, you will get that the force"
+    },
+    {
+      "index": 593,
+      "start": 2584.0,
+      "end": 2592.0,
+      "duration": 8.0,
+      "text": "is the triple integral over your solid of G m x,"
+    },
+    {
+      "index": 594,
+      "start": 2592.0,
+      "end": 2598.0,
+      "duration": 6.0,
+      "text": "y, z over rho cubed, delta dV."
+    },
+    {
+      "index": 595,
+      "start": 2598.0,
+      "end": 2601.0,
+      "duration": 3.0,
+      "text": "Now, two observations about that."
+    },
+    {
+      "index": 596,
+      "start": 2601.0,
+      "end": 2603.0,
+      "duration": 2.0,
+      "text": "So, the first one, well, of course,"
+    },
+    {
+      "index": 597,
+      "start": 2603.0,
+      "end": 2609.0,
+      "duration": 6.0,
+      "text": "these are just constants. So, they can go out."
+    },
+    {
+      "index": 598,
+      "start": 2609.0,
+      "end": 2611.0,
+      "duration": 2.0,
+      "text": "The second observation, so here, we are integrating a"
+    },
+    {
+      "index": 599,
+      "start": 2611.0,
+      "end": 2613.0,
+      "duration": 2.0,
+      "text": "vector quantity. So, what does that mean?"
+    },
+    {
+      "index": 600,
+      "start": 2613.0,
+      "end": 2618.0,
+      "duration": 5.0,
+      "text": "I just mean the x component of a force is given by integrating"
+    },
+    {
+      "index": 601,
+      "start": 2618.0,
+      "end": 2621.0,
+      "duration": 3.0,
+      "text": "G m x over rho cubed delta dV. The y components,"
+    },
+    {
+      "index": 602,
+      "start": 2621.0,
+      "end": 2623.0,
+      "duration": 2.0,
+      "text": "same thing with y. The z components,"
+    },
+    {
+      "index": 603,
+      "start": 2623.0,
+      "end": 2626.0,
+      "duration": 3.0,
+      "text": "same thing with z. OK, there's no,"
+    },
+    {
+      "index": 604,
+      "start": 2626.0,
+      "end": 2631.0,
+      "duration": 5.0,
+      "text": "like, you know, just integrate component by"
+    },
+    {
+      "index": 605,
+      "start": 2631.0,
+      "end": 2636.0,
+      "duration": 5.0,
+      "text": "component to get each component of the force."
+    },
+    {
+      "index": 606,
+      "start": 2636.0,
+      "end": 2641.0,
+      "duration": 5.0,
+      "text": "So, now we could very well to this in rectangular coordinates"
+    },
+    {
+      "index": 607,
+      "start": 2641.0,
+      "end": 2644.0,
+      "duration": 3.0,
+      "text": "if we want. But the annoying thing is this"
+    },
+    {
+      "index": 608,
+      "start": 2644.0,
+      "end": 2646.0,
+      "duration": 2.0,
+      "text": "rho cubed. Rho cubed is going to be x"
+    },
+    {
+      "index": 609,
+      "start": 2646.0,
+      "end": 2650.0,
+      "duration": 4.0,
+      "text": "squared plus y squared plus z squared to the three halves."
+    },
+    {
+      "index": 610,
+      "start": 2650.0,
+      "end": 2653.0,
+      "duration": 3.0,
+      "text": "That's not going to be a very pleasant thing to integrate."
+    },
+    {
+      "index": 611,
+      "start": 2653.0,
+      "end": 2664.0,
+      "duration": 11.0,
+      "text": "So, it's much better to set up these integrals in spherical"
+    },
+    {
+      "index": 612,
+      "start": 2664.0,
+      "end": 2669.0,
+      "duration": 5.0,
+      "text": "coordinates. And, if we're going to do it in"
+    },
+    {
+      "index": 613,
+      "start": 2669.0,
+      "end": 2672.0,
+      "duration": 3.0,
+      "text": "spherical coordinates, then probably we don't want to"
+    },
+    {
+      "index": 614,
+      "start": 2672.0,
+      "end": 2674.0,
+      "duration": 2.0,
+      "text": "bother too much with x and y components because those would"
+    },
+    {
+      "index": 615,
+      "start": 2674.0,
+      "end": 2678.0,
+      "duration": 4.0,
+      "text": "be unpleasant. It would give us rho sine phi"
+    },
+    {
+      "index": 616,
+      "start": 2678.0,
+      "end": 2687.0,
+      "duration": 9.0,
+      "text": "cos theta or sine theta. So, the actual way we will set"
+    },
+    {
+      "index": 617,
+      "start": 2687.0,
+      "end": 2697.0,
+      "duration": 10.0,
+      "text": "up things, set things up, is to place the solid so that"
+    },
+    {
+      "index": 618,
+      "start": 2697.0,
+      "end": 2704.0,
+      "duration": 7.0,
+      "text": "the z axis is an axis of symmetry."
+    },
+    {
+      "index": 619,
+      "start": 2704.0,
+      "end": 2707.0,
+      "duration": 3.0,
+      "text": "And, of course, that only works if the solid"
+    },
+    {
+      "index": 620,
+      "start": 2707.0,
+      "end": 2710.0,
+      "duration": 3.0,
+      "text": "has some axis of symmetry. Like, if you're trying to find"
+    },
+    {
+      "index": 621,
+      "start": 2710.0,
+      "end": 2713.0,
+      "duration": 3.0,
+      "text": "the gravitational attraction of the Pyramid of Giza,"
+    },
+    {
+      "index": 622,
+      "start": 2713.0,
+      "end": 2716.0,
+      "duration": 3.0,
+      "text": "then you won't be able to set up so that it has rotation"
+    },
+    {
+      "index": 623,
+      "start": 2716.0,
+      "end": 2718.0,
+      "duration": 2.0,
+      "text": "symmetry. Well, that's a tough fact of"
+    },
+    {
+      "index": 624,
+      "start": 2718.0,
+      "end": 2721.0,
+      "duration": 3.0,
+      "text": "life, and you have to actually do it in x, y,"
+    },
+    {
+      "index": 625,
+      "start": 2721.0,
+      "end": 2724.0,
+      "duration": 3.0,
+      "text": "z coordinates. But, if at all possible,"
+    },
+    {
+      "index": 626,
+      "start": 2724.0,
+      "end": 2727.0,
+      "duration": 3.0,
+      "text": "then you're going to place things."
+    },
+    {
+      "index": 627,
+      "start": 2727.0,
+      "end": 2730.0,
+      "duration": 3.0,
+      "text": "Well, I guess even then, you could center it on the z"
+    },
+    {
+      "index": 628,
+      "start": 2730.0,
+      "end": 2732.0,
+      "duration": 2.0,
+      "text": "axis. But anyway, so you're going to"
+    },
+    {
+      "index": 629,
+      "start": 2732.0,
+      "end": 2737.0,
+      "duration": 5.0,
+      "text": "mostly place things so that your solid is actually centered on"
+    },
+    {
+      "index": 630,
+      "start": 2737.0,
+      "end": 2741.0,
+      "duration": 4.0,
+      "text": "the z-axis. And, what you gain by that is"
+    },
+    {
+      "index": 631,
+      "start": 2741.0,
+      "end": 2745.0,
+      "duration": 4.0,
+      "text": "that by symmetry, the gravitational force will be"
+    },
+    {
+      "index": 632,
+      "start": 2745.0,
+      "end": 2752.0,
+      "duration": 7.0,
+      "text": "directed along the z axis. So, you will just have to"
+    },
+    {
+      "index": 633,
+      "start": 2752.0,
+      "end": 2758.0,
+      "duration": 6.0,
+      "text": "figure out the z component. So, then the force will be"
+    },
+    {
+      "index": 634,
+      "start": 2758.0,
+      "end": 2763.0,
+      "duration": 5.0,
+      "text": "actually, you know in advance that it will be given by zero,"
+    },
+    {
+      "index": 635,
+      "start": 2763.0,
+      "end": 2771.0,
+      "duration": 8.0,
+      "text": "and some z component. And then, you just need to"
+    },
+    {
+      "index": 636,
+      "start": 2771.0,
+      "end": 2779.0,
+      "duration": 8.0,
+      "text": "compute that component. And, that component will be"
+    },
+    {
+      "index": 637,
+      "start": 2779.0,
+      "end": 2787.0,
+      "duration": 8.0,
+      "text": "just G times m times triple integral of z over rho cubed"
+    },
+    {
+      "index": 638,
+      "start": 2787.0,
+      "end": 2790.0,
+      "duration": 3.0,
+      "text": "delta dV. OK, so that's the first"
+    },
+    {
+      "index": 639,
+      "start": 2790.0,
+      "end": 2795.0,
+      "duration": 5.0,
+      "text": "simplification we can try to do. The second thing is,"
+    },
+    {
+      "index": 640,
+      "start": 2795.0,
+      "end": 2798.0,
+      "duration": 3.0,
+      "text": "well, we have to choose our favorite coordinate system to do"
+    },
+    {
+      "index": 641,
+      "start": 2798.0,
+      "end": 2805.0,
+      "duration": 7.0,
+      "text": "this. But, I claim that actually"
+    },
+    {
+      "index": 642,
+      "start": 2805.0,
+      "end": 2817.0,
+      "duration": 12.0,
+      "text": "spherical coordinates are the best -- -- because let's see"
+    },
+    {
+      "index": 643,
+      "start": 2817.0,
+      "end": 2824.0,
+      "duration": 7.0,
+      "text": "what happens. So, G times mass times triple"
+    },
+    {
+      "index": 644,
+      "start": 2824.0,
+      "end": 2829.0,
+      "duration": 5.0,
+      "text": "integral, well, a z in spherical coordinates"
+    },
+    {
+      "index": 645,
+      "start": 2829.0,
+      "end": 2834.0,
+      "duration": 5.0,
+      "text": "becomes rho cosine phi over rho cubed."
+    },
+    {
+      "index": 646,
+      "start": 2834.0,
+      "end": 2837.0,
+      "duration": 3.0,
+      "text": "Density, well, we can't do anything about"
+    },
+    {
+      "index": 647,
+      "start": 2837.0,
+      "end": 2841.0,
+      "duration": 4.0,
+      "text": "density. And then, dV becomes rho"
+    },
+    {
+      "index": 648,
+      "start": 2841.0,
+      "end": 2848.0,
+      "duration": 7.0,
+      "text": "squared sine phi d rho d phi d theta."
+    },
+    {
+      "index": 649,
+      "start": 2848.0,
+      "end": 2854.0,
+      "duration": 6.0,
+      "text": "Well, so, what happens with that?"
+    },
+    {
+      "index": 650,
+      "start": 2854.0,
+      "end": 2857.0,
+      "duration": 3.0,
+      "text": "Well, you see that you have a rho, a rho squared,"
+    },
+    {
+      "index": 651,
+      "start": 2857.0,
+      "end": 2859.0,
+      "duration": 2.0,
+      "text": "and a rho cubed that cancel each other."
+    },
+    {
+      "index": 652,
+      "start": 2859.0,
+      "end": 2862.0,
+      "duration": 3.0,
+      "text": "So, in fact, it simplifies quite a bit if"
+    },
+    {
+      "index": 653,
+      "start": 2862.0,
+      "end": 2864.0,
+      "duration": 2.0,
+      "text": "you do it in spherical coordinates."
+    },
+    {
+      "index": 654,
+      "start": 2888.0,
+      "end": 2892.0,
+      "duration": 4.0,
+      "text": "OK, so the z component of the force, sorry,"
+    },
+    {
+      "index": 655,
+      "start": 2892.0,
+      "end": 2898.0,
+      "duration": 6.0,
+      "text": "I'm putting a z here to remind you it's the z component."
+    },
+    {
+      "index": 656,
+      "start": 2898.0,
+      "end": 2899.0,
+      "duration": 1.0,
+      "text": "That is not a partial derivative, OK?"
+    },
+    {
+      "index": 657,
+      "start": 2899.0,
+      "end": 2907.0,
+      "duration": 8.0,
+      "text": "Don't get things mixed up, just the z component of the"
+    },
+    {
+      "index": 658,
+      "start": 2907.0,
+      "end": 2915.0,
+      "duration": 8.0,
+      "text": "force becomes Gm triple integral of delta cos phi sine phi d rho"
+    },
+    {
+      "index": 659,
+      "start": 2915.0,
+      "end": 2920.0,
+      "duration": 5.0,
+      "text": "d phi d theta. And, so this thing is not dV,"
+    },
+    {
+      "index": 660,
+      "start": 2920.0,
+      "end": 2922.0,
+      "duration": 2.0,
+      "text": "of course. dV is much bigger,"
+    },
+    {
+      "index": 661,
+      "start": 2922.0,
+      "end": 2925.0,
+      "duration": 3.0,
+      "text": "but we've somehow canceled out most of dV with stuff that was"
+    },
+    {
+      "index": 662,
+      "start": 2925.0,
+      "end": 2929.0,
+      "duration": 4.0,
+      "text": "in the integrand. And see, that's actually"
+    },
+    {
+      "index": 663,
+      "start": 2929.0,
+      "end": 2935.0,
+      "duration": 6.0,
+      "text": "suddenly much less scary. OK, so just to give you an"
+    },
+    {
+      "index": 664,
+      "start": 2935.0,
+      "end": 2941.0,
+      "duration": 6.0,
+      "text": "example of what you can prove it this way, you can prove Newton's"
+    },
+    {
+      "index": 665,
+      "start": 2941.0,
+      "end": 2946.0,
+      "duration": 5.0,
+      "text": "theorem, which says the following thing."
+    },
+    {
+      "index": 666,
+      "start": 2946.0,
+      "end": 2963.0,
+      "duration": 17.0,
+      "text": "It says the gravitational attraction -- -- of a spherical"
+    },
+    {
+      "index": 667,
+      "start": 2963.0,
+      "end": 2969.0,
+      "duration": 6.0,
+      "text": "planet, I should say with uniform"
+    },
+    {
+      "index": 668,
+      "start": 2969.0,
+      "end": 2972.0,
+      "duration": 3.0,
+      "text": "density, or actually it's enough for the"
+    },
+    {
+      "index": 669,
+      "start": 2972.0,
+      "end": 2974.0,
+      "duration": 2.0,
+      "text": "density to depend just on distance to the center."
+    },
+    {
+      "index": 670,
+      "start": 2974.0,
+      "end": 2990.0,
+      "duration": 16.0,
+      "text": "But we just simplify the statement is equal to that of a"
+    },
+    {
+      "index": 671,
+      "start": 2990.0,
+      "end": 3005.0,
+      "duration": 15.0,
+      "text": "point mass -- -- with the same total mass at its center."
+    },
+    {
+      "index": 672,
+      "start": 3005.0,
+      "end": 3011.0,
+      "duration": 6.0,
+      "text": "OK, so what that means is that, so the way we would set it up"
+    },
+    {
+      "index": 673,
+      "start": 3011.0,
+      "end": 3018.0,
+      "duration": 7.0,
+      "text": "is u would be sitting here and your planet would be over here."
+    },
+    {
+      "index": 674,
+      "start": 3018.0,
+      "end": 3021.0,
+      "duration": 3.0,
+      "text": "Or, if you're at the surface of it, then of course you just put"
+    },
+    {
+      "index": 675,
+      "start": 3021.0,
+      "end": 3025.0,
+      "duration": 4.0,
+      "text": "it tangent to the xy plane here. And, you would compute that"
+    },
+    {
+      "index": 676,
+      "start": 3025.0,
+      "end": 3027.0,
+      "duration": 2.0,
+      "text": "quantity. Computation is a little bit"
+    },
+    {
+      "index": 677,
+      "start": 3027.0,
+      "end": 3030.0,
+      "duration": 3.0,
+      "text": "annoying if a sphere is sitting up there because,"
+    },
+    {
+      "index": 678,
+      "start": 3030.0,
+      "end": 3031.0,
+      "duration": 1.0,
+      "text": "of course, you have to find bounds,"
+    },
+    {
+      "index": 679,
+      "start": 3031.0,
+      "end": 3033.0,
+      "duration": 2.0,
+      "text": "and that's not going to be very pleasant."
+    },
+    {
+      "index": 680,
+      "start": 3033.0,
+      "end": 3037.0,
+      "duration": 4.0,
+      "text": "The case that we actually know how to do fairly well is if you"
+    },
+    {
+      "index": 681,
+      "start": 3037.0,
+      "end": 3039.0,
+      "duration": 2.0,
+      "text": "are just at the surface of the planet."
+    },
+    {
+      "index": 682,
+      "start": 3039.0,
+      "end": 3041.0,
+      "duration": 2.0,
+      "text": "But then, what the theorem says is that"
+    },
+    {
+      "index": 683,
+      "start": 3041.0,
+      "end": 3044.0,
+      "duration": 3.0,
+      "text": "the force that you're going to feel is exactly the same as if"
+    },
+    {
+      "index": 684,
+      "start": 3044.0,
+      "end": 3048.0,
+      "duration": 4.0,
+      "text": "you removed all of the planet and you just put an equivalent"
+    },
+    {
+      "index": 685,
+      "start": 3048.0,
+      "end": 3050.0,
+      "duration": 2.0,
+      "text": "point mass here. So, if the earth collapsed to a"
+    },
+    {
+      "index": 686,
+      "start": 3050.0,
+      "end": 3053.0,
+      "duration": 3.0,
+      "text": "black hole at the center of the earth with the same mass,"
+    },
+    {
+      "index": 687,
+      "start": 3053.0,
+      "end": 3055.0,
+      "duration": 2.0,
+      "text": "well, you wouldn't notice the difference immediately,"
+    },
+    {
+      "index": 688,
+      "start": 3055.0,
+      "end": 3060.0,
+      "duration": 5.0,
+      "text": "or, rather, you would, but at least not in terms of"
+    },
+    {
+      "index": 689,
+      "start": 3060.0,
+      "end": 3064.0,
+      "duration": 4.0,
+      "text": "your weight. OK, that's the end for today."
+    }
+  ],
+  "course": {
+    "category": "Mathematics",
+    "title": "Multivariable Calculus",
+    "source_url": "https://www.youtube.com/playlist?list=PL4C4C8A7D06566F38"
+  }
+}

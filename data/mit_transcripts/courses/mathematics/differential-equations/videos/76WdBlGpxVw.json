@@ -1,0 +1,963 @@
+{
+  "video": {
+    "id": "76WdBlGpxVw",
+    "title": "Separable Equations | MIT 18.03SC Differential Equations, Fall 2011",
+    "url": "https://www.youtube.com/watch?v=76WdBlGpxVw",
+    "channel": "MIT OpenCourseWare",
+    "duration": 438,
+    "language": "en"
+  },
+  "segment_count": 135,
+  "segments": [
+    {
+      "index": 0,
+      "start": 7.11,
+      "end": 7.12,
+      "duration": 0.01,
+      "text": "welcome to this session on separable"
+    },
+    {
+      "index": 1,
+      "start": 7.12,
+      "end": 9.549,
+      "duration": 2.429,
+      "text": "equations so in this problem you're"
+    },
+    {
+      "index": 2,
+      "start": 9.559,
+      "end": 12.15,
+      "duration": 2.591,
+      "text": "asked in the first question to solve the"
+    },
+    {
+      "index": 3,
+      "start": 12.16,
+      "end": 16.63,
+      "duration": 4.47,
+      "text": "initial value problem Dy DX = y s with"
+    },
+    {
+      "index": 4,
+      "start": 16.64,
+      "end": 19.349,
+      "duration": 2.709,
+      "text": "initial condition y of 0 equals 1 in the"
+    },
+    {
+      "index": 5,
+      "start": 19.359,
+      "end": 20.83,
+      "duration": 1.471,
+      "text": "second part of the problem you're asked"
+    },
+    {
+      "index": 6,
+      "start": 20.84,
+      "end": 22.75,
+      "duration": 1.91,
+      "text": "to find the general solution where no"
+    },
+    {
+      "index": 7,
+      "start": 22.76,
+      "end": 25.109,
+      "duration": 2.349,
+      "text": "initial condition is imposed so here you"
+    },
+    {
+      "index": 8,
+      "start": 25.119,
+      "end": 26.31,
+      "duration": 1.191,
+      "text": "need to remember your method of"
+    },
+    {
+      "index": 9,
+      "start": 26.32,
+      "end": 29.07,
+      "duration": 2.75,
+      "text": "separation of variables to tackle the"
+    },
+    {
+      "index": 10,
+      "start": 29.08,
+      "end": 31.109,
+      "duration": 2.029,
+      "text": "first question and then in the second"
+    },
+    {
+      "index": 11,
+      "start": 31.119,
+      "end": 33.869,
+      "duration": 2.75,
+      "text": "part of the problem remember all the the"
+    },
+    {
+      "index": 12,
+      "start": 33.879,
+      "end": 35.389,
+      "duration": 1.51,
+      "text": "type of solutions and conditions that"
+    },
+    {
+      "index": 13,
+      "start": 35.399,
+      "end": 37.35,
+      "duration": 1.951,
+      "text": "you applied in the first part to recover"
+    },
+    {
+      "index": 14,
+      "start": 37.36,
+      "end": 40.549,
+      "duration": 3.189,
+      "text": "the lost equ the Lost Solutions so why"
+    },
+    {
+      "index": 15,
+      "start": 40.559,
+      "end": 42.709,
+      "duration": 2.15,
+      "text": "don't you take a minute pause the video"
+    },
+    {
+      "index": 16,
+      "start": 42.719,
+      "end": 44.59,
+      "duration": 1.871,
+      "text": "work through the questions A and B and"
+    },
+    {
+      "index": 17,
+      "start": 44.6,
+      "end": 58.15,
+      "duration": 13.55,
+      "text": "then we'll continue together when I come"
+    },
+    {
+      "index": 18,
+      "start": 62.83,
+      "end": 62.84,
+      "duration": 0.01,
+      "text": "back welcome back so in the first part"
+    },
+    {
+      "index": 19,
+      "start": 62.84,
+      "end": 65.429,
+      "duration": 2.589,
+      "text": "of the problem we'll be solving the"
+    },
+    {
+      "index": 20,
+      "start": 65.439,
+      "end": 68.03,
+      "duration": 2.591,
+      "text": "equation Dy DX equal y s so here the"
+    },
+    {
+      "index": 21,
+      "start": 68.04,
+      "end": 70.95,
+      "duration": 2.91,
+      "text": "method of separation of variables tells"
+    },
+    {
+      "index": 22,
+      "start": 70.96,
+      "end": 72.71,
+      "duration": 1.75,
+      "text": "us that we should regroup the variables"
+    },
+    {
+      "index": 23,
+      "start": 72.72,
+      "end": 75.35,
+      "duration": 2.63,
+      "text": "of the same kind so all the Y variables"
+    },
+    {
+      "index": 24,
+      "start": 75.36,
+      "end": 78.95,
+      "duration": 3.59,
+      "text": "in one side and DX variable on the other"
+    },
+    {
+      "index": 25,
+      "start": 78.96,
+      "end": 81.39,
+      "duration": 2.43,
+      "text": "side of the equation and then integrate"
+    },
+    {
+      "index": 26,
+      "start": 81.4,
+      "end": 84.39,
+      "duration": 2.99,
+      "text": "from this point so here from for this"
+    },
+    {
+      "index": 27,
+      "start": 84.4,
+      "end": 87.91,
+      "duration": 3.51,
+      "text": "step notice that I divided by Y squ"
+    },
+    {
+      "index": 28,
+      "start": 87.92,
+      "end": 89.67,
+      "duration": 1.75,
+      "text": "which means that we need to impose the"
+    },
+    {
+      "index": 29,
+      "start": 89.68,
+      "end": 94.71,
+      "duration": 5.03,
+      "text": "condition y not equal to zero from now"
+    },
+    {
+      "index": 30,
+      "start": 98.109,
+      "end": 98.119,
+      "duration": 0.01,
+      "text": "on so from this step we just use"
+    },
+    {
+      "index": 31,
+      "start": 98.119,
+      "end": 100.51,
+      "duration": 2.391,
+      "text": "infinite integrals"
+    },
+    {
+      "index": 32,
+      "start": 100.52,
+      "end": 103.95,
+      "duration": 3.43,
+      "text": "to integrate both sides of the equation"
+    },
+    {
+      "index": 33,
+      "start": 103.96,
+      "end": 105.749,
+      "duration": 1.789,
+      "text": "so the left hand side is the integral of"
+    },
+    {
+      "index": 34,
+      "start": 105.759,
+      "end": 111.23,
+      "duration": 5.471,
+      "text": "d y over y s so integral of this gives"
+    },
+    {
+      "index": 35,
+      "start": 111.24,
+      "end": 114.23,
+      "duration": 2.99,
+      "text": "us Min -1 over Y and the right hand side"
+    },
+    {
+      "index": 36,
+      "start": 114.24,
+      "end": 118.429,
+      "duration": 4.189,
+      "text": "integral of DX is just X both sides"
+    },
+    {
+      "index": 37,
+      "start": 118.439,
+      "end": 120.749,
+      "duration": 2.31,
+      "text": "would give us U constant Integrations"
+    },
+    {
+      "index": 38,
+      "start": 120.759,
+      "end": 122.789,
+      "duration": 2.03,
+      "text": "but we only need one because this is a"
+    },
+    {
+      "index": 39,
+      "start": 122.799,
+      "end": 124.99,
+      "duration": 2.191,
+      "text": "first order differential equation and so"
+    },
+    {
+      "index": 40,
+      "start": 125.0,
+      "end": 126.59,
+      "duration": 1.59,
+      "text": "we group them together on the right hand"
+    },
+    {
+      "index": 41,
+      "start": 126.6,
+      "end": 137.869,
+      "duration": 11.269,
+      "text": "side with constant"
+    },
+    {
+      "index": 42,
+      "start": 140.91,
+      "end": 140.92,
+      "duration": 0.01,
+      "text": "C so from this point given that we're"
+    },
+    {
+      "index": 43,
+      "start": 140.92,
+      "end": 143.869,
+      "duration": 2.949,
+      "text": "interested in variable y we need just to"
+    },
+    {
+      "index": 44,
+      "start": 143.879,
+      "end": 147.229,
+      "duration": 3.35,
+      "text": "inverse the the"
+    },
+    {
+      "index": 45,
+      "start": 150.07,
+      "end": 150.08,
+      "duration": 0.01,
+      "text": "expression and that gives us partial"
+    },
+    {
+      "index": 46,
+      "start": 150.08,
+      "end": 154.43,
+      "duration": 4.35,
+      "text": "answer which is y of x = -1 /x + C so"
+    },
+    {
+      "index": 47,
+      "start": 154.44,
+      "end": 156.43,
+      "duration": 1.99,
+      "text": "now we need to use our initial condition"
+    },
+    {
+      "index": 48,
+      "start": 156.44,
+      "end": 158.91,
+      "duration": 2.47,
+      "text": "y of 0 = to 1 to determine the value of"
+    },
+    {
+      "index": 49,
+      "start": 158.92,
+      "end": 164.39,
+      "duration": 5.47,
+      "text": "C for this particular initial value"
+    },
+    {
+      "index": 50,
+      "start": 172.149,
+      "end": 172.159,
+      "duration": 0.01,
+      "text": "oops so our initial"
+    },
+    {
+      "index": 51,
+      "start": 172.159,
+      "end": 176.149,
+      "duration": 3.99,
+      "text": "condition was y of 0 = to 1 so if we"
+    },
+    {
+      "index": 52,
+      "start": 176.159,
+      "end": 177.79,
+      "duration": 1.631,
+      "text": "substitute this in the expression that"
+    },
+    {
+      "index": 53,
+      "start": 177.8,
+      "end": 182.67,
+      "duration": 4.87,
+      "text": "we just obtained we just"
+    },
+    {
+      "index": 54,
+      "start": 182.68,
+      "end": 187.39,
+      "duration": 4.71,
+      "text": "have 0 + C which then"
+    },
+    {
+      "index": 55,
+      "start": 187.4,
+      "end": 192.309,
+      "duration": 4.909,
+      "text": "only gives us C equals to 1 so we end up"
+    },
+    {
+      "index": 56,
+      "start": 192.319,
+      "end": 194.229,
+      "duration": 1.91,
+      "text": "with a value for our constant of"
+    },
+    {
+      "index": 57,
+      "start": 194.239,
+      "end": 198.869,
+      "duration": 4.63,
+      "text": "integration C equals 2 minus"
+    },
+    {
+      "index": 58,
+      "start": 211.869,
+      "end": 211.879,
+      "duration": 0.01,
+      "text": "problem is y ofx = 1 / 1 - x so if you"
+    },
+    {
+      "index": 59,
+      "start": 211.879,
+      "end": 213.589,
+      "duration": 1.71,
+      "text": "examine this expression you see right"
+    },
+    {
+      "index": 60,
+      "start": 213.599,
+      "end": 216.27,
+      "duration": 2.671,
+      "text": "away that we have a problem for xal to 1"
+    },
+    {
+      "index": 61,
+      "start": 216.28,
+      "end": 218.429,
+      "duration": 2.149,
+      "text": "because at xals to 1 we have a one over"
+    },
+    {
+      "index": 62,
+      "start": 218.439,
+      "end": 220.03,
+      "duration": 1.591,
+      "text": "zero which means that then the solution"
+    },
+    {
+      "index": 63,
+      "start": 220.04,
+      "end": 222.19,
+      "duration": 2.15,
+      "text": "blows up and we have a vertical ASM"
+    },
+    {
+      "index": 64,
+      "start": 222.2,
+      "end": 231.55,
+      "duration": 9.35,
+      "text": "toote so let me draw this"
+    },
+    {
+      "index": 65,
+      "start": 233.83,
+      "end": 233.84,
+      "duration": 0.01,
+      "text": "here so we're going to"
+    },
+    {
+      "index": 66,
+      "start": 233.84,
+      "end": 236.75,
+      "duration": 2.91,
+      "text": "have an Asm"
+    },
+    {
+      "index": 67,
+      "start": 236.76,
+      "end": 240.83,
+      "duration": 4.07,
+      "text": "toote on x equal to 1"
+    },
+    {
+      "index": 68,
+      "start": 240.84,
+      "end": 245.35,
+      "duration": 4.51,
+      "text": "and a solution that passes"
+    },
+    {
+      "index": 69,
+      "start": 249.67,
+      "end": 249.68,
+      "duration": 0.01,
+      "text": "through our initial condition y = to 1"
+    },
+    {
+      "index": 70,
+      "start": 249.68,
+      "end": 252.19,
+      "duration": 2.51,
+      "text": "going to Infinity When approaching X"
+    },
+    {
+      "index": 71,
+      "start": 252.2,
+      "end": 256.189,
+      "duration": 3.989,
+      "text": "xals to 1 but then on the right side of"
+    },
+    {
+      "index": 72,
+      "start": 256.199,
+      "end": 258.909,
+      "duration": 2.71,
+      "text": "the value xals to 1 we Al have another"
+    },
+    {
+      "index": 73,
+      "start": 258.919,
+      "end": 261.99,
+      "duration": 3.071,
+      "text": "part of the solution that goes to zero"
+    },
+    {
+      "index": 74,
+      "start": 262.0,
+      "end": 264.51,
+      "duration": 2.51,
+      "text": "as X goes to infinity and that dires to"
+    },
+    {
+      "index": 75,
+      "start": 264.52,
+      "end": 268.03,
+      "duration": 3.51,
+      "text": "minus infinity when X approaches one so"
+    },
+    {
+      "index": 76,
+      "start": 268.04,
+      "end": 270.27,
+      "duration": 2.23,
+      "text": "by convention the Solutions of"
+    },
+    {
+      "index": 77,
+      "start": 270.28,
+      "end": 271.79,
+      "duration": 1.51,
+      "text": "differential equations are defined in"
+    },
+    {
+      "index": 78,
+      "start": 271.8,
+      "end": 274.27,
+      "duration": 2.47,
+      "text": "one single interval so we need here to"
+    },
+    {
+      "index": 79,
+      "start": 274.28,
+      "end": 277.71,
+      "duration": 3.43,
+      "text": "realize that the solution we"
+    },
+    {
+      "index": 80,
+      "start": 277.72,
+      "end": 281.79,
+      "duration": 4.07,
+      "text": "had is two is basically two parts the"
+    },
+    {
+      "index": 81,
+      "start": 281.8,
+      "end": 283.51,
+      "duration": 1.71,
+      "text": "parts on the left of the ASM toote and"
+    },
+    {
+      "index": 82,
+      "start": 283.52,
+      "end": 298.629,
+      "duration": 15.109,
+      "text": "the part on the right of the Asm"
+    },
+    {
+      "index": 83,
+      "start": 304.07,
+      "end": 304.08,
+      "duration": 0.01,
+      "text": "so the solution to our initial value"
+    },
+    {
+      "index": 84,
+      "start": 304.08,
+      "end": 305.71,
+      "duration": 1.63,
+      "text": "problem needs to be the solution that"
+    },
+    {
+      "index": 85,
+      "start": 305.72,
+      "end": 307.39,
+      "duration": 1.67,
+      "text": "passes through the imposed initial"
+    },
+    {
+      "index": 86,
+      "start": 307.4,
+      "end": 310.23,
+      "duration": 2.83,
+      "text": "condition which was y of 0 equals to 1"
+    },
+    {
+      "index": 87,
+      "start": 310.24,
+      "end": 316.27,
+      "duration": 6.03,
+      "text": "so it needs to be this"
+    },
+    {
+      "index": 88,
+      "start": 320.909,
+      "end": 320.919,
+      "duration": 0.01,
+      "text": "solution so now if we move on to the"
+    },
+    {
+      "index": 89,
+      "start": 320.919,
+      "end": 323.39,
+      "duration": 2.471,
+      "text": "solution of the second part of the"
+    },
+    {
+      "index": 90,
+      "start": 323.4,
+      "end": 325.909,
+      "duration": 2.509,
+      "text": "problem B we were asked to find the"
+    },
+    {
+      "index": 91,
+      "start": 325.919,
+      "end": 328.35,
+      "duration": 2.431,
+      "text": "general solution of the problem which"
+    },
+    {
+      "index": 92,
+      "start": 328.36,
+      "end": 329.99,
+      "duration": 1.63,
+      "text": "means that we need to account now for"
+    },
+    {
+      "index": 93,
+      "start": 330.0,
+      "end": 331.67,
+      "duration": 1.67,
+      "text": "all the solutions regardless of their"
+    },
+    {
+      "index": 94,
+      "start": 331.68,
+      "end": 334.469,
+      "duration": 2.789,
+      "text": "initial condition so we already answered"
+    },
+    {
+      "index": 95,
+      "start": 334.479,
+      "end": 337.15,
+      "duration": 2.671,
+      "text": "this partially during the solution of of"
+    },
+    {
+      "index": 96,
+      "start": 337.16,
+      "end": 340.909,
+      "duration": 3.749,
+      "text": "part A where we solved using indefinite"
+    },
+    {
+      "index": 97,
+      "start": 340.919,
+      "end": 344.309,
+      "duration": 3.39,
+      "text": "integrals and arrived to the"
+    },
+    {
+      "index": 98,
+      "start": 344.319,
+      "end": 347.909,
+      "duration": 3.59,
+      "text": "solution minus one over X plus C where"
+    },
+    {
+      "index": 99,
+      "start": 347.919,
+      "end": 350.11,
+      "duration": 2.191,
+      "text": "here we had basically an undetermined"
+    },
+    {
+      "index": 100,
+      "start": 350.12,
+      "end": 352.629,
+      "duration": 2.509,
+      "text": "constant of integration so this is one"
+    },
+    {
+      "index": 101,
+      "start": 352.639,
+      "end": 355.15,
+      "duration": 2.511,
+      "text": "General solution but remember that we"
+    },
+    {
+      "index": 102,
+      "start": 355.16,
+      "end": 357.39,
+      "duration": 2.23,
+      "text": "need to give all the general Sol all the"
+    },
+    {
+      "index": 103,
+      "start": 357.4,
+      "end": 359.35,
+      "duration": 1.95,
+      "text": "solutions of the problem so when we"
+    },
+    {
+      "index": 104,
+      "start": 359.36,
+      "end": 361.629,
+      "duration": 2.269,
+      "text": "arrive to this solution we excluded the"
+    },
+    {
+      "index": 105,
+      "start": 361.639,
+      "end": 364.35,
+      "duration": 2.711,
+      "text": "solution that y equals to Z which was"
+    },
+    {
+      "index": 106,
+      "start": 364.36,
+      "end": 366.67,
+      "duration": 2.31,
+      "text": "basically a lost solution because we had"
+    },
+    {
+      "index": 107,
+      "start": 366.68,
+      "end": 369.909,
+      "duration": 3.229,
+      "text": "to impose the condition y not equal to"
+    },
+    {
+      "index": 108,
+      "start": 369.919,
+      "end": 374.23,
+      "duration": 4.311,
+      "text": "zero so we need when we give the general"
+    },
+    {
+      "index": 109,
+      "start": 374.24,
+      "end": 377.909,
+      "duration": 3.669,
+      "text": "solution to this differential equation"
+    },
+    {
+      "index": 110,
+      "start": 377.919,
+      "end": 381.029,
+      "duration": 3.11,
+      "text": "to recover the lost solution and then we"
+    },
+    {
+      "index": 111,
+      "start": 381.039,
+      "end": 383.07,
+      "duration": 2.031,
+      "text": "basically have one kind of solution"
+    },
+    {
+      "index": 112,
+      "start": 383.08,
+      "end": 386.55,
+      "duration": 3.47,
+      "text": "minus one /x + C that excludes yal to0"
+    },
+    {
+      "index": 113,
+      "start": 386.56,
+      "end": 388.469,
+      "duration": 1.909,
+      "text": "and another kind of solution that is"
+    },
+    {
+      "index": 114,
+      "start": 388.479,
+      "end": 392.35,
+      "duration": 3.871,
+      "text": "simply the zero solution so to summarize"
+    },
+    {
+      "index": 115,
+      "start": 392.36,
+      "end": 393.95,
+      "duration": 1.59,
+      "text": "the important points of this problem is"
+    },
+    {
+      "index": 116,
+      "start": 393.96,
+      "end": 395.749,
+      "duration": 1.789,
+      "text": "to remember the separation of variables"
+    },
+    {
+      "index": 117,
+      "start": 395.759,
+      "end": 397.55,
+      "duration": 1.791,
+      "text": "and how to use it and the fact that"
+    },
+    {
+      "index": 118,
+      "start": 397.56,
+      "end": 401.309,
+      "duration": 3.749,
+      "text": "using it imposes imposes us imposes"
+    },
+    {
+      "index": 119,
+      "start": 401.319,
+      "end": 403.87,
+      "duration": 2.551,
+      "text": "conditions that require us to recover"
+    },
+    {
+      "index": 120,
+      "start": 403.88,
+      "end": 405.629,
+      "duration": 1.749,
+      "text": "lost Solutions at the end of the problem"
+    },
+    {
+      "index": 121,
+      "start": 405.639,
+      "end": 408.23,
+      "duration": 2.591,
+      "text": "if we're asked to give General Solutions"
+    },
+    {
+      "index": 122,
+      "start": 408.24,
+      "end": 410.55,
+      "duration": 2.31,
+      "text": "another point to remember is that even a"
+    },
+    {
+      "index": 123,
+      "start": 410.56,
+      "end": 413.99,
+      "duration": 3.43,
+      "text": "simple OD can lead to relatively complex"
+    },
+    {
+      "index": 124,
+      "start": 414.0,
+      "end": 415.869,
+      "duration": 1.869,
+      "text": "Behavior such as the presence of this"
+    },
+    {
+      "index": 125,
+      "start": 415.879,
+      "end": 418.15,
+      "duration": 2.271,
+      "text": "vertical asmt that you need to then know"
+    },
+    {
+      "index": 126,
+      "start": 418.16,
+      "end": 420.869,
+      "duration": 2.709,
+      "text": "how how to deal with and determine which"
+    },
+    {
+      "index": 127,
+      "start": 420.879,
+      "end": 423.029,
+      "duration": 2.15,
+      "text": "part of the solutions that you obtain is"
+    },
+    {
+      "index": 128,
+      "start": 423.039,
+      "end": 424.83,
+      "duration": 1.791,
+      "text": "the real solution to the initial value"
+    },
+    {
+      "index": 129,
+      "start": 424.84,
+      "end": 427.629,
+      "duration": 2.789,
+      "text": "problem that you are given so I hope"
+    },
+    {
+      "index": 130,
+      "start": 427.639,
+      "end": 431.67,
+      "duration": 4.031,
+      "text": "that uh you are okay with this with with"
+    },
+    {
+      "index": 131,
+      "start": 431.68,
+      "end": 434.27,
+      "duration": 2.59,
+      "text": "this problem and you will use these"
+    },
+    {
+      "index": 132,
+      "start": 434.28,
+      "end": 436.55,
+      "duration": 2.27,
+      "text": "approaches many times for the rest of"
+    },
+    {
+      "index": 133,
+      "start": 436.56,
+      "end": 437.189,
+      "duration": 0.629,
+      "text": "the"
+    },
+    {
+      "index": 134,
+      "start": 437.199,
+      "end": 440.199,
+      "duration": 3.0,
+      "text": "course"
+    }
+  ],
+  "course": {
+    "category": "Mathematics",
+    "title": "Differential Equations",
+    "source_url": "https://www.youtube.com/playlist?list=PL64BDFBDA2AF24F7E"
+  }
+}

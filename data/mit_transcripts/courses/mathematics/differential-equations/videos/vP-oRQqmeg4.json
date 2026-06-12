@@ -1,0 +1,5275 @@
+{
+  "video": {
+    "id": "vP-oRQqmeg4",
+    "title": "Lec 9 | MIT 18.03 Differential Equations, Spring 2006",
+    "url": "https://www.youtube.com/watch?v=vP-oRQqmeg4",
+    "channel": "MIT OpenCourseWare",
+    "duration": 3000,
+    "language": "en"
+  },
+  "segment_count": 751,
+  "segments": [
+    {
+      "index": 0,
+      "start": 2.0,
+      "end": 5.0,
+      "duration": 3.0,
+      "text": "We're going to start."
+    },
+    {
+      "index": 1,
+      "start": 31.0,
+      "end": 37.383,
+      "duration": 6.383,
+      "text": "We are going to start studying today, and for quite a while,"
+    },
+    {
+      "index": 2,
+      "start": 37.383,
+      "end": 42.685,
+      "duration": 5.302,
+      "text": "the linear second-order differential equation with"
+    },
+    {
+      "index": 3,
+      "start": 42.685,
+      "end": 46.904,
+      "duration": 4.219,
+      "text": "constant coefficients. In standard form,"
+    },
+    {
+      "index": 4,
+      "start": 46.904,
+      "end": 51.232,
+      "duration": 4.328,
+      "text": "it looks like, there are various possible"
+    },
+    {
+      "index": 5,
+      "start": 51.232,
+      "end": 55.452,
+      "duration": 4.22,
+      "text": "choices for the variable, unfortunately,"
+    },
+    {
+      "index": 6,
+      "start": 55.452,
+      "end": 61.836,
+      "duration": 6.384,
+      "text": "so I hope it won't disturb you much if I use one rather than"
+    },
+    {
+      "index": 7,
+      "start": 61.836,
+      "end": 66.409,
+      "duration": 4.573,
+      "text": "another. I'm going to write it this way"
+    },
+    {
+      "index": 8,
+      "start": 66.409,
+      "end": 69.944,
+      "duration": 3.535,
+      "text": "in standard form. I'll use y as the dependent"
+    },
+    {
+      "index": 9,
+      "start": 69.944,
+      "end": 72.836,
+      "duration": 2.892,
+      "text": "variable. Your book uses little p and"
+    },
+    {
+      "index": 10,
+      "start": 72.836,
+      "end": 76.049,
+      "duration": 3.213,
+      "text": "little q. I'll probably switch to that by"
+    },
+    {
+      "index": 11,
+      "start": 76.049,
+      "end": 78.058,
+      "duration": 2.009,
+      "text": "next time. But, for today,"
+    },
+    {
+      "index": 12,
+      "start": 78.058,
+      "end": 82.476,
+      "duration": 4.418,
+      "text": "I'd like to use the most neutral letters I can find that"
+    },
+    {
+      "index": 13,
+      "start": 82.476,
+      "end": 85.207,
+      "duration": 2.731,
+      "text": "won't interfere with anything else."
+    },
+    {
+      "index": 14,
+      "start": 85.207,
+      "end": 88.742,
+      "duration": 3.535,
+      "text": "So, of course call the constant coefficients,"
+    },
+    {
+      "index": 15,
+      "start": 88.742,
+      "end": 93.0,
+      "duration": 4.258,
+      "text": "respectively, capital A and capital B."
+    },
+    {
+      "index": 16,
+      "start": 93.0,
+      "end": 97.804,
+      "duration": 4.804,
+      "text": "I'm going to assume for today that the right-hand side is"
+    },
+    {
+      "index": 17,
+      "start": 97.804,
+      "end": 100.55,
+      "duration": 2.746,
+      "text": "zero. So, that means it's what we"
+    },
+    {
+      "index": 18,
+      "start": 100.55,
+      "end": 104.497,
+      "duration": 3.947,
+      "text": "call homogeneous. The left-hand side must be in"
+    },
+    {
+      "index": 19,
+      "start": 104.497,
+      "end": 109.473,
+      "duration": 4.976,
+      "text": "this form for it to be linear, it's second order because it"
+    },
+    {
+      "index": 20,
+      "start": 109.473,
+      "end": 113.591,
+      "duration": 4.118,
+      "text": "involves a second derivative. These coefficients,"
+    },
+    {
+      "index": 21,
+      "start": 113.591,
+      "end": 117.538,
+      "duration": 3.947,
+      "text": "A and B, are understood to be constant because,"
+    },
+    {
+      "index": 22,
+      "start": 117.538,
+      "end": 122.0,
+      "duration": 4.462,
+      "text": "as I said, it has constant coefficients."
+    },
+    {
+      "index": 23,
+      "start": 122.0,
+      "end": 126.214,
+      "duration": 4.214,
+      "text": "Of course, that's not the most general linear equation there"
+    },
+    {
+      "index": 24,
+      "start": 126.214,
+      "end": 128.857,
+      "duration": 2.643,
+      "text": "could be. In general, it would be more"
+    },
+    {
+      "index": 25,
+      "start": 128.857,
+      "end": 132.357,
+      "duration": 3.5,
+      "text": "general by making this a function of the dependent"
+    },
+    {
+      "index": 26,
+      "start": 132.357,
+      "end": 135.071,
+      "duration": 2.714,
+      "text": "variable, x or t, whatever it's called."
+    },
+    {
+      "index": 27,
+      "start": 135.071,
+      "end": 138.714,
+      "duration": 3.643,
+      "text": "Similarly, this could be a function of the dependent"
+    },
+    {
+      "index": 28,
+      "start": 138.714,
+      "end": 141.5,
+      "duration": 2.786,
+      "text": "variable. Above all, the right-hand side"
+    },
+    {
+      "index": 29,
+      "start": 141.5,
+      "end": 145.428,
+      "duration": 3.928,
+      "text": "can be a function of a variable rather than simply zero."
+    },
+    {
+      "index": 30,
+      "start": 145.428,
+      "end": 150.0,
+      "duration": 4.572,
+      "text": "In that case the equation is called inhomogeneous."
+    },
+    {
+      "index": 31,
+      "start": 150.0,
+      "end": 154.094,
+      "duration": 4.094,
+      "text": "But it has a different physical meaning, and therefore it's"
+    },
+    {
+      "index": 32,
+      "start": 154.094,
+      "end": 156.494,
+      "duration": 2.4,
+      "text": "customary to study that after this."
+    },
+    {
+      "index": 33,
+      "start": 156.494,
+      "end": 160.094,
+      "duration": 3.6,
+      "text": "You start with this. This is the case we start with,"
+    },
+    {
+      "index": 34,
+      "start": 160.094,
+      "end": 164.258,
+      "duration": 4.164,
+      "text": "and then by the middle of next week we will be studying more"
+    },
+    {
+      "index": 35,
+      "start": 164.258,
+      "end": 167.364,
+      "duration": 3.106,
+      "text": "general cases. But, it's a good idea to start"
+    },
+    {
+      "index": 36,
+      "start": 167.364,
+      "end": 169.27,
+      "duration": 1.906,
+      "text": "here. Your book starts with,"
+    },
+    {
+      "index": 37,
+      "start": 169.27,
+      "end": 173.082,
+      "duration": 3.812,
+      "text": "in general, some theory of a general linear equation of"
+    },
+    {
+      "index": 38,
+      "start": 173.082,
+      "end": 175.552,
+      "duration": 2.47,
+      "text": "second-order, and even higher order."
+    },
+    {
+      "index": 39,
+      "start": 175.552,
+      "end": 180.0,
+      "duration": 4.448,
+      "text": "I'm asking you to skip that for the time being."
+    },
+    {
+      "index": 40,
+      "start": 180.0,
+      "end": 183.518,
+      "duration": 3.518,
+      "text": "We'll come back to it next Wednesday, it two lectures,"
+    },
+    {
+      "index": 41,
+      "start": 183.518,
+      "end": 186.373,
+      "duration": 2.855,
+      "text": "in other words. I think it's much better and"
+    },
+    {
+      "index": 42,
+      "start": 186.373,
+      "end": 190.356,
+      "duration": 3.983,
+      "text": "essential for your problems at for you to get some experience"
+    },
+    {
+      "index": 43,
+      "start": 190.356,
+      "end": 194.473,
+      "duration": 4.117,
+      "text": "with a simple type of equation. And then, you'll understand the"
+    },
+    {
+      "index": 44,
+      "start": 194.473,
+      "end": 196.464,
+      "duration": 1.991,
+      "text": "general theory, how it applies,"
+    },
+    {
+      "index": 45,
+      "start": 196.464,
+      "end": 197.858,
+      "duration": 1.394,
+      "text": "a lot better, I think."
+    },
+    {
+      "index": 46,
+      "start": 197.858,
+      "end": 201.709,
+      "duration": 3.851,
+      "text": "So, let's get experience here. The downside of that is that"
+    },
+    {
+      "index": 47,
+      "start": 201.709,
+      "end": 205.36,
+      "duration": 3.651,
+      "text": "I'm going to have to assume a couple of things about the"
+    },
+    {
+      "index": 48,
+      "start": 205.36,
+      "end": 207.95,
+      "duration": 2.59,
+      "text": "solution to this equation, how it looks;"
+    },
+    {
+      "index": 49,
+      "start": 207.95,
+      "end": 212.0,
+      "duration": 4.05,
+      "text": "I don't think that will upset you too much."
+    },
+    {
+      "index": 50,
+      "start": 212.0,
+      "end": 217.845,
+      "duration": 5.845,
+      "text": "So, what I'm going to assume, and we will justify it in a"
+    },
+    {
+      "index": 51,
+      "start": 217.845,
+      "end": 222.228,
+      "duration": 4.383,
+      "text": "couple lectures, that the general solution,"
+    },
+    {
+      "index": 52,
+      "start": 222.228,
+      "end": 227.552,
+      "duration": 5.324,
+      "text": "that is, the solution involving arbitrary constants,"
+    },
+    {
+      "index": 53,
+      "start": 227.552,
+      "end": 231.936,
+      "duration": 4.384,
+      "text": "looks like this. y is equal-- The arbitrary"
+    },
+    {
+      "index": 54,
+      "start": 231.936,
+      "end": 236.111,
+      "duration": 4.175,
+      "text": "constants occur in a certain special way."
+    },
+    {
+      "index": 55,
+      "start": 236.111,
+      "end": 243.0,
+      "duration": 6.889,
+      "text": "There is c one y one plus c two y two."
+    },
+    {
+      "index": 56,
+      "start": 243.0,
+      "end": 246.267,
+      "duration": 3.267,
+      "text": "So, these are two arbitrary constants corresponding to the"
+    },
+    {
+      "index": 57,
+      "start": 246.267,
+      "end": 249.019,
+      "duration": 2.752,
+      "text": "fact that we are solving a second-order equation."
+    },
+    {
+      "index": 58,
+      "start": 249.019,
+      "end": 251.942,
+      "duration": 2.923,
+      "text": "In general, the number of arbitrary constants in the"
+    },
+    {
+      "index": 59,
+      "start": 251.942,
+      "end": 255.324,
+      "duration": 3.382,
+      "text": "solution is the same as the order of the equation because if"
+    },
+    {
+      "index": 60,
+      "start": 255.324,
+      "end": 258.649,
+      "duration": 3.325,
+      "text": "it's a second-order equation because if it's a second-order"
+    },
+    {
+      "index": 61,
+      "start": 258.649,
+      "end": 261.974,
+      "duration": 3.325,
+      "text": "equation, that means somehow or other, it may be concealed."
+    },
+    {
+      "index": 62,
+      "start": 261.974,
+      "end": 265.356,
+      "duration": 3.382,
+      "text": "But you're going to have to integrate something twice to get"
+    },
+    {
+      "index": 63,
+      "start": 265.356,
+      "end": 266.789,
+      "duration": 1.433,
+      "text": "the answer. And therefore,"
+    },
+    {
+      "index": 64,
+      "start": 266.789,
+      "end": 270.0,
+      "duration": 3.211,
+      "text": "there should be two arbitrary constants."
+    },
+    {
+      "index": 65,
+      "start": 270.0,
+      "end": 274.791,
+      "duration": 4.791,
+      "text": "That's very rough, but it sort of gives you the"
+    },
+    {
+      "index": 66,
+      "start": 274.791,
+      "end": 278.229,
+      "duration": 3.438,
+      "text": "idea. Now, what are the y1 and y2?"
+    },
+    {
+      "index": 67,
+      "start": 278.229,
+      "end": 282.708,
+      "duration": 4.479,
+      "text": "Well, as you can see, if these are arbitrary"
+    },
+    {
+      "index": 68,
+      "start": 282.708,
+      "end": 288.02,
+      "duration": 5.312,
+      "text": "constants, if I take c2 to be zero and c1 to be one,"
+    },
+    {
+      "index": 69,
+      "start": 288.02,
+      "end": 293.541,
+      "duration": 5.521,
+      "text": "that means that y1 must be a solution to the equation,"
+    },
+    {
+      "index": 70,
+      "start": 293.541,
+      "end": 297.708,
+      "duration": 4.167,
+      "text": "and similarly y2. So, where y1 and y2 are"
+    },
+    {
+      "index": 71,
+      "start": 297.708,
+      "end": 302.128,
+      "duration": 4.42,
+      "text": "solutions. Now, what that shows you is"
+    },
+    {
+      "index": 72,
+      "start": 302.128,
+      "end": 305.99,
+      "duration": 3.862,
+      "text": "that the task of solving this equation is reduced,"
+    },
+    {
+      "index": 73,
+      "start": 305.99,
+      "end": 309.379,
+      "duration": 3.389,
+      "text": "in some sense, to finding just two solutions"
+    },
+    {
+      "index": 74,
+      "start": 309.379,
+      "end": 312.847,
+      "duration": 3.468,
+      "text": "of it, somehow. All we have to do is find two"
+    },
+    {
+      "index": 75,
+      "start": 312.847,
+      "end": 317.812,
+      "duration": 4.965,
+      "text": "solutions, and then we will have solved the equation because the"
+    },
+    {
+      "index": 76,
+      "start": 317.812,
+      "end": 322.463,
+      "duration": 4.651,
+      "text": "general solution is made up in this way by multiplying those"
+    },
+    {
+      "index": 77,
+      "start": 322.463,
+      "end": 326.561,
+      "duration": 4.098,
+      "text": "two solutions by arbitrary constants and adding them."
+    },
+    {
+      "index": 78,
+      "start": 326.561,
+      "end": 330.423,
+      "duration": 3.862,
+      "text": "So, the problem is, where do we get that solutions"
+    },
+    {
+      "index": 79,
+      "start": 330.423,
+      "end": 333.569,
+      "duration": 3.146,
+      "text": "from? But, first of all,"
+    },
+    {
+      "index": 80,
+      "start": 333.569,
+      "end": 338.453,
+      "duration": 4.884,
+      "text": "or rather, second or third of all, the initial conditions"
+    },
+    {
+      "index": 81,
+      "start": 338.453,
+      "end": 342.465,
+      "duration": 4.012,
+      "text": "enter into the, I haven't given you any initial"
+    },
+    {
+      "index": 82,
+      "start": 342.465,
+      "end": 345.691,
+      "duration": 3.226,
+      "text": "conditions here, but if you have them,"
+    },
+    {
+      "index": 83,
+      "start": 345.691,
+      "end": 349.79,
+      "duration": 4.099,
+      "text": "and I will illustrate them when I work problems,"
+    },
+    {
+      "index": 84,
+      "start": 349.79,
+      "end": 354.238,
+      "duration": 4.448,
+      "text": "the initial conditions, well, the initial values are"
+    },
+    {
+      "index": 85,
+      "start": 354.238,
+      "end": 359.47,
+      "duration": 5.232,
+      "text": "satisfied by choosing c1 and c2, are satisfied by choosing c1"
+    },
+    {
+      "index": 86,
+      "start": 359.47,
+      "end": 363.979,
+      "duration": 4.509,
+      "text": "and c2 properly. So, in other words,"
+    },
+    {
+      "index": 87,
+      "start": 363.979,
+      "end": 368.666,
+      "duration": 4.687,
+      "text": "if you have an initial value problem to solve,"
+    },
+    {
+      "index": 88,
+      "start": 368.666,
+      "end": 374.187,
+      "duration": 5.521,
+      "text": "that will be taken care of by the way those constants,"
+    },
+    {
+      "index": 89,
+      "start": 374.187,
+      "end": 379.708,
+      "duration": 5.521,
+      "text": "c, enter into the solution. Okay, without further ado,"
+    },
+    {
+      "index": 90,
+      "start": 379.708,
+      "end": 385.854,
+      "duration": 6.146,
+      "text": "there is a standard example, which I wish I had looked up in"
+    },
+    {
+      "index": 91,
+      "start": 385.854,
+      "end": 390.333,
+      "duration": 4.479,
+      "text": "the physics syllabus for the first semester."
+    },
+    {
+      "index": 92,
+      "start": 390.333,
+      "end": 395.125,
+      "duration": 4.792,
+      "text": "Did you study the spring-mass-dashpot system in"
+    },
+    {
+      "index": 93,
+      "start": 395.125,
+      "end": 399.293,
+      "duration": 4.168,
+      "text": "8.01? I'm embarrassed having to ask"
+    },
+    {
+      "index": 94,
+      "start": 399.293,
+      "end": 400.242,
+      "duration": 0.949,
+      "text": "you. You did?"
+    },
+    {
+      "index": 95,
+      "start": 400.242,
+      "end": 404.75,
+      "duration": 4.508,
+      "text": "Raise your hands if you did. Okay, that means you all did."
+    },
+    {
+      "index": 96,
+      "start": 404.75,
+      "end": 409.099,
+      "duration": 4.349,
+      "text": "Well, just let me draw an instant picture to remind you."
+    },
+    {
+      "index": 97,
+      "start": 409.099,
+      "end": 411.551,
+      "duration": 2.452,
+      "text": "So, this is a two second review."
+    },
+    {
+      "index": 98,
+      "start": 411.551,
+      "end": 414.556,
+      "duration": 3.005,
+      "text": "I don't know how they draw the picture."
+    },
+    {
+      "index": 99,
+      "start": 414.556,
+      "end": 417.64,
+      "duration": 3.084,
+      "text": "Probably they don't draw picture at all."
+    },
+    {
+      "index": 100,
+      "start": 417.64,
+      "end": 422.464,
+      "duration": 4.824,
+      "text": "They have some elaborate system here of the thing running back"
+    },
+    {
+      "index": 101,
+      "start": 422.464,
+      "end": 424.678,
+      "duration": 2.214,
+      "text": "and forth. Well, in the math,"
+    },
+    {
+      "index": 102,
+      "start": 424.678,
+      "end": 430.09,
+      "duration": 5.412,
+      "text": "we do that all virtually. So, here's my system."
+    },
+    {
+      "index": 103,
+      "start": 430.09,
+      "end": 434.47,
+      "duration": 4.38,
+      "text": "That's a fixed thing. Here's a little spring."
+    },
+    {
+      "index": 104,
+      "start": 434.47,
+      "end": 438.751,
+      "duration": 4.281,
+      "text": "And, there's a little car on the track here,"
+    },
+    {
+      "index": 105,
+      "start": 438.751,
+      "end": 441.638,
+      "duration": 2.887,
+      "text": "I guess. So, there's the mass,"
+    },
+    {
+      "index": 106,
+      "start": 441.638,
+      "end": 447.411,
+      "duration": 5.773,
+      "text": "some mass in the little car, and motion is damped by what's"
+    },
+    {
+      "index": 107,
+      "start": 447.411,
+      "end": 452.285,
+      "duration": 4.874,
+      "text": "called a dashpot. A dashpot is the sort of thing,"
+    },
+    {
+      "index": 108,
+      "start": 452.285,
+      "end": 455.603,
+      "duration": 3.318,
+      "text": "you see them in everyday life as door closers."
+    },
+    {
+      "index": 109,
+      "start": 455.603,
+      "end": 460.027,
+      "duration": 4.424,
+      "text": "They're the thing up above that you never notice that prevent"
+    },
+    {
+      "index": 110,
+      "start": 460.027,
+      "end": 463.64,
+      "duration": 3.613,
+      "text": "the door slamming shut. So, if you take one apart,"
+    },
+    {
+      "index": 111,
+      "start": 463.64,
+      "end": 467.548,
+      "duration": 3.908,
+      "text": "it looks something like this. So, that's the dash pot."
+    },
+    {
+      "index": 112,
+      "start": 467.548,
+      "end": 471.898,
+      "duration": 4.35,
+      "text": "It's a chamber with a piston. This is a piston moving in and"
+    },
+    {
+      "index": 113,
+      "start": 471.898,
+      "end": 474.995,
+      "duration": 3.097,
+      "text": "out, and compressing the air, releasing it,"
+    },
+    {
+      "index": 114,
+      "start": 474.995,
+      "end": 477.723,
+      "duration": 2.728,
+      "text": "is what damps the motion of the thing."
+    },
+    {
+      "index": 115,
+      "start": 477.723,
+      "end": 482.0,
+      "duration": 4.277,
+      "text": "So, this is a dashpot, it's usually called."
+    },
+    {
+      "index": 116,
+      "start": 482.0,
+      "end": 485.233,
+      "duration": 3.233,
+      "text": "And, here's our mass in that little truck."
+    },
+    {
+      "index": 117,
+      "start": 485.233,
+      "end": 489.255,
+      "duration": 4.022,
+      "text": "And, here's the spring. And then, the equation which"
+    },
+    {
+      "index": 118,
+      "start": 489.255,
+      "end": 491.779,
+      "duration": 2.524,
+      "text": "governs it is, let's call this x."
+    },
+    {
+      "index": 119,
+      "start": 491.779,
+      "end": 495.722,
+      "duration": 3.943,
+      "text": "I'm already changing, going to change the dependent"
+    },
+    {
+      "index": 120,
+      "start": 495.722,
+      "end": 499.823,
+      "duration": 4.101,
+      "text": "variable from y to x, but that's just for the sake of"
+    },
+    {
+      "index": 121,
+      "start": 499.823,
+      "end": 503.293,
+      "duration": 3.47,
+      "text": "example, and because the track is horizontal,"
+    },
+    {
+      "index": 122,
+      "start": 503.293,
+      "end": 507.0,
+      "duration": 3.707,
+      "text": "it seems more natural to call it x."
+    },
+    {
+      "index": 123,
+      "start": 507.0,
+      "end": 510.609,
+      "duration": 3.609,
+      "text": "There's some equilibrium position somewhere,"
+    },
+    {
+      "index": 124,
+      "start": 510.609,
+      "end": 514.302,
+      "duration": 3.693,
+      "text": "let's say, here. That's the position at which"
+    },
+    {
+      "index": 125,
+      "start": 514.302,
+      "end": 518.666,
+      "duration": 4.364,
+      "text": "the mass wants to be, if the spring is not pulling on"
+    },
+    {
+      "index": 126,
+      "start": 518.666,
+      "end": 522.443,
+      "duration": 3.777,
+      "text": "it or pushing on it, and the dashpot is happy."
+    },
+    {
+      "index": 127,
+      "start": 522.443,
+      "end": 526.304,
+      "duration": 3.861,
+      "text": "I guess we'd better have a longer dashpot here."
+    },
+    {
+      "index": 128,
+      "start": 526.304,
+      "end": 530.669,
+      "duration": 4.365,
+      "text": "So, this is the equilibrium position where nothing is"
+    },
+    {
+      "index": 129,
+      "start": 530.669,
+      "end": 533.606,
+      "duration": 2.937,
+      "text": "happening. When you depart from that"
+    },
+    {
+      "index": 130,
+      "start": 533.606,
+      "end": 537.383,
+      "duration": 3.777,
+      "text": "position, then the spring, if you go that way,"
+    },
+    {
+      "index": 131,
+      "start": 537.383,
+      "end": 542.0,
+      "duration": 4.617,
+      "text": "the spring tries to pull the mass back."
+    },
+    {
+      "index": 132,
+      "start": 542.0,
+      "end": 547.0,
+      "duration": 5.0,
+      "text": "If it goes on the site, the spring tries to push the"
+    },
+    {
+      "index": 133,
+      "start": 547.0,
+      "end": 549.156,
+      "duration": 2.156,
+      "text": "mass away. The dashpot,"
+    },
+    {
+      "index": 134,
+      "start": 549.156,
+      "end": 554.549,
+      "duration": 5.393,
+      "text": "meanwhile, is doing its thing. And so, the force on the,"
+    },
+    {
+      "index": 135,
+      "start": 554.549,
+      "end": 559.45,
+      "duration": 4.901,
+      "text": "m x double prime. That's by Newton's law,"
+    },
+    {
+      "index": 136,
+      "start": 559.45,
+      "end": 564.549,
+      "duration": 5.099,
+      "text": "the force, comes from where? Well, there's the spring"
+    },
+    {
+      "index": 137,
+      "start": 564.549,
+      "end": 569.254,
+      "duration": 4.705,
+      "text": "pushing and pulling on it. That force is opposed."
+    },
+    {
+      "index": 138,
+      "start": 569.254,
+      "end": 574.843,
+      "duration": 5.589,
+      "text": "If x gets to be beyond zero, then the spring tries to pull"
+    },
+    {
+      "index": 139,
+      "start": 574.843,
+      "end": 579.256,
+      "duration": 4.413,
+      "text": "it back. If it gets to the left of zero,"
+    },
+    {
+      "index": 140,
+      "start": 579.256,
+      "end": 582.895,
+      "duration": 3.639,
+      "text": "if x gets to be negative, that that spring force is"
+    },
+    {
+      "index": 141,
+      "start": 582.895,
+      "end": 586.462,
+      "duration": 3.567,
+      "text": "pushing it this way, wants to get rid of the mass."
+    },
+    {
+      "index": 142,
+      "start": 586.462,
+      "end": 590.392,
+      "duration": 3.93,
+      "text": "So, it should be minus kx, and this is from the spring,"
+    },
+    {
+      "index": 143,
+      "start": 590.392,
+      "end": 594.832,
+      "duration": 4.44,
+      "text": "the fact that is proportional to the amount by which x varies."
+    },
+    {
+      "index": 144,
+      "start": 594.832,
+      "end": 598.18,
+      "duration": 3.348,
+      "text": "So, that's called Hooke's Law. Never mind that."
+    },
+    {
+      "index": 145,
+      "start": 598.18,
+      "end": 601.034,
+      "duration": 2.854,
+      "text": "This is a law. That's a law,"
+    },
+    {
+      "index": 146,
+      "start": 601.034,
+      "end": 603.103,
+      "duration": 2.069,
+      "text": "Newton's law, okay, Newton,"
+    },
+    {
+      "index": 147,
+      "start": 603.103,
+      "end": 606.445,
+      "duration": 3.342,
+      "text": "Hooke with an E, and the dashpot damping is"
+    },
+    {
+      "index": 148,
+      "start": 606.445,
+      "end": 611.14,
+      "duration": 4.695,
+      "text": "proportional to the velocity. It's not doing anything if the"
+    },
+    {
+      "index": 149,
+      "start": 611.14,
+      "end": 615.039,
+      "duration": 3.899,
+      "text": "mass is not moving, even if it's stretched way out"
+    },
+    {
+      "index": 150,
+      "start": 615.039,
+      "end": 619.496,
+      "duration": 4.457,
+      "text": "of its equilibrium position. So, it resists the velocity."
+    },
+    {
+      "index": 151,
+      "start": 619.496,
+      "end": 624.031,
+      "duration": 4.535,
+      "text": "If the thing is trying to go that way, the dashpot resists"
+    },
+    {
+      "index": 152,
+      "start": 624.031,
+      "end": 626.419,
+      "duration": 2.388,
+      "text": "it. It's trying to go this way,"
+    },
+    {
+      "index": 153,
+      "start": 626.419,
+      "end": 630.0,
+      "duration": 3.581,
+      "text": "the dashpot resists that, too."
+    },
+    {
+      "index": 154,
+      "start": 630.0,
+      "end": 632.549,
+      "duration": 2.549,
+      "text": "It's always opposed to the velocity."
+    },
+    {
+      "index": 155,
+      "start": 632.549,
+      "end": 635.026,
+      "duration": 2.477,
+      "text": "And so, this is a dash pot damping."
+    },
+    {
+      "index": 156,
+      "start": 635.026,
+      "end": 639.47,
+      "duration": 4.444,
+      "text": "I don't know whose law this is. So, it's the force coming from"
+    },
+    {
+      "index": 157,
+      "start": 639.47,
+      "end": 642.456,
+      "duration": 2.986,
+      "text": "the dashpot. And, when you write this out,"
+    },
+    {
+      "index": 158,
+      "start": 642.456,
+      "end": 645.807,
+      "duration": 3.351,
+      "text": "the final result, therefore, is it's m x double"
+    },
+    {
+      "index": 159,
+      "start": 645.807,
+      "end": 649.596,
+      "duration": 3.789,
+      "text": "prime plus c x prime, it's important to see where the"
+    },
+    {
+      "index": 160,
+      "start": 649.596,
+      "end": 652.947,
+      "duration": 3.351,
+      "text": "various terms are, plus kx equals zero."
+    },
+    {
+      "index": 161,
+      "start": 652.947,
+      "end": 656.079,
+      "duration": 3.132,
+      "text": "And now, that's still not in"
+    },
+    {
+      "index": 162,
+      "start": 656.079,
+      "end": 659.066,
+      "duration": 2.987,
+      "text": "standard form. To put it in standard form,"
+    },
+    {
+      "index": 163,
+      "start": 659.066,
+      "end": 663.0,
+      "duration": 3.934,
+      "text": "you must divide through by the mass."
+    },
+    {
+      "index": 164,
+      "start": 663.0,
+      "end": 667.441,
+      "duration": 4.441,
+      "text": "And, it will now read like this, plus k divided by m times"
+    },
+    {
+      "index": 165,
+      "start": 667.441,
+      "end": 670.402,
+      "duration": 2.961,
+      "text": "x equals zero. And, that's the equation"
+    },
+    {
+      "index": 166,
+      "start": 670.402,
+      "end": 673.051,
+      "duration": 2.649,
+      "text": "governing the motion of the spring."
+    },
+    {
+      "index": 167,
+      "start": 673.051,
+      "end": 677.571,
+      "duration": 4.52,
+      "text": "I'm doing this because your problem set, problems three and"
+    },
+    {
+      "index": 168,
+      "start": 677.571,
+      "end": 681.779,
+      "duration": 4.208,
+      "text": "four, ask you to look at a little computer visual which"
+    },
+    {
+      "index": 169,
+      "start": 681.779,
+      "end": 686.298,
+      "duration": 4.519,
+      "text": "illustrates a lot of things. And, I didn't see how it would"
+    },
+    {
+      "index": 170,
+      "start": 686.298,
+      "end": 690.116,
+      "duration": 3.818,
+      "text": "make, you can do it without this interpretation of"
+    },
+    {
+      "index": 171,
+      "start": 690.116,
+      "end": 693.0,
+      "duration": 2.884,
+      "text": "spring-mass-dashpot, --"
+    },
+    {
+      "index": 172,
+      "start": 693.0,
+      "end": 697.312,
+      "duration": 4.312,
+      "text": "but, I think thinking of it of these constants as,"
+    },
+    {
+      "index": 173,
+      "start": 697.312,
+      "end": 701.624,
+      "duration": 4.312,
+      "text": "this is the damping constant, and this is the spring,"
+    },
+    {
+      "index": 174,
+      "start": 701.624,
+      "end": 706.517,
+      "duration": 4.893,
+      "text": "the constant which represents the force being exerted by the"
+    },
+    {
+      "index": 175,
+      "start": 706.517,
+      "end": 710.082,
+      "duration": 3.565,
+      "text": "spring, the spring constant, as it's called,"
+    },
+    {
+      "index": 176,
+      "start": 710.082,
+      "end": 714.726,
+      "duration": 4.644,
+      "text": "makes it much more vivid. So, you will note is that those"
+    },
+    {
+      "index": 177,
+      "start": 714.726,
+      "end": 717.795,
+      "duration": 3.069,
+      "text": "problems are labeled Friday or Monday."
+    },
+    {
+      "index": 178,
+      "start": 717.795,
+      "end": 721.526,
+      "duration": 3.731,
+      "text": "Make it Friday. You can do them after today if"
+    },
+    {
+      "index": 179,
+      "start": 721.526,
+      "end": 727.0,
+      "duration": 5.474,
+      "text": "you have the vaguest idea of what I'm talking about."
+    },
+    {
+      "index": 180,
+      "start": 727.0,
+      "end": 730.623,
+      "duration": 3.623,
+      "text": "If not, go back and repeat 8.01."
+    },
+    {
+      "index": 181,
+      "start": 730.623,
+      "end": 736.35,
+      "duration": 5.727,
+      "text": "So, all this was just an example, a typical model."
+    },
+    {
+      "index": 182,
+      "start": 736.35,
+      "end": 740.675,
+      "duration": 4.325,
+      "text": "But, by far, the most important simple"
+    },
+    {
+      "index": 183,
+      "start": 740.675,
+      "end": 745.0,
+      "duration": 4.325,
+      "text": "model. Okay, now what I'd like to talk"
+    },
+    {
+      "index": 184,
+      "start": 745.0,
+      "end": 750.61,
+      "duration": 5.61,
+      "text": "about is the solution. What is it I have to do to"
+    },
+    {
+      "index": 185,
+      "start": 750.61,
+      "end": 757.045,
+      "duration": 6.435,
+      "text": "solve the equation? So, to solve the equation that"
+    },
+    {
+      "index": 186,
+      "start": 757.045,
+      "end": 761.308,
+      "duration": 4.263,
+      "text": "I outlined in orange on the board, the ODE,"
+    },
+    {
+      "index": 187,
+      "start": 761.308,
+      "end": 764.657,
+      "duration": 3.349,
+      "text": "our task is to find two solutions."
+    },
+    {
+      "index": 188,
+      "start": 764.657,
+      "end": 769.936,
+      "duration": 5.279,
+      "text": "Now, don't make it too trivial. There is a condition."
+    },
+    {
+      "index": 189,
+      "start": 769.936,
+      "end": 773.387,
+      "duration": 3.451,
+      "text": "The solution should be independent."
+    },
+    {
+      "index": 190,
+      "start": 773.387,
+      "end": 778.36,
+      "duration": 4.973,
+      "text": "All that means is that y2 should not be a constant"
+    },
+    {
+      "index": 191,
+      "start": 778.36,
+      "end": 782.687,
+      "duration": 4.327,
+      "text": "multiple of y1. I mean, if you got y1,"
+    },
+    {
+      "index": 192,
+      "start": 782.687,
+      "end": 786.677,
+      "duration": 3.99,
+      "text": "then two times y1 is not an acceptable value for this"
+    },
+    {
+      "index": 193,
+      "start": 786.677,
+      "end": 790.82,
+      "duration": 4.143,
+      "text": "because, as you can see, you really only got one there."
+    },
+    {
+      "index": 194,
+      "start": 790.82,
+      "end": 795.5,
+      "duration": 4.68,
+      "text": "You're not going to be able to make up a two parameter family."
+    },
+    {
+      "index": 195,
+      "start": 795.5,
+      "end": 799.566,
+      "duration": 4.066,
+      "text": "So, the solutions have to be independent, which means,"
+    },
+    {
+      "index": 196,
+      "start": 799.566,
+      "end": 804.092,
+      "duration": 4.526,
+      "text": "to repeat, that neither should be a constant multiple of the"
+    },
+    {
+      "index": 197,
+      "start": 804.092,
+      "end": 806.624,
+      "duration": 2.532,
+      "text": "other. They should look different."
+    },
+    {
+      "index": 198,
+      "start": 806.624,
+      "end": 812.116,
+      "duration": 5.492,
+      "text": "That's an adequate explanation. Okay, now, what's the basic"
+    },
+    {
+      "index": 199,
+      "start": 812.116,
+      "end": 814.703,
+      "duration": 2.587,
+      "text": "method to finding those solutions?"
+    },
+    {
+      "index": 200,
+      "start": 814.703,
+      "end": 818.622,
+      "duration": 3.919,
+      "text": "Well, that's what we're going to use all term long,"
+    },
+    {
+      "index": 201,
+      "start": 818.622,
+      "end": 821.6,
+      "duration": 2.978,
+      "text": "essentially, studying equations of this"
+    },
+    {
+      "index": 202,
+      "start": 821.6,
+      "end": 826.225,
+      "duration": 4.625,
+      "text": "type, even systems of this type, with constant coefficients."
+    },
+    {
+      "index": 203,
+      "start": 826.225,
+      "end": 830.144,
+      "duration": 3.919,
+      "text": "The basic method is to try y equals an exponential."
+    },
+    {
+      "index": 204,
+      "start": 830.144,
+      "end": 834.612,
+      "duration": 4.468,
+      "text": "Now, the only way you can fiddle with an exponential is in"
+    },
+    {
+      "index": 205,
+      "start": 834.612,
+      "end": 837.356,
+      "duration": 2.744,
+      "text": "the constant that you put up on top."
+    },
+    {
+      "index": 206,
+      "start": 837.356,
+      "end": 843.0,
+      "duration": 5.644,
+      "text": "So, I'm going to try y equals e to the rt."
+    },
+    {
+      "index": 207,
+      "start": 843.0,
+      "end": 848.242,
+      "duration": 5.242,
+      "text": "Notice you can't tell from that what I'm using as the"
+    },
+    {
+      "index": 208,
+      "start": 848.242,
+      "end": 853.283,
+      "duration": 5.041,
+      "text": "independent variable. But, this tells you I'm using"
+    },
+    {
+      "index": 209,
+      "start": 853.283,
+      "end": 856.106,
+      "duration": 2.823,
+      "text": "t. And, I'm switching back to"
+    },
+    {
+      "index": 210,
+      "start": 856.106,
+      "end": 859.433,
+      "duration": 3.327,
+      "text": "using t as the dependent variable."
+    },
+    {
+      "index": 211,
+      "start": 859.433,
+      "end": 862.76,
+      "duration": 3.327,
+      "text": "So, T is the independent variable."
+    },
+    {
+      "index": 212,
+      "start": 862.76,
+      "end": 867.498,
+      "duration": 4.738,
+      "text": "Why do I do that? The answer is because somebody"
+    },
+    {
+      "index": 213,
+      "start": 867.498,
+      "end": 871.027,
+      "duration": 3.529,
+      "text": "thought of doing it, probably Euler,"
+    },
+    {
+      "index": 214,
+      "start": 871.027,
+      "end": 876.673,
+      "duration": 5.646,
+      "text": "and it's been a tradition that's handed down for the last"
+    },
+    {
+      "index": 215,
+      "start": 876.673,
+      "end": 882.033,
+      "duration": 5.36,
+      "text": "300 or 400 years. Some things we just know."
+    },
+    {
+      "index": 216,
+      "start": 882.033,
+      "end": 886.587,
+      "duration": 4.554,
+      "text": "All right, so if I do that, as you learned from the exam,"
+    },
+    {
+      "index": 217,
+      "start": 886.587,
+      "end": 890.165,
+      "duration": 3.578,
+      "text": "it's very easy to differentiate exponentials."
+    },
+    {
+      "index": 218,
+      "start": 890.165,
+      "end": 894.231,
+      "duration": 4.066,
+      "text": "That's why people love them. It's also very easy to"
+    },
+    {
+      "index": 219,
+      "start": 894.231,
+      "end": 898.298,
+      "duration": 4.067,
+      "text": "integrate exponentials. And, half of you integrated"
+    },
+    {
+      "index": 220,
+      "start": 898.298,
+      "end": 903.015,
+      "duration": 4.717,
+      "text": "instead of differentiating. So, we will try this and see if"
+    },
+    {
+      "index": 221,
+      "start": 903.015,
+      "end": 907.0,
+      "duration": 3.985,
+      "text": "we can pick r so that it's a solution."
+    },
+    {
+      "index": 222,
+      "start": 907.0,
+      "end": 909.363,
+      "duration": 2.363,
+      "text": "Okay, well, I will plug in, then."
+    },
+    {
+      "index": 223,
+      "start": 909.363,
+      "end": 912.761,
+      "duration": 3.398,
+      "text": "Substitute, in other words, and what do we get?"
+    },
+    {
+      "index": 224,
+      "start": 912.761,
+      "end": 916.602,
+      "duration": 3.841,
+      "text": "Well, for y double prime, I get r squared e to the rt."
+    },
+    {
+      "index": 225,
+      "start": 916.602,
+      "end": 919.926,
+      "duration": 3.324,
+      "text": "That's y double prime"
+    },
+    {
+      "index": 226,
+      "start": 919.926,
+      "end": 922.732,
+      "duration": 2.806,
+      "text": "because each time you differentiate it,"
+    },
+    {
+      "index": 227,
+      "start": 922.732,
+      "end": 925.687,
+      "duration": 2.955,
+      "text": "you put an extra power of r out in front."
+    },
+    {
+      "index": 228,
+      "start": 925.687,
+      "end": 927.534,
+      "duration": 1.847,
+      "text": "But otherwise, do nothing."
+    },
+    {
+      "index": 229,
+      "start": 927.534,
+      "end": 933.0,
+      "duration": 5.466,
+      "text": "The next term will be r times, sorry, I forgot the constant."
+    },
+    {
+      "index": 230,
+      "start": 933.0,
+      "end": 936.06,
+      "duration": 3.06,
+      "text": "Capital A times r e to the rt,"
+    },
+    {
+      "index": 231,
+      "start": 936.06,
+      "end": 939.399,
+      "duration": 3.339,
+      "text": "and then there's the last term, B times y itself,"
+    },
+    {
+      "index": 232,
+      "start": 939.399,
+      "end": 941.834,
+      "duration": 2.435,
+      "text": "which is B e to the rt."
+    },
+    {
+      "index": 233,
+      "start": 941.834,
+      "end": 944.617,
+      "duration": 2.783,
+      "text": "And, that's supposed to be equal to zero."
+    },
+    {
+      "index": 234,
+      "start": 944.617,
+      "end": 948.582,
+      "duration": 3.965,
+      "text": "So, I have to choose r so that this becomes equal to zero."
+    },
+    {
+      "index": 235,
+      "start": 948.582,
+      "end": 951.295,
+      "duration": 2.713,
+      "text": "Now, you see, the e to the rt"
+    },
+    {
+      "index": 236,
+      "start": 951.295,
+      "end": 954.913,
+      "duration": 3.618,
+      "text": "occurs as a factor in every term, and the e to the rt"
+    },
+    {
+      "index": 237,
+      "start": 954.913,
+      "end": 957.626,
+      "duration": 2.713,
+      "text": "is never zero. And therefore,"
+    },
+    {
+      "index": 238,
+      "start": 957.626,
+      "end": 961.73,
+      "duration": 4.104,
+      "text": "you can divide it out because it's always a positive number,"
+    },
+    {
+      "index": 239,
+      "start": 961.73,
+      "end": 967.727,
+      "duration": 5.997,
+      "text": "regardless of the value of t. So, I can cancel out from each"
+    },
+    {
+      "index": 240,
+      "start": 967.727,
+      "end": 970.909,
+      "duration": 3.182,
+      "text": "term. And, what I'm left with is the"
+    },
+    {
+      "index": 241,
+      "start": 970.909,
+      "end": 976.454,
+      "duration": 5.545,
+      "text": "equation r squared plus ar plus b equals zero."
+    },
+    {
+      "index": 242,
+      "start": 976.454,
+      "end": 979.636,
+      "duration": 3.182,
+      "text": "We are trying to find values of"
+    },
+    {
+      "index": 243,
+      "start": 979.636,
+      "end": 984.272,
+      "duration": 4.636,
+      "text": "r that satisfy that equation. And that, dear hearts,"
+    },
+    {
+      "index": 244,
+      "start": 984.272,
+      "end": 989.0,
+      "duration": 4.728,
+      "text": "is why you learn to solve quadratic equations in high"
+    },
+    {
+      "index": 245,
+      "start": 989.0,
+      "end": 994.363,
+      "duration": 5.363,
+      "text": "school, in order that in this moment, you would be now ready"
+    },
+    {
+      "index": 246,
+      "start": 994.363,
+      "end": 1001.0,
+      "duration": 6.637,
+      "text": "to find how spring-mass systems behave when they are damped."
+    },
+    {
+      "index": 247,
+      "start": 1001.0,
+      "end": 1005.782,
+      "duration": 4.782,
+      "text": "This is called the characteristic equation."
+    },
+    {
+      "index": 248,
+      "start": 1005.782,
+      "end": 1012.843,
+      "duration": 7.061,
+      "text": "The characteristic equation of the ODE, or of the system of the"
+    },
+    {
+      "index": 249,
+      "start": 1012.843,
+      "end": 1017.284,
+      "duration": 4.441,
+      "text": "spring mass system, which it's modeling,"
+    },
+    {
+      "index": 250,
+      "start": 1017.284,
+      "end": 1022.637,
+      "duration": 5.353,
+      "text": "the characteristic equation of the system, okay?"
+    },
+    {
+      "index": 251,
+      "start": 1022.637,
+      "end": 1028.558,
+      "duration": 5.921,
+      "text": "Okay, now, we solve it, but now, from high school you"
+    },
+    {
+      "index": 252,
+      "start": 1028.558,
+      "end": 1034.984,
+      "duration": 6.426,
+      "text": "know there are several cases. And, each of those cases"
+    },
+    {
+      "index": 253,
+      "start": 1034.984,
+      "end": 1037.879,
+      "duration": 2.895,
+      "text": "corresponds to a different behavior."
+    },
+    {
+      "index": 254,
+      "start": 1037.879,
+      "end": 1042.097,
+      "duration": 4.218,
+      "text": "And, the cases depend upon what the roots look like."
+    },
+    {
+      "index": 255,
+      "start": 1042.097,
+      "end": 1045.819,
+      "duration": 3.722,
+      "text": "The possibilities are the roots could be real,"
+    },
+    {
+      "index": 256,
+      "start": 1045.819,
+      "end": 1049.045,
+      "duration": 3.226,
+      "text": "and distinct. That's the easiest case to"
+    },
+    {
+      "index": 257,
+      "start": 1049.045,
+      "end": 1051.939,
+      "duration": 2.894,
+      "text": "handle. The roots might be a pair of"
+    },
+    {
+      "index": 258,
+      "start": 1051.939,
+      "end": 1056.972,
+      "duration": 5.033,
+      "text": "complex conjugate numbers. That's harder to handle,"
+    },
+    {
+      "index": 259,
+      "start": 1056.972,
+      "end": 1060.753,
+      "duration": 3.781,
+      "text": "but we are ready to do it. And, the third case,"
+    },
+    {
+      "index": 260,
+      "start": 1060.753,
+      "end": 1065.027,
+      "duration": 4.274,
+      "text": "which is the one most in your problem set is the most"
+    },
+    {
+      "index": 261,
+      "start": 1065.027,
+      "end": 1068.643,
+      "duration": 3.616,
+      "text": "puzzling: when the roots are real, and equal."
+    },
+    {
+      "index": 262,
+      "start": 1068.643,
+      "end": 1073.575,
+      "duration": 4.932,
+      "text": "And, I'm going to talk about those three cases in that order."
+    },
+    {
+      "index": 263,
+      "start": 1073.575,
+      "end": 1077.849,
+      "duration": 4.274,
+      "text": "So, the first case is the roots are real and unequal."
+    },
+    {
+      "index": 264,
+      "start": 1077.849,
+      "end": 1082.616,
+      "duration": 4.767,
+      "text": "If I tell you they are unequal, and I will put down real to"
+    },
+    {
+      "index": 265,
+      "start": 1082.616,
+      "end": 1087.047,
+      "duration": 4.431,
+      "text": "make that clear. Well, that is by far the"
+    },
+    {
+      "index": 266,
+      "start": 1087.047,
+      "end": 1091.311,
+      "duration": 4.264,
+      "text": "simplest case because immediately, one sees we have"
+    },
+    {
+      "index": 267,
+      "start": 1091.311,
+      "end": 1093.785,
+      "duration": 2.474,
+      "text": "two roots. They are different,"
+    },
+    {
+      "index": 268,
+      "start": 1093.785,
+      "end": 1097.026,
+      "duration": 3.241,
+      "text": "and therefore, we get our two solutions"
+    },
+    {
+      "index": 269,
+      "start": 1097.026,
+      "end": 1099.926,
+      "duration": 2.9,
+      "text": "immediately. So, the solutions are,"
+    },
+    {
+      "index": 270,
+      "start": 1099.926,
+      "end": 1104.788,
+      "duration": 4.862,
+      "text": "the general solution to the equation, I write down without"
+    },
+    {
+      "index": 271,
+      "start": 1104.788,
+      "end": 1109.991,
+      "duration": 5.203,
+      "text": "further ado as y equals c1 e to the r1 t plus c2 e to the r2 t."
+    },
+    {
+      "index": 272,
+      "start": 1114.0,
+      "end": 1118.187,
+      "duration": 4.187,
+      "text": "There's our solution. Now, because that was so easy,"
+    },
+    {
+      "index": 273,
+      "start": 1118.187,
+      "end": 1122.868,
+      "duration": 4.681,
+      "text": "and we didn't have to do any work, I'd like to extend this"
+    },
+    {
+      "index": 274,
+      "start": 1122.868,
+      "end": 1128.123,
+      "duration": 5.255,
+      "text": "case a little bit by using it as an example of how you put in the"
+    },
+    {
+      "index": 275,
+      "start": 1128.123,
+      "end": 1131.325,
+      "duration": 3.202,
+      "text": "initial conditions, how to put in the c."
+    },
+    {
+      "index": 276,
+      "start": 1131.325,
+      "end": 1134.938,
+      "duration": 3.613,
+      "text": "So, let me work a specific numerical example,"
+    },
+    {
+      "index": 277,
+      "start": 1134.938,
+      "end": 1139.782,
+      "duration": 4.844,
+      "text": "since we are not going to try to do this theoretically until"
+    },
+    {
+      "index": 278,
+      "start": 1139.782,
+      "end": 1144.316,
+      "duration": 4.534,
+      "text": "next Wednesday. Let's just do a numerical"
+    },
+    {
+      "index": 279,
+      "start": 1144.316,
+      "end": 1147.095,
+      "duration": 2.779,
+      "text": "example. So, suppose I take the"
+    },
+    {
+      "index": 280,
+      "start": 1147.095,
+      "end": 1151.635,
+      "duration": 4.54,
+      "text": "constants to be the damping constant to be a four,"
+    },
+    {
+      "index": 281,
+      "start": 1151.635,
+      "end": 1156.546,
+      "duration": 4.911,
+      "text": "and the spring constant, I'll take the mass to be one,"
+    },
+    {
+      "index": 282,
+      "start": 1156.546,
+      "end": 1159.789,
+      "duration": 3.243,
+      "text": "and the spring constant to be three."
+    },
+    {
+      "index": 283,
+      "start": 1159.789,
+      "end": 1164.329,
+      "duration": 4.54,
+      "text": "So, there's more damping here, damping force here."
+    },
+    {
+      "index": 284,
+      "start": 1164.329,
+      "end": 1171.0,
+      "duration": 6.671,
+      "text": "You can't really talk that way since the units are different."
+    },
+    {
+      "index": 285,
+      "start": 1171.0,
+      "end": 1173.857,
+      "duration": 2.857,
+      "text": "But, this number is bigger than that one."
+    },
+    {
+      "index": 286,
+      "start": 1173.857,
+      "end": 1175.928,
+      "duration": 2.071,
+      "text": "That seems clear, at any rate."
+    },
+    {
+      "index": 287,
+      "start": 1175.928,
+      "end": 1179.285,
+      "duration": 3.357,
+      "text": "Okay, now, what was the characteristic equation?"
+    },
+    {
+      "index": 288,
+      "start": 1179.285,
+      "end": 1181.857,
+      "duration": 2.572,
+      "text": "Look, now watch. Please do what I do."
+    },
+    {
+      "index": 289,
+      "start": 1181.857,
+      "end": 1185.714,
+      "duration": 3.857,
+      "text": "I've found in the past, even by the middle of the term,"
+    },
+    {
+      "index": 290,
+      "start": 1185.714,
+      "end": 1190.0,
+      "duration": 4.286,
+      "text": "there are still students who feel that they must substitute y"
+    },
+    {
+      "index": 291,
+      "start": 1190.0,
+      "end": 1193.928,
+      "duration": 3.928,
+      "text": "equals e to the rt, and go through that whole"
+    },
+    {
+      "index": 292,
+      "start": 1193.928,
+      "end": 1197.357,
+      "duration": 3.429,
+      "text": "little derivation to find that you don't do that."
+    },
+    {
+      "index": 293,
+      "start": 1197.357,
+      "end": 1202.261,
+      "duration": 4.904,
+      "text": "It's a waste of time. I did it that you might not"
+    },
+    {
+      "index": 294,
+      "start": 1202.261,
+      "end": 1206.532,
+      "duration": 4.271,
+      "text": "ever have to do it again. Immediately write down the"
+    },
+    {
+      "index": 295,
+      "start": 1206.532,
+      "end": 1210.302,
+      "duration": 3.77,
+      "text": "characteristic equation. That's not very hard."
+    },
+    {
+      "index": 296,
+      "start": 1210.302,
+      "end": 1214.992,
+      "duration": 4.69,
+      "text": "r squared plus 4r plus three equals zero."
+    },
+    {
+      "index": 297,
+      "start": 1214.992,
+      "end": 1217.84,
+      "duration": 2.848,
+      "text": "And, if you can write down its"
+    },
+    {
+      "index": 298,
+      "start": 1217.84,
+      "end": 1220.101,
+      "duration": 2.261,
+      "text": "roots immediately, splendid."
+    },
+    {
+      "index": 299,
+      "start": 1220.101,
+      "end": 1223.954,
+      "duration": 3.853,
+      "text": "But, let's not assume that level of competence."
+    },
+    {
+      "index": 300,
+      "start": 1223.954,
+      "end": 1229.063,
+      "duration": 5.109,
+      "text": "So, it's r plus three times r plus one equals zero."
+    },
+    {
+      "index": 301,
+      "start": 1229.063,
+      "end": 1233.0,
+      "duration": 3.937,
+      "text": "Okay, you factor it."
+    },
+    {
+      "index": 302,
+      "start": 1233.0,
+      "end": 1236.126,
+      "duration": 3.126,
+      "text": "This being 18.03, a lot of the times the roots"
+    },
+    {
+      "index": 303,
+      "start": 1236.126,
+      "end": 1239.322,
+      "duration": 3.196,
+      "text": "will be integers when they are not, God forbid,"
+    },
+    {
+      "index": 304,
+      "start": 1239.322,
+      "end": 1242.24,
+      "duration": 2.918,
+      "text": "you will have to use the quadratic formula."
+    },
+    {
+      "index": 305,
+      "start": 1242.24,
+      "end": 1244.533,
+      "duration": 2.293,
+      "text": "But here, the roots were integers."
+    },
+    {
+      "index": 306,
+      "start": 1244.533,
+      "end": 1247.312,
+      "duration": 2.779,
+      "text": "It is, after all, only the first example."
+    },
+    {
+      "index": 307,
+      "start": 1247.312,
+      "end": 1250.23,
+      "duration": 2.918,
+      "text": "So, the solution, the general solution is y"
+    },
+    {
+      "index": 308,
+      "start": 1250.23,
+      "end": 1254.26,
+      "duration": 4.03,
+      "text": "equals c1 e to the negative, notice the root is minus three"
+    },
+    {
+      "index": 309,
+      "start": 1254.26,
+      "end": 1256.97,
+      "duration": 2.71,
+      "text": "and minus one, minus 3t plus c2 e to the"
+    },
+    {
+      "index": 310,
+      "start": 1256.97,
+      "end": 1261.0,
+      "duration": 4.03,
+      "text": "negative t."
+    },
+    {
+      "index": 311,
+      "start": 1261.0,
+      "end": 1264.139,
+      "duration": 3.139,
+      "text": "Now, suppose it's an initial value problem."
+    },
+    {
+      "index": 312,
+      "start": 1264.139,
+      "end": 1266.755,
+      "duration": 2.616,
+      "text": "So, I gave you an initial condition."
+    },
+    {
+      "index": 313,
+      "start": 1266.755,
+      "end": 1271.09,
+      "duration": 4.335,
+      "text": "Suppose the initial conditions were that y of zero were one."
+    },
+    {
+      "index": 314,
+      "start": 1271.09,
+      "end": 1273.332,
+      "duration": 2.242,
+      "text": "So, at the start,"
+    },
+    {
+      "index": 315,
+      "start": 1273.332,
+      "end": 1276.621,
+      "duration": 3.289,
+      "text": "the mass has been moved over to the position,"
+    },
+    {
+      "index": 316,
+      "start": 1276.621,
+      "end": 1278.938,
+      "duration": 2.317,
+      "text": "one, here. Well, we expected it,"
+    },
+    {
+      "index": 317,
+      "start": 1278.938,
+      "end": 1282.899,
+      "duration": 3.961,
+      "text": "then, to start doing that. But, this is fairly heavily"
+    },
+    {
+      "index": 318,
+      "start": 1282.899,
+      "end": 1285.141,
+      "duration": 2.242,
+      "text": "damped. This is heavily damped."
+    },
+    {
+      "index": 319,
+      "start": 1285.141,
+      "end": 1290.0,
+      "duration": 4.859,
+      "text": "I'm going to assume that the mass starts at rest."
+    },
+    {
+      "index": 320,
+      "start": 1290.0,
+      "end": 1293.68,
+      "duration": 3.68,
+      "text": "So, the spring is distended. The masses over here."
+    },
+    {
+      "index": 321,
+      "start": 1293.68,
+      "end": 1297.962,
+      "duration": 4.282,
+      "text": "But, there's no motion at times zero this way or that way."
+    },
+    {
+      "index": 322,
+      "start": 1297.962,
+      "end": 1300.516,
+      "duration": 2.554,
+      "text": "In other words, I'm not pushing it."
+    },
+    {
+      "index": 323,
+      "start": 1300.516,
+      "end": 1304.572,
+      "duration": 4.056,
+      "text": "I'm just releasing it and letting it do its thing after"
+    },
+    {
+      "index": 324,
+      "start": 1304.572,
+      "end": 1306.826,
+      "duration": 2.254,
+      "text": "that. Okay, so y prime of zero,"
+    },
+    {
+      "index": 325,
+      "start": 1306.826,
+      "end": 1309.38,
+      "duration": 2.554,
+      "text": "I'll assume, is zero."
+    },
+    {
+      "index": 326,
+      "start": 1309.38,
+      "end": 1313.211,
+      "duration": 3.831,
+      "text": "So, it starts at rest, but in the extended position,"
+    },
+    {
+      "index": 327,
+      "start": 1313.211,
+      "end": 1316.892,
+      "duration": 3.681,
+      "text": "one unit to the right of the equilibrium position."
+    },
+    {
+      "index": 328,
+      "start": 1316.892,
+      "end": 1322.0,
+      "duration": 5.108,
+      "text": "Now, all you have to do is use these two conditions."
+    },
+    {
+      "index": 329,
+      "start": 1322.0,
+      "end": 1326.357,
+      "duration": 4.357,
+      "text": "Notice I have to have two conditions because there are two"
+    },
+    {
+      "index": 330,
+      "start": 1326.357,
+      "end": 1329.186,
+      "duration": 2.829,
+      "text": "constants I have to find the value of."
+    },
+    {
+      "index": 331,
+      "start": 1329.186,
+      "end": 1331.556,
+      "duration": 2.37,
+      "text": "All right, so, let's substitute,"
+    },
+    {
+      "index": 332,
+      "start": 1331.556,
+      "end": 1335.608,
+      "duration": 4.052,
+      "text": "well, we're going to have to calculate the derivative."
+    },
+    {
+      "index": 333,
+      "start": 1335.608,
+      "end": 1338.284,
+      "duration": 2.676,
+      "text": "So, why don't we do that right away?"
+    },
+    {
+      "index": 334,
+      "start": 1338.284,
+      "end": 1342.948,
+      "duration": 4.664,
+      "text": "So, this is minus three c1 e to the minus 3t minus c2 e to the"
+    },
+    {
+      "index": 335,
+      "start": 1342.948,
+      "end": 1347.0,
+      "duration": 4.052,
+      "text": "negative t."
+    },
+    {
+      "index": 336,
+      "start": 1347.0,
+      "end": 1351.319,
+      "duration": 4.319,
+      "text": "And now, if I substitute in at zero, when t equals zero,"
+    },
+    {
+      "index": 337,
+      "start": 1351.319,
+      "end": 1354.382,
+      "duration": 3.063,
+      "text": "what do I get? Well, the first equation,"
+    },
+    {
+      "index": 338,
+      "start": 1354.382,
+      "end": 1358.701,
+      "duration": 4.319,
+      "text": "the left says that y of zero should be one."
+    },
+    {
+      "index": 339,
+      "start": 1358.701,
+      "end": 1361.136,
+      "duration": 2.435,
+      "text": "And, the right says this is one."
+    },
+    {
+      "index": 340,
+      "start": 1361.136,
+      "end": 1363.57,
+      "duration": 2.434,
+      "text": "So, it's c1 plus c2."
+    },
+    {
+      "index": 341,
+      "start": 1363.57,
+      "end": 1367.654,
+      "duration": 4.084,
+      "text": "That's the result of substituting t equals zero."
+    },
+    {
+      "index": 342,
+      "start": 1367.654,
+      "end": 1369.774,
+      "duration": 2.12,
+      "text": "How about substituting?"
+    },
+    {
+      "index": 343,
+      "start": 1369.774,
+      "end": 1373.465,
+      "duration": 3.691,
+      "text": "What should I substitute in the second equation?"
+    },
+    {
+      "index": 344,
+      "start": 1373.465,
+      "end": 1376.842,
+      "duration": 3.377,
+      "text": "Well, y prime of zero is zero."
+    },
+    {
+      "index": 345,
+      "start": 1376.842,
+      "end": 1381.162,
+      "duration": 4.32,
+      "text": "So, if the second equation, when I put in t equals zero,"
+    },
+    {
+      "index": 346,
+      "start": 1381.162,
+      "end": 1385.324,
+      "duration": 4.162,
+      "text": "the left side is zero according to that initial value,"
+    },
+    {
+      "index": 347,
+      "start": 1385.324,
+      "end": 1392.0,
+      "duration": 6.676,
+      "text": "and the right side is negative three c1 minus c2."
+    },
+    {
+      "index": 348,
+      "start": 1392.0,
+      "end": 1395.735,
+      "duration": 3.735,
+      "text": "You see what you end up with, therefore, is a pair of"
+    },
+    {
+      "index": 349,
+      "start": 1395.735,
+      "end": 1399.974,
+      "duration": 4.239,
+      "text": "simultaneous linear equations. And, this is why you learn to"
+    },
+    {
+      "index": 350,
+      "start": 1399.974,
+      "end": 1404.284,
+      "duration": 4.31,
+      "text": "study linear set of pairs of simultaneous linear equations in"
+    },
+    {
+      "index": 351,
+      "start": 1404.284,
+      "end": 1406.87,
+      "duration": 2.586,
+      "text": "high school. These are among the most"
+    },
+    {
+      "index": 352,
+      "start": 1406.87,
+      "end": 1409.672,
+      "duration": 2.802,
+      "text": "important. Solving problems of this type"
+    },
+    {
+      "index": 353,
+      "start": 1409.672,
+      "end": 1413.695,
+      "duration": 4.023,
+      "text": "are among the most important applications of that kind of"
+    },
+    {
+      "index": 354,
+      "start": 1413.695,
+      "end": 1417.0,
+      "duration": 3.305,
+      "text": "algebra, and this kind of algebra."
+    },
+    {
+      "index": 355,
+      "start": 1417.0,
+      "end": 1420.461,
+      "duration": 3.461,
+      "text": "All right, what's the answer finally?"
+    },
+    {
+      "index": 356,
+      "start": 1420.461,
+      "end": 1425.942,
+      "duration": 5.481,
+      "text": "Well, if I add the two of them, I get minus 2c1 equals one."
+    },
+    {
+      "index": 357,
+      "start": 1425.942,
+      "end": 1429.884,
+      "duration": 3.942,
+      "text": "So, c1 is equal to minus one half."
+    },
+    {
+      "index": 358,
+      "start": 1429.884,
+      "end": 1434.307,
+      "duration": 4.423,
+      "text": "And, if c1 is minus a half,"
+    },
+    {
+      "index": 359,
+      "start": 1434.307,
+      "end": 1437.576,
+      "duration": 3.269,
+      "text": "then c2 is minus 3c1."
+    },
+    {
+      "index": 360,
+      "start": 1437.576,
+      "end": 1442.0,
+      "duration": 4.424,
+      "text": "So, c2 is three halves."
+    },
+    {
+      "index": 361,
+      "start": 1450.0,
+      "end": 1453.014,
+      "duration": 3.014,
+      "text": "The final question is, what does that look like as a"
+    },
+    {
+      "index": 362,
+      "start": 1453.014,
+      "end": 1454.551,
+      "duration": 1.537,
+      "text": "solution? Well, in general,"
+    },
+    {
+      "index": 363,
+      "start": 1454.551,
+      "end": 1457.921,
+      "duration": 3.37,
+      "text": "these combinations of two exponentials aren't very easy to"
+    },
+    {
+      "index": 364,
+      "start": 1457.921,
+      "end": 1460.64,
+      "duration": 2.719,
+      "text": "plot by yourself. That's one of the reasons you"
+    },
+    {
+      "index": 365,
+      "start": 1460.64,
+      "end": 1464.128,
+      "duration": 3.488,
+      "text": "are being given this little visual which plots them for you."
+    },
+    {
+      "index": 366,
+      "start": 1464.128,
+      "end": 1466.256,
+      "duration": 2.128,
+      "text": "All you have to do is, as you'll see,"
+    },
+    {
+      "index": 367,
+      "start": 1466.256,
+      "end": 1468.798,
+      "duration": 2.542,
+      "text": "set the damping constant, set the constants,"
+    },
+    {
+      "index": 368,
+      "start": 1468.798,
+      "end": 1471.162,
+      "duration": 2.364,
+      "text": "set the initial conditions, and by magic,"
+    },
+    {
+      "index": 369,
+      "start": 1471.162,
+      "end": 1474.0,
+      "duration": 2.838,
+      "text": "the curve appears on the screen."
+    },
+    {
+      "index": 370,
+      "start": 1474.0,
+      "end": 1480.631,
+      "duration": 6.631,
+      "text": "And, if you change either of the constants,"
+    },
+    {
+      "index": 371,
+      "start": 1480.631,
+      "end": 1488.21,
+      "duration": 7.579,
+      "text": "the curve will change nicely right along with it."
+    },
+    {
+      "index": 372,
+      "start": 1488.21,
+      "end": 1497.684,
+      "duration": 9.474,
+      "text": "So, the solution is y equals minus one half e to the minus 3t"
+    },
+    {
+      "index": 373,
+      "start": 1497.684,
+      "end": 1506.684,
+      "duration": 9.0,
+      "text": "plus three halves e to the negative t."
+    },
+    {
+      "index": 374,
+      "start": 1506.684,
+      "end": 1511.478,
+      "duration": 4.794,
+      "text": "How does it look?"
+    },
+    {
+      "index": 375,
+      "start": 1511.478,
+      "end": 1516.695,
+      "duration": 5.217,
+      "text": "Well, I don't expect you to be able to plot that by yourself,"
+    },
+    {
+      "index": 376,
+      "start": 1516.695,
+      "end": 1519.478,
+      "duration": 2.783,
+      "text": "but you can at least get started."
+    },
+    {
+      "index": 377,
+      "start": 1519.478,
+      "end": 1523.478,
+      "duration": 4.0,
+      "text": "It does have to satisfy the initial conditions."
+    },
+    {
+      "index": 378,
+      "start": 1523.478,
+      "end": 1528.608,
+      "duration": 5.13,
+      "text": "That means it should start at one, and its starting slope is"
+    },
+    {
+      "index": 379,
+      "start": 1528.608,
+      "end": 1532.0,
+      "duration": 3.392,
+      "text": "zero. So, it starts like that."
+    },
+    {
+      "index": 380,
+      "start": 1532.0,
+      "end": 1535.371,
+      "duration": 3.371,
+      "text": "These are both declining exponentials."
+    },
+    {
+      "index": 381,
+      "start": 1535.371,
+      "end": 1540.201,
+      "duration": 4.83,
+      "text": "This declines very rapidly, this somewhat more slowly."
+    },
+    {
+      "index": 382,
+      "start": 1540.201,
+      "end": 1544.94,
+      "duration": 4.739,
+      "text": "It does something like that. If this term were a lot,"
+    },
+    {
+      "index": 383,
+      "start": 1544.94,
+      "end": 1549.041,
+      "duration": 4.101,
+      "text": "lot more negative, I mean, that's the way that"
+    },
+    {
+      "index": 384,
+      "start": 1549.041,
+      "end": 1554.236,
+      "duration": 5.195,
+      "text": "particular solution looks. How might other solutions look?"
+    },
+    {
+      "index": 385,
+      "start": 1554.236,
+      "end": 1557.426,
+      "duration": 3.19,
+      "text": "I'll draw a few other possibilities."
+    },
+    {
+      "index": 386,
+      "start": 1557.426,
+      "end": 1560.706,
+      "duration": 3.28,
+      "text": "If the initial term, if, for example,"
+    },
+    {
+      "index": 387,
+      "start": 1560.706,
+      "end": 1564.625,
+      "duration": 3.919,
+      "text": "the initial slope were quite negative, well,"
+    },
+    {
+      "index": 388,
+      "start": 1564.625,
+      "end": 1569.0,
+      "duration": 4.375,
+      "text": "that would have start like this."
+    },
+    {
+      "index": 389,
+      "start": 1569.0,
+      "end": 1572.553,
+      "duration": 3.553,
+      "text": "Now, just your experience of physics, or of the real world"
+    },
+    {
+      "index": 390,
+      "start": 1572.553,
+      "end": 1575.794,
+      "duration": 3.241,
+      "text": "suggests that if I give, if I start the thing at one,"
+    },
+    {
+      "index": 391,
+      "start": 1575.794,
+      "end": 1579.535,
+      "duration": 3.741,
+      "text": "but give it a strongly negative push, it's going to go beyond"
+    },
+    {
+      "index": 392,
+      "start": 1579.535,
+      "end": 1582.651,
+      "duration": 3.116,
+      "text": "the equilibrium position, and then come back again."
+    },
+    {
+      "index": 393,
+      "start": 1582.651,
+      "end": 1586.205,
+      "duration": 3.554,
+      "text": "But, because the damping is big, it's not going to be able"
+    },
+    {
+      "index": 394,
+      "start": 1586.205,
+      "end": 1589.01,
+      "duration": 2.805,
+      "text": "to get through that. The equilibrium position,"
+    },
+    {
+      "index": 395,
+      "start": 1589.01,
+      "end": 1591.815,
+      "duration": 2.805,
+      "text": "a second time, is going to look something like"
+    },
+    {
+      "index": 396,
+      "start": 1591.815,
+      "end": 1594.577,
+      "duration": 2.762,
+      "text": "that. Or, if I push it in that"
+    },
+    {
+      "index": 397,
+      "start": 1594.577,
+      "end": 1597.993,
+      "duration": 3.416,
+      "text": "direction, the positive direction, that it starts off"
+    },
+    {
+      "index": 398,
+      "start": 1597.993,
+      "end": 1601.476,
+      "duration": 3.483,
+      "text": "with a positive slope. But it loses its energy because"
+    },
+    {
+      "index": 399,
+      "start": 1601.476,
+      "end": 1604.893,
+      "duration": 3.417,
+      "text": "the spring is pulling it. It comes and does something"
+    },
+    {
+      "index": 400,
+      "start": 1604.893,
+      "end": 1606.798,
+      "duration": 1.905,
+      "text": "like that. So, in other words,"
+    },
+    {
+      "index": 401,
+      "start": 1606.798,
+      "end": 1609.624,
+      "duration": 2.826,
+      "text": "it might go down. Cut across the equilibrium"
+    },
+    {
+      "index": 402,
+      "start": 1609.624,
+      "end": 1612.055,
+      "duration": 2.431,
+      "text": "position, come back again, it do that?"
+    },
+    {
+      "index": 403,
+      "start": 1612.055,
+      "end": 1615.472,
+      "duration": 3.417,
+      "text": "No, that it cannot do. I was considering giving you a"
+    },
+    {
+      "index": 404,
+      "start": 1615.472,
+      "end": 1618.823,
+      "duration": 3.351,
+      "text": "problem to prove that, but I got tired of making out"
+    },
+    {
+      "index": 405,
+      "start": 1618.823,
+      "end": 1621.648,
+      "duration": 2.825,
+      "text": "the problems set, and decided I tortured you"
+    },
+    {
+      "index": 406,
+      "start": 1621.648,
+      "end": 1625.0,
+      "duration": 3.352,
+      "text": "enough already, as you will see."
+    },
+    {
+      "index": 407,
+      "start": 1625.0,
+      "end": 1631.461,
+      "duration": 6.461,
+      "text": "So, anyway, these are different possibilities for the way that"
+    },
+    {
+      "index": 408,
+      "start": 1631.461,
+      "end": 1634.957,
+      "duration": 3.496,
+      "text": "can look. This case, where it just"
+    },
+    {
+      "index": 409,
+      "start": 1634.957,
+      "end": 1640.677,
+      "duration": 5.72,
+      "text": "returns in the long run is called the over-damped case,"
+    },
+    {
+      "index": 410,
+      "start": 1640.677,
+      "end": 1644.703,
+      "duration": 4.026,
+      "text": "over-damped. Now, there is another case"
+    },
+    {
+      "index": 411,
+      "start": 1644.703,
+      "end": 1650.0,
+      "duration": 5.297,
+      "text": "where the thing oscillates back and forth."
+    },
+    {
+      "index": 412,
+      "start": 1650.0,
+      "end": 1653.847,
+      "duration": 3.847,
+      "text": "We would expect to get that case if the damping is very"
+    },
+    {
+      "index": 413,
+      "start": 1653.847,
+      "end": 1657.195,
+      "duration": 3.348,
+      "text": "little or nonexistent. Then, there's very little"
+    },
+    {
+      "index": 414,
+      "start": 1657.195,
+      "end": 1661.47,
+      "duration": 4.275,
+      "text": "preventing the mass from doing that, although we do expect if"
+    },
+    {
+      "index": 415,
+      "start": 1661.47,
+      "end": 1665.531,
+      "duration": 4.061,
+      "text": "there's any damping at all, we expect it ultimately to get"
+    },
+    {
+      "index": 416,
+      "start": 1665.531,
+      "end": 1668.737,
+      "duration": 3.206,
+      "text": "nearer and nearer to the equilibrium position."
+    },
+    {
+      "index": 417,
+      "start": 1668.737,
+      "end": 1671.872,
+      "duration": 3.135,
+      "text": "Mathematically, what does that correspond to?"
+    },
+    {
+      "index": 418,
+      "start": 1671.872,
+      "end": 1675.007,
+      "duration": 3.135,
+      "text": "Well, that's going to correspond to case two,"
+    },
+    {
+      "index": 419,
+      "start": 1675.007,
+      "end": 1679.887,
+      "duration": 4.88,
+      "text": "where the roots are complex. The roots are complex,"
+    },
+    {
+      "index": 420,
+      "start": 1679.887,
+      "end": 1683.061,
+      "duration": 3.174,
+      "text": "and this is why, let's call the roots,"
+    },
+    {
+      "index": 421,
+      "start": 1683.061,
+      "end": 1688.209,
+      "duration": 5.148,
+      "text": "in that case we know that the roots are of the form a plus or"
+    },
+    {
+      "index": 422,
+      "start": 1688.209,
+      "end": 1690.697,
+      "duration": 2.488,
+      "text": "minus bi. There are two roots,"
+    },
+    {
+      "index": 423,
+      "start": 1690.697,
+      "end": 1693.442,
+      "duration": 2.745,
+      "text": "and they are a complex conjugate."
+    },
+    {
+      "index": 424,
+      "start": 1693.442,
+      "end": 1696.273,
+      "duration": 2.831,
+      "text": "All right, let's take one of them."
+    },
+    {
+      "index": 425,
+      "start": 1696.273,
+      "end": 1700.82,
+      "duration": 4.547,
+      "text": "What does a correspond to in terms of the exponential?"
+    },
+    {
+      "index": 426,
+      "start": 1700.82,
+      "end": 1704.337,
+      "duration": 3.517,
+      "text": "Well, remember, the function of the r was,"
+    },
+    {
+      "index": 427,
+      "start": 1704.337,
+      "end": 1710.0,
+      "duration": 5.663,
+      "text": "it's this r when we tried our exponential solution."
+    },
+    {
+      "index": 428,
+      "start": 1710.0,
+      "end": 1714.462,
+      "duration": 4.462,
+      "text": "So, what we formally, this means we get a complex"
+    },
+    {
+      "index": 429,
+      "start": 1714.462,
+      "end": 1718.18,
+      "duration": 3.718,
+      "text": "solution. The complex solution y equals e"
+    },
+    {
+      "index": 430,
+      "start": 1718.18,
+      "end": 1723.851,
+      "duration": 5.671,
+      "text": "to this, let's use one of them, let's say, (a plus bi) times t."
+    },
+    {
+      "index": 431,
+      "start": 1723.851,
+      "end": 1727.012,
+      "duration": 3.161,
+      "text": "The question is,"
+    },
+    {
+      "index": 432,
+      "start": 1727.012,
+      "end": 1731.474,
+      "duration": 4.462,
+      "text": "what do we do that? We are not really interested,"
+    },
+    {
+      "index": 433,
+      "start": 1731.474,
+      "end": 1736.68,
+      "duration": 5.206,
+      "text": "I don't know what a complex solution to that thing means."
+    },
+    {
+      "index": 434,
+      "start": 1736.68,
+      "end": 1741.886,
+      "duration": 5.206,
+      "text": "It doesn't have any meaning. What I want to know is how y"
+    },
+    {
+      "index": 435,
+      "start": 1741.886,
+      "end": 1747.0,
+      "duration": 5.114,
+      "text": "behaves or how x behaves in that picture."
+    },
+    {
+      "index": 436,
+      "start": 1747.0,
+      "end": 1750.669,
+      "duration": 3.669,
+      "text": "And, that better be a real function because otherwise I"
+    },
+    {
+      "index": 437,
+      "start": 1750.669,
+      "end": 1754.815,
+      "duration": 4.146,
+      "text": "don't know what to do with it. So, we are looking for two real"
+    },
+    {
+      "index": 438,
+      "start": 1754.815,
+      "end": 1757.669,
+      "duration": 2.854,
+      "text": "functions, the y1 and the y2. But, in fact,"
+    },
+    {
+      "index": 439,
+      "start": 1757.669,
+      "end": 1760.252,
+      "duration": 2.583,
+      "text": "what we've got is one complex function."
+    },
+    {
+      "index": 440,
+      "start": 1760.252,
+      "end": 1762.902,
+      "duration": 2.65,
+      "text": "All right, now, a theorem to the rescue:"
+    },
+    {
+      "index": 441,
+      "start": 1762.902,
+      "end": 1766.708,
+      "duration": 3.806,
+      "text": "this, I'm not going to save for Wednesday because it's so"
+    },
+    {
+      "index": 442,
+      "start": 1766.708,
+      "end": 1770.864,
+      "duration": 4.156,
+      "text": "simple. So, the theorem is that if you"
+    },
+    {
+      "index": 443,
+      "start": 1770.864,
+      "end": 1776.021,
+      "duration": 5.157,
+      "text": "have a complex solution, u plus iv, so each of these is"
+    },
+    {
+      "index": 444,
+      "start": 1776.021,
+      "end": 1780.127,
+      "duration": 4.106,
+      "text": "a function of time, u plus iv is the complex"
+    },
+    {
+      "index": 445,
+      "start": 1780.127,
+      "end": 1785.188,
+      "duration": 5.061,
+      "text": "solution to a real differential equation with constant"
+    },
+    {
+      "index": 446,
+      "start": 1785.188,
+      "end": 1789.198,
+      "duration": 4.01,
+      "text": "coefficients. Well, it doesn't have to have"
+    },
+    {
+      "index": 447,
+      "start": 1789.198,
+      "end": 1793.209,
+      "duration": 4.011,
+      "text": "constant coefficients. It has to be linear."
+    },
+    {
+      "index": 448,
+      "start": 1793.209,
+      "end": 1799.034,
+      "duration": 5.825,
+      "text": "Let me just write it out to y double prime plus A y prime plus"
+    },
+    {
+      "index": 449,
+      "start": 1799.034,
+      "end": 1804.0,
+      "duration": 4.966,
+      "text": "B y equals zero."
+    },
+    {
+      "index": 450,
+      "start": 1804.0,
+      "end": 1808.207,
+      "duration": 4.207,
+      "text": "Suppose you got a complex solution to that equation."
+    },
+    {
+      "index": 451,
+      "start": 1808.207,
+      "end": 1811.424,
+      "duration": 3.217,
+      "text": "These are understood to be real numbers."
+    },
+    {
+      "index": 452,
+      "start": 1811.424,
+      "end": 1815.797,
+      "duration": 4.373,
+      "text": "They are the damping constant and the spring constant."
+    },
+    {
+      "index": 453,
+      "start": 1815.797,
+      "end": 1820.335,
+      "duration": 4.538,
+      "text": "Then, the conclusion is that u and v are real solutions."
+    },
+    {
+      "index": 454,
+      "start": 1820.335,
+      "end": 1823.387,
+      "duration": 3.052,
+      "text": "In other words, having found a complex"
+    },
+    {
+      "index": 455,
+      "start": 1823.387,
+      "end": 1828.172,
+      "duration": 4.785,
+      "text": "solution, all you have to do is take its real and imaginary"
+    },
+    {
+      "index": 456,
+      "start": 1828.172,
+      "end": 1831.967,
+      "duration": 3.795,
+      "text": "parts, and voila, you've got your two solutions"
+    },
+    {
+      "index": 457,
+      "start": 1831.967,
+      "end": 1837.0,
+      "duration": 5.033,
+      "text": "you were looking for for the original equation."
+    },
+    {
+      "index": 458,
+      "start": 1837.0,
+      "end": 1839.963,
+      "duration": 2.963,
+      "text": "Now, that might seem like magic, but it's easy."
+    },
+    {
+      "index": 459,
+      "start": 1839.963,
+      "end": 1843.894,
+      "duration": 3.931,
+      "text": "It's so easy it's the sort of theorem I could spend one minute"
+    },
+    {
+      "index": 460,
+      "start": 1843.894,
+      "end": 1846.793,
+      "duration": 2.899,
+      "text": "proving for you now. What's the reason for it?"
+    },
+    {
+      "index": 461,
+      "start": 1846.793,
+      "end": 1850.724,
+      "duration": 3.931,
+      "text": "Well, the main thing I want you to get out of this argument is"
+    },
+    {
+      "index": 462,
+      "start": 1850.724,
+      "end": 1854.332,
+      "duration": 3.608,
+      "text": "to see that it absolutely depends upon these coefficients"
+    },
+    {
+      "index": 463,
+      "start": 1854.332,
+      "end": 1856.523,
+      "duration": 2.191,
+      "text": "being real. You have to have a real"
+    },
+    {
+      "index": 464,
+      "start": 1856.523,
+      "end": 1859.164,
+      "duration": 2.641,
+      "text": "differential equation for this to be true."
+    },
+    {
+      "index": 465,
+      "start": 1859.164,
+      "end": 1863.491,
+      "duration": 4.327,
+      "text": "Otherwise, it's certainly not. So, the proof is,"
+    },
+    {
+      "index": 466,
+      "start": 1863.491,
+      "end": 1866.473,
+      "duration": 2.982,
+      "text": "what does it mean to be a solution?"
+    },
+    {
+      "index": 467,
+      "start": 1866.473,
+      "end": 1870.333,
+      "duration": 3.86,
+      "text": "It means when you plug in A (u plus iv) plus,"
+    },
+    {
+      "index": 468,
+      "start": 1870.333,
+      "end": 1874.719,
+      "duration": 4.386,
+      "text": "prime, plus B times u plus iv,"
+    },
+    {
+      "index": 469,
+      "start": 1874.719,
+      "end": 1877.526,
+      "duration": 2.807,
+      "text": "what am I supposed to get?"
+    },
+    {
+      "index": 470,
+      "start": 1877.526,
+      "end": 1880.596,
+      "duration": 3.07,
+      "text": "Zero. Well, now, separate these into"
+    },
+    {
+      "index": 471,
+      "start": 1880.596,
+      "end": 1884.631,
+      "duration": 4.035,
+      "text": "the real and imaginary parts. What does it say?"
+    },
+    {
+      "index": 472,
+      "start": 1884.631,
+      "end": 1889.807,
+      "duration": 5.176,
+      "text": "It says u double prime plus A u prime plus B u,"
+    },
+    {
+      "index": 473,
+      "start": 1889.807,
+      "end": 1895.157,
+      "duration": 5.35,
+      "text": "that's the real part of this expression when I expand it"
+    },
+    {
+      "index": 474,
+      "start": 1895.157,
+      "end": 1899.318,
+      "duration": 4.161,
+      "text": "out. And, I've got an imaginary"
+    },
+    {
+      "index": 475,
+      "start": 1899.318,
+      "end": 1903.151,
+      "duration": 3.833,
+      "text": "part, too, which all have the coefficient i."
+    },
+    {
+      "index": 476,
+      "start": 1903.151,
+      "end": 1906.807,
+      "duration": 3.656,
+      "text": "So, from here, I get v double prime plus i"
+    },
+    {
+      "index": 477,
+      "start": 1906.807,
+      "end": 1911.621,
+      "duration": 4.814,
+      "text": "times A v prime plus i times B v."
+    },
+    {
+      "index": 478,
+      "start": 1911.621,
+      "end": 1917.149,
+      "duration": 5.528,
+      "text": "So, this is the imaginary part. Now, here I have something with"
+    },
+    {
+      "index": 479,
+      "start": 1917.149,
+      "end": 1922.32,
+      "duration": 5.171,
+      "text": "a real part plus the imaginary part, i, times the imaginary"
+    },
+    {
+      "index": 480,
+      "start": 1922.32,
+      "end": 1925.886,
+      "duration": 3.566,
+      "text": "part is zero. Well, the only way that can"
+    },
+    {
+      "index": 481,
+      "start": 1925.886,
+      "end": 1931.236,
+      "duration": 5.35,
+      "text": "happen is if the real part is zero, and the imaginary part is"
+    },
+    {
+      "index": 482,
+      "start": 1931.236,
+      "end": 1935.726,
+      "duration": 4.49,
+      "text": "separately zero. So, the conclusion is that"
+    },
+    {
+      "index": 483,
+      "start": 1935.726,
+      "end": 1939.445,
+      "duration": 3.719,
+      "text": "therefore this part must be zero, and therefore this part"
+    },
+    {
+      "index": 484,
+      "start": 1939.445,
+      "end": 1943.496,
+      "duration": 4.051,
+      "text": "must be zero because the two of them together make the complex"
+    },
+    {
+      "index": 485,
+      "start": 1943.496,
+      "end": 1947.082,
+      "duration": 3.586,
+      "text": "number zero plus zero i. Now, what does it mean for the"
+    },
+    {
+      "index": 486,
+      "start": 1947.082,
+      "end": 1951.0,
+      "duration": 3.918,
+      "text": "real part to be zero? It means that u is a solution."
+    },
+    {
+      "index": 487,
+      "start": 1951.0,
+      "end": 1954.685,
+      "duration": 3.685,
+      "text": "This, the imaginary part zero means v is a solution,"
+    },
+    {
+      "index": 488,
+      "start": 1954.685,
+      "end": 1956.925,
+      "duration": 2.24,
+      "text": "and therefore, just what I said."
+    },
+    {
+      "index": 489,
+      "start": 1956.925,
+      "end": 1959.96,
+      "duration": 3.035,
+      "text": "u and v are solutions to the real equation."
+    },
+    {
+      "index": 490,
+      "start": 1959.96,
+      "end": 1964.44,
+      "duration": 4.48,
+      "text": "Where did I use the fact that A and B were real numbers and not"
+    },
+    {
+      "index": 491,
+      "start": 1964.44,
+      "end": 1967.547,
+      "duration": 3.107,
+      "text": "complex numbers? In knowing that this is the"
+    },
+    {
+      "index": 492,
+      "start": 1967.547,
+      "end": 1971.088,
+      "duration": 3.541,
+      "text": "real part, I had to know that A was a real number."
+    },
+    {
+      "index": 493,
+      "start": 1971.088,
+      "end": 1974.629,
+      "duration": 3.541,
+      "text": "If A were something like one plus i,"
+    },
+    {
+      "index": 494,
+      "start": 1974.629,
+      "end": 1977.953,
+      "duration": 3.324,
+      "text": "I'd be screwed, I mean, because then I couldn't"
+    },
+    {
+      "index": 495,
+      "start": 1977.953,
+      "end": 1982.0,
+      "duration": 4.047,
+      "text": "say that this was the real part anymore."
+    },
+    {
+      "index": 496,
+      "start": 1982.0,
+      "end": 1987.805,
+      "duration": 5.805,
+      "text": "So, saying that's the real part, and this is the imaginary"
+    },
+    {
+      "index": 497,
+      "start": 1987.805,
+      "end": 1992.796,
+      "duration": 4.991,
+      "text": "part, I was using the fact that these two numbers,"
+    },
+    {
+      "index": 498,
+      "start": 1992.796,
+      "end": 1997.481,
+      "duration": 4.685,
+      "text": "constants, were real constants: very important."
+    },
+    {
+      "index": 499,
+      "start": 1997.481,
+      "end": 2000.842,
+      "duration": 3.361,
+      "text": "So, what is the case two solution?"
+    },
+    {
+      "index": 500,
+      "start": 2000.842,
+      "end": 2006.75,
+      "duration": 5.908,
+      "text": "Well, what are the real and imaginary parts"
+    },
+    {
+      "index": 501,
+      "start": 2006.75,
+      "end": 2011.231,
+      "duration": 4.481,
+      "text": "of (a plus b i) t? Well, y equals e to the at +"
+    },
+    {
+      "index": 502,
+      "start": 2011.231,
+      "end": 2017.365,
+      "duration": 6.134,
+      "text": "ibt. Okay, you've had experience."
+    },
+    {
+      "index": 503,
+      "start": 2017.365,
+      "end": 2022.179,
+      "duration": 4.814,
+      "text": "You know how to do this now. That's e to the at"
+    },
+    {
+      "index": 504,
+      "start": 2022.179,
+      "end": 2027.247,
+      "duration": 5.068,
+      "text": "times, well, the real part is, well, let's write it this way."
+    },
+    {
+      "index": 505,
+      "start": 2027.247,
+      "end": 2031.724,
+      "duration": 4.477,
+      "text": "The real part is e to the at times cosine b t."
+    },
+    {
+      "index": 506,
+      "start": 2031.724,
+      "end": 2034.934,
+      "duration": 3.21,
+      "text": "Notice how the a and b enter"
+    },
+    {
+      "index": 507,
+      "start": 2034.934,
+      "end": 2038.397,
+      "duration": 3.463,
+      "text": "into the expression. That's the real part."
+    },
+    {
+      "index": 508,
+      "start": 2038.397,
+      "end": 2043.297,
+      "duration": 4.9,
+      "text": "And, the imaginary part is e to the at times the sine of bt."
+    },
+    {
+      "index": 509,
+      "start": 2043.297,
+      "end": 2047.301,
+      "duration": 4.004,
+      "text": "And therefore,"
+    },
+    {
+      "index": 510,
+      "start": 2047.301,
+      "end": 2050.276,
+      "duration": 2.975,
+      "text": "the solution, both of these must,"
+    },
+    {
+      "index": 511,
+      "start": 2050.276,
+      "end": 2053.901,
+      "duration": 3.625,
+      "text": "therefore, be solutions to the equation."
+    },
+    {
+      "index": 512,
+      "start": 2053.901,
+      "end": 2058.084,
+      "duration": 4.183,
+      "text": "And therefore, the general solution to the ODE"
+    },
+    {
+      "index": 513,
+      "start": 2058.084,
+      "end": 2061.895,
+      "duration": 3.811,
+      "text": "is y equals, now, you've got to put in the"
+    },
+    {
+      "index": 514,
+      "start": 2061.895,
+      "end": 2066.171,
+      "duration": 4.276,
+      "text": "arbitrary constants. It's a nice thing to do to"
+    },
+    {
+      "index": 515,
+      "start": 2066.171,
+      "end": 2069.611,
+      "duration": 3.44,
+      "text": "factor out the e to the at."
+    },
+    {
+      "index": 516,
+      "start": 2069.611,
+      "end": 2072.585,
+      "duration": 2.974,
+      "text": "It makes it look a little better."
+    },
+    {
+      "index": 517,
+      "start": 2072.585,
+      "end": 2079.0,
+      "duration": 6.415,
+      "text": "And so, the constants are c1 cosine bt and c2 sine bt."
+    },
+    {
+      "index": 518,
+      "start": 2079.0,
+      "end": 2081.791,
+      "duration": 2.791,
+      "text": "Yeah, but what does that look like?"
+    },
+    {
+      "index": 519,
+      "start": 2081.791,
+      "end": 2085.651,
+      "duration": 3.86,
+      "text": "Well, you know that too. This is an exponential,"
+    },
+    {
+      "index": 520,
+      "start": 2085.651,
+      "end": 2089.099,
+      "duration": 3.448,
+      "text": "which controls the amplitude. But this guy,"
+    },
+    {
+      "index": 521,
+      "start": 2089.099,
+      "end": 2093.78,
+      "duration": 4.681,
+      "text": "which is a combination of two sinusoidal oscillations with"
+    },
+    {
+      "index": 522,
+      "start": 2093.78,
+      "end": 2097.803,
+      "duration": 4.023,
+      "text": "different amplitudes, but with the same frequency,"
+    },
+    {
+      "index": 523,
+      "start": 2097.803,
+      "end": 2101.991,
+      "duration": 4.188,
+      "text": "the b's are the same in both of them, and therefore,"
+    },
+    {
+      "index": 524,
+      "start": 2101.991,
+      "end": 2104.865,
+      "duration": 2.874,
+      "text": "this is, itself, a purely sinusoidal"
+    },
+    {
+      "index": 525,
+      "start": 2104.865,
+      "end": 2109.441,
+      "duration": 4.576,
+      "text": "oscillation. So, in other words,"
+    },
+    {
+      "index": 526,
+      "start": 2109.441,
+      "end": 2115.608,
+      "duration": 6.167,
+      "text": "I don't have room to write it, but it's equal to,"
+    },
+    {
+      "index": 527,
+      "start": 2115.608,
+      "end": 2120.363,
+      "duration": 4.755,
+      "text": "you know. It's a good example of where"
+    },
+    {
+      "index": 528,
+      "start": 2120.363,
+      "end": 2127.944,
+      "duration": 7.581,
+      "text": "you'd use that trigonometric identity I spent time on before"
+    },
+    {
+      "index": 529,
+      "start": 2127.944,
+      "end": 2131.388,
+      "duration": 3.444,
+      "text": "the exam. Okay, let's work a quick"
+    },
+    {
+      "index": 530,
+      "start": 2131.388,
+      "end": 2133.586,
+      "duration": 2.198,
+      "text": "example just to see how this works out."
+    },
+    {
+      "index": 531,
+      "start": 2133.586,
+      "end": 2136.595,
+      "duration": 3.009,
+      "text": "Well, let's get rid of this. Okay, let's now make the"
+    },
+    {
+      "index": 532,
+      "start": 2136.595,
+      "end": 2139.082,
+      "duration": 2.487,
+      "text": "damping, since this is showing oscillations,"
+    },
+    {
+      "index": 533,
+      "start": 2139.082,
+      "end": 2142.669,
+      "duration": 3.587,
+      "text": "it must correspond to the case where the damping is less strong"
+    },
+    {
+      "index": 534,
+      "start": 2142.669,
+      "end": 2144.578,
+      "duration": 1.909,
+      "text": "compared with the spring constant."
+    },
+    {
+      "index": 535,
+      "start": 2144.578,
+      "end": 2147.702,
+      "duration": 3.124,
+      "text": "So, the theorem is that if you have a complex solution,"
+    },
+    {
+      "index": 536,
+      "start": 2147.702,
+      "end": 2150.537,
+      "duration": 2.835,
+      "text": "u plus iv, so each of these is a function of time,"
+    },
+    {
+      "index": 537,
+      "start": 2150.537,
+      "end": 2153.603,
+      "duration": 3.066,
+      "text": "u plus iv is the complex solution to a real"
+    },
+    {
+      "index": 538,
+      "start": 2153.603,
+      "end": 2156.38,
+      "duration": 2.777,
+      "text": "differential equation with constant coefficients."
+    },
+    {
+      "index": 539,
+      "start": 2156.38,
+      "end": 2158.983,
+      "duration": 2.603,
+      "text": "A stiff spring, one that pulls with hard force"
+    },
+    {
+      "index": 540,
+      "start": 2158.983,
+      "end": 2161.586,
+      "duration": 2.603,
+      "text": "is going to make that thing go back and forth,"
+    },
+    {
+      "index": 541,
+      "start": 2161.586,
+      "end": 2165.0,
+      "duration": 3.414,
+      "text": "particularly at the dipping is weak."
+    },
+    {
+      "index": 542,
+      "start": 2165.0,
+      "end": 2169.621,
+      "duration": 4.621,
+      "text": "So, let's use almost the same equation as I've just concealed."
+    },
+    {
+      "index": 543,
+      "start": 2169.621,
+      "end": 2172.424,
+      "duration": 2.803,
+      "text": "But, do you remember a used four here?"
+    },
+    {
+      "index": 544,
+      "start": 2172.424,
+      "end": 2177.121,
+      "duration": 4.697,
+      "text": "Okay, before we used three and we got the solution to look like"
+    },
+    {
+      "index": 545,
+      "start": 2177.121,
+      "end": 2179.696,
+      "duration": 2.575,
+      "text": "that. Now, we will give it a little"
+    },
+    {
+      "index": 546,
+      "start": 2179.696,
+      "end": 2183.333,
+      "duration": 3.637,
+      "text": "more energy by putting some moxie in the springs."
+    },
+    {
+      "index": 547,
+      "start": 2183.333,
+      "end": 2186.742,
+      "duration": 3.409,
+      "text": "So now, the spring is pulling a little harder,"
+    },
+    {
+      "index": 548,
+      "start": 2186.742,
+      "end": 2190.0,
+      "duration": 3.258,
+      "text": "bigger force, a stiffer spring."
+    },
+    {
+      "index": 549,
+      "start": 2190.0,
+      "end": 2195.137,
+      "duration": 5.137,
+      "text": "Okay, the characteristic equation is now going to be r"
+    },
+    {
+      "index": 550,
+      "start": 2195.137,
+      "end": 2200.857,
+      "duration": 5.72,
+      "text": "squared plus 4r plus five is equal to zero."
+    },
+    {
+      "index": 551,
+      "start": 2200.857,
+      "end": 2203.862,
+      "duration": 3.005,
+      "text": "And therefore, if I solve for r,"
+    },
+    {
+      "index": 552,
+      "start": 2203.862,
+      "end": 2209.096,
+      "duration": 5.234,
+      "text": "I'm not going to bother trying to factor this because I"
+    },
+    {
+      "index": 553,
+      "start": 2209.096,
+      "end": 2214.428,
+      "duration": 5.332,
+      "text": "prepared for this lecture, and I know, quadratic formula"
+    },
+    {
+      "index": 554,
+      "start": 2214.428,
+      "end": 2220.147,
+      "duration": 5.719,
+      "text": "time, minus four plus or minus the square root of b squared,"
+    },
+    {
+      "index": 555,
+      "start": 2220.147,
+      "end": 2225.382,
+      "duration": 5.235,
+      "text": "16, minus four times five, 16 minus 20 is negative four"
+    },
+    {
+      "index": 556,
+      "start": 2225.382,
+      "end": 2229.206,
+      "duration": 3.824,
+      "text": "all over two. And therefore,"
+    },
+    {
+      "index": 557,
+      "start": 2229.206,
+      "end": 2233.428,
+      "duration": 4.222,
+      "text": "that makes negative two plus or minus, this makes,"
+    },
+    {
+      "index": 558,
+      "start": 2233.428,
+      "end": 2235.841,
+      "duration": 2.413,
+      "text": "simply, i. 2i divided by two,"
+    },
+    {
+      "index": 559,
+      "start": 2235.841,
+      "end": 2239.46,
+      "duration": 3.619,
+      "text": "which is i. So, the exponential solution is"
+    },
+    {
+      "index": 560,
+      "start": 2239.46,
+      "end": 2243.768,
+      "duration": 4.308,
+      "text": "e to the negative two, you don't have to write this"
+    },
+    {
+      "index": 561,
+      "start": 2243.768,
+      "end": 2246.698,
+      "duration": 2.93,
+      "text": "in. You can get the thing directly."
+    },
+    {
+      "index": 562,
+      "start": 2246.698,
+      "end": 2251.782,
+      "duration": 5.084,
+      "text": "t, let's use the one with the plus sign, and that's going to"
+    },
+    {
+      "index": 563,
+      "start": 2251.782,
+      "end": 2256.693,
+      "duration": 4.911,
+      "text": "give, as the real solutions, e to the negative two t times"
+    },
+    {
+      "index": 564,
+      "start": 2256.693,
+      "end": 2261.691,
+      "duration": 4.998,
+      "text": "cosine t, and e to the negative 2t times"
+    },
+    {
+      "index": 565,
+      "start": 2261.691,
+      "end": 2266.0,
+      "duration": 4.309,
+      "text": "the sine of t."
+    },
+    {
+      "index": 566,
+      "start": 2266.0,
+      "end": 2271.229,
+      "duration": 5.229,
+      "text": "And therefore, the solution is going to be y"
+    },
+    {
+      "index": 567,
+      "start": 2271.229,
+      "end": 2278.283,
+      "duration": 7.054,
+      "text": "equals e to the negative 2t times"
+    },
+    {
+      "index": 568,
+      "start": 2278.283,
+      "end": 2284.0,
+      "duration": 5.717,
+      "text": "(c1 cosine t plus c2 sine t)."
+    },
+    {
+      "index": 569,
+      "start": 2284.0,
+      "end": 2288.049,
+      "duration": 4.049,
+      "text": "If you want to put initial conditions, you can put them in"
+    },
+    {
+      "index": 570,
+      "start": 2288.049,
+      "end": 2292.453,
+      "duration": 4.404,
+      "text": "the same way I did them before. Suppose we use the same initial"
+    },
+    {
+      "index": 571,
+      "start": 2292.453,
+      "end": 2295.65,
+      "duration": 3.197,
+      "text": "conditions: y of zero equals one,"
+    },
+    {
+      "index": 572,
+      "start": 2295.65,
+      "end": 2299.699,
+      "duration": 4.049,
+      "text": "and y prime of zero equals one, equals zero,"
+    },
+    {
+      "index": 573,
+      "start": 2299.699,
+      "end": 2302.043,
+      "duration": 2.344,
+      "text": "let's say, wait, blah, blah, blah,"
+    },
+    {
+      "index": 574,
+      "start": 2302.043,
+      "end": 2304.956,
+      "duration": 2.913,
+      "text": "zero, yeah. Okay, I'd like to take time to"
+    },
+    {
+      "index": 575,
+      "start": 2304.956,
+      "end": 2310.0,
+      "duration": 5.044,
+      "text": "actually do the calculation, but there's nothing new in it."
+    },
+    {
+      "index": 576,
+      "start": 2310.0,
+      "end": 2315.15,
+      "duration": 5.15,
+      "text": "I'd have to take, calculate the derivative here,"
+    },
+    {
+      "index": 577,
+      "start": 2315.15,
+      "end": 2320.301,
+      "duration": 5.151,
+      "text": "and then I would substitute in, solve equations,"
+    },
+    {
+      "index": 578,
+      "start": 2320.301,
+      "end": 2324.684,
+      "duration": 4.383,
+      "text": "and when you do all that, just as before,"
+    },
+    {
+      "index": 579,
+      "start": 2324.684,
+      "end": 2330.712,
+      "duration": 6.028,
+      "text": "the answer that you get is y equals e to the negative 2t,"
+    },
+    {
+      "index": 580,
+      "start": 2330.712,
+      "end": 2335.753,
+      "duration": 5.041,
+      "text": "so, choose the constants c1 and c2"
+    },
+    {
+      "index": 581,
+      "start": 2335.753,
+      "end": 2341.78,
+      "duration": 6.027,
+      "text": "by solving linear equations, and the answer is cosine t,"
+    },
+    {
+      "index": 582,
+      "start": 2341.78,
+      "end": 2347.698,
+      "duration": 5.918,
+      "text": "so, c1 turns out to be one, and c2 turns out to be two,"
+    },
+    {
+      "index": 583,
+      "start": 2347.698,
+      "end": 2351.516,
+      "duration": 3.818,
+      "text": "I hope. Okay, I want to know,"
+    },
+    {
+      "index": 584,
+      "start": 2351.516,
+      "end": 2355.631,
+      "duration": 4.115,
+      "text": "but what does that look like? Well, use that trigonometric"
+    },
+    {
+      "index": 585,
+      "start": 2355.631,
+      "end": 2358.013,
+      "duration": 2.382,
+      "text": "identity. The e to the negative 2t"
+    },
+    {
+      "index": 586,
+      "start": 2358.013,
+      "end": 2361.622,
+      "duration": 3.609,
+      "text": "is just a real factor which is going to"
+    },
+    {
+      "index": 587,
+      "start": 2361.622,
+      "end": 2364.005,
+      "duration": 2.383,
+      "text": "reproduce itself. The question is,"
+    },
+    {
+      "index": 588,
+      "start": 2364.005,
+      "end": 2368.481,
+      "duration": 4.476,
+      "text": "what is cosine t plus 2 sine t look like?"
+    },
+    {
+      "index": 589,
+      "start": 2368.481,
+      "end": 2371.513,
+      "duration": 3.032,
+      "text": "What's its amplitude as a pure oscillation?"
+    },
+    {
+      "index": 590,
+      "start": 2371.513,
+      "end": 2375.411,
+      "duration": 3.898,
+      "text": "It's the square root of one plus two squared."
+    },
+    {
+      "index": 591,
+      "start": 2375.411,
+      "end": 2379.237,
+      "duration": 3.826,
+      "text": "Remember, it depends on looking"
+    },
+    {
+      "index": 592,
+      "start": 2379.237,
+      "end": 2381.909,
+      "duration": 2.672,
+      "text": "at that little triangle, which is one,"
+    },
+    {
+      "index": 593,
+      "start": 2381.909,
+      "end": 2384.796,
+      "duration": 2.887,
+      "text": "two, this is a different scale than that."
+    },
+    {
+      "index": 594,
+      "start": 2384.796,
+      "end": 2387.828,
+      "duration": 3.032,
+      "text": "And here is the square root of five, right?"
+    },
+    {
+      "index": 595,
+      "start": 2387.828,
+      "end": 2390.066,
+      "duration": 2.238,
+      "text": "And, here is phi, the phase lag."
+    },
+    {
+      "index": 596,
+      "start": 2390.066,
+      "end": 2393.026,
+      "duration": 2.96,
+      "text": "So, it's equal to the square root of five."
+    },
+    {
+      "index": 597,
+      "start": 2393.026,
+      "end": 2397.213,
+      "duration": 4.187,
+      "text": "So, it's the square root of five times e to"
+    },
+    {
+      "index": 598,
+      "start": 2397.213,
+      "end": 2400.606,
+      "duration": 3.393,
+      "text": "the negative 2t, and the stuff inside is the"
+    },
+    {
+      "index": 599,
+      "start": 2400.606,
+      "end": 2406.158,
+      "duration": 5.552,
+      "text": "cosine of, the frequency is one. Circular frequency is one,"
+    },
+    {
+      "index": 600,
+      "start": 2406.158,
+      "end": 2410.808,
+      "duration": 4.65,
+      "text": "so it's t minus phi, where phi is this angle."
+    },
+    {
+      "index": 601,
+      "start": 2410.808,
+      "end": 2413.133,
+      "duration": 2.325,
+      "text": "How big is that, one and two?"
+    },
+    {
+      "index": 602,
+      "start": 2413.133,
+      "end": 2416.703,
+      "duration": 3.57,
+      "text": "Well, if this were the square root of three,"
+    },
+    {
+      "index": 603,
+      "start": 2416.703,
+      "end": 2420.689,
+      "duration": 3.986,
+      "text": "which is a little less than two, it would be 60 infinity."
+    },
+    {
+      "index": 604,
+      "start": 2420.689,
+      "end": 2424.758,
+      "duration": 4.069,
+      "text": "So, this must be 70 infinity. So, phi is 70 infinity plus or minus"
+    },
+    {
+      "index": 605,
+      "start": 2424.758,
+      "end": 2429.144,
+      "duration": 4.386,
+      "text": "five, let's say. So, it looks like a slightly"
+    },
+    {
+      "index": 606,
+      "start": 2429.144,
+      "end": 2432.972,
+      "duration": 3.828,
+      "text": "delayed cosine curve, but the amplitude is falling."
+    },
+    {
+      "index": 607,
+      "start": 2432.972,
+      "end": 2435.806,
+      "duration": 2.834,
+      "text": "So, it has to start. So, if I draw it,"
+    },
+    {
+      "index": 608,
+      "start": 2435.806,
+      "end": 2439.558,
+      "duration": 3.752,
+      "text": "here's one, here is, let's say, the square root of"
+    },
+    {
+      "index": 609,
+      "start": 2439.558,
+      "end": 2443.234,
+      "duration": 3.676,
+      "text": "five up about here. Then, the square root of five"
+    },
+    {
+      "index": 610,
+      "start": 2443.234,
+      "end": 2447.599,
+      "duration": 4.365,
+      "text": "times e to the negative 2t looks maybe"
+    },
+    {
+      "index": 611,
+      "start": 2447.599,
+      "end": 2451.427,
+      "duration": 3.828,
+      "text": "something like this. So, that's square root of five"
+    },
+    {
+      "index": 612,
+      "start": 2451.427,
+      "end": 2454.49,
+      "duration": 3.063,
+      "text": "e to the negative 2t."
+    },
+    {
+      "index": 613,
+      "start": 2454.49,
+      "end": 2459.009,
+      "duration": 4.519,
+      "text": "This is cosine t, but shoved over by not quite pi"
+    },
+    {
+      "index": 614,
+      "start": 2459.009,
+      "end": 2462.314,
+      "duration": 3.305,
+      "text": "over two. It starts at one,"
+    },
+    {
+      "index": 615,
+      "start": 2462.314,
+      "end": 2466.334,
+      "duration": 4.02,
+      "text": "and with the slope zero. So, the solution starts like"
+    },
+    {
+      "index": 616,
+      "start": 2466.334,
+      "end": 2468.73,
+      "duration": 2.396,
+      "text": "this. It has to be guided in its"
+    },
+    {
+      "index": 617,
+      "start": 2468.73,
+      "end": 2473.369,
+      "duration": 4.639,
+      "text": "amplitude by this function out there, and in between it's the"
+    },
+    {
+      "index": 618,
+      "start": 2473.369,
+      "end": 2475.92,
+      "duration": 2.551,
+      "text": "cosine curve. But it's moved over."
+    },
+    {
+      "index": 619,
+      "start": 2475.92,
+      "end": 2480.017,
+      "duration": 4.097,
+      "text": "So, if this is pi over two, the first time it crosses,"
+    },
+    {
+      "index": 620,
+      "start": 2480.017,
+      "end": 2484.423,
+      "duration": 4.406,
+      "text": "it's 72 infinity to the right of that. So, if this is pi"
+    },
+    {
+      "index": 621,
+      "start": 2484.423,
+      "end": 2487.67,
+      "duration": 3.247,
+      "text": "over two, it's pi over two plus 70 infinity where it crosses."
+    },
+    {
+      "index": 622,
+      "start": 2487.67,
+      "end": 2492.0,
+      "duration": 4.33,
+      "text": "So, it must be doing something like this."
+    },
+    {
+      "index": 623,
+      "start": 2492.0,
+      "end": 2496.781,
+      "duration": 4.781,
+      "text": "And now, on the other side, it's got to stay within the"
+    },
+    {
+      "index": 624,
+      "start": 2496.781,
+      "end": 2500.765,
+      "duration": 3.984,
+      "text": "same amplitude. So, it must be doing something"
+    },
+    {
+      "index": 625,
+      "start": 2500.765,
+      "end": 2503.598,
+      "duration": 2.833,
+      "text": "like this. Okay, that gets us to,"
+    },
+    {
+      "index": 626,
+      "start": 2503.598,
+      "end": 2508.645,
+      "duration": 5.047,
+      "text": "if this is the under-damped case, because if you're trying"
+    },
+    {
+      "index": 627,
+      "start": 2508.645,
+      "end": 2514.223,
+      "duration": 5.578,
+      "text": "to do this with a swinging door, it means the door's going to be"
+    },
+    {
+      "index": 628,
+      "start": 2514.223,
+      "end": 2519.093,
+      "duration": 4.87,
+      "text": "swinging back and forth. Or, our little mass now hidden,"
+    },
+    {
+      "index": 629,
+      "start": 2519.093,
+      "end": 2524.317,
+      "duration": 5.224,
+      "text": "but you could see it behind that board, is going to be doing"
+    },
+    {
+      "index": 630,
+      "start": 2524.317,
+      "end": 2527.935,
+      "duration": 3.618,
+      "text": "this. But, it never stops."
+    },
+    {
+      "index": 631,
+      "start": 2527.935,
+      "end": 2531.225,
+      "duration": 3.29,
+      "text": "It doesn't realize,"
+    },
+    {
+      "index": 632,
+      "start": 2531.225,
+      "end": 2536.741,
+      "duration": 5.516,
+      "text": "but not in theoretical life. So, this is the under-damped."
+    },
+    {
+      "index": 633,
+      "start": 2536.741,
+      "end": 2541.967,
+      "duration": 5.226,
+      "text": "All right, so it's like Goldilocks and the Three Bears."
+    },
+    {
+      "index": 634,
+      "start": 2541.967,
+      "end": 2545.451,
+      "duration": 3.484,
+      "text": "That's too hot, and this is too cold."
+    },
+    {
+      "index": 635,
+      "start": 2545.451,
+      "end": 2550.0,
+      "duration": 4.549,
+      "text": "What is the thing which is just right?"
+    },
+    {
+      "index": 636,
+      "start": 2550.0,
+      "end": 2557.193,
+      "duration": 7.193,
+      "text": "Well, that's the thing you're going to study on the problem"
+    },
+    {
+      "index": 637,
+      "start": 2557.193,
+      "end": 2560.666,
+      "duration": 3.473,
+      "text": "set. So, just right is called"
+    },
+    {
+      "index": 638,
+      "start": 2560.666,
+      "end": 2566.248,
+      "duration": 5.582,
+      "text": "critically damped. It's what people aim for in"
+    },
+    {
+      "index": 639,
+      "start": 2566.248,
+      "end": 2571.457,
+      "duration": 5.209,
+      "text": "trying to damp motion that they don't want."
+    },
+    {
+      "index": 640,
+      "start": 2571.457,
+      "end": 2578.527,
+      "duration": 7.07,
+      "text": "Now, what's critically damped? It must be the case just in"
+    },
+    {
+      "index": 641,
+      "start": 2578.527,
+      "end": 2583.583,
+      "duration": 5.056,
+      "text": "between these two. Neither complex,"
+    },
+    {
+      "index": 642,
+      "start": 2583.583,
+      "end": 2588.53,
+      "duration": 4.947,
+      "text": "nor the roots different. It's the case of two equal"
+    },
+    {
+      "index": 643,
+      "start": 2588.53,
+      "end": 2591.893,
+      "duration": 3.363,
+      "text": "roots. So, r squared plus Ar plus B"
+    },
+    {
+      "index": 644,
+      "start": 2591.893,
+      "end": 2597.038,
+      "duration": 5.145,
+      "text": "equals zero has two equal roots."
+    },
+    {
+      "index": 645,
+      "start": 2597.038,
+      "end": 2600.501,
+      "duration": 3.463,
+      "text": "Now, that's a very special equation."
+    },
+    {
+      "index": 646,
+      "start": 2600.501,
+      "end": 2604.855,
+      "duration": 4.354,
+      "text": "Suppose we call the root, since all of these,"
+    },
+    {
+      "index": 647,
+      "start": 2604.855,
+      "end": 2610.0,
+      "duration": 5.145,
+      "text": "notice these roots in this physical case."
+    },
+    {
+      "index": 648,
+      "start": 2610.0,
+      "end": 2613.357,
+      "duration": 3.357,
+      "text": "The roots always turn out to be negative numbers,"
+    },
+    {
+      "index": 649,
+      "start": 2613.357,
+      "end": 2617.413,
+      "duration": 4.056,
+      "text": "or have a negative real part. I'm going to call the root a."
+    },
+    {
+      "index": 650,
+      "start": 2617.413,
+      "end": 2620.491,
+      "duration": 3.078,
+      "text": "So, r equals negative a, the root."
+    },
+    {
+      "index": 651,
+      "start": 2620.491,
+      "end": 2623.219,
+      "duration": 2.728,
+      "text": "a is understood to be a positive number."
+    },
+    {
+      "index": 652,
+      "start": 2623.219,
+      "end": 2625.877,
+      "duration": 2.658,
+      "text": "I want that root to be really negative."
+    },
+    {
+      "index": 653,
+      "start": 2625.877,
+      "end": 2630.073,
+      "duration": 4.196,
+      "text": "Then, the equation looks like, the characteristic equation is"
+    },
+    {
+      "index": 654,
+      "start": 2630.073,
+      "end": 2633.64,
+      "duration": 3.567,
+      "text": "going to be r plus a, right, if the root is negative"
+    },
+    {
+      "index": 655,
+      "start": 2633.64,
+      "end": 2637.207,
+      "duration": 3.567,
+      "text": "a, squared because it's a double root."
+    },
+    {
+      "index": 656,
+      "start": 2637.207,
+      "end": 2641.474,
+      "duration": 4.267,
+      "text": "And, that means the equation is of the form r squared plus two"
+    },
+    {
+      "index": 657,
+      "start": 2641.474,
+      "end": 2647.0,
+      "duration": 5.526,
+      "text": "times a r plus a squared equals zero."
+    },
+    {
+      "index": 658,
+      "start": 2647.0,
+      "end": 2650.536,
+      "duration": 3.536,
+      "text": "In other words, the ODE looked like this."
+    },
+    {
+      "index": 659,
+      "start": 2650.536,
+      "end": 2655.576,
+      "duration": 5.04,
+      "text": "The ODE looked like y double prime plus 2a y prime"
+    },
+    {
+      "index": 660,
+      "start": 2655.576,
+      "end": 2658.051,
+      "duration": 2.475,
+      "text": "plus, in other words,"
+    },
+    {
+      "index": 661,
+      "start": 2658.051,
+      "end": 2662.914,
+      "duration": 4.863,
+      "text": "the damping and the spring constant were related in this"
+    },
+    {
+      "index": 662,
+      "start": 2662.914,
+      "end": 2666.628,
+      "duration": 3.714,
+      "text": "special wake, that for a given value of the"
+    },
+    {
+      "index": 663,
+      "start": 2666.628,
+      "end": 2670.695,
+      "duration": 4.067,
+      "text": "spring constant, there was exactly one value of"
+    },
+    {
+      "index": 664,
+      "start": 2670.695,
+      "end": 2676.0,
+      "duration": 5.305,
+      "text": "the damping which produced this in between case."
+    },
+    {
+      "index": 665,
+      "start": 2676.0,
+      "end": 2679.539,
+      "duration": 3.539,
+      "text": "Now, what's the problem connected with it?"
+    },
+    {
+      "index": 666,
+      "start": 2679.539,
+      "end": 2682.302,
+      "duration": 2.763,
+      "text": "Well, the problem, unfortunately,"
+    },
+    {
+      "index": 667,
+      "start": 2682.302,
+      "end": 2686.618,
+      "duration": 4.316,
+      "text": "is staring us in the face when we want to solve it."
+    },
+    {
+      "index": 668,
+      "start": 2686.618,
+      "end": 2691.712,
+      "duration": 5.094,
+      "text": "The problem is that we have a solution, but it is y equals e"
+    },
+    {
+      "index": 669,
+      "start": 2691.712,
+      "end": 2696.892,
+      "duration": 5.18,
+      "text": "to the minus at. I don't have another root to"
+    },
+    {
+      "index": 670,
+      "start": 2696.892,
+      "end": 2701.5,
+      "duration": 4.608,
+      "text": "get another solution with. And, the question is,"
+    },
+    {
+      "index": 671,
+      "start": 2701.5,
+      "end": 2704.285,
+      "duration": 2.785,
+      "text": "where do I get that other solution from?"
+    },
+    {
+      "index": 672,
+      "start": 2704.285,
+      "end": 2706.785,
+      "duration": 2.5,
+      "text": "Now, there are three ways to get it."
+    },
+    {
+      "index": 673,
+      "start": 2706.785,
+      "end": 2709.285,
+      "duration": 2.5,
+      "text": "Well, there are four ways to get it."
+    },
+    {
+      "index": 674,
+      "start": 2709.285,
+      "end": 2712.571,
+      "duration": 3.286,
+      "text": "You look it up in Euler. That's the fourth way."
+    },
+    {
+      "index": 675,
+      "start": 2712.571,
+      "end": 2716.785,
+      "duration": 4.214,
+      "text": "That's the real way to do it. But, I've given you one way as"
+    },
+    {
+      "index": 676,
+      "start": 2716.785,
+      "end": 2719.428,
+      "duration": 2.643,
+      "text": "problem number one on the problem set."
+    },
+    {
+      "index": 677,
+      "start": 2719.428,
+      "end": 2723.285,
+      "duration": 3.857,
+      "text": "I've given you another way as problem number two on the"
+    },
+    {
+      "index": 678,
+      "start": 2723.285,
+      "end": 2726.071,
+      "duration": 2.786,
+      "text": "problem set. And, the third way you will"
+    },
+    {
+      "index": 679,
+      "start": 2726.071,
+      "end": 2728.928,
+      "duration": 2.857,
+      "text": "have to wait for about a week and a half."
+    },
+    {
+      "index": 680,
+      "start": 2728.928,
+      "end": 2733.0,
+      "duration": 4.072,
+      "text": "And, I will give you a third way, too."
+    },
+    {
+      "index": 681,
+      "start": 2733.0,
+      "end": 2736.78,
+      "duration": 3.78,
+      "text": "By that time, you won't want to see any more"
+    },
+    {
+      "index": 682,
+      "start": 2736.78,
+      "end": 2739.857,
+      "duration": 3.077,
+      "text": "ways. But, I'd like to introduce you"
+    },
+    {
+      "index": 683,
+      "start": 2739.857,
+      "end": 2743.901,
+      "duration": 4.044,
+      "text": "to the way on the problem set. And, it is this,"
+    },
+    {
+      "index": 684,
+      "start": 2743.901,
+      "end": 2747.769,
+      "duration": 3.868,
+      "text": "that if you know one solution to an equation,"
+    },
+    {
+      "index": 685,
+      "start": 2747.769,
+      "end": 2751.549,
+      "duration": 3.78,
+      "text": "which looks like a linear equation, in fact,"
+    },
+    {
+      "index": 686,
+      "start": 2751.549,
+      "end": 2754.274,
+      "duration": 2.725,
+      "text": "the piece can be functions of t."
+    },
+    {
+      "index": 687,
+      "start": 2754.274,
+      "end": 2759.637,
+      "duration": 5.363,
+      "text": "They don't have to be constant, so I'll use the books notation"
+    },
+    {
+      "index": 688,
+      "start": 2759.637,
+      "end": 2765.0,
+      "duration": 5.363,
+      "text": "with p's and q's. y prime plus q y equals zero."
+    },
+    {
+      "index": 689,
+      "start": 2765.0,
+      "end": 2768.888,
+      "duration": 3.888,
+      "text": "If you know one solution, there's an absolute,"
+    },
+    {
+      "index": 690,
+      "start": 2768.888,
+      "end": 2773.037,
+      "duration": 4.149,
+      "text": "ironclad guarantee, if you'll know that it's true"
+    },
+    {
+      "index": 691,
+      "start": 2773.037,
+      "end": 2777.098,
+      "duration": 4.061,
+      "text": "because I'm asking you to prove it for yourself."
+    },
+    {
+      "index": 692,
+      "start": 2777.098,
+      "end": 2781.592,
+      "duration": 4.494,
+      "text": "There's another of the form, having this as a factor,"
+    },
+    {
+      "index": 693,
+      "start": 2781.592,
+      "end": 2784.444,
+      "duration": 2.852,
+      "text": "one solution y one, let's call it,"
+    },
+    {
+      "index": 694,
+      "start": 2784.444,
+      "end": 2788.419,
+      "duration": 3.975,
+      "text": "y equals y1 u is another solution."
+    },
+    {
+      "index": 695,
+      "start": 2788.419,
+      "end": 2793.0,
+      "duration": 4.581,
+      "text": "And, you will be able to find u, I swear."
+    },
+    {
+      "index": 696,
+      "start": 2793.0,
+      "end": 2797.354,
+      "duration": 4.354,
+      "text": "Now, let's, in the remaining couple of minutes carry that out"
+    },
+    {
+      "index": 697,
+      "start": 2797.354,
+      "end": 2801.564,
+      "duration": 4.21,
+      "text": "just for this case because I want you to see how to arrange"
+    },
+    {
+      "index": 698,
+      "start": 2801.564,
+      "end": 2804.975,
+      "duration": 3.411,
+      "text": "the work nicely. And, I want you to arrange your"
+    },
+    {
+      "index": 699,
+      "start": 2804.975,
+      "end": 2808.532,
+      "duration": 3.557,
+      "text": "work when you do the problem sets in the same way."
+    },
+    {
+      "index": 700,
+      "start": 2808.532,
+      "end": 2812.306,
+      "duration": 3.774,
+      "text": "So, the way to do it is, the solution we know is e to"
+    },
+    {
+      "index": 701,
+      "start": 2812.306,
+      "end": 2816.298,
+      "duration": 3.992,
+      "text": "the minus at. So, we are going to look for a"
+    },
+    {
+      "index": 702,
+      "start": 2816.298,
+      "end": 2820.0,
+      "duration": 3.702,
+      "text": "solution to this differential equation."
+    },
+    {
+      "index": 703,
+      "start": 2820.0,
+      "end": 2822.97,
+      "duration": 2.97,
+      "text": "That's the differential equation."
+    },
+    {
+      "index": 704,
+      "start": 2822.97,
+      "end": 2828.633,
+      "duration": 5.663,
+      "text": "And, the solution we are going to look for is of the form e to"
+    },
+    {
+      "index": 705,
+      "start": 2828.633,
+      "end": 2832.068,
+      "duration": 3.435,
+      "text": "the negative at times u."
+    },
+    {
+      "index": 706,
+      "start": 2832.068,
+      "end": 2837.082,
+      "duration": 5.014,
+      "text": "Now, you're going to have to make calculation like this"
+    },
+    {
+      "index": 707,
+      "start": 2837.082,
+      "end": 2840.702,
+      "duration": 3.62,
+      "text": "several times in the course of the term."
+    },
+    {
+      "index": 708,
+      "start": 2840.702,
+      "end": 2843.488,
+      "duration": 2.786,
+      "text": "Do it this way. y prime equals,"
+    },
+    {
+      "index": 709,
+      "start": 2843.488,
+      "end": 2847.387,
+      "duration": 3.899,
+      "text": "differentiate, minus a e to the minus a t u"
+    },
+    {
+      "index": 710,
+      "start": 2847.387,
+      "end": 2853.236,
+      "duration": 5.849,
+      "text": "plus e to the minus a t u prime."
+    },
+    {
+      "index": 711,
+      "start": 2853.236,
+      "end": 2857.153,
+      "duration": 3.917,
+      "text": "And then, differentiate again."
+    },
+    {
+      "index": 712,
+      "start": 2857.153,
+      "end": 2859.736,
+      "duration": 2.583,
+      "text": "The answer will be a squared."
+    },
+    {
+      "index": 713,
+      "start": 2859.736,
+      "end": 2863.54,
+      "duration": 3.804,
+      "text": "You differentiate this: a squared e to the negative at"
+    },
+    {
+      "index": 714,
+      "start": 2863.54,
+      "end": 2867.057,
+      "duration": 3.517,
+      "text": "u. I'll have to do this a little"
+    },
+    {
+      "index": 715,
+      "start": 2867.057,
+      "end": 2870.215,
+      "duration": 3.158,
+      "text": "fast, but the next term will be, okay, minus,"
+    },
+    {
+      "index": 716,
+      "start": 2870.215,
+      "end": 2873.947,
+      "duration": 3.732,
+      "text": "so this times u prime, and from this are you going to"
+    },
+    {
+      "index": 717,
+      "start": 2873.947,
+      "end": 2877.464,
+      "duration": 3.517,
+      "text": "get another minus. So, combining what you get from"
+    },
+    {
+      "index": 718,
+      "start": 2877.464,
+      "end": 2880.693,
+      "duration": 3.229,
+      "text": "here, and here, you're going to get minus 2a e"
+    },
+    {
+      "index": 719,
+      "start": 2880.693,
+      "end": 2885.0,
+      "duration": 4.307,
+      "text": "to the minus a t u prime."
+    },
+    {
+      "index": 720,
+      "start": 2885.0,
+      "end": 2888.757,
+      "duration": 3.757,
+      "text": "And then, there is a final term, which comes from this,"
+    },
+    {
+      "index": 721,
+      "start": 2888.757,
+      "end": 2891.054,
+      "duration": 2.297,
+      "text": "e to the minus a t u double prime."
+    },
+    {
+      "index": 722,
+      "start": 2891.054,
+      "end": 2895.159,
+      "duration": 4.105,
+      "text": "Two of these, because of a piece here and a"
+    },
+    {
+      "index": 723,
+      "start": 2895.159,
+      "end": 2899.126,
+      "duration": 3.967,
+      "text": "piece here combine to make that. And now, to plug into the"
+    },
+    {
+      "index": 724,
+      "start": 2899.126,
+      "end": 2901.492,
+      "duration": 2.366,
+      "text": "equation, you multiply this by one."
+    },
+    {
+      "index": 725,
+      "start": 2901.492,
+      "end": 2904.484,
+      "duration": 2.992,
+      "text": "In other words, you don't do anything to it."
+    },
+    {
+      "index": 726,
+      "start": 2904.484,
+      "end": 2908.659,
+      "duration": 4.175,
+      "text": "You multiply this line by 2a, and you multiply that line by a"
+    },
+    {
+      "index": 727,
+      "start": 2908.659,
+      "end": 2912.0,
+      "duration": 3.341,
+      "text": "squared, and you add them."
+    },
+    {
+      "index": 728,
+      "start": 2912.0,
+      "end": 2914.673,
+      "duration": 2.673,
+      "text": "On the left-hand side, I get zero."
+    },
+    {
+      "index": 729,
+      "start": 2914.673,
+      "end": 2919.048,
+      "duration": 4.375,
+      "text": "What do I get on the right? Notice how I've arrange the"
+    },
+    {
+      "index": 730,
+      "start": 2919.048,
+      "end": 2923.341,
+      "duration": 4.293,
+      "text": "work so it adds nicely. This has a squared times this,"
+    },
+    {
+      "index": 731,
+      "start": 2923.341,
+      "end": 2927.392,
+      "duration": 4.051,
+      "text": "plus 2a times that, plus one times that makes zero."
+    },
+    {
+      "index": 732,
+      "start": 2927.392,
+      "end": 2930.956,
+      "duration": 3.564,
+      "text": "2a times this plus one times this makes zero."
+    },
+    {
+      "index": 733,
+      "start": 2930.956,
+      "end": 2936.06,
+      "duration": 5.104,
+      "text": "All that survives is e to the a t u double prime,"
+    },
+    {
+      "index": 734,
+      "start": 2936.06,
+      "end": 2939.382,
+      "duration": 3.322,
+      "text": "and therefore, e to the minus a t u double"
+    },
+    {
+      "index": 735,
+      "start": 2939.382,
+      "end": 2944.0,
+      "duration": 4.618,
+      "text": "prime is equal to zero."
+    },
+    {
+      "index": 736,
+      "start": 2944.0,
+      "end": 2946.981,
+      "duration": 2.981,
+      "text": "So, please tell me, what's u double prime?"
+    },
+    {
+      "index": 737,
+      "start": 2946.981,
+      "end": 2949.09,
+      "duration": 2.109,
+      "text": "It's zero. So, please tell me,"
+    },
+    {
+      "index": 738,
+      "start": 2949.09,
+      "end": 2951.927,
+      "duration": 2.837,
+      "text": "what's u? It's c1 t plus c2."
+    },
+    {
+      "index": 739,
+      "start": 2951.927,
+      "end": 2954.181,
+      "duration": 2.254,
+      "text": "Now, that gives me a whole"
+    },
+    {
+      "index": 740,
+      "start": 2954.181,
+      "end": 2957.818,
+      "duration": 3.637,
+      "text": "family of solutions. Just t would be enough because"
+    },
+    {
+      "index": 741,
+      "start": 2957.818,
+      "end": 2962.036,
+      "duration": 4.218,
+      "text": "all I am doing is looking for one solution that's different"
+    },
+    {
+      "index": 742,
+      "start": 2962.036,
+      "end": 2964.581,
+      "duration": 2.545,
+      "text": "from e to the minus a t."
+    },
+    {
+      "index": 743,
+      "start": 2964.581,
+      "end": 2968.218,
+      "duration": 3.637,
+      "text": "And, that solution, therefore, is y equals e to the"
+    },
+    {
+      "index": 744,
+      "start": 2968.218,
+      "end": 2972.0,
+      "duration": 3.782,
+      "text": "minus a t times t."
+    },
+    {
+      "index": 745,
+      "start": 2972.0,
+      "end": 2974.238,
+      "duration": 2.238,
+      "text": "And, there's my second solution."
+    },
+    {
+      "index": 746,
+      "start": 2974.238,
+      "end": 2977.992,
+      "duration": 3.754,
+      "text": "So, this is a solution of the critically damped case."
+    },
+    {
+      "index": 747,
+      "start": 2977.992,
+      "end": 2982.397,
+      "duration": 4.405,
+      "text": "And, you are going to use it in three or four of the different"
+    },
+    {
+      "index": 748,
+      "start": 2982.397,
+      "end": 2986.584,
+      "duration": 4.187,
+      "text": "problems on the problem set. But, I think you can deal with"
+    },
+    {
+      "index": 749,
+      "start": 2986.584,
+      "end": 2990.917,
+      "duration": 4.333,
+      "text": "virtually the whole problem set, except for the last problem,"
+    },
+    {
+      "index": 750,
+      "start": 2990.917,
+      "end": 2991.917,
+      "duration": 1.0,
+      "text": "now."
+    }
+  ],
+  "course": {
+    "category": "Mathematics",
+    "title": "Differential Equations",
+    "source_url": "https://www.youtube.com/playlist?list=PL64BDFBDA2AF24F7E"
+  }
+}

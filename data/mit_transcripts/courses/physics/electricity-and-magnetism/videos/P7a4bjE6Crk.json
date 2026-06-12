@@ -1,0 +1,6003 @@
+{
+  "video": {
+    "id": "P7a4bjE6Crk",
+    "title": "12. Iterated Expectations",
+    "url": "https://www.youtube.com/watch?v=P7a4bjE6Crk",
+    "channel": "MIT OpenCourseWare",
+    "duration": 2873,
+    "language": "en"
+  },
+  "segment_count": 855,
+  "segments": [
+    {
+      "index": 0,
+      "start": 0.04,
+      "end": 2.46,
+      "duration": 2.42,
+      "text": "The following content is provided under a Creative"
+    },
+    {
+      "index": 1,
+      "start": 2.46,
+      "end": 3.87,
+      "duration": 1.41,
+      "text": "Commons license."
+    },
+    {
+      "index": 2,
+      "start": 3.87,
+      "end": 6.91,
+      "duration": 3.04,
+      "text": "Your support will help MIT OpenCourseWare continue to"
+    },
+    {
+      "index": 3,
+      "start": 6.91,
+      "end": 10.56,
+      "duration": 3.65,
+      "text": "offer high quality educational resources for free."
+    },
+    {
+      "index": 4,
+      "start": 10.56,
+      "end": 13.46,
+      "duration": 2.9,
+      "text": "To make a donation or view additional materials from"
+    },
+    {
+      "index": 5,
+      "start": 13.46,
+      "end": 19.29,
+      "duration": 5.83,
+      "text": "hundreds of MIT courses, visit MIT OpenCourseWare at"
+    },
+    {
+      "index": 6,
+      "start": 19.29,
+      "end": 20.54,
+      "duration": 1.25,
+      "text": "ocw.mit.edu."
+    },
+    {
+      "index": 7,
+      "start": 22.648,
+      "end": 25.41,
+      "duration": 2.762,
+      "text": "JOHN TSITSIKLIS: So today we're going to finish with the"
+    },
+    {
+      "index": 8,
+      "start": 25.41,
+      "end": 28.24,
+      "duration": 2.83,
+      "text": "core material of this class."
+    },
+    {
+      "index": 9,
+      "start": 28.24,
+      "end": 30.98,
+      "duration": 2.74,
+      "text": "That is the material that has to do with probability theory"
+    },
+    {
+      "index": 10,
+      "start": 30.98,
+      "end": 31.69,
+      "duration": 0.71,
+      "text": "in general."
+    },
+    {
+      "index": 11,
+      "start": 31.69,
+      "end": 34.24,
+      "duration": 2.55,
+      "text": "And then for the rest of the semester we're going to look"
+    },
+    {
+      "index": 12,
+      "start": 34.24,
+      "end": 38.29,
+      "duration": 4.05,
+      "text": "at some special types of models, talk about inference."
+    },
+    {
+      "index": 13,
+      "start": 38.29,
+      "end": 40.97,
+      "duration": 2.68,
+      "text": "Well, there's also going to be a small module of core"
+    },
+    {
+      "index": 14,
+      "start": 40.97,
+      "end": 42.84,
+      "duration": 1.87,
+      "text": "material coming later."
+    },
+    {
+      "index": 15,
+      "start": 42.84,
+      "end": 46.94,
+      "duration": 4.1,
+      "text": "But today we're basically finishing chapter four."
+    },
+    {
+      "index": 16,
+      "start": 46.94,
+      "end": 50.8,
+      "duration": 3.86,
+      "text": "And what we're going to do is we're going to look at a"
+    },
+    {
+      "index": 17,
+      "start": 50.8,
+      "end": 53.72,
+      "duration": 2.92,
+      "text": "somewhat familiar concept, the concept of the conditional"
+    },
+    {
+      "index": 18,
+      "start": 53.72,
+      "end": 55.0,
+      "duration": 1.28,
+      "text": "expectation."
+    },
+    {
+      "index": 19,
+      "start": 55.0,
+      "end": 58.69,
+      "duration": 3.69,
+      "text": "But we're going to look at it from a slightly different"
+    },
+    {
+      "index": 20,
+      "start": 58.69,
+      "end": 62.84,
+      "duration": 4.15,
+      "text": "angle, from a slightly more sophisticated angle."
+    },
+    {
+      "index": 21,
+      "start": 62.84,
+      "end": 65.37,
+      "duration": 2.53,
+      "text": "And together with the conditional expectation we"
+    },
+    {
+      "index": 22,
+      "start": 65.37,
+      "end": 68.445,
+      "duration": 3.075,
+      "text": "will also talk about conditional variances."
+    },
+    {
+      "index": 23,
+      "start": 68.445,
+      "end": 71.84,
+      "duration": 3.395,
+      "text": "It's something that we're going to denote this way."
+    },
+    {
+      "index": 24,
+      "start": 71.84,
+      "end": 75.18,
+      "duration": 3.34,
+      "text": "And we're going to see what they are, and there are some"
+    },
+    {
+      "index": 25,
+      "start": 75.18,
+      "end": 77.82,
+      "duration": 2.64,
+      "text": "subtle concepts that are involved here."
+    },
+    {
+      "index": 26,
+      "start": 77.82,
+      "end": 80.78,
+      "duration": 2.96,
+      "text": "And we're going to apply some of the tools we're going to"
+    },
+    {
+      "index": 27,
+      "start": 80.78,
+      "end": 84.39,
+      "duration": 3.61,
+      "text": "develop to deal with a special type of situation in which"
+    },
+    {
+      "index": 28,
+      "start": 84.39,
+      "end": 86.66,
+      "duration": 2.27,
+      "text": "we're adding random variables."
+    },
+    {
+      "index": 29,
+      "start": 86.66,
+      "end": 91.86,
+      "duration": 5.2,
+      "text": "But we're adding a random number of random variables."
+    },
+    {
+      "index": 30,
+      "start": 91.86,
+      "end": 94.72,
+      "duration": 2.86,
+      "text": "OK, so let's start talking about conditional"
+    },
+    {
+      "index": 31,
+      "start": 94.72,
+      "end": 97.41,
+      "duration": 2.69,
+      "text": "expectations."
+    },
+    {
+      "index": 32,
+      "start": 97.41,
+      "end": 99.97,
+      "duration": 2.56,
+      "text": "I guess you know what they are."
+    },
+    {
+      "index": 33,
+      "start": 99.97,
+      "end": 103.66,
+      "duration": 3.69,
+      "text": "Suppose we are in the discrete the world. xy, or discrete"
+    },
+    {
+      "index": 34,
+      "start": 103.66,
+      "end": 105.59,
+      "duration": 1.93,
+      "text": "random variables."
+    },
+    {
+      "index": 35,
+      "start": 105.59,
+      "end": 109.34,
+      "duration": 3.75,
+      "text": "We defined the conditional expectation of x given that I"
+    },
+    {
+      "index": 36,
+      "start": 109.34,
+      "end": 112.48,
+      "duration": 3.14,
+      "text": "told you the value of the random variable y."
+    },
+    {
+      "index": 37,
+      "start": 112.48,
+      "end": 116.8,
+      "duration": 4.32,
+      "text": "And the way we define it is the same way as an ordinary"
+    },
+    {
+      "index": 38,
+      "start": 116.8,
+      "end": 121.02,
+      "duration": 4.22,
+      "text": "expectation, except that we're using the conditional PMF."
+    },
+    {
+      "index": 39,
+      "start": 121.02,
+      "end": 123.44,
+      "duration": 2.42,
+      "text": "So we're using the probabilities that apply to"
+    },
+    {
+      "index": 40,
+      "start": 123.44,
+      "end": 126.91,
+      "duration": 3.47,
+      "text": "the new universe where we are told the value of the random"
+    },
+    {
+      "index": 41,
+      "start": 126.91,
+      "end": 128.289,
+      "duration": 1.379,
+      "text": "variable y."
+    },
+    {
+      "index": 42,
+      "start": 128.289,
+      "end": 132.05,
+      "duration": 3.761,
+      "text": "So this is still a familiar concept so far."
+    },
+    {
+      "index": 43,
+      "start": 132.05,
+      "end": 134.72,
+      "duration": 2.67,
+      "text": "If we're dealing with the continuous random variable x"
+    },
+    {
+      "index": 44,
+      "start": 134.72,
+      "end": 137.17,
+      "duration": 2.45,
+      "text": "the formula is the same, except that here we have an"
+    },
+    {
+      "index": 45,
+      "start": 137.17,
+      "end": 141.45,
+      "duration": 4.28,
+      "text": "integral, and we have to use the conditional density"
+    },
+    {
+      "index": 46,
+      "start": 141.45,
+      "end": 145.02,
+      "duration": 3.57,
+      "text": "function of x."
+    },
+    {
+      "index": 47,
+      "start": 145.02,
+      "end": 148.77,
+      "duration": 3.75,
+      "text": "Now what I'm going to do, I want to introduce it gently"
+    },
+    {
+      "index": 48,
+      "start": 148.77,
+      "end": 152.2,
+      "duration": 3.43,
+      "text": "through the example that we talked about last time."
+    },
+    {
+      "index": 49,
+      "start": 152.2,
+      "end": 155.29,
+      "duration": 3.09,
+      "text": "So last time we talked about having a stick that has a"
+    },
+    {
+      "index": 50,
+      "start": 155.29,
+      "end": 156.77,
+      "duration": 1.48,
+      "text": "certain length."
+    },
+    {
+      "index": 51,
+      "start": 156.77,
+      "end": 161.95,
+      "duration": 5.18,
+      "text": "And we take that stick, and we break it at some point that we"
+    },
+    {
+      "index": 52,
+      "start": 161.95,
+      "end": 163.79,
+      "duration": 1.84,
+      "text": "choose uniformly at random."
+    },
+    {
+      "index": 53,
+      "start": 163.79,
+      "end": 169.39,
+      "duration": 5.6,
+      "text": "And let's denote why the place where we chose to break it."
+    },
+    {
+      "index": 54,
+      "start": 169.39,
+      "end": 172.75,
+      "duration": 3.36,
+      "text": "Having chosen y, then we're left with a"
+    },
+    {
+      "index": 55,
+      "start": 172.75,
+      "end": 173.93,
+      "duration": 1.18,
+      "text": "piece of the stick."
+    },
+    {
+      "index": 56,
+      "start": 173.93,
+      "end": 177.75,
+      "duration": 3.82,
+      "text": "And I'm going to choose a place to break it once more"
+    },
+    {
+      "index": 57,
+      "start": 177.75,
+      "end": 181.33,
+      "duration": 3.58,
+      "text": "uniformly at random between 0 and y."
+    },
+    {
+      "index": 58,
+      "start": 181.33,
+      "end": 184.17,
+      "duration": 2.84,
+      "text": "So this is the second place at which we are going to break"
+    },
+    {
+      "index": 59,
+      "start": 184.17,
+      "end": 187.9,
+      "duration": 3.73,
+      "text": "it, and we call that place x."
+    },
+    {
+      "index": 60,
+      "start": 187.9,
+      "end": 192.04,
+      "duration": 4.14,
+      "text": "OK, so what's the conditional expectation of x if I tell you"
+    },
+    {
+      "index": 61,
+      "start": 192.04,
+      "end": 193.63,
+      "duration": 1.59,
+      "text": "the value of y?"
+    },
+    {
+      "index": 62,
+      "start": 193.63,
+      "end": 196.74,
+      "duration": 3.11,
+      "text": "I tell you that capital Y happens to take a specific"
+    },
+    {
+      "index": 63,
+      "start": 196.74,
+      "end": 198.8,
+      "duration": 2.06,
+      "text": "numerical value."
+    },
+    {
+      "index": 64,
+      "start": 198.8,
+      "end": 202.77,
+      "duration": 3.97,
+      "text": "So this capital Y is now a specific numerical value, x is"
+    },
+    {
+      "index": 65,
+      "start": 202.77,
+      "end": 205.28,
+      "duration": 2.51,
+      "text": "chosen uniformly over this range."
+    },
+    {
+      "index": 66,
+      "start": 205.28,
+      "end": 209.78,
+      "duration": 4.5,
+      "text": "So the expected value of x is going to be half of this range"
+    },
+    {
+      "index": 67,
+      "start": 209.78,
+      "end": 210.81,
+      "duration": 1.03,
+      "text": "between 0 and y."
+    },
+    {
+      "index": 68,
+      "start": 210.81,
+      "end": 216.85,
+      "duration": 6.04,
+      "text": "So the conditional expectation is little y over 2."
+    },
+    {
+      "index": 69,
+      "start": 216.85,
+      "end": 220.21,
+      "duration": 3.36,
+      "text": "The important thing to realize here is that this"
+    },
+    {
+      "index": 70,
+      "start": 220.21,
+      "end": 222.17,
+      "duration": 1.96,
+      "text": "quantity is a number."
+    },
+    {
+      "index": 71,
+      "start": 222.17,
+      "end": 225.57,
+      "duration": 3.4,
+      "text": "I told you that the random variable took a certain"
+    },
+    {
+      "index": 72,
+      "start": 225.57,
+      "end": 229.17,
+      "duration": 3.6,
+      "text": "numerical value, let's say 3.5."
+    },
+    {
+      "index": 73,
+      "start": 229.17,
+      "end": 232.78,
+      "duration": 3.61,
+      "text": "And then you tell me given that the random variable took"
+    },
+    {
+      "index": 74,
+      "start": 232.78,
+      "end": 239.94,
+      "duration": 7.16,
+      "text": "the numerical value 3.5 the expected value of x is 1.75."
+    },
+    {
+      "index": 75,
+      "start": 239.94,
+      "end": 244.08,
+      "duration": 4.14,
+      "text": "So this is an equality between numbers."
+    },
+    {
+      "index": 76,
+      "start": 244.08,
+      "end": 248.11,
+      "duration": 4.03,
+      "text": "On the other hand, before you do the experiment you don't"
+    },
+    {
+      "index": 77,
+      "start": 248.11,
+      "end": 252.16,
+      "duration": 4.05,
+      "text": "know what y is going to turn out to be."
+    },
+    {
+      "index": 78,
+      "start": 252.16,
+      "end": 255.68,
+      "duration": 3.52,
+      "text": "So this little y is the numerical value that has been"
+    },
+    {
+      "index": 79,
+      "start": 255.68,
+      "end": 258.99,
+      "duration": 3.31,
+      "text": "observed when you start doing the experiments and you"
+    },
+    {
+      "index": 80,
+      "start": 258.99,
+      "end": 262.7,
+      "duration": 3.71,
+      "text": "observe the value of capital Y. So in some sense this"
+    },
+    {
+      "index": 81,
+      "start": 262.7,
+      "end": 267.77,
+      "duration": 5.07,
+      "text": "quantity is not known ahead of time, it is random itself."
+    },
+    {
+      "index": 82,
+      "start": 267.77,
+      "end": 273.67,
+      "duration": 5.9,
+      "text": "So maybe we can start thinking of it as a random variable."
+    },
+    {
+      "index": 83,
+      "start": 273.67,
+      "end": 277.01,
+      "duration": 3.34,
+      "text": "So to put it differently, before we do the experiment I"
+    },
+    {
+      "index": 84,
+      "start": 277.01,
+      "end": 281.03,
+      "duration": 4.02,
+      "text": "ask you what's the expected value of x given y?"
+    },
+    {
+      "index": 85,
+      "start": 281.03,
+      "end": 284.74,
+      "duration": 3.71,
+      "text": "You're going to answer me well I don't know, it depends on"
+    },
+    {
+      "index": 86,
+      "start": 284.74,
+      "end": 287.58,
+      "duration": 2.84,
+      "text": "what y is going to turn out to be."
+    },
+    {
+      "index": 87,
+      "start": 287.58,
+      "end": 292.69,
+      "duration": 5.11,
+      "text": "So the expected value of x given y itself can be viewed"
+    },
+    {
+      "index": 88,
+      "start": 292.69,
+      "end": 296.54,
+      "duration": 3.85,
+      "text": "as a random variable, because it depends on the random"
+    },
+    {
+      "index": 89,
+      "start": 296.54,
+      "end": 298.33,
+      "duration": 1.79,
+      "text": "variable capital Y."
+    },
+    {
+      "index": 90,
+      "start": 298.33,
+      "end": 302.08,
+      "duration": 3.75,
+      "text": "So hidden here there's some kind of statement about random"
+    },
+    {
+      "index": 91,
+      "start": 302.08,
+      "end": 304.81,
+      "duration": 2.73,
+      "text": "variables instead of numbers."
+    },
+    {
+      "index": 92,
+      "start": 304.81,
+      "end": 307.77,
+      "duration": 2.96,
+      "text": "And that statement about random variables, we"
+    },
+    {
+      "index": 93,
+      "start": 307.77,
+      "end": 309.66,
+      "duration": 1.89,
+      "text": "write it this way."
+    },
+    {
+      "index": 94,
+      "start": 309.66,
+      "end": 312.77,
+      "duration": 3.11,
+      "text": "By thinking of the expected value, the conditional"
+    },
+    {
+      "index": 95,
+      "start": 312.77,
+      "end": 317.33,
+      "duration": 4.56,
+      "text": "expectation, as a random variable instead of a number."
+    },
+    {
+      "index": 96,
+      "start": 317.33,
+      "end": 320.38,
+      "duration": 3.05,
+      "text": "It's a random variable when we do not specify a specific"
+    },
+    {
+      "index": 97,
+      "start": 320.38,
+      "end": 323.41,
+      "duration": 3.03,
+      "text": "number, but we think of it as an abstract object."
+    },
+    {
+      "index": 98,
+      "start": 323.41,
+      "end": 329.56,
+      "duration": 6.15,
+      "text": "The expected value of x given the random variable y is the"
+    },
+    {
+      "index": 99,
+      "start": 329.56,
+      "end": 334.39,
+      "duration": 4.83,
+      "text": "random variable y over 2 no matter what capital Y"
+    },
+    {
+      "index": 100,
+      "start": 334.39,
+      "end": 337.09,
+      "duration": 2.7,
+      "text": "turns out to be."
+    },
+    {
+      "index": 101,
+      "start": 337.09,
+      "end": 339.53,
+      "duration": 2.44,
+      "text": "So we turn and take a statement that deals with"
+    },
+    {
+      "index": 102,
+      "start": 339.53,
+      "end": 343.46,
+      "duration": 3.93,
+      "text": "equality of two numbers, and we make it a statement that's"
+    },
+    {
+      "index": 103,
+      "start": 343.46,
+      "end": 346.74,
+      "duration": 3.28,
+      "text": "an equality between two random variables."
+    },
+    {
+      "index": 104,
+      "start": 346.74,
+      "end": 349.91,
+      "duration": 3.17,
+      "text": "OK so this is clearly a random variable because"
+    },
+    {
+      "index": 105,
+      "start": 349.91,
+      "end": 352.33,
+      "duration": 2.42,
+      "text": "capital Y is random."
+    },
+    {
+      "index": 106,
+      "start": 352.33,
+      "end": 354.17,
+      "duration": 1.84,
+      "text": "What exactly is this object?"
+    },
+    {
+      "index": 107,
+      "start": 354.17,
+      "end": 357.13,
+      "duration": 2.96,
+      "text": "I didn't yet define it for you formally."
+    },
+    {
+      "index": 108,
+      "start": 357.13,
+      "end": 362.15,
+      "duration": 5.02,
+      "text": "So let's now give the formal definition of this object"
+    },
+    {
+      "index": 109,
+      "start": 362.15,
+      "end": 364.57,
+      "duration": 2.42,
+      "text": "that's going to be denoted this way."
+    },
+    {
+      "index": 110,
+      "start": 364.57,
+      "end": 369.4,
+      "duration": 4.83,
+      "text": "The conditional expectation of x given the random variable y"
+    },
+    {
+      "index": 111,
+      "start": 369.4,
+      "end": 372.83,
+      "duration": 3.43,
+      "text": "is a random variable."
+    },
+    {
+      "index": 112,
+      "start": 372.83,
+      "end": 374.9,
+      "duration": 2.07,
+      "text": "Which random variable is it?"
+    },
+    {
+      "index": 113,
+      "start": 374.9,
+      "end": 379.67,
+      "duration": 4.77,
+      "text": "It's the random variable that takes this specific numerical"
+    },
+    {
+      "index": 114,
+      "start": 379.67,
+      "end": 384.33,
+      "duration": 4.66,
+      "text": "value whenever capital Y happens to take the specific"
+    },
+    {
+      "index": 115,
+      "start": 384.33,
+      "end": 386.48,
+      "duration": 2.15,
+      "text": "numerical value little y."
+    },
+    {
+      "index": 116,
+      "start": 386.48,
+      "end": 390.01,
+      "duration": 3.53,
+      "text": "In particular, this is a random variable, which is a"
+    },
+    {
+      "index": 117,
+      "start": 390.01,
+      "end": 393.84,
+      "duration": 3.83,
+      "text": "function of the random variable capital Y. In this"
+    },
+    {
+      "index": 118,
+      "start": 393.84,
+      "end": 396.68,
+      "duration": 2.84,
+      "text": "instance, it's given by a simple formula in terms of"
+    },
+    {
+      "index": 119,
+      "start": 396.68,
+      "end": 399.54,
+      "duration": 2.86,
+      "text": "capital Y. In other situations it might be a"
+    },
+    {
+      "index": 120,
+      "start": 399.54,
+      "end": 401.52,
+      "duration": 1.98,
+      "text": "more complicated formula."
+    },
+    {
+      "index": 121,
+      "start": 401.52,
+      "end": 404.68,
+      "duration": 3.16,
+      "text": "So again, to summarize, it's a random."
+    },
+    {
+      "index": 122,
+      "start": 404.68,
+      "end": 408.53,
+      "duration": 3.85,
+      "text": "The conditional expectation can be thought of as a random"
+    },
+    {
+      "index": 123,
+      "start": 408.53,
+      "end": 413.04,
+      "duration": 4.51,
+      "text": "variable instead of something that's just a number."
+    },
+    {
+      "index": 124,
+      "start": 413.04,
+      "end": 415.94,
+      "duration": 2.9,
+      "text": "So in any specific context when you're given the value of"
+    },
+    {
+      "index": 125,
+      "start": 415.94,
+      "end": 419.11,
+      "duration": 3.17,
+      "text": "capital Y the conditional expectation becomes a number."
+    },
+    {
+      "index": 126,
+      "start": 419.11,
+      "end": 422.89,
+      "duration": 3.78,
+      "text": "This is the realized value of this random variable."
+    },
+    {
+      "index": 127,
+      "start": 422.89,
+      "end": 426.26,
+      "duration": 3.37,
+      "text": "But before the experiment starts, before you know what"
+    },
+    {
+      "index": 128,
+      "start": 426.26,
+      "end": 430.14,
+      "duration": 3.88,
+      "text": "capital Y is going to be, all that you can say is that the"
+    },
+    {
+      "index": 129,
+      "start": 430.14,
+      "end": 434.32,
+      "duration": 4.18,
+      "text": "conditional expectation is going to be 1/2 of whatever"
+    },
+    {
+      "index": 130,
+      "start": 434.32,
+      "end": 436.84,
+      "duration": 2.52,
+      "text": "capital Y turns out to be."
+    },
+    {
+      "index": 131,
+      "start": 436.84,
+      "end": 440.27,
+      "duration": 3.43,
+      "text": "This is a pretty subtle concept, it's an abstraction,"
+    },
+    {
+      "index": 132,
+      "start": 440.27,
+      "end": 442.99,
+      "duration": 2.72,
+      "text": "but it's a useful abstraction."
+    },
+    {
+      "index": 133,
+      "start": 442.99,
+      "end": 449.44,
+      "duration": 6.45,
+      "text": "And we're going to see today how to use it."
+    },
+    {
+      "index": 134,
+      "start": 449.44,
+      "end": 452.94,
+      "duration": 3.5,
+      "text": "All right, I have made the point that the conditional"
+    },
+    {
+      "index": 135,
+      "start": 452.94,
+      "end": 457.2,
+      "duration": 4.26,
+      "text": "expectation, the random variable that takes these"
+    },
+    {
+      "index": 136,
+      "start": 457.2,
+      "end": 460.49,
+      "duration": 3.29,
+      "text": "numerical values is a random variable."
+    },
+    {
+      "index": 137,
+      "start": 460.49,
+      "end": 463.09,
+      "duration": 2.6,
+      "text": "If it is a random variable this means that it has an"
+    },
+    {
+      "index": 138,
+      "start": 463.09,
+      "end": 465.71,
+      "duration": 2.62,
+      "text": "expectation of its own."
+    },
+    {
+      "index": 139,
+      "start": 465.71,
+      "end": 468.59,
+      "duration": 2.88,
+      "text": "So let's start thinking what the expectation of the"
+    },
+    {
+      "index": 140,
+      "start": 468.59,
+      "end": 473.432,
+      "duration": 4.842,
+      "text": "conditional expectation is going to turn out to be."
+    },
+    {
+      "index": 141,
+      "start": 473.432,
+      "end": 479.21,
+      "duration": 5.778,
+      "text": "OK, so the conditional expectation is a random"
+    },
+    {
+      "index": 142,
+      "start": 479.21,
+      "end": 483.03,
+      "duration": 3.82,
+      "text": "variable, and in general it's some function of the random"
+    },
+    {
+      "index": 143,
+      "start": 483.03,
+      "end": 485.465,
+      "duration": 2.435,
+      "text": "variable y that we are observing."
+    },
+    {
+      "index": 144,
+      "start": 487.97,
+      "end": 493.91,
+      "duration": 5.94,
+      "text": "In terms of numerical values if capital Y happens to take a"
+    },
+    {
+      "index": 145,
+      "start": 493.91,
+      "end": 497.49,
+      "duration": 3.58,
+      "text": "specific numerical value then the conditional expectation"
+    },
+    {
+      "index": 146,
+      "start": 497.49,
+      "end": 500.83,
+      "duration": 3.34,
+      "text": "also takes a specific numerical value, and we use"
+    },
+    {
+      "index": 147,
+      "start": 500.83,
+      "end": 502.63,
+      "duration": 1.8,
+      "text": "the same function to evaluate it."
+    },
+    {
+      "index": 148,
+      "start": 502.63,
+      "end": 505.77,
+      "duration": 3.14,
+      "text": "The difference here is that this is an equality of random"
+    },
+    {
+      "index": 149,
+      "start": 505.77,
+      "end": 509.44,
+      "duration": 3.67,
+      "text": "variables, this is an equality between numbers."
+    },
+    {
+      "index": 150,
+      "start": 509.44,
+      "end": 513.12,
+      "duration": 3.68,
+      "text": "Now if we want to calculate the expected value of the"
+    },
+    {
+      "index": 151,
+      "start": 513.12,
+      "end": 518.539,
+      "duration": 5.419,
+      "text": "conditional expectation we're basically talking about the"
+    },
+    {
+      "index": 152,
+      "start": 518.539,
+      "end": 524.08,
+      "duration": 5.541,
+      "text": "expected value of a function of a random variable."
+    },
+    {
+      "index": 153,
+      "start": 524.08,
+      "end": 528.62,
+      "duration": 4.54,
+      "text": "And we know how to calculate expected values of a function."
+    },
+    {
+      "index": 154,
+      "start": 528.62,
+      "end": 534.33,
+      "duration": 5.71,
+      "text": "If we are in the discrete case, for example, this would"
+    },
+    {
+      "index": 155,
+      "start": 534.33,
+      "end": 542.69,
+      "duration": 8.36,
+      "text": "be a sum over all y's of the function who's expected value"
+    },
+    {
+      "index": 156,
+      "start": 542.69,
+      "end": 549.58,
+      "duration": 6.89,
+      "text": "we're taking times the probability that y takes on a"
+    },
+    {
+      "index": 157,
+      "start": 549.58,
+      "end": 551.94,
+      "duration": 2.36,
+      "text": "specific numerical value."
+    },
+    {
+      "index": 158,
+      "start": 551.94,
+      "end": 556.36,
+      "duration": 4.42,
+      "text": "OK, but let's remember what g is."
+    },
+    {
+      "index": 159,
+      "start": 556.36,
+      "end": 562.69,
+      "duration": 6.33,
+      "text": "So g is the numerical value of the conditional"
+    },
+    {
+      "index": 160,
+      "start": 562.69,
+      "end": 565.3,
+      "duration": 2.61,
+      "text": "expectation of x with y."
+    },
+    {
+      "index": 161,
+      "start": 569.53,
+      "end": 573.45,
+      "duration": 3.92,
+      "text": "And now when you see this expression you recognize it."
+    },
+    {
+      "index": 162,
+      "start": 573.45,
+      "end": 575.63,
+      "duration": 2.18,
+      "text": "This is the expression that we get in the"
+    },
+    {
+      "index": 163,
+      "start": 575.63,
+      "end": 577.19,
+      "duration": 1.56,
+      "text": "total expectation theorem."
+    },
+    {
+      "index": 164,
+      "start": 581.3,
+      "end": 582.795,
+      "duration": 1.495,
+      "text": "Did I miss something?"
+    },
+    {
+      "index": 165,
+      "start": 585.57,
+      "end": 588.7,
+      "duration": 3.13,
+      "text": "Yes, in the total expectation theorem to find the expected"
+    },
+    {
+      "index": 166,
+      "start": 588.7,
+      "end": 592.72,
+      "duration": 4.02,
+      "text": "value of x, we divide the world into different scenarios"
+    },
+    {
+      "index": 167,
+      "start": 592.72,
+      "end": 595.97,
+      "duration": 3.25,
+      "text": "depending on what y happens."
+    },
+    {
+      "index": 168,
+      "start": 595.97,
+      "end": 599.11,
+      "duration": 3.14,
+      "text": "We calculate the expectation in each one of the possible"
+    },
+    {
+      "index": 169,
+      "start": 599.11,
+      "end": 601.75,
+      "duration": 2.64,
+      "text": "worlds, and we take the weighted average."
+    },
+    {
+      "index": 170,
+      "start": 601.75,
+      "end": 604.77,
+      "duration": 3.02,
+      "text": "So this is a formula that you have seen before, and you"
+    },
+    {
+      "index": 171,
+      "start": 604.77,
+      "end": 608.61,
+      "duration": 3.84,
+      "text": "recognize that this is the expected value of x."
+    },
+    {
+      "index": 172,
+      "start": 608.61,
+      "end": 613.28,
+      "duration": 4.67,
+      "text": "So this is a longer, more detailed derivation of what I"
+    },
+    {
+      "index": 173,
+      "start": 613.28,
+      "end": 617.77,
+      "duration": 4.49,
+      "text": "had written up here, but the important thing to keep in"
+    },
+    {
+      "index": 174,
+      "start": 617.77,
+      "end": 622.79,
+      "duration": 5.02,
+      "text": "mind is the moral of the story, the punchline."
+    },
+    {
+      "index": 175,
+      "start": 622.79,
+      "end": 626.64,
+      "duration": 3.85,
+      "text": "The expected value of the conditional expectation is the"
+    },
+    {
+      "index": 176,
+      "start": 626.64,
+      "end": 627.89,
+      "duration": 1.25,
+      "text": "expectation itself."
+    },
+    {
+      "index": 177,
+      "start": 630.71,
+      "end": 635.03,
+      "duration": 4.32,
+      "text": "So this is just our total expectation theorem, but"
+    },
+    {
+      "index": 178,
+      "start": 635.03,
+      "end": 637.7,
+      "duration": 2.67,
+      "text": "written in more abstract notation."
+    },
+    {
+      "index": 179,
+      "start": 637.7,
+      "end": 640.035,
+      "duration": 2.335,
+      "text": "And it comes handy to have this more abstract notation,"
+    },
+    {
+      "index": 180,
+      "start": 640.035,
+      "end": 643.57,
+      "duration": 3.535,
+      "text": "as as we're going to see in a while."
+    },
+    {
+      "index": 181,
+      "start": 643.57,
+      "end": 647.32,
+      "duration": 3.75,
+      "text": "OK, we can apply this to our stick example."
+    },
+    {
+      "index": 182,
+      "start": 647.32,
+      "end": 650.22,
+      "duration": 2.9,
+      "text": "If we want to find the expected value of x how much"
+    },
+    {
+      "index": 183,
+      "start": 650.22,
+      "end": 653.11,
+      "duration": 2.89,
+      "text": "of the stick is left at the end?"
+    },
+    {
+      "index": 184,
+      "start": 653.11,
+      "end": 657.37,
+      "duration": 4.26,
+      "text": "We can calculate it using this law of iterated expectations."
+    },
+    {
+      "index": 185,
+      "start": 657.37,
+      "end": 660.19,
+      "duration": 2.82,
+      "text": "It's the expected value of the conditional expectation."
+    },
+    {
+      "index": 186,
+      "start": 660.19,
+      "end": 663.79,
+      "duration": 3.6,
+      "text": "We know that the conditional expectation is y over 2."
+    },
+    {
+      "index": 187,
+      "start": 663.79,
+      "end": 670.73,
+      "duration": 6.94,
+      "text": "So expected value of y is l over 2, because y is uniform"
+    },
+    {
+      "index": 188,
+      "start": 670.73,
+      "end": 672.83,
+      "duration": 2.1,
+      "text": "so we get l over 4."
+    },
+    {
+      "index": 189,
+      "start": 672.83,
+      "end": 675.44,
+      "duration": 2.61,
+      "text": "So this gives us the same answer that we derived last"
+    },
+    {
+      "index": 190,
+      "start": 675.44,
+      "end": 678.21,
+      "duration": 2.77,
+      "text": "time in a rather long way."
+    },
+    {
+      "index": 191,
+      "start": 684.47,
+      "end": 687.75,
+      "duration": 3.28,
+      "text": "All right, now that we have mastered conditional"
+    },
+    {
+      "index": 192,
+      "start": 687.75,
+      "end": 693.1,
+      "duration": 5.35,
+      "text": "expectations, let's raise the bar a little more and talk"
+    },
+    {
+      "index": 193,
+      "start": 693.1,
+      "end": 695.59,
+      "duration": 2.49,
+      "text": "about conditional variances."
+    },
+    {
+      "index": 194,
+      "start": 695.59,
+      "end": 698.75,
+      "duration": 3.16,
+      "text": "So the conditional expectation is the mean value, or the"
+    },
+    {
+      "index": 195,
+      "start": 698.75,
+      "end": 701.38,
+      "duration": 2.63,
+      "text": "expected value, in a conditional universe where"
+    },
+    {
+      "index": 196,
+      "start": 701.38,
+      "end": 703.45,
+      "duration": 2.07,
+      "text": "you're told the value of y."
+    },
+    {
+      "index": 197,
+      "start": 703.45,
+      "end": 707.27,
+      "duration": 3.82,
+      "text": "In that same conditional universe you can talk about"
+    },
+    {
+      "index": 198,
+      "start": 707.27,
+      "end": 711.36,
+      "duration": 4.09,
+      "text": "the conditional distribution of x, which has a mean--"
+    },
+    {
+      "index": 199,
+      "start": 711.36,
+      "end": 712.81,
+      "duration": 1.45,
+      "text": "the conditional expectation--"
+    },
+    {
+      "index": 200,
+      "start": 712.81,
+      "end": 714.14,
+      "duration": 1.33,
+      "text": "but the conditional distribution of"
+    },
+    {
+      "index": 201,
+      "start": 714.14,
+      "end": 716.13,
+      "duration": 1.99,
+      "text": "x also has a variance."
+    },
+    {
+      "index": 202,
+      "start": 716.13,
+      "end": 718.73,
+      "duration": 2.6,
+      "text": "So we can talk about the variance of x in that"
+    },
+    {
+      "index": 203,
+      "start": 718.73,
+      "end": 721.5,
+      "duration": 2.77,
+      "text": "conditional universe."
+    },
+    {
+      "index": 204,
+      "start": 721.5,
+      "end": 727.39,
+      "duration": 5.89,
+      "text": "The conditional variance as a number is the natural thing."
+    },
+    {
+      "index": 205,
+      "start": 727.39,
+      "end": 731.68,
+      "duration": 4.29,
+      "text": "It's the variance of x, except that all the calculations are"
+    },
+    {
+      "index": 206,
+      "start": 731.68,
+      "end": 733.79,
+      "duration": 2.11,
+      "text": "done in the conditional universe."
+    },
+    {
+      "index": 207,
+      "start": 733.79,
+      "end": 739.94,
+      "duration": 6.15,
+      "text": "In the conditional universe the expected value of x is the"
+    },
+    {
+      "index": 208,
+      "start": 739.94,
+      "end": 741.74,
+      "duration": 1.8,
+      "text": "conditional expectation."
+    },
+    {
+      "index": 209,
+      "start": 741.74,
+      "end": 744.53,
+      "duration": 2.79,
+      "text": "This is the distance from the mean in the conditional"
+    },
+    {
+      "index": 210,
+      "start": 744.53,
+      "end": 746.31,
+      "duration": 1.78,
+      "text": "universe squared."
+    },
+    {
+      "index": 211,
+      "start": 746.31,
+      "end": 750.08,
+      "duration": 3.77,
+      "text": "And we take the average value of the squared distance, but"
+    },
+    {
+      "index": 212,
+      "start": 750.08,
+      "end": 752.66,
+      "duration": 2.58,
+      "text": "calculate it again using the probabilities that apply in"
+    },
+    {
+      "index": 213,
+      "start": 752.66,
+      "end": 755.24,
+      "duration": 2.58,
+      "text": "the conditional universe."
+    },
+    {
+      "index": 214,
+      "start": 755.24,
+      "end": 758.02,
+      "duration": 2.78,
+      "text": "This is an equality between numbers."
+    },
+    {
+      "index": 215,
+      "start": 758.02,
+      "end": 763.72,
+      "duration": 5.7,
+      "text": "I tell you the value of y, once you know that value for y"
+    },
+    {
+      "index": 216,
+      "start": 763.72,
+      "end": 767.73,
+      "duration": 4.01,
+      "text": "you can go ahead and plot the conditional distribution of x."
+    },
+    {
+      "index": 217,
+      "start": 767.73,
+      "end": 770.09,
+      "duration": 2.36,
+      "text": "And for that conditional distribution you can calculate"
+    },
+    {
+      "index": 218,
+      "start": 770.09,
+      "end": 772.89,
+      "duration": 2.8,
+      "text": "the number which is the variance of x in that"
+    },
+    {
+      "index": 219,
+      "start": 772.89,
+      "end": 774.65,
+      "duration": 1.76,
+      "text": "conditional universe."
+    },
+    {
+      "index": 220,
+      "start": 774.65,
+      "end": 777.82,
+      "duration": 3.17,
+      "text": "So now let's repeat the mental gymnastics from the previous"
+    },
+    {
+      "index": 221,
+      "start": 777.82,
+      "end": 783.56,
+      "duration": 5.74,
+      "text": "slide, and abstract things, and define a random variable--"
+    },
+    {
+      "index": 222,
+      "start": 783.56,
+      "end": 786.08,
+      "duration": 2.52,
+      "text": "the conditional variance."
+    },
+    {
+      "index": 223,
+      "start": 786.08,
+      "end": 788.9,
+      "duration": 2.82,
+      "text": "And it's going to be a random variable because we leave the"
+    },
+    {
+      "index": 224,
+      "start": 788.9,
+      "end": 792.01,
+      "duration": 3.11,
+      "text": "numerical value of capital Y unspecified."
+    },
+    {
+      "index": 225,
+      "start": 792.01,
+      "end": 795.67,
+      "duration": 3.66,
+      "text": "So ahead of time we don't know what capital Y is going to be,"
+    },
+    {
+      "index": 226,
+      "start": 795.67,
+      "end": 798.86,
+      "duration": 3.19,
+      "text": "and because of that we don't know ahead of time what the"
+    },
+    {
+      "index": 227,
+      "start": 798.86,
+      "end": 800.87,
+      "duration": 2.01,
+      "text": "conditional variance is going to be."
+    },
+    {
+      "index": 228,
+      "start": 800.87,
+      "end": 804.5,
+      "duration": 3.63,
+      "text": "So before the experiment starts if I ask you what's the"
+    },
+    {
+      "index": 229,
+      "start": 804.5,
+      "end": 806.06,
+      "duration": 1.56,
+      "text": "conditional variance of x?"
+    },
+    {
+      "index": 230,
+      "start": 806.06,
+      "end": 808.44,
+      "duration": 2.38,
+      "text": "You're going to tell me well I don't know, It depends on what"
+    },
+    {
+      "index": 231,
+      "start": 808.44,
+      "end": 810.3,
+      "duration": 1.86,
+      "text": "y is going to turn out to be."
+    },
+    {
+      "index": 232,
+      "start": 810.3,
+      "end": 812.77,
+      "duration": 2.47,
+      "text": "It's going to be something that depends on y."
+    },
+    {
+      "index": 233,
+      "start": 812.77,
+      "end": 816.21,
+      "duration": 3.44,
+      "text": "So it's a random variable, which is a function of y."
+    },
+    {
+      "index": 234,
+      "start": 816.21,
+      "end": 818.98,
+      "duration": 2.77,
+      "text": "So more precisely, the conditional variance when"
+    },
+    {
+      "index": 235,
+      "start": 818.98,
+      "end": 822.48,
+      "duration": 3.5,
+      "text": "written in this notation just with capital letters, is a"
+    },
+    {
+      "index": 236,
+      "start": 822.48,
+      "end": 823.73,
+      "duration": 1.25,
+      "text": "random variable."
+    },
+    {
+      "index": 237,
+      "start": 823.73,
+      "end": 827.56,
+      "duration": 3.83,
+      "text": "It's a random variable whose value is completely determined"
+    },
+    {
+      "index": 238,
+      "start": 827.56,
+      "end": 832.33,
+      "duration": 4.77,
+      "text": "once you learned the value of capital Y. And it takes a"
+    },
+    {
+      "index": 239,
+      "start": 832.33,
+      "end": 835.07,
+      "duration": 2.74,
+      "text": "specific numerical value."
+    },
+    {
+      "index": 240,
+      "start": 835.07,
+      "end": 838.7,
+      "duration": 3.63,
+      "text": "If capital Y happens to get a realization that's a specific"
+    },
+    {
+      "index": 241,
+      "start": 838.7,
+      "end": 843.13,
+      "duration": 4.43,
+      "text": "number, then the variance also becomes a specific number."
+    },
+    {
+      "index": 242,
+      "start": 843.13,
+      "end": 845.39,
+      "duration": 2.26,
+      "text": "And it's just a conditional variance of y"
+    },
+    {
+      "index": 243,
+      "start": 845.39,
+      "end": 849.42,
+      "duration": 4.03,
+      "text": "over x in that universe."
+    },
+    {
+      "index": 244,
+      "start": 849.42,
+      "end": 852.39,
+      "duration": 2.97,
+      "text": "All right, OK, so let's continue what we did in the"
+    },
+    {
+      "index": 245,
+      "start": 852.39,
+      "end": 853.62,
+      "duration": 1.23,
+      "text": "previous slide."
+    },
+    {
+      "index": 246,
+      "start": 853.62,
+      "end": 855.96,
+      "duration": 2.34,
+      "text": "We had the law of iterated expectations."
+    },
+    {
+      "index": 247,
+      "start": 855.96,
+      "end": 858.35,
+      "duration": 2.39,
+      "text": "That told us that expected value of a conditional"
+    },
+    {
+      "index": 248,
+      "start": 858.35,
+      "end": 861.36,
+      "duration": 3.01,
+      "text": "expectation is the unconditional expectation."
+    },
+    {
+      "index": 249,
+      "start": 861.36,
+      "end": 866.14,
+      "duration": 4.78,
+      "text": "Is there a similar rule that might apply in this context?"
+    },
+    {
+      "index": 250,
+      "start": 866.14,
+      "end": 869.81,
+      "duration": 3.67,
+      "text": "So you might guess that the variance of x could be found"
+    },
+    {
+      "index": 251,
+      "start": 869.81,
+      "end": 873.59,
+      "duration": 3.78,
+      "text": "by taking the expected value of the conditional variance."
+    },
+    {
+      "index": 252,
+      "start": 873.59,
+      "end": 875.68,
+      "duration": 2.09,
+      "text": "It turns out that this is not true."
+    },
+    {
+      "index": 253,
+      "start": 875.68,
+      "end": 878.48,
+      "duration": 2.8,
+      "text": "There is a formula for the variance in terms of"
+    },
+    {
+      "index": 254,
+      "start": 878.48,
+      "end": 880.06,
+      "duration": 1.58,
+      "text": "conditional quantities."
+    },
+    {
+      "index": 255,
+      "start": 880.06,
+      "end": 882.28,
+      "duration": 2.22,
+      "text": "But the formula is a little more complicated."
+    },
+    {
+      "index": 256,
+      "start": 882.28,
+      "end": 886.2,
+      "duration": 3.92,
+      "text": "If involves two terms instead of one."
+    },
+    {
+      "index": 257,
+      "start": 886.2,
+      "end": 890.01,
+      "duration": 3.81,
+      "text": "So we're going to go quickly through the"
+    },
+    {
+      "index": 258,
+      "start": 890.01,
+      "end": 892.47,
+      "duration": 2.46,
+      "text": "derivation of this formula."
+    },
+    {
+      "index": 259,
+      "start": 892.47,
+      "end": 895.26,
+      "duration": 2.79,
+      "text": "And then, through examples we'll try to get some"
+    },
+    {
+      "index": 260,
+      "start": 895.26,
+      "end": 898.48,
+      "duration": 3.22,
+      "text": "interpretation of what the different terms here"
+    },
+    {
+      "index": 261,
+      "start": 898.48,
+      "end": 901.44,
+      "duration": 2.96,
+      "text": "correspond to."
+    },
+    {
+      "index": 262,
+      "start": 901.44,
+      "end": 904.8,
+      "duration": 3.36,
+      "text": "All right, so let's try to prove this formula."
+    },
+    {
+      "index": 263,
+      "start": 904.8,
+      "end": 908.94,
+      "duration": 4.14,
+      "text": "And the proof is sort of a useful exercise to make sure"
+    },
+    {
+      "index": 264,
+      "start": 908.94,
+      "end": 911.86,
+      "duration": 2.92,
+      "text": "you understand all the symbols that are involved in here."
+    },
+    {
+      "index": 265,
+      "start": 911.86,
+      "end": 914.85,
+      "duration": 2.99,
+      "text": "So the proof is not difficult, it's 4 and 1/2 lines of"
+    },
+    {
+      "index": 266,
+      "start": 914.85,
+      "end": 918.22,
+      "duration": 3.37,
+      "text": "algebra, of just writing down formulas."
+    },
+    {
+      "index": 267,
+      "start": 918.22,
+      "end": 921.71,
+      "duration": 3.49,
+      "text": "But the challenge is to make sure that at each point you"
+    },
+    {
+      "index": 268,
+      "start": 921.71,
+      "end": 925.07,
+      "duration": 3.36,
+      "text": "understand what each one of the objects is."
+    },
+    {
+      "index": 269,
+      "start": 925.07,
+      "end": 927.88,
+      "duration": 2.81,
+      "text": "So we go into formula for the variance affects."
+    },
+    {
+      "index": 270,
+      "start": 927.88,
+      "end": 932.48,
+      "duration": 4.6,
+      "text": "We know in general that the variance of x has this nice"
+    },
+    {
+      "index": 271,
+      "start": 932.48,
+      "end": 934.59,
+      "duration": 2.11,
+      "text": "expression that we often use to calculate it."
+    },
+    {
+      "index": 272,
+      "start": 934.59,
+      "end": 937.34,
+      "duration": 2.75,
+      "text": "The expected value of the squared of the random variable"
+    },
+    {
+      "index": 273,
+      "start": 937.34,
+      "end": 941.22,
+      "duration": 3.88,
+      "text": "minus the mean squared."
+    },
+    {
+      "index": 274,
+      "start": 941.22,
+      "end": 945.29,
+      "duration": 4.07,
+      "text": "This formula, for the variances, of course it should"
+    },
+    {
+      "index": 275,
+      "start": 945.29,
+      "end": 948.38,
+      "duration": 3.09,
+      "text": "apply to conditional universes."
+    },
+    {
+      "index": 276,
+      "start": 948.38,
+      "end": 950.43,
+      "duration": 2.05,
+      "text": "I mean it's a general formula about variances."
+    },
+    {
+      "index": 277,
+      "start": 950.43,
+      "end": 953.65,
+      "duration": 3.22,
+      "text": "If we put ourselves in a conditional universe where the"
+    },
+    {
+      "index": 278,
+      "start": 953.65,
+      "end": 958.38,
+      "duration": 4.73,
+      "text": "random variable y is given to us the same math should work."
+    },
+    {
+      "index": 279,
+      "start": 958.38,
+      "end": 961.22,
+      "duration": 2.84,
+      "text": "So we should have a similar formula for"
+    },
+    {
+      "index": 280,
+      "start": 961.22,
+      "end": 962.9,
+      "duration": 1.68,
+      "text": "the conditional variances."
+    },
+    {
+      "index": 281,
+      "start": 962.9,
+      "end": 965.43,
+      "duration": 2.53,
+      "text": "It's just the same formula, but applied to"
+    },
+    {
+      "index": 282,
+      "start": 965.43,
+      "end": 967.37,
+      "duration": 1.94,
+      "text": "the conditional universe."
+    },
+    {
+      "index": 283,
+      "start": 967.37,
+      "end": 970.13,
+      "duration": 2.76,
+      "text": "The variance of x in the conditional universe is the"
+    },
+    {
+      "index": 284,
+      "start": 970.13,
+      "end": 972.05,
+      "duration": 1.92,
+      "text": "expected value of x squared--"
+    },
+    {
+      "index": 285,
+      "start": 972.05,
+      "end": 973.77,
+      "duration": 1.72,
+      "text": "in the conditional universe--"
+    },
+    {
+      "index": 286,
+      "start": 973.77,
+      "end": 976.7,
+      "duration": 2.93,
+      "text": "minus the mean of x-- in the conditional universe--"
+    },
+    {
+      "index": 287,
+      "start": 976.7,
+      "end": 977.73,
+      "duration": 1.03,
+      "text": "squared."
+    },
+    {
+      "index": 288,
+      "start": 977.73,
+      "end": 980.35,
+      "duration": 2.62,
+      "text": "So this formula looks fine."
+    },
+    {
+      "index": 289,
+      "start": 980.35,
+      "end": 983.62,
+      "duration": 3.27,
+      "text": "Now let's take expected values of both sides."
+    },
+    {
+      "index": 290,
+      "start": 983.62,
+      "end": 987.47,
+      "duration": 3.85,
+      "text": "Remember the conditional variance is a random variable,"
+    },
+    {
+      "index": 291,
+      "start": 987.47,
+      "end": 990.6,
+      "duration": 3.13,
+      "text": "because its value depends on whatever realization we get"
+    },
+    {
+      "index": 292,
+      "start": 990.6,
+      "end": 993.86,
+      "duration": 3.26,
+      "text": "for capital Y. So we can take expectations here."
+    },
+    {
+      "index": 293,
+      "start": 993.86,
+      "end": 996.32,
+      "duration": 2.46,
+      "text": "We get the expected value of the variance."
+    },
+    {
+      "index": 294,
+      "start": 996.32,
+      "end": 999.38,
+      "duration": 3.06,
+      "text": "Then we have the expected value of a conditional"
+    },
+    {
+      "index": 295,
+      "start": 999.38,
+      "end": 1000.74,
+      "duration": 1.36,
+      "text": "expectation."
+    },
+    {
+      "index": 296,
+      "start": 1000.74,
+      "end": 1004.42,
+      "duration": 3.68,
+      "text": "Here we use the fact that we discussed before."
+    },
+    {
+      "index": 297,
+      "start": 1004.42,
+      "end": 1008.02,
+      "duration": 3.6,
+      "text": "The expected value of a conditional expectation is the"
+    },
+    {
+      "index": 298,
+      "start": 1008.02,
+      "end": 1010.56,
+      "duration": 2.54,
+      "text": "same as the unconditional expectation."
+    },
+    {
+      "index": 299,
+      "start": 1010.56,
+      "end": 1012.78,
+      "duration": 2.22,
+      "text": "So this term becomes this."
+    },
+    {
+      "index": 300,
+      "start": 1012.78,
+      "end": 1017.24,
+      "duration": 4.46,
+      "text": "And finally, here we just have some weird looking random"
+    },
+    {
+      "index": 301,
+      "start": 1017.24,
+      "end": 1022.36,
+      "duration": 5.12,
+      "text": "variable, and we take the expected value of it."
+    },
+    {
+      "index": 302,
+      "start": 1022.36,
+      "end": 1026.21,
+      "duration": 3.85,
+      "text": "All right, now we need to do something about this term."
+    },
+    {
+      "index": 303,
+      "start": 1026.21,
+      "end": 1030.13,
+      "duration": 3.92,
+      "text": "Let's use the same rule up here to"
+    },
+    {
+      "index": 304,
+      "start": 1030.13,
+      "end": 1034.03,
+      "duration": 3.9,
+      "text": "write down this variance."
+    },
+    {
+      "index": 305,
+      "start": 1034.03,
+      "end": 1037.81,
+      "duration": 3.78,
+      "text": "So variance of an expectation, that's kind of strange, but"
+    },
+    {
+      "index": 306,
+      "start": 1037.81,
+      "end": 1041.46,
+      "duration": 3.65,
+      "text": "you remember that the conditional expectation is"
+    },
+    {
+      "index": 307,
+      "start": 1041.46,
+      "end": 1043.79,
+      "duration": 2.33,
+      "text": "random, because y is random."
+    },
+    {
+      "index": 308,
+      "start": 1043.79,
+      "end": 1046.099,
+      "duration": 2.309,
+      "text": "So this thing is a random variable, so"
+    },
+    {
+      "index": 309,
+      "start": 1046.099,
+      "end": 1048.39,
+      "duration": 2.291,
+      "text": "this thing has a variance."
+    },
+    {
+      "index": 310,
+      "start": 1048.39,
+      "end": 1050.31,
+      "duration": 1.92,
+      "text": "What is the variance of this thing?"
+    },
+    {
+      "index": 311,
+      "start": 1050.31,
+      "end": 1057.74,
+      "duration": 7.43,
+      "text": "It's the expected value of the thing squared minus the square"
+    },
+    {
+      "index": 312,
+      "start": 1057.74,
+      "end": 1060.59,
+      "duration": 2.85,
+      "text": "of the expected value of the thing."
+    },
+    {
+      "index": 313,
+      "start": 1060.59,
+      "end": 1063.34,
+      "duration": 2.75,
+      "text": "Now what's the expected value of that thing?"
+    },
+    {
+      "index": 314,
+      "start": 1063.34,
+      "end": 1067.23,
+      "duration": 3.89,
+      "text": "By the law of iterated expectations, once more, the"
+    },
+    {
+      "index": 315,
+      "start": 1067.23,
+      "end": 1069.99,
+      "duration": 2.76,
+      "text": "expected value of this thing is the unconditional"
+    },
+    {
+      "index": 316,
+      "start": 1069.99,
+      "end": 1071.09,
+      "duration": 1.1,
+      "text": "expectation."
+    },
+    {
+      "index": 317,
+      "start": 1071.09,
+      "end": 1074.56,
+      "duration": 3.47,
+      "text": "And that's why here I put the unconditional expectation."
+    },
+    {
+      "index": 318,
+      "start": 1074.56,
+      "end": 1078.04,
+      "duration": 3.48,
+      "text": "So I'm using again this general rule about how to"
+    },
+    {
+      "index": 319,
+      "start": 1078.04,
+      "end": 1081.51,
+      "duration": 3.47,
+      "text": "calculate variances, and I'm applying it to calculate the"
+    },
+    {
+      "index": 320,
+      "start": 1081.51,
+      "end": 1085.68,
+      "duration": 4.17,
+      "text": "variance of the conditional expectation."
+    },
+    {
+      "index": 321,
+      "start": 1085.68,
+      "end": 1090.03,
+      "duration": 4.35,
+      "text": "And now you notice that if you add these two expressions c"
+    },
+    {
+      "index": 322,
+      "start": 1090.03,
+      "end": 1095.04,
+      "duration": 5.01,
+      "text": "and d we get this plus that, which is this."
+    },
+    {
+      "index": 323,
+      "start": 1095.04,
+      "end": 1097.22,
+      "duration": 2.18,
+      "text": "It's equal to--"
+    },
+    {
+      "index": 324,
+      "start": 1097.22,
+      "end": 1102.36,
+      "duration": 5.14,
+      "text": "these two terms cancel, we're left with this minus that,"
+    },
+    {
+      "index": 325,
+      "start": 1102.36,
+      "end": 1104.81,
+      "duration": 2.45,
+      "text": "which is the variance of x."
+    },
+    {
+      "index": 326,
+      "start": 1104.81,
+      "end": 1107.43,
+      "duration": 2.62,
+      "text": "And that's the end of the proof."
+    },
+    {
+      "index": 327,
+      "start": 1107.43,
+      "end": 1111.105,
+      "duration": 3.675,
+      "text": "This one of those proofs that do not convey any intuition."
+    },
+    {
+      "index": 328,
+      "start": 1114.31,
+      "end": 1117.88,
+      "duration": 3.57,
+      "text": "This, as I said, it's a useful proof to go through just to"
+    },
+    {
+      "index": 329,
+      "start": 1117.88,
+      "end": 1120.25,
+      "duration": 2.37,
+      "text": "make sure you understand the symbols."
+    },
+    {
+      "index": 330,
+      "start": 1120.25,
+      "end": 1124.02,
+      "duration": 3.77,
+      "text": "It starts to get pretty confusing, and a little bit on"
+    },
+    {
+      "index": 331,
+      "start": 1124.02,
+      "end": 1125.49,
+      "duration": 1.47,
+      "text": "the abstract side."
+    },
+    {
+      "index": 332,
+      "start": 1125.49,
+      "end": 1128.01,
+      "duration": 2.52,
+      "text": "So it's good to understand what's going on."
+    },
+    {
+      "index": 333,
+      "start": 1128.01,
+      "end": 1132.61,
+      "duration": 4.6,
+      "text": "Now there is intuition behind this formula, some of which is"
+    },
+    {
+      "index": 334,
+      "start": 1132.61,
+      "end": 1134.78,
+      "duration": 2.17,
+      "text": "better left for later in the class when"
+    },
+    {
+      "index": 335,
+      "start": 1134.78,
+      "end": 1136.68,
+      "duration": 1.9,
+      "text": "we talk about inference."
+    },
+    {
+      "index": 336,
+      "start": 1136.68,
+      "end": 1141.38,
+      "duration": 4.7,
+      "text": "The idea is that the conditional expectation you"
+    },
+    {
+      "index": 337,
+      "start": 1141.38,
+      "end": 1144.11,
+      "duration": 2.73,
+      "text": "can interpret it as an estimate of the random"
+    },
+    {
+      "index": 338,
+      "start": 1144.11,
+      "end": 1146.7,
+      "duration": 2.59,
+      "text": "variable that you are trying to--"
+    },
+    {
+      "index": 339,
+      "start": 1146.7,
+      "end": 1150.24,
+      "duration": 3.54,
+      "text": "an estimate of x based on measurements of y, you can"
+    },
+    {
+      "index": 340,
+      "start": 1150.24,
+      "end": 1154.09,
+      "duration": 3.85,
+      "text": "think of these variances as having something to do with an"
+    },
+    {
+      "index": 341,
+      "start": 1154.09,
+      "end": 1155.65,
+      "duration": 1.56,
+      "text": "estimation error."
+    },
+    {
+      "index": 342,
+      "start": 1155.65,
+      "end": 1159.04,
+      "duration": 3.39,
+      "text": "And once you start thinking in those terms an interpretation"
+    },
+    {
+      "index": 343,
+      "start": 1159.04,
+      "end": 1160.06,
+      "duration": 1.02,
+      "text": "will come about."
+    },
+    {
+      "index": 344,
+      "start": 1160.06,
+      "end": 1163.75,
+      "duration": 3.69,
+      "text": "But again as I said this is better left for when we start"
+    },
+    {
+      "index": 345,
+      "start": 1163.75,
+      "end": 1165.32,
+      "duration": 1.57,
+      "text": "talking about inference."
+    },
+    {
+      "index": 346,
+      "start": 1165.32,
+      "end": 1168.08,
+      "duration": 2.76,
+      "text": "Nevertheless, we're going to get some intuition about all"
+    },
+    {
+      "index": 347,
+      "start": 1168.08,
+      "end": 1173.01,
+      "duration": 4.93,
+      "text": "these formulas by considering a baby example where we're"
+    },
+    {
+      "index": 348,
+      "start": 1173.01,
+      "end": 1175.9,
+      "duration": 2.89,
+      "text": "going to apply the law of iterated expectations, and the"
+    },
+    {
+      "index": 349,
+      "start": 1175.9,
+      "end": 1178.06,
+      "duration": 2.16,
+      "text": "law of total variance."
+    },
+    {
+      "index": 350,
+      "start": 1178.06,
+      "end": 1182.36,
+      "duration": 4.3,
+      "text": "So the baby example is that we do this beautiful experiment"
+    },
+    {
+      "index": 351,
+      "start": 1182.36,
+      "end": 1187.19,
+      "duration": 4.83,
+      "text": "of giving a quiz to a class consisting of many sections."
+    },
+    {
+      "index": 352,
+      "start": 1187.19,
+      "end": 1189.325,
+      "duration": 2.135,
+      "text": "And we're interested in two random variables."
+    },
+    {
+      "index": 353,
+      "start": 1192.44,
+      "end": 1194.59,
+      "duration": 2.15,
+      "text": "So we have a number of students, and they're all"
+    },
+    {
+      "index": 354,
+      "start": 1194.59,
+      "end": 1195.98,
+      "duration": 1.39,
+      "text": "allocated to sections."
+    },
+    {
+      "index": 355,
+      "start": 1195.98,
+      "end": 1199.89,
+      "duration": 3.91,
+      "text": "The experiment is that I pick a student at random, and I"
+    },
+    {
+      "index": 356,
+      "start": 1199.89,
+      "end": 1201.18,
+      "duration": 1.29,
+      "text": "look at two random variables."
+    },
+    {
+      "index": 357,
+      "start": 1201.18,
+      "end": 1205.88,
+      "duration": 4.7,
+      "text": "One is the quiz score of the randomly selected student, and"
+    },
+    {
+      "index": 358,
+      "start": 1205.88,
+      "end": 1209.96,
+      "duration": 4.08,
+      "text": "the other random variable is the section number of the"
+    },
+    {
+      "index": 359,
+      "start": 1209.96,
+      "end": 1213.04,
+      "duration": 3.08,
+      "text": "student that I have selected."
+    },
+    {
+      "index": 360,
+      "start": 1213.04,
+      "end": 1217.01,
+      "duration": 3.97,
+      "text": "We're given some statistics about the two sections."
+    },
+    {
+      "index": 361,
+      "start": 1217.01,
+      "end": 1219.96,
+      "duration": 2.95,
+      "text": "Section one has 10 students, section two has 20 students."
+    },
+    {
+      "index": 362,
+      "start": 1219.96,
+      "end": 1222.43,
+      "duration": 2.47,
+      "text": "The quiz average in section one was 90."
+    },
+    {
+      "index": 363,
+      "start": 1222.43,
+      "end": 1225.86,
+      "duration": 3.43,
+      "text": "Quiz average in section two was 60."
+    },
+    {
+      "index": 364,
+      "start": 1225.86,
+      "end": 1228.32,
+      "duration": 2.46,
+      "text": "What's the expected value of x?"
+    },
+    {
+      "index": 365,
+      "start": 1228.32,
+      "end": 1232.99,
+      "duration": 4.67,
+      "text": "What's the expected quiz score if I pick a student at random?"
+    },
+    {
+      "index": 366,
+      "start": 1232.99,
+      "end": 1234.42,
+      "duration": 1.43,
+      "text": "Well, each student has the same"
+    },
+    {
+      "index": 367,
+      "start": 1234.42,
+      "end": 1235.93,
+      "duration": 1.51,
+      "text": "probability of being selected."
+    },
+    {
+      "index": 368,
+      "start": 1235.93,
+      "end": 1238.74,
+      "duration": 2.81,
+      "text": "I'm making that assumption out of the 30 students."
+    },
+    {
+      "index": 369,
+      "start": 1238.74,
+      "end": 1243.52,
+      "duration": 4.78,
+      "text": "I need to add the quiz scores of all of the students."
+    },
+    {
+      "index": 370,
+      "start": 1243.52,
+      "end": 1247.21,
+      "duration": 3.69,
+      "text": "So I need to add the quiz scores in section one, which"
+    },
+    {
+      "index": 371,
+      "start": 1247.21,
+      "end": 1248.86,
+      "duration": 1.65,
+      "text": "is 90 times 10."
+    },
+    {
+      "index": 372,
+      "start": 1248.86,
+      "end": 1251.03,
+      "duration": 2.17,
+      "text": "I need to add the quiz scores in that section,"
+    },
+    {
+      "index": 373,
+      "start": 1251.03,
+      "end": 1252.72,
+      "duration": 1.69,
+      "text": "which is 60 times 20."
+    },
+    {
+      "index": 374,
+      "start": 1252.72,
+      "end": 1255.22,
+      "duration": 2.5,
+      "text": "And we find that the overall average was 70."
+    },
+    {
+      "index": 375,
+      "start": 1255.22,
+      "end": 1258.31,
+      "duration": 3.09,
+      "text": "So this is the usual unconditional expectation."
+    },
+    {
+      "index": 376,
+      "start": 1258.31,
+      "end": 1260.99,
+      "duration": 2.68,
+      "text": "Let's look at the conditional expectation, and let's look at"
+    },
+    {
+      "index": 377,
+      "start": 1260.99,
+      "end": 1263.0,
+      "duration": 2.01,
+      "text": "the elementary version where we're talking"
+    },
+    {
+      "index": 378,
+      "start": 1263.0,
+      "end": 1264.69,
+      "duration": 1.69,
+      "text": "about numerical values."
+    },
+    {
+      "index": 379,
+      "start": 1264.69,
+      "end": 1267.33,
+      "duration": 2.64,
+      "text": "If I tell you that the randomly selected student was"
+    },
+    {
+      "index": 380,
+      "start": 1267.33,
+      "end": 1270.78,
+      "duration": 3.45,
+      "text": "in section one what's the expected value of the quiz"
+    },
+    {
+      "index": 381,
+      "start": 1270.78,
+      "end": 1272.49,
+      "duration": 1.71,
+      "text": "score of that student?"
+    },
+    {
+      "index": 382,
+      "start": 1272.49,
+      "end": 1276.9,
+      "duration": 4.41,
+      "text": "Well, given this information, we're picking a random student"
+    },
+    {
+      "index": 383,
+      "start": 1276.9,
+      "end": 1280.82,
+      "duration": 3.92,
+      "text": "uniformly from that section in which the average was 90."
+    },
+    {
+      "index": 384,
+      "start": 1280.82,
+      "end": 1283.07,
+      "duration": 2.25,
+      "text": "The expected value of the score of that student"
+    },
+    {
+      "index": 385,
+      "start": 1283.07,
+      "end": 1284.58,
+      "duration": 1.51,
+      "text": "is going to be 90."
+    },
+    {
+      "index": 386,
+      "start": 1284.58,
+      "end": 1288.8,
+      "duration": 4.22,
+      "text": "So given the specific value of y, the specific section, the"
+    },
+    {
+      "index": 387,
+      "start": 1288.8,
+      "end": 1291.28,
+      "duration": 2.48,
+      "text": "conditional expectation or the expected value of the quiz"
+    },
+    {
+      "index": 388,
+      "start": 1291.28,
+      "end": 1294.47,
+      "duration": 3.19,
+      "text": "score is a specific number, the number 90."
+    },
+    {
+      "index": 389,
+      "start": 1294.47,
+      "end": 1297.9,
+      "duration": 3.43,
+      "text": "Similarly for the second section the expected value is"
+    },
+    {
+      "index": 390,
+      "start": 1297.9,
+      "end": 1301.48,
+      "duration": 3.58,
+      "text": "60, that's the average score in the second section."
+    },
+    {
+      "index": 391,
+      "start": 1301.48,
+      "end": 1302.94,
+      "duration": 1.46,
+      "text": "This is the elementary version."
+    },
+    {
+      "index": 392,
+      "start": 1302.94,
+      "end": 1305.0,
+      "duration": 2.06,
+      "text": "What about the abstract version?"
+    },
+    {
+      "index": 393,
+      "start": 1305.0,
+      "end": 1308.35,
+      "duration": 3.35,
+      "text": "In the abstract version the conditional expectation is a"
+    },
+    {
+      "index": 394,
+      "start": 1308.35,
+      "end": 1312.54,
+      "duration": 4.19,
+      "text": "random variable because it depends."
+    },
+    {
+      "index": 395,
+      "start": 1312.54,
+      "end": 1317.22,
+      "duration": 4.68,
+      "text": "In which section is the student that I picked?"
+    },
+    {
+      "index": 396,
+      "start": 1317.22,
+      "end": 1321.68,
+      "duration": 4.46,
+      "text": "And with probability 1/3, I'm going to pick a student in the"
+    },
+    {
+      "index": 397,
+      "start": 1321.68,
+      "end": 1324.89,
+      "duration": 3.21,
+      "text": "first section, in which case the conditional expectation"
+    },
+    {
+      "index": 398,
+      "start": 1324.89,
+      "end": 1328.18,
+      "duration": 3.29,
+      "text": "will be 90, and with probability 2/3 I'm going to"
+    },
+    {
+      "index": 399,
+      "start": 1328.18,
+      "end": 1330.26,
+      "duration": 2.08,
+      "text": "pick a student in the second section."
+    },
+    {
+      "index": 400,
+      "start": 1330.26,
+      "end": 1332.45,
+      "duration": 2.19,
+      "text": "And in that case the conditional expectation will"
+    },
+    {
+      "index": 401,
+      "start": 1332.45,
+      "end": 1334.22,
+      "duration": 1.77,
+      "text": "take the value of 60."
+    },
+    {
+      "index": 402,
+      "start": 1334.22,
+      "end": 1337.02,
+      "duration": 2.8,
+      "text": "So this illustrates the idea that the conditional"
+    },
+    {
+      "index": 403,
+      "start": 1337.02,
+      "end": 1339.3,
+      "duration": 2.28,
+      "text": "expectation is a random variable."
+    },
+    {
+      "index": 404,
+      "start": 1339.3,
+      "end": 1341.76,
+      "duration": 2.46,
+      "text": "Depending on what y is going to be, the conditional"
+    },
+    {
+      "index": 405,
+      "start": 1341.76,
+      "end": 1345.32,
+      "duration": 3.56,
+      "text": "expectation is going to be one or the other value with"
+    },
+    {
+      "index": 406,
+      "start": 1345.32,
+      "end": 1347.26,
+      "duration": 1.94,
+      "text": "certain probabilities."
+    },
+    {
+      "index": 407,
+      "start": 1347.26,
+      "end": 1349.23,
+      "duration": 1.97,
+      "text": "Now that we have the distribution of the"
+    },
+    {
+      "index": 408,
+      "start": 1349.23,
+      "end": 1351.61,
+      "duration": 2.38,
+      "text": "conditional expectation we can calculate the"
+    },
+    {
+      "index": 409,
+      "start": 1351.61,
+      "end": 1353.56,
+      "duration": 1.95,
+      "text": "expected value of it."
+    },
+    {
+      "index": 410,
+      "start": 1353.56,
+      "end": 1357.22,
+      "duration": 3.66,
+      "text": "And the expected value of such a random variable is 1/3 times"
+    },
+    {
+      "index": 411,
+      "start": 1357.22,
+      "end": 1364.0,
+      "duration": 6.78,
+      "text": "90, plus 2/3 times 60, and it comes out to equal 70."
+    },
+    {
+      "index": 412,
+      "start": 1364.0,
+      "end": 1369.02,
+      "duration": 5.02,
+      "text": "Which miraculously is the same number that we got up there."
+    },
+    {
+      "index": 413,
+      "start": 1369.02,
+      "end": 1373.06,
+      "duration": 4.04,
+      "text": "So this tells you that you can calculate the overall average"
+    },
+    {
+      "index": 414,
+      "start": 1373.06,
+      "end": 1378.18,
+      "duration": 5.12,
+      "text": "in a large class by taking the averages in each one of the"
+    },
+    {
+      "index": 415,
+      "start": 1378.18,
+      "end": 1382.9,
+      "duration": 4.72,
+      "text": "sections and weighing each one of the sections according to"
+    },
+    {
+      "index": 416,
+      "start": 1382.9,
+      "end": 1386.32,
+      "duration": 3.42,
+      "text": "the number of students that it has."
+    },
+    {
+      "index": 417,
+      "start": 1386.32,
+      "end": 1390.56,
+      "duration": 4.24,
+      "text": "So this section had 90 students but only 1/3 of the"
+    },
+    {
+      "index": 418,
+      "start": 1390.56,
+      "end": 1393.85,
+      "duration": 3.29,
+      "text": "students, so it gets a weight of 1/3."
+    },
+    {
+      "index": 419,
+      "start": 1393.85,
+      "end": 1396.52,
+      "duration": 2.67,
+      "text": "So the law of iterated expectations, once more, is"
+    },
+    {
+      "index": 420,
+      "start": 1396.52,
+      "end": 1398.54,
+      "duration": 2.02,
+      "text": "nothing too complicated."
+    },
+    {
+      "index": 421,
+      "start": 1398.54,
+      "end": 1400.77,
+      "duration": 2.23,
+      "text": "It's just that you can calculate overall class"
+    },
+    {
+      "index": 422,
+      "start": 1400.77,
+      "end": 1402.78,
+      "duration": 2.01,
+      "text": "average by looking at the section"
+    },
+    {
+      "index": 423,
+      "start": 1402.78,
+      "end": 1406.33,
+      "duration": 3.55,
+      "text": "averages and combine them."
+    },
+    {
+      "index": 424,
+      "start": 1406.33,
+      "end": 1408.68,
+      "duration": 2.35,
+      "text": "Now since the conditional expectation is a random"
+    },
+    {
+      "index": 425,
+      "start": 1408.68,
+      "end": 1411.86,
+      "duration": 3.18,
+      "text": "variable, of course it has a variance of it's own."
+    },
+    {
+      "index": 426,
+      "start": 1411.86,
+      "end": 1414.08,
+      "duration": 2.22,
+      "text": "So let's calculate the variance."
+    },
+    {
+      "index": 427,
+      "start": 1414.08,
+      "end": 1416.06,
+      "duration": 1.98,
+      "text": "How do we calculate variances?"
+    },
+    {
+      "index": 428,
+      "start": 1416.06,
+      "end": 1418.96,
+      "duration": 2.9,
+      "text": "We look at all the possible numerical values of this"
+    },
+    {
+      "index": 429,
+      "start": 1418.96,
+      "end": 1422.27,
+      "duration": 3.31,
+      "text": "random variable, which are 90 and 60."
+    },
+    {
+      "index": 430,
+      "start": 1422.27,
+      "end": 1425.62,
+      "duration": 3.35,
+      "text": "We look at the difference of those possible numerical"
+    },
+    {
+      "index": 431,
+      "start": 1425.62,
+      "end": 1429.91,
+      "duration": 4.29,
+      "text": "values from the mean of this random variable, and the mean"
+    },
+    {
+      "index": 432,
+      "start": 1429.91,
+      "end": 1433.77,
+      "duration": 3.86,
+      "text": "of that random variable, we found that's it's 70."
+    },
+    {
+      "index": 433,
+      "start": 1433.77,
+      "end": 1437.48,
+      "duration": 3.71,
+      "text": "And then we weight the different possible numerical"
+    },
+    {
+      "index": 434,
+      "start": 1437.48,
+      "end": 1439.96,
+      "duration": 2.48,
+      "text": "values according to their probabilities."
+    },
+    {
+      "index": 435,
+      "start": 1439.96,
+      "end": 1443.93,
+      "duration": 3.97,
+      "text": "So with probability 1/3 the conditional expectation is 90,"
+    },
+    {
+      "index": 436,
+      "start": 1443.93,
+      "end": 1446.94,
+      "duration": 3.01,
+      "text": "which is 20 away from the mean."
+    },
+    {
+      "index": 437,
+      "start": 1446.94,
+      "end": 1448.47,
+      "duration": 1.53,
+      "text": "And we get this squared distance."
+    },
+    {
+      "index": 438,
+      "start": 1448.47,
+      "end": 1451.75,
+      "duration": 3.28,
+      "text": "With probability 2/3 the conditional expectation is 60,"
+    },
+    {
+      "index": 439,
+      "start": 1451.75,
+      "end": 1454.4,
+      "duration": 2.65,
+      "text": "which is 10 away from the mean, has this squared"
+    },
+    {
+      "index": 440,
+      "start": 1454.4,
+      "end": 1456.91,
+      "duration": 2.51,
+      "text": "distance and gets weighed by 2/3, which is the"
+    },
+    {
+      "index": 441,
+      "start": 1456.91,
+      "end": 1458.47,
+      "duration": 1.56,
+      "text": "probability of 60."
+    },
+    {
+      "index": 442,
+      "start": 1458.47,
+      "end": 1461.13,
+      "duration": 2.66,
+      "text": "So you do the numbers, and you get the value for the variance"
+    },
+    {
+      "index": 443,
+      "start": 1461.13,
+      "end": 1466.8,
+      "duration": 5.67,
+      "text": "equal to 200."
+    },
+    {
+      "index": 444,
+      "start": 1466.8,
+      "end": 1470.25,
+      "duration": 3.45,
+      "text": "All right, so now we want to move towards using that more"
+    },
+    {
+      "index": 445,
+      "start": 1470.25,
+      "end": 1473.77,
+      "duration": 3.52,
+      "text": "complicated formula involving the conditional variances."
+    },
+    {
+      "index": 446,
+      "start": 1476.65,
+      "end": 1480.47,
+      "duration": 3.82,
+      "text": "OK, suppose someone goes and calculates the variance of the"
+    },
+    {
+      "index": 447,
+      "start": 1480.47,
+      "end": 1484.06,
+      "duration": 3.59,
+      "text": "quiz scores inside each one of the sections."
+    },
+    {
+      "index": 448,
+      "start": 1484.06,
+      "end": 1487.68,
+      "duration": 3.62,
+      "text": "So someone gives us these two pieces of information."
+    },
+    {
+      "index": 449,
+      "start": 1487.68,
+      "end": 1493.23,
+      "duration": 5.55,
+      "text": "In section one we take the differences from the mean in"
+    },
+    {
+      "index": 450,
+      "start": 1493.23,
+      "end": 1497.9,
+      "duration": 4.67,
+      "text": "that section, and let's say that the various turns out to"
+    },
+    {
+      "index": 451,
+      "start": 1497.9,
+      "end": 1500.24,
+      "duration": 2.34,
+      "text": "be a number equal to 10 similarly"
+    },
+    {
+      "index": 452,
+      "start": 1500.24,
+      "end": 1501.41,
+      "duration": 1.17,
+      "text": "in the second section."
+    },
+    {
+      "index": 453,
+      "start": 1501.41,
+      "end": 1505.28,
+      "duration": 3.87,
+      "text": "So these are the variances of the quiz scores inside"
+    },
+    {
+      "index": 454,
+      "start": 1505.28,
+      "end": 1507.52,
+      "duration": 2.24,
+      "text": "individual sections."
+    },
+    {
+      "index": 455,
+      "start": 1507.52,
+      "end": 1509.85,
+      "duration": 2.33,
+      "text": "The variance in one conditional universe, the"
+    },
+    {
+      "index": 456,
+      "start": 1509.85,
+      "end": 1513.29,
+      "duration": 3.44,
+      "text": "variance in the other conditional universe."
+    },
+    {
+      "index": 457,
+      "start": 1513.29,
+      "end": 1518.86,
+      "duration": 5.57,
+      "text": "So if I pick a student in section one and I don't tell"
+    },
+    {
+      "index": 458,
+      "start": 1518.86,
+      "end": 1521.4,
+      "duration": 2.54,
+      "text": "you anything more about the student, what's the variance"
+    },
+    {
+      "index": 459,
+      "start": 1521.4,
+      "end": 1523.53,
+      "duration": 2.13,
+      "text": "of the random score of that student?"
+    },
+    {
+      "index": 460,
+      "start": 1523.53,
+      "end": 1525.81,
+      "duration": 2.28,
+      "text": "The variance is 10."
+    },
+    {
+      "index": 461,
+      "start": 1525.81,
+      "end": 1528.21,
+      "duration": 2.4,
+      "text": "I know why, but I don't know the student."
+    },
+    {
+      "index": 462,
+      "start": 1528.21,
+      "end": 1531.26,
+      "duration": 3.05,
+      "text": "So the score is still a random variable in that universe."
+    },
+    {
+      "index": 463,
+      "start": 1531.26,
+      "end": 1533.86,
+      "duration": 2.6,
+      "text": "It has a variance, and that's the variance."
+    },
+    {
+      "index": 464,
+      "start": 1533.86,
+      "end": 1536.33,
+      "duration": 2.47,
+      "text": "Similarly, in the other universe, the variance of the"
+    },
+    {
+      "index": 465,
+      "start": 1536.33,
+      "end": 1539.11,
+      "duration": 2.78,
+      "text": "quiz scores is this number, 20."
+    },
+    {
+      "index": 466,
+      "start": 1539.11,
+      "end": 1542.65,
+      "duration": 3.54,
+      "text": "Once more, this is an equality between numbers."
+    },
+    {
+      "index": 467,
+      "start": 1542.65,
+      "end": 1544.92,
+      "duration": 2.27,
+      "text": "I have fixed the specific value of y."
+    },
+    {
+      "index": 468,
+      "start": 1544.92,
+      "end": 1548.44,
+      "duration": 3.52,
+      "text": "So I put myself in a specific universe, I can calculate the"
+    },
+    {
+      "index": 469,
+      "start": 1548.44,
+      "end": 1551.43,
+      "duration": 2.99,
+      "text": "variance in that specific universe."
+    },
+    {
+      "index": 470,
+      "start": 1551.43,
+      "end": 1555.15,
+      "duration": 3.72,
+      "text": "If I don't specify a numerical value for capital Y, and say I"
+    },
+    {
+      "index": 471,
+      "start": 1555.15,
+      "end": 1558.39,
+      "duration": 3.24,
+      "text": "don't know what Y is going to be, it's going to be random."
+    },
+    {
+      "index": 472,
+      "start": 1558.39,
+      "end": 1562.51,
+      "duration": 4.12,
+      "text": "Then what kind of section variance I'm going to get"
+    },
+    {
+      "index": 473,
+      "start": 1562.51,
+      "end": 1564.5,
+      "duration": 1.99,
+      "text": "itself will be random."
+    },
+    {
+      "index": 474,
+      "start": 1564.5,
+      "end": 1569.53,
+      "duration": 5.03,
+      "text": "With probability 1/3, I pick a student in the first section"
+    },
+    {
+      "index": 475,
+      "start": 1569.53,
+      "end": 1574.74,
+      "duration": 5.21,
+      "text": "in which case the conditional variance given what I have"
+    },
+    {
+      "index": 476,
+      "start": 1574.74,
+      "end": 1576.63,
+      "duration": 1.89,
+      "text": "picked is going to be 10."
+    },
+    {
+      "index": 477,
+      "start": 1576.63,
+      "end": 1580.99,
+      "duration": 4.36,
+      "text": "Or with probability 2/3 I pick y equal to 2, and I place"
+    },
+    {
+      "index": 478,
+      "start": 1580.99,
+      "end": 1582.69,
+      "duration": 1.7,
+      "text": "myself in that universe."
+    },
+    {
+      "index": 479,
+      "start": 1582.69,
+      "end": 1585.79,
+      "duration": 3.1,
+      "text": "And in that universe the conditional variance is 20."
+    },
+    {
+      "index": 480,
+      "start": 1585.79,
+      "end": 1588.32,
+      "duration": 2.53,
+      "text": "So you see again from here that the conditional variance"
+    },
+    {
+      "index": 481,
+      "start": 1588.32,
+      "end": 1592.41,
+      "duration": 4.09,
+      "text": "is a random variable that takes different values with"
+    },
+    {
+      "index": 482,
+      "start": 1592.41,
+      "end": 1593.92,
+      "duration": 1.51,
+      "text": "certain probabilities."
+    },
+    {
+      "index": 483,
+      "start": 1593.92,
+      "end": 1597.83,
+      "duration": 3.91,
+      "text": "And which value it takes depends on the realization of"
+    },
+    {
+      "index": 484,
+      "start": 1597.83,
+      "end": 1601.67,
+      "duration": 3.84,
+      "text": "the random variable capital Y. So this happens if capital Y"
+    },
+    {
+      "index": 485,
+      "start": 1601.67,
+      "end": 1605.97,
+      "duration": 4.3,
+      "text": "is one, this happens if capital Y is equal to 2."
+    },
+    {
+      "index": 486,
+      "start": 1605.97,
+      "end": 1610.0,
+      "duration": 4.03,
+      "text": "Once you have something of this form--"
+    },
+    {
+      "index": 487,
+      "start": 1610.0,
+      "end": 1612.04,
+      "duration": 2.04,
+      "text": "a random variable that takes values with certain"
+    },
+    {
+      "index": 488,
+      "start": 1612.04,
+      "end": 1613.15,
+      "duration": 1.11,
+      "text": "probabilities--"
+    },
+    {
+      "index": 489,
+      "start": 1613.15,
+      "end": 1615.69,
+      "duration": 2.54,
+      "text": "then you can certainly calculate the expected value"
+    },
+    {
+      "index": 490,
+      "start": 1615.69,
+      "end": 1617.32,
+      "duration": 1.63,
+      "text": "of that random variable."
+    },
+    {
+      "index": 491,
+      "start": 1617.32,
+      "end": 1620.11,
+      "duration": 2.79,
+      "text": "Don't get intimidated by the fact that this random"
+    },
+    {
+      "index": 492,
+      "start": 1620.11,
+      "end": 1623.555,
+      "duration": 3.445,
+      "text": "variable, it's something that's described by a string"
+    },
+    {
+      "index": 493,
+      "start": 1623.555,
+      "end": 1627.85,
+      "duration": 4.295,
+      "text": "of eight symbols, or seven, instead of"
+    },
+    {
+      "index": 494,
+      "start": 1627.85,
+      "end": 1629.44,
+      "duration": 1.59,
+      "text": "just a single letter."
+    },
+    {
+      "index": 495,
+      "start": 1629.44,
+      "end": 1635.29,
+      "duration": 5.85,
+      "text": "Think of this whole string of symbols there as just being a"
+    },
+    {
+      "index": 496,
+      "start": 1635.29,
+      "end": 1636.94,
+      "duration": 1.65,
+      "text": "random variable."
+    },
+    {
+      "index": 497,
+      "start": 1636.94,
+      "end": 1641.79,
+      "duration": 4.85,
+      "text": "You could call it z for example, use one letter."
+    },
+    {
+      "index": 498,
+      "start": 1641.79,
+      "end": 1645.99,
+      "duration": 4.2,
+      "text": "So z is a random variable that takes these two values with"
+    },
+    {
+      "index": 499,
+      "start": 1645.99,
+      "end": 1647.99,
+      "duration": 2.0,
+      "text": "these corresponding probabilities."
+    },
+    {
+      "index": 500,
+      "start": 1647.99,
+      "end": 1651.21,
+      "duration": 3.22,
+      "text": "So we can talk about the expected value of Z, which is"
+    },
+    {
+      "index": 501,
+      "start": 1651.21,
+      "end": 1655.56,
+      "duration": 4.35,
+      "text": "going to be 1/3 times 10, 2/3 times 20, and we get a certain"
+    },
+    {
+      "index": 502,
+      "start": 1655.56,
+      "end": 1658.26,
+      "duration": 2.7,
+      "text": "number from here."
+    },
+    {
+      "index": 503,
+      "start": 1658.26,
+      "end": 1661.62,
+      "duration": 3.36,
+      "text": "And now we have all the pieces to calculate the overall"
+    },
+    {
+      "index": 504,
+      "start": 1661.62,
+      "end": 1663.62,
+      "duration": 2.0,
+      "text": "variance of x."
+    },
+    {
+      "index": 505,
+      "start": 1663.62,
+      "end": 1669.33,
+      "duration": 5.71,
+      "text": "The formula from the previous slide tells us this."
+    },
+    {
+      "index": 506,
+      "start": 1669.33,
+      "end": 1671.31,
+      "duration": 1.98,
+      "text": "Do we have all the pieces?"
+    },
+    {
+      "index": 507,
+      "start": 1671.31,
+      "end": 1673.19,
+      "duration": 1.88,
+      "text": "The expected value of the variance, we"
+    },
+    {
+      "index": 508,
+      "start": 1673.19,
+      "end": 1675.16,
+      "duration": 1.97,
+      "text": "just calculated it."
+    },
+    {
+      "index": 509,
+      "start": 1675.16,
+      "end": 1678.71,
+      "duration": 3.55,
+      "text": "The variance of the expected value, this was the last"
+    },
+    {
+      "index": 510,
+      "start": 1678.71,
+      "end": 1680.41,
+      "duration": 1.7,
+      "text": "calculation in the previous slide."
+    },
+    {
+      "index": 511,
+      "start": 1680.41,
+      "end": 1683.49,
+      "duration": 3.08,
+      "text": "We did get a number for it, it was 200."
+    },
+    {
+      "index": 512,
+      "start": 1683.49,
+      "end": 1685.765,
+      "duration": 2.275,
+      "text": "You add the two, you find the total variance."
+    },
+    {
+      "index": 513,
+      "start": 1689.05,
+      "end": 1692.35,
+      "duration": 3.3,
+      "text": "Now the useful piece of this exercise is to try to"
+    },
+    {
+      "index": 514,
+      "start": 1692.35,
+      "end": 1696.49,
+      "duration": 4.14,
+      "text": "interpret these two numbers, and see what they mean."
+    },
+    {
+      "index": 515,
+      "start": 1700.35,
+      "end": 1706.67,
+      "duration": 6.32,
+      "text": "The variance of x given y for a specific y is the variance"
+    },
+    {
+      "index": 516,
+      "start": 1706.67,
+      "end": 1708.85,
+      "duration": 2.18,
+      "text": "inside section one."
+    },
+    {
+      "index": 517,
+      "start": 1708.85,
+      "end": 1711.82,
+      "duration": 2.97,
+      "text": "This is the variance inside section two."
+    },
+    {
+      "index": 518,
+      "start": 1711.82,
+      "end": 1714.94,
+      "duration": 3.12,
+      "text": "The expected value is some kind of average of the"
+    },
+    {
+      "index": 519,
+      "start": 1714.94,
+      "end": 1718.44,
+      "duration": 3.5,
+      "text": "variances inside individual sections."
+    },
+    {
+      "index": 520,
+      "start": 1718.44,
+      "end": 1721.77,
+      "duration": 3.33,
+      "text": "So this term tells us something about the"
+    },
+    {
+      "index": 521,
+      "start": 1721.77,
+      "end": 1726.01,
+      "duration": 4.24,
+      "text": "variability of this course, how widely spread they are"
+    },
+    {
+      "index": 522,
+      "start": 1726.01,
+      "end": 1727.856,
+      "duration": 1.846,
+      "text": "within individual sections."
+    },
+    {
+      "index": 523,
+      "start": 1730.58,
+      "end": 1737.87,
+      "duration": 7.29,
+      "text": "So we have three sections, and this course happens to be--"
+    },
+    {
+      "index": 524,
+      "start": 1737.87,
+      "end": 1741.18,
+      "duration": 3.31,
+      "text": "OK, let's say the sections are really different."
+    },
+    {
+      "index": 525,
+      "start": 1741.18,
+      "end": 1743.19,
+      "duration": 2.01,
+      "text": "So here you have undergraduates and here you"
+    },
+    {
+      "index": 526,
+      "start": 1743.19,
+      "end": 1745.86,
+      "duration": 2.67,
+      "text": "have post-doctoral students."
+    },
+    {
+      "index": 527,
+      "start": 1745.86,
+      "end": 1748.59,
+      "duration": 2.73,
+      "text": "And these are the quiz scores, that's section one, section"
+    },
+    {
+      "index": 528,
+      "start": 1748.59,
+      "end": 1749.96,
+      "duration": 1.37,
+      "text": "two, section three."
+    },
+    {
+      "index": 529,
+      "start": 1749.96,
+      "end": 1753.36,
+      "duration": 3.4,
+      "text": "Here's the mean of the first section."
+    },
+    {
+      "index": 530,
+      "start": 1753.36,
+      "end": 1756.2,
+      "duration": 2.84,
+      "text": "And the variance has something to do with the spread."
+    },
+    {
+      "index": 531,
+      "start": 1756.2,
+      "end": 1758.43,
+      "duration": 2.23,
+      "text": "The variance in the second section has something to do"
+    },
+    {
+      "index": 532,
+      "start": 1758.43,
+      "end": 1761.83,
+      "duration": 3.4,
+      "text": "with the spread, similarly with the third spread."
+    },
+    {
+      "index": 533,
+      "start": 1761.83,
+      "end": 1768.22,
+      "duration": 6.39,
+      "text": "And the expected value of the conditional variances is some"
+    },
+    {
+      "index": 534,
+      "start": 1768.22,
+      "end": 1771.69,
+      "duration": 3.47,
+      "text": "weighted average of the three variances that we get from"
+    },
+    {
+      "index": 535,
+      "start": 1771.69,
+      "end": 1773.72,
+      "duration": 2.03,
+      "text": "individual sections."
+    },
+    {
+      "index": 536,
+      "start": 1773.72,
+      "end": 1777.06,
+      "duration": 3.34,
+      "text": "So variability within sections definitely contributes"
+    },
+    {
+      "index": 537,
+      "start": 1777.06,
+      "end": 1780.0,
+      "duration": 2.94,
+      "text": "something to the overall variability of this course."
+    },
+    {
+      "index": 538,
+      "start": 1780.0,
+      "end": 1785.34,
+      "duration": 5.34,
+      "text": "But if you ask me about the variability over the entire"
+    },
+    {
+      "index": 539,
+      "start": 1785.34,
+      "end": 1787.74,
+      "duration": 2.4,
+      "text": "class there's a second effect."
+    },
+    {
+      "index": 540,
+      "start": 1787.74,
+      "end": 1790.47,
+      "duration": 2.73,
+      "text": "That has to do with the fact that different sections are"
+    },
+    {
+      "index": 541,
+      "start": 1790.47,
+      "end": 1792.66,
+      "duration": 2.19,
+      "text": "very different from each other."
+    },
+    {
+      "index": 542,
+      "start": 1792.66,
+      "end": 1799.44,
+      "duration": 6.78,
+      "text": "That these courses here are far away from those scores."
+    },
+    {
+      "index": 543,
+      "start": 1799.44,
+      "end": 1802.49,
+      "duration": 3.05,
+      "text": "And this term is the one that does the job."
+    },
+    {
+      "index": 544,
+      "start": 1802.49,
+      "end": 1808.41,
+      "duration": 5.92,
+      "text": "This one looks at the expected values inside each section,"
+    },
+    {
+      "index": 545,
+      "start": 1808.41,
+      "end": 1812.84,
+      "duration": 4.43,
+      "text": "and these expected values are this, this, and that."
+    },
+    {
+      "index": 546,
+      "start": 1812.84,
+      "end": 1818.23,
+      "duration": 5.39,
+      "text": "And asks a question how widely spread are they?"
+    },
+    {
+      "index": 547,
+      "start": 1818.23,
+      "end": 1823.0,
+      "duration": 4.77,
+      "text": "It asks how different from each other are the means"
+    },
+    {
+      "index": 548,
+      "start": 1823.0,
+      "end": 1825.4,
+      "duration": 2.4,
+      "text": "inside individual sections?"
+    },
+    {
+      "index": 549,
+      "start": 1825.4,
+      "end": 1828.28,
+      "duration": 2.88,
+      "text": "And in this picture it would be a large number because the"
+    },
+    {
+      "index": 550,
+      "start": 1828.28,
+      "end": 1831.98,
+      "duration": 3.7,
+      "text": "difference section means are quite different."
+    },
+    {
+      "index": 551,
+      "start": 1831.98,
+      "end": 1835.89,
+      "duration": 3.91,
+      "text": "So the story that this formula is telling us is that the"
+    },
+    {
+      "index": 552,
+      "start": 1835.89,
+      "end": 1840.81,
+      "duration": 4.92,
+      "text": "overall variability of the quiz scores consists of two"
+    },
+    {
+      "index": 553,
+      "start": 1840.81,
+      "end": 1844.72,
+      "duration": 3.91,
+      "text": "factors that can be quantified and added."
+    },
+    {
+      "index": 554,
+      "start": 1844.72,
+      "end": 1849.58,
+      "duration": 4.86,
+      "text": "One factor is how much variability is there inside"
+    },
+    {
+      "index": 555,
+      "start": 1849.58,
+      "end": 1851.42,
+      "duration": 1.84,
+      "text": "individual sections?"
+    },
+    {
+      "index": 556,
+      "start": 1851.42,
+      "end": 1854.99,
+      "duration": 3.57,
+      "text": "And the other factor is how different are the sections"
+    },
+    {
+      "index": 557,
+      "start": 1854.99,
+      "end": 1856.1,
+      "duration": 1.11,
+      "text": "from each other?"
+    },
+    {
+      "index": 558,
+      "start": 1856.1,
+      "end": 1858.62,
+      "duration": 2.52,
+      "text": "Both effects contribute to the overall"
+    },
+    {
+      "index": 559,
+      "start": 1858.62,
+      "end": 1859.885,
+      "duration": 1.265,
+      "text": "variability of this course."
+    },
+    {
+      "index": 560,
+      "start": 1863.92,
+      "end": 1868.29,
+      "duration": 4.37,
+      "text": "Let's continue with just one more numerical example."
+    },
+    {
+      "index": 561,
+      "start": 1868.29,
+      "end": 1871.73,
+      "duration": 3.44,
+      "text": "Just to get the hang of doing these kinds of calculations,"
+    },
+    {
+      "index": 562,
+      "start": 1871.73,
+      "end": 1875.81,
+      "duration": 4.08,
+      "text": "and apply this formula to do a divide and conquer calculation"
+    },
+    {
+      "index": 563,
+      "start": 1875.81,
+      "end": 1878.27,
+      "duration": 2.46,
+      "text": "of the variance of a random variable."
+    },
+    {
+      "index": 564,
+      "start": 1878.27,
+      "end": 1880.83,
+      "duration": 2.56,
+      "text": "Just for variety now we're going to take a continuous"
+    },
+    {
+      "index": 565,
+      "start": 1880.83,
+      "end": 1882.14,
+      "duration": 1.31,
+      "text": "random variable."
+    },
+    {
+      "index": 566,
+      "start": 1882.14,
+      "end": 1885.89,
+      "duration": 3.75,
+      "text": "Somebody gives you a PDF if this form, and they ask you"
+    },
+    {
+      "index": 567,
+      "start": 1885.89,
+      "end": 1886.64,
+      "duration": 0.75,
+      "text": "for the variance."
+    },
+    {
+      "index": 568,
+      "start": 1886.64,
+      "end": 1889.49,
+      "duration": 2.85,
+      "text": "And you say oh that's too complicated, I don't want to"
+    },
+    {
+      "index": 569,
+      "start": 1889.49,
+      "end": 1890.35,
+      "duration": 0.86,
+      "text": "do integrals."
+    },
+    {
+      "index": 570,
+      "start": 1890.35,
+      "end": 1892.48,
+      "duration": 2.13,
+      "text": "Can I divide and conquer?"
+    },
+    {
+      "index": 571,
+      "start": 1892.48,
+      "end": 1895.21,
+      "duration": 2.73,
+      "text": "And you say OK, let me do the following trick."
+    },
+    {
+      "index": 572,
+      "start": 1895.21,
+      "end": 1897.83,
+      "duration": 2.62,
+      "text": "Let me define a random variable, y."
+    },
+    {
+      "index": 573,
+      "start": 1897.83,
+      "end": 1903.45,
+      "duration": 5.62,
+      "text": "Which takes the value 1 if x falls in here, and takes the"
+    },
+    {
+      "index": 574,
+      "start": 1903.45,
+      "end": 1907.08,
+      "duration": 3.63,
+      "text": "value 2 if x falls in the second interval."
+    },
+    {
+      "index": 575,
+      "start": 1907.08,
+      "end": 1911.34,
+      "duration": 4.26,
+      "text": "And let me try to work in the conditional world where things"
+    },
+    {
+      "index": 576,
+      "start": 1911.34,
+      "end": 1914.34,
+      "duration": 3.0,
+      "text": "might be easier, and then add things up to"
+    },
+    {
+      "index": 577,
+      "start": 1914.34,
+      "end": 1917.54,
+      "duration": 3.2,
+      "text": "get the overall variance."
+    },
+    {
+      "index": 578,
+      "start": 1917.54,
+      "end": 1921.5,
+      "duration": 3.96,
+      "text": "So I have defined y this particular way."
+    },
+    {
+      "index": 579,
+      "start": 1921.5,
+      "end": 1924.562,
+      "duration": 3.062,
+      "text": "In this example y becomes a function of x."
+    },
+    {
+      "index": 580,
+      "start": 1924.562,
+      "end": 1927.37,
+      "duration": 2.808,
+      "text": "y is completely determined by x."
+    },
+    {
+      "index": 581,
+      "start": 1927.37,
+      "end": 1931.23,
+      "duration": 3.86,
+      "text": "And I'm going to calculate the overall variance by trying to"
+    },
+    {
+      "index": 582,
+      "start": 1931.23,
+      "end": 1934.42,
+      "duration": 3.19,
+      "text": "calculate all of the terms that are involved here."
+    },
+    {
+      "index": 583,
+      "start": 1934.42,
+      "end": 1936.43,
+      "duration": 2.01,
+      "text": "So let's start calculating."
+    },
+    {
+      "index": 584,
+      "start": 1936.43,
+      "end": 1941.69,
+      "duration": 5.26,
+      "text": "First observation is that this event has probability 1/3, and"
+    },
+    {
+      "index": 585,
+      "start": 1941.69,
+      "end": 1944.39,
+      "duration": 2.7,
+      "text": "this event has probability 2/3."
+    },
+    {
+      "index": 586,
+      "start": 1944.39,
+      "end": 1948.48,
+      "duration": 4.09,
+      "text": "The expected value of x given that we are in this universe"
+    },
+    {
+      "index": 587,
+      "start": 1948.48,
+      "end": 1951.26,
+      "duration": 2.78,
+      "text": "is 1/2, because we have a uniform"
+    },
+    {
+      "index": 588,
+      "start": 1951.26,
+      "end": 1953.35,
+      "duration": 2.09,
+      "text": "distribution from 0 to 1."
+    },
+    {
+      "index": 589,
+      "start": 1953.35,
+      "end": 1956.63,
+      "duration": 3.28,
+      "text": "Here we have a uniform distribution from 1 to 2, so"
+    },
+    {
+      "index": 590,
+      "start": 1956.63,
+      "end": 1960.82,
+      "duration": 4.19,
+      "text": "the conditional expectation of x in that universe is 3/2."
+    },
+    {
+      "index": 591,
+      "start": 1960.82,
+      "end": 1963.2,
+      "duration": 2.38,
+      "text": "How about conditional variances?"
+    },
+    {
+      "index": 592,
+      "start": 1963.2,
+      "end": 1968.92,
+      "duration": 5.72,
+      "text": "In the world who are y is equal to 1 x has a uniform"
+    },
+    {
+      "index": 593,
+      "start": 1968.92,
+      "end": 1970.77,
+      "duration": 1.85,
+      "text": "distribution on a unit interval."
+    },
+    {
+      "index": 594,
+      "start": 1970.77,
+      "end": 1973.09,
+      "duration": 2.32,
+      "text": "What's the variance of x?"
+    },
+    {
+      "index": 595,
+      "start": 1973.09,
+      "end": 1977.48,
+      "duration": 4.39,
+      "text": "By now you've probably seen that formula, it's 1 over 12."
+    },
+    {
+      "index": 596,
+      "start": 1977.48,
+      "end": 1980.58,
+      "duration": 3.1,
+      "text": "1 over 12 is the variance of a uniform distribution over a"
+    },
+    {
+      "index": 597,
+      "start": 1980.58,
+      "end": 1981.88,
+      "duration": 1.3,
+      "text": "unit interval."
+    },
+    {
+      "index": 598,
+      "start": 1981.88,
+      "end": 1987.12,
+      "duration": 5.24,
+      "text": "When y is equal to 2 the variance is again 1 over 12."
+    },
+    {
+      "index": 599,
+      "start": 1987.12,
+      "end": 1990.85,
+      "duration": 3.73,
+      "text": "Because in this instance again x has a uniform distribution"
+    },
+    {
+      "index": 600,
+      "start": 1990.85,
+      "end": 1993.36,
+      "duration": 2.51,
+      "text": "over an interval of unit length."
+    },
+    {
+      "index": 601,
+      "start": 1993.36,
+      "end": 1996.01,
+      "duration": 2.65,
+      "text": "What's the overall expected value of x?"
+    },
+    {
+      "index": 602,
+      "start": 1996.01,
+      "end": 1999.08,
+      "duration": 3.07,
+      "text": "The way you find the overall expected value is to consider"
+    },
+    {
+      "index": 603,
+      "start": 1999.08,
+      "end": 2001.37,
+      "duration": 2.29,
+      "text": "the different numerical values of the conditional"
+    },
+    {
+      "index": 604,
+      "start": 2001.37,
+      "end": 2002.45,
+      "duration": 1.08,
+      "text": "expectation."
+    },
+    {
+      "index": 605,
+      "start": 2002.45,
+      "end": 2005.57,
+      "duration": 3.12,
+      "text": "And weigh them according to their probabilities."
+    },
+    {
+      "index": 606,
+      "start": 2005.57,
+      "end": 2008.77,
+      "duration": 3.2,
+      "text": "So with probability 1/3 the conditional"
+    },
+    {
+      "index": 607,
+      "start": 2008.77,
+      "end": 2010.83,
+      "duration": 2.06,
+      "text": "expectation is 1/2."
+    },
+    {
+      "index": 608,
+      "start": 2010.83,
+      "end": 2014.17,
+      "duration": 3.34,
+      "text": "And with probability 2/3 the conditional"
+    },
+    {
+      "index": 609,
+      "start": 2014.17,
+      "end": 2016.46,
+      "duration": 2.29,
+      "text": "expectation is 3 over 2."
+    },
+    {
+      "index": 610,
+      "start": 2016.46,
+      "end": 2019.555,
+      "duration": 3.095,
+      "text": "And this turns out to be 7 over 6."
+    },
+    {
+      "index": 611,
+      "start": 2025.08,
+      "end": 2028.45,
+      "duration": 3.37,
+      "text": "So this is the advance work we need to do, now let's"
+    },
+    {
+      "index": 612,
+      "start": 2028.45,
+      "end": 2030.66,
+      "duration": 2.21,
+      "text": "calculate a few things here."
+    },
+    {
+      "index": 613,
+      "start": 2030.66,
+      "end": 2036.66,
+      "duration": 6.0,
+      "text": "What's the variance of the expected value of x given y?"
+    },
+    {
+      "index": 614,
+      "start": 2036.66,
+      "end": 2040.8,
+      "duration": 4.14,
+      "text": "Expected value of x given y is a random variable that takes"
+    },
+    {
+      "index": 615,
+      "start": 2040.8,
+      "end": 2046.6,
+      "duration": 5.8,
+      "text": "these two values with these probabilities."
+    },
+    {
+      "index": 616,
+      "start": 2046.6,
+      "end": 2050.61,
+      "duration": 4.01,
+      "text": "So to find the variance we consider the probability that"
+    },
+    {
+      "index": 617,
+      "start": 2050.61,
+      "end": 2058.73,
+      "duration": 8.12,
+      "text": "the expected value takes the numerical value of 1/2 minus"
+    },
+    {
+      "index": 618,
+      "start": 2058.73,
+      "end": 2063.659,
+      "duration": 4.929,
+      "text": "the mean of the conditional expectation."
+    },
+    {
+      "index": 619,
+      "start": 2063.659,
+      "end": 2066.82,
+      "duration": 3.161,
+      "text": "What's the mean of the conditional expectation?"
+    },
+    {
+      "index": 620,
+      "start": 2066.82,
+      "end": 2068.56,
+      "duration": 1.74,
+      "text": "It's the unconditional expectation."
+    },
+    {
+      "index": 621,
+      "start": 2068.56,
+      "end": 2070.98,
+      "duration": 2.42,
+      "text": "So it's 7 over 6."
+    },
+    {
+      "index": 622,
+      "start": 2070.98,
+      "end": 2072.889,
+      "duration": 1.909,
+      "text": "We just did that calculation."
+    },
+    {
+      "index": 623,
+      "start": 2072.889,
+      "end": 2078.05,
+      "duration": 5.161,
+      "text": "So I'm putting here that number, 7 over 6 squared."
+    },
+    {
+      "index": 624,
+      "start": 2078.05,
+      "end": 2081.83,
+      "duration": 3.78,
+      "text": "And then there's a second term with probability 2/3, the"
+    },
+    {
+      "index": 625,
+      "start": 2081.83,
+      "end": 2088.76,
+      "duration": 6.93,
+      "text": "conditional expectation takes this value of 3 over 2, which"
+    },
+    {
+      "index": 626,
+      "start": 2088.76,
+      "end": 2094.38,
+      "duration": 5.62,
+      "text": "is so much away from the mean, and we get this contribution."
+    },
+    {
+      "index": 627,
+      "start": 2094.38,
+      "end": 2097.8,
+      "duration": 3.42,
+      "text": "So this way we have calculated the variance of the"
+    },
+    {
+      "index": 628,
+      "start": 2097.8,
+      "end": 2101.59,
+      "duration": 3.79,
+      "text": "conditional expectation, this is this term."
+    },
+    {
+      "index": 629,
+      "start": 2101.59,
+      "end": 2104.0,
+      "duration": 2.41,
+      "text": "What is this?"
+    },
+    {
+      "index": 630,
+      "start": 2104.0,
+      "end": 2105.94,
+      "duration": 1.94,
+      "text": "Any guesses what this number is?"
+    },
+    {
+      "index": 631,
+      "start": 2109.9,
+      "end": 2111.74,
+      "duration": 1.84,
+      "text": "It's 1 over 12, why?"
+    },
+    {
+      "index": 632,
+      "start": 2111.74,
+      "end": 2115.74,
+      "duration": 4.0,
+      "text": "The conditional variance just happened in this example to be"
+    },
+    {
+      "index": 633,
+      "start": 2115.74,
+      "end": 2118.55,
+      "duration": 2.81,
+      "text": "1 over 12 no matter what."
+    },
+    {
+      "index": 634,
+      "start": 2118.55,
+      "end": 2121.24,
+      "duration": 2.69,
+      "text": "So the conditional variance is a deterministic random"
+    },
+    {
+      "index": 635,
+      "start": 2121.24,
+      "end": 2123.53,
+      "duration": 2.29,
+      "text": "variable that takes a constant value."
+    },
+    {
+      "index": 636,
+      "start": 2123.53,
+      "end": 2127.11,
+      "duration": 3.58,
+      "text": "So the expected value of this random variable"
+    },
+    {
+      "index": 637,
+      "start": 2127.11,
+      "end": 2129.49,
+      "duration": 2.38,
+      "text": "is just 1 over 12."
+    },
+    {
+      "index": 638,
+      "start": 2129.49,
+      "end": 2135.46,
+      "duration": 5.97,
+      "text": "So we got the two pieces that we need, and so we do have the"
+    },
+    {
+      "index": 639,
+      "start": 2135.46,
+      "end": 2139.515,
+      "duration": 4.055,
+      "text": "overall variance of the random variable x."
+    },
+    {
+      "index": 640,
+      "start": 2145.68,
+      "end": 2150.75,
+      "duration": 5.07,
+      "text": "So this was just an academic example in order to get the"
+    },
+    {
+      "index": 641,
+      "start": 2150.75,
+      "end": 2156.66,
+      "duration": 5.91,
+      "text": "hang of how to manipulate various quantities."
+    },
+    {
+      "index": 642,
+      "start": 2156.66,
+      "end": 2160.48,
+      "duration": 3.82,
+      "text": "Now let's use what we have learned and the tools that we"
+    },
+    {
+      "index": 643,
+      "start": 2160.48,
+      "end": 2164.41,
+      "duration": 3.93,
+      "text": "have to do something a little more interesting."
+    },
+    {
+      "index": 644,
+      "start": 2164.41,
+      "end": 2167.82,
+      "duration": 3.41,
+      "text": "OK, so by now you're all in love with probabilities."
+    },
+    {
+      "index": 645,
+      "start": 2167.82,
+      "end": 2171.59,
+      "duration": 3.77,
+      "text": "So over the weekend you're going to bookstores to buy"
+    },
+    {
+      "index": 646,
+      "start": 2171.59,
+      "end": 2173.54,
+      "duration": 1.95,
+      "text": "probability books."
+    },
+    {
+      "index": 647,
+      "start": 2173.54,
+      "end": 2179.11,
+      "duration": 5.57,
+      "text": "So you're going to visit a random number bookstores, and"
+    },
+    {
+      "index": 648,
+      "start": 2179.11,
+      "end": 2183.9,
+      "duration": 4.79,
+      "text": "at each one of the bookstores you're going to spend a random"
+    },
+    {
+      "index": 649,
+      "start": 2183.9,
+      "end": 2186.42,
+      "duration": 2.52,
+      "text": "amount of money."
+    },
+    {
+      "index": 650,
+      "start": 2186.42,
+      "end": 2191.06,
+      "duration": 4.64,
+      "text": "So let n be the number of stores that you are visiting."
+    },
+    {
+      "index": 651,
+      "start": 2191.06,
+      "end": 2192.89,
+      "duration": 1.83,
+      "text": "So n is an integer--"
+    },
+    {
+      "index": 652,
+      "start": 2192.89,
+      "end": 2194.87,
+      "duration": 1.98,
+      "text": "non-negative random variable--"
+    },
+    {
+      "index": 653,
+      "start": 2194.87,
+      "end": 2197.05,
+      "duration": 2.18,
+      "text": "and perhaps you know the distribution"
+    },
+    {
+      "index": 654,
+      "start": 2197.05,
+      "end": 2199.23,
+      "duration": 2.18,
+      "text": "of that random variable."
+    },
+    {
+      "index": 655,
+      "start": 2199.23,
+      "end": 2204.08,
+      "duration": 4.85,
+      "text": "Each time that you walk into a store your mind is clear from"
+    },
+    {
+      "index": 656,
+      "start": 2204.08,
+      "end": 2208.58,
+      "duration": 4.5,
+      "text": "whatever you did before, and you just buy a random number"
+    },
+    {
+      "index": 657,
+      "start": 2208.58,
+      "end": 2211.53,
+      "duration": 2.95,
+      "text": "of books that has nothing to do with how many books you"
+    },
+    {
+      "index": 658,
+      "start": 2211.53,
+      "end": 2213.65,
+      "duration": 2.12,
+      "text": "bought earlier on the day."
+    },
+    {
+      "index": 659,
+      "start": 2213.65,
+      "end": 2215.89,
+      "duration": 2.24,
+      "text": "It has nothing to do with how many stores you are"
+    },
+    {
+      "index": 660,
+      "start": 2215.89,
+      "end": 2217.49,
+      "duration": 1.6,
+      "text": "visiting, and so on."
+    },
+    {
+      "index": 661,
+      "start": 2217.49,
+      "end": 2220.76,
+      "duration": 3.27,
+      "text": "So each time you enter as a brand new person, and buy a"
+    },
+    {
+      "index": 662,
+      "start": 2220.76,
+      "end": 2222.18,
+      "duration": 1.42,
+      "text": "random number of books, and spend a"
+    },
+    {
+      "index": 663,
+      "start": 2222.18,
+      "end": 2223.58,
+      "duration": 1.4,
+      "text": "random amount of money."
+    },
+    {
+      "index": 664,
+      "start": 2223.58,
+      "end": 2227.16,
+      "duration": 3.58,
+      "text": "So what I'm saying, more precisely, is that I'm making"
+    },
+    {
+      "index": 665,
+      "start": 2227.16,
+      "end": 2228.76,
+      "duration": 1.6,
+      "text": "the following assumptions."
+    },
+    {
+      "index": 666,
+      "start": 2228.76,
+      "end": 2231.13,
+      "duration": 2.37,
+      "text": "That for each store i--"
+    },
+    {
+      "index": 667,
+      "start": 2231.13,
+      "end": 2234.36,
+      "duration": 3.23,
+      "text": "if you end up visiting the i-th store--"
+    },
+    {
+      "index": 668,
+      "start": 2234.36,
+      "end": 2237.48,
+      "duration": 3.12,
+      "text": "the amount of money that you spend is a random variable"
+    },
+    {
+      "index": 669,
+      "start": 2237.48,
+      "end": 2239.09,
+      "duration": 1.61,
+      "text": "that has a certain distribution."
+    },
+    {
+      "index": 670,
+      "start": 2239.09,
+      "end": 2243.41,
+      "duration": 4.32,
+      "text": "That distribution is the same for each store, and the xi's"
+    },
+    {
+      "index": 671,
+      "start": 2243.41,
+      "end": 2246.89,
+      "duration": 3.48,
+      "text": "from store to store are independent from each other."
+    },
+    {
+      "index": 672,
+      "start": 2246.89,
+      "end": 2250.8,
+      "duration": 3.91,
+      "text": "And furthermore, the xi's are all independent of n."
+    },
+    {
+      "index": 673,
+      "start": 2250.8,
+      "end": 2254.13,
+      "duration": 3.33,
+      "text": "So how much I'm spending at the store-- once I get in--"
+    },
+    {
+      "index": 674,
+      "start": 2254.13,
+      "end": 2257.28,
+      "duration": 3.15,
+      "text": "has nothing to do with how many stores I'm visiting."
+    },
+    {
+      "index": 675,
+      "start": 2257.28,
+      "end": 2260.7,
+      "duration": 3.42,
+      "text": "So this is the setting that we're going to look at."
+    },
+    {
+      "index": 676,
+      "start": 2260.7,
+      "end": 2265.47,
+      "duration": 4.77,
+      "text": "y is the total amount of money that you did spend."
+    },
+    {
+      "index": 677,
+      "start": 2265.47,
+      "end": 2268.79,
+      "duration": 3.32,
+      "text": "It's the sum of how much you spent in the stores, but the"
+    },
+    {
+      "index": 678,
+      "start": 2268.79,
+      "end": 2273.98,
+      "duration": 5.19,
+      "text": "index goes up to capital N. And what's the twist here?"
+    },
+    {
+      "index": 679,
+      "start": 2273.98,
+      "end": 2277.46,
+      "duration": 3.48,
+      "text": "It's that we're dealing with the sum of independent random"
+    },
+    {
+      "index": 680,
+      "start": 2277.46,
+      "end": 2282.69,
+      "duration": 5.23,
+      "text": "variables except that how many random variables we have is"
+    },
+    {
+      "index": 681,
+      "start": 2282.69,
+      "end": 2287.47,
+      "duration": 4.78,
+      "text": "not given to us ahead of time, but it is chosen at random."
+    },
+    {
+      "index": 682,
+      "start": 2287.47,
+      "end": 2292.48,
+      "duration": 5.01,
+      "text": "So it's a sum of a random number of random variables."
+    },
+    {
+      "index": 683,
+      "start": 2292.48,
+      "end": 2295.36,
+      "duration": 2.88,
+      "text": "We would like to calculate some quantities that have to"
+    },
+    {
+      "index": 684,
+      "start": 2295.36,
+      "end": 2299.69,
+      "duration": 4.33,
+      "text": "do with y, in particular the expected value of y, or the"
+    },
+    {
+      "index": 685,
+      "start": 2299.69,
+      "end": 2301.93,
+      "duration": 2.24,
+      "text": "variance of y."
+    },
+    {
+      "index": 686,
+      "start": 2301.93,
+      "end": 2303.54,
+      "duration": 1.61,
+      "text": "How do we go about it?"
+    },
+    {
+      "index": 687,
+      "start": 2303.54,
+      "end": 2306.95,
+      "duration": 3.41,
+      "text": "OK, we know something about the linearity of expectations."
+    },
+    {
+      "index": 688,
+      "start": 2306.95,
+      "end": 2311.89,
+      "duration": 4.94,
+      "text": "That expectation of a sum is the sum of the expectations."
+    },
+    {
+      "index": 689,
+      "start": 2311.89,
+      "end": 2317.18,
+      "duration": 5.29,
+      "text": "But we have used that rule only in the case where it's"
+    },
+    {
+      "index": 690,
+      "start": 2317.18,
+      "end": 2319.85,
+      "duration": 2.67,
+      "text": "the sum of a fixed number of random variables."
+    },
+    {
+      "index": 691,
+      "start": 2319.85,
+      "end": 2323.67,
+      "duration": 3.82,
+      "text": "So expected value of x plus y plus z is expectation of x,"
+    },
+    {
+      "index": 692,
+      "start": 2323.67,
+      "end": 2326.39,
+      "duration": 2.72,
+      "text": "plus expectation of y, plus expectation of z."
+    },
+    {
+      "index": 693,
+      "start": 2326.39,
+      "end": 2328.96,
+      "duration": 2.57,
+      "text": "We know this for a fixed number of random variables."
+    },
+    {
+      "index": 694,
+      "start": 2328.96,
+      "end": 2333.14,
+      "duration": 4.18,
+      "text": "We don't know it, or how it would work for the case of a"
+    },
+    {
+      "index": 695,
+      "start": 2333.14,
+      "end": 2334.43,
+      "duration": 1.29,
+      "text": "random number."
+    },
+    {
+      "index": 696,
+      "start": 2334.43,
+      "end": 2337.87,
+      "duration": 3.44,
+      "text": "Well, if we know something about the case for fixed"
+    },
+    {
+      "index": 697,
+      "start": 2337.87,
+      "end": 2341.73,
+      "duration": 3.86,
+      "text": "random variables let's transport ourselves to a"
+    },
+    {
+      "index": 698,
+      "start": 2341.73,
+      "end": 2345.31,
+      "duration": 3.58,
+      "text": "conditional universe where the number of random variables"
+    },
+    {
+      "index": 699,
+      "start": 2345.31,
+      "end": 2347.57,
+      "duration": 2.26,
+      "text": "we're summing is fixed."
+    },
+    {
+      "index": 700,
+      "start": 2347.57,
+      "end": 2351.64,
+      "duration": 4.07,
+      "text": "So let's try to break the problem divide and conquer by"
+    },
+    {
+      "index": 701,
+      "start": 2351.64,
+      "end": 2355.3,
+      "duration": 3.66,
+      "text": "conditioning on the different possible values of the number"
+    },
+    {
+      "index": 702,
+      "start": 2355.3,
+      "end": 2357.29,
+      "duration": 1.99,
+      "text": "of bookstores that we're visiting."
+    },
+    {
+      "index": 703,
+      "start": 2357.29,
+      "end": 2359.86,
+      "duration": 2.57,
+      "text": "So let's work in the conditional universe, find the"
+    },
+    {
+      "index": 704,
+      "start": 2359.86,
+      "end": 2364.95,
+      "duration": 5.09,
+      "text": "conditional expectation in this universe, and then use"
+    },
+    {
+      "index": 705,
+      "start": 2364.95,
+      "end": 2369.63,
+      "duration": 4.68,
+      "text": "our law of iterated expectations to see what"
+    },
+    {
+      "index": 706,
+      "start": 2369.63,
+      "end": 2372.84,
+      "duration": 3.21,
+      "text": "happens more generally."
+    },
+    {
+      "index": 707,
+      "start": 2372.84,
+      "end": 2377.12,
+      "duration": 4.28,
+      "text": "If I told you that I visited exactly little n stores, where"
+    },
+    {
+      "index": 708,
+      "start": 2377.12,
+      "end": 2380.42,
+      "duration": 3.3,
+      "text": "little n now is a number, let's say 10."
+    },
+    {
+      "index": 709,
+      "start": 2380.42,
+      "end": 2384.84,
+      "duration": 4.42,
+      "text": "Then the amount of money you're spending is x1 plus x2"
+    },
+    {
+      "index": 710,
+      "start": 2384.84,
+      "end": 2391.06,
+      "duration": 6.22,
+      "text": "all the way up to x10 given that we visited 10 stores."
+    },
+    {
+      "index": 711,
+      "start": 2391.06,
+      "end": 2394.64,
+      "duration": 3.58,
+      "text": "So what I have done here is that I've replaced the capital"
+    },
+    {
+      "index": 712,
+      "start": 2394.64,
+      "end": 2399.37,
+      "duration": 4.73,
+      "text": "N with little n, and I can do this because I'm now in the"
+    },
+    {
+      "index": 713,
+      "start": 2399.37,
+      "end": 2401.16,
+      "duration": 1.79,
+      "text": "conditional universe where I know that"
+    },
+    {
+      "index": 714,
+      "start": 2401.16,
+      "end": 2404.16,
+      "duration": 3.0,
+      "text": "capital N is little n."
+    },
+    {
+      "index": 715,
+      "start": 2404.16,
+      "end": 2406.84,
+      "duration": 2.68,
+      "text": "Now little n is fixed."
+    },
+    {
+      "index": 716,
+      "start": 2406.84,
+      "end": 2410.81,
+      "duration": 3.97,
+      "text": "We have assumed that n is independent from the xi's."
+    },
+    {
+      "index": 717,
+      "start": 2410.81,
+      "end": 2415.9,
+      "duration": 5.09,
+      "text": "So in this universe of a fixed n this information here"
+    },
+    {
+      "index": 718,
+      "start": 2415.9,
+      "end": 2420.4,
+      "duration": 4.5,
+      "text": "doesn't tell me anything new about the values of the x's."
+    },
+    {
+      "index": 719,
+      "start": 2420.4,
+      "end": 2424.6,
+      "duration": 4.2,
+      "text": "If you're conditioning random variables that are independent"
+    },
+    {
+      "index": 720,
+      "start": 2424.6,
+      "end": 2427.22,
+      "duration": 2.62,
+      "text": "from the random variables you are interested in, the"
+    },
+    {
+      "index": 721,
+      "start": 2427.22,
+      "end": 2430.63,
+      "duration": 3.41,
+      "text": "conditioning has no effect, and so it can be dropped."
+    },
+    {
+      "index": 722,
+      "start": 2430.63,
+      "end": 2433.0,
+      "duration": 2.37,
+      "text": "So in this conditional universe where you visit"
+    },
+    {
+      "index": 723,
+      "start": 2433.0,
+      "end": 2435.72,
+      "duration": 2.72,
+      "text": "exactly 10 stores the expected amount of money you're"
+    },
+    {
+      "index": 724,
+      "start": 2435.72,
+      "end": 2440.84,
+      "duration": 5.12,
+      "text": "spending is the expectation of the amount of money spent in"
+    },
+    {
+      "index": 725,
+      "start": 2440.84,
+      "end": 2444.35,
+      "duration": 3.51,
+      "text": "10 stores, which is the sum of the expected amount of money"
+    },
+    {
+      "index": 726,
+      "start": 2444.35,
+      "end": 2445.88,
+      "duration": 1.53,
+      "text": "in each store."
+    },
+    {
+      "index": 727,
+      "start": 2445.88,
+      "end": 2448.76,
+      "duration": 2.88,
+      "text": "Each one of these is the same number, because the random"
+    },
+    {
+      "index": 728,
+      "start": 2448.76,
+      "end": 2450.96,
+      "duration": 2.2,
+      "text": "variables have identical distributions."
+    },
+    {
+      "index": 729,
+      "start": 2450.96,
+      "end": 2454.13,
+      "duration": 3.17,
+      "text": "So it's n times the expected value of money you spent in a"
+    },
+    {
+      "index": 730,
+      "start": 2454.13,
+      "end": 2457.14,
+      "duration": 3.01,
+      "text": "typical store."
+    },
+    {
+      "index": 731,
+      "start": 2457.14,
+      "end": 2462.24,
+      "duration": 5.1,
+      "text": "This is almost obvious without doing it formally."
+    },
+    {
+      "index": 732,
+      "start": 2462.24,
+      "end": 2465.01,
+      "duration": 2.77,
+      "text": "If I'm telling you that you're visiting 10 stores, what you"
+    },
+    {
+      "index": 733,
+      "start": 2465.01,
+      "end": 2469.22,
+      "duration": 4.21,
+      "text": "expect to spend is 10 times the amount you expect to spend"
+    },
+    {
+      "index": 734,
+      "start": 2469.22,
+      "end": 2472.18,
+      "duration": 2.96,
+      "text": "in each store individually."
+    },
+    {
+      "index": 735,
+      "start": 2472.18,
+      "end": 2476.48,
+      "duration": 4.3,
+      "text": "Now let's take this equality here and rewrite it in our"
+    },
+    {
+      "index": 736,
+      "start": 2476.48,
+      "end": 2480.03,
+      "duration": 3.55,
+      "text": "abstract notation, in terms of random variables."
+    },
+    {
+      "index": 737,
+      "start": 2480.03,
+      "end": 2482.17,
+      "duration": 2.14,
+      "text": "This is an equality between numbers."
+    },
+    {
+      "index": 738,
+      "start": 2482.17,
+      "end": 2485.44,
+      "duration": 3.27,
+      "text": "Expected value of y given that you visit 10 stores is 10"
+    },
+    {
+      "index": 739,
+      "start": 2485.44,
+      "end": 2488.22,
+      "duration": 2.78,
+      "text": "times this particular number."
+    },
+    {
+      "index": 740,
+      "start": 2488.22,
+      "end": 2490.345,
+      "duration": 2.125,
+      "text": "Let's translate it into random variables."
+    },
+    {
+      "index": 741,
+      "start": 2490.345,
+      "end": 2496.29,
+      "duration": 5.945,
+      "text": "In random variable notation, the expected value of money"
+    },
+    {
+      "index": 742,
+      "start": 2496.29,
+      "end": 2499.61,
+      "duration": 3.32,
+      "text": "you're spending given the number of stores--"
+    },
+    {
+      "index": 743,
+      "start": 2499.61,
+      "end": 2502.48,
+      "duration": 2.87,
+      "text": "but without telling you a specific number--"
+    },
+    {
+      "index": 744,
+      "start": 2502.48,
+      "end": 2506.72,
+      "duration": 4.24,
+      "text": "is whatever that number of stores turns out to be times"
+    },
+    {
+      "index": 745,
+      "start": 2506.72,
+      "end": 2509.3,
+      "duration": 2.58,
+      "text": "the expected value of x."
+    },
+    {
+      "index": 746,
+      "start": 2509.3,
+      "end": 2515.11,
+      "duration": 5.81,
+      "text": "So this is a random variable that takes this as a numerical"
+    },
+    {
+      "index": 747,
+      "start": 2515.11,
+      "end": 2518.15,
+      "duration": 3.04,
+      "text": "value whenever capital N happens to be"
+    },
+    {
+      "index": 748,
+      "start": 2518.15,
+      "end": 2520.03,
+      "duration": 1.88,
+      "text": "equal to little n."
+    },
+    {
+      "index": 749,
+      "start": 2520.03,
+      "end": 2524.57,
+      "duration": 4.54,
+      "text": "This is a random variable, which by definition takes this"
+    },
+    {
+      "index": 750,
+      "start": 2524.57,
+      "end": 2527.45,
+      "duration": 2.88,
+      "text": "numerical value whenever capital N is"
+    },
+    {
+      "index": 751,
+      "start": 2527.45,
+      "end": 2529.52,
+      "duration": 2.07,
+      "text": "equal to little n."
+    },
+    {
+      "index": 752,
+      "start": 2529.52,
+      "end": 2534.96,
+      "duration": 5.44,
+      "text": "So no matter what capital N happens to be what specific"
+    },
+    {
+      "index": 753,
+      "start": 2534.96,
+      "end": 2538.87,
+      "duration": 3.91,
+      "text": "value, little n, it takes this is equal to that."
+    },
+    {
+      "index": 754,
+      "start": 2538.87,
+      "end": 2541.59,
+      "duration": 2.72,
+      "text": "Therefore the value of this random variable is going to be"
+    },
+    {
+      "index": 755,
+      "start": 2541.59,
+      "end": 2543.35,
+      "duration": 1.76,
+      "text": "equal to that random variable."
+    },
+    {
+      "index": 756,
+      "start": 2543.35,
+      "end": 2546.75,
+      "duration": 3.4,
+      "text": "So as random variables, these two random variables are equal"
+    },
+    {
+      "index": 757,
+      "start": 2546.75,
+      "end": 2548.0,
+      "duration": 1.25,
+      "text": "to each other."
+    },
+    {
+      "index": 758,
+      "start": 2549.94,
+      "end": 2553.2,
+      "duration": 3.26,
+      "text": "And now we use the law of iterated expectations."
+    },
+    {
+      "index": 759,
+      "start": 2553.2,
+      "end": 2555.75,
+      "duration": 2.55,
+      "text": "The law of iterated expectations tells us that the"
+    },
+    {
+      "index": 760,
+      "start": 2555.75,
+      "end": 2559.53,
+      "duration": 3.78,
+      "text": "overall expected value of y is the expected value of the"
+    },
+    {
+      "index": 761,
+      "start": 2559.53,
+      "end": 2561.27,
+      "duration": 1.74,
+      "text": "conditional expectation."
+    },
+    {
+      "index": 762,
+      "start": 2561.27,
+      "end": 2563.65,
+      "duration": 2.38,
+      "text": "We have a formula for the conditional expectation."
+    },
+    {
+      "index": 763,
+      "start": 2563.65,
+      "end": 2566.58,
+      "duration": 2.93,
+      "text": "It's n times expected value of x."
+    },
+    {
+      "index": 764,
+      "start": 2566.58,
+      "end": 2570.39,
+      "duration": 3.81,
+      "text": "Now the expected value of x is a number."
+    },
+    {
+      "index": 765,
+      "start": 2570.39,
+      "end": 2574.97,
+      "duration": 4.58,
+      "text": "Expected value of something random times a number is"
+    },
+    {
+      "index": 766,
+      "start": 2574.97,
+      "end": 2578.32,
+      "duration": 3.35,
+      "text": "expected value of the random variable"
+    },
+    {
+      "index": 767,
+      "start": 2578.32,
+      "end": 2579.82,
+      "duration": 1.5,
+      "text": "times the number itself."
+    },
+    {
+      "index": 768,
+      "start": 2579.82,
+      "end": 2582.88,
+      "duration": 3.06,
+      "text": "We can take a number outside the expectation."
+    },
+    {
+      "index": 769,
+      "start": 2582.88,
+      "end": 2586.06,
+      "duration": 3.18,
+      "text": "So expected value of x gets pulled out."
+    },
+    {
+      "index": 770,
+      "start": 2586.06,
+      "end": 2589.79,
+      "duration": 3.73,
+      "text": "And that's the conclusion, that overall the expected"
+    },
+    {
+      "index": 771,
+      "start": 2589.79,
+      "end": 2593.34,
+      "duration": 3.55,
+      "text": "amount of money you're going to spend is equal to how many"
+    },
+    {
+      "index": 772,
+      "start": 2593.34,
+      "end": 2596.67,
+      "duration": 3.33,
+      "text": "stores you expect to visit on the average, and how much"
+    },
+    {
+      "index": 773,
+      "start": 2596.67,
+      "end": 2602.05,
+      "duration": 5.38,
+      "text": "money you expect to spend on each one on the average."
+    },
+    {
+      "index": 774,
+      "start": 2602.05,
+      "end": 2604.89,
+      "duration": 2.84,
+      "text": "You might have guessed that this is the answer."
+    },
+    {
+      "index": 775,
+      "start": 2604.89,
+      "end": 2610.4,
+      "duration": 5.51,
+      "text": "If you expect to visit 10 stores, and you expect to"
+    },
+    {
+      "index": 776,
+      "start": 2610.4,
+      "end": 2614.46,
+      "duration": 4.06,
+      "text": "spend $100 on each store, then yes, you expect to spend"
+    },
+    {
+      "index": 777,
+      "start": 2614.46,
+      "end": 2616.15,
+      "duration": 1.69,
+      "text": "$1,000 today."
+    },
+    {
+      "index": 778,
+      "start": 2616.15,
+      "end": 2619.05,
+      "duration": 2.9,
+      "text": "You're not going to impress your Harvard friends if you"
+    },
+    {
+      "index": 779,
+      "start": 2619.05,
+      "end": 2620.3,
+      "duration": 1.25,
+      "text": "tell them that story."
+    },
+    {
+      "index": 780,
+      "start": 2622.9,
+      "end": 2626.41,
+      "duration": 3.51,
+      "text": "It's one of the cases where reasoning, on the average,"
+    },
+    {
+      "index": 781,
+      "start": 2626.41,
+      "end": 2630.16,
+      "duration": 3.75,
+      "text": "does give you the plausible answer."
+    },
+    {
+      "index": 782,
+      "start": 2630.16,
+      "end": 2634.29,
+      "duration": 4.13,
+      "text": "But you will be able to impress your Harvard friends"
+    },
+    {
+      "index": 783,
+      "start": 2634.29,
+      "end": 2636.94,
+      "duration": 2.65,
+      "text": "if you tell them that I can actually calculate the"
+    },
+    {
+      "index": 784,
+      "start": 2636.94,
+      "end": 2641.51,
+      "duration": 4.57,
+      "text": "variance of how much I can spend."
+    },
+    {
+      "index": 785,
+      "start": 2641.51,
+      "end": 2645.5,
+      "duration": 3.99,
+      "text": "And we're going to work by applying this formula that we"
+    },
+    {
+      "index": 786,
+      "start": 2645.5,
+      "end": 2649.71,
+      "duration": 4.21,
+      "text": "have, and the difficulty is basically sorting out all"
+    },
+    {
+      "index": 787,
+      "start": 2649.71,
+      "end": 2654.36,
+      "duration": 4.65,
+      "text": "those terms here, and what they mean."
+    },
+    {
+      "index": 788,
+      "start": 2654.36,
+      "end": 2660.63,
+      "duration": 6.27,
+      "text": "So let's start with this term."
+    },
+    {
+      "index": 789,
+      "start": 2660.63,
+      "end": 2663.46,
+      "duration": 2.83,
+      "text": "So the expected value of y given that you're visiting n"
+    },
+    {
+      "index": 790,
+      "start": 2663.46,
+      "end": 2666.28,
+      "duration": 2.82,
+      "text": "stores is n times the expected value of x."
+    },
+    {
+      "index": 791,
+      "start": 2666.28,
+      "end": 2668.25,
+      "duration": 1.97,
+      "text": "That's what we did in the previous slide."
+    },
+    {
+      "index": 792,
+      "start": 2668.25,
+      "end": 2672.54,
+      "duration": 4.29,
+      "text": "So this thing is a random variable, it has a variance."
+    },
+    {
+      "index": 793,
+      "start": 2672.54,
+      "end": 2674.3,
+      "duration": 1.76,
+      "text": "What is the variance?"
+    },
+    {
+      "index": 794,
+      "start": 2674.3,
+      "end": 2679.24,
+      "duration": 4.94,
+      "text": "Is the variance of n times the expected value of x."
+    },
+    {
+      "index": 795,
+      "start": 2679.24,
+      "end": 2682.01,
+      "duration": 2.77,
+      "text": "Remember expected value of x is a number."
+    },
+    {
+      "index": 796,
+      "start": 2682.01,
+      "end": 2686.18,
+      "duration": 4.17,
+      "text": "So we're dealing with the variance of n times a number."
+    },
+    {
+      "index": 797,
+      "start": 2686.18,
+      "end": 2688.33,
+      "duration": 2.15,
+      "text": "What happens when you multiply a random"
+    },
+    {
+      "index": 798,
+      "start": 2688.33,
+      "end": 2690.8,
+      "duration": 2.47,
+      "text": "variable by a constant?"
+    },
+    {
+      "index": 799,
+      "start": 2690.8,
+      "end": 2695.02,
+      "duration": 4.22,
+      "text": "The variance becomes the previous variance times the"
+    },
+    {
+      "index": 800,
+      "start": 2695.02,
+      "end": 2696.65,
+      "duration": 1.63,
+      "text": "constant squared."
+    },
+    {
+      "index": 801,
+      "start": 2696.65,
+      "end": 2701.9,
+      "duration": 5.25,
+      "text": "So the variance of this is the variance of n times the square"
+    },
+    {
+      "index": 802,
+      "start": 2701.9,
+      "end": 2704.3,
+      "duration": 2.4,
+      "text": "of that constant that we had here."
+    },
+    {
+      "index": 803,
+      "start": 2704.3,
+      "end": 2708.57,
+      "duration": 4.27,
+      "text": "So this tells us the variance of the expected"
+    },
+    {
+      "index": 804,
+      "start": 2708.57,
+      "end": 2710.29,
+      "duration": 1.72,
+      "text": "value of y given n."
+    },
+    {
+      "index": 805,
+      "start": 2710.29,
+      "end": 2713.38,
+      "duration": 3.09,
+      "text": "This is the part of the variability of how much money"
+    },
+    {
+      "index": 806,
+      "start": 2713.38,
+      "end": 2716.95,
+      "duration": 3.57,
+      "text": "you're spending, which is attributed to the randomness,"
+    },
+    {
+      "index": 807,
+      "start": 2716.95,
+      "end": 2719.65,
+      "duration": 2.7,
+      "text": "or the variability, in the number of stores"
+    },
+    {
+      "index": 808,
+      "start": 2719.65,
+      "end": 2721.38,
+      "duration": 1.73,
+      "text": "that you are visiting."
+    },
+    {
+      "index": 809,
+      "start": 2721.38,
+      "end": 2724.45,
+      "duration": 3.07,
+      "text": "So the interpretation of the two terms is there's"
+    },
+    {
+      "index": 810,
+      "start": 2724.45,
+      "end": 2727.76,
+      "duration": 3.31,
+      "text": "randomness in how much you're going to spend, and this is"
+    },
+    {
+      "index": 811,
+      "start": 2727.76,
+      "end": 2732.48,
+      "duration": 4.72,
+      "text": "attributed to the randomness in the number of stores"
+    },
+    {
+      "index": 812,
+      "start": 2732.48,
+      "end": 2736.66,
+      "duration": 4.18,
+      "text": "together with the randomness inside individual stores."
+    },
+    {
+      "index": 813,
+      "start": 2736.66,
+      "end": 2740.11,
+      "duration": 3.45,
+      "text": "Well, after I tell you how many stores you're visiting."
+    },
+    {
+      "index": 814,
+      "start": 2740.11,
+      "end": 2742.57,
+      "duration": 2.46,
+      "text": "So now let's deal with this term-- the variance inside"
+    },
+    {
+      "index": 815,
+      "start": 2742.57,
+      "end": 2745.02,
+      "duration": 2.45,
+      "text": "individual stores."
+    },
+    {
+      "index": 816,
+      "start": 2745.02,
+      "end": 2747.07,
+      "duration": 2.05,
+      "text": "Let's take it slow."
+    },
+    {
+      "index": 817,
+      "start": 2747.07,
+      "end": 2750.49,
+      "duration": 3.42,
+      "text": "If I tell you that you're visiting exactly little n"
+    },
+    {
+      "index": 818,
+      "start": 2750.49,
+      "end": 2754.22,
+      "duration": 3.73,
+      "text": "stores, then y is how much money you spent in those"
+    },
+    {
+      "index": 819,
+      "start": 2754.22,
+      "end": 2755.49,
+      "duration": 1.27,
+      "text": "little n stores."
+    },
+    {
+      "index": 820,
+      "start": 2755.49,
+      "end": 2759.48,
+      "duration": 3.99,
+      "text": "You're dealing with the sum of little n random variables."
+    },
+    {
+      "index": 821,
+      "start": 2759.48,
+      "end": 2761.29,
+      "duration": 1.81,
+      "text": "What is the variance of the sum of"
+    },
+    {
+      "index": 822,
+      "start": 2761.29,
+      "end": 2763.12,
+      "duration": 1.83,
+      "text": "little n random variables?"
+    },
+    {
+      "index": 823,
+      "start": 2763.12,
+      "end": 2765.88,
+      "duration": 2.76,
+      "text": "It's the sum of their variances."
+    },
+    {
+      "index": 824,
+      "start": 2765.88,
+      "end": 2770.59,
+      "duration": 4.71,
+      "text": "So each store contributes a variance of x, and you're"
+    },
+    {
+      "index": 825,
+      "start": 2770.59,
+      "end": 2772.6,
+      "duration": 2.01,
+      "text": "adding over little n stores."
+    },
+    {
+      "index": 826,
+      "start": 2772.6,
+      "end": 2776.52,
+      "duration": 3.92,
+      "text": "That's the variance of money spent if I tell you"
+    },
+    {
+      "index": 827,
+      "start": 2776.52,
+      "end": 2778.04,
+      "duration": 1.52,
+      "text": "the number of stores."
+    },
+    {
+      "index": 828,
+      "start": 2778.04,
+      "end": 2786.43,
+      "duration": 8.39,
+      "text": "Now let's translate this into random variable notation."
+    },
+    {
+      "index": 829,
+      "start": 2786.43,
+      "end": 2790.31,
+      "duration": 3.88,
+      "text": "This is a random variable that takes this numerical value"
+    },
+    {
+      "index": 830,
+      "start": 2790.31,
+      "end": 2793.63,
+      "duration": 3.32,
+      "text": "whenever capital N is equal to little n."
+    },
+    {
+      "index": 831,
+      "start": 2793.63,
+      "end": 2797.02,
+      "duration": 3.39,
+      "text": "This is a random variable that takes this numerical value"
+    },
+    {
+      "index": 832,
+      "start": 2797.02,
+      "end": 2799.25,
+      "duration": 2.23,
+      "text": "whenever capital N is equal to little n."
+    },
+    {
+      "index": 833,
+      "start": 2799.25,
+      "end": 2800.76,
+      "duration": 1.51,
+      "text": "This is equal to that."
+    },
+    {
+      "index": 834,
+      "start": 2800.76,
+      "end": 2803.96,
+      "duration": 3.2,
+      "text": "Therefore, these two are always equal, no matter what"
+    },
+    {
+      "index": 835,
+      "start": 2803.96,
+      "end": 2805.4,
+      "duration": 1.44,
+      "text": "happens to y."
+    },
+    {
+      "index": 836,
+      "start": 2805.4,
+      "end": 2809.1,
+      "duration": 3.7,
+      "text": "So we have an equality here between random variables."
+    },
+    {
+      "index": 837,
+      "start": 2809.1,
+      "end": 2811.62,
+      "duration": 2.52,
+      "text": "Now we take expectations of both."
+    },
+    {
+      "index": 838,
+      "start": 2811.62,
+      "end": 2816.16,
+      "duration": 4.54,
+      "text": "Expected value of the variance is expected value of this."
+    },
+    {
+      "index": 839,
+      "start": 2816.16,
+      "end": 2819.89,
+      "duration": 3.73,
+      "text": "OK it may look confusing to think of the expected value of"
+    },
+    {
+      "index": 840,
+      "start": 2819.89,
+      "end": 2825.74,
+      "duration": 5.85,
+      "text": "the variance here, but the variance of x is a number, not"
+    },
+    {
+      "index": 841,
+      "start": 2825.74,
+      "end": 2826.65,
+      "duration": 0.91,
+      "text": "a random variable."
+    },
+    {
+      "index": 842,
+      "start": 2826.65,
+      "end": 2828.48,
+      "duration": 1.83,
+      "text": "You think of it as a constant."
+    },
+    {
+      "index": 843,
+      "start": 2828.48,
+      "end": 2832.58,
+      "duration": 4.1,
+      "text": "So its expected value of n times a constant gives us the"
+    },
+    {
+      "index": 844,
+      "start": 2832.58,
+      "end": 2836.42,
+      "duration": 3.84,
+      "text": "expected value of n times the constant itself."
+    },
+    {
+      "index": 845,
+      "start": 2836.42,
+      "end": 2840.84,
+      "duration": 4.42,
+      "text": "So now we got the second term as well, and now we put"
+    },
+    {
+      "index": 846,
+      "start": 2840.84,
+      "end": 2844.9,
+      "duration": 4.06,
+      "text": "everything together, this plus that to get an expression for"
+    },
+    {
+      "index": 847,
+      "start": 2844.9,
+      "end": 2848.05,
+      "duration": 3.15,
+      "text": "the overall variance of y."
+    },
+    {
+      "index": 848,
+      "start": 2848.05,
+      "end": 2852.38,
+      "duration": 4.33,
+      "text": "Which again, as I said before, the overall variability in y"
+    },
+    {
+      "index": 849,
+      "start": 2852.38,
+      "end": 2856.79,
+      "duration": 4.41,
+      "text": "has to do with the variability of how much you spent inside"
+    },
+    {
+      "index": 850,
+      "start": 2856.79,
+      "end": 2859.21,
+      "duration": 2.42,
+      "text": "the typical store."
+    },
+    {
+      "index": 851,
+      "start": 2859.21,
+      "end": 2863.0,
+      "duration": 3.79,
+      "text": "And the variability in the number of stores"
+    },
+    {
+      "index": 852,
+      "start": 2863.0,
+      "end": 2865.51,
+      "duration": 2.51,
+      "text": "that you are visiting."
+    },
+    {
+      "index": 853,
+      "start": 2865.51,
+      "end": 2868.82,
+      "duration": 3.31,
+      "text": "OK, so this is it for today."
+    },
+    {
+      "index": 854,
+      "start": 2868.82,
+      "end": 2872.6,
+      "duration": 3.78,
+      "text": "We'll change subjects quite radically from next time."
+    }
+  ],
+  "course": {
+    "category": "Physics",
+    "title": "Electricity and Magnetism",
+    "source_url": "https://www.youtube.com/playlist?list=PLUl4u3cNGP61MdtwGTqZA0MreSaDybji8"
+  }
+}

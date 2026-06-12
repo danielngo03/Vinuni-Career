@@ -150,8 +150,7 @@ Return only JSON for this job description. Required schema:
       "importance": number from 0 to 1,
       "required": boolean
     }}
-  }},
-  "raw_text": "original text"
+  }}
 }}
 
 Job description:
@@ -183,7 +182,7 @@ def _load_llm_json(text: str, raw_text: str, company_id: str) -> dict[str, Any]:
     data["company_id"] = company_id
     data.setdefault("job_id", f"job_{uuid.uuid4().hex[:8]}")
     data.setdefault("status", "draft")
-    data.setdefault("raw_text", raw_text)
+    data["raw_text"] = raw_text
     return data
 
 

@@ -1,0 +1,7487 @@
+{
+  "video": {
+    "id": "36hCizOk4PA",
+    "title": "Lecture 12 - Cary Look Ahead Adders",
+    "url": "https://www.youtube.com/watch?v=36hCizOk4PA",
+    "channel": "nptelhrd",
+    "duration": 3161,
+    "language": "en"
+  },
+  "segment_count": 1067,
+  "segments": [
+    {
+      "index": 0,
+      "start": 23.47,
+      "end": 23.48,
+      "duration": 0.01,
+      "text": "[Music]"
+    },
+    {
+      "index": 1,
+      "start": 23.48,
+      "end": 26.63,
+      "duration": 3.15,
+      "text": "oh oh"
+    },
+    {
+      "index": 2,
+      "start": 26.64,
+      "end": 28.31,
+      "duration": 1.67,
+      "text": "sh"
+    },
+    {
+      "index": 3,
+      "start": 28.32,
+      "end": 32.05,
+      "duration": 3.73,
+      "text": "sh sh"
+    },
+    {
+      "index": 4,
+      "start": 108.59,
+      "end": 108.6,
+      "duration": 0.01,
+      "text": "in the last lecture introduced the"
+    },
+    {
+      "index": 5,
+      "start": 108.6,
+      "end": 110.429,
+      "duration": 1.829,
+      "text": "concept of propagation"
+    },
+    {
+      "index": 6,
+      "start": 110.439,
+      "end": 112.87,
+      "duration": 2.431,
+      "text": "delay any"
+    },
+    {
+      "index": 7,
+      "start": 112.88,
+      "end": 115.27,
+      "duration": 2.39,
+      "text": "hardware has a"
+    },
+    {
+      "index": 8,
+      "start": 115.28,
+      "end": 117.789,
+      "duration": 2.509,
+      "text": "delay so when we draw a block diagram of"
+    },
+    {
+      "index": 9,
+      "start": 117.799,
+      "end": 120.35,
+      "duration": 2.551,
+      "text": "a circuit diagram or a circuit diagram"
+    },
+    {
+      "index": 10,
+      "start": 120.36,
+      "end": 122.83,
+      "duration": 2.47,
+      "text": "you give inputs and you define outputs"
+    },
+    {
+      "index": 11,
+      "start": 122.84,
+      "end": 124.67,
+      "duration": 1.83,
+      "text": "you sort of assume that the outputs are"
+    },
+    {
+      "index": 12,
+      "start": 124.68,
+      "end": 127.51,
+      "duration": 2.83,
+      "text": "available as soon as inputs are given"
+    },
+    {
+      "index": 13,
+      "start": 127.52,
+      "end": 131.43,
+      "duration": 3.91,
+      "text": "but however fast the hardware is the"
+    },
+    {
+      "index": 14,
+      "start": 131.44,
+      "end": 133.589,
+      "duration": 2.149,
+      "text": "gates and other things we have inside"
+    },
+    {
+      "index": 15,
+      "start": 133.599,
+      "end": 135.35,
+      "duration": 1.751,
+      "text": "the"
+    },
+    {
+      "index": 16,
+      "start": 135.36,
+      "end": 138.15,
+      "duration": 2.79,
+      "text": "circuit there has to be a finite time"
+    },
+    {
+      "index": 17,
+      "start": 138.16,
+      "end": 140.43,
+      "duration": 2.27,
+      "text": "delay for the transmission of"
+    },
+    {
+      "index": 18,
+      "start": 140.44,
+      "end": 142.63,
+      "duration": 2.19,
+      "text": "signals this time is defined as this"
+    },
+    {
+      "index": 19,
+      "start": 142.64,
+      "end": 144.91,
+      "duration": 2.27,
+      "text": "time is called the propagation"
+    },
+    {
+      "index": 20,
+      "start": 144.92,
+      "end": 148.75,
+      "duration": 3.83,
+      "text": "delay of course depends on the length of"
+    },
+    {
+      "index": 21,
+      "start": 148.76,
+      "end": 150.949,
+      "duration": 2.189,
+      "text": "the signal path"
+    },
+    {
+      "index": 22,
+      "start": 150.959,
+      "end": 153.229,
+      "duration": 2.27,
+      "text": "as soon as the signals are"
+    },
+    {
+      "index": 23,
+      "start": 153.239,
+      "end": 157.27,
+      "duration": 4.031,
+      "text": "given this the gates start switching"
+    },
+    {
+      "index": 24,
+      "start": 157.28,
+      "end": 159.63,
+      "duration": 2.35,
+      "text": "basically a switching activity no from"
+    },
+    {
+      "index": 25,
+      "start": 159.64,
+      "end": 162.149,
+      "duration": 2.509,
+      "text": "one level to the next level sometimes"
+    },
+    {
+      "index": 26,
+      "start": 162.159,
+      "end": 164.07,
+      "duration": 1.911,
+      "text": "the switching is not there sometimes"
+    },
+    {
+      "index": 27,
+      "start": 164.08,
+      "end": 165.589,
+      "duration": 1.509,
+      "text": "there switching based on the input"
+    },
+    {
+      "index": 28,
+      "start": 165.599,
+      "end": 167.67,
+      "duration": 2.071,
+      "text": "conditions based on the input conditions"
+    },
+    {
+      "index": 29,
+      "start": 167.68,
+      "end": 168.83,
+      "duration": 1.15,
+      "text": "and the function of the gate we have a"
+    },
+    {
+      "index": 30,
+      "start": 168.84,
+      "end": 171.19,
+      "duration": 2.35,
+      "text": "switching activity so the switching"
+    },
+    {
+      "index": 31,
+      "start": 171.2,
+      "end": 172.39,
+      "duration": 1.19,
+      "text": "activity is going to take a finite"
+    },
+    {
+      "index": 32,
+      "start": 172.4,
+      "end": 175.39,
+      "duration": 2.99,
+      "text": "amount of time and this propagates"
+    },
+    {
+      "index": 33,
+      "start": 175.4,
+      "end": 176.509,
+      "duration": 1.109,
+      "text": "through the"
+    },
+    {
+      "index": 34,
+      "start": 176.519,
+      "end": 179.229,
+      "duration": 2.71,
+      "text": "circuit so the total propagation delay"
+    },
+    {
+      "index": 35,
+      "start": 179.239,
+      "end": 182.309,
+      "duration": 3.07,
+      "text": "of any circuit or subsystem or even a"
+    },
+    {
+      "index": 36,
+      "start": 182.319,
+      "end": 186.39,
+      "duration": 4.071,
+      "text": "big system depends on the the length of"
+    },
+    {
+      "index": 37,
+      "start": 186.4,
+      "end": 190.47,
+      "duration": 4.07,
+      "text": "the path that signals have to Traverse"
+    },
+    {
+      "index": 38,
+      "start": 190.48,
+      "end": 193.19,
+      "duration": 2.71,
+      "text": "travel from the input to the"
+    },
+    {
+      "index": 39,
+      "start": 193.2,
+      "end": 196.43,
+      "duration": 3.23,
+      "text": "output so when you want to"
+    },
+    {
+      "index": 40,
+      "start": 196.44,
+      "end": 201.07,
+      "duration": 4.63,
+      "text": "design fast circuits or fast"
+    },
+    {
+      "index": 41,
+      "start": 201.08,
+      "end": 204.309,
+      "duration": 3.229,
+      "text": "systems naturally had to because one is"
+    },
+    {
+      "index": 42,
+      "start": 204.319,
+      "end": 206.63,
+      "duration": 2.311,
+      "text": "the technology solution what we have"
+    },
+    {
+      "index": 43,
+      "start": 206.64,
+      "end": 209.229,
+      "duration": 2.589,
+      "text": "today is much much much Superior to what"
+    },
+    {
+      "index": 44,
+      "start": 209.239,
+      "end": 211.11,
+      "duration": 1.871,
+      "text": "we had"
+    },
+    {
+      "index": 45,
+      "start": 211.12,
+      "end": 212.949,
+      "duration": 1.829,
+      "text": "30 years ago 20 years ago 10 years ago"
+    },
+    {
+      "index": 46,
+      "start": 212.959,
+      "end": 215.39,
+      "duration": 2.431,
+      "text": "even 5 years ago so speeds are improving"
+    },
+    {
+      "index": 47,
+      "start": 215.4,
+      "end": 217.91,
+      "duration": 2.51,
+      "text": "because of Technology there is one"
+    },
+    {
+      "index": 48,
+      "start": 217.92,
+      "end": 220.39,
+      "duration": 2.47,
+      "text": "aspect the other aspect is can we reduce"
+    },
+    {
+      "index": 49,
+      "start": 220.4,
+      "end": 222.869,
+      "duration": 2.469,
+      "text": "the path of trans"
+    },
+    {
+      "index": 50,
+      "start": 222.879,
+      "end": 224.71,
+      "duration": 1.831,
+      "text": "transmission the the path that the"
+    },
+    {
+      "index": 51,
+      "start": 224.72,
+      "end": 225.99,
+      "duration": 1.27,
+      "text": "signals have to"
+    },
+    {
+      "index": 52,
+      "start": 226.0,
+      "end": 228.949,
+      "duration": 2.949,
+      "text": "trans"
+    },
+    {
+      "index": 53,
+      "start": 228.959,
+      "end": 231.07,
+      "duration": 2.111,
+      "text": "travel from input output if you can"
+    },
+    {
+      "index": 54,
+      "start": 231.08,
+      "end": 233.949,
+      "duration": 2.869,
+      "text": "reduce that path you can reduce the"
+    },
+    {
+      "index": 55,
+      "start": 233.959,
+      "end": 236.429,
+      "duration": 2.47,
+      "text": "propagation delay or increase the speed"
+    },
+    {
+      "index": 56,
+      "start": 236.439,
+      "end": 239.39,
+      "duration": 2.951,
+      "text": "of operation of circuit this is a"
+    },
+    {
+      "index": 57,
+      "start": 239.4,
+      "end": 241.509,
+      "duration": 2.109,
+      "text": "concept which people use all the time to"
+    },
+    {
+      "index": 58,
+      "start": 241.519,
+      "end": 243.949,
+      "duration": 2.43,
+      "text": "for given"
+    },
+    {
+      "index": 59,
+      "start": 243.959,
+      "end": 246.509,
+      "duration": 2.55,
+      "text": "technology you want to maximize the"
+    },
+    {
+      "index": 60,
+      "start": 246.519,
+      "end": 249.149,
+      "duration": 2.63,
+      "text": "speed or you want to improve the speed"
+    },
+    {
+      "index": 61,
+      "start": 249.159,
+      "end": 250.35,
+      "duration": 1.191,
+      "text": "then you have to go for this type of"
+    },
+    {
+      "index": 62,
+      "start": 250.36,
+      "end": 253.03,
+      "duration": 2.67,
+      "text": "options reducing the propagation delay"
+    },
+    {
+      "index": 63,
+      "start": 253.04,
+      "end": 255.39,
+      "duration": 2.35,
+      "text": "by cutting the path length but then a"
+    },
+    {
+      "index": 64,
+      "start": 255.4,
+      "end": 257.909,
+      "duration": 2.509,
+      "text": "given job has to be done take the case"
+    },
+    {
+      "index": 65,
+      "start": 257.919,
+      "end": 260.909,
+      "duration": 2.99,
+      "text": "of the full ladder a multi-bit full"
+    },
+    {
+      "index": 66,
+      "start": 260.919,
+      "end": 263.11,
+      "duration": 2.191,
+      "text": "ladder each full"
+    },
+    {
+      "index": 67,
+      "start": 263.12,
+      "end": 266.07,
+      "duration": 2.95,
+      "text": "ladder uh the carry has to go from one"
+    },
+    {
+      "index": 68,
+      "start": 266.08,
+      "end": 268.469,
+      "duration": 2.389,
+      "text": "stage to the next stage stage to Stage"
+    },
+    {
+      "index": 69,
+      "start": 268.479,
+      "end": 270.31,
+      "duration": 1.831,
+      "text": "the carry has to travel"
+    },
+    {
+      "index": 70,
+      "start": 270.32,
+      "end": 272.83,
+      "duration": 2.51,
+      "text": "the carry circuit we saw the carry"
+    },
+    {
+      "index": 71,
+      "start": 272.84,
+      "end": 276.67,
+      "duration": 3.83,
+      "text": "circuit yesterday we have a two level"
+    },
+    {
+      "index": 72,
+      "start": 276.68,
+      "end": 280.07,
+      "duration": 3.39,
+      "text": "gate structure inputs and gate input and"
+    },
+    {
+      "index": 73,
+      "start": 280.08,
+      "end": 281.909,
+      "duration": 1.829,
+      "text": "Gat feeding to an argate output of the"
+    },
+    {
+      "index": 74,
+      "start": 281.919,
+      "end": 284.95,
+      "duration": 3.031,
+      "text": "argate is the carry for that particular"
+    },
+    {
+      "index": 75,
+      "start": 284.96,
+      "end": 287.23,
+      "duration": 2.27,
+      "text": "bit this input is required in the next"
+    },
+    {
+      "index": 76,
+      "start": 287.24,
+      "end": 291.629,
+      "duration": 4.389,
+      "text": "stage before the next stage can start"
+    },
+    {
+      "index": 77,
+      "start": 291.639,
+      "end": 295.67,
+      "duration": 4.031,
+      "text": "switching"
+    },
+    {
+      "index": 78,
+      "start": 298.23,
+      "end": 298.24,
+      "duration": 0.01,
+      "text": "so naturally as you go on increasing the"
+    },
+    {
+      "index": 79,
+      "start": 298.24,
+      "end": 300.629,
+      "duration": 2.389,
+      "text": "number of bits the prob Delay from bit"
+    },
+    {
+      "index": 80,
+      "start": 300.639,
+      "end": 304.71,
+      "duration": 4.071,
+      "text": "to bit going to increase and finally the"
+    },
+    {
+      "index": 81,
+      "start": 304.72,
+      "end": 306.15,
+      "duration": 1.43,
+      "text": "time at which the results reliable"
+    },
+    {
+      "index": 82,
+      "start": 306.16,
+      "end": 309.79,
+      "duration": 3.63,
+      "text": "results are available the output will"
+    },
+    {
+      "index": 83,
+      "start": 309.8,
+      "end": 312.43,
+      "duration": 2.63,
+      "text": "depend on the number of stages and the"
+    },
+    {
+      "index": 84,
+      "start": 312.44,
+      "end": 314.83,
+      "duration": 2.39,
+      "text": "delay of each"
+    },
+    {
+      "index": 85,
+      "start": 314.84,
+      "end": 317.909,
+      "duration": 3.069,
+      "text": "stage now in if you don't have to depend"
+    },
+    {
+      "index": 86,
+      "start": 317.919,
+      "end": 320.629,
+      "duration": 2.71,
+      "text": "on this transmission of the carry if you"
+    },
+    {
+      "index": 87,
+      "start": 320.639,
+      "end": 321.71,
+      "duration": 1.071,
+      "text": "can sort"
+    },
+    {
+      "index": 88,
+      "start": 321.72,
+      "end": 325.469,
+      "duration": 3.749,
+      "text": "of project the carry output of each"
+    },
+    {
+      "index": 89,
+      "start": 325.479,
+      "end": 327.51,
+      "duration": 2.031,
+      "text": "stage or"
+    },
+    {
+      "index": 90,
+      "start": 327.52,
+      "end": 332.43,
+      "duration": 4.91,
+      "text": "predict the carry of each stage"
+    },
+    {
+      "index": 91,
+      "start": 334.99,
+      "end": 335.0,
+      "duration": 0.01,
+      "text": "we can reduce the propagation delay"
+    },
+    {
+      "index": 92,
+      "start": 335.0,
+      "end": 336.67,
+      "duration": 1.67,
+      "text": "there are several"
+    },
+    {
+      "index": 93,
+      "start": 336.68,
+      "end": 338.87,
+      "duration": 2.19,
+      "text": "techniques fast carry propagation is one"
+    },
+    {
+      "index": 94,
+      "start": 338.88,
+      "end": 340.189,
+      "duration": 1.309,
+      "text": "of the"
+    },
+    {
+      "index": 95,
+      "start": 340.199,
+      "end": 343.23,
+      "duration": 3.031,
+      "text": "standard problems in arithmetic circuit"
+    },
+    {
+      "index": 96,
+      "start": 343.24,
+      "end": 345.39,
+      "duration": 2.15,
+      "text": "design and you know that the speeds of"
+    },
+    {
+      "index": 97,
+      "start": 345.4,
+      "end": 347.83,
+      "duration": 2.43,
+      "text": "computers today are very high we talk of"
+    },
+    {
+      "index": 98,
+      "start": 347.84,
+      "end": 352.469,
+      "duration": 4.629,
+      "text": "gigahertz computers gigahertz means 10^"
+    },
+    {
+      "index": 99,
+      "start": 352.479,
+      "end": 355.07,
+      "duration": 2.591,
+      "text": "9 so we are talking about such spe"
+    },
+    {
+      "index": 100,
+      "start": 355.08,
+      "end": 356.51,
+      "duration": 1.43,
+      "text": "naturally people have thought about this"
+    },
+    {
+      "index": 101,
+      "start": 356.52,
+      "end": 358.43,
+      "duration": 1.91,
+      "text": "problem and have solved this problem so"
+    },
+    {
+      "index": 102,
+      "start": 358.44,
+      "end": 360.95,
+      "duration": 2.51,
+      "text": "we as I said"
+    },
+    {
+      "index": 103,
+      "start": 360.96,
+      "end": 362.07,
+      "duration": 1.11,
+      "text": "this is the first level course in"
+    },
+    {
+      "index": 104,
+      "start": 362.08,
+      "end": 363.95,
+      "duration": 1.87,
+      "text": "digital design that is not the my"
+    },
+    {
+      "index": 105,
+      "start": 363.96,
+      "end": 365.79,
+      "duration": 1.83,
+      "text": "intention to go to all those design"
+    },
+    {
+      "index": 106,
+      "start": 365.8,
+      "end": 367.15,
+      "duration": 1.35,
+      "text": "techniques to improve the speed of"
+    },
+    {
+      "index": 107,
+      "start": 367.16,
+      "end": 369.39,
+      "duration": 2.23,
+      "text": "performance all the various techniques"
+    },
+    {
+      "index": 108,
+      "start": 369.4,
+      "end": 371.07,
+      "duration": 1.67,
+      "text": "but conceptually you should"
+    },
+    {
+      "index": 109,
+      "start": 371.08,
+      "end": 375.029,
+      "duration": 3.949,
+      "text": "know it is always the you can always"
+    },
+    {
+      "index": 110,
+      "start": 375.039,
+      "end": 377.629,
+      "duration": 2.59,
+      "text": "decrease the speed I mean decrease the"
+    },
+    {
+      "index": 111,
+      "start": 377.639,
+      "end": 380.23,
+      "duration": 2.591,
+      "text": "the delay or increase the speed by"
+    },
+    {
+      "index": 112,
+      "start": 380.24,
+      "end": 381.749,
+      "duration": 1.509,
+      "text": "having fewer"
+    },
+    {
+      "index": 113,
+      "start": 381.759,
+      "end": 384.07,
+      "duration": 2.311,
+      "text": "stages how can I have a fewer level of"
+    },
+    {
+      "index": 114,
+      "start": 384.08,
+      "end": 386.07,
+      "duration": 1.99,
+      "text": "two levels of gate I set for each carry"
+    },
+    {
+      "index": 115,
+      "start": 386.08,
+      "end": 388.55,
+      "duration": 2.47,
+      "text": "bait and depending on the number of"
+    },
+    {
+      "index": 116,
+      "start": 388.56,
+      "end": 391.15,
+      "duration": 2.59,
+      "text": "stages"
+    },
+    {
+      "index": 117,
+      "start": 391.16,
+      "end": 394.07,
+      "duration": 2.91,
+      "text": "there have to be that many two levels"
+    },
+    {
+      "index": 118,
+      "start": 394.08,
+      "end": 397.39,
+      "duration": 3.31,
+      "text": "that means there 8 bit addition each bit"
+    },
+    {
+      "index": 119,
+      "start": 397.4,
+      "end": 400.11,
+      "duration": 2.71,
+      "text": "requires two level carry circuit so 8"
+    },
+    {
+      "index": 120,
+      "start": 400.12,
+      "end": 404.029,
+      "duration": 3.909,
+      "text": "into 16 levels of transmission Gates if"
+    },
+    {
+      "index": 121,
+      "start": 404.039,
+      "end": 405.99,
+      "duration": 1.951,
+      "text": "you can reduce that level there are two"
+    },
+    {
+      "index": 122,
+      "start": 406.0,
+      "end": 408.95,
+      "duration": 2.95,
+      "text": "ways of doing it I can predict it and"
+    },
+    {
+      "index": 123,
+      "start": 408.96,
+      "end": 411.11,
+      "duration": 2.15,
+      "text": "see whether without having to wait for"
+    },
+    {
+      "index": 124,
+      "start": 411.12,
+      "end": 412.23,
+      "duration": 1.11,
+      "text": "the previous"
+    },
+    {
+      "index": 125,
+      "start": 412.24,
+      "end": 416.51,
+      "duration": 4.27,
+      "text": "carry can I start my addition of the"
+    },
+    {
+      "index": 126,
+      "start": 416.52,
+      "end": 419.029,
+      "duration": 2.509,
+      "text": "next stage of course which case we have"
+    },
+    {
+      "index": 127,
+      "start": 419.039,
+      "end": 420.39,
+      "duration": 1.351,
+      "text": "to always want"
+    },
+    {
+      "index": 128,
+      "start": 420.4,
+      "end": 422.23,
+      "duration": 1.83,
+      "text": "what is going to happen when the real"
+    },
+    {
+      "index": 129,
+      "start": 422.24,
+      "end": 423.67,
+      "duration": 1.43,
+      "text": "carry comes how are you going to take"
+    },
+    {
+      "index": 130,
+      "start": 423.68,
+      "end": 425.749,
+      "duration": 2.069,
+      "text": "care of that as I said these are all"
+    },
+    {
+      "index": 131,
+      "start": 425.759,
+      "end": 427.27,
+      "duration": 1.511,
+      "text": "very very many techniques we not going"
+    },
+    {
+      "index": 132,
+      "start": 427.28,
+      "end": 429.629,
+      "duration": 2.349,
+      "text": "to look into but what I can do is to"
+    },
+    {
+      "index": 133,
+      "start": 429.639,
+      "end": 432.67,
+      "duration": 3.031,
+      "text": "sort of given a and Bs the bits to be"
+    },
+    {
+      "index": 134,
+      "start": 432.68,
+      "end": 436.43,
+      "duration": 3.75,
+      "text": "added a bit bits of number a and bits of"
+    },
+    {
+      "index": 135,
+      "start": 436.44,
+      "end": 439.79,
+      "duration": 3.35,
+      "text": "number B some sort of"
+    },
+    {
+      "index": 136,
+      "start": 439.8,
+      "end": 446.39,
+      "duration": 6.59,
+      "text": "a we can sort of predict or look ahead"
+    },
+    {
+      "index": 137,
+      "start": 446.4,
+      "end": 449.23,
+      "duration": 2.83,
+      "text": "what would be the car for each stage and"
+    },
+    {
+      "index": 138,
+      "start": 449.24,
+      "end": 450.629,
+      "duration": 1.389,
+      "text": "then feed those"
+    },
+    {
+      "index": 139,
+      "start": 450.639,
+      "end": 453.029,
+      "duration": 2.39,
+      "text": "carries directly into those those"
+    },
+    {
+      "index": 140,
+      "start": 453.039,
+      "end": 455.39,
+      "duration": 2.351,
+      "text": "respective stages in other words do you"
+    },
+    {
+      "index": 141,
+      "start": 455.4,
+      "end": 457.029,
+      "duration": 1.629,
+      "text": "a carry"
+    },
+    {
+      "index": 142,
+      "start": 457.039,
+      "end": 458.869,
+      "duration": 1.83,
+      "text": "computation instead of having to wait"
+    },
+    {
+      "index": 143,
+      "start": 458.879,
+      "end": 460.629,
+      "duration": 1.75,
+      "text": "for the carry to"
+    },
+    {
+      "index": 144,
+      "start": 460.639,
+      "end": 463.07,
+      "duration": 2.431,
+      "text": "propagate do a carry computation and"
+    },
+    {
+      "index": 145,
+      "start": 463.08,
+      "end": 467.189,
+      "duration": 4.109,
+      "text": "feed them all at the same time into the"
+    },
+    {
+      "index": 146,
+      "start": 467.199,
+      "end": 468.309,
+      "duration": 1.11,
+      "text": "respective"
+    },
+    {
+      "index": 147,
+      "start": 468.319,
+      "end": 470.189,
+      "duration": 1.87,
+      "text": "stage which means there has been"
+    },
+    {
+      "index": 148,
+      "start": 470.199,
+      "end": 472.39,
+      "duration": 2.191,
+      "text": "additional logic that means I need to"
+    },
+    {
+      "index": 149,
+      "start": 472.4,
+      "end": 475.629,
+      "duration": 3.229,
+      "text": "have extra Hardware given a and Bs if"
+    },
+    {
+      "index": 150,
+      "start": 475.639,
+      "end": 478.43,
+      "duration": 2.791,
+      "text": "you want to calculate the carries of all"
+    },
+    {
+      "index": 151,
+      "start": 478.44,
+      "end": 480.51,
+      "duration": 2.07,
+      "text": "these different stages"
+    },
+    {
+      "index": 152,
+      "start": 480.52,
+      "end": 482.589,
+      "duration": 2.069,
+      "text": "is ahead of"
+    },
+    {
+      "index": 153,
+      "start": 482.599,
+      "end": 485.51,
+      "duration": 2.911,
+      "text": "time I need to have extra Hardware extra"
+    },
+    {
+      "index": 154,
+      "start": 485.52,
+      "end": 489.149,
+      "duration": 3.629,
+      "text": "logic to accomplish this so it clearly"
+    },
+    {
+      "index": 155,
+      "start": 489.159,
+      "end": 491.309,
+      "duration": 2.15,
+      "text": "means that the cost of extra logic or"
+    },
+    {
+      "index": 156,
+      "start": 491.319,
+      "end": 495.189,
+      "duration": 3.87,
+      "text": "extra Hardware I can speed up the"
+    },
+    {
+      "index": 157,
+      "start": 495.199,
+      "end": 497.51,
+      "duration": 2.311,
+      "text": "operation of a circuit this is something"
+    },
+    {
+      "index": 158,
+      "start": 497.52,
+      "end": 499.43,
+      "duration": 1.91,
+      "text": "which is conceptually not very difficult"
+    },
+    {
+      "index": 159,
+      "start": 499.44,
+      "end": 503.23,
+      "duration": 3.79,
+      "text": "to understand intuitively more"
+    },
+    {
+      "index": 160,
+      "start": 503.24,
+      "end": 506.749,
+      "duration": 3.509,
+      "text": "Hardware faster you can do things if you"
+    },
+    {
+      "index": 161,
+      "start": 506.759,
+      "end": 509.51,
+      "duration": 2.751,
+      "text": "want to do something with a single thing"
+    },
+    {
+      "index": 162,
+      "start": 509.52,
+      "end": 512.269,
+      "duration": 2.749,
+      "text": "single unit of Hardware takes certain"
+    },
+    {
+      "index": 163,
+      "start": 512.279,
+      "end": 515.35,
+      "duration": 3.071,
+      "text": "amount of time if you have many pieces"
+    },
+    {
+      "index": 164,
+      "start": 515.36,
+      "end": 516.829,
+      "duration": 1.469,
+      "text": "of that Hardware you can do it faster of"
+    },
+    {
+      "index": 165,
+      "start": 516.839,
+      "end": 518.829,
+      "duration": 1.99,
+      "text": "course not always probably going be"
+    },
+    {
+      "index": 166,
+      "start": 518.839,
+      "end": 520.67,
+      "duration": 1.831,
+      "text": "partition like that but most"
+    },
+    {
+      "index": 167,
+      "start": 520.68,
+      "end": 523.47,
+      "duration": 2.79,
+      "text": "applications in other words anything you"
+    },
+    {
+      "index": 168,
+      "start": 523.48,
+      "end": 525.87,
+      "duration": 2.39,
+      "text": "want Improvement in performance has to"
+    },
+    {
+      "index": 169,
+      "start": 525.88,
+      "end": 528.59,
+      "duration": 2.71,
+      "text": "come in at the cost of something else"
+    },
+    {
+      "index": 170,
+      "start": 528.6,
+      "end": 530.43,
+      "duration": 1.83,
+      "text": "and usually that something else is the"
+    },
+    {
+      "index": 171,
+      "start": 530.44,
+      "end": 532.59,
+      "duration": 2.15,
+      "text": "extra logic extra logic means extra cost"
+    },
+    {
+      "index": 172,
+      "start": 532.6,
+      "end": 535.35,
+      "duration": 2.75,
+      "text": "extra cost means extra power so it's all"
+    },
+    {
+      "index": 173,
+      "start": 535.36,
+      "end": 537.75,
+      "duration": 2.39,
+      "text": "tradeoff at what speed do you want and"
+    },
+    {
+      "index": 174,
+      "start": 537.76,
+      "end": 539.19,
+      "duration": 1.43,
+      "text": "what is what is the price we're willing"
+    },
+    {
+      "index": 175,
+      "start": 539.2,
+      "end": 539.949,
+      "duration": 0.749,
+      "text": "to"
+    },
+    {
+      "index": 176,
+      "start": 539.959,
+      "end": 543.069,
+      "duration": 3.11,
+      "text": "pay you want to pay more money get more"
+    },
+    {
+      "index": 177,
+      "start": 543.079,
+      "end": 546.35,
+      "duration": 3.271,
+      "text": "gates and dissipate more power if if if"
+    },
+    {
+      "index": 178,
+      "start": 546.36,
+      "end": 548.79,
+      "duration": 2.43,
+      "text": "you don't mind disputing more power I"
+    },
+    {
+      "index": 179,
+      "start": 548.8,
+      "end": 552.59,
+      "duration": 3.79,
+      "text": "can possibly get a better speed up this"
+    },
+    {
+      "index": 180,
+      "start": 552.6,
+      "end": 554.63,
+      "duration": 2.03,
+      "text": "is the concept I want to bring in rather"
+    },
+    {
+      "index": 181,
+      "start": 554.64,
+      "end": 556.59,
+      "duration": 1.95,
+      "text": "than the actual technique there so many"
+    },
+    {
+      "index": 182,
+      "start": 556.6,
+      "end": 558.63,
+      "duration": 2.03,
+      "text": "techniques as an illustration of this"
+    },
+    {
+      "index": 183,
+      "start": 558.64,
+      "end": 560.069,
+      "duration": 1.429,
+      "text": "concept we will only look at one of the"
+    },
+    {
+      "index": 184,
+      "start": 560.079,
+      "end": 562.35,
+      "duration": 2.271,
+      "text": "techniques is called carry look ahead"
+    },
+    {
+      "index": 185,
+      "start": 562.36,
+      "end": 565.75,
+      "duration": 3.39,
+      "text": "add so we'll talk about carry look at"
+    },
+    {
+      "index": 186,
+      "start": 565.76,
+      "end": 569.829,
+      "duration": 4.069,
+      "text": "add for Speed Improvement of adder"
+    },
+    {
+      "index": 187,
+      "start": 569.839,
+      "end": 577.79,
+      "duration": 7.951,
+      "text": "multibit"
+    },
+    {
+      "index": 188,
+      "start": 580.91,
+      "end": 580.92,
+      "duration": 0.01,
+      "text": "adder also some people call it"
+    },
+    {
+      "index": 189,
+      "start": 580.92,
+      "end": 587.91,
+      "duration": 6.99,
+      "text": "CLA car"
+    },
+    {
+      "index": 190,
+      "start": 591.15,
+      "end": 591.16,
+      "duration": 0.01,
+      "text": "Adder as I said can you look"
+    },
+    {
+      "index": 191,
+      "start": 591.16,
+      "end": 593.75,
+      "duration": 2.59,
+      "text": "ahead the carry of differences can be"
+    },
+    {
+      "index": 192,
+      "start": 593.76,
+      "end": 596.31,
+      "duration": 2.55,
+      "text": "looked ahead as soon as the bits are"
+    },
+    {
+      "index": 193,
+      "start": 596.32,
+      "end": 597.829,
+      "duration": 1.509,
+      "text": "known as soon as the"
+    },
+    {
+      "index": 194,
+      "start": 597.839,
+      "end": 601.11,
+      "duration": 3.271,
+      "text": "bits are known and you sort of ahead of"
+    },
+    {
+      "index": 195,
+      "start": 601.12,
+      "end": 603.43,
+      "duration": 2.31,
+      "text": "ahead of time can you do a computation"
+    },
+    {
+      "index": 196,
+      "start": 603.44,
+      "end": 605.31,
+      "duration": 1.87,
+      "text": "of the carry and then use it when it"
+    },
+    {
+      "index": 197,
+      "start": 605.32,
+      "end": 608.03,
+      "duration": 2.71,
+      "text": "when it's required sort of a prediction"
+    },
+    {
+      "index": 198,
+      "start": 608.04,
+      "end": 611.31,
+      "duration": 3.27,
+      "text": "by computation in advance by using extra"
+    },
+    {
+      "index": 199,
+      "start": 611.32,
+      "end": 613.509,
+      "duration": 2.189,
+      "text": "logic that's why he said extra logic can"
+    },
+    {
+      "index": 200,
+      "start": 613.519,
+      "end": 616.99,
+      "duration": 3.471,
+      "text": "give you extra speed and this technique"
+    },
+    {
+      "index": 201,
+      "start": 617.0,
+      "end": 618.35,
+      "duration": 1.35,
+      "text": "is called carry look ahead because of"
+    },
+    {
+      "index": 202,
+      "start": 618.36,
+      "end": 621.31,
+      "duration": 2.95,
+      "text": "that that that reason so we are going to"
+    },
+    {
+      "index": 203,
+      "start": 621.32,
+      "end": 622.71,
+      "duration": 1.39,
+      "text": "have an extra Hardware which is going to"
+    },
+    {
+      "index": 204,
+      "start": 622.72,
+      "end": 625.15,
+      "duration": 2.43,
+      "text": "generate the carry for different stages"
+    },
+    {
+      "index": 205,
+      "start": 625.16,
+      "end": 627.15,
+      "duration": 1.99,
+      "text": "keep it ready and when it's required it"
+    },
+    {
+      "index": 206,
+      "start": 627.16,
+      "end": 628.91,
+      "duration": 1.75,
+      "text": "will be used I'll give you a simple"
+    },
+    {
+      "index": 207,
+      "start": 628.92,
+      "end": 631.47,
+      "duration": 2.55,
+      "text": "example now we have let us use the four"
+    },
+    {
+      "index": 208,
+      "start": 631.48,
+      "end": 634.79,
+      "duration": 3.31,
+      "text": "bit adders again A and"
+    },
+    {
+      "index": 209,
+      "start": 634.8,
+      "end": 638.35,
+      "duration": 3.55,
+      "text": "B A3 A2 A1"
+    },
+    {
+      "index": 210,
+      "start": 638.36,
+      "end": 640.71,
+      "duration": 2.35,
+      "text": "a0 and"
+    },
+    {
+      "index": 211,
+      "start": 640.72,
+      "end": 645.99,
+      "duration": 5.27,
+      "text": "B B3 B2 B B1 B 0 these are the two bits"
+    },
+    {
+      "index": 212,
+      "start": 646.0,
+      "end": 650.99,
+      "duration": 4.99,
+      "text": "you want to add to get the sum s0 S1 S2"
+    },
+    {
+      "index": 213,
+      "start": 651.0,
+      "end": 654.389,
+      "duration": 3.389,
+      "text": "S3 and C3 would be the fifth bit that"
+    },
+    {
+      "index": 214,
+      "start": 654.399,
+      "end": 656.269,
+      "duration": 1.87,
+      "text": "you need when you add two four bits you"
+    },
+    {
+      "index": 215,
+      "start": 656.279,
+      "end": 658.55,
+      "duration": 2.271,
+      "text": "need to have a fifth bit that fifth bit"
+    },
+    {
+      "index": 216,
+      "start": 658.56,
+      "end": 662.59,
+      "duration": 4.03,
+      "text": "comes from this C"
+    },
+    {
+      "index": 217,
+      "start": 665.79,
+      "end": 665.8,
+      "duration": 0.01,
+      "text": "now if you look at the truth"
+    },
+    {
+      "index": 218,
+      "start": 665.8,
+      "end": 669.67,
+      "duration": 3.87,
+      "text": "table what are the what are"
+    },
+    {
+      "index": 219,
+      "start": 669.68,
+      "end": 672.23,
+      "duration": 2.55,
+      "text": "the what are the conditions of the input"
+    },
+    {
+      "index": 220,
+      "start": 672.24,
+      "end": 675.43,
+      "duration": 3.19,
+      "text": "for which there is a carry"
+    },
+    {
+      "index": 221,
+      "start": 678.67,
+      "end": 678.68,
+      "duration": 0.01,
+      "text": "output carry output if you remember if"
+    },
+    {
+      "index": 222,
+      "start": 678.68,
+      "end": 682.03,
+      "duration": 3.35,
+      "text": "you want to quickly do"
+    },
+    {
+      "index": 223,
+      "start": 698.75,
+      "end": 698.76,
+      "duration": 0.01,
+      "text": "there's a"
+    },
+    {
+      "index": 224,
+      "start": 698.76,
+      "end": 703.949,
+      "duration": 5.189,
+      "text": "carry for this there's a carry"
+    },
+    {
+      "index": 225,
+      "start": 703.959,
+      "end": 706.15,
+      "duration": 2.191,
+      "text": "for these"
+    },
+    {
+      "index": 226,
+      "start": 706.16,
+      "end": 714.35,
+      "duration": 8.19,
+      "text": "three now if you look at these"
+    },
+    {
+      "index": 227,
+      "start": 717.509,
+      "end": 717.519,
+      "duration": 0.01,
+      "text": "two this is these are the four rows or"
+    },
+    {
+      "index": 228,
+      "start": 717.519,
+      "end": 719.87,
+      "duration": 2.351,
+      "text": "four conditions of input for which you"
+    },
+    {
+      "index": 229,
+      "start": 719.88,
+      "end": 722.43,
+      "duration": 2.55,
+      "text": "have an output carry you look at these"
+    },
+    {
+      "index": 230,
+      "start": 722.44,
+      "end": 724.19,
+      "duration": 1.75,
+      "text": "two conditions these arrows I have"
+    },
+    {
+      "index": 231,
+      "start": 724.2,
+      "end": 725.67,
+      "duration": 1.47,
+      "text": "marked here these two conditions have"
+    },
+    {
+      "index": 232,
+      "start": 725.68,
+      "end": 728.509,
+      "duration": 2.829,
+      "text": "one thing in"
+    },
+    {
+      "index": 233,
+      "start": 731.389,
+      "end": 731.399,
+      "duration": 0.01,
+      "text": "common"
+    },
+    {
+      "index": 234,
+      "start": 731.399,
+      "end": 733.829,
+      "duration": 2.43,
+      "text": "okay uh"
+    },
+    {
+      "index": 235,
+      "start": 733.839,
+      "end": 738.269,
+      "duration": 4.43,
+      "text": "011 right now we'll put it this"
+    },
+    {
+      "index": 236,
+      "start": 738.279,
+      "end": 741.069,
+      "duration": 2.79,
+      "text": "way I put the carry"
+    },
+    {
+      "index": 237,
+      "start": 741.079,
+      "end": 743.43,
+      "duration": 2.351,
+      "text": "differently I'll remove the arrow the"
+    },
+    {
+      "index": 238,
+      "start": 743.44,
+      "end": 745.509,
+      "duration": 2.069,
+      "text": "last two"
+    },
+    {
+      "index": 239,
+      "start": 745.519,
+      "end": 748.15,
+      "duration": 2.631,
+      "text": "rows I'll put under one"
+    },
+    {
+      "index": 240,
+      "start": 748.16,
+      "end": 749.75,
+      "duration": 1.59,
+      "text": "category"
+    },
+    {
+      "index": 241,
+      "start": 749.76,
+      "end": 751.75,
+      "duration": 1.99,
+      "text": "and these two rows I'll put under"
+    },
+    {
+      "index": 242,
+      "start": 751.76,
+      "end": 756.87,
+      "duration": 5.11,
+      "text": "another"
+    },
+    {
+      "index": 243,
+      "start": 759.47,
+      "end": 759.48,
+      "duration": 0.01,
+      "text": "category when both A and B are"
+    },
+    {
+      "index": 244,
+      "start": 759.48,
+      "end": 761.91,
+      "duration": 2.43,
+      "text": "one we have a"
+    },
+    {
+      "index": 245,
+      "start": 761.92,
+      "end": 764.55,
+      "duration": 2.63,
+      "text": "carry when both A and B are one a carry"
+    },
+    {
+      "index": 246,
+      "start": 764.56,
+      "end": 765.71,
+      "duration": 1.15,
+      "text": "irrespective"
+    },
+    {
+      "index": 247,
+      "start": 765.72,
+      "end": 768.43,
+      "duration": 2.71,
+      "text": "of whether C is one or"
+    },
+    {
+      "index": 248,
+      "start": 768.44,
+      "end": 770.47,
+      "duration": 2.03,
+      "text": "zero so there is one condition under"
+    },
+    {
+      "index": 249,
+      "start": 770.48,
+      "end": 773.35,
+      "duration": 2.87,
+      "text": "which have carry so see you are going to"
+    },
+    {
+      "index": 250,
+      "start": 773.36,
+      "end": 777.03,
+      "duration": 3.67,
+      "text": "design a logic to predict or look ahead"
+    },
+    {
+      "index": 251,
+      "start": 777.04,
+      "end": 779.31,
+      "duration": 2.27,
+      "text": "you have to design a logic to look ahead"
+    },
+    {
+      "index": 252,
+      "start": 779.32,
+      "end": 781.35,
+      "duration": 2.03,
+      "text": "that means I should understand the carry"
+    },
+    {
+      "index": 253,
+      "start": 781.36,
+      "end": 783.829,
+      "duration": 2.469,
+      "text": "mechanism I should understand the carry"
+    },
+    {
+      "index": 254,
+      "start": 783.839,
+      "end": 787.389,
+      "duration": 3.55,
+      "text": "generation mechanism of the adder if you"
+    },
+    {
+      "index": 255,
+      "start": 787.399,
+      "end": 789.11,
+      "duration": 1.711,
+      "text": "want to really design a circuit which"
+    },
+    {
+      "index": 256,
+      "start": 789.12,
+      "end": 791.11,
+      "duration": 1.99,
+      "text": "can generate my carry in advance ahead"
+    },
+    {
+      "index": 257,
+      "start": 791.12,
+      "end": 793.67,
+      "duration": 2.55,
+      "text": "of time that is why I'm looking at it"
+    },
+    {
+      "index": 258,
+      "start": 793.68,
+      "end": 795.629,
+      "duration": 1.949,
+      "text": "this way so carry will be generated"
+    },
+    {
+      "index": 259,
+      "start": 795.639,
+      "end": 799.629,
+      "duration": 3.99,
+      "text": "Whenever there is both A and B are one"
+    },
+    {
+      "index": 260,
+      "start": 799.639,
+      "end": 802.31,
+      "duration": 2.671,
+      "text": "resp whether C is one or zero the other"
+    },
+    {
+      "index": 261,
+      "start": 802.32,
+      "end": 805.99,
+      "duration": 3.67,
+      "text": "condition which carry comes is When A or"
+    },
+    {
+      "index": 262,
+      "start": 806.0,
+      "end": 807.189,
+      "duration": 1.189,
+      "text": "B is"
+    },
+    {
+      "index": 263,
+      "start": 807.199,
+      "end": 811.189,
+      "duration": 3.99,
+      "text": "one one of them EX exclusive condition"
+    },
+    {
+      "index": 264,
+      "start": 811.199,
+      "end": 814.389,
+      "duration": 3.19,
+      "text": "provided CI also happens to be one so"
+    },
+    {
+      "index": 265,
+      "start": 814.399,
+      "end": 815.91,
+      "duration": 1.511,
+      "text": "that means there are I can now sum up"
+    },
+    {
+      "index": 266,
+      "start": 815.92,
+      "end": 821.829,
+      "duration": 5.909,
+      "text": "the carry mechanism of a full add"
+    },
+    {
+      "index": 267,
+      "start": 826.23,
+      "end": 826.24,
+      "duration": 0.01,
+      "text": "as if both A and B are one I get carry"
+    },
+    {
+      "index": 268,
+      "start": 826.24,
+      "end": 828.87,
+      "duration": 2.63,
+      "text": "that means A and B if both are one the"
+    },
+    {
+      "index": 269,
+      "start": 828.88,
+      "end": 832.189,
+      "duration": 3.309,
+      "text": "output is carry is one"
+    },
+    {
+      "index": 270,
+      "start": 832.199,
+      "end": 835.829,
+      "duration": 3.63,
+      "text": "or when a exclusive or"
+    },
+    {
+      "index": 271,
+      "start": 835.839,
+      "end": 838.03,
+      "duration": 2.191,
+      "text": "B is"
+    },
+    {
+      "index": 272,
+      "start": 838.04,
+      "end": 839.749,
+      "duration": 1.709,
+      "text": "true"
+    },
+    {
+      "index": 273,
+      "start": 839.759,
+      "end": 843.47,
+      "duration": 3.711,
+      "text": "but only when a exus be true only when"
+    },
+    {
+      "index": 274,
+      "start": 843.48,
+      "end": 849.59,
+      "duration": 6.11,
+      "text": "CI is one so A exclus or B and CI is one"
+    },
+    {
+      "index": 275,
+      "start": 849.6,
+      "end": 851.71,
+      "duration": 2.11,
+      "text": "condition at which carry is one output"
+    },
+    {
+      "index": 276,
+      "start": 851.72,
+      "end": 852.749,
+      "duration": 1.029,
+      "text": "carry is"
+    },
+    {
+      "index": 277,
+      "start": 852.759,
+      "end": 855.91,
+      "duration": 3.151,
+      "text": "one A and B is one is another condition"
+    },
+    {
+      "index": 278,
+      "start": 855.92,
+      "end": 857.829,
+      "duration": 1.909,
+      "text": "for which output carry is one so there"
+    },
+    {
+      "index": 279,
+      "start": 857.839,
+      "end": 861.11,
+      "duration": 3.271,
+      "text": "are two conditions look at A and B and"
+    },
+    {
+      "index": 280,
+      "start": 861.12,
+      "end": 863.31,
+      "duration": 2.19,
+      "text": "moment there one you put a carry"
+    },
+    {
+      "index": 281,
+      "start": 863.32,
+      "end": 865.629,
+      "duration": 2.309,
+      "text": "condition or look at a exclusive or B"
+    },
+    {
+      "index": 282,
+      "start": 865.639,
+      "end": 868.23,
+      "duration": 2.591,
+      "text": "and see if it is one see if C is one it"
+    },
+    {
+      "index": 283,
+      "start": 868.24,
+      "end": 871.43,
+      "duration": 3.19,
+      "text": "is one make it one if is zero it's not"
+    },
+    {
+      "index": 284,
+      "start": 871.44,
+      "end": 874.069,
+      "duration": 2.629,
+      "text": "so this is called carry generate carry"
+    },
+    {
+      "index": 285,
+      "start": 874.079,
+      "end": 877.91,
+      "duration": 3.831,
+      "text": "is"
+    },
+    {
+      "index": 286,
+      "start": 880.59,
+      "end": 880.6,
+      "duration": 0.01,
+      "text": "generated in that stage whatever is the"
+    },
+    {
+      "index": 287,
+      "start": 880.6,
+      "end": 883.189,
+      "duration": 2.589,
+      "text": "stage we have multi-stage addition 4 bit"
+    },
+    {
+      "index": 288,
+      "start": 883.199,
+      "end": 884.79,
+      "duration": 1.591,
+      "text": "addition in this case it could be 8 bit"
+    },
+    {
+      "index": 289,
+      "start": 884.8,
+      "end": 886.11,
+      "duration": 1.31,
+      "text": "it could be 16"
+    },
+    {
+      "index": 290,
+      "start": 886.12,
+      "end": 891.35,
+      "duration": 5.23,
+      "text": "bits 32 bits at each stage at each"
+    },
+    {
+      "index": 291,
+      "start": 891.36,
+      "end": 893.55,
+      "duration": 2.19,
+      "text": "bit the car will generated if the"
+    },
+    {
+      "index": 292,
+      "start": 893.56,
+      "end": 895.269,
+      "duration": 1.709,
+      "text": "corresponding bits are both"
+    },
+    {
+      "index": 293,
+      "start": 895.279,
+      "end": 898.389,
+      "duration": 3.11,
+      "text": "one that's why called carry generate"
+    },
+    {
+      "index": 294,
+      "start": 898.399,
+      "end": 899.749,
+      "duration": 1.35,
+      "text": "irrespective the fact whether the"
+    },
+    {
+      "index": 295,
+      "start": 899.759,
+      "end": 901.79,
+      "duration": 2.031,
+      "text": "previous carry was one or"
+    },
+    {
+      "index": 296,
+      "start": 901.8,
+      "end": 904.749,
+      "duration": 2.949,
+      "text": "zero so Carri is frh Carri is generated"
+    },
+    {
+      "index": 297,
+      "start": 904.759,
+      "end": 907.23,
+      "duration": 2.471,
+      "text": "at that stage if both A and B happen be"
+    },
+    {
+      "index": 298,
+      "start": 907.24,
+      "end": 909.269,
+      "duration": 2.029,
+      "text": "one in that stage you don't have to look"
+    },
+    {
+      "index": 299,
+      "start": 909.279,
+      "end": 911.99,
+      "duration": 2.711,
+      "text": "at what was the carry push from the"
+    },
+    {
+      "index": 300,
+      "start": 912.0,
+      "end": 915.389,
+      "duration": 3.389,
+      "text": "previous the other condition is when as"
+    },
+    {
+      "index": 301,
+      "start": 915.399,
+      "end": 917.91,
+      "duration": 2.511,
+      "text": "be of that stage is one the car will be"
+    },
+    {
+      "index": 302,
+      "start": 917.92,
+      "end": 919.269,
+      "duration": 1.349,
+      "text": "generated only when the previous carry"
+    },
+    {
+      "index": 303,
+      "start": 919.279,
+      "end": 921.71,
+      "duration": 2.431,
+      "text": "was pushed into that so this one I will"
+    },
+    {
+      "index": 304,
+      "start": 921.72,
+      "end": 927.949,
+      "duration": 6.229,
+      "text": "call carry"
+    },
+    {
+      "index": 305,
+      "start": 935.309,
+      "end": 935.319,
+      "duration": 0.01,
+      "text": "C is propagated from previous stage to"
+    },
+    {
+      "index": 306,
+      "start": 935.319,
+      "end": 936.11,
+      "duration": 0.791,
+      "text": "next"
+    },
+    {
+      "index": 307,
+      "start": 936.12,
+      "end": 939.99,
+      "duration": 3.87,
+      "text": "stage if a exclus or b is one do you"
+    },
+    {
+      "index": 308,
+      "start": 940.0,
+      "end": 941.23,
+      "duration": 1.23,
+      "text": "understand this"
+    },
+    {
+      "index": 309,
+      "start": 941.24,
+      "end": 944.99,
+      "duration": 3.75,
+      "text": "concept propagation a carry from a"
+    },
+    {
+      "index": 310,
+      "start": 945.0,
+      "end": 946.47,
+      "duration": 1.47,
+      "text": "previous stage is"
+    },
+    {
+      "index": 311,
+      "start": 946.48,
+      "end": 949.309,
+      "duration": 2.829,
+      "text": "propagated or transmitted to the next"
+    },
+    {
+      "index": 312,
+      "start": 949.319,
+      "end": 953.629,
+      "duration": 4.31,
+      "text": "stage if a exclusive or B is"
+    },
+    {
+      "index": 313,
+      "start": 956.87,
+      "end": 956.88,
+      "duration": 0.01,
+      "text": "one and if a and b is"
+    },
+    {
+      "index": 314,
+      "start": 956.88,
+      "end": 960.15,
+      "duration": 3.27,
+      "text": "one a fresh car is gener and transmitted"
+    },
+    {
+      "index": 315,
+      "start": 960.16,
+      "end": 961.71,
+      "duration": 1.55,
+      "text": "to the next stage so output carry will"
+    },
+    {
+      "index": 316,
+      "start": 961.72,
+      "end": 964.43,
+      "duration": 2.71,
+      "text": "depend on whether A and B is"
+    },
+    {
+      "index": 317,
+      "start": 964.44,
+      "end": 966.03,
+      "duration": 1.59,
+      "text": "one"
+    },
+    {
+      "index": 318,
+      "start": 966.04,
+      "end": 971.87,
+      "duration": 5.83,
+      "text": "or a or b is one but input carry is also"
+    },
+    {
+      "index": 319,
+      "start": 971.88,
+      "end": 974.35,
+      "duration": 2.47,
+      "text": "one under these two conditions I"
+    },
+    {
+      "index": 320,
+      "start": 974.36,
+      "end": 975.91,
+      "duration": 1.55,
+      "text": "exhausted all the possibilities of a"
+    },
+    {
+      "index": 321,
+      "start": 975.92,
+      "end": 978.99,
+      "duration": 3.07,
+      "text": "carry generation mechanism of a one bit"
+    },
+    {
+      "index": 322,
+      "start": 979.0,
+      "end": 980.99,
+      "duration": 1.99,
+      "text": "this bit could be the e8th bit 7th bit"
+    },
+    {
+      "index": 323,
+      "start": 981.0,
+      "end": 982.79,
+      "duration": 1.79,
+      "text": "18th bit 37th"
+    },
+    {
+      "index": 324,
+      "start": 982.8,
+      "end": 985.309,
+      "duration": 2.509,
+      "text": "bit I need to know what is the previous"
+    },
+    {
+      "index": 325,
+      "start": 985.319,
+      "end": 987.749,
+      "duration": 2.43,
+      "text": "bit and the current value of a and b"
+    },
+    {
+      "index": 326,
+      "start": 987.759,
+      "end": 989.11,
+      "duration": 1.351,
+      "text": "then I know whether the next bit bit is"
+    },
+    {
+      "index": 327,
+      "start": 989.12,
+      "end": 991.629,
+      "duration": 2.509,
+      "text": "going to be one zero for carry that"
+    },
+    {
+      "index": 328,
+      "start": 991.639,
+      "end": 994.79,
+      "duration": 3.151,
+      "text": "clear so that means I can write it as"
+    },
+    {
+      "index": 329,
+      "start": 994.8,
+      "end": 998.71,
+      "duration": 3.91,
+      "text": "I'll call this as G this is p g for"
+    },
+    {
+      "index": 330,
+      "start": 998.72,
+      "end": 1002.87,
+      "duration": 4.15,
+      "text": "Generate carry P for propagate"
+    },
+    {
+      "index": 331,
+      "start": 1002.88,
+      "end": 1006.23,
+      "duration": 3.35,
+      "text": "carry carry generation and carry"
+    },
+    {
+      "index": 332,
+      "start": 1006.24,
+      "end": 1010.069,
+      "duration": 3.829,
+      "text": "propagation so I have C as output carry"
+    },
+    {
+      "index": 333,
+      "start": 1010.079,
+      "end": 1012.91,
+      "duration": 2.831,
+      "text": "as generate condition which is a and b"
+    },
+    {
+      "index": 334,
+      "start": 1012.92,
+      "end": 1015.629,
+      "duration": 2.709,
+      "text": "condition this is going to call G I'm"
+    },
+    {
+      "index": 335,
+      "start": 1015.639,
+      "end": 1017.79,
+      "duration": 2.151,
+      "text": "going to call this G I'm going to call"
+    },
+    {
+      "index": 336,
+      "start": 1017.8,
+      "end": 1020.03,
+      "duration": 2.23,
+      "text": "this term p"
+    },
+    {
+      "index": 337,
+      "start": 1020.04,
+      "end": 1022.829,
+      "duration": 2.789,
+      "text": "the propagate condition is A exclus or B"
+    },
+    {
+      "index": 338,
+      "start": 1022.839,
+      "end": 1027.59,
+      "duration": 4.751,
+      "text": "and C so output carry will"
+    },
+    {
+      "index": 339,
+      "start": 1027.6,
+      "end": 1032.99,
+      "duration": 5.39,
+      "text": "be G or PCI where G stands for a and b g"
+    },
+    {
+      "index": 340,
+      "start": 1033.0,
+      "end": 1035.71,
+      "duration": 2.71,
+      "text": "stands for uh P stands G stands for A"
+    },
+    {
+      "index": 341,
+      "start": 1035.72,
+      "end": 1040.39,
+      "duration": 4.67,
+      "text": "and B and P stands for a exclusive or"
+    },
+    {
+      "index": 342,
+      "start": 1040.4,
+      "end": 1043.27,
+      "duration": 2.87,
+      "text": "B is it"
+    },
+    {
+      "index": 343,
+      "start": 1043.28,
+      "end": 1047.83,
+      "duration": 4.55,
+      "text": "clear now let us look at our four bit"
+    },
+    {
+      "index": 344,
+      "start": 1057.31,
+      "end": 1057.32,
+      "duration": 0.01,
+      "text": "this is my C minus"
+    },
+    {
+      "index": 345,
+      "start": 1057.32,
+      "end": 1062.83,
+      "duration": 5.51,
+      "text": "1 this is my a0 B"
+    },
+    {
+      "index": 346,
+      "start": 1067.11,
+      "end": 1067.12,
+      "duration": 0.01,
+      "text": "0 c0 is output carry feeding as input"
+    },
+    {
+      "index": 347,
+      "start": 1067.12,
+      "end": 1069.19,
+      "duration": 2.07,
+      "text": "carry for"
+    },
+    {
+      "index": 348,
+      "start": 1069.2,
+      "end": 1072.789,
+      "duration": 3.589,
+      "text": "this C"
+    },
+    {
+      "index": 349,
+      "start": 1075.149,
+      "end": 1075.159,
+      "duration": 0.01,
+      "text": "in A1"
+    },
+    {
+      "index": 350,
+      "start": 1075.159,
+      "end": 1077.83,
+      "duration": 2.671,
+      "text": "B1 output of this is called"
+    },
+    {
+      "index": 351,
+      "start": 1077.84,
+      "end": 1080.35,
+      "duration": 2.51,
+      "text": "C1 feeding as input into"
+    },
+    {
+      "index": 352,
+      "start": 1080.36,
+      "end": 1087.07,
+      "duration": 6.71,
+      "text": "this A2"
+    },
+    {
+      "index": 353,
+      "start": 1091.11,
+      "end": 1091.12,
+      "duration": 0.01,
+      "text": "B2 C2 will be the output of this feeding"
+    },
+    {
+      "index": 354,
+      "start": 1091.12,
+      "end": 1094.149,
+      "duration": 3.029,
+      "text": "as input to this A3 B3 this circuit I"
+    },
+    {
+      "index": 355,
+      "start": 1094.159,
+      "end": 1096.01,
+      "duration": 1.851,
+      "text": "drew yesterday also in the last lecture"
+    },
+    {
+      "index": 356,
+      "start": 1096.02,
+      "end": 1097.789,
+      "duration": 1.769,
+      "text": "[Music]"
+    },
+    {
+      "index": 357,
+      "start": 1097.799,
+      "end": 1101.669,
+      "duration": 3.87,
+      "text": "too this is A3"
+    },
+    {
+      "index": 358,
+      "start": 1101.679,
+      "end": 1104.87,
+      "duration": 3.191,
+      "text": "B3 and the output is"
+    },
+    {
+      "index": 359,
+      "start": 1104.88,
+      "end": 1107.75,
+      "duration": 2.87,
+      "text": "C3 I'm only interested in C3"
+    },
+    {
+      "index": 360,
+      "start": 1107.76,
+      "end": 1109.789,
+      "duration": 2.029,
+      "text": "finally"
+    },
+    {
+      "index": 361,
+      "start": 1109.799,
+      "end": 1115.31,
+      "duration": 5.511,
+      "text": "I'm interested in S3 S2 S1 and s0 this"
+    },
+    {
+      "index": 362,
+      "start": 1115.32,
+      "end": 1118.59,
+      "duration": 3.27,
+      "text": "is the sum and C3 the carry I'm not"
+    },
+    {
+      "index": 363,
+      "start": 1118.6,
+      "end": 1120.669,
+      "duration": 2.069,
+      "text": "interested in intermediate carries"
+    },
+    {
+      "index": 364,
+      "start": 1120.679,
+      "end": 1123.43,
+      "duration": 2.751,
+      "text": "intermediate carry of c0 C1 C2 I'm not"
+    },
+    {
+      "index": 365,
+      "start": 1123.44,
+      "end": 1125.75,
+      "duration": 2.31,
+      "text": "interested but I need them for"
+    },
+    {
+      "index": 366,
+      "start": 1125.76,
+      "end": 1127.99,
+      "duration": 2.23,
+      "text": "proceeding with me final"
+    },
+    {
+      "index": 367,
+      "start": 1128.0,
+      "end": 1130.31,
+      "duration": 2.31,
+      "text": "computation in order to complete my"
+    },
+    {
+      "index": 368,
+      "start": 1130.32,
+      "end": 1132.549,
+      "duration": 2.229,
+      "text": "addition process I need"
+    },
+    {
+      "index": 369,
+      "start": 1132.559,
+      "end": 1137.909,
+      "duration": 5.35,
+      "text": "c0 C1 C2 C3 C c0 C1 C2 but what I"
+    },
+    {
+      "index": 370,
+      "start": 1137.919,
+      "end": 1140.99,
+      "duration": 3.071,
+      "text": "interested in is find out s0 S1 S2 S3"
+    },
+    {
+      "index": 371,
+      "start": 1141.0,
+      "end": 1144.59,
+      "duration": 3.59,
+      "text": "and C3 that is my final result so if we"
+    },
+    {
+      "index": 372,
+      "start": 1144.6,
+      "end": 1146.07,
+      "duration": 1.47,
+      "text": "can now speed up the mechanism of"
+    },
+    {
+      "index": 373,
+      "start": 1146.08,
+      "end": 1150.87,
+      "duration": 4.79,
+      "text": "generation of0 C1 C2 and feed into the"
+    },
+    {
+      "index": 374,
+      "start": 1150.88,
+      "end": 1154.99,
+      "duration": 4.11,
+      "text": "appropriate stages of the the adder full"
+    },
+    {
+      "index": 375,
+      "start": 1155.0,
+      "end": 1157.39,
+      "duration": 2.39,
+      "text": "adder I can get the result faster than"
+    },
+    {
+      "index": 376,
+      "start": 1157.4,
+      "end": 1158.789,
+      "duration": 1.389,
+      "text": "that instead of having to wait for this"
+    },
+    {
+      "index": 377,
+      "start": 1158.799,
+      "end": 1160.789,
+      "duration": 1.99,
+      "text": "carry to propagate from one to next to"
+    },
+    {
+      "index": 378,
+      "start": 1160.799,
+      "end": 1162.789,
+      "duration": 1.99,
+      "text": "next to next to next next like"
+    },
+    {
+      "index": 379,
+      "start": 1162.799,
+      "end": 1165.99,
+      "duration": 3.191,
+      "text": "that I can get it faster than that so"
+    },
+    {
+      "index": 380,
+      "start": 1166.0,
+      "end": 1167.549,
+      "duration": 1.549,
+      "text": "now how are we going to do that we"
+    },
+    {
+      "index": 381,
+      "start": 1167.559,
+      "end": 1170.47,
+      "duration": 2.911,
+      "text": "already return for any given stage the C"
+    },
+    {
+      "index": 382,
+      "start": 1170.48,
+      "end": 1173.19,
+      "duration": 2.71,
+      "text": "is given as C output is given"
+    },
+    {
+      "index": 383,
+      "start": 1173.2,
+      "end": 1177.31,
+      "duration": 4.11,
+      "text": "as so I will write this as a generalized"
+    },
+    {
+      "index": 384,
+      "start": 1177.32,
+      "end": 1180.19,
+      "duration": 2.87,
+      "text": "term output carry I'll will call it"
+    },
+    {
+      "index": 385,
+      "start": 1180.2,
+      "end": 1183.51,
+      "duration": 3.31,
+      "text": "CI is"
+    },
+    {
+      "index": 386,
+      "start": 1183.52,
+      "end": 1185.59,
+      "duration": 2.07,
+      "text": "GI p"
+    },
+    {
+      "index": 387,
+      "start": 1185.6,
+      "end": 1190.07,
+      "duration": 4.47,
+      "text": "i c IUS one that means the input carry"
+    },
+    {
+      "index": 388,
+      "start": 1190.08,
+      "end": 1193.11,
+      "duration": 3.03,
+      "text": "is called IUS one the previous I stage"
+    },
+    {
+      "index": 389,
+      "start": 1193.12,
+      "end": 1194.59,
+      "duration": 1.47,
+      "text": "for the I"
+    },
+    {
+      "index": 390,
+      "start": 1194.6,
+      "end": 1199.669,
+      "duration": 5.069,
+      "text": "stage output carry is c i c subscript"
+    },
+    {
+      "index": 391,
+      "start": 1199.679,
+      "end": 1206.23,
+      "duration": 6.551,
+      "text": "i g is AI and bi for that stage Pi is a"
+    },
+    {
+      "index": 392,
+      "start": 1206.24,
+      "end": 1209.149,
+      "duration": 2.909,
+      "text": "exclusive or a A exclus or B for that"
+    },
+    {
+      "index": 393,
+      "start": 1209.159,
+      "end": 1211.789,
+      "duration": 2.63,
+      "text": "stage c i minus one is the carry coming"
+    },
+    {
+      "index": 394,
+      "start": 1211.799,
+      "end": 1214.27,
+      "duration": 2.471,
+      "text": "from the previous stage now I can"
+    },
+    {
+      "index": 395,
+      "start": 1214.28,
+      "end": 1216.47,
+      "duration": 2.19,
+      "text": "substitute for each stage now for the"
+    },
+    {
+      "index": 396,
+      "start": 1216.48,
+      "end": 1221.63,
+      "duration": 5.15,
+      "text": "first stage C 0 would be C 0 will be G 0"
+    },
+    {
+      "index": 397,
+      "start": 1221.64,
+      "end": 1224.39,
+      "duration": 2.75,
+      "text": "plus p 0 C"
+    },
+    {
+      "index": 398,
+      "start": 1224.4,
+      "end": 1226.669,
+      "duration": 2.269,
+      "text": "minus1 minus one I'm putting usually it"
+    },
+    {
+      "index": 399,
+      "start": 1226.679,
+      "end": 1229.51,
+      "duration": 2.831,
+      "text": "is the first four bit cus1 is zero"
+    },
+    {
+      "index": 400,
+      "start": 1229.52,
+      "end": 1231.83,
+      "duration": 2.31,
+      "text": "there's no input carry but as I said as"
+    },
+    {
+      "index": 401,
+      "start": 1231.84,
+      "end": 1235.669,
+      "duration": 3.829,
+      "text": "in the last lecture it could be a stage"
+    },
+    {
+      "index": 402,
+      "start": 1235.679,
+      "end": 1237.63,
+      "duration": 1.951,
+      "text": "in between a multistage four bits I can"
+    },
+    {
+      "index": 403,
+      "start": 1237.64,
+      "end": 1239.75,
+      "duration": 2.11,
+      "text": "have several four bits this can be one"
+    },
+    {
+      "index": 404,
+      "start": 1239.76,
+      "end": 1242.83,
+      "duration": 3.07,
+      "text": "of the intermediate four bit stage so I"
+    },
+    {
+      "index": 405,
+      "start": 1242.84,
+      "end": 1244.51,
+      "duration": 1.67,
+      "text": "cannot assume C minus one to be zero all"
+    },
+    {
+      "index": 406,
+      "start": 1244.52,
+      "end": 1246.51,
+      "duration": 1.99,
+      "text": "the time so I'm putting C minus"
+    },
+    {
+      "index": 407,
+      "start": 1246.52,
+      "end": 1248.99,
+      "duration": 2.47,
+      "text": "one or you want to call this C in if you"
+    },
+    {
+      "index": 408,
+      "start": 1249.0,
+      "end": 1251.63,
+      "duration": 2.63,
+      "text": "are not comfortable with the"
+    },
+    {
+      "index": 409,
+      "start": 1251.64,
+      "end": 1256.31,
+      "duration": 4.67,
+      "text": "word c minus one put it C in doesn't"
+    },
+    {
+      "index": 410,
+      "start": 1256.32,
+      "end": 1258.23,
+      "duration": 1.91,
+      "text": "matter but this CN should not be"
+    },
+    {
+      "index": 411,
+      "start": 1258.24,
+      "end": 1259.95,
+      "duration": 1.71,
+      "text": "confused so that"
+    },
+    {
+      "index": 412,
+      "start": 1259.96,
+      "end": 1261.59,
+      "duration": 1.63,
+      "text": "is"
+    },
+    {
+      "index": 413,
+      "start": 1261.6,
+      "end": 1264.63,
+      "duration": 3.03,
+      "text": "fine and C1 is"
+    },
+    {
+      "index": 414,
+      "start": 1264.64,
+      "end": 1266.63,
+      "duration": 1.99,
+      "text": "G1 plus"
+    },
+    {
+      "index": 415,
+      "start": 1266.64,
+      "end": 1268.19,
+      "duration": 1.55,
+      "text": "P1"
+    },
+    {
+      "index": 416,
+      "start": 1268.2,
+      "end": 1271.59,
+      "duration": 3.39,
+      "text": "C"
+    },
+    {
+      "index": 417,
+      "start": 1274.269,
+      "end": 1274.279,
+      "duration": 0.01,
+      "text": "0 this is where the looking ahead comes"
+    },
+    {
+      "index": 418,
+      "start": 1274.279,
+      "end": 1276.23,
+      "duration": 1.951,
+      "text": "now"
+    },
+    {
+      "index": 419,
+      "start": 1276.24,
+      "end": 1279.909,
+      "duration": 3.669,
+      "text": "c0 we have G1 P1 no problem we are"
+    },
+    {
+      "index": 420,
+      "start": 1279.919,
+      "end": 1281.35,
+      "duration": 1.431,
+      "text": "assuming that A's and B's are all"
+    },
+    {
+      "index": 421,
+      "start": 1281.36,
+      "end": 1283.51,
+      "duration": 2.15,
+      "text": "available at once the beginning of the"
+    },
+    {
+      "index": 422,
+      "start": 1283.52,
+      "end": 1285.909,
+      "duration": 2.389,
+      "text": "problem as soon as the addition is as"
+    },
+    {
+      "index": 423,
+      "start": 1285.919,
+      "end": 1287.75,
+      "duration": 1.831,
+      "text": "soon as you are asked to add you are"
+    },
+    {
+      "index": 424,
+      "start": 1287.76,
+      "end": 1290.549,
+      "duration": 2.789,
+      "text": "given the values of a 0 A1 A2 A3 B 0 B1"
+    },
+    {
+      "index": 425,
+      "start": 1290.559,
+      "end": 1294.549,
+      "duration": 3.99,
+      "text": "B2 B3 so I can always compute G 0 c g g"
+    },
+    {
+      "index": 426,
+      "start": 1294.559,
+      "end": 1297.35,
+      "duration": 2.791,
+      "text": "0 G1 G2 G3 p 0 P1 P2"
+    },
+    {
+      "index": 427,
+      "start": 1297.36,
+      "end": 1300.07,
+      "duration": 2.71,
+      "text": "P3 all in one particular stage"
+    },
+    {
+      "index": 428,
+      "start": 1300.08,
+      "end": 1301.549,
+      "duration": 1.469,
+      "text": "propagation delay will be there but it"
+    },
+    {
+      "index": 429,
+      "start": 1301.559,
+      "end": 1304.669,
+      "duration": 3.11,
+      "text": "is very small but what is not there is"
+    },
+    {
+      "index": 430,
+      "start": 1304.679,
+      "end": 1307.39,
+      "duration": 2.711,
+      "text": "the value of c0 which I have to get from"
+    },
+    {
+      "index": 431,
+      "start": 1307.4,
+      "end": 1309.99,
+      "duration": 2.59,
+      "text": "this so now I can substitute for this c0"
+    },
+    {
+      "index": 432,
+      "start": 1310.0,
+      "end": 1312.71,
+      "duration": 2.71,
+      "text": "in this equation can I not do that it"
+    },
+    {
+      "index": 433,
+      "start": 1312.72,
+      "end": 1314.43,
+      "duration": 1.71,
+      "text": "now become"
+    },
+    {
+      "index": 434,
+      "start": 1314.44,
+      "end": 1323.789,
+      "duration": 9.349,
+      "text": "G1 P1 what is c0 it is g0"
+    },
+    {
+      "index": 435,
+      "start": 1334.99,
+      "end": 1335.0,
+      "duration": 0.01,
+      "text": "1 so I'm I'm substituting for the value"
+    },
+    {
+      "index": 436,
+      "start": 1335.0,
+      "end": 1338.31,
+      "duration": 3.31,
+      "text": "of c0 from this equation so now again I"
+    },
+    {
+      "index": 437,
+      "start": 1338.32,
+      "end": 1343.07,
+      "duration": 4.75,
+      "text": "I know G1 I know P1 I know g0 I know P1"
+    },
+    {
+      "index": 438,
+      "start": 1343.08,
+      "end": 1346.23,
+      "duration": 3.15,
+      "text": "I have so this stage does not require"
+    },
+    {
+      "index": 439,
+      "start": 1346.24,
+      "end": 1350.19,
+      "duration": 3.95,
+      "text": "any extra time to wait for my car"
+    },
+    {
+      "index": 440,
+      "start": 1350.2,
+      "end": 1353.269,
+      "duration": 3.069,
+      "text": "generation the carry generation is based"
+    },
+    {
+      "index": 441,
+      "start": 1353.279,
+      "end": 1354.789,
+      "duration": 1.51,
+      "text": "on the propagation delay of this stage"
+    },
+    {
+      "index": 442,
+      "start": 1354.799,
+      "end": 1357.549,
+      "duration": 2.75,
+      "text": "which is not very much a"
+    },
+    {
+      "index": 443,
+      "start": 1357.559,
+      "end": 1360.63,
+      "duration": 3.071,
+      "text": "logic two- stage logic isn't that this a"
+    },
+    {
+      "index": 444,
+      "start": 1360.64,
+      "end": 1363.31,
+      "duration": 2.67,
+      "text": "sum of product a two- stage logic two-"
+    },
+    {
+      "index": 445,
+      "start": 1363.32,
+      "end": 1365.63,
+      "duration": 2.31,
+      "text": "stage logic so there is a fixed amount"
+    },
+    {
+      "index": 446,
+      "start": 1365.64,
+      "end": 1367.51,
+      "duration": 1.87,
+      "text": "of time delay propagation delay we have"
+    },
+    {
+      "index": 447,
+      "start": 1367.52,
+      "end": 1369.99,
+      "duration": 2.47,
+      "text": "to accept that but we don't have to wait"
+    },
+    {
+      "index": 448,
+      "start": 1370.0,
+      "end": 1372.029,
+      "duration": 2.029,
+      "text": "for some propagation from carry to"
+    },
+    {
+      "index": 449,
+      "start": 1372.039,
+      "end": 1375.99,
+      "duration": 3.951,
+      "text": "propagate from one stage to next"
+    },
+    {
+      "index": 450,
+      "start": 1380.19,
+      "end": 1380.2,
+      "duration": 0.01,
+      "text": "stage continue on this C2 will be"
+    },
+    {
+      "index": 451,
+      "start": 1380.2,
+      "end": 1383.63,
+      "duration": 3.43,
+      "text": "G2 P2 C2 P2"
+    },
+    {
+      "index": 452,
+      "start": 1383.64,
+      "end": 1386.87,
+      "duration": 3.23,
+      "text": "C1 and if you substitute for C C1 from"
+    },
+    {
+      "index": 453,
+      "start": 1386.88,
+      "end": 1390.51,
+      "duration": 3.63,
+      "text": "here this will be G2 +"
+    },
+    {
+      "index": 454,
+      "start": 1390.52,
+      "end": 1394.029,
+      "duration": 3.509,
+      "text": "P2 G1 P1 G"
+    },
+    {
+      "index": 455,
+      "start": 1394.039,
+      "end": 1397.269,
+      "duration": 3.23,
+      "text": "0 P1 p 0 C"
+    },
+    {
+      "index": 456,
+      "start": 1397.279,
+      "end": 1399.39,
+      "duration": 2.111,
+      "text": "minus1 and if you expand it it will"
+    },
+    {
+      "index": 457,
+      "start": 1399.4,
+      "end": 1402.63,
+      "duration": 3.23,
+      "text": "become G2 P2"
+    },
+    {
+      "index": 458,
+      "start": 1402.64,
+      "end": 1405.71,
+      "duration": 3.07,
+      "text": "G1"
+    },
+    {
+      "index": 459,
+      "start": 1409.71,
+      "end": 1409.72,
+      "duration": 0.01,
+      "text": "P2 P1 g0"
+    },
+    {
+      "index": 460,
+      "start": 1409.72,
+      "end": 1416.87,
+      "duration": 7.15,
+      "text": "P2 P1 p 0 C"
+    },
+    {
+      "index": 461,
+      "start": 1419.59,
+      "end": 1419.6,
+      "duration": 0.01,
+      "text": "minus1 again I don't depend on any value"
+    },
+    {
+      "index": 462,
+      "start": 1419.6,
+      "end": 1422.63,
+      "duration": 3.03,
+      "text": "of C except C minus one again it's a"
+    },
+    {
+      "index": 463,
+      "start": 1422.64,
+      "end": 1424.07,
+      "duration": 1.43,
+      "text": "two-stage"
+    },
+    {
+      "index": 464,
+      "start": 1424.08,
+      "end": 1427.47,
+      "duration": 3.39,
+      "text": "logic and Gates followed by"
+    },
+    {
+      "index": 465,
+      "start": 1427.48,
+      "end": 1430.11,
+      "duration": 2.63,
+      "text": "argate one set of and Gates feeding into"
+    },
+    {
+      "index": 466,
+      "start": 1430.12,
+      "end": 1432.19,
+      "duration": 2.07,
+      "text": "an argate and then you get the"
+    },
+    {
+      "index": 467,
+      "start": 1432.2,
+      "end": 1435.31,
+      "duration": 3.11,
+      "text": "output and cus1 is already"
+    },
+    {
+      "index": 468,
+      "start": 1435.32,
+      "end": 1439.19,
+      "duration": 3.87,
+      "text": "known so no question of waiting for the"
+    },
+    {
+      "index": 469,
+      "start": 1439.2,
+      "end": 1441.11,
+      "duration": 1.91,
+      "text": "the car to come come"
+    },
+    {
+      "index": 470,
+      "start": 1441.12,
+      "end": 1443.63,
+      "duration": 2.51,
+      "text": "through and then you can write by"
+    },
+    {
+      "index": 471,
+      "start": 1443.64,
+      "end": 1446.63,
+      "duration": 2.99,
+      "text": "induction C3 would be"
+    },
+    {
+      "index": 472,
+      "start": 1446.64,
+      "end": 1448.63,
+      "duration": 1.99,
+      "text": "G3 s"
+    },
+    {
+      "index": 473,
+      "start": 1448.64,
+      "end": 1454.39,
+      "duration": 5.75,
+      "text": "P3"
+    },
+    {
+      "index": 474,
+      "start": 1456.83,
+      "end": 1456.84,
+      "duration": 0.01,
+      "text": "P2 P2 or"
+    },
+    {
+      "index": 475,
+      "start": 1456.84,
+      "end": 1460.31,
+      "duration": 3.47,
+      "text": "P3 P3"
+    },
+    {
+      "index": 476,
+      "start": 1462.23,
+      "end": 1462.24,
+      "duration": 0.01,
+      "text": "G2 P3"
+    },
+    {
+      "index": 477,
+      "start": 1462.24,
+      "end": 1465.51,
+      "duration": 3.27,
+      "text": "G2 P3"
+    },
+    {
+      "index": 478,
+      "start": 1465.52,
+      "end": 1467.35,
+      "duration": 1.83,
+      "text": "P2"
+    },
+    {
+      "index": 479,
+      "start": 1467.36,
+      "end": 1469.11,
+      "duration": 1.75,
+      "text": "G1"
+    },
+    {
+      "index": 480,
+      "start": 1469.12,
+      "end": 1473.909,
+      "duration": 4.789,
+      "text": "P3 P2 P1 p"
+    },
+    {
+      "index": 481,
+      "start": 1473.919,
+      "end": 1478.87,
+      "duration": 4.951,
+      "text": "0 P3 P2 P1 G1 G"
+    },
+    {
+      "index": 482,
+      "start": 1478.88,
+      "end": 1491.95,
+      "duration": 13.07,
+      "text": "g0 P3 P2 P1 p 0"
+    },
+    {
+      "index": 483,
+      "start": 1496.59,
+      "end": 1496.6,
+      "duration": 0.01,
+      "text": "C so equations for carry for stage"
+    },
+    {
+      "index": 484,
+      "start": 1496.6,
+      "end": 1499.71,
+      "duration": 3.11,
+      "text": "one which has to fit to carry of this"
+    },
+    {
+      "index": 485,
+      "start": 1499.72,
+      "end": 1501.99,
+      "duration": 2.27,
+      "text": "just fit into this the equation for"
+    },
+    {
+      "index": 486,
+      "start": 1502.0,
+      "end": 1503.909,
+      "duration": 1.909,
+      "text": "carry of this has to fit into this"
+    },
+    {
+      "index": 487,
+      "start": 1503.919,
+      "end": 1505.389,
+      "duration": 1.47,
+      "text": "equation for carry of this we has to fit"
+    },
+    {
+      "index": 488,
+      "start": 1505.399,
+      "end": 1507.75,
+      "duration": 2.351,
+      "text": "into this so I have the carry equations"
+    },
+    {
+      "index": 489,
+      "start": 1507.76,
+      "end": 1509.63,
+      "duration": 1.87,
+      "text": "of all I have the carry equations for"
+    },
+    {
+      "index": 490,
+      "start": 1509.64,
+      "end": 1511.75,
+      "duration": 2.11,
+      "text": "all the stages I have the inputs for all"
+    },
+    {
+      "index": 491,
+      "start": 1511.76,
+      "end": 1515.389,
+      "duration": 3.629,
+      "text": "the stages all it needs to do is to find"
+    },
+    {
+      "index": 492,
+      "start": 1515.399,
+      "end": 1516.95,
+      "duration": 1.551,
+      "text": "out the the propagation delay of the"
+    },
+    {
+      "index": 493,
+      "start": 1516.96,
+      "end": 1518.75,
+      "duration": 1.79,
+      "text": "individual full adder which is of course"
+    },
+    {
+      "index": 494,
+      "start": 1518.76,
+      "end": 1520.75,
+      "duration": 1.99,
+      "text": "I'm not saying it is zero propagation"
+    },
+    {
+      "index": 495,
+      "start": 1520.76,
+      "end": 1523.269,
+      "duration": 2.509,
+      "text": "delay I didn't say that the propagation"
+    },
+    {
+      "index": 496,
+      "start": 1523.279,
+      "end": 1525.029,
+      "duration": 1.75,
+      "text": "delay is minimized this is this can be"
+    },
+    {
+      "index": 497,
+      "start": 1525.039,
+      "end": 1526.99,
+      "duration": 1.951,
+      "text": "appreciated when we're talking of"
+    },
+    {
+      "index": 498,
+      "start": 1527.0,
+      "end": 1529.07,
+      "duration": 2.07,
+      "text": "multibit in the sense of multi-bit add"
+    },
+    {
+      "index": 499,
+      "start": 1529.08,
+      "end": 1531.149,
+      "duration": 2.069,
+      "text": "4bit added what is 4 bit maximum 16"
+    },
+    {
+      "index": 500,
+      "start": 1531.159,
+      "end": 1534.669,
+      "duration": 3.51,
+      "text": "numbers 0 to 15 but in computers when"
+    },
+    {
+      "index": 501,
+      "start": 1534.679,
+      "end": 1536.669,
+      "duration": 1.99,
+      "text": "you're talking of number crunching"
+    },
+    {
+      "index": 502,
+      "start": 1536.679,
+      "end": 1539.83,
+      "duration": 3.151,
+      "text": "applications we talk of 16 bits 32 bits"
+    },
+    {
+      "index": 503,
+      "start": 1539.84,
+      "end": 1543.669,
+      "duration": 3.829,
+      "text": "64 bits 128 bits imagine the number of"
+    },
+    {
+      "index": 504,
+      "start": 1543.679,
+      "end": 1545.549,
+      "duration": 1.87,
+      "text": "bits it has to number of stag has to"
+    },
+    {
+      "index": 505,
+      "start": 1545.559,
+      "end": 1549.51,
+      "duration": 3.951,
+      "text": "trans travel in order to Traverse uh to"
+    },
+    {
+      "index": 506,
+      "start": 1549.52,
+      "end": 1550.99,
+      "duration": 1.47,
+      "text": "get to the"
+    },
+    {
+      "index": 507,
+      "start": 1551.0,
+      "end": 1552.909,
+      "duration": 1.909,
+      "text": "output there you can appreciate this"
+    },
+    {
+      "index": 508,
+      "start": 1552.919,
+      "end": 1554.71,
+      "duration": 1.791,
+      "text": "speed up speeding up"
+    },
+    {
+      "index": 509,
+      "start": 1554.72,
+      "end": 1558.389,
+      "duration": 3.669,
+      "text": "here now what is this logic all the G"
+    },
+    {
+      "index": 510,
+      "start": 1558.399,
+      "end": 1559.909,
+      "duration": 1.51,
+      "text": "and PS are known because G is nothing"
+    },
+    {
+      "index": 511,
+      "start": 1559.919,
+      "end": 1562.029,
+      "duration": 2.11,
+      "text": "but an and combination p is nothing but"
+    },
+    {
+      "index": 512,
+      "start": 1562.039,
+      "end": 1565.269,
+      "duration": 3.23,
+      "text": "exclusive or combination so I can have"
+    },
+    {
+      "index": 513,
+      "start": 1565.279,
+      "end": 1567.669,
+      "duration": 2.39,
+      "text": "my PS and"
+    },
+    {
+      "index": 514,
+      "start": 1567.679,
+      "end": 1573.63,
+      "duration": 5.951,
+      "text": "G's generated like this a i b i gives me"
+    },
+    {
+      "index": 515,
+      "start": 1573.64,
+      "end": 1574.47,
+      "duration": 0.83,
+      "text": "pi"
+    },
+    {
+      "index": 516,
+      "start": 1574.48,
+      "end": 1579.35,
+      "duration": 4.87,
+      "text": "I I have four such gates for p 0 P1 P2"
+    },
+    {
+      "index": 517,
+      "start": 1579.36,
+      "end": 1583.35,
+      "duration": 3.99,
+      "text": "P3 I have"
+    },
+    {
+      "index": 518,
+      "start": 1586.149,
+      "end": 1586.159,
+      "duration": 0.01,
+      "text": "G's a i b"
+    },
+    {
+      "index": 519,
+      "start": 1586.159,
+      "end": 1589.35,
+      "duration": 3.191,
+      "text": "i g i"
+    },
+    {
+      "index": 520,
+      "start": 1589.36,
+      "end": 1592.07,
+      "duration": 2.71,
+      "text": "for such Gates and"
+    },
+    {
+      "index": 521,
+      "start": 1592.08,
+      "end": 1595.19,
+      "duration": 3.11,
+      "text": "Gates A and B"
+    },
+    {
+      "index": 522,
+      "start": 1595.2,
+      "end": 1596.75,
+      "duration": 1.55,
+      "text": "I"
+    },
+    {
+      "index": 523,
+      "start": 1596.76,
+      "end": 1599.389,
+      "duration": 2.629,
+      "text": "then I have this"
+    },
+    {
+      "index": 524,
+      "start": 1599.399,
+      "end": 1604.63,
+      "duration": 5.231,
+      "text": "logic in which I'm going to feed my"
+    },
+    {
+      "index": 525,
+      "start": 1604.64,
+      "end": 1606.389,
+      "duration": 1.749,
+      "text": "P0"
+    },
+    {
+      "index": 526,
+      "start": 1606.399,
+      "end": 1607.95,
+      "duration": 1.551,
+      "text": "g0"
+    },
+    {
+      "index": 527,
+      "start": 1607.96,
+      "end": 1609.47,
+      "duration": 1.51,
+      "text": "P1"
+    },
+    {
+      "index": 528,
+      "start": 1609.48,
+      "end": 1610.99,
+      "duration": 1.51,
+      "text": "G1"
+    },
+    {
+      "index": 529,
+      "start": 1611.0,
+      "end": 1612.669,
+      "duration": 1.669,
+      "text": "P2"
+    },
+    {
+      "index": 530,
+      "start": 1612.679,
+      "end": 1614.31,
+      "duration": 1.631,
+      "text": "G2"
+    },
+    {
+      "index": 531,
+      "start": 1614.32,
+      "end": 1615.909,
+      "duration": 1.589,
+      "text": "P3"
+    },
+    {
+      "index": 532,
+      "start": 1615.919,
+      "end": 1619.909,
+      "duration": 3.99,
+      "text": "G3 all been generated by that logic four"
+    },
+    {
+      "index": 533,
+      "start": 1619.919,
+      "end": 1620.99,
+      "duration": 1.071,
+      "text": "sets"
+    },
+    {
+      "index": 534,
+      "start": 1621.0,
+      "end": 1623.83,
+      "duration": 2.83,
+      "text": "of exclusive orgas and gates are fed"
+    },
+    {
+      "index": 535,
+      "start": 1623.84,
+      "end": 1625.99,
+      "duration": 2.15,
+      "text": "into this I'm not showing it a big"
+    },
+    {
+      "index": 536,
+      "start": 1626.0,
+      "end": 1627.549,
+      "duration": 1.549,
+      "text": "drawing because it looks complex and"
+    },
+    {
+      "index": 537,
+      "start": 1627.559,
+      "end": 1629.99,
+      "duration": 2.431,
+      "text": "then you lose the connections you lose"
+    },
+    {
+      "index": 538,
+      "start": 1630.0,
+      "end": 1631.269,
+      "duration": 1.269,
+      "text": "track of"
+    },
+    {
+      "index": 539,
+      "start": 1631.279,
+      "end": 1633.19,
+      "duration": 1.911,
+      "text": "connections and all I have to do is to"
+    },
+    {
+      "index": 540,
+      "start": 1633.2,
+      "end": 1635.47,
+      "duration": 2.27,
+      "text": "feed in my C Min -"
+    },
+    {
+      "index": 541,
+      "start": 1635.48,
+      "end": 1637.75,
+      "duration": 2.27,
+      "text": "one which is a zero most of the time it"
+    },
+    {
+      "index": 542,
+      "start": 1637.76,
+      "end": 1640.029,
+      "duration": 2.269,
+      "text": "is the first four"
+    },
+    {
+      "index": 543,
+      "start": 1640.039,
+      "end": 1643.549,
+      "duration": 3.51,
+      "text": "bits and what do I get at the output I"
+    },
+    {
+      "index": 544,
+      "start": 1643.559,
+      "end": 1646.669,
+      "duration": 3.11,
+      "text": "get C"
+    },
+    {
+      "index": 545,
+      "start": 1646.679,
+      "end": 1650.35,
+      "duration": 3.671,
+      "text": "0 C1"
+    },
+    {
+      "index": 546,
+      "start": 1658.19,
+      "end": 1658.2,
+      "duration": 0.01,
+      "text": "C3 correct and what is inside"
+    },
+    {
+      "index": 547,
+      "start": 1658.2,
+      "end": 1660.71,
+      "duration": 2.51,
+      "text": "this inside this is the logic for all"
+    },
+    {
+      "index": 548,
+      "start": 1660.72,
+      "end": 1663.07,
+      "duration": 2.35,
+      "text": "these each one of these so there will be"
+    },
+    {
+      "index": 549,
+      "start": 1663.08,
+      "end": 1665.31,
+      "duration": 2.23,
+      "text": "a gate structure to calculate this"
+    },
+    {
+      "index": 550,
+      "start": 1665.32,
+      "end": 1667.19,
+      "duration": 1.87,
+      "text": "because the G and P are fed in and C"
+    },
+    {
+      "index": 551,
+      "start": 1667.2,
+      "end": 1669.71,
+      "duration": 2.51,
+      "text": "minus one is fed in this is an and R"
+    },
+    {
+      "index": 552,
+      "start": 1669.72,
+      "end": 1671.75,
+      "duration": 2.03,
+      "text": "combination there going to be lots of"
+    },
+    {
+      "index": 553,
+      "start": 1671.76,
+      "end": 1673.59,
+      "duration": 1.83,
+      "text": "and R combination that I'm not showing"
+    },
+    {
+      "index": 554,
+      "start": 1673.6,
+      "end": 1676.509,
+      "duration": 2.909,
+      "text": "in"
+    },
+    {
+      "index": 555,
+      "start": 1678.789,
+      "end": 1678.799,
+      "duration": 0.01,
+      "text": "detail number of guest will be more for"
+    },
+    {
+      "index": 556,
+      "start": 1678.799,
+      "end": 1682.23,
+      "duration": 3.431,
+      "text": "example this will require only two gates"
+    },
+    {
+      "index": 557,
+      "start": 1682.24,
+      "end": 1684.549,
+      "duration": 2.309,
+      "text": "one and gates for p 0 and c minus1 and"
+    },
+    {
+      "index": 558,
+      "start": 1684.559,
+      "end": 1687.149,
+      "duration": 2.59,
+      "text": "one R gate for these two this will"
+    },
+    {
+      "index": 559,
+      "start": 1687.159,
+      "end": 1690.269,
+      "duration": 3.11,
+      "text": "require three gates one and gate for"
+    },
+    {
+      "index": 560,
+      "start": 1690.279,
+      "end": 1692.509,
+      "duration": 2.23,
+      "text": "this one and gate for this and one R"
+    },
+    {
+      "index": 561,
+      "start": 1692.519,
+      "end": 1694.19,
+      "duration": 1.671,
+      "text": "gate and this and gate will have two"
+    },
+    {
+      "index": 562,
+      "start": 1694.2,
+      "end": 1696.99,
+      "duration": 2.79,
+      "text": "input this hand will be three inputs the"
+    },
+    {
+      "index": 563,
+      "start": 1697.0,
+      "end": 1700.029,
+      "duration": 3.029,
+      "text": "the the the the most complex gate uh"
+    },
+    {
+      "index": 564,
+      "start": 1700.039,
+      "end": 1702.149,
+      "duration": 2.11,
+      "text": "most complex circuit will be this which"
+    },
+    {
+      "index": 565,
+      "start": 1702.159,
+      "end": 1706.47,
+      "duration": 4.311,
+      "text": "will have one 2 three four hand Gates"
+    },
+    {
+      "index": 566,
+      "start": 1706.48,
+      "end": 1708.63,
+      "duration": 2.15,
+      "text": "this handgate will have two inputs"
+    },
+    {
+      "index": 567,
+      "start": 1708.64,
+      "end": 1710.99,
+      "duration": 2.35,
+      "text": "this hand will three inputs this will"
+    },
+    {
+      "index": 568,
+      "start": 1711.0,
+      "end": 1712.63,
+      "duration": 1.63,
+      "text": "have four inputs this will have five"
+    },
+    {
+      "index": 569,
+      "start": 1712.64,
+      "end": 1715.59,
+      "duration": 2.95,
+      "text": "inputs followed by an R"
+    },
+    {
+      "index": 570,
+      "start": 1715.6,
+      "end": 1718.509,
+      "duration": 2.909,
+      "text": "gate so all these gates are only two"
+    },
+    {
+      "index": 571,
+      "start": 1718.519,
+      "end": 1719.95,
+      "duration": 1.431,
+      "text": "levels that is what I'm trying to tell"
+    },
+    {
+      "index": 572,
+      "start": 1719.96,
+      "end": 1722.83,
+      "duration": 2.87,
+      "text": "you here the levels of transmission the"
+    },
+    {
+      "index": 573,
+      "start": 1722.84,
+      "end": 1726.269,
+      "duration": 3.429,
+      "text": "signal is given A's and B's are given"
+    },
+    {
+      "index": 574,
+      "start": 1726.279,
+      "end": 1730.19,
+      "duration": 3.911,
+      "text": "one one level to get Pi the pi another"
+    },
+    {
+      "index": 575,
+      "start": 1730.2,
+      "end": 1732.59,
+      "duration": 2.39,
+      "text": "one level the pi and GI are trans"
+    },
+    {
+      "index": 576,
+      "start": 1732.6,
+      "end": 1735.35,
+      "duration": 2.75,
+      "text": "calculator simultaneously so after one"
+    },
+    {
+      "index": 577,
+      "start": 1735.36,
+      "end": 1739.269,
+      "duration": 3.909,
+      "text": "level of computation or switching"
+    },
+    {
+      "index": 578,
+      "start": 1739.279,
+      "end": 1743.029,
+      "duration": 3.75,
+      "text": "Pi gets computed GI gets"
+    },
+    {
+      "index": 579,
+      "start": 1743.039,
+      "end": 1747.47,
+      "duration": 4.431,
+      "text": "computed so that is fed here after two"
+    },
+    {
+      "index": 580,
+      "start": 1747.48,
+      "end": 1750.07,
+      "duration": 2.59,
+      "text": "levels I get"
+    },
+    {
+      "index": 581,
+      "start": 1750.08,
+      "end": 1753.47,
+      "duration": 3.39,
+      "text": "C's so 1 plus 2 three levels whereas if"
+    },
+    {
+      "index": 582,
+      "start": 1753.48,
+      "end": 1756.83,
+      "duration": 3.35,
+      "text": "I have a multi bit thing is going to"
+    },
+    {
+      "index": 583,
+      "start": 1756.84,
+      "end": 1758.35,
+      "duration": 1.51,
+      "text": "take several each one of those things"
+    },
+    {
+      "index": 584,
+      "start": 1758.36,
+      "end": 1760.99,
+      "duration": 2.63,
+      "text": "are two levels going to two levels a"
+    },
+    {
+      "index": 585,
+      "start": 1761.0,
+      "end": 1763.31,
+      "duration": 2.31,
+      "text": "multiplication effect it goes all the"
+    },
+    {
+      "index": 586,
+      "start": 1763.32,
+      "end": 1767.389,
+      "duration": 4.069,
+      "text": "way so I am buying speed at the cost of"
+    },
+    {
+      "index": 587,
+      "start": 1767.399,
+      "end": 1770.71,
+      "duration": 3.311,
+      "text": "gates I am paying for my speed in terms"
+    },
+    {
+      "index": 588,
+      "start": 1770.72,
+      "end": 1775.71,
+      "duration": 4.99,
+      "text": "of gates I pay Gates Get speed is always"
+    },
+    {
+      "index": 589,
+      "start": 1775.72,
+      "end": 1778.389,
+      "duration": 2.669,
+      "text": "the case trade off is always like that"
+    },
+    {
+      "index": 590,
+      "start": 1778.399,
+      "end": 1782.149,
+      "duration": 3.75,
+      "text": "more expensive things more"
+    },
+    {
+      "index": 591,
+      "start": 1782.159,
+      "end": 1784.99,
+      "duration": 2.831,
+      "text": "uh good performance things are always"
+    },
+    {
+      "index": 592,
+      "start": 1785.0,
+      "end": 1786.029,
+      "duration": 1.029,
+      "text": "more"
+    },
+    {
+      "index": 593,
+      "start": 1786.039,
+      "end": 1789.029,
+      "duration": 2.99,
+      "text": "expensive whatever it is it's a general"
+    },
+    {
+      "index": 594,
+      "start": 1789.039,
+      "end": 1790.83,
+      "duration": 1.791,
+      "text": "rule of course there's always exception"
+    },
+    {
+      "index": 595,
+      "start": 1790.84,
+      "end": 1793.029,
+      "duration": 2.189,
+      "text": "sometimes the money cannot buy certain"
+    },
+    {
+      "index": 596,
+      "start": 1793.039,
+      "end": 1795.47,
+      "duration": 2.431,
+      "text": "things it has to wait for this previous"
+    },
+    {
+      "index": 597,
+      "start": 1795.48,
+      "end": 1796.83,
+      "duration": 1.35,
+      "text": "process to be completed just because you"
+    },
+    {
+      "index": 598,
+      "start": 1796.84,
+      "end": 1798.95,
+      "duration": 2.11,
+      "text": "have an extra person you have two"
+    },
+    {
+      "index": 599,
+      "start": 1798.96,
+      "end": 1801.029,
+      "duration": 2.069,
+      "text": "persons can I now say that if two"
+    },
+    {
+      "index": 600,
+      "start": 1801.039,
+      "end": 1803.95,
+      "duration": 2.911,
+      "text": "persons can do a job in half the time"
+    },
+    {
+      "index": 601,
+      "start": 1803.96,
+      "end": 1805.269,
+      "duration": 1.309,
+      "text": "but if the first person has to finish"
+    },
+    {
+      "index": 602,
+      "start": 1805.279,
+      "end": 1807.549,
+      "duration": 2.27,
+      "text": "and hand over the job to second person"
+    },
+    {
+      "index": 603,
+      "start": 1807.559,
+      "end": 1809.99,
+      "duration": 2.431,
+      "text": "two persons cannot do it faster than one"
+    },
+    {
+      "index": 604,
+      "start": 1810.0,
+      "end": 1811.669,
+      "duration": 1.669,
+      "text": "person there are exceptions like that we"
+    },
+    {
+      "index": 605,
+      "start": 1811.679,
+      "end": 1813.909,
+      "duration": 2.23,
+      "text": "are not talking those exceptions here in"
+    },
+    {
+      "index": 606,
+      "start": 1813.919,
+      "end": 1816.59,
+      "duration": 2.671,
+      "text": "general"
+    },
+    {
+      "index": 607,
+      "start": 1816.6,
+      "end": 1818.389,
+      "duration": 1.789,
+      "text": "conceptually you"
+    },
+    {
+      "index": 608,
+      "start": 1818.399,
+      "end": 1821.509,
+      "duration": 3.11,
+      "text": "pay by money which in terms of gates and"
+    },
+    {
+      "index": 609,
+      "start": 1821.519,
+      "end": 1824.11,
+      "duration": 2.591,
+      "text": "performance in terms of performance is"
+    },
+    {
+      "index": 610,
+      "start": 1824.12,
+      "end": 1826.669,
+      "duration": 2.549,
+      "text": "measured in terms of speed cost is"
+    },
+    {
+      "index": 611,
+      "start": 1826.679,
+      "end": 1828.269,
+      "duration": 1.59,
+      "text": "measured in terms of number of gates but"
+    },
+    {
+      "index": 612,
+      "start": 1828.279,
+      "end": 1830.19,
+      "duration": 1.911,
+      "text": "number of G not only the cost it also"
+    },
+    {
+      "index": 613,
+      "start": 1830.2,
+      "end": 1832.87,
+      "duration": 2.67,
+      "text": "takes more power and more space and all"
+    },
+    {
+      "index": 614,
+      "start": 1832.88,
+      "end": 1835.389,
+      "duration": 2.509,
+      "text": "that type of thing anyway so one level"
+    },
+    {
+      "index": 615,
+      "start": 1835.399,
+      "end": 1838.23,
+      "duration": 2.831,
+      "text": "two level three level I have c0 C1 C2 C3"
+    },
+    {
+      "index": 616,
+      "start": 1838.24,
+      "end": 1841.389,
+      "duration": 3.149,
+      "text": "and I need sum what is sum sum is"
+    },
+    {
+      "index": 617,
+      "start": 1841.399,
+      "end": 1843.63,
+      "duration": 2.231,
+      "text": "nothing but what what is the sum of the"
+    },
+    {
+      "index": 618,
+      "start": 1843.64,
+      "end": 1847.83,
+      "duration": 4.19,
+      "text": "full L if you remember s is a exclusive"
+    },
+    {
+      "index": 619,
+      "start": 1847.84,
+      "end": 1850.95,
+      "duration": 3.11,
+      "text": "or B exclusive or C so since I have a"
+    },
+    {
+      "index": 620,
+      "start": 1850.96,
+      "end": 1852.389,
+      "duration": 1.429,
+      "text": "exclusive or B"
+    },
+    {
+      "index": 621,
+      "start": 1852.399,
+      "end": 1855.75,
+      "duration": 3.351,
+      "text": "already and all these C's One More Level"
+    },
+    {
+      "index": 622,
+      "start": 1855.76,
+      "end": 1858.99,
+      "duration": 3.23,
+      "text": "I get sum so p 0"
+    },
+    {
+      "index": 623,
+      "start": 1859.0,
+      "end": 1860.95,
+      "duration": 1.95,
+      "text": "exclusive are this is C minus one first"
+    },
+    {
+      "index": 624,
+      "start": 1860.96,
+      "end": 1865.87,
+      "duration": 4.91,
+      "text": "stage of course doesn't need um this c0"
+    },
+    {
+      "index": 625,
+      "start": 1865.88,
+      "end": 1869.31,
+      "duration": 3.43,
+      "text": "is the the input to the second stage"
+    },
+    {
+      "index": 626,
+      "start": 1869.32,
+      "end": 1871.029,
+      "duration": 1.709,
+      "text": "this is the carry input to the second"
+    },
+    {
+      "index": 627,
+      "start": 1871.039,
+      "end": 1873.509,
+      "duration": 2.47,
+      "text": "stage carry input to the third stage"
+    },
+    {
+      "index": 628,
+      "start": 1873.519,
+      "end": 1875.029,
+      "duration": 1.51,
+      "text": "carry input to the fourth stage car"
+    },
+    {
+      "index": 629,
+      "start": 1875.039,
+      "end": 1878.31,
+      "duration": 3.271,
+      "text": "input to the the output so this C minus"
+    },
+    {
+      "index": 630,
+      "start": 1878.32,
+      "end": 1880.35,
+      "duration": 2.03,
+      "text": "one is not required so if you want that"
+    },
+    {
+      "index": 631,
+      "start": 1880.36,
+      "end": 1883.83,
+      "duration": 3.47,
+      "text": "c minus one this"
+    },
+    {
+      "index": 632,
+      "start": 1883.84,
+      "end": 1888.669,
+      "duration": 4.829,
+      "text": "is pi I P0"
+    },
+    {
+      "index": 633,
+      "start": 1888.679,
+      "end": 1891.549,
+      "duration": 2.87,
+      "text": "exclusive"
+    },
+    {
+      "index": 634,
+      "start": 1895.269,
+      "end": 1895.279,
+      "duration": 0.01,
+      "text": "R this gives you my"
+    },
+    {
+      "index": 635,
+      "start": 1895.279,
+      "end": 1897.789,
+      "duration": 2.51,
+      "text": "s0 sometimes the C minus one may be zero"
+    },
+    {
+      "index": 636,
+      "start": 1897.799,
+      "end": 1899.59,
+      "duration": 1.791,
+      "text": "as I said the first"
+    },
+    {
+      "index": 637,
+      "start": 1899.6,
+      "end": 1903.509,
+      "duration": 3.909,
+      "text": "stage the first bit of a multibit"
+    },
+    {
+      "index": 638,
+      "start": 1903.519,
+      "end": 1905.83,
+      "duration": 2.311,
+      "text": "addition input carry zero so you don't"
+    },
+    {
+      "index": 639,
+      "start": 1905.84,
+      "end": 1907.509,
+      "duration": 1.669,
+      "text": "need this gate but I'm putting it as a"
+    },
+    {
+      "index": 640,
+      "start": 1907.519,
+      "end": 1910.31,
+      "duration": 2.791,
+      "text": "general General scheme in which this"
+    },
+    {
+      "index": 641,
+      "start": 1910.32,
+      "end": 1912.789,
+      "duration": 2.469,
+      "text": "four bits can be a slice of four"
+    },
+    {
+      "index": 642,
+      "start": 1912.799,
+      "end": 1915.789,
+      "duration": 2.99,
+      "text": "intermediate bits of a much longer width"
+    },
+    {
+      "index": 643,
+      "start": 1915.799,
+      "end": 1918.629,
+      "duration": 2.83,
+      "text": "suppose I have a 64-bit word which in"
+    },
+    {
+      "index": 644,
+      "start": 1918.639,
+      "end": 1921.35,
+      "duration": 2.711,
+      "text": "which I decide to do four bits at a"
+    },
+    {
+      "index": 645,
+      "start": 1921.36,
+      "end": 1923.629,
+      "duration": 2.269,
+      "text": "time and this can be an intermediate"
+    },
+    {
+      "index": 646,
+      "start": 1923.639,
+      "end": 1926.75,
+      "duration": 3.111,
+      "text": "four bits where in the previous carry"
+    },
+    {
+      "index": 647,
+      "start": 1926.76,
+      "end": 1929.75,
+      "duration": 2.99,
+      "text": "stage we have to Feit into this so this"
+    },
+    {
+      "index": 648,
+      "start": 1929.76,
+      "end": 1931.47,
+      "duration": 1.71,
+      "text": "is a generalized drawing even though in"
+    },
+    {
+      "index": 649,
+      "start": 1931.48,
+      "end": 1933.669,
+      "duration": 2.189,
+      "text": "this particular case for 4bit addition"
+    },
+    {
+      "index": 650,
+      "start": 1933.679,
+      "end": 1935.549,
+      "duration": 1.87,
+      "text": "the a0 is the first bit and b0 is the"
+    },
+    {
+      "index": 651,
+      "start": 1935.559,
+      "end": 1938.99,
+      "duration": 3.431,
+      "text": "first bit this is not"
+    },
+    {
+      "index": 652,
+      "start": 1939.0,
+      "end": 1944.19,
+      "duration": 5.19,
+      "text": "required Su is directly p 0 so not Su"
+    },
+    {
+      "index": 653,
+      "start": 1944.2,
+      "end": 1946.83,
+      "duration": 2.63,
+      "text": "isans directly"
+    },
+    {
+      "index": 654,
+      "start": 1946.84,
+      "end": 1952.31,
+      "duration": 5.47,
+      "text": "P0"
+    },
+    {
+      "index": 655,
+      "start": 1955.909,
+      "end": 1955.919,
+      "duration": 0.01,
+      "text": "a ex for B half adder half add now half"
+    },
+    {
+      "index": 656,
+      "start": 1955.919,
+      "end": 1960.149,
+      "duration": 4.23,
+      "text": "adds a exclus for B was a full I we we"
+    },
+    {
+      "index": 657,
+      "start": 1960.159,
+      "end": 1962.75,
+      "duration": 2.591,
+      "text": "saw that the last lecture half harder"
+    },
+    {
+      "index": 658,
+      "start": 1962.76,
+      "end": 1966.269,
+      "duration": 3.509,
+      "text": "sum full adder sum half sum is a ex or B"
+    },
+    {
+      "index": 659,
+      "start": 1966.279,
+      "end": 1970.11,
+      "duration": 3.831,
+      "text": "which is p 0 now P1 is nothing but"
+    },
+    {
+      "index": 660,
+      "start": 1970.12,
+      "end": 1975.31,
+      "duration": 5.19,
+      "text": "c0 with"
+    },
+    {
+      "index": 661,
+      "start": 1988.47,
+      "end": 1988.48,
+      "duration": 0.01,
+      "text": "P2 gives me"
+    },
+    {
+      "index": 662,
+      "start": 1988.48,
+      "end": 1992.07,
+      "duration": 3.59,
+      "text": "what"
+    },
+    {
+      "index": 663,
+      "start": 1997.83,
+      "end": 1997.84,
+      "duration": 0.01,
+      "text": "H yes S2 correct why don't you say"
+    },
+    {
+      "index": 664,
+      "start": 1997.84,
+      "end": 2001.669,
+      "duration": 3.829,
+      "text": "that this one will give"
+    },
+    {
+      "index": 665,
+      "start": 2006.47,
+      "end": 2006.48,
+      "duration": 0.01,
+      "text": "me S3 and this is C3 so my final output"
+    },
+    {
+      "index": 666,
+      "start": 2006.48,
+      "end": 2008.35,
+      "duration": 1.87,
+      "text": "is s0"
+    },
+    {
+      "index": 667,
+      "start": 2008.36,
+      "end": 2012.269,
+      "duration": 3.909,
+      "text": "S1 S2 S3 C3 if C minus1 is there this"
+    },
+    {
+      "index": 668,
+      "start": 2012.279,
+      "end": 2014.47,
+      "duration": 2.191,
+      "text": "exclusive will be there cus one is not"
+    },
+    {
+      "index": 669,
+      "start": 2014.48,
+      "end": 2015.549,
+      "duration": 1.069,
+      "text": "there this will be"
+    },
+    {
+      "index": 670,
+      "start": 2015.559,
+      "end": 2019.029,
+      "duration": 3.47,
+      "text": "s0 so now I have one more St now the"
+    },
+    {
+      "index": 671,
+      "start": 2019.039,
+      "end": 2021.11,
+      "duration": 2.071,
+      "text": "carry is"
+    },
+    {
+      "index": 672,
+      "start": 2021.12,
+      "end": 2024.43,
+      "duration": 3.31,
+      "text": "generated so one gate to car transmit"
+    },
+    {
+      "index": 673,
+      "start": 2024.44,
+      "end": 2027.149,
+      "duration": 2.709,
+      "text": "one gate to compute sum one gate to"
+    },
+    {
+      "index": 674,
+      "start": 2027.159,
+      "end": 2030.029,
+      "duration": 2.87,
+      "text": "compute this p and G's two levels of"
+    },
+    {
+      "index": 675,
+      "start": 2030.039,
+      "end": 2033.23,
+      "duration": 3.191,
+      "text": "gates to compute carry now this doesn't"
+    },
+    {
+      "index": 676,
+      "start": 2033.24,
+      "end": 2036.19,
+      "duration": 2.95,
+      "text": "depend on the number of inputs now so"
+    },
+    {
+      "index": 677,
+      "start": 2036.2,
+      "end": 2039.75,
+      "duration": 3.55,
+      "text": "the propagation is always same you know"
+    },
+    {
+      "index": 678,
+      "start": 2039.76,
+      "end": 2042.31,
+      "duration": 2.55,
+      "text": "it goes so in a multibit add the chain"
+    },
+    {
+      "index": 679,
+      "start": 2042.32,
+      "end": 2043.07,
+      "duration": 0.75,
+      "text": "you"
+    },
+    {
+      "index": 680,
+      "start": 2043.08,
+      "end": 2046.149,
+      "duration": 3.069,
+      "text": "can each of these carry carry will be"
+    },
+    {
+      "index": 681,
+      "start": 2046.159,
+      "end": 2048.589,
+      "duration": 2.43,
+      "text": "generated after two"
+    },
+    {
+      "index": 682,
+      "start": 2048.599,
+      "end": 2051.069,
+      "duration": 2.47,
+      "text": "stages that will be F in the next stage"
+    },
+    {
+      "index": 683,
+      "start": 2051.079,
+      "end": 2054.55,
+      "duration": 3.471,
+      "text": "two stages two stages every every bit"
+    },
+    {
+      "index": 684,
+      "start": 2054.56,
+      "end": 2057.069,
+      "duration": 2.509,
+      "text": "addition requires two stages of"
+    },
+    {
+      "index": 685,
+      "start": 2057.079,
+      "end": 2061.03,
+      "duration": 3.951,
+      "text": "computation and the last c0 will come C3"
+    },
+    {
+      "index": 686,
+      "start": 2061.04,
+      "end": 2063.03,
+      "duration": 1.99,
+      "text": "will come so we're talking about 8 Bits"
+    },
+    {
+      "index": 687,
+      "start": 2063.04,
+      "end": 2064.909,
+      "duration": 1.869,
+      "text": "or 16 bits or 32 bits even four bits"
+    },
+    {
+      "index": 688,
+      "start": 2064.919,
+      "end": 2068.149,
+      "duration": 3.23,
+      "text": "it's eight stages in this case it is one"
+    },
+    {
+      "index": 689,
+      "start": 2068.159,
+      "end": 2072.349,
+      "duration": 4.19,
+      "text": "2 3 4 of course some I have not taken"
+    },
+    {
+      "index": 690,
+      "start": 2072.359,
+      "end": 2075.71,
+      "duration": 3.351,
+      "text": "into account there also so it is it is 1"
+    },
+    {
+      "index": 691,
+      "start": 2075.72,
+      "end": 2077.95,
+      "duration": 2.23,
+      "text": "2 three carry is available after the"
+    },
+    {
+      "index": 692,
+      "start": 2077.96,
+      "end": 2080.03,
+      "duration": 2.07,
+      "text": "third stage"
+    },
+    {
+      "index": 693,
+      "start": 2080.04,
+      "end": 2082.149,
+      "duration": 2.109,
+      "text": "itself there the carry will be available"
+    },
+    {
+      "index": 694,
+      "start": 2082.159,
+      "end": 2084.51,
+      "duration": 2.351,
+      "text": "after eight"
+    },
+    {
+      "index": 695,
+      "start": 2084.52,
+      "end": 2087.03,
+      "duration": 2.51,
+      "text": "stages and some of course will be parall"
+    },
+    {
+      "index": 696,
+      "start": 2087.04,
+      "end": 2089.069,
+      "duration": 2.029,
+      "text": "available so here also but here some"
+    },
+    {
+      "index": 697,
+      "start": 2089.079,
+      "end": 2091.349,
+      "duration": 2.27,
+      "text": "will be available at one extra stage so"
+    },
+    {
+      "index": 698,
+      "start": 2091.359,
+      "end": 2093.27,
+      "duration": 1.911,
+      "text": "some will be available after four levels"
+    },
+    {
+      "index": 699,
+      "start": 2093.28,
+      "end": 2095.47,
+      "duration": 2.19,
+      "text": "of getting four levels of getting which"
+    },
+    {
+      "index": 700,
+      "start": 2095.48,
+      "end": 2098.87,
+      "duration": 3.39,
+      "text": "is again faster by four so I this is as"
+    },
+    {
+      "index": 701,
+      "start": 2098.88,
+      "end": 2100.79,
+      "duration": 1.91,
+      "text": "I said I want to introduce a concept"
+    },
+    {
+      "index": 702,
+      "start": 2100.8,
+      "end": 2105.19,
+      "duration": 4.39,
+      "text": "here car is one of the the more basic"
+    },
+    {
+      "index": 703,
+      "start": 2105.2,
+      "end": 2107.43,
+      "duration": 2.23,
+      "text": "techniques to improve the speed of"
+    },
+    {
+      "index": 704,
+      "start": 2107.44,
+      "end": 2109.87,
+      "duration": 2.43,
+      "text": "addition and arithmetics is not only"
+    },
+    {
+      "index": 705,
+      "start": 2109.88,
+      "end": 2111.51,
+      "duration": 1.63,
+      "text": "addition there are lots of arithmetic"
+    },
+    {
+      "index": 706,
+      "start": 2111.52,
+      "end": 2113.19,
+      "duration": 1.67,
+      "text": "operation you to do you to do"
+    },
+    {
+      "index": 707,
+      "start": 2113.2,
+      "end": 2114.75,
+      "duration": 1.55,
+      "text": "subtraction we to do multiplication you"
+    },
+    {
+      "index": 708,
+      "start": 2114.76,
+      "end": 2117.109,
+      "duration": 2.349,
+      "text": "to do division and large numbers you"
+    },
+    {
+      "index": 709,
+      "start": 2117.119,
+      "end": 2119.67,
+      "duration": 2.551,
+      "text": "have to make floating you have to make"
+    },
+    {
+      "index": 710,
+      "start": 2119.68,
+      "end": 2122.71,
+      "duration": 3.03,
+      "text": "exponential numbers whose magnitud is"
+    },
+    {
+      "index": 711,
+      "start": 2122.72,
+      "end": 2125.55,
+      "duration": 2.83,
+      "text": "very large we have a radics and exponent"
+    },
+    {
+      "index": 712,
+      "start": 2125.56,
+      "end": 2126.63,
+      "duration": 1.07,
+      "text": "that type of"
+    },
+    {
+      "index": 713,
+      "start": 2126.64,
+      "end": 2128.47,
+      "duration": 1.83,
+      "text": "representation so we have to take care"
+    },
+    {
+      "index": 714,
+      "start": 2128.48,
+      "end": 2130.39,
+      "duration": 1.91,
+      "text": "of all of that but the essence is all"
+    },
+    {
+      "index": 715,
+      "start": 2130.4,
+      "end": 2134.27,
+      "duration": 3.87,
+      "text": "the same do we speed up when you need to"
+    },
+    {
+      "index": 716,
+      "start": 2134.28,
+      "end": 2135.51,
+      "duration": 1.23,
+      "text": "speed up what are the techniques used"
+    },
+    {
+      "index": 717,
+      "start": 2135.52,
+      "end": 2137.069,
+      "duration": 1.549,
+      "text": "there are several several techniques but"
+    },
+    {
+      "index": 718,
+      "start": 2137.079,
+      "end": 2138.75,
+      "duration": 1.671,
+      "text": "one of them is this it's one of the"
+    },
+    {
+      "index": 719,
+      "start": 2138.76,
+      "end": 2141.27,
+      "duration": 2.51,
+      "text": "simplest technique to understand but I"
+    },
+    {
+      "index": 720,
+      "start": 2141.28,
+      "end": 2143.19,
+      "duration": 1.91,
+      "text": "by this technique I want to drill home"
+    },
+    {
+      "index": 721,
+      "start": 2143.2,
+      "end": 2145.589,
+      "duration": 2.389,
+      "text": "the point bring home the point that is"
+    },
+    {
+      "index": 722,
+      "start": 2145.599,
+      "end": 2147.63,
+      "duration": 2.031,
+      "text": "always possible to have extra"
+    },
+    {
+      "index": 723,
+      "start": 2147.64,
+      "end": 2150.23,
+      "duration": 2.59,
+      "text": "logic in order to accomplish certain"
+    },
+    {
+      "index": 724,
+      "start": 2150.24,
+      "end": 2152.75,
+      "duration": 2.51,
+      "text": "things and make it"
+    },
+    {
+      "index": 725,
+      "start": 2152.76,
+      "end": 2155.19,
+      "duration": 2.43,
+      "text": "faster now of course you can always"
+    },
+    {
+      "index": 726,
+      "start": 2155.2,
+      "end": 2157.15,
+      "duration": 1.95,
+      "text": "argue that I'm going to have large large"
+    },
+    {
+      "index": 727,
+      "start": 2157.16,
+      "end": 2158.589,
+      "duration": 1.429,
+      "text": "number of G of course I said large"
+    },
+    {
+      "index": 728,
+      "start": 2158.599,
+      "end": 2159.91,
+      "duration": 1.311,
+      "text": "number of gates are required I did not"
+    },
+    {
+      "index": 729,
+      "start": 2159.92,
+      "end": 2162.19,
+      "duration": 2.27,
+      "text": "say it's free you don't get anything"
+    },
+    {
+      "index": 730,
+      "start": 2162.2,
+      "end": 2165.069,
+      "duration": 2.869,
+      "text": "free if you can get this with the same"
+    },
+    {
+      "index": 731,
+      "start": 2165.079,
+      "end": 2167.47,
+      "duration": 2.391,
+      "text": "number of gates as a full adder 4bit"
+    },
+    {
+      "index": 732,
+      "start": 2167.48,
+      "end": 2169.75,
+      "duration": 2.27,
+      "text": "full adder if you can get faster who"
+    },
+    {
+      "index": 733,
+      "start": 2169.76,
+      "end": 2171.79,
+      "duration": 2.03,
+      "text": "will think of that other one is a"
+    },
+    {
+      "index": 734,
+      "start": 2171.8,
+      "end": 2173.63,
+      "duration": 1.83,
+      "text": "question of cost versus performance"
+    },
+    {
+      "index": 735,
+      "start": 2173.64,
+      "end": 2176.23,
+      "duration": 2.59,
+      "text": "tradeoff trade off for performance"
+    },
+    {
+      "index": 736,
+      "start": 2176.24,
+      "end": 2178.87,
+      "duration": 2.63,
+      "text": "versus cost so the cost comes in terms"
+    },
+    {
+      "index": 737,
+      "start": 2178.88,
+      "end": 2180.87,
+      "duration": 1.99,
+      "text": "of this extra gates for this is that is"
+    },
+    {
+      "index": 738,
+      "start": 2180.88,
+      "end": 2183.309,
+      "duration": 2.429,
+      "text": "why I put this a separate Black Box this"
+    },
+    {
+      "index": 739,
+      "start": 2183.319,
+      "end": 2185.27,
+      "duration": 1.951,
+      "text": "is extra logic you need to provide it's"
+    },
+    {
+      "index": 740,
+      "start": 2185.28,
+      "end": 2191.63,
+      "duration": 6.35,
+      "text": "called CLA logic"
+    },
+    {
+      "index": 741,
+      "start": 2198.75,
+      "end": 2198.76,
+      "duration": 0.01,
+      "text": "one other"
+    },
+    {
+      "index": 742,
+      "start": 2198.76,
+      "end": 2203.19,
+      "duration": 4.43,
+      "text": "thing the full concept is a very modular"
+    },
+    {
+      "index": 743,
+      "start": 2203.2,
+      "end": 2205.95,
+      "duration": 2.75,
+      "text": "concept without carry liquid order if"
+    },
+    {
+      "index": 744,
+      "start": 2205.96,
+      "end": 2216.51,
+      "duration": 10.55,
+      "text": "you remember the full order"
+    },
+    {
+      "index": 745,
+      "start": 2248.51,
+      "end": 2248.52,
+      "duration": 0.01,
+      "text": "b and what is that carry carry is is a"
+    },
+    {
+      "index": 746,
+      "start": 2248.52,
+      "end": 2251.03,
+      "duration": 2.51,
+      "text": "ex or"
+    },
+    {
+      "index": 747,
+      "start": 2251.04,
+      "end": 2256.589,
+      "duration": 5.549,
+      "text": "B O A and B now A excl or B"
+    },
+    {
+      "index": 748,
+      "start": 2256.599,
+      "end": 2265.63,
+      "duration": 9.031,
+      "text": "C um and"
+    },
+    {
+      "index": 749,
+      "start": 2284.309,
+      "end": 2284.319,
+      "duration": 0.01,
+      "text": "output the full order without carry look"
+    },
+    {
+      "index": 750,
+      "start": 2284.319,
+      "end": 2287.71,
+      "duration": 3.391,
+      "text": "ahead we saw that sum is a exclus or b"
+    },
+    {
+      "index": 751,
+      "start": 2287.72,
+      "end": 2290.27,
+      "duration": 2.55,
+      "text": "exclus or c carry we saw as can be"
+    },
+    {
+      "index": 752,
+      "start": 2290.28,
+      "end": 2292.309,
+      "duration": 2.029,
+      "text": "written in two ways car can be written"
+    },
+    {
+      "index": 753,
+      "start": 2292.319,
+      "end": 2298.829,
+      "duration": 6.51,
+      "text": "as a B plus acii plus b Ci or a plus CI"
+    },
+    {
+      "index": 754,
+      "start": 2298.839,
+      "end": 2301.03,
+      "duration": 2.191,
+      "text": "into a exclusive or B so I'm using that"
+    },
+    {
+      "index": 755,
+      "start": 2301.04,
+      "end": 2308.39,
+      "duration": 7.35,
+      "text": "option CI * a exus r b CI and a r b R A"
+    },
+    {
+      "index": 756,
+      "start": 2308.4,
+      "end": 2312.829,
+      "duration": 4.429,
+      "text": "and B so now the any number of stages"
+    },
+    {
+      "index": 757,
+      "start": 2312.839,
+      "end": 2314.309,
+      "duration": 1.47,
+      "text": "even though the propagation has to go"
+    },
+    {
+      "index": 758,
+      "start": 2314.319,
+      "end": 2316.71,
+      "duration": 2.391,
+      "text": "from here the c0 two levels and then you"
+    },
+    {
+      "index": 759,
+      "start": 2316.72,
+      "end": 2318.55,
+      "duration": 1.83,
+      "text": "have two levels it goes"
+    },
+    {
+      "index": 760,
+      "start": 2318.56,
+      "end": 2321.069,
+      "duration": 2.509,
+      "text": "on one thing which is elegant here is"
+    },
+    {
+      "index": 761,
+      "start": 2321.079,
+      "end": 2323.109,
+      "duration": 2.03,
+      "text": "the modularity of the circuit that means"
+    },
+    {
+      "index": 762,
+      "start": 2323.119,
+      "end": 2325.069,
+      "duration": 1.95,
+      "text": "whatever is the number of stages all you"
+    },
+    {
+      "index": 763,
+      "start": 2325.079,
+      "end": 2326.75,
+      "duration": 1.671,
+      "text": "have to do is to build an identical"
+    },
+    {
+      "index": 764,
+      "start": 2326.76,
+      "end": 2331.47,
+      "duration": 4.71,
+      "text": "block two bits this repeated twice four"
+    },
+    {
+      "index": 765,
+      "start": 2331.48,
+      "end": 2334.069,
+      "duration": 2.589,
+      "text": "bits repeated four times 8 Bits repeated"
+    },
+    {
+      "index": 766,
+      "start": 2334.079,
+      "end": 2338.23,
+      "duration": 4.151,
+      "text": "eight times 16 bits repeated 16 times so"
+    },
+    {
+      "index": 767,
+      "start": 2338.24,
+      "end": 2339.67,
+      "duration": 1.43,
+      "text": "sometimes it is easy to design circuits"
+    },
+    {
+      "index": 768,
+      "start": 2339.68,
+      "end": 2342.03,
+      "duration": 2.35,
+      "text": "especially when you want to build it you"
+    },
+    {
+      "index": 769,
+      "start": 2342.04,
+      "end": 2344.27,
+      "duration": 2.23,
+      "text": "want to build it in a given space we we"
+    },
+    {
+      "index": 770,
+      "start": 2344.28,
+      "end": 2346.589,
+      "duration": 2.309,
+      "text": "thought of we talked about space being a"
+    },
+    {
+      "index": 771,
+      "start": 2346.599,
+      "end": 2349.349,
+      "duration": 2.75,
+      "text": "premium in a integrated circuit design"
+    },
+    {
+      "index": 772,
+      "start": 2349.359,
+      "end": 2351.39,
+      "duration": 2.031,
+      "text": "we talked about in the beginning the"
+    },
+    {
+      "index": 773,
+      "start": 2351.4,
+      "end": 2354.109,
+      "duration": 2.709,
+      "text": "parameters are again to repeat the speed"
+    },
+    {
+      "index": 774,
+      "start": 2354.119,
+      "end": 2355.99,
+      "duration": 1.871,
+      "text": "the size the"
+    },
+    {
+      "index": 775,
+      "start": 2356.0,
+      "end": 2360.15,
+      "duration": 4.15,
+      "text": "cost and the power dissipation right so"
+    },
+    {
+      "index": 776,
+      "start": 2360.16,
+      "end": 2363.79,
+      "duration": 3.63,
+      "text": "this speed you can pack nicely this"
+    },
+    {
+      "index": 777,
+      "start": 2363.8,
+      "end": 2365.589,
+      "duration": 1.789,
+      "text": "identical circuits called modularity"
+    },
+    {
+      "index": 778,
+      "start": 2365.599,
+      "end": 2367.87,
+      "duration": 2.271,
+      "text": "modular circuits whereas here this will"
+    },
+    {
+      "index": 779,
+      "start": 2367.88,
+      "end": 2370.19,
+      "duration": 2.31,
+      "text": "be all irregular this hand will have"
+    },
+    {
+      "index": 780,
+      "start": 2370.2,
+      "end": 2372.67,
+      "duration": 2.47,
+      "text": "five inputs this will have four inputs"
+    },
+    {
+      "index": 781,
+      "start": 2372.68,
+      "end": 2373.63,
+      "duration": 0.95,
+      "text": "this will have three inputs will have"
+    },
+    {
+      "index": 782,
+      "start": 2373.64,
+      "end": 2376.109,
+      "duration": 2.469,
+      "text": "two inputs one input so irregular"
+    },
+    {
+      "index": 783,
+      "start": 2376.119,
+      "end": 2379.71,
+      "duration": 3.591,
+      "text": "structure of and R combination at least"
+    },
+    {
+      "index": 784,
+      "start": 2379.72,
+      "end": 2382.109,
+      "duration": 2.389,
+      "text": "if all the r all the four all the four"
+    },
+    {
+      "index": 785,
+      "start": 2382.119,
+      "end": 2384.55,
+      "duration": 2.431,
+      "text": "carry circuits are they similar no this"
+    },
+    {
+      "index": 786,
+      "start": 2384.56,
+      "end": 2386.91,
+      "duration": 2.35,
+      "text": "is four terms this is five terms this is"
+    },
+    {
+      "index": 787,
+      "start": 2386.92,
+      "end": 2388.15,
+      "duration": 1.23,
+      "text": "four terms this is three terms this is"
+    },
+    {
+      "index": 788,
+      "start": 2388.16,
+      "end": 2390.71,
+      "duration": 2.55,
+      "text": "two terms like that it goes on so"
+    },
+    {
+      "index": 789,
+      "start": 2390.72,
+      "end": 2392.589,
+      "duration": 1.869,
+      "text": "there's a total irregularities you pay"
+    },
+    {
+      "index": 790,
+      "start": 2392.599,
+      "end": 2394.349,
+      "duration": 1.75,
+      "text": "in terms of that so the optimization of"
+    },
+    {
+      "index": 791,
+      "start": 2394.359,
+      "end": 2396.15,
+      "duration": 1.791,
+      "text": "the design in terms of space and"
+    },
+    {
+      "index": 792,
+      "start": 2396.16,
+      "end": 2398.51,
+      "duration": 2.35,
+      "text": "everything that May in turn introduce"
+    },
+    {
+      "index": 793,
+      "start": 2398.52,
+      "end": 2400.23,
+      "duration": 1.71,
+      "text": "some extra delay in wiring and all that"
+    },
+    {
+      "index": 794,
+      "start": 2400.24,
+      "end": 2401.829,
+      "duration": 1.589,
+      "text": "type of"
+    },
+    {
+      "index": 795,
+      "start": 2401.839,
+      "end": 2404.51,
+      "duration": 2.671,
+      "text": "thing and another big factor"
+    },
+    {
+      "index": 796,
+      "start": 2404.52,
+      "end": 2409.19,
+      "duration": 4.67,
+      "text": "is I put four Gates four stages a b a 0"
+    },
+    {
+      "index": 797,
+      "start": 2409.2,
+      "end": 2414.349,
+      "duration": 5.149,
+      "text": "B 0 a 0 A1 A2 A3 B 0 B1 B2 B3 supposing"
+    },
+    {
+      "index": 798,
+      "start": 2414.359,
+      "end": 2417.109,
+      "duration": 2.75,
+      "text": "had eight eight input eight bits a 0 to"
+    },
+    {
+      "index": 799,
+      "start": 2417.119,
+      "end": 2419.87,
+      "duration": 2.751,
+      "text": "A7 b0 to B7 this equation will have how"
+    },
+    {
+      "index": 800,
+      "start": 2419.88,
+      "end": 2422.03,
+      "duration": 2.15,
+      "text": "many terms this will be the last will be"
+    },
+    {
+      "index": 801,
+      "start": 2422.04,
+      "end": 2426.309,
+      "duration": 4.269,
+      "text": "C c0 C1 C2 C3 C4 C5 C C6"
+    },
+    {
+      "index": 802,
+      "start": 2426.319,
+      "end": 2428.589,
+      "duration": 2.27,
+      "text": "C7 the"
+    },
+    {
+      "index": 803,
+      "start": 2428.599,
+      "end": 2432.19,
+      "duration": 3.591,
+      "text": "last carry of the seventh B that is the"
+    },
+    {
+      "index": 804,
+      "start": 2432.2,
+      "end": 2435.67,
+      "duration": 3.47,
+      "text": "bit seven actually eth stage we call it"
+    },
+    {
+      "index": 805,
+      "start": 2435.68,
+      "end": 2438.069,
+      "duration": 2.389,
+      "text": "bit 7 because we started with zero 0 to"
+    },
+    {
+      "index": 806,
+      "start": 2438.079,
+      "end": 2440.309,
+      "duration": 2.23,
+      "text": "7 so the eighth stage which is the"
+    },
+    {
+      "index": 807,
+      "start": 2440.319,
+      "end": 2444.47,
+      "duration": 4.151,
+      "text": "seventh bit bit 7 C7 would be we'll"
+    },
+    {
+      "index": 808,
+      "start": 2444.48,
+      "end": 2446.43,
+      "duration": 1.95,
+      "text": "start with"
+    },
+    {
+      "index": 809,
+      "start": 2446.44,
+      "end": 2448.27,
+      "duration": 1.83,
+      "text": "G7 this will"
+    },
+    {
+      "index": 810,
+      "start": 2448.28,
+      "end": 2451.39,
+      "duration": 3.11,
+      "text": "be 4 + one terms here so that will be 7"
+    },
+    {
+      "index": 811,
+      "start": 2451.4,
+      "end": 2453.79,
+      "duration": 2.39,
+      "text": "plus one terms eight terms that will"
+    },
+    {
+      "index": 812,
+      "start": 2453.8,
+      "end": 2455.39,
+      "duration": 1.59,
+      "text": "have eight"
+    },
+    {
+      "index": 813,
+      "start": 2455.4,
+      "end": 2460.55,
+      "duration": 5.15,
+      "text": "terms and 1 2 3 4 5 yeah eight yeah four"
+    },
+    {
+      "index": 814,
+      "start": 2460.56,
+      "end": 2462.829,
+      "duration": 2.269,
+      "text": "4 + 1 five nine"
+    },
+    {
+      "index": 815,
+      "start": 2462.839,
+      "end": 2465.79,
+      "duration": 2.951,
+      "text": "terms not only that how many inputs to"
+    },
+    {
+      "index": 816,
+      "start": 2465.8,
+      "end": 2469.109,
+      "duration": 3.309,
+      "text": "this get 1 2 3 4 5 that will have nine"
+    },
+    {
+      "index": 817,
+      "start": 2469.119,
+      "end": 2471.55,
+      "duration": 2.431,
+      "text": "inputs so nine input and gate eight"
+    },
+    {
+      "index": 818,
+      "start": 2471.56,
+      "end": 2473.91,
+      "duration": 2.35,
+      "text": "input and gate seven input and gate six"
+    },
+    {
+      "index": 819,
+      "start": 2473.92,
+      "end": 2476.829,
+      "duration": 2.909,
+      "text": "input five input four input three input"
+    },
+    {
+      "index": 820,
+      "start": 2476.839,
+      "end": 2477.67,
+      "duration": 0.831,
+      "text": "two"
+    },
+    {
+      "index": 821,
+      "start": 2477.68,
+      "end": 2480.069,
+      "duration": 2.389,
+      "text": "input and all of them feeding into R"
+    },
+    {
+      "index": 822,
+      "start": 2480.079,
+      "end": 2484.03,
+      "duration": 3.951,
+      "text": "gate with so many nine inputs so that"
+    },
+    {
+      "index": 823,
+      "start": 2484.04,
+      "end": 2486.23,
+      "duration": 2.19,
+      "text": "will be a circuit which is sort of very"
+    },
+    {
+      "index": 824,
+      "start": 2486.24,
+      "end": 2488.27,
+      "duration": 2.03,
+      "text": "unwieldy"
+    },
+    {
+      "index": 825,
+      "start": 2488.28,
+      "end": 2490.63,
+      "duration": 2.35,
+      "text": "and we are not really discussed that"
+    },
+    {
+      "index": 826,
+      "start": 2490.64,
+      "end": 2491.87,
+      "duration": 1.23,
+      "text": "again that aspect I not discussed some"
+    },
+    {
+      "index": 827,
+      "start": 2491.88,
+      "end": 2494.309,
+      "duration": 2.429,
+      "text": "of those Hardware aspect not"
+    },
+    {
+      "index": 828,
+      "start": 2494.319,
+      "end": 2496.47,
+      "duration": 2.151,
+      "text": "discussed is there any limit on the"
+    },
+    {
+      "index": 829,
+      "start": 2496.48,
+      "end": 2499.51,
+      "duration": 3.03,
+      "text": "number of inputs that a gate can have we"
+    },
+    {
+      "index": 830,
+      "start": 2499.52,
+      "end": 2501.109,
+      "duration": 1.589,
+      "text": "usually have two inputs or three inputs"
+    },
+    {
+      "index": 831,
+      "start": 2501.119,
+      "end": 2503.27,
+      "duration": 2.151,
+      "text": "or four inputs is there any limit can I"
+    },
+    {
+      "index": 832,
+      "start": 2503.28,
+      "end": 2504.829,
+      "duration": 1.549,
+      "text": "have 17 input"
+    },
+    {
+      "index": 833,
+      "start": 2504.839,
+      "end": 2507.79,
+      "duration": 2.951,
+      "text": "Gates can I have 47 input Gates"
+    },
+    {
+      "index": 834,
+      "start": 2507.8,
+      "end": 2509.95,
+      "duration": 2.15,
+      "text": "naturally the question arises there are"
+    },
+    {
+      "index": 835,
+      "start": 2509.96,
+      "end": 2511.79,
+      "duration": 1.83,
+      "text": "some restrictions on that based on the"
+    },
+    {
+      "index": 836,
+      "start": 2511.8,
+      "end": 2514.79,
+      "duration": 2.99,
+      "text": "current levels voltage"
+    },
+    {
+      "index": 837,
+      "start": 2514.8,
+      "end": 2516.91,
+      "duration": 2.11,
+      "text": "levels and the transistors in come in"
+    },
+    {
+      "index": 838,
+      "start": 2516.92,
+      "end": 2520.47,
+      "duration": 3.55,
+      "text": "cies these switching switching Elements"
+    },
+    {
+      "index": 839,
+      "start": 2520.48,
+      "end": 2521.99,
+      "duration": 1.51,
+      "text": "which are inside these Gates which are"
+    },
+    {
+      "index": 840,
+      "start": 2522.0,
+      "end": 2525.349,
+      "duration": 3.349,
+      "text": "not touched upon we are teaching this"
+    },
+    {
+      "index": 841,
+      "start": 2525.359,
+      "end": 2526.79,
+      "duration": 1.431,
+      "text": "course at the system"
+    },
+    {
+      "index": 842,
+      "start": 2526.8,
+      "end": 2529.71,
+      "duration": 2.91,
+      "text": "level not necessarily system level logic"
+    },
+    {
+      "index": 843,
+      "start": 2529.72,
+      "end": 2531.71,
+      "duration": 1.99,
+      "text": "level if you remember in the"
+    },
+    {
+      "index": 844,
+      "start": 2531.72,
+      "end": 2533.79,
+      "duration": 2.07,
+      "text": "introductory lecture I talked about"
+    },
+    {
+      "index": 845,
+      "start": 2533.8,
+      "end": 2537.51,
+      "duration": 3.71,
+      "text": "logic level circuit level subsystem"
+    },
+    {
+      "index": 846,
+      "start": 2537.52,
+      "end": 2539.51,
+      "duration": 1.99,
+      "text": "level system level like that so we're"
+    },
+    {
+      "index": 847,
+      "start": 2539.52,
+      "end": 2541.43,
+      "duration": 1.91,
+      "text": "talking about logic level when you break"
+    },
+    {
+      "index": 848,
+      "start": 2541.44,
+      "end": 2544.19,
+      "duration": 2.75,
+      "text": "the logic you see actual Elements which"
+    },
+    {
+      "index": 849,
+      "start": 2544.2,
+      "end": 2545.349,
+      "duration": 1.149,
+      "text": "form the circuit like diodes and"
+    },
+    {
+      "index": 850,
+      "start": 2545.359,
+      "end": 2548.87,
+      "duration": 3.511,
+      "text": "transistors and resistors and capacitors"
+    },
+    {
+      "index": 851,
+      "start": 2548.88,
+      "end": 2550.43,
+      "duration": 1.55,
+      "text": "so when they are coming in series there"
+    },
+    {
+      "index": 852,
+      "start": 2550.44,
+      "end": 2551.95,
+      "duration": 1.51,
+      "text": "is going to be some problem how many can"
+    },
+    {
+      "index": 853,
+      "start": 2551.96,
+      "end": 2553.43,
+      "duration": 1.47,
+      "text": "you really put in series without having"
+    },
+    {
+      "index": 854,
+      "start": 2553.44,
+      "end": 2554.95,
+      "duration": 1.51,
+      "text": "to"
+    },
+    {
+      "index": 855,
+      "start": 2554.96,
+      "end": 2557.99,
+      "duration": 3.03,
+      "text": "without suffering from the loss of the"
+    },
+    {
+      "index": 856,
+      "start": 2558.0,
+      "end": 2560.79,
+      "duration": 2.79,
+      "text": "signal without getting your signal"
+    },
+    {
+      "index": 857,
+      "start": 2560.8,
+      "end": 2562.549,
+      "duration": 1.749,
+      "text": "without your signal getting completely"
+    },
+    {
+      "index": 858,
+      "start": 2562.559,
+      "end": 2565.27,
+      "duration": 2.711,
+      "text": "dropped to less than realizable less"
+    },
+    {
+      "index": 859,
+      "start": 2565.28,
+      "end": 2567.95,
+      "duration": 2.67,
+      "text": "than recognizable values so these are"
+    },
+    {
+      "index": 860,
+      "start": 2567.96,
+      "end": 2569.99,
+      "duration": 2.03,
+      "text": "issues so there's a limit on the number"
+    },
+    {
+      "index": 861,
+      "start": 2570.0,
+      "end": 2570.95,
+      "duration": 0.95,
+      "text": "of"
+    },
+    {
+      "index": 862,
+      "start": 2570.96,
+      "end": 2573.829,
+      "duration": 2.869,
+      "text": "inputs this called fan in the number of"
+    },
+    {
+      "index": 863,
+      "start": 2573.839,
+      "end": 2575.39,
+      "duration": 1.551,
+      "text": "inputs that you can have in a gate is"
+    },
+    {
+      "index": 864,
+      "start": 2575.4,
+      "end": 2577.829,
+      "duration": 2.429,
+      "text": "called a fan in number of outputs you"
+    },
+    {
+      "index": 865,
+      "start": 2577.839,
+      "end": 2580.069,
+      "duration": 2.23,
+      "text": "can have from a gate is called a fan out"
+    },
+    {
+      "index": 866,
+      "start": 2580.079,
+      "end": 2587.99,
+      "duration": 7.911,
+      "text": "fan in and fan"
+    },
+    {
+      "index": 867,
+      "start": 2590.95,
+      "end": 2590.96,
+      "duration": 0.01,
+      "text": "out fan out is the number of outputs you"
+    },
+    {
+      "index": 868,
+      "start": 2590.96,
+      "end": 2593.63,
+      "duration": 2.67,
+      "text": "can take from a gate to feed similar"
+    },
+    {
+      "index": 869,
+      "start": 2593.64,
+      "end": 2595.43,
+      "duration": 1.79,
+      "text": "Gates without degradation in the"
+    },
+    {
+      "index": 870,
+      "start": 2595.44,
+      "end": 2597.95,
+      "duration": 2.51,
+      "text": "performance of the output so that it can"
+    },
+    {
+      "index": 871,
+      "start": 2597.96,
+      "end": 2599.349,
+      "duration": 1.389,
+      "text": "still maintain the zero level and one"
+    },
+    {
+      "index": 872,
+      "start": 2599.359,
+      "end": 2601.67,
+      "duration": 2.311,
+      "text": "level as per specifications you have a"
+    },
+    {
+      "index": 873,
+      "start": 2601.68,
+      "end": 2602.99,
+      "duration": 1.31,
+      "text": "zero level specification in terms of"
+    },
+    {
+      "index": 874,
+      "start": 2603.0,
+      "end": 2605.39,
+      "duration": 2.39,
+      "text": "currents and voltage one level"
+    },
+    {
+      "index": 875,
+      "start": 2605.4,
+      "end": 2606.589,
+      "duration": 1.189,
+      "text": "specification in terms of current and"
+    },
+    {
+      "index": 876,
+      "start": 2606.599,
+      "end": 2608.95,
+      "duration": 2.351,
+      "text": "voltage for any any gate suppose I say"
+    },
+    {
+      "index": 877,
+      "start": 2608.96,
+      "end": 2611.349,
+      "duration": 2.389,
+      "text": "gate is 0 Vols and 5 Vols it cannot be"
+    },
+    {
+      "index": 878,
+      "start": 2611.359,
+      "end": 2613.109,
+      "duration": 1.75,
+      "text": "absolute 5 Vols it can be there will be"
+    },
+    {
+      "index": 879,
+      "start": 2613.119,
+      "end": 2615.75,
+      "duration": 2.631,
+      "text": "a variation and it also tells you how"
+    },
+    {
+      "index": 880,
+      "start": 2615.76,
+      "end": 2618.27,
+      "duration": 2.51,
+      "text": "much current it will deliver if you go"
+    },
+    {
+      "index": 881,
+      "start": 2618.28,
+      "end": 2621.71,
+      "duration": 3.43,
+      "text": "on connecting many outputs to this gate"
+    },
+    {
+      "index": 882,
+      "start": 2621.72,
+      "end": 2623.51,
+      "duration": 1.79,
+      "text": "a point will be reached when I will not"
+    },
+    {
+      "index": 883,
+      "start": 2623.52,
+      "end": 2624.87,
+      "duration": 1.35,
+      "text": "be able to maintain the level that is"
+    },
+    {
+      "index": 884,
+      "start": 2624.88,
+      "end": 2626.99,
+      "duration": 2.11,
+      "text": "required for driving the next gate that"
+    },
+    {
+      "index": 885,
+      "start": 2627.0,
+      "end": 2628.67,
+      "duration": 1.67,
+      "text": "is called fan out the number of maximum"
+    },
+    {
+      "index": 886,
+      "start": 2628.68,
+      "end": 2630.549,
+      "duration": 1.869,
+      "text": "number of gates you can connect of"
+    },
+    {
+      "index": 887,
+      "start": 2630.559,
+      "end": 2633.109,
+      "duration": 2.55,
+      "text": "similar Gates maximum number of similar"
+    },
+    {
+      "index": 888,
+      "start": 2633.119,
+      "end": 2635.47,
+      "duration": 2.351,
+      "text": "Gates you can connect to the output of a"
+    },
+    {
+      "index": 889,
+      "start": 2635.48,
+      "end": 2638.109,
+      "duration": 2.629,
+      "text": "gate so that the levels are reliably"
+    },
+    {
+      "index": 890,
+      "start": 2638.119,
+      "end": 2640.829,
+      "duration": 2.71,
+      "text": "maintained both in currents and voltage"
+    },
+    {
+      "index": 891,
+      "start": 2640.839,
+      "end": 2642.71,
+      "duration": 1.871,
+      "text": "likewise how many inputs can I give to a"
+    },
+    {
+      "index": 892,
+      "start": 2642.72,
+      "end": 2644.19,
+      "duration": 1.47,
+      "text": "gate without having to without any"
+    },
+    {
+      "index": 893,
+      "start": 2644.2,
+      "end": 2646.71,
+      "duration": 2.51,
+      "text": "degradation is performance so that the"
+    },
+    {
+      "index": 894,
+      "start": 2646.72,
+      "end": 2648.51,
+      "duration": 1.79,
+      "text": "levels are reliable this is called fan"
+    },
+    {
+      "index": 895,
+      "start": 2648.52,
+      "end": 2650.75,
+      "duration": 2.23,
+      "text": "in so there's a limit on this fan in and"
+    },
+    {
+      "index": 896,
+      "start": 2650.76,
+      "end": 2653.03,
+      "duration": 2.27,
+      "text": "fan out for different families different"
+    },
+    {
+      "index": 897,
+      "start": 2653.04,
+      "end": 2655.67,
+      "duration": 2.63,
+      "text": "Technologies so I cannot go on orbitally"
+    },
+    {
+      "index": 898,
+      "start": 2655.68,
+      "end": 2657.27,
+      "duration": 1.59,
+      "text": "adding the number of bits I can I cannot"
+    },
+    {
+      "index": 899,
+      "start": 2657.28,
+      "end": 2659.95,
+      "duration": 2.67,
+      "text": "say I will design a 27 bit carry Li"
+    },
+    {
+      "index": 900,
+      "start": 2659.96,
+      "end": 2663.109,
+      "duration": 3.149,
+      "text": "ahead circuit I canot do that somewhere"
+    },
+    {
+      "index": 901,
+      "start": 2663.119,
+      "end": 2665.39,
+      "duration": 2.271,
+      "text": "it is going to"
+    },
+    {
+      "index": 902,
+      "start": 2665.4,
+      "end": 2667.549,
+      "duration": 2.149,
+      "text": "fail so based on the"
+    },
+    {
+      "index": 903,
+      "start": 2667.559,
+      "end": 2669.79,
+      "duration": 2.231,
+      "text": "conditions these are the two negative"
+    },
+    {
+      "index": 904,
+      "start": 2669.8,
+      "end": 2673.63,
+      "duration": 3.83,
+      "text": "points of this car L the car positiv is"
+    },
+    {
+      "index": 905,
+      "start": 2673.64,
+      "end": 2675.43,
+      "duration": 1.79,
+      "text": "speed up and all that we don't have to"
+    },
+    {
+      "index": 906,
+      "start": 2675.44,
+      "end": 2677.589,
+      "duration": 2.149,
+      "text": "wait for the carry to propagate we are"
+    },
+    {
+      "index": 907,
+      "start": 2677.599,
+      "end": 2679.75,
+      "duration": 2.151,
+      "text": "looking ahead and sort of I won't call"
+    },
+    {
+      "index": 908,
+      "start": 2679.76,
+      "end": 2682.549,
+      "duration": 2.789,
+      "text": "it prediction it's not prediction it is"
+    },
+    {
+      "index": 909,
+      "start": 2682.559,
+      "end": 2684.95,
+      "duration": 2.391,
+      "text": "precomputation prediction is something"
+    },
+    {
+      "index": 910,
+      "start": 2684.96,
+      "end": 2686.27,
+      "duration": 1.31,
+      "text": "which can go"
+    },
+    {
+      "index": 911,
+      "start": 2686.28,
+      "end": 2689.43,
+      "duration": 3.15,
+      "text": "wrong it's a precomputation look"
+    },
+    {
+      "index": 912,
+      "start": 2689.44,
+      "end": 2692.43,
+      "duration": 2.99,
+      "text": "ahead of what is going to"
+    },
+    {
+      "index": 913,
+      "start": 2692.44,
+      "end": 2695.109,
+      "duration": 2.669,
+      "text": "happen the the negative points are the"
+    },
+    {
+      "index": 914,
+      "start": 2695.119,
+      "end": 2698.67,
+      "duration": 3.551,
+      "text": "nonuniform circuit of course extra logic"
+    },
+    {
+      "index": 915,
+      "start": 2698.68,
+      "end": 2700.19,
+      "duration": 1.51,
+      "text": "is one negative point that is we are"
+    },
+    {
+      "index": 916,
+      "start": 2700.2,
+      "end": 2701.549,
+      "duration": 1.349,
+      "text": "willing to pay that otherwise we will"
+    },
+    {
+      "index": 917,
+      "start": 2701.559,
+      "end": 2704.15,
+      "duration": 2.591,
+      "text": "not go into this knowingly you go for"
+    },
+    {
+      "index": 918,
+      "start": 2704.16,
+      "end": 2705.91,
+      "duration": 1.75,
+      "text": "I'll pay more money give me a faster"
+    },
+    {
+      "index": 919,
+      "start": 2705.92,
+      "end": 2708.349,
+      "duration": 2.429,
+      "text": "speed faster gate you are going to ask"
+    },
+    {
+      "index": 920,
+      "start": 2708.359,
+      "end": 2709.43,
+      "duration": 1.071,
+      "text": "I'll give you more money give me a"
+    },
+    {
+      "index": 921,
+      "start": 2709.44,
+      "end": 2711.829,
+      "duration": 2.389,
+      "text": "faster Adder you ask for it you got it"
+    },
+    {
+      "index": 922,
+      "start": 2711.839,
+      "end": 2714.39,
+      "duration": 2.551,
+      "text": "so that is not a dis I wanton list as a"
+    },
+    {
+      "index": 923,
+      "start": 2714.4,
+      "end": 2716.51,
+      "duration": 2.11,
+      "text": "disadvantage it's a technique of"
+    },
+    {
+      "index": 924,
+      "start": 2716.52,
+      "end": 2719.23,
+      "duration": 2.71,
+      "text": "reducing the speed but from the dis"
+    },
+    {
+      "index": 925,
+      "start": 2719.24,
+      "end": 2720.79,
+      "duration": 1.55,
+      "text": "disadvantage point of view there are two"
+    },
+    {
+      "index": 926,
+      "start": 2720.8,
+      "end": 2722.91,
+      "duration": 2.11,
+      "text": "disadvantages one is"
+    },
+    {
+      "index": 927,
+      "start": 2722.92,
+      "end": 2727.63,
+      "duration": 4.71,
+      "text": "the the non uniformity non modularity"
+    },
+    {
+      "index": 928,
+      "start": 2727.64,
+      "end": 2730.589,
+      "duration": 2.949,
+      "text": "of the carry look Ahad add second thing"
+    },
+    {
+      "index": 929,
+      "start": 2730.599,
+      "end": 2733.03,
+      "duration": 2.431,
+      "text": "is there's a limit on number of bits you"
+    },
+    {
+      "index": 930,
+      "start": 2733.04,
+      "end": 2735.75,
+      "duration": 2.71,
+      "text": "can do for carry look ahead people say"
+    },
+    {
+      "index": 931,
+      "start": 2735.76,
+      "end": 2738.87,
+      "duration": 3.11,
+      "text": "four is okay sometimes"
+    },
+    {
+      "index": 932,
+      "start": 2738.88,
+      "end": 2742.15,
+      "duration": 3.27,
+      "text": "eight see problem is maybe between four"
+    },
+    {
+      "index": 933,
+      "start": 2742.16,
+      "end": 2745.23,
+      "duration": 3.07,
+      "text": "and eight somewhere six or seven may be"
+    },
+    {
+      "index": 934,
+      "start": 2745.24,
+      "end": 2747.309,
+      "duration": 2.069,
+      "text": "Optimum or five or six may be Optimum"
+    },
+    {
+      "index": 935,
+      "start": 2747.319,
+      "end": 2749.95,
+      "duration": 2.631,
+      "text": "but unfortunately in digital we always"
+    },
+    {
+      "index": 936,
+      "start": 2749.96,
+      "end": 2752.87,
+      "duration": 2.91,
+      "text": "do with zero two Powers always for some"
+    },
+    {
+      "index": 937,
+      "start": 2752.88,
+      "end": 2754.67,
+      "duration": 1.79,
+      "text": "convenience and sometimes for practical"
+    },
+    {
+      "index": 938,
+      "start": 2754.68,
+      "end": 2759.109,
+      "duration": 4.429,
+      "text": "reasons we do 0 1 1 2 4"
+    },
+    {
+      "index": 939,
+      "start": 2759.119,
+      "end": 2762.79,
+      "duration": 3.671,
+      "text": "8 16 like that it's very rare to find a"
+    },
+    {
+      "index": 940,
+      "start": 2762.8,
+      "end": 2764.75,
+      "duration": 1.95,
+      "text": "seven bit adder in the market you can"
+    },
+    {
+      "index": 941,
+      "start": 2764.76,
+      "end": 2766.95,
+      "duration": 2.19,
+      "text": "buy an 8bit you can not buy a 6bit"
+    },
+    {
+      "index": 942,
+      "start": 2766.96,
+      "end": 2770.43,
+      "duration": 3.47,
+      "text": "register you can buy a 12 8bit register"
+    },
+    {
+      "index": 943,
+      "start": 2770.44,
+      "end": 2772.589,
+      "duration": 2.149,
+      "text": "of course you can always build one but"
+    },
+    {
+      "index": 944,
+      "start": 2772.599,
+      "end": 2775.03,
+      "duration": 2.431,
+      "text": "that's not what I mean"
+    },
+    {
+      "index": 945,
+      "start": 2775.04,
+      "end": 2777.63,
+      "duration": 2.59,
+      "text": "so four bits sometimes eight bits are"
+    },
+    {
+      "index": 946,
+      "start": 2777.64,
+      "end": 2781.349,
+      "duration": 3.709,
+      "text": "done so what happens if I want to do"
+    },
+    {
+      "index": 947,
+      "start": 2781.359,
+      "end": 2785.549,
+      "duration": 4.19,
+      "text": "really multibit addition like 16 bits or"
+    },
+    {
+      "index": 948,
+      "start": 2785.559,
+      "end": 2789.39,
+      "duration": 3.831,
+      "text": "32 bits or 64 bits bits there are two"
+    },
+    {
+      "index": 949,
+      "start": 2789.4,
+      "end": 2792.67,
+      "duration": 3.27,
+      "text": "options I can go in for I can divide"
+    },
+    {
+      "index": 950,
+      "start": 2792.68,
+      "end": 2796.51,
+      "duration": 3.83,
+      "text": "this into 4 bit 4bit four bit in a trans"
+    },
+    {
+      "index": 951,
+      "start": 2796.52,
+      "end": 2800.03,
+      "duration": 3.51,
+      "text": "in a carry propagation mode and within"
+    },
+    {
+      "index": 952,
+      "start": 2800.04,
+      "end": 2801.75,
+      "duration": 1.71,
+      "text": "each of those four bits I can do a carry"
+    },
+    {
+      "index": 953,
+      "start": 2801.76,
+      "end": 2803.829,
+      "duration": 2.069,
+      "text": "look ahead so first bit carry look ahead"
+    },
+    {
+      "index": 954,
+      "start": 2803.839,
+      "end": 2806.19,
+      "duration": 2.351,
+      "text": "first four bits carry look ahead output"
+    },
+    {
+      "index": 955,
+      "start": 2806.2,
+      "end": 2809.43,
+      "duration": 3.23,
+      "text": "carry will trigger the second stage"
+    },
+    {
+      "index": 956,
+      "start": 2809.44,
+      "end": 2813.23,
+      "duration": 3.79,
+      "text": "again so instead of having 64"
+    },
+    {
+      "index": 957,
+      "start": 2813.24,
+      "end": 2816.589,
+      "duration": 3.349,
+      "text": "times the propagation delay I will have"
+    },
+    {
+      "index": 958,
+      "start": 2816.599,
+      "end": 2820.069,
+      "duration": 3.47,
+      "text": "only 16 times the propagation delay plus"
+    },
+    {
+      "index": 959,
+      "start": 2820.079,
+      "end": 2822.71,
+      "duration": 2.631,
+      "text": "the extra propagation delay for each"
+    },
+    {
+      "index": 960,
+      "start": 2822.72,
+      "end": 2826.549,
+      "duration": 3.829,
+      "text": "carry look stage that is one"
+    },
+    {
+      "index": 961,
+      "start": 2826.559,
+      "end": 2828.829,
+      "duration": 2.27,
+      "text": "option the second option is within that"
+    },
+    {
+      "index": 962,
+      "start": 2828.839,
+      "end": 2830.87,
+      "duration": 2.031,
+      "text": "I can do a carry look ahead I can do a"
+    },
+    {
+      "index": 963,
+      "start": 2830.88,
+      "end": 2833.51,
+      "duration": 2.63,
+      "text": "carry look ahead of the fourth stage eth"
+    },
+    {
+      "index": 964,
+      "start": 2833.52,
+      "end": 2836.63,
+      "duration": 3.11,
+      "text": "stage fourth bit 8th bit 12th bit 16th"
+    },
+    {
+      "index": 965,
+      "start": 2836.64,
+      "end": 2840.39,
+      "duration": 3.75,
+      "text": "bit and use another carry look logic to"
+    },
+    {
+      "index": 966,
+      "start": 2840.4,
+      "end": 2842.589,
+      "duration": 2.189,
+      "text": "generate higher level carry look so I"
+    },
+    {
+      "index": 967,
+      "start": 2842.599,
+      "end": 2845.51,
+      "duration": 2.911,
+      "text": "can go on doing it cascading in levels"
+    },
+    {
+      "index": 968,
+      "start": 2845.52,
+      "end": 2848.309,
+      "duration": 2.789,
+      "text": "of carry also can be in different levels"
+    },
+    {
+      "index": 969,
+      "start": 2848.319,
+      "end": 2849.99,
+      "duration": 1.671,
+      "text": "I can have a two level carry look ahead"
+    },
+    {
+      "index": 970,
+      "start": 2850.0,
+      "end": 2851.75,
+      "duration": 1.75,
+      "text": "I can have a three level carry look"
+    },
+    {
+      "index": 971,
+      "start": 2851.76,
+      "end": 2853.069,
+      "duration": 1.309,
+      "text": "ahead I can have four level carry look"
+    },
+    {
+      "index": 972,
+      "start": 2853.079,
+      "end": 2856.109,
+      "duration": 3.03,
+      "text": "ahead so carry look ahead along with"
+    },
+    {
+      "index": 973,
+      "start": 2856.119,
+      "end": 2858.03,
+      "duration": 1.911,
+      "text": "transmission"
+    },
+    {
+      "index": 974,
+      "start": 2858.04,
+      "end": 2860.51,
+      "duration": 2.47,
+      "text": "serial carry propagation combined with"
+    },
+    {
+      "index": 975,
+      "start": 2860.52,
+      "end": 2863.19,
+      "duration": 2.67,
+      "text": "carry look ahead is First Option where I"
+    },
+    {
+      "index": 976,
+      "start": 2863.2,
+      "end": 2866.15,
+      "duration": 2.95,
+      "text": "will have four bit carry Lads connected"
+    },
+    {
+      "index": 977,
+      "start": 2866.16,
+      "end": 2868.87,
+      "duration": 2.71,
+      "text": "in carry propagation"
+    },
+    {
+      "index": 978,
+      "start": 2868.88,
+      "end": 2872.589,
+      "duration": 3.709,
+      "text": "mode so the speed is reduce somewhat"
+    },
+    {
+      "index": 979,
+      "start": 2872.599,
+      "end": 2874.91,
+      "duration": 2.311,
+      "text": "speed is increased somewhat propagation"
+    },
+    {
+      "index": 980,
+      "start": 2874.92,
+      "end": 2878.03,
+      "duration": 3.11,
+      "text": "delay is reduced somewhat"
+    },
+    {
+      "index": 981,
+      "start": 2878.04,
+      "end": 2879.549,
+      "duration": 1.509,
+      "text": "the other one is if you want to do even"
+    },
+    {
+      "index": 982,
+      "start": 2879.559,
+      "end": 2882.03,
+      "duration": 2.471,
+      "text": "better than that within the carry look"
+    },
+    {
+      "index": 983,
+      "start": 2882.04,
+      "end": 2885.71,
+      "duration": 3.67,
+      "text": "head output so I I look ahead the carry"
+    },
+    {
+      "index": 984,
+      "start": 2885.72,
+      "end": 2888.309,
+      "duration": 2.589,
+      "text": "for the first four bits at the same time"
+    },
+    {
+      "index": 985,
+      "start": 2888.319,
+      "end": 2890.549,
+      "duration": 2.23,
+      "text": "I can get carry for all of them I can"
+    },
+    {
+      "index": 986,
+      "start": 2890.559,
+      "end": 2892.87,
+      "duration": 2.311,
+      "text": "look ahead carry for the eight stage"
+    },
+    {
+      "index": 987,
+      "start": 2892.88,
+      "end": 2894.309,
+      "duration": 1.429,
+      "text": "first four bits I can do second four"
+    },
+    {
+      "index": 988,
+      "start": 2894.319,
+      "end": 2896.39,
+      "duration": 2.071,
+      "text": "bits I can do third four bits I can do"
+    },
+    {
+      "index": 989,
+      "start": 2896.4,
+      "end": 2898.03,
+      "duration": 1.63,
+      "text": "all of them can feed into another carry"
+    },
+    {
+      "index": 990,
+      "start": 2898.04,
+      "end": 2900.19,
+      "duration": 2.15,
+      "text": "look at stage if it is not sufficient I"
+    },
+    {
+      "index": 991,
+      "start": 2900.2,
+      "end": 2902.069,
+      "duration": 1.869,
+      "text": "can go to one more stage like that that"
+    },
+    {
+      "index": 992,
+      "start": 2902.079,
+      "end": 2903.63,
+      "duration": 1.551,
+      "text": "is more and more complex circuit that"
+    },
+    {
+      "index": 993,
+      "start": 2903.64,
+      "end": 2906.069,
+      "duration": 2.429,
+      "text": "means more logic when you have more"
+    },
+    {
+      "index": 994,
+      "start": 2906.079,
+      "end": 2907.67,
+      "duration": 1.591,
+      "text": "logic and more non"
+    },
+    {
+      "index": 995,
+      "start": 2907.68,
+      "end": 2910.67,
+      "duration": 2.99,
+      "text": "modularity so again there's a tradeoff"
+    },
+    {
+      "index": 996,
+      "start": 2910.68,
+      "end": 2912.47,
+      "duration": 1.79,
+      "text": "there's a speed variation I can have a"
+    },
+    {
+      "index": 997,
+      "start": 2912.48,
+      "end": 2915.589,
+      "duration": 3.109,
+      "text": "menu now no carry look at for me give me"
+    },
+    {
+      "index": 998,
+      "start": 2915.599,
+      "end": 2917.99,
+      "duration": 2.391,
+      "text": "I will do a modular design with full"
+    },
+    {
+      "index": 999,
+      "start": 2918.0,
+      "end": 2920.23,
+      "duration": 2.23,
+      "text": "adders I'm happy the speed is good"
+    },
+    {
+      "index": 1000,
+      "start": 2920.24,
+      "end": 2922.87,
+      "duration": 2.63,
+      "text": "enough take it okay I want an"
+    },
+    {
+      "index": 1001,
+      "start": 2922.88,
+      "end": 2924.43,
+      "duration": 1.55,
+      "text": "improvement in speed so I will do carry"
+    },
+    {
+      "index": 1002,
+      "start": 2924.44,
+      "end": 2926.15,
+      "duration": 1.71,
+      "text": "look at but I don't do more than four"
+    },
+    {
+      "index": 1003,
+      "start": 2926.16,
+      "end": 2928.47,
+      "duration": 2.31,
+      "text": "bits give me any number of bits I will"
+    },
+    {
+      "index": 1004,
+      "start": 2928.48,
+      "end": 2930.23,
+      "duration": 1.75,
+      "text": "divide it into four bit four bit four"
+    },
+    {
+      "index": 1005,
+      "start": 2930.24,
+      "end": 2932.03,
+      "duration": 1.79,
+      "text": "bit and each inside I do carry look head"
+    },
+    {
+      "index": 1006,
+      "start": 2932.04,
+      "end": 2934.91,
+      "duration": 2.87,
+      "text": "but outside they will connect as carry"
+    },
+    {
+      "index": 1007,
+      "start": 2934.92,
+      "end": 2937.589,
+      "duration": 2.669,
+      "text": "propagate that is second option"
+    },
+    {
+      "index": 1008,
+      "start": 2937.599,
+      "end": 2941.349,
+      "duration": 3.75,
+      "text": "so more logic increase"
+    },
+    {
+      "index": 1009,
+      "start": 2941.359,
+      "end": 2943.63,
+      "duration": 2.271,
+      "text": "speed so you pay for it but you know"
+    },
+    {
+      "index": 1010,
+      "start": 2943.64,
+      "end": 2946.19,
+      "duration": 2.55,
+      "text": "that you pay for it and the modularity"
+    },
+    {
+      "index": 1011,
+      "start": 2946.2,
+      "end": 2948.19,
+      "duration": 1.99,
+      "text": "and that all that extra F considerations"
+    },
+    {
+      "index": 1012,
+      "start": 2948.2,
+      "end": 2951.069,
+      "duration": 2.869,
+      "text": "you already taken into account third is"
+    },
+    {
+      "index": 1013,
+      "start": 2951.079,
+      "end": 2952.549,
+      "duration": 1.47,
+      "text": "I'm not sure the speed you are going to"
+    },
+    {
+      "index": 1014,
+      "start": 2952.559,
+      "end": 2955.43,
+      "duration": 2.871,
+      "text": "get with this I want much faster then I"
+    },
+    {
+      "index": 1015,
+      "start": 2955.44,
+      "end": 2957.95,
+      "duration": 2.51,
+      "text": "can car this carry look ahads can the"
+    },
+    {
+      "index": 1016,
+      "start": 2957.96,
+      "end": 2960.95,
+      "duration": 2.99,
+      "text": "output carry look ahads the carries of"
+    },
+    {
+      "index": 1017,
+      "start": 2960.96,
+      "end": 2962.349,
+      "duration": 1.389,
+      "text": "the four"
+    },
+    {
+      "index": 1018,
+      "start": 2962.359,
+      "end": 2965.549,
+      "duration": 3.19,
+      "text": "stages four stage carry look ahead can"
+    },
+    {
+      "index": 1019,
+      "start": 2965.559,
+      "end": 2968.15,
+      "duration": 2.591,
+      "text": "be used in a second level car look ahead"
+    },
+    {
+      "index": 1020,
+      "start": 2968.16,
+      "end": 2971.27,
+      "duration": 3.11,
+      "text": "to get a carry generation much faster"
+    },
+    {
+      "index": 1021,
+      "start": 2971.28,
+      "end": 2973.43,
+      "duration": 2.15,
+      "text": "than the other one so this requires two"
+    },
+    {
+      "index": 1022,
+      "start": 2973.44,
+      "end": 2976.069,
+      "duration": 2.629,
+      "text": "level carry look ahead design which is"
+    },
+    {
+      "index": 1023,
+      "start": 2976.079,
+      "end": 2977.589,
+      "duration": 1.51,
+      "text": "going to be slightly more complex in"
+    },
+    {
+      "index": 1024,
+      "start": 2977.599,
+      "end": 2980.109,
+      "duration": 2.51,
+      "text": "terms of Hardware in design complexity"
+    },
+    {
+      "index": 1025,
+      "start": 2980.119,
+      "end": 2983.309,
+      "duration": 3.19,
+      "text": "number of gates and thereby the non"
+    },
+    {
+      "index": 1026,
+      "start": 2983.319,
+      "end": 2985.349,
+      "duration": 2.03,
+      "text": "modularity size etc etc all those"
+    },
+    {
+      "index": 1027,
+      "start": 2985.359,
+      "end": 2988.23,
+      "duration": 2.871,
+      "text": "problems come again here also but let us"
+    },
+    {
+      "index": 1028,
+      "start": 2988.24,
+      "end": 2990.549,
+      "duration": 2.309,
+      "text": "not go into all that we'll talk about at"
+    },
+    {
+      "index": 1029,
+      "start": 2990.559,
+      "end": 2995.91,
+      "duration": 5.351,
+      "text": "most carad connected in propagation mode"
+    },
+    {
+      "index": 1030,
+      "start": 2995.92,
+      "end": 2997.71,
+      "duration": 1.79,
+      "text": "suppose you want to build 16 bit carry"
+    },
+    {
+      "index": 1031,
+      "start": 2997.72,
+      "end": 3000.95,
+      "duration": 3.23,
+      "text": "liquid 16 bit full adder I'll probably"
+    },
+    {
+      "index": 1032,
+      "start": 3000.96,
+      "end": 3003.789,
+      "duration": 2.829,
+      "text": "do it at four carry liquid adders C3"
+    },
+    {
+      "index": 1033,
+      "start": 3003.799,
+      "end": 3006.349,
+      "duration": 2.55,
+      "text": "feeding into second stage C7 feeding"
+    },
+    {
+      "index": 1034,
+      "start": 3006.359,
+      "end": 3009.27,
+      "duration": 2.911,
+      "text": "into third stage C11 feeding into the"
+    },
+    {
+      "index": 1035,
+      "start": 3009.28,
+      "end": 3011.069,
+      "duration": 1.789,
+      "text": "fourth stage that is good enough for"
+    },
+    {
+      "index": 1036,
+      "start": 3011.079,
+      "end": 3013.19,
+      "duration": 2.111,
+      "text": "this class but I wanted to introduce so"
+    },
+    {
+      "index": 1037,
+      "start": 3013.2,
+      "end": 3015.03,
+      "duration": 1.83,
+      "text": "basically even though car look as I said"
+    },
+    {
+      "index": 1038,
+      "start": 3015.04,
+      "end": 3017.51,
+      "duration": 2.47,
+      "text": "is the example I use for speeding up"
+    },
+    {
+      "index": 1039,
+      "start": 3017.52,
+      "end": 3020.19,
+      "duration": 2.67,
+      "text": "this is something are it should be sort"
+    },
+    {
+      "index": 1040,
+      "start": 3020.2,
+      "end": 3022.589,
+      "duration": 2.389,
+      "text": "of familiar there a conceptual level"
+    },
+    {
+      "index": 1041,
+      "start": 3022.599,
+      "end": 3024.589,
+      "duration": 1.99,
+      "text": "arithmetic circuit have lots of that is"
+    },
+    {
+      "index": 1042,
+      "start": 3024.599,
+      "end": 3025.95,
+      "duration": 1.351,
+      "text": "a design that is the beauty of design"
+    },
+    {
+      "index": 1043,
+      "start": 3025.96,
+      "end": 3027.87,
+      "duration": 1.91,
+      "text": "ver analysis analysis there's an"
+    },
+    {
+      "index": 1044,
+      "start": 3027.88,
+      "end": 3029.43,
+      "duration": 1.55,
+      "text": "analysis you have to lead the analysis"
+    },
+    {
+      "index": 1045,
+      "start": 3029.44,
+      "end": 3030.75,
+      "duration": 1.31,
+      "text": "that's how somebody else does the"
+    },
+    {
+      "index": 1046,
+      "start": 3030.76,
+      "end": 3032.23,
+      "duration": 1.47,
+      "text": "analysis and you just understand and"
+    },
+    {
+      "index": 1047,
+      "start": 3032.24,
+      "end": 3034.63,
+      "duration": 2.39,
+      "text": "learn it a design you have"
+    },
+    {
+      "index": 1048,
+      "start": 3034.64,
+      "end": 3036.589,
+      "duration": 1.949,
+      "text": "options what are the various techniques"
+    },
+    {
+      "index": 1049,
+      "start": 3036.599,
+      "end": 3037.99,
+      "duration": 1.391,
+      "text": "by which you can speed up based on the"
+    },
+    {
+      "index": 1050,
+      "start": 3038.0,
+      "end": 3039.15,
+      "duration": 1.15,
+      "text": "consideration based on the design"
+    },
+    {
+      "index": 1051,
+      "start": 3039.16,
+      "end": 3040.71,
+      "duration": 1.55,
+      "text": "requirement based on the cost based on"
+    },
+    {
+      "index": 1052,
+      "start": 3040.72,
+      "end": 3043.63,
+      "duration": 2.91,
+      "text": "the performance requirement you deser"
+    },
+    {
+      "index": 1053,
+      "start": 3043.64,
+      "end": 3045.109,
+      "duration": 1.469,
+      "text": "that is where the design concept comes"
+    },
+    {
+      "index": 1054,
+      "start": 3045.119,
+      "end": 3047.589,
+      "duration": 2.47,
+      "text": "in so I just thought I will introduce"
+    },
+    {
+      "index": 1055,
+      "start": 3047.599,
+      "end": 3049.349,
+      "duration": 1.75,
+      "text": "this concept to you this is a general"
+    },
+    {
+      "index": 1056,
+      "start": 3049.359,
+      "end": 3051.19,
+      "duration": 1.831,
+      "text": "Concept in terms"
+    },
+    {
+      "index": 1057,
+      "start": 3051.2,
+      "end": 3053.15,
+      "duration": 1.95,
+      "text": "of"
+    },
+    {
+      "index": 1058,
+      "start": 3053.16,
+      "end": 3056.15,
+      "duration": 2.99,
+      "text": "Hardware extra Hardware can reduce the"
+    },
+    {
+      "index": 1059,
+      "start": 3056.16,
+      "end": 3058.47,
+      "duration": 2.31,
+      "text": "propagation delay or increase the speed"
+    },
+    {
+      "index": 1060,
+      "start": 3058.48,
+      "end": 3059.91,
+      "duration": 1.43,
+      "text": "or extra Hardware can improve the"
+    },
+    {
+      "index": 1061,
+      "start": 3059.92,
+      "end": 3062.51,
+      "duration": 2.59,
+      "text": "performance in most cases that"
+    },
+    {
+      "index": 1062,
+      "start": 3062.52,
+      "end": 3064.51,
+      "duration": 1.99,
+      "text": "qualifying class I want to always put"
+    },
+    {
+      "index": 1063,
+      "start": 3064.52,
+      "end": 3066.91,
+      "duration": 2.39,
+      "text": "there are some cases where it's extra"
+    },
+    {
+      "index": 1064,
+      "start": 3066.92,
+      "end": 3068.03,
+      "duration": 1.11,
+      "text": "money"
+    },
+    {
+      "index": 1065,
+      "start": 3068.04,
+      "end": 3071.75,
+      "duration": 3.71,
+      "text": "cannot buy what you want so this not not"
+    },
+    {
+      "index": 1066,
+      "start": 3071.76,
+      "end": 3074.549,
+      "duration": 2.789,
+      "text": "always"
+    }
+  ],
+  "course": {
+    "category": "Engineering & Robotics",
+    "title": "Circuits and Electronics",
+    "source_url": "https://www.youtube.com/playlist?list=PL803563859BF7ED8C"
+  }
+}

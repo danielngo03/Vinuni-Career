@@ -1,0 +1,5352 @@
+{
+  "video": {
+    "id": "R9a_NHXrBcg",
+    "title": "Lec 23 | MIT 18.01 Single Variable Calculus, Fall 2007",
+    "url": "https://www.youtube.com/watch?v=R9a_NHXrBcg",
+    "channel": "MIT OpenCourseWare",
+    "duration": 2916,
+    "language": "en"
+  },
+  "segment_count": 762,
+  "segments": [
+    {
+      "index": 0,
+      "start": 0.0,
+      "end": 2.23,
+      "duration": 2.23,
+      "text": "The following content is provided under a Creative"
+    },
+    {
+      "index": 1,
+      "start": 2.23,
+      "end": 2.65,
+      "duration": 0.42,
+      "text": "Commons license."
+    },
+    {
+      "index": 2,
+      "start": 2.65,
+      "end": 6.52,
+      "duration": 3.87,
+      "text": "Your support will help MIT OpenCourseWare continue to"
+    },
+    {
+      "index": 3,
+      "start": 6.52,
+      "end": 9.95,
+      "duration": 3.43,
+      "text": "offer high quality educational resources for free."
+    },
+    {
+      "index": 4,
+      "start": 9.95,
+      "end": 13.18,
+      "duration": 3.23,
+      "text": "To make a donation, or to view additional materials from"
+    },
+    {
+      "index": 5,
+      "start": 13.18,
+      "end": 16.82,
+      "duration": 3.64,
+      "text": "hundreds of MIT courses, visit MIT OpenCourseWare at"
+    },
+    {
+      "index": 6,
+      "start": 16.82,
+      "end": 21.67,
+      "duration": 4.85,
+      "text": "ocw.mit.edu."
+    },
+    {
+      "index": 7,
+      "start": 21.67,
+      "end": 24.57,
+      "duration": 2.9,
+      "text": "PROFESSOR: Today we're going to hold off just a little bit"
+    },
+    {
+      "index": 8,
+      "start": 24.57,
+      "end": 27.25,
+      "duration": 2.68,
+      "text": "on boiling water."
+    },
+    {
+      "index": 9,
+      "start": 27.25,
+      "end": 32.02,
+      "duration": 4.77,
+      "text": "And talk about another application of integrals, and"
+    },
+    {
+      "index": 10,
+      "start": 32.02,
+      "end": 36.03,
+      "duration": 4.01,
+      "text": "we'll get to the witches' cauldron in the middle."
+    },
+    {
+      "index": 11,
+      "start": 36.03,
+      "end": 45.23,
+      "duration": 9.2,
+      "text": "The that I'd like to start with today is average value."
+    },
+    {
+      "index": 12,
+      "start": 45.23,
+      "end": 47.62,
+      "duration": 2.39,
+      "text": "This is something that I mentioned a little bit"
+    },
+    {
+      "index": 13,
+      "start": 47.62,
+      "end": 50.29,
+      "duration": 2.67,
+      "text": "earlier, and there was a misprint on the board, so I"
+    },
+    {
+      "index": 14,
+      "start": 50.29,
+      "end": 54.98,
+      "duration": 4.69,
+      "text": "want to make sure that we have the definitions straight."
+    },
+    {
+      "index": 15,
+      "start": 54.98,
+      "end": 56.77,
+      "duration": 1.79,
+      "text": "And also the reasoning straight."
+    },
+    {
+      "index": 16,
+      "start": 56.77,
+      "end": 59.09,
+      "duration": 2.32,
+      "text": "This is one of the most important applications of"
+    },
+    {
+      "index": 17,
+      "start": 59.09,
+      "end": 63.84,
+      "duration": 4.75,
+      "text": "integrals, one of the most important examples."
+    },
+    {
+      "index": 18,
+      "start": 63.84,
+      "end": 68.3,
+      "duration": 4.46,
+      "text": "If you take the average of a bunch of numbers,"
+    },
+    {
+      "index": 19,
+      "start": 68.3,
+      "end": 70.42,
+      "duration": 2.12,
+      "text": "that looks like this."
+    },
+    {
+      "index": 20,
+      "start": 70.42,
+      "end": 75.5,
+      "duration": 5.08,
+      "text": "And we can view this as sampling a function."
+    },
+    {
+      "index": 21,
+      "start": 75.5,
+      "end": 77.57,
+      "duration": 2.07,
+      "text": "As we would with Riemann's sum."
+    },
+    {
+      "index": 22,
+      "start": 77.57,
+      "end": 85.07,
+      "duration": 7.5,
+      "text": "And what I said last week was that this tends to this"
+    },
+    {
+      "index": 23,
+      "start": 85.07,
+      "end": 92.96,
+      "duration": 7.89,
+      "text": "expression here, which is called the continuous average."
+    },
+    {
+      "index": 24,
+      "start": 92.96,
+      "end": 103.55,
+      "duration": 10.59,
+      "text": "So this guy is the continuous average."
+    },
+    {
+      "index": 25,
+      "start": 103.55,
+      "end": 109.27,
+      "duration": 5.72,
+      "text": "Or just the average of f."
+    },
+    {
+      "index": 26,
+      "start": 109.27,
+      "end": 113.49,
+      "duration": 4.22,
+      "text": "And I want to explain that, just to make sure that we're"
+    },
+    {
+      "index": 27,
+      "start": 113.49,
+      "end": 116.38,
+      "duration": 2.89,
+      "text": "all on the same page."
+    },
+    {
+      "index": 28,
+      "start": 116.38,
+      "end": 119.53,
+      "duration": 3.15,
+      "text": "In general, if you have a function and you want to"
+    },
+    {
+      "index": 29,
+      "start": 119.53,
+      "end": 123.77,
+      "duration": 4.24,
+      "text": "interpret the integral, our first interpretation was that"
+    },
+    {
+      "index": 30,
+      "start": 123.77,
+      "end": 129.86,
+      "duration": 6.09,
+      "text": "it's something like the area under the curve."
+    },
+    {
+      "index": 31,
+      "start": 129.86,
+      "end": 135.44,
+      "duration": 5.58,
+      "text": "But average value is another reasonable interpretation."
+    },
+    {
+      "index": 32,
+      "start": 135.44,
+      "end": 140.45,
+      "duration": 5.01,
+      "text": "Namely, if you take equally spaced points here, starting"
+    },
+    {
+      "index": 33,
+      "start": 140.45,
+      "end": 148.52,
+      "duration": 8.07,
+      "text": "with x0, x1, x2, all the way up to xn, which is the left"
+    },
+    {
+      "index": 34,
+      "start": 148.52,
+      "end": 154.32,
+      "duration": 5.8,
+      "text": "point b, and then we have values y1, which = f ( x1),"
+    },
+    {
+      "index": 35,
+      "start": 154.32,
+      "end": 163.04,
+      "duration": 8.72,
+      "text": "y2, which = f ( x2), all the way up to yn, which = f ( xn)."
+    },
+    {
+      "index": 36,
+      "start": 163.04,
+      "end": 166.19,
+      "duration": 3.15,
+      "text": "And again, the spacing here that we're talking"
+    },
+    {
+      "index": 37,
+      "start": 166.19,
+      "end": 170.69,
+      "duration": 4.5,
+      "text": "about is b - a / n."
+    },
+    {
+      "index": 38,
+      "start": 170.69,
+      "end": 172.64,
+      "duration": 1.95,
+      "text": "So remember that spacing, that's going to be the"
+    },
+    {
+      "index": 39,
+      "start": 172.64,
+      "end": 177.1,
+      "duration": 4.46,
+      "text": "connection that we'll draw."
+    },
+    {
+      "index": 40,
+      "start": 177.1,
+      "end": 188.44,
+      "duration": 11.34,
+      "text": "Then the Riemann sum is y1 through yn, the sum of (y1 ..."
+    },
+    {
+      "index": 41,
+      "start": 188.44,
+      "end": 192.08,
+      "duration": 3.64,
+      "text": "yn) delta x."
+    },
+    {
+      "index": 42,
+      "start": 192.08,
+      "end": 195.68,
+      "duration": 3.6,
+      "text": "And that's what tends, as delta x goes to 0, to the"
+    },
+    {
+      "index": 43,
+      "start": 195.68,
+      "end": 203.4,
+      "duration": 7.72,
+      "text": "integral. ."
+    },
+    {
+      "index": 44,
+      "start": 203.4,
+      "end": 207.3,
+      "duration": 3.9,
+      "text": "The only change in point of view if I want to write this"
+    },
+    {
+      "index": 45,
+      "start": 207.3,
+      "end": 212.18,
+      "duration": 4.88,
+      "text": "limiting property, which is right above here, the only"
+    },
+    {
+      "index": 46,
+      "start": 212.18,
+      "end": 216.34,
+      "duration": 4.16,
+      "text": "change between here and here is that I want to divide by"
+    },
+    {
+      "index": 47,
+      "start": 216.34,
+      "end": 218.85,
+      "duration": 2.51,
+      "text": "the length of the interval. b - a."
+    },
+    {
+      "index": 48,
+      "start": 218.85,
+      "end": 222.0,
+      "duration": 3.15,
+      "text": "So I will divide by b - a here."
+    },
+    {
+      "index": 49,
+      "start": 222.0,
+      "end": 228.23,
+      "duration": 6.23,
+      "text": "And divide by b - a over here."
+    },
+    {
+      "index": 50,
+      "start": 228.23,
+      "end": 233.51,
+      "duration": 5.28,
+      "text": "And then I'll just check what this thing actually is."
+    },
+    {
+      "index": 51,
+      "start": 233.51,
+      "end": 237.56,
+      "duration": 4.05,
+      "text": "Delta x / b - a, what is that factor?"
+    },
+    {
+      "index": 52,
+      "start": 237.56,
+      "end": 241.93,
+      "duration": 4.37,
+      "text": "Well, if we look over here to what delta x is, if you divide"
+    },
+    {
+      "index": 53,
+      "start": 241.93,
+      "end": 247.04,
+      "duration": 5.11,
+      "text": "by b - a, it's 1 / n."
+    },
+    {
+      "index": 54,
+      "start": 247.04,
+      "end": 250.21,
+      "duration": 3.17,
+      "text": "So the factor delta x / b - a = 1 / n."
+    },
+    {
+      "index": 55,
+      "start": 250.21,
+      "end": 255.21,
+      "duration": 5.0,
+      "text": "That's what I put over here, the sum of y1 through yn / n."
+    },
+    {
+      "index": 56,
+      "start": 255.21,
+      "end": 258.86,
+      "duration": 3.65,
+      "text": "And as this tends to 0, it's the same"
+    },
+    {
+      "index": 57,
+      "start": 258.86,
+      "end": 262.76,
+      "duration": 3.9,
+      "text": "as n going to infinity."
+    },
+    {
+      "index": 58,
+      "start": 262.76,
+      "end": 265.61,
+      "duration": 2.85,
+      "text": "Those are the same things."
+    },
+    {
+      "index": 59,
+      "start": 265.61,
+      "end": 267.45,
+      "duration": 1.84,
+      "text": "The average value and the integral are"
+    },
+    {
+      "index": 60,
+      "start": 267.45,
+      "end": 268.46,
+      "duration": 1.01,
+      "text": "very closely related."
+    },
+    {
+      "index": 61,
+      "start": 268.46,
+      "end": 272.13,
+      "duration": 3.67,
+      "text": "There's only this difference that we're dividing by the"
+    },
+    {
+      "index": 62,
+      "start": 272.13,
+      "end": 276.44,
+      "duration": 4.31,
+      "text": "length of the interval."
+    },
+    {
+      "index": 63,
+      "start": 276.44,
+      "end": 278.81,
+      "duration": 2.37,
+      "text": "I want to give an example which is an incredibly"
+    },
+    {
+      "index": 64,
+      "start": 278.81,
+      "end": 281.8,
+      "duration": 2.99,
+      "text": "simpleminded one, but it'll come into play later on."
+    },
+    {
+      "index": 65,
+      "start": 281.8,
+      "end": 287.04,
+      "duration": 5.24,
+      "text": "So let's take the example of a constant."
+    },
+    {
+      "index": 66,
+      "start": 287.04,
+      "end": 290.73,
+      "duration": 3.69,
+      "text": "And this is, I hope, will make you slightly less confused"
+    },
+    {
+      "index": 67,
+      "start": 290.73,
+      "end": 292.54,
+      "duration": 1.81,
+      "text": "about what I just wrote."
+    },
+    {
+      "index": 68,
+      "start": 292.54,
+      "end": 295.17,
+      "duration": 2.63,
+      "text": "As well as making you think that this is as simpleminded"
+    },
+    {
+      "index": 69,
+      "start": 295.17,
+      "end": 297.37,
+      "duration": 2.2,
+      "text": "and reasonable as it should be."
+    },
+    {
+      "index": 70,
+      "start": 297.37,
+      "end": 300.31,
+      "duration": 2.94,
+      "text": "If I check what the average value of this constant is,"
+    },
+    {
+      "index": 71,
+      "start": 300.31,
+      "end": 304.68,
+      "duration": 4.37,
+      "text": "it's given by this relatively complicated formula here."
+    },
+    {
+      "index": 72,
+      "start": 304.68,
+      "end": 307.17,
+      "duration": 2.49,
+      "text": "That is, I have to integrate the function c."
+    },
+    {
+      "index": 73,
+      "start": 307.17,
+      "end": 309.57,
+      "duration": 2.4,
+      "text": "Well, it's just the constant c."
+    },
+    {
+      "index": 74,
+      "start": 309.57,
+      "end": 312.32,
+      "duration": 2.75,
+      "text": "And however you do this, as an antiderivative I was thinking"
+    },
+    {
+      "index": 75,
+      "start": 312.32,
+      "end": 314.56,
+      "duration": 2.24,
+      "text": "of it as a rectangle, the answer that you're going to"
+    },
+    {
+      "index": 76,
+      "start": 314.56,
+      "end": 318.31,
+      "duration": 3.75,
+      "text": "get is c here."
+    },
+    {
+      "index": 77,
+      "start": 318.31,
+      "end": 319.49,
+      "duration": 1.18,
+      "text": "So work that out."
+    },
+    {
+      "index": 78,
+      "start": 319.49,
+      "end": 320.73,
+      "duration": 1.24,
+      "text": "The answer is c."
+    },
+    {
+      "index": 79,
+      "start": 320.73,
+      "end": 326.32,
+      "duration": 5.59,
+      "text": "And so the fact that the average of c = c, which had"
+    },
+    {
+      "index": 80,
+      "start": 326.32,
+      "end": 330.28,
+      "duration": 3.96,
+      "text": "better be the case for averages, explains the"
+    },
+    {
+      "index": 81,
+      "start": 330.28,
+      "end": 331.76,
+      "duration": 1.48,
+      "text": "denominator."
+    },
+    {
+      "index": 82,
+      "start": 331.76,
+      "end": 336.69,
+      "duration": 4.93,
+      "text": "Explains the 1 / b - a there."
+    },
+    {
+      "index": 83,
+      "start": 336.69,
+      "end": 339.19,
+      "duration": 2.5,
+      "text": "That's cooked up exactly so that the average of a constant"
+    },
+    {
+      "index": 84,
+      "start": 339.19,
+      "end": 340.23,
+      "duration": 1.04,
+      "text": "is what it's supposed to be."
+    },
+    {
+      "index": 85,
+      "start": 340.23,
+      "end": 342.25,
+      "duration": 2.02,
+      "text": "Otherwise we have the wrong normalizing factor."
+    },
+    {
+      "index": 86,
+      "start": 342.25,
+      "end": 345.45,
+      "duration": 3.2,
+      "text": "We've clearly got a piece of nonsense on our hands."
+    },
+    {
+      "index": 87,
+      "start": 345.45,
+      "end": 351.58,
+      "duration": 6.13,
+      "text": "And incidentally, it also explains the 1 / n in the very"
+    },
+    {
+      "index": 88,
+      "start": 351.58,
+      "end": 353.46,
+      "duration": 1.88,
+      "text": "first formula that I wrote down."
+    },
+    {
+      "index": 89,
+      "start": 353.46,
+      "end": 356.38,
+      "duration": 2.92,
+      "text": "The reason why this is called the average, or one reason why"
+    },
+    {
+      "index": 90,
+      "start": 356.38,
+      "end": 359.4,
+      "duration": 3.02,
+      "text": "it's the right thing, is that if you took the same constant"
+    },
+    {
+      "index": 91,
+      "start": 359.4,
+      "end": 362.02,
+      "duration": 2.62,
+      "text": "c, for y all the way across there n times, if you divide"
+    },
+    {
+      "index": 92,
+      "start": 362.02,
+      "end": 363.93,
+      "duration": 1.91,
+      "text": "it by n, you get back c."
+    },
+    {
+      "index": 93,
+      "start": 363.93,
+      "end": 365.77,
+      "duration": 1.84,
+      "text": "That's what we mean by average value and that's"
+    },
+    {
+      "index": 94,
+      "start": 365.77,
+      "end": 371.37,
+      "duration": 5.6,
+      "text": "why the n is there."
+    },
+    {
+      "index": 95,
+      "start": 371.37,
+      "end": 374.96,
+      "duration": 3.59,
+      "text": "So that was an easy example."
+    },
+    {
+      "index": 96,
+      "start": 374.96,
+      "end": 377.83,
+      "duration": 2.87,
+      "text": "Now none of the examples that we are going to give are going"
+    },
+    {
+      "index": 97,
+      "start": 377.83,
+      "end": 380.0,
+      "duration": 2.17,
+      "text": "to be all that complicated."
+    },
+    {
+      "index": 98,
+      "start": 380.0,
+      "end": 383.46,
+      "duration": 3.46,
+      "text": "But they will get sort of steadily more sophisticated."
+    },
+    {
+      "index": 99,
+      "start": 383.46,
+      "end": 395.93,
+      "duration": 12.47,
+      "text": "The second example is going to be the average height of a"
+    },
+    {
+      "index": 100,
+      "start": 395.93,
+      "end": 407.86,
+      "duration": 11.93,
+      "text": "point on a semicircle."
+    },
+    {
+      "index": 101,
+      "start": 407.86,
+      "end": 412.8,
+      "duration": 4.94,
+      "text": "And maybe I'll draw a picture of the semicircle first here."
+    },
+    {
+      "index": 102,
+      "start": 412.8,
+      "end": 414.93,
+      "duration": 2.13,
+      "text": "And we'll just make it the standard"
+    },
+    {
+      "index": 103,
+      "start": 414.93,
+      "end": 418.84,
+      "duration": 3.91,
+      "text": "circle, the unit circle."
+    },
+    {
+      "index": 104,
+      "start": 418.84,
+      "end": 424.89,
+      "duration": 6.05,
+      "text": "So maybe I should have called it a unit semicircle."
+    },
+    {
+      "index": 105,
+      "start": 424.89,
+      "end": 427.68,
+      "duration": 2.79,
+      "text": "This is the point negative 1, this is the point 1."
+    },
+    {
+      "index": 106,
+      "start": 427.68,
+      "end": 432.69,
+      "duration": 5.01,
+      "text": "And we're picking a point over here and we're going to take"
+    },
+    {
+      "index": 107,
+      "start": 432.69,
+      "end": 437.21,
+      "duration": 4.52,
+      "text": "the typical, or the average, height here."
+    },
+    {
+      "index": 108,
+      "start": 437.21,
+      "end": 438.55,
+      "duration": 1.34,
+      "text": "Integrating with respect to dx."
+    },
+    {
+      "index": 109,
+      "start": 438.55,
+      "end": 441.77,
+      "duration": 3.22,
+      "text": "So sort of continuously with respect to dx."
+    },
+    {
+      "index": 110,
+      "start": 441.77,
+      "end": 445.03,
+      "duration": 3.26,
+      "text": "Well, what is that?"
+    },
+    {
+      "index": 111,
+      "start": 445.03,
+      "end": 449.38,
+      "duration": 4.35,
+      "text": "Well, according to the rule, it's 1 / b - a times - sorry,"
+    },
+    {
+      "index": 112,
+      "start": 449.38,
+      "end": 450.47,
+      "duration": 1.09,
+      "text": "it's up here in the box."
+    },
+    {
+      "index": 113,
+      "start": 450.47,
+      "end": 454.08,
+      "duration": 3.61,
+      "text": "1 / b - a, the interval from a to b, f ( x) dx."
+    },
+    {
+      "index": 114,
+      "start": 454.08,
+      "end": 459.46,
+      "duration": 5.38,
+      "text": "That's 1 / + 1 - (- 1)."
+    },
+    {
+      "index": 115,
+      "start": 459.46,
+      "end": 465.24,
+      "duration": 5.78,
+      "text": "The integral from - 1 to 1, square root of 1 - x ^2 dx."
+    },
+    {
+      "index": 116,
+      "start": 465.24,
+      "end": 472.727,
+      "duration": 7.487,
+      "text": "Right, because the height is y = , this is y = the square"
+    },
+    {
+      "index": 117,
+      "start": 472.727,
+      "end": 477.26,
+      "duration": 4.533,
+      "text": "root of 1 - x^2."
+    },
+    {
+      "index": 118,
+      "start": 477.26,
+      "end": 482.99,
+      "duration": 5.73,
+      "text": "And to evaluate this is not as difficult as it seems. This is"
+    },
+    {
+      "index": 119,
+      "start": 482.99,
+      "end": 486.95,
+      "duration": 3.96,
+      "text": "1/2 times this quantity here, which we can"
+    },
+    {
+      "index": 120,
+      "start": 486.95,
+      "end": 488.94,
+      "duration": 1.99,
+      "text": "interpret as an area."
+    },
+    {
+      "index": 121,
+      "start": 488.94,
+      "end": 492.52,
+      "duration": 3.58,
+      "text": "It's the area of the semicircle."
+    },
+    {
+      "index": 122,
+      "start": 492.52,
+      "end": 500.31,
+      "duration": 7.79,
+      "text": "So this is the area of the semicircle, which we know to"
+    },
+    {
+      "index": 123,
+      "start": 500.31,
+      "end": 502.73,
+      "duration": 2.42,
+      "text": "be half the area of the circle."
+    },
+    {
+      "index": 124,
+      "start": 502.73,
+      "end": 506.7,
+      "duration": 3.97,
+      "text": "So it's pi / 2."
+    },
+    {
+      "index": 125,
+      "start": 506.7,
+      "end": 515.5,
+      "duration": 8.8,
+      "text": "And so the answer, here the average height, is pi/ 4."
+    },
+    {
+      "index": 126,
+      "start": 515.5,
+      "end": 518.67,
+      "duration": 3.17,
+      "text": "Now, later in the class and actually not in this unit,"
+    },
+    {
+      "index": 127,
+      "start": 518.67,
+      "end": 520.66,
+      "duration": 1.99,
+      "text": "we'll actually be able to calculate the"
+    },
+    {
+      "index": 128,
+      "start": 520.66,
+      "end": 522.91,
+      "duration": 2.25,
+      "text": "antiderivative of this."
+    },
+    {
+      "index": 129,
+      "start": 522.91,
+      "end": 524.44,
+      "duration": 1.53,
+      "text": "So in other words, we'll be able to calculate this"
+    },
+    {
+      "index": 130,
+      "start": 524.44,
+      "end": 525.09,
+      "duration": 0.65,
+      "text": "analytically."
+    },
+    {
+      "index": 131,
+      "start": 525.09,
+      "end": 528.98,
+      "duration": 3.89,
+      "text": "For right now we just have the geometric reason why the value"
+    },
+    {
+      "index": 132,
+      "start": 528.98,
+      "end": 531.19,
+      "duration": 2.21,
+      "text": "of this is pi / 2."
+    },
+    {
+      "index": 133,
+      "start": 531.19,
+      "end": 533.62,
+      "duration": 2.43,
+      "text": "And we'll do that in the fourth unit when we do a lot"
+    },
+    {
+      "index": 134,
+      "start": 533.62,
+      "end": 537.14,
+      "duration": 3.52,
+      "text": "of techniques of integration."
+    },
+    {
+      "index": 135,
+      "start": 537.14,
+      "end": 538.29,
+      "duration": 1.15,
+      "text": "So here's an example."
+    },
+    {
+      "index": 136,
+      "start": 538.29,
+      "end": 543.77,
+      "duration": 5.48,
+      "text": "Turns out, the average height of this is pi / 4."
+    },
+    {
+      "index": 137,
+      "start": 543.77,
+      "end": 547.66,
+      "duration": 3.89,
+      "text": "Now, the next example that I want to give introduces a"
+    },
+    {
+      "index": 138,
+      "start": 547.66,
+      "end": 549.44,
+      "duration": 1.78,
+      "text": "little bit of confusion."
+    },
+    {
+      "index": 139,
+      "start": 549.44,
+      "end": 553.75,
+      "duration": 4.31,
+      "text": "And I'm not going to resolve this confusion completely, but"
+    },
+    {
+      "index": 140,
+      "start": 553.75,
+      "end": 555.87,
+      "duration": 2.12,
+      "text": "I'm going to try to get you used to it."
+    },
+    {
+      "index": 141,
+      "start": 555.87,
+      "end": 562.77,
+      "duration": 6.9,
+      "text": "I'm going to take the average height again."
+    },
+    {
+      "index": 142,
+      "start": 562.77,
+      "end": 573.69,
+      "duration": 10.92,
+      "text": "But now, with respect to arc length."
+    },
+    {
+      "index": 143,
+      "start": 573.69,
+      "end": 577.25,
+      "duration": 3.56,
+      "text": "Which is usually denoted theta."
+    },
+    {
+      "index": 144,
+      "start": 577.25,
+      "end": 579.59,
+      "duration": 2.34,
+      "text": "Now, this brings up an extremely"
+    },
+    {
+      "index": 145,
+      "start": 579.59,
+      "end": 583.08,
+      "duration": 3.49,
+      "text": "important feature of averages."
+    },
+    {
+      "index": 146,
+      "start": 583.08,
+      "end": 587.12,
+      "duration": 4.04,
+      "text": "Which is that you have to specify the variable with"
+    },
+    {
+      "index": 147,
+      "start": 587.12,
+      "end": 591.29,
+      "duration": 4.17,
+      "text": "respect to which the average is taking place."
+    },
+    {
+      "index": 148,
+      "start": 591.29,
+      "end": 592.87,
+      "duration": 1.58,
+      "text": "And the answer will be different"
+    },
+    {
+      "index": 149,
+      "start": 592.87,
+      "end": 594.62,
+      "duration": 1.75,
+      "text": "depending on the variable."
+    },
+    {
+      "index": 150,
+      "start": 594.62,
+      "end": 596.06,
+      "duration": 1.44,
+      "text": "So it's not going to be the same."
+    },
+    {
+      "index": 151,
+      "start": 596.06,
+      "end": 598.13,
+      "duration": 2.07,
+      "text": "Wow, can't spell the word length here."
+    },
+    {
+      "index": 152,
+      "start": 598.13,
+      "end": 602.23,
+      "duration": 4.1,
+      "text": "Just like the plural of witches the last time."
+    },
+    {
+      "index": 153,
+      "start": 602.23,
+      "end": 603.15,
+      "duration": 0.92,
+      "text": "We'll work on that."
+    },
+    {
+      "index": 154,
+      "start": 603.15,
+      "end": 610.19,
+      "duration": 7.04,
+      "text": "We'll fix all of our, that's an ancient"
+    },
+    {
+      "index": 155,
+      "start": 610.19,
+      "end": 611.41,
+      "duration": 1.22,
+      "text": "Gaelic word, I think."
+    },
+    {
+      "index": 156,
+      "start": 611.41,
+      "end": 616.56,
+      "duration": 5.15,
+      "text": "Lengh."
+    },
+    {
+      "index": 157,
+      "start": 616.56,
+      "end": 622.19,
+      "duration": 5.63,
+      "text": "So now, let me show you that it's not quite the same here."
+    },
+    {
+      "index": 158,
+      "start": 622.19,
+      "end": 625.83,
+      "duration": 3.64,
+      "text": "It's especially exaggerated if maybe I shift this little"
+    },
+    {
+      "index": 159,
+      "start": 625.83,
+      "end": 630.44,
+      "duration": 4.61,
+      "text": "interval dx over to the right-hand end."
+    },
+    {
+      "index": 160,
+      "start": 630.44,
+      "end": 632.45,
+      "duration": 2.01,
+      "text": "And you can see that the little portion that"
+    },
+    {
+      "index": 161,
+      "start": 632.45,
+      "end": 635.93,
+      "duration": 3.48,
+      "text": "corresponds to it, which is the d theta piece, has a"
+    },
+    {
+      "index": 162,
+      "start": 635.93,
+      "end": 639.13,
+      "duration": 3.2,
+      "text": "different length from the dx piece."
+    },
+    {
+      "index": 163,
+      "start": 639.13,
+      "end": 641.62,
+      "duration": 2.49,
+      "text": "And indeed, as you come down here, these very short"
+    },
+    {
+      "index": 164,
+      "start": 641.62,
+      "end": 644.92,
+      "duration": 3.3,
+      "text": "portions of dx length have much longer"
+    },
+    {
+      "index": 165,
+      "start": 644.92,
+      "end": 647.77,
+      "duration": 2.85,
+      "text": "portions of theta length."
+    },
+    {
+      "index": 166,
+      "start": 647.77,
+      "end": 651.76,
+      "duration": 3.99,
+      "text": "So that the average that we're taking when we do it with"
+    },
+    {
+      "index": 167,
+      "start": 651.76,
+      "end": 656.06,
+      "duration": 4.3,
+      "text": "respect to theta, is going to emphasize the low values more."
+    },
+    {
+      "index": 168,
+      "start": 656.06,
+      "end": 658.09,
+      "duration": 2.03,
+      "text": "They're going to be more exaggerated."
+    },
+    {
+      "index": 169,
+      "start": 658.09,
+      "end": 662.08,
+      "duration": 3.99,
+      "text": "And the average should be lower than the"
+    },
+    {
+      "index": 170,
+      "start": 662.08,
+      "end": 663.03,
+      "duration": 0.95,
+      "text": "average that we got here."
+    },
+    {
+      "index": 171,
+      "start": 663.03,
+      "end": 664.88,
+      "duration": 1.85,
+      "text": "So we should expect a different number."
+    },
+    {
+      "index": 172,
+      "start": 664.88,
+      "end": 666.95,
+      "duration": 2.07,
+      "text": "And it's not going to be pi / 4, it's going to"
+    },
+    {
+      "index": 173,
+      "start": 666.95,
+      "end": 667.85,
+      "duration": 0.9,
+      "text": "be something else."
+    },
+    {
+      "index": 174,
+      "start": 667.85,
+      "end": 672.17,
+      "duration": 4.32,
+      "text": "Whatever it is, it should be smaller than pi / 4."
+    },
+    {
+      "index": 175,
+      "start": 672.17,
+      "end": 674.2,
+      "duration": 2.03,
+      "text": "Now, let's set up the integral."
+    },
+    {
+      "index": 176,
+      "start": 674.2,
+      "end": 677.1,
+      "duration": 2.9,
+      "text": "The integral follows the same rule."
+    },
+    {
+      "index": 177,
+      "start": 677.1,
+      "end": 679.87,
+      "duration": 2.77,
+      "text": "It's just 1 over the length of the interval times the"
+    },
+    {
+      "index": 178,
+      "start": 679.87,
+      "end": 684.39,
+      "duration": 4.52,
+      "text": "integral over the interval of the function."
+    },
+    {
+      "index": 179,
+      "start": 684.39,
+      "end": 687.48,
+      "duration": 3.09,
+      "text": "That's the integral, but now where does theta range?"
+    },
+    {
+      "index": 180,
+      "start": 687.48,
+      "end": 692.43,
+      "duration": 4.95,
+      "text": "This time, theta goes from 0 to pi."
+    },
+    {
+      "index": 181,
+      "start": 692.43,
+      "end": 694.99,
+      "duration": 2.56,
+      "text": "So the integral is from 0 to pi."
+    },
+    {
+      "index": 182,
+      "start": 694.99,
+      "end": 700.14,
+      "duration": 5.15,
+      "text": "And the thing we divide by is pi."
+    },
+    {
+      "index": 183,
+      "start": 700.14,
+      "end": 702.71,
+      "duration": 2.57,
+      "text": "And the integration requires us to know the"
+    },
+    {
+      "index": 184,
+      "start": 702.71,
+      "end": 704.16,
+      "duration": 1.45,
+      "text": "formula for the height."
+    },
+    {
+      "index": 185,
+      "start": 704.16,
+      "end": 707.41,
+      "duration": 3.25,
+      "text": "Which is sin theta."
+    },
+    {
+      "index": 186,
+      "start": 707.41,
+      "end": 708.68,
+      "duration": 1.27,
+      "text": "In terms of theta, of course."
+    },
+    {
+      "index": 187,
+      "start": 708.68,
+      "end": 711.71,
+      "duration": 3.03,
+      "text": "It's the same as square root of - x^2, but it's expressed"
+    },
+    {
+      "index": 188,
+      "start": 711.71,
+      "end": 713.36,
+      "duration": 1.65,
+      "text": "in terms of theta."
+    },
+    {
+      "index": 189,
+      "start": 713.36,
+      "end": 715.2,
+      "duration": 1.84,
+      "text": "So it's this."
+    },
+    {
+      "index": 190,
+      "start": 715.2,
+      "end": 718.34,
+      "duration": 3.14,
+      "text": "And here's our average."
+    },
+    {
+      "index": 191,
+      "start": 718.34,
+      "end": 721.21,
+      "duration": 2.87,
+      "text": "I'll put this up here."
+    },
+    {
+      "index": 192,
+      "start": 721.21,
+      "end": 729.01,
+      "duration": 7.8,
+      "text": "So that's the formula for the height."
+    },
+    {
+      "index": 193,
+      "start": 729.01,
+      "end": 730.81,
+      "duration": 1.8,
+      "text": "So let's work it out."
+    },
+    {
+      "index": 194,
+      "start": 730.81,
+      "end": 733.05,
+      "duration": 2.24,
+      "text": "This one, we have the advantage of being able to"
+    },
+    {
+      "index": 195,
+      "start": 733.05,
+      "end": 736.92,
+      "duration": 3.87,
+      "text": "work out because we know the antiderivative of sin theta."
+    },
+    {
+      "index": 196,
+      "start": 736.92,
+      "end": 745.53,
+      "duration": 8.61,
+      "text": "It happens with this factor of pi, it's - cos theta."
+    },
+    {
+      "index": 197,
+      "start": 745.53,
+      "end": 755.73,
+      "duration": 10.2,
+      "text": "And so, that's - 1 / pi ( cos pi), sorry. (cos pi - cos) 0."
+    },
+    {
+      "index": 198,
+      "start": 755.73,
+      "end": 767.34,
+      "duration": 11.61,
+      "text": "Which is - 1 / pi ( - 2), which is 2 / pi."
+    },
+    {
+      "index": 199,
+      "start": 767.34,
+      "end": 774.84,
+      "duration": 7.5,
+      "text": "And sure enough, if you check it, you'll see that 2 / pi <"
+    },
+    {
+      "index": 200,
+      "start": 774.84,
+      "end": 782.25,
+      "duration": 7.41,
+      "text": "pi / 4, because pi^2 > 8."
+    },
+    {
+      "index": 201,
+      "start": 782.25,
+      "end": 782.98,
+      "duration": 0.73,
+      "text": "Yeah, question."
+    },
+    {
+      "index": 202,
+      "start": 782.98,
+      "end": 786.61,
+      "duration": 3.63,
+      "text": "STUDENT: [INAUDIBLE]"
+    },
+    {
+      "index": 203,
+      "start": 786.61,
+      "end": 789.7,
+      "duration": 3.09,
+      "text": "PROFESSOR: The question is how do I get sin theta."
+    },
+    {
+      "index": 204,
+      "start": 789.7,
+      "end": 796.08,
+      "duration": 6.38,
+      "text": "And the answer is, on this diagram, if theta is over here"
+    },
+    {
+      "index": 205,
+      "start": 796.08,
+      "end": 800.09,
+      "duration": 4.01,
+      "text": "then this height is this, and this is the angle theta, then"
+    },
+    {
+      "index": 206,
+      "start": 800.09,
+      "end": 802.79,
+      "duration": 2.7,
+      "text": "the height is the sine."
+    },
+    {
+      "index": 207,
+      "start": 802.79,
+      "end": 806.6,
+      "duration": 3.81,
+      "text": "OK."
+    },
+    {
+      "index": 208,
+      "start": 806.6,
+      "end": 807.32,
+      "duration": 0.72,
+      "text": "Another question."
+    },
+    {
+      "index": 209,
+      "start": 807.32,
+      "end": 812.16,
+      "duration": 4.84,
+      "text": "STUDENT: [INAUDIBLE]"
+    },
+    {
+      "index": 210,
+      "start": 812.16,
+      "end": 821.35,
+      "duration": 9.19,
+      "text": "PROFESSOR: The question is, what is the first one, the"
+    },
+    {
+      "index": 211,
+      "start": 821.35,
+      "end": 824.49,
+      "duration": 3.14,
+      "text": "first one is an average of height, of a point on a"
+    },
+    {
+      "index": 212,
+      "start": 824.49,
+      "end": 831.31,
+      "duration": 6.82,
+      "text": "semicircle and this one is with respect to x."
+    },
+    {
+      "index": 213,
+      "start": 831.31,
+      "end": 834.29,
+      "duration": 2.98,
+      "text": "So what this reveals is that it's ambiguous to say what the"
+    },
+    {
+      "index": 214,
+      "start": 834.29,
+      "end": 837.28,
+      "duration": 2.99,
+      "text": "average value of something is, unless you've explained what"
+    },
+    {
+      "index": 215,
+      "start": 837.28,
+      "end": 840.2,
+      "duration": 2.92,
+      "text": "the underlying averaging variable is."
+    },
+    {
+      "index": 216,
+      "start": 840.2,
+      "end": 848.14,
+      "duration": 7.94,
+      "text": "STUDENT: [INAUDIBLE]"
+    },
+    {
+      "index": 217,
+      "start": 848.14,
+      "end": 851.95,
+      "duration": 3.81,
+      "text": "PROFESSOR: The next question is how should you interpret"
+    },
+    {
+      "index": 218,
+      "start": 851.95,
+      "end": 853.86,
+      "duration": 1.91,
+      "text": "this value."
+    },
+    {
+      "index": 219,
+      "start": 853.86,
+      "end": 857.25,
+      "duration": 3.39,
+      "text": "That is, what came out of this calculation?"
+    },
+    {
+      "index": 220,
+      "start": 857.25,
+      "end": 862.56,
+      "duration": 5.31,
+      "text": "And the answer is only sort of embedded in"
+    },
+    {
+      "index": 221,
+      "start": 862.56,
+      "end": 866.05,
+      "duration": 3.49,
+      "text": "this calculation itself."
+    },
+    {
+      "index": 222,
+      "start": 866.05,
+      "end": 868.98,
+      "duration": 2.93,
+      "text": "So here's a way of thinking of it which is anticipating our"
+    },
+    {
+      "index": 223,
+      "start": 868.98,
+      "end": 869.73,
+      "duration": 0.75,
+      "text": "next subject."
+    },
+    {
+      "index": 224,
+      "start": 869.73,
+      "end": 871.52,
+      "duration": 1.79,
+      "text": "Which is probability."
+    },
+    {
+      "index": 225,
+      "start": 871.52,
+      "end": 874.95,
+      "duration": 3.43,
+      "text": "Which is, suppose you picked a number at"
+    },
+    {
+      "index": 226,
+      "start": 874.95,
+      "end": 876.66,
+      "duration": 1.71,
+      "text": "random in this interval."
+    },
+    {
+      "index": 227,
+      "start": 876.66,
+      "end": 879.44,
+      "duration": 2.78,
+      "text": "With equal likelihood, one place and another."
+    },
+    {
+      "index": 228,
+      "start": 879.44,
+      "end": 882.08,
+      "duration": 2.64,
+      "text": "And then you saw what height was above that."
+    },
+    {
+      "index": 229,
+      "start": 882.08,
+      "end": 883.97,
+      "duration": 1.89,
+      "text": "That would be the interpretation of this first"
+    },
+    {
+      "index": 230,
+      "start": 883.97,
+      "end": 885.29,
+      "duration": 1.32,
+      "text": "average value."
+    },
+    {
+      "index": 231,
+      "start": 885.29,
+      "end": 887.95,
+      "duration": 2.66,
+      "text": "And the second one is, I picked something at random on"
+    },
+    {
+      "index": 232,
+      "start": 887.95,
+      "end": 890.11,
+      "duration": 2.16,
+      "text": "this circle."
+    },
+    {
+      "index": 233,
+      "start": 890.11,
+      "end": 893.24,
+      "duration": 3.13,
+      "text": "And equally likely, any possible point on this circle"
+    },
+    {
+      "index": 234,
+      "start": 893.24,
+      "end": 894.97,
+      "duration": 1.73,
+      "text": "according to its length."
+    },
+    {
+      "index": 235,
+      "start": 894.97,
+      "end": 898.18,
+      "duration": 3.21,
+      "text": "And then I ask what the height of that point is."
+    },
+    {
+      "index": 236,
+      "start": 898.18,
+      "end": 904.67,
+      "duration": 6.49,
+      "text": "And those are just different things."
+    },
+    {
+      "index": 237,
+      "start": 904.67,
+      "end": 905.46,
+      "duration": 0.79,
+      "text": "Another question."
+    },
+    {
+      "index": 238,
+      "start": 905.46,
+      "end": 909.51,
+      "duration": 4.05,
+      "text": "STUDENT: [INAUDIBLE]"
+    },
+    {
+      "index": 239,
+      "start": 909.51,
+      "end": 912.34,
+      "duration": 2.83,
+      "text": "PROFESSOR: Cos pi, shouldn't it be 0?"
+    },
+    {
+      "index": 240,
+      "start": 912.34,
+      "end": 916.83,
+      "duration": 4.49,
+      "text": "No. cos of, it's - 1."
+    },
+    {
+      "index": 241,
+      "start": 916.83,
+      "end": 919.44,
+      "duration": 2.61,
+      "text": "Cos pi = - 1."
+    },
+    {
+      "index": 242,
+      "start": 919.44,
+      "end": 925.11,
+      "duration": 5.67,
+      "text": "Cosine, sorry."
+    },
+    {
+      "index": 243,
+      "start": 925.11,
+      "end": 929.24,
+      "duration": 4.13,
+      "text": "No, cos 0 = 1. cos pi = - 1."
+    },
+    {
+      "index": 244,
+      "start": 929.24,
+      "end": 930.54,
+      "duration": 1.3,
+      "text": "And so they cancel."
+    },
+    {
+      "index": 245,
+      "start": 930.54,
+      "end": 931.6,
+      "duration": 1.06,
+      "text": "That is, they don't cancel."
+    },
+    {
+      "index": 246,
+      "start": 931.6,
+      "end": 935.88,
+      "duration": 4.28,
+      "text": "It's - 1 - 1, which = - 2."
+    },
+    {
+      "index": 247,
+      "start": 935.88,
+      "end": 938.12,
+      "duration": 2.24,
+      "text": "Key point."
+    },
+    {
+      "index": 248,
+      "start": 938.12,
+      "end": 938.33,
+      "duration": 0.21,
+      "text": "Yeah."
+    },
+    {
+      "index": 249,
+      "start": 938.33,
+      "end": 949.68,
+      "duration": 11.35,
+      "text": "STUDENT: [INAUDIBLE]"
+    },
+    {
+      "index": 250,
+      "start": 949.68,
+      "end": 951.26,
+      "duration": 1.58,
+      "text": "PROFESSOR: All right, let me repeat."
+    },
+    {
+      "index": 251,
+      "start": 951.26,
+      "end": 957.62,
+      "duration": 6.36,
+      "text": "So the question was to repeat the reasoning by which I"
+    },
+    {
+      "index": 252,
+      "start": 957.62,
+      "end": 961.17,
+      "duration": 3.55,
+      "text": "guessed in advance that probably this was going to be"
+    },
+    {
+      "index": 253,
+      "start": 961.17,
+      "end": 964.91,
+      "duration": 3.74,
+      "text": "the relationship between the average value with respect to"
+    },
+    {
+      "index": 254,
+      "start": 964.91,
+      "end": 967.13,
+      "duration": 2.22,
+      "text": "arc length versus the average value with respect to this"
+    },
+    {
+      "index": 255,
+      "start": 967.13,
+      "end": 970.79,
+      "duration": 3.66,
+      "text": "horizontal distance."
+    },
+    {
+      "index": 256,
+      "start": 970.79,
+      "end": 973.11,
+      "duration": 2.32,
+      "text": "And it had to do with the previous way"
+    },
+    {
+      "index": 257,
+      "start": 973.11,
+      "end": 976.98,
+      "duration": 3.87,
+      "text": "this diagram was drawn."
+    },
+    {
+      "index": 258,
+      "start": 976.98,
+      "end": 981.92,
+      "duration": 4.94,
+      "text": "Which is comparing an interval in dx with"
+    },
+    {
+      "index": 259,
+      "start": 981.92,
+      "end": 985.8,
+      "duration": 3.88,
+      "text": "an interval in theta."
+    },
+    {
+      "index": 260,
+      "start": 985.8,
+      "end": 987.78,
+      "duration": 1.98,
+      "text": "A little section in theta."
+    },
+    {
+      "index": 261,
+      "start": 987.78,
+      "end": 992.53,
+      "duration": 4.75,
+      "text": "And when you're near the top, they're nearly this same."
+    },
+    {
+      "index": 262,
+      "start": 992.53,
+      "end": 994.43,
+      "duration": 1.9,
+      "text": "That is, it's more or less balanced."
+    },
+    {
+      "index": 263,
+      "start": 994.43,
+      "end": 996.34,
+      "duration": 1.91,
+      "text": "It's a little curved here, a little different."
+    },
+    {
+      "index": 264,
+      "start": 996.34,
+      "end": 999.01,
+      "duration": 2.67,
+      "text": "But here it becomes very exaggerated."
+    },
+    {
+      "index": 265,
+      "start": 999.01,
+      "end": 1002.39,
+      "duration": 3.38,
+      "text": "The d theta lengths are much longer than the dx lengths."
+    },
+    {
+      "index": 266,
+      "start": 1002.39,
+      "end": 1007.45,
+      "duration": 5.06,
+      "text": "Which means that importance given by the theta of variable"
+    },
+    {
+      "index": 267,
+      "start": 1007.45,
+      "end": 1011.13,
+      "duration": 3.68,
+      "text": "to these parts of the circle is larger,"
+    },
+    {
+      "index": 268,
+      "start": 1011.13,
+      "end": 1012.93,
+      "duration": 1.8,
+      "text": "relative to these parts."
+    },
+    {
+      "index": 269,
+      "start": 1012.93,
+      "end": 1015.83,
+      "duration": 2.9,
+      "text": "Whereas if you look at this section versus this section"
+    },
+    {
+      "index": 270,
+      "start": 1015.83,
+      "end": 1017.72,
+      "duration": 1.89,
+      "text": "for the dx, they give equal weights to"
+    },
+    {
+      "index": 271,
+      "start": 1017.72,
+      "end": 1019.09,
+      "duration": 1.37,
+      "text": "these two equal lengths."
+    },
+    {
+      "index": 272,
+      "start": 1019.09,
+      "end": 1021.32,
+      "duration": 2.23,
+      "text": "But here, with respect to theta, this is relatively"
+    },
+    {
+      "index": 273,
+      "start": 1021.32,
+      "end": 1023.09,
+      "duration": 1.77,
+      "text": "short and this is much larger."
+    },
+    {
+      "index": 274,
+      "start": 1023.09,
+      "end": 1025.96,
+      "duration": 2.87,
+      "text": "So, as I say, the theta variable's emphasizing the"
+    },
+    {
+      "index": 275,
+      "start": 1025.96,
+      "end": 1029.14,
+      "duration": 3.18,
+      "text": "lower parts of the semicircle more."
+    },
+    {
+      "index": 276,
+      "start": 1029.14,
+      "end": 1031.07,
+      "duration": 1.93,
+      "text": "That's because this length is shorter and"
+    },
+    {
+      "index": 277,
+      "start": 1031.07,
+      "end": 1032.34,
+      "duration": 1.27,
+      "text": "this length is longer."
+    },
+    {
+      "index": 278,
+      "start": 1032.34,
+      "end": 1036.13,
+      "duration": 3.79,
+      "text": "Whereas these two are the same."
+    },
+    {
+      "index": 279,
+      "start": 1036.13,
+      "end": 1040.11,
+      "duration": 3.98,
+      "text": "It's a balancing act of the relative weights."
+    },
+    {
+      "index": 280,
+      "start": 1040.11,
+      "end": 1042.29,
+      "duration": 2.18,
+      "text": "I'm going to say that again in a different way,"
+    },
+    {
+      "index": 281,
+      "start": 1042.29,
+      "end": 1045.32,
+      "duration": 3.03,
+      "text": "and maybe this will."
+    },
+    {
+      "index": 282,
+      "start": 1045.32,
+      "end": 1051.81,
+      "duration": 6.49,
+      "text": "The lower part is more important for theta."
+    },
+    {
+      "index": 283,
+      "start": 1051.81,
+      "end": 1052.19,
+      "duration": 0.38,
+      "text": "STUDENT: [INAUDIBLE]"
+    },
+    {
+      "index": 284,
+      "start": 1052.19,
+      "end": 1053.93,
+      "duration": 1.74,
+      "text": "PROFESSOR: So the question is, but shouldn't it have a bigger"
+    },
+    {
+      "index": 285,
+      "start": 1053.93,
+      "end": 1055.92,
+      "duration": 1.99,
+      "text": "value because it's a longer length."
+    },
+    {
+      "index": 286,
+      "start": 1055.92,
+      "end": 1057.62,
+      "duration": 1.7,
+      "text": "Never with averages."
+    },
+    {
+      "index": 287,
+      "start": 1057.62,
+      "end": 1059.54,
+      "duration": 1.92,
+      "text": "Whatever the length is, we're always dividing."
+    },
+    {
+      "index": 288,
+      "start": 1059.54,
+      "end": 1062.76,
+      "duration": 3.22,
+      "text": "We're always compensating by the total."
+    },
+    {
+      "index": 289,
+      "start": 1062.76,
+      "end": 1065.41,
+      "duration": 2.65,
+      "text": "We have the integral from 0 to pi, but we're dividing by pi."
+    },
+    {
+      "index": 290,
+      "start": 1065.41,
+      "end": 1068.06,
+      "duration": 2.65,
+      "text": "Here we had the integral from - 1 to 1, but"
+    },
+    {
+      "index": 291,
+      "start": 1068.06,
+      "end": 1069.76,
+      "duration": 1.7,
+      "text": "we're dividing by 2."
+    },
+    {
+      "index": 292,
+      "start": 1069.76,
+      "end": 1072.22,
+      "duration": 2.46,
+      "text": "So we divide by something different each time."
+    },
+    {
+      "index": 293,
+      "start": 1072.22,
+      "end": 1073.85,
+      "duration": 1.63,
+      "text": "And this is very, very important."
+    },
+    {
+      "index": 294,
+      "start": 1073.85,
+      "end": 1076.55,
+      "duration": 2.7,
+      "text": "It's that the average of a constant is that same constant"
+    },
+    {
+      "index": 295,
+      "start": 1076.55,
+      "end": 1078.07,
+      "duration": 1.52,
+      "text": "regardless of which one we did."
+    },
+    {
+      "index": 296,
+      "start": 1078.07,
+      "end": 1080.93,
+      "duration": 2.86,
+      "text": "So if it were a constant, we would always compensate for"
+    },
+    {
+      "index": 297,
+      "start": 1080.93,
+      "end": 1081.27,
+      "duration": 0.34,
+      "text": "the length."
+    },
+    {
+      "index": 298,
+      "start": 1081.27,
+      "end": 1083.78,
+      "duration": 2.51,
+      "text": "So the length never matters."
+    },
+    {
+      "index": 299,
+      "start": 1083.78,
+      "end": 1089.16,
+      "duration": 5.38,
+      "text": "If it's the integral from 0 to 1,000,000, or 100, let's say,"
+    },
+    {
+      "index": 300,
+      "start": 1089.16,
+      "end": 1092.33,
+      "duration": 3.17,
+      "text": "1/100 cdx, it's just the same."
+    },
+    {
+      "index": 301,
+      "start": 1092.33,
+      "end": 1094.16,
+      "duration": 1.83,
+      "text": "It's always that, it doesn't matter how long it is."
+    },
+    {
+      "index": 302,
+      "start": 1094.16,
+      "end": 1098.05,
+      "duration": 3.89,
+      "text": "Because we compensate."
+    },
+    {
+      "index": 303,
+      "start": 1098.05,
+      "end": 1099.73,
+      "duration": 1.68,
+      "text": "That's really the difference between an integral and an"
+    },
+    {
+      "index": 304,
+      "start": 1099.73,
+      "end": 1104.75,
+      "duration": 5.02,
+      "text": "average, is that we're dividing by the total."
+    },
+    {
+      "index": 305,
+      "start": 1104.75,
+      "end": 1107.56,
+      "duration": 2.81,
+      "text": "Now I want to introduce another notion, which is"
+    },
+    {
+      "index": 306,
+      "start": 1107.56,
+      "end": 1111.5,
+      "duration": 3.94,
+      "text": "actually what's underlying these two examples that I just"
+    },
+    {
+      "index": 307,
+      "start": 1111.5,
+      "end": 1112.06,
+      "duration": 0.56,
+      "text": "wrote down."
+    },
+    {
+      "index": 308,
+      "start": 1112.06,
+      "end": 1116.05,
+      "duration": 3.99,
+      "text": "And this is by far the one which you should emphasize the"
+    },
+    {
+      "index": 309,
+      "start": 1116.05,
+      "end": 1119.47,
+      "duration": 3.42,
+      "text": "most in your thoughts."
+    },
+    {
+      "index": 310,
+      "start": 1119.47,
+      "end": 1125.59,
+      "duration": 6.12,
+      "text": "Because it is much more flexible, and is much more"
+    },
+    {
+      "index": 311,
+      "start": 1125.59,
+      "end": 1130.77,
+      "duration": 5.18,
+      "text": "typical of real life problems. So the idea of a weighted"
+    },
+    {
+      "index": 312,
+      "start": 1130.77,
+      "end": 1133.92,
+      "duration": 3.15,
+      "text": "average is the following."
+    },
+    {
+      "index": 313,
+      "start": 1133.92,
+      "end": 1137.58,
+      "duration": 3.66,
+      "text": "You take the integral, say from a to b, of some function."
+    },
+    {
+      "index": 314,
+      "start": 1137.58,
+      "end": 1142.55,
+      "duration": 4.97,
+      "text": "But now you multiply by a weight."
+    },
+    {
+      "index": 315,
+      "start": 1142.55,
+      "end": 1145.56,
+      "duration": 3.01,
+      "text": "And you have to divide by the total."
+    },
+    {
+      "index": 316,
+      "start": 1145.56,
+      "end": 1147.41,
+      "duration": 1.85,
+      "text": "And what's the total going to be?"
+    },
+    {
+      "index": 317,
+      "start": 1147.41,
+      "end": 1151.82,
+      "duration": 4.41,
+      "text": "It's the integral from a to b of this total weighting that"
+    },
+    {
+      "index": 318,
+      "start": 1151.82,
+      "end": 1157.19,
+      "duration": 5.37,
+      "text": "we have. Now, why is this the correct notion?"
+    },
+    {
+      "index": 319,
+      "start": 1157.19,
+      "end": 1160.42,
+      "duration": 3.23,
+      "text": "I'm going to explain it to you in two ways."
+    },
+    {
+      "index": 320,
+      "start": 1160.42,
+      "end": 1164.99,
+      "duration": 4.57,
+      "text": "The first is this very simpleminded thing that I"
+    },
+    {
+      "index": 321,
+      "start": 1164.99,
+      "end": 1170.48,
+      "duration": 5.49,
+      "text": "wrote on the board there, with the constants."
+    },
+    {
+      "index": 322,
+      "start": 1170.48,
+      "end": 1178.48,
+      "duration": 8.0,
+      "text": "What we want is the average value of c to be c."
+    },
+    {
+      "index": 323,
+      "start": 1178.48,
+      "end": 1180.82,
+      "duration": 2.34,
+      "text": "Otherwise this makes no sense as an average."
+    },
+    {
+      "index": 324,
+      "start": 1180.82,
+      "end": 1183.07,
+      "duration": 2.25,
+      "text": "Now, let's just look at this definition here."
+    },
+    {
+      "index": 325,
+      "start": 1183.07,
+      "end": 1184.66,
+      "duration": 1.59,
+      "text": "And see that that's correct."
+    },
+    {
+      "index": 326,
+      "start": 1184.66,
+      "end": 1190.9,
+      "duration": 6.24,
+      "text": "If you integrate c, from a to b, w ( x) dx, and you divide"
+    },
+    {
+      "index": 327,
+      "start": 1190.9,
+      "end": 1196.03,
+      "duration": 5.13,
+      "text": "by the integral from a to b, w ( x) dx, not surprisingly, the"
+    },
+    {
+      "index": 328,
+      "start": 1196.03,
+      "end": 1197.02,
+      "duration": 0.99,
+      "text": "c factors out."
+    },
+    {
+      "index": 329,
+      "start": 1197.02,
+      "end": 1199.01,
+      "duration": 1.99,
+      "text": "It's a constant."
+    },
+    {
+      "index": 330,
+      "start": 1199.01,
+      "end": 1203.43,
+      "duration": 4.42,
+      "text": "So this is c times the integral a to b, w (x), dx,"
+    },
+    {
+      "index": 331,
+      "start": 1203.43,
+      "end": 1205.38,
+      "duration": 1.95,
+      "text": "divided by the same thing."
+    },
+    {
+      "index": 332,
+      "start": 1205.38,
+      "end": 1208.39,
+      "duration": 3.01,
+      "text": "And that's why we picked it."
+    },
+    {
+      "index": 333,
+      "start": 1208.39,
+      "end": 1210.17,
+      "duration": 1.78,
+      "text": "We picked it so that these things would cancel."
+    },
+    {
+      "index": 334,
+      "start": 1210.17,
+      "end": 1214.66,
+      "duration": 4.49,
+      "text": "And this would give c."
+    },
+    {
+      "index": 335,
+      "start": 1214.66,
+      "end": 1217.91,
+      "duration": 3.25,
+      "text": "So in the previous case, this property explains the"
+    },
+    {
+      "index": 336,
+      "start": 1217.91,
+      "end": 1220.14,
+      "duration": 2.23,
+      "text": "denominator."
+    },
+    {
+      "index": 337,
+      "start": 1220.14,
+      "end": 1229.76,
+      "duration": 9.62,
+      "text": "And again over here, it explains the denominator."
+    },
+    {
+      "index": 338,
+      "start": 1229.76,
+      "end": 1232.51,
+      "duration": 2.75,
+      "text": "And let me just give you one more explanation."
+    },
+    {
+      "index": 339,
+      "start": 1232.51,
+      "end": 1238.34,
+      "duration": 5.83,
+      "text": "Which is maybe a real life pretend real life example."
+    },
+    {
+      "index": 340,
+      "start": 1238.34,
+      "end": 1243.06,
+      "duration": 4.72,
+      "text": "You have a stock which you bought for $10 one year."
+    },
+    {
+      "index": 341,
+      "start": 1243.06,
+      "end": 1246.74,
+      "duration": 3.68,
+      "text": "And then six months later you brought some more for $20."
+    },
+    {
+      "index": 342,
+      "start": 1246.74,
+      "end": 1250.36,
+      "duration": 3.62,
+      "text": "And then you bought some more for $30."
+    },
+    {
+      "index": 343,
+      "start": 1250.36,
+      "end": 1253.81,
+      "duration": 3.45,
+      "text": "Now, what's the average price of your stock?"
+    },
+    {
+      "index": 344,
+      "start": 1253.81,
+      "end": 1258.37,
+      "duration": 4.56,
+      "text": "Well, it depends on how many shares you bought."
+    },
+    {
+      "index": 345,
+      "start": 1258.37,
+      "end": 1261.29,
+      "duration": 2.92,
+      "text": "If you bought this many shares the first time, and this many"
+    },
+    {
+      "index": 346,
+      "start": 1261.29,
+      "end": 1263.76,
+      "duration": 2.47,
+      "text": "shares the second time, and this many shares the third"
+    },
+    {
+      "index": 347,
+      "start": 1263.76,
+      "end": 1267.23,
+      "duration": 3.47,
+      "text": "time, this is the total amount that you spent."
+    },
+    {
+      "index": 348,
+      "start": 1267.23,
+      "end": 1274.09,
+      "duration": 6.86,
+      "text": "And the average price is the total price divided by the"
+    },
+    {
+      "index": 349,
+      "start": 1274.09,
+      "end": 1277.12,
+      "duration": 3.03,
+      "text": "total number of shares."
+    },
+    {
+      "index": 350,
+      "start": 1277.12,
+      "end": 1282.56,
+      "duration": 5.44,
+      "text": "And this is the discrete analog of this continuous"
+    },
+    {
+      "index": 351,
+      "start": 1282.56,
+      "end": 1284.07,
+      "duration": 1.51,
+      "text": "averaging process here."
+    },
+    {
+      "index": 352,
+      "start": 1284.07,
+      "end": 1288.26,
+      "duration": 4.19,
+      "text": "The function f now, so I use w for weight, the function f now"
+    },
+    {
+      "index": 353,
+      "start": 1288.26,
+      "end": 1291.15,
+      "duration": 2.89,
+      "text": "is the function whose values are 10, 20 and 30."
+    },
+    {
+      "index": 354,
+      "start": 1291.15,
+      "end": 1295.8,
+      "duration": 4.65,
+      "text": "And the weightings are the relative importance of the"
+    },
+    {
+      "index": 355,
+      "start": 1295.8,
+      "end": 1302.03,
+      "duration": 6.23,
+      "text": "different purchases."
+    },
+    {
+      "index": 356,
+      "start": 1302.03,
+      "end": 1311.6,
+      "duration": 9.57,
+      "text": "So again, these wi's are weights."
+    },
+    {
+      "index": 357,
+      "start": 1311.6,
+      "end": 1312.71,
+      "duration": 1.11,
+      "text": "There was another question."
+    },
+    {
+      "index": 358,
+      "start": 1312.71,
+      "end": 1314.4,
+      "duration": 1.69,
+      "text": "Out in the audience, at some point."
+    },
+    {
+      "index": 359,
+      "start": 1314.4,
+      "end": 1315.3,
+      "duration": 0.9,
+      "text": "Over here, yes."
+    },
+    {
+      "index": 360,
+      "start": 1315.3,
+      "end": 1324.52,
+      "duration": 9.22,
+      "text": "STUDENT: [INAUDIBLE]"
+    },
+    {
+      "index": 361,
+      "start": 1324.52,
+      "end": 1326.92,
+      "duration": 2.4,
+      "text": "PROFESSOR: Very, very good point."
+    },
+    {
+      "index": 362,
+      "start": 1326.92,
+      "end": 1335.71,
+      "duration": 8.79,
+      "text": "So in this numerator here, the statement is, in this example,"
+    },
+    {
+      "index": 363,
+      "start": 1335.71,
+      "end": 1337.02,
+      "duration": 1.31,
+      "text": "we factored out c."
+    },
+    {
+      "index": 364,
+      "start": 1337.02,
+      "end": 1340.71,
+      "duration": 3.69,
+      "text": "But here we cannot factor out f ( x)."
+    },
+    {
+      "index": 365,
+      "start": 1340.71,
+      "end": 1343.45,
+      "duration": 2.74,
+      "text": "That's extremely important and that is the whole point."
+    },
+    {
+      "index": 366,
+      "start": 1343.45,
+      "end": 1345.95,
+      "duration": 2.5,
+      "text": "So, in other words, the weighted average is very"
+    },
+    {
+      "index": 367,
+      "start": 1345.95,
+      "end": 1349.82,
+      "duration": 3.87,
+      "text": "interesting you have to do two different integrals to figure"
+    },
+    {
+      "index": 368,
+      "start": 1349.82,
+      "end": 1352.38,
+      "duration": 2.56,
+      "text": "it out in general."
+    },
+    {
+      "index": 369,
+      "start": 1352.38,
+      "end": 1354.12,
+      "duration": 1.74,
+      "text": "When it happens that this is c, it's an"
+    },
+    {
+      "index": 370,
+      "start": 1354.12,
+      "end": 1355.43,
+      "duration": 1.31,
+      "text": "extremely boring integral."
+    },
+    {
+      "index": 371,
+      "start": 1355.43,
+      "end": 1357.62,
+      "duration": 2.19,
+      "text": "Which in fact because, it's an average, you don't even have"
+    },
+    {
+      "index": 372,
+      "start": 1357.62,
+      "end": 1358.93,
+      "duration": 1.31,
+      "text": "to calculate at all."
+    },
+    {
+      "index": 373,
+      "start": 1358.93,
+      "end": 1361.49,
+      "duration": 2.56,
+      "text": "Factor it out and cancel these things and never bother to"
+    },
+    {
+      "index": 374,
+      "start": 1361.49,
+      "end": 1363.53,
+      "duration": 2.04,
+      "text": "calculate these two numbers."
+    },
+    {
+      "index": 375,
+      "start": 1363.53,
+      "end": 1366.58,
+      "duration": 3.05,
+      "text": "So these massive numbers just cancel."
+    },
+    {
+      "index": 376,
+      "start": 1366.58,
+      "end": 1368.975,
+      "duration": 2.395,
+      "text": "So it's a very special property of a constant, that"
+    },
+    {
+      "index": 377,
+      "start": 1368.975,
+      "end": 1375.65,
+      "duration": 6.675,
+      "text": "it factors out."
+    },
+    {
+      "index": 378,
+      "start": 1375.65,
+      "end": 1380.1,
+      "duration": 4.45,
+      "text": "That was our first discussion, and now with this example I'm"
+    },
+    {
+      "index": 379,
+      "start": 1380.1,
+      "end": 1382.9,
+      "duration": 2.8,
+      "text": "going to go back to the heating up of the witches'"
+    },
+    {
+      "index": 380,
+      "start": 1382.9,
+      "end": 1387.6,
+      "duration": 4.7,
+      "text": "cauldron and we'll use average value to illustrate the"
+    },
+    {
+      "index": 381,
+      "start": 1387.6,
+      "end": 1399.7,
+      "duration": 12.1,
+      "text": "integral that we get in that context as well."
+    },
+    {
+      "index": 382,
+      "start": 1399.7,
+      "end": 1400.91,
+      "duration": 1.21,
+      "text": "I remind you, let's see."
+    },
+    {
+      "index": 383,
+      "start": 1400.91,
+      "end": 1405.48,
+      "duration": 4.57,
+      "text": "The situation with the witches' cauldron was this."
+    },
+    {
+      "index": 384,
+      "start": 1405.48,
+      "end": 1420.26,
+      "duration": 14.78,
+      "text": "The first important thing is that there were, so this is"
+    },
+    {
+      "index": 385,
+      "start": 1420.26,
+      "end": 1422.77,
+      "duration": 2.51,
+      "text": "the big cauldron here."
+    },
+    {
+      "index": 386,
+      "start": 1422.77,
+      "end": 1427.21,
+      "duration": 4.44,
+      "text": "This is the one whose height is 1 meter and"
+    },
+    {
+      "index": 387,
+      "start": 1427.21,
+      "end": 1433.19,
+      "duration": 5.98,
+      "text": "whose width is 2 meters."
+    },
+    {
+      "index": 388,
+      "start": 1433.19,
+      "end": 1436.54,
+      "duration": 3.35,
+      "text": "And it's a parabola of revolution here."
+    },
+    {
+      "index": 389,
+      "start": 1436.54,
+      "end": 1446.5,
+      "duration": 9.96,
+      "text": "And it had about approximately 1600 liters in it."
+    },
+    {
+      "index": 390,
+      "start": 1446.5,
+      "end": 1454.64,
+      "duration": 8.14,
+      "text": "And this curve was y = x^2."
+    },
+    {
+      "index": 391,
+      "start": 1454.64,
+      "end": 1458.56,
+      "duration": 3.92,
+      "text": "And the situation that I described at the end of last"
+    },
+    {
+      "index": 392,
+      "start": 1458.56,
+      "end": 1465.21,
+      "duration": 6.65,
+      "text": "time was that the initial temperature was"
+    },
+    {
+      "index": 393,
+      "start": 1465.21,
+      "end": 1468.56,
+      "duration": 3.35,
+      "text": "T = 0 degrees Celsius."
+    },
+    {
+      "index": 394,
+      "start": 1468.56,
+      "end": 1475.32,
+      "duration": 6.76,
+      "text": "And the final temperature, instead of being a constant"
+    },
+    {
+      "index": 395,
+      "start": 1475.32,
+      "end": 1481.29,
+      "duration": 5.97,
+      "text": "temperature, we were heating this guy up from the bottom."
+    },
+    {
+      "index": 396,
+      "start": 1481.29,
+      "end": 1488.34,
+      "duration": 7.05,
+      "text": "And it was hotter on the bottom than on the top."
+    },
+    {
+      "index": 397,
+      "start": 1488.34,
+      "end": 1494.87,
+      "duration": 6.53,
+      "text": "And the final temperature was given by the formula T = 100 -"
+    },
+    {
+      "index": 398,
+      "start": 1494.87,
+      "end": 1497.88,
+      "duration": 3.01,
+      "text": "30 times the height y."
+    },
+    {
+      "index": 399,
+      "start": 1497.88,
+      "end": 1504.09,
+      "duration": 6.21,
+      "text": "So at y = 0, at the bottom, it's 100."
+    },
+    {
+      "index": 400,
+      "start": 1504.09,
+      "end": 1510.73,
+      "duration": 6.64,
+      "text": "And at the top, T = 70 degrees."
+    },
+    {
+      "index": 401,
+      "start": 1510.73,
+      "end": 1515.42,
+      "duration": 4.69,
+      "text": "OK, so this is the final configuration for the"
+    },
+    {
+      "index": 402,
+      "start": 1515.42,
+      "end": 1516.02,
+      "duration": 0.6,
+      "text": "temperature."
+    },
+    {
+      "index": 403,
+      "start": 1516.02,
+      "end": 1533.1,
+      "duration": 17.08,
+      "text": "And the question was how much energy do we need."
+    },
+    {
+      "index": 404,
+      "start": 1533.1,
+      "end": 1536.67,
+      "duration": 3.57,
+      "text": "So, the first observation here, and this is the reason"
+    },
+    {
+      "index": 405,
+      "start": 1536.67,
+      "end": 1542.63,
+      "duration": 5.96,
+      "text": "for giving this example, is that it's important to realize"
+    },
+    {
+      "index": 406,
+      "start": 1542.63,
+      "end": 1554.7,
+      "duration": 12.07,
+      "text": "that you want to use the method of disks in this case."
+    },
+    {
+      "index": 407,
+      "start": 1554.7,
+      "end": 1558.04,
+      "duration": 3.34,
+      "text": "The reason, so it doesn't have to do with, you shouldn't"
+    },
+    {
+      "index": 408,
+      "start": 1558.04,
+      "end": 1562.06,
+      "duration": 4.02,
+      "text": "think of the disks first. But what you should think of is"
+    },
+    {
+      "index": 409,
+      "start": 1562.06,
+      "end": 1565.01,
+      "duration": 2.95,
+      "text": "the horizontal."
+    },
+    {
+      "index": 410,
+      "start": 1565.01,
+      "end": 1569.78,
+      "duration": 4.77,
+      "text": "We must use horizontals because T is constant on"
+    },
+    {
+      "index": 411,
+      "start": 1569.78,
+      "end": 1570.84,
+      "duration": 1.06,
+      "text": "horizontals."
+    },
+    {
+      "index": 412,
+      "start": 1570.84,
+      "end": 1572.74,
+      "duration": 1.9,
+      "text": "It's not constant on verticals."
+    },
+    {
+      "index": 413,
+      "start": 1572.74,
+      "end": 1576.13,
+      "duration": 3.39,
+      "text": "If we set things up with shells, as we did last time,"
+    },
+    {
+      "index": 414,
+      "start": 1576.13,
+      "end": 1578.98,
+      "duration": 2.85,
+      "text": "to compute the volume of this, then T will"
+    },
+    {
+      "index": 415,
+      "start": 1578.98,
+      "end": 1581.76,
+      "duration": 2.78,
+      "text": "vary along the shell."
+    },
+    {
+      "index": 416,
+      "start": 1581.76,
+      "end": 1584.62,
+      "duration": 2.86,
+      "text": "And we will still have an averaging problem, an integral"
+    },
+    {
+      "index": 417,
+      "start": 1584.62,
+      "end": 1586.73,
+      "duration": 2.11,
+      "text": "problem along the vertical portion."
+    },
+    {
+      "index": 418,
+      "start": 1586.73,
+      "end": 1589.46,
+      "duration": 2.73,
+      "text": "But if we do it this way, T is constant on"
+    },
+    {
+      "index": 419,
+      "start": 1589.46,
+      "end": 1591.77,
+      "duration": 2.31,
+      "text": "this whole level here."
+    },
+    {
+      "index": 420,
+      "start": 1591.77,
+      "end": 1594.4,
+      "duration": 2.63,
+      "text": "And so there's no more calculus involved in"
+    },
+    {
+      "index": 421,
+      "start": 1594.4,
+      "end": 1596.14,
+      "duration": 1.74,
+      "text": "calculating what the contribution is"
+    },
+    {
+      "index": 422,
+      "start": 1596.14,
+      "end": 1599.84,
+      "duration": 3.7,
+      "text": "of any given level."
+    },
+    {
+      "index": 423,
+      "start": 1599.84,
+      "end": 1609.62,
+      "duration": 9.78,
+      "text": "So t is constant on horizontals."
+    },
+    {
+      "index": 424,
+      "start": 1609.62,
+      "end": 1612.75,
+      "duration": 3.13,
+      "text": "Actually, in disguise, this is that same trick"
+    },
+    {
+      "index": 425,
+      "start": 1612.75,
+      "end": 1613.37,
+      "duration": 0.62,
+      "text": "that we have here."
+    },
+    {
+      "index": 426,
+      "start": 1613.37,
+      "end": 1615.68,
+      "duration": 2.31,
+      "text": "We can factor constants out of integrals."
+    },
+    {
+      "index": 427,
+      "start": 1615.68,
+      "end": 1617.58,
+      "duration": 1.9,
+      "text": "You could view it as an integral, but the point is"
+    },
+    {
+      "index": 428,
+      "start": 1617.58,
+      "end": 1623.48,
+      "duration": 5.9,
+      "text": "that it's more elementary than that."
+    },
+    {
+      "index": 429,
+      "start": 1623.48,
+      "end": 1626.43,
+      "duration": 2.95,
+      "text": "Now I have to set it up for you."
+    },
+    {
+      "index": 430,
+      "start": 1626.43,
+      "end": 1629.23,
+      "duration": 2.8,
+      "text": "And in order to do that, I need to remember what the"
+    },
+    {
+      "index": 431,
+      "start": 1629.23,
+      "end": 1630.47,
+      "duration": 1.24,
+      "text": "equation is."
+    },
+    {
+      "index": 432,
+      "start": 1630.47,
+      "end": 1632.96,
+      "duration": 2.49,
+      "text": "Which is y = x ^2."
+    },
+    {
+      "index": 433,
+      "start": 1632.96,
+      "end": 1639.03,
+      "duration": 6.07,
+      "text": "And the formula for the total amount of energy is going to"
+    },
+    {
+      "index": 434,
+      "start": 1639.03,
+      "end": 1645.0,
+      "duration": 5.97,
+      "text": "be volume times the number of degrees."
+    },
+    {
+      "index": 435,
+      "start": 1645.0,
+      "end": 1651.48,
+      "duration": 6.48,
+      "text": "That's going to be equal to the energy that we need here."
+    },
+    {
+      "index": 436,
+      "start": 1651.48,
+      "end": 1653.25,
+      "duration": 1.77,
+      "text": "And so let's add it up."
+    },
+    {
+      "index": 437,
+      "start": 1653.25,
+      "end": 1658.54,
+      "duration": 5.29,
+      "text": "It's the integral from 0 to 1, and this is with respect to y."
+    },
+    {
+      "index": 438,
+      "start": 1658.54,
+      "end": 1661.3,
+      "duration": 2.76,
+      "text": "So the y level goes from 0 to 1."
+    },
+    {
+      "index": 439,
+      "start": 1661.3,
+      "end": 1667.31,
+      "duration": 6.01,
+      "text": "This top level's y = 1, this bottom level's y = 0."
+    },
+    {
+      "index": 440,
+      "start": 1667.31,
+      "end": 1675.26,
+      "duration": 7.95,
+      "text": "And the disk that we get, this is the point (x, y) here, is"
+    },
+    {
+      "index": 441,
+      "start": 1675.26,
+      "end": 1676.22,
+      "duration": 0.96,
+      "text": "rotated around."
+    },
+    {
+      "index": 442,
+      "start": 1676.22,
+      "end": 1681.23,
+      "duration": 5.01,
+      "text": "And its radius is x."
+    },
+    {
+      "index": 443,
+      "start": 1681.23,
+      "end": 1685.5,
+      "duration": 4.27,
+      "text": "So the thickness is dy, and the area of"
+    },
+    {
+      "index": 444,
+      "start": 1685.5,
+      "end": 1689.48,
+      "duration": 3.98,
+      "text": "the disk is pi x^2."
+    },
+    {
+      "index": 445,
+      "start": 1689.48,
+      "end": 1693.83,
+      "duration": 4.35,
+      "text": "And the thing that we're averaging is T. Well, we're"
+    },
+    {
+      "index": 446,
+      "start": 1693.83,
+      "end": 1696.01,
+      "duration": 2.18,
+      "text": "not yet averaging, we're just integrating it."
+    },
+    {
+      "index": 447,
+      "start": 1696.01,
+      "end": 1704.17,
+      "duration": 8.16,
+      "text": "We're just adding up the total."
+    },
+    {
+      "index": 448,
+      "start": 1704.17,
+      "end": 1709.08,
+      "duration": 4.91,
+      "text": "Now I'm just going to plug in the various values for this."
+    },
+    {
+      "index": 449,
+      "start": 1709.08,
+      "end": 1716.58,
+      "duration": 7.5,
+      "text": "And what I'm going to get is T, again, = 100 - 30y."
+    },
+    {
+      "index": 450,
+      "start": 1716.58,
+      "end": 1720.96,
+      "duration": 4.38,
+      "text": "And this radius is measured up to this very end."
+    },
+    {
+      "index": 451,
+      "start": 1720.96,
+      "end": 1722.44,
+      "duration": 1.48,
+      "text": "So x^2 = y."
+    },
+    {
+      "index": 452,
+      "start": 1722.44,
+      "end": 1725.41,
+      "duration": 2.97,
+      "text": "So this is pi y dy."
+    },
+    {
+      "index": 453,
+      "start": 1725.41,
+      "end": 1727.8,
+      "duration": 2.39,
+      "text": "And this is the integral that we'll be able to evaluate."
+    },
+    {
+      "index": 454,
+      "start": 1727.8,
+      "end": 1728.66,
+      "duration": 0.86,
+      "text": "Yeah, question."
+    },
+    {
+      "index": 455,
+      "start": 1728.66,
+      "end": 1730.25,
+      "duration": 1.59,
+      "text": "STUDENT: [INAUDIBLE]"
+    },
+    {
+      "index": 456,
+      "start": 1730.25,
+      "end": 1740.07,
+      "duration": 9.82,
+      "text": "PROFESSOR: All right."
+    },
+    {
+      "index": 457,
+      "start": 1740.07,
+      "end": 1745.71,
+      "duration": 5.64,
+      "text": "Well, let's carry this out."
+    },
+    {
+      "index": 458,
+      "start": 1745.71,
+      "end": 1749.16,
+      "duration": 3.45,
+      "text": "Let's finish off the calculation here."
+    },
+    {
+      "index": 459,
+      "start": 1749.16,
+      "end": 1750.23,
+      "duration": 1.07,
+      "text": "Let's see."
+    },
+    {
+      "index": 460,
+      "start": 1750.23,
+      "end": 1756.38,
+      "duration": 6.15,
+      "text": "This is equal to, what does it equal to."
+    },
+    {
+      "index": 461,
+      "start": 1756.38,
+      "end": 1759.58,
+      "duration": 3.2,
+      "text": "Well, I'll put it over here."
+    },
+    {
+      "index": 462,
+      "start": 1759.58,
+      "end": 1767.78,
+      "duration": 8.2,
+      "text": "It's equal to 50 pi y ^2 - right, because this is 100 pi"
+    },
+    {
+      "index": 463,
+      "start": 1767.78,
+      "end": 1776.95,
+      "duration": 9.17,
+      "text": "y, and then there's a 30, this is 100 pi y - 30 pi y ^2, and"
+    },
+    {
+      "index": 464,
+      "start": 1776.95,
+      "end": 1778.78,
+      "duration": 1.83,
+      "text": "I have to take the antiderivative of that."
+    },
+    {
+      "index": 465,
+      "start": 1778.78,
+      "end": 1785.45,
+      "duration": 6.67,
+      "text": "So I get 50 pi y ^2, and I get 10 pi y ^3."
+    },
+    {
+      "index": 466,
+      "start": 1785.45,
+      "end": 1788.12,
+      "duration": 2.67,
+      "text": "Evaluate it at 0 and 1."
+    },
+    {
+      "index": 467,
+      "start": 1788.12,
+      "end": 1797.93,
+      "duration": 9.81,
+      "text": "And that is 40 pi."
+    },
+    {
+      "index": 468,
+      "start": 1797.93,
+      "end": 1805.14,
+      "duration": 7.21,
+      "text": "Now, I spent a tremendous amount of time last time"
+    },
+    {
+      "index": 469,
+      "start": 1805.14,
+      "end": 1807.9,
+      "duration": 2.76,
+      "text": "focusing on units."
+    },
+    {
+      "index": 470,
+      "start": 1807.9,
+      "end": 1810.71,
+      "duration": 2.81,
+      "text": "Because I want to tell you how to get a realistic"
+    },
+    {
+      "index": 471,
+      "start": 1810.71,
+      "end": 1812.08,
+      "duration": 1.37,
+      "text": "number out of this."
+    },
+    {
+      "index": 472,
+      "start": 1812.08,
+      "end": 1816.515,
+      "duration": 4.435,
+      "text": "And there's a subtle point here that I pointed out last"
+    },
+    {
+      "index": 473,
+      "start": 1816.515,
+      "end": 1818.65,
+      "duration": 2.135,
+      "text": "time that had to do with changing meters to"
+    },
+    {
+      "index": 474,
+      "start": 1818.65,
+      "end": 1819.16,
+      "duration": 0.51,
+      "text": "centimeters."
+    },
+    {
+      "index": 475,
+      "start": 1819.16,
+      "end": 1822.57,
+      "duration": 3.41,
+      "text": "I claim that I've treated those correctly."
+    },
+    {
+      "index": 476,
+      "start": 1822.57,
+      "end": 1828.1,
+      "duration": 5.53,
+      "text": "So, what we have here is that the answer is in degrees, that"
+    },
+    {
+      "index": 477,
+      "start": 1828.1,
+      "end": 1834.8,
+      "duration": 6.7,
+      "text": "is Celsius, times cubic meters."
+    },
+    {
+      "index": 478,
+      "start": 1834.8,
+      "end": 1836.57,
+      "duration": 1.77,
+      "text": "These are the correct units."
+    },
+    {
+      "index": 479,
+      "start": 1836.57,
+      "end": 1843.76,
+      "duration": 7.19,
+      "text": "And now, I can translate this into Celsius is spelled with a"
+    },
+    {
+      "index": 480,
+      "start": 1843.76,
+      "end": 1844.896,
+      "duration": 1.136,
+      "text": "C. That's interesting."
+    },
+    {
+      "index": 481,
+      "start": 1844.896,
+      "end": 1846.63,
+      "duration": 1.734,
+      "text": "Celsius."
+    },
+    {
+      "index": 482,
+      "start": 1846.63,
+      "end": 1849.84,
+      "duration": 3.21,
+      "text": "I can translate this into units that you're more"
+    },
+    {
+      "index": 483,
+      "start": 1849.84,
+      "end": 1850.85,
+      "duration": 1.01,
+      "text": "familiar with."
+    },
+    {
+      "index": 484,
+      "start": 1850.85,
+      "end": 1858.24,
+      "duration": 7.39,
+      "text": "So let's try 40 pi deg * m ^3, and then do"
+    },
+    {
+      "index": 485,
+      "start": 1858.24,
+      "end": 1859.71,
+      "duration": 1.47,
+      "text": "the conversion factors."
+    },
+    {
+      "index": 486,
+      "start": 1859.71,
+      "end": 1867.31,
+      "duration": 7.6,
+      "text": "First of all there's one calorie per degree times a"
+    },
+    {
+      "index": 487,
+      "start": 1867.31,
+      "end": 1868.84,
+      "duration": 1.53,
+      "text": "milliliter."
+    },
+    {
+      "index": 488,
+      "start": 1868.84,
+      "end": 1871.15,
+      "duration": 2.31,
+      "text": "That's one conversion."
+    },
+    {
+      "index": 489,
+      "start": 1871.15,
+      "end": 1874.6,
+      "duration": 3.45,
+      "text": "And then let's see."
+    },
+    {
+      "index": 490,
+      "start": 1874.6,
+      "end": 1877.15,
+      "duration": 2.55,
+      "text": "I'm going to have to translate from centimeters so I have"
+    },
+    {
+      "index": 491,
+      "start": 1877.15,
+      "end": 1885.11,
+      "duration": 7.96,
+      "text": "here (100 cm / m)^ 3."
+    },
+    {
+      "index": 492,
+      "start": 1885.11,
+      "end": 1886.29,
+      "duration": 1.18,
+      "text": "So these are the two conversion"
+    },
+    {
+      "index": 493,
+      "start": 1886.29,
+      "end": 1890.55,
+      "duration": 4.26,
+      "text": "factors that I need."
+    },
+    {
+      "index": 494,
+      "start": 1890.55,
+      "end": 1898.69,
+      "duration": 8.14,
+      "text": "And so, I get 40 pi ( 10 ^ 6), that's 100^3."
+    },
+    {
+      "index": 495,
+      "start": 1898.69,
+      "end": 1906.55,
+      "duration": 7.86,
+      "text": "And this is in calories."
+    },
+    {
+      "index": 496,
+      "start": 1906.55,
+      "end": 1908.47,
+      "duration": 1.92,
+      "text": "So how much is this?"
+    },
+    {
+      "index": 497,
+      "start": 1908.47,
+      "end": 1913.91,
+      "duration": 5.44,
+      "text": "Well, it's a little better, maybe, to do it in 40 pi *"
+    },
+    {
+      "index": 498,
+      "start": 1913.91,
+      "end": 1919.21,
+      "duration": 5.3,
+      "text": "1,000 kilocalories, because these are the ones that you"
+    },
+    {
+      "index": 499,
+      "start": 1919.21,
+      "end": 1925.71,
+      "duration": 6.5,
+      "text": "actually see on your nutrition labels of foods."
+    },
+    {
+      "index": 500,
+      "start": 1925.71,
+      "end": 1932.6,
+      "duration": 6.89,
+      "text": "And so this number is around 125 or so."
+    },
+    {
+      "index": 501,
+      "start": 1932.6,
+      "end": 1935.96,
+      "duration": 3.36,
+      "text": "Let's see, is that about right?"
+    },
+    {
+      "index": 502,
+      "start": 1935.96,
+      "end": 1937.93,
+      "duration": 1.97,
+      "text": "Let's make sure I've got these numbers right."
+    },
+    {
+      "index": 503,
+      "start": 1937.93,
+      "end": 1940.55,
+      "duration": 2.62,
+      "text": "Yeah, this is about 125."
+    },
+    {
+      "index": 504,
+      "start": 1940.55,
+      "end": 1942.78,
+      "duration": 2.23,
+      "text": "40 pi."
+    },
+    {
+      "index": 505,
+      "start": 1942.78,
+      "end": 1952.22,
+      "duration": 9.44,
+      "text": "And so one candy bar, this is a Halloween example, so."
+    },
+    {
+      "index": 506,
+      "start": 1952.22,
+      "end": 1958.46,
+      "duration": 6.24,
+      "text": "One candy bar is about 250 kilocalories."
+    },
+    {
+      "index": 507,
+      "start": 1958.46,
+      "end": 1964.62,
+      "duration": 6.16,
+      "text": "So this is half a candy bar."
+    },
+    {
+      "index": 508,
+      "start": 1964.62,
+      "end": 1973.13,
+      "duration": 8.51,
+      "text": "So the answer to our question is that it takes 500 candy"
+    },
+    {
+      "index": 509,
+      "start": 1973.13,
+      "end": 1982.9,
+      "duration": 9.77,
+      "text": "bars to heat up this thing."
+    },
+    {
+      "index": 510,
+      "start": 1982.9,
+      "end": 1987.57,
+      "duration": 4.67,
+      "text": "OK, so that's our example."
+    },
+    {
+      "index": 511,
+      "start": 1987.57,
+      "end": 1988.63,
+      "duration": 1.06,
+      "text": "Now, yeah."
+    },
+    {
+      "index": 512,
+      "start": 1988.63,
+      "end": 1989.16,
+      "duration": 0.53,
+      "text": "Question."
+    },
+    {
+      "index": 513,
+      "start": 1989.16,
+      "end": 1993.71,
+      "duration": 4.55,
+      "text": "STUDENT: [INAUDIBLE]"
+    },
+    {
+      "index": 514,
+      "start": 1993.71,
+      "end": 1996.98,
+      "duration": 3.27,
+      "text": "PROFESSOR: What does the integral give us?"
+    },
+    {
+      "index": 515,
+      "start": 1996.98,
+      "end": 2002.5,
+      "duration": 5.52,
+      "text": "This integral is, the integral represents"
+    },
+    {
+      "index": 516,
+      "start": 2002.5,
+      "end": 2003.47,
+      "duration": 0.97,
+      "text": "the following things."
+    },
+    {
+      "index": 517,
+      "start": 2003.47,
+      "end": 2006.33,
+      "duration": 2.86,
+      "text": "So the question is, what does this integral give us."
+    },
+    {
+      "index": 518,
+      "start": 2006.33,
+      "end": 2007.64,
+      "duration": 1.31,
+      "text": "So here's the integral."
+    },
+    {
+      "index": 519,
+      "start": 2007.64,
+      "end": 2010.64,
+      "duration": 3.0,
+      "text": "Here it is, rewritten so that it can be calculated."
+    },
+    {
+      "index": 520,
+      "start": 2010.64,
+      "end": 2013.37,
+      "duration": 2.73,
+      "text": "And what this integral is giving us is"
+    },
+    {
+      "index": 521,
+      "start": 2013.37,
+      "end": 2014.17,
+      "duration": 0.8,
+      "text": "the following thing."
+    },
+    {
+      "index": 522,
+      "start": 2014.17,
+      "end": 2016.16,
+      "duration": 1.99,
+      "text": "You have to imagine the following idea."
+    },
+    {
+      "index": 523,
+      "start": 2016.16,
+      "end": 2019.22,
+      "duration": 3.06,
+      "text": "You've got a little chunk of water in here."
+    },
+    {
+      "index": 524,
+      "start": 2019.22,
+      "end": 2022.32,
+      "duration": 3.1,
+      "text": "And you're going to raise is from 0 degrees all the way up"
+    },
+    {
+      "index": 525,
+      "start": 2022.32,
+      "end": 2026.84,
+      "duration": 4.52,
+      "text": "to whatever the target temperature is."
+    },
+    {
+      "index": 526,
+      "start": 2026.84,
+      "end": 2031.19,
+      "duration": 4.35,
+      "text": "And so that little milliliter of water, if you like, has to"
+    },
+    {
+      "index": 527,
+      "start": 2031.19,
+      "end": 2034.9,
+      "duration": 3.71,
+      "text": "be raised from 0 to some number which is a function of"
+    },
+    {
+      "index": 528,
+      "start": 2034.9,
+      "end": 2036.73,
+      "duration": 1.83,
+      "text": "the height."
+    },
+    {
+      "index": 529,
+      "start": 2036.73,
+      "end": 2039.95,
+      "duration": 3.22,
+      "text": "It's something between 70 and 100 degrees."
+    },
+    {
+      "index": 530,
+      "start": 2039.95,
+      "end": 2044.19,
+      "duration": 4.24,
+      "text": "And the one right above it also has to be raised to a"
+    },
+    {
+      "index": 531,
+      "start": 2044.19,
+      "end": 2045.53,
+      "duration": 1.34,
+      "text": "temperature, although a slightly different"
+    },
+    {
+      "index": 532,
+      "start": 2045.53,
+      "end": 2046.28,
+      "duration": 0.75,
+      "text": "temperature."
+    },
+    {
+      "index": 533,
+      "start": 2046.28,
+      "end": 2048.84,
+      "duration": 2.56,
+      "text": "And what we're doing with the integral is we're adding up"
+    },
+    {
+      "index": 534,
+      "start": 2048.84,
+      "end": 2055.7,
+      "duration": 6.86,
+      "text": "all of those degrees and the calorie represents how much it"
+    },
+    {
+      "index": 535,
+      "start": 2055.7,
+      "end": 2058.22,
+      "duration": 2.52,
+      "text": "takes, one calorie represents how much it takes to raise by"
+    },
+    {
+      "index": 536,
+      "start": 2058.22,
+      "end": 2061.98,
+      "duration": 3.76,
+      "text": "1 degree 1 milliliter of water."
+    },
+    {
+      "index": 537,
+      "start": 2061.98,
+      "end": 2066.62,
+      "duration": 4.64,
+      "text": "One cubic centimeter of water."
+    },
+    {
+      "index": 538,
+      "start": 2066.62,
+      "end": 2071.61,
+      "duration": 4.99,
+      "text": "That's the definition of a calorie."
+    },
+    {
+      "index": 539,
+      "start": 2071.61,
+      "end": 2072.99,
+      "duration": 1.38,
+      "text": "And we're adding it up."
+    },
+    {
+      "index": 540,
+      "start": 2072.99,
+      "end": 2075.43,
+      "duration": 2.44,
+      "text": "So in other words, each of these cubes is one thing."
+    },
+    {
+      "index": 541,
+      "start": 2075.43,
+      "end": 2078.01,
+      "duration": 2.58,
+      "text": "And now we have to add it up over this massive thing, which"
+    },
+    {
+      "index": 542,
+      "start": 2078.01,
+      "end": 2080.15,
+      "duration": 2.14,
+      "text": "is 1600 liters."
+    },
+    {
+      "index": 543,
+      "start": 2080.15,
+      "end": 2082.14,
+      "duration": 1.99,
+      "text": "And we have a lot of different little cubes."
+    },
+    {
+      "index": 544,
+      "start": 2082.14,
+      "end": 2083.42,
+      "duration": 1.28,
+      "text": "And that's what we did."
+    },
+    {
+      "index": 545,
+      "start": 2083.42,
+      "end": 2085.32,
+      "duration": 1.9,
+      "text": "When we glommed them all together."
+    },
+    {
+      "index": 546,
+      "start": 2085.32,
+      "end": 2088.8,
+      "duration": 3.48,
+      "text": "That's what the integral is doing for us."
+    },
+    {
+      "index": 547,
+      "start": 2088.8,
+      "end": 2094.2,
+      "duration": 5.4,
+      "text": "Other questions."
+    },
+    {
+      "index": 548,
+      "start": 2094.2,
+      "end": 2097.4,
+      "duration": 3.2,
+      "text": "Now I want to connect this with weighted averages"
+    },
+    {
+      "index": 549,
+      "start": 2097.4,
+      "end": 2098.8,
+      "duration": 1.4,
+      "text": "before we go on."
+    },
+    {
+      "index": 550,
+      "start": 2098.8,
+      "end": 2101.81,
+      "duration": 3.01,
+      "text": "Because that was the reason why I did weighted averages"
+    },
+    {
+      "index": 551,
+      "start": 2101.81,
+      "end": 2106.33,
+      "duration": 4.52,
+      "text": "first. I'm going to compute also the average final"
+    },
+    {
+      "index": 552,
+      "start": 2106.33,
+      "end": 2114.81,
+      "duration": 8.48,
+      "text": "temperature."
+    },
+    {
+      "index": 553,
+      "start": 2114.81,
+      "end": 2118.12,
+      "duration": 3.31,
+      "text": "So, final because this is the interesting one, the average"
+    },
+    {
+      "index": 554,
+      "start": 2118.12,
+      "end": 2121.03,
+      "duration": 2.91,
+      "text": "starting temperature's very boring, it's 0."
+    },
+    {
+      "index": 555,
+      "start": 2121.03,
+      "end": 2126.18,
+      "duration": 5.15,
+      "text": "The average final temperature is, individually the"
+    },
+    {
+      "index": 556,
+      "start": 2126.18,
+      "end": 2127.84,
+      "duration": 1.66,
+      "text": "temperatures are different."
+    },
+    {
+      "index": 557,
+      "start": 2127.84,
+      "end": 2133.11,
+      "duration": 5.27,
+      "text": "And the answer here is it's the integral from 0 to 1 of T"
+    },
+    {
+      "index": 558,
+      "start": 2133.11,
+      "end": 2138.39,
+      "duration": 5.28,
+      "text": "pi y dy divided by the integral from 0"
+    },
+    {
+      "index": 559,
+      "start": 2138.39,
+      "end": 2142.04,
+      "duration": 3.65,
+      "text": "to 1 of pi y dy."
+    },
+    {
+      "index": 560,
+      "start": 2142.04,
+      "end": 2144.54,
+      "duration": 2.5,
+      "text": "So this is the total temperature, weighted"
+    },
+    {
+      "index": 561,
+      "start": 2144.54,
+      "end": 2148.07,
+      "duration": 3.53,
+      "text": "appropriately to the volume of water that's involved at that"
+    },
+    {
+      "index": 562,
+      "start": 2148.07,
+      "end": 2152.88,
+      "duration": 4.81,
+      "text": "temperature, divided by the total volume of water."
+    },
+    {
+      "index": 563,
+      "start": 2152.88,
+      "end": 2155.13,
+      "duration": 2.25,
+      "text": "And we computed these two numbers."
+    },
+    {
+      "index": 564,
+      "start": 2155.13,
+      "end": 2158.35,
+      "duration": 3.22,
+      "text": "The number in the numerator is what we call 40 pi."
+    },
+    {
+      "index": 565,
+      "start": 2158.35,
+      "end": 2160.57,
+      "duration": 2.22,
+      "text": "And the number in the denominator, actually this is"
+    },
+    {
+      "index": 566,
+      "start": 2160.57,
+      "end": 2163.34,
+      "duration": 2.77,
+      "text": "easier than what we did last time with shells you can just"
+    },
+    {
+      "index": 567,
+      "start": 2163.34,
+      "end": 2166.16,
+      "duration": 2.82,
+      "text": "look at this and see that it's the area under a triangle."
+    },
+    {
+      "index": 568,
+      "start": 2166.16,
+      "end": 2168.5,
+      "duration": 2.34,
+      "text": "It's pi / 2."
+    },
+    {
+      "index": 569,
+      "start": 2168.5,
+      "end": 2171.76,
+      "duration": 3.26,
+      "text": "And so the answer here is 80 degrees."
+    },
+    {
+      "index": 570,
+      "start": 2171.76,
+      "end": 2174.91,
+      "duration": 3.15,
+      "text": "This is the average temperature."
+    },
+    {
+      "index": 571,
+      "start": 2174.91,
+      "end": 2177.67,
+      "duration": 2.76,
+      "text": "Note that this is a weighted average."
+    },
+    {
+      "index": 572,
+      "start": 2177.67,
+      "end": 2181.64,
+      "duration": 3.97,
+      "text": "The weighting here is different"
+    },
+    {
+      "index": 573,
+      "start": 2181.64,
+      "end": 2182.81,
+      "duration": 1.17,
+      "text": "according to the height."
+    },
+    {
+      "index": 574,
+      "start": 2182.81,
+      "end": 2188.19,
+      "duration": 5.38,
+      "text": "The weighting factor is pi y."
+    },
+    {
+      "index": 575,
+      "start": 2188.19,
+      "end": 2190.01,
+      "duration": 1.82,
+      "text": "That's the weighting factor."
+    },
+    {
+      "index": 576,
+      "start": 2190.01,
+      "end": 2192.27,
+      "duration": 2.26,
+      "text": "And that's not surprising."
+    },
+    {
+      "index": 577,
+      "start": 2192.27,
+      "end": 2195.63,
+      "duration": 3.36,
+      "text": "When y is small, there's less volume down here."
+    },
+    {
+      "index": 578,
+      "start": 2195.63,
+      "end": 2198.94,
+      "duration": 3.31,
+      "text": "Up above, those are more important volumes, because"
+    },
+    {
+      "index": 579,
+      "start": 2198.94,
+      "end": 2202.04,
+      "duration": 3.1,
+      "text": "there's more water up at the top of the cauldron than there"
+    },
+    {
+      "index": 580,
+      "start": 2202.04,
+      "end": 2203.96,
+      "duration": 1.92,
+      "text": "is down at the bottom of the cauldron."
+    },
+    {
+      "index": 581,
+      "start": 2203.96,
+      "end": 2206.895,
+      "duration": 2.935,
+      "text": "If you compare this to the ordinary average, if you take"
+    },
+    {
+      "index": 582,
+      "start": 2206.895,
+      "end": 2211.23,
+      "duration": 4.335,
+      "text": "the maximum temperature plus the minimum temperature,"
+    },
+    {
+      "index": 583,
+      "start": 2211.23,
+      "end": 2216.47,
+      "duration": 5.24,
+      "text": "divided by 2, that would be 100 + 70 / 2."
+    },
+    {
+      "index": 584,
+      "start": 2216.47,
+      "end": 2219.83,
+      "duration": 3.36,
+      "text": "You would get 85 degrees."
+    },
+    {
+      "index": 585,
+      "start": 2219.83,
+      "end": 2221.61,
+      "duration": 1.78,
+      "text": "And that's bigger."
+    },
+    {
+      "index": 586,
+      "start": 2221.61,
+      "end": 2222.44,
+      "duration": 0.83,
+      "text": "Why?"
+    },
+    {
+      "index": 587,
+      "start": 2222.44,
+      "end": 2225.03,
+      "duration": 2.59,
+      "text": "Because the cooler water is on top."
+    },
+    {
+      "index": 588,
+      "start": 2225.03,
+      "end": 2228.77,
+      "duration": 3.74,
+      "text": "And the actual average, the correct weighted average, is"
+    },
+    {
+      "index": 589,
+      "start": 2228.77,
+      "end": 2231.8,
+      "duration": 3.03,
+      "text": "lower than this fake average."
+    },
+    {
+      "index": 590,
+      "start": 2231.8,
+      "end": 2235.52,
+      "duration": 3.72,
+      "text": "Which is not the true average in this context."
+    },
+    {
+      "index": 591,
+      "start": 2235.52,
+      "end": 2238.09,
+      "duration": 2.57,
+      "text": "All right so the weighting is that the thing is getting"
+    },
+    {
+      "index": 592,
+      "start": 2238.09,
+      "end": 2253.16,
+      "duration": 15.07,
+      "text": "fatter near the top."
+    },
+    {
+      "index": 593,
+      "start": 2253.16,
+      "end": 2258.98,
+      "duration": 5.82,
+      "text": "So now I'm going to do another example of weighted average."
+    },
+    {
+      "index": 594,
+      "start": 2258.98,
+      "end": 2266.02,
+      "duration": 7.04,
+      "text": "And this example is also very much worth your while."
+    },
+    {
+      "index": 595,
+      "start": 2266.02,
+      "end": 2269.21,
+      "duration": 3.19,
+      "text": "It's the other incredibly important one in"
+    },
+    {
+      "index": 596,
+      "start": 2269.21,
+      "end": 2271.96,
+      "duration": 2.75,
+      "text": "interpreting integrals."
+    },
+    {
+      "index": 597,
+      "start": 2271.96,
+      "end": 2276.79,
+      "duration": 4.83,
+      "text": "And it's a very, very simple example of a function, f."
+    },
+    {
+      "index": 598,
+      "start": 2276.79,
+      "end": 2280.15,
+      "duration": 3.36,
+      "text": "The weightings will be different, but the functions,"
+    },
+    {
+      "index": 599,
+      "start": 2280.15,
+      "end": 2283.32,
+      "duration": 3.17,
+      "text": "f, will be of a very particular kind."
+    },
+    {
+      "index": 600,
+      "start": 2283.32,
+      "end": 2287.45,
+      "duration": 4.13,
+      "text": "Namely, the function f will be practically a constant."
+    },
+    {
+      "index": 601,
+      "start": 2287.45,
+      "end": 2288.48,
+      "duration": 1.03,
+      "text": "But not quite."
+    },
+    {
+      "index": 602,
+      "start": 2288.48,
+      "end": 2291.34,
+      "duration": 2.86,
+      "text": "It's going to be a constant on one interval, and then 0 on"
+    },
+    {
+      "index": 603,
+      "start": 2291.34,
+      "end": 2296.95,
+      "duration": 5.61,
+      "text": "the rest. So we'll do those weighted averages now."
+    },
+    {
+      "index": 604,
+      "start": 2296.95,
+      "end": 2314.9,
+      "duration": 17.95,
+      "text": "And this subject is called probability."
+    },
+    {
+      "index": 605,
+      "start": 2314.9,
+      "end": 2320.42,
+      "duration": 5.52,
+      "text": "In probability, what we do, so I'm just going to give some"
+    },
+    {
+      "index": 606,
+      "start": 2320.42,
+      "end": 2323.91,
+      "duration": 3.49,
+      "text": "examples here."
+    },
+    {
+      "index": 607,
+      "start": 2323.91,
+      "end": 2334.62,
+      "duration": 10.71,
+      "text": "I'm going to pick a point to in quotation marks at random."
+    },
+    {
+      "index": 608,
+      "start": 2334.62,
+      "end": 2340.9,
+      "duration": 6.28,
+      "text": "In the region y < x < 1 - x ^2."
+    },
+    {
+      "index": 609,
+      "start": 2340.9,
+      "end": 2345.06,
+      "duration": 4.16,
+      "text": "That's this shape here."
+    },
+    {
+      "index": 610,
+      "start": 2345.06,
+      "end": 2348.77,
+      "duration": 3.71,
+      "text": "Well, let's draw it right down here."
+    },
+    {
+      "index": 611,
+      "start": 2348.77,
+      "end": 2349.31,
+      "duration": 0.54,
+      "text": "For now."
+    },
+    {
+      "index": 612,
+      "start": 2349.31,
+      "end": 2350.38,
+      "duration": 1.07,
+      "text": "So, somewhere in here."
+    },
+    {
+      "index": 613,
+      "start": 2350.38,
+      "end": 2353.31,
+      "duration": 2.93,
+      "text": "Some point, (x, y)."
+    },
+    {
+      "index": 614,
+      "start": 2353.31,
+      "end": 2359.44,
+      "duration": 6.13,
+      "text": "And then I need to tell you, according to what this random"
+    },
+    {
+      "index": 615,
+      "start": 2359.44,
+      "end": 2360.33,
+      "duration": 0.89,
+      "text": "really means."
+    },
+    {
+      "index": 616,
+      "start": 2360.33,
+      "end": 2371.78,
+      "duration": 11.45,
+      "text": "This is proportional to area, if you like."
+    },
+    {
+      "index": 617,
+      "start": 2371.78,
+      "end": 2373.99,
+      "duration": 2.21,
+      "text": "So area inside of this section."
+    },
+    {
+      "index": 618,
+      "start": 2373.99,
+      "end": 2376.26,
+      "duration": 2.27,
+      "text": "And then the question that we're going to answer right"
+    },
+    {
+      "index": 619,
+      "start": 2376.26,
+      "end": 2386.62,
+      "duration": 10.36,
+      "text": "now is, what is the chance that, it's usually called"
+    },
+    {
+      "index": 620,
+      "start": 2386.62,
+      "end": 2396.98,
+      "duration": 10.36,
+      "text": "probability, that x > 1/2."
+    },
+    {
+      "index": 621,
+      "start": 2396.98,
+      "end": 2403.62,
+      "duration": 6.64,
+      "text": "Let me show you what's going on here."
+    },
+    {
+      "index": 622,
+      "start": 2403.62,
+      "end": 2408.78,
+      "duration": 5.16,
+      "text": "And this is always the case with things in probability."
+    },
+    {
+      "index": 623,
+      "start": 2408.78,
+      "end": 2410.29,
+      "duration": 1.51,
+      "text": "So, first of all, we have a name for this."
+    },
+    {
+      "index": 624,
+      "start": 2410.29,
+      "end": 2416.22,
+      "duration": 5.93,
+      "text": "This is called P ( x > 1/2)."
+    },
+    {
+      "index": 625,
+      "start": 2416.22,
+      "end": 2421.06,
+      "duration": 4.84,
+      "text": "And so that's what it's called in our notation here."
+    },
+    {
+      "index": 626,
+      "start": 2421.06,
+      "end": 2427.9,
+      "duration": 6.84,
+      "text": "And what it is, is the probability is always equal to"
+    },
+    {
+      "index": 627,
+      "start": 2427.9,
+      "end": 2432.76,
+      "duration": 4.86,
+      "text": "the part / the whole."
+    },
+    {
+      "index": 628,
+      "start": 2432.76,
+      "end": 2436.93,
+      "duration": 4.17,
+      "text": "It's a ratio just like the one over there."
+    },
+    {
+      "index": 629,
+      "start": 2436.93,
+      "end": 2438.72,
+      "duration": 1.79,
+      "text": "And which is the part and which is the whole."
+    },
+    {
+      "index": 630,
+      "start": 2438.72,
+      "end": 2443.47,
+      "duration": 4.75,
+      "text": "Well, in this picture, the whole is the whole parabola."
+    },
+    {
+      "index": 631,
+      "start": 2443.47,
+      "end": 2448.91,
+      "duration": 5.44,
+      "text": "And the part is the section x > 1/2."
+    },
+    {
+      "index": 632,
+      "start": 2448.91,
+      "end": 2460.46,
+      "duration": 11.55,
+      "text": "And it's just the ratio of those two areas."
+    },
+    {
+      "index": 633,
+      "start": 2460.46,
+      "end": 2461.97,
+      "duration": 1.51,
+      "text": "Let's write that down."
+    },
+    {
+      "index": 634,
+      "start": 2461.97,
+      "end": 2469.21,
+      "duration": 7.24,
+      "text": "That's the integral from 1/2 to 1 of (1 - x ^2) dx, divided"
+    },
+    {
+      "index": 635,
+      "start": 2469.21,
+      "end": 2476.0,
+      "duration": 6.79,
+      "text": "by the integral from - 1 to 1, (1 - x ^2 ) dx."
+    },
+    {
+      "index": 636,
+      "start": 2476.0,
+      "end": 2483.35,
+      "duration": 7.35,
+      "text": "And again, the weighting factor here is 1 - x^2."
+    },
+    {
+      "index": 637,
+      "start": 2483.35,
+      "end": 2487.57,
+      "duration": 4.22,
+      "text": "And to be a little bit more specific here, the starting"
+    },
+    {
+      "index": 638,
+      "start": 2487.57,
+      "end": 2493.39,
+      "duration": 5.82,
+      "text": "point a = - 1 and the endpoint b = + 1."
+    },
+    {
+      "index": 639,
+      "start": 2493.39,
+      "end": 2497.54,
+      "duration": 4.15,
+      "text": "So this is P(x < 1/2)."
+    },
+    {
+      "index": 640,
+      "start": 2497.54,
+      "end": 2502.07,
+      "duration": 4.53,
+      "text": "And if you work it out, it turns out to be"
+    },
+    {
+      "index": 641,
+      "start": 2502.07,
+      "end": 2507.21,
+      "duration": 5.14,
+      "text": "5/18, we won't do it."
+    },
+    {
+      "index": 642,
+      "start": 2507.21,
+      "end": 2507.47,
+      "duration": 0.26,
+      "text": "Yeah."
+    },
+    {
+      "index": 643,
+      "start": 2507.47,
+      "end": 2541.13,
+      "duration": 33.66,
+      "text": "STUDENT: [INAUDIBLE]"
+    },
+    {
+      "index": 644,
+      "start": 2541.13,
+      "end": 2543.17,
+      "duration": 2.04,
+      "text": "PROFESSOR: What we're trying to do with probability."
+    },
+    {
+      "index": 645,
+      "start": 2543.17,
+      "end": 2546.76,
+      "duration": 3.59,
+      "text": "So I can't repeat your question."
+    },
+    {
+      "index": 646,
+      "start": 2546.76,
+      "end": 2550.72,
+      "duration": 3.96,
+      "text": "But I can try say, because it was a little bit too"
+    },
+    {
+      "index": 647,
+      "start": 2550.72,
+      "end": 2551.58,
+      "duration": 0.86,
+      "text": "complicated."
+    },
+    {
+      "index": 648,
+      "start": 2551.58,
+      "end": 2555.02,
+      "duration": 3.44,
+      "text": "But it was not correct, OK."
+    },
+    {
+      "index": 649,
+      "start": 2555.02,
+      "end": 2558.49,
+      "duration": 3.47,
+      "text": "What we're taking is, we have two possible"
+    },
+    {
+      "index": 650,
+      "start": 2558.49,
+      "end": 2559.94,
+      "duration": 1.45,
+      "text": "things that could happen."
+    },
+    {
+      "index": 651,
+      "start": 2559.94,
+      "end": 2562.64,
+      "duration": 2.7,
+      "text": "Either, let's put it this way."
+    },
+    {
+      "index": 652,
+      "start": 2562.64,
+      "end": 2563.91,
+      "duration": 1.27,
+      "text": "Let's make it a gamble."
+    },
+    {
+      "index": 653,
+      "start": 2563.91,
+      "end": 2567.15,
+      "duration": 3.24,
+      "text": "Somebody picks a point in here at random."
+    },
+    {
+      "index": 654,
+      "start": 2567.15,
+      "end": 2573.16,
+      "duration": 6.01,
+      "text": "And we're trying to figure out what your"
+    },
+    {
+      "index": 655,
+      "start": 2573.16,
+      "end": 2574.75,
+      "duration": 1.59,
+      "text": "chances are of winning."
+    },
+    {
+      "index": 656,
+      "start": 2574.75,
+      "end": 2576.83,
+      "duration": 2.08,
+      "text": "In other words, the chances the person picks something in"
+    },
+    {
+      "index": 657,
+      "start": 2576.83,
+      "end": 2579.67,
+      "duration": 2.84,
+      "text": "here versus something in there."
+    },
+    {
+      "index": 658,
+      "start": 2579.67,
+      "end": 2581.57,
+      "duration": 1.9,
+      "text": "And the interesting thing is, so what percent of"
+    },
+    {
+      "index": 659,
+      "start": 2581.57,
+      "end": 2584.22,
+      "duration": 2.65,
+      "text": "the time do you win."
+    },
+    {
+      "index": 660,
+      "start": 2584.22,
+      "end": 2586.6,
+      "duration": 2.38,
+      "text": "The answer is it's some fraction of 1."
+    },
+    {
+      "index": 661,
+      "start": 2586.6,
+      "end": 2588.88,
+      "duration": 2.28,
+      "text": "And in order to figure that out, I have to figure out the"
+    },
+    {
+      "index": 662,
+      "start": 2588.88,
+      "end": 2591.9,
+      "duration": 3.02,
+      "text": "total area here."
+    },
+    {
+      "index": 663,
+      "start": 2591.9,
+      "end": 2595.21,
+      "duration": 3.31,
+      "text": "Versus the total of the entire, all the way from - 1"
+    },
+    {
+      "index": 664,
+      "start": 2595.21,
+      "end": 2598.19,
+      "duration": 2.98,
+      "text": "to 1, the beginning to the end."
+    },
+    {
+      "index": 665,
+      "start": 2598.19,
+      "end": 2602.58,
+      "duration": 4.39,
+      "text": "So in the numerator, I put success, and in the"
+    },
+    {
+      "index": 666,
+      "start": 2602.58,
+      "end": 2605.25,
+      "duration": 2.67,
+      "text": "denominator I put all possibilities."
+    },
+    {
+      "index": 667,
+      "start": 2605.25,
+      "end": 2606.72,
+      "duration": 1.47,
+      "text": "So that, right?"
+    },
+    {
+      "index": 668,
+      "start": 2606.72,
+      "end": 2609.26,
+      "duration": 2.54,
+      "text": "STUDENT: [INAUDIBLE]"
+    },
+    {
+      "index": 669,
+      "start": 2609.26,
+      "end": 2611.08,
+      "duration": 1.82,
+      "text": "PROFESSOR: And that's the interpretation of this."
+    },
+    {
+      "index": 670,
+      "start": 2611.08,
+      "end": 2613.06,
+      "duration": 1.98,
+      "text": "So maybe I didn't understand your question."
+    },
+    {
+      "index": 671,
+      "start": 2613.06,
+      "end": 2617.9,
+      "duration": 4.84,
+      "text": "STUDENT: [INAUDIBLE]"
+    },
+    {
+      "index": 672,
+      "start": 2617.9,
+      "end": 2620.13,
+      "duration": 2.23,
+      "text": "PROFESSOR: Ah, why is 1 - x ^2 the weighting factor."
+    },
+    {
+      "index": 673,
+      "start": 2620.13,
+      "end": 2624.55,
+      "duration": 4.42,
+      "text": "That has to do with how you compute areas under curves."
+    },
+    {
+      "index": 674,
+      "start": 2624.55,
+      "end": 2629.04,
+      "duration": 4.49,
+      "text": "The curve here is y = 1 - x ^2."
+    },
+    {
+      "index": 675,
+      "start": 2629.04,
+      "end": 2631.81,
+      "duration": 2.77,
+      "text": "And so, in order to calculate how much area is between 1/2"
+    },
+    {
+      "index": 676,
+      "start": 2631.81,
+      "end": 2632.94,
+      "duration": 1.13,
+      "text": "and 1, I have to integrate."
+    },
+    {
+      "index": 677,
+      "start": 2632.94,
+      "end": 2634.44,
+      "duration": 1.5,
+      "text": "That's the interpretation of this."
+    },
+    {
+      "index": 678,
+      "start": 2634.44,
+      "end": 2636.45,
+      "duration": 2.01,
+      "text": "This is the area under that curve."
+    },
+    {
+      "index": 679,
+      "start": 2636.45,
+      "end": 2637.22,
+      "duration": 0.77,
+      "text": "This integral."
+    },
+    {
+      "index": 680,
+      "start": 2637.22,
+      "end": 2641.2,
+      "duration": 3.98,
+      "text": "And the denominator's the area under the whole thing."
+    },
+    {
+      "index": 681,
+      "start": 2641.2,
+      "end": 2642.18,
+      "duration": 0.98,
+      "text": "OK, yeah."
+    },
+    {
+      "index": 682,
+      "start": 2642.18,
+      "end": 2642.76,
+      "duration": 0.58,
+      "text": "Another question."
+    },
+    {
+      "index": 683,
+      "start": 2642.76,
+      "end": 2646.06,
+      "duration": 3.3,
+      "text": "STUDENT: [INAUDIBLE]"
+    },
+    {
+      "index": 684,
+      "start": 2646.06,
+      "end": 2648.1,
+      "duration": 2.04,
+      "text": "PROFESSOR: Ah."
+    },
+    {
+      "index": 685,
+      "start": 2648.1,
+      "end": 2649.46,
+      "duration": 1.36,
+      "text": "Yikes."
+    },
+    {
+      "index": 686,
+      "start": 2649.46,
+      "end": 2652.69,
+      "duration": 3.23,
+      "text": "It was supposed to be the same question as over here."
+    },
+    {
+      "index": 687,
+      "start": 2652.69,
+      "end": 2653.03,
+      "duration": 0.34,
+      "text": "Thank you."
+    },
+    {
+      "index": 688,
+      "start": 2653.03,
+      "end": 2658.71,
+      "duration": 5.68,
+      "text": "STUDENT: [INAUDIBLE]"
+    },
+    {
+      "index": 689,
+      "start": 2658.71,
+      "end": 2661.42,
+      "duration": 2.71,
+      "text": "PROFESSOR: This has something to do with weighting factors."
+    },
+    {
+      "index": 690,
+      "start": 2661.42,
+      "end": 2665.41,
+      "duration": 3.99,
+      "text": "Here's the weight factor."
+    },
+    {
+      "index": 691,
+      "start": 2665.41,
+      "end": 2668.26,
+      "duration": 2.85,
+      "text": "Well, it's the relative importance from the point of"
+    },
+    {
+      "index": 692,
+      "start": 2668.26,
+      "end": 2673.16,
+      "duration": 4.9,
+      "text": "view of this probability of these places versus those."
+    },
+    {
+      "index": 693,
+      "start": 2673.16,
+      "end": 2676.08,
+      "duration": 2.92,
+      "text": "That is, so this is a weighting factor because it's"
+    },
+    {
+      "index": 694,
+      "start": 2676.08,
+      "end": 2685.07,
+      "duration": 8.99,
+      "text": "telling me that in some sense this number 5/18, actually"
+    },
+    {
+      "index": 695,
+      "start": 2685.07,
+      "end": 2688.42,
+      "duration": 3.35,
+      "text": "that makes me think that this number is probably wrong."
+    },
+    {
+      "index": 696,
+      "start": 2688.42,
+      "end": 2693.17,
+      "duration": 4.75,
+      "text": "Well, I'll let you calculate it out."
+    },
+    {
+      "index": 697,
+      "start": 2693.17,
+      "end": 2696.29,
+      "duration": 3.12,
+      "text": "It looks like it should be less than 1/4 here, because"
+    },
+    {
+      "index": 698,
+      "start": 2696.29,
+      "end": 2698.29,
+      "duration": 2.0,
+      "text": "this is 1/4 of the total distance and there's a little"
+    },
+    {
+      "index": 699,
+      "start": 2698.29,
+      "end": 2700.86,
+      "duration": 2.57,
+      "text": "less in here than there is in the middle."
+    },
+    {
+      "index": 700,
+      "start": 2700.86,
+      "end": 2703.27,
+      "duration": 2.41,
+      "text": "So in fact it probably should be less than 1/4, the answer."
+    },
+    {
+      "index": 701,
+      "start": 2703.27,
+      "end": 2709.19,
+      "duration": 5.92,
+      "text": "STUDENT: [INAUDIBLE]"
+    },
+    {
+      "index": 702,
+      "start": 2709.19,
+      "end": 2711.07,
+      "duration": 1.88,
+      "text": "PROFESSOR: The equation of the curve is 1 - x^2."
+    },
+    {
+      "index": 703,
+      "start": 2713.67,
+      "end": 2715.74,
+      "duration": 2.07,
+      "text": "The reason why it's the weighting factor is that we're"
+    },
+    {
+      "index": 704,
+      "start": 2715.74,
+      "end": 2718.14,
+      "duration": 2.4,
+      "text": "interpreting, the question has to do with the"
+    },
+    {
+      "index": 705,
+      "start": 2718.14,
+      "end": 2720.12,
+      "duration": 1.98,
+      "text": "area under that curve."
+    },
+    {
+      "index": 706,
+      "start": 2720.12,
+      "end": 2724.02,
+      "duration": 3.9,
+      "text": "And so, this is showing us how much is relatively important"
+    },
+    {
+      "index": 707,
+      "start": 2724.02,
+      "end": 2725.2,
+      "duration": 1.18,
+      "text": "versus how much is not."
+    },
+    {
+      "index": 708,
+      "start": 2725.2,
+      "end": 2727.79,
+      "duration": 2.59,
+      "text": "This is, these parts are relatively important, these"
+    },
+    {
+      "index": 709,
+      "start": 2727.79,
+      "end": 2728.66,
+      "duration": 0.87,
+      "text": "parts are less important."
+    },
+    {
+      "index": 710,
+      "start": 2728.66,
+      "end": 2729.96,
+      "duration": 1.3,
+      "text": "According to area."
+    },
+    {
+      "index": 711,
+      "start": 2729.96,
+      "end": 2731.73,
+      "duration": 1.77,
+      "text": "Because we've said that area is the way"
+    },
+    {
+      "index": 712,
+      "start": 2731.73,
+      "end": 2735.92,
+      "duration": 4.19,
+      "text": "we're making the choice."
+    },
+    {
+      "index": 713,
+      "start": 2735.92,
+      "end": 2740.4,
+      "duration": 4.48,
+      "text": "So I don't have quite enough time to tell you"
+    },
+    {
+      "index": 714,
+      "start": 2740.4,
+      "end": 2743.53,
+      "duration": 3.13,
+      "text": "about my next example."
+    },
+    {
+      "index": 715,
+      "start": 2743.53,
+      "end": 2745.87,
+      "duration": 2.34,
+      "text": "Instead, I'm just going to tell you what the general"
+    },
+    {
+      "index": 716,
+      "start": 2745.87,
+      "end": 2746.82,
+      "duration": 0.95,
+      "text": "formula is."
+    },
+    {
+      "index": 717,
+      "start": 2746.82,
+      "end": 2748.92,
+      "duration": 2.1,
+      "text": "And we'll do our example next time."
+    },
+    {
+      "index": 718,
+      "start": 2748.92,
+      "end": 2751.79,
+      "duration": 2.87,
+      "text": "I'll tell you what it's going to be."
+    },
+    {
+      "index": 719,
+      "start": 2751.79,
+      "end": 2764.19,
+      "duration": 12.4,
+      "text": "So here's the general formula for probability here."
+    },
+    {
+      "index": 720,
+      "start": 2764.19,
+      "end": 2772.12,
+      "duration": 7.93,
+      "text": "We're going to imagine that we have a total range which is"
+    },
+    {
+      "index": 721,
+      "start": 2772.12,
+      "end": 2775.47,
+      "duration": 3.35,
+      "text": "maybe going from a to b, and we have some intermediate"
+    },
+    {
+      "index": 722,
+      "start": 2775.47,
+      "end": 2780.16,
+      "duration": 4.69,
+      "text": "values x1 and x2, and then we're going to try to compute"
+    },
+    {
+      "index": 723,
+      "start": 2780.16,
+      "end": 2787.39,
+      "duration": 7.23,
+      "text": "the probability that some variable that we picked at"
+    },
+    {
+      "index": 724,
+      "start": 2787.39,
+      "end": 2791.56,
+      "duration": 4.17,
+      "text": "random occurs between x1 and x2."
+    },
+    {
+      "index": 725,
+      "start": 2791.56,
+      "end": 2796.49,
+      "duration": 4.93,
+      "text": "And by definition, we're saying that it's an integral."
+    },
+    {
+      "index": 726,
+      "start": 2796.49,
+      "end": 2801.72,
+      "duration": 5.23,
+      "text": "It's the integral from x1 to x2 of the weight dx, divided"
+    },
+    {
+      "index": 727,
+      "start": 2801.72,
+      "end": 2806.71,
+      "duration": 4.99,
+      "text": "by the integral all the way from a to b."
+    },
+    {
+      "index": 728,
+      "start": 2806.71,
+      "end": 2807.39,
+      "duration": 0.68,
+      "text": "Of the weight."
+    },
+    {
+      "index": 729,
+      "start": 2807.39,
+      "end": 2815.9,
+      "duration": 8.51,
+      "text": "So, again, this is the part divided by the whole."
+    },
+    {
+      "index": 730,
+      "start": 2815.9,
+      "end": 2819.89,
+      "duration": 3.99,
+      "text": "And the relationship between this and the weighted average"
+    },
+    {
+      "index": 731,
+      "start": 2819.89,
+      "end": 2823.46,
+      "duration": 3.57,
+      "text": "that we had earlier was that the function f ( x) is kind of"
+    },
+    {
+      "index": 732,
+      "start": 2823.46,
+      "end": 2824.45,
+      "duration": 0.99,
+      "text": "a strange function."
+    },
+    {
+      "index": 733,
+      "start": 2824.45,
+      "end": 2826.41,
+      "duration": 1.96,
+      "text": "It's 0 and 1."
+    },
+    {
+      "index": 734,
+      "start": 2826.41,
+      "end": 2830.36,
+      "duration": 3.95,
+      "text": "It's just the picture, if you like, is that you have this"
+    },
+    {
+      "index": 735,
+      "start": 2830.36,
+      "end": 2831.86,
+      "duration": 1.5,
+      "text": "weighting factor."
+    },
+    {
+      "index": 736,
+      "start": 2831.86,
+      "end": 2834.18,
+      "duration": 2.32,
+      "text": "And it's going from a to b."
+    },
+    {
+      "index": 737,
+      "start": 2834.18,
+      "end": 2836.99,
+      "duration": 2.81,
+      "text": "But then in between there, we have the part that we're"
+    },
+    {
+      "index": 738,
+      "start": 2836.99,
+      "end": 2837.69,
+      "duration": 0.7,
+      "text": "interested in."
+    },
+    {
+      "index": 739,
+      "start": 2837.69,
+      "end": 2840.13,
+      "duration": 2.44,
+      "text": "Which is between x1 and x2."
+    },
+    {
+      "index": 740,
+      "start": 2840.13,
+      "end": 2843.91,
+      "duration": 3.78,
+      "text": "And it's the ratio of this inner part to the whole thing"
+    },
+    {
+      "index": 741,
+      "start": 2843.91,
+      "end": 2854.65,
+      "duration": 10.74,
+      "text": "that we're interested in."
+    },
+    {
+      "index": 742,
+      "start": 2854.65,
+      "end": 2859.66,
+      "duration": 5.01,
+      "text": "Tomorrow I'm going to try to do a realistic example."
+    },
+    {
+      "index": 743,
+      "start": 2859.66,
+      "end": 2861.23,
+      "duration": 1.57,
+      "text": "And I'm going to tell you what it is, but"
+    },
+    {
+      "index": 744,
+      "start": 2861.23,
+      "end": 2863.62,
+      "duration": 2.39,
+      "text": "we'll take it up tomorrow."
+    },
+    {
+      "index": 745,
+      "start": 2863.62,
+      "end": 2866.47,
+      "duration": 2.85,
+      "text": "I told you it was going to be tomorrow, but we still have a"
+    },
+    {
+      "index": 746,
+      "start": 2866.47,
+      "end": 2869.27,
+      "duration": 2.8,
+      "text": "whole minute, so I'm going to tell you what the problem is."
+    },
+    {
+      "index": 747,
+      "start": 2869.27,
+      "end": 2873.66,
+      "duration": 4.39,
+      "text": "So this is going to be a target practice problem."
+    },
+    {
+      "index": 748,
+      "start": 2873.66,
+      "end": 2875.61,
+      "duration": 1.95,
+      "text": "You have a target here and you're throwing"
+    },
+    {
+      "index": 749,
+      "start": 2875.61,
+      "end": 2880.81,
+      "duration": 5.2,
+      "text": "darts at this target."
+    },
+    {
+      "index": 750,
+      "start": 2880.81,
+      "end": 2885.96,
+      "duration": 5.15,
+      "text": "And so you're throwing darts at this target."
+    },
+    {
+      "index": 751,
+      "start": 2885.96,
+      "end": 2893.02,
+      "duration": 7.06,
+      "text": "And somebody is standing next to the dartboard."
+    },
+    {
+      "index": 752,
+      "start": 2893.02,
+      "end": 2895.4,
+      "duration": 2.38,
+      "text": "Your little brother is standing next to"
+    },
+    {
+      "index": 753,
+      "start": 2895.4,
+      "end": 2898.16,
+      "duration": 2.76,
+      "text": "the dartboard here."
+    },
+    {
+      "index": 754,
+      "start": 2898.16,
+      "end": 2903.44,
+      "duration": 5.28,
+      "text": "And the question is, how likely you are to hit your"
+    },
+    {
+      "index": 755,
+      "start": 2903.44,
+      "end": 2904.32,
+      "duration": 0.88,
+      "text": "little brother."
+    },
+    {
+      "index": 756,
+      "start": 2904.32,
+      "end": 2907.19,
+      "duration": 2.87,
+      "text": "So this will, let's see."
+    },
+    {
+      "index": 757,
+      "start": 2907.19,
+      "end": 2908.5,
+      "duration": 1.31,
+      "text": "You'll see whether you like that or not."
+    },
+    {
+      "index": 758,
+      "start": 2908.5,
+      "end": 2910.0,
+      "duration": 1.5,
+      "text": "Actually, I was the little brother."
+    },
+    {
+      "index": 759,
+      "start": 2910.0,
+      "end": 2911.71,
+      "duration": 1.71,
+      "text": "So, I don't know which way you want to go."
+    },
+    {
+      "index": 760,
+      "start": 2911.71,
+      "end": 2912.68,
+      "duration": 0.97,
+      "text": "We'll go either way."
+    },
+    {
+      "index": 761,
+      "start": 2912.68,
+      "end": 2915.24,
+      "duration": 2.56,
+      "text": "We'll find out next time."
+    }
+  ],
+  "course": {
+    "category": "Mathematics",
+    "title": "Single Variable Calculus",
+    "source_url": "https://www.youtube.com/playlist?list=PL590CCC2BC5AF3BC1"
+  }
+}

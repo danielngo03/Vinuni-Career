@@ -1,0 +1,7844 @@
+{
+  "video": {
+    "id": "b1P0hurY6UE",
+    "title": "20. Quantum Statistical Mechanics Part 1",
+    "url": "https://www.youtube.com/watch?v=b1P0hurY6UE",
+    "channel": "MIT OpenCourseWare",
+    "duration": 5011,
+    "language": "en"
+  },
+  "segment_count": 1118,
+  "segments": [
+    {
+      "index": 0,
+      "start": 0.07,
+      "end": 1.78,
+      "duration": 1.71,
+      "text": "The following content is provided"
+    },
+    {
+      "index": 1,
+      "start": 1.78,
+      "end": 4.019,
+      "duration": 2.239,
+      "text": "under a Creative Commons license."
+    },
+    {
+      "index": 2,
+      "start": 4.019,
+      "end": 6.87,
+      "duration": 2.851,
+      "text": "Your support will help MIT OpenCourseWare continue"
+    },
+    {
+      "index": 3,
+      "start": 6.87,
+      "end": 10.73,
+      "duration": 3.86,
+      "text": "to offer high-quality educational resources for free."
+    },
+    {
+      "index": 4,
+      "start": 10.73,
+      "end": 13.34,
+      "duration": 2.61,
+      "text": "To make a donation or view additional materials"
+    },
+    {
+      "index": 5,
+      "start": 13.34,
+      "end": 17.217,
+      "duration": 3.877,
+      "text": "from hundreds of MIT courses, visit MIT OpenCourseWare"
+    },
+    {
+      "index": 6,
+      "start": 17.217,
+      "end": 17.842,
+      "duration": 0.625,
+      "text": "at ocw.mit.edu."
+    },
+    {
+      "index": 7,
+      "start": 20.98,
+      "end": 21.89,
+      "duration": 0.91,
+      "text": "PROFESSOR: OK."
+    },
+    {
+      "index": 8,
+      "start": 21.89,
+      "end": 24.33,
+      "duration": 2.44,
+      "text": "Let's start."
+    },
+    {
+      "index": 9,
+      "start": 24.33,
+      "end": 30.47,
+      "duration": 6.14,
+      "text": "So last lecture, what we talked about was limitations"
+    },
+    {
+      "index": 10,
+      "start": 30.47,
+      "end": 33.28,
+      "duration": 2.81,
+      "text": "of classical statistical mechanics,"
+    },
+    {
+      "index": 11,
+      "start": 33.28,
+      "end": 37.18,
+      "duration": 3.9,
+      "text": "and what I will contrast with what"
+    },
+    {
+      "index": 12,
+      "start": 37.18,
+      "end": 41.86,
+      "duration": 4.68,
+      "text": "I will talk about today, which is new version."
+    },
+    {
+      "index": 13,
+      "start": 41.86,
+      "end": 45.32,
+      "duration": 3.46,
+      "text": "The old version of quantum mechanics,"
+    },
+    {
+      "index": 14,
+      "start": 45.32,
+      "end": 48.77,
+      "duration": 3.45,
+      "text": "which was based on the observation originally from"
+    },
+    {
+      "index": 15,
+      "start": 48.77,
+      "end": 51.68,
+      "duration": 2.91,
+      "text": "Planck, and then expanded by Einstein,"
+    },
+    {
+      "index": 16,
+      "start": 51.68,
+      "end": 61.22,
+      "duration": 9.54,
+      "text": "that for a harmonic oscillator, a frequency omega,"
+    },
+    {
+      "index": 17,
+      "start": 61.22,
+      "end": 65.85,
+      "duration": 4.63,
+      "text": "the energies cannot take all values."
+    },
+    {
+      "index": 18,
+      "start": 65.85,
+      "end": 71.01,
+      "duration": 5.16,
+      "text": "But values that are multiples of the frequency of the oscillator"
+    },
+    {
+      "index": 19,
+      "start": 71.01,
+      "end": 73.22,
+      "duration": 2.21,
+      "text": "and then some integer n."
+    },
+    {
+      "index": 20,
+      "start": 77.094,
+      "end": 79.89,
+      "duration": 2.796,
+      "text": "What we did with this observation"
+    },
+    {
+      "index": 21,
+      "start": 79.89,
+      "end": 83.82,
+      "duration": 3.93,
+      "text": "to extract thermal properties was to simply say"
+    },
+    {
+      "index": 22,
+      "start": 83.82,
+      "end": 85.6,
+      "duration": 1.78,
+      "text": "that we will construct a partition"
+    },
+    {
+      "index": 23,
+      "start": 85.6,
+      "end": 88.87,
+      "duration": 3.27,
+      "text": "function for the harmonic oscillator"
+    },
+    {
+      "index": 24,
+      "start": 88.87,
+      "end": 94.382,
+      "duration": 5.512,
+      "text": "by summing over all of the states of e to the minus beta e"
+    },
+    {
+      "index": 25,
+      "start": 94.382,
+      "end": 98.86,
+      "duration": 4.478,
+      "text": "n according to the formula given above."
+    },
+    {
+      "index": 26,
+      "start": 98.86,
+      "end": 104.1,
+      "duration": 5.24,
+      "text": "Just thinking that these are allowed states"
+    },
+    {
+      "index": 27,
+      "start": 104.1,
+      "end": 110.6,
+      "duration": 6.5,
+      "text": "of this oscillator-- and this you can very easily do."
+    },
+    {
+      "index": 28,
+      "start": 110.6,
+      "end": 113.66,
+      "duration": 3.06,
+      "text": "It starts with the first term and then"
+    },
+    {
+      "index": 29,
+      "start": 113.66,
+      "end": 121.93,
+      "duration": 8.27,
+      "text": "it's a algebraic series, which will give you that formula."
+    },
+    {
+      "index": 30,
+      "start": 121.93,
+      "end": 126.72,
+      "duration": 4.79,
+      "text": "Now, if you are sitting at some temperature t,"
+    },
+    {
+      "index": 31,
+      "start": 126.72,
+      "end": 130.99,
+      "duration": 4.27,
+      "text": "you say that the average energy that you"
+    },
+    {
+      "index": 32,
+      "start": 130.99,
+      "end": 136.09,
+      "duration": 5.1,
+      "text": "have in your system, well, the formula that you have is"
+    },
+    {
+      "index": 33,
+      "start": 136.09,
+      "end": 142.17,
+      "duration": 6.08,
+      "text": "minus the log z by the beta, which if I apply to the z"
+    },
+    {
+      "index": 34,
+      "start": 142.17,
+      "end": 147.01,
+      "duration": 4.84,
+      "text": "that I have about, essentially weighs each one of these"
+    },
+    {
+      "index": 35,
+      "start": 147.01,
+      "end": 150.17,
+      "duration": 3.16,
+      "text": "by these Boltzmann weights by the corresponding energy"
+    },
+    {
+      "index": 36,
+      "start": 150.17,
+      "end": 151.91,
+      "duration": 1.74,
+      "text": "and sums them."
+    },
+    {
+      "index": 37,
+      "start": 151.91,
+      "end": 156.74,
+      "duration": 4.83,
+      "text": "What we do is we get, essentially, the contribution"
+    },
+    {
+      "index": 38,
+      "start": 156.74,
+      "end": 158.66,
+      "duration": 1.92,
+      "text": "of the ground state."
+    },
+    {
+      "index": 39,
+      "start": 158.66,
+      "end": 164.39,
+      "duration": 5.73,
+      "text": "Actually, for all intents and purposes, we can ignore this,"
+    },
+    {
+      "index": 40,
+      "start": 164.39,
+      "end": 165.87,
+      "duration": 1.48,
+      "text": "and, hence, this."
+    },
+    {
+      "index": 41,
+      "start": 165.87,
+      "end": 170.09,
+      "duration": 4.22,
+      "text": "But for completion, let's have them around."
+    },
+    {
+      "index": 42,
+      "start": 170.09,
+      "end": 172.96,
+      "duration": 2.87,
+      "text": "And then from what is in the denominator,"
+    },
+    {
+      "index": 43,
+      "start": 172.96,
+      "end": 176.52,
+      "duration": 3.56,
+      "text": "if you take derivative with respect to beta,"
+    },
+    {
+      "index": 44,
+      "start": 176.52,
+      "end": 179.33,
+      "duration": 2.81,
+      "text": "you will get a factor of h bar omega."
+    },
+    {
+      "index": 45,
+      "start": 179.33,
+      "end": 184.01,
+      "duration": 4.68,
+      "text": "And then this factor of 1 minus e to the minus beta h bar."
+    },
+    {
+      "index": 46,
+      "start": 186.95,
+      "end": 190.19,
+      "duration": 3.24,
+      "text": "Actually, we then additional e to the minus beta"
+    },
+    {
+      "index": 47,
+      "start": 190.19,
+      "end": 191.642,
+      "duration": 1.452,
+      "text": "h bar omega in here."
+    },
+    {
+      "index": 48,
+      "start": 197.43,
+      "end": 200.86,
+      "duration": 3.43,
+      "text": "Now, the thing that we really compare to"
+    },
+    {
+      "index": 49,
+      "start": 200.86,
+      "end": 205.54,
+      "duration": 4.68,
+      "text": "was what happens if we were to take one more derivative to see"
+    },
+    {
+      "index": 50,
+      "start": 205.54,
+      "end": 208.87,
+      "duration": 3.33,
+      "text": "how much the heat capacity is that we"
+    },
+    {
+      "index": 51,
+      "start": 208.87,
+      "end": 211.76,
+      "duration": 2.89,
+      "text": "have in the harmonic oscillator."
+    },
+    {
+      "index": 52,
+      "start": 211.76,
+      "end": 216.07,
+      "duration": 4.31,
+      "text": "So basically taking an average of the raw formula with respect"
+    },
+    {
+      "index": 53,
+      "start": 216.07,
+      "end": 219.68,
+      "duration": 3.61,
+      "text": "to temperature, realizing that these betas are"
+    },
+    {
+      "index": 54,
+      "start": 219.68,
+      "end": 222.97,
+      "duration": 3.29,
+      "text": "inverse temperatures."
+    },
+    {
+      "index": 55,
+      "start": 222.97,
+      "end": 226.896,
+      "duration": 3.926,
+      "text": "So derivatives with respect to t will"
+    },
+    {
+      "index": 56,
+      "start": 226.896,
+      "end": 228.437,
+      "duration": 1.541,
+      "text": "be related to derivative with respect"
+    },
+    {
+      "index": 57,
+      "start": 228.437,
+      "end": 232.37,
+      "duration": 3.933,
+      "text": "to beta, except that I've will get an additional factor of 1"
+    },
+    {
+      "index": 58,
+      "start": 232.37,
+      "end": 234.77,
+      "duration": 2.4,
+      "text": "over k bt squared."
+    },
+    {
+      "index": 59,
+      "start": 234.77,
+      "end": 238.19,
+      "duration": 3.42,
+      "text": "So the whole thing I could write that as kb"
+    },
+    {
+      "index": 60,
+      "start": 238.19,
+      "end": 247.5,
+      "duration": 9.31,
+      "text": "and then I had the h bar omega over kt squared."
+    },
+    {
+      "index": 61,
+      "start": 247.5,
+      "end": 251.57,
+      "duration": 4.07,
+      "text": "And then from these factors, I had something like e"
+    },
+    {
+      "index": 62,
+      "start": 251.57,
+      "end": 260.275,
+      "duration": 8.705,
+      "text": "to the minus e to the h bar omega over kt."
+    },
+    {
+      "index": 63,
+      "start": 260.275,
+      "end": 265.86,
+      "duration": 5.585,
+      "text": "E to the h bar omega over kt minus 1 squared."
+    },
+    {
+      "index": 64,
+      "start": 269.51,
+      "end": 276.83,
+      "duration": 7.32,
+      "text": "So if we were to plug this function, the heat"
+    },
+    {
+      "index": 65,
+      "start": 276.83,
+      "end": 284.57,
+      "duration": 7.74,
+      "text": "capacity in its natural unit that are this kb, then"
+    },
+    {
+      "index": 66,
+      "start": 284.57,
+      "end": 291.39,
+      "duration": 6.82,
+      "text": "as a function of temperature, we get behavior"
+    },
+    {
+      "index": 67,
+      "start": 291.39,
+      "end": 294.74,
+      "duration": 3.35,
+      "text": "that we can actually express correctly"
+    },
+    {
+      "index": 68,
+      "start": 294.74,
+      "end": 296.16,
+      "duration": 1.42,
+      "text": "in terms of the combination."
+    },
+    {
+      "index": 69,
+      "start": 296.16,
+      "end": 298.87,
+      "duration": 2.71,
+      "text": "You can see always we get temperature"
+    },
+    {
+      "index": 70,
+      "start": 298.87,
+      "end": 302.11,
+      "duration": 3.24,
+      "text": "in units of kb over h bar omega."
+    },
+    {
+      "index": 71,
+      "start": 302.11,
+      "end": 306.26,
+      "duration": 4.15,
+      "text": "So I can really plug this in the form of, say,"
+    },
+    {
+      "index": 72,
+      "start": 306.26,
+      "end": 310.897,
+      "duration": 4.637,
+      "text": "kt over h bar omega, which we call t"
+    },
+    {
+      "index": 73,
+      "start": 310.897,
+      "end": 312.355,
+      "duration": 1.458,
+      "text": "to some characteristic temperature."
+    },
+    {
+      "index": 74,
+      "start": 314.87,
+      "end": 322.09,
+      "duration": 7.22,
+      "text": "And the behavior that we have is that close to 0 temperatures,"
+    },
+    {
+      "index": 75,
+      "start": 322.09,
+      "end": 324.45,
+      "duration": 2.36,
+      "text": "you go to 0 exponentially, because"
+    },
+    {
+      "index": 76,
+      "start": 324.45,
+      "end": 327.69,
+      "duration": 3.24,
+      "text": "of essentially the ratio of these exponentials."
+    },
+    {
+      "index": 77,
+      "start": 327.69,
+      "end": 331.01,
+      "duration": 3.32,
+      "text": "We leave one exponential in the denominator."
+    },
+    {
+      "index": 78,
+      "start": 331.01,
+      "end": 334.668,
+      "duration": 3.658,
+      "text": "So the gaps that you have between n equals to 0"
+    },
+    {
+      "index": 79,
+      "start": 334.668,
+      "end": 339.41,
+      "duration": 4.742,
+      "text": "and n equals to 1 translates to behavior"
+    },
+    {
+      "index": 80,
+      "start": 339.41,
+      "end": 342.73,
+      "duration": 3.32,
+      "text": "of that at low temperatures is exponentially"
+    },
+    {
+      "index": 81,
+      "start": 342.73,
+      "end": 345.23,
+      "duration": 2.5,
+      "text": "decaying to leading order."
+    },
+    {
+      "index": 82,
+      "start": 351.17,
+      "end": 355.04,
+      "duration": 3.87,
+      "text": "Then, eventually, at high temperatures,"
+    },
+    {
+      "index": 83,
+      "start": 355.04,
+      "end": 361.26,
+      "duration": 6.22,
+      "text": "you get the classical result where you saturate to 1."
+    },
+    {
+      "index": 84,
+      "start": 361.26,
+      "end": 365.38,
+      "duration": 4.12,
+      "text": "And so you will have a curve that"
+    },
+    {
+      "index": 85,
+      "start": 365.38,
+      "end": 370.35,
+      "duration": 4.97,
+      "text": "has a shift from one behavior to another behavior."
+    },
+    {
+      "index": 86,
+      "start": 370.35,
+      "end": 375.32,
+      "duration": 4.97,
+      "text": "And the place where this transition occurs"
+    },
+    {
+      "index": 87,
+      "start": 375.32,
+      "end": 379.22,
+      "duration": 3.9,
+      "text": "is when this combination is of the order of 1."
+    },
+    {
+      "index": 88,
+      "start": 379.22,
+      "end": 383.03,
+      "duration": 3.81,
+      "text": "I'm not saying it's precisely 1, but it's of the order of 1."
+    },
+    {
+      "index": 89,
+      "start": 383.03,
+      "end": 385.324,
+      "duration": 2.294,
+      "text": "So, basically, you have this kind of behavior."
+    },
+    {
+      "index": 90,
+      "start": 388.782,
+      "end": 391.26,
+      "duration": 2.478,
+      "text": "OK?"
+    },
+    {
+      "index": 91,
+      "start": 391.26,
+      "end": 394.74,
+      "duration": 3.48,
+      "text": "So we use this curve to explain the heat"
+    },
+    {
+      "index": 92,
+      "start": 394.74,
+      "end": 399.16,
+      "duration": 4.42,
+      "text": "capacity of diatomic gas, such as the gas in this room,"
+    },
+    {
+      "index": 93,
+      "start": 399.16,
+      "end": 404.8,
+      "duration": 5.64,
+      "text": "and why at room temperature, we see a heat capacity in which it"
+    },
+    {
+      "index": 94,
+      "start": 404.8,
+      "end": 408.38,
+      "duration": 3.58,
+      "text": "appears that the vibrational degrees of freedom are frozen,"
+    },
+    {
+      "index": 95,
+      "start": 408.38,
+      "end": 410.64,
+      "duration": 2.26,
+      "text": "are not contributing anything."
+    },
+    {
+      "index": 96,
+      "start": 410.64,
+      "end": 414.5,
+      "duration": 3.86,
+      "text": "While at temperatures above the characteristic vibrational"
+    },
+    {
+      "index": 97,
+      "start": 414.5,
+      "end": 417.392,
+      "duration": 2.892,
+      "text": "frequency, which for a gas is of the order of 10"
+    },
+    {
+      "index": 98,
+      "start": 417.392,
+      "end": 420.94,
+      "duration": 3.548,
+      "text": "to the 3 degrees k, you really get"
+    },
+    {
+      "index": 99,
+      "start": 420.94,
+      "end": 422.68,
+      "duration": 1.74,
+      "text": "energy in the harmonic oscillator"
+    },
+    {
+      "index": 100,
+      "start": 422.68,
+      "end": 424.12,
+      "duration": 1.44,
+      "text": "also in the vibrations."
+    },
+    {
+      "index": 101,
+      "start": 424.12,
+      "end": 426.53,
+      "duration": 2.41,
+      "text": "And the heat capacity jumps, because you"
+    },
+    {
+      "index": 102,
+      "start": 426.53,
+      "end": 428.24,
+      "duration": 1.71,
+      "text": "have another way of storing energy."
+    },
+    {
+      "index": 103,
+      "start": 431.01,
+      "end": 447.51,
+      "duration": 16.5,
+      "text": "So the next thing that we asked was whether this describes also"
+    },
+    {
+      "index": 104,
+      "start": 447.51,
+      "end": 451.99,
+      "duration": 4.48,
+      "text": "heat capacity of a solid."
+    },
+    {
+      "index": 105,
+      "start": 456.79,
+      "end": 458.86,
+      "duration": 2.07,
+      "text": "So basically, for the diatomic gas,"
+    },
+    {
+      "index": 106,
+      "start": 458.86,
+      "end": 462.87,
+      "duration": 4.01,
+      "text": "you have two atoms that are bonded together"
+    },
+    {
+      "index": 107,
+      "start": 462.87,
+      "end": 464.36,
+      "duration": 1.49,
+      "text": "into a molecule."
+    },
+    {
+      "index": 108,
+      "start": 464.36,
+      "end": 467.52,
+      "duration": 3.16,
+      "text": "And you consider the vibrations of that."
+    },
+    {
+      "index": 109,
+      "start": 467.52,
+      "end": 471.83,
+      "duration": 4.31,
+      "text": "You can regard the solid as a huge molecule"
+    },
+    {
+      "index": 110,
+      "start": 471.83,
+      "end": 474.56,
+      "duration": 2.73,
+      "text": "with lots of atoms joined together."
+    },
+    {
+      "index": 111,
+      "start": 474.56,
+      "end": 476.72,
+      "duration": 2.16,
+      "text": "And they have vibrations."
+    },
+    {
+      "index": 112,
+      "start": 476.72,
+      "end": 480.83,
+      "duration": 4.11,
+      "text": "And if you think about all of those vibrations giving you"
+    },
+    {
+      "index": 113,
+      "start": 480.83,
+      "end": 483.55,
+      "duration": 2.72,
+      "text": "something that is similar to this,"
+    },
+    {
+      "index": 114,
+      "start": 483.55,
+      "end": 486.24,
+      "duration": 2.69,
+      "text": "you would conclude that the heat capacity of a solid"
+    },
+    {
+      "index": 115,
+      "start": 486.24,
+      "end": 489.69,
+      "duration": 3.45,
+      "text": "should also have this kind of behavior."
+    },
+    {
+      "index": 116,
+      "start": 489.69,
+      "end": 492.44,
+      "duration": 2.75,
+      "text": "Whereas we noted that in actuality,"
+    },
+    {
+      "index": 117,
+      "start": 492.44,
+      "end": 500.82,
+      "duration": 8.38,
+      "text": "the heat capacity of a solid vanishes much more slowly"
+    },
+    {
+      "index": 118,
+      "start": 500.82,
+      "end": 503.23,
+      "duration": 2.41,
+      "text": "at low temperatures."
+    },
+    {
+      "index": 119,
+      "start": 503.23,
+      "end": 506.74,
+      "duration": 3.51,
+      "text": "And the dependence at low temperatures"
+    },
+    {
+      "index": 120,
+      "start": 506.74,
+      "end": 508.56,
+      "duration": 1.82,
+      "text": "is proportional to t cubed."
+    },
+    {
+      "index": 121,
+      "start": 513.15,
+      "end": 516.59,
+      "duration": 3.44,
+      "text": "So at the end of last lecture, we"
+    },
+    {
+      "index": 122,
+      "start": 516.59,
+      "end": 522.82,
+      "duration": 6.23,
+      "text": "gave an explanation for this, which I will repeat."
+    },
+    {
+      "index": 123,
+      "start": 522.82,
+      "end": 528.0,
+      "duration": 5.18,
+      "text": "Again, the picture is that the solid, like a huge molecule,"
+    },
+    {
+      "index": 124,
+      "start": 528.0,
+      "end": 530.91,
+      "duration": 2.91,
+      "text": "has vibrational modes."
+    },
+    {
+      "index": 125,
+      "start": 530.91,
+      "end": 533.56,
+      "duration": 2.65,
+      "text": "But these vibrational modes cover a whole range"
+    },
+    {
+      "index": 126,
+      "start": 533.56,
+      "end": 536.15,
+      "duration": 2.59,
+      "text": "of different frequencies."
+    },
+    {
+      "index": 127,
+      "start": 536.15,
+      "end": 544.63,
+      "duration": 8.48,
+      "text": "And so if you ask, what are the frequencies omega"
+    },
+    {
+      "index": 128,
+      "start": 544.63,
+      "end": 560.51,
+      "duration": 15.88,
+      "text": "alpha of vibrations of a solid, the most natural way"
+    },
+    {
+      "index": 129,
+      "start": 560.51,
+      "end": 563.64,
+      "duration": 3.13,
+      "text": "to characterize them is, in fact,"
+    },
+    {
+      "index": 130,
+      "start": 563.64,
+      "end": 569.97,
+      "duration": 6.33,
+      "text": "in terms of a wave vector k that indicates a direction"
+    },
+    {
+      "index": 131,
+      "start": 569.97,
+      "end": 575.27,
+      "duration": 5.3,
+      "text": "for the oscillatory wave that you set up in the material."
+    },
+    {
+      "index": 132,
+      "start": 575.27,
+      "end": 587.42,
+      "duration": 12.15,
+      "text": "And depending on k, you'll have different frequencies."
+    },
+    {
+      "index": 133,
+      "start": 587.42,
+      "end": 594.15,
+      "duration": 6.73,
+      "text": "And I said that, essentially, the longest wave length"
+    },
+    {
+      "index": 134,
+      "start": 594.15,
+      "end": 598.18,
+      "duration": 4.03,
+      "text": "corresponding to k equals to 0 is taking the whole solid"
+    },
+    {
+      "index": 135,
+      "start": 598.18,
+      "end": 599.34,
+      "duration": 1.16,
+      "text": "and translating it."
+    },
+    {
+      "index": 136,
+      "start": 599.34,
+      "end": 603.57,
+      "duration": 4.23,
+      "text": "Again, thinking back about the oxygen molecule, the oxygen"
+    },
+    {
+      "index": 137,
+      "start": 603.57,
+      "end": 606.0,
+      "duration": 2.43,
+      "text": "molecule, you have two coordinates."
+    },
+    {
+      "index": 138,
+      "start": 606.0,
+      "end": 609.56,
+      "duration": 3.56,
+      "text": "It's the relative coordinate that has the vibration."
+    },
+    {
+      "index": 139,
+      "start": 609.56,
+      "end": 613.5,
+      "duration": 3.94,
+      "text": "And you have a center of mass coordinate that has no energy."
+    },
+    {
+      "index": 140,
+      "start": 613.5,
+      "end": 616.03,
+      "duration": 2.53,
+      "text": "If you make a molecule more and more complicated,"
+    },
+    {
+      "index": 141,
+      "start": 616.03,
+      "end": 618.48,
+      "duration": 2.45,
+      "text": "you will have more modes, but you will always"
+    },
+    {
+      "index": 142,
+      "start": 618.48,
+      "end": 622.48,
+      "duration": 4.0,
+      "text": "have the 0 mode that corresponds to the translation."
+    },
+    {
+      "index": 143,
+      "start": 622.48,
+      "end": 625.01,
+      "duration": 2.53,
+      "text": "And that carries over all the way to the solid."
+    },
+    {
+      "index": 144,
+      "start": 625.01,
+      "end": 628.5,
+      "duration": 3.49,
+      "text": "So there is a mode that corresponds to translations--"
+    },
+    {
+      "index": 145,
+      "start": 628.5,
+      "end": 631.42,
+      "duration": 2.92,
+      "text": "and, in fact, rotations-- that would carry"
+    },
+    {
+      "index": 146,
+      "start": 631.42,
+      "end": 637.94,
+      "duration": 6.52,
+      "text": "no energy, and corresponds, therefore, to 0 frequency."
+    },
+    {
+      "index": 147,
+      "start": 637.94,
+      "end": 642.69,
+      "duration": 4.75,
+      "text": "And then if you start to make long wavelength oscillations,"
+    },
+    {
+      "index": 148,
+      "start": 642.69,
+      "end": 645.98,
+      "duration": 3.29,
+      "text": "the frequency is going to be small."
+    },
+    {
+      "index": 149,
+      "start": 645.98,
+      "end": 649.46,
+      "duration": 3.48,
+      "text": "And, indeed, what we know is that we tap on the solid"
+    },
+    {
+      "index": 150,
+      "start": 649.46,
+      "end": 651.83,
+      "duration": 2.37,
+      "text": "and you create sound waves, which"
+    },
+    {
+      "index": 151,
+      "start": 651.83,
+      "end": 656.36,
+      "duration": 4.53,
+      "text": "means that the low-frequency long wavelength"
+    },
+    {
+      "index": 152,
+      "start": 656.36,
+      "end": 660.05,
+      "duration": 3.69,
+      "text": "modes have a dispersion relation in which omega"
+    },
+    {
+      "index": 153,
+      "start": 660.05,
+      "end": 662.09,
+      "duration": 2.04,
+      "text": "is proportional to k."
+    },
+    {
+      "index": 154,
+      "start": 662.09,
+      "end": 666.34,
+      "duration": 4.25,
+      "text": "We can write that as omega is v times k, where"
+    },
+    {
+      "index": 155,
+      "start": 666.34,
+      "end": 670.6,
+      "duration": 4.26,
+      "text": "v is the velocity of the sound in the solid."
+    },
+    {
+      "index": 156,
+      "start": 670.6,
+      "end": 676.23,
+      "duration": 5.63,
+      "text": "Now, of course, the shortest wave length that you can have"
+    },
+    {
+      "index": 157,
+      "start": 676.23,
+      "end": 680.54,
+      "duration": 4.31,
+      "text": "is related to the separation between the atoms in the solid."
+    },
+    {
+      "index": 158,
+      "start": 680.54,
+      "end": 683.19,
+      "duration": 2.65,
+      "text": "And so, basically, there's a limit"
+    },
+    {
+      "index": 159,
+      "start": 683.19,
+      "end": 687.3,
+      "duration": 4.11,
+      "text": "to the range of k's that you can put in your system."
+    },
+    {
+      "index": 160,
+      "start": 687.3,
+      "end": 689.57,
+      "duration": 2.27,
+      "text": "And this linear behavior is going"
+    },
+    {
+      "index": 161,
+      "start": 689.57,
+      "end": 694.17,
+      "duration": 4.6,
+      "text": "to get modified once you get towards the age of the solid."
+    },
+    {
+      "index": 162,
+      "start": 694.17,
+      "end": 699.1,
+      "duration": 4.93,
+      "text": "And the reason I have alpha here is"
+    },
+    {
+      "index": 163,
+      "start": 699.1,
+      "end": 702.39,
+      "duration": 3.29,
+      "text": "because you can have different polarizations."
+    },
+    {
+      "index": 164,
+      "start": 702.39,
+      "end": 705.48,
+      "duration": 3.09,
+      "text": "There are three different possible polarizations."
+    },
+    {
+      "index": 165,
+      "start": 705.48,
+      "end": 707.82,
+      "duration": 2.34,
+      "text": "So in principle, you will have three"
+    },
+    {
+      "index": 166,
+      "start": 707.82,
+      "end": 711.08,
+      "duration": 3.26,
+      "text": "of these curves in the system hard."
+    },
+    {
+      "index": 167,
+      "start": 715.21,
+      "end": 719.72,
+      "duration": 4.51,
+      "text": "And these curves could be very complicated"
+    },
+    {
+      "index": 168,
+      "start": 719.72,
+      "end": 721.98,
+      "duration": 2.26,
+      "text": "when you get to the edge of [INAUDIBLE] zone"
+    },
+    {
+      "index": 169,
+      "start": 721.98,
+      "end": 725.79,
+      "duration": 3.81,
+      "text": "and you have to solve a big dynamical matrix"
+    },
+    {
+      "index": 170,
+      "start": 725.79,
+      "end": 729.06,
+      "duration": 3.27,
+      "text": "in order to extract what the frequencies are,"
+    },
+    {
+      "index": 171,
+      "start": 729.06,
+      "end": 733.37,
+      "duration": 4.31,
+      "text": "if you want to have the complete spectrum."
+    },
+    {
+      "index": 172,
+      "start": 733.37,
+      "end": 737.77,
+      "duration": 4.4,
+      "text": "So the solid is a collection of these harmonic oscillators that"
+    },
+    {
+      "index": 173,
+      "start": 737.77,
+      "end": 740.18,
+      "duration": 2.41,
+      "text": "are, in principle, very complicated."
+    },
+    {
+      "index": 174,
+      "start": 742.73,
+      "end": 746.07,
+      "duration": 3.34,
+      "text": "But we have the following."
+    },
+    {
+      "index": 175,
+      "start": 746.07,
+      "end": 748.545,
+      "duration": 2.475,
+      "text": "So I say, OK, I have all of these."
+    },
+    {
+      "index": 176,
+      "start": 748.545,
+      "end": 751.4,
+      "duration": 2.855,
+      "text": "And I want to calculate at a given temperature"
+    },
+    {
+      "index": 177,
+      "start": 751.4,
+      "end": 754.48,
+      "duration": 3.08,
+      "text": "how much energy I have put in the solid."
+    },
+    {
+      "index": 178,
+      "start": 754.48,
+      "end": 758.69,
+      "duration": 4.21,
+      "text": "So this energy that I have put in the vibrations"
+    },
+    {
+      "index": 179,
+      "start": 758.69,
+      "end": 763.18,
+      "duration": 4.49,
+      "text": "at some temperature t, assuming that these vibrations are"
+    },
+    {
+      "index": 180,
+      "start": 763.18,
+      "end": 767.61,
+      "duration": 4.43,
+      "text": "really a collection of these oscillators."
+    },
+    {
+      "index": 181,
+      "start": 767.61,
+      "end": 772.93,
+      "duration": 5.32,
+      "text": "Well, what I have to do is to add up all of these terms."
+    },
+    {
+      "index": 182,
+      "start": 772.93,
+      "end": 776.82,
+      "duration": 3.89,
+      "text": "There's going to be adding up all of the h bar omega over 2s"
+    },
+    {
+      "index": 183,
+      "start": 776.82,
+      "end": 778.92,
+      "duration": 2.1,
+      "text": "for all of these."
+    },
+    {
+      "index": 184,
+      "start": 778.92,
+      "end": 779.42,
+      "duration": 0.5,
+      "text": "OK?"
+    },
+    {
+      "index": 185,
+      "start": 779.42,
+      "end": 782.5,
+      "duration": 3.08,
+      "text": "That will give me something that I will simply call e 0,"
+    },
+    {
+      "index": 186,
+      "start": 782.5,
+      "end": 784.33,
+      "duration": 1.83,
+      "text": "because it doesn't depend on temperature."
+    },
+    {
+      "index": 187,
+      "start": 784.33,
+      "end": 786.95,
+      "duration": 2.62,
+      "text": "Presumably will exist at 0 temperature."
+    },
+    {
+      "index": 188,
+      "start": 786.95,
+      "end": 789.38,
+      "duration": 2.43,
+      "text": "And I can even fold into that whatever"
+    },
+    {
+      "index": 189,
+      "start": 789.38,
+      "end": 793.3,
+      "duration": 3.92,
+      "text": "the value of the potential energy of the interactions"
+    },
+    {
+      "index": 190,
+      "start": 793.3,
+      "end": 796.67,
+      "duration": 3.37,
+      "text": "between the particles is at 0 temperature."
+    },
+    {
+      "index": 191,
+      "start": 796.67,
+      "end": 800.69,
+      "duration": 4.02,
+      "text": "What I'm interested in really is the temperature dependence."
+    },
+    {
+      "index": 192,
+      "start": 800.69,
+      "end": 804.5,
+      "duration": 3.81,
+      "text": "So I basically take the formula that I have over there,"
+    },
+    {
+      "index": 193,
+      "start": 804.5,
+      "end": 808.06,
+      "duration": 3.56,
+      "text": "and sum over all of these oscillators."
+    },
+    {
+      "index": 194,
+      "start": 808.06,
+      "end": 811.22,
+      "duration": 3.16,
+      "text": "These oscillators are characterized by polarization"
+    },
+    {
+      "index": 195,
+      "start": 811.22,
+      "end": 813.78,
+      "duration": 2.56,
+      "text": "and by the wave vector k."
+    },
+    {
+      "index": 196,
+      "start": 813.78,
+      "end": 819.56,
+      "duration": 5.78,
+      "text": "And then I have, essentially, h bar omega alpha"
+    },
+    {
+      "index": 197,
+      "start": 819.56,
+      "end": 828.75,
+      "duration": 9.19,
+      "text": "of k divided by e to the beta h bar omega alpha of k minus 1."
+    },
+    {
+      "index": 198,
+      "start": 828.75,
+      "end": 833.44,
+      "duration": 4.69,
+      "text": "So I have to apply that formula to this potentially very"
+    },
+    {
+      "index": 199,
+      "start": 833.44,
+      "end": 837.32,
+      "duration": 3.88,
+      "text": "complicated set of frequencies."
+    },
+    {
+      "index": 200,
+      "start": 837.32,
+      "end": 841.72,
+      "duration": 4.4,
+      "text": "The thing is, that according to the picture that I have over"
+    },
+    {
+      "index": 201,
+      "start": 841.72,
+      "end": 846.92,
+      "duration": 5.2,
+      "text": "here, to a 0 order approximation,"
+    },
+    {
+      "index": 202,
+      "start": 846.92,
+      "end": 850.54,
+      "duration": 3.62,
+      "text": "you would say that the heat capacity is 1"
+    },
+    {
+      "index": 203,
+      "start": 850.54,
+      "end": 855.19,
+      "duration": 4.65,
+      "text": "if you are on this side, 0 if you're on that side."
+    },
+    {
+      "index": 204,
+      "start": 855.19,
+      "end": 858.79,
+      "duration": 3.6,
+      "text": "What distinguishes those two sides"
+    },
+    {
+      "index": 205,
+      "start": 858.79,
+      "end": 862.86,
+      "duration": 4.07,
+      "text": "is whether the frequency in combination with temperature"
+    },
+    {
+      "index": 206,
+      "start": 862.86,
+      "end": 865.67,
+      "duration": 2.81,
+      "text": "is less than or larger than 1."
+    },
+    {
+      "index": 207,
+      "start": 865.67,
+      "end": 871.15,
+      "duration": 5.48,
+      "text": "Basically, low frequencies would end up being here."
+    },
+    {
+      "index": 208,
+      "start": 871.15,
+      "end": 873.61,
+      "duration": 2.46,
+      "text": "High frequencies would end up being here."
+    },
+    {
+      "index": 209,
+      "start": 873.61,
+      "end": 876.04,
+      "duration": 2.43,
+      "text": "And would not contribute."
+    },
+    {
+      "index": 210,
+      "start": 876.04,
+      "end": 881.15,
+      "duration": 5.11,
+      "text": "So for a given temperature, there is some borderline."
+    },
+    {
+      "index": 211,
+      "start": 881.15,
+      "end": 885.31,
+      "duration": 4.16,
+      "text": "That borderline would correspond to kt over h bar."
+    },
+    {
+      "index": 212,
+      "start": 885.31,
+      "end": 889.63,
+      "duration": 4.32,
+      "text": "So let me draw where that borderline is."
+    },
+    {
+      "index": 213,
+      "start": 889.63,
+      "end": 892.6,
+      "duration": 2.97,
+      "text": "Kt over h bar."
+    },
+    {
+      "index": 214,
+      "start": 892.6,
+      "end": 895.77,
+      "duration": 3.17,
+      "text": "For a particular temperature, all of these modes"
+    },
+    {
+      "index": 215,
+      "start": 895.77,
+      "end": 897.93,
+      "duration": 2.16,
+      "text": "are not really contributing."
+    },
+    {
+      "index": 216,
+      "start": 897.93,
+      "end": 900.55,
+      "duration": 2.62,
+      "text": "All of these modes are contributing."
+    },
+    {
+      "index": 217,
+      "start": 900.55,
+      "end": 903.66,
+      "duration": 3.11,
+      "text": "If my temperature is high enough,"
+    },
+    {
+      "index": 218,
+      "start": 903.66,
+      "end": 905.88,
+      "duration": 2.22,
+      "text": "everything is contributing."
+    },
+    {
+      "index": 219,
+      "start": 905.88,
+      "end": 909.6,
+      "duration": 3.72,
+      "text": "And the total number of oscillators is 3 n."
+    },
+    {
+      "index": 220,
+      "start": 909.6,
+      "end": 910.81,
+      "duration": 1.21,
+      "text": "It's the number of atoms."
+    },
+    {
+      "index": 221,
+      "start": 910.81,
+      "end": 913.49,
+      "duration": 2.68,
+      "text": "So essentially, I will get 3 n times"
+    },
+    {
+      "index": 222,
+      "start": 913.49,
+      "end": 915.79,
+      "duration": 2.3,
+      "text": "whatever formula I have over there."
+    },
+    {
+      "index": 223,
+      "start": 915.79,
+      "end": 918.01,
+      "duration": 2.22,
+      "text": "As a come further and further down,"
+    },
+    {
+      "index": 224,
+      "start": 918.01,
+      "end": 920.4,
+      "duration": 2.39,
+      "text": "there's some kind of complicated behavior"
+    },
+    {
+      "index": 225,
+      "start": 920.4,
+      "end": 923.6,
+      "duration": 3.2,
+      "text": "as I go through this spaghetti of modes."
+    },
+    {
+      "index": 226,
+      "start": 923.6,
+      "end": 927.14,
+      "duration": 3.54,
+      "text": "But when I get to low enough structures,"
+    },
+    {
+      "index": 227,
+      "start": 927.14,
+      "end": 929.11,
+      "duration": 1.97,
+      "text": "then, again, things become simple,"
+    },
+    {
+      "index": 228,
+      "start": 929.11,
+      "end": 933.02,
+      "duration": 3.91,
+      "text": "because I will only be sensitive to the modes that"
+    },
+    {
+      "index": 229,
+      "start": 933.02,
+      "end": 937.26,
+      "duration": 4.24,
+      "text": "are described by this a omega being vk."
+    },
+    {
+      "index": 230,
+      "start": 937.26,
+      "end": 938.04,
+      "duration": 0.78,
+      "text": "OK?"
+    },
+    {
+      "index": 231,
+      "start": 938.04,
+      "end": 944.98,
+      "duration": 6.94,
+      "text": "So if I'm interested in t going to 0,"
+    },
+    {
+      "index": 232,
+      "start": 944.98,
+      "end": 948.055,
+      "duration": 3.075,
+      "text": "means less than some characteristic temperature"
+    },
+    {
+      "index": 233,
+      "start": 948.055,
+      "end": 950.89,
+      "duration": 2.835,
+      "text": "that we have to define shortly."
+    },
+    {
+      "index": 234,
+      "start": 950.89,
+      "end": 956.27,
+      "duration": 5.38,
+      "text": "So let's say, replace this with t less than some theta"
+    },
+    {
+      "index": 235,
+      "start": 956.27,
+      "end": 960.14,
+      "duration": 3.87,
+      "text": "d that I have to get for you shortly,"
+    },
+    {
+      "index": 236,
+      "start": 960.14,
+      "end": 966.93,
+      "duration": 6.79,
+      "text": "then I will replace this with e 0 plus sum over alpha"
+    },
+    {
+      "index": 237,
+      "start": 966.93,
+      "end": 976.52,
+      "duration": 9.59,
+      "text": "and k of h bar v alpha k e to the beta h bar e"
+    },
+    {
+      "index": 238,
+      "start": 976.52,
+      "end": 981.89,
+      "duration": 5.37,
+      "text": "alpha k minus 1."
+    },
+    {
+      "index": 239,
+      "start": 981.89,
+      "end": 982.39,
+      "duration": 0.5,
+      "text": "OK?"
+    },
+    {
+      "index": 240,
+      "start": 986.32,
+      "end": 992.08,
+      "duration": 5.76,
+      "text": "Now, for simplicity, essentially I"
+    },
+    {
+      "index": 241,
+      "start": 992.08,
+      "end": 993.7,
+      "duration": 1.62,
+      "text": "have to do three different sums."
+    },
+    {
+      "index": 242,
+      "start": 993.7,
+      "end": 996.3,
+      "duration": 2.6,
+      "text": "All of them are the same up to having"
+    },
+    {
+      "index": 243,
+      "start": 996.3,
+      "end": 1000.7,
+      "duration": 4.4,
+      "text": "to use different values of v. Let's just for simplicity"
+    },
+    {
+      "index": 244,
+      "start": 1000.7,
+      "end": 1005.85,
+      "duration": 5.15,
+      "text": "assume that all of the v alphas are the same v,"
+    },
+    {
+      "index": 245,
+      "start": 1005.85,
+      "end": 1008.57,
+      "duration": 2.72,
+      "text": "so that I really have only one velocity."
+    },
+    {
+      "index": 246,
+      "start": 1008.57,
+      "end": 1011.2,
+      "duration": 2.63,
+      "text": "There's really no difficulty in generalizing this."
+    },
+    {
+      "index": 247,
+      "start": 1011.2,
+      "end": 1015.14,
+      "duration": 3.94,
+      "text": "So let's do this for simplicity of algebra."
+    },
+    {
+      "index": 248,
+      "start": 1015.14,
+      "end": 1018.36,
+      "duration": 3.22,
+      "text": "So if I do that, then the sum over alpha"
+    },
+    {
+      "index": 249,
+      "start": 1018.36,
+      "end": 1020.42,
+      "duration": 2.06,
+      "text": "will simply give me a factor of 3."
+    },
+    {
+      "index": 250,
+      "start": 1020.42,
+      "end": 1023.39,
+      "duration": 2.97,
+      "text": "There are three possible polarizations, so I put a 3"
+    },
+    {
+      "index": 251,
+      "start": 1023.39,
+      "end": 1025.72,
+      "duration": 2.33,
+      "text": "there."
+    },
+    {
+      "index": 252,
+      "start": 1025.72,
+      "end": 1028.5,
+      "duration": 2.78,
+      "text": "And then I have to do the summation over k."
+    },
+    {
+      "index": 253,
+      "start": 1028.5,
+      "end": 1031.64,
+      "duration": 3.14,
+      "text": "Well, what does the summation over k mean?"
+    },
+    {
+      "index": 254,
+      "start": 1031.64,
+      "end": 1036.44,
+      "duration": 4.8,
+      "text": "When I have a small molecule for the, let's say, three"
+    },
+    {
+      "index": 255,
+      "start": 1036.44,
+      "end": 1039.119,
+      "duration": 2.679,
+      "text": "or four atoms, then I can enumerate"
+    },
+    {
+      "index": 256,
+      "start": 1039.119,
+      "end": 1041.98,
+      "duration": 2.861,
+      "text": "what the different vibrational states are."
+    },
+    {
+      "index": 257,
+      "start": 1041.98,
+      "end": 1047.52,
+      "duration": 5.54,
+      "text": "As I go to a large solid, I essentially"
+    },
+    {
+      "index": 258,
+      "start": 1047.52,
+      "end": 1052.93,
+      "duration": 5.41,
+      "text": "have modes that are at each value of k,"
+    },
+    {
+      "index": 259,
+      "start": 1052.93,
+      "end": 1055.04,
+      "duration": 2.11,
+      "text": "but, in reality, they are discrete."
+    },
+    {
+      "index": 260,
+      "start": 1055.04,
+      "end": 1058.4,
+      "duration": 3.36,
+      "text": "They are very, very, very, very finely separated"
+    },
+    {
+      "index": 261,
+      "start": 1058.4,
+      "end": 1061.39,
+      "duration": 2.99,
+      "text": "by a separation that is of the order of 2"
+    },
+    {
+      "index": 262,
+      "start": 1061.39,
+      "end": 1065.11,
+      "duration": 3.72,
+      "text": "pi over the size of the system."
+    },
+    {
+      "index": 263,
+      "start": 1065.11,
+      "end": 1069.58,
+      "duration": 4.47,
+      "text": "So to ensure that eventually when you count all of the modes"
+    },
+    {
+      "index": 264,
+      "start": 1069.58,
+      "end": 1071.55,
+      "duration": 1.97,
+      "text": "that you have here, you, again, end up"
+    },
+    {
+      "index": 265,
+      "start": 1071.55,
+      "end": 1076.01,
+      "duration": 4.46,
+      "text": "to have of the order of n states."
+    },
+    {
+      "index": 266,
+      "start": 1076.01,
+      "end": 1080.33,
+      "duration": 4.32,
+      "text": "So if that's the case, this sum, really I"
+    },
+    {
+      "index": 267,
+      "start": 1080.33,
+      "end": 1084.93,
+      "duration": 4.6,
+      "text": "can replace with an integral, because going from one point"
+    },
+    {
+      "index": 268,
+      "start": 1084.93,
+      "end": 1087.32,
+      "duration": 2.39,
+      "text": "to the next point does not make much difference."
+    },
+    {
+      "index": 269,
+      "start": 1087.32,
+      "end": 1092.07,
+      "duration": 4.75,
+      "text": "So I will have an integral over k."
+    },
+    {
+      "index": 270,
+      "start": 1092.07,
+      "end": 1095.85,
+      "duration": 3.78,
+      "text": "But I have to know how densely these things are."
+    },
+    {
+      "index": 271,
+      "start": 1095.85,
+      "end": 1099.12,
+      "duration": 3.27,
+      "text": "And in one direction it is 2 pi over l."
+    },
+    {
+      "index": 272,
+      "start": 1099.12,
+      "end": 1101.84,
+      "duration": 2.72,
+      "text": "So the density would be l over 2 pi."
+    },
+    {
+      "index": 273,
+      "start": 1101.84,
+      "end": 1103.85,
+      "duration": 2.01,
+      "text": "If I look at all three directions,"
+    },
+    {
+      "index": 274,
+      "start": 1103.85,
+      "end": 1106.18,
+      "duration": 2.33,
+      "text": "I have to multiply all of them."
+    },
+    {
+      "index": 275,
+      "start": 1106.18,
+      "end": 1108.99,
+      "duration": 2.81,
+      "text": "So I will get v divided by 2 pi cubed."
+    },
+    {
+      "index": 276,
+      "start": 1108.99,
+      "end": 1112.67,
+      "duration": 3.68,
+      "text": "So this is the usual density of states."
+    },
+    {
+      "index": 277,
+      "start": 1112.67,
+      "end": 1119.25,
+      "duration": 6.58,
+      "text": "And you go to description in terms of wave numbers,"
+    },
+    {
+      "index": 278,
+      "start": 1119.25,
+      "end": 1122.28,
+      "duration": 3.03,
+      "text": "or, later on, in terms of momentums."
+    },
+    {
+      "index": 279,
+      "start": 1122.28,
+      "end": 1129.071,
+      "duration": 6.791,
+      "text": "And what we have here is this integral h bar v k e"
+    },
+    {
+      "index": 280,
+      "start": 1129.071,
+      "end": 1133.352,
+      "duration": 4.281,
+      "text": "to the beta h bar v k minus 1."
+    },
+    {
+      "index": 281,
+      "start": 1136.52,
+      "end": 1138.96,
+      "duration": 2.44,
+      "text": "OK?"
+    },
+    {
+      "index": 282,
+      "start": 1138.96,
+      "end": 1143.1,
+      "duration": 4.14,
+      "text": "So let's simplify this a little bit further."
+    },
+    {
+      "index": 283,
+      "start": 1143.1,
+      "end": 1144.88,
+      "duration": 1.78,
+      "text": "I have e 0."
+    },
+    {
+      "index": 284,
+      "start": 1144.88,
+      "end": 1145.73,
+      "duration": 0.85,
+      "text": "I have 3v."
+    },
+    {
+      "index": 285,
+      "start": 1145.73,
+      "end": 1152.65,
+      "duration": 6.92,
+      "text": "The integrand only depends on the magnitude of k,"
+    },
+    {
+      "index": 286,
+      "start": 1152.65,
+      "end": 1155.61,
+      "duration": 2.96,
+      "text": "so I can take advantage of that spherical symmetry"
+    },
+    {
+      "index": 287,
+      "start": 1155.61,
+      "end": 1162.14,
+      "duration": 6.53,
+      "text": "and write this as 4 pi k squared v k divided by this 8 pi cubed."
+    },
+    {
+      "index": 288,
+      "start": 1165.66,
+      "end": 1171.2,
+      "duration": 5.54,
+      "text": "What I can do is I can also introduce"
+    },
+    {
+      "index": 289,
+      "start": 1171.2,
+      "end": 1176.27,
+      "duration": 5.07,
+      "text": "a factor of beta here, multiplied by k t."
+    },
+    {
+      "index": 290,
+      "start": 1176.27,
+      "end": 1179.53,
+      "duration": 3.26,
+      "text": "Beta k t is 1."
+    },
+    {
+      "index": 291,
+      "start": 1179.53,
+      "end": 1185.89,
+      "duration": 6.36,
+      "text": "And if I call this combination to be x, then what"
+    },
+    {
+      "index": 292,
+      "start": 1185.89,
+      "end": 1194.56,
+      "duration": 8.67,
+      "text": "I have is k b t x e to the x minus 1."
+    },
+    {
+      "index": 293,
+      "start": 1198.28,
+      "end": 1202.995,
+      "duration": 4.715,
+      "text": "Of course, k is simply related to x by k"
+    },
+    {
+      "index": 294,
+      "start": 1202.995,
+      "end": 1217.97,
+      "duration": 14.975,
+      "text": "being x kt over h bar v."
+    },
+    {
+      "index": 295,
+      "start": 1217.97,
+      "end": 1220.7,
+      "duration": 2.73,
+      "text": "And so at the next level of approximation,"
+    },
+    {
+      "index": 296,
+      "start": 1220.7,
+      "end": 1225.21,
+      "duration": 4.51,
+      "text": "this k squared v k I will write in terms of x squared v x."
+    },
+    {
+      "index": 297,
+      "start": 1225.21,
+      "end": 1226.55,
+      "duration": 1.34,
+      "text": "And so what do I have?"
+    },
+    {
+      "index": 298,
+      "start": 1226.55,
+      "end": 1229.08,
+      "duration": 2.53,
+      "text": "I have e 0."
+    },
+    {
+      "index": 299,
+      "start": 1229.08,
+      "end": 1233.965,
+      "duration": 4.885,
+      "text": "I have 3v divided by 2 pi squared."
+    },
+    {
+      "index": 300,
+      "start": 1238.6,
+      "end": 1242.04,
+      "duration": 3.44,
+      "text": "Because of this factor of kt that I will take outside"
+    },
+    {
+      "index": 301,
+      "start": 1242.04,
+      "end": 1244.89,
+      "duration": 2.85,
+      "text": "I have a kt."
+    },
+    {
+      "index": 302,
+      "start": 1244.89,
+      "end": 1247.27,
+      "duration": 2.38,
+      "text": "I have a k squared vk that I want"
+    },
+    {
+      "index": 303,
+      "start": 1247.27,
+      "end": 1249.35,
+      "duration": 2.08,
+      "text": "to replace with x squared v x."
+    },
+    {
+      "index": 304,
+      "start": 1249.35,
+      "end": 1251.64,
+      "duration": 2.29,
+      "text": "And that will give me an additional factor"
+    },
+    {
+      "index": 305,
+      "start": 1251.64,
+      "end": 1256.97,
+      "duration": 5.33,
+      "text": "of kv over h bar v cubed."
+    },
+    {
+      "index": 306,
+      "start": 1256.97,
+      "end": 1261.02,
+      "duration": 4.05,
+      "text": "And then I have an integral 0 to e 0 v"
+    },
+    {
+      "index": 307,
+      "start": 1261.02,
+      "end": 1266.93,
+      "duration": 5.91,
+      "text": "x x cubed e to the x minus 1."
+    },
+    {
+      "index": 308,
+      "start": 1273.035,
+      "end": 1277.47,
+      "duration": 4.435,
+      "text": "Now, in principle, when I start with this integration,"
+    },
+    {
+      "index": 309,
+      "start": 1277.47,
+      "end": 1283.67,
+      "duration": 6.2,
+      "text": "I have a finite range for k, which presumably"
+    },
+    {
+      "index": 310,
+      "start": 1283.67,
+      "end": 1287.68,
+      "duration": 4.01,
+      "text": "would translate into a finite range for x."
+    },
+    {
+      "index": 311,
+      "start": 1287.68,
+      "end": 1291.88,
+      "duration": 4.2,
+      "text": "But in reality none of these modes is contributing,"
+    },
+    {
+      "index": 312,
+      "start": 1291.88,
+      "end": 1294.43,
+      "duration": 2.55,
+      "text": "so I could extend the range of integration"
+    },
+    {
+      "index": 313,
+      "start": 1294.43,
+      "end": 1298.3,
+      "duration": 3.87,
+      "text": "all the way to infinity, and make very small error"
+    },
+    {
+      "index": 314,
+      "start": 1298.3,
+      "end": 1300.46,
+      "duration": 2.16,
+      "text": "at low temperatures."
+    },
+    {
+      "index": 315,
+      "start": 1300.46,
+      "end": 1303.1,
+      "duration": 2.64,
+      "text": "And the advantage of that is that then this"
+    },
+    {
+      "index": 316,
+      "start": 1303.1,
+      "end": 1307.16,
+      "duration": 4.06,
+      "text": "becomes a definite integral."
+    },
+    {
+      "index": 317,
+      "start": 1307.16,
+      "end": 1310.11,
+      "duration": 2.95,
+      "text": "Something that you can look up in tables."
+    },
+    {
+      "index": 318,
+      "start": 1310.11,
+      "end": 1314.083,
+      "duration": 3.973,
+      "text": "And its value is in fact pi to the fourth over 15."
+    },
+    {
+      "index": 319,
+      "start": 1317.87,
+      "end": 1322.09,
+      "duration": 4.22,
+      "text": "So substituting that over there, what do we have?"
+    },
+    {
+      "index": 320,
+      "start": 1322.09,
+      "end": 1332.9,
+      "duration": 10.81,
+      "text": "We have that the energy is e 0 plus 3 divided by 15,"
+    },
+    {
+      "index": 321,
+      "start": 1332.9,
+      "end": 1337.53,
+      "duration": 4.63,
+      "text": "will give me 5, which turns the 2 into a 10."
+    },
+    {
+      "index": 322,
+      "start": 1340.48,
+      "end": 1343.99,
+      "duration": 3.51,
+      "text": "I have pi to the fourth divided by pi squared,"
+    },
+    {
+      "index": 323,
+      "start": 1343.99,
+      "end": 1348.45,
+      "duration": 4.46,
+      "text": "so there's a pi squared that will survive out here."
+    },
+    {
+      "index": 324,
+      "start": 1348.45,
+      "end": 1351.515,
+      "duration": 3.065,
+      "text": "I have a kt."
+    },
+    {
+      "index": 325,
+      "start": 1351.515,
+      "end": 1359.99,
+      "duration": 8.475,
+      "text": "I have kt over h bar v cubed."
+    },
+    {
+      "index": 326,
+      "start": 1359.99,
+      "end": 1361.98,
+      "duration": 1.99,
+      "text": "And then I have a factor of volume."
+    },
+    {
+      "index": 327,
+      "start": 1361.98,
+      "end": 1366.28,
+      "duration": 4.3,
+      "text": "But volume is proportional to the number of particles"
+    },
+    {
+      "index": 328,
+      "start": 1366.28,
+      "end": 1370.18,
+      "duration": 3.9,
+      "text": "that I have in the system times the size of my unit cell."
+    },
+    {
+      "index": 329,
+      "start": 1370.18,
+      "end": 1372.76,
+      "duration": 2.58,
+      "text": "Let's call that a cubed."
+    },
+    {
+      "index": 330,
+      "start": 1372.76,
+      "end": 1377.23,
+      "duration": 4.47,
+      "text": "So this I can write this as l a cubed."
+    },
+    {
+      "index": 331,
+      "start": 1377.23,
+      "end": 1380.9,
+      "duration": 3.67,
+      "text": "Why do I do that is because when I then take the derivative,"
+    },
+    {
+      "index": 332,
+      "start": 1380.9,
+      "end": 1385.25,
+      "duration": 4.35,
+      "text": "I'd like to write the heat capacity per particle."
+    },
+    {
+      "index": 333,
+      "start": 1385.25,
+      "end": 1392.726,
+      "duration": 7.476,
+      "text": "So, indeed, if I now take the derivative, which is de by dt,"
+    },
+    {
+      "index": 334,
+      "start": 1392.726,
+      "end": 1398.21,
+      "duration": 5.484,
+      "text": "the answer will be proportional to n and kv."
+    },
+    {
+      "index": 335,
+      "start": 1398.21,
+      "end": 1402.0,
+      "duration": 3.79,
+      "text": "The number of particles and this k v, which"
+    },
+    {
+      "index": 336,
+      "start": 1402.0,
+      "end": 1408.46,
+      "duration": 6.46,
+      "text": "is the function, the unit of heat capacities."
+    },
+    {
+      "index": 337,
+      "start": 1408.46,
+      "end": 1412.18,
+      "duration": 3.72,
+      "text": "The overall dependence is t to the fourth."
+    },
+    {
+      "index": 338,
+      "start": 1412.18,
+      "end": 1415.8,
+      "duration": 3.62,
+      "text": "So when I take derivatives, I will get 4t cubed."
+    },
+    {
+      "index": 339,
+      "start": 1415.8,
+      "end": 1423.83,
+      "duration": 8.03,
+      "text": "That 4 will change the 1 over 10 to 2 pi squared over 5."
+    },
+    {
+      "index": 340,
+      "start": 1423.83,
+      "end": 1429.36,
+      "duration": 5.53,
+      "text": "And then I have the combination kvt h bar"
+    },
+    {
+      "index": 341,
+      "start": 1429.36,
+      "end": 1434.54,
+      "duration": 5.18,
+      "text": "v, and that factor of a raised to the third power."
+    },
+    {
+      "index": 342,
+      "start": 1434.54,
+      "end": 1437.95,
+      "duration": 3.41,
+      "text": "So the whole thing is proportional to t cubed."
+    },
+    {
+      "index": 343,
+      "start": 1437.95,
+      "end": 1444.09,
+      "duration": 6.14,
+      "text": "And the coefficient I will call theta d for [INAUDIBLE]."
+    },
+    {
+      "index": 344,
+      "start": 1444.09,
+      "end": 1451.695,
+      "duration": 7.605,
+      "text": "And theta d I have calculated to be h bar v over a h"
+    },
+    {
+      "index": 345,
+      "start": 1451.695,
+      "end": 1454.79,
+      "duration": 3.095,
+      "text": "bar v a over k t."
+    },
+    {
+      "index": 346,
+      "start": 1454.79,
+      "end": 1457.276,
+      "duration": 2.486,
+      "text": "No, h bar v over a k t."
+    },
+    {
+      "index": 347,
+      "start": 1470.94,
+      "end": 1475.52,
+      "duration": 4.58,
+      "text": "So the heat capacity of the solid"
+    },
+    {
+      "index": 348,
+      "start": 1475.52,
+      "end": 1478.96,
+      "duration": 3.44,
+      "text": "is going to be proportional, of course, to n k b."
+    },
+    {
+      "index": 349,
+      "start": 1478.96,
+      "end": 1482.62,
+      "duration": 3.66,
+      "text": "But most importantly, is proportional to t cubed."
+    },
+    {
+      "index": 350,
+      "start": 1482.62,
+      "end": 1486.48,
+      "duration": 3.86,
+      "text": "And t cubed just came from this argument"
+    },
+    {
+      "index": 351,
+      "start": 1486.48,
+      "end": 1488.86,
+      "duration": 2.38,
+      "text": "that I need low omegas."
+    },
+    {
+      "index": 352,
+      "start": 1488.86,
+      "end": 1491.31,
+      "duration": 2.45,
+      "text": "And how many things I have at the omega."
+    },
+    {
+      "index": 353,
+      "start": 1491.31,
+      "end": 1495.18,
+      "duration": 3.87,
+      "text": "How many frequencies do I have that are vibrating?"
+    },
+    {
+      "index": 354,
+      "start": 1495.18,
+      "end": 1497.55,
+      "duration": 2.37,
+      "text": "The number of those frequencies is essentially"
+    },
+    {
+      "index": 355,
+      "start": 1497.55,
+      "end": 1501.76,
+      "duration": 4.21,
+      "text": "the size of a cube in k space."
+    },
+    {
+      "index": 356,
+      "start": 1501.76,
+      "end": 1507.04,
+      "duration": 5.28,
+      "text": "So it goes like this-- maximum k cubed in three dimensions."
+    },
+    {
+      "index": 357,
+      "start": 1507.04,
+      "end": 1509.97,
+      "duration": 2.93,
+      "text": "In two dimensions, it will be squared and all of that."
+    },
+    {
+      "index": 358,
+      "start": 1509.97,
+      "end": 1514.11,
+      "duration": 4.14,
+      "text": "So it's very easy to figure out from this dispersion relation"
+    },
+    {
+      "index": 359,
+      "start": 1514.11,
+      "end": 1517.18,
+      "duration": 3.07,
+      "text": "what the low temperature behavior of the heat capacity"
+    },
+    {
+      "index": 360,
+      "start": 1517.18,
+      "end": 1518.35,
+      "duration": 1.17,
+      "text": "has to be."
+    },
+    {
+      "index": 361,
+      "start": 1518.35,
+      "end": 1521.99,
+      "duration": 3.64,
+      "text": "And you will see that this is, in fact, predictive,"
+    },
+    {
+      "index": 362,
+      "start": 1521.99,
+      "end": 1524.93,
+      "duration": 2.94,
+      "text": "in that later on in the course, we"
+    },
+    {
+      "index": 363,
+      "start": 1524.93,
+      "end": 1529.3,
+      "duration": 4.37,
+      "text": "will come an example of where the heat capacity of a liquid,"
+    },
+    {
+      "index": 364,
+      "start": 1529.3,
+      "end": 1534.61,
+      "duration": 5.31,
+      "text": "which was helium, was observed to have this t cubed behavior"
+    },
+    {
+      "index": 365,
+      "start": 1534.61,
+      "end": 1538.635,
+      "duration": 4.025,
+      "text": "based on that Landau immediately postulated that there should be"
+    },
+    {
+      "index": 366,
+      "start": 1538.635,
+      "end": 1542.29,
+      "duration": 3.655,
+      "text": "a phonon-like dispersion inside that superfluid."
+    },
+    {
+      "index": 367,
+      "start": 1544.97,
+      "end": 1545.47,
+      "duration": 0.5,
+      "text": "OK."
+    },
+    {
+      "index": 368,
+      "start": 1548.0,
+      "end": 1552.98,
+      "duration": 4.98,
+      "text": "So that's the story of the heat capacity of the solid."
+    },
+    {
+      "index": 369,
+      "start": 1552.98,
+      "end": 1555.77,
+      "duration": 2.79,
+      "text": "So we started with a molecule."
+    },
+    {
+      "index": 370,
+      "start": 1555.77,
+      "end": 1560.47,
+      "duration": 4.7,
+      "text": "We went from a molecule into an entire solid."
+    },
+    {
+      "index": 371,
+      "start": 1560.47,
+      "end": 1564.48,
+      "duration": 4.01,
+      "text": "The next step that what I'm going to do is I'm"
+    },
+    {
+      "index": 372,
+      "start": 1564.48,
+      "end": 1568.14,
+      "duration": 3.66,
+      "text": "going to remove the solid and just keep the box."
+    },
+    {
+      "index": 373,
+      "start": 1574.64,
+      "end": 1576.72,
+      "duration": 2.08,
+      "text": "So essentially, they calculation that I"
+    },
+    {
+      "index": 374,
+      "start": 1576.72,
+      "end": 1579.53,
+      "duration": 2.81,
+      "text": "did, if you think about it, corresponded"
+    },
+    {
+      "index": 375,
+      "start": 1579.53,
+      "end": 1584.0,
+      "duration": 4.47,
+      "text": "to having some kind of a box, and having"
+    },
+    {
+      "index": 376,
+      "start": 1584.0,
+      "end": 1587.82,
+      "duration": 3.82,
+      "text": "vibrational modes inside the box."
+    },
+    {
+      "index": 377,
+      "start": 1587.82,
+      "end": 1591.67,
+      "duration": 3.85,
+      "text": "But let's imagine that it is an empty box."
+    },
+    {
+      "index": 378,
+      "start": 1591.67,
+      "end": 1596.17,
+      "duration": 4.5,
+      "text": "But we know that even in empty space we have light."
+    },
+    {
+      "index": 379,
+      "start": 1596.17,
+      "end": 1599.96,
+      "duration": 3.79,
+      "text": "So within an empty box, we can still"
+    },
+    {
+      "index": 380,
+      "start": 1599.96,
+      "end": 1603.42,
+      "duration": 3.46,
+      "text": "have modes of the electromagnetic field."
+    },
+    {
+      "index": 381,
+      "start": 1607.43,
+      "end": 1611.59,
+      "duration": 4.16,
+      "text": "Modes of electromagnetic field, just like the modes"
+    },
+    {
+      "index": 382,
+      "start": 1611.59,
+      "end": 1614.93,
+      "duration": 3.34,
+      "text": "of the solid, we can characterize"
+    },
+    {
+      "index": 383,
+      "start": 1614.93,
+      "end": 1618.79,
+      "duration": 3.86,
+      "text": "by the direction along which oscillations travel."
+    },
+    {
+      "index": 384,
+      "start": 1621.49,
+      "end": 1628.22,
+      "duration": 6.73,
+      "text": "And whereas for the atoms in the solid, they have displacement"
+    },
+    {
+      "index": 385,
+      "start": 1628.22,
+      "end": 1633.17,
+      "duration": 4.95,
+      "text": "and the corresponding momentum for the electromagnetic field,"
+    },
+    {
+      "index": 386,
+      "start": 1633.17,
+      "end": 1635.58,
+      "duration": 2.41,
+      "text": "you have the electric field."
+    },
+    {
+      "index": 387,
+      "start": 1635.58,
+      "end": 1639.13,
+      "duration": 3.55,
+      "text": "And its conjugate is the magnetic field."
+    },
+    {
+      "index": 388,
+      "start": 1639.13,
+      "end": 1641.72,
+      "duration": 2.59,
+      "text": "And these things will be oscillating"
+    },
+    {
+      "index": 389,
+      "start": 1641.72,
+      "end": 1643.31,
+      "duration": 1.59,
+      "text": "to create for you a wave."
+    },
+    {
+      "index": 390,
+      "start": 1647.03,
+      "end": 1651.39,
+      "duration": 4.36,
+      "text": "Except that, whereas for the solid, for each atom"
+    },
+    {
+      "index": 391,
+      "start": 1651.39,
+      "end": 1653.41,
+      "duration": 2.02,
+      "text": "we had three possible directions,"
+    },
+    {
+      "index": 392,
+      "start": 1653.41,
+      "end": 1657.965,
+      "duration": 4.555,
+      "text": "and therefore we had three branches, for this, since e"
+    },
+    {
+      "index": 393,
+      "start": 1657.965,
+      "end": 1660.69,
+      "duration": 2.725,
+      "text": "and b have to be orthogonal to k,"
+    },
+    {
+      "index": 394,
+      "start": 1660.69,
+      "end": 1662.71,
+      "duration": 2.02,
+      "text": "you really have only two polarizations."
+    },
+    {
+      "index": 395,
+      "start": 1671.44,
+      "end": 1675.52,
+      "duration": 4.08,
+      "text": "But apart from that, the frequency spectrum"
+    },
+    {
+      "index": 396,
+      "start": 1675.52,
+      "end": 1678.27,
+      "duration": 2.75,
+      "text": "is exactly the same as we would have"
+    },
+    {
+      "index": 397,
+      "start": 1678.27,
+      "end": 1681.29,
+      "duration": 3.02,
+      "text": "for the solids at low temperature replacing"
+    },
+    {
+      "index": 398,
+      "start": 1681.29,
+      "end": 1687.09,
+      "duration": 5.8,
+      "text": "to v that we have with the speed of light."
+    },
+    {
+      "index": 399,
+      "start": 1687.09,
+      "end": 1692.06,
+      "duration": 4.97,
+      "text": "And so you would say, OK."
+    },
+    {
+      "index": 400,
+      "start": 1692.06,
+      "end": 1696.57,
+      "duration": 4.51,
+      "text": "If I were to calculate the energy content that"
+    },
+    {
+      "index": 401,
+      "start": 1696.57,
+      "end": 1701.74,
+      "duration": 5.17,
+      "text": "is inside the box, what I have to do"
+    },
+    {
+      "index": 402,
+      "start": 1701.74,
+      "end": 1708.16,
+      "duration": 6.42,
+      "text": "is to sum over all of the modes and polarizations."
+    },
+    {
+      "index": 403,
+      "start": 1711.15,
+      "end": 1715.55,
+      "duration": 4.4,
+      "text": "Regarding each one of these as a harmonic oscillator,"
+    },
+    {
+      "index": 404,
+      "start": 1715.55,
+      "end": 1718.43,
+      "duration": 2.88,
+      "text": "going through the system of quantizing according"
+    },
+    {
+      "index": 405,
+      "start": 1718.43,
+      "end": 1721.86,
+      "duration": 3.43,
+      "text": "to this old quantum mechanics, the harmonic oscillators,"
+    },
+    {
+      "index": 406,
+      "start": 1721.86,
+      "end": 1724.66,
+      "duration": 2.8,
+      "text": "I have to add up the energy content of each oscillator."
+    },
+    {
+      "index": 407,
+      "start": 1724.66,
+      "end": 1733.92,
+      "duration": 9.26,
+      "text": "And so what I have is this h bar omega of k."
+    },
+    {
+      "index": 408,
+      "start": 1733.92,
+      "end": 1738.47,
+      "duration": 4.55,
+      "text": "And then I have 1/2 plus 1 over e"
+    },
+    {
+      "index": 409,
+      "start": 1738.47,
+      "end": 1742.91,
+      "duration": 4.44,
+      "text": "to the beta h bar omega of k minus 1."
+    },
+    {
+      "index": 410,
+      "start": 1746.28,
+      "end": 1748.89,
+      "duration": 2.61,
+      "text": "And then I can do exactly the kinds of things"
+    },
+    {
+      "index": 411,
+      "start": 1748.89,
+      "end": 1752.88,
+      "duration": 3.99,
+      "text": "that I had before, replacing the sum over k"
+    },
+    {
+      "index": 412,
+      "start": 1752.88,
+      "end": 1756.28,
+      "duration": 3.4,
+      "text": "with a v times an integral."
+    },
+    {
+      "index": 413,
+      "start": 1756.28,
+      "end": 1759.37,
+      "duration": 3.09,
+      "text": "So the whole thing would be, first of all,"
+    },
+    {
+      "index": 414,
+      "start": 1759.37,
+      "end": 1762.96,
+      "duration": 3.59,
+      "text": "proportional to v, going from the sum over k"
+    },
+    {
+      "index": 415,
+      "start": 1762.96,
+      "end": 1764.61,
+      "duration": 1.65,
+      "text": "to the integration over k."
+    },
+    {
+      "index": 416,
+      "start": 1767.41,
+      "end": 1773.57,
+      "duration": 6.16,
+      "text": "I would have to add all of these h bar omega over 2s."
+    },
+    {
+      "index": 417,
+      "start": 1773.57,
+      "end": 1777.29,
+      "duration": 3.72,
+      "text": "Has no temperature dependence, so let me just, again, call it"
+    },
+    {
+      "index": 418,
+      "start": 1777.29,
+      "end": 1779.15,
+      "duration": 1.86,
+      "text": "some e 0."
+    },
+    {
+      "index": 419,
+      "start": 1779.15,
+      "end": 1780.8,
+      "duration": 1.65,
+      "text": "Actually, let's call it epsilon 0,"
+    },
+    {
+      "index": 420,
+      "start": 1780.8,
+      "end": 1784.82,
+      "duration": 4.02,
+      "text": "because it's more like an energy density."
+    },
+    {
+      "index": 421,
+      "start": 1784.82,
+      "end": 1788.85,
+      "duration": 4.03,
+      "text": "And then I have the sum over all of the other modes."
+    },
+    {
+      "index": 422,
+      "start": 1788.85,
+      "end": 1790.2,
+      "duration": 1.35,
+      "text": "There's two polarisations."
+    },
+    {
+      "index": 423,
+      "start": 1790.2,
+      "end": 1794.26,
+      "duration": 4.06,
+      "text": "So as opposed to the three that I had before, I have two."
+    },
+    {
+      "index": 424,
+      "start": 1794.26,
+      "end": 1800.15,
+      "duration": 5.89,
+      "text": "I have, again, the integral over k of 4 pi k"
+    },
+    {
+      "index": 425,
+      "start": 1800.15,
+      "end": 1804.6,
+      "duration": 4.45,
+      "text": "squared v k divided by 8 pi cubed, which"
+    },
+    {
+      "index": 426,
+      "start": 1804.6,
+      "end": 1808.37,
+      "duration": 3.77,
+      "text": "is part of this density of state calculation."
+    },
+    {
+      "index": 427,
+      "start": 1808.37,
+      "end": 1817.03,
+      "duration": 8.66,
+      "text": "I have, again, a factor of h bar omega."
+    },
+    {
+      "index": 428,
+      "start": 1817.03,
+      "end": 1821.5,
+      "duration": 4.47,
+      "text": "Now, I realize that my omega is ck."
+    },
+    {
+      "index": 429,
+      "start": 1821.5,
+      "end": 1825.13,
+      "duration": 3.63,
+      "text": "So I simply write it as h bar ck."
+    },
+    {
+      "index": 430,
+      "start": 1825.13,
+      "end": 1830.85,
+      "duration": 5.72,
+      "text": "And then I have e to the beta h bar ck minus 1."
+    },
+    {
+      "index": 431,
+      "start": 1837.49,
+      "end": 1844.71,
+      "duration": 7.22,
+      "text": "So we will again allow this to go from 0 to infinity."
+    },
+    {
+      "index": 432,
+      "start": 1844.71,
+      "end": 1847.01,
+      "duration": 2.3,
+      "text": "And what do we get?"
+    },
+    {
+      "index": 433,
+      "start": 1847.01,
+      "end": 1855.89,
+      "duration": 8.88,
+      "text": "We will get v epsilon 0 plus, well, the 8 and 8 cancel."
+    },
+    {
+      "index": 434,
+      "start": 1855.89,
+      "end": 1859.57,
+      "duration": 3.68,
+      "text": "I have pi over pi squared."
+    },
+    {
+      "index": 435,
+      "start": 1859.57,
+      "end": 1861.64,
+      "duration": 2.07,
+      "text": "So pi over pi cubed."
+    },
+    {
+      "index": 436,
+      "start": 1861.64,
+      "end": 1863.445,
+      "duration": 1.805,
+      "text": "So it will give me 1 over pi squared."
+    },
+    {
+      "index": 437,
+      "start": 1867.17,
+      "end": 1870.175,
+      "duration": 3.005,
+      "text": "I have one factor of kt."
+    },
+    {
+      "index": 438,
+      "start": 1873.31,
+      "end": 1876.46,
+      "duration": 3.15,
+      "text": "Again, when I introduce here a beta"
+    },
+    {
+      "index": 439,
+      "start": 1876.46,
+      "end": 1880.279,
+      "duration": 3.819,
+      "text": "and then multiply by kt, so that this dimension,"
+    },
+    {
+      "index": 440,
+      "start": 1880.279,
+      "end": 1881.32,
+      "duration": 1.041,
+      "text": "this combination appears."
+    },
+    {
+      "index": 441,
+      "start": 1885.33,
+      "end": 1889.305,
+      "duration": 3.975,
+      "text": "Then I have, if I were to change variable and call"
+    },
+    {
+      "index": 442,
+      "start": 1889.305,
+      "end": 1893.73,
+      "duration": 4.425,
+      "text": "this the new variable, I have factor"
+    },
+    {
+      "index": 443,
+      "start": 1893.73,
+      "end": 1899.01,
+      "duration": 5.28,
+      "text": "of k squared dk, which gives me, just as"
+    },
+    {
+      "index": 444,
+      "start": 1899.01,
+      "end": 1903.87,
+      "duration": 4.86,
+      "text": "before over there, a factor of kt over h bar c cubed."
+    },
+    {
+      "index": 445,
+      "start": 1909.15,
+      "end": 1913.71,
+      "duration": 4.56,
+      "text": "And then I have this integral left,"
+    },
+    {
+      "index": 446,
+      "start": 1913.71,
+      "end": 1921.78,
+      "duration": 8.07,
+      "text": "which is the 0 to infinity v x x cubed e to the x minus 1,"
+    },
+    {
+      "index": 447,
+      "start": 1921.78,
+      "end": 1926.194,
+      "duration": 4.414,
+      "text": "which we stated is pi to the fourth over 15."
+    },
+    {
+      "index": 448,
+      "start": 1931.81,
+      "end": 1939.13,
+      "duration": 7.32,
+      "text": "So the part that is dependent on temperature, the energy"
+    },
+    {
+      "index": 449,
+      "start": 1939.13,
+      "end": 1944.45,
+      "duration": 5.32,
+      "text": "content, just as in this case, scales as t to the fourth."
+    },
+    {
+      "index": 450,
+      "start": 1947.59,
+      "end": 1951.54,
+      "duration": 3.95,
+      "text": "There is one part that we have over here"
+    },
+    {
+      "index": 451,
+      "start": 1951.54,
+      "end": 1955.975,
+      "duration": 4.435,
+      "text": "from all of the 0s, which is, in fact, an infinity."
+    },
+    {
+      "index": 452,
+      "start": 1959.54,
+      "end": 1964.26,
+      "duration": 4.72,
+      "text": "And maybe there is some degree of worry about that."
+    },
+    {
+      "index": 453,
+      "start": 1964.26,
+      "end": 1969.94,
+      "duration": 5.68,
+      "text": "We didn't have to worry about that infinity in this case,"
+    },
+    {
+      "index": 454,
+      "start": 1969.94,
+      "end": 1975.42,
+      "duration": 5.48,
+      "text": "because the number of modes that we had was, in reality, finite."
+    },
+    {
+      "index": 455,
+      "start": 1975.42,
+      "end": 1981.19,
+      "duration": 5.77,
+      "text": "So once we were to add up properly all of these 0 point"
+    },
+    {
+      "index": 456,
+      "start": 1981.19,
+      "end": 1984.05,
+      "duration": 2.86,
+      "text": "energies for this, we would have gotten a finite number."
+    },
+    {
+      "index": 457,
+      "start": 1984.05,
+      "end": 1987.54,
+      "duration": 3.49,
+      "text": "It would have been large, but it would have been finite."
+    },
+    {
+      "index": 458,
+      "start": 1987.54,
+      "end": 1991.99,
+      "duration": 4.45,
+      "text": "Whereas here, the difference is that there is really"
+    },
+    {
+      "index": 459,
+      "start": 1991.99,
+      "end": 1994.17,
+      "duration": 2.18,
+      "text": "no upper cut-off."
+    },
+    {
+      "index": 460,
+      "start": 1994.17,
+      "end": 2001.78,
+      "duration": 7.61,
+      "text": "So this k here, for a solid, you have a minimum wavelength."
+    },
+    {
+      "index": 461,
+      "start": 2001.78,
+      "end": 2005.71,
+      "duration": 3.93,
+      "text": "You can't do things shorter than the separation of particles."
+    },
+    {
+      "index": 462,
+      "start": 2005.71,
+      "end": 2010.86,
+      "duration": 5.15,
+      "text": "But for light, you can have arbitrarily short wavelength,"
+    },
+    {
+      "index": 463,
+      "start": 2010.86,
+      "end": 2014.69,
+      "duration": 3.83,
+      "text": "and that gives you this infinity over here."
+    },
+    {
+      "index": 464,
+      "start": 2014.69,
+      "end": 2017.31,
+      "duration": 2.62,
+      "text": "So typically, we ignore that."
+    },
+    {
+      "index": 465,
+      "start": 2017.31,
+      "end": 2020.64,
+      "duration": 3.33,
+      "text": "Maybe it is related to the cosmological constant, et"
+    },
+    {
+      "index": 466,
+      "start": 2020.64,
+      "end": 2021.54,
+      "duration": 0.9,
+      "text": "cetera."
+    },
+    {
+      "index": 467,
+      "start": 2021.54,
+      "end": 2026.09,
+      "duration": 4.55,
+      "text": "But for our purposes, we are not going to focus on that at all."
+    },
+    {
+      "index": 468,
+      "start": 2026.09,
+      "end": 2028.15,
+      "duration": 2.06,
+      "text": "And the interesting part is this part,"
+    },
+    {
+      "index": 469,
+      "start": 2028.15,
+      "end": 2032.11,
+      "duration": 3.96,
+      "text": "that proportional to t to the fourth."
+    },
+    {
+      "index": 470,
+      "start": 2032.11,
+      "end": 2035.09,
+      "duration": 2.98,
+      "text": "There are two SOP calculations to this"
+    },
+    {
+      "index": 471,
+      "start": 2035.09,
+      "end": 2038.28,
+      "duration": 3.19,
+      "text": "that I will just give part of the answer,"
+    },
+    {
+      "index": 472,
+      "start": 2038.28,
+      "end": 2040.11,
+      "duration": 1.83,
+      "text": "because another part of the answer"
+    },
+    {
+      "index": 473,
+      "start": 2040.11,
+      "end": 2045.73,
+      "duration": 5.62,
+      "text": "is something that you do in problem sets."
+    },
+    {
+      "index": 474,
+      "start": 2045.73,
+      "end": 2049.989,
+      "duration": 4.259,
+      "text": "One of them is that what we have here is an energy density."
+    },
+    {
+      "index": 475,
+      "start": 2049.989,
+      "end": 2052.26,
+      "duration": 2.271,
+      "text": "It's proportional to volume."
+    },
+    {
+      "index": 476,
+      "start": 2052.26,
+      "end": 2054.989,
+      "duration": 2.729,
+      "text": "And we have seen that energy densities"
+    },
+    {
+      "index": 477,
+      "start": 2054.989,
+      "end": 2057.77,
+      "duration": 2.781,
+      "text": "are related to pressures."
+    },
+    {
+      "index": 478,
+      "start": 2057.77,
+      "end": 2060.134,
+      "duration": 2.364,
+      "text": "So indeed, there is a corresponding pressure."
+    },
+    {
+      "index": 479,
+      "start": 2063.03,
+      "end": 2066.139,
+      "duration": 3.109,
+      "text": "That is, if you're at the temperature t,"
+    },
+    {
+      "index": 480,
+      "start": 2066.139,
+      "end": 2073.19,
+      "duration": 7.051,
+      "text": "this collection of vibrating electromagnetic fields"
+    },
+    {
+      "index": 481,
+      "start": 2073.19,
+      "end": 2077.429,
+      "duration": 4.239,
+      "text": "exerts a pressure on the walls of the container."
+    },
+    {
+      "index": 482,
+      "start": 2077.429,
+      "end": 2084.12,
+      "duration": 6.691,
+      "text": "This pressure is related to energy density."
+    },
+    {
+      "index": 483,
+      "start": 2084.12,
+      "end": 2089.87,
+      "duration": 5.75,
+      "text": "The factor of 1/3 comes because of the dispersion relation."
+    },
+    {
+      "index": 484,
+      "start": 2089.87,
+      "end": 2092.62,
+      "duration": 2.75,
+      "text": "And you can show that in one of the problem sets."
+    },
+    {
+      "index": 485,
+      "start": 2092.62,
+      "end": 2094.719,
+      "duration": 2.099,
+      "text": "You know that already."
+    },
+    {
+      "index": 486,
+      "start": 2094.719,
+      "end": 2096.4,
+      "duration": 1.681,
+      "text": "So that would say that you would have,"
+    },
+    {
+      "index": 487,
+      "start": 2096.4,
+      "end": 2100.2,
+      "duration": 3.8,
+      "text": "essentially, something like some kind of p 0."
+    },
+    {
+      "index": 488,
+      "start": 2102.93,
+      "end": 2107.86,
+      "duration": 4.93,
+      "text": "And then something that is proportional to t"
+    },
+    {
+      "index": 489,
+      "start": 2107.86,
+      "end": 2109.19,
+      "duration": 1.33,
+      "text": "to the fourth."
+    },
+    {
+      "index": 490,
+      "start": 2109.19,
+      "end": 2112.76,
+      "duration": 3.57,
+      "text": "So I guess the correspondent coefficient here"
+    },
+    {
+      "index": 491,
+      "start": 2112.76,
+      "end": 2128.2,
+      "duration": 15.44,
+      "text": "would be p squared divided by 45 kt kt over h bar c cubed."
+    },
+    {
+      "index": 492,
+      "start": 2128.2,
+      "end": 2131.62,
+      "duration": 3.42,
+      "text": "So there is radiation pressure that"
+    },
+    {
+      "index": 493,
+      "start": 2131.62,
+      "end": 2133.79,
+      "duration": 2.17,
+      "text": "is proportional to temperature."
+    },
+    {
+      "index": 494,
+      "start": 2133.79,
+      "end": 2138.16,
+      "duration": 4.37,
+      "text": "The hotter you make this box, the more pressure it will get"
+    },
+    {
+      "index": 495,
+      "start": 2138.16,
+      "end": 2140.56,
+      "duration": 2.4,
+      "text": "exerted from it."
+    },
+    {
+      "index": 496,
+      "start": 2140.56,
+      "end": 2142.73,
+      "duration": 2.17,
+      "text": "There is, of course, again this infinity"
+    },
+    {
+      "index": 497,
+      "start": 2142.73,
+      "end": 2145.14,
+      "duration": 2.41,
+      "text": "that you may worry about."
+    },
+    {
+      "index": 498,
+      "start": 2145.14,
+      "end": 2148.64,
+      "duration": 3.5,
+      "text": "But here the problem is less serious,"
+    },
+    {
+      "index": 499,
+      "start": 2148.64,
+      "end": 2151.28,
+      "duration": 2.64,
+      "text": "because you would say that in reality,"
+    },
+    {
+      "index": 500,
+      "start": 2151.28,
+      "end": 2153.98,
+      "duration": 2.7,
+      "text": "if I have the wall of the box, it"
+    },
+    {
+      "index": 501,
+      "start": 2153.98,
+      "end": 2157.74,
+      "duration": 3.76,
+      "text": "is going to get pressure from both sides."
+    },
+    {
+      "index": 502,
+      "start": 2157.74,
+      "end": 2160.437,
+      "duration": 2.697,
+      "text": "And if there's an infinite pressure from both sides,"
+    },
+    {
+      "index": 503,
+      "start": 2160.437,
+      "end": 2161.145,
+      "duration": 0.708,
+      "text": "they will cancel."
+    },
+    {
+      "index": 504,
+      "start": 2161.145,
+      "end": 2164.39,
+      "duration": 3.245,
+      "text": "So you don't have to worry about that."
+    },
+    {
+      "index": 505,
+      "start": 2164.39,
+      "end": 2166.45,
+      "duration": 2.06,
+      "text": "But it turns out that, actually, you"
+    },
+    {
+      "index": 506,
+      "start": 2166.45,
+      "end": 2170.47,
+      "duration": 4.02,
+      "text": "can measure the consequences of this pressure."
+    },
+    {
+      "index": 507,
+      "start": 2170.47,
+      "end": 2176.45,
+      "duration": 5.98,
+      "text": "And that occurs when rather than having one plate,"
+    },
+    {
+      "index": 508,
+      "start": 2176.45,
+      "end": 2179.38,
+      "duration": 2.93,
+      "text": "you have two plates that there are"
+    },
+    {
+      "index": 509,
+      "start": 2179.38,
+      "end": 2182.94,
+      "duration": 3.56,
+      "text": "some small separation apart."
+    },
+    {
+      "index": 510,
+      "start": 2182.94,
+      "end": 2185.04,
+      "duration": 2.1,
+      "text": "Then the modes of radiation that you"
+    },
+    {
+      "index": 511,
+      "start": 2185.04,
+      "end": 2189.83,
+      "duration": 4.79,
+      "text": "can fit in here because of the quantizations that you have,"
+    },
+    {
+      "index": 512,
+      "start": 2189.83,
+      "end": 2194.47,
+      "duration": 4.64,
+      "text": "are different from the modes that you can have out here."
+    },
+    {
+      "index": 513,
+      "start": 2194.47,
+      "end": 2199.16,
+      "duration": 4.69,
+      "text": "So that difference, even from the 0 point fluctuations--"
+    },
+    {
+      "index": 514,
+      "start": 2199.16,
+      "end": 2202.84,
+      "duration": 3.68,
+      "text": "the h bar omega over 2s-- will give you"
+    },
+    {
+      "index": 515,
+      "start": 2202.84,
+      "end": 2206.7,
+      "duration": 3.86,
+      "text": "a pressure that pushes these plates together."
+    },
+    {
+      "index": 516,
+      "start": 2206.7,
+      "end": 2210.28,
+      "duration": 3.58,
+      "text": "That's called a Casimir force, or Casimir pressure."
+    },
+    {
+      "index": 517,
+      "start": 2210.28,
+      "end": 2214.52,
+      "duration": 4.24,
+      "text": "And that was predicted by Casimir in 1950s,"
+    },
+    {
+      "index": 518,
+      "start": 2214.52,
+      "end": 2219.15,
+      "duration": 4.63,
+      "text": "and was measured experimentally roughly 10 years ago"
+    },
+    {
+      "index": 519,
+      "start": 2219.15,
+      "end": 2223.07,
+      "duration": 3.92,
+      "text": "to high precision, matching the formula that we had."
+    },
+    {
+      "index": 520,
+      "start": 2223.07,
+      "end": 2226.05,
+      "duration": 2.98,
+      "text": "So sometimes, these infinities have"
+    },
+    {
+      "index": 521,
+      "start": 2226.05,
+      "end": 2229.33,
+      "duration": 3.28,
+      "text": "consequences that you have to worry about."
+    },
+    {
+      "index": 522,
+      "start": 2229.33,
+      "end": 2232.58,
+      "duration": 3.25,
+      "text": "But that's also to indicate that there's"
+    },
+    {
+      "index": 523,
+      "start": 2232.58,
+      "end": 2236.25,
+      "duration": 3.67,
+      "text": "kind of modern physics to this."
+    },
+    {
+      "index": 524,
+      "start": 2236.25,
+      "end": 2240.59,
+      "duration": 4.34,
+      "text": "But really it was the origin of quantum mechanics,"
+    },
+    {
+      "index": 525,
+      "start": 2240.59,
+      "end": 2244.58,
+      "duration": 3.99,
+      "text": "because of the other aspect of the physics, which"
+    },
+    {
+      "index": 526,
+      "start": 2244.58,
+      "end": 2249.2,
+      "duration": 4.62,
+      "text": "is imagine that again you have this box."
+    },
+    {
+      "index": 527,
+      "start": 2249.2,
+      "end": 2252.76,
+      "duration": 3.56,
+      "text": "I draw it now as an irregular box."
+    },
+    {
+      "index": 528,
+      "start": 2252.76,
+      "end": 2257.74,
+      "duration": 4.98,
+      "text": "And I open a hole of size a inside the box."
+    },
+    {
+      "index": 529,
+      "start": 2257.74,
+      "end": 2261.99,
+      "duration": 4.25,
+      "text": "And then the radiation that was inside at temperatures t"
+    },
+    {
+      "index": 530,
+      "start": 2261.99,
+      "end": 2266.4,
+      "duration": 4.41,
+      "text": "will start to go out."
+    },
+    {
+      "index": 531,
+      "start": 2266.4,
+      "end": 2268.07,
+      "duration": 1.67,
+      "text": "So you have a hot box."
+    },
+    {
+      "index": 532,
+      "start": 2268.07,
+      "end": 2269.35,
+      "duration": 1.28,
+      "text": "You open a hole in it."
+    },
+    {
+      "index": 533,
+      "start": 2269.35,
+      "end": 2272.45,
+      "duration": 3.1,
+      "text": "And then the radiation starts to come out."
+    },
+    {
+      "index": 534,
+      "start": 2272.45,
+      "end": 2278.103,
+      "duration": 5.653,
+      "text": "And so what you will have is a flux of radiation."
+    },
+    {
+      "index": 535,
+      "start": 2281.67,
+      "end": 2288.39,
+      "duration": 6.72,
+      "text": "Flux means that this it energy that is escaping per unit area"
+    },
+    {
+      "index": 536,
+      "start": 2288.39,
+      "end": 2291.32,
+      "duration": 2.93,
+      "text": "and per unit time."
+    },
+    {
+      "index": 537,
+      "start": 2291.32,
+      "end": 2298.01,
+      "duration": 6.69,
+      "text": "So there's a flux, which is per area per time."
+    },
+    {
+      "index": 538,
+      "start": 2298.01,
+      "end": 2301.61,
+      "duration": 3.6,
+      "text": "It turns out that that flux-- and this"
+    },
+    {
+      "index": 539,
+      "start": 2301.61,
+      "end": 2305.75,
+      "duration": 4.14,
+      "text": "is another factor, this factor of 1/3"
+    },
+    {
+      "index": 540,
+      "start": 2305.75,
+      "end": 2309.03,
+      "duration": 3.28,
+      "text": "that I mentioned-- is related the energy"
+    },
+    {
+      "index": 541,
+      "start": 2309.03,
+      "end": 2314.5,
+      "duration": 5.47,
+      "text": "density with a factor of 1 c over 4."
+    },
+    {
+      "index": 542,
+      "start": 2314.5,
+      "end": 2319.73,
+      "duration": 5.23,
+      "text": "Essentially, clearly the velocity with which energy"
+    },
+    {
+      "index": 543,
+      "start": 2319.73,
+      "end": 2323.21,
+      "duration": 3.48,
+      "text": "escaping is proportional to c."
+    },
+    {
+      "index": 544,
+      "start": 2323.21,
+      "end": 2327.76,
+      "duration": 4.55,
+      "text": "So you will get more radiation flux the larger c."
+    },
+    {
+      "index": 545,
+      "start": 2327.76,
+      "end": 2330.47,
+      "duration": 2.71,
+      "text": "The answer has to be proportional to c."
+    },
+    {
+      "index": 546,
+      "start": 2330.47,
+      "end": 2333.25,
+      "duration": 2.78,
+      "text": "And it is what is inside that is escaping,"
+    },
+    {
+      "index": 547,
+      "start": 2333.25,
+      "end": 2336.35,
+      "duration": 3.1,
+      "text": "so it has to be proportional to the energy density"
+    },
+    {
+      "index": 548,
+      "start": 2336.35,
+      "end": 2342.27,
+      "duration": 5.92,
+      "text": "that you have inside, some kind of energy per unit volume."
+    },
+    {
+      "index": 549,
+      "start": 2342.27,
+      "end": 2348.0,
+      "duration": 5.73,
+      "text": "And the factor of 1/4 is one of these geometric factors."
+    },
+    {
+      "index": 550,
+      "start": 2348.0,
+      "end": 2350.92,
+      "duration": 2.92,
+      "text": "Essentially, there's two factors of cosine of theta."
+    },
+    {
+      "index": 551,
+      "start": 2350.92,
+      "end": 2353.96,
+      "duration": 3.04,
+      "text": "And you have to do an average of cosine squared theta."
+    },
+    {
+      "index": 552,
+      "start": 2353.96,
+      "end": 2358.72,
+      "duration": 4.76,
+      "text": "And that will give you the additional 1/4."
+    },
+    {
+      "index": 553,
+      "start": 2358.72,
+      "end": 2359.77,
+      "duration": 1.05,
+      "text": "OK?"
+    },
+    {
+      "index": 554,
+      "start": 2359.77,
+      "end": 2363.62,
+      "duration": 3.85,
+      "text": "But rather than looking-- so this"
+    },
+    {
+      "index": 555,
+      "start": 2363.62,
+      "end": 2366.7,
+      "duration": 3.08,
+      "text": "would tell you that there is an energy that is streaming out."
+    },
+    {
+      "index": 556,
+      "start": 2366.7,
+      "end": 2369.51,
+      "duration": 2.81,
+      "text": "That is, the net value is proportional to t"
+    },
+    {
+      "index": 557,
+      "start": 2369.51,
+      "end": 2370.82,
+      "duration": 1.31,
+      "text": "to the fourth."
+    },
+    {
+      "index": 558,
+      "start": 2370.82,
+      "end": 2375.04,
+      "duration": 4.22,
+      "text": "But more interestingly, we can ask"
+    },
+    {
+      "index": 559,
+      "start": 2375.04,
+      "end": 2379.88,
+      "duration": 4.84,
+      "text": "what is the flux per wavelength?"
+    },
+    {
+      "index": 560,
+      "start": 2379.88,
+      "end": 2382.98,
+      "duration": 3.1,
+      "text": "And so for that, I can just go back to the formula"
+    },
+    {
+      "index": 561,
+      "start": 2382.98,
+      "end": 2386.26,
+      "duration": 3.28,
+      "text": "before I integrated over k, and ask"
+    },
+    {
+      "index": 562,
+      "start": 2386.26,
+      "end": 2391.44,
+      "duration": 5.18,
+      "text": "what is the energy density in each interval of k?"
+    },
+    {
+      "index": 563,
+      "start": 2391.44,
+      "end": 2396.35,
+      "duration": 4.91,
+      "text": "And so what I have to do is to just go and look at the formula"
+    },
+    {
+      "index": 564,
+      "start": 2396.35,
+      "end": 2400.19,
+      "duration": 3.84,
+      "text": "that I have prior to doing the integration over k."
+    },
+    {
+      "index": 565,
+      "start": 2400.19,
+      "end": 2402.72,
+      "duration": 2.53,
+      "text": "Multiply it by c over 4."
+    },
+    {
+      "index": 566,
+      "start": 2402.72,
+      "end": 2404.13,
+      "duration": 1.41,
+      "text": "What do I have?"
+    },
+    {
+      "index": 567,
+      "start": 2404.13,
+      "end": 2409.46,
+      "duration": 5.33,
+      "text": "I have 8 pi divided by 8 pi cubed."
+    },
+    {
+      "index": 568,
+      "start": 2409.46,
+      "end": 2414.55,
+      "duration": 5.09,
+      "text": "I have a factor of k squared from the density of states."
+    },
+    {
+      "index": 569,
+      "start": 2414.55,
+      "end": 2423.27,
+      "duration": 8.72,
+      "text": "I have this factor of h bar c k divided by e to the beta h"
+    },
+    {
+      "index": 570,
+      "start": 2423.27,
+      "end": 2425.35,
+      "duration": 2.08,
+      "text": "bar c k minus 1."
+    },
+    {
+      "index": 571,
+      "start": 2431.92,
+      "end": 2438.19,
+      "duration": 6.27,
+      "text": "So there's no analogue of this, because I am not doing"
+    },
+    {
+      "index": 572,
+      "start": 2438.19,
+      "end": 2441.22,
+      "duration": 3.03,
+      "text": "the integration over k."
+    },
+    {
+      "index": 573,
+      "start": 2441.22,
+      "end": 2445.47,
+      "duration": 4.25,
+      "text": "So we can simplify some of these factors up front."
+    },
+    {
+      "index": 574,
+      "start": 2445.47,
+      "end": 2449.0,
+      "duration": 3.53,
+      "text": "But really, the story is how does this quantity"
+    },
+    {
+      "index": 575,
+      "start": 2449.0,
+      "end": 2453.97,
+      "duration": 4.97,
+      "text": "look as the function of wave number, which"
+    },
+    {
+      "index": 576,
+      "start": 2453.97,
+      "end": 2457.5,
+      "duration": 3.53,
+      "text": "is the inverse of wave length, if you like."
+    },
+    {
+      "index": 577,
+      "start": 2457.5,
+      "end": 2462.48,
+      "duration": 4.98,
+      "text": "And what we see is that when k goes to 0, essentially,"
+    },
+    {
+      "index": 578,
+      "start": 2462.48,
+      "end": 2465.74,
+      "duration": 3.26,
+      "text": "this factor into the beta h bar ck"
+    },
+    {
+      "index": 579,
+      "start": 2465.74,
+      "end": 2468.21,
+      "duration": 2.47,
+      "text": "I have to expand to lowest order."
+    },
+    {
+      "index": 580,
+      "start": 2468.21,
+      "end": 2472.43,
+      "duration": 4.22,
+      "text": "I will get beta h bar c k, because the 1 disappears."
+    },
+    {
+      "index": 581,
+      "start": 2472.43,
+      "end": 2475.16,
+      "duration": 2.73,
+      "text": "H bar ck is cancelled, so the answer is going to be"
+    },
+    {
+      "index": 582,
+      "start": 2475.16,
+      "end": 2477.07,
+      "duration": 1.91,
+      "text": "proportional to inverse beta."
+    },
+    {
+      "index": 583,
+      "start": 2477.07,
+      "end": 2480.84,
+      "duration": 3.77,
+      "text": "It's going to be proportional to kt and k squared."
+    },
+    {
+      "index": 584,
+      "start": 2480.84,
+      "end": 2485.83,
+      "duration": 4.99,
+      "text": "So, essentially, the low k behavior part of this"
+    },
+    {
+      "index": 585,
+      "start": 2485.83,
+      "end": 2492.65,
+      "duration": 6.82,
+      "text": "is proportional to k squared c, of course, and kt."
+    },
+    {
+      "index": 586,
+      "start": 2498.78,
+      "end": 2503.3,
+      "duration": 4.52,
+      "text": "However, when I go to the high k numbers,"
+    },
+    {
+      "index": 587,
+      "start": 2503.3,
+      "end": 2506.19,
+      "duration": 2.89,
+      "text": "the exponential will kill things off."
+    },
+    {
+      "index": 588,
+      "start": 2506.19,
+      "end": 2509.74,
+      "duration": 3.55,
+      "text": "So the large k part of this is going"
+    },
+    {
+      "index": 589,
+      "start": 2509.74,
+      "end": 2511.37,
+      "duration": 1.63,
+      "text": "to be exponentially small."
+    },
+    {
+      "index": 590,
+      "start": 2515.57,
+      "end": 2519.58,
+      "duration": 4.01,
+      "text": "And, actually, the curve will look something like this,"
+    },
+    {
+      "index": 591,
+      "start": 2519.58,
+      "end": 2522.4,
+      "duration": 2.82,
+      "text": "therefore."
+    },
+    {
+      "index": 592,
+      "start": 2522.4,
+      "end": 2528.77,
+      "duration": 6.37,
+      "text": "It will have a maximum around the k, which presumably"
+    },
+    {
+      "index": 593,
+      "start": 2528.77,
+      "end": 2537.1,
+      "duration": 8.33,
+      "text": "is of the order of kt over h bar c."
+    },
+    {
+      "index": 594,
+      "start": 2540.08,
+      "end": 2546.41,
+      "duration": 6.33,
+      "text": "So basically, the hotter you have,"
+    },
+    {
+      "index": 595,
+      "start": 2546.41,
+      "end": 2549.99,
+      "duration": 3.58,
+      "text": "this will move to the right."
+    },
+    {
+      "index": 596,
+      "start": 2549.99,
+      "end": 2554.06,
+      "duration": 4.07,
+      "text": "The wavelengths will become shorter."
+    },
+    {
+      "index": 597,
+      "start": 2554.06,
+      "end": 2559.89,
+      "duration": 5.83,
+      "text": "And, essentially, that's the origin of the fact that can you"
+    },
+    {
+      "index": 598,
+      "start": 2559.89,
+      "end": 2565.2,
+      "duration": 5.31,
+      "text": "heat some kind of material, it will start to emit radiation."
+    },
+    {
+      "index": 599,
+      "start": 2565.2,
+      "end": 2568.72,
+      "duration": 3.52,
+      "text": "And the radiation will be peaked at some frequency that"
+    },
+    {
+      "index": 600,
+      "start": 2568.72,
+      "end": 2572.21,
+      "duration": 3.49,
+      "text": "is related to its temperature."
+    },
+    {
+      "index": 601,
+      "start": 2572.21,
+      "end": 2576.91,
+      "duration": 4.7,
+      "text": "Now, if we didn't have this quantization effect,"
+    },
+    {
+      "index": 602,
+      "start": 2576.91,
+      "end": 2581.96,
+      "duration": 5.05,
+      "text": "if h bar went to 0, then what would happen"
+    },
+    {
+      "index": 603,
+      "start": 2581.96,
+      "end": 2587.72,
+      "duration": 5.76,
+      "text": "is that this k squared kt would continue forever."
+    },
+    {
+      "index": 604,
+      "start": 2587.72,
+      "end": 2588.38,
+      "duration": 0.66,
+      "text": "OK?"
+    },
+    {
+      "index": 605,
+      "start": 2588.38,
+      "end": 2590.59,
+      "duration": 2.21,
+      "text": "Essentially, you would have in each one"
+    },
+    {
+      "index": 606,
+      "start": 2590.59,
+      "end": 2593.47,
+      "duration": 2.88,
+      "text": "of these modes of radiation, classically,"
+    },
+    {
+      "index": 607,
+      "start": 2593.47,
+      "end": 2595.61,
+      "duration": 2.14,
+      "text": "you would put a kt of energy."
+    },
+    {
+      "index": 608,
+      "start": 2595.61,
+      "end": 2599.52,
+      "duration": 3.91,
+      "text": "And since you could have arbitrarily short wavelengths,"
+    },
+    {
+      "index": 609,
+      "start": 2599.52,
+      "end": 2603.17,
+      "duration": 3.65,
+      "text": "you would have infinite energy at shorter and shorter"
+    },
+    {
+      "index": 610,
+      "start": 2603.17,
+      "end": 2604.08,
+      "duration": 0.91,
+      "text": "wavelengths."
+    },
+    {
+      "index": 611,
+      "start": 2604.08,
+      "end": 2606.37,
+      "duration": 2.29,
+      "text": "And you would have this ultraviolet catastrophe."
+    },
+    {
+      "index": 612,
+      "start": 2611.5,
+      "end": 2613.75,
+      "duration": 2.25,
+      "text": "Of course, the shape of this curve"
+    },
+    {
+      "index": 613,
+      "start": 2613.75,
+      "end": 2618.49,
+      "duration": 4.74,
+      "text": "was experimentally known towards the end of the 19th century."
+    },
+    {
+      "index": 614,
+      "start": 2618.49,
+      "end": 2622.02,
+      "duration": 3.53,
+      "text": "And so that was the basis of thinking about it,"
+    },
+    {
+      "index": 615,
+      "start": 2622.02,
+      "end": 2623.98,
+      "duration": 1.96,
+      "text": "and fitting an exponential to the end,"
+    },
+    {
+      "index": 616,
+      "start": 2623.98,
+      "end": 2627.98,
+      "duration": 4.0,
+      "text": "and eventually deducing that this quantization"
+    },
+    {
+      "index": 617,
+      "start": 2627.98,
+      "end": 2630.9,
+      "duration": 2.92,
+      "text": "of the oscillators would potentially give you"
+    },
+    {
+      "index": 618,
+      "start": 2630.9,
+      "end": 2632.375,
+      "duration": 1.475,
+      "text": "the reason for this to happen."
+    },
+    {
+      "index": 619,
+      "start": 2637.61,
+      "end": 2641.06,
+      "duration": 3.45,
+      "text": "Now, the way that I have described it,"
+    },
+    {
+      "index": 620,
+      "start": 2641.06,
+      "end": 2645.43,
+      "duration": 4.37,
+      "text": "I focused on having a cavity and opening the cavity,"
+    },
+    {
+      "index": 621,
+      "start": 2645.43,
+      "end": 2648.72,
+      "duration": 3.29,
+      "text": "and having the energy go out."
+    },
+    {
+      "index": 622,
+      "start": 2648.72,
+      "end": 2652.26,
+      "duration": 3.54,
+      "text": "Of course, the experiments for black body"
+    },
+    {
+      "index": 623,
+      "start": 2652.26,
+      "end": 2653.87,
+      "duration": 1.61,
+      "text": "are not done on cavities."
+    },
+    {
+      "index": 624,
+      "start": 2653.87,
+      "end": 2657.43,
+      "duration": 3.56,
+      "text": "They're done on some piece of metal or some other thing"
+    },
+    {
+      "index": 625,
+      "start": 2657.43,
+      "end": 2658.58,
+      "duration": 1.15,
+      "text": "that you heat up."
+    },
+    {
+      "index": 626,
+      "start": 2658.58,
+      "end": 2661.73,
+      "duration": 3.15,
+      "text": "And then you can look at the spectrum of the radiation."
+    },
+    {
+      "index": 627,
+      "start": 2661.73,
+      "end": 2664.59,
+      "duration": 2.86,
+      "text": "And so, again, there is some universality"
+    },
+    {
+      "index": 628,
+      "start": 2664.59,
+      "end": 2669.07,
+      "duration": 4.48,
+      "text": "in this, that it is not so sensitive to the properties"
+    },
+    {
+      "index": 629,
+      "start": 2669.07,
+      "end": 2671.65,
+      "duration": 2.58,
+      "text": "of the material, although there are"
+    },
+    {
+      "index": 630,
+      "start": 2671.65,
+      "end": 2674.01,
+      "duration": 2.36,
+      "text": "some emissivity and other factors that"
+    },
+    {
+      "index": 631,
+      "start": 2674.01,
+      "end": 2676.9,
+      "duration": 2.89,
+      "text": "multiply the final result."
+    },
+    {
+      "index": 632,
+      "start": 2676.9,
+      "end": 2678.82,
+      "duration": 1.92,
+      "text": "So the final result, in fact, would"
+    },
+    {
+      "index": 633,
+      "start": 2678.82,
+      "end": 2682.86,
+      "duration": 4.04,
+      "text": "say that if I were to integrate over frequencies,"
+    },
+    {
+      "index": 634,
+      "start": 2682.86,
+      "end": 2693.34,
+      "duration": 10.48,
+      "text": "the total radiation flux, which would be c over 4 times"
+    },
+    {
+      "index": 635,
+      "start": 2693.34,
+      "end": 2697.19,
+      "duration": 3.85,
+      "text": "the energy density total, is going"
+    },
+    {
+      "index": 636,
+      "start": 2697.19,
+      "end": 2699.07,
+      "duration": 1.88,
+      "text": "to be proportional to temperature"
+    },
+    {
+      "index": 637,
+      "start": 2699.07,
+      "end": 2701.73,
+      "duration": 2.66,
+      "text": "to the fourth power."
+    },
+    {
+      "index": 638,
+      "start": 2701.73,
+      "end": 2716.01,
+      "duration": 14.28,
+      "text": "And this constant in front is the Stefan-Boltzmann,"
+    },
+    {
+      "index": 639,
+      "start": 2716.01,
+      "end": 2723.57,
+      "duration": 7.56,
+      "text": "which has some particular value that you can look up,"
+    },
+    {
+      "index": 640,
+      "start": 2723.57,
+      "end": 2728.066,
+      "duration": 4.496,
+      "text": "units of watts per area per degrees Kelvin."
+    },
+    {
+      "index": 641,
+      "start": 2733.87,
+      "end": 2740.3,
+      "duration": 6.43,
+      "text": "So this perspective is rather macroscopic."
+    },
+    {
+      "index": 642,
+      "start": 2740.3,
+      "end": 2744.97,
+      "duration": 4.67,
+      "text": "The radiated energy is proportional to the surface"
+    },
+    {
+      "index": 643,
+      "start": 2744.97,
+      "end": 2746.72,
+      "duration": 1.75,
+      "text": "area."
+    },
+    {
+      "index": 644,
+      "start": 2746.72,
+      "end": 2750.13,
+      "duration": 3.41,
+      "text": "If you make things that are small,"
+    },
+    {
+      "index": 645,
+      "start": 2750.13,
+      "end": 2753.61,
+      "duration": 3.48,
+      "text": "and the wavelengths that you're looking at over here become"
+    },
+    {
+      "index": 646,
+      "start": 2753.61,
+      "end": 2756.16,
+      "duration": 2.55,
+      "text": "compatible to the size of the object,"
+    },
+    {
+      "index": 647,
+      "start": 2756.16,
+      "end": 2759.16,
+      "duration": 3.0,
+      "text": "these formulas break down."
+    },
+    {
+      "index": 648,
+      "start": 2759.16,
+      "end": 2764.0,
+      "duration": 4.84,
+      "text": "And again, go forward about 150 years or so,"
+    },
+    {
+      "index": 649,
+      "start": 2764.0,
+      "end": 2768.12,
+      "duration": 4.12,
+      "text": "there is ongoing research-- I guess more 200 years--"
+    },
+    {
+      "index": 650,
+      "start": 2768.12,
+      "end": 2771.43,
+      "duration": 3.31,
+      "text": "ongoing research on-- no, 100 and something--"
+    },
+    {
+      "index": 651,
+      "start": 2771.43,
+      "end": 2778.55,
+      "duration": 7.12,
+      "text": "ongoing research on how these classical laws of radiation"
+    },
+    {
+      "index": 652,
+      "start": 2778.55,
+      "end": 2782.34,
+      "duration": 3.79,
+      "text": "are modified when you're dealing with objects that are small"
+    },
+    {
+      "index": 653,
+      "start": 2782.34,
+      "end": 2785.011,
+      "duration": 2.671,
+      "text": "compared to the wavelengths that are emitted, etc."
+    },
+    {
+      "index": 654,
+      "start": 2795.002,
+      "end": 2795.585,
+      "duration": 0.583,
+      "text": "Any questions?"
+    },
+    {
+      "index": 655,
+      "start": 2798.95,
+      "end": 2807.81,
+      "duration": 8.86,
+      "text": "So the next part of the story is why did you do all of this?"
+    },
+    {
+      "index": 656,
+      "start": 2807.81,
+      "end": 2811.4,
+      "duration": 3.59,
+      "text": "It works, but what is the justification?"
+    },
+    {
+      "index": 657,
+      "start": 2814.96,
+      "end": 2820.96,
+      "duration": 6.0,
+      "text": "In that I said there was the old quantum mechanics."
+    },
+    {
+      "index": 658,
+      "start": 2820.96,
+      "end": 2826.84,
+      "duration": 5.88,
+      "text": "But really, we want to have statements about quantum"
+    },
+    {
+      "index": 659,
+      "start": 2826.84,
+      "end": 2831.05,
+      "duration": 4.21,
+      "text": "systems that are not harmonic oscillators."
+    },
+    {
+      "index": 660,
+      "start": 2831.05,
+      "end": 2834.89,
+      "duration": 3.84,
+      "text": "And we want to be able to understand actually"
+    },
+    {
+      "index": 661,
+      "start": 2834.89,
+      "end": 2838.54,
+      "duration": 3.65,
+      "text": "what the underlying basis is in the same way"
+    },
+    {
+      "index": 662,
+      "start": 2838.54,
+      "end": 2841.19,
+      "duration": 2.65,
+      "text": "that they understand how we were doing things"
+    },
+    {
+      "index": 663,
+      "start": 2841.19,
+      "end": 2845.42,
+      "duration": 4.23,
+      "text": "for classical statistical mechanics."
+    },
+    {
+      "index": 664,
+      "start": 2845.42,
+      "end": 2848.66,
+      "duration": 3.24,
+      "text": "And so really, we want to look at how"
+    },
+    {
+      "index": 665,
+      "start": 2848.66,
+      "end": 2852.564,
+      "duration": 3.904,
+      "text": "to make the transition from classical to quantum"
+    },
+    {
+      "index": 666,
+      "start": 2852.564,
+      "end": 2853.48,
+      "duration": 0.916,
+      "text": "statistical mechanics."
+    },
+    {
+      "index": 667,
+      "start": 2859.85,
+      "end": 2864.91,
+      "duration": 5.06,
+      "text": "So for that, let's go and remind us."
+    },
+    {
+      "index": 668,
+      "start": 2864.91,
+      "end": 2867.01,
+      "duration": 2.1,
+      "text": "Actually, so basically the question"
+    },
+    {
+      "index": 669,
+      "start": 2867.01,
+      "end": 2869.92,
+      "duration": 2.91,
+      "text": "is something like this-- what does"
+    },
+    {
+      "index": 670,
+      "start": 2869.92,
+      "end": 2873.81,
+      "duration": 3.89,
+      "text": "this partition function mean?"
+    },
+    {
+      "index": 671,
+      "start": 2873.81,
+      "end": 2877.11,
+      "duration": 3.3,
+      "text": "I'm calculating things as if I have"
+    },
+    {
+      "index": 672,
+      "start": 2877.11,
+      "end": 2879.59,
+      "duration": 2.48,
+      "text": "these states that are the energy levels."
+    },
+    {
+      "index": 673,
+      "start": 2879.59,
+      "end": 2885.08,
+      "duration": 5.49,
+      "text": "And the probabilities are e to the minus beta epsilon n."
+    },
+    {
+      "index": 674,
+      "start": 2885.08,
+      "end": 2886.32,
+      "duration": 1.24,
+      "text": "What does that mean?"
+    },
+    {
+      "index": 675,
+      "start": 2886.32,
+      "end": 2889.64,
+      "duration": 3.32,
+      "text": "Classically, we knew the Boltzmann rates"
+    },
+    {
+      "index": 676,
+      "start": 2889.64,
+      "end": 2892.39,
+      "duration": 2.75,
+      "text": "had something to do with the probability of finding"
+    },
+    {
+      "index": 677,
+      "start": 2892.39,
+      "end": 2897.5,
+      "duration": 5.11,
+      "text": "a particle with a particular position and momentum."
+    },
+    {
+      "index": 678,
+      "start": 2897.5,
+      "end": 2900.34,
+      "duration": 2.84,
+      "text": "So what is the analogous thing here?"
+    },
+    {
+      "index": 679,
+      "start": 2900.34,
+      "end": 2903.57,
+      "duration": 3.23,
+      "text": "And you know that in new quantum mechanics,"
+    },
+    {
+      "index": 680,
+      "start": 2903.57,
+      "end": 2906.83,
+      "duration": 3.26,
+      "text": "the interpretation of many things is probabilistic."
+    },
+    {
+      "index": 681,
+      "start": 2909.35,
+      "end": 2912.49,
+      "duration": 3.14,
+      "text": "And in statistical mechanics, even classically"
+    },
+    {
+      "index": 682,
+      "start": 2912.49,
+      "end": 2915.61,
+      "duration": 3.12,
+      "text": "we had a probabilistic interpretation."
+    },
+    {
+      "index": 683,
+      "start": 2915.61,
+      "end": 2920.02,
+      "duration": 4.41,
+      "text": "So presumably, we want to build a probabilistic theory"
+    },
+    {
+      "index": 684,
+      "start": 2920.02,
+      "end": 2923.58,
+      "duration": 3.56,
+      "text": "on top of another probabilistic theory."
+    },
+    {
+      "index": 685,
+      "start": 2923.58,
+      "end": 2926.48,
+      "duration": 2.9,
+      "text": "So how do we go about understanding"
+    },
+    {
+      "index": 686,
+      "start": 2926.48,
+      "end": 2929.95,
+      "duration": 3.47,
+      "text": "precisely what is happening over here?"
+    },
+    {
+      "index": 687,
+      "start": 2929.95,
+      "end": 2933.84,
+      "duration": 3.89,
+      "text": "So let's kind of remind ourselves"
+    },
+    {
+      "index": 688,
+      "start": 2933.84,
+      "end": 2938.4,
+      "duration": 4.56,
+      "text": "of what we were doing in the original classical statistical"
+    },
+    {
+      "index": 689,
+      "start": 2938.4,
+      "end": 2941.74,
+      "duration": 3.34,
+      "text": "mechanics, and try to see how we can make"
+    },
+    {
+      "index": 690,
+      "start": 2941.74,
+      "end": 2943.93,
+      "duration": 2.19,
+      "text": "the corresponding calculations when"
+    },
+    {
+      "index": 691,
+      "start": 2943.93,
+      "end": 2946.9,
+      "duration": 2.97,
+      "text": "things are quantum mechanical."
+    },
+    {
+      "index": 692,
+      "start": 2946.9,
+      "end": 2951.21,
+      "duration": 4.31,
+      "text": "So, essentially, the probabilistic sense"
+    },
+    {
+      "index": 693,
+      "start": 2951.21,
+      "end": 2955.15,
+      "duration": 3.94,
+      "text": "that we had in classical statistical mechanics"
+    },
+    {
+      "index": 694,
+      "start": 2955.15,
+      "end": 2958.79,
+      "duration": 3.64,
+      "text": "was to assign probabilities for micro states, given"
+    },
+    {
+      "index": 695,
+      "start": 2958.79,
+      "end": 2961.95,
+      "duration": 3.16,
+      "text": "that we had some knowledge of the macro state."
+    },
+    {
+      "index": 696,
+      "start": 2961.95,
+      "end": 2979.35,
+      "duration": 17.4,
+      "text": "So the classical microstate mu was a point"
+    },
+    {
+      "index": 697,
+      "start": 2979.35,
+      "end": 2984.368,
+      "duration": 5.018,
+      "text": "which was a collection of p's and q's in phase space."
+    },
+    {
+      "index": 698,
+      "start": 2991.69,
+      "end": 3001.0,
+      "duration": 9.31,
+      "text": "So what is a quantum microstate?"
+    },
+    {
+      "index": 699,
+      "start": 3001.0,
+      "end": 3001.5,
+      "duration": 0.5,
+      "text": "OK."
+    },
+    {
+      "index": 700,
+      "start": 3001.5,
+      "end": 3013.16,
+      "duration": 11.66,
+      "text": "So here, I'm just going to jump several decades ahead, and just"
+    },
+    {
+      "index": 701,
+      "start": 3013.16,
+      "end": 3014.57,
+      "duration": 1.41,
+      "text": "write the answer."
+    },
+    {
+      "index": 702,
+      "start": 3014.57,
+      "end": 3017.56,
+      "duration": 2.99,
+      "text": "And I'm going to do it in somewhat"
+    },
+    {
+      "index": 703,
+      "start": 3017.56,
+      "end": 3021.369,
+      "duration": 3.809,
+      "text": "of a more axiomatic way, because it's not up to me"
+    },
+    {
+      "index": 704,
+      "start": 3021.369,
+      "end": 3022.66,
+      "duration": 1.291,
+      "text": "to introduce quantum mechanics."
+    },
+    {
+      "index": 705,
+      "start": 3022.66,
+      "end": 3025.19,
+      "duration": 2.53,
+      "text": "I assume that you know it already."
+    },
+    {
+      "index": 706,
+      "start": 3025.19,
+      "end": 3028.01,
+      "duration": 2.82,
+      "text": "Just a perspective that I'm going to take."
+    },
+    {
+      "index": 707,
+      "start": 3028.01,
+      "end": 3040.02,
+      "duration": 12.01,
+      "text": "So the quantum microstate is a complex unit vector"
+    },
+    {
+      "index": 708,
+      "start": 3040.02,
+      "end": 3040.88,
+      "duration": 0.86,
+      "text": "in Hilbert space."
+    },
+    {
+      "index": 709,
+      "start": 3047.81,
+      "end": 3049.44,
+      "duration": 1.63,
+      "text": "OK?"
+    },
+    {
+      "index": 710,
+      "start": 3049.44,
+      "end": 3060.77,
+      "duration": 11.33,
+      "text": "So for any vector space, we can choose a set of unit vectors"
+    },
+    {
+      "index": 711,
+      "start": 3060.77,
+      "end": 3062.71,
+      "duration": 1.94,
+      "text": "that form an orthonormal basis."
+    },
+    {
+      "index": 712,
+      "start": 3069.028,
+      "end": 3073.63,
+      "duration": 4.602,
+      "text": "And I'm going to use this bra-ket notation."
+    },
+    {
+      "index": 713,
+      "start": 3073.63,
+      "end": 3080.58,
+      "duration": 6.95,
+      "text": "And so our psi, which is a vector in this space,"
+    },
+    {
+      "index": 714,
+      "start": 3080.58,
+      "end": 3085.68,
+      "duration": 5.1,
+      "text": "can be written in terms of its components"
+    },
+    {
+      "index": 715,
+      "start": 3085.68,
+      "end": 3090.16,
+      "duration": 4.48,
+      "text": "by pointing to the different directions in this space,"
+    },
+    {
+      "index": 716,
+      "start": 3090.16,
+      "end": 3097.79,
+      "duration": 7.63,
+      "text": "and components that I will indicate by this psi n."
+    },
+    {
+      "index": 717,
+      "start": 3097.79,
+      "end": 3100.65,
+      "duration": 2.86,
+      "text": "And these are complex."
+    },
+    {
+      "index": 718,
+      "start": 3105.5,
+      "end": 3111.81,
+      "duration": 6.31,
+      "text": "And I will use the notation that psi n"
+    },
+    {
+      "index": 719,
+      "start": 3111.81,
+      "end": 3115.63,
+      "duration": 3.82,
+      "text": "is the complex conjugate of n psi."
+    },
+    {
+      "index": 720,
+      "start": 3118.98,
+      "end": 3126.48,
+      "duration": 7.5,
+      "text": "And the norm of this I'm going to indicate by psi psi, which"
+    },
+    {
+      "index": 721,
+      "start": 3126.48,
+      "end": 3132.26,
+      "duration": 5.78,
+      "text": "is obtained by summing over all n psi psi n star, which"
+    },
+    {
+      "index": 722,
+      "start": 3132.26,
+      "end": 3137.28,
+      "duration": 5.02,
+      "text": "is essentially the magnitude of n psi squared."
+    },
+    {
+      "index": 723,
+      "start": 3137.28,
+      "end": 3140.19,
+      "duration": 2.91,
+      "text": "And these are unit vectors."
+    },
+    {
+      "index": 724,
+      "start": 3140.19,
+      "end": 3143.24,
+      "duration": 3.05,
+      "text": "So all of these states are normalized such"
+    },
+    {
+      "index": 725,
+      "start": 3143.24,
+      "end": 3145.96,
+      "duration": 2.72,
+      "text": "that psi psi is equal to 1."
+    },
+    {
+      "index": 726,
+      "start": 3151.13,
+      "end": 3152.26,
+      "duration": 1.13,
+      "text": "Yes."
+    },
+    {
+      "index": 727,
+      "start": 3152.26,
+      "end": 3155.397,
+      "duration": 3.137,
+      "text": "AUDIENCE: You're not allowing particle numbers"
+    },
+    {
+      "index": 728,
+      "start": 3155.397,
+      "end": 3156.77,
+      "duration": 1.373,
+      "text": "to vary, are you?"
+    },
+    {
+      "index": 729,
+      "start": 3156.77,
+      "end": 3158.15,
+      "duration": 1.38,
+      "text": "PROFESSOR: At this stage, no."
+    },
+    {
+      "index": 730,
+      "start": 3158.15,
+      "end": 3160.82,
+      "duration": 2.67,
+      "text": "Later on, when we do the grand canonical,"
+    },
+    {
+      "index": 731,
+      "start": 3160.82,
+      "end": 3163.85,
+      "duration": 3.03,
+      "text": "we will change our Hilbert space."
+    },
+    {
+      "index": 732,
+      "start": 3178.48,
+      "end": 3180.22,
+      "duration": 1.74,
+      "text": "OK?"
+    },
+    {
+      "index": 733,
+      "start": 3180.22,
+      "end": 3183.03,
+      "duration": 2.81,
+      "text": "So that's one concept."
+    },
+    {
+      "index": 734,
+      "start": 3183.03,
+      "end": 3186.82,
+      "duration": 3.79,
+      "text": "The other concept, classically, we measure things."
+    },
+    {
+      "index": 735,
+      "start": 3186.82,
+      "end": 3188.69,
+      "duration": 1.87,
+      "text": "So we have classical observable."
+    },
+    {
+      "index": 736,
+      "start": 3197.1,
+      "end": 3203.72,
+      "duration": 6.62,
+      "text": "And these are functions all of which"
+    },
+    {
+      "index": 737,
+      "start": 3203.72,
+      "end": 3207.75,
+      "duration": 4.03,
+      "text": "depend on this p and q in phase space."
+    },
+    {
+      "index": 738,
+      "start": 3213.51,
+      "end": 3216.51,
+      "duration": 3.0,
+      "text": "So basically, there's the phase space."
+    },
+    {
+      "index": 739,
+      "start": 3216.51,
+      "end": 3219.27,
+      "duration": 2.76,
+      "text": "We can have some particular function,"
+    },
+    {
+      "index": 740,
+      "start": 3219.27,
+      "end": 3222.67,
+      "duration": 3.4,
+      "text": "such as the kinetic energy-- sum over i pi squared"
+    },
+    {
+      "index": 741,
+      "start": 3222.67,
+      "end": 3226.22,
+      "duration": 3.55,
+      "text": "over 2 n-- that's an example of an observable."
+    },
+    {
+      "index": 742,
+      "start": 3226.22,
+      "end": 3229.92,
+      "duration": 3.7,
+      "text": "Kinetic energy, potential energy, anything that we like,"
+    },
+    {
+      "index": 743,
+      "start": 3229.92,
+      "end": 3232.44,
+      "duration": 2.52,
+      "text": "you can classically write a sum function"
+    },
+    {
+      "index": 744,
+      "start": 3232.44,
+      "end": 3234.88,
+      "duration": 2.44,
+      "text": "that you want to evaluate in phase space,"
+    },
+    {
+      "index": 745,
+      "start": 3234.88,
+      "end": 3237.74,
+      "duration": 2.86,
+      "text": "given that you are at some particular point in phase"
+    },
+    {
+      "index": 746,
+      "start": 3237.74,
+      "end": 3242.72,
+      "duration": 4.98,
+      "text": "space, the state of your system, you can evaluate what that is."
+    },
+    {
+      "index": 747,
+      "start": 3242.72,
+      "end": 3250.85,
+      "duration": 8.13,
+      "text": "Now in quantum mechanics, observables"
+    },
+    {
+      "index": 748,
+      "start": 3250.85,
+      "end": 3269.26,
+      "duration": 18.41,
+      "text": "are operators, or matrices, if you like, in this vector space."
+    },
+    {
+      "index": 749,
+      "start": 3269.26,
+      "end": 3270.65,
+      "duration": 1.39,
+      "text": "OK?"
+    },
+    {
+      "index": 750,
+      "start": 3270.65,
+      "end": 3277.31,
+      "duration": 6.66,
+      "text": "So among the various observables,"
+    },
+    {
+      "index": 751,
+      "start": 3277.31,
+      "end": 3279.21,
+      "duration": 1.9,
+      "text": "certainly, are things like the position"
+    },
+    {
+      "index": 752,
+      "start": 3279.21,
+      "end": 3281.76,
+      "duration": 2.55,
+      "text": "and the momentum of the particle."
+    },
+    {
+      "index": 753,
+      "start": 3281.76,
+      "end": 3283.67,
+      "duration": 1.91,
+      "text": "So there are presumably matrices that"
+    },
+    {
+      "index": 754,
+      "start": 3283.67,
+      "end": 3287.85,
+      "duration": 4.18,
+      "text": "correspond to position and momentum."
+    },
+    {
+      "index": 755,
+      "start": 3287.85,
+      "end": 3292.83,
+      "duration": 4.98,
+      "text": "And for that, we look at some other properties"
+    },
+    {
+      "index": 756,
+      "start": 3292.83,
+      "end": 3296.65,
+      "duration": 3.82,
+      "text": "that this classical systems have."
+    },
+    {
+      "index": 757,
+      "start": 3296.65,
+      "end": 3303.21,
+      "duration": 6.56,
+      "text": "We had defined classically a Poisson bracket,"
+    },
+    {
+      "index": 758,
+      "start": 3303.21,
+      "end": 3310.94,
+      "duration": 7.73,
+      "text": "which was a sum over all alphas d a by d q alpha"
+    },
+    {
+      "index": 759,
+      "start": 3310.94,
+      "end": 3321.145,
+      "duration": 10.205,
+      "text": "d b by d p alpha minus the a by the p alpha b d by the q f."
+    },
+    {
+      "index": 760,
+      "start": 3321.145,
+      "end": 3321.645,
+      "duration": 0.5,
+      "text": "OK?"
+    },
+    {
+      "index": 761,
+      "start": 3324.5,
+      "end": 3329.21,
+      "duration": 4.71,
+      "text": "And this is an operation that you"
+    },
+    {
+      "index": 762,
+      "start": 3329.21,
+      "end": 3333.05,
+      "duration": 3.84,
+      "text": "would like to, and happens to, carry over in some sense"
+    },
+    {
+      "index": 763,
+      "start": 3333.05,
+      "end": 3337.22,
+      "duration": 4.17,
+      "text": "into quantum mechanics."
+    },
+    {
+      "index": 764,
+      "start": 3337.22,
+      "end": 3340.0,
+      "duration": 2.78,
+      "text": "But one of the consequence of this"
+    },
+    {
+      "index": 765,
+      "start": 3340.0,
+      "end": 3345.47,
+      "duration": 5.47,
+      "text": "is you can check if I pick a particular momentum, key,"
+    },
+    {
+      "index": 766,
+      "start": 3345.47,
+      "end": 3352.84,
+      "duration": 7.37,
+      "text": "and a particular coordinate, q, and put it over here, most"
+    },
+    {
+      "index": 767,
+      "start": 3352.84,
+      "end": 3357.14,
+      "duration": 4.3,
+      "text": "of the time I will get 0, unless the alphas match"
+    },
+    {
+      "index": 768,
+      "start": 3357.14,
+      "end": 3360.54,
+      "duration": 3.4,
+      "text": "exactly the p q's that I have up there."
+    },
+    {
+      "index": 769,
+      "start": 3360.54,
+      "end": 3362.94,
+      "duration": 2.4,
+      "text": "And if you go through this whole thing,"
+    },
+    {
+      "index": 770,
+      "start": 3362.94,
+      "end": 3368.61,
+      "duration": 5.67,
+      "text": "I will get something like that is like a delta i j."
+    },
+    {
+      "index": 771,
+      "start": 3368.61,
+      "end": 3370.61,
+      "duration": 2.0,
+      "text": "OK."
+    },
+    {
+      "index": 772,
+      "start": 3370.61,
+      "end": 3376.59,
+      "duration": 5.98,
+      "text": "So this structure somehow continues in quantum mechanics,"
+    },
+    {
+      "index": 773,
+      "start": 3376.59,
+      "end": 3382.05,
+      "duration": 5.46,
+      "text": "in this sense that the matrices that correspond to p and q"
+    },
+    {
+      "index": 774,
+      "start": 3382.05,
+      "end": 3393.24,
+      "duration": 11.19,
+      "text": "satisfy the condition that p i and q j,"
+    },
+    {
+      "index": 775,
+      "start": 3393.24,
+      "end": 3398.2,
+      "duration": 4.96,
+      "text": "thinking of two matrices, and this is the commutator,"
+    },
+    {
+      "index": 776,
+      "start": 3398.2,
+      "end": 3410.786,
+      "duration": 12.586,
+      "text": "so this is p i q j minus q j p i is h bar over i delta h."
+    },
+    {
+      "index": 777,
+      "start": 3417.57,
+      "end": 3424.71,
+      "duration": 7.14,
+      "text": "So once you have the matrices that correspond to p and q,"
+    },
+    {
+      "index": 778,
+      "start": 3424.71,
+      "end": 3431.37,
+      "duration": 6.66,
+      "text": "you can take any function of p and q that you had over here,"
+    },
+    {
+      "index": 779,
+      "start": 3431.37,
+      "end": 3436.51,
+      "duration": 5.14,
+      "text": "and then replace the p's and q's that appear in, let's say,"
+    },
+    {
+      "index": 780,
+      "start": 3436.51,
+      "end": 3440.02,
+      "duration": 3.51,
+      "text": "a series expansion, or an expansion of this o in powers"
+    },
+    {
+      "index": 781,
+      "start": 3440.02,
+      "end": 3444.84,
+      "duration": 4.82,
+      "text": "of p and q, with corresponding matrices p hat and q hat."
+    },
+    {
+      "index": 782,
+      "start": 3444.84,
+      "end": 3448.98,
+      "duration": 4.14,
+      "text": "And that way, you will construct a corresponding operator."
+    },
+    {
+      "index": 783,
+      "start": 3448.98,
+      "end": 3452.24,
+      "duration": 3.26,
+      "text": "There is one subtlety that you've probably encountered,"
+    },
+    {
+      "index": 784,
+      "start": 3452.24,
+      "end": 3454.48,
+      "duration": 2.24,
+      "text": "in that there is some symmetrization"
+    },
+    {
+      "index": 785,
+      "start": 3454.48,
+      "end": 3458.13,
+      "duration": 3.65,
+      "text": "that you have to do before you can make this replacement."
+    },
+    {
+      "index": 786,
+      "start": 3460.77,
+      "end": 3462.07,
+      "duration": 1.3,
+      "text": "OK."
+    },
+    {
+      "index": 787,
+      "start": 3462.07,
+      "end": 3465.386,
+      "duration": 3.316,
+      "text": "So what does it mean?"
+    },
+    {
+      "index": 788,
+      "start": 3465.386,
+      "end": 3471.13,
+      "duration": 5.744,
+      "text": "In classical theory, if something is observable"
+    },
+    {
+      "index": 789,
+      "start": 3471.13,
+      "end": 3472.72,
+      "duration": 1.59,
+      "text": "the answer that you get is a number."
+    },
+    {
+      "index": 790,
+      "start": 3472.72,
+      "end": 3473.22,
+      "duration": 0.5,
+      "text": "Right?"
+    },
+    {
+      "index": 791,
+      "start": 3473.22,
+      "end": 3476.18,
+      "duration": 2.96,
+      "text": "You can calculate what the kinetic energy is."
+    },
+    {
+      "index": 792,
+      "start": 3476.18,
+      "end": 3479.03,
+      "duration": 2.85,
+      "text": "In quantum mechanics, what does it"
+    },
+    {
+      "index": 793,
+      "start": 3479.03,
+      "end": 3483.6,
+      "duration": 4.57,
+      "text": "mean that observable is a matrix?"
+    },
+    {
+      "index": 794,
+      "start": 3483.6,
+      "end": 3486.53,
+      "duration": 2.93,
+      "text": "The statement is that observables"
+    },
+    {
+      "index": 795,
+      "start": 3486.53,
+      "end": 3495.21,
+      "duration": 8.68,
+      "text": "don't have definite values, but the expectation value"
+    },
+    {
+      "index": 796,
+      "start": 3495.21,
+      "end": 3502.31,
+      "duration": 7.1,
+      "text": "of a particular observable o in some state pi"
+    },
+    {
+      "index": 797,
+      "start": 3502.31,
+      "end": 3506.34,
+      "duration": 4.03,
+      "text": "is given by psi o psi."
+    },
+    {
+      "index": 798,
+      "start": 3506.34,
+      "end": 3511.01,
+      "duration": 4.67,
+      "text": "Essentially, you take the vector that correspond to the state,"
+    },
+    {
+      "index": 799,
+      "start": 3511.01,
+      "end": 3514.52,
+      "duration": 3.51,
+      "text": "multiply the matrix on it, and then sandwich it"
+    },
+    {
+      "index": 800,
+      "start": 3514.52,
+      "end": 3516.85,
+      "duration": 2.33,
+      "text": "with the conjugate of the vector,"
+    },
+    {
+      "index": 801,
+      "start": 3516.85,
+      "end": 3518.365,
+      "duration": 1.515,
+      "text": "and that will give you your state."
+    },
+    {
+      "index": 802,
+      "start": 3518.365,
+      "end": 3523.88,
+      "duration": 5.515,
+      "text": "So in terms of elements of some particular basis,"
+    },
+    {
+      "index": 803,
+      "start": 3523.88,
+      "end": 3527.61,
+      "duration": 3.73,
+      "text": "you would write this as a sum over n and m."
+    },
+    {
+      "index": 804,
+      "start": 3527.61,
+      "end": 3533.2,
+      "duration": 5.59,
+      "text": "Psi n n o m m psi."
+    },
+    {
+      "index": 805,
+      "start": 3537.28,
+      "end": 3542.82,
+      "duration": 5.54,
+      "text": "And in that particular basis, your operator"
+    },
+    {
+      "index": 806,
+      "start": 3542.82,
+      "end": 3544.63,
+      "duration": 1.81,
+      "text": "would have these matrix elements."
+    },
+    {
+      "index": 807,
+      "start": 3547.16,
+      "end": 3550.97,
+      "duration": 3.81,
+      "text": "Now again, another property, if you're"
+    },
+    {
+      "index": 808,
+      "start": 3550.97,
+      "end": 3553.63,
+      "duration": 2.66,
+      "text": "measuring something that is observable,"
+    },
+    {
+      "index": 809,
+      "start": 3553.63,
+      "end": 3557.2,
+      "duration": 3.57,
+      "text": "is presumably you will get a number that is real."
+    },
+    {
+      "index": 810,
+      "start": 3557.2,
+      "end": 3561.45,
+      "duration": 4.25,
+      "text": "That is, you expect this to be the same thing"
+    },
+    {
+      "index": 811,
+      "start": 3561.45,
+      "end": 3564.79,
+      "duration": 3.34,
+      "text": "as its complex conjugate."
+    },
+    {
+      "index": 812,
+      "start": 3564.79,
+      "end": 3567.94,
+      "duration": 3.15,
+      "text": "And if you follow this condition,"
+    },
+    {
+      "index": 813,
+      "start": 3567.94,
+      "end": 3574.49,
+      "duration": 6.55,
+      "text": "you will see that that reality implies that n o m should"
+    },
+    {
+      "index": 814,
+      "start": 3574.49,
+      "end": 3581.94,
+      "duration": 7.45,
+      "text": "m o n complex conjugate, which is typically written"
+    },
+    {
+      "index": 815,
+      "start": 3581.94,
+      "end": 3586.039,
+      "duration": 4.099,
+      "text": "as the matrix being its Hermitian conjugate,"
+    },
+    {
+      "index": 816,
+      "start": 3586.039,
+      "end": 3586.83,
+      "duration": 0.791,
+      "text": "or being Hermitian."
+    },
+    {
+      "index": 817,
+      "start": 3591.19,
+      "end": 3594.51,
+      "duration": 3.32,
+      "text": "So all observables in quantum mechanics"
+    },
+    {
+      "index": 818,
+      "start": 3594.51,
+      "end": 3598.665,
+      "duration": 4.155,
+      "text": "would correspond to Hermitian operators or matrices."
+    },
+    {
+      "index": 819,
+      "start": 3601.761,
+      "end": 3602.26,
+      "duration": 0.499,
+      "text": "OK."
+    },
+    {
+      "index": 820,
+      "start": 3604.81,
+      "end": 3606.73,
+      "duration": 1.92,
+      "text": "There's one other piece, and then we"
+    },
+    {
+      "index": 821,
+      "start": 3606.73,
+      "end": 3614.43,
+      "duration": 7.7,
+      "text": "can forget about axioms."
+    },
+    {
+      "index": 822,
+      "start": 3614.43,
+      "end": 3619.95,
+      "duration": 5.52,
+      "text": "We have a classical time evolution."
+    },
+    {
+      "index": 823,
+      "start": 3626.93,
+      "end": 3630.53,
+      "duration": 3.6,
+      "text": "We know that the particular point in the classical phase"
+    },
+    {
+      "index": 824,
+      "start": 3630.53,
+      "end": 3633.41,
+      "duration": 2.88,
+      "text": "space changes as a function of time, such"
+    },
+    {
+      "index": 825,
+      "start": 3633.41,
+      "end": 3640.44,
+      "duration": 7.03,
+      "text": "that q i dot is plus d h by d p i."
+    },
+    {
+      "index": 826,
+      "start": 3640.44,
+      "end": 3646.19,
+      "duration": 5.75,
+      "text": "P i dot is minus d h by d q i."
+    },
+    {
+      "index": 827,
+      "start": 3646.19,
+      "end": 3649.92,
+      "duration": 3.73,
+      "text": "By the way, both of these can be written as q i"
+    },
+    {
+      "index": 828,
+      "start": 3649.92,
+      "end": 3655.63,
+      "duration": 5.71,
+      "text": "and h Poisson bracket and p i and h Poisson bracket."
+    },
+    {
+      "index": 829,
+      "start": 3655.63,
+      "end": 3661.72,
+      "duration": 6.09,
+      "text": "But there is a particular function observable, h,"
+    },
+    {
+      "index": 830,
+      "start": 3661.72,
+      "end": 3667.66,
+      "duration": 5.94,
+      "text": "the Hamiltonian, that derives the classical evolution."
+    },
+    {
+      "index": 831,
+      "start": 3667.66,
+      "end": 3673.8,
+      "duration": 6.14,
+      "text": "And when we go to quantum evolution,"
+    },
+    {
+      "index": 832,
+      "start": 3673.8,
+      "end": 3679.48,
+      "duration": 5.68,
+      "text": "this vector that we have in Hilbert space evolves according"
+    },
+    {
+      "index": 833,
+      "start": 3679.48,
+      "end": 3686.55,
+      "duration": 7.07,
+      "text": "to i h bar d by dt of the vector psi"
+    },
+    {
+      "index": 834,
+      "start": 3686.55,
+      "end": 3690.716,
+      "duration": 4.166,
+      "text": "is the matrix that we have acting on psi."
+    },
+    {
+      "index": 835,
+      "start": 3694.9,
+      "end": 3696.541,
+      "duration": 1.641,
+      "text": "OK."
+    },
+    {
+      "index": 836,
+      "start": 3696.541,
+      "end": 3697.04,
+      "duration": 0.499,
+      "text": "Fine."
+    },
+    {
+      "index": 837,
+      "start": 3697.04,
+      "end": 3700.584,
+      "duration": 3.544,
+      "text": "So these are the basics that we need."
+    },
+    {
+      "index": 838,
+      "start": 3700.584,
+      "end": 3705.88,
+      "duration": 5.296,
+      "text": "Now we can go and do statistical descriptions."
+    },
+    {
+      "index": 839,
+      "start": 3713.1,
+      "end": 3724.54,
+      "duration": 11.44,
+      "text": "So the main element that we had in constructing statistical"
+    },
+    {
+      "index": 840,
+      "start": 3724.54,
+      "end": 3727.666,
+      "duration": 3.126,
+      "text": "descriptions was deal with a macrostate."
+    },
+    {
+      "index": 841,
+      "start": 3735.85,
+      "end": 3738.44,
+      "duration": 2.59,
+      "text": "We said that if I'm interested in thinking"
+    },
+    {
+      "index": 842,
+      "start": 3738.44,
+      "end": 3742.76,
+      "duration": 4.32,
+      "text": "about the properties of one cubic meter of gas"
+    },
+    {
+      "index": 843,
+      "start": 3742.76,
+      "end": 3745.96,
+      "duration": 3.2,
+      "text": "at standard temperature and pressure,"
+    },
+    {
+      "index": 844,
+      "start": 3745.96,
+      "end": 3749.34,
+      "duration": 3.38,
+      "text": "I'm not thinking about a particular point in phase"
+    },
+    {
+      "index": 845,
+      "start": 3749.34,
+      "end": 3752.02,
+      "duration": 2.68,
+      "text": "space, because different gases that"
+    },
+    {
+      "index": 846,
+      "start": 3752.02,
+      "end": 3755.3,
+      "duration": 3.28,
+      "text": "have exactly the same macroscopic properties would"
+    },
+    {
+      "index": 847,
+      "start": 3755.3,
+      "end": 3758.1,
+      "duration": 2.8,
+      "text": "correspond to many, many different possible points"
+    },
+    {
+      "index": 848,
+      "start": 3758.1,
+      "end": 3762.06,
+      "duration": 3.96,
+      "text": "in this phase space that are changing as a function of time."
+    },
+    {
+      "index": 849,
+      "start": 3762.06,
+      "end": 3767.85,
+      "duration": 5.79,
+      "text": "So rather than thinking about a single microstate,"
+    },
+    {
+      "index": 850,
+      "start": 3767.85,
+      "end": 3770.74,
+      "duration": 2.89,
+      "text": "we talked about an ensemble."
+    },
+    {
+      "index": 851,
+      "start": 3770.74,
+      "end": 3780.28,
+      "duration": 9.54,
+      "text": "And this ensemble had a whole bunch of possible microstates."
+    },
+    {
+      "index": 852,
+      "start": 3780.28,
+      "end": 3782.34,
+      "duration": 2.06,
+      "text": "In the simplest prescription, maybe we"
+    },
+    {
+      "index": 853,
+      "start": 3782.34,
+      "end": 3786.28,
+      "duration": 3.94,
+      "text": "said they were all equally likely."
+    },
+    {
+      "index": 854,
+      "start": 3786.28,
+      "end": 3789.56,
+      "duration": 3.28,
+      "text": "But, actually, we could even assign some kind of probability"
+    },
+    {
+      "index": 855,
+      "start": 3789.56,
+      "end": 3790.06,
+      "duration": 0.5,
+      "text": "to them."
+    },
+    {
+      "index": 856,
+      "start": 3793.74,
+      "end": 3799.43,
+      "duration": 5.69,
+      "text": "And we want to know what to do with this, because then what"
+    },
+    {
+      "index": 857,
+      "start": 3799.43,
+      "end": 3804.13,
+      "duration": 4.7,
+      "text": "happened was from this description,"
+    },
+    {
+      "index": 858,
+      "start": 3804.13,
+      "end": 3811.15,
+      "duration": 7.02,
+      "text": "we then constructed a density which was, again,"
+    },
+    {
+      "index": 859,
+      "start": 3811.15,
+      "end": 3816.17,
+      "duration": 5.02,
+      "text": "some kind of a probability in phase space."
+    },
+    {
+      "index": 860,
+      "start": 3816.17,
+      "end": 3818.69,
+      "duration": 2.52,
+      "text": "And we looked at its time evolution."
+    },
+    {
+      "index": 861,
+      "start": 3818.69,
+      "end": 3822.14,
+      "duration": 3.45,
+      "text": "We looked at the averages and all kinds of things"
+    },
+    {
+      "index": 862,
+      "start": 3822.14,
+      "end": 3825.25,
+      "duration": 3.11,
+      "text": "in terms of this density."
+    },
+    {
+      "index": 863,
+      "start": 3825.25,
+      "end": 3830.34,
+      "duration": 5.09,
+      "text": "So the question is, what happens to all of this"
+    },
+    {
+      "index": 864,
+      "start": 3830.34,
+      "end": 3835.07,
+      "duration": 4.73,
+      "text": "when we go to quantum descriptions?"
+    },
+    {
+      "index": 865,
+      "start": 3835.07,
+      "end": 3835.93,
+      "duration": 0.86,
+      "text": "OK."
+    },
+    {
+      "index": 866,
+      "start": 3835.93,
+      "end": 3838.7,
+      "duration": 2.77,
+      "text": "You can follow a lot of that."
+    },
+    {
+      "index": 867,
+      "start": 3838.7,
+      "end": 3844.64,
+      "duration": 5.94,
+      "text": "We can, again, take the example of the one cubic meter of gas"
+    },
+    {
+      "index": 868,
+      "start": 3844.64,
+      "end": 3847.43,
+      "duration": 2.79,
+      "text": "at standard temperature and pressure."
+    },
+    {
+      "index": 869,
+      "start": 3847.43,
+      "end": 3851.38,
+      "duration": 3.95,
+      "text": "But the rather than describing the state of the system"
+    },
+    {
+      "index": 870,
+      "start": 3851.38,
+      "end": 3853.75,
+      "duration": 2.37,
+      "text": "classically, I can try to describe it"
+    },
+    {
+      "index": 871,
+      "start": 3853.75,
+      "end": 3855.93,
+      "duration": 2.18,
+      "text": "quantum mechanically."
+    },
+    {
+      "index": 872,
+      "start": 3855.93,
+      "end": 3858.14,
+      "duration": 2.21,
+      "text": "Presumably the quantum mechanical description"
+    },
+    {
+      "index": 873,
+      "start": 3858.14,
+      "end": 3861.93,
+      "duration": 3.79,
+      "text": "at some limit becomes equivalent to the classical description."
+    },
+    {
+      "index": 874,
+      "start": 3861.93,
+      "end": 3868.005,
+      "duration": 6.075,
+      "text": "So I will have an ensemble of states."
+    },
+    {
+      "index": 875,
+      "start": 3870.82,
+      "end": 3873.94,
+      "duration": 3.12,
+      "text": "I don't know which one of them I am in."
+    },
+    {
+      "index": 876,
+      "start": 3873.94,
+      "end": 3875.36,
+      "duration": 1.42,
+      "text": "I have lots of boxes."
+    },
+    {
+      "index": 877,
+      "start": 3875.36,
+      "end": 3879.71,
+      "duration": 4.35,
+      "text": "They would correspond to different microstates,"
+    },
+    {
+      "index": 878,
+      "start": 3879.71,
+      "end": 3881.48,
+      "duration": 1.77,
+      "text": "presumably."
+    },
+    {
+      "index": 879,
+      "start": 3881.48,
+      "end": 3885.79,
+      "duration": 4.31,
+      "text": "And this has, actually, a word that"
+    },
+    {
+      "index": 880,
+      "start": 3885.79,
+      "end": 3888.01,
+      "duration": 2.22,
+      "text": "is used more in the quantum context."
+    },
+    {
+      "index": 881,
+      "start": 3888.01,
+      "end": 3890.4,
+      "duration": 2.39,
+      "text": "I guess one could use it in the classical context."
+    },
+    {
+      "index": 882,
+      "start": 3890.4,
+      "end": 3893.57,
+      "duration": 3.17,
+      "text": "It's called a mixed state."
+    },
+    {
+      "index": 883,
+      "start": 3893.57,
+      "end": 3897.27,
+      "duration": 3.7,
+      "text": "A pure state is one you know exactly."
+    },
+    {
+      "index": 884,
+      "start": 3897.27,
+      "end": 3900.74,
+      "duration": 3.47,
+      "text": "Mixed state is, well, like the gas I tell you."
+    },
+    {
+      "index": 885,
+      "start": 3900.74,
+      "end": 3903.43,
+      "duration": 2.69,
+      "text": "I tell you only the macroscopic information,"
+    },
+    {
+      "index": 886,
+      "start": 3903.43,
+      "end": 3906.34,
+      "duration": 2.91,
+      "text": "you don't know much about microscopically what it is."
+    },
+    {
+      "index": 887,
+      "start": 3906.34,
+      "end": 3909.47,
+      "duration": 3.13,
+      "text": "If these are possibilities, and not knowing"
+    },
+    {
+      "index": 888,
+      "start": 3909.47,
+      "end": 3911.51,
+      "duration": 2.04,
+      "text": "those possibilities, you can say that it's"
+    },
+    {
+      "index": 889,
+      "start": 3911.51,
+      "end": 3914.96,
+      "duration": 3.45,
+      "text": "a mixture of all these states."
+    },
+    {
+      "index": 890,
+      "start": 3914.96,
+      "end": 3916.83,
+      "duration": 1.87,
+      "text": "OK."
+    },
+    {
+      "index": 891,
+      "start": 3916.83,
+      "end": 3921.49,
+      "duration": 4.66,
+      "text": "Now, what would I use, classically, a density for?"
+    },
+    {
+      "index": 892,
+      "start": 3921.49,
+      "end": 3924.7,
+      "duration": 3.21,
+      "text": "What I could do is I could calculate"
+    },
+    {
+      "index": 893,
+      "start": 3924.7,
+      "end": 3934.53,
+      "duration": 9.83,
+      "text": "the average of some observable, classically, in this ensemble."
+    },
+    {
+      "index": 894,
+      "start": 3934.53,
+      "end": 3937.99,
+      "duration": 3.46,
+      "text": "And what I would do is I would integrate"
+    },
+    {
+      "index": 895,
+      "start": 3937.99,
+      "end": 3943.47,
+      "duration": 5.48,
+      "text": "over the entirety of the six n-dimensional phase space"
+    },
+    {
+      "index": 896,
+      "start": 3943.47,
+      "end": 3947.85,
+      "duration": 4.38,
+      "text": "the o at some particular point in phase space"
+    },
+    {
+      "index": 897,
+      "start": 3947.85,
+      "end": 3951.54,
+      "duration": 3.69,
+      "text": "and the density at that point in phase space."
+    },
+    {
+      "index": 898,
+      "start": 3951.54,
+      "end": 3956.92,
+      "duration": 5.38,
+      "text": "And this average I will indicate by a bar."
+    },
+    {
+      "index": 899,
+      "start": 3956.92,
+      "end": 3963.77,
+      "duration": 6.85,
+      "text": "So my bars stand for ensemble average,"
+    },
+    {
+      "index": 900,
+      "start": 3963.77,
+      "end": 3968.1,
+      "duration": 4.33,
+      "text": "to make them distinct from these quantum averages"
+    },
+    {
+      "index": 901,
+      "start": 3968.1,
+      "end": 3971.88,
+      "duration": 3.78,
+      "text": "that I will indicate with the Bra-Kets."
+    },
+    {
+      "index": 902,
+      "start": 3971.88,
+      "end": 3974.18,
+      "duration": 2.3,
+      "text": "OK?"
+    },
+    {
+      "index": 903,
+      "start": 3974.18,
+      "end": 3980.88,
+      "duration": 6.7,
+      "text": "So let's try to do the analogue of that in quantum states."
+    },
+    {
+      "index": 904,
+      "start": 3980.88,
+      "end": 3985.74,
+      "duration": 4.86,
+      "text": "I would say that, OK, for a particular one of the members"
+    },
+    {
+      "index": 905,
+      "start": 3985.74,
+      "end": 3988.41,
+      "duration": 2.67,
+      "text": "of this ensemble, I can calculate"
+    },
+    {
+      "index": 906,
+      "start": 3988.41,
+      "end": 3990.41,
+      "duration": 2.0,
+      "text": "what the expectation value is."
+    },
+    {
+      "index": 907,
+      "start": 3993.26,
+      "end": 3997.31,
+      "duration": 4.05,
+      "text": "This is the expectation value that"
+    },
+    {
+      "index": 908,
+      "start": 3997.31,
+      "end": 4002.8,
+      "duration": 5.49,
+      "text": "corresponds to this observable o, if I was in a pure state psi"
+    },
+    {
+      "index": 909,
+      "start": 4002.8,
+      "end": 4004.62,
+      "duration": 1.82,
+      "text": "alpha."
+    },
+    {
+      "index": 910,
+      "start": 4004.62,
+      "end": 4008.37,
+      "duration": 3.75,
+      "text": "But I don't know that I am there."
+    },
+    {
+      "index": 911,
+      "start": 4008.37,
+      "end": 4012.78,
+      "duration": 4.41,
+      "text": "I have a probability, so I do a summation"
+    },
+    {
+      "index": 912,
+      "start": 4012.78,
+      "end": 4014.85,
+      "duration": 2.07,
+      "text": "over all of these states."
+    },
+    {
+      "index": 913,
+      "start": 4014.85,
+      "end": 4018.66,
+      "duration": 3.81,
+      "text": "And I will call that expectation value ensemble average."
+    },
+    {
+      "index": 914,
+      "start": 4023.93,
+      "end": 4027.77,
+      "duration": 3.84,
+      "text": "So that's how things are defined."
+    },
+    {
+      "index": 915,
+      "start": 4027.77,
+      "end": 4031.28,
+      "duration": 3.51,
+      "text": "Let's look at this in some particular basis."
+    },
+    {
+      "index": 916,
+      "start": 4031.28,
+      "end": 4039.78,
+      "duration": 8.5,
+      "text": "I would write this as a sum over alpha m and n p alpha psi"
+    },
+    {
+      "index": 917,
+      "start": 4039.78,
+      "end": 4048.35,
+      "duration": 8.57,
+      "text": "alpha m m o n n psi alpha."
+    },
+    {
+      "index": 918,
+      "start": 4048.35,
+      "end": 4053.06,
+      "duration": 4.71,
+      "text": "So, essentially, writing all of these psis"
+    },
+    {
+      "index": 919,
+      "start": 4053.06,
+      "end": 4058.29,
+      "duration": 5.23,
+      "text": "in terms of their components, just as I had done above."
+    },
+    {
+      "index": 920,
+      "start": 4058.29,
+      "end": 4059.92,
+      "duration": 1.63,
+      "text": "OK."
+    },
+    {
+      "index": 921,
+      "start": 4059.92,
+      "end": 4064.08,
+      "duration": 4.16,
+      "text": "Now what I want to do is to reorder this."
+    },
+    {
+      "index": 922,
+      "start": 4064.08,
+      "end": 4068.35,
+      "duration": 4.27,
+      "text": "Do the summation over n and m first,"
+    },
+    {
+      "index": 923,
+      "start": 4068.35,
+      "end": 4070.38,
+      "duration": 2.03,
+      "text": "the summation over alpha last."
+    },
+    {
+      "index": 924,
+      "start": 4070.38,
+      "end": 4072.395,
+      "duration": 2.015,
+      "text": "So what do I have?"
+    },
+    {
+      "index": 925,
+      "start": 4072.395,
+      "end": 4077.67,
+      "duration": 5.275,
+      "text": "I have m o n."
+    },
+    {
+      "index": 926,
+      "start": 4077.67,
+      "end": 4086.85,
+      "duration": 9.18,
+      "text": "And then I have a sum over alpha of p alpha n psi alpha"
+    },
+    {
+      "index": 927,
+      "start": 4086.85,
+      "end": 4087.81,
+      "duration": 0.96,
+      "text": "n."
+    },
+    {
+      "index": 928,
+      "start": 4094.29,
+      "end": 4103.359,
+      "duration": 9.069,
+      "text": "So what I will do, this quantity that alpha is summed over--"
+    },
+    {
+      "index": 929,
+      "start": 4103.359,
+      "end": 4106.939,
+      "duration": 3.58,
+      "text": "so it depends on the two indices n and m."
+    },
+    {
+      "index": 930,
+      "start": 4106.939,
+      "end": 4108.55,
+      "duration": 1.611,
+      "text": "I can give it a name."
+    },
+    {
+      "index": 931,
+      "start": 4108.55,
+      "end": 4111.43,
+      "duration": 2.88,
+      "text": "I can call it n rho m."
+    },
+    {
+      "index": 932,
+      "start": 4115.55,
+      "end": 4121.6,
+      "duration": 6.05,
+      "text": "If I do that, then this o bar average becomes simply--"
+    },
+    {
+      "index": 933,
+      "start": 4121.6,
+      "end": 4123.819,
+      "duration": 2.219,
+      "text": "let's see."
+    },
+    {
+      "index": 934,
+      "start": 4123.819,
+      "end": 4130.56,
+      "duration": 6.741,
+      "text": "This summation over n gives me the matrix product o rho."
+    },
+    {
+      "index": 935,
+      "start": 4130.56,
+      "end": 4134.79,
+      "duration": 4.23,
+      "text": "And then summation over m gives me the trace of the product."
+    },
+    {
+      "index": 936,
+      "start": 4134.79,
+      "end": 4137.221,
+      "duration": 2.431,
+      "text": "So this is the trace of rho o."
+    },
+    {
+      "index": 937,
+      "start": 4139.987,
+      "end": 4142.3,
+      "duration": 2.313,
+      "text": "OK?"
+    },
+    {
+      "index": 938,
+      "start": 4142.3,
+      "end": 4149.85,
+      "duration": 7.55,
+      "text": "So I constructed something that is"
+    },
+    {
+      "index": 939,
+      "start": 4149.85,
+      "end": 4156.26,
+      "duration": 6.41,
+      "text": "kind of analogous to the classical use"
+    },
+    {
+      "index": 940,
+      "start": 4156.26,
+      "end": 4160.93,
+      "duration": 4.67,
+      "text": "of the density in phase space."
+    },
+    {
+      "index": 941,
+      "start": 4160.93,
+      "end": 4163.85,
+      "duration": 2.92,
+      "text": "So you would multiply the density and the thing"
+    },
+    {
+      "index": 942,
+      "start": 4163.85,
+      "end": 4168.31,
+      "duration": 4.46,
+      "text": "that you wanted to calculate the observable."
+    },
+    {
+      "index": 943,
+      "start": 4168.31,
+      "end": 4171.29,
+      "duration": 2.98,
+      "text": "And the ensemble average is obtained"
+    },
+    {
+      "index": 944,
+      "start": 4171.29,
+      "end": 4174.71,
+      "duration": 3.42,
+      "text": "as a kind of summing over all possible what values"
+    },
+    {
+      "index": 945,
+      "start": 4174.71,
+      "end": 4177.55,
+      "duration": 2.84,
+      "text": "of that product in phase space."
+    },
+    {
+      "index": 946,
+      "start": 4177.55,
+      "end": 4180.729,
+      "duration": 3.179,
+      "text": "So here, I'm doing something similar."
+    },
+    {
+      "index": 947,
+      "start": 4180.729,
+      "end": 4185.109,
+      "duration": 4.38,
+      "text": "I'm multiplying this o by some matrix row."
+    },
+    {
+      "index": 948,
+      "start": 4185.109,
+      "end": 4192.37,
+      "duration": 7.261,
+      "text": "So, again, this I can think of as having introduced"
+    },
+    {
+      "index": 949,
+      "start": 4192.37,
+      "end": 4195.63,
+      "duration": 3.26,
+      "text": "a new matrix for an operator."
+    },
+    {
+      "index": 950,
+      "start": 4195.63,
+      "end": 4197.51,
+      "duration": 1.88,
+      "text": "And this is the density matrix."
+    },
+    {
+      "index": 951,
+      "start": 4207.52,
+      "end": 4212.91,
+      "duration": 5.39,
+      "text": "And if I basically ignore, or write it"
+    },
+    {
+      "index": 952,
+      "start": 4212.91,
+      "end": 4216.61,
+      "duration": 3.7,
+      "text": "in basis-independent form, it is obtained"
+    },
+    {
+      "index": 953,
+      "start": 4216.61,
+      "end": 4220.62,
+      "duration": 4.01,
+      "text": "by summing over all alphas the alphas,"
+    },
+    {
+      "index": 954,
+      "start": 4220.62,
+      "end": 4223.71,
+      "duration": 3.09,
+      "text": "and, essentially, cutting off the n and m."
+    },
+    {
+      "index": 955,
+      "start": 4223.71,
+      "end": 4231.71,
+      "duration": 8.0,
+      "text": "I have the matrix that I would form out of state alpha by,"
+    },
+    {
+      "index": 956,
+      "start": 4231.71,
+      "end": 4235.37,
+      "duration": 3.66,
+      "text": "essentially, taking the vector and its conjugate"
+    },
+    {
+      "index": 957,
+      "start": 4235.37,
+      "end": 4241.71,
+      "duration": 6.34,
+      "text": "and multiplying rows and columns together to make a matrix."
+    },
+    {
+      "index": 958,
+      "start": 4241.71,
+      "end": 4244.79,
+      "duration": 3.08,
+      "text": "And then multiplying or averaging that matrix"
+    },
+    {
+      "index": 959,
+      "start": 4244.79,
+      "end": 4248.27,
+      "duration": 3.48,
+      "text": "over all possible values of the ensemble--"
+    },
+    {
+      "index": 960,
+      "start": 4248.27,
+      "end": 4252.64,
+      "duration": 4.37,
+      "text": "elements of the ensemble-- would give me this density."
+    },
+    {
+      "index": 961,
+      "start": 4252.64,
+      "end": 4259.06,
+      "duration": 6.42,
+      "text": "So in the same way that any observable"
+    },
+    {
+      "index": 962,
+      "start": 4259.06,
+      "end": 4267.2,
+      "duration": 8.14,
+      "text": "in classical mechanics goes over to an operator in quantum"
+    },
+    {
+      "index": 963,
+      "start": 4267.2,
+      "end": 4270.92,
+      "duration": 3.72,
+      "text": "mechanics, we find that we have another function"
+    },
+    {
+      "index": 964,
+      "start": 4270.92,
+      "end": 4273.26,
+      "duration": 2.34,
+      "text": "in phase space-- this density."
+    },
+    {
+      "index": 965,
+      "start": 4273.26,
+      "end": 4277.32,
+      "duration": 4.06,
+      "text": "This density goes over to the matrix or an operator that"
+    },
+    {
+      "index": 966,
+      "start": 4277.32,
+      "end": 4278.77,
+      "duration": 1.45,
+      "text": "is given by this formula here."
+    },
+    {
+      "index": 967,
+      "start": 4281.33,
+      "end": 4286.958,
+      "duration": 5.628,
+      "text": "It is useful to enumerate some properties of the density"
+    },
+    {
+      "index": 968,
+      "start": 4286.958,
+      "end": 4287.458,
+      "duration": 0.5,
+      "text": "matrix."
+    },
+    {
+      "index": 969,
+      "start": 4304.94,
+      "end": 4315.15,
+      "duration": 10.21,
+      "text": "First of all, the density matrix is positive definite."
+    },
+    {
+      "index": 970,
+      "start": 4315.15,
+      "end": 4316.492,
+      "duration": 1.342,
+      "text": "What does that mean?"
+    },
+    {
+      "index": 971,
+      "start": 4316.492,
+      "end": 4321.43,
+      "duration": 4.938,
+      "text": "It means that if you take the density matrix,"
+    },
+    {
+      "index": 972,
+      "start": 4321.43,
+      "end": 4327.78,
+      "duration": 6.35,
+      "text": "multiply it by any state on the right and the left"
+    },
+    {
+      "index": 973,
+      "start": 4327.78,
+      "end": 4332.78,
+      "duration": 5.0,
+      "text": "to construct a number, this number will be positive,"
+    },
+    {
+      "index": 974,
+      "start": 4332.78,
+      "end": 4336.57,
+      "duration": 3.79,
+      "text": "because if I apply it to the formula that I have over there,"
+    },
+    {
+      "index": 975,
+      "start": 4336.57,
+      "end": 4339.75,
+      "duration": 3.18,
+      "text": "this is simply sum over alpha p alpha."
+    },
+    {
+      "index": 976,
+      "start": 4339.75,
+      "end": 4345.91,
+      "duration": 6.16,
+      "text": "Then I have phi psi psi alpha, and them"
+    },
+    {
+      "index": 977,
+      "start": 4345.91,
+      "end": 4349.44,
+      "duration": 3.53,
+      "text": "psi alpha psi, which is its complex conjugate."
+    },
+    {
+      "index": 978,
+      "start": 4349.44,
+      "end": 4354.69,
+      "duration": 5.25,
+      "text": "So I get the norm of that product, which is positive."
+    },
+    {
+      "index": 979,
+      "start": 4354.69,
+      "end": 4359.14,
+      "duration": 4.45,
+      "text": "All of the p alphas are positive probabilities."
+    },
+    {
+      "index": 980,
+      "start": 4359.14,
+      "end": 4363.89,
+      "duration": 4.75,
+      "text": "So this is certainly something that is positive."
+    },
+    {
+      "index": 981,
+      "start": 4363.89,
+      "end": 4370.78,
+      "duration": 6.89,
+      "text": "We said that anything that makes sense in quantum mechanics"
+    },
+    {
+      "index": 982,
+      "start": 4370.78,
+      "end": 4371.85,
+      "duration": 1.07,
+      "text": "should be Hermitian."
+    },
+    {
+      "index": 983,
+      "start": 4375.72,
+      "end": 4378.63,
+      "duration": 2.91,
+      "text": "And it is easy to check."
+    },
+    {
+      "index": 984,
+      "start": 4378.63,
+      "end": 4382.35,
+      "duration": 3.72,
+      "text": "That if I take this operator rho and do"
+    },
+    {
+      "index": 985,
+      "start": 4382.35,
+      "end": 4386.01,
+      "duration": 3.66,
+      "text": "the complex conjugate, essentially what happens"
+    },
+    {
+      "index": 986,
+      "start": 4386.01,
+      "end": 4388.54,
+      "duration": 2.53,
+      "text": "is that I have to take sum over alpha."
+    },
+    {
+      "index": 987,
+      "start": 4388.54,
+      "end": 4391.52,
+      "duration": 2.98,
+      "text": "Complex conjugate of p alpha is p alpha itself."
+    },
+    {
+      "index": 988,
+      "start": 4391.52,
+      "end": 4394.27,
+      "duration": 2.75,
+      "text": "Probabilities are real numbers."
+    },
+    {
+      "index": 989,
+      "start": 4394.27,
+      "end": 4399.94,
+      "duration": 5.67,
+      "text": "If I take psi alpha psi alpha and conjugate it, essentially"
+    },
+    {
+      "index": 990,
+      "start": 4399.94,
+      "end": 4401.51,
+      "duration": 1.57,
+      "text": "I take this and put it here."
+    },
+    {
+      "index": 991,
+      "start": 4401.51,
+      "end": 4403.45,
+      "duration": 1.94,
+      "text": "And I take that and put it over there."
+    },
+    {
+      "index": 992,
+      "start": 4403.45,
+      "end": 4404.985,
+      "duration": 1.535,
+      "text": "And I get the same thing."
+    },
+    {
+      "index": 993,
+      "start": 4404.985,
+      "end": 4406.62,
+      "duration": 1.635,
+      "text": "So it's the same thing as rho."
+    },
+    {
+      "index": 994,
+      "start": 4409.92,
+      "end": 4412.706,
+      "duration": 2.786,
+      "text": "And, finally, there's a normalization."
+    },
+    {
+      "index": 995,
+      "start": 4421.72,
+      "end": 4428.17,
+      "duration": 6.45,
+      "text": "If, for my o over here in the last formula, I choose 1,"
+    },
+    {
+      "index": 996,
+      "start": 4428.17,
+      "end": 4432.79,
+      "duration": 4.62,
+      "text": "then I get the expectation value of 1"
+    },
+    {
+      "index": 997,
+      "start": 4432.79,
+      "end": 4437.05,
+      "duration": 4.26,
+      "text": "has to be the trace of rho."
+    },
+    {
+      "index": 998,
+      "start": 4437.05,
+      "end": 4440.25,
+      "duration": 3.2,
+      "text": "And we can check that the trace of rho,"
+    },
+    {
+      "index": 999,
+      "start": 4440.25,
+      "end": 4442.76,
+      "duration": 2.51,
+      "text": "essentially, is obtained by summing over"
+    },
+    {
+      "index": 1000,
+      "start": 4442.76,
+      "end": 4448.96,
+      "duration": 6.2,
+      "text": "all alpha p alpha, and the dot product of the two psi alphas."
+    },
+    {
+      "index": 1001,
+      "start": 4448.96,
+      "end": 4453.28,
+      "duration": 4.32,
+      "text": "Since any state in quantum mechanics"
+    },
+    {
+      "index": 1002,
+      "start": 4453.28,
+      "end": 4457.66,
+      "duration": 4.38,
+      "text": "corresponds to a unit vector, this is 1."
+    },
+    {
+      "index": 1003,
+      "start": 4457.66,
+      "end": 4461.532,
+      "duration": 3.872,
+      "text": "So I get a sum over alpha of p alphas."
+    },
+    {
+      "index": 1004,
+      "start": 4461.532,
+      "end": 4464.28,
+      "duration": 2.748,
+      "text": "And these are probabilities assigned"
+    },
+    {
+      "index": 1005,
+      "start": 4464.28,
+      "end": 4465.83,
+      "duration": 1.55,
+      "text": "to the members of the ensemble."
+    },
+    {
+      "index": 1006,
+      "start": 4465.83,
+      "end": 4468.06,
+      "duration": 2.23,
+      "text": "They have to add up to 1."
+    },
+    {
+      "index": 1007,
+      "start": 4468.06,
+      "end": 4470.01,
+      "duration": 1.95,
+      "text": "And so this is like this."
+    },
+    {
+      "index": 1008,
+      "start": 4472.84,
+      "end": 4480.96,
+      "duration": 8.12,
+      "text": "So the quantity that we were looking at,"
+    },
+    {
+      "index": 1009,
+      "start": 4480.96,
+      "end": 4486.6,
+      "duration": 5.64,
+      "text": "and built, essentially, all of our later classical statistical"
+    },
+    {
+      "index": 1010,
+      "start": 4486.6,
+      "end": 4490.5,
+      "duration": 3.9,
+      "text": "mechanics, on is this density."
+    },
+    {
+      "index": 1011,
+      "start": 4490.5,
+      "end": 4494.63,
+      "duration": 4.13,
+      "text": "Density was a probability in phase space."
+    },
+    {
+      "index": 1012,
+      "start": 4494.63,
+      "end": 4496.81,
+      "duration": 2.18,
+      "text": "Now, when you go to quantum mechanics,"
+    },
+    {
+      "index": 1013,
+      "start": 4496.81,
+      "end": 4498.36,
+      "duration": 1.55,
+      "text": "we don't have phase space."
+    },
+    {
+      "index": 1014,
+      "start": 4498.36,
+      "end": 4500.65,
+      "duration": 2.29,
+      "text": "We have Hilbert space."
+    },
+    {
+      "index": 1015,
+      "start": 4500.65,
+      "end": 4503.68,
+      "duration": 3.03,
+      "text": "We already have a probabilistic theory."
+    },
+    {
+      "index": 1016,
+      "start": 4503.68,
+      "end": 4507.45,
+      "duration": 3.77,
+      "text": "Turns out that this function, which"
+    },
+    {
+      "index": 1017,
+      "start": 4507.45,
+      "end": 4510.24,
+      "duration": 2.79,
+      "text": "was the probability in phase space classically,"
+    },
+    {
+      "index": 1018,
+      "start": 4510.24,
+      "end": 4515.08,
+      "duration": 4.84,
+      "text": "gets promoted to this matrix, the density matrix, that has,"
+    },
+    {
+      "index": 1019,
+      "start": 4515.08,
+      "end": 4517.99,
+      "duration": 2.91,
+      "text": "once you take traces and do all kinds of things,"
+    },
+    {
+      "index": 1020,
+      "start": 4517.99,
+      "end": 4521.02,
+      "duration": 3.03,
+      "text": "the kinds of properties that you would expect the probability"
+    },
+    {
+      "index": 1021,
+      "start": 4521.02,
+      "end": 4522.66,
+      "duration": 1.64,
+      "text": "to have classically."
+    },
+    {
+      "index": 1022,
+      "start": 4522.66,
+      "end": 4526.2,
+      "duration": 3.54,
+      "text": "But it's not really probability in the usual sense."
+    },
+    {
+      "index": 1023,
+      "start": 4526.2,
+      "end": 4528.81,
+      "duration": 2.61,
+      "text": "It's a matrix."
+    },
+    {
+      "index": 1024,
+      "start": 4528.81,
+      "end": 4531.06,
+      "duration": 2.25,
+      "text": "OK."
+    },
+    {
+      "index": 1025,
+      "start": 4531.06,
+      "end": 4537.35,
+      "duration": 6.29,
+      "text": "There is one other thing element of this to go through,"
+    },
+    {
+      "index": 1026,
+      "start": 4537.35,
+      "end": 4544.45,
+      "duration": 7.1,
+      "text": "which is that classically, we said"
+    },
+    {
+      "index": 1027,
+      "start": 4544.45,
+      "end": 4549.67,
+      "duration": 5.22,
+      "text": "that, OK, I pick a set of states."
+    },
+    {
+      "index": 1028,
+      "start": 4549.67,
+      "end": 4552.17,
+      "duration": 2.5,
+      "text": "They correspond to some density."
+    },
+    {
+      "index": 1029,
+      "start": 4552.17,
+      "end": 4555.96,
+      "duration": 3.79,
+      "text": "But the microstates are changing as a function of time."
+    },
+    {
+      "index": 1030,
+      "start": 4555.96,
+      "end": 4559.51,
+      "duration": 3.55,
+      "text": "So the density was changing as a function of time."
+    },
+    {
+      "index": 1031,
+      "start": 4559.51,
+      "end": 4567.19,
+      "duration": 7.68,
+      "text": "And we had Liouville's theorem, which"
+    },
+    {
+      "index": 1032,
+      "start": 4567.19,
+      "end": 4575.625,
+      "duration": 8.435,
+      "text": "stated that d rho by d t was the Poisson bracket"
+    },
+    {
+      "index": 1033,
+      "start": 4575.625,
+      "end": 4577.81,
+      "duration": 2.185,
+      "text": "of the Hamiltonian with rho."
+    },
+    {
+      "index": 1034,
+      "start": 4580.86,
+      "end": 4584.7,
+      "duration": 3.84,
+      "text": "So we can quantum mechanically ask,"
+    },
+    {
+      "index": 1035,
+      "start": 4584.7,
+      "end": 4588.63,
+      "duration": 3.93,
+      "text": "what happens to our density matrix?"
+    },
+    {
+      "index": 1036,
+      "start": 4588.63,
+      "end": 4593.29,
+      "duration": 4.66,
+      "text": "So we have a matrix rho."
+    },
+    {
+      "index": 1037,
+      "start": 4593.29,
+      "end": 4598.4,
+      "duration": 5.11,
+      "text": "I can ask, what is the time derivative of that matrix?"
+    },
+    {
+      "index": 1038,
+      "start": 4598.4,
+      "end": 4604.87,
+      "duration": 6.47,
+      "text": "And, actually, I will insert the i h bar here,"
+    },
+    {
+      "index": 1039,
+      "start": 4604.87,
+      "end": 4611.13,
+      "duration": 6.26,
+      "text": "because I anticipate that, essentially,"
+    },
+    {
+      "index": 1040,
+      "start": 4611.13,
+      "end": 4616.82,
+      "duration": 5.69,
+      "text": "rho having that form, what I will have is sum over alpha."
+    },
+    {
+      "index": 1041,
+      "start": 4616.82,
+      "end": 4626.87,
+      "duration": 10.05,
+      "text": "And then I have i h bar d by dt acting on these p alpha psi"
+    },
+    {
+      "index": 1042,
+      "start": 4626.87,
+      "end": 4628.56,
+      "duration": 1.69,
+      "text": "f."
+    },
+    {
+      "index": 1043,
+      "start": 4631.08,
+      "end": 4635.86,
+      "duration": 4.78,
+      "text": "So there rho is sum over alpha p alpha psi alpha psi alpha."
+    },
+    {
+      "index": 1044,
+      "start": 4635.86,
+      "end": 4639.11,
+      "duration": 3.25,
+      "text": "Sum over alpha p alpha I can take outside."
+    },
+    {
+      "index": 1045,
+      "start": 4639.11,
+      "end": 4643.52,
+      "duration": 4.41,
+      "text": "I h bar d by dt acts on these two psis"
+    },
+    {
+      "index": 1046,
+      "start": 4643.52,
+      "end": 4646.59,
+      "duration": 3.07,
+      "text": "that are appearing a complex conjugates."
+    },
+    {
+      "index": 1047,
+      "start": 4646.59,
+      "end": 4650.18,
+      "duration": 3.59,
+      "text": "So it can either, d by dt, act on one or the other."
+    },
+    {
+      "index": 1048,
+      "start": 4650.18,
+      "end": 4653.24,
+      "duration": 3.06,
+      "text": "So I can write this as sum over alpha p"
+    },
+    {
+      "index": 1049,
+      "start": 4653.24,
+      "end": 4665.32,
+      "duration": 12.08,
+      "text": "alpha i h bar d by dt acting on psi alpha psi alpha, or i,"
+    },
+    {
+      "index": 1050,
+      "start": 4665.32,
+      "end": 4676.466,
+      "duration": 11.146,
+      "text": "or psi alpha, and then i h bar d by dt acting on this psi alpha."
+    },
+    {
+      "index": 1051,
+      "start": 4682.37,
+      "end": 4688.06,
+      "duration": 5.69,
+      "text": "Now, i h bar d by dt psi alpha, we"
+    },
+    {
+      "index": 1052,
+      "start": 4688.06,
+      "end": 4693.62,
+      "duration": 5.56,
+      "text": "said that, essentially, the quantum rule for time evolution"
+    },
+    {
+      "index": 1053,
+      "start": 4693.62,
+      "end": 4696.49,
+      "duration": 2.87,
+      "text": "is i h bar d by dt of the state will"
+    },
+    {
+      "index": 1054,
+      "start": 4696.49,
+      "end": 4701.656,
+      "duration": 5.166,
+      "text": "give you is governed by h times acting on psi alpha."
+    },
+    {
+      "index": 1055,
+      "start": 4704.83,
+      "end": 4711.22,
+      "duration": 6.39,
+      "text": "If I were to take the complex conjugate of this expression,"
+    },
+    {
+      "index": 1056,
+      "start": 4711.22,
+      "end": 4715.69,
+      "duration": 4.47,
+      "text": "what I would get is minus i h bar"
+    },
+    {
+      "index": 1057,
+      "start": 4715.69,
+      "end": 4719.02,
+      "duration": 3.33,
+      "text": "d by dt acting on psi that is pointing"
+    },
+    {
+      "index": 1058,
+      "start": 4719.02,
+      "end": 4722.08,
+      "duration": 3.06,
+      "text": "the other way of our complex conjugation"
+    },
+    {
+      "index": 1059,
+      "start": 4722.08,
+      "end": 4729.77,
+      "duration": 7.69,
+      "text": "is h acting on the psi in the opposite way."
+    },
+    {
+      "index": 1060,
+      "start": 4729.77,
+      "end": 4745.493,
+      "duration": 15.723,
+      "text": "So this thing is minus psi alpha with h f acting on it."
+    },
+    {
+      "index": 1061,
+      "start": 4749.27,
+      "end": 4750.52,
+      "duration": 1.25,
+      "text": "OK."
+    },
+    {
+      "index": 1062,
+      "start": 4750.52,
+      "end": 4762.02,
+      "duration": 11.5,
+      "text": "So then I can write the whole thing as h-- for the first term"
+    },
+    {
+      "index": 1063,
+      "start": 4762.02,
+      "end": 4764.23,
+      "duration": 2.21,
+      "text": "take the h out front."
+    },
+    {
+      "index": 1064,
+      "start": 4764.23,
+      "end": 4768.14,
+      "duration": 3.91,
+      "text": "I have a sum over alpha p alpha psi alpha"
+    },
+    {
+      "index": 1065,
+      "start": 4768.14,
+      "end": 4777.0,
+      "duration": 8.86,
+      "text": "psi alpha, minus, from this complex conjugation-- here, h"
+    },
+    {
+      "index": 1066,
+      "start": 4777.0,
+      "end": 4780.74,
+      "duration": 3.74,
+      "text": "is completely to the right-- I have a sum over alpha"
+    },
+    {
+      "index": 1067,
+      "start": 4780.74,
+      "end": 4785.38,
+      "duration": 4.64,
+      "text": "p alpha psi alpha psi alpha."
+    },
+    {
+      "index": 1068,
+      "start": 4785.38,
+      "end": 4786.969,
+      "duration": 1.589,
+      "text": "And then we have h."
+    },
+    {
+      "index": 1069,
+      "start": 4789.69,
+      "end": 4791.825,
+      "duration": 2.135,
+      "text": "Now, these are again getting rho back."
+    },
+    {
+      "index": 1070,
+      "start": 4796.463,
+      "end": 4804.49,
+      "duration": 8.027,
+      "text": "So what I have established is that i h bar, the time"
+    },
+    {
+      "index": 1071,
+      "start": 4804.49,
+      "end": 4808.42,
+      "duration": 3.93,
+      "text": "derivative of this density matrix,"
+    },
+    {
+      "index": 1072,
+      "start": 4808.42,
+      "end": 4815.8,
+      "duration": 7.38,
+      "text": "is simply the commutator of the operators h and o."
+    },
+    {
+      "index": 1073,
+      "start": 4820.96,
+      "end": 4831.14,
+      "duration": 10.18,
+      "text": "So what we had up here was the classical Liouville theorem,"
+    },
+    {
+      "index": 1074,
+      "start": 4831.14,
+      "end": 4835.05,
+      "duration": 3.91,
+      "text": "relating the time derivative of the density in phase space"
+    },
+    {
+      "index": 1075,
+      "start": 4835.05,
+      "end": 4837.86,
+      "duration": 2.81,
+      "text": "to the Poisson bracket with h."
+    },
+    {
+      "index": 1076,
+      "start": 4837.86,
+      "end": 4841.43,
+      "duration": 3.57,
+      "text": "What we have here is the quantum version, where"
+    },
+    {
+      "index": 1077,
+      "start": 4841.43,
+      "end": 4845.22,
+      "duration": 3.79,
+      "text": "the time derivative of this density matrix"
+    },
+    {
+      "index": 1078,
+      "start": 4845.22,
+      "end": 4847.58,
+      "duration": 2.36,
+      "text": "is the commutator of rho with h."
+    },
+    {
+      "index": 1079,
+      "start": 4852.34,
+      "end": 4859.55,
+      "duration": 7.21,
+      "text": "Now we are done, because what did we use this Liouville for?"
+    },
+    {
+      "index": 1080,
+      "start": 4859.55,
+      "end": 4864.29,
+      "duration": 4.74,
+      "text": "We used it to deduce that if I have things that are not"
+    },
+    {
+      "index": 1081,
+      "start": 4864.29,
+      "end": 4870.09,
+      "duration": 5.8,
+      "text": "changing as a function of time, I have equilibrium systems,"
+    },
+    {
+      "index": 1082,
+      "start": 4870.09,
+      "end": 4872.59,
+      "duration": 2.5,
+      "text": "where the density is invariant."
+    },
+    {
+      "index": 1083,
+      "start": 4872.59,
+      "end": 4874.18,
+      "duration": 1.59,
+      "text": "It's the same."
+    },
+    {
+      "index": 1084,
+      "start": 4874.18,
+      "end": 4881.49,
+      "duration": 7.31,
+      "text": "Then rho of equilibrium not changing as a function of time"
+    },
+    {
+      "index": 1085,
+      "start": 4881.49,
+      "end": 4887.44,
+      "duration": 5.95,
+      "text": "can be achieved by simply making it a function of h."
+    },
+    {
+      "index": 1086,
+      "start": 4887.44,
+      "end": 4892.94,
+      "duration": 5.5,
+      "text": "And, more precisely, h and conserved quantities"
+    },
+    {
+      "index": 1087,
+      "start": 4892.94,
+      "end": 4896.1,
+      "duration": 3.16,
+      "text": "that have 0 Poisson bracket with h."
+    },
+    {
+      "index": 1088,
+      "start": 4903.7,
+      "end": 4907.33,
+      "duration": 3.63,
+      "text": "How can I make the quantum density matrix"
+    },
+    {
+      "index": 1089,
+      "start": 4907.33,
+      "end": 4910.81,
+      "duration": 3.48,
+      "text": "to be invariant of time?"
+    },
+    {
+      "index": 1090,
+      "start": 4910.81,
+      "end": 4914.44,
+      "duration": 3.63,
+      "text": "All I need to do is to ensure that the Poisson bracket"
+    },
+    {
+      "index": 1091,
+      "start": 4914.44,
+      "end": 4918.35,
+      "duration": 3.91,
+      "text": "of that density with the Hamiltonian is 0."
+    },
+    {
+      "index": 1092,
+      "start": 4918.35,
+      "end": 4921.3,
+      "duration": 2.95,
+      "text": "Not the Poisson bracket, the commutator."
+    },
+    {
+      "index": 1093,
+      "start": 4921.3,
+      "end": 4924.56,
+      "duration": 3.26,
+      "text": "Clearly, the commutator of h with itself is 0."
+    },
+    {
+      "index": 1094,
+      "start": 4924.56,
+      "end": 4927.51,
+      "duration": 2.95,
+      "text": "Hh minus hh is 0."
+    },
+    {
+      "index": 1095,
+      "start": 4927.51,
+      "end": 4932.39,
+      "duration": 4.88,
+      "text": "So this I can make a function of h,"
+    },
+    {
+      "index": 1096,
+      "start": 4932.39,
+      "end": 4935.27,
+      "duration": 2.88,
+      "text": "and any other kind of quantity also"
+    },
+    {
+      "index": 1097,
+      "start": 4935.27,
+      "end": 4938.61,
+      "duration": 3.34,
+      "text": "that has 0 commutator with h."
+    },
+    {
+      "index": 1098,
+      "start": 4938.61,
+      "end": 4942.1,
+      "duration": 3.49,
+      "text": "So, essentially, the quantum version also applies."
+    },
+    {
+      "index": 1099,
+      "start": 4942.1,
+      "end": 4946.81,
+      "duration": 4.71,
+      "text": "That is, the quantum version of rho equilibrium,"
+    },
+    {
+      "index": 1100,
+      "start": 4946.81,
+      "end": 4950.35,
+      "duration": 3.54,
+      "text": "I can make it by constructing something"
+    },
+    {
+      "index": 1101,
+      "start": 4950.35,
+      "end": 4954.42,
+      "duration": 4.07,
+      "text": "that depends on the Hilbert space"
+    },
+    {
+      "index": 1102,
+      "start": 4954.42,
+      "end": 4956.46,
+      "duration": 2.04,
+      "text": "through the dependence of the Hamiltonian"
+    },
+    {
+      "index": 1103,
+      "start": 4956.46,
+      "end": 4961.73,
+      "duration": 5.27,
+      "text": "and on the Hilbert space and any other conserved quantities that"
+    },
+    {
+      "index": 1104,
+      "start": 4961.73,
+      "end": 4965.436,
+      "duration": 3.706,
+      "text": "have 0 commutator also with the Hamiltonian."
+    },
+    {
+      "index": 1105,
+      "start": 4969.44,
+      "end": 4973.13,
+      "duration": 3.69,
+      "text": "So now, what we will do next time"
+    },
+    {
+      "index": 1106,
+      "start": 4973.13,
+      "end": 4975.9,
+      "duration": 2.77,
+      "text": "is we can pick and choose whatever rho equilibrium"
+    },
+    {
+      "index": 1107,
+      "start": 4975.9,
+      "end": 4976.68,
+      "duration": 0.78,
+      "text": "we had before."
+    },
+    {
+      "index": 1108,
+      "start": 4976.68,
+      "end": 4979.56,
+      "duration": 2.88,
+      "text": "Canonical e to the minus beta h."
+    },
+    {
+      "index": 1109,
+      "start": 4979.56,
+      "end": 4982.93,
+      "duration": 3.37,
+      "text": "We make this matrix to be e to the minus beta h."
+    },
+    {
+      "index": 1110,
+      "start": 4982.93,
+      "end": 4986.71,
+      "duration": 3.78,
+      "text": "Uniform anything, we can just carry over"
+    },
+    {
+      "index": 1111,
+      "start": 4986.71,
+      "end": 4990.16,
+      "duration": 3.45,
+      "text": "whatever functional dependence we had here to here."
+    },
+    {
+      "index": 1112,
+      "start": 4990.16,
+      "end": 4993.24,
+      "duration": 3.08,
+      "text": "And we are ensure to have something"
+    },
+    {
+      "index": 1113,
+      "start": 4993.24,
+      "end": 4996.28,
+      "duration": 3.04,
+      "text": "that is quantum mechanically invariant."
+    },
+    {
+      "index": 1114,
+      "start": 4996.28,
+      "end": 5001.12,
+      "duration": 4.84,
+      "text": "And we will then interpret what the various quantities"
+    },
+    {
+      "index": 1115,
+      "start": 5001.12,
+      "end": 5005.62,
+      "duration": 4.5,
+      "text": "calculated through that density matrix and the formulas"
+    },
+    {
+      "index": 1116,
+      "start": 5005.62,
+      "end": 5009.06,
+      "duration": 3.44,
+      "text": "that we described actually."
+    },
+    {
+      "index": 1117,
+      "start": 5009.06,
+      "end": 5010.575,
+      "duration": 1.515,
+      "text": "OK?"
+    }
+  ],
+  "course": {
+    "category": "Physics",
+    "title": "Quantum Physics",
+    "source_url": "https://www.youtube.com/playlist?list=PLUl4u3cNGP60gl3fdUTKRrt5t_GPx2sRg"
+  }
+}

@@ -1,0 +1,8005 @@
+{
+  "video": {
+    "id": "TSjJlJJ2aoI",
+    "title": "17. Interacting Particles Part 3",
+    "url": "https://www.youtube.com/watch?v=TSjJlJJ2aoI",
+    "channel": "MIT OpenCourseWare",
+    "duration": 4997,
+    "language": "en"
+  },
+  "segment_count": 1141,
+  "segments": [
+    {
+      "index": 0,
+      "start": 0.06,
+      "end": 1.78,
+      "duration": 1.72,
+      "text": "The following content is provided"
+    },
+    {
+      "index": 1,
+      "start": 1.78,
+      "end": 4.019,
+      "duration": 2.239,
+      "text": "under a Creative Commons license."
+    },
+    {
+      "index": 2,
+      "start": 4.019,
+      "end": 6.87,
+      "duration": 2.851,
+      "text": "Your support will help MIT OpenCourseWare continue"
+    },
+    {
+      "index": 3,
+      "start": 6.87,
+      "end": 10.73,
+      "duration": 3.86,
+      "text": "to offer high quality educational resources for free."
+    },
+    {
+      "index": 4,
+      "start": 10.73,
+      "end": 13.33,
+      "duration": 2.6,
+      "text": "To make a donation or view additional materials"
+    },
+    {
+      "index": 5,
+      "start": 13.33,
+      "end": 17.217,
+      "duration": 3.887,
+      "text": "from hundreds of MIT courses, visit MIT OpenCourseWare"
+    },
+    {
+      "index": 6,
+      "start": 17.217,
+      "end": 17.842,
+      "duration": 0.625,
+      "text": "at ocw.mit.edu."
+    },
+    {
+      "index": 7,
+      "start": 20.57,
+      "end": 23.67,
+      "duration": 3.1,
+      "text": "PROFESSOR: And to this purpose, we"
+    },
+    {
+      "index": 8,
+      "start": 23.67,
+      "end": 28.47,
+      "duration": 4.8,
+      "text": "need to calculate some thermodynamics."
+    },
+    {
+      "index": 9,
+      "start": 28.47,
+      "end": 31.16,
+      "duration": 2.69,
+      "text": "And we usually do that in statistical mechanics"
+    },
+    {
+      "index": 10,
+      "start": 31.16,
+      "end": 35.45,
+      "duration": 4.29,
+      "text": "by calculating for some kind of a partition function."
+    },
+    {
+      "index": 11,
+      "start": 35.45,
+      "end": 37.32,
+      "duration": 1.87,
+      "text": "And we saw last time that it would"
+    },
+    {
+      "index": 12,
+      "start": 37.32,
+      "end": 42.18,
+      "duration": 4.86,
+      "text": "be useful to calculate this grand partition function, which"
+    },
+    {
+      "index": 13,
+      "start": 42.18,
+      "end": 44.4,
+      "duration": 2.22,
+      "text": "is the ensemble where you specify"
+    },
+    {
+      "index": 14,
+      "start": 44.4,
+      "end": 48.92,
+      "duration": 4.52,
+      "text": "the temperature, the chemical potential, and the volume"
+    },
+    {
+      "index": 15,
+      "start": 48.92,
+      "end": 51.25,
+      "duration": 2.33,
+      "text": "of the gas."
+    },
+    {
+      "index": 16,
+      "start": 51.25,
+      "end": 55.12,
+      "duration": 3.87,
+      "text": "And in this ensemble, your task is"
+    },
+    {
+      "index": 17,
+      "start": 55.12,
+      "end": 60.06,
+      "duration": 4.94,
+      "text": "to look at within this box of volume V"
+    },
+    {
+      "index": 18,
+      "start": 60.06,
+      "end": 64.69,
+      "duration": 4.63,
+      "text": "the possibility of there being any number of particles."
+    },
+    {
+      "index": 19,
+      "start": 64.69,
+      "end": 69.4,
+      "duration": 4.71,
+      "text": "So you have to sum over all possible N particle states."
+    },
+    {
+      "index": 20,
+      "start": 69.4,
+      "end": 72.64,
+      "duration": 3.24,
+      "text": "The contribution of each N particle states"
+    },
+    {
+      "index": 21,
+      "start": 72.64,
+      "end": 77.71,
+      "duration": 5.07,
+      "text": "is exponentially related to the number of particles"
+    },
+    {
+      "index": 22,
+      "start": 77.71,
+      "end": 79.98,
+      "duration": 2.27,
+      "text": "through the chemical potential."
+    },
+    {
+      "index": 23,
+      "start": 79.98,
+      "end": 84.73,
+      "duration": 4.75,
+      "text": "And then given that you are in a segment that has N particles,"
+    },
+    {
+      "index": 24,
+      "start": 84.73,
+      "end": 87.69,
+      "duration": 2.96,
+      "text": "you have to look at all possible configurations"
+    },
+    {
+      "index": 25,
+      "start": 87.69,
+      "end": 90.89,
+      "duration": 3.2,
+      "text": "of those particles and integrate over"
+    },
+    {
+      "index": 26,
+      "start": 90.89,
+      "end": 92.79,
+      "duration": 1.9,
+      "text": "all of those possibilities."
+    },
+    {
+      "index": 27,
+      "start": 92.79,
+      "end": 96.35,
+      "duration": 3.56,
+      "text": "And that amounts to calculating the partition function."
+    },
+    {
+      "index": 28,
+      "start": 96.35,
+      "end": 100.54,
+      "duration": 4.19,
+      "text": "So for the partition function of an N particle system,"
+    },
+    {
+      "index": 29,
+      "start": 100.54,
+      "end": 103.88,
+      "duration": 3.34,
+      "text": "you have to integrate over all of the momenta."
+    },
+    {
+      "index": 30,
+      "start": 103.88,
+      "end": 107.02,
+      "duration": 3.14,
+      "text": "Integration over each component of the momentum"
+    },
+    {
+      "index": 31,
+      "start": 107.02,
+      "end": 112.34,
+      "duration": 5.32,
+      "text": "gives you a factor of 1 over lambda, where lambda again"
+    },
+    {
+      "index": 32,
+      "start": 112.34,
+      "end": 118.88,
+      "duration": 6.54,
+      "text": "was related to the mass of the particle and temperature"
+    },
+    {
+      "index": 33,
+      "start": 118.88,
+      "end": 122.44,
+      "duration": 3.56,
+      "text": "through this formula with h what we"
+    },
+    {
+      "index": 34,
+      "start": 122.44,
+      "end": 127.64,
+      "duration": 5.2,
+      "text": "use to make these integrations over pq combinations"
+    },
+    {
+      "index": 35,
+      "start": 127.64,
+      "end": 129.12,
+      "duration": 1.48,
+      "text": "dimensionless."
+    },
+    {
+      "index": 36,
+      "start": 129.12,
+      "end": 131.86,
+      "duration": 2.74,
+      "text": "There are 3N such integrations."
+    },
+    {
+      "index": 37,
+      "start": 131.86,
+      "end": 136.68,
+      "duration": 4.82,
+      "text": "So that's a contribution from the momenta."
+    },
+    {
+      "index": 38,
+      "start": 136.68,
+      "end": 139.32,
+      "duration": 2.64,
+      "text": "And then we have to do the integration"
+    },
+    {
+      "index": 39,
+      "start": 139.32,
+      "end": 141.47,
+      "duration": 2.15,
+      "text": "over all of the coordinates."
+    },
+    {
+      "index": 40,
+      "start": 141.47,
+      "end": 145.97,
+      "duration": 4.5,
+      "text": "And as long as these particles are identical,"
+    },
+    {
+      "index": 41,
+      "start": 145.97,
+      "end": 150.14,
+      "duration": 4.17,
+      "text": "we decided to divide by the number of permutations."
+    },
+    {
+      "index": 42,
+      "start": 150.14,
+      "end": 153.15,
+      "duration": 3.01,
+      "text": "Because we cannot tear them apart."
+    },
+    {
+      "index": 43,
+      "start": 153.15,
+      "end": 157.71,
+      "duration": 4.56,
+      "text": "So having done that, I need to now integrate over all of the N"
+    },
+    {
+      "index": 44,
+      "start": 157.71,
+      "end": 163.7,
+      "duration": 5.99,
+      "text": "particles spanning a box of size V"
+    },
+    {
+      "index": 45,
+      "start": 163.7,
+      "end": 167.18,
+      "duration": 3.48,
+      "text": "so the integration is within the box."
+    },
+    {
+      "index": 46,
+      "start": 167.18,
+      "end": 171.08,
+      "duration": 3.9,
+      "text": "And when I have interactions, then I"
+    },
+    {
+      "index": 47,
+      "start": 171.08,
+      "end": 174.2,
+      "duration": 3.12,
+      "text": "have to worry about the Boltzmann weight that"
+    },
+    {
+      "index": 48,
+      "start": 174.2,
+      "end": 175.55,
+      "duration": 1.35,
+      "text": "comes from the interaction."
+    },
+    {
+      "index": 49,
+      "start": 175.55,
+      "end": 178.63,
+      "duration": 3.08,
+      "text": "So here I should really put some kind of e"
+    },
+    {
+      "index": 50,
+      "start": 178.63,
+      "end": 182.92,
+      "duration": 4.29,
+      "text": "to the minus beta times the interaction U."
+    },
+    {
+      "index": 51,
+      "start": 182.92,
+      "end": 185.48,
+      "duration": 2.56,
+      "text": "And what we did was we said that let's assume"
+    },
+    {
+      "index": 52,
+      "start": 185.48,
+      "end": 189.29,
+      "duration": 3.81,
+      "text": "that this interaction comes from pairs of particles."
+    },
+    {
+      "index": 53,
+      "start": 189.29,
+      "end": 193.64,
+      "duration": 4.35,
+      "text": "And so this U is the sum over all possible pairs"
+    },
+    {
+      "index": 54,
+      "start": 193.64,
+      "end": 196.75,
+      "duration": 3.11,
+      "text": "of particles, which when exponentiated"
+    },
+    {
+      "index": 55,
+      "start": 196.75,
+      "end": 204.79,
+      "duration": 8.04,
+      "text": "will then give you a product over all possible pairs j, k"
+    },
+    {
+      "index": 56,
+      "start": 204.79,
+      "end": 209.45,
+      "duration": 4.66,
+      "text": "and a factor that is related to the potential interaction"
+    },
+    {
+      "index": 57,
+      "start": 209.45,
+      "end": 210.98,
+      "duration": 1.53,
+      "text": "between these."
+    },
+    {
+      "index": 58,
+      "start": 210.98,
+      "end": 215.35,
+      "duration": 4.37,
+      "text": "And we found it useful to write that factor as 1"
+    },
+    {
+      "index": 59,
+      "start": 215.35,
+      "end": 225.84,
+      "duration": 10.49,
+      "text": "plus fjk, where this fjk stood for e to the minus"
+    },
+    {
+      "index": 60,
+      "start": 225.84,
+      "end": 233.15,
+      "duration": 7.31,
+      "text": "beta of V qj minus qk minus 1."
+    },
+    {
+      "index": 61,
+      "start": 233.15,
+      "end": 235.95,
+      "duration": 2.8,
+      "text": "So basically if I add the 1 to that,"
+    },
+    {
+      "index": 62,
+      "start": 235.95,
+      "end": 239.19,
+      "duration": 3.24,
+      "text": "I just get the exponentiated interaction potential."
+    },
+    {
+      "index": 63,
+      "start": 239.19,
+      "end": 243.15,
+      "duration": 3.96,
+      "text": "And then I have a forum such as this."
+    },
+    {
+      "index": 64,
+      "start": 243.15,
+      "end": 245.78,
+      "duration": 2.63,
+      "text": "So basically, this is the quantity"
+    },
+    {
+      "index": 65,
+      "start": 245.78,
+      "end": 247.98,
+      "duration": 2.2,
+      "text": "that we wanted to compute."
+    },
+    {
+      "index": 66,
+      "start": 247.98,
+      "end": 251.39,
+      "duration": 3.41,
+      "text": "And so then we said, well, let's imagine"
+    },
+    {
+      "index": 67,
+      "start": 251.39,
+      "end": 257.25,
+      "duration": 5.86,
+      "text": "expanding these factors of 1 plus f1, 2, 1 plus f1, 3,"
+    },
+    {
+      "index": 68,
+      "start": 257.25,
+      "end": 259.91,
+      "duration": 2.66,
+      "text": "1 plus f2, 3, all of these factors,"
+    },
+    {
+      "index": 69,
+      "start": 259.91,
+      "end": 264.88,
+      "duration": 4.97,
+      "text": "and organize them according to the powers of f that they have."
+    },
+    {
+      "index": 70,
+      "start": 264.88,
+      "end": 267.99,
+      "duration": 3.11,
+      "text": "So the leading term would be taking 1 from everybody."
+    },
+    {
+      "index": 71,
+      "start": 267.99,
+      "end": 269.97,
+      "duration": 1.98,
+      "text": "So that would give me V to the N, which"
+    },
+    {
+      "index": 72,
+      "start": 269.97,
+      "end": 272.73,
+      "duration": 2.76,
+      "text": "would be the 0-th order partition"
+    },
+    {
+      "index": 73,
+      "start": 272.73,
+      "end": 275.0,
+      "duration": 2.27,
+      "text": "function, the non-interacting system."
+    },
+    {
+      "index": 74,
+      "start": 275.0,
+      "end": 277.59,
+      "duration": 2.59,
+      "text": "And then I would start to get corrections"
+    },
+    {
+      "index": 75,
+      "start": 277.59,
+      "end": 281.08,
+      "duration": 3.49,
+      "text": "where there's order of f integrated, order of f squared"
+    },
+    {
+      "index": 76,
+      "start": 281.08,
+      "end": 284.07,
+      "duration": 2.99,
+      "text": "integrated, all kinds of things."
+    },
+    {
+      "index": 77,
+      "start": 284.07,
+      "end": 289.33,
+      "duration": 5.26,
+      "text": "And that being a somewhat difficult object to look at,"
+    },
+    {
+      "index": 78,
+      "start": 289.33,
+      "end": 293.86,
+      "duration": 4.53,
+      "text": "we said, let's imagine graphically what we would get."
+    },
+    {
+      "index": 79,
+      "start": 293.86,
+      "end": 298.8,
+      "duration": 4.94,
+      "text": "And the typical contribution that we would get to this"
+    },
+    {
+      "index": 80,
+      "start": 298.8,
+      "end": 304.64,
+      "duration": 5.84,
+      "text": "would involve having to iterate over all of these N particles."
+    },
+    {
+      "index": 81,
+      "start": 304.64,
+      "end": 310.56,
+      "duration": 5.92,
+      "text": "So we have to somehow imagine that we have particles 1 to N."
+    },
+    {
+      "index": 82,
+      "start": 310.56,
+      "end": 316.37,
+      "duration": 5.81,
+      "text": "And then for a particular term, we either pick 1's-- and there"
+    },
+    {
+      "index": 83,
+      "start": 316.37,
+      "end": 319.77,
+      "duration": 3.4,
+      "text": "will be some points that are not connected to any f that is"
+    },
+    {
+      "index": 84,
+      "start": 319.77,
+      "end": 321.41,
+      "duration": 1.64,
+      "text": "integrated."
+    },
+    {
+      "index": 85,
+      "start": 321.41,
+      "end": 324.59,
+      "duration": 3.18,
+      "text": "There will be a bunch of things that will be connected"
+    },
+    {
+      "index": 86,
+      "start": 324.59,
+      "end": 328.26,
+      "duration": 3.67,
+      "text": "to things where there are pair of f's."
+    },
+    {
+      "index": 87,
+      "start": 328.26,
+      "end": 330.1,
+      "duration": 1.84,
+      "text": "There will be things later on maybe"
+    },
+    {
+      "index": 88,
+      "start": 330.1,
+      "end": 335.45,
+      "duration": 5.35,
+      "text": "where there are triplets of f, and so forth and so on."
+    },
+    {
+      "index": 89,
+      "start": 335.45,
+      "end": 340.5,
+      "duration": 5.05,
+      "text": "And then we said that when I do the integrations that"
+    },
+    {
+      "index": 90,
+      "start": 340.5,
+      "end": 344.18,
+      "duration": 3.68,
+      "text": "correspond to this, what do I get?"
+    },
+    {
+      "index": 91,
+      "start": 344.18,
+      "end": 348.14,
+      "duration": 3.96,
+      "text": "I will get the contribution that comes from one particle"
+    },
+    {
+      "index": 92,
+      "start": 348.14,
+      "end": 350.65,
+      "duration": 2.51,
+      "text": "by itself integrated."
+    },
+    {
+      "index": 93,
+      "start": 350.65,
+      "end": 356.94,
+      "duration": 6.29,
+      "text": "Let's call that b1 to the power of n1."
+    },
+    {
+      "index": 94,
+      "start": 356.94,
+      "end": 362.62,
+      "duration": 5.68,
+      "text": "I will get the contribution from this pair integrated."
+    },
+    {
+      "index": 95,
+      "start": 362.62,
+      "end": 367.29,
+      "duration": 4.67,
+      "text": "I will get b2 to the power of n2."
+    },
+    {
+      "index": 96,
+      "start": 367.29,
+      "end": 370.82,
+      "duration": 3.53,
+      "text": "I will get the contributions from these entities."
+    },
+    {
+      "index": 97,
+      "start": 370.82,
+      "end": 374.31,
+      "duration": 3.49,
+      "text": "And in general, I said, well, OK, somewhere in this,"
+    },
+    {
+      "index": 98,
+      "start": 374.31,
+      "end": 376.73,
+      "duration": 2.42,
+      "text": "I will get bl to the power of nl."
+    },
+    {
+      "index": 99,
+      "start": 379.418,
+      "end": 382.65,
+      "duration": 3.232,
+      "text": "Now of course, I have a big constraint here"
+    },
+    {
+      "index": 100,
+      "start": 382.65,
+      "end": 390.08,
+      "duration": 7.43,
+      "text": "that is that the sum over l of lnl"
+    },
+    {
+      "index": 101,
+      "start": 390.08,
+      "end": 394.75,
+      "duration": 4.67,
+      "text": "has to be the total number of points 1 to n."
+    },
+    {
+      "index": 102,
+      "start": 394.75,
+      "end": 400.33,
+      "duration": 5.58,
+      "text": "So however I partition this, I will have for each graph"
+    },
+    {
+      "index": 103,
+      "start": 400.33,
+      "end": 403.09,
+      "duration": 2.76,
+      "text": "that particular constraint acting."
+    },
+    {
+      "index": 104,
+      "start": 406.18,
+      "end": 413.32,
+      "duration": 7.14,
+      "text": "We said that clearly there's a lot of graphs and combinations"
+    },
+    {
+      "index": 105,
+      "start": 413.32,
+      "end": 416.71,
+      "duration": 3.39,
+      "text": "that give you precisely this same factor."
+    },
+    {
+      "index": 106,
+      "start": 416.71,
+      "end": 420.01,
+      "duration": 3.3,
+      "text": "But all I had to do was to sort of rearrange"
+    },
+    {
+      "index": 107,
+      "start": 420.01,
+      "end": 422.12,
+      "duration": 2.11,
+      "text": "the numbers and ordering, et cetera,"
+    },
+    {
+      "index": 108,
+      "start": 422.12,
+      "end": 424.75,
+      "duration": 2.63,
+      "text": "and I would get all of this."
+    },
+    {
+      "index": 109,
+      "start": 424.75,
+      "end": 427.52,
+      "duration": 2.77,
+      "text": "So it would be very nice if I could figure out"
+    },
+    {
+      "index": 110,
+      "start": 427.52,
+      "end": 429.32,
+      "duration": 1.8,
+      "text": "what the overall factor is out here."
+    },
+    {
+      "index": 111,
+      "start": 432.45,
+      "end": 438.68,
+      "duration": 6.23,
+      "text": "So we said that the factor is something like N factorial."
+    },
+    {
+      "index": 112,
+      "start": 438.68,
+      "end": 442.5,
+      "duration": 3.82,
+      "text": "Because what I can do is I can permute all of these numbers,"
+    },
+    {
+      "index": 113,
+      "start": 442.5,
+      "end": 445.95,
+      "duration": 3.45,
+      "text": "and I would get exactly the same thing."
+    },
+    {
+      "index": 114,
+      "start": 445.95,
+      "end": 449.6,
+      "duration": 3.65,
+      "text": "But then I have to make sure that I don't over count."
+    },
+    {
+      "index": 115,
+      "start": 449.6,
+      "end": 455.35,
+      "duration": 5.75,
+      "text": "And not over counting required me to divide"
+    },
+    {
+      "index": 116,
+      "start": 455.35,
+      "end": 457.35,
+      "duration": 2.0,
+      "text": "by the number of permutations that I"
+    },
+    {
+      "index": 117,
+      "start": 457.35,
+      "end": 460.05,
+      "duration": 2.7,
+      "text": "have within each subgroup."
+    },
+    {
+      "index": 118,
+      "start": 460.05,
+      "end": 463.38,
+      "duration": 3.33,
+      "text": "So I have bl to the power of n."
+    },
+    {
+      "index": 119,
+      "start": 463.38,
+      "end": 471.36,
+      "duration": 7.98,
+      "text": "I have l factorial to the power of nl."
+    },
+    {
+      "index": 120,
+      "start": 471.36,
+      "end": 475.34,
+      "duration": 3.98,
+      "text": "And then I have the change."
+    },
+    {
+      "index": 121,
+      "start": 475.34,
+      "end": 477.37,
+      "duration": 2.03,
+      "text": "Let's say this is 1, 2, this is 3, 4."
+    },
+    {
+      "index": 122,
+      "start": 477.37,
+      "end": 481.17,
+      "duration": 3.8,
+      "text": "I could have called one of them 3, 4, the other one 1, 2."
+    },
+    {
+      "index": 123,
+      "start": 481.17,
+      "end": 486.925,
+      "duration": 5.755,
+      "text": "So basically I will have nl factorial from the permutations"
+    },
+    {
+      "index": 124,
+      "start": 486.925,
+      "end": 487.835,
+      "duration": 0.91,
+      "text": "within each."
+    },
+    {
+      "index": 125,
+      "start": 492.39,
+      "end": 496.95,
+      "duration": 4.56,
+      "text": "But I would have gotten exactly the same numerical factor"
+    },
+    {
+      "index": 126,
+      "start": 496.95,
+      "end": 503.51,
+      "duration": 6.56,
+      "text": "out front if I had the same configuration"
+    },
+    {
+      "index": 127,
+      "start": 503.51,
+      "end": 505.07,
+      "duration": 1.56,
+      "text": "but I had this diagram."
+    },
+    {
+      "index": 128,
+      "start": 507.77,
+      "end": 509.86,
+      "duration": 2.09,
+      "text": "I would have gotten exactly the same factor."
+    },
+    {
+      "index": 129,
+      "start": 509.86,
+      "end": 513.08,
+      "duration": 3.22,
+      "text": "I would call the contribution to this b3."
+    },
+    {
+      "index": 130,
+      "start": 513.08,
+      "end": 516.559,
+      "duration": 3.479,
+      "text": "I didn't say currently what b3 is."
+    },
+    {
+      "index": 131,
+      "start": 516.559,
+      "end": 519.64,
+      "duration": 3.081,
+      "text": "I would have gotten exactly the same factor."
+    },
+    {
+      "index": 132,
+      "start": 519.64,
+      "end": 524.08,
+      "duration": 4.44,
+      "text": "So maybe then what I did was to sort of group"
+    },
+    {
+      "index": 133,
+      "start": 524.08,
+      "end": 526.08,
+      "duration": 2.0,
+      "text": "all of those things that would come"
+    },
+    {
+      "index": 134,
+      "start": 526.08,
+      "end": 530.1,
+      "duration": 4.02,
+      "text": "with the same numerical factor into this [INAUDIBLE] sum"
+    },
+    {
+      "index": 135,
+      "start": 530.1,
+      "end": 531.02,
+      "duration": 0.92,
+      "text": "that I call bl."
+    },
+    {
+      "index": 136,
+      "start": 531.02,
+      "end": 540.77,
+      "duration": 9.75,
+      "text": "So I call bl to be the sum over all l-particle clusters."
+    },
+    {
+      "index": 137,
+      "start": 549.25,
+      "end": 552.73,
+      "duration": 3.48,
+      "text": "And then, of course here, I have to sum over"
+    },
+    {
+      "index": 138,
+      "start": 552.73,
+      "end": 555.61,
+      "duration": 2.88,
+      "text": "all configurations of nl that are"
+    },
+    {
+      "index": 139,
+      "start": 555.61,
+      "end": 559.122,
+      "duration": 3.512,
+      "text": "consistent with this constraint that I have to put up there."
+    },
+    {
+      "index": 140,
+      "start": 564.43,
+      "end": 568.26,
+      "duration": 3.83,
+      "text": "So the rest of it then was algebra."
+    },
+    {
+      "index": 141,
+      "start": 568.26,
+      "end": 575.08,
+      "duration": 6.82,
+      "text": "We said that if I constrain the total number,"
+    },
+    {
+      "index": 142,
+      "start": 575.08,
+      "end": 576.8,
+      "duration": 1.72,
+      "text": "it's difficult for me to do."
+    },
+    {
+      "index": 143,
+      "start": 576.8,
+      "end": 581.31,
+      "duration": 4.51,
+      "text": "That's why I didn't go and calculate the partition"
+    },
+    {
+      "index": 144,
+      "start": 581.31,
+      "end": 584.88,
+      "duration": 3.57,
+      "text": "function and switch to the grand partition function."
+    },
+    {
+      "index": 145,
+      "start": 584.88,
+      "end": 588.55,
+      "duration": 3.67,
+      "text": "Because in the grand partition, I can essentially"
+    },
+    {
+      "index": 146,
+      "start": 588.55,
+      "end": 594.91,
+      "duration": 6.36,
+      "text": "make this N that constrains the values of these nl's"
+    },
+    {
+      "index": 147,
+      "start": 594.91,
+      "end": 597.26,
+      "duration": 2.35,
+      "text": "to be all over the place."
+    },
+    {
+      "index": 148,
+      "start": 597.26,
+      "end": 602.87,
+      "duration": 5.61,
+      "text": "And therefore summing over things with nl unconstrained"
+    },
+    {
+      "index": 149,
+      "start": 602.87,
+      "end": 607.48,
+      "duration": 4.61,
+      "text": "is equivalent to summing over terms with nl constrained,"
+    },
+    {
+      "index": 150,
+      "start": 607.48,
+      "end": 612.01,
+      "duration": 4.53,
+      "text": "and then summing over whatever the final constraint is."
+    },
+    {
+      "index": 151,
+      "start": 612.01,
+      "end": 616.31,
+      "duration": 4.3,
+      "text": "So once I did that, I was liberated from this constraint."
+    },
+    {
+      "index": 152,
+      "start": 616.31,
+      "end": 621.36,
+      "duration": 5.05,
+      "text": "I could do the sum for each value of nl separately."
+    },
+    {
+      "index": 153,
+      "start": 621.36,
+      "end": 624.38,
+      "duration": 3.02,
+      "text": "And the thing nicely broke up into pieces."
+    },
+    {
+      "index": 154,
+      "start": 624.38,
+      "end": 627.97,
+      "duration": 3.59,
+      "text": "And so then what I could do is I could"
+    },
+    {
+      "index": 155,
+      "start": 627.97,
+      "end": 632.36,
+      "duration": 4.39,
+      "text": "show that each term in the sum, there"
+    },
+    {
+      "index": 156,
+      "start": 632.36,
+      "end": 636.88,
+      "duration": 4.52,
+      "text": "would be a product over different contributions l."
+    },
+    {
+      "index": 157,
+      "start": 636.88,
+      "end": 643.29,
+      "duration": 6.41,
+      "text": "For each l, I could sum over nl running from 0 to infinity."
+    },
+    {
+      "index": 158,
+      "start": 643.29,
+      "end": 649.84,
+      "duration": 6.55,
+      "text": "I had the 1 over nl factorial from out here."
+    },
+    {
+      "index": 159,
+      "start": 649.84,
+      "end": 653.32,
+      "duration": 3.48,
+      "text": "I had an e to the beta mu divided"
+    },
+    {
+      "index": 160,
+      "start": 653.32,
+      "end": 658.73,
+      "duration": 5.41,
+      "text": "by lambda cubed from the combination of these things"
+    },
+    {
+      "index": 161,
+      "start": 658.73,
+      "end": 662.06,
+      "duration": 3.33,
+      "text": "raised to the power of lnl, which"
+    },
+    {
+      "index": 162,
+      "start": 662.06,
+      "end": 665.7,
+      "duration": 3.64,
+      "text": "is how big N would have been composed."
+    },
+    {
+      "index": 163,
+      "start": 665.7,
+      "end": 668.55,
+      "duration": 2.85,
+      "text": "So I would have here lnl."
+    },
+    {
+      "index": 164,
+      "start": 668.55,
+      "end": 677.98,
+      "duration": 9.43,
+      "text": "And I also had an l factorial raised to the power of nl."
+    },
+    {
+      "index": 165,
+      "start": 677.98,
+      "end": 679.952,
+      "duration": 1.972,
+      "text": "So I can write things in this fashion."
+    },
+    {
+      "index": 166,
+      "start": 682.84,
+      "end": 685.74,
+      "duration": 2.9,
+      "text": "So this thing then became the same thing"
+    },
+    {
+      "index": 167,
+      "start": 685.74,
+      "end": 691.795,
+      "duration": 6.055,
+      "text": "as an exponential of a sum over l running from 1 to infinity."
+    },
+    {
+      "index": 168,
+      "start": 695.16,
+      "end": 697.38,
+      "duration": 2.22,
+      "text": "1 over l factorial, of if you like"
+    },
+    {
+      "index": 169,
+      "start": 697.38,
+      "end": 703.22,
+      "duration": 5.84,
+      "text": "e to the beta mu over lambda cubed to the power of l 1"
+    },
+    {
+      "index": 170,
+      "start": 703.22,
+      "end": 704.92,
+      "duration": 1.7,
+      "text": "over l factorial."
+    },
+    {
+      "index": 171,
+      "start": 704.92,
+      "end": 706.61,
+      "duration": 1.69,
+      "text": "And then I had bl."
+    },
+    {
+      "index": 172,
+      "start": 712.69,
+      "end": 718.61,
+      "duration": 5.92,
+      "text": "So it was this very nice result somehow summing"
+    },
+    {
+      "index": 173,
+      "start": 718.61,
+      "end": 723.82,
+      "duration": 5.21,
+      "text": "over all kinds of things, and then taking the logarithm."
+    },
+    {
+      "index": 174,
+      "start": 723.82,
+      "end": 726.732,
+      "duration": 2.912,
+      "text": "The logarithm really depends only"
+    },
+    {
+      "index": 175,
+      "start": 726.732,
+      "end": 730.48,
+      "duration": 3.748,
+      "text": "on the contributions of single clusters."
+    },
+    {
+      "index": 176,
+      "start": 730.48,
+      "end": 732.25,
+      "duration": 1.77,
+      "text": "And again, the reason it had to be"
+    },
+    {
+      "index": 177,
+      "start": 732.25,
+      "end": 735.09,
+      "duration": 2.84,
+      "text": "that way is because the ultimate thing"
+    },
+    {
+      "index": 178,
+      "start": 735.09,
+      "end": 738.17,
+      "duration": 3.08,
+      "text": "that I calculated in this ensemble"
+    },
+    {
+      "index": 179,
+      "start": 738.17,
+      "end": 742.96,
+      "duration": 4.79,
+      "text": "is that the answer should be e to the beta V"
+    },
+    {
+      "index": 180,
+      "start": 742.96,
+      "end": 743.94,
+      "duration": 0.98,
+      "text": "times the pressure."
+    },
+    {
+      "index": 181,
+      "start": 746.47,
+      "end": 750.95,
+      "duration": 4.48,
+      "text": "And so the expression that we have over here better"
+    },
+    {
+      "index": 182,
+      "start": 750.95,
+      "end": 756.89,
+      "duration": 5.94,
+      "text": "have terms which are all proportional to volume."
+    },
+    {
+      "index": 183,
+      "start": 756.89,
+      "end": 760.46,
+      "duration": 3.57,
+      "text": "Sorry, they're all made extensive by proportionality"
+    },
+    {
+      "index": 184,
+      "start": 760.46,
+      "end": 761.69,
+      "duration": 1.23,
+      "text": "to volume."
+    },
+    {
+      "index": 185,
+      "start": 761.69,
+      "end": 765.38,
+      "duration": 3.69,
+      "text": "And indeed, when I do the integrations over a single any"
+    },
+    {
+      "index": 186,
+      "start": 765.38,
+      "end": 768.62,
+      "duration": 3.24,
+      "text": "cluster, there is one degree of freedom, if you like,"
+    },
+    {
+      "index": 187,
+      "start": 768.62,
+      "end": 772.08,
+      "duration": 3.46,
+      "text": "associated with the center of mass of the cluster that"
+    },
+    {
+      "index": 188,
+      "start": 772.08,
+      "end": 774.79,
+      "duration": 2.71,
+      "text": "can go and explore the entire volume."
+    },
+    {
+      "index": 189,
+      "start": 774.79,
+      "end": 779.7,
+      "duration": 4.91,
+      "text": "And so all of these things are in fact in the large end limit"
+    },
+    {
+      "index": 190,
+      "start": 779.7,
+      "end": 785.739,
+      "duration": 6.039,
+      "text": "proportional to V and something that I call bl bar."
+    },
+    {
+      "index": 191,
+      "start": 797.34,
+      "end": 804.61,
+      "duration": 7.27,
+      "text": "So once I divide by this volume, the final outcome"
+    },
+    {
+      "index": 192,
+      "start": 804.61,
+      "end": 807.94,
+      "duration": 3.33,
+      "text": "of my calculation is that I can calculate"
+    },
+    {
+      "index": 193,
+      "start": 807.94,
+      "end": 812.34,
+      "duration": 4.4,
+      "text": "the pressure of an interacting gas"
+    },
+    {
+      "index": 194,
+      "start": 812.34,
+      "end": 821.86,
+      "duration": 9.52,
+      "text": "by summing over a series whose terms are this e to the beta mu"
+    },
+    {
+      "index": 195,
+      "start": 821.86,
+      "end": 828.1,
+      "duration": 6.24,
+      "text": "over lambda cubed raised to the power of l bl bar divided"
+    },
+    {
+      "index": 196,
+      "start": 828.1,
+      "end": 830.28,
+      "duration": 2.18,
+      "text": "by l factorial."
+    },
+    {
+      "index": 197,
+      "start": 839.48,
+      "end": 845.71,
+      "duration": 6.23,
+      "text": "OK, this is correct, but not particularly illuminating."
+    },
+    {
+      "index": 198,
+      "start": 845.71,
+      "end": 851.37,
+      "duration": 5.66,
+      "text": "Because the thing that we said we have some intuition for"
+    },
+    {
+      "index": 199,
+      "start": 851.37,
+      "end": 855.64,
+      "duration": 4.27,
+      "text": "is that the pressure of a gas-- let's"
+    },
+    {
+      "index": 200,
+      "start": 855.64,
+      "end": 859.63,
+      "duration": 3.99,
+      "text": "say if I look at it in terms of beta P,"
+    },
+    {
+      "index": 201,
+      "start": 859.63,
+      "end": 866.9,
+      "duration": 7.27,
+      "text": "actually P is the density times kt, which is 1 over beta,"
+    },
+    {
+      "index": 202,
+      "start": 866.9,
+      "end": 868.21,
+      "duration": 1.31,
+      "text": "if you like, or nkT."
+    },
+    {
+      "index": 203,
+      "start": 868.21,
+      "end": 870.93,
+      "duration": 2.72,
+      "text": "It doesn't matter."
+    },
+    {
+      "index": 204,
+      "start": 870.93,
+      "end": 872.88,
+      "duration": 1.95,
+      "text": "And then there will be corrections."
+    },
+    {
+      "index": 205,
+      "start": 872.88,
+      "end": 875.27,
+      "duration": 2.39,
+      "text": "There will be a term that is order of n squared."
+    },
+    {
+      "index": 206,
+      "start": 877.98,
+      "end": 882.64,
+      "duration": 4.66,
+      "text": "There will be a term that is order of n cubed."
+    },
+    {
+      "index": 207,
+      "start": 882.64,
+      "end": 884.66,
+      "duration": 2.02,
+      "text": "And there are these coefficients,"
+    },
+    {
+      "index": 208,
+      "start": 884.66,
+      "end": 889.1,
+      "duration": 4.44,
+      "text": "which are functions of temperature,"
+    },
+    {
+      "index": 209,
+      "start": 889.1,
+      "end": 892.46,
+      "duration": 3.36,
+      "text": "that are called the virial coefficient."
+    },
+    {
+      "index": 210,
+      "start": 892.46,
+      "end": 895.22,
+      "duration": 2.76,
+      "text": "And this is a virial expansion."
+    },
+    {
+      "index": 211,
+      "start": 895.22,
+      "end": 900.37,
+      "duration": 5.15,
+      "text": "Essentially what it is is a fitting"
+    },
+    {
+      "index": 212,
+      "start": 900.37,
+      "end": 902.24,
+      "duration": 1.87,
+      "text": "of the form of the pressure of the gas"
+    },
+    {
+      "index": 213,
+      "start": 902.24,
+      "end": 904.19,
+      "duration": 1.95,
+      "text": "as a function of density."
+    },
+    {
+      "index": 214,
+      "start": 904.19,
+      "end": 908.545,
+      "duration": 4.355,
+      "text": "In the very low density limit you get ideal gas result."
+    },
+    {
+      "index": 215,
+      "start": 908.545,
+      "end": 911.11,
+      "duration": 2.565,
+      "text": "And presumably because of these interactions,"
+    },
+    {
+      "index": 216,
+      "start": 911.11,
+      "end": 914.65,
+      "duration": 3.54,
+      "text": "you will get corrections that presumably also"
+    },
+    {
+      "index": 217,
+      "start": 914.65,
+      "end": 917.74,
+      "duration": 3.09,
+      "text": "know about the potential that went"
+    },
+    {
+      "index": 218,
+      "start": 917.74,
+      "end": 923.1,
+      "duration": 5.36,
+      "text": "into the construction of all of these b bars, et cetera."
+    },
+    {
+      "index": 219,
+      "start": 923.1,
+      "end": 928.99,
+      "duration": 5.89,
+      "text": "So how do we relate these things that are, say, experimentally"
+    },
+    {
+      "index": 220,
+      "start": 928.99,
+      "end": 935.04,
+      "duration": 6.05,
+      "text": "accessible to this expansion that we have over here?"
+    },
+    {
+      "index": 221,
+      "start": 935.04,
+      "end": 938.97,
+      "duration": 3.93,
+      "text": "And the reason it is not obvious immediately"
+    },
+    {
+      "index": 222,
+      "start": 938.97,
+      "end": 946.01,
+      "duration": 7.04,
+      "text": "is because this is an expansion in chemical potential,"
+    },
+    {
+      "index": 223,
+      "start": 946.01,
+      "end": 949.72,
+      "duration": 3.71,
+      "text": "whereas over here, I have density."
+    },
+    {
+      "index": 224,
+      "start": 949.72,
+      "end": 951.73,
+      "duration": 2.01,
+      "text": "So what do I do?"
+    },
+    {
+      "index": 225,
+      "start": 951.73,
+      "end": 956.04,
+      "duration": 4.31,
+      "text": "Well, I realize that the density can be obtained as follows."
+    },
+    {
+      "index": 226,
+      "start": 956.04,
+      "end": 962.15,
+      "duration": 6.11,
+      "text": "In the grand canonical ensemble, the number of particles"
+    },
+    {
+      "index": 227,
+      "start": 962.15,
+      "end": 966.81,
+      "duration": 4.66,
+      "text": "is in principal a random variable."
+    },
+    {
+      "index": 228,
+      "start": 966.81,
+      "end": 970.65,
+      "duration": 3.84,
+      "text": "But that random variable is governed by this e"
+    },
+    {
+      "index": 229,
+      "start": 970.65,
+      "end": 974.35,
+      "duration": 3.7,
+      "text": "to the beta mu N that controls how many you have."
+    },
+    {
+      "index": 230,
+      "start": 974.35,
+      "end": 981.33,
+      "duration": 6.98,
+      "text": "And if I take the log of Q with respect to beta mu,"
+    },
+    {
+      "index": 231,
+      "start": 981.33,
+      "end": 983.84,
+      "duration": 2.51,
+      "text": "I will generate the average number,"
+    },
+    {
+      "index": 232,
+      "start": 983.84,
+      "end": 986.05,
+      "duration": 2.21,
+      "text": "which in the thermodynamic limit we"
+    },
+    {
+      "index": 233,
+      "start": 986.05,
+      "end": 988.94,
+      "duration": 2.89,
+      "text": "expect to be the same thing as what we thermodynamically"
+    },
+    {
+      "index": 234,
+      "start": 988.94,
+      "end": 990.75,
+      "duration": 1.81,
+      "text": "would call the number."
+    },
+    {
+      "index": 235,
+      "start": 990.75,
+      "end": 996.08,
+      "duration": 5.33,
+      "text": "And this log Q we just established is beta PV."
+    },
+    {
+      "index": 236,
+      "start": 996.08,
+      "end": 1000.6,
+      "duration": 4.52,
+      "text": "So what we have here is the derivative of beta VP"
+    },
+    {
+      "index": 237,
+      "start": 1000.6,
+      "end": 1003.27,
+      "duration": 2.67,
+      "text": "with respect to beta mu."
+    },
+    {
+      "index": 238,
+      "start": 1003.27,
+      "end": 1005.45,
+      "duration": 2.18,
+      "text": "And if I do this at constant temperature,"
+    },
+    {
+      "index": 239,
+      "start": 1005.45,
+      "end": 1007.24,
+      "duration": 1.79,
+      "text": "the betas disappear."
+    },
+    {
+      "index": 240,
+      "start": 1007.24,
+      "end": 1010.87,
+      "duration": 3.63,
+      "text": "This is the same thing as V dP by d"
+    },
+    {
+      "index": 241,
+      "start": 1010.87,
+      "end": 1014.19,
+      "duration": 3.32,
+      "text": "mu at constant temperature."
+    },
+    {
+      "index": 242,
+      "start": 1014.19,
+      "end": 1020.97,
+      "duration": 6.78,
+      "text": "But also I can take the derivative right here."
+    },
+    {
+      "index": 243,
+      "start": 1020.97,
+      "end": 1022.8,
+      "duration": 1.83,
+      "text": "So what happens?"
+    },
+    {
+      "index": 244,
+      "start": 1022.8,
+      "end": 1030.66,
+      "duration": 7.86,
+      "text": "I will find that the density which is N over V,"
+    },
+    {
+      "index": 245,
+      "start": 1030.66,
+      "end": 1034.66,
+      "duration": 4.0,
+      "text": "is the derivative of this expression with respect"
+    },
+    {
+      "index": 246,
+      "start": 1034.66,
+      "end": 1036.609,
+      "duration": 1.949,
+      "text": "to beta mu."
+    },
+    {
+      "index": 247,
+      "start": 1036.609,
+      "end": 1040.52,
+      "duration": 3.911,
+      "text": "I go and I find that there's a beta mu."
+    },
+    {
+      "index": 248,
+      "start": 1040.52,
+      "end": 1044.06,
+      "duration": 3.54,
+      "text": "If I take a derivative of this with respect to beta mu,"
+    },
+    {
+      "index": 249,
+      "start": 1044.06,
+      "end": 1047.3,
+      "duration": 3.24,
+      "text": "really it's exponential of beta mu l."
+    },
+    {
+      "index": 250,
+      "start": 1047.3,
+      "end": 1051.42,
+      "duration": 4.12,
+      "text": "The derivative of it will give me l e to the beta mu l."
+    },
+    {
+      "index": 251,
+      "start": 1051.42,
+      "end": 1057.4,
+      "duration": 5.98,
+      "text": "So what I get is a sum over l e to the beta mu"
+    },
+    {
+      "index": 252,
+      "start": 1057.4,
+      "end": 1059.46,
+      "duration": 2.06,
+      "text": "over lambda cubed."
+    },
+    {
+      "index": 253,
+      "start": 1059.46,
+      "end": 1062.3,
+      "duration": 2.84,
+      "text": "l gets repeated."
+    },
+    {
+      "index": 254,
+      "start": 1062.3,
+      "end": 1065.59,
+      "duration": 3.29,
+      "text": "And then I will have l times this."
+    },
+    {
+      "index": 255,
+      "start": 1065.59,
+      "end": 1070.3,
+      "duration": 4.71,
+      "text": "So I will have vl bar divided by l minus 1 factorial."
+    },
+    {
+      "index": 256,
+      "start": 1073.79,
+      "end": 1076.37,
+      "duration": 2.58,
+      "text": "So the series for density is very"
+    },
+    {
+      "index": 257,
+      "start": 1076.37,
+      "end": 1078.68,
+      "duration": 2.31,
+      "text": "much like the series for pressure,"
+    },
+    {
+      "index": 258,
+      "start": 1078.68,
+      "end": 1083.98,
+      "duration": 5.3,
+      "text": "except that you replace 1 over l factorial with 1 over l"
+    },
+    {
+      "index": 259,
+      "start": 1083.98,
+      "end": 1085.009,
+      "duration": 1.029,
+      "text": "minus 1 factorial."
+    },
+    {
+      "index": 260,
+      "start": 1089.41,
+      "end": 1092.69,
+      "duration": 3.28,
+      "text": "So now my task is clear."
+    },
+    {
+      "index": 261,
+      "start": 1092.69,
+      "end": 1098.35,
+      "duration": 5.66,
+      "text": "What I should do is I should solve"
+    },
+    {
+      "index": 262,
+      "start": 1098.35,
+      "end": 1104.09,
+      "duration": 5.74,
+      "text": "given a particular density for what mu is."
+    },
+    {
+      "index": 263,
+      "start": 1104.09,
+      "end": 1107.1,
+      "duration": 3.01,
+      "text": "Once I have mu as a function of density,"
+    },
+    {
+      "index": 264,
+      "start": 1107.1,
+      "end": 1108.9,
+      "duration": 1.8,
+      "text": "I can substitute it back here."
+    },
+    {
+      "index": 265,
+      "start": 1108.9,
+      "end": 1112.86,
+      "duration": 3.96,
+      "text": "And I will have pressure as a function of density."
+    },
+    {
+      "index": 266,
+      "start": 1112.86,
+      "end": 1116.09,
+      "duration": 3.23,
+      "text": "Of course it's clear that the right variable to look at"
+    },
+    {
+      "index": 267,
+      "start": 1116.09,
+      "end": 1123.71,
+      "duration": 7.62,
+      "text": "is not mu, but x, which is e to the beta mu over lambda cubed."
+    },
+    {
+      "index": 268,
+      "start": 1123.71,
+      "end": 1125.15,
+      "duration": 1.44,
+      "text": "This actually has a name."
+    },
+    {
+      "index": 269,
+      "start": 1125.15,
+      "end": 1126.96,
+      "duration": 1.81,
+      "text": "It's sometimes called fugacity."
+    },
+    {
+      "index": 270,
+      "start": 1134.23,
+      "end": 1138.13,
+      "duration": 3.9,
+      "text": "So the second equation is telling me"
+    },
+    {
+      "index": 271,
+      "start": 1138.13,
+      "end": 1145.7,
+      "duration": 7.57,
+      "text": "that the density I can write in terms of the fugacity as a sum"
+    },
+    {
+      "index": 272,
+      "start": 1145.7,
+      "end": 1153.14,
+      "duration": 7.44,
+      "text": "over l x to the l bl bar divided by l minus 1 factorial, which"
+    },
+    {
+      "index": 273,
+      "start": 1153.14,
+      "end": 1156.86,
+      "duration": 3.72,
+      "text": "if I were to sort of write in its full details,"
+    },
+    {
+      "index": 274,
+      "start": 1156.86,
+      "end": 1164.43,
+      "duration": 7.57,
+      "text": "it starts with b1 bar x plus b2 bar x squared."
+    },
+    {
+      "index": 275,
+      "start": 1164.43,
+      "end": 1168.89,
+      "duration": 4.46,
+      "text": "Because there I have 0 factorial or 1 factorial respectively."
+    },
+    {
+      "index": 276,
+      "start": 1168.89,
+      "end": 1173.94,
+      "duration": 5.05,
+      "text": "The next term will be b3 bar over 2 x cubed."
+    },
+    {
+      "index": 277,
+      "start": 1173.94,
+      "end": 1176.11,
+      "duration": 2.17,
+      "text": "And this will go on and on."
+    },
+    {
+      "index": 278,
+      "start": 1181.88,
+      "end": 1185.78,
+      "duration": 3.9,
+      "text": "Also, let me remind you what b1 bar is."
+    },
+    {
+      "index": 279,
+      "start": 1185.78,
+      "end": 1191.74,
+      "duration": 5.96,
+      "text": "b1 bar, for every one of these b1 bars,"
+    },
+    {
+      "index": 280,
+      "start": 1191.74,
+      "end": 1195.14,
+      "duration": 3.4,
+      "text": "I have to divide by 1 over V because of this V."
+    },
+    {
+      "index": 281,
+      "start": 1195.14,
+      "end": 1197.98,
+      "duration": 2.84,
+      "text": "And then I have to do the integration that corresponds"
+    },
+    {
+      "index": 282,
+      "start": 1197.98,
+      "end": 1202.05,
+      "duration": 4.07,
+      "text": "to the one cluster, which is essentially one cluster going"
+    },
+    {
+      "index": 283,
+      "start": 1202.05,
+      "end": 1205.25,
+      "duration": 3.2,
+      "text": "over the entirety of space, which will give me V."
+    },
+    {
+      "index": 284,
+      "start": 1205.25,
+      "end": 1209.23,
+      "duration": 3.98,
+      "text": "So this is in fact 1."
+    },
+    {
+      "index": 285,
+      "start": 1209.23,
+      "end": 1214.29,
+      "duration": 5.06,
+      "text": "So basically this coefficient here is 1."
+    },
+    {
+      "index": 286,
+      "start": 1214.29,
+      "end": 1216.1,
+      "duration": 1.81,
+      "text": "And then I will have the corrections."
+    },
+    {
+      "index": 287,
+      "start": 1220.4,
+      "end": 1223.6,
+      "duration": 3.2,
+      "text": "So you say, well, I have n as a function of x."
+    },
+    {
+      "index": 288,
+      "start": 1223.6,
+      "end": 1226.89,
+      "duration": 3.29,
+      "text": "I want x as a function of n."
+    },
+    {
+      "index": 289,
+      "start": 1226.89,
+      "end": 1229.36,
+      "duration": 2.47,
+      "text": "And I say, OK, that's not that difficult."
+    },
+    {
+      "index": 290,
+      "start": 1229.36,
+      "end": 1234.34,
+      "duration": 4.98,
+      "text": "I will write that x equals n minus b2 bar"
+    },
+    {
+      "index": 291,
+      "start": 1234.34,
+      "end": 1240.69,
+      "duration": 6.35,
+      "text": "x squared minus b3 bar x cubed over 2, and so forth."
+    },
+    {
+      "index": 292,
+      "start": 1240.69,
+      "end": 1241.86,
+      "duration": 1.17,
+      "text": "And I have now x."
+    },
+    {
+      "index": 293,
+      "start": 1246.91,
+      "end": 1250.56,
+      "duration": 3.65,
+      "text": "Maybe a few of you are skeptical."
+    },
+    {
+      "index": 294,
+      "start": 1250.56,
+      "end": 1252.33,
+      "duration": 1.77,
+      "text": "Some of you don't seem to be bothered."
+    },
+    {
+      "index": 295,
+      "start": 1255.44,
+      "end": 1258.81,
+      "duration": 3.37,
+      "text": "OK, so my claim is that this is indeed"
+    },
+    {
+      "index": 296,
+      "start": 1258.81,
+      "end": 1264.86,
+      "duration": 6.05,
+      "text": "a systematic way of solving a series in which when"
+    },
+    {
+      "index": 297,
+      "start": 1264.86,
+      "end": 1270.475,
+      "duration": 5.615,
+      "text": "the density goes to 0, you expect x to also go to 0."
+    },
+    {
+      "index": 298,
+      "start": 1270.475,
+      "end": 1274.5,
+      "duration": 4.025,
+      "text": "And to lowest order, x will be of the order of density."
+    },
+    {
+      "index": 299,
+      "start": 1274.5,
+      "end": 1278.45,
+      "duration": 3.95,
+      "text": "And these will be higher order powers in density."
+    },
+    {
+      "index": 300,
+      "start": 1278.45,
+      "end": 1284.62,
+      "duration": 6.17,
+      "text": "So to get a systematic series in density, all you need to do"
+    },
+    {
+      "index": 301,
+      "start": 1284.62,
+      "end": 1289.15,
+      "duration": 4.53,
+      "text": "is to sort of work with a series such as this keeping"
+    },
+    {
+      "index": 302,
+      "start": 1289.15,
+      "end": 1293.03,
+      "duration": 3.88,
+      "text": "in mind what order you have solved things to."
+    },
+    {
+      "index": 303,
+      "start": 1293.03,
+      "end": 1295.9,
+      "duration": 2.87,
+      "text": "So I claim that to lowest order, this really"
+    },
+    {
+      "index": 304,
+      "start": 1295.9,
+      "end": 1297.96,
+      "duration": 2.06,
+      "text": "just says that x is n."
+    },
+    {
+      "index": 305,
+      "start": 1297.96,
+      "end": 1302.78,
+      "duration": 4.82,
+      "text": "And then there are corrections that are order of n squared."
+    },
+    {
+      "index": 306,
+      "start": 1302.78,
+      "end": 1306.77,
+      "duration": 3.99,
+      "text": "And to get the next order term, all I need to do"
+    },
+    {
+      "index": 307,
+      "start": 1306.77,
+      "end": 1310.31,
+      "duration": 3.54,
+      "text": "is to substitute the lower order in this equation."
+    },
+    {
+      "index": 308,
+      "start": 1310.31,
+      "end": 1315.3,
+      "duration": 4.99,
+      "text": "So basically if I substitute x equals n in this equation,"
+    },
+    {
+      "index": 309,
+      "start": 1315.3,
+      "end": 1320.9,
+      "duration": 5.6,
+      "text": "I will get n minus b2 n square."
+    },
+    {
+      "index": 310,
+      "start": 1320.9,
+      "end": 1324.99,
+      "duration": 4.09,
+      "text": "If I substitute x over n here, it will be a higher order term."
+    },
+    {
+      "index": 311,
+      "start": 1324.99,
+      "end": 1326.97,
+      "duration": 1.98,
+      "text": "And I claim that this is the correct result"
+    },
+    {
+      "index": 312,
+      "start": 1326.97,
+      "end": 1328.38,
+      "duration": 1.41,
+      "text": "to order of n cubed."
+    },
+    {
+      "index": 313,
+      "start": 1331.94,
+      "end": 1335.25,
+      "duration": 3.31,
+      "text": "And then to get the result to order of n"
+    },
+    {
+      "index": 314,
+      "start": 1335.25,
+      "end": 1340.42,
+      "duration": 5.17,
+      "text": "cubed, I substitute this back into the original equation."
+    },
+    {
+      "index": 315,
+      "start": 1340.42,
+      "end": 1346.05,
+      "duration": 5.63,
+      "text": "So I start with n minus b2 bar, the square"
+    },
+    {
+      "index": 316,
+      "start": 1346.05,
+      "end": 1349.75,
+      "duration": 3.7,
+      "text": "of the previous solution at the right order."
+    },
+    {
+      "index": 317,
+      "start": 1349.75,
+      "end": 1354.63,
+      "duration": 4.88,
+      "text": "So squaring this, I will get n squared minus twice"
+    },
+    {
+      "index": 318,
+      "start": 1354.63,
+      "end": 1358.03,
+      "duration": 3.4,
+      "text": "b2 bar n cubed."
+    },
+    {
+      "index": 319,
+      "start": 1358.03,
+      "end": 1360.66,
+      "duration": 2.63,
+      "text": "And the next term that would be the square of this, which"
+    },
+    {
+      "index": 320,
+      "start": 1360.66,
+      "end": 1364.21,
+      "duration": 3.55,
+      "text": "is order of n to the fourth, I don't write down."
+    },
+    {
+      "index": 321,
+      "start": 1364.21,
+      "end": 1369.2,
+      "duration": 4.99,
+      "text": "And then I have minus b3 bar over 2,"
+    },
+    {
+      "index": 322,
+      "start": 1369.2,
+      "end": 1371.67,
+      "duration": 2.47,
+      "text": "the cube of the previous solution."
+    },
+    {
+      "index": 323,
+      "start": 1371.67,
+      "end": 1373.6,
+      "duration": 1.93,
+      "text": "And at the right order that I have,"
+    },
+    {
+      "index": 324,
+      "start": 1373.6,
+      "end": 1378.61,
+      "duration": 5.01,
+      "text": "that's the same thing as b3 bar over 2 n cubed"
+    },
+    {
+      "index": 325,
+      "start": 1378.61,
+      "end": 1382.7,
+      "duration": 4.09,
+      "text": "and order of n to the fourth."
+    },
+    {
+      "index": 326,
+      "start": 1382.7,
+      "end": 1385.75,
+      "duration": 3.05,
+      "text": "And all I really need to do at this order"
+    },
+    {
+      "index": 327,
+      "start": 1385.75,
+      "end": 1388.87,
+      "duration": 3.12,
+      "text": "is to recognize that I have two terms that"
+    },
+    {
+      "index": 328,
+      "start": 1388.87,
+      "end": 1390.5,
+      "duration": 1.63,
+      "text": "are order of n cubed."
+    },
+    {
+      "index": 329,
+      "start": 1390.5,
+      "end": 1396.59,
+      "duration": 6.09,
+      "text": "Putting them together, I have n minus b2 bar n squared."
+    },
+    {
+      "index": 330,
+      "start": 1396.59,
+      "end": 1402.37,
+      "duration": 5.78,
+      "text": "And then I have plus 2b2 bar squared"
+    },
+    {
+      "index": 331,
+      "start": 1402.37,
+      "end": 1411.18,
+      "duration": 8.81,
+      "text": "minus b3 bar over 2 n cubed and order of n to the fourth."
+    },
+    {
+      "index": 332,
+      "start": 1421.0,
+      "end": 1422.18,
+      "duration": 1.18,
+      "text": "So now we erase this."
+    },
+    {
+      "index": 333,
+      "start": 1433.42,
+      "end": 1438.7,
+      "duration": 5.28,
+      "text": "OK, so now I have solved for x in a power series in n."
+    },
+    {
+      "index": 334,
+      "start": 1438.7,
+      "end": 1440.91,
+      "duration": 2.21,
+      "text": "All I need to do is to substitute"
+    },
+    {
+      "index": 335,
+      "start": 1440.91,
+      "end": 1443.16,
+      "duration": 2.25,
+      "text": "in the power series for p."
+    },
+    {
+      "index": 336,
+      "start": 1443.16,
+      "end": 1444.84,
+      "duration": 1.68,
+      "text": "So let's write that down."
+    },
+    {
+      "index": 337,
+      "start": 1444.84,
+      "end": 1451.72,
+      "duration": 6.88,
+      "text": "The power series for beta p is b1 bar times"
+    },
+    {
+      "index": 338,
+      "start": 1451.72,
+      "end": 1456.81,
+      "duration": 5.09,
+      "text": "the density b2 bar squared over 2 density"
+    },
+    {
+      "index": 339,
+      "start": 1456.81,
+      "end": 1463.67,
+      "duration": 6.86,
+      "text": "square, b3 bar over 3 factorial, which"
+    },
+    {
+      "index": 340,
+      "start": 1463.67,
+      "end": 1467.48,
+      "duration": 3.81,
+      "text": "is 6 n cubed, and so forth."
+    },
+    {
+      "index": 341,
+      "start": 1467.48,
+      "end": 1470.19,
+      "duration": 2.71,
+      "text": "But I only calculated things to order of n cubed."
+    },
+    {
+      "index": 342,
+      "start": 1472.93,
+      "end": 1476.74,
+      "duration": 3.81,
+      "text": "Also, b1 bar is the same thing as 1."
+    },
+    {
+      "index": 343,
+      "start": 1476.74,
+      "end": 1480.74,
+      "duration": 4.0,
+      "text": "So basically that's what I should be working with."
+    },
+    {
+      "index": 344,
+      "start": 1480.74,
+      "end": 1484.9,
+      "duration": 4.16,
+      "text": "And so all I need to do is to substitute-- oops,"
+    },
+    {
+      "index": 345,
+      "start": 1484.9,
+      "end": 1486.42,
+      "duration": 1.52,
+      "text": "except that these are all x's."
+    },
+    {
+      "index": 346,
+      "start": 1494.17,
+      "end": 1496.89,
+      "duration": 2.72,
+      "text": "The series here for beta p that I"
+    },
+    {
+      "index": 347,
+      "start": 1496.89,
+      "end": 1501.6,
+      "duration": 4.71,
+      "text": "have is in powers of this quantity x."
+    },
+    {
+      "index": 348,
+      "start": 1501.6,
+      "end": 1507.45,
+      "duration": 5.85,
+      "text": "And it is x that I had calculated as a function of n."
+    },
+    {
+      "index": 349,
+      "start": 1507.45,
+      "end": 1515.43,
+      "duration": 7.98,
+      "text": "To the order that I calculated, it is n minus b2n squared."
+    },
+    {
+      "index": 350,
+      "start": 1515.43,
+      "end": 1526.36,
+      "duration": 10.93,
+      "text": "And then I have 2b2 squared minus b3 over b3."
+    },
+    {
+      "index": 351,
+      "start": 1526.36,
+      "end": 1530.85,
+      "duration": 4.49,
+      "text": "Somehow this sounds incorrect to me."
+    },
+    {
+      "index": 352,
+      "start": 1530.85,
+      "end": 1533.222,
+      "duration": 2.372,
+      "text": "Nope, that's fine."
+    },
+    {
+      "index": 353,
+      "start": 1533.222,
+      "end": 1535.01,
+      "duration": 1.788,
+      "text": "Because here I have 2."
+    },
+    {
+      "index": 354,
+      "start": 1535.01,
+      "end": 1537.02,
+      "duration": 2.01,
+      "text": "So that's correct."
+    },
+    {
+      "index": 355,
+      "start": 1537.02,
+      "end": 1543.97,
+      "duration": 6.95,
+      "text": "b3 over 2 n cubed-- so essentially,"
+    },
+    {
+      "index": 356,
+      "start": 1543.97,
+      "end": 1547.91,
+      "duration": 3.94,
+      "text": "I just substituted for x here."
+    },
+    {
+      "index": 357,
+      "start": 1547.91,
+      "end": 1551.63,
+      "duration": 3.72,
+      "text": "The next order term is going to be"
+    },
+    {
+      "index": 358,
+      "start": 1551.63,
+      "end": 1556.28,
+      "duration": 4.65,
+      "text": "b2 over 2 times the square of x."
+    },
+    {
+      "index": 359,
+      "start": 1556.28,
+      "end": 1560.55,
+      "duration": 4.27,
+      "text": "The square of x will give me a term that is n squared,"
+    },
+    {
+      "index": 360,
+      "start": 1560.55,
+      "end": 1567.11,
+      "duration": 6.56,
+      "text": "a term that is from here 2b2n cubed."
+    },
+    {
+      "index": 361,
+      "start": 1567.11,
+      "end": 1571.8,
+      "duration": 4.69,
+      "text": "Order of n to the fourth I haven't calculated correctly."
+    },
+    {
+      "index": 362,
+      "start": 1571.8,
+      "end": 1577.44,
+      "duration": 5.64,
+      "text": "Order of n cubed I have b3 over 6."
+    },
+    {
+      "index": 363,
+      "start": 1577.44,
+      "end": 1581.85,
+      "duration": 4.41,
+      "text": "And just x cubed is the same thing as n cubed to this order."
+    },
+    {
+      "index": 364,
+      "start": 1581.85,
+      "end": 1586.562,
+      "duration": 4.712,
+      "text": "And I have not calculated anything at the next order."
+    },
+    {
+      "index": 365,
+      "start": 1589.83,
+      "end": 1593.544,
+      "duration": 3.714,
+      "text": "So let's see what we have."
+    },
+    {
+      "index": 366,
+      "start": 1593.544,
+      "end": 1596.12,
+      "duration": 2.576,
+      "text": "We have n."
+    },
+    {
+      "index": 367,
+      "start": 1596.12,
+      "end": 1600.55,
+      "duration": 4.43,
+      "text": "At the next order, there are two terms that are n squared."
+    },
+    {
+      "index": 368,
+      "start": 1600.55,
+      "end": 1603.57,
+      "duration": 3.02,
+      "text": "There is this term, and there is that term."
+    },
+    {
+      "index": 369,
+      "start": 1603.57,
+      "end": 1609.04,
+      "duration": 5.47,
+      "text": "Putting them together, I will get minus b2 over 2 n squared."
+    },
+    {
+      "index": 370,
+      "start": 1612.03,
+      "end": 1615.14,
+      "duration": 3.11,
+      "text": "At the next order, at the order of n cubed,"
+    },
+    {
+      "index": 371,
+      "start": 1615.14,
+      "end": 1617.54,
+      "duration": 2.4,
+      "text": "I have a bunch of terms."
+    },
+    {
+      "index": 372,
+      "start": 1617.54,
+      "end": 1623.47,
+      "duration": 5.93,
+      "text": "First of all, there is this 2b2 squared."
+    },
+    {
+      "index": 373,
+      "start": 1623.47,
+      "end": 1629.81,
+      "duration": 6.34,
+      "text": "But then multiplying this with this will subtract one b2."
+    },
+    {
+      "index": 374,
+      "start": 1629.81,
+      "end": 1634.5,
+      "duration": 4.69,
+      "text": "So I'm going to be left with b2 squared."
+    },
+    {
+      "index": 375,
+      "start": 1634.5,
+      "end": 1640.03,
+      "duration": 5.53,
+      "text": "And then I have minus 1/2 b3."
+    },
+    {
+      "index": 376,
+      "start": 1640.03,
+      "end": 1642.32,
+      "duration": 2.29,
+      "text": "So that's one term."
+    },
+    {
+      "index": 377,
+      "start": 1642.32,
+      "end": 1646.14,
+      "duration": 3.82,
+      "text": "And then I have plus 1/6 b3."
+    },
+    {
+      "index": 378,
+      "start": 1646.14,
+      "end": 1650.56,
+      "duration": 4.42,
+      "text": "Minus 1/2 plus 1/6 is minus 1/3."
+    },
+    {
+      "index": 379,
+      "start": 1650.56,
+      "end": 1655.21,
+      "duration": 4.65,
+      "text": "So this is minus b3 over 3 n cubed."
+    },
+    {
+      "index": 380,
+      "start": 1655.21,
+      "end": 1659.325,
+      "duration": 4.115,
+      "text": "And I haven't calculated order of n to the fourth."
+    },
+    {
+      "index": 381,
+      "start": 1662.17,
+      "end": 1664.095,
+      "duration": 1.925,
+      "text": "And this is the formula for BP."
+    },
+    {
+      "index": 382,
+      "start": 1671.68,
+      "end": 1675.865,
+      "duration": 4.185,
+      "text": "So lowest order, I have the ideal gas result."
+    },
+    {
+      "index": 383,
+      "start": 1679.17,
+      "end": 1681.57,
+      "duration": 2.4,
+      "text": "Actually, let me, for simplicity,"
+    },
+    {
+      "index": 384,
+      "start": 1681.57,
+      "end": 1685.445,
+      "duration": 3.875,
+      "text": "define the virial coefficients in this fashion."
+    },
+    {
+      "index": 385,
+      "start": 1688.03,
+      "end": 1693.41,
+      "duration": 5.38,
+      "text": "The second order, I will get a correction B2,"
+    },
+    {
+      "index": 386,
+      "start": 1693.41,
+      "end": 1696.21,
+      "duration": 2.8,
+      "text": "which is minus 1/2 of b2 bar."
+    },
+    {
+      "index": 387,
+      "start": 1698.755,
+      "end": 1704.99,
+      "duration": 6.235,
+      "text": "So this is minus 1/2 of the diagram that"
+    },
+    {
+      "index": 388,
+      "start": 1704.99,
+      "end": 1710.64,
+      "duration": 5.65,
+      "text": "corresponds to essentially one of these lines"
+    },
+    {
+      "index": 389,
+      "start": 1710.64,
+      "end": 1712.95,
+      "duration": 2.31,
+      "text": "that I have up here."
+    },
+    {
+      "index": 390,
+      "start": 1712.95,
+      "end": 1714.77,
+      "duration": 1.82,
+      "text": "And so what is it?"
+    },
+    {
+      "index": 391,
+      "start": 1714.77,
+      "end": 1722.14,
+      "duration": 7.37,
+      "text": "It is minus 1/2 the integral over the relative coordinate"
+    },
+    {
+      "index": 392,
+      "start": 1722.14,
+      "end": 1725.9,
+      "duration": 3.76,
+      "text": "of e to the minus beta v as a function"
+    },
+    {
+      "index": 393,
+      "start": 1725.9,
+      "end": 1727.94,
+      "duration": 2.04,
+      "text": "of the relative coordinate minus 1."
+    },
+    {
+      "index": 394,
+      "start": 1732.34,
+      "end": 1737.58,
+      "duration": 5.24,
+      "text": "Now earlier, we had in fact calculated this result directly"
+    },
+    {
+      "index": 395,
+      "start": 1737.58,
+      "end": 1739.51,
+      "duration": 1.93,
+      "text": "through the partition function."
+    },
+    {
+      "index": 396,
+      "start": 1739.51,
+      "end": 1744.3,
+      "duration": 4.79,
+      "text": "I did a calculation in which I calculated the first term"
+    },
+    {
+      "index": 397,
+      "start": 1744.3,
+      "end": 1746.74,
+      "duration": 2.44,
+      "text": "in the other way of looking at things,"
+    },
+    {
+      "index": 398,
+      "start": 1746.74,
+      "end": 1752.06,
+      "duration": 5.32,
+      "text": "in the cumulant expansion, as a function of expansions"
+    },
+    {
+      "index": 399,
+      "start": 1752.06,
+      "end": 1753.28,
+      "duration": 1.22,
+      "text": "in the potential."
+    },
+    {
+      "index": 400,
+      "start": 1753.28,
+      "end": 1755.11,
+      "duration": 1.83,
+      "text": "We saw that there was a term that all"
+    },
+    {
+      "index": 401,
+      "start": 1755.11,
+      "end": 1756.84,
+      "duration": 1.73,
+      "text": "was order of density squared."
+    },
+    {
+      "index": 402,
+      "start": 1756.84,
+      "end": 1760.14,
+      "duration": 3.3,
+      "text": "We summed all of the terms to get this factor."
+    },
+    {
+      "index": 403,
+      "start": 1760.14,
+      "end": 1763.27,
+      "duration": 3.13,
+      "text": "And there was precisely a factor of minus 1/2"
+    },
+    {
+      "index": 404,
+      "start": 1763.27,
+      "end": 1765.71,
+      "duration": 2.44,
+      "text": "as a correction to pressure once we"
+    },
+    {
+      "index": 405,
+      "start": 1765.71,
+      "end": 1767.772,
+      "duration": 2.062,
+      "text": "took the derivative of the partition function"
+    },
+    {
+      "index": 406,
+      "start": 1767.772,
+      "end": 1768.73,
+      "duration": 0.958,
+      "text": "with respect to volume."
+    },
+    {
+      "index": 407,
+      "start": 1771.34,
+      "end": 1778.6,
+      "duration": 7.26,
+      "text": "OK, so the thing that is new is really the next order term, B3,"
+    },
+    {
+      "index": 408,
+      "start": 1778.6,
+      "end": 1784.36,
+      "duration": 5.76,
+      "text": "which is b2 squared minus b3 bar over 3."
+    },
+    {
+      "index": 409,
+      "start": 1784.36,
+      "end": 1788.23,
+      "duration": 3.87,
+      "text": "OK, so what is that?"
+    },
+    {
+      "index": 410,
+      "start": 1788.23,
+      "end": 1792.34,
+      "duration": 4.11,
+      "text": "Diagrammatically, B2 was this factor"
+    },
+    {
+      "index": 411,
+      "start": 1792.34,
+      "end": 1798.48,
+      "duration": 6.14,
+      "text": "that we calculated above and is the square of this pair."
+    },
+    {
+      "index": 412,
+      "start": 1798.48,
+      "end": 1803.36,
+      "duration": 4.88,
+      "text": "And then I have to subtract from that 1/3 of whatever"
+    },
+    {
+      "index": 413,
+      "start": 1803.36,
+      "end": 1806.29,
+      "duration": 2.93,
+      "text": "goes into B3."
+    },
+    {
+      "index": 414,
+      "start": 1806.29,
+      "end": 1810.77,
+      "duration": 4.48,
+      "text": "Now remember, we said that B3, I have to pick three points"
+    },
+    {
+      "index": 415,
+      "start": 1810.77,
+      "end": 1814.74,
+      "duration": 3.97,
+      "text": "and make sure I link them in all possible ways."
+    },
+    {
+      "index": 416,
+      "start": 1814.74,
+      "end": 1819.91,
+      "duration": 5.17,
+      "text": "So the diagrams that go into B3, one of them is this."
+    },
+    {
+      "index": 417,
+      "start": 1819.91,
+      "end": 1822.16,
+      "duration": 2.25,
+      "text": "But then there are three other ways"
+    },
+    {
+      "index": 418,
+      "start": 1822.16,
+      "end": 1826.743,
+      "duration": 4.583,
+      "text": "of making a linked object, which is these things."
+    },
+    {
+      "index": 419,
+      "start": 1831.95,
+      "end": 1835.15,
+      "duration": 3.2,
+      "text": "We also saw that if I were to calculate"
+    },
+    {
+      "index": 420,
+      "start": 1835.15,
+      "end": 1839.01,
+      "duration": 3.86,
+      "text": "the contribution of any one of these objects,"
+    },
+    {
+      "index": 421,
+      "start": 1839.01,
+      "end": 1843.48,
+      "duration": 4.47,
+      "text": "I can very easily choose to measure my coordinates"
+    },
+    {
+      "index": 422,
+      "start": 1843.48,
+      "end": 1847.69,
+      "duration": 4.21,
+      "text": "with respect to, say, the point that is at their apex."
+    },
+    {
+      "index": 423,
+      "start": 1847.69,
+      "end": 1849.73,
+      "duration": 2.04,
+      "text": "And then I would have one variable"
+    },
+    {
+      "index": 424,
+      "start": 1849.73,
+      "end": 1851.71,
+      "duration": 1.98,
+      "text": "which is this distance, one variable which"
+    },
+    {
+      "index": 425,
+      "start": 1851.71,
+      "end": 1853.0,
+      "duration": 1.29,
+      "text": "is that distance."
+    },
+    {
+      "index": 426,
+      "start": 1853.0,
+      "end": 1855.15,
+      "duration": 2.15,
+      "text": "And independently, each one of them"
+    },
+    {
+      "index": 427,
+      "start": 1855.15,
+      "end": 1860.03,
+      "duration": 4.88,
+      "text": "would give me the factor that I calculated before."
+    },
+    {
+      "index": 428,
+      "start": 1860.03,
+      "end": 1866.05,
+      "duration": 6.02,
+      "text": "In essence, all of these one particle reducible graphs"
+    },
+    {
+      "index": 429,
+      "start": 1866.05,
+      "end": 1869.362,
+      "duration": 3.312,
+      "text": "give a contribution, which is the product"
+    },
+    {
+      "index": 430,
+      "start": 1869.362,
+      "end": 1873.69,
+      "duration": 4.328,
+      "text": "of these single line graphs."
+    },
+    {
+      "index": 431,
+      "start": 1873.69,
+      "end": 1874.77,
+      "duration": 1.08,
+      "text": "There are three of them."
+    },
+    {
+      "index": 432,
+      "start": 1874.77,
+      "end": 1878.63,
+      "duration": 3.86,
+      "text": "Minus 1/3 precisely cancels that."
+    },
+    {
+      "index": 433,
+      "start": 1878.63,
+      "end": 1884.45,
+      "duration": 5.82,
+      "text": "And so the calculation that goes into the third virial"
+    },
+    {
+      "index": 434,
+      "start": 1884.45,
+      "end": 1891.67,
+      "duration": 7.22,
+      "text": "coefficient ultimately will only depend on this one graph."
+    },
+    {
+      "index": 435,
+      "start": 1891.67,
+      "end": 1894.72,
+      "duration": 3.05,
+      "text": "And we had anticipated this before."
+    },
+    {
+      "index": 436,
+      "start": 1894.72,
+      "end": 1896.64,
+      "duration": 1.92,
+      "text": "When we were doing things previously"
+    },
+    {
+      "index": 437,
+      "start": 1896.64,
+      "end": 1899.88,
+      "duration": 3.24,
+      "text": "using the expansion of the partition function,"
+    },
+    {
+      "index": 438,
+      "start": 1899.88,
+      "end": 1903.27,
+      "duration": 3.39,
+      "text": "we saw that in this cumulant expansion,"
+    },
+    {
+      "index": 439,
+      "start": 1903.27,
+      "end": 1906.21,
+      "duration": 2.94,
+      "text": "only the cumulants were appearing."
+    },
+    {
+      "index": 440,
+      "start": 1906.21,
+      "end": 1908.36,
+      "duration": 2.15,
+      "text": "And for calculation of the cumulants,"
+    },
+    {
+      "index": 441,
+      "start": 1908.36,
+      "end": 1910.86,
+      "duration": 2.5,
+      "text": "I had to do lots of subtractions."
+    },
+    {
+      "index": 442,
+      "start": 1910.86,
+      "end": 1913.28,
+      "duration": 2.42,
+      "text": "And those subtractions were genetically"
+    },
+    {
+      "index": 443,
+      "start": 1913.28,
+      "end": 1920.88,
+      "duration": 7.6,
+      "text": "removing these one particle reducible graphs."
+    },
+    {
+      "index": 444,
+      "start": 1920.88,
+      "end": 1924.23,
+      "duration": 3.35,
+      "text": "And this continues to all orders."
+    },
+    {
+      "index": 445,
+      "start": 1924.23,
+      "end": 1930.28,
+      "duration": 6.05,
+      "text": "And the general formula is that the l-th contribution here"
+    },
+    {
+      "index": 446,
+      "start": 1930.28,
+      "end": 1937.06,
+      "duration": 6.78,
+      "text": "will be a factor of l minus 1 over l factorial, which is not"
+    },
+    {
+      "index": 447,
+      "start": 1937.06,
+      "end": 1939.75,
+      "duration": 2.69,
+      "text": "so difficult to get by following the procedures"
+    },
+    {
+      "index": 448,
+      "start": 1939.75,
+      "end": 1944.94,
+      "duration": 5.19,
+      "text": "that I have described over here, and then the part of bl that"
+    },
+    {
+      "index": 449,
+      "start": 1944.94,
+      "end": 1948.15,
+      "duration": 3.21,
+      "text": "is one particle irreducible."
+    },
+    {
+      "index": 450,
+      "start": 1953.36,
+      "end": 1958.6,
+      "duration": 5.24,
+      "text": "So this is the eventual result for how"
+    },
+    {
+      "index": 451,
+      "start": 1958.6,
+      "end": 1964.76,
+      "duration": 6.16,
+      "text": "you would be able, given some particular form of the two body"
+    },
+    {
+      "index": 452,
+      "start": 1964.76,
+      "end": 1971.12,
+      "duration": 6.36,
+      "text": "interaction, to calculate an expansion for pressure"
+    },
+    {
+      "index": 453,
+      "start": 1971.12,
+      "end": 1975.96,
+      "duration": 4.84,
+      "text": "in powers of density, how the coefficients of that expansion"
+    },
+    {
+      "index": 454,
+      "start": 1975.96,
+      "end": 1979.261,
+      "duration": 3.301,
+      "text": "are related to properties of this potential"
+    },
+    {
+      "index": 455,
+      "start": 1979.261,
+      "end": 1980.76,
+      "duration": 1.499,
+      "text": "through this diagrammatic expansion."
+    },
+    {
+      "index": 456,
+      "start": 1990.16,
+      "end": 1993.1,
+      "duration": 2.94,
+      "text": "So this is formally correct."
+    },
+    {
+      "index": 457,
+      "start": 1993.1,
+      "end": 1996.44,
+      "duration": 3.34,
+      "text": "And then the next question is, is it practical?"
+    },
+    {
+      "index": 458,
+      "start": 1996.44,
+      "end": 1998.38,
+      "duration": 1.94,
+      "text": "Is it useful?"
+    },
+    {
+      "index": 459,
+      "start": 1998.38,
+      "end": 2003.31,
+      "duration": 4.93,
+      "text": "So we need to start computing things to see something"
+    },
+    {
+      "index": 460,
+      "start": 2003.31,
+      "end": 2007.524,
+      "duration": 4.214,
+      "text": "about the usefulness of this series for some particular type"
+    },
+    {
+      "index": 461,
+      "start": 2007.524,
+      "end": 2008.065,
+      "duration": 0.541,
+      "text": "of potential."
+    },
+    {
+      "index": 462,
+      "start": 2011.06,
+      "end": 2014.79,
+      "duration": 3.73,
+      "text": "So we are going to look at the kind of potential"
+    },
+    {
+      "index": 463,
+      "start": 2014.79,
+      "end": 2017.37,
+      "duration": 2.58,
+      "text": "that I already described for you."
+    },
+    {
+      "index": 464,
+      "start": 2017.37,
+      "end": 2023.8,
+      "duration": 6.43,
+      "text": "That is, if I look at two particles in a gas that"
+    },
+    {
+      "index": 465,
+      "start": 2023.8,
+      "end": 2027.72,
+      "duration": 3.92,
+      "text": "are separated by an amount r-- let's"
+    },
+    {
+      "index": 466,
+      "start": 2027.72,
+      "end": 2030.63,
+      "duration": 2.91,
+      "text": "imagine the potential only depends"
+    },
+    {
+      "index": 467,
+      "start": 2030.63,
+      "end": 2034.58,
+      "duration": 3.95,
+      "text": "on the relative distance, not orientation or anything else."
+    },
+    {
+      "index": 468,
+      "start": 2034.58,
+      "end": 2037.61,
+      "duration": 3.03,
+      "text": "We said that basically, at large distances,"
+    },
+    {
+      "index": 469,
+      "start": 2037.61,
+      "end": 2042.08,
+      "duration": 4.47,
+      "text": "the potential is attractive because of van der Waals."
+    },
+    {
+      "index": 470,
+      "start": 2042.08,
+      "end": 2045.89,
+      "duration": 3.81,
+      "text": "At short distances, the potential is repulsive."
+    },
+    {
+      "index": 471,
+      "start": 2045.89,
+      "end": 2049.35,
+      "duration": 3.46,
+      "text": "And so you have a general form such as this."
+    },
+    {
+      "index": 472,
+      "start": 2052.9,
+      "end": 2055.61,
+      "duration": 2.71,
+      "text": "Now, if I want to do calculations,"
+    },
+    {
+      "index": 473,
+      "start": 2055.61,
+      "end": 2058.53,
+      "duration": 2.92,
+      "text": "it would be useful for me to have something"
+    },
+    {
+      "index": 474,
+      "start": 2058.53,
+      "end": 2062.07,
+      "duration": 3.54,
+      "text": "that I can do calculations exactly"
+    },
+    {
+      "index": 475,
+      "start": 2062.07,
+      "end": 2064.909,
+      "duration": 2.839,
+      "text": "with and get an estimate."
+    },
+    {
+      "index": 476,
+      "start": 2064.909,
+      "end": 2067.659,
+      "duration": 2.75,
+      "text": "So what I'm going to do is to replace that potential,"
+    },
+    {
+      "index": 477,
+      "start": 2067.659,
+      "end": 2071.13,
+      "duration": 3.471,
+      "text": "essentially, with a hard wall."
+    },
+    {
+      "index": 478,
+      "start": 2071.13,
+      "end": 2078.469,
+      "duration": 7.339,
+      "text": "So my approximation to the potential is that my v of r"
+    },
+    {
+      "index": 479,
+      "start": 2078.469,
+      "end": 2082.135,
+      "duration": 3.666,
+      "text": "is infinite for distances, separations"
+    },
+    {
+      "index": 480,
+      "start": 2082.135,
+      "end": 2085.06,
+      "duration": 2.925,
+      "text": "that are less than some r0."
+    },
+    {
+      "index": 481,
+      "start": 2085.06,
+      "end": 2088.48,
+      "duration": 3.42,
+      "text": "So basically, I define some kind of r0,"
+    },
+    {
+      "index": 482,
+      "start": 2088.48,
+      "end": 2092.389,
+      "duration": 3.909,
+      "text": "which is the-- if you think of them as billiard balls,"
+    },
+    {
+      "index": 483,
+      "start": 2092.389,
+      "end": 2096.38,
+      "duration": 3.991,
+      "text": "it's related to the closest distance of approach."
+    },
+    {
+      "index": 484,
+      "start": 2096.38,
+      "end": 2099.74,
+      "duration": 3.36,
+      "text": "This potential at large distances"
+    },
+    {
+      "index": 485,
+      "start": 2099.74,
+      "end": 2106.66,
+      "duration": 6.92,
+      "text": "has typical van der Waals form, by which"
+    },
+    {
+      "index": 486,
+      "start": 2106.66,
+      "end": 2110.58,
+      "duration": 3.92,
+      "text": "I mean it falls off as a function of separation"
+    },
+    {
+      "index": 487,
+      "start": 2110.58,
+      "end": 2113.18,
+      "duration": 2.6,
+      "text": "with the sixth power."
+    },
+    {
+      "index": 488,
+      "start": 2113.18,
+      "end": 2114.14,
+      "duration": 0.96,
+      "text": "It is attractive."
+    },
+    {
+      "index": 489,
+      "start": 2114.14,
+      "end": 2116.71,
+      "duration": 2.57,
+      "text": "So I put a minus sign here."
+    },
+    {
+      "index": 490,
+      "start": 2116.71,
+      "end": 2120.44,
+      "duration": 3.73,
+      "text": "In order to make sure that I get eventually the dimensions"
+    },
+    {
+      "index": 491,
+      "start": 2120.44,
+      "end": 2125.82,
+      "duration": 5.38,
+      "text": "right, the coefficient that goes here I write as r0 with a u0"
+    },
+    {
+      "index": 492,
+      "start": 2125.82,
+      "end": 2133.35,
+      "duration": 7.53,
+      "text": "up here such that if I assume that the potential is precisely"
+    },
+    {
+      "index": 493,
+      "start": 2133.35,
+      "end": 2142.87,
+      "duration": 9.52,
+      "text": "this for all r that are greater than r0, then"
+    },
+    {
+      "index": 494,
+      "start": 2142.87,
+      "end": 2147.41,
+      "duration": 4.54,
+      "text": "I'm replacing the actual potential"
+    },
+    {
+      "index": 495,
+      "start": 2147.41,
+      "end": 2150.71,
+      "duration": 3.3,
+      "text": "by something like this."
+    },
+    {
+      "index": 496,
+      "start": 2150.71,
+      "end": 2154.55,
+      "duration": 3.84,
+      "text": "And the minimum depth of potential"
+    },
+    {
+      "index": 497,
+      "start": 2154.55,
+      "end": 2158.01,
+      "duration": 3.46,
+      "text": "will occur at this cusp over here at minus u0."
+    },
+    {
+      "index": 498,
+      "start": 2168.19,
+      "end": 2173.09,
+      "duration": 4.9,
+      "text": "So why did I do that?"
+    },
+    {
+      "index": 499,
+      "start": 2173.09,
+      "end": 2176.41,
+      "duration": 3.32,
+      "text": "Because now I can calculate with that"
+    },
+    {
+      "index": 500,
+      "start": 2176.41,
+      "end": 2178.85,
+      "duration": 2.44,
+      "text": "what the second virial coefficient is."
+    },
+    {
+      "index": 501,
+      "start": 2178.85,
+      "end": 2181.87,
+      "duration": 3.02,
+      "text": "So what is B2?"
+    },
+    {
+      "index": 502,
+      "start": 2181.87,
+      "end": 2191.06,
+      "duration": 9.19,
+      "text": "B2 is minus 1/2 the integral of relative potential."
+    },
+    {
+      "index": 503,
+      "start": 2195.1,
+      "end": 2200.62,
+      "duration": 5.52,
+      "text": "Now this integral will take two parts"
+    },
+    {
+      "index": 504,
+      "start": 2200.62,
+      "end": 2204.8,
+      "duration": 4.18,
+      "text": "from these two different contributions."
+    },
+    {
+      "index": 505,
+      "start": 2204.8,
+      "end": 2210.05,
+      "duration": 5.25,
+      "text": "One part is when I'm in the regime where the particles are"
+    },
+    {
+      "index": 506,
+      "start": 2210.05,
+      "end": 2212.57,
+      "duration": 2.52,
+      "text": "excluded, the potential is infinity."
+    },
+    {
+      "index": 507,
+      "start": 2212.57,
+      "end": 2217.43,
+      "duration": 4.86,
+      "text": "And there, f is simply minus 1."
+    },
+    {
+      "index": 508,
+      "start": 2217.43,
+      "end": 2222.18,
+      "duration": 4.75,
+      "text": "So that minus 1 then gets integrated from 0 to r,"
+    },
+    {
+      "index": 509,
+      "start": 2222.18,
+      "end": 2224.7,
+      "duration": 2.52,
+      "text": "giving me the volume that is excluded."
+    },
+    {
+      "index": 510,
+      "start": 2224.7,
+      "end": 2227.75,
+      "duration": 3.05,
+      "text": "So what I will get here is a minus 1"
+    },
+    {
+      "index": 511,
+      "start": 2227.75,
+      "end": 2231.4,
+      "duration": 3.65,
+      "text": "times the excluded volume."
+    },
+    {
+      "index": 512,
+      "start": 2231.4,
+      "end": 2236.68,
+      "duration": 5.28,
+      "text": "That's the first part, where the volume is, of course,"
+    },
+    {
+      "index": 513,
+      "start": 2236.68,
+      "end": 2241.628,
+      "duration": 4.948,
+      "text": "4 pi over 3 r0 cubed for the volume of the sphere."
+    },
+    {
+      "index": 514,
+      "start": 2244.7,
+      "end": 2247.18,
+      "duration": 2.48,
+      "text": "And then I have to add the part where"
+    },
+    {
+      "index": 515,
+      "start": 2247.18,
+      "end": 2252.0,
+      "duration": 4.82,
+      "text": "I go from f0 all the way to infinity."
+    },
+    {
+      "index": 516,
+      "start": 2252.0,
+      "end": 2255.11,
+      "duration": 3.11,
+      "text": "The potential is vertically symmetric."
+    },
+    {
+      "index": 517,
+      "start": 2255.11,
+      "end": 2261.93,
+      "duration": 6.82,
+      "text": "So d cubed r becomes 4 pi r squared dr."
+    },
+    {
+      "index": 518,
+      "start": 2261.93,
+      "end": 2269.39,
+      "duration": 7.46,
+      "text": "And I have to integrate e to the minus"
+    },
+    {
+      "index": 519,
+      "start": 2269.39,
+      "end": 2272.7,
+      "duration": 3.31,
+      "text": "beta times the attractive part of the potential."
+    },
+    {
+      "index": 520,
+      "start": 2272.7,
+      "end": 2277.9,
+      "duration": 5.2,
+      "text": "So it's beta u0 r0 over r to the sixth minus 1."
+    },
+    {
+      "index": 521,
+      "start": 2283.39,
+      "end": 2286.78,
+      "duration": 3.39,
+      "text": "So what I will do, I will additionally"
+    },
+    {
+      "index": 522,
+      "start": 2286.78,
+      "end": 2291.28,
+      "duration": 4.5,
+      "text": "assume that I'm in the range of parameters"
+    },
+    {
+      "index": 523,
+      "start": 2291.28,
+      "end": 2296.2,
+      "duration": 4.92,
+      "text": "where this beta u0 is much less than 1,"
+    },
+    {
+      "index": 524,
+      "start": 2296.2,
+      "end": 2299.84,
+      "duration": 3.64,
+      "text": "that is, at temperatures that are higher"
+    },
+    {
+      "index": 525,
+      "start": 2299.84,
+      "end": 2302.88,
+      "duration": 3.04,
+      "text": "compared to the depth of this potential converted"
+    },
+    {
+      "index": 526,
+      "start": 2302.88,
+      "end": 2304.91,
+      "duration": 2.03,
+      "text": "to units of kT."
+    },
+    {
+      "index": 527,
+      "start": 2304.91,
+      "end": 2309.01,
+      "duration": 4.1,
+      "text": "And if that is the case, then I can expand this."
+    },
+    {
+      "index": 528,
+      "start": 2309.01,
+      "end": 2311.7,
+      "duration": 2.69,
+      "text": "And the expansion to the lowest order"
+    },
+    {
+      "index": 529,
+      "start": 2311.7,
+      "end": 2317.38,
+      "duration": 5.68,
+      "text": "will simply give me beta u0 r0 over r to the sixth power."
+    },
+    {
+      "index": 530,
+      "start": 2317.38,
+      "end": 2320.485,
+      "duration": 3.105,
+      "text": "And I will ignore higher order terms."
+    },
+    {
+      "index": 531,
+      "start": 2320.485,
+      "end": 2324.82,
+      "duration": 4.335,
+      "text": "So this, if you like, is order of beta u0 squared."
+    },
+    {
+      "index": 532,
+      "start": 2329.57,
+      "end": 2334.53,
+      "duration": 4.96,
+      "text": "Now, having done that, then the second integral becomes simple."
+    },
+    {
+      "index": 533,
+      "start": 2334.53,
+      "end": 2336.7,
+      "duration": 2.17,
+      "text": "Because I have to integrate r squared"
+    },
+    {
+      "index": 534,
+      "start": 2336.7,
+      "end": 2341.33,
+      "duration": 4.63,
+      "text": "divided by r to the fourth, which is r to the minus 4."
+    },
+    {
+      "index": 535,
+      "start": 2341.33,
+      "end": 2349.32,
+      "duration": 7.99,
+      "text": "Integral of r to the minus 4 gives me r to the minus 3."
+    },
+    {
+      "index": 536,
+      "start": 2349.32,
+      "end": 2353.02,
+      "duration": 3.7,
+      "text": "And then there's a factor of minus 1/3 from the integration."
+    },
+    {
+      "index": 537,
+      "start": 2353.02,
+      "end": 2358.28,
+      "duration": 5.26,
+      "text": "It has to be evaluated between 0 and infinity."
+    },
+    {
+      "index": 538,
+      "start": 2358.28,
+      "end": 2366.04,
+      "duration": 7.76,
+      "text": "And so the final answer, then, for B2 is minus 1/2."
+    },
+    {
+      "index": 539,
+      "start": 2366.04,
+      "end": 2372.211,
+      "duration": 6.171,
+      "text": "I have minus 4 pi over 3 r0 cubed from the excluded volume"
+    },
+    {
+      "index": 540,
+      "start": 2372.211,
+      "end": 2372.71,
+      "duration": 0.499,
+      "text": "part."
+    },
+    {
+      "index": 541,
+      "start": 2375.85,
+      "end": 2389.18,
+      "duration": 13.33,
+      "text": "From here, I will get a 4 pi beta u0 r0 to the sixth."
+    },
+    {
+      "index": 542,
+      "start": 2392.7,
+      "end": 2397.13,
+      "duration": 4.43,
+      "text": "And then I will get this factor of r the minus 3"
+    },
+    {
+      "index": 543,
+      "start": 2397.13,
+      "end": 2399.5,
+      "duration": 2.37,
+      "text": "over 3 evaluated between infinity,"
+    },
+    {
+      "index": 544,
+      "start": 2399.5,
+      "end": 2405.74,
+      "duration": 6.24,
+      "text": "which gives me 0 and r0."
+    },
+    {
+      "index": 545,
+      "start": 2413.72,
+      "end": 2416.53,
+      "duration": 2.81,
+      "text": "So you can see that with this potential, actually"
+    },
+    {
+      "index": 546,
+      "start": 2416.53,
+      "end": 2422.9,
+      "duration": 6.37,
+      "text": "both terms are proportional to 4 pi r0 cubed over 3."
+    },
+    {
+      "index": 547,
+      "start": 2422.9,
+      "end": 2429.2,
+      "duration": 6.3,
+      "text": "And so I can write the answer as minus omega over 2"
+    },
+    {
+      "index": 548,
+      "start": 2429.2,
+      "end": 2433.76,
+      "duration": 4.56,
+      "text": "where I have defined omega to be this 4 pi r0 cubed"
+    },
+    {
+      "index": 549,
+      "start": 2433.76,
+      "end": 2436.505,
+      "duration": 2.745,
+      "text": "over 3, which is the excluded volume."
+    },
+    {
+      "index": 550,
+      "start": 2439.24,
+      "end": 2446.404,
+      "duration": 7.164,
+      "text": "Basically, it's the volume that is excluded from exploration"
+    },
+    {
+      "index": 551,
+      "start": 2446.404,
+      "end": 2447.57,
+      "duration": 1.166,
+      "text": "when you have two particles."
+    },
+    {
+      "index": 552,
+      "start": 2447.57,
+      "end": 2452.9,
+      "duration": 5.33,
+      "text": "Because their center of mass cannot come as close as r0."
+    },
+    {
+      "index": 553,
+      "start": 2452.9,
+      "end": 2458.33,
+      "duration": 5.43,
+      "text": "So that 1/2 appears here as 1."
+    },
+    {
+      "index": 554,
+      "start": 2458.33,
+      "end": 2461.81,
+      "duration": 3.48,
+      "text": "Because I already took care of that."
+    },
+    {
+      "index": 555,
+      "start": 2461.81,
+      "end": 2465.4,
+      "duration": 3.59,
+      "text": "This rest of the coefficients are proportional to this"
+    },
+    {
+      "index": 556,
+      "start": 2465.4,
+      "end": 2468.69,
+      "duration": 3.29,
+      "text": "except with a factor of minus beta u0."
+    },
+    {
+      "index": 557,
+      "start": 2468.69,
+      "end": 2472.28,
+      "duration": 3.59,
+      "text": "So I get minus beta u0."
+    },
+    {
+      "index": 558,
+      "start": 2472.28,
+      "end": 2479.351,
+      "duration": 7.071,
+      "text": "So this is your second virial coefficient for this."
+    },
+    {
+      "index": 559,
+      "start": 2479.351,
+      "end": 2481.1,
+      "duration": 1.749,
+      "text": "AUDIENCE: It should be positive out front."
+    },
+    {
+      "index": 560,
+      "start": 2481.1,
+      "end": 2481.849,
+      "duration": 0.749,
+      "text": "PROFESSOR: Pardon?"
+    },
+    {
+      "index": 561,
+      "start": 2481.849,
+      "end": 2486.544,
+      "duration": 4.695,
+      "text": "AUDIENCE: It should be positive out front, [INAUDIBLE]?"
+    },
+    {
+      "index": 562,
+      "start": 2486.544,
+      "end": 2488.516,
+      "duration": 1.972,
+      "text": "PROFESSOR: Yes, because there was a minus,"
+    },
+    {
+      "index": 563,
+      "start": 2488.516,
+      "end": 2489.502,
+      "duration": 0.986,
+      "text": "and there's a minus."
+    },
+    {
+      "index": 564,
+      "start": 2489.502,
+      "end": 2490.488,
+      "duration": 0.986,
+      "text": "There's a plus."
+    },
+    {
+      "index": 565,
+      "start": 2510.701,
+      "end": 2511.687,
+      "duration": 0.986,
+      "text": "Let's keep that."
+    },
+    {
+      "index": 566,
+      "start": 2520.62,
+      "end": 2525.62,
+      "duration": 5.0,
+      "text": "So what we have so far, we've said"
+    },
+    {
+      "index": 567,
+      "start": 2525.62,
+      "end": 2531.94,
+      "duration": 6.32,
+      "text": "that beta times the pressure starts with ideal gas behavior"
+    },
+    {
+      "index": 568,
+      "start": 2531.94,
+      "end": 2533.644,
+      "duration": 1.704,
+      "text": "n."
+    },
+    {
+      "index": 569,
+      "start": 2533.644,
+      "end": 2537.44,
+      "duration": 3.796,
+      "text": "And then I have the next correction,"
+    },
+    {
+      "index": 570,
+      "start": 2537.44,
+      "end": 2542.86,
+      "duration": 5.42,
+      "text": "which is this B2 multiplying n squared."
+    },
+    {
+      "index": 571,
+      "start": 2542.86,
+      "end": 2547.97,
+      "duration": 5.11,
+      "text": "So I will have n squared times this coefficient"
+    },
+    {
+      "index": 572,
+      "start": 2547.97,
+      "end": 2551.07,
+      "duration": 3.1,
+      "text": "that I have calculated for this type of gas, which"
+    },
+    {
+      "index": 573,
+      "start": 2551.07,
+      "end": 2554.71,
+      "duration": 3.64,
+      "text": "is omega over 2 1 minus beta u0."
+    },
+    {
+      "index": 574,
+      "start": 2554.71,
+      "end": 2557.54,
+      "duration": 2.83,
+      "text": "And presumably there are higher order terms in this."
+    },
+    {
+      "index": 575,
+      "start": 2562.86,
+      "end": 2567.84,
+      "duration": 4.98,
+      "text": "So whenever you see something like this,"
+    },
+    {
+      "index": 576,
+      "start": 2567.84,
+      "end": 2571.76,
+      "duration": 3.92,
+      "text": "then you have to start thinking about,"
+    },
+    {
+      "index": 577,
+      "start": 2571.76,
+      "end": 2575.68,
+      "duration": 3.92,
+      "text": "is this a good expansion?"
+    },
+    {
+      "index": 578,
+      "start": 2575.68,
+      "end": 2579.69,
+      "duration": 4.01,
+      "text": "So let's think about how this expansion could"
+    },
+    {
+      "index": 579,
+      "start": 2579.69,
+      "end": 2580.79,
+      "duration": 1.1,
+      "text": "have become problematic."
+    },
+    {
+      "index": 580,
+      "start": 2583.69,
+      "end": 2588.85,
+      "duration": 5.16,
+      "text": "Actually, there is already one thing that I should have noted"
+    },
+    {
+      "index": 581,
+      "start": 2588.85,
+      "end": 2597.79,
+      "duration": 8.94,
+      "text": "and I didn't, which is short versus long range potential."
+    },
+    {
+      "index": 582,
+      "start": 2601.89,
+      "end": 2605.68,
+      "duration": 3.79,
+      "text": "Now, it was nice for this potential"
+    },
+    {
+      "index": 583,
+      "start": 2605.68,
+      "end": 2609.46,
+      "duration": 3.78,
+      "text": "that I got an answer that was in the form"
+    },
+    {
+      "index": 584,
+      "start": 2609.46,
+      "end": 2613.44,
+      "duration": 3.98,
+      "text": "that I could write down, factor out omega."
+    },
+    {
+      "index": 585,
+      "start": 2613.44,
+      "end": 2615.57,
+      "duration": 2.13,
+      "text": "You can say, well, would you have always"
+    },
+    {
+      "index": 586,
+      "start": 2615.57,
+      "end": 2618.63,
+      "duration": 3.06,
+      "text": "been able to do something similar to that?"
+    },
+    {
+      "index": 587,
+      "start": 2618.63,
+      "end": 2620.63,
+      "duration": 2.0,
+      "text": "Because you see, ultimately what this"
+    },
+    {
+      "index": 588,
+      "start": 2620.63,
+      "end": 2627.95,
+      "duration": 7.32,
+      "text": "says is that in order for all of these terms in this expansion"
+    },
+    {
+      "index": 589,
+      "start": 2627.95,
+      "end": 2634.56,
+      "duration": 6.61,
+      "text": "to be dimensionally correct, the next term is a density,"
+    },
+    {
+      "index": 590,
+      "start": 2634.56,
+      "end": 2637.21,
+      "duration": 2.65,
+      "text": "has dimensions of inverse volume,"
+    },
+    {
+      "index": 591,
+      "start": 2637.21,
+      "end": 2638.72,
+      "duration": 1.51,
+      "text": "density squared compared to this."
+    },
+    {
+      "index": 592,
+      "start": 2638.72,
+      "end": 2642.78,
+      "duration": 4.06,
+      "text": "So it should be compensated by some factor of volume."
+    },
+    {
+      "index": 593,
+      "start": 2642.78,
+      "end": 2645.53,
+      "duration": 2.75,
+      "text": "And we can see that this factor of volume"
+    },
+    {
+      "index": 594,
+      "start": 2645.53,
+      "end": 2648.25,
+      "duration": 2.72,
+      "text": "came from something that was of the order"
+    },
+    {
+      "index": 595,
+      "start": 2648.25,
+      "end": 2652.986,
+      "duration": 4.736,
+      "text": "of this size of the molecule, this r0."
+    },
+    {
+      "index": 596,
+      "start": 2652.986,
+      "end": 2656.86,
+      "duration": 3.874,
+      "text": "OK, so it's interesting."
+    },
+    {
+      "index": 597,
+      "start": 2656.86,
+      "end": 2660.83,
+      "duration": 3.97,
+      "text": "It says that it's really the short-range part"
+    },
+    {
+      "index": 598,
+      "start": 2660.83,
+      "end": 2666.77,
+      "duration": 5.94,
+      "text": "of the potential that seems to be setting the correction."
+    },
+    {
+      "index": 599,
+      "start": 2666.77,
+      "end": 2669.5,
+      "duration": 2.73,
+      "text": "Now, where did that come from?"
+    },
+    {
+      "index": 600,
+      "start": 2669.5,
+      "end": 2671.67,
+      "duration": 2.17,
+      "text": "Well, there was one place that I had"
+    },
+    {
+      "index": 601,
+      "start": 2671.67,
+      "end": 2674.92,
+      "duration": 3.25,
+      "text": "to do an integration over the potential."
+    },
+    {
+      "index": 602,
+      "start": 2674.92,
+      "end": 2676.85,
+      "duration": 1.93,
+      "text": "And I found that the integration was"
+    },
+    {
+      "index": 603,
+      "start": 2676.85,
+      "end": 2680.876,
+      "duration": 4.026,
+      "text": "dominated by the lower range."
+    },
+    {
+      "index": 604,
+      "start": 2680.876,
+      "end": 2683.71,
+      "duration": 2.834,
+      "text": "That was over here."
+    },
+    {
+      "index": 605,
+      "start": 2683.71,
+      "end": 2685.395,
+      "duration": 1.685,
+      "text": "Where would this become difficult?"
+    },
+    {
+      "index": 606,
+      "start": 2689.454,
+      "end": 2692.3,
+      "duration": 2.846,
+      "text": "AUDIENCE: In a small box?"
+    },
+    {
+      "index": 607,
+      "start": 2692.3,
+      "end": 2693.876,
+      "duration": 1.576,
+      "text": "PROFESSOR: In a small box, but we"
+    },
+    {
+      "index": 608,
+      "start": 2693.876,
+      "end": 2696.05,
+      "duration": 2.174,
+      "text": "are always taking the thermodynamic limit"
+    },
+    {
+      "index": 609,
+      "start": 2696.05,
+      "end": 2697.721,
+      "duration": 1.671,
+      "text": "where V goes to infinity."
+    },
+    {
+      "index": 610,
+      "start": 2697.721,
+      "end": 2699.685,
+      "duration": 1.964,
+      "text": "AUDIENCE: Or inverse square log?"
+    },
+    {
+      "index": 611,
+      "start": 2699.685,
+      "end": 2701.79,
+      "duration": 2.105,
+      "text": "PROFESSOR: Inverse square log, yes, that's right."
+    },
+    {
+      "index": 612,
+      "start": 2701.79,
+      "end": 2705.09,
+      "duration": 3.3,
+      "text": "So who says that this integral should converge?"
+    },
+    {
+      "index": 613,
+      "start": 2705.09,
+      "end": 2710.76,
+      "duration": 5.67,
+      "text": "I'm doing an integral d cubed r, something like v of r."
+    },
+    {
+      "index": 614,
+      "start": 2710.76,
+      "end": 2714.24,
+      "duration": 3.48,
+      "text": "And convergence was the reason why this integral"
+    },
+    {
+      "index": 615,
+      "start": 2714.24,
+      "end": 2716.695,
+      "duration": 2.455,
+      "text": "was dominated by short distance."
+    },
+    {
+      "index": 616,
+      "start": 2716.695,
+      "end": 2722.49,
+      "duration": 5.795,
+      "text": "If this potential goes like 1 over r cubed,"
+    },
+    {
+      "index": 617,
+      "start": 2722.49,
+      "end": 2726.05,
+      "duration": 3.56,
+      "text": "then it will logarithmically depend on the size of the box."
+    },
+    {
+      "index": 618,
+      "start": 2726.05,
+      "end": 2729.32,
+      "duration": 3.27,
+      "text": "For Coulomb interaction, 1/r potential"
+    },
+    {
+      "index": 619,
+      "start": 2729.32,
+      "end": 2730.94,
+      "duration": 1.62,
+      "text": "you can't even think about it."
+    },
+    {
+      "index": 620,
+      "start": 2730.94,
+      "end": 2734.03,
+      "duration": 3.09,
+      "text": "It's just too divergent."
+    },
+    {
+      "index": 621,
+      "start": 2734.03,
+      "end": 2738.64,
+      "duration": 4.61,
+      "text": "So this expansion will fail for potentials"
+    },
+    {
+      "index": 622,
+      "start": 2738.64,
+      "end": 2743.3,
+      "duration": 4.66,
+      "text": "that have tails that are decaying as 1"
+    },
+    {
+      "index": 623,
+      "start": 2743.3,
+      "end": 2746.68,
+      "duration": 3.38,
+      "text": "over r cubed or even slower."
+    },
+    {
+      "index": 624,
+      "start": 2746.68,
+      "end": 2750.67,
+      "duration": 3.99,
+      "text": "Fortunately, that's not the case for van der Waals'"
+    },
+    {
+      "index": 625,
+      "start": 2750.67,
+      "end": 2753.32,
+      "duration": 2.65,
+      "text": "potential and typical potentials."
+    },
+    {
+      "index": 626,
+      "start": 2753.32,
+      "end": 2756.1,
+      "duration": 2.78,
+      "text": "But if you have a plasma, you have to worry about this."
+    },
+    {
+      "index": 627,
+      "start": 2756.1,
+      "end": 2758.61,
+      "duration": 2.51,
+      "text": "And that's why I was also saying last time"
+    },
+    {
+      "index": 628,
+      "start": 2758.61,
+      "end": 2761.597,
+      "duration": 2.987,
+      "text": "that the typical expansions that you have to do for plasmas"
+    },
+    {
+      "index": 629,
+      "start": 2761.597,
+      "end": 2762.18,
+      "duration": 0.583,
+      "text": "are different."
+    },
+    {
+      "index": 630,
+      "start": 2764.93,
+      "end": 2770.05,
+      "duration": 5.12,
+      "text": "So given that we are dominated by the short range,"
+    },
+    {
+      "index": 631,
+      "start": 2770.05,
+      "end": 2774.38,
+      "duration": 4.33,
+      "text": "what is the correction that I've obtained"
+    },
+    {
+      "index": 632,
+      "start": 2774.38,
+      "end": 2776.51,
+      "duration": 2.13,
+      "text": "compared to the first term?"
+    },
+    {
+      "index": 633,
+      "start": 2776.51,
+      "end": 2779.915,
+      "duration": 3.405,
+      "text": "So essentially, I have calculated a second order term"
+    },
+    {
+      "index": 634,
+      "start": 2779.915,
+      "end": 2783.45,
+      "duration": 3.535,
+      "text": "that is of the order of this divided by the first order"
+    },
+    {
+      "index": 635,
+      "start": 2783.45,
+      "end": 2785.94,
+      "duration": 2.49,
+      "text": "term and pressure that was density."
+    },
+    {
+      "index": 636,
+      "start": 2785.94,
+      "end": 2791.02,
+      "duration": 5.08,
+      "text": "And we find that this is of the order of n omega."
+    },
+    {
+      "index": 637,
+      "start": 2791.02,
+      "end": 2796.81,
+      "duration": 5.79,
+      "text": "How many particles are within the range of interaction?"
+    },
+    {
+      "index": 638,
+      "start": 2796.81,
+      "end": 2804.72,
+      "duration": 7.91,
+      "text": "And this would be kind of like the ratio"
+    },
+    {
+      "index": 639,
+      "start": 2804.72,
+      "end": 2813.39,
+      "duration": 8.67,
+      "text": "of the density of liquid to the density of gas."
+    },
+    {
+      "index": 640,
+      "start": 2813.39,
+      "end": 2819.648,
+      "duration": 6.258,
+      "text": "Because the density of liquid would be related-- oh,"
+    },
+    {
+      "index": 641,
+      "start": 2819.648,
+      "end": 2820.731,
+      "duration": 1.083,
+      "text": "it's the other way around."
+    },
+    {
+      "index": 642,
+      "start": 2824.03,
+      "end": 2829.26,
+      "duration": 5.23,
+      "text": "The density of liquid would be 1 over the volume"
+    },
+    {
+      "index": 643,
+      "start": 2829.26,
+      "end": 2830.86,
+      "duration": 1.6,
+      "text": "that one particle occupies."
+    },
+    {
+      "index": 644,
+      "start": 2830.86,
+      "end": 2835.41,
+      "duration": 4.55,
+      "text": "So the density of liquid would go in the denominator."
+    },
+    {
+      "index": 645,
+      "start": 2835.41,
+      "end": 2844.02,
+      "duration": 8.61,
+      "text": "The density of gas is this n that I have over here."
+    },
+    {
+      "index": 646,
+      "start": 2844.02,
+      "end": 2846.42,
+      "duration": 2.4,
+      "text": "And again, for the gas in this room,"
+    },
+    {
+      "index": 647,
+      "start": 2846.42,
+      "end": 2849.98,
+      "duration": 3.56,
+      "text": "this ratio is of the order of 10 to the minus 3."
+    },
+    {
+      "index": 648,
+      "start": 2849.98,
+      "end": 2851.78,
+      "duration": 1.8,
+      "text": "And we are safe."
+    },
+    {
+      "index": 649,
+      "start": 2851.78,
+      "end": 2855.3,
+      "duration": 3.52,
+      "text": "But if I were to start compressing this"
+    },
+    {
+      "index": 650,
+      "start": 2855.3,
+      "end": 2858.5,
+      "duration": 3.2,
+      "text": "so that I go to higher and higher densities,"
+    },
+    {
+      "index": 651,
+      "start": 2858.5,
+      "end": 2861.69,
+      "duration": 3.19,
+      "text": "ultimately I say that this second order term becomes"
+    },
+    {
+      "index": 652,
+      "start": 2861.69,
+      "end": 2863.3,
+      "duration": 1.61,
+      "text": "of the order of the first order term."
+    },
+    {
+      "index": 653,
+      "start": 2863.3,
+      "end": 2865.73,
+      "duration": 2.43,
+      "text": "And then perturbation doesn't make sense."
+    },
+    {
+      "index": 654,
+      "start": 2865.73,
+      "end": 2869.43,
+      "duration": 3.7,
+      "text": "Naturally, the reason for that is I haven't calculated."
+    },
+    {
+      "index": 655,
+      "start": 2869.43,
+      "end": 2871.53,
+      "duration": 2.1,
+      "text": "But typically what you find is that if you"
+    },
+    {
+      "index": 656,
+      "start": 2871.53,
+      "end": 2873.36,
+      "duration": 1.83,
+      "text": "go to higher and higher order terms"
+    },
+    {
+      "index": 657,
+      "start": 2873.36,
+      "end": 2877.4,
+      "duration": 4.04,
+      "text": "in the series, in most cases, but clearly not in all cases,"
+    },
+    {
+      "index": 658,
+      "start": 2877.4,
+      "end": 2881.22,
+      "duration": 3.82,
+      "text": "the ratio of successive terms is more or less"
+    },
+    {
+      "index": 659,
+      "start": 2881.22,
+      "end": 2883.99,
+      "duration": 2.77,
+      "text": "set by the ratio of the first terms."
+    },
+    {
+      "index": 660,
+      "start": 2883.99,
+      "end": 2886.77,
+      "duration": 2.78,
+      "text": "It has to be dimensionally correct."
+    },
+    {
+      "index": 661,
+      "start": 2886.77,
+      "end": 2889.17,
+      "duration": 2.4,
+      "text": "And we've established that the typical dimension that"
+    },
+    {
+      "index": 662,
+      "start": 2889.17,
+      "end": 2895.45,
+      "duration": 6.28,
+      "text": "is controlling everything is the volume of the particle."
+    },
+    {
+      "index": 663,
+      "start": 2895.45,
+      "end": 2900.59,
+      "duration": 5.14,
+      "text": "So this expansion will fail for long range potentials,"
+    },
+    {
+      "index": 664,
+      "start": 2900.59,
+      "end": 2903.98,
+      "duration": 3.39,
+      "text": "for going to liquid-like densities."
+    },
+    {
+      "index": 665,
+      "start": 2903.98,
+      "end": 2907.57,
+      "duration": 3.59,
+      "text": "But also I made another thing, which"
+    },
+    {
+      "index": 666,
+      "start": 2907.57,
+      "end": 2910.54,
+      "duration": 2.97,
+      "text": "is that I assumed that that could expand this exponential."
+    },
+    {
+      "index": 667,
+      "start": 2913.14,
+      "end": 2915.82,
+      "duration": 2.68,
+      "text": "And then in principle, there are other difficulties"
+    },
+    {
+      "index": 668,
+      "start": 2915.82,
+      "end": 2920.07,
+      "duration": 4.25,
+      "text": "that could arise if this condition that I wrote here"
+    },
+    {
+      "index": 669,
+      "start": 2920.07,
+      "end": 2921.08,
+      "duration": 1.01,
+      "text": "is violated."
+    },
+    {
+      "index": 670,
+      "start": 2921.08,
+      "end": 2926.08,
+      "duration": 5.0,
+      "text": "If beta u0 is greater than 1, then this coefficient by itself"
+    },
+    {
+      "index": 671,
+      "start": 2926.08,
+      "end": 2929.18,
+      "duration": 3.1,
+      "text": "becomes large exponentially."
+    },
+    {
+      "index": 672,
+      "start": 2929.18,
+      "end": 2933.16,
+      "duration": 3.98,
+      "text": "And then you would expect that higher order terms will also"
+    },
+    {
+      "index": 673,
+      "start": 2933.16,
+      "end": 2936.35,
+      "duration": 3.19,
+      "text": "get more factors of this exponential and potential."
+    },
+    {
+      "index": 674,
+      "start": 2936.35,
+      "end": 2938.13,
+      "duration": 1.78,
+      "text": "And things will blow up on you."
+    },
+    {
+      "index": 675,
+      "start": 2938.13,
+      "end": 2941.39,
+      "duration": 3.26,
+      "text": "So it will also have difficulties"
+    },
+    {
+      "index": 676,
+      "start": 2941.39,
+      "end": 2946.55,
+      "duration": 5.16,
+      "text": "at low temperatures for attractive potentials."
+    },
+    {
+      "index": 677,
+      "start": 2950.4,
+      "end": 2953.01,
+      "duration": 2.61,
+      "text": "Again, the reason for that is obvious."
+    },
+    {
+      "index": 678,
+      "start": 2953.01,
+      "end": 2955.32,
+      "duration": 2.31,
+      "text": "If you have an attractive potential,"
+    },
+    {
+      "index": 679,
+      "start": 2955.32,
+      "end": 2957.38,
+      "duration": 2.06,
+      "text": "you go to low enough temperature,"
+    },
+    {
+      "index": 680,
+      "start": 2957.38,
+      "end": 2960.33,
+      "duration": 2.95,
+      "text": "and the ground state is everybody sticking together--"
+    },
+    {
+      "index": 681,
+      "start": 2960.33,
+      "end": 2965.56,
+      "duration": 5.23,
+      "text": "looks nothing like a gas, looks like a solid or something."
+    },
+    {
+      "index": 682,
+      "start": 2965.56,
+      "end": 2968.17,
+      "duration": 2.61,
+      "text": "So these are the kind of limitations"
+    },
+    {
+      "index": 683,
+      "start": 2968.17,
+      "end": 2969.667,
+      "duration": 1.497,
+      "text": "that one has in this series."
+    },
+    {
+      "index": 684,
+      "start": 2994.06,
+      "end": 3001.65,
+      "duration": 7.59,
+      "text": "OK, let's be brave and do some more"
+    },
+    {
+      "index": 685,
+      "start": 3001.65,
+      "end": 3003.5,
+      "duration": 1.85,
+      "text": "rearrangements of this equation."
+    },
+    {
+      "index": 686,
+      "start": 3003.5,
+      "end": 3006.11,
+      "duration": 2.61,
+      "text": "So I have that to this order, beta P"
+    },
+    {
+      "index": 687,
+      "start": 3006.11,
+      "end": 3010.93,
+      "duration": 4.82,
+      "text": "is n plus n squared this excluded"
+    },
+    {
+      "index": 688,
+      "start": 3010.93,
+      "end": 3014.68,
+      "duration": 3.75,
+      "text": "volume over 2 1 minus beta u0."
+    },
+    {
+      "index": 689,
+      "start": 3017.87,
+      "end": 3022.43,
+      "duration": 4.56,
+      "text": "And then there's higher order terms of course."
+    },
+    {
+      "index": 690,
+      "start": 3022.43,
+      "end": 3025.8,
+      "duration": 3.37,
+      "text": "And then I notice that there are two terms on this equation that"
+    },
+    {
+      "index": 691,
+      "start": 3025.8,
+      "end": 3027.86,
+      "duration": 2.06,
+      "text": "are proportional to beta."
+    },
+    {
+      "index": 692,
+      "start": 3027.86,
+      "end": 3030.68,
+      "duration": 2.82,
+      "text": "And I say, why not put both of them together?"
+    },
+    {
+      "index": 693,
+      "start": 3030.68,
+      "end": 3032.65,
+      "duration": 1.97,
+      "text": "So I will have beta."
+    },
+    {
+      "index": 694,
+      "start": 3032.65,
+      "end": 3034.91,
+      "duration": 2.26,
+      "text": "Bring that term to this side, and it"
+    },
+    {
+      "index": 695,
+      "start": 3034.91,
+      "end": 3042.8,
+      "duration": 7.89,
+      "text": "becomes P plus n squared omega over 2 u0."
+    },
+    {
+      "index": 696,
+      "start": 3045.42,
+      "end": 3048.51,
+      "duration": 3.09,
+      "text": "And then what is left on the other side?"
+    },
+    {
+      "index": 697,
+      "start": 3048.51,
+      "end": 3049.95,
+      "duration": 1.44,
+      "text": "Let's factor out the n."
+    },
+    {
+      "index": 698,
+      "start": 3049.95,
+      "end": 3053.65,
+      "duration": 3.7,
+      "text": "I expect this to be a series in higher and higher powers of n."
+    },
+    {
+      "index": 699,
+      "start": 3053.65,
+      "end": 3056.42,
+      "duration": 2.77,
+      "text": "And the first correction to 1 comes"
+    },
+    {
+      "index": 700,
+      "start": 3056.42,
+      "end": 3059.13,
+      "duration": 2.71,
+      "text": "from here, which is n omega over 2."
+    },
+    {
+      "index": 701,
+      "start": 3059.13,
+      "end": 3061.55,
+      "duration": 2.42,
+      "text": "And I expect there to be higher order terms."
+    },
+    {
+      "index": 702,
+      "start": 3073.83,
+      "end": 3078.66,
+      "duration": 4.83,
+      "text": "Now again, to order of n squared that I have calculated things"
+    },
+    {
+      "index": 703,
+      "start": 3078.66,
+      "end": 3082.31,
+      "duration": 3.65,
+      "text": "correctly, this expression is no different"
+    },
+    {
+      "index": 704,
+      "start": 3082.31,
+      "end": 3087.87,
+      "duration": 5.56,
+      "text": "from the following expression-- 1 minus n omega over 2."
+    },
+    {
+      "index": 705,
+      "start": 3087.87,
+      "end": 3091.91,
+      "duration": 4.04,
+      "text": "Again, there will be higher order terms in n."
+    },
+    {
+      "index": 706,
+      "start": 3091.91,
+      "end": 3095.1,
+      "duration": 3.19,
+      "text": "But the order of n squared, both of these equations,"
+    },
+    {
+      "index": 707,
+      "start": 3095.1,
+      "end": 3096.325,
+      "duration": 1.225,
+      "text": "expressions, are equivalent."
+    },
+    {
+      "index": 708,
+      "start": 3101.22,
+      "end": 3106.74,
+      "duration": 5.52,
+      "text": "So if I now ignore higher order terms,"
+    },
+    {
+      "index": 709,
+      "start": 3106.74,
+      "end": 3114.7,
+      "duration": 7.96,
+      "text": "this whole thing is equivalent to P plus n squared u--"
+    },
+    {
+      "index": 710,
+      "start": 3114.7,
+      "end": 3117.79,
+      "duration": 3.09,
+      "text": "well, let's write this in the following fashion-- p"
+    },
+    {
+      "index": 711,
+      "start": 3117.79,
+      "end": 3125.22,
+      "duration": 7.43,
+      "text": "plus u0 omega over 2 N over V, which is density squared."
+    },
+    {
+      "index": 712,
+      "start": 3127.79,
+      "end": 3133.35,
+      "duration": 5.56,
+      "text": "And actually this side, if I were to multiply by V,"
+    },
+    {
+      "index": 713,
+      "start": 3133.35,
+      "end": 3134.86,
+      "duration": 1.51,
+      "text": "what do I get?"
+    },
+    {
+      "index": 714,
+      "start": 3134.86,
+      "end": 3140.055,
+      "duration": 5.195,
+      "text": "This becomes numerator V, denominator V minus N"
+    },
+    {
+      "index": 715,
+      "start": 3140.055,
+      "end": 3141.71,
+      "duration": 1.655,
+      "text": "omega over 2."
+    },
+    {
+      "index": 716,
+      "start": 3141.71,
+      "end": 3147.84,
+      "duration": 6.13,
+      "text": "Let's multiply by V minus N omega over 2."
+    },
+    {
+      "index": 717,
+      "start": 3147.84,
+      "end": 3152.9,
+      "duration": 5.06,
+      "text": "And the right-hand side will be--"
+    },
+    {
+      "index": 718,
+      "start": 3152.9,
+      "end": 3156.81,
+      "duration": 3.91,
+      "text": "AUDIENCE: Is that where it should be there?"
+    },
+    {
+      "index": 719,
+      "start": 3156.81,
+      "end": 3157.866,
+      "duration": 1.056,
+      "text": "PROFESSOR: What happened?"
+    },
+    {
+      "index": 720,
+      "start": 3157.866,
+      "end": 3160.346,
+      "duration": 2.48,
+      "text": "AUDIENCE: This one, [INAUDIBLE]."
+    },
+    {
+      "index": 721,
+      "start": 3165.802,
+      "end": 3172.86,
+      "duration": 7.058,
+      "text": "PROFESSOR: Yes, so if I multiply this, which is N over V, by V,"
+    },
+    {
+      "index": 722,
+      "start": 3172.86,
+      "end": 3176.92,
+      "duration": 4.06,
+      "text": "I will get N, good, which removes"
+    },
+    {
+      "index": 723,
+      "start": 3176.92,
+      "end": 3178.49,
+      "duration": 1.57,
+      "text": "the difficulty that I had."
+    },
+    {
+      "index": 724,
+      "start": 3178.49,
+      "end": 3182.79,
+      "duration": 4.3,
+      "text": "Because now I multiply by kT."
+    },
+    {
+      "index": 725,
+      "start": 3182.79,
+      "end": 3185.46,
+      "duration": 2.67,
+      "text": "And the left hand side disappears."
+    },
+    {
+      "index": 726,
+      "start": 3185.46,
+      "end": 3187.65,
+      "duration": 2.19,
+      "text": "And on the right hand side, I will get NkT."
+    },
+    {
+      "index": 727,
+      "start": 3193.94,
+      "end": 3198.83,
+      "duration": 4.89,
+      "text": "So we'll spend some time on this equation"
+    },
+    {
+      "index": 728,
+      "start": 3198.83,
+      "end": 3202.105,
+      "duration": 3.275,
+      "text": "that you will likely recognize as the van der Waals equation."
+    },
+    {
+      "index": 729,
+      "start": 3208.79,
+      "end": 3214.81,
+      "duration": 6.02,
+      "text": "I kind of justify it by rearranging this series."
+    },
+    {
+      "index": 730,
+      "start": 3214.81,
+      "end": 3217.39,
+      "duration": 2.58,
+      "text": "But van der Waals himself, of course,"
+    },
+    {
+      "index": 731,
+      "start": 3217.39,
+      "end": 3220.89,
+      "duration": 3.5,
+      "text": "had a different way of justifying it,"
+    },
+    {
+      "index": 732,
+      "start": 3220.89,
+      "end": 3225.08,
+      "duration": 4.19,
+      "text": "which is that basically if we think about the ideal gas,"
+    },
+    {
+      "index": 733,
+      "start": 3225.08,
+      "end": 3231.26,
+      "duration": 6.18,
+      "text": "and you have particles that are moving within some volume V,"
+    },
+    {
+      "index": 734,
+      "start": 3231.26,
+      "end": 3234.6,
+      "duration": 3.34,
+      "text": "if you have excluded volume interactions,"
+    },
+    {
+      "index": 735,
+      "start": 3234.6,
+      "end": 3239.42,
+      "duration": 4.82,
+      "text": "then some of this volume is no longer available."
+    },
+    {
+      "index": 736,
+      "start": 3239.42,
+      "end": 3241.69,
+      "duration": 2.27,
+      "text": "And so maybe what you should do is"
+    },
+    {
+      "index": 737,
+      "start": 3241.69,
+      "end": 3245.3,
+      "duration": 3.61,
+      "text": "you should reduce the volume by an amount that"
+    },
+    {
+      "index": 738,
+      "start": 3245.3,
+      "end": 3247.47,
+      "duration": 2.17,
+      "text": "is proportional to the number of particles."
+    },
+    {
+      "index": 739,
+      "start": 3250.32,
+      "end": 3254.41,
+      "duration": 4.09,
+      "text": "This factor of 1/2 is actually very interesting."
+    },
+    {
+      "index": 740,
+      "start": 3254.41,
+      "end": 3256.51,
+      "duration": 2.1,
+      "text": "Because it is correct."
+    },
+    {
+      "index": 741,
+      "start": 3256.51,
+      "end": 3260.61,
+      "duration": 4.1,
+      "text": "And I see that a number of people"
+    },
+    {
+      "index": 742,
+      "start": 3260.61,
+      "end": 3264.02,
+      "duration": 3.41,
+      "text": "in well known journals, et cetera,"
+    },
+    {
+      "index": 743,
+      "start": 3264.02,
+      "end": 3267.95,
+      "duration": 3.93,
+      "text": "write that the excluded volume should be essentially"
+    },
+    {
+      "index": 744,
+      "start": 3267.95,
+      "end": 3271.63,
+      "duration": 3.68,
+      "text": "n times the volume that is excluded around each particle."
+    },
+    {
+      "index": 745,
+      "start": 3271.63,
+      "end": 3272.56,
+      "duration": 0.93,
+      "text": "It's not that."
+    },
+    {
+      "index": 746,
+      "start": 3272.56,
+      "end": 3274.48,
+      "duration": 1.92,
+      "text": "It is 1/2 of that."
+    },
+    {
+      "index": 747,
+      "start": 3274.48,
+      "end": 3276.6,
+      "duration": 2.12,
+      "text": "And I'll leave you to mull on that."
+    },
+    {
+      "index": 748,
+      "start": 3276.6,
+      "end": 3279.79,
+      "duration": 3.19,
+      "text": "Because we will justify it later on."
+    },
+    {
+      "index": 749,
+      "start": 3279.79,
+      "end": 3281.99,
+      "duration": 2.2,
+      "text": "But in the meantime, you can think"
+    },
+    {
+      "index": 750,
+      "start": 3281.99,
+      "end": 3286.86,
+      "duration": 4.87,
+      "text": "about why the factor of 1/2 is there."
+    },
+    {
+      "index": 751,
+      "start": 3286.86,
+      "end": 3290.45,
+      "duration": 3.59,
+      "text": "The other issue is that-- so there"
+    },
+    {
+      "index": 752,
+      "start": 3290.45,
+      "end": 3294.1,
+      "duration": 3.65,
+      "text": "has to be a correction to the volume."
+    },
+    {
+      "index": 753,
+      "start": 3294.1,
+      "end": 3297.07,
+      "duration": 2.97,
+      "text": "And the kind of hand-waving statement"
+    },
+    {
+      "index": 754,
+      "start": 3297.07,
+      "end": 3299.96,
+      "duration": 2.89,
+      "text": "that you make about the correction to pressure"
+    },
+    {
+      "index": 755,
+      "start": 3299.96,
+      "end": 3305.73,
+      "duration": 5.77,
+      "text": "is that if you think about the particle that is in the middle,"
+    },
+    {
+      "index": 756,
+      "start": 3305.73,
+      "end": 3310.19,
+      "duration": 4.46,
+      "text": "it is being attracted by everybody, whereas when"
+    },
+    {
+      "index": 757,
+      "start": 3310.19,
+      "end": 3313.75,
+      "duration": 3.56,
+      "text": "it comes to the surface, it is really being attracted"
+    },
+    {
+      "index": 758,
+      "start": 3313.75,
+      "end": 3317.76,
+      "duration": 4.01,
+      "text": "by things that are half of the space."
+    },
+    {
+      "index": 759,
+      "start": 3317.76,
+      "end": 3319.81,
+      "duration": 2.05,
+      "text": "So there is an effective potential"
+    },
+    {
+      "index": 760,
+      "start": 3319.81,
+      "end": 3323.85,
+      "duration": 4.04,
+      "text": "that the particles feel from the collective action"
+    },
+    {
+      "index": 761,
+      "start": 3323.85,
+      "end": 3327.79,
+      "duration": 3.94,
+      "text": "of all the others, which is slightly less steep when"
+    },
+    {
+      "index": 762,
+      "start": 3327.79,
+      "end": 3331.14,
+      "duration": 3.35,
+      "text": "you approach the boundaries."
+    },
+    {
+      "index": 763,
+      "start": 3331.14,
+      "end": 3336.03,
+      "duration": 4.89,
+      "text": "And therefore, you can either think that because of this,"
+    },
+    {
+      "index": 764,
+      "start": 3336.03,
+      "end": 3338.59,
+      "duration": 2.56,
+      "text": "there's less density that you have at the boundary."
+    },
+    {
+      "index": 765,
+      "start": 3338.59,
+      "end": 3341.05,
+      "duration": 2.46,
+      "text": "Less density will give you less pressure."
+    },
+    {
+      "index": 766,
+      "start": 3341.05,
+      "end": 3342.77,
+      "duration": 1.72,
+      "text": "Or if you have a particle that is"
+    },
+    {
+      "index": 767,
+      "start": 3342.77,
+      "end": 3345.78,
+      "duration": 3.01,
+      "text": "kind of moving towards the wall, it"
+    },
+    {
+      "index": 768,
+      "start": 3345.78,
+      "end": 3347.84,
+      "duration": 2.06,
+      "text": "is being pulled back so it doesn't"
+    },
+    {
+      "index": 769,
+      "start": 3347.84,
+      "end": 3351.11,
+      "duration": 3.27,
+      "text": "hit the wall as strongly as you would expect,"
+    },
+    {
+      "index": 770,
+      "start": 3351.11,
+      "end": 3353.44,
+      "duration": 2.33,
+      "text": "that would give the pressure of the ideal gas."
+    },
+    {
+      "index": 771,
+      "start": 3353.44,
+      "end": 3357.73,
+      "duration": 4.29,
+      "text": "So there is a pressure that has to be reduced related"
+    },
+    {
+      "index": 772,
+      "start": 3357.73,
+      "end": 3360.91,
+      "duration": 3.18,
+      "text": "to the strength of the potential and something that"
+    },
+    {
+      "index": 773,
+      "start": 3360.91,
+      "end": 3363.16,
+      "duration": 2.25,
+      "text": "has to do with all of the other particles."
+    },
+    {
+      "index": 774,
+      "start": 3363.16,
+      "end": 3366.47,
+      "duration": 3.31,
+      "text": "And there's density squared will appear there."
+    },
+    {
+      "index": 775,
+      "start": 3366.47,
+      "end": 3370.47,
+      "duration": 4.0,
+      "text": "We will have a more full justification of this equation"
+    },
+    {
+      "index": 776,
+      "start": 3370.47,
+      "end": 3371.69,
+      "duration": 1.22,
+      "text": "later on."
+    },
+    {
+      "index": 777,
+      "start": 3371.69,
+      "end": 3376.14,
+      "duration": 4.45,
+      "text": "But for the time being, let's sort of sit with this equation"
+    },
+    {
+      "index": 778,
+      "start": 3376.14,
+      "end": 3378.51,
+      "duration": 2.37,
+      "text": "and think about its consequences for awhile."
+    },
+    {
+      "index": 779,
+      "start": 3385.2,
+      "end": 3387.56,
+      "duration": 2.36,
+      "text": "Because the thing that we would like to do"
+    },
+    {
+      "index": 780,
+      "start": 3387.56,
+      "end": 3395.06,
+      "duration": 7.5,
+      "text": "is we have come from a perspective of looking"
+    },
+    {
+      "index": 781,
+      "start": 3395.06,
+      "end": 3399.71,
+      "duration": 4.65,
+      "text": "at the ideal gas and how the pressure of the ideal gas"
+    },
+    {
+      "index": 782,
+      "start": 3399.71,
+      "end": 3403.61,
+      "duration": 3.9,
+      "text": "starts to get corrected because of the interactions."
+    },
+    {
+      "index": 783,
+      "start": 3403.61,
+      "end": 3406.34,
+      "duration": 2.73,
+      "text": "Of course, things become interesting"
+    },
+    {
+      "index": 784,
+      "start": 3406.34,
+      "end": 3408.47,
+      "duration": 2.13,
+      "text": "when you go to the dense limit."
+    },
+    {
+      "index": 785,
+      "start": 3408.47,
+      "end": 3411.04,
+      "duration": 2.57,
+      "text": "And then the gas becomes something like a liquid."
+    },
+    {
+      "index": 786,
+      "start": 3411.04,
+      "end": 3413.83,
+      "duration": 2.79,
+      "text": "And you have transitions and things like that."
+    },
+    {
+      "index": 787,
+      "start": 3413.83,
+      "end": 3418.57,
+      "duration": 4.74,
+      "text": "So really, it's the other limit, the dense, highly interacting"
+    },
+    {
+      "index": 788,
+      "start": 3418.57,
+      "end": 3420.74,
+      "duration": 2.17,
+      "text": "limited that is interesting."
+    },
+    {
+      "index": 789,
+      "start": 3420.74,
+      "end": 3425.64,
+      "duration": 4.9,
+      "text": "And to get that, we have few choices."
+    },
+    {
+      "index": 790,
+      "start": 3425.64,
+      "end": 3430.77,
+      "duration": 5.13,
+      "text": "Either I have to somehow sum many, many terms in the series,"
+    },
+    {
+      "index": 791,
+      "start": 3430.77,
+      "end": 3434.7,
+      "duration": 3.93,
+      "text": "which will be very difficult, and we can't do that,"
+    },
+    {
+      "index": 792,
+      "start": 3434.7,
+      "end": 3438.155,
+      "duration": 3.455,
+      "text": "or you can make some kind of approximation, rearrangement,"
+    },
+    {
+      "index": 793,
+      "start": 3438.155,
+      "end": 3439.49,
+      "duration": 1.335,
+      "text": "and a guess."
+    },
+    {
+      "index": 794,
+      "start": 3439.49,
+      "end": 3444.1,
+      "duration": 4.61,
+      "text": "And this is what the van der Waals equation is based on."
+    },
+    {
+      "index": 795,
+      "start": 3444.1,
+      "end": 3447.95,
+      "duration": 3.85,
+      "text": "I made the guess here by somewhat rearranging"
+    },
+    {
+      "index": 796,
+      "start": 3447.95,
+      "end": 3450.49,
+      "duration": 2.54,
+      "text": "and re-summing the terms in this series."
+    },
+    {
+      "index": 797,
+      "start": 3450.49,
+      "end": 3454.39,
+      "duration": 3.9,
+      "text": "But I will give you shortly a different justification"
+    },
+    {
+      "index": 798,
+      "start": 3454.39,
+      "end": 3457.92,
+      "duration": 3.53,
+      "text": "that is more transparent and tells you immediately"
+    },
+    {
+      "index": 799,
+      "start": 3457.92,
+      "end": 3459.74,
+      "duration": 1.82,
+      "text": "what the limitations are."
+    },
+    {
+      "index": 800,
+      "start": 3459.74,
+      "end": 3462.55,
+      "duration": 2.81,
+      "text": "But basically that's why we are going"
+    },
+    {
+      "index": 801,
+      "start": 3462.55,
+      "end": 3465.11,
+      "duration": 2.56,
+      "text": "to spend some time with this equation."
+    },
+    {
+      "index": 802,
+      "start": 3465.11,
+      "end": 3468.64,
+      "duration": 3.53,
+      "text": "Because ultimately, we are hoping to transition"
+    },
+    {
+      "index": 803,
+      "start": 3468.64,
+      "end": 3471.502,
+      "duration": 2.862,
+      "text": "from the weakly interacting case to the strongly interacting"
+    },
+    {
+      "index": 804,
+      "start": 3471.502,
+      "end": 3472.002,
+      "duration": 0.5,
+      "text": "case."
+    },
+    {
+      "index": 805,
+      "start": 3478.36,
+      "end": 3479.277,
+      "duration": 0.917,
+      "text": "Yes."
+    },
+    {
+      "index": 806,
+      "start": 3479.277,
+      "end": 3480.152,
+      "duration": 0.875,
+      "text": "AUDIENCE: [INAUDIBLE]"
+    },
+    {
+      "index": 807,
+      "start": 3489.05,
+      "end": 3492.19,
+      "duration": 3.14,
+      "text": "PROFESSOR: No, no, no, no, omega was"
+    },
+    {
+      "index": 808,
+      "start": 3492.19,
+      "end": 3496.03,
+      "duration": 3.84,
+      "text": "defined as the volume excluded around one particle."
+    },
+    {
+      "index": 809,
+      "start": 3496.03,
+      "end": 3499.07,
+      "duration": 3.04,
+      "text": "So if you're thinking about billiard balls,"
+    },
+    {
+      "index": 810,
+      "start": 3499.07,
+      "end": 3501.49,
+      "duration": 2.42,
+      "text": "r0 is the diameter."
+    },
+    {
+      "index": 811,
+      "start": 3501.49,
+      "end": 3503.32,
+      "duration": 1.83,
+      "text": "It's not the radius."
+    },
+    {
+      "index": 812,
+      "start": 3503.32,
+      "end": 3508.78,
+      "duration": 5.46,
+      "text": "And 4 pi over 3 r0 cubed is 8 times the diameter"
+    },
+    {
+      "index": 813,
+      "start": 3508.78,
+      "end": 3510.98,
+      "duration": 2.2,
+      "text": "of a single billiard ball."
+    },
+    {
+      "index": 814,
+      "start": 3510.98,
+      "end": 3514.03,
+      "duration": 3.05,
+      "text": "So the correction that we get, if you like,"
+    },
+    {
+      "index": 815,
+      "start": 3514.03,
+      "end": 3518.86,
+      "duration": 4.83,
+      "text": "is 4 times the volume of a billiard ball multiplied"
+    },
+    {
+      "index": 816,
+      "start": 3518.86,
+      "end": 3520.472,
+      "duration": 1.612,
+      "text": "by the number of billiard balls."
+    },
+    {
+      "index": 817,
+      "start": 3531.35,
+      "end": 3532.249,
+      "duration": 0.899,
+      "text": "Where was I?"
+    },
+    {
+      "index": 818,
+      "start": 3550.84,
+      "end": 3557.06,
+      "duration": 6.22,
+      "text": "OK, so what this equation gives you, the van der Waals,"
+    },
+    {
+      "index": 819,
+      "start": 3557.06,
+      "end": 3560.35,
+      "duration": 3.29,
+      "text": "is an expression for how the pressure behaves"
+    },
+    {
+      "index": 820,
+      "start": 3560.35,
+      "end": 3561.765,
+      "duration": 1.415,
+      "text": "as a function of volume."
+    },
+    {
+      "index": 821,
+      "start": 3566.39,
+      "end": 3571.97,
+      "duration": 5.58,
+      "text": "Actually, it would be nicer if we were to sort of replace"
+    },
+    {
+      "index": 822,
+      "start": 3571.97,
+      "end": 3575.15,
+      "duration": 3.18,
+      "text": "this by volume per particle, which"
+    },
+    {
+      "index": 823,
+      "start": 3575.15,
+      "end": 3576.67,
+      "duration": 1.52,
+      "text": "would be the inverse density."
+    },
+    {
+      "index": 824,
+      "start": 3576.67,
+      "end": 3579.98,
+      "duration": 3.31,
+      "text": "But you can use one or the other."
+    },
+    {
+      "index": 825,
+      "start": 3579.98,
+      "end": 3582.32,
+      "duration": 2.34,
+      "text": "It doesn't matter."
+    },
+    {
+      "index": 826,
+      "start": 3582.32,
+      "end": 3586.41,
+      "duration": 4.09,
+      "text": "Now, what you find is that there is, first"
+    },
+    {
+      "index": 827,
+      "start": 3586.41,
+      "end": 3591.51,
+      "duration": 5.1,
+      "text": "of all, a limitation to the volume."
+    },
+    {
+      "index": 828,
+      "start": 3591.51,
+      "end": 3594.88,
+      "duration": 3.37,
+      "text": "So basically, none of your cares are"
+    },
+    {
+      "index": 829,
+      "start": 3594.88,
+      "end": 3599.52,
+      "duration": 4.64,
+      "text": "going to go to volumes that are lower than n omega over 2."
+    },
+    {
+      "index": 830,
+      "start": 3599.52,
+      "end": 3604.04,
+      "duration": 4.52,
+      "text": "So basically there's a barrier here that occurs over here."
+    },
+    {
+      "index": 831,
+      "start": 3604.04,
+      "end": 3606.19,
+      "duration": 2.15,
+      "text": "But if you go to the other limit,"
+    },
+    {
+      "index": 832,
+      "start": 3606.19,
+      "end": 3610.72,
+      "duration": 4.53,
+      "text": "where you go to large volumes, you can ignore terms like this."
+    },
+    {
+      "index": 833,
+      "start": 3610.72,
+      "end": 3615.61,
+      "duration": 4.89,
+      "text": "And then you get back the kind of ideal gas behavior."
+    },
+    {
+      "index": 834,
+      "start": 3615.61,
+      "end": 3619.06,
+      "duration": 3.45,
+      "text": "So basically, in one limit, where"
+    },
+    {
+      "index": 835,
+      "start": 3619.06,
+      "end": 3622.72,
+      "duration": 3.66,
+      "text": "you are either at high temperatures--"
+    },
+    {
+      "index": 836,
+      "start": 3622.72,
+      "end": 3627.34,
+      "duration": 4.62,
+      "text": "and at high temperatures, essentially, the correction"
+    },
+    {
+      "index": 837,
+      "start": 3627.34,
+      "end": 3630.66,
+      "duration": 3.32,
+      "text": "here will also be negligible."
+    },
+    {
+      "index": 838,
+      "start": 3630.66,
+      "end": 3634.09,
+      "duration": 3.43,
+      "text": "Or you are at high values of the volume."
+    },
+    {
+      "index": 839,
+      "start": 3634.09,
+      "end": 3638.16,
+      "duration": 4.07,
+      "text": "You get isotherms that are very much like the isotherms"
+    },
+    {
+      "index": 840,
+      "start": 3638.16,
+      "end": 3641.18,
+      "duration": 3.02,
+      "text": "that you have for the ideal gas, except that"
+    },
+    {
+      "index": 841,
+      "start": 3641.18,
+      "end": 3645.76,
+      "duration": 4.58,
+      "text": "rather than asymptote to 0, PV going like NkT,"
+    },
+    {
+      "index": 842,
+      "start": 3645.76,
+      "end": 3650.91,
+      "duration": 5.15,
+      "text": "you asymptote to this excluded volume."
+    },
+    {
+      "index": 843,
+      "start": 3650.91,
+      "end": 3654.44,
+      "duration": 3.53,
+      "text": "So this is for high T, T large."
+    },
+    {
+      "index": 844,
+      "start": 3657.17,
+      "end": 3658.68,
+      "duration": 1.51,
+      "text": "T larger than what?"
+    },
+    {
+      "index": 845,
+      "start": 3658.68,
+      "end": 3661.91,
+      "duration": 3.23,
+      "text": "Well essentially, what happens is"
+    },
+    {
+      "index": 846,
+      "start": 3661.91,
+      "end": 3667.02,
+      "duration": 5.11,
+      "text": "that if I look at the pressure, I can write it in this fashion"
+    },
+    {
+      "index": 847,
+      "start": 3667.02,
+      "end": 3667.52,
+      "duration": 0.5,
+      "text": "also."
+    },
+    {
+      "index": 848,
+      "start": 3667.52,
+      "end": 3675.06,
+      "duration": 7.54,
+      "text": "It is NkT divided by V minus N omega over 2."
+    },
+    {
+      "index": 849,
+      "start": 3675.06,
+      "end": 3678.18,
+      "duration": 3.12,
+      "text": "So that's the term that dominates at high temperature."
+    },
+    {
+      "index": 850,
+      "start": 3678.18,
+      "end": 3680.64,
+      "duration": 2.46,
+      "text": "It's proportional to kT."
+    },
+    {
+      "index": 851,
+      "start": 3680.64,
+      "end": 3686.85,
+      "duration": 6.21,
+      "text": "But then there's the subtraction u0 omega over 2 N/V squared."
+    },
+    {
+      "index": 852,
+      "start": 3686.85,
+      "end": 3690.27,
+      "duration": 3.42,
+      "text": "And again, this term is not so important at large volume."
+    },
+    {
+      "index": 853,
+      "start": 3690.27,
+      "end": 3692.3,
+      "duration": 2.03,
+      "text": "Because at large volume, this 1/V"
+    },
+    {
+      "index": 854,
+      "start": 3692.3,
+      "end": 3695.35,
+      "duration": 3.05,
+      "text": "is more dominant than 1 over V squared."
+    },
+    {
+      "index": 855,
+      "start": 3695.35,
+      "end": 3698.88,
+      "duration": 3.53,
+      "text": "But as you go to lower temperatures"
+    },
+    {
+      "index": 856,
+      "start": 3698.88,
+      "end": 3702.98,
+      "duration": 4.1,
+      "text": "and intermediate volumes, then essentially you"
+    },
+    {
+      "index": 857,
+      "start": 3702.98,
+      "end": 3707.14,
+      "duration": 4.16,
+      "text": "have potentially a correction that falls off as minus 1"
+    },
+    {
+      "index": 858,
+      "start": 3707.14,
+      "end": 3709.11,
+      "duration": 1.97,
+      "text": "over V squared."
+    },
+    {
+      "index": 859,
+      "start": 3709.11,
+      "end": 3713.62,
+      "duration": 4.51,
+      "text": "And so this correction that falls off as 1 over V squared"
+    },
+    {
+      "index": 860,
+      "start": 3713.62,
+      "end": 3717.88,
+      "duration": 4.26,
+      "text": "can potentially modify your curve,"
+    },
+    {
+      "index": 861,
+      "start": 3717.88,
+      "end": 3723.37,
+      "duration": 5.49,
+      "text": "bring it down, and then give it a structure such as this."
+    },
+    {
+      "index": 862,
+      "start": 3723.37,
+      "end": 3726.35,
+      "duration": 2.98,
+      "text": "So this is T less than."
+    },
+    {
+      "index": 863,
+      "start": 3726.35,
+      "end": 3730.32,
+      "duration": 3.97,
+      "text": "And clearly, between these two types of behavior,"
+    },
+    {
+      "index": 864,
+      "start": 3730.32,
+      "end": 3734.1,
+      "duration": 3.78,
+      "text": "where there is monotonic behavior"
+    },
+    {
+      "index": 865,
+      "start": 3734.1,
+      "end": 3736.88,
+      "duration": 2.78,
+      "text": "or non-monotonic behavior, there has"
+    },
+    {
+      "index": 866,
+      "start": 3736.88,
+      "end": 3740.86,
+      "duration": 3.98,
+      "text": "to be a limiting curve that, let's say, does something"
+    },
+    {
+      "index": 867,
+      "start": 3740.86,
+      "end": 3747.19,
+      "duration": 6.33,
+      "text": "like this, comes tangentially to the horizontal axis,"
+    },
+    {
+      "index": 868,
+      "start": 3747.19,
+      "end": 3750.8,
+      "duration": 3.61,
+      "text": "and then goes on like this."
+    },
+    {
+      "index": 869,
+      "start": 3750.8,
+      "end": 3753.87,
+      "duration": 3.07,
+      "text": "So this would be for T equals Tc."
+    },
+    {
+      "index": 870,
+      "start": 3753.87,
+      "end": 3757.543,
+      "duration": 3.673,
+      "text": "This is T greater than Tc, T less than Tc."
+    },
+    {
+      "index": 871,
+      "start": 3767.7,
+      "end": 3770.14,
+      "duration": 2.44,
+      "text": "OK, so that's fine, except that now we"
+    },
+    {
+      "index": 872,
+      "start": 3770.14,
+      "end": 3773.08,
+      "duration": 2.94,
+      "text": "have encountered the difficulty."
+    },
+    {
+      "index": 873,
+      "start": 3773.08,
+      "end": 3777.04,
+      "duration": 3.96,
+      "text": "Because one of the things that we had established"
+    },
+    {
+      "index": 874,
+      "start": 3777.04,
+      "end": 3790.21,
+      "duration": 13.17,
+      "text": "for thermodynamic stability was that delta P delta"
+    },
+    {
+      "index": 875,
+      "start": 3790.21,
+      "end": 3791.87,
+      "duration": 1.66,
+      "text": "V had to be negative."
+    },
+    {
+      "index": 876,
+      "start": 3795.87,
+      "end": 3800.69,
+      "duration": 4.82,
+      "text": "And the ideal gas curve and portions"
+    },
+    {
+      "index": 877,
+      "start": 3800.69,
+      "end": 3806.48,
+      "duration": 5.79,
+      "text": "of this curve which have a negative slope"
+    },
+    {
+      "index": 878,
+      "start": 3806.48,
+      "end": 3809.28,
+      "duration": 2.8,
+      "text": "are all consistent with this."
+    },
+    {
+      "index": 879,
+      "start": 3809.28,
+      "end": 3819.72,
+      "duration": 10.44,
+      "text": "But this portion over here where dP by dV is positive,"
+    },
+    {
+      "index": 880,
+      "start": 3819.72,
+      "end": 3822.35,
+      "duration": 2.63,
+      "text": "it kind of violates the condition"
+    },
+    {
+      "index": 881,
+      "start": 3822.35,
+      "end": 3828.38,
+      "duration": 6.03,
+      "text": "that the compressibility kappa T, which is minus 1/V dV"
+    },
+    {
+      "index": 882,
+      "start": 3828.38,
+      "end": 3831.55,
+      "duration": 3.17,
+      "text": "by dP at constant temperature, better be positive."
+    },
+    {
+      "index": 883,
+      "start": 3835.36,
+      "end": 3842.83,
+      "duration": 7.47,
+      "text": "And so clearly, the expression that one gets through this van"
+    },
+    {
+      "index": 884,
+      "start": 3842.83,
+      "end": 3847.85,
+      "duration": 5.02,
+      "text": "der Waals equation has a limitation."
+    },
+    {
+      "index": 885,
+      "start": 3847.85,
+      "end": 3851.46,
+      "duration": 3.61,
+      "text": "And the most natural way about it"
+    },
+    {
+      "index": 886,
+      "start": 3851.46,
+      "end": 3855.32,
+      "duration": 3.86,
+      "text": "is to say, well, the question that you wrote down"
+    },
+    {
+      "index": 887,
+      "start": 3855.32,
+      "end": 3859.214,
+      "duration": 3.894,
+      "text": "is clearly incorrect."
+    },
+    {
+      "index": 888,
+      "start": 3859.214,
+      "end": 3860.13,
+      "duration": 0.916,
+      "text": "That's certainly true."
+    },
+    {
+      "index": 889,
+      "start": 3860.13,
+      "end": 3862.71,
+      "duration": 2.58,
+      "text": "Also, this equation is incorrect,"
+    },
+    {
+      "index": 890,
+      "start": 3862.71,
+      "end": 3866.856,
+      "duration": 4.146,
+      "text": "except that this kind of reminds us"
+    },
+    {
+      "index": 891,
+      "start": 3866.856,
+      "end": 3874.78,
+      "duration": 7.924,
+      "text": "with what actually happens if I look at the isotherms of a gas,"
+    },
+    {
+      "index": 892,
+      "start": 3874.78,
+      "end": 3878.66,
+      "duration": 3.88,
+      "text": "such as gas in this room, or something that"
+    },
+    {
+      "index": 893,
+      "start": 3878.66,
+      "end": 3881.01,
+      "duration": 2.35,
+      "text": "is more familiar, such as water."
+    },
+    {
+      "index": 894,
+      "start": 3881.01,
+      "end": 3886.33,
+      "duration": 5.32,
+      "text": "What you find is that at high temperatures,"
+    },
+    {
+      "index": 895,
+      "start": 3886.33,
+      "end": 3890.44,
+      "duration": 4.11,
+      "text": "you indeed have curves that look like this."
+    },
+    {
+      "index": 896,
+      "start": 3893.13,
+      "end": 3896.55,
+      "duration": 3.42,
+      "text": "But at low temperatures, you liquidify."
+    },
+    {
+      "index": 897,
+      "start": 3896.55,
+      "end": 3900.632,
+      "duration": 4.082,
+      "text": "And what you have is a zone of coexistence,"
+    },
+    {
+      "index": 898,
+      "start": 3900.632,
+      "end": 3903.58,
+      "duration": 2.948,
+      "text": "let's say something like this, by which I"
+    },
+    {
+      "index": 899,
+      "start": 3903.58,
+      "end": 3907.95,
+      "duration": 4.37,
+      "text": "mean that the isotherm that you draw"
+    },
+    {
+      "index": 900,
+      "start": 3907.95,
+      "end": 3913.91,
+      "duration": 5.96,
+      "text": "has a portion that lives in the gas phase"
+    },
+    {
+      "index": 901,
+      "start": 3913.91,
+      "end": 3918.63,
+      "duration": 4.72,
+      "text": "and is a slightly modified version of the ideal gas."
+    },
+    {
+      "index": 902,
+      "start": 3918.63,
+      "end": 3921.2,
+      "duration": 2.57,
+      "text": "But then it has a portion that corresponds"
+    },
+    {
+      "index": 903,
+      "start": 3921.2,
+      "end": 3924.09,
+      "duration": 2.89,
+      "text": "to the more or less incompressible liquid."
+    },
+    {
+      "index": 904,
+      "start": 3924.09,
+      "end": 3928.87,
+      "duration": 4.78,
+      "text": "Although this has clearly still some finite compressibility."
+    },
+    {
+      "index": 905,
+      "start": 3928.87,
+      "end": 3933.1,
+      "duration": 4.23,
+      "text": "And then in between, there is a region where if you have a box,"
+    },
+    {
+      "index": 906,
+      "start": 3933.1,
+      "end": 3936.09,
+      "duration": 2.99,
+      "text": "part of your box would be liquid, and part of your box"
+    },
+    {
+      "index": 907,
+      "start": 3936.09,
+      "end": 3937.24,
+      "duration": 1.15,
+      "text": "would be gas."
+    },
+    {
+      "index": 908,
+      "start": 3937.24,
+      "end": 3942.1,
+      "duration": 4.86,
+      "text": "And as you compress the box, the proportion of liquid and gas"
+    },
+    {
+      "index": 909,
+      "start": 3942.1,
+      "end": 3944.12,
+      "duration": 2.02,
+      "text": "will change."
+    },
+    {
+      "index": 910,
+      "start": 3944.12,
+      "end": 3948.14,
+      "duration": 4.02,
+      "text": "And this happens for T less than some Tc."
+    },
+    {
+      "index": 911,
+      "start": 3948.14,
+      "end": 3953.03,
+      "duration": 4.89,
+      "text": "And once more, there is a curve that kind of"
+    },
+    {
+      "index": 912,
+      "start": 3953.03,
+      "end": 3958.66,
+      "duration": 5.63,
+      "text": "looks like this at some intermediate temperature Tc."
+    },
+    {
+      "index": 913,
+      "start": 3961.55,
+      "end": 3966.22,
+      "duration": 4.67,
+      "text": "So you look at the comparison, you say, well,"
+    },
+    {
+      "index": 914,
+      "start": 3966.22,
+      "end": 3969.34,
+      "duration": 3.12,
+      "text": "as long as I stay above Tc-- of course"
+    },
+    {
+      "index": 915,
+      "start": 3969.34,
+      "end": 3973.865,
+      "duration": 4.525,
+      "text": "I don't expect this equation to give the right numbers"
+    },
+    {
+      "index": 916,
+      "start": 3973.865,
+      "end": 3975.75,
+      "duration": 1.885,
+      "text": "for what Tc or whatever is."
+    },
+    {
+      "index": 917,
+      "start": 3975.75,
+      "end": 3979.94,
+      "duration": 4.19,
+      "text": "But qualitatively, I get topologies and behaviors"
+    },
+    {
+      "index": 918,
+      "start": 3979.94,
+      "end": 3982.97,
+      "duration": 3.03,
+      "text": "at that T greater than Tc all the way up"
+    },
+    {
+      "index": 919,
+      "start": 3982.97,
+      "end": 3986.3,
+      "duration": 3.33,
+      "text": "to Tc are not very different."
+    },
+    {
+      "index": 920,
+      "start": 3986.3,
+      "end": 3989.66,
+      "duration": 3.36,
+      "text": "But at T less than Tc, they also signal"
+    },
+    {
+      "index": 921,
+      "start": 3989.66,
+      "end": 3991.98,
+      "duration": 2.32,
+      "text": "that something bad is happening."
+    },
+    {
+      "index": 922,
+      "start": 3991.98,
+      "end": 3997.12,
+      "duration": 5.14,
+      "text": "And somehow, the original description has to be modified."
+    },
+    {
+      "index": 923,
+      "start": 3997.12,
+      "end": 4002.08,
+      "duration": 4.96,
+      "text": "And so the thing that Maxwell and van der Waals and company"
+    },
+    {
+      "index": 924,
+      "start": 4002.08,
+      "end": 4010.52,
+      "duration": 8.44,
+      "text": "did was to somehow convert this incorrect set of equations"
+    },
+    {
+      "index": 925,
+      "start": 4010.52,
+      "end": 4014.26,
+      "duration": 3.74,
+      "text": "to something that resembles this."
+    },
+    {
+      "index": 926,
+      "start": 4014.26,
+      "end": 4017.724,
+      "duration": 3.464,
+      "text": "So let's see how they managed to do this."
+    },
+    {
+      "index": 927,
+      "start": 4043.96,
+      "end": 4048.18,
+      "duration": 4.22,
+      "text": "Actually, this may not be a bad thing to keep in mind."
+    },
+    {
+      "index": 928,
+      "start": 4050.75,
+      "end": 4053.77,
+      "duration": 3.02,
+      "text": "Let's have a thermodynamic-- well,"
+    },
+    {
+      "index": 929,
+      "start": 4053.77,
+      "end": 4060.2,
+      "duration": 6.43,
+      "text": "I kind of emphasize that there is thermodynamic reason for why"
+    },
+    {
+      "index": 930,
+      "start": 4060.2,
+      "end": 4063.56,
+      "duration": 3.36,
+      "text": "this is not valid."
+    },
+    {
+      "index": 931,
+      "start": 4063.56,
+      "end": 4065.76,
+      "duration": 2.2,
+      "text": "Always there's a corresponding reason"
+    },
+    {
+      "index": 932,
+      "start": 4065.76,
+      "end": 4068.1,
+      "duration": 2.34,
+      "text": "if you look at things from the perspective"
+    },
+    {
+      "index": 933,
+      "start": 4068.1,
+      "end": 4069.92,
+      "duration": 1.82,
+      "text": "of statistical mechanics."
+    },
+    {
+      "index": 934,
+      "start": 4069.92,
+      "end": 4071.59,
+      "duration": 1.67,
+      "text": "So it may be useful to sort of think"
+    },
+    {
+      "index": 935,
+      "start": 4071.59,
+      "end": 4074.82,
+      "duration": 3.23,
+      "text": "about what's happening from that perspective."
+    },
+    {
+      "index": 936,
+      "start": 4074.82,
+      "end": 4077.51,
+      "duration": 2.69,
+      "text": "Let's imagine that we are in this grand canonical ensemble."
+    },
+    {
+      "index": 937,
+      "start": 4077.51,
+      "end": 4082.04,
+      "duration": 4.53,
+      "text": "In the grand canonical ensemble, the number of particles,"
+    },
+    {
+      "index": 938,
+      "start": 4082.04,
+      "end": 4085.76,
+      "duration": 3.72,
+      "text": "as we discussed, is not fixed."
+    },
+    {
+      "index": 939,
+      "start": 4085.76,
+      "end": 4090.8,
+      "duration": 5.04,
+      "text": "But the mean number of particles is given by the expressions"
+    },
+    {
+      "index": 940,
+      "start": 4090.8,
+      "end": 4092.85,
+      "duration": 2.05,
+      "text": "that we saw over here, is related"
+    },
+    {
+      "index": 941,
+      "start": 4092.85,
+      "end": 4097.7,
+      "duration": 4.85,
+      "text": "to the pressure through dP by d mu at constant temperature."
+    },
+    {
+      "index": 942,
+      "start": 4102.56,
+      "end": 4105.79,
+      "duration": 3.23,
+      "text": "But there are fluctuations."
+    },
+    {
+      "index": 943,
+      "start": 4105.79,
+      "end": 4112.34,
+      "duration": 6.55,
+      "text": "So you would say that the fluctuations are related"
+    },
+    {
+      "index": 944,
+      "start": 4112.34,
+      "end": 4118.49,
+      "duration": 6.15,
+      "text": "by taking a second derivative of this object."
+    },
+    {
+      "index": 945,
+      "start": 4118.49,
+      "end": 4123.91,
+      "duration": 5.42,
+      "text": "Because clearly, q, if I were to expand it in powers of beta mu,"
+    },
+    {
+      "index": 946,
+      "start": 4123.91,
+      "end": 4127.779,
+      "duration": 3.869,
+      "text": "will generate various moments of n."
+    },
+    {
+      "index": 947,
+      "start": 4127.779,
+      "end": 4130.88,
+      "duration": 3.101,
+      "text": "Log of q will generate cumulants."
+    },
+    {
+      "index": 948,
+      "start": 4130.88,
+      "end": 4134.399,
+      "duration": 3.519,
+      "text": "So the variance would be one more derivative."
+    },
+    {
+      "index": 949,
+      "start": 4134.399,
+      "end": 4139.88,
+      "duration": 5.481,
+      "text": "And so that will amount to taking"
+    },
+    {
+      "index": 950,
+      "start": 4139.88,
+      "end": 4142.31,
+      "duration": 2.43,
+      "text": "a derivative of the first derivative, which"
+    },
+    {
+      "index": 951,
+      "start": 4142.31,
+      "end": 4144.74,
+      "duration": 2.43,
+      "text": "was the number itself."
+    },
+    {
+      "index": 952,
+      "start": 4144.74,
+      "end": 4151.97,
+      "duration": 7.23,
+      "text": "So I will get this to be dN by d mu at constant T,"
+    },
+    {
+      "index": 953,
+      "start": 4151.97,
+      "end": 4155.25,
+      "duration": 3.28,
+      "text": "except that there's an additional factor of kT."
+    },
+    {
+      "index": 954,
+      "start": 4155.25,
+      "end": 4158.529,
+      "duration": 3.279,
+      "text": "So maybe I will write this carefully enough."
+    },
+    {
+      "index": 955,
+      "start": 4158.529,
+      "end": 4168.02,
+      "duration": 9.491,
+      "text": "I have d2 log Q with respect to beta mu squared"
+    },
+    {
+      "index": 956,
+      "start": 4168.02,
+      "end": 4170.632,
+      "duration": 2.612,
+      "text": "will give me N squared."
+    },
+    {
+      "index": 957,
+      "start": 4170.632,
+      "end": 4177.37,
+      "duration": 6.738,
+      "text": "Now, the first derivative with respect to beta mu of log Q"
+    },
+    {
+      "index": 958,
+      "start": 4177.37,
+      "end": 4182.2,
+      "duration": 4.83,
+      "text": "gave me the mean, which I'm actually thinking of as N"
+    },
+    {
+      "index": 959,
+      "start": 4182.2,
+      "end": 4183.87,
+      "duration": 1.67,
+      "text": "itself."
+    },
+    {
+      "index": 960,
+      "start": 4183.87,
+      "end": 4185.8,
+      "duration": 1.93,
+      "text": "And then there's this factor of beta."
+    },
+    {
+      "index": 961,
+      "start": 4185.8,
+      "end": 4190.955,
+      "duration": 5.155,
+      "text": "So this is really kT dN by d mu."
+    },
+    {
+      "index": 962,
+      "start": 4190.955,
+      "end": 4193.29,
+      "duration": 2.335,
+      "text": "All of these are done at constant temperature."
+    },
+    {
+      "index": 963,
+      "start": 4204.68,
+      "end": 4210.11,
+      "duration": 5.43,
+      "text": "So the statistical analog of stability"
+    },
+    {
+      "index": 964,
+      "start": 4210.11,
+      "end": 4215.27,
+      "duration": 5.16,
+      "text": "really comes down to variances being positive."
+    },
+    {
+      "index": 965,
+      "start": 4215.27,
+      "end": 4221.32,
+      "duration": 6.05,
+      "text": "So my claim is that this variance being positive"
+    },
+    {
+      "index": 966,
+      "start": 4221.32,
+      "end": 4226.63,
+      "duration": 5.31,
+      "text": "is related to this stability condition."
+    },
+    {
+      "index": 967,
+      "start": 4226.63,
+      "end": 4229.01,
+      "duration": 2.38,
+      "text": "Let me do that in the following fashion."
+    },
+    {
+      "index": 968,
+      "start": 4229.01,
+      "end": 4230.88,
+      "duration": 1.87,
+      "text": "I divide these two expressions."
+    },
+    {
+      "index": 969,
+      "start": 4230.88,
+      "end": 4233.47,
+      "duration": 2.59,
+      "text": "I will get the average of N squared divided"
+    },
+    {
+      "index": 970,
+      "start": 4233.47,
+      "end": 4240.13,
+      "duration": 6.66,
+      "text": "by average of N, which is really N, so the variance over N."
+    },
+    {
+      "index": 971,
+      "start": 4240.13,
+      "end": 4241.29,
+      "duration": 1.16,
+      "text": "I have kT."
+    },
+    {
+      "index": 972,
+      "start": 4244.35,
+      "end": 4251.3,
+      "duration": 6.95,
+      "text": "And then I have the ratio of two of these derivatives."
+    },
+    {
+      "index": 973,
+      "start": 4251.3,
+      "end": 4254.09,
+      "duration": 2.79,
+      "text": "And the reason I wanted to do that ratio"
+    },
+    {
+      "index": 974,
+      "start": 4254.09,
+      "end": 4256.69,
+      "duration": 2.6,
+      "text": "was to get rid of the d mu."
+    },
+    {
+      "index": 975,
+      "start": 4256.69,
+      "end": 4259.16,
+      "duration": 2.47,
+      "text": "Because d mu is not so nice."
+    },
+    {
+      "index": 976,
+      "start": 4259.16,
+      "end": 4261.645,
+      "duration": 2.485,
+      "text": "If I take the ratio of those two derivatives,"
+    },
+    {
+      "index": 977,
+      "start": 4261.645,
+      "end": 4269.83,
+      "duration": 8.185,
+      "text": "I will get dN by dP at constant T."
+    },
+    {
+      "index": 978,
+      "start": 4269.83,
+      "end": 4273.41,
+      "duration": 3.58,
+      "text": "But what I really wanted was to say something about dV"
+    },
+    {
+      "index": 979,
+      "start": 4273.41,
+      "end": 4277.8,
+      "duration": 4.39,
+      "text": "by dP at constant T rather than dN by dP."
+    },
+    {
+      "index": 980,
+      "start": 4277.8,
+      "end": 4284.75,
+      "duration": 6.95,
+      "text": "So what I'm going to do is to somehow convert this dN by dP"
+    },
+    {
+      "index": 981,
+      "start": 4284.75,
+      "end": 4290.18,
+      "duration": 5.43,
+      "text": "into dN by dV, and then dV by dP."
+    },
+    {
+      "index": 982,
+      "start": 4292.89,
+      "end": 4296.25,
+      "duration": 3.36,
+      "text": "And actually to do that, I need to use the chain rule."
+    },
+    {
+      "index": 983,
+      "start": 4296.25,
+      "end": 4300.44,
+      "duration": 4.19,
+      "text": "So this will be T, P. This will be T, N."
+    },
+    {
+      "index": 984,
+      "start": 4300.44,
+      "end": 4304.59,
+      "duration": 4.15,
+      "text": "And the chain rule will give me an additional minus sign."
+    },
+    {
+      "index": 985,
+      "start": 4304.59,
+      "end": 4308.83,
+      "duration": 4.24,
+      "text": "So this is a reminder of how your partial derivatives"
+    },
+    {
+      "index": 986,
+      "start": 4308.83,
+      "end": 4311.58,
+      "duration": 2.75,
+      "text": "and the chain rule goes."
+    },
+    {
+      "index": 987,
+      "start": 4311.58,
+      "end": 4318.46,
+      "duration": 6.88,
+      "text": "Finally, dN by dV is none other than the density N/V."
+    },
+    {
+      "index": 988,
+      "start": 4318.46,
+      "end": 4322.05,
+      "duration": 3.59,
+      "text": "At constant temperature, N and V will be proportional."
+    },
+    {
+      "index": 989,
+      "start": 4322.05,
+      "end": 4327.98,
+      "duration": 5.93,
+      "text": "And what I have here is 1/V dV by dP,"
+    },
+    {
+      "index": 990,
+      "start": 4327.98,
+      "end": 4329.56,
+      "duration": 1.58,
+      "text": "which is the compressibility."
+    },
+    {
+      "index": 991,
+      "start": 4329.56,
+      "end": 4337.94,
+      "duration": 8.38,
+      "text": "So the whole thing here is NkT times kappa of T."
+    },
+    {
+      "index": 992,
+      "start": 4337.94,
+      "end": 4343.73,
+      "duration": 5.79,
+      "text": "And so this being positive, this positivity of the variance,"
+    },
+    {
+      "index": 993,
+      "start": 4343.73,
+      "end": 4348.035,
+      "duration": 4.305,
+      "text": "is-- the thermodynamic analog of it"
+    },
+    {
+      "index": 994,
+      "start": 4348.035,
+      "end": 4351.77,
+      "duration": 3.735,
+      "text": "was from the stability, and something such as this."
+    },
+    {
+      "index": 995,
+      "start": 4351.77,
+      "end": 4355.08,
+      "duration": 3.31,
+      "text": "The statistical analog of it is that the probability"
+    },
+    {
+      "index": 996,
+      "start": 4355.08,
+      "end": 4359.71,
+      "duration": 4.63,
+      "text": "distribution that I'm looking at in the grand canonical ensemble"
+    },
+    {
+      "index": 997,
+      "start": 4359.71,
+      "end": 4363.85,
+      "duration": 4.14,
+      "text": "as a function of N has to be peaked around some region."
+    },
+    {
+      "index": 998,
+      "start": 4363.85,
+      "end": 4365.72,
+      "duration": 1.87,
+      "text": "The variance around that peak better"
+    },
+    {
+      "index": 999,
+      "start": 4365.72,
+      "end": 4371.36,
+      "duration": 5.64,
+      "text": "be positive so that I'm looking in the vicinity of a maximum."
+    },
+    {
+      "index": 1000,
+      "start": 4371.36,
+      "end": 4373.25,
+      "duration": 1.89,
+      "text": "If it was negative, it means that I'm"
+    },
+    {
+      "index": 1001,
+      "start": 4373.25,
+      "end": 4375.62,
+      "duration": 2.37,
+      "text": "looking in the vicinity of a minimum."
+    },
+    {
+      "index": 1002,
+      "start": 4375.62,
+      "end": 4378.58,
+      "duration": 2.96,
+      "text": "And I'm looking at the least likely configuration."
+    },
+    {
+      "index": 1003,
+      "start": 4378.58,
+      "end": 4380.27,
+      "duration": 1.69,
+      "text": "So it cannot be allowed."
+    },
+    {
+      "index": 1004,
+      "start": 4380.27,
+      "end": 4383.38,
+      "duration": 3.11,
+      "text": "So that's the statistical reason."
+    },
+    {
+      "index": 1005,
+      "start": 4383.38,
+      "end": 4386.69,
+      "duration": 3.31,
+      "text": "OK, now I want to use that in connection"
+    },
+    {
+      "index": 1006,
+      "start": 4386.69,
+      "end": 4391.26,
+      "duration": 4.57,
+      "text": "with what we have over here and see"
+    },
+    {
+      "index": 1007,
+      "start": 4391.26,
+      "end": 4392.985,
+      "duration": 1.725,
+      "text": "what I can learn about this."
+    },
+    {
+      "index": 1008,
+      "start": 4405.09,
+      "end": 4408.68,
+      "duration": 3.59,
+      "text": "I said that I wrote two expressions and divided them,"
+    },
+    {
+      "index": 1009,
+      "start": 4408.68,
+      "end": 4412.81,
+      "duration": 4.13,
+      "text": "because I didn't want to deal with the chemical potential."
+    },
+    {
+      "index": 1010,
+      "start": 4412.81,
+      "end": 4417.94,
+      "duration": 5.13,
+      "text": "But let me redefine that and say the following,"
+    },
+    {
+      "index": 1011,
+      "start": 4417.94,
+      "end": 4424.33,
+      "duration": 6.39,
+      "text": "that N is V dP by d mu at constant T."
+    },
+    {
+      "index": 1012,
+      "start": 4424.33,
+      "end": 4428.29,
+      "duration": 3.96,
+      "text": "And maybe I will start to gain some idea about chemical"
+    },
+    {
+      "index": 1013,
+      "start": 4428.29,
+      "end": 4431.43,
+      "duration": 3.14,
+      "text": "potential if I rearrange this as d mu"
+    },
+    {
+      "index": 1014,
+      "start": 4431.43,
+      "end": 4442.5,
+      "duration": 11.07,
+      "text": "is V/N dP along this surface of constant P at constant T."
+    },
+    {
+      "index": 1015,
+      "start": 4442.5,
+      "end": 4448.34,
+      "duration": 5.84,
+      "text": "And then I can calculate mu as a function of P"
+    },
+    {
+      "index": 1016,
+      "start": 4448.34,
+      "end": 4452.43,
+      "duration": 4.09,
+      "text": "at some particular temperature minus mu"
+    },
+    {
+      "index": 1017,
+      "start": 4452.43,
+      "end": 4458.81,
+      "duration": 6.38,
+      "text": "at some reference point by integrating from the reference"
+    },
+    {
+      "index": 1018,
+      "start": 4458.81,
+      "end": 4462.59,
+      "duration": 3.78,
+      "text": "point to the pressure of interest"
+    },
+    {
+      "index": 1019,
+      "start": 4462.59,
+      "end": 4470.02,
+      "duration": 7.43,
+      "text": "the quantity V/N dP prime where V of P prime I"
+    },
+    {
+      "index": 1020,
+      "start": 4470.02,
+      "end": 4472.36,
+      "duration": 2.34,
+      "text": "take from this curve."
+    },
+    {
+      "index": 1021,
+      "start": 4472.36,
+      "end": 4477.95,
+      "duration": 5.59,
+      "text": "So this curve gives me P as a function of V."
+    },
+    {
+      "index": 1022,
+      "start": 4477.95,
+      "end": 4483.42,
+      "duration": 5.47,
+      "text": "But I can invert it and think of V as a function of P,"
+    },
+    {
+      "index": 1023,
+      "start": 4483.42,
+      "end": 4487.31,
+      "duration": 3.89,
+      "text": "put it here, and see what is happening with the chemical"
+    },
+    {
+      "index": 1024,
+      "start": 4487.31,
+      "end": 4491.42,
+      "duration": 4.11,
+      "text": "potential if I walk along one of these trajectories."
+    },
+    {
+      "index": 1025,
+      "start": 4491.42,
+      "end": 4498.25,
+      "duration": 6.83,
+      "text": "And in particular, let's kind of draw one of these"
+    },
+    {
+      "index": 1026,
+      "start": 4498.25,
+      "end": 4501.52,
+      "duration": 3.27,
+      "text": "curves that I am unhappy with that"
+    },
+    {
+      "index": 1027,
+      "start": 4501.52,
+      "end": 4506.62,
+      "duration": 5.1,
+      "text": "have this kind of form in general"
+    },
+    {
+      "index": 1028,
+      "start": 4506.62,
+      "end": 4511.23,
+      "duration": 4.61,
+      "text": "and calculate what happens to the chemical potential"
+    },
+    {
+      "index": 1029,
+      "start": 4511.23,
+      "end": 4514.06,
+      "duration": 2.83,
+      "text": "if I, let's say, pick this reference point"
+    },
+    {
+      "index": 1030,
+      "start": 4514.06,
+      "end": 4518.1,
+      "duration": 4.04,
+      "text": "A, and the corresponding pressure PA,"
+    },
+    {
+      "index": 1031,
+      "start": 4518.1,
+      "end": 4522.61,
+      "duration": 4.51,
+      "text": "and go along this curve, which corresponds to some temperature"
+    },
+    {
+      "index": 1032,
+      "start": 4522.61,
+      "end": 4527.35,
+      "duration": 4.74,
+      "text": "T that is less than this instability temperature,"
+    },
+    {
+      "index": 1033,
+      "start": 4527.35,
+      "end": 4529.485,
+      "duration": 2.135,
+      "text": "and track the shape of the chemical potential."
+    },
+    {
+      "index": 1034,
+      "start": 4532.46,
+      "end": 4536.33,
+      "duration": 3.87,
+      "text": "So this formula says that the change in chemical potential we"
+    },
+    {
+      "index": 1035,
+      "start": 4536.33,
+      "end": 4541.0,
+      "duration": 4.67,
+      "text": "obtained by calculating V-- divide by N,"
+    },
+    {
+      "index": 1036,
+      "start": 4541.0,
+      "end": 4544.32,
+      "duration": 3.32,
+      "text": "but our N is fixed-- as a function of P,"
+    },
+    {
+      "index": 1037,
+      "start": 4544.32,
+      "end": 4547.56,
+      "duration": 3.24,
+      "text": "and integrating as you go up in pressure."
+    },
+    {
+      "index": 1038,
+      "start": 4547.56,
+      "end": 4552.07,
+      "duration": 4.51,
+      "text": "So essentially, I'm calculating the integral starting"
+    },
+    {
+      "index": 1039,
+      "start": 4552.07,
+      "end": 4555.25,
+      "duration": 3.18,
+      "text": "from point A as I go under this curve."
+    },
+    {
+      "index": 1040,
+      "start": 4558.7,
+      "end": 4564.12,
+      "duration": 5.42,
+      "text": "So let's plot as a result of that integration how"
+    },
+    {
+      "index": 1041,
+      "start": 4564.12,
+      "end": 4569.46,
+      "duration": 5.34,
+      "text": "that chemical potential at P minus PA is going to look"
+    },
+    {
+      "index": 1042,
+      "start": 4569.46,
+      "end": 4575.34,
+      "duration": 5.88,
+      "text": "like as I go in P beyond PA."
+    },
+    {
+      "index": 1043,
+      "start": 4575.34,
+      "end": 4577.99,
+      "duration": 2.65,
+      "text": "So at PA, that's my reference."
+    },
+    {
+      "index": 1044,
+      "start": 4577.99,
+      "end": 4581.23,
+      "duration": 3.24,
+      "text": "The chemical potential is some value."
+    },
+    {
+      "index": 1045,
+      "start": 4581.23,
+      "end": 4586.96,
+      "duration": 5.73,
+      "text": "As I go up and up, because of this area of this curve,"
+    },
+    {
+      "index": 1046,
+      "start": 4586.96,
+      "end": 4589.81,
+      "duration": 2.85,
+      "text": "I keep adding to the chemical potential"
+    },
+    {
+      "index": 1047,
+      "start": 4589.81,
+      "end": 4594.42,
+      "duration": 4.61,
+      "text": "until I reach the maximum here at this point C."
+    },
+    {
+      "index": 1048,
+      "start": 4594.42,
+      "end": 4603.38,
+      "duration": 8.96,
+      "text": "So there is some curve that goes from this A to some point C."
+    },
+    {
+      "index": 1049,
+      "start": 4603.38,
+      "end": 4611.11,
+      "duration": 7.73,
+      "text": "Now, the thing is that when I continue going along this curve"
+    },
+    {
+      "index": 1050,
+      "start": 4611.11,
+      "end": 4616.9,
+      "duration": 5.79,
+      "text": "down this potential all the way to the bottom of this, which"
+    },
+    {
+      "index": 1051,
+      "start": 4616.9,
+      "end": 4622.84,
+      "duration": 5.94,
+      "text": "I will call D, my DP's are negative."
+    },
+    {
+      "index": 1052,
+      "start": 4622.84,
+      "end": 4628.65,
+      "duration": 5.81,
+      "text": "So I start subtracting from what I had before."
+    },
+    {
+      "index": 1053,
+      "start": 4628.65,
+      "end": 4632.351,
+      "duration": 3.701,
+      "text": "And so then the curve starts to go down."
+    },
+    {
+      "index": 1054,
+      "start": 4632.351,
+      "end": 4636.6,
+      "duration": 4.249,
+      "text": "So all the way to D, I'm proceeding"
+    },
+    {
+      "index": 1055,
+      "start": 4636.6,
+      "end": 4639.07,
+      "duration": 2.47,
+      "text": "in the opposite direction."
+    },
+    {
+      "index": 1056,
+      "start": 4639.07,
+      "end": 4644.37,
+      "duration": 5.3,
+      "text": "Once I hit D, I start going all the way to the end of the curve"
+    },
+    {
+      "index": 1057,
+      "start": 4644.37,
+      "end": 4646.34,
+      "duration": 1.97,
+      "text": "however far I want to go."
+    },
+    {
+      "index": 1058,
+      "start": 4646.34,
+      "end": 4649.18,
+      "duration": 2.84,
+      "text": "And I'm adding some positive area."
+    },
+    {
+      "index": 1059,
+      "start": 4649.18,
+      "end": 4657.415,
+      "duration": 8.235,
+      "text": "So the next part I also have a variation in chemical potential"
+    },
+    {
+      "index": 1060,
+      "start": 4657.415,
+      "end": 4658.62,
+      "duration": 1.205,
+      "text": "that goes like this."
+    },
+    {
+      "index": 1061,
+      "start": 4664.14,
+      "end": 4671.384,
+      "duration": 7.244,
+      "text": "So you ask, well, if I give you what the temperature is"
+    },
+    {
+      "index": 1062,
+      "start": 4671.384,
+      "end": 4673.3,
+      "duration": 1.916,
+      "text": "and what the pressure is-- and I have told you"
+    },
+    {
+      "index": 1063,
+      "start": 4673.3,
+      "end": 4675.36,
+      "duration": 2.06,
+      "text": "what the temperature and pressure are--"
+    },
+    {
+      "index": 1064,
+      "start": 4675.36,
+      "end": 4677.85,
+      "duration": 2.49,
+      "text": "I should be able to calculate the chemical potential."
+    },
+    {
+      "index": 1065,
+      "start": 4677.85,
+      "end": 4679.8,
+      "duration": 1.95,
+      "text": "It's an intensive function of the other two"
+    },
+    {
+      "index": 1066,
+      "start": 4679.8,
+      "end": 4681.7,
+      "duration": 1.9,
+      "text": "intensive functions."
+    },
+    {
+      "index": 1067,
+      "start": 4681.7,
+      "end": 4684.65,
+      "duration": 2.95,
+      "text": "And this curve tells me that, except that there"
+    },
+    {
+      "index": 1068,
+      "start": 4684.65,
+      "end": 4687.71,
+      "duration": 3.06,
+      "text": "are regions where I don't know which one to pick."
+    },
+    {
+      "index": 1069,
+      "start": 4691.06,
+      "end": 4693.05,
+      "duration": 1.99,
+      "text": "There are regions where it's obvious there's"
+    },
+    {
+      "index": 1070,
+      "start": 4693.05,
+      "end": 4695.63,
+      "duration": 2.58,
+      "text": "one value of the chemical potential."
+    },
+    {
+      "index": 1071,
+      "start": 4695.63,
+      "end": 4698.76,
+      "duration": 3.13,
+      "text": "But there is in between, because of this instability,"
+    },
+    {
+      "index": 1072,
+      "start": 4698.76,
+      "end": 4701.88,
+      "duration": 3.12,
+      "text": "three possible values."
+    },
+    {
+      "index": 1073,
+      "start": 4701.88,
+      "end": 4707.57,
+      "duration": 5.69,
+      "text": "And typically, if you have systems--"
+    },
+    {
+      "index": 1074,
+      "start": 4707.57,
+      "end": 4711.2,
+      "duration": 3.63,
+      "text": "think about different chemicals that can go between each other."
+    },
+    {
+      "index": 1075,
+      "start": 4711.2,
+      "end": 4714.86,
+      "duration": 3.66,
+      "text": "And there are potentials for chemical transformations."
+    },
+    {
+      "index": 1076,
+      "start": 4714.86,
+      "end": 4718.45,
+      "duration": 3.59,
+      "text": "You say, go and pick the lowest chemical potential."
+    },
+    {
+      "index": 1077,
+      "start": 4718.45,
+      "end": 4721.9,
+      "duration": 3.45,
+      "text": "The system will evolve onto the condition that"
+    },
+    {
+      "index": 1078,
+      "start": 4721.9,
+      "end": 4724.41,
+      "duration": 2.51,
+      "text": "has the lowest chemical potential."
+    },
+    {
+      "index": 1079,
+      "start": 4724.41,
+      "end": 4728.29,
+      "duration": 3.88,
+      "text": "So that says that when you have a situation such as this,"
+    },
+    {
+      "index": 1080,
+      "start": 4728.29,
+      "end": 4732.49,
+      "duration": 4.2,
+      "text": "you really have to pick the lowest one."
+    },
+    {
+      "index": 1081,
+      "start": 4732.49,
+      "end": 4740.19,
+      "duration": 7.7,
+      "text": "And so you have to bail out on your first curve at the point"
+    },
+    {
+      "index": 1082,
+      "start": 4740.19,
+      "end": 4748.6,
+      "duration": 8.41,
+      "text": "B, and on your second curve at a point E, where on this curve"
+    },
+    {
+      "index": 1083,
+      "start": 4748.6,
+      "end": 4755.03,
+      "duration": 6.43,
+      "text": "B and E are such that when you integrate this BDP all"
+    },
+    {
+      "index": 1084,
+      "start": 4755.03,
+      "end": 4759.45,
+      "duration": 4.42,
+      "text": "the way from B to E, you will get 0, which means that you"
+    },
+    {
+      "index": 1085,
+      "start": 4759.45,
+      "end": 4767.28,
+      "duration": 7.83,
+      "text": "have to find points B and E such that the integral here"
+    },
+    {
+      "index": 1086,
+      "start": 4767.28,
+      "end": 4770.47,
+      "duration": 3.19,
+      "text": "is the same as the integral here."
+    },
+    {
+      "index": 1087,
+      "start": 4770.47,
+      "end": 4773.416,
+      "duration": 2.946,
+      "text": "And this is the so-called Maxwell construction."
+    },
+    {
+      "index": 1088,
+      "start": 4782.2,
+      "end": 4787.82,
+      "duration": 5.62,
+      "text": "So what that means is that originally I was telling you"
+    },
+    {
+      "index": 1089,
+      "start": 4787.82,
+      "end": 4794.7,
+      "duration": 6.88,
+      "text": "over here that there is some portion of the curve that"
+    },
+    {
+      "index": 1090,
+      "start": 4794.7,
+      "end": 4796.86,
+      "duration": 2.16,
+      "text": "violates all kinds of thermodynamics."
+    },
+    {
+      "index": 1091,
+      "start": 4796.86,
+      "end": 4799.42,
+      "duration": 2.56,
+      "text": "And you should not access it."
+    },
+    {
+      "index": 1092,
+      "start": 4799.42,
+      "end": 4803.5,
+      "duration": 4.08,
+      "text": "And this other argument that we are pursuing here says that"
+    },
+    {
+      "index": 1093,
+      "start": 4803.5,
+      "end": 4807.55,
+      "duration": 4.05,
+      "text": "actually the regions that you cannot access are beyond that."
+    },
+    {
+      "index": 1094,
+      "start": 4807.55,
+      "end": 4810.2,
+      "duration": 2.65,
+      "text": "There's a portion that extends in this direction,"
+    },
+    {
+      "index": 1095,
+      "start": 4810.2,
+      "end": 4813.16,
+      "duration": 2.96,
+      "text": "and a portion that extends in that direction."
+    },
+    {
+      "index": 1096,
+      "start": 4813.16,
+      "end": 4816.89,
+      "duration": 3.73,
+      "text": "And really there's a portion that you can access up to here,"
+    },
+    {
+      "index": 1097,
+      "start": 4816.89,
+      "end": 4819.96,
+      "duration": 3.07,
+      "text": "and a portion that you can access up to here."
+    },
+    {
+      "index": 1098,
+      "start": 4819.96,
+      "end": 4822.01,
+      "duration": 2.05,
+      "text": "And maybe you should sort of then"
+    },
+    {
+      "index": 1099,
+      "start": 4822.01,
+      "end": 4825.21,
+      "duration": 3.2,
+      "text": "join them by a straight line and make an analog"
+    },
+    {
+      "index": 1100,
+      "start": 4825.21,
+      "end": 4828.98,
+      "duration": 3.77,
+      "text": "with what we have over there."
+    },
+    {
+      "index": 1101,
+      "start": 4828.98,
+      "end": 4836.31,
+      "duration": 7.33,
+      "text": "Now, in another thing, another way of looking at this"
+    },
+    {
+      "index": 1102,
+      "start": 4836.31,
+      "end": 4841.37,
+      "duration": 5.06,
+      "text": "is that the green portion is certainly unstable,"
+    },
+    {
+      "index": 1103,
+      "start": 4841.37,
+      "end": 4844.95,
+      "duration": 3.58,
+      "text": "violates all kinds of thermodynamic conditions."
+    },
+    {
+      "index": 1104,
+      "start": 4844.95,
+      "end": 4848.85,
+      "duration": 3.9,
+      "text": "And people argue that these other portions that"
+    },
+    {
+      "index": 1105,
+      "start": 4848.85,
+      "end": 4853.96,
+      "duration": 5.11,
+      "text": "have the right slope are in some sense metastable."
+    },
+    {
+      "index": 1106,
+      "start": 4853.96,
+      "end": 4861.04,
+      "duration": 7.08,
+      "text": "So this would be a stable equilibrium."
+    },
+    {
+      "index": 1107,
+      "start": 4861.04,
+      "end": 4864.54,
+      "duration": 3.5,
+      "text": "This would be an unstable equilibrium."
+    },
+    {
+      "index": 1108,
+      "start": 4864.54,
+      "end": 4867.7,
+      "duration": 3.16,
+      "text": "And a metastable equilibrium is that you are at a minimum,"
+    },
+    {
+      "index": 1109,
+      "start": 4867.7,
+      "end": 4870.88,
+      "duration": 3.18,
+      "text": "but there's a deeper minimum somewhere else."
+    },
+    {
+      "index": 1110,
+      "start": 4870.88,
+      "end": 4883.35,
+      "duration": 12.47,
+      "text": "And the picture is that if you manage to take your gas"
+    },
+    {
+      "index": 1111,
+      "start": 4883.35,
+      "end": 4887.27,
+      "duration": 3.92,
+      "text": "and put additional pressure on it,"
+    },
+    {
+      "index": 1112,
+      "start": 4887.27,
+      "end": 4893.19,
+      "duration": 5.92,
+      "text": "there is a region where there is a coexistence with the liquid"
+    },
+    {
+      "index": 1113,
+      "start": 4893.19,
+      "end": 4897.18,
+      "duration": 3.99,
+      "text": "which is better in terms of free energy, et cetera."
+    },
+    {
+      "index": 1114,
+      "start": 4897.18,
+      "end": 4900.25,
+      "duration": 3.07,
+      "text": "But there could be some kind of a kinetic barrier,"
+    },
+    {
+      "index": 1115,
+      "start": 4900.25,
+      "end": 4904.99,
+      "duration": 4.74,
+      "text": "like nucleation or whatever, that prevents you to go there."
+    },
+    {
+      "index": 1116,
+      "start": 4904.99,
+      "end": 4908.18,
+      "duration": 3.19,
+      "text": "And this again is something that is experimentally observed."
+    },
+    {
+      "index": 1117,
+      "start": 4908.18,
+      "end": 4911.89,
+      "duration": 3.71,
+      "text": "If you try to rapidly pressurize a gas,"
+    },
+    {
+      "index": 1118,
+      "start": 4911.89,
+      "end": 4916.9,
+      "duration": 5.01,
+      "text": "you could sometimes avoid and not make your transition"
+    },
+    {
+      "index": 1119,
+      "start": 4916.9,
+      "end": 4919.68,
+      "duration": 2.78,
+      "text": "to the liquid state at the right pressure."
+    },
+    {
+      "index": 1120,
+      "start": 4919.68,
+      "end": 4922.595,
+      "duration": 2.915,
+      "text": "But if you were to do things sufficiently slowly,"
+    },
+    {
+      "index": 1121,
+      "start": 4922.595,
+      "end": 4927.02,
+      "duration": 4.425,
+      "text": "you would ultimately reach this point"
+    },
+    {
+      "index": 1122,
+      "start": 4927.02,
+      "end": 4929.23,
+      "duration": 2.21,
+      "text": "that corresponds to the true equilibrium"
+    },
+    {
+      "index": 1123,
+      "start": 4929.23,
+      "end": 4933.66,
+      "duration": 4.43,
+      "text": "pressure of making this transition."
+    },
+    {
+      "index": 1124,
+      "start": 4933.66,
+      "end": 4938.02,
+      "duration": 4.36,
+      "text": "Now, the thing is that somehow this whole story"
+    },
+    {
+      "index": 1125,
+      "start": 4938.02,
+      "end": 4941.69,
+      "duration": 3.67,
+      "text": "is not very satisfactory."
+    },
+    {
+      "index": 1126,
+      "start": 4941.69,
+      "end": 4943.94,
+      "duration": 2.25,
+      "text": "I started with some rearrangement"
+    },
+    {
+      "index": 1127,
+      "start": 4943.94,
+      "end": 4947.84,
+      "duration": 3.9,
+      "text": "of some perturbative to arrive at this equation."
+    },
+    {
+      "index": 1128,
+      "start": 4947.84,
+      "end": 4951.2,
+      "duration": 3.36,
+      "text": "This equation has this unstable portion."
+    },
+    {
+      "index": 1129,
+      "start": 4951.2,
+      "end": 4954.9,
+      "duration": 3.7,
+      "text": "And somehow I'm trying to relate something that makes absolutely"
+    },
+    {
+      "index": 1130,
+      "start": 4954.9,
+      "end": 4957.88,
+      "duration": 2.98,
+      "text": "no thermodynamic sense and try to gain"
+    },
+    {
+      "index": 1131,
+      "start": 4957.88,
+      "end": 4963.545,
+      "duration": 5.665,
+      "text": "from it some idea about what is happening in a real liquid gas"
+    },
+    {
+      "index": 1132,
+      "start": 4963.545,
+      "end": 4965.25,
+      "duration": 1.705,
+      "text": "system."
+    },
+    {
+      "index": 1133,
+      "start": 4965.25,
+      "end": 4968.58,
+      "duration": 3.33,
+      "text": "So it would be good if all of this"
+    },
+    {
+      "index": 1134,
+      "start": 4968.58,
+      "end": 4973.25,
+      "duration": 4.67,
+      "text": "could be more formally described within a framework"
+    },
+    {
+      "index": 1135,
+      "start": 4973.25,
+      "end": 4977.53,
+      "duration": 4.28,
+      "text": "where all of the approximations, et cetera, are clear,"
+    },
+    {
+      "index": 1136,
+      "start": 4977.53,
+      "end": 4979.41,
+      "duration": 1.88,
+      "text": "and we know what's going on."
+    },
+    {
+      "index": 1137,
+      "start": 4979.41,
+      "end": 4982.575,
+      "duration": 3.165,
+      "text": "And so next time, we will do that."
+    },
+    {
+      "index": 1138,
+      "start": 4982.575,
+      "end": 4986.91,
+      "duration": 4.335,
+      "text": "We will essentially developed a much more systematic formalism"
+    },
+    {
+      "index": 1139,
+      "start": 4986.91,
+      "end": 4991.55,
+      "duration": 4.64,
+      "text": "for calculating the properties of an interacting gas,"
+    },
+    {
+      "index": 1140,
+      "start": 4991.55,
+      "end": 4996.619,
+      "duration": 5.069,
+      "text": "and see that we get this, and we also understand why it fails."
+    }
+  ],
+  "course": {
+    "category": "Physics",
+    "title": "Quantum Physics",
+    "source_url": "https://www.youtube.com/playlist?list=PLUl4u3cNGP60gl3fdUTKRrt5t_GPx2sRg"
+  }
+}

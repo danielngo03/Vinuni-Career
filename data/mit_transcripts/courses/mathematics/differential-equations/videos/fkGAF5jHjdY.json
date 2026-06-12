@@ -1,0 +1,1824 @@
+{
+  "video": {
+    "id": "fkGAF5jHjdY",
+    "title": "Sinusoidal Inputs | MIT 18.03SC Differential Equations, Fall 2011",
+    "url": "https://www.youtube.com/watch?v=fkGAF5jHjdY",
+    "channel": "MIT OpenCourseWare",
+    "duration": 827,
+    "language": "en"
+  },
+  "segment_count": 258,
+  "segments": [
+    {
+      "index": 0,
+      "start": 7.429,
+      "end": 7.439,
+      "duration": 0.01,
+      "text": "welcome back so in this session we're"
+    },
+    {
+      "index": 1,
+      "start": 7.439,
+      "end": 10.11,
+      "duration": 2.671,
+      "text": "going to look at Cold inputs for"
+    },
+    {
+      "index": 2,
+      "start": 10.12,
+      "end": 12.43,
+      "duration": 2.31,
+      "text": "ordinary differential equations of order"
+    },
+    {
+      "index": 3,
+      "start": 12.44,
+      "end": 15.19,
+      "duration": 2.75,
+      "text": "one so here in question one you're used"
+    },
+    {
+      "index": 4,
+      "start": 15.2,
+      "end": 17.51,
+      "duration": 2.31,
+      "text": "to use you're asked to use complex"
+    },
+    {
+      "index": 5,
+      "start": 17.52,
+      "end": 20.63,
+      "duration": 3.11,
+      "text": "techniques to solve x dot plus KX equal"
+    },
+    {
+      "index": 6,
+      "start": 20.64,
+      "end": 23.75,
+      "duration": 3.11,
+      "text": "cosine of Omega T here K and Omega are"
+    },
+    {
+      "index": 7,
+      "start": 23.76,
+      "end": 27.71,
+      "duration": 3.95,
+      "text": "constants this is a OD of first order uh"
+    },
+    {
+      "index": 8,
+      "start": 27.72,
+      "end": 31.71,
+      "duration": 3.99,
+      "text": "and the cidal input is referring to the"
+    },
+    {
+      "index": 9,
+      "start": 31.72,
+      "end": 33.59,
+      "duration": 1.87,
+      "text": "right hand side of the OD where"
+    },
+    {
+      "index": 10,
+      "start": 33.6,
+      "end": 36.19,
+      "duration": 2.59,
+      "text": "basically the we are forcing a system"
+    },
+    {
+      "index": 11,
+      "start": 36.2,
+      "end": 39.229,
+      "duration": 3.029,
+      "text": "with a function and its sinusoidal of"
+    },
+    {
+      "index": 12,
+      "start": 39.239,
+      "end": 41.95,
+      "duration": 2.711,
+      "text": "angular frequency Omega which means"
+    },
+    {
+      "index": 13,
+      "start": 41.96,
+      "end": 44.389,
+      "duration": 2.429,
+      "text": "basically a period of 2 pi over Omega so"
+    },
+    {
+      "index": 14,
+      "start": 44.399,
+      "end": 46.15,
+      "duration": 1.751,
+      "text": "you're used to you're asked to use"
+    },
+    {
+      "index": 15,
+      "start": 46.16,
+      "end": 48.029,
+      "duration": 1.869,
+      "text": "complex techniques to solve"
+    },
+    {
+      "index": 16,
+      "start": 48.039,
+      "end": 51.11,
+      "duration": 3.071,
+      "text": "this in question a in question B we're"
+    },
+    {
+      "index": 17,
+      "start": 51.12,
+      "end": 54.189,
+      "duration": 3.069,
+      "text": "asked to use what we had in question a"
+    },
+    {
+      "index": 18,
+      "start": 54.199,
+      "end": 56.389,
+      "duration": 2.19,
+      "text": "to solve this modified function where"
+    },
+    {
+      "index": 19,
+      "start": 56.399,
+      "end": 58.47,
+      "duration": 2.071,
+      "text": "again we have a cidal input on the right"
+    },
+    {
+      "index": 20,
+      "start": 58.48,
+      "end": 60.63,
+      "duration": 2.15,
+      "text": "hand side with an additional amp ude F"
+    },
+    {
+      "index": 21,
+      "start": 60.64,
+      "end": 63.229,
+      "duration": 2.589,
+      "text": "which is now constant in the third part"
+    },
+    {
+      "index": 22,
+      "start": 63.239,
+      "end": 64.75,
+      "duration": 1.511,
+      "text": "we're asked to use superposition"
+    },
+    {
+      "index": 23,
+      "start": 64.76,
+      "end": 66.63,
+      "duration": 1.87,
+      "text": "principle to solve this combined"
+    },
+    {
+      "index": 24,
+      "start": 66.64,
+      "end": 68.63,
+      "duration": 1.99,
+      "text": "equation where now we're introducing a"
+    },
+    {
+      "index": 25,
+      "start": 68.64,
+      "end": 70.95,
+      "duration": 2.31,
+      "text": "value for example for f which is three"
+    },
+    {
+      "index": 26,
+      "start": 70.96,
+      "end": 72.55,
+      "duration": 1.59,
+      "text": "and you can see also that the right hand"
+    },
+    {
+      "index": 27,
+      "start": 72.56,
+      "end": 74.63,
+      "duration": 2.07,
+      "text": "side is also a cidal input because it's"
+    },
+    {
+      "index": 28,
+      "start": 74.64,
+      "end": 77.55,
+      "duration": 2.91,
+      "text": "a linear combination of Cal functions"
+    },
+    {
+      "index": 29,
+      "start": 77.56,
+      "end": 79.19,
+      "duration": 1.63,
+      "text": "all these equations are linear with"
+    },
+    {
+      "index": 30,
+      "start": 79.2,
+      "end": 80.31,
+      "duration": 1.11,
+      "text": "constant"
+    },
+    {
+      "index": 31,
+      "start": 80.32,
+      "end": 82.83,
+      "duration": 2.51,
+      "text": "coefficients and hence superposition"
+    },
+    {
+      "index": 32,
+      "start": 82.84,
+      "end": 84.749,
+      "duration": 1.909,
+      "text": "principle would hold so why don't you"
+    },
+    {
+      "index": 33,
+      "start": 84.759,
+      "end": 86.63,
+      "duration": 1.871,
+      "text": "stop the video take a few minutes and"
+    },
+    {
+      "index": 34,
+      "start": 86.64,
+      "end": 88.19,
+      "duration": 1.55,
+      "text": "work through the problems and we'll be"
+    },
+    {
+      "index": 35,
+      "start": 88.2,
+      "end": 100.71,
+      "duration": 12.51,
+      "text": "back"
+    },
+    {
+      "index": 36,
+      "start": 104.55,
+      "end": 104.56,
+      "duration": 0.01,
+      "text": "welcome back so what is it that we're"
+    },
+    {
+      "index": 37,
+      "start": 104.56,
+      "end": 106.51,
+      "duration": 1.95,
+      "text": "asked to do here we're asked to solve"
+    },
+    {
+      "index": 38,
+      "start": 106.52,
+      "end": 108.069,
+      "duration": 1.549,
+      "text": "this using a trick that you learn in"
+    },
+    {
+      "index": 39,
+      "start": 108.079,
+      "end": 110.67,
+      "duration": 2.591,
+      "text": "class to basically convert a real valued"
+    },
+    {
+      "index": 40,
+      "start": 110.68,
+      "end": 114.27,
+      "duration": 3.59,
+      "text": "OD into complex form so in the"
+    },
+    {
+      "index": 41,
+      "start": 114.28,
+      "end": 117.99,
+      "duration": 3.71,
+      "text": "first first thing to do is to realize"
+    },
+    {
+      "index": 42,
+      "start": 118.0,
+      "end": 122.029,
+      "duration": 4.029,
+      "text": "that"
+    },
+    {
+      "index": 43,
+      "start": 123.83,
+      "end": 123.84,
+      "duration": 0.01,
+      "text": "the first thing to do is to realize that"
+    },
+    {
+      "index": 44,
+      "start": 123.84,
+      "end": 125.99,
+      "duration": 2.15,
+      "text": "the cosine of Omega"
+    },
+    {
+      "index": 45,
+      "start": 126.0,
+      "end": 131.39,
+      "duration": 5.39,
+      "text": "T is simply the real part of the"
+    },
+    {
+      "index": 46,
+      "start": 131.4,
+      "end": 134.869,
+      "duration": 3.469,
+      "text": "imaginary complex exponential I Omega T"
+    },
+    {
+      "index": 47,
+      "start": 134.879,
+      "end": 137.79,
+      "duration": 2.911,
+      "text": "so when when we realize that and we see"
+    },
+    {
+      "index": 48,
+      "start": 137.8,
+      "end": 148.43,
+      "duration": 10.63,
+      "text": "that the OD is real valued linear we"
+    },
+    {
+      "index": 49,
+      "start": 175.27,
+      "end": 175.28,
+      "duration": 0.01,
+      "text": "complex so from this point and we're"
+    },
+    {
+      "index": 50,
+      "start": 175.28,
+      "end": 178.47,
+      "duration": 3.19,
+      "text": "going to label this equation"
+    },
+    {
+      "index": 51,
+      "start": 178.48,
+      "end": 180.869,
+      "duration": 2.389,
+      "text": "star from this this point we can go back"
+    },
+    {
+      "index": 52,
+      "start": 180.879,
+      "end": 182.11,
+      "duration": 1.231,
+      "text": "to the techniques that we learned in"
+    },
+    {
+      "index": 53,
+      "start": 182.12,
+      "end": 184.63,
+      "duration": 2.51,
+      "text": "class namely the integrating factor to"
+    },
+    {
+      "index": 54,
+      "start": 184.64,
+      "end": 186.27,
+      "duration": 1.63,
+      "text": "realize that we can rewrite the right"
+    },
+    {
+      "index": 55,
+      "start": 186.28,
+      "end": 188.309,
+      "duration": 2.029,
+      "text": "hand"
+    },
+    {
+      "index": 56,
+      "start": 188.319,
+      "end": 190.83,
+      "duration": 2.511,
+      "text": "side in this form introducing a new"
+    },
+    {
+      "index": 57,
+      "start": 190.84,
+      "end": 194.309,
+      "duration": 3.469,
+      "text": "function U so"
+    },
+    {
+      "index": 58,
+      "start": 194.319,
+      "end": 197.03,
+      "duration": 2.711,
+      "text": "that we need to seek a function U that"
+    },
+    {
+      "index": 59,
+      "start": 197.04,
+      "end": 201.39,
+      "duration": 4.35,
+      "text": "will then recover this function this"
+    },
+    {
+      "index": 60,
+      "start": 201.4,
+      "end": 204.43,
+      "duration": 3.03,
+      "text": "equation and from"
+    },
+    {
+      "index": 61,
+      "start": 204.44,
+      "end": 207.27,
+      "duration": 2.83,
+      "text": "previous recitations and problem we saw"
+    },
+    {
+      "index": 62,
+      "start": 207.28,
+      "end": 208.99,
+      "duration": 1.71,
+      "text": "that clearly the U that we would need to"
+    },
+    {
+      "index": 63,
+      "start": 209.0,
+      "end": 212.509,
+      "duration": 3.509,
+      "text": "pick is just exponential of KT okay so"
+    },
+    {
+      "index": 64,
+      "start": 212.519,
+      "end": 215.03,
+      "duration": 2.511,
+      "text": "now from this we basically have we're"
+    },
+    {
+      "index": 65,
+      "start": 215.04,
+      "end": 223.149,
+      "duration": 8.109,
+      "text": "back"
+    },
+    {
+      "index": 66,
+      "start": 226.63,
+      "end": 226.64,
+      "duration": 0.01,
+      "text": "to I Omega plus K the whole thing t on"
+    },
+    {
+      "index": 67,
+      "start": 226.64,
+      "end": 229.589,
+      "duration": 2.949,
+      "text": "the right hand side and"
+    },
+    {
+      "index": 68,
+      "start": 229.599,
+      "end": 232.069,
+      "duration": 2.47,
+      "text": "here z u Prime that we just need to"
+    },
+    {
+      "index": 69,
+      "start": 232.079,
+      "end": 235.789,
+      "duration": 3.71,
+      "text": "integrate on both sides so this is"
+    },
+    {
+      "index": 70,
+      "start": 235.799,
+      "end": 240.429,
+      "duration": 4.63,
+      "text": "simply KT Z on the left hand side"
+    },
+    {
+      "index": 71,
+      "start": 240.439,
+      "end": 241.63,
+      "duration": 1.191,
+      "text": "and on the right hand side we're"
+    },
+    {
+      "index": 72,
+      "start": 241.64,
+      "end": 245.67,
+      "duration": 4.03,
+      "text": "integrating again it's just still an"
+    },
+    {
+      "index": 73,
+      "start": 245.68,
+      "end": 253.63,
+      "duration": 7.95,
+      "text": "exponential even though it's"
+    },
+    {
+      "index": 74,
+      "start": 255.869,
+      "end": 255.879,
+      "duration": 0.01,
+      "text": "complex and we need to introduce of"
+    },
+    {
+      "index": 75,
+      "start": 255.879,
+      "end": 260.03,
+      "duration": 4.151,
+      "text": "course constant of"
+    },
+    {
+      "index": 76,
+      "start": 263.35,
+      "end": 263.36,
+      "duration": 0.01,
+      "text": "integration so the solution for the"
+    },
+    {
+      "index": 77,
+      "start": 263.36,
+      "end": 264.43,
+      "duration": 1.07,
+      "text": "equation"
+    },
+    {
+      "index": 78,
+      "start": 264.44,
+      "end": 266.87,
+      "duration": 2.43,
+      "text": "star is then I'm going to write it up"
+    },
+    {
+      "index": 79,
+      "start": 266.88,
+      "end": 268.909,
+      "duration": 2.029,
+      "text": "here so that we keep that for the rest"
+    },
+    {
+      "index": 80,
+      "start": 268.919,
+      "end": 272.51,
+      "duration": 3.591,
+      "text": "of the problem"
+    },
+    {
+      "index": 81,
+      "start": 275.469,
+      "end": 275.479,
+      "duration": 0.01,
+      "text": "minus t minus"
+    },
+    {
+      "index": 82,
+      "start": 275.479,
+      "end": 279.31,
+      "duration": 3.831,
+      "text": "KT when I divide by this and here the"
+    },
+    {
+      "index": 83,
+      "start": 279.32,
+      "end": 281.87,
+      "duration": 2.55,
+      "text": "minus KT of this exponential is going to"
+    },
+    {
+      "index": 84,
+      "start": 281.88,
+      "end": 293.27,
+      "duration": 11.39,
+      "text": "be canceled out by the integrating"
+    },
+    {
+      "index": 85,
+      "start": 297.07,
+      "end": 297.08,
+      "duration": 0.01,
+      "text": "Factor okay so we're going to keep that"
+    },
+    {
+      "index": 86,
+      "start": 297.08,
+      "end": 300.87,
+      "duration": 3.79,
+      "text": "here so here I gave the general solution"
+    },
+    {
+      "index": 87,
+      "start": 300.88,
+      "end": 303.31,
+      "duration": 2.43,
+      "text": "with the solution that would come from"
+    },
+    {
+      "index": 88,
+      "start": 303.32,
+      "end": 305.39,
+      "duration": 2.07,
+      "text": "the homogeneous equation which we could"
+    },
+    {
+      "index": 89,
+      "start": 305.4,
+      "end": 306.95,
+      "duration": 1.55,
+      "text": "refer to also as a transient here"
+    },
+    {
+      "index": 90,
+      "start": 306.96,
+      "end": 309.27,
+      "duration": 2.31,
+      "text": "because basically after a long time T"
+    },
+    {
+      "index": 91,
+      "start": 309.28,
+      "end": 312.11,
+      "duration": 2.83,
+      "text": "this exponential if K is positive would"
+    },
+    {
+      "index": 92,
+      "start": 312.12,
+      "end": 314.67,
+      "duration": 2.55,
+      "text": "Decay and the solute the part of the"
+    },
+    {
+      "index": 93,
+      "start": 314.68,
+      "end": 317.55,
+      "duration": 2.87,
+      "text": "solution that comes from the Cal input"
+    },
+    {
+      "index": 94,
+      "start": 317.56,
+      "end": 319.11,
+      "duration": 1.55,
+      "text": "or the forcing which would be a"
+    },
+    {
+      "index": 95,
+      "start": 319.12,
+      "end": 321.55,
+      "duration": 2.43,
+      "text": "particular"
+    },
+    {
+      "index": 96,
+      "start": 321.56,
+      "end": 324.39,
+      "duration": 2.83,
+      "text": "solution so to go back to the original"
+    },
+    {
+      "index": 97,
+      "start": 324.4,
+      "end": 325.99,
+      "duration": 1.59,
+      "text": "question we were asked to solve this"
+    },
+    {
+      "index": 98,
+      "start": 326.0,
+      "end": 329.43,
+      "duration": 3.43,
+      "text": "real valued equation so from what we"
+    },
+    {
+      "index": 99,
+      "start": 329.44,
+      "end": 331.23,
+      "duration": 1.79,
+      "text": "know noticed above we saw that the right"
+    },
+    {
+      "index": 100,
+      "start": 331.24,
+      "end": 333.39,
+      "duration": 2.15,
+      "text": "hand side is just a real part of the"
+    },
+    {
+      "index": 101,
+      "start": 333.4,
+      "end": 335.07,
+      "duration": 1.67,
+      "text": "right hand side of the complex value"
+    },
+    {
+      "index": 102,
+      "start": 335.08,
+      "end": 340.749,
+      "duration": 5.669,
+      "text": "equation star and similarly then we"
+    },
+    {
+      "index": 103,
+      "start": 343.83,
+      "end": 343.84,
+      "duration": 0.01,
+      "text": "can do the same for the actual Solutions"
+    },
+    {
+      "index": 104,
+      "start": 343.84,
+      "end": 346.189,
+      "duration": 2.349,
+      "text": "themselves X is also just a real value"
+    },
+    {
+      "index": 105,
+      "start": 346.199,
+      "end": 349.029,
+      "duration": 2.83,
+      "text": "of this complex number so here for this"
+    },
+    {
+      "index": 106,
+      "start": 349.039,
+      "end": 351.67,
+      "duration": 2.631,
+      "text": "General solution I'm going to just use c"
+    },
+    {
+      "index": 107,
+      "start": 351.68,
+      "end": 355.189,
+      "duration": 3.509,
+      "text": "bar for General complex constant here uh"
+    },
+    {
+      "index": 108,
+      "start": 355.199,
+      "end": 357.07,
+      "duration": 1.871,
+      "text": "and in this case we will take the real"
+    },
+    {
+      "index": 109,
+      "start": 357.08,
+      "end": 358.95,
+      "duration": 1.87,
+      "text": "value so at this point we don't really"
+    },
+    {
+      "index": 110,
+      "start": 358.96,
+      "end": 360.309,
+      "duration": 1.349,
+      "text": "doesn't really matter matter what C is"
+    },
+    {
+      "index": 111,
+      "start": 360.319,
+      "end": 361.59,
+      "duration": 1.271,
+      "text": "is just we're going to keep it as a"
+    },
+    {
+      "index": 112,
+      "start": 361.6,
+      "end": 365.27,
+      "duration": 3.67,
+      "text": "constant and now it's just real"
+    },
+    {
+      "index": 113,
+      "start": 365.28,
+      "end": 368.07,
+      "duration": 2.79,
+      "text": "valued that's for the one part and then"
+    },
+    {
+      "index": 114,
+      "start": 368.08,
+      "end": 370.43,
+      "duration": 2.35,
+      "text": "we need to"
+    },
+    {
+      "index": 115,
+      "start": 370.44,
+      "end": 374.71,
+      "duration": 4.27,
+      "text": "take the real part of this"
+    },
+    {
+      "index": 116,
+      "start": 374.72,
+      "end": 377.589,
+      "duration": 2.869,
+      "text": "expression come back to the line here so"
+    },
+    {
+      "index": 117,
+      "start": 377.599,
+      "end": 380.83,
+      "duration": 3.231,
+      "text": "to take the real part of this"
+    },
+    {
+      "index": 118,
+      "start": 382.95,
+      "end": 382.96,
+      "duration": 0.01,
+      "text": "expression you learn that basically you"
+    },
+    {
+      "index": 119,
+      "start": 382.96,
+      "end": 385.909,
+      "duration": 2.949,
+      "text": "just need to multiply the denominator"
+    },
+    {
+      "index": 120,
+      "start": 385.919,
+      "end": 388.55,
+      "duration": 2.631,
+      "text": "the numerator by the complex conjugate"
+    },
+    {
+      "index": 121,
+      "start": 388.56,
+      "end": 392.15,
+      "duration": 3.59,
+      "text": "for"
+    },
+    {
+      "index": 122,
+      "start": 409.469,
+      "end": 409.479,
+      "duration": 0.01,
+      "text": "us so we have K minus I Omega over the"
+    },
+    {
+      "index": 123,
+      "start": 409.479,
+      "end": 410.51,
+      "duration": 1.031,
+      "text": "squares"
+    },
+    {
+      "index": 124,
+      "start": 410.52,
+      "end": 413.23,
+      "duration": 2.71,
+      "text": "and and then again earlier formula that"
+    },
+    {
+      "index": 125,
+      "start": 413.24,
+      "end": 416.27,
+      "duration": 3.03,
+      "text": "we saw in the previous recitation so X"
+    },
+    {
+      "index": 126,
+      "start": 416.28,
+      "end": 418.23,
+      "duration": 1.95,
+      "text": "from this expression is just the real"
+    },
+    {
+      "index": 127,
+      "start": 418.24,
+      "end": 420.309,
+      "duration": 2.069,
+      "text": "part of all of this so it's going to be"
+    },
+    {
+      "index": 128,
+      "start": 420.319,
+      "end": 424.629,
+      "duration": 4.31,
+      "text": "this"
+    },
+    {
+      "index": 129,
+      "start": 426.909,
+      "end": 426.919,
+      "duration": 0.01,
+      "text": "term actually let me"
+    },
+    {
+      "index": 130,
+      "start": 426.919,
+      "end": 432.07,
+      "duration": 5.151,
+      "text": "factorize"
+    },
+    {
+      "index": 131,
+      "start": 434.07,
+      "end": 434.08,
+      "duration": 0.01,
+      "text": "denominator and then the result of"
+    },
+    {
+      "index": 132,
+      "start": 434.08,
+      "end": 436.35,
+      "duration": 2.27,
+      "text": "multiplying the two complex Parts as"
+    },
+    {
+      "index": 133,
+      "start": 436.36,
+      "end": 442.07,
+      "duration": 5.71,
+      "text": "well I do I minus"
+    },
+    {
+      "index": 134,
+      "start": 444.629,
+      "end": 444.639,
+      "duration": 0.01,
+      "text": "one and so that"
+    },
+    {
+      "index": 135,
+      "start": 444.639,
+      "end": 447.83,
+      "duration": 3.191,
+      "text": "ansers the part A of the"
+    },
+    {
+      "index": 136,
+      "start": 447.84,
+      "end": 450.469,
+      "duration": 2.629,
+      "text": "question the part A of the the problem"
+    },
+    {
+      "index": 137,
+      "start": 450.479,
+      "end": 454.39,
+      "duration": 3.911,
+      "text": "so if we look at Part B I'm just going"
+    },
+    {
+      "index": 138,
+      "start": 454.4,
+      "end": 456.71,
+      "duration": 2.31,
+      "text": "to do it"
+    },
+    {
+      "index": 139,
+      "start": 456.72,
+      "end": 459.79,
+      "duration": 3.07,
+      "text": "here Part B we're asked to to solve a"
+    },
+    {
+      "index": 140,
+      "start": 459.8,
+      "end": 463.189,
+      "duration": 3.389,
+      "text": "very very similar"
+    },
+    {
+      "index": 141,
+      "start": 466.67,
+      "end": 466.68,
+      "duration": 0.01,
+      "text": "equation and I'm just going to"
+    },
+    {
+      "index": 142,
+      "start": 466.68,
+      "end": 469.749,
+      "duration": 3.069,
+      "text": "leave the F out for"
+    },
+    {
+      "index": 143,
+      "start": 469.759,
+      "end": 472.79,
+      "duration": 3.031,
+      "text": "now it's basically the same equation"
+    },
+    {
+      "index": 144,
+      "start": 472.8,
+      "end": 475.029,
+      "duration": 2.229,
+      "text": "except that the input now is a sign"
+    },
+    {
+      "index": 145,
+      "start": 475.039,
+      "end": 477.029,
+      "duration": 1.99,
+      "text": "instead of a cosine so we can use the"
+    },
+    {
+      "index": 146,
+      "start": 477.039,
+      "end": 479.749,
+      "duration": 2.71,
+      "text": "same trick as we used for question a by"
+    },
+    {
+      "index": 147,
+      "start": 479.759,
+      "end": 482.07,
+      "duration": 2.311,
+      "text": "realizing that now the sign is just the"
+    },
+    {
+      "index": 148,
+      "start": 482.08,
+      "end": 489.749,
+      "duration": 7.669,
+      "text": "imaginary part of the"
+    },
+    {
+      "index": 149,
+      "start": 492.909,
+      "end": 492.919,
+      "duration": 0.01,
+      "text": "exponential the complex"
+    },
+    {
+      "index": 150,
+      "start": 492.919,
+      "end": 495.27,
+      "duration": 2.351,
+      "text": "exponential so we don't need to redo all"
+    },
+    {
+      "index": 151,
+      "start": 495.28,
+      "end": 497.629,
+      "duration": 2.349,
+      "text": "the work we only need to if we were"
+    },
+    {
+      "index": 152,
+      "start": 497.639,
+      "end": 499.469,
+      "duration": 1.83,
+      "text": "considering this equation to just take"
+    },
+    {
+      "index": 153,
+      "start": 499.479,
+      "end": 501.27,
+      "duration": 1.791,
+      "text": "the imaginary part of the solution that"
+    },
+    {
+      "index": 154,
+      "start": 501.28,
+      "end": 504.11,
+      "duration": 2.83,
+      "text": "we just found here and we can just read"
+    },
+    {
+      "index": 155,
+      "start": 504.12,
+      "end": 508.07,
+      "duration": 3.95,
+      "text": "off the solution from this from this"
+    },
+    {
+      "index": 156,
+      "start": 508.08,
+      "end": 509.95,
+      "duration": 1.87,
+      "text": "line um"
+    },
+    {
+      "index": 157,
+      "start": 509.96,
+      "end": 513.63,
+      "duration": 3.67,
+      "text": "note that in this expression I left out"
+    },
+    {
+      "index": 158,
+      "start": 513.64,
+      "end": 518.269,
+      "duration": 4.629,
+      "text": "the homogeneous part which I should add"
+    },
+    {
+      "index": 159,
+      "start": 521.35,
+      "end": 521.36,
+      "duration": 0.01,
+      "text": "here from here and this was just a"
+    },
+    {
+      "index": 160,
+      "start": 521.36,
+      "end": 523.589,
+      "duration": 2.229,
+      "text": "complex part so to come back to what I"
+    },
+    {
+      "index": 161,
+      "start": 523.599,
+      "end": 525.23,
+      "duration": 1.631,
+      "text": "was saying the sign is just the"
+    },
+    {
+      "index": 162,
+      "start": 525.24,
+      "end": 526.71,
+      "duration": 1.47,
+      "text": "imaginary part of the complex"
+    },
+    {
+      "index": 163,
+      "start": 526.72,
+      "end": 528.55,
+      "duration": 1.83,
+      "text": "exponential so we just going to just"
+    },
+    {
+      "index": 164,
+      "start": 528.56,
+      "end": 529.79,
+      "duration": 1.23,
+      "text": "write"
+    },
+    {
+      "index": 165,
+      "start": 529.8,
+      "end": 534.23,
+      "duration": 4.43,
+      "text": "down the solution by reading off here so"
+    },
+    {
+      "index": 166,
+      "start": 534.24,
+      "end": 536.63,
+      "duration": 2.39,
+      "text": "again we have the homogeneous"
+    },
+    {
+      "index": 167,
+      "start": 536.64,
+      "end": 539.75,
+      "duration": 3.11,
+      "text": "part which would be another"
+    },
+    {
+      "index": 168,
+      "start": 539.76,
+      "end": 542.63,
+      "duration": 2.87,
+      "text": "real valued constant and then the real"
+    },
+    {
+      "index": 169,
+      "start": 542.64,
+      "end": 548.63,
+      "duration": 5.99,
+      "text": "part of this"
+    },
+    {
+      "index": 170,
+      "start": 551.75,
+      "end": 551.76,
+      "duration": 0.01,
+      "text": "expression 1 / k sare + Omega"
+    },
+    {
+      "index": 171,
+      "start": 551.76,
+      "end": 554.99,
+      "duration": 3.23,
+      "text": "square and its imaginary part then would"
+    },
+    {
+      "index": 172,
+      "start": 555.0,
+      "end": 557.75,
+      "duration": 2.75,
+      "text": "give us a"
+    },
+    {
+      "index": 173,
+      "start": 557.76,
+      "end": 561.03,
+      "duration": 3.27,
+      "text": "k sin Omega"
+    },
+    {
+      "index": 174,
+      "start": 561.04,
+      "end": 564.03,
+      "duration": 2.99,
+      "text": "T and A"
+    },
+    {
+      "index": 175,
+      "start": 564.04,
+      "end": 568.069,
+      "duration": 4.029,
+      "text": "minus Omega"
+    },
+    {
+      "index": 176,
+      "start": 568.079,
+      "end": 571.03,
+      "duration": 2.951,
+      "text": "plus Omega"
+    },
+    {
+      "index": 177,
+      "start": 571.04,
+      "end": 574.069,
+      "duration": 3.029,
+      "text": "T so this would be the solution for Part"
+    },
+    {
+      "index": 178,
+      "start": 574.079,
+      "end": 577.389,
+      "duration": 3.31,
+      "text": "B if we had this equation but we"
+    },
+    {
+      "index": 179,
+      "start": 577.399,
+      "end": 578.87,
+      "duration": 1.471,
+      "text": "actually have an equation with an"
+    },
+    {
+      "index": 180,
+      "start": 578.88,
+      "end": 582.829,
+      "duration": 3.949,
+      "text": "additional amplitude F and what this"
+    },
+    {
+      "index": 181,
+      "start": 582.839,
+      "end": 585.949,
+      "duration": 3.11,
+      "text": "leads to is just an additional constant"
+    },
+    {
+      "index": 182,
+      "start": 585.959,
+      "end": 588.79,
+      "duration": 2.831,
+      "text": "that would appear then for this solution"
+    },
+    {
+      "index": 183,
+      "start": 588.8,
+      "end": 590.87,
+      "duration": 2.07,
+      "text": "and we could see that if we rewinded the"
+    },
+    {
+      "index": 184,
+      "start": 590.88,
+      "end": 593.269,
+      "duration": 2.389,
+      "text": "way we solved in part A and saw that"
+    },
+    {
+      "index": 185,
+      "start": 593.279,
+      "end": 595.59,
+      "duration": 2.311,
+      "text": "introducing constant constant F to the"
+    },
+    {
+      "index": 186,
+      "start": 595.6,
+      "end": 596.829,
+      "duration": 1.229,
+      "text": "equation is equivalent to just"
+    },
+    {
+      "index": 187,
+      "start": 596.839,
+      "end": 599.03,
+      "duration": 2.191,
+      "text": "multiplying the full equation with f and"
+    },
+    {
+      "index": 188,
+      "start": 599.04,
+      "end": 602.11,
+      "duration": 3.07,
+      "text": "then the integrating Factor uh part we"
+    },
+    {
+      "index": 189,
+      "start": 602.12,
+      "end": 603.91,
+      "duration": 1.79,
+      "text": "would end up with an F in front of our"
+    },
+    {
+      "index": 190,
+      "start": 603.92,
+      "end": 605.069,
+      "duration": 1.149,
+      "text": "solution when we are doing the"
+    },
+    {
+      "index": 191,
+      "start": 605.079,
+      "end": 607.35,
+      "duration": 2.271,
+      "text": "integration and so basically that"
+    },
+    {
+      "index": 192,
+      "start": 607.36,
+      "end": 609.35,
+      "duration": 1.99,
+      "text": "amplitude could be absorbed in the"
+    },
+    {
+      "index": 193,
+      "start": 609.36,
+      "end": 611.87,
+      "duration": 2.51,
+      "text": "constant of integration for the uh"
+    },
+    {
+      "index": 194,
+      "start": 611.88,
+      "end": 615.47,
+      "duration": 3.59,
+      "text": "homogeneous part and the F would just"
+    },
+    {
+      "index": 195,
+      "start": 615.48,
+      "end": 618.069,
+      "duration": 2.589,
+      "text": "remains in the particular"
+    },
+    {
+      "index": 196,
+      "start": 618.079,
+      "end": 623.15,
+      "duration": 5.071,
+      "text": "solution"
+    },
+    {
+      "index": 197,
+      "start": 626.35,
+      "end": 626.36,
+      "duration": 0.01,
+      "text": "here so for the last part of the problem"
+    },
+    {
+      "index": 198,
+      "start": 626.36,
+      "end": 629.55,
+      "duration": 3.19,
+      "text": "we were now used"
+    },
+    {
+      "index": 199,
+      "start": 629.56,
+      "end": 631.87,
+      "duration": 2.31,
+      "text": "we're now you asked to use the"
+    },
+    {
+      "index": 200,
+      "start": 631.88,
+      "end": 635.23,
+      "duration": 3.35,
+      "text": "superposition principle to"
+    },
+    {
+      "index": 201,
+      "start": 635.24,
+      "end": 638.31,
+      "duration": 3.07,
+      "text": "combine to combine Solutions"
+    },
+    {
+      "index": 202,
+      "start": 638.32,
+      "end": 643.47,
+      "duration": 5.15,
+      "text": "of two previous Odes that we"
+    },
+    {
+      "index": 203,
+      "start": 645.99,
+      "end": 646.0,
+      "duration": 0.01,
+      "text": "could split from this"
+    },
+    {
+      "index": 204,
+      "start": 646.0,
+      "end": 648.75,
+      "duration": 2.75,
+      "text": "equation and what was it"
+    },
+    {
+      "index": 205,
+      "start": 648.76,
+      "end": 652.629,
+      "duration": 3.869,
+      "text": "cosine Oma t + 3"
+    },
+    {
+      "index": 206,
+      "start": 652.639,
+      "end": 656.23,
+      "duration": 3.591,
+      "text": "sin Omega T so you saw from previous"
+    },
+    {
+      "index": 207,
+      "start": 656.24,
+      "end": 658.47,
+      "duration": 2.23,
+      "text": "recitations that superposition principle"
+    },
+    {
+      "index": 208,
+      "start": 658.48,
+      "end": 660.31,
+      "duration": 1.83,
+      "text": "applies for linear equations this is"
+    },
+    {
+      "index": 209,
+      "start": 660.32,
+      "end": 662.31,
+      "duration": 1.99,
+      "text": "clearly a linear equation and here on"
+    },
+    {
+      "index": 210,
+      "start": 662.32,
+      "end": 663.829,
+      "duration": 1.509,
+      "text": "the right hand side we have two"
+    },
+    {
+      "index": 211,
+      "start": 663.839,
+      "end": 666.35,
+      "duration": 2.511,
+      "text": "sinusoidal functions because it's linear"
+    },
+    {
+      "index": 212,
+      "start": 666.36,
+      "end": 667.47,
+      "duration": 1.11,
+      "text": "we"
+    },
+    {
+      "index": 213,
+      "start": 667.48,
+      "end": 671.23,
+      "duration": 3.75,
+      "text": "can look at this by splitting"
+    },
+    {
+      "index": 214,
+      "start": 671.24,
+      "end": 674.43,
+      "duration": 3.19,
+      "text": "it into two"
+    },
+    {
+      "index": 215,
+      "start": 674.44,
+      "end": 677.59,
+      "duration": 3.15,
+      "text": "equations and I'm just introducing X1 X2"
+    },
+    {
+      "index": 216,
+      "start": 677.6,
+      "end": 685.31,
+      "duration": 7.71,
+      "text": "as notation to distinguish between the"
+    },
+    {
+      "index": 217,
+      "start": 687.949,
+      "end": 687.959,
+      "duration": 0.01,
+      "text": "two and here we can recognize that we"
+    },
+    {
+      "index": 218,
+      "start": 687.959,
+      "end": 690.389,
+      "duration": 2.43,
+      "text": "already did this work that was in part A"
+    },
+    {
+      "index": 219,
+      "start": 690.399,
+      "end": 693.47,
+      "duration": 3.071,
+      "text": "and we already did this work in Part B"
+    },
+    {
+      "index": 220,
+      "start": 693.48,
+      "end": 696.47,
+      "duration": 2.99,
+      "text": "where F now has a value of three and so"
+    },
+    {
+      "index": 221,
+      "start": 696.48,
+      "end": 698.629,
+      "duration": 2.149,
+      "text": "what this is telling us because it's a"
+    },
+    {
+      "index": 222,
+      "start": 698.639,
+      "end": 700.509,
+      "duration": 1.87,
+      "text": "linear equation we can use superposition"
+    },
+    {
+      "index": 223,
+      "start": 700.519,
+      "end": 710.55,
+      "duration": 10.031,
+      "text": "principle the solution if you were to"
+    },
+    {
+      "index": 224,
+      "start": 720.31,
+      "end": 720.32,
+      "duration": 0.01,
+      "text": "equations would just be the the sum of"
+    },
+    {
+      "index": 225,
+      "start": 720.32,
+      "end": 722.629,
+      "duration": 2.309,
+      "text": "the two previous solutions that we found"
+    },
+    {
+      "index": 226,
+      "start": 722.639,
+      "end": 725.949,
+      "duration": 3.31,
+      "text": "so this would be our"
+    },
+    {
+      "index": 227,
+      "start": 729.71,
+      "end": 729.72,
+      "duration": 0.01,
+      "text": "X3 if I had labeled this with a three"
+    },
+    {
+      "index": 228,
+      "start": 729.72,
+      "end": 732.87,
+      "duration": 3.15,
+      "text": "and so basically the solution is simply"
+    },
+    {
+      "index": 229,
+      "start": 732.88,
+      "end": 735.59,
+      "duration": 2.71,
+      "text": "the sum of the two previous forms and so"
+    },
+    {
+      "index": 230,
+      "start": 735.6,
+      "end": 739.389,
+      "duration": 3.789,
+      "text": "we would end up still with our C minus"
+    },
+    {
+      "index": 231,
+      "start": 739.399,
+      "end": 741.15,
+      "duration": 1.751,
+      "text": "KT which is basically the homogeneous"
+    },
+    {
+      "index": 232,
+      "start": 741.16,
+      "end": 742.269,
+      "duration": 1.109,
+      "text": "part that we obtained in the two"
+    },
+    {
+      "index": 233,
+      "start": 742.279,
+      "end": 744.43,
+      "duration": 2.151,
+      "text": "previous part which is common and then"
+    },
+    {
+      "index": 234,
+      "start": 744.44,
+      "end": 746.629,
+      "duration": 2.189,
+      "text": "we just need to"
+    },
+    {
+      "index": 235,
+      "start": 746.639,
+      "end": 749.43,
+      "duration": 2.791,
+      "text": "add to add each particular solution"
+    },
+    {
+      "index": 236,
+      "start": 749.44,
+      "end": 752.87,
+      "duration": 3.43,
+      "text": "introduced by in part A and Part B so if"
+    },
+    {
+      "index": 237,
+      "start": 752.88,
+      "end": 758.87,
+      "duration": 5.99,
+      "text": "I have room I will write it"
+    },
+    {
+      "index": 238,
+      "start": 761.91,
+      "end": 761.92,
+      "duration": 0.01,
+      "text": "Alla so we would have"
+    },
+    {
+      "index": 239,
+      "start": 761.92,
+      "end": 766.069,
+      "duration": 4.149,
+      "text": "K count Omega t plus Omega"
+    },
+    {
+      "index": 240,
+      "start": 766.079,
+      "end": 769.79,
+      "duration": 3.711,
+      "text": "s Omega T from the first part of the"
+    },
+    {
+      "index": 241,
+      "start": 769.8,
+      "end": 773.189,
+      "duration": 3.389,
+      "text": "cosine and then we're introducing a"
+    },
+    {
+      "index": 242,
+      "start": 773.199,
+      "end": 782.75,
+      "duration": 9.551,
+      "text": "three k sin Omega t"
+    },
+    {
+      "index": 243,
+      "start": 795.55,
+      "end": 795.56,
+      "duration": 0.01,
+      "text": "and that would be then the solution of"
+    },
+    {
+      "index": 244,
+      "start": 795.56,
+      "end": 798.189,
+      "duration": 2.629,
+      "text": "the combined two equations and so you"
+    },
+    {
+      "index": 245,
+      "start": 798.199,
+      "end": 799.79,
+      "duration": 1.591,
+      "text": "don't need to redo the full work by"
+    },
+    {
+      "index": 246,
+      "start": 799.8,
+      "end": 802.35,
+      "duration": 2.55,
+      "text": "using the superposition principle so"
+    },
+    {
+      "index": 247,
+      "start": 802.36,
+      "end": 804.509,
+      "duration": 2.149,
+      "text": "here the key was just to recognize that"
+    },
+    {
+      "index": 248,
+      "start": 804.519,
+      "end": 806.47,
+      "duration": 1.951,
+      "text": "the cosiness and the signs are basically"
+    },
+    {
+      "index": 249,
+      "start": 806.48,
+      "end": 808.189,
+      "duration": 1.709,
+      "text": "real part and imaginary parts of the"
+    },
+    {
+      "index": 250,
+      "start": 808.199,
+      "end": 811.069,
+      "duration": 2.87,
+      "text": "complex number of exponential of I Omega"
+    },
+    {
+      "index": 251,
+      "start": 811.079,
+      "end": 814.03,
+      "duration": 2.951,
+      "text": "T again it's just cular formula and"
+    },
+    {
+      "index": 252,
+      "start": 814.04,
+      "end": 816.629,
+      "duration": 2.589,
+      "text": "using that as a shortcut to be able to"
+    },
+    {
+      "index": 253,
+      "start": 816.639,
+      "end": 818.71,
+      "duration": 2.071,
+      "text": "kill two birds with one stone and solve"
+    },
+    {
+      "index": 254,
+      "start": 818.72,
+      "end": 821.189,
+      "duration": 2.469,
+      "text": "the two equations by using only really"
+    },
+    {
+      "index": 255,
+      "start": 821.199,
+      "end": 822.67,
+      "duration": 1.471,
+      "text": "one approach which is just the"
+    },
+    {
+      "index": 256,
+      "start": 822.68,
+      "end": 824.79,
+      "duration": 2.11,
+      "text": "integrating factor and this ends the"
+    },
+    {
+      "index": 257,
+      "start": 824.8,
+      "end": 828.399,
+      "duration": 3.599,
+      "text": "session for today"
+    }
+  ],
+  "course": {
+    "category": "Mathematics",
+    "title": "Differential Equations",
+    "source_url": "https://www.youtube.com/playlist?list=PL64BDFBDA2AF24F7E"
+  }
+}

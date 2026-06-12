@@ -1,0 +1,1565 @@
+{
+  "video": {
+    "id": "pUFSXhoazY8",
+    "title": "Pole Diagrams | MIT 18.03SC Differential Equations, Fall 2011",
+    "url": "https://www.youtube.com/watch?v=pUFSXhoazY8",
+    "channel": "MIT OpenCourseWare",
+    "duration": 633,
+    "language": "en"
+  },
+  "segment_count": 221,
+  "segments": [
+    {
+      "index": 0,
+      "start": 7.59,
+      "end": 7.6,
+      "duration": 0.01,
+      "text": "welcome in this session we're going to"
+    },
+    {
+      "index": 1,
+      "start": 7.6,
+      "end": 9.99,
+      "duration": 2.39,
+      "text": "examine pole diagrams so let's consider"
+    },
+    {
+      "index": 2,
+      "start": 10.0,
+      "end": 11.91,
+      "duration": 1.91,
+      "text": "the poll diagrams for the linear time"
+    },
+    {
+      "index": 3,
+      "start": 11.92,
+      "end": 14.589,
+      "duration": 2.669,
+      "text": "independent systems of the form bdy"
+    },
+    {
+      "index": 4,
+      "start": 14.599,
+      "end": 18.99,
+      "duration": 4.391,
+      "text": "equals F so here we have a few pole"
+    },
+    {
+      "index": 5,
+      "start": 19.0,
+      "end": 20.67,
+      "duration": 1.67,
+      "text": "diagrams to examine with the poles"
+    },
+    {
+      "index": 6,
+      "start": 20.68,
+      "end": 23.31,
+      "duration": 2.63,
+      "text": "marked with the red crosses the axes are"
+    },
+    {
+      "index": 7,
+      "start": 23.32,
+      "end": 26.15,
+      "duration": 2.83,
+      "text": "imaginary axis and the real axis and the"
+    },
+    {
+      "index": 8,
+      "start": 26.16,
+      "end": 27.99,
+      "duration": 1.83,
+      "text": "questions are list all the stable"
+    },
+    {
+      "index": 9,
+      "start": 28.0,
+      "end": 30.23,
+      "duration": 2.23,
+      "text": "systems choose the systems with the"
+    },
+    {
+      "index": 10,
+      "start": 30.24,
+      "end": 33.67,
+      "duration": 3.43,
+      "text": "fastest Decay and last last choose"
+    },
+    {
+      "index": 11,
+      "start": 33.68,
+      "end": 36.15,
+      "duration": 2.47,
+      "text": "fastest Decay without oscillation so you"
+    },
+    {
+      "index": 12,
+      "start": 36.16,
+      "end": 38.59,
+      "duration": 2.43,
+      "text": "have to think of how to interpret these"
+    },
+    {
+      "index": 13,
+      "start": 38.6,
+      "end": 41.029,
+      "duration": 2.429,
+      "text": "diagrams and what are the meanings of"
+    },
+    {
+      "index": 14,
+      "start": 41.039,
+      "end": 42.51,
+      "duration": 1.471,
+      "text": "the position of the different poles to"
+    },
+    {
+      "index": 15,
+      "start": 42.52,
+      "end": 44.27,
+      "duration": 1.75,
+      "text": "address these questions so pause the"
+    },
+    {
+      "index": 16,
+      "start": 44.28,
+      "end": 46.11,
+      "duration": 1.83,
+      "text": "video take a few minutes and I'll be"
+    },
+    {
+      "index": 17,
+      "start": 46.12,
+      "end": 58.709,
+      "duration": 12.589,
+      "text": "right"
+    },
+    {
+      "index": 18,
+      "start": 62.229,
+      "end": 62.239,
+      "duration": 0.01,
+      "text": "back well welcome back okay so the first"
+    },
+    {
+      "index": 19,
+      "start": 62.239,
+      "end": 64.27,
+      "duration": 2.031,
+      "text": "question asks us to list all the stable"
+    },
+    {
+      "index": 20,
+      "start": 64.28,
+      "end": 66.71,
+      "duration": 2.43,
+      "text": "systems so if you recall all the stable"
+    },
+    {
+      "index": 21,
+      "start": 66.72,
+      "end": 68.789,
+      "duration": 2.069,
+      "text": "systems would be the ones for which the"
+    },
+    {
+      "index": 22,
+      "start": 68.799,
+      "end": 71.95,
+      "duration": 3.151,
+      "text": "real part of the pole are all negative"
+    },
+    {
+      "index": 23,
+      "start": 71.96,
+      "end": 75.99,
+      "duration": 4.03,
+      "text": "so if we have all the"
+    },
+    {
+      "index": 24,
+      "start": 78.749,
+      "end": 78.759,
+      "duration": 0.01,
+      "text": "poles with real part negative we would"
+    },
+    {
+      "index": 25,
+      "start": 78.759,
+      "end": 80.31,
+      "duration": 1.551,
+      "text": "have a stable system for which the"
+    },
+    {
+      "index": 26,
+      "start": 80.32,
+      "end": 82.59,
+      "duration": 2.27,
+      "text": "solution after a long time would Decay"
+    },
+    {
+      "index": 27,
+      "start": 82.6,
+      "end": 84.749,
+      "duration": 2.149,
+      "text": "basically would be transient so here if"
+    },
+    {
+      "index": 28,
+      "start": 84.759,
+      "end": 87.91,
+      "duration": 3.151,
+      "text": "we look our our at our pole diagrams we"
+    },
+    {
+      "index": 29,
+      "start": 87.92,
+      "end": 90.95,
+      "duration": 3.03,
+      "text": "have diagram B for which the real part"
+    },
+    {
+      "index": 30,
+      "start": 90.96,
+      "end": 94.27,
+      "duration": 3.31,
+      "text": "of the two poles are minus 3 and minus 2"
+    },
+    {
+      "index": 31,
+      "start": 94.28,
+      "end": 96.109,
+      "duration": 1.829,
+      "text": "so this would definitely generate a"
+    },
+    {
+      "index": 32,
+      "start": 96.119,
+      "end": 98.429,
+      "duration": 2.31,
+      "text": "decaying a decaying exponential of"
+    },
+    {
+      "index": 33,
+      "start": 98.439,
+      "end": 100.429,
+      "duration": 1.99,
+      "text": "exponential minus 2T exponential minus"
+    },
+    {
+      "index": 34,
+      "start": 100.439,
+      "end": 103.749,
+      "duration": 3.31,
+      "text": "3T type functions at large time for the"
+    },
+    {
+      "index": 35,
+      "start": 103.759,
+      "end": 108.149,
+      "duration": 4.39,
+      "text": "for the system uh in a we have a minus"
+    },
+    {
+      "index": 36,
+      "start": 108.159,
+      "end": 110.429,
+      "duration": 2.27,
+      "text": "one and a one so the real part here"
+    },
+    {
+      "index": 37,
+      "start": 110.439,
+      "end": 112.55,
+      "duration": 2.111,
+      "text": "would give us a Decay an exponential"
+    },
+    {
+      "index": 38,
+      "start": 112.56,
+      "end": 115.03,
+      "duration": 2.47,
+      "text": "decay exponential minus t but we would"
+    },
+    {
+      "index": 39,
+      "start": 115.04,
+      "end": 116.87,
+      "duration": 1.83,
+      "text": "have here a term that would diverge with"
+    },
+    {
+      "index": 40,
+      "start": 116.88,
+      "end": 118.709,
+      "duration": 1.829,
+      "text": "exponential T so this would have"
+    },
+    {
+      "index": 41,
+      "start": 118.719,
+      "end": 120.31,
+      "duration": 1.591,
+      "text": "basically Behavior at long time that"
+    },
+    {
+      "index": 42,
+      "start": 120.32,
+      "end": 123.149,
+      "duration": 2.829,
+      "text": "diverges and doesn't go to zero so this"
+    },
+    {
+      "index": 43,
+      "start": 123.159,
+      "end": 125.83,
+      "duration": 2.671,
+      "text": "would not basically be a stable"
+    },
+    {
+      "index": 44,
+      "start": 125.84,
+      "end": 129.35,
+      "duration": 3.51,
+      "text": "system for C we have all the real Parts"
+    },
+    {
+      "index": 45,
+      "start": 129.36,
+      "end": 132.67,
+      "duration": 3.31,
+      "text": "negative so we're in the stable case for"
+    },
+    {
+      "index": 46,
+      "start": 132.68,
+      "end": 135.19,
+      "duration": 2.51,
+      "text": "D we also have the same all the real"
+    },
+    {
+      "index": 47,
+      "start": 135.2,
+      "end": 136.71,
+      "duration": 1.51,
+      "text": "parts are negative so these are"
+    },
+    {
+      "index": 48,
+      "start": 136.72,
+      "end": 140.83,
+      "duration": 4.11,
+      "text": "imaginary 3 I minus uh minus 2+ 3 I so"
+    },
+    {
+      "index": 49,
+      "start": 140.84,
+      "end": 142.229,
+      "duration": 1.389,
+      "text": "both of them have also negative real"
+    },
+    {
+      "index": 50,
+      "start": 142.239,
+      "end": 144.19,
+      "duration": 1.951,
+      "text": "part so everything is on the left side"
+    },
+    {
+      "index": 51,
+      "start": 144.2,
+      "end": 147.39,
+      "duration": 3.19,
+      "text": "of the plane same thing for e and for f"
+    },
+    {
+      "index": 52,
+      "start": 147.4,
+      "end": 149.509,
+      "duration": 2.109,
+      "text": "we are right on the uh we're right on"
+    },
+    {
+      "index": 53,
+      "start": 149.519,
+      "end": 151.91,
+      "duration": 2.391,
+      "text": "the on the imaginary axis which means"
+    },
+    {
+      "index": 54,
+      "start": 151.92,
+      "end": 154.35,
+      "duration": 2.43,
+      "text": "that we can't tell if it's going to be"
+    },
+    {
+      "index": 55,
+      "start": 154.36,
+      "end": 156.63,
+      "duration": 2.27,
+      "text": "uh an exponential it's not going to be"
+    },
+    {
+      "index": 56,
+      "start": 156.64,
+      "end": 159.19,
+      "duration": 2.55,
+      "text": "an exponential decay or or growth at"
+    },
+    {
+      "index": 57,
+      "start": 159.2,
+      "end": 166.63,
+      "duration": 7.43,
+      "text": "this point so this to answer the first"
+    },
+    {
+      "index": 58,
+      "start": 170.99,
+      "end": 171.0,
+      "duration": 0.01,
+      "text": "questions the stable systems would be"
+    },
+    {
+      "index": 59,
+      "start": 171.0,
+      "end": 173.229,
+      "duration": 2.229,
+      "text": "b"
+    },
+    {
+      "index": 60,
+      "start": 173.239,
+      "end": 175.43,
+      "duration": 2.191,
+      "text": "c"
+    },
+    {
+      "index": 61,
+      "start": 175.44,
+      "end": 177.949,
+      "duration": 2.509,
+      "text": "d"
+    },
+    {
+      "index": 62,
+      "start": 177.959,
+      "end": 182.149,
+      "duration": 4.19,
+      "text": "e and that's it"
+    },
+    {
+      "index": 63,
+      "start": 184.67,
+      "end": 184.68,
+      "duration": 0.01,
+      "text": "so now for the second part choose the"
+    },
+    {
+      "index": 64,
+      "start": 184.68,
+      "end": 187.43,
+      "duration": 2.75,
+      "text": "system with the fastest Decay so here"
+    },
+    {
+      "index": 65,
+      "start": 187.44,
+      "end": 190.869,
+      "duration": 3.429,
+      "text": "again as we just saw the real part of"
+    },
+    {
+      "index": 66,
+      "start": 190.879,
+      "end": 192.789,
+      "duration": 1.91,
+      "text": "the poles gives us the speed at which"
+    },
+    {
+      "index": 67,
+      "start": 192.799,
+      "end": 195.789,
+      "duration": 2.99,
+      "text": "the system is going to Decay and so we"
+    },
+    {
+      "index": 68,
+      "start": 195.799,
+      "end": 199.55,
+      "duration": 3.751,
+      "text": "have to look for a system that has the"
+    },
+    {
+      "index": 69,
+      "start": 199.56,
+      "end": 202.67,
+      "duration": 3.11,
+      "text": "the its pole the rightmost on the"
+    },
+    {
+      "index": 70,
+      "start": 202.68,
+      "end": 206.27,
+      "duration": 3.59,
+      "text": "rightmost part of the plane so so for"
+    },
+    {
+      "index": 71,
+      "start": 206.28,
+      "end": 208.429,
+      "duration": 2.149,
+      "text": "example we restrict ourself here the"
+    },
+    {
+      "index": 72,
+      "start": 208.439,
+      "end": 210.19,
+      "duration": 1.751,
+      "text": "fastest Decay here is going to be"
+    },
+    {
+      "index": 73,
+      "start": 210.2,
+      "end": 212.39,
+      "duration": 2.19,
+      "text": "governed by the rightmost pole so the"
+    },
+    {
+      "index": 74,
+      "start": 212.4,
+      "end": 215.429,
+      "duration": 3.029,
+      "text": "exponential minus 2T uh that we need to"
+    },
+    {
+      "index": 75,
+      "start": 215.439,
+      "end": 217.949,
+      "duration": 2.51,
+      "text": "examine here we have an exponential"
+    },
+    {
+      "index": 76,
+      "start": 217.959,
+      "end": 220.67,
+      "duration": 2.711,
+      "text": "minus 3T Decay type here we would have"
+    },
+    {
+      "index": 77,
+      "start": 220.68,
+      "end": 224.71,
+      "duration": 4.03,
+      "text": "an exponential minus t Decay here we"
+    },
+    {
+      "index": 78,
+      "start": 224.72,
+      "end": 228.11,
+      "duration": 3.39,
+      "text": "would have something a little bit uh uh"
+    },
+    {
+      "index": 79,
+      "start": 228.12,
+      "end": 231.03,
+      "duration": 2.91,
+      "text": "minus 0.5t and here again this is not"
+    },
+    {
+      "index": 80,
+      "start": 231.04,
+      "end": 233.789,
+      "duration": 2.749,
+      "text": "stable system with a Decay at large time"
+    },
+    {
+      "index": 81,
+      "start": 233.799,
+      "end": 236.229,
+      "duration": 2.43,
+      "text": "so which of the system has the fastest"
+    },
+    {
+      "index": 82,
+      "start": 236.239,
+      "end": 239.11,
+      "duration": 2.871,
+      "text": "Decay we would need to select the ones"
+    },
+    {
+      "index": 83,
+      "start": 239.12,
+      "end": 240.509,
+      "duration": 1.389,
+      "text": "the one with the"
+    },
+    {
+      "index": 84,
+      "start": 240.519,
+      "end": 243.75,
+      "duration": 3.231,
+      "text": "with the uh rightmost pole that is the"
+    },
+    {
+      "index": 85,
+      "start": 243.76,
+      "end": 247.47,
+      "duration": 3.71,
+      "text": "most on the left so we would need to"
+    },
+    {
+      "index": 86,
+      "start": 247.48,
+      "end": 249.91,
+      "duration": 2.43,
+      "text": "compare this minus two with this minus"
+    },
+    {
+      "index": 87,
+      "start": 249.92,
+      "end": 252.27,
+      "duration": 2.35,
+      "text": "three with this minus one with this"
+    },
+    {
+      "index": 88,
+      "start": 252.28,
+      "end": 255.55,
+      "duration": 3.27,
+      "text": "minus 0.5 and from all these poles the"
+    },
+    {
+      "index": 89,
+      "start": 255.56,
+      "end": 259.43,
+      "duration": 3.87,
+      "text": "one that has the minus uh three here"
+    },
+    {
+      "index": 90,
+      "start": 259.44,
+      "end": 261.469,
+      "duration": 2.029,
+      "text": "would be the one that would be decaying"
+    },
+    {
+      "index": 91,
+      "start": 261.479,
+      "end": 267.67,
+      "duration": 6.191,
+      "text": "the fastest okay so we would have system"
+    },
+    {
+      "index": 92,
+      "start": 271.43,
+      "end": 271.44,
+      "duration": 0.01,
+      "text": "C decaying"
+    },
+    {
+      "index": 93,
+      "start": 271.44,
+      "end": 274.629,
+      "duration": 3.189,
+      "text": "as exponential minus 3T and I'm going to"
+    },
+    {
+      "index": 94,
+      "start": 274.639,
+      "end": 276.23,
+      "duration": 1.591,
+      "text": "just write down the others and these"
+    },
+    {
+      "index": 95,
+      "start": 276.24,
+      "end": 278.31,
+      "duration": 2.07,
+      "text": "would be the dominant terms that would"
+    },
+    {
+      "index": 96,
+      "start": 278.32,
+      "end": 280.71,
+      "duration": 2.39,
+      "text": "basically subscribe the behavior at"
+    },
+    {
+      "index": 97,
+      "start": 280.72,
+      "end": 287.39,
+      "duration": 6.67,
+      "text": "large T so this is the"
+    },
+    {
+      "index": 98,
+      "start": 290.07,
+      "end": 290.08,
+      "duration": 0.01,
+      "text": "fastest uh for our system B which is not"
+    },
+    {
+      "index": 99,
+      "start": 290.08,
+      "end": 292.15,
+      "duration": 2.07,
+      "text": "the fastest I'm just going to write it"
+    },
+    {
+      "index": 100,
+      "start": 292.16,
+      "end": 295.629,
+      "duration": 3.469,
+      "text": "it's going to be dominated by minus"
+    },
+    {
+      "index": 101,
+      "start": 295.639,
+      "end": 298.23,
+      "duration": 2.591,
+      "text": "2T uh for the system D it would be"
+    },
+    {
+      "index": 102,
+      "start": 298.24,
+      "end": 301.27,
+      "duration": 3.03,
+      "text": "dominated"
+    },
+    {
+      "index": 103,
+      "start": 305.95,
+      "end": 305.96,
+      "duration": 0.01,
+      "text": "by a minus 1T for the system"
+    },
+    {
+      "index": 104,
+      "start": 305.96,
+      "end": 309.43,
+      "duration": 3.47,
+      "text": "e would be dominated by the"
+    },
+    {
+      "index": 105,
+      "start": 309.44,
+      "end": 313.71,
+      "duration": 4.27,
+      "text": "minus 0.5 t Okay so the fastest Decay"
+    },
+    {
+      "index": 106,
+      "start": 313.72,
+      "end": 318.189,
+      "duration": 4.469,
+      "text": "would definitely be system C okay so the"
+    },
+    {
+      "index": 107,
+      "start": 318.199,
+      "end": 320.83,
+      "duration": 2.631,
+      "text": "last question choose the fastest Decay"
+    },
+    {
+      "index": 108,
+      "start": 320.84,
+      "end": 323.11,
+      "duration": 2.27,
+      "text": "without oscillations so now we need to"
+    },
+    {
+      "index": 109,
+      "start": 323.12,
+      "end": 326.51,
+      "duration": 3.39,
+      "text": "pay attention to whether the poles are"
+    },
+    {
+      "index": 110,
+      "start": 326.52,
+      "end": 328.79,
+      "duration": 2.27,
+      "text": "on the imaginary axis on the real Axis"
+    },
+    {
+      "index": 111,
+      "start": 328.8,
+      "end": 331.83,
+      "duration": 3.03,
+      "text": "or somewhere in the middle so let's"
+    },
+    {
+      "index": 112,
+      "start": 331.84,
+      "end": 334.23,
+      "duration": 2.39,
+      "text": "again examine only the stable cases so"
+    },
+    {
+      "index": 113,
+      "start": 334.24,
+      "end": 336.15,
+      "duration": 1.91,
+      "text": "here the two poles are on the real axis"
+    },
+    {
+      "index": 114,
+      "start": 336.16,
+      "end": 338.469,
+      "duration": 2.309,
+      "text": "so it's going to give us a behavior that"
+    },
+    {
+      "index": 115,
+      "start": 338.479,
+      "end": 341.309,
+      "duration": 2.83,
+      "text": "is only pure Decay exponential decay"
+    },
+    {
+      "index": 116,
+      "start": 341.319,
+      "end": 343.309,
+      "duration": 1.99,
+      "text": "exponential minus 2T exponential minus"
+    },
+    {
+      "index": 117,
+      "start": 343.319,
+      "end": 345.27,
+      "duration": 1.951,
+      "text": "3T with no oscillations because"
+    },
+    {
+      "index": 118,
+      "start": 345.28,
+      "end": 346.909,
+      "duration": 1.629,
+      "text": "basically these two poles don't have any"
+    },
+    {
+      "index": 119,
+      "start": 346.919,
+      "end": 349.95,
+      "duration": 3.031,
+      "text": "imaginary part here we have a term in"
+    },
+    {
+      "index": 120,
+      "start": 349.96,
+      "end": 352.51,
+      "duration": 2.55,
+      "text": "exponential minus 3T but we would have a"
+    },
+    {
+      "index": 121,
+      "start": 352.52,
+      "end": 355.59,
+      "duration": 3.07,
+      "text": "term that would show oscillations with"
+    },
+    {
+      "index": 122,
+      "start": 355.6,
+      "end": 358.07,
+      "duration": 2.47,
+      "text": "with the circular frequencies of three"
+    },
+    {
+      "index": 123,
+      "start": 358.08,
+      "end": 359.95,
+      "duration": 1.87,
+      "text": "so you would have an exponential minus 3"
+    },
+    {
+      "index": 124,
+      "start": 359.96,
+      "end": 364.67,
+      "duration": 4.71,
+      "text": "T cosine 3T plus exponential minus 3T"
+    },
+    {
+      "index": 125,
+      "start": 364.68,
+      "end": 367.39,
+      "duration": 2.71,
+      "text": "sin 3T for example so here we would have"
+    },
+    {
+      "index": 126,
+      "start": 367.4,
+      "end": 369.029,
+      "duration": 1.629,
+      "text": "system that shows oscillation so we"
+    },
+    {
+      "index": 127,
+      "start": 369.039,
+      "end": 371.83,
+      "duration": 2.791,
+      "text": "don't want that for this case then would"
+    },
+    {
+      "index": 128,
+      "start": 371.84,
+      "end": 373.71,
+      "duration": 1.87,
+      "text": "be similar so you see the pattern here"
+    },
+    {
+      "index": 129,
+      "start": 373.72,
+      "end": 375.67,
+      "duration": 1.95,
+      "text": "we have an exponential decay here we"
+    },
+    {
+      "index": 130,
+      "start": 375.68,
+      "end": 378.07,
+      "duration": 2.39,
+      "text": "would have decaying oscillations so"
+    },
+    {
+      "index": 131,
+      "start": 378.08,
+      "end": 381.07,
+      "duration": 2.99,
+      "text": "there is oscillations same thing here"
+    },
+    {
+      "index": 132,
+      "start": 381.08,
+      "end": 384.39,
+      "duration": 3.31,
+      "text": "and so we are left with only system B"
+    },
+    {
+      "index": 133,
+      "start": 384.4,
+      "end": 385.99,
+      "duration": 1.59,
+      "text": "which basically does not show any"
+    },
+    {
+      "index": 134,
+      "start": 386.0,
+      "end": 387.79,
+      "duration": 1.79,
+      "text": "oscillation but only an exponential"
+    },
+    {
+      "index": 135,
+      "start": 387.8,
+      "end": 392.27,
+      "duration": 4.47,
+      "text": "decay"
+    },
+    {
+      "index": 136,
+      "start": 393.629,
+      "end": 393.639,
+      "duration": 0.01,
+      "text": "um"
+    },
+    {
+      "index": 137,
+      "start": 393.639,
+      "end": 397.749,
+      "duration": 4.11,
+      "text": "so pure"
+    },
+    {
+      "index": 138,
+      "start": 400.589,
+      "end": 400.599,
+      "duration": 0.01,
+      "text": "Decay and it's dominated by the"
+    },
+    {
+      "index": 139,
+      "start": 400.599,
+      "end": 402.79,
+      "duration": 2.191,
+      "text": "exponential minus"
+    },
+    {
+      "index": 140,
+      "start": 402.8,
+      "end": 408.35,
+      "duration": 5.55,
+      "text": "2T without"
+    },
+    {
+      "index": 141,
+      "start": 410.67,
+      "end": 410.68,
+      "duration": 0.01,
+      "text": "oscillations okay so that ends this"
+    },
+    {
+      "index": 142,
+      "start": 410.68,
+      "end": 412.43,
+      "duration": 1.75,
+      "text": "first part of the problem I'm going to"
+    },
+    {
+      "index": 143,
+      "start": 412.44,
+      "end": 414.83,
+      "duration": 2.39,
+      "text": "just take a a minute and come back to"
+    },
+    {
+      "index": 144,
+      "start": 414.84,
+      "end": 422.07,
+      "duration": 7.23,
+      "text": "show you the second part of the problem"
+    },
+    {
+      "index": 145,
+      "start": 423.79,
+      "end": 423.8,
+      "duration": 0.01,
+      "text": "okay welcome back for the second part of"
+    },
+    {
+      "index": 146,
+      "start": 423.8,
+      "end": 427.029,
+      "duration": 3.229,
+      "text": "the problem so here another pole diagram"
+    },
+    {
+      "index": 147,
+      "start": 427.039,
+      "end": 429.07,
+      "duration": 2.031,
+      "text": "that we're going to label J for this"
+    },
+    {
+      "index": 148,
+      "start": 429.08,
+      "end": 432.95,
+      "duration": 3.87,
+      "text": "system and the polls are basically uh"
+    },
+    {
+      "index": 149,
+      "start": 432.96,
+      "end": 438.43,
+      "duration": 5.47,
+      "text": "here 0.5 + 4 I 0.5 - 4 I and then here"
+    },
+    {
+      "index": 150,
+      "start": 438.44,
+      "end": 440.749,
+      "duration": 2.309,
+      "text": "we have almost a minus three and here"
+    },
+    {
+      "index": 151,
+      "start": 440.759,
+      "end": 442.83,
+      "duration": 2.071,
+      "text": "would be a minus 4"
+    },
+    {
+      "index": 152,
+      "start": 442.84,
+      "end": 446.07,
+      "duration": 3.23,
+      "text": "okay so the question is to consider now"
+    },
+    {
+      "index": 153,
+      "start": 446.08,
+      "end": 450.55,
+      "duration": 4.47,
+      "text": "this the previous system we had P of d"
+    },
+    {
+      "index": 154,
+      "start": 450.56,
+      "end": 454.35,
+      "duration": 3.79,
+      "text": "yals F of T but now with f of T equals"
+    },
+    {
+      "index": 155,
+      "start": 454.36,
+      "end": 457.629,
+      "duration": 3.269,
+      "text": "F0 cos Omega T and Omega the the"
+    },
+    {
+      "index": 156,
+      "start": 457.639,
+      "end": 459.79,
+      "duration": 2.151,
+      "text": "circular frequency going between one and"
+    },
+    {
+      "index": 157,
+      "start": 459.8,
+      "end": 461.83,
+      "duration": 2.03,
+      "text": "five and the question is for which"
+    },
+    {
+      "index": 158,
+      "start": 461.84,
+      "end": 465.79,
+      "duration": 3.95,
+      "text": "values of Omega uh do we have the"
+    },
+    {
+      "index": 159,
+      "start": 465.8,
+      "end": 469.309,
+      "duration": 3.509,
+      "text": "largest response from the system G so"
+    },
+    {
+      "index": 160,
+      "start": 469.319,
+      "end": 471.43,
+      "duration": 2.111,
+      "text": "basically we're looking at phenomenon of"
+    },
+    {
+      "index": 161,
+      "start": 471.44,
+      "end": 474.23,
+      "duration": 2.79,
+      "text": "resonance where we want to find the"
+    },
+    {
+      "index": 162,
+      "start": 474.24,
+      "end": 476.749,
+      "duration": 2.509,
+      "text": "frequency Omega for which the response"
+    },
+    {
+      "index": 163,
+      "start": 476.759,
+      "end": 479.51,
+      "duration": 2.751,
+      "text": "of the system is going to be the biggest"
+    },
+    {
+      "index": 164,
+      "start": 479.52,
+      "end": 481.35,
+      "duration": 1.83,
+      "text": "so you have so I give you just a few"
+    },
+    {
+      "index": 165,
+      "start": 481.36,
+      "end": 490.95,
+      "duration": 9.59,
+      "text": "minutes and we we'll be right"
+    },
+    {
+      "index": 166,
+      "start": 493.35,
+      "end": 493.36,
+      "duration": 0.01,
+      "text": "back okay welcome back for this second"
+    },
+    {
+      "index": 167,
+      "start": 493.36,
+      "end": 495.99,
+      "duration": 2.63,
+      "text": "part so here if you"
+    },
+    {
+      "index": 168,
+      "start": 496.0,
+      "end": 499.11,
+      "duration": 3.11,
+      "text": "recall the amplitude response from the"
+    },
+    {
+      "index": 169,
+      "start": 499.12,
+      "end": 500.629,
+      "duration": 1.509,
+      "text": "previous"
+    },
+    {
+      "index": 170,
+      "start": 500.639,
+      "end": 503.589,
+      "duration": 2.95,
+      "text": "recitations the amplitude is governed by"
+    },
+    {
+      "index": 171,
+      "start": 503.599,
+      "end": 505.35,
+      "duration": 1.751,
+      "text": "one over the characteristic polinomial"
+    },
+    {
+      "index": 172,
+      "start": 505.36,
+      "end": 507.629,
+      "duration": 2.269,
+      "text": "evaluated at I Omega where do I Omega"
+    },
+    {
+      "index": 173,
+      "start": 507.639,
+      "end": 508.99,
+      "duration": 1.351,
+      "text": "come from if you recall it comes from"
+    },
+    {
+      "index": 174,
+      "start": 509.0,
+      "end": 510.79,
+      "duration": 1.79,
+      "text": "the exponential response formula because"
+    },
+    {
+      "index": 175,
+      "start": 510.8,
+      "end": 512.509,
+      "duration": 1.709,
+      "text": "on the right hand side here we have a"
+    },
+    {
+      "index": 176,
+      "start": 512.519,
+      "end": 515.75,
+      "duration": 3.231,
+      "text": "cosine Omega T that is then then we"
+    },
+    {
+      "index": 177,
+      "start": 515.76,
+      "end": 518.55,
+      "duration": 2.79,
+      "text": "complexify exponential I Omega T Etc to"
+    },
+    {
+      "index": 178,
+      "start": 518.56,
+      "end": 521.67,
+      "duration": 3.11,
+      "text": "get the amplitude response so the"
+    },
+    {
+      "index": 179,
+      "start": 521.68,
+      "end": 524.07,
+      "duration": 2.39,
+      "text": "amplitude is going to be the largest for"
+    },
+    {
+      "index": 180,
+      "start": 524.08,
+      "end": 526.19,
+      "duration": 2.11,
+      "text": "basically values of I Omega that are the"
+    },
+    {
+      "index": 181,
+      "start": 526.2,
+      "end": 531.31,
+      "duration": 5.11,
+      "text": "closest to the poles of the"
+    },
+    {
+      "index": 182,
+      "start": 531.32,
+      "end": 534.59,
+      "duration": 3.27,
+      "text": "polinomial to the poles of this"
+    },
+    {
+      "index": 183,
+      "start": 534.6,
+      "end": 537.829,
+      "duration": 3.229,
+      "text": "function right basically the poles of"
+    },
+    {
+      "index": 184,
+      "start": 537.839,
+      "end": 540.509,
+      "duration": 2.67,
+      "text": "the one over characteristic polinomial"
+    },
+    {
+      "index": 185,
+      "start": 540.519,
+      "end": 544.23,
+      "duration": 3.711,
+      "text": "is going to give us the the the one over"
+    },
+    {
+      "index": 186,
+      "start": 544.24,
+      "end": 546.15,
+      "duration": 1.91,
+      "text": "zero which will give an amplitude"
+    },
+    {
+      "index": 187,
+      "start": 546.16,
+      "end": 547.75,
+      "duration": 1.59,
+      "text": "response that goes to Infinity so the"
+    },
+    {
+      "index": 188,
+      "start": 547.76,
+      "end": 550.31,
+      "duration": 2.55,
+      "text": "largest uh response so we want to choose"
+    },
+    {
+      "index": 189,
+      "start": 550.32,
+      "end": 553.03,
+      "duration": 2.71,
+      "text": "our frequency I Omega basically we want"
+    },
+    {
+      "index": 190,
+      "start": 553.04,
+      "end": 554.99,
+      "duration": 1.95,
+      "text": "to look at this diagram and look at the"
+    },
+    {
+      "index": 191,
+      "start": 555.0,
+      "end": 557.55,
+      "duration": 2.55,
+      "text": "poles that are the"
+    },
+    {
+      "index": 192,
+      "start": 557.56,
+      "end": 560.15,
+      "duration": 2.59,
+      "text": "closest to the values that going to give"
+    },
+    {
+      "index": 193,
+      "start": 560.16,
+      "end": 562.99,
+      "duration": 2.83,
+      "text": "us P of s equals to zero and this is"
+    },
+    {
+      "index": 194,
+      "start": 563.0,
+      "end": 564.949,
+      "duration": 1.949,
+      "text": "basically diagram that gives us the pole"
+    },
+    {
+      "index": 195,
+      "start": 564.959,
+      "end": 567.55,
+      "duration": 2.591,
+      "text": "of this one over p and so we want to"
+    },
+    {
+      "index": 196,
+      "start": 567.56,
+      "end": 570.79,
+      "duration": 3.23,
+      "text": "choose the Val Val for I Omega which"
+    },
+    {
+      "index": 197,
+      "start": 570.8,
+      "end": 572.829,
+      "duration": 2.029,
+      "text": "will be on the imaginary axis that is"
+    },
+    {
+      "index": 198,
+      "start": 572.839,
+      "end": 575.79,
+      "duration": 2.951,
+      "text": "the closest to one of these two poles"
+    },
+    {
+      "index": 199,
+      "start": 575.8,
+      "end": 578.99,
+      "duration": 3.19,
+      "text": "given that we work with positive"
+    },
+    {
+      "index": 200,
+      "start": 579.0,
+      "end": 582.269,
+      "duration": 3.269,
+      "text": "frequencies we would want for example to"
+    },
+    {
+      "index": 201,
+      "start": 582.279,
+      "end": 584.069,
+      "duration": 1.79,
+      "text": "choose I"
+    },
+    {
+      "index": 202,
+      "start": 584.079,
+      "end": 587.389,
+      "duration": 3.31,
+      "text": "Omega equals I4 okay so it would be here"
+    },
+    {
+      "index": 203,
+      "start": 587.399,
+      "end": 590.19,
+      "duration": 2.791,
+      "text": "or just Omega equals to"
+    },
+    {
+      "index": 204,
+      "start": 590.2,
+      "end": 593.069,
+      "duration": 2.869,
+      "text": "four and this value of Omega would get"
+    },
+    {
+      "index": 205,
+      "start": 593.079,
+      "end": 595.47,
+      "duration": 2.391,
+      "text": "us very close to this pole which would"
+    },
+    {
+      "index": 206,
+      "start": 595.48,
+      "end": 597.949,
+      "duration": 2.469,
+      "text": "mean then that we are one over a very"
+    },
+    {
+      "index": 207,
+      "start": 597.959,
+      "end": 599.55,
+      "duration": 1.591,
+      "text": "small number which means that the"
+    },
+    {
+      "index": 208,
+      "start": 599.56,
+      "end": 601.79,
+      "duration": 2.23,
+      "text": "amplitude response will be the biggest"
+    },
+    {
+      "index": 209,
+      "start": 601.8,
+      "end": 604.47,
+      "duration": 2.67,
+      "text": "so that's the idea behind look behind"
+    },
+    {
+      "index": 210,
+      "start": 604.48,
+      "end": 606.949,
+      "duration": 2.469,
+      "text": "the resonance and looking at again"
+    },
+    {
+      "index": 211,
+      "start": 606.959,
+      "end": 609.35,
+      "duration": 2.391,
+      "text": "another the phenomenon of resonance from"
+    },
+    {
+      "index": 212,
+      "start": 609.36,
+      "end": 611.63,
+      "duration": 2.27,
+      "text": "the pole diagram perspective and with"
+    },
+    {
+      "index": 213,
+      "start": 611.64,
+      "end": 614.99,
+      "duration": 3.35,
+      "text": "the idea of uh the use of the laast"
+    },
+    {
+      "index": 214,
+      "start": 615.0,
+      "end": 617.71,
+      "duration": 2.71,
+      "text": "transform behind the the whole technique"
+    },
+    {
+      "index": 215,
+      "start": 617.72,
+      "end": 620.31,
+      "duration": 2.59,
+      "text": "so that ends this session and uh the"
+    },
+    {
+      "index": 216,
+      "start": 620.32,
+      "end": 622.509,
+      "duration": 2.189,
+      "text": "goal was really to learn to interpret"
+    },
+    {
+      "index": 217,
+      "start": 622.519,
+      "end": 624.43,
+      "duration": 1.911,
+      "text": "and the meaning of the polls in the pole"
+    },
+    {
+      "index": 218,
+      "start": 624.44,
+      "end": 627.269,
+      "duration": 2.829,
+      "text": "diagrams and how that do the poles give"
+    },
+    {
+      "index": 219,
+      "start": 627.279,
+      "end": 629.11,
+      "duration": 1.831,
+      "text": "us an idea and insight on the behavior"
+    },
+    {
+      "index": 220,
+      "start": 629.12,
+      "end": 633.24,
+      "duration": 4.12,
+      "text": "of the the system on the long term"
+    }
+  ],
+  "course": {
+    "category": "Mathematics",
+    "title": "Differential Equations",
+    "source_url": "https://www.youtube.com/playlist?list=PL64BDFBDA2AF24F7E"
+  }
+}

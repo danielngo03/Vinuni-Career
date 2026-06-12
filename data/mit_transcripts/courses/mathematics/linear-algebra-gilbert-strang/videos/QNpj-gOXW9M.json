@@ -1,0 +1,6745 @@
+{
+  "video": {
+    "id": "QNpj-gOXW9M",
+    "title": "20. Cramer's Rule, Inverse Matrix, and Volume",
+    "url": "https://www.youtube.com/watch?v=QNpj-gOXW9M",
+    "channel": "MIT OpenCourseWare",
+    "duration": 3061,
+    "language": "en"
+  },
+  "segment_count": 961,
+  "segments": [
+    {
+      "index": 0,
+      "start": 9.91,
+      "end": 9.92,
+      "duration": 0.01,
+      "text": "okay this is lecture"
+    },
+    {
+      "index": 1,
+      "start": 9.92,
+      "end": 14.15,
+      "duration": 4.23,
+      "text": "20 and this is the final lecture on"
+    },
+    {
+      "index": 2,
+      "start": 14.16,
+      "end": 17.349,
+      "duration": 3.189,
+      "text": "determinants um and it's about the"
+    },
+    {
+      "index": 3,
+      "start": 17.359,
+      "end": 21.029,
+      "duration": 3.67,
+      "text": "applications so we worked hard in the"
+    },
+    {
+      "index": 4,
+      "start": 21.039,
+      "end": 24.95,
+      "duration": 3.911,
+      "text": "last two lectures to get a formula for"
+    },
+    {
+      "index": 5,
+      "start": 24.96,
+      "end": 27.029,
+      "duration": 2.069,
+      "text": "the determinant and the properties of"
+    },
+    {
+      "index": 6,
+      "start": 27.039,
+      "end": 28.71,
+      "duration": 1.671,
+      "text": "the determinant"
+    },
+    {
+      "index": 7,
+      "start": 28.72,
+      "end": 32.99,
+      "duration": 4.27,
+      "text": "now to use the determinant and and"
+    },
+    {
+      "index": 8,
+      "start": 33.0,
+      "end": 34.79,
+      "duration": 1.79,
+      "text": "always this"
+    },
+    {
+      "index": 9,
+      "start": 34.8,
+      "end": 37.95,
+      "duration": 3.15,
+      "text": "determinant packs all this information"
+    },
+    {
+      "index": 10,
+      "start": 37.96,
+      "end": 42.59,
+      "duration": 4.63,
+      "text": "into a into a single number"
+    },
+    {
+      "index": 11,
+      "start": 42.6,
+      "end": 45.99,
+      "duration": 3.39,
+      "text": "and that number can give us formulas for"
+    },
+    {
+      "index": 12,
+      "start": 46.0,
+      "end": 49.35,
+      "duration": 3.35,
+      "text": "all sorts of uh things that we've been"
+    },
+    {
+      "index": 13,
+      "start": 49.36,
+      "end": 52.43,
+      "duration": 3.07,
+      "text": "calculating already without formulas now"
+    },
+    {
+      "index": 14,
+      "start": 52.44,
+      "end": 55.189,
+      "duration": 2.749,
+      "text": "what was a inverse so so I'm be"
+    },
+    {
+      "index": 15,
+      "start": 55.199,
+      "end": 60.27,
+      "duration": 5.071,
+      "text": "beginning with the formula for a inverse"
+    },
+    {
+      "index": 16,
+      "start": 60.28,
+      "end": 63.75,
+      "duration": 3.47,
+      "text": "two 2x two formula we know right the 2x"
+    },
+    {
+      "index": 17,
+      "start": 63.76,
+      "end": 66.95,
+      "duration": 3.19,
+      "text": "two formula for a inverse the inverse of"
+    },
+    {
+      "index": 18,
+      "start": 66.96,
+      "end": 75.59,
+      "duration": 8.63,
+      "text": "a b c d inverse is one over the"
+    },
+    {
+      "index": 19,
+      "start": 87.069,
+      "end": 87.079,
+      "duration": 0.01,
+      "text": "c"
+    },
+    {
+      "index": 20,
+      "start": 87.079,
+      "end": 89.99,
+      "duration": 2.911,
+      "text": "somehow I want to see what's going on"
+    },
+    {
+      "index": 21,
+      "start": 90.0,
+      "end": 92.149,
+      "duration": 2.149,
+      "text": "for 3x3 and n"
+    },
+    {
+      "index": 22,
+      "start": 92.159,
+      "end": 95.31,
+      "duration": 3.151,
+      "text": "byn and actually maybe you can see"
+    },
+    {
+      "index": 23,
+      "start": 95.32,
+      "end": 98.99,
+      "duration": 3.67,
+      "text": "what's going on from this 2x two case so"
+    },
+    {
+      "index": 24,
+      "start": 99.0,
+      "end": 101.389,
+      "duration": 2.389,
+      "text": "there's a formula for the inverse and"
+    },
+    {
+      "index": 25,
+      "start": 101.399,
+      "end": 103.31,
+      "duration": 1.911,
+      "text": "what did I divide"
+    },
+    {
+      "index": 26,
+      "start": 103.32,
+      "end": 107.469,
+      "duration": 4.149,
+      "text": "by the determinant so what I'm looking"
+    },
+    {
+      "index": 27,
+      "start": 107.479,
+      "end": 112.19,
+      "duration": 4.711,
+      "text": "for is a Formula where it has one over"
+    },
+    {
+      "index": 28,
+      "start": 112.2,
+      "end": 113.109,
+      "duration": 0.909,
+      "text": "the"
+    },
+    {
+      "index": 29,
+      "start": 113.119,
+      "end": 115.429,
+      "duration": 2.31,
+      "text": "determinant and and you remember why"
+    },
+    {
+      "index": 30,
+      "start": 115.439,
+      "end": 118.63,
+      "duration": 3.191,
+      "text": "that makes good sense because then"
+    },
+    {
+      "index": 31,
+      "start": 118.64,
+      "end": 121.19,
+      "duration": 2.55,
+      "text": "that's perfect as long as the the"
+    },
+    {
+      "index": 32,
+      "start": 121.2,
+      "end": 123.709,
+      "duration": 2.509,
+      "text": "determinant isn't zero and that's"
+    },
+    {
+      "index": 33,
+      "start": 123.719,
+      "end": 126.87,
+      "duration": 3.151,
+      "text": "exactly when there is an inverse but now"
+    },
+    {
+      "index": 34,
+      "start": 126.88,
+      "end": 129.19,
+      "duration": 2.31,
+      "text": "I have to ask can we recognize any of"
+    },
+    {
+      "index": 35,
+      "start": 129.2,
+      "end": 130.51,
+      "duration": 1.31,
+      "text": "this"
+    },
+    {
+      "index": 36,
+      "start": 130.52,
+      "end": 133.35,
+      "duration": 2.83,
+      "text": "stuff do you recognize what that number"
+    },
+    {
+      "index": 37,
+      "start": 133.36,
+      "end": 137.589,
+      "duration": 4.229,
+      "text": "D is from the past from last from the"
+    },
+    {
+      "index": 38,
+      "start": 137.599,
+      "end": 138.75,
+      "duration": 1.151,
+      "text": "last"
+    },
+    {
+      "index": 39,
+      "start": 138.76,
+      "end": 143.19,
+      "duration": 4.43,
+      "text": "lecture my hint is think"
+    },
+    {
+      "index": 40,
+      "start": 143.2,
+      "end": 146.71,
+      "duration": 3.51,
+      "text": "co-actors CU my formula is going to be"
+    },
+    {
+      "index": 41,
+      "start": 146.72,
+      "end": 149.03,
+      "duration": 2.31,
+      "text": "my formula for the inverse is going to"
+    },
+    {
+      "index": 42,
+      "start": 149.04,
+      "end": 151.39,
+      "duration": 2.35,
+      "text": "be one over the determinant times a"
+    },
+    {
+      "index": 43,
+      "start": 151.4,
+      "end": 154.63,
+      "duration": 3.23,
+      "text": "matrix of co-actors so that you remember"
+    },
+    {
+      "index": 44,
+      "start": 154.64,
+      "end": 157.63,
+      "duration": 2.99,
+      "text": "that D what's that the co-actor of"
+    },
+    {
+      "index": 45,
+      "start": 157.64,
+      "end": 160.83,
+      "duration": 3.19,
+      "text": "remember co-actors if that's the one one"
+    },
+    {
+      "index": 46,
+      "start": 160.84,
+      "end": 163.309,
+      "duration": 2.469,
+      "text": "co-actor because if I strike out row and"
+    },
+    {
+      "index": 47,
+      "start": 163.319,
+      "end": 166.79,
+      "duration": 3.471,
+      "text": "column one I'm left with"
+    },
+    {
+      "index": 48,
+      "start": 166.8,
+      "end": 170.39,
+      "duration": 3.59,
+      "text": "d and what's minus"
+    },
+    {
+      "index": 49,
+      "start": 170.4,
+      "end": 174.55,
+      "duration": 4.15,
+      "text": "B okay which co-actor is that"
+    },
+    {
+      "index": 50,
+      "start": 174.56,
+      "end": 179.63,
+      "duration": 5.07,
+      "text": "one Co minus B is the co-actor of C"
+    },
+    {
+      "index": 51,
+      "start": 179.64,
+      "end": 180.83,
+      "duration": 1.19,
+      "text": "right"
+    },
+    {
+      "index": 52,
+      "start": 180.84,
+      "end": 184.39,
+      "duration": 3.55,
+      "text": "if I strike out the C I'm left with a B"
+    },
+    {
+      "index": 53,
+      "start": 184.4,
+      "end": 186.43,
+      "duration": 2.03,
+      "text": "there and why in the minus"
+    },
+    {
+      "index": 54,
+      "start": 186.44,
+      "end": 190.509,
+      "duration": 4.069,
+      "text": "sign because this C was in a 2 one"
+    },
+    {
+      "index": 55,
+      "start": 190.519,
+      "end": 193.47,
+      "duration": 2.951,
+      "text": "position and 2 + one is odd so there was"
+    },
+    {
+      "index": 56,
+      "start": 193.48,
+      "end": 196.07,
+      "duration": 2.59,
+      "text": "a minus went into the co-actor and"
+    },
+    {
+      "index": 57,
+      "start": 196.08,
+      "end": 199.789,
+      "duration": 3.709,
+      "text": "that's it okay I'll write down next what"
+    },
+    {
+      "index": 58,
+      "start": 199.799,
+      "end": 203.789,
+      "duration": 3.99,
+      "text": "my formula is here's the big formula for"
+    },
+    {
+      "index": 59,
+      "start": 203.799,
+      "end": 205.99,
+      "duration": 2.191,
+      "text": "the a for a"
+    },
+    {
+      "index": 60,
+      "start": 206.0,
+      "end": 208.789,
+      "duration": 2.789,
+      "text": "inverse it's one over the determinant of"
+    },
+    {
+      "index": 61,
+      "start": 208.799,
+      "end": 213.19,
+      "duration": 4.391,
+      "text": "a"
+    },
+    {
+      "index": 62,
+      "start": 214.789,
+      "end": 214.799,
+      "duration": 0.01,
+      "text": "and then some"
+    },
+    {
+      "index": 63,
+      "start": 214.799,
+      "end": 219.229,
+      "duration": 4.43,
+      "text": "Matrix and that Matrix is the Matrix of"
+    },
+    {
+      "index": 64,
+      "start": 219.239,
+      "end": 220.91,
+      "duration": 1.671,
+      "text": "co-actors"
+    },
+    {
+      "index": 65,
+      "start": 220.92,
+      "end": 225.429,
+      "duration": 4.509,
+      "text": "C only one thing I it turn you'll see I"
+    },
+    {
+      "index": 66,
+      "start": 225.439,
+      "end": 228.67,
+      "duration": 3.231,
+      "text": "have to I transpose it so this is the"
+    },
+    {
+      "index": 67,
+      "start": 228.68,
+      "end": 232.19,
+      "duration": 3.51,
+      "text": "Matrix of co-actors the what I'll just"
+    },
+    {
+      "index": 68,
+      "start": 232.2,
+      "end": 234.63,
+      "duration": 2.43,
+      "text": "why don't we just call it the co-actor"
+    },
+    {
+      "index": 69,
+      "start": 234.64,
+      "end": 240.429,
+      "duration": 5.789,
+      "text": "Matrix so the one one entry of of C"
+    },
+    {
+      "index": 70,
+      "start": 240.439,
+      "end": 243.27,
+      "duration": 2.831,
+      "text": "is the co is the one one co-actor the"
+    },
+    {
+      "index": 71,
+      "start": 243.28,
+      "end": 245.309,
+      "duration": 2.029,
+      "text": "thing that we get by throwing away row"
+    },
+    {
+      "index": 72,
+      "start": 245.319,
+      "end": 249.03,
+      "duration": 3.711,
+      "text": "and column one it's the"
+    },
+    {
+      "index": 73,
+      "start": 252.83,
+      "end": 252.84,
+      "duration": 0.01,
+      "text": "D and uh because of the"
+    },
+    {
+      "index": 74,
+      "start": 252.84,
+      "end": 255.83,
+      "duration": 2.99,
+      "text": "transpose what I see up here is the"
+    },
+    {
+      "index": 75,
+      "start": 255.84,
+      "end": 259.11,
+      "duration": 3.27,
+      "text": "co-actor of this guy down here right"
+    },
+    {
+      "index": 76,
+      "start": 259.12,
+      "end": 261.39,
+      "duration": 2.27,
+      "text": "that's where the transpose came"
+    },
+    {
+      "index": 77,
+      "start": 261.4,
+      "end": 266.189,
+      "duration": 4.789,
+      "text": "in what I see here this is the co-actor"
+    },
+    {
+      "index": 78,
+      "start": 266.199,
+      "end": 268.71,
+      "duration": 2.511,
+      "text": "not of this one because I've transposed"
+    },
+    {
+      "index": 79,
+      "start": 268.72,
+      "end": 271.11,
+      "duration": 2.39,
+      "text": "this is the co-actor of the B when I"
+    },
+    {
+      "index": 80,
+      "start": 271.12,
+      "end": 272.629,
+      "duration": 1.509,
+      "text": "throw away the"
+    },
+    {
+      "index": 81,
+      "start": 272.639,
+      "end": 275.79,
+      "duration": 3.151,
+      "text": "B the B row and the B column I'm left"
+    },
+    {
+      "index": 82,
+      "start": 275.8,
+      "end": 278.39,
+      "duration": 2.59,
+      "text": "with c and then I have that minus sign"
+    },
+    {
+      "index": 83,
+      "start": 278.4,
+      "end": 283.79,
+      "duration": 5.39,
+      "text": "again and of course the 22 entry is the"
+    },
+    {
+      "index": 84,
+      "start": 283.8,
+      "end": 287.55,
+      "duration": 3.75,
+      "text": "co-actor of D and that's this a"
+    },
+    {
+      "index": 85,
+      "start": 287.56,
+      "end": 289.95,
+      "duration": 2.39,
+      "text": "okay so there's the"
+    },
+    {
+      "index": 86,
+      "start": 289.96,
+      "end": 293.749,
+      "duration": 3.789,
+      "text": "formula but we got to think why I"
+    },
+    {
+      "index": 87,
+      "start": 293.759,
+      "end": 296.909,
+      "duration": 3.15,
+      "text": "mean it worked in this 2x two case but a"
+    },
+    {
+      "index": 88,
+      "start": 296.919,
+      "end": 298.59,
+      "duration": 1.671,
+      "text": "lot of other formulas would have worked"
+    },
+    {
+      "index": 89,
+      "start": 298.6,
+      "end": 301.51,
+      "duration": 2.91,
+      "text": "just as well we have to see why that's"
+    },
+    {
+      "index": 90,
+      "start": 301.52,
+      "end": 306.51,
+      "duration": 4.99,
+      "text": "true in other words why is it so this is"
+    },
+    {
+      "index": 91,
+      "start": 306.52,
+      "end": 309.87,
+      "duration": 3.35,
+      "text": "what I aim to to to uh find and and"
+    },
+    {
+      "index": 92,
+      "start": 309.88,
+      "end": 311.95,
+      "duration": 2.07,
+      "text": "let's just sort of look to see what is"
+    },
+    {
+      "index": 93,
+      "start": 311.96,
+      "end": 314.55,
+      "duration": 2.59,
+      "text": "that telling us that tells us that the"
+    },
+    {
+      "index": 94,
+      "start": 314.56,
+      "end": 316.95,
+      "duration": 2.39,
+      "text": "formula that the expression for a"
+    },
+    {
+      "index": 95,
+      "start": 316.96,
+      "end": 319.55,
+      "duration": 2.59,
+      "text": "inverse let's look at a"
+    },
+    {
+      "index": 96,
+      "start": 319.56,
+      "end": 326.15,
+      "duration": 6.59,
+      "text": "3X3 and I just write down a a b c d e f"
+    },
+    {
+      "index": 97,
+      "start": 326.16,
+      "end": 330.87,
+      "duration": 4.71,
+      "text": "ghi and I'm looking for its inverse"
+    },
+    {
+      "index": 98,
+      "start": 330.88,
+      "end": 333.15,
+      "duration": 2.27,
+      "text": "and what kind of a formula do I see"
+    },
+    {
+      "index": 99,
+      "start": 333.16,
+      "end": 336.029,
+      "duration": 2.869,
+      "text": "there I mean what the determinant is a"
+    },
+    {
+      "index": 100,
+      "start": 336.039,
+      "end": 339.309,
+      "duration": 3.27,
+      "text": "bunch of products of three factors right"
+    },
+    {
+      "index": 101,
+      "start": 339.319,
+      "end": 341.27,
+      "duration": 1.951,
+      "text": "the determinant of this Matrix will"
+    },
+    {
+      "index": 102,
+      "start": 341.28,
+      "end": 347.11,
+      "duration": 5.83,
+      "text": "involve a eii and bf time G and C * D *"
+    },
+    {
+      "index": 103,
+      "start": 347.12,
+      "end": 352.71,
+      "duration": 5.59,
+      "text": "H and minus ceg and so on so things with"
+    },
+    {
+      "index": 104,
+      "start": 352.72,
+      "end": 356.67,
+      "duration": 3.95,
+      "text": "three factors go in here things with how"
+    },
+    {
+      "index": 105,
+      "start": 356.68,
+      "end": 360.27,
+      "duration": 3.59,
+      "text": "many F how many uh factors do things in"
+    },
+    {
+      "index": 106,
+      "start": 360.28,
+      "end": 363.87,
+      "duration": 3.59,
+      "text": "the uh in The co-factor Matrix have"
+    },
+    {
+      "index": 107,
+      "start": 363.88,
+      "end": 366.43,
+      "duration": 2.55,
+      "text": "what's a typical co-actor what's the"
+    },
+    {
+      "index": 108,
+      "start": 366.44,
+      "end": 367.909,
+      "duration": 1.469,
+      "text": "co-actor of"
+    },
+    {
+      "index": 109,
+      "start": 367.919,
+      "end": 371.629,
+      "duration": 3.71,
+      "text": "a the co-actor of a the one one entry up"
+    },
+    {
+      "index": 110,
+      "start": 371.639,
+      "end": 373.67,
+      "duration": 2.031,
+      "text": "here in the inverse"
+    },
+    {
+      "index": 111,
+      "start": 373.68,
+      "end": 376.71,
+      "duration": 3.03,
+      "text": "is I throw away the row and column"
+    },
+    {
+      "index": 112,
+      "start": 376.72,
+      "end": 378.99,
+      "duration": 2.27,
+      "text": "containing a and I take the determinant"
+    },
+    {
+      "index": 113,
+      "start": 379.0,
+      "end": 381.469,
+      "duration": 2.469,
+      "text": "of what's left that's the co-actor and"
+    },
+    {
+      "index": 114,
+      "start": 381.479,
+      "end": 386.87,
+      "duration": 5.391,
+      "text": "that's EI minus FH products of two"
+    },
+    {
+      "index": 115,
+      "start": 386.88,
+      "end": 389.749,
+      "duration": 2.869,
+      "text": "things I'm just making the observation"
+    },
+    {
+      "index": 116,
+      "start": 389.759,
+      "end": 393.83,
+      "duration": 4.071,
+      "text": "the determinative of a involves"
+    },
+    {
+      "index": 117,
+      "start": 393.84,
+      "end": 396.11,
+      "duration": 2.27,
+      "text": "products of"
+    },
+    {
+      "index": 118,
+      "start": 396.12,
+      "end": 400.27,
+      "duration": 4.15,
+      "text": "n"
+    },
+    {
+      "index": 119,
+      "start": 404.79,
+      "end": 404.8,
+      "duration": 0.01,
+      "text": "entries and the then the co-actor Matrix"
+    },
+    {
+      "index": 120,
+      "start": 404.8,
+      "end": 406.67,
+      "duration": 1.87,
+      "text": "involves products"
+    },
+    {
+      "index": 121,
+      "start": 406.68,
+      "end": 410.35,
+      "duration": 3.67,
+      "text": "of of n minus1"
+    },
+    {
+      "index": 122,
+      "start": 410.36,
+      "end": 411.909,
+      "duration": 1.549,
+      "text": "entries"
+    },
+    {
+      "index": 123,
+      "start": 411.919,
+      "end": 413.469,
+      "duration": 1.55,
+      "text": "and"
+    },
+    {
+      "index": 124,
+      "start": 413.479,
+      "end": 416.95,
+      "duration": 3.471,
+      "text": "like we never noticed any of this stuff"
+    },
+    {
+      "index": 125,
+      "start": 416.96,
+      "end": 418.909,
+      "duration": 1.949,
+      "text": "when we were Computing the inverse by"
+    },
+    {
+      "index": 126,
+      "start": 418.919,
+      "end": 421.15,
+      "duration": 2.231,
+      "text": "the ga Jordan method or whatever you"
+    },
+    {
+      "index": 127,
+      "start": 421.16,
+      "end": 423.35,
+      "duration": 2.19,
+      "text": "remember how we did it we took the"
+    },
+    {
+      "index": 128,
+      "start": 423.36,
+      "end": 426.23,
+      "duration": 2.87,
+      "text": "Matrix a we tucked the identity next to"
+    },
+    {
+      "index": 129,
+      "start": 426.24,
+      "end": 429.909,
+      "duration": 3.669,
+      "text": "it we did elimination till a became the"
+    },
+    {
+      "index": 130,
+      "start": 429.919,
+      "end": 432.39,
+      "duration": 2.471,
+      "text": "identity and then that the identity"
+    },
+    {
+      "index": 131,
+      "start": 432.4,
+      "end": 434.869,
+      "duration": 2.469,
+      "text": "suddenly was a inverse well that was"
+    },
+    {
+      "index": 132,
+      "start": 434.879,
+      "end": 435.909,
+      "duration": 1.03,
+      "text": "great"
+    },
+    {
+      "index": 133,
+      "start": 435.919,
+      "end": 439.83,
+      "duration": 3.911,
+      "text": "numerically but we never knew what was"
+    },
+    {
+      "index": 134,
+      "start": 439.84,
+      "end": 443.749,
+      "duration": 3.909,
+      "text": "going on basically and now we see what"
+    },
+    {
+      "index": 135,
+      "start": 443.759,
+      "end": 446.309,
+      "duration": 2.55,
+      "text": "the formula is in terms of letters"
+    },
+    {
+      "index": 136,
+      "start": 446.319,
+      "end": 448.15,
+      "duration": 1.831,
+      "text": "what's the algebra instead of the"
+    },
+    {
+      "index": 137,
+      "start": 448.16,
+      "end": 449.67,
+      "duration": 1.51,
+      "text": "algorithm"
+    },
+    {
+      "index": 138,
+      "start": 449.68,
+      "end": 453.51,
+      "duration": 3.83,
+      "text": "okay but I have to say why this is right"
+    },
+    {
+      "index": 139,
+      "start": 453.52,
+      "end": 456.35,
+      "duration": 2.83,
+      "text": "right I still this is that's a pretty"
+    },
+    {
+      "index": 140,
+      "start": 456.36,
+      "end": 460.15,
+      "duration": 3.79,
+      "text": "magic formula where does it come from"
+    },
+    {
+      "index": 141,
+      "start": 460.16,
+      "end": 462.07,
+      "duration": 1.91,
+      "text": "well I'll just check it having having"
+    },
+    {
+      "index": 142,
+      "start": 462.08,
+      "end": 466.55,
+      "duration": 4.47,
+      "text": "got it up there let me I'll I'll say how"
+    },
+    {
+      "index": 143,
+      "start": 466.56,
+      "end": 470.51,
+      "duration": 3.95,
+      "text": "can we check what do I want to check I"
+    },
+    {
+      "index": 144,
+      "start": 470.52,
+      "end": 473.11,
+      "duration": 2.59,
+      "text": "want to check that a times its inverse"
+    },
+    {
+      "index": 145,
+      "start": 473.12,
+      "end": 476.309,
+      "duration": 3.189,
+      "text": "gives the identity so I I want to check"
+    },
+    {
+      "index": 146,
+      "start": 476.319,
+      "end": 480.189,
+      "duration": 3.87,
+      "text": "that a * this thing a * this"
+    },
+    {
+      "index": 147,
+      "start": 480.199,
+      "end": 481.95,
+      "duration": 1.751,
+      "text": "now I'm going to write in the inverse"
+    },
+    {
+      "index": 148,
+      "start": 481.96,
+      "end": 485.749,
+      "duration": 3.789,
+      "text": "gives the identity so I check that a * C"
+    },
+    {
+      "index": 149,
+      "start": 485.759,
+      "end": 488.149,
+      "duration": 2.39,
+      "text": "transpose let me bring the determinant"
+    },
+    {
+      "index": 150,
+      "start": 488.159,
+      "end": 490.909,
+      "duration": 2.75,
+      "text": "up here determinant of"
+    },
+    {
+      "index": 151,
+      "start": 490.919,
+      "end": 493.469,
+      "duration": 2.55,
+      "text": "a times the"
+    },
+    {
+      "index": 152,
+      "start": 493.479,
+      "end": 495.95,
+      "duration": 2.471,
+      "text": "identity that's my"
+    },
+    {
+      "index": 153,
+      "start": 495.96,
+      "end": 499.79,
+      "duration": 3.83,
+      "text": "job that that that's it that if this is"
+    },
+    {
+      "index": 154,
+      "start": 499.8,
+      "end": 501.83,
+      "duration": 2.03,
+      "text": "true and it"
+    },
+    {
+      "index": 155,
+      "start": 501.84,
+      "end": 506.11,
+      "duration": 4.27,
+      "text": "is then then I've correctly identified a"
+    },
+    {
+      "index": 156,
+      "start": 506.12,
+      "end": 508.99,
+      "duration": 2.87,
+      "text": "inverse as C transpose divided by the"
+    },
+    {
+      "index": 157,
+      "start": 509.0,
+      "end": 510.99,
+      "duration": 1.99,
+      "text": "determinant"
+    },
+    {
+      "index": 158,
+      "start": 511.0,
+      "end": 513.35,
+      "duration": 2.35,
+      "text": "okay but why is this"
+    },
+    {
+      "index": 159,
+      "start": 513.36,
+      "end": 516.55,
+      "duration": 3.19,
+      "text": "true why is that true let me let me put"
+    },
+    {
+      "index": 160,
+      "start": 516.56,
+      "end": 519.23,
+      "duration": 2.67,
+      "text": "down what I'm doing here I have"
+    },
+    {
+      "index": 161,
+      "start": 519.24,
+      "end": 524.029,
+      "duration": 4.789,
+      "text": "a here here's a here's A1 one I'm I'm"
+    },
+    {
+      "index": 162,
+      "start": 524.039,
+      "end": 527.79,
+      "duration": 3.751,
+      "text": "doing this multiplication along to"
+    },
+    {
+      "index": 163,
+      "start": 527.8,
+      "end": 530.509,
+      "duration": 2.709,
+      "text": "a1n and then down in this last row will"
+    },
+    {
+      "index": 164,
+      "start": 530.519,
+      "end": 534.87,
+      "duration": 4.351,
+      "text": "be an a N1 along to a NN and I'm"
+    },
+    {
+      "index": 165,
+      "start": 534.88,
+      "end": 537.87,
+      "duration": 2.99,
+      "text": "multiplying by The co-actor Matrix"
+    },
+    {
+      "index": 166,
+      "start": 537.88,
+      "end": 539.59,
+      "duration": 1.71,
+      "text": "transposed"
+    },
+    {
+      "index": 167,
+      "start": 539.6,
+      "end": 542.71,
+      "duration": 3.11,
+      "text": "so when I transpose it'll be"
+    },
+    {
+      "index": 168,
+      "start": 542.72,
+      "end": 544.91,
+      "duration": 2.19,
+      "text": "C11"
+    },
+    {
+      "index": 169,
+      "start": 544.92,
+      "end": 546.91,
+      "duration": 1.99,
+      "text": "C12 down to"
+    },
+    {
+      "index": 170,
+      "start": 546.92,
+      "end": 551.31,
+      "duration": 4.39,
+      "text": "c1n notice usually that one coming first"
+    },
+    {
+      "index": 171,
+      "start": 551.32,
+      "end": 554.19,
+      "duration": 2.87,
+      "text": "would mean I'm in row one but I've"
+    },
+    {
+      "index": 172,
+      "start": 554.2,
+      "end": 557.23,
+      "duration": 3.03,
+      "text": "transposed so that's those are the"
+    },
+    {
+      "index": 173,
+      "start": 557.24,
+      "end": 559.91,
+      "duration": 2.67,
+      "text": "co-actors this First Column are the"
+    },
+    {
+      "index": 174,
+      "start": 559.92,
+      "end": 563.47,
+      "duration": 3.55,
+      "text": "co-actors from Row one and then the last"
+    },
+    {
+      "index": 175,
+      "start": 563.48,
+      "end": 568.63,
+      "duration": 5.15,
+      "text": "column would be the co-actors from row N"
+    },
+    {
+      "index": 176,
+      "start": 568.64,
+      "end": 570.87,
+      "duration": 2.23,
+      "text": "and why should that come out to be"
+    },
+    {
+      "index": 177,
+      "start": 570.88,
+      "end": 572.949,
+      "duration": 2.069,
+      "text": "anything"
+    },
+    {
+      "index": 178,
+      "start": 572.959,
+      "end": 575.71,
+      "duration": 2.751,
+      "text": "good in fact why should it come out to"
+    },
+    {
+      "index": 179,
+      "start": 575.72,
+      "end": 578.389,
+      "duration": 2.669,
+      "text": "be as good as this"
+    },
+    {
+      "index": 180,
+      "start": 578.399,
+      "end": 582.43,
+      "duration": 4.031,
+      "text": "well you can tell me what the one one"
+    },
+    {
+      "index": 181,
+      "start": 582.44,
+      "end": 584.75,
+      "duration": 2.31,
+      "text": "entry in the product is this is like"
+    },
+    {
+      "index": 182,
+      "start": 584.76,
+      "end": 587.509,
+      "duration": 2.749,
+      "text": "you're seeing the main point if you just"
+    },
+    {
+      "index": 183,
+      "start": 587.519,
+      "end": 592.389,
+      "duration": 4.87,
+      "text": "tell me one entry what do I get up there"
+    },
+    {
+      "index": 184,
+      "start": 592.399,
+      "end": 597.15,
+      "duration": 4.751,
+      "text": "in the one one entry when I do this row"
+    },
+    {
+      "index": 185,
+      "start": 597.16,
+      "end": 600.91,
+      "duration": 3.75,
+      "text": "of of ENT of this Row from a times this"
+    },
+    {
+      "index": 186,
+      "start": 600.92,
+      "end": 603.11,
+      "duration": 2.19,
+      "text": "column of"
+    },
+    {
+      "index": 187,
+      "start": 603.12,
+      "end": 606.15,
+      "duration": 3.03,
+      "text": "co-actors what what will I get there"
+    },
+    {
+      "index": 188,
+      "start": 606.16,
+      "end": 609.069,
+      "duration": 2.909,
+      "text": "because we have seen this I mean we're"
+    },
+    {
+      "index": 189,
+      "start": 609.079,
+      "end": 612.509,
+      "duration": 3.43,
+      "text": "right building exactly on what the last"
+    },
+    {
+      "index": 190,
+      "start": 612.519,
+      "end": 613.949,
+      "duration": 1.43,
+      "text": "lecture"
+    },
+    {
+      "index": 191,
+      "start": 613.959,
+      "end": 618.63,
+      "duration": 4.671,
+      "text": "reached uh so this is a11 * C11 a12 *"
+    },
+    {
+      "index": 192,
+      "start": 618.64,
+      "end": 622.35,
+      "duration": 3.71,
+      "text": "C12 a1n * c1n what does that what does"
+    },
+    {
+      "index": 193,
+      "start": 622.36,
+      "end": 624.71,
+      "duration": 2.35,
+      "text": "that sum up"
+    },
+    {
+      "index": 194,
+      "start": 624.72,
+      "end": 628.31,
+      "duration": 3.59,
+      "text": "to that's the co that's the co-actor"
+    },
+    {
+      "index": 195,
+      "start": 628.32,
+      "end": 630.15,
+      "duration": 1.83,
+      "text": "formula"
+    },
+    {
+      "index": 196,
+      "start": 630.16,
+      "end": 631.91,
+      "duration": 1.75,
+      "text": "for the"
+    },
+    {
+      "index": 197,
+      "start": 631.92,
+      "end": 634.35,
+      "duration": 2.43,
+      "text": "determinant that's the this co-factor"
+    },
+    {
+      "index": 198,
+      "start": 634.36,
+      "end": 637.59,
+      "duration": 3.23,
+      "text": "formula which I wrote which I which I we"
+    },
+    {
+      "index": 199,
+      "start": 637.6,
+      "end": 640.949,
+      "duration": 3.349,
+      "text": "got last time the determinant of a is if"
+    },
+    {
+      "index": 200,
+      "start": 640.959,
+      "end": 644.15,
+      "duration": 3.191,
+      "text": "I use Row one let let I equal"
+    },
+    {
+      "index": 201,
+      "start": 644.16,
+      "end": 649.59,
+      "duration": 5.43,
+      "text": "1 then I have a11 * its co-actor a12 *"
+    },
+    {
+      "index": 202,
+      "start": 649.6,
+      "end": 652.79,
+      "duration": 3.19,
+      "text": "its co-actor and so on and that gives me"
+    },
+    {
+      "index": 203,
+      "start": 652.8,
+      "end": 653.79,
+      "duration": 0.99,
+      "text": "the"
+    },
+    {
+      "index": 204,
+      "start": 653.8,
+      "end": 657.509,
+      "duration": 3.709,
+      "text": "determinant and it worked in this in"
+    },
+    {
+      "index": 205,
+      "start": 657.519,
+      "end": 660.31,
+      "duration": 2.791,
+      "text": "this case uh this"
+    },
+    {
+      "index": 206,
+      "start": 660.32,
+      "end": 664.269,
+      "duration": 3.949,
+      "text": "row times this thing is sure enough a D"
+    },
+    {
+      "index": 207,
+      "start": 664.279,
+      "end": 667.99,
+      "duration": 3.711,
+      "text": "minus BC but this formula says it always"
+    },
+    {
+      "index": 208,
+      "start": 668.0,
+      "end": 672.31,
+      "duration": 4.31,
+      "text": "works so up here in this in this"
+    },
+    {
+      "index": 209,
+      "start": 672.32,
+      "end": 675.47,
+      "duration": 3.15,
+      "text": "position I'm getting determinant of a"
+    },
+    {
+      "index": 210,
+      "start": 675.48,
+      "end": 679.23,
+      "duration": 3.75,
+      "text": "what about in the 2 two position row two"
+    },
+    {
+      "index": 211,
+      "start": 679.24,
+      "end": 683.509,
+      "duration": 4.269,
+      "text": "* column 2 there what what is that"
+    },
+    {
+      "index": 212,
+      "start": 683.519,
+      "end": 685.949,
+      "duration": 2.43,
+      "text": "that's just the co-actors that's just"
+    },
+    {
+      "index": 213,
+      "start": 685.959,
+      "end": 687.829,
+      "duration": 1.87,
+      "text": "row2 * its"
+    },
+    {
+      "index": 214,
+      "start": 687.839,
+      "end": 689.99,
+      "duration": 2.151,
+      "text": "co-actors so if of course I get the"
+    },
+    {
+      "index": 215,
+      "start": 690.0,
+      "end": 692.03,
+      "duration": 2.03,
+      "text": "determinant"
+    },
+    {
+      "index": 216,
+      "start": 692.04,
+      "end": 695.069,
+      "duration": 3.029,
+      "text": "again and in the last here this is the"
+    },
+    {
+      "index": 217,
+      "start": 695.079,
+      "end": 699.389,
+      "duration": 4.31,
+      "text": "last row times its co-actors exactly you"
+    },
+    {
+      "index": 218,
+      "start": 699.399,
+      "end": 701.55,
+      "duration": 2.151,
+      "text": "see we're realizing that the co-factor"
+    },
+    {
+      "index": 219,
+      "start": 701.56,
+      "end": 705.11,
+      "duration": 3.55,
+      "text": "formula is just this sum of products so"
+    },
+    {
+      "index": 220,
+      "start": 705.12,
+      "end": 706.71,
+      "duration": 1.59,
+      "text": "of course we think hey we've got a"
+    },
+    {
+      "index": 221,
+      "start": 706.72,
+      "end": 709.59,
+      "duration": 2.87,
+      "text": "matrix multiplication there and we get"
+    },
+    {
+      "index": 222,
+      "start": 709.6,
+      "end": 714.91,
+      "duration": 5.31,
+      "text": "determinant of"
+    },
+    {
+      "index": 223,
+      "start": 716.99,
+      "end": 717.0,
+      "duration": 0.01,
+      "text": "a"
+    },
+    {
+      "index": 224,
+      "start": 717.0,
+      "end": 721.069,
+      "duration": 4.069,
+      "text": "great but there's one more idea here"
+    },
+    {
+      "index": 225,
+      "start": 721.079,
+      "end": 724.31,
+      "duration": 3.231,
+      "text": "right what else what have I not so I"
+    },
+    {
+      "index": 226,
+      "start": 724.32,
+      "end": 726.069,
+      "duration": 1.749,
+      "text": "haven't got that formula completely"
+    },
+    {
+      "index": 227,
+      "start": 726.079,
+      "end": 730.15,
+      "duration": 4.071,
+      "text": "proved yet because I've still got to do"
+    },
+    {
+      "index": 228,
+      "start": 730.16,
+      "end": 732.99,
+      "duration": 2.83,
+      "text": "all the off diagonal stuff which I want"
+    },
+    {
+      "index": 229,
+      "start": 733.0,
+      "end": 734.87,
+      "duration": 1.87,
+      "text": "to be zero"
+    },
+    {
+      "index": 230,
+      "start": 734.88,
+      "end": 737.55,
+      "duration": 2.67,
+      "text": "right I just want this to be determinant"
+    },
+    {
+      "index": 231,
+      "start": 737.56,
+      "end": 739.75,
+      "duration": 2.19,
+      "text": "of a times the identity and then I'm I'm"
+    },
+    {
+      "index": 232,
+      "start": 739.76,
+      "end": 741.829,
+      "duration": 2.069,
+      "text": "a happy"
+    },
+    {
+      "index": 233,
+      "start": 741.839,
+      "end": 745.43,
+      "duration": 3.591,
+      "text": "person so why should that be why should"
+    },
+    {
+      "index": 234,
+      "start": 745.44,
+      "end": 750.55,
+      "duration": 5.11,
+      "text": "it be that one row times the co-actors"
+    },
+    {
+      "index": 235,
+      "start": 750.56,
+      "end": 752.11,
+      "duration": 1.55,
+      "text": "from a different"
+    },
+    {
+      "index": 236,
+      "start": 752.12,
+      "end": 755.35,
+      "duration": 3.23,
+      "text": "row which become a column because I"
+    },
+    {
+      "index": 237,
+      "start": 755.36,
+      "end": 758.31,
+      "duration": 2.95,
+      "text": "transpose give"
+    },
+    {
+      "index": 238,
+      "start": 758.32,
+      "end": 761.87,
+      "duration": 3.55,
+      "text": "Zer in other words the co-actor"
+    },
+    {
+      "index": 239,
+      "start": 761.88,
+      "end": 765.71,
+      "duration": 3.83,
+      "text": "formula gives the determinant if the row"
+    },
+    {
+      "index": 240,
+      "start": 765.72,
+      "end": 768.23,
+      "duration": 2.51,
+      "text": "and the and the co-actors you know if"
+    },
+    {
+      "index": 241,
+      "start": 768.24,
+      "end": 770.189,
+      "duration": 1.949,
+      "text": "the if the entries of a and the"
+    },
+    {
+      "index": 242,
+      "start": 770.199,
+      "end": 773.03,
+      "duration": 2.831,
+      "text": "co-actors are for the same"
+    },
+    {
+      "index": 243,
+      "start": 773.04,
+      "end": 776.59,
+      "duration": 3.55,
+      "text": "row but for some reason if I take the"
+    },
+    {
+      "index": 244,
+      "start": 776.6,
+      "end": 778.87,
+      "duration": 2.27,
+      "text": "co-actors from the fir the entries from"
+    },
+    {
+      "index": 245,
+      "start": 778.88,
+      "end": 781.509,
+      "duration": 2.629,
+      "text": "the first row and the co-actors from the"
+    },
+    {
+      "index": 246,
+      "start": 781.519,
+      "end": 783.47,
+      "duration": 1.951,
+      "text": "second row for some reason I"
+    },
+    {
+      "index": 247,
+      "start": 783.48,
+      "end": 786.67,
+      "duration": 3.19,
+      "text": "automatically get zero and it's sort of"
+    },
+    {
+      "index": 248,
+      "start": 786.68,
+      "end": 789.67,
+      "duration": 2.99,
+      "text": "like interesting to say why does that"
+    },
+    {
+      "index": 249,
+      "start": 789.68,
+      "end": 792.509,
+      "duration": 2.829,
+      "text": "happen and can I just check that of"
+    },
+    {
+      "index": 250,
+      "start": 792.519,
+      "end": 795.67,
+      "duration": 3.151,
+      "text": "course we know it happens uh in this"
+    },
+    {
+      "index": 251,
+      "start": 795.68,
+      "end": 799.43,
+      "duration": 3.75,
+      "text": "case here are the numbers from Row one"
+    },
+    {
+      "index": 252,
+      "start": 799.44,
+      "end": 802.15,
+      "duration": 2.71,
+      "text": "and here are the co-actors from row"
+    },
+    {
+      "index": 253,
+      "start": 802.16,
+      "end": 805.829,
+      "duration": 3.669,
+      "text": "two right those are the numbers in row"
+    },
+    {
+      "index": 254,
+      "start": 805.839,
+      "end": 808.87,
+      "duration": 3.031,
+      "text": "one and these are the co-actors from row"
+    },
+    {
+      "index": 255,
+      "start": 808.88,
+      "end": 812.15,
+      "duration": 3.27,
+      "text": "two two cuz the co-actor of C is minus B"
+    },
+    {
+      "index": 256,
+      "start": 812.16,
+      "end": 814.79,
+      "duration": 2.63,
+      "text": "and the co-actor of D is a and sure"
+    },
+    {
+      "index": 257,
+      "start": 814.8,
+      "end": 819.269,
+      "duration": 4.469,
+      "text": "enough that row times this column"
+    },
+    {
+      "index": 258,
+      "start": 819.279,
+      "end": 824.79,
+      "duration": 5.511,
+      "text": "gives please say it zero right okay so"
+    },
+    {
+      "index": 259,
+      "start": 824.8,
+      "end": 826.31,
+      "duration": 1.51,
+      "text": "now how"
+    },
+    {
+      "index": 260,
+      "start": 826.32,
+      "end": 829.389,
+      "duration": 3.069,
+      "text": "come how come can we even see it in this"
+    },
+    {
+      "index": 261,
+      "start": 829.399,
+      "end": 833.43,
+      "duration": 4.031,
+      "text": "2x two case why why well I mean I guess"
+    },
+    {
+      "index": 262,
+      "start": 833.44,
+      "end": 836.069,
+      "duration": 2.629,
+      "text": "we in one way we certainly do see it"
+    },
+    {
+      "index": 263,
+      "start": 836.079,
+      "end": 837.829,
+      "duration": 1.75,
+      "text": "because it's right here I mean do we"
+    },
+    {
+      "index": 264,
+      "start": 837.839,
+      "end": 839.949,
+      "duration": 2.11,
+      "text": "just do it and we get zero but we want"
+    },
+    {
+      "index": 265,
+      "start": 839.959,
+      "end": 843.23,
+      "duration": 3.271,
+      "text": "to think of some reason"
+    },
+    {
+      "index": 266,
+      "start": 843.24,
+      "end": 846.11,
+      "duration": 2.87,
+      "text": "why the answer is zero some reason that"
+    },
+    {
+      "index": 267,
+      "start": 846.12,
+      "end": 849.35,
+      "duration": 3.23,
+      "text": "we can use in the N byend case so let"
+    },
+    {
+      "index": 268,
+      "start": 849.36,
+      "end": 852.389,
+      "duration": 3.029,
+      "text": "here here's my"
+    },
+    {
+      "index": 269,
+      "start": 855.11,
+      "end": 855.12,
+      "duration": 0.01,
+      "text": "thinking we must be if we're getting the"
+    },
+    {
+      "index": 270,
+      "start": 855.12,
+      "end": 859.069,
+      "duration": 3.949,
+      "text": "answer zero we suspect that what we're"
+    },
+    {
+      "index": 271,
+      "start": 859.079,
+      "end": 860.99,
+      "duration": 1.911,
+      "text": "doing somehow we're taking the"
+    },
+    {
+      "index": 272,
+      "start": 861.0,
+      "end": 862.829,
+      "duration": 1.829,
+      "text": "determinant of some"
+    },
+    {
+      "index": 273,
+      "start": 862.839,
+      "end": 865.629,
+      "duration": 2.79,
+      "text": "Matrix that has two equal"
+    },
+    {
+      "index": 274,
+      "start": 865.639,
+      "end": 868.87,
+      "duration": 3.231,
+      "text": "rows so I believe that if we multiply"
+    },
+    {
+      "index": 275,
+      "start": 868.88,
+      "end": 869.67,
+      "duration": 0.79,
+      "text": "these"
+    },
+    {
+      "index": 276,
+      "start": 869.68,
+      "end": 873.03,
+      "duration": 3.35,
+      "text": "by the co-actors from some other row"
+    },
+    {
+      "index": 277,
+      "start": 873.04,
+      "end": 875.11,
+      "duration": 2.07,
+      "text": "we're taking the"
+    },
+    {
+      "index": 278,
+      "start": 875.12,
+      "end": 877.269,
+      "duration": 2.149,
+      "text": "determinant yeah what Matrix are we"
+    },
+    {
+      "index": 279,
+      "start": 877.279,
+      "end": 879.389,
+      "duration": 2.11,
+      "text": "taking the determinant of here it's this"
+    },
+    {
+      "index": 280,
+      "start": 879.399,
+      "end": 882.91,
+      "duration": 3.511,
+      "text": "is it we're when we do that times this"
+    },
+    {
+      "index": 281,
+      "start": 882.92,
+      "end": 886.31,
+      "duration": 3.39,
+      "text": "we're really taking can I put this in"
+    },
+    {
+      "index": 282,
+      "start": 886.32,
+      "end": 889.629,
+      "duration": 3.309,
+      "text": "little letters down here I'm"
+    },
+    {
+      "index": 283,
+      "start": 889.639,
+      "end": 896.15,
+      "duration": 6.511,
+      "text": "taking let me look at the Matrix a b a"
+    },
+    {
+      "index": 284,
+      "start": 896.16,
+      "end": 900.629,
+      "duration": 4.469,
+      "text": "b let me call that Matrix a"
+    },
+    {
+      "index": 285,
+      "start": 900.639,
+      "end": 907.069,
+      "duration": 6.43,
+      "text": "a s a screwed up okay all right so now"
+    },
+    {
+      "index": 286,
+      "start": 907.079,
+      "end": 909.55,
+      "duration": 2.471,
+      "text": "that Matrix is certainly singular so if"
+    },
+    {
+      "index": 287,
+      "start": 909.56,
+      "end": 911.35,
+      "duration": 1.79,
+      "text": "we find its determinant we're going to"
+    },
+    {
+      "index": 288,
+      "start": 911.36,
+      "end": 915.15,
+      "duration": 3.79,
+      "text": "get zero but I claim that if we find its"
+    },
+    {
+      "index": 289,
+      "start": 915.16,
+      "end": 918.15,
+      "duration": 2.99,
+      "text": "determinant by the co-actor rule go"
+    },
+    {
+      "index": 290,
+      "start": 918.16,
+      "end": 921.03,
+      "duration": 2.87,
+      "text": "along the first row we would take a"
+    },
+    {
+      "index": 291,
+      "start": 921.04,
+      "end": 924.71,
+      "duration": 3.67,
+      "text": "times the co-actor of a and what is the"
+    },
+    {
+      "index": 292,
+      "start": 924.72,
+      "end": 927.71,
+      "duration": 2.99,
+      "text": "co so"
+    },
+    {
+      "index": 293,
+      "start": 927.72,
+      "end": 931.389,
+      "duration": 3.669,
+      "text": "see how oh no I I'll let me go along the"
+    },
+    {
+      "index": 294,
+      "start": 931.399,
+      "end": 936.59,
+      "duration": 5.191,
+      "text": "second row okay so let's see which if I"
+    },
+    {
+      "index": 295,
+      "start": 936.6,
+      "end": 939.55,
+      "duration": 2.95,
+      "text": "take I know I've got a singular Matrix"
+    },
+    {
+      "index": 296,
+      "start": 939.56,
+      "end": 945.069,
+      "duration": 5.509,
+      "text": "here and I believe that when I do this"
+    },
+    {
+      "index": 297,
+      "start": 945.079,
+      "end": 947.43,
+      "duration": 2.351,
+      "text": "multiplication what I'm doing is using"
+    },
+    {
+      "index": 298,
+      "start": 947.44,
+      "end": 950.069,
+      "duration": 2.629,
+      "text": "the co-actor formula for the"
+    },
+    {
+      "index": 299,
+      "start": 950.079,
+      "end": 952.269,
+      "duration": 2.19,
+      "text": "determinant and I know I'm going to get"
+    },
+    {
+      "index": 300,
+      "start": 952.279,
+      "end": 954.829,
+      "duration": 2.55,
+      "text": "zero let me try this again so the"
+    },
+    {
+      "index": 301,
+      "start": 954.839,
+      "end": 956.949,
+      "duration": 2.11,
+      "text": "co-actor formula for the determinant"
+    },
+    {
+      "index": 302,
+      "start": 956.959,
+      "end": 959.99,
+      "duration": 3.031,
+      "text": "says I should take a"
+    },
+    {
+      "index": 303,
+      "start": 960.0,
+      "end": 963.71,
+      "duration": 3.71,
+      "text": "a Time its co-actor which is this"
+    },
+    {
+      "index": 304,
+      "start": 963.72,
+      "end": 967.55,
+      "duration": 3.83,
+      "text": "B plus b * this time its co-actor which"
+    },
+    {
+      "index": 305,
+      "start": 967.56,
+      "end": 972.269,
+      "duration": 4.709,
+      "text": "is this minus a okay that's what we're"
+    },
+    {
+      "index": 306,
+      "start": 972.279,
+      "end": 976.47,
+      "duration": 4.191,
+      "text": "doing apart from a sign here oh yeah"
+    },
+    {
+      "index": 307,
+      "start": 976.48,
+      "end": 978.23,
+      "duration": 1.75,
+      "text": "so you"
+    },
+    {
+      "index": 308,
+      "start": 978.24,
+      "end": 980.99,
+      "duration": 2.75,
+      "text": "know there might be a minus multiplying"
+    },
+    {
+      "index": 309,
+      "start": 981.0,
+      "end": 983.67,
+      "duration": 2.67,
+      "text": "everything so if I take this determinant"
+    },
+    {
+      "index": 310,
+      "start": 983.68,
+      "end": 985.87,
+      "duration": 2.19,
+      "text": "it's a the determinant of this the"
+    },
+    {
+      "index": 311,
+      "start": 985.88,
+      "end": 990.749,
+      "duration": 4.869,
+      "text": "determinant of a screwed up is a times"
+    },
+    {
+      "index": 312,
+      "start": 990.759,
+      "end": 994.829,
+      "duration": 4.07,
+      "text": "its co-actor which is B plus the second"
+    },
+    {
+      "index": 313,
+      "start": 994.839,
+      "end": 998.03,
+      "duration": 3.191,
+      "text": "guy times its co-factor which is minus"
+    },
+    {
+      "index": 314,
+      "start": 998.04,
+      "end": 1001.829,
+      "duration": 3.789,
+      "text": "a and of course I get the answer zero"
+    },
+    {
+      "index": 315,
+      "start": 1001.839,
+      "end": 1004.59,
+      "duration": 2.751,
+      "text": "and this is exactly what's happening in"
+    },
+    {
+      "index": 316,
+      "start": 1004.6,
+      "end": 1011.23,
+      "duration": 6.63,
+      "text": "that in that uh row times this wrong"
+    },
+    {
+      "index": 317,
+      "start": 1014.309,
+      "end": 1014.319,
+      "duration": 0.01,
+      "text": "column okay that's the 2x two picture"
+    },
+    {
+      "index": 318,
+      "start": 1014.319,
+      "end": 1016.91,
+      "duration": 2.591,
+      "text": "and it's just the same here that the"
+    },
+    {
+      "index": 319,
+      "start": 1016.92,
+      "end": 1020.71,
+      "duration": 3.79,
+      "text": "reason I get a zero up in the"
+    },
+    {
+      "index": 320,
+      "start": 1020.72,
+      "end": 1023.749,
+      "duration": 3.029,
+      "text": "is the reason I get a zero is that when"
+    },
+    {
+      "index": 321,
+      "start": 1023.759,
+      "end": 1024.909,
+      "duration": 1.15,
+      "text": "I"
+    },
+    {
+      "index": 322,
+      "start": 1024.919,
+      "end": 1027.189,
+      "duration": 2.27,
+      "text": "multiply the first"
+    },
+    {
+      "index": 323,
+      "start": 1027.199,
+      "end": 1031.51,
+      "duration": 4.311,
+      "text": "row of a and the last row of the"
+    },
+    {
+      "index": 324,
+      "start": 1031.52,
+      "end": 1034.71,
+      "duration": 3.19,
+      "text": "co-actor matrix it's as if I'm taking"
+    },
+    {
+      "index": 325,
+      "start": 1034.72,
+      "end": 1036.47,
+      "duration": 1.75,
+      "text": "the determinant of this screwed up"
+    },
+    {
+      "index": 326,
+      "start": 1036.48,
+      "end": 1041.27,
+      "duration": 4.79,
+      "text": "Matrix that has first and last rows"
+    },
+    {
+      "index": 327,
+      "start": 1045.47,
+      "end": 1045.48,
+      "duration": 0.01,
+      "text": "identical the book pins this down more"
+    },
+    {
+      "index": 328,
+      "start": 1045.48,
+      "end": 1047.71,
+      "duration": 2.23,
+      "text": "specific more carefully than I can do in"
+    },
+    {
+      "index": 329,
+      "start": 1047.72,
+      "end": 1050.47,
+      "duration": 2.75,
+      "text": "the lecture I I hope you're seeing the"
+    },
+    {
+      "index": 330,
+      "start": 1050.48,
+      "end": 1053.15,
+      "duration": 2.67,
+      "text": "point that this is an"
+    },
+    {
+      "index": 331,
+      "start": 1053.16,
+      "end": 1055.63,
+      "duration": 2.47,
+      "text": "identity that that that it's a beautiful"
+    },
+    {
+      "index": 332,
+      "start": 1055.64,
+      "end": 1057.59,
+      "duration": 1.95,
+      "text": "identity and it tells us what the"
+    },
+    {
+      "index": 333,
+      "start": 1057.6,
+      "end": 1059.669,
+      "duration": 2.069,
+      "text": "inverse of the Matrix"
+    },
+    {
+      "index": 334,
+      "start": 1059.679,
+      "end": 1062.39,
+      "duration": 2.711,
+      "text": "is so it gives us the inverse the"
+    },
+    {
+      "index": 335,
+      "start": 1062.4,
+      "end": 1065.35,
+      "duration": 2.95,
+      "text": "formula for the inverse okay so that's"
+    },
+    {
+      "index": 336,
+      "start": 1065.36,
+      "end": 1068.909,
+      "duration": 3.549,
+      "text": "the first goal of my lecture was to find"
+    },
+    {
+      "index": 337,
+      "start": 1068.919,
+      "end": 1072.83,
+      "duration": 3.911,
+      "text": "this formula it's done"
+    },
+    {
+      "index": 338,
+      "start": 1072.84,
+      "end": 1076.99,
+      "duration": 4.15,
+      "text": "okay and of course I can invert now uh I"
+    },
+    {
+      "index": 339,
+      "start": 1077.0,
+      "end": 1079.35,
+      "duration": 2.35,
+      "text": "I I can I sort of"
+    },
+    {
+      "index": 340,
+      "start": 1079.36,
+      "end": 1081.47,
+      "duration": 2.11,
+      "text": "like I can see what Happ I can answer"
+    },
+    {
+      "index": 341,
+      "start": 1081.48,
+      "end": 1085.59,
+      "duration": 4.11,
+      "text": "questions like this suppose I have a"
+    },
+    {
+      "index": 342,
+      "start": 1085.6,
+      "end": 1089.35,
+      "duration": 3.75,
+      "text": "matrix and let me move the one one"
+    },
+    {
+      "index": 343,
+      "start": 1089.36,
+      "end": 1092.669,
+      "duration": 3.309,
+      "text": "entry what happens to the"
+    },
+    {
+      "index": 344,
+      "start": 1092.679,
+      "end": 1094.909,
+      "duration": 2.23,
+      "text": "inverse just just think about that"
+    },
+    {
+      "index": 345,
+      "start": 1094.919,
+      "end": 1097.39,
+      "duration": 2.471,
+      "text": "question suppose I have some Matrix I"
+    },
+    {
+      "index": 346,
+      "start": 1097.4,
+      "end": 1099.43,
+      "duration": 2.03,
+      "text": "just write down some nice non- singular"
+    },
+    {
+      "index": 347,
+      "start": 1099.44,
+      "end": 1102.029,
+      "duration": 2.589,
+      "text": "matrix it's got an inverse and then I"
+    },
+    {
+      "index": 348,
+      "start": 1102.039,
+      "end": 1105.31,
+      "duration": 3.271,
+      "text": "move the one one entry a little bit I"
+    },
+    {
+      "index": 349,
+      "start": 1105.32,
+      "end": 1108.549,
+      "duration": 3.229,
+      "text": "add one to it for example what happens"
+    },
+    {
+      "index": 350,
+      "start": 1108.559,
+      "end": 1111.75,
+      "duration": 3.191,
+      "text": "to the inverse Matrix well this formula"
+    },
+    {
+      "index": 351,
+      "start": 1111.76,
+      "end": 1114.27,
+      "duration": 2.51,
+      "text": "should tell me I have to look to see"
+    },
+    {
+      "index": 352,
+      "start": 1114.28,
+      "end": 1116.75,
+      "duration": 2.47,
+      "text": "what happens to the determinant and what"
+    },
+    {
+      "index": 353,
+      "start": 1116.76,
+      "end": 1118.669,
+      "duration": 1.909,
+      "text": "happens to all the"
+    },
+    {
+      "index": 354,
+      "start": 1118.679,
+      "end": 1122.23,
+      "duration": 3.551,
+      "text": "co-actors and uh the picture it's it's"
+    },
+    {
+      "index": 355,
+      "start": 1122.24,
+      "end": 1123.23,
+      "duration": 0.99,
+      "text": "all"
+    },
+    {
+      "index": 356,
+      "start": 1123.24,
+      "end": 1126.43,
+      "duration": 3.19,
+      "text": "there it's all there we can"
+    },
+    {
+      "index": 357,
+      "start": 1126.44,
+      "end": 1128.789,
+      "duration": 2.349,
+      "text": "really understand how the inverse"
+    },
+    {
+      "index": 358,
+      "start": 1128.799,
+      "end": 1133.11,
+      "duration": 4.311,
+      "text": "changes when the Matrix changes okay now"
+    },
+    {
+      "index": 359,
+      "start": 1133.12,
+      "end": 1134.71,
+      "duration": 1.59,
+      "text": "my second"
+    },
+    {
+      "index": 360,
+      "start": 1134.72,
+      "end": 1138.47,
+      "duration": 3.75,
+      "text": "application is to let me put that over"
+    },
+    {
+      "index": 361,
+      "start": 1138.48,
+      "end": 1142.71,
+      "duration": 4.23,
+      "text": "here is to ax equal"
+    },
+    {
+      "index": 362,
+      "start": 1146.87,
+      "end": 1146.88,
+      "duration": 0.01,
+      "text": "B well of course the solution is a"
+    },
+    {
+      "index": 363,
+      "start": 1146.88,
+      "end": 1148.029,
+      "duration": 1.149,
+      "text": "inverse"
+    },
+    {
+      "index": 364,
+      "start": 1148.039,
+      "end": 1151.71,
+      "duration": 3.671,
+      "text": "B but now I have a formula for a inverse"
+    },
+    {
+      "index": 365,
+      "start": 1151.72,
+      "end": 1156.11,
+      "duration": 4.39,
+      "text": "a inverse is one over the"
+    },
+    {
+      "index": 366,
+      "start": 1161.029,
+      "end": 1161.039,
+      "duration": 0.01,
+      "text": "determinant times this C transpose time"
+    },
+    {
+      "index": 367,
+      "start": 1161.039,
+      "end": 1165.11,
+      "duration": 4.071,
+      "text": "B I now know what a inverse is so now I"
+    },
+    {
+      "index": 368,
+      "start": 1165.12,
+      "end": 1167.39,
+      "duration": 2.27,
+      "text": "just have to say what have I got here is"
+    },
+    {
+      "index": 369,
+      "start": 1167.4,
+      "end": 1171.789,
+      "duration": 4.389,
+      "text": "there any way to to make this formula"
+    },
+    {
+      "index": 370,
+      "start": 1171.799,
+      "end": 1175.11,
+      "duration": 3.311,
+      "text": "this this answer which is the one and"
+    },
+    {
+      "index": 371,
+      "start": 1175.12,
+      "end": 1177.789,
+      "duration": 2.669,
+      "text": "only answer it's the very same answer"
+    },
+    {
+      "index": 372,
+      "start": 1177.799,
+      "end": 1181.63,
+      "duration": 3.831,
+      "text": "we' got on the first day of the Class by"
+    },
+    {
+      "index": 373,
+      "start": 1181.64,
+      "end": 1183.909,
+      "duration": 2.269,
+      "text": "elimination now I'm now I've got a"
+    },
+    {
+      "index": 374,
+      "start": 1183.919,
+      "end": 1186.27,
+      "duration": 2.351,
+      "text": "formula for the"
+    },
+    {
+      "index": 375,
+      "start": 1186.28,
+      "end": 1190.27,
+      "duration": 3.99,
+      "text": "answer can I play with it further to see"
+    },
+    {
+      "index": 376,
+      "start": 1190.28,
+      "end": 1195.35,
+      "duration": 5.07,
+      "text": "what's going on and Kramer this Kramer's"
+    },
+    {
+      "index": 377,
+      "start": 1195.36,
+      "end": 1197.39,
+      "duration": 2.03,
+      "text": "rule is"
+    },
+    {
+      "index": 378,
+      "start": 1197.4,
+      "end": 1200.35,
+      "duration": 2.95,
+      "text": "exactly uh"
+    },
+    {
+      "index": 379,
+      "start": 1200.36,
+      "end": 1202.87,
+      "duration": 2.51,
+      "text": "that a a way of"
+    },
+    {
+      "index": 380,
+      "start": 1202.88,
+      "end": 1206.23,
+      "duration": 3.35,
+      "text": "looking at this"
+    },
+    {
+      "index": 381,
+      "start": 1206.24,
+      "end": 1210.63,
+      "duration": 4.39,
+      "text": "formula okay so this is a formula for"
+    },
+    {
+      "index": 382,
+      "start": 1210.64,
+      "end": 1214.43,
+      "duration": 3.79,
+      "text": "x here's my formula well of course the"
+    },
+    {
+      "index": 383,
+      "start": 1214.44,
+      "end": 1216.95,
+      "duration": 2.51,
+      "text": "first thing I see from the formula is"
+    },
+    {
+      "index": 384,
+      "start": 1216.96,
+      "end": 1220.029,
+      "duration": 3.069,
+      "text": "that the answer X always has that in the"
+    },
+    {
+      "index": 385,
+      "start": 1220.039,
+      "end": 1222.95,
+      "duration": 2.911,
+      "text": "determinant I'm not surprised there's a"
+    },
+    {
+      "index": 386,
+      "start": 1222.96,
+      "end": 1225.83,
+      "duration": 2.87,
+      "text": "division by the determinant but then I"
+    },
+    {
+      "index": 387,
+      "start": 1225.84,
+      "end": 1227.669,
+      "duration": 1.829,
+      "text": "have to say a little more carefully"
+    },
+    {
+      "index": 388,
+      "start": 1227.679,
+      "end": 1229.59,
+      "duration": 1.911,
+      "text": "what's going on up here here and let me"
+    },
+    {
+      "index": 389,
+      "start": 1229.6,
+      "end": 1231.87,
+      "duration": 2.27,
+      "text": "tell you what Kramer's rule is let let"
+    },
+    {
+      "index": 390,
+      "start": 1231.88,
+      "end": 1234.47,
+      "duration": 2.59,
+      "text": "me take X1 the first"
+    },
+    {
+      "index": 391,
+      "start": 1234.48,
+      "end": 1236.99,
+      "duration": 2.51,
+      "text": "component so this is the first component"
+    },
+    {
+      "index": 392,
+      "start": 1237.0,
+      "end": 1239.27,
+      "duration": 2.27,
+      "text": "of the answer then there'll be a second"
+    },
+    {
+      "index": 393,
+      "start": 1239.28,
+      "end": 1241.83,
+      "duration": 2.55,
+      "text": "component and uh all the other"
+    },
+    {
+      "index": 394,
+      "start": 1241.84,
+      "end": 1244.87,
+      "duration": 3.03,
+      "text": "components can I take just the first"
+    },
+    {
+      "index": 395,
+      "start": 1244.88,
+      "end": 1247.149,
+      "duration": 2.269,
+      "text": "component of this formula well I"
+    },
+    {
+      "index": 396,
+      "start": 1247.159,
+      "end": 1251.149,
+      "duration": 3.99,
+      "text": "certainly have determinant of a Down"
+    },
+    {
+      "index": 397,
+      "start": 1251.159,
+      "end": 1255.23,
+      "duration": 4.071,
+      "text": "Under And what the heck is the"
+    },
+    {
+      "index": 398,
+      "start": 1255.24,
+      "end": 1259.31,
+      "duration": 4.07,
+      "text": "first so what do I get in C transposed"
+    },
+    {
+      "index": 399,
+      "start": 1259.32,
+      "end": 1263.11,
+      "duration": 3.79,
+      "text": "B what's the first entry of C transpose"
+    },
+    {
+      "index": 400,
+      "start": 1263.12,
+      "end": 1265.11,
+      "duration": 1.99,
+      "text": "B that's what I have to ask"
+    },
+    {
+      "index": 401,
+      "start": 1265.12,
+      "end": 1267.11,
+      "duration": 1.99,
+      "text": "myself"
+    },
+    {
+      "index": 402,
+      "start": 1267.12,
+      "end": 1269.47,
+      "duration": 2.35,
+      "text": "well what's the first entry of C"
+    },
+    {
+      "index": 403,
+      "start": 1269.48,
+      "end": 1272.909,
+      "duration": 3.429,
+      "text": "transpose B okay"
+    },
+    {
+      "index": 404,
+      "start": 1272.919,
+      "end": 1276.269,
+      "duration": 3.35,
+      "text": "the this B is let me let me tell you"
+    },
+    {
+      "index": 405,
+      "start": 1276.279,
+      "end": 1282.029,
+      "duration": 5.75,
+      "text": "what it is I I somehow I'm multiplying"
+    },
+    {
+      "index": 406,
+      "start": 1282.039,
+      "end": 1285.669,
+      "duration": 3.63,
+      "text": "co-actors by the entries of B right in"
+    },
+    {
+      "index": 407,
+      "start": 1285.679,
+      "end": 1288.789,
+      "duration": 3.11,
+      "text": "this product co-actors from The Matrix"
+    },
+    {
+      "index": 408,
+      "start": 1288.799,
+      "end": 1292.31,
+      "duration": 3.511,
+      "text": "entries of B so anytime I'm multiplying"
+    },
+    {
+      "index": 409,
+      "start": 1292.32,
+      "end": 1294.669,
+      "duration": 2.349,
+      "text": "co-actors by numbers I think I'm getting"
+    },
+    {
+      "index": 410,
+      "start": 1294.679,
+      "end": 1297.47,
+      "duration": 2.791,
+      "text": "the determinant of something and let me"
+    },
+    {
+      "index": 411,
+      "start": 1297.48,
+      "end": 1299.71,
+      "duration": 2.23,
+      "text": "call that something"
+    },
+    {
+      "index": 412,
+      "start": 1299.72,
+      "end": 1302.99,
+      "duration": 3.27,
+      "text": "B1 so this is this is a matrix this is a"
+    },
+    {
+      "index": 413,
+      "start": 1303.0,
+      "end": 1305.909,
+      "duration": 2.909,
+      "text": "this is a The Matrix whose determinant"
+    },
+    {
+      "index": 414,
+      "start": 1305.919,
+      "end": 1307.75,
+      "duration": 1.831,
+      "text": "is coming out of that and we'll we'll"
+    },
+    {
+      "index": 415,
+      "start": 1307.76,
+      "end": 1310.63,
+      "duration": 2.87,
+      "text": "see what it is X2 will be the"
+    },
+    {
+      "index": 416,
+      "start": 1310.64,
+      "end": 1314.59,
+      "duration": 3.95,
+      "text": "determinant of some other Matrix B2 also"
+    },
+    {
+      "index": 417,
+      "start": 1314.6,
+      "end": 1318.269,
+      "duration": 3.669,
+      "text": "divided by determinant of a so now I"
+    },
+    {
+      "index": 418,
+      "start": 1318.279,
+      "end": 1319.07,
+      "duration": 0.791,
+      "text": "just"
+    },
+    {
+      "index": 419,
+      "start": 1319.08,
+      "end": 1321.47,
+      "duration": 2.39,
+      "text": "Kramer just had a good idea he he"
+    },
+    {
+      "index": 420,
+      "start": 1321.48,
+      "end": 1324.87,
+      "duration": 3.39,
+      "text": "realized what Matrix it was what these"
+    },
+    {
+      "index": 421,
+      "start": 1324.88,
+      "end": 1328.43,
+      "duration": 3.55,
+      "text": "B1 and B2 and B3 and so on matrices were"
+    },
+    {
+      "index": 422,
+      "start": 1328.44,
+      "end": 1333.75,
+      "duration": 5.31,
+      "text": "let me write them on the board"
+    },
+    {
+      "index": 423,
+      "start": 1336.909,
+      "end": 1336.919,
+      "duration": 0.01,
+      "text": "underneath okay so what is this"
+    },
+    {
+      "index": 424,
+      "start": 1336.919,
+      "end": 1338.669,
+      "duration": 1.75,
+      "text": "B1 this"
+    },
+    {
+      "index": 425,
+      "start": 1338.679,
+      "end": 1343.83,
+      "duration": 5.151,
+      "text": "B1 is the Matrix that has B in its first"
+    },
+    {
+      "index": 426,
+      "start": 1343.84,
+      "end": 1347.789,
+      "duration": 3.949,
+      "text": "column and otherwise the rest of it is a"
+    },
+    {
+      "index": 427,
+      "start": 1347.799,
+      "end": 1352.07,
+      "duration": 4.271,
+      "text": "so it other wise it has the rest the The"
+    },
+    {
+      "index": 428,
+      "start": 1352.08,
+      "end": 1355.029,
+      "duration": 2.949,
+      "text": "nus1"
+    },
+    {
+      "index": 429,
+      "start": 1355.039,
+      "end": 1357.789,
+      "duration": 2.75,
+      "text": "Columns of"
+    },
+    {
+      "index": 430,
+      "start": 1357.799,
+      "end": 1363.149,
+      "duration": 5.35,
+      "text": "a it's it's it's the Matrix with it's"
+    },
+    {
+      "index": 431,
+      "start": 1363.159,
+      "end": 1366.07,
+      "duration": 2.911,
+      "text": "it's just the Matrix a"
+    },
+    {
+      "index": 432,
+      "start": 1366.08,
+      "end": 1369.07,
+      "duration": 2.99,
+      "text": "with column"
+    },
+    {
+      "index": 433,
+      "start": 1369.08,
+      "end": 1370.99,
+      "duration": 1.91,
+      "text": "one"
+    },
+    {
+      "index": 434,
+      "start": 1371.0,
+      "end": 1373.83,
+      "duration": 2.83,
+      "text": "replaced by the right hand"
+    },
+    {
+      "index": 435,
+      "start": 1373.84,
+      "end": 1379.87,
+      "duration": 6.03,
+      "text": "side by the right hand side B"
+    },
+    {
+      "index": 436,
+      "start": 1382.47,
+      "end": 1382.48,
+      "duration": 0.01,
+      "text": "because somehow when I take the"
+    },
+    {
+      "index": 437,
+      "start": 1382.48,
+      "end": 1386.269,
+      "duration": 3.789,
+      "text": "determinant of this guy it's giving me"
+    },
+    {
+      "index": 438,
+      "start": 1386.279,
+      "end": 1388.149,
+      "duration": 1.87,
+      "text": "this matrix"
+    },
+    {
+      "index": 439,
+      "start": 1388.159,
+      "end": 1392.07,
+      "duration": 3.911,
+      "text": "multiplication well how could that"
+    },
+    {
+      "index": 440,
+      "start": 1392.08,
+      "end": 1395.39,
+      "duration": 3.31,
+      "text": "be well how could so what's what's the"
+    },
+    {
+      "index": 441,
+      "start": 1395.4,
+      "end": 1398.19,
+      "duration": 2.79,
+      "text": "determinant formula I'll use here I'll"
+    },
+    {
+      "index": 442,
+      "start": 1398.2,
+      "end": 1400.87,
+      "duration": 2.67,
+      "text": "use co-actors of"
+    },
+    {
+      "index": 443,
+      "start": 1400.88,
+      "end": 1403.87,
+      "duration": 2.99,
+      "text": "course and I might as well use co-actors"
+    },
+    {
+      "index": 444,
+      "start": 1403.88,
+      "end": 1406.669,
+      "duration": 2.789,
+      "text": "down column one so when I use co-actors"
+    },
+    {
+      "index": 445,
+      "start": 1406.679,
+      "end": 1409.07,
+      "duration": 2.391,
+      "text": "down column one I'm taking the first"
+    },
+    {
+      "index": 446,
+      "start": 1409.08,
+      "end": 1411.789,
+      "duration": 2.709,
+      "text": "entry of B times"
+    },
+    {
+      "index": 447,
+      "start": 1411.799,
+      "end": 1414.39,
+      "duration": 2.591,
+      "text": "what times the"
+    },
+    {
+      "index": 448,
+      "start": 1414.4,
+      "end": 1419.029,
+      "duration": 4.629,
+      "text": "co-actor C11 do you see that when I when"
+    },
+    {
+      "index": 449,
+      "start": 1419.039,
+      "end": 1421.95,
+      "duration": 2.911,
+      "text": "I use co-actors here I take the first"
+    },
+    {
+      "index": 450,
+      "start": 1421.96,
+      "end": 1425.39,
+      "duration": 3.43,
+      "text": "entry here B1 let's call it times the"
+    },
+    {
+      "index": 451,
+      "start": 1425.4,
+      "end": 1428.47,
+      "duration": 3.07,
+      "text": "co-actor there but what's that co-actor"
+    },
+    {
+      "index": 452,
+      "start": 1428.48,
+      "end": 1431.51,
+      "duration": 3.03,
+      "text": "and by my little hand waving is meant to"
+    },
+    {
+      "index": 453,
+      "start": 1431.52,
+      "end": 1434.11,
+      "duration": 2.59,
+      "text": "indicate that it's a matrix of one size"
+    },
+    {
+      "index": 454,
+      "start": 1434.12,
+      "end": 1437.59,
+      "duration": 3.47,
+      "text": "smaller the co-actor and it's exactly"
+    },
+    {
+      "index": 455,
+      "start": 1437.6,
+      "end": 1441.39,
+      "duration": 3.79,
+      "text": "C11 well that's just what we wanted the"
+    },
+    {
+      "index": 456,
+      "start": 1441.4,
+      "end": 1443.669,
+      "duration": 2.269,
+      "text": "this first entry is"
+    },
+    {
+      "index": 457,
+      "start": 1443.679,
+      "end": 1445.75,
+      "duration": 2.071,
+      "text": "C11 time"
+    },
+    {
+      "index": 458,
+      "start": 1445.76,
+      "end": 1449.99,
+      "duration": 4.23,
+      "text": "B1 and then the next entry is whatever"
+    },
+    {
+      "index": 459,
+      "start": 1450.0,
+      "end": 1455.87,
+      "duration": 5.87,
+      "text": "is C 21 * B2 and so on and sure enough"
+    },
+    {
+      "index": 460,
+      "start": 1455.88,
+      "end": 1458.19,
+      "duration": 2.31,
+      "text": "if I look here when I'm when I do the"
+    },
+    {
+      "index": 461,
+      "start": 1458.2,
+      "end": 1460.669,
+      "duration": 2.469,
+      "text": "co-actor expansion B2 is getting"
+    },
+    {
+      "index": 462,
+      "start": 1460.679,
+      "end": 1464.51,
+      "duration": 3.831,
+      "text": "multiplied by the right thing and so"
+    },
+    {
+      "index": 463,
+      "start": 1464.52,
+      "end": 1468.029,
+      "duration": 3.509,
+      "text": "on so there's Kramer's Rule and the book"
+    },
+    {
+      "index": 464,
+      "start": 1468.039,
+      "end": 1468.909,
+      "duration": 0.87,
+      "text": "gives"
+    },
+    {
+      "index": 465,
+      "start": 1468.919,
+      "end": 1473.789,
+      "duration": 4.87,
+      "text": "another kind of cute proof without uh"
+    },
+    {
+      "index": 466,
+      "start": 1473.799,
+      "end": 1476.99,
+      "duration": 3.191,
+      "text": "without building so much on co-actors"
+    },
+    {
+      "index": 467,
+      "start": 1477.0,
+      "end": 1478.71,
+      "duration": 1.71,
+      "text": "but here we've got co-actors so I"
+    },
+    {
+      "index": 468,
+      "start": 1478.72,
+      "end": 1480.83,
+      "duration": 2.11,
+      "text": "thought I'd just give you this proof so"
+    },
+    {
+      "index": 469,
+      "start": 1480.84,
+      "end": 1484.51,
+      "duration": 3.67,
+      "text": "what is B in general what is"
+    },
+    {
+      "index": 470,
+      "start": 1484.52,
+      "end": 1489.95,
+      "duration": 5.43,
+      "text": "BJ this is the uh this is a"
+    },
+    {
+      "index": 471,
+      "start": 1489.96,
+      "end": 1493.31,
+      "duration": 3.35,
+      "text": "with column"
+    },
+    {
+      "index": 472,
+      "start": 1493.32,
+      "end": 1497.029,
+      "duration": 3.709,
+      "text": "J replaced"
+    },
+    {
+      "index": 473,
+      "start": 1497.039,
+      "end": 1501.909,
+      "duration": 4.87,
+      "text": "by by"
+    },
+    {
+      "index": 474,
+      "start": 1505.83,
+      "end": 1505.84,
+      "duration": 0.01,
+      "text": "B so that's that's the it's that DET"
+    },
+    {
+      "index": 475,
+      "start": 1505.84,
+      "end": 1508.23,
+      "duration": 2.39,
+      "text": "it's the determinant of that Matrix that"
+    },
+    {
+      "index": 476,
+      "start": 1508.24,
+      "end": 1511.71,
+      "duration": 3.47,
+      "text": "you divide by determinant of a to get XJ"
+    },
+    {
+      "index": 477,
+      "start": 1511.72,
+      "end": 1514.95,
+      "duration": 3.23,
+      "text": "so X let me change this general formula"
+    },
+    {
+      "index": 478,
+      "start": 1514.96,
+      "end": 1519.549,
+      "duration": 4.589,
+      "text": "XJ the jth one is the determinant of"
+    },
+    {
+      "index": 479,
+      "start": 1519.559,
+      "end": 1522.669,
+      "duration": 3.11,
+      "text": "BJ divided by the determinant of a and"
+    },
+    {
+      "index": 480,
+      "start": 1522.679,
+      "end": 1524.909,
+      "duration": 2.23,
+      "text": "now we've said what BJ"
+    },
+    {
+      "index": 481,
+      "start": 1524.919,
+      "end": 1530.23,
+      "duration": 5.311,
+      "text": "is um"
+    },
+    {
+      "index": 482,
+      "start": 1532.99,
+      "end": 1533.0,
+      "duration": 0.01,
+      "text": "well so Kramer found a"
+    },
+    {
+      "index": 483,
+      "start": 1533.0,
+      "end": 1537.83,
+      "duration": 4.83,
+      "text": "rule and we could ask him okay great"
+    },
+    {
+      "index": 484,
+      "start": 1537.84,
+      "end": 1541.83,
+      "duration": 3.99,
+      "text": "good work Kramer but is your rule any"
+    },
+    {
+      "index": 485,
+      "start": 1541.84,
+      "end": 1543.029,
+      "duration": 1.189,
+      "text": "good in"
+    },
+    {
+      "index": 486,
+      "start": 1543.039,
+      "end": 1546.789,
+      "duration": 3.75,
+      "text": "practice so he says"
+    },
+    {
+      "index": 487,
+      "start": 1546.799,
+      "end": 1549.47,
+      "duration": 2.671,
+      "text": "well you couldn't ask a better rule than"
+    },
+    {
+      "index": 488,
+      "start": 1549.48,
+      "end": 1552.59,
+      "duration": 3.11,
+      "text": "mine right because it's just all you"
+    },
+    {
+      "index": 489,
+      "start": 1552.6,
+      "end": 1556.19,
+      "duration": 3.59,
+      "text": "have to do is find the determinant of a"
+    },
+    {
+      "index": 490,
+      "start": 1556.2,
+      "end": 1558.63,
+      "duration": 2.43,
+      "text": "and these other"
+    },
+    {
+      "index": 491,
+      "start": 1558.64,
+      "end": 1560.83,
+      "duration": 2.19,
+      "text": "determinants so I guess I just he just"
+    },
+    {
+      "index": 492,
+      "start": 1560.84,
+      "end": 1562.99,
+      "duration": 2.15,
+      "text": "says well all you have to do is find n"
+    },
+    {
+      "index": 493,
+      "start": 1563.0,
+      "end": 1565.95,
+      "duration": 2.95,
+      "text": "plus one determinants the the NBS and"
+    },
+    {
+      "index": 494,
+      "start": 1565.96,
+      "end": 1570.149,
+      "duration": 4.189,
+      "text": "the"
+    },
+    {
+      "index": 495,
+      "start": 1573.23,
+      "end": 1573.24,
+      "duration": 0.01,
+      "text": "A and"
+    },
+    {
+      "index": 496,
+      "start": 1573.24,
+      "end": 1576.95,
+      "duration": 3.71,
+      "text": "actually uh I remember reading there was"
+    },
+    {
+      "index": 497,
+      "start": 1576.96,
+      "end": 1579.35,
+      "duration": 2.39,
+      "text": "a book popular book that that kids"
+    },
+    {
+      "index": 498,
+      "start": 1579.36,
+      "end": 1583.11,
+      "duration": 3.75,
+      "text": "interested in math read when I was a kid"
+    },
+    {
+      "index": 499,
+      "start": 1583.12,
+      "end": 1585.83,
+      "duration": 2.71,
+      "text": "interested in math called mathematics"
+    },
+    {
+      "index": 500,
+      "start": 1585.84,
+      "end": 1588.549,
+      "duration": 2.709,
+      "text": "for the million or something by a guy"
+    },
+    {
+      "index": 501,
+      "start": 1588.559,
+      "end": 1592.389,
+      "duration": 3.83,
+      "text": "named Bell and it had a little page"
+    },
+    {
+      "index": 502,
+      "start": 1592.399,
+      "end": 1594.07,
+      "duration": 1.671,
+      "text": "about linear"
+    },
+    {
+      "index": 503,
+      "start": 1594.08,
+      "end": 1598.19,
+      "duration": 4.11,
+      "text": "algebra and it said uh so it explained"
+    },
+    {
+      "index": 504,
+      "start": 1598.2,
+      "end": 1601.35,
+      "duration": 3.15,
+      "text": "elimination in a very complicated way I"
+    },
+    {
+      "index": 505,
+      "start": 1601.36,
+      "end": 1603.75,
+      "duration": 2.39,
+      "text": "certainly didn't understand it and and"
+    },
+    {
+      "index": 506,
+      "start": 1603.76,
+      "end": 1606.669,
+      "duration": 2.909,
+      "text": "it made it you know it sort of"
+    },
+    {
+      "index": 507,
+      "start": 1606.679,
+      "end": 1610.389,
+      "duration": 3.71,
+      "text": "said well there is this formula for"
+    },
+    {
+      "index": 508,
+      "start": 1610.399,
+      "end": 1612.71,
+      "duration": 2.311,
+      "text": "elimination but look at this great"
+    },
+    {
+      "index": 509,
+      "start": 1612.72,
+      "end": 1614.75,
+      "duration": 2.03,
+      "text": "formula Kramer's"
+    },
+    {
+      "index": 510,
+      "start": 1614.76,
+      "end": 1617.59,
+      "duration": 2.83,
+      "text": "rule so it certainly said Kramer's rule"
+    },
+    {
+      "index": 511,
+      "start": 1617.6,
+      "end": 1619.43,
+      "duration": 1.83,
+      "text": "was the way to go"
+    },
+    {
+      "index": 512,
+      "start": 1619.44,
+      "end": 1623.549,
+      "duration": 4.109,
+      "text": "go but actually Kramer's rule is a"
+    },
+    {
+      "index": 513,
+      "start": 1623.559,
+      "end": 1626.83,
+      "duration": 3.271,
+      "text": "disastrous way to go because to compute"
+    },
+    {
+      "index": 514,
+      "start": 1626.84,
+      "end": 1627.909,
+      "duration": 1.069,
+      "text": "these"
+    },
+    {
+      "index": 515,
+      "start": 1627.919,
+      "end": 1631.11,
+      "duration": 3.191,
+      "text": "determinants uh takes like approximately"
+    },
+    {
+      "index": 516,
+      "start": 1631.12,
+      "end": 1635.389,
+      "duration": 4.269,
+      "text": "forever so uh it's it's so I actually I"
+    },
+    {
+      "index": 517,
+      "start": 1635.399,
+      "end": 1637.389,
+      "duration": 1.99,
+      "text": "now think of that book title as being"
+    },
+    {
+      "index": 518,
+      "start": 1637.399,
+      "end": 1639.269,
+      "duration": 1.87,
+      "text": "mathematics for the millionaire because"
+    },
+    {
+      "index": 519,
+      "start": 1639.279,
+      "end": 1643.31,
+      "duration": 4.031,
+      "text": "you'd have to be able to pay for uh a"
+    },
+    {
+      "index": 520,
+      "start": 1643.32,
+      "end": 1645.35,
+      "duration": 2.03,
+      "text": "hopelessly long calculation where"
+    },
+    {
+      "index": 521,
+      "start": 1645.36,
+      "end": 1648.029,
+      "duration": 2.669,
+      "text": "elimination of course produced the X's"
+    },
+    {
+      "index": 522,
+      "start": 1648.039,
+      "end": 1651.029,
+      "duration": 2.99,
+      "text": "uh uh in an instant"
+    },
+    {
+      "index": 523,
+      "start": 1651.039,
+      "end": 1654.99,
+      "duration": 3.951,
+      "text": "but having a formula allows you to with"
+    },
+    {
+      "index": 524,
+      "start": 1655.0,
+      "end": 1656.99,
+      "duration": 1.99,
+      "text": "with letters you know allows you to do"
+    },
+    {
+      "index": 525,
+      "start": 1657.0,
+      "end": 1660.509,
+      "duration": 3.509,
+      "text": "algebra instead of uh algorithms so"
+    },
+    {
+      "index": 526,
+      "start": 1660.519,
+      "end": 1663.669,
+      "duration": 3.15,
+      "text": "there's some value in the Kramer's rule"
+    },
+    {
+      "index": 527,
+      "start": 1663.679,
+      "end": 1668.47,
+      "duration": 4.791,
+      "text": "formula for x and in the explicit"
+    },
+    {
+      "index": 528,
+      "start": 1668.48,
+      "end": 1670.43,
+      "duration": 1.95,
+      "text": "formula for for a"
+    },
+    {
+      "index": 529,
+      "start": 1670.44,
+      "end": 1672.99,
+      "duration": 2.55,
+      "text": "inverse it's it's there're they're nice"
+    },
+    {
+      "index": 530,
+      "start": 1673.0,
+      "end": 1676.389,
+      "duration": 3.389,
+      "text": "formulas but I just don't want you to"
+    },
+    {
+      "index": 531,
+      "start": 1676.399,
+      "end": 1679.269,
+      "duration": 2.87,
+      "text": "use them that's that's what I comes to"
+    },
+    {
+      "index": 532,
+      "start": 1679.279,
+      "end": 1681.87,
+      "duration": 2.591,
+      "text": "if you had to and mat lab would never"
+    },
+    {
+      "index": 533,
+      "start": 1681.88,
+      "end": 1684.63,
+      "duration": 2.75,
+      "text": "never do it I mean it would use"
+    },
+    {
+      "index": 534,
+      "start": 1684.64,
+      "end": 1686.59,
+      "duration": 1.95,
+      "text": "elimination"
+    },
+    {
+      "index": 535,
+      "start": 1686.6,
+      "end": 1689.87,
+      "duration": 3.27,
+      "text": "okay now I'm ready for number three in"
+    },
+    {
+      "index": 536,
+      "start": 1689.88,
+      "end": 1694.149,
+      "duration": 4.269,
+      "text": "today's list of amazing"
+    },
+    {
+      "index": 537,
+      "start": 1694.159,
+      "end": 1696.789,
+      "duration": 2.63,
+      "text": "connections coming through the"
+    },
+    {
+      "index": 538,
+      "start": 1696.799,
+      "end": 1700.11,
+      "duration": 3.311,
+      "text": "determinant and that number three is the"
+    },
+    {
+      "index": 539,
+      "start": 1700.12,
+      "end": 1702.509,
+      "duration": 2.389,
+      "text": "fact that the determinant gives a"
+    },
+    {
+      "index": 540,
+      "start": 1702.519,
+      "end": 1706.71,
+      "duration": 4.191,
+      "text": "volume okay so now so that's my final"
+    },
+    {
+      "index": 541,
+      "start": 1706.72,
+      "end": 1710.99,
+      "duration": 4.27,
+      "text": "topic for the the among these it's this"
+    },
+    {
+      "index": 542,
+      "start": 1711.0,
+      "end": 1713.83,
+      "duration": 2.83,
+      "text": "my number three application that the"
+    },
+    {
+      "index": 543,
+      "start": 1713.84,
+      "end": 1716.11,
+      "duration": 2.27,
+      "text": "determinant is actually equals the"
+    },
+    {
+      "index": 544,
+      "start": 1716.12,
+      "end": 1718.669,
+      "duration": 2.549,
+      "text": "volume of something can I use this"
+    },
+    {
+      "index": 545,
+      "start": 1718.679,
+      "end": 1723.07,
+      "duration": 4.391,
+      "text": "little space to consider a special case"
+    },
+    {
+      "index": 546,
+      "start": 1723.08,
+      "end": 1726.029,
+      "duration": 2.949,
+      "text": "and then I'll use the far board to think"
+    },
+    {
+      "index": 547,
+      "start": 1726.039,
+      "end": 1728.35,
+      "duration": 2.311,
+      "text": "about the general rule so what am I"
+    },
+    {
+      "index": 548,
+      "start": 1728.36,
+      "end": 1732.23,
+      "duration": 3.87,
+      "text": "going to prove I I I or or or claim I"
+    },
+    {
+      "index": 549,
+      "start": 1732.24,
+      "end": 1734.43,
+      "duration": 2.19,
+      "text": "claim that the"
+    },
+    {
+      "index": 550,
+      "start": 1734.44,
+      "end": 1739.549,
+      "duration": 5.109,
+      "text": "determinant of the Matrix is the volum"
+    },
+    {
+      "index": 551,
+      "start": 1739.559,
+      "end": 1741.909,
+      "duration": 2.35,
+      "text": "volume of a"
+    },
+    {
+      "index": 552,
+      "start": 1741.919,
+      "end": 1744.83,
+      "duration": 2.911,
+      "text": "box okay and you say which"
+    },
+    {
+      "index": 553,
+      "start": 1744.84,
+      "end": 1750.149,
+      "duration": 5.309,
+      "text": "box fair enough okay"
+    },
+    {
+      "index": 554,
+      "start": 1750.159,
+      "end": 1753.31,
+      "duration": 3.151,
+      "text": "so let's see I'm in shall we say we're"
+    },
+    {
+      "index": 555,
+      "start": 1753.32,
+      "end": 1754.99,
+      "duration": 1.67,
+      "text": "in say"
+    },
+    {
+      "index": 556,
+      "start": 1755.0,
+      "end": 1757.83,
+      "duration": 2.83,
+      "text": "3x3 should we suppose let's let's say"
+    },
+    {
+      "index": 557,
+      "start": 1757.84,
+      "end": 1761.509,
+      "duration": 3.669,
+      "text": "3x3 so so we can really we're we're"
+    },
+    {
+      "index": 558,
+      "start": 1761.519,
+      "end": 1764.23,
+      "duration": 2.711,
+      "text": "talking about boxes in three dimensions"
+    },
+    {
+      "index": 559,
+      "start": 1764.24,
+      "end": 1768.909,
+      "duration": 4.669,
+      "text": "and 3x3 matrices and so all do just you"
+    },
+    {
+      "index": 560,
+      "start": 1768.919,
+      "end": 1771.549,
+      "duration": 2.63,
+      "text": "could guess what the box is here's"
+    },
+    {
+      "index": 561,
+      "start": 1771.559,
+      "end": 1773.87,
+      "duration": 2.311,
+      "text": "here's uh three"
+    },
+    {
+      "index": 562,
+      "start": 1773.88,
+      "end": 1777.59,
+      "duration": 3.71,
+      "text": "dimensions okay now I take the first row"
+    },
+    {
+      "index": 563,
+      "start": 1777.6,
+      "end": 1779.269,
+      "duration": 1.669,
+      "text": "of the"
+    },
+    {
+      "index": 564,
+      "start": 1779.279,
+      "end": 1784.87,
+      "duration": 5.591,
+      "text": "Matrix a11 a22 a sorry a11 a12 a13 that"
+    },
+    {
+      "index": 565,
+      "start": 1784.88,
+      "end": 1787.07,
+      "duration": 2.19,
+      "text": "that row is a"
+    },
+    {
+      "index": 566,
+      "start": 1787.08,
+      "end": 1790.83,
+      "duration": 3.75,
+      "text": "vector it goes to some point that point"
+    },
+    {
+      "index": 567,
+      "start": 1790.84,
+      "end": 1793.31,
+      "duration": 2.47,
+      "text": "will be and that edge going to it will"
+    },
+    {
+      "index": 568,
+      "start": 1793.32,
+      "end": 1795.75,
+      "duration": 2.43,
+      "text": "be an edge of the box and that point"
+    },
+    {
+      "index": 569,
+      "start": 1795.76,
+      "end": 1798.029,
+      "duration": 2.269,
+      "text": "will be a corner of the box so here"
+    },
+    {
+      "index": 570,
+      "start": 1798.039,
+      "end": 1800.23,
+      "duration": 2.191,
+      "text": "here's 0 00 0 of"
+    },
+    {
+      "index": 571,
+      "start": 1800.24,
+      "end": 1803.07,
+      "duration": 2.83,
+      "text": "course and here's the first row of the"
+    },
+    {
+      "index": 572,
+      "start": 1803.08,
+      "end": 1806.909,
+      "duration": 3.829,
+      "text": "Matrix A1 1"
+    },
+    {
+      "index": 573,
+      "start": 1806.919,
+      "end": 1809.389,
+      "duration": 2.47,
+      "text": "a12"
+    },
+    {
+      "index": 574,
+      "start": 1809.399,
+      "end": 1813.95,
+      "duration": 4.551,
+      "text": "a13 so that's one edge of the"
+    },
+    {
+      "index": 575,
+      "start": 1813.96,
+      "end": 1818.87,
+      "duration": 4.91,
+      "text": "Box another edge of the box is to the"
+    },
+    {
+      "index": 576,
+      "start": 1818.88,
+      "end": 1822.07,
+      "duration": 3.19,
+      "text": "second row of the Matrix row two can I"
+    },
+    {
+      "index": 577,
+      "start": 1822.08,
+      "end": 1825.149,
+      "duration": 3.069,
+      "text": "just call it there Row Two and a third"
+    },
+    {
+      "index": 578,
+      "start": 1825.159,
+      "end": 1828.669,
+      "duration": 3.51,
+      "text": "row of the Box will be two"
+    },
+    {
+      "index": 579,
+      "start": 1828.679,
+      "end": 1831.11,
+      "duration": 2.431,
+      "text": "the third row third edge of the Box will"
+    },
+    {
+      "index": 580,
+      "start": 1831.12,
+      "end": 1835.509,
+      "duration": 4.389,
+      "text": "be given by Row three so so there's Row"
+    },
+    {
+      "index": 581,
+      "start": 1835.519,
+      "end": 1837.87,
+      "duration": 2.351,
+      "text": "three that that that the coordinates"
+    },
+    {
+      "index": 582,
+      "start": 1837.88,
+      "end": 1839.63,
+      "duration": 1.75,
+      "text": "what are the coordinates of that corner"
+    },
+    {
+      "index": 583,
+      "start": 1839.64,
+      "end": 1842.83,
+      "duration": 3.19,
+      "text": "of the box"
+    },
+    {
+      "index": 584,
+      "start": 1842.84,
+      "end": 1844.909,
+      "duration": 2.069,
+      "text": "a31"
+    },
+    {
+      "index": 585,
+      "start": 1844.919,
+      "end": 1847.149,
+      "duration": 2.23,
+      "text": "a32"
+    },
+    {
+      "index": 586,
+      "start": 1847.159,
+      "end": 1850.23,
+      "duration": 3.071,
+      "text": "a33 so I've got that edge of the box"
+    },
+    {
+      "index": 587,
+      "start": 1850.24,
+      "end": 1851.789,
+      "duration": 1.549,
+      "text": "that edge of the box that edge of the"
+    },
+    {
+      "index": 588,
+      "start": 1851.799,
+      "end": 1854.269,
+      "duration": 2.47,
+      "text": "box and that's all I need now I just"
+    },
+    {
+      "index": 589,
+      "start": 1854.279,
+      "end": 1857.23,
+      "duration": 2.951,
+      "text": "finish out the box right I just make I"
+    },
+    {
+      "index": 590,
+      "start": 1857.24,
+      "end": 1861.269,
+      "duration": 4.029,
+      "text": "make a sorry box the proper word of"
+    },
+    {
+      "index": 591,
+      "start": 1861.279,
+      "end": 1865.35,
+      "duration": 4.071,
+      "text": "course is parallel a pipen but for"
+    },
+    {
+      "index": 592,
+      "start": 1865.36,
+      "end": 1866.31,
+      "duration": 0.95,
+      "text": "obvious"
+    },
+    {
+      "index": 593,
+      "start": 1866.32,
+      "end": 1871.31,
+      "duration": 4.99,
+      "text": "reasons uh I wrote box okay so uh okay"
+    },
+    {
+      "index": 594,
+      "start": 1871.32,
+      "end": 1873.549,
+      "duration": 2.229,
+      "text": "so there's the there's the bottom of the"
+    },
+    {
+      "index": 595,
+      "start": 1873.559,
+      "end": 1877.11,
+      "duration": 3.551,
+      "text": "box there are the"
+    },
+    {
+      "index": 596,
+      "start": 1877.12,
+      "end": 1880.35,
+      "duration": 3.23,
+      "text": "four Edge sides of the Box there's the"
+    },
+    {
+      "index": 597,
+      "start": 1880.36,
+      "end": 1882.549,
+      "duration": 2.189,
+      "text": "top of the"
+    },
+    {
+      "index": 598,
+      "start": 1882.559,
+      "end": 1887.31,
+      "duration": 4.751,
+      "text": "box you right it's the box that has"
+    },
+    {
+      "index": 599,
+      "start": 1887.32,
+      "end": 1889.23,
+      "duration": 1.91,
+      "text": "these three edges and then it's"
+    },
+    {
+      "index": 600,
+      "start": 1889.24,
+      "end": 1893.11,
+      "duration": 3.87,
+      "text": "completed to a to a uh each you know"
+    },
+    {
+      "index": 601,
+      "start": 1893.12,
+      "end": 1896.789,
+      "duration": 3.669,
+      "text": "each side is a is a"
+    },
+    {
+      "index": 602,
+      "start": 1900.629,
+      "end": 1900.639,
+      "duration": 0.01,
+      "text": "parallelogram and it's that box whose"
+    },
+    {
+      "index": 603,
+      "start": 1900.639,
+      "end": 1904.669,
+      "duration": 4.03,
+      "text": "volume is given by the"
+    },
+    {
+      "index": 604,
+      "start": 1906.35,
+      "end": 1906.36,
+      "duration": 0.01,
+      "text": "determinant"
+    },
+    {
+      "index": 605,
+      "start": 1906.36,
+      "end": 1909.87,
+      "duration": 3.51,
+      "text": "that's now it's possible that the"
+    },
+    {
+      "index": 606,
+      "start": 1909.88,
+      "end": 1911.75,
+      "duration": 1.87,
+      "text": "determinant is"
+    },
+    {
+      "index": 607,
+      "start": 1911.76,
+      "end": 1914.47,
+      "duration": 2.71,
+      "text": "negative so we have to just say what's"
+    },
+    {
+      "index": 608,
+      "start": 1914.48,
+      "end": 1916.909,
+      "duration": 2.429,
+      "text": "going on in that case if the determinant"
+    },
+    {
+      "index": 609,
+      "start": 1916.919,
+      "end": 1919.629,
+      "duration": 2.71,
+      "text": "is negative"
+    },
+    {
+      "index": 610,
+      "start": 1919.639,
+      "end": 1922.35,
+      "duration": 2.711,
+      "text": "then the the volume we we should take"
+    },
+    {
+      "index": 611,
+      "start": 1922.36,
+      "end": 1925.029,
+      "duration": 2.669,
+      "text": "the absolute value really so the volume"
+    },
+    {
+      "index": 612,
+      "start": 1925.039,
+      "end": 1927.029,
+      "duration": 1.99,
+      "text": "if we if we think of volume is positive"
+    },
+    {
+      "index": 613,
+      "start": 1927.039,
+      "end": 1930.35,
+      "duration": 3.311,
+      "text": "we should take the absolute value of the"
+    },
+    {
+      "index": 614,
+      "start": 1930.36,
+      "end": 1933.11,
+      "duration": 2.75,
+      "text": "determinant but the the sign what does"
+    },
+    {
+      "index": 615,
+      "start": 1933.12,
+      "end": 1934.95,
+      "duration": 1.83,
+      "text": "the sign of the determin it always must"
+    },
+    {
+      "index": 616,
+      "start": 1934.96,
+      "end": 1937.95,
+      "duration": 2.99,
+      "text": "tell us something and somehow it it will"
+    },
+    {
+      "index": 617,
+      "start": 1937.96,
+      "end": 1940.59,
+      "duration": 2.63,
+      "text": "tell us whether these three is a whether"
+    },
+    {
+      "index": 618,
+      "start": 1940.6,
+      "end": 1942.789,
+      "duration": 2.189,
+      "text": "it's a right-handed box or a left-handed"
+    },
+    {
+      "index": 619,
+      "start": 1942.799,
+      "end": 1947.43,
+      "duration": 4.631,
+      "text": "box if we if we reversed two of the"
+    },
+    {
+      "index": 620,
+      "start": 1947.44,
+      "end": 1950.269,
+      "duration": 2.829,
+      "text": "edges"
+    },
+    {
+      "index": 621,
+      "start": 1952.149,
+      "end": 1952.159,
+      "duration": 0.01,
+      "text": "we would go between a right-handed box"
+    },
+    {
+      "index": 622,
+      "start": 1952.159,
+      "end": 1954.149,
+      "duration": 1.99,
+      "text": "and a left-handed box we wouldn't change"
+    },
+    {
+      "index": 623,
+      "start": 1954.159,
+      "end": 1957.19,
+      "duration": 3.031,
+      "text": "the volume but we would change the the"
+    },
+    {
+      "index": 624,
+      "start": 1957.2,
+      "end": 1959.43,
+      "duration": 2.23,
+      "text": "cyc the cyclic"
+    },
+    {
+      "index": 625,
+      "start": 1959.44,
+      "end": 1962.909,
+      "duration": 3.469,
+      "text": "order so that I won't worry about that"
+    },
+    {
+      "index": 626,
+      "start": 1962.919,
+      "end": 1965.95,
+      "duration": 3.031,
+      "text": "and so one special case is"
+    },
+    {
+      "index": 627,
+      "start": 1965.96,
+      "end": 1970.31,
+      "duration": 4.35,
+      "text": "what a equal identity Matrix so let's"
+    },
+    {
+      "index": 628,
+      "start": 1970.32,
+      "end": 1973.07,
+      "duration": 2.75,
+      "text": "take that special case a"
+    },
+    {
+      "index": 629,
+      "start": 1973.08,
+      "end": 1977.23,
+      "duration": 4.15,
+      "text": "equal identity Matrix is the formula"
+    },
+    {
+      "index": 630,
+      "start": 1977.24,
+      "end": 1979.87,
+      "duration": 2.63,
+      "text": "determinant of identity Matrix does that"
+    },
+    {
+      "index": 631,
+      "start": 1979.88,
+      "end": 1983.31,
+      "duration": 3.43,
+      "text": "equal the volume of the"
+    },
+    {
+      "index": 632,
+      "start": 1987.35,
+      "end": 1987.36,
+      "duration": 0.01,
+      "text": "Box well what is the Box what's the box"
+    },
+    {
+      "index": 633,
+      "start": 1987.36,
+      "end": 1990.99,
+      "duration": 3.63,
+      "text": "if a is the identity Matrix then these"
+    },
+    {
+      "index": 634,
+      "start": 1991.0,
+      "end": 1993.43,
+      "duration": 2.43,
+      "text": "three rows are the three coordinate"
+    },
+    {
+      "index": 635,
+      "start": 1993.44,
+      "end": 1996.389,
+      "duration": 2.949,
+      "text": "vectors and the box"
+    },
+    {
+      "index": 636,
+      "start": 1996.399,
+      "end": 2001.669,
+      "duration": 5.27,
+      "text": "is it's a cube it's the unit cube so if"
+    },
+    {
+      "index": 637,
+      "start": 2001.679,
+      "end": 2003.87,
+      "duration": 2.191,
+      "text": "if a is the identity Matrix of course"
+    },
+    {
+      "index": 638,
+      "start": 2003.88,
+      "end": 2007.23,
+      "duration": 3.35,
+      "text": "our formula is right well actually that"
+    },
+    {
+      "index": 639,
+      "start": 2007.24,
+      "end": 2010.99,
+      "duration": 3.75,
+      "text": "proves property one that the volume has"
+    },
+    {
+      "index": 640,
+      "start": 2011.0,
+      "end": 2013.71,
+      "duration": 2.71,
+      "text": "property one actually we could we could"
+    },
+    {
+      "index": 641,
+      "start": 2013.72,
+      "end": 2016.07,
+      "duration": 2.35,
+      "text": "we could get this thing if we if we can"
+    },
+    {
+      "index": 642,
+      "start": 2016.08,
+      "end": 2018.87,
+      "duration": 2.79,
+      "text": "show that the Box volume has the same"
+    },
+    {
+      "index": 643,
+      "start": 2018.88,
+      "end": 2021.43,
+      "duration": 2.55,
+      "text": "three properties that Define the"
+    },
+    {
+      "index": 644,
+      "start": 2021.44,
+      "end": 2025.59,
+      "duration": 4.15,
+      "text": "determinant then it must be the"
+    },
+    {
+      "index": 645,
+      "start": 2028.83,
+      "end": 2028.84,
+      "duration": 0.01,
+      "text": "determinant so that's like the the the"
+    },
+    {
+      "index": 646,
+      "start": 2028.84,
+      "end": 2031.71,
+      "duration": 2.87,
+      "text": "elegant way to prove this to prove this"
+    },
+    {
+      "index": 647,
+      "start": 2031.72,
+      "end": 2033.789,
+      "duration": 2.069,
+      "text": "amazing fact that the determinant equals"
+    },
+    {
+      "index": 648,
+      "start": 2033.799,
+      "end": 2036.149,
+      "duration": 2.35,
+      "text": "the volume first we'll check it for the"
+    },
+    {
+      "index": 649,
+      "start": 2036.159,
+      "end": 2038.909,
+      "duration": 2.75,
+      "text": "identity Matrix"
+    },
+    {
+      "index": 650,
+      "start": 2038.919,
+      "end": 2042.19,
+      "duration": 3.271,
+      "text": "that's fine the box is a cube and its"
+    },
+    {
+      "index": 651,
+      "start": 2042.2,
+      "end": 2044.59,
+      "duration": 2.39,
+      "text": "volume is one and the determinant is one"
+    },
+    {
+      "index": 652,
+      "start": 2044.6,
+      "end": 2048.03,
+      "duration": 3.43,
+      "text": "and and one agrees with one now let me"
+    },
+    {
+      "index": 653,
+      "start": 2048.04,
+      "end": 2050.869,
+      "duration": 2.829,
+      "text": "take one let me go up one level to an"
+    },
+    {
+      "index": 654,
+      "start": 2050.879,
+      "end": 2053.55,
+      "duration": 2.671,
+      "text": "orthogonal Matrix because I'd like to"
+    },
+    {
+      "index": 655,
+      "start": 2053.56,
+      "end": 2056.43,
+      "duration": 2.87,
+      "text": "take this chance to bring in chapter the"
+    },
+    {
+      "index": 656,
+      "start": 2056.44,
+      "end": 2057.79,
+      "duration": 1.35,
+      "text": "the previous"
+    },
+    {
+      "index": 657,
+      "start": 2057.8,
+      "end": 2060.51,
+      "duration": 2.71,
+      "text": "chapter suppose I have an orthogonal"
+    },
+    {
+      "index": 658,
+      "start": 2060.52,
+      "end": 2062.589,
+      "duration": 2.069,
+      "text": "Matrix what did that mean that I always"
+    },
+    {
+      "index": 659,
+      "start": 2062.599,
+      "end": 2064.43,
+      "duration": 1.831,
+      "text": "called those things"
+    },
+    {
+      "index": 660,
+      "start": 2064.44,
+      "end": 2068.069,
+      "duration": 3.629,
+      "text": "Q what was the point of suppose I have"
+    },
+    {
+      "index": 661,
+      "start": 2068.079,
+      "end": 2070.389,
+      "duration": 2.31,
+      "text": "suppose instead of the identity Matrix"
+    },
+    {
+      "index": 662,
+      "start": 2070.399,
+      "end": 2074.71,
+      "duration": 4.311,
+      "text": "I'm now going to take a equal"
+    },
+    {
+      "index": 663,
+      "start": 2074.72,
+      "end": 2082.349,
+      "duration": 7.629,
+      "text": "Q an orthogonal"
+    },
+    {
+      "index": 664,
+      "start": 2085.51,
+      "end": 2085.52,
+      "duration": 0.01,
+      "text": "Matrix what what was that what was Q"
+    },
+    {
+      "index": 665,
+      "start": 2085.52,
+      "end": 2088.909,
+      "duration": 3.389,
+      "text": "then that was a matrix whose columns"
+    },
+    {
+      "index": 666,
+      "start": 2088.919,
+      "end": 2092.829,
+      "duration": 3.91,
+      "text": "were orthonormal right those were its"
+    },
+    {
+      "index": 667,
+      "start": 2092.839,
+      "end": 2095.27,
+      "duration": 2.431,
+      "text": "columns were unit vectors perpendicular"
+    },
+    {
+      "index": 668,
+      "start": 2095.28,
+      "end": 2099.109,
+      "duration": 3.829,
+      "text": "unit vectors"
+    },
+    {
+      "index": 669,
+      "start": 2102.109,
+      "end": 2102.119,
+      "duration": 0.01,
+      "text": "so what kind of a box have we got"
+    },
+    {
+      "index": 670,
+      "start": 2102.119,
+      "end": 2105.069,
+      "duration": 2.95,
+      "text": "now what kind of a box comes from the"
+    },
+    {
+      "index": 671,
+      "start": 2105.079,
+      "end": 2107.349,
+      "duration": 2.27,
+      "text": "rows or the columns I don't mind because"
+    },
+    {
+      "index": 672,
+      "start": 2107.359,
+      "end": 2109.63,
+      "duration": 2.271,
+      "text": "the determinant is the determinant of"
+    },
+    {
+      "index": 673,
+      "start": 2109.64,
+      "end": 2112.349,
+      "duration": 2.709,
+      "text": "the transpose so I'm never worried about"
+    },
+    {
+      "index": 674,
+      "start": 2112.359,
+      "end": 2115.47,
+      "duration": 3.111,
+      "text": "that what kind of a box what shape box"
+    },
+    {
+      "index": 675,
+      "start": 2115.48,
+      "end": 2117.87,
+      "duration": 2.39,
+      "text": "have we got if the Matrix is an"
+    },
+    {
+      "index": 676,
+      "start": 2117.88,
+      "end": 2119.39,
+      "duration": 1.51,
+      "text": "orthogonal"
+    },
+    {
+      "index": 677,
+      "start": 2119.4,
+      "end": 2121.47,
+      "duration": 2.07,
+      "text": "matrix it's"
+    },
+    {
+      "index": 678,
+      "start": 2121.48,
+      "end": 2125.27,
+      "duration": 3.79,
+      "text": "another Cube It's a cube again how is it"
+    },
+    {
+      "index": 679,
+      "start": 2125.28,
+      "end": 2130.51,
+      "duration": 5.23,
+      "text": "different from the identity Cube"
+    },
+    {
+      "index": 680,
+      "start": 2132.15,
+      "end": 2132.16,
+      "duration": 0.01,
+      "text": "it's just"
+    },
+    {
+      "index": 681,
+      "start": 2132.16,
+      "end": 2135.47,
+      "duration": 3.31,
+      "text": "rotated it's just the orthogonal Matrix"
+    },
+    {
+      "index": 682,
+      "start": 2135.48,
+      "end": 2138.069,
+      "duration": 2.589,
+      "text": "Cube doesn't have to be the identity"
+    },
+    {
+      "index": 683,
+      "start": 2138.079,
+      "end": 2141.19,
+      "duration": 3.111,
+      "text": "matrix it's just the unit cube but"
+    },
+    {
+      "index": 684,
+      "start": 2141.2,
+      "end": 2144.55,
+      "duration": 3.35,
+      "text": "turned in space so sure"
+    },
+    {
+      "index": 685,
+      "start": 2144.56,
+      "end": 2147.43,
+      "duration": 2.87,
+      "text": "enough it's a unit cube and its volume"
+    },
+    {
+      "index": 686,
+      "start": 2147.44,
+      "end": 2149.27,
+      "duration": 1.83,
+      "text": "is one"
+    },
+    {
+      "index": 687,
+      "start": 2149.28,
+      "end": 2152.43,
+      "duration": 3.15,
+      "text": "now is the determinant"
+    },
+    {
+      "index": 688,
+      "start": 2152.44,
+      "end": 2155.63,
+      "duration": 3.19,
+      "text": "one what's the determinant of Q we"
+    },
+    {
+      "index": 689,
+      "start": 2155.64,
+      "end": 2157.43,
+      "duration": 1.79,
+      "text": "believe that the determinant of Q better"
+    },
+    {
+      "index": 690,
+      "start": 2157.44,
+      "end": 2161.15,
+      "duration": 3.71,
+      "text": "be one or minus one so that our formula"
+    },
+    {
+      "index": 691,
+      "start": 2161.16,
+      "end": 2163.95,
+      "duration": 2.79,
+      "text": "checks out in that if we can't check it"
+    },
+    {
+      "index": 692,
+      "start": 2163.96,
+      "end": 2167.03,
+      "duration": 3.07,
+      "text": "in these easy cases where we got a cube"
+    },
+    {
+      "index": 693,
+      "start": 2167.04,
+      "end": 2169.99,
+      "duration": 2.95,
+      "text": "we're not going to get it in the general"
+    },
+    {
+      "index": 694,
+      "start": 2170.0,
+      "end": 2174.51,
+      "duration": 4.51,
+      "text": "case so why is the determinant of Q"
+    },
+    {
+      "index": 695,
+      "start": 2174.52,
+      "end": 2177.349,
+      "duration": 2.829,
+      "text": "equal 1 or minus"
+    },
+    {
+      "index": 696,
+      "start": 2177.359,
+      "end": 2180.23,
+      "duration": 2.871,
+      "text": "one what do we know about Q what's the"
+    },
+    {
+      "index": 697,
+      "start": 2180.24,
+      "end": 2183.43,
+      "duration": 3.19,
+      "text": "one Matrix statement of the properties"
+    },
+    {
+      "index": 698,
+      "start": 2183.44,
+      "end": 2188.23,
+      "duration": 4.79,
+      "text": "of q a matrix with orthonormal columns"
+    },
+    {
+      "index": 699,
+      "start": 2188.24,
+      "end": 2192.15,
+      "duration": 3.91,
+      "text": "has satisfies a certain equation what"
+    },
+    {
+      "index": 700,
+      "start": 2192.16,
+      "end": 2195.19,
+      "duration": 3.03,
+      "text": "what is that it's if we have this"
+    },
+    {
+      "index": 701,
+      "start": 2195.2,
+      "end": 2200.63,
+      "duration": 5.43,
+      "text": "orthogonal Matrix then the the fact this"
+    },
+    {
+      "index": 702,
+      "start": 2200.64,
+      "end": 2203.63,
+      "duration": 2.99,
+      "text": "the the the way to say what it what it's"
+    },
+    {
+      "index": 703,
+      "start": 2203.64,
+      "end": 2207.23,
+      "duration": 3.59,
+      "text": "properties are is this Q Prime Q"
+    },
+    {
+      "index": 704,
+      "start": 2207.24,
+      "end": 2211.79,
+      "duration": 4.55,
+      "text": "transpose Q equals I"
+    },
+    {
+      "index": 705,
+      "start": 2211.8,
+      "end": 2215.79,
+      "duration": 3.99,
+      "text": "right that's what those are the matrices"
+    },
+    {
+      "index": 706,
+      "start": 2215.8,
+      "end": 2219.27,
+      "duration": 3.47,
+      "text": "that get the name Q the matrices that Q"
+    },
+    {
+      "index": 707,
+      "start": 2219.28,
+      "end": 2222.87,
+      "duration": 3.59,
+      "text": "transposed Q is I okay now from that"
+    },
+    {
+      "index": 708,
+      "start": 2222.88,
+      "end": 2225.27,
+      "duration": 2.39,
+      "text": "tell me why is the"
+    },
+    {
+      "index": 709,
+      "start": 2225.28,
+      "end": 2230.27,
+      "duration": 4.99,
+      "text": "determinant one or minus one how do I"
+    },
+    {
+      "index": 710,
+      "start": 2230.28,
+      "end": 2233.75,
+      "duration": 3.47,
+      "text": "out of this fact this may even be a"
+    },
+    {
+      "index": 711,
+      "start": 2233.76,
+      "end": 2236.27,
+      "duration": 2.51,
+      "text": "homework"
+    },
+    {
+      "index": 712,
+      "start": 2236.28,
+      "end": 2239.55,
+      "duration": 3.27,
+      "text": "problem it's there in the in the list of"
+    },
+    {
+      "index": 713,
+      "start": 2239.56,
+      "end": 2242.109,
+      "duration": 2.549,
+      "text": "exercises in the book and let's just do"
+    },
+    {
+      "index": 714,
+      "start": 2242.119,
+      "end": 2245.23,
+      "duration": 3.111,
+      "text": "it how do I get how do I discover that"
+    },
+    {
+      "index": 715,
+      "start": 2245.24,
+      "end": 2247.79,
+      "duration": 2.55,
+      "text": "the determinant of Q"
+    },
+    {
+      "index": 716,
+      "start": 2247.8,
+      "end": 2250.47,
+      "duration": 2.67,
+      "text": "is one or maybe minus"
+    },
+    {
+      "index": 717,
+      "start": 2250.48,
+      "end": 2253.23,
+      "duration": 2.75,
+      "text": "one I take determinants on both sides"
+    },
+    {
+      "index": 718,
+      "start": 2253.24,
+      "end": 2256.95,
+      "duration": 3.71,
+      "text": "everybody says so I won't I'll I won't I"
+    },
+    {
+      "index": 719,
+      "start": 2256.96,
+      "end": 2258.79,
+      "duration": 1.83,
+      "text": "take determinants of both sides on the"
+    },
+    {
+      "index": 720,
+      "start": 2258.8,
+      "end": 2260.63,
+      "duration": 1.83,
+      "text": "right hand side so I when I take"
+    },
+    {
+      "index": 721,
+      "start": 2260.64,
+      "end": 2263.27,
+      "duration": 2.63,
+      "text": "determinants of both sides let me just"
+    },
+    {
+      "index": 722,
+      "start": 2263.28,
+      "end": 2265.23,
+      "duration": 1.95,
+      "text": "do"
+    },
+    {
+      "index": 723,
+      "start": 2265.24,
+      "end": 2270.55,
+      "duration": 5.31,
+      "text": "it take the determinant of take"
+    },
+    {
+      "index": 724,
+      "start": 2272.39,
+      "end": 2272.4,
+      "duration": 0.01,
+      "text": "determinants the determinant of the"
+    },
+    {
+      "index": 725,
+      "start": 2272.4,
+      "end": 2274.99,
+      "duration": 2.59,
+      "text": "identity is one what's the determinant"
+    },
+    {
+      "index": 726,
+      "start": 2275.0,
+      "end": 2278.67,
+      "duration": 3.67,
+      "text": "of that product"
+    },
+    {
+      "index": 727,
+      "start": 2282.51,
+      "end": 2282.52,
+      "duration": 0.01,
+      "text": "rule nine is paying off now the"
+    },
+    {
+      "index": 728,
+      "start": 2282.52,
+      "end": 2284.51,
+      "duration": 1.99,
+      "text": "determinant of a product is the"
+    },
+    {
+      "index": 729,
+      "start": 2284.52,
+      "end": 2288.47,
+      "duration": 3.95,
+      "text": "determinant of this guy maybe I'll put"
+    },
+    {
+      "index": 730,
+      "start": 2288.48,
+      "end": 2290.51,
+      "duration": 2.03,
+      "text": "it y I'll use that symbol for"
+    },
+    {
+      "index": 731,
+      "start": 2290.52,
+      "end": 2292.39,
+      "duration": 1.87,
+      "text": "determinant it's the determinant of that"
+    },
+    {
+      "index": 732,
+      "start": 2292.4,
+      "end": 2296.47,
+      "duration": 4.07,
+      "text": "guy times the determinant of the other"
+    },
+    {
+      "index": 733,
+      "start": 2296.48,
+      "end": 2300.309,
+      "duration": 3.829,
+      "text": "guy and then what's the determinant of Q"
+    },
+    {
+      "index": 734,
+      "start": 2300.319,
+      "end": 2302.71,
+      "duration": 2.391,
+      "text": "transpose it's the same as the deter of"
+    },
+    {
+      "index": 735,
+      "start": 2302.72,
+      "end": 2306.15,
+      "duration": 3.43,
+      "text": "Q rule 10 pays off so this is just this"
+    },
+    {
+      "index": 736,
+      "start": 2306.16,
+      "end": 2308.27,
+      "duration": 2.11,
+      "text": "thing squared"
+    },
+    {
+      "index": 737,
+      "start": 2308.28,
+      "end": 2310.63,
+      "duration": 2.35,
+      "text": "so that determinant squared is one and"
+    },
+    {
+      "index": 738,
+      "start": 2310.64,
+      "end": 2311.91,
+      "duration": 1.27,
+      "text": "sure"
+    },
+    {
+      "index": 739,
+      "start": 2311.92,
+      "end": 2317.43,
+      "duration": 5.51,
+      "text": "enough it's one or minus one"
+    },
+    {
+      "index": 740,
+      "start": 2321.589,
+      "end": 2321.599,
+      "duration": 0.01,
+      "text": "great so in these special cases of"
+    },
+    {
+      "index": 741,
+      "start": 2321.599,
+      "end": 2326.069,
+      "duration": 4.47,
+      "text": "Cubes we really do have determinant"
+    },
+    {
+      "index": 742,
+      "start": 2326.079,
+      "end": 2327.75,
+      "duration": 1.671,
+      "text": "equals"
+    },
+    {
+      "index": 743,
+      "start": 2327.76,
+      "end": 2334.349,
+      "duration": 6.589,
+      "text": "volume now can I just push that to non"
+    },
+    {
+      "index": 744,
+      "start": 2334.359,
+      "end": 2339.99,
+      "duration": 5.631,
+      "text": "cubes let me push it first to"
+    },
+    {
+      "index": 745,
+      "start": 2342.589,
+      "end": 2342.599,
+      "duration": 0.01,
+      "text": "rectangles rectangular"
+    },
+    {
+      "index": 746,
+      "start": 2342.599,
+      "end": 2346.55,
+      "duration": 3.951,
+      "text": "boxes where I'm just multiplying the the"
+    },
+    {
+      "index": 747,
+      "start": 2346.56,
+      "end": 2350.71,
+      "duration": 4.15,
+      "text": "edges are let me keep all the 90° angles"
+    },
+    {
+      "index": 748,
+      "start": 2350.72,
+      "end": 2352.15,
+      "duration": 1.43,
+      "text": "because those are that that makes my"
+    },
+    {
+      "index": 749,
+      "start": 2352.16,
+      "end": 2355.349,
+      "duration": 3.189,
+      "text": "life easy and just stretch the stretch"
+    },
+    {
+      "index": 750,
+      "start": 2355.359,
+      "end": 2359.39,
+      "duration": 4.031,
+      "text": "the edges suppose I stretch that first"
+    },
+    {
+      "index": 751,
+      "start": 2359.4,
+      "end": 2363.19,
+      "duration": 3.79,
+      "text": "Edge suppose this first Edge I double"
+    },
+    {
+      "index": 752,
+      "start": 2363.2,
+      "end": 2367.87,
+      "duration": 4.67,
+      "text": "suppose I double that that first Edge"
+    },
+    {
+      "index": 753,
+      "start": 2370.03,
+      "end": 2370.04,
+      "duration": 0.01,
+      "text": "keeping the other edges the"
+    },
+    {
+      "index": 754,
+      "start": 2370.04,
+      "end": 2373.589,
+      "duration": 3.549,
+      "text": "same what happens to the"
+    },
+    {
+      "index": 755,
+      "start": 2373.599,
+      "end": 2377.95,
+      "duration": 4.351,
+      "text": "volume it doubles right we know that the"
+    },
+    {
+      "index": 756,
+      "start": 2377.96,
+      "end": 2380.349,
+      "duration": 2.389,
+      "text": "volume of a cube doubles in fact because"
+    },
+    {
+      "index": 757,
+      "start": 2380.359,
+      "end": 2382.109,
+      "duration": 1.75,
+      "text": "we know that the new Cube would sit"
+    },
+    {
+      "index": 758,
+      "start": 2382.119,
+      "end": 2384.91,
+      "duration": 2.791,
+      "text": "right on top of I mean the new the added"
+    },
+    {
+      "index": 759,
+      "start": 2384.92,
+      "end": 2387.589,
+      "duration": 2.669,
+      "text": "Cube would sit right and would fit"
+    },
+    {
+      "index": 760,
+      "start": 2387.599,
+      "end": 2389.55,
+      "duration": 1.951,
+      "text": "probably a geometer would say congruent"
+    },
+    {
+      "index": 761,
+      "start": 2389.56,
+      "end": 2391.47,
+      "duration": 1.91,
+      "text": "or something would go right in in the"
+    },
+    {
+      "index": 762,
+      "start": 2391.48,
+      "end": 2393.27,
+      "duration": 1.79,
+      "text": "other one we'd have two we have two"
+    },
+    {
+      "index": 763,
+      "start": 2393.28,
+      "end": 2398.63,
+      "duration": 5.35,
+      "text": "identical cubes total volume is now two"
+    },
+    {
+      "index": 764,
+      "start": 2398.64,
+      "end": 2401.309,
+      "duration": 2.669,
+      "text": "okay so if if I double an edge the"
+    },
+    {
+      "index": 765,
+      "start": 2401.319,
+      "end": 2406.589,
+      "duration": 5.27,
+      "text": "volume doubles what happens to the"
+    },
+    {
+      "index": 766,
+      "start": 2410.43,
+      "end": 2410.44,
+      "duration": 0.01,
+      "text": "determinant if I double uh the first row"
+    },
+    {
+      "index": 767,
+      "start": 2410.44,
+      "end": 2413.39,
+      "duration": 2.95,
+      "text": "of a"
+    },
+    {
+      "index": 768,
+      "start": 2416.99,
+      "end": 2417.0,
+      "duration": 0.01,
+      "text": "matrix what what's the effect on the"
+    },
+    {
+      "index": 769,
+      "start": 2417.0,
+      "end": 2418.75,
+      "duration": 1.75,
+      "text": "determinant it"
+    },
+    {
+      "index": 770,
+      "start": 2418.76,
+      "end": 2423.55,
+      "duration": 4.79,
+      "text": "also doubles right and that was rule"
+    },
+    {
+      "index": 771,
+      "start": 2423.56,
+      "end": 2425.47,
+      "duration": 1.91,
+      "text": "number"
+    },
+    {
+      "index": 772,
+      "start": 2425.48,
+      "end": 2429.23,
+      "duration": 3.75,
+      "text": "3A remember rule 3 3 a was that if I I"
+    },
+    {
+      "index": 773,
+      "start": 2429.24,
+      "end": 2433.95,
+      "duration": 4.71,
+      "text": "could if I had a factor in in row one t"
+    },
+    {
+      "index": 774,
+      "start": 2433.96,
+      "end": 2435.79,
+      "duration": 1.83,
+      "text": "i could Factor it"
+    },
+    {
+      "index": 775,
+      "start": 2435.8,
+      "end": 2440.27,
+      "duration": 4.47,
+      "text": "out so if if I have a factor two in that"
+    },
+    {
+      "index": 776,
+      "start": 2440.28,
+      "end": 2442.349,
+      "duration": 2.069,
+      "text": "Row one I can Factor it out of the"
+    },
+    {
+      "index": 777,
+      "start": 2442.359,
+      "end": 2445.23,
+      "duration": 2.871,
+      "text": "determinant it agrees with the the"
+    },
+    {
+      "index": 778,
+      "start": 2445.24,
+      "end": 2447.829,
+      "duration": 2.589,
+      "text": "volume of the box has that factor"
+    },
+    {
+      "index": 779,
+      "start": 2447.839,
+      "end": 2453.109,
+      "duration": 5.27,
+      "text": "to so so volume satisfies this property"
+    },
+    {
+      "index": 780,
+      "start": 2453.119,
+      "end": 2457.589,
+      "duration": 4.47,
+      "text": "3A and now I really am close but I but"
+    },
+    {
+      "index": 781,
+      "start": 2457.599,
+      "end": 2460.55,
+      "duration": 2.951,
+      "text": "to get to the very end of this proof I"
+    },
+    {
+      "index": 782,
+      "start": 2460.56,
+      "end": 2462.829,
+      "duration": 2.269,
+      "text": "have to get away from right angles I"
+    },
+    {
+      "index": 783,
+      "start": 2462.839,
+      "end": 2466.19,
+      "duration": 3.351,
+      "text": "have to allow the possibility"
+    },
+    {
+      "index": 784,
+      "start": 2466.2,
+      "end": 2469.51,
+      "duration": 3.31,
+      "text": "of uh other"
+    },
+    {
+      "index": 785,
+      "start": 2469.52,
+      "end": 2472.75,
+      "duration": 3.23,
+      "text": "angles and or or what's saying the same"
+    },
+    {
+      "index": 786,
+      "start": 2472.76,
+      "end": 2475.51,
+      "duration": 2.75,
+      "text": "thing I have to check that the volume"
+    },
+    {
+      "index": 787,
+      "start": 2475.52,
+      "end": 2478.23,
+      "duration": 2.71,
+      "text": "also satisfies"
+    },
+    {
+      "index": 788,
+      "start": 2478.24,
+      "end": 2482.75,
+      "duration": 4.51,
+      "text": "3B so can I can I just so this is n of"
+    },
+    {
+      "index": 789,
+      "start": 2482.76,
+      "end": 2486.79,
+      "duration": 4.03,
+      "text": "proof that so I'm determinant of a"
+    },
+    {
+      "index": 790,
+      "start": 2486.8,
+      "end": 2491.39,
+      "duration": 4.59,
+      "text": "equals volume of"
+    },
+    {
+      "index": 791,
+      "start": 2495.47,
+      "end": 2495.48,
+      "duration": 0.01,
+      "text": "box and where am I right now this volume"
+    },
+    {
+      "index": 792,
+      "start": 2495.48,
+      "end": 2498.23,
+      "duration": 2.75,
+      "text": "has properties properties"
+    },
+    {
+      "index": 793,
+      "start": 2498.24,
+      "end": 2502.55,
+      "duration": 4.31,
+      "text": "one no problem if the box is the cube"
+    },
+    {
+      "index": 794,
+      "start": 2502.56,
+      "end": 2503.51,
+      "duration": 0.95,
+      "text": "everything"
+    },
+    {
+      "index": 795,
+      "start": 2503.52,
+      "end": 2506.75,
+      "duration": 3.23,
+      "text": "is if if the box is the unit cube its"
+    },
+    {
+      "index": 796,
+      "start": 2506.76,
+      "end": 2508.03,
+      "duration": 1.27,
+      "text": "volume is"
+    },
+    {
+      "index": 797,
+      "start": 2508.04,
+      "end": 2513.95,
+      "duration": 5.91,
+      "text": "one property two was if I reverse two"
+    },
+    {
+      "index": 798,
+      "start": 2513.96,
+      "end": 2517.829,
+      "duration": 3.869,
+      "text": "rows but that doesn't change the Box"
+    },
+    {
+      "index": 799,
+      "start": 2517.839,
+      "end": 2519.63,
+      "duration": 1.791,
+      "text": "and it doesn't change the absolute value"
+    },
+    {
+      "index": 800,
+      "start": 2519.64,
+      "end": 2524.63,
+      "duration": 4.99,
+      "text": "so no problem there property 3A was if I"
+    },
+    {
+      "index": 801,
+      "start": 2524.64,
+      "end": 2527.43,
+      "duration": 2.79,
+      "text": "M you remember what 3A was so property"
+    },
+    {
+      "index": 802,
+      "start": 2527.44,
+      "end": 2530.349,
+      "duration": 2.909,
+      "text": "one was about the identity Matrix"
+    },
+    {
+      "index": 803,
+      "start": 2530.359,
+      "end": 2532.55,
+      "duration": 2.191,
+      "text": "property two was about a plus or minus"
+    },
+    {
+      "index": 804,
+      "start": 2532.56,
+      "end": 2535.55,
+      "duration": 2.99,
+      "text": "sign that I don't care about property 3A"
+    },
+    {
+      "index": 805,
+      "start": 2535.56,
+      "end": 2539.43,
+      "duration": 3.87,
+      "text": "was a factor T in a row but now I've got"
+    },
+    {
+      "index": 806,
+      "start": 2539.44,
+      "end": 2542.99,
+      "duration": 3.55,
+      "text": "property 3B to deal"
+    },
+    {
+      "index": 807,
+      "start": 2543.0,
+      "end": 2545.87,
+      "duration": 2.87,
+      "text": "with what was property 3B this is a"
+    },
+    {
+      "index": 808,
+      "start": 2545.88,
+      "end": 2550.23,
+      "duration": 4.35,
+      "text": "great way to review these uh properties"
+    },
+    {
+      "index": 809,
+      "start": 2550.24,
+      "end": 2554.87,
+      "duration": 4.63,
+      "text": "so that 3B the property 3B said Let's do"
+    },
+    {
+      "index": 810,
+      "start": 2554.88,
+      "end": 2558.71,
+      "duration": 3.83,
+      "text": "let's do 2x two so said that if I had a"
+    },
+    {
+      "index": 811,
+      "start": 2558.72,
+      "end": 2564.069,
+      "duration": 5.349,
+      "text": "+ a prime b + B Prime C"
+    },
+    {
+      "index": 812,
+      "start": 2564.079,
+      "end": 2568.109,
+      "duration": 4.03,
+      "text": "D that this equal what so this is"
+    },
+    {
+      "index": 813,
+      "start": 2568.119,
+      "end": 2571.47,
+      "duration": 3.351,
+      "text": "property 3B this is the linearity in row"
+    },
+    {
+      "index": 814,
+      "start": 2571.48,
+      "end": 2572.79,
+      "duration": 1.31,
+      "text": "one by"
+    },
+    {
+      "index": 815,
+      "start": 2572.8,
+      "end": 2576.549,
+      "duration": 3.749,
+      "text": "itself so CD is staying the same and I"
+    },
+    {
+      "index": 816,
+      "start": 2576.559,
+      "end": 2578.51,
+      "duration": 1.951,
+      "text": "can split this into"
+    },
+    {
+      "index": 817,
+      "start": 2578.52,
+      "end": 2585.109,
+      "duration": 6.589,
+      "text": "a and a prime B"
+    },
+    {
+      "index": 818,
+      "start": 2588.309,
+      "end": 2588.319,
+      "duration": 0.01,
+      "text": "Prime that's property"
+    },
+    {
+      "index": 819,
+      "start": 2588.319,
+      "end": 2591.99,
+      "duration": 3.671,
+      "text": "3B at least in the 2x two"
+    },
+    {
+      "index": 820,
+      "start": 2592.0,
+      "end": 2596.27,
+      "duration": 4.27,
+      "text": "case and what am I I I wanted now to"
+    },
+    {
+      "index": 821,
+      "start": 2596.28,
+      "end": 2598.95,
+      "duration": 2.67,
+      "text": "show show that the"
+    },
+    {
+      "index": 822,
+      "start": 2598.96,
+      "end": 2603.349,
+      "duration": 4.389,
+      "text": "volume which two 2 by2 that means"
+    },
+    {
+      "index": 823,
+      "start": 2603.359,
+      "end": 2608.829,
+      "duration": 5.47,
+      "text": "area has this has this property"
+    },
+    {
+      "index": 824,
+      "start": 2609.91,
+      "end": 2609.92,
+      "duration": 0.01,
+      "text": "let me just"
+    },
+    {
+      "index": 825,
+      "start": 2609.92,
+      "end": 2612.47,
+      "duration": 2.55,
+      "text": "emphasize that we have got we're getting"
+    },
+    {
+      "index": 826,
+      "start": 2612.48,
+      "end": 2616.109,
+      "duration": 3.629,
+      "text": "this is a Formula then for the area of a"
+    },
+    {
+      "index": 827,
+      "start": 2616.119,
+      "end": 2618.109,
+      "duration": 1.99,
+      "text": "parallelogram the area of this"
+    },
+    {
+      "index": 828,
+      "start": 2618.119,
+      "end": 2620.549,
+      "duration": 2.43,
+      "text": "parallelogram can I just draw it okay"
+    },
+    {
+      "index": 829,
+      "start": 2620.559,
+      "end": 2622.23,
+      "duration": 1.671,
+      "text": "here's the here's the parallelogram I"
+    },
+    {
+      "index": 830,
+      "start": 2622.24,
+      "end": 2624.309,
+      "duration": 2.069,
+      "text": "have the row"
+    },
+    {
+      "index": 831,
+      "start": 2624.319,
+      "end": 2628.19,
+      "duration": 3.871,
+      "text": "AB that's the first row that's the point"
+    },
+    {
+      "index": 832,
+      "start": 2628.2,
+      "end": 2631.47,
+      "duration": 3.27,
+      "text": "ab and I tack"
+    },
+    {
+      "index": 833,
+      "start": 2631.48,
+      "end": 2633.91,
+      "duration": 2.43,
+      "text": "on"
+    },
+    {
+      "index": 834,
+      "start": 2633.92,
+      "end": 2637.71,
+      "duration": 3.79,
+      "text": "CD CD coming out of here"
+    },
+    {
+      "index": 835,
+      "start": 2637.72,
+      "end": 2641.51,
+      "duration": 3.79,
+      "text": "and I complete the"
+    },
+    {
+      "index": 836,
+      "start": 2644.829,
+      "end": 2644.839,
+      "duration": 0.01,
+      "text": "parallelogram so this is C so well I"
+    },
+    {
+      "index": 837,
+      "start": 2644.839,
+      "end": 2648.99,
+      "duration": 4.151,
+      "text": "better make it look right it's really"
+    },
+    {
+      "index": 838,
+      "start": 2649.0,
+      "end": 2651.99,
+      "duration": 2.99,
+      "text": "this one that has coordinates CD and"
+    },
+    {
+      "index": 839,
+      "start": 2652.0,
+      "end": 2653.15,
+      "duration": 1.15,
+      "text": "this has"
+    },
+    {
+      "index": 840,
+      "start": 2653.16,
+      "end": 2655.99,
+      "duration": 2.83,
+      "text": "coordinates well whatever the sum"
+    },
+    {
+      "index": 841,
+      "start": 2656.0,
+      "end": 2661.19,
+      "duration": 5.19,
+      "text": "is and of course starting at 0"
+    },
+    {
+      "index": 842,
+      "start": 2665.63,
+      "end": 2665.64,
+      "duration": 0.01,
+      "text": "so we all know this is a plus c b plus"
+    },
+    {
+      "index": 843,
+      "start": 2665.64,
+      "end": 2668.349,
+      "duration": 2.709,
+      "text": "d"
+    },
+    {
+      "index": 844,
+      "start": 2668.359,
+      "end": 2670.19,
+      "duration": 1.831,
+      "text": "uh rather"
+    },
+    {
+      "index": 845,
+      "start": 2670.2,
+      "end": 2673.15,
+      "duration": 2.95,
+      "text": "than I'm I'm pausing on that proof for a"
+    },
+    {
+      "index": 846,
+      "start": 2673.16,
+      "end": 2676.309,
+      "duration": 3.149,
+      "text": "minute just to going back to our"
+    },
+    {
+      "index": 847,
+      "start": 2676.319,
+      "end": 2679.47,
+      "duration": 3.151,
+      "text": "formula because I want you to see that"
+    },
+    {
+      "index": 848,
+      "start": 2679.48,
+      "end": 2681.67,
+      "duration": 2.19,
+      "text": "unlike Kramer's rule that I wasn't that"
+    },
+    {
+      "index": 849,
+      "start": 2681.68,
+      "end": 2682.79,
+      "duration": 1.11,
+      "text": "impressed"
+    },
+    {
+      "index": 850,
+      "start": 2682.8,
+      "end": 2685.95,
+      "duration": 3.15,
+      "text": "by I'm very impressed by this formula"
+    },
+    {
+      "index": 851,
+      "start": 2685.96,
+      "end": 2687.51,
+      "duration": 1.55,
+      "text": "for the area of a"
+    },
+    {
+      "index": 852,
+      "start": 2687.52,
+      "end": 2689.91,
+      "duration": 2.39,
+      "text": "parallelogram and what's our"
+    },
+    {
+      "index": 853,
+      "start": 2689.92,
+      "end": 2693.91,
+      "duration": 3.99,
+      "text": "formula what what's the area of that"
+    },
+    {
+      "index": 854,
+      "start": 2693.92,
+      "end": 2698.91,
+      "duration": 4.99,
+      "text": "parallelogram if I had asked you that"
+    },
+    {
+      "index": 855,
+      "start": 2698.92,
+      "end": 2699.79,
+      "duration": 0.87,
+      "text": "last"
+    },
+    {
+      "index": 856,
+      "start": 2699.8,
+      "end": 2702.43,
+      "duration": 2.63,
+      "text": "year you would have said okay the area"
+    },
+    {
+      "index": 857,
+      "start": 2702.44,
+      "end": 2705.67,
+      "duration": 3.23,
+      "text": "of a parallelogram is the base times the"
+    },
+    {
+      "index": 858,
+      "start": 2705.68,
+      "end": 2706.829,
+      "duration": 1.149,
+      "text": "height"
+    },
+    {
+      "index": 859,
+      "start": 2706.839,
+      "end": 2709.829,
+      "duration": 2.99,
+      "text": "right so you would have figured out what"
+    },
+    {
+      "index": 860,
+      "start": 2709.839,
+      "end": 2712.829,
+      "duration": 2.99,
+      "text": "this base the how long that base was"
+    },
+    {
+      "index": 861,
+      "start": 2712.839,
+      "end": 2716.27,
+      "duration": 3.431,
+      "text": "it's like the square root of A2 + b^2"
+    },
+    {
+      "index": 862,
+      "start": 2716.28,
+      "end": 2717.87,
+      "duration": 1.59,
+      "text": "and then you would have figured out how"
+    },
+    {
+      "index": 863,
+      "start": 2717.88,
+      "end": 2720.99,
+      "duration": 3.11,
+      "text": "much is this height whatever it is it's"
+    },
+    {
+      "index": 864,
+      "start": 2721.0,
+      "end": 2724.63,
+      "duration": 3.63,
+      "text": "horrible this I"
+    },
+    {
+      "index": 865,
+      "start": 2727.91,
+      "end": 2727.92,
+      "duration": 0.01,
+      "text": "mean we got square roots and in that"
+    },
+    {
+      "index": 866,
+      "start": 2727.92,
+      "end": 2729.589,
+      "duration": 1.669,
+      "text": "height there would be"
+    },
+    {
+      "index": 867,
+      "start": 2729.599,
+      "end": 2732.99,
+      "duration": 3.391,
+      "text": "other revolting stuff but now what's the"
+    },
+    {
+      "index": 868,
+      "start": 2733.0,
+      "end": 2741.27,
+      "duration": 8.27,
+      "text": "formula that we now know for the"
+    },
+    {
+      "index": 869,
+      "start": 2743.63,
+      "end": 2743.64,
+      "duration": 0.01,
+      "text": "area it's the"
+    },
+    {
+      "index": 870,
+      "start": 2743.64,
+      "end": 2747.549,
+      "duration": 3.909,
+      "text": "determinant of our little"
+    },
+    {
+      "index": 871,
+      "start": 2758.109,
+      "end": 2758.119,
+      "duration": 0.01,
+      "text": "c no square"
+    },
+    {
+      "index": 872,
+      "start": 2758.119,
+      "end": 2761.91,
+      "duration": 3.791,
+      "text": "roots totally rememberable because it's"
+    },
+    {
+      "index": 873,
+      "start": 2761.92,
+      "end": 2763.549,
+      "duration": 1.629,
+      "text": "exactly a formula that we've been"
+    },
+    {
+      "index": 874,
+      "start": 2763.559,
+      "end": 2768.19,
+      "duration": 4.631,
+      "text": "studying the whole uh for three"
+    },
+    {
+      "index": 875,
+      "start": 2768.2,
+      "end": 2772.23,
+      "duration": 4.03,
+      "text": "lectures okay that that that's um you"
+    },
+    {
+      "index": 876,
+      "start": 2772.24,
+      "end": 2774.069,
+      "duration": 1.829,
+      "text": "know that's the most important point I'm"
+    },
+    {
+      "index": 877,
+      "start": 2774.079,
+      "end": 2777.71,
+      "duration": 3.631,
+      "text": "making here is that if you know the"
+    },
+    {
+      "index": 878,
+      "start": 2777.72,
+      "end": 2780.549,
+      "duration": 2.829,
+      "text": "coordinates of a"
+    },
+    {
+      "index": 879,
+      "start": 2780.559,
+      "end": 2784.19,
+      "duration": 3.631,
+      "text": "box of the coiners then you have a great"
+    },
+    {
+      "index": 880,
+      "start": 2784.2,
+      "end": 2788.39,
+      "duration": 4.19,
+      "text": "formula for the volume area or volume"
+    },
+    {
+      "index": 881,
+      "start": 2788.4,
+      "end": 2791.069,
+      "duration": 2.669,
+      "text": "that doesn't involve any lengths or any"
+    },
+    {
+      "index": 882,
+      "start": 2791.079,
+      "end": 2795.03,
+      "duration": 3.951,
+      "text": "angles or any Heights but just involves"
+    },
+    {
+      "index": 883,
+      "start": 2795.04,
+      "end": 2796.87,
+      "duration": 1.83,
+      "text": "the coordinates that you've"
+    },
+    {
+      "index": 884,
+      "start": 2796.88,
+      "end": 2799.47,
+      "duration": 2.59,
+      "text": "got and similarly what's the area of"
+    },
+    {
+      "index": 885,
+      "start": 2799.48,
+      "end": 2802.27,
+      "duration": 2.79,
+      "text": "this triangle suppose I chop that off"
+    },
+    {
+      "index": 886,
+      "start": 2802.28,
+      "end": 2804.069,
+      "duration": 1.789,
+      "text": "and say what about because you might"
+    },
+    {
+      "index": 887,
+      "start": 2804.079,
+      "end": 2805.75,
+      "duration": 1.671,
+      "text": "often be interested in a triangle"
+    },
+    {
+      "index": 888,
+      "start": 2805.76,
+      "end": 2807.79,
+      "duration": 2.03,
+      "text": "instead of a parallelogram what's the"
+    },
+    {
+      "index": 889,
+      "start": 2807.8,
+      "end": 2810.99,
+      "duration": 3.19,
+      "text": "area of this"
+    },
+    {
+      "index": 890,
+      "start": 2813.71,
+      "end": 2813.72,
+      "duration": 0.01,
+      "text": "triangle now there again everybody would"
+    },
+    {
+      "index": 891,
+      "start": 2813.72,
+      "end": 2816.51,
+      "duration": 2.79,
+      "text": "have said the area of a triangle is half"
+    },
+    {
+      "index": 892,
+      "start": 2816.52,
+      "end": 2820.27,
+      "duration": 3.75,
+      "text": "the base times the"
+    },
+    {
+      "index": 893,
+      "start": 2823.27,
+      "end": 2823.28,
+      "duration": 0.01,
+      "text": "height and in some cases if you know the"
+    },
+    {
+      "index": 894,
+      "start": 2823.28,
+      "end": 2825.27,
+      "duration": 1.99,
+      "text": "base that's that's and the height that's"
+    },
+    {
+      "index": 895,
+      "start": 2825.28,
+      "end": 2828.109,
+      "duration": 2.829,
+      "text": "fine but here we what we know is the"
+    },
+    {
+      "index": 896,
+      "start": 2828.119,
+      "end": 2831.03,
+      "duration": 2.911,
+      "text": "coordinates of the corners we know the"
+    },
+    {
+      "index": 897,
+      "start": 2831.04,
+      "end": 2836.829,
+      "duration": 5.789,
+      "text": "vertices and so what's the area of that"
+    },
+    {
+      "index": 898,
+      "start": 2841.109,
+      "end": 2841.119,
+      "duration": 0.01,
+      "text": "triangle if I know these if I know AB CD"
+    },
+    {
+      "index": 899,
+      "start": 2841.119,
+      "end": 2844.03,
+      "duration": 2.911,
+      "text": "and 0 0 what's the what's the"
+    },
+    {
+      "index": 900,
+      "start": 2844.04,
+      "end": 2848.349,
+      "duration": 4.309,
+      "text": "area it's just half so"
+    },
+    {
+      "index": 901,
+      "start": 2848.359,
+      "end": 2851.03,
+      "duration": 2.671,
+      "text": "it's just half of this so this is this"
+    },
+    {
+      "index": 902,
+      "start": 2851.04,
+      "end": 2856.109,
+      "duration": 5.069,
+      "text": "is AB a minus BC for the"
+    },
+    {
+      "index": 903,
+      "start": 2856.119,
+      "end": 2859.63,
+      "duration": 3.511,
+      "text": "parallelogram and 1/2 of that 1 half of"
+    },
+    {
+      "index": 904,
+      "start": 2859.64,
+      "end": 2866.109,
+      "duration": 6.469,
+      "text": "a D minus BC for the"
+    },
+    {
+      "index": 905,
+      "start": 2868.95,
+      "end": 2868.96,
+      "duration": 0.01,
+      "text": "triangle so I I just I mean this is a"
+    },
+    {
+      "index": 906,
+      "start": 2868.96,
+      "end": 2870.91,
+      "duration": 1.95,
+      "text": "totally trivial remark to say well"
+    },
+    {
+      "index": 907,
+      "start": 2870.92,
+      "end": 2874.15,
+      "duration": 3.23,
+      "text": "divide by two but it's just that you"
+    },
+    {
+      "index": 908,
+      "start": 2874.16,
+      "end": 2877.99,
+      "duration": 3.83,
+      "text": "more often see triangles"
+    },
+    {
+      "index": 909,
+      "start": 2878.0,
+      "end": 2880.829,
+      "duration": 2.829,
+      "text": "and you feel you know the formula for"
+    },
+    {
+      "index": 910,
+      "start": 2880.839,
+      "end": 2883.15,
+      "duration": 2.311,
+      "text": "the area but the good formula for the"
+    },
+    {
+      "index": 911,
+      "start": 2883.16,
+      "end": 2886.79,
+      "duration": 3.63,
+      "text": "area is this one and I'm just going to J"
+    },
+    {
+      "index": 912,
+      "start": 2886.8,
+      "end": 2888.23,
+      "duration": 1.43,
+      "text": "I'm just going to say one more thing"
+    },
+    {
+      "index": 913,
+      "start": 2888.24,
+      "end": 2890.27,
+      "duration": 2.03,
+      "text": "about the area of a triangle it's just"
+    },
+    {
+      "index": 914,
+      "start": 2890.28,
+      "end": 2893.15,
+      "duration": 2.87,
+      "text": "because it's it's you know it's so great"
+    },
+    {
+      "index": 915,
+      "start": 2893.16,
+      "end": 2895.75,
+      "duration": 2.59,
+      "text": "to have a good formula for something"
+    },
+    {
+      "index": 916,
+      "start": 2895.76,
+      "end": 2900.03,
+      "duration": 4.27,
+      "text": "what if our triangle did not start at 0"
+    },
+    {
+      "index": 917,
+      "start": 2900.04,
+      "end": 2902.19,
+      "duration": 2.15,
+      "text": "0 what if our"
+    },
+    {
+      "index": 918,
+      "start": 2902.2,
+      "end": 2906.109,
+      "duration": 3.909,
+      "text": "triangle what if we had this what if we"
+    },
+    {
+      "index": 919,
+      "start": 2906.119,
+      "end": 2911.589,
+      "duration": 5.47,
+      "text": "had so I'm coming back to triangles"
+    },
+    {
+      "index": 920,
+      "start": 2921.19,
+      "end": 2921.2,
+      "duration": 0.01,
+      "text": "triangle somewhere it's I'm I'm saying"
+    },
+    {
+      "index": 921,
+      "start": 2921.2,
+      "end": 2922.95,
+      "duration": 1.75,
+      "text": "with triangles I'm just in two"
+    },
+    {
+      "index": 922,
+      "start": 2922.96,
+      "end": 2926.91,
+      "duration": 3.95,
+      "text": "Dimensions but I'm going to allow you to"
+    },
+    {
+      "index": 923,
+      "start": 2926.92,
+      "end": 2930.99,
+      "duration": 4.07,
+      "text": "give"
+    },
+    {
+      "index": 924,
+      "start": 2940.19,
+      "end": 2940.2,
+      "duration": 0.01,
+      "text": "and in those six numbers must determine"
+    },
+    {
+      "index": 925,
+      "start": 2940.2,
+      "end": 2944.23,
+      "duration": 4.03,
+      "text": "the area and what's the formula the area"
+    },
+    {
+      "index": 926,
+      "start": 2944.24,
+      "end": 2945.71,
+      "duration": 1.47,
+      "text": "is going to be it's going to be there'll"
+    },
+    {
+      "index": 927,
+      "start": 2945.72,
+      "end": 2948.71,
+      "duration": 2.99,
+      "text": "be that half of a"
+    },
+    {
+      "index": 928,
+      "start": 2948.72,
+      "end": 2951.51,
+      "duration": 2.79,
+      "text": "parallelogram I mean basically this"
+    },
+    {
+      "index": 929,
+      "start": 2951.52,
+      "end": 2953.91,
+      "duration": 2.39,
+      "text": "can't be completely new right we've got"
+    },
+    {
+      "index": 930,
+      "start": 2953.92,
+      "end": 2956.829,
+      "duration": 2.909,
+      "text": "the area when we we know the area when"
+    },
+    {
+      "index": 931,
+      "start": 2956.839,
+      "end": 2959.349,
+      "duration": 2.51,
+      "text": "this is"
+    },
+    {
+      "index": 932,
+      "start": 2959.359,
+      "end": 2962.99,
+      "duration": 3.631,
+      "text": "0 now we just want to lift our s"
+    },
+    {
+      "index": 933,
+      "start": 2963.0,
+      "end": 2966.39,
+      "duration": 3.39,
+      "text": "slightly and get the area when all so"
+    },
+    {
+      "index": 934,
+      "start": 2966.4,
+      "end": 2968.03,
+      "duration": 1.63,
+      "text": "let me write down what it what it comes"
+    },
+    {
+      "index": 935,
+      "start": 2968.04,
+      "end": 2970.549,
+      "duration": 2.509,
+      "text": "out to be it turns out that if you do"
+    },
+    {
+      "index": 936,
+      "start": 2970.559,
+      "end": 2971.67,
+      "duration": 1.111,
+      "text": "this"
+    },
+    {
+      "index": 937,
+      "start": 2971.68,
+      "end": 2980.99,
+      "duration": 9.31,
+      "text": "X1 y1 and a one X2 Y 2 and a 1 X3 Y3 and"
+    },
+    {
+      "index": 938,
+      "start": 2981.0,
+      "end": 2983.19,
+      "duration": 2.19,
+      "text": "a one that that"
+    },
+    {
+      "index": 939,
+      "start": 2983.2,
+      "end": 2986.309,
+      "duration": 3.109,
+      "text": "works that that's determinant symbol of"
+    },
+    {
+      "index": 940,
+      "start": 2986.319,
+      "end": 2988.349,
+      "duration": 2.03,
+      "text": "course it's"
+    },
+    {
+      "index": 941,
+      "start": 2988.359,
+      "end": 2991.15,
+      "duration": 2.791,
+      "text": "just if I gave you that determinate to"
+    },
+    {
+      "index": 942,
+      "start": 2991.16,
+      "end": 2993.589,
+      "duration": 2.429,
+      "text": "find you might subtract this Row from"
+    },
+    {
+      "index": 943,
+      "start": 2993.599,
+      "end": 2996.19,
+      "duration": 2.591,
+      "text": "this it would kill that one subtract"
+    },
+    {
+      "index": 944,
+      "start": 2996.2,
+      "end": 2998.15,
+      "duration": 1.95,
+      "text": "this row from this it would kill that"
+    },
+    {
+      "index": 945,
+      "start": 2998.16,
+      "end": 3001.15,
+      "duration": 2.99,
+      "text": "one then you'd have a simple determinant"
+    },
+    {
+      "index": 946,
+      "start": 3001.16,
+      "end": 3005.349,
+      "duration": 4.189,
+      "text": "to do with differences and it would"
+    },
+    {
+      "index": 947,
+      "start": 3005.359,
+      "end": 3009.15,
+      "duration": 3.791,
+      "text": "it this little subtraction what I did re"
+    },
+    {
+      "index": 948,
+      "start": 3009.16,
+      "end": 3013.349,
+      "duration": 4.189,
+      "text": "was equivalent to moving the triangle to"
+    },
+    {
+      "index": 949,
+      "start": 3013.359,
+      "end": 3015.51,
+      "duration": 2.151,
+      "text": "start at the"
+    },
+    {
+      "index": 950,
+      "start": 3015.52,
+      "end": 3019.789,
+      "duration": 4.269,
+      "text": "origin I did it fast because time is up"
+    },
+    {
+      "index": 951,
+      "start": 3019.799,
+      "end": 3021.109,
+      "duration": 1.31,
+      "text": "and I didn't"
+    },
+    {
+      "index": 952,
+      "start": 3021.119,
+      "end": 3024.23,
+      "duration": 3.111,
+      "text": "complete that proof of"
+    },
+    {
+      "index": 953,
+      "start": 3024.24,
+      "end": 3027.349,
+      "duration": 3.109,
+      "text": "3B I I'll leave the the book has a"
+    },
+    {
+      "index": 954,
+      "start": 3027.359,
+      "end": 3029.87,
+      "duration": 2.511,
+      "text": "carefully drawn figure to show why that"
+    },
+    {
+      "index": 955,
+      "start": 3029.88,
+      "end": 3033.39,
+      "duration": 3.51,
+      "text": "works but I hope you saw the main point"
+    },
+    {
+      "index": 956,
+      "start": 3033.4,
+      "end": 3036.829,
+      "duration": 3.429,
+      "text": "is that for area and volume determinant"
+    },
+    {
+      "index": 957,
+      "start": 3036.839,
+      "end": 3038.71,
+      "duration": 1.871,
+      "text": "gives a great"
+    },
+    {
+      "index": 958,
+      "start": 3038.72,
+      "end": 3043.43,
+      "duration": 4.71,
+      "text": "formula okay and next lectures are about"
+    },
+    {
+      "index": 959,
+      "start": 3043.44,
+      "end": 3047.63,
+      "duration": 4.19,
+      "text": "igen values so we're really into the big"
+    },
+    {
+      "index": 960,
+      "start": 3047.64,
+      "end": 3051.64,
+      "duration": 4.0,
+      "text": "stuff thanks"
+    }
+  ],
+  "course": {
+    "category": "Mathematics",
+    "title": "Linear Algebra - Gilbert Strang",
+    "source_url": "https://www.youtube.com/playlist?list=PL49CF3715CB9EF31D"
+  }
+}

@@ -1,0 +1,7494 @@
+{
+  "video": {
+    "id": "YzZUIYRCE38",
+    "title": "14. Orthogonal Vectors and Subspaces",
+    "url": "https://www.youtube.com/watch?v=YzZUIYRCE38",
+    "channel": "MIT OpenCourseWare",
+    "duration": 2987,
+    "language": "en"
+  },
+  "segment_count": 1068,
+  "segments": [
+    {
+      "index": 0,
+      "start": 13.51,
+      "end": 13.52,
+      "duration": 0.01,
+      "text": "Okay."
+    },
+    {
+      "index": 1,
+      "start": 13.52,
+      "end": 14.71,
+      "duration": 1.19,
+      "text": "Uh"
+    },
+    {
+      "index": 2,
+      "start": 14.72,
+      "end": 19.15,
+      "duration": 4.43,
+      "text": "Cameras are rolling. This is lecture 14."
+    },
+    {
+      "index": 3,
+      "start": 19.16,
+      "end": 21.79,
+      "duration": 2.63,
+      "text": "Starting a new chapter."
+    },
+    {
+      "index": 4,
+      "start": 21.8,
+      "end": 24.71,
+      "duration": 2.91,
+      "text": "Chapter about orthogonality."
+    },
+    {
+      "index": 5,
+      "start": 24.72,
+      "end": 27.67,
+      "duration": 2.95,
+      "text": "What it means for vectors to be"
+    },
+    {
+      "index": 6,
+      "start": 27.68,
+      "end": 29.43,
+      "duration": 1.75,
+      "text": "orthogonal."
+    },
+    {
+      "index": 7,
+      "start": 29.44,
+      "end": 32.19,
+      "duration": 2.75,
+      "text": "What it means for subspaces to be"
+    },
+    {
+      "index": 8,
+      "start": 32.2,
+      "end": 35.03,
+      "duration": 2.83,
+      "text": "orthogonal. What it means for bases to"
+    },
+    {
+      "index": 9,
+      "start": 35.04,
+      "end": 37.35,
+      "duration": 2.31,
+      "text": "be orthogonal."
+    },
+    {
+      "index": 10,
+      "start": 37.36,
+      "end": 40.27,
+      "duration": 2.91,
+      "text": "So, a 90° This is"
+    },
+    {
+      "index": 11,
+      "start": 40.28,
+      "end": 44.43,
+      "duration": 4.15,
+      "text": "This is a 90° chapter."
+    },
+    {
+      "index": 12,
+      "start": 44.44,
+      "end": 46.87,
+      "duration": 2.43,
+      "text": "So, what does it mean?"
+    },
+    {
+      "index": 13,
+      "start": 46.88,
+      "end": 51.03,
+      "duration": 4.15,
+      "text": "Uh let me let me jump to subspaces"
+    },
+    {
+      "index": 14,
+      "start": 51.04,
+      "end": 53.71,
+      "duration": 2.67,
+      "text": "because I've drawn here"
+    },
+    {
+      "index": 15,
+      "start": 53.72,
+      "end": 56.27,
+      "duration": 2.55,
+      "text": "the big picture. This is the"
+    },
+    {
+      "index": 16,
+      "start": 56.28,
+      "end": 59.87,
+      "duration": 3.59,
+      "text": "This is the 1806 picture here."
+    },
+    {
+      "index": 17,
+      "start": 59.88,
+      "end": 61.23,
+      "duration": 1.35,
+      "text": "And"
+    },
+    {
+      "index": 18,
+      "start": 61.24,
+      "end": 62.31,
+      "duration": 1.07,
+      "text": "uh"
+    },
+    {
+      "index": 19,
+      "start": 62.32,
+      "end": 64.39,
+      "duration": 2.07,
+      "text": "Hold it down, guys."
+    },
+    {
+      "index": 20,
+      "start": 64.4,
+      "end": 67.95,
+      "duration": 3.55,
+      "text": "Uh so, this is the picture and we know a"
+    },
+    {
+      "index": 21,
+      "start": 67.96,
+      "end": 70.47,
+      "duration": 2.51,
+      "text": "lot about that picture already."
+    },
+    {
+      "index": 22,
+      "start": 70.48,
+      "end": 74.51,
+      "duration": 4.03,
+      "text": "We know the dimension of every subspace."
+    },
+    {
+      "index": 23,
+      "start": 74.52,
+      "end": 78.19,
+      "duration": 3.67,
+      "text": "We know that these dimensions are"
+    },
+    {
+      "index": 24,
+      "start": 78.2,
+      "end": 82.47,
+      "duration": 4.27,
+      "text": "r and n minus r."
+    },
+    {
+      "index": 25,
+      "start": 82.48,
+      "end": 85.91,
+      "duration": 3.43,
+      "text": "We know that these dimensions are r and"
+    },
+    {
+      "index": 26,
+      "start": 85.92,
+      "end": 88.31,
+      "duration": 2.39,
+      "text": "m minus r."
+    },
+    {
+      "index": 27,
+      "start": 88.32,
+      "end": 89.63,
+      "duration": 1.31,
+      "text": "What we"
+    },
+    {
+      "index": 28,
+      "start": 89.64,
+      "end": 92.11,
+      "duration": 2.47,
+      "text": "What I want to show now is what this"
+    },
+    {
+      "index": 29,
+      "start": 92.12,
+      "end": 94.03,
+      "duration": 1.91,
+      "text": "figure is saying"
+    },
+    {
+      "index": 30,
+      "start": 94.04,
+      "end": 95.59,
+      "duration": 1.55,
+      "text": "that"
+    },
+    {
+      "index": 31,
+      "start": 95.6,
+      "end": 99.27,
+      "duration": 3.67,
+      "text": "the angle betw- wait, the figure is like"
+    },
+    {
+      "index": 32,
+      "start": 99.28,
+      "end": 102.43,
+      "duration": 3.15,
+      "text": "just my attempt to draw what I'm now"
+    },
+    {
+      "index": 33,
+      "start": 102.44,
+      "end": 104.91,
+      "duration": 2.47,
+      "text": "going to say that"
+    },
+    {
+      "index": 34,
+      "start": 104.92,
+      "end": 108.23,
+      "duration": 3.31,
+      "text": "the angle between these subspaces is"
+    },
+    {
+      "index": 35,
+      "start": 108.24,
+      "end": 110.43,
+      "duration": 2.19,
+      "text": "90°."
+    },
+    {
+      "index": 36,
+      "start": 110.44,
+      "end": 112.99,
+      "duration": 2.55,
+      "text": "And the angle between these subspaces is"
+    },
+    {
+      "index": 37,
+      "start": 113.0,
+      "end": 114.87,
+      "duration": 1.87,
+      "text": "90°. Now, I have to say, what does that"
+    },
+    {
+      "index": 38,
+      "start": 114.88,
+      "end": 117.63,
+      "duration": 2.75,
+      "text": "mean? What does it mean for a subspaces"
+    },
+    {
+      "index": 39,
+      "start": 117.64,
+      "end": 121.03,
+      "duration": 3.39,
+      "text": "to be orthogonal?"
+    },
+    {
+      "index": 40,
+      "start": 121.04,
+      "end": 124.67,
+      "duration": 3.63,
+      "text": "But I hope you appreciate the"
+    },
+    {
+      "index": 41,
+      "start": 124.68,
+      "end": 126.95,
+      "duration": 2.27,
+      "text": "beauty of this picture."
+    },
+    {
+      "index": 42,
+      "start": 126.96,
+      "end": 128.91,
+      "duration": 1.95,
+      "text": "That that"
+    },
+    {
+      "index": 43,
+      "start": 128.92,
+      "end": 131.99,
+      "duration": 3.07,
+      "text": "those subspaces are going to come out to"
+    },
+    {
+      "index": 44,
+      "start": 132.0,
+      "end": 134.07,
+      "duration": 2.07,
+      "text": "be orthogonal."
+    },
+    {
+      "index": 45,
+      "start": 134.08,
+      "end": 138.11,
+      "duration": 4.03,
+      "text": "Those two and also those two."
+    },
+    {
+      "index": 46,
+      "start": 138.12,
+      "end": 140.31,
+      "duration": 2.19,
+      "text": "So that's like"
+    },
+    {
+      "index": 47,
+      "start": 140.32,
+      "end": 143.47,
+      "duration": 3.15,
+      "text": "one point"
+    },
+    {
+      "index": 48,
+      "start": 143.48,
+      "end": 146.35,
+      "duration": 2.87,
+      "text": "one important point to step forward in"
+    },
+    {
+      "index": 49,
+      "start": 146.36,
+      "end": 148.91,
+      "duration": 2.55,
+      "text": "understanding those subspaces."
+    },
+    {
+      "index": 50,
+      "start": 148.92,
+      "end": 151.27,
+      "duration": 2.35,
+      "text": "We knew what each subspace was like. We"
+    },
+    {
+      "index": 51,
+      "start": 151.28,
+      "end": 154.03,
+      "duration": 2.75,
+      "text": "could compute bases for them. Now we"
+    },
+    {
+      "index": 52,
+      "start": 154.04,
+      "end": 155.39,
+      "duration": 1.35,
+      "text": "know more."
+    },
+    {
+      "index": 53,
+      "start": 155.4,
+      "end": 158.15,
+      "duration": 2.75,
+      "text": "Or we will in a few minutes."
+    },
+    {
+      "index": 54,
+      "start": 158.16,
+      "end": 160.43,
+      "duration": 2.27,
+      "text": "Okay, I have to say"
+    },
+    {
+      "index": 55,
+      "start": 160.44,
+      "end": 162.43,
+      "duration": 1.99,
+      "text": "first of all, what does it mean for two"
+    },
+    {
+      "index": 56,
+      "start": 162.44,
+      "end": 164.87,
+      "duration": 2.43,
+      "text": "vectors to be orthogonal?"
+    },
+    {
+      "index": 57,
+      "start": 164.88,
+      "end": 169.47,
+      "duration": 4.59,
+      "text": "So let me start with that."
+    },
+    {
+      "index": 58,
+      "start": 180.229,
+      "end": 180.239,
+      "duration": 0.01,
+      "text": "The word orthogonal is is just another"
+    },
+    {
+      "index": 59,
+      "start": 180.239,
+      "end": 182.55,
+      "duration": 2.311,
+      "text": "word for perpendicular."
+    },
+    {
+      "index": 60,
+      "start": 182.56,
+      "end": 185.71,
+      "duration": 3.15,
+      "text": "It means that in n-dimensional space"
+    },
+    {
+      "index": 61,
+      "start": 185.72,
+      "end": 190.229,
+      "duration": 4.509,
+      "text": "the angle between those vectors is 90°."
+    },
+    {
+      "index": 62,
+      "start": 190.239,
+      "end": 191.99,
+      "duration": 1.751,
+      "text": "It means that they form a right"
+    },
+    {
+      "index": 63,
+      "start": 192.0,
+      "end": 193.43,
+      "duration": 1.43,
+      "text": "triangle."
+    },
+    {
+      "index": 64,
+      "start": 193.44,
+      "end": 197.71,
+      "duration": 4.27,
+      "text": "It It even means that the going way back"
+    },
+    {
+      "index": 65,
+      "start": 197.72,
+      "end": 199.43,
+      "duration": 1.71,
+      "text": "to the Greeks"
+    },
+    {
+      "index": 66,
+      "start": 199.44,
+      "end": 201.03,
+      "duration": 1.59,
+      "text": "that this"
+    },
+    {
+      "index": 67,
+      "start": 201.04,
+      "end": 206.87,
+      "duration": 5.83,
+      "text": "uh angle that this triangle of vector x"
+    },
+    {
+      "index": 68,
+      "start": 206.88,
+      "end": 209.91,
+      "duration": 3.03,
+      "text": "of vector y"
+    },
+    {
+      "index": 69,
+      "start": 209.92,
+      "end": 213.43,
+      "duration": 3.51,
+      "text": "and the vector x + y"
+    },
+    {
+      "index": 70,
+      "start": 213.44,
+      "end": 215.15,
+      "duration": 1.71,
+      "text": "of course that'll be the"
+    },
+    {
+      "index": 71,
+      "start": 215.16,
+      "end": 217.19,
+      "duration": 2.03,
+      "text": "hypotenuse."
+    },
+    {
+      "index": 72,
+      "start": 217.2,
+      "end": 220.07,
+      "duration": 2.87,
+      "text": "So what was it the Greeks figured out"
+    },
+    {
+      "index": 73,
+      "start": 220.08,
+      "end": 221.59,
+      "duration": 1.51,
+      "text": "and it's"
+    },
+    {
+      "index": 74,
+      "start": 221.6,
+      "end": 222.67,
+      "duration": 1.07,
+      "text": "neat."
+    },
+    {
+      "index": 75,
+      "start": 222.68,
+      "end": 225.79,
+      "duration": 3.11,
+      "text": "It's the fact that the"
+    },
+    {
+      "index": 76,
+      "start": 225.8,
+      "end": 226.949,
+      "duration": 1.149,
+      "text": "So"
+    },
+    {
+      "index": 77,
+      "start": 226.959,
+      "end": 228.79,
+      "duration": 1.831,
+      "text": "these are orthogonal. This is a right"
+    },
+    {
+      "index": 78,
+      "start": 228.8,
+      "end": 232.43,
+      "duration": 3.63,
+      "text": "angle. If So So let me put the great"
+    },
+    {
+      "index": 79,
+      "start": 232.44,
+      "end": 237.63,
+      "duration": 5.19,
+      "text": "name down, Pythagoras."
+    },
+    {
+      "index": 80,
+      "start": 239.55,
+      "end": 239.56,
+      "duration": 0.01,
+      "text": "I'm I'm looking for What am I looking"
+    },
+    {
+      "index": 81,
+      "start": 239.56,
+      "end": 240.55,
+      "duration": 0.99,
+      "text": "for?"
+    },
+    {
+      "index": 82,
+      "start": 240.56,
+      "end": 244.07,
+      "duration": 3.51,
+      "text": "I'm looking for the condition"
+    },
+    {
+      "index": 83,
+      "start": 244.08,
+      "end": 245.99,
+      "duration": 1.91,
+      "text": "if you give me two vectors, how do I"
+    },
+    {
+      "index": 84,
+      "start": 246.0,
+      "end": 248.47,
+      "duration": 2.47,
+      "text": "know if they're orthogonal?"
+    },
+    {
+      "index": 85,
+      "start": 248.48,
+      "end": 250.47,
+      "duration": 1.99,
+      "text": "How can I tell two perpendicular"
+    },
+    {
+      "index": 86,
+      "start": 250.48,
+      "end": 253.15,
+      "duration": 2.67,
+      "text": "vectors? And actually, you probably know"
+    },
+    {
+      "index": 87,
+      "start": 253.16,
+      "end": 254.71,
+      "duration": 1.55,
+      "text": "the answer. Let me write the answer"
+    },
+    {
+      "index": 88,
+      "start": 254.72,
+      "end": 257.43,
+      "duration": 2.71,
+      "text": "down. Orthogonal vectors, what's the"
+    },
+    {
+      "index": 89,
+      "start": 257.44,
+      "end": 260.509,
+      "duration": 3.069,
+      "text": "test for orthogonality?"
+    },
+    {
+      "index": 90,
+      "start": 260.519,
+      "end": 264.19,
+      "duration": 3.671,
+      "text": "I take the dot product,"
+    },
+    {
+      "index": 91,
+      "start": 264.2,
+      "end": 270.23,
+      "duration": 6.03,
+      "text": "which I tend to write as X transpose Y,"
+    },
+    {
+      "index": 92,
+      "start": 270.24,
+      "end": 273.43,
+      "duration": 3.19,
+      "text": "cuz that's a row times a column,"
+    },
+    {
+      "index": 93,
+      "start": 273.44,
+      "end": 275.95,
+      "duration": 2.51,
+      "text": "and that matrix multiplication just"
+    },
+    {
+      "index": 94,
+      "start": 275.96,
+      "end": 280.71,
+      "duration": 4.75,
+      "text": "gives me the right thing, that X1Y1 +"
+    },
+    {
+      "index": 95,
+      "start": 280.72,
+      "end": 283.11,
+      "duration": 2.39,
+      "text": "X2Y2 and so on."
+    },
+    {
+      "index": 96,
+      "start": 283.12,
+      "end": 287.35,
+      "duration": 4.23,
+      "text": "So, these vectors are orthogonal if this"
+    },
+    {
+      "index": 97,
+      "start": 287.36,
+      "end": 291.03,
+      "duration": 3.67,
+      "text": "result X transpose Y is"
+    },
+    {
+      "index": 98,
+      "start": 291.04,
+      "end": 292.51,
+      "duration": 1.47,
+      "text": "zero."
+    },
+    {
+      "index": 99,
+      "start": 292.52,
+      "end": 294.07,
+      "duration": 1.55,
+      "text": "That's the test."
+    },
+    {
+      "index": 100,
+      "start": 294.08,
+      "end": 295.27,
+      "duration": 1.19,
+      "text": "Okay."
+    },
+    {
+      "index": 101,
+      "start": 295.28,
+      "end": 297.79,
+      "duration": 2.51,
+      "text": "Can I connect that"
+    },
+    {
+      "index": 102,
+      "start": 297.8,
+      "end": 300.79,
+      "duration": 2.99,
+      "text": "to other things?"
+    },
+    {
+      "index": 103,
+      "start": 302.67,
+      "end": 302.68,
+      "duration": 0.01,
+      "text": "I mean, it's like it's amazing. It's"
+    },
+    {
+      "index": 104,
+      "start": 302.68,
+      "end": 305.87,
+      "duration": 3.19,
+      "text": "It's just beautiful that here we have"
+    },
+    {
+      "index": 105,
+      "start": 305.88,
+      "end": 307.99,
+      "duration": 2.11,
+      "text": "and we're in N dimensions,"
+    },
+    {
+      "index": 106,
+      "start": 308.0,
+      "end": 309.63,
+      "duration": 1.63,
+      "text": "we've got a couple of vectors, we want"
+    },
+    {
+      "index": 107,
+      "start": 309.64,
+      "end": 311.87,
+      "duration": 2.23,
+      "text": "to know the angle between them,"
+    },
+    {
+      "index": 108,
+      "start": 311.88,
+      "end": 315.03,
+      "duration": 3.15,
+      "text": "and the right thing to look at is"
+    },
+    {
+      "index": 109,
+      "start": 315.04,
+      "end": 316.79,
+      "duration": 1.75,
+      "text": "the simplest thing that you could"
+    },
+    {
+      "index": 110,
+      "start": 316.8,
+      "end": 319.99,
+      "duration": 3.19,
+      "text": "imagine, the dot product. Okay. Now,"
+    },
+    {
+      "index": 111,
+      "start": 320.0,
+      "end": 323.15,
+      "duration": 3.15,
+      "text": "why? So, I'm answering the question now,"
+    },
+    {
+      "index": 112,
+      "start": 323.16,
+      "end": 326.55,
+      "duration": 3.39,
+      "text": "why let's just some"
+    },
+    {
+      "index": 113,
+      "start": 326.56,
+      "end": 329.55,
+      "duration": 2.99,
+      "text": "Let's add some uh"
+    },
+    {
+      "index": 114,
+      "start": 329.56,
+      "end": 332.51,
+      "duration": 2.95,
+      "text": "justification to this fact that that's"
+    },
+    {
+      "index": 115,
+      "start": 332.52,
+      "end": 334.909,
+      "duration": 2.389,
+      "text": "the test. Okay."
+    },
+    {
+      "index": 116,
+      "start": 334.919,
+      "end": 336.75,
+      "duration": 1.831,
+      "text": "So, Pythagoras would say we've got a"
+    },
+    {
+      "index": 117,
+      "start": 336.76,
+      "end": 339.67,
+      "duration": 2.91,
+      "text": "right triangle if that length squared"
+    },
+    {
+      "index": 118,
+      "start": 339.68,
+      "end": 341.55,
+      "duration": 1.87,
+      "text": "plus that length squared equals that"
+    },
+    {
+      "index": 119,
+      "start": 341.56,
+      "end": 343.11,
+      "duration": 1.55,
+      "text": "length squared."
+    },
+    {
+      "index": 120,
+      "start": 343.12,
+      "end": 345.909,
+      "duration": 2.789,
+      "text": "Okay. Can I write it as"
+    },
+    {
+      "index": 121,
+      "start": 345.919,
+      "end": 347.95,
+      "duration": 2.031,
+      "text": "X squared"
+    },
+    {
+      "index": 122,
+      "start": 347.96,
+      "end": 350.47,
+      "duration": 2.51,
+      "text": "plus y squared"
+    },
+    {
+      "index": 123,
+      "start": 350.48,
+      "end": 352.07,
+      "duration": 1.59,
+      "text": "equals"
+    },
+    {
+      "index": 124,
+      "start": 352.08,
+      "end": 354.83,
+      "duration": 2.75,
+      "text": "x plus y squared."
+    },
+    {
+      "index": 125,
+      "start": 354.84,
+      "end": 356.79,
+      "duration": 1.95,
+      "text": "Now, don't please don't think that this"
+    },
+    {
+      "index": 126,
+      "start": 356.8,
+      "end": 359.07,
+      "duration": 2.27,
+      "text": "is always true."
+    },
+    {
+      "index": 127,
+      "start": 359.08,
+      "end": 361.71,
+      "duration": 2.63,
+      "text": "This is only going to be true"
+    },
+    {
+      "index": 128,
+      "start": 361.72,
+      "end": 363.31,
+      "duration": 1.59,
+      "text": "in this"
+    },
+    {
+      "index": 129,
+      "start": 363.32,
+      "end": 364.91,
+      "duration": 1.59,
+      "text": "It's going to be"
+    },
+    {
+      "index": 130,
+      "start": 364.92,
+      "end": 367.91,
+      "duration": 2.99,
+      "text": "equivalent to orthogonality. For other"
+    },
+    {
+      "index": 131,
+      "start": 367.92,
+      "end": 371.11,
+      "duration": 3.19,
+      "text": "triangles, of course, it's not true."
+    },
+    {
+      "index": 132,
+      "start": 371.12,
+      "end": 373.43,
+      "duration": 2.31,
+      "text": "For other triangles, it's not. But for a"
+    },
+    {
+      "index": 133,
+      "start": 373.44,
+      "end": 377.39,
+      "duration": 3.95,
+      "text": "right triangle, somehow that fact should"
+    },
+    {
+      "index": 134,
+      "start": 377.4,
+      "end": 379.63,
+      "duration": 2.23,
+      "text": "connect to that fact. Can we just make"
+    },
+    {
+      "index": 135,
+      "start": 379.64,
+      "end": 383.47,
+      "duration": 3.83,
+      "text": "that connection?"
+    },
+    {
+      "index": 136,
+      "start": 386.51,
+      "end": 386.52,
+      "duration": 0.01,
+      "text": "What's the connection between this test"
+    },
+    {
+      "index": 137,
+      "start": 386.52,
+      "end": 389.31,
+      "duration": 2.79,
+      "text": "for orthogonality and this"
+    },
+    {
+      "index": 138,
+      "start": 389.32,
+      "end": 391.55,
+      "duration": 2.23,
+      "text": "statement of orthogonality? Well, I"
+    },
+    {
+      "index": 139,
+      "start": 391.56,
+      "end": 394.07,
+      "duration": 2.51,
+      "text": "guess I have to say, what is the length"
+    },
+    {
+      "index": 140,
+      "start": 394.08,
+      "end": 395.51,
+      "duration": 1.43,
+      "text": "squared?"
+    },
+    {
+      "index": 141,
+      "start": 395.52,
+      "end": 397.03,
+      "duration": 1.51,
+      "text": "So, let's"
+    },
+    {
+      "index": 142,
+      "start": 397.04,
+      "end": 399.11,
+      "duration": 2.07,
+      "text": "continue on the"
+    },
+    {
+      "index": 143,
+      "start": 399.12,
+      "end": 402.31,
+      "duration": 3.19,
+      "text": "board underneath with that equation."
+    },
+    {
+      "index": 144,
+      "start": 402.32,
+      "end": 404.47,
+      "duration": 2.15,
+      "text": "Give me another way to express the"
+    },
+    {
+      "index": 145,
+      "start": 404.48,
+      "end": 407.67,
+      "duration": 3.19,
+      "text": "length squared of a vector."
+    },
+    {
+      "index": 146,
+      "start": 407.68,
+      "end": 409.95,
+      "duration": 2.27,
+      "text": "And let me just give you a vector."
+    },
+    {
+      "index": 147,
+      "start": 409.96,
+      "end": 413.35,
+      "duration": 3.39,
+      "text": "The vector 1 2 3."
+    },
+    {
+      "index": 148,
+      "start": 413.36,
+      "end": 415.67,
+      "duration": 2.31,
+      "text": "That's in three dimensions."
+    },
+    {
+      "index": 149,
+      "start": 415.68,
+      "end": 418.83,
+      "duration": 3.15,
+      "text": "What is the length squared of the vector"
+    },
+    {
+      "index": 150,
+      "start": 418.84,
+      "end": 423.35,
+      "duration": 4.51,
+      "text": "x equal 1 2 3?"
+    },
+    {
+      "index": 151,
+      "start": 426.75,
+      "end": 426.76,
+      "duration": 0.01,
+      "text": "So, how do you find the length squared?"
+    },
+    {
+      "index": 152,
+      "start": 426.76,
+      "end": 428.87,
+      "duration": 2.11,
+      "text": "Well, really you're just"
+    },
+    {
+      "index": 153,
+      "start": 428.88,
+      "end": 430.63,
+      "duration": 1.75,
+      "text": "you want the length of that vector that"
+    },
+    {
+      "index": 154,
+      "start": 430.64,
+      "end": 434.909,
+      "duration": 4.269,
+      "text": "goes along one, up two, and out three."
+    },
+    {
+      "index": 155,
+      "start": 434.919,
+      "end": 436.39,
+      "duration": 1.471,
+      "text": "And And we'll"
+    },
+    {
+      "index": 156,
+      "start": 436.4,
+      "end": 438.83,
+      "duration": 2.43,
+      "text": "come come back to that right triangle"
+    },
+    {
+      "index": 157,
+      "start": 438.84,
+      "end": 439.87,
+      "duration": 1.03,
+      "text": "stuff."
+    },
+    {
+      "index": 158,
+      "start": 439.88,
+      "end": 444.47,
+      "duration": 4.59,
+      "text": "The length squared is This is exactly"
+    },
+    {
+      "index": 159,
+      "start": 444.48,
+      "end": 448.79,
+      "duration": 4.31,
+      "text": "x transpose x."
+    },
+    {
+      "index": 160,
+      "start": 451.15,
+      "end": 451.16,
+      "duration": 0.01,
+      "text": "Whenever I see x transpose x, I know"
+    },
+    {
+      "index": 161,
+      "start": 451.16,
+      "end": 452.75,
+      "duration": 1.59,
+      "text": "I've got"
+    },
+    {
+      "index": 162,
+      "start": 452.76,
+      "end": 454.95,
+      "duration": 2.19,
+      "text": "a number that's positive."
+    },
+    {
+      "index": 163,
+      "start": 454.96,
+      "end": 458.27,
+      "duration": 3.31,
+      "text": "It's a length squared unless it unless x"
+    },
+    {
+      "index": 164,
+      "start": 458.28,
+      "end": 460.79,
+      "duration": 2.51,
+      "text": "happens to be the zero vector. That's"
+    },
+    {
+      "index": 165,
+      "start": 460.8,
+      "end": 464.47,
+      "duration": 3.67,
+      "text": "the one case where the length is zero."
+    },
+    {
+      "index": 166,
+      "start": 464.48,
+      "end": 468.27,
+      "duration": 3.79,
+      "text": "So, right this is just X1 squared plus"
+    },
+    {
+      "index": 167,
+      "start": 468.28,
+      "end": 471.87,
+      "duration": 3.59,
+      "text": "X2 squared plus so on plus Xn squared."
+    },
+    {
+      "index": 168,
+      "start": 471.88,
+      "end": 474.51,
+      "duration": 2.63,
+      "text": "So, one in the example I gave you, what"
+    },
+    {
+      "index": 169,
+      "start": 474.52,
+      "end": 476.71,
+      "duration": 2.19,
+      "text": "was the length squared of that vector 1"
+    },
+    {
+      "index": 170,
+      "start": 476.72,
+      "end": 479.19,
+      "duration": 2.47,
+      "text": "2 3?"
+    },
+    {
+      "index": 171,
+      "start": 479.2,
+      "end": 481.99,
+      "duration": 2.79,
+      "text": "So, you square those, you get 1 4 and 9,"
+    },
+    {
+      "index": 172,
+      "start": 482.0,
+      "end": 484.27,
+      "duration": 2.27,
+      "text": "you add, you get 14."
+    },
+    {
+      "index": 173,
+      "start": 484.28,
+      "end": 488.55,
+      "duration": 4.27,
+      "text": "So, the vector 1 2 3 has length 14."
+    },
+    {
+      "index": 174,
+      "start": 488.56,
+      "end": 491.07,
+      "duration": 2.51,
+      "text": "So, let me just let me just put down a"
+    },
+    {
+      "index": 175,
+      "start": 491.08,
+      "end": 492.909,
+      "duration": 1.829,
+      "text": "vector here."
+    },
+    {
+      "index": 176,
+      "start": 492.919,
+      "end": 499.15,
+      "duration": 6.231,
+      "text": "Let X be the vector 1 2 3."
+    },
+    {
+      "index": 177,
+      "start": 500.59,
+      "end": 500.6,
+      "duration": 0.01,
+      "text": "Let me cook up a vector that's"
+    },
+    {
+      "index": 178,
+      "start": 500.6,
+      "end": 505.47,
+      "duration": 4.87,
+      "text": "orthogonal to it."
+    },
+    {
+      "index": 179,
+      "start": 507.47,
+      "end": 507.48,
+      "duration": 0.01,
+      "text": "So, what's the vector that's orthogonal"
+    },
+    {
+      "index": 180,
+      "start": 507.48,
+      "end": 508.59,
+      "duration": 1.11,
+      "text": "So, let"
+    },
+    {
+      "index": 181,
+      "start": 508.6,
+      "end": 512.31,
+      "duration": 3.71,
+      "text": "write down here X squared is 1 plus 4"
+    },
+    {
+      "index": 182,
+      "start": 512.32,
+      "end": 514.87,
+      "duration": 2.55,
+      "text": "plus 9 14."
+    },
+    {
+      "index": 183,
+      "start": 514.88,
+      "end": 516.75,
+      "duration": 1.87,
+      "text": "Let me cook up a vector that's"
+    },
+    {
+      "index": 184,
+      "start": 516.76,
+      "end": 518.909,
+      "duration": 2.149,
+      "text": "orthogonal to it."
+    },
+    {
+      "index": 185,
+      "start": 518.919,
+      "end": 525.07,
+      "duration": 6.151,
+      "text": "We'll get"
+    },
+    {
+      "index": 186,
+      "start": 527.07,
+      "end": 527.08,
+      "duration": 0.01,
+      "text": "Right, that that those two vectors are"
+    },
+    {
+      "index": 187,
+      "start": 527.08,
+      "end": 534.35,
+      "duration": 7.27,
+      "text": "orthogonal. The length of Y squared is"
+    },
+    {
+      "index": 188,
+      "start": 535.79,
+      "end": 535.8,
+      "duration": 0.01,
+      "text": "five."
+    },
+    {
+      "index": 189,
+      "start": 535.8,
+      "end": 538.829,
+      "duration": 3.029,
+      "text": "And X plus Y"
+    },
+    {
+      "index": 190,
+      "start": 538.839,
+      "end": 540.63,
+      "duration": 1.791,
+      "text": "is"
+    },
+    {
+      "index": 191,
+      "start": 540.64,
+      "end": 543.75,
+      "duration": 3.11,
+      "text": "1 and 2 making 3, 2 and minus 1 making"
+    },
+    {
+      "index": 192,
+      "start": 543.76,
+      "end": 547.19,
+      "duration": 3.43,
+      "text": "1, 3 and 0 making 3, and the length of"
+    },
+    {
+      "index": 193,
+      "start": 547.2,
+      "end": 550.03,
+      "duration": 2.83,
+      "text": "this squared"
+    },
+    {
+      "index": 194,
+      "start": 550.04,
+      "end": 555.63,
+      "duration": 5.59,
+      "text": "is 9 plus 1 plus 9 19."
+    },
+    {
+      "index": 195,
+      "start": 555.64,
+      "end": 558.71,
+      "duration": 3.07,
+      "text": "And sure enough"
+    },
+    {
+      "index": 196,
+      "start": 561.19,
+      "end": 561.2,
+      "duration": 0.01,
+      "text": "I haven't proved anything. I've just"
+    },
+    {
+      "index": 197,
+      "start": 561.2,
+      "end": 563.07,
+      "duration": 1.87,
+      "text": "like"
+    },
+    {
+      "index": 198,
+      "start": 563.08,
+      "end": 568.23,
+      "duration": 5.15,
+      "text": "checked to see that my my my test X"
+    },
+    {
+      "index": 199,
+      "start": 568.24,
+      "end": 570.95,
+      "duration": 2.71,
+      "text": "transpose Y equals 0, which is true,"
+    },
+    {
+      "index": 200,
+      "start": 570.96,
+      "end": 573.43,
+      "duration": 2.47,
+      "text": "right? Everybody sees that X transpose Y"
+    },
+    {
+      "index": 201,
+      "start": 573.44,
+      "end": 575.31,
+      "duration": 1.87,
+      "text": "is 0 here."
+    },
+    {
+      "index": 202,
+      "start": 575.32,
+      "end": 577.83,
+      "duration": 2.51,
+      "text": "That that's maybe the main point that"
+    },
+    {
+      "index": 203,
+      "start": 577.84,
+      "end": 580.55,
+      "duration": 2.71,
+      "text": "you should get really quick at doing X"
+    },
+    {
+      "index": 204,
+      "start": 580.56,
+      "end": 583.31,
+      "duration": 2.75,
+      "text": "transpose Y. So, it's just"
+    },
+    {
+      "index": 205,
+      "start": 583.32,
+      "end": 585.03,
+      "duration": 1.71,
+      "text": "this plus this plus this, and that's"
+    },
+    {
+      "index": 206,
+      "start": 585.04,
+      "end": 585.95,
+      "duration": 0.91,
+      "text": "zero."
+    },
+    {
+      "index": 207,
+      "start": 585.96,
+      "end": 589.55,
+      "duration": 3.59,
+      "text": "And sure enough, that clicks with"
+    },
+    {
+      "index": 208,
+      "start": 589.56,
+      "end": 593.95,
+      "duration": 4.39,
+      "text": "uh 14 + 5 agreeing with 19. Now, let me"
+    },
+    {
+      "index": 209,
+      "start": 593.96,
+      "end": 596.75,
+      "duration": 2.79,
+      "text": "just do that in letters."
+    },
+    {
+      "index": 210,
+      "start": 596.76,
+      "end": 601.07,
+      "duration": 4.31,
+      "text": "So, that's Y transpose Y."
+    },
+    {
+      "index": 211,
+      "start": 601.08,
+      "end": 602.95,
+      "duration": 1.87,
+      "text": "And this is"
+    },
+    {
+      "index": 212,
+      "start": 602.96,
+      "end": 604.87,
+      "duration": 1.91,
+      "text": "X + Y"
+    },
+    {
+      "index": 213,
+      "start": 604.88,
+      "end": 608.07,
+      "duration": 3.19,
+      "text": "transpose X + Y."
+    },
+    {
+      "index": 214,
+      "start": 608.08,
+      "end": 609.75,
+      "duration": 1.67,
+      "text": "Okay."
+    },
+    {
+      "index": 215,
+      "start": 609.76,
+      "end": 611.91,
+      "duration": 2.15,
+      "text": "So, I'm looking again, this isn't always"
+    },
+    {
+      "index": 216,
+      "start": 611.92,
+      "end": 614.07,
+      "duration": 2.15,
+      "text": "true. I repeat."
+    },
+    {
+      "index": 217,
+      "start": 614.08,
+      "end": 615.87,
+      "duration": 1.79,
+      "text": "This is going to be true when we have a"
+    },
+    {
+      "index": 218,
+      "start": 615.88,
+      "end": 617.95,
+      "duration": 2.07,
+      "text": "right angle."
+    },
+    {
+      "index": 219,
+      "start": 617.96,
+      "end": 620.47,
+      "duration": 2.51,
+      "text": "And let's just Well, of course, I'm just"
+    },
+    {
+      "index": 220,
+      "start": 620.48,
+      "end": 622.67,
+      "duration": 2.19,
+      "text": "going to simplify this stuff here."
+    },
+    {
+      "index": 221,
+      "start": 622.68,
+      "end": 625.91,
+      "duration": 3.23,
+      "text": "There's an X transpose X there,"
+    },
+    {
+      "index": 222,
+      "start": 625.92,
+      "end": 629.83,
+      "duration": 3.91,
+      "text": "and there's a Y transpose Y there,"
+    },
+    {
+      "index": 223,
+      "start": 629.84,
+      "end": 634.35,
+      "duration": 4.51,
+      "text": "and there's an X transpose Y,"
+    },
+    {
+      "index": 224,
+      "start": 634.36,
+      "end": 641.59,
+      "duration": 7.23,
+      "text": "and there's a Y transpose X."
+    },
+    {
+      "index": 225,
+      "start": 643.07,
+      "end": 643.08,
+      "duration": 0.01,
+      "text": "I knew I could"
+    },
+    {
+      "index": 226,
+      "start": 643.08,
+      "end": 646.55,
+      "duration": 3.47,
+      "text": "do that simplification because"
+    },
+    {
+      "index": 227,
+      "start": 646.56,
+      "end": 648.31,
+      "duration": 1.75,
+      "text": "I'm just doing matrix multiplication,"
+    },
+    {
+      "index": 228,
+      "start": 648.32,
+      "end": 650.829,
+      "duration": 2.509,
+      "text": "and I've just followed the rules. Okay."
+    },
+    {
+      "index": 229,
+      "start": 650.839,
+      "end": 653.79,
+      "duration": 2.951,
+      "text": "So, X transpose X is cancelled, Y"
+    },
+    {
+      "index": 230,
+      "start": 653.8,
+      "end": 656.55,
+      "duration": 2.75,
+      "text": "transpose Y is cancelled, and what about"
+    },
+    {
+      "index": 231,
+      "start": 656.56,
+      "end": 658.59,
+      "duration": 2.03,
+      "text": "these guys? What can What can you tell"
+    },
+    {
+      "index": 232,
+      "start": 658.6,
+      "end": 661.35,
+      "duration": 2.75,
+      "text": "me about"
+    },
+    {
+      "index": 233,
+      "start": 661.36,
+      "end": 663.67,
+      "duration": 2.31,
+      "text": "the inner product of X with Y and the"
+    },
+    {
+      "index": 234,
+      "start": 663.68,
+      "end": 666.829,
+      "duration": 3.149,
+      "text": "inner product of Y with X?"
+    },
+    {
+      "index": 235,
+      "start": 666.839,
+      "end": 669.55,
+      "duration": 2.711,
+      "text": "Is there a difference?"
+    },
+    {
+      "index": 236,
+      "start": 669.56,
+      "end": 674.51,
+      "duration": 4.95,
+      "text": "I think if we if while we're doing real"
+    },
+    {
+      "index": 237,
+      "start": 676.99,
+      "end": 677.0,
+      "duration": 0.01,
+      "text": "vectors, which is all we're doing now,"
+    },
+    {
+      "index": 238,
+      "start": 677.0,
+      "end": 678.59,
+      "duration": 1.59,
+      "text": "there isn't a difference. There's no"
+    },
+    {
+      "index": 239,
+      "start": 678.6,
+      "end": 682.43,
+      "duration": 3.83,
+      "text": "difference. If I take X transpose Y,"
+    },
+    {
+      "index": 240,
+      "start": 682.44,
+      "end": 684.95,
+      "duration": 2.51,
+      "text": "that'll give me zero. If I took Y"
+    },
+    {
+      "index": 241,
+      "start": 684.96,
+      "end": 687.95,
+      "duration": 2.99,
+      "text": "transpose X, I would have the same"
+    },
+    {
+      "index": 242,
+      "start": 687.96,
+      "end": 692.67,
+      "duration": 4.71,
+      "text": "X1Y1 and X2Y2 and X3Y3."
+    },
+    {
+      "index": 243,
+      "start": 692.68,
+      "end": 695.19,
+      "duration": 2.51,
+      "text": "It would be the same. So, this is this"
+    },
+    {
+      "index": 244,
+      "start": 695.2,
+      "end": 697.31,
+      "duration": 2.11,
+      "text": "is this is the same as that. This is"
+    },
+    {
+      "index": 245,
+      "start": 697.32,
+      "end": 699.27,
+      "duration": 1.95,
+      "text": "really all I'll knock that guy out and"
+    },
+    {
+      "index": 246,
+      "start": 699.28,
+      "end": 703.67,
+      "duration": 4.39,
+      "text": "say two of these."
+    },
+    {
+      "index": 247,
+      "start": 706.31,
+      "end": 706.32,
+      "duration": 0.01,
+      "text": "So, actually that's the"
+    },
+    {
+      "index": 248,
+      "start": 706.32,
+      "end": 710.03,
+      "duration": 3.71,
+      "text": "this this equation boiled down to this"
+    },
+    {
+      "index": 249,
+      "start": 710.04,
+      "end": 711.91,
+      "duration": 1.87,
+      "text": "thing being zero."
+    },
+    {
+      "index": 250,
+      "start": 711.92,
+      "end": 712.87,
+      "duration": 0.95,
+      "text": "Right?"
+    },
+    {
+      "index": 251,
+      "start": 712.88,
+      "end": 715.31,
+      "duration": 2.43,
+      "text": "Everything else canceled and this"
+    },
+    {
+      "index": 252,
+      "start": 715.32,
+      "end": 717.31,
+      "duration": 1.99,
+      "text": "equation boiled down to that one. So,"
+    },
+    {
+      "index": 253,
+      "start": 717.32,
+      "end": 720.35,
+      "duration": 3.03,
+      "text": "that's really all I wanted."
+    },
+    {
+      "index": 254,
+      "start": 720.36,
+      "end": 724.15,
+      "duration": 3.79,
+      "text": "I just wanted to check that"
+    },
+    {
+      "index": 255,
+      "start": 724.16,
+      "end": 726.31,
+      "duration": 2.15,
+      "text": "Pythagoras"
+    },
+    {
+      "index": 256,
+      "start": 726.32,
+      "end": 728.47,
+      "duration": 2.15,
+      "text": "for a right triangle"
+    },
+    {
+      "index": 257,
+      "start": 728.48,
+      "end": 729.87,
+      "duration": 1.39,
+      "text": "led me"
+    },
+    {
+      "index": 258,
+      "start": 729.88,
+      "end": 732.15,
+      "duration": 2.27,
+      "text": "to this Now, of course, I canceled the"
+    },
+    {
+      "index": 259,
+      "start": 732.16,
+      "end": 734.63,
+      "duration": 2.47,
+      "text": "two now, no problem."
+    },
+    {
+      "index": 260,
+      "start": 734.64,
+      "end": 738.79,
+      "duration": 4.15,
+      "text": "2x transpose y = 0 as the test."
+    },
+    {
+      "index": 261,
+      "start": 738.8,
+      "end": 741.11,
+      "duration": 2.31,
+      "text": "Fair enough. Okay."
+    },
+    {
+      "index": 262,
+      "start": 741.12,
+      "end": 743.11,
+      "duration": 1.99,
+      "text": "You knew it was coming."
+    },
+    {
+      "index": 263,
+      "start": 743.12,
+      "end": 745.75,
+      "duration": 2.63,
+      "text": "The dot product of orthogonal vectors is"
+    },
+    {
+      "index": 264,
+      "start": 745.76,
+      "end": 746.87,
+      "duration": 1.11,
+      "text": "zero."
+    },
+    {
+      "index": 265,
+      "start": 746.88,
+      "end": 749.27,
+      "duration": 2.39,
+      "text": "It's just I just want to say that's"
+    },
+    {
+      "index": 266,
+      "start": 749.28,
+      "end": 751.71,
+      "duration": 2.43,
+      "text": "really neat. It comes that it comes out"
+    },
+    {
+      "index": 267,
+      "start": 751.72,
+      "end": 754.75,
+      "duration": 3.03,
+      "text": "so well. All right."
+    },
+    {
+      "index": 268,
+      "start": 754.76,
+      "end": 757.31,
+      "duration": 2.55,
+      "text": "Now, what about So, now I know if two"
+    },
+    {
+      "index": 269,
+      "start": 757.32,
+      "end": 759.75,
+      "duration": 2.43,
+      "text": "vec what it means when two vectors are"
+    },
+    {
+      "index": 270,
+      "start": 759.76,
+      "end": 762.55,
+      "duration": 2.79,
+      "text": "orthogonal. By the way, what about if"
+    },
+    {
+      "index": 271,
+      "start": 762.56,
+      "end": 765.829,
+      "duration": 3.269,
+      "text": "one of these guys is the zero vector?"
+    },
+    {
+      "index": 272,
+      "start": 765.839,
+      "end": 769.75,
+      "duration": 3.911,
+      "text": "Suppose x is the zero vector and y is"
+    },
+    {
+      "index": 273,
+      "start": 769.76,
+      "end": 771.59,
+      "duration": 1.83,
+      "text": "whatever."
+    },
+    {
+      "index": 274,
+      "start": 771.6,
+      "end": 774.95,
+      "duration": 3.35,
+      "text": "Are they orthogonal?"
+    },
+    {
+      "index": 275,
+      "start": 777.15,
+      "end": 777.16,
+      "duration": 0.01,
+      "text": "Sure."
+    },
+    {
+      "index": 276,
+      "start": 777.16,
+      "end": 779.07,
+      "duration": 1.91,
+      "text": "In math, the one thing about math is"
+    },
+    {
+      "index": 277,
+      "start": 779.08,
+      "end": 781.91,
+      "duration": 2.83,
+      "text": "you're supposed to follow the rules."
+    },
+    {
+      "index": 278,
+      "start": 781.92,
+      "end": 784.47,
+      "duration": 2.55,
+      "text": "So, you're supposed to If If x is the"
+    },
+    {
+      "index": 279,
+      "start": 784.48,
+      "end": 786.95,
+      "duration": 2.47,
+      "text": "zero vector, you're supposed to take the"
+    },
+    {
+      "index": 280,
+      "start": 786.96,
+      "end": 789.95,
+      "duration": 2.99,
+      "text": "zero vector dotted with y and of course,"
+    },
+    {
+      "index": 281,
+      "start": 789.96,
+      "end": 792.15,
+      "duration": 2.19,
+      "text": "you get always get zero."
+    },
+    {
+      "index": 282,
+      "start": 792.16,
+      "end": 795.11,
+      "duration": 2.95,
+      "text": "So, just so we're all"
+    },
+    {
+      "index": 283,
+      "start": 795.12,
+      "end": 798.19,
+      "duration": 3.07,
+      "text": "sure, the zero vector is orthogonal to"
+    },
+    {
+      "index": 284,
+      "start": 798.2,
+      "end": 800.99,
+      "duration": 2.79,
+      "text": "everybody."
+    },
+    {
+      "index": 285,
+      "start": 801.99,
+      "end": 802.0,
+      "duration": 0.01,
+      "text": "But"
+    },
+    {
+      "index": 286,
+      "start": 802.0,
+      "end": 804.71,
+      "duration": 2.71,
+      "text": "what I want to"
+    },
+    {
+      "index": 287,
+      "start": 804.72,
+      "end": 806.63,
+      "duration": 1.91,
+      "text": "what I I want to"
+    },
+    {
+      "index": 288,
+      "start": 806.64,
+      "end": 808.51,
+      "duration": 1.87,
+      "text": "uh"
+    },
+    {
+      "index": 289,
+      "start": 808.52,
+      "end": 812.15,
+      "duration": 3.63,
+      "text": "speak about is subspaces."
+    },
+    {
+      "index": 290,
+      "start": 814.11,
+      "end": 814.12,
+      "duration": 0.01,
+      "text": "What does it mean"
+    },
+    {
+      "index": 291,
+      "start": 814.12,
+      "end": 815.75,
+      "duration": 1.63,
+      "text": "for me to say"
+    },
+    {
+      "index": 292,
+      "start": 815.76,
+      "end": 818.43,
+      "duration": 2.67,
+      "text": "that some subspace is orthogonal to some"
+    },
+    {
+      "index": 293,
+      "start": 818.44,
+      "end": 820.39,
+      "duration": 1.95,
+      "text": "other subspace?"
+    },
+    {
+      "index": 294,
+      "start": 820.4,
+      "end": 822.07,
+      "duration": 1.67,
+      "text": "So, okay. Now, I've got to write this"
+    },
+    {
+      "index": 295,
+      "start": 822.08,
+      "end": 825.63,
+      "duration": 3.55,
+      "text": "down. So, cuz we're defining definition"
+    },
+    {
+      "index": 296,
+      "start": 825.64,
+      "end": 828.51,
+      "duration": 2.87,
+      "text": "of subspace"
+    },
+    {
+      "index": 297,
+      "start": 828.52,
+      "end": 830.43,
+      "duration": 1.91,
+      "text": "S"
+    },
+    {
+      "index": 298,
+      "start": 830.44,
+      "end": 831.75,
+      "duration": 1.31,
+      "text": "is"
+    },
+    {
+      "index": 299,
+      "start": 831.76,
+      "end": 835.55,
+      "duration": 3.79,
+      "text": "orthogonal, so"
+    },
+    {
+      "index": 300,
+      "start": 837.03,
+      "end": 837.04,
+      "duration": 0.01,
+      "text": "to"
+    },
+    {
+      "index": 301,
+      "start": 837.04,
+      "end": 840.59,
+      "duration": 3.55,
+      "text": "subspace"
+    },
+    {
+      "index": 302,
+      "start": 842.83,
+      "end": 842.84,
+      "duration": 0.01,
+      "text": "let's say T."
+    },
+    {
+      "index": 303,
+      "start": 842.84,
+      "end": 847.31,
+      "duration": 4.47,
+      "text": "So, I've got a couple of subspaces."
+    },
+    {
+      "index": 304,
+      "start": 849.31,
+      "end": 849.32,
+      "duration": 0.01,
+      "text": "And what should it mean for those guys"
+    },
+    {
+      "index": 305,
+      "start": 849.32,
+      "end": 851.43,
+      "duration": 2.11,
+      "text": "to be orthogonal?"
+    },
+    {
+      "index": 306,
+      "start": 851.44,
+      "end": 853.27,
+      "duration": 1.83,
+      "text": "It's just a na- it's sort of what's the"
+    },
+    {
+      "index": 307,
+      "start": 853.28,
+      "end": 856.39,
+      "duration": 3.11,
+      "text": "natural extension from orthogonal"
+    },
+    {
+      "index": 308,
+      "start": 856.4,
+      "end": 859.95,
+      "duration": 3.55,
+      "text": "vectors to orthogonal subspaces?"
+    },
+    {
+      "index": 309,
+      "start": 859.96,
+      "end": 861.55,
+      "duration": 1.59,
+      "text": "Well,"
+    },
+    {
+      "index": 310,
+      "start": 861.56,
+      "end": 866.27,
+      "duration": 4.71,
+      "text": "and in particular"
+    },
+    {
+      "index": 311,
+      "start": 868.47,
+      "end": 868.48,
+      "duration": 0.01,
+      "text": "let's think of some orthogonal subspaces"
+    },
+    {
+      "index": 312,
+      "start": 868.48,
+      "end": 869.87,
+      "duration": 1.39,
+      "text": "like"
+    },
+    {
+      "index": 313,
+      "start": 869.88,
+      "end": 870.99,
+      "duration": 1.11,
+      "text": "uh"
+    },
+    {
+      "index": 314,
+      "start": 871.0,
+      "end": 873.91,
+      "duration": 2.91,
+      "text": "uh this wall."
+    },
+    {
+      "index": 315,
+      "start": 873.92,
+      "end": 877.27,
+      "duration": 3.35,
+      "text": "I I let's say in three dimensions."
+    },
+    {
+      "index": 316,
+      "start": 877.28,
+      "end": 880.15,
+      "duration": 2.87,
+      "text": "So, the blackboard extended to infinity,"
+    },
+    {
+      "index": 317,
+      "start": 880.16,
+      "end": 882.95,
+      "duration": 2.79,
+      "text": "right? Is a is a subspace,"
+    },
+    {
+      "index": 318,
+      "start": 882.96,
+      "end": 887.63,
+      "duration": 4.67,
+      "text": "a plane, a two-dimensional subspace."
+    },
+    {
+      "index": 319,
+      "start": 891.15,
+      "end": 891.16,
+      "duration": 0.01,
+      "text": "It's a little bumpy, but anyway, it's a"
+    },
+    {
+      "index": 320,
+      "start": 891.16,
+      "end": 893.51,
+      "duration": 2.35,
+      "text": "think of it as a subspace."
+    },
+    {
+      "index": 321,
+      "start": 893.52,
+      "end": 895.07,
+      "duration": 1.55,
+      "text": "Um"
+    },
+    {
+      "index": 322,
+      "start": 895.08,
+      "end": 896.91,
+      "duration": 1.83,
+      "text": "let me take the floor as another"
+    },
+    {
+      "index": 323,
+      "start": 896.92,
+      "end": 901.79,
+      "duration": 4.87,
+      "text": "subspace."
+    },
+    {
+      "index": 324,
+      "start": 904.39,
+      "end": 904.4,
+      "duration": 0.01,
+      "text": "Again,"
+    },
+    {
+      "index": 325,
+      "start": 904.4,
+      "end": 906.07,
+      "duration": 1.67,
+      "text": "it's not"
+    },
+    {
+      "index": 326,
+      "start": 906.08,
+      "end": 911.15,
+      "duration": 5.07,
+      "text": "a great subspace. MIT only built it like"
+    },
+    {
+      "index": 327,
+      "start": 911.16,
+      "end": 914.75,
+      "duration": 3.59,
+      "text": "so-so, but uh"
+    },
+    {
+      "index": 328,
+      "start": 914.76,
+      "end": 918.79,
+      "duration": 4.03,
+      "text": "and I'll put the origin right here."
+    },
+    {
+      "index": 329,
+      "start": 918.8,
+      "end": 921.07,
+      "duration": 2.27,
+      "text": "So, the origin of the world"
+    },
+    {
+      "index": 330,
+      "start": 921.08,
+      "end": 923.07,
+      "duration": 1.99,
+      "text": "is right there."
+    },
+    {
+      "index": 331,
+      "start": 923.08,
+      "end": 926.67,
+      "duration": 3.59,
+      "text": "Okay."
+    },
+    {
+      "index": 332,
+      "start": 929.23,
+      "end": 929.24,
+      "duration": 0.01,
+      "text": "Thereby giving linear algebra its proper"
+    },
+    {
+      "index": 333,
+      "start": 929.24,
+      "end": 932.55,
+      "duration": 3.31,
+      "text": "importance in in this. Okay. So, there's"
+    },
+    {
+      "index": 334,
+      "start": 932.56,
+      "end": 934.31,
+      "duration": 1.75,
+      "text": "one subspace, there's another one, the"
+    },
+    {
+      "index": 335,
+      "start": 934.32,
+      "end": 935.91,
+      "duration": 1.59,
+      "text": "floor."
+    },
+    {
+      "index": 336,
+      "start": 935.92,
+      "end": 938.95,
+      "duration": 3.03,
+      "text": "And"
+    },
+    {
+      "index": 337,
+      "start": 944.15,
+      "end": 944.16,
+      "duration": 0.01,
+      "text": "What does it mean for two subspaces to"
+    },
+    {
+      "index": 338,
+      "start": 944.16,
+      "end": 946.11,
+      "duration": 1.95,
+      "text": "be orthogonal in a and in that special"
+    },
+    {
+      "index": 339,
+      "start": 946.12,
+      "end": 948.19,
+      "duration": 2.07,
+      "text": "case, are they orthogonal? All right."
+    },
+    {
+      "index": 340,
+      "start": 948.2,
+      "end": 950.91,
+      "duration": 2.71,
+      "text": "Let let's finish this sentence."
+    },
+    {
+      "index": 341,
+      "start": 950.92,
+      "end": 957.51,
+      "duration": 6.59,
+      "text": "What does it mean? Means"
+    },
+    {
+      "index": 342,
+      "start": 958.79,
+      "end": 958.8,
+      "duration": 0.01,
+      "text": "We have to We have to know what we're"
+    },
+    {
+      "index": 343,
+      "start": 958.8,
+      "end": 960.43,
+      "duration": 1.63,
+      "text": "talking about here."
+    },
+    {
+      "index": 344,
+      "start": 960.44,
+      "end": 963.07,
+      "duration": 2.63,
+      "text": "So, what would be a reasonable idea of"
+    },
+    {
+      "index": 345,
+      "start": 963.08,
+      "end": 965.19,
+      "duration": 2.11,
+      "text": "orthogonal?"
+    },
+    {
+      "index": 346,
+      "start": 965.2,
+      "end": 966.55,
+      "duration": 1.35,
+      "text": "Well, let me"
+    },
+    {
+      "index": 347,
+      "start": 966.56,
+      "end": 968.67,
+      "duration": 2.11,
+      "text": "put the right thing up."
+    },
+    {
+      "index": 348,
+      "start": 968.68,
+      "end": 972.51,
+      "duration": 3.83,
+      "text": "It means that every vector in S"
+    },
+    {
+      "index": 349,
+      "start": 972.52,
+      "end": 974.47,
+      "duration": 1.95,
+      "text": "every"
+    },
+    {
+      "index": 350,
+      "start": 974.48,
+      "end": 976.55,
+      "duration": 2.07,
+      "text": "vector"
+    },
+    {
+      "index": 351,
+      "start": 976.56,
+      "end": 978.43,
+      "duration": 1.87,
+      "text": "in S"
+    },
+    {
+      "index": 352,
+      "start": 978.44,
+      "end": 982.59,
+      "duration": 4.15,
+      "text": "is orthogonal"
+    },
+    {
+      "index": 353,
+      "start": 989.99,
+      "end": 990.0,
+      "duration": 0.01,
+      "text": "to What am I going to say?"
+    },
+    {
+      "index": 354,
+      "start": 990.0,
+      "end": 997.91,
+      "duration": 7.91,
+      "text": "Every vector in T."
+    },
+    {
+      "index": 355,
+      "start": 1002.07,
+      "end": 1002.08,
+      "duration": 0.01,
+      "text": "That's a reasonable"
+    },
+    {
+      "index": 356,
+      "start": 1002.08,
+      "end": 1003.59,
+      "duration": 1.51,
+      "text": "and it's a good and it's the right"
+    },
+    {
+      "index": 357,
+      "start": 1003.6,
+      "end": 1005.67,
+      "duration": 2.07,
+      "text": "definition for two subspaces to be"
+    },
+    {
+      "index": 358,
+      "start": 1005.68,
+      "end": 1006.95,
+      "duration": 1.27,
+      "text": "orthogonal."
+    },
+    {
+      "index": 359,
+      "start": 1006.96,
+      "end": 1008.63,
+      "duration": 1.67,
+      "text": "But I just want you to see, hey, what"
+    },
+    {
+      "index": 360,
+      "start": 1008.64,
+      "end": 1010.67,
+      "duration": 2.03,
+      "text": "does that mean?"
+    },
+    {
+      "index": 361,
+      "start": 1010.68,
+      "end": 1013.55,
+      "duration": 2.87,
+      "text": "So, answer the question about the"
+    },
+    {
+      "index": 362,
+      "start": 1013.56,
+      "end": 1015.59,
+      "duration": 2.03,
+      "text": "the blackboard and the"
+    },
+    {
+      "index": 363,
+      "start": 1015.6,
+      "end": 1017.35,
+      "duration": 1.75,
+      "text": "floor."
+    },
+    {
+      "index": 364,
+      "start": 1017.36,
+      "end": 1019.79,
+      "duration": 2.43,
+      "text": "Are those two subspaces They're They're"
+    },
+    {
+      "index": 365,
+      "start": 1019.8,
+      "end": 1021.71,
+      "duration": 1.91,
+      "text": "two-dimensional, right?"
+    },
+    {
+      "index": 366,
+      "start": 1021.72,
+      "end": 1024.309,
+      "duration": 2.589,
+      "text": "And we're in R3."
+    },
+    {
+      "index": 367,
+      "start": 1024.319,
+      "end": 1025.949,
+      "duration": 1.63,
+      "text": "It's like the"
+    },
+    {
+      "index": 368,
+      "start": 1025.959,
+      "end": 1034.87,
+      "duration": 8.911,
+      "text": "XZ plane or something and the XY plane."
+    },
+    {
+      "index": 369,
+      "start": 1037.03,
+      "end": 1037.04,
+      "duration": 0.01,
+      "text": "Are they orthogonal?"
+    },
+    {
+      "index": 370,
+      "start": 1037.04,
+      "end": 1038.949,
+      "duration": 1.909,
+      "text": "Is every vector in the blackboard"
+    },
+    {
+      "index": 371,
+      "start": 1038.959,
+      "end": 1041.79,
+      "duration": 2.831,
+      "text": "orthogonal to vector in the floor?"
+    },
+    {
+      "index": 372,
+      "start": 1041.8,
+      "end": 1047.51,
+      "duration": 5.71,
+      "text": "Starting from the origin right there."
+    },
+    {
+      "index": 373,
+      "start": 1051.59,
+      "end": 1051.6,
+      "duration": 0.01,
+      "text": "Yes or no? I could take a vote."
+    },
+    {
+      "index": 374,
+      "start": 1051.6,
+      "end": 1054.95,
+      "duration": 3.35,
+      "text": "I'll be getting some yeses and some nos."
+    },
+    {
+      "index": 375,
+      "start": 1054.96,
+      "end": 1057.71,
+      "duration": 2.75,
+      "text": "No is the answer. They're not."
+    },
+    {
+      "index": 376,
+      "start": 1057.72,
+      "end": 1060.03,
+      "duration": 2.31,
+      "text": "You can tell me a vector"
+    },
+    {
+      "index": 377,
+      "start": 1060.04,
+      "end": 1062.15,
+      "duration": 2.11,
+      "text": "in the blackboard and a vector in the"
+    },
+    {
+      "index": 378,
+      "start": 1062.16,
+      "end": 1069.27,
+      "duration": 7.11,
+      "text": "floor that are not orthogonal."
+    },
+    {
+      "index": 379,
+      "start": 1070.91,
+      "end": 1070.92,
+      "duration": 0.01,
+      "text": "Uh"
+    },
+    {
+      "index": 380,
+      "start": 1070.92,
+      "end": 1072.75,
+      "duration": 1.83,
+      "text": "What's What's Well, you can tell me"
+    },
+    {
+      "index": 381,
+      "start": 1072.76,
+      "end": 1074.87,
+      "duration": 2.11,
+      "text": "quite a few, I guess."
+    },
+    {
+      "index": 382,
+      "start": 1074.88,
+      "end": 1079.19,
+      "duration": 4.31,
+      "text": "Maybe like I could take some 45° guy in"
+    },
+    {
+      "index": 383,
+      "start": 1079.2,
+      "end": 1080.07,
+      "duration": 0.87,
+      "text": "the"
+    },
+    {
+      "index": 384,
+      "start": 1080.08,
+      "end": 1083.47,
+      "duration": 3.39,
+      "text": "blackboard and some"
+    },
+    {
+      "index": 385,
+      "start": 1083.48,
+      "end": 1086.55,
+      "duration": 3.07,
+      "text": "thing in the floor"
+    },
+    {
+      "index": 386,
+      "start": 1086.56,
+      "end": 1089.27,
+      "duration": 2.71,
+      "text": "that aren't at 90°, right? In fact, even"
+    },
+    {
+      "index": 387,
+      "start": 1089.28,
+      "end": 1093.15,
+      "duration": 3.87,
+      "text": "more, you could tell me a vector"
+    },
+    {
+      "index": 388,
+      "start": 1093.16,
+      "end": 1096.51,
+      "duration": 3.35,
+      "text": "that's in both the blackboard plane and"
+    },
+    {
+      "index": 389,
+      "start": 1096.52,
+      "end": 1098.39,
+      "duration": 1.87,
+      "text": "the floor plane, so it's certainly not"
+    },
+    {
+      "index": 390,
+      "start": 1098.4,
+      "end": 1100.51,
+      "duration": 2.11,
+      "text": "orthogonal to itself."
+    },
+    {
+      "index": 391,
+      "start": 1100.52,
+      "end": 1103.87,
+      "duration": 3.35,
+      "text": "So, for sure, those two planes aren't"
+    },
+    {
+      "index": 392,
+      "start": 1103.88,
+      "end": 1105.55,
+      "duration": 1.67,
+      "text": "orthogonal."
+    },
+    {
+      "index": 393,
+      "start": 1105.56,
+      "end": 1107.75,
+      "duration": 2.19,
+      "text": "What would that be? So, what's a vector"
+    },
+    {
+      "index": 394,
+      "start": 1107.76,
+      "end": 1110.55,
+      "duration": 2.79,
+      "text": "that's in the black- in in both of those"
+    },
+    {
+      "index": 395,
+      "start": 1110.56,
+      "end": 1112.23,
+      "duration": 1.67,
+      "text": "planes?"
+    },
+    {
+      "index": 396,
+      "start": 1112.24,
+      "end": 1115.07,
+      "duration": 2.83,
+      "text": "It's this guy running along the crack"
+    },
+    {
+      "index": 397,
+      "start": 1115.08,
+      "end": 1117.43,
+      "duration": 2.35,
+      "text": "there, where the intersection"
+    },
+    {
+      "index": 398,
+      "start": 1117.44,
+      "end": 1119.47,
+      "duration": 2.03,
+      "text": "the intersection."
+    },
+    {
+      "index": 399,
+      "start": 1119.48,
+      "end": 1121.43,
+      "duration": 1.95,
+      "text": "A vector Look,"
+    },
+    {
+      "index": 400,
+      "start": 1121.44,
+      "end": 1124.55,
+      "duration": 3.11,
+      "text": "if two subspaces meet some vector, well,"
+    },
+    {
+      "index": 401,
+      "start": 1124.56,
+      "end": 1126.47,
+      "duration": 1.91,
+      "text": "then for sure they're not orthogonal"
+    },
+    {
+      "index": 402,
+      "start": 1126.48,
+      "end": 1129.11,
+      "duration": 2.63,
+      "text": "because"
+    },
+    {
+      "index": 403,
+      "start": 1129.12,
+      "end": 1131.79,
+      "duration": 2.67,
+      "text": "that vector is in one and it's in the"
+    },
+    {
+      "index": 404,
+      "start": 1131.8,
+      "end": 1134.27,
+      "duration": 2.47,
+      "text": "other and it's not orthogonal to itself"
+    },
+    {
+      "index": 405,
+      "start": 1134.28,
+      "end": 1137.55,
+      "duration": 3.27,
+      "text": "unless it's zero. So, the only I mean,"
+    },
+    {
+      "index": 406,
+      "start": 1137.56,
+      "end": 1140.75,
+      "duration": 3.19,
+      "text": "so orthogonal"
+    },
+    {
+      "index": 407,
+      "start": 1140.76,
+      "end": 1142.99,
+      "duration": 2.23,
+      "text": "If for me to say these two subspaces are"
+    },
+    {
+      "index": 408,
+      "start": 1143.0,
+      "end": 1145.27,
+      "duration": 2.27,
+      "text": "orthogonal, first of all,"
+    },
+    {
+      "index": 409,
+      "start": 1145.28,
+      "end": 1148.47,
+      "duration": 3.19,
+      "text": "I'm certainly saying that they don't"
+    },
+    {
+      "index": 410,
+      "start": 1148.48,
+      "end": 1152.51,
+      "duration": 4.03,
+      "text": "intersect in any"
+    },
+    {
+      "index": 411,
+      "start": 1154.47,
+      "end": 1154.48,
+      "duration": 0.01,
+      "text": "uh nonzero vector."
+    },
+    {
+      "index": 412,
+      "start": 1154.48,
+      "end": 1155.55,
+      "duration": 1.07,
+      "text": "But also,"
+    },
+    {
+      "index": 413,
+      "start": 1155.56,
+      "end": 1157.67,
+      "duration": 2.11,
+      "text": "I mean more than that just not"
+    },
+    {
+      "index": 414,
+      "start": 1157.68,
+      "end": 1159.47,
+      "duration": 1.79,
+      "text": "intersecting isn't good enough. So, give"
+    },
+    {
+      "index": 415,
+      "start": 1159.48,
+      "end": 1161.71,
+      "duration": 2.23,
+      "text": "me an example"
+    },
+    {
+      "index": 416,
+      "start": 1161.72,
+      "end": 1165.15,
+      "duration": 3.43,
+      "text": "Oh, let's say in the plane."
+    },
+    {
+      "index": 417,
+      "start": 1165.16,
+      "end": 1166.39,
+      "duration": 1.23,
+      "text": "Well, well."
+    },
+    {
+      "index": 418,
+      "start": 1166.4,
+      "end": 1167.07,
+      "duration": 0.67,
+      "text": "Well,"
+    },
+    {
+      "index": 419,
+      "start": 1167.08,
+      "end": 1169.47,
+      "duration": 2.39,
+      "text": "when do we have orthogonal subspaces in"
+    },
+    {
+      "index": 420,
+      "start": 1169.48,
+      "end": 1171.43,
+      "duration": 1.95,
+      "text": "the plane? Yeah, tell me in the plane."
+    },
+    {
+      "index": 421,
+      "start": 1171.44,
+      "end": 1172.83,
+      "duration": 1.39,
+      "text": "So, we don't there aren't that many"
+    },
+    {
+      "index": 422,
+      "start": 1172.84,
+      "end": 1175.35,
+      "duration": 2.51,
+      "text": "different subspaces in the plane. What"
+    },
+    {
+      "index": 423,
+      "start": 1175.36,
+      "end": 1177.35,
+      "duration": 1.99,
+      "text": "What have we got in the plane that's as"
+    },
+    {
+      "index": 424,
+      "start": 1177.36,
+      "end": 1180.87,
+      "duration": 3.51,
+      "text": "possible subspaces?"
+    },
+    {
+      "index": 425,
+      "start": 1182.63,
+      "end": 1182.64,
+      "duration": 0.01,
+      "text": "The zero vector,"
+    },
+    {
+      "index": 426,
+      "start": 1182.64,
+      "end": 1184.35,
+      "duration": 1.71,
+      "text": "real small,"
+    },
+    {
+      "index": 427,
+      "start": 1184.36,
+      "end": 1187.23,
+      "duration": 2.87,
+      "text": "uh a line through the origin,"
+    },
+    {
+      "index": 428,
+      "start": 1187.24,
+      "end": 1189.51,
+      "duration": 2.27,
+      "text": "or the whole plane."
+    },
+    {
+      "index": 429,
+      "start": 1189.52,
+      "end": 1193.59,
+      "duration": 4.07,
+      "text": "Okay. Now, so when is a line through the"
+    },
+    {
+      "index": 430,
+      "start": 1193.6,
+      "end": 1194.99,
+      "duration": 1.39,
+      "text": "origin"
+    },
+    {
+      "index": 431,
+      "start": 1195.0,
+      "end": 1199.75,
+      "duration": 4.75,
+      "text": "orthogonal to the whole plane?"
+    },
+    {
+      "index": 432,
+      "start": 1201.99,
+      "end": 1202.0,
+      "duration": 0.01,
+      "text": "Never, right? Never."
+    },
+    {
+      "index": 433,
+      "start": 1202.0,
+      "end": 1203.91,
+      "duration": 1.91,
+      "text": "When is a line through the origin"
+    },
+    {
+      "index": 434,
+      "start": 1203.92,
+      "end": 1209.23,
+      "duration": 5.31,
+      "text": "orthogonal to the zero subspace?"
+    },
+    {
+      "index": 435,
+      "start": 1211.07,
+      "end": 1211.08,
+      "duration": 0.01,
+      "text": "Always. Right."
+    },
+    {
+      "index": 436,
+      "start": 1211.08,
+      "end": 1212.75,
+      "duration": 1.67,
+      "text": "When is a line through the origin"
+    },
+    {
+      "index": 437,
+      "start": 1212.76,
+      "end": 1215.23,
+      "duration": 2.47,
+      "text": "orthogonal to a different line through"
+    },
+    {
+      "index": 438,
+      "start": 1215.24,
+      "end": 1217.63,
+      "duration": 2.39,
+      "text": "the origin? Well, that's the case that"
+    },
+    {
+      "index": 439,
+      "start": 1217.64,
+      "end": 1220.99,
+      "duration": 3.35,
+      "text": "we all have a clear picture of. They"
+    },
+    {
+      "index": 440,
+      "start": 1221.0,
+      "end": 1223.63,
+      "duration": 2.63,
+      "text": "the two lines have to meet at 90°. They"
+    },
+    {
+      "index": 441,
+      "start": 1223.64,
+      "end": 1225.39,
+      "duration": 1.75,
+      "text": "have only the"
+    },
+    {
+      "index": 442,
+      "start": 1225.4,
+      "end": 1227.07,
+      "duration": 1.67,
+      "text": "So, that So, that's"
+    },
+    {
+      "index": 443,
+      "start": 1227.08,
+      "end": 1228.99,
+      "duration": 1.91,
+      "text": "like this simple case I'm talking about."
+    },
+    {
+      "index": 444,
+      "start": 1229.0,
+      "end": 1231.11,
+      "duration": 2.11,
+      "text": "There's one subspace, there's the other"
+    },
+    {
+      "index": 445,
+      "start": 1231.12,
+      "end": 1234.43,
+      "duration": 3.31,
+      "text": "subspace, they only meet at zero, and"
+    },
+    {
+      "index": 446,
+      "start": 1234.44,
+      "end": 1236.67,
+      "duration": 2.23,
+      "text": "they're orthogonal. Okay."
+    },
+    {
+      "index": 447,
+      "start": 1236.68,
+      "end": 1238.43,
+      "duration": 1.75,
+      "text": "Now,"
+    },
+    {
+      "index": 448,
+      "start": 1238.44,
+      "end": 1241.95,
+      "duration": 3.51,
+      "text": "so we now know what it means for two"
+    },
+    {
+      "index": 449,
+      "start": 1241.96,
+      "end": 1243.95,
+      "duration": 1.99,
+      "text": "subspaces to be orthogonal. And now I"
+    },
+    {
+      "index": 450,
+      "start": 1243.96,
+      "end": 1245.39,
+      "duration": 1.43,
+      "text": "want to say"
+    },
+    {
+      "index": 451,
+      "start": 1245.4,
+      "end": 1247.59,
+      "duration": 2.19,
+      "text": "that this is true for the row space and"
+    },
+    {
+      "index": 452,
+      "start": 1247.6,
+      "end": 1248.99,
+      "duration": 1.39,
+      "text": "the null space."
+    },
+    {
+      "index": 453,
+      "start": 1249.0,
+      "end": 1251.07,
+      "duration": 2.07,
+      "text": "Okay. So, that's the"
+    },
+    {
+      "index": 454,
+      "start": 1251.08,
+      "end": 1252.35,
+      "duration": 1.27,
+      "text": "that's the"
+    },
+    {
+      "index": 455,
+      "start": 1252.36,
+      "end": 1253.79,
+      "duration": 1.43,
+      "text": "neat fact."
+    },
+    {
+      "index": 456,
+      "start": 1253.8,
+      "end": 1257.51,
+      "duration": 3.71,
+      "text": "So, row space"
+    },
+    {
+      "index": 457,
+      "start": 1259.75,
+      "end": 1259.76,
+      "duration": 0.01,
+      "text": "is"
+    },
+    {
+      "index": 458,
+      "start": 1259.76,
+      "end": 1264.31,
+      "duration": 4.55,
+      "text": "orthogonal"
+    },
+    {
+      "index": 459,
+      "start": 1266.75,
+      "end": 1266.76,
+      "duration": 0.01,
+      "text": "to the null space. Now, how did I come"
+    },
+    {
+      "index": 460,
+      "start": 1266.76,
+      "end": 1272.51,
+      "duration": 5.75,
+      "text": "up with that?"
+    },
+    {
+      "index": 461,
+      "start": 1274.95,
+      "end": 1274.96,
+      "duration": 0.01,
+      "text": "But, you see that like it's right. That"
+    },
+    {
+      "index": 462,
+      "start": 1274.96,
+      "end": 1277.51,
+      "duration": 2.55,
+      "text": "means that these that these subspaces"
+    },
+    {
+      "index": 463,
+      "start": 1277.52,
+      "end": 1280.55,
+      "duration": 3.03,
+      "text": "are just the right things. They're just"
+    },
+    {
+      "index": 464,
+      "start": 1280.56,
+      "end": 1283.11,
+      "duration": 2.55,
+      "text": "cutting the cutting the whole space up"
+    },
+    {
+      "index": 465,
+      "start": 1283.12,
+      "end": 1284.59,
+      "duration": 1.47,
+      "text": "into"
+    },
+    {
+      "index": 466,
+      "start": 1284.6,
+      "end": 1287.59,
+      "duration": 2.99,
+      "text": "two perpendicular subspaces."
+    },
+    {
+      "index": 467,
+      "start": 1287.6,
+      "end": 1293.67,
+      "duration": 6.07,
+      "text": "Okay, so what?"
+    },
+    {
+      "index": 468,
+      "start": 1296.23,
+      "end": 1296.24,
+      "duration": 0.01,
+      "text": "Well, what have I got"
+    },
+    {
+      "index": 469,
+      "start": 1296.24,
+      "end": 1297.99,
+      "duration": 1.75,
+      "text": "to work with?"
+    },
+    {
+      "index": 470,
+      "start": 1298.0,
+      "end": 1301.19,
+      "duration": 3.19,
+      "text": "All I know is the null space."
+    },
+    {
+      "index": 471,
+      "start": 1301.2,
+      "end": 1304.35,
+      "duration": 3.15,
+      "text": "The null space has vectors that solve"
+    },
+    {
+      "index": 472,
+      "start": 1304.36,
+      "end": 1307.19,
+      "duration": 2.83,
+      "text": "Ax = 0."
+    },
+    {
+      "index": 473,
+      "start": 1307.2,
+      "end": 1310.51,
+      "duration": 3.31,
+      "text": "So, this is a this is a guy x."
+    },
+    {
+      "index": 474,
+      "start": 1310.52,
+      "end": 1313.87,
+      "duration": 3.35,
+      "text": "x is in the null space."
+    },
+    {
+      "index": 475,
+      "start": 1313.88,
+      "end": 1317.27,
+      "duration": 3.39,
+      "text": "Then, Ax is 0."
+    },
+    {
+      "index": 476,
+      "start": 1321.19,
+      "end": 1321.2,
+      "duration": 0.01,
+      "text": "So, why is it orthogonal to the rows of"
+    },
+    {
+      "index": 477,
+      "start": 1321.2,
+      "end": 1323.19,
+      "duration": 1.99,
+      "text": "A?"
+    },
+    {
+      "index": 478,
+      "start": 1323.2,
+      "end": 1325.75,
+      "duration": 2.55,
+      "text": "If I write down Ax = 0, which is all I"
+    },
+    {
+      "index": 479,
+      "start": 1325.76,
+      "end": 1328.35,
+      "duration": 2.59,
+      "text": "know about the null space,"
+    },
+    {
+      "index": 480,
+      "start": 1328.36,
+      "end": 1330.23,
+      "duration": 1.87,
+      "text": "then"
+    },
+    {
+      "index": 481,
+      "start": 1330.24,
+      "end": 1332.11,
+      "duration": 1.87,
+      "text": "I guess I want you to see that that's"
+    },
+    {
+      "index": 482,
+      "start": 1332.12,
+      "end": 1334.35,
+      "duration": 2.23,
+      "text": "telling me just that equation right"
+    },
+    {
+      "index": 483,
+      "start": 1334.36,
+      "end": 1337.03,
+      "duration": 2.67,
+      "text": "there is telling me"
+    },
+    {
+      "index": 484,
+      "start": 1337.04,
+      "end": 1339.55,
+      "duration": 2.51,
+      "text": "that the rows of A, let me write it out."
+    },
+    {
+      "index": 485,
+      "start": 1339.56,
+      "end": 1341.75,
+      "duration": 2.19,
+      "text": "There's row one"
+    },
+    {
+      "index": 486,
+      "start": 1341.76,
+      "end": 1343.95,
+      "duration": 2.19,
+      "text": "of A."
+    },
+    {
+      "index": 487,
+      "start": 1343.96,
+      "end": 1347.23,
+      "duration": 3.27,
+      "text": "Row two."
+    },
+    {
+      "index": 488,
+      "start": 1349.87,
+      "end": 1349.88,
+      "duration": 0.01,
+      "text": "Row m."
+    },
+    {
+      "index": 489,
+      "start": 1349.88,
+      "end": 1352.27,
+      "duration": 2.39,
+      "text": "of A. That that's A."
+    },
+    {
+      "index": 490,
+      "start": 1352.28,
+      "end": 1354.47,
+      "duration": 2.19,
+      "text": "And it's multiplying x"
+    },
+    {
+      "index": 491,
+      "start": 1354.48,
+      "end": 1356.51,
+      "duration": 2.03,
+      "text": "and it's producing"
+    },
+    {
+      "index": 492,
+      "start": 1356.52,
+      "end": 1360.11,
+      "duration": 3.59,
+      "text": "zero."
+    },
+    {
+      "index": 493,
+      "start": 1361.43,
+      "end": 1361.44,
+      "duration": 0.01,
+      "text": "Okay."
+    },
+    {
+      "index": 494,
+      "start": 1361.44,
+      "end": 1363.23,
+      "duration": 1.79,
+      "text": "Written out that way,"
+    },
+    {
+      "index": 495,
+      "start": 1363.24,
+      "end": 1367.11,
+      "duration": 3.87,
+      "text": "you'll see it."
+    },
+    {
+      "index": 496,
+      "start": 1369.15,
+      "end": 1369.16,
+      "duration": 0.01,
+      "text": "So, I'm saying that a vector in the row"
+    },
+    {
+      "index": 497,
+      "start": 1369.16,
+      "end": 1372.75,
+      "duration": 3.59,
+      "text": "space is perpendicular to this guy x in"
+    },
+    {
+      "index": 498,
+      "start": 1372.76,
+      "end": 1374.19,
+      "duration": 1.43,
+      "text": "the null space."
+    },
+    {
+      "index": 499,
+      "start": 1374.2,
+      "end": 1377.23,
+      "duration": 3.03,
+      "text": "And you see why?"
+    },
+    {
+      "index": 500,
+      "start": 1377.24,
+      "end": 1379.95,
+      "duration": 2.71,
+      "text": "Cuz this equation is telling you that"
+    },
+    {
+      "index": 501,
+      "start": 1379.96,
+      "end": 1382.79,
+      "duration": 2.83,
+      "text": "the row one of A"
+    },
+    {
+      "index": 502,
+      "start": 1382.8,
+      "end": 1385.03,
+      "duration": 2.23,
+      "text": "multiplying, that's a that's a dot"
+    },
+    {
+      "index": 503,
+      "start": 1385.04,
+      "end": 1387.27,
+      "duration": 2.23,
+      "text": "product, right? Row row one of A dot"
+    },
+    {
+      "index": 504,
+      "start": 1387.28,
+      "end": 1389.23,
+      "duration": 1.95,
+      "text": "product with this X is producing this"
+    },
+    {
+      "index": 505,
+      "start": 1389.24,
+      "end": 1391.39,
+      "duration": 2.15,
+      "text": "zero."
+    },
+    {
+      "index": 506,
+      "start": 1391.4,
+      "end": 1395.91,
+      "duration": 4.51,
+      "text": "So, X is orthogonal to the first row."
+    },
+    {
+      "index": 507,
+      "start": 1395.92,
+      "end": 1399.35,
+      "duration": 3.43,
+      "text": "And to the second row. Row two of A X is"
+    },
+    {
+      "index": 508,
+      "start": 1399.36,
+      "end": 1402.23,
+      "duration": 2.87,
+      "text": "giving that zero. Row M of A times X is"
+    },
+    {
+      "index": 509,
+      "start": 1402.24,
+      "end": 1404.95,
+      "duration": 2.71,
+      "text": "giving that zero. So, X is"
+    },
+    {
+      "index": 510,
+      "start": 1404.96,
+      "end": 1407.47,
+      "duration": 2.51,
+      "text": "The equation is telling me that X is"
+    },
+    {
+      "index": 511,
+      "start": 1407.48,
+      "end": 1411.43,
+      "duration": 3.95,
+      "text": "orthogonal to all the rows."
+    },
+    {
+      "index": 512,
+      "start": 1413.75,
+      "end": 1413.76,
+      "duration": 0.01,
+      "text": "Right? It's just sitting there."
+    },
+    {
+      "index": 513,
+      "start": 1413.76,
+      "end": 1415.75,
+      "duration": 1.99,
+      "text": "That's all we we it had to be sitting"
+    },
+    {
+      "index": 514,
+      "start": 1415.76,
+      "end": 1417.39,
+      "duration": 1.63,
+      "text": "there cuz we didn't know anything more"
+    },
+    {
+      "index": 515,
+      "start": 1417.4,
+      "end": 1419.91,
+      "duration": 2.51,
+      "text": "about the null space than this."
+    },
+    {
+      "index": 516,
+      "start": 1419.92,
+      "end": 1424.39,
+      "duration": 4.47,
+      "text": "And now I guess to be totally"
+    },
+    {
+      "index": 517,
+      "start": 1424.4,
+      "end": 1426.47,
+      "duration": 2.07,
+      "text": "complete here,"
+    },
+    {
+      "index": 518,
+      "start": 1426.48,
+      "end": 1429.43,
+      "duration": 2.95,
+      "text": "I've now checked that X is orthogonal to"
+    },
+    {
+      "index": 519,
+      "start": 1429.44,
+      "end": 1432.15,
+      "duration": 2.71,
+      "text": "each separate row."
+    },
+    {
+      "index": 520,
+      "start": 1432.16,
+      "end": 1433.67,
+      "duration": 1.51,
+      "text": "But what else"
+    },
+    {
+      "index": 521,
+      "start": 1433.68,
+      "end": 1438.55,
+      "duration": 4.87,
+      "text": "strictly speaking do I have to do?"
+    },
+    {
+      "index": 522,
+      "start": 1440.47,
+      "end": 1440.48,
+      "duration": 0.01,
+      "text": "The the what to show that those"
+    },
+    {
+      "index": 523,
+      "start": 1440.48,
+      "end": 1442.99,
+      "duration": 2.51,
+      "text": "subspaces are orthogonal, I have to take"
+    },
+    {
+      "index": 524,
+      "start": 1443.0,
+      "end": 1445.47,
+      "duration": 2.47,
+      "text": "this X in the null space and show that"
+    },
+    {
+      "index": 525,
+      "start": 1445.48,
+      "end": 1448.79,
+      "duration": 3.31,
+      "text": "it's orthogonal to every"
+    },
+    {
+      "index": 526,
+      "start": 1448.8,
+      "end": 1451.11,
+      "duration": 2.31,
+      "text": "vector in the row space. Every vector in"
+    },
+    {
+      "index": 527,
+      "start": 1451.12,
+      "end": 1453.31,
+      "duration": 2.19,
+      "text": "the row space. So, what what else is in"
+    },
+    {
+      "index": 528,
+      "start": 1453.32,
+      "end": 1455.23,
+      "duration": 1.91,
+      "text": "the row space?"
+    },
+    {
+      "index": 529,
+      "start": 1455.24,
+      "end": 1457.27,
+      "duration": 2.03,
+      "text": "Th- this row is in the row space, that"
+    },
+    {
+      "index": 530,
+      "start": 1457.28,
+      "end": 1459.27,
+      "duration": 1.99,
+      "text": "row is in the row space."
+    },
+    {
+      "index": 531,
+      "start": 1459.28,
+      "end": 1461.79,
+      "duration": 2.51,
+      "text": "They They're all there. But that's not"
+    },
+    {
+      "index": 532,
+      "start": 1461.8,
+      "end": 1463.55,
+      "duration": 1.75,
+      "text": "the whole row space, right? We just have"
+    },
+    {
+      "index": 533,
+      "start": 1463.56,
+      "end": 1465.87,
+      "duration": 2.31,
+      "text": "to like remember, what does it mean"
+    },
+    {
+      "index": 534,
+      "start": 1465.88,
+      "end": 1469.55,
+      "duration": 3.67,
+      "text": "What does that word space telling us?"
+    },
+    {
+      "index": 535,
+      "start": 1469.56,
+      "end": 1474.39,
+      "duration": 4.83,
+      "text": "And what else is in the row space?"
+    },
+    {
+      "index": 536,
+      "start": 1477.75,
+      "end": 1477.76,
+      "duration": 0.01,
+      "text": "Besides the rows?"
+    },
+    {
+      "index": 537,
+      "start": 1477.76,
+      "end": 1479.95,
+      "duration": 2.19,
+      "text": "All there"
+    },
+    {
+      "index": 538,
+      "start": 1479.96,
+      "end": 1481.87,
+      "duration": 1.91,
+      "text": "combination."
+    },
+    {
+      "index": 539,
+      "start": 1481.88,
+      "end": 1484.03,
+      "duration": 2.15,
+      "text": "So, I really have to check that sure"
+    },
+    {
+      "index": 540,
+      "start": 1484.04,
+      "end": 1486.67,
+      "duration": 2.63,
+      "text": "enough, if X is perpendicular row one,"
+    },
+    {
+      "index": 541,
+      "start": 1486.68,
+      "end": 1488.47,
+      "duration": 1.79,
+      "text": "row two, all the all the different"
+    },
+    {
+      "index": 542,
+      "start": 1488.48,
+      "end": 1491.39,
+      "duration": 2.91,
+      "text": "separate rows, then also X is"
+    },
+    {
+      "index": 543,
+      "start": 1491.4,
+      "end": 1493.39,
+      "duration": 1.99,
+      "text": "perpendicular to what combination of the"
+    },
+    {
+      "index": 544,
+      "start": 1493.4,
+      "end": 1495.35,
+      "duration": 1.95,
+      "text": "rows. And that's just matrix"
+    },
+    {
+      "index": 545,
+      "start": 1495.36,
+      "end": 1498.35,
+      "duration": 2.99,
+      "text": "multiplication again. You know, I have"
+    },
+    {
+      "index": 546,
+      "start": 1498.36,
+      "end": 1500.55,
+      "duration": 2.19,
+      "text": "row one"
+    },
+    {
+      "index": 547,
+      "start": 1500.56,
+      "end": 1503.95,
+      "duration": 3.39,
+      "text": "transpose X is zero."
+    },
+    {
+      "index": 548,
+      "start": 1503.96,
+      "end": 1510.95,
+      "duration": 6.99,
+      "text": "So on, row two transpose X is zero."
+    },
+    {
+      "index": 549,
+      "start": 1513.59,
+      "end": 1513.6,
+      "duration": 0.01,
+      "text": "So, I'm entitled to multiply that by"
+    },
+    {
+      "index": 550,
+      "start": 1513.6,
+      "end": 1517.31,
+      "duration": 3.71,
+      "text": "some C1, this by some C2, I still have"
+    },
+    {
+      "index": 551,
+      "start": 1517.32,
+      "end": 1520.63,
+      "duration": 3.31,
+      "text": "zeros. I'm entitled to add."
+    },
+    {
+      "index": 552,
+      "start": 1520.64,
+      "end": 1523.99,
+      "duration": 3.35,
+      "text": "So, I have C1 row one. So So, all this"
+    },
+    {
+      "index": 553,
+      "start": 1524.0,
+      "end": 1526.91,
+      "duration": 2.91,
+      "text": "when I put that together, that's"
+    },
+    {
+      "index": 554,
+      "start": 1526.92,
+      "end": 1532.71,
+      "duration": 5.79,
+      "text": "big parentheses C1 row one plus C2 row"
+    },
+    {
+      "index": 555,
+      "start": 1532.72,
+      "end": 1534.67,
+      "duration": 1.95,
+      "text": "two and so on"
+    },
+    {
+      "index": 556,
+      "start": 1534.68,
+      "end": 1538.15,
+      "duration": 3.47,
+      "text": "transpose X is zero."
+    },
+    {
+      "index": 557,
+      "start": 1538.16,
+      "end": 1540.39,
+      "duration": 2.23,
+      "text": "Right? I just added the zeros and got"
+    },
+    {
+      "index": 558,
+      "start": 1540.4,
+      "end": 1543.23,
+      "duration": 2.83,
+      "text": "zero, and I just added these following"
+    },
+    {
+      "index": 559,
+      "start": 1543.24,
+      "end": 1546.43,
+      "duration": 3.19,
+      "text": "the rules."
+    },
+    {
+      "index": 560,
+      "start": 1547.59,
+      "end": 1547.6,
+      "duration": 0.01,
+      "text": "No"
+    },
+    {
+      "index": 561,
+      "start": 1547.6,
+      "end": 1550.27,
+      "duration": 2.67,
+      "text": "No big deal. The whole point was right"
+    },
+    {
+      "index": 562,
+      "start": 1550.28,
+      "end": 1551.83,
+      "duration": 1.55,
+      "text": "sitting in that."
+    },
+    {
+      "index": 563,
+      "start": 1551.84,
+      "end": 1554.51,
+      "duration": 2.67,
+      "text": "Okay."
+    },
+    {
+      "index": 564,
+      "start": 1555.99,
+      "end": 1556.0,
+      "duration": 0.01,
+      "text": "So"
+    },
+    {
+      "index": 565,
+      "start": 1556.0,
+      "end": 1559.07,
+      "duration": 3.07,
+      "text": "if I come back to this figure now"
+    },
+    {
+      "index": 566,
+      "start": 1559.08,
+      "end": 1560.27,
+      "duration": 1.19,
+      "text": "I'm"
+    },
+    {
+      "index": 567,
+      "start": 1560.28,
+      "end": 1562.43,
+      "duration": 2.15,
+      "text": "like a happier person."
+    },
+    {
+      "index": 568,
+      "start": 1562.44,
+      "end": 1564.07,
+      "duration": 1.63,
+      "text": "Cuz I have"
+    },
+    {
+      "index": 569,
+      "start": 1564.08,
+      "end": 1565.75,
+      "duration": 1.67,
+      "text": "this"
+    },
+    {
+      "index": 570,
+      "start": 1565.76,
+      "end": 1566.67,
+      "duration": 0.91,
+      "text": "uh"
+    },
+    {
+      "index": 571,
+      "start": 1566.68,
+      "end": 1569.51,
+      "duration": 2.83,
+      "text": "the I now see how those subspaces are"
+    },
+    {
+      "index": 572,
+      "start": 1569.52,
+      "end": 1570.67,
+      "duration": 1.15,
+      "text": "oriented."
+    },
+    {
+      "index": 573,
+      "start": 1570.68,
+      "end": 1573.99,
+      "duration": 3.31,
+      "text": "And these subspaces are also oriented."
+    },
+    {
+      "index": 574,
+      "start": 1574.0,
+      "end": 1576.15,
+      "duration": 2.15,
+      "text": "Well, actually"
+    },
+    {
+      "index": 575,
+      "start": 1576.16,
+      "end": 1580.07,
+      "duration": 3.91,
+      "text": "why why is that orthogonality?"
+    },
+    {
+      "index": 576,
+      "start": 1580.08,
+      "end": 1582.67,
+      "duration": 2.59,
+      "text": "Well, if the same statement for A"
+    },
+    {
+      "index": 577,
+      "start": 1582.68,
+      "end": 1585.75,
+      "duration": 3.07,
+      "text": "transpose as that one was for A. So, I"
+    },
+    {
+      "index": 578,
+      "start": 1585.76,
+      "end": 1587.55,
+      "duration": 1.79,
+      "text": "won't take time to prove it again"
+    },
+    {
+      "index": 579,
+      "start": 1587.56,
+      "end": 1589.55,
+      "duration": 1.99,
+      "text": "because it's"
+    },
+    {
+      "index": 580,
+      "start": 1589.56,
+      "end": 1592.99,
+      "duration": 3.43,
+      "text": "cuz we checked it for every matrix, and"
+    },
+    {
+      "index": 581,
+      "start": 1593.0,
+      "end": 1595.47,
+      "duration": 2.47,
+      "text": "A transpose is just as good a matrix as"
+    },
+    {
+      "index": 582,
+      "start": 1595.48,
+      "end": 1597.23,
+      "duration": 1.75,
+      "text": "A, so"
+    },
+    {
+      "index": 583,
+      "start": 1597.24,
+      "end": 1599.47,
+      "duration": 2.23,
+      "text": "we're orthogonal over there."
+    },
+    {
+      "index": 584,
+      "start": 1599.48,
+      "end": 1602.23,
+      "duration": 2.75,
+      "text": "So, we really have"
+    },
+    {
+      "index": 585,
+      "start": 1602.24,
+      "end": 1604.31,
+      "duration": 2.07,
+      "text": "carved up this"
+    },
+    {
+      "index": 586,
+      "start": 1604.32,
+      "end": 1608.31,
+      "duration": 3.99,
+      "text": "these this This was like carving up M"
+    },
+    {
+      "index": 587,
+      "start": 1608.32,
+      "end": 1610.47,
+      "duration": 2.15,
+      "text": "dimensional space"
+    },
+    {
+      "index": 588,
+      "start": 1610.48,
+      "end": 1613.91,
+      "duration": 3.43,
+      "text": "into two subspaces."
+    },
+    {
+      "index": 589,
+      "start": 1613.92,
+      "end": 1615.99,
+      "duration": 2.07,
+      "text": "And this one was carving up"
+    },
+    {
+      "index": 590,
+      "start": 1616.0,
+      "end": 1619.39,
+      "duration": 3.39,
+      "text": "n-dimensional space"
+    },
+    {
+      "index": 591,
+      "start": 1619.4,
+      "end": 1621.75,
+      "duration": 2.35,
+      "text": "into two subspaces."
+    },
+    {
+      "index": 592,
+      "start": 1621.76,
+      "end": 1624.39,
+      "duration": 2.63,
+      "text": "And"
+    },
+    {
+      "index": 593,
+      "start": 1626.83,
+      "end": 1626.84,
+      "duration": 0.01,
+      "text": "Well, one more thing here. One more"
+    },
+    {
+      "index": 594,
+      "start": 1626.84,
+      "end": 1631.03,
+      "duration": 4.19,
+      "text": "important thing."
+    },
+    {
+      "index": 595,
+      "start": 1633.43,
+      "end": 1633.44,
+      "duration": 0.01,
+      "text": "Let Let me move into into into three"
+    },
+    {
+      "index": 596,
+      "start": 1633.44,
+      "end": 1635.83,
+      "duration": 2.39,
+      "text": "dimensions."
+    },
+    {
+      "index": 597,
+      "start": 1635.84,
+      "end": 1640.47,
+      "duration": 4.63,
+      "text": "Tell me a couple of orthogonal subspaces"
+    },
+    {
+      "index": 598,
+      "start": 1640.48,
+      "end": 1643.43,
+      "duration": 2.95,
+      "text": "in three dimensions"
+    },
+    {
+      "index": 599,
+      "start": 1643.44,
+      "end": 1644.87,
+      "duration": 1.43,
+      "text": "that"
+    },
+    {
+      "index": 600,
+      "start": 1644.88,
+      "end": 1647.35,
+      "duration": 2.47,
+      "text": "somehow don't carve up the whole space."
+    },
+    {
+      "index": 601,
+      "start": 1647.36,
+      "end": 1650.23,
+      "duration": 2.87,
+      "text": "There's stuff left there."
+    },
+    {
+      "index": 602,
+      "start": 1650.24,
+      "end": 1653.15,
+      "duration": 2.91,
+      "text": "I'm thinking of a couple of orthogonal"
+    },
+    {
+      "index": 603,
+      "start": 1653.16,
+      "end": 1654.75,
+      "duration": 1.59,
+      "text": "lines."
+    },
+    {
+      "index": 604,
+      "start": 1654.76,
+      "end": 1655.91,
+      "duration": 1.15,
+      "text": "If I"
+    },
+    {
+      "index": 605,
+      "start": 1655.92,
+      "end": 1658.91,
+      "duration": 2.99,
+      "text": "Suppose I'm in three dimensions, R3."
+    },
+    {
+      "index": 606,
+      "start": 1658.92,
+      "end": 1662.71,
+      "duration": 3.79,
+      "text": "And I have one line, one one-dimensional"
+    },
+    {
+      "index": 607,
+      "start": 1662.72,
+      "end": 1665.95,
+      "duration": 3.23,
+      "text": "subspace, and a perpendicular one."
+    },
+    {
+      "index": 608,
+      "start": 1665.96,
+      "end": 1667.95,
+      "duration": 1.99,
+      "text": "Could those be"
+    },
+    {
+      "index": 609,
+      "start": 1667.96,
+      "end": 1671.07,
+      "duration": 3.11,
+      "text": "the row space and the null space?"
+    },
+    {
+      "index": 610,
+      "start": 1671.08,
+      "end": 1672.79,
+      "duration": 1.71,
+      "text": "Could those be the row space and the"
+    },
+    {
+      "index": 611,
+      "start": 1672.8,
+      "end": 1675.43,
+      "duration": 2.63,
+      "text": "null space? Could I Could I be in three"
+    },
+    {
+      "index": 612,
+      "start": 1675.44,
+      "end": 1678.35,
+      "duration": 2.91,
+      "text": "dimensions"
+    },
+    {
+      "index": 613,
+      "start": 1682.87,
+      "end": 1682.88,
+      "duration": 0.01,
+      "text": "and have a row space that's a line and a"
+    },
+    {
+      "index": 614,
+      "start": 1682.88,
+      "end": 1685.83,
+      "duration": 2.95,
+      "text": "null space that's a line?"
+    },
+    {
+      "index": 615,
+      "start": 1685.84,
+      "end": 1687.19,
+      "duration": 1.35,
+      "text": "No."
+    },
+    {
+      "index": 616,
+      "start": 1687.2,
+      "end": 1690.07,
+      "duration": 2.87,
+      "text": "Why not?"
+    },
+    {
+      "index": 617,
+      "start": 1691.79,
+      "end": 1691.8,
+      "duration": 0.01,
+      "text": "Because the dimensions aren't right,"
+    },
+    {
+      "index": 618,
+      "start": 1691.8,
+      "end": 1694.35,
+      "duration": 2.55,
+      "text": "right? The dimensions are no good. The"
+    },
+    {
+      "index": 619,
+      "start": 1694.36,
+      "end": 1697.75,
+      "duration": 3.39,
+      "text": "The dimensions here are r and n minus r."
+    },
+    {
+      "index": 620,
+      "start": 1697.76,
+      "end": 1701.43,
+      "duration": 3.67,
+      "text": "They add up to three. They add up to n."
+    },
+    {
+      "index": 621,
+      "start": 1701.44,
+      "end": 1704.91,
+      "duration": 3.47,
+      "text": "If I take uh Let's just if I just follow"
+    },
+    {
+      "index": 622,
+      "start": 1704.92,
+      "end": 1706.71,
+      "duration": 1.79,
+      "text": "that example."
+    },
+    {
+      "index": 623,
+      "start": 1706.72,
+      "end": 1710.03,
+      "duration": 3.31,
+      "text": "If If If If the row space is"
+    },
+    {
+      "index": 624,
+      "start": 1710.04,
+      "end": 1713.35,
+      "duration": 3.31,
+      "text": "one-dimensional, suppose A is What's a"
+    },
+    {
+      "index": 625,
+      "start": 1713.36,
+      "end": 1714.43,
+      "duration": 1.07,
+      "text": "good"
+    },
+    {
+      "index": 626,
+      "start": 1714.44,
+      "end": 1717.35,
+      "duration": 2.91,
+      "text": "in I'm in R3. I want a one-dimensional"
+    },
+    {
+      "index": 627,
+      "start": 1717.36,
+      "end": 1723.39,
+      "duration": 6.03,
+      "text": "row space. Let me take 1 2 5 2 4 10."
+    },
+    {
+      "index": 628,
+      "start": 1723.4,
+      "end": 1728.55,
+      "duration": 5.15,
+      "text": "What's the dimension of that row space?"
+    },
+    {
+      "index": 629,
+      "start": 1730.15,
+      "end": 1730.16,
+      "duration": 0.01,
+      "text": "One."
+    },
+    {
+      "index": 630,
+      "start": 1730.16,
+      "end": 1735.63,
+      "duration": 5.47,
+      "text": "What's the dimension of the null space?"
+    },
+    {
+      "index": 631,
+      "start": 1737.31,
+      "end": 1737.32,
+      "duration": 0.01,
+      "text": "What What tell What's the null space"
+    },
+    {
+      "index": 632,
+      "start": 1737.32,
+      "end": 1740.11,
+      "duration": 2.79,
+      "text": "look like in that case? The row space is"
+    },
+    {
+      "index": 633,
+      "start": 1740.12,
+      "end": 1742.27,
+      "duration": 2.15,
+      "text": "a line, right? One-dimensional. It's"
+    },
+    {
+      "index": 634,
+      "start": 1742.28,
+      "end": 1746.31,
+      "duration": 4.03,
+      "text": "just a line through 1 2 5."
+    },
+    {
+      "index": 635,
+      "start": 1748.11,
+      "end": 1748.12,
+      "duration": 0.01,
+      "text": "Geometrically, what's the row space look"
+    },
+    {
+      "index": 636,
+      "start": 1748.12,
+      "end": 1750.79,
+      "duration": 2.67,
+      "text": "like?"
+    },
+    {
+      "index": 637,
+      "start": 1755.55,
+      "end": 1755.56,
+      "duration": 0.01,
+      "text": "What's its dimension?"
+    },
+    {
+      "index": 638,
+      "start": 1755.56,
+      "end": 1760.39,
+      "duration": 4.83,
+      "text": "So So here are Here n is 3."
+    },
+    {
+      "index": 639,
+      "start": 1760.4,
+      "end": 1763.07,
+      "duration": 2.67,
+      "text": "The rank is 1."
+    },
+    {
+      "index": 640,
+      "start": 1763.08,
+      "end": 1766.67,
+      "duration": 3.59,
+      "text": "So the dimension of the null space, so"
+    },
+    {
+      "index": 641,
+      "start": 1766.68,
+      "end": 1768.19,
+      "duration": 1.51,
+      "text": "I'm looking"
+    },
+    {
+      "index": 642,
+      "start": 1768.2,
+      "end": 1770.07,
+      "duration": 1.87,
+      "text": "at this x"
+    },
+    {
+      "index": 643,
+      "start": 1770.08,
+      "end": 1772.75,
+      "duration": 2.67,
+      "text": "x1 x2 x3"
+    },
+    {
+      "index": 644,
+      "start": 1772.76,
+      "end": 1776.59,
+      "duration": 3.83,
+      "text": "to get 0."
+    },
+    {
+      "index": 645,
+      "start": 1780.07,
+      "end": 1780.08,
+      "duration": 0.01,
+      "text": "So the dimension of the null space is"
+    },
+    {
+      "index": 646,
+      "start": 1780.08,
+      "end": 1782.19,
+      "duration": 2.11,
+      "text": "we all know is"
+    },
+    {
+      "index": 647,
+      "start": 1782.2,
+      "end": 1783.27,
+      "duration": 1.07,
+      "text": "two."
+    },
+    {
+      "index": 648,
+      "start": 1783.28,
+      "end": 1785.35,
+      "duration": 2.07,
+      "text": "Right. It's a plane."
+    },
+    {
+      "index": 649,
+      "start": 1785.36,
+      "end": 1787.67,
+      "duration": 2.31,
+      "text": "And now, actually, we know we see better"
+    },
+    {
+      "index": 650,
+      "start": 1787.68,
+      "end": 1789.67,
+      "duration": 1.99,
+      "text": "what plane is it."
+    },
+    {
+      "index": 651,
+      "start": 1789.68,
+      "end": 1792.55,
+      "duration": 2.87,
+      "text": "What plane is it?"
+    },
+    {
+      "index": 652,
+      "start": 1792.56,
+      "end": 1797.11,
+      "duration": 4.55,
+      "text": "It's the plane that's perpendicular to"
+    },
+    {
+      "index": 653,
+      "start": 1797.12,
+      "end": 1799.87,
+      "duration": 2.75,
+      "text": "1 2 5."
+    },
+    {
+      "index": 654,
+      "start": 1799.88,
+      "end": 1802.59,
+      "duration": 2.71,
+      "text": "Right? We now see In fact, the 2 4 10"
+    },
+    {
+      "index": 655,
+      "start": 1802.6,
+      "end": 1804.51,
+      "duration": 1.91,
+      "text": "didn't actually have any effect at all."
+    },
+    {
+      "index": 656,
+      "start": 1804.52,
+      "end": 1806.99,
+      "duration": 2.47,
+      "text": "I could have just ignored that."
+    },
+    {
+      "index": 657,
+      "start": 1807.0,
+      "end": 1809.03,
+      "duration": 2.03,
+      "text": "That didn't change the row space or the"
+    },
+    {
+      "index": 658,
+      "start": 1809.04,
+      "end": 1812.15,
+      "duration": 3.11,
+      "text": "null space."
+    },
+    {
+      "index": 659,
+      "start": 1814.43,
+      "end": 1814.44,
+      "duration": 0.01,
+      "text": "I'll just make that"
+    },
+    {
+      "index": 660,
+      "start": 1814.44,
+      "end": 1816.27,
+      "duration": 1.83,
+      "text": "one equation."
+    },
+    {
+      "index": 661,
+      "start": 1816.28,
+      "end": 1818.15,
+      "duration": 1.87,
+      "text": "Yeah. Okay. Sure."
+    },
+    {
+      "index": 662,
+      "start": 1818.16,
+      "end": 1819.83,
+      "duration": 1.67,
+      "text": "That's That's the easiest to deal with."
+    },
+    {
+      "index": 663,
+      "start": 1819.84,
+      "end": 1821.99,
+      "duration": 2.15,
+      "text": "One equation,"
+    },
+    {
+      "index": 664,
+      "start": 1822.0,
+      "end": 1824.31,
+      "duration": 2.31,
+      "text": "three unknowns,"
+    },
+    {
+      "index": 665,
+      "start": 1824.32,
+      "end": 1828.59,
+      "duration": 4.27,
+      "text": "and um"
+    },
+    {
+      "index": 666,
+      "start": 1830.79,
+      "end": 1830.8,
+      "duration": 0.01,
+      "text": "I want to ask"
+    },
+    {
+      "index": 667,
+      "start": 1830.8,
+      "end": 1832.55,
+      "duration": 1.75,
+      "text": "uh"
+    },
+    {
+      "index": 668,
+      "start": 1832.56,
+      "end": 1834.95,
+      "duration": 2.39,
+      "text": "What's What does the equation give me?"
+    },
+    {
+      "index": 669,
+      "start": 1834.96,
+      "end": 1837.71,
+      "duration": 2.75,
+      "text": "It gives me the null space."
+    },
+    {
+      "index": 670,
+      "start": 1837.72,
+      "end": 1840.15,
+      "duration": 2.43,
+      "text": "And you would have said"
+    },
+    {
+      "index": 671,
+      "start": 1840.16,
+      "end": 1841.99,
+      "duration": 1.83,
+      "text": "back in September, you would have said"
+    },
+    {
+      "index": 672,
+      "start": 1842.0,
+      "end": 1843.59,
+      "duration": 1.59,
+      "text": "it gives you a plane."
+    },
+    {
+      "index": 673,
+      "start": 1843.6,
+      "end": 1844.71,
+      "duration": 1.11,
+      "text": "And"
+    },
+    {
+      "index": 674,
+      "start": 1844.72,
+      "end": 1846.71,
+      "duration": 1.99,
+      "text": "we're we're completely right. And the"
+    },
+    {
+      "index": 675,
+      "start": 1846.72,
+      "end": 1849.47,
+      "duration": 2.75,
+      "text": "plane it gives you, the normal vector,"
+    },
+    {
+      "index": 676,
+      "start": 1849.48,
+      "end": 1852.19,
+      "duration": 2.71,
+      "text": "you remember in calculus there was this"
+    },
+    {
+      "index": 677,
+      "start": 1852.2,
+      "end": 1855.15,
+      "duration": 2.95,
+      "text": "dumb normal vector called N. Well, there"
+    },
+    {
+      "index": 678,
+      "start": 1855.16,
+      "end": 1857.47,
+      "duration": 2.31,
+      "text": "it is, 1 2 5."
+    },
+    {
+      "index": 679,
+      "start": 1857.48,
+      "end": 1859.43,
+      "duration": 1.95,
+      "text": "Okay."
+    },
+    {
+      "index": 680,
+      "start": 1859.44,
+      "end": 1860.47,
+      "duration": 1.03,
+      "text": "So,"
+    },
+    {
+      "index": 681,
+      "start": 1860.48,
+      "end": 1862.63,
+      "duration": 2.15,
+      "text": "uh"
+    },
+    {
+      "index": 682,
+      "start": 1862.64,
+      "end": 1865.67,
+      "duration": 3.03,
+      "text": "What what is the"
+    },
+    {
+      "index": 683,
+      "start": 1865.68,
+      "end": 1868.63,
+      "duration": 2.95,
+      "text": "What's the point I want to make here?"
+    },
+    {
+      "index": 684,
+      "start": 1868.64,
+      "end": 1871.39,
+      "duration": 2.75,
+      "text": "I want to make I want to emphasize that"
+    },
+    {
+      "index": 685,
+      "start": 1871.4,
+      "end": 1874.15,
+      "duration": 2.75,
+      "text": "not only are the"
+    },
+    {
+      "index": 686,
+      "start": 1874.16,
+      "end": 1879.75,
+      "duration": 5.59,
+      "text": "Let me write it in words."
+    },
+    {
+      "index": 687,
+      "start": 1900.79,
+      "end": 1900.8,
+      "duration": 0.01,
+      "text": "That's That's this neat fact which we we"
+    },
+    {
+      "index": 688,
+      "start": 1900.8,
+      "end": 1904.51,
+      "duration": 3.71,
+      "text": "just checked from AX = 0. But now I want"
+    },
+    {
+      "index": 689,
+      "start": 1904.52,
+      "end": 1905.83,
+      "duration": 1.31,
+      "text": "to say"
+    },
+    {
+      "index": 690,
+      "start": 1905.84,
+      "end": 1907.95,
+      "duration": 2.11,
+      "text": "I want to say more because there's a"
+    },
+    {
+      "index": 691,
+      "start": 1907.96,
+      "end": 1911.03,
+      "duration": 3.07,
+      "text": "little more that's true."
+    },
+    {
+      "index": 692,
+      "start": 1911.04,
+      "end": 1914.75,
+      "duration": 3.71,
+      "text": "Their dimensions add to the whole space."
+    },
+    {
+      "index": 693,
+      "start": 1914.76,
+      "end": 1916.15,
+      "duration": 1.39,
+      "text": "So, that's like a little extra"
+    },
+    {
+      "index": 694,
+      "start": 1916.16,
+      "end": 1917.51,
+      "duration": 1.35,
+      "text": "information."
+    },
+    {
+      "index": 695,
+      "start": 1917.52,
+      "end": 1918.67,
+      "duration": 1.15,
+      "text": "That"
+    },
+    {
+      "index": 696,
+      "start": 1918.68,
+      "end": 1920.47,
+      "duration": 1.79,
+      "text": "It's not like I could I couldn't have a"
+    },
+    {
+      "index": 697,
+      "start": 1920.48,
+      "end": 1922.95,
+      "duration": 2.47,
+      "text": "line and a line in three dimensions."
+    },
+    {
+      "index": 698,
+      "start": 1922.96,
+      "end": 1924.99,
+      "duration": 2.03,
+      "text": "Those Those don't add up. One and one"
+    },
+    {
+      "index": 699,
+      "start": 1925.0,
+      "end": 1926.95,
+      "duration": 1.95,
+      "text": "don't add to three."
+    },
+    {
+      "index": 700,
+      "start": 1926.96,
+      "end": 1929.59,
+      "duration": 2.63,
+      "text": "So, I use the word orthogonal"
+    },
+    {
+      "index": 701,
+      "start": 1929.6,
+      "end": 1934.87,
+      "duration": 5.27,
+      "text": "complement."
+    },
+    {
+      "index": 702,
+      "start": 1936.71,
+      "end": 1936.72,
+      "duration": 0.01,
+      "text": "in"
+    },
+    {
+      "index": 703,
+      "start": 1936.72,
+      "end": 1939.91,
+      "duration": 3.19,
+      "text": "Rn. And the idea of this word complement"
+    },
+    {
+      "index": 704,
+      "start": 1939.92,
+      "end": 1941.23,
+      "duration": 1.31,
+      "text": "is"
+    },
+    {
+      "index": 705,
+      "start": 1941.24,
+      "end": 1943.95,
+      "duration": 2.71,
+      "text": "that"
+    },
+    {
+      "index": 706,
+      "start": 1943.96,
+      "end": 1946.95,
+      "duration": 2.99,
+      "text": "the orthogonal complement of a"
+    },
+    {
+      "index": 707,
+      "start": 1946.96,
+      "end": 1948.99,
+      "duration": 2.03,
+      "text": "row space"
+    },
+    {
+      "index": 708,
+      "start": 1949.0,
+      "end": 1951.91,
+      "duration": 2.91,
+      "text": "contains not just some vectors that are"
+    },
+    {
+      "index": 709,
+      "start": 1951.92,
+      "end": 1954.23,
+      "duration": 2.31,
+      "text": "orthogonal to it, but all."
+    },
+    {
+      "index": 710,
+      "start": 1954.24,
+      "end": 1956.71,
+      "duration": 2.47,
+      "text": "So, so what does that mean? That means"
+    },
+    {
+      "index": 711,
+      "start": 1956.72,
+      "end": 1961.03,
+      "duration": 4.31,
+      "text": "that the null space"
+    },
+    {
+      "index": 712,
+      "start": 1965.03,
+      "end": 1965.04,
+      "duration": 0.01,
+      "text": "contains all"
+    },
+    {
+      "index": 713,
+      "start": 1965.04,
+      "end": 1969.51,
+      "duration": 4.47,
+      "text": "not just some, but all vectors"
+    },
+    {
+      "index": 714,
+      "start": 1969.52,
+      "end": 1974.03,
+      "duration": 4.51,
+      "text": "that are perpendicular to the row space."
+    },
+    {
+      "index": 715,
+      "start": 1974.04,
+      "end": 1977.67,
+      "duration": 3.63,
+      "text": "Okay."
+    },
+    {
+      "index": 716,
+      "start": 1979.79,
+      "end": 1979.8,
+      "duration": 0.01,
+      "text": "Really, what I've done in this half of"
+    },
+    {
+      "index": 717,
+      "start": 1979.8,
+      "end": 1981.51,
+      "duration": 1.71,
+      "text": "the lecture"
+    },
+    {
+      "index": 718,
+      "start": 1981.52,
+      "end": 1984.07,
+      "duration": 2.55,
+      "text": "is just"
+    },
+    {
+      "index": 719,
+      "start": 1984.08,
+      "end": 1986.83,
+      "duration": 2.75,
+      "text": "notice"
+    },
+    {
+      "index": 720,
+      "start": 1986.84,
+      "end": 1989.39,
+      "duration": 2.55,
+      "text": "some of the nice geometry that that we"
+    },
+    {
+      "index": 721,
+      "start": 1989.4,
+      "end": 1991.47,
+      "duration": 2.07,
+      "text": "didn't pick up before because we didn't"
+    },
+    {
+      "index": 722,
+      "start": 1991.48,
+      "end": 1994.99,
+      "duration": 3.51,
+      "text": "discuss perpendicular vectors before."
+    },
+    {
+      "index": 723,
+      "start": 1995.0,
+      "end": 1997.03,
+      "duration": 2.03,
+      "text": "But, it was all sitting there, and now"
+    },
+    {
+      "index": 724,
+      "start": 1997.04,
+      "end": 1999.63,
+      "duration": 2.59,
+      "text": "we've picked it up. That these vectors"
+    },
+    {
+      "index": 725,
+      "start": 1999.64,
+      "end": 2001.87,
+      "duration": 2.23,
+      "text": "are orthogonal complements. And I guess"
+    },
+    {
+      "index": 726,
+      "start": 2001.88,
+      "end": 2005.03,
+      "duration": 3.15,
+      "text": "I even call this"
+    },
+    {
+      "index": 727,
+      "start": 2005.04,
+      "end": 2008.07,
+      "duration": 3.03,
+      "text": "part one of the fundamental theorem of"
+    },
+    {
+      "index": 728,
+      "start": 2008.08,
+      "end": 2009.75,
+      "duration": 1.67,
+      "text": "linear algebra."
+    },
+    {
+      "index": 729,
+      "start": 2009.76,
+      "end": 2011.07,
+      "duration": 1.31,
+      "text": "The fundamental theorem of linear"
+    },
+    {
+      "index": 730,
+      "start": 2011.08,
+      "end": 2012.23,
+      "duration": 1.15,
+      "text": "algebra"
+    },
+    {
+      "index": 731,
+      "start": 2012.24,
+      "end": 2016.43,
+      "duration": 4.19,
+      "text": "is about these four subspaces."
+    },
+    {
+      "index": 732,
+      "start": 2016.44,
+      "end": 2018.31,
+      "duration": 1.87,
+      "text": "So, part one is about their dimension."
+    },
+    {
+      "index": 733,
+      "start": 2018.32,
+      "end": 2021.59,
+      "duration": 3.27,
+      "text": "Maybe I should call it part two now."
+    },
+    {
+      "index": 734,
+      "start": 2021.6,
+      "end": 2024.51,
+      "duration": 2.91,
+      "text": "Their dimensions we got."
+    },
+    {
+      "index": 735,
+      "start": 2024.52,
+      "end": 2026.67,
+      "duration": 2.15,
+      "text": "Now we're getting their orthogonality."
+    },
+    {
+      "index": 736,
+      "start": 2026.68,
+      "end": 2028.95,
+      "duration": 2.27,
+      "text": "That's part two."
+    },
+    {
+      "index": 737,
+      "start": 2028.96,
+      "end": 2031.59,
+      "duration": 2.63,
+      "text": "And part three"
+    },
+    {
+      "index": 738,
+      "start": 2031.6,
+      "end": 2034.55,
+      "duration": 2.95,
+      "text": "will be about bases for this."
+    },
+    {
+      "index": 739,
+      "start": 2034.56,
+      "end": 2037.19,
+      "duration": 2.63,
+      "text": "Orthogonal bases."
+    },
+    {
+      "index": 740,
+      "start": 2037.2,
+      "end": 2039.11,
+      "duration": 1.91,
+      "text": "So, that's"
+    },
+    {
+      "index": 741,
+      "start": 2039.12,
+      "end": 2040.43,
+      "duration": 1.31,
+      "text": "uh coming up."
+    },
+    {
+      "index": 742,
+      "start": 2040.44,
+      "end": 2041.47,
+      "duration": 1.03,
+      "text": "Okay."
+    },
+    {
+      "index": 743,
+      "start": 2041.48,
+      "end": 2042.55,
+      "duration": 1.07,
+      "text": "So,"
+    },
+    {
+      "index": 744,
+      "start": 2042.56,
+      "end": 2046.39,
+      "duration": 3.83,
+      "text": "I'm I'm uh"
+    },
+    {
+      "index": 745,
+      "start": 2049.03,
+      "end": 2049.04,
+      "duration": 0.01,
+      "text": "I'm happy with that"
+    },
+    {
+      "index": 746,
+      "start": 2049.04,
+      "end": 2050.79,
+      "duration": 1.75,
+      "text": "geometry right now."
+    },
+    {
+      "index": 747,
+      "start": 2050.8,
+      "end": 2052.55,
+      "duration": 1.75,
+      "text": "Okay."
+    },
+    {
+      "index": 748,
+      "start": 2052.56,
+      "end": 2054.869,
+      "duration": 2.309,
+      "text": "Okay. Now, what's my next goal in this"
+    },
+    {
+      "index": 749,
+      "start": 2054.879,
+      "end": 2056.149,
+      "duration": 1.27,
+      "text": "chapter?"
+    },
+    {
+      "index": 750,
+      "start": 2056.159,
+      "end": 2058.07,
+      "duration": 1.911,
+      "text": "Here's the It's the main problem of the"
+    },
+    {
+      "index": 751,
+      "start": 2058.08,
+      "end": 2060.07,
+      "duration": 1.99,
+      "text": "chapter."
+    },
+    {
+      "index": 752,
+      "start": 2060.08,
+      "end": 2062.99,
+      "duration": 2.91,
+      "text": "The main problem of the chapter is So,"
+    },
+    {
+      "index": 753,
+      "start": 2063.0,
+      "end": 2066.51,
+      "duration": 3.51,
+      "text": "this is coming."
+    },
+    {
+      "index": 754,
+      "start": 2075.629,
+      "end": 2075.639,
+      "duration": 0.01,
+      "text": "This is this is the very last chapter"
+    },
+    {
+      "index": 755,
+      "start": 2075.639,
+      "end": 2083.909,
+      "duration": 8.27,
+      "text": "that's about AX = B."
+    },
+    {
+      "index": 756,
+      "start": 2086.79,
+      "end": 2086.8,
+      "duration": 0.01,
+      "text": "I would like to solve that"
+    },
+    {
+      "index": 757,
+      "start": 2086.8,
+      "end": 2089.07,
+      "duration": 2.27,
+      "text": "system of equations"
+    },
+    {
+      "index": 758,
+      "start": 2089.08,
+      "end": 2094.47,
+      "duration": 5.39,
+      "text": "when there is no solution."
+    },
+    {
+      "index": 759,
+      "start": 2096.59,
+      "end": 2096.6,
+      "duration": 0.01,
+      "text": "You may say what a ridiculous thing to"
+    },
+    {
+      "index": 760,
+      "start": 2096.6,
+      "end": 2099.31,
+      "duration": 2.71,
+      "text": "do, but I have to say I it's done all"
+    },
+    {
+      "index": 761,
+      "start": 2099.32,
+      "end": 2100.55,
+      "duration": 1.23,
+      "text": "the time."
+    },
+    {
+      "index": 762,
+      "start": 2100.56,
+      "end": 2103.59,
+      "duration": 3.03,
+      "text": "In fact, it has to be done. You get"
+    },
+    {
+      "index": 763,
+      "start": 2103.6,
+      "end": 2107.39,
+      "duration": 3.79,
+      "text": "So so the problem is solve"
+    },
+    {
+      "index": 764,
+      "start": 2107.4,
+      "end": 2109.95,
+      "duration": 2.55,
+      "text": "as the best possible"
+    },
+    {
+      "index": 765,
+      "start": 2109.96,
+      "end": 2114.27,
+      "duration": 4.31,
+      "text": "solve I'll put quotes"
+    },
+    {
+      "index": 766,
+      "start": 2117.59,
+      "end": 2117.6,
+      "duration": 0.01,
+      "text": "AX = B when"
+    },
+    {
+      "index": 767,
+      "start": 2117.6,
+      "end": 2120.15,
+      "duration": 2.55,
+      "text": "there is"
+    },
+    {
+      "index": 768,
+      "start": 2120.16,
+      "end": 2124.39,
+      "duration": 4.23,
+      "text": "no solution."
+    },
+    {
+      "index": 769,
+      "start": 2126.07,
+      "end": 2126.08,
+      "duration": 0.01,
+      "text": "And of course, what does that mean? B"
+    },
+    {
+      "index": 770,
+      "start": 2126.08,
+      "end": 2129.47,
+      "duration": 3.39,
+      "text": "isn't in the in the column space."
+    },
+    {
+      "index": 771,
+      "start": 2129.48,
+      "end": 2131.95,
+      "duration": 2.47,
+      "text": "And it's quite typical"
+    },
+    {
+      "index": 772,
+      "start": 2131.96,
+      "end": 2135.59,
+      "duration": 3.63,
+      "text": "if this matrix A is rectangular, if I"
+    },
+    {
+      "index": 773,
+      "start": 2135.6,
+      "end": 2138.47,
+      "duration": 2.87,
+      "text": "maybe I have M equations"
+    },
+    {
+      "index": 774,
+      "start": 2138.48,
+      "end": 2140.35,
+      "duration": 1.87,
+      "text": "and that's bigger than the number of"
+    },
+    {
+      "index": 775,
+      "start": 2140.36,
+      "end": 2142.23,
+      "duration": 1.87,
+      "text": "unknowns"
+    },
+    {
+      "index": 776,
+      "start": 2142.24,
+      "end": 2145.27,
+      "duration": 3.03,
+      "text": "then for sure the rank"
+    },
+    {
+      "index": 777,
+      "start": 2145.28,
+      "end": 2146.63,
+      "duration": 1.35,
+      "text": "is"
+    },
+    {
+      "index": 778,
+      "start": 2146.64,
+      "end": 2148.35,
+      "duration": 1.71,
+      "text": "not M."
+    },
+    {
+      "index": 779,
+      "start": 2148.36,
+      "end": 2150.59,
+      "duration": 2.23,
+      "text": "The rank couldn't be M now. So there"
+    },
+    {
+      "index": 780,
+      "start": 2150.6,
+      "end": 2152.31,
+      "duration": 1.71,
+      "text": "will be a lot of right hand sides with"
+    },
+    {
+      "index": 781,
+      "start": 2152.32,
+      "end": 2156.75,
+      "duration": 4.43,
+      "text": "no solution, but"
+    },
+    {
+      "index": 782,
+      "start": 2160.19,
+      "end": 2160.2,
+      "duration": 0.01,
+      "text": "Here's an example."
+    },
+    {
+      "index": 783,
+      "start": 2160.2,
+      "end": 2162.71,
+      "duration": 2.51,
+      "text": "Some satellite is buzzing along."
+    },
+    {
+      "index": 784,
+      "start": 2162.72,
+      "end": 2166.19,
+      "duration": 3.47,
+      "text": "You measure its position."
+    },
+    {
+      "index": 785,
+      "start": 2172.55,
+      "end": 2172.56,
+      "duration": 0.01,
+      "text": "So that gives you a thousand equations"
+    },
+    {
+      "index": 786,
+      "start": 2172.56,
+      "end": 2173.83,
+      "duration": 1.27,
+      "text": "for the"
+    },
+    {
+      "index": 787,
+      "start": 2173.84,
+      "end": 2176.67,
+      "duration": 2.83,
+      "text": "for the parameters that that that give"
+    },
+    {
+      "index": 788,
+      "start": 2176.68,
+      "end": 2178.23,
+      "duration": 1.55,
+      "text": "the position."
+    },
+    {
+      "index": 789,
+      "start": 2178.24,
+      "end": 2180.23,
+      "duration": 1.99,
+      "text": "But there aren't a thousand parameters,"
+    },
+    {
+      "index": 790,
+      "start": 2180.24,
+      "end": 2183.19,
+      "duration": 2.95,
+      "text": "there's just maybe six or so."
+    },
+    {
+      "index": 791,
+      "start": 2183.2,
+      "end": 2186.15,
+      "duration": 2.95,
+      "text": "Or you're measuring the"
+    },
+    {
+      "index": 792,
+      "start": 2186.16,
+      "end": 2189.63,
+      "duration": 3.47,
+      "text": "you're doing questionnaires."
+    },
+    {
+      "index": 793,
+      "start": 2189.64,
+      "end": 2193.99,
+      "duration": 4.35,
+      "text": "You're you're measuring"
+    },
+    {
+      "index": 794,
+      "start": 2196.15,
+      "end": 2196.16,
+      "duration": 0.01,
+      "text": "resistances."
+    },
+    {
+      "index": 795,
+      "start": 2196.16,
+      "end": 2198.35,
+      "duration": 2.19,
+      "text": "You're taking pulses. You're measuring"
+    },
+    {
+      "index": 796,
+      "start": 2198.36,
+      "end": 2200.55,
+      "duration": 2.19,
+      "text": "somebody's pulse rate."
+    },
+    {
+      "index": 797,
+      "start": 2200.56,
+      "end": 2202.27,
+      "duration": 1.71,
+      "text": "Okay, there's just one unknown, the"
+    },
+    {
+      "index": 798,
+      "start": 2202.28,
+      "end": 2204.83,
+      "duration": 2.55,
+      "text": "pulse rate."
+    },
+    {
+      "index": 799,
+      "start": 2204.84,
+      "end": 2207.03,
+      "duration": 2.19,
+      "text": "So, you measure it once, okay, fine."
+    },
+    {
+      "index": 800,
+      "start": 2207.04,
+      "end": 2209.51,
+      "duration": 2.47,
+      "text": "But, if you really want to know it, you"
+    },
+    {
+      "index": 801,
+      "start": 2209.52,
+      "end": 2212.63,
+      "duration": 3.11,
+      "text": "measure it multiple times."
+    },
+    {
+      "index": 802,
+      "start": 2212.64,
+      "end": 2214.87,
+      "duration": 2.23,
+      "text": "But then, the measurements have no"
+    },
+    {
+      "index": 803,
+      "start": 2214.88,
+      "end": 2217.03,
+      "duration": 2.15,
+      "text": "reason. So, there's"
+    },
+    {
+      "index": 804,
+      "start": 2217.04,
+      "end": 2218.83,
+      "duration": 1.79,
+      "text": "The problem is that in many, many"
+    },
+    {
+      "index": 805,
+      "start": 2218.84,
+      "end": 2222.67,
+      "duration": 3.83,
+      "text": "problems, we got too many equations,"
+    },
+    {
+      "index": 806,
+      "start": 2222.68,
+      "end": 2225.59,
+      "duration": 2.91,
+      "text": "and they've got noise in the right-hand"
+    },
+    {
+      "index": 807,
+      "start": 2225.6,
+      "end": 2227.35,
+      "duration": 1.75,
+      "text": "side. So,"
+    },
+    {
+      "index": 808,
+      "start": 2227.36,
+      "end": 2229.63,
+      "duration": 2.27,
+      "text": "Ax = b,"
+    },
+    {
+      "index": 809,
+      "start": 2229.64,
+      "end": 2231.35,
+      "duration": 1.71,
+      "text": "I can't expect to solve it exactly,"
+    },
+    {
+      "index": 810,
+      "start": 2231.36,
+      "end": 2233.67,
+      "duration": 2.31,
+      "text": "right? Cuz I don't even know what the"
+    },
+    {
+      "index": 811,
+      "start": 2233.68,
+      "end": 2235.39,
+      "duration": 1.71,
+      "text": "there's error there's there's"
+    },
+    {
+      "index": 812,
+      "start": 2235.4,
+      "end": 2236.71,
+      "duration": 1.31,
+      "text": "measurement"
+    },
+    {
+      "index": 813,
+      "start": 2236.72,
+      "end": 2238.63,
+      "duration": 1.91,
+      "text": "mistake in b,"
+    },
+    {
+      "index": 814,
+      "start": 2238.64,
+      "end": 2241.71,
+      "duration": 3.07,
+      "text": "but there's information, too."
+    },
+    {
+      "index": 815,
+      "start": 2241.72,
+      "end": 2244.11,
+      "duration": 2.39,
+      "text": "There's a lot of information about x in"
+    },
+    {
+      "index": 816,
+      "start": 2244.12,
+      "end": 2246.83,
+      "duration": 2.71,
+      "text": "there. And what I want to do is like"
+    },
+    {
+      "index": 817,
+      "start": 2246.84,
+      "end": 2250.55,
+      "duration": 3.71,
+      "text": "separate the noise, the junk,"
+    },
+    {
+      "index": 818,
+      "start": 2250.56,
+      "end": 2253.79,
+      "duration": 3.23,
+      "text": "from the information."
+    },
+    {
+      "index": 819,
+      "start": 2253.8,
+      "end": 2256.99,
+      "duration": 3.19,
+      "text": "And so, this is a straightforward linear"
+    },
+    {
+      "index": 820,
+      "start": 2257.0,
+      "end": 2258.59,
+      "duration": 1.59,
+      "text": "algebra problem."
+    },
+    {
+      "index": 821,
+      "start": 2258.6,
+      "end": 2261.51,
+      "duration": 2.91,
+      "text": "How do I solve What's the best solution?"
+    },
+    {
+      "index": 822,
+      "start": 2261.52,
+      "end": 2263.51,
+      "duration": 1.99,
+      "text": "Okay."
+    },
+    {
+      "index": 823,
+      "start": 2263.52,
+      "end": 2264.91,
+      "duration": 1.39,
+      "text": "Now,"
+    },
+    {
+      "index": 824,
+      "start": 2264.92,
+      "end": 2266.71,
+      "duration": 1.79,
+      "text": "let me"
+    },
+    {
+      "index": 825,
+      "start": 2266.72,
+      "end": 2268.27,
+      "duration": 1.55,
+      "text": "um"
+    },
+    {
+      "index": 826,
+      "start": 2268.28,
+      "end": 2270.87,
+      "duration": 2.59,
+      "text": "I want I I want to say, so that's like"
+    },
+    {
+      "index": 827,
+      "start": 2270.88,
+      "end": 2273.43,
+      "duration": 2.55,
+      "text": "describes the problem in a"
+    },
+    {
+      "index": 828,
+      "start": 2273.44,
+      "end": 2277.15,
+      "duration": 3.71,
+      "text": "algebraic way. I've got some equations."
+    },
+    {
+      "index": 829,
+      "start": 2277.16,
+      "end": 2279.03,
+      "duration": 1.87,
+      "text": "I'm looking for the best solution. Well,"
+    },
+    {
+      "index": 830,
+      "start": 2279.04,
+      "end": 2281.15,
+      "duration": 2.11,
+      "text": "one way to find it is one one way to"
+    },
+    {
+      "index": 831,
+      "start": 2281.16,
+      "end": 2282.15,
+      "duration": 0.99,
+      "text": "start"
+    },
+    {
+      "index": 832,
+      "start": 2282.16,
+      "end": 2284.95,
+      "duration": 2.79,
+      "text": "one way to find a solution is"
+    },
+    {
+      "index": 833,
+      "start": 2284.96,
+      "end": 2288.47,
+      "duration": 3.51,
+      "text": "throw away"
+    },
+    {
+      "index": 834,
+      "start": 2290.83,
+      "end": 2290.84,
+      "duration": 0.01,
+      "text": "equations until you've got a nice square"
+    },
+    {
+      "index": 835,
+      "start": 2290.84,
+      "end": 2294.67,
+      "duration": 3.83,
+      "text": "invertible system and solve that."
+    },
+    {
+      "index": 836,
+      "start": 2300.23,
+      "end": 2300.24,
+      "duration": 0.01,
+      "text": "There's no reason"
+    },
+    {
+      "index": 837,
+      "start": 2300.24,
+      "end": 2302.15,
+      "duration": 1.91,
+      "text": "in these measurements to say these"
+    },
+    {
+      "index": 838,
+      "start": 2302.16,
+      "end": 2303.55,
+      "duration": 1.39,
+      "text": "measurements are perfect and these"
+    },
+    {
+      "index": 839,
+      "start": 2303.56,
+      "end": 2305.75,
+      "duration": 2.19,
+      "text": "measurements are useless."
+    },
+    {
+      "index": 840,
+      "start": 2305.76,
+      "end": 2308.47,
+      "duration": 2.71,
+      "text": "We want to use all the measurements to"
+    },
+    {
+      "index": 841,
+      "start": 2308.48,
+      "end": 2310.27,
+      "duration": 1.79,
+      "text": "get the best information, to get the"
+    },
+    {
+      "index": 842,
+      "start": 2310.28,
+      "end": 2314.87,
+      "duration": 4.59,
+      "text": "maximum information. But how? Okay."
+    },
+    {
+      "index": 843,
+      "start": 2314.88,
+      "end": 2318.51,
+      "duration": 3.63,
+      "text": "Let me anticipate a matrix that's going"
+    },
+    {
+      "index": 844,
+      "start": 2318.52,
+      "end": 2319.79,
+      "duration": 1.27,
+      "text": "to show up."
+    },
+    {
+      "index": 845,
+      "start": 2319.8,
+      "end": 2323.51,
+      "duration": 3.71,
+      "text": "This A is typically a rectangle."
+    },
+    {
+      "index": 846,
+      "start": 2323.52,
+      "end": 2326.87,
+      "duration": 3.35,
+      "text": "But a matrix that shows up whenever you"
+    },
+    {
+      "index": 847,
+      "start": 2326.88,
+      "end": 2329.47,
+      "duration": 2.59,
+      "text": "have and we've chapter three was all"
+    },
+    {
+      "index": 848,
+      "start": 2329.48,
+      "end": 2332.07,
+      "duration": 2.59,
+      "text": "about rectangular matrices."
+    },
+    {
+      "index": 849,
+      "start": 2332.08,
+      "end": 2334.83,
+      "duration": 2.75,
+      "text": "And we know when this is solvable, you"
+    },
+    {
+      "index": 850,
+      "start": 2334.84,
+      "end": 2337.83,
+      "duration": 2.99,
+      "text": "could do elimination on it, right?"
+    },
+    {
+      "index": 851,
+      "start": 2337.84,
+      "end": 2339.31,
+      "duration": 1.47,
+      "text": "But I'm thinking, hey, you do"
+    },
+    {
+      "index": 852,
+      "start": 2339.32,
+      "end": 2343.43,
+      "duration": 4.11,
+      "text": "elimination and you get equation zero"
+    },
+    {
+      "index": 853,
+      "start": 2343.44,
+      "end": 2344.71,
+      "duration": 1.27,
+      "text": "equal"
+    },
+    {
+      "index": 854,
+      "start": 2344.72,
+      "end": 2347.95,
+      "duration": 3.23,
+      "text": "other non-zeros. I'm thinking we really"
+    },
+    {
+      "index": 855,
+      "start": 2347.96,
+      "end": 2350.63,
+      "duration": 2.67,
+      "text": "elimination is going to fail."
+    },
+    {
+      "index": 856,
+      "start": 2350.64,
+      "end": 2352.79,
+      "duration": 2.15,
+      "text": "So, that's our question. Elimination"
+    },
+    {
+      "index": 857,
+      "start": 2352.8,
+      "end": 2354.95,
+      "duration": 2.15,
+      "text": "will get us down to"
+    },
+    {
+      "index": 858,
+      "start": 2354.96,
+      "end": 2357.95,
+      "duration": 2.99,
+      "text": "to will tell us if there is a solution"
+    },
+    {
+      "index": 859,
+      "start": 2357.96,
+      "end": 2361.83,
+      "duration": 3.87,
+      "text": "or not, but I'm now thinking not."
+    },
+    {
+      "index": 860,
+      "start": 2361.84,
+      "end": 2364.15,
+      "duration": 2.31,
+      "text": "Okay, so what are we going to do? All"
+    },
+    {
+      "index": 861,
+      "start": 2364.16,
+      "end": 2365.87,
+      "duration": 1.71,
+      "text": "right. I'm going to I'm going to tell"
+    },
+    {
+      "index": 862,
+      "start": 2365.88,
+      "end": 2366.95,
+      "duration": 1.07,
+      "text": "you"
+    },
+    {
+      "index": 863,
+      "start": 2366.96,
+      "end": 2369.03,
+      "duration": 2.07,
+      "text": "to jump ahead"
+    },
+    {
+      "index": 864,
+      "start": 2369.04,
+      "end": 2372.67,
+      "duration": 3.63,
+      "text": "to the matrix that will play a key role."
+    },
+    {
+      "index": 865,
+      "start": 2372.68,
+      "end": 2374.51,
+      "duration": 1.83,
+      "text": "So, this is the matrix that you want to"
+    },
+    {
+      "index": 866,
+      "start": 2374.52,
+      "end": 2378.79,
+      "duration": 4.27,
+      "text": "understand for this chapter four."
+    },
+    {
+      "index": 867,
+      "start": 2378.8,
+      "end": 2387.51,
+      "duration": 8.71,
+      "text": "And it's the matrix A transpose A."
+    },
+    {
+      "index": 868,
+      "start": 2390.03,
+      "end": 2390.04,
+      "duration": 0.01,
+      "text": "What's"
+    },
+    {
+      "index": 869,
+      "start": 2390.04,
+      "end": 2392.87,
+      "duration": 2.83,
+      "text": "Tell me some things about that matrix."
+    },
+    {
+      "index": 870,
+      "start": 2392.88,
+      "end": 2396.31,
+      "duration": 3.43,
+      "text": "So, A is this m by n matrix,"
+    },
+    {
+      "index": 871,
+      "start": 2396.32,
+      "end": 2398.07,
+      "duration": 1.75,
+      "text": "rectangular."
+    },
+    {
+      "index": 872,
+      "start": 2398.08,
+      "end": 2400.95,
+      "duration": 2.87,
+      "text": "But now I'm saying that the good matrix"
+    },
+    {
+      "index": 873,
+      "start": 2400.96,
+      "end": 2404.79,
+      "duration": 3.83,
+      "text": "that shows up in the end is A transpose"
+    },
+    {
+      "index": 874,
+      "start": 2404.8,
+      "end": 2408.71,
+      "duration": 3.91,
+      "text": "A. So, tell me something about that."
+    },
+    {
+      "index": 875,
+      "start": 2408.72,
+      "end": 2410.79,
+      "duration": 2.07,
+      "text": "Is it Yeah, tell me what's the first"
+    },
+    {
+      "index": 876,
+      "start": 2410.8,
+      "end": 2413.79,
+      "duration": 2.99,
+      "text": "thing you know about A transpose A?"
+    },
+    {
+      "index": 877,
+      "start": 2413.8,
+      "end": 2416.51,
+      "duration": 2.71,
+      "text": "It's square, right?"
+    },
+    {
+      "index": 878,
+      "start": 2416.52,
+      "end": 2419.47,
+      "duration": 2.95,
+      "text": "Square because this is m by n"
+    },
+    {
+      "index": 879,
+      "start": 2419.48,
+      "end": 2421.71,
+      "duration": 2.23,
+      "text": "and this is n by m."
+    },
+    {
+      "index": 880,
+      "start": 2421.72,
+      "end": 2425.07,
+      "duration": 3.35,
+      "text": "So, this is the result is n by n. Good."
+    },
+    {
+      "index": 881,
+      "start": 2425.08,
+      "end": 2426.19,
+      "duration": 1.11,
+      "text": "Square."
+    },
+    {
+      "index": 882,
+      "start": 2426.2,
+      "end": 2427.95,
+      "duration": 1.75,
+      "text": "What else?"
+    },
+    {
+      "index": 883,
+      "start": 2427.96,
+      "end": 2437.47,
+      "duration": 9.51,
+      "text": "It's symmetric. Good. It's symmetric."
+    },
+    {
+      "index": 884,
+      "start": 2439.83,
+      "end": 2439.84,
+      "duration": 0.01,
+      "text": "Cuz you remember how to do that. If we"
+    },
+    {
+      "index": 885,
+      "start": 2439.84,
+      "end": 2442.67,
+      "duration": 2.83,
+      "text": "transpose that matrix,"
+    },
+    {
+      "index": 886,
+      "start": 2442.68,
+      "end": 2444.67,
+      "duration": 1.99,
+      "text": "let's transpose it."
+    },
+    {
+      "index": 887,
+      "start": 2444.68,
+      "end": 2448.83,
+      "duration": 4.15,
+      "text": "A transpose A, if I transpose it,"
+    },
+    {
+      "index": 888,
+      "start": 2448.84,
+      "end": 2449.91,
+      "duration": 1.07,
+      "text": "then"
+    },
+    {
+      "index": 889,
+      "start": 2449.92,
+      "end": 2453.83,
+      "duration": 3.91,
+      "text": "that comes first, transpose, this comes"
+    },
+    {
+      "index": 890,
+      "start": 2453.84,
+      "end": 2455.79,
+      "duration": 1.95,
+      "text": "second,"
+    },
+    {
+      "index": 891,
+      "start": 2455.8,
+      "end": 2457.35,
+      "duration": 1.55,
+      "text": "transpose,"
+    },
+    {
+      "index": 892,
+      "start": 2457.36,
+      "end": 2461.39,
+      "duration": 4.03,
+      "text": "and then transposing twice is"
+    },
+    {
+      "index": 893,
+      "start": 2461.4,
+      "end": 2464.15,
+      "duration": 2.75,
+      "text": "leaves it brings it back to the same, so"
+    },
+    {
+      "index": 894,
+      "start": 2464.16,
+      "end": 2466.55,
+      "duration": 2.39,
+      "text": "it's symmetric. Good."
+    },
+    {
+      "index": 895,
+      "start": 2466.56,
+      "end": 2469.07,
+      "duration": 2.51,
+      "text": "Now,"
+    },
+    {
+      "index": 896,
+      "start": 2470.99,
+      "end": 2471.0,
+      "duration": 0.01,
+      "text": "we now know how to ask more about a"
+    },
+    {
+      "index": 897,
+      "start": 2471.0,
+      "end": 2473.99,
+      "duration": 2.99,
+      "text": "matrix."
+    },
+    {
+      "index": 898,
+      "start": 2476.87,
+      "end": 2476.88,
+      "duration": 0.01,
+      "text": "I'm interested in"
+    },
+    {
+      "index": 899,
+      "start": 2476.88,
+      "end": 2480.07,
+      "duration": 3.19,
+      "text": "is it invertible?"
+    },
+    {
+      "index": 900,
+      "start": 2483.71,
+      "end": 2483.72,
+      "duration": 0.01,
+      "text": "If not, what's its null space?"
+    },
+    {
+      "index": 901,
+      "start": 2483.72,
+      "end": 2486.15,
+      "duration": 2.43,
+      "text": "So, I want to know about cuz cuz you're"
+    },
+    {
+      "index": 902,
+      "start": 2486.16,
+      "end": 2490.99,
+      "duration": 4.83,
+      "text": "going to see Well, let me let me even"
+    },
+    {
+      "index": 903,
+      "start": 2493.23,
+      "end": 2493.24,
+      "duration": 0.01,
+      "text": "Well, I shouldn't do this, but I will."
+    },
+    {
+      "index": 904,
+      "start": 2493.24,
+      "end": 2498.35,
+      "duration": 5.11,
+      "text": "Let me tell you what equation to solve"
+    },
+    {
+      "index": 905,
+      "start": 2504.43,
+      "end": 2504.44,
+      "duration": 0.01,
+      "text": "The good equation"
+    },
+    {
+      "index": 906,
+      "start": 2504.44,
+      "end": 2507.83,
+      "duration": 3.39,
+      "text": "comes from multiplying both sides by A"
+    },
+    {
+      "index": 907,
+      "start": 2507.84,
+      "end": 2509.55,
+      "duration": 1.71,
+      "text": "transpose."
+    },
+    {
+      "index": 908,
+      "start": 2509.56,
+      "end": 2511.99,
+      "duration": 2.43,
+      "text": "So, the the the good equation that you"
+    },
+    {
+      "index": 909,
+      "start": 2512.0,
+      "end": 2513.31,
+      "duration": 1.31,
+      "text": "get to"
+    },
+    {
+      "index": 910,
+      "start": 2513.32,
+      "end": 2519.51,
+      "duration": 6.19,
+      "text": "is this one. A transpose A x = A"
+    },
+    {
+      "index": 911,
+      "start": 2519.52,
+      "end": 2524.87,
+      "duration": 5.35,
+      "text": "transpose B."
+    },
+    {
+      "index": 912,
+      "start": 2526.71,
+      "end": 2526.72,
+      "duration": 0.01,
+      "text": "That will be the central equation in the"
+    },
+    {
+      "index": 913,
+      "start": 2526.72,
+      "end": 2528.67,
+      "duration": 1.95,
+      "text": "chapter."
+    },
+    {
+      "index": 914,
+      "start": 2528.68,
+      "end": 2530.91,
+      "duration": 2.23,
+      "text": "So, I think why not tell it to"
+    },
+    {
+      "index": 915,
+      "start": 2530.92,
+      "end": 2533.23,
+      "duration": 2.31,
+      "text": "Why not admit it right away?"
+    },
+    {
+      "index": 916,
+      "start": 2533.24,
+      "end": 2534.39,
+      "duration": 1.15,
+      "text": "Okay."
+    },
+    {
+      "index": 917,
+      "start": 2534.4,
+      "end": 2537.87,
+      "duration": 3.47,
+      "text": "I have to I should really give X"
+    },
+    {
+      "index": 918,
+      "start": 2537.88,
+      "end": 2540.39,
+      "duration": 2.51,
+      "text": "uh I"
+    },
+    {
+      "index": 919,
+      "start": 2540.4,
+      "end": 2543.75,
+      "duration": 3.35,
+      "text": "I want to sort of indicate that this X"
+    },
+    {
+      "index": 920,
+      "start": 2543.76,
+      "end": 2547.47,
+      "duration": 3.71,
+      "text": "isn't I mean this X"
+    },
+    {
+      "index": 921,
+      "start": 2547.48,
+      "end": 2549.87,
+      "duration": 2.39,
+      "text": "was the solution to that equation if it"
+    },
+    {
+      "index": 922,
+      "start": 2549.88,
+      "end": 2553.35,
+      "duration": 3.47,
+      "text": "existed, but probably didn't."
+    },
+    {
+      "index": 923,
+      "start": 2553.36,
+      "end": 2556.15,
+      "duration": 2.79,
+      "text": "Now, let me give this"
+    },
+    {
+      "index": 924,
+      "start": 2556.16,
+      "end": 2558.95,
+      "duration": 2.79,
+      "text": "a different name, X hat."
+    },
+    {
+      "index": 925,
+      "start": 2558.96,
+      "end": 2561.15,
+      "duration": 2.19,
+      "text": "Because I'm hoping"
+    },
+    {
+      "index": 926,
+      "start": 2561.16,
+      "end": 2565.67,
+      "duration": 4.51,
+      "text": "this one will have a solution."
+    },
+    {
+      "index": 927,
+      "start": 2567.79,
+      "end": 2567.8,
+      "duration": 0.01,
+      "text": "And I'm saying that it's my best"
+    },
+    {
+      "index": 928,
+      "start": 2567.8,
+      "end": 2569.59,
+      "duration": 1.79,
+      "text": "solution."
+    },
+    {
+      "index": 929,
+      "start": 2569.6,
+      "end": 2572.35,
+      "duration": 2.75,
+      "text": "I'll have to say what does best mean."
+    },
+    {
+      "index": 930,
+      "start": 2572.36,
+      "end": 2575.63,
+      "duration": 3.27,
+      "text": "But that's going to be my my my plan."
+    },
+    {
+      "index": 931,
+      "start": 2575.64,
+      "end": 2578.63,
+      "duration": 2.99,
+      "text": "I'm going to say that the best solution"
+    },
+    {
+      "index": 932,
+      "start": 2578.64,
+      "end": 2580.55,
+      "duration": 1.91,
+      "text": "solves this equation. So, you see right"
+    },
+    {
+      "index": 933,
+      "start": 2580.56,
+      "end": 2582.71,
+      "duration": 2.15,
+      "text": "away why I'm so interested in this"
+    },
+    {
+      "index": 934,
+      "start": 2582.72,
+      "end": 2586.63,
+      "duration": 3.91,
+      "text": "matrix A transpose A and in its"
+    },
+    {
+      "index": 935,
+      "start": 2586.64,
+      "end": 2588.55,
+      "duration": 1.91,
+      "text": "invertibility."
+    },
+    {
+      "index": 936,
+      "start": 2588.56,
+      "end": 2590.07,
+      "duration": 1.51,
+      "text": "Okay."
+    },
+    {
+      "index": 937,
+      "start": 2590.08,
+      "end": 2594.07,
+      "duration": 3.99,
+      "text": "Now, when is it invertible?"
+    },
+    {
+      "index": 938,
+      "start": 2595.19,
+      "end": 2595.2,
+      "duration": 0.01,
+      "text": "Okay."
+    },
+    {
+      "index": 939,
+      "start": 2595.2,
+      "end": 2597.95,
+      "duration": 2.75,
+      "text": "Let me take a case Let Let me just do"
+    },
+    {
+      "index": 940,
+      "start": 2597.96,
+      "end": 2600.47,
+      "duration": 2.51,
+      "text": "one example and then"
+    },
+    {
+      "index": 941,
+      "start": 2600.48,
+      "end": 2601.27,
+      "duration": 0.79,
+      "text": "uh"
+    },
+    {
+      "index": 942,
+      "start": 2601.28,
+      "end": 2605.79,
+      "duration": 4.51,
+      "text": "uh just I I'll just pick a matrix here."
+    },
+    {
+      "index": 943,
+      "start": 2605.8,
+      "end": 2608.15,
+      "duration": 2.35,
+      "text": "Just so we see what A transpose A looks"
+    },
+    {
+      "index": 944,
+      "start": 2608.16,
+      "end": 2613.23,
+      "duration": 5.07,
+      "text": "like. So, let me take a matrix A 1 1 1"
+    },
+    {
+      "index": 945,
+      "start": 2613.24,
+      "end": 2616.11,
+      "duration": 2.87,
+      "text": "1 2 5 just to"
+    },
+    {
+      "index": 946,
+      "start": 2616.12,
+      "end": 2620.51,
+      "duration": 4.39,
+      "text": "invent a matrix. So, there's a matrix A."
+    },
+    {
+      "index": 947,
+      "start": 2625.31,
+      "end": 2625.32,
+      "duration": 0.01,
+      "text": "Notice that it has m = 3 rows and n = 2"
+    },
+    {
+      "index": 948,
+      "start": 2625.32,
+      "end": 2628.27,
+      "duration": 2.95,
+      "text": "columns."
+    },
+    {
+      "index": 949,
+      "start": 2631.31,
+      "end": 2631.32,
+      "duration": 0.01,
+      "text": "Its rank is"
+    },
+    {
+      "index": 950,
+      "start": 2631.32,
+      "end": 2634.63,
+      "duration": 3.31,
+      "text": "The rank of that matrix is"
+    },
+    {
+      "index": 951,
+      "start": 2634.64,
+      "end": 2636.59,
+      "duration": 1.95,
+      "text": "two, right? Yeah, the columns are"
+    },
+    {
+      "index": 952,
+      "start": 2636.6,
+      "end": 2638.35,
+      "duration": 1.75,
+      "text": "independent."
+    },
+    {
+      "index": 953,
+      "start": 2638.36,
+      "end": 2641.11,
+      "duration": 2.75,
+      "text": "Does AX = B"
+    },
+    {
+      "index": 954,
+      "start": 2641.12,
+      "end": 2646.59,
+      "duration": 5.47,
+      "text": "If I look at AX = B, so X is just X1 X2"
+    },
+    {
+      "index": 955,
+      "start": 2646.6,
+      "end": 2652.59,
+      "duration": 5.99,
+      "text": "and B is B1, B2, B3."
+    },
+    {
+      "index": 956,
+      "start": 2656.15,
+      "end": 2656.16,
+      "duration": 0.01,
+      "text": "Do I expect to solve AX = B? What what's"
+    },
+    {
+      "index": 957,
+      "start": 2656.16,
+      "end": 2659.11,
+      "duration": 2.95,
+      "text": "No way, right? I mean"
+    },
+    {
+      "index": 958,
+      "start": 2659.12,
+      "end": 2661.27,
+      "duration": 2.15,
+      "text": "linear algebra is great, but solving"
+    },
+    {
+      "index": 959,
+      "start": 2661.28,
+      "end": 2663.43,
+      "duration": 2.15,
+      "text": "three equations with only two unknowns"
+    },
+    {
+      "index": 960,
+      "start": 2663.44,
+      "end": 2665.91,
+      "duration": 2.47,
+      "text": "usually we can't do it."
+    },
+    {
+      "index": 961,
+      "start": 2665.92,
+      "end": 2669.47,
+      "duration": 3.55,
+      "text": "We can only solve it if this vector B is"
+    },
+    {
+      "index": 962,
+      "start": 2669.48,
+      "end": 2673.15,
+      "duration": 3.67,
+      "text": "what?"
+    },
+    {
+      "index": 963,
+      "start": 2676.11,
+      "end": 2676.12,
+      "duration": 0.01,
+      "text": "I can solve that equation if that vector"
+    },
+    {
+      "index": 964,
+      "start": 2676.12,
+      "end": 2680.27,
+      "duration": 4.15,
+      "text": "B1, B2, B3 is in the"
+    },
+    {
+      "index": 965,
+      "start": 2680.28,
+      "end": 2682.87,
+      "duration": 2.59,
+      "text": "column space. If it's a combination of"
+    },
+    {
+      "index": 966,
+      "start": 2682.88,
+      "end": 2685.51,
+      "duration": 2.63,
+      "text": "those columns, then fine. But usually it"
+    },
+    {
+      "index": 967,
+      "start": 2685.52,
+      "end": 2686.95,
+      "duration": 1.43,
+      "text": "won't be."
+    },
+    {
+      "index": 968,
+      "start": 2686.96,
+      "end": 2689.47,
+      "duration": 2.51,
+      "text": "So the combinations just fill up a plane"
+    },
+    {
+      "index": 969,
+      "start": 2689.48,
+      "end": 2692.71,
+      "duration": 3.23,
+      "text": "and most vectors aren't on that plane."
+    },
+    {
+      "index": 970,
+      "start": 2692.72,
+      "end": 2696.15,
+      "duration": 3.43,
+      "text": "So what I'm saying is that I'm going to"
+    },
+    {
+      "index": 971,
+      "start": 2696.16,
+      "end": 2697.99,
+      "duration": 1.83,
+      "text": "work with"
+    },
+    {
+      "index": 972,
+      "start": 2698.0,
+      "end": 2700.59,
+      "duration": 2.59,
+      "text": "the matrix A transpose A and I just want"
+    },
+    {
+      "index": 973,
+      "start": 2700.6,
+      "end": 2703.19,
+      "duration": 2.59,
+      "text": "to figure out in this example"
+    },
+    {
+      "index": 974,
+      "start": 2703.2,
+      "end": 2707.71,
+      "duration": 4.51,
+      "text": "what A transpose A is."
+    },
+    {
+      "index": 975,
+      "start": 2710.35,
+      "end": 2710.36,
+      "duration": 0.01,
+      "text": "So it's 2 by 2. The first entry is a"
+    },
+    {
+      "index": 976,
+      "start": 2710.36,
+      "end": 2713.67,
+      "duration": 3.31,
+      "text": "three. The next entry is an eight."
+    },
+    {
+      "index": 977,
+      "start": 2713.68,
+      "end": 2717.91,
+      "duration": 4.23,
+      "text": "This entry is a"
+    },
+    {
+      "index": 978,
+      "start": 2720.79,
+      "end": 2720.8,
+      "duration": 0.01,
+      "text": "What's that entry?"
+    },
+    {
+      "index": 979,
+      "start": 2720.8,
+      "end": 2723.03,
+      "duration": 2.23,
+      "text": "Eight. For sure."
+    },
+    {
+      "index": 980,
+      "start": 2723.04,
+      "end": 2727.71,
+      "duration": 4.67,
+      "text": "We knew it had to be and this entry is"
+    },
+    {
+      "index": 981,
+      "start": 2727.72,
+      "end": 2729.71,
+      "duration": 1.99,
+      "text": "one. Now"
+    },
+    {
+      "index": 982,
+      "start": 2729.72,
+      "end": 2732.27,
+      "duration": 2.55,
+      "text": "getting out my trusty calculator."
+    },
+    {
+      "index": 983,
+      "start": 2732.28,
+      "end": 2734.63,
+      "duration": 2.35,
+      "text": "30. Is that right?"
+    },
+    {
+      "index": 984,
+      "start": 2734.64,
+      "end": 2735.83,
+      "duration": 1.19,
+      "text": "30."
+    },
+    {
+      "index": 985,
+      "start": 2735.84,
+      "end": 2738.11,
+      "duration": 2.27,
+      "text": "And is that matrix invertible? There's"
+    },
+    {
+      "index": 986,
+      "start": 2738.12,
+      "end": 2740.87,
+      "duration": 2.75,
+      "text": "an A transpose A."
+    },
+    {
+      "index": 987,
+      "start": 2740.88,
+      "end": 2743.79,
+      "duration": 2.91,
+      "text": "And it is invertible, right? 38 is not a"
+    },
+    {
+      "index": 988,
+      "start": 2743.8,
+      "end": 2747.95,
+      "duration": 4.15,
+      "text": "multiple of 830 and and it's invertible."
+    },
+    {
+      "index": 989,
+      "start": 2747.96,
+      "end": 2750.07,
+      "duration": 2.11,
+      "text": "And that's the normal That's what I"
+    },
+    {
+      "index": 990,
+      "start": 2750.08,
+      "end": 2751.35,
+      "duration": 1.27,
+      "text": "expect."
+    },
+    {
+      "index": 991,
+      "start": 2751.36,
+      "end": 2752.71,
+      "duration": 1.35,
+      "text": "So"
+    },
+    {
+      "index": 992,
+      "start": 2752.72,
+      "end": 2755.19,
+      "duration": 2.47,
+      "text": "this is what I what I want to I want to"
+    },
+    {
+      "index": 993,
+      "start": 2755.2,
+      "end": 2756.27,
+      "duration": 1.07,
+      "text": "show."
+    },
+    {
+      "index": 994,
+      "start": 2756.28,
+      "end": 2758.27,
+      "duration": 1.99,
+      "text": "It So here's the final Here's the key"
+    },
+    {
+      "index": 995,
+      "start": 2758.28,
+      "end": 2759.67,
+      "duration": 1.39,
+      "text": "point."
+    },
+    {
+      "index": 996,
+      "start": 2759.68,
+      "end": 2761.59,
+      "duration": 1.91,
+      "text": "The null space"
+    },
+    {
+      "index": 997,
+      "start": 2761.6,
+      "end": 2764.59,
+      "duration": 2.99,
+      "text": "of A transpose A"
+    },
+    {
+      "index": 998,
+      "start": 2764.6,
+      "end": 2766.19,
+      "duration": 1.59,
+      "text": "It It It's not going to be always"
+    },
+    {
+      "index": 999,
+      "start": 2766.2,
+      "end": 2769.59,
+      "duration": 3.39,
+      "text": "invertible."
+    },
+    {
+      "index": 1000,
+      "start": 2772.43,
+      "end": 2772.44,
+      "duration": 0.01,
+      "text": "Tell me a matrix Yeah. Now, I I have to"
+    },
+    {
+      "index": 1001,
+      "start": 2772.44,
+      "end": 2774.23,
+      "duration": 1.79,
+      "text": "I have to say that I can't say A"
+    },
+    {
+      "index": 1002,
+      "start": 2774.24,
+      "end": 2776.95,
+      "duration": 2.71,
+      "text": "transpose A is always invertible."
+    },
+    {
+      "index": 1003,
+      "start": 2776.96,
+      "end": 2779.95,
+      "duration": 2.99,
+      "text": "Cuz that's asking too much. I mean, what"
+    },
+    {
+      "index": 1004,
+      "start": 2779.96,
+      "end": 2782.99,
+      "duration": 3.03,
+      "text": "could the matrix A be, for example,"
+    },
+    {
+      "index": 1005,
+      "start": 2783.0,
+      "end": 2784.95,
+      "duration": 1.95,
+      "text": "so that A transpose A was not"
+    },
+    {
+      "index": 1006,
+      "start": 2784.96,
+      "end": 2787.27,
+      "duration": 2.31,
+      "text": "invertible?"
+    },
+    {
+      "index": 1007,
+      "start": 2787.28,
+      "end": 2789.59,
+      "duration": 2.31,
+      "text": "Well, even could be the zero matrix. I"
+    },
+    {
+      "index": 1008,
+      "start": 2789.6,
+      "end": 2792.23,
+      "duration": 2.63,
+      "text": "mean, that's like extreme case."
+    },
+    {
+      "index": 1009,
+      "start": 2792.24,
+      "end": 2793.99,
+      "duration": 1.75,
+      "text": "Suppose I"
+    },
+    {
+      "index": 1010,
+      "start": 2794.0,
+      "end": 2795.87,
+      "duration": 1.87,
+      "text": "make this"
+    },
+    {
+      "index": 1011,
+      "start": 2795.88,
+      "end": 2798.87,
+      "duration": 2.99,
+      "text": "rank"
+    },
+    {
+      "index": 1012,
+      "start": 2808.31,
+      "end": 2808.32,
+      "duration": 0.01,
+      "text": "Now, I figure out A transpose A again,"
+    },
+    {
+      "index": 1013,
+      "start": 2808.32,
+      "end": 2813.83,
+      "duration": 5.51,
+      "text": "and I get What do I get?"
+    },
+    {
+      "index": 1014,
+      "start": 2815.83,
+      "end": 2815.84,
+      "duration": 0.01,
+      "text": "I get nine."
+    },
+    {
+      "index": 1015,
+      "start": 2815.84,
+      "end": 2820.51,
+      "duration": 4.67,
+      "text": "I get nine, of course, and here I get"
+    },
+    {
+      "index": 1016,
+      "start": 2820.52,
+      "end": 2822.51,
+      "duration": 1.99,
+      "text": "What's that entry?"
+    },
+    {
+      "index": 1017,
+      "start": 2822.52,
+      "end": 2826.83,
+      "duration": 4.31,
+      "text": "27."
+    },
+    {
+      "index": 1018,
+      "start": 2834.75,
+      "end": 2834.76,
+      "duration": 0.01,
+      "text": "And why do I I I I knew it wouldn't be"
+    },
+    {
+      "index": 1019,
+      "start": 2834.76,
+      "end": 2836.55,
+      "duration": 1.79,
+      "text": "invertible anyway."
+    },
+    {
+      "index": 1020,
+      "start": 2836.56,
+      "end": 2841.35,
+      "duration": 4.79,
+      "text": "Cuz this matrix only has rank"
+    },
+    {
+      "index": 1021,
+      "start": 2843.11,
+      "end": 2843.12,
+      "duration": 0.01,
+      "text": "one."
+    },
+    {
+      "index": 1022,
+      "start": 2843.12,
+      "end": 2845.03,
+      "duration": 1.91,
+      "text": "And if I have a product of matrices of"
+    },
+    {
+      "index": 1023,
+      "start": 2845.04,
+      "end": 2847.39,
+      "duration": 2.35,
+      "text": "rank one, the product is not going to"
+    },
+    {
+      "index": 1024,
+      "start": 2847.4,
+      "end": 2850.31,
+      "duration": 2.91,
+      "text": "have a rank bigger than one."
+    },
+    {
+      "index": 1025,
+      "start": 2850.32,
+      "end": 2852.55,
+      "duration": 2.23,
+      "text": "So, I'm not surprised that the answer"
+    },
+    {
+      "index": 1026,
+      "start": 2852.56,
+      "end": 2856.63,
+      "duration": 4.07,
+      "text": "only has rank one, and that's what I'm"
+    },
+    {
+      "index": 1027,
+      "start": 2856.64,
+      "end": 2858.63,
+      "duration": 1.99,
+      "text": "al- always happens."
+    },
+    {
+      "index": 1028,
+      "start": 2858.64,
+      "end": 2861.55,
+      "duration": 2.91,
+      "text": "That the rank of A transpose A comes out"
+    },
+    {
+      "index": 1029,
+      "start": 2861.56,
+      "end": 2864.39,
+      "duration": 2.83,
+      "text": "to equal the rank of A."
+    },
+    {
+      "index": 1030,
+      "start": 2864.4,
+      "end": 2865.63,
+      "duration": 1.23,
+      "text": "So,"
+    },
+    {
+      "index": 1031,
+      "start": 2865.64,
+      "end": 2868.35,
+      "duration": 2.71,
+      "text": "uh yeah. So, the null space of A"
+    },
+    {
+      "index": 1032,
+      "start": 2868.36,
+      "end": 2871.59,
+      "duration": 3.23,
+      "text": "transpose A equals the null space of A."
+    },
+    {
+      "index": 1033,
+      "start": 2871.6,
+      "end": 2877.39,
+      "duration": 5.79,
+      "text": "The rank of A transpose A"
+    },
+    {
+      "index": 1034,
+      "start": 2883.11,
+      "end": 2883.12,
+      "duration": 0.01,
+      "text": "So,"
+    },
+    {
+      "index": 1035,
+      "start": 2883.12,
+      "end": 2886.11,
+      "duration": 2.99,
+      "text": "let's"
+    },
+    {
+      "index": 1036,
+      "start": 2887.59,
+      "end": 2887.6,
+      "duration": 0.01,
+      "text": "I'll I'll tell you"
+    },
+    {
+      "index": 1037,
+      "start": 2887.6,
+      "end": 2889.23,
+      "duration": 1.63,
+      "text": "if in a"
+    },
+    {
+      "index": 1038,
+      "start": 2889.24,
+      "end": 2892.11,
+      "duration": 2.87,
+      "text": "as soon as I can why that's true, but"
+    },
+    {
+      "index": 1039,
+      "start": 2892.12,
+      "end": 2895.99,
+      "duration": 3.87,
+      "text": "let's"
+    },
+    {
+      "index": 1040,
+      "start": 2897.91,
+      "end": 2897.92,
+      "duration": 0.01,
+      "text": "draw from that what the fact that I"
+    },
+    {
+      "index": 1041,
+      "start": 2897.92,
+      "end": 2901.11,
+      "duration": 3.19,
+      "text": "want. This tells me that"
+    },
+    {
+      "index": 1042,
+      "start": 2901.12,
+      "end": 2903.59,
+      "duration": 2.47,
+      "text": "this square symmetric matrix is"
+    },
+    {
+      "index": 1043,
+      "start": 2903.6,
+      "end": 2904.99,
+      "duration": 1.39,
+      "text": "invertible"
+    },
+    {
+      "index": 1044,
+      "start": 2905.0,
+      "end": 2906.55,
+      "duration": 1.55,
+      "text": "if"
+    },
+    {
+      "index": 1045,
+      "start": 2906.56,
+      "end": 2910.71,
+      "duration": 4.15,
+      "text": "So, here's my conclusion. A transpose A"
+    },
+    {
+      "index": 1046,
+      "start": 2910.72,
+      "end": 2914.91,
+      "duration": 4.19,
+      "text": "is invertible"
+    },
+    {
+      "index": 1047,
+      "start": 2925.23,
+      "end": 2925.24,
+      "duration": 0.01,
+      "text": "this null space is"
+    },
+    {
+      "index": 1048,
+      "start": 2925.24,
+      "end": 2927.51,
+      "duration": 2.27,
+      "text": "only got the zero vector."
+    },
+    {
+      "index": 1049,
+      "start": 2927.52,
+      "end": 2928.99,
+      "duration": 1.47,
+      "text": "Which means"
+    },
+    {
+      "index": 1050,
+      "start": 2929.0,
+      "end": 2931.63,
+      "duration": 2.63,
+      "text": "the columns of A are independent."
+    },
+    {
+      "index": 1051,
+      "start": 2931.64,
+      "end": 2934.59,
+      "duration": 2.95,
+      "text": "So, A transpose A is invertible exactly"
+    },
+    {
+      "index": 1052,
+      "start": 2934.6,
+      "end": 2937.91,
+      "duration": 3.31,
+      "text": "if A has"
+    },
+    {
+      "index": 1053,
+      "start": 2937.92,
+      "end": 2940.43,
+      "duration": 2.51,
+      "text": "independent"
+    },
+    {
+      "index": 1054,
+      "start": 2940.44,
+      "end": 2943.55,
+      "duration": 3.11,
+      "text": "columns."
+    },
+    {
+      "index": 1055,
+      "start": 2950.11,
+      "end": 2950.12,
+      "duration": 0.01,
+      "text": "That's the That's the the the fact that"
+    },
+    {
+      "index": 1056,
+      "start": 2950.12,
+      "end": 2952.63,
+      "duration": 2.51,
+      "text": "I need about A transpose A, and then"
+    },
+    {
+      "index": 1057,
+      "start": 2952.64,
+      "end": 2955.79,
+      "duration": 3.15,
+      "text": "you'll see next time"
+    },
+    {
+      "index": 1058,
+      "start": 2955.8,
+      "end": 2958.23,
+      "duration": 2.43,
+      "text": "how A transpose A enters everything."
+    },
+    {
+      "index": 1059,
+      "start": 2958.24,
+      "end": 2961.15,
+      "duration": 2.91,
+      "text": "Next Next lecture is actually a crucial"
+    },
+    {
+      "index": 1060,
+      "start": 2961.16,
+      "end": 2962.07,
+      "duration": 0.91,
+      "text": "one."
+    },
+    {
+      "index": 1061,
+      "start": 2962.08,
+      "end": 2965.55,
+      "duration": 3.47,
+      "text": "Here I'm preparing for it by"
+    },
+    {
+      "index": 1062,
+      "start": 2965.56,
+      "end": 2968.95,
+      "duration": 3.39,
+      "text": "getting us thinking about A transpose A."
+    },
+    {
+      "index": 1063,
+      "start": 2968.96,
+      "end": 2971.55,
+      "duration": 2.59,
+      "text": "And its rank is the same as the rank of"
+    },
+    {
+      "index": 1064,
+      "start": 2971.56,
+      "end": 2973.19,
+      "duration": 1.63,
+      "text": "A, and we can decide when it's"
+    },
+    {
+      "index": 1065,
+      "start": 2973.2,
+      "end": 2974.23,
+      "duration": 1.03,
+      "text": "invertible."
+    },
+    {
+      "index": 1066,
+      "start": 2974.24,
+      "end": 2976.95,
+      "duration": 2.71,
+      "text": "Okay, so see you Friday."
+    },
+    {
+      "index": 1067,
+      "start": 2976.96,
+      "end": 2979.2,
+      "duration": 2.24,
+      "text": "Thank you."
+    }
+  ],
+  "course": {
+    "category": "Mathematics",
+    "title": "Linear Algebra - Gilbert Strang",
+    "source_url": "https://www.youtube.com/playlist?list=PL49CF3715CB9EF31D"
+  }
+}

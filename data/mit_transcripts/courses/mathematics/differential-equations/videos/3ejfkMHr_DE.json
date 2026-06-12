@@ -1,0 +1,6283 @@
+{
+  "video": {
+    "id": "3ejfkMHr_DE",
+    "title": "Lec 21 | MIT 18.03 Differential Equations, Spring 2006",
+    "url": "https://www.youtube.com/watch?v=3ejfkMHr_DE",
+    "channel": "MIT OpenCourseWare",
+    "duration": 2659,
+    "language": "en"
+  },
+  "segment_count": 895,
+  "segments": [
+    {
+      "index": 0,
+      "start": 11.15,
+      "end": 11.16,
+      "duration": 0.01,
+      "text": "today is going to be one of the more"
+    },
+    {
+      "index": 1,
+      "start": 11.16,
+      "end": 13.509,
+      "duration": 2.349,
+      "text": "difficult lectures of the term so put on"
+    },
+    {
+      "index": 2,
+      "start": 13.519,
+      "end": 15.07,
+      "duration": 1.551,
+      "text": "your thinking caps as they say in"
+    },
+    {
+      "index": 3,
+      "start": 15.08,
+      "end": 18.189,
+      "duration": 3.109,
+      "text": "Elementary School uh the topic is going"
+    },
+    {
+      "index": 4,
+      "start": 18.199,
+      "end": 26.71,
+      "duration": 8.511,
+      "text": "to be What's called the"
+    },
+    {
+      "index": 5,
+      "start": 29.189,
+      "end": 29.199,
+      "duration": 0.01,
+      "text": "convolution the convolution is something"
+    },
+    {
+      "index": 6,
+      "start": 29.199,
+      "end": 30.87,
+      "duration": 1.671,
+      "text": "very peculiar that you do to two"
+    },
+    {
+      "index": 7,
+      "start": 30.88,
+      "end": 33.869,
+      "duration": 2.989,
+      "text": "functions to get a third function it has"
+    },
+    {
+      "index": 8,
+      "start": 33.879,
+      "end": 36.99,
+      "duration": 3.111,
+      "text": "its own special symbol F of"
+    },
+    {
+      "index": 9,
+      "start": 37.0,
+      "end": 39.709,
+      "duration": 2.709,
+      "text": "T asterisk is the universal symbol"
+    },
+    {
+      "index": 10,
+      "start": 39.719,
+      "end": 42.91,
+      "duration": 3.191,
+      "text": "that's used for"
+    },
+    {
+      "index": 11,
+      "start": 46.029,
+      "end": 46.039,
+      "duration": 0.01,
+      "text": "that so this is a new function of T"
+    },
+    {
+      "index": 12,
+      "start": 46.039,
+      "end": 48.189,
+      "duration": 2.15,
+      "text": "which Bears very little resemblance to"
+    },
+    {
+      "index": 13,
+      "start": 48.199,
+      "end": 52.029,
+      "duration": 3.83,
+      "text": "the ones F of T that you started with uh"
+    },
+    {
+      "index": 14,
+      "start": 52.039,
+      "end": 54.91,
+      "duration": 2.871,
+      "text": "uh I'm going to give you the formula for"
+    },
+    {
+      "index": 15,
+      "start": 54.92,
+      "end": 57.95,
+      "duration": 3.03,
+      "text": "it but I first there are two ways of"
+    },
+    {
+      "index": 16,
+      "start": 57.96,
+      "end": 61.75,
+      "duration": 3.79,
+      "text": "motivating it and both are important"
+    },
+    {
+      "index": 17,
+      "start": 61.76,
+      "end": 64.07,
+      "duration": 2.31,
+      "text": "there's a formal motivation which is why"
+    },
+    {
+      "index": 18,
+      "start": 64.08,
+      "end": 66.109,
+      "duration": 2.029,
+      "text": "it's tucked into this section Ono"
+    },
+    {
+      "index": 19,
+      "start": 66.119,
+      "end": 68.429,
+      "duration": 2.31,
+      "text": "transform and the formal motivation is"
+    },
+    {
+      "index": 20,
+      "start": 68.439,
+      "end": 70.67,
+      "duration": 2.231,
+      "text": "the following suppose we start with a"
+    },
+    {
+      "index": 21,
+      "start": 70.68,
+      "end": 74.03,
+      "duration": 3.35,
+      "text": "lus transform of two different fun those"
+    },
+    {
+      "index": 22,
+      "start": 74.04,
+      "end": 76.149,
+      "duration": 2.109,
+      "text": "two"
+    },
+    {
+      "index": 23,
+      "start": 76.159,
+      "end": 79.149,
+      "duration": 2.99,
+      "text": "functions uh now the most natural"
+    },
+    {
+      "index": 24,
+      "start": 79.159,
+      "end": 82.749,
+      "duration": 3.59,
+      "text": "question to ask is since llao transforms"
+    },
+    {
+      "index": 25,
+      "start": 82.759,
+      "end": 87.149,
+      "duration": 4.39,
+      "text": "are really a pain to calculate is from"
+    },
+    {
+      "index": 26,
+      "start": 87.159,
+      "end": 90.149,
+      "duration": 2.99,
+      "text": "old Lao transforms is it easy to get new"
+    },
+    {
+      "index": 27,
+      "start": 90.159,
+      "end": 93.27,
+      "duration": 3.111,
+      "text": "ones and the first thing one of course"
+    },
+    {
+      "index": 28,
+      "start": 93.28,
+      "end": 95.63,
+      "duration": 2.35,
+      "text": "summing functions is easy that gives you"
+    },
+    {
+      "index": 29,
+      "start": 95.64,
+      "end": 97.87,
+      "duration": 2.23,
+      "text": "the sum of the transforms but a more"
+    },
+    {
+      "index": 30,
+      "start": 97.88,
+      "end": 100.149,
+      "duration": 2.269,
+      "text": "natural question would be suppose I want"
+    },
+    {
+      "index": 31,
+      "start": 100.159,
+      "end": 103.55,
+      "duration": 3.391,
+      "text": "to multiply F of T and G of T is there"
+    },
+    {
+      "index": 32,
+      "start": 103.56,
+      "end": 106.95,
+      "duration": 3.39,
+      "text": "some hopefully some neat formula If I"
+    },
+    {
+      "index": 33,
+      "start": 106.96,
+      "end": 108.749,
+      "duration": 1.789,
+      "text": "multiply the product of the take the"
+    },
+    {
+      "index": 34,
+      "start": 108.759,
+      "end": 110.95,
+      "duration": 2.191,
+      "text": "product of these two is there some neat"
+    },
+    {
+      "index": 35,
+      "start": 110.96,
+      "end": 113.429,
+      "duration": 2.469,
+      "text": "formula for the Lelo transform of that"
+    },
+    {
+      "index": 36,
+      "start": 113.439,
+      "end": 117.31,
+      "duration": 3.871,
+      "text": "product that would simplify life greatly"
+    },
+    {
+      "index": 37,
+      "start": 117.32,
+      "end": 119.27,
+      "duration": 1.95,
+      "text": "and the answer is there is no such"
+    },
+    {
+      "index": 38,
+      "start": 119.28,
+      "end": 122.789,
+      "duration": 3.509,
+      "text": "formula and there never will"
+    },
+    {
+      "index": 39,
+      "start": 122.799,
+      "end": 125.63,
+      "duration": 2.831,
+      "text": "be well we will not give up entirely"
+    },
+    {
+      "index": 40,
+      "start": 125.64,
+      "end": 127.35,
+      "duration": 1.71,
+      "text": "suppose we ask the other"
+    },
+    {
+      "index": 41,
+      "start": 127.36,
+      "end": 131.15,
+      "duration": 3.79,
+      "text": "question suppose instead I multiply the"
+    },
+    {
+      "index": 42,
+      "start": 131.16,
+      "end": 132.51,
+      "duration": 1.35,
+      "text": "llao"
+    },
+    {
+      "index": 43,
+      "start": 132.52,
+      "end": 135.07,
+      "duration": 2.55,
+      "text": "transforms could that be related to"
+    },
+    {
+      "index": 44,
+      "start": 135.08,
+      "end": 138.869,
+      "duration": 3.789,
+      "text": "something I cook up out of f of T and G"
+    },
+    {
+      "index": 45,
+      "start": 138.879,
+      "end": 140.79,
+      "duration": 1.911,
+      "text": "of T could it be the transform of"
+    },
+    {
+      "index": 46,
+      "start": 140.8,
+      "end": 142.949,
+      "duration": 2.149,
+      "text": "something I cook up out of F T and G of"
+    },
+    {
+      "index": 47,
+      "start": 142.959,
+      "end": 145.55,
+      "duration": 2.591,
+      "text": "T and that's what the convolution is for"
+    },
+    {
+      "index": 48,
+      "start": 145.56,
+      "end": 149.99,
+      "duration": 4.43,
+      "text": "the answer is that F of s times G of s"
+    },
+    {
+      "index": 49,
+      "start": 150.0,
+      "end": 153.47,
+      "duration": 3.47,
+      "text": "turns out to be the llao transform of"
+    },
+    {
+      "index": 50,
+      "start": 153.48,
+      "end": 155.589,
+      "duration": 2.109,
+      "text": "the"
+    },
+    {
+      "index": 51,
+      "start": 155.599,
+      "end": 158.03,
+      "duration": 2.431,
+      "text": "convolution the convolution and that's"
+    },
+    {
+      "index": 52,
+      "start": 158.04,
+      "end": 160.07,
+      "duration": 2.03,
+      "text": "one way of defining it is the thing that"
+    },
+    {
+      "index": 53,
+      "start": 160.08,
+      "end": 162.19,
+      "duration": 2.11,
+      "text": "you the function of T that you should"
+    },
+    {
+      "index": 54,
+      "start": 162.2,
+      "end": 165.149,
+      "duration": 2.949,
+      "text": "put in there in order that its llas"
+    },
+    {
+      "index": 55,
+      "start": 165.159,
+      "end": 167.509,
+      "duration": 2.35,
+      "text": "transform turn out to be the product of"
+    },
+    {
+      "index": 56,
+      "start": 167.519,
+      "end": 170.149,
+      "duration": 2.63,
+      "text": "f of s time G of"
+    },
+    {
+      "index": 57,
+      "start": 170.159,
+      "end": 171.83,
+      "duration": 1.671,
+      "text": "s"
+    },
+    {
+      "index": 58,
+      "start": 171.84,
+      "end": 174.43,
+      "duration": 2.59,
+      "text": "now I'll give you in a moment the"
+    },
+    {
+      "index": 59,
+      "start": 174.44,
+      "end": 177.79,
+      "duration": 3.35,
+      "text": "formula for it but I think"
+    },
+    {
+      "index": 60,
+      "start": 177.8,
+      "end": 180.79,
+      "duration": 2.99,
+      "text": "I'll I'll give you"
+    },
+    {
+      "index": 61,
+      "start": 180.8,
+      "end": 183.229,
+      "duration": 2.429,
+      "text": "one and a quarter minutes of well two"
+    },
+    {
+      "index": 62,
+      "start": 183.239,
+      "end": 186.149,
+      "duration": 2.91,
+      "text": "minutes of motivation as to why there"
+    },
+    {
+      "index": 63,
+      "start": 186.159,
+      "end": 188.11,
+      "duration": 1.951,
+      "text": "should be such a"
+    },
+    {
+      "index": 64,
+      "start": 188.12,
+      "end": 190.47,
+      "duration": 2.35,
+      "text": "formula now I won't calculate this out"
+    },
+    {
+      "index": 65,
+      "start": 190.48,
+      "end": 192.949,
+      "duration": 2.469,
+      "text": "to the end because I don't have time but"
+    },
+    {
+      "index": 66,
+      "start": 192.959,
+      "end": 194.39,
+      "duration": 1.431,
+      "text": "here's the reason why there should be"
+    },
+    {
+      "index": 67,
+      "start": 194.4,
+      "end": 196.83,
+      "duration": 2.43,
+      "text": "such a formula and you might suspect and"
+    },
+    {
+      "index": 68,
+      "start": 196.84,
+      "end": 199.35,
+      "duration": 2.51,
+      "text": "therefore it will be worth looking for"
+    },
+    {
+      "index": 69,
+      "start": 199.36,
+      "end": 201.63,
+      "duration": 2.27,
+      "text": "it's because remember I told you where"
+    },
+    {
+      "index": 70,
+      "start": 201.64,
+      "end": 204.509,
+      "duration": 2.869,
+      "text": "the llast transform came from that the"
+    },
+    {
+      "index": 71,
+      "start": 204.519,
+      "end": 207.19,
+      "duration": 2.671,
+      "text": "transform was the continuous analog of a"
+    },
+    {
+      "index": 72,
+      "start": 207.2,
+      "end": 210.19,
+      "duration": 2.99,
+      "text": "power Series so that when you ask a"
+    },
+    {
+      "index": 73,
+      "start": 210.2,
+      "end": 212.47,
+      "duration": 2.27,
+      "text": "general question like that the place to"
+    },
+    {
+      "index": 74,
+      "start": 212.48,
+      "end": 214.509,
+      "duration": 2.029,
+      "text": "look for is if you know an analogous"
+    },
+    {
+      "index": 75,
+      "start": 214.519,
+      "end": 216.63,
+      "duration": 2.111,
+      "text": "idea say does it work something like"
+    },
+    {
+      "index": 76,
+      "start": 216.64,
+      "end": 219.83,
+      "duration": 3.19,
+      "text": "that work there so here I have a power"
+    },
+    {
+      "index": 77,
+      "start": 219.84,
+      "end": 224.07,
+      "duration": 4.23,
+      "text": "series summation a n x to the N remember"
+    },
+    {
+      "index": 78,
+      "start": 224.08,
+      "end": 225.789,
+      "duration": 1.709,
+      "text": "you can write this in computer notation"
+    },
+    {
+      "index": 79,
+      "start": 225.799,
+      "end": 228.949,
+      "duration": 3.15,
+      "text": "as a of n to make it look like f of n f"
+    },
+    {
+      "index": 80,
+      "start": 228.959,
+      "end": 233.869,
+      "duration": 4.91,
+      "text": "of T and the analog is between n is"
+    },
+    {
+      "index": 81,
+      "start": 233.879,
+      "end": 236.589,
+      "duration": 2.71,
+      "text": "turned into T when you turn a power"
+    },
+    {
+      "index": 82,
+      "start": 236.599,
+      "end": 240.03,
+      "duration": 3.431,
+      "text": "series into the plus transform and uh X"
+    },
+    {
+      "index": 83,
+      "start": 240.04,
+      "end": 242.91,
+      "duration": 2.87,
+      "text": "gets turned into e the S and one formula"
+    },
+    {
+      "index": 84,
+      "start": 242.92,
+      "end": 245.67,
+      "duration": 2.75,
+      "text": "just turns into the other okay so"
+    },
+    {
+      "index": 85,
+      "start": 245.68,
+      "end": 247.949,
+      "duration": 2.269,
+      "text": "there's a formula for F ofx this is the"
+    },
+    {
+      "index": 86,
+      "start": 247.959,
+      "end": 250.67,
+      "duration": 2.711,
+      "text": "analog of the llas transform and"
+    },
+    {
+      "index": 87,
+      "start": 250.68,
+      "end": 255.39,
+      "duration": 4.71,
+      "text": "similarly G of X here is summation BN x"
+    },
+    {
+      "index": 88,
+      "start": 255.4,
+      "end": 257.189,
+      "duration": 1.789,
+      "text": "to the"
+    },
+    {
+      "index": 89,
+      "start": 257.199,
+      "end": 260.909,
+      "duration": 3.71,
+      "text": "N now again the naive question would be"
+    },
+    {
+      "index": 90,
+      "start": 260.919,
+      "end": 262.749,
+      "duration": 1.83,
+      "text": "well suppose I multiply the two"
+    },
+    {
+      "index": 91,
+      "start": 262.759,
+      "end": 264.79,
+      "duration": 2.031,
+      "text": "coefficient corresponding coefficients"
+    },
+    {
+      "index": 92,
+      "start": 264.8,
+      "end": 267.629,
+      "duration": 2.829,
+      "text": "together and add up that power series"
+    },
+    {
+      "index": 93,
+      "start": 267.639,
+      "end": 273.79,
+      "duration": 6.151,
+      "text": "summation a n b n * X the"
+    },
+    {
+      "index": 94,
+      "start": 277.11,
+      "end": 277.12,
+      "duration": 0.01,
+      "text": "N is that somehow it's some related to f"
+    },
+    {
+      "index": 95,
+      "start": 277.12,
+      "end": 278.79,
+      "duration": 1.67,
+      "text": "and g and of course everybody knows the"
+    },
+    {
+      "index": 96,
+      "start": 278.8,
+      "end": 284.23,
+      "duration": 5.43,
+      "text": "answer to that is no has no relation"
+    },
+    {
+      "index": 97,
+      "start": 287.189,
+      "end": 287.199,
+      "duration": 0.01,
+      "text": "whatever but suppose instead I multiply"
+    },
+    {
+      "index": 98,
+      "start": 287.199,
+      "end": 290.31,
+      "duration": 3.111,
+      "text": "these two guys well in that case I'll"
+    },
+    {
+      "index": 99,
+      "start": 290.32,
+      "end": 294.35,
+      "duration": 4.03,
+      "text": "get a new power"
+    },
+    {
+      "index": 100,
+      "start": 296.11,
+      "end": 296.12,
+      "duration": 0.01,
+      "text": "series I don't know what its"
+    },
+    {
+      "index": 101,
+      "start": 296.12,
+      "end": 297.71,
+      "duration": 1.59,
+      "text": "coefficients are but let's write them"
+    },
+    {
+      "index": 102,
+      "start": 297.72,
+      "end": 300.51,
+      "duration": 2.79,
+      "text": "down let's just call them CN"
+    },
+    {
+      "index": 103,
+      "start": 300.52,
+      "end": 303.23,
+      "duration": 2.71,
+      "text": "so what I'm asking is if this"
+    },
+    {
+      "index": 104,
+      "start": 303.24,
+      "end": 304.909,
+      "duration": 1.669,
+      "text": "corresponds to the product of the two"
+    },
+    {
+      "index": 105,
+      "start": 304.919,
+      "end": 307.55,
+      "duration": 2.631,
+      "text": "llast transforms and what I want to know"
+    },
+    {
+      "index": 106,
+      "start": 307.56,
+      "end": 312.749,
+      "duration": 5.189,
+      "text": "is is there a"
+    },
+    {
+      "index": 107,
+      "start": 316.39,
+      "end": 316.4,
+      "duration": 0.01,
+      "text": "formula which says that CN is equal to"
+    },
+    {
+      "index": 108,
+      "start": 316.4,
+      "end": 319.27,
+      "duration": 2.87,
+      "text": "something that can be calcul calculated"
+    },
+    {
+      "index": 109,
+      "start": 319.28,
+      "end": 322.23,
+      "duration": 2.95,
+      "text": "out of the AI and the"
+    },
+    {
+      "index": 110,
+      "start": 322.24,
+      "end": 325.27,
+      "duration": 3.03,
+      "text": "BJ now the answer to that is yes there"
+    },
+    {
+      "index": 111,
+      "start": 325.28,
+      "end": 328.83,
+      "duration": 3.55,
+      "text": "is and the formula for CN is called the"
+    },
+    {
+      "index": 112,
+      "start": 328.84,
+      "end": 331.309,
+      "duration": 2.469,
+      "text": "convolution"
+    },
+    {
+      "index": 113,
+      "start": 331.319,
+      "end": 333.87,
+      "duration": 2.551,
+      "text": "now you could figure out this formula"
+    },
+    {
+      "index": 114,
+      "start": 333.88,
+      "end": 339.27,
+      "duration": 5.39,
+      "text": "yourself you figure it"
+    },
+    {
+      "index": 115,
+      "start": 341.83,
+      "end": 341.84,
+      "duration": 0.01,
+      "text": "out anyone who's smart enough to be"
+    },
+    {
+      "index": 116,
+      "start": 341.84,
+      "end": 343.39,
+      "duration": 1.55,
+      "text": "interested in the question in the first"
+    },
+    {
+      "index": 117,
+      "start": 343.4,
+      "end": 345.15,
+      "duration": 1.75,
+      "text": "place is smart enough to figure out what"
+    },
+    {
+      "index": 118,
+      "start": 345.16,
+      "end": 347.11,
+      "duration": 1.95,
+      "text": "that formula is and it will give you"
+    },
+    {
+      "index": 119,
+      "start": 347.12,
+      "end": 349.11,
+      "duration": 1.99,
+      "text": "great pleasure to see that it's just"
+    },
+    {
+      "index": 120,
+      "start": 349.12,
+      "end": 350.629,
+      "duration": 1.509,
+      "text": "like the formula for the convolution"
+    },
+    {
+      "index": 121,
+      "start": 350.639,
+      "end": 352.83,
+      "duration": 2.191,
+      "text": "that I'm going to give you"
+    },
+    {
+      "index": 122,
+      "start": 352.84,
+      "end": 355.469,
+      "duration": 2.629,
+      "text": "now so what is that formula for the"
+    },
+    {
+      "index": 123,
+      "start": 355.479,
+      "end": 357.749,
+      "duration": 2.27,
+      "text": "convolution okay hang"
+    },
+    {
+      "index": 124,
+      "start": 357.759,
+      "end": 360.99,
+      "duration": 3.231,
+      "text": "on now you're not going to lie like it"
+    },
+    {
+      "index": 125,
+      "start": 361.0,
+      "end": 362.79,
+      "duration": 1.79,
+      "text": "but you didn't like the formula of llast"
+    },
+    {
+      "index": 126,
+      "start": 362.8,
+      "end": 366.43,
+      "duration": 3.63,
+      "text": "transform either uh you felt wiser grown"
+    },
+    {
+      "index": 127,
+      "start": 366.44,
+      "end": 368.589,
+      "duration": 2.149,
+      "text": "up getting it but it it's a mouthful to"
+    },
+    {
+      "index": 128,
+      "start": 368.599,
+      "end": 370.35,
+      "duration": 1.751,
+      "text": "swallow it's something you get used to"
+    },
+    {
+      "index": 129,
+      "start": 370.36,
+      "end": 372.189,
+      "duration": 1.829,
+      "text": "slowly and you'll get used to the"
+    },
+    {
+      "index": 130,
+      "start": 372.199,
+      "end": 374.589,
+      "duration": 2.39,
+      "text": "convolution equally"
+    },
+    {
+      "index": 131,
+      "start": 374.599,
+      "end": 377.15,
+      "duration": 2.551,
+      "text": "slowly so what is the convolution of f"
+    },
+    {
+      "index": 132,
+      "start": 377.16,
+      "end": 380.79,
+      "duration": 3.63,
+      "text": "of T and G of"
+    },
+    {
+      "index": 133,
+      "start": 384.27,
+      "end": 384.28,
+      "duration": 0.01,
+      "text": "T it's a function calculated according"
+    },
+    {
+      "index": 134,
+      "start": 384.28,
+      "end": 385.95,
+      "duration": 1.67,
+      "text": "to the corresponding formula it's a"
+    },
+    {
+      "index": 135,
+      "start": 385.96,
+      "end": 387.749,
+      "duration": 1.789,
+      "text": "function of"
+    },
+    {
+      "index": 136,
+      "start": 387.759,
+      "end": 391.95,
+      "duration": 4.191,
+      "text": "T it's the integral from 0 to T"
+    },
+    {
+      "index": 137,
+      "start": 391.96,
+      "end": 396.07,
+      "duration": 4.11,
+      "text": "of f of u u is a dummy variable because"
+    },
+    {
+      "index": 138,
+      "start": 396.08,
+      "end": 397.79,
+      "duration": 1.71,
+      "text": "I'm it's going to be integrated out when"
+    },
+    {
+      "index": 139,
+      "start": 397.8,
+      "end": 405.629,
+      "duration": 7.829,
+      "text": "I do the integration G of T minus U"
+    },
+    {
+      "index": 140,
+      "start": 408.55,
+      "end": 408.56,
+      "duration": 0.01,
+      "text": "DT that's it I didn't make it up I'm"
+    },
+    {
+      "index": 141,
+      "start": 408.56,
+      "end": 418.51,
+      "duration": 9.95,
+      "text": "just bearing the bad"
+    },
+    {
+      "index": 142,
+      "start": 421.869,
+      "end": 421.879,
+      "duration": 0.01,
+      "text": "news well what do you do when you see a"
+    },
+    {
+      "index": 143,
+      "start": 421.879,
+      "end": 424.589,
+      "duration": 2.71,
+      "text": "formula that seems to you know well you"
+    },
+    {
+      "index": 144,
+      "start": 424.599,
+      "end": 426.55,
+      "duration": 1.951,
+      "text": "know well the first thing to do of"
+    },
+    {
+      "index": 145,
+      "start": 426.56,
+      "end": 428.83,
+      "duration": 2.27,
+      "text": "course is try calculating just just to"
+    },
+    {
+      "index": 146,
+      "start": 428.84,
+      "end": 430.51,
+      "duration": 1.67,
+      "text": "get some feeling for what kind of a"
+    },
+    {
+      "index": 147,
+      "start": 430.52,
+      "end": 433.35,
+      "duration": 2.83,
+      "text": "thing you know what what's this good"
+    },
+    {
+      "index": 148,
+      "start": 433.36,
+      "end": 435.35,
+      "duration": 1.99,
+      "text": "let's try some examples uh let's see"
+    },
+    {
+      "index": 149,
+      "start": 435.36,
+      "end": 437.589,
+      "duration": 2.229,
+      "text": "let's calculate uh what would be a"
+    },
+    {
+      "index": 150,
+      "start": 437.599,
+      "end": 441.23,
+      "duration": 3.631,
+      "text": "modest beginning uh let's calculate the"
+    },
+    {
+      "index": 151,
+      "start": 441.24,
+      "end": 443.99,
+      "duration": 2.75,
+      "text": "convolution of uh t with"
+    },
+    {
+      "index": 152,
+      "start": 444.0,
+      "end": 446.27,
+      "duration": 2.27,
+      "text": "itself or Betty yet let's calculate the"
+    },
+    {
+      "index": 153,
+      "start": 446.28,
+      "end": 447.71,
+      "duration": 1.43,
+      "text": "convolution just so that you could tell"
+    },
+    {
+      "index": 154,
+      "start": 447.72,
+      "end": 451.23,
+      "duration": 3.51,
+      "text": "the difference uh t with"
+    },
+    {
+      "index": 155,
+      "start": 451.24,
+      "end": 454.83,
+      "duration": 3.59,
+      "text": "t2qu a t squ with t make it a little"
+    },
+    {
+      "index": 156,
+      "start": 454.84,
+      "end": 456.909,
+      "duration": 2.069,
+      "text": "easier by the way the convolution is"
+    },
+    {
+      "index": 157,
+      "start": 456.919,
+      "end": 459.67,
+      "duration": 2.751,
+      "text": "symmetric F star G is the same thing as"
+    },
+    {
+      "index": 158,
+      "start": 459.68,
+      "end": 462.309,
+      "duration": 2.629,
+      "text": "G starf let's put that down explicitly I"
+    },
+    {
+      "index": 159,
+      "start": 462.319,
+      "end": 464.749,
+      "duration": 2.43,
+      "text": "forgot to last period so tell all the"
+    },
+    {
+      "index": 160,
+      "start": 464.759,
+      "end": 466.55,
+      "duration": 1.791,
+      "text": "guys who came to the one o'clock lecture"
+    },
+    {
+      "index": 161,
+      "start": 466.56,
+      "end": 473.029,
+      "duration": 6.469,
+      "text": "did you know something that they"
+    },
+    {
+      "index": 162,
+      "start": 475.11,
+      "end": 475.12,
+      "duration": 0.01,
+      "text": "don't now that's a theory it's"
+    },
+    {
+      "index": 163,
+      "start": 475.12,
+      "end": 476.51,
+      "duration": 1.39,
+      "text": "commutative this operation is"
+    },
+    {
+      "index": 164,
+      "start": 476.52,
+      "end": 478.95,
+      "duration": 2.43,
+      "text": "commutative in other words now that has"
+    },
+    {
+      "index": 165,
+      "start": 478.96,
+      "end": 482.79,
+      "duration": 3.83,
+      "text": "to be a because the formula is not"
+    },
+    {
+      "index": 166,
+      "start": 482.8,
+      "end": 485.43,
+      "duration": 2.63,
+      "text": "symmetric the formula does not treat f"
+    },
+    {
+      "index": 167,
+      "start": 485.44,
+      "end": 487.07,
+      "duration": 1.63,
+      "text": "and g"
+    },
+    {
+      "index": 168,
+      "start": 487.08,
+      "end": 489.79,
+      "duration": 2.71,
+      "text": "equally and therefore this is not"
+    },
+    {
+      "index": 169,
+      "start": 489.8,
+      "end": 492.23,
+      "duration": 2.43,
+      "text": "obvious it's not it's at least not"
+    },
+    {
+      "index": 170,
+      "start": 492.24,
+      "end": 494.35,
+      "duration": 2.11,
+      "text": "obvious if you look at it that way but"
+    },
+    {
+      "index": 171,
+      "start": 494.36,
+      "end": 500.469,
+      "duration": 6.109,
+      "text": "it is obvious if you look at it that way"
+    },
+    {
+      "index": 172,
+      "start": 506.029,
+      "end": 506.039,
+      "duration": 0.01,
+      "text": "why in other words F star G is the guy"
+    },
+    {
+      "index": 173,
+      "start": 506.039,
+      "end": 510.35,
+      "duration": 4.311,
+      "text": "whose lass transform is f of s * G of"
+    },
+    {
+      "index": 174,
+      "start": 510.36,
+      "end": 514.19,
+      "duration": 3.83,
+      "text": "s well what would G Star F be that would"
+    },
+    {
+      "index": 175,
+      "start": 514.2,
+      "end": 517.589,
+      "duration": 3.389,
+      "text": "be the guy whose lass transform is G * F"
+    },
+    {
+      "index": 176,
+      "start": 517.599,
+      "end": 519.67,
+      "duration": 2.071,
+      "text": "but F capital F time capital G is the"
+    },
+    {
+      "index": 177,
+      "start": 519.68,
+      "end": 521.909,
+      "duration": 2.229,
+      "text": "same as capital G * capital"
+    },
+    {
+      "index": 178,
+      "start": 521.919,
+      "end": 525.87,
+      "duration": 3.951,
+      "text": "F so it's because the Lao transforms are"
+    },
+    {
+      "index": 179,
+      "start": 525.88,
+      "end": 528.269,
+      "duration": 2.389,
+      "text": "commutative ordinary multiplication is"
+    },
+    {
+      "index": 180,
+      "start": 528.279,
+      "end": 530.19,
+      "duration": 1.911,
+      "text": "commutative it follows that this has to"
+    },
+    {
+      "index": 181,
+      "start": 530.2,
+      "end": 533.07,
+      "duration": 2.87,
+      "text": "be comput commutative too so I'll write"
+    },
+    {
+      "index": 182,
+      "start": 533.08,
+      "end": 537.23,
+      "duration": 4.15,
+      "text": "that down since f * G is equal to GF and"
+    },
+    {
+      "index": 183,
+      "start": 537.24,
+      "end": 539.47,
+      "duration": 2.23,
+      "text": "you have to understand that here I mean"
+    },
+    {
+      "index": 184,
+      "start": 539.48,
+      "end": 543.389,
+      "duration": 3.909,
+      "text": "these are the little transforms of those"
+    },
+    {
+      "index": 185,
+      "start": 543.399,
+      "end": 547.03,
+      "duration": 3.631,
+      "text": "guys but it's not obvious from the"
+    },
+    {
+      "index": 186,
+      "start": 547.04,
+      "end": 549.75,
+      "duration": 2.71,
+      "text": "formula okay let's calculate the LL"
+    },
+    {
+      "index": 187,
+      "start": 549.76,
+      "end": 552.11,
+      "duration": 2.35,
+      "text": "transform of uh sorry the convolution of"
+    },
+    {
+      "index": 188,
+      "start": 552.12,
+      "end": 554.91,
+      "duration": 2.79,
+      "text": "tar let's do it by the"
+    },
+    {
+      "index": 189,
+      "start": 554.92,
+      "end": 557.269,
+      "duration": 2.349,
+      "text": "formula all right by the formula I"
+    },
+    {
+      "index": 190,
+      "start": 557.279,
+      "end": 560.67,
+      "duration": 3.391,
+      "text": "calculate integral 0 to T now I take the"
+    },
+    {
+      "index": 191,
+      "start": 560.68,
+      "end": 563.31,
+      "duration": 2.63,
+      "text": "first function but I change its variable"
+    },
+    {
+      "index": 192,
+      "start": 563.32,
+      "end": 567.03,
+      "duration": 3.71,
+      "text": "to the dummy variable U so that's u^2 I"
+    },
+    {
+      "index": 193,
+      "start": 567.04,
+      "end": 569.75,
+      "duration": 2.71,
+      "text": "take the second function and replace its"
+    },
+    {
+      "index": 194,
+      "start": 569.76,
+      "end": 575.23,
+      "duration": 5.47,
+      "text": "variable by uus T so this is"
+    },
+    {
+      "index": 195,
+      "start": 575.24,
+      "end": 579.75,
+      "duration": 4.51,
+      "text": "times U T minus U"
+    },
+    {
+      "index": 196,
+      "start": 579.76,
+      "end": 581.79,
+      "duration": 2.03,
+      "text": "sorry"
+    },
+    {
+      "index": 197,
+      "start": 581.8,
+      "end": 584.91,
+      "duration": 3.11,
+      "text": "okay do you see that this to calculate"
+    },
+    {
+      "index": 198,
+      "start": 584.92,
+      "end": 587.069,
+      "duration": 2.149,
+      "text": "that this is what I have to write down"
+    },
+    {
+      "index": 199,
+      "start": 587.079,
+      "end": 590.069,
+      "duration": 2.99,
+      "text": "that's what the formula"
+    },
+    {
+      "index": 200,
+      "start": 599.509,
+      "end": 599.519,
+      "duration": 0.01,
+      "text": "wrong oh sorry the you the integration"
+    },
+    {
+      "index": 201,
+      "start": 599.519,
+      "end": 601.11,
+      "duration": 1.591,
+      "text": "respect to you of course this should be"
+    },
+    {
+      "index": 202,
+      "start": 601.12,
+      "end": 607.949,
+      "duration": 6.829,
+      "text": "a thanks very"
+    },
+    {
+      "index": 203,
+      "start": 612.19,
+      "end": 612.2,
+      "duration": 0.01,
+      "text": "much okay let's do it uh so it is U"
+    },
+    {
+      "index": 204,
+      "start": 612.2,
+      "end": 614.67,
+      "duration": 2.47,
+      "text": "integral of u^2 T is remember it's"
+    },
+    {
+      "index": 205,
+      "start": 614.68,
+      "end": 616.829,
+      "duration": 2.149,
+      "text": "integrated with respect to U so it's U"
+    },
+    {
+      "index": 206,
+      "start": 616.839,
+      "end": 620.19,
+      "duration": 3.351,
+      "text": "cubed over 3 *"
+    },
+    {
+      "index": 207,
+      "start": 620.2,
+      "end": 623.11,
+      "duration": 2.91,
+      "text": "T the rest of it is the integral of U"
+    },
+    {
+      "index": 208,
+      "start": 623.12,
+      "end": 626.91,
+      "duration": 3.79,
+      "text": "cubed which is U 4th over 4 all this is"
+    },
+    {
+      "index": 209,
+      "start": 626.92,
+      "end": 629.829,
+      "duration": 2.909,
+      "text": "to be evaluated between 0 and T at the"
+    },
+    {
+      "index": 210,
+      "start": 629.839,
+      "end": 632.55,
+      "duration": 2.711,
+      "text": "upper limit so I put U equal T I get T"
+    },
+    {
+      "index": 211,
+      "start": 632.56,
+      "end": 634.71,
+      "duration": 2.15,
+      "text": "4th over"
+    },
+    {
+      "index": 212,
+      "start": 634.72,
+      "end": 639.55,
+      "duration": 4.83,
+      "text": "3 minus t 4 over four of course at the"
+    },
+    {
+      "index": 213,
+      "start": 639.56,
+      "end": 642.03,
+      "duration": 2.47,
+      "text": "lower limit U is zero so both of these"
+    },
+    {
+      "index": 214,
+      "start": 642.04,
+      "end": 644.35,
+      "duration": 2.31,
+      "text": "are terms are zero there's nothing there"
+    },
+    {
+      "index": 215,
+      "start": 644.36,
+      "end": 647.43,
+      "duration": 3.07,
+      "text": "and the answer is therefore T 4"
+    },
+    {
+      "index": 216,
+      "start": 647.44,
+      "end": 653.19,
+      "duration": 5.75,
+      "text": "/ a 3 minus A4 is a"
+    },
+    {
+      "index": 217,
+      "start": 656.43,
+      "end": 656.44,
+      "duration": 0.01,
+      "text": "12th so that's doing it from the formula"
+    },
+    {
+      "index": 218,
+      "start": 656.44,
+      "end": 657.99,
+      "duration": 1.55,
+      "text": "but of course there's an easier way to"
+    },
+    {
+      "index": 219,
+      "start": 658.0,
+      "end": 661.23,
+      "duration": 3.23,
+      "text": "do it uh we can I use the LL transform"
+    },
+    {
+      "index": 220,
+      "start": 661.24,
+      "end": 665.43,
+      "duration": 4.19,
+      "text": "instead uh if I L transform it the L"
+    },
+    {
+      "index": 221,
+      "start": 665.44,
+      "end": 668.79,
+      "duration": 3.35,
+      "text": "transform of t^2 is what"
+    },
+    {
+      "index": 222,
+      "start": 668.8,
+      "end": 673.79,
+      "duration": 4.99,
+      "text": "is 2 factorial / s"
+    },
+    {
+      "index": 223,
+      "start": 673.8,
+      "end": 680.269,
+      "duration": 6.469,
+      "text": "cubed the transform of T is 1 /"
+    },
+    {
+      "index": 224,
+      "start": 680.279,
+      "end": 682.67,
+      "duration": 2.391,
+      "text": "S2 and so because this is the"
+    },
+    {
+      "index": 225,
+      "start": 682.68,
+      "end": 684.31,
+      "duration": 1.63,
+      "text": "convolution of these it should"
+    },
+    {
+      "index": 226,
+      "start": 684.32,
+      "end": 686.79,
+      "duration": 2.47,
+      "text": "correspond to the product of the Lelo"
+    },
+    {
+      "index": 227,
+      "start": 686.8,
+      "end": 694.79,
+      "duration": 7.99,
+      "text": "transforms which is two over s 5th"
+    },
+    {
+      "index": 228,
+      "start": 697.11,
+      "end": 697.12,
+      "duration": 0.01,
+      "text": "power well is that the same as this"
+    },
+    {
+      "index": 229,
+      "start": 697.12,
+      "end": 700.069,
+      "duration": 2.949,
+      "text": "what's the L transform of in other words"
+    },
+    {
+      "index": 230,
+      "start": 700.079,
+      "end": 703.99,
+      "duration": 3.911,
+      "text": "what's the inverse LL transform"
+    },
+    {
+      "index": 231,
+      "start": 704.0,
+      "end": 708.43,
+      "duration": 4.43,
+      "text": "of two over S"
+    },
+    {
+      "index": 232,
+      "start": 708.44,
+      "end": 712.79,
+      "duration": 4.35,
+      "text": "5 well the inverse lass transform of"
+    },
+    {
+      "index": 233,
+      "start": 712.8,
+      "end": 716.23,
+      "duration": 3.43,
+      "text": "four factorial over s the 5th is how"
+    },
+    {
+      "index": 234,
+      "start": 716.24,
+      "end": 721.79,
+      "duration": 5.55,
+      "text": "much that's T 4th right"
+    },
+    {
+      "index": 235,
+      "start": 724.11,
+      "end": 724.12,
+      "duration": 0.01,
+      "text": "now how does this differ well to turn"
+    },
+    {
+      "index": 236,
+      "start": 724.12,
+      "end": 726.75,
+      "duration": 2.63,
+      "text": "that into that I should divide by four *"
+    },
+    {
+      "index": 237,
+      "start": 726.76,
+      "end": 731.91,
+      "duration": 5.15,
+      "text": "3 so this should be 112th T 4th 1 over4"
+    },
+    {
+      "index": 238,
+      "start": 731.92,
+      "end": 735.59,
+      "duration": 3.67,
+      "text": "* 3 because this is 24 and that's two so"
+    },
+    {
+      "index": 239,
+      "start": 735.6,
+      "end": 738.389,
+      "duration": 2.789,
+      "text": "divide by 12 toer what constant"
+    },
+    {
+      "index": 240,
+      "start": 738.399,
+      "end": 741.79,
+      "duration": 3.391,
+      "text": "have so it works at least in that"
+    },
+    {
+      "index": 241,
+      "start": 741.8,
+      "end": 744.829,
+      "duration": 3.029,
+      "text": "case but now notice uh this is not an"
+    },
+    {
+      "index": 242,
+      "start": 744.839,
+      "end": 747.629,
+      "duration": 2.79,
+      "text": "ordinary product the convolution of t^2"
+    },
+    {
+      "index": 243,
+      "start": 747.639,
+      "end": 750.15,
+      "duration": 2.511,
+      "text": "and T is not something like T Cub is"
+    },
+    {
+      "index": 244,
+      "start": 750.16,
+      "end": 752.31,
+      "duration": 2.15,
+      "text": "something like T 4th power and there's a"
+    },
+    {
+      "index": 245,
+      "start": 752.32,
+      "end": 755.11,
+      "duration": 2.79,
+      "text": "funny constant in there too very"
+    },
+    {
+      "index": 246,
+      "start": 755.12,
+      "end": 756.949,
+      "duration": 1.829,
+      "text": "unpredictable let's look at the"
+    },
+    {
+      "index": 247,
+      "start": 756.959,
+      "end": 758.47,
+      "duration": 1.511,
+      "text": "convolution let's take another example"
+    },
+    {
+      "index": 248,
+      "start": 758.48,
+      "end": 764.23,
+      "duration": 5.75,
+      "text": "of a convolution"
+    },
+    {
+      "index": 249,
+      "start": 767.43,
+      "end": 767.44,
+      "duration": 0.01,
+      "text": "uh let's do something really humble just"
+    },
+    {
+      "index": 250,
+      "start": 767.44,
+      "end": 769.189,
+      "duration": 1.749,
+      "text": "to show you that this even at the"
+    },
+    {
+      "index": 251,
+      "start": 769.199,
+      "end": 771.79,
+      "duration": 2.591,
+      "text": "simplest example this is not trivial"
+    },
+    {
+      "index": 252,
+      "start": 771.8,
+      "end": 773.829,
+      "duration": 2.029,
+      "text": "let's take the convolution of f of t"
+    },
+    {
+      "index": 253,
+      "start": 773.839,
+      "end": 775.87,
+      "duration": 2.031,
+      "text": "with"
+    },
+    {
+      "index": 254,
+      "start": 775.88,
+      "end": 778.59,
+      "duration": 2.71,
+      "text": "one can you take yeah one is a function"
+    },
+    {
+      "index": 255,
+      "start": 778.6,
+      "end": 781.23,
+      "duration": 2.63,
+      "text": "just like any function uh but you mean"
+    },
+    {
+      "index": 256,
+      "start": 781.24,
+      "end": 782.949,
+      "duration": 1.709,
+      "text": "you get something out of the convolution"
+    },
+    {
+      "index": 257,
+      "start": 782.959,
+      "end": 784.03,
+      "duration": 1.071,
+      "text": "yes"
+    },
+    {
+      "index": 258,
+      "start": 784.04,
+      "end": 787.069,
+      "duration": 3.029,
+      "text": "yes let's just write down the formula"
+    },
+    {
+      "index": 259,
+      "start": 787.079,
+      "end": 790.15,
+      "duration": 3.071,
+      "text": "it's now I can't use the llast transform"
+    },
+    {
+      "index": 260,
+      "start": 790.16,
+      "end": 791.629,
+      "duration": 1.469,
+      "text": "here because you won't know what to do"
+    },
+    {
+      "index": 261,
+      "start": 791.639,
+      "end": 793.87,
+      "duration": 2.231,
+      "text": "with it uh you don't have that formula"
+    },
+    {
+      "index": 262,
+      "start": 793.88,
+      "end": 796.31,
+      "duration": 2.43,
+      "text": "yet it's a secret one that only I know"
+    },
+    {
+      "index": 263,
+      "start": 796.32,
+      "end": 799.15,
+      "duration": 2.83,
+      "text": "so let's so let's do it let's use let's"
+    },
+    {
+      "index": 264,
+      "start": 799.16,
+      "end": 800.389,
+      "duration": 1.229,
+      "text": "calculate it out the way we're supposed"
+    },
+    {
+      "index": 265,
+      "start": 800.399,
+      "end": 803.79,
+      "duration": 3.391,
+      "text": "to so it's the integral from 0er to T of"
+    },
+    {
+      "index": 266,
+      "start": 803.8,
+      "end": 807.11,
+      "duration": 3.31,
+      "text": "f of U and now what do I do with that"
+    },
+    {
+      "index": 267,
+      "start": 807.12,
+      "end": 809.91,
+      "duration": 2.79,
+      "text": "one I'm supposed to take that one is the"
+    },
+    {
+      "index": 268,
+      "start": 809.92,
+      "end": 812.75,
+      "duration": 2.83,
+      "text": "function G of T and wherever I see a t"
+    },
+    {
+      "index": 269,
+      "start": 812.76,
+      "end": 816.47,
+      "duration": 3.71,
+      "text": "I'm supposed to plug in T minus U well I"
+    },
+    {
+      "index": 270,
+      "start": 816.48,
+      "end": 818.069,
+      "duration": 1.589,
+      "text": "don't see any T"
+    },
+    {
+      "index": 271,
+      "start": 818.079,
+      "end": 821.55,
+      "duration": 3.471,
+      "text": "there but that's something for rejoicing"
+    },
+    {
+      "index": 272,
+      "start": 821.56,
+      "end": 823.949,
+      "duration": 2.389,
+      "text": "there's nothing to do to make the"
+    },
+    {
+      "index": 273,
+      "start": 823.959,
+      "end": 827.15,
+      "duration": 3.191,
+      "text": "substitution it's just"
+    },
+    {
+      "index": 274,
+      "start": 830.47,
+      "end": 830.48,
+      "duration": 0.01,
+      "text": "one so the answer is it's the this"
+    },
+    {
+      "index": 275,
+      "start": 830.48,
+      "end": 832.59,
+      "duration": 2.11,
+      "text": "Curious Thing the convolution of a"
+    },
+    {
+      "index": 276,
+      "start": 832.6,
+      "end": 835.43,
+      "duration": 2.83,
+      "text": "function with one you"
+    },
+    {
+      "index": 277,
+      "start": 835.44,
+      "end": 844.91,
+      "duration": 9.47,
+      "text": "integrated from 0 to T"
+    },
+    {
+      "index": 278,
+      "start": 847.749,
+      "end": 847.759,
+      "duration": 0.01,
+      "text": "well as they said now Wonderland was it"
+    },
+    {
+      "index": 279,
+      "start": 847.759,
+      "end": 849.749,
+      "duration": 1.99,
+      "text": "things are getting curiouser and"
+    },
+    {
+      "index": 280,
+      "start": 849.759,
+      "end": 852.15,
+      "duration": 2.391,
+      "text": "curiouser uh I mean what is going on"
+    },
+    {
+      "index": 281,
+      "start": 852.16,
+      "end": 854.35,
+      "duration": 2.19,
+      "text": "with this crazy function and where are"
+    },
+    {
+      "index": 282,
+      "start": 854.36,
+      "end": 856.47,
+      "duration": 2.11,
+      "text": "we supposed to start with it well I'm"
+    },
+    {
+      "index": 283,
+      "start": 856.48,
+      "end": 859.749,
+      "duration": 3.269,
+      "text": "going to prove this for you uh mostly"
+    },
+    {
+      "index": 284,
+      "start": 859.759,
+      "end": 863.23,
+      "duration": 3.471,
+      "text": "because the proof is easy in other words"
+    },
+    {
+      "index": 285,
+      "start": 863.24,
+      "end": 867.749,
+      "duration": 4.509,
+      "text": "I'm going to prove prove that that's"
+    },
+    {
+      "index": 286,
+      "start": 867.759,
+      "end": 870.43,
+      "duration": 2.671,
+      "text": "true and"
+    },
+    {
+      "index": 287,
+      "start": 870.44,
+      "end": 872.389,
+      "duration": 1.949,
+      "text": "as I give the proof you'll see where the"
+    },
+    {
+      "index": 288,
+      "start": 872.399,
+      "end": 874.43,
+      "duration": 2.031,
+      "text": "convolution is coming from that's number"
+    },
+    {
+      "index": 289,
+      "start": 874.44,
+      "end": 876.949,
+      "duration": 2.509,
+      "text": "one and number two the real reason I'm"
+    },
+    {
+      "index": 290,
+      "start": 876.959,
+      "end": 878.509,
+      "duration": 1.55,
+      "text": "giving you the proof because it's a"
+    },
+    {
+      "index": 291,
+      "start": 878.519,
+      "end": 882.15,
+      "duration": 3.631,
+      "text": "marvelous it's a marvelous exercise in"
+    },
+    {
+      "index": 292,
+      "start": 882.16,
+      "end": 886.31,
+      "duration": 4.15,
+      "text": "changing the variables in a double"
+    },
+    {
+      "index": 293,
+      "start": 886.32,
+      "end": 888.87,
+      "duration": 2.55,
+      "text": "integral now that's something you all"
+    },
+    {
+      "index": 294,
+      "start": 888.88,
+      "end": 890.629,
+      "duration": 1.749,
+      "text": "know how to do even the ones who are"
+    },
+    {
+      "index": 295,
+      "start": 890.639,
+      "end": 892.749,
+      "duration": 2.11,
+      "text": "taking 1802 concurrently and I didn't"
+    },
+    {
+      "index": 296,
+      "start": 892.759,
+      "end": 895.59,
+      "duration": 2.831,
+      "text": "advise you to do that uh but I've"
+    },
+    {
+      "index": 297,
+      "start": 895.6,
+      "end": 897.35,
+      "duration": 1.75,
+      "text": "arranged the course so it's possible to"
+    },
+    {
+      "index": 298,
+      "start": 897.36,
+      "end": 900.189,
+      "duration": 2.829,
+      "text": "do but I knew that by the time we got to"
+    },
+    {
+      "index": 299,
+      "start": 900.199,
+      "end": 901.43,
+      "duration": 1.231,
+      "text": "this you would already know how to"
+    },
+    {
+      "index": 300,
+      "start": 901.44,
+      "end": 904.03,
+      "duration": 2.59,
+      "text": "change variables at a double integral so"
+    },
+    {
+      "index": 301,
+      "start": 904.04,
+      "end": 905.829,
+      "duration": 1.789,
+      "text": "and in fact you'll have the advantage of"
+    },
+    {
+      "index": 302,
+      "start": 905.839,
+      "end": 907.35,
+      "duration": 1.511,
+      "text": "remembering how to do it because you"
+    },
+    {
+      "index": 303,
+      "start": 907.36,
+      "end": 909.629,
+      "duration": 2.269,
+      "text": "just had it a week or two ago whereas"
+    },
+    {
+      "index": 304,
+      "start": 909.639,
+      "end": 911.71,
+      "duration": 2.071,
+      "text": "all the other guys is something dim in"
+    },
+    {
+      "index": 305,
+      "start": 911.72,
+      "end": 915.15,
+      "duration": 3.43,
+      "text": "their distance and so I'm reviewing how"
+    },
+    {
+      "index": 306,
+      "start": 915.16,
+      "end": 918.23,
+      "duration": 3.07,
+      "text": "to change variables at a double"
+    },
+    {
+      "index": 307,
+      "start": 918.24,
+      "end": 924.03,
+      "duration": 5.79,
+      "text": "integral I'm showing you it's good for"
+    },
+    {
+      "index": 308,
+      "start": 926.71,
+      "end": 926.72,
+      "duration": 0.01,
+      "text": "something so what we're out to try to"
+    },
+    {
+      "index": 309,
+      "start": 926.72,
+      "end": 927.949,
+      "duration": 1.229,
+      "text": "prove is this"
+    },
+    {
+      "index": 310,
+      "start": 927.959,
+      "end": 929.749,
+      "duration": 1.79,
+      "text": "formula"
+    },
+    {
+      "index": 311,
+      "start": 929.759,
+      "end": 938.389,
+      "duration": 8.63,
+      "text": "let's put that down in so you"
+    },
+    {
+      "index": 312,
+      "start": 941.99,
+      "end": 942.0,
+      "duration": 0.01,
+      "text": "understand okay let's do"
+    },
+    {
+      "index": 313,
+      "start": 942.0,
+      "end": 944.59,
+      "duration": 2.59,
+      "text": "it now we'll use the desert island"
+    },
+    {
+      "index": 314,
+      "start": 944.6,
+      "end": 947.189,
+      "duration": 2.589,
+      "text": "method so you have as much time as you"
+    },
+    {
+      "index": 315,
+      "start": 947.199,
+      "end": 950.79,
+      "duration": 3.591,
+      "text": "want your desert island I in fact I'm"
+    },
+    {
+      "index": 316,
+      "start": 950.8,
+      "end": 953.11,
+      "duration": 2.31,
+      "text": "going to even go it the opposite"
+    },
+    {
+      "index": 317,
+      "start": 953.12,
+      "end": 956.67,
+      "duration": 3.55,
+      "text": "way I'm going to start with you got a"
+    },
+    {
+      "index": 318,
+      "start": 956.68,
+      "end": 958.35,
+      "duration": 1.67,
+      "text": "lot of time on your hand say gee I"
+    },
+    {
+      "index": 319,
+      "start": 958.36,
+      "end": 959.55,
+      "duration": 1.19,
+      "text": "wonder if there's a"
+    },
+    {
+      "index": 320,
+      "start": 959.56,
+      "end": 961.11,
+      "duration": 1.55,
+      "text": "if I take the product of the llast"
+    },
+    {
+      "index": 321,
+      "start": 961.12,
+      "end": 962.629,
+      "duration": 1.509,
+      "text": "transforms I wonder if there's some"
+    },
+    {
+      "index": 322,
+      "start": 962.639,
+      "end": 964.15,
+      "duration": 1.511,
+      "text": "crazy function I could put in there"
+    },
+    {
+      "index": 323,
+      "start": 964.16,
+      "end": 965.71,
+      "duration": 1.55,
+      "text": "which would make things work you've"
+    },
+    {
+      "index": 324,
+      "start": 965.72,
+      "end": 967.35,
+      "duration": 1.63,
+      "text": "never heard of the convolution you're"
+    },
+    {
+      "index": 325,
+      "start": 967.36,
+      "end": 969.47,
+      "duration": 2.11,
+      "text": "going to discover it all by"
+    },
+    {
+      "index": 326,
+      "start": 969.48,
+      "end": 972.309,
+      "duration": 2.829,
+      "text": "yourself okay so how do you begin so"
+    },
+    {
+      "index": 327,
+      "start": 972.319,
+      "end": 974.67,
+      "duration": 2.351,
+      "text": "we'll start with the left hand side"
+    },
+    {
+      "index": 328,
+      "start": 974.68,
+      "end": 976.23,
+      "duration": 1.55,
+      "text": "we'll looking"
+    },
+    {
+      "index": 329,
+      "start": 976.24,
+      "end": 979.43,
+      "duration": 3.19,
+      "text": "for some nice way of calculating that as"
+    },
+    {
+      "index": 330,
+      "start": 979.44,
+      "end": 982.59,
+      "duration": 3.15,
+      "text": "the llao transform of a single function"
+    },
+    {
+      "index": 331,
+      "start": 982.6,
+      "end": 985.03,
+      "duration": 2.43,
+      "text": "so the way to begin is by writing out"
+    },
+    {
+      "index": 332,
+      "start": 985.04,
+      "end": 987.069,
+      "duration": 2.029,
+      "text": "the definitions we couldn't use anything"
+    },
+    {
+      "index": 333,
+      "start": 987.079,
+      "end": 989.03,
+      "duration": 1.951,
+      "text": "else since we don't have anything else"
+    },
+    {
+      "index": 334,
+      "start": 989.04,
+      "end": 991.99,
+      "duration": 2.95,
+      "text": "to use now looking ahead I'm going to"
+    },
+    {
+      "index": 335,
+      "start": 992.0,
+      "end": 994.59,
+      "duration": 2.59,
+      "text": "not use T I'm going to use two neutral"
+    },
+    {
+      "index": 336,
+      "start": 994.6,
+      "end": 996.71,
+      "duration": 2.11,
+      "text": "variables when I calculate after all the"
+    },
+    {
+      "index": 337,
+      "start": 996.72,
+      "end": 999.069,
+      "duration": 2.349,
+      "text": "t is just a dummy variable anyway you'll"
+    },
+    {
+      "index": 338,
+      "start": 999.079,
+      "end": 1001.509,
+      "duration": 2.43,
+      "text": "see uh in a minute the wisdom of doing"
+    },
+    {
+      "index": 339,
+      "start": 1001.519,
+      "end": 1005.35,
+      "duration": 3.831,
+      "text": "this so it's this times the integral"
+    },
+    {
+      "index": 340,
+      "start": 1005.36,
+      "end": 1007.71,
+      "duration": 2.35,
+      "text": "which gives the lass transform of G so"
+    },
+    {
+      "index": 341,
+      "start": 1007.72,
+      "end": 1011.71,
+      "duration": 3.99,
+      "text": "that's e to the S V let's say times G of"
+    },
+    {
+      "index": 342,
+      "start": 1011.72,
+      "end": 1013.829,
+      "duration": 2.109,
+      "text": "V"
+    },
+    {
+      "index": 343,
+      "start": 1013.839,
+      "end": 1017.749,
+      "duration": 3.91,
+      "text": "DV okay everybody can get that far and"
+    },
+    {
+      "index": 344,
+      "start": 1017.759,
+      "end": 1020.829,
+      "duration": 3.07,
+      "text": "now we have to start looking"
+    },
+    {
+      "index": 345,
+      "start": 1020.839,
+      "end": 1024.11,
+      "duration": 3.271,
+      "text": "well this is a single integral an 1801"
+    },
+    {
+      "index": 346,
+      "start": 1024.12,
+      "end": 1026.789,
+      "duration": 2.669,
+      "text": "integral involving U and this is an 1801"
+    },
+    {
+      "index": 347,
+      "start": 1026.799,
+      "end": 1029.11,
+      "duration": 2.311,
+      "text": "integral involving V but when you take"
+    },
+    {
+      "index": 348,
+      "start": 1029.12,
+      "end": 1031.909,
+      "duration": 2.789,
+      "text": "the product of two integrals like that"
+    },
+    {
+      "index": 349,
+      "start": 1031.919,
+      "end": 1034.309,
+      "duration": 2.39,
+      "text": "remember when you evaluate a double"
+    },
+    {
+      "index": 350,
+      "start": 1034.319,
+      "end": 1036.75,
+      "duration": 2.431,
+      "text": "integral there's an easy case where you"
+    },
+    {
+      "index": 351,
+      "start": 1036.76,
+      "end": 1038.87,
+      "duration": 2.11,
+      "text": "don't it's much easier than any other"
+    },
+    {
+      "index": 352,
+      "start": 1038.88,
+      "end": 1041.549,
+      "duration": 2.669,
+      "text": "case if you could write the inside if"
+    },
+    {
+      "index": 353,
+      "start": 1041.559,
+      "end": 1044.35,
+      "duration": 2.791,
+      "text": "you're integrating over a rectangle for"
+    },
+    {
+      "index": 354,
+      "start": 1044.36,
+      "end": 1047.51,
+      "duration": 3.15,
+      "text": "example and and you can write the"
+    },
+    {
+      "index": 355,
+      "start": 1047.52,
+      "end": 1050.59,
+      "duration": 3.07,
+      "text": "integral as product of a function just"
+    },
+    {
+      "index": 356,
+      "start": 1050.6,
+      "end": 1053.27,
+      "duration": 2.67,
+      "text": "of U and the product of a function just"
+    },
+    {
+      "index": 357,
+      "start": 1053.28,
+      "end": 1056.029,
+      "duration": 2.749,
+      "text": "is V then the integral is very easy to"
+    },
+    {
+      "index": 358,
+      "start": 1056.039,
+      "end": 1057.87,
+      "duration": 1.831,
+      "text": "evaluate you can forget all the rules"
+    },
+    {
+      "index": 359,
+      "start": 1057.88,
+      "end": 1060.07,
+      "duration": 2.19,
+      "text": "you just take all the U part out all the"
+    },
+    {
+      "index": 360,
+      "start": 1060.08,
+      "end": 1062.51,
+      "duration": 2.43,
+      "text": "V part out and integrate them separately"
+    },
+    {
+      "index": 361,
+      "start": 1062.52,
+      "end": 1065.789,
+      "duration": 3.269,
+      "text": "A to B C to d That's the easy case of"
+    },
+    {
+      "index": 362,
+      "start": 1065.799,
+      "end": 1067.63,
+      "duration": 1.831,
+      "text": "evaluating a double integral it's what"
+    },
+    {
+      "index": 363,
+      "start": 1067.64,
+      "end": 1071.11,
+      "duration": 3.47,
+      "text": "everybody tries to do even when it's not"
+    },
+    {
+      "index": 364,
+      "start": 1071.12,
+      "end": 1073.95,
+      "duration": 2.83,
+      "text": "appropriate now here it is appropriate"
+    },
+    {
+      "index": 365,
+      "start": 1073.96,
+      "end": 1076.43,
+      "duration": 2.47,
+      "text": "except I'm going to use it backwards"
+    },
+    {
+      "index": 366,
+      "start": 1076.44,
+      "end": 1079.35,
+      "duration": 2.91,
+      "text": "this is the result of having done that"
+    },
+    {
+      "index": 367,
+      "start": 1079.36,
+      "end": 1081.71,
+      "duration": 2.35,
+      "text": "if this is the result of having done it"
+    },
+    {
+      "index": 368,
+      "start": 1081.72,
+      "end": 1085.07,
+      "duration": 3.35,
+      "text": "what was the step just before it well I"
+    },
+    {
+      "index": 369,
+      "start": 1085.08,
+      "end": 1086.909,
+      "duration": 1.829,
+      "text": "must have been trying to evaluate a"
+    },
+    {
+      "index": 370,
+      "start": 1086.919,
+      "end": 1088.47,
+      "duration": 1.551,
+      "text": "double"
+    },
+    {
+      "index": 371,
+      "start": 1088.48,
+      "end": 1091.549,
+      "duration": 3.069,
+      "text": "integral as U runs from zero to infinity"
+    },
+    {
+      "index": 372,
+      "start": 1091.559,
+      "end": 1094.27,
+      "duration": 2.711,
+      "text": "and V runs from zero to Infinity of what"
+    },
+    {
+      "index": 373,
+      "start": 1094.28,
+      "end": 1096.31,
+      "duration": 2.03,
+      "text": "well of the product of these two"
+    },
+    {
+      "index": 374,
+      "start": 1096.32,
+      "end": 1099.43,
+      "duration": 3.11,
+      "text": "functions now what is that e Theus Su *"
+    },
+    {
+      "index": 375,
+      "start": 1099.44,
+      "end": 1102.909,
+      "duration": 3.469,
+      "text": "e Theus SV well I must surely want to"
+    },
+    {
+      "index": 376,
+      "start": 1102.919,
+      "end": 1105.11,
+      "duration": 2.191,
+      "text": "combine"
+    },
+    {
+      "index": 377,
+      "start": 1105.12,
+      "end": 1110.43,
+      "duration": 5.31,
+      "text": "those eus Su * eus s B and what's left"
+    },
+    {
+      "index": 378,
+      "start": 1110.44,
+      "end": 1116.11,
+      "duration": 5.67,
+      "text": "well what's gets dragged along"
+    },
+    {
+      "index": 379,
+      "start": 1116.12,
+      "end": 1118.909,
+      "duration": 2.789,
+      "text": "DV this is the same as that because of"
+    },
+    {
+      "index": 380,
+      "start": 1118.919,
+      "end": 1120.71,
+      "duration": 1.791,
+      "text": "that law I just gave you this is the"
+    },
+    {
+      "index": 381,
+      "start": 1120.72,
+      "end": 1122.789,
+      "duration": 2.069,
+      "text": "product of a function just of U and a"
+    },
+    {
+      "index": 382,
+      "start": 1122.799,
+      "end": 1124.99,
+      "duration": 2.191,
+      "text": "function just of v and therefore it's"
+    },
+    {
+      "index": 383,
+      "start": 1125.0,
+      "end": 1127.07,
+      "duration": 2.07,
+      "text": "okay to separate the two integrals out"
+    },
+    {
+      "index": 384,
+      "start": 1127.08,
+      "end": 1129.43,
+      "duration": 2.35,
+      "text": "that way because I'm integrating a sort"
+    },
+    {
+      "index": 385,
+      "start": 1129.44,
+      "end": 1131.43,
+      "duration": 1.99,
+      "text": "of a rectangle it goes to Infinity that"
+    },
+    {
+      "index": 386,
+      "start": 1131.44,
+      "end": 1133.63,
+      "duration": 2.19,
+      "text": "way and infinity that way but what I'm"
+    },
+    {
+      "index": 387,
+      "start": 1133.64,
+      "end": 1136.669,
+      "duration": 3.029,
+      "text": "integrating is over the plane in other"
+    },
+    {
+      "index": 388,
+      "start": 1136.679,
+      "end": 1140.07,
+      "duration": 3.391,
+      "text": "words this region of the plane"
+    },
+    {
+      "index": 389,
+      "start": 1140.08,
+      "end": 1143.27,
+      "duration": 3.19,
+      "text": "as u v goes from zero to Infinity zero"
+    },
+    {
+      "index": 390,
+      "start": 1143.28,
+      "end": 1146.149,
+      "duration": 2.869,
+      "text": "to"
+    },
+    {
+      "index": 391,
+      "start": 1148.51,
+      "end": 1148.52,
+      "duration": 0.01,
+      "text": "Infinity"
+    },
+    {
+      "index": 392,
+      "start": 1148.52,
+      "end": 1150.83,
+      "duration": 2.31,
+      "text": "now let's take a look what are we"
+    },
+    {
+      "index": 393,
+      "start": 1150.84,
+      "end": 1154.47,
+      "duration": 3.63,
+      "text": "looking for well we're looking for we"
+    },
+    {
+      "index": 394,
+      "start": 1154.48,
+      "end": 1160.43,
+      "duration": 5.95,
+      "text": "would be very happy if U plus v were"
+    },
+    {
+      "index": 395,
+      "start": 1168.27,
+      "end": 1168.28,
+      "duration": 0.01,
+      "text": "t in other words I'm introducing a new"
+    },
+    {
+      "index": 396,
+      "start": 1168.28,
+      "end": 1172.23,
+      "duration": 3.95,
+      "text": "variable t u plus v and it's suggested"
+    },
+    {
+      "index": 397,
+      "start": 1172.24,
+      "end": 1174.19,
+      "duration": 1.95,
+      "text": "by the form in which I'm looking for the"
+    },
+    {
+      "index": 398,
+      "start": 1174.2,
+      "end": 1176.83,
+      "duration": 2.63,
+      "text": "answer now you of course you then have"
+    },
+    {
+      "index": 399,
+      "start": 1176.84,
+      "end": 1179.149,
+      "duration": 2.309,
+      "text": "to we need another variable we could"
+    },
+    {
+      "index": 400,
+      "start": 1179.159,
+      "end": 1182.95,
+      "duration": 3.791,
+      "text": "keep either U or V oh let's keep U that"
+    },
+    {
+      "index": 401,
+      "start": 1182.96,
+      "end": 1185.75,
+      "duration": 2.79,
+      "text": "means V we this game of musical chairs V"
+    },
+    {
+      "index": 402,
+      "start": 1185.76,
+      "end": 1188.59,
+      "duration": 2.83,
+      "text": "got dropped out uh well we can't have"
+    },
+    {
+      "index": 403,
+      "start": 1188.6,
+      "end": 1189.99,
+      "duration": 1.39,
+      "text": "three variables we only have room for"
+    },
+    {
+      "index": 404,
+      "start": 1190.0,
+      "end": 1194.43,
+      "duration": 4.43,
+      "text": "two but uh we will remember"
+    },
+    {
+      "index": 405,
+      "start": 1194.44,
+      "end": 1198.149,
+      "duration": 3.709,
+      "text": "it rest in peace V was equal to T minus"
+    },
+    {
+      "index": 406,
+      "start": 1198.159,
+      "end": 1203.71,
+      "duration": 5.551,
+      "text": "U in we ever need him"
+    },
+    {
+      "index": 407,
+      "start": 1207.27,
+      "end": 1207.28,
+      "duration": 0.01,
+      "text": "again okay let's now put in the limits"
+    },
+    {
+      "index": 408,
+      "start": 1207.28,
+      "end": 1208.87,
+      "duration": 1.59,
+      "text": "let's put in the integral the rest of"
+    },
+    {
+      "index": 409,
+      "start": 1208.88,
+      "end": 1211.99,
+      "duration": 3.11,
+      "text": "the change of variable so it's e so I'm"
+    },
+    {
+      "index": 410,
+      "start": 1212.0,
+      "end": 1214.669,
+      "duration": 2.669,
+      "text": "now changing it to these new variables T"
+    },
+    {
+      "index": 411,
+      "start": 1214.679,
+      "end": 1218.27,
+      "duration": 3.591,
+      "text": "and U so it's e to the negative St well"
+    },
+    {
+      "index": 412,
+      "start": 1218.28,
+      "end": 1220.87,
+      "duration": 2.59,
+      "text": "F of U I don't have to do anything"
+    },
+    {
+      "index": 413,
+      "start": 1220.88,
+      "end": 1225.07,
+      "duration": 4.19,
+      "text": "to but G of V I'm not allowed to keep V"
+    },
+    {
+      "index": 414,
+      "start": 1225.08,
+      "end": 1230.789,
+      "duration": 5.709,
+      "text": "so V has to be changed to T minus U"
+    },
+    {
+      "index": 415,
+      "start": 1233.59,
+      "end": 1233.6,
+      "duration": 0.01,
+      "text": "amazing things are"
+    },
+    {
+      "index": 416,
+      "start": 1233.6,
+      "end": 1236.149,
+      "duration": 2.549,
+      "text": "happening"
+    },
+    {
+      "index": 417,
+      "start": 1236.159,
+      "end": 1238.63,
+      "duration": 2.471,
+      "text": "du now I want to change this to an"
+    },
+    {
+      "index": 418,
+      "start": 1238.64,
+      "end": 1241.43,
+      "duration": 2.79,
+      "text": "integral du DT now for that you have to"
+    },
+    {
+      "index": 419,
+      "start": 1241.44,
+      "end": 1243.11,
+      "duration": 1.67,
+      "text": "be a little careful we have two things"
+    },
+    {
+      "index": 420,
+      "start": 1243.12,
+      "end": 1247.31,
+      "duration": 4.19,
+      "text": "to do to figure out this what goes with"
+    },
+    {
+      "index": 421,
+      "start": 1247.32,
+      "end": 1250.549,
+      "duration": 3.229,
+      "text": "that and we have to put in the limits"
+    },
+    {
+      "index": 422,
+      "start": 1250.559,
+      "end": 1253.31,
+      "duration": 2.751,
+      "text": "also now those are the two non-trivial"
+    },
+    {
+      "index": 423,
+      "start": 1253.32,
+      "end": 1255.909,
+      "duration": 2.589,
+      "text": "operations when you change integrals in"
+    },
+    {
+      "index": 424,
+      "start": 1255.919,
+      "end": 1258.19,
+      "duration": 2.271,
+      "text": "a change variables in a double integral"
+    },
+    {
+      "index": 425,
+      "start": 1258.2,
+      "end": 1260.71,
+      "duration": 2.51,
+      "text": "so let's be really careful let's do the"
+    },
+    {
+      "index": 426,
+      "start": 1260.72,
+      "end": 1263.71,
+      "duration": 2.99,
+      "text": "easier of the two first I want to change"
+    },
+    {
+      "index": 427,
+      "start": 1263.72,
+      "end": 1266.63,
+      "duration": 2.91,
+      "text": "from du DV"
+    },
+    {
+      "index": 428,
+      "start": 1266.64,
+      "end": 1271.99,
+      "duration": 5.35,
+      "text": "to duu DT and now to do that you have to"
+    },
+    {
+      "index": 429,
+      "start": 1272.0,
+      "end": 1274.63,
+      "duration": 2.63,
+      "text": "put in the Jacobian matrix the Jacobian"
+    },
+    {
+      "index": 430,
+      "start": 1274.64,
+      "end": 1276.99,
+      "duration": 2.35,
+      "text": "DET ter"
+    },
+    {
+      "index": 431,
+      "start": 1277.0,
+      "end": 1280.029,
+      "duration": 3.029,
+      "text": "ah you how many of you forgot that I"
+    },
+    {
+      "index": 432,
+      "start": 1280.039,
+      "end": 1284.07,
+      "duration": 4.031,
+      "text": "won't even bother asking"
+    },
+    {
+      "index": 433,
+      "start": 1287.23,
+      "end": 1287.24,
+      "duration": 0.01,
+      "text": "uh oh come on you only lose two points"
+    },
+    {
+      "index": 434,
+      "start": 1287.24,
+      "end": 1288.71,
+      "duration": 1.47,
+      "text": "what's the it doesn't matter if you put"
+    },
+    {
+      "index": 435,
+      "start": 1288.72,
+      "end": 1292.549,
+      "duration": 3.829,
+      "text": "in the Jacobian uh as you see you know"
+    },
+    {
+      "index": 436,
+      "start": 1292.559,
+      "end": 1294.149,
+      "duration": 1.59,
+      "text": "going forget something you'll lose less"
+    },
+    {
+      "index": 437,
+      "start": 1294.159,
+      "end": 1295.909,
+      "duration": 1.75,
+      "text": "credit for forgetting that than anything"
+    },
+    {
+      "index": 438,
+      "start": 1295.919,
+      "end": 1298.789,
+      "duration": 2.87,
+      "text": "else so it's the Jacobian of u and v"
+    },
+    {
+      "index": 439,
+      "start": 1298.799,
+      "end": 1303.029,
+      "duration": 4.23,
+      "text": "with respect to U and T So to calculate"
+    },
+    {
+      "index": 440,
+      "start": 1303.039,
+      "end": 1307.39,
+      "duration": 4.351,
+      "text": "that you write U equals u v equals uh T"
+    },
+    {
+      "index": 441,
+      "start": 1307.4,
+      "end": 1308.669,
+      "duration": 1.269,
+      "text": "minus"
+    },
+    {
+      "index": 442,
+      "start": 1308.679,
+      "end": 1314.149,
+      "duration": 5.47,
+      "text": "U and then the Jacobian"
+    },
+    {
+      "index": 443,
+      "start": 1317.789,
+      "end": 1317.799,
+      "duration": 0.01,
+      "text": "is the Jacobian is uh blah blah blah"
+    },
+    {
+      "index": 444,
+      "start": 1317.799,
+      "end": 1319.11,
+      "duration": 1.311,
+      "text": "blah blah blah"
+    },
+    {
+      "index": 445,
+      "start": 1319.12,
+      "end": 1321.029,
+      "duration": 1.909,
+      "text": "uh the partial The Matrix of the"
+    },
+    {
+      "index": 446,
+      "start": 1321.039,
+      "end": 1324.909,
+      "duration": 3.87,
+      "text": "determinant of partial"
+    },
+    {
+      "index": 447,
+      "start": 1327.029,
+      "end": 1327.039,
+      "duration": 0.01,
+      "text": "derivatives so it's the determinant"
+    },
+    {
+      "index": 448,
+      "start": 1327.039,
+      "end": 1328.909,
+      "duration": 1.87,
+      "text": "whose entries are the partial of U with"
+    },
+    {
+      "index": 449,
+      "start": 1328.919,
+      "end": 1332.19,
+      "duration": 3.271,
+      "text": "respect to U the partial of U with"
+    },
+    {
+      "index": 450,
+      "start": 1332.2,
+      "end": 1334.07,
+      "duration": 1.87,
+      "text": "respect to T but these are independent"
+    },
+    {
+      "index": 451,
+      "start": 1334.08,
+      "end": 1336.39,
+      "duration": 2.31,
+      "text": "variables so that's zero the partial of"
+    },
+    {
+      "index": 452,
+      "start": 1336.4,
+      "end": 1339.31,
+      "duration": 2.91,
+      "text": "V with respect to U is negative one the"
+    },
+    {
+      "index": 453,
+      "start": 1339.32,
+      "end": 1342.83,
+      "duration": 3.51,
+      "text": "partial of V with respect to T is one so"
+    },
+    {
+      "index": 454,
+      "start": 1342.84,
+      "end": 1346.59,
+      "duration": 3.75,
+      "text": "the Jacobian is one so if you forgot it"
+    },
+    {
+      "index": 455,
+      "start": 1346.6,
+      "end": 1347.51,
+      "duration": 0.91,
+      "text": "no"
+    },
+    {
+      "index": 456,
+      "start": 1347.52,
+      "end": 1350.789,
+      "duration": 3.269,
+      "text": "harm"
+    },
+    {
+      "index": 457,
+      "start": 1353.95,
+      "end": 1353.96,
+      "duration": 0.01,
+      "text": "so the Jacobian is"
+    },
+    {
+      "index": 458,
+      "start": 1353.96,
+      "end": 1357.07,
+      "duration": 3.11,
+      "text": "one now more serious and in some ways I"
+    },
+    {
+      "index": 459,
+      "start": 1357.08,
+      "end": 1359.269,
+      "duration": 2.189,
+      "text": "think for most of you the most difficult"
+    },
+    {
+      "index": 460,
+      "start": 1359.279,
+      "end": 1361.35,
+      "duration": 2.071,
+      "text": "part of the operation is putting in the"
+    },
+    {
+      "index": 461,
+      "start": 1361.36,
+      "end": 1362.39,
+      "duration": 1.03,
+      "text": "new"
+    },
+    {
+      "index": 462,
+      "start": 1362.4,
+      "end": 1364.95,
+      "duration": 2.55,
+      "text": "livits now for that you look at the"
+    },
+    {
+      "index": 463,
+      "start": 1364.96,
+      "end": 1367.19,
+      "duration": 2.23,
+      "text": "region over which you're integrating I"
+    },
+    {
+      "index": 464,
+      "start": 1367.2,
+      "end": 1369.47,
+      "duration": 2.27,
+      "text": "think I better do that carefully uh"
+    },
+    {
+      "index": 465,
+      "start": 1369.48,
+      "end": 1371.23,
+      "duration": 1.75,
+      "text": "let's I need a bigger picture that's"
+    },
+    {
+      "index": 466,
+      "start": 1371.24,
+      "end": 1374.029,
+      "duration": 2.789,
+      "text": "really what I'm trying to say so here is"
+    },
+    {
+      "index": 467,
+      "start": 1374.039,
+      "end": 1376.87,
+      "duration": 2.831,
+      "text": "the UV coordinates and I want to change"
+    },
+    {
+      "index": 468,
+      "start": 1376.88,
+      "end": 1380.11,
+      "duration": 3.23,
+      "text": "these to UV to UT coordinates the"
+    },
+    {
+      "index": 469,
+      "start": 1380.12,
+      "end": 1383.83,
+      "duration": 3.71,
+      "text": "integration is over the first"
+    },
+    {
+      "index": 470,
+      "start": 1383.84,
+      "end": 1386.59,
+      "duration": 2.75,
+      "text": "quadrant so what you do is when you do"
+    },
+    {
+      "index": 471,
+      "start": 1386.6,
+      "end": 1391.11,
+      "duration": 4.51,
+      "text": "the integral the first step is U is"
+    },
+    {
+      "index": 472,
+      "start": 1391.12,
+      "end": 1394.269,
+      "duration": 3.149,
+      "text": "varying and T is held fixed so in the"
+    },
+    {
+      "index": 473,
+      "start": 1394.279,
+      "end": 1398.87,
+      "duration": 4.591,
+      "text": "first integration U"
+    },
+    {
+      "index": 474,
+      "start": 1402.269,
+      "end": 1402.279,
+      "duration": 0.01,
+      "text": "varies T is held fixed now what is"
+    },
+    {
+      "index": 475,
+      "start": 1402.279,
+      "end": 1404.95,
+      "duration": 2.671,
+      "text": "holding T fixed in this picture mean"
+    },
+    {
+      "index": 476,
+      "start": 1404.96,
+      "end": 1409.789,
+      "duration": 4.829,
+      "text": "well T is equal to U + V so U plus v is"
+    },
+    {
+      "index": 477,
+      "start": 1409.799,
+      "end": 1413.39,
+      "duration": 3.591,
+      "text": "fixed is a constant in other words now"
+    },
+    {
+      "index": 478,
+      "start": 1413.4,
+      "end": 1415.31,
+      "duration": 1.91,
+      "text": "where are the curves along which U plus"
+    },
+    {
+      "index": 479,
+      "start": 1415.32,
+      "end": 1419.909,
+      "duration": 4.589,
+      "text": "v is a constant well they are these"
+    },
+    {
+      "index": 480,
+      "start": 1423.23,
+      "end": 1423.24,
+      "duration": 0.01,
+      "text": "lines these are the lines along which u+"
+    },
+    {
+      "index": 481,
+      "start": 1423.24,
+      "end": 1427.95,
+      "duration": 4.71,
+      "text": "V equals a constant or t is a constant"
+    },
+    {
+      "index": 482,
+      "start": 1427.96,
+      "end": 1430.11,
+      "duration": 2.15,
+      "text": "the reason I'm holding t a constant is"
+    },
+    {
+      "index": 483,
+      "start": 1430.12,
+      "end": 1432.029,
+      "duration": 1.909,
+      "text": "because the first integration only"
+    },
+    {
+      "index": 484,
+      "start": 1432.039,
+      "end": 1437.11,
+      "duration": 5.071,
+      "text": "allows U to change T is held"
+    },
+    {
+      "index": 485,
+      "start": 1440.269,
+      "end": 1440.279,
+      "duration": 0.01,
+      "text": "fixed okay you let U"
+    },
+    {
+      "index": 486,
+      "start": 1440.279,
+      "end": 1444.909,
+      "duration": 4.63,
+      "text": "increase as U increase and T is held"
+    },
+    {
+      "index": 487,
+      "start": 1444.919,
+      "end": 1448.11,
+      "duration": 3.191,
+      "text": "fixed I'm traversing these lines in this"
+    },
+    {
+      "index": 488,
+      "start": 1448.12,
+      "end": 1450.029,
+      "duration": 1.909,
+      "text": "Direction that's the direction on which"
+    },
+    {
+      "index": 489,
+      "start": 1450.039,
+      "end": 1453.11,
+      "duration": 3.071,
+      "text": "U is increasing I integrate from the"
+    },
+    {
+      "index": 490,
+      "start": 1453.12,
+      "end": 1455.39,
+      "duration": 2.27,
+      "text": "point from the U value where they leave"
+    },
+    {
+      "index": 491,
+      "start": 1455.4,
+      "end": 1457.549,
+      "duration": 2.149,
+      "text": "the region into enter the region what's"
+    },
+    {
+      "index": 492,
+      "start": 1457.559,
+      "end": 1459.75,
+      "duration": 2.191,
+      "text": "the U value where they enter the region"
+    },
+    {
+      "index": 493,
+      "start": 1459.76,
+      "end": 1463.87,
+      "duration": 4.11,
+      "text": "U is equal to zero everybody would know"
+    },
+    {
+      "index": 494,
+      "start": 1463.88,
+      "end": 1466.149,
+      "duration": 2.269,
+      "text": "that not so many people would be able to"
+    },
+    {
+      "index": 495,
+      "start": 1466.159,
+      "end": 1468.389,
+      "duration": 2.23,
+      "text": "figure out what to put for where it"
+    },
+    {
+      "index": 496,
+      "start": 1468.399,
+      "end": 1470.35,
+      "duration": 1.951,
+      "text": "leaves the"
+    },
+    {
+      "index": 497,
+      "start": 1470.36,
+      "end": 1473.59,
+      "duration": 3.23,
+      "text": "region what's U the value of U when it"
+    },
+    {
+      "index": 498,
+      "start": 1473.6,
+      "end": 1477.19,
+      "duration": 3.59,
+      "text": "leaves the region well this is the curve"
+    },
+    {
+      "index": 499,
+      "start": 1477.2,
+      "end": 1482.59,
+      "duration": 5.39,
+      "text": "v equals 0 but V equals 0 is in another"
+    },
+    {
+      "index": 500,
+      "start": 1482.6,
+      "end": 1486.75,
+      "duration": 4.15,
+      "text": "language U equals T T minus U equal 0 or"
+    },
+    {
+      "index": 501,
+      "start": 1486.76,
+      "end": 1489.87,
+      "duration": 3.11,
+      "text": "U equals T in other words they enter the"
+    },
+    {
+      "index": 502,
+      "start": 1489.88,
+      "end": 1492.789,
+      "duration": 2.909,
+      "text": "region where U equals 0 and they leave"
+    },
+    {
+      "index": 503,
+      "start": 1492.799,
+      "end": 1497.31,
+      "duration": 4.511,
+      "text": "where U is T has the value"
+    },
+    {
+      "index": 504,
+      "start": 1505.909,
+      "end": 1505.919,
+      "duration": 0.01,
+      "text": "and how about the other guys for which"
+    },
+    {
+      "index": 505,
+      "start": 1505.919,
+      "end": 1508.31,
+      "duration": 2.391,
+      "text": "T's do I want to do this well I want to"
+    },
+    {
+      "index": 506,
+      "start": 1508.32,
+      "end": 1511.31,
+      "duration": 2.99,
+      "text": "do it for all these T values well now"
+    },
+    {
+      "index": 507,
+      "start": 1511.32,
+      "end": 1514.149,
+      "duration": 2.829,
+      "text": "the T value here that's the starting one"
+    },
+    {
+      "index": 508,
+      "start": 1514.159,
+      "end": 1518.669,
+      "duration": 4.51,
+      "text": "here T is zero and here T is not zero"
+    },
+    {
+      "index": 509,
+      "start": 1518.679,
+      "end": 1520.63,
+      "duration": 1.951,
+      "text": "and if I go out and cover the whole"
+    },
+    {
+      "index": 510,
+      "start": 1520.64,
+      "end": 1523.149,
+      "duration": 2.509,
+      "text": "first quadrant I'll be going letting T"
+    },
+    {
+      "index": 511,
+      "start": 1523.159,
+      "end": 1525.95,
+      "duration": 2.791,
+      "text": "increase to Infinity the sum of u and v"
+    },
+    {
+      "index": 512,
+      "start": 1525.96,
+      "end": 1527.71,
+      "duration": 1.75,
+      "text": "i will be letting increase to Infinity"
+    },
+    {
+      "index": 513,
+      "start": 1527.72,
+      "end": 1532.07,
+      "duration": 4.35,
+      "text": "so it's 0 to Infinity so all this is an"
+    },
+    {
+      "index": 514,
+      "start": 1532.08,
+      "end": 1534.47,
+      "duration": 2.39,
+      "text": "exercise in changing taking this double"
+    },
+    {
+      "index": 515,
+      "start": 1534.48,
+      "end": 1537.07,
+      "duration": 2.59,
+      "text": "integral in UV coordinates and changing"
+    },
+    {
+      "index": 516,
+      "start": 1537.08,
+      "end": 1539.43,
+      "duration": 2.35,
+      "text": "it to this double integral an equivalent"
+    },
+    {
+      "index": 517,
+      "start": 1539.44,
+      "end": 1541.909,
+      "duration": 2.469,
+      "text": "double integral over the same region but"
+    },
+    {
+      "index": 518,
+      "start": 1541.919,
+      "end": 1545.43,
+      "duration": 3.511,
+      "text": "now in ut coordinates and now that's the"
+    },
+    {
+      "index": 519,
+      "start": 1545.44,
+      "end": 1547.31,
+      "duration": 1.87,
+      "text": "answer somewhere here is the answer"
+    },
+    {
+      "index": 520,
+      "start": 1547.32,
+      "end": 1548.789,
+      "duration": 1.469,
+      "text": "because"
+    },
+    {
+      "index": 521,
+      "start": 1548.799,
+      "end": 1552.87,
+      "duration": 4.071,
+      "text": "look because look if I"
+    },
+    {
+      "index": 522,
+      "start": 1552.88,
+      "end": 1555.99,
+      "duration": 3.11,
+      "text": "uh since the first integration is with"
+    },
+    {
+      "index": 523,
+      "start": 1556.0,
+      "end": 1561.909,
+      "duration": 5.909,
+      "text": "respect to you this this guy can migrate"
+    },
+    {
+      "index": 524,
+      "start": 1561.919,
+      "end": 1566.23,
+      "duration": 4.311,
+      "text": "outside because it doesn't involve"
+    },
+    {
+      "index": 525,
+      "start": 1566.24,
+      "end": 1569.59,
+      "duration": 3.35,
+      "text": "you that only involves T and T is only"
+    },
+    {
+      "index": 526,
+      "start": 1569.6,
+      "end": 1572.35,
+      "duration": 2.75,
+      "text": "caught by the second integration so I"
+    },
+    {
+      "index": 527,
+      "start": 1572.36,
+      "end": 1574.19,
+      "duration": 1.83,
+      "text": "can put this outside and what do I end"
+    },
+    {
+      "index": 528,
+      "start": 1574.2,
+      "end": 1576.35,
+      "duration": 2.15,
+      "text": "up with the integral from zero to"
+    },
+    {
+      "index": 529,
+      "start": 1576.36,
+      "end": 1580.669,
+      "duration": 4.309,
+      "text": "Infinity of e to the negative St times"
+    },
+    {
+      "index": 530,
+      "start": 1580.679,
+      "end": 1583.43,
+      "duration": 2.751,
+      "text": "what's left a funny expression but"
+    },
+    {
+      "index": 531,
+      "start": 1583.44,
+      "end": 1585.07,
+      "duration": 1.63,
+      "text": "you're on your desert island and found"
+    },
+    {
+      "index": 532,
+      "start": 1585.08,
+      "end": 1588.63,
+      "duration": 3.55,
+      "text": "it this funny expression integral from 0"
+    },
+    {
+      "index": 533,
+      "start": 1588.64,
+      "end": 1594.23,
+      "duration": 5.59,
+      "text": "to T F of uu G of T minus U du in short"
+    },
+    {
+      "index": 534,
+      "start": 1594.24,
+      "end": 1599.549,
+      "duration": 5.309,
+      "text": "the convolution exactly the"
+    },
+    {
+      "index": 535,
+      "start": 1601.789,
+      "end": 1601.799,
+      "duration": 0.01,
+      "text": "convolution so all you have to do is get"
+    },
+    {
+      "index": 536,
+      "start": 1601.799,
+      "end": 1603.59,
+      "duration": 1.791,
+      "text": "the idea that there might be a formula"
+    },
+    {
+      "index": 537,
+      "start": 1603.6,
+      "end": 1606.23,
+      "duration": 2.63,
+      "text": "sit down change variables the double"
+    },
+    {
+      "index": 538,
+      "start": 1606.24,
+      "end": 1613.19,
+      "duration": 6.95,
+      "text": "integral Echo you got your formula"
+    },
+    {
+      "index": 539,
+      "start": 1615.95,
+      "end": 1615.96,
+      "duration": 0.01,
+      "text": "well I would like to spend much of the"
+    },
+    {
+      "index": 540,
+      "start": 1615.96,
+      "end": 1617.23,
+      "duration": 1.27,
+      "text": "rest of the"
+    },
+    {
+      "index": 541,
+      "start": 1617.24,
+      "end": 1618.83,
+      "duration": 1.59,
+      "text": "period"
+    },
+    {
+      "index": 542,
+      "start": 1618.84,
+      "end": 1621.19,
+      "duration": 2.35,
+      "text": "in other words so that's how it relates"
+    },
+    {
+      "index": 543,
+      "start": 1621.2,
+      "end": 1623.23,
+      "duration": 2.03,
+      "text": "to the luse transform that's how it"
+    },
+    {
+      "index": 544,
+      "start": 1623.24,
+      "end": 1625.51,
+      "duration": 2.27,
+      "text": "comes out of the LL transform here's how"
+    },
+    {
+      "index": 545,
+      "start": 1625.52,
+      "end": 1627.71,
+      "duration": 2.19,
+      "text": "to use it you know calculate it either"
+    },
+    {
+      "index": 546,
+      "start": 1627.72,
+      "end": 1629.43,
+      "duration": 1.71,
+      "text": "with a llao transform or directly from"
+    },
+    {
+      "index": 547,
+      "start": 1629.44,
+      "end": 1631.19,
+      "duration": 1.75,
+      "text": "the integral and of course you'll solve"
+    },
+    {
+      "index": 548,
+      "start": 1631.2,
+      "end": 1633.31,
+      "duration": 2.11,
+      "text": "problems llao transform problems"
+    },
+    {
+      "index": 549,
+      "start": 1633.32,
+      "end": 1634.59,
+      "duration": 1.27,
+      "text": "differential equations using the"
+    },
+    {
+      "index": 550,
+      "start": 1634.6,
+      "end": 1637.19,
+      "duration": 2.59,
+      "text": "convolution but I have to tell you that"
+    },
+    {
+      "index": 551,
+      "start": 1637.2,
+      "end": 1638.71,
+      "duration": 1.51,
+      "text": "most people convolution is very"
+    },
+    {
+      "index": 552,
+      "start": 1638.72,
+      "end": 1641.23,
+      "duration": 2.51,
+      "text": "important and most people who use it"
+    },
+    {
+      "index": 553,
+      "start": 1641.24,
+      "end": 1643.11,
+      "duration": 1.87,
+      "text": "don't use it in connection of the llao"
+    },
+    {
+      "index": 554,
+      "start": 1643.12,
+      "end": 1646.35,
+      "duration": 3.23,
+      "text": "transform they use it for its own"
+    },
+    {
+      "index": 555,
+      "start": 1646.36,
+      "end": 1649.31,
+      "duration": 2.95,
+      "text": "sake uh the first"
+    },
+    {
+      "index": 556,
+      "start": 1649.32,
+      "end": 1652.669,
+      "duration": 3.349,
+      "text": "place I learned that you know outside of"
+    },
+    {
+      "index": 557,
+      "start": 1652.679,
+      "end": 1654.63,
+      "duration": 1.951,
+      "text": "MIT people use the convolution was"
+    },
+    {
+      "index": 558,
+      "start": 1654.64,
+      "end": 1657.07,
+      "duration": 2.43,
+      "text": "actually from my daughter who uh you"
+    },
+    {
+      "index": 559,
+      "start": 1657.08,
+      "end": 1659.59,
+      "duration": 2.51,
+      "text": "know is she's an environmental engineer"
+    },
+    {
+      "index": 560,
+      "start": 1659.6,
+      "end": 1661.789,
+      "duration": 2.189,
+      "text": "a consultant uh environmental consultant"
+    },
+    {
+      "index": 561,
+      "start": 1661.799,
+      "end": 1663.47,
+      "duration": 1.671,
+      "text": "she does risk assessment stuff like that"
+    },
+    {
+      "index": 562,
+      "start": 1663.48,
+      "end": 1665.63,
+      "duration": 2.15,
+      "text": "but anyway she had this paper on acid"
+    },
+    {
+      "index": 563,
+      "start": 1665.64,
+      "end": 1667.07,
+      "duration": 1.43,
+      "text": "range she was trying to read for a"
+    },
+    {
+      "index": 564,
+      "start": 1667.08,
+      "end": 1671.47,
+      "duration": 4.39,
+      "text": "client and uh she said you know was"
+    },
+    {
+      "index": 565,
+      "start": 1671.48,
+      "end": 1673.389,
+      "duration": 1.909,
+      "text": "something about calculating acid rain"
+    },
+    {
+      "index": 566,
+      "start": 1673.399,
+      "end": 1676.59,
+      "duration": 3.191,
+      "text": "falls on uh soil and then from there the"
+    },
+    {
+      "index": 567,
+      "start": 1676.6,
+      "end": 1679.35,
+      "duration": 2.75,
+      "text": "stuff leeches into a river but uh things"
+    },
+    {
+      "index": 568,
+      "start": 1679.36,
+      "end": 1681.31,
+      "duration": 1.95,
+      "text": "happen to it on the way the soil"
+    },
+    {
+      "index": 569,
+      "start": 1681.32,
+      "end": 1683.389,
+      "duration": 2.069,
+      "text": "combines with it in various ways reduces"
+    },
+    {
+      "index": 570,
+      "start": 1683.399,
+      "end": 1686.149,
+      "duration": 2.75,
+      "text": "the acidity and things happen chemical"
+    },
+    {
+      "index": 571,
+      "start": 1686.159,
+      "end": 1687.789,
+      "duration": 1.63,
+      "text": "reactions take place blah blah blah blah"
+    },
+    {
+      "index": 572,
+      "start": 1687.799,
+      "end": 1690.029,
+      "duration": 2.23,
+      "text": "anyway she said well then they"
+    },
+    {
+      "index": 573,
+      "start": 1690.039,
+      "end": 1691.909,
+      "duration": 1.87,
+      "text": "calculated in the end how much the water"
+    },
+    {
+      "index": 574,
+      "start": 1691.919,
+      "end": 1693.87,
+      "duration": 1.951,
+      "text": "get the river gets polluted but she said"
+    },
+    {
+      "index": 575,
+      "start": 1693.88,
+      "end": 1695.31,
+      "duration": 1.43,
+      "text": "but it's a"
+    },
+    {
+      "index": 576,
+      "start": 1695.32,
+      "end": 1698.149,
+      "duration": 2.829,
+      "text": "convolution she said well what's the"
+    },
+    {
+      "index": 577,
+      "start": 1698.159,
+      "end": 1700.23,
+      "duration": 2.071,
+      "text": "convolution so I told her she was too"
+    },
+    {
+      "index": 578,
+      "start": 1700.24,
+      "end": 1702.87,
+      "duration": 2.63,
+      "text": "young to learn about the convolution and"
+    },
+    {
+      "index": 579,
+      "start": 1702.88,
+      "end": 1704.389,
+      "duration": 1.509,
+      "text": "you know so I thought I'd better look it"
+    },
+    {
+      "index": 580,
+      "start": 1704.399,
+      "end": 1706.95,
+      "duration": 2.551,
+      "text": "up first uh I mean I of course knew what"
+    },
+    {
+      "index": 581,
+      "start": 1706.96,
+      "end": 1708.23,
+      "duration": 1.27,
+      "text": "the convolution was but I was a little"
+    },
+    {
+      "index": 582,
+      "start": 1708.24,
+      "end": 1709.83,
+      "duration": 1.59,
+      "text": "puzzled at that application of it so I"
+    },
+    {
+      "index": 583,
+      "start": 1709.84,
+      "end": 1712.31,
+      "duration": 2.47,
+      "text": "read the paper it was interesting and I"
+    },
+    {
+      "index": 584,
+      "start": 1712.32,
+      "end": 1715.19,
+      "duration": 2.87,
+      "text": "uh in thinking about it uh I then other"
+    },
+    {
+      "index": 585,
+      "start": 1715.2,
+      "end": 1717.029,
+      "duration": 1.829,
+      "text": "people have come to me you know some guy"
+    },
+    {
+      "index": 586,
+      "start": 1717.039,
+      "end": 1719.11,
+      "duration": 2.071,
+      "text": "with a problem about they drilled ice"
+    },
+    {
+      "index": 587,
+      "start": 1719.12,
+      "end": 1722.11,
+      "duration": 2.99,
+      "text": "cores in the North Pole and uh from the"
+    },
+    {
+      "index": 588,
+      "start": 1722.12,
+      "end": 1724.31,
+      "duration": 2.19,
+      "text": "radioactive carbon and so on they were"
+    },
+    {
+      "index": 589,
+      "start": 1724.32,
+      "end": 1725.75,
+      "duration": 1.43,
+      "text": "deducing various things about the"
+    },
+    {
+      "index": 590,
+      "start": 1725.76,
+      "end": 1728.47,
+      "duration": 2.71,
+      "text": "climate you know 60 billion years ago"
+    },
+    {
+      "index": 591,
+      "start": 1728.48,
+      "end": 1731.149,
+      "duration": 2.669,
+      "text": "and it was all convolution he asked me"
+    },
+    {
+      "index": 592,
+      "start": 1731.159,
+      "end": 1733.669,
+      "duration": 2.51,
+      "text": "if I could explain that to him so let me"
+    },
+    {
+      "index": 593,
+      "start": 1733.679,
+      "end": 1736.31,
+      "duration": 2.631,
+      "text": "give you uh a sort of an allpurpose"
+    },
+    {
+      "index": 594,
+      "start": 1736.32,
+      "end": 1739.269,
+      "duration": 2.949,
+      "text": "thing a simple all purpose model which"
+    },
+    {
+      "index": 595,
+      "start": 1739.279,
+      "end": 1741.669,
+      "duration": 2.39,
+      "text": "can be adapted which is a very good way"
+    },
+    {
+      "index": 596,
+      "start": 1741.679,
+      "end": 1746.31,
+      "duration": 4.631,
+      "text": "I of thinking of the convolution in my"
+    },
+    {
+      "index": 597,
+      "start": 1758.87,
+      "end": 1758.88,
+      "duration": 0.01,
+      "text": "dumping it's in the notes by the way uh"
+    },
+    {
+      "index": 598,
+      "start": 1758.88,
+      "end": 1760.99,
+      "duration": 2.11,
+      "text": "so I'm just uh if you want to take a"
+    },
+    {
+      "index": 599,
+      "start": 1761.0,
+      "end": 1764.35,
+      "duration": 3.35,
+      "text": "chance uh and just listen to what I'm"
+    },
+    {
+      "index": 600,
+      "start": 1764.36,
+      "end": 1765.95,
+      "duration": 1.59,
+      "text": "saying rather than scribbling everything"
+    },
+    {
+      "index": 601,
+      "start": 1765.96,
+      "end": 1768.269,
+      "duration": 2.309,
+      "text": "down maybe it's a good you'll be able to"
+    },
+    {
+      "index": 602,
+      "start": 1768.279,
+      "end": 1770.59,
+      "duration": 2.311,
+      "text": "figured out the notes also so the"
+    },
+    {
+      "index": 603,
+      "start": 1770.6,
+      "end": 1773.31,
+      "duration": 2.71,
+      "text": "problem is we have some Factory or some"
+    },
+    {
+      "index": 604,
+      "start": 1773.32,
+      "end": 1775.669,
+      "duration": 2.349,
+      "text": "a nuclear plant or something like that"
+    },
+    {
+      "index": 605,
+      "start": 1775.679,
+      "end": 1777.87,
+      "duration": 2.191,
+      "text": "it's producing nuclear material"
+    },
+    {
+      "index": 606,
+      "start": 1777.88,
+      "end": 1780.669,
+      "duration": 2.789,
+      "text": "radioactive waste certain not always at"
+    },
+    {
+      "index": 607,
+      "start": 1780.679,
+      "end": 1784.59,
+      "duration": 3.911,
+      "text": "the same rate uh and then it carts it"
+    },
+    {
+      "index": 608,
+      "start": 1784.6,
+      "end": 1787.71,
+      "duration": 3.11,
+      "text": "and dumps it on a pile somewhere so"
+    },
+    {
+      "index": 609,
+      "start": 1787.72,
+      "end": 1791.509,
+      "duration": 3.789,
+      "text": "radioactive"
+    },
+    {
+      "index": 610,
+      "start": 1794.669,
+      "end": 1794.679,
+      "duration": 0.01,
+      "text": "waste is dumped and there's a dumping"
+    },
+    {
+      "index": 611,
+      "start": 1794.679,
+      "end": 1797.87,
+      "duration": 3.191,
+      "text": "function I'll call that F of T the dump"
+    },
+    {
+      "index": 612,
+      "start": 1797.88,
+      "end": 1800.83,
+      "duration": 2.95,
+      "text": "rate"
+    },
+    {
+      "index": 613,
+      "start": 1803.47,
+      "end": 1803.48,
+      "duration": 0.01,
+      "text": "That's The Dumping rate let's say t"
+    },
+    {
+      "index": 614,
+      "start": 1803.48,
+      "end": 1807.269,
+      "duration": 3.789,
+      "text": "is in years you like to have units and"
+    },
+    {
+      "index": 615,
+      "start": 1807.279,
+      "end": 1809.509,
+      "duration": 2.23,
+      "text": "quantity kilograms I don't know whatever"
+    },
+    {
+      "index": 616,
+      "start": 1809.519,
+      "end": 1812.669,
+      "duration": 3.15,
+      "text": "whatever you want uh now what does The"
+    },
+    {
+      "index": 617,
+      "start": 1812.679,
+      "end": 1814.47,
+      "duration": 1.791,
+      "text": "Dumping rate"
+    },
+    {
+      "index": 618,
+      "start": 1814.48,
+      "end": 1816.99,
+      "duration": 2.51,
+      "text": "mean The Dumping rate"
+    },
+    {
+      "index": 619,
+      "start": 1817.0,
+      "end": 1822.99,
+      "duration": 5.99,
+      "text": "means that if I on the time axis if I"
+    },
+    {
+      "index": 620,
+      "start": 1823.0,
+      "end": 1825.389,
+      "duration": 2.389,
+      "text": "have two times which are close together"
+    },
+    {
+      "index": 621,
+      "start": 1825.399,
+      "end": 1828.509,
+      "duration": 3.11,
+      "text": "for example two successive days a new"
+    },
+    {
+      "index": 622,
+      "start": 1828.519,
+      "end": 1831.35,
+      "duration": 2.831,
+      "text": "midnight on two successive days then"
+    },
+    {
+      "index": 623,
+      "start": 1831.36,
+      "end": 1833.11,
+      "duration": 1.75,
+      "text": "there's a time interval between them"
+    },
+    {
+      "index": 624,
+      "start": 1833.12,
+      "end": 1834.95,
+      "duration": 1.83,
+      "text": "I'll call that delta"
+    },
+    {
+      "index": 625,
+      "start": 1834.96,
+      "end": 1838.149,
+      "duration": 3.189,
+      "text": "T to say The Dumping rate is f of t"
+    },
+    {
+      "index": 626,
+      "start": 1838.159,
+      "end": 1843.83,
+      "duration": 5.671,
+      "text": "means that the amount"
+    },
+    {
+      "index": 627,
+      "start": 1847.59,
+      "end": 1847.6,
+      "duration": 0.01,
+      "text": "dumped in the in this time interval in"
+    },
+    {
+      "index": 628,
+      "start": 1847.6,
+      "end": 1852.95,
+      "duration": 5.35,
+      "text": "the time interval from TI to TI + one is"
+    },
+    {
+      "index": 629,
+      "start": 1852.96,
+      "end": 1855.99,
+      "duration": 3.03,
+      "text": "approximately not exactly because the"
+    },
+    {
+      "index": 630,
+      "start": 1856.0,
+      "end": 1858.11,
+      "duration": 2.11,
+      "text": "damping The Dumping rate isn't even"
+    },
+    {
+      "index": 631,
+      "start": 1858.12,
+      "end": 1860.83,
+      "duration": 2.71,
+      "text": "constant within this time interval uh"
+    },
+    {
+      "index": 632,
+      "start": 1860.84,
+      "end": 1864.19,
+      "duration": 3.35,
+      "text": "but it's approximately The Dumping rate"
+    },
+    {
+      "index": 633,
+      "start": 1864.2,
+      "end": 1865.669,
+      "duration": 1.469,
+      "text": "times the"
+    },
+    {
+      "index": 634,
+      "start": 1865.679,
+      "end": 1870.47,
+      "duration": 4.791,
+      "text": "time over which The Dumping was taking"
+    },
+    {
+      "index": 635,
+      "start": 1873.389,
+      "end": 1873.399,
+      "duration": 0.01,
+      "text": "place that's what I mean by The Dump"
+    },
+    {
+      "index": 636,
+      "start": 1873.399,
+      "end": 1876.07,
+      "duration": 2.671,
+      "text": "break and it gets more and more accurate"
+    },
+    {
+      "index": 637,
+      "start": 1876.08,
+      "end": 1879.549,
+      "duration": 3.469,
+      "text": "the smaller the time interval you"
+    },
+    {
+      "index": 638,
+      "start": 1879.559,
+      "end": 1883.07,
+      "duration": 3.511,
+      "text": "take okay now here's my problem the"
+    },
+    {
+      "index": 639,
+      "start": 1883.08,
+      "end": 1886.909,
+      "duration": 3.829,
+      "text": "problem"
+    },
+    {
+      "index": 640,
+      "start": 1889.149,
+      "end": 1889.159,
+      "duration": 0.01,
+      "text": "is start"
+    },
+    {
+      "index": 641,
+      "start": 1889.159,
+      "end": 1892.59,
+      "duration": 3.431,
+      "text": "dumping at time tal"
+    },
+    {
+      "index": 642,
+      "start": 1892.6,
+      "end": 1897.35,
+      "duration": 4.75,
+      "text": "0 at time tal"
+    },
+    {
+      "index": 643,
+      "start": 1915.149,
+      "end": 1915.159,
+      "duration": 0.01,
+      "text": "pile now what makes that problem"
+    },
+    {
+      "index": 644,
+      "start": 1915.159,
+      "end": 1918.59,
+      "duration": 3.431,
+      "text": "slightly complicated is"
+    },
+    {
+      "index": 645,
+      "start": 1918.6,
+      "end": 1921.87,
+      "duration": 3.27,
+      "text": "radioactive waste decays if I put some"
+    },
+    {
+      "index": 646,
+      "start": 1921.88,
+      "end": 1924.389,
+      "duration": 2.509,
+      "text": "at at certain day and then go back"
+    },
+    {
+      "index": 647,
+      "start": 1924.399,
+      "end": 1926.909,
+      "duration": 2.51,
+      "text": "several months later I don't and"
+    },
+    {
+      "index": 648,
+      "start": 1926.919,
+      "end": 1929.07,
+      "duration": 2.151,
+      "text": "nothing's happened in between I don't"
+    },
+    {
+      "index": 649,
+      "start": 1929.08,
+      "end": 1931.029,
+      "duration": 1.949,
+      "text": "have the same amount that I dumped"
+    },
+    {
+      "index": 650,
+      "start": 1931.039,
+      "end": 1933.789,
+      "duration": 2.75,
+      "text": "because some of a fraction of it decayed"
+    },
+    {
+      "index": 651,
+      "start": 1933.799,
+      "end": 1937.47,
+      "duration": 3.671,
+      "text": "I have less and our answer to the"
+    },
+    {
+      "index": 652,
+      "start": 1937.48,
+      "end": 1940.43,
+      "duration": 2.95,
+      "text": "problem must take account of for each"
+    },
+    {
+      "index": 653,
+      "start": 1940.44,
+      "end": 1942.789,
+      "duration": 2.349,
+      "text": "piece of waste how long it has been in"
+    },
+    {
+      "index": 654,
+      "start": 1942.799,
+      "end": 1945.389,
+      "duration": 2.59,
+      "text": "the pile because that takes account of"
+    },
+    {
+      "index": 655,
+      "start": 1945.399,
+      "end": 1948.269,
+      "duration": 2.87,
+      "text": "how long it had to Decay and what ends"
+    },
+    {
+      "index": 656,
+      "start": 1948.279,
+      "end": 1951.909,
+      "duration": 3.63,
+      "text": "up what it ends up as so the"
+    },
+    {
+      "index": 657,
+      "start": 1951.919,
+      "end": 1954.029,
+      "duration": 2.11,
+      "text": "calculation the essential part of the"
+    },
+    {
+      "index": 658,
+      "start": 1954.039,
+      "end": 1958.47,
+      "duration": 4.431,
+      "text": "calculation will be that if you have an"
+    },
+    {
+      "index": 659,
+      "start": 1958.48,
+      "end": 1964.029,
+      "duration": 5.549,
+      "text": "initial amount of this"
+    },
+    {
+      "index": 660,
+      "start": 1981.59,
+      "end": 1981.6,
+      "duration": 0.01,
+      "text": "you know this is a law of radioactive"
+    },
+    {
+      "index": 661,
+      "start": 1981.6,
+      "end": 1984.47,
+      "duration": 2.87,
+      "text": "decay you knew that coming into 1803"
+    },
+    {
+      "index": 662,
+      "start": 1984.48,
+      "end": 1985.509,
+      "duration": 1.029,
+      "text": "although it's of course a simple"
+    },
+    {
+      "index": 663,
+      "start": 1985.519,
+      "end": 1987.11,
+      "duration": 1.591,
+      "text": "differential equation which produces it"
+    },
+    {
+      "index": 664,
+      "start": 1987.12,
+      "end": 1988.31,
+      "duration": 1.19,
+      "text": "but I'll assume you simply know the"
+    },
+    {
+      "index": 665,
+      "start": 1988.32,
+      "end": 1991.269,
+      "duration": 2.949,
+      "text": "answer K depends on the material so I'm"
+    },
+    {
+      "index": 666,
+      "start": 1991.279,
+      "end": 1994.07,
+      "duration": 2.791,
+      "text": "going to assume that the uh nuclear"
+    },
+    {
+      "index": 667,
+      "start": 1994.08,
+      "end": 1996.149,
+      "duration": 2.069,
+      "text": "plant dumps the same radioactive"
+    },
+    {
+      "index": 668,
+      "start": 1996.159,
+      "end": 1998.149,
+      "duration": 1.99,
+      "text": "substance each time it's only one"
+    },
+    {
+      "index": 669,
+      "start": 1998.159,
+      "end": 2001.11,
+      "duration": 2.951,
+      "text": "substance I'm calculating and K is it so"
+    },
+    {
+      "index": 670,
+      "start": 2001.12,
+      "end": 2003.11,
+      "duration": 1.99,
+      "text": "assume the K is"
+    },
+    {
+      "index": 671,
+      "start": 2003.12,
+      "end": 2005.909,
+      "duration": 2.789,
+      "text": "fixed I don't have to change from one K"
+    },
+    {
+      "index": 672,
+      "start": 2005.919,
+      "end": 2007.87,
+      "duration": 1.951,
+      "text": "from one material to a k for another"
+    },
+    {
+      "index": 673,
+      "start": 2007.88,
+      "end": 2009.95,
+      "duration": 2.07,
+      "text": "because it's mixing up the"
+    },
+    {
+      "index": 674,
+      "start": 2009.96,
+      "end": 2013.83,
+      "duration": 3.87,
+      "text": "stuff just one material okay and now"
+    },
+    {
+      "index": 675,
+      "start": 2013.84,
+      "end": 2017.269,
+      "duration": 3.429,
+      "text": "let's calculate it here's the idea I'll"
+    },
+    {
+      "index": 676,
+      "start": 2017.279,
+      "end": 2019.31,
+      "duration": 2.031,
+      "text": "take the txis but now I'm going to"
+    },
+    {
+      "index": 677,
+      "start": 2019.32,
+      "end": 2021.509,
+      "duration": 2.189,
+      "text": "change its name to the U axis you'll see"
+    },
+    {
+      "index": 678,
+      "start": 2021.519,
+      "end": 2024.909,
+      "duration": 3.39,
+      "text": "why in just a second starts at"
+    },
+    {
+      "index": 679,
+      "start": 2024.919,
+      "end": 2027.549,
+      "duration": 2.63,
+      "text": "zero I'm interested in what's happening"
+    },
+    {
+      "index": 680,
+      "start": 2027.559,
+      "end": 2031.83,
+      "duration": 4.271,
+      "text": "at the time T how much is left at time T"
+    },
+    {
+      "index": 681,
+      "start": 2031.84,
+      "end": 2033.669,
+      "duration": 1.829,
+      "text": "so I'm going to divide up the interval"
+    },
+    {
+      "index": 682,
+      "start": 2033.679,
+      "end": 2038.59,
+      "duration": 4.911,
+      "text": "from 0 to T on this time axis to well"
+    },
+    {
+      "index": 683,
+      "start": 2038.6,
+      "end": 2042.19,
+      "duration": 3.59,
+      "text": "here's u0o the starting point U1"
+    },
+    {
+      "index": 684,
+      "start": 2042.2,
+      "end": 2045.95,
+      "duration": 3.75,
+      "text": "U2 uh let's make this U1"
+    },
+    {
+      "index": 685,
+      "start": 2045.96,
+      "end": 2048.869,
+      "duration": 2.909,
+      "text": "U oh curses U"
+    },
+    {
+      "index": 686,
+      "start": 2048.879,
+      "end": 2053.109,
+      "duration": 4.23,
+      "text": "Want U two u3 and so on let's call this"
+    },
+    {
+      "index": 687,
+      "start": 2053.119,
+      "end": 2059.069,
+      "duration": 5.95,
+      "text": "uh"
+    },
+    {
+      "index": 688,
+      "start": 2061.589,
+      "end": 2061.599,
+      "duration": 0.01,
+      "text": "U plus it doesn't"
+    },
+    {
+      "index": 689,
+      "start": 2061.599,
+      "end": 2066.71,
+      "duration": 5.111,
+      "text": "matter okay now the"
+    },
+    {
+      "index": 690,
+      "start": 2066.72,
+      "end": 2070.71,
+      "duration": 3.99,
+      "text": "amount"
+    },
+    {
+      "index": 691,
+      "start": 2072.31,
+      "end": 2072.32,
+      "duration": 0.01,
+      "text": "so what I'm going to do is look at the"
+    },
+    {
+      "index": 692,
+      "start": 2072.32,
+      "end": 2075.71,
+      "duration": 3.39,
+      "text": "amount uh take a time interval from UI"
+    },
+    {
+      "index": 693,
+      "start": 2075.72,
+      "end": 2079.149,
+      "duration": 3.429,
+      "text": "to UI + 1 this is a time interval delta"
+    },
+    {
+      "index": 694,
+      "start": 2079.159,
+      "end": 2081.99,
+      "duration": 2.831,
+      "text": "T Delta"
+    },
+    {
+      "index": 695,
+      "start": 2085.03,
+      "end": 2085.04,
+      "duration": 0.01,
+      "text": "U divide it up into equal time"
+    },
+    {
+      "index": 696,
+      "start": 2085.04,
+      "end": 2088.669,
+      "duration": 3.629,
+      "text": "intervals so the amount"
+    },
+    {
+      "index": 697,
+      "start": 2088.679,
+      "end": 2092.349,
+      "duration": 3.67,
+      "text": "dumped in the time interval from UI to"
+    },
+    {
+      "index": 698,
+      "start": 2092.359,
+      "end": 2097.23,
+      "duration": 4.871,
+      "text": "UI + 1 is equal to approximately F of UI"
+    },
+    {
+      "index": 699,
+      "start": 2097.24,
+      "end": 2100.91,
+      "duration": 3.67,
+      "text": "the dump function there times Delta U we"
+    },
+    {
+      "index": 700,
+      "start": 2100.92,
+      "end": 2102.75,
+      "duration": 1.83,
+      "text": "calculated that before that's what the"
+    },
+    {
+      "index": 701,
+      "start": 2102.76,
+      "end": 2106.109,
+      "duration": 3.349,
+      "text": "meaning of The Dumping"
+    },
+    {
+      "index": 702,
+      "start": 2111.47,
+      "end": 2111.48,
+      "duration": 0.01,
+      "text": "rate by time T how much has it decayed"
+    },
+    {
+      "index": 703,
+      "start": 2111.48,
+      "end": 2115.03,
+      "duration": 3.55,
+      "text": "to it has decayed how much is left in"
+    },
+    {
+      "index": 704,
+      "start": 2115.04,
+      "end": 2121.19,
+      "duration": 6.15,
+      "text": "other"
+    },
+    {
+      "index": 705,
+      "start": 2124.109,
+      "end": 2124.119,
+      "duration": 0.01,
+      "text": "words well this is the starting"
+    },
+    {
+      "index": 706,
+      "start": 2124.119,
+      "end": 2126.829,
+      "duration": 2.71,
+      "text": "amount so the answer is going to be it's"
+    },
+    {
+      "index": 707,
+      "start": 2126.839,
+      "end": 2128.23,
+      "duration": 1.391,
+      "text": "F of U"
+    },
+    {
+      "index": 708,
+      "start": 2128.24,
+      "end": 2131.27,
+      "duration": 3.03,
+      "text": "* Delta U"
+    },
+    {
+      "index": 709,
+      "start": 2131.28,
+      "end": 2135.27,
+      "duration": 3.99,
+      "text": "times this factor which tells how how"
+    },
+    {
+      "index": 710,
+      "start": 2135.28,
+      "end": 2138.39,
+      "duration": 3.11,
+      "text": "much it decay now so times so this is"
+    },
+    {
+      "index": 711,
+      "start": 2138.4,
+      "end": 2142.15,
+      "duration": 3.75,
+      "text": "the starting amount at time"
+    },
+    {
+      "index": 712,
+      "start": 2142.16,
+      "end": 2144.87,
+      "duration": 2.71,
+      "text": "UI that's what it was first dumped and"
+    },
+    {
+      "index": 713,
+      "start": 2144.88,
+      "end": 2147.67,
+      "duration": 2.79,
+      "text": "this is the amount that was dumped time"
+    },
+    {
+      "index": 714,
+      "start": 2147.68,
+      "end": 2150.829,
+      "duration": 3.149,
+      "text": "multiply that by e to the minus K times"
+    },
+    {
+      "index": 715,
+      "start": 2150.839,
+      "end": 2153.39,
+      "duration": 2.551,
+      "text": "now what should I put up in there I have"
+    },
+    {
+      "index": 716,
+      "start": 2153.4,
+      "end": 2156.99,
+      "duration": 3.59,
+      "text": "to put the length of time that it had to"
+    },
+    {
+      "index": 717,
+      "start": 2157.0,
+      "end": 2158.15,
+      "duration": 1.15,
+      "text": "decay"
+    },
+    {
+      "index": 718,
+      "start": 2158.16,
+      "end": 2159.71,
+      "duration": 1.55,
+      "text": "what is the length of time that it had"
+    },
+    {
+      "index": 719,
+      "start": 2159.72,
+      "end": 2163.309,
+      "duration": 3.589,
+      "text": "to Decay it was dumped at UI I'm looking"
+    },
+    {
+      "index": 720,
+      "start": 2163.319,
+      "end": 2166.069,
+      "duration": 2.75,
+      "text": "at time T it decayed"
+    },
+    {
+      "index": 721,
+      "start": 2166.079,
+      "end": 2177.589,
+      "duration": 11.51,
+      "text": "for the time length T minus"
+    },
+    {
+      "index": 722,
+      "start": 2180.23,
+      "end": 2180.24,
+      "duration": 0.01,
+      "text": "UI the length of"
+    },
+    {
+      "index": 723,
+      "start": 2180.24,
+      "end": 2183.95,
+      "duration": 3.71,
+      "text": "time it"
+    },
+    {
+      "index": 724,
+      "start": 2194.75,
+      "end": 2194.76,
+      "duration": 0.01,
+      "text": "so the stuff that was dumped in this"
+    },
+    {
+      "index": 725,
+      "start": 2194.76,
+      "end": 2198.19,
+      "duration": 3.43,
+      "text": "time interval when I at time T when I"
+    },
+    {
+      "index": 726,
+      "start": 2198.2,
+      "end": 2200.39,
+      "duration": 2.19,
+      "text": "come to look at it this is how much of"
+    },
+    {
+      "index": 727,
+      "start": 2200.4,
+      "end": 2203.349,
+      "duration": 2.949,
+      "text": "it is left and now all I have to do is"
+    },
+    {
+      "index": 728,
+      "start": 2203.359,
+      "end": 2206.27,
+      "duration": 2.911,
+      "text": "add up that that quantity for this time"
+    },
+    {
+      "index": 729,
+      "start": 2206.28,
+      "end": 2207.75,
+      "duration": 1.47,
+      "text": "the stuff that was dumped in this time"
+    },
+    {
+      "index": 730,
+      "start": 2207.76,
+      "end": 2210.27,
+      "duration": 2.51,
+      "text": "interval plus the stuff dumped then plus"
+    },
+    {
+      "index": 731,
+      "start": 2210.28,
+      "end": 2211.99,
+      "duration": 1.71,
+      "text": "and so on all the way up to the stuff"
+    },
+    {
+      "index": 732,
+      "start": 2212.0,
+      "end": 2214.109,
+      "duration": 2.109,
+      "text": "that was dumped yesterday and the answer"
+    },
+    {
+      "index": 733,
+      "start": 2214.119,
+      "end": 2216.51,
+      "duration": 2.391,
+      "text": "will be"
+    },
+    {
+      "index": 734,
+      "start": 2216.52,
+      "end": 2218.069,
+      "duration": 1.549,
+      "text": "therefore"
+    },
+    {
+      "index": 735,
+      "start": 2218.079,
+      "end": 2222.51,
+      "duration": 4.431,
+      "text": "the answer will be the total"
+    },
+    {
+      "index": 736,
+      "start": 2225.63,
+      "end": 2225.64,
+      "duration": 0.01,
+      "text": "amount left at time"
+    },
+    {
+      "index": 737,
+      "start": 2225.64,
+      "end": 2230.75,
+      "duration": 5.11,
+      "text": "T that is that is not yet"
+    },
+    {
+      "index": 738,
+      "start": 2234.309,
+      "end": 2234.319,
+      "duration": 0.01,
+      "text": "decayed will be approximately you add up"
+    },
+    {
+      "index": 739,
+      "start": 2234.319,
+      "end": 2236.349,
+      "duration": 2.03,
+      "text": "the amount coming from the first time"
+    },
+    {
+      "index": 740,
+      "start": 2236.359,
+      "end": 2238.15,
+      "duration": 1.791,
+      "text": "interval plus the amount coming and so"
+    },
+    {
+      "index": 741,
+      "start": 2238.16,
+      "end": 2241.309,
+      "duration": 3.149,
+      "text": "on so it will be F of UI I'll save the"
+    },
+    {
+      "index": 742,
+      "start": 2241.319,
+      "end": 2247.51,
+      "duration": 6.191,
+      "text": "Delta U for the n * eus K * tus UI Del"
+    },
+    {
+      "index": 743,
+      "start": 2247.52,
+      "end": 2249.99,
+      "duration": 2.47,
+      "text": "Delta U so these two parts represent the"
+    },
+    {
+      "index": 744,
+      "start": 2250.0,
+      "end": 2252.349,
+      "duration": 2.349,
+      "text": "amount dumped and this is the Decay"
+    },
+    {
+      "index": 745,
+      "start": 2252.359,
+      "end": 2255.75,
+      "duration": 3.391,
+      "text": "factor and I add those up as I runs from"
+    },
+    {
+      "index": 746,
+      "start": 2255.76,
+      "end": 2257.67,
+      "duration": 1.91,
+      "text": "well where did I start from one to then"
+    },
+    {
+      "index": 747,
+      "start": 2257.68,
+      "end": 2260.51,
+      "duration": 2.83,
+      "text": "let's"
+    },
+    {
+      "index": 748,
+      "start": 2264.23,
+      "end": 2264.24,
+      "duration": 0.01,
+      "text": "say and now let delta T go to zero in"
+    },
+    {
+      "index": 749,
+      "start": 2264.24,
+      "end": 2267.23,
+      "duration": 2.99,
+      "text": "other words make this more AC Delta U go"
+    },
+    {
+      "index": 750,
+      "start": 2267.24,
+      "end": 2269.47,
+      "duration": 2.23,
+      "text": "to zero make this more accurate by"
+    },
+    {
+      "index": 751,
+      "start": 2269.48,
+      "end": 2271.71,
+      "duration": 2.23,
+      "text": "taking finer and finer subdiv in other"
+    },
+    {
+      "index": 752,
+      "start": 2271.72,
+      "end": 2273.15,
+      "duration": 1.43,
+      "text": "words instead of looking every month to"
+    },
+    {
+      "index": 753,
+      "start": 2273.16,
+      "end": 2274.91,
+      "duration": 1.75,
+      "text": "see how much was dump let's look every"
+    },
+    {
+      "index": 754,
+      "start": 2274.92,
+      "end": 2277.71,
+      "duration": 2.79,
+      "text": "week every day and so on to make this"
+    },
+    {
+      "index": 755,
+      "start": 2277.72,
+      "end": 2280.03,
+      "duration": 2.31,
+      "text": "calculation more accurate and the answer"
+    },
+    {
+      "index": 756,
+      "start": 2280.04,
+      "end": 2282.23,
+      "duration": 2.19,
+      "text": "is this"
+    },
+    {
+      "index": 757,
+      "start": 2282.24,
+      "end": 2285.109,
+      "duration": 2.869,
+      "text": "approaches the exact amount which will"
+    },
+    {
+      "index": 758,
+      "start": 2285.119,
+      "end": 2287.95,
+      "duration": 2.831,
+      "text": "be the integral this sum is a remon sum"
+    },
+    {
+      "index": 759,
+      "start": 2287.96,
+      "end": 2291.51,
+      "duration": 3.55,
+      "text": "it approaches the integral from zero to"
+    },
+    {
+      "index": 760,
+      "start": 2291.52,
+      "end": 2294.589,
+      "duration": 3.069,
+      "text": "well I'm adding it up from"
+    },
+    {
+      "index": 761,
+      "start": 2294.599,
+      "end": 2302.27,
+      "duration": 7.671,
+      "text": "U 1al 0 to u n = t the final value so it"
+    },
+    {
+      "index": 762,
+      "start": 2302.28,
+      "end": 2304.91,
+      "duration": 2.63,
+      "text": "will be the integral from the starting"
+    },
+    {
+      "index": 763,
+      "start": 2304.92,
+      "end": 2309.069,
+      "duration": 4.149,
+      "text": "point to the ending point of f of U"
+    },
+    {
+      "index": 764,
+      "start": 2309.079,
+      "end": 2313.99,
+      "duration": 4.911,
+      "text": "eus K * tus U"
+    },
+    {
+      "index": 765,
+      "start": 2314.0,
+      "end": 2316.43,
+      "duration": 2.43,
+      "text": "du that's the answer to the problem it's"
+    },
+    {
+      "index": 766,
+      "start": 2316.44,
+      "end": 2318.069,
+      "duration": 1.629,
+      "text": "given by this rather funny looking"
+    },
+    {
+      "index": 767,
+      "start": 2318.079,
+      "end": 2319.75,
+      "duration": 1.671,
+      "text": "integral but from this point of view"
+    },
+    {
+      "index": 768,
+      "start": 2319.76,
+      "end": 2322.589,
+      "duration": 2.829,
+      "text": "it's entirely natural It's a combination"
+    },
+    {
+      "index": 769,
+      "start": 2322.599,
+      "end": 2325.03,
+      "duration": 2.431,
+      "text": "of The Dumping function this doesn't"
+    },
+    {
+      "index": 770,
+      "start": 2325.04,
+      "end": 2327.589,
+      "duration": 2.549,
+      "text": "care what the material was it only wants"
+    },
+    {
+      "index": 771,
+      "start": 2327.599,
+      "end": 2330.55,
+      "duration": 2.951,
+      "text": "to know how much was put on every day"
+    },
+    {
+      "index": 772,
+      "start": 2330.56,
+      "end": 2332.79,
+      "duration": 2.23,
+      "text": "and this part which doesn't care how"
+    },
+    {
+      "index": 773,
+      "start": 2332.8,
+      "end": 2335.589,
+      "duration": 2.789,
+      "text": "much was put on each day it just is an"
+    },
+    {
+      "index": 774,
+      "start": 2335.599,
+      "end": 2337.43,
+      "duration": 1.831,
+      "text": "intrinsic constant of the materal"
+    },
+    {
+      "index": 775,
+      "start": 2337.44,
+      "end": 2341.87,
+      "duration": 4.43,
+      "text": "material involving its Decay rate and"
+    },
+    {
+      "index": 776,
+      "start": 2341.88,
+      "end": 2343.99,
+      "duration": 2.11,
+      "text": "this total thing represents the total"
+    },
+    {
+      "index": 777,
+      "start": 2344.0,
+      "end": 2346.23,
+      "duration": 2.23,
+      "text": "amount and that is what is it it's the"
+    },
+    {
+      "index": 778,
+      "start": 2346.24,
+      "end": 2350.829,
+      "duration": 4.589,
+      "text": "convolution of f of t with what"
+    },
+    {
+      "index": 779,
+      "start": 2350.839,
+      "end": 2354.63,
+      "duration": 3.791,
+      "text": "function e to"
+    },
+    {
+      "index": 780,
+      "start": 2357.47,
+      "end": 2357.48,
+      "duration": 0.01,
+      "text": "the minus"
+    },
+    {
+      "index": 781,
+      "start": 2357.48,
+      "end": 2359.95,
+      "duration": 2.47,
+      "text": "KT it's the convolution of The Dumping"
+    },
+    {
+      "index": 782,
+      "start": 2359.96,
+      "end": 2362.55,
+      "duration": 2.59,
+      "text": "function and the Decay function and the"
+    },
+    {
+      "index": 783,
+      "start": 2362.56,
+      "end": 2364.63,
+      "duration": 2.07,
+      "text": "convolution is exactly the operation"
+    },
+    {
+      "index": 784,
+      "start": 2364.64,
+      "end": 2367.47,
+      "duration": 2.83,
+      "text": "that you have to have to do that okay"
+    },
+    {
+      "index": 785,
+      "start": 2367.48,
+      "end": 2371.309,
+      "duration": 3.829,
+      "text": "okay uh so I think this is the most"
+    },
+    {
+      "index": 786,
+      "start": 2371.319,
+      "end": 2374.19,
+      "duration": 2.871,
+      "text": "intuitive approach physical approach to"
+    },
+    {
+      "index": 787,
+      "start": 2374.2,
+      "end": 2376.87,
+      "duration": 2.67,
+      "text": "the meaning of this of the convolution"
+    },
+    {
+      "index": 788,
+      "start": 2376.88,
+      "end": 2378.63,
+      "duration": 1.75,
+      "text": "in this particular you say well that's"
+    },
+    {
+      "index": 789,
+      "start": 2378.64,
+      "end": 2380.15,
+      "duration": 1.51,
+      "text": "very special okay so it tells me what"
+    },
+    {
+      "index": 790,
+      "start": 2380.16,
+      "end": 2382.51,
+      "duration": 2.35,
+      "text": "the meaning of a convolution with a an"
+    },
+    {
+      "index": 791,
+      "start": 2382.52,
+      "end": 2383.75,
+      "duration": 1.23,
+      "text": "exponential is but what about the"
+    },
+    {
+      "index": 792,
+      "start": 2383.76,
+      "end": 2385.71,
+      "duration": 1.95,
+      "text": "convolution with all the other functions"
+    },
+    {
+      "index": 793,
+      "start": 2385.72,
+      "end": 2387.309,
+      "duration": 1.589,
+      "text": "we're going to have to use in this"
+    },
+    {
+      "index": 794,
+      "start": 2387.319,
+      "end": 2390.47,
+      "duration": 3.151,
+      "text": "course they can all be interpreted just"
+    },
+    {
+      "index": 795,
+      "start": 2390.48,
+      "end": 2392.27,
+      "duration": 1.79,
+      "text": "by being a little flexible in your"
+    },
+    {
+      "index": 796,
+      "start": 2392.28,
+      "end": 2396.309,
+      "duration": 4.029,
+      "text": "approach I'll give you two examples of"
+    },
+    {
+      "index": 797,
+      "start": 2396.319,
+      "end": 2399.99,
+      "duration": 3.671,
+      "text": "this well you'll three first of all uh I"
+    },
+    {
+      "index": 798,
+      "start": 2400.0,
+      "end": 2402.79,
+      "duration": 2.79,
+      "text": "use it for a i in the problem set I"
+    },
+    {
+      "index": 799,
+      "start": 2402.8,
+      "end": 2405.75,
+      "duration": 2.95,
+      "text": "asked you about a bank account uh that's"
+    },
+    {
+      "index": 800,
+      "start": 2405.76,
+      "end": 2407.109,
+      "duration": 1.349,
+      "text": "not something any of you are interested"
+    },
+    {
+      "index": 801,
+      "start": 2407.119,
+      "end": 2410.91,
+      "duration": 3.791,
+      "text": "in okay so how about uh suppose I said I"
+    },
+    {
+      "index": 802,
+      "start": 2410.92,
+      "end": 2416.109,
+      "duration": 5.189,
+      "text": "dump"
+    },
+    {
+      "index": 803,
+      "start": 2418.95,
+      "end": 2418.96,
+      "duration": 0.01,
+      "text": "garbage undecayed"
+    },
+    {
+      "index": 804,
+      "start": 2418.96,
+      "end": 2420.95,
+      "duration": 1.99,
+      "text": "undecaying so something that doesn't"
+    },
+    {
+      "index": 805,
+      "start": 2420.96,
+      "end": 2422.309,
+      "duration": 1.349,
+      "text": "Decay at"
+    },
+    {
+      "index": 806,
+      "start": 2422.319,
+      "end": 2425.069,
+      "duration": 2.75,
+      "text": "all what's the answer going to be well"
+    },
+    {
+      "index": 807,
+      "start": 2425.079,
+      "end": 2427.67,
+      "duration": 2.591,
+      "text": "the calculation will be exactly the same"
+    },
+    {
+      "index": 808,
+      "start": 2427.68,
+      "end": 2429.19,
+      "duration": 1.51,
+      "text": "there'll be it'll be the convolution of"
+    },
+    {
+      "index": 809,
+      "start": 2429.2,
+      "end": 2431.55,
+      "duration": 2.35,
+      "text": "The Dumping function the only difference"
+    },
+    {
+      "index": 810,
+      "start": 2431.56,
+      "end": 2434.55,
+      "duration": 2.99,
+      "text": "is that now the garbage isn't going to"
+    },
+    {
+      "index": 811,
+      "start": 2434.56,
+      "end": 2437.47,
+      "duration": 2.91,
+      "text": "Decay so no matter how long it's left"
+    },
+    {
+      "index": 812,
+      "start": 2437.48,
+      "end": 2440.19,
+      "duration": 2.71,
+      "text": "the same amount is going to be left at"
+    },
+    {
+      "index": 813,
+      "start": 2440.2,
+      "end": 2441.51,
+      "duration": 1.31,
+      "text": "the end in other words I don't want the"
+    },
+    {
+      "index": 814,
+      "start": 2441.52,
+      "end": 2443.91,
+      "duration": 2.39,
+      "text": "an exponential decay function I want the"
+    },
+    {
+      "index": 815,
+      "start": 2443.92,
+      "end": 2446.349,
+      "duration": 2.429,
+      "text": "function one the constant function one"
+    },
+    {
+      "index": 816,
+      "start": 2446.359,
+      "end": 2448.39,
+      "duration": 2.031,
+      "text": "because once I stick it on the pile"
+    },
+    {
+      "index": 817,
+      "start": 2448.4,
+      "end": 2449.95,
+      "duration": 1.55,
+      "text": "nothing happens to it it just stays"
+    },
+    {
+      "index": 818,
+      "start": 2449.96,
+      "end": 2452.03,
+      "duration": 2.07,
+      "text": "there so it's going to be the"
+    },
+    {
+      "index": 819,
+      "start": 2452.04,
+      "end": 2455.51,
+      "duration": 3.47,
+      "text": "convolution of this one because this is"
+    },
+    {
+      "index": 820,
+      "start": 2455.52,
+      "end": 2464.51,
+      "duration": 8.99,
+      "text": "constant it's undecayed"
+    },
+    {
+      "index": 821,
+      "start": 2467.069,
+      "end": 2467.079,
+      "duration": 0.01,
+      "text": "this by The Identical reasoning and so"
+    },
+    {
+      "index": 822,
+      "start": 2467.079,
+      "end": 2468.43,
+      "duration": 1.351,
+      "text": "what's the answer going to be it's going"
+    },
+    {
+      "index": 823,
+      "start": 2468.44,
+      "end": 2472.27,
+      "duration": 3.83,
+      "text": "to be the integral from0 to T of f of U"
+    },
+    {
+      "index": 824,
+      "start": 2472.28,
+      "end": 2476.71,
+      "duration": 4.43,
+      "text": "du now that's an 1801 problem if I dump"
+    },
+    {
+      "index": 825,
+      "start": 2476.72,
+      "end": 2479.27,
+      "duration": 2.55,
+      "text": "with a dumping rate F of U and I dump"
+    },
+    {
+      "index": 826,
+      "start": 2479.28,
+      "end": 2482.55,
+      "duration": 3.27,
+      "text": "from Time Zero to time T how much to is"
+    },
+    {
+      "index": 827,
+      "start": 2482.56,
+      "end": 2484.109,
+      "duration": 1.549,
+      "text": "on the pile they don't give it they"
+    },
+    {
+      "index": 828,
+      "start": 2484.119,
+      "end": 2485.75,
+      "duration": 1.631,
+      "text": "always give velocity problems and"
+    },
+    {
+      "index": 829,
+      "start": 2485.76,
+      "end": 2488.03,
+      "duration": 2.27,
+      "text": "problems of how to slice up red lows and"
+    },
+    {
+      "index": 830,
+      "start": 2488.04,
+      "end": 2490.03,
+      "duration": 1.99,
+      "text": "stuff like that but but this is a real"
+    },
+    {
+      "index": 831,
+      "start": 2490.04,
+      "end": 2492.349,
+      "duration": 2.309,
+      "text": "life problem if that's the dumping rate"
+    },
+    {
+      "index": 832,
+      "start": 2492.359,
+      "end": 2495.03,
+      "duration": 2.671,
+      "text": "and you dump for T days from zero to"
+    },
+    {
+      "index": 833,
+      "start": 2495.04,
+      "end": 2497.349,
+      "duration": 2.309,
+      "text": "time0 time T how much you have left at"
+    },
+    {
+      "index": 834,
+      "start": 2497.359,
+      "end": 2500.55,
+      "duration": 3.191,
+      "text": "the end answer the integral of f of U du"
+    },
+    {
+      "index": 835,
+      "start": 2500.56,
+      "end": 2502.91,
+      "duration": 2.35,
+      "text": "from 0 to"
+    },
+    {
+      "index": 836,
+      "start": 2502.92,
+      "end": 2505.23,
+      "duration": 2.31,
+      "text": "T I'll give you another example suppose"
+    },
+    {
+      "index": 837,
+      "start": 2505.24,
+      "end": 2507.15,
+      "duration": 1.91,
+      "text": "I wanted a dumping suppose I wanted a"
+    },
+    {
+      "index": 838,
+      "start": 2507.16,
+      "end": 2509.87,
+      "duration": 2.71,
+      "text": "function uh wanted to interpret"
+    },
+    {
+      "index": 839,
+      "start": 2509.88,
+      "end": 2515.99,
+      "duration": 6.11,
+      "text": "something uh which grows like T for"
+    },
+    {
+      "index": 840,
+      "start": 2518.43,
+      "end": 2518.44,
+      "duration": 0.01,
+      "text": "instance or I want is a physical"
+    },
+    {
+      "index": 841,
+      "start": 2518.44,
+      "end": 2521.47,
+      "duration": 3.03,
+      "text": "interpretation well I have to think of"
+    },
+    {
+      "index": 842,
+      "start": 2521.48,
+      "end": 2523.109,
+      "duration": 1.629,
+      "text": "I'm making a pile of something you know"
+    },
+    {
+      "index": 843,
+      "start": 2523.119,
+      "end": 2525.23,
+      "duration": 2.111,
+      "text": "a metaphorical pile we don't actually"
+    },
+    {
+      "index": 844,
+      "start": 2525.24,
+      "end": 2528.91,
+      "duration": 3.67,
+      "text": "have to make a physical pile uh and the"
+    },
+    {
+      "index": 845,
+      "start": 2528.92,
+      "end": 2530.589,
+      "duration": 1.669,
+      "text": "things should be growing like tea well"
+    },
+    {
+      "index": 846,
+      "start": 2530.599,
+      "end": 2533.63,
+      "duration": 3.031,
+      "text": "what grows like tea uh not bacteria they"
+    },
+    {
+      "index": 847,
+      "start": 2533.64,
+      "end": 2536.309,
+      "duration": 2.669,
+      "text": "grow exponentially let's I was before"
+    },
+    {
+      "index": 848,
+      "start": 2536.319,
+      "end": 2537.349,
+      "duration": 1.03,
+      "text": "the electure I was trying to think"
+    },
+    {
+      "index": 849,
+      "start": 2537.359,
+      "end": 2539.19,
+      "duration": 1.831,
+      "text": "something so I came up with chickens I'm"
+    },
+    {
+      "index": 850,
+      "start": 2539.2,
+      "end": 2541.19,
+      "duration": 1.99,
+      "text": "sure on a chicken farm little baby"
+    },
+    {
+      "index": 851,
+      "start": 2541.2,
+      "end": 2543.99,
+      "duration": 2.79,
+      "text": "chickens grow linearly all little animal"
+    },
+    {
+      "index": 852,
+      "start": 2544.0,
+      "end": 2545.67,
+      "duration": 1.67,
+      "text": "all little animals anyway I've observed"
+    },
+    {
+      "index": 853,
+      "start": 2545.68,
+      "end": 2547.39,
+      "duration": 1.71,
+      "text": "that babies grow linearly at at least"
+    },
+    {
+      "index": 854,
+      "start": 2547.4,
+      "end": 2549.309,
+      "duration": 1.909,
+      "text": "for a while thank God after a while they"
+    },
+    {
+      "index": 855,
+      "start": 2549.319,
+      "end": 2552.43,
+      "duration": 3.111,
+      "text": "tap her off but uh but but in the"
+    },
+    {
+      "index": 856,
+      "start": 2552.44,
+      "end": 2554.87,
+      "duration": 2.43,
+      "text": "beginning you know they eat every four"
+    },
+    {
+      "index": 857,
+      "start": 2554.88,
+      "end": 2557.109,
+      "duration": 2.229,
+      "text": "hours or whatever and they eat the same"
+    },
+    {
+      "index": 858,
+      "start": 2557.119,
+      "end": 2561.309,
+      "duration": 4.19,
+      "text": "amount pretty much and that adds up uh"
+    },
+    {
+      "index": 859,
+      "start": 2561.319,
+      "end": 2563.99,
+      "duration": 2.671,
+      "text": "so it's uh so let's suppose this"
+    },
+    {
+      "index": 860,
+      "start": 2564.0,
+      "end": 2569.63,
+      "duration": 5.63,
+      "text": "represents the growth lyar growth of"
+    },
+    {
+      "index": 861,
+      "start": 2572.71,
+      "end": 2572.72,
+      "duration": 0.01,
+      "text": "chickens of baby chicks baby chick that"
+    },
+    {
+      "index": 862,
+      "start": 2572.72,
+      "end": 2575.309,
+      "duration": 2.589,
+      "text": "makes them sound"
+    },
+    {
+      "index": 863,
+      "start": 2578.829,
+      "end": 2578.839,
+      "duration": 0.01,
+      "text": "cuter less offensive okay so a farmer a"
+    },
+    {
+      "index": 864,
+      "start": 2578.839,
+      "end": 2580.109,
+      "duration": 1.27,
+      "text": "chicken farmer or whatever they call"
+    },
+    {
+      "index": 865,
+      "start": 2580.119,
+      "end": 2582.549,
+      "duration": 2.43,
+      "text": "them uh is starting a new brood so"
+    },
+    {
+      "index": 866,
+      "start": 2582.559,
+      "end": 2584.91,
+      "duration": 2.351,
+      "text": "anyway the hens lay at a certain rate"
+    },
+    {
+      "index": 867,
+      "start": 2584.92,
+      "end": 2586.549,
+      "duration": 1.629,
+      "text": "and each of those are incubated and"
+    },
+    {
+      "index": 868,
+      "start": 2586.559,
+      "end": 2589.15,
+      "duration": 2.591,
+      "text": "after all a couple months they turn into"
+    },
+    {
+      "index": 869,
+      "start": 2589.16,
+      "end": 2592.109,
+      "duration": 2.949,
+      "text": "a little baby chicks come out uh so this"
+    },
+    {
+      "index": 870,
+      "start": 2592.119,
+      "end": 2594.51,
+      "duration": 2.391,
+      "text": "will be the rate the production rate for"
+    },
+    {
+      "index": 871,
+      "start": 2594.52,
+      "end": 2602.47,
+      "duration": 7.95,
+      "text": "new"
+    },
+    {
+      "index": 872,
+      "start": 2605.15,
+      "end": 2605.16,
+      "duration": 0.01,
+      "text": "chickens okay and it will be the"
+    },
+    {
+      "index": 873,
+      "start": 2605.16,
+      "end": 2607.51,
+      "duration": 2.35,
+      "text": "convolution which will be tell you at"
+    },
+    {
+      "index": 874,
+      "start": 2607.52,
+      "end": 2612.069,
+      "duration": 4.549,
+      "text": "time t uh the number of kilograms we"
+    },
+    {
+      "index": 875,
+      "start": 2612.079,
+      "end": 2614.589,
+      "duration": 2.51,
+      "text": "better do this in kilograms I'm afraid"
+    },
+    {
+      "index": 876,
+      "start": 2614.599,
+      "end": 2616.549,
+      "duration": 1.95,
+      "text": "uh now that's not as heartless as it"
+    },
+    {
+      "index": 877,
+      "start": 2616.559,
+      "end": 2621.47,
+      "duration": 4.911,
+      "text": "seems uh the number of kilograms of"
+    },
+    {
+      "index": 878,
+      "start": 2621.48,
+      "end": 2624.589,
+      "duration": 3.109,
+      "text": "chickens time"
+    },
+    {
+      "index": 879,
+      "start": 2624.599,
+      "end": 2627.23,
+      "duration": 2.631,
+      "text": "te it really isn't heartless because"
+    },
+    {
+      "index": 880,
+      "start": 2627.24,
+      "end": 2628.829,
+      "duration": 1.589,
+      "text": "after all why does a why would the"
+    },
+    {
+      "index": 881,
+      "start": 2628.839,
+      "end": 2631.39,
+      "duration": 2.551,
+      "text": "farmer want to know that well because a"
+    },
+    {
+      "index": 882,
+      "start": 2631.4,
+      "end": 2633.03,
+      "duration": 1.63,
+      "text": "certain number of pounds of chicken eat"
+    },
+    {
+      "index": 883,
+      "start": 2633.04,
+      "end": 2634.309,
+      "duration": 1.269,
+      "text": "a certain number of pounds of chicken"
+    },
+    {
+      "index": 884,
+      "start": 2634.319,
+      "end": 2636.67,
+      "duration": 2.351,
+      "text": "feed and that's how much he has to dump"
+    },
+    {
+      "index": 885,
+      "start": 2636.68,
+      "end": 2637.549,
+      "duration": 0.869,
+      "text": "uh"
+    },
+    {
+      "index": 886,
+      "start": 2637.559,
+      "end": 2639.27,
+      "duration": 1.711,
+      "text": "bus have to give them every day that's"
+    },
+    {
+      "index": 887,
+      "start": 2639.28,
+      "end": 2641.51,
+      "duration": 2.23,
+      "text": "how he calculates his expenses so he"
+    },
+    {
+      "index": 888,
+      "start": 2641.52,
+      "end": 2643.51,
+      "duration": 1.99,
+      "text": "will have to know what the convolution"
+    },
+    {
+      "index": 889,
+      "start": 2643.52,
+      "end": 2645.63,
+      "duration": 2.11,
+      "text": "is or better yet he will hire you who"
+    },
+    {
+      "index": 890,
+      "start": 2645.64,
+      "end": 2647.15,
+      "duration": 1.51,
+      "text": "knows what the convolution is and you'll"
+    },
+    {
+      "index": 891,
+      "start": 2647.16,
+      "end": 2648.99,
+      "duration": 1.83,
+      "text": "be able to tell him okay why don't we"
+    },
+    {
+      "index": 892,
+      "start": 2649.0,
+      "end": 2652.47,
+      "duration": 3.47,
+      "text": "stop there and uh uh go to recitation"
+    },
+    {
+      "index": 893,
+      "start": 2652.48,
+      "end": 2653.589,
+      "duration": 1.109,
+      "text": "tomorrow because they'll be doing"
+    },
+    {
+      "index": 894,
+      "start": 2653.599,
+      "end": 2658.03,
+      "duration": 4.431,
+      "text": "important"
+    }
+  ],
+  "course": {
+    "category": "Mathematics",
+    "title": "Differential Equations",
+    "source_url": "https://www.youtube.com/playlist?list=PL64BDFBDA2AF24F7E"
+  }
+}

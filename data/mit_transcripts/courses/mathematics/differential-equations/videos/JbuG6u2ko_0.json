@@ -1,0 +1,970 @@
+{
+  "video": {
+    "id": "JbuG6u2ko_0",
+    "title": "Exploration of the Convolution Accumulation Applet",
+    "url": "https://www.youtube.com/watch?v=JbuG6u2ko_0",
+    "channel": "MIT OpenCourseWare",
+    "duration": 405,
+    "language": "en"
+  },
+  "segment_count": 136,
+  "segments": [
+    {
+      "index": 0,
+      "start": 3.149,
+      "end": 3.159,
+      "duration": 0.01,
+      "text": "convolution is a tricky concept and hard"
+    },
+    {
+      "index": 1,
+      "start": 3.159,
+      "end": 5.39,
+      "duration": 2.231,
+      "text": "to understand but it gives so much"
+    },
+    {
+      "index": 2,
+      "start": 5.4,
+      "end": 7.11,
+      "duration": 1.71,
+      "text": "Insight that it's worthwhile coming to"
+    },
+    {
+      "index": 3,
+      "start": 7.12,
+      "end": 9.549,
+      "duration": 2.429,
+      "text": "grips with it the convolution"
+    },
+    {
+      "index": 4,
+      "start": 9.559,
+      "end": 11.589,
+      "duration": 2.03,
+      "text": "accumulation matlet provides one"
+    },
+    {
+      "index": 5,
+      "start": 11.599,
+      "end": 14.709,
+      "duration": 3.11,
+      "text": "perspective on the convolution integral"
+    },
+    {
+      "index": 6,
+      "start": 14.719,
+      "end": 17.029,
+      "duration": 2.31,
+      "text": "I'll explain the applet using a"
+    },
+    {
+      "index": 7,
+      "start": 17.039,
+      "end": 19.71,
+      "duration": 2.671,
+      "text": "story there's a lake in Iowa with a"
+    },
+    {
+      "index": 8,
+      "start": 19.72,
+      "end": 21.429,
+      "duration": 1.709,
+      "text": "stream running into it and a stream"
+    },
+    {
+      "index": 9,
+      "start": 21.439,
+      "end": 24.109,
+      "duration": 2.67,
+      "text": "running out of it Farm runoff puts"
+    },
+    {
+      "index": 10,
+      "start": 24.119,
+      "end": 26.95,
+      "duration": 2.831,
+      "text": "phosphate into the lake the rate of"
+    },
+    {
+      "index": 11,
+      "start": 26.96,
+      "end": 29.23,
+      "duration": 2.27,
+      "text": "deposition of the phosphate varies over"
+    },
+    {
+      "index": 12,
+      "start": 29.24,
+      "end": 31.95,
+      "duration": 2.71,
+      "text": "the year most in the summer none in the"
+    },
+    {
+      "index": 13,
+      "start": 31.96,
+      "end": 34.63,
+      "duration": 2.67,
+      "text": "debt of winter suppose that the farm is"
+    },
+    {
+      "index": 14,
+      "start": 34.64,
+      "end": 37.95,
+      "duration": 3.31,
+      "text": "new and that at T equals Zer there is no"
+    },
+    {
+      "index": 15,
+      "start": 37.96,
+      "end": 40.229,
+      "duration": 2.269,
+      "text": "phosphate in the lake this is called"
+    },
+    {
+      "index": 16,
+      "start": 40.239,
+      "end": 41.75,
+      "duration": 1.511,
+      "text": "rest initial"
+    },
+    {
+      "index": 17,
+      "start": 41.76,
+      "end": 44.549,
+      "duration": 2.789,
+      "text": "conditions the question is how much"
+    },
+    {
+      "index": 18,
+      "start": 44.559,
+      "end": 46.99,
+      "duration": 2.431,
+      "text": "phosphate is there in the lake at some"
+    },
+    {
+      "index": 19,
+      "start": 47.0,
+      "end": 48.83,
+      "duration": 1.83,
+      "text": "later time say"
+    },
+    {
+      "index": 20,
+      "start": 48.84,
+      "end": 51.75,
+      "duration": 2.91,
+      "text": "t this will be an accumulation of"
+    },
+    {
+      "index": 21,
+      "start": 51.76,
+      "end": 54.59,
+      "duration": 2.83,
+      "text": "contributions from earlier times but the"
+    },
+    {
+      "index": 22,
+      "start": 54.6,
+      "end": 56.63,
+      "duration": 2.03,
+      "text": "earlier contributions will have decayed"
+    },
+    {
+      "index": 23,
+      "start": 56.64,
+      "end": 58.59,
+      "duration": 1.95,
+      "text": "somewhat by time"
+    },
+    {
+      "index": 24,
+      "start": 58.6,
+      "end": 61.869,
+      "duration": 3.269,
+      "text": "T we can visualize this process using"
+    },
+    {
+      "index": 25,
+      "start": 61.879,
+      "end": 64.95,
+      "duration": 3.071,
+      "text": "the convolution accumulation mathet I'll"
+    },
+    {
+      "index": 26,
+      "start": 64.96,
+      "end": 68.07,
+      "duration": 3.11,
+      "text": "set it up to model what we're looking at"
+    },
+    {
+      "index": 27,
+      "start": 68.08,
+      "end": 72.109,
+      "duration": 4.029,
+      "text": "the signal F of T is the rate of input"
+    },
+    {
+      "index": 28,
+      "start": 72.119,
+      "end": 74.749,
+      "duration": 2.63,
+      "text": "of phosphate into the lake and I will"
+    },
+    {
+      "index": 29,
+      "start": 74.759,
+      "end": 78.99,
+      "duration": 4.231,
+      "text": "model it by the menu item F of T is 1"
+    },
+    {
+      "index": 30,
+      "start": 79.0,
+      "end": 80.749,
+      "duration": 1.749,
+      "text": "plus cosine"
+    },
+    {
+      "index": 31,
+      "start": 80.759,
+      "end": 83.63,
+      "duration": 2.871,
+      "text": "BT you can see it drawn in the lower"
+    },
+    {
+      "index": 32,
+      "start": 83.64,
+      "end": 88.19,
+      "duration": 4.55,
+      "text": "graphing window"
+    },
+    {
+      "index": 33,
+      "start": 91.91,
+      "end": 91.92,
+      "duration": 0.01,
+      "text": "here a certain portion of the phosphate"
+    },
+    {
+      "index": 34,
+      "start": 91.92,
+      "end": 95.03,
+      "duration": 3.11,
+      "text": "in the lake leaves it during each unit"
+    },
+    {
+      "index": 35,
+      "start": 95.04,
+      "end": 97.71,
+      "duration": 2.67,
+      "text": "of time this results in an exponential"
+    },
+    {
+      "index": 36,
+      "start": 97.72,
+      "end": 99.67,
+      "duration": 1.95,
+      "text": "decay of each"
+    },
+    {
+      "index": 37,
+      "start": 99.68,
+      "end": 102.27,
+      "duration": 2.59,
+      "text": "contribution this Decay profile is"
+    },
+    {
+      "index": 38,
+      "start": 102.28,
+      "end": 104.709,
+      "duration": 2.429,
+      "text": "called the weight function denoted here"
+    },
+    {
+      "index": 39,
+      "start": 104.719,
+      "end": 107.83,
+      "duration": 3.111,
+      "text": "by G of T and I will select the weight"
+    },
+    {
+      "index": 40,
+      "start": 107.84,
+      "end": 111.069,
+      "duration": 3.229,
+      "text": "function giving exponential decay e the"
+    },
+    {
+      "index": 41,
+      "start": 111.079,
+      "end": 115.029,
+      "duration": 3.95,
+      "text": "minus"
+    },
+    {
+      "index": 42,
+      "start": 117.63,
+      "end": 117.64,
+      "duration": 0.01,
+      "text": "a now let's see what happens if I let a"
+    },
+    {
+      "index": 43,
+      "start": 117.64,
+      "end": 120.95,
+      "duration": 3.31,
+      "text": "small amount of time elapse how small"
+    },
+    {
+      "index": 44,
+      "start": 120.96,
+      "end": 123.109,
+      "duration": 2.149,
+      "text": "well I can select that by picking the"
+    },
+    {
+      "index": 45,
+      "start": 123.119,
+      "end": 126.35,
+      "duration": 3.231,
+      "text": "step size and I will select a step size"
+    },
+    {
+      "index": 46,
+      "start": 126.36,
+      "end": 127.469,
+      "duration": 1.109,
+      "text": "of"
+    },
+    {
+      "index": 47,
+      "start": 127.479,
+      "end": 130.51,
+      "duration": 3.031,
+      "text": "1/8 so now let's let a little bit of"
+    },
+    {
+      "index": 48,
+      "start": 130.52,
+      "end": 135.949,
+      "duration": 5.429,
+      "text": "time elapse say amount of time of"
+    },
+    {
+      "index": 49,
+      "start": 135.959,
+      "end": 138.91,
+      "duration": 2.951,
+      "text": "1/8 if I click on the time slider at 1/8"
+    },
+    {
+      "index": 50,
+      "start": 138.92,
+      "end": 141.949,
+      "duration": 3.029,
+      "text": "I get this picture T equals z happens to"
+    },
+    {
+      "index": 51,
+      "start": 141.959,
+      "end": 144.589,
+      "duration": 2.63,
+      "text": "occur at Midsummer so that the signal"
+    },
+    {
+      "index": 52,
+      "start": 144.599,
+      "end": 147.43,
+      "duration": 2.831,
+      "text": "has a value of two in kilogram say per"
+    },
+    {
+      "index": 53,
+      "start": 147.44,
+      "end": 153.309,
+      "duration": 5.869,
+      "text": "unit time this F fate is decays"
+    },
+    {
+      "index": 54,
+      "start": 153.319,
+      "end": 156.03,
+      "duration": 2.711,
+      "text": "away as water comes into the lake and"
+    },
+    {
+      "index": 55,
+      "start": 156.04,
+      "end": 157.99,
+      "duration": 1.95,
+      "text": "carries it off according to the weight"
+    },
+    {
+      "index": 56,
+      "start": 158.0,
+      "end": 160.07,
+      "duration": 2.07,
+      "text": "function and this is indicated by the"
+    },
+    {
+      "index": 57,
+      "start": 160.08,
+      "end": 162.47,
+      "duration": 2.39,
+      "text": "exponential decay function here on the"
+    },
+    {
+      "index": 58,
+      "start": 162.48,
+      "end": 165.71,
+      "duration": 3.23,
+      "text": "bottom"
+    },
+    {
+      "index": 59,
+      "start": 169.03,
+      "end": 169.04,
+      "duration": 0.01,
+      "text": "window a weight function is a rate it"
+    },
+    {
+      "index": 60,
+      "start": 169.04,
+      "end": 171.55,
+      "duration": 2.51,
+      "text": "needs to get multiplied by the step size"
+    },
+    {
+      "index": 61,
+      "start": 171.56,
+      "end": 173.35,
+      "duration": 1.79,
+      "text": "before it gives an actual amount of"
+    },
+    {
+      "index": 62,
+      "start": 173.36,
+      "end": 176.75,
+      "duration": 3.39,
+      "text": "phosphate in the lake the step size is"
+    },
+    {
+      "index": 63,
+      "start": 176.76,
+      "end": 180.43,
+      "duration": 3.67,
+      "text": "1/8 and the product is the the signal"
+    },
+    {
+      "index": 64,
+      "start": 180.44,
+      "end": 183.11,
+      "duration": 2.67,
+      "text": "the value of the signal at T equals 0"
+    },
+    {
+      "index": 65,
+      "start": 183.12,
+      "end": 186.55,
+      "duration": 3.43,
+      "text": "that's two times the weight function"
+    },
+    {
+      "index": 66,
+      "start": 186.56,
+      "end": 189.63,
+      "duration": 3.07,
+      "text": "that's the exponential de Gay Times the"
+    },
+    {
+      "index": 67,
+      "start": 189.64,
+      "end": 193.229,
+      "duration": 3.589,
+      "text": "step size which is 1/8 and so that gives"
+    },
+    {
+      "index": 68,
+      "start": 193.239,
+      "end": 196.39,
+      "duration": 3.151,
+      "text": "Al together one4 times that exponential"
+    },
+    {
+      "index": 69,
+      "start": 196.4,
+      "end": 198.99,
+      "duration": 2.59,
+      "text": "decay and you see that drawn in the top"
+    },
+    {
+      "index": 70,
+      "start": 199.0,
+      "end": 201.509,
+      "duration": 2.509,
+      "text": "graphing window here the value near T"
+    },
+    {
+      "index": 71,
+      "start": 201.519,
+      "end": 205.869,
+      "duration": 4.35,
+      "text": "equals z is a quarter and it decays away"
+    },
+    {
+      "index": 72,
+      "start": 205.879,
+      "end": 208.11,
+      "duration": 2.231,
+      "text": "exponentially now let's move on to the"
+    },
+    {
+      "index": 73,
+      "start": 208.12,
+      "end": 210.309,
+      "duration": 2.189,
+      "text": "next time interval"
+    },
+    {
+      "index": 74,
+      "start": 210.319,
+      "end": 211.67,
+      "duration": 1.351,
+      "text": "I'll"
+    },
+    {
+      "index": 75,
+      "start": 211.68,
+      "end": 216.55,
+      "duration": 4.87,
+      "text": "click here and you see what happens the"
+    },
+    {
+      "index": 76,
+      "start": 216.56,
+      "end": 219.149,
+      "duration": 2.589,
+      "text": "signal is now a little bit"
+    },
+    {
+      "index": 77,
+      "start": 219.159,
+      "end": 220.949,
+      "duration": 1.79,
+      "text": "less"
+    },
+    {
+      "index": 78,
+      "start": 220.959,
+      "end": 224.309,
+      "duration": 3.35,
+      "text": "and the time is a little bit later so"
+    },
+    {
+      "index": 79,
+      "start": 224.319,
+      "end": 226.229,
+      "duration": 1.91,
+      "text": "the weight function is scaled and"
+    },
+    {
+      "index": 80,
+      "start": 226.239,
+      "end": 228.789,
+      "duration": 2.55,
+      "text": "shifted a little bit differently in this"
+    },
+    {
+      "index": 81,
+      "start": 228.799,
+      "end": 231.309,
+      "duration": 2.51,
+      "text": "bottom graphing window it gets"
+    },
+    {
+      "index": 82,
+      "start": 231.319,
+      "end": 234.55,
+      "duration": 3.231,
+      "text": "multiplied by the step size 1/8 again"
+    },
+    {
+      "index": 83,
+      "start": 234.56,
+      "end": 238.91,
+      "duration": 4.35,
+      "text": "and laid down on top of the graph of the"
+    },
+    {
+      "index": 84,
+      "start": 238.92,
+      "end": 240.789,
+      "duration": 1.869,
+      "text": "phosphate around rising from the first"
+    },
+    {
+      "index": 85,
+      "start": 240.799,
+      "end": 245.83,
+      "duration": 5.031,
+      "text": "time interval so the sum of those two is"
+    },
+    {
+      "index": 86,
+      "start": 245.84,
+      "end": 248.229,
+      "duration": 2.389,
+      "text": "a record of the phosphate in the lake"
+    },
+    {
+      "index": 87,
+      "start": 248.239,
+      "end": 249.789,
+      "duration": 1.55,
+      "text": "arising from these first two time"
+    },
+    {
+      "index": 88,
+      "start": 249.799,
+      "end": 253.069,
+      "duration": 3.27,
+      "text": "intervals as it decays away in later"
+    },
+    {
+      "index": 89,
+      "start": 253.079,
+      "end": 256.43,
+      "duration": 3.351,
+      "text": "time this process continues you can see"
+    },
+    {
+      "index": 90,
+      "start": 256.44,
+      "end": 258.99,
+      "duration": 2.55,
+      "text": "the next few steps by clicking them up"
+    },
+    {
+      "index": 91,
+      "start": 259.0,
+      "end": 260.71,
+      "duration": 1.71,
+      "text": "here's the effect of the third time"
+    },
+    {
+      "index": 92,
+      "start": 260.72,
+      "end": 263.31,
+      "duration": 2.59,
+      "text": "interval as it decays away but laid down"
+    },
+    {
+      "index": 93,
+      "start": 263.32,
+      "end": 265.95,
+      "duration": 2.63,
+      "text": "on top of the proceeding contributions"
+    },
+    {
+      "index": 94,
+      "start": 265.96,
+      "end": 266.87,
+      "duration": 0.91,
+      "text": "to the"
+    },
+    {
+      "index": 95,
+      "start": 266.88,
+      "end": 270.71,
+      "duration": 3.83,
+      "text": "lake and so on or I can animate the"
+    },
+    {
+      "index": 96,
+      "start": 270.72,
+      "end": 273.15,
+      "duration": 2.43,
+      "text": "entire process and watch the thing"
+    },
+    {
+      "index": 97,
+      "start": 273.16,
+      "end": 283.27,
+      "duration": 10.11,
+      "text": "evolve As Time"
+    },
+    {
+      "index": 98,
+      "start": 286.79,
+      "end": 286.8,
+      "duration": 0.01,
+      "text": "increases so you can see the effect is a"
+    },
+    {
+      "index": 99,
+      "start": 286.8,
+      "end": 288.71,
+      "duration": 1.91,
+      "text": "steady state is reached after a while"
+    },
+    {
+      "index": 100,
+      "start": 288.72,
+      "end": 290.15,
+      "duration": 1.43,
+      "text": "you get a"
+    },
+    {
+      "index": 101,
+      "start": 290.16,
+      "end": 294.15,
+      "duration": 3.99,
+      "text": "sinusoidal total amount of phosphate in"
+    },
+    {
+      "index": 102,
+      "start": 294.16,
+      "end": 298.83,
+      "duration": 4.67,
+      "text": "the lake um it's it's delayed a little"
+    },
+    {
+      "index": 103,
+      "start": 298.84,
+      "end": 301.27,
+      "duration": 2.43,
+      "text": "bit from the peak the ma maximum amount"
+    },
+    {
+      "index": 104,
+      "start": 301.28,
+      "end": 303.07,
+      "duration": 1.79,
+      "text": "of phosphate in the lake occurs a little"
+    },
+    {
+      "index": 105,
+      "start": 303.08,
+      "end": 306.55,
+      "duration": 3.47,
+      "text": "after"
+    },
+    {
+      "index": 106,
+      "start": 309.79,
+      "end": 309.8,
+      "duration": 0.01,
+      "text": "Midsummer now imagine shrinking the step"
+    },
+    {
+      "index": 107,
+      "start": 309.8,
+      "end": 313.029,
+      "duration": 3.229,
+      "text": "size in the limit as the step size goes"
+    },
+    {
+      "index": 108,
+      "start": 313.039,
+      "end": 316.029,
+      "duration": 2.99,
+      "text": "to zero this process is described by the"
+    },
+    {
+      "index": 109,
+      "start": 316.039,
+      "end": 319.79,
+      "duration": 3.751,
+      "text": "convolution integral at time T all the"
+    },
+    {
+      "index": 110,
+      "start": 319.8,
+      "end": 323.189,
+      "duration": 3.389,
+      "text": "contributions from Time Zero to time T"
+    },
+    {
+      "index": 111,
+      "start": 323.199,
+      "end": 325.35,
+      "duration": 2.151,
+      "text": "are present and so we're going to take"
+    },
+    {
+      "index": 112,
+      "start": 325.36,
+      "end": 328.11,
+      "duration": 2.75,
+      "text": "an integral from U equals 0 to U equals"
+    },
+    {
+      "index": 113,
+      "start": 328.12,
+      "end": 330.15,
+      "duration": 2.03,
+      "text": "t"
+    },
+    {
+      "index": 114,
+      "start": 330.16,
+      "end": 333.59,
+      "duration": 3.43,
+      "text": "the contribution from time U decays by"
+    },
+    {
+      "index": 115,
+      "start": 333.6,
+      "end": 338.95,
+      "duration": 5.35,
+      "text": "the factor of G of T minus U by time"
+    },
+    {
+      "index": 116,
+      "start": 338.96,
+      "end": 342.67,
+      "duration": 3.71,
+      "text": "T so the contribution from between U"
+    },
+    {
+      "index": 117,
+      "start": 342.68,
+      "end": 346.67,
+      "duration": 3.99,
+      "text": "time U and time U plus du is given by"
+    },
+    {
+      "index": 118,
+      "start": 346.68,
+      "end": 350.629,
+      "duration": 3.949,
+      "text": "the product F of U the signal at time U"
+    },
+    {
+      "index": 119,
+      "start": 350.639,
+      "end": 353.99,
+      "duration": 3.351,
+      "text": "times G of T minus U the weight function"
+    },
+    {
+      "index": 120,
+      "start": 354.0,
+      "end": 359.87,
+      "duration": 5.87,
+      "text": "evaluated at T minus U times du"
+    },
+    {
+      "index": 121,
+      "start": 361.79,
+      "end": 361.8,
+      "duration": 0.01,
+      "text": "and the integral of this differential"
+    },
+    {
+      "index": 122,
+      "start": 361.8,
+      "end": 364.87,
+      "duration": 3.07,
+      "text": "from U equal 0 to U equal T is the"
+    },
+    {
+      "index": 123,
+      "start": 364.88,
+      "end": 366.87,
+      "duration": 1.99,
+      "text": "amount of phosphate in the lake at time"
+    },
+    {
+      "index": 124,
+      "start": 366.88,
+      "end": 370.79,
+      "duration": 3.91,
+      "text": "T and it's given by the convolution"
+    },
+    {
+      "index": 125,
+      "start": 370.8,
+      "end": 373.189,
+      "duration": 2.389,
+      "text": "integral this system is modeled by a"
+    },
+    {
+      "index": 126,
+      "start": 373.199,
+      "end": 377.39,
+      "duration": 4.191,
+      "text": "differential equation namely dxdt plus"
+    },
+    {
+      "index": 127,
+      "start": 377.4,
+      "end": 381.51,
+      "duration": 4.11,
+      "text": "ax equals F of T the weight function of"
+    },
+    {
+      "index": 128,
+      "start": 381.52,
+      "end": 387.07,
+      "duration": 5.55,
+      "text": "the of the operator DX DT plus ax is e"
+    },
+    {
+      "index": 129,
+      "start": 387.08,
+      "end": 390.23,
+      "duration": 3.15,
+      "text": "minus a t and the solution to the"
+    },
+    {
+      "index": 130,
+      "start": 390.24,
+      "end": 392.189,
+      "duration": 1.949,
+      "text": "differential equation with rest initial"
+    },
+    {
+      "index": 131,
+      "start": 392.199,
+      "end": 394.15,
+      "duration": 1.951,
+      "text": "conditions is given by the convolution"
+    },
+    {
+      "index": 132,
+      "start": 394.16,
+      "end": 396.83,
+      "duration": 2.67,
+      "text": "integral of the input signal with the"
+    },
+    {
+      "index": 133,
+      "start": 396.84,
+      "end": 399.309,
+      "duration": 2.469,
+      "text": "weight function this statement is a"
+    },
+    {
+      "index": 134,
+      "start": 399.319,
+      "end": 402.27,
+      "duration": 2.951,
+      "text": "general fact for LTI operators not just"
+    },
+    {
+      "index": 135,
+      "start": 402.28,
+      "end": 406.039,
+      "duration": 3.759,
+      "text": "first order operators"
+    }
+  ],
+  "course": {
+    "category": "Mathematics",
+    "title": "Differential Equations",
+    "source_url": "https://www.youtube.com/playlist?list=PL64BDFBDA2AF24F7E"
+  }
+}

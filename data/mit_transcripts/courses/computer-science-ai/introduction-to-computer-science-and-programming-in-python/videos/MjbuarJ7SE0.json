@@ -1,0 +1,6948 @@
+{
+  "video": {
+    "id": "MjbuarJ7SE0",
+    "title": "4. Decomposition, Abstraction, and Functions",
+    "url": "https://www.youtube.com/watch?v=MjbuarJ7SE0",
+    "channel": "MIT OpenCourseWare",
+    "duration": 2468,
+    "language": "en"
+  },
+  "segment_count": 990,
+  "segments": [
+    {
+      "index": 0,
+      "start": 2.55,
+      "end": 2.56,
+      "duration": 0.01,
+      "text": "the following content is provided under"
+    },
+    {
+      "index": 1,
+      "start": 2.56,
+      "end": 5.309,
+      "duration": 2.749,
+      "text": "a Creative Commons license your support"
+    },
+    {
+      "index": 2,
+      "start": 5.319,
+      "end": 7.429,
+      "duration": 2.11,
+      "text": "will help MIT open courseware continue"
+    },
+    {
+      "index": 3,
+      "start": 7.439,
+      "end": 9.39,
+      "duration": 1.951,
+      "text": "to offer highquality educational"
+    },
+    {
+      "index": 4,
+      "start": 9.4,
+      "end": 12.549,
+      "duration": 3.149,
+      "text": "resources for free to make a donation or"
+    },
+    {
+      "index": 5,
+      "start": 12.559,
+      "end": 14.509,
+      "duration": 1.95,
+      "text": "view additional materials from hundreds"
+    },
+    {
+      "index": 6,
+      "start": 14.519,
+      "end": 17.83,
+      "duration": 3.311,
+      "text": "of MIT courses visit MIT opencourseware"
+    },
+    {
+      "index": 7,
+      "start": 17.84,
+      "end": 31.109,
+      "duration": 13.269,
+      "text": "at ocw.mit.edu"
+    },
+    {
+      "index": 8,
+      "start": 32.869,
+      "end": 32.879,
+      "duration": 0.01,
+      "text": "all right everyone let's get"
+    },
+    {
+      "index": 9,
+      "start": 32.879,
+      "end": 35.069,
+      "duration": 2.19,
+      "text": "started all right good afternoon on this"
+    },
+    {
+      "index": 10,
+      "start": 35.079,
+      "end": 38.549,
+      "duration": 3.47,
+      "text": "rainy rainy sad afternoon so I'm glad"
+    },
+    {
+      "index": 11,
+      "start": 38.559,
+      "end": 41.99,
+      "duration": 3.431,
+      "text": "we're inside though okay so lecture four"
+    },
+    {
+      "index": 12,
+      "start": 42.0,
+      "end": 43.549,
+      "duration": 1.549,
+      "text": "of 6 triple1 and"
+    },
+    {
+      "index": 13,
+      "start": 43.559,
+      "end": 46.11,
+      "duration": 2.551,
+      "text": "600 quick quick recap of what we did"
+    },
+    {
+      "index": 14,
+      "start": 46.12,
+      "end": 47.99,
+      "duration": 1.87,
+      "text": "last time so last time we did a little"
+    },
+    {
+      "index": 15,
+      "start": 48.0,
+      "end": 49.35,
+      "duration": 1.35,
+      "text": "bit more string"
+    },
+    {
+      "index": 16,
+      "start": 49.36,
+      "end": 51.549,
+      "duration": 2.189,
+      "text": "manipulations and then we saw how you"
+    },
+    {
+      "index": 17,
+      "start": 51.559,
+      "end": 54.15,
+      "duration": 2.591,
+      "text": "can use for Loops over strings directly"
+    },
+    {
+      "index": 18,
+      "start": 54.16,
+      "end": 55.51,
+      "duration": 1.35,
+      "text": "right so instead of having four Loops"
+    },
+    {
+      "index": 19,
+      "start": 55.52,
+      "end": 59.11,
+      "duration": 3.59,
+      "text": "that iterate over uh range so 0 1 2 3 4"
+    },
+    {
+      "index": 20,
+      "start": 59.12,
+      "end": 61.189,
+      "duration": 2.069,
+      "text": "and so on you saw that it was more"
+    },
+    {
+      "index": 21,
+      "start": 61.199,
+      "end": 63.75,
+      "duration": 2.551,
+      "text": "powerful to sometimes use for Loops that"
+    },
+    {
+      "index": 22,
+      "start": 63.76,
+      "end": 65.59,
+      "duration": 1.83,
+      "text": "iterate over"
+    },
+    {
+      "index": 23,
+      "start": 65.6,
+      "end": 68.87,
+      "duration": 3.27,
+      "text": "um over string objects directly so that"
+    },
+    {
+      "index": 24,
+      "start": 68.88,
+      "end": 70.27,
+      "duration": 1.39,
+      "text": "was the first half of the lecture in the"
+    },
+    {
+      "index": 25,
+      "start": 70.28,
+      "end": 72.429,
+      "duration": 2.149,
+      "text": "second half we started looking at"
+    },
+    {
+      "index": 26,
+      "start": 72.439,
+      "end": 76.19,
+      "duration": 3.751,
+      "text": "different ways that you can Implement uh"
+    },
+    {
+      "index": 27,
+      "start": 76.2,
+      "end": 78.03,
+      "duration": 1.83,
+      "text": "um the different different"
+    },
+    {
+      "index": 28,
+      "start": 78.04,
+      "end": 79.91,
+      "duration": 1.87,
+      "text": "implementations to the same problem so"
+    },
+    {
+      "index": 29,
+      "start": 79.92,
+      "end": 81.91,
+      "duration": 1.99,
+      "text": "we saw the problem of finding the cube"
+    },
+    {
+      "index": 30,
+      "start": 81.92,
+      "end": 85.87,
+      "duration": 3.95,
+      "text": "root and we saw some uh implementations"
+    },
+    {
+      "index": 31,
+      "start": 85.88,
+      "end": 88.149,
+      "duration": 2.269,
+      "text": "we saw the guess and check method and"
+    },
+    {
+      "index": 32,
+      "start": 88.159,
+      "end": 90.429,
+      "duration": 2.27,
+      "text": "the approximation method and then we"
+    },
+    {
+      "index": 33,
+      "start": 90.439,
+      "end": 92.71,
+      "duration": 2.271,
+      "text": "looked at what I thought was the most"
+    },
+    {
+      "index": 34,
+      "start": 92.72,
+      "end": 94.55,
+      "duration": 1.83,
+      "text": "powerful method which was the bisection"
+    },
+    {
+      "index": 35,
+      "start": 94.56,
+      "end": 96.67,
+      "duration": 2.11,
+      "text": "method and this one if you remember I"
+    },
+    {
+      "index": 36,
+      "start": 96.68,
+      "end": 97.71,
+      "duration": 1.03,
+      "text": "played a game with someone in the"
+    },
+    {
+      "index": 37,
+      "start": 97.72,
+      "end": 99.59,
+      "duration": 1.87,
+      "text": "audience where I got uh where I guessed"
+    },
+    {
+      "index": 38,
+      "start": 99.6,
+      "end": 102.63,
+      "duration": 3.03,
+      "text": "a number between zero and 100 and we saw"
+    },
+    {
+      "index": 39,
+      "start": 102.64,
+      "end": 104.35,
+      "duration": 1.71,
+      "text": "that I was able to guess that number"
+    },
+    {
+      "index": 40,
+      "start": 104.36,
+      "end": 105.91,
+      "duration": 1.55,
+      "text": "really really quickly right using the"
+    },
+    {
+      "index": 41,
+      "start": 105.92,
+      "end": 107.95,
+      "duration": 2.03,
+      "text": "bisection method and that's the one that"
+    },
+    {
+      "index": 42,
+      "start": 107.96,
+      "end": 109.069,
+      "duration": 1.109,
+      "text": "that's the method that you're going to"
+    },
+    {
+      "index": 43,
+      "start": 109.079,
+      "end": 110.59,
+      "duration": 1.511,
+      "text": "implement that you are currently"
+    },
+    {
+      "index": 44,
+      "start": 110.6,
+      "end": 113.069,
+      "duration": 2.469,
+      "text": "implementing in your problem"
+    },
+    {
+      "index": 45,
+      "start": 113.079,
+      "end": 115.27,
+      "duration": 2.191,
+      "text": "set okay so"
+    },
+    {
+      "index": 46,
+      "start": 115.28,
+      "end": 118.67,
+      "duration": 3.39,
+      "text": "today uh so that that that sort"
+    },
+    {
+      "index": 47,
+      "start": 118.68,
+      "end": 120.95,
+      "duration": 2.27,
+      "text": "of um"
+    },
+    {
+      "index": 48,
+      "start": 120.96,
+      "end": 124.069,
+      "duration": 3.109,
+      "text": "um that sort of finishes introduction to"
+    },
+    {
+      "index": 49,
+      "start": 124.079,
+      "end": 126.109,
+      "duration": 2.03,
+      "text": "some of the more basic mechanisms in"
+    },
+    {
+      "index": 50,
+      "start": 126.119,
+      "end": 128.27,
+      "duration": 2.151,
+      "text": "Python and today we're going to talk"
+    },
+    {
+      "index": 51,
+      "start": 128.28,
+      "end": 130.43,
+      "duration": 2.15,
+      "text": "about how to structure your programs"
+    },
+    {
+      "index": 52,
+      "start": 130.44,
+      "end": 132.91,
+      "duration": 2.47,
+      "text": "such that you write nice coherent code"
+    },
+    {
+      "index": 53,
+      "start": 132.92,
+      "end": 135.55,
+      "duration": 2.63,
+      "text": "reusable code by hiding some away some"
+    },
+    {
+      "index": 54,
+      "start": 135.56,
+      "end": 138.509,
+      "duration": 2.949,
+      "text": "of the details in your code okay and to"
+    },
+    {
+      "index": 55,
+      "start": 138.519,
+      "end": 139.67,
+      "duration": 1.151,
+      "text": "do that we're going to look at these"
+    },
+    {
+      "index": 56,
+      "start": 139.68,
+      "end": 141.79,
+      "duration": 2.11,
+      "text": "things called"
+    },
+    {
+      "index": 57,
+      "start": 141.8,
+      "end": 144.79,
+      "duration": 2.99,
+      "text": "functions all right so just stepping"
+    },
+    {
+      "index": 58,
+      "start": 144.8,
+      "end": 146.63,
+      "duration": 1.83,
+      "text": "back and sort of getting a highlevel"
+    },
+    {
+      "index": 59,
+      "start": 146.64,
+      "end": 148.67,
+      "duration": 2.03,
+      "text": "view of how we write the code so far"
+    },
+    {
+      "index": 60,
+      "start": 148.68,
+      "end": 150.63,
+      "duration": 1.95,
+      "text": "okay so so far"
+    },
+    {
+      "index": 61,
+      "start": 150.64,
+      "end": 151.91,
+      "duration": 1.27,
+      "text": "the way uh the way that you've been"
+    },
+    {
+      "index": 62,
+      "start": 151.92,
+      "end": 153.75,
+      "duration": 1.83,
+      "text": "writing code for your programs is you"
+    },
+    {
+      "index": 63,
+      "start": 153.76,
+      "end": 155.63,
+      "duration": 1.87,
+      "text": "know you open a file you type some code"
+    },
+    {
+      "index": 64,
+      "start": 155.64,
+      "end": 157.83,
+      "duration": 2.19,
+      "text": "to solve a particular problem given like"
+    },
+    {
+      "index": 65,
+      "start": 157.84,
+      "end": 161.589,
+      "duration": 3.749,
+      "text": "in your problem sets um each file"
+    },
+    {
+      "index": 66,
+      "start": 161.599,
+      "end": 164.27,
+      "duration": 2.671,
+      "text": "contains some piece of code you know you"
+    },
+    {
+      "index": 67,
+      "start": 164.28,
+      "end": 165.75,
+      "duration": 1.47,
+      "text": "have sequences of instructions that"
+    },
+    {
+      "index": 68,
+      "start": 165.76,
+      "end": 168.47,
+      "duration": 2.71,
+      "text": "contain maybe you know assignments Loops"
+    },
+    {
+      "index": 69,
+      "start": 168.48,
+      "end": 170.75,
+      "duration": 2.27,
+      "text": "conditionals and so on and so on but"
+    },
+    {
+      "index": 70,
+      "start": 170.76,
+      "end": 173.19,
+      "duration": 2.43,
+      "text": "really you have one file that contains"
+    },
+    {
+      "index": 71,
+      "start": 173.2,
+      "end": 175.39,
+      "duration": 2.19,
+      "text": "each code and you write everything in"
+    },
+    {
+      "index": 72,
+      "start": 175.4,
+      "end": 178.27,
+      "duration": 2.87,
+      "text": "that in that particular file right but"
+    },
+    {
+      "index": 73,
+      "start": 178.28,
+      "end": 180.79,
+      "duration": 2.51,
+      "text": "this is okay for smaller for smaller"
+    },
+    {
+      "index": 74,
+      "start": 180.8,
+      "end": 182.35,
+      "duration": 1.55,
+      "text": "problems that we've been seeing so far"
+    },
+    {
+      "index": 75,
+      "start": 182.36,
+      "end": 183.589,
+      "duration": 1.229,
+      "text": "but when you're starting to write large"
+    },
+    {
+      "index": 76,
+      "start": 183.599,
+      "end": 185.43,
+      "duration": 1.831,
+      "text": "pieces of code it's going to get really"
+    },
+    {
+      "index": 77,
+      "start": 185.44,
+      "end": 188.229,
+      "duration": 2.789,
+      "text": "messy really quickly okay so think about"
+    },
+    {
+      "index": 78,
+      "start": 188.239,
+      "end": 189.91,
+      "duration": 1.671,
+      "text": "if you're you know you want to use a for"
+    },
+    {
+      "index": 79,
+      "start": 189.92,
+      "end": 192.71,
+      "duration": 2.79,
+      "text": "Loop in one part of your code and you"
+    },
+    {
+      "index": 80,
+      "start": 192.72,
+      "end": 194.39,
+      "duration": 1.67,
+      "text": "find it useful to use that same for Loop"
+    },
+    {
+      "index": 81,
+      "start": 194.4,
+      "end": 197.03,
+      "duration": 2.63,
+      "text": "in another part of your code some point"
+    },
+    {
+      "index": 82,
+      "start": 197.04,
+      "end": 198.63,
+      "duration": 1.59,
+      "text": "in the future as you're you know"
+    },
+    {
+      "index": 83,
+      "start": 198.64,
+      "end": 199.91,
+      "duration": 1.27,
+      "text": "debugging your code you might want to"
+    },
+    {
+      "index": 84,
+      "start": 199.92,
+      "end": 201.43,
+      "duration": 1.51,
+      "text": "change your original for Loop you have"
+    },
+    {
+      "index": 85,
+      "start": 201.44,
+      "end": 202.99,
+      "duration": 1.55,
+      "text": "to figure out all the other places where"
+    },
+    {
+      "index": 86,
+      "start": 203.0,
+      "end": 205.949,
+      "duration": 2.949,
+      "text": "you've used that type of for Loop for"
+    },
+    {
+      "index": 87,
+      "start": 205.959,
+      "end": 209.47,
+      "duration": 3.511,
+      "text": "example so as you're scaling your uh"
+    },
+    {
+      "index": 88,
+      "start": 209.48,
+      "end": 211.11,
+      "duration": 1.63,
+      "text": "your code you you'll find it harder to"
+    },
+    {
+      "index": 89,
+      "start": 211.12,
+      "end": 213.47,
+      "duration": 2.35,
+      "text": "keep track of of these details okay so"
+    },
+    {
+      "index": 90,
+      "start": 213.48,
+      "end": 214.71,
+      "duration": 1.23,
+      "text": "this is where functions will come into"
+    },
+    {
+      "index": 91,
+      "start": 214.72,
+      "end": 218.589,
+      "duration": 3.869,
+      "text": "play in today's lecture um will help you"
+    },
+    {
+      "index": 92,
+      "start": 218.599,
+      "end": 222.429,
+      "duration": 3.83,
+      "text": "in okay"
+    },
+    {
+      "index": 93,
+      "start": 222.439,
+      "end": 224.869,
+      "duration": 2.43,
+      "text": "so if you want to be considered a good a"
+    },
+    {
+      "index": 94,
+      "start": 224.879,
+      "end": 226.27,
+      "duration": 1.391,
+      "text": "good programmer and good programming"
+    },
+    {
+      "index": 95,
+      "start": 226.28,
+      "end": 229.309,
+      "duration": 3.029,
+      "text": "style would be to not necessarily add"
+    },
+    {
+      "index": 96,
+      "start": 229.319,
+      "end": 230.91,
+      "duration": 1.591,
+      "text": "lots and lots of lines of code but"
+    },
+    {
+      "index": 97,
+      "start": 230.92,
+      "end": 233.03,
+      "duration": 2.11,
+      "text": "really to add more functionality to your"
+    },
+    {
+      "index": 98,
+      "start": 233.04,
+      "end": 235.789,
+      "duration": 2.749,
+      "text": "programs okay so how many different"
+    },
+    {
+      "index": 99,
+      "start": 235.799,
+      "end": 237.47,
+      "duration": 1.671,
+      "text": "things how many different features can"
+    },
+    {
+      "index": 100,
+      "start": 237.48,
+      "end": 239.429,
+      "duration": 1.949,
+      "text": "your program do rather than how long can"
+    },
+    {
+      "index": 101,
+      "start": 239.439,
+      "end": 242.589,
+      "duration": 3.15,
+      "text": "your code be right and that'll help you"
+    },
+    {
+      "index": 102,
+      "start": 242.599,
+      "end": 244.509,
+      "duration": 1.91,
+      "text": "later on look at your code if you need"
+    },
+    {
+      "index": 103,
+      "start": 244.519,
+      "end": 245.99,
+      "duration": 1.471,
+      "text": "it for a future class and it'll help"
+    },
+    {
+      "index": 104,
+      "start": 246.0,
+      "end": 247.75,
+      "duration": 1.75,
+      "text": "others if they want to look at your code"
+    },
+    {
+      "index": 105,
+      "start": 247.76,
+      "end": 251.069,
+      "duration": 3.309,
+      "text": "later on if they find it useful okay so"
+    },
+    {
+      "index": 106,
+      "start": 251.079,
+      "end": 252.83,
+      "duration": 1.751,
+      "text": "today we're introducing this idea of"
+    },
+    {
+      "index": 107,
+      "start": 252.84,
+      "end": 255.149,
+      "duration": 2.309,
+      "text": "functions and functions are mechanisms"
+    },
+    {
+      "index": 108,
+      "start": 255.159,
+      "end": 258.629,
+      "duration": 3.47,
+      "text": "to achieve decomposition and abstraction"
+    },
+    {
+      "index": 109,
+      "start": 258.639,
+      "end": 261.069,
+      "duration": 2.43,
+      "text": "okay so these are two key words here"
+    },
+    {
+      "index": 110,
+      "start": 261.079,
+      "end": 262.43,
+      "duration": 1.351,
+      "text": "that are going to pop up in today's"
+    },
+    {
+      "index": 111,
+      "start": 262.44,
+      "end": 265.27,
+      "duration": 2.83,
+      "text": "lecture and also in in future lectures"
+    },
+    {
+      "index": 112,
+      "start": 265.28,
+      "end": 267.909,
+      "duration": 2.629,
+      "text": "so before I introduce decomposition and"
+    },
+    {
+      "index": 113,
+      "start": 267.919,
+      "end": 269.71,
+      "duration": 1.791,
+      "text": "abstraction in the context of fun"
+    },
+    {
+      "index": 114,
+      "start": 269.72,
+      "end": 271.27,
+      "duration": 1.55,
+      "text": "functions let's first take a look at"
+    },
+    {
+      "index": 115,
+      "start": 271.28,
+      "end": 273.99,
+      "duration": 2.71,
+      "text": "just sort of a real life example so"
+    },
+    {
+      "index": 116,
+      "start": 274.0,
+      "end": 275.71,
+      "duration": 1.71,
+      "text": "let's take a projector right I'm using"
+    },
+    {
+      "index": 117,
+      "start": 275.72,
+      "end": 276.67,
+      "duration": 0.95,
+      "text": "one right"
+    },
+    {
+      "index": 118,
+      "start": 276.68,
+      "end": 280.79,
+      "duration": 4.11,
+      "text": "now quick show of hands okay if I give"
+    },
+    {
+      "index": 119,
+      "start": 280.8,
+      "end": 282.43,
+      "duration": 1.63,
+      "text": "you all of the electronic components"
+    },
+    {
+      "index": 120,
+      "start": 282.44,
+      "end": 284.909,
+      "duration": 2.469,
+      "text": "that are part of a projector right"
+    },
+    {
+      "index": 121,
+      "start": 284.919,
+      "end": 288.27,
+      "duration": 3.351,
+      "text": "resistors a fan a light bulb a lens the"
+    },
+    {
+      "index": 122,
+      "start": 288.28,
+      "end": 290.31,
+      "duration": 2.03,
+      "text": "casing you know all of the different"
+    },
+    {
+      "index": 123,
+      "start": 290.32,
+      "end": 293.31,
+      "duration": 2.99,
+      "text": "parts in it who here would be able to"
+    },
+    {
+      "index": 124,
+      "start": 293.32,
+      "end": 296.23,
+      "duration": 2.91,
+      "text": "build a"
+    },
+    {
+      "index": 125,
+      "start": 299.83,
+      "end": 299.84,
+      "duration": 0.01,
+      "text": "projector do I see a hand no oh oh yeah"
+    },
+    {
+      "index": 126,
+      "start": 299.84,
+      "end": 302.67,
+      "duration": 2.83,
+      "text": "nice you can also lie I won't know the"
+    },
+    {
+      "index": 127,
+      "start": 302.68,
+      "end": 305.27,
+      "duration": 2.59,
+      "text": "difference but if you can do that I'd be"
+    },
+    {
+      "index": 128,
+      "start": 305.28,
+      "end": 308.31,
+      "duration": 3.03,
+      "text": "very impressed all right so you can't"
+    },
+    {
+      "index": 129,
+      "start": 308.32,
+      "end": 310.189,
+      "duration": 1.869,
+      "text": "really put together a projector right"
+    },
+    {
+      "index": 130,
+      "start": 310.199,
+      "end": 311.59,
+      "duration": 1.391,
+      "text": "another show of"
+    },
+    {
+      "index": 131,
+      "start": 311.6,
+      "end": 313.99,
+      "duration": 2.39,
+      "text": "hands if I gave you a projector that's"
+    },
+    {
+      "index": 132,
+      "start": 314.0,
+      "end": 316.029,
+      "duration": 2.029,
+      "text": "fully assembled okay and I gave you a"
+    },
+    {
+      "index": 133,
+      "start": 316.039,
+      "end": 318.029,
+      "duration": 1.99,
+      "text": "computer for example who'd be able to"
+    },
+    {
+      "index": 134,
+      "start": 318.039,
+      "end": 319.39,
+      "duration": 1.351,
+      "text": "maybe figure out within let's say an"
+    },
+    {
+      "index": 135,
+      "start": 319.4,
+      "end": 322.35,
+      "duration": 2.95,
+      "text": "hour how to how to make them work"
+    },
+    {
+      "index": 136,
+      "start": 322.36,
+      "end": 325.029,
+      "duration": 2.669,
+      "text": "together good fair fair bit of fair bit"
+    },
+    {
+      "index": 137,
+      "start": 325.039,
+      "end": 326.83,
+      "duration": 1.791,
+      "text": "of the class that's perfect that's"
+    },
+    {
+      "index": 138,
+      "start": 326.84,
+      "end": 328.35,
+      "duration": 1.51,
+      "text": "exactly the answers I was trying to get"
+    },
+    {
+      "index": 139,
+      "start": 328.36,
+      "end": 331.79,
+      "duration": 3.43,
+      "text": "at here"
+    },
+    {
+      "index": 140,
+      "start": 334.629,
+      "end": 334.639,
+      "duration": 0.01,
+      "text": "so none of us really know how projector"
+    },
+    {
+      "index": 141,
+      "start": 334.639,
+      "end": 336.79,
+      "duration": 2.151,
+      "text": "works right the internals but a lot more"
+    },
+    {
+      "index": 142,
+      "start": 336.8,
+      "end": 339.11,
+      "duration": 2.31,
+      "text": "of us know how to work a projector right"
+    },
+    {
+      "index": 143,
+      "start": 339.12,
+      "end": 341.39,
+      "duration": 2.27,
+      "text": "just given maybe a set of basic"
+    },
+    {
+      "index": 144,
+      "start": 341.4,
+      "end": 343.469,
+      "duration": 2.069,
+      "text": "instructions or just intuitively"
+    },
+    {
+      "index": 145,
+      "start": 343.479,
+      "end": 346.07,
+      "duration": 2.591,
+      "text": "speaking okay so you see the projector"
+    },
+    {
+      "index": 146,
+      "start": 346.08,
+      "end": 347.83,
+      "duration": 1.75,
+      "text": "as sort of a black box right you don't"
+    },
+    {
+      "index": 147,
+      "start": 347.84,
+      "end": 349.629,
+      "duration": 1.789,
+      "text": "need to know how it works in order to"
+    },
+    {
+      "index": 148,
+      "start": 349.639,
+      "end": 353.029,
+      "duration": 3.39,
+      "text": "use it right you know maybe what inputs"
+    },
+    {
+      "index": 149,
+      "start": 353.039,
+      "end": 355.59,
+      "duration": 2.551,
+      "text": "it might take what's it supposed to do"
+    },
+    {
+      "index": 150,
+      "start": 355.6,
+      "end": 357.99,
+      "duration": 2.39,
+      "text": "at a high level right take the whatever"
+    },
+    {
+      "index": 151,
+      "start": 358.0,
+      "end": 360.15,
+      "duration": 2.15,
+      "text": "is on my screen and put it up on the"
+    },
+    {
+      "index": 152,
+      "start": 360.16,
+      "end": 362.35,
+      "duration": 2.19,
+      "text": "on the large screen there just magnify"
+    },
+    {
+      "index": 153,
+      "start": 362.36,
+      "end": 364.83,
+      "duration": 2.47,
+      "text": "it but you don't know how it does it"
+    },
+    {
+      "index": 154,
+      "start": 364.84,
+      "end": 366.79,
+      "duration": 1.95,
+      "text": "right how the components work together"
+    },
+    {
+      "index": 155,
+      "start": 366.8,
+      "end": 369.07,
+      "duration": 2.27,
+      "text": "so that's the idea of abstraction right"
+    },
+    {
+      "index": 156,
+      "start": 369.08,
+      "end": 370.629,
+      "duration": 1.549,
+      "text": "you don't need to know how the projector"
+    },
+    {
+      "index": 157,
+      "start": 370.639,
+      "end": 372.749,
+      "duration": 2.11,
+      "text": "Works in order to use"
+    },
+    {
+      "index": 158,
+      "start": 372.759,
+      "end": 376.11,
+      "duration": 3.351,
+      "text": "it okay that's abstraction the other"
+    },
+    {
+      "index": 159,
+      "start": 376.12,
+      "end": 380.11,
+      "duration": 3.99,
+      "text": "half of that was decomposition okay so"
+    },
+    {
+      "index": 160,
+      "start": 380.12,
+      "end": 382.79,
+      "duration": 2.67,
+      "text": "let's say that now given a projector I"
+    },
+    {
+      "index": 161,
+      "start": 382.8,
+      "end": 385.39,
+      "duration": 2.59,
+      "text": "want to project a very very large image"
+    },
+    {
+      "index": 162,
+      "start": 385.4,
+      "end": 388.909,
+      "duration": 3.509,
+      "text": "down on a very large uh stage for"
+    },
+    {
+      "index": 163,
+      "start": 388.919,
+      "end": 391.309,
+      "duration": 2.39,
+      "text": "example this is from one of the Olympics"
+    },
+    {
+      "index": 164,
+      "start": 391.319,
+      "end": 393.35,
+      "duration": 2.031,
+      "text": "right it's a stage of like 10 football"
+    },
+    {
+      "index": 165,
+      "start": 393.36,
+      "end": 395.55,
+      "duration": 2.19,
+      "text": "fields something like that something"
+    },
+    {
+      "index": 166,
+      "start": 395.56,
+      "end": 396.909,
+      "duration": 1.349,
+      "text": "massive right you could build one"
+    },
+    {
+      "index": 167,
+      "start": 396.919,
+      "end": 399.029,
+      "duration": 2.11,
+      "text": "projector that's able to project a very"
+    },
+    {
+      "index": 168,
+      "start": 399.039,
+      "end": 400.749,
+      "duration": 1.71,
+      "text": "large image but that would be really"
+    },
+    {
+      "index": 169,
+      "start": 400.759,
+      "end": 402.749,
+      "duration": 1.99,
+      "text": "expensive and you'd have to build this"
+    },
+    {
+      "index": 170,
+      "start": 402.759,
+      "end": 404.71,
+      "duration": 1.951,
+      "text": "one projector that used for this one"
+    },
+    {
+      "index": 171,
+      "start": 404.72,
+      "end": 406.39,
+      "duration": 1.67,
+      "text": "time"
+    },
+    {
+      "index": 172,
+      "start": 406.4,
+      "end": 408.71,
+      "duration": 2.31,
+      "text": "right so instead what you could do is"
+    },
+    {
+      "index": 173,
+      "start": 408.72,
+      "end": 410.43,
+      "duration": 1.71,
+      "text": "you could take a bunch of smaller"
+    },
+    {
+      "index": 174,
+      "start": 410.44,
+      "end": 414.55,
+      "duration": 4.11,
+      "text": "projectors right and feed different"
+    },
+    {
+      "index": 175,
+      "start": 414.56,
+      "end": 417.35,
+      "duration": 2.79,
+      "text": "inputs to each one of them and as you're"
+    },
+    {
+      "index": 176,
+      "start": 417.36,
+      "end": 418.67,
+      "duration": 1.31,
+      "text": "feeding different inputs each one's"
+    },
+    {
+      "index": 177,
+      "start": 418.68,
+      "end": 420.55,
+      "duration": 1.87,
+      "text": "going to show a different output and"
+    },
+    {
+      "index": 178,
+      "start": 420.56,
+      "end": 421.909,
+      "duration": 1.349,
+      "text": "then you're going to be able to have all"
+    },
+    {
+      "index": 179,
+      "start": 421.919,
+      "end": 423.43,
+      "duration": 1.511,
+      "text": "of these different projectors working"
+    },
+    {
+      "index": 180,
+      "start": 423.44,
+      "end": 425.909,
+      "duration": 2.469,
+      "text": "together to solve this larger problem"
+    },
+    {
+      "index": 181,
+      "start": 425.919,
+      "end": 428.71,
+      "duration": 2.791,
+      "text": "of projecting this really cool image on"
+    },
+    {
+      "index": 182,
+      "start": 428.72,
+      "end": 432.35,
+      "duration": 3.63,
+      "text": "a very large stage right so that's the"
+    },
+    {
+      "index": 183,
+      "start": 432.36,
+      "end": 435.79,
+      "duration": 3.43,
+      "text": "idea of decomposition"
+    },
+    {
+      "index": 184,
+      "start": 435.8,
+      "end": 439.07,
+      "duration": 3.27,
+      "text": "okay you take the same the same"
+    },
+    {
+      "index": 185,
+      "start": 439.08,
+      "end": 441.99,
+      "duration": 2.91,
+      "text": "projector feed it different inputs it"
+    },
+    {
+      "index": 186,
+      "start": 442.0,
+      "end": 443.55,
+      "duration": 1.55,
+      "text": "does the exact same thing behind the"
+    },
+    {
+      "index": 187,
+      "start": 443.56,
+      "end": 444.99,
+      "duration": 1.43,
+      "text": "scenes but it'll produce a different"
+    },
+    {
+      "index": 188,
+      "start": 445.0,
+      "end": 447.189,
+      "duration": 2.189,
+      "text": "output for each one of these different"
+    },
+    {
+      "index": 189,
+      "start": 447.199,
+      "end": 449.99,
+      "duration": 2.791,
+      "text": "inputs right so these different devices"
+    },
+    {
+      "index": 190,
+      "start": 450.0,
+      "end": 451.55,
+      "duration": 1.55,
+      "text": "are going to work together to achieve"
+    },
+    {
+      "index": 191,
+      "start": 451.56,
+      "end": 453.749,
+      "duration": 2.189,
+      "text": "the same common goal that's the idea of"
+    },
+    {
+      "index": 192,
+      "start": 453.759,
+      "end": 455.67,
+      "duration": 1.911,
+      "text": "the of"
+    },
+    {
+      "index": 193,
+      "start": 455.68,
+      "end": 457.79,
+      "duration": 2.11,
+      "text": "decomposition so this these were I"
+    },
+    {
+      "index": 194,
+      "start": 457.8,
+      "end": 460.39,
+      "duration": 2.59,
+      "text": "applied to the problem of you know"
+    },
+    {
+      "index": 195,
+      "start": 460.4,
+      "end": 462.83,
+      "duration": 2.43,
+      "text": "projecting large image or or a projector"
+    },
+    {
+      "index": 196,
+      "start": 462.84,
+      "end": 464.55,
+      "duration": 1.71,
+      "text": "in general but we can apply these exact"
+    },
+    {
+      "index": 197,
+      "start": 464.56,
+      "end": 469.27,
+      "duration": 4.71,
+      "text": "same Concepts to programming okay so"
+    },
+    {
+      "index": 198,
+      "start": 469.28,
+      "end": 471.07,
+      "duration": 1.79,
+      "text": "decomposition is really just the problem"
+    },
+    {
+      "index": 199,
+      "start": 471.08,
+      "end": 473.27,
+      "duration": 2.19,
+      "text": "of creating structure in your code okay"
+    },
+    {
+      "index": 200,
+      "start": 473.28,
+      "end": 474.71,
+      "duration": 1.43,
+      "text": "in the projector example we have"
+    },
+    {
+      "index": 201,
+      "start": 474.72,
+      "end": 477.309,
+      "duration": 2.589,
+      "text": "separate devices working"
+    },
+    {
+      "index": 202,
+      "start": 477.319,
+      "end": 480.11,
+      "duration": 2.791,
+      "text": "together in programming"
+    },
+    {
+      "index": 203,
+      "start": 480.12,
+      "end": 481.95,
+      "duration": 1.83,
+      "text": "to achieve decomposition you're dividing"
+    },
+    {
+      "index": 204,
+      "start": 481.96,
+      "end": 483.67,
+      "duration": 1.71,
+      "text": "your code into smaller modules these are"
+    },
+    {
+      "index": 205,
+      "start": 483.68,
+      "end": 485.83,
+      "duration": 2.15,
+      "text": "going to be self-contained and you can"
+    },
+    {
+      "index": 206,
+      "start": 485.84,
+      "end": 487.67,
+      "duration": 1.83,
+      "text": "think of them as sort of little mini"
+    },
+    {
+      "index": 207,
+      "start": 487.68,
+      "end": 490.309,
+      "duration": 2.629,
+      "text": "programs right you feed in some input to"
+    },
+    {
+      "index": 208,
+      "start": 490.319,
+      "end": 492.589,
+      "duration": 2.27,
+      "text": "them they do a little task and then they"
+    },
+    {
+      "index": 209,
+      "start": 492.599,
+      "end": 494.189,
+      "duration": 1.59,
+      "text": "give you something back you know they go"
+    },
+    {
+      "index": 210,
+      "start": 494.199,
+      "end": 495.71,
+      "duration": 1.511,
+      "text": "off and do their thing and then they"
+    },
+    {
+      "index": 211,
+      "start": 495.72,
+      "end": 497.55,
+      "duration": 1.83,
+      "text": "give back a"
+    },
+    {
+      "index": 212,
+      "start": 497.56,
+      "end": 501.35,
+      "duration": 3.79,
+      "text": "result okay these modules can be used to"
+    },
+    {
+      "index": 213,
+      "start": 501.36,
+      "end": 502.83,
+      "duration": 1.47,
+      "text": "break up your"
+    },
+    {
+      "index": 214,
+      "start": 502.84,
+      "end": 504.95,
+      "duration": 2.11,
+      "text": "code and the important thing is that"
+    },
+    {
+      "index": 215,
+      "start": 504.96,
+      "end": 507.55,
+      "duration": 2.59,
+      "text": "they're reusable so you write a module"
+    },
+    {
+      "index": 216,
+      "start": 507.56,
+      "end": 509.11,
+      "duration": 1.55,
+      "text": "once a little piece of code that does"
+    },
+    {
+      "index": 217,
+      "start": 509.12,
+      "end": 510.189,
+      "duration": 1.069,
+      "text": "something"
+    },
+    {
+      "index": 218,
+      "start": 510.199,
+      "end": 513.75,
+      "duration": 3.551,
+      "text": "once you debug it once and then you can"
+    },
+    {
+      "index": 219,
+      "start": 513.76,
+      "end": 515.389,
+      "duration": 1.629,
+      "text": "reuse it many many times in your code"
+    },
+    {
+      "index": 220,
+      "start": 515.399,
+      "end": 518.509,
+      "duration": 3.11,
+      "text": "with different inputs okay benefit of"
+    },
+    {
+      "index": 221,
+      "start": 518.519,
+      "end": 521.11,
+      "duration": 2.591,
+      "text": "this is it keeps your code organized and"
+    },
+    {
+      "index": 222,
+      "start": 521.12,
+      "end": 523.07,
+      "duration": 1.95,
+      "text": "it keeps your code"
+    },
+    {
+      "index": 223,
+      "start": 523.08,
+      "end": 526.269,
+      "duration": 3.189,
+      "text": "coherent okay so functions are going to"
+    },
+    {
+      "index": 224,
+      "start": 526.279,
+      "end": 528.07,
+      "duration": 1.791,
+      "text": "be used to achieve decomposition and to"
+    },
+    {
+      "index": 225,
+      "start": 528.08,
+      "end": 529.87,
+      "duration": 1.79,
+      "text": "create structure in our code we're going"
+    },
+    {
+      "index": 226,
+      "start": 529.88,
+      "end": 532.15,
+      "duration": 2.27,
+      "text": "to see functions today in this lecture"
+    },
+    {
+      "index": 227,
+      "start": 532.16,
+      "end": 533.43,
+      "duration": 1.27,
+      "text": "and in a few weeks you're going to"
+    },
+    {
+      "index": 228,
+      "start": 533.44,
+      "end": 535.03,
+      "duration": 1.59,
+      "text": "actually see when we talk about"
+    },
+    {
+      "index": 229,
+      "start": 535.04,
+      "end": 536.55,
+      "duration": 1.51,
+      "text": "object-oriented programming how you can"
+    },
+    {
+      "index": 230,
+      "start": 536.56,
+      "end": 539.67,
+      "duration": 3.11,
+      "text": "achieve decomposition with classes"
+    },
+    {
+      "index": 231,
+      "start": 539.68,
+      "end": 541.67,
+      "duration": 1.99,
+      "text": "and with classes you can create your own"
+    },
+    {
+      "index": 232,
+      "start": 541.68,
+      "end": 543.829,
+      "duration": 2.149,
+      "text": "object types like inss and floats you"
+    },
+    {
+      "index": 233,
+      "start": 543.839,
+      "end": 545.069,
+      "duration": 1.23,
+      "text": "can create your own object types for"
+    },
+    {
+      "index": 234,
+      "start": 545.079,
+      "end": 547.59,
+      "duration": 2.511,
+      "text": "whatever you want but that's"
+    },
+    {
+      "index": 235,
+      "start": 547.6,
+      "end": 550.829,
+      "duration": 3.229,
+      "text": "later okay so decomposition is creating"
+    },
+    {
+      "index": 236,
+      "start": 550.839,
+      "end": 554.15,
+      "duration": 3.311,
+      "text": "structure new code and abstraction is is"
+    },
+    {
+      "index": 237,
+      "start": 554.16,
+      "end": 555.79,
+      "duration": 1.63,
+      "text": "the idea of suppressing details so in"
+    },
+    {
+      "index": 238,
+      "start": 555.8,
+      "end": 557.15,
+      "duration": 1.35,
+      "text": "the projector example remember"
+    },
+    {
+      "index": 239,
+      "start": 557.16,
+      "end": 559.43,
+      "duration": 2.27,
+      "text": "abstraction was you didn't need to know"
+    },
+    {
+      "index": 240,
+      "start": 559.44,
+      "end": 560.71,
+      "duration": 1.27,
+      "text": "exactly how the projector worked in"
+    },
+    {
+      "index": 241,
+      "start": 560.72,
+      "end": 562.389,
+      "duration": 1.669,
+      "text": "order to use it and it's going to be the"
+    },
+    {
+      "index": 242,
+      "start": 562.399,
+      "end": 564.949,
+      "duration": 2.55,
+      "text": "same idea in programming so once you"
+    },
+    {
+      "index": 243,
+      "start": 564.959,
+      "end": 567.59,
+      "duration": 2.631,
+      "text": "write a piece of code that does a little"
+    },
+    {
+      "index": 244,
+      "start": 567.6,
+      "end": 569.71,
+      "duration": 2.11,
+      "text": "task you don't need to re write that"
+    },
+    {
+      "index": 245,
+      "start": 569.72,
+      "end": 571.069,
+      "duration": 1.349,
+      "text": "piece of code many times you've written"
+    },
+    {
+      "index": 246,
+      "start": 571.079,
+      "end": 571.99,
+      "duration": 0.911,
+      "text": "it"
+    },
+    {
+      "index": 247,
+      "start": 572.0,
+      "end": 574.15,
+      "duration": 2.15,
+      "text": "once and you write this thing called a"
+    },
+    {
+      "index": 248,
+      "start": 574.16,
+      "end": 576.03,
+      "duration": 1.87,
+      "text": "function specification for it or a doc"
+    },
+    {
+      "index": 249,
+      "start": 576.04,
+      "end": 578.67,
+      "duration": 2.63,
+      "text": "string and this is a piece of text that"
+    },
+    {
+      "index": 250,
+      "start": 578.68,
+      "end": 581.03,
+      "duration": 2.35,
+      "text": "tells anyone else who'd want to use it"
+    },
+    {
+      "index": 251,
+      "start": 581.04,
+      "end": 582.389,
+      "duration": 1.349,
+      "text": "in the future you know other people"
+    },
+    {
+      "index": 252,
+      "start": 582.399,
+      "end": 585.389,
+      "duration": 2.99,
+      "text": "maybe yourself it tells them how to use"
+    },
+    {
+      "index": 253,
+      "start": 585.399,
+      "end": 588.35,
+      "duration": 2.951,
+      "text": "this function what inputs does it take"
+    },
+    {
+      "index": 254,
+      "start": 588.36,
+      "end": 589.75,
+      "duration": 1.39,
+      "text": "what's the type of the inputs what is"
+    },
+    {
+      "index": 255,
+      "start": 589.76,
+      "end": 591.87,
+      "duration": 2.11,
+      "text": "the function supposed to do and what is"
+    },
+    {
+      "index": 256,
+      "start": 591.88,
+      "end": 593.11,
+      "duration": 1.23,
+      "text": "the output that you're going to get out"
+    },
+    {
+      "index": 257,
+      "start": 593.12,
+      "end": 595.71,
+      "duration": 2.59,
+      "text": "of it right so they don't need to know"
+    },
+    {
+      "index": 258,
+      "start": 595.72,
+      "end": 597.63,
+      "duration": 1.91,
+      "text": "exactly how you implemented the function"
+    },
+    {
+      "index": 259,
+      "start": 597.64,
+      "end": 599.11,
+      "duration": 1.47,
+      "text": "they just need to know inputs what it"
+    },
+    {
+      "index": 260,
+      "start": 599.12,
+      "end": 603.43,
+      "duration": 4.31,
+      "text": "does what's the output those three three"
+    },
+    {
+      "index": 261,
+      "start": 603.44,
+      "end": 606.47,
+      "duration": 3.03,
+      "text": "things okay so these functions are then"
+    },
+    {
+      "index": 262,
+      "start": 606.48,
+      "end": 608.79,
+      "duration": 2.31,
+      "text": "reusable chunks of code and we'll see in"
+    },
+    {
+      "index": 263,
+      "start": 608.8,
+      "end": 611.269,
+      "duration": 2.469,
+      "text": "a few examples today's lecture how um"
+    },
+    {
+      "index": 264,
+      "start": 611.279,
+      "end": 614.63,
+      "duration": 3.351,
+      "text": "how to write some and how to call call"
+    },
+    {
+      "index": 265,
+      "start": 614.64,
+      "end": 616.43,
+      "duration": 1.79,
+      "text": "functions and as we're going through"
+    },
+    {
+      "index": 266,
+      "start": 616.44,
+      "end": 618.269,
+      "duration": 1.829,
+      "text": "today's code I want you to sort of think"
+    },
+    {
+      "index": 267,
+      "start": 618.279,
+      "end": 620.55,
+      "duration": 2.271,
+      "text": "about functions in with two two"
+    },
+    {
+      "index": 268,
+      "start": 620.56,
+      "end": 622.99,
+      "duration": 2.43,
+      "text": "different hats on okay the first hat is"
+    },
+    {
+      "index": 269,
+      "start": 623.0,
+      "end": 625.63,
+      "duration": 2.63,
+      "text": "from someone who's writing the function"
+    },
+    {
+      "index": 270,
+      "start": 625.64,
+      "end": 627.31,
+      "duration": 1.67,
+      "text": "right so in the projector example"
+    },
+    {
+      "index": 271,
+      "start": 627.32,
+      "end": 629.19,
+      "duration": 1.87,
+      "text": "someone had to build the first projector"
+    },
+    {
+      "index": 272,
+      "start": 629.2,
+      "end": 630.31,
+      "duration": 1.11,
+      "text": "right right someone had to know how to"
+    },
+    {
+      "index": 273,
+      "start": 630.32,
+      "end": 632.829,
+      "duration": 2.509,
+      "text": "put all these uh components together so"
+    },
+    {
+      "index": 274,
+      "start": 632.839,
+      "end": 634.59,
+      "duration": 1.751,
+      "text": "that's going to be you writing a"
+    },
+    {
+      "index": 275,
+      "start": 634.6,
+      "end": 636.11,
+      "duration": 1.51,
+      "text": "function right so you need to know how"
+    },
+    {
+      "index": 276,
+      "start": 636.12,
+      "end": 637.509,
+      "duration": 1.389,
+      "text": "to make the function"
+    },
+    {
+      "index": 277,
+      "start": 637.519,
+      "end": 641.11,
+      "duration": 3.591,
+      "text": "work and then the other hat is you as"
+    },
+    {
+      "index": 278,
+      "start": 641.12,
+      "end": 643.069,
+      "duration": 1.949,
+      "text": "someone as a programmer who's just using"
+    },
+    {
+      "index": 279,
+      "start": 643.079,
+      "end": 644.87,
+      "duration": 1.791,
+      "text": "the function right you're assuming it's"
+    },
+    {
+      "index": 280,
+      "start": 644.88,
+      "end": 647.19,
+      "duration": 2.31,
+      "text": "already been implemented correctly and"
+    },
+    {
+      "index": 281,
+      "start": 647.2,
+      "end": 649.91,
+      "duration": 2.71,
+      "text": "now you're just using it to to do"
+    },
+    {
+      "index": 282,
+      "start": 649.92,
+      "end": 653.59,
+      "duration": 3.67,
+      "text": "something"
+    },
+    {
+      "index": 283,
+      "start": 656.35,
+      "end": 656.36,
+      "duration": 0.01,
+      "text": "okay so these are some of the function"
+    },
+    {
+      "index": 284,
+      "start": 656.36,
+      "end": 657.79,
+      "duration": 1.43,
+      "text": "characteristics and we'll see an example"
+    },
+    {
+      "index": 285,
+      "start": 657.8,
+      "end": 659.67,
+      "duration": 1.87,
+      "text": "on the next slide so function is going"
+    },
+    {
+      "index": 286,
+      "start": 659.68,
+      "end": 661.949,
+      "duration": 2.269,
+      "text": "to have a name you have to call it"
+    },
+    {
+      "index": 287,
+      "start": 661.959,
+      "end": 663.47,
+      "duration": 1.511,
+      "text": "something it's going to have some"
+    },
+    {
+      "index": 288,
+      "start": 663.48,
+      "end": 665.31,
+      "duration": 1.83,
+      "text": "parameters these are the inputs to the"
+    },
+    {
+      "index": 289,
+      "start": 665.32,
+      "end": 667.47,
+      "duration": 2.15,
+      "text": "function you can have zero inputs or as"
+    },
+    {
+      "index": 290,
+      "start": 667.48,
+      "end": 670.629,
+      "duration": 3.149,
+      "text": "many as you'd like function should have"
+    },
+    {
+      "index": 291,
+      "start": 670.639,
+      "end": 672.389,
+      "duration": 1.75,
+      "text": "a dock string this is how you achieve"
+    },
+    {
+      "index": 292,
+      "start": 672.399,
+      "end": 674.59,
+      "duration": 2.191,
+      "text": "abstraction so it's optional but highly"
+    },
+    {
+      "index": 293,
+      "start": 674.6,
+      "end": 676.43,
+      "duration": 1.83,
+      "text": "recommended and this is how you tell"
+    },
+    {
+      "index": 294,
+      "start": 676.44,
+      "end": 678.71,
+      "duration": 2.27,
+      "text": "other people how to use your"
+    },
+    {
+      "index": 295,
+      "start": 678.72,
+      "end": 681.509,
+      "duration": 2.789,
+      "text": "function function has a body which is"
+    },
+    {
+      "index": 296,
+      "start": 681.519,
+      "end": 683.19,
+      "duration": 1.671,
+      "text": "the meat and potatoes of the function"
+    },
+    {
+      "index": 297,
+      "start": 683.2,
+      "end": 685.35,
+      "duration": 2.15,
+      "text": "right what it does and a function is"
+    },
+    {
+      "index": 298,
+      "start": 685.36,
+      "end": 687.99,
+      "duration": 2.63,
+      "text": "going to return something it's it"
+    },
+    {
+      "index": 299,
+      "start": 688.0,
+      "end": 689.509,
+      "duration": 1.509,
+      "text": "computes its thing and then it gives"
+    },
+    {
+      "index": 300,
+      "start": 689.519,
+      "end": 691.59,
+      "duration": 2.071,
+      "text": "back spits back some"
+    },
+    {
+      "index": 301,
+      "start": 691.6,
+      "end": 693.31,
+      "duration": 1.71,
+      "text": "answer"
+    },
+    {
+      "index": 302,
+      "start": 693.32,
+      "end": 696.55,
+      "duration": 3.23,
+      "text": "okay here's an example of a function"
+    },
+    {
+      "index": 303,
+      "start": 696.56,
+      "end": 700.269,
+      "duration": 3.709,
+      "text": "definition and a function call okay"
+    },
+    {
+      "index": 304,
+      "start": 700.279,
+      "end": 702.75,
+      "duration": 2.471,
+      "text": "function definition is up here you know"
+    },
+    {
+      "index": 305,
+      "start": 702.76,
+      "end": 705.55,
+      "duration": 2.79,
+      "text": "what I'll just draw it"
+    },
+    {
+      "index": 306,
+      "start": 705.56,
+      "end": 709.19,
+      "duration": 3.63,
+      "text": "here this is the function definition up"
+    },
+    {
+      "index": 307,
+      "start": 709.2,
+      "end": 712.509,
+      "duration": 3.309,
+      "text": "here and this is the function call down"
+    },
+    {
+      "index": 308,
+      "start": 712.519,
+      "end": 715.829,
+      "duration": 3.31,
+      "text": "here so remember someone has to write"
+    },
+    {
+      "index": 309,
+      "start": 715.839,
+      "end": 717.87,
+      "duration": 2.031,
+      "text": "the function you know that that does"
+    },
+    {
+      "index": 310,
+      "start": 717.88,
+      "end": 719.75,
+      "duration": 1.87,
+      "text": "something to begin with so this is how"
+    },
+    {
+      "index": 311,
+      "start": 719.76,
+      "end": 721.55,
+      "duration": 1.79,
+      "text": "you write the function the first is"
+    },
+    {
+      "index": 312,
+      "start": 721.56,
+      "end": 723.79,
+      "duration": 2.23,
+      "text": "whoops the first is going to"
+    },
+    {
+      "index": 313,
+      "start": 723.8,
+      "end": 729.23,
+      "duration": 5.43,
+      "text": "be this DF keyword and DF stands for it"
+    },
+    {
+      "index": 314,
+      "start": 729.24,
+      "end": 732.67,
+      "duration": 3.43,
+      "text": "tells python I'm going to define a"
+    },
+    {
+      "index": 315,
+      "start": 732.68,
+      "end": 735.189,
+      "duration": 2.509,
+      "text": "function next is the name of the"
+    },
+    {
+      "index": 316,
+      "start": 735.199,
+      "end": 736.79,
+      "duration": 1.591,
+      "text": "function in this case I'm calling the"
+    },
+    {
+      "index": 317,
+      "start": 736.8,
+      "end": 738.75,
+      "duration": 1.95,
+      "text": "function isore"
+    },
+    {
+      "index": 318,
+      "start": 738.76,
+      "end": 741.35,
+      "duration": 2.59,
+      "text": "even and the function name should really"
+    },
+    {
+      "index": 319,
+      "start": 741.36,
+      "end": 743.99,
+      "duration": 2.63,
+      "text": "be something descriptive whereas someone"
+    },
+    {
+      "index": 320,
+      "start": 744.0,
+      "end": 745.35,
+      "duration": 1.35,
+      "text": "who's just using this function or"
+    },
+    {
+      "index": 321,
+      "start": 745.36,
+      "end": 747.23,
+      "duration": 1.87,
+      "text": "looking at it can pretty much tell what"
+    },
+    {
+      "index": 322,
+      "start": 747.24,
+      "end": 749.829,
+      "duration": 2.589,
+      "text": "it's supposed to do without lot without"
+    },
+    {
+      "index": 323,
+      "start": 749.839,
+      "end": 752.23,
+      "duration": 2.391,
+      "text": "going a lot further than that than just"
+    },
+    {
+      "index": 324,
+      "start": 752.24,
+      "end": 754.829,
+      "duration": 2.589,
+      "text": "looking at the name"
+    },
+    {
+      "index": 325,
+      "start": 754.839,
+      "end": 757.43,
+      "duration": 2.591,
+      "text": "okay and then in parentheses you give it"
+    },
+    {
+      "index": 326,
+      "start": 757.44,
+      "end": 760.31,
+      "duration": 2.87,
+      "text": "any parameters also known as arguments"
+    },
+    {
+      "index": 327,
+      "start": 760.32,
+      "end": 761.79,
+      "duration": 1.47,
+      "text": "and these parameters are the inputs to"
+    },
+    {
+      "index": 328,
+      "start": 761.8,
+      "end": 762.829,
+      "duration": 1.029,
+      "text": "the"
+    },
+    {
+      "index": 329,
+      "start": 762.839,
+      "end": 767.11,
+      "duration": 4.271,
+      "text": "function and then you do"
+    },
+    {
+      "index": 330,
+      "start": 770.11,
+      "end": 770.12,
+      "duration": 0.01,
+      "text": "colon okay so this"
+    },
+    {
+      "index": 331,
+      "start": 770.12,
+      "end": 772.269,
+      "duration": 2.149,
+      "text": "is the first line of the function"
+    },
+    {
+      "index": 332,
+      "start": 772.279,
+      "end": 774.31,
+      "duration": 2.031,
+      "text": "definition and after this everything"
+    },
+    {
+      "index": 333,
+      "start": 774.32,
+      "end": 775.79,
+      "duration": 1.47,
+      "text": "that's going to be part of the function"
+    },
+    {
+      "index": 334,
+      "start": 775.8,
+      "end": 777.71,
+      "duration": 1.91,
+      "text": "is going to be"
+    },
+    {
+      "index": 335,
+      "start": 777.72,
+      "end": 780.389,
+      "duration": 2.669,
+      "text": "indented the next part is going to be"
+    },
+    {
+      "index": 336,
+      "start": 780.399,
+      "end": 782.189,
+      "duration": 1.79,
+      "text": "the dock string or the specification and"
+    },
+    {
+      "index": 337,
+      "start": 782.199,
+      "end": 786.189,
+      "duration": 3.99,
+      "text": "this is how we achieve abstraction using"
+    },
+    {
+      "index": 338,
+      "start": 788.31,
+      "end": 788.32,
+      "duration": 0.01,
+      "text": "functions specification or the doc"
+    },
+    {
+      "index": 339,
+      "start": 788.32,
+      "end": 790.67,
+      "duration": 2.35,
+      "text": "string starts with triple quotes and"
+    },
+    {
+      "index": 340,
+      "start": 790.68,
+      "end": 792.23,
+      "duration": 1.55,
+      "text": "ends with triple quotes and you can sort"
+    },
+    {
+      "index": 341,
+      "start": 792.24,
+      "end": 794.389,
+      "duration": 2.149,
+      "text": "of think about this as a multi-line"
+    },
+    {
+      "index": 342,
+      "start": 794.399,
+      "end": 796.71,
+      "duration": 2.311,
+      "text": "comment it's just going to be text"
+    },
+    {
+      "index": 343,
+      "start": 796.72,
+      "end": 798.189,
+      "duration": 1.469,
+      "text": "that's going to be visible to whoever"
+    },
+    {
+      "index": 344,
+      "start": 798.199,
+      "end": 800.829,
+      "duration": 2.63,
+      "text": "uses the function and it should tell"
+    },
+    {
+      "index": 345,
+      "start": 800.839,
+      "end": 803.189,
+      "duration": 2.35,
+      "text": "them the F the following things what are"
+    },
+    {
+      "index": 346,
+      "start": 803.199,
+      "end": 805.629,
+      "duration": 2.43,
+      "text": "the inputs to the function what is the"
+    },
+    {
+      "index": 347,
+      "start": 805.639,
+      "end": 808.069,
+      "duration": 2.43,
+      "text": "function supposed to do generally and"
+    },
+    {
+      "index": 348,
+      "start": 808.079,
+      "end": 810.389,
+      "duration": 2.31,
+      "text": "what is the function going to give back"
+    },
+    {
+      "index": 349,
+      "start": 810.399,
+      "end": 811.79,
+      "duration": 1.391,
+      "text": "to whoever called"
+    },
+    {
+      "index": 350,
+      "start": 811.8,
+      "end": 814.47,
+      "duration": 2.67,
+      "text": "it"
+    },
+    {
+      "index": 351,
+      "start": 814.48,
+      "end": 817.389,
+      "duration": 2.909,
+      "text": "okay the next part is going to be the"
+    },
+    {
+      "index": 352,
+      "start": 817.399,
+      "end": 819.829,
+      "duration": 2.43,
+      "text": "body of the function we'll talk about"
+    },
+    {
+      "index": 353,
+      "start": 819.839,
+      "end": 823.069,
+      "duration": 3.23,
+      "text": "what's inside it in the next"
+    },
+    {
+      "index": 354,
+      "start": 823.079,
+      "end": 825.55,
+      "duration": 2.471,
+      "text": "slide and that's it that's all for the"
+    },
+    {
+      "index": 355,
+      "start": 825.56,
+      "end": 826.91,
+      "duration": 1.35,
+      "text": "function"
+    },
+    {
+      "index": 356,
+      "start": 826.92,
+      "end": 830.43,
+      "duration": 3.51,
+      "text": "definition defa blah blah blah indented"
+    },
+    {
+      "index": 357,
+      "start": 830.44,
+      "end": 832.79,
+      "duration": 2.35,
+      "text": "everything inside the function okay so"
+    },
+    {
+      "index": 358,
+      "start": 832.8,
+      "end": 836.55,
+      "duration": 3.75,
+      "text": "this is you writing the function um"
+    },
+    {
+      "index": 359,
+      "start": 836.56,
+      "end": 838.629,
+      "duration": 2.069,
+      "text": "definition once the function definition"
+    },
+    {
+      "index": 360,
+      "start": 838.639,
+      "end": 840.11,
+      "duration": 1.471,
+      "text": "is written"
+    },
+    {
+      "index": 361,
+      "start": 840.12,
+      "end": 842.269,
+      "duration": 2.149,
+      "text": "you can call the function and that's"
+    },
+    {
+      "index": 362,
+      "start": 842.279,
+      "end": 843.829,
+      "duration": 1.55,
+      "text": "this part down"
+    },
+    {
+      "index": 363,
+      "start": 843.839,
+      "end": 846.35,
+      "duration": 2.511,
+      "text": "here and here when you call a function"
+    },
+    {
+      "index": 364,
+      "start": 846.36,
+      "end": 849.03,
+      "duration": 2.67,
+      "text": "you just say its name and then you give"
+    },
+    {
+      "index": 365,
+      "start": 849.04,
+      "end": 851.069,
+      "duration": 2.029,
+      "text": "it parameters and you give it as many"
+    },
+    {
+      "index": 366,
+      "start": 851.079,
+      "end": 852.99,
+      "duration": 1.911,
+      "text": "parameters as the function is expecting"
+    },
+    {
+      "index": 367,
+      "start": 853.0,
+      "end": 857.189,
+      "duration": 4.189,
+      "text": "in this case only one"
+    },
+    {
+      "index": 368,
+      "start": 865.509,
+      "end": 865.519,
+      "duration": 0.01,
+      "text": "okay so what's inside the function body"
+    },
+    {
+      "index": 369,
+      "start": 865.519,
+      "end": 866.99,
+      "duration": 1.471,
+      "text": "you can put anything inside the function"
+    },
+    {
+      "index": 370,
+      "start": 867.0,
+      "end": 868.47,
+      "duration": 1.47,
+      "text": "body remember think of a function as"
+    },
+    {
+      "index": 371,
+      "start": 868.48,
+      "end": 870.23,
+      "duration": 1.75,
+      "text": "sort of a small procedure a little mini"
+    },
+    {
+      "index": 372,
+      "start": 870.24,
+      "end": 872.269,
+      "duration": 2.029,
+      "text": "program that does something so you can"
+    },
+    {
+      "index": 373,
+      "start": 872.279,
+      "end": 874.189,
+      "duration": 1.91,
+      "text": "do anything inside the function that you"
+    },
+    {
+      "index": 374,
+      "start": 874.199,
+      "end": 876.31,
+      "duration": 2.111,
+      "text": "can do in in a regular program print"
+    },
+    {
+      "index": 375,
+      "start": 876.32,
+      "end": 879.389,
+      "duration": 3.069,
+      "text": "things do mathematical operations and so"
+    },
+    {
+      "index": 376,
+      "start": 879.399,
+      "end": 882.069,
+      "duration": 2.67,
+      "text": "on the last line is the most important"
+    },
+    {
+      "index": 377,
+      "start": 882.079,
+      "end": 884.11,
+      "duration": 2.031,
+      "text": "part of the function"
+    },
+    {
+      "index": 378,
+      "start": 884.12,
+      "end": 886.79,
+      "duration": 2.67,
+      "text": "though and it's this return statement"
+    },
+    {
+      "index": 379,
+      "start": 886.8,
+      "end": 888.59,
+      "duration": 1.79,
+      "text": "that's what we call it so it's a it's a"
+    },
+    {
+      "index": 380,
+      "start": 888.6,
+      "end": 890.55,
+      "duration": 1.95,
+      "text": "line of code that starts with return"
+    },
+    {
+      "index": 381,
+      "start": 890.56,
+      "end": 891.87,
+      "duration": 1.31,
+      "text": "which is a"
+    },
+    {
+      "index": 382,
+      "start": 891.88,
+      "end": 895.11,
+      "duration": 3.23,
+      "text": "keyword and then it's going to be some"
+    },
+    {
+      "index": 383,
+      "start": 895.12,
+      "end": 897.71,
+      "duration": 2.59,
+      "text": "value okay notice this is an expression"
+    },
+    {
+      "index": 384,
+      "start": 897.72,
+      "end": 900.509,
+      "duration": 2.789,
+      "text": "here i%c 2 is equal equal Z is an"
+    },
+    {
+      "index": 385,
+      "start": 900.519,
+      "end": 901.99,
+      "duration": 1.471,
+      "text": "expression that's going to evaluate to"
+    },
+    {
+      "index": 386,
+      "start": 902.0,
+      "end": 904.71,
+      "duration": 2.71,
+      "text": "some"
+    },
+    {
+      "index": 387,
+      "start": 908.23,
+      "end": 908.24,
+      "duration": 0.01,
+      "text": "value okay and as long as there this"
+    },
+    {
+      "index": 388,
+      "start": 908.24,
+      "end": 909.829,
+      "duration": 1.589,
+      "text": "part is something that evaluates some"
+    },
+    {
+      "index": 389,
+      "start": 909.839,
+      "end": 913.509,
+      "duration": 3.67,
+      "text": "value it could be anything you want okay"
+    },
+    {
+      "index": 390,
+      "start": 913.519,
+      "end": 915.749,
+      "duration": 2.23,
+      "text": "and this line here return something"
+    },
+    {
+      "index": 391,
+      "start": 915.759,
+      "end": 917.949,
+      "duration": 2.19,
+      "text": "tells python okay after you finished"
+    },
+    {
+      "index": 392,
+      "start": 917.959,
+      "end": 920.35,
+      "duration": 2.391,
+      "text": "executing everything inside the"
+    },
+    {
+      "index": 393,
+      "start": 920.36,
+      "end": 923.23,
+      "duration": 2.87,
+      "text": "function what value should I"
+    },
+    {
+      "index": 394,
+      "start": 923.24,
+      "end": 926.55,
+      "duration": 3.31,
+      "text": "return and whoever called the function"
+    },
+    {
+      "index": 395,
+      "start": 926.56,
+      "end": 928.269,
+      "duration": 1.709,
+      "text": "is going to get back that value and the"
+    },
+    {
+      "index": 396,
+      "start": 928.279,
+      "end": 930.189,
+      "duration": 1.91,
+      "text": "function call it s will be replaced by"
+    },
+    {
+      "index": 397,
+      "start": 930.199,
+      "end": 931.269,
+      "duration": 1.07,
+      "text": "that"
+    },
+    {
+      "index": 398,
+      "start": 931.279,
+      "end": 938.11,
+      "duration": 6.831,
+      "text": "value okay so let's look at an"
+    },
+    {
+      "index": 399,
+      "start": 940.43,
+      "end": 940.44,
+      "duration": 0.01,
+      "text": "example I'm going to introduce the idea"
+    },
+    {
+      "index": 400,
+      "start": 940.44,
+      "end": 946.629,
+      "duration": 6.189,
+      "text": "of scope now okay and scope just means"
+    },
+    {
+      "index": 401,
+      "start": 946.639,
+      "end": 949.99,
+      "duration": 3.351,
+      "text": "is another word for environment okay so"
+    },
+    {
+      "index": 402,
+      "start": 950.0,
+      "end": 951.509,
+      "duration": 1.509,
+      "text": "if if I told you that you can think of"
+    },
+    {
+      "index": 403,
+      "start": 951.519,
+      "end": 953.189,
+      "duration": 1.67,
+      "text": "functions as little mini"
+    },
+    {
+      "index": 404,
+      "start": 953.199,
+      "end": 955.71,
+      "duration": 2.511,
+      "text": "programs the scope of a function is"
+    },
+    {
+      "index": 405,
+      "start": 955.72,
+      "end": 956.79,
+      "duration": 1.07,
+      "text": "going to"
+    },
+    {
+      "index": 406,
+      "start": 956.8,
+      "end": 960.15,
+      "duration": 3.35,
+      "text": "be a completely separate environment"
+    },
+    {
+      "index": 407,
+      "start": 960.16,
+      "end": 962.389,
+      "duration": 2.229,
+      "text": "than the environment of the main"
+    },
+    {
+      "index": 408,
+      "start": 962.399,
+      "end": 965.069,
+      "duration": 2.67,
+      "text": "program so as soon as you make a"
+    },
+    {
+      "index": 409,
+      "start": 965.079,
+      "end": 967.829,
+      "duration": 2.75,
+      "text": "function call behind the scenes what"
+    },
+    {
+      "index": 410,
+      "start": 967.839,
+      "end": 969.59,
+      "duration": 1.751,
+      "text": "python says is okay I'm in the main"
+    },
+    {
+      "index": 411,
+      "start": 969.6,
+      "end": 972.189,
+      "duration": 2.589,
+      "text": "program but I see a function call I'm"
+    },
+    {
+      "index": 412,
+      "start": 972.199,
+      "end": 973.949,
+      "duration": 1.75,
+      "text": "going to step out of this main program"
+    },
+    {
+      "index": 413,
+      "start": 973.959,
+      "end": 975.749,
+      "duration": 1.79,
+      "text": "I'm going to go off into this new"
+    },
+    {
+      "index": 414,
+      "start": 975.759,
+      "end": 978.069,
+      "duration": 2.31,
+      "text": "environment I'm going to create entirely"
+    },
+    {
+      "index": 415,
+      "start": 978.079,
+      "end": 980.15,
+      "duration": 2.071,
+      "text": "new set of variables that just exists"
+    },
+    {
+      "index": 416,
+      "start": 980.16,
+      "end": 982.23,
+      "duration": 2.07,
+      "text": "within this"
+    },
+    {
+      "index": 417,
+      "start": 982.24,
+      "end": 984.15,
+      "duration": 1.91,
+      "text": "environment I'm going to do some"
+    },
+    {
+      "index": 418,
+      "start": 984.16,
+      "end": 986.269,
+      "duration": 2.109,
+      "text": "computations when I see the return I'm"
+    },
+    {
+      "index": 419,
+      "start": 986.279,
+      "end": 988.509,
+      "duration": 2.23,
+      "text": "going to take this one return value I'm"
+    },
+    {
+      "index": 420,
+      "start": 988.519,
+      "end": 990.389,
+      "duration": 1.87,
+      "text": "going to exit that environment and then"
+    },
+    {
+      "index": 421,
+      "start": 990.399,
+      "end": 992.069,
+      "duration": 1.67,
+      "text": "I'm going to come back to the main"
+    },
+    {
+      "index": 422,
+      "start": 992.079,
+      "end": 995.99,
+      "duration": 3.911,
+      "text": "program okay so as you're entering from"
+    },
+    {
+      "index": 423,
+      "start": 996.0,
+      "end": 997.71,
+      "duration": 1.71,
+      "text": "one scope to another you're sort of"
+    },
+    {
+      "index": 424,
+      "start": 997.72,
+      "end": 1000.79,
+      "duration": 3.07,
+      "text": "passing these values back and forth so"
+    },
+    {
+      "index": 425,
+      "start": 1000.8,
+      "end": 1002.15,
+      "duration": 1.35,
+      "text": "when you're entering a scope you're"
+    },
+    {
+      "index": 426,
+      "start": 1002.16,
+      "end": 1004.87,
+      "duration": 2.71,
+      "text": "passing a variable back into you're"
+    },
+    {
+      "index": 427,
+      "start": 1004.88,
+      "end": 1006.829,
+      "duration": 1.949,
+      "text": "passing a variable into the function and"
+    },
+    {
+      "index": 428,
+      "start": 1006.839,
+      "end": 1007.949,
+      "duration": 1.11,
+      "text": "when the function's finished you're"
+    },
+    {
+      "index": 429,
+      "start": 1007.959,
+      "end": 1010.59,
+      "duration": 2.631,
+      "text": "passing a value back to whoever called"
+    },
+    {
+      "index": 430,
+      "start": 1010.6,
+      "end": 1013.749,
+      "duration": 3.149,
+      "text": "it okay so once again this top part is"
+    },
+    {
+      "index": 431,
+      "start": 1013.759,
+      "end": 1014.99,
+      "duration": 1.231,
+      "text": "the function"
+    },
+    {
+      "index": 432,
+      "start": 1015.0,
+      "end": 1017.99,
+      "duration": 2.99,
+      "text": "definition and any arguments for the"
+    },
+    {
+      "index": 433,
+      "start": 1018.0,
+      "end": 1020.87,
+      "duration": 2.87,
+      "text": "function definition are called formal"
+    },
+    {
+      "index": 434,
+      "start": 1020.88,
+      "end": 1022.71,
+      "duration": 1.83,
+      "text": "parameters and they're called formal"
+    },
+    {
+      "index": 435,
+      "start": 1022.72,
+      "end": 1024.27,
+      "duration": 1.55,
+      "text": "parameters because notice they don't"
+    },
+    {
+      "index": 436,
+      "start": 1024.28,
+      "end": 1026.429,
+      "duration": 2.149,
+      "text": "actually have a value yet right in the"
+    },
+    {
+      "index": 437,
+      "start": 1026.439,
+      "end": 1028.309,
+      "duration": 1.87,
+      "text": "function definition you're sort of"
+    },
+    {
+      "index": 438,
+      "start": 1028.319,
+      "end": 1030.549,
+      "duration": 2.23,
+      "text": "writing the function assuming that in"
+    },
+    {
+      "index": 439,
+      "start": 1030.559,
+      "end": 1033.47,
+      "duration": 2.911,
+      "text": "this case X is going to have some value"
+    },
+    {
+      "index": 440,
+      "start": 1033.48,
+      "end": 1035.549,
+      "duration": 2.069,
+      "text": "but you don't know what it is"
+    },
+    {
+      "index": 441,
+      "start": 1035.559,
+      "end": 1039.35,
+      "duration": 3.791,
+      "text": "yet you only know what value X takes"
+    },
+    {
+      "index": 442,
+      "start": 1039.36,
+      "end": 1043.309,
+      "duration": 3.949,
+      "text": "when you make a function call down"
+    },
+    {
+      "index": 443,
+      "start": 1045.829,
+      "end": 1045.839,
+      "duration": 0.01,
+      "text": "here so this is your function definition"
+    },
+    {
+      "index": 444,
+      "start": 1045.839,
+      "end": 1047.51,
+      "duration": 1.671,
+      "text": "and then later on in your M Pro main"
+    },
+    {
+      "index": 445,
+      "start": 1047.52,
+      "end": 1050.07,
+      "duration": 2.55,
+      "text": "program you might Define some V variable"
+    },
+    {
+      "index": 446,
+      "start": 1050.08,
+      "end": 1052.07,
+      "duration": 1.99,
+      "text": "X is equal to three and then you make a"
+    },
+    {
+      "index": 447,
+      "start": 1052.08,
+      "end": 1056.029,
+      "duration": 3.949,
+      "text": "function call F ofx here is your"
+    },
+    {
+      "index": 448,
+      "start": 1056.039,
+      "end": 1058.35,
+      "duration": 2.311,
+      "text": "function"
+    },
+    {
+      "index": 449,
+      "start": 1058.36,
+      "end": 1061.43,
+      "duration": 3.07,
+      "text": "call and it says okay I'm calling f with"
+    },
+    {
+      "index": 450,
+      "start": 1061.44,
+      "end": 1063.31,
+      "duration": 1.87,
+      "text": "the value three because X takes the"
+    },
+    {
+      "index": 451,
+      "start": 1063.32,
+      "end": 1065.15,
+      "duration": 1.83,
+      "text": "value three and then I'm going to map"
+    },
+    {
+      "index": 452,
+      "start": 1065.16,
+      "end": 1068.15,
+      "duration": 2.99,
+      "text": "three into the"
+    },
+    {
+      "index": 453,
+      "start": 1070.909,
+      "end": 1070.919,
+      "duration": 0.01,
+      "text": "function the values that are passed into"
+    },
+    {
+      "index": 454,
+      "start": 1070.919,
+      "end": 1072.51,
+      "duration": 1.591,
+      "text": "the function call are called actual"
+    },
+    {
+      "index": 455,
+      "start": 1072.52,
+      "end": 1073.83,
+      "duration": 1.31,
+      "text": "parameters because they're going to"
+    },
+    {
+      "index": 456,
+      "start": 1073.84,
+      "end": 1075.39,
+      "duration": 1.55,
+      "text": "actually have a"
+    },
+    {
+      "index": 457,
+      "start": 1075.4,
+      "end": 1078.43,
+      "duration": 3.03,
+      "text": "value okay so let's step through this"
+    },
+    {
+      "index": 458,
+      "start": 1078.44,
+      "end": 1080.39,
+      "duration": 1.95,
+      "text": "program this little small program and"
+    },
+    {
+      "index": 459,
+      "start": 1080.4,
+      "end": 1082.11,
+      "duration": 1.71,
+      "text": "see what exactly happens behind the"
+    },
+    {
+      "index": 460,
+      "start": 1082.12,
+      "end": 1084.63,
+      "duration": 2.51,
+      "text": "scenes in the scope and if you're just"
+    },
+    {
+      "index": 461,
+      "start": 1084.64,
+      "end": 1086.23,
+      "duration": 1.59,
+      "text": "starting to program I think it would be"
+    },
+    {
+      "index": 462,
+      "start": 1086.24,
+      "end": 1088.07,
+      "duration": 1.83,
+      "text": "highly valuable if you take a piece of"
+    },
+    {
+      "index": 463,
+      "start": 1088.08,
+      "end": 1090.149,
+      "duration": 2.069,
+      "text": "paper as you're doing some of these"
+    },
+    {
+      "index": 464,
+      "start": 1090.159,
+      "end": 1092.43,
+      "duration": 2.271,
+      "text": "exercises and you write down something"
+    },
+    {
+      "index": 465,
+      "start": 1092.44,
+      "end": 1093.99,
+      "duration": 1.55,
+      "text": "similar to what I'm going to go through"
+    },
+    {
+      "index": 466,
+      "start": 1094.0,
+      "end": 1096.789,
+      "duration": 2.789,
+      "text": "here I think it'll help a lot and you'll"
+    },
+    {
+      "index": 467,
+      "start": 1096.799,
+      "end": 1098.87,
+      "duration": 2.071,
+      "text": "be able to see exactly you know step by"
+    },
+    {
+      "index": 468,
+      "start": 1098.88,
+      "end": 1101.35,
+      "duration": 2.47,
+      "text": "step what variables take what values and"
+    },
+    {
+      "index": 469,
+      "start": 1101.36,
+      "end": 1105.789,
+      "duration": 4.429,
+      "text": "which scope you're in okay so here we go"
+    },
+    {
+      "index": 470,
+      "start": 1105.799,
+      "end": 1107.71,
+      "duration": 1.911,
+      "text": "when the program first starts we're"
+    },
+    {
+      "index": 471,
+      "start": 1107.72,
+      "end": 1110.23,
+      "duration": 2.51,
+      "text": "creating This Global scope okay it's the"
+    },
+    {
+      "index": 472,
+      "start": 1110.24,
+      "end": 1112.39,
+      "duration": 2.15,
+      "text": "main program"
+    },
+    {
+      "index": 473,
+      "start": 1112.4,
+      "end": 1115.149,
+      "duration": 2.749,
+      "text": "scope in the main program scope the"
+    },
+    {
+      "index": 474,
+      "start": 1115.159,
+      "end": 1117.51,
+      "duration": 2.351,
+      "text": "first thing that Python's going to see"
+    },
+    {
+      "index": 475,
+      "start": 1117.52,
+      "end": 1122.35,
+      "duration": 4.83,
+      "text": "is this part here DF F ofx and then some"
+    },
+    {
+      "index": 476,
+      "start": 1122.36,
+      "end": 1126.27,
+      "duration": 3.91,
+      "text": "some stuff inside okay this tells python"
+    },
+    {
+      "index": 477,
+      "start": 1126.28,
+      "end": 1129.59,
+      "duration": 3.31,
+      "text": "I have a function named X but I don't"
+    },
+    {
+      "index": 478,
+      "start": 1129.6,
+      "end": 1132.59,
+      "duration": 2.99,
+      "text": "care what's inside the code yet I don't"
+    },
+    {
+      "index": 479,
+      "start": 1132.6,
+      "end": 1134.47,
+      "duration": 1.87,
+      "text": "care what's inside the function"
+    },
+    {
+      "index": 480,
+      "start": 1134.48,
+      "end": 1137.87,
+      "duration": 3.39,
+      "text": "definition yet because I haven't called"
+    },
+    {
+      "index": 481,
+      "start": 1137.88,
+      "end": 1139.35,
+      "duration": 1.47,
+      "text": "the function yet"
+    },
+    {
+      "index": 482,
+      "start": 1139.36,
+      "end": 1141.31,
+      "duration": 1.95,
+      "text": "right so to python it's just some code"
+    },
+    {
+      "index": 483,
+      "start": 1141.32,
+      "end": 1146.47,
+      "duration": 5.15,
+      "text": "just sitting in the global scope"
+    },
+    {
+      "index": 484,
+      "start": 1146.48,
+      "end": 1149.19,
+      "duration": 2.71,
+      "text": "okay so whenever you see DF you're just"
+    },
+    {
+      "index": 485,
+      "start": 1149.2,
+      "end": 1150.71,
+      "duration": 1.51,
+      "text": "putting some code in there then you go"
+    },
+    {
+      "index": 486,
+      "start": 1150.72,
+      "end": 1153.27,
+      "duration": 2.55,
+      "text": "on to the next line X is equal to three"
+    },
+    {
+      "index": 487,
+      "start": 1153.28,
+      "end": 1155.11,
+      "duration": 1.83,
+      "text": "so in the global scope you now have also"
+    },
+    {
+      "index": 488,
+      "start": 1155.12,
+      "end": 1156.909,
+      "duration": 1.789,
+      "text": "a variable X is"
+    },
+    {
+      "index": 489,
+      "start": 1156.919,
+      "end": 1159.789,
+      "duration": 2.87,
+      "text": "three and then the next line Z is equal"
+    },
+    {
+      "index": 490,
+      "start": 1159.799,
+      "end": 1163.11,
+      "duration": 3.311,
+      "text": "to F ofx is a function call as soon as"
+    },
+    {
+      "index": 491,
+      "start": 1163.12,
+      "end": 1165.27,
+      "duration": 2.15,
+      "text": "you hit a function call you create a new"
+    },
+    {
+      "index": 492,
+      "start": 1165.28,
+      "end": 1168.27,
+      "duration": 2.99,
+      "text": "scope a new environment okay so we're"
+    },
+    {
+      "index": 493,
+      "start": 1168.28,
+      "end": 1171.35,
+      "duration": 3.07,
+      "text": "temporary L leaving the global scope and"
+    },
+    {
+      "index": 494,
+      "start": 1171.36,
+      "end": 1174.51,
+      "duration": 3.15,
+      "text": "sort of you know portaling into a new"
+    },
+    {
+      "index": 495,
+      "start": 1174.52,
+      "end": 1176.47,
+      "duration": 1.95,
+      "text": "scope where we're going to try to figure"
+    },
+    {
+      "index": 496,
+      "start": 1176.48,
+      "end": 1178.43,
+      "duration": 1.95,
+      "text": "out what this function is going to do"
+    },
+    {
+      "index": 497,
+      "start": 1178.44,
+      "end": 1180.07,
+      "duration": 1.63,
+      "text": "and what it's going to"
+    },
+    {
+      "index": 498,
+      "start": 1180.08,
+      "end": 1183.789,
+      "duration": 3.709,
+      "text": "return so the first thing you do is you"
+    },
+    {
+      "index": 499,
+      "start": 1183.799,
+      "end": 1186.909,
+      "duration": 3.11,
+      "text": "map the parameters so X here I'm calling"
+    },
+    {
+      "index": 500,
+      "start": 1186.919,
+      "end": 1189.549,
+      "duration": 2.63,
+      "text": "f ofx with three so the first thing I'm"
+    },
+    {
+      "index": 501,
+      "start": 1189.559,
+      "end": 1191.07,
+      "duration": 1.511,
+      "text": "doing is I'm mapping every one of the"
+    },
+    {
+      "index": 502,
+      "start": 1191.08,
+      "end": 1193.029,
+      "duration": 1.949,
+      "text": "parameters in the definition to their"
+    },
+    {
+      "index": 503,
+      "start": 1193.039,
+      "end": 1194.99,
+      "duration": 1.951,
+      "text": "values so the first thing I'm doing is X"
+    },
+    {
+      "index": 504,
+      "start": 1195.0,
+      "end": 1199.149,
+      "duration": 4.149,
+      "text": "gets the value three"
+    },
+    {
+      "index": 505,
+      "start": 1203.63,
+      "end": 1203.64,
+      "duration": 0.01,
+      "text": "okay next line here is x equal x + 1 so"
+    },
+    {
+      "index": 506,
+      "start": 1203.64,
+      "end": 1205.99,
+      "duration": 2.35,
+      "text": "we're still inside the function called f"
+    },
+    {
+      "index": 507,
+      "start": 1206.0,
+      "end": 1209.11,
+      "duration": 3.11,
+      "text": "so X gets the value"
+    },
+    {
+      "index": 508,
+      "start": 1211.43,
+      "end": 1211.44,
+      "duration": 0.01,
+      "text": "four we're printing this and then we're"
+    },
+    {
+      "index": 509,
+      "start": 1211.44,
+      "end": 1212.47,
+      "duration": 1.03,
+      "text": "returning"
+    },
+    {
+      "index": 510,
+      "start": 1212.48,
+      "end": 1216.07,
+      "duration": 3.59,
+      "text": "X so in the scope of f x is equal to 4"
+    },
+    {
+      "index": 511,
+      "start": 1216.08,
+      "end": 1218.11,
+      "duration": 2.03,
+      "text": "so we're returning that value back to"
+    },
+    {
+      "index": 512,
+      "start": 1218.12,
+      "end": 1220.07,
+      "duration": 1.95,
+      "text": "whoever called it which was this"
+    },
+    {
+      "index": 513,
+      "start": 1220.08,
+      "end": 1223.149,
+      "duration": 3.069,
+      "text": "function call within the global scope so"
+    },
+    {
+      "index": 514,
+      "start": 1223.159,
+      "end": 1225.19,
+      "duration": 2.031,
+      "text": "this part right here F ofx which was the"
+    },
+    {
+      "index": 515,
+      "start": 1225.2,
+      "end": 1227.39,
+      "duration": 2.19,
+      "text": "function call gets replaced with"
+    },
+    {
+      "index": 516,
+      "start": 1227.4,
+      "end": 1230.51,
+      "duration": 3.11,
+      "text": "four so inside the main program Z is"
+    },
+    {
+      "index": 517,
+      "start": 1230.52,
+      "end": 1231.909,
+      "duration": 1.389,
+      "text": "equal to"
+    },
+    {
+      "index": 518,
+      "start": 1231.919,
+      "end": 1235.43,
+      "duration": 3.511,
+      "text": "4 okay and that's how we pass parameters"
+    },
+    {
+      "index": 519,
+      "start": 1235.44,
+      "end": 1237.99,
+      "duration": 2.55,
+      "text": "into the function and we got a parameter"
+    },
+    {
+      "index": 520,
+      "start": 1238.0,
+      "end": 1239.83,
+      "duration": 1.83,
+      "text": "back from the function as soon as the"
+    },
+    {
+      "index": 521,
+      "start": 1239.84,
+      "end": 1242.549,
+      "duration": 2.709,
+      "text": "function returns something the scope"
+    },
+    {
+      "index": 522,
+      "start": 1242.559,
+      "end": 1244.789,
+      "duration": 2.23,
+      "text": "that you were in for the function gets"
+    },
+    {
+      "index": 523,
+      "start": 1244.799,
+      "end": 1246.669,
+      "duration": 1.87,
+      "text": "erased you forget about every variable"
+    },
+    {
+      "index": 524,
+      "start": 1246.679,
+      "end": 1249.149,
+      "duration": 2.47,
+      "text": "that was created in there delete that"
+    },
+    {
+      "index": 525,
+      "start": 1249.159,
+      "end": 1250.87,
+      "duration": 1.711,
+      "text": "scope and you're back to wherever you"
+    },
+    {
+      "index": 526,
+      "start": 1250.88,
+      "end": 1252.789,
+      "duration": 1.909,
+      "text": "started calling"
+    },
+    {
+      "index": 527,
+      "start": 1252.799,
+      "end": 1256.95,
+      "duration": 4.151,
+      "text": "it one warning though so what happens if"
+    },
+    {
+      "index": 528,
+      "start": 1256.96,
+      "end": 1259.47,
+      "duration": 2.51,
+      "text": "there's no return statement I said that"
+    },
+    {
+      "index": 529,
+      "start": 1259.48,
+      "end": 1261.39,
+      "duration": 1.91,
+      "text": "every function has to return"
+    },
+    {
+      "index": 530,
+      "start": 1261.4,
+      "end": 1263.83,
+      "duration": 2.43,
+      "text": "something if you don't explicitly put a"
+    },
+    {
+      "index": 531,
+      "start": 1263.84,
+      "end": 1266.71,
+      "duration": 2.87,
+      "text": "return statement python is going to add"
+    },
+    {
+      "index": 532,
+      "start": 1266.72,
+      "end": 1269.11,
+      "duration": 2.39,
+      "text": "one for you you don't have to do this"
+    },
+    {
+      "index": 533,
+      "start": 1269.12,
+      "end": 1271.35,
+      "duration": 2.23,
+      "text": "and it's going to actually have return"
+    },
+    {
+      "index": 534,
+      "start": 1271.36,
+      "end": 1273.95,
+      "duration": 2.59,
+      "text": "none n o n"
+    },
+    {
+      "index": 535,
+      "start": 1273.96,
+      "end": 1278.029,
+      "duration": 4.069,
+      "text": "e and none is the special special type"
+    },
+    {
+      "index": 536,
+      "start": 1278.039,
+      "end": 1280.23,
+      "duration": 2.191,
+      "text": "uh none is a the value for a special"
+    },
+    {
+      "index": 537,
+      "start": 1280.24,
+      "end": 1283.11,
+      "duration": 2.87,
+      "text": "type called nun type and it represents"
+    },
+    {
+      "index": 538,
+      "start": 1283.12,
+      "end": 1284.87,
+      "duration": 1.75,
+      "text": "the absence of a"
+    },
+    {
+      "index": 539,
+      "start": 1284.88,
+      "end": 1288.71,
+      "duration": 3.83,
+      "text": "value okay"
+    },
+    {
+      "index": 540,
+      "start": 1288.72,
+      "end": 1292.07,
+      "duration": 3.35,
+      "text": "that not a string not not a none is not"
+    },
+    {
+      "index": 541,
+      "start": 1292.08,
+      "end": 1294.75,
+      "duration": 2.67,
+      "text": "a string not none is not a string"
+    },
+    {
+      "index": 542,
+      "start": 1294.76,
+      "end": 1299.149,
+      "duration": 4.389,
+      "text": "exactly it's a special special"
+    },
+    {
+      "index": 543,
+      "start": 1303.149,
+      "end": 1303.159,
+      "duration": 0.01,
+      "text": "type okay so before we go on I wanted to"
+    },
+    {
+      "index": 544,
+      "start": 1303.159,
+      "end": 1305.31,
+      "duration": 2.151,
+      "text": "go through a small exercise and spider"
+    },
+    {
+      "index": 545,
+      "start": 1305.32,
+      "end": 1306.87,
+      "duration": 1.55,
+      "text": "just to just to show you the difference"
+    },
+    {
+      "index": 546,
+      "start": 1306.88,
+      "end": 1309.47,
+      "duration": 2.59,
+      "text": "that none and uh and printing and"
+    },
+    {
+      "index": 547,
+      "start": 1309.48,
+      "end": 1311.149,
+      "duration": 1.669,
+      "text": "returning makes so here are two"
+    },
+    {
+      "index": 548,
+      "start": 1311.159,
+      "end": 1312.269,
+      "duration": 1.11,
+      "text": "functions that I"
+    },
+    {
+      "index": 549,
+      "start": 1312.279,
+      "end": 1315.35,
+      "duration": 3.071,
+      "text": "wrote one is is even with return that's"
+    },
+    {
+      "index": 550,
+      "start": 1315.36,
+      "end": 1318.83,
+      "duration": 3.47,
+      "text": "its name so it's pretty descriptive"
+    },
+    {
+      "index": 551,
+      "start": 1318.84,
+      "end": 1320.47,
+      "duration": 1.63,
+      "text": "it's pretty much the same code we saw in"
+    },
+    {
+      "index": 552,
+      "start": 1320.48,
+      "end": 1321.23,
+      "duration": 0.75,
+      "text": "the"
+    },
+    {
+      "index": 553,
+      "start": 1321.24,
+      "end": 1323.549,
+      "duration": 2.309,
+      "text": "slides it just has this extra little"
+    },
+    {
+      "index": 554,
+      "start": 1323.559,
+      "end": 1327.07,
+      "duration": 3.511,
+      "text": "print thing it gets the remainder when"
+    },
+    {
+      "index": 555,
+      "start": 1327.08,
+      "end": 1330.39,
+      "duration": 3.31,
+      "text": "uh I is Divi uh divided by two and it"
+    },
+    {
+      "index": 556,
+      "start": 1330.4,
+      "end": 1332.31,
+      "duration": 1.91,
+      "text": "returns whether the remainder is equal"
+    },
+    {
+      "index": 557,
+      "start": 1332.32,
+      "end": 1334.71,
+      "duration": 2.39,
+      "text": "to zero so it'll either return a true or"
+    },
+    {
+      "index": 558,
+      "start": 1334.72,
+      "end": 1337.51,
+      "duration": 2.79,
+      "text": "a false a"
+    },
+    {
+      "index": 559,
+      "start": 1340.669,
+      "end": 1340.679,
+      "duration": 0.01,
+      "text": "Boolean okay so my function call is"
+    },
+    {
+      "index": 560,
+      "start": 1340.679,
+      "end": 1343.75,
+      "duration": 3.071,
+      "text": "this I'm saying is even with return with"
+    },
+    {
+      "index": 561,
+      "start": 1343.76,
+      "end": 1345.789,
+      "duration": 2.029,
+      "text": "the uh value"
+    },
+    {
+      "index": 562,
+      "start": 1345.799,
+      "end": 1348.07,
+      "duration": 2.271,
+      "text": "three when I make this function call"
+    },
+    {
+      "index": 563,
+      "start": 1348.08,
+      "end": 1350.99,
+      "duration": 2.91,
+      "text": "this three three gets mapped into here"
+    },
+    {
+      "index": 564,
+      "start": 1351.0,
+      "end": 1354.11,
+      "duration": 3.11,
+      "text": "this variable here so I is equal to"
+    },
+    {
+      "index": 565,
+      "start": 1354.12,
+      "end": 1356.99,
+      "duration": 2.87,
+      "text": "3 I'm going to print with return and"
+    },
+    {
+      "index": 566,
+      "start": 1357.0,
+      "end": 1358.51,
+      "duration": 1.51,
+      "text": "then I'm going to say remainder is equal"
+    },
+    {
+      "index": 567,
+      "start": 1358.52,
+      "end": 1361.789,
+      "duration": 3.269,
+      "text": "to 3% 2 which comes out to Value one"
+    },
+    {
+      "index": 568,
+      "start": 1361.799,
+      "end": 1363.99,
+      "duration": 2.191,
+      "text": "because there's a remainder one and I'm"
+    },
+    {
+      "index": 569,
+      "start": 1364.0,
+      "end": 1365.669,
+      "duration": 1.669,
+      "text": "going to return whether one is equal to"
+    },
+    {
+      "index": 570,
+      "start": 1365.679,
+      "end": 1368.71,
+      "duration": 3.031,
+      "text": "zero which is false okay so this this"
+    },
+    {
+      "index": 571,
+      "start": 1368.72,
+      "end": 1371.83,
+      "duration": 3.11,
+      "text": "line here returns false but am I doing"
+    },
+    {
+      "index": 572,
+      "start": 1371.84,
+      "end": 1374.83,
+      "duration": 2.99,
+      "text": "anything with a false not really it's"
+    },
+    {
+      "index": 573,
+      "start": 1374.84,
+      "end": 1376.909,
+      "duration": 2.069,
+      "text": "just sort of sitting in the code here"
+    },
+    {
+      "index": 574,
+      "start": 1376.919,
+      "end": 1379.35,
+      "duration": 2.431,
+      "text": "okay so this gets evalu"
+    },
+    {
+      "index": 575,
+      "start": 1379.36,
+      "end": 1383.87,
+      "duration": 4.51,
+      "text": "valed to um false I'm not printing it"
+    },
+    {
+      "index": 576,
+      "start": 1383.88,
+      "end": 1385.35,
+      "duration": 1.47,
+      "text": "I'm not doing any operations with it"
+    },
+    {
+      "index": 577,
+      "start": 1385.36,
+      "end": 1386.63,
+      "duration": 1.27,
+      "text": "it's just sitting there so it won't show"
+    },
+    {
+      "index": 578,
+      "start": 1386.64,
+      "end": 1388.75,
+      "duration": 2.11,
+      "text": "up anywhere if I want the result to show"
+    },
+    {
+      "index": 579,
+      "start": 1388.76,
+      "end": 1390.39,
+      "duration": 1.63,
+      "text": "up somewhere then I have to print it so"
+    },
+    {
+      "index": 580,
+      "start": 1390.4,
+      "end": 1392.669,
+      "duration": 2.269,
+      "text": "that's what this next Line's"
+    },
+    {
+      "index": 581,
+      "start": 1392.679,
+      "end": 1394.43,
+      "duration": 1.751,
+      "text": "doing"
+    },
+    {
+      "index": 582,
+      "start": 1394.44,
+      "end": 1396.909,
+      "duration": 2.469,
+      "text": "okay so that one should be straight uh"
+    },
+    {
+      "index": 583,
+      "start": 1396.919,
+      "end": 1398.75,
+      "duration": 1.831,
+      "text": "straightforward is even with that"
+    },
+    {
+      "index": 584,
+      "start": 1398.76,
+      "end": 1400.269,
+      "duration": 1.509,
+      "text": "returns a little bit trickier but not"
+    },
+    {
+      "index": 585,
+      "start": 1400.279,
+      "end": 1403.549,
+      "duration": 3.27,
+      "text": "too bad I have print without return"
+    },
+    {
+      "index": 586,
+      "start": 1403.559,
+      "end": 1406.71,
+      "duration": 3.151,
+      "text": "inside here and then I'm going to get a"
+    },
+    {
+      "index": 587,
+      "start": 1406.72,
+      "end": 1410.029,
+      "duration": 3.309,
+      "text": "remainder um is equal to i% 2 and notice"
+    },
+    {
+      "index": 588,
+      "start": 1410.039,
+      "end": 1411.71,
+      "duration": 1.671,
+      "text": "that I'm not have I don't have any"
+    },
+    {
+      "index": 589,
+      "start": 1411.72,
+      "end": 1414.19,
+      "duration": 2.47,
+      "text": "return so implicitly Python's going to"
+    },
+    {
+      "index": 590,
+      "start": 1414.2,
+      "end": 1416.99,
+      "duration": 2.79,
+      "text": "add a return none for me like that you"
+    },
+    {
+      "index": 591,
+      "start": 1417.0,
+      "end": 1419.63,
+      "duration": 2.63,
+      "text": "don't have to add"
+    },
+    {
+      "index": 592,
+      "start": 1419.64,
+      "end": 1422.31,
+      "duration": 2.67,
+      "text": "it so when I make the function call here"
+    },
+    {
+      "index": 593,
+      "start": 1422.32,
+      "end": 1423.87,
+      "duration": 1.55,
+      "text": "it's going to do the same thing except"
+    },
+    {
+      "index": 594,
+      "start": 1423.88,
+      "end": 1425.669,
+      "duration": 1.789,
+      "text": "the return in this case is not going to"
+    },
+    {
+      "index": 595,
+      "start": 1425.679,
+      "end": 1427.11,
+      "duration": 1.431,
+      "text": "be a Boolean it's going to be this"
+    },
+    {
+      "index": 596,
+      "start": 1427.12,
+      "end": 1429.87,
+      "duration": 2.75,
+      "text": "special none right so this is going to"
+    },
+    {
+      "index": 597,
+      "start": 1429.88,
+      "end": 1432.75,
+      "duration": 2.87,
+      "text": "get evaluated"
+    },
+    {
+      "index": 598,
+      "start": 1436.75,
+      "end": 1436.76,
+      "duration": 0.01,
+      "text": "To None again I'm not printing it out"
+    },
+    {
+      "index": 599,
+      "start": 1436.76,
+      "end": 1439.11,
+      "duration": 2.35,
+      "text": "it's just sitting there"
+    },
+    {
+      "index": 600,
+      "start": 1439.12,
+      "end": 1442.51,
+      "duration": 3.39,
+      "text": "if I were to print out the result of"
+    },
+    {
+      "index": 601,
+      "start": 1442.52,
+      "end": 1444.75,
+      "duration": 2.23,
+      "text": "that you'd be printing out this value"
+    },
+    {
+      "index": 602,
+      "start": 1444.76,
+      "end": 1447.95,
+      "duration": 3.19,
+      "text": "none which if I run it you'll see here"
+    },
+    {
+      "index": 603,
+      "start": 1447.96,
+      "end": 1451.669,
+      "duration": 3.709,
+      "text": "it just prints it out right there okay"
+    },
+    {
+      "index": 604,
+      "start": 1451.679,
+      "end": 1454.029,
+      "duration": 2.35,
+      "text": "so as you're doing your next pet it's"
+    },
+    {
+      "index": 605,
+      "start": 1454.039,
+      "end": 1455.909,
+      "duration": 1.87,
+      "text": "it's about functions and you're seeing"
+    },
+    {
+      "index": 606,
+      "start": 1455.919,
+      "end": 1458.269,
+      "duration": 2.35,
+      "text": "these nuns popping out in some places"
+    },
+    {
+      "index": 607,
+      "start": 1458.279,
+      "end": 1459.789,
+      "duration": 1.51,
+      "text": "check to make sure that you've actually"
+    },
+    {
+      "index": 608,
+      "start": 1459.799,
+      "end": 1462.19,
+      "duration": 2.391,
+      "text": "returned something as opposed to just"
+    },
+    {
+      "index": 609,
+      "start": 1462.2,
+      "end": 1464.07,
+      "duration": 1.87,
+      "text": "printed something inside the function"
+    },
+    {
+      "index": 610,
+      "start": 1464.08,
+      "end": 1469.549,
+      "duration": 5.469,
+      "text": "right like we did here okay"
+    },
+    {
+      "index": 611,
+      "start": 1470.83,
+      "end": 1470.84,
+      "duration": 0.01,
+      "text": "all right so that's the difference and"
+    },
+    {
+      "index": 612,
+      "start": 1470.84,
+      "end": 1472.83,
+      "duration": 1.99,
+      "text": "the last thing I want to mention about"
+    },
+    {
+      "index": 613,
+      "start": 1472.84,
+      "end": 1475.83,
+      "duration": 2.99,
+      "text": "this is even function is um is how"
+    },
+    {
+      "index": 614,
+      "start": 1475.84,
+      "end": 1478.19,
+      "duration": 2.35,
+      "text": "useful it can be so notice so this is"
+    },
+    {
+      "index": 615,
+      "start": 1478.2,
+      "end": 1481.549,
+      "duration": 3.349,
+      "text": "the function um as in the slides and"
+    },
+    {
+      "index": 616,
+      "start": 1481.559,
+      "end": 1484.59,
+      "duration": 3.031,
+      "text": "once you write the function"
+    },
+    {
+      "index": 617,
+      "start": 1484.6,
+      "end": 1487.029,
+      "duration": 2.429,
+      "text": "once you can use it many many times in"
+    },
+    {
+      "index": 618,
+      "start": 1487.039,
+      "end": 1490.549,
+      "duration": 3.51,
+      "text": "your code so here I have uh I'm using"
+    },
+    {
+      "index": 619,
+      "start": 1490.559,
+      "end": 1492.669,
+      "duration": 2.11,
+      "text": "the function is even to print the"
+    },
+    {
+      "index": 620,
+      "start": 1492.679,
+      "end": 1495.149,
+      "duration": 2.47,
+      "text": "numbers between 0 and 19 including and"
+    },
+    {
+      "index": 621,
+      "start": 1495.159,
+      "end": 1497.789,
+      "duration": 2.63,
+      "text": "whether the number is even or odd so"
+    },
+    {
+      "index": 622,
+      "start": 1497.799,
+      "end": 1500.31,
+      "duration": 2.511,
+      "text": "notice this piece of code here once I've"
+    },
+    {
+      "index": 623,
+      "start": 1500.32,
+      "end": 1502.11,
+      "duration": 1.79,
+      "text": "written this function is even looks"
+    },
+    {
+      "index": 624,
+      "start": 1502.12,
+      "end": 1504.23,
+      "duration": 2.11,
+      "text": "really really nice"
+    },
+    {
+      "index": 625,
+      "start": 1504.24,
+      "end": 1507.149,
+      "duration": 2.909,
+      "text": "right I have four all the numbers in"
+    },
+    {
+      "index": 626,
+      "start": 1507.159,
+      "end": 1508.95,
+      "duration": 1.791,
+      "text": "this range"
+    },
+    {
+      "index": 627,
+      "start": 1508.96,
+      "end": 1513.269,
+      "duration": 4.309,
+      "text": "if the number I is even right this is"
+    },
+    {
+      "index": 628,
+      "start": 1513.279,
+      "end": 1515.51,
+      "duration": 2.231,
+      "text": "going to return a true or"
+    },
+    {
+      "index": 629,
+      "start": 1515.52,
+      "end": 1519.07,
+      "duration": 3.55,
+      "text": "false for all the numbers 0 1 2 3"
+    },
+    {
+      "index": 630,
+      "start": 1519.08,
+      "end": 1521.549,
+      "duration": 2.469,
+      "text": "4 if it's true then I'm going to print"
+    },
+    {
+      "index": 631,
+      "start": 1521.559,
+      "end": 1523.149,
+      "duration": 1.59,
+      "text": "out even and otherwise I'm going to"
+    },
+    {
+      "index": 632,
+      "start": 1523.159,
+      "end": 1525.43,
+      "duration": 2.271,
+      "text": "print out odd so if I run this it's"
+    },
+    {
+      "index": 633,
+      "start": 1525.44,
+      "end": 1527.789,
+      "duration": 2.349,
+      "text": "going to do this zero even one odd two"
+    },
+    {
+      "index": 634,
+      "start": 1527.799,
+      "end": 1530.99,
+      "duration": 3.191,
+      "text": "even and so so on so notice using"
+    },
+    {
+      "index": 635,
+      "start": 1531.0,
+      "end": 1533.07,
+      "duration": 2.07,
+      "text": "functions makes my code really nice"
+    },
+    {
+      "index": 636,
+      "start": 1533.08,
+      "end": 1534.909,
+      "duration": 1.829,
+      "text": "looking right if I wasn't using"
+    },
+    {
+      "index": 637,
+      "start": 1534.919,
+      "end": 1536.47,
+      "duration": 1.551,
+      "text": "functions I'd have to put these two"
+    },
+    {
+      "index": 638,
+      "start": 1536.48,
+      "end": 1541.31,
+      "duration": 4.83,
+      "text": "lines somewhere inside here right and it"
+    },
+    {
+      "index": 639,
+      "start": 1541.32,
+      "end": 1547.07,
+      "duration": 5.75,
+      "text": "would look a little bit"
+    },
+    {
+      "index": 640,
+      "start": 1549.669,
+      "end": 1549.679,
+      "duration": 0.01,
+      "text": "Messier so I've said this maybe once or"
+    },
+    {
+      "index": 641,
+      "start": 1549.679,
+      "end": 1553.35,
+      "duration": 3.671,
+      "text": "twice before in Python everything is an"
+    },
+    {
+      "index": 642,
+      "start": 1553.36,
+      "end": 1555.549,
+      "duration": 2.189,
+      "text": "object"
+    },
+    {
+      "index": 643,
+      "start": 1555.559,
+      "end": 1557.83,
+      "duration": 2.271,
+      "text": "okay might not have meant anything back"
+    },
+    {
+      "index": 644,
+      "start": 1557.84,
+      "end": 1558.95,
+      "duration": 1.11,
+      "text": "then"
+    },
+    {
+      "index": 645,
+      "start": 1558.96,
+      "end": 1561.389,
+      "duration": 2.429,
+      "text": "but I think you're going to see what I"
+    },
+    {
+      "index": 646,
+      "start": 1561.399,
+      "end": 1565.029,
+      "duration": 3.63,
+      "text": "mean using this particular example okay"
+    },
+    {
+      "index": 647,
+      "start": 1565.039,
+      "end": 1567.789,
+      "duration": 2.75,
+      "text": "so if if in Python everything's an"
+    },
+    {
+      "index": 648,
+      "start": 1567.799,
+      "end": 1569.669,
+      "duration": 1.87,
+      "text": "object integers are objects flots are"
+    },
+    {
+      "index": 649,
+      "start": 1569.679,
+      "end": 1573.07,
+      "duration": 3.391,
+      "text": "objects even functions are objects okay"
+    },
+    {
+      "index": 650,
+      "start": 1573.08,
+      "end": 1575.59,
+      "duration": 2.51,
+      "text": "so as you can pass objects as parameters"
+    },
+    {
+      "index": 651,
+      "start": 1575.6,
+      "end": 1577.99,
+      "duration": 2.39,
+      "text": "back and forth as function you know as"
+    },
+    {
+      "index": 652,
+      "start": 1578.0,
+      "end": 1580.35,
+      "duration": 2.35,
+      "text": "function parameters you can also pass"
+    },
+    {
+      "index": 653,
+      "start": 1580.36,
+      "end": 1582.75,
+      "duration": 2.39,
+      "text": "other functions as as"
+    },
+    {
+      "index": 654,
+      "start": 1582.76,
+      "end": 1586.11,
+      "duration": 3.35,
+      "text": "parameters let's see what this means so"
+    },
+    {
+      "index": 655,
+      "start": 1586.12,
+      "end": 1588.83,
+      "duration": 2.71,
+      "text": "we have three function definitions here"
+    },
+    {
+      "index": 656,
+      "start": 1588.84,
+      "end": 1591.99,
+      "duration": 3.15,
+      "text": "Funk a funk B and Funk"
+    },
+    {
+      "index": 657,
+      "start": 1592.0,
+      "end": 1594.59,
+      "duration": 2.59,
+      "text": "C and then I have three lines of code"
+    },
+    {
+      "index": 658,
+      "start": 1594.6,
+      "end": 1597.19,
+      "duration": 2.59,
+      "text": "here in my main program so I have one"
+    },
+    {
+      "index": 659,
+      "start": 1597.2,
+      "end": 1600.07,
+      "duration": 2.87,
+      "text": "call to Funk a one call to Funk B and"
+    },
+    {
+      "index": 660,
+      "start": 1600.08,
+      "end": 1602.99,
+      "duration": 2.91,
+      "text": "one call to Funk C let's Trace through"
+    },
+    {
+      "index": 661,
+      "start": 1603.0,
+      "end": 1604.43,
+      "duration": 1.43,
+      "text": "just like in the previous example and"
+    },
+    {
+      "index": 662,
+      "start": 1604.44,
+      "end": 1605.789,
+      "duration": 1.349,
+      "text": "see what exactly"
+    },
+    {
+      "index": 663,
+      "start": 1605.799,
+      "end": 1607.909,
+      "duration": 2.11,
+      "text": "happens first thing I create is my"
+    },
+    {
+      "index": 664,
+      "start": 1607.919,
+      "end": 1609.149,
+      "duration": 1.23,
+      "text": "Global"
+    },
+    {
+      "index": 665,
+      "start": 1609.159,
+      "end": 1611.669,
+      "duration": 2.51,
+      "text": "scope and I have three function"
+    },
+    {
+      "index": 666,
+      "start": 1611.679,
+      "end": 1613.389,
+      "duration": 1.71,
+      "text": "definitions again I don't care what's in"
+    },
+    {
+      "index": 667,
+      "start": 1613.399,
+      "end": 1614.95,
+      "duration": 1.551,
+      "text": "the code yet because I haven't called"
+    },
+    {
+      "index": 668,
+      "start": 1614.96,
+      "end": 1616.87,
+      "duration": 1.91,
+      "text": "the functions yet okay python just knows"
+    },
+    {
+      "index": 669,
+      "start": 1616.88,
+      "end": 1618.59,
+      "duration": 1.71,
+      "text": "there's these functions would these"
+    },
+    {
+      "index": 670,
+      "start": 1618.6,
+      "end": 1621.59,
+      "duration": 2.99,
+      "text": "names that contain some"
+    },
+    {
+      "index": 671,
+      "start": 1621.6,
+      "end": 1624.07,
+      "duration": 2.47,
+      "text": "code after these definitions I come to"
+    },
+    {
+      "index": 672,
+      "start": 1624.08,
+      "end": 1626.87,
+      "duration": 2.79,
+      "text": "this line here print Funk a as soon as I"
+    },
+    {
+      "index": 673,
+      "start": 1626.88,
+      "end": 1628.95,
+      "duration": 2.07,
+      "text": "make a function call I'm going to create"
+    },
+    {
+      "index": 674,
+      "start": 1628.96,
+      "end": 1630.43,
+      "duration": 1.47,
+      "text": "a new scope and I'm going to hop into"
+    },
+    {
+      "index": 675,
+      "start": 1630.44,
+      "end": 1633.31,
+      "duration": 2.87,
+      "text": "there okay inside Funk"
+    },
+    {
+      "index": 676,
+      "start": 1633.32,
+      "end": 1636.909,
+      "duration": 3.589,
+      "text": "a I'm going to go and look at what Funk"
+    },
+    {
+      "index": 677,
+      "start": 1636.919,
+      "end": 1639.07,
+      "duration": 2.151,
+      "text": "a does it doesn't take any parameters it"
+    },
+    {
+      "index": 678,
+      "start": 1639.08,
+      "end": 1642.63,
+      "duration": 3.55,
+      "text": "just prints out this this this message"
+    },
+    {
+      "index": 679,
+      "start": 1642.64,
+      "end": 1645.389,
+      "duration": 2.749,
+      "text": "here and then it it leaves it's"
+    },
+    {
+      "index": 680,
+      "start": 1645.399,
+      "end": 1650.31,
+      "duration": 4.911,
+      "text": "done there's no return so we return none"
+    },
+    {
+      "index": 681,
+      "start": 1650.32,
+      "end": 1652.51,
+      "duration": 2.19,
+      "text": "so Funk a returns none to whoever called"
+    },
+    {
+      "index": 682,
+      "start": 1652.52,
+      "end": 1657.35,
+      "duration": 4.83,
+      "text": "it which was that line there so that is"
+    },
+    {
+      "index": 683,
+      "start": 1657.36,
+      "end": 1661.909,
+      "duration": 4.549,
+      "text": "going to be"
+    },
+    {
+      "index": 684,
+      "start": 1664.83,
+      "end": 1664.84,
+      "duration": 0.01,
+      "text": "none next line this one right here print"
+    },
+    {
+      "index": 685,
+      "start": 1664.84,
+      "end": 1667.47,
+      "duration": 2.63,
+      "text": "five plus some function"
+    },
+    {
+      "index": 686,
+      "start": 1667.48,
+      "end": 1670.11,
+      "duration": 2.63,
+      "text": "call again I'm going to hop into Funk B"
+    },
+    {
+      "index": 687,
+      "start": 1670.12,
+      "end": 1673.87,
+      "duration": 3.75,
+      "text": "scope and see what to do there so first"
+    },
+    {
+      "index": 688,
+      "start": 1673.88,
+      "end": 1676.71,
+      "duration": 2.83,
+      "text": "I'm going to map my parameters so two"
+    },
+    {
+      "index": 689,
+      "start": 1676.72,
+      "end": 1679.47,
+      "duration": 2.75,
+      "text": "whoops two gets mapped to"
+    },
+    {
+      "index": 690,
+      "start": 1679.48,
+      "end": 1682.59,
+      "duration": 3.11,
+      "text": "y so inside Funk B's scope Y is going to"
+    },
+    {
+      "index": 691,
+      "start": 1682.6,
+      "end": 1684.35,
+      "duration": 1.75,
+      "text": "get the value two that's the very first"
+    },
+    {
+      "index": 692,
+      "start": 1684.36,
+      "end": 1686.11,
+      "duration": 1.75,
+      "text": "thing I'm doing mapping all the"
+    },
+    {
+      "index": 693,
+      "start": 1686.12,
+      "end": 1688.029,
+      "duration": 1.909,
+      "text": "parameters then I'm going to print this"
+    },
+    {
+      "index": 694,
+      "start": 1688.039,
+      "end": 1689.83,
+      "duration": 1.791,
+      "text": "thing here and then I'm going to return"
+    },
+    {
+      "index": 695,
+      "start": 1689.84,
+      "end": 1693.029,
+      "duration": 3.189,
+      "text": "y so inside Funk b y has the value two"
+    },
+    {
+      "index": 696,
+      "start": 1693.039,
+      "end": 1694.71,
+      "duration": 1.671,
+      "text": "and I'm returning two back to whoever"
+    },
+    {
+      "index": 697,
+      "start": 1694.72,
+      "end": 1696.87,
+      "duration": 2.15,
+      "text": "called"
+    },
+    {
+      "index": 698,
+      "start": 1696.88,
+      "end": 1702.389,
+      "duration": 5.509,
+      "text": "me okay so this is the value two and I'm"
+    },
+    {
+      "index": 699,
+      "start": 1702.399,
+      "end": 1705.87,
+      "duration": 3.471,
+      "text": "going to print 5 plus 2 which is"
+    },
+    {
+      "index": 700,
+      "start": 1709.07,
+      "end": 1709.08,
+      "duration": 0.01,
+      "text": "seven last one this is a tricky"
+    },
+    {
+      "index": 701,
+      "start": 1709.08,
+      "end": 1710.59,
+      "duration": 1.51,
+      "text": "that popped up if you think you've got"
+    },
+    {
+      "index": 702,
+      "start": 1710.6,
+      "end": 1712.43,
+      "duration": 1.83,
+      "text": "it try that exercise but otherwise"
+    },
+    {
+      "index": 703,
+      "start": 1712.44,
+      "end": 1713.63,
+      "duration": 1.19,
+      "text": "follow"
+    },
+    {
+      "index": 704,
+      "start": 1713.64,
+      "end": 1720.269,
+      "duration": 6.629,
+      "text": "along print funky Funk a okay so I see"
+    },
+    {
+      "index": 705,
+      "start": 1720.279,
+      "end": 1723.99,
+      "duration": 3.711,
+      "text": "that I am going to enter Funk C's"
+    },
+    {
+      "index": 706,
+      "start": 1724.0,
+      "end": 1726.389,
+      "duration": 2.389,
+      "text": "scope so I'm going to look at funy do"
+    },
+    {
+      "index": 707,
+      "start": 1726.399,
+      "end": 1729.029,
+      "duration": 2.63,
+      "text": "what funy does first thing I do is I'm"
+    },
+    {
+      "index": 708,
+      "start": 1729.039,
+      "end": 1731.029,
+      "duration": 1.99,
+      "text": "mapping all the parameters don't even"
+    },
+    {
+      "index": 709,
+      "start": 1731.039,
+      "end": 1732.59,
+      "duration": 1.551,
+      "text": "worry about the fact that this is a"
+    },
+    {
+      "index": 710,
+      "start": 1732.6,
+      "end": 1734.75,
+      "duration": 2.15,
+      "text": "function right now just pretend it's you"
+    },
+    {
+      "index": 711,
+      "start": 1734.76,
+      "end": 1738.75,
+      "duration": 3.99,
+      "text": "know X or something so you say funk a a"
+    },
+    {
+      "index": 712,
+      "start": 1738.76,
+      "end": 1741.509,
+      "duration": 2.749,
+      "text": "is going to get mapped to the variable Z"
+    },
+    {
+      "index": 713,
+      "start": 1741.519,
+      "end": 1746.71,
+      "duration": 5.191,
+      "text": "inside funy so Z is funy just mapping"
+    },
+    {
+      "index": 714,
+      "start": 1746.72,
+      "end": 1749.23,
+      "duration": 2.51,
+      "text": "parameters from actual to"
+    },
+    {
+      "index": 715,
+      "start": 1749.24,
+      "end": 1751.789,
+      "duration": 2.549,
+      "text": "formal then what do we do inside Funk C"
+    },
+    {
+      "index": 716,
+      "start": 1751.799,
+      "end": 1755.19,
+      "duration": 3.391,
+      "text": "we print out inside Funk"
+    },
+    {
+      "index": 717,
+      "start": 1758.31,
+      "end": 1758.32,
+      "duration": 0.01,
+      "text": "C and then we"
+    },
+    {
+      "index": 718,
+      "start": 1758.32,
+      "end": 1761.35,
+      "duration": 3.03,
+      "text": "return"
+    },
+    {
+      "index": 719,
+      "start": 1763.87,
+      "end": 1763.88,
+      "duration": 0.01,
+      "text": "Z this is the cool"
+    },
+    {
+      "index": 720,
+      "start": 1763.88,
+      "end": 1769.07,
+      "duration": 5.19,
+      "text": "part inside Funk c z is Funk a"
+    },
+    {
+      "index": 721,
+      "start": 1769.08,
+      "end": 1771.11,
+      "duration": 2.03,
+      "text": "so if you replace Z with funk"
+    },
+    {
+      "index": 722,
+      "start": 1771.12,
+      "end": 1774.789,
+      "duration": 3.669,
+      "text": "a this here becomes return Funk a open"
+    },
+    {
+      "index": 723,
+      "start": 1774.799,
+      "end": 1775.75,
+      "duration": 0.951,
+      "text": "close"
+    },
+    {
+      "index": 724,
+      "start": 1775.76,
+      "end": 1777.71,
+      "duration": 1.95,
+      "text": "parenthesis look"
+    },
+    {
+      "index": 725,
+      "start": 1777.72,
+      "end": 1780.47,
+      "duration": 2.75,
+      "text": "familiar we did that function call right"
+    },
+    {
+      "index": 726,
+      "start": 1780.48,
+      "end": 1781.789,
+      "duration": 1.309,
+      "text": "there right so that's just another"
+    },
+    {
+      "index": 727,
+      "start": 1781.799,
+      "end": 1787.31,
+      "duration": 5.511,
+      "text": "function"
+    },
+    {
+      "index": 728,
+      "start": 1789.669,
+      "end": 1789.679,
+      "duration": 0.01,
+      "text": "call so with that being another function"
+    },
+    {
+      "index": 729,
+      "start": 1789.679,
+      "end": 1790.909,
+      "duration": 1.23,
+      "text": "call you're going to create another"
+    },
+    {
+      "index": 730,
+      "start": 1790.919,
+      "end": 1792.669,
+      "duration": 1.75,
+      "text": "scope and you're going to pop into that"
+    },
+    {
+      "index": 731,
+      "start": 1792.679,
+      "end": 1796.19,
+      "duration": 3.511,
+      "text": "one so we're one two I guess two Scopes"
+    },
+    {
+      "index": 732,
+      "start": 1796.2,
+      "end": 1797.789,
+      "duration": 1.589,
+      "text": "deep we're trying to figure out where"
+    },
+    {
+      "index": 733,
+      "start": 1797.799,
+      "end": 1801.35,
+      "duration": 3.551,
+      "text": "we're going so Funk A's scope is going"
+    },
+    {
+      "index": 734,
+      "start": 1801.36,
+      "end": 1803.509,
+      "duration": 2.149,
+      "text": "to be up here so what does Funk a do it"
+    },
+    {
+      "index": 735,
+      "start": 1803.519,
+      "end": 1806.63,
+      "duration": 3.111,
+      "text": "just prints out this and it returns none"
+    },
+    {
+      "index": 736,
+      "start": 1806.64,
+      "end": 1808.35,
+      "duration": 1.71,
+      "text": "so we're going to return none to whoever"
+    },
+    {
+      "index": 737,
+      "start": 1808.36,
+      "end": 1811.149,
+      "duration": 2.789,
+      "text": "called us which was Funk"
+    },
+    {
+      "index": 738,
+      "start": 1811.159,
+      "end": 1817.75,
+      "duration": 6.591,
+      "text": "C so this line here becomes return"
+    },
+    {
+      "index": 739,
+      "start": 1820.31,
+      "end": 1820.32,
+      "duration": 0.01,
+      "text": "none and so this line here is going to"
+    },
+    {
+      "index": 740,
+      "start": 1820.32,
+      "end": 1822.43,
+      "duration": 2.11,
+      "text": "return none to whoever called it which"
+    },
+    {
+      "index": 741,
+      "start": 1822.44,
+      "end": 1824.59,
+      "duration": 2.15,
+      "text": "was this line down"
+    },
+    {
+      "index": 742,
+      "start": 1824.6,
+      "end": 1828.789,
+      "duration": 4.189,
+      "text": "here oops I didn't mean to cross it out"
+    },
+    {
+      "index": 743,
+      "start": 1828.799,
+      "end": 1831.47,
+      "duration": 2.671,
+      "text": "so that line here is going to print"
+    },
+    {
+      "index": 744,
+      "start": 1831.48,
+      "end": 1835.389,
+      "duration": 3.909,
+      "text": "none so it's if you just go step by step"
+    },
+    {
+      "index": 745,
+      "start": 1835.399,
+      "end": 1837.75,
+      "duration": 2.351,
+      "text": "it shouldn't be too bad to try to map"
+    },
+    {
+      "index": 746,
+      "start": 1837.76,
+      "end": 1839.71,
+      "duration": 1.95,
+      "text": "what happens with with variable names"
+    },
+    {
+      "index": 747,
+      "start": 1839.72,
+      "end": 1841.63,
+      "duration": 1.91,
+      "text": "and and foral parameters and actual"
+    },
+    {
+      "index": 748,
+      "start": 1841.64,
+      "end": 1843.549,
+      "duration": 1.909,
+      "text": "parameters okay that's why I highly"
+    },
+    {
+      "index": 749,
+      "start": 1843.559,
+      "end": 1846.95,
+      "duration": 3.391,
+      "text": "recommend pieces of paper and"
+    },
+    {
+      "index": 750,
+      "start": 1846.96,
+      "end": 1849.07,
+      "duration": 2.11,
+      "text": "pens one last thing I want to mention"
+    },
+    {
+      "index": 751,
+      "start": 1849.08,
+      "end": 1850.47,
+      "duration": 1.39,
+      "text": "about"
+    },
+    {
+      "index": 752,
+      "start": 1850.48,
+      "end": 1854.07,
+      "duration": 3.59,
+      "text": "scope before we do another example so"
+    },
+    {
+      "index": 753,
+      "start": 1854.08,
+      "end": 1855.83,
+      "duration": 1.75,
+      "text": "there are three sort of situations you"
+    },
+    {
+      "index": 754,
+      "start": 1855.84,
+      "end": 1858.23,
+      "duration": 2.39,
+      "text": "might find yourself in the first one is"
+    },
+    {
+      "index": 755,
+      "start": 1858.24,
+      "end": 1860.83,
+      "duration": 2.59,
+      "text": "probably the most"
+    },
+    {
+      "index": 756,
+      "start": 1860.84,
+      "end": 1864.35,
+      "duration": 3.51,
+      "text": "typical and this is when you define a"
+    },
+    {
+      "index": 757,
+      "start": 1864.36,
+      "end": 1866.99,
+      "duration": 2.63,
+      "text": "function and it's using a variable named"
+    },
+    {
+      "index": 758,
+      "start": 1867.0,
+      "end": 1869.43,
+      "duration": 2.43,
+      "text": "X in this case that's also defined"
+    },
+    {
+      "index": 759,
+      "start": 1869.44,
+      "end": 1872.87,
+      "duration": 3.43,
+      "text": "outside of the function and that doesn't"
+    },
+    {
+      "index": 760,
+      "start": 1872.88,
+      "end": 1876.87,
+      "duration": 3.99,
+      "text": "matter because of the idea of Scopes so"
+    },
+    {
+      "index": 761,
+      "start": 1876.88,
+      "end": 1878.43,
+      "duration": 1.55,
+      "text": "inside the global scope you can have"
+    },
+    {
+      "index": 762,
+      "start": 1878.44,
+      "end": 1880.43,
+      "duration": 1.99,
+      "text": "variables X when you're inside a"
+    },
+    {
+      "index": 763,
+      "start": 1880.44,
+      "end": 1881.95,
+      "duration": 1.51,
+      "text": "different scope you can have whatever"
+    },
+    {
+      "index": 764,
+      "start": 1881.96,
+      "end": 1883.99,
+      "duration": 2.03,
+      "text": "variables variable names you want and"
+    },
+    {
+      "index": 765,
+      "start": 1884.0,
+      "end": 1885.83,
+      "duration": 1.83,
+      "text": "when you're inside that scope Python's"
+    },
+    {
+      "index": 766,
+      "start": 1885.84,
+      "end": 1887.11,
+      "duration": 1.27,
+      "text": "going to use those variable names so"
+    },
+    {
+      "index": 767,
+      "start": 1887.12,
+      "end": 1889.31,
+      "duration": 2.19,
+      "text": "they don't interfere with each other at"
+    },
+    {
+      "index": 768,
+      "start": 1889.32,
+      "end": 1891.909,
+      "duration": 2.589,
+      "text": "all so in this example I've defined a"
+    },
+    {
+      "index": 769,
+      "start": 1891.919,
+      "end": 1893.629,
+      "duration": 1.71,
+      "text": "variable X is equal to one and then I"
+    },
+    {
+      "index": 770,
+      "start": 1893.639,
+      "end": 1896.35,
+      "duration": 2.711,
+      "text": "increment it and that doesn't interfere"
+    },
+    {
+      "index": 771,
+      "start": 1896.36,
+      "end": 1899.31,
+      "duration": 2.95,
+      "text": "with the fact that we have a variable X"
+    },
+    {
+      "index": 772,
+      "start": 1899.32,
+      "end": 1903.669,
+      "duration": 4.349,
+      "text": "outside this one's a little bit trickier"
+    },
+    {
+      "index": 773,
+      "start": 1903.679,
+      "end": 1907.75,
+      "duration": 4.071,
+      "text": "I Define this uh this function"
+    },
+    {
+      "index": 774,
+      "start": 1912.07,
+      "end": 1912.08,
+      "duration": 0.01,
+      "text": "G and all G does is access a variable X"
+    },
+    {
+      "index": 775,
+      "start": 1912.08,
+      "end": 1914.95,
+      "duration": 2.87,
+      "text": "but notice inside G I've never actually"
+    },
+    {
+      "index": 776,
+      "start": 1914.96,
+      "end": 1918.029,
+      "duration": 3.069,
+      "text": "declared or or initialized a variable X"
+    },
+    {
+      "index": 777,
+      "start": 1918.039,
+      "end": 1921.269,
+      "duration": 3.23,
+      "text": "right in this F I said X is equal to 1"
+    },
+    {
+      "index": 778,
+      "start": 1921.279,
+      "end": 1924.629,
+      "duration": 3.35,
+      "text": "but in here I'm just sort of using"
+    },
+    {
+      "index": 779,
+      "start": 1924.639,
+      "end": 1927.83,
+      "duration": 3.191,
+      "text": "X so this does not give you an error in"
+    },
+    {
+      "index": 780,
+      "start": 1927.84,
+      "end": 1929.269,
+      "duration": 1.429,
+      "text": "fact it's okay for you to do this in"
+    },
+    {
+      "index": 781,
+      "start": 1929.279,
+      "end": 1931.509,
+      "duration": 2.23,
+      "text": "python python says okay I'm in this"
+    },
+    {
+      "index": 782,
+      "start": 1931.519,
+      "end": 1933.629,
+      "duration": 2.11,
+      "text": "scope but I don't have a variable named"
+    },
+    {
+      "index": 783,
+      "start": 1933.639,
+      "end": 1936.99,
+      "duration": 3.351,
+      "text": "X so let me just go into the scope of"
+    },
+    {
+      "index": 784,
+      "start": 1937.0,
+      "end": 1938.59,
+      "duration": 1.59,
+      "text": "whoever called me so I'm going to just"
+    },
+    {
+      "index": 785,
+      "start": 1938.6,
+      "end": 1941.07,
+      "duration": 2.47,
+      "text": "temporarily hop out of this scope and"
+    },
+    {
+      "index": 786,
+      "start": 1941.08,
+      "end": 1943.509,
+      "duration": 2.429,
+      "text": "see is there a variable X outside of of"
+    },
+    {
+      "index": 787,
+      "start": 1943.519,
+      "end": 1946.269,
+      "duration": 2.75,
+      "text": "me and it'll find this variable X here"
+    },
+    {
+      "index": 788,
+      "start": 1946.279,
+      "end": 1948.909,
+      "duration": 2.63,
+      "text": "and it's going to print out its values"
+    },
+    {
+      "index": 789,
+      "start": 1948.919,
+      "end": 1952.389,
+      "duration": 3.47,
+      "text": "so that's"
+    },
+    {
+      "index": 790,
+      "start": 1954.99,
+      "end": 1955.0,
+      "duration": 0.01,
+      "text": "okay this last example here is actually"
+    },
+    {
+      "index": 791,
+      "start": 1955.0,
+      "end": 1957.71,
+      "duration": 2.71,
+      "text": "not allowed in Python similar to this"
+    },
+    {
+      "index": 792,
+      "start": 1957.72,
+      "end": 1961.43,
+      "duration": 3.71,
+      "text": "one except that I'm trying to increment"
+    },
+    {
+      "index": 793,
+      "start": 1961.44,
+      "end": 1964.07,
+      "duration": 2.63,
+      "text": "a value of x but then I'm also trying to"
+    },
+    {
+      "index": 794,
+      "start": 1964.08,
+      "end": 1966.71,
+      "duration": 2.63,
+      "text": "reassign it to the same value of"
+    },
+    {
+      "index": 795,
+      "start": 1966.72,
+      "end": 1969.23,
+      "duration": 2.51,
+      "text": "x the problem with that is I never"
+    },
+    {
+      "index": 796,
+      "start": 1969.24,
+      "end": 1972.23,
+      "duration": 2.99,
+      "text": "actually initialized X inside"
+    },
+    {
+      "index": 797,
+      "start": 1972.24,
+      "end": 1974.71,
+      "duration": 2.47,
+      "text": "H so if I"
+    },
+    {
+      "index": 798,
+      "start": 1974.72,
+      "end": 1978.11,
+      "duration": 3.39,
+      "text": "said if inside H I said X is equal to 1"
+    },
+    {
+      "index": 799,
+      "start": 1978.12,
+      "end": 1980.75,
+      "duration": 2.63,
+      "text": "and then I did X Plus equal to 1 then it"
+    },
+    {
+      "index": 800,
+      "start": 1980.76,
+      "end": 1983.83,
+      "duration": 3.07,
+      "text": "would be this example here F of Y but I"
+    },
+    {
+      "index": 801,
+      "start": 1983.84,
+      "end": 1987.549,
+      "duration": 3.709,
+      "text": "didn't do that I just tried to access X"
+    },
+    {
+      "index": 802,
+      "start": 1987.559,
+      "end": 1988.59,
+      "duration": 1.031,
+      "text": "and then"
+    },
+    {
+      "index": 803,
+      "start": 1988.6,
+      "end": 1991.43,
+      "duration": 2.83,
+      "text": "incremented increment it and then try to"
+    },
+    {
+      "index": 804,
+      "start": 1991.44,
+      "end": 1992.909,
+      "duration": 1.469,
+      "text": "reassign it and that actually that's"
+    },
+    {
+      "index": 805,
+      "start": 1992.919,
+      "end": 1994.629,
+      "duration": 1.71,
+      "text": "actually not allowed in"
+    },
+    {
+      "index": 806,
+      "start": 1994.639,
+      "end": 1997.31,
+      "duration": 2.671,
+      "text": "Python there's a way around it using"
+    },
+    {
+      "index": 807,
+      "start": 1997.32,
+      "end": 2001.389,
+      "duration": 4.069,
+      "text": "Global variables okay but it's actually"
+    },
+    {
+      "index": 808,
+      "start": 2001.399,
+      "end": 2003.789,
+      "duration": 2.39,
+      "text": "frowned upon to use Global variables"
+    },
+    {
+      "index": 809,
+      "start": 2003.799,
+      "end": 2005.629,
+      "duration": 1.83,
+      "text": "though Global variables are part of the"
+    },
+    {
+      "index": 810,
+      "start": 2005.639,
+      "end": 2009.269,
+      "duration": 3.63,
+      "text": "readings for for this lecture"
+    },
+    {
+      "index": 811,
+      "start": 2009.279,
+      "end": 2010.95,
+      "duration": 1.671,
+      "text": "and the reason why it's not a great idea"
+    },
+    {
+      "index": 812,
+      "start": 2010.96,
+      "end": 2013.87,
+      "duration": 2.91,
+      "text": "to use Global variables is because"
+    },
+    {
+      "index": 813,
+      "start": 2013.88,
+      "end": 2016.11,
+      "duration": 2.23,
+      "text": "Global variables sort of give you this"
+    },
+    {
+      "index": 814,
+      "start": 2016.12,
+      "end": 2020.509,
+      "duration": 4.389,
+      "text": "this loophole around um Scopes so it"
+    },
+    {
+      "index": 815,
+      "start": 2020.519,
+      "end": 2022.95,
+      "duration": 2.431,
+      "text": "allows you to write code that could"
+    },
+    {
+      "index": 816,
+      "start": 2022.96,
+      "end": 2026.19,
+      "duration": 3.23,
+      "text": "become very messy okay so Global using"
+    },
+    {
+      "index": 817,
+      "start": 2026.2,
+      "end": 2027.99,
+      "duration": 1.79,
+      "text": "Global variables you can be inside a"
+    },
+    {
+      "index": 818,
+      "start": 2028.0,
+      "end": 2029.789,
+      "duration": 1.789,
+      "text": "function and then modify a variable"
+    },
+    {
+      "index": 819,
+      "start": 2029.799,
+      "end": 2032.149,
+      "duration": 2.35,
+      "text": "that's defined outside of of your"
+    },
+    {
+      "index": 820,
+      "start": 2032.159,
+      "end": 2034.07,
+      "duration": 1.911,
+      "text": "function and that sort of defeats the"
+    },
+    {
+      "index": 821,
+      "start": 2034.08,
+      "end": 2036.669,
+      "duration": 2.589,
+      "text": "purpose of of functions and using them"
+    },
+    {
+      "index": 822,
+      "start": 2036.679,
+      "end": 2039.07,
+      "duration": 2.391,
+      "text": "and writing these coherent modules that"
+    },
+    {
+      "index": 823,
+      "start": 2039.08,
+      "end": 2042.669,
+      "duration": 3.589,
+      "text": "that are separate"
+    },
+    {
+      "index": 824,
+      "start": 2045.909,
+      "end": 2045.919,
+      "duration": 0.01,
+      "text": "okay that said it might it will"
+    },
+    {
+      "index": 825,
+      "start": 2045.919,
+      "end": 2047.23,
+      "duration": 1.311,
+      "text": "sometimes be useful to use Global"
+    },
+    {
+      "index": 826,
+      "start": 2047.24,
+      "end": 2049.149,
+      "duration": 1.909,
+      "text": "variables as you'll see in uh in a"
+    },
+    {
+      "index": 827,
+      "start": 2049.159,
+      "end": 2052.27,
+      "duration": 3.111,
+      "text": "couple lectures from"
+    },
+    {
+      "index": 828,
+      "start": 2054.31,
+      "end": 2054.32,
+      "duration": 0.01,
+      "text": "now"
+    },
+    {
+      "index": 829,
+      "start": 2054.32,
+      "end": 2057.03,
+      "duration": 2.71,
+      "text": "Okay cool so let's go on to the last"
+    },
+    {
+      "index": 830,
+      "start": 2057.04,
+      "end": 2058.51,
+      "duration": 1.47,
+      "text": "scope"
+    },
+    {
+      "index": 831,
+      "start": 2058.52,
+      "end": 2061.51,
+      "duration": 2.99,
+      "text": "example okay this slide is here and"
+    },
+    {
+      "index": 832,
+      "start": 2061.52,
+      "end": 2063.629,
+      "duration": 2.109,
+      "text": "notice I've bolded underlined and"
+    },
+    {
+      "index": 833,
+      "start": 2063.639,
+      "end": 2065.95,
+      "duration": 2.311,
+      "text": "italicized the python tutor because I"
+    },
+    {
+      "index": 834,
+      "start": 2065.96,
+      "end": 2068.75,
+      "duration": 2.79,
+      "text": "find it extremely helpful so the python"
+    },
+    {
+      "index": 835,
+      "start": 2068.76,
+      "end": 2070.27,
+      "duration": 1.51,
+      "text": "tutor as I've mentioned in one of the"
+    },
+    {
+      "index": 836,
+      "start": 2070.28,
+      "end": 2072.149,
+      "duration": 1.869,
+      "text": "assignments is it was actually developed"
+    },
+    {
+      "index": 837,
+      "start": 2072.159,
+      "end": 2073.99,
+      "duration": 1.831,
+      "text": "by a grad student here or post grad"
+    },
+    {
+      "index": 838,
+      "start": 2074.0,
+      "end": 2077.99,
+      "duration": 3.99,
+      "text": "studentstock here and it allows you to"
+    },
+    {
+      "index": 839,
+      "start": 2078.0,
+      "end": 2081.79,
+      "duration": 3.79,
+      "text": "go through python paste paste the code"
+    },
+    {
+      "index": 840,
+      "start": 2081.8,
+      "end": 2084.149,
+      "duration": 2.349,
+      "text": "go through it step by step like with"
+    },
+    {
+      "index": 841,
+      "start": 2084.159,
+      "end": 2086.43,
+      "duration": 2.271,
+      "text": "each iteration it'll show you exactly"
+    },
+    {
+      "index": 842,
+      "start": 2086.44,
+      "end": 2089.27,
+      "duration": 2.83,
+      "text": "what values each variable has what scope"
+    },
+    {
+      "index": 843,
+      "start": 2089.28,
+      "end": 2092.23,
+      "duration": 2.95,
+      "text": "you're in when Scopes get created when"
+    },
+    {
+      "index": 844,
+      "start": 2092.24,
+      "end": 2094.869,
+      "duration": 2.629,
+      "text": "Scopes get destroyed variables within"
+    },
+    {
+      "index": 845,
+      "start": 2094.879,
+      "end": 2096.99,
+      "duration": 2.111,
+      "text": "each scope so pretty much every single"
+    },
+    {
+      "index": 846,
+      "start": 2097.0,
+      "end": 2099.39,
+      "duration": 2.39,
+      "text": "detail you need to sort of understand"
+    },
+    {
+      "index": 847,
+      "start": 2099.4,
+      "end": 2101.39,
+      "duration": 1.99,
+      "text": "functions you know as we're starting to"
+    },
+    {
+      "index": 848,
+      "start": 2101.4,
+      "end": 2102.79,
+      "duration": 1.39,
+      "text": "you can see we've had a couple questions"
+    },
+    {
+      "index": 849,
+      "start": 2102.8,
+      "end": 2104.31,
+      "duration": 1.51,
+      "text": "and these were great"
+    },
+    {
+      "index": 850,
+      "start": 2104.32,
+      "end": 2106.67,
+      "duration": 2.35,
+      "text": "questions so if you're still trying to"
+    },
+    {
+      "index": 851,
+      "start": 2106.68,
+      "end": 2107.91,
+      "duration": 1.23,
+      "text": "understand what's going on I would"
+    },
+    {
+      "index": 852,
+      "start": 2107.92,
+      "end": 2110.069,
+      "duration": 2.149,
+      "text": "highly suggest you take a piece of code"
+    },
+    {
+      "index": 853,
+      "start": 2110.079,
+      "end": 2111.829,
+      "duration": 1.75,
+      "text": "and just run it in the python tutor and"
+    },
+    {
+      "index": 854,
+      "start": 2111.839,
+      "end": 2113.55,
+      "duration": 1.711,
+      "text": "you should be able to see exactly what"
+    },
+    {
+      "index": 855,
+      "start": 2113.56,
+      "end": 2115.79,
+      "duration": 2.23,
+      "text": "happens in sort of a similar way that"
+    },
+    {
+      "index": 856,
+      "start": 2115.8,
+      "end": 2118.79,
+      "duration": 2.99,
+      "text": "I've drawn my my diagrams"
+    },
+    {
+      "index": 857,
+      "start": 2118.8,
+      "end": 2121.91,
+      "duration": 3.11,
+      "text": "okay in all of the in all of the codes"
+    },
+    {
+      "index": 858,
+      "start": 2121.92,
+      "end": 2124.109,
+      "duration": 2.189,
+      "text": "for the this particular lecture I've put"
+    },
+    {
+      "index": 859,
+      "start": 2124.119,
+      "end": 2126.19,
+      "duration": 2.071,
+      "text": "links to the python tutor for each one"
+    },
+    {
+      "index": 860,
+      "start": 2126.2,
+      "end": 2127.91,
+      "duration": 1.71,
+      "text": "of those exercises so you can just copy"
+    },
+    {
+      "index": 861,
+      "start": 2127.92,
+      "end": 2130.15,
+      "duration": 2.23,
+      "text": "and paste those and it'll automatically"
+    },
+    {
+      "index": 862,
+      "start": 2130.16,
+      "end": 2132.15,
+      "duration": 1.99,
+      "text": "populate it with that particular example"
+    },
+    {
+      "index": 863,
+      "start": 2132.16,
+      "end": 2134.87,
+      "duration": 2.71,
+      "text": "so you just have to click step step step"
+    },
+    {
+      "index": 864,
+      "start": 2134.88,
+      "end": 2137.95,
+      "duration": 3.07,
+      "text": "okay so having made my plug for python"
+    },
+    {
+      "index": 865,
+      "start": 2137.96,
+      "end": 2140.43,
+      "duration": 2.47,
+      "text": "tutor let's go"
+    },
+    {
+      "index": 866,
+      "start": 2140.44,
+      "end": 2143.03,
+      "duration": 2.59,
+      "text": "on okay so here's an"
+    },
+    {
+      "index": 867,
+      "start": 2143.04,
+      "end": 2146.349,
+      "duration": 3.309,
+      "text": "example it's going to show a couple"
+    },
+    {
+      "index": 868,
+      "start": 2146.359,
+      "end": 2149.87,
+      "duration": 3.511,
+      "text": "things one is um what Happ you know"
+    },
+    {
+      "index": 869,
+      "start": 2149.88,
+      "end": 2153.589,
+      "duration": 3.709,
+      "text": "print versus return and also this idea"
+    },
+    {
+      "index": 870,
+      "start": 2153.599,
+      "end": 2155.95,
+      "duration": 2.351,
+      "text": "of you can Nest functions okay so just"
+    },
+    {
+      "index": 871,
+      "start": 2155.96,
+      "end": 2157.43,
+      "duration": 1.47,
+      "text": "like you could have nested Loops nested"
+    },
+    {
+      "index": 872,
+      "start": 2157.44,
+      "end": 2159.67,
+      "duration": 2.23,
+      "text": "conditions you can also Nest functions"
+    },
+    {
+      "index": 873,
+      "start": 2159.68,
+      "end": 2161.349,
+      "duration": 1.669,
+      "text": "within"
+    },
+    {
+      "index": 874,
+      "start": 2161.359,
+      "end": 2163.95,
+      "duration": 2.591,
+      "text": "functions so let's draw some diagrams"
+    },
+    {
+      "index": 875,
+      "start": 2163.96,
+      "end": 2166.27,
+      "duration": 2.31,
+      "text": "just like before of the"
+    },
+    {
+      "index": 876,
+      "start": 2166.28,
+      "end": 2168.63,
+      "duration": 2.35,
+      "text": "Scopes first thing we're going to do is"
+    },
+    {
+      "index": 877,
+      "start": 2168.64,
+      "end": 2170.19,
+      "duration": 1.55,
+      "text": "when we have a program we're going to"
+    },
+    {
+      "index": 878,
+      "start": 2170.2,
+      "end": 2172.03,
+      "duration": 1.83,
+      "text": "create the global scope and we're going"
+    },
+    {
+      "index": 879,
+      "start": 2172.04,
+      "end": 2174.95,
+      "duration": 2.91,
+      "text": "to add every variable that we have and"
+    },
+    {
+      "index": 880,
+      "start": 2174.96,
+      "end": 2176.47,
+      "duration": 1.51,
+      "text": "then when we reach a function call we're"
+    },
+    {
+      "index": 881,
+      "start": 2176.48,
+      "end": 2179.79,
+      "duration": 3.31,
+      "text": "going to do something about that okay so"
+    },
+    {
+      "index": 882,
+      "start": 2179.8,
+      "end": 2181.829,
+      "duration": 2.029,
+      "text": "the first thing in the global scope"
+    },
+    {
+      "index": 883,
+      "start": 2181.839,
+      "end": 2184.23,
+      "duration": 2.391,
+      "text": "is this function"
+    },
+    {
+      "index": 884,
+      "start": 2184.24,
+      "end": 2187.27,
+      "duration": 3.03,
+      "text": "definition again in my Global scope I"
+    },
+    {
+      "index": 885,
+      "start": 2187.28,
+      "end": 2189.829,
+      "duration": 2.549,
+      "text": "just G as some code because I have not"
+    },
+    {
+      "index": 886,
+      "start": 2189.839,
+      "end": 2192.069,
+      "duration": 2.23,
+      "text": "called it yet okay I only go inside a"
+    },
+    {
+      "index": 887,
+      "start": 2192.079,
+      "end": 2195.109,
+      "duration": 3.03,
+      "text": "function when I make a function call so"
+    },
+    {
+      "index": 888,
+      "start": 2195.119,
+      "end": 2198.87,
+      "duration": 3.751,
+      "text": "G contains some code so we're done with"
+    },
+    {
+      "index": 889,
+      "start": 2198.88,
+      "end": 2202.87,
+      "duration": 3.99,
+      "text": "75% of that of that code next line is X"
+    },
+    {
+      "index": 890,
+      "start": 2202.88,
+      "end": 2204.309,
+      "duration": 1.429,
+      "text": "is equal to"
+    },
+    {
+      "index": 891,
+      "start": 2204.319,
+      "end": 2207.55,
+      "duration": 3.231,
+      "text": "3 so I'm making X be a variable inside"
+    },
+    {
+      "index": 892,
+      "start": 2207.56,
+      "end": 2209.71,
+      "duration": 2.15,
+      "text": "my Global scope with value three and"
+    },
+    {
+      "index": 893,
+      "start": 2209.72,
+      "end": 2212.99,
+      "duration": 3.27,
+      "text": "then I have this Z is equal to G of"
+    },
+    {
+      "index": 894,
+      "start": 2213.0,
+      "end": 2216.71,
+      "duration": 3.71,
+      "text": "X this is a function call when I see a"
+    },
+    {
+      "index": 895,
+      "start": 2216.72,
+      "end": 2218.43,
+      "duration": 1.71,
+      "text": "function call I'm going to create a new"
+    },
+    {
+      "index": 896,
+      "start": 2218.44,
+      "end": 2222.43,
+      "duration": 3.99,
+      "text": "scope so here is the scope of"
+    },
+    {
+      "index": 897,
+      "start": 2222.44,
+      "end": 2225.61,
+      "duration": 3.17,
+      "text": "G with the scope of G I'm mapping"
+    },
+    {
+      "index": 898,
+      "start": 2225.62,
+      "end": 2227.99,
+      "duration": 2.37,
+      "text": "[Music]"
+    },
+    {
+      "index": 899,
+      "start": 2228.0,
+      "end": 2231.55,
+      "duration": 3.55,
+      "text": "variables to uh actual actual parameters"
+    },
+    {
+      "index": 900,
+      "start": 2231.56,
+      "end": 2234.27,
+      "duration": 2.71,
+      "text": "to formal parameters so the first thing"
+    },
+    {
+      "index": 901,
+      "start": 2234.28,
+      "end": 2236.27,
+      "duration": 1.99,
+      "text": "I'm doing is I'm saying inside G what is"
+    },
+    {
+      "index": 902,
+      "start": 2236.28,
+      "end": 2239.71,
+      "duration": 3.43,
+      "text": "the value of of actual parameter x and x"
+    },
+    {
+      "index": 903,
+      "start": 2239.72,
+      "end": 2241.829,
+      "duration": 2.109,
+      "text": "is going to be the value"
+    },
+    {
+      "index": 904,
+      "start": 2241.839,
+      "end": 2244.47,
+      "duration": 2.631,
+      "text": "three because I've called G of X with X"
+    },
+    {
+      "index": 905,
+      "start": 2244.48,
+      "end": 2248.91,
+      "duration": 4.43,
+      "text": "is equal to 3"
+    },
+    {
+      "index": 906,
+      "start": 2252.51,
+      "end": 2252.52,
+      "duration": 0.01,
+      "text": "okay next what I see inside this"
+    },
+    {
+      "index": 907,
+      "start": 2252.52,
+      "end": 2255.63,
+      "duration": 3.11,
+      "text": "function so this is the inside of the"
+    },
+    {
+      "index": 908,
+      "start": 2255.64,
+      "end": 2259.27,
+      "duration": 3.63,
+      "text": "function is this bit"
+    },
+    {
+      "index": 909,
+      "start": 2259.28,
+      "end": 2262.15,
+      "duration": 2.87,
+      "text": "here it's another function"
+    },
+    {
+      "index": 910,
+      "start": 2262.16,
+      "end": 2264.39,
+      "duration": 2.23,
+      "text": "definition again since I'm just defining"
+    },
+    {
+      "index": 911,
+      "start": 2264.4,
+      "end": 2267.309,
+      "duration": 2.909,
+      "text": "the function and I'm not calling it all"
+    },
+    {
+      "index": 912,
+      "start": 2267.319,
+      "end": 2270.03,
+      "duration": 2.711,
+      "text": "python sees is H is some"
+    },
+    {
+      "index": 913,
+      "start": 2270.04,
+      "end": 2272.829,
+      "duration": 2.789,
+      "text": "code okay I haven't called the function"
+    },
+    {
+      "index": 914,
+      "start": 2272.839,
+      "end": 2275.19,
+      "duration": 2.351,
+      "text": "H yet because I'm just defining it here"
+    },
+    {
+      "index": 915,
+      "start": 2275.2,
+      "end": 2275.95,
+      "duration": 0.75,
+      "text": "with"
+    },
+    {
+      "index": 916,
+      "start": 2275.96,
+      "end": 2278.829,
+      "duration": 2.869,
+      "text": "DF Okay so so that finishes this this"
+    },
+    {
+      "index": 917,
+      "start": 2278.839,
+      "end": 2282.19,
+      "duration": 3.351,
+      "text": "part here the next line is x equal to x"
+    },
+    {
+      "index": 918,
+      "start": 2282.2,
+      "end": 2283.43,
+      "duration": 1.23,
+      "text": "+"
+    },
+    {
+      "index": 919,
+      "start": 2283.44,
+      "end": 2286.03,
+      "duration": 2.59,
+      "text": "1 so inside the scope of G I'm"
+    },
+    {
+      "index": 920,
+      "start": 2286.04,
+      "end": 2288.91,
+      "duration": 2.87,
+      "text": "incrementing X to be four then I'm"
+    },
+    {
+      "index": 921,
+      "start": 2288.92,
+      "end": 2290.91,
+      "duration": 1.99,
+      "text": "printing out this"
+    },
+    {
+      "index": 922,
+      "start": 2290.92,
+      "end": 2294.109,
+      "duration": 3.189,
+      "text": "line and then I've reached here"
+    },
+    {
+      "index": 923,
+      "start": 2294.119,
+      "end": 2297.309,
+      "duration": 3.19,
+      "text": "H this is actually a function call and"
+    },
+    {
+      "index": 924,
+      "start": 2297.319,
+      "end": 2298.79,
+      "duration": 1.471,
+      "text": "I'm calling"
+    },
+    {
+      "index": 925,
+      "start": 2298.8,
+      "end": 2301.15,
+      "duration": 2.35,
+      "text": "H as soon as I make a function call I'm"
+    },
+    {
+      "index": 926,
+      "start": 2301.16,
+      "end": 2303.03,
+      "duration": 1.87,
+      "text": "creating another scope so I'm"
+    },
+    {
+      "index": 927,
+      "start": 2303.04,
+      "end": 2305.589,
+      "duration": 2.549,
+      "text": "temporarily going out of the scope of G"
+    },
+    {
+      "index": 928,
+      "start": 2305.599,
+      "end": 2309.109,
+      "duration": 3.51,
+      "text": "and going into the scope of H"
+    },
+    {
+      "index": 929,
+      "start": 2309.119,
+      "end": 2310.91,
+      "duration": 1.791,
+      "text": "so python knows that H contains some"
+    },
+    {
+      "index": 930,
+      "start": 2310.92,
+      "end": 2312.95,
+      "duration": 2.03,
+      "text": "code and now I can go inside H and do"
+    },
+    {
+      "index": 931,
+      "start": 2312.96,
+      "end": 2315.71,
+      "duration": 2.75,
+      "text": "whatever I need to do so the first so H"
+    },
+    {
+      "index": 932,
+      "start": 2315.72,
+      "end": 2316.99,
+      "duration": 1.27,
+      "text": "doesn't have any"
+    },
+    {
+      "index": 933,
+      "start": 2317.0,
+      "end": 2319.109,
+      "duration": 2.109,
+      "text": "parameters so I don't need to populate"
+    },
+    {
+      "index": 934,
+      "start": 2319.119,
+      "end": 2322.589,
+      "duration": 3.47,
+      "text": "anything like that in there X does def H"
+    },
+    {
+      "index": 935,
+      "start": 2322.599,
+      "end": 2325.23,
+      "duration": 2.631,
+      "text": "does Define a variable called X which is"
+    },
+    {
+      "index": 936,
+      "start": 2325.24,
+      "end": 2327.91,
+      "duration": 2.67,
+      "text": "ABC it's a"
+    },
+    {
+      "index": 937,
+      "start": 2327.92,
+      "end": 2332.15,
+      "duration": 4.23,
+      "text": "string and then that's all H"
+    },
+    {
+      "index": 938,
+      "start": 2332.16,
+      "end": 2336.109,
+      "duration": 3.949,
+      "text": "does what does it"
+    },
+    {
+      "index": 939,
+      "start": 2338.79,
+      "end": 2338.8,
+      "duration": 0.01,
+      "text": "return none I heard murmuring but I"
+    },
+    {
+      "index": 940,
+      "start": 2338.8,
+      "end": 2340.309,
+      "duration": 1.509,
+      "text": "think none was the was what you guys are"
+    },
+    {
+      "index": 941,
+      "start": 2340.319,
+      "end": 2342.79,
+      "duration": 2.471,
+      "text": "saying so since there's no return"
+    },
+    {
+      "index": 942,
+      "start": 2342.8,
+      "end": 2346.75,
+      "duration": 3.95,
+      "text": "statement H is going to return none okay"
+    },
+    {
+      "index": 943,
+      "start": 2346.76,
+      "end": 2350.47,
+      "duration": 3.71,
+      "text": "so H returns none back to whoever called"
+    },
+    {
+      "index": 944,
+      "start": 2350.48,
+      "end": 2354.15,
+      "duration": 3.67,
+      "text": "it which was this code inside G so that"
+    },
+    {
+      "index": 945,
+      "start": 2354.16,
+      "end": 2355.99,
+      "duration": 1.83,
+      "text": "gets replaced with none the thing that"
+    },
+    {
+      "index": 946,
+      "start": 2356.0,
+      "end": 2358.75,
+      "duration": 2.75,
+      "text": "I've H this circled red H"
+    },
+    {
+      "index": 947,
+      "start": 2358.76,
+      "end": 2362.19,
+      "duration": 3.43,
+      "text": "here as soon as H returns we're going to"
+    },
+    {
+      "index": 948,
+      "start": 2362.2,
+      "end": 2363.829,
+      "duration": 1.629,
+      "text": "get rid of that scope all the variables"
+    },
+    {
+      "index": 949,
+      "start": 2363.839,
+      "end": 2367.39,
+      "duration": 3.551,
+      "text": "created within it and we're done with h"
+    },
+    {
+      "index": 950,
+      "start": 2367.4,
+      "end": 2369.829,
+      "duration": 2.429,
+      "text": "so now we're back into G and we just"
+    },
+    {
+      "index": 951,
+      "start": 2369.839,
+      "end": 2372.23,
+      "duration": 2.391,
+      "text": "finished executing this and this got"
+    },
+    {
+      "index": 952,
+      "start": 2372.24,
+      "end": 2374.87,
+      "duration": 2.63,
+      "text": "replaced with none okay we're not"
+    },
+    {
+      "index": 953,
+      "start": 2374.88,
+      "end": 2377.75,
+      "duration": 2.87,
+      "text": "printing it out right so this doesn't"
+    },
+    {
+      "index": 954,
+      "start": 2377.76,
+      "end": 2380.27,
+      "duration": 2.51,
+      "text": "show up anywhere it's just"
+    },
+    {
+      "index": 955,
+      "start": 2380.28,
+      "end": 2382.39,
+      "duration": 2.11,
+      "text": "there so we're finished with that line"
+    },
+    {
+      "index": 956,
+      "start": 2382.4,
+      "end": 2385.99,
+      "duration": 3.59,
+      "text": "and the next line is return"
+    },
+    {
+      "index": 957,
+      "start": 2390.19,
+      "end": 2390.2,
+      "duration": 0.01,
+      "text": "X so X inside G is four so four gets"
+    },
+    {
+      "index": 958,
+      "start": 2390.2,
+      "end": 2392.03,
+      "duration": 1.83,
+      "text": "returned back to whoever called it which"
+    },
+    {
+      "index": 959,
+      "start": 2392.04,
+      "end": 2395.39,
+      "duration": 3.35,
+      "text": "was in the global scope here so this"
+    },
+    {
+      "index": 960,
+      "start": 2395.4,
+      "end": 2399.75,
+      "duration": 4.35,
+      "text": "gets replaced with four"
+    },
+    {
+      "index": 961,
+      "start": 2401.99,
+      "end": 2402.0,
+      "duration": 0.01,
+      "text": "so once we've returned X we've"
+    },
+    {
+      "index": 962,
+      "start": 2402.0,
+      "end": 2404.67,
+      "duration": 2.67,
+      "text": "completely exited out of that uh the"
+    },
+    {
+      "index": 963,
+      "start": 2404.68,
+      "end": 2407.15,
+      "duration": 2.47,
+      "text": "scope of G and we've come back to"
+    },
+    {
+      "index": 964,
+      "start": 2407.16,
+      "end": 2410.43,
+      "duration": 3.27,
+      "text": "whoever called us which was Global scope"
+    },
+    {
+      "index": 965,
+      "start": 2410.44,
+      "end": 2412.39,
+      "duration": 1.95,
+      "text": "and we've replaced Z is equal to G of X"
+    },
+    {
+      "index": 966,
+      "start": 2412.4,
+      "end": 2414.19,
+      "duration": 1.79,
+      "text": "and that completely got replac with four"
+    },
+    {
+      "index": 967,
+      "start": 2414.2,
+      "end": 2416.87,
+      "duration": 2.67,
+      "text": "the return value"
+    },
+    {
+      "index": 968,
+      "start": 2416.88,
+      "end": 2420.99,
+      "duration": 4.11,
+      "text": "okay so that's sort of showing nested"
+    },
+    {
+      "index": 969,
+      "start": 2421.0,
+      "end": 2421.95,
+      "duration": 0.95,
+      "text": "nested"
+    },
+    {
+      "index": 970,
+      "start": 2421.96,
+      "end": 2424.109,
+      "duration": 2.149,
+      "text": "functions all right just circling back"
+    },
+    {
+      "index": 971,
+      "start": 2424.119,
+      "end": 2426.03,
+      "duration": 1.911,
+      "text": "to decomposition abstraction this is the"
+    },
+    {
+      "index": 972,
+      "start": 2426.04,
+      "end": 2428.79,
+      "duration": 2.75,
+      "text": "last slide you can see in in in if you"
+    },
+    {
+      "index": 973,
+      "start": 2428.8,
+      "end": 2430.91,
+      "duration": 2.11,
+      "text": "look at the code um associated with"
+    },
+    {
+      "index": 974,
+      "start": 2430.92,
+      "end": 2432.67,
+      "duration": 1.75,
+      "text": "today's lecture there's some other"
+    },
+    {
+      "index": 975,
+      "start": 2432.68,
+      "end": 2434.589,
+      "duration": 1.909,
+      "text": "examples where you can see just how"
+    },
+    {
+      "index": 976,
+      "start": 2434.599,
+      "end": 2436.23,
+      "duration": 1.631,
+      "text": "powerful it is to use functions and you"
+    },
+    {
+      "index": 977,
+      "start": 2436.24,
+      "end": 2438.39,
+      "duration": 2.15,
+      "text": "can write really clean and simple code"
+    },
+    {
+      "index": 978,
+      "start": 2438.4,
+      "end": 2439.99,
+      "duration": 1.59,
+      "text": "if you define your own functions and"
+    },
+    {
+      "index": 979,
+      "start": 2440.0,
+      "end": 2443.15,
+      "duration": 3.15,
+      "text": "then just use them later right and the"
+    },
+    {
+      "index": 980,
+      "start": 2443.16,
+      "end": 2444.95,
+      "duration": 1.79,
+      "text": "beauty of defining your own functions"
+    },
+    {
+      "index": 981,
+      "start": 2444.96,
+      "end": 2446.75,
+      "duration": 1.79,
+      "text": "that you can use multiple times later is"
+    },
+    {
+      "index": 982,
+      "start": 2446.76,
+      "end": 2448.63,
+      "duration": 1.87,
+      "text": "you only have to debug the function once"
+    },
+    {
+      "index": 983,
+      "start": 2448.64,
+      "end": 2450.23,
+      "duration": 1.59,
+      "text": "right I know debugging is not your"
+    },
+    {
+      "index": 984,
+      "start": 2450.24,
+      "end": 2451.75,
+      "duration": 1.51,
+      "text": "favorite thing but you only have to"
+    },
+    {
+      "index": 985,
+      "start": 2451.76,
+      "end": 2453.309,
+      "duration": 1.549,
+      "text": "debug this one thing once and then you"
+    },
+    {
+      "index": 986,
+      "start": 2453.319,
+      "end": 2455.03,
+      "duration": 1.711,
+      "text": "can know that it's right and it works"
+    },
+    {
+      "index": 987,
+      "start": 2455.04,
+      "end": 2456.67,
+      "duration": 1.63,
+      "text": "well and you can just use it multiple"
+    },
+    {
+      "index": 988,
+      "start": 2456.68,
+      "end": 2458.03,
+      "duration": 1.35,
+      "text": "times"
+    },
+    {
+      "index": 989,
+      "start": 2458.04,
+      "end": 2462.16,
+      "duration": 4.12,
+      "text": "all right thanks everyone"
+    }
+  ],
+  "course": {
+    "category": "Computer Science & AI",
+    "title": "Introduction to Computer Science and Programming in Python",
+    "source_url": "https://www.youtube.com/playlist?list=PLUl4u3cNGP63WbdFxL8giv4yhgdMGaZNA"
+  }
+}

@@ -1,0 +1,3007 @@
+{
+  "video": {
+    "id": "XDhJ8lVGbl8",
+    "title": "Lec 1 | MIT 18.03 Differential Equations, Spring 2006",
+    "url": "https://www.youtube.com/watch?v=XDhJ8lVGbl8",
+    "channel": "MIT OpenCourseWare",
+    "duration": 2936,
+    "language": "en"
+  },
+  "segment_count": 427,
+  "segments": [
+    {
+      "index": 0,
+      "start": 7.36,
+      "end": 15.86,
+      "duration": 8.5,
+      "text": "OK, let's get started. Now... I'm assuming that, A, you went recitation yesterday,"
+    },
+    {
+      "index": 1,
+      "start": 15.86,
+      "end": 22.66,
+      "duration": 6.8,
+      "text": "B, that even if you didn't, you know how to separate variables, and you know how to construct simple"
+    },
+    {
+      "index": 2,
+      "start": 22.66,
+      "end": 29.31,
+      "duration": 6.65,
+      "text": "models, solve physical problems with differential equations, and possibly even solve them."
+    },
+    {
+      "index": 3,
+      "start": 29.31,
+      "end": 39.14,
+      "duration": 9.83,
+      "text": "So, you should have learned that either in high school, or 18.01 here, or... yeah."
+    },
+    {
+      "index": 4,
+      "start": 39.14,
+      "end": 44.38,
+      "duration": 5.24,
+      "text": "So, I'm going to start from that point, assume you know that. I'm not going to tell you what differential"
+    },
+    {
+      "index": 5,
+      "start": 44.39,
+      "end": 49.609,
+      "duration": 5.219,
+      "text": "equations are, or what modeling is. If you still are uncertain about those things, the"
+    },
+    {
+      "index": 6,
+      "start": 49.609,
+      "end": 57.36,
+      "duration": 7.751,
+      "text": "book has a very long and good explanation of it. Just read that stuff. So,"
+    },
+    {
+      "index": 7,
+      "start": 57.36,
+      "end": 66.36,
+      "duration": 9.0,
+      "text": "we are talking about first order ODEs."
+    },
+    {
+      "index": 8,
+      "start": 66.36,
+      "end": 73.86,
+      "duration": 7.5,
+      "text": "ODE: I'll only use three ... two acronyms. ODE is ordinary differential equations. I think all of MIT"
+    },
+    {
+      "index": 9,
+      "start": 73.86,
+      "end": 81.52,
+      "duration": 7.66,
+      "text": "knows that, whether they've been taking the course or not. So, we are talking about first-order ODEs."
+    },
+    {
+      "index": 10,
+      "start": 84.74,
+      "end": 92.32,
+      "duration": 7.58,
+      "text": "which in standard form, are written, you isolate the derivative of y with respect"
+    },
+    {
+      "index": 11,
+      "start": 92.32,
+      "end": 98.83,
+      "duration": 6.51,
+      "text": "to, x, let's say, on the left-hand side, and on the right-hand side you write everything"
+    },
+    {
+      "index": 12,
+      "start": 98.83,
+      "end": 105.07,
+      "duration": 6.24,
+      "text": "else. You can't always do this very well, but for today, I'm going to assume that it"
+    },
+    {
+      "index": 13,
+      "start": 105.07,
+      "end": 112.32,
+      "duration": 7.25,
+      "text": "has been done and it's doable. So, for example, some of the ones that will be considered either"
+    },
+    {
+      "index": 14,
+      "start": 112.32,
+      "end": 119.32,
+      "duration": 7.0,
+      "text": "today or in the problem set are things like"
+    },
+    {
+      "index": 15,
+      "start": 120.82,
+      "end": 123.7,
+      "duration": 2.88,
+      "text": "oh... y' = x / y"
+    },
+    {
+      "index": 16,
+      "start": 123.71,
+      "end": 131.39,
+      "duration": 7.68,
+      "text": "That's pretty simple. The problem set has y' = ...let's see..."
+    },
+    {
+      "index": 17,
+      "start": 137.18,
+      "end": 141.68,
+      "duration": 4.5,
+      "text": "x - y^2."
+    },
+    {
+      "index": 18,
+      "start": 141.68,
+      "end": 150.24,
+      "duration": 8.56,
+      "text": "And, it also has y' = y - x^2."
+    },
+    {
+      "index": 19,
+      "start": 151.0,
+      "end": 157.03,
+      "duration": 6.03,
+      "text": "There are others, too. Now, when you look at this, this, of course, you can solve by"
+    },
+    {
+      "index": 20,
+      "start": 157.03,
+      "end": 165.0,
+      "duration": 7.97,
+      "text": "separating variables. So, this is solvable. This one is-- and neither of these can you"
+    },
+    {
+      "index": 21,
+      "start": 165.0,
+      "end": 172.0,
+      "duration": 7.0,
+      "text": "separate variables. And they look extremely similar. But they are extremely dissimilar."
+    },
+    {
+      "index": 22,
+      "start": 172.23,
+      "end": 179.84,
+      "duration": 7.61,
+      "text": "The most dissimilar about them is that this one is easily solvable. And you will learn,"
+    },
+    {
+      "index": 23,
+      "start": 179.84,
+      "end": 184.06,
+      "duration": 4.22,
+      "text": "if you don't know already, next time next Friday how to solve this one"
+    },
+    {
+      "index": 24,
+      "start": 184.06,
+      "end": 189.39,
+      "duration": 5.33,
+      "text": "This one, which looks almost the same, is unsolvable in a certain sense. Namely, there"
+    },
+    {
+      "index": 25,
+      "start": 189.39,
+      "end": 194.59,
+      "duration": 5.2,
+      "text": "are no elementary functions which you can write down, which will give a solution of"
+    },
+    {
+      "index": 26,
+      "start": 194.59,
+      "end": 200.79,
+      "duration": 6.2,
+      "text": "that differential equation. So, right away, one confronts the most significant fact that"
+    },
+    {
+      "index": 27,
+      "start": 200.79,
+      "end": 205.959,
+      "duration": 5.169,
+      "text": "even for the simplest possible differential equations, those which only involve the first"
+    },
+    {
+      "index": 28,
+      "start": 205.959,
+      "end": 210.87,
+      "duration": 4.911,
+      "text": "derivative, it's possible to write down extremely looking simple guys."
+    },
+    {
+      "index": 29,
+      "start": 210.87,
+      "end": 221.91,
+      "duration": 11.04,
+      "text": "I'll put this one up in blue to indicate that it's bad. Whoops, sorry, I mean, not really"
+    },
+    {
+      "index": 30,
+      "start": 221.91,
+      "end": 232.51,
+      "duration": 10.6,
+      "text": "bad, but recalcitrant. It's not solvable in the ordinary sense in which you think of an"
+    },
+    {
+      "index": 31,
+      "start": 232.51,
+      "end": 239.209,
+      "duration": 6.699,
+      "text": "equation is solvable. And, since those equations are the rule rather than the exception, I'm"
+    },
+    {
+      "index": 32,
+      "start": 239.209,
+      "end": 245.08,
+      "duration": 5.871,
+      "text": "going about this first day to not solving a single differential equation, but indicating"
+    },
+    {
+      "index": 33,
+      "start": 245.08,
+      "end": 249.45,
+      "duration": 4.37,
+      "text": "to you what you do when you meet a blue equation like that."
+    },
+    {
+      "index": 34,
+      "start": 249.45,
+      "end": 254.989,
+      "duration": 5.539,
+      "text": "What do you do with it? So, this first day is going to be devoted to geometric ways of"
+    },
+    {
+      "index": 35,
+      "start": 254.989,
+      "end": 261.549,
+      "duration": 6.56,
+      "text": "looking at differential equations and numerical. At the very end, I'll talk a little bit about"
+    },
+    {
+      "index": 36,
+      "start": 261.549,
+      "end": 269.06,
+      "duration": 7.511,
+      "text": "numerical ways. And you'll work on both of those for the first problem set. So,"
+    },
+    {
+      "index": 37,
+      "start": 269.06,
+      "end": 276.24,
+      "duration": 7.18,
+      "text": "what's our geometric view of differential equations?"
+    },
+    {
+      "index": 38,
+      "start": 280.0,
+      "end": 282.86,
+      "duration": 2.86,
+      "text": "Well, it's something that's contrasted with"
+    },
+    {
+      "index": 39,
+      "start": 282.87,
+      "end": 288.9,
+      "duration": 6.03,
+      "text": "the usual procedures, by which you solve things and find elementary functions which solve"
+    },
+    {
+      "index": 40,
+      "start": 288.9,
+      "end": 295.68,
+      "duration": 6.78,
+      "text": "them. I'll call that the analytic method. So, on the one hand, we have the analytic"
+    },
+    {
+      "index": 41,
+      "start": 295.68,
+      "end": 303.82,
+      "duration": 8.14,
+      "text": "ideas, in which you write down explicitly the equation, y' = f(x,y)."
+    },
+    {
+      "index": 42,
+      "start": 303.82,
+      "end": 309.229,
+      "duration": 5.409,
+      "text": "And, you look for certain functions, which are called its solutions. Now, so there's"
+    },
+    {
+      "index": 43,
+      "start": 309.229,
+      "end": 316.289,
+      "duration": 7.06,
+      "text": "the ODE. And, y1 of x, notice I don't use a separate letter. I don't use g or h or something"
+    },
+    {
+      "index": 44,
+      "start": 316.29,
+      "end": 321.34,
+      "duration": 5.05,
+      "text": "like that for the solution because the letters multiply so quickly, that is, multiply in"
+    },
+    {
+      "index": 45,
+      "start": 321.34,
+      "end": 326.47,
+      "duration": 5.13,
+      "text": "the sense of rabbits, that after a while, if you keep using different letters for each"
+    },
+    {
+      "index": 46,
+      "start": 326.47,
+      "end": 329.63,
+      "duration": 3.16,
+      "text": "new idea, you can't figure out what you're talking about."
+    },
+    {
+      "index": 47,
+      "start": 329.63,
+      "end": 338.229,
+      "duration": 8.599,
+      "text": "So, I'll use y1 means, it's a solution of this differential equation. Of course, the"
+    },
+    {
+      "index": 48,
+      "start": 338.229,
+      "end": 342.949,
+      "duration": 4.72,
+      "text": "differential equation has many solutions containing an arbitrary constant. So, we'll call this"
+    },
+    {
+      "index": 49,
+      "start": 342.949,
+      "end": 350.933,
+      "duration": 7.984,
+      "text": "the solution. Now, the geometric view,"
+    },
+    {
+      "index": 50,
+      "start": 352.74,
+      "end": 356.4,
+      "duration": 3.66,
+      "text": "the geometric guy that corresponds to this version"
+    },
+    {
+      "index": 51,
+      "start": 356.4,
+      "end": 362.6,
+      "duration": 6.2,
+      "text": "of writing the equation, is something called a direction field."
+    },
+    {
+      "index": 52,
+      "start": 365.94,
+      "end": 368.54,
+      "duration": 2.6,
+      "text": "And, the solution is, from"
+    },
+    {
+      "index": 53,
+      "start": 368.54,
+      "end": 375.54,
+      "duration": 7.0,
+      "text": "the geometric point of view, something called an integral curve."
+    },
+    {
+      "index": 54,
+      "start": 378.16,
+      "end": 379.58,
+      "duration": 1.42,
+      "text": "So, let me explain if you"
+    },
+    {
+      "index": 55,
+      "start": 379.58,
+      "end": 383.25,
+      "duration": 3.67,
+      "text": "don't know what the direction field is. I know for some of you, I'm reviewing what you"
+    },
+    {
+      "index": 56,
+      "start": 383.25,
+      "end": 387.56,
+      "duration": 4.31,
+      "text": "learned in high school. Those of you who had the BC syllabus in high school should know"
+    },
+    {
+      "index": 57,
+      "start": 387.56,
+      "end": 392.54,
+      "duration": 4.98,
+      "text": "these things. But, it never hurts to get a little more practice. And, in any event, I"
+    },
+    {
+      "index": 58,
+      "start": 392.54,
+      "end": 400.22,
+      "duration": 7.68,
+      "text": "think the computer stuff that you will be doing on the problem set, a certain amount"
+    },
+    {
+      "index": 59,
+      "start": 400.22,
+      "end": 401.699,
+      "duration": 1.479,
+      "text": "of it should be novel to you."
+    },
+    {
+      "index": 60,
+      "start": 401.699,
+      "end": 408.56,
+      "duration": 6.861,
+      "text": "It was novel to me, so why not to you? So, what's a direction field? Well, the direction"
+    },
+    {
+      "index": 61,
+      "start": 408.56,
+      "end": 415.84,
+      "duration": 7.28,
+      "text": "field is, you take the plane, and in each point of the plane-- of course, that's an"
+    },
+    {
+      "index": 62,
+      "start": 415.85,
+      "end": 420.41,
+      "duration": 4.56,
+      "text": "impossibility. But, you pick some points of the plane. You draw what's called a little"
+    },
+    {
+      "index": 63,
+      "start": 420.41,
+      "end": 425.97,
+      "duration": 5.56,
+      "text": "line element. So, there is a point. It's a little line, and the only thing which distinguishes"
+    },
+    {
+      "index": 64,
+      "start": 425.97,
+      "end": 431.56,
+      "duration": 5.59,
+      "text": "it outside of its position in the plane, so here's the point, (x,y), at which we are drawing"
+    },
+    {
+      "index": 65,
+      "start": 431.56,
+      "end": 442.68,
+      "duration": 11.12,
+      "text": "this line element, is its slope. And, what is its slope? Its slope is to be f(x,y)."
+    },
+    {
+      "index": 66,
+      "start": 445.12,
+      "end": 451.36,
+      "duration": 6.24,
+      "text": "And now, You fill up the plane with these things until you're tired of putting then in. So,"
+    },
+    {
+      "index": 67,
+      "start": 451.4,
+      "end": 453.08,
+      "duration": 1.68,
+      "text": "I'm going to get tired pretty quickly."
+    },
+    {
+      "index": 68,
+      "start": 453.08,
+      "end": 458.699,
+      "duration": 5.619,
+      "text": "So, I don't know, let's not make them all go the same way. That sort of seems cheating."
+    },
+    {
+      "index": 69,
+      "start": 458.699,
+      "end": 465.63,
+      "duration": 6.931,
+      "text": "How about here? Here's a few randomly chosen line elements that I put in, and I putted"
+    },
+    {
+      "index": 70,
+      "start": 465.63,
+      "end": 470.21,
+      "duration": 4.58,
+      "text": "the slopes at random since I didn't have any particular differential equation in mind."
+    },
+    {
+      "index": 71,
+      "start": 470.21,
+      "end": 477.43,
+      "duration": 7.22,
+      "text": "Now, the integral curve, so those are the line elements. The integral curve is a curve,"
+    },
+    {
+      "index": 72,
+      "start": 477.43,
+      "end": 485.42,
+      "duration": 7.99,
+      "text": "which goes through the plane, and at every point is tangent to the line element there."
+    },
+    {
+      "index": 73,
+      "start": 485.42,
+      "end": 492.639,
+      "duration": 7.219,
+      "text": "So, this is the integral curve. Hey, wait a minute, I thought tangents were the line"
+    },
+    {
+      "index": 74,
+      "start": 492.639,
+      "end": 497.25,
+      "duration": 4.611,
+      "text": "element there didn't even touch it. Well, I can't fill up the plane with line elements."
+    },
+    {
+      "index": 75,
+      "start": 497.25,
+      "end": 502.259,
+      "duration": 5.009,
+      "text": "Here, at this point, there was a line element, which I didn't bother drawing in. And, it"
+    },
+    {
+      "index": 76,
+      "start": 502.259,
+      "end": 508.71,
+      "duration": 6.451,
+      "text": "was tangent to that. Same thing over here: if I drew the line element here, I would find"
+    },
+    {
+      "index": 77,
+      "start": 508.71,
+      "end": 513.289,
+      "duration": 4.579,
+      "text": "that the curve had exactly the right slope there."
+    },
+    {
+      "index": 78,
+      "start": 513.289,
+      "end": 523.8,
+      "duration": 10.511,
+      "text": "So, the point is the integral, what distinguishes the integral curve is that everywhere it has"
+    },
+    {
+      "index": 79,
+      "start": 523.8,
+      "end": 529.58,
+      "duration": 5.78,
+      "text": "the direction, that's the way I'll indicate that it's tangent, has the direction of the"
+    },
+    {
+      "index": 80,
+      "start": 529.58,
+      "end": 539.98,
+      "duration": 10.4,
+      "text": "field everywhere at all points on the curve, of course, where it doesn't go. It doesn't"
+    },
+    {
+      "index": 81,
+      "start": 539.99,
+      "end": 550.7,
+      "duration": 10.71,
+      "text": "have any mission to fulfill. Now, I say that this integral curve is the graph of the solution"
+    },
+    {
+      "index": 82,
+      "start": 550.7,
+      "end": 556.54,
+      "duration": 5.84,
+      "text": "to the differential equation. In other words, writing down analytically the differential"
+    },
+    {
+      "index": 83,
+      "start": 556.54,
+      "end": 563.0,
+      "duration": 6.46,
+      "text": "equation is the same geometrically as drawing this direction field, and solving analytically"
+    },
+    {
+      "index": 84,
+      "start": 563.0,
+      "end": 568.32,
+      "duration": 5.32,
+      "text": "for a solution of the differential equation is the same thing as geometrically drawing"
+    },
+    {
+      "index": 85,
+      "start": 568.32,
+      "end": 571.0,
+      "duration": 2.68,
+      "text": "an integral curve. So, what am I saying?"
+    },
+    {
+      "index": 86,
+      "start": 571.0,
+      "end": 578.0,
+      "duration": 7.0,
+      "text": "I say that an integral curve,"
+    },
+    {
+      "index": 87,
+      "start": 578.74,
+      "end": 582.38,
+      "duration": 3.64,
+      "text": "all right, let me write it this way. I'll make a little theorem"
+    },
+    {
+      "index": 88,
+      "start": 582.38,
+      "end": 591.74,
+      "duration": 9.36,
+      "text": "out of it, that y1(x) is a solution to the differential equation"
+    },
+    {
+      "index": 89,
+      "start": 594.64,
+      "end": 598.38,
+      "duration": 3.74,
+      "text": "if, and only if,"
+    },
+    {
+      "index": 90,
+      "start": 598.38,
+      "end": 611.66,
+      "duration": 13.28,
+      "text": "the graph, the curve associated with this, the graph of y1 of x is an integral curve."
+    },
+    {
+      "index": 91,
+      "start": 611.66,
+      "end": 617.3,
+      "duration": 5.64,
+      "text": "Integral curve of what? Well, of the direction field associated with that equation. But there isn't"
+    },
+    {
+      "index": 92,
+      "start": 617.31,
+      "end": 621.55,
+      "duration": 4.24,
+      "text": "quite enough room to write that on the board. But, you could put it in your notes, if you"
+    },
+    {
+      "index": 93,
+      "start": 621.55,
+      "end": 630.5,
+      "duration": 8.95,
+      "text": "take notes. So, this is the relation between the two, the integral curves of the graphs"
+    },
+    {
+      "index": 94,
+      "start": 630.5,
+      "end": 631.43,
+      "duration": 0.93,
+      "text": "or solutions."
+    },
+    {
+      "index": 95,
+      "start": 631.43,
+      "end": 637.69,
+      "duration": 6.26,
+      "text": "Now, why is that so? Well, in fact, all I have to do to prove this, if you can call"
+    },
+    {
+      "index": 96,
+      "start": 637.69,
+      "end": 644.82,
+      "duration": 7.13,
+      "text": "it a proof at all, is simply to translate what each side really means. What does it"
+    },
+    {
+      "index": 97,
+      "start": 644.82,
+      "end": 651.18,
+      "duration": 6.36,
+      "text": "really mean to say that a given function is a solution to the differential equation? Well,"
+    },
+    {
+      "index": 98,
+      "start": 651.18,
+      "end": 656.94,
+      "duration": 5.76,
+      "text": "it means that if you plug it into the differential equation, it satisfies it. Okay, what is that?"
+    },
+    {
+      "index": 99,
+      "start": 656.94,
+      "end": 660.88,
+      "duration": 3.94,
+      "text": "So, how do I plug it into the differential equation and check that it satisfies it?"
+    },
+    {
+      "index": 100,
+      "start": 660.88,
+      "end": 668.38,
+      "duration": 7.5,
+      "text": "Well, doing it in the abstract, I first calculate its derivative. And then, how will it look"
+    },
+    {
+      "index": 101,
+      "start": 668.38,
+      "end": 673.17,
+      "duration": 4.79,
+      "text": "after I plugged it into the differential equation? Well, I don't do anything to the x, but wherever"
+    },
+    {
+      "index": 102,
+      "start": 673.17,
+      "end": 679.16,
+      "duration": 5.99,
+      "text": "I see y, I plug in this particular function. So, in notation, that would be written this"
+    },
+    {
+      "index": 103,
+      "start": 679.16,
+      "end": 686.16,
+      "duration": 7.0,
+      "text": "way. So, for this to be a solution means this,"
+    },
+    {
+      "index": 104,
+      "start": 688.16,
+      "end": 692.46,
+      "duration": 4.3,
+      "text": "that that equation is satisfied. Okay, what"
+    },
+    {
+      "index": 105,
+      "start": 692.47,
+      "end": 699.64,
+      "duration": 7.17,
+      "text": "does it mean for the graph to be an integral curve? Well, it means that at each point,"
+    },
+    {
+      "index": 106,
+      "start": 699.64,
+      "end": 710.32,
+      "duration": 10.68,
+      "text": "the slope of this curve, it means that the slope of y1 of x should be, at each point,"
+    },
+    {
+      "index": 107,
+      "start": 710.32,
+      "end": 724.58,
+      "duration": 14.26,
+      "text": "(x1,y1). It should be equal to the slope of the direction field at that point."
+    },
+    {
+      "index": 108,
+      "start": 724.58,
+      "end": 730.1,
+      "duration": 5.52,
+      "text": "And then, what is the slope of the direction field at that point? Well, it is f of that"
+    },
+    {
+      "index": 109,
+      "start": 730.11,
+      "end": 742.51,
+      "duration": 12.4,
+      "text": "particular, well, at the point, (x,y1). If you like, you can put a subscript, one, on"
+    },
+    {
+      "index": 110,
+      "start": 742.51,
+      "end": 747.019,
+      "duration": 4.509,
+      "text": "there, send a one here or a zero there, to indicate that you mean a particular point."
+    },
+    {
+      "index": 111,
+      "start": 747.019,
+      "end": 753.06,
+      "duration": 6.041,
+      "text": "But, it looks better if you don't. But, there's some possibility of confusion. I admit to"
+    },
+    {
+      "index": 112,
+      "start": 753.06,
+      "end": 757.73,
+      "duration": 4.67,
+      "text": "that. So, the slope of the direction field, what is that slope? Well, by the way, I calculated"
+    },
+    {
+      "index": 113,
+      "start": 757.73,
+      "end": 764.35,
+      "duration": 6.62,
+      "text": "the direction field. Its slope at the point was to be x, whatever the value of x was,"
+    },
+    {
+      "index": 114,
+      "start": 764.35,
+      "end": 772.52,
+      "duration": 8.17,
+      "text": "and whatever the value of y1(x) was, substituted into the right-hand side of the equation."
+    },
+    {
+      "index": 115,
+      "start": 772.52,
+      "end": 778.68,
+      "duration": 6.16,
+      "text": "So, what the slope of this function of that curve of the graph should be equal to the"
+    },
+    {
+      "index": 116,
+      "start": 778.68,
+      "end": 781.49,
+      "duration": 2.81,
+      "text": "slope of the direction field. Now, what does this say?"
+    },
+    {
+      "index": 117,
+      "start": 781.49,
+      "end": 788.49,
+      "duration": 7.0,
+      "text": "Well, what's the slope of y1(x)? That's y1'(x). That's from the first day of 18.01, calculus."
+    },
+    {
+      "index": 118,
+      "start": 788.74,
+      "end": 794.92,
+      "duration": 6.18,
+      "text": "What's the slope of the direction field? This? Well, it's this. And, that's with the right"
+    },
+    {
+      "index": 119,
+      "start": 794.92,
+      "end": 801.23,
+      "duration": 6.31,
+      "text": "hand side. So, saying these two guys are the same or equal, is exactly, analytically, the"
+    },
+    {
+      "index": 120,
+      "start": 801.23,
+      "end": 807.39,
+      "duration": 6.16,
+      "text": "same as saying these two guys are equal. So, in other words, the proof consists of, what"
+    },
+    {
+      "index": 121,
+      "start": 807.39,
+      "end": 812.26,
+      "duration": 4.87,
+      "text": "does this really mean? What does this really mean? And after you see what both really mean,"
+    },
+    {
+      "index": 122,
+      "start": 812.26,
+      "end": 814.2,
+      "duration": 1.94,
+      "text": "you say, yeah, they're the same."
+    },
+    {
+      "index": 123,
+      "start": 814.2,
+      "end": 830.44,
+      "duration": 16.24,
+      "text": "So, I don't how to write that. It's okay: same, same, how's that? This is the same as that."
+    },
+    {
+      "index": 124,
+      "start": 831.84,
+      "end": 838.019,
+      "duration": 6.179,
+      "text": "Okay, well, this leaves us the interesting question of how do you draw a direction from"
+    },
+    {
+      "index": 125,
+      "start": 838.019,
+      "end": 845.259,
+      "duration": 7.24,
+      "text": "the, well, this being 2003, mostly computers draw them for you. Nonetheless, you do have"
+    },
+    {
+      "index": 126,
+      "start": 845.26,
+      "end": 849.56,
+      "duration": 4.3,
+      "text": "to know a certain amount. I've given you a couple of exercises where you have to draw"
+    },
+    {
+      "index": 127,
+      "start": 849.56,
+      "end": 855.7,
+      "duration": 6.14,
+      "text": "the direction field yourself. This is so you get a feeling for it, and also because humans"
+    },
+    {
+      "index": 128,
+      "start": 855.7,
+      "end": 862.7,
+      "duration": 7.0,
+      "text": "don't draw direction fields the same way computers do. So, let's first of all, how did computers"
+    },
+    {
+      "index": 129,
+      "start": 863.48,
+      "end": 870.48,
+      "duration": 7.0,
+      "text": "do it? They are very stupid. There's no problem."
+    },
+    {
+      "index": 130,
+      "start": 872.42,
+      "end": 878.61,
+      "duration": 6.19,
+      "text": "Since they go very fast and have unlimited amounts of energy to waste, the computer method"
+    },
+    {
+      "index": 131,
+      "start": 878.61,
+      "end": 889.79,
+      "duration": 11.18,
+      "text": "is the naive one. You pick the point. You pick a point, and generally, they are usually"
+    },
+    {
+      "index": 132,
+      "start": 889.79,
+      "end": 894.68,
+      "duration": 4.89,
+      "text": "equally spaced. You determine some spacing, that one: blah, blah, blah, blah, blah, blah,"
+    },
+    {
+      "index": 133,
+      "start": 894.68,
+      "end": 911.68,
+      "duration": 17.0,
+      "text": "equally spaced. And, at each point, it computes f(x, y) at the point, finds, meets,"
+    },
+    {
+      "index": 134,
+      "start": 911.68,
+      "end": 918.04,
+      "duration": 6.36,
+      "text": "and computes the value of f of (x, y), that function, and the next thing is, on the screen,"
+    },
+    {
+      "index": 135,
+      "start": 918.04,
+      "end": 930.92,
+      "duration": 12.88,
+      "text": "it draws, at (x, y), the little line element having slope f(x, y). In other words, it does"
+    },
+    {
+      "index": 136,
+      "start": 930.93,
+      "end": 935.55,
+      "duration": 4.62,
+      "text": "what the differential equation tells it to do."
+    },
+    {
+      "index": 137,
+      "start": 935.55,
+      "end": 940.91,
+      "duration": 5.36,
+      "text": "And the only thing that it does is you can, if you are telling the thing to draw the direction"
+    },
+    {
+      "index": 138,
+      "start": 940.91,
+      "end": 946.209,
+      "duration": 5.299,
+      "text": "field, about the only option you have is telling what the spacing should be, and sometimes"
+    },
+    {
+      "index": 139,
+      "start": 946.209,
+      "end": 950.019,
+      "duration": 3.81,
+      "text": "people don't like to see a whole line. They only like to see a little bit of a half line."
+    },
+    {
+      "index": 140,
+      "start": 950.019,
+      "end": 954.5,
+      "duration": 4.481,
+      "text": "And, you can sometimes tell, according to the program, tell the computer how long you"
+    },
+    {
+      "index": 141,
+      "start": 954.5,
+      "end": 958.85,
+      "duration": 4.35,
+      "text": "want that line to be, if you want it teeny or a little bigger. Once in awhile you want"
+    },
+    {
+      "index": 142,
+      "start": 958.85,
+      "end": 961.6,
+      "duration": 2.75,
+      "text": "it narrower on it, but not right now."
+    },
+    {
+      "index": 143,
+      "start": 961.6,
+      "end": 970.34,
+      "duration": 8.74,
+      "text": "Okay, that's what a computer does. What does a human do? This is what it means to be human."
+    },
+    {
+      "index": 144,
+      "start": 970.35,
+      "end": 977.61,
+      "duration": 7.26,
+      "text": "You use your intelligence. From a human point of view, this stuff has been done in the wrong"
+    },
+    {
+      "index": 145,
+      "start": 977.61,
+      "end": 982.43,
+      "duration": 4.82,
+      "text": "order. And the reason it's been done in the wrong order: because for each new point, it"
+    },
+    {
+      "index": 146,
+      "start": 982.43,
+      "end": 988.699,
+      "duration": 6.269,
+      "text": "requires a recalculation of f(x, y). That is horrible. The computer doesn't mind, but"
+    },
+    {
+      "index": 147,
+      "start": 988.699,
+      "end": 996.039,
+      "duration": 7.34,
+      "text": "a human does. So, for a human, the way to do it is not to begin by picking the point,"
+    },
+    {
+      "index": 148,
+      "start": 996.04,
+      "end": 1001.889,
+      "duration": 5.849,
+      "text": "but to begin by picking the slope that you would like to see. So, you begin by taking"
+    },
+    {
+      "index": 149,
+      "start": 1001.889,
+      "end": 1009.8,
+      "duration": 7.911,
+      "text": "the slope. Let's call it the value of the slope, C. So, you pick a number. C is two."
+    },
+    {
+      "index": 150,
+      "start": 1009.8,
+      "end": 1016.44,
+      "duration": 6.64,
+      "text": "I want to see where are all the points in the plane where the slope of that line element"
+    },
+    {
+      "index": 151,
+      "start": 1016.44,
+      "end": 1021.47,
+      "duration": 5.03,
+      "text": "would be two? Well, they will satisfy an equation."
+    },
+    {
+      "index": 152,
+      "start": 1021.47,
+      "end": 1032.949,
+      "duration": 11.479,
+      "text": "The equation is f(x,y) = C, in general. So, what you do is plot this, plot the equation,"
+    },
+    {
+      "index": 153,
+      "start": 1032.949,
+      "end": 1038.379,
+      "duration": 5.43,
+      "text": "plot this equation. Notice, it's not the differential equation. You can't exactly plot a differential"
+    },
+    {
+      "index": 154,
+      "start": 1038.379,
+      "end": 1045.759,
+      "duration": 7.38,
+      "text": "equation. It's a curve, an ordinary curve. But which curve will depend; it's, in fact,"
+    },
+    {
+      "index": 155,
+      "start": 1045.769,
+      "end": 1055.759,
+      "duration": 9.99,
+      "text": "from the 18.02 point of view, the level curve of C, sorry, it's a level curve of f of (x,"
+    },
+    {
+      "index": 156,
+      "start": 1055.759,
+      "end": 1059.779,
+      "duration": 4.02,
+      "text": "y), the function f of x and y corresponding to the level of value C"
+    },
+    {
+      "index": 157,
+      "start": 1059.779,
+      "end": 1064.539,
+      "duration": 4.76,
+      "text": "But we are not going to call it that because this is not 18.02. Instead, we're going to"
+    },
+    {
+      "index": 158,
+      "start": 1064.54,
+      "end": 1079.479,
+      "duration": 14.939,
+      "text": "call it an isocline. And then, you plot, well, you've done it. So, you've got this isocline,"
+    },
+    {
+      "index": 159,
+      "start": 1079.479,
+      "end": 1087.419,
+      "duration": 7.94,
+      "text": "except I'm going to use a solution curve, solid lines, only for integral curves. When"
+    },
+    {
+      "index": 160,
+      "start": 1087.429,
+      "end": 1092.979,
+      "duration": 5.55,
+      "text": "we do plot isoclines, to indicate that they are not solutions, we'll use dashed lines"
+    },
+    {
+      "index": 161,
+      "start": 1092.979,
+      "end": 1100.819,
+      "duration": 7.84,
+      "text": "for doing them. One of the computer things does and the other one doesn't. But they use"
+    },
+    {
+      "index": 162,
+      "start": 1100.83,
+      "end": 1105.149,
+      "duration": 4.319,
+      "text": "different colors, also. There are different ways of telling you what's an isocline and"
+    },
+    {
+      "index": 163,
+      "start": 1105.149,
+      "end": 1109.72,
+      "duration": 4.571,
+      "text": "what's the solution curve. So, and what do you do? So, these are all the points where"
+    },
+    {
+      "index": 164,
+      "start": 1109.72,
+      "end": 1111.529,
+      "duration": 1.809,
+      "text": "the slope is going to be C."
+    },
+    {
+      "index": 165,
+      "start": 1111.529,
+      "end": 1118.529,
+      "duration": 7.0,
+      "text": "And now, what you do is draw in as many as you want of line elements having slope C."
+    },
+    {
+      "index": 166,
+      "start": 1118.57,
+      "end": 1122.84,
+      "duration": 4.27,
+      "text": "Notice how efficient that is. If you want 50 million of them and have the time, draw"
+    },
+    {
+      "index": 167,
+      "start": 1122.84,
+      "end": 1127.359,
+      "duration": 4.519,
+      "text": "in 50 million. If two or three are enough, draw in two or three. You will be looking"
+    },
+    {
+      "index": 168,
+      "start": 1127.359,
+      "end": 1132.629,
+      "duration": 5.27,
+      "text": "at the picture. You will see what the curve looks like, and that will give you your judgment"
+    },
+    {
+      "index": 169,
+      "start": 1132.629,
+      "end": 1138.499,
+      "duration": 5.87,
+      "text": "as to how you are to do that. So, in general, a picture drawn that way, so let's say, an"
+    },
+    {
+      "index": 170,
+      "start": 1138.499,
+      "end": 1142.559,
+      "duration": 4.06,
+      "text": "isocline corresponding to C equals zero."
+    },
+    {
+      "index": 171,
+      "start": 1142.559,
+      "end": 1147.72,
+      "duration": 5.161,
+      "text": "The line elements, and I think for an isocline, for the purposes of this lecture, it would"
+    },
+    {
+      "index": 172,
+      "start": 1147.72,
+      "end": 1153.359,
+      "duration": 5.639,
+      "text": "be a good idea to put isoclines. Okay, so I'm going to put solution curves in pink,"
+    },
+    {
+      "index": 173,
+      "start": 1153.359,
+      "end": 1164.059,
+      "duration": 10.7,
+      "text": "or whatever this color is, and isoclines are going to be in orange, I guess. So, isocline,"
+    },
+    {
+      "index": 174,
+      "start": 1164.07,
+      "end": 1169.649,
+      "duration": 5.579,
+      "text": "represented by a dashed line, and now you will put in the line elements of, we'll need"
+    },
+    {
+      "index": 175,
+      "start": 1169.649,
+      "end": 1173.71,
+      "duration": 4.061,
+      "text": "lots of chalk for that. So, I'll use white chalk."
+    },
+    {
+      "index": 176,
+      "start": 1173.71,
+      "end": 1178.72,
+      "duration": 5.01,
+      "text": "Y horizontal? Because according to this the slope is supposed to be zero there. And at"
+    },
+    {
+      "index": 177,
+      "start": 1178.72,
+      "end": 1183.899,
+      "duration": 5.179,
+      "text": "the same way, how about an isocline where the slope is negative one? Let's suppose here"
+    },
+    {
+      "index": 178,
+      "start": 1183.899,
+      "end": 1189.419,
+      "duration": 5.52,
+      "text": "C is equal to negative one. Okay, then it will look like this. These are supposed to"
+    },
+    {
+      "index": 179,
+      "start": 1189.419,
+      "end": 1196.579,
+      "duration": 7.16,
+      "text": "be lines of slope negative one. Don't shoot me if they are not. So, that's the principle."
+    },
+    {
+      "index": 180,
+      "start": 1196.58,
+      "end": 1201.009,
+      "duration": 4.429,
+      "text": "So, this is how you will fill up the plane to draw a direction field: by plotting the"
+    },
+    {
+      "index": 181,
+      "start": 1201.009,
+      "end": 1204.19,
+      "duration": 3.181,
+      "text": "isoclines first."
+    },
+    {
+      "index": 182,
+      "start": 1204.19,
+      "end": 1209.359,
+      "duration": 5.169,
+      "text": "And then, once you have the isoclines there, you will have line elements. And you can draw"
+    },
+    {
+      "index": 183,
+      "start": 1209.359,
+      "end": 1213.58,
+      "duration": 4.221,
+      "text": "a direction field. Okay, so, for the next few minutes, I'd like to work a couple of"
+    },
+    {
+      "index": 184,
+      "start": 1213.58,
+      "end": 1219.26,
+      "duration": 5.68,
+      "text": "examples for you to show how this works out in practice."
+    },
+    {
+      "index": 185,
+      "start": 1235.26,
+      "end": 1236.84,
+      "duration": 1.58,
+      "text": "So, the first equation is going"
+    },
+    {
+      "index": 186,
+      "start": 1236.84,
+      "end": 1243.84,
+      "duration": 7.0,
+      "text": "to be y' = -x / y."
+    },
+    {
+      "index": 187,
+      "start": 1246.94,
+      "end": 1255.92,
+      "duration": 8.98,
+      "text": "Okay, first thing, what are the isoclines? Well, the isoclines"
+    },
+    {
+      "index": 188,
+      "start": 1262.02,
+      "end": 1265.4,
+      "duration": 3.38,
+      "text": "are going to be y."
+    },
+    {
+      "index": 189,
+      "start": 1265.409,
+      "end": 1275.72,
+      "duration": 10.311,
+      "text": "Well, -x / y = C. Maybe I better make two steps out of this. Minus x over y is equal"
+    },
+    {
+      "index": 190,
+      "start": 1275.72,
+      "end": 1281.669,
+      "duration": 5.949,
+      "text": "to C. But, of course, nobody draws a curve in that form. You'll want it in the form y"
+    },
+    {
+      "index": 191,
+      "start": 1281.669,
+      "end": 1296.379,
+      "duration": 14.71,
+      "text": "= -1 / C * x. So, there's our isocline. Why don't I put that up in orange since it's going"
+    },
+    {
+      "index": 192,
+      "start": 1296.379,
+      "end": 1304.699,
+      "duration": 8.32,
+      "text": "to be, that's the color I'll draw it in. In other words, for different values of C, now"
+    },
+    {
+      "index": 193,
+      "start": 1304.7,
+      "end": 1310.559,
+      "duration": 5.859,
+      "text": "this thing is aligned. It's aligned, in fact, through the origin. This looks pretty simple."
+    },
+    {
+      "index": 194,
+      "start": 1310.559,
+      "end": 1317.719,
+      "duration": 7.16,
+      "text": "Okay, so here's our plane. The isoclines are going to be lines through the origin. And"
+    },
+    {
+      "index": 195,
+      "start": 1317.72,
+      "end": 1321.679,
+      "duration": 3.959,
+      "text": "now, let's put them in, suppose, for example, C is equal to one."
+    },
+    {
+      "index": 196,
+      "start": 1321.679,
+      "end": 1331.679,
+      "duration": 10.0,
+      "text": "Well, if C is equal to one, then it's the line, y equals minus x. So, this is the isocline."
+    },
+    {
+      "index": 197,
+      "start": 1331.68,
+      "end": 1338.68,
+      "duration": 7.0,
+      "text": "I'll put, down here, C equals minus one. And,"
+    },
+    {
+      "index": 198,
+      "start": 1346.78,
+      "end": 1350.74,
+      "duration": 3.96,
+      "text": "and along it, the"
+    },
+    {
+      "index": 199,
+      "start": 1353.2,
+      "end": 1355.82,
+      "duration": 2.62,
+      "text": "no, something's wrong."
+    },
+    {
+      "index": 200,
+      "start": 1358.06,
+      "end": 1360.88,
+      "duration": 2.82,
+      "text": "I'm sorry?"
+    },
+    {
+      "index": 201,
+      "start": 1362.88,
+      "end": 1372.139,
+      "duration": 9.259,
+      "text": "C is one, not negative one, right, thanks. Thanks. So, C equals one. So, it should be"
+    },
+    {
+      "index": 202,
+      "start": 1372.139,
+      "end": 1377.349,
+      "duration": 5.21,
+      "text": "little line segments of slope one will be the line elements, things of slope one. OK,"
+    },
+    {
+      "index": 203,
+      "start": 1377.349,
+      "end": 1379.999,
+      "duration": 2.65,
+      "text": "now how about C equals negative one?"
+    },
+    {
+      "index": 204,
+      "start": 1379.999,
+      "end": 1387.619,
+      "duration": 7.62,
+      "text": "If C equals negative one, then it's the line, y = x. And so, that's the isocline. Notice,"
+    },
+    {
+      "index": 205,
+      "start": 1387.629,
+      "end": 1395.059,
+      "duration": 7.43,
+      "text": "still dash because these are isoclines. Here, C is negative one. And so, the slope elements"
+    },
+    {
+      "index": 206,
+      "start": 1395.059,
+      "end": 1402.739,
+      "duration": 7.68,
+      "text": "look like this. Notice, they are perpendicular. Now, notice that they are always going to"
+    },
+    {
+      "index": 207,
+      "start": 1402.749,
+      "end": 1412.279,
+      "duration": 9.53,
+      "text": "be perpendicular to the line because the slope of this line is minus one over C. But, the"
+    },
+    {
+      "index": 208,
+      "start": 1412.279,
+      "end": 1419.319,
+      "duration": 7.04,
+      "text": "slope of the line element is going to be C. Those numbers, minus one over C and C, are"
+    },
+    {
+      "index": 209,
+      "start": 1419.32,
+      "end": 1425.239,
+      "duration": 5.919,
+      "text": "negative reciprocals. And, you know that two lines whose slopes are negative reciprocals"
+    },
+    {
+      "index": 210,
+      "start": 1425.239,
+      "end": 1432.099,
+      "duration": 6.86,
+      "text": "are perpendicular. So, the line elements are going to be perpendicular to these. And therefore,"
+    },
+    {
+      "index": 211,
+      "start": 1432.099,
+      "end": 1437.45,
+      "duration": 5.351,
+      "text": "I hardly even have to bother calculating, doing any more calculation. Here's going to"
+    },
+    {
+      "index": 212,
+      "start": 1437.45,
+      "end": 1440.509,
+      "duration": 3.059,
+      "text": "be a, well, how about this one?"
+    },
+    {
+      "index": 213,
+      "start": 1440.509,
+      "end": 1447.409,
+      "duration": 6.9,
+      "text": "Here's a controversial isocline. Is that an isocline? Well, wait a minute. That doesn't"
+    },
+    {
+      "index": 214,
+      "start": 1447.409,
+      "end": 1457.009,
+      "duration": 9.6,
+      "text": "correspond to anything looking like this. Ah-ha, but it would if I put C multiplied"
+    },
+    {
+      "index": 215,
+      "start": 1457.009,
+      "end": 1463.429,
+      "duration": 6.42,
+      "text": "through by C. And then, it would correspond to C being zero. In other words, don't write"
+    },
+    {
+      "index": 216,
+      "start": 1463.429,
+      "end": 1470.709,
+      "duration": 7.28,
+      "text": "it like this. Multiply through by C. It will read C y = - x. And then, when C is zero,"
+    },
+    {
+      "index": 217,
+      "start": 1471.33,
+      "end": 1474.609,
+      "duration": 3.279,
+      "text": "I have x equals zero, which is exactly the y-axis."
+    },
+    {
+      "index": 218,
+      "start": 1474.609,
+      "end": 1484.369,
+      "duration": 9.76,
+      "text": "So, that really is included. How about the x-axis? Well, the x-axis is not included."
+    },
+    {
+      "index": 219,
+      "start": 1484.369,
+      "end": 1489.899,
+      "duration": 5.53,
+      "text": "However, most people include it anyway. This is very common to be a sort of sloppy and"
+    },
+    {
+      "index": 220,
+      "start": 1489.899,
+      "end": 1495.279,
+      "duration": 5.38,
+      "text": "bending the edges of corners a little bit, and hoping nobody will notice. We'll say that"
+    },
+    {
+      "index": 221,
+      "start": 1495.279,
+      "end": 1500.399,
+      "duration": 5.12,
+      "text": "corresponds to C equals infinity. I hope nobody wants to fight about that. If you do, go fight"
+    },
+    {
+      "index": 222,
+      "start": 1500.399,
+      "end": 1506.159,
+      "duration": 5.76,
+      "text": "with somebody else. So, if C is infinity, that means the little line segment should"
+    },
+    {
+      "index": 223,
+      "start": 1506.159,
+      "end": 1511.539,
+      "duration": 5.38,
+      "text": "have infinite slope, and by common consent, that means it should be vertical. And so,"
+    },
+    {
+      "index": 224,
+      "start": 1511.539,
+      "end": 1518.759,
+      "duration": 7.22,
+      "text": "we can even count this as sort of an isocline. And, I'll make the dashes smaller, indicate"
+    },
+    {
+      "index": 225,
+      "start": 1518.769,
+      "end": 1528.559,
+      "duration": 9.79,
+      "text": "it has a lower status than the others. And, I'll put this in, do this weaselly thing of"
+    },
+    {
+      "index": 226,
+      "start": 1528.559,
+      "end": 1533.729,
+      "duration": 5.17,
+      "text": "putting it in quotation marks to indicate that I'm not responsible for it."
+    },
+    {
+      "index": 227,
+      "start": 1533.729,
+      "end": 1540.44,
+      "duration": 6.711,
+      "text": "Okay, now, we now have to put it the integral curves. Well, nothing could be easier. I'm"
+    },
+    {
+      "index": 228,
+      "start": 1540.44,
+      "end": 1547.599,
+      "duration": 7.159,
+      "text": "looking for curves which are everywhere perpendicular to these rays. Well, you know from geometry"
+    },
+    {
+      "index": 229,
+      "start": 1547.6,
+      "end": 1553.36,
+      "duration": 5.76,
+      "text": "that those are circles. So, the integral curves are circles."
+    },
+    {
+      "index": 230,
+      "start": 1560.94,
+      "end": 1563.82,
+      "duration": 2.88,
+      "text": "And, it's an elementary exercise,"
+    },
+    {
+      "index": 231,
+      "start": 1563.83,
+      "end": 1573.369,
+      "duration": 9.539,
+      "text": "which I would not deprive you of the pleasure of. Solve the ODE by separation of variables."
+    },
+    {
+      "index": 232,
+      "start": 1573.369,
+      "end": 1580.159,
+      "duration": 6.79,
+      "text": "In other words, we've gotten the, so the circles are ones with a center at the origin, of course,"
+    },
+    {
+      "index": 233,
+      "start": 1580.159,
+      "end": 1587.399,
+      "duration": 7.24,
+      "text": "equal some constant. I'll call it C1, so it's not confused with this C. They look like that,"
+    },
+    {
+      "index": 234,
+      "start": 1587.4,
+      "end": 1593.16,
+      "duration": 5.76,
+      "text": "and now you should solve this by separating variables, and just confirm that the solutions"
+    },
+    {
+      "index": 235,
+      "start": 1593.169,
+      "end": 1596.2,
+      "duration": 3.031,
+      "text": "are, in fact, those circles."
+    },
+    {
+      "index": 236,
+      "start": 1596.2,
+      "end": 1602.33,
+      "duration": 6.13,
+      "text": "One interesting thing, and so I confirm this, I won't do it because I want to do geometric"
+    },
+    {
+      "index": 237,
+      "start": 1602.33,
+      "end": 1607.409,
+      "duration": 5.079,
+      "text": "and numerical things today. So, if you solve it by separating variables, one interesting"
+    },
+    {
+      "index": 238,
+      "start": 1607.409,
+      "end": 1617.369,
+      "duration": 9.96,
+      "text": "thing to note is that if I write the solution as y = y1(x), well, it'll look something like"
+    },
+    {
+      "index": 239,
+      "start": 1617.369,
+      "end": 1624.229,
+      "duration": 6.86,
+      "text": "the sqrt (C1 - x^2). We'll make the x squared because that's the way people usually put the radius."
+    },
+    {
+      "index": 240,
+      "start": 1624.229,
+      "end": 1626.249,
+      "duration": 2.02,
+      "text": "Minus x squared."
+    },
+    {
+      "index": 241,
+      "start": 1626.249,
+      "end": 1633.519,
+      "duration": 7.27,
+      "text": "And so, a solution, a typical solution looks like this. Well, what's the solution over"
+    },
+    {
+      "index": 242,
+      "start": 1633.519,
+      "end": 1642.079,
+      "duration": 8.56,
+      "text": "here? Well, that one solution will be goes from here to here. If you like, it has a negative"
+    },
+    {
+      "index": 243,
+      "start": 1642.09,
+      "end": 1647.32,
+      "duration": 5.23,
+      "text": "side to it. So, I'll make, let's say, plus. There's another solution, which has a negative"
+    },
+    {
+      "index": 244,
+      "start": 1647.32,
+      "end": 1652.589,
+      "duration": 5.269,
+      "text": "value. But let's use the one with the positive value of the square root. My point is this,"
+    },
+    {
+      "index": 245,
+      "start": 1652.589,
+      "end": 1660.589,
+      "duration": 8.0,
+      "text": "that that solution, the domain of that solution, really only goes from here to here. It's not"
+    },
+    {
+      "index": 246,
+      "start": 1660.589,
+      "end": 1665.869,
+      "duration": 5.28,
+      "text": "the whole x-axis. It's just a limited piece of the x-axis where that solution is defined."
+    },
+    {
+      "index": 247,
+      "start": 1665.869,
+      "end": 1672.629,
+      "duration": 6.76,
+      "text": "There's no way of extending it further. And, there's no way of predicting, by looking at"
+    },
+    {
+      "index": 248,
+      "start": 1672.629,
+      "end": 1677.529,
+      "duration": 4.9,
+      "text": "the differential equation, that a typical solution was going to have a limited domain"
+    },
+    {
+      "index": 249,
+      "start": 1677.529,
+      "end": 1679.949,
+      "duration": 2.42,
+      "text": "like that."
+    },
+    {
+      "index": 250,
+      "start": 1681.48,
+      "end": 1688.259,
+      "duration": 6.779,
+      "text": "In other words, you could find a solution, but how far out is it going to go? Sometimes,"
+    },
+    {
+      "index": 251,
+      "start": 1688.259,
+      "end": 1693.509,
+      "duration": 5.25,
+      "text": "it's impossible to tell, except by either finding it explicitly, or by asking a computer"
+    },
+    {
+      "index": 252,
+      "start": 1693.509,
+      "end": 1697.409,
+      "duration": 3.9,
+      "text": "to draw a picture of it, and seeing if that gives you some insight. It's one of the many"
+    },
+    {
+      "index": 253,
+      "start": 1697.409,
+      "end": 1702.2,
+      "duration": 4.791,
+      "text": "difficulties in handling differential equations. You don't know what the domain of a solution"
+    },
+    {
+      "index": 254,
+      "start": 1702.2,
+      "end": 1706.109,
+      "duration": 3.909,
+      "text": "is going to be until you've actually calculated it."
+    },
+    {
+      "index": 255,
+      "start": 1706.109,
+      "end": 1728.599,
+      "duration": 22.49,
+      "text": "Now, a slightly more complicated example is going to be, let's see, y' = 1 + x - y. It's"
+    },
+    {
+      "index": 256,
+      "start": 1728.599,
+      "end": 1735.089,
+      "duration": 6.49,
+      "text": "not a lot more complicated, and as a computer exercise, you will work with, still, more"
+    },
+    {
+      "index": 257,
+      "start": 1735.089,
+      "end": 1740.929,
+      "duration": 5.84,
+      "text": "complicated ones. But here, the isoclines would be what? Well, I set that equal to C."
+    },
+    {
+      "index": 258,
+      "start": 1740.929,
+      "end": 1747.809,
+      "duration": 6.88,
+      "text": "Can you do the algebra in your head? An isocline will have the equation: this equals C. So,"
+    },
+    {
+      "index": 259,
+      "start": 1747.809,
+      "end": 1753.419,
+      "duration": 5.61,
+      "text": "I'm going to put the y on the right hand side, and that C on the left hand side. So, it will"
+    },
+    {
+      "index": 260,
+      "start": 1753.419,
+      "end": 1765.859,
+      "duration": 12.44,
+      "text": "have the equation y = 1 + x - C, or a nicer way to write it would be y = x + 1 - C. I"
+    },
+    {
+      "index": 261,
+      "start": 1765.869,
+      "end": 1770.44,
+      "duration": 4.571,
+      "text": "guess it really doesn't matter."
+    },
+    {
+      "index": 262,
+      "start": 1770.44,
+      "end": 1776.029,
+      "duration": 5.589,
+      "text": "So there's the equation of the isocline. Let's quickly draw the direction field. And notice,"
+    },
+    {
+      "index": 263,
+      "start": 1776.029,
+      "end": 1781.059,
+      "duration": 5.03,
+      "text": "by the way, it's a simple equation, but you cannot separate variables. So, I will not,"
+    },
+    {
+      "index": 264,
+      "start": 1781.059,
+      "end": 1788.059,
+      "duration": 7.0,
+      "text": "today at any rate, be able to check the answer. I will not be able to get an analytic answer."
+    },
+    {
+      "index": 265,
+      "start": 1790.07,
+      "end": 1795.2,
+      "duration": 5.13,
+      "text": "All we'll be able to do now is get a geometric answer. But notice how quickly, relatively"
+    },
+    {
+      "index": 266,
+      "start": 1795.2,
+      "end": 1801.489,
+      "duration": 6.289,
+      "text": "quickly, one can get it. So, I'm feeling for how the solutions behave to this equation."
+    },
+    {
+      "index": 267,
+      "start": 1801.489,
+      "end": 1810.209,
+      "duration": 8.72,
+      "text": "All right, let's see, what should we plot first? I like C equals one, no, don't do C"
+    },
+    {
+      "index": 268,
+      "start": 1810.21,
+      "end": 1819.4,
+      "duration": 9.19,
+      "text": "equals one. Let's do C equals zero, first. C equals zero. That's the line. y = x + 1."
+    },
+    {
+      "index": 269,
+      "start": 1819.4,
+      "end": 1823.16,
+      "duration": 3.76,
+      "text": "Okay, let me run and get that chalk."
+    },
+    {
+      "index": 270,
+      "start": 1826.42,
+      "end": 1829.999,
+      "duration": 3.579,
+      "text": "So, I'll isoclines are in orange. If so, when C equals"
+    },
+    {
+      "index": 271,
+      "start": 1829.999,
+      "end": 1836.179,
+      "duration": 6.18,
+      "text": "zero, y equals x plus one. So, let's say it's this curve."
+    },
+    {
+      "index": 272,
+      "start": 1837.86,
+      "end": 1840.48,
+      "duration": 2.62,
+      "text": "C equals zero."
+    },
+    {
+      "index": 273,
+      "start": 1841.4,
+      "end": 1842.78,
+      "duration": 1.38,
+      "text": "How about C equals"
+    },
+    {
+      "index": 274,
+      "start": 1842.789,
+      "end": 1849.409,
+      "duration": 6.62,
+      "text": "negative one? Then it's y = x + 2. It's this curve."
+    },
+    {
+      "index": 275,
+      "start": 1852.12,
+      "end": 1856.739,
+      "duration": 4.619,
+      "text": "Well, let's label it down here."
+    },
+    {
+      "index": 276,
+      "start": 1858.66,
+      "end": 1867.159,
+      "duration": 8.499,
+      "text": "So, this is C equals negative one. C equals negative two would be y equals x, no, what am I doing?"
+    },
+    {
+      "index": 277,
+      "start": 1867.159,
+      "end": 1874.159,
+      "duration": 7.0,
+      "text": "C equals negative one is y = x + 2. That's right. Well, how about the other side?"
+    },
+    {
+      "index": 278,
+      "start": 1875.1,
+      "end": 1882.34,
+      "duration": 7.24,
+      "text": "If C equals plus one, well, then it's going to go through the origin."
+    },
+    {
+      "index": 279,
+      "start": 1885.8,
+      "end": 1892.42,
+      "duration": 6.62,
+      "text": "It looks like a little more room down here. How about, so if this is going to be C equals one, then I sort of"
+    },
+    {
+      "index": 280,
+      "start": 1892.429,
+      "end": 1898.649,
+      "duration": 6.22,
+      "text": "get the idea. C equals two will look like this. They're all going to be parallel lines"
+    },
+    {
+      "index": 281,
+      "start": 1898.649,
+      "end": 1905.32,
+      "duration": 6.671,
+      "text": "because all that's changing is the y-intercept, as I do this thing. So, here, it's C equals"
+    },
+    {
+      "index": 282,
+      "start": 1905.32,
+      "end": 1914.36,
+      "duration": 9.04,
+      "text": "two. That's probably enough. All right, let's put it in the line elements. All right,"
+    },
+    {
+      "index": 283,
+      "start": 1914.36,
+      "end": 1921.86,
+      "duration": 7.5,
+      "text": "C equals negative one. These will be perpendicular. C equals zero, like this."
+    },
+    {
+      "index": 284,
+      "start": 1924.999,
+      "end": 1930.529,
+      "duration": 5.53,
+      "text": "C equals one. Oh, this is interesting. I can't even draw in the line elements because they"
+    },
+    {
+      "index": 285,
+      "start": 1930.529,
+      "end": 1937.529,
+      "duration": 7.0,
+      "text": "seem to coincide with the curve itself, with the line itself. They write y along the line,"
+    },
+    {
+      "index": 286,
+      "start": 1937.839,
+      "end": 1943.919,
+      "duration": 6.08,
+      "text": "and that makes it hard to draw them in. How about C equals two? Well, here, the line elements"
+    },
+    {
+      "index": 287,
+      "start": 1943.919,
+      "end": 1950.359,
+      "duration": 6.44,
+      "text": "will be slanty. They'll have slope two, so a pretty slanty up. And, I can see if a C"
+    },
+    {
+      "index": 288,
+      "start": 1950.359,
+      "end": 1954.899,
+      "duration": 4.54,
+      "text": "equals three in the same way. There are going to be even more slantier up. And here, they're"
+    },
+    {
+      "index": 289,
+      "start": 1954.899,
+      "end": 1961.779,
+      "duration": 6.88,
+      "text": "going to be even more slanty down. This is not very scientific terminology or mathematical,"
+    },
+    {
+      "index": 290,
+      "start": 1961.779,
+      "end": 1967.229,
+      "duration": 5.45,
+      "text": "but you get the idea. Okay, so there's our quick version of the direction field. All"
+    },
+    {
+      "index": 291,
+      "start": 1967.229,
+      "end": 1972.389,
+      "duration": 5.16,
+      "text": "we have to do is put in some integral curves now. Well, it looks like it's doing this."
+    },
+    {
+      "index": 292,
+      "start": 1972.389,
+      "end": 1977.999,
+      "duration": 5.61,
+      "text": "It gets less slanty here. It levels out, has slope zero."
+    },
+    {
+      "index": 293,
+      "start": 1977.999,
+      "end": 1982.469,
+      "duration": 4.47,
+      "text": "And now, in this part of the plain, the slope seems to be rising. So, it must do something"
+    },
+    {
+      "index": 294,
+      "start": 1982.469,
+      "end": 1989.519,
+      "duration": 7.05,
+      "text": "like that. This guy must do something like this. I'm a little doubtful of what I should"
+    },
+    {
+      "index": 295,
+      "start": 1989.519,
+      "end": 1998.799,
+      "duration": 9.28,
+      "text": "be doing here. Or, how about going from the other side? Well, it rises, gets a little,"
+    },
+    {
+      "index": 296,
+      "start": 1998.809,
+      "end": 2006.069,
+      "duration": 7.26,
+      "text": "should it cross this? What should I do? Well, there's one integral curve, which is easy"
+    },
+    {
+      "index": 297,
+      "start": 2006.07,
+      "end": 2013.139,
+      "duration": 7.069,
+      "text": "to see. It's this one. This line is both an isocline and an integral curve."
+    },
+    {
+      "index": 298,
+      "start": 2013.139,
+      "end": 2024.199,
+      "duration": 11.06,
+      "text": "It's everything, except drawable, [LAUGHTER] so, you understand this is the same line."
+    },
+    {
+      "index": 299,
+      "start": 2024.2,
+      "end": 2029.07,
+      "duration": 4.87,
+      "text": "It's both orange and pink at the same time. But I don't know what combination color that"
+    },
+    {
+      "index": 300,
+      "start": 2029.07,
+      "end": 2042.109,
+      "duration": 13.039,
+      "text": "would make. It doesn't look like a line, but be sympathetic. Now, the question is, what's"
+    },
+    {
+      "index": 301,
+      "start": 2042.109,
+      "end": 2051.02,
+      "duration": 8.911,
+      "text": "happening in this corridor? In the corridor, that's not a mathematical word either, between"
+    },
+    {
+      "index": 302,
+      "start": 2051.02,
+      "end": 2056.519,
+      "duration": 5.499,
+      "text": "the isoclines for, well, what are they? They are the isoclines for C equals two, and C"
+    },
+    {
+      "index": 303,
+      "start": 2056.52,
+      "end": 2059.5,
+      "duration": 2.98,
+      "text": "equals zero."
+    },
+    {
+      "index": 304,
+      "start": 2063.86,
+      "end": 2068.74,
+      "duration": 4.88,
+      "text": "How does that corridor look? Well: something like this. Over here, the"
+    },
+    {
+      "index": 305,
+      "start": 2068.74,
+      "end": 2073.95,
+      "duration": 5.21,
+      "text": "lines all look like that. And here, they all look like this."
+    },
+    {
+      "index": 306,
+      "start": 2073.95,
+      "end": 2086.76,
+      "duration": 12.81,
+      "text": "The slope is two. And, a hapless solution gets in there. What's it to do? Well, do you"
+    },
+    {
+      "index": 307,
+      "start": 2086.76,
+      "end": 2092.169,
+      "duration": 5.409,
+      "text": "see that if a solution gets in that corridor, an integral curve gets in that corridor, no"
+    },
+    {
+      "index": 308,
+      "start": 2092.169,
+      "end": 2100.96,
+      "duration": 8.791,
+      "text": "escape is possible. It's like a lobster trap. The lobster can walk in. But it cannot walk"
+    },
+    {
+      "index": 309,
+      "start": 2100.96,
+      "end": 2108.44,
+      "duration": 7.48,
+      "text": "out because things are always going in. How could it escape? Well, it would have to double"
+    },
+    {
+      "index": 310,
+      "start": 2108.45,
+      "end": 2114.73,
+      "duration": 6.28,
+      "text": "back, somehow, and remember, to escape, it has to be, to escape on the left side, it"
+    },
+    {
+      "index": 311,
+      "start": 2114.73,
+      "end": 2116.66,
+      "duration": 1.93,
+      "text": "must be going horizontally."
+    },
+    {
+      "index": 312,
+      "start": 2116.66,
+      "end": 2124.66,
+      "duration": 8.0,
+      "text": "But, how could it do that without doubling back first and having the wrong slope? The"
+    },
+    {
+      "index": 313,
+      "start": 2124.66,
+      "end": 2130.22,
+      "duration": 5.56,
+      "text": "slope of everything in this corridor is positive, and to double back and escape, it would at"
+    },
+    {
+      "index": 314,
+      "start": 2130.22,
+      "end": 2134.769,
+      "duration": 4.549,
+      "text": "some point have to have negative slope. It can't do that. Well, could it escape on the"
+    },
+    {
+      "index": 315,
+      "start": 2134.769,
+      "end": 2140.549,
+      "duration": 5.78,
+      "text": "right-hand side? No, because at the moment when it wants to cross, it will have to have"
+    },
+    {
+      "index": 316,
+      "start": 2140.549,
+      "end": 2149.059,
+      "duration": 8.51,
+      "text": "a slope less than this line. But all these spiky guys are pointing; it can't escape that"
+    },
+    {
+      "index": 317,
+      "start": 2149.059,
+      "end": 2155.2,
+      "duration": 6.141,
+      "text": "way either. So, no escape is possible. It has to continue on, there. But, more than"
+    },
+    {
+      "index": 318,
+      "start": 2155.2,
+      "end": 2161.109,
+      "duration": 5.909,
+      "text": "that is true. So, a solution can't escape."
+    },
+    {
+      "index": 319,
+      "start": 2161.109,
+      "end": 2171.42,
+      "duration": 10.311,
+      "text": "Once it's in there, it can't escape. It's like, what do they call those plants, I forget,"
+    },
+    {
+      "index": 320,
+      "start": 2171.42,
+      "end": 2177.48,
+      "duration": 6.06,
+      "text": "pitcher plants. You know, all their hairs are going down. So, it looks like that. And so,"
+    },
+    {
+      "index": 321,
+      "start": 2177.48,
+      "end": 2183.22,
+      "duration": 5.74,
+      "text": "the poor little insect falls in. They could climb up the walls except that all the hairs"
+    },
+    {
+      "index": 322,
+      "start": 2183.22,
+      "end": 2188.859,
+      "duration": 5.639,
+      "text": "are going the wrong direction, and it can't get over them. Well, let's think of it that"
+    },
+    {
+      "index": 323,
+      "start": 2188.859,
+      "end": 2194.039,
+      "duration": 5.18,
+      "text": "way: this poor trap solution. So, it does what it has to do. Now, there's more to it"
+    },
+    {
+      "index": 324,
+      "start": 2194.039,
+      "end": 2201.039,
+      "duration": 7.0,
+      "text": "than that. Because there are two principles involved here that you should know, that help"
+    },
+    {
+      "index": 325,
+      "start": 2201.64,
+      "end": 2210.22,
+      "duration": 8.58,
+      "text": "a lot in drawing these pictures. Principle number one is that two integral curves cannot"
+    },
+    {
+      "index": 326,
+      "start": 2210.23,
+      "end": 2217.819,
+      "duration": 7.589,
+      "text": "cross at an angle. Two integral curves can't cross, I mean, by crossing at an angle like"
+    },
+    {
+      "index": 327,
+      "start": 2217.819,
+      "end": 2222.64,
+      "duration": 4.821,
+      "text": "that. I'll indicate what I mean by a picture like that."
+    },
+    {
+      "index": 328,
+      "start": 2222.64,
+      "end": 2231.319,
+      "duration": 8.679,
+      "text": "Now, why not? This is an important principle. Let's put that up in the white box. They can't"
+    },
+    {
+      "index": 329,
+      "start": 2231.319,
+      "end": 2239.139,
+      "duration": 7.82,
+      "text": "cross because if two integral curves, are trying to cross, well, one will look like"
+    },
+    {
+      "index": 330,
+      "start": 2239.14,
+      "end": 2245.849,
+      "duration": 6.709,
+      "text": "this. It's an integral curve because it has this slope. And, the other integral curve"
+    },
+    {
+      "index": 331,
+      "start": 2245.849,
+      "end": 2252.24,
+      "duration": 6.391,
+      "text": "has this slope. And now, they fight with each other. What is the true slope at that point?"
+    },
+    {
+      "index": 332,
+      "start": 2252.24,
+      "end": 2257.22,
+      "duration": 4.98,
+      "text": "Well, the direction field only allows you to have one slope. If there's a line element"
+    },
+    {
+      "index": 333,
+      "start": 2257.22,
+      "end": 2261.67,
+      "duration": 4.45,
+      "text": "at that point, it has a definite slope. And therefore, it cannot have both the slope and"
+    },
+    {
+      "index": 334,
+      "start": 2261.67,
+      "end": 2271.72,
+      "duration": 10.05,
+      "text": "that one. It's as simple as that. So, the reason is you can't have two slopes. The direction"
+    },
+    {
+      "index": 335,
+      "start": 2271.72,
+      "end": 2278.72,
+      "duration": 7.0,
+      "text": "field doesn't allow it. Well, that's a big, big help because if I know, here's an integral"
+    },
+    {
+      "index": 336,
+      "start": 2278.97,
+      "end": 2283.44,
+      "duration": 4.47,
+      "text": "curve, and if I know that none of these other pink integral curves are allowed to cross"
+    },
+    {
+      "index": 337,
+      "start": 2283.44,
+      "end": 2285.769,
+      "duration": 2.329,
+      "text": "it, how else can I do it?"
+    },
+    {
+      "index": 338,
+      "start": 2285.769,
+      "end": 2291.74,
+      "duration": 5.971,
+      "text": "Well, they can't escape. They can't cross. It's sort of clear that they must get closer"
+    },
+    {
+      "index": 339,
+      "start": 2291.74,
+      "end": 2299.079,
+      "duration": 7.339,
+      "text": "and closer to it. You know, I'd have to work a little to justify that. But I think that"
+    },
+    {
+      "index": 340,
+      "start": 2299.079,
+      "end": 2305.069,
+      "duration": 5.99,
+      "text": "nobody would have any doubt of it who did a little experimentation. In other words,"
+    },
+    {
+      "index": 341,
+      "start": 2305.069,
+      "end": 2314.169,
+      "duration": 9.1,
+      "text": "all these curves joined that little tube and get closer and closer to this line, y = x."
+    },
+    {
+      "index": 342,
+      "start": 2314.17,
+      "end": 2322.99,
+      "duration": 8.82,
+      "text": "And there, without solving the differential equation, it's clear that all of these solutions,"
+    },
+    {
+      "index": 343,
+      "start": 2322.99,
+      "end": 2331.619,
+      "duration": 8.629,
+      "text": "how do they behave? As x goes to infinity, they become asymptotic to, they become closer"
+    },
+    {
+      "index": 344,
+      "start": 2331.619,
+      "end": 2342.139,
+      "duration": 10.52,
+      "text": "and closer to the solution, x. Is x a solution? Yeah, because y equals x is an integral curve."
+    },
+    {
+      "index": 345,
+      "start": 2342.15,
+      "end": 2348.41,
+      "duration": 6.26,
+      "text": "Is x a solution? Yeah, because if I plug in y equals x, I get what? On the right-hand"
+    },
+    {
+      "index": 346,
+      "start": 2348.41,
+      "end": 2360.069,
+      "duration": 11.659,
+      "text": "side, I get one. And on the left-hand side, I get one. One equals one. So, this is a solution."
+    },
+    {
+      "index": 347,
+      "start": 2360.069,
+      "end": 2369.629,
+      "duration": 9.56,
+      "text": "Let's indicate that it's a solution. So, analytically, we've discovered an analytic solution to the"
+    },
+    {
+      "index": 348,
+      "start": 2369.63,
+      "end": 2377.799,
+      "duration": 8.169,
+      "text": "differential equation, namely, Y equals X, just by this geometric process. Now, there's"
+    },
+    {
+      "index": 349,
+      "start": 2377.799,
+      "end": 2387.759,
+      "duration": 9.96,
+      "text": "one more principle like that, which is less obvious. But you do have to know it. So, you"
+    },
+    {
+      "index": 350,
+      "start": 2387.769,
+      "end": 2394.609,
+      "duration": 6.84,
+      "text": "are not allowed to cross. That's clear. But it's much, much, much, much, much less obvious"
+    },
+    {
+      "index": 351,
+      "start": 2394.609,
+      "end": 2401.049,
+      "duration": 6.44,
+      "text": "that two integral curves cannot touch. That is, they cannot even be tangent. Two integral"
+    },
+    {
+      "index": 352,
+      "start": 2401.049,
+      "end": 2405.089,
+      "duration": 4.04,
+      "text": "curves cannot be tangent."
+    },
+    {
+      "index": 353,
+      "start": 2410.67,
+      "end": 2417.119,
+      "duration": 6.449,
+      "text": "I'll indicate that by the word touch, which is what a lot of people say. In other words,"
+    },
+    {
+      "index": 354,
+      "start": 2417.119,
+      "end": 2422.519,
+      "duration": 5.4,
+      "text": "if this is illegal, so is this."
+    },
+    {
+      "index": 355,
+      "start": 2429.48,
+      "end": 2431.58,
+      "duration": 2.1,
+      "text": "Can't have it."
+    },
+    {
+      "index": 356,
+      "start": 2432.7,
+      "end": 2435.4,
+      "duration": 2.7,
+      "text": "You know, without that for example, it might"
+    },
+    {
+      "index": 357,
+      "start": 2435.41,
+      "end": 2442.71,
+      "duration": 7.3,
+      "text": "be, I might feel that there would be nothing in this to prevent those curves from joining."
+    },
+    {
+      "index": 358,
+      "start": 2442.71,
+      "end": 2449.88,
+      "duration": 7.17,
+      "text": "Why couldn't these pink curves join the line, y equals x? You know, it's a solution. They"
+    },
+    {
+      "index": 359,
+      "start": 2449.88,
+      "end": 2456.2,
+      "duration": 6.32,
+      "text": "just pitch a ride, as it were. The answer is they cannot do that because they have to"
+    },
+    {
+      "index": 360,
+      "start": 2456.2,
+      "end": 2462.42,
+      "duration": 6.22,
+      "text": "just get asymptotic to it, ever, ever closer. They can't join y equals x because at the"
+    },
+    {
+      "index": 361,
+      "start": 2462.42,
+      "end": 2465.39,
+      "duration": 2.97,
+      "text": "point where they join, you have that situation."
+    },
+    {
+      "index": 362,
+      "start": 2465.39,
+      "end": 2471.24,
+      "duration": 5.85,
+      "text": "Now, why can't you to have this? That's much more sophisticated than this, and the reason"
+    },
+    {
+      "index": 363,
+      "start": 2471.24,
+      "end": 2476.62,
+      "duration": 5.38,
+      "text": "is because of something called the Existence and Uniqueness Theorem,"
+    },
+    {
+      "index": 364,
+      "start": 2476.62,
+      "end": 2482.3,
+      "duration": 5.68,
+      "text": "Existence and Uniqueness Theorem"
+    },
+    {
+      "index": 365,
+      "start": 2485.86,
+      "end": 2488.66,
+      "duration": 2.8,
+      "text": "which says"
+    },
+    {
+      "index": 366,
+      "start": 2492.16,
+      "end": 2499.04,
+      "duration": 6.88,
+      "text": "that there is through a point, (x0, y0),"
+    },
+    {
+      "index": 367,
+      "start": 2499.04,
+      "end": 2512.34,
+      "duration": 13.3,
+      "text": "that y prime equals y' = f(x, y) has only one, and only one solution. One has one solution."
+    },
+    {
+      "index": 368,
+      "start": 2512.349,
+      "end": 2516.359,
+      "duration": 4.01,
+      "text": "In mathematics speak, that means at least one solution. It doesn't mean it has just"
+    },
+    {
+      "index": 369,
+      "start": 2516.359,
+      "end": 2522.799,
+      "duration": 6.44,
+      "text": "one solution. That's mathematical convention. It has one solution, at least one solution."
+    },
+    {
+      "index": 370,
+      "start": 2522.799,
+      "end": 2527.24,
+      "duration": 4.441,
+      "text": "But, the killer is, only one solution."
+    },
+    {
+      "index": 371,
+      "start": 2527.24,
+      "end": 2533.009,
+      "duration": 5.769,
+      "text": "That's what you have to say in mathematics if you want just one, one, and only one solution"
+    },
+    {
+      "index": 372,
+      "start": 2533.009,
+      "end": 2544.349,
+      "duration": 11.34,
+      "text": "through the point (x0, y0). So, the fact that it has one, that is the existence part. The"
+    },
+    {
+      "index": 373,
+      "start": 2544.349,
+      "end": 2550.88,
+      "duration": 6.531,
+      "text": "fact that it has only one is the uniqueness part of the theorem. Now, like all good mathematical"
+    },
+    {
+      "index": 374,
+      "start": 2550.88,
+      "end": 2560.16,
+      "duration": 9.28,
+      "text": "theorems, this one does have hypotheses. So, this is not going to be a course, I warn you,"
+    },
+    {
+      "index": 375,
+      "start": 2560.17,
+      "end": 2565.829,
+      "duration": 5.659,
+      "text": "those of you who are theoretically inclined, very rich in hypotheses. But, hypotheses for"
+    },
+    {
+      "index": 376,
+      "start": 2565.829,
+      "end": 2574.349,
+      "duration": 8.52,
+      "text": "those one or that f(x, y) should be a continuous function. Now, like polynomial, signs, should"
+    },
+    {
+      "index": 377,
+      "start": 2574.349,
+      "end": 2581.349,
+      "duration": 7.0,
+      "text": "be continuous near, in the vicinity of that point."
+    },
+    {
+      "index": 378,
+      "start": 2583.349,
+      "end": 2588.48,
+      "duration": 5.131,
+      "text": "That guarantees existence, and what guarantees uniqueness is the hypothesis that you would"
+    },
+    {
+      "index": 379,
+      "start": 2588.48,
+      "end": 2596.54,
+      "duration": 8.06,
+      "text": "not guess by yourself. Neither would I. What guarantees the uniqueness is that also, it's"
+    },
+    {
+      "index": 380,
+      "start": 2596.549,
+      "end": 2603.549,
+      "duration": 7.0,
+      "text": "partial derivative with respect to y should be continuous,"
+    },
+    {
+      "index": 381,
+      "start": 2605.44,
+      "end": 2612.2,
+      "duration": 6.76,
+      "text": "should be continuous near (x0, y0)."
+    },
+    {
+      "index": 382,
+      "start": 2615.78,
+      "end": 2617.2,
+      "duration": 1.42,
+      "text": "Well,"
+    },
+    {
+      "index": 383,
+      "start": 2620.74,
+      "end": 2630.56,
+      "duration": 9.82,
+      "text": "I have to make a decision. I don't have time to talk about Euler's method. Let me"
+    },
+    {
+      "index": 384,
+      "start": 2630.569,
+      "end": 2635.859,
+      "duration": 5.29,
+      "text": "refer you to the, there's one page of notes, and I couldn't do any more than just repeat"
+    },
+    {
+      "index": 385,
+      "start": 2635.859,
+      "end": 2640.15,
+      "duration": 4.291,
+      "text": "what's on those notes. So, I'll trust you to read that."
+    },
+    {
+      "index": 386,
+      "start": 2640.15,
+      "end": 2645.17,
+      "duration": 5.02,
+      "text": "And instead, let me give you an example which will solidify these things in your mind a"
+    },
+    {
+      "index": 387,
+      "start": 2645.17,
+      "end": 2651.43,
+      "duration": 6.26,
+      "text": "little bit. I think that's a better course. The example is not in your notes, and therefore,"
+    },
+    {
+      "index": 388,
+      "start": 2651.43,
+      "end": 2658.43,
+      "duration": 7.0,
+      "text": "remember, you heard it here first. Okay, so what's the example? It's..."
+    },
+    {
+      "index": 389,
+      "start": 2665.84,
+      "end": 2666.84,
+      "duration": 1.0,
+      "text": "So,"
+    },
+    {
+      "index": 390,
+      "start": 2672.86,
+      "end": 2676.02,
+      "duration": 3.16,
+      "text": "there's our differential equation."
+    },
+    {
+      "index": 391,
+      "start": 2677.26,
+      "end": 2684.14,
+      "duration": 6.88,
+      "text": "Now, let's just solve it by separating variables. dy. Can you do it in your head? dy"
+    },
+    {
+      "index": 392,
+      "start": 2684.14,
+      "end": 2691.3,
+      "duration": 7.16,
+      "text": "over dx, put all the y's on the left. It will look like dy / (1 - y). Put all the dx's on"
+    },
+    {
+      "index": 393,
+      "start": 2691.309,
+      "end": 2697.549,
+      "duration": 6.24,
+      "text": "the left. So, the dx here goes on the right, rather. That will be dx. And then, the x goes"
+    },
+    {
+      "index": 394,
+      "start": 2697.549,
+      "end": 2701.119,
+      "duration": 3.57,
+      "text": "down into the denominator. So now, it looks like that."
+    },
+    {
+      "index": 395,
+      "start": 2701.119,
+      "end": 2712.259,
+      "duration": 11.14,
+      "text": "And, if I integrate both sides, I get the log of one minus y, I guess, maybe with a,"
+    },
+    {
+      "index": 396,
+      "start": 2712.259,
+      "end": 2719.739,
+      "duration": 7.48,
+      "text": "I never bothered with that, but you can. It should be absolute values. All right, put"
+    },
+    {
+      "index": 397,
+      "start": 2719.75,
+      "end": 2727.9,
+      "duration": 8.15,
+      "text": "an absolute value, plus a constant. And now, if I exponentiate both sides, the constant"
+    },
+    {
+      "index": 398,
+      "start": 2727.9,
+      "end": 2737.52,
+      "duration": 9.62,
+      "text": "is positive. So, this is going to look like y. (1 - y) = x. And, the constant will be"
+    },
+    {
+      "index": 399,
+      "start": 2737.529,
+      "end": 2745.709,
+      "duration": 8.18,
+      "text": "e^C1. And, I'll just make that a new constant, Cx. And now, by letting C be negative, that's"
+    },
+    {
+      "index": 400,
+      "start": 2745.71,
+      "end": 2749.95,
+      "duration": 4.24,
+      "text": "why you can get rid of the absolute values, if you allow C to have negative values as"
+    },
+    {
+      "index": 401,
+      "start": 2749.95,
+      "end": 2756.619,
+      "duration": 6.669,
+      "text": "well as positive values. Let's write this in a more human form. So, y = 1 - Cx. Good,"
+    },
+    {
+      "index": 402,
+      "start": 2756.619,
+      "end": 2759.109,
+      "duration": 2.49,
+      "text": "all right, let's just plot those. So, these are the solutions."
+    },
+    {
+      "index": 403,
+      "start": 2759.109,
+      "end": 2765.029,
+      "duration": 5.92,
+      "text": "It's a pretty easy equation, pretty easy solution method, just separation of variables. What"
+    },
+    {
+      "index": 404,
+      "start": 2765.029,
+      "end": 2776.129,
+      "duration": 11.1,
+      "text": "do they look like? Well, these are all lines whose intercept is at one. And, they have"
+    },
+    {
+      "index": 405,
+      "start": 2776.13,
+      "end": 2788.369,
+      "duration": 12.239,
+      "text": "any slope whatsoever. So, these are the lines that look like that. Okay, now let me ask,"
+    },
+    {
+      "index": 406,
+      "start": 2788.369,
+      "end": 2795.079,
+      "duration": 6.71,
+      "text": "existence and uniqueness. Existence: through which points of the plane does the solution"
+    },
+    {
+      "index": 407,
+      "start": 2795.079,
+      "end": 2802.059,
+      "duration": 6.98,
+      "text": "go? Answer: through every point of the plane, through any point here, I can find one and"
+    },
+    {
+      "index": 408,
+      "start": 2802.059,
+      "end": 2810.639,
+      "duration": 8.58,
+      "text": "only one of those lines, except for these stupid guys here on the stalk of the flower."
+    },
+    {
+      "index": 409,
+      "start": 2810.65,
+      "end": 2819.41,
+      "duration": 8.76,
+      "text": "Here, for each of these points, there is no existence. There is no solution to this differential"
+    },
+    {
+      "index": 410,
+      "start": 2819.41,
+      "end": 2827.579,
+      "duration": 8.169,
+      "text": "equation, which goes through any of these wiggly points on the y-axis, with one exception."
+    },
+    {
+      "index": 411,
+      "start": 2827.579,
+      "end": 2835.219,
+      "duration": 7.64,
+      "text": "This point is oversupplied. At this point, it's not existence that fails. It's uniqueness"
+    },
+    {
+      "index": 412,
+      "start": 2835.23,
+      "end": 2845.14,
+      "duration": 9.91,
+      "text": "that fails: no uniqueness. There are lots of things which go through here. Now, is that"
+    },
+    {
+      "index": 413,
+      "start": 2845.14,
+      "end": 2849.48,
+      "duration": 4.34,
+      "text": "a violation of the existence and uniqueness theorem? It cannot be a violation because"
+    },
+    {
+      "index": 414,
+      "start": 2849.48,
+      "end": 2855.749,
+      "duration": 6.269,
+      "text": "the theorem has no exceptions. Otherwise, it wouldn't be a theorem. So, let's take a"
+    },
+    {
+      "index": 415,
+      "start": 2855.749,
+      "end": 2860.69,
+      "duration": 4.941,
+      "text": "look. What's wrong? We thought we solved it modulo, putting the absolute value signs on"
+    },
+    {
+      "index": 416,
+      "start": 2860.69,
+      "end": 2867.029,
+      "duration": 6.339,
+      "text": "the log. What's wrong? The answer: what's wrong is to use the theorem you must write"
+    },
+    {
+      "index": 417,
+      "start": 2867.029,
+      "end": 2873.269,
+      "duration": 6.24,
+      "text": "the differential equation in standard form, in the green form I gave you. Let's write"
+    },
+    {
+      "index": 418,
+      "start": 2873.269,
+      "end": 2881.74,
+      "duration": 8.471,
+      "text": "the differential equation the way we were supposed to. It says dy / dx = (1 - y) / x."
+    },
+    {
+      "index": 419,
+      "start": 2881.74,
+      "end": 2889.9,
+      "duration": 8.16,
+      "text": "And now, I see, the right-hand side is not continuous, in fact, not even defined when"
+    },
+    {
+      "index": 420,
+      "start": 2889.91,
+      "end": 2896.529,
+      "duration": 6.619,
+      "text": "x equals zero, when along the y-axis. And therefore, the existence and uniqueness is"
+    },
+    {
+      "index": 421,
+      "start": 2896.529,
+      "end": 2903.2,
+      "duration": 6.671,
+      "text": "not guaranteed along the line, x equals zero of the y-axis. And, in fact, we see that it"
+    },
+    {
+      "index": 422,
+      "start": 2903.2,
+      "end": 2910.579,
+      "duration": 7.379,
+      "text": "failed. Now, as a practical matter, it's the way existence and uniqueness fails in all"
+    },
+    {
+      "index": 423,
+      "start": 2910.579,
+      "end": 2915.49,
+      "duration": 4.911,
+      "text": "ordinary life work with differential equations is not through sophisticated examples that"
+    },
+    {
+      "index": 424,
+      "start": 2915.49,
+      "end": 2917.549,
+      "duration": 2.059,
+      "text": "mathematicians can construct."
+    },
+    {
+      "index": 425,
+      "start": 2917.549,
+      "end": 2922.769,
+      "duration": 5.22,
+      "text": "But normally, because f(x, y) will fail to be defined somewhere, and those will be the"
+    },
+    {
+      "index": 426,
+      "start": 2922.769,
+      "end": 2925.799,
+      "duration": 3.03,
+      "text": "bad points. Thanks."
+    }
+  ],
+  "course": {
+    "category": "Mathematics",
+    "title": "Differential Equations",
+    "source_url": "https://www.youtube.com/playlist?list=PL64BDFBDA2AF24F7E"
+  }
+}

@@ -1,0 +1,8803 @@
+{
+  "video": {
+    "id": "76dhtgZt38A",
+    "title": "6. Binary Trees, Part 1",
+    "url": "https://www.youtube.com/watch?v=76dhtgZt38A",
+    "channel": "MIT OpenCourseWare",
+    "duration": 3058,
+    "language": "en"
+  },
+  "segment_count": 1255,
+  "segments": [
+    {
+      "index": 0,
+      "start": 15.39,
+      "end": 15.4,
+      "duration": 0.01,
+      "text": "All right, let's get started."
+    },
+    {
+      "index": 1,
+      "start": 15.4,
+      "end": 17.11,
+      "duration": 1.71,
+      "text": "Welcome back to double O six. Today we"
+    },
+    {
+      "index": 2,
+      "start": 17.12,
+      "end": 18.63,
+      "duration": 1.51,
+      "text": "are doing some of the coolest data"
+    },
+    {
+      "index": 3,
+      "start": 18.64,
+      "end": 20.19,
+      "duration": 1.55,
+      "text": "structures we will see in this class."
+    },
+    {
+      "index": 4,
+      "start": 20.2,
+      "end": 21.59,
+      "duration": 1.39,
+      "text": "Maybe some of the coolest data"
+    },
+    {
+      "index": 5,
+      "start": 21.6,
+      "end": 25.11,
+      "duration": 3.51,
+      "text": "structures ever. Binary trees. You've"
+    },
+    {
+      "index": 6,
+      "start": 25.12,
+      "end": 28.31,
+      "duration": 3.19,
+      "text": "certainly seen trees in many forms"
+    },
+    {
+      "index": 7,
+      "start": 28.32,
+      "end": 30.59,
+      "duration": 2.27,
+      "text": "in the past including in this class"
+    },
+    {
+      "index": 8,
+      "start": 30.6,
+      "end": 32.55,
+      "duration": 1.95,
+      "text": "we've talked used trees as a lower bound"
+    },
+    {
+      "index": 9,
+      "start": 32.56,
+      "end": 34.31,
+      "duration": 1.75,
+      "text": "tool for"
+    },
+    {
+      "index": 10,
+      "start": 34.32,
+      "end": 36.35,
+      "duration": 2.03,
+      "text": "in the decision tree model."
+    },
+    {
+      "index": 11,
+      "start": 36.36,
+      "end": 38.47,
+      "duration": 2.11,
+      "text": "But this lecture and the next lecture"
+    },
+    {
+      "index": 12,
+      "start": 38.48,
+      "end": 39.91,
+      "duration": 1.43,
+      "text": "we're going to build"
+    },
+    {
+      "index": 13,
+      "start": 39.92,
+      "end": 42.79,
+      "duration": 2.87,
+      "text": "one data structure that is almost"
+    },
+    {
+      "index": 14,
+      "start": 42.8,
+      "end": 44.75,
+      "duration": 1.95,
+      "text": "superior to all data structures we have"
+    },
+    {
+      "index": 15,
+      "start": 44.76,
+      "end": 48.31,
+      "duration": 3.55,
+      "text": "seen and can do almost anything really"
+    },
+    {
+      "index": 16,
+      "start": 48.32,
+      "end": 51.47,
+      "duration": 3.15,
+      "text": "fast. First recall all the data"
+    },
+    {
+      "index": 17,
+      "start": 51.48,
+      "end": 53.19,
+      "duration": 1.71,
+      "text": "structures we've seen so far arrays,"
+    },
+    {
+      "index": 18,
+      "start": 53.2,
+      "end": 55.11,
+      "duration": 1.91,
+      "text": "linked lists, dynamic arrays, sorted"
+    },
+    {
+      "index": 19,
+      "start": 55.12,
+      "end": 59.43,
+      "duration": 4.31,
+      "text": "arrays, hash tables and the two sets of"
+    },
+    {
+      "index": 20,
+      "start": 59.44,
+      "end": 60.63,
+      "duration": 1.19,
+      "text": "operations we're interested in"
+    },
+    {
+      "index": 21,
+      "start": 60.64,
+      "end": 62.79,
+      "duration": 2.15,
+      "text": "supporting. The two interfaces one was"
+    },
+    {
+      "index": 22,
+      "start": 62.8,
+      "end": 64.71,
+      "duration": 1.91,
+      "text": "sequences where we're maintaining items"
+    },
+    {
+      "index": 23,
+      "start": 64.72,
+      "end": 66.31,
+      "duration": 1.59,
+      "text": "in a specified order. We want to be able"
+    },
+    {
+      "index": 24,
+      "start": 66.32,
+      "end": 68.27,
+      "duration": 1.95,
+      "text": "to insert an item right after another"
+    },
+    {
+      "index": 25,
+      "start": 68.28,
+      "end": 69.87,
+      "duration": 1.59,
+      "text": "item or delete an item in the middle of"
+    },
+    {
+      "index": 26,
+      "start": 69.88,
+      "end": 71.59,
+      "duration": 1.71,
+      "text": "the list and always be able to access"
+    },
+    {
+      "index": 27,
+      "start": 71.6,
+      "end": 73.11,
+      "duration": 1.51,
+      "text": "the ith item."
+    },
+    {
+      "index": 28,
+      "start": 73.12,
+      "end": 74.91,
+      "duration": 1.79,
+      "text": "We haven't seen any good data structures"
+    },
+    {
+      "index": 29,
+      "start": 74.92,
+      "end": 77.63,
+      "duration": 2.71,
+      "text": "for that problem. We're really good at"
+    },
+    {
+      "index": 30,
+      "start": 77.64,
+      "end": 79.59,
+      "duration": 1.95,
+      "text": "inserting and deleting at the beginning"
+    },
+    {
+      "index": 31,
+      "start": 79.6,
+      "end": 81.83,
+      "duration": 2.23,
+      "text": "or the end of the sequence but we we"
+    },
+    {
+      "index": 32,
+      "start": 81.84,
+      "end": 83.59,
+      "duration": 1.75,
+      "text": "haven't seen anything that's efficient"
+    },
+    {
+      "index": 33,
+      "start": 83.6,
+      "end": 84.51,
+      "duration": 0.91,
+      "text": "at"
+    },
+    {
+      "index": 34,
+      "start": 84.52,
+      "end": 86.43,
+      "duration": 1.91,
+      "text": "inserting in the middle of the list or"
+    },
+    {
+      "index": 35,
+      "start": 86.44,
+      "end": 87.59,
+      "duration": 1.15,
+      "text": "deleting in the middle of the list."
+    },
+    {
+      "index": 36,
+      "start": 87.6,
+      "end": 89.39,
+      "duration": 1.79,
+      "text": "Linked list you can't even get to the"
+    },
+    {
+      "index": 37,
+      "start": 89.4,
+      "end": 91.83,
+      "duration": 2.43,
+      "text": "middle in less than linear time."
+    },
+    {
+      "index": 38,
+      "start": 91.84,
+      "end": 93.51,
+      "duration": 1.67,
+      "text": "Array you can get to the middle but if"
+    },
+    {
+      "index": 39,
+      "start": 93.52,
+      "end": 95.11,
+      "duration": 1.59,
+      "text": "you make any changes you have to do the"
+    },
+    {
+      "index": 40,
+      "start": 95.12,
+      "end": 97.95,
+      "duration": 2.83,
+      "text": "shift which is very expensive. So today"
+    },
+    {
+      "index": 41,
+      "start": 97.96,
+      "end": 100.95,
+      "duration": 2.99,
+      "text": "or sorry next lecture for the first time"
+    },
+    {
+      "index": 42,
+      "start": 100.96,
+      "end": 103.79,
+      "duration": 2.83,
+      "text": "we will see all of those operations"
+    },
+    {
+      "index": 43,
+      "start": 103.8,
+      "end": 105.39,
+      "duration": 1.59,
+      "text": "efficient."
+    },
+    {
+      "index": 44,
+      "start": 105.4,
+      "end": 106.95,
+      "duration": 1.55,
+      "text": "Um"
+    },
+    {
+      "index": 45,
+      "start": 106.96,
+      "end": 109.67,
+      "duration": 2.71,
+      "text": "mention our goal"
+    },
+    {
+      "index": 46,
+      "start": 109.68,
+      "end": 111.71,
+      "duration": 2.03,
+      "text": "where efficient means"
+    },
+    {
+      "index": 47,
+      "start": 111.72,
+      "end": 113.19,
+      "duration": 1.47,
+      "text": "logarithmic."
+    },
+    {
+      "index": 48,
+      "start": 113.2,
+      "end": 116.43,
+      "duration": 3.23,
+      "text": "So we're not quite as good as linked"
+    },
+    {
+      "index": 49,
+      "start": 116.44,
+      "end": 118.23,
+      "duration": 1.79,
+      "text": "lists and dynamic arrays at inserting"
+    },
+    {
+      "index": 50,
+      "start": 118.24,
+      "end": 120.51,
+      "duration": 2.27,
+      "text": "and and deleting at the ends. Those"
+    },
+    {
+      "index": 51,
+      "start": 120.52,
+      "end": 121.91,
+      "duration": 1.39,
+      "text": "there that we achieve constant or"
+    },
+    {
+      "index": 52,
+      "start": 121.92,
+      "end": 124.43,
+      "duration": 2.51,
+      "text": "constant amortized time. But up to this"
+    },
+    {
+      "index": 53,
+      "start": 124.44,
+      "end": 126.51,
+      "duration": 2.07,
+      "text": "log factor we're going to get the best"
+    },
+    {
+      "index": 54,
+      "start": 126.52,
+      "end": 128.43,
+      "duration": 1.91,
+      "text": "of all worlds where we can solve all the"
+    },
+    {
+      "index": 55,
+      "start": 128.44,
+      "end": 131.55,
+      "duration": 3.11,
+      "text": "things all the operations that don't"
+    },
+    {
+      "index": 56,
+      "start": 131.56,
+      "end": 132.91,
+      "duration": 1.35,
+      "text": "build or iterate through the entire"
+    },
+    {
+      "index": 57,
+      "start": 132.92,
+      "end": 134.43,
+      "duration": 1.51,
+      "text": "structure. That of course takes linear"
+    },
+    {
+      "index": 58,
+      "start": 134.44,
+      "end": 135.47,
+      "duration": 1.03,
+      "text": "time."
+    },
+    {
+      "index": 59,
+      "start": 135.48,
+      "end": 136.55,
+      "duration": 1.07,
+      "text": "But we can do all the others in"
+    },
+    {
+      "index": 60,
+      "start": 136.56,
+      "end": 138.99,
+      "duration": 2.43,
+      "text": "logarithmic time. For sets"
+    },
+    {
+      "index": 61,
+      "start": 139.0,
+      "end": 140.91,
+      "duration": 1.91,
+      "text": "sets we're maintain maintaining a bunch"
+    },
+    {
+      "index": 62,
+      "start": 140.92,
+      "end": 144.23,
+      "duration": 3.31,
+      "text": "of items which have intrinsic keys and"
+    },
+    {
+      "index": 63,
+      "start": 144.24,
+      "end": 146.71,
+      "duration": 2.47,
+      "text": "we want to search by key."
+    },
+    {
+      "index": 64,
+      "start": 146.72,
+      "end": 149.03,
+      "duration": 2.31,
+      "text": "So hash tables are great if you're only"
+    },
+    {
+      "index": 65,
+      "start": 149.04,
+      "end": 151.19,
+      "duration": 2.15,
+      "text": "doing exact searches. If you want to"
+    },
+    {
+      "index": 66,
+      "start": 151.2,
+      "end": 153.51,
+      "duration": 2.31,
+      "text": "find a key and get yes or no is it in"
+    },
+    {
+      "index": 67,
+      "start": 153.52,
+      "end": 154.95,
+      "duration": 1.43,
+      "text": "there and if it's in there give me the"
+    },
+    {
+      "index": 68,
+      "start": 154.96,
+      "end": 156.27,
+      "duration": 1.31,
+      "text": "item."
+    },
+    {
+      "index": 69,
+      "start": 156.28,
+      "end": 158.91,
+      "duration": 2.63,
+      "text": "That's what Python dictionaries do."
+    },
+    {
+      "index": 70,
+      "start": 158.92,
+      "end": 160.51,
+      "duration": 1.59,
+      "text": "And they're great at inserting and"
+    },
+    {
+      "index": 71,
+      "start": 160.52,
+      "end": 164.55,
+      "duration": 4.03,
+      "text": "deleting but they're really bad at find"
+    },
+    {
+      "index": 72,
+      "start": 164.56,
+      "end": 166.67,
+      "duration": 2.11,
+      "text": "previous and find next. This is the"
+    },
+    {
+      "index": 73,
+      "start": 166.68,
+      "end": 169.07,
+      "duration": 2.39,
+      "text": "unsuccessful case. If I search for a key"
+    },
+    {
+      "index": 74,
+      "start": 169.08,
+      "end": 171.35,
+      "duration": 2.27,
+      "text": "and it's not in my structure I would"
+    },
+    {
+      "index": 75,
+      "start": 171.36,
+      "end": 172.99,
+      "duration": 1.63,
+      "text": "like to know more than just the answer"
+    },
+    {
+      "index": 76,
+      "start": 173.0,
+      "end": 175.59,
+      "duration": 2.59,
+      "text": "no. I'd like to know what the previous"
+    },
+    {
+      "index": 77,
+      "start": 175.6,
+      "end": 177.63,
+      "duration": 2.03,
+      "text": "and next items that are actually in the"
+    },
+    {
+      "index": 78,
+      "start": 177.64,
+      "end": 180.03,
+      "duration": 2.39,
+      "text": "structure. So what are my nearest"
+    },
+    {
+      "index": 79,
+      "start": 180.04,
+      "end": 181.83,
+      "duration": 1.79,
+      "text": "matches when I search by key? That's a"
+    },
+    {
+      "index": 80,
+      "start": 181.84,
+      "end": 184.63,
+      "duration": 2.79,
+      "text": "natural query and the only data"
+    },
+    {
+      "index": 81,
+      "start": 184.64,
+      "end": 186.15,
+      "duration": 1.51,
+      "text": "structure we have that's good at it is a"
+    },
+    {
+      "index": 82,
+      "start": 186.16,
+      "end": 188.71,
+      "duration": 2.55,
+      "text": "sorted array because binary search gives"
+    },
+    {
+      "index": 83,
+      "start": 188.72,
+      "end": 190.99,
+      "duration": 2.27,
+      "text": "this to us. If we search for a key by"
+    },
+    {
+      "index": 84,
+      "start": 191.0,
+      "end": 193.31,
+      "duration": 2.31,
+      "text": "binary search and we don't find it the"
+    },
+    {
+      "index": 85,
+      "start": 193.32,
+      "end": 195.11,
+      "duration": 1.79,
+      "text": "position that we end up at is right"
+    },
+    {
+      "index": 86,
+      "start": 195.12,
+      "end": 197.95,
+      "duration": 2.83,
+      "text": "between the previous and next one. But"
+    },
+    {
+      "index": 87,
+      "start": 197.96,
+      "end": 200.07,
+      "duration": 2.11,
+      "text": "of course sorted arrays are terrible for"
+    },
+    {
+      "index": 88,
+      "start": 200.08,
+      "end": 202.59,
+      "duration": 2.51,
+      "text": "dynamic operations. We don't know how to"
+    },
+    {
+      "index": 89,
+      "start": 202.6,
+      "end": 203.83,
+      "duration": 1.23,
+      "text": "maintain"
+    },
+    {
+      "index": 90,
+      "start": 203.84,
+      "end": 205.59,
+      "duration": 1.75,
+      "text": "we can't maintain a sorted array without"
+    },
+    {
+      "index": 91,
+      "start": 205.6,
+      "end": 206.87,
+      "duration": 1.27,
+      "text": "any gaps"
+    },
+    {
+      "index": 92,
+      "start": 206.88,
+      "end": 207.95,
+      "duration": 1.07,
+      "text": "when we're doing insertions and"
+    },
+    {
+      "index": 93,
+      "start": 207.96,
+      "end": 210.51,
+      "duration": 2.55,
+      "text": "deletions. In some sense today and next"
+    },
+    {
+      "index": 94,
+      "start": 210.52,
+      "end": 213.47,
+      "duration": 2.95,
+      "text": "class binary trees let us represent a"
+    },
+    {
+      "index": 95,
+      "start": 213.48,
+      "end": 215.55,
+      "duration": 2.07,
+      "text": "sorted order or in general an order of"
+    },
+    {
+      "index": 96,
+      "start": 215.56,
+      "end": 219.11,
+      "duration": 3.55,
+      "text": "items dynamically and still allow us to"
+    },
+    {
+      "index": 97,
+      "start": 219.12,
+      "end": 222.39,
+      "duration": 3.27,
+      "text": "do very fast things like get at of I and"
+    },
+    {
+      "index": 98,
+      "start": 222.4,
+      "end": 224.51,
+      "duration": 2.11,
+      "text": "find previous of a key. So that's our"
+    },
+    {
+      "index": 99,
+      "start": 224.52,
+      "end": 226.47,
+      "duration": 1.95,
+      "text": "goal. We're not going to quite get to"
+    },
+    {
+      "index": 100,
+      "start": 226.48,
+      "end": 230.03,
+      "duration": 3.55,
+      "text": "this goal today. We're going to get uh"
+    },
+    {
+      "index": 101,
+      "start": 230.04,
+      "end": 232.63,
+      "duration": 2.59,
+      "text": "an incomparable thing called the height"
+    },
+    {
+      "index": 102,
+      "start": 232.64,
+      "end": 233.91,
+      "duration": 1.27,
+      "text": "of the tree"
+    },
+    {
+      "index": 103,
+      "start": 233.92,
+      "end": 235.39,
+      "duration": 1.47,
+      "text": "and then on Thursday we'll be able to"
+    },
+    {
+      "index": 104,
+      "start": 235.4,
+      "end": 237.15,
+      "duration": 1.75,
+      "text": "finish and achieve this goal. Today is"
+    },
+    {
+      "index": 105,
+      "start": 237.16,
+      "end": 242.27,
+      "duration": 5.11,
+      "text": "just in service to that goal. Um"
+    },
+    {
+      "index": 106,
+      "start": 242.28,
+      "end": 245.75,
+      "duration": 3.47,
+      "text": "So what is a binary tree?"
+    },
+    {
+      "index": 107,
+      "start": 245.76,
+      "end": 247.75,
+      "duration": 1.99,
+      "text": "Let me"
+    },
+    {
+      "index": 108,
+      "start": 247.76,
+      "end": 249.47,
+      "duration": 1.71,
+      "text": "draw an example"
+    },
+    {
+      "index": 109,
+      "start": 249.48,
+      "end": 252.47,
+      "duration": 2.99,
+      "text": "and then find it more precisely."
+    },
+    {
+      "index": 110,
+      "start": 252.48,
+      "end": 254.31,
+      "duration": 1.83,
+      "text": "Mathematicians will call this a rooted"
+    },
+    {
+      "index": 111,
+      "start": 254.32,
+      "end": 256.349,
+      "duration": 2.029,
+      "text": "binary tree. See in case you've seen"
+    },
+    {
+      "index": 112,
+      "start": 256.359,
+      "end": 258.27,
+      "duration": 1.911,
+      "text": "that in 042 say."
+    },
+    {
+      "index": 113,
+      "start": 258.28,
+      "end": 259.91,
+      "duration": 1.63,
+      "text": "Um"
+    },
+    {
+      "index": 114,
+      "start": 259.92,
+      "end": 276.39,
+      "duration": 16.47,
+      "text": "Here is a picture."
+    },
+    {
+      "index": 115,
+      "start": 279.15,
+      "end": 279.16,
+      "duration": 0.01,
+      "text": "So this is an example of a binary tree."
+    },
+    {
+      "index": 116,
+      "start": 279.16,
+      "end": 280.47,
+      "duration": 1.31,
+      "text": "It has a bunch of nodes which we're"
+    },
+    {
+      "index": 117,
+      "start": 280.48,
+      "end": 282.63,
+      "duration": 2.15,
+      "text": "drawing in circles. It has items in the"
+    },
+    {
+      "index": 118,
+      "start": 282.64,
+      "end": 284.91,
+      "duration": 2.27,
+      "text": "nodes which we're I'm writing as letters"
+    },
+    {
+      "index": 119,
+      "start": 284.92,
+      "end": 288.15,
+      "duration": 3.23,
+      "text": "here. So this is item A, item B, item C"
+    },
+    {
+      "index": 120,
+      "start": 288.16,
+      "end": 289.99,
+      "duration": 1.83,
+      "text": "and it has these links between them."
+    },
+    {
+      "index": 121,
+      "start": 290.0,
+      "end": 291.95,
+      "duration": 1.95,
+      "text": "This is like linked lists."
+    },
+    {
+      "index": 122,
+      "start": 291.96,
+      "end": 292.59,
+      "duration": 0.63,
+      "text": "Uh"
+    },
+    {
+      "index": 123,
+      "start": 292.6,
+      "end": 295.59,
+      "duration": 2.99,
+      "text": "but in general a node"
+    },
+    {
+      "index": 124,
+      "start": 295.6,
+      "end": 301.19,
+      "duration": 5.59,
+      "text": "uh X is going to have a parent pointer"
+    },
+    {
+      "index": 125,
+      "start": 301.2,
+      "end": 302.51,
+      "duration": 1.31,
+      "text": "uh a"
+    },
+    {
+      "index": 126,
+      "start": 302.52,
+      "end": 304.59,
+      "duration": 2.07,
+      "text": "left child"
+    },
+    {
+      "index": 127,
+      "start": 304.6,
+      "end": 307.71,
+      "duration": 3.11,
+      "text": "left pointer and a right child"
+    },
+    {
+      "index": 128,
+      "start": 307.72,
+      "end": 309.19,
+      "duration": 1.47,
+      "text": "right pointer"
+    },
+    {
+      "index": 129,
+      "start": 309.2,
+      "end": 311.55,
+      "duration": 2.35,
+      "text": "and it also has uh"
+    },
+    {
+      "index": 130,
+      "start": 311.56,
+      "end": 314.07,
+      "duration": 2.51,
+      "text": "an item inside of it."
+    },
+    {
+      "index": 131,
+      "start": 314.08,
+      "end": 316.51,
+      "duration": 2.43,
+      "text": "So I'm going to talk about node.left is"
+    },
+    {
+      "index": 132,
+      "start": 316.52,
+      "end": 320.15,
+      "duration": 3.63,
+      "text": "a pointer to the left the node down"
+    },
+    {
+      "index": 133,
+      "start": 320.16,
+      "end": 323.55,
+      "duration": 3.39,
+      "text": "here. Node.right, node.parent, node.item"
+    },
+    {
+      "index": 134,
+      "start": 323.56,
+      "end": 325.07,
+      "duration": 1.51,
+      "text": "gives me"
+    },
+    {
+      "index": 135,
+      "start": 325.08,
+      "end": 326.79,
+      "duration": 1.71,
+      "text": "uh so if I"
+    },
+    {
+      "index": 136,
+      "start": 326.8,
+      "end": 331.31,
+      "duration": 4.51,
+      "text": "look at the node A its item is A."
+    },
+    {
+      "index": 137,
+      "start": 331.32,
+      "end": 337.03,
+      "duration": 5.71,
+      "text": "So let me draw for you"
+    },
+    {
+      "index": 138,
+      "start": 356.95,
+      "end": 356.96,
+      "duration": 0.01,
+      "text": "Okay, the parent of A is nothing. So we"
+    },
+    {
+      "index": 139,
+      "start": 356.96,
+      "end": 358.59,
+      "duration": 1.63,
+      "text": "call A the root node. There's going to"
+    },
+    {
+      "index": 140,
+      "start": 358.6,
+      "end": 361.51,
+      "duration": 2.91,
+      "text": "be a unique node that has no parent."
+    },
+    {
+      "index": 141,
+      "start": 361.52,
+      "end": 363.07,
+      "duration": 1.55,
+      "text": "It's uh"
+    },
+    {
+      "index": 142,
+      "start": 363.08,
+      "end": 365.47,
+      "duration": 2.39,
+      "text": "sad to have no parents but there you go."
+    },
+    {
+      "index": 143,
+      "start": 365.48,
+      "end": 367.31,
+      "duration": 1.83,
+      "text": "Uh then we have node B which whose"
+    },
+    {
+      "index": 144,
+      "start": 367.32,
+      "end": 370.51,
+      "duration": 3.19,
+      "text": "parent is A. Node C is parent its parent"
+    },
+    {
+      "index": 145,
+      "start": 370.52,
+      "end": 373.43,
+      "duration": 2.91,
+      "text": "is A. Node D its parent is B. Node E its"
+    },
+    {
+      "index": 146,
+      "start": 373.44,
+      "end": 377.31,
+      "duration": 3.87,
+      "text": "parent is B and node F its parent is D."
+    },
+    {
+      "index": 147,
+      "start": 377.32,
+      "end": 378.07,
+      "duration": 0.75,
+      "text": "Uh"
+    },
+    {
+      "index": 148,
+      "start": 378.08,
+      "end": 379.83,
+      "duration": 1.75,
+      "text": "um alphabetical order here happens to be"
+    },
+    {
+      "index": 149,
+      "start": 379.84,
+      "end": 383.11,
+      "duration": 3.27,
+      "text": "ordered by parent."
+    },
+    {
+      "index": 150,
+      "start": 384.79,
+      "end": 384.8,
+      "duration": 0.01,
+      "text": "Then we have left pointers. I'll just do"
+    },
+    {
+      "index": 151,
+      "start": 384.8,
+      "end": 387.51,
+      "duration": 2.71,
+      "text": "a few of them. So left pointer of A is"
+    },
+    {
+      "index": 152,
+      "start": 387.52,
+      "end": 388.51,
+      "duration": 0.99,
+      "text": "B."
+    },
+    {
+      "index": 153,
+      "start": 388.52,
+      "end": 390.83,
+      "duration": 2.31,
+      "text": "Right pointer of A"
+    },
+    {
+      "index": 154,
+      "start": 390.84,
+      "end": 392.47,
+      "duration": 1.63,
+      "text": "Sorry, B the node."
+    },
+    {
+      "index": 155,
+      "start": 392.48,
+      "end": 396.99,
+      "duration": 4.51,
+      "text": "Uh these should all be nodes."
+    },
+    {
+      "index": 156,
+      "start": 398.71,
+      "end": 398.72,
+      "duration": 0.01,
+      "text": "I'm circling for nodes and just writing"
+    },
+    {
+      "index": 157,
+      "start": 398.72,
+      "end": 400.63,
+      "duration": 1.91,
+      "text": "the letter for the item to make it clear"
+    },
+    {
+      "index": 158,
+      "start": 400.64,
+      "end": 402.75,
+      "duration": 2.11,
+      "text": "that those are different things. Uh the"
+    },
+    {
+      "index": 159,
+      "start": 402.76,
+      "end": 405.63,
+      "duration": 2.87,
+      "text": "right pointer for A is C. Left pointer"
+    },
+    {
+      "index": 160,
+      "start": 405.64,
+      "end": 409.91,
+      "duration": 4.27,
+      "text": "for B is D. Right pointer for B is E."
+    },
+    {
+      "index": 161,
+      "start": 409.92,
+      "end": 411.27,
+      "duration": 1.35,
+      "text": "And so on."
+    },
+    {
+      "index": 162,
+      "start": 411.28,
+      "end": 412.59,
+      "duration": 1.31,
+      "text": "Okay, so in other words each of these"
+    },
+    {
+      "index": 163,
+      "start": 412.6,
+      "end": 415.59,
+      "duration": 2.99,
+      "text": "lines is a bidirectional pointer. Uh in"
+    },
+    {
+      "index": 164,
+      "start": 415.6,
+      "end": 417.23,
+      "duration": 1.63,
+      "text": "this direction it's the parent direction"
+    },
+    {
+      "index": 165,
+      "start": 417.24,
+      "end": 418.79,
+      "duration": 1.55,
+      "text": "in this direction it's left in this"
+    },
+    {
+      "index": 166,
+      "start": 418.8,
+      "end": 421.27,
+      "duration": 2.47,
+      "text": "case. Um because it's bidirectional we"
+    },
+    {
+      "index": 167,
+      "start": 421.28,
+      "end": 424.07,
+      "duration": 2.79,
+      "text": "don't draw the arrows. We just draw"
+    },
+    {
+      "index": 168,
+      "start": 424.08,
+      "end": 426.35,
+      "duration": 2.27,
+      "text": "uh undirected lines."
+    },
+    {
+      "index": 169,
+      "start": 426.36,
+      "end": 427.83,
+      "duration": 1.47,
+      "text": "Okay, um"
+    },
+    {
+      "index": 170,
+      "start": 427.84,
+      "end": 429.23,
+      "duration": 1.39,
+      "text": "this is in general what a binary tree"
+    },
+    {
+      "index": 171,
+      "start": 429.24,
+      "end": 431.35,
+      "duration": 2.11,
+      "text": "looks like. Uh"
+    },
+    {
+      "index": 172,
+      "start": 431.36,
+      "end": 434.11,
+      "duration": 2.75,
+      "text": "a key invariant is that if you take a"
+    },
+    {
+      "index": 173,
+      "start": 434.12,
+      "end": 438.03,
+      "duration": 3.91,
+      "text": "node and say go to its left pointer left"
+    },
+    {
+      "index": 174,
+      "start": 438.04,
+      "end": 441.55,
+      "duration": 3.51,
+      "text": "child and then go to that node's parent"
+    },
+    {
+      "index": 175,
+      "start": 441.56,
+      "end": 442.47,
+      "duration": 0.91,
+      "text": "uh"
+    },
+    {
+      "index": 176,
+      "start": 442.48,
+      "end": 445.19,
+      "duration": 2.71,
+      "text": "this should be the same as node."
+    },
+    {
+      "index": 177,
+      "start": 445.2,
+      "end": 447.11,
+      "duration": 1.91,
+      "text": "Right, so that's just saying these are"
+    },
+    {
+      "index": 178,
+      "start": 447.12,
+      "end": 449.43,
+      "duration": 2.31,
+      "text": "in parent is always the inverse of left"
+    },
+    {
+      "index": 179,
+      "start": 449.44,
+      "end": 451.35,
+      "duration": 1.91,
+      "text": "or right operation. This is also true"
+    },
+    {
+      "index": 180,
+      "start": 451.36,
+      "end": 454.67,
+      "duration": 3.31,
+      "text": "for right."
+    },
+    {
+      "index": 181,
+      "start": 456.71,
+      "end": 456.72,
+      "duration": 0.01,
+      "text": "Okay, and that's a binary tree. Now the"
+    },
+    {
+      "index": 182,
+      "start": 456.72,
+      "end": 459.75,
+      "duration": 3.03,
+      "text": "intuition what's going on here is"
+    },
+    {
+      "index": 183,
+      "start": 459.76,
+      "end": 460.87,
+      "duration": 1.11,
+      "text": "you could you could say it's we're"
+    },
+    {
+      "index": 184,
+      "start": 460.88,
+      "end": 463.75,
+      "duration": 2.87,
+      "text": "inspired by a linked list."
+    },
+    {
+      "index": 185,
+      "start": 463.76,
+      "end": 465.07,
+      "duration": 1.31,
+      "text": "Linked list had a very similar"
+    },
+    {
+      "index": 186,
+      "start": 465.08,
+      "end": 467.43,
+      "duration": 2.35,
+      "text": "structure. Um"
+    },
+    {
+      "index": 187,
+      "start": 467.44,
+      "end": 470.43,
+      "duration": 2.99,
+      "text": "maybe an item or there's a node it had"
+    },
+    {
+      "index": 188,
+      "start": 470.44,
+      "end": 471.95,
+      "duration": 1.51,
+      "text": "an item in it"
+    },
+    {
+      "index": 189,
+      "start": 471.96,
+      "end": 474.27,
+      "duration": 2.31,
+      "text": "and it had a next pointer and it had a"
+    },
+    {
+      "index": 190,
+      "start": 474.28,
+      "end": 476.35,
+      "duration": 2.07,
+      "text": "previous pointer."
+    },
+    {
+      "index": 191,
+      "start": 476.36,
+      "end": 478.27,
+      "duration": 1.91,
+      "text": "Uh so in some sense what we're if it's"
+    },
+    {
+      "index": 192,
+      "start": 478.28,
+      "end": 479.79,
+      "duration": 1.51,
+      "text": "doubly linked we had a previous pointer"
+    },
+    {
+      "index": 193,
+      "start": 479.8,
+      "end": 481.31,
+      "duration": 1.51,
+      "text": "but if singly linked we only had a next"
+    },
+    {
+      "index": 194,
+      "start": 481.32,
+      "end": 482.51,
+      "duration": 1.19,
+      "text": "pointer."
+    },
+    {
+      "index": 195,
+      "start": 482.52,
+      "end": 484.19,
+      "duration": 1.67,
+      "text": "And if you think about"
+    },
+    {
+      "index": 196,
+      "start": 484.2,
+      "end": 486.51,
+      "duration": 2.31,
+      "text": "the limits of linked lists especially"
+    },
+    {
+      "index": 197,
+      "start": 486.52,
+      "end": 488.71,
+      "duration": 2.19,
+      "text": "singly linked lists if you just have one"
+    },
+    {
+      "index": 198,
+      "start": 488.72,
+      "end": 491.15,
+      "duration": 2.43,
+      "text": "pointer per node you can only build a"
+    },
+    {
+      "index": 199,
+      "start": 491.16,
+      "end": 494.15,
+      "duration": 2.99,
+      "text": "list and so the result is"
+    },
+    {
+      "index": 200,
+      "start": 494.16,
+      "end": 497.23,
+      "duration": 3.07,
+      "text": "uh"
+    },
+    {
+      "index": 201,
+      "start": 498.87,
+      "end": 498.88,
+      "duration": 0.01,
+      "text": "you know this"
+    },
+    {
+      "index": 202,
+      "start": 498.88,
+      "end": 502.47,
+      "duration": 3.59,
+      "text": "this node is going to have depth linear."
+    },
+    {
+      "index": 203,
+      "start": 502.48,
+      "end": 504.23,
+      "duration": 1.75,
+      "text": "Depth means how many pointers do I have"
+    },
+    {
+      "index": 204,
+      "start": 504.24,
+      "end": 505.87,
+      "duration": 1.63,
+      "text": "to follow to get here"
+    },
+    {
+      "index": 205,
+      "start": 505.88,
+      "end": 507.87,
+      "duration": 1.99,
+      "text": "from the root of the structure which for"
+    },
+    {
+      "index": 206,
+      "start": 507.88,
+      "end": 509.95,
+      "duration": 2.07,
+      "text": "linked lists was the head. With doubly"
+    },
+    {
+      "index": 207,
+      "start": 509.96,
+      "end": 512.07,
+      "duration": 2.11,
+      "text": "linked okay I can have a head and a tail"
+    },
+    {
+      "index": 208,
+      "start": 512.08,
+      "end": 514.43,
+      "duration": 2.35,
+      "text": "and I can put bidirections on here but"
+    },
+    {
+      "index": 209,
+      "start": 514.44,
+      "end": 516.39,
+      "duration": 1.95,
+      "text": "then still the middle item has depth"
+    },
+    {
+      "index": 210,
+      "start": 516.4,
+      "end": 518.51,
+      "duration": 2.11,
+      "text": "linear. So there's no way to get there"
+    },
+    {
+      "index": 211,
+      "start": 518.52,
+      "end": 520.31,
+      "duration": 1.79,
+      "text": "in less than linear time. With binary"
+    },
+    {
+      "index": 212,
+      "start": 520.32,
+      "end": 523.39,
+      "duration": 3.07,
+      "text": "trees because we use two types of next"
+    },
+    {
+      "index": 213,
+      "start": 523.4,
+      "end": 525.47,
+      "duration": 2.07,
+      "text": "pointers left and right"
+    },
+    {
+      "index": 214,
+      "start": 525.48,
+      "end": 527.43,
+      "duration": 1.95,
+      "text": "we can build a tree and we know trees in"
+    },
+    {
+      "index": 215,
+      "start": 527.44,
+      "end": 529.55,
+      "duration": 2.11,
+      "text": "general have logarithmic can have"
+    },
+    {
+      "index": 216,
+      "start": 529.56,
+      "end": 531.27,
+      "duration": 1.71,
+      "text": "logarithmic height."
+    },
+    {
+      "index": 217,
+      "start": 531.28,
+      "end": 534.35,
+      "duration": 3.07,
+      "text": "Um the and so it's possible in a tree to"
+    },
+    {
+      "index": 218,
+      "start": 534.36,
+      "end": 537.27,
+      "duration": 2.91,
+      "text": "get to any node starting from the root"
+    },
+    {
+      "index": 219,
+      "start": 537.28,
+      "end": 539.43,
+      "duration": 2.15,
+      "text": "in only log n traversals. So that's the"
+    },
+    {
+      "index": 220,
+      "start": 539.44,
+      "end": 543.27,
+      "duration": 3.83,
+      "text": "intuition of what's going on. Now today"
+    },
+    {
+      "index": 221,
+      "start": 543.28,
+      "end": 544.87,
+      "duration": 1.59,
+      "text": "uh"
+    },
+    {
+      "index": 222,
+      "start": 544.88,
+      "end": 546.83,
+      "duration": 1.95,
+      "text": "we're going to talk about the height of"
+    },
+    {
+      "index": 223,
+      "start": 546.84,
+      "end": 548.11,
+      "duration": 1.27,
+      "text": "a tree."
+    },
+    {
+      "index": 224,
+      "start": 548.12,
+      "end": 550.39,
+      "duration": 2.27,
+      "text": "So let me define"
+    },
+    {
+      "index": 225,
+      "start": 550.4,
+      "end": 552.71,
+      "duration": 2.31,
+      "text": "uh"
+    },
+    {
+      "index": 226,
+      "start": 554.07,
+      "end": 554.08,
+      "duration": 0.01,
+      "text": "I'm going to need a couple definitions"
+    },
+    {
+      "index": 227,
+      "start": 554.08,
+      "end": 558.51,
+      "duration": 4.43,
+      "text": "here."
+    },
+    {
+      "index": 228,
+      "start": 559.95,
+      "end": 559.96,
+      "duration": 0.01,
+      "text": "Subtree"
+    },
+    {
+      "index": 229,
+      "start": 559.96,
+      "end": 563.95,
+      "duration": 3.99,
+      "text": "and height"
+    },
+    {
+      "index": 230,
+      "start": 570.63,
+      "end": 570.64,
+      "duration": 0.01,
+      "text": "Uh so a tree decomposes into subtrees."
+    },
+    {
+      "index": 231,
+      "start": 570.64,
+      "end": 573.55,
+      "duration": 2.91,
+      "text": "So for example the subtree rooted at B"
+    },
+    {
+      "index": 232,
+      "start": 573.56,
+      "end": 576.15,
+      "duration": 2.59,
+      "text": "or the subtree of B is"
+    },
+    {
+      "index": 233,
+      "start": 576.16,
+      "end": 580.19,
+      "duration": 4.03,
+      "text": "this portion of the tree."
+    },
+    {
+      "index": 234,
+      "start": 582.67,
+      "end": 582.68,
+      "duration": 0.01,
+      "text": "Uh so it's that node and all of the"
+    },
+    {
+      "index": 235,
+      "start": 582.68,
+      "end": 584.67,
+      "duration": 1.99,
+      "text": "descendants of this node. So because we"
+    },
+    {
+      "index": 236,
+      "start": 584.68,
+      "end": 586.39,
+      "duration": 1.71,
+      "text": "have parents and children we can"
+    },
+    {
+      "index": 237,
+      "start": 586.4,
+      "end": 589.71,
+      "duration": 3.31,
+      "text": "generalize in the familial tree sense."
+    },
+    {
+      "index": 238,
+      "start": 589.72,
+      "end": 591.87,
+      "duration": 2.15,
+      "text": "We can talk about ancestors of a node."
+    },
+    {
+      "index": 239,
+      "start": 591.88,
+      "end": 594.39,
+      "duration": 2.51,
+      "text": "So the ancestors of F are its parent,"
+    },
+    {
+      "index": 240,
+      "start": 594.4,
+      "end": 596.51,
+      "duration": 2.11,
+      "text": "its grandparent, its great grandparents"
+    },
+    {
+      "index": 241,
+      "start": 596.52,
+      "end": 598.31,
+      "duration": 1.79,
+      "text": "and so on. Together, all of these are"
+    },
+    {
+      "index": 242,
+      "start": 598.32,
+      "end": 599.47,
+      "duration": 1.15,
+      "text": "called"
+    },
+    {
+      "index": 243,
+      "start": 599.48,
+      "end": 602.43,
+      "duration": 2.95,
+      "text": "uh ancestors. It's a It doesn't quite"
+    },
+    {
+      "index": 244,
+      "start": 602.44,
+      "end": 604.19,
+      "duration": 1.75,
+      "text": "correspond to familiar trees cuz"
+    },
+    {
+      "index": 245,
+      "start": 604.2,
+      "end": 606.59,
+      "duration": 2.39,
+      "text": "familiar trees you have two parents."
+    },
+    {
+      "index": 246,
+      "start": 606.6,
+      "end": 610.07,
+      "duration": 3.47,
+      "text": "Here, you only have a unique parent."
+    },
+    {
+      "index": 247,
+      "start": 610.08,
+      "end": 612.43,
+      "duration": 2.35,
+      "text": "Or the poor root has no parent."
+    },
+    {
+      "index": 248,
+      "start": 612.44,
+      "end": 615.35,
+      "duration": 2.91,
+      "text": "Um We also talk about"
+    },
+    {
+      "index": 249,
+      "start": 615.36,
+      "end": 617.11,
+      "duration": 1.75,
+      "text": "It's like mixed metaphors. Leaves of the"
+    },
+    {
+      "index": 250,
+      "start": 617.12,
+      "end": 619.27,
+      "duration": 2.15,
+      "text": "tree."
+    },
+    {
+      "index": 251,
+      "start": 619.28,
+      "end": 621.47,
+      "duration": 2.19,
+      "text": "Uh these are"
+    },
+    {
+      "index": 252,
+      "start": 621.48,
+      "end": 623.63,
+      "duration": 2.15,
+      "text": "uh"
+    },
+    {
+      "index": 253,
+      "start": 623.64,
+      "end": 626.35,
+      "duration": 2.71,
+      "text": "people with no children."
+    },
+    {
+      "index": 254,
+      "start": 626.36,
+      "end": 628.71,
+      "duration": 2.35,
+      "text": "Parents will complain about this, but"
+    },
+    {
+      "index": 255,
+      "start": 628.72,
+      "end": 629.71,
+      "duration": 0.99,
+      "text": "um"
+    },
+    {
+      "index": 256,
+      "start": 629.72,
+      "end": 631.99,
+      "duration": 2.27,
+      "text": "many of like many of us in this room, we"
+    },
+    {
+      "index": 257,
+      "start": 632.0,
+      "end": 633.35,
+      "duration": 1.35,
+      "text": "have no children yet, so we are called"
+    },
+    {
+      "index": 258,
+      "start": 633.36,
+      "end": 635.63,
+      "duration": 2.27,
+      "text": "leaves. You can tell your parent, \"Hey,"
+    },
+    {
+      "index": 259,
+      "start": 635.64,
+      "end": 637.51,
+      "duration": 1.87,
+      "text": "I'm just a leaf, you know, blowing in"
+    },
+    {
+      "index": 260,
+      "start": 637.52,
+      "end": 638.67,
+      "duration": 1.15,
+      "text": "the wind.\""
+    },
+    {
+      "index": 261,
+      "start": 638.68,
+      "end": 639.43,
+      "duration": 0.75,
+      "text": "Uh"
+    },
+    {
+      "index": 262,
+      "start": 639.44,
+      "end": 640.51,
+      "duration": 1.07,
+      "text": "so, uh"
+    },
+    {
+      "index": 263,
+      "start": 640.52,
+      "end": 642.39,
+      "duration": 1.87,
+      "text": "you know, like this uh it's so many"
+    },
+    {
+      "index": 264,
+      "start": 642.4,
+      "end": 643.91,
+      "duration": 1.51,
+      "text": "mixed metaphors, but we always draw"
+    },
+    {
+      "index": 265,
+      "start": 643.92,
+      "end": 646.07,
+      "duration": 2.15,
+      "text": "trees downwards"
+    },
+    {
+      "index": 266,
+      "start": 646.08,
+      "end": 648.75,
+      "duration": 2.67,
+      "text": "uh like the root structure of a tree,"
+    },
+    {
+      "index": 267,
+      "start": 648.76,
+      "end": 650.83,
+      "duration": 2.07,
+      "text": "yet we call the ends of the roots"
+    },
+    {
+      "index": 268,
+      "start": 650.84,
+      "end": 653.67,
+      "duration": 2.83,
+      "text": "leaves, uh which is upside down. Anyway,"
+    },
+    {
+      "index": 269,
+      "start": 653.68,
+      "end": 655.51,
+      "duration": 1.83,
+      "text": "that's trees for you."
+    },
+    {
+      "index": 270,
+      "start": 655.52,
+      "end": 657.27,
+      "duration": 1.75,
+      "text": "Lots of entertaining analogies. Okay,"
+    },
+    {
+      "index": 271,
+      "start": 657.28,
+      "end": 659.31,
+      "duration": 2.03,
+      "text": "but ancestors are useful. Descendants"
+    },
+    {
+      "index": 272,
+      "start": 659.32,
+      "end": 660.91,
+      "duration": 1.59,
+      "text": "are also useful. So, the descendants of"
+    },
+    {
+      "index": 273,
+      "start": 660.92,
+      "end": 663.15,
+      "duration": 2.23,
+      "text": "B are all of its children and all of its"
+    },
+    {
+      "index": 274,
+      "start": 663.16,
+      "end": 664.99,
+      "duration": 1.83,
+      "text": "grandchildren and all the way down, but"
+    },
+    {
+      "index": 275,
+      "start": 665.0,
+      "end": 667.11,
+      "duration": 2.11,
+      "text": "just within the subtree."
+    },
+    {
+      "index": 276,
+      "start": 667.12,
+      "end": 671.27,
+      "duration": 4.15,
+      "text": "So, subtree of X consists of X uh and"
+    },
+    {
+      "index": 277,
+      "start": 671.28,
+      "end": 676.91,
+      "duration": 5.63,
+      "text": "its descendants."
+    },
+    {
+      "index": 278,
+      "start": 680.67,
+      "end": 680.68,
+      "duration": 0.01,
+      "text": "And we think of X being the root"
+    },
+    {
+      "index": 279,
+      "start": 680.68,
+      "end": 682.27,
+      "duration": 1.59,
+      "text": "of that subtree. So, we're kind of"
+    },
+    {
+      "index": 280,
+      "start": 682.28,
+      "end": 684.27,
+      "duration": 1.99,
+      "text": "forgetting about everything outside of"
+    },
+    {
+      "index": 281,
+      "start": 684.28,
+      "end": 686.31,
+      "duration": 2.03,
+      "text": "the subtree when we talk about subtree"
+    },
+    {
+      "index": 282,
+      "start": 686.32,
+      "end": 687.43,
+      "duration": 1.11,
+      "text": "of X."
+    },
+    {
+      "index": 283,
+      "start": 687.44,
+      "end": 693.31,
+      "duration": 5.87,
+      "text": "Um Let's talk about the depth of a node."
+    },
+    {
+      "index": 284,
+      "start": 695.43,
+      "end": 695.44,
+      "duration": 0.01,
+      "text": "Depth of a node is"
+    },
+    {
+      "index": 285,
+      "start": 695.44,
+      "end": 696.99,
+      "duration": 1.55,
+      "text": "uh"
+    },
+    {
+      "index": 286,
+      "start": 697.0,
+      "end": 701.87,
+      "duration": 4.87,
+      "text": "I guess the number of its ancestors."
+    },
+    {
+      "index": 287,
+      "start": 703.43,
+      "end": 703.44,
+      "duration": 0.01,
+      "text": "That's"
+    },
+    {
+      "index": 288,
+      "start": 703.44,
+      "end": 705.71,
+      "duration": 2.27,
+      "text": "right. Um"
+    },
+    {
+      "index": 289,
+      "start": 705.72,
+      "end": 707.59,
+      "duration": 1.87,
+      "text": "The way I usually think of it is the"
+    },
+    {
+      "index": 290,
+      "start": 707.6,
+      "end": 709.55,
+      "duration": 1.95,
+      "text": "number of"
+    },
+    {
+      "index": 291,
+      "start": 709.56,
+      "end": 712.91,
+      "duration": 3.35,
+      "text": "number of edges"
+    },
+    {
+      "index": 292,
+      "start": 715.79,
+      "end": 715.8,
+      "duration": 0.01,
+      "text": "in in the path"
+    },
+    {
+      "index": 293,
+      "start": 715.8,
+      "end": 717.23,
+      "duration": 1.43,
+      "text": "from"
+    },
+    {
+      "index": 294,
+      "start": 717.24,
+      "end": 718.71,
+      "duration": 1.47,
+      "text": "X"
+    },
+    {
+      "index": 295,
+      "start": 718.72,
+      "end": 722.51,
+      "duration": 3.79,
+      "text": "up to the root."
+    },
+    {
+      "index": 296,
+      "start": 724.87,
+      "end": 724.88,
+      "duration": 0.01,
+      "text": "So, every node has a unique path that"
+    },
+    {
+      "index": 297,
+      "start": 724.88,
+      "end": 727.19,
+      "duration": 2.31,
+      "text": "goes upwards until it can't go up"
+    },
+    {
+      "index": 298,
+      "start": 727.2,
+      "end": 730.47,
+      "duration": 3.27,
+      "text": "anymore. So, the depth of E is two"
+    },
+    {
+      "index": 299,
+      "start": 730.48,
+      "end": 732.47,
+      "duration": 1.99,
+      "text": "because there are two edges"
+    },
+    {
+      "index": 300,
+      "start": 732.48,
+      "end": 735.75,
+      "duration": 3.27,
+      "text": "uh one two in the path from the root A"
+    },
+    {
+      "index": 301,
+      "start": 735.76,
+      "end": 738.55,
+      "duration": 2.79,
+      "text": "to E. So, maybe I'll write some depths."
+    },
+    {
+      "index": 302,
+      "start": 738.56,
+      "end": 740.39,
+      "duration": 1.83,
+      "text": "Uh depth of E is two."
+    },
+    {
+      "index": 303,
+      "start": 740.4,
+      "end": 742.59,
+      "duration": 2.19,
+      "text": "Depth of these guys is one. Depth of the"
+    },
+    {
+      "index": 304,
+      "start": 742.6,
+      "end": 744.43,
+      "duration": 1.83,
+      "text": "root is zero."
+    },
+    {
+      "index": 305,
+      "start": 744.44,
+      "end": 745.43,
+      "duration": 0.99,
+      "text": "Two."
+    },
+    {
+      "index": 306,
+      "start": 745.44,
+      "end": 746.67,
+      "duration": 1.23,
+      "text": "Three."
+    },
+    {
+      "index": 307,
+      "start": 746.68,
+      "end": 748.47,
+      "duration": 1.79,
+      "text": "So, those are"
+    },
+    {
+      "index": 308,
+      "start": 748.48,
+      "end": 751.07,
+      "duration": 2.59,
+      "text": "depths."
+    },
+    {
+      "index": 309,
+      "start": 753.03,
+      "end": 753.04,
+      "duration": 0.01,
+      "text": "I'm going to"
+    },
+    {
+      "index": 310,
+      "start": 753.04,
+      "end": 759.03,
+      "duration": 5.99,
+      "text": "clean this up a little bit."
+    },
+    {
+      "index": 311,
+      "start": 760.87,
+      "end": 760.88,
+      "duration": 0.01,
+      "text": "So, we can focus on the image. All"
+    },
+    {
+      "index": 312,
+      "start": 760.88,
+      "end": 763.03,
+      "duration": 2.15,
+      "text": "right. Height. So, depth is measuring"
+    },
+    {
+      "index": 313,
+      "start": 763.04,
+      "end": 764.79,
+      "duration": 1.75,
+      "text": "downwards cuz we you know, if you"
+    },
+    {
+      "index": 314,
+      "start": 764.8,
+      "end": 767.99,
+      "duration": 3.19,
+      "text": "imagine depth within water, this is"
+    },
+    {
+      "index": 315,
+      "start": 768.0,
+      "end": 769.75,
+      "duration": 1.75,
+      "text": "uh the surface of the water, and then we"
+    },
+    {
+      "index": 316,
+      "start": 769.76,
+      "end": 771.31,
+      "duration": 1.55,
+      "text": "measure how deep you are from the"
+    },
+    {
+      "index": 317,
+      "start": 771.32,
+      "end": 773.59,
+      "duration": 2.27,
+      "text": "surface. Height is in the reverse"
+    },
+    {
+      "index": 318,
+      "start": 773.6,
+      "end": 774.95,
+      "duration": 1.35,
+      "text": "direction. We're going to measure from"
+    },
+    {
+      "index": 319,
+      "start": 774.96,
+      "end": 777.11,
+      "duration": 2.15,
+      "text": "the leaf level up cuz leaves are at the"
+    },
+    {
+      "index": 320,
+      "start": 777.12,
+      "end": 780.67,
+      "duration": 3.55,
+      "text": "bottom of the tree. So, height of a node"
+    },
+    {
+      "index": 321,
+      "start": 780.68,
+      "end": 782.51,
+      "duration": 1.83,
+      "text": "is going to be"
+    },
+    {
+      "index": 322,
+      "start": 782.52,
+      "end": 783.51,
+      "duration": 0.99,
+      "text": "uh"
+    },
+    {
+      "index": 323,
+      "start": 783.52,
+      "end": 787.15,
+      "duration": 3.63,
+      "text": "the number of edges"
+    },
+    {
+      "index": 324,
+      "start": 787.16,
+      "end": 799.71,
+      "duration": 12.55,
+      "text": "in the longest downward path."
+    },
+    {
+      "index": 325,
+      "start": 802.43,
+      "end": 802.44,
+      "duration": 0.01,
+      "text": "Okay, which is the same thing as"
+    },
+    {
+      "index": 326,
+      "start": 802.44,
+      "end": 806.07,
+      "duration": 3.63,
+      "text": "the maximum depth of a node"
+    },
+    {
+      "index": 327,
+      "start": 806.08,
+      "end": 812.51,
+      "duration": 6.43,
+      "text": "in X's subtree."
+    },
+    {
+      "index": 328,
+      "start": 814.95,
+      "end": 814.96,
+      "duration": 0.01,
+      "text": "Uh let's do"
+    },
+    {
+      "index": 329,
+      "start": 814.96,
+      "end": 817.07,
+      "duration": 2.11,
+      "text": "height in red."
+    },
+    {
+      "index": 330,
+      "start": 817.08,
+      "end": 819.15,
+      "duration": 2.07,
+      "text": "So, uh how long is the longest path from"
+    },
+    {
+      "index": 331,
+      "start": 819.16,
+      "end": 821.03,
+      "duration": 1.87,
+      "text": "F to a leaf? Well, F is a leaf, so all"
+    },
+    {
+      "index": 332,
+      "start": 821.04,
+      "end": 824.27,
+      "duration": 3.23,
+      "text": "leaves have depth zero."
+    },
+    {
+      "index": 333,
+      "start": 824.28,
+      "end": 827.55,
+      "duration": 3.27,
+      "text": "Sorry, height zero. I get it backwards."
+    },
+    {
+      "index": 334,
+      "start": 827.56,
+      "end": 829.27,
+      "duration": 1.71,
+      "text": "Um"
+    },
+    {
+      "index": 335,
+      "start": 829.28,
+      "end": 832.75,
+      "duration": 3.47,
+      "text": "D Here, it's So, there are two ways to"
+    },
+    {
+      "index": 336,
+      "start": 832.76,
+      "end": 835.31,
+      "duration": 2.55,
+      "text": "go down. This doesn't go to a leaf. Uh"
+    },
+    {
+      "index": 337,
+      "start": 835.32,
+      "end": 837.27,
+      "duration": 1.95,
+      "text": "this one goes to a leaf, and its height"
+    },
+    {
+      "index": 338,
+      "start": 837.28,
+      "end": 840.03,
+      "duration": 2.75,
+      "text": "is zero, so this height is one. There's"
+    },
+    {
+      "index": 339,
+      "start": 840.04,
+      "end": 842.23,
+      "duration": 2.19,
+      "text": "one edge to a leaf here."
+    },
+    {
+      "index": 340,
+      "start": 842.24,
+      "end": 844.95,
+      "duration": 2.71,
+      "text": "Uh B has two leaves it can get to. We"
+    },
+    {
+      "index": 341,
+      "start": 844.96,
+      "end": 846.75,
+      "duration": 1.79,
+      "text": "take the longest one, so that's length"
+    },
+    {
+      "index": 342,
+      "start": 846.76,
+      "end": 848.07,
+      "duration": 1.31,
+      "text": "two."
+    },
+    {
+      "index": 343,
+      "start": 848.08,
+      "end": 850.47,
+      "duration": 2.39,
+      "text": "Uh A similarly has"
+    },
+    {
+      "index": 344,
+      "start": 850.48,
+      "end": 856.39,
+      "duration": 5.91,
+      "text": "height three."
+    },
+    {
+      "index": 345,
+      "start": 858.79,
+      "end": 858.8,
+      "duration": 0.01,
+      "text": "Okay, so height we measure"
+    },
+    {
+      "index": 346,
+      "start": 858.8,
+      "end": 861.63,
+      "duration": 2.83,
+      "text": "upward, depth we measure downward. What"
+    },
+    {
+      "index": 347,
+      "start": 861.64,
+      "end": 863.87,
+      "duration": 2.23,
+      "text": "One thing we care about uh is just the"
+    },
+    {
+      "index": 348,
+      "start": 863.88,
+      "end": 866.59,
+      "duration": 2.71,
+      "text": "height of the overall tree,"
+    },
+    {
+      "index": 349,
+      "start": 866.6,
+      "end": 868.71,
+      "duration": 2.11,
+      "text": "uh which is"
+    },
+    {
+      "index": 350,
+      "start": 868.72,
+      "end": 872.79,
+      "duration": 4.07,
+      "text": "the height of the root."
+    },
+    {
+      "index": 351,
+      "start": 874.19,
+      "end": 874.2,
+      "duration": 0.01,
+      "text": "And I'm going to call that H cuz we're"
+    },
+    {
+      "index": 352,
+      "start": 874.2,
+      "end": 879.55,
+      "duration": 5.35,
+      "text": "going to use it a lot."
+    },
+    {
+      "index": 353,
+      "start": 881.51,
+      "end": 881.52,
+      "duration": 0.01,
+      "text": "And what we're going to achieve today is"
+    },
+    {
+      "index": 354,
+      "start": 881.52,
+      "end": 883.23,
+      "duration": 1.71,
+      "text": "all of these running times, instead of"
+    },
+    {
+      "index": 355,
+      "start": 883.24,
+      "end": 885.59,
+      "duration": 2.35,
+      "text": "being log n, they're going to be order"
+    },
+    {
+      "index": 356,
+      "start": 885.6,
+      "end": 888.75,
+      "duration": 3.15,
+      "text": "H."
+    },
+    {
+      "index": 357,
+      "start": 891.63,
+      "end": 891.64,
+      "duration": 0.01,
+      "text": "So, today our goal is to get all the"
+    },
+    {
+      "index": 358,
+      "start": 891.64,
+      "end": 894.03,
+      "duration": 2.39,
+      "text": "operations we care about in order H"
+    },
+    {
+      "index": 359,
+      "start": 894.04,
+      "end": 897.15,
+      "duration": 3.11,
+      "text": "time."
+    },
+    {
+      "index": 360,
+      "start": 899.51,
+      "end": 899.52,
+      "duration": 0.01,
+      "text": "And then next lecture, we're going to"
+    },
+    {
+      "index": 361,
+      "start": 899.52,
+      "end": 901.79,
+      "duration": 2.27,
+      "text": "guarantee that H is always log n, and"
+    },
+    {
+      "index": 362,
+      "start": 901.8,
+      "end": 903.67,
+      "duration": 1.87,
+      "text": "then we'll get log n time."
+    },
+    {
+      "index": 363,
+      "start": 903.68,
+      "end": 904.87,
+      "duration": 1.19,
+      "text": "So, we need to do a bunch of work to"
+    },
+    {
+      "index": 364,
+      "start": 904.88,
+      "end": 906.67,
+      "duration": 1.79,
+      "text": "achieve log n. Today, we'll do the work"
+    },
+    {
+      "index": 365,
+      "start": 906.68,
+      "end": 908.79,
+      "duration": 2.11,
+      "text": "that's all the tree manipulation, and as"
+    },
+    {
+      "index": 366,
+      "start": 908.8,
+      "end": 910.949,
+      "duration": 2.149,
+      "text": "long as your tree is nice and shallow,"
+    },
+    {
+      "index": 367,
+      "start": 910.959,
+      "end": 913.11,
+      "duration": 2.151,
+      "text": "it doesn't have high height,"
+    },
+    {
+      "index": 368,
+      "start": 913.12,
+      "end": 914.39,
+      "duration": 1.27,
+      "text": "it has logarithmic height, everything"
+    },
+    {
+      "index": 369,
+      "start": 914.4,
+      "end": 916.11,
+      "duration": 1.71,
+      "text": "will be log n. Of course, there are"
+    },
+    {
+      "index": 370,
+      "start": 916.12,
+      "end": 918.19,
+      "duration": 2.07,
+      "text": "trees that are really bad."
+    },
+    {
+      "index": 371,
+      "start": 918.2,
+      "end": 925.069,
+      "duration": 6.869,
+      "text": "Right? We can have a tree"
+    },
+    {
+      "index": 372,
+      "start": 926.67,
+      "end": 926.68,
+      "duration": 0.01,
+      "text": "like this,"
+    },
+    {
+      "index": 373,
+      "start": 926.68,
+      "end": 929.31,
+      "duration": 2.63,
+      "text": "which is basically a linked list,"
+    },
+    {
+      "index": 374,
+      "start": 929.32,
+      "end": 930.99,
+      "duration": 1.67,
+      "text": "where we only use right pointers, and"
+    },
+    {
+      "index": 375,
+      "start": 931.0,
+      "end": 932.75,
+      "duration": 1.75,
+      "text": "all the left pointers are null."
+    },
+    {
+      "index": 376,
+      "start": 932.76,
+      "end": 934.79,
+      "duration": 2.03,
+      "text": "So, there are high There are trees that"
+    },
+    {
+      "index": 377,
+      "start": 934.8,
+      "end": 938.15,
+      "duration": 3.35,
+      "text": "are very high, have high height. Um We"
+    },
+    {
+      "index": 378,
+      "start": 938.16,
+      "end": 939.51,
+      "duration": 1.35,
+      "text": "want to avoid these, but we won't worry"
+    },
+    {
+      "index": 379,
+      "start": 939.52,
+      "end": 941.47,
+      "duration": 1.95,
+      "text": "about that till next lecture. Question."
+    },
+    {
+      "index": 380,
+      "start": 941.48,
+      "end": 942.91,
+      "duration": 1.43,
+      "text": "I have a quick question. Is the height"
+    },
+    {
+      "index": 381,
+      "start": 942.92,
+      "end": 945.55,
+      "duration": 2.63,
+      "text": "of node C zero?"
+    },
+    {
+      "index": 382,
+      "start": 945.56,
+      "end": 947.23,
+      "duration": 1.67,
+      "text": "What is the height of node C? Height of"
+    },
+    {
+      "index": 383,
+      "start": 947.24,
+      "end": 948.949,
+      "duration": 1.709,
+      "text": "node C is zero."
+    },
+    {
+      "index": 384,
+      "start": 948.959,
+      "end": 950.51,
+      "duration": 1.551,
+      "text": "Cuz the length of the longest path, the"
+    },
+    {
+      "index": 385,
+      "start": 950.52,
+      "end": 952.39,
+      "duration": 1.87,
+      "text": "number of edges in the longest downward"
+    },
+    {
+      "index": 386,
+      "start": 952.4,
+      "end": 954.27,
+      "duration": 1.87,
+      "text": "path is zero."
+    },
+    {
+      "index": 387,
+      "start": 954.28,
+      "end": 955.55,
+      "duration": 1.27,
+      "text": "Yeah. We're counting edges, not"
+    },
+    {
+      "index": 388,
+      "start": 955.56,
+      "end": 958.47,
+      "duration": 2.91,
+      "text": "vertices."
+    },
+    {
+      "index": 389,
+      "start": 959.829,
+      "end": 959.839,
+      "duration": 0.01,
+      "text": "Um"
+    },
+    {
+      "index": 390,
+      "start": 959.839,
+      "end": 961.43,
+      "duration": 1.591,
+      "text": "Yeah."
+    },
+    {
+      "index": 391,
+      "start": 961.44,
+      "end": 962.71,
+      "duration": 1.27,
+      "text": "So, the height of the tree is of course"
+    },
+    {
+      "index": 392,
+      "start": 962.72,
+      "end": 964.829,
+      "duration": 2.109,
+      "text": "just the depth the maximum depth. I"
+    },
+    {
+      "index": 393,
+      "start": 964.839,
+      "end": 966.55,
+      "duration": 1.711,
+      "text": "think that's right. So, the height here"
+    },
+    {
+      "index": 394,
+      "start": 966.56,
+      "end": 967.47,
+      "duration": 0.91,
+      "text": "is"
+    },
+    {
+      "index": 395,
+      "start": 967.48,
+      "end": 969.59,
+      "duration": 2.11,
+      "text": "three, and the maximum depth is this"
+    },
+    {
+      "index": 396,
+      "start": 969.6,
+      "end": 971.39,
+      "duration": 1.79,
+      "text": "terribly drawn three."
+    },
+    {
+      "index": 397,
+      "start": 971.4,
+      "end": 972.87,
+      "duration": 1.47,
+      "text": "So, these happen to correspond in the"
+    },
+    {
+      "index": 398,
+      "start": 972.88,
+      "end": 975.43,
+      "duration": 2.55,
+      "text": "maximum case, but we use height to"
+    },
+    {
+      "index": 399,
+      "start": 975.44,
+      "end": 978.829,
+      "duration": 3.389,
+      "text": "always mean maximum, and so that's why"
+    },
+    {
+      "index": 400,
+      "start": 978.839,
+      "end": 980.75,
+      "duration": 1.911,
+      "text": "we talk about the height of the tree."
+    },
+    {
+      "index": 401,
+      "start": 980.76,
+      "end": 982.39,
+      "duration": 1.63,
+      "text": "Depth of the tree is not defined, just"
+    },
+    {
+      "index": 402,
+      "start": 982.4,
+      "end": 984.99,
+      "duration": 2.59,
+      "text": "depths of nodes."
+    },
+    {
+      "index": 403,
+      "start": 985.0,
+      "end": 987.67,
+      "duration": 2.67,
+      "text": "Okay. Um"
+    },
+    {
+      "index": 404,
+      "start": 987.68,
+      "end": 989.71,
+      "duration": 2.03,
+      "text": "How do we use these trees to represent"
+    },
+    {
+      "index": 405,
+      "start": 989.72,
+      "end": 991.829,
+      "duration": 2.109,
+      "text": "either sequence or set?"
+    },
+    {
+      "index": 406,
+      "start": 991.839,
+      "end": 993.39,
+      "duration": 1.551,
+      "text": "Uh"
+    },
+    {
+      "index": 407,
+      "start": 993.4,
+      "end": 996.63,
+      "duration": 3.23,
+      "text": "I claim that there is a natural order"
+    },
+    {
+      "index": 408,
+      "start": 996.64,
+      "end": 1007.79,
+      "duration": 11.15,
+      "text": "in trees called the traversal order"
+    },
+    {
+      "index": 409,
+      "start": 1011.63,
+      "end": 1011.64,
+      "duration": 0.01,
+      "text": "of nodes or items"
+    },
+    {
+      "index": 410,
+      "start": 1011.64,
+      "end": 1013.11,
+      "duration": 1.47,
+      "text": "in the tree."
+    },
+    {
+      "index": 411,
+      "start": 1013.12,
+      "end": 1014.99,
+      "duration": 1.87,
+      "text": "So, I'm going to define a particular"
+    },
+    {
+      "index": 412,
+      "start": 1015.0,
+      "end": 1017.87,
+      "duration": 2.87,
+      "text": "order. Uh"
+    },
+    {
+      "index": 413,
+      "start": 1017.88,
+      "end": 1019.87,
+      "duration": 1.99,
+      "text": "Say in this example,"
+    },
+    {
+      "index": 414,
+      "start": 1019.88,
+      "end": 1024.03,
+      "duration": 4.15,
+      "text": "let's do the example first."
+    },
+    {
+      "index": 415,
+      "start": 1033.03,
+      "end": 1033.04,
+      "duration": 0.01,
+      "text": "is going to be F,"
+    },
+    {
+      "index": 416,
+      "start": 1033.04,
+      "end": 1034.63,
+      "duration": 1.59,
+      "text": "D,"
+    },
+    {
+      "index": 417,
+      "start": 1034.64,
+      "end": 1036.59,
+      "duration": 1.95,
+      "text": "B,"
+    },
+    {
+      "index": 418,
+      "start": 1036.6,
+      "end": 1038.87,
+      "duration": 2.27,
+      "text": "E,"
+    },
+    {
+      "index": 419,
+      "start": 1038.88,
+      "end": 1040.27,
+      "duration": 1.39,
+      "text": "A,"
+    },
+    {
+      "index": 420,
+      "start": 1040.28,
+      "end": 1042.79,
+      "duration": 2.51,
+      "text": "C. I feel like I'm in music class. This"
+    },
+    {
+      "index": 421,
+      "start": 1042.8,
+      "end": 1044.669,
+      "duration": 1.869,
+      "text": "is the my my guitar or something, but"
+    },
+    {
+      "index": 422,
+      "start": 1044.679,
+      "end": 1046.91,
+      "duration": 2.231,
+      "text": "it's not. Help."
+    },
+    {
+      "index": 423,
+      "start": 1046.92,
+      "end": 1049.15,
+      "duration": 2.23,
+      "text": "Just if it is a coincidence. Um"
+    },
+    {
+      "index": 424,
+      "start": 1049.16,
+      "end": 1050.75,
+      "duration": 1.59,
+      "text": "So,"
+    },
+    {
+      "index": 425,
+      "start": 1050.76,
+      "end": 1052.91,
+      "duration": 2.15,
+      "text": "what is this order? What I'd like to do"
+    },
+    {
+      "index": 426,
+      "start": 1052.92,
+      "end": 1054.51,
+      "duration": 1.59,
+      "text": "is um"
+    },
+    {
+      "index": 427,
+      "start": 1054.52,
+      "end": 1056.669,
+      "duration": 2.149,
+      "text": "recursively define an order"
+    },
+    {
+      "index": 428,
+      "start": 1056.679,
+      "end": 1058.63,
+      "duration": 1.951,
+      "text": "where the root of the tree is somewhere"
+    },
+    {
+      "index": 429,
+      "start": 1058.64,
+      "end": 1060.51,
+      "duration": 1.87,
+      "text": "in the middle, and everything in the"
+    },
+    {
+      "index": 430,
+      "start": 1060.52,
+      "end": 1063.63,
+      "duration": 3.11,
+      "text": "left subtree is left earlier in the"
+    },
+    {
+      "index": 431,
+      "start": 1063.64,
+      "end": 1065.35,
+      "duration": 1.71,
+      "text": "order than the root, and everything in"
+    },
+    {
+      "index": 432,
+      "start": 1065.36,
+      "end": 1067.55,
+      "duration": 2.19,
+      "text": "the right subtree is later. So, you can"
+    },
+    {
+      "index": 433,
+      "start": 1067.56,
+      "end": 1070.15,
+      "duration": 2.59,
+      "text": "see here, C comes after A,"
+    },
+    {
+      "index": 434,
+      "start": 1070.16,
+      "end": 1071.79,
+      "duration": 1.63,
+      "text": "and then all the other nodes come before"
+    },
+    {
+      "index": 435,
+      "start": 1071.8,
+      "end": 1072.669,
+      "duration": 0.869,
+      "text": "A."
+    },
+    {
+      "index": 436,
+      "start": 1072.679,
+      "end": 1075.99,
+      "duration": 3.311,
+      "text": "And recursively, if I look at a node B,"
+    },
+    {
+      "index": 437,
+      "start": 1076.0,
+      "end": 1078.63,
+      "duration": 2.63,
+      "text": "this node B, which appears over here,"
+    },
+    {
+      "index": 438,
+      "start": 1078.64,
+      "end": 1080.99,
+      "duration": 2.35,
+      "text": "E is to the right of it, but if this is"
+    },
+    {
+      "index": 439,
+      "start": 1081.0,
+      "end": 1082.83,
+      "duration": 1.83,
+      "text": "all to the left of A,"
+    },
+    {
+      "index": 440,
+      "start": 1082.84,
+      "end": 1085.55,
+      "duration": 2.71,
+      "text": "so E is between B and A."
+    },
+    {
+      "index": 441,
+      "start": 1085.56,
+      "end": 1088.31,
+      "duration": 2.75,
+      "text": "B on the left, and then F and D are to"
+    },
+    {
+      "index": 442,
+      "start": 1088.32,
+      "end": 1090.07,
+      "duration": 1.75,
+      "text": "the left of that, and again, F comes"
+    },
+    {
+      "index": 443,
+      "start": 1090.08,
+      "end": 1092.43,
+      "duration": 2.35,
+      "text": "before D because F is in the left"
+    },
+    {
+      "index": 444,
+      "start": 1092.44,
+      "end": 1094.79,
+      "duration": 2.35,
+      "text": "subtree of D."
+    },
+    {
+      "index": 445,
+      "start": 1094.8,
+      "end": 1096.43,
+      "duration": 1.63,
+      "text": "Okay, so we say"
+    },
+    {
+      "index": 446,
+      "start": 1096.44,
+      "end": 1098.11,
+      "duration": 1.67,
+      "text": "uh"
+    },
+    {
+      "index": 447,
+      "start": 1098.12,
+      "end": 1103.95,
+      "duration": 5.83,
+      "text": "for every node,"
+    },
+    {
+      "index": 448,
+      "start": 1105.91,
+      "end": 1105.92,
+      "duration": 0.01,
+      "text": "uh the"
+    },
+    {
+      "index": 449,
+      "start": 1105.92,
+      "end": 1107.63,
+      "duration": 1.71,
+      "text": "nodes"
+    },
+    {
+      "index": 450,
+      "start": 1107.64,
+      "end": 1110.51,
+      "duration": 2.87,
+      "text": "in X.left"
+    },
+    {
+      "index": 451,
+      "start": 1110.52,
+      "end": 1114.51,
+      "duration": 3.99,
+      "text": "are before X,"
+    },
+    {
+      "index": 452,
+      "start": 1117.43,
+      "end": 1117.44,
+      "duration": 0.01,
+      "text": "and the nodes in X.right"
+    },
+    {
+      "index": 453,
+      "start": 1117.44,
+      "end": 1123.19,
+      "duration": 5.75,
+      "text": "are come after X."
+    },
+    {
+      "index": 454,
+      "start": 1124.79,
+      "end": 1124.8,
+      "duration": 0.01,
+      "text": "And this uniquely defines an order"
+    },
+    {
+      "index": 455,
+      "start": 1124.8,
+      "end": 1126.75,
+      "duration": 1.95,
+      "text": "called the traversal order. It's also"
+    },
+    {
+      "index": 456,
+      "start": 1126.76,
+      "end": 1129.149,
+      "duration": 2.389,
+      "text": "called the in-order traversal order."
+    },
+    {
+      "index": 457,
+      "start": 1129.159,
+      "end": 1130.95,
+      "duration": 1.791,
+      "text": "It's called in order because it's in the"
+    },
+    {
+      "index": 458,
+      "start": 1130.96,
+      "end": 1132.79,
+      "duration": 1.83,
+      "text": "traversal order. So, it's very circular,"
+    },
+    {
+      "index": 459,
+      "start": 1132.8,
+      "end": 1133.63,
+      "duration": 0.83,
+      "text": "but"
+    },
+    {
+      "index": 460,
+      "start": 1133.64,
+      "end": 1135.63,
+      "duration": 1.99,
+      "text": "um you may have seen in-order traversal,"
+    },
+    {
+      "index": 461,
+      "start": 1135.64,
+      "end": 1137.149,
+      "duration": 1.509,
+      "text": "this is the same thing."
+    },
+    {
+      "index": 462,
+      "start": 1137.159,
+      "end": 1138.669,
+      "duration": 1.51,
+      "text": "Uh there's a very simple algorithm for"
+    },
+    {
+      "index": 463,
+      "start": 1138.679,
+      "end": 1140.75,
+      "duration": 2.071,
+      "text": "computing this."
+    },
+    {
+      "index": 464,
+      "start": 1140.76,
+      "end": 1142.59,
+      "duration": 1.83,
+      "text": "If I want to"
+    },
+    {
+      "index": 465,
+      "start": 1142.6,
+      "end": 1144.149,
+      "duration": 1.549,
+      "text": "iterate"
+    },
+    {
+      "index": 466,
+      "start": 1144.159,
+      "end": 1146.35,
+      "duration": 2.191,
+      "text": "uh let's call this"
+    },
+    {
+      "index": 467,
+      "start": 1146.36,
+      "end": 1149.07,
+      "duration": 2.71,
+      "text": "Yeah. If I want to iterate all the nodes"
+    },
+    {
+      "index": 468,
+      "start": 1149.08,
+      "end": 1150.669,
+      "duration": 1.589,
+      "text": "within a subtree"
+    },
+    {
+      "index": 469,
+      "start": 1150.679,
+      "end": 1152.79,
+      "duration": 2.111,
+      "text": "X, rooted by X,"
+    },
+    {
+      "index": 470,
+      "start": 1152.8,
+      "end": 1156.63,
+      "duration": 3.83,
+      "text": "um I just iterate on all of the"
+    },
+    {
+      "index": 471,
+      "start": 1156.64,
+      "end": 1158.79,
+      "duration": 2.15,
+      "text": "nodes in the left subtree,"
+    },
+    {
+      "index": 472,
+      "start": 1158.8,
+      "end": 1162.83,
+      "duration": 4.03,
+      "text": "then I output X itself,"
+    },
+    {
+      "index": 473,
+      "start": 1162.84,
+      "end": 1165.23,
+      "duration": 2.39,
+      "text": "then I iterate on all the nodes in the"
+    },
+    {
+      "index": 474,
+      "start": 1165.24,
+      "end": 1170.909,
+      "duration": 5.669,
+      "text": "right subtree."
+    },
+    {
+      "index": 475,
+      "start": 1172.51,
+      "end": 1172.52,
+      "duration": 0.01,
+      "text": "Okay, you may have seen that algorithm"
+    },
+    {
+      "index": 476,
+      "start": 1172.52,
+      "end": 1174.35,
+      "duration": 1.83,
+      "text": "before. This is just another way to"
+    },
+    {
+      "index": 477,
+      "start": 1174.36,
+      "end": 1176.83,
+      "duration": 2.47,
+      "text": "codify the same thing. The result is all"
+    },
+    {
+      "index": 478,
+      "start": 1176.84,
+      "end": 1178.47,
+      "duration": 1.63,
+      "text": "the nodes within a subtree appear"
+    },
+    {
+      "index": 479,
+      "start": 1178.48,
+      "end": 1181.03,
+      "duration": 2.55,
+      "text": "contiguously with no interruptions, and"
+    },
+    {
+      "index": 480,
+      "start": 1181.04,
+      "end": 1182.99,
+      "duration": 1.95,
+      "text": "then the parent"
+    },
+    {
+      "index": 481,
+      "start": 1183.0,
+      "end": 1184.23,
+      "duration": 1.23,
+      "text": "parent's going to come before or after,"
+    },
+    {
+      "index": 482,
+      "start": 1184.24,
+      "end": 1185.47,
+      "duration": 1.23,
+      "text": "depending on whether it's the left or"
+    },
+    {
+      "index": 483,
+      "start": 1185.48,
+      "end": 1188.47,
+      "duration": 2.99,
+      "text": "right child."
+    },
+    {
+      "index": 484,
+      "start": 1189.79,
+      "end": 1189.8,
+      "duration": 0.01,
+      "text": "Okay, so"
+    },
+    {
+      "index": 485,
+      "start": 1189.8,
+      "end": 1191.91,
+      "duration": 2.11,
+      "text": "and now it's just a matter of connecting"
+    },
+    {
+      "index": 486,
+      "start": 1191.92,
+      "end": 1193.63,
+      "duration": 1.71,
+      "text": "the dots, because we're representing an"
+    },
+    {
+      "index": 487,
+      "start": 1193.64,
+      "end": 1194.71,
+      "duration": 1.07,
+      "text": "order."
+    },
+    {
+      "index": 488,
+      "start": 1194.72,
+      "end": 1196.67,
+      "duration": 1.95,
+      "text": "And for sequence, that is going to be"
+    },
+    {
+      "index": 489,
+      "start": 1196.68,
+      "end": 1198.23,
+      "duration": 1.55,
+      "text": "the sequence order. If we want to store"
+    },
+    {
+      "index": 490,
+      "start": 1198.24,
+      "end": 1200.91,
+      "duration": 2.67,
+      "text": "n items x0 through x1, we're going to"
+    },
+    {
+      "index": 491,
+      "start": 1200.92,
+      "end": 1202.75,
+      "duration": 1.83,
+      "text": "build some kind of tree."
+    },
+    {
+      "index": 492,
+      "start": 1202.76,
+      "end": 1204.83,
+      "duration": 2.07,
+      "text": "Uh we're going to put x0 here, x1 here,"
+    },
+    {
+      "index": 493,
+      "start": 1204.84,
+      "end": 1208.27,
+      "duration": 3.43,
+      "text": "x2 here, x3 here, x4 here, x5 here. You"
+    },
+    {
+      "index": 494,
+      "start": 1208.28,
+      "end": 1210.03,
+      "duration": 1.75,
+      "text": "can see I'm very used to dealing with"
+    },
+    {
+      "index": 495,
+      "start": 1210.04,
+      "end": 1211.19,
+      "duration": 1.15,
+      "text": "traversal orders. It takes a little"
+    },
+    {
+      "index": 496,
+      "start": 1211.2,
+      "end": 1212.91,
+      "duration": 1.71,
+      "text": "while. Um you could also see it here."
+    },
+    {
+      "index": 497,
+      "start": 1212.92,
+      "end": 1215.59,
+      "duration": 2.67,
+      "text": "We're going to put x1 in this node, x2"
+    },
+    {
+      "index": 498,
+      "start": 1215.6,
+      "end": 1218.19,
+      "duration": 2.59,
+      "text": "Sorry, x0 here, x1 here, x2 here, and so"
+    },
+    {
+      "index": 499,
+      "start": 1218.2,
+      "end": 1221.99,
+      "duration": 3.79,
+      "text": "on. That's the same order that I gave."
+    },
+    {
+      "index": 500,
+      "start": 1223.47,
+      "end": 1223.48,
+      "duration": 0.01,
+      "text": "Okay, that's for sequences. For sets,"
+    },
+    {
+      "index": 501,
+      "start": 1223.48,
+      "end": 1224.75,
+      "duration": 1.27,
+      "text": "that order is just going to be the"
+    },
+    {
+      "index": 502,
+      "start": 1224.76,
+      "end": 1226.67,
+      "duration": 1.91,
+      "text": "sorted order, and we're going to be"
+    },
+    {
+      "index": 503,
+      "start": 1226.68,
+      "end": 1228.23,
+      "duration": 1.55,
+      "text": "effectively representing the sorted"
+    },
+    {
+      "index": 504,
+      "start": 1228.24,
+      "end": 1231.51,
+      "duration": 3.27,
+      "text": "order of keys, say increasing."
+    },
+    {
+      "index": 505,
+      "start": 1231.52,
+      "end": 1233.87,
+      "duration": 2.35,
+      "text": "Uh but before we get to that, let's talk"
+    },
+    {
+      "index": 506,
+      "start": 1233.88,
+      "end": 1235.39,
+      "duration": 1.51,
+      "text": "about"
+    },
+    {
+      "index": 507,
+      "start": 1235.4,
+      "end": 1237.83,
+      "duration": 2.43,
+      "text": "different operations we can do"
+    },
+    {
+      "index": 508,
+      "start": 1237.84,
+      "end": 1239.55,
+      "duration": 1.71,
+      "text": "uh"
+    },
+    {
+      "index": 509,
+      "start": 1239.56,
+      "end": 1241.31,
+      "duration": 1.75,
+      "text": "just playing around with traversal"
+    },
+    {
+      "index": 510,
+      "start": 1241.32,
+      "end": 1243.95,
+      "duration": 2.63,
+      "text": "order."
+    },
+    {
+      "index": 511,
+      "start": 1245.11,
+      "end": 1245.12,
+      "duration": 0.01,
+      "text": "And then we're going to use these to"
+    },
+    {
+      "index": 512,
+      "start": 1245.12,
+      "end": 1247.67,
+      "duration": 2.55,
+      "text": "build the sequence and set operations"
+    },
+    {
+      "index": 513,
+      "start": 1247.68,
+      "end": 1249.63,
+      "duration": 1.95,
+      "text": "that we care about."
+    },
+    {
+      "index": 514,
+      "start": 1249.64,
+      "end": 1252.15,
+      "duration": 2.51,
+      "text": "So, first operation,"
+    },
+    {
+      "index": 515,
+      "start": 1252.16,
+      "end": 1254.79,
+      "duration": 2.63,
+      "text": "I'll call subtree first. Seems"
+    },
+    {
+      "index": 516,
+      "start": 1254.8,
+      "end": 1256.95,
+      "duration": 2.15,
+      "text": "appropriate that it is called first."
+    },
+    {
+      "index": 517,
+      "start": 1256.96,
+      "end": 1258.59,
+      "duration": 1.63,
+      "text": "Uh"
+    },
+    {
+      "index": 518,
+      "start": 1258.6,
+      "end": 1260.51,
+      "duration": 1.91,
+      "text": "It's the first one."
+    },
+    {
+      "index": 519,
+      "start": 1260.52,
+      "end": 1262.87,
+      "duration": 2.35,
+      "text": "So, given a node,"
+    },
+    {
+      "index": 520,
+      "start": 1262.88,
+      "end": 1264.59,
+      "duration": 1.71,
+      "text": "which I'll call node,"
+    },
+    {
+      "index": 521,
+      "start": 1264.6,
+      "end": 1265.19,
+      "duration": 0.59,
+      "text": "uh"
+    },
+    {
+      "index": 522,
+      "start": 1265.2,
+      "end": 1270.15,
+      "duration": 4.95,
+      "text": "this defines a subtree,"
+    },
+    {
+      "index": 523,
+      "start": 1272.47,
+      "end": 1272.48,
+      "duration": 0.01,
+      "text": "which usually we draw subtrees as"
+    },
+    {
+      "index": 524,
+      "start": 1272.48,
+      "end": 1274.75,
+      "duration": 2.27,
+      "text": "triangles hanging off of the node. It'd"
+    },
+    {
+      "index": 525,
+      "start": 1274.76,
+      "end": 1276.35,
+      "duration": 1.59,
+      "text": "be uh"
+    },
+    {
+      "index": 526,
+      "start": 1276.36,
+      "end": 1278.07,
+      "duration": 1.71,
+      "text": "So, here I would"
+    },
+    {
+      "index": 527,
+      "start": 1278.08,
+      "end": 1279.47,
+      "duration": 1.39,
+      "text": "write x,"
+    },
+    {
+      "index": 528,
+      "start": 1279.48,
+      "end": 1281.27,
+      "duration": 1.79,
+      "text": "and then there's some subtree of all the"
+    },
+    {
+      "index": 529,
+      "start": 1281.28,
+      "end": 1283.23,
+      "duration": 1.95,
+      "text": "descendants of x."
+    },
+    {
+      "index": 530,
+      "start": 1283.24,
+      "end": 1285.47,
+      "duration": 2.23,
+      "text": "So, with subtree first, I would like to"
+    },
+    {
+      "index": 531,
+      "start": 1285.48,
+      "end": 1290.91,
+      "duration": 5.43,
+      "text": "say among all the nodes in this subtree,"
+    },
+    {
+      "index": 532,
+      "start": 1307.07,
+      "end": 1307.08,
+      "duration": 0.01,
+      "text": "So, just restricting to um"
+    },
+    {
+      "index": 533,
+      "start": 1307.08,
+      "end": 1308.55,
+      "duration": 1.47,
+      "text": "that subtree."
+    },
+    {
+      "index": 534,
+      "start": 1308.56,
+      "end": 1315.11,
+      "duration": 6.55,
+      "text": "Subtree of node."
+    },
+    {
+      "index": 535,
+      "start": 1318.43,
+      "end": 1318.44,
+      "duration": 0.01,
+      "text": "So, where is it in this tree?"
+    },
+    {
+      "index": 536,
+      "start": 1318.44,
+      "end": 1323.83,
+      "duration": 5.39,
+      "text": "Yeah."
+    },
+    {
+      "index": 537,
+      "start": 1325.31,
+      "end": 1325.32,
+      "duration": 0.01,
+      "text": "Uh node is actually part of many"
+    },
+    {
+      "index": 538,
+      "start": 1325.32,
+      "end": 1328.31,
+      "duration": 2.99,
+      "text": "subtrees. Good question. Uh f f is in"
+    },
+    {
+      "index": 539,
+      "start": 1328.32,
+      "end": 1330.75,
+      "duration": 2.43,
+      "text": "its own in the subtree of f. Uh f is"
+    },
+    {
+      "index": 540,
+      "start": 1330.76,
+      "end": 1332.63,
+      "duration": 1.87,
+      "text": "also in the subtree of d. F is in the"
+    },
+    {
+      "index": 541,
+      "start": 1332.64,
+      "end": 1334.59,
+      "duration": 1.95,
+      "text": "subtree of b, like I drew. F is in the"
+    },
+    {
+      "index": 542,
+      "start": 1334.6,
+      "end": 1336.35,
+      "duration": 1.75,
+      "text": "subtree of a. It's in in the subtree of"
+    },
+    {
+      "index": 543,
+      "start": 1336.36,
+      "end": 1340.669,
+      "duration": 4.309,
+      "text": "exactly its ancestors."
+    },
+    {
+      "index": 544,
+      "start": 1343.15,
+      "end": 1343.16,
+      "duration": 0.01,
+      "text": "But in this operation, when we define"
+    },
+    {
+      "index": 545,
+      "start": 1343.16,
+      "end": 1346.07,
+      "duration": 2.91,
+      "text": "node our node only defines one subtree."
+    },
+    {
+      "index": 546,
+      "start": 1346.08,
+      "end": 1348.27,
+      "duration": 2.19,
+      "text": "It is the root of only one subtree. And"
+    },
+    {
+      "index": 547,
+      "start": 1348.28,
+      "end": 1350.75,
+      "duration": 2.47,
+      "text": "that's the subtree we're talking about."
+    },
+    {
+      "index": 548,
+      "start": 1350.76,
+      "end": 1352.51,
+      "duration": 1.75,
+      "text": "And then I want to know among all those"
+    },
+    {
+      "index": 549,
+      "start": 1352.52,
+      "end": 1354.79,
+      "duration": 2.27,
+      "text": "nodes, which includes node itself and"
+    },
+    {
+      "index": 550,
+      "start": 1354.8,
+      "end": 1356.11,
+      "duration": 1.31,
+      "text": "other things,"
+    },
+    {
+      "index": 551,
+      "start": 1356.12,
+      "end": 1358.07,
+      "duration": 1.95,
+      "text": "uh which one comes first in this"
+    },
+    {
+      "index": 552,
+      "start": 1358.08,
+      "end": 1359.75,
+      "duration": 1.67,
+      "text": "traversal order? This is like practice"
+    },
+    {
+      "index": 553,
+      "start": 1359.76,
+      "end": 1362.55,
+      "duration": 2.79,
+      "text": "with traversal orders."
+    },
+    {
+      "index": 554,
+      "start": 1362.56,
+      "end": 1369.31,
+      "duration": 6.75,
+      "text": "So, where should I look for this node?"
+    },
+    {
+      "index": 555,
+      "start": 1370.87,
+      "end": 1370.88,
+      "duration": 0.01,
+      "text": "Yeah."
+    },
+    {
+      "index": 556,
+      "start": 1370.88,
+      "end": 1373.47,
+      "duration": 2.59,
+      "text": "The leftmost leaf. Yeah. In the picture,"
+    },
+    {
+      "index": 557,
+      "start": 1373.48,
+      "end": 1375.31,
+      "duration": 1.83,
+      "text": "it's here, but pictures can be"
+    },
+    {
+      "index": 558,
+      "start": 1375.32,
+      "end": 1376.55,
+      "duration": 1.23,
+      "text": "deceiving."
+    },
+    {
+      "index": 559,
+      "start": 1376.56,
+      "end": 1377.23,
+      "duration": 0.67,
+      "text": "Um"
+    },
+    {
+      "index": 560,
+      "start": 1377.24,
+      "end": 1380.31,
+      "duration": 3.07,
+      "text": "we just want to go left"
+    },
+    {
+      "index": 561,
+      "start": 1380.32,
+      "end": 1382.43,
+      "duration": 2.11,
+      "text": "as much as possible. When I say go left,"
+    },
+    {
+      "index": 562,
+      "start": 1382.44,
+      "end": 1384.55,
+      "duration": 2.11,
+      "text": "I mean this iteration node equals"
+    },
+    {
+      "index": 563,
+      "start": 1384.56,
+      "end": 1387.99,
+      "duration": 3.43,
+      "text": "node.left."
+    },
+    {
+      "index": 564,
+      "start": 1390.47,
+      "end": 1390.48,
+      "duration": 0.01,
+      "text": "If you just look at our definition,"
+    },
+    {
+      "index": 565,
+      "start": 1390.48,
+      "end": 1393.31,
+      "duration": 2.83,
+      "text": "all the nodes in the left come before x"
+    },
+    {
+      "index": 566,
+      "start": 1393.32,
+      "end": 1395.11,
+      "duration": 1.79,
+      "text": "and all the nodes in the right, so it's"
+    },
+    {
+      "index": 567,
+      "start": 1395.12,
+      "end": 1396.43,
+      "duration": 1.31,
+      "text": "got to be in the left subtree if there"
+    },
+    {
+      "index": 568,
+      "start": 1396.44,
+      "end": 1397.95,
+      "duration": 1.51,
+      "text": "is one."
+    },
+    {
+      "index": 569,
+      "start": 1397.96,
+      "end": 1398.59,
+      "duration": 0.63,
+      "text": "Uh"
+    },
+    {
+      "index": 570,
+      "start": 1398.6,
+      "end": 1401.03,
+      "duration": 2.43,
+      "text": "of course, we can't do this forever."
+    },
+    {
+      "index": 571,
+      "start": 1401.04,
+      "end": 1404.15,
+      "duration": 3.11,
+      "text": "Uh so, let's say until we would fall off"
+    },
+    {
+      "index": 572,
+      "start": 1404.16,
+      "end": 1408.23,
+      "duration": 4.07,
+      "text": "the tree,"
+    },
+    {
+      "index": 573,
+      "start": 1409.669,
+      "end": 1409.679,
+      "duration": 0.01,
+      "text": "which means"
+    },
+    {
+      "index": 574,
+      "start": 1409.679,
+      "end": 1410.95,
+      "duration": 1.271,
+      "text": "um"
+    },
+    {
+      "index": 575,
+      "start": 1410.96,
+      "end": 1414.95,
+      "duration": 3.99,
+      "text": "node is none."
+    },
+    {
+      "index": 576,
+      "start": 1416.47,
+      "end": 1416.48,
+      "duration": 0.01,
+      "text": "Okay, but we stop"
+    },
+    {
+      "index": 577,
+      "start": 1416.48,
+      "end": 1417.669,
+      "duration": 1.189,
+      "text": "uh"
+    },
+    {
+      "index": 578,
+      "start": 1417.679,
+      "end": 1419.79,
+      "duration": 2.111,
+      "text": "before that would happen."
+    },
+    {
+      "index": 579,
+      "start": 1419.8,
+      "end": 1421.63,
+      "duration": 1.83,
+      "text": "So, this is like uh the directions like,"
+    },
+    {
+      "index": 580,
+      "start": 1421.64,
+      "end": 1423.31,
+      "duration": 1.67,
+      "text": "\"Oh, you keep driving until you see the"
+    },
+    {
+      "index": 581,
+      "start": 1423.32,
+      "end": 1425.11,
+      "duration": 1.79,
+      "text": "store, and it's the block right before"
+    },
+    {
+      "index": 582,
+      "start": 1425.12,
+      "end": 1426.59,
+      "duration": 1.47,
+      "text": "that.\" And it's like, \"Well, that's not"
+    },
+    {
+      "index": 583,
+      "start": 1426.6,
+      "end": 1428.99,
+      "duration": 2.39,
+      "text": "very helpful.\" So, uh you keep iterating"
+    },
+    {
+      "index": 584,
+      "start": 1429.0,
+      "end": 1430.91,
+      "duration": 1.91,
+      "text": "node equals node.left until node becomes"
+    },
+    {
+      "index": 585,
+      "start": 1430.92,
+      "end": 1433.55,
+      "duration": 2.63,
+      "text": "none, and then you undo one step. Okay,"
+    },
+    {
+      "index": 586,
+      "start": 1433.56,
+      "end": 1434.99,
+      "duration": 1.43,
+      "text": "you all know how to program that. It's"
+    },
+    {
+      "index": 587,
+      "start": 1435.0,
+      "end": 1436.95,
+      "duration": 1.95,
+      "text": "not hard. Um"
+    },
+    {
+      "index": 588,
+      "start": 1436.96,
+      "end": 1439.91,
+      "duration": 2.95,
+      "text": "so, that last non-none node, which might"
+    },
+    {
+      "index": 589,
+      "start": 1439.92,
+      "end": 1442.51,
+      "duration": 2.59,
+      "text": "actually be the root. It might be node."
+    },
+    {
+      "index": 590,
+      "start": 1442.52,
+      "end": 1444.79,
+      "duration": 2.27,
+      "text": "Maybe it has no left children."
+    },
+    {
+      "index": 591,
+      "start": 1444.8,
+      "end": 1446.39,
+      "duration": 1.59,
+      "text": "But in that case, I claim node is the"
+    },
+    {
+      "index": 592,
+      "start": 1446.4,
+      "end": 1448.19,
+      "duration": 1.79,
+      "text": "very first in its in its subtree"
+    },
+    {
+      "index": 593,
+      "start": 1448.2,
+      "end": 1450.79,
+      "duration": 2.59,
+      "text": "traversal order, because if there are no"
+    },
+    {
+      "index": 594,
+      "start": 1450.8,
+      "end": 1452.63,
+      "duration": 1.83,
+      "text": "nodes in the left that come before x,"
+    },
+    {
+      "index": 595,
+      "start": 1452.64,
+      "end": 1455.27,
+      "duration": 2.63,
+      "text": "then x is actually first."
+    },
+    {
+      "index": 596,
+      "start": 1455.28,
+      "end": 1458.11,
+      "duration": 2.83,
+      "text": "Okay? And that So, that's it. Uh"
+    },
+    {
+      "index": 597,
+      "start": 1458.12,
+      "end": 1462.59,
+      "duration": 4.47,
+      "text": "return node."
+    },
+    {
+      "index": 598,
+      "start": 1464.47,
+      "end": 1464.48,
+      "duration": 0.01,
+      "text": "So, I'm modifying node in place here,"
+    },
+    {
+      "index": 599,
+      "start": 1464.48,
+      "end": 1466.55,
+      "duration": 2.07,
+      "text": "and the very last one before I hit none,"
+    },
+    {
+      "index": 600,
+      "start": 1466.56,
+      "end": 1468.71,
+      "duration": 2.15,
+      "text": "that's the minimum. That's the first"
+    },
+    {
+      "index": 601,
+      "start": 1468.72,
+      "end": 1470.71,
+      "duration": 1.99,
+      "text": "item in the traversal order. Similarly,"
+    },
+    {
+      "index": 602,
+      "start": 1470.72,
+      "end": 1472.99,
+      "duration": 2.27,
+      "text": "you can define subtree last."
+    },
+    {
+      "index": 603,
+      "start": 1473.0,
+      "end": 1475.43,
+      "duration": 2.43,
+      "text": "Okay, let's do a more interesting one."
+    },
+    {
+      "index": 604,
+      "start": 1475.44,
+      "end": 1481.27,
+      "duration": 5.83,
+      "text": "Successor."
+    },
+    {
+      "index": 605,
+      "start": 1483.15,
+      "end": 1483.16,
+      "duration": 0.01,
+      "text": "Node."
+    },
+    {
+      "index": 606,
+      "start": 1483.16,
+      "end": 1485.43,
+      "duration": 2.27,
+      "text": "So, in this case, I want to know what is"
+    },
+    {
+      "index": 607,
+      "start": 1485.44,
+      "end": 1487.23,
+      "duration": 1.79,
+      "text": "the next"
+    },
+    {
+      "index": 608,
+      "start": 1487.24,
+      "end": 1489.99,
+      "duration": 2.75,
+      "text": "uh"
+    },
+    {
+      "index": 609,
+      "start": 1492.87,
+      "end": 1492.88,
+      "duration": 0.01,
+      "text": "after node"
+    },
+    {
+      "index": 610,
+      "start": 1492.88,
+      "end": 1496.63,
+      "duration": 3.75,
+      "text": "in the overall tree's traversal order."
+    },
+    {
+      "index": 611,
+      "start": 1496.64,
+      "end": 1499.07,
+      "duration": 2.43,
+      "text": "Okay, here I was restricting to"
+    },
+    {
+      "index": 612,
+      "start": 1499.08,
+      "end": 1500.19,
+      "duration": 1.11,
+      "text": "uh"
+    },
+    {
+      "index": 613,
+      "start": 1500.2,
+      "end": 1501.95,
+      "duration": 1.75,
+      "text": "a single subtree. Now, I'm thinking"
+    },
+    {
+      "index": 614,
+      "start": 1501.96,
+      "end": 1503.55,
+      "duration": 1.59,
+      "text": "about the entire tree in the entire"
+    },
+    {
+      "index": 615,
+      "start": 1503.56,
+      "end": 1505.47,
+      "duration": 1.91,
+      "text": "traversal order. And given a node, I"
+    },
+    {
+      "index": 616,
+      "start": 1505.48,
+      "end": 1508.23,
+      "duration": 2.75,
+      "text": "want to know which one comes next."
+    },
+    {
+      "index": 617,
+      "start": 1508.24,
+      "end": 1510.87,
+      "duration": 2.63,
+      "text": "Call this the successor."
+    },
+    {
+      "index": 618,
+      "start": 1510.88,
+      "end": 1513.55,
+      "duration": 2.67,
+      "text": "I feel like I should make some kind of"
+    },
+    {
+      "index": 619,
+      "start": 1513.56,
+      "end": 1515.79,
+      "duration": 2.23,
+      "text": "royal family joke now, but I don't know"
+    },
+    {
+      "index": 620,
+      "start": 1515.8,
+      "end": 1516.87,
+      "duration": 1.07,
+      "text": "how."
+    },
+    {
+      "index": 621,
+      "start": 1516.88,
+      "end": 1517.91,
+      "duration": 1.03,
+      "text": "Um"
+    },
+    {
+      "index": 622,
+      "start": 1517.92,
+      "end": 1520.47,
+      "duration": 2.55,
+      "text": "so, every node has a unique successor."
+    },
+    {
+      "index": 623,
+      "start": 1520.48,
+      "end": 1522.75,
+      "duration": 2.27,
+      "text": "Let's do Let's do some examples."
+    },
+    {
+      "index": 624,
+      "start": 1522.76,
+      "end": 1525.43,
+      "duration": 2.67,
+      "text": "So, we can start with f."
+    },
+    {
+      "index": 625,
+      "start": 1525.44,
+      "end": 1527.23,
+      "duration": 1.79,
+      "text": "The successor of f, if we just index"
+    },
+    {
+      "index": 626,
+      "start": 1527.24,
+      "end": 1530.55,
+      "duration": 3.31,
+      "text": "into this list, the successor is d."
+    },
+    {
+      "index": 627,
+      "start": 1530.56,
+      "end": 1533.31,
+      "duration": 2.75,
+      "text": "Okay? Successor of d is b. Successor b"
+    },
+    {
+      "index": 628,
+      "start": 1533.32,
+      "end": 1535.19,
+      "duration": 1.87,
+      "text": "is e. It's Okay, it's very easy to read"
+    },
+    {
+      "index": 629,
+      "start": 1535.2,
+      "end": 1537.19,
+      "duration": 1.99,
+      "text": "successors off when I have the traversal"
+    },
+    {
+      "index": 630,
+      "start": 1537.2,
+      "end": 1538.59,
+      "duration": 1.39,
+      "text": "order written down, but let's think"
+    },
+    {
+      "index": 631,
+      "start": 1538.6,
+      "end": 1541.59,
+      "duration": 2.99,
+      "text": "about how to do it in the tree."
+    },
+    {
+      "index": 632,
+      "start": 1541.6,
+      "end": 1542.71,
+      "duration": 1.11,
+      "text": "Okay?"
+    },
+    {
+      "index": 633,
+      "start": 1542.72,
+      "end": 1545.19,
+      "duration": 2.47,
+      "text": "Uh"
+    },
+    {
+      "index": 634,
+      "start": 1546.59,
+      "end": 1546.6,
+      "duration": 0.01,
+      "text": "Let's see. There are going to be two"
+    },
+    {
+      "index": 635,
+      "start": 1546.6,
+      "end": 1548.59,
+      "duration": 1.99,
+      "text": "cases."
+    },
+    {
+      "index": 636,
+      "start": 1548.6,
+      "end": 1551.47,
+      "duration": 2.87,
+      "text": "If I look at the successor of a,"
+    },
+    {
+      "index": 637,
+      "start": 1551.48,
+      "end": 1553.91,
+      "duration": 2.43,
+      "text": "it has a right child."
+    },
+    {
+      "index": 638,
+      "start": 1553.92,
+      "end": 1555.79,
+      "duration": 1.87,
+      "text": "And in this case, the right child of a"
+    },
+    {
+      "index": 639,
+      "start": 1555.8,
+      "end": 1557.83,
+      "duration": 2.03,
+      "text": "is the successor, but that's not always"
+    },
+    {
+      "index": 640,
+      "start": 1557.84,
+      "end": 1558.91,
+      "duration": 1.07,
+      "text": "the case."
+    },
+    {
+      "index": 641,
+      "start": 1558.92,
+      "end": 1561.59,
+      "duration": 2.67,
+      "text": "I don't have a good example. But if I"
+    },
+    {
+      "index": 642,
+      "start": 1561.6,
+      "end": 1564.07,
+      "duration": 2.47,
+      "text": "had another node here, let's call it"
+    },
+    {
+      "index": 643,
+      "start": 1564.08,
+      "end": 1566.23,
+      "duration": 2.15,
+      "text": "g,"
+    },
+    {
+      "index": 644,
+      "start": 1566.24,
+      "end": 1566.95,
+      "duration": 0.71,
+      "text": "uh"
+    },
+    {
+      "index": 645,
+      "start": 1566.96,
+      "end": 1570.43,
+      "duration": 3.47,
+      "text": "the successor of a is actually g."
+    },
+    {
+      "index": 646,
+      "start": 1570.44,
+      "end": 1573.23,
+      "duration": 2.79,
+      "text": "Right? Cuz uh all of these items come"
+    },
+    {
+      "index": 647,
+      "start": 1573.24,
+      "end": 1575.47,
+      "duration": 2.23,
+      "text": "after a in the order, but which one"
+    },
+    {
+      "index": 648,
+      "start": 1575.48,
+      "end": 1578.79,
+      "duration": 3.31,
+      "text": "comes first? The leftmost leaf."
+    },
+    {
+      "index": 649,
+      "start": 1578.8,
+      "end": 1580.91,
+      "duration": 2.11,
+      "text": "Okay, that's the problem we just solved."
+    },
+    {
+      "index": 650,
+      "start": 1580.92,
+      "end": 1583.19,
+      "duration": 2.27,
+      "text": "So, if a has a right child, what we want"
+    },
+    {
+      "index": 651,
+      "start": 1583.2,
+      "end": 1586.47,
+      "duration": 3.27,
+      "text": "is the leftmost leaf, the first thing in"
+    },
+    {
+      "index": 652,
+      "start": 1586.48,
+      "end": 1587.47,
+      "duration": 0.99,
+      "text": "that"
+    },
+    {
+      "index": 653,
+      "start": 1587.48,
+      "end": 1590.11,
+      "duration": 2.63,
+      "text": "subtree."
+    },
+    {
+      "index": 654,
+      "start": 1592.55,
+      "end": 1592.56,
+      "duration": 0.01,
+      "text": "The right subtree. Right child subtree."
+    },
+    {
+      "index": 655,
+      "start": 1592.56,
+      "end": 1596.35,
+      "duration": 3.79,
+      "text": "So, this is case one. If uh"
+    },
+    {
+      "index": 656,
+      "start": 1596.36,
+      "end": 1597.87,
+      "duration": 1.51,
+      "text": "node.right,"
+    },
+    {
+      "index": 657,
+      "start": 1597.88,
+      "end": 1600.19,
+      "duration": 2.31,
+      "text": "so if we have a right child,"
+    },
+    {
+      "index": 658,
+      "start": 1600.2,
+      "end": 1604.669,
+      "duration": 4.469,
+      "text": "then what we want is"
+    },
+    {
+      "index": 659,
+      "start": 1604.679,
+      "end": 1608.79,
+      "duration": 4.111,
+      "text": "subtree first"
+    },
+    {
+      "index": 660,
+      "start": 1616.83,
+      "end": 1616.84,
+      "duration": 0.01,
+      "text": "Okay, great. We can reduce to this other"
+    },
+    {
+      "index": 661,
+      "start": 1616.84,
+      "end": 1618.51,
+      "duration": 1.67,
+      "text": "operation."
+    },
+    {
+      "index": 662,
+      "start": 1618.52,
+      "end": 1620.71,
+      "duration": 2.19,
+      "text": "Uh but what if"
+    },
+    {
+      "index": 663,
+      "start": 1620.72,
+      "end": 1622.91,
+      "duration": 2.19,
+      "text": "the node doesn't have a right child?"
+    },
+    {
+      "index": 664,
+      "start": 1622.92,
+      "end": 1623.59,
+      "duration": 0.67,
+      "text": "So,"
+    },
+    {
+      "index": 665,
+      "start": 1623.6,
+      "end": 1625.43,
+      "duration": 1.83,
+      "text": "for example, it could be a leaf."
+    },
+    {
+      "index": 666,
+      "start": 1625.44,
+      "end": 1627.87,
+      "duration": 2.43,
+      "text": "Say we're taking the successor of"
+    },
+    {
+      "index": 667,
+      "start": 1627.88,
+      "end": 1628.91,
+      "duration": 1.03,
+      "text": "I mean, it doesn't have to be a leaf."
+    },
+    {
+      "index": 668,
+      "start": 1628.92,
+      "end": 1630.39,
+      "duration": 1.47,
+      "text": "Could be f, which has no children. It"
+    },
+    {
+      "index": 669,
+      "start": 1630.4,
+      "end": 1632.31,
+      "duration": 1.91,
+      "text": "could be d, which has one child, but no"
+    },
+    {
+      "index": 670,
+      "start": 1632.32,
+      "end": 1634.19,
+      "duration": 1.87,
+      "text": "right child."
+    },
+    {
+      "index": 671,
+      "start": 1634.2,
+      "end": 1635.87,
+      "duration": 1.67,
+      "text": "So, what's the successor of f? Well,"
+    },
+    {
+      "index": 672,
+      "start": 1635.88,
+      "end": 1638.31,
+      "duration": 2.43,
+      "text": "it's d, which in this case is the"
+    },
+    {
+      "index": 673,
+      "start": 1638.32,
+      "end": 1639.83,
+      "duration": 1.51,
+      "text": "parent,"
+    },
+    {
+      "index": 674,
+      "start": 1639.84,
+      "end": 1641.35,
+      "duration": 1.51,
+      "text": "but it's not always. For example, if we"
+    },
+    {
+      "index": 675,
+      "start": 1641.36,
+      "end": 1643.03,
+      "duration": 1.67,
+      "text": "do successor of e, its parent is"
+    },
+    {
+      "index": 676,
+      "start": 1643.04,
+      "end": 1645.47,
+      "duration": 2.43,
+      "text": "actually earlier in the order, because e"
+    },
+    {
+      "index": 677,
+      "start": 1645.48,
+      "end": 1647.79,
+      "duration": 2.31,
+      "text": "was a right child. Here, f was a left"
+    },
+    {
+      "index": 678,
+      "start": 1647.8,
+      "end": 1650.47,
+      "duration": 2.67,
+      "text": "child, and so its parent"
+    },
+    {
+      "index": 679,
+      "start": 1650.48,
+      "end": 1652.51,
+      "duration": 2.03,
+      "text": "was after."
+    },
+    {
+      "index": 680,
+      "start": 1652.52,
+      "end": 1653.87,
+      "duration": 1.35,
+      "text": "Um"
+    },
+    {
+      "index": 681,
+      "start": 1653.88,
+      "end": 1656.95,
+      "duration": 3.07,
+      "text": "Successor of d happens to be b, because"
+    },
+    {
+      "index": 682,
+      "start": 1656.96,
+      "end": 1659.31,
+      "duration": 2.35,
+      "text": "uh it's par- it was the left child of"
+    },
+    {
+      "index": 683,
+      "start": 1659.32,
+      "end": 1661.23,
+      "duration": 1.91,
+      "text": "its parent. Okay, so that seems like the"
+    },
+    {
+      "index": 684,
+      "start": 1661.24,
+      "end": 1662.63,
+      "duration": 1.39,
+      "text": "easy case. If we're the left child of"
+    },
+    {
+      "index": 685,
+      "start": 1662.64,
+      "end": 1664.19,
+      "duration": 1.55,
+      "text": "our parent, then"
+    },
+    {
+      "index": 686,
+      "start": 1664.2,
+      "end": 1666.11,
+      "duration": 1.91,
+      "text": "our successor is our parent."
+    },
+    {
+      "index": 687,
+      "start": 1666.12,
+      "end": 1667.07,
+      "duration": 0.95,
+      "text": "Okay,"
+    },
+    {
+      "index": 688,
+      "start": 1667.08,
+      "end": 1668.91,
+      "duration": 1.83,
+      "text": "basing on this some small example, but"
+    },
+    {
+      "index": 689,
+      "start": 1668.92,
+      "end": 1670.39,
+      "duration": 1.47,
+      "text": "we can argue it generally in a moment."
+    },
+    {
+      "index": 690,
+      "start": 1670.4,
+      "end": 1672.47,
+      "duration": 2.07,
+      "text": "What's the successor of e?"
+    },
+    {
+      "index": 691,
+      "start": 1672.48,
+      "end": 1673.83,
+      "duration": 1.35,
+      "text": "Uh well, it's not b, cuz that comes"
+    },
+    {
+      "index": 692,
+      "start": 1673.84,
+      "end": 1676.11,
+      "duration": 2.27,
+      "text": "earlier. In fact, all the things in this"
+    },
+    {
+      "index": 693,
+      "start": 1676.12,
+      "end": 1678.07,
+      "duration": 1.95,
+      "text": "in b's subtree come"
+    },
+    {
+      "index": 694,
+      "start": 1678.08,
+      "end": 1680.55,
+      "duration": 2.47,
+      "text": "earlier or equal to e."
+    },
+    {
+      "index": 695,
+      "start": 1680.56,
+      "end": 1681.91,
+      "duration": 1.35,
+      "text": "Um"
+    },
+    {
+      "index": 696,
+      "start": 1681.92,
+      "end": 1683.91,
+      "duration": 1.99,
+      "text": "so, we have to keep going up."
+    },
+    {
+      "index": 697,
+      "start": 1683.92,
+      "end": 1685.59,
+      "duration": 1.67,
+      "text": "And then it turns out the successor of e"
+    },
+    {
+      "index": 698,
+      "start": 1685.6,
+      "end": 1688.75,
+      "duration": 3.15,
+      "text": "is a, because this subtree was the left"
+    },
+    {
+      "index": 699,
+      "start": 1688.76,
+      "end": 1691.35,
+      "duration": 2.59,
+      "text": "child of a, because b was a left child"
+    },
+    {
+      "index": 700,
+      "start": 1691.36,
+      "end": 1692.55,
+      "duration": 1.19,
+      "text": "of a."
+    },
+    {
+      "index": 701,
+      "start": 1692.56,
+      "end": 1695.07,
+      "duration": 2.51,
+      "text": "So, the general strategy is walk up the"
+    },
+    {
+      "index": 702,
+      "start": 1695.08,
+      "end": 1697.55,
+      "duration": 2.47,
+      "text": "tree"
+    },
+    {
+      "index": 703,
+      "start": 1697.56,
+      "end": 1698.83,
+      "duration": 1.27,
+      "text": "until"
+    },
+    {
+      "index": 704,
+      "start": 1698.84,
+      "end": 1702.149,
+      "duration": 3.309,
+      "text": "we are we we go up a traversal whose"
+    },
+    {
+      "index": 705,
+      "start": 1702.159,
+      "end": 1704.71,
+      "duration": 2.551,
+      "text": "reverse direction would be left."
+    },
+    {
+      "index": 706,
+      "start": 1704.72,
+      "end": 1706.149,
+      "duration": 1.429,
+      "text": "Okay? So,"
+    },
+    {
+      "index": 707,
+      "start": 1706.159,
+      "end": 1707.51,
+      "duration": 1.351,
+      "text": "um"
+    },
+    {
+      "index": 708,
+      "start": 1707.52,
+      "end": 1709.51,
+      "duration": 1.99,
+      "text": "walk up the tree."
+    },
+    {
+      "index": 709,
+      "start": 1709.52,
+      "end": 1711.47,
+      "duration": 1.95,
+      "text": "When I say walk up, I mean node equals"
+    },
+    {
+      "index": 710,
+      "start": 1711.48,
+      "end": 1720.35,
+      "duration": 8.87,
+      "text": "node.parent iteration."
+    },
+    {
+      "index": 711,
+      "start": 1721.99,
+      "end": 1722.0,
+      "duration": 0.01,
+      "text": "Until"
+    },
+    {
+      "index": 712,
+      "start": 1722.0,
+      "end": 1723.43,
+      "duration": 1.43,
+      "text": "um"
+    },
+    {
+      "index": 713,
+      "start": 1723.44,
+      "end": 1725.47,
+      "duration": 2.03,
+      "text": "we go up"
+    },
+    {
+      "index": 714,
+      "start": 1725.48,
+      "end": 1730.55,
+      "duration": 5.07,
+      "text": "a left branch."
+    },
+    {
+      "index": 715,
+      "start": 1733.27,
+      "end": 1733.28,
+      "duration": 0.01,
+      "text": "So, this would mean that node"
+    },
+    {
+      "index": 716,
+      "start": 1733.28,
+      "end": 1736.71,
+      "duration": 3.43,
+      "text": "before we do the change, node equals uh"
+    },
+    {
+      "index": 717,
+      "start": 1736.72,
+      "end": 1743.149,
+      "duration": 6.429,
+      "text": "node.parent.left."
+    },
+    {
+      "index": 718,
+      "start": 1744.75,
+      "end": 1744.76,
+      "duration": 0.01,
+      "text": "Okay, so we can check that. And then"
+    },
+    {
+      "index": 719,
+      "start": 1744.76,
+      "end": 1747.39,
+      "duration": 2.63,
+      "text": "after we do that traversal, that parent"
+    },
+    {
+      "index": 720,
+      "start": 1747.4,
+      "end": 1753.669,
+      "duration": 6.269,
+      "text": "is exactly the node we're looking for."
+    },
+    {
+      "index": 721,
+      "start": 1755.31,
+      "end": 1755.32,
+      "duration": 0.01,
+      "text": "Okay, why is this true in general? Let"
+    },
+    {
+      "index": 722,
+      "start": 1755.32,
+      "end": 1757.909,
+      "duration": 2.589,
+      "text": "me draw a more generic picture. So,"
+    },
+    {
+      "index": 723,
+      "start": 1757.919,
+      "end": 1761.83,
+      "duration": 3.911,
+      "text": "we're starting at some node,"
+    },
+    {
+      "index": 724,
+      "start": 1764.99,
+      "end": 1765.0,
+      "duration": 0.01,
+      "text": "and let's say its parent is to the"
+    },
+    {
+      "index": 725,
+      "start": 1765.0,
+      "end": 1767.55,
+      "duration": 2.55,
+      "text": "right, so it comes later in the order"
+    },
+    {
+      "index": 726,
+      "start": 1767.56,
+      "end": 1769.87,
+      "duration": 2.31,
+      "text": "for a while. Sorry."
+    },
+    {
+      "index": 727,
+      "start": 1769.88,
+      "end": 1770.79,
+      "duration": 0.91,
+      "text": "Get this backwards. We're doing"
+    },
+    {
+      "index": 728,
+      "start": 1770.8,
+      "end": 1774.669,
+      "duration": 3.869,
+      "text": "successor."
+    },
+    {
+      "index": 729,
+      "start": 1778.43,
+      "end": 1778.44,
+      "duration": 0.01,
+      "text": "It goes to left for a while."
+    },
+    {
+      "index": 730,
+      "start": 1778.44,
+      "end": 1779.95,
+      "duration": 1.51,
+      "text": "So, these are all these nodes will come"
+    },
+    {
+      "index": 731,
+      "start": 1779.96,
+      "end": 1781.35,
+      "duration": 1.39,
+      "text": "earlier in the order, because by the"
+    },
+    {
+      "index": 732,
+      "start": 1781.36,
+      "end": 1782.51,
+      "duration": 1.15,
+      "text": "definition, everything in the right"
+    },
+    {
+      "index": 733,
+      "start": 1782.52,
+      "end": 1784.79,
+      "duration": 2.27,
+      "text": "subtree comes after. And at some point,"
+    },
+    {
+      "index": 734,
+      "start": 1784.8,
+      "end": 1786.39,
+      "duration": 1.59,
+      "text": "we have a parent that's to the right,"
+    },
+    {
+      "index": 735,
+      "start": 1786.4,
+      "end": 1788.99,
+      "duration": 2.59,
+      "text": "meaning this node was the left child of"
+    },
+    {
+      "index": 736,
+      "start": 1789.0,
+      "end": 1791.63,
+      "duration": 2.63,
+      "text": "this parent, and that node by definition"
+    },
+    {
+      "index": 737,
+      "start": 1791.64,
+      "end": 1793.99,
+      "duration": 2.35,
+      "text": "will come after all of the nodes in"
+    },
+    {
+      "index": 738,
+      "start": 1794.0,
+      "end": 1795.35,
+      "duration": 1.35,
+      "text": "here."
+    },
+    {
+      "index": 739,
+      "start": 1795.36,
+      "end": 1797.23,
+      "duration": 1.87,
+      "text": "And could there be anything in between"
+    },
+    {
+      "index": 740,
+      "start": 1797.24,
+      "end": 1798.87,
+      "duration": 1.63,
+      "text": "node and this"
+    },
+    {
+      "index": 741,
+      "start": 1798.88,
+      "end": 1800.03,
+      "duration": 1.15,
+      "text": "uh"
+    },
+    {
+      "index": 742,
+      "start": 1800.04,
+      "end": 1803.23,
+      "duration": 3.19,
+      "text": "this parent grandparent ancestor? Uh"
+    },
+    {
+      "index": 743,
+      "start": 1803.24,
+      "end": 1804.71,
+      "duration": 1.47,
+      "text": "only if there was something in this"
+    },
+    {
+      "index": 744,
+      "start": 1804.72,
+      "end": 1807.03,
+      "duration": 2.31,
+      "text": "subtree. And we're in the case here"
+    },
+    {
+      "index": 745,
+      "start": 1807.04,
+      "end": 1808.83,
+      "duration": 1.79,
+      "text": "where there is no right subtree of our"
+    },
+    {
+      "index": 746,
+      "start": 1808.84,
+      "end": 1810.27,
+      "duration": 1.43,
+      "text": "original node."
+    },
+    {
+      "index": 747,
+      "start": 1810.28,
+      "end": 1812.15,
+      "duration": 1.87,
+      "text": "So, these this is where all the nodes in"
+    },
+    {
+      "index": 748,
+      "start": 1812.16,
+      "end": 1814.03,
+      "duration": 1.87,
+      "text": "between node and here would be, but"
+    },
+    {
+      "index": 749,
+      "start": 1814.04,
+      "end": 1815.91,
+      "duration": 1.87,
+      "text": "there aren't any, and therefore this is"
+    },
+    {
+      "index": 750,
+      "start": 1815.92,
+      "end": 1817.83,
+      "duration": 1.91,
+      "text": "the successor."
+    },
+    {
+      "index": 751,
+      "start": 1817.84,
+      "end": 1819.87,
+      "duration": 2.03,
+      "text": "So, that's sort of the general"
+    },
+    {
+      "index": 752,
+      "start": 1819.88,
+      "end": 1821.47,
+      "duration": 1.59,
+      "text": "argument why this"
+    },
+    {
+      "index": 753,
+      "start": 1821.48,
+      "end": 1835.75,
+      "duration": 14.27,
+      "text": "works. I see a question. Yeah."
+    },
+    {
+      "index": 754,
+      "start": 1837.15,
+      "end": 1837.16,
+      "duration": 0.01,
+      "text": "Uh"
+    },
+    {
+      "index": 755,
+      "start": 1837.16,
+      "end": 1838.55,
+      "duration": 1.39,
+      "text": "placed into the traversal order. So, the"
+    },
+    {
+      "index": 756,
+      "start": 1838.56,
+      "end": 1840.35,
+      "duration": 1.79,
+      "text": "traversal order is never explicitly"
+    },
+    {
+      "index": 757,
+      "start": 1840.36,
+      "end": 1841.83,
+      "duration": 1.47,
+      "text": "computed."
+    },
+    {
+      "index": 758,
+      "start": 1841.84,
+      "end": 1844.23,
+      "duration": 2.39,
+      "text": "What we're talk It's always implicit. We"
+    },
+    {
+      "index": 759,
+      "start": 1844.24,
+      "end": 1847.35,
+      "duration": 3.11,
+      "text": "can't afford to maintain this as, say,"
+    },
+    {
+      "index": 760,
+      "start": 1847.36,
+      "end": 1848.67,
+      "duration": 1.31,
+      "text": "an array."
+    },
+    {
+      "index": 761,
+      "start": 1848.68,
+      "end": 1850.67,
+      "duration": 1.99,
+      "text": "This is just in our heads. Maybe I will"
+    },
+    {
+      "index": 762,
+      "start": 1850.68,
+      "end": 1851.95,
+      "duration": 1.27,
+      "text": "draw it"
+    },
+    {
+      "index": 763,
+      "start": 1851.96,
+      "end": 1853.87,
+      "duration": 1.91,
+      "text": "with a"
+    },
+    {
+      "index": 764,
+      "start": 1853.88,
+      "end": 1855.79,
+      "duration": 1.91,
+      "text": "cloud around it. We're just thinking"
+    },
+    {
+      "index": 765,
+      "start": 1855.8,
+      "end": 1857.63,
+      "duration": 1.83,
+      "text": "this."
+    },
+    {
+      "index": 766,
+      "start": 1857.64,
+      "end": 1859.27,
+      "duration": 1.63,
+      "text": "Okay? It's not in the computer"
+    },
+    {
+      "index": 767,
+      "start": 1859.28,
+      "end": 1861.35,
+      "duration": 2.07,
+      "text": "explicitly. In the computer, all we"
+    },
+    {
+      "index": 768,
+      "start": 1861.36,
+      "end": 1863.23,
+      "duration": 1.87,
+      "text": "store is this."
+    },
+    {
+      "index": 769,
+      "start": 1863.24,
+      "end": 1865.15,
+      "duration": 1.91,
+      "text": "And the reason is this is expensive. We"
+    },
+    {
+      "index": 770,
+      "start": 1865.16,
+      "end": 1866.95,
+      "duration": 1.79,
+      "text": "don't We can't maintain an array of"
+    },
+    {
+      "index": 771,
+      "start": 1866.96,
+      "end": 1868.39,
+      "duration": 1.43,
+      "text": "things and be able to insert in the"
+    },
+    {
+      "index": 772,
+      "start": 1868.4,
+      "end": 1870.63,
+      "duration": 2.23,
+      "text": "middle, whereas this is cheap. I can"
+    },
+    {
+      "index": 773,
+      "start": 1870.64,
+      "end": 1872.71,
+      "duration": 2.07,
+      "text": "afford to maintain this structure"
+    },
+    {
+      "index": 774,
+      "start": 1872.72,
+      "end": 1874.19,
+      "duration": 1.47,
+      "text": "and do all these things. And so, the"
+    },
+    {
+      "index": 775,
+      "start": 1874.2,
+      "end": 1875.27,
+      "duration": 1.07,
+      "text": "reason we're talking about these"
+    },
+    {
+      "index": 776,
+      "start": 1875.28,
+      "end": 1876.55,
+      "duration": 1.27,
+      "text": "operations is they're letting us"
+    },
+    {
+      "index": 777,
+      "start": 1876.56,
+      "end": 1878.99,
+      "duration": 2.43,
+      "text": "manipulate the order, or in this case"
+    },
+    {
+      "index": 778,
+      "start": 1879.0,
+      "end": 1881.39,
+      "duration": 2.39,
+      "text": "letting us iterate through the order."
+    },
+    {
+      "index": 779,
+      "start": 1881.4,
+      "end": 1882.83,
+      "duration": 1.43,
+      "text": "So, this was an algorithm for iterating"
+    },
+    {
+      "index": 780,
+      "start": 1882.84,
+      "end": 1884.87,
+      "duration": 2.03,
+      "text": "through the entire order, but that takes"
+    },
+    {
+      "index": 781,
+      "start": 1884.88,
+      "end": 1886.43,
+      "duration": 1.55,
+      "text": "linear time."
+    },
+    {
+      "index": 782,
+      "start": 1886.44,
+      "end": 1888.35,
+      "duration": 1.91,
+      "text": "Uh this was getting started in the"
+    },
+    {
+      "index": 783,
+      "start": 1888.36,
+      "end": 1890.63,
+      "duration": 2.27,
+      "text": "order, find me the first"
+    },
+    {
+      "index": 784,
+      "start": 1890.64,
+      "end": 1891.99,
+      "duration": 1.35,
+      "text": "first thing in the order, and this was"
+    },
+    {
+      "index": 785,
+      "start": 1892.0,
+      "end": 1895.07,
+      "duration": 3.07,
+      "text": "given one node, find me the next one."
+    },
+    {
+      "index": 786,
+      "start": 1895.08,
+      "end": 1908.83,
+      "duration": 13.75,
+      "text": "How long do these operations take?"
+    },
+    {
+      "index": 787,
+      "start": 1918.43,
+      "end": 1918.44,
+      "duration": 0.01,
+      "text": "Right. At most the height of the entire"
+    },
+    {
+      "index": 788,
+      "start": 1918.44,
+      "end": 1920.39,
+      "duration": 1.95,
+      "text": "tree. In fact, it's going to be the"
+    },
+    {
+      "index": 789,
+      "start": 1920.4,
+      "end": 1922.51,
+      "duration": 2.11,
+      "text": "depth of that first node, but in the"
+    },
+    {
+      "index": 790,
+      "start": 1922.52,
+      "end": 1923.99,
+      "duration": 1.47,
+      "text": "worst case that's the height of the"
+    },
+    {
+      "index": 791,
+      "start": 1924.0,
+      "end": 1925.95,
+      "duration": 1.95,
+      "text": "entire tree. In general, all of these"
+    },
+    {
+      "index": 792,
+      "start": 1925.96,
+      "end": 1928.59,
+      "duration": 2.63,
+      "text": "operations are going to be order H."
+    },
+    {
+      "index": 793,
+      "start": 1928.6,
+      "end": 1930.31,
+      "duration": 1.71,
+      "text": "Uh we need to think about it in each"
+    },
+    {
+      "index": 794,
+      "start": 1930.32,
+      "end": 1932.31,
+      "duration": 1.99,
+      "text": "case, except for this one, which is"
+    },
+    {
+      "index": 795,
+      "start": 1932.32,
+      "end": 1933.87,
+      "duration": 1.55,
+      "text": "order N."
+    },
+    {
+      "index": 796,
+      "start": 1933.88,
+      "end": 1934.79,
+      "duration": 0.91,
+      "text": "Cuz we're iterating through the whole"
+    },
+    {
+      "index": 797,
+      "start": 1934.8,
+      "end": 1935.669,
+      "duration": 0.869,
+      "text": "thing."
+    },
+    {
+      "index": 798,
+      "start": 1935.679,
+      "end": 1936.31,
+      "duration": 0.631,
+      "text": "Um"
+    },
+    {
+      "index": 799,
+      "start": 1936.32,
+      "end": 1937.87,
+      "duration": 1.55,
+      "text": "this In this case, we're just calling"
+    },
+    {
+      "index": 800,
+      "start": 1937.88,
+      "end": 1939.99,
+      "duration": 2.11,
+      "text": "subtree first, so that takes order H"
+    },
+    {
+      "index": 801,
+      "start": 1940.0,
+      "end": 1941.71,
+      "duration": 1.71,
+      "text": "time. Here, we're walking up the tree"
+    },
+    {
+      "index": 802,
+      "start": 1941.72,
+      "end": 1942.95,
+      "duration": 1.23,
+      "text": "instead of down, but that's going to"
+    },
+    {
+      "index": 803,
+      "start": 1942.96,
+      "end": 1945.43,
+      "duration": 2.47,
+      "text": "cost exactly the height of the node."
+    },
+    {
+      "index": 804,
+      "start": 1945.44,
+      "end": 1947.43,
+      "duration": 1.99,
+      "text": "We happen to stop early, but worst case,"
+    },
+    {
+      "index": 805,
+      "start": 1947.44,
+      "end": 1950.07,
+      "duration": 2.63,
+      "text": "order H. For all these all the uh"
+    },
+    {
+      "index": 806,
+      "start": 1950.08,
+      "end": 1951.55,
+      "duration": 1.47,
+      "text": "operations we consider today, we just"
+    },
+    {
+      "index": 807,
+      "start": 1951.56,
+      "end": 1953.39,
+      "duration": 1.83,
+      "text": "want to get an order H bound, and later"
+    },
+    {
+      "index": 808,
+      "start": 1953.4,
+      "end": 1955.51,
+      "duration": 2.11,
+      "text": "we'll we will bound H."
+    },
+    {
+      "index": 809,
+      "start": 1955.52,
+      "end": 1958.19,
+      "duration": 2.67,
+      "text": "So, the point is these are fast. If H is"
+    },
+    {
+      "index": 810,
+      "start": 1958.2,
+      "end": 1960.31,
+      "duration": 2.11,
+      "text": "small, like log N, these are almost"
+    },
+    {
+      "index": 811,
+      "start": 1960.32,
+      "end": 1961.87,
+      "duration": 1.55,
+      "text": "instantaneous."
+    },
+    {
+      "index": 812,
+      "start": 1961.88,
+      "end": 1964.35,
+      "duration": 2.47,
+      "text": "Whereas if I had to update the explicit"
+    },
+    {
+      "index": 813,
+      "start": 1964.36,
+      "end": 1966.63,
+      "duration": 2.27,
+      "text": "traversal order, say as an array, I"
+    },
+    {
+      "index": 814,
+      "start": 1966.64,
+      "end": 1968.03,
+      "duration": 1.39,
+      "text": "would have to spend linear time every"
+    },
+    {
+      "index": 815,
+      "start": 1968.04,
+      "end": 1969.83,
+      "duration": 1.79,
+      "text": "time I make a change."
+    },
+    {
+      "index": 816,
+      "start": 1969.84,
+      "end": 1971.79,
+      "duration": 1.95,
+      "text": "And yes, it would be fast to do"
+    },
+    {
+      "index": 817,
+      "start": 1971.8,
+      "end": 1973.51,
+      "duration": 1.71,
+      "text": "successor if I had this stored"
+    },
+    {
+      "index": 818,
+      "start": 1973.52,
+      "end": 1975.75,
+      "duration": 2.23,
+      "text": "explicitly, but maintaining it would be"
+    },
+    {
+      "index": 819,
+      "start": 1975.76,
+      "end": 1977.31,
+      "duration": 1.55,
+      "text": "impossible. Maintaining it efficiently"
+    },
+    {
+      "index": 820,
+      "start": 1977.32,
+      "end": 1984.99,
+      "duration": 7.67,
+      "text": "would be impossible. Question?"
+    },
+    {
+      "index": 821,
+      "start": 1987.19,
+      "end": 1987.2,
+      "duration": 0.01,
+      "text": "Yes."
+    },
+    {
+      "index": 822,
+      "start": 1987.2,
+      "end": 1993.91,
+      "duration": 6.71,
+      "text": "Okay."
+    },
+    {
+      "index": 823,
+      "start": 1995.15,
+      "end": 1995.16,
+      "duration": 0.01,
+      "text": "Cool."
+    },
+    {
+      "index": 824,
+      "start": 1995.16,
+      "end": 1998.23,
+      "duration": 3.07,
+      "text": "Uh so, these were queries where I want"
+    },
+    {
+      "index": 825,
+      "start": 1998.24,
+      "end": 1999.95,
+      "duration": 1.71,
+      "text": "to"
+    },
+    {
+      "index": 826,
+      "start": 1999.96,
+      "end": 2001.03,
+      "duration": 1.07,
+      "text": "follow"
+    },
+    {
+      "index": 827,
+      "start": 2001.04,
+      "end": 2002.99,
+      "duration": 1.95,
+      "text": "uh see what's what's next in the"
+    },
+    {
+      "index": 828,
+      "start": 2003.0,
+      "end": 2004.75,
+      "duration": 1.75,
+      "text": "traversal sequence. Now, let's talk"
+    },
+    {
+      "index": 829,
+      "start": 2004.76,
+      "end": 2006.27,
+      "duration": 1.51,
+      "text": "about actually changing the traversal"
+    },
+    {
+      "index": 830,
+      "start": 2006.28,
+      "end": 2007.63,
+      "duration": 1.35,
+      "text": "sequence. So, these are insert and"
+    },
+    {
+      "index": 831,
+      "start": 2007.64,
+      "end": 2009.83,
+      "duration": 2.19,
+      "text": "delete operations. These will correspond"
+    },
+    {
+      "index": 832,
+      "start": 2009.84,
+      "end": 2013.71,
+      "duration": 3.87,
+      "text": "roughly to insert at or delete at, but"
+    },
+    {
+      "index": 833,
+      "start": 2013.72,
+      "end": 2015.47,
+      "duration": 1.75,
+      "text": "they're not quite We're not quite in"
+    },
+    {
+      "index": 834,
+      "start": 2015.48,
+      "end": 2017.27,
+      "duration": 1.79,
+      "text": "sequence world yet. Instead, we're going"
+    },
+    {
+      "index": 835,
+      "start": 2017.28,
+      "end": 2019.669,
+      "duration": 2.389,
+      "text": "to focus on inserting or deleting in the"
+    },
+    {
+      "index": 836,
+      "start": 2019.679,
+      "end": 2027.59,
+      "duration": 7.911,
+      "text": "middle of a subtree."
+    },
+    {
+      "index": 837,
+      "start": 2029.51,
+      "end": 2029.52,
+      "duration": 0.01,
+      "text": "So, I'm going to have"
+    },
+    {
+      "index": 838,
+      "start": 2029.52,
+      "end": 2036.27,
+      "duration": 6.75,
+      "text": "two nodes."
+    },
+    {
+      "index": 839,
+      "start": 2043.83,
+      "end": 2043.84,
+      "duration": 0.01,
+      "text": "in the traversal order"
+    },
+    {
+      "index": 840,
+      "start": 2043.84,
+      "end": 2046.79,
+      "duration": 2.95,
+      "text": "So, node already exists in the tree. New"
+    },
+    {
+      "index": 841,
+      "start": 2046.8,
+      "end": 2048.71,
+      "duration": 1.91,
+      "text": "is a new node that does not yet exist in"
+    },
+    {
+      "index": 842,
+      "start": 2048.72,
+      "end": 2050.59,
+      "duration": 1.87,
+      "text": "the tree, hence I call it new. And what"
+    },
+    {
+      "index": 843,
+      "start": 2050.6,
+      "end": 2053.149,
+      "duration": 2.549,
+      "text": "I'd like to do is insert"
+    },
+    {
+      "index": 844,
+      "start": 2053.159,
+      "end": 2056.11,
+      "duration": 2.951,
+      "text": "new right after node."
+    },
+    {
+      "index": 845,
+      "start": 2056.12,
+      "end": 2057.389,
+      "duration": 1.269,
+      "text": "Okay? And there's a symmetric operation,"
+    },
+    {
+      "index": 846,
+      "start": 2057.399,
+      "end": 2059.11,
+      "duration": 1.711,
+      "text": "which is insert before. It will be"
+    },
+    {
+      "index": 847,
+      "start": 2059.12,
+      "end": 2061.11,
+      "duration": 1.99,
+      "text": "implemented almost identically."
+    },
+    {
+      "index": 848,
+      "start": 2061.12,
+      "end": 2064.869,
+      "duration": 3.749,
+      "text": "Um so, we'll just focus on after."
+    },
+    {
+      "index": 849,
+      "start": 2064.879,
+      "end": 2066.349,
+      "duration": 1.47,
+      "text": "So, I want to insert this new node in"
+    },
+    {
+      "index": 850,
+      "start": 2066.359,
+      "end": 2067.71,
+      "duration": 1.351,
+      "text": "the traversal order, which again is in"
+    },
+    {
+      "index": 851,
+      "start": 2067.72,
+      "end": 2069.99,
+      "duration": 2.27,
+      "text": "our heads. This is all in in our thought"
+    },
+    {
+      "index": 852,
+      "start": 2070.0,
+      "end": 2072.83,
+      "duration": 2.83,
+      "text": "bubble."
+    },
+    {
+      "index": 853,
+      "start": 2075.31,
+      "end": 2075.32,
+      "duration": 0.01,
+      "text": "Um that's what we want to achieve, and"
+    },
+    {
+      "index": 854,
+      "start": 2075.32,
+      "end": 2077.79,
+      "duration": 2.47,
+      "text": "we have to do it by manipulating this"
+    },
+    {
+      "index": 855,
+      "start": 2077.8,
+      "end": 2079.43,
+      "duration": 1.63,
+      "text": "tree, and what however we change the"
+    },
+    {
+      "index": 856,
+      "start": 2079.44,
+      "end": 2082.79,
+      "duration": 3.35,
+      "text": "tree, it defines a new traversal order."
+    },
+    {
+      "index": 857,
+      "start": 2082.8,
+      "end": 2101.83,
+      "duration": 19.03,
+      "text": "Uh so, maybe let's do an example first."
+    },
+    {
+      "index": 858,
+      "start": 2104.31,
+      "end": 2104.32,
+      "duration": 0.01,
+      "text": "Actually, yeah, I probably want this"
+    },
+    {
+      "index": 859,
+      "start": 2104.32,
+      "end": 2106.43,
+      "duration": 2.11,
+      "text": "traversal order."
+    },
+    {
+      "index": 860,
+      "start": 2106.44,
+      "end": 2108.43,
+      "duration": 1.99,
+      "text": "Keep track of that."
+    },
+    {
+      "index": 861,
+      "start": 2108.44,
+      "end": 2109.39,
+      "duration": 0.95,
+      "text": "So,"
+    },
+    {
+      "index": 862,
+      "start": 2109.4,
+      "end": 2111.75,
+      "duration": 2.35,
+      "text": "uh let's say the first thing we want to"
+    },
+    {
+      "index": 863,
+      "start": 2111.76,
+      "end": 2113.31,
+      "duration": 1.55,
+      "text": "do"
+    },
+    {
+      "index": 864,
+      "start": 2113.32,
+      "end": 2113.99,
+      "duration": 0.67,
+      "text": "uh"
+    },
+    {
+      "index": 865,
+      "start": 2114.0,
+      "end": 2116.07,
+      "duration": 2.07,
+      "text": "is"
+    },
+    {
+      "index": 866,
+      "start": 2116.08,
+      "end": 2119.19,
+      "duration": 3.11,
+      "text": "insert"
+    },
+    {
+      "index": 867,
+      "start": 2120.75,
+      "end": 2120.76,
+      "duration": 0.01,
+      "text": "G"
+    },
+    {
+      "index": 868,
+      "start": 2120.76,
+      "end": 2123.03,
+      "duration": 2.27,
+      "text": "before E."
+    },
+    {
+      "index": 869,
+      "start": 2123.04,
+      "end": 2124.91,
+      "duration": 1.87,
+      "text": "I want to illustrate both of the"
+    },
+    {
+      "index": 870,
+      "start": 2124.92,
+      "end": 2127.43,
+      "duration": 2.51,
+      "text": "operations. Uh"
+    },
+    {
+      "index": 871,
+      "start": 2127.44,
+      "end": 2129.31,
+      "duration": 1.87,
+      "text": "insert"
+    },
+    {
+      "index": 872,
+      "start": 2129.32,
+      "end": 2130.75,
+      "duration": 1.43,
+      "text": "H"
+    },
+    {
+      "index": 873,
+      "start": 2130.76,
+      "end": 2132.39,
+      "duration": 1.63,
+      "text": "after"
+    },
+    {
+      "index": 874,
+      "start": 2132.4,
+      "end": 2134.07,
+      "duration": 1.67,
+      "text": "E."
+    },
+    {
+      "index": 875,
+      "start": 2134.08,
+      "end": 2137.99,
+      "duration": 3.91,
+      "text": "A."
+    },
+    {
+      "index": 876,
+      "start": 2139.03,
+      "end": 2139.04,
+      "duration": 0.01,
+      "text": "Okay."
+    },
+    {
+      "index": 877,
+      "start": 2139.04,
+      "end": 2141.349,
+      "duration": 2.309,
+      "text": "Um"
+    },
+    {
+      "index": 878,
+      "start": 2144.59,
+      "end": 2144.6,
+      "duration": 0.01,
+      "text": "So, insert G before E. So, conceptually,"
+    },
+    {
+      "index": 879,
+      "start": 2144.6,
+      "end": 2148.349,
+      "duration": 3.749,
+      "text": "what we want to do is insert G here."
+    },
+    {
+      "index": 880,
+      "start": 2148.359,
+      "end": 2151.27,
+      "duration": 2.911,
+      "text": "And the way So, we're given the node E,"
+    },
+    {
+      "index": 881,
+      "start": 2151.28,
+      "end": 2153.51,
+      "duration": 2.23,
+      "text": "and we're given a sort of empty node I"
+    },
+    {
+      "index": 882,
+      "start": 2153.52,
+      "end": 2154.99,
+      "duration": 1.47,
+      "text": "mean, a node that just contains G. It"
+    },
+    {
+      "index": 883,
+      "start": 2155.0,
+      "end": 2157.03,
+      "duration": 2.03,
+      "text": "doesn't have any pointers yet. And we"
+    },
+    {
+      "index": 884,
+      "start": 2157.04,
+      "end": 2159.71,
+      "duration": 2.67,
+      "text": "would like to put it before E."
+    },
+    {
+      "index": 885,
+      "start": 2159.72,
+      "end": 2162.07,
+      "duration": 2.35,
+      "text": "Where should I put it?"
+    },
+    {
+      "index": 886,
+      "start": 2162.08,
+      "end": 2164.63,
+      "duration": 2.55,
+      "text": "Left child."
+    },
+    {
+      "index": 887,
+      "start": 2164.64,
+      "end": 2167.07,
+      "duration": 2.43,
+      "text": "Right? So, that's This is an easy case."
+    },
+    {
+      "index": 888,
+      "start": 2167.08,
+      "end": 2168.55,
+      "duration": 1.47,
+      "text": "If I'm trying to insert before and"
+    },
+    {
+      "index": 889,
+      "start": 2168.56,
+      "end": 2170.83,
+      "duration": 2.27,
+      "text": "there's no left child, stick it there."
+    },
+    {
+      "index": 890,
+      "start": 2170.84,
+      "end": 2171.87,
+      "duration": 1.03,
+      "text": "If you're trying to insert after and"
+    },
+    {
+      "index": 891,
+      "start": 2171.88,
+      "end": 2174.11,
+      "duration": 2.23,
+      "text": "there's no right child, stick it there."
+    },
+    {
+      "index": 892,
+      "start": 2174.12,
+      "end": 2175.11,
+      "duration": 0.99,
+      "text": "Easy."
+    },
+    {
+      "index": 893,
+      "start": 2175.12,
+      "end": 2178.349,
+      "duration": 3.229,
+      "text": "So, let me write down case one."
+    },
+    {
+      "index": 894,
+      "start": 2178.359,
+      "end": 2180.63,
+      "duration": 2.271,
+      "text": "Uh"
+    },
+    {
+      "index": 895,
+      "start": 2183.27,
+      "end": 2183.28,
+      "duration": 0.01,
+      "text": "So, here we're inserting after. So, if"
+    },
+    {
+      "index": 896,
+      "start": 2183.28,
+      "end": 2186.07,
+      "duration": 2.79,
+      "text": "there's no uh"
+    },
+    {
+      "index": 897,
+      "start": 2186.08,
+      "end": 2191.47,
+      "duration": 5.39,
+      "text": "right child"
+    },
+    {
+      "index": 898,
+      "start": 2192.79,
+      "end": 2192.8,
+      "duration": 0.01,
+      "text": "put"
+    },
+    {
+      "index": 899,
+      "start": 2192.8,
+      "end": 2194.55,
+      "duration": 1.75,
+      "text": "new"
+    },
+    {
+      "index": 900,
+      "start": 2194.56,
+      "end": 2196.39,
+      "duration": 1.83,
+      "text": "there."
+    },
+    {
+      "index": 901,
+      "start": 2196.4,
+      "end": 2198.19,
+      "duration": 1.79,
+      "text": "Okay? I'm using informal language here,"
+    },
+    {
+      "index": 902,
+      "start": 2198.2,
+      "end": 2200.75,
+      "duration": 2.55,
+      "text": "putting this new node"
+    },
+    {
+      "index": 903,
+      "start": 2200.76,
+      "end": 2201.75,
+      "duration": 0.99,
+      "text": "um"
+    },
+    {
+      "index": 904,
+      "start": 2201.76,
+      "end": 2204.11,
+      "duration": 2.35,
+      "text": "there be instead of writing, for"
+    },
+    {
+      "index": 905,
+      "start": 2204.12,
+      "end": 2207.67,
+      "duration": 3.55,
+      "text": "example, node.right equals new."
+    },
+    {
+      "index": 906,
+      "start": 2207.68,
+      "end": 2209.349,
+      "duration": 1.669,
+      "text": "Because that's only one operation you"
+    },
+    {
+      "index": 907,
+      "start": 2209.359,
+      "end": 2210.95,
+      "duration": 1.591,
+      "text": "need to do. One thing you would do is"
+    },
+    {
+      "index": 908,
+      "start": 2210.96,
+      "end": 2212.99,
+      "duration": 2.03,
+      "text": "set node.right equals to new, but you"
+    },
+    {
+      "index": 909,
+      "start": 2213.0,
+      "end": 2214.71,
+      "duration": 1.71,
+      "text": "also have to set new's parent to be"
+    },
+    {
+      "index": 910,
+      "start": 2214.72,
+      "end": 2217.349,
+      "duration": 2.629,
+      "text": "node.right. So, instead of worrying"
+    },
+    {
+      "index": 911,
+      "start": 2217.359,
+      "end": 2219.27,
+      "duration": 1.911,
+      "text": "about those two pointer changes, cuz we"
+    },
+    {
+      "index": 912,
+      "start": 2219.28,
+      "end": 2220.79,
+      "duration": 1.51,
+      "text": "always do bidirectional pointer changes,"
+    },
+    {
+      "index": 913,
+      "start": 2220.8,
+      "end": 2222.23,
+      "duration": 1.43,
+      "text": "I'm just going to use"
+    },
+    {
+      "index": 914,
+      "start": 2222.24,
+      "end": 2223.59,
+      "duration": 1.35,
+      "text": "pseudocode, and then in recitation"
+    },
+    {
+      "index": 915,
+      "start": 2223.6,
+      "end": 2225.27,
+      "duration": 1.67,
+      "text": "you'll see actual Python code that does"
+    },
+    {
+      "index": 916,
+      "start": 2225.28,
+      "end": 2227.47,
+      "duration": 2.19,
+      "text": "all this."
+    },
+    {
+      "index": 917,
+      "start": 2227.48,
+      "end": 2229.07,
+      "duration": 1.59,
+      "text": "Uh so,"
+    },
+    {
+      "index": 918,
+      "start": 2229.08,
+      "end": 2232.43,
+      "duration": 3.35,
+      "text": "then there's the other case."
+    },
+    {
+      "index": 919,
+      "start": 2234.67,
+      "end": 2234.68,
+      "duration": 0.01,
+      "text": "So, that should be the second example,"
+    },
+    {
+      "index": 920,
+      "start": 2234.68,
+      "end": 2238.43,
+      "duration": 3.75,
+      "text": "insert H after A."
+    },
+    {
+      "index": 921,
+      "start": 2238.44,
+      "end": 2240.47,
+      "duration": 2.03,
+      "text": "Right?"
+    },
+    {
+      "index": 922,
+      "start": 2240.48,
+      "end": 2242.79,
+      "duration": 2.31,
+      "text": "Insert H after A. So, we already have a"
+    },
+    {
+      "index": 923,
+      "start": 2242.8,
+      "end": 2245.59,
+      "duration": 2.79,
+      "text": "node after A in the right child's in"
+    },
+    {
+      "index": 924,
+      "start": 2245.6,
+      "end": 2248.19,
+      "duration": 2.59,
+      "text": "this right subtree."
+    },
+    {
+      "index": 925,
+      "start": 2248.2,
+      "end": 2249.27,
+      "duration": 1.07,
+      "text": "Um"
+    },
+    {
+      "index": 926,
+      "start": 2249.28,
+      "end": 2252.23,
+      "duration": 2.95,
+      "text": "So, where do I want to put"
+    },
+    {
+      "index": 927,
+      "start": 2252.24,
+      "end": 2254.83,
+      "duration": 2.59,
+      "text": "H"
+    },
+    {
+      "index": 928,
+      "start": 2254.84,
+      "end": 2257.19,
+      "duration": 2.35,
+      "text": "relative to A? Well, it should be to the"
+    },
+    {
+      "index": 929,
+      "start": 2257.2,
+      "end": 2258.79,
+      "duration": 1.59,
+      "text": "right of A,"
+    },
+    {
+      "index": 930,
+      "start": 2258.8,
+      "end": 2260.39,
+      "duration": 1.59,
+      "text": "but it should be"
+    },
+    {
+      "index": 931,
+      "start": 2260.4,
+      "end": 2263.39,
+      "duration": 2.99,
+      "text": "before C. It should be to the left of C."
+    },
+    {
+      "index": 932,
+      "start": 2263.4,
+      "end": 2265.15,
+      "duration": 1.75,
+      "text": "So, that would mean we want to put it"
+    },
+    {
+      "index": 933,
+      "start": 2265.16,
+      "end": 2267.03,
+      "duration": 1.87,
+      "text": "here."
+    },
+    {
+      "index": 934,
+      "start": 2267.04,
+      "end": 2268.59,
+      "duration": 1.55,
+      "text": "And this case it was pretty easy because"
+    },
+    {
+      "index": 935,
+      "start": 2268.6,
+      "end": 2270.349,
+      "duration": 1.749,
+      "text": "this tree was small."
+    },
+    {
+      "index": 936,
+      "start": 2270.359,
+      "end": 2272.07,
+      "duration": 1.711,
+      "text": "Where do I want to put it in general?"
+    },
+    {
+      "index": 937,
+      "start": 2272.08,
+      "end": 2274.07,
+      "duration": 1.99,
+      "text": "Well, wherever"
+    },
+    {
+      "index": 938,
+      "start": 2274.08,
+      "end": 2275.43,
+      "duration": 1.35,
+      "text": "uh"
+    },
+    {
+      "index": 939,
+      "start": 2275.44,
+      "end": 2278.03,
+      "duration": 2.59,
+      "text": "subtree first tells me to put it, right?"
+    },
+    {
+      "index": 940,
+      "start": 2278.04,
+      "end": 2280.07,
+      "duration": 2.03,
+      "text": "Subtree first is going to give me the"
+    },
+    {
+      "index": 941,
+      "start": 2280.08,
+      "end": 2281.75,
+      "duration": 1.67,
+      "text": "successor. These are all kind of"
+    },
+    {
+      "index": 942,
+      "start": 2281.76,
+      "end": 2285.15,
+      "duration": 3.39,
+      "text": "parallel. Um"
+    },
+    {
+      "index": 943,
+      "start": 2287.27,
+      "end": 2287.28,
+      "duration": 0.01,
+      "text": "We're in the case now where our node has"
+    },
+    {
+      "index": 944,
+      "start": 2287.28,
+      "end": 2288.87,
+      "duration": 1.59,
+      "text": "a right child,"
+    },
+    {
+      "index": 945,
+      "start": 2288.88,
+      "end": 2290.75,
+      "duration": 1.87,
+      "text": "and then successor tells us where the"
+    },
+    {
+      "index": 946,
+      "start": 2290.76,
+      "end": 2293.39,
+      "duration": 2.63,
+      "text": "successor is. It is the first node,"
+    },
+    {
+      "index": 947,
+      "start": 2293.4,
+      "end": 2296.59,
+      "duration": 3.19,
+      "text": "which is the leftmost descendant in the"
+    },
+    {
+      "index": 948,
+      "start": 2296.6,
+      "end": 2299.15,
+      "duration": 2.55,
+      "text": "right subtree of the node."
+    },
+    {
+      "index": 949,
+      "start": 2299.16,
+      "end": 2300.67,
+      "duration": 1.51,
+      "text": "Okay? A lot of pointers to follow in"
+    },
+    {
+      "index": 950,
+      "start": 2300.68,
+      "end": 2302.59,
+      "duration": 1.91,
+      "text": "that sentence, but um"
+    },
+    {
+      "index": 951,
+      "start": 2302.6,
+      "end": 2305.55,
+      "duration": 2.95,
+      "text": "it's clear in the picture."
+    },
+    {
+      "index": 952,
+      "start": 2305.56,
+      "end": 2308.19,
+      "duration": 2.63,
+      "text": "So, this In this case, we had node, and"
+    },
+    {
+      "index": 953,
+      "start": 2308.2,
+      "end": 2309.75,
+      "duration": 1.55,
+      "text": "there was no right child, so we just"
+    },
+    {
+      "index": 954,
+      "start": 2309.76,
+      "end": 2313.47,
+      "duration": 3.71,
+      "text": "added new to be its right child."
+    },
+    {
+      "index": 955,
+      "start": 2313.48,
+      "end": 2315.99,
+      "duration": 2.51,
+      "text": "Okay? In the other case,"
+    },
+    {
+      "index": 956,
+      "start": 2316.0,
+      "end": 2321.11,
+      "duration": 5.11,
+      "text": "we had a right child. So, here's node."
+    },
+    {
+      "index": 957,
+      "start": 2321.12,
+      "end": 2323.63,
+      "duration": 2.51,
+      "text": "There's uh there's this node here,"
+    },
+    {
+      "index": 958,
+      "start": 2323.64,
+      "end": 2325.07,
+      "duration": 1.43,
+      "text": "node.right,"
+    },
+    {
+      "index": 959,
+      "start": 2325.08,
+      "end": 2329.07,
+      "duration": 3.99,
+      "text": "which now we're supposing exists."
+    },
+    {
+      "index": 960,
+      "start": 2331.07,
+      "end": 2331.08,
+      "duration": 0.01,
+      "text": "And it defines a whole subtree. There's"
+    },
+    {
+      "index": 961,
+      "start": 2331.08,
+      "end": 2332.95,
+      "duration": 1.87,
+      "text": "this one,"
+    },
+    {
+      "index": 962,
+      "start": 2332.96,
+      "end": 2334.99,
+      "duration": 2.03,
+      "text": "which is the"
+    },
+    {
+      "index": 963,
+      "start": 2335.0,
+      "end": 2337.03,
+      "duration": 2.03,
+      "text": "first node in the traversal order of"
+    },
+    {
+      "index": 964,
+      "start": 2337.04,
+      "end": 2338.349,
+      "duration": 1.309,
+      "text": "this subtree, also known as the"
+    },
+    {
+      "index": 965,
+      "start": 2338.359,
+      "end": 2340.19,
+      "duration": 1.831,
+      "text": "successor of node."
+    },
+    {
+      "index": 966,
+      "start": 2340.2,
+      "end": 2344.27,
+      "duration": 4.07,
+      "text": "So, call this successor"
+    },
+    {
+      "index": 967,
+      "start": 2346.67,
+      "end": 2346.68,
+      "duration": 0.01,
+      "text": "of node in the current traversal order,"
+    },
+    {
+      "index": 968,
+      "start": 2346.68,
+      "end": 2348.75,
+      "duration": 2.07,
+      "text": "but of course we'd like to make new the"
+    },
+    {
+      "index": 969,
+      "start": 2348.76,
+      "end": 2351.15,
+      "duration": 2.39,
+      "text": "new successor of the node. So, where"
+    },
+    {
+      "index": 970,
+      "start": 2351.16,
+      "end": 2353.51,
+      "duration": 2.35,
+      "text": "does it go?"
+    },
+    {
+      "index": 971,
+      "start": 2353.52,
+      "end": 2357.03,
+      "duration": 3.51,
+      "text": "Here."
+    },
+    {
+      "index": 972,
+      "start": 2360.11,
+      "end": 2360.12,
+      "duration": 0.01,
+      "text": "We want to add it as a left child"
+    },
+    {
+      "index": 973,
+      "start": 2360.12,
+      "end": 2363.79,
+      "duration": 3.67,
+      "text": "to the old successor."
+    },
+    {
+      "index": 974,
+      "start": 2365.99,
+      "end": 2366.0,
+      "duration": 0.01,
+      "text": "Okay? So, put"
+    },
+    {
+      "index": 975,
+      "start": 2366.0,
+      "end": 2368.51,
+      "duration": 2.51,
+      "text": "uh"
+    },
+    {
+      "index": 976,
+      "start": 2370.59,
+      "end": 2370.6,
+      "duration": 0.01,
+      "text": "node as"
+    },
+    {
+      "index": 977,
+      "start": 2370.6,
+      "end": 2380.43,
+      "duration": 9.83,
+      "text": "uh"
+    },
+    {
+      "index": 978,
+      "start": 2382.15,
+      "end": 2382.16,
+      "duration": 0.01,
+      "text": "So, take the successor, and if you look"
+    },
+    {
+      "index": 979,
+      "start": 2382.16,
+      "end": 2383.75,
+      "duration": 1.59,
+      "text": "at the code for successor, we're in this"
+    },
+    {
+      "index": 980,
+      "start": 2383.76,
+      "end": 2385.59,
+      "duration": 1.83,
+      "text": "case, so we know it will just call"
+    },
+    {
+      "index": 981,
+      "start": 2385.6,
+      "end": 2388.59,
+      "duration": 2.99,
+      "text": "subtree first of node.right. And"
+    },
+    {
+      "index": 982,
+      "start": 2388.6,
+      "end": 2390.91,
+      "duration": 2.31,
+      "text": "remember, subtree first went left as"
+    },
+    {
+      "index": 983,
+      "start": 2390.92,
+      "end": 2393.31,
+      "duration": 2.39,
+      "text": "much as it possibly could. So, what that"
+    },
+    {
+      "index": 984,
+      "start": 2393.32,
+      "end": 2394.79,
+      "duration": 1.47,
+      "text": "means is this successor node is"
+    },
+    {
+      "index": 985,
+      "start": 2394.8,
+      "end": 2398.11,
+      "duration": 3.31,
+      "text": "guaranteed to not have a left child."
+    },
+    {
+      "index": 986,
+      "start": 2398.12,
+      "end": 2399.59,
+      "duration": 1.47,
+      "text": "Right? Because it was defined by going"
+    },
+    {
+      "index": 987,
+      "start": 2399.6,
+      "end": 2401.23,
+      "duration": 1.63,
+      "text": "right once and then going left as much"
+    },
+    {
+      "index": 988,
+      "start": 2401.24,
+      "end": 2402.55,
+      "duration": 1.31,
+      "text": "as you could."
+    },
+    {
+      "index": 989,
+      "start": 2402.56,
+      "end": 2404.23,
+      "duration": 1.67,
+      "text": "So, there's no more left, which means we"
+    },
+    {
+      "index": 990,
+      "start": 2404.24,
+      "end": 2406.55,
+      "duration": 2.31,
+      "text": "can make one more left. We just add new"
+    },
+    {
+      "index": 991,
+      "start": 2406.56,
+      "end": 2407.71,
+      "duration": 1.15,
+      "text": "there"
+    },
+    {
+      "index": 992,
+      "start": 2407.72,
+      "end": 2410.07,
+      "duration": 2.35,
+      "text": "and we're done. Now, if you look at the"
+    },
+    {
+      "index": 993,
+      "start": 2410.08,
+      "end": 2412.39,
+      "duration": 2.31,
+      "text": "traversal order, it will be node then"
+    },
+    {
+      "index": 994,
+      "start": 2412.4,
+      "end": 2414.19,
+      "duration": 1.79,
+      "text": "new then the old successor and then the"
+    },
+    {
+      "index": 995,
+      "start": 2414.2,
+      "end": 2416.35,
+      "duration": 2.15,
+      "text": "rest of that subtree."
+    },
+    {
+      "index": 996,
+      "start": 2416.36,
+      "end": 2417.83,
+      "duration": 1.47,
+      "text": "Okay, it's kind of cool."
+    },
+    {
+      "index": 997,
+      "start": 2417.84,
+      "end": 2419.83,
+      "duration": 1.99,
+      "text": "In all cases,"
+    },
+    {
+      "index": 998,
+      "start": 2419.84,
+      "end": 2420.63,
+      "duration": 0.79,
+      "text": "uh"
+    },
+    {
+      "index": 999,
+      "start": 2420.64,
+      "end": 2422.79,
+      "duration": 2.15,
+      "text": "I mean, this was constant time."
+    },
+    {
+      "index": 1000,
+      "start": 2422.8,
+      "end": 2424.31,
+      "duration": 1.51,
+      "text": "Here, we spent constant time after we"
+    },
+    {
+      "index": 1001,
+      "start": 2424.32,
+      "end": 2426.67,
+      "duration": 2.35,
+      "text": "called successor. Successor costs order"
+    },
+    {
+      "index": 1002,
+      "start": 2426.68,
+      "end": 2432.47,
+      "duration": 5.79,
+      "text": "H time, so this is order H."
+    },
+    {
+      "index": 1003,
+      "start": 2434.23,
+      "end": 2434.24,
+      "duration": 0.01,
+      "text": "Hm?"
+    },
+    {
+      "index": 1004,
+      "start": 2434.24,
+      "end": 2436.59,
+      "duration": 2.35,
+      "text": "New new."
+    },
+    {
+      "index": 1005,
+      "start": 2436.6,
+      "end": 2438.67,
+      "duration": 2.07,
+      "text": "Okay."
+    },
+    {
+      "index": 1006,
+      "start": 2438.68,
+      "end": 2444.71,
+      "duration": 6.03,
+      "text": "Put new there."
+    },
+    {
+      "index": 1007,
+      "start": 2445.87,
+      "end": 2445.88,
+      "duration": 0.01,
+      "text": "Clear?"
+    },
+    {
+      "index": 1008,
+      "start": 2445.88,
+      "end": 2447.75,
+      "duration": 1.87,
+      "text": "Okay, that was insertion."
+    },
+    {
+      "index": 1009,
+      "start": 2447.76,
+      "end": 2454.43,
+      "duration": 6.67,
+      "text": "Let's do deletion."
+    },
+    {
+      "index": 1010,
+      "start": 2456.15,
+      "end": 2456.16,
+      "duration": 0.01,
+      "text": "Get the"
+    },
+    {
+      "index": 1011,
+      "start": 2456.16,
+      "end": 2470.43,
+      "duration": 14.27,
+      "text": "spec right and the example."
+    },
+    {
+      "index": 1012,
+      "start": 2471.63,
+      "end": 2471.64,
+      "duration": 0.01,
+      "text": "All of these are going to have two"
+    },
+    {
+      "index": 1013,
+      "start": 2471.64,
+      "end": 2472.75,
+      "duration": 1.11,
+      "text": "cases."
+    },
+    {
+      "index": 1014,
+      "start": 2472.76,
+      "end": 2475.51,
+      "duration": 2.75,
+      "text": "Uh so, let me"
+    },
+    {
+      "index": 1015,
+      "start": 2475.52,
+      "end": 2478.39,
+      "duration": 2.87,
+      "text": "Oh, I didn't update. So, now H is after"
+    },
+    {
+      "index": 1016,
+      "start": 2478.4,
+      "end": 2479.43,
+      "duration": 1.03,
+      "text": "A."
+    },
+    {
+      "index": 1017,
+      "start": 2479.44,
+      "end": 2480.83,
+      "duration": 1.39,
+      "text": "So, it should be like this. And you can"
+    },
+    {
+      "index": 1018,
+      "start": 2480.84,
+      "end": 2482.11,
+      "duration": 1.27,
+      "text": "check the new traversal order of this"
+    },
+    {
+      "index": 1019,
+      "start": 2482.12,
+      "end": 2486.31,
+      "duration": 4.19,
+      "text": "tree is exactly that."
+    },
+    {
+      "index": 1020,
+      "start": 2487.47,
+      "end": 2487.48,
+      "duration": 0.01,
+      "text": "Next, I'm going to do a couple of"
+    },
+    {
+      "index": 1021,
+      "start": 2487.48,
+      "end": 2489.23,
+      "duration": 1.75,
+      "text": "deletions."
+    },
+    {
+      "index": 1022,
+      "start": 2489.24,
+      "end": 2493.11,
+      "duration": 3.87,
+      "text": "Let's delete"
+    },
+    {
+      "index": 1023,
+      "start": 2498.83,
+      "end": 2498.84,
+      "duration": 0.01,
+      "text": "first and then we're going to"
+    },
+    {
+      "index": 1024,
+      "start": 2498.84,
+      "end": 2502.23,
+      "duration": 3.39,
+      "text": "Well, this is"
+    },
+    {
+      "index": 1025,
+      "start": 2509.63,
+      "end": 2509.64,
+      "duration": 0.01,
+      "text": "And then we're going to delete A."
+    },
+    {
+      "index": 1026,
+      "start": 2509.64,
+      "end": 2511.51,
+      "duration": 1.87,
+      "text": "So,"
+    },
+    {
+      "index": 1027,
+      "start": 2511.52,
+      "end": 2512.99,
+      "duration": 1.47,
+      "text": "where is F? We're supposing we're given"
+    },
+    {
+      "index": 1028,
+      "start": 2513.0,
+      "end": 2515.27,
+      "duration": 2.27,
+      "text": "a pointer to F, this node."
+    },
+    {
+      "index": 1029,
+      "start": 2515.28,
+      "end": 2516.67,
+      "duration": 1.39,
+      "text": "Well, it's a leaf. So, if I want to"
+    },
+    {
+      "index": 1030,
+      "start": 2516.68,
+      "end": 2519.67,
+      "duration": 2.99,
+      "text": "delete it, I just erase it."
+    },
+    {
+      "index": 1031,
+      "start": 2519.68,
+      "end": 2521.31,
+      "duration": 1.63,
+      "text": "Easy."
+    },
+    {
+      "index": 1032,
+      "start": 2521.32,
+      "end": 2522.99,
+      "duration": 1.67,
+      "text": "Leaves are easy to delete. There's no no"
+    },
+    {
+      "index": 1033,
+      "start": 2523.0,
+      "end": 2525.27,
+      "duration": 2.27,
+      "text": "work to do. So, what that means is I'm"
+    },
+    {
+      "index": 1034,
+      "start": 2525.28,
+      "end": 2527.83,
+      "duration": 2.55,
+      "text": "removing the pointer from D to F."
+    },
+    {
+      "index": 1035,
+      "start": 2527.84,
+      "end": 2530.87,
+      "duration": 3.03,
+      "text": "Okay, we just erase that guy."
+    },
+    {
+      "index": 1036,
+      "start": 2530.88,
+      "end": 2532.47,
+      "duration": 1.59,
+      "text": "Uh okay, now here's a trickier one."
+    },
+    {
+      "index": 1037,
+      "start": 2532.48,
+      "end": 2534.11,
+      "duration": 1.63,
+      "text": "Suppose I want to delete the root of the"
+    },
+    {
+      "index": 1038,
+      "start": 2534.12,
+      "end": 2536.63,
+      "duration": 2.51,
+      "text": "tree. This is kind of the hardest case,"
+    },
+    {
+      "index": 1039,
+      "start": 2536.64,
+      "end": 2538.15,
+      "duration": 1.51,
+      "text": "but in general, it'd be somewhere in"
+    },
+    {
+      "index": 1040,
+      "start": 2538.16,
+      "end": 2540.39,
+      "duration": 2.23,
+      "text": "between leaf and root."
+    },
+    {
+      "index": 1041,
+      "start": 2540.4,
+      "end": 2542.75,
+      "duration": 2.35,
+      "text": "So, if I want to delete A, if I just"
+    },
+    {
+      "index": 1042,
+      "start": 2542.76,
+      "end": 2544.35,
+      "duration": 1.59,
+      "text": "erased it, then suddenly there are these"
+    },
+    {
+      "index": 1043,
+      "start": 2544.36,
+      "end": 2546.59,
+      "duration": 2.23,
+      "text": "pointers to nowhere and I disconnect the"
+    },
+    {
+      "index": 1044,
+      "start": 2546.6,
+      "end": 2548.03,
+      "duration": 1.43,
+      "text": "tree into two parts. I don't want to do"
+    },
+    {
+      "index": 1045,
+      "start": 2548.04,
+      "end": 2550.31,
+      "duration": 2.27,
+      "text": "that. I need to keep my tree connected."
+    },
+    {
+      "index": 1046,
+      "start": 2550.32,
+      "end": 2551.87,
+      "duration": 1.55,
+      "text": "So,"
+    },
+    {
+      "index": 1047,
+      "start": 2551.88,
+      "end": 2554.15,
+      "duration": 2.27,
+      "text": "I'm going to play this trick,"
+    },
+    {
+      "index": 1048,
+      "start": 2554.16,
+      "end": 2556.91,
+      "duration": 2.75,
+      "text": "which is I forget if I use successor or"
+    },
+    {
+      "index": 1049,
+      "start": 2556.92,
+      "end": 2558.75,
+      "duration": 1.83,
+      "text": "predecessor."
+    },
+    {
+      "index": 1050,
+      "start": 2558.76,
+      "end": 2561.75,
+      "duration": 2.99,
+      "text": "Predecessor."
+    },
+    {
+      "index": 1051,
+      "start": 2563.63,
+      "end": 2563.64,
+      "duration": 0.01,
+      "text": "Um"
+    },
+    {
+      "index": 1052,
+      "start": 2563.64,
+      "end": 2565.71,
+      "duration": 2.07,
+      "text": "So, I'm going to s-"
+    },
+    {
+      "index": 1053,
+      "start": 2565.72,
+      "end": 2566.47,
+      "duration": 0.75,
+      "text": "uh"
+    },
+    {
+      "index": 1054,
+      "start": 2566.48,
+      "end": 2568.07,
+      "duration": 1.59,
+      "text": "look at A. We already have defined"
+    },
+    {
+      "index": 1055,
+      "start": 2568.08,
+      "end": 2571.07,
+      "duration": 2.99,
+      "text": "successor and thereby predecessor."
+    },
+    {
+      "index": 1056,
+      "start": 2571.08,
+      "end": 2571.99,
+      "duration": 0.91,
+      "text": "Uh so, I'm going to look at the"
+    },
+    {
+      "index": 1057,
+      "start": 2572.0,
+      "end": 2573.83,
+      "duration": 1.83,
+      "text": "predecessor of A,"
+    },
+    {
+      "index": 1058,
+      "start": 2573.84,
+      "end": 2576.15,
+      "duration": 2.31,
+      "text": "which is E."
+    },
+    {
+      "index": 1059,
+      "start": 2576.16,
+      "end": 2578.03,
+      "duration": 1.87,
+      "text": "You can check that here. The one before"
+    },
+    {
+      "index": 1060,
+      "start": 2578.04,
+      "end": 2581.55,
+      "duration": 3.51,
+      "text": "A is E. This is in the left subtree. Uh"
+    },
+    {
+      "index": 1061,
+      "start": 2581.56,
+      "end": 2583.51,
+      "duration": 1.95,
+      "text": "find me the rightmost item. Keep going"
+    },
+    {
+      "index": 1062,
+      "start": 2583.52,
+      "end": 2585.83,
+      "duration": 2.31,
+      "text": "right until I can't. That's E."
+    },
+    {
+      "index": 1063,
+      "start": 2585.84,
+      "end": 2587.23,
+      "duration": 1.39,
+      "text": "So, now these guys are adjacent in the"
+    },
+    {
+      "index": 1064,
+      "start": 2587.24,
+      "end": 2588.99,
+      "duration": 1.75,
+      "text": "order and I'm about to remove A from the"
+    },
+    {
+      "index": 1065,
+      "start": 2589.0,
+      "end": 2592.11,
+      "duration": 3.11,
+      "text": "order. So, I can momentarily cheat and"
+    },
+    {
+      "index": 1066,
+      "start": 2592.12,
+      "end": 2593.95,
+      "duration": 1.83,
+      "text": "swap their labels."
+    },
+    {
+      "index": 1067,
+      "start": 2593.96,
+      "end": 2596.59,
+      "duration": 2.63,
+      "text": "I'm going to erase A and E here and put"
+    },
+    {
+      "index": 1068,
+      "start": 2596.6,
+      "end": 2597.87,
+      "duration": 1.27,
+      "text": "E"
+    },
+    {
+      "index": 1069,
+      "start": 2597.88,
+      "end": 2599.83,
+      "duration": 1.95,
+      "text": "after A."
+    },
+    {
+      "index": 1070,
+      "start": 2599.84,
+      "end": 2601.99,
+      "duration": 2.15,
+      "text": "Why? Because it moves A down in the"
+    },
+    {
+      "index": 1071,
+      "start": 2602.0,
+      "end": 2603.91,
+      "duration": 1.91,
+      "text": "tree. And if I get to the leaf, I'm"
+    },
+    {
+      "index": 1072,
+      "start": 2603.92,
+      "end": 2604.87,
+      "duration": 0.95,
+      "text": "done."
+    },
+    {
+      "index": 1073,
+      "start": 2604.88,
+      "end": 2606.15,
+      "duration": 1.27,
+      "text": "So, I'm not quite done cuz this is not a"
+    },
+    {
+      "index": 1074,
+      "start": 2606.16,
+      "end": 2607.71,
+      "duration": 1.55,
+      "text": "leaf. So, again, I look at A's"
+    },
+    {
+      "index": 1075,
+      "start": 2607.72,
+      "end": 2611.95,
+      "duration": 4.23,
+      "text": "predecessor. It's now G. Predecessor um"
+    },
+    {
+      "index": 1076,
+      "start": 2611.96,
+      "end": 2614.51,
+      "duration": 2.55,
+      "text": "we hope is always in the"
+    },
+    {
+      "index": 1077,
+      "start": 2614.52,
+      "end": 2616.99,
+      "duration": 2.47,
+      "text": "uh farther down in the tree."
+    },
+    {
+      "index": 1078,
+      "start": 2617.0,
+      "end": 2622.47,
+      "duration": 5.47,
+      "text": "And then I swap A with G."
+    },
+    {
+      "index": 1079,
+      "start": 2624.51,
+      "end": 2624.52,
+      "duration": 0.01,
+      "text": "Okay, I have preserved the traversal"
+    },
+    {
+      "index": 1080,
+      "start": 2624.52,
+      "end": 2626.87,
+      "duration": 2.35,
+      "text": "order except where A falls"
+    },
+    {
+      "index": 1081,
+      "start": 2626.88,
+      "end": 2628.71,
+      "duration": 1.83,
+      "text": "just by moving A earlier in the order"
+    },
+    {
+      "index": 1082,
+      "start": 2628.72,
+      "end": 2631.23,
+      "duration": 2.51,
+      "text": "here. And now A is a leaf and I can"
+    },
+    {
+      "index": 1083,
+      "start": 2631.24,
+      "end": 2634.47,
+      "duration": 3.23,
+      "text": "erase it."
+    },
+    {
+      "index": 1084,
+      "start": 2636.19,
+      "end": 2636.2,
+      "duration": 0.01,
+      "text": "Okay, so that's what we're going to"
+    },
+    {
+      "index": 1085,
+      "start": 2636.2,
+      "end": 2638.15,
+      "duration": 1.95,
+      "text": "follow. Now, in actuality, it's a little"
+    },
+    {
+      "index": 1086,
+      "start": 2638.16,
+      "end": 2639.39,
+      "duration": 1.23,
+      "text": "tricky. Sometimes we need to use"
+    },
+    {
+      "index": 1087,
+      "start": 2639.4,
+      "end": 2641.47,
+      "duration": 2.07,
+      "text": "predecessor, sometimes we need to use"
+    },
+    {
+      "index": 1088,
+      "start": 2641.48,
+      "end": 2644.19,
+      "duration": 2.71,
+      "text": "successor."
+    },
+    {
+      "index": 1089,
+      "start": 2646.51,
+      "end": 2646.52,
+      "duration": 0.01,
+      "text": "Okay, so the cases are if node is a"
+    },
+    {
+      "index": 1090,
+      "start": 2646.52,
+      "end": 2647.87,
+      "duration": 1.35,
+      "text": "leaf,"
+    },
+    {
+      "index": 1091,
+      "start": 2647.88,
+      "end": 2650.31,
+      "duration": 2.43,
+      "text": "uh just detach it"
+    },
+    {
+      "index": 1092,
+      "start": 2650.32,
+      "end": 2654.03,
+      "duration": 3.71,
+      "text": "from the parent. Easy."
+    },
+    {
+      "index": 1093,
+      "start": 2655.31,
+      "end": 2655.32,
+      "duration": 0.01,
+      "text": "That's sort of our base case in the"
+    },
+    {
+      "index": 1094,
+      "start": 2655.32,
+      "end": 2658.19,
+      "duration": 2.87,
+      "text": "recursion. Otherwise,"
+    },
+    {
+      "index": 1095,
+      "start": 2658.2,
+      "end": 2659.07,
+      "duration": 0.87,
+      "text": "um"
+    },
+    {
+      "index": 1096,
+      "start": 2659.08,
+      "end": 2660.47,
+      "duration": 1.39,
+      "text": "there are two cases."
+    },
+    {
+      "index": 1097,
+      "start": 2660.48,
+      "end": 2662.07,
+      "duration": 1.59,
+      "text": "If"
+    },
+    {
+      "index": 1098,
+      "start": 2662.08,
+      "end": 2664.11,
+      "duration": 2.03,
+      "text": "So, if we're not a leaf,"
+    },
+    {
+      "index": 1099,
+      "start": 2664.12,
+      "end": 2666.15,
+      "duration": 2.03,
+      "text": "that means we have a left child or a"
+    },
+    {
+      "index": 1100,
+      "start": 2666.16,
+      "end": 2667.95,
+      "duration": 1.79,
+      "text": "right child or both."
+    },
+    {
+      "index": 1101,
+      "start": 2667.96,
+      "end": 2669.59,
+      "duration": 1.63,
+      "text": "Both is going to be the easy case. Uh"
+    },
+    {
+      "index": 1102,
+      "start": 2669.6,
+      "end": 2671.87,
+      "duration": 2.27,
+      "text": "but in general, I have either there's a"
+    },
+    {
+      "index": 1103,
+      "start": 2671.88,
+      "end": 2673.47,
+      "duration": 1.59,
+      "text": "left child"
+    },
+    {
+      "index": 1104,
+      "start": 2673.48,
+      "end": 2675.95,
+      "duration": 2.47,
+      "text": "or there's a right child."
+    },
+    {
+      "index": 1105,
+      "start": 2675.96,
+      "end": 2677.11,
+      "duration": 1.15,
+      "text": "In either case, I'm going to be happy,"
+    },
+    {
+      "index": 1106,
+      "start": 2677.12,
+      "end": 2680.83,
+      "duration": 3.71,
+      "text": "so I don't need a a both case."
+    },
+    {
+      "index": 1107,
+      "start": 2680.84,
+      "end": 2684.11,
+      "duration": 3.27,
+      "text": "Uh okay, so what do I do? In if I have a"
+    },
+    {
+      "index": 1108,
+      "start": 2684.12,
+      "end": 2687.15,
+      "duration": 3.03,
+      "text": "left child, that guarantees to me that"
+    },
+    {
+      "index": 1109,
+      "start": 2687.16,
+      "end": 2689.59,
+      "duration": 2.43,
+      "text": "it the node's predecessor is inside that"
+    },
+    {
+      "index": 1110,
+      "start": 2689.6,
+      "end": 2691.39,
+      "duration": 1.79,
+      "text": "left subtree, which means it's lower in"
+    },
+    {
+      "index": 1111,
+      "start": 2691.4,
+      "end": 2692.75,
+      "duration": 1.35,
+      "text": "the tree."
+    },
+    {
+      "index": 1112,
+      "start": 2692.76,
+      "end": 2694.11,
+      "duration": 1.35,
+      "text": "If I didn't have a left child, the"
+    },
+    {
+      "index": 1113,
+      "start": 2694.12,
+      "end": 2695.87,
+      "duration": 1.75,
+      "text": "predecessor would actually be higher in"
+    },
+    {
+      "index": 1114,
+      "start": 2695.88,
+      "end": 2697.95,
+      "duration": 2.07,
+      "text": "the tree and I don't want to go higher."
+    },
+    {
+      "index": 1115,
+      "start": 2697.96,
+      "end": 2699.87,
+      "duration": 1.91,
+      "text": "Okay, so if I have a left child, I know"
+    },
+    {
+      "index": 1116,
+      "start": 2699.88,
+      "end": 2702.19,
+      "duration": 2.31,
+      "text": "the predecessor is lower and so I'm"
+    },
+    {
+      "index": 1117,
+      "start": 2702.2,
+      "end": 2704.83,
+      "duration": 2.63,
+      "text": "going to swap"
+    },
+    {
+      "index": 1118,
+      "start": 2704.84,
+      "end": 2706.75,
+      "duration": 1.91,
+      "text": "my item,"
+    },
+    {
+      "index": 1119,
+      "start": 2706.76,
+      "end": 2708.79,
+      "duration": 2.03,
+      "text": "contents of my node,"
+    },
+    {
+      "index": 1120,
+      "start": 2708.8,
+      "end": 2719.07,
+      "duration": 10.27,
+      "text": "with my predecessor's item."
+    },
+    {
+      "index": 1121,
+      "start": 2721.51,
+      "end": 2721.52,
+      "duration": 0.01,
+      "text": "And then I'm going to recursively"
+    },
+    {
+      "index": 1122,
+      "start": 2721.52,
+      "end": 2722.95,
+      "duration": 1.43,
+      "text": "uh delete"
+    },
+    {
+      "index": 1123,
+      "start": 2722.96,
+      "end": 2732.15,
+      "duration": 9.19,
+      "text": "predecessor."
+    },
+    {
+      "index": 1124,
+      "start": 2733.51,
+      "end": 2733.52,
+      "duration": 0.01,
+      "text": "Okay, that's the case that we looked at"
+    },
+    {
+      "index": 1125,
+      "start": 2733.52,
+      "end": 2735.43,
+      "duration": 1.91,
+      "text": "in this code in this example because we"
+    },
+    {
+      "index": 1126,
+      "start": 2735.44,
+      "end": 2737.27,
+      "duration": 1.83,
+      "text": "always had a left child. If we have a"
+    },
+    {
+      "index": 1127,
+      "start": 2737.28,
+      "end": 2738.91,
+      "duration": 1.63,
+      "text": "right child but no left child, we just"
+    },
+    {
+      "index": 1128,
+      "start": 2738.92,
+      "end": 2740.15,
+      "duration": 1.23,
+      "text": "do the reverse. We swap with our"
+    },
+    {
+      "index": 1129,
+      "start": 2740.16,
+      "end": 2742.43,
+      "duration": 2.27,
+      "text": "successor's item and then delete the"
+    },
+    {
+      "index": 1130,
+      "start": 2742.44,
+      "end": 2744.349,
+      "duration": 1.909,
+      "text": "successor. Okay, in either case, we're"
+    },
+    {
+      "index": 1131,
+      "start": 2744.359,
+      "end": 2746.59,
+      "duration": 2.231,
+      "text": "going down and so if we start at some"
+    },
+    {
+      "index": 1132,
+      "start": 2746.6,
+      "end": 2749.15,
+      "duration": 2.55,
+      "text": "node like the root, uh every time we do"
+    },
+    {
+      "index": 1133,
+      "start": 2749.16,
+      "end": 2752.27,
+      "duration": 3.11,
+      "text": "this operation, we're walking down"
+    },
+    {
+      "index": 1134,
+      "start": 2752.28,
+      "end": 2754.03,
+      "duration": 1.75,
+      "text": "and then we're walking down and in"
+    },
+    {
+      "index": 1135,
+      "start": 2754.04,
+      "end": 2755.47,
+      "duration": 1.43,
+      "text": "general, we'll keep walking down"
+    },
+    {
+      "index": 1136,
+      "start": 2755.48,
+      "end": 2757.43,
+      "duration": 1.95,
+      "text": "resuming where we left off, which means"
+    },
+    {
+      "index": 1137,
+      "start": 2757.44,
+      "end": 2759.27,
+      "duration": 1.83,
+      "text": "total amount of time we spend is"
+    },
+    {
+      "index": 1138,
+      "start": 2759.28,
+      "end": 2762.43,
+      "duration": 3.15,
+      "text": "proportional to the height of the tree"
+    },
+    {
+      "index": 1139,
+      "start": 2762.44,
+      "end": 2775.55,
+      "duration": 13.11,
+      "text": "in the worst case. Question?"
+    },
+    {
+      "index": 1140,
+      "start": 2777.31,
+      "end": 2777.32,
+      "duration": 0.01,
+      "text": "Right. So, E didn't used to have a right"
+    },
+    {
+      "index": 1141,
+      "start": 2777.32,
+      "end": 2778.91,
+      "duration": 1.59,
+      "text": "child. So, we're changing identities of"
+    },
+    {
+      "index": 1142,
+      "start": 2778.92,
+      "end": 2781.79,
+      "duration": 2.87,
+      "text": "nodes when we do this cuz we uh"
+    },
+    {
+      "index": 1143,
+      "start": 2781.8,
+      "end": 2783.59,
+      "duration": 1.79,
+      "text": "This We didn't actually move this"
+    },
+    {
+      "index": 1144,
+      "start": 2783.6,
+      "end": 2785.349,
+      "duration": 1.749,
+      "text": "circle. The circle stayed in place and"
+    },
+    {
+      "index": 1145,
+      "start": 2785.359,
+      "end": 2786.75,
+      "duration": 1.391,
+      "text": "what we changed was the item that was"
+    },
+    {
+      "index": 1146,
+      "start": 2786.76,
+      "end": 2788.59,
+      "duration": 1.83,
+      "text": "stored in that circle."
+    },
+    {
+      "index": 1147,
+      "start": 2788.6,
+      "end": 2791.95,
+      "duration": 3.35,
+      "text": "So, whether you call this node E or A,"
+    },
+    {
+      "index": 1148,
+      "start": 2791.96,
+      "end": 2793.99,
+      "duration": 2.03,
+      "text": "uh it doesn't really matter. It is just"
+    },
+    {
+      "index": 1149,
+      "start": 2794.0,
+      "end": 2795.55,
+      "duration": 1.55,
+      "text": "the root node."
+    },
+    {
+      "index": 1150,
+      "start": 2795.56,
+      "end": 2796.95,
+      "duration": 1.39,
+      "text": "Okay, so we're going to play a lot of"
+    },
+    {
+      "index": 1151,
+      "start": 2796.96,
+      "end": 2798.51,
+      "duration": 1.55,
+      "text": "these tricks of moving the items around."
+    },
+    {
+      "index": 1152,
+      "start": 2798.52,
+      "end": 2799.71,
+      "duration": 1.19,
+      "text": "So far, we hadn't been doing that. We"
+    },
+    {
+      "index": 1153,
+      "start": 2799.72,
+      "end": 2802.27,
+      "duration": 2.55,
+      "text": "just been creating nodes and placing"
+    },
+    {
+      "index": 1154,
+      "start": 2802.28,
+      "end": 2803.51,
+      "duration": 1.23,
+      "text": "them somewhere."
+    },
+    {
+      "index": 1155,
+      "start": 2803.52,
+      "end": 2805.19,
+      "duration": 1.67,
+      "text": "Uh but now we're uh in this delete"
+    },
+    {
+      "index": 1156,
+      "start": 2805.2,
+      "end": 2806.87,
+      "duration": 1.67,
+      "text": "operation is the first time where we're"
+    },
+    {
+      "index": 1157,
+      "start": 2806.88,
+      "end": 2809.31,
+      "duration": 2.43,
+      "text": "changing what's stored in the nodes."
+    },
+    {
+      "index": 1158,
+      "start": 2809.32,
+      "end": 2810.79,
+      "duration": 1.47,
+      "text": "But we still can define the traversal"
+    },
+    {
+      "index": 1159,
+      "start": 2810.8,
+      "end": 2811.87,
+      "duration": 1.07,
+      "text": "order, right? The traversal order of"
+    },
+    {
+      "index": 1160,
+      "start": 2811.88,
+      "end": 2815.43,
+      "duration": 3.55,
+      "text": "this tree is D B G E H C,"
+    },
+    {
+      "index": 1161,
+      "start": 2815.44,
+      "end": 2816.99,
+      "duration": 1.55,
+      "text": "which should be what we get here if I"
+    },
+    {
+      "index": 1162,
+      "start": 2817.0,
+      "end": 2822.83,
+      "duration": 5.83,
+      "text": "delete F and A."
+    },
+    {
+      "index": 1163,
+      "start": 2824.11,
+      "end": 2824.12,
+      "duration": 0.01,
+      "text": "And"
+    },
+    {
+      "index": 1164,
+      "start": 2824.12,
+      "end": 2831.79,
+      "duration": 7.67,
+      "text": "Sorry, can't F."
+    },
+    {
+      "index": 1165,
+      "start": 2833.43,
+      "end": 2833.44,
+      "duration": 0.01,
+      "text": "Trees will not preserve connections."
+    },
+    {
+      "index": 1166,
+      "start": 2833.44,
+      "end": 2835.59,
+      "duration": 2.15,
+      "text": "That's just the name of the game. We are"
+    },
+    {
+      "index": 1167,
+      "start": 2835.6,
+      "end": 2836.95,
+      "duration": 1.35,
+      "text": "We have to allow this, otherwise we"
+    },
+    {
+      "index": 1168,
+      "start": 2836.96,
+      "end": 2838.67,
+      "duration": 1.71,
+      "text": "can't do anything. That's the short"
+    },
+    {
+      "index": 1169,
+      "start": 2838.68,
+      "end": 2839.67,
+      "duration": 0.99,
+      "text": "version."
+    },
+    {
+      "index": 1170,
+      "start": 2839.68,
+      "end": 2841.19,
+      "duration": 1.51,
+      "text": "Okay?"
+    },
+    {
+      "index": 1171,
+      "start": 2841.2,
+      "end": 2842.67,
+      "duration": 1.47,
+      "text": "Okay, and in the last few minutes, let"
+    },
+    {
+      "index": 1172,
+      "start": 2842.68,
+      "end": 2845.47,
+      "duration": 2.79,
+      "text": "me talk about how we take these trees"
+    },
+    {
+      "index": 1173,
+      "start": 2845.48,
+      "end": 2848.99,
+      "duration": 3.51,
+      "text": "and implement a set or sequence."
+    },
+    {
+      "index": 1174,
+      "start": 2849.0,
+      "end": 2854.83,
+      "duration": 5.83,
+      "text": "Okay, I've already alluded to this."
+    },
+    {
+      "index": 1175,
+      "start": 2866.349,
+      "end": 2866.359,
+      "duration": 0.01,
+      "text": "equal to"
+    },
+    {
+      "index": 1176,
+      "start": 2866.359,
+      "end": 2867.47,
+      "duration": 1.111,
+      "text": "the"
+    },
+    {
+      "index": 1177,
+      "start": 2867.48,
+      "end": 2868.39,
+      "duration": 0.91,
+      "text": "the order that we're trying to"
+    },
+    {
+      "index": 1178,
+      "start": 2868.4,
+      "end": 2873.51,
+      "duration": 5.11,
+      "text": "represent, the sequence order."
+    },
+    {
+      "index": 1179,
+      "start": 2875.03,
+      "end": 2875.04,
+      "duration": 0.01,
+      "text": "And if we're trying to store a set,"
+    },
+    {
+      "index": 1180,
+      "start": 2875.04,
+      "end": 2877.19,
+      "duration": 2.15,
+      "text": "items with keys, we're going to make the"
+    },
+    {
+      "index": 1181,
+      "start": 2877.2,
+      "end": 2880.87,
+      "duration": 3.67,
+      "text": "traversal order"
+    },
+    {
+      "index": 1182,
+      "start": 2884.83,
+      "end": 2884.84,
+      "duration": 0.01,
+      "text": "equal to uh ordered by increasing key."
+    },
+    {
+      "index": 1183,
+      "start": 2884.84,
+      "end": 2886.47,
+      "duration": 1.63,
+      "text": "Increasing"
+    },
+    {
+      "index": 1184,
+      "start": 2886.48,
+      "end": 2888.43,
+      "duration": 1.95,
+      "text": "item"
+    },
+    {
+      "index": 1185,
+      "start": 2888.44,
+      "end": 2893.19,
+      "duration": 4.75,
+      "text": "key."
+    },
+    {
+      "index": 1186,
+      "start": 2895.11,
+      "end": 2895.12,
+      "duration": 0.01,
+      "text": "In some sense, that's it. Uh but then we"
+    },
+    {
+      "index": 1187,
+      "start": 2895.12,
+      "end": 2897.15,
+      "duration": 2.03,
+      "text": "need to think about how do we implement"
+    },
+    {
+      "index": 1188,
+      "start": 2897.16,
+      "end": 2900.19,
+      "duration": 3.03,
+      "text": "all of these operations. So, maybe most"
+    },
+    {
+      "index": 1189,
+      "start": 2900.2,
+      "end": 2901.91,
+      "duration": 1.71,
+      "text": "enlightening is"
+    },
+    {
+      "index": 1190,
+      "start": 2901.92,
+      "end": 2905.59,
+      "duration": 3.67,
+      "text": "uh for starters is finding a key"
+    },
+    {
+      "index": 1191,
+      "start": 2905.6,
+      "end": 2907.55,
+      "duration": 1.95,
+      "text": "in a tree."
+    },
+    {
+      "index": 1192,
+      "start": 2907.56,
+      "end": 2909.23,
+      "duration": 1.67,
+      "text": "So, uh this is going to correspond to"
+    },
+    {
+      "index": 1193,
+      "start": 2909.24,
+      "end": 2911.51,
+      "duration": 2.27,
+      "text": "binary search."
+    },
+    {
+      "index": 1194,
+      "start": 2911.52,
+      "end": 2913.75,
+      "duration": 2.23,
+      "text": "Right? If I'm searching for"
+    },
+    {
+      "index": 1195,
+      "start": 2913.76,
+      "end": 2916.47,
+      "duration": 2.71,
+      "text": "a key, let's say I'm searching for G's"
+    },
+    {
+      "index": 1196,
+      "start": 2916.48,
+      "end": 2918.71,
+      "duration": 2.23,
+      "text": "key and I know"
+    },
+    {
+      "index": 1197,
+      "start": 2918.72,
+      "end": 2921.11,
+      "duration": 2.39,
+      "text": "it's maybe hard in this example. Maybe"
+    },
+    {
+      "index": 1198,
+      "start": 2921.12,
+      "end": 2923.75,
+      "duration": 2.63,
+      "text": "I'll replace these all with numbers."
+    },
+    {
+      "index": 1199,
+      "start": 2923.76,
+      "end": 2925.91,
+      "duration": 2.15,
+      "text": "So, I can think about"
+    },
+    {
+      "index": 1200,
+      "start": 2925.92,
+      "end": 2928.71,
+      "duration": 2.79,
+      "text": "key values."
+    },
+    {
+      "index": 1201,
+      "start": 2928.72,
+      "end": 2934.91,
+      "duration": 6.19,
+      "text": "Okay, so let's say 1 7 12 17"
+    },
+    {
+      "index": 1202,
+      "start": 2934.92,
+      "end": 2937.95,
+      "duration": 3.03,
+      "text": "19 and 23."
+    },
+    {
+      "index": 1203,
+      "start": 2937.96,
+      "end": 2940.99,
+      "duration": 3.03,
+      "text": "Um this is now in key order. If you"
+    },
+    {
+      "index": 1204,
+      "start": 2941.0,
+      "end": 2942.47,
+      "duration": 1.47,
+      "text": "think of the traversal order, the"
+    },
+    {
+      "index": 1205,
+      "start": 2942.48,
+      "end": 2944.87,
+      "duration": 2.39,
+      "text": "property is that all the keys in the"
+    },
+    {
+      "index": 1206,
+      "start": 2944.88,
+      "end": 2947.11,
+      "duration": 2.23,
+      "text": "left subtree of the root are less than"
+    },
+    {
+      "index": 1207,
+      "start": 2947.12,
+      "end": 2948.71,
+      "duration": 1.59,
+      "text": "the root and the root is less than all"
+    },
+    {
+      "index": 1208,
+      "start": 2948.72,
+      "end": 2949.95,
+      "duration": 1.23,
+      "text": "the keys in the right subtree and"
+    },
+    {
+      "index": 1209,
+      "start": 2949.96,
+      "end": 2953.11,
+      "duration": 3.15,
+      "text": "recursively all the way down. This is uh"
+    },
+    {
+      "index": 1210,
+      "start": 2953.12,
+      "end": 2954.99,
+      "duration": 1.87,
+      "text": "something called the"
+    },
+    {
+      "index": 1211,
+      "start": 2955.0,
+      "end": 2957.51,
+      "duration": 2.51,
+      "text": "binary search tree property,"
+    },
+    {
+      "index": 1212,
+      "start": 2957.52,
+      "end": 2959.83,
+      "duration": 2.31,
+      "text": "BST property. These"
+    },
+    {
+      "index": 1213,
+      "start": 2959.84,
+      "end": 2962.67,
+      "duration": 2.83,
+      "text": "uh here we're calling them binary trees"
+    },
+    {
+      "index": 1214,
+      "start": 2962.68,
+      "end": 2965.07,
+      "duration": 2.39,
+      "text": "sets or set binary trees,"
+    },
+    {
+      "index": 1215,
+      "start": 2965.08,
+      "end": 2966.27,
+      "duration": 1.19,
+      "text": "uh but they're also known in the"
+    },
+    {
+      "index": 1216,
+      "start": 2966.28,
+      "end": 2968.11,
+      "duration": 1.83,
+      "text": "literature as binary search trees, term"
+    },
+    {
+      "index": 1217,
+      "start": 2968.12,
+      "end": 2969.79,
+      "duration": 1.67,
+      "text": "you may have heard before. So, this is a"
+    },
+    {
+      "index": 1218,
+      "start": 2969.8,
+      "end": 2971.19,
+      "duration": 1.39,
+      "text": "special case of what we're doing where"
+    },
+    {
+      "index": 1219,
+      "start": 2971.2,
+      "end": 2973.47,
+      "duration": 2.27,
+      "text": "we're storing the keys in order."
+    },
+    {
+      "index": 1220,
+      "start": 2973.48,
+      "end": 2974.87,
+      "duration": 1.39,
+      "text": "And then if I want to search for a key"
+    },
+    {
+      "index": 1221,
+      "start": 2974.88,
+      "end": 2976.349,
+      "duration": 1.469,
+      "text": "like uh"
+    },
+    {
+      "index": 1222,
+      "start": 2976.359,
+      "end": 2977.79,
+      "duration": 1.431,
+      "text": "13,"
+    },
+    {
+      "index": 1223,
+      "start": 2977.8,
+      "end": 2980.03,
+      "duration": 2.23,
+      "text": "I compare that key with the root. I see,"
+    },
+    {
+      "index": 1224,
+      "start": 2980.04,
+      "end": 2982.95,
+      "duration": 2.91,
+      "text": "oh, it's not equal and it's to the left"
+    },
+    {
+      "index": 1225,
+      "start": 2982.96,
+      "end": 2986.23,
+      "duration": 3.27,
+      "text": "cuz it's less than 17. So, 13 is left of"
+    },
+    {
+      "index": 1226,
+      "start": 2986.24,
+      "end": 2989.35,
+      "duration": 3.11,
+      "text": "here. 13 is right of seven. 13 is right"
+    },
+    {
+      "index": 1227,
+      "start": 2989.36,
+      "end": 2992.31,
+      "duration": 2.95,
+      "text": "of 12. And so, I know that this is where"
+    },
+    {
+      "index": 1228,
+      "start": 2992.32,
+      "end": 2994.43,
+      "duration": 2.11,
+      "text": "13 would belong"
+    },
+    {
+      "index": 1229,
+      "start": 2994.44,
+      "end": 2995.79,
+      "duration": 1.35,
+      "text": "but there's no right child there and so,"
+    },
+    {
+      "index": 1230,
+      "start": 2995.8,
+      "end": 2998.63,
+      "duration": 2.83,
+      "text": "I know in find I just return nothing."
+    },
+    {
+      "index": 1231,
+      "start": 2998.64,
+      "end": 3001.39,
+      "duration": 2.75,
+      "text": "If I was doing find previous, I would"
+    },
+    {
+      "index": 1232,
+      "start": 3001.4,
+      "end": 3003.51,
+      "duration": 2.11,
+      "text": "return this node"
+    },
+    {
+      "index": 1233,
+      "start": 3003.52,
+      "end": 3005.59,
+      "duration": 2.07,
+      "text": "because I have tried to go to the right."
+    },
+    {
+      "index": 1234,
+      "start": 3005.6,
+      "end": 3007.39,
+      "duration": 1.79,
+      "text": "The The last time before I fell off the"
+    },
+    {
+      "index": 1235,
+      "start": 3007.4,
+      "end": 3009.43,
+      "duration": 2.03,
+      "text": "tree, I was trying to go to the right"
+    },
+    {
+      "index": 1236,
+      "start": 3009.44,
+      "end": 3011.91,
+      "duration": 2.47,
+      "text": "and therefore, that last node I had was"
+    },
+    {
+      "index": 1237,
+      "start": 3011.92,
+      "end": 3013.39,
+      "duration": 1.47,
+      "text": "the previous item. If I was trying to do"
+    },
+    {
+      "index": 1238,
+      "start": 3013.4,
+      "end": 3015.51,
+      "duration": 2.11,
+      "text": "find next, what would I do? I would just"
+    },
+    {
+      "index": 1239,
+      "start": 3015.52,
+      "end": 3018.31,
+      "duration": 2.79,
+      "text": "take this node and compute its successor"
+    },
+    {
+      "index": 1240,
+      "start": 3018.32,
+      "end": 3019.99,
+      "duration": 1.67,
+      "text": "which we already know how to do and that"
+    },
+    {
+      "index": 1241,
+      "start": 3020.0,
+      "end": 3021.83,
+      "duration": 1.83,
+      "text": "happens to be the root."
+    },
+    {
+      "index": 1242,
+      "start": 3021.84,
+      "end": 3024.07,
+      "duration": 2.23,
+      "text": "Okay, so now I can do these inexact"
+    },
+    {
+      "index": 1243,
+      "start": 3024.08,
+      "end": 3025.59,
+      "duration": 1.51,
+      "text": "searches. When I do find previous and"
+    },
+    {
+      "index": 1244,
+      "start": 3025.6,
+      "end": 3027.91,
+      "duration": 2.31,
+      "text": "find next, when I fall off the tree, I"
+    },
+    {
+      "index": 1245,
+      "start": 3027.92,
+      "end": 3029.99,
+      "duration": 2.07,
+      "text": "find either the previous or the next and"
+    },
+    {
+      "index": 1246,
+      "start": 3030.0,
+      "end": 3031.47,
+      "duration": 1.47,
+      "text": "then with predecessor or successor, I"
+    },
+    {
+      "index": 1247,
+      "start": 3031.48,
+      "end": 3033.15,
+      "duration": 1.67,
+      "text": "can find the other one."
+    },
+    {
+      "index": 1248,
+      "start": 3033.16,
+      "end": 3035.47,
+      "duration": 2.31,
+      "text": "Okay, so that's how we can do"
+    },
+    {
+      "index": 1249,
+      "start": 3035.48,
+      "end": 3038.07,
+      "duration": 2.59,
+      "text": "find and find previous"
+    },
+    {
+      "index": 1250,
+      "start": 3038.08,
+      "end": 3040.99,
+      "duration": 2.91,
+      "text": "and find next."
+    },
+    {
+      "index": 1251,
+      "start": 3041.0,
+      "end": 3042.83,
+      "duration": 1.83,
+      "text": "To do"
+    },
+    {
+      "index": 1252,
+      "start": 3042.84,
+      "end": 3044.31,
+      "duration": 1.47,
+      "text": "uh,"
+    },
+    {
+      "index": 1253,
+      "start": 3044.32,
+      "end": 3046.19,
+      "duration": 1.87,
+      "text": "sequences, we need a little bit more"
+    },
+    {
+      "index": 1254,
+      "start": 3046.2,
+      "end": 3050.84,
+      "duration": 4.64,
+      "text": "work. We'll do that next time."
+    }
+  ],
+  "course": {
+    "category": "Computer Science & AI",
+    "title": "Introduction to Algorithms",
+    "source_url": "https://www.youtube.com/playlist?list=PLUl4u3cNGP63EdVPNLG3ToM6LaEUuStEY"
+  }
+}

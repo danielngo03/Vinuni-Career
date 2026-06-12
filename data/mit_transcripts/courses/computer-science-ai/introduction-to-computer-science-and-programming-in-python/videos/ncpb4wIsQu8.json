@@ -1,0 +1,592 @@
+{
+  "video": {
+    "id": "ncpb4wIsQu8",
+    "title": "Tuples",
+    "url": "https://www.youtube.com/watch?v=ncpb4wIsQu8",
+    "channel": "MIT OpenCourseWare",
+    "duration": 209,
+    "language": "en"
+  },
+  "segment_count": 82,
+  "segments": [
+    {
+      "index": 0,
+      "start": 2.59,
+      "end": 2.6,
+      "duration": 0.01,
+      "text": "The following content is provided under"
+    },
+    {
+      "index": 1,
+      "start": 2.6,
+      "end": 5.31,
+      "duration": 2.71,
+      "text": "a Creative Commons license. Your support"
+    },
+    {
+      "index": 2,
+      "start": 5.32,
+      "end": 7.43,
+      "duration": 2.11,
+      "text": "will help MIT Open Courseware continue"
+    },
+    {
+      "index": 3,
+      "start": 7.44,
+      "end": 9.31,
+      "duration": 1.87,
+      "text": "to offer high-quality educational"
+    },
+    {
+      "index": 4,
+      "start": 9.32,
+      "end": 11.23,
+      "duration": 1.91,
+      "text": "resources for free."
+    },
+    {
+      "index": 5,
+      "start": 11.24,
+      "end": 13.39,
+      "duration": 2.15,
+      "text": "To make a donation or view additional"
+    },
+    {
+      "index": 6,
+      "start": 13.4,
+      "end": 16.07,
+      "duration": 2.67,
+      "text": "materials from hundreds of MIT courses,"
+    },
+    {
+      "index": 7,
+      "start": 16.08,
+      "end": 17.99,
+      "duration": 1.91,
+      "text": "visit MIT Open Courseware at"
+    },
+    {
+      "index": 8,
+      "start": 18.0,
+      "end": 22.55,
+      "duration": 4.55,
+      "text": "ocw.mit.edu."
+    },
+    {
+      "index": 9,
+      "start": 24.47,
+      "end": 24.48,
+      "duration": 0.01,
+      "text": "All right, we've got we've got some good"
+    },
+    {
+      "index": 10,
+      "start": 24.48,
+      "end": 26.31,
+      "duration": 1.83,
+      "text": "competition here. So, let's let's"
+    },
+    {
+      "index": 11,
+      "start": 26.32,
+      "end": 29.87,
+      "duration": 3.55,
+      "text": "actually work through it."
+    },
+    {
+      "index": 12,
+      "start": 36.31,
+      "end": 36.32,
+      "duration": 0.01,
+      "text": "So, I'm I have a function called always"
+    },
+    {
+      "index": 13,
+      "start": 36.32,
+      "end": 39.11,
+      "duration": 2.79,
+      "text": "sunny and it's going to take in two"
+    },
+    {
+      "index": 14,
+      "start": 39.12,
+      "end": 41.95,
+      "duration": 2.83,
+      "text": "two variables, right? T1 and T2."
+    },
+    {
+      "index": 15,
+      "start": 41.96,
+      "end": 44.15,
+      "duration": 2.19,
+      "text": "And I'm calling it with"
+    },
+    {
+      "index": 16,
+      "start": 44.16,
+      "end": 45.67,
+      "duration": 1.51,
+      "text": "cloudy"
+    },
+    {
+      "index": 17,
+      "start": 45.68,
+      "end": 46.95,
+      "duration": 1.27,
+      "text": "and cold."
+    },
+    {
+      "index": 18,
+      "start": 46.96,
+      "end": 49.99,
+      "duration": 3.03,
+      "text": "Okay. So, when I do my function call,"
+    },
+    {
+      "index": 19,
+      "start": 50.0,
+      "end": 51.71,
+      "duration": 1.71,
+      "text": "T1"
+    },
+    {
+      "index": 20,
+      "start": 51.72,
+      "end": 54.23,
+      "duration": 2.51,
+      "text": "is going to be equal to"
+    },
+    {
+      "index": 21,
+      "start": 54.24,
+      "end": 56.15,
+      "duration": 1.91,
+      "text": "um"
+    },
+    {
+      "index": 22,
+      "start": 56.16,
+      "end": 59.03,
+      "duration": 2.87,
+      "text": "cloudy."
+    },
+    {
+      "index": 23,
+      "start": 61.43,
+      "end": 61.44,
+      "duration": 0.01,
+      "text": "These are strings, but uh"
+    },
+    {
+      "index": 24,
+      "start": 61.44,
+      "end": 62.43,
+      "duration": 0.99,
+      "text": "I'm not going to bother putting the"
+    },
+    {
+      "index": 25,
+      "start": 62.44,
+      "end": 63.83,
+      "duration": 1.39,
+      "text": "quotes."
+    },
+    {
+      "index": 26,
+      "start": 63.84,
+      "end": 67.27,
+      "duration": 3.43,
+      "text": "And T2 is equal to"
+    },
+    {
+      "index": 27,
+      "start": 67.28,
+      "end": 68.59,
+      "duration": 1.31,
+      "text": "cold."
+    },
+    {
+      "index": 28,
+      "start": 68.6,
+      "end": 69.71,
+      "duration": 1.11,
+      "text": "Comma."
+    },
+    {
+      "index": 29,
+      "start": 69.72,
+      "end": 70.79,
+      "duration": 1.07,
+      "text": "Okay."
+    },
+    {
+      "index": 30,
+      "start": 70.8,
+      "end": 73.59,
+      "duration": 2.79,
+      "text": "So, remember what I said."
+    },
+    {
+      "index": 31,
+      "start": 73.6,
+      "end": 75.47,
+      "duration": 1.87,
+      "text": "With a comma, it's a tuple. Without a"
+    },
+    {
+      "index": 32,
+      "start": 75.48,
+      "end": 77.23,
+      "duration": 1.75,
+      "text": "comma, it's a string."
+    },
+    {
+      "index": 33,
+      "start": 77.24,
+      "end": 80.83,
+      "duration": 3.59,
+      "text": "So, T1 is actually going to be a string."
+    },
+    {
+      "index": 34,
+      "start": 80.84,
+      "end": 83.91,
+      "duration": 3.07,
+      "text": "And T2 is actually a tuple. Okay."
+    },
+    {
+      "index": 35,
+      "start": 83.92,
+      "end": 85.27,
+      "duration": 1.35,
+      "text": "So, that's the first sort of trick to"
+    },
+    {
+      "index": 36,
+      "start": 85.28,
+      "end": 89.03,
+      "duration": 3.75,
+      "text": "this question."
+    },
+    {
+      "index": 37,
+      "start": 90.75,
+      "end": 90.76,
+      "duration": 0.01,
+      "text": "So, I've made my function call and I've"
+    },
+    {
+      "index": 38,
+      "start": 90.76,
+      "end": 93.51,
+      "duration": 2.75,
+      "text": "assigned T1 and T2 to be those those two"
+    },
+    {
+      "index": 39,
+      "start": 93.52,
+      "end": 95.91,
+      "duration": 2.39,
+      "text": "values."
+    },
+    {
+      "index": 40,
+      "start": 95.92,
+      "end": 98.31,
+      "duration": 2.39,
+      "text": "So, the next line is sun is equal to"
+    },
+    {
+      "index": 41,
+      "start": 98.32,
+      "end": 100.67,
+      "duration": 2.35,
+      "text": "sunny comma sun. So, sun is going to be"
+    },
+    {
+      "index": 42,
+      "start": 100.68,
+      "end": 104.75,
+      "duration": 4.07,
+      "text": "this tuple of two strings."
+    },
+    {
+      "index": 43,
+      "start": 106.75,
+      "end": 106.76,
+      "duration": 0.01,
+      "text": "The next line is"
+    },
+    {
+      "index": 44,
+      "start": 106.76,
+      "end": 110.19,
+      "duration": 3.43,
+      "text": "figuring out what first is."
+    },
+    {
+      "index": 45,
+      "start": 110.2,
+      "end": 112.71,
+      "duration": 2.51,
+      "text": "So, first"
+    },
+    {
+      "index": 46,
+      "start": 112.72,
+      "end": 115.71,
+      "duration": 2.99,
+      "text": "is going to be"
+    },
+    {
+      "index": 47,
+      "start": 115.72,
+      "end": 117.47,
+      "duration": 1.75,
+      "text": "So, I'm looking at my T1 here. It's a"
+    },
+    {
+      "index": 48,
+      "start": 117.48,
+      "end": 119.63,
+      "duration": 2.15,
+      "text": "string, right? The fact that I have"
+    },
+    {
+      "index": 49,
+      "start": 119.64,
+      "end": 121.11,
+      "duration": 1.47,
+      "text": "parentheses doesn't actually make a"
+    },
+    {
+      "index": 50,
+      "start": 121.12,
+      "end": 123.31,
+      "duration": 2.19,
+      "text": "difference when I'm"
+    },
+    {
+      "index": 51,
+      "start": 123.32,
+      "end": 125.99,
+      "duration": 2.67,
+      "text": "talking about strings."
+    },
+    {
+      "index": 52,
+      "start": 126.0,
+      "end": 129.15,
+      "duration": 3.15,
+      "text": "Like that."
+    },
+    {
+      "index": 53,
+      "start": 131.91,
+      "end": 131.92,
+      "duration": 0.01,
+      "text": "So, when I'm indexing into a string,"
+    },
+    {
+      "index": 54,
+      "start": 131.92,
+      "end": 134.19,
+      "duration": 2.27,
+      "text": "T1 at position zero actually just gives"
+    },
+    {
+      "index": 55,
+      "start": 134.2,
+      "end": 136.75,
+      "duration": 2.55,
+      "text": "me a C."
+    },
+    {
+      "index": 56,
+      "start": 136.76,
+      "end": 142.15,
+      "duration": 5.39,
+      "text": "Cuz it's a string, not a tuple."
+    },
+    {
+      "index": 57,
+      "start": 145.79,
+      "end": 145.8,
+      "duration": 0.01,
+      "text": "And T2 at position zero says, \"Okay,"
+    },
+    {
+      "index": 58,
+      "start": 145.8,
+      "end": 147.39,
+      "duration": 1.59,
+      "text": "well, this is a tuple that contains only"
+    },
+    {
+      "index": 59,
+      "start": 147.4,
+      "end": 148.83,
+      "duration": 1.43,
+      "text": "one element."
+    },
+    {
+      "index": 60,
+      "start": 148.84,
+      "end": 151.79,
+      "duration": 2.95,
+      "text": "That element being at position zero."
+    },
+    {
+      "index": 61,
+      "start": 151.8,
+      "end": 157.11,
+      "duration": 5.31,
+      "text": "And that element is the string cold."
+    },
+    {
+      "index": 62,
+      "start": 158.949,
+      "end": 158.959,
+      "duration": 0.01,
+      "text": "Right? So, this is a tuple."
+    },
+    {
+      "index": 63,
+      "start": 158.959,
+      "end": 161.35,
+      "duration": 2.391,
+      "text": "So, I'm taking everything"
+    },
+    {
+      "index": 64,
+      "start": 161.36,
+      "end": 163.51,
+      "duration": 2.15,
+      "text": "right before the first comma. And that"
+    },
+    {
+      "index": 65,
+      "start": 163.52,
+      "end": 164.79,
+      "duration": 1.27,
+      "text": "happens to be just the one element"
+    },
+    {
+      "index": 66,
+      "start": 164.8,
+      "end": 167.51,
+      "duration": 2.71,
+      "text": "that's in there."
+    },
+    {
+      "index": 67,
+      "start": 169.59,
+      "end": 169.6,
+      "duration": 0.01,
+      "text": "Okay? So, this is just the string C"
+    },
+    {
+      "index": 68,
+      "start": 169.6,
+      "end": 173.71,
+      "duration": 4.11,
+      "text": "cold."
+    },
+    {
+      "index": 69,
+      "start": 177.63,
+      "end": 177.64,
+      "duration": 0.01,
+      "text": "And then I'm returning here a tuple."
+    },
+    {
+      "index": 70,
+      "start": 177.64,
+      "end": 180.11,
+      "duration": 2.47,
+      "text": "And the tuple I'm returning is sun at"
+    },
+    {
+      "index": 71,
+      "start": 180.12,
+      "end": 186.15,
+      "duration": 6.03,
+      "text": "position zero. So, that's just sunny."
+    },
+    {
+      "index": 72,
+      "start": 187.47,
+      "end": 187.48,
+      "duration": 0.01,
+      "text": "Comma."
+    },
+    {
+      "index": 73,
+      "start": 187.48,
+      "end": 189.55,
+      "duration": 2.07,
+      "text": "Just doing what is what's in here. And"
+    },
+    {
+      "index": 74,
+      "start": 189.56,
+      "end": 190.99,
+      "duration": 1.43,
+      "text": "then first."
+    },
+    {
+      "index": 75,
+      "start": 191.0,
+      "end": 196.19,
+      "duration": 5.19,
+      "text": "And first was the string C cold."
+    },
+    {
+      "index": 76,
+      "start": 198.99,
+      "end": 199.0,
+      "duration": 0.01,
+      "text": "Okay? So, really the important thing"
+    },
+    {
+      "index": 77,
+      "start": 199.0,
+      "end": 201.03,
+      "duration": 2.03,
+      "text": "about this ex- example was to make sure"
+    },
+    {
+      "index": 78,
+      "start": 201.04,
+      "end": 202.11,
+      "duration": 1.07,
+      "text": "that you understand the difference"
+    },
+    {
+      "index": 79,
+      "start": 202.12,
+      "end": 204.31,
+      "duration": 2.19,
+      "text": "between what a string is"
+    },
+    {
+      "index": 80,
+      "start": 204.32,
+      "end": 206.509,
+      "duration": 2.189,
+      "text": "and what a tuple is."
+    },
+    {
+      "index": 81,
+      "start": 206.519,
+      "end": 208.8,
+      "duration": 2.281,
+      "text": "Okay?"
+    }
+  ],
+  "course": {
+    "category": "Computer Science & AI",
+    "title": "Introduction to Computer Science and Programming in Python",
+    "source_url": "https://www.youtube.com/playlist?list=PLUl4u3cNGP63WbdFxL8giv4yhgdMGaZNA"
+  }
+}

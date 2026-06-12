@@ -1,0 +1,354 @@
+{
+  "video": {
+    "id": "qq7I2MQNrtU",
+    "title": "Special Methods",
+    "url": "https://www.youtube.com/watch?v=qq7I2MQNrtU",
+    "channel": "MIT OpenCourseWare",
+    "duration": 132,
+    "language": "en"
+  },
+  "segment_count": 48,
+  "segments": [
+    {
+      "index": 0,
+      "start": 2.629,
+      "end": 2.6390000000000002,
+      "duration": 0.01,
+      "text": "The following content is provided under"
+    },
+    {
+      "index": 1,
+      "start": 2.6390000000000002,
+      "end": 5.269,
+      "duration": 2.63,
+      "text": "a Creative Common License. Your support"
+    },
+    {
+      "index": 2,
+      "start": 5.279,
+      "end": 7.51,
+      "duration": 2.231,
+      "text": "will help MIT Open Courseware continue"
+    },
+    {
+      "index": 3,
+      "start": 7.52,
+      "end": 9.43,
+      "duration": 1.91,
+      "text": "to offer high-quality educational"
+    },
+    {
+      "index": 4,
+      "start": 9.44,
+      "end": 12.31,
+      "duration": 2.87,
+      "text": "resources for free. To make a donation"
+    },
+    {
+      "index": 5,
+      "start": 12.32,
+      "end": 14.23,
+      "duration": 1.91,
+      "text": "or view additional materials from"
+    },
+    {
+      "index": 6,
+      "start": 14.24,
+      "end": 17.189,
+      "duration": 2.949,
+      "text": "hundreds of MIT courses, visit MIT Open"
+    },
+    {
+      "index": 7,
+      "start": 17.199,
+      "end": 26.269,
+      "duration": 9.07,
+      "text": "Courseware at ocw.mmit.edu."
+    },
+    {
+      "index": 8,
+      "start": 29.63,
+      "end": 29.64,
+      "duration": 0.01,
+      "text": "Okay, we have our"
+    },
+    {
+      "index": 9,
+      "start": 29.64,
+      "end": 31.95,
+      "duration": 2.31,
+      "text": "class. We've"
+    },
+    {
+      "index": 10,
+      "start": 31.96,
+      "end": 34.75,
+      "duration": 2.79,
+      "text": "done pretty much everything up until"
+    },
+    {
+      "index": 11,
+      "start": 34.76,
+      "end": 37.229,
+      "duration": 2.469,
+      "text": "here. And we're going to"
+    },
+    {
+      "index": 12,
+      "start": 37.239,
+      "end": 40.549,
+      "duration": 3.31,
+      "text": "add this special function here. So,"
+    },
+    {
+      "index": 13,
+      "start": 40.559,
+      "end": 44.51,
+      "duration": 3.951,
+      "text": "we're implementing this"
+    },
+    {
+      "index": 14,
+      "start": 47.029,
+      "end": 47.039,
+      "duration": 0.01,
+      "text": "underscore_eq_. And implementing this is"
+    },
+    {
+      "index": 15,
+      "start": 47.039,
+      "end": 50.709,
+      "duration": 3.67,
+      "text": "going to is going to allow us to compare"
+    },
+    {
+      "index": 16,
+      "start": 50.719,
+      "end": 55.11,
+      "duration": 4.391,
+      "text": "two types of cars."
+    },
+    {
+      "index": 17,
+      "start": 56.79,
+      "end": 56.8,
+      "duration": 0.01,
+      "text": "So, the way I've decided to compare two"
+    },
+    {
+      "index": 18,
+      "start": 56.8,
+      "end": 59.91,
+      "duration": 3.11,
+      "text": "types of cars is I'm saying the two cars"
+    },
+    {
+      "index": 19,
+      "start": 59.92,
+      "end": 61.59,
+      "duration": 1.67,
+      "text": "are going to be equal if they have the"
+    },
+    {
+      "index": 20,
+      "start": 61.6,
+      "end": 62.869,
+      "duration": 1.269,
+      "text": "same number of wheels, they have the"
+    },
+    {
+      "index": 21,
+      "start": 62.879,
+      "end": 65.99,
+      "duration": 3.111,
+      "text": "same color, and if they have the same um"
+    },
+    {
+      "index": 22,
+      "start": 66.0,
+      "end": 67.71,
+      "duration": 1.71,
+      "text": "number of"
+    },
+    {
+      "index": 23,
+      "start": 67.72,
+      "end": 71.75,
+      "duration": 4.03,
+      "text": "doors. Okay, so if all of these are"
+    },
+    {
+      "index": 24,
+      "start": 71.76,
+      "end": 77.39,
+      "duration": 5.63,
+      "text": "equal, then return true and else return"
+    },
+    {
+      "index": 25,
+      "start": 80.31,
+      "end": 80.32,
+      "duration": 0.01,
+      "text": "false. Inside the actual program here,"
+    },
+    {
+      "index": 26,
+      "start": 80.32,
+      "end": 82.87,
+      "duration": 2.55,
+      "text": "I'm creating one car, four wheels, two"
+    },
+    {
+      "index": 27,
+      "start": 82.88,
+      "end": 85.19,
+      "duration": 2.31,
+      "text": "doors. I'm changing its color to red."
+    },
+    {
+      "index": 28,
+      "start": 85.2,
+      "end": 87.19,
+      "duration": 1.99,
+      "text": "I'm creating another car, four wheels,"
+    },
+    {
+      "index": 29,
+      "start": 87.2,
+      "end": 88.429,
+      "duration": 1.229,
+      "text": "two"
+    },
+    {
+      "index": 30,
+      "start": 88.439,
+      "end": 91.95,
+      "duration": 3.511,
+      "text": "doors. By default, this new car or your"
+    },
+    {
+      "index": 31,
+      "start": 91.96,
+      "end": 94.39,
+      "duration": 2.43,
+      "text": "car is going to have the color empty"
+    },
+    {
+      "index": 32,
+      "start": 94.4,
+      "end": 97.23,
+      "duration": 2.83,
+      "text": "string because that's how a new car gets"
+    },
+    {
+      "index": 33,
+      "start": 97.24,
+      "end": 100.59,
+      "duration": 3.35,
+      "text": "initialized,"
+    },
+    {
+      "index": 34,
+      "start": 104.23,
+      "end": 104.24,
+      "duration": 0.01,
+      "text": "right? So between my car and your car,"
+    },
+    {
+      "index": 35,
+      "start": 104.24,
+      "end": 106.389,
+      "duration": 2.149,
+      "text": "the difference is going to be the color."
+    },
+    {
+      "index": 36,
+      "start": 106.399,
+      "end": 107.83,
+      "duration": 1.431,
+      "text": "Okay? So the color is not going to be"
+    },
+    {
+      "index": 37,
+      "start": 107.84,
+      "end": 109.03,
+      "duration": 1.19,
+      "text": "the same. They have the same number of"
+    },
+    {
+      "index": 38,
+      "start": 109.04,
+      "end": 110.91,
+      "duration": 1.87,
+      "text": "wheels and the same number of"
+    },
+    {
+      "index": 39,
+      "start": 110.92,
+      "end": 113.83,
+      "duration": 2.91,
+      "text": "doors. So when So because I implemented"
+    },
+    {
+      "index": 40,
+      "start": 113.84,
+      "end": 117.749,
+      "duration": 3.909,
+      "text": "the equal method in my code, this does"
+    },
+    {
+      "index": 41,
+      "start": 117.759,
+      "end": 119.749,
+      "duration": 1.99,
+      "text": "not throw an error. This lets me"
+    },
+    {
+      "index": 42,
+      "start": 119.759,
+      "end": 122.389,
+      "duration": 2.63,
+      "text": "proceed. It compares four with four,"
+    },
+    {
+      "index": 43,
+      "start": 122.399,
+      "end": 123.91,
+      "duration": 1.511,
+      "text": "which is good. Two with two, which is"
+    },
+    {
+      "index": 44,
+      "start": 123.92,
+      "end": 125.83,
+      "duration": 1.91,
+      "text": "good, and then the colors don't match."
+    },
+    {
+      "index": 45,
+      "start": 125.84,
+      "end": 127.389,
+      "duration": 1.549,
+      "text": "So it's going to say"
+    },
+    {
+      "index": 46,
+      "start": 127.399,
+      "end": 129.589,
+      "duration": 2.19,
+      "text": "false, which most of you guys are"
+    },
+    {
+      "index": 47,
+      "start": 129.599,
+      "end": 132.8,
+      "duration": 3.201,
+      "text": "getting it right."
+    }
+  ],
+  "course": {
+    "category": "Computer Science & AI",
+    "title": "Introduction to Computer Science and Programming in Python",
+    "source_url": "https://www.youtube.com/playlist?list=PLUl4u3cNGP63WbdFxL8giv4yhgdMGaZNA"
+  }
+}
