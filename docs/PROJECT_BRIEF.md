@@ -14,29 +14,28 @@ Companies need a structured way to create job requirements and discover which st
 
 ## Target User
 
-Company or recruiter users managing job requests in a student-job matching platform.
+Company/recruiter users managing job requests, students managing CV-derived profiles, and teacher/school users preparing transcript data for learning workflows.
 
 ## Demo Goal
 
-In the demo, a company user can:
+In the demo, users can:
 
-- Upload or enter a JD.
-- Convert it into validated job requirement JSON.
-- Review/edit the JSON.
-- Save the job request.
-- Open or close the job.
-- Run matching for an open job and see ranked mock students with missing skills and explanations.
+- Companies upload or enter a JD, convert it into validated job requirement JSON, save it, open or close it, and run matching.
+- Students upload or paste a CV, save a skill profile, and match themselves against open jobs.
+- Teachers view dashboard statistics and build YouTube transcript/RAG data for a video or playlist.
 
 ## AI Core
 
-Parse JD content into a structured job requirement profile using Gemini 3.1 Flash Lite. The parser should extract metadata and skill requirements, then pass the output through schema validation before the job is saved.
+Parse JD and CV content into structured profiles using Gemini 3.1 Flash Lite when configured, with local fallback behavior for demos. The parsers extract metadata and skill requirements, then pass output through schema validation before data is saved.
 
 ## Inputs
 
 - PDF/DOCX JD upload.
+- PDF/DOCX CV upload.
 - Structured JD form fields.
 - Local mock student skill profiles.
 - Optional threshold settings for match labels.
+- YouTube video or playlist URL for teacher transcript/RAG data.
 
 ## Outputs
 
@@ -44,6 +43,8 @@ Parse JD content into a structured job requirement profile using Gemini 3.1 Flas
 - Saved job request JSON.
 - Ranked match results for one open job.
 - Missing or weak skill explanations per student.
+- Saved CV-derived student skill profiles.
+- YouTube transcript chunks and pipeline reports.
 
 ## Scope
 
@@ -56,12 +57,12 @@ Parse JD content into a structured job requirement profile using Gemini 3.1 Flas
 - Rule-based `all_students_for_job` matching.
 - Mock student profile provider.
 - Agent-style FastAPI backend.
-- Streamlit home page and JD workspace page.
+- Streamlit demo login, Home dashboard, JD Workspace, CV Analysis, and Teacher RAG Pipeline pages.
 
 ## Non-Goals
 
 - Course recommendations.
-- Interview RAG.
+- Production interview RAG/chat experience.
 - Admin dashboards.
 - Production auth and database.
 - Deployment hardening beyond demo readiness.

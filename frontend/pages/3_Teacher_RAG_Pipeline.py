@@ -4,8 +4,8 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from demo_auth import get_current_user_id, require_login
-from shared import render_parser_status_sidebar
+from demo_auth import get_current_account_id, require_login
+from shared import render_home_link, render_parser_status_sidebar
 
 try:
     import streamlit as st
@@ -18,9 +18,9 @@ from backend.src.services.youtube_rag_pipeline import DEFAULT_OUTPUT_DIR, Pipeli
 st.set_page_config(page_title="Teacher RAG Pipeline", layout="wide")
 require_login("teacher")
 render_parser_status_sidebar()
-teacher_user_id = get_current_user_id()
+teacher_account_id = get_current_account_id()
 
-st.page_link("pages/0_Home.py", label="Back to Teacher Dashboard")
+render_home_link("Back to Teacher Dashboard")
 st.title("Teacher RAG Pipeline")
 
 with st.form("youtube-rag-pipeline-form"):
@@ -55,7 +55,7 @@ if submitted:
                     PipelineConfig(
                         source_url=source_url.strip(),
                         output_dir=Path(output_dir),
-                        teacher_user_id=teacher_user_id,
+                        teacher_user_id=teacher_account_id,
                         category=category.strip() or "Uncategorized",
                         course_title=course_title.strip() or None,
                         languages=tuple(languages),

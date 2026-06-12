@@ -99,7 +99,7 @@ Company flow:
 1. A company enters or uploads a JD in the JD Workspace.
 2. The backend extracts text, parses it with the configured LLM or fallback parser, validates the result, and saves a job JSON file.
 3. The company opens the job and runs matching.
-4. The matching service ranks mock and saved student profiles with deterministic rules.
+4. The matching service ranks student profiles with deterministic rules. Demo seed profiles are stored in the same student store and marked with `metadata.is_mock = true`.
 
 Student flow:
 
@@ -120,7 +120,8 @@ Teacher flow:
 |------|----------|---------|
 | Jobs | `data/jobs` | Company-created job requirement profiles. |
 | Saved students | `data/students` | CV-derived student skill profiles. |
-| Mock students | `data/mock/students.json` | Demo matching data before real student API integration. |
+| Jobs | `data/jobs` | Saved jobs and demo seed jobs. Mock rows are marked with `metadata.is_mock = true`. |
+| Students | `data/students` | Saved CV-derived profiles and demo seed students. Mock rows are marked with `metadata.is_mock = true`. |
 | YouTube RAG outputs | `data/youtube_rag` | Teacher transcript pipeline artifacts. |
 
 Local JSON is a demo choice. It keeps the project easy to run and inspect, but it is not intended for concurrent production writes.

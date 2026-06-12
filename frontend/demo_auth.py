@@ -16,13 +16,25 @@ ACCOUNT_TYPE_LABELS = {
     "teacher": "Teacher / School",
 }
 
+ACCOUNT_ID_LABELS = {
+    "enterprise": "Company ID",
+    "student": "Student ID",
+    "teacher": "Teacher ID",
+}
+
+ACCOUNT_ID_DEFAULTS = {
+    "enterprise": "company_demo",
+    "student": "mock-student-ai-001",
+    "teacher": "teacher_demo",
+}
+
 
 def get_current_user() -> dict[str, str] | None:
     user = st.session_state.get("auth_user")
     return user if isinstance(user, dict) else None
 
 
-def get_current_user_id() -> str:
+def get_current_account_id() -> str:
     user = get_current_user()
     return str(user.get("user_id", "")) if user else ""
 
@@ -52,15 +64,17 @@ def render_login() -> None:
     with st.form("login-form"):
         account_label = st.selectbox("Account type", list(ACCOUNT_TYPE_LABELS.values()))
         role = next(key for key, label in ACCOUNT_TYPE_LABELS.items() if label == account_label)
-        user_label = "Teacher / School ID" if role == "teacher" else "User ID"
-        user_id = st.text_input(user_label)
+        user_id = st.text_input(
+            ACCOUNT_ID_LABELS.get(role, "Account ID"),
+            value=ACCOUNT_ID_DEFAULTS.get(role, ""),
+        )
         password = st.text_input("Password", type="password")
         submitted = st.form_submit_button("Login")
 
     if submitted:
         clean_user_id = user_id.strip()
         if not clean_user_id:
-            st.error("User ID is required.")
+            st.error("Account ID is required.")
             return
         if not password.strip():
             st.error("Password is required.")
@@ -76,7 +90,7 @@ def render_logout_sidebar(user: dict[str, Any]) -> None:
     st.sidebar.header("Account")
     role = str(user.get("role", ""))
     st.sidebar.text_input("Account type", value=ACCOUNT_TYPE_LABELS.get(role, role), disabled=True)
-    st.sidebar.text_input("Account ID", value=str(user.get("user_id", "")), disabled=True)
+    st.sidebar.text_input(ACCOUNT_ID_LABELS.get(role, "Account ID"), value=str(user.get("user_id", "")), disabled=True)
     if st.sidebar.button("Logout"):
         for key in ["auth_user", "draft_job", "draft_student", "parser_metadata", "cv_parser_metadata"]:
             st.session_state.pop(key, None)

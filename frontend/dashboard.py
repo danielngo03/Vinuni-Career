@@ -4,8 +4,8 @@ from __future__ import annotations
 
 from collections import Counter
 
-from demo_auth import get_current_role, get_current_user_id, render_login, render_logout_sidebar
-from shared import job_repo, mock_student_provider, render_parser_status_sidebar, student_repo
+from demo_auth import get_current_account_id, get_current_role, render_login, render_logout_sidebar
+from shared import job_repo, render_parser_status_sidebar, student_repo
 
 try:
     import streamlit as st
@@ -22,7 +22,7 @@ def render_dashboard() -> None:
     render_parser_status_sidebar()
     render_logout_sidebar(user)
     role = get_current_role()
-    user_id = get_current_user_id()
+    account_id = get_current_account_id()
 
     title = "Teacher Dashboard" if role == "teacher" else "Corhort Matching Demo"
     st.title(title)
@@ -30,7 +30,7 @@ def render_dashboard() -> None:
 
     if role == "enterprise":
         col_jobs, col_open = st.columns(2)
-        jobs = [job for job in job_repo.list() if job.company_id == user_id]
+        jobs = [job for job in job_repo.list() if job.company_id == account_id]
         open_jobs = [job for job in jobs if job.status == "open"]
 
         col_jobs.metric("Saved jobs", len(jobs))
@@ -40,9 +40,9 @@ def render_dashboard() -> None:
 
     st.subheader("Pages")
     if role == "enterprise":
-        st.page_link("pages/1_JD_Workspace.py", label="JD Workspace")
+        st.page_link("pages/1_Enterprise_JD_Workspace.py", label="Enterprise JD Workspace")
     elif role == "student":
-        st.page_link("pages/2_CV_Analysis.py", label="CV Analysis")
+        st.page_link("pages/2_Student_CV_Analysis.py", label="Student CV Analysis")
     else:
         st.page_link("pages/3_Teacher_RAG_Pipeline.py", label="Teacher RAG Pipeline")
 
@@ -50,7 +50,7 @@ def render_dashboard() -> None:
 def render_teacher_stats() -> None:
     jobs = job_repo.list()
     saved_students = student_repo.list_profiles()
-    mock_students = mock_student_provider.list_profiles()
+    mock_students = [student for student in saved_students if student.metadata.get("is_mock") is True]
     company_ids = sorted({job.company_id for job in jobs})
     status_counts = Counter(job.status for job in jobs)
     skill_counts = Counter()

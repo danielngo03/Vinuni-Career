@@ -4,6 +4,8 @@
 
 Build the enterprise-side module for a student-job matching platform. Companies can create job descriptions, have them parsed into structured job requirement JSON by an LLM, manage job request status, and run rule-based matching against student skill profiles.
 
+The implemented demo now also includes student CV parsing/profile management and a teacher YouTube transcript/RAG pipeline so the local app can cover the broader demo flow.
+
 ## User Goal
 
 Deliver the assigned module for a final/demo-day project: enterprise job request management plus `all_students_for_job` matching.
@@ -11,7 +13,7 @@ Deliver the assigned module for a final/demo-day project: enterprise job request
 ## Target User
 
 - Primary: company / recruiter users who create and manage job requests.
-- Secondary: project team members who need a stable API/module to integrate with student profile and admin modules.
+- Secondary: students using CV-derived skill profiles, teacher/school users preparing transcript data, and project team members who need stable APIs to integrate with adjacent modules.
 
 ## Selected Direction
 
@@ -52,8 +54,8 @@ This is final/demo-day material and needs clear APIs, evaluation evidence, demo-
 ## Non-Goals
 
 - Course recommendation.
-- RAG interview simulation.
-- School/admin dashboard.
+- Production RAG interview simulation.
+- Production school/admin dashboard.
 - Full auth or production permissions.
 - Production database.
 - Next.js frontend.
@@ -69,12 +71,12 @@ The AI core is structured extraction, not a general chatbot. It receives raw JD 
 - Document readers: PDF and DOCX text extraction.
 - Storage: local JSON files.
 - Student profiles: mock JSON provider plus local CV-derived profiles, later replaceable with an API provider.
-- RAG: not in scope for this module.
+- RAG: the original enterprise matching scope did not include interview RAG; the current demo includes a teacher-owned YouTube transcript/RAG data pipeline.
 
 ## Backend / Frontend Need
 
 - Backend: FastAPI with agent-style routers.
-- Frontend/demo: Streamlit home page plus JD workspace page.
+- Frontend/demo: Streamlit demo login, role-aware Home dashboard, JD Workspace, CV Analysis, and Teacher RAG Pipeline pages.
 - Keep both thin; the main value is the parser, schema validation, job state management, and matching engine.
 
 ## Evaluation Direction

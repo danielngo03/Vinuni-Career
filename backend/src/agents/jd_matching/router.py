@@ -18,10 +18,8 @@ from backend.src.services.document_reader import extract_text_from_bytes
 from backend.src.services.jd_parser import parse_jd_form_with_metadata, parse_jd_text_with_metadata, parse_metadata_to_dict
 from backend.src.services.matching import match_students_for_job
 from backend.src.services.storage import (
-    CombinedStudentProfileProvider,
     JsonJobRepository,
     JsonStudentRepository,
-    MockStudentProfileProvider,
 )
 
 try:
@@ -32,10 +30,10 @@ except ImportError:  # pragma: no cover - used only when optional API dependency
     HTTPException = Exception  # type: ignore[assignment]
 
 
-job_repo = JsonJobRepository(settings.jobs_dir)
+saved_job_repo = JsonJobRepository(settings.jobs_dir)
+job_repo = saved_job_repo
 saved_student_repo = JsonStudentRepository(settings.students_dir)
-mock_student_provider = MockStudentProfileProvider(settings.mock_students_path)
-student_provider = CombinedStudentProfileProvider(saved_student_repo, mock_student_provider)
+student_provider = saved_student_repo
 
 
 if APIRouter is not None:
@@ -86,13 +84,13 @@ if APIRouter is not None:
         try:
             payload["company_id"] = user.user_id
             job = job_from_dict(payload)
-            return job_to_dict(job_repo.save(job))
+            return job_to_dict(saved_job_repo.save(job))
         except ValidationError as exc:
             raise HTTPException(status_code=422, detail=str(exc)) from exc
 
     @router.get("/jobs")
     def list_jobs(user: DemoUser = Depends(require_roles("enterprise"))) -> list[dict[str, Any]]:
-        return [job_to_dict(job) for job in job_repo.list() if job.company_id == user.user_id]
+        return [job_to_dict(job) for job in saved_job_repo.list() if job.company_id == user.user_id]
 
     @router.get("/jobs/open")
     def list_open_jobs(_user: DemoUser = Depends(require_roles("student", "enterprise"))) -> list[dict[str, Any]]:
@@ -120,13 +118,13 @@ if APIRouter is not None:
         user: DemoUser = Depends(require_roles("enterprise")),
     ) -> dict[str, Any]:
         try:
-            current = job_repo.get(job_id)
+            current = saved_job_repo.get(job_id)
             if current.company_id != user.user_id:
                 raise HTTPException(status_code=403, detail="Enterprises can only update their own jobs.")
             payload["job_id"] = job_id
             payload["company_id"] = user.user_id
             job = job_from_dict(payload)
-            return job_to_dict(job_repo.save(job))
+            return job_to_dict(saved_job_repo.save(job))
         except FileNotFoundError as exc:
             raise HTTPException(status_code=404, detail=str(exc)) from exc
         except ValidationError as exc:
@@ -138,10 +136,10 @@ if APIRouter is not None:
         user: DemoUser = Depends(require_roles("enterprise")),
     ) -> dict[str, Any]:
         try:
-            current = job_repo.get(job_id)
+            current = saved_job_repo.get(job_id)
             if current.company_id != user.user_id:
                 raise HTTPException(status_code=403, detail="Enterprises can only open their own jobs.")
-            return job_to_dict(job_repo.update_status(job_id, "open"))
+            return job_to_dict(saved_job_repo.update_status(job_id, "open"))
         except FileNotFoundError as exc:
             raise HTTPException(status_code=404, detail=str(exc)) from exc
 
@@ -151,10 +149,10 @@ if APIRouter is not None:
         user: DemoUser = Depends(require_roles("enterprise")),
     ) -> dict[str, Any]:
         try:
-            current = job_repo.get(job_id)
+            current = saved_job_repo.get(job_id)
             if current.company_id != user.user_id:
                 raise HTTPException(status_code=403, detail="Enterprises can only close their own jobs.")
-            return job_to_dict(job_repo.update_status(job_id, "closed"))
+            return job_to_dict(saved_job_repo.update_status(job_id, "closed"))
         except FileNotFoundError as exc:
             raise HTTPException(status_code=404, detail=str(exc)) from exc
 
@@ -164,17 +162,21 @@ if APIRouter is not None:
         user: DemoUser = Depends(require_roles("enterprise")),
     ) -> dict[str, str]:
         try:
-            current = job_repo.get(job_id)
+            current = saved_job_repo.get(job_id)
             if current.company_id != user.user_id:
                 raise HTTPException(status_code=403, detail="Enterprises can only delete their own jobs.")
-            job_repo.delete(job_id)
+            saved_job_repo.delete(job_id)
             return {"status": "deleted", "job_id": job_id}
         except FileNotFoundError as exc:
             raise HTTPException(status_code=404, detail=str(exc)) from exc
 
     @router.get("/students/mock")
     def list_mock_students(_user: DemoUser = Depends(require_roles("enterprise"))) -> list[dict[str, Any]]:
-        return [student_to_dict(student) for student in mock_student_provider.list_profiles()]
+        return [
+            student_to_dict(student)
+            for student in saved_student_repo.list_profiles()
+            if student.metadata.get("is_mock") is True
+        ]
 
     @router.post("/jobs/{job_id}/match")
     def match_job(
@@ -188,7 +190,7 @@ if APIRouter is not None:
                 strong_match=float(payload.get("strong_match", settings.strong_match_threshold)),
                 partial_match=float(payload.get("partial_match", settings.partial_match_threshold)),
             )
-            job = job_repo.get(job_id)
+            job = saved_job_repo.get(job_id)
             if job.company_id != user.user_id:
                 raise HTTPException(status_code=403, detail="Enterprises can only match their own jobs.")
             results = match_students_for_job(job, student_provider.list_profiles(), thresholds)

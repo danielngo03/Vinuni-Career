@@ -16,18 +16,18 @@ except ImportError as exc:  # pragma: no cover
     raise RuntimeError("Install streamlit to run the demo UI.") from exc
 
 from backend.src.core.config import settings
+from backend.src.models.schemas import JobRequirementProfile, job_to_dict
 from backend.src.services.storage import (
-    CombinedStudentProfileProvider,
     JsonJobRepository,
     JsonStudentRepository,
-    MockStudentProfileProvider,
 )
 
 
-job_repo = JsonJobRepository(settings.jobs_dir)
+saved_job_repo = JsonJobRepository(settings.jobs_dir)
+job_repo = saved_job_repo
 student_repo = JsonStudentRepository(settings.students_dir)
-mock_student_provider = MockStudentProfileProvider(settings.mock_students_path)
-student_provider = CombinedStudentProfileProvider(student_repo, mock_student_provider)
+student_provider = student_repo
+HOME_PAGE = "Home.py"
 
 logging.basicConfig(
     level=getattr(logging, getattr(settings, "log_level", "INFO").upper(), logging.INFO),
@@ -75,37 +75,27 @@ def render_parser_status_sidebar() -> None:
             st.sidebar.info("Used fallback/mock parser")
 
 
-def render_demo_role_sidebar() -> str:
-    st.sidebar.header("Demo User")
-    role = st.sidebar.radio(
-        "Role",
-        ["enterprise", "student"],
-        index=0,
-        horizontal=True,
-        key="demo_role",
-    )
-    user_id_default = "company_demo" if role == "enterprise" else "student_demo"
-    st.sidebar.text_input("User ID", value=user_id_default, key=f"demo_user_id_{role}")
-    return role
+def render_home_link(label: str = "Back to Dashboard") -> None:
+    st.page_link(HOME_PAGE, label=label)
 
 
-def get_demo_user_id(role: str | None = None) -> str:
-    selected_role = role or st.session_state.get("demo_role", "enterprise")
-    default = "company_demo" if selected_role == "enterprise" else "student_demo"
-    return str(st.session_state.get(f"demo_user_id_{selected_role}", default)).strip() or default
-
-
-def require_demo_role(*allowed_roles: str) -> str:
-    role = render_demo_role_sidebar()
-    if role not in allowed_roles:
-        allowed = ", ".join(allowed_roles)
-        st.warning(f"This page is available for: {allowed}.")
-        st.stop()
-    return role
+def render_parse_metadata_status(metadata: dict[str, Any], item_label: str) -> None:
+    if metadata.get("used_llm"):
+        st.success(f"Last {item_label} parse used {metadata.get('parser_mode')} ({metadata.get('model')}).")
+    elif metadata.get("api_key_configured") and metadata.get("fallback_used"):
+        st.warning(f"LLM credentials exist, but the last {item_label} parse used fallback because the LLM call failed.")
+        if metadata.get("error"):
+            st.caption(metadata["error"])
+    else:
+        st.info(f"Last {item_label} parse used the local fallback/mock parser because the selected LLM is not configured.")
 
 
 def log_ui_action(action: str, detail: str) -> None:
     logger.info("action=%s %s", action, detail)
+
+
+def job_review_data(job: JobRequirementProfile) -> dict[str, Any]:
+    return job_to_dict(job)
 
 
 def short_error(error: object) -> str:

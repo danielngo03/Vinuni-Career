@@ -16,7 +16,6 @@ PROJECT_ROOT = Path(__file__).resolve().parents[3]
 DATA_DIR = PROJECT_ROOT / "data"
 JOBS_DIR = DATA_DIR / "jobs"
 STUDENTS_DIR = DATA_DIR / "students"
-MOCK_DIR = DATA_DIR / "mock"
 
 if load_dotenv is not None:
     load_dotenv(PROJECT_ROOT / ".env")
@@ -64,7 +63,6 @@ class Settings:
     gemini_model: str = os.getenv("GEMINI_MODEL", os.getenv("LLM_MODEL", "gemini-3.1-flash-lite"))
     jobs_dir: Path = JOBS_DIR
     students_dir: Path = STUDENTS_DIR
-    mock_students_path: Path = MOCK_DIR / "students.json"
     strong_match_threshold: float = float(os.getenv("STRONG_MATCH_THRESHOLD", "0.8"))
     partial_match_threshold: float = float(os.getenv("PARTIAL_MATCH_THRESHOLD", "0.6"))
     demo_auth_enabled: bool = _env_bool("DEMO_AUTH_ENABLED", True)

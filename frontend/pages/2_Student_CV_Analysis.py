@@ -2,11 +2,14 @@
 
 from __future__ import annotations
 
-from demo_auth import get_current_user_id, require_login
+from demo_auth import get_current_account_id, require_login
 from shared import (
+    job_review_data,
     job_repo,
     log_ui_action,
+    render_home_link,
     render_parsed_job_review,
+    render_parse_metadata_status,
     render_parser_status_sidebar,
     render_student_profile_review,
     student_repo,
@@ -27,8 +30,8 @@ from backend.src.services.matching import match_students_for_job
 st.set_page_config(page_title="CV Analysis", layout="wide")
 user = require_login("student")
 render_parser_status_sidebar()
-student_user_id = get_current_user_id()
-st.page_link("pages/0_Home.py", label="Back to Dashboard")
+student_account_id = get_current_account_id()
+render_home_link()
 st.title("CV Analysis")
 
 tab_parse, tab_manage, tab_match = st.tabs(["Parse CV", "Manage Students", "Match Jobs"])
@@ -61,23 +64,17 @@ with tab_parse:
 
     if "draft_student" in st.session_state:
         metadata = st.session_state.get("cv_parser_metadata", {})
-        if metadata.get("used_llm"):
-            st.success(f"Last parse used {metadata.get('parser_mode')} ({metadata.get('model')}).")
-        elif metadata.get("api_key_configured") and metadata.get("fallback_used"):
-            st.warning("LLM credentials exist, but the last CV parse used fallback because the LLM call failed.")
-            if metadata.get("error"):
-                st.caption(metadata["error"])
-        else:
-            st.info("Last CV parse used the local fallback parser because the selected LLM is not configured.")
+        render_parse_metadata_status(metadata, "CV")
 
         st.subheader("Review parsed student")
         render_student_profile_review(st.session_state["draft_student"], key_prefix="draft-student")
         if st.button("Save student profile"):
             try:
                 student_data = dict(st.session_state["draft_student"])
+                student_data["student_id"] = student_account_id
                 metadata = student_data.setdefault("metadata", {})
                 if isinstance(metadata, dict):
-                    metadata["owner_user_id"] = student_user_id
+                    metadata["owner_user_id"] = student_account_id
                 student = student_from_dict(student_data)
                 student_repo.save(student)
                 log_ui_action("save_student", student.student_id)
@@ -90,7 +87,7 @@ with tab_manage:
     students = [
         student
         for student in student_repo.list_profiles()
-        if student.metadata.get("owner_user_id") == student_user_id
+        if student.student_id == student_account_id or student.metadata.get("owner_user_id") == student_account_id
     ]
     if not students:
         st.info("No CV-derived students saved yet.")
@@ -106,7 +103,7 @@ with tab_match:
     students = [
         student
         for student in student_repo.list_profiles()
-        if student.metadata.get("owner_user_id") == student_user_id
+        if student.student_id == student_account_id or student.metadata.get("owner_user_id") == student_account_id
     ]
     open_jobs = [job for job in job_repo.list() if job.status == "open"]
 
@@ -126,28 +123,7 @@ with tab_match:
         st.subheader("Open Job Details")
         for job in open_jobs:
             with st.expander(f"{job.title} ({job.job_id})"):
-                render_parsed_job_review(
-                    {
-                        "job_id": job.job_id,
-                        "company_id": job.company_id,
-                        "title": job.title,
-                        "status": job.status,
-                        "employment_type": job.employment_type,
-                        "location": job.location,
-                        "salary_range": job.salary_range,
-                        "benefits": job.benefits,
-                        "skills": {
-                            name: {
-                                "required_level": requirement.required_level,
-                                "importance": requirement.importance,
-                                "required": requirement.required,
-                            }
-                            for name, requirement in job.skills.items()
-                        },
-                        "raw_text": job.raw_text,
-                    },
-                    key_prefix=f"student-job-detail-{job.job_id}",
-                )
+                render_parsed_job_review(job_review_data(job), key_prefix=f"student-job-detail-{job.job_id}")
 
         if st.button("Run matching"):
             thresholds = MatchThresholds(strong_match=strong, partial_match=partial)
@@ -195,24 +171,6 @@ with tab_match:
                             width="stretch",
                         )
                     render_parsed_job_review(
-                        {
-                            "job_id": job.job_id,
-                            "company_id": job.company_id,
-                            "title": job.title,
-                            "status": job.status,
-                            "employment_type": job.employment_type,
-                            "location": job.location,
-                            "salary_range": job.salary_range,
-                            "benefits": job.benefits,
-                            "skills": {
-                                name: {
-                                    "required_level": requirement.required_level,
-                                    "importance": requirement.importance,
-                                    "required": requirement.required,
-                                }
-                                for name, requirement in job.skills.items()
-                            },
-                            "raw_text": job.raw_text,
-                        },
+                        job_review_data(job),
                         key_prefix=f"student-match-result-{job.job_id}",
                     )

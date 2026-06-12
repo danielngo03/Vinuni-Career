@@ -8,11 +8,7 @@ from backend.src.agents.student_profile.service import summarize_student_profile
 from backend.src.core.auth import DemoUser, require_roles
 from backend.src.core.config import settings
 from backend.src.models.schemas import StudentProfile, ValidationError, student_from_dict, student_to_dict
-from backend.src.services.storage import (
-    CombinedStudentProfileProvider,
-    JsonStudentRepository,
-    MockStudentProfileProvider,
-)
+from backend.src.services.storage import JsonStudentRepository
 
 try:
     from fastapi import APIRouter, Depends, HTTPException
@@ -23,8 +19,7 @@ except ImportError:  # pragma: no cover - used only when optional API dependency
 
 
 saved_student_repo = JsonStudentRepository(settings.students_dir)
-mock_student_provider = MockStudentProfileProvider(settings.mock_students_path)
-student_provider = CombinedStudentProfileProvider(saved_student_repo, mock_student_provider)
+student_provider = saved_student_repo
 
 
 def _can_access_student(student: StudentProfile, user: DemoUser) -> bool:
@@ -81,7 +76,11 @@ if APIRouter is not None:
 
     @router.get("/students/mock")
     def list_mock_students(_user: DemoUser = Depends(require_roles("enterprise"))) -> list[dict[str, Any]]:
-        return [student_to_dict(student) for student in mock_student_provider.list_profiles()]
+        return [
+            student_to_dict(student)
+            for student in saved_student_repo.list_profiles()
+            if student.metadata.get("is_mock") is True
+        ]
 
     @router.get("/students/{student_id}")
     def get_student(
