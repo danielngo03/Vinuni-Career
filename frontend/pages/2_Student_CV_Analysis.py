@@ -22,7 +22,11 @@ except ImportError as exc:  # pragma: no cover
 
 from backend.src.core.config import settings
 from backend.src.models.schemas import MatchThresholds, student_from_dict, student_to_dict
-from backend.src.services.cv_parser import cv_parse_metadata_to_dict, parse_cv_text_with_metadata
+from backend.src.services.cv_parser import (
+    cv_parse_metadata_to_dict,
+    parse_cv_form_with_metadata,
+    parse_cv_text_with_metadata,
+)
 from backend.src.services.document_reader import extract_text_from_bytes
 from backend.src.services.matching import match_students_for_job
 
@@ -37,9 +41,43 @@ st.title("CV Analysis")
 tab_parse, tab_manage, tab_match = st.tabs(["Parse CV", "Manage Students", "Match Jobs"])
 
 with tab_parse:
-    input_mode = st.radio("Input mode", ["Upload", "Raw text"], horizontal=True)
+    input_mode = st.radio("Input mode", ["Form", "Upload", "Raw text"], horizontal=True)
 
-    if input_mode == "Upload":
+    if input_mode == "Form":
+        form = {
+            "name": st.text_input("Full name", value=""),
+            "email": st.text_input("Email", value=""),
+            "phone": st.text_input("Phone", value=""),
+            "major": st.text_input("Major", value=""),
+            "year": st.text_input("Year", value=""),
+            "skills": st.text_area(
+                "Skills",
+                value="",
+                height=90,
+            ),
+            "education": st.text_area(
+                "Education",
+                value="",
+                height=90,
+            ),
+            "projects": st.text_area(
+                "Projects",
+                value="",
+                height=120,
+            ),
+            "experience": st.text_area("Experience", value="", height=90),
+        }
+        parse_clicked = st.button("Parse form")
+        if parse_clicked:
+            if not any(str(value).strip() for value in form.values()):
+                st.error("Enter CV information before parsing.")
+                log_ui_action("parse_cv_form", "empty form")
+                st.stop()
+            result = parse_cv_form_with_metadata(form)
+            st.session_state["draft_student"] = student_to_dict(result.student)
+            st.session_state["cv_parser_metadata"] = cv_parse_metadata_to_dict(result.metadata)
+            log_ui_action("parse_cv_form", result.student.student_id)
+    elif input_mode == "Upload":
         uploaded = st.file_uploader("Upload student CV", type=["txt", "pdf", "docx"])
         parse_clicked = st.button("Parse upload")
         if parse_clicked and uploaded is not None:
@@ -57,6 +95,10 @@ with tab_parse:
     else:
         raw_text = st.text_area("Raw CV text", height=260)
         if st.button("Parse text"):
+            if not raw_text.strip():
+                st.error("Enter CV text before parsing.")
+                log_ui_action("parse_cv_text", "empty text")
+                st.stop()
             result = parse_cv_text_with_metadata(raw_text)
             st.session_state["draft_student"] = student_to_dict(result.student)
             st.session_state["cv_parser_metadata"] = cv_parse_metadata_to_dict(result.metadata)

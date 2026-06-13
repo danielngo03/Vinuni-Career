@@ -26,7 +26,7 @@ DEMO_AUTH_ENABLED=true
 
 If `GEMINI_API_KEY` is missing or the LLM call fails, JD and CV parsing use deterministic fallback behavior where available.
 
-Demo API authorization uses request headers:
+Demo API requests use role headers. The Streamlit demo uses the same role/account values in its local login state.
 
 ```text
 X-Demo-Role: enterprise
@@ -40,7 +40,7 @@ X-Demo-Role: student
 X-Demo-User-Id: mock-student-ai-001
 ```
 
-Teacher/school accounts use:
+Teacher/school demo accounts use:
 
 ```text
 X-Demo-Role: teacher
@@ -67,14 +67,24 @@ GET  /agents/jd-matching/health
 GET  /agents/student-profile/health
 GET  /agents/cv-analysis/health
 POST /jobs/parse
+POST /jobs/parse-upload
 POST /jobs
 GET  /jobs
+GET  /jobs/open
+GET  /jobs/{job_id}
+PATCH /jobs/{job_id}
+POST /jobs/{job_id}/open
+POST /jobs/{job_id}/close
+DELETE /jobs/{job_id}
 POST /jobs/{job_id}/match
+POST /students/{student_id}/match-jobs
 GET  /students/mock
 POST /students/cv/parse
 POST /students/cv/parse-upload
 POST /students
 GET  /students
+GET  /students/{student_id}
+DELETE /students/{student_id}
 POST /agents/student-profile/students
 GET  /agents/student-profile/students
 GET  /agents/student-profile/students/mock
@@ -87,9 +97,9 @@ GET  /agents/student-profile/students/{student_id}/summary
 Role rules:
 
 - `enterprise`: JD parsing, job management, matching, and student list access.
-- `student`: CV parsing, saving a student profile, and managing owned profiles.
+- `student`: CV parsing, saving a student profile, managing owned profiles, and matching owned profiles against open jobs.
 - Student profile CRUD is namespaced under `/agents/student-profile`; students can manage their own saved profiles, while enterprises can read profiles for matching/review.
-- `teacher`: YouTube transcript RAG pipeline page for school-owned course data.
+- `teacher`: YouTube transcript RAG pipeline page for school-owned course data. There is no teacher FastAPI router yet; the Streamlit page and CLI call the shared pipeline service directly.
 
 ## 4. Run Streamlit UI
 
@@ -117,7 +127,7 @@ scripts\_pyrun.cmd -m unittest discover -s backend\tests -p "test_*.py"
 For a single video or playlist URL:
 
 ```powershell
-python scripts\mit_rag_pipeline.py run --source-url "https://www.youtube.com/watch?v=0Va2dOLqUfM" --teacher-user-id teacher_001 --category "Biology & Chemistry" --course-title "Chemistry Principles"
+scripts\_pyrun.cmd scripts\mit_rag_pipeline.py run --source-url "https://www.youtube.com/watch?v=0Va2dOLqUfM" --teacher-user-id teacher_001 --category "Biology & Chemistry" --course-title "Chemistry Principles"
 ```
 
 The same command accepts playlist URLs. Outputs are written under `data/youtube_rag` by default:

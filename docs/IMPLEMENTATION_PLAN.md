@@ -2,11 +2,11 @@
 
 ## Approved Scope
 
-Build the enterprise JD management and rule-based matching module for final/demo-day. The module uses local JSON storage, mock student profiles, a configurable LLM provider for JD parsing, schema validation/edit before saving, FastAPI for APIs, and Streamlit for a thin demo UI.
+Build the enterprise JD management and rule-based matching module for final/demo-day. The module uses local JSON storage, mock student profiles, a configurable LLM provider for JD/CV parsing, schema validation/edit before saving, FastAPI workflow routers, and a Streamlit demo UI.
 
 ## Current Status
 
-The original demo scope is implemented. The backend has since been refactored into agent-style routers, the frontend has been split into Streamlit pages behind a role-based demo login, CV parsing creates local student skill profiles for matching, and teachers can run the YouTube transcript/RAG pipeline from Streamlit.
+The original demo scope is implemented. The backend has since been refactored into agent-style routers for JD, CV, and student profile workflows. The frontend has been split into Streamlit pages behind a role-based demo login, CV parsing creates local student skill profiles for matching, and teachers can run the YouTube transcript/RAG pipeline from Streamlit.
 
 ## Completed Milestones
 
@@ -22,7 +22,7 @@ The original demo scope is implemented. The backend has since been refactored in
 10. Refactored backend routes into agent-style modules.
 11. Split frontend into a Home dashboard entrypoint and role-specific workspaces.
 12. Split README introduction from the run guide.
-13. Added CV analysis agent, local student profile storage, Streamlit CV page, and matching against saved CV-derived students.
+13. Added CV analysis workflow, local student profile storage, Streamlit CV page, and matching against saved CV-derived students.
 14. Added teacher dashboard/RAG pipeline flow, removed legacy Streamlit entrypoints, and renamed role-specific pages.
 
 ## Current Structure
@@ -59,10 +59,15 @@ project-root/
   data/
     jobs/
     students/
-    mock/
     youtube_rag/
   docs/
+    ARCHITECTURE.md
+    DECISION_LOG.md
+    IMPLEMENTATION_PLAN.md
+    INTAKE_SUMMARY.md
+    PROJECT_BRIEF.md
     RUNNING.md
+    WORKLOG.md
   eval/
 ```
 

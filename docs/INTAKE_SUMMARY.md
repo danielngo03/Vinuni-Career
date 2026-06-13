@@ -49,7 +49,7 @@ This is final/demo-day material and needs clear APIs, evaluation evidence, demo-
 - Match one job against mock and locally saved student profiles.
 - Return ranked students with `match_score`, `match_status`, matched skills, missing or weak skills, and explanation.
 - Allow configurable matching thresholds.
-- Provide a thin agent-style FastAPI backend and simple Streamlit demo UI.
+- Provide thin FastAPI workflow routers and a simple Streamlit demo UI.
 
 ## Non-Goals
 
@@ -75,7 +75,7 @@ The AI core is structured extraction, not a general chatbot. It receives raw JD 
 
 ## Backend / Frontend Need
 
-- Backend: FastAPI with agent-style routers.
+- Backend: FastAPI with agent-style routers for JD, CV, and student profile workflows.
 - Frontend/demo: Streamlit demo login, role-aware Home dashboard, JD Workspace, CV Analysis, and Teacher RAG Pipeline pages.
 - Keep both thin; the main value is the parser, schema validation, job state management, and matching engine.
 

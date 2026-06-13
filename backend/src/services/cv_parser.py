@@ -113,6 +113,25 @@ def parse_cv_text_with_metadata(raw_text: str, use_llm: bool = True) -> CvParseR
     )
 
 
+def parse_cv_form(form: dict[str, Any], use_llm: bool = True) -> StudentProfile:
+    return parse_cv_form_with_metadata(form, use_llm=use_llm).student
+
+
+def parse_cv_form_with_metadata(form: dict[str, Any], use_llm: bool = True) -> CvParseResult:
+    raw_text = _cv_form_to_text(form)
+    result = parse_cv_text_with_metadata(raw_text, use_llm=use_llm)
+    parsed = result.student
+    metadata = dict(parsed.metadata)
+
+    if form.get("name"):
+        parsed.name = str(form["name"]).strip()
+    for key in ["email", "phone", "major", "year"]:
+        if form.get(key):
+            metadata[key] = str(form[key]).strip()
+    parsed.metadata = metadata
+    return CvParseResult(student=parsed, raw_text=raw_text, metadata=result.metadata)
+
+
 def cv_parse_metadata_to_dict(metadata: CvParseMetadata) -> dict[str, Any]:
     return {
         "parser_mode": metadata.parser_mode,
@@ -122,6 +141,36 @@ def cv_parse_metadata_to_dict(metadata: CvParseMetadata) -> dict[str, Any]:
         "fallback_used": metadata.fallback_used,
         "error": metadata.error,
     }
+
+
+def _cv_form_to_text(form: dict[str, Any]) -> str:
+    lines = []
+    simple_fields = [
+        ("name", "Name"),
+        ("email", "Email"),
+        ("phone", "Phone"),
+        ("major", "Major"),
+        ("year", "Year"),
+        ("skills", "Skills"),
+    ]
+    for key, label in simple_fields:
+        value = str(form.get(key, "")).strip()
+        if value:
+            lines.append(f"{label}: {value}")
+
+    section_fields = [
+        ("education", "Education"),
+        ("projects", "Projects"),
+        ("experience", "Experience"),
+    ]
+    for key, label in section_fields:
+        value = str(form.get(key, "")).strip()
+        if not value:
+            continue
+        lines.append(f"{label}:")
+        lines.extend(line.strip() for line in value.splitlines() if line.strip())
+
+    return "\n".join(lines)
 
 
 def _build_parse_prompt(raw_text: str) -> str:
