@@ -22,11 +22,12 @@ ACCOUNT_ID_LABELS = {
     "teacher": "Teacher ID",
 }
 
-ACCOUNT_ID_DEFAULTS = {
-    "enterprise": "company_demo",
-    "student": "mock-student-ai-001",
-    "teacher": "teacher_demo",
-}
+AUTH_SCOPED_STATE_KEYS = [
+    "draft_job",
+    "draft_student",
+    "parser_metadata",
+    "cv_parser_metadata",
+]
 
 
 def get_current_user() -> dict[str, str] | None:
@@ -66,7 +67,7 @@ def render_login() -> None:
         role = next(key for key, label in ACCOUNT_TYPE_LABELS.items() if label == account_label)
         user_id = st.text_input(
             ACCOUNT_ID_LABELS.get(role, "Account ID"),
-            value=ACCOUNT_ID_DEFAULTS.get(role, ""),
+            value="",
         )
         password = st.text_input("Password", type="password")
         submitted = st.form_submit_button("Login")
@@ -79,6 +80,10 @@ def render_login() -> None:
         if not password.strip():
             st.error("Password is required.")
             return
+        previous_user = get_current_user()
+        if previous_user != {"role": role, "user_id": clean_user_id}:
+            for key in AUTH_SCOPED_STATE_KEYS:
+                st.session_state.pop(key, None)
         st.session_state["auth_user"] = {
             "role": role,
             "user_id": clean_user_id,
@@ -92,6 +97,6 @@ def render_logout_sidebar(user: dict[str, Any]) -> None:
     st.sidebar.text_input("Account type", value=ACCOUNT_TYPE_LABELS.get(role, role), disabled=True)
     st.sidebar.text_input(ACCOUNT_ID_LABELS.get(role, "Account ID"), value=str(user.get("user_id", "")), disabled=True)
     if st.sidebar.button("Logout"):
-        for key in ["auth_user", "draft_job", "draft_student", "parser_metadata", "cv_parser_metadata"]:
+        for key in ["auth_user", *AUTH_SCOPED_STATE_KEYS]:
             st.session_state.pop(key, None)
         st.rerun()

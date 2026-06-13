@@ -31,6 +31,30 @@ class CvAnalysisTests(unittest.TestCase):
         self.assertIn("SQL", result.student.skills)
         self.assertTrue(result.metadata.fallback_used)
 
+    def test_cv_form_parser_builds_student_profile(self):
+        original_get_provider = cv_parser.get_llm_provider
+        cv_parser.get_llm_provider = lambda: (_ for _ in ()).throw(RuntimeError("no provider"))
+        try:
+            result = cv_parser.parse_cv_form_with_metadata(
+                {
+                    "name": "Tran Thi B",
+                    "email": "b@example.com",
+                    "major": "Information Systems",
+                    "year": "Second year",
+                    "skills": "Python, SQL, React",
+                    "projects": "Built a React dashboard with Python API and SQL reports.",
+                }
+            )
+        finally:
+            cv_parser.get_llm_provider = original_get_provider
+
+        self.assertEqual(result.student.name, "Tran Thi B")
+        self.assertEqual(result.student.metadata["email"], "b@example.com")
+        self.assertEqual(result.student.metadata["major"], "Information Systems")
+        self.assertIn("Python", result.student.skills)
+        self.assertIn("React", result.student.skills)
+        self.assertTrue(result.metadata.fallback_used)
+
     def test_student_repository_saves_and_reads_profiles(self):
         with tempfile.TemporaryDirectory() as temp_dir:
             repo = JsonStudentRepository(Path(temp_dir))

@@ -56,7 +56,7 @@ Parse JD and CV content into structured profiles using Gemini 3.1 Flash Lite whe
 - Local JSON storage.
 - Rule-based `all_students_for_job` matching.
 - Mock student profile provider.
-- Agent-style FastAPI backend.
+- Agent-style FastAPI backend for JD, CV, and student profile workflows.
 - Streamlit demo login, Home dashboard, JD Workspace, CV Analysis, and Teacher RAG Pipeline pages.
 
 ## Non-Goals
