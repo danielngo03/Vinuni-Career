@@ -4,6 +4,8 @@ from __future__ import annotations
 
 from typing import Any
 
+from theme import render_page_header
+
 try:
     import streamlit as st
 except ImportError as exc:  # pragma: no cover
@@ -25,6 +27,8 @@ ACCOUNT_ID_LABELS = {
 AUTH_SCOPED_STATE_KEYS = [
     "draft_job",
     "draft_student",
+    "draft_student_source_text",
+    "student_job_review",
     "parser_metadata",
     "cv_parser_metadata",
 ]
@@ -61,16 +65,24 @@ def require_login(*allowed_roles: str) -> dict[str, str]:
 
 
 def render_login() -> None:
-    st.title("Login")
-    with st.form("login-form"):
-        account_label = st.selectbox("Account type", list(ACCOUNT_TYPE_LABELS.values()))
-        role = next(key for key, label in ACCOUNT_TYPE_LABELS.items() if label == account_label)
-        user_id = st.text_input(
-            ACCOUNT_ID_LABELS.get(role, "Account ID"),
-            value="",
-        )
-        password = st.text_input("Password", type="password")
-        submitted = st.form_submit_button("Login")
+    render_page_header(
+        "Corhort Portal",
+        "A focused workspace for student profiles, job matching, and academic content operations.",
+        kicker="Secure demo access",
+        pills=["Student", "Enterprise", "Teacher"],
+    )
+    login_container = st.container(border=True)
+    with login_container:
+        st.markdown("<h1>Sign in</h1><p>Choose a role and continue into the workspace.</p>", unsafe_allow_html=True)
+        with st.form("login-form"):
+            account_label = st.selectbox("Account type", list(ACCOUNT_TYPE_LABELS.values()))
+            role = next(key for key, label in ACCOUNT_TYPE_LABELS.items() if label == account_label)
+            user_id = st.text_input(
+                ACCOUNT_ID_LABELS.get(role, "Account ID"),
+                value="",
+            )
+            password = st.text_input("Password", type="password")
+            submitted = st.form_submit_button("Login")
 
     if submitted:
         clean_user_id = user_id.strip()

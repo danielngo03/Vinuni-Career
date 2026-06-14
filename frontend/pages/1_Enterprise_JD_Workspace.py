@@ -14,6 +14,7 @@ from shared import (
     render_parser_status_sidebar,
     student_provider,
 )
+from theme import apply_enterprise_theme, render_page_header, render_section_header
 
 try:
     import streamlit as st
@@ -32,15 +33,22 @@ from backend.src.services.matching import match_students_for_job
 
 
 st.set_page_config(page_title="Enterprise JD Workspace", layout="wide")
+apply_enterprise_theme()
 user = require_login("enterprise")
 render_parser_status_sidebar()
 company_account_id = get_current_account_id()
 render_home_link()
-st.title("Enterprise JD Workspace")
+render_page_header(
+    "Enterprise JD Workspace",
+    "Turn job descriptions into structured requirements, manage opening status, and run ranked student matching.",
+    kicker="Enterprise console",
+    pills=[f"Company {company_account_id}", "Open/close workflow", "Explainable matching"],
+)
 
 tab_parse, tab_manage, tab_match = st.tabs(["Parse JD", "Manage Jobs", "Run Matching"])
 
 with tab_parse:
+    render_section_header("Parse Job Description", "Start from a form, document upload, or raw JD text.")
     input_mode = st.radio("Input mode", ["Form", "Upload", "Raw text"], horizontal=True)
     company_id = st.text_input("Company ID", value=company_account_id, disabled=True)
 
@@ -86,7 +94,7 @@ with tab_parse:
     if "draft_job" in st.session_state:
         if "parser_metadata" in st.session_state:
             render_parse_metadata_status(st.session_state["parser_metadata"], "JD")
-        st.subheader("Review parsed job")
+        render_section_header("Review Parsed Job", "Confirm requirements before saving the job profile.")
         render_parsed_job_review(st.session_state["draft_job"], key_prefix="draft-job")
         if st.button("Save job"):
             try:
@@ -101,6 +109,7 @@ with tab_parse:
                 st.error(str(exc))
 
 with tab_manage:
+    render_section_header("Manage Jobs", "Update status and keep only active jobs visible to students.")
     jobs = [job for job in job_repo.list() if job.company_id == company_account_id]
     if not jobs:
         st.info("No jobs saved yet.")
@@ -122,6 +131,7 @@ with tab_manage:
                 st.rerun()
 
 with tab_match:
+    render_section_header("Run Matching", "Rank available student profiles against one open job.")
     jobs = [job for job in job_repo.list() if job.company_id == company_account_id]
     open_jobs = [job for job in jobs if job.status == "open"]
     students = student_provider.list_profiles()

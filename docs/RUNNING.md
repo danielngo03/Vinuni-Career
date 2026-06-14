@@ -66,6 +66,7 @@ GET  /
 GET  /agents/jd-matching/health
 GET  /agents/student-profile/health
 GET  /agents/cv-analysis/health
+GET  /agents/teacher-rag/health
 POST /jobs/parse
 POST /jobs/parse-upload
 POST /jobs
@@ -78,6 +79,7 @@ POST /jobs/{job_id}/close
 DELETE /jobs/{job_id}
 POST /jobs/{job_id}/match
 POST /students/{student_id}/match-jobs
+POST /students/{student_id}/jobs/{job_id}/review
 GET  /students/mock
 POST /students/cv/parse
 POST /students/cv/parse-upload
@@ -92,16 +94,40 @@ GET  /agents/student-profile/students/{student_id}
 PATCH /agents/student-profile/students/{student_id}
 DELETE /agents/student-profile/students/{student_id}
 GET  /agents/student-profile/students/{student_id}/summary
+POST /agents/teacher-rag/detect
+POST /agents/teacher-rag/run
 ```
 
 Role rules:
 
 - `enterprise`: JD parsing, job management, matching, and student list access.
-- `student`: CV parsing, saving a student profile, managing owned profiles, and matching owned profiles against open jobs.
+- `student`: CV parsing, saving a student profile, managing owned profiles, matching owned profiles against open jobs, and reviewing an owned CV profile against one open JD.
 - Student profile CRUD is namespaced under `/agents/student-profile`; students can manage their own saved profiles, while enterprises can read profiles for matching/review.
-- `teacher`: YouTube transcript RAG pipeline page for school-owned course data. There is no teacher FastAPI router yet; the Streamlit page and CLI call the shared pipeline service directly.
+- `teacher`: YouTube transcript RAG pipeline API and UI for school-owned course data.
 
-## 4. Run Streamlit UI
+## 4. Run React Web UI
+
+In another PowerShell terminal:
+
+```powershell
+cd frontend-web
+npm install
+npm run dev
+```
+
+Default URL:
+
+```text
+http://127.0.0.1:5173
+```
+
+The React app calls FastAPI at `http://127.0.0.1:8000` by default. To point it elsewhere, create `frontend-web/.env`:
+
+```text
+VITE_API_BASE_URL=http://127.0.0.1:8001
+```
+
+## 5. Run Legacy Streamlit UI
 
 In another PowerShell terminal:
 
@@ -113,16 +139,16 @@ The UI currently has:
 
 - Home page: demo login, role-aware dashboard metrics, and page links.
 - Enterprise JD Workspace page: parse JD, manage jobs, and run matching.
-- Student CV Analysis page: parse CVs, review and save student profiles, and match the student against open jobs.
+- Student CV Analysis page: parse CVs, review and save student profiles, match the student against open jobs, and review a CV profile against a selected open JD.
 - Teacher RAG Pipeline page: build transcript/RAG data from a YouTube video or playlist.
 
-## 5. Run Tests
+## 6. Run Tests
 
 ```powershell
 scripts\_pyrun.cmd -m unittest discover -s backend\tests -p "test_*.py"
 ```
 
-## 6. Build YouTube RAG Transcript Data
+## 7. Build YouTube RAG Transcript Data
 
 For a single video or playlist URL:
 

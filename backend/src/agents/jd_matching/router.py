@@ -17,6 +17,7 @@ from backend.src.models.schemas import (
 from backend.src.services.document_reader import extract_text_from_bytes
 from backend.src.services.jd_parser import parse_jd_form_with_metadata, parse_jd_text_with_metadata, parse_metadata_to_dict
 from backend.src.services.matching import match_students_for_job
+from backend.src.services.cv_reviewer import review_student_against_job
 from backend.src.services.storage import (
     JsonJobRepository,
     JsonStudentRepository,
@@ -34,6 +35,13 @@ saved_job_repo = JsonJobRepository(settings.jobs_dir)
 job_repo = saved_job_repo
 saved_student_repo = JsonStudentRepository(settings.students_dir)
 student_provider = saved_student_repo
+
+
+def _ensure_student_owner(student_data: dict[str, Any], user: DemoUser) -> None:
+    metadata = student_data.get("metadata", {})
+    owner_user_id = metadata.get("owner_user_id") if isinstance(metadata, dict) else None
+    if owner_user_id != user.user_id and student_data.get("student_id") != user.user_id:
+        raise HTTPException(status_code=403, detail="Students can only access their own profile.")
 
 
 if APIRouter is not None:
@@ -222,6 +230,37 @@ if APIRouter is not None:
                 match = match_students_for_job(job, [student], thresholds)[0]
                 results.append({"job": job_to_dict(job), "match": match_result_to_dict(match)})
             return sorted(results, key=lambda item: item["match"]["match_score"], reverse=True)
+        except FileNotFoundError as exc:
+            raise HTTPException(status_code=404, detail=str(exc)) from exc
+        except ValidationError as exc:
+            raise HTTPException(status_code=422, detail=str(exc)) from exc
+
+    @router.post("/students/{student_id}/jobs/{job_id}/review")
+    def review_student_for_job(
+        student_id: str,
+        job_id: str,
+        payload: dict[str, Any] | None = None,
+        user: DemoUser = Depends(require_roles("student")),
+    ) -> dict[str, Any]:
+        try:
+            payload = payload or {}
+            student = saved_student_repo.get(student_id)
+            _ensure_student_owner(student_to_dict(student), user)
+
+            job = job_repo.get(job_id)
+            if job.status != "open":
+                raise HTTPException(status_code=403, detail="Students can only review against open jobs.")
+
+            thresholds = MatchThresholds(
+                strong_match=float(payload.get("strong_match", settings.strong_match_threshold)),
+                partial_match=float(payload.get("partial_match", settings.partial_match_threshold)),
+            )
+            return review_student_against_job(
+                student,
+                job,
+                thresholds=thresholds,
+                use_llm=bool(payload.get("use_llm", True)),
+            )
         except FileNotFoundError as exc:
             raise HTTPException(status_code=404, detail=str(exc)) from exc
         except ValidationError as exc:

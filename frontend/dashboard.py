@@ -6,6 +6,8 @@ from collections import Counter
 
 from demo_auth import get_current_account_id, get_current_role, render_login, render_logout_sidebar
 from shared import job_repo, render_parser_status_sidebar, student_repo
+from theme import render_page_header, render_section_header, render_status_strip, render_workspace_card
+from backend.src.core.config import settings
 
 try:
     import streamlit as st
@@ -24,26 +26,78 @@ def render_dashboard() -> None:
     role = get_current_role()
     account_id = get_current_account_id()
 
-    title = "Teacher Dashboard" if role == "teacher" else "Corhort Matching Demo"
-    st.title(title)
-    st.caption("Use the sidebar navigation to work with the available workspace for this account.")
+    if role == "enterprise":
+        render_page_header(
+            "Enterprise Talent Console",
+            "Create structured job requirements, manage openings, and review ranked student matches.",
+            kicker="Company workspace",
+            pills=[f"Account {account_id}", "JD parsing", "Talent matching"],
+        )
+    elif role == "student":
+        render_page_header(
+            "Student Career Portal",
+            "Understand your current profile, discover matching jobs, and review CV gaps against open roles.",
+            kicker="Student workspace",
+            pills=[f"Account {account_id}", "CV analysis", "Job review"],
+        )
+    else:
+        render_page_header(
+            "Academic Operations Dashboard",
+            "Monitor demo data and prepare transcript assets for retrieval-ready course content.",
+            kicker="Teacher workspace",
+            pills=[f"Account {account_id}", "Course data", "RAG pipeline"],
+        )
 
     if role == "enterprise":
-        col_jobs, col_open = st.columns(2)
         jobs = [job for job in job_repo.list() if job.company_id == account_id]
         open_jobs = [job for job in jobs if job.status == "open"]
-
-        col_jobs.metric("Saved jobs", len(jobs))
-        col_open.metric("Open jobs", len(open_jobs))
+        render_status_strip(
+            [
+                {"label": "Saved jobs", "value": len(jobs), "note": "Owned by this company"},
+                {"label": "Open jobs", "value": len(open_jobs), "note": "Visible to students"},
+                {"label": "Students", "value": len(student_repo.list_profiles()), "note": "Profiles available"},
+                {"label": "Default strong", "value": f"{settings.strong_match_threshold:.0%}", "note": "Configurable"},
+            ]
+        )
     elif role == "teacher":
         render_teacher_stats()
+    else:
+        students = [
+            student
+            for student in student_repo.list_profiles()
+            if student.student_id == account_id or student.metadata.get("owner_user_id") == account_id
+        ]
+        open_jobs = [job for job in job_repo.list() if job.status == "open"]
+        render_status_strip(
+            [
+                {"label": "Saved profiles", "value": len(students), "note": "Owned by student"},
+                {"label": "Open jobs", "value": len(open_jobs), "note": "Ready to match"},
+                {"label": "Mock profiles", "value": len([s for s in student_repo.list_profiles() if s.metadata.get("is_mock")]), "note": "Demo data"},
+                {"label": "Review mode", "value": "AI", "note": "Fallback ready"},
+            ]
+        )
 
-    st.subheader("Pages")
+    render_section_header("Workspace", "Select the operation surface for this account.")
     if role == "enterprise":
+        render_workspace_card(
+            "Enterprise",
+            "JD Workspace",
+            "Parse job descriptions, manage status, and run explainable student matching.",
+        )
         st.page_link("pages/1_Enterprise_JD_Workspace.py", label="Enterprise JD Workspace")
     elif role == "student":
+        render_workspace_card(
+            "Student",
+            "CV Analysis",
+            "Parse a CV, save a profile, match open roles, and review gaps against one JD.",
+        )
         st.page_link("pages/2_Student_CV_Analysis.py", label="Student CV Analysis")
     else:
+        render_workspace_card(
+            "Teacher",
+            "RAG Pipeline",
+            "Build clean transcript data and chunk outputs from YouTube course sources.",
+        )
         st.page_link("pages/3_Teacher_RAG_Pipeline.py", label="Teacher RAG Pipeline")
 
 
@@ -68,7 +122,7 @@ def render_teacher_stats() -> None:
     col_closed.metric("Closed jobs", status_counts.get("closed", 0))
     col_mock.metric("Mock students", len(mock_students))
 
-    st.subheader("Enterprise Job Summary")
+    render_section_header("Enterprise Job Summary", "Live counts grouped by company account.")
     if company_ids:
         rows = []
         for company_id in company_ids:
@@ -87,7 +141,7 @@ def render_teacher_stats() -> None:
     else:
         st.info("No enterprise job data yet.")
 
-    st.subheader("Student Skill Summary")
+    render_section_header("Student Skill Summary", "Most represented skills across saved student profiles.")
     if saved_students:
         st.dataframe(
             [

@@ -1,5 +1,9 @@
 import unittest
 
+from fastapi import FastAPI
+from fastapi.testclient import TestClient
+
+from backend.src.agents.teacher_rag.router import router as teacher_rag_router
 from backend.src.services.youtube_rag_pipeline import build_chunks, detect_source_type
 
 
@@ -36,6 +40,28 @@ class YoutubeRagPipelineTests(unittest.TestCase):
         self.assertEqual(chunks[0]["metadata"]["start_segment_index"], 0)
         self.assertEqual(chunks[0]["metadata"]["end_segment_index"], 1)
         self.assertIn("t=10", chunks[0]["metadata"]["timestamp_url"])
+
+
+class TeacherRagRouterTests(unittest.TestCase):
+    def test_detect_endpoint_requires_teacher_role(self):
+        app = FastAPI()
+        app.include_router(teacher_rag_router)
+        client = TestClient(app)
+
+        ok = client.post(
+            "/agents/teacher-rag/detect",
+            json={"source_url": "https://www.youtube.com/playlist?list=PL123"},
+            headers={"X-Demo-Role": "teacher", "X-Demo-User-Id": "teacher_demo"},
+        )
+        self.assertEqual(ok.status_code, 200)
+        self.assertEqual(ok.json(), {"source_type": "playlist"})
+
+        forbidden = client.post(
+            "/agents/teacher-rag/detect",
+            json={"source_url": "https://www.youtube.com/watch?v=abc123"},
+            headers={"X-Demo-Role": "student", "X-Demo-User-Id": "student_demo"},
+        )
+        self.assertEqual(forbidden.status_code, 403)
 
 
 if __name__ == "__main__":

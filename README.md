@@ -31,6 +31,7 @@ Implemented:
 - Job create, list, update, open, close, delete, and detail views.
 - Rule-based student-job matching with score labels, matched skills, and missing/weak skill explanations.
 - CV parsing into student skill profiles.
+- Student CV review against one open JD, including missing skills, missing keywords, CV rewrite suggestions, and priority actions.
 - Student profile create, list, read, update, delete, and summary routes.
 - Student-side match run against all open job details.
 - Enterprise-side matching against student profiles stored in `data/students`, including profiles marked as mock.
@@ -54,6 +55,7 @@ Architecture and data flow are documented in:
 High-level components:
 
 - `frontend/`: Streamlit entrypoint, dashboard renderer, shared UI helpers, demo auth, and role-specific pages.
+- `frontend-web/`: production-style React/Vite frontend that talks to the FastAPI API.
 - `backend/src/api/`: FastAPI app composition.
 - `backend/src/agents/`: workflow routers for JD matching, CV analysis, and student profiles.
 - `backend/src/services/`: parsing, storage, document reading, matching, and YouTube RAG pipeline logic.
@@ -130,7 +132,21 @@ FastAPI docs:
 http://127.0.0.1:8000/docs
 ```
 
-Start Streamlit in another terminal:
+Start the production-style React frontend in another terminal:
+
+```powershell
+cd frontend-web
+npm install
+npm run dev
+```
+
+Default React URL:
+
+```text
+http://127.0.0.1:5173
+```
+
+The Streamlit demo remains available as a legacy local UI:
 
 ```powershell
 scripts\_pyrun.cmd -m streamlit run frontend\Home.py
@@ -168,6 +184,7 @@ GET  /
 GET  /agents/jd-matching/health
 GET  /agents/cv-analysis/health
 GET  /agents/student-profile/health
+GET  /agents/teacher-rag/health
 
 POST /jobs/parse
 POST /jobs/parse-upload
@@ -180,6 +197,7 @@ POST /jobs/{job_id}/open
 POST /jobs/{job_id}/close
 POST /jobs/{job_id}/match
 POST /students/{student_id}/match-jobs
+POST /students/{student_id}/jobs/{job_id}/review
 
 POST /students/cv/parse
 POST /students/cv/parse-upload
@@ -190,6 +208,9 @@ DELETE /students/{student_id}
 
 GET  /agents/student-profile/students/mock
 GET  /agents/student-profile/students/{student_id}/summary
+
+POST /agents/teacher-rag/detect
+POST /agents/teacher-rag/run
 ```
 
 ## Sample Queries
@@ -233,6 +254,21 @@ $headers = @{
 }
 
 Invoke-RestMethod -Uri "http://127.0.0.1:8000/students/mock-student-ai-001/match-jobs" -Method Post -Headers $headers
+```
+
+Review a saved student profile against one open job:
+
+```powershell
+$headers = @{
+  "X-Demo-Role" = "student"
+  "X-Demo-User-Id" = "mock-student-frontend-001"
+}
+
+$body = @{
+  use_llm = $true
+} | ConvertTo-Json
+
+Invoke-RestMethod -Uri "http://127.0.0.1:8000/students/mock-student-frontend-001/jobs/mock-frontend-intern-001/review" -Method Post -Headers $headers -Body $body -ContentType "application/json"
 ```
 
 ## Teacher RAG Pipeline

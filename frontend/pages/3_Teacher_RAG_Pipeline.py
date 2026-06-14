@@ -6,6 +6,7 @@ from pathlib import Path
 
 from demo_auth import get_current_account_id, require_login
 from shared import render_home_link, render_parser_status_sidebar
+from theme import apply_enterprise_theme, render_page_header, render_section_header
 
 try:
     import streamlit as st
@@ -16,13 +17,20 @@ from backend.src.services.youtube_rag_pipeline import DEFAULT_OUTPUT_DIR, Pipeli
 
 
 st.set_page_config(page_title="Teacher RAG Pipeline", layout="wide")
+apply_enterprise_theme()
 require_login("teacher")
 render_parser_status_sidebar()
 teacher_account_id = get_current_account_id()
 
 render_home_link("Back to Teacher Dashboard")
-st.title("Teacher RAG Pipeline")
+render_page_header(
+    "Teacher RAG Pipeline",
+    "Prepare transcript data, cleaned text, chunks, and run reports from YouTube course sources.",
+    kicker="Academic operations",
+    pills=[f"Teacher {teacher_account_id}", "Video or playlist", "Chunk builder"],
+)
 
+render_section_header("Source Configuration", "Submit a course video or playlist and tune transcript output settings.")
 with st.form("youtube-rag-pipeline-form"):
     source_url = st.text_input("YouTube video or playlist URL")
     category = st.text_input("Category", value="Uncategorized")
@@ -72,7 +80,7 @@ if submitted:
             col_saved.metric("Videos saved", report.get("videos_saved", 0))
             col_failed.metric("Videos failed", report.get("videos_failed", 0))
             col_chunks.metric("Chunks created", report.get("chunks_created", 0))
-            st.subheader("Outputs")
+            render_section_header("Outputs", "Generated artifacts for the latest pipeline run.")
             st.dataframe(
                 [
                     {"name": "chunks", "path": report.get("chunks_output", "")},
@@ -81,7 +89,7 @@ if submitted:
                 hide_index=True,
                 width="stretch",
             )
-            st.subheader("Videos")
+            render_section_header("Videos", "Per-video processing status.")
             st.dataframe(report.get("videos", []), hide_index=True, width="stretch")
         except Exception as exc:
             st.error(str(exc))

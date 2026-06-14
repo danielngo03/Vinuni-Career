@@ -2,52 +2,41 @@
   "student_id": "mock-student-frontend-001",
   "name": "Chi Le",
   "skills": {
-    "JavaScript": {
-      "score": 9,
-      "confidence": 0.9,
+    "Python": {
+      "score": 7.0,
+      "confidence": 0.75,
       "evidence": [
-        "Built interactive dashboards with JavaScript",
-        "Completed frontend internship project"
+        "Completed a Python API coursework project."
+      ]
+    },
+    "JavaScript": {
+      "score": 7.0,
+      "confidence": 0.75,
+      "evidence": [
+        "Built interactive dashboards with JavaScript and React."
       ]
     },
     "React": {
-      "score": 8,
-      "confidence": 0.86,
+      "score": 7.0,
+      "confidence": 0.75,
       "evidence": [
-        "Developed reusable React components",
-        "Built a React capstone app"
-      ]
-    },
-    "CSS": {
-      "score": 7,
-      "confidence": 0.82,
-      "evidence": [
-        "Implemented responsive layouts",
-        "Used design-system tokens in UI coursework"
-      ]
-    },
-    "Communication": {
-      "score": 6,
-      "confidence": 0.72,
-      "evidence": [
-        "Presented sprint demo updates"
-      ]
-    },
-    "Python": {
-      "score": 4,
-      "confidence": 0.58,
-      "evidence": [
-        "Completed introductory programming course"
+        "Built interactive dashboards with JavaScript and React."
       ]
     }
   },
   "metadata": {
-    "is_mock": true,
-    "mock_type": "student_profile",
-    "mock_source": "local_demo_seed",
-    "owner_user_id": "mock-student-frontend-001",
+    "email": null,
+    "phone": null,
     "major": "Computer Science",
-    "year": 3,
-    "demo_note": "Strong match for Frontend Engineer Intern."
+    "year": null,
+    "education": [],
+    "projects": [
+      "Built interactive dashboards with JavaScript and React.",
+      "Completed a Python API coursework project."
+    ],
+    "experience": [],
+    "parser_note": "Deterministic fallback parser; review JSON before saving.",
+    "owner_user_id": "mock-student-frontend-001",
+    "cv_text_excerpt": "Chi Le\nMajor: Computer Science\nProjects:\nBuilt interactive dashboards with JavaScript and React.\nCompleted a Python API coursework project."
   }
 }
