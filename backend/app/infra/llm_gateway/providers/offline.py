@@ -1,0 +1,56 @@
+from __future__ import annotations
+
+import hashlib
+import math
+import re
+from collections import Counter
+
+from app.infra.llm_gateway.schemas import ChatRequest, ChatResponse, EmbeddingResponse
+
+
+class OfflineProvider:
+    name = "offline"
+
+    def __init__(self, *, dimensions: int = 32) -> None:
+        self.dimensions = dimensions
+
+    def chat(self, request: ChatRequest) -> ChatResponse:
+        last_user = next(
+            (message.content for message in reversed(request.messages) if message.role == "user"),
+            "",
+        )
+        content = (
+            "Offline fallback response. Configure OPENAI_API_KEY, GEMINI_API_KEY, or "
+            "LOCAL_BASE_URL to enable a real model. Input summary: "
+            f"{last_user[:240]}"
+        )
+        input_text = "\n".join(message.content for message in request.messages)
+        return ChatResponse(
+            content=content,
+            provider=self.name,
+            model=request.model or "offline-deterministic",
+            input_tokens=_estimate_tokens(input_text),
+            output_tokens=_estimate_tokens(content),
+        )
+
+    def embed(self, text: str, *, model: str | None = None) -> EmbeddingResponse:
+        return EmbeddingResponse(
+            embedding=_hash_embedding(text, self.dimensions),
+            provider=self.name,
+            model=model or "offline-hash-embedding",
+            input_tokens=_estimate_tokens(text),
+        )
+
+
+def _estimate_tokens(text: str) -> int:
+    return max(1, math.ceil(len(text) / 4))
+
+
+def _hash_embedding(text: str, dimensions: int) -> list[float]:
+    buckets = [0.0] * dimensions
+    words = re.findall(r"[a-zA-Z0-9+#.]+", text.lower())
+    for word, count in Counter(words).items():
+        digest = hashlib.sha256(word.encode("utf-8")).digest()
+        buckets[digest[0] % dimensions] += 1.0 + math.log(count)
+    norm = math.sqrt(sum(value * value for value in buckets)) or 1.0
+    return [round(value / norm, 6) for value in buckets]
