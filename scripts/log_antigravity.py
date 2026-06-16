@@ -119,9 +119,25 @@ def _unquote_arg(val):
     return val
 
 
-def _conv_cwds(transcript: Path) -> set[str]:
-    """All Cwd values that appear in tool calls inside this transcript."""
-    cwds: set[str] = set()
+def _has_repo_path(val, repo_root_n: str) -> bool:
+    """Recursively search arguments to see if any point to paths inside the repo."""
+    if isinstance(val, str):
+        n = _normalize(_unquote_arg(val))
+        if n == repo_root_n or n.startswith(repo_root_n + "\\"):
+            return True
+    elif isinstance(val, list):
+        for item in val:
+            if _has_repo_path(item, repo_root_n):
+                return True
+    elif isinstance(val, dict):
+        for k, v in val.items():
+            if _has_repo_path(v, repo_root_n):
+                return True
+    return False
+
+
+def _conv_touches_repo(transcript: Path, repo_root_n: str) -> bool:
+    """True if any tool call in this transcript touched a file/dir inside the repo."""
     try:
         with open(transcript, encoding="utf-8") as f:
             for line in f:
@@ -134,28 +150,10 @@ def _conv_cwds(transcript: Path) -> set[str]:
                     continue
                 for tc in (entry.get("tool_calls") or []):
                     args = tc.get("args") or {}
-                    cwd = args.get("Cwd") or args.get("cwd")
-                    cwd = _unquote_arg(cwd)
-                    if isinstance(cwd, str):
-                        n = _normalize(cwd)
-                        if n:
-                            cwds.add(n)
+                    if _has_repo_path(args, repo_root_n):
+                        return True
     except OSError:
         pass
-    return cwds
-
-
-def _conv_matches_repo(cwds: set[str], repo_root_n: str) -> bool:
-    """True if any cwd is equal to, ancestor of, or descendant of the repo."""
-    if not repo_root_n or not cwds:
-        return False
-    for cwd in cwds:
-        if cwd == repo_root_n:
-            return True
-        if cwd.startswith(repo_root_n + "\\"):
-            return True
-        if repo_root_n.startswith(cwd + "\\"):
-            return True
     return False
 
 
@@ -217,9 +215,8 @@ def iter_user_inputs(brain_dirs: list[Path], cutoff: datetime | None,
             if not transcript.exists() or transcript.stat().st_size == 0:
                 continue
 
-            cwds = _conv_cwds(transcript)
             # If we have a repo root, skip convs that never touched it.
-            if repo_root_n and not _conv_matches_repo(cwds, repo_root_n):
+            if repo_root_n and not _conv_touches_repo(transcript, repo_root_n):
                 continue
 
             with open(transcript, encoding="utf-8") as f:

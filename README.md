@@ -1,295 +1,126 @@
-# Corhort: Student-Job Matching Demo
+# Starter Code Template — Cohort 2 (AI20K Build)
 
-Corhort is a local MVP for AI-assisted student, enterprise, and teacher workflows.
+Đây là template khởi tạo trống (Starter Code) dành cho các kho lưu trữ (repository) của các nhóm thuộc **Cohort 2 - AI20K Build**. Dự án đã được cấu hình sẵn các hook để tự động ghi lại lịch sử sử dụng AI (AI usage logging hooks) cho các công cụ phổ biến như: Claude Code, Cursor, Codex, Gemini CLI, Antigravity (IDE), và GitHub Copilot.
 
-The app supports:
+## Cấu trúc thư mục
 
-- Enterprises creating structured job descriptions and running student-job matching.
-- Students parsing CVs into skill profiles and matching themselves against open jobs.
-- Teachers viewing demo statistics and building RAG-ready transcript data from YouTube videos or playlists.
-
-This repository is designed for a local demo, not production deployment.
-
-## MVP User Flow
-
-Recommended 3-minute demo flow:
-
-1. Log in as `Enterprise / Company`.
-2. Open `JD Workspace`, parse or enter a job description, save the job, mark it open, and run matching.
-3. Log in as `Student`.
-4. Open `CV Analysis`, parse a CV, save the student profile, run job matching, and inspect matched job details.
-5. Log in as `Teacher / School`.
-6. Open the teacher dashboard to view student/company statistics, then open `Teacher RAG Pipeline` to submit a YouTube video or playlist URL.
-
-## Features
-
-Implemented:
-
-- Demo login with account types: `enterprise`, `student`, and `teacher`.
-- JD parsing from text, form input, or uploaded documents.
-- LLM parsing through Gemini when configured, with deterministic fallback parsing for local demos.
-- Job create, list, update, open, close, delete, and detail views.
-- Rule-based student-job matching with score labels, matched skills, and missing/weak skill explanations.
-- CV parsing into student skill profiles.
-- Student profile create, list, read, update, delete, and summary routes.
-- Student-side match run against all open job details.
-- Enterprise-side matching against student profiles stored in `data/students`, including profiles marked as mock.
-- Teacher dashboard statistics for student and enterprise demo data.
-- Teacher YouTube transcript pipeline for video or playlist sources.
-- Local JSON storage for jobs, students, and RAG outputs.
-
-Not implemented for production:
-
-- Real account/session authentication.
-- Production database.
-- Multi-user concurrency controls.
-- Deployment configuration.
-
-## Architecture
-
-Architecture and data flow are documented in:
-
-- [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)
-
-High-level components:
-
-- `frontend/`: Streamlit entrypoint, dashboard renderer, shared UI helpers, demo auth, and role-specific pages.
-- `backend/src/api/`: FastAPI app composition.
-- `backend/src/agents/`: workflow routers for JD matching, CV analysis, and student profiles.
-- `backend/src/services/`: parsing, storage, document reading, matching, and YouTube RAG pipeline logic.
-- `data/jobs/`: saved job descriptions, including seed records marked with `metadata.is_mock = true`.
-- `data/students/`: saved CV-derived student profiles, including seed records marked with `metadata.is_mock = true`.
-- `data/youtube_rag/`: raw transcripts, cleaned transcripts, chunks, and reports.
-
-## Project Structure
-
-```text
-backend/
-  src/
-    api/        FastAPI app composition
-    agents/     agent-style API routers
-    core/       settings, paths, and demo auth helpers
-    models/     shared schemas and validators
-    provider/   shared LLM provider adapters
-    services/   parser, storage, document reader, matching, RAG pipeline
-  tests/        backend tests
-data/
-  jobs/         local saved jobs and mock seed jobs
-  students/     local saved student profiles and mock seed students
-  youtube_rag/  teacher transcript pipeline outputs
-docs/           architecture, project notes, and run guide
-eval/           evaluation plan, sample JDs, and evidence report
-frontend/       Streamlit demo UI
-  Home.py       Streamlit entrypoint
-  dashboard.py  role-aware dashboard renderer
-  demo_auth.py  demo login helpers
-  shared.py     shared UI and repository helpers
-  pages/        role-specific workspaces
-scripts/        local runner and RAG pipeline scripts
+```
+├── scripts/
+│   ├── _pyrun.sh             # Trình chạy Python đa nền tảng (bash)
+│   ├── _pyrun.cmd            # Trình chạy Python đa nền tảng (Windows cmd)
+│   ├── setup_hooks.sh        # Script cài đặt git hook một lần (POSIX / macOS)
+│   ├── setup_hooks.ps1       # Script cài đặt git hook một lần (Windows PowerShell)
+│   ├── log_hook.py           # Bộ xử lý ghi log cho các công cụ AI (Claude / Cursor / Codex / Gemini / Copilot)
+│   ├── log_antigravity.py    # Bộ tự động quét log từ Antigravity
+│   ├── log_manual.py         # Bộ ghi log thủ công cho ChatGPT hoặc các công cụ nền web
+│   └── submit_log.py         # Tự động gửi log lên hệ thống grading khi thực hiện git push
+├── .agents/                  # Các quy tắc (rules) và luồng công việc (workflows) của Antigravity
+├── .claude/ .codex/ .cursor/ .gemini/ .github/hooks/   # Các file cấu hình hook cho từng công cụ AI
+├── .env.example              # File cấu hình mẫu môi trường
+├── JOURNAL.md                # Nhật ký hàng tuần — chặng đường sản phẩm và bài học kinh nghiệm
+├── WORKLOG.md                # Nhật ký công việc, quyết định kỹ thuật, phân chia nhiệm vụ
+└── README.md                 # Tài liệu hướng dẫn dự án (file này)
 ```
 
-## Setup
+## Bắt đầu cài đặt (Getting Started)
 
-Run commands from the project root:
+### 1. Clone dự án và cài đặt pre-push hook
 
+**Dành cho Linux / macOS / Git Bash:**
+```bash
+git clone <repo-url>
+cd <repo>
+bash scripts/setup_hooks.sh
+```
+
+**Dành cho Windows PowerShell:**
 ```powershell
-cd K:\Corhort\C2-App-037
+git clone <repo-url>
+cd <repo>
+powershell -ExecutionPolicy Bypass -File scripts\setup_hooks.ps1
 ```
 
-Install dependencies:
+### 2. Cấu hình môi trường (.env)
 
-```powershell
-scripts\_pyrun.cmd -m pip install -r requirements.txt
+Tạo file `.env` từ file mẫu:
+```bash
+cp .env.example .env       # macOS / Linux / Git Bash
+# copy .env.example .env   # Windows cmd
 ```
 
-Create or update `.env` in the project root.
+Sau đó, mở file `.env` và điền đầy đủ thông tin `AI_LOG_SERVER` và `AI_LOG_API_KEY` (được cung cấp bởi giảng viên khóa học).
 
-For local fallback mode, no API key is required. Optional configuration:
+### 3. Phát triển dự án của bạn
 
-```text
-GEMINI_API_KEY=your_gemini_key
-GEMINI_MODEL=gemini-3.1-flash-lite
-STRONG_MATCH_THRESHOLD=0.8
-PARTIAL_MATCH_THRESHOLD=0.6
-DEMO_AUTH_ENABLED=true
+Đây là một template trống để bắt đầu dự án — bạn có thể chọn bất kỳ ngôn ngữ hay framework nào bạn muốn. Hệ thống ghi log (hooks) không phụ thuộc vào ngôn ngữ lập trình của dự án; hệ thống chỉ yêu cầu có sẵn **Python 3** trên máy của bạn (chấp nhận bất kỳ lệnh nào như `python3`, `python`, hoặc `py`).
+
+---
+
+## Nhật ký hàng tuần (Weekly Journal)
+
+Cập nhật **[JOURNAL.md](./JOURNAL.md)** vào cuối mỗi tuần học:
+
+- Các tính năng đã phát triển thành công.
+- Các công cụ AI đã sử dụng và cách chúng hỗ trợ bạn.
+- Vấn đề khó khăn nhất trong tuần và cách bạn giải quyết nó.
+- Những điểm bạn muốn làm khác đi nếu được làm lại.
+- Kế hoạch phát triển cho tuần tiếp theo.
+
+> **QUAN TRỌNG:** File `JOURNAL.md` phải được cập nhật trước mỗi lần tạo Pull Request (PR) — đây là minh chứng học tập và tiêu chí đánh giá cho khóa học của bạn.
+
+---
+
+## Nhật ký công việc (Worklog)
+
+Cập nhật **[WORKLOG.md](./WORKLOG.md)** bất cứ khi nào nhóm của bạn đưa ra quyết định kỹ thuật hoặc thay đổi hướng đi:
+
+- **Quyết định kỹ thuật**: Tại sao lại chọn cách tiếp cận này thay vì các lựa chọn thay thế khác?
+- **Phân chia nhiệm vụ**: Ai làm gì, thời hạn hoàn thành khi nào.
+- **Thảo luận ý tưởng (Brainstorming)**: Các giải pháp đã cân nhắc, ưu điểm / nhược điểm, kết luận cuối cùng.
+- **Lỗi quan trọng (Bugs)**: Nguyên nhân gốc rễ và cách khắc phục.
+
+---
+
+## Cơ chế ghi nhận log sử dụng AI (AI Logging)
+
+Các prompt và lượt gọi công cụ của bạn sẽ **tự động được ghi nhận và gửi đi** khi bạn sử dụng bất kỳ công cụ AI nào được hỗ trợ (Claude Code, Cursor, Codex, Gemini, Antigravity, Copilot). Bạn không cần thực hiện thêm bước thủ công nào sau khi đã chạy lệnh `setup_hooks`.
+
+### Ghi nhận log thủ công (Dành cho ChatGPT hoặc các công cụ Web khác)
+
+Nếu bạn sử dụng ChatGPT hoặc các công cụ AI khác trên giao diện web, hãy chạy lệnh dưới đây để ghi nhận lịch sử thủ công:
+
+**Dành cho macOS / Linux (POSIX):**
+```bash
+bash scripts/_pyrun.sh scripts/log_manual.py --tool chatgpt --prompt "<mô tả chi tiết những gì bạn đã làm>"
 ```
 
-If `GEMINI_API_KEY` is missing or the provider call fails, JD and CV parsing use deterministic fallback behavior where available.
-
-## Run Locally
-
-Start FastAPI:
-
-```powershell
-scripts\_pyrun.cmd -m uvicorn backend.src.api.main:app --reload
+**Dành cho Windows:**
+```cmd
+scripts\_pyrun.cmd scripts\log_manual.py --tool chatgpt --prompt "<mô tả chi tiết những gì bạn đã làm>"
 ```
 
-FastAPI docs:
+### Yêu cầu về môi trường chạy Python
 
-```text
-http://127.0.0.1:8000/docs
-```
+Hệ thống hooks yêu cầu cài đặt sẵn ít nhất một trong các lệnh: `python3`, `python`, hoặc `py` trong biến môi trường PATH của hệ điều hành.
 
-Start Streamlit in another terminal:
+| Hệ điều hành | Hướng dẫn cài đặt khuyến nghị |
+|---|---|
+| **Windows** | Tải Python 3 từ [python.org](https://www.python.org/downloads/) — khi cài đặt tích hợp sẵn cả `python` và launcher `py` vào PATH. |
+| **Ubuntu / Debian** | Chạy `sudo apt install python3` (hầu hết đã được cài sẵn). |
+| **macOS** | Chạy `brew install python3` hoặc sử dụng Python 3 đi kèm của hệ thống. |
 
-```powershell
-scripts\_pyrun.cmd -m streamlit run frontend\Home.py
-```
+Trình bao bọc `scripts/_pyrun.*` sẽ tự động phát hiện phiên bản Python đang có trên hệ thống của bạn — bạn không cần thiết lập cấu hình alias hoặc chỉnh sửa đường dẫn thủ công.
 
-Default Streamlit URL:
+---
 
-```text
-http://127.0.0.1:8501
-```
+## Cải tiến hệ thống AI Log trong repository này
 
-## Demo Accounts
+Để hỗ trợ quy trình làm việc thuận tiện hơn cho học sinh trong các môi trường Workspace phức tạp, repository này đã được cập nhật thêm các tính năng:
 
-The Streamlit UI lets the user choose an account type during demo login.
+1. **Bộ lọc thông minh theo đường dẫn (Path-based filtering) cho Antigravity**:
+   - Khác với phiên bản gốc chỉ dựa vào thư mục chạy lệnh (`Cwd`) dễ gây ra lỗi lẫn lộn hoặc kéo theo các prompt của các bài Lab khác khi bạn mở một Workspace cha chung (ví dụ thư mục `Vinuni/` chứa nhiều lab).
+   - Hệ thống mới sẽ kiểm tra đệ quy tất cả các đường dẫn file được thao tác trong cuộc hội thoại. Chỉ khi cuộc hội thoại thực sự có tương tác với các file/thư mục nằm trong `Build/C2-App-037`, hệ thống mới ghi log và gửi đi.
 
-API requests use demo headers:
-
-```text
-X-Demo-Role: enterprise | student | teacher
-X-Demo-User-Id: company_demo | mock-student-ai-001 | teacher_demo
-```
-
-Role behavior:
-
-- `enterprise`: manage JDs, open/close jobs, run matching, and review student profiles.
-- `student`: parse CVs, save owned profile data, and run matching against open jobs.
-- `teacher`: view teacher dashboard statistics and build YouTube transcript/RAG data.
-
-This is only a demo authorization boundary. Replace it with real authentication before production use.
-
-## Useful API Endpoints
-
-```text
-GET  /
-GET  /agents/jd-matching/health
-GET  /agents/cv-analysis/health
-GET  /agents/student-profile/health
-
-POST /jobs/parse
-POST /jobs/parse-upload
-POST /jobs
-GET  /jobs
-GET  /jobs/open
-GET  /jobs/{job_id}
-PATCH /jobs/{job_id}
-POST /jobs/{job_id}/open
-POST /jobs/{job_id}/close
-POST /jobs/{job_id}/match
-POST /students/{student_id}/match-jobs
-
-POST /students/cv/parse
-POST /students/cv/parse-upload
-POST /students
-GET  /students
-GET  /students/{student_id}
-DELETE /students/{student_id}
-
-GET  /agents/student-profile/students/mock
-GET  /agents/student-profile/students/{student_id}/summary
-```
-
-## Sample Queries
-
-Parse a JD:
-
-```powershell
-$headers = @{
-  "X-Demo-Role" = "enterprise"
-  "X-Demo-User-Id" = "company_demo"
-}
-
-$body = @{
-  text = "AI Engineer Intern. Required skills: Python 8, machine learning 7, SQL 5. Nice to have: LLM 6."
-} | ConvertTo-Json
-
-Invoke-RestMethod -Uri "http://127.0.0.1:8000/jobs/parse" -Method Post -Headers $headers -Body $body -ContentType "application/json"
-```
-
-Parse a CV:
-
-```powershell
-$headers = @{
-  "X-Demo-Role" = "student"
-  "X-Demo-User-Id" = "mock-student-ai-001"
-}
-
-$body = @{
-  text = "Student has experience with Python, SQL, machine learning projects, dashboards, and teamwork."
-} | ConvertTo-Json
-
-Invoke-RestMethod -Uri "http://127.0.0.1:8000/students/cv/parse" -Method Post -Headers $headers -Body $body -ContentType "application/json"
-```
-
-Run student-side matching after saving a student profile:
-
-```powershell
-$headers = @{
-  "X-Demo-Role" = "student"
-  "X-Demo-User-Id" = "mock-student-ai-001"
-}
-
-Invoke-RestMethod -Uri "http://127.0.0.1:8000/students/mock-student-ai-001/match-jobs" -Method Post -Headers $headers
-```
-
-## Teacher RAG Pipeline
-
-Teachers can build RAG-ready transcript data from either:
-
-- A single YouTube video URL.
-- A YouTube playlist URL.
-
-Use the Streamlit `Teacher RAG Pipeline` page after logging in as `Teacher / School`, or run the CLI:
-
-```powershell
-python scripts\mit_rag_pipeline.py run --source-url "https://www.youtube.com/watch?v=0Va2dOLqUfM" --teacher-user-id teacher_001 --category "Biology & Chemistry" --course-title "Chemistry Principles"
-```
-
-Outputs are written under `data/youtube_rag`:
-
-```text
-raw/<source>/videos/<video_id>.json
-cleaned/<source>/videos/<video_id>.json
-chunks/<source>.jsonl
-reports/<run_id>.json
-```
-
-## Evaluation Evidence
-
-Evaluation docs:
-
-- [eval/EVALUATION_PLAN.md](eval/EVALUATION_PLAN.md)
-- [eval/EVALUATION_REPORT.md](eval/EVALUATION_REPORT.md)
-
-For manual evidence, prepare at least:
-
-- 2 JDs.
-- 3 CVs.
-- 1 YouTube video or playlist URL if teacher RAG evidence is included.
-
-Recommended manual cases:
-
-1. Enterprise parses, saves, opens, and views a JD.
-2. Student parses and saves a CV profile.
-3. Student runs match against open JDs and views job detail output.
-4. Enterprise runs matching for one JD and verifies ranked student results.
-5. Teacher views dashboard statistics and runs or previews the RAG pipeline flow.
-
-Each manual case should record the input, steps, actual output, and pass/fail result.
-
-## Tests
-
-Run backend tests:
-
-```powershell
-scripts\_pyrun.cmd -m unittest discover -s backend\tests -p "test_*.py"
-```
-
-## Additional Documentation
-
-- Run guide: [docs/RUNNING.md](docs/RUNNING.md)
-- Architecture notes: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)
-- Project brief: [docs/PROJECT_BRIEF.md](docs/PROJECT_BRIEF.md)
+2. **Khả năng chạy độc lập không phụ thuộc thư viện ngoài (`python-dotenv`)**:
+   - Script gửi log (`submit_log.py`) đã được bổ sung bộ phân tích thủ công file `.env` dự phòng.
+   - Nhờ vậy, ngay cả khi máy bạn chưa cài đặt thư viện `python-dotenv` (một lỗi phổ biến gây bỏ sót log mà không cảnh báo rõ), hệ thống vẫn tự động đọc được API Key từ `.env` và gửi log lên server chấm điểm thành công.

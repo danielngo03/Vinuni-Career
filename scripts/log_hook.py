@@ -13,20 +13,7 @@ from pathlib import Path
 VN_TZ = timezone(timedelta(hours=7))
 
 
-def repo_root_from_cwd() -> Path | None:
-    """Find the repo root without invoking git, so safe.directory can be set."""
-    cwd = Path.cwd().resolve()
-    for path in (cwd, *cwd.parents):
-        if (path / ".git").exists():
-            return path
-    return None
-
-
 def git(cmd):
-    repo_root = repo_root_from_cwd()
-    if repo_root and cmd.startswith("git "):
-        safe_dir = str(repo_root).replace("\\", "/")
-        cmd = f'git -c safe.directory="{safe_dir}" {cmd[4:]}'
     try:
         return subprocess.check_output(cmd, shell=True, text=True, stderr=subprocess.DEVNULL).strip()
     except Exception:
@@ -193,11 +180,8 @@ def main():
     with open(log_file, "a", encoding="utf-8") as f:
         f.write(json.dumps(entry, ensure_ascii=False) + "\n")
 
-    # Some Codex hook events treat stdout as an optional control response with
-    # an event-specific schema. This logger is passive, so Codex should see no
-    # control output. Other tools, such as Gemini, still expect JSON on stdout.
-    if tool != "codex":
-        print(json.dumps({"status": "logged"}))
+    # Output valid JSON (required by some tools like Gemini)
+    print(json.dumps({"status": "logged"}))
 
 
 if __name__ == "__main__":
