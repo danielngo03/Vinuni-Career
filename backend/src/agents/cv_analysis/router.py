@@ -47,6 +47,7 @@ if APIRouter is not None:
             result = parse_cv_text_with_metadata(str(payload.get("raw_text", "")))
             response = student_to_dict(result.student)
             response["_parser"] = cv_parse_metadata_to_dict(result.metadata)
+            response["_raw_text"] = result.raw_text
             return response
         except Exception as exc:
             raise HTTPException(status_code=400, detail=str(exc)) from exc
@@ -62,6 +63,7 @@ if APIRouter is not None:
             result = parse_cv_text_with_metadata(raw_text)
             response = student_to_dict(result.student)
             response["_parser"] = cv_parse_metadata_to_dict(result.metadata)
+            response["_raw_text"] = raw_text
             return response
         except Exception as exc:
             raise HTTPException(status_code=400, detail=str(exc)) from exc

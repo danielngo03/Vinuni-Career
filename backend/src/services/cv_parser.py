@@ -9,7 +9,7 @@ from dataclasses import dataclass
 from typing import Any
 
 from backend.src.core.config import settings
-from backend.src.models.schemas import StudentProfile, student_from_dict
+from backend.src.models.schemas import StudentProfile, normalize_skill_name, student_from_dict
 from backend.src.provider import LLMProvider, get_llm_provider
 
 
@@ -30,7 +30,40 @@ CV_SKILLS = [
     "Excel",
     "Git",
     "Data Analysis",
+    "TypeScript",
+    "C++",
+    "C#",
 ]
+
+SELF_RATING_LABELS = {
+    "beginner": 3,
+    "basic": 4,
+    "familiar": 5,
+    "intermediate": 6,
+    "proficient": 7,
+    "advanced": 8,
+    "expert": 9,
+    "co ban": 4,
+    "cơ bản": 4,
+    "trung cap": 6,
+    "trung cấp": 6,
+    "thanh thao": 8,
+    "thành thạo": 8,
+    "nang cao": 8,
+    "nâng cao": 8,
+    "chuyen gia": 9,
+    "chuyên gia": 9,
+}
+
+SELF_RATING_BLOCKED_CANDIDATE_WORDS = {
+    "gpa",
+    "grade",
+    "graduated",
+    "ranking",
+    "revenue",
+    "score",
+    "top",
+}
 
 
 @dataclass(frozen=True)
@@ -183,7 +216,14 @@ Return only JSON for this student CV. Required schema:
     "Skill Name": {{
       "score": number from 0 to 10,
       "confidence": number from 0 to 1,
-      "evidence": ["short evidence phrase from the CV"]
+      "evidence": ["short evidence phrase from the CV"],
+      "self_rating": {{
+        "value": number if the CV shows a self-rating,
+        "scale": number such as 5, 10, or 100,
+        "normalized_score": number from 0 to 10,
+        "source": "stars/percent/bar/level/slash",
+        "raw": "original short rating text"
+      }}
     }}
   }},
   "metadata": {{
@@ -198,6 +238,11 @@ Return only JSON for this student CV. Required schema:
 }}
 
 Score skills conservatively. Use evidence from projects, coursework, work experience, or explicit skills.
+If the CV uses self-rated skill stars, bars, percentages, or labels such as Beginner/Intermediate/Advanced, preserve that signal in self_rating. Do not treat self_rating alone as strong evidence.
+Language rules:
+- Write every natural-language value in Vietnamese.
+- Keep established skill, tool, framework, and model names unchanged, for example Python, SQL, React, FastAPI, Docker, RAG, LLM.
+- Do not translate JSON keys.
 
 CV:
 {raw_text}
@@ -218,7 +263,7 @@ def _load_llm_json(text: str, raw_text: str) -> dict[str, Any]:
     metadata = data.setdefault("metadata", {})
     if isinstance(metadata, dict):
         metadata.pop("raw_text", None)
-    return data
+    return _merge_self_ratings(data, raw_text)
 
 
 def _fallback_parse(raw_text: str) -> dict[str, Any]:
@@ -241,7 +286,7 @@ def _fallback_parse(raw_text: str) -> dict[str, Any]:
             }
         }
 
-    return {
+    data = {
         "student_id": f"student_{uuid.uuid4().hex[:8]}",
         "name": _infer_name(raw_text),
         "skills": skills,
@@ -253,9 +298,143 @@ def _fallback_parse(raw_text: str) -> dict[str, Any]:
             "education": _infer_section_lines(raw_text, "education"),
             "projects": _infer_section_lines(raw_text, "projects"),
             "experience": _infer_section_lines(raw_text, "experience"),
-            "parser_note": "Deterministic fallback parser; review JSON before saving.",
+            "parser_note": "Bộ phân tích dự phòng theo quy tắc; hãy kiểm tra JSON trước khi lưu.",
         },
     }
+    return _merge_self_ratings(data, raw_text)
+
+
+def _merge_self_ratings(data: dict[str, Any], raw_text: str) -> dict[str, Any]:
+    detected = _detect_self_ratings(raw_text)
+    if not detected:
+        return data
+
+    skills = data.setdefault("skills", {})
+    if not isinstance(skills, dict):
+        return data
+
+    for skill_name, rating in detected.items():
+        skill = skills.get(skill_name)
+        evidence = f"Tự đánh giá trong CV: {rating['raw']}"
+        capped_score = min(float(rating["normalized_score"]), 7.0)
+        if isinstance(skill, dict):
+            skill["self_rating"] = rating
+            existing_evidence = skill.setdefault("evidence", [])
+            if isinstance(existing_evidence, list) and evidence not in existing_evidence:
+                existing_evidence.append(evidence)
+        else:
+            skills[skill_name] = {
+                "score": capped_score,
+                "confidence": 0.45,
+                "evidence": [evidence],
+                "self_rating": rating,
+            }
+
+    metadata = data.setdefault("metadata", {})
+    if isinstance(metadata, dict):
+        metadata["self_ratings_detected"] = sorted(detected)
+        metadata["self_rating_note"] = (
+            "Các mức sao/thanh/% là tự đánh giá của ứng viên; điểm matching vẫn nên được kiểm tra cùng bằng chứng dự án hoặc kinh nghiệm."
+        )
+    return data
+
+
+def _detect_self_ratings(raw_text: str) -> dict[str, dict[str, Any]]:
+    ratings: dict[str, dict[str, Any]] = {}
+    for line in raw_text.splitlines():
+        clean = " ".join(line.strip(" -\t").split())
+        if not clean:
+            continue
+        extracted = _extract_rating_from_line(clean)
+        if not extracted:
+            continue
+        skill_name = _infer_rated_skill(clean, extracted["raw"])
+        if not skill_name:
+            continue
+        previous = ratings.get(skill_name)
+        if previous and float(previous["normalized_score"]) >= float(extracted["normalized_score"]):
+            continue
+        ratings[skill_name] = extracted
+    return ratings
+
+
+def _extract_rating_from_line(line: str) -> dict[str, Any] | None:
+    star_match = re.search(r"[★☆⭐]{2,5}", line)
+    if star_match:
+        token = star_match.group(0)
+        filled = sum(1 for char in token if char in {"★", "⭐"})
+        return _rating(filled, len(token), "stars", line)
+
+    slash_match = re.search(r"(?<!\d)(10(?:\.0)?|[0-9](?:\.\d+)?)\s*/\s*(5|10)(?!\d)", line)
+    if slash_match:
+        value = float(slash_match.group(1))
+        scale = float(slash_match.group(2))
+        if 0 <= value <= scale:
+            return _rating(value, scale, "slash", line)
+
+    percent_match = re.search(r"(?<!\d)(100|[1-9]?\d)\s*%", line)
+    if percent_match:
+        return _rating(float(percent_match.group(1)), 100.0, "percent", line)
+
+    bar_match = re.search(r"[█▓▒░■□▰▱▮▯●○]{3,12}", line)
+    if bar_match:
+        token = bar_match.group(0)
+        empty = {"░", "□", "▱", "▯", "○"}
+        filled = sum(1 for char in token if char not in empty)
+        return _rating(filled, len(token), "bar", line)
+
+    lowered = line.lower()
+    for label, score in SELF_RATING_LABELS.items():
+        if re.search(rf"\b{re.escape(label)}\b", lowered):
+            return _rating(float(score), 10.0, "level", line)
+    return None
+
+
+def _rating(value: float, scale: float, source: str, raw: str) -> dict[str, Any]:
+    normalized = 0.0 if scale <= 0 else round((value / scale) * 10, 2)
+    return {
+        "value": value,
+        "scale": scale,
+        "normalized_score": max(0.0, min(normalized, 10.0)),
+        "source": source,
+        "raw": raw[:160],
+    }
+
+
+def _infer_rated_skill(line: str, rating_raw: str) -> str | None:
+    lowered = line.lower()
+    for known_skill in sorted(CV_SKILLS, key=len, reverse=True):
+        if re.search(rf"(?<![a-z0-9+#.]){re.escape(known_skill.lower())}(?![a-z0-9+#.])", lowered):
+            return normalize_skill_name(known_skill)
+
+    rating_index = _rating_index(line)
+    before_rating = line[:rating_index].strip(" :-|•\t") if rating_index is not None else line.strip(" :-|•\t")
+    before_rating = re.sub(r"^(skills?|technical skills?|kỹ năng|ky nang)\s*[:|-]\s*", "", before_rating, flags=re.IGNORECASE)
+    candidate_words = re.findall(r"[A-Za-z0-9+#.]+", before_rating)
+    if not candidate_words:
+        return None
+    candidate = " ".join(candidate_words[-3:]).strip()
+    if not candidate or len(candidate) > 40:
+        return None
+    if any(word.lower() in SELF_RATING_BLOCKED_CANDIDATE_WORDS for word in candidate_words):
+        return None
+    return normalize_skill_name(candidate)
+
+
+def _rating_index(line: str) -> int | None:
+    patterns = [
+        r"[★☆⭐]{2,5}",
+        r"(?<!\d)(10(?:\.0)?|[0-9](?:\.\d+)?)\s*/\s*(5|10)(?!\d)",
+        r"(?<!\d)(100|[1-9]?\d)\s*%",
+        r"[█▓▒░■□▰▱▮▯●○]{3,12}",
+    ]
+    indices = [match.start() for pattern in patterns if (match := re.search(pattern, line))]
+    lowered = line.lower()
+    for label in SELF_RATING_LABELS:
+        match = re.search(rf"\b{re.escape(label)}\b", lowered)
+        if match:
+            indices.append(match.start())
+    return min(indices) if indices else None
 
 
 def _infer_name(raw_text: str) -> str:
@@ -322,4 +501,4 @@ def _infer_evidence(raw_text: str, skill: str) -> list[str]:
         clean = line.strip(" -\t")
         if skill.lower() in clean.lower():
             evidence.append(clean[:140])
-    return evidence[:3] or [f"Skill keyword found: {skill}"]
+    return evidence[:3] or [f"Tìm thấy từ khóa kỹ năng: {skill}"]

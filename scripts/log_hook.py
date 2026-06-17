@@ -13,6 +13,34 @@ from pathlib import Path
 VN_TZ = timezone(timedelta(hours=7))
 
 
+def repair_mojibake(value):
+    """Repair common UTF-8 text that was decoded as a Windows code page."""
+    if isinstance(value, str):
+        markers = ("Ã", "Â", "â€", "â€™", "â€œ", "â€�", "áº", "á»", "Ä‘")
+        if not any(marker in value for marker in markers):
+            return value
+        repaired = value
+        for _ in range(3):
+            changed = False
+            for encoding in ("cp1252", "latin1"):
+                try:
+                    candidate = repaired.encode(encoding).decode("utf-8")
+                except UnicodeError:
+                    continue
+                if candidate != repaired:
+                    repaired = candidate
+                    changed = True
+                    break
+            if not changed or not any(marker in repaired for marker in markers):
+                break
+        return repaired
+    if isinstance(value, list):
+        return [repair_mojibake(item) for item in value]
+    if isinstance(value, dict):
+        return {key: repair_mojibake(item) for key, item in value.items()}
+    return value
+
+
 def repo_root_from_cwd() -> Path | None:
     """Find the repo root without invoking git, so safe.directory can be set."""
     cwd = Path.cwd().resolve()
@@ -180,6 +208,7 @@ def main():
         data = json.loads(raw)
     except json.JSONDecodeError:
         sys.exit(0)
+    data = repair_mojibake(data)
 
     tool = detect_tool(data)
     entry = normalize(data, tool)

@@ -19,6 +19,7 @@ class StudentSkill:
     score: float
     confidence: float = 1.0
     evidence: list[str] = field(default_factory=list)
+    self_rating: dict[str, Any] | None = None
 
 
 @dataclass
@@ -129,6 +130,7 @@ def student_from_dict(data: dict[str, Any]) -> StudentProfile:
             score=_number_between(raw_skill, "score", 0, 10),
             confidence=_number_between(raw_skill, "confidence", 0, 1),
             evidence=list(raw_skill.get("evidence", [])),
+            self_rating=raw_skill.get("self_rating") if isinstance(raw_skill.get("self_rating"), dict) else None,
         )
 
     metadata = data.get("metadata", {})
@@ -182,11 +184,14 @@ def job_from_dict(data: dict[str, Any]) -> JobRequirementProfile:
 
 
 def skill_to_dict(skill: StudentSkill) -> dict[str, Any]:
-    return {
+    data = {
         "score": skill.score,
         "confidence": skill.confidence,
         "evidence": skill.evidence,
     }
+    if skill.self_rating:
+        data["self_rating"] = skill.self_rating
+    return data
 
 
 def requirement_to_dict(requirement: JobSkillRequirement) -> dict[str, Any]:

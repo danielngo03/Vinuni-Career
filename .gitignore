@@ -11,10 +11,17 @@ build/
 *.egg-info/
 .pytest_cache/
 .mypy_cache/
+node_modules/
+dist/
 
 # OS
 .DS_Store
 *.log
+*.db
+*.sqlite
+*.sqlite3
+*.tsbuildinfo
+.data/
 
 # AI logs — tracked structure, ignored content
 .ai-log/*.jsonl
