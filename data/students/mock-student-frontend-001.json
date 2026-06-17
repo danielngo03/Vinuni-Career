@@ -1,42 +1,187 @@
 {
   "student_id": "mock-student-frontend-001",
-  "name": "Chi Le",
+  "name": "Nguyen Khanh Toan",
   "skills": {
     "Python": {
-      "score": 7.0,
-      "confidence": 0.75,
+      "score": 8.0,
+      "confidence": 0.89,
       "evidence": [
-        "Completed a Python API coursework project."
+        "Python (primary)",
+        "Trained the model with PyTorch and Diffusers",
+        "Built a training pipeline"
       ]
     },
-    "JavaScript": {
-      "score": 7.0,
-      "confidence": 0.75,
+    "Java": {
+      "score": 3.0,
+      "confidence": 0.52,
       "evidence": [
-        "Built interactive dashboards with JavaScript and React."
+        "Programming: Java"
       ]
     },
-    "React": {
+    "LLM": {
       "score": 7.0,
-      "confidence": 0.75,
+      "confidence": 0.84,
       "evidence": [
-        "Built interactive dashboards with JavaScript and React."
+        "Core Strengths: LLM-based systems",
+        "Implemented a RAG pipeline",
+        "Generating responses with an LLM"
+      ]
+    },
+    "RAG": {
+      "score": 8.0,
+      "confidence": 0.9,
+      "evidence": [
+        "Core Strengths: Retrieval-Augmented Generation (RAG)",
+        "Car Sales Chatbot using Retrieval-Augmented Generation (RAG)",
+        "Implemented a RAG pipeline retrieving relevant documents"
+      ]
+    },
+    "AI pipelines": {
+      "score": 7.0,
+      "confidence": 0.87,
+      "evidence": [
+        "Experience building end-to-end AI pipelines",
+        "Data preprocessing, model training, evaluation, and deployment",
+        "Built a training pipeline including dataset collection and preprocessing"
+      ]
+    },
+    "PyTorch": {
+      "score": 7.0,
+      "confidence": 0.83,
+      "evidence": [
+        "Frameworks & Tools: PyTorch",
+        "Trained the model with PyTorch and Diffusers"
+      ]
+    },
+    "Hugging Face": {
+      "score": 4.0,
+      "confidence": 0.55,
+      "evidence": [
+        "Frameworks & Tools: Hugging Face"
+      ]
+    },
+    "LangChain": {
+      "score": 4.0,
+      "confidence": 0.55,
+      "evidence": [
+        "Frameworks & Tools: LangChain"
+      ]
+    },
+    "TensorFlow": {
+      "score": 3.0,
+      "confidence": 0.5,
+      "evidence": [
+        "Frameworks & Tools: TensorFlow"
+      ]
+    },
+    "Scikit-learn": {
+      "score": 3.0,
+      "confidence": 0.5,
+      "evidence": [
+        "Frameworks & Tools: Scikit-learn"
+      ]
+    },
+    "Diffusers": {
+      "score": 7.0,
+      "confidence": 0.82,
+      "evidence": [
+        "Frameworks & Tools: Diffusers",
+        "Trained the model with PyTorch and Diffusers"
+      ]
+    },
+    "Stable Diffusion XL": {
+      "score": 7.0,
+      "confidence": 0.86,
+      "evidence": [
+        "Fine-tuned Stable Diffusion XL (SDXL)",
+        "Developed a demo for text-to-image generation"
+      ]
+    },
+    "LoRA": {
+      "score": 6.0,
+      "confidence": 0.79,
+      "evidence": [
+        "Using LoRA to generate Vietnamese landscapes"
+      ]
+    },
+    "Embeddings": {
+      "score": 6.0,
+      "confidence": 0.78,
+      "evidence": [
+        "Built a vector retrieval system using embeddings and similarity search"
+      ]
+    },
+    "Similarity Search": {
+      "score": 6.0,
+      "confidence": 0.77,
+      "evidence": [
+        "Built a vector retrieval system using embeddings and similarity search"
+      ]
+    },
+    "BLIP-2": {
+      "score": 5.0,
+      "confidence": 0.72,
+      "evidence": [
+        "Automatic caption generation using BLIP-2"
+      ]
+    },
+    "Data Preprocessing": {
+      "score": 7.0,
+      "confidence": 0.84,
+      "evidence": [
+        "Data preprocessing, model training, evaluation, and deployment",
+        "Built a training pipeline including dataset collection, preprocessing"
+      ]
+    },
+    "Model Training": {
+      "score": 7.0,
+      "confidence": 0.86,
+      "evidence": [
+        "Model training, evaluation, and deployment",
+        "Fine-tuned Stable Diffusion XL (SDXL)",
+        "Trained the model with PyTorch and Diffusers"
+      ]
+    },
+    "Model Deployment": {
+      "score": 5.0,
+      "confidence": 0.68,
+      "evidence": [
+        "Experience building end-to-end AI pipelines including deployment",
+        "Exposure to real-world AI product workflows including deployment"
       ]
     }
   },
   "metadata": {
-    "email": null,
-    "phone": null,
-    "major": "Computer Science",
-    "year": null,
-    "education": [],
-    "projects": [
-      "Built interactive dashboards with JavaScript and React.",
-      "Completed a Python API coursework project."
+    "email": "24.1120xx@gmail.com",
+    "phone": "0986241104",
+    "major": "Khoa học máy tính",
+    "year": "Sinh viên năm cuối",
+    "education": [
+      {
+        "school": "University of Science – Vietnam National University, Hanoi (VNU-HUS)",
+        "degree": "Cử nhân Khoa học máy tính",
+        "status": "Sinh viên năm cuối"
+      }
     ],
-    "experience": [],
-    "parser_note": "Deterministic fallback parser; review JSON before saving.",
+    "projects": [
+      {
+        "name": "Car Sales Chatbot using Retrieval-Augmented Generation (RAG)",
+        "description": "Dự án chatbot trả lời câu hỏi về tồn kho xe bằng dữ liệu nội bộ công ty, sử dụng RAG, truy xuất vector, embeddings và LLM để giảm hallucination."
+      },
+      {
+        "name": "Vietnamese Oil Painting Generator – Stable Diffusion Fine-tuning",
+        "description": "Dự án fine-tune Stable Diffusion XL bằng LoRA để tạo ảnh phong cảnh Việt Nam phong cách sơn dầu, xây dựng pipeline huấn luyện, caption tự động bằng BLIP-2 và demo text-to-image."
+      }
+    ],
+    "experience": [
+      {
+        "role": "AI Intern",
+        "company": "MISA JSC",
+        "duration": "3 tháng",
+        "description": "Làm việc với đội AI về xử lý dữ liệu và các tác vụ liên quan đến mô hình, có trải nghiệm với quy trình phát triển, kiểm thử và triển khai sản phẩm AI thực tế."
+      }
+    ],
     "owner_user_id": "mock-student-frontend-001",
-    "cv_text_excerpt": "Chi Le\nMajor: Computer Science\nProjects:\nBuilt interactive dashboards with JavaScript and React.\nCompleted a Python API coursework project."
+    "cv_text_excerpt": "NGUYEN KHANH TOAN\nAI Engineer\nHanoi, Vietnam | 24.1120xx@gmail.com | 0986241104\nProfessional Summary\n– Final-year Computer Science student at University of Science – Vietnam National University, Hanoi.\n– Hands-on experience in AI applications.\n– Experience buildingend-to-end AI pipelinesincluding data collection, model training, and deploy-\nment.\nEducation\n– University of Science – Vietnam National University, Hanoi (VNU-HUS)\n– Bachelor of Science in Computer Science — Final-year student\nTechnical Skills\n– Core Strengths:LLM-based systems, Retrieval-Augmented Generation (RAG).\n– AI Development:Experience building end-to-end AI pipelines including data preprocessing, model\ntraining, evaluation, and deployment.\n– Programming: Python (primary), Java.\n– Frameworks & Tools:PyTorch, Hugging Face, LangChain, TensorFlow, Scikit-learn, Diffusers.\nExperience\nAI Intern – MISA JSC 3 months\nWorked with the AI team on data processing and model-related tasks, gaining exposure to real-world\nAI product workflows including development, testing, and deployment.\nProjects\nCar Sales Chatbot using Retrieval-Augmented Generation (RAG)\n– Developed a chatbot that answers vehicle inventory questions using internal company data.\n– Implemented a RAG pipeline retrieving relevant documents before generating responses with an\nLLM.\n– Built a vector retrieval system using embeddings and similarity search.\n– Reduced hallucination by grounding responses in internal knowledge sources.\nVietnamese Oil Painting Generator – Stable Diffusion Fine-tuning\n– Fine-tuned Stable Diffusion XL (SDXL) using LoRA to generate Vietnamese landscapes in oil paint-\ning style.\n– Built a training pipeline including dataset collection, preprocessing, and automatic caption genera-\ntion using BLIP-2.\n– Trained the model with PyTorch and Diffusers on NVIDIA A100 GPU (bf16).\n– Developed a demo for text-to-image generation."
   }
 }

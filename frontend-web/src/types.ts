@@ -15,6 +15,13 @@ export type StudentSkill = {
   score: number;
   confidence: number;
   evidence: string[];
+  self_rating?: {
+    value: number;
+    scale: number;
+    normalized_score: number;
+    source: "stars" | "percent" | "bar" | "level" | "slash" | string;
+    raw: string;
+  };
 };
 
 export type Job = {
@@ -36,6 +43,18 @@ export type StudentProfile = {
   name: string;
   skills: Record<string, StudentSkill>;
   metadata?: Record<string, unknown>;
+};
+
+export type ParsedStudentProfile = StudentProfile & {
+  _raw_text?: string;
+  _parser?: {
+    parser_mode: string;
+    model: string;
+    api_key_configured: boolean;
+    used_llm: boolean;
+    fallback_used: boolean;
+    error?: string | null;
+  };
 };
 
 export type MatchResult = {

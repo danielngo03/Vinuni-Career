@@ -153,6 +153,11 @@ Return only JSON for this job description. Required schema:
   }}
 }}
 
+Language rules:
+- Write every natural-language value in Vietnamese.
+- Keep established skill, tool, framework, and model names unchanged, for example Python, SQL, React, FastAPI, Docker, LLM.
+- Do not translate JSON keys or enum-like values such as draft, internship, full-time, part-time, or unspecified.
+
 Job description:
 {raw_text}
 """

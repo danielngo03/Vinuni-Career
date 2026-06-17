@@ -166,6 +166,8 @@ Required schema:
   "priority_actions": ["highest-impact actions first"]
 }}
 
+Write every natural-language value in Vietnamese. Keep established skill, tool, framework, and model names unchanged, for example Python, SQL, React, FastAPI, Docker, RAG, LLM. Do not translate JSON keys.
+
 Use this deterministic matching evidence as ground truth:
 {json.dumps(fallback, ensure_ascii=False)}
 
@@ -247,13 +249,13 @@ def _overall_assessment(
 ) -> str:
     if not missing_skills:
         return (
-            f"{student.name} is a {match_status} for {job.title}. "
-            "The saved CV profile already covers the job's required skills."
+            f"{student.name} đang ở mức {match_status} cho vị trí {job.title}. "
+            "Hồ sơ CV đã bao phủ các kỹ năng bắt buộc của công việc."
         )
     top_missing = ", ".join(item["skill"] for item in missing_skills[:3])
     return (
-        f"{student.name} is a {match_status} for {job.title}. "
-        f"The main gaps to address are {top_missing}."
+        f"{student.name} đang ở mức {match_status} cho vị trí {job.title}. "
+        f"Các khoảng cách chính cần xử lý là {top_missing}."
     )
 
 
@@ -273,16 +275,16 @@ def _strengths(student: StudentProfile, matched_skills: list[str]) -> list[str]:
         skill = student.skills.get(skill_name)
         evidence = ""
         if skill and skill.evidence:
-            evidence = f" Evidence: {skill.evidence[0]}"
-        strengths.append(f"{skill_name} meets the JD requirement.{evidence}")
-    return strengths or ["No required JD skills are clearly covered yet; add concrete evidence to the CV."]
+            evidence = f" Bằng chứng: {skill.evidence[0]}"
+        strengths.append(f"{skill_name} đáp ứng yêu cầu trong JD.{evidence}")
+    return strengths or ["CV chưa thể hiện rõ kỹ năng bắt buộc trong JD; hãy bổ sung bằng chứng cụ thể."]
 
 
 def _improvement_suggestions(missing_skills: list[dict[str, Any]]) -> list[str]:
     if not missing_skills:
-        return ["Keep building project evidence that proves the matched skills in a work-like context."]
+        return ["Tiếp tục bổ sung bằng chứng dự án để chứng minh các kỹ năng đã khớp trong bối cảnh gần với công việc thực tế."]
     return [
-        f"Improve {item['skill']} from {item['student_score']:g} toward {item['required_level']:g} with a project, coursework, or internship task."
+        f"Nâng {item['skill']} từ {item['student_score']:g} lên gần mức {item['required_level']:g} bằng dự án, môn học hoặc nhiệm vụ thực tập."
         for item in missing_skills[:5]
     ]
 
@@ -290,20 +292,20 @@ def _improvement_suggestions(missing_skills: list[dict[str, Any]]) -> list[str]:
 def _cv_improvements(missing_skills: list[dict[str, Any]], missing_keywords: list[str]) -> list[str]:
     suggestions = []
     for item in missing_skills[:3]:
-        suggestions.append(f"Add a bullet that shows measurable experience with {item['skill']}.")
+        suggestions.append(f"Thêm một gạch đầu dòng thể hiện kinh nghiệm đo lường được với {item['skill']}.")
     if missing_keywords:
-        suggestions.append(f"Use relevant JD keywords naturally where true: {', '.join(missing_keywords[:6])}.")
-    return suggestions or ["Keep the CV evidence specific: project name, tool used, result, and impact."]
+        suggestions.append(f"Dùng các từ khóa liên quan trong JD một cách tự nhiên khi đúng sự thật: {', '.join(missing_keywords[:6])}.")
+    return suggestions or ["Giữ bằng chứng trong CV thật cụ thể: tên dự án, công cụ đã dùng, kết quả và tác động."]
 
 
 def _priority_actions(missing_skills: list[dict[str, Any]], missing_keywords: list[str]) -> list[str]:
     actions = [
-        f"Close the {item['skill']} gap first because it is highly weighted in the JD."
+        f"Ưu tiên thu hẹp khoảng cách {item['skill']} trước vì kỹ năng này có trọng số cao trong JD."
         for item in missing_skills[:3]
     ]
     if missing_keywords:
-        actions.append(f"Review whether these JD terms honestly belong in the CV: {', '.join(missing_keywords[:5])}.")
-    return actions or ["Prepare a short portfolio story for each matched skill before applying."]
+        actions.append(f"Kiểm tra xem các thuật ngữ JD này có thể đưa vào CV một cách trung thực không: {', '.join(missing_keywords[:5])}.")
+    return actions or ["Chuẩn bị một câu chuyện portfolio ngắn cho từng kỹ năng đã khớp trước khi ứng tuyển."]
 
 
 def _missing_keywords(student: StudentProfile, job: JobRequirementProfile, missing_skills: list[dict[str, Any]]) -> list[str]:
@@ -336,6 +338,7 @@ def _student_context(student: StudentProfile) -> dict[str, Any]:
                 "score": skill.score,
                 "confidence": skill.confidence,
                 "evidence": skill.evidence,
+                "self_rating": skill.self_rating,
             }
             for name, skill in student.skills.items()
         },

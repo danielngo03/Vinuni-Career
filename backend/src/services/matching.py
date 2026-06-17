@@ -91,12 +91,12 @@ def _explain(
     matched_skills: list[str],
     missing_or_weak: dict[str, SkillGap],
 ) -> str:
-    matched = ", ".join(matched_skills) if matched_skills else "no required skills"
+    matched = ", ".join(matched_skills) if matched_skills else "chưa có kỹ năng bắt buộc khớp rõ"
     if not missing_or_weak:
-        return f"{student_name} is a {status} because all required skills meet the requested levels."
+        return f"{student_name} đạt mức {status} vì tất cả kỹ năng bắt buộc đều đáp ứng mức yêu cầu."
 
     gaps = ", ".join(
-        f"{name} gap {gap.gap:g} (has {gap.user_score:g}, needs {gap.required_level:g})"
+        f"{name} thiếu {gap.gap:g} điểm (hiện có {gap.user_score:g}, cần {gap.required_level:g})"
         for name, gap in missing_or_weak.items()
     )
-    return f"{student_name} is a {status}. Matched: {matched}. Missing or weak: {gaps}."
+    return f"{student_name} đạt mức {status}. Kỹ năng khớp: {matched}. Còn thiếu hoặc yếu: {gaps}."

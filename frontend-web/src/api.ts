@@ -1,4 +1,4 @@
-import type { ApiError, Job, MatchResult, ReviewResult, Session, StudentJobMatch, StudentProfile, TeacherRagReport } from "./types";
+import type { ApiError, Job, MatchResult, ParsedStudentProfile, ReviewResult, Session, StudentJobMatch, StudentProfile, TeacherRagReport } from "./types";
 
 const API_BASE = import.meta.env.VITE_API_BASE_URL || "http://127.0.0.1:8000";
 
@@ -77,7 +77,7 @@ export const api = {
     }),
 
   parseCvText: (session: Session, rawText: string) =>
-    request<StudentProfile>("/students/cv/parse", session, {
+    request<ParsedStudentProfile>("/students/cv/parse", session, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ raw_text: rawText }),
@@ -86,7 +86,7 @@ export const api = {
   parseCvUpload: (session: Session, file: File) => {
     const form = new FormData();
     form.append("file", file);
-    return request<StudentProfile>("/students/cv/parse-upload", session, {
+    return request<ParsedStudentProfile>("/students/cv/parse-upload", session, {
       method: "POST",
       body: form,
     });
