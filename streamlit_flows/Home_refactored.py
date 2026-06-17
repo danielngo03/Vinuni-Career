@@ -9,8 +9,8 @@ from api_data import (
     ROLE_COMPANY,
     ROLE_STUDENT,
     create_demo_accounts,
-    get_user_role,
     get_current_user,
+    get_user_role,
     register_account,
     render_api_base_control,
     render_login_form,
@@ -18,9 +18,9 @@ from api_data import (
 )
 from flow_log import render_log
 from views.cv_manager import render_cv_manager_page
-from views.company import render_company_page
-from views.student import render_student_page
 from views.job_matching import render_job_matching_page
+from views.student import render_student_page
+from views.company import render_company_page
 
 
 st.set_page_config(page_title="C2 Flow Lab", page_icon="C2", layout="wide")
@@ -30,11 +30,13 @@ def main() -> None:
     api_base = render_api_base_control()
     token = st.session_state.get("flow_api_token")
     user = st.session_state.get("flow_user")
+
     if token:
         try:
             user = get_current_user(api_base, token)
             st.session_state["flow_user"] = user
         except RuntimeError:
+            # Keep the previous session state so the UI does not crash during API refresh issues.
             pass
 
     st.sidebar.divider()
@@ -46,7 +48,15 @@ def main() -> None:
 
     role = get_user_role(user)
     pages = allowed_pages(role)
-    selected_page = st.sidebar.radio("Navigation", list(pages), label_visibility="collapsed")
+    if not pages:
+        st.error("This account role is not allowed to access any page.")
+        return
+
+    selected_page = st.sidebar.radio(
+        "Navigation",
+        list(pages),
+        label_visibility="collapsed",
+    )
     pages[selected_page](api_base, token)
 
 
@@ -61,6 +71,7 @@ def render_login_page(api_base: str) -> None:
             render_login_form(api_base)
         with register_tab:
             render_register_form(api_base)
+
     with right:
         st.subheader("Demo accounts")
         st.write("Create or refresh demo login accounts through FastAPI.")
@@ -77,27 +88,37 @@ def render_login_page(api_base: str) -> None:
 
 
 def allowed_pages(role: str) -> dict[str, Callable[[str, str], None]]:
+    """Return sidebar pages by user role.
+
+    Company users now land on the refactored company dashboard. The dashboard itself
+    is split into Overview, JD Management, and Candidate Matching tabs inside
+    views/company.py.
+    """
+    student_pages: dict[str, Callable[[str, str], None]] = {
+        "Student Profile": render_student_page,
+        "CVs": render_cv_manager_page,
+        "Job Matching": render_job_matching_page,
+    }
+    company_pages: dict[str, Callable[[str, str], None]] = {
+        "Company Dashboard": render_company_page,
+    }
+
     if role == ROLE_STUDENT:
-        return {
-            "Student Profile": render_student_page,
-            "CVs": render_cv_manager_page,
-            "Job Matching": render_job_matching_page,
-        }
+        return student_pages
     if role == ROLE_COMPANY:
-        return {"Company": render_company_page}
+        return company_pages
     if role == ROLE_ADMIN:
-        return {
-            "Student Profile": render_student_page,
-            "CVs": render_cv_manager_page,
-            "Job Matching": render_job_matching_page,
-            "Company": render_company_page,
-        }
+        return {**student_pages, **company_pages}
     return {}
 
 
 def render_register_form(api_base: str) -> None:
     with st.form("flow_register_form"):
-        account_type = st.segmented_control("Account type", ["student", "company"], default="student")
+        account_type = st.segmented_control(
+            "Account type",
+            ["student", "company"],
+            default="student",
+        )
         account = st.text_input("Account", placeholder="student_4 or company_3").strip()
         full_name = st.text_input("Display name", placeholder="Nguyen Van A").strip()
         password = st.text_input("Password", value="1", type="password")
@@ -111,6 +132,7 @@ def render_register_form(api_base: str) -> None:
     if not full_name:
         st.error("Display name is required.")
         return
+
     try:
         register_account(api_base, account, password, full_name)
         st.success("Account created. You can login now.")

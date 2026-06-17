@@ -18,7 +18,9 @@ def test_parse_cv_raw_endpoint(client: TestClient):
     assert response.status_code == 200
     data = response.json()
     assert data["student_id"] == "mock-student-frontend-001"
-    assert data["name"] == "Chi Le"
+    assert data["target_position"] == "Frontend Developer"
+    assert "work_experience" in data
+    assert "education" in data
     assert "python" in data["skills"]
     assert data["metadata"]["source"] == "raw_text"
 
@@ -37,5 +39,7 @@ def test_parse_cv_upload_endpoint(client: TestClient):
 
     assert response.status_code == 200
     data = response.json()
-    assert data["name"] == "Chi Le"
+    assert data["target_position"] == "Frontend Developer"
+    assert "work_experience" in data
+    assert "education" in data
     assert data["metadata"]["source"] == "upload"

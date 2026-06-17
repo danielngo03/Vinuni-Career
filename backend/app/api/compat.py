@@ -10,10 +10,15 @@ from fastapi import APIRouter, File, Form, Header, HTTPException, UploadFile
 from pydantic import BaseModel, Field
 
 from app.schemas.matching import (
+    MatchingConfig,
+    MatchingEducation,
+    MatchingEducationRequirement,
+    MatchingExperienceRequirement,
     MatchingJobInput,
     MatchingSkillRequirement,
     MatchingStudentInput,
     MatchingStudentSkill,
+    MatchingWorkExperience,
 )
 from app.services.ai_service import extract_skills
 from app.services.cv_service import parse_cv_raw_text
@@ -36,6 +41,7 @@ class RawTextPayload(BaseModel):
 class MatchThresholds(BaseModel):
     strong_match: float = 0.8
     partial_match: float = 0.6
+    config: MatchingConfig = Field(default_factory=MatchingConfig)
 
 
 class CvPayload(BaseModel):
@@ -212,7 +218,7 @@ def _match(
     student: dict[str, Any],
     thresholds: MatchThresholds,
 ) -> dict[str, Any]:
-    result = score_match(_to_matching_student(student), _to_matching_job(job))
+    result = score_match(_to_matching_student(student), _to_matching_job(job), thresholds.config)
     score = round(result.match_score / 100, 3)
     if score >= thresholds.strong_match:
         status = "strong_match"
@@ -255,6 +261,12 @@ def _to_matching_job(job: dict[str, Any]) -> MatchingJobInput:
             skill: MatchingSkillRequirement(**detail)
             for skill, detail in job.get("skills", {}).items()
         },
+        experience_requirements=MatchingExperienceRequirement(
+            **job.get("experience_requirements", {})
+        ),
+        education_requirements=MatchingEducationRequirement(
+            **job.get("education_requirements", {})
+        ),
         raw_text=job.get("raw_text"),
         metadata=job.get("metadata", {}),
     )
@@ -264,10 +276,21 @@ def _to_matching_student(student: dict[str, Any]) -> MatchingStudentInput:
     return MatchingStudentInput(
         student_id=student["student_id"],
         name=student.get("name"),
+        target_position=student.get("target_position"),
         skills={
             skill: MatchingStudentSkill(**detail)
             for skill, detail in student.get("skills", {}).items()
         },
+        work_experience=[
+            MatchingWorkExperience(**item)
+            for item in student.get("work_experience", [])
+            if isinstance(item, dict)
+        ],
+        education=[
+            MatchingEducation(**item)
+            for item in student.get("education", [])
+            if isinstance(item, dict)
+        ],
         metadata=student.get("metadata", {}),
     )
 

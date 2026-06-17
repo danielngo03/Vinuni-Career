@@ -1,589 +1,1080 @@
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
+import type { CSSProperties, ReactNode } from "react";
 import {
-  ArrowRight,
+  BarChart3,
   BookOpenCheck,
   BriefcaseBusiness,
   Building2,
   CheckCircle2,
-  Filter,
-  GraduationCap,
+  ChevronRight,
+  ClipboardList,
+  FileSearch,
+  FileText,
+  Layers3,
   LayoutDashboard,
+  LogOut,
+  Menu,
   Search,
   Sparkles,
-  Trash2,
   UserRound,
+  X,
 } from "lucide-react";
 import { api } from "./api";
-import type { CompatMatch, FlowMode, Job, Student, StudentJobMatch, View } from "./types";
+import { candidateMatches, jobs, studentJobMatches, students } from "./data";
+import type { Job, Match, MatchingWeights, Role, Student } from "./types";
 
-const MODE_LABEL: Record<FlowMode, string> = {
-  balanced: "Cân bằng",
-  strict: "Khắt khe",
-  intern_friendly: "Thân thiện intern",
+type Section = "overview" | "student-profile" | "cv-manager" | "job-matching" | "company-overview" | "jd-manager" | "candidate-matching";
+
+type Session = {
+  account: string;
+  displayName: string;
+  role: Role;
+};
+
+type WeightPreset = "balanced" | "skills_first" | "intern_friendly";
+type ActiveWeightPreset = WeightPreset | "custom";
+
+const roleLabels: Record<Role, string> = {
+  student: "Học viên",
+  company: "Doanh nghiệp",
+  admin: "Quản trị",
+};
+
+const roleSections: Record<Role, Section[]> = {
+  student: ["overview", "student-profile", "cv-manager", "job-matching"],
+  company: ["overview", "company-overview", "jd-manager", "candidate-matching"],
+  admin: ["overview", "student-profile", "cv-manager", "job-matching", "company-overview", "jd-manager", "candidate-matching"],
+};
+
+const sectionMeta: Record<Section, { label: string; icon: ReactNode }> = {
+  overview: { label: "Tổng quan", icon: <LayoutDashboard size={18} /> },
+  "student-profile": { label: "Hồ sơ học viên", icon: <UserRound size={18} /> },
+  "cv-manager": { label: "CV", icon: <FileText size={18} /> },
+  "job-matching": { label: "Ghép việc làm", icon: <FileSearch size={18} /> },
+  "company-overview": { label: "Tổng quan công ty", icon: <Building2 size={18} /> },
+  "jd-manager": { label: "Quản lý JD", icon: <ClipboardList size={18} /> },
+  "candidate-matching": { label: "Ghép ứng viên", icon: <BriefcaseBusiness size={18} /> },
+};
+
+const flowIntro: Record<Role, { title: string; text: string; start: Section; steps: Section[] }> = {
+  student: {
+    title: "Luồng học viên",
+    text: "Quản lý hồ sơ cá nhân, phân tích CV và xem việc làm phù hợp.",
+    start: "student-profile",
+    steps: ["student-profile", "cv-manager", "job-matching"],
+  },
+  company: {
+    title: "Luồng doanh nghiệp",
+    text: "Theo dõi công ty, quản lý JD và xếp hạng ứng viên.",
+    start: "company-overview",
+    steps: ["company-overview", "jd-manager", "candidate-matching"],
+  },
+  admin: {
+    title: "Luồng quản trị demo",
+    text: "Kiểm thử toàn bộ màn hình học viên và doanh nghiệp trong một phiên.",
+    start: "overview",
+    steps: ["student-profile", "cv-manager", "job-matching", "company-overview", "jd-manager", "candidate-matching"],
+  },
+};
+
+const demoAccounts = [
+  { account: "student_1", password: "1", displayName: "Nguyen Minh Anh", hint: "Học viên demo" },
+  { account: "company_1", password: "1", displayName: "BlueLearn HR", hint: "Doanh nghiệp demo" },
+  { account: "admin_1", password: "1", displayName: "Admin Demo", hint: "Quản trị demo" },
+];
+
+const weightPresets: Record<WeightPreset, { label: string; weights: MatchingWeights }> = {
+  balanced: {
+    label: "Cân bằng",
+    weights: { skill_weight: 0.65, experience_weight: 0.2, education_weight: 0.15 },
+  },
+  skills_first: {
+    label: "Ưu tiên kỹ năng",
+    weights: { skill_weight: 0.85, experience_weight: 0.1, education_weight: 0.05 },
+  },
+  intern_friendly: {
+    label: "Phù hợp thực tập",
+    weights: { skill_weight: 0.6, experience_weight: 0.15, education_weight: 0.25 },
+  },
 };
 
 function App() {
-  const [view, setView] = useState<View>("overview");
-  const [students, setStudents] = useState<Student[]>([]);
-  const [jobs, setJobs] = useState<Job[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
+  const [session, setSession] = useState<Session | null>(null);
+  const [activeSection, setActiveSection] = useState<Section>("overview");
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
-  async function refresh() {
-    setError("");
-    setLoading(true);
-    try {
-      const [studentData, jobData] = await Promise.all([api.listStudents(), api.listJobs()]);
-      setStudents(studentData);
-      setJobs(jobData);
-    } catch (err) {
-      setError((err as Error).message);
-    } finally {
-      setLoading(false);
-    }
+  if (!session) {
+    return <LoginScreen onLogin={(nextSession) => {
+      setSession(nextSession);
+      setActiveSection(flowIntro[nextSession.role].start);
+    }} />;
   }
 
-  useEffect(() => {
-    refresh();
-  }, []);
+  const role = session.role;
+  const visibleSections = roleSections[role];
+
+  function logout() {
+    setSession(null);
+    setActiveSection("overview");
+    setSidebarOpen(false);
+  }
+
+  function switchSection(section: Section) {
+    setActiveSection(section);
+    setSidebarOpen(false);
+  }
 
   return (
     <div className="app-shell">
-      <aside className="sidebar">
-        <Brand />
-        <nav className="nav-stack" aria-label="Điều hướng chính">
-          <NavButton active={view === "overview"} icon={<LayoutDashboard size={18} />} label="Tổng quan" onClick={() => setView("overview")} />
-          <NavButton active={view === "student"} icon={<UserRound size={18} />} label="Sinh viên" onClick={() => setView("student")} />
-          <NavButton active={view === "company"} icon={<Building2 size={18} />} label="Doanh nghiệp" onClick={() => setView("company")} />
-        </nav>
-        <div className="sidebar-note">
-          <BookOpenCheck size={18} />
-          <span>Prototype từ Streamlit Flow Lab, dùng dữ liệu demo trong backend.</span>
+      <aside className={sidebarOpen ? "sidebar open" : "sidebar"}>
+        <div className="sidebar-top">
+          <Brand />
+          <button className="icon-button mobile-only" aria-label="Đóng menu" onClick={() => setSidebarOpen(false)}>
+            <X size={18} />
+          </button>
         </div>
+
+        <div className="flow-session">
+          <span>Đang ở</span>
+          <strong>{flowIntro[role].title}</strong>
+          <p>{session.displayName} | {flowIntro[role].text}</p>
+        </div>
+
+        <nav className="nav-list" aria-label="Điều hướng">
+          {visibleSections.map((section) => (
+            <button
+              key={section}
+              className={activeSection === section ? "nav-item active" : "nav-item"}
+              onClick={() => switchSection(section)}
+            >
+              {sectionMeta[section].icon}
+              <span>{sectionMeta[section].label}</span>
+            </button>
+          ))}
+        </nav>
+
+        <div className="sidebar-card">
+          <span>Giao diện sẵn sàng triển khai</span>
+          <strong>Giao diện hướng nghiệp</strong>
+          <p>Mock data đầy đủ để demo trước khi nối FastAPI.</p>
+        </div>
+
+        <button className="ghost-button" onClick={logout}>
+          <LogOut size={16} />
+          Đăng xuất
+        </button>
       </aside>
 
-      <main className="main-stage">
+      <main className="main">
         <header className="topbar">
-          <div>
-            <p className="eyebrow">Corhort Edu Match</p>
-            <h1>{titleForView(view)}</h1>
-          </div>
-          <button className="secondary-button" onClick={refresh}>
-            <Sparkles size={16} />
-            Làm mới dữ liệu
+          <button className="icon-button mobile-only" aria-label="Mở menu" onClick={() => setSidebarOpen(true)}>
+            <Menu size={20} />
           </button>
+          <div>
+            <p className="eyebrow">Cầu Nối Tài Năng</p>
+            <h1>{sectionMeta[activeSection].label}</h1>
+          </div>
+          <div className="topbar-actions">
+            <div className="search-box">
+              <Search size={17} />
+              <span>Tìm học viên, JD, kỹ năng</span>
+            </div>
+            <button className="primary-button">
+              <Sparkles size={16} />
+              Tạo demo
+            </button>
+          </div>
         </header>
 
-        {error && <Banner tone="error" text={error} />}
-        {loading && <Banner tone="info" text="Đang tải dữ liệu demo..." />}
-
-        {view === "overview" && <Overview students={students} jobs={jobs} onOpen={setView} />}
-        {view === "student" && <StudentFlow students={students} jobs={jobs} />}
-        {view === "company" && <CompanyFlow students={students} jobs={jobs} onChanged={refresh} />}
+        <FlowProgress role={role} activeSection={activeSection} onNavigate={switchSection} />
+        <Dashboard session={session} section={activeSection} onNavigate={switchSection} />
       </main>
     </div>
   );
 }
 
-function Overview({ students, jobs, onOpen }: { students: Student[]; jobs: Job[]; onOpen: (view: View) => void }) {
-  const openJobs = jobs.filter((job) => job.status === "open");
-  const skillCount = new Set(students.flatMap((student) => Object.keys(student.skills || {}))).size;
+function LoginScreen({ onLogin }: { onLogin: (session: Session) => void }) {
+  const [account, setAccount] = useState("student_1");
+  const [password, setPassword] = useState("1");
+  const [error, setError] = useState("");
+
+  function submitLogin() {
+    const found = demoAccounts.find((item) => item.account === account.trim() && item.password === password);
+    if (!found) {
+      setError("Tài khoản demo không đúng. Gợi ý: student_1 / 1, company_1 / 1, admin_1 / 1.");
+      return;
+    }
+    setError("");
+    onLogin({ account: found.account, displayName: found.displayName, role: roleFromAccount(found.account) });
+  }
+
+  function fillDemo(nextAccount: string) {
+    const found = demoAccounts.find((item) => item.account === nextAccount);
+    if (!found) return;
+    setAccount(found.account);
+    setPassword(found.password);
+    setError("");
+  }
 
   return (
-    <section className="overview-grid">
+    <main className="login-page">
+      <section className="login-hero">
+        <Brand />
+        <div>
+          <p className="eyebrow">Cổng đăng nhập demo</p>
+          <h1>Cầu Nối Tài Năng</h1>
+          <p>
+            Đăng nhập bằng tài khoản demo, hệ thống sẽ tự nhận vai trò và đưa bạn thẳng vào luồng phù hợp.
+          </p>
+        </div>
+        <div className="login-proof-grid">
+          <div>
+            <strong>7</strong>
+            <span>màn hình flow</span>
+          </div>
+          <div>
+            <strong>3</strong>
+            <span>vai trò demo</span>
+          </div>
+          <div>
+            <strong>100%</strong>
+            <span>mock UI offline</span>
+          </div>
+        </div>
+      </section>
+
+      <section className="login-card">
+        <div className="login-card-heading">
+          <p className="eyebrow">Đăng nhập</p>
+          <h2>Vào hệ thống</h2>
+        </div>
+        <label className="field-label">
+          Tài khoản
+          <input className="text-input" value={account} onChange={(event) => setAccount(event.target.value)} />
+        </label>
+        <label className="field-label">
+          Mật khẩu
+          <input className="text-input" type="password" value={password} onChange={(event) => setPassword(event.target.value)} onKeyDown={(event) => {
+            if (event.key === "Enter") submitLogin();
+          }} />
+        </label>
+        {error && <div className="login-error">{error}</div>}
+        <button className="primary-button full-width" onClick={submitLogin}>
+          Đăng nhập
+          <ChevronRight size={16} />
+        </button>
+        <div className="demo-account-list">
+          <span>Tài khoản mẫu</span>
+          {demoAccounts.map((item) => (
+            <button key={item.account} onClick={() => fillDemo(item.account)}>
+              <strong>{item.account}</strong>
+              <small>{item.hint}</small>
+            </button>
+          ))}
+        </div>
+      </section>
+    </main>
+  );
+}
+
+function FlowProgress({ role, activeSection, onNavigate }: { role: Role; activeSection: Section; onNavigate: (section: Section) => void }) {
+  return (
+    <section className="flow-progress" aria-label="Tiến trình phân luồng">
+      <div className="flow-progress-title">
+        <Layers3 size={18} />
+        <strong>{roleLabels[role]}</strong>
+      </div>
+      <div className="flow-progress-steps">
+        {flowIntro[role].steps.map((step, index) => (
+          <button key={step} className={activeSection === step ? "flow-progress-step active" : "flow-progress-step"} onClick={() => onNavigate(step)}>
+            <span>{index + 1}</span>
+            {sectionMeta[step].label}
+          </button>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function Dashboard({ session, section, onNavigate }: { session: Session; section: Section; onNavigate: (section: Section) => void }) {
+  const role = session.role;
+
+  if (section === "overview") return <Overview role={role} onNavigate={onNavigate} />;
+  if (section === "student-profile") return <StudentProfile session={session} />;
+  if (section === "cv-manager") return <CvManager />;
+  if (section === "job-matching") return <JobMatching />;
+  if (section === "company-overview") return <CompanyOverview />;
+  if (section === "jd-manager") return <JdManager />;
+  return <CandidateMatching />;
+}
+
+function Overview({ role, onNavigate }: { role: Role; onNavigate: (section: Section) => void }) {
+  const openJobs = jobs.filter((job) => job.status === "open").length;
+  const avgMatch = Math.round(studentJobMatches.reduce((sum, item) => sum + item.score, 0) / studentJobMatches.length);
+  const showStudentJourney = role === "student" || role === "admin";
+  const showCompanyJourney = role === "company" || role === "admin";
+
+  return (
+    <div className="page-stack">
       <section className="hero-band">
         <div className="hero-copy">
-          <p className="eyebrow">Nền tảng giáo dục hướng nghiệp</p>
-          <h2>Biến hồ sơ năng lực thành lộ trình ứng tuyển rõ ràng.</h2>
+          <p className="eyebrow">Không gian hướng nghiệp thông minh</p>
+          <h2>{role === "company" ? "Tuyển đúng ứng viên từ hồ sơ năng lực có giải thích." : "Biến CV thành lộ trình học tập và ứng tuyển rõ ràng."}</h2>
           <p>
-            Sinh viên thấy công việc phù hợp và khoảng cách kỹ năng. Doanh nghiệp xem ứng viên theo điểm match, điểm mạnh và rủi ro cần kiểm tra.
+            Giao diện này được chuyển ý tưởng từ phòng thử nghiệm luồng: hồ sơ học viên, quản lý CV, quản lý JD và ghép hai chiều.
           </p>
-          <div className="button-row">
-            <button className="primary-button" onClick={() => onOpen("student")}>
-              Mở flow sinh viên
-              <ArrowRight size={16} />
+          <div className="hero-actions">
+            <button className="primary-button" onClick={() => onNavigate(role === "company" ? "candidate-matching" : "job-matching")}>
+              Mở ghép
+              <ChevronRight size={16} />
             </button>
-            <button className="quiet-button" onClick={() => onOpen("company")}>
-              Mở flow doanh nghiệp
-              <BriefcaseBusiness size={16} />
+            <button className="secondary-button" onClick={() => onNavigate(role === "company" ? "jd-manager" : "cv-manager")}>
+              {role === "company" ? "Quản lý JD" : "Quản lý CV"}
             </button>
           </div>
         </div>
         <div className="learning-visual" aria-hidden="true">
-          <div className="visual-board">
-            <span />
-            <span />
-            <span />
+          <div className="visual-card card-a">
+            <BookOpenCheck size={22} />
+            <strong>Bộ đọc CV</strong>
+            <span>Kỹ năng + minh chứng</span>
           </div>
-          <div className="visual-card primary">CV</div>
-          <div className="visual-card accent">JD</div>
-          <div className="visual-score">92%</div>
+          <div className="visual-card card-b">
+            <BarChart3 size={22} />
+            <strong>Điểm phù hợp</strong>
+            <span>{avgMatch}% trung bình</span>
+          </div>
+          <div className="visual-card card-c">
+            <BriefcaseBusiness size={22} />
+            <strong>{openJobs} JD đang mở</strong>
+            <span>Ghép theo quy tắc</span>
+          </div>
         </div>
       </section>
 
-      <div className="metric-strip">
-        <Metric label="Sinh viên" value={students.length} />
-        <Metric label="Job đang mở" value={openJobs.length} />
-        <Metric label="Kỹ năng đã ghi nhận" value={skillCount} />
-      </div>
-
-      <section className="action-grid">
-        <ActionCard icon={<UserRound size={18} />} title="Student flow" text="Tìm job phù hợp, lọc theo điểm, trạng thái và xem kỹ năng còn thiếu." onClick={() => onOpen("student")} />
-        <ActionCard icon={<Building2 size={18} />} title="Company flow" text="Quản lý trạng thái JD và xếp hạng ứng viên theo rulebase matching." onClick={() => onOpen("company")} />
-        <ActionCard icon={<GraduationCap size={18} />} title="Education theme" text="Tông sáng, nội dung tiếng Việt, tập trung vào học tập và phát triển năng lực." onClick={() => onOpen("student")} />
+      <section className="metric-grid">
+        <MetricCard label="Học viên demo" value={String(students.length)} detail="Có hồ sơ kỹ năng, học vấn, kinh nghiệm" />
+        <MetricCard label="JD đang mở" value={String(openJobs)} detail="Sẵn sàng ghép với ứng viên" />
+        <MetricCard label="Điểm phù hợp cao nhất" value="91%" detail="Thực tập sinh Frontend - Nền tảng giáo dục" />
+        <MetricCard label="Luồng chính" value="7" detail="Tương ứng các màn hình nghiệp vụ" />
       </section>
-    </section>
+
+      <section className={role === "admin" ? "two-column" : "page-stack"}>
+        {showStudentJourney && (
+          <Panel title="Lộ trình học viên" subtitle="Từ CV đến quyết định ứng tuyển.">
+            <FlowSteps
+              items={[
+                ["Phân tích CV", "Trích xuất kỹ năng, kinh nghiệm, học vấn."],
+                ["Hồ sơ", "Chọn điểm nổi bật hiển thị trong hồ sơ."],
+                ["Ghép việc làm", "Xếp hạng công việc và chỉ ra khoảng thiếu."],
+              ]}
+            />
+          </Panel>
+        )}
+        {showCompanyJourney && (
+          <Panel title="Lộ trình doanh nghiệp" subtitle="Từ JD đến shortlist ứng viên.">
+            <FlowSteps
+              items={[
+                ["Overview", "Theo dõi JD mở, đóng, tổng số vị trí."],
+                ["Quản lý JD", "Cập nhật trạng thái và kiểm tra nội dung JD."],
+                ["Ghép ứng viên", "Xếp hạng ứng viên theo quy tắc ưu tiên kỹ năng."],
+              ]}
+            />
+          </Panel>
+        )}
+      </section>
+    </div>
   );
 }
 
-function StudentFlow({ students, jobs }: { students: Student[]; jobs: Job[] }) {
-  const [studentId, setStudentId] = useState(students[0]?.student_id || "");
-  const [mode, setMode] = useState<FlowMode>("balanced");
-  const [query, setQuery] = useState("");
-  const [minScore, setMinScore] = useState(0);
-  const [status, setStatus] = useState("all");
-  const [matches, setMatches] = useState<StudentJobMatch[]>([]);
-  const [error, setError] = useState("");
-  const selectedStudent = students.find((student) => student.student_id === studentId) || students[0];
-
-  useEffect(() => {
-    if (!studentId && students[0]) setStudentId(students[0].student_id);
-  }, [studentId, students]);
-
-  const visibleMatches = useMemo(() => {
-    return matches.filter(({ job, match }) => {
-      const score = percent(match.match_score);
-      const haystack = `${job.job_id} ${job.title} ${job.company_id}`.toLowerCase();
-      return score >= minScore && (status === "all" || job.status === status) && (!query || haystack.includes(query.toLowerCase()));
-    });
-  }, [matches, minScore, query, status]);
-
-  async function runMatch() {
-    if (!selectedStudent) return;
-    setError("");
-    try {
-      setMatches(await api.matchStudentJobs(selectedStudent.student_id, mode));
-    } catch (err) {
-      setError((err as Error).message);
-    }
-  }
+function StudentProfile({ session }: { session: Session }) {
+  const canBrowseProfiles = session.role === "admin";
+  const ownStudent = students.find((item) => item.id === session.account) ?? students[0];
+  const [selectedId, setSelectedId] = useState(ownStudent.id);
+  const student = canBrowseProfiles
+    ? students.find((item) => item.id === selectedId) ?? ownStudent
+    : ownStudent;
 
   return (
-    <section className="flow-layout">
-      <div className="main-column">
-        <Panel title="Hồ sơ sinh viên" subtitle="Dữ liệu lấy từ demo JSON trong Streamlit flow.">
-          {selectedStudent ? <StudentProfile student={selectedStudent} /> : <EmptyState text="Chưa có hồ sơ sinh viên." />}
-        </Panel>
-
-        <Panel title="Job matching" subtitle="Chọn chế độ match rồi chạy xếp hạng tất cả JD cho sinh viên.">
-          <div className="control-grid">
-            <label>
-              Sinh viên
-              <select value={selectedStudent?.student_id || ""} onChange={(event) => setStudentId(event.target.value)}>
-                {students.map((student) => (
-                  <option key={student.student_id} value={student.student_id}>
-                    {student.name || student.student_id}
-                  </option>
-                ))}
-              </select>
-            </label>
-            <ModePicker value={mode} onChange={setMode} />
-            <button className="primary-button align-end" onClick={runMatch} disabled={!selectedStudent}>
-              Match all jobs
-              <Search size={16} />
-            </button>
-          </div>
-        </Panel>
-
-        <Panel title="Kết quả phù hợp" subtitle={`Đang hiển thị ${visibleMatches.length} trong ${matches.length} kết quả.`}>
-          <ResultFilters query={query} setQuery={setQuery} minScore={minScore} setMinScore={setMinScore} status={status} setStatus={setStatus} jobs={jobs} />
-          {error && <Banner tone="error" text={error} />}
-          <div className="result-list">
-            {visibleMatches.map(({ job, match }) => (
-              <JobMatchCard key={job.job_id} job={job} match={match} />
+    <div className="page-stack">
+      <section className="profile-header">
+        <div>
+          <p className="eyebrow">Mã học viên: {student.id}</p>
+          <h2>{student.name}</h2>
+          <p>{student.target}</p>
+        </div>
+        {canBrowseProfiles && (
+          <select className="select-input" value={selectedId} onChange={(event) => setSelectedId(event.target.value)}>
+            {students.map((item) => (
+              <option key={item.id} value={item.id}>
+                {item.name}
+              </option>
             ))}
-            {!visibleMatches.length && <EmptyState text="Chưa có kết quả phù hợp với bộ lọc hiện tại." />}
-          </div>
+          </select>
+        )}
+      </section>
+
+      <section className="three-column">
+        <HighlightCard title="Kinh nghiệm nổi bật" value={student.experiences[0].title} detail={`${student.experiences[0].company} | ${student.experiences[0].score}/10`} />
+        <HighlightCard title="Học vấn nổi bật" value={student.education[0].degree} detail={`${student.education[0].institution} | ${student.education[0].score}/10`} />
+        <HighlightCard title="Kỹ năng nổi bật" value={student.skills[0].name} detail={`${student.skills[0].score}/10 độ tin cậy ${Math.round(student.skills[0].confidence * 100)}%`} />
+      </section>
+
+      <section className="two-column wide-left">
+        <Panel title="Thông tin cá nhân" subtitle="Phần hiển thị cho học viên sau khi lưu CV chính.">
+          <InfoGrid
+            rows={[
+              ["Email", student.email],
+              ["Điện thoại", student.phone],
+              ["Địa điểm", student.location],
+              ["Trường", student.university],
+              ["Ngành học", student.major],
+              ["Năm tốt nghiệp", student.graduationYear],
+            ]}
+          />
+          <div className="bio-box">{student.bio}</div>
         </Panel>
-      </div>
-
-      <aside className="side-column">
-        <Panel title="Tín hiệu học tập" subtitle="Góc nhìn nhanh để tư vấn kỹ năng tiếp theo.">
-          <InsightStats students={students} jobs={jobs} matches={matches.map((item) => item.match)} />
+        <Panel title="Hồ sơ kỹ năng" subtitle="Điểm dựa trên CV chính và bằng chứng trích xuất.">
+          <SkillList skills={student.skills} />
         </Panel>
-      </aside>
-    </section>
-  );
-}
+      </section>
 
-function CompanyFlow({ students, jobs, onChanged }: { students: Student[]; jobs: Job[]; onChanged: () => void }) {
-  const [jobId, setJobId] = useState(jobs[0]?.job_id || "");
-  const [mode, setMode] = useState<FlowMode>("balanced");
-  const [query, setQuery] = useState("");
-  const [minScore, setMinScore] = useState(0);
-  const [matches, setMatches] = useState<CompatMatch[]>([]);
-  const [error, setError] = useState("");
-  const selectedJob = jobs.find((job) => job.job_id === jobId) || jobs[0];
-
-  useEffect(() => {
-    if (!jobId && jobs[0]) setJobId(jobs[0].job_id);
-  }, [jobId, jobs]);
-
-  const visibleMatches = useMemo(() => {
-    return matches.filter((match) => {
-      const score = percent(match.match_score);
-      const haystack = `${match.student_id} ${match.student_name || ""}`.toLowerCase();
-      return score >= minScore && (!query || haystack.includes(query.toLowerCase()));
-    });
-  }, [matches, minScore, query]);
-
-  async function runMatch() {
-    if (!selectedJob) return;
-    setError("");
-    try {
-      setMatches(await api.matchJobCandidates(selectedJob.job_id, mode));
-    } catch (err) {
-      setError((err as Error).message);
-    }
-  }
-
-  async function setStatus(status: "open" | "closed") {
-    if (!selectedJob) return;
-    setError("");
-    try {
-      await api.updateJobStatus(selectedJob.job_id, status);
-      await onChanged();
-    } catch (err) {
-      setError((err as Error).message);
-    }
-  }
-
-  async function deleteJob() {
-    if (!selectedJob) return;
-    setError("");
-    try {
-      await api.deleteJob(selectedJob.job_id);
-      setMatches([]);
-      await onChanged();
-    } catch (err) {
-      setError((err as Error).message);
-    }
-  }
-
-  return (
-    <section className="flow-layout">
-      <div className="main-column">
-        <Panel title="Quản lý JD" subtitle="Tương đương phần Manage JD by ID trong Streamlit.">
-          <div className="control-grid">
-            <label>
-              JD
-              <select value={selectedJob?.job_id || ""} onChange={(event) => setJobId(event.target.value)}>
-                {jobs.map((job) => (
-                  <option key={job.job_id} value={job.job_id}>
-                    {job.title} - {job.job_id}
-                  </option>
-                ))}
-              </select>
-            </label>
-            <ModePicker value={mode} onChange={setMode} />
-            <button className="primary-button align-end" onClick={runMatch} disabled={!selectedJob}>
-              Rank all candidates
-              <Search size={16} />
-            </button>
-          </div>
-          {selectedJob && <JobDetail job={selectedJob} />}
-          <div className="button-row">
-            <button className="secondary-button" onClick={() => setStatus("open")} disabled={!selectedJob}>
-              <CheckCircle2 size={16} />
-              Set open
-            </button>
-            <button className="quiet-button" onClick={() => setStatus("closed")} disabled={!selectedJob}>
-              Set closed
-            </button>
-            <button className="danger-button" onClick={deleteJob} disabled={!selectedJob}>
-              <Trash2 size={16} />
-              Delete JD
-            </button>
-          </div>
-          {error && <Banner tone="error" text={error} />}
-        </Panel>
-
-        <Panel title="Ứng viên phù hợp" subtitle={`Đang hiển thị ${visibleMatches.length} trong ${matches.length} ứng viên.`}>
-          <div className="filter-row">
-            <label>
-              <Filter size={15} />
-              Tìm sinh viên
-              <input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Tên hoặc mã sinh viên" />
-            </label>
-            <label>
-              Điểm tối thiểu
-              <input type="range" min="0" max="100" step="5" value={minScore} onChange={(event) => setMinScore(Number(event.target.value))} />
-              <span>{minScore}%</span>
-            </label>
-          </div>
-          <div className="result-list">
-            {visibleMatches.map((match) => (
-              <CandidateCard key={match.student_id} match={match} />
-            ))}
-            {!visibleMatches.length && <EmptyState text="Chưa có kết quả. Hãy chọn JD và chạy xếp hạng ứng viên." />}
-          </div>
-        </Panel>
-      </div>
-
-      <aside className="side-column">
-        <Panel title="Nguồn ứng viên" subtitle={`${students.length} hồ sơ sinh viên trong demo data.`}>
-          <div className="student-mini-list">
-            {students.slice(0, 6).map((student) => (
-              <span key={student.student_id}>{student.name || student.student_id}</span>
-            ))}
-          </div>
-        </Panel>
-      </aside>
-    </section>
-  );
-}
-
-function StudentProfile({ student }: { student: Student }) {
-  const skills = Object.entries(student.skills || {});
-  return (
-    <div className="profile-block">
-      <div>
-        <p className="eyebrow">{student.student_id}</p>
-        <h2>{student.name || "Sinh viên demo"}</h2>
-      </div>
-      <div className="skill-cloud">
-        {skills.map(([name, detail]) => (
-          <span key={name}>
-            {name} · {Math.round(detail.score || 0)}/10
-          </span>
-        ))}
-      </div>
+      <Panel title="Chi tiết CV" subtitle="Kinh nghiệm và học vấn được trình bày dạng có thể scan nhanh.">
+        <DataTable
+          headers={["Loại", "Tiêu đề", "Tổ chức", "Điểm", "Tóm tắt"]}
+          rows={[
+            ...student.experiences.map((item) => ["Kinh nghiệm", item.title, item.company, `${item.score}/10`, item.summary]),
+            ...student.education.map((item) => ["Học vấn", item.degree, item.institution, `${item.score}/10`, item.year]),
+          ]}
+        />
+      </Panel>
     </div>
   );
 }
 
-function JobDetail({ job }: { job: Job }) {
-  return (
-    <div className="job-detail">
-      <div>
-        <p className="eyebrow">{job.job_id}</p>
-        <h3>{job.title}</h3>
-        <span>{job.company_id} · {job.location || "Remote"} · {job.status || "draft"}</span>
-      </div>
-      <div className="skill-cloud compact">
-        {Object.entries(job.skills || {}).slice(0, 8).map(([name, detail]) => (
-          <span key={name}>{name} · {Math.round(detail.required_level || 0)}/10</span>
-        ))}
-      </div>
-    </div>
-  );
-}
+function CvManager() {
+  const [cvText, setCvText] = useState("Nguyen Minh Anh\nThực tập sinh Frontend\nDashboard React, tìm kiếm bằng JavaScript, bố cục CSS responsive, phối hợp review sprint.");
+  const parsedSkills = useMemo(() => ["React", "JavaScript", "CSS", "Giao tiếp"].filter((skill) => cvText.toLowerCase().includes(skill.toLowerCase())), [cvText]);
 
-function ResultFilters({
-  query,
-  setQuery,
-  minScore,
-  setMinScore,
-  status,
-  setStatus,
-  jobs,
-}: {
-  query: string;
-  setQuery: (value: string) => void;
-  minScore: number;
-  setMinScore: (value: number) => void;
-  status: string;
-  setStatus: (value: string) => void;
-  jobs: Job[];
-}) {
-  const statuses = Array.from(new Set(jobs.map((job) => job.status || "-")));
   return (
-    <div className="filter-row">
-      <label>
-        <Filter size={15} />
-        Tìm JD
-        <input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Tên job, mã job, công ty" />
-      </label>
-      <label>
-        Trạng thái
-        <select value={status} onChange={(event) => setStatus(event.target.value)}>
-          <option value="all">Tất cả</option>
-          {statuses.map((item) => (
-            <option key={item} value={item}>{item}</option>
-          ))}
-        </select>
-      </label>
-      <label>
-        Điểm tối thiểu
-        <input type="range" min="0" max="100" step="5" value={minScore} onChange={(event) => setMinScore(Number(event.target.value))} />
-        <span>{minScore}%</span>
-      </label>
-    </div>
-  );
-}
-
-function JobMatchCard({ job, match }: { job: Job; match: CompatMatch }) {
-  return (
-    <article className="match-card">
-      <div className="match-card-top">
-        <div>
-          <p className="eyebrow">{job.job_id} · {job.status || "-"}</p>
-          <h3>{job.title}</h3>
-          <span>{job.company_id} · {job.location || "Remote"}</span>
-        </div>
-        <Score value={match.match_score} />
-      </div>
-      <MatchText match={match} />
-    </article>
-  );
-}
-
-function CandidateCard({ match }: { match: CompatMatch }) {
-  return (
-    <article className="match-card">
-      <div className="match-card-top">
-        <div>
-          <p className="eyebrow">{match.student_id}</p>
-          <h3>{match.student_name || match.student_id}</h3>
-          <span>{labelForStatus(match.match_status)}</span>
-        </div>
-        <Score value={match.match_score} />
-      </div>
-      <MatchText match={match} />
-    </article>
-  );
-}
-
-function MatchText({ match }: { match: CompatMatch }) {
-  const gaps = Object.keys(match.missing_or_weak_skills || {});
-  return (
-    <div className="match-text">
-      <p>{match.explanation}</p>
-      <div className="two-column-list">
-        <div>
-          <strong>Điểm mạnh</strong>
-          <span>{match.matched_skills?.join(", ") || "-"}</span>
-        </div>
-        <div>
-          <strong>Khoảng cách</strong>
-          <span>{gaps.join(", ") || "-"}</span>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function InsightStats({ students, jobs, matches }: { students: Student[]; jobs: Job[]; matches: CompatMatch[] }) {
-  const best = matches[0];
-  return (
-    <div className="insight-stack">
-      <Metric label="Hồ sơ" value={students.length} />
-      <Metric label="JD" value={jobs.length} />
-      <Metric label="Best match" value={best ? `${percent(best.match_score)}%` : "-"} />
-      <p className="muted">Gợi ý tư vấn: ưu tiên những kỹ năng xuất hiện trong cả JD đang mở và phần gap của sinh viên.</p>
-    </div>
-  );
-}
-
-function ModePicker({ value, onChange }: { value: FlowMode; onChange: (value: FlowMode) => void }) {
-  return (
-    <label>
-      Matching mode
-      <div className="segmented">
-        {(Object.keys(MODE_LABEL) as FlowMode[]).map((mode) => (
-          <button key={mode} className={value === mode ? "active" : ""} type="button" onClick={() => onChange(mode)}>
-            {MODE_LABEL[mode]}
+    <div className="two-column wide-left">
+      <Panel title="Phân tích CV mới" subtitle="Dán CV, xem bản xem trước có cấu trúc rồi lưu làm CV chính.">
+        <label className="field-label">
+          Vị trí trong CV
+          <input className="text-input" defaultValue="Thực tập sinh Frontend" />
+        </label>
+        <label className="field-label">
+          Nội dung CV
+          <textarea className="text-area" value={cvText} onChange={(event) => setCvText(event.target.value)} />
+        </label>
+        <div className="button-row">
+          <button className="primary-button">
+            <Sparkles size={16} />
+            Phân tích CV
           </button>
-        ))}
+          <button className="secondary-button">Lưu làm CV chính</button>
+        </div>
+      </Panel>
+
+      <Panel title="Bản xem trước CV đã phân tích" subtitle="Mô phỏng bản xem trước trước khi lưu vào hồ sơ học viên.">
+        <div className="preview-block">
+          <p className="eyebrow">Kỹ năng nhận diện</p>
+          <div className="tag-cloud">
+            {(parsedSkills.length ? parsedSkills : ["React", "JavaScript", "CSS"]).map((skill) => (
+              <span key={skill}>{skill}</span>
+            ))}
+          </div>
+        </div>
+        <SavedCvList />
+      </Panel>
+    </div>
+  );
+}
+
+function JobMatching() {
+  const [minScore, setMinScore] = useState(0);
+  const [matches, setMatches] = useState<Match[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [notice, setNotice] = useState("");
+  const [error, setError] = useState("");
+  const visible = matches.filter((item) => item.score >= minScore);
+  async function runMatch() {
+    setLoading(true);
+    setError("");
+    setNotice("");
+    try {
+      const result = await api.matchStudentJobs(students[0]);
+      setMatches(result);
+      setNotice(`Đã gọi API và nhận ${result.length} việc làm phù hợp.`);
+    } catch (err) {
+      setMatches(studentJobMatches);
+      setError(`Chưa gọi được API backend (${(err as Error).message}). Đang hiển thị dữ liệu mẫu để kiểm tra giao diện.`);
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  return (
+    <div className="page-stack">
+      <Panel title="Bộ điều khiển ghép việc" subtitle="Chọn chế độ ghép và lọc kết quả hiển thị.">
+        <div className="control-grid">
+          <label className="field-label">
+            Chế độ ghép
+            <select className="select-input" defaultValue="balanced">
+              <option value="balanced">Cân bằng</option>
+              <option value="strict">Khắt khe</option>
+              <option value="intern_friendly">Phù hợp thực tập</option>
+            </select>
+          </label>
+          <label className="field-label">
+            Điểm tối thiểu: {minScore}
+            <input type="range" min="0" max="100" step="5" value={minScore} onChange={(event) => setMinScore(Number(event.target.value))} />
+          </label>
+          <button className="primary-button" onClick={runMatch} disabled={loading}>
+            <Search size={16} />
+            {loading ? "Đang ghép..." : "Ghép tất cả việc làm"}
+          </button>
+        </div>
+      </Panel>
+
+      <RunFeedback notice={notice} error={error} idle={!matches.length && !loading} idleText="Bấm Ghép tất cả việc làm để gọi API ghép việc." />
+      <MatchGrid matches={visible} emptyTitle="Không có việc làm nào vượt ngưỡng lọc." />
+    </div>
+  );
+}
+
+function CompanyOverview() {
+  const [managedJobs] = useState(jobs);
+  const openJobs = managedJobs.filter((job) => job.status === "open");
+  const closedJobs = managedJobs.filter((job) => job.status === "closed");
+
+  return (
+    <div className="page-stack">
+      <section className="metric-grid">
+        <MetricCard label="Tổng số JD" value={String(managedJobs.length)} detail="Tất cả vị trí trong bộ dữ liệu mẫu" />
+        <MetricCard label="Đang mở" value={String(openJobs.length)} detail="Đang nhận ứng viên" />
+        <MetricCard label="Đã đóng" value={String(closedJobs.length)} detail="Đã đóng hoặc tạm ngưng" />
+        <MetricCard label="Tỉ lệ đang mở" value={`${Math.round((openJobs.length / managedJobs.length) * 100)}%`} detail="Tỉ lệ vị trí đang mở" />
+      </section>
+      <Panel title="JD gần đây" subtitle="Tóm tắt các JD gần nhất theo công ty.">
+        <DataTable
+          headers={["JD", "Công ty", "Trạng thái", "Địa điểm", "Kỹ năng bắt buộc"]}
+          rows={managedJobs.map((job) => [job.title, job.companyName, formatStatus(job.status), job.location, job.requiredSkills.join(", ")])}
+        />
+      </Panel>
+    </div>
+  );
+}
+
+function JdManager() {
+  const [managedJobs, setManagedJobs] = useState(jobs);
+  const [selectedId, setSelectedId] = useState(jobs[0].id);
+  const [jdText, setJdText] = useState("Thực tập sinh Frontend - Nền tảng giáo dục\nKỹ năng bắt buộc: React, JavaScript, CSS, Giao tiếp\nKỹ năng ưu tiên: TypeScript, Figma\nLinh hoạt, HCMC. Thực tập.");
+  const [draftJob, setDraftJob] = useState<Job | null>(null);
+  const [parseLoading, setParseLoading] = useState(false);
+  const [saveLoading, setSaveLoading] = useState(false);
+  const [parseNotice, setParseNotice] = useState("");
+  const [parseError, setParseError] = useState("");
+  const job = managedJobs.find((item) => item.id === selectedId) ?? managedJobs[0];
+  const openCount = managedJobs.filter((item) => item.status === "open").length;
+  const closedCount = managedJobs.filter((item) => item.status === "closed").length;
+
+  function toggleSelectedJob() {
+    setManagedJobs((currentJobs) =>
+      currentJobs.map((item) =>
+        item.id === job.id
+          ? {
+              ...item,
+              status: item.status === "open" ? "closed" : "open",
+            }
+          : item,
+      ),
+    );
+  }
+
+  async function parseNewJd() {
+    setParseLoading(true);
+    setParseNotice("");
+    setParseError("");
+    try {
+      const parsed = await api.parseJob(jdText, "company_demo");
+      setDraftJob(parsed);
+      setParseNotice("Đã parse JD bằng API backend.");
+    } catch (err) {
+      const parsed = parseJobLocally(jdText);
+      setDraftJob(parsed);
+      setParseError(`Chưa gọi được API parse JD (${(err as Error).message}). Đang dùng parser demo local.`);
+    } finally {
+      setParseLoading(false);
+    }
+  }
+
+  async function saveDraftJob() {
+    if (!draftJob) return;
+    setSaveLoading(true);
+    setParseNotice("");
+    setParseError("");
+    try {
+      const saved = await api.saveJob(draftJob);
+      setManagedJobs((currentJobs) => upsertJob(currentJobs, saved));
+      setSelectedId(saved.id);
+      setDraftJob(null);
+      setParseNotice("Đã lưu JD bằng API backend và thêm vào danh sách.");
+    } catch (err) {
+      setManagedJobs((currentJobs) => upsertJob(currentJobs, draftJob));
+      setSelectedId(draftJob.id);
+      setDraftJob(null);
+      setParseError(`Chưa lưu được qua API (${(err as Error).message}). Đã thêm JD vào danh sách local để demo.`);
+    } finally {
+      setSaveLoading(false);
+    }
+  }
+
+  return (
+    <div className="page-stack">
+      <section className="metric-grid compact-metrics">
+        <MetricCard label="JD đang mở" value={String(openCount)} detail="Đang hiển thị cho học viên" />
+        <MetricCard label="JD đã đóng" value={String(closedCount)} detail="Tạm ẩn khỏi ghép việc" />
+        <MetricCard label="Đang chọn" value={job.status === "open" ? "Bật" : "Tắt"} detail={job.title} />
+      </section>
+
+      <Panel title="Phân tích JD mới" subtitle="Dán JD thô, hệ thống sẽ trích xuất tiêu đề, kỹ năng bắt buộc và kỹ năng ưu tiên.">
+        <label className="field-label">
+          Nội dung JD
+          <textarea className="text-area jd-text-area" value={jdText} onChange={(event) => setJdText(event.target.value)} />
+        </label>
+        <div className="button-row">
+          <button className="primary-button" onClick={parseNewJd} disabled={parseLoading || !jdText.trim()}>
+            <Sparkles size={16} />
+            {parseLoading ? "Đang phân tích..." : "Phân tích JD"}
+          </button>
+          {draftJob && (
+            <button className="secondary-button" onClick={saveDraftJob} disabled={saveLoading}>
+              <CheckCircle2 size={16} />
+              {saveLoading ? "Đang lưu..." : "Lưu JD"}
+            </button>
+          )}
+        </div>
+        <RunFeedback notice={parseNotice} error={parseError} idle={!draftJob && !parseLoading && !parseNotice && !parseError} idleText="Phân tích JD mới để xem bản xem trước trước khi lưu." />
+        {draftJob && <JdPreview job={draftJob} />}
+      </Panel>
+
+      <Panel title="Quản lý JD" subtitle="Chọn JD, xem trạng thái và cập nhật mô phỏng.">
+        <label className="field-label">
+          Chọn JD
+          <select className="select-input" value={selectedId} onChange={(event) => setSelectedId(event.target.value)}>
+            {managedJobs.map((item) => (
+              <option key={item.id} value={item.id}>
+                {item.title} - {formatStatus(item.status)}
+              </option>
+            ))}
+          </select>
+        </label>
+        <div className="jd-summary">
+          <h3>{job.title}</h3>
+          <StatusBadge status={job.status} />
+          <p>{job.companyName} | {job.location} | {job.employmentType}</p>
+          <div className="jd-toggle-line">
+            <div>
+              <strong>{job.status === "open" ? "JD đang bật" : "JD đang tắt"}</strong>
+              <span>{job.status === "open" ? "Học viên có thể nhìn thấy và được ghép với JD này." : "JD bị ẩn khỏi luồng ghép việc của học viên."}</span>
+            </div>
+            <button className={job.status === "open" ? "danger-button" : "primary-button"} onClick={toggleSelectedJob}>
+              {job.status === "open" ? "Tắt JD" : "Mở JD"}
+            </button>
+          </div>
+        </div>
+        <div className="button-row">
+          <button className="secondary-button" onClick={toggleSelectedJob}>
+            {job.status === "open" ? "Chuyển sang đã đóng" : "Chuyển sang đang mở"}
+          </button>
+          <button className="danger-button">Xóa JD</button>
+        </div>
+      </Panel>
+    </div>
+  );
+}
+
+function parseJobLocally(rawText: string): Job {
+  const knownSkills = ["React", "JavaScript", "TypeScript", "CSS", "Python", "FastAPI", "SQL", "Power BI", "Giao tiếp", "Figma", "Testing", "Docker"];
+  const foundSkills = knownSkills.filter((skill) => rawText.toLowerCase().includes(skill.toLowerCase()));
+  const title = rawText.split(/\r?\n/).find((line) => line.trim())?.trim().slice(0, 80) || "JD chưa đặt tên";
+  const requiredSkills = foundSkills.slice(0, 5);
+  const optionalSkills = foundSkills.slice(5);
+  return {
+    id: `job_local_${Date.now()}`,
+    companyId: "company_demo",
+    companyName: "Công ty demo",
+    title,
+    status: "closed",
+    location: rawText.toLowerCase().includes("remote") ? "Từ xa" : "Linh hoạt",
+    employmentType: rawText.toLowerCase().includes("full") ? "Toàn thời gian" : "Thực tập",
+    requiredSkills: requiredSkills.length ? requiredSkills : ["Giao tiếp", "Tài liệu hóa"],
+    optionalSkills,
+    salary: "Thỏa thuận",
+  };
+}
+
+function upsertJob(currentJobs: Job[], nextJob: Job): Job[] {
+  const exists = currentJobs.some((item) => item.id === nextJob.id);
+  if (exists) return currentJobs.map((item) => (item.id === nextJob.id ? nextJob : item));
+  return [nextJob, ...currentJobs];
+}
+
+function JdPreview({ job }: { job: Job }) {
+  return (
+    <div className="jd-preview">
+      <div className="jd-preview-head">
+        <div>
+          <p className="eyebrow">Xem trước JD</p>
+          <h3>{job.title}</h3>
+          <span>{job.companyName} | {job.location} | {job.employmentType}</span>
+        </div>
+        <StatusBadge status={job.status} />
       </div>
+      <Insight title="Kỹ năng bắt buộc" items={job.requiredSkills} />
+      <Insight title="Kỹ năng ưu tiên" items={job.optionalSkills.length ? job.optionalSkills : ["Chưa có kỹ năng ưu tiên"]} />
+    </div>
+  );
+}
+
+function CandidateMatching() {
+  const [weights, setWeights] = useState<MatchingWeights>(weightPresets.balanced.weights);
+  const [activePreset, setActivePreset] = useState<ActiveWeightPreset>("balanced");
+  const [minScore, setMinScore] = useState(0);
+  const [selectedJobId, setSelectedJobId] = useState(jobs[0].id);
+  const [matches, setMatches] = useState<Match[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [notice, setNotice] = useState("");
+  const [error, setError] = useState("");
+  const visible = matches.filter((item) => item.score >= minScore);
+  const selectedJob = jobs.find((job) => job.id === selectedJobId) ?? jobs[0];
+  const activeTotal = Math.round(
+    (weights.skill_weight + weights.experience_weight + weights.education_weight) * 100,
+  );
+
+  function applyPreset(preset: WeightPreset) {
+    setActivePreset(preset);
+    setWeights(weightPresets[preset].weights);
+  }
+
+  function updateWeight(key: keyof MatchingWeights, value: number) {
+    setActivePreset("custom");
+    setWeights((current) => ({ ...current, [key]: value / 100 }));
+  }
+
+  async function runMatch() {
+    setLoading(true);
+    setError("");
+    setNotice("");
+    try {
+      const result = await api.matchCandidates(selectedJob, weights);
+      setMatches(result);
+      setNotice(`Đã gọi API và nhận ${result.length} ứng viên phù hợp.`);
+    } catch (err) {
+      setMatches(candidateMatches);
+      setError(`Chưa gọi được API backend (${(err as Error).message}). Đang hiển thị dữ liệu mẫu để kiểm tra giao diện.`);
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  return (
+    <div className="page-stack">
+      <Panel title="Ghép ứng viên" subtitle="Xếp hạng ứng viên bằng quy tắc ưu tiên kỹ năng.">
+        <div className="control-grid">
+          <label className="field-label">
+            Chọn JD
+            <select className="select-input" value={selectedJobId} onChange={(event) => setSelectedJobId(event.target.value)}>
+              {jobs.map((job) => (
+                <option key={job.id} value={job.id}>
+                  {job.title}
+                </option>
+              ))}
+            </select>
+          </label>
+          <label className="field-label">
+            Điểm tối thiểu: {minScore}
+            <input type="range" min="0" max="100" step="5" value={minScore} onChange={(event) => setMinScore(Number(event.target.value))} />
+          </label>
+          <button className="primary-button" onClick={runMatch} disabled={loading}>
+            <Search size={16} />
+            {loading ? "Đang xếp hạng..." : "Xếp hạng tất cả ứng viên"}
+          </button>
+        </div>
+        <div className="weight-panel">
+          <div className="preset-row" aria-label="Bộ trọng số ghép">
+            {(Object.keys(weightPresets) as WeightPreset[]).map((preset) => (
+              <button
+                key={preset}
+                className={activePreset === preset ? "preset-pill active" : "preset-pill"}
+                onClick={() => applyPreset(preset)}
+              >
+                {weightPresets[preset].label}
+              </button>
+            ))}
+          </div>
+          <div className="weight-grid">
+            <WeightSlider
+              label="Kỹ năng"
+              value={Math.round(weights.skill_weight * 100)}
+              onChange={(value) => updateWeight("skill_weight", value)}
+            />
+            <WeightSlider
+              label="Kinh nghiệm"
+              value={Math.round(weights.experience_weight * 100)}
+              onChange={(value) => updateWeight("experience_weight", value)}
+            />
+            <WeightSlider
+              label="Học vấn"
+              value={Math.round(weights.education_weight * 100)}
+              onChange={(value) => updateWeight("education_weight", value)}
+            />
+          </div>
+          <div className="weight-total">
+            Tổng trọng số {activeTotal}%. Backend sẽ chuẩn hóa trọng số đang dùng.
+          </div>
+        </div>
+      </Panel>
+
+      <RunFeedback notice={notice} error={error} idle={!matches.length && !loading} idleText="Bấm Xếp hạng tất cả ứng viên để gọi API ghép ứng viên." />
+      <MatchGrid matches={visible} emptyTitle="Không có ứng viên nào vượt ngưỡng lọc." />
+    </div>
+  );
+}
+
+function WeightSlider({ label, value, onChange }: { label: string; value: number; onChange: (value: number) => void }) {
+  return (
+    <label className={value === 0 ? "weight-slider disabled" : "weight-slider"}>
+      <span>
+        {label}
+        <strong>{value === 0 ? "Tắt" : `${value}%`}</strong>
+      </span>
+      <input
+        type="range"
+        min="0"
+        max="100"
+        step="5"
+        value={value}
+        onChange={(event) => onChange(Number(event.target.value))}
+      />
     </label>
   );
 }
 
-function Panel({ title, subtitle, children }: { title: string; subtitle: string; children: React.ReactNode }) {
+function Panel({ title, subtitle, children }: { title: string; subtitle: string; children: ReactNode }) {
   return (
     <section className="panel">
       <div className="panel-heading">
-        <h2>{title}</h2>
-        <p>{subtitle}</p>
+        <div>
+          <h2>{title}</h2>
+          <p>{subtitle}</p>
+        </div>
       </div>
       {children}
     </section>
   );
 }
 
-function NavButton({ active, icon, label, onClick }: { active: boolean; icon: React.ReactNode; label: string; onClick: () => void }) {
+function RunFeedback({ notice, error, idle, idleText }: { notice: string; error: string; idle: boolean; idleText: string }) {
+  if (error) return <div className="feedback-banner warning">{error}</div>;
+  if (notice) return <div className="feedback-banner success">{notice}</div>;
+  if (idle) return <div className="feedback-banner neutral">{idleText}</div>;
+  return null;
+}
+
+function MetricCard({ label, value, detail }: { label: string; value: string; detail: string }) {
   return (
-    <button className={active ? "nav-item active" : "nav-item"} onClick={onClick}>
-      {icon}
-      {label}
-    </button>
+    <article className="metric-card">
+      <span>{label}</span>
+      <strong>{value}</strong>
+      <p>{detail}</p>
+    </article>
   );
 }
 
-function Brand() {
+function HighlightCard({ title, value, detail }: { title: string; value: string; detail: string }) {
   return (
-    <div className="brand">
-      <div className="brand-mark">C2</div>
-      <div>
-        <strong>Corhort</strong>
-        <span>Education matching lab</span>
+    <article className="highlight-card">
+      <span>{title}</span>
+      <strong>{value}</strong>
+      <p>{detail}</p>
+    </article>
+  );
+}
+
+function SkillList({ skills }: { skills: Student["skills"] }) {
+  return (
+    <div className="skill-list">
+      {skills.map((skill) => (
+        <div className="skill-row" key={skill.name}>
+          <div>
+            <strong>{skill.name}</strong>
+            <span>{skill.evidence}</span>
+          </div>
+          <div className="score-chip">{skill.score.toFixed(1)}</div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function MatchGrid({ matches, emptyTitle }: { matches: Match[]; emptyTitle: string }) {
+  if (!matches.length) {
+    return (
+      <div className="empty-state">
+        <Sparkles size={22} />
+        <strong>{emptyTitle}</strong>
+        <p>Hạ bộ lọc hoặc chọn chế độ khác để xem thêm kết quả.</p>
+      </div>
+    );
+  }
+
+  return (
+    <section className="match-grid">
+      {matches.map((match) => (
+        <article className="match-card" key={match.id}>
+          <div className="match-card-top">
+            <div>
+              <p className="eyebrow">{match.subtitle}</p>
+              <h3>{match.title}</h3>
+            </div>
+            <ScoreCircle score={match.score} />
+          </div>
+          <StatusBadge status={match.decision} />
+          <Insight title="Điểm mạnh" items={match.strengths} />
+          <Insight title="Khoảng thiếu" items={match.gaps} />
+        </article>
+      ))}
+    </section>
+  );
+}
+
+function FlowSteps({ items }: { items: Array<[string, string]> }) {
+  return (
+    <div className="flow-steps">
+      {items.map(([title, detail], index) => (
+        <div className="flow-step" key={title}>
+          <span>{String(index + 1).padStart(2, "0")}</span>
+          <div>
+            <strong>{title}</strong>
+            <p>{detail}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function InfoGrid({ rows }: { rows: Array<[string, string]> }) {
+  return (
+    <div className="info-grid">
+      {rows.map(([label, value]) => (
+        <div key={label}>
+          <span>{label}</span>
+          <strong>{value}</strong>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function SavedCvList() {
+  return (
+    <div className="saved-list">
+      <div className="saved-item">
+        <CheckCircle2 size={18} />
+        <div>
+          <strong>CV thực tập Frontend</strong>
+          <span>CV chính | 2 kinh nghiệm | 4 kỹ năng nổi bật</span>
+        </div>
+      </div>
+      <div className="saved-item">
+        <FileText size={18} />
+        <div>
+          <strong>CV phần mềm tổng quát</strong>
+          <span>Bản nháp | Sẵn sàng phân tích lại</span>
+        </div>
       </div>
     </div>
   );
 }
 
-function Metric({ label, value }: { label: string; value: string | number }) {
+function DataTable({ headers, rows }: { headers: string[]; rows: string[][] }) {
   return (
-    <div className="metric">
-      <span>{label}</span>
-      <strong>{value}</strong>
+    <div className="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            {headers.map((header) => (
+              <th key={header}>{header}</th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {rows.map((row, index) => (
+            <tr key={`${row[0]}-${index}`}>
+              {row.map((cell, cellIndex) => (
+                <td key={`${cell}-${cellIndex}`}>{cell}</td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 }
 
-function ActionCard({ icon, title, text, onClick }: { icon: React.ReactNode; title: string; text: string; onClick: () => void }) {
+function Insight({ title, items }: { title: string; items: string[] }) {
   return (
-    <button className="action-card" onClick={onClick}>
-      <span>{icon}</span>
+    <div className="insight">
       <strong>{title}</strong>
-      <p>{text}</p>
-    </button>
-  );
-}
-
-function Score({ value }: { value: number }) {
-  const score = percent(value);
-  return <div className="score-ring" style={{ "--score": `${score}%` } as React.CSSProperties}>{score}%</div>;
-}
-
-function Banner({ tone, text }: { tone: "error" | "info"; text: string }) {
-  return <div className={tone === "error" ? "banner error" : "banner info"}>{text}</div>;
-}
-
-function EmptyState({ text }: { text: string }) {
-  return (
-    <div className="empty-state">
-      <Sparkles size={18} />
-      <span>{text}</span>
+      <div className="tag-cloud">
+        {items.map((item) => (
+          <span key={item}>{item}</span>
+        ))}
+      </div>
     </div>
   );
 }
 
-function percent(value: number) {
-  return Math.round(value <= 1 ? value * 100 : value);
+function ScoreCircle({ score }: { score: number }) {
+  return (
+    <div className="score-circle" style={{ "--score": `${score}%` } as CSSProperties}>
+      {score}
+    </div>
+  );
 }
 
-function labelForStatus(status: CompatMatch["match_status"]) {
-  if (status === "strong_match") return "Strong match";
-  if (status === "partial_match") return "Partial match";
-  return "Needs review";
+function StatusBadge({ status }: { status: Job["status"] | Match["decision"] }) {
+  return <span className={`status-badge ${String(status).toLowerCase()}`}>{formatStatus(status)}</span>;
 }
 
-function titleForView(view: View) {
-  if (view === "student") return "Flow sinh viên";
-  if (view === "company") return "Flow doanh nghiệp";
-  return "Dashboard giáo dục";
+function formatStatus(status: Job["status"] | Match["decision"]) {
+  if (status === "open") return "Đang mở";
+  if (status === "closed") return "Đã đóng";
+  if (status === "Shortlist") return "Phù hợp cao";
+  if (status === "Review") return "Cần xem thêm";
+  if (status === "Gap") return "Còn thiếu";
+  return status;
+}
+
+function Brand() {
+  return (
+    <div className="brand">
+      <div className="brand-mark">NT</div>
+      <div>
+        <strong>Cầu Nối Tài Năng</strong>
+        <span>Hồ sơ năng lực & ghép việc</span>
+      </div>
+    </div>
+  );
+}
+
+function roleFromAccount(account: string): Role {
+  if (account.startsWith("company_")) return "company";
+  if (account.startsWith("admin_")) return "admin";
+  return "student";
 }
 
 export default App;

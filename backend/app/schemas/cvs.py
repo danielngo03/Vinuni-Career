@@ -21,7 +21,8 @@ class CVRawParseRequest(BaseModel):
 
 class CVFormParseRequest(BaseModel):
     student_id: str | None = Field(default=None, max_length=120)
-    name: str = Field(min_length=1, max_length=120)
+    target_position: str | None = Field(default=None, max_length=120)
+    name: str | None = Field(default=None, max_length=120)
     education: str | None = Field(default=None, max_length=10_000)
     experience: str | None = Field(default=None, max_length=30_000)
     projects: str | None = Field(default=None, max_length=30_000)
@@ -33,6 +34,30 @@ class CVParsedSkill(BaseModel):
     score: float = Field(ge=0, le=10)
     confidence: float = Field(ge=0, le=1)
     evidence: list[str]
+
+
+class CVWorkExperience(BaseModel):
+    title: str = Field(default="", max_length=160)
+    company: str = Field(default="", max_length=160)
+    duration: str = Field(default="", max_length=120)
+    summary: str = Field(default="", max_length=500)
+    score: float = Field(default=0, ge=0, le=10)
+    score_reason: str = Field(default="", max_length=300)
+
+
+class CVEducation(BaseModel):
+    degree: str = Field(default="", max_length=180)
+    institution: str = Field(default="", max_length=180)
+    year: str = Field(default="", max_length=120)
+    summary: str = Field(default="", max_length=500)
+    score: float = Field(default=0, ge=0, le=10)
+    score_reason: str = Field(default="", max_length=300)
+
+
+class CVProfileHighlights(BaseModel):
+    work_experience_indexes: list[int] = Field(default_factory=list)
+    education_indexes: list[int] = Field(default_factory=list)
+    skill_names: list[str] = Field(default_factory=list)
 
 
 class CVParseMetadata(BaseModel):
@@ -53,7 +78,10 @@ class CVParseMetadata(BaseModel):
 
 class CVParseResponse(BaseModel):
     student_id: str
-    name: str
+    target_position: str
+    work_experience: list[CVWorkExperience] = Field(default_factory=list)
+    education: list[CVEducation] = Field(default_factory=list)
+    profile_highlights: CVProfileHighlights = Field(default_factory=CVProfileHighlights)
     skills: dict[str, CVParsedSkill]
     metadata: CVParseMetadata
 

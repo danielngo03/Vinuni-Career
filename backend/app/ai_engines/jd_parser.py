@@ -9,7 +9,13 @@ from typing import Iterable
 
 from app.infra.llm_gateway import ChatMessage, ChatRequest, get_llm_gateway
 from app.infra.llm_gateway.errors import LLMGatewayError
-from app.schemas.jobs import JobFormParseRequest, JobParsedSkill, JobParseResponse
+from app.schemas.jobs import (
+    JobEducationRequirements,
+    JobExperienceRequirements,
+    JobFormParseRequest,
+    JobParsedSkill,
+    JobParseResponse,
+)
 from app.services.ai_service import extract_skills
 
 PROMPT_VERSION = "parse_jd_v1"
@@ -61,6 +67,8 @@ def parse_jd_form(payload: JobFormParseRequest) -> JobParseResponse:
         benefits=_clean_list(payload.benefits),
         skills=_job_skills(required, text, required=True)
         | _job_skills(preferred, text, required=False),
+        experience_requirements=_experience_requirements_from_text(text),
+        education_requirements=_education_requirements_from_text(text),
         raw_text=text,
         metadata=_parse_metadata("form", text, parser_mode="deterministic_form"),
     )
@@ -87,6 +95,14 @@ def _parse_text(
             salary_range=_optional_str(parsed.get("salary_range")) or _salary_from_text(text),
             benefits=_coerce_string_list(parsed.get("benefits")),
             skills=_coerce_llm_skills(parsed.get("skills"), text),
+            experience_requirements=_coerce_experience_requirements(
+                parsed.get("experience_requirements"),
+                text,
+            ),
+            education_requirements=_coerce_education_requirements(
+                parsed.get("education_requirements"),
+                text,
+            ),
             raw_text=text,
             metadata=_parse_metadata(
                 source,
@@ -109,6 +125,8 @@ def _parse_text(
         salary_range=_salary_from_text(text),
         benefits=_benefits_from_text(text),
         skills=_job_skills(skills, text, required=True),
+        experience_requirements=_experience_requirements_from_text(text),
+        education_requirements=_education_requirements_from_text(text),
         raw_text=text,
         metadata=_parse_metadata(
             source,
@@ -259,6 +277,56 @@ def _benefits_from_text(text: str) -> list[str]:
     return benefits
 
 
+def _experience_requirements_from_text(text: str) -> JobExperienceRequirements:
+    lowered = text.lower()
+    explicit = bool(
+        re.search(
+            r"\b(experience|internship|portfolio|project experience|worked with|hands-on)\b",
+            lowered,
+        )
+    )
+    min_months = _months_from_text(text)
+    required = bool(re.search(r"\b(required|must have|need)\b.{0,40}\bexperience\b", lowered))
+    importance = 0.0
+    if explicit:
+        importance = 0.8 if required else 0.45
+    if min_months:
+        explicit = True
+        importance = max(importance, 0.65)
+    return JobExperienceRequirements(
+        required=required,
+        min_months=min_months,
+        preferred_titles=_preferred_titles_from_text(text) if explicit else [],
+        keywords=_experience_keywords_from_text(text),
+        importance=importance,
+    )
+
+
+def _education_requirements_from_text(text: str) -> JobEducationRequirements:
+    lowered = text.lower()
+    fields = _fields_of_study_from_text(text)
+    degrees = _degrees_from_text(text)
+    certifications = _certifications_from_text(text)
+    explicit = bool(fields or degrees or certifications)
+    required = bool(
+        re.search(
+            r"\b(required|must have|need)\b.{0,60}\b(degree|student|graduate|certification|gpa)\b",
+            lowered,
+        )
+    )
+    importance = 0.0
+    if explicit:
+        importance = 0.8 if required else 0.5
+    return JobEducationRequirements(
+        required=required,
+        degrees=degrees,
+        fields_of_study=fields,
+        certifications=certifications,
+        keywords=_education_keywords_from_text(text),
+        importance=importance,
+    )
+
+
 def _job_skills(
     skill_names: Iterable[str],
     text: str,
@@ -307,6 +375,136 @@ def _coerce_llm_skills(value: object, text: str) -> dict[str, JobParsedSkill]:
             required=required,
         )
     return skills or _job_skills(extract_skills(text), text, required=True)
+
+
+def _coerce_experience_requirements(value: object, text: str) -> JobExperienceRequirements:
+    fallback = _experience_requirements_from_text(text)
+    if not isinstance(value, dict):
+        return fallback
+    return JobExperienceRequirements(
+        required=bool(value.get("required", fallback.required)),
+        min_months=int(
+            _clamp_float(
+                value.get("min_months"),
+                default=fallback.min_months,
+                low=0,
+                high=600,
+            )
+        ),
+        preferred_titles=_coerce_string_list(value.get("preferred_titles")) or fallback.preferred_titles,
+        keywords=_coerce_string_list(value.get("keywords")) or fallback.keywords,
+        importance=_clamp_float(
+            value.get("importance"),
+            default=fallback.importance,
+            low=0,
+            high=1,
+        ),
+    )
+
+
+def _coerce_education_requirements(value: object, text: str) -> JobEducationRequirements:
+    fallback = _education_requirements_from_text(text)
+    if not isinstance(value, dict):
+        return fallback
+    return JobEducationRequirements(
+        required=bool(value.get("required", fallback.required)),
+        degrees=_coerce_string_list(value.get("degrees")) or fallback.degrees,
+        fields_of_study=(
+            _coerce_string_list(value.get("fields_of_study"))
+            or fallback.fields_of_study
+        ),
+        certifications=_coerce_string_list(value.get("certifications")) or fallback.certifications,
+        keywords=_coerce_string_list(value.get("keywords")) or fallback.keywords,
+        importance=_clamp_float(
+            value.get("importance"),
+            default=fallback.importance,
+            low=0,
+            high=1,
+        ),
+    )
+
+
+def _months_from_text(text: str) -> int:
+    match = re.search(r"(\d+)\s*\+?\s*(month|months|year|years|yr|yrs)\b", text, flags=re.IGNORECASE)
+    if not match:
+        return 0
+    amount = int(match.group(1))
+    unit = match.group(2).lower()
+    return amount * 12 if unit.startswith(("year", "yr")) else amount
+
+
+def _preferred_titles_from_text(text: str) -> list[str]:
+    title = _title_from_text(text).lower()
+    titles = [title] if title and title != "untitled job" else []
+    lowered = text.lower()
+    for keyword in ("frontend developer", "backend developer", "data analyst", "marketing assistant"):
+        if keyword in lowered and keyword not in titles:
+            titles.append(keyword)
+    return titles[:5]
+
+
+def _experience_keywords_from_text(text: str) -> list[str]:
+    lowered = text.lower()
+    keywords = []
+    for keyword in (
+        "internship",
+        "project experience",
+        "portfolio",
+        "customer service",
+        "web development",
+        "data reporting",
+        "hands-on",
+    ):
+        if keyword in lowered:
+            keywords.append(keyword)
+    if re.search(r"\bexperience\b", lowered):
+        keywords.append("experience")
+    return list(dict.fromkeys(keywords))[:8]
+
+
+def _degrees_from_text(text: str) -> list[str]:
+    lowered = text.lower()
+    degrees = []
+    for keyword in ("bachelor", "undergraduate student", "fresh graduate", "diploma", "certificate"):
+        if keyword in lowered:
+            degrees.append(keyword)
+    if "student" in lowered and not degrees:
+        degrees.append("student")
+    return degrees[:6]
+
+
+def _fields_of_study_from_text(text: str) -> list[str]:
+    lowered = text.lower()
+    fields = []
+    for keyword in (
+        "computer science",
+        "software engineering",
+        "information technology",
+        "business administration",
+        "marketing",
+        "data science",
+    ):
+        if keyword in lowered:
+            fields.append(keyword)
+    return fields[:6]
+
+
+def _certifications_from_text(text: str) -> list[str]:
+    lowered = text.lower()
+    certifications = []
+    for keyword in ("aws", "google analytics", "excel certification", "pmp", "scrum"):
+        if keyword in lowered:
+            certifications.append(keyword)
+    return certifications[:6]
+
+
+def _education_keywords_from_text(text: str) -> list[str]:
+    lowered = text.lower()
+    keywords = []
+    for keyword in ("final year student", "fresh graduate", "gpa", "coursework", "academic background"):
+        if keyword in lowered:
+            keywords.append(keyword)
+    return keywords[:8]
 
 
 def _normalize_skills(skill_names: Iterable[str]) -> list[str]:

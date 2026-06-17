@@ -1,0 +1,1 @@
+"""Role-gated Streamlit views."""

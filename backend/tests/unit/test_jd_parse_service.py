@@ -44,3 +44,21 @@ def test_parse_jd_form_uses_structured_skills():
     assert set(data["skills"]) == {"docker", "fastapi", "python"}
     assert data["skills"]["docker"]["required"] is False
     assert data["metadata"]["source"] == "form"
+
+
+def test_parse_jd_extracts_experience_and_education_requirements():
+    result = parse_jd_raw_text(
+        (
+            "Backend Intern. Required skills: Python, FastAPI. "
+            "Must have 6 months project experience or portfolio. "
+            "Computer Science student preferred."
+        ),
+        job_id="job-requirements-001",
+        company_id="company_demo",
+    )
+
+    data = result.model_dump()
+    assert data["experience_requirements"]["required"] is True
+    assert data["experience_requirements"]["min_months"] == 6
+    assert "portfolio" in data["experience_requirements"]["keywords"]
+    assert "computer science" in data["education_requirements"]["fields_of_study"]

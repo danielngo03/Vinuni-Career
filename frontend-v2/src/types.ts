@@ -1,63 +1,83 @@
-export type SkillDetail = {
-  score?: number;
-  confidence?: number;
-  evidence?: string[];
-  required_level?: number;
-  importance?: number;
-  required?: boolean;
+export type Role = "student" | "company" | "admin";
+
+export type Skill = {
+  name: string;
+  score: number;
+  confidence: number;
+  evidence: string;
+};
+
+export type Experience = {
+  title: string;
+  company: string;
+  duration: string;
+  score: number;
+  summary: string;
+};
+
+export type Education = {
+  degree: string;
+  institution: string;
+  year: string;
+  score: number;
 };
 
 export type Student = {
-  student_id: string;
-  name?: string;
-  skills: Record<string, SkillDetail>;
-  metadata?: Record<string, unknown>;
-};
-
-export type Company = {
-  company_id: string;
+  id: string;
   name: string;
-  industry?: string;
-  metadata?: Record<string, unknown>;
+  target: string;
+  email: string;
+  phone: string;
+  location: string;
+  university: string;
+  major: string;
+  graduationYear: string;
+  bio: string;
+  skills: Skill[];
+  experiences: Experience[];
+  education: Education[];
 };
 
 export type Job = {
-  job_id: string;
-  company_id: string;
+  id: string;
+  companyId: string;
+  companyName: string;
   title: string;
-  status?: "open" | "closed" | "draft" | string;
-  location?: string;
-  employment_type?: string;
-  salary_range?: string;
-  benefits?: string[];
-  skills: Record<string, SkillDetail>;
-  metadata?: Record<string, unknown>;
+  status: "open" | "closed";
+  location: string;
+  employmentType: string;
+  requiredSkills: string[];
+  optionalSkills: string[];
+  salary: string;
+  experienceRequirements?: {
+    required: boolean;
+    min_months: number;
+    preferred_titles: string[];
+    keywords: string[];
+    importance: number;
+  };
+  educationRequirements?: {
+    required: boolean;
+    degrees: string[];
+    fields_of_study: string[];
+    certifications: string[];
+    keywords: string[];
+    importance: number;
+  };
 };
 
-export type StudentJobMatch = {
-  job: Job;
-  match: CompatMatch;
+export type MatchingWeights = {
+  skill_weight: number;
+  experience_weight: number;
+  education_weight: number;
 };
 
-export type CompatMatch = {
-  job_id: string;
-  student_id: string;
-  student_name?: string;
-  match_score: number;
-  match_status: "strong_match" | "partial_match" | "not_match";
-  matched_skills: string[];
-  missing_or_weak_skills: Record<string, SkillGap>;
-  explanation: string;
+export type Match = {
+  id: string;
+  title: string;
+  subtitle: string;
+  score: number;
+  decision: "Shortlist" | "Review" | "Gap";
+  strengths: string[];
+  gaps: string[];
 };
-
-export type SkillGap = {
-  user_score: number;
-  required_level: number;
-  gap: number;
-  importance: number;
-  required: boolean;
-};
-
-export type FlowMode = "balanced" | "strict" | "intern_friendly";
-
-export type View = "overview" | "student" | "company";

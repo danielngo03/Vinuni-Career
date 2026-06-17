@@ -55,6 +55,23 @@ class JobParsedSkill(BaseModel):
     required: bool = True
 
 
+class JobExperienceRequirements(BaseModel):
+    required: bool = False
+    min_months: int = Field(default=0, ge=0)
+    preferred_titles: list[str] = Field(default_factory=list)
+    keywords: list[str] = Field(default_factory=list)
+    importance: float = Field(default=0.0, ge=0, le=1)
+
+
+class JobEducationRequirements(BaseModel):
+    required: bool = False
+    degrees: list[str] = Field(default_factory=list)
+    fields_of_study: list[str] = Field(default_factory=list)
+    certifications: list[str] = Field(default_factory=list)
+    keywords: list[str] = Field(default_factory=list)
+    importance: float = Field(default=0.0, ge=0, le=1)
+
+
 class JobParseMetadata(BaseModel):
     source: str
     jd_text_excerpt: str
@@ -81,6 +98,12 @@ class JobParseResponse(BaseModel):
     salary_range: str | None = None
     benefits: list[str] = Field(default_factory=list)
     skills: dict[str, JobParsedSkill]
+    experience_requirements: JobExperienceRequirements = Field(
+        default_factory=JobExperienceRequirements
+    )
+    education_requirements: JobEducationRequirements = Field(
+        default_factory=JobEducationRequirements
+    )
     raw_text: str
     metadata: JobParseMetadata
 
