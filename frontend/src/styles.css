@@ -295,6 +295,12 @@ select:focus {
   font-weight: 850;
 }
 
+.secondary-button.disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+  pointer-events: none;
+}
+
 .quiet-button {
   padding: 0 16px;
   background: rgba(255, 255, 255, 0.66);
@@ -469,7 +475,8 @@ select:focus {
 }
 
 .workspace-flow > .error-banner,
-.workspace-flow > .notice-banner {
+.workspace-flow > .notice-banner,
+.workspace-flow > .ai-loading-banner {
   grid-column: 1 / -1;
 }
 
@@ -583,6 +590,7 @@ select:focus {
 .skill-cloud span {
   display: inline-flex;
   align-items: center;
+  gap: 6px;
   min-height: 32px;
   padding: 0 11px;
   border-radius: 999px;
@@ -590,6 +598,16 @@ select:focus {
   color: var(--brand-strong);
   font-size: 13px;
   font-weight: 800;
+}
+
+.skill-cloud span em {
+  padding: 2px 7px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.72);
+  color: var(--muted);
+  font-size: 11px;
+  font-style: normal;
+  white-space: nowrap;
 }
 
 .toggle-line {
@@ -711,6 +729,58 @@ select:focus {
 .notice-banner {
   background: var(--aqua-soft);
   color: var(--brand-strong);
+}
+
+.ai-loading-banner {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  border: 1px solid rgba(47, 109, 246, 0.18);
+  border-radius: 16px;
+  background: linear-gradient(135deg, #ffffff, var(--brand-soft) 56%, var(--aqua-soft));
+  color: var(--ink);
+  box-shadow: 0 14px 32px rgba(47, 109, 246, 0.12);
+}
+
+.ai-loading-banner strong,
+.ai-loading-banner span {
+  display: block;
+}
+
+.ai-loading-banner span {
+  margin-top: 2px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.ai-loading-mark {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  flex: 0 0 44px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, var(--brand), var(--aqua) 54%, var(--violet));
+  color: #fff;
+  font-weight: 950;
+  box-shadow: 0 10px 24px rgba(47, 109, 246, 0.22);
+}
+
+.ai-loading-mark .spin-icon {
+  position: absolute;
+  inset: auto 5px 5px auto;
+}
+
+.spin-icon {
+  animation: spin 900ms linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 @media (max-width: 1100px) {

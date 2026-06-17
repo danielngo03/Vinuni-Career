@@ -11,6 +11,7 @@ import {
   FileText,
   GraduationCap,
   LayoutDashboard,
+  LoaderCircle,
   LogOut,
   Search,
   Sparkles,
@@ -264,6 +265,7 @@ function StudentWorkspace({ session }: { session: Session }) {
   const [matches, setMatches] = useState<StudentJobMatch[]>([]);
   const [review, setReview] = useState<ReviewResult | null>(null);
   const [useLlm, setUseLlm] = useState(true);
+  const [aiLoading, setAiLoading] = useState("");
   const [error, setError] = useState("");
   const [notice, setNotice] = useState("");
 
@@ -283,14 +285,17 @@ function StudentWorkspace({ session }: { session: Session }) {
     refresh().catch((err: Error) => setError(err.message));
   }, [session]);
 
-  async function runAction(action: () => Promise<void>, success: string) {
+  async function runAction(action: () => Promise<void>, success: string, loadingMessage = "") {
     setError("");
     setNotice("");
+    if (loadingMessage) setAiLoading(loadingMessage);
     try {
       await action();
       setNotice(success);
     } catch (err) {
       setError((err as Error).message);
+    } finally {
+      if (loadingMessage) setAiLoading("");
     }
   }
 
@@ -298,24 +303,29 @@ function StudentWorkspace({ session }: { session: Session }) {
     <section className="workspace-flow">
       <ErrorBanner message={error} />
       <Notice message={notice} />
+      <AiLoadingBanner message={aiLoading} />
       <section className="flow-main">
         <Panel title="1. Tạo hồ sơ từ CV" subtitle="Bạn chỉ cần đưa CV vào, hệ thống sẽ tóm tắt phần quan trọng.">
           <textarea className="text-area" value={cvText} onChange={(event) => setCvText(event.target.value)} />
           <div className="button-row">
-            <button className="primary-button" onClick={() => runAction(async () => setDraftStudent(await api.parseCvText(session, cvText)), "Đã đọc CV. Hãy kiểm tra hồ sơ trước khi lưu.")}>
-              <Sparkles size={16} />
-              Đọc CV
+            <button className="primary-button" disabled={Boolean(aiLoading)} onClick={() => runAction(async () => setDraftStudent(await api.parseCvText(session, cvText)), "Đã đọc CV. Hãy kiểm tra hồ sơ trước khi lưu.", "AI đang đọc CV")}>
+              {aiLoading === "AI đang đọc CV" ? <LoaderCircle className="spin-icon" size={16} /> : <Sparkles size={16} />}
+              {aiLoading === "AI đang đọc CV" ? "Đang đọc CV" : "Đọc CV"}
             </button>
-            <label className="secondary-button">
-              <Upload size={16} />
-              Tải CV lên
+            <label className={aiLoading ? "secondary-button disabled" : "secondary-button"}>
+              {aiLoading === "AI đang đọc CV từ tệp" ? <LoaderCircle className="spin-icon" size={16} /> : <Upload size={16} />}
+              {aiLoading === "AI đang đọc CV từ tệp" ? "Đang đọc tệp" : "Tải CV lên"}
               <input
                 hidden
                 type="file"
                 accept=".txt,.pdf,.docx"
                 onChange={(event) => {
                   const file = event.target.files?.[0];
-                  if (file) runAction(async () => setDraftStudent(await api.parseCvUpload(session, file)), "Đã tải lên và đọc CV.");
+                  if (file && !aiLoading) runAction(async () => {
+                    const parsed = await api.parseCvUpload(session, file);
+                    if (parsed._raw_text) setCvText(parsed._raw_text);
+                    setDraftStudent(parsed);
+                  }, "Đã tải lên và đọc CV. Nội dung đã được đưa vào ô CV để kiểm tra.", "AI đang đọc CV từ tệp");
                 }}
               />
             </label>
@@ -383,11 +393,11 @@ function StudentWorkspace({ session }: { session: Session }) {
             </label>
             <button
               className="secondary-button full"
-              disabled={!selectedProfile || !selectedJob}
-              onClick={() => selectedProfile && selectedJob && runAction(async () => setReview(await api.reviewStudentJob(session, selectedProfile.student_id, selectedJob.job_id, STRONG_DEFAULT, PARTIAL_DEFAULT, useLlm)), "Đã nhận xét CV với JD.")}
+              disabled={!selectedProfile || !selectedJob || Boolean(aiLoading)}
+              onClick={() => selectedProfile && selectedJob && runAction(async () => setReview(await api.reviewStudentJob(session, selectedProfile.student_id, selectedJob.job_id, STRONG_DEFAULT, PARTIAL_DEFAULT, useLlm)), "Đã nhận xét CV với JD.", useLlm ? "AI đang nhận xét CV" : "")}
             >
-              Nhận xét CV với JD đã chọn
-              <FileSearch size={16} />
+              {aiLoading === "AI đang nhận xét CV" ? "Đang nhận xét CV" : "Nhận xét CV với JD đã chọn"}
+              {aiLoading === "AI đang nhận xét CV" ? <LoaderCircle className="spin-icon" size={16} /> : <FileSearch size={16} />}
             </button>
           </div>
           {topMatch && <MatchHighlight match={topMatch} />}
@@ -405,6 +415,7 @@ function EnterpriseWorkspace({ session }: { session: Session }) {
   const [selectedJobId, setSelectedJobId] = useState("");
   const [matches, setMatches] = useState<MatchResult[]>([]);
   const [rawText, setRawText] = useState("Frontend Intern. Required skills: JavaScript 8, React 7, Communication 6. Nice to have: Documentation.");
+  const [aiLoading, setAiLoading] = useState("");
   const [error, setError] = useState("");
   const [notice, setNotice] = useState("");
 
@@ -421,14 +432,17 @@ function EnterpriseWorkspace({ session }: { session: Session }) {
     refresh().catch((err: Error) => setError(err.message));
   }, [session]);
 
-  async function runAction(action: () => Promise<void>, success: string) {
+  async function runAction(action: () => Promise<void>, success: string, loadingMessage = "") {
     setError("");
     setNotice("");
+    if (loadingMessage) setAiLoading(loadingMessage);
     try {
       await action();
       setNotice(success);
     } catch (err) {
       setError((err as Error).message);
+    } finally {
+      if (loadingMessage) setAiLoading("");
     }
   }
 
@@ -436,24 +450,25 @@ function EnterpriseWorkspace({ session }: { session: Session }) {
     <section className="workspace-flow">
       <ErrorBanner message={error} />
       <Notice message={notice} />
+      <AiLoadingBanner message={aiLoading} />
       <section className="flow-main">
         <Panel title="1. Chuẩn hóa JD" subtitle="Dán JD hoặc tải tệp lên. Hệ thống sẽ biến JD thành yêu cầu kỹ năng.">
           <textarea className="text-area" value={rawText} onChange={(event) => setRawText(event.target.value)} />
           <div className="button-row">
-            <button className="primary-button" onClick={() => runAction(async () => setDraftJob(await api.parseJob(session, { raw_text: rawText, company_id: session.userId })), "Đã đọc JD. Hãy kiểm tra trước khi lưu.")}>
-              <Sparkles size={16} />
-              Đọc JD
+            <button className="primary-button" disabled={Boolean(aiLoading)} onClick={() => runAction(async () => setDraftJob(await api.parseJob(session, { raw_text: rawText, company_id: session.userId })), "Đã đọc JD. Hãy kiểm tra trước khi lưu.", "AI đang đọc JD")}>
+              {aiLoading === "AI đang đọc JD" ? <LoaderCircle className="spin-icon" size={16} /> : <Sparkles size={16} />}
+              {aiLoading === "AI đang đọc JD" ? "Đang đọc JD" : "Đọc JD"}
             </button>
-            <label className="secondary-button">
-              <Upload size={16} />
-              Tải JD lên
+            <label className={aiLoading ? "secondary-button disabled" : "secondary-button"}>
+              {aiLoading === "AI đang đọc JD từ tệp" ? <LoaderCircle className="spin-icon" size={16} /> : <Upload size={16} />}
+              {aiLoading === "AI đang đọc JD từ tệp" ? "Đang đọc tệp" : "Tải JD lên"}
               <input
                 hidden
                 type="file"
                 accept=".txt,.pdf,.docx"
                 onChange={(event) => {
                   const file = event.target.files?.[0];
-                  if (file) runAction(async () => setDraftJob(await api.parseJobUpload(session, file)), "Đã tải lên và đọc JD.");
+                  if (file && !aiLoading) runAction(async () => setDraftJob(await api.parseJobUpload(session, file)), "Đã tải lên và đọc JD.", "AI đang đọc JD từ tệp");
                 }}
               />
             </label>
@@ -614,7 +629,10 @@ function ProfilePreview({ student, onSave }: { student: StudentProfile; onSave: 
       </div>
       <div className="skill-cloud">
         {skills.map(([name, skill]) => (
-          <span key={name}>{name} · {Math.round(skill.score)}/10</span>
+          <span key={name}>
+            {name} · {Math.round(skill.score)}/10
+            {skill.self_rating && <em>{formatSelfRating(skill.self_rating)}</em>}
+          </span>
         ))}
       </div>
     </div>
@@ -811,6 +829,28 @@ function ErrorBanner({ message }: { message: string }) {
 
 function Notice({ message }: { message: string }) {
   return message ? <div className="notice-banner">{message}</div> : null;
+}
+
+function formatSelfRating(rating: { value: number; scale: number; normalized_score: number; source: string }) {
+  if (rating.source === "percent") return `tự đánh giá ${Math.round(rating.value)}%`;
+  if (rating.source === "level") return `tự đánh giá ${Math.round(rating.normalized_score)}/10`;
+  return `tự đánh giá ${Number(rating.value).toFixed(Number.isInteger(rating.value) ? 0 : 1)}/${Math.round(rating.scale)}`;
+}
+
+function AiLoadingBanner({ message }: { message: string }) {
+  if (!message) return null;
+  return (
+    <div className="ai-loading-banner" role="status" aria-live="polite">
+      <div className="ai-loading-mark">
+        <span>C</span>
+        <LoaderCircle className="spin-icon" size={18} />
+      </div>
+      <div>
+        <strong>{message}</strong>
+        <span>Vui lòng chờ trong giây lát.</span>
+      </div>
+    </div>
+  );
 }
 
 function headlineForRole(role: Role) {
