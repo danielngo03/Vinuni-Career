@@ -91,12 +91,17 @@ def mask_pii(text: str) -> tuple[str, list[dict[str, str]]]:
 
 def extract_skills(text: str) -> list[str]:
     normalized = re.sub(r"[^a-z0-9+#.\s-]", " ", text.lower())
-    found = {skill for skill in SKILLS if skill in normalized}
+    found = {skill for skill in SKILLS if _contains_skill(normalized, skill)}
     if "node.js" in normalized:
         found.add("node")
     if "postgres" in normalized:
         found.add("postgresql")
     return sorted(found)
+
+
+def _contains_skill(text: str, skill: str) -> bool:
+    pattern = r"(?<![a-z0-9+#.])" + re.escape(skill) + r"(?![a-z0-9+#.])"
+    return re.search(pattern, text) is not None
 
 
 def embed_text(text: str, dimensions: int = 32) -> list[float]:

@@ -14,6 +14,50 @@ class CVMaskResponse(BaseModel):
     entities: list[dict[str, str]]
 
 
+class CVRawParseRequest(BaseModel):
+    raw_text: str = Field(min_length=1, max_length=80_000)
+    student_id: str | None = Field(default=None, max_length=120)
+
+
+class CVFormParseRequest(BaseModel):
+    student_id: str | None = Field(default=None, max_length=120)
+    name: str = Field(min_length=1, max_length=120)
+    education: str | None = Field(default=None, max_length=10_000)
+    experience: str | None = Field(default=None, max_length=30_000)
+    projects: str | None = Field(default=None, max_length=30_000)
+    skills: list[str] = Field(default_factory=list)
+    raw_notes: str | None = Field(default=None, max_length=20_000)
+
+
+class CVParsedSkill(BaseModel):
+    score: float = Field(ge=0, le=10)
+    confidence: float = Field(ge=0, le=1)
+    evidence: list[str]
+
+
+class CVParseMetadata(BaseModel):
+    source: str
+    cv_text_excerpt: str
+    parser_mode: str
+    llm_used: bool = False
+    fallback_used: bool = False
+    fallback_reason: str | None = None
+    provider_chain: list[str] = Field(default_factory=list)
+    provider: str | None = None
+    model: str | None = None
+    prompt_version: str | None = None
+    error_status_code: int | None = None
+    error_code: str | None = None
+    error: str | None = None
+
+
+class CVParseResponse(BaseModel):
+    student_id: str
+    name: str
+    skills: dict[str, CVParsedSkill]
+    metadata: CVParseMetadata
+
+
 class CVCreate(BaseModel):
     student_id: str
     parsed_data: dict[str, Any] = Field(default_factory=dict)

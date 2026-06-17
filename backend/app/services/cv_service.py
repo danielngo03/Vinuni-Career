@@ -3,9 +3,24 @@ from __future__ import annotations
 from fastapi import HTTPException, status
 from sqlalchemy.orm import Session
 
+from app.ai_engines.cv_parser import parse_cv_form as ai_parse_cv_form
+from app.ai_engines.cv_parser import parse_cv_raw_text as ai_parse_cv_raw_text
 from app.infra.database.models import CV, StudentProfile
-from app.schemas.cvs import CVCreate
+from app.schemas.cvs import CVCreate, CVFormParseRequest, CVParseResponse
 from app.services.ai_service import embed_text, index_document, mask_pii
+
+
+def parse_cv_raw_text(
+    raw_text: str,
+    *,
+    student_id: str | None = None,
+    source: str = "raw_text",
+) -> CVParseResponse:
+    return ai_parse_cv_raw_text(raw_text, student_id=student_id, source=source)
+
+
+def parse_cv_form(payload: CVFormParseRequest) -> CVParseResponse:
+    return ai_parse_cv_form(payload)
 
 
 def create_cv(db: Session, payload: CVCreate) -> CV:

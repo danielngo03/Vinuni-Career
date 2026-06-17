@@ -6,16 +6,26 @@ import uuid
 from pathlib import Path
 from typing import Any
 
-from fastapi import APIRouter, File, HTTPException, UploadFile
+from fastapi import APIRouter, File, Form, Header, HTTPException, UploadFile
 from pydantic import BaseModel, Field
 
+from app.schemas.matching import (
+    MatchingJobInput,
+    MatchingSkillRequirement,
+    MatchingStudentInput,
+    MatchingStudentSkill,
+)
 from app.services.ai_service import extract_skills
+from app.services.cv_service import parse_cv_raw_text
+from app.services.job_service import parse_jd_raw_text
+from app.services.matching_service import score_match
 
 router = APIRouter(tags=["frontend-compat"])
 
 DATA_ROOT = Path(__file__).resolve().parents[2] / ".data" / "demo"
 JOBS_DIR = DATA_ROOT / "jobs"
 STUDENTS_DIR = DATA_ROOT / "students"
+COMPANIES_DIR = DATA_ROOT / "companies"
 
 
 class RawTextPayload(BaseModel):
@@ -35,6 +45,17 @@ class CvPayload(BaseModel):
 def _ensure_dirs() -> None:
     JOBS_DIR.mkdir(parents=True, exist_ok=True)
     STUDENTS_DIR.mkdir(parents=True, exist_ok=True)
+    COMPANIES_DIR.mkdir(parents=True, exist_ok=True)
+    if not any(COMPANIES_DIR.glob("*.json")):
+        _write_json(
+            COMPANIES_DIR / "company_demo.json",
+            {
+                "company_id": "company_demo",
+                "name": "Demo Company",
+                "industry": "Education technology",
+                "metadata": {"source": "compat_api"},
+            },
+        )
     if not any(JOBS_DIR.glob("*.json")):
         _write_json(
             JOBS_DIR / "mock-frontend-intern-001.json",
@@ -162,6 +183,11 @@ def _list_jobs() -> list[dict[str, Any]]:
     return [_read_json(path) for path in sorted(JOBS_DIR.glob("*.json"))]
 
 
+def _list_companies() -> list[dict[str, Any]]:
+    _ensure_dirs()
+    return [_read_json(path) for path in sorted(COMPANIES_DIR.glob("*.json"))]
+
+
 def _list_students() -> list[dict[str, Any]]:
     _ensure_dirs()
     return [_read_json(path) for path in sorted(STUDENTS_DIR.glob("*.json"))]
@@ -186,44 +212,64 @@ def _match(
     student: dict[str, Any],
     thresholds: MatchThresholds,
 ) -> dict[str, Any]:
-    matched: list[str] = []
-    gaps: dict[str, Any] = {}
-    weighted_score = 0.0
-    total_weight = 0.0
-    student_skills = student.get("skills", {})
-    for skill, requirement in job.get("skills", {}).items():
-        required_level = float(requirement.get("required_level", 6))
-        importance = float(requirement.get("importance", 1))
-        user_score = float(student_skills.get(skill, {}).get("score", 0))
-        total_weight += importance
-        weighted_score += min(user_score / max(required_level, 1), 1.0) * importance
-        if user_score >= required_level:
-            matched.append(skill)
-        else:
-            gaps[skill] = {
-                "user_score": user_score,
-                "required_level": required_level,
-                "gap": round(max(required_level - user_score, 0), 1),
-                "importance": importance,
-                "required": bool(requirement.get("required", True)),
-            }
-    score = round(weighted_score / total_weight, 3) if total_weight else 0.0
+    result = score_match(_to_matching_student(student), _to_matching_job(job))
+    score = round(result.match_score / 100, 3)
     if score >= thresholds.strong_match:
         status = "strong_match"
     elif score >= thresholds.partial_match:
         status = "partial_match"
     else:
         status = "not_match"
+    gaps = {
+        item.skill: {
+            "user_score": item.student_score or 0,
+            "required_level": item.required_level,
+            "gap": round(max(item.required_level - (item.student_score or 0), 0), 1),
+            "importance": item.importance,
+            "required": item.required,
+        }
+        for item in result.skill_breakdown
+        if item.status != "matched"
+    }
     return {
         "job_id": job["job_id"],
         "student_id": student["student_id"],
-        "student_name": student["name"],
+        "student_name": student.get("name") or student["student_id"],
         "match_score": score,
         "match_status": status,
-        "matched_skills": matched,
+        "matched_skills": result.strengths,
         "missing_or_weak_skills": gaps,
-        "explanation": f"{student['name']} matches {len(matched)} key skill(s) for {job['title']}.",
+        "explanation": " ".join(result.explanations)
+        or f"{student.get('name') or student['student_id']} matches {job['title']}.",
     }
+
+
+def _to_matching_job(job: dict[str, Any]) -> MatchingJobInput:
+    return MatchingJobInput(
+        job_id=job["job_id"],
+        company_id=job.get("company_id"),
+        title=job["title"],
+        status=job.get("status"),
+        location=job.get("location"),
+        skills={
+            skill: MatchingSkillRequirement(**detail)
+            for skill, detail in job.get("skills", {}).items()
+        },
+        raw_text=job.get("raw_text"),
+        metadata=job.get("metadata", {}),
+    )
+
+
+def _to_matching_student(student: dict[str, Any]) -> MatchingStudentInput:
+    return MatchingStudentInput(
+        student_id=student["student_id"],
+        name=student.get("name"),
+        skills={
+            skill: MatchingStudentSkill(**detail)
+            for skill, detail in student.get("skills", {}).items()
+        },
+        metadata=student.get("metadata", {}),
+    )
 
 
 async def _upload_text(file: UploadFile) -> str:
@@ -244,15 +290,19 @@ def root() -> dict[str, Any]:
 
 @router.post("/jobs/parse")
 def parse_job(payload: RawTextPayload) -> dict[str, Any]:
-    return _job_from_text(payload.raw_text, company_id=payload.company_id)
+    return parse_jd_raw_text(payload.raw_text, company_id=payload.company_id).model_dump()
 
 
 @router.post("/jobs/parse-upload")
 async def parse_job_upload(
-    company_id: str = "company_demo",
+    company_id: str = Form(default="company_demo"),
     file: UploadFile = File(...),
 ) -> dict[str, Any]:
-    return _job_from_text(await _upload_text(file), company_id=company_id)
+    return parse_jd_raw_text(
+        await _upload_text(file),
+        company_id=company_id,
+        source="upload",
+    ).model_dump()
 
 
 @router.post("/jobs")
@@ -267,6 +317,11 @@ def save_job(job: dict[str, Any]) -> dict[str, Any]:
 @router.get("/jobs")
 def list_jobs() -> list[dict[str, Any]]:
     return _list_jobs()
+
+
+@router.get("/companies")
+def list_companies() -> list[dict[str, Any]]:
+    return _list_companies()
 
 
 @router.get("/jobs/open")
@@ -307,13 +362,23 @@ def match_job(job_id: str, thresholds: MatchThresholds) -> list[dict[str, Any]]:
 
 
 @router.post("/students/cv/parse")
-def parse_cv(payload: CvPayload) -> dict[str, Any]:
-    return _student_from_text(payload.raw_text)
+def parse_cv(
+    payload: CvPayload,
+    demo_user_id: str | None = Header(default=None, alias="X-Demo-User-Id"),
+) -> dict[str, Any]:
+    return parse_cv_raw_text(payload.raw_text, student_id=demo_user_id).model_dump()
 
 
 @router.post("/students/cv/parse-upload")
-async def parse_cv_upload(file: UploadFile = File(...)) -> dict[str, Any]:
-    return _student_from_text(await _upload_text(file))
+async def parse_cv_upload(
+    file: UploadFile = File(...),
+    demo_user_id: str | None = Header(default=None, alias="X-Demo-User-Id"),
+) -> dict[str, Any]:
+    return parse_cv_raw_text(
+        await _upload_text(file),
+        student_id=demo_user_id,
+        source="upload",
+    ).model_dump()
 
 
 @router.post("/students")
