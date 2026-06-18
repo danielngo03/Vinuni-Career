@@ -1,5 +1,5 @@
 [project]
-name = "c2-career-platform-backend"
+name = "vinuni-career-platform-backend"
 version = "0.1.0"
 description = "B2B2C AI career platform backend MVP"
 requires-python = ">=3.14,<3.15"
@@ -30,6 +30,19 @@ dev = [
     "ruff>=0.6.3",
     "mypy>=1.11.1",
 ]
+ai-production = [
+    "langgraph>=0.2.70",
+    "instructor>=1.7.0",
+    "python-magic>=0.4.27",
+    "pypdf>=5.0.0",
+    "python-docx>=1.1.2",
+    "presidio-analyzer>=2.2.355",
+    "presidio-anonymizer>=2.2.355",
+    "rapidfuzz>=3.10.0",
+    "flashrank>=0.2.10",
+    "langfuse>=2.53.0",
+    "litellm>=1.52.0",
+]
 
 [build-system]
 requires = ["hatchling"]
@@ -49,4 +62,9 @@ target-version = "py314"
 
 [tool.ruff.lint]
 select = ["E", "F", "I", "B", "UP", "SIM"]
-ignore = ["B008"]
+ignore = [
+    "B008",
+    "E501",
+    "SIM102",
+    "UP042",
+]

@@ -1,8 +1,8 @@
 from __future__ import annotations
 
-from app.infra.search import get_search_client
-from app.schemas.search import SearchRequest, SearchResponse, SearchResult
-from app.services.ai_service import embed_text
+from app.modules.ai_operations.application.legacy_ai_service import embed_text
+from app.modules.platform.schemas import SearchRequest, SearchResponse, SearchResult
+from app.platform.search import get_search_client
 
 
 def search_documents(payload: SearchRequest) -> SearchResponse:
@@ -16,7 +16,7 @@ def search_documents(payload: SearchRequest) -> SearchResponse:
     return SearchResponse(
         results=[
             SearchResult(
-                id=hit.document.id,
+                id=str(hit.document.metadata.get("document_id") or hit.document.id),
                 entity_type=hit.document.entity_type,
                 title=hit.document.title,
                 score=hit.score,

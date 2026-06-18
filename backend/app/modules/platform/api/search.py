@@ -2,10 +2,10 @@ from __future__ import annotations
 
 from fastapi import APIRouter, Depends
 
-from app.api.dependencies.auth import get_current_user
-from app.infra.database.models import User
-from app.schemas.search import SearchRequest, SearchResponse
-from app.services.search_service import search_documents
+from app.modules.access.api.auth import get_current_user
+from app.modules.platform.application.search_service import search_documents
+from app.modules.platform.schemas import SearchRequest, SearchResponse
+from app.platform.database.models import User
 
 router = APIRouter()
 
