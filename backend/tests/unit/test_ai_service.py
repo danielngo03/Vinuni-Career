@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from app.services.ai_service import mask_pii, match_cv_to_job
+from app.modules.ai_operations.application.legacy_ai_service import mask_pii, match_cv_to_job
 
 
 def test_mask_pii_redacts_email_phone_and_possible_name():
