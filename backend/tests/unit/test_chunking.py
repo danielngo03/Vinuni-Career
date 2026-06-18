@@ -1,7 +1,7 @@
 from __future__ import annotations
 
-from app.ai_engines.guardrails import detect_prompt_injection
-from app.ai_engines.rag import chunk_text
+from app.ai.retrieval import chunk_text
+from app.ai.safety import detect_prompt_injection
 
 
 def test_chunk_text_preserves_order_and_overlap():

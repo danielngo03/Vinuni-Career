@@ -1,5 +1,7 @@
 # Environment
 .env
+.env.*
+!.env.example
 
 # Python
 __pycache__/
@@ -11,19 +13,20 @@ build/
 *.egg-info/
 .pytest_cache/
 .mypy_cache/
-node_modules/
-dist/
-
-# OS
-.DS_Store
-*.log
 *.db
 *.sqlite
 *.sqlite3
+
+# OS
+.DS_Store
+
+# Node / Next.js
+node_modules/
+.next/
+.turbo/
+out/
 *.tsbuildinfo
-.data/
+.dev/
 
 # AI logs — tracked structure, ignored content
 .ai-log/*.jsonl
-
-docs/test-graph.md

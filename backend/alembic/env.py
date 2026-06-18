@@ -2,13 +2,12 @@ from __future__ import annotations
 
 from logging.config import fileConfig
 
-from alembic import context
 from sqlalchemy import engine_from_config, pool
 
-from app.core.config import settings
-from app.infra.database.session import Base
-
-from app.infra.database import models  # noqa: F401
+from alembic import context
+from app.platform.database import models  # noqa: F401
+from app.platform.database.session import Base
+from app.shared.config import settings
 
 config = context.config
 if config.config_file_name is not None:
