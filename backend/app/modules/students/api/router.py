@@ -3,12 +3,12 @@ from __future__ import annotations
 from fastapi import APIRouter, Depends, Query
 from sqlalchemy.orm import Session
 
-from app.api.dependencies.auth import get_current_user
-from app.infra.database.models import StudentProfile, User
-from app.infra.database.session import get_db
-from app.schemas.common import PageParams
-from app.schemas.students import StudentProfileCreate, StudentProfileView
-from app.services.student_service import create_student_profile, list_student_profiles
+from app.modules.access.api.auth import get_current_user
+from app.modules.students.application.service import create_student_profile, list_student_profiles
+from app.modules.students.schemas import StudentProfileCreate, StudentProfileView
+from app.platform.database.models import StudentProfile, User
+from app.platform.database.session import get_db
+from app.shared.schemas import PageParams
 
 router = APIRouter()
 
