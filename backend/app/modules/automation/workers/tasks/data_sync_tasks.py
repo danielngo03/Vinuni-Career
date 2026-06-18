@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from app.queue.celery_app import celery_app
+from app.modules.automation.queue.celery_app import celery_app
 
 
 @celery_app.task(name="sync.search_index")

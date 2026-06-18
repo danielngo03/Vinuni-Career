@@ -2,34 +2,35 @@ from __future__ import annotations
 
 from uuid import uuid4
 
-from fastapi import HTTPException, UploadFile, status
 from sqlalchemy.orm import Session
 
-from app.core.config import settings
-from app.infra.database.models import File
-from app.infra.storage import get_storage
+from app.platform.database.models import File
+from app.platform.storage import get_storage
+from app.shared.config import settings
+from app.shared.errors import AppError, ErrorCode
 
 
-async def store_upload(
+def store_upload(
     db: Session,
     *,
     uploader_id: str,
-    upload: UploadFile,
+    file_name: str,
+    content_type: str,
+    content: bytes,
     is_public: bool,
 ) -> File:
-    content = await upload.read()
     max_bytes = settings.max_upload_mb * 1024 * 1024
     if len(content) > max_bytes:
-        raise HTTPException(
-            status_code=status.HTTP_413_REQUEST_ENTITY_TOO_LARGE,
-            detail=f"File exceeds {settings.max_upload_mb} MB",
+        raise AppError(
+            code=ErrorCode.BAD_REQUEST,
+            message="File size exceeds the 5MB limit",
+            status_code=400,
         )
-    content_type = upload.content_type or "application/octet-stream"
-    key = f"{uploader_id}/{uuid4()}-{upload.filename or 'upload.bin'}"
+    key = f"{uploader_id}/{uuid4()}-{file_name or 'upload.bin'}"
     stored = get_storage().put_bytes(key, content, content_type)
     file = File(
         uploader_id=uploader_id,
-        file_name=upload.filename or stored.key,
+        file_name=file_name or stored.key,
         file_url=stored.url,
         is_public=is_public,
         file_type=content_type,

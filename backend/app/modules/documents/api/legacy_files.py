@@ -4,12 +4,12 @@ from fastapi import APIRouter, Depends, Query, UploadFile
 from fastapi import File as UploadParam
 from sqlalchemy.orm import Session
 
-from app.api.dependencies.auth import get_current_user
-from app.core.config import settings
-from app.infra.database.models import File, User
-from app.infra.database.session import get_db
-from app.schemas.files import FileView, SignedUrlResponse
-from app.services.file_service import signed_file_url, store_upload
+from app.modules.access.api.auth import get_current_user
+from app.modules.documents.application.legacy_file_service import signed_file_url, store_upload
+from app.modules.documents.legacy_schemas import FileView, SignedUrlResponse
+from app.platform.database.models import File, User
+from app.platform.database.session import get_db
+from app.shared.config import settings
 
 router = APIRouter()
 
@@ -21,7 +21,14 @@ async def upload_file(
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user),
 ) -> File:
-    return await store_upload(db, uploader_id=current_user.id, upload=upload, is_public=is_public)
+    return store_upload(
+        db,
+        uploader_id=current_user.id,
+        file_name=upload.filename or "upload.bin",
+        content_type=upload.content_type or "application/octet-stream",
+        content=await upload.read(),
+        is_public=is_public,
+    )
 
 
 @router.get("/signed-url", response_model=SignedUrlResponse)

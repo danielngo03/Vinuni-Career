@@ -5,9 +5,9 @@ import hmac
 
 from fastapi import APIRouter, Header, Request
 
-from app.api.exceptions import AppError, ErrorCode
-from app.core.config import settings
-from app.schemas.webhooks import AcademicRecordEvent, WebhookAck
+from app.modules.automation.schemas import AcademicRecordEvent, WebhookAck
+from app.shared.config import settings
+from app.shared.errors import AppError, ErrorCode
 
 router = APIRouter()
 
