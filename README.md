@@ -279,7 +279,7 @@ sequenceDiagram
 
     MOD-->>API: Response DTO
     API-->>B: JSON response
-    B-->>W: Forward response; rotate token after eligible 401
+    B-->>W: Forward response, rotate token after eligible 401
     W-->>U: Update role-specific UI
 ```
 
