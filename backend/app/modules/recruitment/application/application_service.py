@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from datetime import UTC, datetime
+
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
@@ -16,6 +18,12 @@ from app.shared.enum import ApplicationStatus, JobStatus
 from app.shared.errors import AppError, ErrorCode
 
 
+def _as_utc(value: datetime) -> datetime:
+    if value.tzinfo is None:
+        return value.replace(tzinfo=UTC)
+    return value.astimezone(UTC)
+
+
 def apply_to_job(
     db: Session,
     job_id: str,
@@ -30,7 +38,7 @@ def apply_to_job(
         raise AppError(code=ErrorCode.CONFLICT, message="Job is not open", status_code=409)
     if not job.is_active:
         raise AppError(code=ErrorCode.CONFLICT, message="Job is inactive", status_code=409)
-    if job.application_deadline and job.application_deadline < now_utc():
+    if job.application_deadline and _as_utc(job.application_deadline) < now_utc():
         raise AppError(
             code=ErrorCode.BAD_REQUEST,
             message="Job application deadline has passed",

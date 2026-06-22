@@ -88,7 +88,12 @@ class GeminiNativeProvider:
         if request.response_format:
             body["generationConfig"]["responseMimeType"] = "application/json"
         if request.response_schema:
-            body["generationConfig"]["responseSchema"] = request.response_schema
+            # Pydantic emits JSON Schema (including constructs such as $defs/$ref).
+            # Gemini's responseSchema field accepts only its narrower OpenAPI-style
+            # Schema object, while responseJsonSchema accepts standard JSON Schema.
+            # Sending a Pydantic schema through responseSchema can be accepted by
+            # the API without reliably constraining the model's output.
+            body["generationConfig"]["responseJsonSchema"] = request.response_schema
         return body
 
     def _ensure_available(self) -> None:

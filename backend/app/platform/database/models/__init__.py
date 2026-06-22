@@ -1,4 +1,8 @@
 from app.modules.automation.infrastructure.models import AutomationWorkflow, WorkflowExecutionLog
+from app.modules.ai_operations.infrastructure.interview_models import (
+    AIInterviewSession,
+    AIInterviewTurn,
+)
 from app.modules.engagement.infrastructure.models import CompanyReview, Notification
 from app.modules.opportunities.infrastructure.models import Bookmark, Event, EventRegistration, Job
 from app.modules.recruitment.infrastructure.models import (
@@ -59,6 +63,8 @@ from app.platform.database.models.student import (
 __all__ = [
     "AIRun",
     "AIRunEvent",
+    "AIInterviewSession",
+    "AIInterviewTurn",
     "AIUsageLog",
     "DocumentRecord",
     "OutboxEvent",
