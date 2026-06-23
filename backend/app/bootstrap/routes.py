@@ -9,6 +9,7 @@ from fastapi import APIRouter
 from app.bootstrap import health
 from app.modules.access.api.router import router as auth_router
 from app.modules.ai_operations.api import legacy
+from app.modules.ai_operations.api.interview_agent import router as ai_interview_router
 from app.modules.ai_operations.api.router import router as ai_runs_router
 from app.modules.automation.api import webhooks, workflows
 from app.modules.documents.api import legacy_files
@@ -39,6 +40,7 @@ ROUTES = (
     RouteRegistration(registration_router, "/registrations", ("verification",)),
     RouteRegistration(documents_router, tags=("documents",)),
     RouteRegistration(ai_runs_router, tags=("ai-runs",)),
+    RouteRegistration(ai_interview_router, tags=("ai-interviews",)),
     RouteRegistration(jobs.router, "/jobs", ("opportunities",)),
     RouteRegistration(events.router, "/events", ("opportunities",)),
     RouteRegistration(applications.router, "/jobs", ("recruitment",)),

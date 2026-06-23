@@ -5,6 +5,7 @@ import {
   Briefcase,
   CheckCircle,
   Funnel,
+  ChatCircleText,
   MagnifyingGlass,
   Plus,
   SpinnerGap,
@@ -21,6 +22,7 @@ import { Input } from "@/components/ui/input";
 import { Modal } from "@/components/ui/modal";
 import { PanelSkeleton } from "@/components/ui/skeleton";
 import { StatusBadge } from "@/components/dashboard/status-badge";
+import { InterviewSimulatorModal } from "@/features/jobs/interview-simulator-modal";
 
 export function JobCenter({
   portal,
@@ -37,6 +39,7 @@ export function JobCenter({
   const [loading, setLoading] = useState(true);
   const [workingId, setWorkingId] = useState<string | null>(null);
   const [createOpen, setCreateOpen] = useState(false);
+  const [interviewJob, setInterviewJob] = useState<Job | null>(null);
 
   const load = useCallback(async () => {
     setLoading(true);
@@ -226,6 +229,14 @@ export function JobCenter({
                           <BookmarkSimple className="size-4" />
                         </Button>
                         <Button
+                          variant="outline"
+                          onClick={() => setInterviewJob(job)}
+                          disabled={workingId === job.id}
+                        >
+                          <ChatCircleText className="size-4" />
+                          Phỏng vấn thử
+                        </Button>
+                        <Button
                           onClick={() => apply(job.id)}
                           disabled={workingId === job.id}
                         >
@@ -268,6 +279,14 @@ export function JobCenter({
         open={createOpen}
         onOpenChange={setCreateOpen}
         onCreated={load}
+      />
+      <InterviewSimulatorModal
+        open={Boolean(interviewJob)}
+        onOpenChange={(open) => {
+          if (!open) setInterviewJob(null);
+        }}
+        job={interviewJob}
+        cv={cvs.find((item) => item.is_primary) || cvs[0] || null}
       />
     </>
   );

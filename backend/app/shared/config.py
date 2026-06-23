@@ -41,7 +41,9 @@ class Settings(BaseSettings):
         "http://localhost:3000",
     ]
 
-    llm_provider: Literal["offline", "openai", "gemini", "openrouter", "nvidia"] = "nvidia"
+    llm_provider: Literal["offline", "openai", "gemini", "groq", "openrouter", "nvidia"] = (
+        "nvidia"
+    )
     llm_provider_chain: Annotated[list[str], NoDecode] = ["nvidia", "offline"]
     llm_model: str = "nvidia/nemotron-3-ultra-550b-a55b:free"
     llm_timeout_seconds: float = 30.0
@@ -59,6 +61,11 @@ class Settings(BaseSettings):
     gemini_openai_base_url: str = "https://generativelanguage.googleapis.com/v1beta/openai"
     gemini_model: str = "gemini-3.5-flash"
     gemini_embedding_model: str = "gemini-embedding-2-preview"
+
+    groq_api_key: str | None = None
+    groq_base_url: str = "https://api.groq.com/openai/v1"
+    groq_model: str = "llama-3.3-70b-versatile"
+    groq_embedding_model: str | None = None
 
     openrouter_api_key: str | None = None
     openrouter_base_url: str = "https://openrouter.ai/api/v1"

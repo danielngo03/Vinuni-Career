@@ -2072,6 +2072,111 @@
         }
       }
     },
+    "/api/v1/ai/interviews/sessions": {
+      "post": {
+        "tags": [
+          "ai-interviews",
+          "ai-interviews"
+        ],
+        "summary": "Start Interview",
+        "operationId": "start_interview_api_v1_ai_interviews_sessions_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/StartInterviewRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CandidateInterviewResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/ai/interviews/sessions/{session_id}/answers": {
+      "post": {
+        "tags": [
+          "ai-interviews",
+          "ai-interviews"
+        ],
+        "summary": "Answer Interview Question",
+        "operationId": "answer_interview_question_api_v1_ai_interviews_sessions__session_id__answers_post",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "session_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Session Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/InterviewAnswerRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CandidateInterviewResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/jobs": {
       "post": {
         "tags": [
@@ -3363,6 +3468,101 @@
                 }
               }
             }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/cvs/{cv_id}": {
+      "patch": {
+        "tags": [
+          "recruitment"
+        ],
+        "summary": "Update Cv",
+        "operationId": "update_cv_api_v1_cvs__cv_id__patch",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "cv_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Cv Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CVUpdate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CVView"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "recruitment"
+        ],
+        "summary": "Delete Cv",
+        "operationId": "delete_cv_api_v1_cvs__cv_id__delete",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "cv_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Cv Id"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successful Response"
           },
           "422": {
             "description": "Validation Error",
@@ -5211,6 +5411,17 @@
             "type": "string",
             "contentMediaType": "application/octet-stream",
             "title": "File"
+          },
+          "title": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Title"
           }
         },
         "type": "object",
@@ -5482,6 +5693,21 @@
         ],
         "title": "CVMaskResponse"
       },
+      "CVUpdate": {
+        "properties": {
+          "title": {
+            "type": "string",
+            "maxLength": 255,
+            "minLength": 1,
+            "title": "Title"
+          }
+        },
+        "type": "object",
+        "required": [
+          "title"
+        ],
+        "title": "CVUpdate"
+      },
       "CVView": {
         "properties": {
           "id": {
@@ -5658,6 +5884,52 @@
           "created_at"
         ],
         "title": "CVView"
+      },
+      "CandidateInterviewResponse": {
+        "properties": {
+          "session_id": {
+            "type": "string",
+            "title": "Session Id"
+          },
+          "question": {
+            "type": "string",
+            "title": "Question"
+          },
+          "current_phase": {
+            "type": "string",
+            "enum": [
+              "career",
+              "cv_verification",
+              "problem_solving",
+              "behavioral",
+              "candidate_questions",
+              "completed"
+            ],
+            "title": "Current Phase"
+          },
+          "should_end_interview": {
+            "type": "boolean",
+            "title": "Should End Interview"
+          },
+          "report": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/InterviewReport"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "type": "object",
+        "required": [
+          "session_id",
+          "question",
+          "current_phase",
+          "should_end_interview"
+        ],
+        "title": "CandidateInterviewResponse"
       },
       "ChatMessagePayload": {
         "properties": {
@@ -7040,6 +7312,164 @@
         ],
         "title": "IndustryView"
       },
+      "InterviewAnswerRequest": {
+        "properties": {
+          "answer": {
+            "type": "string",
+            "maxLength": 10000,
+            "minLength": 1,
+            "title": "Answer"
+          }
+        },
+        "type": "object",
+        "required": [
+          "answer"
+        ],
+        "title": "InterviewAnswerRequest"
+      },
+      "InterviewAssessmentDimension": {
+        "properties": {
+          "key": {
+            "type": "string",
+            "enum": [
+              "technical_knowledge",
+              "practical_experience",
+              "problem_solving",
+              "communication",
+              "critical_thinking"
+            ],
+            "title": "Key"
+          },
+          "label": {
+            "type": "string",
+            "maxLength": 100,
+            "minLength": 1,
+            "title": "Label"
+          },
+          "score": {
+            "type": "integer",
+            "maximum": 100.0,
+            "minimum": 0.0,
+            "title": "Score"
+          },
+          "weight": {
+            "type": "integer",
+            "maximum": 100.0,
+            "minimum": 0.0,
+            "title": "Weight"
+          },
+          "summary": {
+            "type": "string",
+            "maxLength": 1000,
+            "minLength": 1,
+            "title": "Summary"
+          },
+          "evidence": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "maxItems": 5,
+            "title": "Evidence"
+          }
+        },
+        "type": "object",
+        "required": [
+          "key",
+          "label",
+          "score",
+          "weight",
+          "summary"
+        ],
+        "title": "InterviewAssessmentDimension"
+      },
+      "InterviewConfig": {
+        "properties": {
+          "language": {
+            "type": "string",
+            "maxLength": 20,
+            "minLength": 2,
+            "title": "Language",
+            "default": "vi"
+          },
+          "candidate_level": {
+            "type": "string",
+            "enum": [
+              "student",
+              "intern",
+              "fresher",
+              "junior"
+            ],
+            "title": "Candidate Level",
+            "default": "student"
+          },
+          "target_role": {
+            "type": "string",
+            "maxLength": 200,
+            "title": "Target Role",
+            "default": ""
+          },
+          "current_phase": {
+            "type": "string",
+            "enum": [
+              "career",
+              "cv_verification",
+              "problem_solving",
+              "behavioral",
+              "candidate_questions",
+              "completed"
+            ],
+            "title": "Current Phase",
+            "default": "career"
+          },
+          "allowed_next_phases": {
+            "items": {
+              "type": "string",
+              "enum": [
+                "career",
+                "cv_verification",
+                "problem_solving",
+                "behavioral",
+                "candidate_questions",
+                "completed"
+              ]
+            },
+            "type": "array",
+            "maxItems": 6,
+            "title": "Allowed Next Phases"
+          },
+          "min_questions": {
+            "type": "integer",
+            "maximum": 20.0,
+            "minimum": 1.0,
+            "title": "Min Questions",
+            "default": 8
+          },
+          "max_questions": {
+            "type": "integer",
+            "maximum": 40.0,
+            "minimum": 1.0,
+            "title": "Max Questions",
+            "default": 18
+          },
+          "max_follow_ups_per_topic": {
+            "type": "integer",
+            "maximum": 5.0,
+            "minimum": 0.0,
+            "title": "Max Follow Ups Per Topic",
+            "default": 3
+          },
+          "min_communication_samples": {
+            "type": "integer",
+            "maximum": 20.0,
+            "minimum": 1.0,
+            "title": "Min Communication Samples",
+            "default": 4
+          }
+        },
+        "type": "object",
+        "title": "InterviewConfig"
+      },
       "InterviewCreate": {
         "properties": {
           "application_id": {
@@ -7103,6 +7533,80 @@
           "end_time"
         ],
         "title": "InterviewCreate"
+      },
+      "InterviewReport": {
+        "properties": {
+          "overall_score": {
+            "type": "integer",
+            "maximum": 100.0,
+            "minimum": 0.0,
+            "title": "Overall Score"
+          },
+          "overall_summary": {
+            "type": "string",
+            "maxLength": 1500,
+            "minLength": 1,
+            "title": "Overall Summary"
+          },
+          "dimensions": {
+            "items": {
+              "$ref": "#/components/schemas/InterviewAssessmentDimension"
+            },
+            "type": "array",
+            "maxItems": 5,
+            "minItems": 5,
+            "title": "Dimensions"
+          },
+          "strengths": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "maxItems": 5,
+            "title": "Strengths"
+          },
+          "improvements": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "maxItems": 5,
+            "title": "Improvements"
+          },
+          "insufficient_evidence": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "maxItems": 5,
+            "title": "Insufficient Evidence"
+          },
+          "action_plan": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "maxItems": 5,
+            "title": "Action Plan"
+          },
+          "confidence": {
+            "type": "string",
+            "enum": [
+              "low",
+              "medium",
+              "high"
+            ],
+            "title": "Confidence"
+          }
+        },
+        "type": "object",
+        "required": [
+          "overall_score",
+          "overall_summary",
+          "dimensions",
+          "confidence"
+        ],
+        "title": "InterviewReport"
       },
       "InterviewStatus": {
         "type": "string",
@@ -9466,6 +9970,27 @@
           "ttl_seconds"
         ],
         "title": "SignedUrlResponse"
+      },
+      "StartInterviewRequest": {
+        "properties": {
+          "cv_id": {
+            "type": "string",
+            "title": "Cv Id"
+          },
+          "job_id": {
+            "type": "string",
+            "title": "Job Id"
+          },
+          "interview_config": {
+            "$ref": "#/components/schemas/InterviewConfig"
+          }
+        },
+        "type": "object",
+        "required": [
+          "cv_id",
+          "job_id"
+        ],
+        "title": "StartInterviewRequest"
       },
       "StudentDashboard": {
         "properties": {

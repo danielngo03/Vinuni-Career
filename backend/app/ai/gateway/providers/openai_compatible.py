@@ -24,7 +24,7 @@ class OpenAICompatibleProvider:
         base_url: str,
         api_key: str | None,
         chat_model: str,
-        embedding_model: str,
+        embedding_model: str | None,
         rerank_model: str | None = None,
         timeout_seconds: float,
     ) -> None:
@@ -69,6 +69,8 @@ class OpenAICompatibleProvider:
     def embed(self, text: str, *, model: str | None = None) -> EmbeddingResponse:
         self._ensure_available()
         selected_model = model or self.embedding_model
+        if not selected_model:
+            raise LLMProviderUnavailable(f"{self.name} embedding model is not configured")
         payload = {"model": selected_model, "input": [text], "encoding_format": "float"}
         if "embedqa" in selected_model.lower() or "nv-embed" in selected_model.lower():
             payload["input_type"] = "query"
@@ -132,7 +134,7 @@ class OpenAICompatibleProvider:
         )
 
     def _ensure_available(self) -> None:
-        if self.name in {"openai", "gemini"} and not self.api_key:
+        if self.name in {"openai", "gemini", "groq"} and not self.api_key:
             raise LLMProviderUnavailable(f"{self.name} API key is not configured")
 
     def _post(self, path: str, body: dict) -> dict:

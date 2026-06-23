@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "rm -rf .next/dev && next dev --port 3000",
+    "dev": "next dev --port 3000",
     "build": "next build",
     "start": "next start --port 3000",
     "lint": "eslint .",
@@ -27,6 +27,7 @@
     "zod": "^4.4.3"
   },
   "devDependencies": {
+    "@next/swc-wasm-nodejs": "16.2.9",
     "@tailwindcss/postcss": "^4.1.18",
     "@types/node": "^20.19.27",
     "@types/react": "^19.2.7",

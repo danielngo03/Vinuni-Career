@@ -14,10 +14,32 @@ def test_openapi_exposes_v2_operational_contracts(client: TestClient):
         "/api/v1/documents/upload-session",
         "/api/v1/ai/runs/",
         "/api/v1/ai/runs/capabilities",
+        "/api/v1/ai/interviews/sessions",
+        "/api/v1/ai/interviews/sessions/{session_id}",
+        "/api/v1/ai/interviews/sessions/{session_id}/answers",
         "/api/v1/dashboard/student",
     }
     assert required.issubset(paths)
     assert "/api/v1/orgs/registration-reference" not in paths
+
+
+def test_candidate_interview_response_does_not_expose_internal_fields(client: TestClient):
+    schema = client.get("/openapi.json").json()
+    properties = schema["components"]["schemas"]["CandidateInterviewResponse"]["properties"]
+
+    assert set(properties) == {
+        "session_id",
+        "question",
+        "current_phase",
+        "should_end_interview",
+        "report",
+    }
+    assert not {
+        "internal_reason",
+        "expected_signals",
+        "previous_answer_evaluation",
+        "score",
+    } & set(properties)
 
 
 def test_organization_compatibility_alias_remains_callable(client: TestClient):

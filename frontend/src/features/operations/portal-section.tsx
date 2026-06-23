@@ -22,6 +22,7 @@ import { AIOperations } from "@/features/ai/ai-operations";
 import { ApplicationCenter } from "@/features/applications/application-center";
 import { CVCenter } from "@/features/cv/cv-center";
 import { EventCenter, ReviewCenter } from "@/features/events/event-center";
+import { AIInterviewHistory } from "@/features/interviews/ai-interview-history";
 import { JobCenter } from "@/features/jobs/job-center";
 import {
   CandidateCenter,
@@ -95,7 +96,7 @@ function renderSection(portal: Portal, section: string, orgId?: string | null) {
     if (section === "jobs") return <JobCenter portal="student" />;
     if (section === "cv") return <CVCenter />;
     if (section === "applications") return <ApplicationCenter />;
-    if (section === "interviews") return <ApplicationCenter showOnlyInterviews />;
+    if (section === "interviews") return <AIInterviewHistory />;
     if (section === "events") return <EventCenter />;
     if (section === "reviews") return <ReviewCenter />;
   }

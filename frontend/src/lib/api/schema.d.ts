@@ -626,6 +626,40 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/v1/ai/interviews/sessions": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Start Interview */
+        post: operations["start_interview_api_v1_ai_interviews_sessions_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/ai/interviews/sessions/{session_id}/answers": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Answer Interview Question */
+        post: operations["answer_interview_question_api_v1_ai_interviews_sessions__session_id__answers_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/v1/jobs": {
         parameters: {
             query?: never;
@@ -951,6 +985,24 @@ export interface paths {
         options?: never;
         head?: never;
         patch?: never;
+        trace?: never;
+    };
+    "/api/v1/cvs/{cv_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post?: never;
+        /** Delete Cv */
+        delete: operations["delete_cv_api_v1_cvs__cv_id__delete"];
+        options?: never;
+        head?: never;
+        /** Update Cv */
+        patch: operations["update_cv_api_v1_cvs__cv_id__patch"];
         trace?: never;
     };
     "/api/v1/interviews": {
@@ -1519,6 +1571,8 @@ export interface components {
         Body_upload_student_cv_api_v1_cvs_upload_post: {
             /** File */
             file: string;
+            /** Title */
+            title?: string | null;
         };
         /** CVCreate */
         CVCreate: {
@@ -1602,6 +1656,11 @@ export interface components {
                 [key: string]: string;
             }[];
         };
+        /** CVUpdate */
+        CVUpdate: {
+            /** Title */
+            title: string;
+        };
         /** CVView */
         CVView: {
             /** Id */
@@ -1653,6 +1712,21 @@ export interface components {
              * Format: date-time
              */
             created_at: string;
+        };
+        /** CandidateInterviewResponse */
+        CandidateInterviewResponse: {
+            /** Session Id */
+            session_id: string;
+            /** Question */
+            question: string;
+            /**
+             * Current Phase
+             * @enum {string}
+             */
+            current_phase: "career" | "cv_verification" | "problem_solving" | "behavioral" | "candidate_questions" | "completed";
+            /** Should End Interview */
+            should_end_interview: boolean;
+            report?: components["schemas"]["InterviewReport"] | null;
         };
         /** ChatMessagePayload */
         ChatMessagePayload: {
@@ -2123,6 +2197,76 @@ export interface components {
             /** Is Active */
             is_active: boolean;
         };
+        /** InterviewAnswerRequest */
+        InterviewAnswerRequest: {
+            /** Answer */
+            answer: string;
+        };
+        /** InterviewAssessmentDimension */
+        InterviewAssessmentDimension: {
+            /**
+             * Key
+             * @enum {string}
+             */
+            key: "technical_knowledge" | "practical_experience" | "problem_solving" | "communication" | "critical_thinking";
+            /** Label */
+            label: string;
+            /** Score */
+            score: number;
+            /** Weight */
+            weight: number;
+            /** Summary */
+            summary: string;
+            /** Evidence */
+            evidence?: string[];
+        };
+        /** InterviewConfig */
+        InterviewConfig: {
+            /**
+             * Language
+             * @default vi
+             */
+            language: string;
+            /**
+             * Candidate Level
+             * @default student
+             * @enum {string}
+             */
+            candidate_level: "student" | "intern" | "fresher" | "junior";
+            /**
+             * Target Role
+             * @default
+             */
+            target_role: string;
+            /**
+             * Current Phase
+             * @default career
+             * @enum {string}
+             */
+            current_phase: "career" | "cv_verification" | "problem_solving" | "behavioral" | "candidate_questions" | "completed";
+            /** Allowed Next Phases */
+            allowed_next_phases?: ("career" | "cv_verification" | "problem_solving" | "behavioral" | "candidate_questions" | "completed")[];
+            /**
+             * Min Questions
+             * @default 8
+             */
+            min_questions: number;
+            /**
+             * Max Questions
+             * @default 18
+             */
+            max_questions: number;
+            /**
+             * Max Follow Ups Per Topic
+             * @default 3
+             */
+            max_follow_ups_per_topic: number;
+            /**
+             * Min Communication Samples
+             * @default 4
+             */
+            min_communication_samples: number;
+        };
         /** InterviewCreate */
         InterviewCreate: {
             /** Application Id */
@@ -2145,6 +2289,28 @@ export interface components {
             location?: string | null;
             /** Notes */
             notes?: string | null;
+        };
+        /** InterviewReport */
+        InterviewReport: {
+            /** Overall Score */
+            overall_score: number;
+            /** Overall Summary */
+            overall_summary: string;
+            /** Dimensions */
+            dimensions: components["schemas"]["InterviewAssessmentDimension"][];
+            /** Strengths */
+            strengths?: string[];
+            /** Improvements */
+            improvements?: string[];
+            /** Insufficient Evidence */
+            insufficient_evidence?: string[];
+            /** Action Plan */
+            action_plan?: string[];
+            /**
+             * Confidence
+             * @enum {string}
+             */
+            confidence: "low" | "medium" | "high";
         };
         /**
          * InterviewStatus
@@ -2902,6 +3068,14 @@ export interface components {
             url: string;
             /** Ttl Seconds */
             ttl_seconds: number;
+        };
+        /** StartInterviewRequest */
+        StartInterviewRequest: {
+            /** Cv Id */
+            cv_id: string;
+            /** Job Id */
+            job_id: string;
+            interview_config?: components["schemas"]["InterviewConfig"];
         };
         /** StudentDashboard */
         StudentDashboard: {
@@ -4537,6 +4711,74 @@ export interface operations {
             };
         };
     };
+    start_interview_api_v1_ai_interviews_sessions_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["StartInterviewRequest"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["CandidateInterviewResponse"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    answer_interview_question_api_v1_ai_interviews_sessions__session_id__answers_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                session_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["InterviewAnswerRequest"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["CandidateInterviewResponse"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
     get_jobs_api_v1_jobs_get: {
         parameters: {
             query?: {
@@ -5247,6 +5489,70 @@ export interface operations {
             cookie?: never;
         };
         requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["CVView"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    delete_cv_api_v1_cvs__cv_id__delete: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                cv_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    update_cv_api_v1_cvs__cv_id__patch: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                cv_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["CVUpdate"];
+            };
+        };
         responses: {
             /** @description Successful Response */
             200: {
