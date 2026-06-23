@@ -14,7 +14,7 @@ from app.ai.interview.schemas import (
     InterviewRuntimeContext,
     MatchingResult,
 )
-from app.ai.interview.service import generate_next_turn
+from app.ai.interview.service import generate_interview_report, generate_next_turn
 
 
 class FakeGateway:
@@ -360,3 +360,72 @@ def test_interview_finishes_early_when_evidence_is_sufficient():
     assert result.planner_output.should_end_interview is True
     assert result.planner_output.phase_completion_signal == "enough_evidence"
     assert len(gateway.requests) == 1
+
+
+def test_final_report_uses_fixed_dimensions_and_backend_weighted_score():
+    gateway = FakeGateway(
+        [
+            {
+                "overall_summary": "Ứng viên thể hiện nền tảng tốt và cần đưa thêm số liệu.",
+                "dimensions": [
+                    {
+                        "key": "technical_knowledge",
+                        "score": 80,
+                        "summary": "Giải thích đúng các khái niệm chính.",
+                        "evidence": ["Mô tả được cách xây dựng API."],
+                    },
+                    {
+                        "key": "practical_experience",
+                        "score": 70,
+                        "summary": "Có ví dụ thực tế nhưng kết quả chưa định lượng.",
+                        "evidence": ["Nêu phần việc cá nhân trong đồ án."],
+                    },
+                    {
+                        "key": "problem_solving",
+                        "score": 60,
+                        "summary": "Có quy trình xử lý cơ bản.",
+                        "evidence": ["Tái hiện lỗi trước khi kiểm tra log."],
+                    },
+                    {
+                        "key": "communication",
+                        "score": 90,
+                        "summary": "Trả lời rõ và đúng trọng tâm.",
+                        "evidence": ["Bổ sung chi tiết tốt sau câu hỏi làm rõ."],
+                    },
+                    {
+                        "key": "critical_thinking",
+                        "score": 50,
+                        "summary": "Chưa phân tích nhiều phương án đánh đổi.",
+                        "evidence": [],
+                    },
+                ],
+                "strengths": ["Trình bày rõ phần việc cá nhân."],
+                "improvements": ["Nêu thêm số liệu kết quả."],
+                "insufficient_evidence": ["Chưa đủ bằng chứng về phân tích đánh đổi."],
+                "action_plan": ["Luyện trả lời theo tình huống, hành động và kết quả."],
+                "confidence": "medium",
+            }
+        ]
+    )
+    context = _runtime(
+        history=[
+            ConversationTurn(
+                question="Em đã làm phần nào trong đồ án?",
+                answer="Em xây API và kiểm tra log khi có lỗi.",
+                phase="cv_verification",
+                topic_key="project_contribution",
+            )
+        ],
+        question_count=1,
+    )
+
+    report, metadata = generate_interview_report(
+        context,
+        answer_evaluations=[],
+        gateway=gateway,
+    )
+
+    assert report.overall_score == 73
+    assert [dimension.weight for dimension in report.dimensions] == [30, 20, 20, 20, 10]
+    assert all(dimension.key != "job_fit" for dimension in report.dimensions)
+    assert metadata["provider"] == "fake"

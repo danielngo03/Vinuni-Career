@@ -37,6 +37,13 @@ VerificationStatus = Literal[
     "not_assessed",
 ]
 AnswerQuality = Literal["vague", "partial", "sufficient", "irrelevant", "unable_to_answer"]
+AssessmentDimensionKey = Literal[
+    "technical_knowledge",
+    "practical_experience",
+    "problem_solving",
+    "communication",
+    "critical_thinking",
+]
 
 
 class MatchingResult(BaseModel):
@@ -96,6 +103,43 @@ class CommunicationEvaluation(BaseModel):
     summary: str = Field(default="", max_length=500)
 
 
+class InterviewAssessmentDimension(BaseModel):
+    key: AssessmentDimensionKey
+    label: str = Field(min_length=1, max_length=100)
+    score: int = Field(ge=0, le=100)
+    weight: int = Field(ge=0, le=100)
+    summary: str = Field(min_length=1, max_length=1000)
+    evidence: list[str] = Field(default_factory=list, max_length=5)
+
+
+class InterviewReport(BaseModel):
+    overall_score: int = Field(ge=0, le=100)
+    overall_summary: str = Field(min_length=1, max_length=1500)
+    dimensions: list[InterviewAssessmentDimension] = Field(min_length=5, max_length=5)
+    strengths: list[str] = Field(default_factory=list, max_length=5)
+    improvements: list[str] = Field(default_factory=list, max_length=5)
+    insufficient_evidence: list[str] = Field(default_factory=list, max_length=5)
+    action_plan: list[str] = Field(default_factory=list, max_length=5)
+    confidence: Literal["low", "medium", "high"]
+
+
+class InterviewReportDraftDimension(BaseModel):
+    key: AssessmentDimensionKey
+    score: int = Field(ge=0, le=100)
+    summary: str = Field(min_length=1, max_length=1000)
+    evidence: list[str] = Field(default_factory=list, max_length=5)
+
+
+class InterviewReportDraft(BaseModel):
+    overall_summary: str = Field(min_length=1, max_length=1500)
+    dimensions: list[InterviewReportDraftDimension] = Field(min_length=5, max_length=5)
+    strengths: list[str] = Field(default_factory=list, max_length=5)
+    improvements: list[str] = Field(default_factory=list, max_length=5)
+    insufficient_evidence: list[str] = Field(default_factory=list, max_length=5)
+    action_plan: list[str] = Field(default_factory=list, max_length=5)
+    confidence: Literal["low", "medium", "high"]
+
+
 class EvaluationState(BaseModel):
     competency_status: dict[str, VerificationStatus] = Field(default_factory=dict)
     contradictions: list[str] = Field(default_factory=list, max_length=100)
@@ -103,6 +147,7 @@ class EvaluationState(BaseModel):
         default_factory=list,
         max_length=40,
     )
+    final_report: InterviewReport | None = None
 
 
 class ConversationTurn(BaseModel):
@@ -181,6 +226,7 @@ class CandidateInterviewResponse(BaseModel):
     question: str
     current_phase: InterviewPhase
     should_end_interview: bool
+    report: InterviewReport | None = None
 
 
 class InterviewRuntimeContext(BaseModel):

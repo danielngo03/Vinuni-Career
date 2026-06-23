@@ -9,12 +9,16 @@ from pydantic import BaseModel
 from app.ai.gateway import ChatMessage, ChatRequest, LLMGateway, get_llm_gateway
 from app.ai.interview.prompts import (
     INTERVIEW_PLANNER_SYSTEM_PROMPT,
+    INTERVIEW_REPORT_SYSTEM_PROMPT,
     QUESTION_GENERATOR_SYSTEM_PROMPT,
 )
 from app.ai.interview.schemas import (
     CoverageItem,
     CoverageState,
     EvaluationState,
+    InterviewAssessmentDimension,
+    InterviewReport,
+    InterviewReportDraft,
     InterviewRuntimeContext,
     InterviewTurnResult,
     PlannerOutput,
@@ -31,6 +35,14 @@ INTERNAL_TERMS = (
     "rubric",
     "score:",
 )
+
+REPORT_DIMENSIONS = {
+    "technical_knowledge": ("Kiến thức chuyên môn", 30),
+    "practical_experience": ("Kinh nghiệm thực tế", 20),
+    "problem_solving": ("Giải quyết vấn đề", 20),
+    "communication": ("Giao tiếp và làm rõ", 20),
+    "critical_thinking": ("Tư duy phản biện", 10),
+}
 
 
 def build_coverage_state(context: InterviewRuntimeContext) -> CoverageState:
@@ -178,6 +190,132 @@ def generate_next_turn(
         evaluation_state=evaluation,
         provider_metadata=metadata,
     )
+
+
+def generate_interview_report(
+    context: InterviewRuntimeContext,
+    *,
+    answer_evaluations: list[dict[str, Any]],
+    gateway: LLMGateway | None = None,
+) -> tuple[InterviewReport, dict[str, Any]]:
+    llm = gateway or get_llm_gateway()
+    payload = {
+        "language": context.interview_config.language,
+        "candidate_level": context.interview_config.candidate_level,
+        "target_role_context": context.interview_config.target_role,
+        "transcript": [turn.model_dump(mode="json") for turn in context.history],
+        "answer_evaluations": answer_evaluations,
+        "coverage_state": context.coverage_state.model_dump(mode="json"),
+        "communication_samples": [
+            sample.model_dump(mode="json")
+            for sample in context.evaluation_state.communication_samples
+        ],
+        "contradictions": context.evaluation_state.contradictions,
+    }
+    try:
+        draft, metadata = _call_structured(
+            llm,
+            system_prompt=INTERVIEW_REPORT_SYSTEM_PROMPT,
+            payload=payload,
+            output_model=InterviewReportDraft,
+            feature="interview_final_report",
+        )
+        return _finalize_report(draft), metadata
+    except Exception as exc:  # noqa: BLE001
+        return _fallback_report(context), {"fallback": True, "error": str(exc)[:500]}
+
+
+def _finalize_report(draft: InterviewReportDraft) -> InterviewReport:
+    by_key = {dimension.key: dimension for dimension in draft.dimensions}
+    if set(by_key) != set(REPORT_DIMENSIONS):
+        raise ValueError("The report must contain each assessment dimension exactly once")
+    dimensions = [
+        InterviewAssessmentDimension(
+            key=key,
+            label=label,
+            score=by_key[key].score,
+            weight=weight,
+            summary=by_key[key].summary,
+            evidence=by_key[key].evidence,
+        )
+        for key, (label, weight) in REPORT_DIMENSIONS.items()
+    ]
+    overall_score = round(
+        sum(dimension.score * dimension.weight for dimension in dimensions) / 100
+    )
+    return InterviewReport(
+        overall_score=overall_score,
+        overall_summary=draft.overall_summary,
+        dimensions=dimensions,
+        strengths=draft.strengths,
+        improvements=draft.improvements,
+        insufficient_evidence=draft.insufficient_evidence,
+        action_plan=draft.action_plan,
+        confidence=draft.confidence,
+    )
+
+
+def _fallback_report(context: InterviewRuntimeContext) -> InterviewReport:
+    samples = context.evaluation_state.communication_samples
+    communication_score = (
+        round(
+            sum(
+                sample.clarity
+                + sample.specificity
+                + sample.relevance
+                + sample.structure
+                for sample in samples
+            )
+            / (len(samples) * 16)
+            * 100
+        )
+        if samples
+        else 0
+    )
+    assessed = [
+        item
+        for item in context.coverage_state.skills
+        if item.status not in {"not_assessed", "claimed"}
+    ]
+    verified = [item for item in assessed if item.status == "verified"]
+    technical_score = round(len(verified) / len(assessed) * 100) if assessed else 0
+    phase_scores = {
+        "practical_experience": 50 if "cv_verification" in {t.phase for t in context.history} else 0,
+        "problem_solving": 50 if "problem_solving" in {t.phase for t in context.history} else 0,
+        "critical_thinking": 50 if "behavioral" in {t.phase for t in context.history} else 0,
+    }
+    scores = {
+        "technical_knowledge": technical_score,
+        **phase_scores,
+        "communication": communication_score,
+    }
+    draft = InterviewReportDraft(
+        overall_summary=(
+            "Báo cáo được tổng hợp từ các bằng chứng đã ghi nhận trong buổi phỏng vấn. "
+            "Một số nhận xét chi tiết chưa thể tạo đầy đủ."
+        ),
+        dimensions=[
+            {
+                "key": key,
+                "score": scores[key],
+                "summary": (
+                    "Điểm tạm tính từ các bằng chứng có cấu trúc đã thu thập trong buổi phỏng vấn."
+                ),
+                "evidence": [],
+            }
+            for key in REPORT_DIMENSIONS
+        ],
+        strengths=[],
+        improvements=[],
+        insufficient_evidence=[
+            "Chưa đủ dữ liệu để tạo nhận xét chi tiết cho toàn bộ khía cạnh."
+        ],
+        action_plan=[
+            "Luyện trả lời bằng một ví dụ cụ thể, nêu rõ hành động cá nhân và kết quả."
+        ],
+        confidence="low",
+    )
+    return _finalize_report(draft)
 
 
 def _call_structured[ModelT: BaseModel](

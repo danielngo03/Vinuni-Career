@@ -61,7 +61,7 @@ Repository gồm một frontend Next.js và một backend FastAPI modular monoli
 - JWT access token, rotating refresh token, identity context và RBAC
 - Redis/Celery adapter cho distributed workers; local in-process workflow cho development
 - Local/S3 storage adapter; memory/Redis cache; memory/Elasticsearch/OpenSearch search adapter
-- OpenAI, Gemini, OpenRouter, NVIDIA và deterministic offline AI provider
+- OpenAI, Gemini, Groq, OpenRouter, NVIDIA và deterministic offline AI provider
 - Pytest, Ruff, Mypy, architecture tests, contract tests và E2E tests
 
 ## Repository structure
@@ -520,6 +520,10 @@ Nguồn cấu hình runtime:
 | `GEMINI_OPENAI_BASE_URL` | No | Gemini OpenAI-compatible API | Compatible API base |
 | `GEMINI_MODEL` | No | configured model | Chat/vision model |
 | `GEMINI_EMBEDDING_MODEL` | No | configured model | Embedding model |
+| `GROQ_API_KEY` | For Groq | empty | Groq credential |
+| `GROQ_BASE_URL` | No | `https://api.groq.com/openai/v1` | Groq OpenAI-compatible API base |
+| `GROQ_MODEL` | No | `llama-3.3-70b-versatile` | Chat model |
+| `GROQ_EMBEDDING_MODEL` | No | empty | Optional OpenAI-compatible embedding model |
 | `OPENROUTER_API_KEY` | For OpenRouter | empty | OpenRouter credential |
 | `OPENROUTER_BASE_URL` | No | `https://openrouter.ai/api/v1` | API base |
 | `OPENROUTER_HTTP_REFERER` | Recommended | `http://localhost:3000` | OpenRouter application referer |

@@ -1726,6 +1726,7 @@ export interface components {
             current_phase: "career" | "cv_verification" | "problem_solving" | "behavioral" | "candidate_questions" | "completed";
             /** Should End Interview */
             should_end_interview: boolean;
+            report?: components["schemas"]["InterviewReport"] | null;
         };
         /** ChatMessagePayload */
         ChatMessagePayload: {
@@ -2201,6 +2202,24 @@ export interface components {
             /** Answer */
             answer: string;
         };
+        /** InterviewAssessmentDimension */
+        InterviewAssessmentDimension: {
+            /**
+             * Key
+             * @enum {string}
+             */
+            key: "technical_knowledge" | "practical_experience" | "problem_solving" | "communication" | "critical_thinking";
+            /** Label */
+            label: string;
+            /** Score */
+            score: number;
+            /** Weight */
+            weight: number;
+            /** Summary */
+            summary: string;
+            /** Evidence */
+            evidence?: string[];
+        };
         /** InterviewConfig */
         InterviewConfig: {
             /**
@@ -2270,6 +2289,28 @@ export interface components {
             location?: string | null;
             /** Notes */
             notes?: string | null;
+        };
+        /** InterviewReport */
+        InterviewReport: {
+            /** Overall Score */
+            overall_score: number;
+            /** Overall Summary */
+            overall_summary: string;
+            /** Dimensions */
+            dimensions: components["schemas"]["InterviewAssessmentDimension"][];
+            /** Strengths */
+            strengths?: string[];
+            /** Improvements */
+            improvements?: string[];
+            /** Insufficient Evidence */
+            insufficient_evidence?: string[];
+            /** Action Plan */
+            action_plan?: string[];
+            /**
+             * Confidence
+             * @enum {string}
+             */
+            confidence: "low" | "medium" | "high";
         };
         /**
          * InterviewStatus

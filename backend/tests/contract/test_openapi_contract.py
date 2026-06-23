@@ -31,6 +31,7 @@ def test_candidate_interview_response_does_not_expose_internal_fields(client: Te
         "question",
         "current_phase",
         "should_end_interview",
+        "report",
     }
     assert not {
         "internal_reason",

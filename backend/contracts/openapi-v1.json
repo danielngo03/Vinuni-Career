@@ -5910,6 +5910,16 @@
           "should_end_interview": {
             "type": "boolean",
             "title": "Should End Interview"
+          },
+          "report": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/InterviewReport"
+              },
+              {
+                "type": "null"
+              }
+            ]
           }
         },
         "type": "object",
@@ -7317,6 +7327,62 @@
         ],
         "title": "InterviewAnswerRequest"
       },
+      "InterviewAssessmentDimension": {
+        "properties": {
+          "key": {
+            "type": "string",
+            "enum": [
+              "technical_knowledge",
+              "practical_experience",
+              "problem_solving",
+              "communication",
+              "critical_thinking"
+            ],
+            "title": "Key"
+          },
+          "label": {
+            "type": "string",
+            "maxLength": 100,
+            "minLength": 1,
+            "title": "Label"
+          },
+          "score": {
+            "type": "integer",
+            "maximum": 100.0,
+            "minimum": 0.0,
+            "title": "Score"
+          },
+          "weight": {
+            "type": "integer",
+            "maximum": 100.0,
+            "minimum": 0.0,
+            "title": "Weight"
+          },
+          "summary": {
+            "type": "string",
+            "maxLength": 1000,
+            "minLength": 1,
+            "title": "Summary"
+          },
+          "evidence": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "maxItems": 5,
+            "title": "Evidence"
+          }
+        },
+        "type": "object",
+        "required": [
+          "key",
+          "label",
+          "score",
+          "weight",
+          "summary"
+        ],
+        "title": "InterviewAssessmentDimension"
+      },
       "InterviewConfig": {
         "properties": {
           "language": {
@@ -7467,6 +7533,80 @@
           "end_time"
         ],
         "title": "InterviewCreate"
+      },
+      "InterviewReport": {
+        "properties": {
+          "overall_score": {
+            "type": "integer",
+            "maximum": 100.0,
+            "minimum": 0.0,
+            "title": "Overall Score"
+          },
+          "overall_summary": {
+            "type": "string",
+            "maxLength": 1500,
+            "minLength": 1,
+            "title": "Overall Summary"
+          },
+          "dimensions": {
+            "items": {
+              "$ref": "#/components/schemas/InterviewAssessmentDimension"
+            },
+            "type": "array",
+            "maxItems": 5,
+            "minItems": 5,
+            "title": "Dimensions"
+          },
+          "strengths": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "maxItems": 5,
+            "title": "Strengths"
+          },
+          "improvements": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "maxItems": 5,
+            "title": "Improvements"
+          },
+          "insufficient_evidence": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "maxItems": 5,
+            "title": "Insufficient Evidence"
+          },
+          "action_plan": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "maxItems": 5,
+            "title": "Action Plan"
+          },
+          "confidence": {
+            "type": "string",
+            "enum": [
+              "low",
+              "medium",
+              "high"
+            ],
+            "title": "Confidence"
+          }
+        },
+        "type": "object",
+        "required": [
+          "overall_score",
+          "overall_summary",
+          "dimensions",
+          "confidence"
+        ],
+        "title": "InterviewReport"
       },
       "InterviewStatus": {
         "type": "string",

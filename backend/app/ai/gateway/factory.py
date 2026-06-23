@@ -57,6 +57,14 @@ def _direct_gateway() -> LLMGateway:
             embedding_model=settings.openai_embedding_model,
             timeout_seconds=settings.llm_timeout_seconds,
         ),
+        "groq": OpenAICompatibleProvider(
+            name="groq",
+            base_url=settings.groq_base_url,
+            api_key=settings.groq_api_key,
+            chat_model=settings.groq_model,
+            embedding_model=settings.groq_embedding_model,
+            timeout_seconds=settings.llm_timeout_seconds,
+        ),
         "nvidia": OpenAICompatibleProvider(
             name="nvidia",
             base_url=settings.nvidia_base_url,
@@ -105,6 +113,14 @@ def _litellm_proxy_gateway() -> LLMGateway:
             api_key=settings.litellm_api_key,
             chat_model=settings.gemini_model,
             embedding_model=settings.gemini_embedding_model,
+            timeout_seconds=settings.llm_timeout_seconds,
+        ),
+        "groq": OpenAICompatibleProvider(
+            name="groq",
+            base_url=settings.litellm_proxy_url or "",
+            api_key=settings.litellm_api_key,
+            chat_model=settings.groq_model,
+            embedding_model=settings.groq_embedding_model,
             timeout_seconds=settings.llm_timeout_seconds,
         ),
         "nvidia": OpenAICompatibleProvider(

@@ -18,7 +18,7 @@ from app.ai.interview.schemas import (
     InterviewRuntimeContext,
     MatchingResult,
 )
-from app.ai.interview.service import generate_next_turn
+from app.ai.interview.service import generate_interview_report, generate_next_turn
 from app.ai.matching.skills import normalize_skills
 from app.modules.access.api.auth import get_current_user
 from app.modules.ai_operations.infrastructure.interview_models import (
@@ -161,6 +161,31 @@ def answer_interview_question(
     session.evaluation_state = result.evaluation_state.model_dump(mode="json")
     if result.planner_output.should_end_interview:
         session.status = "COMPLETED"
+        report_context = runtime.model_copy(
+            update={
+                "history": history,
+                "coverage_state": result.coverage_state,
+                "evaluation_state": result.evaluation_state,
+            }
+        )
+        evaluations = [
+            evaluation
+            for turn in turns
+            if (evaluation := turn.internal_output.get("previous_answer_evaluation"))
+        ]
+        if result.planner_output.previous_answer_evaluation:
+            evaluations.append(
+                result.planner_output.previous_answer_evaluation.model_dump(mode="json")
+            )
+        report, report_metadata = generate_interview_report(
+            report_context,
+            answer_evaluations=evaluations,
+        )
+        session.evaluation_state = {
+            **session.evaluation_state,
+            "final_report": report.model_dump(mode="json"),
+            "report_metadata": report_metadata,
+        }
     elif result.question:
         session.question_count += 1
         db.add(_new_turn(session.id, session.question_count, result))
@@ -196,6 +221,7 @@ def _candidate_response(
         question=question,
         current_phase=session.current_phase,
         should_end_interview=session.status == "COMPLETED",
+        report=(session.evaluation_state or {}).get("final_report"),
     )
 
 

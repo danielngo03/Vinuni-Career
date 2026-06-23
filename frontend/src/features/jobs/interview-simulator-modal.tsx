@@ -2,9 +2,13 @@
 
 import {
   ArrowRight,
+  ChartBar,
   ChatCircleText,
+  CheckCircle,
   PaperPlaneTilt,
   SpinnerGap,
+  Target,
+  WarningCircle,
 } from "@phosphor-icons/react";
 import { useState } from "react";
 import { toast } from "sonner";
@@ -27,6 +31,27 @@ interface InterviewResponse {
   question: string;
   current_phase: InterviewPhase;
   should_end_interview: boolean;
+  report: InterviewReport | null;
+}
+
+interface InterviewReportDimension {
+  key: string;
+  label: string;
+  score: number;
+  weight: number;
+  summary: string;
+  evidence: string[];
+}
+
+interface InterviewReport {
+  overall_score: number;
+  overall_summary: string;
+  dimensions: InterviewReportDimension[];
+  strengths: string[];
+  improvements: string[];
+  insufficient_evidence: string[];
+  action_plan: string[];
+  confidence: "low" | "medium" | "high";
 }
 
 interface TranscriptItem {
@@ -159,22 +184,26 @@ export function InterviewSimulatorModal({
               {phaseLabel(session.current_phase)}
             </span>
           </div>
-          <div className="max-h-[48vh] space-y-4 overflow-y-auto pr-1">
-            {transcript.map((item, index) => (
-              <div key={`${index}-${item.question}`} className="space-y-2">
-                <div className="border-l-2 border-primary pl-3">
-                  <p className="text-xs font-semibold text-muted">Người phỏng vấn</p>
-                  <p className="mt-1 text-sm leading-6">{item.question}</p>
-                </div>
-                {item.answer ? (
-                  <div className="ml-5 bg-slate-50 p-3">
-                    <p className="text-xs font-semibold text-muted">Bạn</p>
-                    <p className="mt-1 whitespace-pre-wrap text-sm leading-6">{item.answer}</p>
+          {session.should_end_interview && session.report ? (
+            <InterviewReportView report={session.report} />
+          ) : (
+            <div className="max-h-[48vh] space-y-4 overflow-y-auto pr-1">
+              {transcript.map((item, index) => (
+                <div key={`${index}-${item.question}`} className="space-y-2">
+                  <div className="border-l-2 border-primary pl-3">
+                    <p className="text-xs font-semibold text-muted">Người phỏng vấn</p>
+                    <p className="mt-1 text-sm leading-6">{item.question}</p>
                   </div>
-                ) : null}
-              </div>
-            ))}
-          </div>
+                  {item.answer ? (
+                    <div className="ml-5 bg-slate-50 p-3">
+                      <p className="text-xs font-semibold text-muted">Bạn</p>
+                      <p className="mt-1 whitespace-pre-wrap text-sm leading-6">{item.answer}</p>
+                    </div>
+                  ) : null}
+                </div>
+              ))}
+            </div>
+          )}
           {session.should_end_interview ? (
             <div className="border-t pt-4 text-center">
               <p className="font-semibold">Buổi phỏng vấn đã hoàn thành</p>
@@ -207,6 +236,114 @@ export function InterviewSimulatorModal({
       )}
     </Modal>
   );
+}
+
+function InterviewReportView({ report }: { report: InterviewReport }) {
+  return (
+    <div className="max-h-[58vh] space-y-5 overflow-y-auto pr-1">
+      <div className="bg-primary/5 p-4">
+        <div className="flex items-center gap-3">
+          <div className="flex size-14 shrink-0 items-center justify-center rounded-full bg-primary text-lg font-bold text-white">
+            {report.overall_score}
+          </div>
+          <div>
+            <p className="font-semibold">Đánh giá tổng thể</p>
+            <p className="mt-1 text-sm leading-6 text-muted">{report.overall_summary}</p>
+          </div>
+        </div>
+        <p className="mt-3 text-xs text-muted">
+          Độ tin cậy: {confidenceLabel(report.confidence)}
+        </p>
+      </div>
+
+      <section>
+        <div className="mb-3 flex items-center gap-2">
+          <ChartBar className="size-5 text-primary" />
+          <h3 className="font-semibold">Các khía cạnh đánh giá</h3>
+        </div>
+        <div className="space-y-4">
+          {report.dimensions.map((dimension) => (
+            <div key={dimension.key} className="border p-3">
+              <div className="flex items-center justify-between gap-3 text-sm">
+                <span className="font-semibold">{dimension.label}</span>
+                <span className="font-bold text-primary">{dimension.score}/100</span>
+              </div>
+              <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-slate-100">
+                <div
+                  className="h-full rounded-full bg-primary"
+                  style={{ width: `${dimension.score}%` }}
+                />
+              </div>
+              <p className="mt-2 text-sm leading-6 text-muted">{dimension.summary}</p>
+              {dimension.evidence.length ? (
+                <ul className="mt-2 space-y-1 text-xs leading-5 text-muted">
+                  {dimension.evidence.map((item) => (
+                    <li key={item}>• {item}</li>
+                  ))}
+                </ul>
+              ) : null}
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <ReportList
+        icon={<CheckCircle className="size-5 text-emerald-600" />}
+        title="Điểm mạnh"
+        items={report.strengths}
+      />
+      <ReportList
+        icon={<WarningCircle className="size-5 text-amber-600" />}
+        title="Điểm cần cải thiện"
+        items={report.improvements}
+      />
+      <ReportList
+        icon={<Target className="size-5 text-primary" />}
+        title="Kế hoạch cải thiện"
+        items={report.action_plan}
+      />
+      <ReportList
+        icon={<WarningCircle className="size-5 text-muted" />}
+        title="Nội dung chưa đủ bằng chứng"
+        items={report.insufficient_evidence}
+      />
+    </div>
+  );
+}
+
+function ReportList({
+  icon,
+  title,
+  items,
+}: {
+  icon: React.ReactNode;
+  title: string;
+  items: string[];
+}) {
+  if (!items.length) return null;
+  return (
+    <section>
+      <div className="mb-2 flex items-center gap-2">
+        {icon}
+        <h3 className="font-semibold">{title}</h3>
+      </div>
+      <ul className="space-y-2 text-sm leading-6 text-muted">
+        {items.map((item) => (
+          <li key={item} className="border-l-2 border-slate-200 pl-3">
+            {item}
+          </li>
+        ))}
+      </ul>
+    </section>
+  );
+}
+
+function confidenceLabel(confidence: InterviewReport["confidence"]): string {
+  return {
+    low: "Thấp",
+    medium: "Trung bình",
+    high: "Cao",
+  }[confidence];
 }
 
 function phaseLabel(phase: InterviewPhase): string {
