@@ -152,6 +152,7 @@ def answer_interview_question(
         coverage_state=CoverageState.model_validate(session.coverage_state),
         question_count=session.question_count,
         current_topic=previous_internal.get("question_plan", {}).get("topic_key"),
+        current_difficulty=previous_internal.get("question_plan", {}).get("difficulty"),
         follow_up_count=int(previous_internal.get("follow_up_count", 0)),
         latest_answer=payload.answer,
     )

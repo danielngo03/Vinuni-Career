@@ -37,6 +37,9 @@ VerificationStatus = Literal[
     "not_assessed",
 ]
 AnswerQuality = Literal["vague", "partial", "sufficient", "irrelevant", "unable_to_answer"]
+OwnershipLevel = Literal["direct", "shared", "observed", "not_owned", "unknown"]
+TopicDecision = Literal["continue", "clarify", "learning_probe", "stop"]
+QuestionDifficulty = Literal["easy", "medium", "hard"]
 AssessmentDimensionKey = Literal[
     "technical_knowledge",
     "practical_experience",
@@ -86,6 +89,10 @@ class CoverageItem(BaseModel):
     priority: Literal["must_have", "nice_to_have", "cv_only"]
     status: VerificationStatus = "not_assessed"
     evidence_count: int = Field(default=0, ge=0)
+    evidence_summaries: list[str] = Field(default_factory=list, max_length=10)
+    ownership: OwnershipLevel = "unknown"
+    highest_verified_difficulty: QuestionDifficulty | None = None
+    stop_reason: str | None = Field(default=None, max_length=500)
     last_topic_key: str | None = Field(default=None, max_length=160)
 
 
@@ -101,6 +108,17 @@ class CommunicationEvaluation(BaseModel):
     relevance: int = Field(ge=0, le=4)
     structure: int = Field(ge=0, le=4)
     summary: str = Field(default="", max_length=500)
+
+
+class TopicEvidenceState(BaseModel):
+    ownership: OwnershipLevel = "unknown"
+    evidence_found: list[str] = Field(default_factory=list, max_length=10)
+    remaining_gap: str = Field(default="", max_length=1000)
+    highest_verified_difficulty: QuestionDifficulty | None = None
+    stop_reason: str | None = Field(default=None, max_length=500)
+    consecutive_weak_answers: int = Field(default=0, ge=0, le=10)
+    learning_probe_used: bool = False
+    red_flags: list[str] = Field(default_factory=list, max_length=10)
 
 
 class InterviewAssessmentDimension(BaseModel):
@@ -143,6 +161,8 @@ class InterviewReportDraft(BaseModel):
 class EvaluationState(BaseModel):
     competency_status: dict[str, VerificationStatus] = Field(default_factory=dict)
     contradictions: list[str] = Field(default_factory=list, max_length=100)
+    topic_evidence: dict[str, TopicEvidenceState] = Field(default_factory=dict)
+    red_flags: list[str] = Field(default_factory=list, max_length=100)
     communication_samples: list[CommunicationEvaluation] = Field(
         default_factory=list,
         max_length=40,
@@ -164,12 +184,21 @@ class PreviousAnswerEvaluation(BaseModel):
     strengths: list[str] = Field(default_factory=list, max_length=20)
     missing_evidence: list[str] = Field(default_factory=list, max_length=20)
     contradictions: list[str] = Field(default_factory=list, max_length=20)
+    detected_competency: str = Field(default="", max_length=200)
+    evidence_found: list[str] = Field(default_factory=list, max_length=10)
+    remaining_gap: str = Field(default="", max_length=1000)
+    ownership: OwnershipLevel = "unknown"
+    topic_decision: TopicDecision = "continue"
+    reason_for_next_question: str = Field(default="", max_length=500)
+    anti_repetition_check: str = Field(default="", max_length=500)
+    ownership_check: str = Field(default="", max_length=500)
+    red_flags: list[str] = Field(default_factory=list, max_length=10)
     communication: CommunicationEvaluation
 
 
 class QuestionPlan(BaseModel):
     question_type: Literal["initial", "follow_up", "transition", "closing"]
-    difficulty: Literal["easy", "medium", "hard"]
+    difficulty: QuestionDifficulty
     target_competency: str = Field(min_length=1, max_length=200)
     source_type: Literal[
         "cv_skill",
@@ -239,6 +268,7 @@ class InterviewRuntimeContext(BaseModel):
     coverage_state: CoverageState = Field(default_factory=CoverageState)
     question_count: int = Field(default=0, ge=0)
     current_topic: str | None = Field(default=None, max_length=160)
+    current_difficulty: QuestionDifficulty | None = None
     follow_up_count: int = Field(default=0, ge=0, le=5)
     latest_answer: str | None = Field(default=None, max_length=10_000)
 

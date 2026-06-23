@@ -13,6 +13,7 @@ from app.ai.interview.schemas import (
     InterviewConfig,
     InterviewRuntimeContext,
     MatchingResult,
+    TopicEvidenceState,
 )
 from app.ai.interview.service import generate_interview_report, generate_next_turn
 
@@ -132,6 +133,14 @@ def test_follow_up_updates_previous_skill_and_keeps_internal_data_out_of_questio
             "strengths": ["Specific Python API example"],
             "missing_evidence": [],
             "contradictions": [],
+            "detected_competency": "Python API development",
+            "evidence_found": ["Built an API for a student project"],
+            "remaining_gap": "",
+            "ownership": "direct",
+            "topic_decision": "continue",
+            "reason_for_next_question": "Python has enough evidence; assess FastAPI next.",
+            "anti_repetition_check": "FastAPI has not been asked yet.",
+            "ownership_check": "The candidate directly built the Python API.",
             "communication": {
                 "clarity": 3,
                 "specificity": 3,
@@ -168,6 +177,12 @@ def test_follow_up_updates_previous_skill_and_keeps_internal_data_out_of_questio
 
     python = next(item for item in result.coverage_state.skills if item.skill_id == "python")
     assert python.status == "verified"
+    assert python.ownership == "direct"
+    assert python.evidence_summaries == ["Built an API for a student project"]
+    assert (
+        result.evaluation_state.topic_evidence["verify_python"].evidence_found
+        == ["Built an API for a student project"]
+    )
     assert "score" not in result.question.lower()
     assert "expected_signals" not in result.question.lower()
 
@@ -177,9 +192,232 @@ def test_invalid_model_output_uses_single_question_fallback():
 
     result = generate_next_turn(_runtime(), gateway=gateway)
 
-    assert result.question == "Điều gì khiến em muốn ứng tuyển vào vị trí này?"
+    assert result.question == (
+        "Trong công việc Backend Intern, khía cạnh nào khiến em muốn tìm hiểu sâu hơn?"
+    )
     assert result.provider_metadata["planner"]["fallback"] is True
     assert result.question.count("?") == 1
+
+
+def test_repeated_question_is_rejected_and_regenerated():
+    planner = _planner(
+        action="clarify_answer",
+        current_phase="career",
+        question_plan={
+            "question_type": "follow_up",
+            "difficulty": "easy",
+            "target_competency": "career motivation",
+            "source_type": "previous_answer",
+            "source_reference": "Em khá thích.",
+            "evidence_gap": "The specific area of interest is missing.",
+            "question_intent": "clarify_answer",
+            "topic_key": "career_motivation",
+            "linked_skill_ids": [],
+        },
+        previous_answer_evaluation={
+            "score": 1,
+            "status": "not_assessed",
+            "answer_quality": "vague",
+            "strengths": [],
+            "missing_evidence": ["One specific area of interest"],
+            "remaining_gap": "The specific area of interest is missing.",
+            "ownership": "unknown",
+            "topic_decision": "clarify",
+            "communication": {
+                "clarity": 1,
+                "specificity": 0,
+                "relevance": 2,
+                "structure": 1,
+                "summary": "Too vague.",
+            },
+        },
+        follow_up_count=1,
+    )
+    repeated = "Điều gì khiến em muốn ứng tuyển vào vị trí này?"
+    gateway = FakeGateway(
+        [
+            planner,
+            {"question": repeated},
+            {
+                "question": (
+                    "Trong vị trí này, em muốn tìm hiểu sâu nhất về xây dựng ứng dụng, "
+                    "tối ưu chi phí hay vận hành LLM?"
+                )
+            },
+        ]
+    )
+    runtime = _runtime(
+        history=[
+            ConversationTurn(
+                question=repeated,
+                answer="Em khá thích.",
+                phase="career",
+                topic_key="career_motivation",
+            )
+        ],
+        question_count=1,
+        current_topic="career_motivation",
+        current_difficulty="easy",
+        latest_answer="Em khá thích.",
+    )
+
+    result = generate_next_turn(runtime, gateway=gateway)
+
+    assert result.question != repeated
+    assert result.provider_metadata["question_generator"]["attempts"] == 2
+    assert len(gateway.requests) == 3
+
+
+def test_non_owned_unobserved_topic_is_stopped_instead_of_probed_as_owner():
+    planner = _planner(
+        action="probe_deeper",
+        current_phase="cv_verification",
+        question_plan={
+            "question_type": "follow_up",
+            "difficulty": "medium",
+            "target_competency": "Docker",
+            "source_type": "previous_answer",
+            "source_reference": "Thành viên khác làm và em không quan sát.",
+            "evidence_gap": "Docker implementation evidence is missing.",
+            "question_intent": "request_evidence",
+            "topic_key": "verify_docker",
+            "linked_skill_ids": ["docker"],
+        },
+        previous_answer_evaluation={
+            "score": 0,
+            "status": "not_assessed",
+            "answer_quality": "unable_to_answer",
+            "strengths": [],
+            "missing_evidence": ["No direct or observed Docker evidence"],
+            "remaining_gap": "No direct or observed Docker evidence.",
+            "ownership": "not_owned",
+            "topic_decision": "stop",
+            "reason_for_next_question": "Stop Docker and assess another competency.",
+            "ownership_check": "The candidate did not implement or observe Docker work.",
+            "communication": {
+                "clarity": 3,
+                "specificity": 2,
+                "relevance": 4,
+                "structure": 3,
+                "summary": "Clearly states no ownership.",
+            },
+        },
+        evaluated_skill_ids=[],
+        follow_up_count=1,
+    )
+    gateway = FakeGateway(
+        [
+            planner,
+            {"question": "Em có thể nêu một tình huống cụ thể em đã sử dụng Python không?"},
+        ]
+    )
+    runtime = _runtime(
+        interview_config=_runtime().interview_config.model_copy(
+            update={"current_phase": "cv_verification"}
+        ),
+        history=[
+            ConversationTurn(
+                question="Em đã dùng Docker như thế nào trong dự án?",
+                answer="Thành viên khác làm và em không quan sát.",
+                phase="cv_verification",
+                topic_key="verify_docker",
+            )
+        ],
+        question_count=1,
+        current_topic="verify_docker",
+        current_difficulty="easy",
+        latest_answer="Thành viên khác làm và em không quan sát.",
+    )
+
+    result = generate_next_turn(runtime, gateway=gateway)
+
+    assert result.planner_output.question_plan.topic_key != "verify_docker"
+    docker_state = result.evaluation_state.topic_evidence["verify_docker"]
+    assert docker_state.ownership == "not_owned"
+    assert docker_state.stop_reason
+    assert "Docker" not in result.question
+
+
+def test_second_weak_answer_forces_topic_switch():
+    planner = _planner(
+        action="clarify_answer",
+        current_phase="cv_verification",
+        question_plan={
+            "question_type": "follow_up",
+            "difficulty": "easy",
+            "target_competency": "project contribution",
+            "source_type": "previous_answer",
+            "source_reference": "Em làm nhiều lắm.",
+            "evidence_gap": "A concrete contribution is still missing.",
+            "question_intent": "clarify_answer",
+            "topic_key": "project_contribution",
+            "linked_skill_ids": [],
+        },
+        previous_answer_evaluation={
+            "score": 1,
+            "status": "not_assessed",
+            "answer_quality": "vague",
+            "strengths": [],
+            "missing_evidence": ["One concrete contribution"],
+            "remaining_gap": "A concrete contribution is still missing.",
+            "topic_decision": "clarify",
+            "communication": {
+                "clarity": 1,
+                "specificity": 0,
+                "relevance": 2,
+                "structure": 1,
+                "summary": "Still vague.",
+            },
+        },
+        follow_up_count=2,
+    )
+    gateway = FakeGateway(
+        [
+            planner,
+            {"question": "Em có thể nêu một tình huống cụ thể em đã sử dụng Python không?"},
+        ]
+    )
+    runtime = _runtime(
+        interview_config=_runtime().interview_config.model_copy(
+            update={"current_phase": "cv_verification"}
+        ),
+        history=[
+            ConversationTurn(
+                question="Em đóng góp gì trong đề tài?",
+                answer="Nhiều lắm.",
+                phase="cv_verification",
+                topic_key="project_contribution",
+            ),
+            ConversationTurn(
+                question="Em hãy chọn một phần cụ thể em trực tiếp làm?",
+                answer="Em làm nhiều lắm.",
+                phase="cv_verification",
+                topic_key="project_contribution",
+            ),
+        ],
+        evaluation_state=EvaluationState(
+            topic_evidence={
+                "project_contribution": TopicEvidenceState(
+                    consecutive_weak_answers=1
+                )
+            }
+        ),
+        question_count=2,
+        current_topic="project_contribution",
+        current_difficulty="easy",
+        follow_up_count=1,
+        latest_answer="Em làm nhiều lắm.",
+    )
+
+    result = generate_next_turn(runtime, gateway=gateway)
+
+    assert result.planner_output.question_plan.topic_key != "project_contribution"
+    assert (
+        result.evaluation_state.topic_evidence[
+            "project_contribution"
+        ].consecutive_weak_answers
+        == 2
+    )
 
 
 def test_question_limit_finishes_without_calling_model():

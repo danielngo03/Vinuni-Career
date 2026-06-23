@@ -2,6 +2,8 @@ from __future__ import annotations
 
 import json
 import re
+import unicodedata
+from difflib import SequenceMatcher
 from typing import Any
 
 from pydantic import BaseModel
@@ -23,8 +25,10 @@ from app.ai.interview.schemas import (
     InterviewTurnResult,
     PlannerOutput,
     PreviousAnswerEvaluation,
+    QuestionDifficulty,
     QuestionGeneratorOutput,
     QuestionPlan,
+    TopicEvidenceState,
 )
 from app.ai.matching.skills import normalize_skills
 
@@ -106,6 +110,7 @@ def generate_next_turn(
 
     llm = gateway or get_llm_gateway()
     metadata: dict[str, Any] = {}
+    planner: PlannerOutput | None = None
     try:
         planner, planner_meta = _call_structured(
             llm,
@@ -117,14 +122,23 @@ def generate_next_turn(
         _validate_planner(planner, runtime)
         metadata["planner"] = planner_meta
     except Exception as exc:  # noqa: BLE001
-        planner = _fallback_plan(runtime)
+        planner = _fallback_plan(
+            runtime,
+            previous_evaluation=(
+                planner.previous_answer_evaluation if planner is not None else None
+            ),
+        )
         metadata["planner"] = {"fallback": True, "error": str(exc)[:500]}
 
     coverage, evaluation = _apply_previous_evaluation(
         coverage,
         runtime.evaluation_state,
         planner,
-        evaluated_topic_key=runtime.current_topic,
+        evaluated_topic_key=(
+            runtime.current_topic
+            or (runtime.history[-1].topic_key if runtime.history else None)
+        ),
+        evaluated_difficulty=runtime.current_difficulty,
     )
     if runtime.question_count >= runtime.interview_config.max_questions:
         planner = _finished_plan(runtime)
@@ -167,21 +181,54 @@ def generate_next_turn(
             else None
         ),
         "already_asked_topics": [turn.topic_key for turn in runtime.history],
+        "already_asked_questions": [turn.question for turn in runtime.history],
+        "current_topic_evidence": (
+            evaluation.topic_evidence.get(runtime.current_topic).model_dump(mode="json")
+            if runtime.current_topic
+            and evaluation.topic_evidence.get(runtime.current_topic)
+            else None
+        ),
     }
+    writer_attempts: list[dict[str, Any]] = []
     try:
-        generated, writer_meta = _call_structured(
-            llm,
-            system_prompt=QUESTION_GENERATOR_SYSTEM_PROMPT,
-            payload=writer_payload,
-            output_model=QuestionGeneratorOutput,
-            feature="interview_question_generator",
-        )
-        _validate_candidate_question(generated.question)
-        question = generated.question.strip()
-        metadata["question_generator"] = writer_meta
+        for attempt in range(2):
+            generated, writer_meta = _call_structured(
+                llm,
+                system_prompt=QUESTION_GENERATOR_SYSTEM_PROMPT,
+                payload=writer_payload,
+                output_model=QuestionGeneratorOutput,
+                feature="interview_question_generator",
+            )
+            _validate_candidate_question(generated.question)
+            duplicate = _find_similar_question(
+                generated.question,
+                [turn.question for turn in runtime.history],
+            )
+            writer_attempts.append(writer_meta)
+            if duplicate is None:
+                question = generated.question.strip()
+                break
+            if attempt == 1:
+                raise ValueError(f"Generated question repeats an earlier question: {duplicate}")
+            writer_payload = {
+                **writer_payload,
+                "rejected_question": generated.question,
+                "rejection_reason": (
+                    "The question is too similar to an earlier question. Target one narrower "
+                    "unresolved evidence gap without repeating the same intent."
+                ),
+            }
+        metadata["question_generator"] = {
+            **writer_attempts[-1],
+            "attempts": len(writer_attempts),
+        }
     except Exception as exc:  # noqa: BLE001
         question = _fallback_question(runtime, planner)
-        metadata["question_generator"] = {"fallback": True, "error": str(exc)[:500]}
+        metadata["question_generator"] = {
+            "fallback": True,
+            "error": str(exc)[:500],
+            "attempts": len(writer_attempts),
+        }
 
     return InterviewTurnResult(
         question=question,
@@ -377,13 +424,52 @@ def _validate_planner(planner: PlannerOutput, context: InterviewRuntimeContext) 
         raise ValueError("Planner exceeded max_follow_ups_per_topic")
     if not first_turn and planner.previous_answer_evaluation:
         evaluation = planner.previous_answer_evaluation
-        needs_follow_up = (
-            evaluation.answer_quality in {"vague", "partial", "irrelevant"}
-            or bool(evaluation.missing_evidence)
+        topic_state = (
+            context.evaluation_state.topic_evidence.get(context.current_topic)
+            if context.current_topic
+            else None
         )
-        can_follow_up = context.follow_up_count < config.max_follow_ups_per_topic
+        weak_answer = evaluation.answer_quality in {
+            "vague",
+            "irrelevant",
+            "unable_to_answer",
+        }
+        consecutive_weak = (topic_state.consecutive_weak_answers if topic_state else 0) + (
+            1 if weak_answer else 0
+        )
+        must_stop = (
+            evaluation.topic_decision == "stop"
+            or evaluation.answer_quality == "unable_to_answer"
+            or consecutive_weak >= 2
+            or (
+                evaluation.ownership == "not_owned"
+                and evaluation.topic_decision != "learning_probe"
+            )
+        )
+        follow_up_limit = 1 if evaluation.answer_quality in {"vague", "irrelevant"} else 2
+        can_follow_up = (
+            context.follow_up_count < min(config.max_follow_ups_per_topic, follow_up_limit)
+            and not must_stop
+        )
+        needs_follow_up = (
+            evaluation.topic_decision in {"clarify", "learning_probe"}
+            or (
+                evaluation.answer_quality in {"vague", "partial", "irrelevant"}
+                and bool(evaluation.missing_evidence)
+            )
+        )
+        same_topic = planner.question_plan.topic_key == context.current_topic
+        if must_stop and same_topic:
+            raise ValueError("This topic must stop after weak, unable, or non-owned evidence")
+        if evaluation.ownership == "not_owned" and same_topic:
+            if evaluation.topic_decision != "learning_probe":
+                raise ValueError("A non-owned topic only permits one learning probe")
+            if topic_state and topic_state.learning_probe_used:
+                raise ValueError("The learning probe for this non-owned topic was already used")
+            if planner.question_plan.difficulty != "easy":
+                raise ValueError("A learning probe for non-owned work must be easy")
         if needs_follow_up and can_follow_up:
-            if planner.question_plan.topic_key != context.current_topic:
+            if not same_topic:
                 raise ValueError("An incomplete answer must be clarified on the same topic")
             if planner.question_plan.question_type != "follow_up":
                 raise ValueError("An incomplete answer requires a follow-up question")
@@ -398,8 +484,17 @@ def _validate_planner(planner: PlannerOutput, context: InterviewRuntimeContext) 
                 raise ValueError("An incomplete answer requires a follow-up action")
             if planner.follow_up_count != context.follow_up_count + 1:
                 raise ValueError("follow_up_count must increment on the same topic")
-        elif planner.question_plan.topic_key != context.current_topic and planner.follow_up_count != 0:
+        elif not same_topic and planner.follow_up_count != 0:
             raise ValueError("follow_up_count must reset when switching topics")
+        elif same_topic and needs_follow_up and not can_follow_up:
+            raise ValueError("The follow-up limit for this answer or topic has been reached")
+        if context.current_difficulty:
+            difficulty_rank = {"easy": 0, "medium": 1, "hard": 2}
+            if (
+                difficulty_rank[planner.question_plan.difficulty]
+                > difficulty_rank[context.current_difficulty] + 1
+            ):
+                raise ValueError("Question difficulty cannot jump more than one level")
     if planner.current_phase == "completed" and not planner.should_end_interview:
         raise ValueError("completed phase must end the interview")
     if planner.should_end_interview and planner.action != "finish_interview":
@@ -420,20 +515,69 @@ def _validate_candidate_question(question: str) -> None:
         raise ValueError("Question contains multiple sentences")
 
 
-def _fallback_plan(context: InterviewRuntimeContext) -> PlannerOutput:
+def _normalize_question(question: str) -> str:
+    value = unicodedata.normalize("NFKD", question.casefold())
+    value = "".join(character for character in value if not unicodedata.combining(character))
+    return " ".join(re.findall(r"\w+", value, flags=re.UNICODE))
+
+
+def _find_similar_question(question: str, previous_questions: list[str]) -> str | None:
+    normalized = _normalize_question(question)
+    if not normalized:
+        return None
+    tokens = set(normalized.split())
+    for previous in previous_questions:
+        prior = _normalize_question(previous)
+        if not prior:
+            continue
+        prior_tokens = set(prior.split())
+        union = tokens | prior_tokens
+        token_similarity = len(tokens & prior_tokens) / len(union) if union else 0
+        sequence_similarity = SequenceMatcher(None, normalized, prior).ratio()
+        if normalized == prior or sequence_similarity >= 0.84 or token_similarity >= 0.78:
+            return previous
+    return None
+
+
+def _fallback_plan(
+    context: InterviewRuntimeContext,
+    *,
+    previous_evaluation: PreviousAnswerEvaluation | None = None,
+) -> PlannerOutput:
     first_turn = not context.history and context.latest_answer is None
     phase = context.interview_config.current_phase
     coverage = build_coverage_state(context)
+    topic_state = (
+        context.evaluation_state.topic_evidence.get(context.current_topic)
+        if context.current_topic
+        else None
+    )
     should_clarify = (
         not first_turn
         and bool(context.current_topic)
-        and context.follow_up_count < context.interview_config.max_follow_ups_per_topic
+        and context.follow_up_count < min(
+            context.interview_config.max_follow_ups_per_topic,
+            1,
+        )
+        and (topic_state is None or topic_state.ownership != "not_owned")
+        and (topic_state is None or topic_state.consecutive_weak_answers < 1)
+        and (topic_state is None or not topic_state.stop_reason)
+        and (
+            previous_evaluation is None
+            or (
+                previous_evaluation.ownership != "not_owned"
+                and previous_evaluation.answer_quality != "unable_to_answer"
+                and previous_evaluation.topic_decision != "stop"
+            )
+        )
     )
     target = next(
         (
             item
             for item in coverage.skills
             if item.priority == "must_have" and item.status != "verified"
+            and item.ownership != "not_owned"
+            and f"verify_{item.skill_id}" != context.current_topic
         ),
         None,
     )
@@ -448,7 +592,7 @@ def _fallback_plan(context: InterviewRuntimeContext) -> PlannerOutput:
             question_intent="clarify_answer",
             topic_key=context.current_topic or "clarify_previous_answer",
         )
-    elif phase == "career":
+    elif phase == "career" and first_turn:
         plan = QuestionPlan(
             question_type="initial" if first_turn else "transition",
             difficulty="easy",
@@ -460,16 +604,16 @@ def _fallback_plan(context: InterviewRuntimeContext) -> PlannerOutput:
             topic_key="career_motivation",
         )
     else:
-        skill = target.skill if target else "relevant project contribution"
+        skill = target.skill if target else "problem solving approach"
         plan = QuestionPlan(
-            question_type="initial" if first_turn else "follow_up",
+            question_type="initial" if first_turn else "transition",
             difficulty="easy",
             target_competency=skill,
-            source_type="jd_requirement" if target else "cv_project",
+            source_type="jd_requirement" if target else "general",
             source_reference=skill,
             evidence_gap="Direct evidence of the candidate's contribution is missing.",
             question_intent="request_evidence",
-            topic_key=f"verify_{target.skill_id}" if target else "verify_relevant_project",
+            topic_key=f"verify_{target.skill_id}" if target else "problem_solving_approach",
             linked_skill_ids=[target.skill_id] if target else [],
         )
     return PlannerOutput(
@@ -478,16 +622,28 @@ def _fallback_plan(context: InterviewRuntimeContext) -> PlannerOutput:
             if first_turn
             else "clarify_answer"
             if should_clarify
-            else "ask_question"
+            else "switch_topic"
         ),
-        current_phase=phase,
+        current_phase=(
+            "cv_verification" if phase == "career" and not first_turn else phase
+        ),
         question_plan=plan,
         previous_answer_evaluation=None
         if first_turn
-        else PreviousAnswerEvaluation(
+        else previous_evaluation
+        or PreviousAnswerEvaluation(
             status="not_assessed",
             answer_quality="vague",
             missing_evidence=["A concrete example or direct contribution is missing."],
+            remaining_gap="A concrete example or direct contribution is missing.",
+            topic_decision="clarify" if should_clarify else "stop",
+            reason_for_next_question=(
+                "Ask for one concrete example."
+                if should_clarify
+                else "Move to another competency after an unproductive topic."
+            ),
+            anti_repetition_check="Use a narrower evidence request than the previous question.",
+            ownership_check="Do not assume ownership until the candidate states it.",
             communication={
                 "clarity": 1,
                 "specificity": 0,
@@ -536,39 +692,71 @@ def _fallback_question(
     planner: PlannerOutput,
 ) -> str:
     language = context.interview_config.language.lower()
-    phase = planner.current_phase
+    plan = planner.question_plan
+    competency = plan.target_competency.strip() or "chủ đề này"
     if language.startswith("vi"):
-        questions = {
-            "career": "Điều gì khiến em muốn ứng tuyển vào vị trí này?",
-            "cv_verification": (
-                "Em có thể mô tả phần mình trực tiếp thực hiện trong dự án liên quan nhất "
-                "đến vị trí này không?"
-            ),
-            "problem_solving": (
-                "Nếu cần xây dựng một chức năng chính cho sản phẩm này, em sẽ bắt đầu "
-                "phân tích và thiết kế giải pháp như thế nào?"
-            ),
-            "behavioral": (
-                "Em có thể kể về một lần gặp khó khăn khi làm dự án nhóm và cách em xử lý không?"
-            ),
-            "candidate_questions": "Em có câu hỏi nào về vị trí hoặc môi trường làm việc không?",
-        }
+        if (
+            planner.previous_answer_evaluation
+            and planner.previous_answer_evaluation.ownership == "not_owned"
+            and planner.previous_answer_evaluation.topic_decision == "learning_probe"
+            and plan.topic_key == context.current_topic
+        ):
+            candidate = (
+                f"Nếu được giao phụ trách {competency}, bước đầu tiên em sẽ tìm hiểu "
+                "và thực hiện là gì?"
+            )
+        elif plan.question_type == "follow_up":
+            candidate = (
+                f"Em có thể nêu một ví dụ cụ thể chứng minh khả năng {competency} không?"
+            )
+        elif planner.current_phase == "career":
+            candidate = (
+                f"Trong công việc {context.interview_config.target_role or 'này'}, "
+                "khía cạnh nào khiến em muốn tìm hiểu sâu hơn?"
+            )
+        else:
+            candidate = (
+                f"Em có thể nêu một tình huống cụ thể em đã sử dụng {competency} không?"
+            )
+        alternatives = [
+            candidate,
+            f"Với {competency}, quyết định quan trọng nhất em từng trực tiếp đưa ra là gì?",
+            f"Kết quả cụ thể nào cho thấy phần việc {competency} của em đã hoạt động tốt?",
+        ]
     else:
-        questions = {
-            "career": "What makes you interested in this role?",
-            "cv_verification": (
-                "Could you describe the part you personally implemented in the project "
-                "most relevant to this role?"
-            ),
-            "problem_solving": (
-                "How would you begin analyzing and designing a core feature for this product?"
-            ),
-            "behavioral": (
-                "Can you describe a challenge in a team project and how you handled it?"
-            ),
-            "candidate_questions": "What would you like to ask about the role or workplace?",
-        }
-    return questions.get(phase, questions["career"])
+        if (
+            planner.previous_answer_evaluation
+            and planner.previous_answer_evaluation.ownership == "not_owned"
+            and planner.previous_answer_evaluation.topic_decision == "learning_probe"
+            and plan.topic_key == context.current_topic
+        ):
+            candidate = (
+                f"If you were assigned {competency}, what would be your first step "
+                "to learn and implement it?"
+            )
+        elif plan.question_type == "follow_up":
+            candidate = f"What concrete example best demonstrates your {competency}?"
+        elif planner.current_phase == "career":
+            candidate = (
+                f"Which part of {context.interview_config.target_role or 'this role'} "
+                "would you most like to explore further?"
+            )
+        else:
+            candidate = f"What is one concrete situation where you used {competency}?"
+        alternatives = [
+            candidate,
+            f"What was the most important decision you personally made about {competency}?",
+            f"What concrete result showed that your work on {competency} was effective?",
+        ]
+    previous_questions = [turn.question for turn in context.history]
+    return next(
+        (
+            alternative
+            for alternative in alternatives
+            if _find_similar_question(alternative, previous_questions) is None
+        ),
+        alternatives[-1],
+    )
 
 
 def _apply_previous_evaluation(
@@ -577,6 +765,7 @@ def _apply_previous_evaluation(
     planner: PlannerOutput,
     *,
     evaluated_topic_key: str | None,
+    evaluated_difficulty: QuestionDifficulty | None,
 ) -> tuple[CoverageState, EvaluationState]:
     evaluation = planner.previous_answer_evaluation
     if not evaluation:
@@ -585,12 +774,65 @@ def _apply_previous_evaluation(
         *evaluation_state.communication_samples,
         evaluation.communication,
     ][-40:]
+    topic_evidence = dict(evaluation_state.topic_evidence)
+    if evaluated_topic_key:
+        previous_topic = topic_evidence.get(evaluated_topic_key, TopicEvidenceState())
+        weak_answer = evaluation.answer_quality in {
+            "vague",
+            "irrelevant",
+            "unable_to_answer",
+        }
+        topic_evidence[evaluated_topic_key] = previous_topic.model_copy(
+            update={
+                "ownership": (
+                    evaluation.ownership
+                    if evaluation.ownership != "unknown"
+                    else previous_topic.ownership
+                ),
+                "evidence_found": list(
+                    dict.fromkeys(
+                        [*previous_topic.evidence_found, *evaluation.evidence_found]
+                    )
+                )[-10:],
+                "remaining_gap": evaluation.remaining_gap
+                or (evaluation.missing_evidence[0] if evaluation.missing_evidence else ""),
+                "highest_verified_difficulty": (
+                    evaluated_difficulty
+                    if evaluation.status == "verified" and evaluated_difficulty
+                    else previous_topic.highest_verified_difficulty
+                ),
+                "stop_reason": (
+                    evaluation.reason_for_next_question
+                    if evaluation.topic_decision == "stop"
+                    else previous_topic.stop_reason
+                ),
+                "consecutive_weak_answers": (
+                    min(previous_topic.consecutive_weak_answers + 1, 10)
+                    if weak_answer
+                    else 0
+                ),
+                "learning_probe_used": (
+                    previous_topic.learning_probe_used
+                    or evaluation.topic_decision == "learning_probe"
+                ),
+                "red_flags": list(
+                    dict.fromkeys([*previous_topic.red_flags, *evaluation.red_flags])
+                )[-10:],
+            }
+        )
+    red_flags = list(
+        dict.fromkeys([*evaluation_state.red_flags, *evaluation.red_flags])
+    )[-100:]
     linked = set(planner.evaluated_skill_ids)
     if not linked:
         return (
             coverage,
             evaluation_state.model_copy(
-                update={"communication_samples": communication_samples}
+                update={
+                    "communication_samples": communication_samples,
+                    "topic_evidence": topic_evidence,
+                    "red_flags": red_flags,
+                }
             ),
         )
 
@@ -604,6 +846,24 @@ def _apply_previous_evaluation(
                 update={
                     "status": evaluation.status,
                     "evidence_count": item.evidence_count + 1,
+                    "evidence_summaries": list(
+                        dict.fromkeys([*item.evidence_summaries, *evaluation.evidence_found])
+                    )[-10:],
+                    "ownership": (
+                        evaluation.ownership
+                        if evaluation.ownership != "unknown"
+                        else item.ownership
+                    ),
+                    "highest_verified_difficulty": (
+                        evaluated_difficulty
+                        if evaluation.status == "verified" and evaluated_difficulty
+                        else item.highest_verified_difficulty
+                    ),
+                    "stop_reason": (
+                        evaluation.reason_for_next_question
+                        if evaluation.topic_decision == "stop"
+                        else item.stop_reason
+                    ),
                     "last_topic_key": evaluated_topic_key,
                 }
             )
@@ -631,7 +891,10 @@ def _apply_previous_evaluation(
         EvaluationState(
             competency_status=statuses,
             contradictions=contradictions,
+            topic_evidence=topic_evidence,
+            red_flags=red_flags,
             communication_samples=communication_samples,
+            final_report=evaluation_state.final_report,
         ),
     )
 
