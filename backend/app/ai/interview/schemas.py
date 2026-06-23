@@ -40,6 +40,7 @@ AnswerQuality = Literal["vague", "partial", "sufficient", "irrelevant", "unable_
 OwnershipLevel = Literal["direct", "shared", "observed", "not_owned", "unknown"]
 TopicDecision = Literal["continue", "clarify", "learning_probe", "stop"]
 QuestionDifficulty = Literal["easy", "medium", "hard"]
+InterviewMode = Literal["tech_lead", "technical_check"]
 AssessmentDimensionKey = Literal[
     "technical_knowledge",
     "practical_experience",
@@ -56,6 +57,7 @@ class MatchingResult(BaseModel):
 
 
 class InterviewConfig(BaseModel):
+    interview_mode: InterviewMode = "tech_lead"
     language: str = Field(default="vi", min_length=2, max_length=20)
     candidate_level: Literal["student", "intern", "fresher", "junior"] = "student"
     target_role: str = Field(default="", max_length=200)

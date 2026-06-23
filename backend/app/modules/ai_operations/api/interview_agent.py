@@ -1,8 +1,9 @@
 from __future__ import annotations
 
+from datetime import datetime
 from typing import Any
 
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, Query, Response
 from pydantic import BaseModel, Field
 from sqlalchemy import select
 from sqlalchemy.orm import Session
@@ -40,6 +41,33 @@ class StartInterviewRequest(BaseModel):
     interview_config: InterviewConfig = Field(default_factory=InterviewConfig)
 
 
+class InterviewTurnView(BaseModel):
+    sequence: int
+    phase: str
+    topic_key: str
+    question: str
+    answer: str | None = None
+
+
+class InterviewSessionSummary(BaseModel):
+    session_id: str
+    job_id: str
+    cv_id: str
+    interview_mode: str
+    status: str
+    current_phase: str
+    question_count: int
+    job_title: str
+    created_at: datetime
+    updated_at: datetime | None = None
+    has_report: bool
+
+
+class InterviewSessionDetail(InterviewSessionSummary):
+    report: dict[str, Any] | None = None
+    turns: list[InterviewTurnView] = Field(default_factory=list)
+
+
 @router.post("/sessions", response_model=CandidateInterviewResponse, status_code=201)
 def start_interview(
     payload: StartInterviewRequest,
@@ -56,10 +84,16 @@ def start_interview(
     cv_data = _cv_extraction(cv)
     jd_data = _jd_extraction(job)
     matching = _matching_result(cv_data, jd_data)
+    technical_check = payload.interview_config.interview_mode == "technical_check"
     config = payload.interview_config.model_copy(
         update={
             "target_role": payload.interview_config.target_role or job.title,
-            "current_phase": "career",
+            "current_phase": "cv_verification" if technical_check else "career",
+            "allowed_next_phases": (
+                ["cv_verification", "problem_solving", "completed"]
+                if technical_check
+                else payload.interview_config.allowed_next_phases
+            ),
         }
     )
     runtime = InterviewRuntimeContext(
@@ -91,6 +125,79 @@ def start_interview(
     db.commit()
     db.refresh(session)
     return _candidate_response(session, result.question)
+
+
+@router.get("/sessions", response_model=list[InterviewSessionSummary])
+def list_interview_sessions(
+    job_id: str | None = Query(default=None),
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user),
+) -> list[InterviewSessionSummary]:
+    query = (
+        select(AIInterviewSession)
+        .where(AIInterviewSession.user_id == current_user.id)
+        .order_by(AIInterviewSession.created_at.desc())
+        .limit(50)
+    )
+    if job_id:
+        query = query.where(AIInterviewSession.job_id == job_id)
+    sessions = list(db.scalars(query))
+    return [_session_summary(session) for session in sessions]
+
+
+@router.get("/sessions/{session_id}", response_model=InterviewSessionDetail)
+def get_interview_session(
+    session_id: str,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user),
+) -> InterviewSessionDetail:
+    session = db.get(AIInterviewSession, session_id)
+    if not session or session.user_id != current_user.id:
+        raise AppError(
+            code=ErrorCode.NOT_FOUND,
+            message="Interview session not found",
+            status_code=404,
+        )
+    turns = list(
+        db.scalars(
+            select(AIInterviewTurn)
+            .where(AIInterviewTurn.session_id == session.id)
+            .order_by(AIInterviewTurn.sequence)
+        )
+    )
+    summary = _session_summary(session)
+    return InterviewSessionDetail(
+        **summary.model_dump(),
+        report=(session.evaluation_state or {}).get("final_report"),
+        turns=[
+            InterviewTurnView(
+                sequence=turn.sequence,
+                phase=turn.phase,
+                topic_key=turn.topic_key,
+                question=turn.question,
+                answer=turn.answer,
+            )
+            for turn in turns
+        ],
+    )
+
+
+@router.delete("/sessions/{session_id}", status_code=204)
+def delete_interview_session(
+    session_id: str,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user),
+) -> Response:
+    session = db.get(AIInterviewSession, session_id)
+    if not session or session.user_id != current_user.id:
+        raise AppError(
+            code=ErrorCode.NOT_FOUND,
+            message="Interview session not found",
+            status_code=404,
+        )
+    db.delete(session)
+    db.commit()
+    return Response(status_code=204)
 
 
 @router.post(
@@ -223,6 +330,24 @@ def _candidate_response(
         current_phase=session.current_phase,
         should_end_interview=session.status == "COMPLETED",
         report=(session.evaluation_state or {}).get("final_report"),
+    )
+
+
+def _session_summary(session: AIInterviewSession) -> InterviewSessionSummary:
+    config = session.config or {}
+    jd_snapshot = session.jd_snapshot or {}
+    return InterviewSessionSummary(
+        session_id=session.id,
+        job_id=session.job_id,
+        cv_id=session.cv_id,
+        interview_mode=str(config.get("interview_mode") or "tech_lead"),
+        status=session.status,
+        current_phase=session.current_phase,
+        question_count=session.question_count,
+        job_title=str(jd_snapshot.get("title") or config.get("target_role") or ""),
+        created_at=session.created_at,
+        updated_at=session.updated_at,
+        has_report=bool((session.evaluation_state or {}).get("final_report")),
     )
 
 

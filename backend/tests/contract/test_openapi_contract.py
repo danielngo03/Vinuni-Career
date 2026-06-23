@@ -15,6 +15,7 @@ def test_openapi_exposes_v2_operational_contracts(client: TestClient):
         "/api/v1/ai/runs/",
         "/api/v1/ai/runs/capabilities",
         "/api/v1/ai/interviews/sessions",
+        "/api/v1/ai/interviews/sessions/{session_id}",
         "/api/v1/ai/interviews/sessions/{session_id}/answers",
         "/api/v1/dashboard/student",
     }

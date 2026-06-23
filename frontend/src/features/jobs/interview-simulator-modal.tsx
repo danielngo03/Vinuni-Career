@@ -5,12 +5,13 @@ import {
   ChartBar,
   ChatCircleText,
   CheckCircle,
+  ClockCounterClockwise,
   PaperPlaneTilt,
   SpinnerGap,
   Target,
   WarningCircle,
 } from "@phosphor-icons/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Modal } from "@/components/ui/modal";
@@ -25,6 +26,7 @@ type InterviewPhase =
   | "behavioral"
   | "candidate_questions"
   | "completed";
+type InterviewMode = "tech_lead" | "technical_check";
 
 interface InterviewResponse {
   session_id: string;
@@ -54,6 +56,31 @@ interface InterviewReport {
   confidence: "low" | "medium" | "high";
 }
 
+interface InterviewSessionSummary {
+  session_id: string;
+  job_id: string;
+  cv_id: string;
+  interview_mode: InterviewMode;
+  status: string;
+  current_phase: InterviewPhase;
+  question_count: number;
+  job_title: string;
+  created_at: string;
+  updated_at: string;
+  has_report: boolean;
+}
+
+interface InterviewSessionDetail extends InterviewSessionSummary {
+  report: InterviewReport | null;
+  turns: Array<{
+    sequence: number;
+    phase: InterviewPhase;
+    topic_key: string;
+    question: string;
+    answer: string | null;
+  }>;
+}
+
 interface TranscriptItem {
   question: string;
   answer?: string;
@@ -75,6 +102,31 @@ export function InterviewSimulatorModal({
   const [transcript, setTranscript] = useState<TranscriptItem[]>([]);
   const [answer, setAnswer] = useState("");
   const [pending, setPending] = useState(false);
+  const [selectedMode, setSelectedMode] = useState<InterviewMode>("tech_lead");
+  const [history, setHistory] = useState<InterviewSessionSummary[]>([]);
+  const [historyLoading, setHistoryLoading] = useState(false);
+
+  useEffect(() => {
+    if (!open || !job) return;
+    let ignore = false;
+    async function loadHistory() {
+      setHistoryLoading(true);
+      try {
+        const items = await apiFetch<InterviewSessionSummary[]>(
+          `/ai/interviews/sessions?job_id=${job?.id}`,
+        );
+        if (!ignore) setHistory(items);
+      } catch (error) {
+        if (!ignore) toast.error(apiMessage(error, dictionary.common.retry));
+      } finally {
+        if (!ignore) setHistoryLoading(false);
+      }
+    }
+    void loadHistory();
+    return () => {
+      ignore = true;
+    };
+  }, [dictionary.common.retry, job, open]);
 
   function handleOpenChange(nextOpen: boolean) {
     if (!nextOpen) {
@@ -82,12 +134,16 @@ export function InterviewSimulatorModal({
       setTranscript([]);
       setAnswer("");
       setPending(false);
+      setSelectedMode("tech_lead");
+      setHistory([]);
+      setHistoryLoading(false);
     }
     onOpenChange(nextOpen);
   }
 
-  async function start() {
+  async function start(mode: InterviewMode) {
     if (!job || !cv) return;
+    setSelectedMode(mode);
     setPending(true);
     try {
       const response = await apiFetch<InterviewResponse>("/ai/interviews/sessions", {
@@ -96,6 +152,7 @@ export function InterviewSimulatorModal({
           cv_id: cv.id,
           job_id: job.id,
           interview_config: {
+            interview_mode: mode,
             language: "vi",
             candidate_level: "student",
             target_role: job.title,
@@ -104,6 +161,35 @@ export function InterviewSimulatorModal({
       });
       setSession(response);
       setTranscript(response.question ? [{ question: response.question }] : []);
+      setHistory([]);
+    } catch (error) {
+      toast.error(apiMessage(error, dictionary.common.retry));
+    } finally {
+      setPending(false);
+    }
+  }
+
+  async function openSavedSession(sessionId: string) {
+    setPending(true);
+    try {
+      const detail = await apiFetch<InterviewSessionDetail>(
+        `/ai/interviews/sessions/${sessionId}`,
+      );
+      setSelectedMode(detail.interview_mode);
+      setSession({
+        session_id: detail.session_id,
+        question: "",
+        current_phase: detail.current_phase,
+        should_end_interview: detail.status === "COMPLETED",
+        report: detail.report,
+      });
+      setTranscript(
+        detail.turns.map((turn) => ({
+          question: turn.question,
+          answer: turn.answer || undefined,
+        })),
+      );
+      setAnswer("");
     } catch (error) {
       toast.error(apiMessage(error, dictionary.common.retry));
     } finally {
@@ -168,20 +254,36 @@ export function InterviewSimulatorModal({
               CV sử dụng: <span className="font-semibold text-foreground">{cv.title}</span>
             </p>
           )}
-          <Button className="w-full" onClick={start} disabled={!cv || pending}>
-            {pending ? (
-              <SpinnerGap className="size-4 animate-spin" />
-            ) : (
-              <ArrowRight className="size-4" />
-            )}
-            Bắt đầu phỏng vấn
-          </Button>
+          <div className="grid gap-3 sm:grid-cols-2">
+            <InterviewModeButton
+              title="Phỏng vấn với Tech Lead AI"
+              description="Mô phỏng phỏng vấn thích ứng theo CV/JD, có hỏi sâu về dự án và cách xử lý vấn đề."
+              active={selectedMode === "tech_lead"}
+              pending={pending}
+              disabled={!cv}
+              onClick={() => start("tech_lead")}
+            />
+            <InterviewModeButton
+              title="Kiểm tra kỹ thuật"
+              description="Thuần câu hỏi code, query, debug và kiến thức kỹ thuật dựa trên skill trong CV/JD."
+              active={selectedMode === "technical_check"}
+              pending={pending}
+              disabled={!cv}
+              onClick={() => start("technical_check")}
+            />
+          </div>
+          <InterviewHistoryList
+            items={history}
+            loading={historyLoading}
+            pending={pending}
+            onOpen={openSavedSession}
+          />
         </div>
       ) : (
         <div className="space-y-5">
           <div className="border-b pb-3 text-xs">
             <span className="font-semibold uppercase text-primary">
-              {phaseLabel(session.current_phase)}
+              {phaseLabel(session.current_phase, selectedMode)}
             </span>
           </div>
           {session.should_end_interview && session.report ? (
@@ -236,6 +338,98 @@ export function InterviewSimulatorModal({
       )}
     </Modal>
   );
+}
+
+function InterviewHistoryList({
+  items,
+  loading,
+  pending,
+  onOpen,
+}: {
+  items: InterviewSessionSummary[];
+  loading: boolean;
+  pending: boolean;
+  onOpen: (sessionId: string) => void;
+}) {
+  if (loading) {
+    return (
+      <div className="rounded-2xl border p-4 text-sm text-muted">
+        Đang tải buổi phỏng vấn đã lưu...
+      </div>
+    );
+  }
+  if (!items.length) return null;
+  return (
+    <section className="space-y-3 rounded-2xl border p-4">
+      <div className="flex items-center gap-2">
+        <ClockCounterClockwise className="size-5 text-primary" />
+        <h3 className="font-semibold">Buổi đã lưu</h3>
+      </div>
+      <div className="space-y-2">
+        {items.map((item) => (
+          <button
+            key={item.session_id}
+            type="button"
+            disabled={pending}
+            onClick={() => onOpen(item.session_id)}
+            className="focus-ring w-full rounded-xl border p-3 text-left transition hover:border-primary hover:bg-primary/5 disabled:cursor-not-allowed disabled:opacity-60"
+          >
+            <div className="flex flex-wrap items-center justify-between gap-2">
+              <p className="font-semibold">{modeLabel(item.interview_mode)}</p>
+              <span className="rounded-full bg-slate-100 px-2 py-1 text-xs text-muted">
+                {item.status === "COMPLETED" ? "Đã hoàn thành" : "Đang làm"}
+              </span>
+            </div>
+            <p className="mt-1 text-xs text-muted">
+              {new Date(item.created_at).toLocaleString()} · {item.question_count} câu
+              {item.has_report ? " · có đánh giá" : ""}
+            </p>
+          </button>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function InterviewModeButton({
+  title,
+  description,
+  active,
+  pending,
+  disabled,
+  onClick,
+}: {
+  title: string;
+  description: string;
+  active: boolean;
+  pending: boolean;
+  disabled: boolean;
+  onClick: () => void;
+}) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      disabled={disabled || pending}
+      className="focus-ring rounded-2xl border p-4 text-left transition hover:border-primary hover:bg-primary/5 disabled:cursor-not-allowed disabled:opacity-60"
+    >
+      <div className="flex items-start justify-between gap-3">
+        <div>
+          <p className="font-semibold">{title}</p>
+          <p className="mt-2 text-sm leading-6 text-muted">{description}</p>
+        </div>
+        {pending && active ? (
+          <SpinnerGap className="size-5 shrink-0 animate-spin text-primary" />
+        ) : (
+          <ArrowRight className="size-5 shrink-0 text-primary" />
+        )}
+      </div>
+    </button>
+  );
+}
+
+function modeLabel(mode: InterviewMode): string {
+  return mode === "technical_check" ? "Kiểm tra kỹ thuật" : "Phỏng vấn với Tech Lead AI";
 }
 
 function InterviewReportView({ report }: { report: InterviewReport }) {
@@ -346,7 +540,10 @@ function confidenceLabel(confidence: InterviewReport["confidence"]): string {
   }[confidence];
 }
 
-function phaseLabel(phase: InterviewPhase): string {
+function phaseLabel(phase: InterviewPhase, mode: InterviewMode): string {
+  if (mode === "technical_check" && phase !== "completed") {
+    return "Kiểm tra kỹ thuật";
+  }
   const labels: Record<InterviewPhase, string> = {
     career: "Định hướng sự nghiệp",
     cv_verification: "Xác thực CV",

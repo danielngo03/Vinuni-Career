@@ -47,6 +47,13 @@ REPORT_DIMENSIONS = {
     "communication": ("Giao tiếp và làm rõ", 20),
     "critical_thinking": ("Tư duy phản biện", 10),
 }
+TECHNICAL_CHECK_REPORT_DIMENSIONS = {
+    "technical_knowledge": ("Kiến thức chuyên môn", 30),
+    "practical_experience": ("Độ đúng code/query", 25),
+    "problem_solving": ("Debug và giải quyết vấn đề", 25),
+    "communication": ("Giải thích kỹ thuật", 10),
+    "critical_thinking": ("Edge cases và hiệu năng", 10),
+}
 
 
 def build_coverage_state(context: InterviewRuntimeContext) -> CoverageState:
@@ -169,6 +176,7 @@ def generate_next_turn(
 
     writer_payload = {
         "language": runtime.interview_config.language,
+        "interview_mode": runtime.interview_config.interview_mode,
         "candidate_level": runtime.interview_config.candidate_level,
         "phase": planner.current_phase,
         "action": planner.action,
@@ -248,6 +256,7 @@ def generate_interview_report(
     llm = gateway or get_llm_gateway()
     payload = {
         "language": context.interview_config.language,
+        "interview_mode": context.interview_config.interview_mode,
         "candidate_level": context.interview_config.candidate_level,
         "target_role_context": context.interview_config.target_role,
         "transcript": [turn.model_dump(mode="json") for turn in context.history],
@@ -267,14 +276,29 @@ def generate_interview_report(
             output_model=InterviewReportDraft,
             feature="interview_final_report",
         )
-        return _finalize_report(draft), metadata
+        return _finalize_report(
+            draft,
+            dimensions=_report_dimensions(context),
+        ), metadata
     except Exception as exc:  # noqa: BLE001
         return _fallback_report(context), {"fallback": True, "error": str(exc)[:500]}
 
 
-def _finalize_report(draft: InterviewReportDraft) -> InterviewReport:
+def _report_dimensions(
+    context: InterviewRuntimeContext,
+) -> dict[str, tuple[str, int]]:
+    if context.interview_config.interview_mode == "technical_check":
+        return TECHNICAL_CHECK_REPORT_DIMENSIONS
+    return REPORT_DIMENSIONS
+
+
+def _finalize_report(
+    draft: InterviewReportDraft,
+    *,
+    dimensions: dict[str, tuple[str, int]] = REPORT_DIMENSIONS,
+) -> InterviewReport:
     by_key = {dimension.key: dimension for dimension in draft.dimensions}
-    if set(by_key) != set(REPORT_DIMENSIONS):
+    if set(by_key) != set(dimensions):
         raise ValueError("The report must contain each assessment dimension exactly once")
     dimensions = [
         InterviewAssessmentDimension(
@@ -285,7 +309,7 @@ def _finalize_report(draft: InterviewReportDraft) -> InterviewReport:
             summary=by_key[key].summary,
             evidence=by_key[key].evidence,
         )
-        for key, (label, weight) in REPORT_DIMENSIONS.items()
+        for key, (label, weight) in dimensions.items()
     ]
     overall_score = round(
         sum(dimension.score * dimension.weight for dimension in dimensions) / 100
@@ -303,6 +327,7 @@ def _finalize_report(draft: InterviewReportDraft) -> InterviewReport:
 
 
 def _fallback_report(context: InterviewRuntimeContext) -> InterviewReport:
+    report_dimensions = _report_dimensions(context)
     samples = context.evaluation_state.communication_samples
     communication_score = (
         round(
@@ -350,7 +375,7 @@ def _fallback_report(context: InterviewRuntimeContext) -> InterviewReport:
                 ),
                 "evidence": [],
             }
-            for key in REPORT_DIMENSIONS
+            for key in report_dimensions
         ],
         strengths=[],
         improvements=[],
@@ -362,7 +387,7 @@ def _fallback_report(context: InterviewRuntimeContext) -> InterviewReport:
         ],
         confidence="low",
     )
-    return _finalize_report(draft)
+    return _finalize_report(draft, dimensions=report_dimensions)
 
 
 def _call_structured[ModelT: BaseModel](
@@ -420,6 +445,11 @@ def _validate_planner(planner: PlannerOutput, context: InterviewRuntimeContext) 
         config.current_phase,
     }:
         raise ValueError("suggested_next_phase is not allowed")
+    if _is_technical_check(context):
+        if planner.current_phase in {"career", "behavioral", "candidate_questions"}:
+            raise ValueError("Technical check mode only permits technical phases")
+        if planner.question_plan.topic_key == "career_motivation":
+            raise ValueError("Technical check mode cannot ask career motivation questions")
     if planner.follow_up_count > config.max_follow_ups_per_topic:
         raise ValueError("Planner exceeded max_follow_ups_per_topic")
     if not first_turn and planner.previous_answer_evaluation:
@@ -539,6 +569,28 @@ def _find_similar_question(question: str, previous_questions: list[str]) -> str 
     return None
 
 
+def _is_technical_check(context: InterviewRuntimeContext) -> bool:
+    return context.interview_config.interview_mode == "technical_check"
+
+
+def _next_fallback_skill(
+    context: InterviewRuntimeContext,
+    coverage: CoverageState,
+) -> CoverageItem | None:
+    candidates = [
+        item
+        for item in coverage.skills
+        if item.status != "verified"
+        and item.ownership != "not_owned"
+        and f"verify_{item.skill_id}" != context.current_topic
+    ]
+    if _is_technical_check(context):
+        matched = [item for item in candidates if item.status == "claimed"]
+        if matched:
+            return sorted(matched, key=lambda item: item.skill)[0]
+    return next((item for item in candidates if item.priority == "must_have"), None)
+
+
 def _fallback_plan(
     context: InterviewRuntimeContext,
     *,
@@ -571,16 +623,7 @@ def _fallback_plan(
             )
         )
     )
-    target = next(
-        (
-            item
-            for item in coverage.skills
-            if item.priority == "must_have" and item.status != "verified"
-            and item.ownership != "not_owned"
-            and f"verify_{item.skill_id}" != context.current_topic
-        ),
-        None,
-    )
+    target = _next_fallback_skill(context, coverage)
     if should_clarify:
         plan = QuestionPlan(
             question_type="follow_up",
@@ -592,7 +635,7 @@ def _fallback_plan(
             question_intent="clarify_answer",
             topic_key=context.current_topic or "clarify_previous_answer",
         )
-    elif phase == "career" and first_turn:
+    elif phase == "career" and first_turn and not _is_technical_check(context):
         plan = QuestionPlan(
             question_type="initial" if first_turn else "transition",
             difficulty="easy",
@@ -604,16 +647,24 @@ def _fallback_plan(
             topic_key="career_motivation",
         )
     else:
-        skill = target.skill if target else "problem solving approach"
+        skill = target.skill if target else "technical problem solving"
         plan = QuestionPlan(
             question_type="initial" if first_turn else "transition",
             difficulty="easy",
             target_competency=skill,
             source_type="jd_requirement" if target else "general",
             source_reference=skill,
-            evidence_gap="Direct evidence of the candidate's contribution is missing.",
-            question_intent="request_evidence",
-            topic_key=f"verify_{target.skill_id}" if target else "problem_solving_approach",
+            evidence_gap=(
+                "Technical correctness, syntax, and practical reasoning have not been checked."
+                if _is_technical_check(context)
+                else "Direct evidence of the candidate's contribution is missing."
+            ),
+            question_intent=(
+                "technical_code_or_query_check"
+                if _is_technical_check(context)
+                else "request_evidence"
+            ),
+            topic_key=f"verify_{target.skill_id}" if target else "technical_problem_solving",
             linked_skill_ids=[target.skill_id] if target else [],
         )
     return PlannerOutput(
@@ -625,7 +676,11 @@ def _fallback_plan(
             else "switch_topic"
         ),
         current_phase=(
-            "cv_verification" if phase == "career" and not first_turn else phase
+            "problem_solving"
+            if _is_technical_check(context) and phase == "career"
+            else "cv_verification"
+            if phase == "career" and not first_turn
+            else phase
         ),
         question_plan=plan,
         previous_answer_evaluation=None
@@ -694,6 +749,8 @@ def _fallback_question(
     language = context.interview_config.language.lower()
     plan = planner.question_plan
     competency = plan.target_competency.strip() or "chủ đề này"
+    if _is_technical_check(context):
+        return _technical_fallback_question(context, competency)
     if language.startswith("vi"):
         if (
             planner.previous_answer_evaluation
@@ -756,6 +813,85 @@ def _fallback_question(
             if _find_similar_question(alternative, previous_questions) is None
         ),
         alternatives[-1],
+    )
+
+
+def _technical_fallback_question(
+    context: InterviewRuntimeContext,
+    competency: str,
+) -> str:
+    language = context.interview_config.language.lower()
+    normalized = _normalize_question(competency)
+    if language.startswith("vi"):
+        if "mongodb" in normalized or "mongo" in normalized:
+            candidates = [
+                "Cho collection `orders` có các field `user_id`, `status`, `created_at`. Em viết MongoDB query lấy 10 đơn hàng mới nhất của một user đang ở trạng thái `paid` như thế nào?",
+                "Với MongoDB, em sẽ tạo index nào cho query lọc theo `user_id`, `status` và sắp xếp theo `created_at` giảm dần?",
+            ]
+        elif "sql" in normalized or "postgres" in normalized or "mysql" in normalized:
+            candidates = [
+                "Cho bảng `orders(user_id, total, created_at)`. Em viết câu SQL tính tổng doanh thu theo từng user trong 30 ngày gần nhất như thế nào?",
+                "Cho bảng `users` và `orders`, em viết SQL lấy 5 user có tổng giá trị đơn hàng cao nhất như thế nào?",
+            ]
+        elif "python" in normalized:
+            candidates = [
+                "Em viết một hàm Python nhận list số nguyên và trả về phần tử xuất hiện nhiều nhất như thế nào?",
+                "Trong Python, đoạn code đọc file JSON có thể lỗi ở những điểm nào và em xử lý exception ra sao?",
+            ]
+        elif "react" in normalized:
+            candidates = [
+                "Trong React, khi một component re-render quá nhiều vì state thay đổi, em sẽ kiểm tra và tối ưu theo hướng nào?",
+                "Em viết một component React nhỏ gọi API khi mount và hiển thị trạng thái loading/error/data như thế nào?",
+            ]
+        elif "fastapi" in normalized:
+            candidates = [
+                "Trong FastAPI, em viết một endpoint POST nhận JSON, validate dữ liệu đầu vào và trả về status code phù hợp như thế nào?",
+                "Nếu một endpoint FastAPI trả lỗi 500 không rõ nguyên nhân, em debug theo các bước kỹ thuật nào?",
+            ]
+        else:
+            candidates = [
+                f"Với {competency}, em hãy giải một bài kỹ thuật nhỏ: input là gì, output mong muốn là gì, và em sẽ viết code hoặc query như thế nào?",
+                f"Em mô tả một lỗi kỹ thuật thường gặp khi dùng {competency} và cách debug cụ thể của em?",
+            ]
+    else:
+        if "mongodb" in normalized or "mongo" in normalized:
+            candidates = [
+                "Given an `orders` collection with `user_id`, `status`, and `created_at`, what MongoDB query returns the 10 newest paid orders for one user?",
+                "What MongoDB index would you create for filtering by `user_id` and `status` while sorting by `created_at` descending?",
+            ]
+        elif "sql" in normalized or "postgres" in normalized or "mysql" in normalized:
+            candidates = [
+                "Given `orders(user_id, total, created_at)`, write a SQL query for revenue per user in the last 30 days.",
+                "Given `users` and `orders`, write SQL to return the top 5 users by total order value.",
+            ]
+        elif "python" in normalized:
+            candidates = [
+                "Write a Python function that takes a list of integers and returns the most frequent element.",
+                "When reading a JSON file in Python, what errors can happen and how would you handle them?",
+            ]
+        elif "react" in normalized:
+            candidates = [
+                "In React, if a component re-renders too often because of state changes, how would you inspect and optimize it?",
+                "Write a small React component that calls an API on mount and handles loading, error, and data states.",
+            ]
+        elif "fastapi" in normalized:
+            candidates = [
+                "In FastAPI, how would you implement a POST endpoint that accepts JSON, validates input, and returns the right status code?",
+                "If a FastAPI endpoint returns an unclear 500 error, what exact technical debugging steps would you take?",
+            ]
+        else:
+            candidates = [
+                f"For {competency}, solve a small technical task: what are the inputs, expected output, and code or query approach?",
+                f"Describe a common technical bug when using {competency} and the exact debugging steps you would take.",
+            ]
+    previous_questions = [turn.question for turn in context.history]
+    return next(
+        (
+            candidate
+            for candidate in candidates
+            if _find_similar_question(candidate, previous_questions) is None
+        ),
+        candidates[-1],
     )
 
 
@@ -907,6 +1043,14 @@ def _has_enough_evidence_to_finish(
     config = context.interview_config
     if context.question_count < config.min_questions:
         return False
+    if _is_technical_check(context):
+        must_have = [item for item in coverage.skills if item.priority == "must_have"]
+        if must_have:
+            return all(
+                item.evidence_count > 0 and item.status not in {"not_assessed", "claimed"}
+                for item in must_have
+            )
+        return bool(evaluation_state.competency_status)
     if len(evaluation_state.communication_samples) < config.min_communication_samples:
         return False
 

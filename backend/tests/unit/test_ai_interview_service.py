@@ -199,6 +199,27 @@ def test_invalid_model_output_uses_single_question_fallback():
     assert result.question.count("?") == 1
 
 
+def test_technical_check_fallback_asks_code_question_instead_of_career():
+    gateway = FakeGateway(["not json"])
+    runtime = _runtime(
+        interview_config=_runtime().interview_config.model_copy(
+            update={
+                "interview_mode": "technical_check",
+                "current_phase": "cv_verification",
+                "allowed_next_phases": ["cv_verification", "problem_solving", "completed"],
+            }
+        )
+    )
+
+    result = generate_next_turn(runtime, gateway=gateway)
+
+    assert result.planner_output.current_phase == "cv_verification"
+    assert result.planner_output.question_plan.topic_key == "verify_python"
+    assert "Python" in result.question
+    assert "ứng tuyển" not in result.question
+    assert "muốn tìm hiểu" not in result.question
+
+
 def test_repeated_question_is_rejected_and_regenerated():
     planner = _planner(
         action="clarify_answer",
@@ -667,3 +688,71 @@ def test_final_report_uses_fixed_dimensions_and_backend_weighted_score():
     assert [dimension.weight for dimension in report.dimensions] == [30, 20, 20, 20, 10]
     assert all(dimension.key != "job_fit" for dimension in report.dimensions)
     assert metadata["provider"] == "fake"
+
+
+def test_technical_check_report_uses_technical_labels_and_weights():
+    gateway = FakeGateway(
+        [
+            {
+                "overall_summary": "Ứng viên làm được bài kỹ thuật cơ bản và cần luyện edge cases.",
+                "dimensions": [
+                    {
+                        "key": "technical_knowledge",
+                        "score": 80,
+                        "summary": "Nắm cú pháp và khái niệm chính.",
+                        "evidence": ["Viết được hàm Python cơ bản."],
+                    },
+                    {
+                        "key": "practical_experience",
+                        "score": 70,
+                        "summary": "Code/query phần chính đúng.",
+                        "evidence": ["Trả về được kết quả mong muốn."],
+                    },
+                    {
+                        "key": "problem_solving",
+                        "score": 60,
+                        "summary": "Có hướng debug nhưng chưa đầy đủ.",
+                        "evidence": ["Kiểm tra input trước khi xử lý."],
+                    },
+                    {
+                        "key": "communication",
+                        "score": 90,
+                        "summary": "Giải thích kỹ thuật ngắn gọn.",
+                        "evidence": ["Nêu được lý do chọn cấu trúc dữ liệu."],
+                    },
+                    {
+                        "key": "critical_thinking",
+                        "score": 50,
+                        "summary": "Chưa nêu đủ edge cases.",
+                        "evidence": [],
+                    },
+                ],
+                "strengths": ["Nắm bài kỹ thuật cơ bản."],
+                "improvements": ["Bổ sung edge cases."],
+                "insufficient_evidence": [],
+                "action_plan": ["Luyện thêm bài query/code ngắn."],
+                "confidence": "medium",
+            }
+        ]
+    )
+    context = _runtime(
+        interview_config=_runtime().interview_config.model_copy(
+            update={"interview_mode": "technical_check"}
+        )
+    )
+
+    report, _ = generate_interview_report(
+        context,
+        answer_evaluations=[],
+        gateway=gateway,
+    )
+
+    assert report.overall_score == 70
+    assert [dimension.weight for dimension in report.dimensions] == [30, 25, 25, 10, 10]
+    assert [dimension.label for dimension in report.dimensions] == [
+        "Kiến thức chuyên môn",
+        "Độ đúng code/query",
+        "Debug và giải quyết vấn đề",
+        "Giải thích kỹ thuật",
+        "Edge cases và hiệu năng",
+    ]
