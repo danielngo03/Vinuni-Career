@@ -1,7 +1,9 @@
 from __future__ import annotations
 
 import json
+import os
 from functools import lru_cache
+from pathlib import Path
 from typing import Annotated, Any, Literal
 
 from pydantic import AnyHttpUrl, Field, field_validator
@@ -177,6 +179,54 @@ class Settings(BaseSettings):
                 return json.loads(stripped)
             return [item.strip() for item in stripped.split(",") if item.strip()]
         return value
+
+
+def get_gemini_api_keys() -> list[str]:
+    values = _collect_dotenv_values()
+    values.update(os.environ)
+    return _dedupe_keys(_split_gemini_api_key(values.get("GEMINI_API_KEY")))
+
+
+def _collect_dotenv_values() -> dict[str, str]:
+    root = Path(__file__).resolve().parents[3]
+    paths = [Path.cwd() / ".env", root / ".env", root / "backend" / ".env"]
+    values: dict[str, str] = {}
+    for path in paths:
+        if not path.exists():
+            continue
+        for line in path.read_text(encoding="utf-8").splitlines():
+            stripped = line.strip()
+            if not stripped or stripped.startswith("#") or "=" not in stripped:
+                continue
+            key, raw_value = stripped.split("=", 1)
+            values[key.strip()] = _clean_dotenv_value(raw_value)
+    return values
+
+
+def _clean_dotenv_value(value: str) -> str:
+    stripped = value.strip()
+    if " #" in stripped:
+        stripped = stripped.split(" #", 1)[0].strip()
+    if len(stripped) >= 2 and stripped[0] == stripped[-1] and stripped[0] in {"'", '"'}:
+        return stripped[1:-1]
+    return stripped
+
+
+def _split_gemini_api_key(value: str | None) -> list[str]:
+    if not value:
+        return []
+    return [item.strip() for item in value.split(",") if item.strip()]
+
+
+def _dedupe_keys(values: list[str | None]) -> list[str]:
+    keys = []
+    seen: set[str] = set()
+    for value in values:
+        normalized = (value or "").strip()
+        if normalized and normalized not in seen:
+            keys.append(normalized)
+            seen.add(normalized)
+    return keys
 
 
 @lru_cache

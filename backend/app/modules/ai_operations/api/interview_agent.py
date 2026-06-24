@@ -85,16 +85,24 @@ def start_interview(
     jd_data = _jd_extraction(job)
     matching = _matching_result(cv_data, jd_data)
     technical_check = payload.interview_config.interview_mode == "technical_check"
+    config_updates = {
+        "target_role": payload.interview_config.target_role or job.title,
+        "current_phase": "cv_verification" if technical_check else "career",
+        "allowed_next_phases": (
+            ["cv_verification", "problem_solving", "completed"]
+            if technical_check
+            else payload.interview_config.allowed_next_phases
+        ),
+    }
+    provided_config_fields = payload.interview_config.model_fields_set
+    if "max_questions" not in provided_config_fields:
+        config_updates["max_questions"] = 10 if technical_check else 12
+    if "min_questions" not in provided_config_fields:
+        config_updates["min_questions"] = 3
+    if "max_follow_ups_per_topic" not in provided_config_fields:
+        config_updates["max_follow_ups_per_topic"] = 2
     config = payload.interview_config.model_copy(
-        update={
-            "target_role": payload.interview_config.target_role or job.title,
-            "current_phase": "cv_verification" if technical_check else "career",
-            "allowed_next_phases": (
-                ["cv_verification", "problem_solving", "completed"]
-                if technical_check
-                else payload.interview_config.allowed_next_phases
-            ),
-        }
+        update=config_updates
     )
     runtime = InterviewRuntimeContext(
         cv=cv_data,

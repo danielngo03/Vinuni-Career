@@ -4,6 +4,7 @@ from uuid import uuid4
 
 import httpx
 
+from app.ai.gateway.api_key_pool import APIKeyPool, looks_like_key_exhaustion
 from app.ai.gateway.errors import LLMProviderError, LLMProviderUnavailable
 from app.ai.gateway.schemas import (
     ChatRequest,
@@ -23,6 +24,7 @@ class OpenAICompatibleProvider:
         name: str,
         base_url: str,
         api_key: str | None,
+        api_keys: list[str] | None = None,
         chat_model: str,
         embedding_model: str | None,
         rerank_model: str | None = None,
@@ -31,6 +33,7 @@ class OpenAICompatibleProvider:
         self.name = name
         self.base_url = base_url.rstrip("/")
         self.api_key = api_key
+        self.api_key_pool = APIKeyPool([api_key, *(api_keys or [])])
         self.chat_model = chat_model
         self.embedding_model = embedding_model
         self.rerank_model = rerank_model
@@ -134,26 +137,47 @@ class OpenAICompatibleProvider:
         )
 
     def _ensure_available(self) -> None:
-        if self.name in {"openai", "gemini", "groq"} and not self.api_key:
-            raise LLMProviderUnavailable(f"{self.name} API key is not configured")
+        if self.name in {"openai", "gemini", "groq"} and not self.api_key_pool.has_available_key():
+            raise LLMProviderUnavailable(
+                f"{self.name} API key is not configured or all keys are quota exhausted"
+            )
 
     def _post(self, path: str, body: dict) -> dict:
-        headers = {
-            "Authorization": f"Bearer {self.api_key}",
-            "Content-Type": "application/json",
-            "X-Client-Request-Id": _request_id(),
-        }
         url = path if path.startswith("http") else f"{self.base_url}{path}"
-        try:
-            with httpx.Client(timeout=self.timeout_seconds) as client:
-                response = client.post(url, headers=headers, json=body)
-            response.raise_for_status()
-            return response.json()
-        except httpx.HTTPStatusError as exc:
-            detail = exc.response.text[:500]
-            raise LLMProviderError(self.name, f"HTTP {exc.response.status_code}: {detail}") from exc
-        except httpx.HTTPError as exc:
-            raise LLMProviderError(self.name, str(exc)) from exc
+        key_errors: list[str] = []
+        api_keys = self.api_key_pool.available_keys()
+        if not api_keys and self.name not in {"openai", "gemini", "groq"}:
+            api_keys = [self.api_key or ""]
+        with httpx.Client(timeout=self.timeout_seconds) as client:
+            for api_key in api_keys:
+                headers = {
+                    "Authorization": f"Bearer {api_key}",
+                    "Content-Type": "application/json",
+                    "X-Client-Request-Id": _request_id(),
+                }
+                try:
+                    response = client.post(url, headers=headers, json=body)
+                    response.raise_for_status()
+                    self.api_key_pool.record_success(api_key)
+                    return response.json()
+                except httpx.HTTPStatusError as exc:
+                    detail = exc.response.text[:500]
+                    if self.name == "gemini" and looks_like_key_exhaustion(
+                        exc.response.status_code, detail
+                    ):
+                        self.api_key_pool.mark_exhausted(api_key)
+                        key_errors.append(f"HTTP {exc.response.status_code}: {detail}")
+                        continue
+                    raise LLMProviderError(
+                        self.name, f"HTTP {exc.response.status_code}: {detail}"
+                    ) from exc
+                except httpx.HTTPError as exc:
+                    raise LLMProviderError(self.name, str(exc)) from exc
+        if key_errors:
+            raise LLMProviderUnavailable(
+                f"{self.name} API keys are quota exhausted: " + "; ".join(key_errors)
+            )
+        raise LLMProviderUnavailable(f"{self.name} API key is not configured")
 
 
 def _request_id() -> str:

@@ -32,8 +32,8 @@
   --color-warning: var(--warning);
   --color-danger: var(--danger);
   --color-navy: var(--navy);
-  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
-  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+  --font-sans: ui-sans-serif, system-ui, sans-serif;
+  --font-mono: ui-monospace, monospace;
 }
 
 * {
@@ -49,7 +49,7 @@ body {
   min-width: 320px;
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  font-family: ui-sans-serif, system-ui, sans-serif;
   text-rendering: optimizeLegibility;
   overflow-x: hidden;
 }

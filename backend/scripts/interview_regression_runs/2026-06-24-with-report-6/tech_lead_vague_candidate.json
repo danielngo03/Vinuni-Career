@@ -1,0 +1,809 @@
+{
+  "case": "tech_lead_vague_candidate",
+  "mode": "tech_lead",
+  "answer_style": "vague",
+  "max_questions": 12,
+  "generated_at": "2026-06-24T13:45:40.540594+00:00",
+  "flags": [],
+  "report": {
+    "overall_score": 0,
+    "overall_summary": "Ứng viên không thể trả lời bất kỳ câu hỏi kỹ thuật nào liên quan đến dự án hoặc kiến thức nền tảng. Trong suốt buổi phỏng vấn, ứng viên liên tục đưa ra một câu trả lời duy nhất và không liên quan đến nội dung câu hỏi, bất kể chủ đề là kiến trúc hệ thống, Docker, hay lập trình Python. Điều này cho thấy sự thiếu hụt nghiêm trọng về kỹ năng giao tiếp, khả năng hiểu vấn đề và kiến thức kỹ thuật cần thiết cho vị trí thực tập sinh.",
+    "dimensions": [
+      {
+        "key": "technical_knowledge",
+        "label": "Kiến thức chuyên môn",
+        "score": 0,
+        "weight": 30,
+        "summary": "Ứng viên không thể hiện được bất kỳ kiến thức nào về FastAPI, Docker hay Python.",
+        "evidence": [
+          "Không thể giải thích kiến trúc FastAPI.",
+          "Không thể liệt kê các chỉ thị Dockerfile.",
+          "Không thể thực hiện bài tập lập trình Python cơ bản."
+        ]
+      },
+      {
+        "key": "practical_experience",
+        "label": "Kinh nghiệm thực tế",
+        "score": 0,
+        "weight": 20,
+        "summary": "Không có bằng chứng về kinh nghiệm thực tế hoặc quyền sở hữu dự án.",
+        "evidence": [
+          "Không thể mô tả dự án đồ án đã nêu trong CV.",
+          "Không thể giải thích vai trò cá nhân trong hệ thống AI."
+        ]
+      },
+      {
+        "key": "problem_solving",
+        "label": "Giải quyết vấn đề",
+        "score": 0,
+        "weight": 20,
+        "summary": "Không thể đánh giá khả năng giải quyết vấn đề do ứng viên không phản hồi các câu hỏi kỹ thuật.",
+        "evidence": [
+          "Chỉ đưa ra câu trả lời rập khuôn về việc xem log để debug mà không có ngữ cảnh cụ thể."
+        ]
+      },
+      {
+        "key": "communication",
+        "label": "Giao tiếp và làm rõ",
+        "score": 0,
+        "weight": 20,
+        "summary": "Kỹ năng giao tiếp rất kém, không có khả năng lắng nghe và phản hồi đúng trọng tâm câu hỏi.",
+        "evidence": [
+          "Lặp lại cùng một câu trả lời không liên quan cho 11 câu hỏi khác nhau."
+        ]
+      },
+      {
+        "key": "critical_thinking",
+        "label": "Tư duy phản biện",
+        "score": 0,
+        "weight": 10,
+        "summary": "Không thể đánh giá do ứng viên không tham gia vào quá trình thảo luận kỹ thuật.",
+        "evidence": [
+          "Không có khả năng phân tích hoặc đưa ra các lựa chọn thay thế."
+        ]
+      }
+    ],
+    "strengths": [],
+    "improvements": [
+      "Cần học lại các kiến thức nền tảng về Python, FastAPI và Docker.",
+      "Cần rèn luyện kỹ năng lắng nghe và trả lời đúng trọng tâm câu hỏi trong phỏng vấn.",
+      "Cần chuẩn bị kỹ lưỡng về các dự án cá nhân để có thể giải thích chi tiết về kiến trúc và vai trò của bản thân."
+    ],
+    "insufficient_evidence": [
+      "Thiếu hoàn toàn bằng chứng về kiến thức kỹ thuật.",
+      "Thiếu bằng chứng về kinh nghiệm thực tế.",
+      "Thiếu bằng chứng về khả năng tư duy logic."
+    ],
+    "action_plan": [
+      "Tập trung vào việc nắm vững cú pháp Python cơ bản và các khái niệm lập trình hướng đối tượng.",
+      "Thực hành xây dựng các ứng dụng web đơn giản với FastAPI và đóng gói chúng bằng Docker.",
+      "Tham gia các buổi phỏng vấn giả lập để cải thiện kỹ năng giao tiếp và phản xạ khi đối mặt với câu hỏi kỹ thuật."
+    ],
+    "confidence": "high"
+  },
+  "report_metadata": {
+    "provider": "gemini",
+    "model": "gemini-3.1-flash-lite",
+    "input_tokens": 5529,
+    "output_tokens": 803,
+    "attempts": 1
+  },
+  "answer_evaluations": [
+    {
+      "sequence": 1,
+      "question": "Bạn có thể mô tả kiến trúc tổng thể của dự án AI backend demo mà bạn đã thực hiện và giải thích vai trò cụ thể của dịch vụ FastAPI trong hệ thống đó không?",
+      "answer": "Em có làm qua trong đồ án và em thường debug bằng cách xem log rồi sửa dần.",
+      "evaluation": {
+        "score": 1,
+        "status": "claimed",
+        "answer_quality": "vague",
+        "strengths": [],
+        "missing_evidence": [
+          "architecture description",
+          "specific role in FastAPI service"
+        ],
+        "contradictions": [],
+        "detected_competency": "basic_debugging",
+        "evidence_found": [
+          "uses logs for debugging"
+        ],
+        "remaining_gap": "The candidate did not address the architecture or their specific role in the project.",
+        "ownership": "unknown",
+        "topic_decision": "clarify",
+        "reason_for_next_question": "The previous answer was off-topic regarding the architecture request. I need to re-focus on the project structure to verify ownership.",
+        "anti_repetition_check": "This question asks for the architecture again, but narrows the scope to the API endpoints to force a concrete answer.",
+        "ownership_check": "Asking about specific endpoints will reveal if the candidate actually built the API.",
+        "red_flags": [
+          "vague_response_to_architectural_question"
+        ],
+        "communication": {
+          "clarity": 1,
+          "specificity": 1,
+          "relevance": 1,
+          "structure": 1,
+          "summary": "Candidate ignored the architecture question and provided a generic debugging statement."
+        }
+      }
+    },
+    {
+      "sequence": 2,
+      "question": "Cảm ơn bạn đã chia sẻ về cách debug. Để làm rõ hơn về kiến trúc, bạn có thể liệt kê các endpoint chính mà dịch vụ FastAPI của bạn cung cấp và giải thích cách nó kết nối với các thành phần khác trong hệ thống AI đó không?",
+      "answer": "Em có làm qua trong đồ án và em thường debug bằng cách xem log rồi sửa dần.",
+      "evaluation": {
+        "score": 0,
+        "status": "not_assessed",
+        "answer_quality": "vague",
+        "strengths": [],
+        "missing_evidence": [
+          "architectural_overview",
+          "endpoint_list",
+          "system_integration_details"
+        ],
+        "contradictions": [],
+        "detected_competency": "none",
+        "evidence_found": [
+          "uses logs for debugging"
+        ],
+        "remaining_gap": "The candidate failed to describe the project architecture or their specific role after two attempts.",
+        "ownership": "unknown",
+        "topic_decision": "stop",
+        "reason_for_next_question": "The candidate provided a repetitive, non-responsive answer regarding project architecture. Switching to Docker to assess technical implementation skills.",
+        "anti_repetition_check": "The previous questions were about architecture; this is a technical task about Docker.",
+        "ownership_check": "This will assess if the candidate can explain the Dockerfile or containerization process they claimed.",
+        "red_flags": [
+          "vague_response_to_architectural_question",
+          "repetitive_non_responsive_answer"
+        ],
+        "communication": {
+          "clarity": 1,
+          "specificity": 1,
+          "relevance": 1,
+          "structure": 1,
+          "summary": "Candidate ignored the architecture question and provided a generic debugging statement."
+        }
+      }
+    },
+    {
+      "sequence": 3,
+      "question": "Để chuyển sang chủ đề về triển khai, bạn hãy giải thích các chỉ thị chính mà bạn đã sử dụng trong Dockerfile để đóng gói dịch vụ FastAPI của mình và lý do tại sao bạn chọn cấu trúc đó?",
+      "answer": "Em có làm qua trong đồ án và em thường debug bằng cách xem log rồi sửa dần.",
+      "evaluation": {
+        "score": 0,
+        "status": "not_assessed",
+        "answer_quality": "vague",
+        "strengths": [],
+        "missing_evidence": [
+          "no architectural details provided",
+          "no dockerfile details provided"
+        ],
+        "contradictions": [],
+        "detected_competency": "none",
+        "evidence_found": [
+          "uses logs for debugging"
+        ],
+        "remaining_gap": "Candidate is unable to describe their own project or technical implementation details.",
+        "ownership": "unknown",
+        "topic_decision": "stop",
+        "reason_for_next_question": "The candidate has provided the same non-responsive answer three times. Switching to a direct technical knowledge check to assess if they have any foundational Python knowledge.",
+        "anti_repetition_check": "Moving away from project-based questions to a direct coding task.",
+        "ownership_check": "Not applicable as we are switching to a technical knowledge check.",
+        "red_flags": [
+          "repetitive_non_responsive_answer",
+          "inability_to_describe_project"
+        ],
+        "communication": {
+          "clarity": 1,
+          "specificity": 1,
+          "relevance": 1,
+          "structure": 1,
+          "summary": "Candidate provided a repetitive, non-responsive answer regarding their project work."
+        }
+      }
+    },
+    {
+      "sequence": 4,
+      "question": "Để chuyển sang phần kiểm tra kiến thức lập trình, bạn hãy viết một đoạn mã Python ngắn sử dụng list comprehension để tạo ra một danh sách chứa bình phương của các số chẵn từ 1 đến 10.",
+      "answer": "Em có làm qua trong đồ án và em thường debug bằng cách xem log rồi sửa dần.",
+      "evaluation": {
+        "score": 0,
+        "status": "not_assessed",
+        "answer_quality": "vague",
+        "strengths": [],
+        "missing_evidence": [
+          "No evidence of Python knowledge",
+          "No evidence of project ownership",
+          "No evidence of technical understanding"
+        ],
+        "contradictions": [],
+        "detected_competency": "none",
+        "evidence_found": [],
+        "remaining_gap": "Candidate consistently provides the same non-responsive answer regardless of the question asked.",
+        "ownership": "unknown",
+        "topic_decision": "stop",
+        "reason_for_next_question": "The candidate has provided the exact same non-responsive answer to four different questions, indicating an inability to engage in the interview process.",
+        "anti_repetition_check": "This is a termination action.",
+        "ownership_check": "Ownership cannot be established.",
+        "red_flags": [
+          "repetitive_non_responsive_answer",
+          "inability_to_answer_technical_questions"
+        ],
+        "communication": {
+          "clarity": 1,
+          "specificity": 1,
+          "relevance": 1,
+          "structure": 1,
+          "summary": "The candidate provided the same irrelevant response for the fourth time."
+        }
+      }
+    },
+    {
+      "sequence": 5,
+      "question": "Trong quá trình làm việc với Docker, bạn thường sử dụng lệnh nào để kiểm tra trạng thái của các container đang chạy và cách bạn xem log của một container cụ thể?",
+      "answer": "Em có làm qua trong đồ án và em thường debug bằng cách xem log rồi sửa dần.",
+      "evaluation": {
+        "score": 0,
+        "status": "not_assessed",
+        "answer_quality": "unable_to_answer",
+        "strengths": [],
+        "missing_evidence": [
+          "technical_knowledge",
+          "project_ownership",
+          "communication_engagement"
+        ],
+        "contradictions": [],
+        "detected_competency": "none",
+        "evidence_found": [],
+        "remaining_gap": "Candidate is unable to provide any relevant information regarding their CV or technical skills.",
+        "ownership": "unknown",
+        "topic_decision": "stop",
+        "reason_for_next_question": "The candidate has provided the same non-responsive answer five times, making further assessment impossible.",
+        "anti_repetition_check": "This is a termination action.",
+        "ownership_check": "Not applicable.",
+        "red_flags": [
+          "repetitive_non_responsive_answer",
+          "inability_to_answer_technical_questions",
+          "lack_of_engagement"
+        ],
+        "communication": {
+          "clarity": 1,
+          "specificity": 1,
+          "relevance": 1,
+          "structure": 1,
+          "summary": "The candidate provided the same irrelevant response for the fifth time."
+        }
+      }
+    },
+    {
+      "sequence": 6,
+      "question": "Vì chúng ta đã trao đổi qua nhiều khía cạnh kỹ thuật nhưng chưa có kết quả rõ ràng, bạn có thể chia sẻ một ví dụ cụ thể về cách bạn sử dụng FastAPI để định nghĩa một route nhận dữ liệu JSON và trả về phản hồi cơ bản không?",
+      "answer": "Em có làm qua trong đồ án và em thường debug bằng cách xem log rồi sửa dần.",
+      "evaluation": {
+        "score": 0,
+        "status": "not_assessed",
+        "answer_quality": "irrelevant",
+        "strengths": [],
+        "missing_evidence": [
+          "technical_knowledge",
+          "project_ownership",
+          "communication_engagement"
+        ],
+        "contradictions": [],
+        "detected_competency": "none",
+        "evidence_found": [],
+        "remaining_gap": "The candidate has provided the exact same non-responsive, generic answer to six consecutive technical questions, indicating a complete lack of engagement or ability to answer.",
+        "ownership": "unknown",
+        "topic_decision": "stop",
+        "reason_for_next_question": "The candidate is unable to provide relevant answers to any technical or project-related questions after multiple attempts. Further questioning is unproductive.",
+        "anti_repetition_check": "This is the termination step.",
+        "ownership_check": "Ownership cannot be established as the candidate does not engage with the questions.",
+        "red_flags": [
+          "repetitive_non_responsive_answer",
+          "inability_to_answer_technical_questions",
+          "lack_of_engagement"
+        ],
+        "communication": {
+          "clarity": 1,
+          "specificity": 1,
+          "relevance": 1,
+          "structure": 1,
+          "summary": "The candidate provided the same irrelevant response for the sixth time."
+        }
+      }
+    },
+    {
+      "sequence": 7,
+      "question": "Để kết thúc phần trao đổi kỹ thuật, bạn có thể giải thích ngắn gọn mục đích của việc sử dụng Docker trong quá trình phát triển phần mềm và nêu một lợi ích chính mà bạn nhận thấy khi đóng gói ứng dụng vào container không?",
+      "answer": "Em có làm qua trong đồ án và em thường debug bằng cách xem log rồi sửa dần.",
+      "evaluation": {
+        "score": 0,
+        "status": "not_assessed",
+        "answer_quality": "irrelevant",
+        "strengths": [],
+        "missing_evidence": [
+          "technical_knowledge",
+          "project_ownership",
+          "communication_skills"
+        ],
+        "contradictions": [],
+        "detected_competency": "none",
+        "evidence_found": [],
+        "remaining_gap": "The candidate has provided the exact same non-responsive, generic answer to seven consecutive technical questions, indicating a complete lack of engagement or ability to answer.",
+        "ownership": "unknown",
+        "topic_decision": "stop",
+        "reason_for_next_question": "The candidate is unable to provide relevant answers to any technical or project-related questions after multiple attempts. Further questioning is unproductive.",
+        "anti_repetition_check": "The candidate has provided the same answer seven times.",
+        "ownership_check": "Ownership cannot be determined as the candidate does not engage with the questions.",
+        "red_flags": [
+          "repetitive_non_responsive_answer",
+          "inability_to_answer_technical_questions",
+          "lack_of_engagement"
+        ],
+        "communication": {
+          "clarity": 1,
+          "specificity": 1,
+          "relevance": 1,
+          "structure": 1,
+          "summary": "The candidate provided the same irrelevant response for the seventh time."
+        }
+      }
+    },
+    {
+      "sequence": 8,
+      "question": "Để chuyển sang chủ đề về FastAPI, bạn có thể cho biết cách sử dụng decorator @app.get để định nghĩa một đường dẫn đơn giản trả về thông điệp 'Hello World' dưới dạng JSON không?",
+      "answer": "Em có làm qua trong đồ án và em thường debug bằng cách xem log rồi sửa dần.",
+      "evaluation": {
+        "score": 0,
+        "status": "not_assessed",
+        "answer_quality": "irrelevant",
+        "strengths": [],
+        "missing_evidence": [
+          "technical_knowledge",
+          "project_ownership",
+          "communication_relevance"
+        ],
+        "contradictions": [],
+        "detected_competency": "none",
+        "evidence_found": [],
+        "remaining_gap": "The candidate has provided the exact same non-responsive, generic answer to eight consecutive technical questions, indicating a complete lack of engagement or ability to answer.",
+        "ownership": "unknown",
+        "topic_decision": "stop",
+        "reason_for_next_question": "The candidate is unable to provide relevant answers to any technical or project-related questions after multiple attempts. Further questioning is unproductive.",
+        "anti_repetition_check": "The interview is being terminated.",
+        "ownership_check": "Ownership could not be established due to non-responsive answers.",
+        "red_flags": [
+          "repetitive_non_responsive_answer",
+          "inability_to_answer_technical_questions",
+          "lack_of_engagement"
+        ],
+        "communication": {
+          "clarity": 1,
+          "specificity": 1,
+          "relevance": 1,
+          "structure": 1,
+          "summary": "The candidate provided the same irrelevant response for the eighth time."
+        }
+      }
+    },
+    {
+      "sequence": 9,
+      "question": "Vì chúng ta đã trao đổi qua nhiều khía cạnh kỹ thuật nhưng chưa có kết quả rõ ràng, bạn có thể giải thích ngắn gọn mục đích của việc sử dụng Docker trong quá trình phát triển phần mềm và nêu một lợi ích chính mà bạn nhận thấy khi đóng gói ứng dụng vào container không?",
+      "answer": "Em có làm qua trong đồ án và em thường debug bằng cách xem log rồi sửa dần.",
+      "evaluation": {
+        "score": 0,
+        "status": "not_assessed",
+        "answer_quality": "irrelevant",
+        "strengths": [],
+        "missing_evidence": [
+          "technical_knowledge",
+          "project_ownership",
+          "communication_ability"
+        ],
+        "contradictions": [],
+        "detected_competency": "none",
+        "evidence_found": [],
+        "remaining_gap": "The candidate has provided the exact same non-responsive, generic answer to nine consecutive technical questions, indicating a complete lack of engagement or ability to answer.",
+        "ownership": "unknown",
+        "topic_decision": "stop",
+        "reason_for_next_question": "The candidate is unable to provide relevant answers to any technical or project-related questions after multiple attempts. Further questioning is unproductive.",
+        "anti_repetition_check": "The interview is being terminated due to persistent non-responsive answers.",
+        "ownership_check": "Ownership cannot be established as the candidate does not engage with the questions.",
+        "red_flags": [
+          "repetitive_non_responsive_answer",
+          "inability_to_answer_technical_questions",
+          "lack_of_engagement"
+        ],
+        "communication": {
+          "clarity": 1,
+          "specificity": 1,
+          "relevance": 1,
+          "structure": 1,
+          "summary": "The candidate provided the same irrelevant response for the ninth time."
+        }
+      }
+    },
+    {
+      "sequence": 10,
+      "question": "Trong FastAPI, bạn hãy cho biết cách sử dụng Dependency Injection thông qua tham số 'Depends' để lấy dữ liệu từ một header cụ thể trong request?",
+      "answer": "Em có làm qua trong đồ án và em thường debug bằng cách xem log rồi sửa dần.",
+      "evaluation": {
+        "score": 0,
+        "status": "not_assessed",
+        "answer_quality": "irrelevant",
+        "strengths": [],
+        "missing_evidence": [
+          "technical_knowledge",
+          "project_ownership",
+          "communication_engagement"
+        ],
+        "contradictions": [],
+        "detected_competency": "none",
+        "evidence_found": [],
+        "remaining_gap": "The candidate has provided the exact same non-responsive, generic answer to ten consecutive technical questions, indicating a complete lack of engagement or ability to answer.",
+        "ownership": "unknown",
+        "topic_decision": "stop",
+        "reason_for_next_question": "The candidate is unable to provide relevant answers to any technical or project-related questions after multiple attempts. Further questioning is unproductive.",
+        "anti_repetition_check": "The candidate has provided the same answer 10 times. Stopping the interview.",
+        "ownership_check": "Ownership cannot be established as the candidate does not engage with the questions.",
+        "red_flags": [
+          "repetitive_non_responsive_answer",
+          "inability_to_answer_technical_questions",
+          "lack_of_engagement"
+        ],
+        "communication": {
+          "clarity": 1,
+          "specificity": 1,
+          "relevance": 1,
+          "structure": 1,
+          "summary": "The candidate provided the same irrelevant response for the tenth time."
+        }
+      }
+    },
+    {
+      "sequence": 11,
+      "question": "Để làm rõ hơn về kinh nghiệm thực tế, bạn có thể cho biết lệnh Docker nào được dùng để xây dựng một image từ Dockerfile hiện tại và cách bạn đặt tên (tag) cho image đó để quản lý phiên bản không?",
+      "answer": "Em có làm qua trong đồ án và em thường debug bằng cách xem log rồi sửa dần.",
+      "evaluation": {
+        "score": 0,
+        "status": "not_assessed",
+        "answer_quality": "irrelevant",
+        "strengths": [],
+        "missing_evidence": [
+          "technical_knowledge",
+          "project_ownership",
+          "communication_engagement"
+        ],
+        "contradictions": [],
+        "detected_competency": "none",
+        "evidence_found": [],
+        "remaining_gap": "Candidate has provided the same non-responsive, generic answer to 11 consecutive questions, indicating a complete lack of engagement or ability to answer.",
+        "ownership": "unknown",
+        "topic_decision": "stop",
+        "reason_for_next_question": "The candidate is unable to provide relevant answers to any technical or project-related questions after multiple attempts. Further questioning is unproductive.",
+        "anti_repetition_check": "N/A",
+        "ownership_check": "N/A",
+        "red_flags": [
+          "repetitive_non_responsive_answer",
+          "inability_to_answer_technical_questions",
+          "lack_of_engagement"
+        ],
+        "communication": {
+          "clarity": 1,
+          "specificity": 1,
+          "relevance": 1,
+          "structure": 1,
+          "summary": "The candidate provided the same irrelevant response for the eleventh time."
+        }
+      }
+    }
+  ],
+  "turns": [
+    {
+      "sequence": 1,
+      "question": "Bạn có thể mô tả kiến trúc tổng thể của dự án AI backend demo mà bạn đã thực hiện và giải thích vai trò cụ thể của dịch vụ FastAPI trong hệ thống đó không?",
+      "answer": "Em có làm qua trong đồ án và em thường debug bằng cách xem log rồi sửa dần.",
+      "phase": "cv_verification",
+      "topic_key": "fastapi_architecture",
+      "question_type": "initial",
+      "difficulty": "easy",
+      "provider_metadata": {
+        "planner": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 2151,
+          "output_tokens": 236,
+          "attempts": 1
+        },
+        "question_generator": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 764,
+          "output_tokens": 42,
+          "attempts": 1
+        }
+      }
+    },
+    {
+      "sequence": 2,
+      "question": "Cảm ơn bạn đã chia sẻ về cách debug. Để làm rõ hơn về kiến trúc, bạn có thể liệt kê các endpoint chính mà dịch vụ FastAPI của bạn cung cấp và giải thích cách nó kết nối với các thành phần khác trong hệ thống AI đó không?",
+      "answer": "Em có làm qua trong đồ án và em thường debug bằng cách xem log rồi sửa dần.",
+      "phase": "cv_verification",
+      "topic_key": "fastapi_architecture",
+      "question_type": "follow_up",
+      "difficulty": "easy",
+      "provider_metadata": {
+        "planner": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 2251,
+          "output_tokens": 608,
+          "attempts": 1
+        },
+        "question_generator": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 1173,
+          "output_tokens": 59,
+          "attempts": 1
+        }
+      }
+    },
+    {
+      "sequence": 3,
+      "question": "Để chuyển sang chủ đề về triển khai, bạn hãy giải thích các chỉ thị chính mà bạn đã sử dụng trong Dockerfile để đóng gói dịch vụ FastAPI của mình và lý do tại sao bạn chọn cấu trúc đó?",
+      "answer": "Em có làm qua trong đồ án và em thường debug bằng cách xem log rồi sửa dần.",
+      "phase": "cv_verification",
+      "topic_key": "docker_implementation",
+      "question_type": "transition",
+      "difficulty": "easy",
+      "provider_metadata": {
+        "planner": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 2478,
+          "output_tokens": 588,
+          "attempts": 1
+        },
+        "question_generator": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 1258,
+          "output_tokens": 49,
+          "attempts": 1
+        }
+      }
+    },
+    {
+      "sequence": 4,
+      "question": "Để chuyển sang phần kiểm tra kiến thức lập trình, bạn hãy viết một đoạn mã Python ngắn sử dụng list comprehension để tạo ra một danh sách chứa bình phương của các số chẵn từ 1 đến 10.",
+      "answer": "Em có làm qua trong đồ án và em thường debug bằng cách xem log rồi sửa dần.",
+      "phase": "cv_verification",
+      "topic_key": "python_basics",
+      "question_type": "transition",
+      "difficulty": "easy",
+      "provider_metadata": {
+        "planner": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 2665,
+          "output_tokens": 593,
+          "attempts": 1
+        },
+        "question_generator": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 1291,
+          "output_tokens": 50,
+          "attempts": 1
+        }
+      }
+    },
+    {
+      "sequence": 5,
+      "question": "Trong quá trình làm việc với Docker, bạn thường sử dụng lệnh nào để kiểm tra trạng thái của các container đang chạy và cách bạn xem log của một container cụ thể?",
+      "answer": "Em có làm qua trong đồ án và em thường debug bằng cách xem log rồi sửa dần.",
+      "phase": "cv_verification",
+      "topic_key": "verify_docker",
+      "question_type": "transition",
+      "difficulty": "easy",
+      "provider_metadata": {
+        "planner": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 2964,
+          "output_tokens": 540,
+          "attempts": 1,
+          "backend_overrode_early_finish": true
+        },
+        "question_generator": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 1333,
+          "output_tokens": 40,
+          "attempts": 1
+        }
+      }
+    },
+    {
+      "sequence": 6,
+      "question": "Vì chúng ta đã trao đổi qua nhiều khía cạnh kỹ thuật nhưng chưa có kết quả rõ ràng, bạn có thể chia sẻ một ví dụ cụ thể về cách bạn sử dụng FastAPI để định nghĩa một route nhận dữ liệu JSON và trả về phản hồi cơ bản không?",
+      "answer": "Em có làm qua trong đồ án và em thường debug bằng cách xem log rồi sửa dần.",
+      "phase": "cv_verification",
+      "topic_key": "verify_fastapi",
+      "question_type": "transition",
+      "difficulty": "easy",
+      "provider_metadata": {
+        "planner": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 3235,
+          "output_tokens": 569,
+          "attempts": 1,
+          "backend_overrode_early_finish": true
+        },
+        "question_generator": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 1358,
+          "output_tokens": 64,
+          "attempts": 1
+        }
+      }
+    },
+    {
+      "sequence": 7,
+      "question": "Để kết thúc phần trao đổi kỹ thuật, bạn có thể giải thích ngắn gọn mục đích của việc sử dụng Docker trong quá trình phát triển phần mềm và nêu một lợi ích chính mà bạn nhận thấy khi đóng gói ứng dụng vào container không?",
+      "answer": "Em có làm qua trong đồ án và em thường debug bằng cách xem log rồi sửa dần.",
+      "phase": "cv_verification",
+      "topic_key": "verify_docker",
+      "question_type": "transition",
+      "difficulty": "easy",
+      "provider_metadata": {
+        "planner": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 3450,
+          "output_tokens": 594,
+          "attempts": 1,
+          "backend_overrode_early_finish": true
+        },
+        "question_generator": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 1487,
+          "output_tokens": 54,
+          "attempts": 1
+        }
+      }
+    },
+    {
+      "sequence": 8,
+      "question": "Để chuyển sang chủ đề về FastAPI, bạn có thể cho biết cách sử dụng decorator @app.get để định nghĩa một đường dẫn đơn giản trả về thông điệp 'Hello World' dưới dạng JSON không?",
+      "answer": "Em có làm qua trong đồ án và em thường debug bằng cách xem log rồi sửa dần.",
+      "phase": "cv_verification",
+      "topic_key": "verify_fastapi",
+      "question_type": "transition",
+      "difficulty": "easy",
+      "provider_metadata": {
+        "planner": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 3729,
+          "output_tokens": 560,
+          "attempts": 1,
+          "backend_overrode_early_finish": true
+        },
+        "question_generator": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 1543,
+          "output_tokens": 48,
+          "attempts": 1
+        }
+      }
+    },
+    {
+      "sequence": 9,
+      "question": "Vì chúng ta đã trao đổi qua nhiều khía cạnh kỹ thuật nhưng chưa có kết quả rõ ràng, bạn có thể giải thích ngắn gọn mục đích của việc sử dụng Docker trong quá trình phát triển phần mềm và nêu một lợi ích chính mà bạn nhận thấy khi đóng gói ứng dụng vào container không?",
+      "answer": "Em có làm qua trong đồ án và em thường debug bằng cách xem log rồi sửa dần.",
+      "phase": "cv_verification",
+      "topic_key": "verify_docker",
+      "question_type": "transition",
+      "difficulty": "easy",
+      "provider_metadata": {
+        "planner": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 3868,
+          "output_tokens": 589,
+          "attempts": 1,
+          "backend_overrode_early_finish": true
+        },
+        "question_generator": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 1577,
+          "output_tokens": 65,
+          "attempts": 1
+        }
+      }
+    },
+    {
+      "sequence": 10,
+      "question": "Trong FastAPI, bạn hãy cho biết cách sử dụng Dependency Injection thông qua tham số 'Depends' để lấy dữ liệu từ một header cụ thể trong request?",
+      "answer": "Em có làm qua trong đồ án và em thường debug bằng cách xem log rồi sửa dần.",
+      "phase": "cv_verification",
+      "topic_key": "verify_fastapi",
+      "question_type": "transition",
+      "difficulty": "easy",
+      "provider_metadata": {
+        "planner": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 4000,
+          "output_tokens": 594,
+          "attempts": 1,
+          "backend_overrode_early_finish": true
+        },
+        "question_generator": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 1673,
+          "output_tokens": 40,
+          "attempts": 1
+        }
+      }
+    },
+    {
+      "sequence": 11,
+      "question": "Để làm rõ hơn về kinh nghiệm thực tế, bạn có thể cho biết lệnh Docker nào được dùng để xây dựng một image từ Dockerfile hiện tại và cách bạn đặt tên (tag) cho image đó để quản lý phiên bản không?",
+      "answer": "Em có làm qua trong đồ án và em thường debug bằng cách xem log rồi sửa dần.",
+      "phase": "cv_verification",
+      "topic_key": "verify_docker",
+      "question_type": "transition",
+      "difficulty": "easy",
+      "provider_metadata": {
+        "planner": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 4103,
+          "output_tokens": 584,
+          "attempts": 1,
+          "backend_overrode_early_finish": true
+        },
+        "question_generator": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 1773,
+          "output_tokens": 53,
+          "attempts": 2
+        }
+      }
+    },
+    {
+      "sequence": 12,
+      "question": "Trong FastAPI, bạn hãy viết một đoạn mã ngắn sử dụng Pydantic model để định nghĩa cấu trúc dữ liệu cho một request body bao gồm hai trường là 'username' kiểu chuỗi và 'age' kiểu số nguyên.",
+      "answer": "Em có làm qua trong đồ án và em thường debug bằng cách xem log rồi sửa dần.",
+      "phase": "cv_verification",
+      "topic_key": "verify_fastapi",
+      "question_type": "transition",
+      "difficulty": "easy",
+      "provider_metadata": {
+        "planner": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 4225,
+          "output_tokens": 581,
+          "attempts": 1,
+          "backend_overrode_early_finish": true
+        },
+        "question_generator": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 1727,
+          "output_tokens": 50,
+          "attempts": 1
+        }
+      }
+    }
+  ]
+}

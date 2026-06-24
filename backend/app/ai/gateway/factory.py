@@ -7,7 +7,7 @@ from app.ai.gateway.providers.gemini_native import GeminiNativeProvider
 from app.ai.gateway.providers.offline import OfflineProvider
 from app.ai.gateway.providers.openai_compatible import OpenAICompatibleProvider
 from app.ai.gateway.providers.openrouter import OpenRouterProvider
-from app.shared.config import settings
+from app.shared.config import get_gemini_api_keys, settings
 
 
 @lru_cache
@@ -22,7 +22,8 @@ def _direct_gateway() -> LLMGateway:
     gemini_provider = (
         GeminiNativeProvider(
             base_url=settings.gemini_base_url,
-            api_key=settings.gemini_api_key,
+            api_key=None,
+            api_keys=get_gemini_api_keys(),
             chat_model=settings.gemini_model,
             embedding_model=settings.gemini_embedding_model,
             timeout_seconds=settings.llm_timeout_seconds,
@@ -31,7 +32,8 @@ def _direct_gateway() -> LLMGateway:
         else OpenAICompatibleProvider(
             name="gemini",
             base_url=settings.gemini_openai_base_url,
-            api_key=settings.gemini_api_key,
+            api_key=None,
+            api_keys=get_gemini_api_keys(),
             chat_model=settings.gemini_model,
             embedding_model=settings.gemini_embedding_model,
             timeout_seconds=settings.llm_timeout_seconds,
