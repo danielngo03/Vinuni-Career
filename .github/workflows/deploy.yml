@@ -4,6 +4,8 @@ on:
   # Deploy khi push vào các nhánh frontend.
   push:
     branches:
+      - main
+      - blue/main-frontend
       - 'blue/*fe*'
       - 'blue/**/*fe*'
       - 'blue/*frontend*'
@@ -13,11 +15,16 @@ on:
   # Chạy kiểm tra/deploy preview khi mở PR vào các nhánh frontend.
   pull_request:
     branches:
+      - main
+      - blue/main-frontend
       - 'blue/*fe*'
       - 'blue/**/*fe*'
       - 'blue/*frontend*'
       - 'blue/**/*frontend*'
       # Sửa/thêm pattern nhánh theo ý bạn.
+
+  # Cho phép bấm Run workflow thủ công trên GitHub Actions.
+  workflow_dispatch:
 
 concurrency:
   # Hủy workflow cũ trên cùng nhánh để tiết kiệm thời gian deploy.
@@ -39,8 +46,8 @@ jobs:
 
       - name: Set Deployment Environment
         run: |
-          # Nhánh này deploy production, các nhánh còn lại deploy preview.
-          if [ "${{ github.ref_name }}" = "blue/main-frontend" ]; then
+          # Nhánh main deploy production, các nhánh còn lại deploy preview.
+          if [ "${{ github.ref_name }}" = "main" ] || [ "${{ github.ref_name }}" = "blue/main-frontend" ]; then
             echo "VERCEL_ENV=production" >> $GITHUB_ENV
             echo "VERCEL_ARGS=--prod" >> $GITHUB_ENV
           else
