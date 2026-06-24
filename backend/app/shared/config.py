@@ -42,10 +42,10 @@ class Settings(BaseSettings):
     ]
 
     llm_provider: Literal["offline", "openai", "gemini", "groq", "openrouter", "nvidia"] = (
-        "nvidia"
+        "openrouter"
     )
-    llm_provider_chain: Annotated[list[str], NoDecode] = ["nvidia", "offline"]
-    llm_model: str = "nvidia/nemotron-3-ultra-550b-a55b:free"
+    llm_provider_chain: Annotated[list[str], NoDecode] = ["openrouter", "offline"]
+    llm_model: str = "google/gemma-4-31b-it:free"
     llm_timeout_seconds: float = 30.0
     llm_max_retries: int = 2
     llm_retry_backoff_seconds: float = 0.35
@@ -71,17 +71,14 @@ class Settings(BaseSettings):
     openrouter_base_url: str = "https://openrouter.ai/api/v1"
     openrouter_http_referer: str | None = "http://localhost:3000"
     openrouter_app_title: str = "VinUni Career Platform"
-    openrouter_model: str = "nvidia/nemotron-3-ultra-550b-a55b:free"
+    openrouter_model: str = "google/gemma-4-31b-it:free"
     openrouter_model_fallbacks: Annotated[list[str], NoDecode] = [
-        "nvidia/nemotron-3-super-120b-a12b:free",
-        "nvidia/nemotron-3-nano-30b-a3b:free",
-        "google/gemma-4-31b-it:free",
         "google/gemma-4-26b-a4b-it:free",
         "nex-agi/nex-n2-pro:free",
     ]
-    openrouter_safety_model: str = "nvidia/nemotron-3.5-content-safety:free"
-    openrouter_embedding_model: str = "nvidia/llama-nemotron-embed-vl-1b-v2:free"
-    openrouter_rerank_model: str = "nvidia/llama-nemotron-rerank-vl-1b-v2:free"
+    openrouter_safety_model: str = "google/gemma-4-26b-a4b-it:free"
+    openrouter_embedding_model: str = ""
+    openrouter_rerank_model: str = ""
 
     nvidia_api_key: str | None = None
     nvidia_base_url: str = "https://integrate.api.nvidia.com/v1"
@@ -101,14 +98,14 @@ class Settings(BaseSettings):
     max_extraction_retries: int = 2
     semantic_cache_enabled: bool = True
     guardrails_enabled: bool = True
-    rerank_provider: Literal["offline", "openrouter", "cohere", "flashrank", "nvidia"] = "nvidia"
+    rerank_provider: Literal["offline", "openrouter", "cohere", "flashrank", "nvidia"] = "offline"
     cohere_api_key: str | None = None
     langfuse_enabled: bool = False
     langfuse_public_key: str | None = None
     langfuse_secret_key: str | None = None
     langfuse_host: str = "https://cloud.langfuse.com"
 
-    embedding_provider_chain: Annotated[list[str], NoDecode] = ["nvidia", "offline"]
+    embedding_provider_chain: Annotated[list[str], NoDecode] = ["offline"]
     embedding_dimensions: int = 32
     ai_daily_org_token_limit: int = 200_000
 

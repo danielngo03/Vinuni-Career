@@ -92,6 +92,7 @@ class AgentCapabilityResponse(BaseModel):
 # Endpoints
 # ---------------------------------------------------------------------------
 
+@router.post("", response_model=RunResponse, status_code=202, include_in_schema=False)
 @router.post("/", response_model=RunResponse, status_code=202)
 def create_run(
     body: CreateRunRequest,
@@ -218,6 +219,7 @@ def cancel_run(
     return _run_response(run)
 
 
+@router.get("", response_model=list[RunResponse], include_in_schema=False)
 @router.get("/", response_model=list[RunResponse])
 def list_runs(
     run_type: str | None = None,

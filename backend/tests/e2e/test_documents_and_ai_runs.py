@@ -70,7 +70,7 @@ def test_ai_runs_are_tenant_scoped_and_asynchronous(client: TestClient):
     student = _login(client, "student@vinuni.edu.vn", "student")
 
     created = client.post(
-        "/api/v1/ai/runs/",
+        "/api/v1/ai/runs",
         headers=student,
         json={
             "run_type": "career_coaching",
