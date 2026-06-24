@@ -1,153 +1,84 @@
-name: CI/CD
+name: Vercel Production Deployment
 
 on:
-  pull_request:
-    branches:
-      - main
+  # Deploy khi push vào các nhánh frontend.
   push:
     branches:
-      - main
-  workflow_dispatch:
+      - 'blue/*fe*'
+      - 'blue/**/*fe*'
+      - 'blue/*frontend*'
+      - 'blue/**/*frontend*'
+      # Sửa/thêm pattern nhánh ở đây nếu cần.
 
-permissions:
-  contents: read
+  # Chạy kiểm tra/deploy preview khi mở PR vào các nhánh frontend.
+  pull_request:
+    branches:
+      - 'blue/*fe*'
+      - 'blue/**/*fe*'
+      - 'blue/*frontend*'
+      - 'blue/**/*frontend*'
+      # Sửa/thêm pattern nhánh theo ý bạn.
 
 concurrency:
-  group: ci-cd-${{ github.ref }}
+  # Hủy workflow cũ trên cùng nhánh để tiết kiệm thời gian deploy.
+  group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
-  backend-ci:
-    name: Backend CI
+  deploy:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
-    defaults:
-      run:
-        working-directory: backend
     env:
-      APP_ENV: test
-      DATABASE_URL: sqlite:///./test.db
-      SECRET_KEY: test-secret-key-with-enough-length
-      ENFORCE_RBAC: "false"
-      RATE_LIMIT_ENABLED: "false"
-      LLM_PROVIDER: offline
-      LLM_PROVIDER_CHAIN: offline
-      EMBEDDING_PROVIDER_CHAIN: offline
-      RERANK_PROVIDER: offline
-      INTERNAL_SERVICE_TOKEN: test-internal-service-token
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.12"
-          cache: pip
-          cache-dependency-path: backend/pyproject.toml
-
-      - name: Install backend dependencies
-        run: |
-          python -m pip install --upgrade pip
-          python -m pip install -e ".[dev]"
-
-      - name: Lint backend
-        run: python -m ruff check app tests scripts alembic
-
-      - name: Type-check backend
-        run: python -m mypy app --ignore-missing-imports --no-error-summary
-
-      - name: Test backend
-        run: python -m pytest
-
-      - name: Check Alembic migrations
-        env:
-          DATABASE_URL: sqlite:////tmp/vinuni-career-migration-check.db
-        run: |
-          rm -f /tmp/vinuni-career-migration-check.db
-          python -m alembic upgrade head
-          python -m alembic downgrade base
-          python -m alembic upgrade head
-
-  frontend-ci:
-    name: Frontend CI
-    runs-on: ubuntu-latest
-    timeout-minutes: 15
-    defaults:
-      run:
-        working-directory: frontend
-    env:
-      BACKEND_URL: http://127.0.0.1:8000/api/v1
-      NEXT_PUBLIC_APP_DOMAIN: example.com
-      NEXT_PUBLIC_DEFAULT_LOCALE: vi
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Set up pnpm
-        uses: pnpm/action-setup@v4
-        with:
-          version: 10.19.0
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: "20"
-          cache: pnpm
-          cache-dependency-path: frontend/pnpm-lock.yaml
-
-      - name: Install frontend dependencies
-        run: pnpm install --frozen-lockfile
-
-      - name: Lint frontend
-        run: pnpm lint
-
-      - name: Type-check frontend
-        run: pnpm check-types
-
-      - name: Build frontend
-        run: pnpm build
-
-  deploy-frontend:
-    name: Deploy Frontend to Vercel
-    runs-on: ubuntu-latest
-    timeout-minutes: 15
-    needs:
-      - backend-ci
-      - frontend-ci
-    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
-    defaults:
-      run:
-        working-directory: frontend
-    env:
+      # Cần cấu hình 3 secrets này trong GitHub repo settings.
       VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+      VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+      VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+      
     steps:
-      - name: Checkout
+      - name: Checkout Code
         uses: actions/checkout@v4
 
-      - name: Set up pnpm
+      - name: Set Deployment Environment
+        run: |
+          # Nhánh này deploy production, các nhánh còn lại deploy preview.
+          if [ "${{ github.ref_name }}" = "blue/main-frontend" ]; then
+            echo "VERCEL_ENV=production" >> $GITHUB_ENV
+            echo "VERCEL_ARGS=--prod" >> $GITHUB_ENV
+          else
+            echo "VERCEL_ENV=preview" >> $GITHUB_ENV
+            echo "VERCEL_ARGS=" >> $GITHUB_ENV
+          fi
+
+      - name: Install pnpm
         uses: pnpm/action-setup@v4
         with:
-          version: 10.19.0
+          version: 10
 
-      - name: Set up Node.js
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "20"
-          cache: pnpm
-          cache-dependency-path: frontend/pnpm-lock.yaml
+          node-version: 22
+          cache: 'pnpm'
+          cache-dependency-path: 'frontend/pnpm-lock.yaml'
 
-      - name: Install frontend dependencies
-        run: pnpm install --frozen-lockfile
+      - name: Cache Next.js Build
+        uses: actions/cache@v4
+        with:
+          path: ${{ github.workspace }}/frontend/.next/cache
+          key: ${{ runner.os }}-nextjs-${{ hashFiles('frontend/pnpm-lock.yaml') }}-${{ hashFiles('frontend/**/*.js', 'frontend/**/*.jsx', 'frontend/**/*.ts', 'frontend/**/*.tsx') }}
+          restore-keys: |
+            ${{ runner.os }}-nextjs-${{ hashFiles('frontend/pnpm-lock.yaml') }}-
 
-      - name: Deploy production
-        if: env.VERCEL_TOKEN != ''
-        run: |
-          pnpm dlx vercel@latest pull --yes --environment=production --token="$VERCEL_TOKEN"
-          pnpm dlx vercel@latest build --prod --token="$VERCEL_TOKEN"
-          pnpm dlx vercel@latest deploy --prebuilt --prod --token="$VERCEL_TOKEN"
+      - name: Install Vercel CLI
+        run: npm install --global vercel@latest
 
-      - name: Explain skipped deployment
-        if: env.VERCEL_TOKEN == ''
-        run: |
-          echo "Set the VERCEL_TOKEN GitHub secret to enable production deploys."
+      - name: Pull Vercel Environment Information
+        working-directory: ./frontend
+        run: vercel pull --yes --environment=${{ env.VERCEL_ENV }}
+
+      - name: Build Project Artifacts
+        working-directory: ./frontend
+        run: vercel build ${{ env.VERCEL_ARGS }}
+
+      - name: Deploy Project Artifacts to Vercel
+        working-directory: ./frontend
+        run: vercel deploy --prebuilt ${{ env.VERCEL_ARGS }}
