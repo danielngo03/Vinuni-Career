@@ -56,7 +56,7 @@ Repository gồm một frontend Next.js và một backend FastAPI modular monoli
 
 ### Backend
 
-- Python `3.14`, FastAPI, Pydantic 2 và SQLAlchemy 2
+- Python `3.12+`, FastAPI, Pydantic 2 và SQLAlchemy 2
 - Alembic migrations; PostgreSQL cho môi trường triển khai, SQLite dùng được cho demo/test local
 - JWT access token, rotating refresh token, identity context và RBAC
 - Redis/Celery adapter cho distributed workers; local in-process workflow cho development
@@ -298,7 +298,7 @@ sequenceDiagram
 ### Prerequisites
 
 - macOS, Linux hoặc WSL khuyến nghị.
-- Python `3.14.x` vì `backend/pyproject.toml` yêu cầu `>=3.14,<3.15`.
+- Python `3.12.x` hoặc mới hơn vì `backend/pyproject.toml` yêu cầu `>=3.12,<3.15`.
 - Node.js `20+`.
 - pnpm `10.19.x`; có thể kích hoạt bằng Corepack.
 - Git.
