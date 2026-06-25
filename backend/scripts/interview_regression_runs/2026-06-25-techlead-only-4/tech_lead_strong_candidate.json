@@ -1,0 +1,827 @@
+{
+  "case": "tech_lead_strong_candidate",
+  "mode": "tech_lead",
+  "answer_style": "strong",
+  "max_questions": 12,
+  "generated_at": "2026-06-25T03:08:32.789708+00:00",
+  "flags": [
+    "strong candidate reached max instead of stopping early",
+    "tech_lead asked 3 direct coding/query tasks, expected at most 2"
+  ],
+  "report": {
+    "overall_score": 29,
+    "overall_summary": "Ứng viên thể hiện sự hiểu biết cơ bản về kiến trúc FastAPI và tư duy tốt trong việc tách biệt logic (separation of concerns) ở giai đoạn đầu. Tuy nhiên, ứng viên gặp khó khăn nghiêm trọng trong việc trả lời các câu hỏi kỹ thuật cụ thể sau đó. Thay vì cung cấp các chi tiết kỹ thuật hoặc giải pháp cho các bài toán Docker, SQL, hay xử lý lỗi, ứng viên liên tục lặp lại một quy trình debug chung chung. Điều này cho thấy sự thiếu hụt trong việc nắm vững kiến thức nền tảng hoặc khả năng lắng nghe và thích ứng với yêu cầu cụ thể của người phỏng vấn.",
+    "dimensions": [
+      {
+        "key": "technical_knowledge",
+        "label": "Kiến thức chuyên môn",
+        "score": 30,
+        "weight": 30,
+        "summary": "Ứng viên nắm được các khái niệm cơ bản về FastAPI và asyncio, nhưng không thể hiện được kiến thức về tối ưu hóa Docker (multi-stage build) hoặc các truy vấn SQL cơ bản.",
+        "evidence": [
+          "Hiểu về cách sử dụng asyncio.wait_for để xử lý timeout.",
+          "Không thể giải thích về kỹ thuật multi-stage build trong Docker.",
+          "Không thực hiện được yêu cầu viết câu lệnh SQL JOIN và GROUP BY."
+        ]
+      },
+      {
+        "key": "practical_experience",
+        "label": "Kinh nghiệm thực tế",
+        "score": 35,
+        "weight": 20,
+        "summary": "Ứng viên có kinh nghiệm thực tế trong việc xây dựng API và debug lỗi, nhưng không thể cung cấp các ví dụ cụ thể hoặc chi tiết kỹ thuật để chứng minh quyền sở hữu dự án.",
+        "evidence": [
+          "Đã triển khai tách service gọi model khỏi router.",
+          "Có kinh nghiệm sử dụng các công cụ debug như cURL, docker logs, docker exec.",
+          "Không thể mô tả chi tiết một tình huống lỗi logic cụ thể trong code."
+        ]
+      },
+      {
+        "key": "problem_solving",
+        "label": "Giải quyết vấn đề",
+        "score": 25,
+        "weight": 20,
+        "summary": "Ứng viên có quy trình debug có cấu trúc (reproduce, log, fix), nhưng khả năng áp dụng vào các tình huống cụ thể hoặc thay đổi cách tiếp cận khi được yêu cầu là rất hạn chế.",
+        "evidence": [
+          "Biết cách sử dụng log và cURL để tái hiện lỗi.",
+          "Không thể đưa ra giải pháp code cụ thể cho lỗi timeout database.",
+          "Liên tục lặp lại quy trình debug chung thay vì giải quyết vấn đề kỹ thuật được đặt ra."
+        ]
+      },
+      {
+        "key": "communication",
+        "label": "Giao tiếp và làm rõ",
+        "score": 30,
+        "weight": 20,
+        "summary": "Khả năng giao tiếp bị hạn chế do ứng viên không trả lời đúng trọng tâm câu hỏi, thường xuyên lặp lại các câu trả lời cũ dù đã được yêu cầu làm rõ.",
+        "evidence": [
+          "Trả lời lạc đề nhiều lần đối với các câu hỏi về SQL và Docker.",
+          "Không thích ứng được với các câu hỏi follow-up để làm rõ chi tiết kỹ thuật.",
+          "Thiếu sự linh hoạt trong việc thay đổi nội dung trả lời theo yêu cầu của người phỏng vấn."
+        ]
+      },
+      {
+        "key": "critical_thinking",
+        "label": "Tư duy phản biện",
+        "score": 20,
+        "weight": 10,
+        "summary": "Ứng viên chưa thể hiện được khả năng phân tích trade-offs hoặc tư duy phản biện về các giải pháp kỹ thuật.",
+        "evidence": [
+          "Không đưa ra được các lựa chọn thay thế khi được hỏi về tối ưu hóa.",
+          "Thiếu khả năng phân tích nguyên nhân gốc rễ (root-cause analysis) ở mức độ sâu hơn quy trình debug cơ bản."
+        ]
+      }
+    ],
+    "strengths": [
+      "Có tư duy tốt về việc tách biệt logic (separation of concerns) trong kiến trúc backend.",
+      "Hiểu biết cơ bản về lập trình bất đồng bộ (asyncio) trong Python.",
+      "Có quy trình debug có hệ thống và biết sử dụng các công cụ dòng lệnh cơ bản."
+    ],
+    "improvements": [
+      "Cần học cách lắng nghe kỹ câu hỏi và trả lời đúng trọng tâm thay vì lặp lại các quy trình chung.",
+      "Cần nắm vững kiến thức nền tảng về Docker (đặc biệt là multi-stage build) và SQL (JOIN, GROUP BY).",
+      "Cần chuẩn bị các ví dụ cụ thể về lỗi kỹ thuật đã gặp và cách giải quyết chi tiết thay vì mô tả quy trình lý thuyết."
+    ],
+    "insufficient_evidence": [
+      "Thiếu bằng chứng về khả năng viết truy vấn SQL cơ bản.",
+      "Thiếu bằng chứng về khả năng tối ưu hóa Docker image.",
+      "Thiếu bằng chứng về khả năng xử lý lỗi ở mức độ code cụ thể (try-except blocks)."
+    ],
+    "action_plan": [
+      "Ôn tập lại các kiến thức cơ bản về SQL (JOIN, GROUP BY, subqueries).",
+      "Thực hành xây dựng Dockerfile tối ưu với multi-stage build cho ứng dụng FastAPI.",
+      "Luyện tập kỹ năng phỏng vấn bằng cách trả lời các câu hỏi kỹ thuật theo cấu trúc STAR (Situation, Task, Action, Result) với các ví dụ cụ thể.",
+      "Tìm hiểu sâu hơn về cách xử lý lỗi và timeout trong các thư viện kết nối database (ví dụ: SQLAlchemy, Tortoise ORM)."
+    ],
+    "confidence": "high"
+  },
+  "report_metadata": {
+    "provider": "gemini",
+    "model": "gemini-3.1-flash-lite",
+    "input_tokens": 7409,
+    "output_tokens": 1209,
+    "attempts": 1
+  },
+  "answer_evaluations": [
+    {
+      "sequence": 1,
+      "question": "Bạn có thể mô tả kiến trúc tổng thể của dự án AI backend demo mà bạn đã thực hiện và giải thích vai trò cụ thể của dịch vụ FastAPI trong hệ thống đó không?",
+      "answer": "Với endpoint AI text, em tách service gọi model khỏi router, log latency và status, thêm timeout/fallback message, và không lưu prompt raw nếu có dữ liệu nhạy cảm.",
+      "evaluation": {
+        "score": 3,
+        "status": "partially_verified",
+        "answer_quality": "sufficient",
+        "strengths": [
+          "Hiểu về tách biệt logic (separation of concerns)",
+          "Có ý thức về logging và bảo mật dữ liệu"
+        ],
+        "missing_evidence": [
+          "Chi tiết triển khai kỹ thuật của việc tách service",
+          "Cách xử lý timeout cụ thể trong FastAPI"
+        ],
+        "contradictions": [],
+        "detected_competency": "Technical design awareness",
+        "evidence_found": [
+          "Đã triển khai tách service gọi model",
+          "Đã thêm cơ chế timeout và fallback"
+        ],
+        "remaining_gap": "Cần làm rõ cách thức triển khai cụ thể (code structure) để xác nhận quyền sở hữu trực tiếp.",
+        "ownership": "direct",
+        "topic_decision": "continue",
+        "reason_for_next_question": "Ứng viên đã nêu ý tưởng tốt, cần đào sâu vào cách thực hiện để xác nhận quyền sở hữu trực tiếp.",
+        "anti_repetition_check": "Câu hỏi trước hỏi về kiến trúc tổng thể, câu này tập trung vào chi tiết triển khai của một thành phần đã nêu.",
+        "ownership_check": "Hỏi về cách triển khai cụ thể của chính tính năng ứng viên vừa liệt kê.",
+        "red_flags": [],
+        "communication": {
+          "clarity": 3,
+          "specificity": 3,
+          "relevance": 4,
+          "structure": 3,
+          "summary": "Ứng viên trả lời tập trung vào các khía cạnh kỹ thuật của endpoint AI, thể hiện tư duy tốt về thiết kế hệ thống."
+        }
+      }
+    },
+    {
+      "sequence": 2,
+      "question": "Để tách service gọi model khỏi router trong FastAPI, bạn đã tổ chức cấu trúc thư mục và các class như thế nào, và bạn đã sử dụng cơ chế nào để thiết lập timeout cũng như xử lý fallback khi model phản hồi chậm?",
+      "answer": "Em bọc call model bằng timeout, ví dụ `asyncio.wait_for(call_model(payload), timeout=10)`. Nếu timeout thì log latency/status, trả fallback message thân thiện và không retry vô hạn trong request.",
+      "evaluation": {
+        "score": 3,
+        "status": "verified",
+        "answer_quality": "sufficient",
+        "strengths": [
+          "Demonstrated practical use of asyncio.wait_for",
+          "Understands timeout and fallback patterns"
+        ],
+        "missing_evidence": [],
+        "contradictions": [],
+        "detected_competency": "Technical implementation",
+        "evidence_found": [
+          "Directly implemented timeout logic using asyncio.wait_for",
+          "Implemented basic fallback mechanism"
+        ],
+        "remaining_gap": "None for this specific topic.",
+        "ownership": "direct",
+        "topic_decision": "stop",
+        "reason_for_next_question": "FastAPI/Python logic verified; moving to Docker as per JD requirements.",
+        "anti_repetition_check": "New topic (Docker) is distinct from previous FastAPI logic.",
+        "ownership_check": "Question focuses on the candidate's project containerization.",
+        "red_flags": [],
+        "communication": {
+          "clarity": 3,
+          "specificity": 3,
+          "relevance": 4,
+          "structure": 3,
+          "summary": "Candidate provided a clear, technically sound explanation of their timeout implementation."
+        }
+      }
+    },
+    {
+      "sequence": 3,
+      "question": "Trong dự án của bạn, bạn đã cấu hình Dockerfile như thế nào để tối ưu hóa kích thước image cho ứng dụng FastAPI?",
+      "answer": "Em containerize FastAPI service bằng Dockerfile, bind Uvicorn vào `0.0.0.0`, map port `8000:8000`, và debug lỗi không truy cập được bằng `docker ps`, `docker logs`, rồi `docker exec` curl nội bộ.",
+      "evaluation": {
+        "score": 2,
+        "status": "partially_verified",
+        "answer_quality": "partial",
+        "strengths": [
+          "Demonstrated practical knowledge of container networking and basic debugging commands."
+        ],
+        "missing_evidence": [
+          "Did not address image size optimization techniques requested in the previous question."
+        ],
+        "contradictions": [],
+        "detected_competency": "Docker basic usage",
+        "evidence_found": [
+          "Knows how to bind Uvicorn to 0.0.0.0",
+          "Knows basic Docker CLI debugging commands"
+        ],
+        "remaining_gap": "Image size optimization techniques (e.g., multi-stage builds).",
+        "ownership": "direct",
+        "topic_decision": "continue",
+        "reason_for_next_question": "The candidate missed the optimization part of the previous question. I need to verify if they have experience with multi-stage builds or other size-reduction strategies.",
+        "anti_repetition_check": "The previous question asked about optimization; this follow-up specifically probes for the 'how' regarding image size reduction.",
+        "ownership_check": "The candidate claimed to containerize the service; asking about their specific Dockerfile implementation is a direct ownership check.",
+        "red_flags": [],
+        "communication": {
+          "clarity": 3,
+          "specificity": 2,
+          "relevance": 3,
+          "structure": 3,
+          "summary": "Candidate provided a functional overview of their Docker setup but skipped the optimization aspect."
+        }
+      }
+    },
+    {
+      "sequence": 4,
+      "question": "Cảm ơn bạn đã chia sẻ về cách debug. Để tiếp nối ý về tối ưu hóa kích thước image, bạn hãy giải thích cách áp dụng kỹ thuật multi-stage build trong Dockerfile cho ứng dụng FastAPI của mình và cách bạn phân chia các giai đoạn để giảm thiểu dung lượng image cuối cùng?",
+      "answer": "Em containerize FastAPI service bằng Dockerfile, bind Uvicorn vào `0.0.0.0`, map port `8000:8000`, và debug lỗi không truy cập được bằng `docker ps`, `docker logs`, rồi `docker exec` curl nội bộ.",
+      "evaluation": {
+        "score": 1,
+        "status": "partially_verified",
+        "answer_quality": "vague",
+        "strengths": [
+          "Knows basic Docker CLI commands for debugging"
+        ],
+        "missing_evidence": [
+          "Did not address multi-stage build optimization as requested"
+        ],
+        "contradictions": [],
+        "detected_competency": "Docker basics",
+        "evidence_found": [
+          "Basic Docker CLI debugging knowledge"
+        ],
+        "remaining_gap": "Multi-stage build implementation for image size optimization",
+        "ownership": "direct",
+        "topic_decision": "stop",
+        "reason_for_next_question": "Candidate failed to address the specific question about multi-stage builds twice. Moving to SQL to assess remaining JD skills.",
+        "anti_repetition_check": "Switching from Docker to SQL.",
+        "ownership_check": "Moving to a new skill area.",
+        "red_flags": [
+          "Repeated the same answer despite a specific follow-up request"
+        ],
+        "communication": {
+          "clarity": 2,
+          "specificity": 1,
+          "relevance": 2,
+          "structure": 2,
+          "summary": "Candidate repeated the previous answer instead of addressing the multi-stage build question."
+        }
+      }
+    },
+    {
+      "sequence": 5,
+      "question": "Để chuyển sang chủ đề về cơ sở dữ liệu, giả sử bạn có một bảng 'users' và một bảng 'orders'. Bạn hãy viết một câu lệnh SQL để lấy danh sách tên người dùng cùng với tổng số tiền họ đã chi tiêu từ bảng 'orders', sử dụng JOIN và GROUP BY.",
+      "answer": "Em trực tiếp xây API CRUD và login, tách controller sang service để dễ test. Khi endpoint trả 500, em reproduce bằng cURL, so expected/actual, xem stack trace, thêm log ở service/DB, và sau khi sửa thì debug time giảm từ khoảng 30 phút xuống 10 phút.",
+      "evaluation": {
+        "score": 0,
+        "status": "not_assessed",
+        "answer_quality": "irrelevant",
+        "strengths": [
+          "Candidate described a structured debugging process for API errors."
+        ],
+        "missing_evidence": [
+          "The SQL query requested was not provided."
+        ],
+        "contradictions": [],
+        "detected_competency": "Debugging methodology",
+        "evidence_found": [
+          "Candidate has experience debugging API 500 errors using cURL and logs."
+        ],
+        "remaining_gap": "Ability to write a basic SQL JOIN and GROUP BY query.",
+        "ownership": "direct",
+        "topic_decision": "clarify",
+        "reason_for_next_question": "The candidate did not answer the previous technical question about SQL. I need to re-ask the query task to assess the SQL skill.",
+        "anti_repetition_check": "The previous question asked for a SQL query; this follow-up asks for the same query again because the candidate provided an irrelevant answer about debugging.",
+        "ownership_check": "The candidate claimed to build CRUD APIs, which implies interaction with a database; asking for a SQL query is a direct check of this skill.",
+        "red_flags": [
+          "Candidate ignored the specific technical task requested."
+        ],
+        "communication": {
+          "clarity": 3,
+          "specificity": 2,
+          "relevance": 1,
+          "structure": 2,
+          "summary": "Candidate provided a good description of their debugging process but completely missed the SQL query task."
+        }
+      }
+    },
+    {
+      "sequence": 6,
+      "question": "Cảm ơn bạn đã chia sẻ về quy trình debug. Quay lại với yêu cầu về cơ sở dữ liệu, bạn hãy viết giúp mình một câu lệnh SQL để lấy danh sách tên người dùng (từ bảng 'users') cùng với tổng số tiền họ đã chi tiêu (từ bảng 'orders'), sử dụng JOIN và GROUP BY để tổng hợp dữ liệu này.",
+      "answer": "Em trực tiếp xây API CRUD và login, tách controller sang service để dễ test. Khi endpoint trả 500, em reproduce bằng cURL, so expected/actual, xem stack trace, thêm log ở service/DB, và sau khi sửa thì debug time giảm từ khoảng 30 phút xuống 10 phút.",
+      "evaluation": {
+        "score": 0,
+        "status": "not_assessed",
+        "answer_quality": "irrelevant",
+        "strengths": [
+          "Candidate has a structured approach to debugging in general."
+        ],
+        "missing_evidence": [
+          "SQL query syntax",
+          "Direct response to the technical task"
+        ],
+        "contradictions": [],
+        "detected_competency": "process_oriented_thinking",
+        "evidence_found": [
+          "Candidate understands the importance of logs and reproduction steps in debugging."
+        ],
+        "remaining_gap": "Ability to provide specific technical implementation or query syntax when requested.",
+        "ownership": "direct",
+        "topic_decision": "stop",
+        "reason_for_next_question": "The candidate has failed to answer the SQL task twice and previously failed the Docker optimization task twice. I am switching to a problem-solving scenario to assess their ability to handle a concrete debugging situation.",
+        "anti_repetition_check": "This is a new scenario-based question, distinct from the previous SQL query and Docker optimization tasks.",
+        "ownership_check": "The question asks for a hypothetical debugging approach based on their claimed experience with FastAPI and API development.",
+        "red_flags": [
+          "Candidate ignored the specific technical task requested twice.",
+          "Candidate provided a generic process description instead of the requested SQL query."
+        ],
+        "communication": {
+          "clarity": 2,
+          "specificity": 1,
+          "relevance": 1,
+          "structure": 2,
+          "summary": "Candidate consistently provides a generic 'how I debug' response instead of answering the specific technical question asked."
+        }
+      }
+    },
+    {
+      "sequence": 7,
+      "question": "Giả sử một endpoint FastAPI của bạn thỉnh thoảng trả về lỗi 500 do kết nối tới database bị timeout. Thay vì chỉ kiểm tra log, bạn sẽ thay đổi code như thế nào để xử lý tình huống này một cách chủ động, ví dụ như sử dụng cơ chế retry hoặc thiết lập timeout cụ thể cho truy vấn đó?",
+      "answer": "Em trực tiếp xây API CRUD và login, tách controller sang service để dễ test. Khi endpoint trả 500, em reproduce bằng cURL, so expected/actual, xem stack trace, thêm log ở service/DB, và sau khi sửa thì debug time giảm từ khoảng 30 phút xuống 10 phút.",
+      "evaluation": {
+        "score": 0,
+        "status": "not_assessed",
+        "answer_quality": "irrelevant",
+        "strengths": [],
+        "missing_evidence": [
+          "Technical implementation details for SQL queries",
+          "Technical implementation details for Docker multi-stage builds",
+          "Specific code-level handling for database timeouts"
+        ],
+        "contradictions": [],
+        "detected_competency": "none",
+        "evidence_found": [
+          "Candidate has basic knowledge of API debugging processes"
+        ],
+        "remaining_gap": "Candidate consistently provides generic process descriptions instead of answering specific technical questions.",
+        "ownership": "unknown",
+        "topic_decision": "stop",
+        "reason_for_next_question": "The candidate has repeatedly failed to answer specific technical questions across multiple topics (Docker, SQL, API debugging), providing generic process descriptions instead. Further questioning is unlikely to yield valid technical evidence.",
+        "anti_repetition_check": "N/A",
+        "ownership_check": "N/A",
+        "red_flags": [
+          "Repeatedly ignored specific technical tasks",
+          "Provided generic process descriptions instead of technical answers",
+          "Failed to adapt to follow-up requests"
+        ],
+        "communication": {
+          "clarity": 2,
+          "specificity": 1,
+          "relevance": 1,
+          "structure": 2,
+          "summary": "Candidate consistently provides a generic 'how I debug' response instead of answering the specific technical question asked."
+        }
+      }
+    },
+    {
+      "sequence": 8,
+      "question": "Để hiểu rõ hơn về cách bạn giải quyết vấn đề kỹ thuật, bạn có thể chia sẻ một tình huống cụ thể mà bạn đã gặp phải trong quá trình phát triển, nơi bạn phải thay đổi cách tiếp cận hoặc cấu trúc code để giải quyết một lỗi hiệu năng hoặc logic phức tạp không?",
+      "answer": "Em trực tiếp xây API CRUD và login, tách controller sang service để dễ test. Khi endpoint trả 500, em reproduce bằng cURL, so expected/actual, xem stack trace, thêm log ở service/DB, và sau khi sửa thì debug time giảm từ khoảng 30 phút xuống 10 phút.",
+      "evaluation": {
+        "score": 0,
+        "status": "not_assessed",
+        "answer_quality": "irrelevant",
+        "strengths": [],
+        "missing_evidence": [
+          "Specific technical implementation details",
+          "Direct answers to technical questions"
+        ],
+        "contradictions": [],
+        "detected_competency": "none",
+        "evidence_found": [
+          "Candidate consistently provides generic process descriptions instead of answering specific technical questions."
+        ],
+        "remaining_gap": "Candidate failed to provide specific technical evidence across multiple topics.",
+        "ownership": "unknown",
+        "topic_decision": "stop",
+        "reason_for_next_question": "The candidate has repeatedly failed to answer specific technical questions across multiple topics (Docker, SQL, API debugging), providing generic process descriptions instead. Further questioning is unlikely to yield valid technical evidence.",
+        "anti_repetition_check": "N/A",
+        "ownership_check": "N/A",
+        "red_flags": [
+          "Repeatedly ignored specific technical tasks",
+          "Provided generic process descriptions instead of technical answers",
+          "Failed to adapt to follow-up requests"
+        ],
+        "communication": {
+          "clarity": 2,
+          "specificity": 1,
+          "relevance": 1,
+          "structure": 2,
+          "summary": "Candidate consistently provides a generic 'how I debug' response instead of answering the specific technical question asked."
+        }
+      }
+    },
+    {
+      "sequence": 9,
+      "question": "Để làm rõ hơn về kỹ năng giải quyết vấn đề, bạn hãy mô tả một tình huống cụ thể khi bạn gặp lỗi logic trong code, thay vì mô tả quy trình chung, hãy cho biết chính xác dòng code hoặc logic nào đã gây ra lỗi đó và bạn đã thay đổi cấu trúc code như thế nào để khắc phục nó?",
+      "answer": "Em trực tiếp xây API CRUD và login, tách controller sang service để dễ test. Khi endpoint trả 500, em reproduce bằng cURL, so expected/actual, xem stack trace, thêm log ở service/DB, và sau khi sửa thì debug time giảm từ khoảng 30 phút xuống 10 phút.",
+      "evaluation": {
+        "score": 0,
+        "status": "not_assessed",
+        "answer_quality": "unable_to_answer",
+        "strengths": [],
+        "missing_evidence": [
+          "Specific technical implementation details",
+          "Direct answers to technical questions",
+          "Ability to move beyond generic process descriptions"
+        ],
+        "contradictions": [],
+        "detected_competency": "none",
+        "evidence_found": [
+          "Candidate consistently provides generic process descriptions instead of answering specific technical questions."
+        ],
+        "remaining_gap": "Candidate failed to provide specific technical evidence across multiple topics.",
+        "ownership": "unknown",
+        "topic_decision": "stop",
+        "reason_for_next_question": "The candidate has repeatedly failed to answer specific technical questions across multiple topics (Docker, SQL, API debugging), providing generic process descriptions instead. Further questioning is unlikely to yield valid technical evidence.",
+        "anti_repetition_check": "N/A",
+        "ownership_check": "N/A",
+        "red_flags": [
+          "Repeatedly ignored specific technical tasks",
+          "Provided generic process descriptions instead of technical answers",
+          "Failed to adapt to follow-up requests"
+        ],
+        "communication": {
+          "clarity": 2,
+          "specificity": 1,
+          "relevance": 1,
+          "structure": 2,
+          "summary": "Candidate consistently provides a generic 'how I debug' response instead of answering the specific technical question asked."
+        }
+      }
+    },
+    {
+      "sequence": 10,
+      "question": "Để giúp mình hiểu rõ hơn về cách bạn làm việc với dữ liệu, bạn hãy cho biết nếu cần kiểm tra xem một danh sách các ID người dùng có tồn tại trong bảng 'users' hay không, bạn sẽ viết một câu lệnh SQL sử dụng toán tử nào để thực hiện việc này một cách hiệu quả nhất?",
+      "answer": "Em trực tiếp xây API CRUD và login, tách controller sang service để dễ test. Khi endpoint trả 500, em reproduce bằng cURL, so expected/actual, xem stack trace, thêm log ở service/DB, và sau khi sửa thì debug time giảm từ khoảng 30 phút xuống 10 phút.",
+      "evaluation": {
+        "score": 0,
+        "status": "not_assessed",
+        "answer_quality": "unable_to_answer",
+        "strengths": [],
+        "missing_evidence": [
+          "Specific technical implementation details",
+          "Direct answers to technical queries",
+          "Ability to adapt to follow-up requests"
+        ],
+        "contradictions": [],
+        "detected_competency": "none",
+        "evidence_found": [
+          "Candidate consistently provides generic process descriptions instead of answering specific technical questions."
+        ],
+        "remaining_gap": "Candidate failed to provide specific technical evidence across multiple topics.",
+        "ownership": "unknown",
+        "topic_decision": "stop",
+        "reason_for_next_question": "The candidate has repeatedly failed to answer specific technical questions across multiple topics (Docker, SQL, API debugging), providing generic process descriptions instead. Further questioning is unlikely to yield valid technical evidence.",
+        "anti_repetition_check": "N/A",
+        "ownership_check": "N/A",
+        "red_flags": [
+          "Repeatedly ignored specific technical tasks",
+          "Provided generic process descriptions instead of technical answers",
+          "Failed to adapt to follow-up requests"
+        ],
+        "communication": {
+          "clarity": 2,
+          "specificity": 1,
+          "relevance": 1,
+          "structure": 2,
+          "summary": "Candidate consistently provides a generic 'how I debug' response instead of answering the specific technical question asked."
+        }
+      }
+    },
+    {
+      "sequence": 11,
+      "question": "Để mình có thể hiểu rõ hơn về cách bạn xử lý lỗi trong thực tế, bạn hãy cho biết một đoạn code cụ thể mà bạn đã từng viết để bắt ngoại lệ (exception) khi gọi một hàm bên ngoài, và bạn đã xử lý giá trị trả về trong khối 'except' đó như thế nào?",
+      "answer": "Em trực tiếp xây API CRUD và login, tách controller sang service để dễ test. Khi endpoint trả 500, em reproduce bằng cURL, so expected/actual, xem stack trace, thêm log ở service/DB, và sau khi sửa thì debug time giảm từ khoảng 30 phút xuống 10 phút.",
+      "evaluation": {
+        "score": 0,
+        "status": "not_assessed",
+        "answer_quality": "unable_to_answer",
+        "strengths": [],
+        "missing_evidence": [
+          "Specific technical implementation details",
+          "Direct answers to technical questions"
+        ],
+        "contradictions": [],
+        "detected_competency": "none",
+        "evidence_found": [],
+        "remaining_gap": "Candidate consistently provides generic process descriptions instead of answering specific technical questions.",
+        "ownership": "unknown",
+        "topic_decision": "stop",
+        "reason_for_next_question": "The candidate has repeatedly failed to answer specific technical questions across multiple topics, providing generic process descriptions instead. Further questioning is unlikely to yield valid technical evidence.",
+        "anti_repetition_check": "N/A",
+        "ownership_check": "N/A",
+        "red_flags": [
+          "Repeatedly ignored specific technical tasks",
+          "Provided generic process descriptions instead of technical answers",
+          "Failed to adapt to follow-up requests"
+        ],
+        "communication": {
+          "clarity": 2,
+          "specificity": 1,
+          "relevance": 1,
+          "structure": 2,
+          "summary": "Candidate consistently provides a generic 'how I debug' response instead of answering the specific technical question asked."
+        }
+      }
+    }
+  ],
+  "turns": [
+    {
+      "sequence": 1,
+      "question": "Bạn có thể mô tả kiến trúc tổng thể của dự án AI backend demo mà bạn đã thực hiện và giải thích vai trò cụ thể của dịch vụ FastAPI trong hệ thống đó không?",
+      "answer": "Với endpoint AI text, em tách service gọi model khỏi router, log latency và status, thêm timeout/fallback message, và không lưu prompt raw nếu có dữ liệu nhạy cảm.",
+      "phase": "cv_verification",
+      "topic_key": "project_architecture_fastapi",
+      "question_type": "initial",
+      "difficulty": "easy",
+      "provider_metadata": {
+        "planner": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 2530,
+          "output_tokens": 265,
+          "attempts": 1
+        },
+        "question_generator": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 981,
+          "output_tokens": 46,
+          "attempts": 1
+        }
+      }
+    },
+    {
+      "sequence": 2,
+      "question": "Để tách service gọi model khỏi router trong FastAPI, bạn đã tổ chức cấu trúc thư mục và các class như thế nào, và bạn đã sử dụng cơ chế nào để thiết lập timeout cũng như xử lý fallback khi model phản hồi chậm?",
+      "answer": "Em bọc call model bằng timeout, ví dụ `asyncio.wait_for(call_model(payload), timeout=10)`. Nếu timeout thì log latency/status, trả fallback message thân thiện và không retry vô hạn trong request.",
+      "phase": "cv_verification",
+      "topic_key": "project_architecture_fastapi",
+      "question_type": "follow_up",
+      "difficulty": "medium",
+      "provider_metadata": {
+        "planner": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 2670,
+          "output_tokens": 738,
+          "attempts": 1
+        },
+        "question_generator": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 1584,
+          "output_tokens": 57,
+          "attempts": 2
+        }
+      }
+    },
+    {
+      "sequence": 3,
+      "question": "Trong dự án của bạn, bạn đã cấu hình Dockerfile như thế nào để tối ưu hóa kích thước image cho ứng dụng FastAPI?",
+      "answer": "Em containerize FastAPI service bằng Dockerfile, bind Uvicorn vào `0.0.0.0`, map port `8000:8000`, và debug lỗi không truy cập được bằng `docker ps`, `docker logs`, rồi `docker exec` curl nội bộ.",
+      "phase": "cv_verification",
+      "topic_key": "docker_implementation",
+      "question_type": "transition",
+      "difficulty": "easy",
+      "provider_metadata": {
+        "planner": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 3010,
+          "output_tokens": 561,
+          "attempts": 1
+        },
+        "question_generator": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 1536,
+          "output_tokens": 36,
+          "attempts": 2
+        }
+      }
+    },
+    {
+      "sequence": 4,
+      "question": "Cảm ơn bạn đã chia sẻ về cách debug. Để tiếp nối ý về tối ưu hóa kích thước image, bạn hãy giải thích cách áp dụng kỹ thuật multi-stage build trong Dockerfile cho ứng dụng FastAPI của mình và cách bạn phân chia các giai đoạn để giảm thiểu dung lượng image cuối cùng?",
+      "answer": "Em containerize FastAPI service bằng Dockerfile, bind Uvicorn vào `0.0.0.0`, map port `8000:8000`, và debug lỗi không truy cập được bằng `docker ps`, `docker logs`, rồi `docker exec` curl nội bộ.",
+      "phase": "cv_verification",
+      "topic_key": "docker_implementation",
+      "question_type": "follow_up",
+      "difficulty": "medium",
+      "provider_metadata": {
+        "planner": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 3229,
+          "output_tokens": 646,
+          "attempts": 1
+        },
+        "question_generator": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 1656,
+          "output_tokens": 71,
+          "attempts": 2
+        }
+      }
+    },
+    {
+      "sequence": 5,
+      "question": "Để chuyển sang chủ đề về cơ sở dữ liệu, giả sử bạn có một bảng 'users' và một bảng 'orders'. Bạn hãy viết một câu lệnh SQL để lấy danh sách tên người dùng cùng với tổng số tiền họ đã chi tiêu từ bảng 'orders', sử dụng JOIN và GROUP BY.",
+      "answer": "Em trực tiếp xây API CRUD và login, tách controller sang service để dễ test. Khi endpoint trả 500, em reproduce bằng cURL, so expected/actual, xem stack trace, thêm log ở service/DB, và sau khi sửa thì debug time giảm từ khoảng 30 phút xuống 10 phút.",
+      "phase": "cv_verification",
+      "topic_key": "sql_database_integration",
+      "question_type": "transition",
+      "difficulty": "easy",
+      "provider_metadata": {
+        "planner": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 3539,
+          "output_tokens": 581,
+          "attempts": 1
+        },
+        "question_generator": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 1624,
+          "output_tokens": 66,
+          "attempts": 1
+        }
+      }
+    },
+    {
+      "sequence": 6,
+      "question": "Cảm ơn bạn đã chia sẻ về quy trình debug. Quay lại với yêu cầu về cơ sở dữ liệu, bạn hãy viết giúp mình một câu lệnh SQL để lấy danh sách tên người dùng (từ bảng 'users') cùng với tổng số tiền họ đã chi tiêu (từ bảng 'orders'), sử dụng JOIN và GROUP BY để tổng hợp dữ liệu này.",
+      "answer": "Em trực tiếp xây API CRUD và login, tách controller sang service để dễ test. Khi endpoint trả 500, em reproduce bằng cURL, so expected/actual, xem stack trace, thêm log ở service/DB, và sau khi sửa thì debug time giảm từ khoảng 30 phút xuống 10 phút.",
+      "phase": "cv_verification",
+      "topic_key": "sql_database_integration",
+      "question_type": "follow_up",
+      "difficulty": "easy",
+      "provider_metadata": {
+        "planner": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 3808,
+          "output_tokens": 665,
+          "attempts": 1
+        },
+        "question_generator": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 1737,
+          "output_tokens": 80,
+          "attempts": 1
+        }
+      }
+    },
+    {
+      "sequence": 7,
+      "question": "Giả sử một endpoint FastAPI của bạn thỉnh thoảng trả về lỗi 500 do kết nối tới database bị timeout. Thay vì chỉ kiểm tra log, bạn sẽ thay đổi code như thế nào để xử lý tình huống này một cách chủ động, ví dụ như sử dụng cơ chế retry hoặc thiết lập timeout cụ thể cho truy vấn đó?",
+      "answer": "Em trực tiếp xây API CRUD và login, tách controller sang service để dễ test. Khi endpoint trả 500, em reproduce bằng cURL, so expected/actual, xem stack trace, thêm log ở service/DB, và sau khi sửa thì debug time giảm từ khoảng 30 phút xuống 10 phút.",
+      "phase": "cv_verification",
+      "topic_key": "jd_scenario_api_debugging",
+      "question_type": "transition",
+      "difficulty": "easy",
+      "provider_metadata": {
+        "planner": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 4181,
+          "output_tokens": 691,
+          "attempts": 1
+        },
+        "question_generator": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 1914,
+          "output_tokens": 81,
+          "attempts": 1
+        }
+      }
+    },
+    {
+      "sequence": 8,
+      "question": "Để hiểu rõ hơn về cách bạn giải quyết vấn đề kỹ thuật, bạn có thể chia sẻ một tình huống cụ thể mà bạn đã gặp phải trong quá trình phát triển, nơi bạn phải thay đổi cách tiếp cận hoặc cấu trúc code để giải quyết một lỗi hiệu năng hoặc logic phức tạp không?",
+      "answer": "Em trực tiếp xây API CRUD và login, tách controller sang service để dễ test. Khi endpoint trả 500, em reproduce bằng cURL, so expected/actual, xem stack trace, thêm log ở service/DB, và sau khi sửa thì debug time giảm từ khoảng 30 phút xuống 10 phút.",
+      "phase": "cv_verification",
+      "topic_key": "technical_problem_solving",
+      "question_type": "transition",
+      "difficulty": "easy",
+      "provider_metadata": {
+        "planner": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 4547,
+          "output_tokens": 634,
+          "attempts": 1,
+          "backend_overrode_early_finish": true
+        },
+        "question_generator": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 1903,
+          "output_tokens": 69,
+          "attempts": 1
+        }
+      }
+    },
+    {
+      "sequence": 9,
+      "question": "Để làm rõ hơn về kỹ năng giải quyết vấn đề, bạn hãy mô tả một tình huống cụ thể khi bạn gặp lỗi logic trong code, thay vì mô tả quy trình chung, hãy cho biết chính xác dòng code hoặc logic nào đã gây ra lỗi đó và bạn đã thay đổi cấu trúc code như thế nào để khắc phục nó?",
+      "answer": "Em trực tiếp xây API CRUD và login, tách controller sang service để dễ test. Khi endpoint trả 500, em reproduce bằng cURL, so expected/actual, xem stack trace, thêm log ở service/DB, và sau khi sửa thì debug time giảm từ khoảng 30 phút xuống 10 phút.",
+      "phase": "cv_verification",
+      "topic_key": "technical_problem_solving",
+      "question_type": "transition",
+      "difficulty": "easy",
+      "provider_metadata": {
+        "planner": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 5003,
+          "output_tokens": 622,
+          "attempts": 1,
+          "backend_overrode_early_finish": true
+        },
+        "question_generator": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 1949,
+          "output_tokens": 77,
+          "attempts": 1
+        }
+      }
+    },
+    {
+      "sequence": 10,
+      "question": "Để giúp mình hiểu rõ hơn về cách bạn làm việc với dữ liệu, bạn hãy cho biết nếu cần kiểm tra xem một danh sách các ID người dùng có tồn tại trong bảng 'users' hay không, bạn sẽ viết một câu lệnh SQL sử dụng toán tử nào để thực hiện việc này một cách hiệu quả nhất?",
+      "answer": "Em trực tiếp xây API CRUD và login, tách controller sang service để dễ test. Khi endpoint trả 500, em reproduce bằng cURL, so expected/actual, xem stack trace, thêm log ở service/DB, và sau khi sửa thì debug time giảm từ khoảng 30 phút xuống 10 phút.",
+      "phase": "cv_verification",
+      "topic_key": "technical_problem_solving",
+      "question_type": "transition",
+      "difficulty": "easy",
+      "provider_metadata": {
+        "planner": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 5391,
+          "output_tokens": 617,
+          "attempts": 1,
+          "backend_overrode_early_finish": true
+        },
+        "question_generator": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 2043,
+          "output_tokens": 74,
+          "attempts": 1
+        }
+      }
+    },
+    {
+      "sequence": 11,
+      "question": "Để mình có thể hiểu rõ hơn về cách bạn xử lý lỗi trong thực tế, bạn hãy cho biết một đoạn code cụ thể mà bạn đã từng viết để bắt ngoại lệ (exception) khi gọi một hàm bên ngoài, và bạn đã xử lý giá trị trả về trong khối 'except' đó như thế nào?",
+      "answer": "Em trực tiếp xây API CRUD và login, tách controller sang service để dễ test. Khi endpoint trả 500, em reproduce bằng cURL, so expected/actual, xem stack trace, thêm log ở service/DB, và sau khi sửa thì debug time giảm từ khoảng 30 phút xuống 10 phút.",
+      "phase": "cv_verification",
+      "topic_key": "technical_problem_solving",
+      "question_type": "transition",
+      "difficulty": "easy",
+      "provider_metadata": {
+        "planner": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 5587,
+          "output_tokens": 613,
+          "attempts": 1,
+          "backend_overrode_early_finish": true
+        },
+        "question_generator": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 2113,
+          "output_tokens": 73,
+          "attempts": 1
+        }
+      }
+    },
+    {
+      "sequence": 12,
+      "question": "Để mình có thể hiểu rõ hơn về cách bạn làm việc với các thư viện bên thứ ba, bạn hãy viết một đoạn code Python ngắn sử dụng khối try-except để gọi một hàm giả định là 'fetch_data()' và xử lý trường hợp hàm này ném ra ngoại lệ 'ConnectionError' bằng cách in ra thông báo lỗi cụ thể.",
+      "answer": "Em trực tiếp xây API CRUD và login, tách controller sang service để dễ test. Khi endpoint trả 500, em reproduce bằng cURL, so expected/actual, xem stack trace, thêm log ở service/DB, và sau khi sửa thì debug time giảm từ khoảng 30 phút xuống 10 phút.",
+      "phase": "cv_verification",
+      "topic_key": "technical_problem_solving",
+      "question_type": "transition",
+      "difficulty": "easy",
+      "provider_metadata": {
+        "planner": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 5781,
+          "output_tokens": 568,
+          "attempts": 1,
+          "backend_overrode_early_finish": true
+        },
+        "question_generator": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 2151,
+          "output_tokens": 81,
+          "attempts": 1
+        }
+      }
+    }
+  ]
+}

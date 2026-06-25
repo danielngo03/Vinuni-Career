@@ -1,0 +1,450 @@
+{
+  "case": "tech_lead_strong_candidate",
+  "mode": "tech_lead",
+  "answer_style": "strong",
+  "max_questions": 12,
+  "generated_at": "2026-06-25T03:05:26.871342+00:00",
+  "flags": [
+    "question_generator used provider/unknown fallback: Tech lead question repeats a direct coding/query task"
+  ],
+  "report": {
+    "overall_score": 33,
+    "overall_summary": "Ứng viên thể hiện khả năng nắm bắt quy trình debug cơ bản và có kinh nghiệm thực tế trong việc triển khai JWT auth cho FastAPI. Tuy nhiên, ứng viên gặp khó khăn nghiêm trọng trong việc lắng nghe và phản hồi đúng trọng tâm câu hỏi, thường xuyên lặp lại một nội dung đã chuẩn bị sẵn thay vì giải quyết các yêu cầu kỹ thuật cụ thể về Docker và lập trình Python. Kỹ năng giao tiếp kỹ thuật cần được cải thiện đáng kể để đảm bảo sự tương tác hiệu quả trong môi trường làm việc.",
+    "dimensions": [
+      {
+        "key": "technical_knowledge",
+        "label": "Kiến thức chuyên môn",
+        "score": 30,
+        "weight": 30,
+        "summary": "Ứng viên hiểu cách triển khai JWT và quy trình debug API, nhưng thiếu kiến thức thực tế về Docker và không thể thực hiện các yêu cầu lập trình cơ bản.",
+        "evidence": [
+          "Có kinh nghiệm triển khai JWT auth trong FastAPI.",
+          "Không giải thích được cách truyền biến môi trường trong Docker.",
+          "Không thực hiện được yêu cầu viết code Python list comprehension."
+        ]
+      },
+      {
+        "key": "practical_experience",
+        "label": "Kinh nghiệm thực tế",
+        "score": 40,
+        "weight": 20,
+        "summary": "Ứng viên có kinh nghiệm thực tế trong việc xây dựng API CRUD và xử lý lỗi, nhưng không thể chứng minh sâu hơn về các kỹ thuật triển khai (deployment).",
+        "evidence": [
+          "Đã tự xây dựng API CRUD và login.",
+          "Có quy trình debug cụ thể (reproduce bằng cURL, kiểm tra stack trace).",
+          "Đã tối ưu hóa thời gian debug từ 30 phút xuống 10 phút."
+        ]
+      },
+      {
+        "key": "problem_solving",
+        "label": "Giải quyết vấn đề",
+        "score": 45,
+        "weight": 20,
+        "summary": "Ứng viên có tư duy debug tốt trong môi trường phát triển, nhưng khả năng giải quyết vấn đề bị hạn chế bởi việc không tập trung vào câu hỏi.",
+        "evidence": [
+          "Sử dụng log và fail-fast để xử lý lỗi cấu hình biến môi trường.",
+          "Sử dụng cURL để tái hiện lỗi 500.",
+          "Có phương pháp so sánh expected/actual để tìm nguyên nhân lỗi."
+        ]
+      },
+      {
+        "key": "communication",
+        "label": "Giao tiếp và làm rõ",
+        "score": 20,
+        "weight": 20,
+        "summary": "Kỹ năng giao tiếp là điểm yếu lớn nhất. Ứng viên thường xuyên trả lời lạc đề và lặp lại nội dung cũ thay vì phản hồi trực tiếp câu hỏi của người phỏng vấn.",
+        "evidence": [
+          "Lặp lại câu trả lời về JWT 3 lần dù được hỏi về Docker và code.",
+          "Không tuân thủ yêu cầu viết code dù đã được nhắc lại.",
+          "Thiếu sự linh hoạt trong việc điều chỉnh nội dung trả lời theo câu hỏi."
+        ]
+      },
+      {
+        "key": "critical_thinking",
+        "label": "Tư duy phản biện",
+        "score": 30,
+        "weight": 10,
+        "summary": "Ứng viên chưa thể hiện được khả năng phân tích các lựa chọn kỹ thuật hoặc đánh giá các giải pháp thay thế.",
+        "evidence": [
+          "Chưa đưa ra được các lựa chọn thay thế khi được hỏi về cấu hình Docker.",
+          "Tập trung vào việc mô tả quy trình đã làm thay vì phân tích tại sao chọn giải pháp đó."
+        ]
+      }
+    ],
+    "strengths": [
+      "Có kinh nghiệm thực tế với FastAPI và JWT.",
+      "Có quy trình debug có cấu trúc và hiệu quả.",
+      "Chủ động trong việc thêm log và cơ chế fail-fast để kiểm soát lỗi."
+    ],
+    "improvements": [
+      "Cần rèn luyện kỹ năng lắng nghe và trả lời đúng trọng tâm câu hỏi.",
+      "Cần củng cố kiến thức về Docker (cách quản lý biến môi trường, Dockerfile).",
+      "Cần luyện tập kỹ năng lập trình cơ bản với Python (list comprehension, thao tác dữ liệu).",
+      "Tránh việc học thuộc lòng câu trả lời và áp dụng máy móc vào mọi câu hỏi."
+    ],
+    "insufficient_evidence": [
+      "Kiến thức về Docker và containerization.",
+      "Khả năng viết code Python cơ bản.",
+      "Khả năng phân tích trade-offs trong thiết kế hệ thống."
+    ],
+    "action_plan": [
+      "Ôn tập kiến thức về Docker: cách sử dụng .env, Docker secrets và cấu hình docker-compose.",
+      "Luyện tập các bài tập lập trình Python cơ bản trên các nền tảng như LeetCode hoặc HackerRank.",
+      "Thực hành kỹ năng phỏng vấn: tập trung lắng nghe câu hỏi, xác nhận lại nếu chưa rõ và trả lời trực tiếp vào vấn đề.",
+      "Tìm hiểu thêm về các best practices trong việc bảo mật biến môi trường trong ứng dụng backend."
+    ],
+    "confidence": "high"
+  },
+  "report_metadata": {
+    "provider": "gemini",
+    "model": "gemini-3.1-flash-lite",
+    "input_tokens": 3727,
+    "output_tokens": 1099,
+    "attempts": 1
+  },
+  "answer_evaluations": [
+    {
+      "sequence": 1,
+      "question": "Bạn có thể mô tả kiến trúc tổng thể của dự án AI backend demo mà bạn đã thực hiện không? Đặc biệt, hãy giải thích cách bạn thiết kế service FastAPI và triển khai cơ chế xác thực JWT trong dự án này.",
+      "answer": "Trong project login API, em tự làm phần JWT auth. Bug khó nhất là secret khác giữa local và server làm token verify fail. Em log config fingerprint lúc startup, kiểm tra env, đồng bộ secret và thêm fail-fast nếu thiếu biến môi trường.",
+      "evaluation": {
+        "score": 3,
+        "status": "verified",
+        "answer_quality": "sufficient",
+        "strengths": [
+          "Direct ownership of JWT implementation",
+          "Concrete debugging steps",
+          "Proactive error handling"
+        ],
+        "missing_evidence": [
+          "Details on Docker configuration for this specific project"
+        ],
+        "contradictions": [],
+        "detected_competency": "technical_problem_solving",
+        "evidence_found": [
+          "Personally implemented JWT auth",
+          "Resolved environment variable mismatch via logging and fail-fast"
+        ],
+        "remaining_gap": "Docker usage in the project",
+        "ownership": "direct",
+        "topic_decision": "stop",
+        "reason_for_next_question": "The candidate demonstrated ownership of the JWT logic. Now I need to verify the Docker skill claimed in the CV/JD.",
+        "anti_repetition_check": "This question shifts from JWT debugging to Docker containerization.",
+        "ownership_check": "The question asks about the candidate's specific setup for the project mentioned in the CV.",
+        "red_flags": [],
+        "communication": {
+          "clarity": 4,
+          "specificity": 4,
+          "relevance": 4,
+          "structure": 3,
+          "summary": "The candidate clearly explained the debugging process for a JWT secret issue."
+        }
+      }
+    },
+    {
+      "sequence": 2,
+      "question": "Bạn đã đề cập đến việc triển khai dự án này trong môi trường container. Bạn có thể giải thích cách bạn cấu hình Dockerfile để đảm bảo các biến môi trường, bao gồm cả JWT secret, được truyền vào ứng dụng FastAPI một cách an toàn và hiệu quả khi chạy container không?",
+      "answer": "Trong project login API, em tự làm phần JWT auth. Bug khó nhất là secret khác giữa local và server làm token verify fail. Em log config fingerprint lúc startup, kiểm tra env, đồng bộ secret và thêm fail-fast nếu thiếu biến môi trường.",
+      "evaluation": {
+        "score": 1,
+        "status": "partially_verified",
+        "answer_quality": "irrelevant",
+        "strengths": [
+          "Previous JWT debugging explanation was solid"
+        ],
+        "missing_evidence": [
+          "Explanation of Dockerfile configuration for environment variables"
+        ],
+        "contradictions": [],
+        "detected_competency": "Technical communication",
+        "evidence_found": [
+          "Candidate understands JWT secret management in general"
+        ],
+        "remaining_gap": "How Docker handles environment variables in their specific project",
+        "ownership": "direct",
+        "topic_decision": "clarify",
+        "reason_for_next_question": "The candidate provided an irrelevant answer by repeating the previous topic. I need to steer them back to the Docker configuration question.",
+        "anti_repetition_check": "The previous question was about Dockerfile configuration. This follow-up asks for the same technical detail but clarifies that the previous answer did not address the Docker aspect.",
+        "ownership_check": "The candidate claimed ownership of the project; this question verifies if they actually configured the containerization.",
+        "red_flags": [
+          "Candidate did not listen to the specific question asked"
+        ],
+        "communication": {
+          "clarity": 2,
+          "specificity": 1,
+          "relevance": 1,
+          "structure": 2,
+          "summary": "The candidate repeated the previous answer about JWT debugging instead of answering the question about Dockerfile configuration."
+        }
+      }
+    },
+    {
+      "sequence": 3,
+      "question": "Tôi hiểu bạn đã xử lý vấn đề đồng bộ secret trong code, nhưng tôi muốn tập trung vào khía cạnh Docker. Cụ thể, trong Dockerfile hoặc file docker-compose.yml của dự án, bạn đã cấu hình như thế nào để truyền biến môi trường chứa JWT secret vào container FastAPI mà không để lộ giá trị này trong image?",
+      "answer": "Trong project login API, em tự làm phần JWT auth. Bug khó nhất là secret khác giữa local và server làm token verify fail. Em log config fingerprint lúc startup, kiểm tra env, đồng bộ secret và thêm fail-fast nếu thiếu biến môi trường.",
+      "evaluation": {
+        "score": 0,
+        "status": "contradicted",
+        "answer_quality": "irrelevant",
+        "strengths": [],
+        "missing_evidence": [
+          "Specific Dockerfile or docker-compose.yml configuration for environment variables"
+        ],
+        "contradictions": [
+          "Candidate repeated the previous answer about JWT debugging instead of addressing the Docker configuration question."
+        ],
+        "detected_competency": "Communication",
+        "evidence_found": [],
+        "remaining_gap": "Docker configuration knowledge",
+        "ownership": "unknown",
+        "topic_decision": "stop",
+        "reason_for_next_question": "The candidate failed to answer the Docker question twice and repeated irrelevant information. Switching to Python to assess core technical skills.",
+        "anti_repetition_check": "Switching from Docker to Python coding task.",
+        "ownership_check": "N/A - switching topic.",
+        "red_flags": [
+          "Candidate did not listen to the specific question asked",
+          "Repetitive answer"
+        ],
+        "communication": {
+          "clarity": 2,
+          "specificity": 1,
+          "relevance": 1,
+          "structure": 1,
+          "summary": "The candidate repeated the previous answer about JWT debugging instead of answering the question about Dockerfile configuration."
+        }
+      }
+    },
+    {
+      "sequence": 4,
+      "question": "Để chuyển sang phần kỹ năng lập trình, bạn hãy viết một đoạn code Python ngắn sử dụng list comprehension để lọc ra tất cả các số chẵn từ một danh sách số nguyên cho trước, sau đó bình phương các số đó.",
+      "answer": "Em trực tiếp xây API CRUD và login, tách controller sang service để dễ test. Khi endpoint trả 500, em reproduce bằng cURL, so expected/actual, xem stack trace, thêm log ở service/DB, và sau khi sửa thì debug time giảm từ khoảng 30 phút xuống 10 phút.",
+      "evaluation": {
+        "score": 1,
+        "status": "partially_verified",
+        "answer_quality": "irrelevant",
+        "strengths": [
+          "Candidate described a structured debugging process"
+        ],
+        "missing_evidence": [
+          "Python list comprehension code"
+        ],
+        "contradictions": [
+          "Candidate ignored the specific coding task requested"
+        ],
+        "detected_competency": "Debugging methodology",
+        "evidence_found": [
+          "Candidate uses cURL for reproduction",
+          "Candidate uses stack traces and logging for debugging"
+        ],
+        "remaining_gap": "Basic Python syntax proficiency",
+        "ownership": "direct",
+        "topic_decision": "clarify",
+        "reason_for_next_question": "The candidate did not perform the requested coding task. I need to re-ask the specific Python task to verify basic syntax skills.",
+        "anti_repetition_check": "This is a re-ask of the coding task because the previous answer was completely off-topic.",
+        "ownership_check": "The candidate claimed Python experience; this is a direct verification of that claim.",
+        "red_flags": [
+          "Candidate did not follow instructions for the coding task"
+        ],
+        "communication": {
+          "clarity": 2,
+          "specificity": 1,
+          "relevance": 1,
+          "structure": 2,
+          "summary": "The candidate provided a process description instead of the requested code snippet."
+        }
+      }
+    },
+    {
+      "sequence": 5,
+      "question": "Trong câu trả lời vừa rồi, em có thể chọn một bước kỹ thuật em trực tiếp làm và nói rõ input, hành động, kết quả không?",
+      "answer": "Em trực tiếp xây API CRUD và login, tách controller sang service để dễ test. Khi endpoint trả 500, em reproduce bằng cURL, so expected/actual, xem stack trace, thêm log ở service/DB, và sau khi sửa thì debug time giảm từ khoảng 30 phút xuống 10 phút.",
+      "evaluation": {
+        "score": 1,
+        "status": "partially_verified",
+        "answer_quality": "irrelevant",
+        "strengths": [
+          "Candidate has a structured approach to debugging (reproduction, logging, stack trace analysis)"
+        ],
+        "missing_evidence": [
+          "Direct response to the coding task",
+          "Ability to follow specific technical instructions"
+        ],
+        "contradictions": [
+          "Candidate provided a process description instead of the requested code snippet"
+        ],
+        "detected_competency": "debugging_process",
+        "evidence_found": [
+          "Uses cURL for reproduction",
+          "Uses stack traces and logging for debugging"
+        ],
+        "remaining_gap": "Basic Python syntax proficiency and ability to follow technical instructions",
+        "ownership": "direct",
+        "topic_decision": "stop",
+        "reason_for_next_question": "The candidate failed to follow the coding task twice. I am switching to a scenario-based question to assess their problem-solving approach in a more natural context.",
+        "anti_repetition_check": "This is a new scenario-based question, not a coding task or a repeat of the JWT question.",
+        "ownership_check": "The question asks for a hypothetical debugging scenario based on their claimed experience with API development.",
+        "red_flags": [
+          "Candidate did not follow instructions for the coding task",
+          "Candidate appears to be using a pre-prepared script for answers"
+        ],
+        "communication": {
+          "clarity": 2,
+          "specificity": 1,
+          "relevance": 1,
+          "structure": 2,
+          "summary": "The candidate provided a process description instead of the requested code snippet."
+        }
+      }
+    }
+  ],
+  "turns": [
+    {
+      "sequence": 1,
+      "question": "Bạn có thể mô tả kiến trúc tổng thể của dự án AI backend demo mà bạn đã thực hiện không? Đặc biệt, hãy giải thích cách bạn thiết kế service FastAPI và triển khai cơ chế xác thực JWT trong dự án này.",
+      "answer": "Trong project login API, em tự làm phần JWT auth. Bug khó nhất là secret khác giữa local và server làm token verify fail. Em log config fingerprint lúc startup, kiểm tra env, đồng bộ secret và thêm fail-fast nếu thiếu biến môi trường.",
+      "phase": "cv_verification",
+      "topic_key": "project_architecture_ownership",
+      "question_type": "initial",
+      "difficulty": "easy",
+      "provider_metadata": {
+        "planner": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 2530,
+          "output_tokens": 260,
+          "attempts": 1
+        },
+        "question_generator": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 977,
+          "output_tokens": 52,
+          "attempts": 1
+        }
+      }
+    },
+    {
+      "sequence": 2,
+      "question": "Bạn đã đề cập đến việc triển khai dự án này trong môi trường container. Bạn có thể giải thích cách bạn cấu hình Dockerfile để đảm bảo các biến môi trường, bao gồm cả JWT secret, được truyền vào ứng dụng FastAPI một cách an toàn và hiệu quả khi chạy container không?",
+      "answer": "Trong project login API, em tự làm phần JWT auth. Bug khó nhất là secret khác giữa local và server làm token verify fail. Em log config fingerprint lúc startup, kiểm tra env, đồng bộ secret và thêm fail-fast nếu thiếu biến môi trường.",
+      "phase": "cv_verification",
+      "topic_key": "docker_containerization_verification",
+      "question_type": "follow_up",
+      "difficulty": "medium",
+      "provider_metadata": {
+        "planner": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 2708,
+          "output_tokens": 601,
+          "attempts": 1
+        },
+        "question_generator": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 1438,
+          "output_tokens": 64,
+          "attempts": 1
+        }
+      }
+    },
+    {
+      "sequence": 3,
+      "question": "Tôi hiểu bạn đã xử lý vấn đề đồng bộ secret trong code, nhưng tôi muốn tập trung vào khía cạnh Docker. Cụ thể, trong Dockerfile hoặc file docker-compose.yml của dự án, bạn đã cấu hình như thế nào để truyền biến môi trường chứa JWT secret vào container FastAPI mà không để lộ giá trị này trong image?",
+      "answer": "Trong project login API, em tự làm phần JWT auth. Bug khó nhất là secret khác giữa local và server làm token verify fail. Em log config fingerprint lúc startup, kiểm tra env, đồng bộ secret và thêm fail-fast nếu thiếu biến môi trường.",
+      "phase": "cv_verification",
+      "topic_key": "docker_containerization_verification",
+      "question_type": "follow_up",
+      "difficulty": "medium",
+      "provider_metadata": {
+        "planner": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 3020,
+          "output_tokens": 653,
+          "attempts": 1
+        },
+        "question_generator": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 1543,
+          "output_tokens": 76,
+          "attempts": 1
+        }
+      }
+    },
+    {
+      "sequence": 4,
+      "question": "Để chuyển sang phần kỹ năng lập trình, bạn hãy viết một đoạn code Python ngắn sử dụng list comprehension để lọc ra tất cả các số chẵn từ một danh sách số nguyên cho trước, sau đó bình phương các số đó.",
+      "answer": "Em trực tiếp xây API CRUD và login, tách controller sang service để dễ test. Khi endpoint trả 500, em reproduce bằng cURL, so expected/actual, xem stack trace, thêm log ở service/DB, và sau khi sửa thì debug time giảm từ khoảng 30 phút xuống 10 phút.",
+      "phase": "cv_verification",
+      "topic_key": "python_coding_verification",
+      "question_type": "transition",
+      "difficulty": "easy",
+      "provider_metadata": {
+        "planner": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 3313,
+          "output_tokens": 594,
+          "attempts": 1
+        },
+        "question_generator": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 1591,
+          "output_tokens": 52,
+          "attempts": 1
+        }
+      }
+    },
+    {
+      "sequence": 5,
+      "question": "Trong câu trả lời vừa rồi, em có thể chọn một bước kỹ thuật em trực tiếp làm và nói rõ input, hành động, kết quả không?",
+      "answer": "Em trực tiếp xây API CRUD và login, tách controller sang service để dễ test. Khi endpoint trả 500, em reproduce bằng cURL, so expected/actual, xem stack trace, thêm log ở service/DB, và sau khi sửa thì debug time giảm từ khoảng 30 phút xuống 10 phút.",
+      "phase": "cv_verification",
+      "topic_key": "python_coding_verification",
+      "question_type": "follow_up",
+      "difficulty": "easy",
+      "provider_metadata": {
+        "planner": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 3578,
+          "output_tokens": 618,
+          "attempts": 1
+        },
+        "question_generator": {
+          "fallback": true,
+          "error": "Tech lead question repeats a direct coding/query task",
+          "attempts": 2
+        }
+      }
+    },
+    {
+      "sequence": 6,
+      "question": "Giả sử một API FastAPI của bạn đột ngột trả về lỗi 500 cho một request POST cụ thể, nhưng log không hiển thị rõ nguyên nhân. Nếu bạn nghi ngờ lỗi nằm ở quá trình xử lý dữ liệu trong tầng Service, bạn sẽ thiết kế các bước kiểm tra hoặc thêm cơ chế log như thế nào để cô lập vấn đề mà không làm ảnh hưởng đến hiệu năng của hệ thống đang chạy?",
+      "answer": "Em trực tiếp xây API CRUD và login, tách controller sang service để dễ test. Khi endpoint trả 500, em reproduce bằng cURL, so expected/actual, xem stack trace, thêm log ở service/DB, và sau khi sửa thì debug time giảm từ khoảng 30 phút xuống 10 phút.",
+      "phase": "cv_verification",
+      "topic_key": "jd_scenario_api_debugging",
+      "question_type": "transition",
+      "difficulty": "easy",
+      "provider_metadata": {
+        "planner": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 3864,
+          "output_tokens": 693,
+          "attempts": 1
+        },
+        "question_generator": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 1789,
+          "output_tokens": 95,
+          "attempts": 1
+        }
+      }
+    }
+  ]
+}

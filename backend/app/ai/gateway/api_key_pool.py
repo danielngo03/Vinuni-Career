@@ -42,9 +42,9 @@ class APIKeyPool:
 
 def looks_like_key_exhaustion(status_code: int, detail: str) -> bool:
     normalized = detail.lower()
-    if status_code == 429:
+    if status_code in {401, 402, 403, 429}:
         return True
-    if status_code not in {400, 403}:
+    if status_code != 400:
         return False
     markers = (
         "api key not valid",

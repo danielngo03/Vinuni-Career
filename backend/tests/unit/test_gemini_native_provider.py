@@ -90,6 +90,103 @@ def test_gemini_native_provider_rotates_to_next_key_after_quota(monkeypatch):
     assert requests == ["key-1", "key-2"]
 
 
+def test_gemini_native_provider_rotates_to_next_key_after_auth_4xx(monkeypatch):
+    requests = []
+
+    class StubClient:
+        def __init__(self, timeout: float) -> None:
+            self.timeout = timeout
+
+        def __enter__(self):
+            return self
+
+        def __exit__(self, exc_type, exc, traceback):
+            return None
+
+        def post(self, url: str, *, params: dict, headers: dict, json: dict):
+            requests.append(params["key"])
+            request = httpx.Request("POST", url)
+            if params["key"] == "key-1":
+                return httpx.Response(
+                    403,
+                    request=request,
+                    text='{"error":{"status":"PERMISSION_DENIED","message":"denied"}}',
+                )
+            return httpx.Response(
+                200,
+                request=request,
+                json={
+                    "candidates": [{"content": {"parts": [{"text": "ok"}]}}],
+                    "usageMetadata": {"promptTokenCount": 1, "candidatesTokenCount": 1},
+                },
+            )
+
+    monkeypatch.setattr(httpx, "Client", StubClient)
+    provider = GeminiNativeProvider(
+        base_url="https://example.test",
+        api_key="key-1",
+        api_keys=["key-2"],
+        chat_model="test-model",
+        embedding_model="test-embedding",
+        timeout_seconds=1,
+    )
+
+    response = provider.chat(ChatRequest(messages=[ChatMessage(role="user", content="hello")]))
+
+    assert response.content == "ok"
+    assert requests == ["key-1", "key-2"]
+
+
+def test_gemini_native_provider_retries_5xx_before_failing_or_rotating(monkeypatch):
+    requests = []
+    sleeps = []
+
+    class StubClient:
+        def __init__(self, timeout: float) -> None:
+            self.timeout = timeout
+
+        def __enter__(self):
+            return self
+
+        def __exit__(self, exc_type, exc, traceback):
+            return None
+
+        def post(self, url: str, *, params: dict, headers: dict, json: dict):
+            requests.append(params["key"])
+            request = httpx.Request("POST", url)
+            if len(requests) == 1:
+                return httpx.Response(
+                    503,
+                    request=request,
+                    text='{"error":{"status":"UNAVAILABLE","message":"high demand"}}',
+                )
+            return httpx.Response(
+                200,
+                request=request,
+                json={
+                    "candidates": [{"content": {"parts": [{"text": "ok"}]}}],
+                    "usageMetadata": {"promptTokenCount": 1, "candidatesTokenCount": 1},
+                },
+            )
+
+    monkeypatch.setattr(httpx, "Client", StubClient)
+    monkeypatch.setattr("app.ai.gateway.providers.gemini_native.time.sleep", sleeps.append)
+    provider = GeminiNativeProvider(
+        base_url="https://example.test",
+        api_key="key-1",
+        api_keys=["key-2"],
+        chat_model="test-model",
+        embedding_model="test-embedding",
+        timeout_seconds=1,
+    )
+
+    response = provider.chat(ChatRequest(messages=[ChatMessage(role="user", content="hello")]))
+
+    assert response.content == "ok"
+    assert requests == ["key-1", "key-1"]
+    assert sleeps == [1.0]
+
+
 def test_gemini_native_provider_skips_exhausted_key_on_next_call(monkeypatch):
     requests = []
 

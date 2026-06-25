@@ -725,6 +725,12 @@ def test_interview_finishes_early_when_evidence_is_sufficient():
                 phase="problem_solving",
                 topic_key="communication_debug",
             ),
+            ConversationTurn(
+                question="Giả sử team cần xây API gọi model AI, em thiết kế flow thế nào?",
+                answer="Em tách router, service gọi model, timeout và lưu DB.",
+                phase="problem_solving",
+                topic_key="jd_scenario_ai_api_flow",
+            ),
         ],
         coverage_state=CoverageState(
             skills=[
@@ -734,6 +740,7 @@ def test_interview_finishes_early_when_evidence_is_sufficient():
                     source="jd_requirement",
                     priority="must_have",
                     status="partially_verified",
+                    evidence_count=1,
                 ),
                 CoverageItem(
                     skill_id="fastapi",
@@ -741,13 +748,14 @@ def test_interview_finishes_early_when_evidence_is_sufficient():
                     source="jd_requirement",
                     priority="must_have",
                     status="partially_verified",
+                    evidence_count=1,
                 ),
             ]
         ),
         evaluation_state=EvaluationState(
             communication_samples=[communication, communication, communication]
         ),
-        question_count=4,
+        question_count=5,
         current_topic="impact",
         latest_answer="Em giảm thời gian xử lý từ 10 phút xuống 2 phút.",
     )
@@ -758,6 +766,318 @@ def test_interview_finishes_early_when_evidence_is_sufficient():
     assert result.planner_output.should_end_interview is True
     assert result.planner_output.phase_completion_signal == "enough_evidence"
     assert len(gateway.requests) == 1
+
+
+def test_tech_lead_does_not_finish_when_must_have_jd_skill_is_unassessed():
+    communication = CommunicationEvaluation(
+        clarity=3,
+        specificity=3,
+        relevance=3,
+        structure=3,
+        summary="Clear technical answer.",
+    )
+    planner = _planner(
+        action="finish_interview",
+        current_phase="completed",
+        question_plan={
+            "question_type": "closing",
+            "difficulty": "easy",
+            "target_competency": "interview completion",
+            "source_type": "general",
+            "source_reference": "",
+            "evidence_gap": "",
+            "question_intent": "finish_interview",
+            "topic_key": "completed",
+            "linked_skill_ids": [],
+        },
+        previous_answer_evaluation={
+            "score": 4,
+            "status": "verified",
+            "answer_quality": "sufficient",
+            "strengths": ["Explained FastAPI endpoint design."],
+            "missing_evidence": [],
+            "contradictions": [],
+            "communication": communication.model_dump(),
+        },
+        evaluated_skill_ids=["fastapi"],
+        should_end_interview=True,
+    )
+    gateway = FakeGateway(
+        [
+            planner,
+            {
+                "question": (
+                    "JD có yêu cầu Docker nhưng CV chưa có bằng chứng rõ. "
+                    "Em từng containerize app backend chưa, và nếu có thì em tự làm phần nào?"
+                )
+            },
+        ]
+    )
+    runtime = _runtime(
+        interview_config=_runtime().interview_config.model_copy(
+            update={"current_phase": "problem_solving", "max_questions": 8}
+        ),
+        history=[
+            ConversationTurn(
+                question="Em dùng Python ở đâu?",
+                answer="Em xây API.",
+                phase="cv_verification",
+                topic_key="verify_python",
+            ),
+            ConversationTurn(
+                question="Em thiết kế FastAPI endpoint thế nào?",
+                answer="Em dùng Pydantic và service layer.",
+                phase="problem_solving",
+                topic_key="verify_fastapi",
+            ),
+            ConversationTurn(
+                question="Giả sử app FastAPI lỗi 500 thì em debug thế nào?",
+                answer="Em xem log, request body và stack trace.",
+                phase="problem_solving",
+                topic_key="jd_scenario_debug_backend_apis",
+            ),
+        ],
+        coverage_state=CoverageState(
+            skills=[
+                CoverageItem(
+                    skill_id="python",
+                    skill="python",
+                    source="jd_requirement",
+                    priority="must_have",
+                    status="verified",
+                    evidence_count=1,
+                ),
+                CoverageItem(
+                    skill_id="fastapi",
+                    skill="fastapi",
+                    source="jd_requirement",
+                    priority="must_have",
+                    status="verified",
+                    evidence_count=1,
+                ),
+                CoverageItem(
+                    skill_id="docker",
+                    skill="docker",
+                    source="jd_requirement",
+                    priority="must_have",
+                    status="not_assessed",
+                    evidence_count=0,
+                ),
+            ]
+        ),
+        evaluation_state=EvaluationState(
+            communication_samples=[communication, communication]
+        ),
+        question_count=3,
+        current_topic="verify_fastapi",
+        current_difficulty="medium",
+        latest_answer="Em dùng Pydantic và tách service để dễ test.",
+    )
+
+    result = generate_next_turn(runtime, gateway=gateway)
+
+    assert result.question
+    assert result.planner_output.should_end_interview is False
+    assert result.planner_output.question_plan.topic_key == "verify_docker"
+    assert "Docker" in result.question
+
+
+def test_tech_lead_requires_jd_scenario_before_early_finish():
+    communication = CommunicationEvaluation(
+        clarity=3,
+        specificity=3,
+        relevance=3,
+        structure=3,
+        summary="Clear technical answer.",
+    )
+    planner = _planner(
+        action="finish_interview",
+        current_phase="completed",
+        question_plan={
+            "question_type": "closing",
+            "difficulty": "easy",
+            "target_competency": "interview completion",
+            "source_type": "general",
+            "source_reference": "",
+            "evidence_gap": "",
+            "question_intent": "finish_interview",
+            "topic_key": "completed",
+            "linked_skill_ids": [],
+        },
+        previous_answer_evaluation={
+            "score": 4,
+            "status": "verified",
+            "answer_quality": "sufficient",
+            "strengths": ["Explained Docker debugging."],
+            "missing_evidence": [],
+            "contradictions": [],
+            "communication": communication.model_dump(),
+        },
+        evaluated_skill_ids=["docker"],
+        should_end_interview=True,
+    )
+    gateway = FakeGateway(
+        [
+            planner,
+            {
+                "question": (
+                    "Giả sử team cần xây API nhận text, gọi model AI và lưu kết quả. "
+                    "Em sẽ thiết kế flow backend và xử lý lỗi chính như thế nào?"
+                )
+            },
+        ]
+    )
+    runtime = _runtime(
+        interview_config=_runtime().interview_config.model_copy(
+            update={"current_phase": "problem_solving", "max_questions": 8}
+        ),
+        job_description=_runtime().job_description.model_copy(
+            update={"responsibilities": ["Build backend APIs that integrate AI model calls."]}
+        ),
+        history=[
+            ConversationTurn(
+                question="Em dùng Python ở đâu?",
+                answer="Em xây API.",
+                phase="cv_verification",
+                topic_key="verify_python",
+            ),
+            ConversationTurn(
+                question="Em thiết kế FastAPI endpoint thế nào?",
+                answer="Em dùng Pydantic và service layer.",
+                phase="problem_solving",
+                topic_key="verify_fastapi",
+            ),
+            ConversationTurn(
+                question="Em dùng Docker như thế nào?",
+                answer="Em viết Dockerfile và map port.",
+                phase="problem_solving",
+                topic_key="verify_docker",
+            ),
+        ],
+        coverage_state=CoverageState(
+            skills=[
+                CoverageItem(
+                    skill_id="python",
+                    skill="python",
+                    source="jd_requirement",
+                    priority="must_have",
+                    status="verified",
+                    evidence_count=1,
+                ),
+                CoverageItem(
+                    skill_id="fastapi",
+                    skill="fastapi",
+                    source="jd_requirement",
+                    priority="must_have",
+                    status="verified",
+                    evidence_count=1,
+                ),
+                CoverageItem(
+                    skill_id="docker",
+                    skill="docker",
+                    source="jd_requirement",
+                    priority="must_have",
+                    status="verified",
+                    evidence_count=1,
+                ),
+            ]
+        ),
+        evaluation_state=EvaluationState(
+            communication_samples=[communication, communication]
+        ),
+        question_count=3,
+        current_topic="verify_docker",
+        current_difficulty="medium",
+        latest_answer="Em viết Dockerfile và debug bằng docker logs.",
+    )
+
+    result = generate_next_turn(runtime, gateway=gateway)
+
+    assert result.question
+    assert result.planner_output.should_end_interview is False
+    assert result.planner_output.question_plan.topic_key.startswith("jd_scenario_")
+
+
+def test_tech_lead_does_not_repeat_direct_coding_task():
+    communication = CommunicationEvaluation(
+        clarity=2,
+        specificity=1,
+        relevance=2,
+        structure=2,
+        summary="Avoided the direct SQL request.",
+    )
+    planner = _planner(
+        action="switch_topic",
+        current_phase="problem_solving",
+        question_plan={
+            "question_type": "transition",
+            "difficulty": "medium",
+            "target_competency": "PostgreSQL debugging",
+            "source_type": "jd_requirement",
+            "source_reference": "PostgreSQL",
+            "evidence_gap": "Database reasoning still needs evidence.",
+            "question_intent": "request_evidence",
+            "topic_key": "verify_postgresql",
+            "linked_skill_ids": ["postgresql"],
+        },
+        previous_answer_evaluation={
+            "score": 2,
+            "status": "partially_verified",
+            "answer_quality": "partial",
+            "strengths": ["Mentioned DB logs."],
+            "missing_evidence": ["Did not answer the SQL task."],
+            "contradictions": [],
+            "communication": communication.model_dump(),
+        },
+        evaluated_skill_ids=["postgresql"],
+    )
+    gateway = FakeGateway(
+        [
+            planner,
+            {"question": "Bạn hãy viết câu lệnh SQL lấy các order có amount lớn hơn 1000000."},
+            {
+                "question": (
+                    "Trong một lỗi database timeout ở FastAPI, em sẽ kiểm tra connection pool, "
+                    "query chậm và log PostgreSQL theo thứ tự nào?"
+                )
+            },
+        ]
+    )
+    runtime = _runtime(
+        interview_config=_runtime().interview_config.model_copy(
+            update={"current_phase": "problem_solving", "max_questions": 8}
+        ),
+        history=[
+            ConversationTurn(
+                question="Bạn hãy viết câu lệnh SQL tính tổng amount theo user_id.",
+                answer="Em sẽ xem log và sửa dần.",
+                phase="problem_solving",
+                topic_key="verify_postgresql",
+            )
+        ],
+        coverage_state=CoverageState(
+            skills=[
+                CoverageItem(
+                    skill_id="postgresql",
+                    skill="PostgreSQL",
+                    source="jd_requirement",
+                    priority="must_have",
+                    status="partially_verified",
+                    evidence_count=1,
+                )
+            ]
+        ),
+        question_count=1,
+        current_topic="verify_postgresql",
+        current_difficulty="medium",
+        latest_answer="Em sẽ xem log và sửa dần.",
+    )
+
+    result = generate_next_turn(runtime, gateway=gateway)
+
+    assert "viết câu lệnh SQL" not in result.question
+    assert "connection pool" in result.question
+    assert result.provider_metadata["question_generator"]["attempts"] == 2
 
 
 def test_final_report_uses_fixed_dimensions_and_backend_weighted_score():

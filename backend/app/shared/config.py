@@ -58,6 +58,7 @@ class Settings(BaseSettings):
     openai_embedding_model: str = "text-embedding-3-small"
 
     gemini_api_key: str | None = None
+    gemini_api_keys: Annotated[list[str], NoDecode] = []
     gemini_api_style: Literal["native", "openai_compatible"] = "native"
     gemini_base_url: str = "https://generativelanguage.googleapis.com/v1beta"
     gemini_openai_base_url: str = "https://generativelanguage.googleapis.com/v1beta/openai"
@@ -168,6 +169,7 @@ class Settings(BaseSettings):
         "backend_cors_origins",
         "llm_provider_chain",
         "embedding_provider_chain",
+        "gemini_api_keys",
         "openrouter_model_fallbacks",
         mode="before",
     )
@@ -184,7 +186,12 @@ class Settings(BaseSettings):
 def get_gemini_api_keys() -> list[str]:
     values = _collect_dotenv_values()
     values.update(os.environ)
-    return _dedupe_keys(_split_gemini_api_key(values.get("GEMINI_API_KEY")))
+    return _dedupe_keys(
+        [
+            *_parse_key_list(values.get("GEMINI_API_KEYS")),
+            *_parse_key_list(values.get("GEMINI_API_KEY")),
+        ]
+    )
 
 
 def _collect_dotenv_values() -> dict[str, str]:
@@ -212,9 +219,15 @@ def _clean_dotenv_value(value: str) -> str:
     return stripped
 
 
-def _split_gemini_api_key(value: str | None) -> list[str]:
+def _parse_key_list(value: str | None) -> list[str]:
     if not value:
         return []
+    stripped = value.strip()
+    if stripped.startswith("["):
+        parsed = json.loads(stripped)
+        if not isinstance(parsed, list):
+            raise ValueError("Expected a JSON list of API keys")
+        return [str(item).strip() for item in parsed if str(item).strip()]
     return [item.strip() for item in value.split(",") if item.strip()]
 
 

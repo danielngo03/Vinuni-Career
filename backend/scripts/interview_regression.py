@@ -86,6 +86,12 @@ def main() -> int:
         default=None,
         help="Optional directory where each case transcript is saved as a JSON file.",
     )
+    parser.add_argument(
+        "--mode",
+        choices=("tech_lead", "technical_check"),
+        default=None,
+        help="Optional interview mode filter.",
+    )
     args = parser.parse_args()
     if args.output_dir:
         args.output_dir.mkdir(parents=True, exist_ok=True)
@@ -96,6 +102,8 @@ def main() -> int:
         Case("technical_check_strong_candidate", "technical_check", "technical_strong", 10),
         Case("technical_check_weak_candidate", "technical_check", "technical_weak", 10),
     ]
+    if args.mode:
+        cases = [case for case in cases if case.mode == args.mode]
     failures = []
     for case in cases:
         transcript, flags, turn_metadata, report, report_metadata, answer_evaluations = run_case(case)
@@ -373,6 +381,19 @@ def _answer_for(style: str, question: str) -> str:
             "Với endpoint AI text, em tách service gọi model khỏi router, log latency và status, "
             "thêm timeout/fallback message, và không lưu prompt raw nếu có dữ liệu nhạy cảm."
         )
+    if "sql" in lower or "join" in lower or "group by" in lower or "orders" in lower:
+        return (
+            "Em viết `SELECT u.name, SUM(o.amount) AS total_amount FROM users u "
+            "JOIN orders o ON o.user_id = u.id GROUP BY u.id, u.name HAVING SUM(o.amount) > 1000000;`. "
+            "Nếu query chậm em xem `EXPLAIN`, index trên `orders.user_id`, và số dòng sau JOIN."
+        )
+    if "list comprehension" in lower or "sá»‘ cháºµn" in lower or "so chan" in lower:
+        return "Em viết `[x * x for x in numbers if x % 2 == 0]`; với `[1, 2, 3, 4]` thì output là `[4, 16]`."
+    if "try-except" in lower or "connectionerror" in lower or "exception" in lower:
+        return (
+            "Em viết `try: data = fetch_data()` rồi `except ConnectionError as exc: "
+            "logger.warning('fetch failed', exc_info=exc); return None`. Với API thật em sẽ trả lỗi rõ hoặc fallback."
+        )
     return (
         "Em trực tiếp xây API CRUD và login, tách controller sang service để dễ test. Khi endpoint "
         "trả 500, em reproduce bằng cURL, so expected/actual, xem stack trace, thêm log ở service/DB, "
@@ -406,6 +427,9 @@ def _provider_flags(metadata: dict) -> list[str]:
         "Technical check mode requires",
         "Generated question repeats",
         "Question contains multiple",
+        "Tech lead question repeats a direct coding/query task",
+        "Tech lead has reached the direct coding/query task limit",
+        "follow_up_count must reset when switching topics",
     )
     for feature in ("planner", "question_generator", "report"):
         feature_meta = metadata.get(feature) or {}
@@ -532,6 +556,57 @@ def _session_flags(case: Case, transcript: list[ConversationTurn]) -> list[str]:
         flags.append(f"exceeded max_questions={case.max_questions}")
     if case.answer_style in {"strong", "technical_strong"} and len(transcript) == case.max_questions:
         flags.append("strong candidate reached max instead of stopping early")
+    if case.mode == "tech_lead":
+        session_text = "\n".join(
+            f"{turn.topic_key}\n{turn.question}\n{turn.answer}" for turn in transcript
+        ).casefold()
+        required_skills = {"fastapi", "docker"}
+        for required_skill in required_skills:
+            if required_skill not in session_text:
+                flags.append(f"tech_lead missing required JD/CV verification skill: {required_skill}")
+        if "python" not in session_text and "fastapi" not in session_text:
+            flags.append("tech_lead missing required JD/CV verification skill: python")
+        direct_task_terms = (
+            "kiểm tra kỹ năng lập trình",
+            "viết code",
+            "viết một đoạn code",
+            "viết đoạn code",
+            "viết một đoạn mã",
+            "viết đoạn mã",
+            "viết một câu lệnh sql",
+            "viết câu lệnh sql",
+            "viết sql",
+            "viết một truy vấn",
+            "viết query",
+            "viết truy vấn",
+            "viết dockerfile",
+            "lọc ra các số chẵn",
+            "trả về một danh sách",
+            "coding test",
+            "programming skill test",
+            "write code",
+            "write a snippet",
+            "write sql",
+            "write a sql",
+            "write query",
+            "write a query",
+            "write dockerfile",
+        )
+        direct_task_count = 0
+        for turn in transcript:
+            question_lower = turn.question.casefold()
+            if any(term in question_lower for term in direct_task_terms):
+                direct_task_count += 1
+        if direct_task_count > 2:
+            flags.append(f"tech_lead asked {direct_task_count} direct coding/query tasks, expected at most 2")
+        topics = {turn.topic_key for turn in transcript}
+        scenario_terms = ("giả sử", "suppose", "scenario", "tình huống", "flow", "thiết kế")
+        if not any(topic.startswith("jd_scenario_") for topic in topics) and not any(
+            term in session_text for term in scenario_terms
+        ):
+            flags.append("tech_lead missing JD-based work scenario")
+    if case.mode == "technical_check" and len(transcript) < 5:
+        flags.append("technical_check ended before collecting enough technical coverage")
     return flags
 
 

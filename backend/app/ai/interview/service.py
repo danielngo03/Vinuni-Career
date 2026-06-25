@@ -101,6 +101,41 @@ TECHNICAL_TASK_SIGNALS = (
     "pydantic",
 )
 
+TECH_LEAD_DIRECT_TASK_TERMS = (
+    "basic programming test",
+    "coding test",
+    "programming skill test",
+    "write code",
+    "write a code",
+    "write a snippet",
+    "write a short snippet",
+    "write sql",
+    "write a sql",
+    "write query",
+    "write a query",
+    "write a dockerfile",
+    "filter even numbers",
+    "return a new list",
+    "kiểm tra kỹ năng lập trình",
+    "kiểm tra lập trình",
+    "viết code",
+    "viết một đoạn code",
+    "viết đoạn code",
+    "viết một đoạn mã",
+    "viết đoạn mã",
+    "viết mã",
+    "viết sql",
+    "viết một câu lệnh sql",
+    "viết câu lệnh sql",
+    "viết một truy vấn",
+    "viết query",
+    "viết truy vấn",
+    "viết dockerfile",
+    "viết nội dung dockerfile",
+    "lọc ra các số chẵn",
+    "trả về một danh sách",
+)
+
 REPORT_DIMENSIONS = {
     "technical_knowledge": ("Kiến thức chuyên môn", 30),
     "practical_experience": ("Kinh nghiệm thực tế", 20),
@@ -654,12 +689,32 @@ def _validate_candidate_question(
     if context and context.interview_config.interview_mode == "tech_lead":
         if any(term in normalized for term in TECH_LEAD_LABEL_TERMS):
             raise ValueError("Tech lead question exposes an internal competency label")
+        if (
+            context.history
+            and _is_tech_lead_direct_task(context.history[-1].question)
+            and _is_tech_lead_direct_task(question)
+        ):
+            raise ValueError("Tech lead question repeats a direct coding/query task")
+        if _is_tech_lead_direct_task(question) and _tech_lead_direct_task_count(context) >= 2:
+            raise ValueError("Tech lead has reached the direct coding/query task limit")
 
 
 def _normalize_question(question: str) -> str:
     value = unicodedata.normalize("NFKD", question.casefold())
     value = "".join(character for character in value if not unicodedata.combining(character))
     return " ".join(re.findall(r"\w+", value, flags=re.UNICODE))
+
+
+def _is_tech_lead_direct_task(question: str) -> bool:
+    normalized = _normalize_question(question)
+    return any(
+        _normalize_question(term) in normalized
+        for term in TECH_LEAD_DIRECT_TASK_TERMS
+    )
+
+
+def _tech_lead_direct_task_count(context: InterviewRuntimeContext) -> int:
+    return sum(1 for turn in context.history if _is_tech_lead_direct_task(turn.question))
 
 
 def _find_similar_question(question: str, previous_questions: list[str]) -> str | None:
@@ -684,6 +739,38 @@ def _is_technical_check(context: InterviewRuntimeContext) -> bool:
     return context.interview_config.interview_mode == "technical_check"
 
 
+def _has_jd_scenario_evidence(context: InterviewRuntimeContext) -> bool:
+    return any(turn.topic_key.startswith("jd_scenario_") for turn in context.history)
+
+
+def _jd_scenario_plan(context: InterviewRuntimeContext) -> QuestionPlan:
+    responsibility = next(
+        (
+            item.strip()
+            for item in context.job_description.responsibilities
+            if item.strip()
+        ),
+        context.job_description.title or context.interview_config.target_role,
+    )
+    role = context.interview_config.target_role or context.job_description.title or "this role"
+    source_reference = responsibility or role
+    normalized = normalize_skills([source_reference or role])
+    topic_suffix = (normalized[0] if normalized else "role_workflow")[:100]
+    return QuestionPlan(
+        question_type="transition",
+        difficulty="medium",
+        target_competency=f"{role} workflow scenario",
+        source_type="jd_requirement",
+        source_reference=source_reference[:500],
+        evidence_gap=(
+            "The interview has not yet checked how the candidate applies the JD "
+            "requirements to a realistic engineering workflow."
+        ),
+        question_intent="jd_work_scenario",
+        topic_key=f"jd_scenario_{topic_suffix}",
+    )
+
+
 def _next_fallback_skill(
     context: InterviewRuntimeContext,
     coverage: CoverageState,
@@ -692,13 +779,28 @@ def _next_fallback_skill(
         item
         for item in coverage.skills
         if item.status != "verified"
+        and item.evidence_count == 0
         and item.ownership != "not_owned"
+        and not item.stop_reason
         and f"verify_{item.skill_id}" != context.current_topic
     ]
     if _is_technical_check(context):
         matched = [item for item in candidates if item.status == "claimed"]
         if matched:
             return sorted(matched, key=lambda item: item.skill)[0]
+    if context.interview_config.interview_mode == "tech_lead":
+        matched_must_have = [
+            item for item in candidates if item.priority == "must_have" and item.status == "claimed"
+        ]
+        if matched_must_have:
+            return matched_must_have[0]
+        jd_only_must_have = [
+            item
+            for item in candidates
+            if item.priority == "must_have" and item.status == "not_assessed"
+        ]
+        if jd_only_must_have:
+            return jd_only_must_have[0]
     return next((item for item in candidates if item.priority == "must_have"), None)
 
 
@@ -807,6 +909,12 @@ def _fallback_plan(
             context.interview_config.max_follow_ups_per_topic,
             1,
         )
+        and (
+            previous_evaluation is None
+            or previous_evaluation.topic_decision in {"clarify", "learning_probe"}
+            or previous_evaluation.answer_quality in {"vague", "partial", "irrelevant"}
+            or bool(previous_evaluation.missing_evidence)
+        )
         and (topic_state is None or topic_state.ownership != "not_owned")
         and (topic_state is None or topic_state.consecutive_weak_answers < 1)
         and (topic_state is None or not topic_state.stop_reason)
@@ -855,6 +963,12 @@ def _fallback_plan(
             question_intent="Understand why the candidate wants this role.",
             topic_key="career_motivation",
         )
+    elif (
+        context.interview_config.interview_mode == "tech_lead"
+        and not target
+        and not _has_jd_scenario_evidence(context)
+    ):
+        plan = _jd_scenario_plan(context)
     else:
         skill = target.skill if target else "technical problem solving"
         plan = QuestionPlan(
@@ -977,6 +1091,18 @@ def _fallback_question(
         )
     if _is_technical_check(context):
         return _technical_fallback_question(context, competency)
+    if plan.topic_key.startswith("jd_scenario_"):
+        if language.startswith("vi"):
+            return (
+                f"Giả sử trong vai trò {context.interview_config.target_role or context.job_description.title or 'này'}, "
+                f"team giao em một yêu cầu liên quan đến {plan.source_reference or competency}. "
+                "Em sẽ thiết kế flow xử lý, tách các thành phần, và xử lý lỗi chính như thế nào?"
+            )
+        return (
+            f"Suppose that in {context.interview_config.target_role or context.job_description.title or 'this role'}, "
+            f"the team gives you a requirement related to {plan.source_reference or competency}. "
+            "How would you design the processing flow, split components, and handle the main failure case?"
+        )
     if language.startswith("vi"):
         if (
             planner.previous_answer_evaluation
@@ -1348,9 +1474,11 @@ def _has_enough_evidence_to_finish(
             for item in must_have
             if item.evidence_count > 0 and item.status not in {"not_assessed", "claimed"}
         ]
-        required_count = min(2, len(must_have))
+        required_count = len(must_have)
         if len(assessed_must_have) < required_count:
             return False
+    if not _has_jd_scenario_evidence(context):
+        return False
 
     phases = {turn.phase for turn in context.history}
     if "cv_verification" not in phases:
