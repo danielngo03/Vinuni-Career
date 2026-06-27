@@ -96,6 +96,9 @@ TECHNICAL_TASK_SIGNALS = (
     "kiem tra",
     "dau vao",
     "dau ra",
+    "thiet ke",
+    "flow",
+    "xu ly",
     "status",
     "uvicorn",
     "pydantic",
@@ -613,7 +616,12 @@ def _validate_planner(planner: PlannerOutput, context: InterviewRuntimeContext) 
                 and evaluation.topic_decision != "learning_probe"
             )
         )
-        follow_up_limit = 1 if evaluation.answer_quality in {"vague", "irrelevant"} else 2
+        follow_up_limit = (
+            1
+            if _is_technical_check(context)
+            or evaluation.answer_quality in {"vague", "irrelevant"}
+            else 2
+        )
         can_follow_up = (
             context.follow_up_count < min(config.max_follow_ups_per_topic, follow_up_limit)
             and not must_stop
@@ -739,6 +747,82 @@ def _is_technical_check(context: InterviewRuntimeContext) -> bool:
     return context.interview_config.interview_mode == "technical_check"
 
 
+def _technical_skill_category(skill_or_text: str) -> str:
+    normalized = _normalize_question(skill_or_text)
+    if any(term in normalized for term in {"python", "javascript", "typescript", "java", "go", "csharp"}):
+        return "language"
+    if any(term in normalized for term in {"fastapi", "django", "flask", "api", "endpoint", "pydantic", "jwt"}):
+        return "api"
+    if any(
+        term in normalized
+        for term in {
+            "sql",
+            "postgresql",
+            "postgres",
+            "mysql",
+            "mongodb",
+            "mongo",
+            "database",
+            "db",
+            "du lieu",
+            "co so du lieu",
+            "truy van",
+        }
+    ):
+        return "database"
+    if any(term in normalized for term in {"docker", "container", "compose", "uvicorn", "deploy"}):
+        return "tooling"
+    if any(term in normalized for term in {"ai", "model", "mo hinh", "rag", "vector", "embedding", "llm"}):
+        return "ai"
+    if any(term in normalized for term in {"debug", "kiem tra", "log", "loi", "exception", "error", "500", "traceback", "timeout"}):
+        return "debugging"
+    if any(term in normalized for term in {"edge", "case", "null", "empty", "rong", "thieu", "missing", "invalid", "422"}):
+        return "edge_case"
+    return "general"
+
+
+def _technical_covered_categories(
+    context: InterviewRuntimeContext,
+    coverage: CoverageState,
+) -> set[str]:
+    skill_by_topic = {f"verify_{item.skill_id}": item.skill for item in coverage.skills}
+    categories: set[str] = set()
+    for turn in context.history:
+        text = f"{turn.topic_key} {turn.question} {turn.answer}"
+        topic_skill = skill_by_topic.get(turn.topic_key)
+        if topic_skill:
+            categories.add(_technical_skill_category(topic_skill))
+        category = _technical_skill_category(text)
+        if category != "general":
+            categories.add(category)
+        normalized_text = _normalize_question(text)
+        if any(term in normalized_text for term in {"debug", "kiem tra", "log", "loi", "exception", "error", "500", "traceback", "timeout", "try except", "zerodivisionerror"}):
+            categories.add("debugging")
+        if any(term in normalized_text for term in {"edge", "case", "null", "empty", "rong", "thieu", "missing", "invalid", "422"}):
+            categories.add("edge_case")
+    return categories
+
+
+def _technical_skill_has_evidence(
+    item: CoverageItem,
+    context: InterviewRuntimeContext,
+    evaluation_state: EvaluationState,
+) -> bool:
+    if item.evidence_count > 0 and item.status not in {"not_assessed", "claimed"}:
+        return True
+    skill_name = _normalize_question(item.skill)
+    skill_category = _technical_skill_category(item.skill)
+    for turn in context.history:
+        text = f"{turn.topic_key} {turn.question} {turn.answer}"
+        normalized_text = _normalize_question(text)
+        if skill_name not in normalized_text and _technical_skill_category(text) != skill_category:
+            continue
+        topic_state = evaluation_state.topic_evidence.get(turn.topic_key)
+        if topic_state and topic_state.evidence_found and topic_state.ownership != "not_owned":
+            return True
+    return False
+
+
 def _has_jd_scenario_evidence(context: InterviewRuntimeContext) -> bool:
     return any(turn.topic_key.startswith("jd_scenario_") for turn in context.history)
 
@@ -785,9 +869,17 @@ def _next_fallback_skill(
         and f"verify_{item.skill_id}" != context.current_topic
     ]
     if _is_technical_check(context):
-        matched = [item for item in candidates if item.status == "claimed"]
-        if matched:
-            return sorted(matched, key=lambda item: item.skill)[0]
+        covered_categories = _technical_covered_categories(context, coverage)
+
+        def technical_rank(item: CoverageItem) -> tuple[int, int, str]:
+            category = _technical_skill_category(item.skill)
+            source_rank = 0 if item.priority == "must_have" else 1 if item.priority == "nice_to_have" else 2
+            category_rank = 0 if category not in covered_categories else 1
+            status_rank = 0 if item.status == "claimed" else 1
+            return (category_rank, source_rank, status_rank, item.skill)
+
+        if candidates:
+            return sorted(candidates, key=technical_rank)[0]
     if context.interview_config.interview_mode == "tech_lead":
         matched_must_have = [
             item for item in candidates if item.priority == "must_have" and item.status == "claimed"
@@ -1193,7 +1285,13 @@ def _technical_fallback_question(
     language = context.interview_config.language.lower()
     normalized = _normalize_question(competency)
     if language.startswith("vi"):
-        if "mongodb" in normalized or "mongo" in normalized:
+        if normalized in {"technical problem solving", "technical debugging detail"}:
+            candidates = [
+                "Một endpoint FastAPI trả 500 khi nhận request JSON hợp lệ. Em sẽ kiểm tra request body, log, stack trace và service/database layer theo thứ tự nào?",
+                "Một API gọi model AI thỉnh thoảng bị timeout. Em sẽ đặt timeout, log latency/status và trả fallback response như thế nào?",
+                "Nếu request thiếu field bắt buộc, em muốn API trả 422 thay vì 500. Em sẽ dùng schema hoặc validation nào để xử lý?",
+            ]
+        elif "mongodb" in normalized or "mongo" in normalized:
             candidates = [
                 "Cho collection `orders` có các field `user_id`, `status`, `created_at`. Em viết MongoDB query lấy 10 đơn hàng mới nhất của một user đang ở trạng thái `paid` như thế nào?",
                 "Với MongoDB, em sẽ tạo index nào cho query lọc theo `user_id`, `status` và sắp xếp theo `created_at` giảm dần?",
@@ -1242,7 +1340,13 @@ def _technical_fallback_question(
                 f"Với {competency}, em nêu một edge case làm solution dễ fail và cách xử lý trong code hoặc config?",
             ]
     else:
-        if "mongodb" in normalized or "mongo" in normalized:
+        if normalized in {"technical problem solving", "technical debugging detail"}:
+            candidates = [
+                "A FastAPI endpoint returns 500 for a valid JSON request. In what order would you inspect the request body, logs, stack trace, and service/database layer?",
+                "An API call to an AI model sometimes times out. How would you set the timeout, log latency/status, and return a fallback response?",
+                "If a request is missing a required field, how would you make the API return 422 instead of 500 using schema validation?",
+            ]
+        elif "mongodb" in normalized or "mongo" in normalized:
             candidates = [
                 "Given an `orders` collection with `user_id`, `status`, and `created_at`, what MongoDB query returns the 10 newest paid orders for one user?",
                 "What MongoDB index would you create for filtering by `user_id` and `status` while sorting by `created_at` descending?",
@@ -1452,12 +1556,17 @@ def _has_enough_evidence_to_finish(
 ) -> bool:
     answered_questions = context.question_count
     if _is_technical_check(context):
-        if answered_questions < 3:
+        if answered_questions < max(5, context.interview_config.min_questions):
+            return False
+        covered_categories = _technical_covered_categories(context, coverage)
+        if len(covered_categories) < 4:
+            return False
+        if not covered_categories.intersection({"debugging", "edge_case"}):
             return False
         must_have = [item for item in coverage.skills if item.priority == "must_have"]
         if must_have:
             return all(
-                item.evidence_count > 0 and item.status not in {"not_assessed", "claimed"}
+                _technical_skill_has_evidence(item, context, evaluation_state)
                 for item in must_have
             )
         return len(evaluation_state.competency_status) >= 2

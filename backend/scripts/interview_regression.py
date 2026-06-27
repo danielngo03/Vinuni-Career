@@ -304,6 +304,28 @@ def _answer_for(style: str, question: str) -> str:
     if style == "technical_weak":
         return "Em chưa chắc cú pháp, nhưng em sẽ thử chạy và xem lỗi trước."
     if style == "technical_strong":
+        if "modulenotfounderror" in lower or "module not found" in lower:
+            return (
+                "Em xem `docker logs`, chạy shell bằng `docker run --rm -it image sh` hoặc "
+                "`docker run --rm --entrypoint sh image`, kiểm tra `pwd`, `ls`, `pip show package`, "
+                "đường dẫn `app.main:app`, và thứ tự `COPY requirements.txt` trước `pip install`."
+            )
+        if "multi-stage" in lower or "multi stage" in lower:
+            return (
+                "Em dùng builder stage để cài dependencies vào `/install`, runtime stage dùng `python:3.12-slim`, "
+                "copy artifact cần thiết, thêm `RUN adduser --disabled-password appuser`, `USER appuser`, "
+                "và chỉ copy source cần chạy để giảm image size."
+            )
+        if "layer caching" in lower or ("copy" in lower and "requirements" in lower and "source" in lower):
+            return (
+                "Em copy `requirements.txt` trước rồi `RUN pip install -r requirements.txt`, sau đó mới `COPY . .`. "
+                "Như vậy khi chỉ đổi source code, layer cài dependency vẫn được cache."
+            )
+        if "appuser" in lower or ("root" in lower and "user" in lower and "docker" in lower):
+            return (
+                "Em thêm `RUN adduser --disabled-password --gecos '' appuser`, "
+                "`RUN chown -R appuser:appuser /app`, rồi đặt `USER appuser` trước `CMD`."
+            )
         if "dockerfile" in lower:
             return (
                 "Em dùng `FROM python:3.12-slim`, `WORKDIR /app`, copy requirements, "
@@ -322,12 +344,55 @@ def _answer_for(style: str, question: str) -> str:
                 "từ env, nếu token thiếu hoặc sai thì raise `HTTPException(status_code=401)`. Endpoint cần auth "
                 "sẽ khai báo `current_user = Depends(get_current_user)`."
             )
+        if "depends" in lower or ("pydantic" in lower and "code" in lower):
+            return (
+                "Em viết `class LoginRequest(BaseModel): email: EmailStr; password: str`, "
+                "`def check_db(): return True`, rồi `@app.post('/login')` "
+                "`def login(payload: LoginRequest, ok: bool = Depends(check_db)): return {'email': payload.email}`."
+            )
+        if "500" in lower and ("log" in lower or "endpoint" in lower or "debug" in lower):
+            return (
+                "Em reproduce bằng cURL với cùng body/header, bật `uvicorn --log-level debug`, "
+                "thêm request id, log trước/sau service và DB call, xem stack trace, rồi viết test case cố định lỗi."
+            )
+        if "field" in lower and ("json" in lower or "pydantic" in lower):
+            return (
+                "Em tách nested model như `class WeatherMain(BaseModel): temp: float | None = None`, "
+                "`class WeatherResponse(BaseModel): main: WeatherMain | None = None`, "
+                "dùng default/optional field và kiểm tra `None` trước khi đọc dữ liệu."
+            )
         if "fastapi" in lower or "endpoint" in lower:
             return (
                 "Em tạo Pydantic model gồm `email: EmailStr`, `password: str`, endpoint POST. "
                 "Input thiếu field FastAPI trả 422, sai password trả 401, lỗi server mới là 500."
             )
         if "sql" in lower or "query" in lower:
+            if "%@gmail.com" in lower or "ký tự đại diện" in lower or "wildcard" in lower:
+                return (
+                    "LIKE '%@gmail.com' có wildcard đầu chuỗi nên B-tree index thường không seek hiệu quả. "
+                    "Em có thể lưu domain email ở cột riêng, index cột đó, hoặc dùng index phù hợp cho pattern search."
+                )
+            if "customer_id" in lower and ("5" in lower or "order_id" in lower):
+                return (
+                    "Em viết `SELECT customer_id, COUNT(order_id) AS order_count FROM orders "
+                    "GROUP BY customer_id HAVING COUNT(order_id) >= 5;`."
+                )
+            if "inner join" in lower or ("orders" in lower and "users" in lower and "amount" in lower):
+                return (
+                    "Em viết `SELECT u.name, SUM(o.amount) AS total_amount "
+                    "FROM users u INNER JOIN orders o ON o.user_id = u.id "
+                    "GROUP BY u.id, u.name;`."
+                )
+            if "name" in lower and ("count" in lower or "nhiều hơn một lần" in lower or "cùng một tên" in lower):
+                return (
+                    "Em viết `SELECT name, COUNT(*) AS user_count FROM users "
+                    "GROUP BY name HAVING COUNT(*) > 1;`."
+                )
+            if "customer_id" in lower and "order_date" in lower and "2024" in lower:
+                return (
+                    "Em viết `SELECT DISTINCT customer_id FROM orders "
+                    "WHERE order_date >= DATE '2024-01-01' AND order_date < DATE '2024-02-01';`."
+                )
             if "gmail" in lower:
                 return "Em viết `SELECT name, email FROM users WHERE email LIKE '%@gmail.com';`."
             return (
@@ -340,6 +405,10 @@ def _answer_for(style: str, question: str) -> str:
             return "Em viết `for x in range(1, 11):\\n    if x % 2 == 0:\\n        print(x)`."
         if "danh sách" in lower or "list" in lower:
             return "Em viết `numbers = [1, 2, 3, 4, 5]` rồi xử lý bằng vòng lặp hoặc list comprehension tùy yêu cầu."
+        if "map" in lower:
+            return "Em viết `result = list(map(lambda x: x * x, [1, 2, 3, 4]))`, output là `[1, 4, 9, 16]`."
+        if "dictionary" in lower or "'diem'" in lower:
+            return "Em viết `student = {'ten': 'An', 'diem': 8}; student['diem'] = 9; print(student)`."
         if "try-except" in lower or "chia" in lower:
             return (
                 "Em viết `try: result = a / b` rồi `except ZeroDivisionError: return None` hoặc trả lỗi rõ ràng. "
@@ -387,8 +456,10 @@ def _answer_for(style: str, question: str) -> str:
             "JOIN orders o ON o.user_id = u.id GROUP BY u.id, u.name HAVING SUM(o.amount) > 1000000;`. "
             "Nếu query chậm em xem `EXPLAIN`, index trên `orders.user_id`, và số dòng sau JOIN."
         )
-    if "list comprehension" in lower or "sá»‘ cháºµn" in lower or "so chan" in lower:
-        return "Em viết `[x * x for x in numbers if x % 2 == 0]`; với `[1, 2, 3, 4]` thì output là `[4, 16]`."
+        if "map" in lower:
+            return "Em viết `result = list(map(lambda x: x * x, [1, 2, 3, 4]))`, output là `[1, 4, 9, 16]`."
+        if "list comprehension" in lower or "sá»‘ cháºµn" in lower or "so chan" in lower:
+            return "Em viết `[x * x for x in numbers if x % 2 == 0]`; với `[1, 2, 3, 4]` thì output là `[4, 16]`."
     if "try-except" in lower or "connectionerror" in lower or "exception" in lower:
         return (
             "Em viết `try: data = fetch_data()` rồi `except ConnectionError as exc: "
@@ -430,6 +501,7 @@ def _provider_flags(metadata: dict) -> list[str]:
         "Tech lead question repeats a direct coding/query task",
         "Tech lead has reached the direct coding/query task limit",
         "follow_up_count must reset when switching topics",
+        "Technical check question is behavioral or communication-focused",
     )
     for feature in ("planner", "question_generator", "report"):
         feature_meta = metadata.get(feature) or {}

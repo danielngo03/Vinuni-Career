@@ -15,7 +15,11 @@ from app.ai.interview.schemas import (
     MatchingResult,
     TopicEvidenceState,
 )
-from app.ai.interview.service import generate_interview_report, generate_next_turn
+from app.ai.interview.service import (
+    _has_enough_evidence_to_finish,
+    generate_interview_report,
+    generate_next_turn,
+)
 
 
 class FakeGateway:
@@ -277,6 +281,140 @@ def test_technical_check_rejects_behavioral_question_and_falls_back_to_task():
     assert "Dockerfile" in result.question
     assert "tình huống cụ thể" not in result.question
     assert result.provider_metadata["question_generator"]["attempts"] == 2
+
+
+def test_technical_check_overrides_early_finish_until_debug_or_edge_coverage():
+    gateway = FakeGateway(
+        [
+            _planner(
+                action="finish_interview",
+                current_phase="completed",
+                question_plan={
+                    "question_type": "closing",
+                    "difficulty": "easy",
+                    "target_competency": "interview completion",
+                    "source_type": "general",
+                    "source_reference": "",
+                    "evidence_gap": "",
+                    "question_intent": "finish_interview",
+                    "topic_key": "completed",
+                    "linked_skill_ids": [],
+                },
+                should_end_interview=True,
+            ),
+            {"question": "If a FastAPI endpoint returns 500, what logs and request details would you inspect first?"},
+        ]
+    )
+    runtime = _runtime(
+        interview_config=_runtime().interview_config.model_copy(
+            update={
+                "interview_mode": "technical_check",
+                "current_phase": "problem_solving",
+                "allowed_next_phases": ["cv_verification", "problem_solving", "completed"],
+                "min_questions": 3,
+                "max_questions": 10,
+            }
+        ),
+        coverage_state=CoverageState(
+            skills=[
+                CoverageItem(
+                    skill_id="python",
+                    skill="Python",
+                    source="jd_requirement",
+                    priority="must_have",
+                    status="verified",
+                    evidence_count=1,
+                ),
+                CoverageItem(
+                    skill_id="fastapi",
+                    skill="FastAPI",
+                    source="jd_requirement",
+                    priority="must_have",
+                    status="verified",
+                    evidence_count=1,
+                ),
+                CoverageItem(
+                    skill_id="docker",
+                    skill="Docker",
+                    source="jd_requirement",
+                    priority="must_have",
+                    status="verified",
+                    evidence_count=1,
+                ),
+            ]
+        ),
+        history=[
+            ConversationTurn(question="Write a Python function.", answer="def f(): pass", phase="cv_verification", topic_key="verify_python"),
+            ConversationTurn(question="Write a FastAPI endpoint.", answer="@app.post('/items')", phase="cv_verification", topic_key="verify_fastapi"),
+            ConversationTurn(question="Write a Dockerfile.", answer="FROM python:3.12-slim", phase="problem_solving", topic_key="verify_docker"),
+            ConversationTurn(question="Write a small API request body.", answer="{'email': 'a@b.com'}", phase="problem_solving", topic_key="verify_fastapi"),
+            ConversationTurn(question="What status code should create return?", answer="201", phase="problem_solving", topic_key="verify_fastapi"),
+        ],
+        question_count=5,
+    )
+
+    result = generate_next_turn(runtime, gateway=gateway)
+
+    assert result.question
+    assert "500" in result.question
+    assert result.planner_output.action != "finish_interview"
+
+
+def test_technical_check_can_finish_with_non_verify_topic_evidence():
+    coverage = CoverageState(
+        skills=[
+            CoverageItem(
+                skill_id="python",
+                skill="Python",
+                source="jd_requirement",
+                priority="must_have",
+                status="claimed",
+            ),
+            CoverageItem(
+                skill_id="fastapi",
+                skill="FastAPI",
+                source="jd_requirement",
+                priority="must_have",
+                status="claimed",
+            ),
+            CoverageItem(
+                skill_id="docker",
+                skill="Docker",
+                source="jd_requirement",
+                priority="must_have",
+                status="claimed",
+            ),
+        ]
+    )
+    runtime = _runtime(
+        interview_config=_runtime().interview_config.model_copy(
+            update={
+                "interview_mode": "technical_check",
+                "current_phase": "problem_solving",
+                "min_questions": 3,
+                "max_questions": 10,
+            }
+        ),
+        history=[
+            ConversationTurn(question="Write a FastAPI endpoint.", answer="Used Pydantic and Depends.", phase="cv_verification", topic_key="fastapi_implementation"),
+            ConversationTurn(question="Write a Dockerfile.", answer="FROM python:3.12-slim", phase="cv_verification", topic_key="docker_implementation"),
+            ConversationTurn(question="Write SQL GROUP BY.", answer="SELECT user_id, SUM(total) FROM orders GROUP BY user_id", phase="problem_solving", topic_key="sql_query_task"),
+            ConversationTurn(question="Write Python list comprehension.", answer="[x*x for x in xs if x % 2 == 0]", phase="problem_solving", topic_key="verify_python"),
+            ConversationTurn(question="Handle ZeroDivisionError.", answer="Use try-except ZeroDivisionError.", phase="problem_solving", topic_key="technical_problem_solving"),
+        ],
+        question_count=5,
+    )
+    evaluation = EvaluationState(
+        topic_evidence={
+            "fastapi_implementation": TopicEvidenceState(evidence_found=["Implemented FastAPI endpoint"]),
+            "docker_implementation": TopicEvidenceState(evidence_found=["Wrote Dockerfile"]),
+            "sql_query_task": TopicEvidenceState(evidence_found=["Wrote SQL query"]),
+            "verify_python": TopicEvidenceState(evidence_found=["Used Python list comprehension"]),
+            "technical_problem_solving": TopicEvidenceState(evidence_found=["Handled ZeroDivisionError"]),
+        }
+    )
+
+    assert _has_enough_evidence_to_finish(runtime, coverage, evaluation) is True
 
 
 def test_tech_lead_rejects_internal_communication_label_question():

@@ -1,0 +1,700 @@
+{
+  "case": "technical_check_strong_candidate",
+  "mode": "technical_check",
+  "answer_style": "technical_strong",
+  "max_questions": 10,
+  "generated_at": "2026-06-25T08:37:33.969388+00:00",
+  "flags": [
+    "strong candidate reached max instead of stopping early"
+  ],
+  "report": {
+    "overall_score": 31,
+    "overall_summary": "Ứng viên thể hiện kiến thức lý thuyết cơ bản về FastAPI, Docker và Python nhưng gặp khó khăn lớn trong việc thực hiện các yêu cầu kỹ thuật cụ thể. Ứng viên thường xuyên bỏ qua các yêu cầu viết code, không tuân thủ schema dữ liệu được cung cấp trong bài kiểm tra SQL, và có xu hướng lặp lại câu trả lời cũ khi được yêu cầu cải thiện hoặc sửa lỗi. Kỹ năng chú ý đến chi tiết và khả năng làm theo hướng dẫn kỹ thuật còn hạn chế.",
+    "dimensions": [
+      {
+        "key": "technical_knowledge",
+        "label": "Kiến thức chuyên môn",
+        "score": 40,
+        "weight": 30,
+        "summary": "Nắm vững các khái niệm cơ bản về FastAPI, Dockerfile và cú pháp Python, nhưng thiếu khả năng áp dụng vào các tình huống cụ thể.",
+        "evidence": [
+          "Hiểu về Pydantic validation và mã trạng thái HTTP.",
+          "Biết cách cấu trúc một Dockerfile cơ bản.",
+          "Hiểu cú pháp list comprehension và try-except trong Python."
+        ]
+      },
+      {
+        "key": "practical_experience",
+        "label": "Độ đúng code/query",
+        "score": 25,
+        "weight": 25,
+        "summary": "Kém trong việc thực thi code thực tế. Ứng viên liên tục không cung cấp đoạn code được yêu cầu dù đã được nhắc nhở nhiều lần.",
+        "evidence": [
+          "Không cung cấp code FastAPI theo yêu cầu.",
+          "Không tuân thủ schema bảng 'orders' trong bài tập SQL.",
+          "Lặp lại nội dung Dockerfile cũ thay vì thực hiện tối ưu hóa."
+        ]
+      },
+      {
+        "key": "problem_solving",
+        "label": "Debug và giải quyết vấn đề",
+        "score": 30,
+        "weight": 25,
+        "summary": "Khả năng giải quyết vấn đề bị hạn chế do không chú ý đến các ràng buộc của đề bài.",
+        "evidence": [
+          "Sử dụng các cột không tồn tại trong schema SQL dù đã được nhắc nhở.",
+          "Không thực hiện được yêu cầu multi-stage build trong Docker.",
+          "Giải thích logic không nhất quán với kết quả code."
+        ]
+      },
+      {
+        "key": "communication",
+        "label": "Giải thích kỹ thuật",
+        "score": 35,
+        "weight": 10,
+        "summary": "Khả năng truyền đạt kỹ thuật còn yếu, thường xuyên bỏ qua các yêu cầu cụ thể của người phỏng vấn.",
+        "evidence": [
+          "Lặp lại câu trả lời cũ khi được hỏi về cải tiến.",
+          "Không phản hồi trực tiếp vào yêu cầu viết code."
+        ]
+      },
+      {
+        "key": "critical_thinking",
+        "label": "Edge cases và hiệu năng",
+        "score": 20,
+        "weight": 10,
+        "summary": "Thiếu sự cẩn trọng trong việc xử lý các yêu cầu kỹ thuật và không có khả năng tự điều chỉnh khi có phản hồi.",
+        "evidence": [
+          "Bỏ qua các ràng buộc schema trong SQL.",
+          "Không thực hiện các bước tối ưu hóa Docker dù đã được gợi ý.",
+          "Thiếu sự kiểm tra lại logic code trước khi trả lời."
+        ]
+      }
+    ],
+    "strengths": [
+      "Nắm vững lý thuyết cơ bản về FastAPI và Pydantic.",
+      "Hiểu cách cấu trúc Dockerfile cơ bản.",
+      "Biết cách sử dụng các cấu trúc Python cơ bản như list comprehension và try-except."
+    ],
+    "improvements": [
+      "Cần tập trung đọc kỹ yêu cầu đề bài và tuân thủ schema dữ liệu được cung cấp.",
+      "Cần thực hành viết code thực tế thay vì chỉ mô tả lý thuyết.",
+      "Cần học cách tối ưu hóa Docker image (multi-stage build) và bảo mật (non-root user).",
+      "Cần cải thiện khả năng lắng nghe và phản hồi đúng trọng tâm câu hỏi của người phỏng vấn."
+    ],
+    "insufficient_evidence": [
+      "Khả năng viết code FastAPI hoàn chỉnh với Dependency Injection.",
+      "Khả năng thực hiện tối ưu hóa Docker image bằng multi-stage build.",
+      "Khả năng viết truy vấn SQL phức tạp dựa trên schema cho trước."
+    ],
+    "action_plan": [
+      "Thực hành viết một ứng dụng FastAPI đơn giản có kết nối database và sử dụng Depends.",
+      "Viết lại Dockerfile cho ứng dụng FastAPI sử dụng multi-stage build và non-root user.",
+      "Luyện tập các bài tập SQL trên LeetCode hoặc HackerRank, chú trọng vào việc tuân thủ schema.",
+      "Thực hiện các bài tập code Python nhỏ và kiểm tra kỹ output trước khi kết luận."
+    ],
+    "confidence": "high"
+  },
+  "report_metadata": {
+    "provider": "gemini",
+    "model": "gemini-3.1-flash-lite",
+    "input_tokens": 6101,
+    "output_tokens": 1031,
+    "attempts": 1
+  },
+  "answer_evaluations": [
+    {
+      "sequence": 1,
+      "question": "Trong FastAPI, làm thế nào để bạn định nghĩa một endpoint nhận dữ liệu JSON từ client và sử dụng Pydantic model để validate dữ liệu đó? Hãy viết một đoạn code ví dụ ngắn gọn.",
+      "answer": "Em tạo Pydantic model gồm `email: EmailStr`, `password: str`, endpoint POST. Input thiếu field FastAPI trả 422, sai password trả 401, lỗi server mới là 500.",
+      "evaluation": {
+        "score": 3,
+        "status": "verified",
+        "answer_quality": "sufficient",
+        "strengths": [
+          "understands Pydantic validation",
+          "knows standard HTTP status codes"
+        ],
+        "missing_evidence": [
+          "no code snippet provided as requested"
+        ],
+        "contradictions": [],
+        "detected_competency": "FastAPI basics",
+        "evidence_found": [
+          "understands Pydantic model validation and status code mapping"
+        ],
+        "remaining_gap": "needs to demonstrate actual implementation syntax",
+        "ownership": "direct",
+        "topic_decision": "continue",
+        "reason_for_next_question": "Candidate described the logic correctly but did not provide the requested code snippet. Asking for a specific implementation detail to confirm syntax proficiency.",
+        "anti_repetition_check": "The previous question asked for a general explanation and code; this follow-up asks for a specific implementation detail (dependency injection) to verify depth.",
+        "ownership_check": "Focusing on the implementation of the previously mentioned login endpoint.",
+        "red_flags": [],
+        "communication": {
+          "clarity": 3,
+          "specificity": 3,
+          "relevance": 4,
+          "structure": 3,
+          "summary": "Candidate correctly identified Pydantic validation and status codes but missed the code snippet requirement."
+        }
+      }
+    },
+    {
+      "sequence": 2,
+      "question": "Cảm ơn bạn đã giải thích về logic xử lý lỗi. Để làm rõ hơn về cú pháp, bạn hãy viết một đoạn code ngắn sử dụng FastAPI để định nghĩa endpoint POST nhận dữ liệu từ Pydantic model mà bạn đã mô tả, bao gồm việc sử dụng `Depends` để inject một dependency đơn giản (ví dụ: kiểm tra kết nối database) vào endpoint đó.",
+      "answer": "Em tạo Pydantic model gồm `email: EmailStr`, `password: str`, endpoint POST. Input thiếu field FastAPI trả 422, sai password trả 401, lỗi server mới là 500.",
+      "evaluation": {
+        "score": 1,
+        "status": "partially_verified",
+        "answer_quality": "partial",
+        "strengths": [
+          "Understands status code mapping",
+          "Understands Pydantic validation"
+        ],
+        "missing_evidence": [
+          "Failed to provide the requested code snippet for dependency injection"
+        ],
+        "contradictions": [],
+        "detected_competency": "FastAPI basics",
+        "evidence_found": [
+          "Understands Pydantic model validation and status code mapping"
+        ],
+        "remaining_gap": "Needs to demonstrate actual implementation syntax for FastAPI dependencies",
+        "ownership": "direct",
+        "topic_decision": "stop",
+        "reason_for_next_question": "Candidate failed to provide the code snippet twice despite prompts. Switching to Docker to assess another must-have skill.",
+        "anti_repetition_check": "Moving from FastAPI implementation to Docker containerization.",
+        "ownership_check": "Previous topic was FastAPI, now moving to Docker as per JD requirements.",
+        "red_flags": [
+          "Repeatedly ignored request for code snippet"
+        ],
+        "communication": {
+          "clarity": 2,
+          "specificity": 2,
+          "relevance": 3,
+          "structure": 2,
+          "summary": "Candidate provided conceptual understanding but failed to provide the requested code snippet twice."
+        }
+      }
+    },
+    {
+      "sequence": 3,
+      "question": "Để đóng gói ứng dụng FastAPI của bạn vào một container, bạn hãy viết nội dung của một file Dockerfile đơn giản để build image cho ứng dụng đó, bao gồm các bước cơ bản như chọn base image, copy source code và cài đặt các thư viện từ file requirements.txt.",
+      "answer": "Em dùng `FROM python:3.12-slim`, `WORKDIR /app`, copy requirements, `RUN pip install -r requirements.txt`, copy source, `EXPOSE 8000`, và `CMD [\"uvicorn\", \"app.main:app\", \"--host\", \"0.0.0.0\", \"--port\", \"8000\"]`.",
+      "evaluation": {
+        "score": 4,
+        "status": "verified",
+        "answer_quality": "sufficient",
+        "strengths": [
+          "Correct Dockerfile syntax",
+          "Proper use of base image",
+          "Correct command to run FastAPI"
+        ],
+        "missing_evidence": [],
+        "contradictions": [],
+        "detected_competency": "Containerization basics",
+        "evidence_found": [
+          "Successfully wrote a functional Dockerfile for a FastAPI application"
+        ],
+        "remaining_gap": "Optimization techniques for production images",
+        "ownership": "direct",
+        "topic_decision": "continue",
+        "reason_for_next_question": "The candidate demonstrated basic Docker knowledge. Now checking for production-readiness (optimization).",
+        "anti_repetition_check": "Moving from basic syntax to optimization/trade-offs.",
+        "ownership_check": "The candidate provided the specific Dockerfile structure, confirming direct knowledge.",
+        "red_flags": [],
+        "communication": {
+          "clarity": 4,
+          "specificity": 4,
+          "relevance": 4,
+          "structure": 4,
+          "summary": "Candidate provided a correct and complete Dockerfile structure."
+        }
+      }
+    },
+    {
+      "sequence": 4,
+      "question": "Để tối ưu hóa kích thước image và tăng tính bảo mật cho Dockerfile bạn vừa viết, bạn sẽ thực hiện những thay đổi cụ thể nào, ví dụ như việc sử dụng multi-stage builds hoặc thay đổi user chạy ứng dụng?",
+      "answer": "Em dùng `FROM python:3.12-slim`, `WORKDIR /app`, copy requirements, `RUN pip install -r requirements.txt`, copy source, `EXPOSE 8000`, và `CMD [\"uvicorn\", \"app.main:app\", \"--host\", \"0.0.0.0\", \"--port\", \"8000\"]`.",
+      "evaluation": {
+        "score": 1,
+        "status": "partially_verified",
+        "answer_quality": "vague",
+        "strengths": [
+          "Provided a functional basic Dockerfile"
+        ],
+        "missing_evidence": [
+          "Optimization techniques",
+          "Security best practices (non-root user)",
+          "Multi-stage build implementation"
+        ],
+        "contradictions": [],
+        "detected_competency": "Basic Docker knowledge",
+        "evidence_found": [
+          "Understands basic Dockerfile structure for Python applications"
+        ],
+        "remaining_gap": "Needs to demonstrate understanding of production-grade Docker practices (multi-stage builds, security)",
+        "ownership": "direct",
+        "topic_decision": "clarify",
+        "reason_for_next_question": "The candidate repeated the previous answer instead of answering the specific question about optimization. I need to clarify the request for production-level improvements.",
+        "anti_repetition_check": "The question now explicitly asks for specific techniques (multi-stage, non-root) to avoid a generic repeat.",
+        "ownership_check": "The candidate claimed to have containerized a backend service; this is a direct check of that claim.",
+        "red_flags": [
+          "Repeated previous answer verbatim when asked for improvements"
+        ],
+        "communication": {
+          "clarity": 2,
+          "specificity": 1,
+          "relevance": 1,
+          "structure": 2,
+          "summary": "Candidate repeated the basic Dockerfile content instead of addressing the specific question about optimization and security."
+        }
+      }
+    },
+    {
+      "sequence": 5,
+      "question": "Bạn có thể viết lại Dockerfile đó bằng cách sử dụng kỹ thuật multi-stage build để tách biệt môi trường build và môi trường chạy ứng dụng, đồng thời thêm lệnh để tạo và sử dụng một user không có quyền root (non-root user) để chạy ứng dụng không?",
+      "answer": "Em thêm `RUN adduser --disabled-password --gecos '' appuser`, `RUN chown -R appuser:appuser /app`, rồi đặt `USER appuser` trước `CMD`.",
+      "evaluation": {
+        "score": 3,
+        "status": "partially_verified",
+        "answer_quality": "partial",
+        "strengths": [
+          "Correctly identified non-root user implementation steps"
+        ],
+        "missing_evidence": [
+          "Multi-stage build implementation"
+        ],
+        "contradictions": [],
+        "detected_competency": "Docker security",
+        "evidence_found": [
+          "Understands how to create and switch to a non-root user in a Dockerfile"
+        ],
+        "remaining_gap": "Multi-stage build implementation for image size optimization",
+        "ownership": "direct",
+        "topic_decision": "continue",
+        "reason_for_next_question": "The candidate addressed the security part of the previous question but missed the multi-stage build part. I need to verify this specific optimization technique.",
+        "anti_repetition_check": "This question specifically asks for the multi-stage build syntax which was missed in the previous turn.",
+        "ownership_check": "The candidate is explaining the implementation steps for a Dockerfile, which aligns with their claimed experience.",
+        "red_flags": [],
+        "communication": {
+          "clarity": 3,
+          "specificity": 3,
+          "relevance": 3,
+          "structure": 3,
+          "summary": "Candidate correctly identified the steps for non-root user implementation but did not provide the multi-stage build syntax."
+        }
+      }
+    },
+    {
+      "sequence": 6,
+      "question": "Để tiếp tục với phần SQL, giả sử bạn có bảng 'orders' với các cột 'order_id', 'customer_id', và 'order_date'. Bạn hãy viết một câu lệnh SQL để lấy ra danh sách 'customer_id' và tổng số đơn hàng của mỗi khách hàng, chỉ bao gồm những khách hàng đã đặt từ 5 đơn hàng trở lên.",
+      "answer": "Em dùng `GROUP BY user_id`, lọc `created_at >= now() - interval '30 days'`, và dùng `COALESCE(sum(total), 0)` nếu cần tránh NULL.",
+      "evaluation": {
+        "score": 1,
+        "status": "partially_verified",
+        "answer_quality": "irrelevant",
+        "strengths": [
+          "Demonstrates familiarity with SQL aggregation and filtering concepts"
+        ],
+        "missing_evidence": [
+          "Did not use the provided schema (order_id, customer_id, order_date)",
+          "Did not correctly implement the '5 orders or more' filter"
+        ],
+        "contradictions": [
+          "Used columns (user_id, created_at, total) not present in the prompt"
+        ],
+        "detected_competency": "SQL syntax",
+        "evidence_found": [
+          "Understands basic SQL aggregation"
+        ],
+        "remaining_gap": "Ability to map requirements to a specific provided schema",
+        "ownership": "direct",
+        "topic_decision": "clarify",
+        "reason_for_next_question": "The candidate ignored the provided schema and requirements. I need to ask them to re-apply the logic to the specific columns requested.",
+        "anti_repetition_check": "This is a clarification of the previous SQL task to ensure the candidate follows the schema constraints.",
+        "ownership_check": "The candidate is writing the query directly.",
+        "red_flags": [
+          "Ignored schema constraints provided in the prompt"
+        ],
+        "communication": {
+          "clarity": 2,
+          "specificity": 1,
+          "relevance": 1,
+          "structure": 2,
+          "summary": "The candidate provided a query using columns not defined in the prompt and failed to implement the count filter correctly."
+        }
+      }
+    },
+    {
+      "sequence": 7,
+      "question": "Cảm ơn bạn đã phản hồi. Tuy nhiên, hãy sử dụng đúng các cột 'order_id', 'customer_id' và 'order_date' từ bảng 'orders' mà tôi đã cung cấp. Bạn hãy viết lại câu lệnh SQL để lấy ra 'customer_id' và tổng số đơn hàng của mỗi khách hàng, với điều kiện chỉ hiển thị những khách hàng có từ 5 đơn hàng trở lên.",
+      "answer": "Em dùng `GROUP BY user_id`, lọc `created_at >= now() - interval '30 days'`, và dùng `COALESCE(sum(total), 0)` nếu cần tránh NULL.",
+      "evaluation": {
+        "score": 1,
+        "status": "contradicted",
+        "answer_quality": "irrelevant",
+        "strengths": [],
+        "missing_evidence": [
+          "Ability to follow specific schema constraints in SQL",
+          "Ability to adapt answers to specific follow-up prompts"
+        ],
+        "contradictions": [
+          "Used columns (user_id, created_at, total) not present in the prompt despite explicit correction"
+        ],
+        "detected_competency": "basic_sql_syntax",
+        "evidence_found": [
+          "Understands basic SQL aggregation"
+        ],
+        "remaining_gap": "Candidate consistently ignores specific constraints and repeats previous answers when asked for corrections.",
+        "ownership": "direct",
+        "topic_decision": "stop",
+        "reason_for_next_question": "The candidate has failed to address specific constraints or provide requested code snippets across multiple topics, and has repeated incorrect answers despite explicit guidance.",
+        "anti_repetition_check": "N/A",
+        "ownership_check": "N/A",
+        "red_flags": [
+          "Repeatedly ignored request for code snippet",
+          "Repeated previous answer verbatim when asked for improvements",
+          "Ignored schema constraints provided in the prompt"
+        ],
+        "communication": {
+          "clarity": 2,
+          "specificity": 1,
+          "relevance": 1,
+          "structure": 2,
+          "summary": "The candidate failed to follow the schema provided in the prompt for the second time, using columns not present in the table definition."
+        }
+      }
+    },
+    {
+      "sequence": 8,
+      "question": "Chúng ta hãy chuyển sang Python. Bạn hãy viết một đoạn code ngắn sử dụng list comprehension để lọc ra các số chẵn từ một danh sách các số nguyên cho trước, ví dụ: [1, 2, 3, 4, 5, 6].",
+      "answer": "Em viết `[x * x for x in [1, 2, 3, 4, 5, 6] if x % 2 == 0]`, output là `[4, 16, 36]`.",
+      "evaluation": {
+        "score": 1,
+        "status": "partially_verified",
+        "answer_quality": "partial",
+        "strengths": [
+          "Correct syntax for list comprehension"
+        ],
+        "missing_evidence": [
+          "Failed to provide the correct output for the logic described (4^2=16, 6^2=36, but 2^2=4; the list should be [4, 16, 36] but the logic was applied to the wrong set or misinterpreted)"
+        ],
+        "contradictions": [
+          "The logic provided [x*x for x in [1,2,3,4,5,6] if x%2==0] results in [4, 16, 36], but the candidate's explanation of the filtering logic was inconsistent with the requested task."
+        ],
+        "detected_competency": "basic_python_syntax",
+        "evidence_found": [
+          "Understands basic list comprehension syntax"
+        ],
+        "remaining_gap": "Attention to detail and ability to follow specific constraints.",
+        "ownership": "direct",
+        "topic_decision": "stop",
+        "reason_for_next_question": "The candidate has consistently failed to follow instructions, ignored schema constraints, and provided repetitive or incorrect answers despite multiple prompts. Further questioning is unlikely to yield reliable evidence.",
+        "anti_repetition_check": "N/A",
+        "ownership_check": "N/A",
+        "red_flags": [
+          "Repeatedly ignored request for code snippet",
+          "Repeated previous answer verbatim when asked for improvements",
+          "Ignored schema constraints provided in the prompt"
+        ],
+        "communication": {
+          "clarity": 2,
+          "specificity": 2,
+          "relevance": 2,
+          "structure": 2,
+          "summary": "The candidate provided the correct syntax for list comprehension but failed to demonstrate consistent attention to detail."
+        }
+      }
+    },
+    {
+      "sequence": 9,
+      "question": "Để kiểm tra khả năng xử lý lỗi cơ bản trong Python, bạn hãy viết một đoạn code sử dụng khối try-except để bắt lỗi ZeroDivisionError khi thực hiện phép chia một số cho 0 và in ra thông báo 'Lỗi chia cho số 0'.",
+      "answer": "Em viết `try: result = a / b` rồi `except ZeroDivisionError: return None` hoặc trả lỗi rõ ràng. Em cũng validate `b != 0` trước nếu đây là input từ request.",
+      "evaluation": {
+        "score": 2,
+        "status": "partially_verified",
+        "answer_quality": "sufficient",
+        "strengths": [
+          "Understands basic try-except block usage in Python",
+          "Recognizes the importance of input validation"
+        ],
+        "missing_evidence": [
+          "Did not provide a complete code snippet as requested"
+        ],
+        "contradictions": [],
+        "detected_competency": "basic_error_handling",
+        "evidence_found": [
+          "Understands basic try-except block usage in Python"
+        ],
+        "remaining_gap": "Attention to detail and ability to follow specific constraints.",
+        "ownership": "direct",
+        "topic_decision": "stop",
+        "reason_for_next_question": "The candidate has consistently failed to follow instructions, ignored schema constraints, and provided repetitive or incorrect answers despite multiple prompts. Further questioning is unlikely to yield reliable evidence.",
+        "anti_repetition_check": "N/A",
+        "ownership_check": "N/A",
+        "red_flags": [
+          "Repeatedly ignored request for code snippet",
+          "Repeated previous answer verbatim when asked for improvements",
+          "Ignored schema constraints provided in the prompt"
+        ],
+        "communication": {
+          "clarity": 3,
+          "specificity": 2,
+          "relevance": 3,
+          "structure": 2,
+          "summary": "Candidate provided a correct conceptual explanation for error handling but failed to provide the requested code snippet."
+        }
+      }
+    }
+  ],
+  "turns": [
+    {
+      "sequence": 1,
+      "question": "Trong FastAPI, làm thế nào để bạn định nghĩa một endpoint nhận dữ liệu JSON từ client và sử dụng Pydantic model để validate dữ liệu đó? Hãy viết một đoạn code ví dụ ngắn gọn.",
+      "answer": "Em tạo Pydantic model gồm `email: EmailStr`, `password: str`, endpoint POST. Input thiếu field FastAPI trả 422, sai password trả 401, lỗi server mới là 500.",
+      "phase": "cv_verification",
+      "topic_key": "fastapi_implementation",
+      "question_type": "initial",
+      "difficulty": "easy",
+      "provider_metadata": {
+        "planner": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 2682,
+          "output_tokens": 217,
+          "attempts": 1
+        },
+        "question_generator": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 1019,
+          "output_tokens": 46,
+          "attempts": 1
+        }
+      }
+    },
+    {
+      "sequence": 2,
+      "question": "Cảm ơn bạn đã giải thích về logic xử lý lỗi. Để làm rõ hơn về cú pháp, bạn hãy viết một đoạn code ngắn sử dụng FastAPI để định nghĩa endpoint POST nhận dữ liệu từ Pydantic model mà bạn đã mô tả, bao gồm việc sử dụng `Depends` để inject một dependency đơn giản (ví dụ: kiểm tra kết nối database) vào endpoint đó.",
+      "answer": "Em tạo Pydantic model gồm `email: EmailStr`, `password: str`, endpoint POST. Input thiếu field FastAPI trả 422, sai password trả 401, lỗi server mới là 500.",
+      "phase": "cv_verification",
+      "topic_key": "fastapi_implementation",
+      "question_type": "follow_up",
+      "difficulty": "medium",
+      "provider_metadata": {
+        "planner": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 2842,
+          "output_tokens": 543,
+          "attempts": 1
+        },
+        "question_generator": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 1447,
+          "output_tokens": 83,
+          "attempts": 1
+        }
+      }
+    },
+    {
+      "sequence": 3,
+      "question": "Để đóng gói ứng dụng FastAPI của bạn vào một container, bạn hãy viết nội dung của một file Dockerfile đơn giản để build image cho ứng dụng đó, bao gồm các bước cơ bản như chọn base image, copy source code và cài đặt các thư viện từ file requirements.txt.",
+      "answer": "Em dùng `FROM python:3.12-slim`, `WORKDIR /app`, copy requirements, `RUN pip install -r requirements.txt`, copy source, `EXPOSE 8000`, và `CMD [\"uvicorn\", \"app.main:app\", \"--host\", \"0.0.0.0\", \"--port\", \"8000\"]`.",
+      "phase": "cv_verification",
+      "topic_key": "docker_implementation",
+      "question_type": "transition",
+      "difficulty": "easy",
+      "provider_metadata": {
+        "planner": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 3114,
+          "output_tokens": 523,
+          "attempts": 1
+        },
+        "question_generator": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 1599,
+          "output_tokens": 63,
+          "attempts": 1
+        }
+      }
+    },
+    {
+      "sequence": 4,
+      "question": "Để tối ưu hóa kích thước image và tăng tính bảo mật cho Dockerfile bạn vừa viết, bạn sẽ thực hiện những thay đổi cụ thể nào, ví dụ như việc sử dụng multi-stage builds hoặc thay đổi user chạy ứng dụng?",
+      "answer": "Em dùng `FROM python:3.12-slim`, `WORKDIR /app`, copy requirements, `RUN pip install -r requirements.txt`, copy source, `EXPOSE 8000`, và `CMD [\"uvicorn\", \"app.main:app\", \"--host\", \"0.0.0.0\", \"--port\", \"8000\"]`.",
+      "phase": "cv_verification",
+      "topic_key": "verify_docker",
+      "question_type": "transition",
+      "difficulty": "easy",
+      "provider_metadata": {
+        "planner": {
+          "fallback": true,
+          "error": "follow_up_count must reset when switching topics"
+        },
+        "question_generator": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 1614,
+          "output_tokens": 52,
+          "attempts": 1
+        }
+      }
+    },
+    {
+      "sequence": 5,
+      "question": "Bạn có thể viết lại Dockerfile đó bằng cách sử dụng kỹ thuật multi-stage build để tách biệt môi trường build và môi trường chạy ứng dụng, đồng thời thêm lệnh để tạo và sử dụng một user không có quyền root (non-root user) để chạy ứng dụng không?",
+      "answer": "Em thêm `RUN adduser --disabled-password --gecos '' appuser`, `RUN chown -R appuser:appuser /app`, rồi đặt `USER appuser` trước `CMD`.",
+      "phase": "cv_verification",
+      "topic_key": "verify_docker",
+      "question_type": "follow_up",
+      "difficulty": "medium",
+      "provider_metadata": {
+        "planner": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 3685,
+          "output_tokens": 653,
+          "attempts": 1
+        },
+        "question_generator": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 1764,
+          "output_tokens": 63,
+          "attempts": 1
+        }
+      }
+    },
+    {
+      "sequence": 6,
+      "question": "Để tiếp tục với phần SQL, giả sử bạn có bảng 'orders' với các cột 'order_id', 'customer_id', và 'order_date'. Bạn hãy viết một câu lệnh SQL để lấy ra danh sách 'customer_id' và tổng số đơn hàng của mỗi khách hàng, chỉ bao gồm những khách hàng đã đặt từ 5 đơn hàng trở lên.",
+      "answer": "Em dùng `GROUP BY user_id`, lọc `created_at >= now() - interval '30 days'`, và dùng `COALESCE(sum(total), 0)` nếu cần tránh NULL.",
+      "phase": "cv_verification",
+      "topic_key": "verify_sql",
+      "question_type": "transition",
+      "difficulty": "easy",
+      "provider_metadata": {
+        "planner": {
+          "fallback": true,
+          "error": "The follow-up limit for this answer or topic has been reached"
+        },
+        "question_generator": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 1768,
+          "output_tokens": 81,
+          "attempts": 1
+        }
+      }
+    },
+    {
+      "sequence": 7,
+      "question": "Cảm ơn bạn đã phản hồi. Tuy nhiên, hãy sử dụng đúng các cột 'order_id', 'customer_id' và 'order_date' từ bảng 'orders' mà tôi đã cung cấp. Bạn hãy viết lại câu lệnh SQL để lấy ra 'customer_id' và tổng số đơn hàng của mỗi khách hàng, với điều kiện chỉ hiển thị những khách hàng có từ 5 đơn hàng trở lên.",
+      "answer": "Em dùng `GROUP BY user_id`, lọc `created_at >= now() - interval '30 days'`, và dùng `COALESCE(sum(total), 0)` nếu cần tránh NULL.",
+      "phase": "cv_verification",
+      "topic_key": "verify_sql",
+      "question_type": "follow_up",
+      "difficulty": "easy",
+      "provider_metadata": {
+        "planner": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 4136,
+          "output_tokens": 697,
+          "attempts": 1
+        },
+        "question_generator": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 1937,
+          "output_tokens": 97,
+          "attempts": 1
+        }
+      }
+    },
+    {
+      "sequence": 8,
+      "question": "Chúng ta hãy chuyển sang Python. Bạn hãy viết một đoạn code ngắn sử dụng list comprehension để lọc ra các số chẵn từ một danh sách các số nguyên cho trước, ví dụ: [1, 2, 3, 4, 5, 6].",
+      "answer": "Em viết `[x * x for x in [1, 2, 3, 4, 5, 6] if x % 2 == 0]`, output là `[4, 16, 36]`.",
+      "phase": "cv_verification",
+      "topic_key": "verify_python",
+      "question_type": "transition",
+      "difficulty": "easy",
+      "provider_metadata": {
+        "planner": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 4445,
+          "output_tokens": 614,
+          "attempts": 1,
+          "backend_overrode_early_finish": true
+        },
+        "question_generator": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 2015,
+          "output_tokens": 65,
+          "attempts": 1
+        }
+      }
+    },
+    {
+      "sequence": 9,
+      "question": "Để kiểm tra khả năng xử lý lỗi cơ bản trong Python, bạn hãy viết một đoạn code sử dụng khối try-except để bắt lỗi ZeroDivisionError khi thực hiện phép chia một số cho 0 và in ra thông báo 'Lỗi chia cho số 0'.",
+      "answer": "Em viết `try: result = a / b` rồi `except ZeroDivisionError: return None` hoặc trả lỗi rõ ràng. Em cũng validate `b != 0` trước nếu đây là input từ request.",
+      "phase": "cv_verification",
+      "topic_key": "technical_problem_solving",
+      "question_type": "transition",
+      "difficulty": "easy",
+      "provider_metadata": {
+        "planner": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 4722,
+          "output_tokens": 719,
+          "attempts": 1,
+          "backend_overrode_early_finish": true
+        },
+        "question_generator": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 2144,
+          "output_tokens": 64,
+          "attempts": 1
+        }
+      }
+    },
+    {
+      "sequence": 10,
+      "question": "Để kiểm tra khả năng thao tác với dữ liệu, bạn hãy viết một đoạn code Python sử dụng hàm `map` để bình phương tất cả các phần tử trong danh sách `[1, 2, 3, 4]` và trả về kết quả dưới dạng một danh sách mới.",
+      "answer": "Em viết `numbers = [1, 2, 3, 4, 5]` rồi xử lý bằng vòng lặp hoặc list comprehension tùy yêu cầu.",
+      "phase": "cv_verification",
+      "topic_key": "technical_problem_solving",
+      "question_type": "transition",
+      "difficulty": "easy",
+      "provider_metadata": {
+        "planner": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 5114,
+          "output_tokens": 616,
+          "attempts": 1,
+          "backend_overrode_early_finish": true
+        },
+        "question_generator": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 2106,
+          "output_tokens": 69,
+          "attempts": 1
+        }
+      }
+    }
+  ]
+}

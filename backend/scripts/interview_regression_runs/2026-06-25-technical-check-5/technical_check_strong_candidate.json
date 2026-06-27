@@ -1,0 +1,681 @@
+{
+  "case": "technical_check_strong_candidate",
+  "mode": "technical_check",
+  "answer_style": "technical_strong",
+  "max_questions": 10,
+  "generated_at": "2026-06-25T08:49:01.440490+00:00",
+  "flags": [
+    "strong candidate reached max instead of stopping early"
+  ],
+  "report": {
+    "overall_score": 48,
+    "overall_summary": "Ứng viên thể hiện kiến thức cơ bản tốt về lập trình Python và framework FastAPI, bao gồm việc sử dụng Pydantic, Dependency Injection và xử lý lỗi. Tuy nhiên, ứng viên gặp khó khăn đáng kể trong việc nắm bắt các khái niệm kỹ thuật chuyên sâu hơn như tối ưu hóa Docker layer caching và hiệu suất truy vấn SQL (indexing). Ứng viên có xu hướng lặp lại câu trả lời cũ hoặc đưa ra quy trình debug chung chung thay vì giải quyết trực tiếp các câu hỏi về hiệu suất hệ thống.",
+    "dimensions": [
+      {
+        "key": "technical_knowledge",
+        "label": "Kiến thức chuyên môn",
+        "score": 50,
+        "weight": 30,
+        "summary": "Nắm vững cú pháp Python và các khái niệm cơ bản của FastAPI. Thiếu kiến thức về tối ưu hóa Docker và cơ chế đánh chỉ mục (indexing) trong cơ sở dữ liệu.",
+        "evidence": [
+          "Viết đúng code list comprehension và xử lý lỗi try-except.",
+          "Hiểu rõ cách sử dụng Depends trong FastAPI.",
+          "Không giải thích được cơ chế layer caching trong Docker.",
+          "Không hiểu ảnh hưởng của toán tử LIKE với ký tự đại diện đầu chuỗi đến hiệu suất truy vấn."
+        ]
+      },
+      {
+        "key": "practical_experience",
+        "label": "Độ đúng code/query",
+        "score": 55,
+        "weight": 25,
+        "summary": "Có khả năng viết code thực tế cho các tác vụ đơn giản, nhưng chưa có kinh nghiệm xử lý các vấn đề hiệu suất hoặc tối ưu hóa môi trường triển khai.",
+        "evidence": [
+          "Viết được Dockerfile cơ bản hoạt động tốt.",
+          "Viết được câu lệnh SQL SELECT cơ bản.",
+          "Không thể tối ưu hóa Dockerfile để tận dụng caching.",
+          "Đưa ra quy trình debug không liên quan khi được hỏi về hiệu suất SQL."
+        ]
+      },
+      {
+        "key": "problem_solving",
+        "label": "Debug và giải quyết vấn đề",
+        "score": 40,
+        "weight": 25,
+        "summary": "Khả năng giải quyết vấn đề còn hạn chế khi đối mặt với các câu hỏi mang tính tư duy hệ thống hoặc tối ưu hóa.",
+        "evidence": [
+          "Lặp lại nội dung Dockerfile thay vì giải thích logic tối ưu hóa.",
+          "Đưa ra quy trình debug chung chung thay vì phân tích nguyên nhân gốc rễ của vấn đề hiệu suất SQL."
+        ]
+      },
+      {
+        "key": "communication",
+        "label": "Giải thích kỹ thuật",
+        "score": 50,
+        "weight": 10,
+        "summary": "Khả năng diễn đạt kỹ thuật ở mức trung bình. Ứng viên thường không trả lời trực tiếp vào trọng tâm câu hỏi khi gặp các vấn đề khó.",
+        "evidence": [
+          "Giải thích rõ ràng về logic validation và dependency injection.",
+          "Không trả lời trực tiếp vào câu hỏi về tối ưu hóa Docker và SQL performance."
+        ]
+      },
+      {
+        "key": "critical_thinking",
+        "label": "Edge cases và hiệu năng",
+        "score": 40,
+        "weight": 10,
+        "summary": "Thiếu tư duy về hiệu suất và các trade-off trong thiết kế hệ thống.",
+        "evidence": [
+          "Không nhận diện được vấn đề hiệu suất khi sử dụng LIKE '%...'.",
+          "Không phân tích được sự khác biệt giữa các thứ tự lệnh trong Dockerfile đối với caching."
+        ]
+      }
+    ],
+    "strengths": [
+      "Nắm vững cú pháp Python cơ bản và list comprehension.",
+      "Hiểu rõ cách sử dụng FastAPI Dependency Injection và Pydantic.",
+      "Có khả năng viết Dockerfile cơ bản chính xác.",
+      "Có tư duy tốt về việc validate input từ request."
+    ],
+    "improvements": [
+      "Nghiên cứu cơ chế Docker layer caching và cách tối ưu hóa thứ tự các lệnh trong Dockerfile.",
+      "Tìm hiểu về cách hoạt động của B-Tree index trong SQL và tại sao LIKE '%...' làm mất hiệu quả của index.",
+      "Cần tập trung lắng nghe và trả lời trực tiếp vào câu hỏi kỹ thuật thay vì đưa ra các quy trình debug chung chung.",
+      "Nâng cao kiến thức về tối ưu hóa hiệu suất hệ thống (performance tuning)."
+    ],
+    "insufficient_evidence": [
+      "Chưa có bằng chứng về khả năng làm việc với các hệ quản trị cơ sở dữ liệu thực tế (ngoài các câu lệnh SELECT đơn giản).",
+      "Chưa đánh giá được khả năng làm việc với các công cụ CI/CD hoặc orchestration (Kubernetes) do chưa được hỏi."
+    ],
+    "action_plan": [
+      "Thực hành tối ưu hóa Dockerfile bằng cách tách các lệnh COPY và RUN, sau đó kiểm tra kết quả build bằng lệnh 'docker build --no-cache' và so sánh thời gian.",
+      "Tìm hiểu về 'SARGable' queries trong SQL và thực hiện bài tập so sánh thời gian thực thi giữa LIKE '%abc' và LIKE 'abc%' trên bảng dữ liệu lớn.",
+      "Đọc tài liệu về Docker Layer Caching để hiểu tại sao thứ tự lệnh lại quan trọng.",
+      "Thực hiện một bài tập nhỏ về tối ưu hóa truy vấn SQL bằng cách sử dụng EXPLAIN ANALYZE để quan sát kế hoạch thực thi."
+    ],
+    "confidence": "high"
+  },
+  "report_metadata": {
+    "provider": "gemini",
+    "model": "gemini-3.1-flash-lite",
+    "input_tokens": 5440,
+    "output_tokens": 1153,
+    "attempts": 1
+  },
+  "answer_evaluations": [
+    {
+      "sequence": 1,
+      "question": "Trong dự án FastAPI của bạn, hãy viết một đoạn code ngắn để định nghĩa một endpoint nhận dữ liệu JSON từ client và trả về một phản hồi đơn giản xác nhận đã nhận được dữ liệu đó.",
+      "answer": "Em tạo Pydantic model gồm `email: EmailStr`, `password: str`, endpoint POST. Input thiếu field FastAPI trả 422, sai password trả 401, lỗi server mới là 500.",
+      "evaluation": {
+        "score": 3,
+        "status": "partially_verified",
+        "answer_quality": "sufficient",
+        "strengths": [
+          "Understands Pydantic validation",
+          "Correctly identifies HTTP status codes"
+        ],
+        "missing_evidence": [
+          "No code structure shown",
+          "No database interaction mentioned"
+        ],
+        "contradictions": [],
+        "detected_competency": "API basics",
+        "evidence_found": [
+          "Understands FastAPI request validation and status code mapping"
+        ],
+        "remaining_gap": "Implementation details of database integration or dependency injection.",
+        "ownership": "direct",
+        "topic_decision": "continue",
+        "reason_for_next_question": "Verify how the candidate integrates a database (PostgreSQL) into the FastAPI endpoint as mentioned in their project.",
+        "anti_repetition_check": "Moving from status codes to database dependency injection.",
+        "ownership_check": "Asking about the project's database integration.",
+        "red_flags": [],
+        "communication": {
+          "clarity": 3,
+          "specificity": 3,
+          "relevance": 4,
+          "structure": 3,
+          "summary": "Candidate clearly explained the validation and status code logic."
+        }
+      }
+    },
+    {
+      "sequence": 2,
+      "question": "Trong dự án FastAPI của bạn, hãy viết một đoạn code ngắn minh họa cách sử dụng Dependency Injection (Depends) để lấy một session cơ sở dữ liệu trong một endpoint cụ thể.",
+      "answer": "Em tạo dependency `get_current_user` đọc `Authorization: Bearer`, verify JWT bằng secret từ env, nếu token thiếu hoặc sai thì raise `HTTPException(status_code=401)`. Endpoint cần auth sẽ khai báo `current_user = Depends(get_current_user)`.",
+      "evaluation": {
+        "score": 3,
+        "status": "verified",
+        "answer_quality": "sufficient",
+        "strengths": [
+          "Correctly identified dependency injection pattern",
+          "Understands JWT authentication flow"
+        ],
+        "missing_evidence": [],
+        "contradictions": [],
+        "detected_competency": "FastAPI Dependency Injection",
+        "evidence_found": [
+          "Demonstrated practical knowledge of FastAPI Depends and JWT auth"
+        ],
+        "remaining_gap": "None for this topic",
+        "ownership": "direct",
+        "topic_decision": "stop",
+        "reason_for_next_question": "FastAPI dependency injection is verified. Moving to Docker as it is a must-have skill in the JD.",
+        "anti_repetition_check": "Switching from FastAPI to Docker.",
+        "ownership_check": "Previous answer confirmed direct implementation of auth dependencies.",
+        "red_flags": [],
+        "communication": {
+          "clarity": 3,
+          "specificity": 3,
+          "relevance": 4,
+          "structure": 3,
+          "summary": "Candidate provided a clear and accurate explanation of the dependency injection mechanism."
+        }
+      }
+    },
+    {
+      "sequence": 3,
+      "question": "Để đóng gói ứng dụng FastAPI của bạn vào một container, hãy viết nội dung file Dockerfile đơn giản nhất để build image từ source code, bao gồm việc cài đặt các dependencies từ file requirements.txt và chạy ứng dụng bằng uvicorn.",
+      "answer": "Em dùng `FROM python:3.12-slim`, `WORKDIR /app`, copy requirements, `RUN pip install -r requirements.txt`, copy source, `EXPOSE 8000`, và `CMD [\"uvicorn\", \"app.main:app\", \"--host\", \"0.0.0.0\", \"--port\", \"8000\"]`.",
+      "evaluation": {
+        "score": 4,
+        "status": "verified",
+        "answer_quality": "sufficient",
+        "strengths": [
+          "Correct Dockerfile structure",
+          "Proper use of multi-stage concepts implicitly",
+          "Correct port and command configuration"
+        ],
+        "missing_evidence": [],
+        "contradictions": [],
+        "detected_competency": "Containerization",
+        "evidence_found": [
+          "Successfully wrote a functional Dockerfile for a FastAPI application"
+        ],
+        "remaining_gap": "None for basic Dockerfile creation",
+        "ownership": "direct",
+        "topic_decision": "continue",
+        "reason_for_next_question": "The candidate demonstrated basic Dockerfile knowledge. Now I will test their ability to optimize the build or handle a common issue.",
+        "anti_repetition_check": "This is a new question about Docker optimization/debugging, not just writing a file.",
+        "ownership_check": "Grounded in the previous Dockerfile answer.",
+        "red_flags": [],
+        "communication": {
+          "clarity": 4,
+          "specificity": 4,
+          "relevance": 4,
+          "structure": 4,
+          "summary": "The candidate provided a concise and accurate Dockerfile."
+        }
+      }
+    },
+    {
+      "sequence": 4,
+      "question": "Để tối ưu hóa thời gian build image Docker cho ứng dụng FastAPI của bạn, bạn sẽ thay đổi thứ tự các lệnh trong Dockerfile như thế nào để tận dụng tối đa cơ chế layer caching khi file requirements.txt không thay đổi nhưng source code thường xuyên được cập nhật?",
+      "answer": "Em dùng `FROM python:3.12-slim`, `WORKDIR /app`, copy requirements, `RUN pip install -r requirements.txt`, copy source, `EXPOSE 8000`, và `CMD [\"uvicorn\", \"app.main:app\", \"--host\", \"0.0.0.0\", \"--port\", \"8000\"]`.",
+      "evaluation": {
+        "score": 1,
+        "status": "partially_verified",
+        "answer_quality": "vague",
+        "strengths": [
+          "Provided a functional Dockerfile"
+        ],
+        "missing_evidence": [
+          "Did not address the specific question about layer caching optimization"
+        ],
+        "contradictions": [],
+        "detected_competency": "Basic Docker usage",
+        "evidence_found": [
+          "Candidate knows how to write a basic Dockerfile"
+        ],
+        "remaining_gap": "Understanding of Docker layer caching and build optimization",
+        "ownership": "direct",
+        "topic_decision": "clarify",
+        "reason_for_next_question": "The candidate repeated the previous answer instead of addressing the optimization question. I need to clarify the specific requirement regarding layer caching.",
+        "anti_repetition_check": "The question now specifically asks about the order of COPY commands to solve the caching issue.",
+        "ownership_check": "The candidate claims to have containerized the backend, so they should understand the build process.",
+        "red_flags": [
+          "Candidate did not read the question carefully"
+        ],
+        "communication": {
+          "clarity": 2,
+          "specificity": 1,
+          "relevance": 1,
+          "structure": 2,
+          "summary": "The candidate provided a correct Dockerfile but failed to answer the specific optimization question."
+        }
+      }
+    },
+    {
+      "sequence": 5,
+      "question": "Trong Dockerfile, nếu bạn đặt lệnh 'COPY . .' trước lệnh 'RUN pip install -r requirements.txt', điều gì sẽ xảy ra với layer caching mỗi khi bạn thay đổi một file source code nhỏ, và tại sao việc tách riêng lệnh COPY cho requirements.txt lại giúp tối ưu hóa quá trình build?",
+      "answer": "Em dùng `FROM python:3.12-slim`, `WORKDIR /app`, copy requirements, `RUN pip install -r requirements.txt`, copy source, `EXPOSE 8000`, và `CMD [\"uvicorn\", \"app.main:app\", \"--host\", \"0.0.0.0\", \"--port\", \"8000\"]`.",
+      "evaluation": {
+        "score": 1,
+        "status": "partially_verified",
+        "answer_quality": "irrelevant",
+        "strengths": [
+          "Candidate understands the basic structure of a Dockerfile."
+        ],
+        "missing_evidence": [
+          "Explanation of layer caching mechanism",
+          "Explanation of why copying requirements separately optimizes build time"
+        ],
+        "contradictions": [],
+        "detected_competency": "Docker basics",
+        "evidence_found": [
+          "Candidate knows how to write a basic Dockerfile"
+        ],
+        "remaining_gap": "Understanding of Docker layer caching and build optimization",
+        "ownership": "direct",
+        "topic_decision": "stop",
+        "reason_for_next_question": "The candidate repeated the same Dockerfile content instead of answering the conceptual question about layer caching. I will move to SQL to assess another skill.",
+        "anti_repetition_check": "The previous question was about Docker optimization; this is a new topic about SQL.",
+        "ownership_check": "N/A - switching topic.",
+        "red_flags": [
+          "Candidate did not read the question carefully",
+          "Candidate failed to address the conceptual question after two attempts"
+        ],
+        "communication": {
+          "clarity": 2,
+          "specificity": 1,
+          "relevance": 1,
+          "structure": 2,
+          "summary": "The candidate provided a correct Dockerfile but failed to answer the specific optimization question, repeating the same code instead."
+        }
+      }
+    },
+    {
+      "sequence": 6,
+      "question": "Giả sử bạn có một bảng 'users' với các cột 'id', 'name', và 'email'. Hãy viết một câu lệnh SQL để lấy ra tên và email của tất cả người dùng có email kết thúc bằng '@gmail.com'.",
+      "answer": "Em viết `SELECT name, email FROM users WHERE email LIKE '%@gmail.com';`.",
+      "evaluation": {
+        "score": 4,
+        "status": "verified",
+        "answer_quality": "sufficient",
+        "strengths": [
+          "Correct SQL syntax",
+          "Accurate use of LIKE operator"
+        ],
+        "missing_evidence": [
+          "Performance considerations for large datasets"
+        ],
+        "contradictions": [],
+        "detected_competency": "Basic SQL proficiency",
+        "evidence_found": [
+          "Candidate can write standard SQL SELECT queries with filtering"
+        ],
+        "remaining_gap": "Understanding of indexing or performance implications of wildcard searches",
+        "ownership": "direct",
+        "topic_decision": "continue",
+        "reason_for_next_question": "The candidate answered the basic query correctly. I will now probe for a slightly more advanced scenario involving performance to assess depth.",
+        "anti_repetition_check": "This is a new question focusing on performance/indexing, not just syntax.",
+        "ownership_check": "The candidate provided the code directly.",
+        "red_flags": [],
+        "communication": {
+          "clarity": 4,
+          "specificity": 4,
+          "relevance": 4,
+          "structure": 4,
+          "summary": "The candidate provided a correct and concise SQL query."
+        }
+      }
+    },
+    {
+      "sequence": 7,
+      "question": "Nếu bảng 'users' có hàng triệu bản ghi, việc sử dụng toán tử LIKE với ký tự đại diện ở đầu như '%@gmail.com' sẽ ảnh hưởng thế nào đến hiệu suất truy vấn ngay cả khi cột 'email' đã được đánh chỉ mục?",
+      "answer": "Em sẽ reproduce bằng cURL, xem stack trace Uvicorn, kiểm tra request body, log trước/sau service và DB query, rồi thêm test case cho lỗi đó.",
+      "evaluation": {
+        "score": 0,
+        "status": "contradicted",
+        "answer_quality": "irrelevant",
+        "strengths": [],
+        "missing_evidence": [
+          "Understanding of SQL indexing and performance impact of leading wildcards"
+        ],
+        "contradictions": [
+          "The candidate provided a debugging process for a web service instead of answering a question about SQL query performance and indexing."
+        ],
+        "detected_competency": "technical_knowledge",
+        "evidence_found": [
+          "Candidate can write basic SQL SELECT queries"
+        ],
+        "remaining_gap": "Understanding of database performance and indexing",
+        "ownership": "direct",
+        "topic_decision": "stop",
+        "reason_for_next_question": "The candidate failed to answer the SQL performance question twice (once by providing an irrelevant debugging process), and previously failed to answer Docker optimization questions. Sufficient technical evidence has been collected to conclude the assessment.",
+        "anti_repetition_check": "N/A",
+        "ownership_check": "N/A",
+        "red_flags": [
+          "Candidate provided an irrelevant answer to a technical performance question",
+          "Candidate failed to address conceptual questions after multiple attempts"
+        ],
+        "communication": {
+          "clarity": 1,
+          "specificity": 1,
+          "relevance": 1,
+          "structure": 1,
+          "summary": "The candidate provided a generic debugging workflow that did not address the specific SQL performance question asked."
+        }
+      }
+    },
+    {
+      "sequence": 8,
+      "question": "Trong Python, hãy viết một đoạn code ngắn sử dụng list comprehension để tạo ra một danh sách mới chứa bình phương của các số chẵn từ một danh sách số nguyên cho trước.",
+      "answer": "Em viết `[x * x for x in [1, 2, 3, 4, 5, 6] if x % 2 == 0]`, output là `[4, 16, 36]`.",
+      "evaluation": {
+        "score": 4,
+        "status": "verified",
+        "answer_quality": "sufficient",
+        "strengths": [
+          "Correct implementation of list comprehension",
+          "Accurate output prediction"
+        ],
+        "missing_evidence": [],
+        "contradictions": [],
+        "detected_competency": "python_basics",
+        "evidence_found": [
+          "Candidate demonstrates proficiency in Python list comprehensions"
+        ],
+        "remaining_gap": "None",
+        "ownership": "direct",
+        "topic_decision": "stop",
+        "reason_for_next_question": "Sufficient technical evidence has been collected across multiple domains (FastAPI, Python, SQL, Docker).",
+        "anti_repetition_check": "N/A",
+        "ownership_check": "N/A",
+        "red_flags": [],
+        "communication": {
+          "clarity": 4,
+          "specificity": 4,
+          "relevance": 4,
+          "structure": 4,
+          "summary": "The candidate correctly answered the Python list comprehension task."
+        }
+      }
+    },
+    {
+      "sequence": 9,
+      "question": "Để kiểm tra khả năng xử lý lỗi cơ bản trong Python, bạn hãy viết một đoạn code sử dụng khối try-except để bắt lỗi ZeroDivisionError khi thực hiện phép chia một số cho 0 và in ra thông báo 'Lỗi chia cho số 0'.",
+      "answer": "Em viết `try: result = a / b` rồi `except ZeroDivisionError: return None` hoặc trả lỗi rõ ràng. Em cũng validate `b != 0` trước nếu đây là input từ request.",
+      "evaluation": {
+        "score": 3,
+        "status": "verified",
+        "answer_quality": "sufficient",
+        "strengths": [
+          "Correctly identified error handling pattern",
+          "Demonstrated proactive input validation"
+        ],
+        "missing_evidence": [],
+        "contradictions": [],
+        "detected_competency": "Python error handling",
+        "evidence_found": [
+          "Candidate understands try-except blocks and input validation"
+        ],
+        "remaining_gap": "None",
+        "ownership": "direct",
+        "topic_decision": "stop",
+        "reason_for_next_question": "Sufficient technical evidence has been collected across all required and nice-to-have skills.",
+        "anti_repetition_check": "N/A",
+        "ownership_check": "N/A",
+        "red_flags": [],
+        "communication": {
+          "clarity": 4,
+          "specificity": 4,
+          "relevance": 4,
+          "structure": 4,
+          "summary": "The candidate provided a clear and correct approach to error handling."
+        }
+      }
+    }
+  ],
+  "turns": [
+    {
+      "sequence": 1,
+      "question": "Trong dự án FastAPI của bạn, hãy viết một đoạn code ngắn để định nghĩa một endpoint nhận dữ liệu JSON từ client và trả về một phản hồi đơn giản xác nhận đã nhận được dữ liệu đó.",
+      "answer": "Em tạo Pydantic model gồm `email: EmailStr`, `password: str`, endpoint POST. Input thiếu field FastAPI trả 422, sai password trả 401, lỗi server mới là 500.",
+      "phase": "cv_verification",
+      "topic_key": "fastapi_implementation",
+      "question_type": "initial",
+      "difficulty": "easy",
+      "provider_metadata": {
+        "planner": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 2691,
+          "output_tokens": 241,
+          "attempts": 1
+        },
+        "question_generator": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 1028,
+          "output_tokens": 46,
+          "attempts": 1
+        }
+      }
+    },
+    {
+      "sequence": 2,
+      "question": "Trong dự án FastAPI của bạn, hãy viết một đoạn code ngắn minh họa cách sử dụng Dependency Injection (Depends) để lấy một session cơ sở dữ liệu trong một endpoint cụ thể.",
+      "answer": "Em tạo dependency `get_current_user` đọc `Authorization: Bearer`, verify JWT bằng secret từ env, nếu token thiếu hoặc sai thì raise `HTTPException(status_code=401)`. Endpoint cần auth sẽ khai báo `current_user = Depends(get_current_user)`.",
+      "phase": "cv_verification",
+      "topic_key": "fastapi_implementation",
+      "question_type": "follow_up",
+      "difficulty": "medium",
+      "provider_metadata": {
+        "planner": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 2851,
+          "output_tokens": 551,
+          "attempts": 1
+        },
+        "question_generator": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 1522,
+          "output_tokens": 42,
+          "attempts": 2
+        }
+      }
+    },
+    {
+      "sequence": 3,
+      "question": "Để đóng gói ứng dụng FastAPI của bạn vào một container, hãy viết nội dung file Dockerfile đơn giản nhất để build image từ source code, bao gồm việc cài đặt các dependencies từ file requirements.txt và chạy ứng dụng bằng uvicorn.",
+      "answer": "Em dùng `FROM python:3.12-slim`, `WORKDIR /app`, copy requirements, `RUN pip install -r requirements.txt`, copy source, `EXPOSE 8000`, và `CMD [\"uvicorn\", \"app.main:app\", \"--host\", \"0.0.0.0\", \"--port\", \"8000\"]`.",
+      "phase": "cv_verification",
+      "topic_key": "docker_implementation",
+      "question_type": "transition",
+      "difficulty": "easy",
+      "provider_metadata": {
+        "planner": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 3108,
+          "output_tokens": 506,
+          "attempts": 1
+        },
+        "question_generator": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 1483,
+          "output_tokens": 55,
+          "attempts": 1
+        }
+      }
+    },
+    {
+      "sequence": 4,
+      "question": "Để tối ưu hóa thời gian build image Docker cho ứng dụng FastAPI của bạn, bạn sẽ thay đổi thứ tự các lệnh trong Dockerfile như thế nào để tận dụng tối đa cơ chế layer caching khi file requirements.txt không thay đổi nhưng source code thường xuyên được cập nhật?",
+      "answer": "Em dùng `FROM python:3.12-slim`, `WORKDIR /app`, copy requirements, `RUN pip install -r requirements.txt`, copy source, `EXPOSE 8000`, và `CMD [\"uvicorn\", \"app.main:app\", \"--host\", \"0.0.0.0\", \"--port\", \"8000\"]`.",
+      "phase": "cv_verification",
+      "topic_key": "verify_docker",
+      "question_type": "transition",
+      "difficulty": "easy",
+      "provider_metadata": {
+        "planner": {
+          "fallback": true,
+          "error": "follow_up_count must reset when switching topics"
+        },
+        "question_generator": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 1570,
+          "output_tokens": 61,
+          "attempts": 1
+        }
+      }
+    },
+    {
+      "sequence": 5,
+      "question": "Trong Dockerfile, nếu bạn đặt lệnh 'COPY . .' trước lệnh 'RUN pip install -r requirements.txt', điều gì sẽ xảy ra với layer caching mỗi khi bạn thay đổi một file source code nhỏ, và tại sao việc tách riêng lệnh COPY cho requirements.txt lại giúp tối ưu hóa quá trình build?",
+      "answer": "Em dùng `FROM python:3.12-slim`, `WORKDIR /app`, copy requirements, `RUN pip install -r requirements.txt`, copy source, `EXPOSE 8000`, và `CMD [\"uvicorn\", \"app.main:app\", \"--host\", \"0.0.0.0\", \"--port\", \"8000\"]`.",
+      "phase": "cv_verification",
+      "topic_key": "verify_docker",
+      "question_type": "follow_up",
+      "difficulty": "medium",
+      "provider_metadata": {
+        "planner": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 3629,
+          "output_tokens": 643,
+          "attempts": 1
+        },
+        "question_generator": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 1699,
+          "output_tokens": 69,
+          "attempts": 1
+        }
+      }
+    },
+    {
+      "sequence": 6,
+      "question": "Giả sử bạn có một bảng 'users' với các cột 'id', 'name', và 'email'. Hãy viết một câu lệnh SQL để lấy ra tên và email của tất cả người dùng có email kết thúc bằng '@gmail.com'.",
+      "answer": "Em viết `SELECT name, email FROM users WHERE email LIKE '%@gmail.com';`.",
+      "phase": "cv_verification",
+      "topic_key": "sql_query_task",
+      "question_type": "transition",
+      "difficulty": "easy",
+      "provider_metadata": {
+        "planner": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 3939,
+          "output_tokens": 620,
+          "attempts": 1
+        },
+        "question_generator": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 1816,
+          "output_tokens": 55,
+          "attempts": 1
+        }
+      }
+    },
+    {
+      "sequence": 7,
+      "question": "Nếu bảng 'users' có hàng triệu bản ghi, việc sử dụng toán tử LIKE với ký tự đại diện ở đầu như '%@gmail.com' sẽ ảnh hưởng thế nào đến hiệu suất truy vấn ngay cả khi cột 'email' đã được đánh chỉ mục?",
+      "answer": "Em sẽ reproduce bằng cURL, xem stack trace Uvicorn, kiểm tra request body, log trước/sau service và DB query, rồi thêm test case cho lỗi đó.",
+      "phase": "cv_verification",
+      "topic_key": "sql_query_task",
+      "question_type": "follow_up",
+      "difficulty": "medium",
+      "provider_metadata": {
+        "planner": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 4088,
+          "output_tokens": 557,
+          "attempts": 1
+        },
+        "question_generator": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 1790,
+          "output_tokens": 59,
+          "attempts": 2
+        }
+      }
+    },
+    {
+      "sequence": 8,
+      "question": "Trong Python, hãy viết một đoạn code ngắn sử dụng list comprehension để tạo ra một danh sách mới chứa bình phương của các số chẵn từ một danh sách số nguyên cho trước.",
+      "answer": "Em viết `[x * x for x in [1, 2, 3, 4, 5, 6] if x % 2 == 0]`, output là `[4, 16, 36]`.",
+      "phase": "cv_verification",
+      "topic_key": "verify_python",
+      "question_type": "transition",
+      "difficulty": "easy",
+      "provider_metadata": {
+        "planner": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 4341,
+          "output_tokens": 606,
+          "attempts": 1,
+          "backend_overrode_early_finish": true
+        },
+        "question_generator": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 1878,
+          "output_tokens": 41,
+          "attempts": 1
+        }
+      }
+    },
+    {
+      "sequence": 9,
+      "question": "Để kiểm tra khả năng xử lý lỗi cơ bản trong Python, bạn hãy viết một đoạn code sử dụng khối try-except để bắt lỗi ZeroDivisionError khi thực hiện phép chia một số cho 0 và in ra thông báo 'Lỗi chia cho số 0'.",
+      "answer": "Em viết `try: result = a / b` rồi `except ZeroDivisionError: return None` hoặc trả lỗi rõ ràng. Em cũng validate `b != 0` trước nếu đây là input từ request.",
+      "phase": "cv_verification",
+      "topic_key": "technical_problem_solving",
+      "question_type": "transition",
+      "difficulty": "easy",
+      "provider_metadata": {
+        "planner": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 4676,
+          "output_tokens": 514,
+          "attempts": 1,
+          "backend_overrode_early_finish": true
+        },
+        "question_generator": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 1794,
+          "output_tokens": 59,
+          "attempts": 1
+        }
+      }
+    },
+    {
+      "sequence": 10,
+      "question": "Với kỹ thuật em vừa mô tả, em hãy giải một task nhỏ: input là gì, output mong muốn là gì, và code hoặc query chính sẽ viết thế nào?",
+      "answer": "Em dùng `GROUP BY user_id`, lọc `created_at >= now() - interval '30 days'`, và dùng `COALESCE(sum(total), 0)` nếu cần tránh NULL.",
+      "phase": "cv_verification",
+      "topic_key": "technical_problem_solving",
+      "question_type": "transition",
+      "difficulty": "easy",
+      "provider_metadata": {
+        "planner": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 4947,
+          "output_tokens": 524,
+          "attempts": 1,
+          "backend_overrode_early_finish": true
+        },
+        "question_generator": {
+          "fallback": true,
+          "error": "Technical check question is behavioral or communication-focused",
+          "attempts": 2
+        }
+      }
+    }
+  ]
+}
