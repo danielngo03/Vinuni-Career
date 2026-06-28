@@ -22,6 +22,26 @@ def extract_cv_from_pdf(content: bytes) -> CVExtraction:
         raise GeminiCVExtractionError("Gemini API key is not configured")
 
     bodies = _request_bodies(content)
+    return _extract_with_bodies(api_keys, bodies, raw_text_quality="vision_extracted")
+
+
+def extract_cv_from_text(text: str) -> CVExtraction:
+    api_keys = get_gemini_api_keys()
+    if not api_keys:
+        raise GeminiCVExtractionError("Gemini API key is not configured")
+    if not text.strip():
+        raise GeminiCVExtractionError("CV text is empty")
+
+    bodies = _text_request_bodies(text)
+    return _extract_with_bodies(api_keys, bodies, raw_text_quality="native_text")
+
+
+def _extract_with_bodies(
+    api_keys: list[str],
+    bodies: list[dict[str, Any]],
+    *,
+    raw_text_quality: str,
+) -> CVExtraction:
     last_error = "Unknown Gemini extraction error"
     for model in _candidate_models():
         for body in bodies:
@@ -29,7 +49,7 @@ def extract_cv_from_pdf(content: bytes) -> CVExtraction:
                 try:
                     data = _post_generate_content(api_key, model, body)
                     extraction = _parse_extraction(data)
-                    extraction.raw_text_quality = "vision_extracted"
+                    extraction.raw_text_quality = raw_text_quality  # type: ignore[assignment]
                     return extraction
                 except GeminiCVExtractionError as exc:
                     last_error = str(exc)
@@ -39,19 +59,7 @@ def extract_cv_from_pdf(content: bytes) -> CVExtraction:
 
 
 def _request_bodies(content: bytes) -> list[dict[str, Any]]:
-    prompt = (
-        "Extract this student CV/resume into strict JSON matching this shape: "
-        '{"document_type":"cv","summary":"","raw_markdown":"","skills":[{"name":"","evidence":"","proficiency":"unknown"}],'
-        '"education":[{"institution":"","degree":"","major":"","start_year":null,"end_year":null}],'
-        '"experiences":[{"company":"","title":"","summary":"","start_date":null,"end_date":null}],'
-        '"projects":[{"name":"","description":"","technologies":[]}],'
-        '"languages":[],"certifications":[],"raw_text_quality":"vision_extracted","confidence":0.0}. '
-        "Set raw_markdown to a clean one-column Markdown CV. Use headings and bullet lists only; "
-        "do not create tables, multi-column layouts, HTML, code fences, or decorative separators. "
-        "Return only facts visible in the document. "
-        "Do not invent dates, companies, degrees, projects, or skills. "
-        "Use empty arrays or empty strings when a field is absent."
-    )
+    prompt = _cv_extraction_prompt("vision_extracted")
     base_body: dict[str, Any] = {
         "contents": [
             {
@@ -80,6 +88,46 @@ def _request_bodies(content: bytes) -> list[dict[str, Any]]:
         },
     }
     return [schema_body, base_body]
+
+
+def _text_request_bodies(text: str) -> list[dict[str, Any]]:
+    prompt = f"{_cv_extraction_prompt('native_text')}\n\nSOURCE TEXT:\n{text[:80_000]}"
+    base_body: dict[str, Any] = {
+        "contents": [
+            {
+                "role": "user",
+                "parts": [{"text": prompt}],
+            }
+        ],
+        "generationConfig": {
+            "temperature": 0,
+            "responseMimeType": "application/json",
+        },
+    }
+    schema_body = {
+        **base_body,
+        "generationConfig": {
+            **base_body["generationConfig"],
+            "responseJsonSchema": CVExtraction.model_json_schema(),
+        },
+    }
+    return [schema_body, base_body]
+
+
+def _cv_extraction_prompt(raw_text_quality: str) -> str:
+    return (
+        "Extract this student CV/resume into strict JSON matching this shape: "
+        '{"document_type":"cv","summary":"","raw_markdown":"","skills":[{"name":"","evidence":"","proficiency":"unknown"}],'
+        '"education":[{"institution":"","degree":"","major":"","start_year":null,"end_year":null}],'
+        '"experiences":[{"company":"","title":"","summary":"","start_date":null,"end_date":null}],'
+        '"projects":[{"name":"","description":"","technologies":[]}],'
+        f'"languages":[],"certifications":[],"raw_text_quality":"{raw_text_quality}","confidence":0.0}}. '
+        "Set raw_markdown to a clean one-column Markdown CV. Use headings and bullet lists only; "
+        "do not create tables, multi-column layouts, HTML, code fences, or decorative separators. "
+        "Return only facts visible in the document. "
+        "Do not invent dates, companies, degrees, projects, or skills. "
+        "Use empty arrays or empty strings when a field is absent."
+    )
 
 
 def cv_extraction_to_text(extraction: CVExtraction) -> str:

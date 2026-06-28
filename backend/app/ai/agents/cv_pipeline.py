@@ -3,6 +3,7 @@ from __future__ import annotations
 import re
 from dataclasses import dataclass, field
 
+from app.ai.extraction.gemini_document_cv import extract_cv_from_text
 from app.ai.extraction.schemas import CVExtraction, SkillEvidence
 from app.ai.matching import normalize_skills
 from app.ai.safety import mask_pii
@@ -51,7 +52,12 @@ class CVPipelineResult:
     trace: list[dict[str, str]] = field(default_factory=list)
 
 
-def run_cv_pipeline(raw_text: str, *, source_quality: str = "native_text") -> CVPipelineResult:
+def run_cv_pipeline(
+    raw_text: str,
+    *,
+    source_quality: str = "native_text",
+    use_llm: bool = False,
+) -> CVPipelineResult:
     trace: list[dict[str, str]] = []
     document_type = _router_node(raw_text)
     trace.append({"node": "router", "result": document_type})
@@ -64,8 +70,12 @@ def run_cv_pipeline(raw_text: str, *, source_quality: str = "native_text") -> CV
             trace=trace,
         )
 
-    extraction = _extractor_node(raw_text, source_quality=source_quality)
-    trace.append({"node": "extractor", "result": f"{len(extraction.skills)} skills"})
+    extraction, extractor_trace = _extractor_node(
+        raw_text,
+        source_quality=source_quality,
+        use_llm=use_llm,
+    )
+    trace.extend(extractor_trace)
     normalized = normalize_skills([skill.name for skill in extraction.skills])
     flags = _critic_node(raw_text, normalized)
     trace.append({"node": "critic", "result": ",".join(flags) or "passed"})
@@ -100,7 +110,27 @@ def _router_node(raw_text: str) -> str:
     return "cv"
 
 
-def _extractor_node(raw_text: str, *, source_quality: str) -> CVExtraction:
+def _extractor_node(
+    raw_text: str,
+    *,
+    source_quality: str,
+    use_llm: bool,
+) -> tuple[CVExtraction, list[dict[str, str]]]:
+    if use_llm:
+        extraction = extract_cv_from_text(raw_text)
+        extraction.raw_text_quality = source_quality  # type: ignore[misc]
+        return extraction, [
+            {
+                "node": "llm_extractor",
+                "result": f"{len(extraction.skills)} skills",
+            }
+        ]
+
+    fallback = _heuristic_extractor(raw_text, source_quality=source_quality)
+    return fallback, [{"node": "heuristic_extractor", "result": f"{len(fallback.skills)} skills"}]
+
+
+def _heuristic_extractor(raw_text: str, *, source_quality: str) -> CVExtraction:
     found = []
     lowered = raw_text.lower()
     for skill in SKILL_PATTERNS:

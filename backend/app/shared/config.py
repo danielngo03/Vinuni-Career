@@ -15,6 +15,7 @@ class Settings(BaseSettings):
 
     app_name: str = "Vinuni Career Platform"
     app_env: Literal["local", "test", "staging", "production"] = "local"
+    app_timezone: str = "Asia/Bangkok"
     api_v1_prefix: str = "/api/v1"
     debug: bool = False
 

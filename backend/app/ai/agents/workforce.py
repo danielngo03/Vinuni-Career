@@ -91,7 +91,7 @@ def _cv_extraction_agent(task: AgentTask) -> AgentResult:
     source_quality = str(task.payload.get("source_quality", "native_text"))
     if source_quality not in {"native_text", "ocr_needed", "vision_extracted", "unknown"}:
         source_quality = "unknown"
-    pipeline = run_cv_pipeline(raw_text, source_quality=source_quality)
+    pipeline = run_cv_pipeline(raw_text, source_quality=source_quality, use_llm=True)
     return AgentResult(
         agent="cv_extraction_agent",
         status="completed",

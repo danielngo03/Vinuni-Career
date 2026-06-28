@@ -121,3 +121,22 @@ class Bookmark(Base, TimestampMixin):
 
     student: Mapped[StudentProfile] = relationship()
     job: Mapped[Job] = relationship()
+
+
+class JobScheduledAction(Base, TimestampMixin):
+    __tablename__ = "job_scheduled_actions"
+    __table_args__ = (
+        Index("ix_job_scheduled_actions_due", "status", "run_at"),
+        Index("ix_job_scheduled_actions_job", "job_id"),
+    )
+
+    id: Mapped[str] = mapped_column(String(36), primary_key=True, default=uuid_str)
+    job_id: Mapped[str] = mapped_column(ForeignKey("jobs.id"), nullable=False)
+    action: Mapped[str] = mapped_column(String(32), nullable=False)
+    run_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False)
+    status: Mapped[str] = mapped_column(String(32), default="PENDING", nullable=False)
+    requested_by: Mapped[str | None] = mapped_column(ForeignKey("users.id"), nullable=True)
+    executed_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
+    error_message: Mapped[str | None] = mapped_column(Text, nullable=True)
+
+    job: Mapped[Job] = relationship()

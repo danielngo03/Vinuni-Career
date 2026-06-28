@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import hashlib
 import logging
 from io import BytesIO
 from typing import cast
@@ -248,10 +249,32 @@ def update_cv(
     if not cv or cv.deleted_at is not None or cv.student_id != current_user.id:
         raise AppError(code=ErrorCode.NOT_FOUND, message="CV not found", status_code=404)
 
-    cv.title = payload.title
+    if payload.title is not None:
+        cv.title = payload.title
+    if payload.raw_text is not None:
+        raw_text = payload.raw_text.strip()
+        content_hash = _content_hash(raw_text)
+        parsed_data = dict(cv.parsed_data or {})
+        last_analyzed_hash = parsed_data.get("last_analyzed_content_hash")
+        parsed_data.update(
+            {
+                "raw_markdown": raw_text,
+                "raw_text": raw_text,
+                "content_hash": content_hash,
+                "manual_edited_at": now_utc().isoformat(),
+                "analysis_stale": bool(last_analyzed_hash and last_analyzed_hash != content_hash),
+            }
+        )
+        if not last_analyzed_hash:
+            parsed_data["analysis_stale"] = True
+        cv.parsed_data = parsed_data
     db.commit()
     db.refresh(cv)
     return cv
+
+
+def _content_hash(text: str) -> str:
+    return hashlib.sha256(text.strip().encode("utf-8")).hexdigest()
 
 @router.delete("/{cv_id}", status_code=204)
 def delete_cv(

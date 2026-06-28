@@ -25,7 +25,16 @@ def extract_structured[ModelT: BaseModel](
                 "to the provided schema. Do not invent facts that are absent from source text."
             ),
         ),
-        ChatMessage(role="user", content=f"{instruction}\n\nSOURCE TEXT:\n{text[:80_000]}"),
+        ChatMessage(
+            role="user",
+            content=(
+                f"{instruction}\n\n"
+                "JSON SCHEMA:\n"
+                f"{json.dumps(schema, ensure_ascii=False)}\n\n"
+                "SOURCE TEXT:\n"
+                f"{text[:80_000]}"
+            ),
+        ),
     ]
     last_error = ""
     for attempt in range(max(1, max_retries)):
@@ -52,6 +61,10 @@ def extract_structured[ModelT: BaseModel](
         except LLMGatewayError as exc:
             last_error = str(exc)
             continue
+        if response.provider == "offline":
+            raise ValueError(
+                "Structured extraction requires a real LLM provider; offline fallback is disabled."
+            )
         try:
             return schema_model.model_validate(_load_json_object(response.content))
         except (json.JSONDecodeError, ValidationError, ValueError) as exc:

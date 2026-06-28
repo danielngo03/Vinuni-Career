@@ -70,7 +70,8 @@ class CVCreate(BaseModel):
 
 
 class CVUpdate(BaseModel):
-    title: str = Field(min_length=1, max_length=255)
+    title: str | None = Field(default=None, min_length=1, max_length=255)
+    raw_text: str | None = Field(default=None, min_length=1, max_length=80_000)
 
 
 class CVView(BaseModel):
