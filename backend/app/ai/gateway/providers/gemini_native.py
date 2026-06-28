@@ -1,13 +1,19 @@
 from __future__ import annotations
 
 import math
+import time
 from uuid import uuid4
 
 import httpx
 
+from app.ai.gateway.api_key_pool import APIKeyPool, looks_like_key_exhaustion
 from app.ai.gateway.errors import LLMProviderError, LLMProviderUnavailable
 from app.ai.gateway.schemas import ChatRequest, ChatResponse, EmbeddingResponse
 from app.shared.context import get_request_context
+
+
+SERVER_ERROR_RETRY_ATTEMPTS = 2
+SERVER_ERROR_BACKOFF_SECONDS = 1.0
 
 
 class GeminiNativeProvider:
@@ -18,12 +24,13 @@ class GeminiNativeProvider:
         *,
         base_url: str,
         api_key: str | None,
+        api_keys: list[str] | None = None,
         chat_model: str,
         embedding_model: str,
         timeout_seconds: float,
     ) -> None:
         self.base_url = base_url.rstrip("/")
-        self.api_key = api_key
+        self.api_key_pool = APIKeyPool([api_key, *(api_keys or [])])
         self.chat_model = chat_model
         self.embedding_model = embedding_model
         self.timeout_seconds = timeout_seconds
@@ -97,26 +104,45 @@ class GeminiNativeProvider:
         return body
 
     def _ensure_available(self) -> None:
-        if not self.api_key:
-            raise LLMProviderUnavailable("gemini API key is not configured")
+        if not self.api_key_pool.has_available_key():
+            raise LLMProviderUnavailable("gemini API key is not configured or all keys are quota exhausted")
 
     def _post(self, path: str, body: dict) -> dict:
         headers = {"Content-Type": "application/json", "X-Client-Request-Id": _request_id()}
-        try:
-            with httpx.Client(timeout=self.timeout_seconds) as client:
-                response = client.post(
-                    f"{self.base_url}{path}",
-                    params={"key": self.api_key},
-                    headers=headers,
-                    json=body,
-                )
-            response.raise_for_status()
-            return response.json()
-        except httpx.HTTPStatusError as exc:
-            detail = exc.response.text[:500]
-            raise LLMProviderError(self.name, f"HTTP {exc.response.status_code}: {detail}") from exc
-        except httpx.HTTPError as exc:
-            raise LLMProviderError(self.name, str(exc)) from exc
+        key_errors: list[str] = []
+        with httpx.Client(timeout=self.timeout_seconds) as client:
+            for api_key in self.api_key_pool.available_keys():
+                for attempt in range(SERVER_ERROR_RETRY_ATTEMPTS):
+                    try:
+                        response = client.post(
+                            f"{self.base_url}{path}",
+                            params={"key": api_key},
+                            headers=headers,
+                            json=body,
+                        )
+                        response.raise_for_status()
+                        self.api_key_pool.record_success(api_key)
+                        return response.json()
+                    except httpx.HTTPStatusError as exc:
+                        status_code = exc.response.status_code
+                        detail = exc.response.text[:500]
+                        if 500 <= status_code < 600 and attempt + 1 < SERVER_ERROR_RETRY_ATTEMPTS:
+                            time.sleep(SERVER_ERROR_BACKOFF_SECONDS * (2**attempt))
+                            continue
+                        if looks_like_key_exhaustion(status_code, detail):
+                            self.api_key_pool.mark_exhausted(api_key)
+                            key_errors.append(f"HTTP {status_code}: {detail}")
+                            break
+                        raise LLMProviderError(
+                            self.name, f"HTTP {status_code}: {detail}"
+                        ) from exc
+                    except httpx.HTTPError as exc:
+                        raise LLMProviderError(self.name, str(exc)) from exc
+        if key_errors:
+            raise LLMProviderUnavailable(
+                "gemini API keys are quota exhausted: " + "; ".join(key_errors)
+            )
+        raise LLMProviderUnavailable("gemini API key is not configured")
 
 
 def _estimate_tokens(text: str) -> int:

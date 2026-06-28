@@ -41,6 +41,7 @@ class JobCreate(BaseModel):
     is_active: bool = True
     is_featured: bool = False
     max_openings: int | None = Field(default=None, ge=1)
+    parsed_requirements: dict[str, Any] | None = None
 
     @model_validator(mode="after")
     def validate_logic(self) -> JobCreate:
@@ -58,6 +59,21 @@ class JobCreate(BaseModel):
                 raise ValueError("application_deadline cannot be in the past")
 
         return self
+
+
+class JobUpdate(BaseModel):
+    title: str | None = Field(default=None, min_length=3, max_length=255)
+    description: str | None = Field(default=None, min_length=20, max_length=50_000)
+    requirements: str | None = None
+    responsibilities: str | None = None
+    benefits_text: str | None = None
+    location_address: str | None = Field(default=None, max_length=500)
+    skills: list[str] | None = None
+    benefits: list[str] | None = None
+    application_deadline: datetime | None = None
+    is_active: bool | None = None
+    max_openings: int | None = Field(default=None, ge=1)
+    parsed_requirements: dict[str, Any] | None = None
 
 
 class JobModerationRequest(BaseModel):
@@ -95,6 +111,9 @@ class JobView(BaseModel):
     max_openings: int | None
     parsed_requirements: dict[str, Any]
     status: JobStatus
+    match_score: float | None = None
+    matched_skills: list[str] = Field(default_factory=list)
+    missing_skills: list[str] = Field(default_factory=list)
 
 
 class JobPage(BaseModel):
@@ -102,6 +121,28 @@ class JobPage(BaseModel):
     total: int
     limit: int
     offset: int
+
+
+class JobScheduleCreate(BaseModel):
+    action: str = Field(pattern="^(PUBLISH|OPEN|CLOSE)$")
+    run_at: datetime
+
+
+class JobActionRequest(BaseModel):
+    action: str = Field(pattern="^(PUBLISH|OPEN|CLOSE)$")
+
+
+class JobScheduleView(BaseModel):
+    model_config = ConfigDict(from_attributes=True)
+
+    id: str
+    job_id: str
+    action: str
+    run_at: datetime
+    status: str
+    requested_by: str | None
+    executed_at: datetime | None
+    error_message: str | None
 
 
 class EventCreate(BaseModel):

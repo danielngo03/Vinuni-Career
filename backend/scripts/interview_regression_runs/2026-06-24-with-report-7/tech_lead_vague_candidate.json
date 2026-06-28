@@ -1,0 +1,766 @@
+{
+  "case": "tech_lead_vague_candidate",
+  "mode": "tech_lead",
+  "answer_style": "vague",
+  "max_questions": 12,
+  "generated_at": "2026-06-24T13:52:50.767814+00:00",
+  "flags": [],
+  "report": {
+    "overall_score": 2,
+    "overall_summary": "Ứng viên không thể hiện được kiến thức kỹ thuật cơ bản hoặc kinh nghiệm thực tế cho vị trí thực tập sinh Backend AI. Trong suốt buổi phỏng vấn, ứng viên liên tục đưa ra một câu trả lời duy nhất và không liên quan cho mọi câu hỏi kỹ thuật, bao gồm cả các yêu cầu về viết code FastAPI, Dockerfile, và giải quyết vấn đề logic. Điều này cho thấy sự thiếu chuẩn bị hoặc thiếu hụt kỹ năng nền tảng cần thiết để đảm nhận vai trò.",
+    "dimensions": [
+      {
+        "key": "technical_knowledge",
+        "label": "Kiến thức chuyên môn",
+        "score": 0,
+        "weight": 30,
+        "summary": "Ứng viên không thể hiện được kiến thức về FastAPI, Docker, Python hay SQL.",
+        "evidence": [
+          "Không thể viết đoạn code FastAPI đơn giản.",
+          "Không thể cung cấp nội dung Dockerfile cơ bản.",
+          "Không thể giải quyết bài toán SQL INNER JOIN cơ bản."
+        ]
+      },
+      {
+        "key": "practical_experience",
+        "label": "Kinh nghiệm thực tế",
+        "score": 0,
+        "weight": 20,
+        "summary": "Không có bằng chứng về kinh nghiệm thực tế hoặc quyền sở hữu dự án.",
+        "evidence": [
+          "Ứng viên không thể mô tả kiến trúc dự án đồ án của chính mình.",
+          "Không thể nêu tên một tính năng hoặc endpoint cụ thể đã triển khai."
+        ]
+      },
+      {
+        "key": "problem_solving",
+        "label": "Giải quyết vấn đề",
+        "score": 0,
+        "weight": 20,
+        "summary": "Ứng viên không thể giải thích quy trình tư duy hoặc kỹ thuật gỡ lỗi ngoài việc xem log.",
+        "evidence": [
+          "Luôn trả lời lặp lại một câu duy nhất về việc xem log khi được hỏi về cách xử lý lỗi runtime hoặc lỗi logic.",
+          "Không thể giải thích cách sử dụng debugger hoặc breakpoint."
+        ]
+      },
+      {
+        "key": "communication",
+        "label": "Giao tiếp và làm rõ",
+        "score": 10,
+        "weight": 20,
+        "summary": "Khả năng giao tiếp rất hạn chế, thiếu sự tương tác và không trả lời đúng trọng tâm câu hỏi.",
+        "evidence": [
+          "Sử dụng cùng một câu trả lời rập khuôn cho tất cả các câu hỏi khác nhau.",
+          "Không thể giải thích hoặc làm rõ các vấn đề kỹ thuật khi được yêu cầu."
+        ]
+      },
+      {
+        "key": "critical_thinking",
+        "label": "Tư duy phản biện",
+        "score": 0,
+        "weight": 10,
+        "summary": "Không thể hiện được khả năng tư duy phản biện hoặc phân tích kỹ thuật.",
+        "evidence": [
+          "Không đưa ra được các phương án thay thế hoặc phân tích nguyên nhân gốc rễ khi được hỏi về các tình huống kỹ thuật giả định."
+        ]
+      }
+    ],
+    "strengths": [
+      "Không có điểm mạnh kỹ thuật nào được ghi nhận trong buổi phỏng vấn."
+    ],
+    "improvements": [
+      "Cần học lại các kiến thức nền tảng về Python, FastAPI và Docker.",
+      "Cần rèn luyện kỹ năng giao tiếp và lắng nghe để trả lời đúng trọng tâm câu hỏi.",
+      "Cần thực hành viết code thực tế thay vì chỉ nắm lý thuyết bề nổi.",
+      "Cần học cách phân tích và giải quyết vấn đề kỹ thuật một cách có hệ thống thay vì chỉ dựa vào log."
+    ],
+    "insufficient_evidence": [
+      "Thiếu hoàn toàn bằng chứng về kỹ năng lập trình.",
+      "Thiếu bằng chứng về khả năng làm việc với cơ sở dữ liệu.",
+      "Thiếu bằng chứng về khả năng triển khai ứng dụng (Docker)."
+    ],
+    "action_plan": [
+      "Tập trung xây dựng các dự án nhỏ từ đầu (tự viết code) để hiểu rõ kiến trúc.",
+      "Học cách sử dụng các công cụ debug chuyên nghiệp như pdb hoặc debugger trong IDE.",
+      "Luyện tập các bài tập SQL cơ bản trên các nền tảng trực tuyến.",
+      "Tìm hiểu cách đọc tài liệu kỹ thuật (documentation) của các framework như FastAPI."
+    ],
+    "confidence": "high"
+  },
+  "report_metadata": {
+    "provider": "gemini",
+    "model": "gemini-3.1-flash-lite",
+    "input_tokens": 5233,
+    "output_tokens": 909,
+    "attempts": 1
+  },
+  "answer_evaluations": [
+    {
+      "sequence": 1,
+      "question": "Bạn có thể mô tả kiến trúc tổng thể của dự án AI backend demo mà bạn đã thực hiện, cũng như vai trò cụ thể của bạn trong việc xây dựng dịch vụ FastAPI và triển khai Docker container cho dự án này không?",
+      "answer": "Em có làm qua trong đồ án và em thường debug bằng cách xem log rồi sửa dần.",
+      "evaluation": {
+        "score": 1,
+        "status": "claimed",
+        "answer_quality": "vague",
+        "strengths": [
+          "mentions debugging via logs"
+        ],
+        "missing_evidence": [
+          "architecture description",
+          "specific implementation details",
+          "ownership confirmation"
+        ],
+        "contradictions": [],
+        "detected_competency": "basic_debugging",
+        "evidence_found": [
+          "uses logs for debugging"
+        ],
+        "remaining_gap": "No evidence of architecture understanding or specific contribution to the FastAPI/Docker project.",
+        "ownership": "unknown",
+        "topic_decision": "clarify",
+        "reason_for_next_question": "The previous answer was too generic and did not address the architecture or specific role. Need to ground the conversation in a concrete task.",
+        "anti_repetition_check": "Focusing on a specific component implementation rather than general architecture.",
+        "ownership_check": "Asking for a specific feature implementation to verify if the candidate actually built the project.",
+        "red_flags": [],
+        "communication": {
+          "clarity": 1,
+          "specificity": 1,
+          "relevance": 2,
+          "structure": 1,
+          "summary": "Candidate provided a very brief, non-specific answer regarding their project work."
+        }
+      }
+    },
+    {
+      "sequence": 2,
+      "question": "Cảm ơn bạn đã chia sẻ về cách debug. Trong dự án FastAPI đó, bạn có thể cho biết cụ thể một endpoint hoặc một tính năng xử lý dữ liệu nào mà bạn đã trực tiếp thiết kế và triển khai không?",
+      "answer": "Em có làm qua trong đồ án và em thường debug bằng cách xem log rồi sửa dần.",
+      "evaluation": {
+        "score": 0,
+        "status": "not_assessed",
+        "answer_quality": "vague",
+        "strengths": [],
+        "missing_evidence": [
+          "specific implementation details",
+          "architecture understanding",
+          "direct contribution evidence"
+        ],
+        "contradictions": [],
+        "detected_competency": "none",
+        "evidence_found": [
+          "uses logs for debugging"
+        ],
+        "remaining_gap": "Candidate failed to provide specific details about their project work after two attempts.",
+        "ownership": "unknown",
+        "topic_decision": "stop",
+        "reason_for_next_question": "The candidate provided the same vague answer twice regarding project ownership. Switching to a direct technical check on FastAPI to assess actual skill level.",
+        "anti_repetition_check": "Switching from project-based inquiry to a specific technical code task.",
+        "ownership_check": "Project-based inquiry failed to establish ownership; moving to technical knowledge verification.",
+        "red_flags": [
+          "vague responses",
+          "repetitive answers"
+        ],
+        "communication": {
+          "clarity": 1,
+          "specificity": 1,
+          "relevance": 1,
+          "structure": 1,
+          "summary": "The candidate repeated the same vague response about debugging when asked for specific project details."
+        }
+      }
+    },
+    {
+      "sequence": 3,
+      "question": "Để kiểm tra kiến thức về FastAPI, bạn hãy viết một đoạn code ngắn định nghĩa một endpoint GET đơn giản nhận vào một tham số query string là 'user_id' và trả về một JSON response chứa thông tin 'user_id' đó.",
+      "answer": "Em có làm qua trong đồ án và em thường debug bằng cách xem log rồi sửa dần.",
+      "evaluation": {
+        "score": 0,
+        "status": "not_assessed",
+        "answer_quality": "unable_to_answer",
+        "strengths": [],
+        "missing_evidence": [
+          "no code provided",
+          "no project details",
+          "no technical depth"
+        ],
+        "contradictions": [],
+        "detected_competency": "none",
+        "evidence_found": [
+          "uses logs for debugging"
+        ],
+        "remaining_gap": "Candidate failed to provide a simple FastAPI code snippet after being asked directly.",
+        "ownership": "unknown",
+        "topic_decision": "stop",
+        "reason_for_next_question": "The candidate provided the same non-responsive answer three times. Switching to a different technical skill (Docker) to see if they can provide a concrete technical response.",
+        "anti_repetition_check": "This is a new topic (Docker) compared to the previous FastAPI/Project questions.",
+        "ownership_check": "Switching to a direct technical check on Docker to assess practical knowledge.",
+        "red_flags": [
+          "vague responses",
+          "repetitive answers",
+          "unable to provide code"
+        ],
+        "communication": {
+          "clarity": 1,
+          "specificity": 1,
+          "relevance": 1,
+          "structure": 1,
+          "summary": "Candidate repeated the same vague response despite being asked for a specific code snippet."
+        }
+      }
+    },
+    {
+      "sequence": 4,
+      "question": "Để chuyển sang chủ đề Docker, bạn hãy viết một nội dung file Dockerfile đơn giản để đóng gói một ứng dụng Python cơ bản, trong đó bao gồm các bước: sử dụng image base là 'python:3.9-slim', copy file 'requirements.txt' vào container, cài đặt các thư viện cần thiết và chạy file 'main.py'.",
+      "answer": "Em có làm qua trong đồ án và em thường debug bằng cách xem log rồi sửa dần.",
+      "evaluation": {
+        "score": 0,
+        "status": "not_assessed",
+        "answer_quality": "unable_to_answer",
+        "strengths": [],
+        "missing_evidence": [
+          "No technical evidence provided for Docker",
+          "No technical evidence provided for Python",
+          "No technical evidence provided for FastAPI"
+        ],
+        "contradictions": [],
+        "detected_competency": "none",
+        "evidence_found": [
+          "Candidate consistently provided the same non-responsive answer across multiple technical topics."
+        ],
+        "remaining_gap": "Candidate failed to demonstrate any technical knowledge or project ownership despite multiple opportunities.",
+        "ownership": "not_owned",
+        "topic_decision": "stop",
+        "reason_for_next_question": "The candidate has provided the same non-responsive answer to four consecutive technical questions, indicating a lack of technical readiness for the role.",
+        "anti_repetition_check": "This is the final action to conclude the interview.",
+        "ownership_check": "Ownership is determined to be not_owned based on the inability to provide any project-specific details.",
+        "red_flags": [
+          "vague responses",
+          "repetitive answers",
+          "unable to provide code",
+          "unable to provide technical details"
+        ],
+        "communication": {
+          "clarity": 1,
+          "specificity": 1,
+          "relevance": 1,
+          "structure": 1,
+          "summary": "The candidate provided the same repetitive, non-technical answer to every question asked."
+        }
+      }
+    },
+    {
+      "sequence": 5,
+      "question": "Cảm ơn bạn đã chia sẻ. Để kết thúc phần trao đổi kỹ thuật, bạn có thể giải thích ngắn gọn cách bạn thường xử lý một lỗi runtime cụ thể mà bạn từng gặp phải trong quá trình phát triển ứng dụng Python không?",
+      "answer": "Em có làm qua trong đồ án và em thường debug bằng cách xem log rồi sửa dần.",
+      "evaluation": {
+        "score": null,
+        "status": "not_assessed",
+        "answer_quality": "unable_to_answer",
+        "strengths": [],
+        "missing_evidence": [],
+        "contradictions": [],
+        "detected_competency": "",
+        "evidence_found": [],
+        "remaining_gap": "",
+        "ownership": "unknown",
+        "topic_decision": "continue",
+        "reason_for_next_question": "",
+        "anti_repetition_check": "",
+        "ownership_check": "",
+        "red_flags": [],
+        "communication": {
+          "clarity": 1,
+          "specificity": 1,
+          "relevance": 1,
+          "structure": 1,
+          "summary": "The candidate provided the same repetitive, non-technical answer to every question asked."
+        }
+      }
+    },
+    {
+      "sequence": 6,
+      "question": "Để chuyển sang chủ đề khác, bạn có thể chia sẻ về một tình huống cụ thể trong quá trình học tập hoặc làm dự án mà bạn đã phải đối mặt với một vấn đề kỹ thuật phức tạp, và cách bạn đã tiếp cận để giải quyết vấn đề đó là gì?",
+      "answer": "Em có làm qua trong đồ án và em thường debug bằng cách xem log rồi sửa dần.",
+      "evaluation": {
+        "score": null,
+        "status": "not_assessed",
+        "answer_quality": "unable_to_answer",
+        "strengths": [],
+        "missing_evidence": [],
+        "contradictions": [],
+        "detected_competency": "",
+        "evidence_found": [],
+        "remaining_gap": "",
+        "ownership": "unknown",
+        "topic_decision": "continue",
+        "reason_for_next_question": "",
+        "anti_repetition_check": "",
+        "ownership_check": "",
+        "red_flags": [],
+        "communication": {
+          "clarity": 1,
+          "specificity": 1,
+          "relevance": 1,
+          "structure": 1,
+          "summary": "The candidate provided the same repetitive, non-technical answer to every question asked."
+        }
+      }
+    },
+    {
+      "sequence": 7,
+      "question": "Trong quá trình làm việc với các dự án Python, nếu bạn gặp phải một lỗi 'MemoryError' khi xử lý một tập dữ liệu lớn, bạn sẽ thực hiện các bước kiểm tra hoặc thay đổi cách tiếp cận code như thế nào để khắc phục vấn đề này?",
+      "answer": "Em có làm qua trong đồ án và em thường debug bằng cách xem log rồi sửa dần.",
+      "evaluation": {
+        "score": null,
+        "status": "not_assessed",
+        "answer_quality": "unable_to_answer",
+        "strengths": [],
+        "missing_evidence": [],
+        "contradictions": [],
+        "detected_competency": "",
+        "evidence_found": [],
+        "remaining_gap": "",
+        "ownership": "unknown",
+        "topic_decision": "continue",
+        "reason_for_next_question": "",
+        "anti_repetition_check": "",
+        "ownership_check": "",
+        "red_flags": [],
+        "communication": {
+          "clarity": 1,
+          "specificity": 1,
+          "relevance": 1,
+          "structure": 1,
+          "summary": "The candidate provided the same repetitive, non-technical answer to every question asked."
+        }
+      }
+    },
+    {
+      "sequence": 8,
+      "question": "Ngoài việc xem log, bạn có thể mô tả một kỹ thuật hoặc công cụ cụ thể nào khác mà bạn đã sử dụng để xác định nguyên nhân gốc rễ của một lỗi logic trong code không?",
+      "answer": "Em có làm qua trong đồ án và em thường debug bằng cách xem log rồi sửa dần.",
+      "evaluation": {
+        "score": null,
+        "status": "not_assessed",
+        "answer_quality": "unable_to_answer",
+        "strengths": [],
+        "missing_evidence": [],
+        "contradictions": [],
+        "detected_competency": "",
+        "evidence_found": [],
+        "remaining_gap": "",
+        "ownership": "unknown",
+        "topic_decision": "continue",
+        "reason_for_next_question": "",
+        "anti_repetition_check": "",
+        "ownership_check": "",
+        "red_flags": [],
+        "communication": {
+          "clarity": 1,
+          "specificity": 1,
+          "relevance": 1,
+          "structure": 1,
+          "summary": "The candidate provided the same repetitive, non-technical answer to every question asked."
+        }
+      }
+    },
+    {
+      "sequence": 9,
+      "question": "Để hiểu rõ hơn về cách bạn tiếp cận vấn đề, giả sử bạn đang làm việc với một hàm Python xử lý dữ liệu nhưng kết quả trả về không đúng như mong đợi. Ngoài việc đọc log, bạn có thể giải thích cách sử dụng một công cụ như trình gỡ lỗi (debugger) hoặc kỹ thuật đặt điểm dừng (breakpoint) để kiểm tra giá trị của các biến tại thời điểm thực thi không?",
+      "answer": "Em có làm qua trong đồ án và em thường debug bằng cách xem log rồi sửa dần.",
+      "evaluation": {
+        "score": null,
+        "status": "not_assessed",
+        "answer_quality": "unable_to_answer",
+        "strengths": [],
+        "missing_evidence": [],
+        "contradictions": [],
+        "detected_competency": "",
+        "evidence_found": [],
+        "remaining_gap": "",
+        "ownership": "unknown",
+        "topic_decision": "continue",
+        "reason_for_next_question": "",
+        "anti_repetition_check": "",
+        "ownership_check": "",
+        "red_flags": [],
+        "communication": {
+          "clarity": 1,
+          "specificity": 1,
+          "relevance": 1,
+          "structure": 1,
+          "summary": "The candidate provided the same repetitive, non-technical answer to every question asked."
+        }
+      }
+    },
+    {
+      "sequence": 10,
+      "question": "Chúng ta hãy chuyển sang chủ đề về cơ sở dữ liệu. Giả sử bạn có một bảng 'users' và một bảng 'orders', bạn hãy viết một câu lệnh SQL sử dụng INNER JOIN để lấy ra tên người dùng (user_name) và tổng số tiền đơn hàng (total_amount) của tất cả những người dùng đã thực hiện ít nhất một đơn hàng.",
+      "answer": "Em có làm qua trong đồ án và em thường debug bằng cách xem log rồi sửa dần.",
+      "evaluation": {
+        "score": null,
+        "status": "not_assessed",
+        "answer_quality": "unable_to_answer",
+        "strengths": [],
+        "missing_evidence": [],
+        "contradictions": [],
+        "detected_competency": "",
+        "evidence_found": [],
+        "remaining_gap": "",
+        "ownership": "unknown",
+        "topic_decision": "continue",
+        "reason_for_next_question": "",
+        "anti_repetition_check": "",
+        "ownership_check": "",
+        "red_flags": [],
+        "communication": {
+          "clarity": 1,
+          "specificity": 1,
+          "relevance": 1,
+          "structure": 1,
+          "summary": "The candidate provided the same repetitive, non-technical answer to every question asked throughout the interview."
+        }
+      }
+    },
+    {
+      "sequence": 11,
+      "question": "Để hiểu rõ hơn về cách bạn giải quyết vấn đề, giả sử bạn có một đoạn code Python thực hiện một vòng lặp xử lý dữ liệu nhưng bị treo hoặc chạy rất chậm. Bạn sẽ sử dụng những bước cụ thể nào để xác định xem vấn đề nằm ở thuật toán hay do tài nguyên hệ thống?",
+      "answer": "Em có làm qua trong đồ án và em thường debug bằng cách xem log rồi sửa dần.",
+      "evaluation": {
+        "score": null,
+        "status": "not_assessed",
+        "answer_quality": "unable_to_answer",
+        "strengths": [],
+        "missing_evidence": [],
+        "contradictions": [],
+        "detected_competency": "",
+        "evidence_found": [],
+        "remaining_gap": "",
+        "ownership": "unknown",
+        "topic_decision": "continue",
+        "reason_for_next_question": "",
+        "anti_repetition_check": "",
+        "ownership_check": "",
+        "red_flags": [],
+        "communication": {
+          "clarity": 1,
+          "specificity": 1,
+          "relevance": 1,
+          "structure": 1,
+          "summary": "The candidate provided the same repetitive, non-technical answer to every question asked throughout the interview."
+        }
+      }
+    }
+  ],
+  "turns": [
+    {
+      "sequence": 1,
+      "question": "Bạn có thể mô tả kiến trúc tổng thể của dự án AI backend demo mà bạn đã thực hiện, cũng như vai trò cụ thể của bạn trong việc xây dựng dịch vụ FastAPI và triển khai Docker container cho dự án này không?",
+      "answer": "Em có làm qua trong đồ án và em thường debug bằng cách xem log rồi sửa dần.",
+      "phase": "cv_verification",
+      "topic_key": "ai_backend_demo_architecture",
+      "question_type": "initial",
+      "difficulty": "easy",
+      "provider_metadata": {
+        "planner": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 2197,
+          "output_tokens": 247,
+          "attempts": 1
+        },
+        "question_generator": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 802,
+          "output_tokens": 52,
+          "attempts": 1
+        }
+      }
+    },
+    {
+      "sequence": 2,
+      "question": "Cảm ơn bạn đã chia sẻ về cách debug. Trong dự án FastAPI đó, bạn có thể cho biết cụ thể một endpoint hoặc một tính năng xử lý dữ liệu nào mà bạn đã trực tiếp thiết kế và triển khai không?",
+      "answer": "Em có làm qua trong đồ án và em thường debug bằng cách xem log rồi sửa dần.",
+      "phase": "cv_verification",
+      "topic_key": "ai_backend_demo_architecture",
+      "question_type": "follow_up",
+      "difficulty": "easy",
+      "provider_metadata": {
+        "planner": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 2313,
+          "output_tokens": 609,
+          "attempts": 1
+        },
+        "question_generator": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 1227,
+          "output_tokens": 51,
+          "attempts": 1
+        }
+      }
+    },
+    {
+      "sequence": 3,
+      "question": "Để kiểm tra kiến thức về FastAPI, bạn hãy viết một đoạn code ngắn định nghĩa một endpoint GET đơn giản nhận vào một tham số query string là 'user_id' và trả về một JSON response chứa thông tin 'user_id' đó.",
+      "answer": "Em có làm qua trong đồ án và em thường debug bằng cách xem log rồi sửa dần.",
+      "phase": "cv_verification",
+      "topic_key": "fastapi_implementation_check",
+      "question_type": "transition",
+      "difficulty": "easy",
+      "provider_metadata": {
+        "planner": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 2537,
+          "output_tokens": 546,
+          "attempts": 1
+        },
+        "question_generator": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 1267,
+          "output_tokens": 60,
+          "attempts": 1
+        }
+      }
+    },
+    {
+      "sequence": 4,
+      "question": "Để chuyển sang chủ đề Docker, bạn hãy viết một nội dung file Dockerfile đơn giản để đóng gói một ứng dụng Python cơ bản, trong đó bao gồm các bước: sử dụng image base là 'python:3.9-slim', copy file 'requirements.txt' vào container, cài đặt các thư viện cần thiết và chạy file 'main.py'.",
+      "answer": "Em có làm qua trong đồ án và em thường debug bằng cách xem log rồi sửa dần.",
+      "phase": "cv_verification",
+      "topic_key": "docker_containerization_check",
+      "question_type": "transition",
+      "difficulty": "easy",
+      "provider_metadata": {
+        "planner": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 2771,
+          "output_tokens": 590,
+          "attempts": 1
+        },
+        "question_generator": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 1356,
+          "output_tokens": 83,
+          "attempts": 1
+        }
+      }
+    },
+    {
+      "sequence": 5,
+      "question": "Cảm ơn bạn đã chia sẻ. Để kết thúc phần trao đổi kỹ thuật, bạn có thể giải thích ngắn gọn cách bạn thường xử lý một lỗi runtime cụ thể mà bạn từng gặp phải trong quá trình phát triển ứng dụng Python không?",
+      "answer": "Em có làm qua trong đồ án và em thường debug bằng cách xem log rồi sửa dần.",
+      "phase": "cv_verification",
+      "topic_key": "technical_problem_solving",
+      "question_type": "transition",
+      "difficulty": "easy",
+      "provider_metadata": {
+        "planner": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 3057,
+          "output_tokens": 623,
+          "attempts": 1,
+          "backend_overrode_early_finish": true
+        },
+        "question_generator": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 1503,
+          "output_tokens": 54,
+          "attempts": 1
+        }
+      }
+    },
+    {
+      "sequence": 6,
+      "question": "Để chuyển sang chủ đề khác, bạn có thể chia sẻ về một tình huống cụ thể trong quá trình học tập hoặc làm dự án mà bạn đã phải đối mặt với một vấn đề kỹ thuật phức tạp, và cách bạn đã tiếp cận để giải quyết vấn đề đó là gì?",
+      "answer": "Em có làm qua trong đồ án và em thường debug bằng cách xem log rồi sửa dần.",
+      "phase": "cv_verification",
+      "topic_key": "technical_problem_solving",
+      "question_type": "transition",
+      "difficulty": "easy",
+      "provider_metadata": {
+        "planner": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 3400,
+          "output_tokens": 328,
+          "attempts": 1,
+          "backend_overrode_early_finish": true
+        },
+        "question_generator": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 1329,
+          "output_tokens": 66,
+          "attempts": 1
+        }
+      }
+    },
+    {
+      "sequence": 7,
+      "question": "Trong quá trình làm việc với các dự án Python, nếu bạn gặp phải một lỗi 'MemoryError' khi xử lý một tập dữ liệu lớn, bạn sẽ thực hiện các bước kiểm tra hoặc thay đổi cách tiếp cận code như thế nào để khắc phục vấn đề này?",
+      "answer": "Em có làm qua trong đồ án và em thường debug bằng cách xem log rồi sửa dần.",
+      "phase": "cv_verification",
+      "topic_key": "technical_problem_solving",
+      "question_type": "transition",
+      "difficulty": "easy",
+      "provider_metadata": {
+        "planner": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 3588,
+          "output_tokens": 335,
+          "attempts": 1,
+          "backend_overrode_early_finish": true
+        },
+        "question_generator": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 1401,
+          "output_tokens": 60,
+          "attempts": 1
+        }
+      }
+    },
+    {
+      "sequence": 8,
+      "question": "Ngoài việc xem log, bạn có thể mô tả một kỹ thuật hoặc công cụ cụ thể nào khác mà bạn đã sử dụng để xác định nguyên nhân gốc rễ của một lỗi logic trong code không?",
+      "answer": "Em có làm qua trong đồ án và em thường debug bằng cách xem log rồi sửa dần.",
+      "phase": "cv_verification",
+      "topic_key": "technical_problem_solving",
+      "question_type": "transition",
+      "difficulty": "easy",
+      "provider_metadata": {
+        "planner": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 3721,
+          "output_tokens": 323,
+          "attempts": 1,
+          "backend_overrode_early_finish": true
+        },
+        "question_generator": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 1461,
+          "output_tokens": 45,
+          "attempts": 1
+        }
+      }
+    },
+    {
+      "sequence": 9,
+      "question": "Để hiểu rõ hơn về cách bạn tiếp cận vấn đề, giả sử bạn đang làm việc với một hàm Python xử lý dữ liệu nhưng kết quả trả về không đúng như mong đợi. Ngoài việc đọc log, bạn có thể giải thích cách sử dụng một công cụ như trình gỡ lỗi (debugger) hoặc kỹ thuật đặt điểm dừng (breakpoint) để kiểm tra giá trị của các biến tại thời điểm thực thi không?",
+      "answer": "Em có làm qua trong đồ án và em thường debug bằng cách xem log rồi sửa dần.",
+      "phase": "cv_verification",
+      "topic_key": "technical_problem_solving",
+      "question_type": "transition",
+      "difficulty": "easy",
+      "provider_metadata": {
+        "planner": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 3840,
+          "output_tokens": 322,
+          "attempts": 1,
+          "backend_overrode_early_finish": true
+        },
+        "question_generator": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 1495,
+          "output_tokens": 90,
+          "attempts": 1
+        }
+      }
+    },
+    {
+      "sequence": 10,
+      "question": "Chúng ta hãy chuyển sang chủ đề về cơ sở dữ liệu. Giả sử bạn có một bảng 'users' và một bảng 'orders', bạn hãy viết một câu lệnh SQL sử dụng INNER JOIN để lấy ra tên người dùng (user_name) và tổng số tiền đơn hàng (total_amount) của tất cả những người dùng đã thực hiện ít nhất một đơn hàng.",
+      "answer": "Em có làm qua trong đồ án và em thường debug bằng cách xem log rồi sửa dần.",
+      "phase": "cv_verification",
+      "topic_key": "technical_problem_solving",
+      "question_type": "transition",
+      "difficulty": "easy",
+      "provider_metadata": {
+        "planner": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 4003,
+          "output_tokens": 325,
+          "attempts": 1,
+          "backend_overrode_early_finish": true
+        },
+        "question_generator": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 1631,
+          "output_tokens": 81,
+          "attempts": 1
+        }
+      }
+    },
+    {
+      "sequence": 11,
+      "question": "Để hiểu rõ hơn về cách bạn giải quyết vấn đề, giả sử bạn có một đoạn code Python thực hiện một vòng lặp xử lý dữ liệu nhưng bị treo hoặc chạy rất chậm. Bạn sẽ sử dụng những bước cụ thể nào để xác định xem vấn đề nằm ở thuật toán hay do tài nguyên hệ thống?",
+      "answer": "Em có làm qua trong đồ án và em thường debug bằng cách xem log rồi sửa dần.",
+      "phase": "cv_verification",
+      "topic_key": "technical_problem_solving",
+      "question_type": "transition",
+      "difficulty": "easy",
+      "provider_metadata": {
+        "planner": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 4159,
+          "output_tokens": 326,
+          "attempts": 1,
+          "backend_overrode_early_finish": true
+        },
+        "question_generator": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 1710,
+          "output_tokens": 68,
+          "attempts": 1
+        }
+      }
+    },
+    {
+      "sequence": 12,
+      "question": "Trong đồ án của bạn, hãy mô tả một lỗi logic cụ thể mà bạn đã gặp phải và các bước bạn đã thực hiện để xác định nguyên nhân gây ra lỗi đó trong code.",
+      "answer": "Em có làm qua trong đồ án và em thường debug bằng cách xem log rồi sửa dần.",
+      "phase": "cv_verification",
+      "topic_key": "technical_problem_solving",
+      "question_type": "transition",
+      "difficulty": "easy",
+      "provider_metadata": {
+        "planner": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 4317,
+          "output_tokens": 330,
+          "attempts": 1,
+          "backend_overrode_early_finish": true
+        },
+        "question_generator": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 1843,
+          "output_tokens": 42,
+          "attempts": 2
+        }
+      }
+    }
+  ]
+}

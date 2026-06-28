@@ -1,7 +1,9 @@
 from __future__ import annotations
 
 import json
+import os
 from functools import lru_cache
+from pathlib import Path
 from typing import Annotated, Any, Literal
 
 from pydantic import AnyHttpUrl, Field, field_validator
@@ -13,6 +15,7 @@ class Settings(BaseSettings):
 
     app_name: str = "Vinuni Career Platform"
     app_env: Literal["local", "test", "staging", "production"] = "local"
+    app_timezone: str = "Asia/Bangkok"
     api_v1_prefix: str = "/api/v1"
     debug: bool = False
 
@@ -56,6 +59,7 @@ class Settings(BaseSettings):
     openai_embedding_model: str = "text-embedding-3-small"
 
     gemini_api_key: str | None = None
+    gemini_api_keys: Annotated[list[str], NoDecode] = []
     gemini_api_style: Literal["native", "openai_compatible"] = "native"
     gemini_base_url: str = "https://generativelanguage.googleapis.com/v1beta"
     gemini_openai_base_url: str = "https://generativelanguage.googleapis.com/v1beta/openai"
@@ -163,6 +167,7 @@ class Settings(BaseSettings):
         "backend_cors_origins",
         "llm_provider_chain",
         "embedding_provider_chain",
+        "gemini_api_keys",
         "openrouter_model_fallbacks",
         mode="before",
     )
@@ -174,6 +179,65 @@ class Settings(BaseSettings):
                 return json.loads(stripped)
             return [item.strip() for item in stripped.split(",") if item.strip()]
         return value
+
+
+def get_gemini_api_keys() -> list[str]:
+    values = _collect_dotenv_values()
+    values.update(os.environ)
+    return _dedupe_keys(
+        [
+            *_parse_key_list(values.get("GEMINI_API_KEYS")),
+            *_parse_key_list(values.get("GEMINI_API_KEY")),
+        ]
+    )
+
+
+def _collect_dotenv_values() -> dict[str, str]:
+    root = Path(__file__).resolve().parents[3]
+    paths = [Path.cwd() / ".env", root / ".env", root / "backend" / ".env"]
+    values: dict[str, str] = {}
+    for path in paths:
+        if not path.exists():
+            continue
+        for line in path.read_text(encoding="utf-8").splitlines():
+            stripped = line.strip()
+            if not stripped or stripped.startswith("#") or "=" not in stripped:
+                continue
+            key, raw_value = stripped.split("=", 1)
+            values[key.strip()] = _clean_dotenv_value(raw_value)
+    return values
+
+
+def _clean_dotenv_value(value: str) -> str:
+    stripped = value.strip()
+    if " #" in stripped:
+        stripped = stripped.split(" #", 1)[0].strip()
+    if len(stripped) >= 2 and stripped[0] == stripped[-1] and stripped[0] in {"'", '"'}:
+        return stripped[1:-1]
+    return stripped
+
+
+def _parse_key_list(value: str | None) -> list[str]:
+    if not value:
+        return []
+    stripped = value.strip()
+    if stripped.startswith("["):
+        parsed = json.loads(stripped)
+        if not isinstance(parsed, list):
+            raise ValueError("Expected a JSON list of API keys")
+        return [str(item).strip() for item in parsed if str(item).strip()]
+    return [item.strip() for item in value.split(",") if item.strip()]
+
+
+def _dedupe_keys(values: list[str | None]) -> list[str]:
+    keys = []
+    seen: set[str] = set()
+    for value in values:
+        normalized = (value or "").strip()
+        if normalized and normalized not in seen:
+            keys.append(normalized)
+            seen.add(normalized)
+    return keys
 
 
 @lru_cache

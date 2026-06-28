@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import hashlib
+
 from sqlalchemy.orm import Session
 
 from app.ai.agents import run_cv_pipeline
@@ -33,6 +35,7 @@ def create_cv(db: Session, payload: CVCreate) -> CV:
     raw_text = payload.raw_text or "\n".join(str(value) for value in payload.parsed_data.values())
     pipeline = run_cv_pipeline(raw_text)
     masked_text = pipeline.masked_data.get("text", raw_text)
+    content_hash = _content_hash(raw_text)
     if payload.is_primary:
         from sqlalchemy import update
         db.execute(
@@ -52,7 +55,13 @@ def create_cv(db: Session, payload: CVCreate) -> CV:
         certificates=payload.certificates,
         projects=payload.projects,
         awards=payload.awards,
-        parsed_data={**payload.parsed_data, **pipeline.parsed_data},
+        parsed_data={
+            **payload.parsed_data,
+            **pipeline.parsed_data,
+            "content_hash": content_hash,
+            "last_analyzed_content_hash": content_hash,
+            "analysis_stale": False,
+        },
         masked_data=pipeline.masked_data,
         embedding=embed_text(masked_text),
         is_primary=payload.is_primary,
@@ -69,3 +78,7 @@ def create_cv(db: Session, payload: CVCreate) -> CV:
     db.commit()
     db.refresh(cv)
     return cv
+
+
+def _content_hash(text: str) -> str:
+    return hashlib.sha256(text.strip().encode("utf-8")).hexdigest()

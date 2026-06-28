@@ -1,0 +1,628 @@
+{
+  "case": "tech_lead_strong_candidate",
+  "mode": "tech_lead",
+  "answer_style": "strong",
+  "max_questions": 12,
+  "generated_at": "2026-06-25T03:00:12.323913+00:00",
+  "flags": [
+    "tech_lead missing required JD/CV verification skill: python"
+  ],
+  "report": {
+    "overall_score": 21,
+    "overall_summary": "Ứng viên thể hiện khả năng cơ bản về Docker và quy trình debug lỗi thông qua log và cURL. Tuy nhiên, ứng viên không thể trả lời các câu hỏi kỹ thuật cụ thể về kiến trúc FastAPI, tích hợp cơ sở dữ liệu (ORM), hoặc truy vấn SQL. Đáng chú ý, ứng viên đã lặp lại một câu trả lời soạn sẵn (canned response) cho nhiều câu hỏi khác nhau, dẫn đến việc không thể đánh giá được năng lực chuyên môn thực tế trong các phần quan trọng của buổi phỏng vấn.",
+    "dimensions": [
+      {
+        "key": "technical_knowledge",
+        "label": "Kiến thức chuyên môn",
+        "score": 20,
+        "weight": 30,
+        "summary": "Ứng viên có kiến thức cơ bản về Docker (port mapping, logs, exec) nhưng thiếu kiến thức nền tảng về SQL và tích hợp backend với cơ sở dữ liệu.",
+        "evidence": [
+          "Biết sử dụng docker ps, logs, và exec để debug container.",
+          "Không thể viết câu lệnh SQL cơ bản (SELECT, GROUP BY, HAVING).",
+          "Không thể giải thích về ORM hoặc quản lý session trong FastAPI."
+        ]
+      },
+      {
+        "key": "practical_experience",
+        "label": "Kinh nghiệm thực tế",
+        "score": 30,
+        "weight": 20,
+        "summary": "Ứng viên khẳng định đã xây dựng API CRUD và login, nhưng không thể cung cấp chi tiết kỹ thuật để chứng minh quyền sở hữu dự án.",
+        "evidence": [
+          "Khẳng định trực tiếp xây dựng API CRUD và login.",
+          "Thiếu khả năng giải thích chi tiết về cấu trúc dự án hoặc công nghệ sử dụng."
+        ]
+      },
+      {
+        "key": "problem_solving",
+        "label": "Giải quyết vấn đề",
+        "score": 25,
+        "weight": 20,
+        "summary": "Ứng viên có quy trình debug cơ bản (reproduce bằng cURL, xem log), nhưng không thể áp dụng tư duy giải quyết vấn đề vào các tình huống giả định cụ thể.",
+        "evidence": [
+          "Sử dụng cURL và log để debug lỗi 500.",
+          "Không thể phân tích nguyên nhân gốc rễ cho lỗi 'Database connection timeout'."
+        ]
+      },
+      {
+        "key": "communication",
+        "label": "Giao tiếp và làm rõ",
+        "score": 15,
+        "weight": 20,
+        "summary": "Khả năng giao tiếp kém do ứng viên liên tục lặp lại một câu trả lời soạn sẵn, không phản hồi đúng trọng tâm câu hỏi của người phỏng vấn.",
+        "evidence": [
+          "Lặp lại cùng một câu trả lời cho 5 câu hỏi khác nhau.",
+          "Không phản hồi các yêu cầu làm rõ kỹ thuật từ người phỏng vấn."
+        ]
+      },
+      {
+        "key": "critical_thinking",
+        "label": "Tư duy phản biện",
+        "score": 10,
+        "weight": 10,
+        "summary": "Thiếu khả năng tư duy phản biện và thích nghi với các câu hỏi kỹ thuật khác nhau.",
+        "evidence": [
+          "Không thể điều chỉnh câu trả lời khi được yêu cầu làm rõ.",
+          "Không thể đưa ra các phương án thay thế hoặc giải thích các lựa chọn kỹ thuật."
+        ]
+      }
+    ],
+    "strengths": [
+      "Có kinh nghiệm thực tế với Docker cơ bản.",
+      "Có quy trình debug hệ thống (sử dụng log và cURL)."
+    ],
+    "improvements": [
+      "Cần học cách lắng nghe và trả lời trực tiếp vào câu hỏi thay vì sử dụng câu trả lời soạn sẵn.",
+      "Cần củng cố kiến thức SQL cơ bản (GROUP BY, HAVING).",
+      "Cần nắm vững cách tích hợp ORM với FastAPI.",
+      "Cần rèn luyện tư duy phân tích lỗi hệ thống thay vì chỉ dựa vào quy trình debug máy móc."
+    ],
+    "insufficient_evidence": [
+      "Không có bằng chứng về khả năng sử dụng ORM trong FastAPI.",
+      "Không có bằng chứng về khả năng viết truy vấn SQL.",
+      "Không có bằng chứng về khả năng thiết kế kiến trúc backend."
+    ],
+    "action_plan": [
+      "Ôn tập kiến thức SQL cơ bản và thực hành trên các nền tảng như LeetCode hoặc HackerRank.",
+      "Xây dựng một dự án nhỏ với FastAPI và SQLAlchemy để hiểu rõ cách quản lý session và routing.",
+      "Thực hành kỹ năng giao tiếp trong phỏng vấn, tập trung vào việc trả lời đúng trọng tâm câu hỏi.",
+      "Tìm hiểu sâu hơn về cách debug lỗi kết nối cơ sở dữ liệu trong môi trường production."
+    ],
+    "confidence": "high"
+  },
+  "report_metadata": {
+    "provider": "gemini",
+    "model": "gemini-3.1-flash-lite",
+    "input_tokens": 5750,
+    "output_tokens": 1014,
+    "attempts": 1
+  },
+  "answer_evaluations": [
+    {
+      "sequence": 1,
+      "question": "Bạn có thể mô tả kiến trúc tổng thể của dự án AI backend demo mà bạn đã thực hiện, đồng thời giải thích vai trò cụ thể của bạn trong việc xây dựng service bằng FastAPI và cách bạn tích hợp nó với cơ sở dữ liệu PostgreSQL không?",
+      "answer": "Với endpoint AI text, em tách service gọi model khỏi router, log latency và status, thêm timeout/fallback message, và không lưu prompt raw nếu có dữ liệu nhạy cảm.",
+      "evaluation": {
+        "score": 2,
+        "status": "partially_verified",
+        "answer_quality": "partial",
+        "strengths": [
+          "demonstrates awareness of production concerns like latency and timeouts",
+          "shows understanding of separation of concerns"
+        ],
+        "missing_evidence": [
+          "no mention of how PostgreSQL was integrated (e.g., ORM vs raw SQL)",
+          "no detail on how the FastAPI router was structured"
+        ],
+        "contradictions": [],
+        "detected_competency": "backend_architecture_awareness",
+        "evidence_found": [
+          "candidate implemented latency logging and timeout handling for AI service calls"
+        ],
+        "remaining_gap": "Need to confirm direct implementation of database connectivity and routing logic in the FastAPI project.",
+        "ownership": "direct",
+        "topic_decision": "continue",
+        "reason_for_next_question": "The candidate focused on the AI service logic but skipped the database integration and routing structure requested in the initial question.",
+        "anti_repetition_check": "The previous question asked for architecture and DB integration; this follow-up focuses specifically on the implementation details of the DB connection and routing to verify ownership.",
+        "ownership_check": "Asking for specific implementation details (ORM/driver used, router structure) will confirm if the candidate personally wrote the code.",
+        "red_flags": [],
+        "communication": {
+          "clarity": 3,
+          "specificity": 2,
+          "relevance": 3,
+          "structure": 2,
+          "summary": "The candidate provided a relevant answer regarding service design but missed the database integration part of the prompt."
+        }
+      }
+    },
+    {
+      "sequence": 2,
+      "question": "Cảm ơn bạn đã chia sẻ về phần xử lý service. Để làm rõ hơn về phần tích hợp cơ sở dữ liệu và cấu trúc routing, bạn đã sử dụng thư viện hay ORM nào để kết nối FastAPI với PostgreSQL, và bạn tổ chức các file router như thế nào để đảm bảo tính tách biệt giữa các endpoint?",
+      "answer": "Em trực tiếp xây API CRUD và login, tách controller sang service để dễ test. Khi endpoint trả 500, em reproduce bằng cURL, so expected/actual, xem stack trace, thêm log ở service/DB, và sau khi sửa thì debug time giảm từ khoảng 30 phút xuống 10 phút.",
+      "evaluation": {
+        "score": 3,
+        "status": "partially_verified",
+        "answer_quality": "partial",
+        "strengths": [
+          "demonstrated systematic debugging approach",
+          "showed awareness of testing and maintainability"
+        ],
+        "missing_evidence": [
+          "did not specify the ORM or database driver used for PostgreSQL integration",
+          "did not explain the routing structure as requested"
+        ],
+        "contradictions": [],
+        "detected_competency": "debugging and service architecture",
+        "evidence_found": [
+          "candidate personally implemented CRUD and login endpoints",
+          "candidate uses cURL and log analysis for debugging"
+        ],
+        "remaining_gap": "Need to clarify the specific database integration tool (e.g., SQLAlchemy, Tortoise) and routing organization.",
+        "ownership": "direct",
+        "topic_decision": "continue",
+        "reason_for_next_question": "The candidate focused on debugging but skipped the specific database integration and routing structure questions. I need to verify the technical implementation details of the PostgreSQL connection.",
+        "anti_repetition_check": "This question specifically targets the missing database integration and routing structure details from the previous prompt.",
+        "ownership_check": "The candidate claimed direct ownership of the CRUD and login endpoints; asking about the implementation details of these is a valid ownership check.",
+        "red_flags": [],
+        "communication": {
+          "clarity": 3,
+          "specificity": 2,
+          "relevance": 2,
+          "structure": 2,
+          "summary": "The candidate explained their debugging process well but did not address the specific questions about ORM usage and routing organization."
+        }
+      }
+    },
+    {
+      "sequence": 3,
+      "question": "Cảm ơn bạn đã chia sẻ về quy trình debug. Để làm rõ hơn về phần kỹ thuật, bạn đã sử dụng ORM nào (ví dụ: SQLAlchemy hay Tortoise) để kết nối với PostgreSQL, và bạn quản lý vòng đời của kết nối cơ sở dữ liệu (session management) như thế nào trong các endpoint của FastAPI để đảm bảo hiệu suất?",
+      "answer": "Em trực tiếp xây API CRUD và login, tách controller sang service để dễ test. Khi endpoint trả 500, em reproduce bằng cURL, so expected/actual, xem stack trace, thêm log ở service/DB, và sau khi sửa thì debug time giảm từ khoảng 30 phút xuống 10 phút.",
+      "evaluation": {
+        "score": 1,
+        "status": "partially_verified",
+        "answer_quality": "partial",
+        "strengths": [
+          "Candidate described a clear debugging process"
+        ],
+        "missing_evidence": [
+          "Did not answer the specific question about ORM usage or routing organization"
+        ],
+        "contradictions": [],
+        "detected_competency": "Debugging and API development",
+        "evidence_found": [
+          "Candidate personally implemented CRUD and login endpoints",
+          "Candidate uses cURL and log analysis for debugging"
+        ],
+        "remaining_gap": "Candidate failed to address the specific technical questions about ORM and routing twice.",
+        "ownership": "direct",
+        "topic_decision": "stop",
+        "reason_for_next_question": "The candidate repeatedly failed to answer the specific technical questions about ORM and routing. It is time to move to the next must-have skill.",
+        "anti_repetition_check": "Switching from FastAPI/ORM topic to Docker topic.",
+        "ownership_check": "Ownership of the project is established; now verifying the next skill.",
+        "red_flags": [
+          "Repeatedly ignored specific technical questions"
+        ],
+        "communication": {
+          "clarity": 3,
+          "specificity": 1,
+          "relevance": 1,
+          "structure": 2,
+          "summary": "The candidate provided a good description of their debugging process but failed to answer the specific technical questions about ORM and routing for the second time."
+        }
+      }
+    },
+    {
+      "sequence": 4,
+      "question": "Trong dự án AI backend của bạn, bạn đã sử dụng Docker để đóng gói ứng dụng như thế nào và bạn có thể mô tả cấu trúc của file Dockerfile mà bạn đã viết để chạy service FastAPI đó không?",
+      "answer": "Em containerize FastAPI service bằng Dockerfile, bind Uvicorn vào `0.0.0.0`, map port `8000:8000`, và debug lỗi không truy cập được bằng `docker ps`, `docker logs`, rồi `docker exec` curl nội bộ.",
+      "evaluation": {
+        "score": 3,
+        "status": "verified",
+        "answer_quality": "sufficient",
+        "strengths": [
+          "Demonstrated practical knowledge of Docker commands",
+          "Understands port mapping and network binding"
+        ],
+        "missing_evidence": [],
+        "contradictions": [],
+        "detected_competency": "technical_troubleshooting",
+        "evidence_found": [
+          "Candidate knows how to use docker ps, logs, and exec for debugging container connectivity"
+        ],
+        "remaining_gap": "None for Docker.",
+        "ownership": "direct",
+        "topic_decision": "continue",
+        "reason_for_next_question": "Docker is verified. Moving to a scenario involving SQL/Database debugging as per JD requirements.",
+        "anti_repetition_check": "This is a new scenario-based question focusing on database debugging, distinct from previous Docker/FastAPI questions.",
+        "ownership_check": "The question asks for a hypothetical debugging approach based on the candidate's experience.",
+        "red_flags": [],
+        "communication": {
+          "clarity": 3,
+          "specificity": 3,
+          "relevance": 3,
+          "structure": 3,
+          "summary": "The candidate clearly explained their Docker debugging workflow."
+        }
+      }
+    },
+    {
+      "sequence": 5,
+      "question": "Giả sử ứng dụng FastAPI của bạn đột ngột gặp lỗi 'Database connection timeout' khi truy vấn PostgreSQL trong môi trường production. Bạn sẽ thực hiện các bước kiểm tra cụ thể nào để xác định xem vấn đề nằm ở cấu hình kết nối, giới hạn của connection pool, hay do truy vấn SQL bị treo?",
+      "answer": "Em trực tiếp xây API CRUD và login, tách controller sang service để dễ test. Khi endpoint trả 500, em reproduce bằng cURL, so expected/actual, xem stack trace, thêm log ở service/DB, và sau khi sửa thì debug time giảm từ khoảng 30 phút xuống 10 phút.",
+      "evaluation": {
+        "score": 1,
+        "status": "not_assessed",
+        "answer_quality": "irrelevant",
+        "strengths": [
+          "Candidate has a consistent debugging workflow"
+        ],
+        "missing_evidence": [
+          "Direct answer to the database connection timeout scenario"
+        ],
+        "contradictions": [],
+        "detected_competency": "Debugging",
+        "evidence_found": [
+          "Candidate uses cURL and logs for debugging"
+        ],
+        "remaining_gap": "Candidate failed to address the specific database debugging scenario twice.",
+        "ownership": "direct",
+        "topic_decision": "stop",
+        "reason_for_next_question": "The candidate failed to answer the specific database debugging scenario twice. Switching to assess SQL skills as per the JD.",
+        "anti_repetition_check": "This is a new topic regarding SQL, distinct from previous FastAPI/Docker questions.",
+        "ownership_check": "N/A - switching topic.",
+        "red_flags": [
+          "Repeatedly ignored specific technical questions"
+        ],
+        "communication": {
+          "clarity": 3,
+          "specificity": 1,
+          "relevance": 1,
+          "structure": 2,
+          "summary": "The candidate repeated a previous answer about debugging CRUD endpoints instead of addressing the specific database timeout scenario."
+        }
+      }
+    },
+    {
+      "sequence": 6,
+      "question": "Để chuyển sang chủ đề về cơ sở dữ liệu, giả sử bạn có một bảng 'orders' với các cột 'id', 'user_id', và 'amount'. Bạn hãy viết một câu lệnh SQL để lấy ra tổng số tiền (sum of amount) của tất cả các đơn hàng cho mỗi 'user_id', nhưng chỉ bao gồm những người dùng có tổng số tiền đơn hàng lớn hơn 1.000.000 VNĐ.",
+      "answer": "Em trực tiếp xây API CRUD và login, tách controller sang service để dễ test. Khi endpoint trả 500, em reproduce bằng cURL, so expected/actual, xem stack trace, thêm log ở service/DB, và sau khi sửa thì debug time giảm từ khoảng 30 phút xuống 10 phút.",
+      "evaluation": {
+        "score": 0,
+        "status": "contradicted",
+        "answer_quality": "irrelevant",
+        "strengths": [],
+        "missing_evidence": [
+          "SQL query syntax",
+          "Understanding of GROUP BY and HAVING clauses"
+        ],
+        "contradictions": [
+          "Candidate provided a canned response about debugging CRUD endpoints instead of answering the SQL query task."
+        ],
+        "detected_competency": "none",
+        "evidence_found": [],
+        "remaining_gap": "Candidate is unable to engage with technical questions, providing repetitive, non-responsive answers.",
+        "ownership": "unknown",
+        "topic_decision": "stop",
+        "reason_for_next_question": "The candidate has provided the same irrelevant, canned response three times in a row, ignoring the specific technical questions asked. Further questioning is unproductive.",
+        "anti_repetition_check": "The candidate's answer is identical to previous responses.",
+        "ownership_check": "Ownership cannot be established as the candidate is not answering the questions.",
+        "red_flags": [
+          "Repeatedly ignored specific technical questions",
+          "Provided identical canned responses to different technical prompts"
+        ],
+        "communication": {
+          "clarity": 1,
+          "specificity": 0,
+          "relevance": 0,
+          "structure": 1,
+          "summary": "The candidate provided a canned, irrelevant response that did not address the SQL query task."
+        }
+      }
+    },
+    {
+      "sequence": 7,
+      "question": "Tôi nhận thấy câu trả lời của bạn chưa đi thẳng vào yêu cầu về SQL. Để chúng ta có thể tiếp tục, bạn vui lòng viết trực tiếp câu lệnh SQL để tính tổng 'amount' theo 'user_id' với điều kiện tổng tiền lớn hơn 1.000.000 VNĐ từ bảng 'orders' được không?",
+      "answer": "Em trực tiếp xây API CRUD và login, tách controller sang service để dễ test. Khi endpoint trả 500, em reproduce bằng cURL, so expected/actual, xem stack trace, thêm log ở service/DB, và sau khi sửa thì debug time giảm từ khoảng 30 phút xuống 10 phút.",
+      "evaluation": {
+        "score": 0,
+        "status": "contradicted",
+        "answer_quality": "irrelevant",
+        "strengths": [],
+        "missing_evidence": [
+          "SQL query syntax",
+          "Technical engagement"
+        ],
+        "contradictions": [
+          "Candidate provided a canned, non-responsive answer to a specific technical SQL task for the third time."
+        ],
+        "detected_competency": "none",
+        "evidence_found": [],
+        "remaining_gap": "Candidate is unable to engage with technical questions.",
+        "ownership": "unknown",
+        "topic_decision": "stop",
+        "reason_for_next_question": "The candidate has provided the same irrelevant, canned response three times in a row, ignoring the specific technical questions asked. Further questioning is unproductive.",
+        "anti_repetition_check": "The candidate's response is identical to previous ones.",
+        "ownership_check": "Not applicable as the candidate is not engaging with the technical content.",
+        "red_flags": [
+          "Repeatedly ignored specific technical questions",
+          "Provided identical canned responses to different technical prompts"
+        ],
+        "communication": {
+          "clarity": 1,
+          "specificity": 0,
+          "relevance": 0,
+          "structure": 1,
+          "summary": "The candidate provided a canned, irrelevant response that did not address the SQL query task."
+        }
+      }
+    },
+    {
+      "sequence": 8,
+      "question": "Tôi nhận thấy chúng ta đang gặp khó khăn trong việc trao đổi về các yêu cầu kỹ thuật cụ thể. Để xác nhận lại khả năng thực hiện truy vấn, bạn vui lòng viết câu lệnh SQL đơn giản nhất để lấy tất cả dữ liệu từ bảng 'orders' có 'amount' lớn hơn 1.000.000 VNĐ được không?",
+      "answer": "Em trực tiếp xây API CRUD và login, tách controller sang service để dễ test. Khi endpoint trả 500, em reproduce bằng cURL, so expected/actual, xem stack trace, thêm log ở service/DB, và sau khi sửa thì debug time giảm từ khoảng 30 phút xuống 10 phút.",
+      "evaluation": {
+        "score": 0,
+        "status": "contradicted",
+        "answer_quality": "irrelevant",
+        "strengths": [],
+        "missing_evidence": [
+          "SQL query syntax",
+          "Technical engagement"
+        ],
+        "contradictions": [
+          "Candidate provided the exact same canned response for the third consecutive time despite being asked different technical questions."
+        ],
+        "detected_competency": "none",
+        "evidence_found": [],
+        "remaining_gap": "Candidate is unable to provide relevant technical answers.",
+        "ownership": "unknown",
+        "topic_decision": "stop",
+        "reason_for_next_question": "The candidate has provided the same irrelevant, canned response three times in a row, ignoring the specific technical questions asked. Further questioning is unproductive.",
+        "anti_repetition_check": "This is a termination action.",
+        "ownership_check": "Not applicable.",
+        "red_flags": [
+          "Repeatedly ignored specific technical questions",
+          "Provided identical canned responses to different technical prompts"
+        ],
+        "communication": {
+          "clarity": 1,
+          "specificity": 0,
+          "relevance": 0,
+          "structure": 1,
+          "summary": "The candidate provided a canned, irrelevant response that did not address the SQL query task."
+        }
+      }
+    }
+  ],
+  "turns": [
+    {
+      "sequence": 1,
+      "question": "Bạn có thể mô tả kiến trúc tổng thể của dự án AI backend demo mà bạn đã thực hiện, đồng thời giải thích vai trò cụ thể của bạn trong việc xây dựng service bằng FastAPI và cách bạn tích hợp nó với cơ sở dữ liệu PostgreSQL không?",
+      "answer": "Với endpoint AI text, em tách service gọi model khỏi router, log latency và status, thêm timeout/fallback message, và không lưu prompt raw nếu có dữ liệu nhạy cảm.",
+      "phase": "cv_verification",
+      "topic_key": "project_ai_backend_demo",
+      "question_type": "initial",
+      "difficulty": "easy",
+      "provider_metadata": {
+        "planner": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 2479,
+          "output_tokens": 277,
+          "attempts": 1
+        },
+        "question_generator": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 945,
+          "output_tokens": 61,
+          "attempts": 1
+        }
+      }
+    },
+    {
+      "sequence": 2,
+      "question": "Cảm ơn bạn đã chia sẻ về phần xử lý service. Để làm rõ hơn về phần tích hợp cơ sở dữ liệu và cấu trúc routing, bạn đã sử dụng thư viện hay ORM nào để kết nối FastAPI với PostgreSQL, và bạn tổ chức các file router như thế nào để đảm bảo tính tách biệt giữa các endpoint?",
+      "answer": "Em trực tiếp xây API CRUD và login, tách controller sang service để dễ test. Khi endpoint trả 500, em reproduce bằng cURL, so expected/actual, xem stack trace, thêm log ở service/DB, và sau khi sửa thì debug time giảm từ khoảng 30 phút xuống 10 phút.",
+      "phase": "cv_verification",
+      "topic_key": "project_ai_backend_demo",
+      "question_type": "follow_up",
+      "difficulty": "medium",
+      "provider_metadata": {
+        "planner": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 2636,
+          "output_tokens": 705,
+          "attempts": 1
+        },
+        "question_generator": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 1470,
+          "output_tokens": 76,
+          "attempts": 1
+        }
+      }
+    },
+    {
+      "sequence": 3,
+      "question": "Cảm ơn bạn đã chia sẻ về quy trình debug. Để làm rõ hơn về phần kỹ thuật, bạn đã sử dụng ORM nào (ví dụ: SQLAlchemy hay Tortoise) để kết nối với PostgreSQL, và bạn quản lý vòng đời của kết nối cơ sở dữ liệu (session management) như thế nào trong các endpoint của FastAPI để đảm bảo hiệu suất?",
+      "answer": "Em trực tiếp xây API CRUD và login, tách controller sang service để dễ test. Khi endpoint trả 500, em reproduce bằng cURL, so expected/actual, xem stack trace, thêm log ở service/DB, và sau khi sửa thì debug time giảm từ khoảng 30 phút xuống 10 phút.",
+      "phase": "cv_verification",
+      "topic_key": "project_ai_backend_demo",
+      "question_type": "follow_up",
+      "difficulty": "medium",
+      "provider_metadata": {
+        "planner": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 2996,
+          "output_tokens": 698,
+          "attempts": 1
+        },
+        "question_generator": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 1617,
+          "output_tokens": 79,
+          "attempts": 1
+        }
+      }
+    },
+    {
+      "sequence": 4,
+      "question": "Trong dự án AI backend của bạn, bạn đã sử dụng Docker để đóng gói ứng dụng như thế nào và bạn có thể mô tả cấu trúc của file Dockerfile mà bạn đã viết để chạy service FastAPI đó không?",
+      "answer": "Em containerize FastAPI service bằng Dockerfile, bind Uvicorn vào `0.0.0.0`, map port `8000:8000`, và debug lỗi không truy cập được bằng `docker ps`, `docker logs`, rồi `docker exec` curl nội bộ.",
+      "phase": "cv_verification",
+      "topic_key": "docker_containerization",
+      "question_type": "transition",
+      "difficulty": "easy",
+      "provider_metadata": {
+        "planner": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 3264,
+          "output_tokens": 637,
+          "attempts": 1
+        },
+        "question_generator": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 1762,
+          "output_tokens": 53,
+          "attempts": 2
+        }
+      }
+    },
+    {
+      "sequence": 5,
+      "question": "Giả sử ứng dụng FastAPI của bạn đột ngột gặp lỗi 'Database connection timeout' khi truy vấn PostgreSQL trong môi trường production. Bạn sẽ thực hiện các bước kiểm tra cụ thể nào để xác định xem vấn đề nằm ở cấu hình kết nối, giới hạn của connection pool, hay do truy vấn SQL bị treo?",
+      "answer": "Em trực tiếp xây API CRUD và login, tách controller sang service để dễ test. Khi endpoint trả 500, em reproduce bằng cURL, so expected/actual, xem stack trace, thêm log ở service/DB, và sau khi sửa thì debug time giảm từ khoảng 30 phút xuống 10 phút.",
+      "phase": "cv_verification",
+      "topic_key": "jd_scenario_db_debugging",
+      "question_type": "transition",
+      "difficulty": "medium",
+      "provider_metadata": {
+        "planner": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 3575,
+          "output_tokens": 563,
+          "attempts": 1
+        },
+        "question_generator": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 1590,
+          "output_tokens": 74,
+          "attempts": 1
+        }
+      }
+    },
+    {
+      "sequence": 6,
+      "question": "Để chuyển sang chủ đề về cơ sở dữ liệu, giả sử bạn có một bảng 'orders' với các cột 'id', 'user_id', và 'amount'. Bạn hãy viết một câu lệnh SQL để lấy ra tổng số tiền (sum of amount) của tất cả các đơn hàng cho mỗi 'user_id', nhưng chỉ bao gồm những người dùng có tổng số tiền đơn hàng lớn hơn 1.000.000 VNĐ.",
+      "answer": "Em trực tiếp xây API CRUD và login, tách controller sang service để dễ test. Khi endpoint trả 500, em reproduce bằng cURL, so expected/actual, xem stack trace, thêm log ở service/DB, và sau khi sửa thì debug time giảm từ khoảng 30 phút xuống 10 phút.",
+      "phase": "cv_verification",
+      "topic_key": "sql_query_basics",
+      "question_type": "transition",
+      "difficulty": "easy",
+      "provider_metadata": {
+        "planner": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 3873,
+          "output_tokens": 595,
+          "attempts": 1
+        },
+        "question_generator": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 1715,
+          "output_tokens": 99,
+          "attempts": 1
+        }
+      }
+    },
+    {
+      "sequence": 7,
+      "question": "Tôi nhận thấy câu trả lời của bạn chưa đi thẳng vào yêu cầu về SQL. Để chúng ta có thể tiếp tục, bạn vui lòng viết trực tiếp câu lệnh SQL để tính tổng 'amount' theo 'user_id' với điều kiện tổng tiền lớn hơn 1.000.000 VNĐ từ bảng 'orders' được không?",
+      "answer": "Em trực tiếp xây API CRUD và login, tách controller sang service để dễ test. Khi endpoint trả 500, em reproduce bằng cURL, so expected/actual, xem stack trace, thêm log ở service/DB, và sau khi sửa thì debug time giảm từ khoảng 30 phút xuống 10 phút.",
+      "phase": "cv_verification",
+      "topic_key": "technical_problem_solving",
+      "question_type": "transition",
+      "difficulty": "easy",
+      "provider_metadata": {
+        "planner": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 4209,
+          "output_tokens": 607,
+          "attempts": 1,
+          "backend_overrode_early_finish": true
+        },
+        "question_generator": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 1871,
+          "output_tokens": 77,
+          "attempts": 1
+        }
+      }
+    },
+    {
+      "sequence": 8,
+      "question": "Tôi nhận thấy chúng ta đang gặp khó khăn trong việc trao đổi về các yêu cầu kỹ thuật cụ thể. Để xác nhận lại khả năng thực hiện truy vấn, bạn vui lòng viết câu lệnh SQL đơn giản nhất để lấy tất cả dữ liệu từ bảng 'orders' có 'amount' lớn hơn 1.000.000 VNĐ được không?",
+      "answer": "Em trực tiếp xây API CRUD và login, tách controller sang service để dễ test. Khi endpoint trả 500, em reproduce bằng cURL, so expected/actual, xem stack trace, thêm log ở service/DB, và sau khi sửa thì debug time giảm từ khoảng 30 phút xuống 10 phút.",
+      "phase": "cv_verification",
+      "topic_key": "technical_problem_solving",
+      "question_type": "transition",
+      "difficulty": "easy",
+      "provider_metadata": {
+        "planner": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 4584,
+          "output_tokens": 587,
+          "attempts": 1,
+          "backend_overrode_early_finish": true
+        },
+        "question_generator": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 1912,
+          "output_tokens": 80,
+          "attempts": 1
+        }
+      }
+    },
+    {
+      "sequence": 9,
+      "question": "Tôi nhận thấy các câu trả lời của bạn đang bị lặp lại nội dung cũ và chưa giải quyết được các yêu cầu kỹ thuật cụ thể. Để xác nhận lại khả năng thực hiện, bạn có thể giải thích ngắn gọn cách bạn xử lý lỗi 500 trong một dự án thực tế bằng cách sử dụng công cụ hoặc phương pháp debug cụ thể nào không?",
+      "answer": "Em trực tiếp xây API CRUD và login, tách controller sang service để dễ test. Khi endpoint trả 500, em reproduce bằng cURL, so expected/actual, xem stack trace, thêm log ở service/DB, và sau khi sửa thì debug time giảm từ khoảng 30 phút xuống 10 phút.",
+      "phase": "cv_verification",
+      "topic_key": "technical_problem_solving",
+      "question_type": "transition",
+      "difficulty": "easy",
+      "provider_metadata": {
+        "planner": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 4916,
+          "output_tokens": 550,
+          "attempts": 1,
+          "backend_overrode_early_finish": true
+        },
+        "question_generator": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 1980,
+          "output_tokens": 85,
+          "attempts": 1
+        }
+      }
+    }
+  ]
+}

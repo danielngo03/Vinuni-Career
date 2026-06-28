@@ -1,0 +1,680 @@
+{
+  "case": "technical_check_strong_candidate",
+  "mode": "technical_check",
+  "answer_style": "technical_strong",
+  "max_questions": 10,
+  "generated_at": "2026-06-25T08:34:12.675068+00:00",
+  "flags": [
+    "strong candidate reached max instead of stopping early"
+  ],
+  "report": {
+    "overall_score": 30,
+    "overall_summary": "Ứng viên thể hiện kiến thức cơ bản về cú pháp Python và cấu trúc Dockerfile, tuy nhiên gặp khó khăn lớn trong việc áp dụng kiến thức vào các tình huống thực tế (debugging) và các truy vấn SQL phức tạp. Ứng viên có xu hướng lặp lại câu trả lời cũ khi gặp câu hỏi khó hoặc không liên quan đến câu hỏi được đặt ra, cho thấy khả năng giải quyết vấn đề và tư duy logic cần được cải thiện đáng kể.",
+    "dimensions": [
+      {
+        "key": "technical_knowledge",
+        "label": "Kiến thức chuyên môn",
+        "score": 40,
+        "weight": 30,
+        "summary": "Ứng viên nắm được cú pháp cơ bản của Python (list comprehension) và cấu trúc Dockerfile, nhưng thiếu kiến thức về các thao tác SQL nâng cao như JOIN và GROUP BY.",
+        "evidence": [
+          "Viết đúng list comprehension trong Python.",
+          "Viết đúng Dockerfile cơ bản.",
+          "Không thực hiện được truy vấn SQL với INNER JOIN và GROUP BY."
+        ]
+      },
+      {
+        "key": "practical_experience",
+        "label": "Độ đúng code/query",
+        "score": 30,
+        "weight": 25,
+        "summary": "Kinh nghiệm thực tế còn hạn chế, đặc biệt là trong việc xử lý lỗi (debugging) và viết truy vấn SQL thực tế.",
+        "evidence": [
+          "Không đưa ra được các bước debug khi gặp lỗi ModuleNotFoundError trong Docker.",
+          "Cung cấp câu trả lời SQL không liên quan đến yêu cầu đề bài."
+        ]
+      },
+      {
+        "key": "problem_solving",
+        "label": "Debug và giải quyết vấn đề",
+        "score": 20,
+        "weight": 25,
+        "summary": "Khả năng giải quyết vấn đề yếu. Ứng viên thường xuyên lặp lại nội dung cũ thay vì phân tích nguyên nhân gốc rễ khi gặp lỗi hoặc yêu cầu mới.",
+        "evidence": [
+          "Lặp lại nội dung Dockerfile khi được hỏi về cách debug lỗi.",
+          "Không phân tích được yêu cầu SQL để đưa ra giải pháp phù hợp."
+        ]
+      },
+      {
+        "key": "communication",
+        "label": "Giải thích kỹ thuật",
+        "score": 30,
+        "weight": 10,
+        "summary": "Khả năng giao tiếp kỹ thuật chưa tốt, thường xuyên trả lời lạc đề hoặc không đáp ứng đúng yêu cầu của câu hỏi.",
+        "evidence": [
+          "Không cung cấp code khi được yêu cầu cụ thể.",
+          "Trả lời lạc đề hoàn toàn trong các câu hỏi về SQL và Docker debugging."
+        ]
+      },
+      {
+        "key": "critical_thinking",
+        "label": "Edge cases và hiệu năng",
+        "score": 25,
+        "weight": 10,
+        "summary": "Tư duy phản biện thấp, chưa thể hiện được khả năng phân tích các tình huống lỗi hoặc tối ưu hóa truy vấn.",
+        "evidence": [
+          "Không nhận diện được yêu cầu của câu hỏi về việc tìm bản ghi trùng lặp.",
+          "Không đưa ra được các bước kiểm tra hệ thống khi container bị lỗi."
+        ]
+      }
+    ],
+    "strengths": [
+      "Nắm vững cú pháp Python cơ bản (list comprehension).",
+      "Hiểu cấu trúc cơ bản của một Dockerfile tiêu chuẩn.",
+      "Nắm được các mã trạng thái HTTP cơ bản trong FastAPI."
+    ],
+    "improvements": [
+      "Cần rèn luyện kỹ năng đọc hiểu yêu cầu câu hỏi để tránh trả lời lạc đề.",
+      "Cần học cách debug container (sử dụng docker exec, kiểm tra logs).",
+      "Cần nắm vững các câu lệnh SQL JOIN và các hàm tổng hợp (GROUP BY, HAVING).",
+      "Cần thực hành viết code thực tế thay vì chỉ mô tả lý thuyết."
+    ],
+    "insufficient_evidence": [
+      "Khả năng làm việc với database thực tế (chưa thể hiện được qua các câu hỏi SQL).",
+      "Khả năng xử lý các lỗi runtime trong môi trường production."
+    ],
+    "action_plan": [
+      "Thực hành các bài tập SQL trên LeetCode hoặc HackerRank, tập trung vào JOIN và GROUP BY.",
+      "Tự xây dựng một ứng dụng FastAPI đơn giản và thực hiện đóng gói, sau đó cố tình gây lỗi để thực hành debug.",
+      "Tìm hiểu cách sử dụng lệnh 'docker logs' và 'docker exec' để kiểm tra container đang chạy.",
+      "Luyện tập viết code trực tiếp trên trình soạn thảo thay vì chỉ giải thích logic."
+    ],
+    "confidence": "high"
+  },
+  "report_metadata": {
+    "provider": "gemini",
+    "model": "gemini-3.1-flash-lite",
+    "input_tokens": 5642,
+    "output_tokens": 984,
+    "attempts": 1
+  },
+  "answer_evaluations": [
+    {
+      "sequence": 1,
+      "question": "Trong FastAPI, làm thế nào để bạn định nghĩa một endpoint nhận dữ liệu JSON từ client và sử dụng Pydantic model để validate dữ liệu đó? Hãy viết một đoạn code ví dụ ngắn gọn.",
+      "answer": "Em tạo Pydantic model gồm `email: EmailStr`, `password: str`, endpoint POST. Input thiếu field FastAPI trả 422, sai password trả 401, lỗi server mới là 500.",
+      "evaluation": {
+        "score": 3,
+        "status": "verified",
+        "answer_quality": "sufficient",
+        "strengths": [
+          "understands Pydantic validation",
+          "knows standard HTTP status codes"
+        ],
+        "missing_evidence": [
+          "no code snippet provided as requested"
+        ],
+        "contradictions": [],
+        "detected_competency": "FastAPI basics",
+        "evidence_found": [
+          "understands Pydantic model validation and status code mapping"
+        ],
+        "remaining_gap": "needs to demonstrate actual code implementation",
+        "ownership": "direct",
+        "topic_decision": "continue",
+        "reason_for_next_question": "Candidate described the logic well but did not provide the requested code snippet. Asking for a small code implementation to verify syntax and structure.",
+        "anti_repetition_check": "Previous question asked for logic and code; this asks for the code implementation specifically.",
+        "ownership_check": "Asking for code implementation based on the logic they just described.",
+        "red_flags": [],
+        "communication": {
+          "clarity": 3,
+          "specificity": 3,
+          "relevance": 4,
+          "structure": 3,
+          "summary": "Candidate clearly explained the logic for Pydantic validation and status codes."
+        }
+      }
+    },
+    {
+      "sequence": 2,
+      "question": "Cảm ơn bạn đã giải thích logic. Bạn có thể viết một đoạn code ngắn bằng FastAPI để minh họa việc định nghĩa Pydantic model cho dữ liệu đầu vào và endpoint POST xử lý dữ liệu đó không?",
+      "answer": "Em tạo Pydantic model gồm `email: EmailStr`, `password: str`, endpoint POST. Input thiếu field FastAPI trả 422, sai password trả 401, lỗi server mới là 500.",
+      "evaluation": {
+        "score": 2,
+        "status": "partially_verified",
+        "answer_quality": "partial",
+        "strengths": [
+          "Correctly identified status codes for validation and auth errors"
+        ],
+        "missing_evidence": [
+          "Did not provide the requested code snippet despite being asked twice"
+        ],
+        "contradictions": [],
+        "detected_competency": "FastAPI fundamentals",
+        "evidence_found": [
+          "understands Pydantic model validation and status code mapping"
+        ],
+        "remaining_gap": "Candidate failed to provide code implementation after two requests.",
+        "ownership": "direct",
+        "topic_decision": "stop",
+        "reason_for_next_question": "Candidate is unable to provide code snippets for FastAPI; switching to Docker to assess technical skills in a different area.",
+        "anti_repetition_check": "Switching from FastAPI implementation to Docker containerization.",
+        "ownership_check": "Previous topic ownership was direct; moving to a new skill.",
+        "red_flags": [
+          "Repeatedly failed to follow instructions to provide code"
+        ],
+        "communication": {
+          "clarity": 3,
+          "specificity": 2,
+          "relevance": 3,
+          "structure": 2,
+          "summary": "Candidate understands the concepts but failed to provide the requested code snippet."
+        }
+      }
+    },
+    {
+      "sequence": 3,
+      "question": "Để đóng gói một ứng dụng Python đơn giản chạy bằng FastAPI, bạn hãy viết nội dung cho một file Dockerfile cơ bản để build image cho ứng dụng đó.",
+      "answer": "Em dùng `FROM python:3.12-slim`, `WORKDIR /app`, copy requirements, `RUN pip install -r requirements.txt`, copy source, `EXPOSE 8000`, và `CMD [\"uvicorn\", \"app.main:app\", \"--host\", \"0.0.0.0\", \"--port\", \"8000\"]`.",
+      "evaluation": {
+        "score": 4,
+        "status": "verified",
+        "answer_quality": "sufficient",
+        "strengths": [
+          "Correct Dockerfile structure",
+          "Correct base image selection",
+          "Correct command syntax"
+        ],
+        "missing_evidence": [],
+        "contradictions": [],
+        "detected_competency": "Containerization basics",
+        "evidence_found": [
+          "Candidate successfully provided a functional Dockerfile for a FastAPI application."
+        ],
+        "remaining_gap": "Need to assess debugging or production-like scenario handling.",
+        "ownership": "direct",
+        "topic_decision": "continue",
+        "reason_for_next_question": "The candidate demonstrated basic knowledge of Dockerfile creation. Now I will test their ability to troubleshoot a common Docker issue.",
+        "anti_repetition_check": "This is a new question about debugging a Docker container, not just creating one.",
+        "ownership_check": "The candidate provided the Dockerfile structure, so they should be able to explain how to debug it.",
+        "red_flags": [],
+        "communication": {
+          "clarity": 4,
+          "specificity": 4,
+          "relevance": 4,
+          "structure": 4,
+          "summary": "The candidate provided a complete and accurate Dockerfile configuration."
+        }
+      }
+    },
+    {
+      "sequence": 4,
+      "question": "Giả sử sau khi build image thành công, container khởi chạy nhưng ngay lập tức bị thoát (exit) với lỗi 'ModuleNotFoundError: No module named ...'. Bạn sẽ thực hiện các bước kiểm tra nào bên trong container hoặc điều chỉnh Dockerfile như thế nào để xác định và khắc phục vấn đề này?",
+      "answer": "Em dùng `FROM python:3.12-slim`, `WORKDIR /app`, copy requirements, `RUN pip install -r requirements.txt`, copy source, `EXPOSE 8000`, và `CMD [\"uvicorn\", \"app.main:app\", \"--host\", \"0.0.0.0\", \"--port\", \"8000\"]`.",
+      "evaluation": {
+        "score": 1,
+        "status": "partially_verified",
+        "answer_quality": "irrelevant",
+        "strengths": [
+          "Candidate knows the structure of a standard Dockerfile."
+        ],
+        "missing_evidence": [
+          "No debugging steps provided for the specific error scenario."
+        ],
+        "contradictions": [],
+        "detected_competency": "technical_knowledge",
+        "evidence_found": [
+          "Candidate can write a basic Dockerfile."
+        ],
+        "remaining_gap": "Candidate did not address the debugging scenario requested.",
+        "ownership": "direct",
+        "topic_decision": "clarify",
+        "reason_for_next_question": "The candidate repeated the Dockerfile content instead of answering the debugging question. I need to re-ask the debugging scenario to verify their ability to troubleshoot container issues.",
+        "anti_repetition_check": "The question now specifically asks for debugging steps (e.g., checking logs, inspecting file structure) rather than asking for the Dockerfile again.",
+        "ownership_check": "The question asks for the candidate's personal approach to debugging, which is consistent with their claimed experience.",
+        "red_flags": [
+          "Repeated the previous answer instead of addressing the new question."
+        ],
+        "communication": {
+          "clarity": 2,
+          "specificity": 1,
+          "relevance": 1,
+          "structure": 2,
+          "summary": "The candidate provided the Dockerfile again instead of explaining how to debug the ModuleNotFoundError."
+        }
+      }
+    },
+    {
+      "sequence": 5,
+      "question": "Tôi hiểu cấu trúc Dockerfile bạn đã nêu, nhưng hãy tập trung vào việc xử lý lỗi. Nếu container bị thoát với lỗi 'ModuleNotFoundError', bạn sẽ dùng lệnh nào để truy cập vào bên trong container đang chạy (hoặc đã dừng) nhằm kiểm tra xem các thư viện đã được cài đặt đúng vị trí hay chưa?",
+      "answer": "Em dùng `FROM python:3.12-slim`, `WORKDIR /app`, copy requirements, `RUN pip install -r requirements.txt`, copy source, `EXPOSE 8000`, và `CMD [\"uvicorn\", \"app.main:app\", \"--host\", \"0.0.0.0\", \"--port\", \"8000\"]`.",
+      "evaluation": {
+        "score": 0,
+        "status": "contradicted",
+        "answer_quality": "irrelevant",
+        "strengths": [],
+        "missing_evidence": [
+          "debugging steps for ModuleNotFoundError",
+          "command to inspect container filesystem"
+        ],
+        "contradictions": [
+          "Candidate repeated the Dockerfile content instead of answering the debugging question."
+        ],
+        "detected_competency": "none",
+        "evidence_found": [],
+        "remaining_gap": "Candidate failed to address the debugging scenario twice; switching to SQL to assess technical knowledge in a different domain.",
+        "ownership": "not_owned",
+        "topic_decision": "stop",
+        "reason_for_next_question": "The candidate has failed to answer the debugging question twice by repeating the previous answer. I am switching to SQL to assess a different technical skill.",
+        "anti_repetition_check": "This is a new topic (SQL) and a new question type (query task).",
+        "ownership_check": "N/A - switching topic.",
+        "red_flags": [
+          "Repeated the previous answer instead of addressing the new question.",
+          "Unable to follow instructions for debugging."
+        ],
+        "communication": {
+          "clarity": 1,
+          "specificity": 1,
+          "relevance": 1,
+          "structure": 1,
+          "summary": "The candidate repeated the Dockerfile configuration instead of answering the debugging question."
+        }
+      }
+    },
+    {
+      "sequence": 6,
+      "question": "Giả sử bạn có một bảng 'users' gồm các cột 'id', 'name', và 'email'. Hãy viết một câu lệnh SQL để lấy ra tên (name) của tất cả người dùng có email kết thúc bằng '@gmail.com'.",
+      "answer": "Em viết `SELECT name, email FROM users WHERE email LIKE '%@gmail.com';`.",
+      "evaluation": {
+        "score": 4,
+        "status": "verified",
+        "answer_quality": "sufficient",
+        "strengths": [
+          "Correct syntax for SELECT and LIKE operator"
+        ],
+        "missing_evidence": [
+          "Aggregation or grouping"
+        ],
+        "contradictions": [],
+        "detected_competency": "Basic SQL querying",
+        "evidence_found": [
+          "Candidate can write basic SELECT queries with filtering"
+        ],
+        "remaining_gap": "Ability to perform aggregation (GROUP BY, COUNT)",
+        "ownership": "direct",
+        "topic_decision": "continue",
+        "reason_for_next_question": "The candidate successfully answered the basic query. Now I will test aggregation skills to assess SQL proficiency further.",
+        "anti_repetition_check": "The question asks for aggregation (COUNT/GROUP BY) which is distinct from the previous filtering task.",
+        "ownership_check": "The candidate provided the SQL query directly.",
+        "red_flags": [],
+        "communication": {
+          "clarity": 4,
+          "specificity": 4,
+          "relevance": 4,
+          "structure": 4,
+          "summary": "The candidate provided a correct and concise SQL query."
+        }
+      }
+    },
+    {
+      "sequence": 7,
+      "question": "Dựa trên bảng 'users' đó, làm thế nào để bạn viết một câu lệnh SQL nhằm đếm số lượng người dùng có cùng một tên (name) và chỉ hiển thị những tên xuất hiện nhiều hơn một lần?",
+      "answer": "Em dùng `GROUP BY user_id`, lọc `created_at >= now() - interval '30 days'`, và dùng `COALESCE(sum(total), 0)` nếu cần tránh NULL.",
+      "evaluation": {
+        "score": 1,
+        "status": "contradicted",
+        "answer_quality": "irrelevant",
+        "strengths": [
+          "Understands basic SQL syntax"
+        ],
+        "missing_evidence": [
+          "Ability to use GROUP BY and HAVING for aggregation"
+        ],
+        "contradictions": [
+          "The answer provided logic for a different problem (filtering by date and summing totals) instead of counting duplicate names."
+        ],
+        "detected_competency": "SQL",
+        "evidence_found": [
+          "Basic SELECT and WHERE clause knowledge"
+        ],
+        "remaining_gap": "Correct use of GROUP BY and HAVING to identify duplicates.",
+        "ownership": "direct",
+        "topic_decision": "clarify",
+        "reason_for_next_question": "The previous answer was completely off-topic for the requested aggregation task. I need to clarify the requirement for identifying duplicate names using GROUP BY and HAVING.",
+        "anti_repetition_check": "This is a new query task focused on the specific requirement of finding duplicates, distinct from the previous filtering task.",
+        "ownership_check": "The candidate is being asked to write a standard SQL query, which is a fundamental skill for a backend intern.",
+        "red_flags": [
+          "Provided an irrelevant answer to a standard SQL question."
+        ],
+        "communication": {
+          "clarity": 2,
+          "specificity": 1,
+          "relevance": 1,
+          "structure": 2,
+          "summary": "The candidate provided an answer that did not address the question about counting duplicate names, instead discussing date filtering and summation."
+        }
+      }
+    },
+    {
+      "sequence": 8,
+      "question": "Trong Python, hãy viết một đoạn code ngắn sử dụng list comprehension để lọc ra các số chẵn từ một danh sách các số nguyên cho trước, ví dụ: [1, 2, 3, 4, 5, 6].",
+      "answer": "Em viết `[x * x for x in [1, 2, 3, 4, 5, 6] if x % 2 == 0]`, output là `[4, 16, 36]`.",
+      "evaluation": {
+        "score": 4,
+        "status": "verified",
+        "answer_quality": "sufficient",
+        "strengths": [
+          "Correct use of list comprehension",
+          "Correct logic for filtering even numbers",
+          "Accurate output calculation"
+        ],
+        "missing_evidence": [],
+        "contradictions": [],
+        "detected_competency": "Python syntax proficiency",
+        "evidence_found": [
+          "Candidate correctly implemented list comprehension to filter and transform a list."
+        ],
+        "remaining_gap": "None",
+        "ownership": "direct",
+        "topic_decision": "stop",
+        "reason_for_next_question": "The interview has reached the maximum question limit and sufficient technical signals have been collected.",
+        "anti_repetition_check": "N/A",
+        "ownership_check": "N/A",
+        "red_flags": [],
+        "communication": {
+          "clarity": 4,
+          "specificity": 4,
+          "relevance": 4,
+          "structure": 4,
+          "summary": "The candidate provided a correct and concise Python list comprehension."
+        }
+      }
+    },
+    {
+      "sequence": 9,
+      "question": "Giả sử bạn có hai bảng 'orders' (chứa 'order_id', 'user_id', 'amount') và 'users' (chứa 'id', 'name'). Hãy viết một câu lệnh SQL sử dụng INNER JOIN để lấy ra tên của người dùng và tổng số tiền (amount) của tất cả các đơn hàng mà họ đã thực hiện.",
+      "answer": "Em dùng `GROUP BY user_id`, lọc `created_at >= now() - interval '30 days'`, và dùng `COALESCE(sum(total), 0)` nếu cần tránh NULL.",
+      "evaluation": {
+        "score": 0,
+        "status": "contradicted",
+        "answer_quality": "irrelevant",
+        "strengths": [],
+        "missing_evidence": [
+          "SQL JOIN syntax",
+          "SQL aggregation logic"
+        ],
+        "contradictions": [
+          "Candidate provided an answer about date filtering and summation instead of performing an INNER JOIN between two tables."
+        ],
+        "detected_competency": "sql_query_reasoning",
+        "evidence_found": [
+          "Candidate failed to demonstrate understanding of JOIN operations."
+        ],
+        "remaining_gap": "SQL JOIN and aggregation proficiency.",
+        "ownership": "not_owned",
+        "topic_decision": "stop",
+        "reason_for_next_question": "The candidate has provided irrelevant answers to SQL questions and reached the maximum question limit.",
+        "anti_repetition_check": "N/A",
+        "ownership_check": "N/A",
+        "red_flags": [
+          "Provided an irrelevant answer to a standard SQL question."
+        ],
+        "communication": {
+          "clarity": 2,
+          "specificity": 1,
+          "relevance": 1,
+          "structure": 2,
+          "summary": "The candidate provided an answer that did not address the question about joining tables, instead discussing date filtering and summation."
+        }
+      }
+    }
+  ],
+  "turns": [
+    {
+      "sequence": 1,
+      "question": "Trong FastAPI, làm thế nào để bạn định nghĩa một endpoint nhận dữ liệu JSON từ client và sử dụng Pydantic model để validate dữ liệu đó? Hãy viết một đoạn code ví dụ ngắn gọn.",
+      "answer": "Em tạo Pydantic model gồm `email: EmailStr`, `password: str`, endpoint POST. Input thiếu field FastAPI trả 422, sai password trả 401, lỗi server mới là 500.",
+      "phase": "cv_verification",
+      "topic_key": "fastapi_implementation",
+      "question_type": "initial",
+      "difficulty": "easy",
+      "provider_metadata": {
+        "planner": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 2682,
+          "output_tokens": 217,
+          "attempts": 1
+        },
+        "question_generator": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 1019,
+          "output_tokens": 46,
+          "attempts": 1
+        }
+      }
+    },
+    {
+      "sequence": 2,
+      "question": "Cảm ơn bạn đã giải thích logic. Bạn có thể viết một đoạn code ngắn bằng FastAPI để minh họa việc định nghĩa Pydantic model cho dữ liệu đầu vào và endpoint POST xử lý dữ liệu đó không?",
+      "answer": "Em tạo Pydantic model gồm `email: EmailStr`, `password: str`, endpoint POST. Input thiếu field FastAPI trả 422, sai password trả 401, lỗi server mới là 500.",
+      "phase": "cv_verification",
+      "topic_key": "fastapi_implementation",
+      "question_type": "follow_up",
+      "difficulty": "medium",
+      "provider_metadata": {
+        "planner": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 2842,
+          "output_tokens": 509,
+          "attempts": 1
+        },
+        "question_generator": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 1432,
+          "output_tokens": 49,
+          "attempts": 1
+        }
+      }
+    },
+    {
+      "sequence": 3,
+      "question": "Để đóng gói một ứng dụng Python đơn giản chạy bằng FastAPI, bạn hãy viết nội dung cho một file Dockerfile cơ bản để build image cho ứng dụng đó.",
+      "answer": "Em dùng `FROM python:3.12-slim`, `WORKDIR /app`, copy requirements, `RUN pip install -r requirements.txt`, copy source, `EXPOSE 8000`, và `CMD [\"uvicorn\", \"app.main:app\", \"--host\", \"0.0.0.0\", \"--port\", \"8000\"]`.",
+      "phase": "cv_verification",
+      "topic_key": "docker_implementation",
+      "question_type": "transition",
+      "difficulty": "easy",
+      "provider_metadata": {
+        "planner": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 3077,
+          "output_tokens": 600,
+          "attempts": 1
+        },
+        "question_generator": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 1542,
+          "output_tokens": 38,
+          "attempts": 1
+        }
+      }
+    },
+    {
+      "sequence": 4,
+      "question": "Giả sử sau khi build image thành công, container khởi chạy nhưng ngay lập tức bị thoát (exit) với lỗi 'ModuleNotFoundError: No module named ...'. Bạn sẽ thực hiện các bước kiểm tra nào bên trong container hoặc điều chỉnh Dockerfile như thế nào để xác định và khắc phục vấn đề này?",
+      "answer": "Em dùng `FROM python:3.12-slim`, `WORKDIR /app`, copy requirements, `RUN pip install -r requirements.txt`, copy source, `EXPOSE 8000`, và `CMD [\"uvicorn\", \"app.main:app\", \"--host\", \"0.0.0.0\", \"--port\", \"8000\"]`.",
+      "phase": "cv_verification",
+      "topic_key": "docker_debugging",
+      "question_type": "follow_up",
+      "difficulty": "medium",
+      "provider_metadata": {
+        "planner": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 3352,
+          "output_tokens": 586,
+          "attempts": 1
+        },
+        "question_generator": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 1573,
+          "output_tokens": 68,
+          "attempts": 1
+        }
+      }
+    },
+    {
+      "sequence": 5,
+      "question": "Tôi hiểu cấu trúc Dockerfile bạn đã nêu, nhưng hãy tập trung vào việc xử lý lỗi. Nếu container bị thoát với lỗi 'ModuleNotFoundError', bạn sẽ dùng lệnh nào để truy cập vào bên trong container đang chạy (hoặc đã dừng) nhằm kiểm tra xem các thư viện đã được cài đặt đúng vị trí hay chưa?",
+      "answer": "Em dùng `FROM python:3.12-slim`, `WORKDIR /app`, copy requirements, `RUN pip install -r requirements.txt`, copy source, `EXPOSE 8000`, và `CMD [\"uvicorn\", \"app.main:app\", \"--host\", \"0.0.0.0\", \"--port\", \"8000\"]`.",
+      "phase": "cv_verification",
+      "topic_key": "docker_debugging",
+      "question_type": "follow_up",
+      "difficulty": "medium",
+      "provider_metadata": {
+        "planner": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 3649,
+          "output_tokens": 632,
+          "attempts": 1
+        },
+        "question_generator": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 1725,
+          "output_tokens": 71,
+          "attempts": 1
+        }
+      }
+    },
+    {
+      "sequence": 6,
+      "question": "Giả sử bạn có một bảng 'users' gồm các cột 'id', 'name', và 'email'. Hãy viết một câu lệnh SQL để lấy ra tên (name) của tất cả người dùng có email kết thúc bằng '@gmail.com'.",
+      "answer": "Em viết `SELECT name, email FROM users WHERE email LIKE '%@gmail.com';`.",
+      "phase": "cv_verification",
+      "topic_key": "sql_query_task",
+      "question_type": "transition",
+      "difficulty": "easy",
+      "provider_metadata": {
+        "planner": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 3967,
+          "output_tokens": 615,
+          "attempts": 1
+        },
+        "question_generator": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 1830,
+          "output_tokens": 56,
+          "attempts": 1
+        }
+      }
+    },
+    {
+      "sequence": 7,
+      "question": "Dựa trên bảng 'users' đó, làm thế nào để bạn viết một câu lệnh SQL nhằm đếm số lượng người dùng có cùng một tên (name) và chỉ hiển thị những tên xuất hiện nhiều hơn một lần?",
+      "answer": "Em dùng `GROUP BY user_id`, lọc `created_at >= now() - interval '30 days'`, và dùng `COALESCE(sum(total), 0)` nếu cần tránh NULL.",
+      "phase": "cv_verification",
+      "topic_key": "sql_query_task",
+      "question_type": "follow_up",
+      "difficulty": "easy",
+      "provider_metadata": {
+        "planner": {
+          "fallback": true,
+          "error": "follow_up_count must reset when switching topics"
+        },
+        "question_generator": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 1716,
+          "output_tokens": 51,
+          "attempts": 1
+        }
+      }
+    },
+    {
+      "sequence": 8,
+      "question": "Trong Python, hãy viết một đoạn code ngắn sử dụng list comprehension để lọc ra các số chẵn từ một danh sách các số nguyên cho trước, ví dụ: [1, 2, 3, 4, 5, 6].",
+      "answer": "Em viết `[x * x for x in [1, 2, 3, 4, 5, 6] if x % 2 == 0]`, output là `[4, 16, 36]`.",
+      "phase": "cv_verification",
+      "topic_key": "verify_python",
+      "question_type": "transition",
+      "difficulty": "easy",
+      "provider_metadata": {
+        "planner": {
+          "fallback": true,
+          "error": "The follow-up limit for this answer or topic has been reached"
+        },
+        "question_generator": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 1854,
+          "output_tokens": 55,
+          "attempts": 1
+        }
+      }
+    },
+    {
+      "sequence": 9,
+      "question": "Giả sử bạn có hai bảng 'orders' (chứa 'order_id', 'user_id', 'amount') và 'users' (chứa 'id', 'name'). Hãy viết một câu lệnh SQL sử dụng INNER JOIN để lấy ra tên của người dùng và tổng số tiền (amount) của tất cả các đơn hàng mà họ đã thực hiện.",
+      "answer": "Em dùng `GROUP BY user_id`, lọc `created_at >= now() - interval '30 days'`, và dùng `COALESCE(sum(total), 0)` nếu cần tránh NULL.",
+      "phase": "cv_verification",
+      "topic_key": "verify_sql",
+      "question_type": "transition",
+      "difficulty": "easy",
+      "provider_metadata": {
+        "planner": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 4573,
+          "output_tokens": 538,
+          "attempts": 1,
+          "backend_overrode_early_finish": true
+        },
+        "question_generator": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 1820,
+          "output_tokens": 80,
+          "attempts": 1
+        }
+      }
+    },
+    {
+      "sequence": 10,
+      "question": "Để làm rõ hơn về cách kết nối dữ liệu, bạn hãy viết một câu lệnh SQL đơn giản sử dụng INNER JOIN để kết nối bảng 'users' và 'orders' dựa trên cột 'id' của bảng 'users' và 'user_id' của bảng 'orders', sau đó chọn ra 'name' và 'amount' của các đơn hàng tương ứng.",
+      "answer": "Em dùng `GROUP BY user_id`, lọc `created_at >= now() - interval '30 days'`, và dùng `COALESCE(sum(total), 0)` nếu cần tránh NULL.",
+      "phase": "cv_verification",
+      "topic_key": "technical_problem_solving",
+      "question_type": "transition",
+      "difficulty": "easy",
+      "provider_metadata": {
+        "planner": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 4854,
+          "output_tokens": 595,
+          "attempts": 1,
+          "backend_overrode_early_finish": true
+        },
+        "question_generator": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 1969,
+          "output_tokens": 84,
+          "attempts": 1
+        }
+      }
+    }
+  ]
+}

@@ -88,9 +88,7 @@ def get_student_dashboard(
         )
     )
     matched_skills = {skill for job in recommended for skill in job.tags}
-    primary_skills = (
-        set((primary_cv.parsed_data or {}).get("skills") or []) if primary_cv else set()
-    )
+    primary_skills = set(_cv_skill_names(primary_cv)) if primary_cv else set()
     best_score = max((job.match_score or 0 for job in recommended), default=0)
     privacy = {
         "pii_masking": 96 if cvs else 0,
@@ -268,7 +266,7 @@ def get_university_dashboard(
                 "id": org.id,
                 "name": org.name,
                 "is_verified_partner": org.is_verified_partner,
-                "metadata": org.metadata_json,
+                "metadata": org.metadata_json or {},
             }
             for org in partners
         ],
@@ -312,15 +310,12 @@ def _portal_for(item: UserOrgRole) -> str:
 def _job_to_dashboard(job: Job, db: Session, *, primary_cv: CV | None = None) -> DashboardJob:
     org = db.get(Organization, job.org_id)
     metadata = job.parsed_requirements or {}
+    org_metadata = org.metadata_json if org and isinstance(org.metadata_json, dict) else {}
     tags = _extract_skills(metadata)
     match_score = None
     reason = None
     if primary_cv:
-        cv_skills = {
-            str(skill).strip()
-            for skill in (primary_cv.skills or [])
-            if str(skill).strip()
-        }
+        cv_skills = set(_cv_skill_names(primary_cv))
         normalized_cv_skills = {skill.casefold(): skill for skill in cv_skills}
         matched_skills = [
             normalized_cv_skills[tag.casefold()]
@@ -338,11 +333,12 @@ def _job_to_dashboard(job: Job, db: Session, *, primary_cv: CV | None = None) ->
         title=job.title,
         company=org.name if org else "Unknown organization",
         location=str(
-            metadata.get("location") or (org.metadata_json.get("location") if org else "") or ""
+            metadata.get("location") or org_metadata.get("location") or job.location_address or ""
         ),
         salary_range=str(
             metadata.get("salary_range")
-            or (org.metadata_json.get("salary_range") if org else "")
+            or org_metadata.get("salary_range")
+            or _salary_range(job)
             or ""
         ),
         status=job.status.value,
@@ -386,13 +382,74 @@ def _cv_to_dashboard(cv: CV) -> DashboardCV:
         id=cv.id,
         is_primary=cv.is_primary,
         masked_preview=_masked_preview(cv.masked_data),
-        skills=list(cv.skills or (cv.parsed_data or {}).get("skills") or [])[:8],
+        skills=_cv_skill_names(cv)[:8],
     )
 
 
 def _extract_skills(parsed_requirements: dict[str, Any]) -> list[str]:
-    skills = parsed_requirements.get("skills") or parsed_requirements.get("required_skills") or []
-    return [str(skill) for skill in skills if skill][:8]
+    nested = parsed_requirements.get("requirements")
+    if isinstance(nested, dict):
+        skills = (
+            nested.get("skills")
+            or nested.get("required_skills")
+            or parsed_requirements.get("skills")
+            or parsed_requirements.get("required_skills")
+            or []
+        )
+    else:
+        skills = parsed_requirements.get("skills") or parsed_requirements.get("required_skills") or []
+    return _skill_names(skills)[:8]
+
+
+def _cv_skill_names(cv: CV) -> list[str]:
+    parsed = cv.parsed_data or {}
+    gemini = parsed.get("gemini_extraction")
+    candidates: list[Any] = []
+    if cv.skills:
+        candidates.extend(cv.skills)
+    if isinstance(parsed.get("skills"), list):
+        candidates.extend(parsed["skills"])
+    if isinstance(gemini, dict) and isinstance(gemini.get("skills"), list):
+        candidates.extend(gemini["skills"])
+    return _skill_names(candidates)
+
+
+def _skill_names(raw_skills: Any) -> list[str]:
+    if not isinstance(raw_skills, list):
+        return []
+    names: list[str] = []
+    seen: set[str] = set()
+    for item in raw_skills:
+        value = ""
+        if isinstance(item, str):
+            value = item
+        elif isinstance(item, dict):
+            for key in ("name", "skill", "label", "title"):
+                candidate = item.get(key)
+                if isinstance(candidate, str) and candidate.strip():
+                    value = candidate
+                    break
+        else:
+            value = str(item)
+        value = value.strip()
+        if not value:
+            continue
+        key = value.casefold()
+        if key in seen:
+            continue
+        seen.add(key)
+        names.append(value)
+    return names
+
+
+def _salary_range(job: Job) -> str:
+    if job.salary_min is None and job.salary_max is None:
+        return ""
+    if job.salary_min is not None and job.salary_max is not None:
+        return f"{job.salary_min:,} - {job.salary_max:,} {job.currency}"
+    if job.salary_min is not None:
+        return f"From {job.salary_min:,} {job.currency}"
+    return f"Up to {job.salary_max:,} {job.currency}"
 
 
 def _masked_preview(masked_data: dict[str, Any]) -> str:

@@ -1,0 +1,678 @@
+{
+  "case": "technical_check_weak_candidate",
+  "mode": "technical_check",
+  "answer_style": "technical_weak",
+  "max_questions": 10,
+  "generated_at": "2026-06-25T08:50:08.043901+00:00",
+  "flags": [],
+  "report": {
+    "overall_score": 2,
+    "overall_summary": "Ứng viên không thể hiện được kiến thức nền tảng về kỹ thuật trong bất kỳ lĩnh vực nào được yêu cầu cho vị trí thực tập sinh Backend AI Engineer. Trong suốt buổi phỏng vấn, ứng viên liên tục trả lời rằng không chắc chắn về cú pháp và không thể thực hiện các tác vụ lập trình cơ bản như viết hàm Python, truy vấn SQL đơn giản, cấu hình Dockerfile hoặc định nghĩa endpoint FastAPI.",
+    "dimensions": [
+      {
+        "key": "technical_knowledge",
+        "label": "Kiến thức chuyên môn",
+        "score": 0,
+        "weight": 30,
+        "summary": "Ứng viên thiếu hụt kiến thức cơ bản về cú pháp Python, SQL, Docker và FastAPI.",
+        "evidence": [
+          "Không thể viết hàm Python cơ bản (tinh_tong).",
+          "Không thể viết câu lệnh SQL đơn giản (SELECT, COUNT).",
+          "Không thể viết Dockerfile cơ bản.",
+          "Không thể định nghĩa endpoint FastAPI cơ bản."
+        ]
+      },
+      {
+        "key": "practical_experience",
+        "label": "Độ đúng code/query",
+        "score": 0,
+        "weight": 25,
+        "summary": "Ứng viên không thể hiện được khả năng thực thi bất kỳ tác vụ kỹ thuật nào.",
+        "evidence": [
+          "Không hoàn thành được bất kỳ yêu cầu code hoặc query nào trong 9 câu hỏi.",
+          "Luôn trả lời bằng cách từ chối thực hiện thay vì đưa ra giải pháp."
+        ]
+      },
+      {
+        "key": "problem_solving",
+        "label": "Debug và giải quyết vấn đề",
+        "score": 0,
+        "weight": 25,
+        "summary": "Ứng viên không thể hiện được tư duy giải quyết vấn đề kỹ thuật.",
+        "evidence": [
+          "Cách tiếp cận duy nhất được đề cập là 'thử chạy và xem lỗi', không có tư duy phân tích hoặc logic lập trình."
+        ]
+      },
+      {
+        "key": "communication",
+        "label": "Giải thích kỹ thuật",
+        "score": 20,
+        "weight": 10,
+        "summary": "Khả năng diễn đạt kỹ thuật rất hạn chế do thiếu kiến thức chuyên môn.",
+        "evidence": [
+          "Câu trả lời lặp lại một nội dung duy nhất cho mọi câu hỏi kỹ thuật.",
+          "Không thể giải thích hoặc mô tả các khái niệm kỹ thuật."
+        ]
+      },
+      {
+        "key": "critical_thinking",
+        "label": "Edge cases và hiệu năng",
+        "score": 0,
+        "weight": 10,
+        "summary": "Không có bằng chứng về tư duy phản biện hoặc hiểu biết về các khía cạnh kỹ thuật.",
+        "evidence": [
+          "Không thể đánh giá hoặc đưa ra giải pháp cho các tình huống kỹ thuật cơ bản."
+        ]
+      }
+    ],
+    "strengths": [],
+    "improvements": [
+      "Học lại cú pháp cơ bản của ngôn ngữ Python (hàm, vòng lặp, điều kiện).",
+      "Tìm hiểu các câu lệnh SQL cơ bản (SELECT, COUNT, WHERE).",
+      "Học cách xây dựng Dockerfile cơ bản cho ứng dụng Python.",
+      "Thực hành xây dựng các API đơn giản với FastAPI.",
+      "Rèn luyện tư duy giải quyết vấn đề bằng cách tự viết code thay vì dựa vào thông báo lỗi của trình biên dịch."
+    ],
+    "insufficient_evidence": [
+      "Không có bằng chứng về bất kỳ kỹ năng kỹ thuật nào do ứng viên không thực hiện được các bài kiểm tra."
+    ],
+    "action_plan": [
+      "Hoàn thành khóa học nhập môn Python.",
+      "Thực hành các bài tập SQL cơ bản trên các nền tảng như LeetCode hoặc HackerRank.",
+      "Tự xây dựng một ứng dụng web đơn giản với FastAPI và đóng gói bằng Docker.",
+      "Tìm hiểu cách debug code một cách chủ động thay vì chỉ dựa vào thông báo lỗi."
+    ],
+    "confidence": "high"
+  },
+  "report_metadata": {
+    "provider": "gemini",
+    "model": "gemini-3.1-flash-lite",
+    "input_tokens": 4476,
+    "output_tokens": 841,
+    "attempts": 1
+  },
+  "answer_evaluations": [
+    {
+      "sequence": 1,
+      "question": "Trong dự án FastAPI của bạn, hãy viết một đoạn code ngắn để định nghĩa một endpoint POST nhận dữ liệu JSON bao gồm trường 'username' và trả về thông báo chào mừng.",
+      "answer": "Em chưa chắc cú pháp, nhưng em sẽ thử chạy và xem lỗi trước.",
+      "evaluation": {
+        "score": 1,
+        "status": "claimed",
+        "answer_quality": "vague",
+        "strengths": [],
+        "missing_evidence": [
+          "syntax knowledge",
+          "practical implementation"
+        ],
+        "contradictions": [],
+        "detected_competency": "basic syntax",
+        "evidence_found": [],
+        "remaining_gap": "Candidate could not provide basic FastAPI endpoint syntax.",
+        "ownership": "unknown",
+        "topic_decision": "stop",
+        "reason_for_next_question": "Candidate struggled with basic FastAPI syntax; switching to Docker to assess technical knowledge in another area.",
+        "anti_repetition_check": "Switching from FastAPI to Docker.",
+        "ownership_check": "Moving to a new skill to verify technical proficiency.",
+        "red_flags": [
+          "lack of basic syntax knowledge"
+        ],
+        "communication": {
+          "clarity": 2,
+          "specificity": 1,
+          "relevance": 2,
+          "structure": 2,
+          "summary": "Candidate admitted lack of syntax knowledge and described a trial-and-error approach."
+        }
+      }
+    },
+    {
+      "sequence": 2,
+      "question": "Để đóng gói một ứng dụng Python đơn giản vào Docker, bạn hãy viết nội dung cho một file Dockerfile cơ bản sử dụng image 'python:3.9-slim' làm nền tảng, thực hiện copy file 'app.py' vào container và thiết lập lệnh để chạy file đó.",
+      "answer": "Em chưa chắc cú pháp, nhưng em sẽ thử chạy và xem lỗi trước.",
+      "evaluation": {
+        "score": 0,
+        "status": "contradicted",
+        "answer_quality": "unable_to_answer",
+        "strengths": [],
+        "missing_evidence": [
+          "Dockerfile syntax knowledge"
+        ],
+        "contradictions": [],
+        "detected_competency": "none",
+        "evidence_found": [],
+        "remaining_gap": "Candidate could not provide basic Dockerfile syntax.",
+        "ownership": "unknown",
+        "topic_decision": "stop",
+        "reason_for_next_question": "Candidate struggled with basic syntax for both FastAPI and Docker. Switching to SQL to assess if they have any technical foundation.",
+        "anti_repetition_check": "This is a new topic (SQL) and a new question type (query task).",
+        "ownership_check": "N/A - switching topic due to lack of evidence.",
+        "red_flags": [
+          "lack of basic syntax knowledge in multiple core areas"
+        ],
+        "communication": {
+          "clarity": 2,
+          "specificity": 1,
+          "relevance": 2,
+          "structure": 2,
+          "summary": "Candidate could not provide Dockerfile syntax."
+        }
+      }
+    },
+    {
+      "sequence": 3,
+      "question": "Giả sử bạn có một bảng 'users' với các cột 'id', 'name' và 'email'. Bạn hãy viết một câu lệnh SQL để lấy ra tất cả các bản ghi từ bảng này mà có giá trị cột 'name' là 'Nguyen Van A'.",
+      "answer": "Em chưa chắc cú pháp, nhưng em sẽ thử chạy và xem lỗi trước.",
+      "evaluation": {
+        "score": 0,
+        "status": "not_assessed",
+        "answer_quality": "unable_to_answer",
+        "strengths": [],
+        "missing_evidence": [
+          "SQL syntax",
+          "FastAPI syntax",
+          "Docker syntax"
+        ],
+        "contradictions": [],
+        "detected_competency": "none",
+        "evidence_found": [],
+        "remaining_gap": "Candidate lacks foundational technical knowledge in all core areas (Python/FastAPI, Docker, SQL) required for the internship.",
+        "ownership": "unknown",
+        "topic_decision": "stop",
+        "reason_for_next_question": "Candidate has been unable to provide basic syntax or technical implementation details across three core areas. Further questioning is unlikely to yield evidence of technical proficiency.",
+        "anti_repetition_check": "N/A",
+        "ownership_check": "N/A",
+        "red_flags": [
+          "lack of basic syntax knowledge",
+          "inability to demonstrate core technical skills"
+        ],
+        "communication": {
+          "clarity": 2,
+          "specificity": 1,
+          "relevance": 2,
+          "structure": 2,
+          "summary": "Candidate consistently stated they were unsure of syntax across all technical topics."
+        }
+      }
+    },
+    {
+      "sequence": 4,
+      "question": "Trong Python, bạn hãy viết một đoạn code ngắn để khai báo một danh sách (list) chứa ba số nguyên bất kỳ, sau đó sử dụng vòng lặp for để in từng phần tử trong danh sách đó ra màn hình.",
+      "answer": "Em chưa chắc cú pháp, nhưng em sẽ thử chạy và xem lỗi trước.",
+      "evaluation": {
+        "score": 0,
+        "status": "not_assessed",
+        "answer_quality": "unable_to_answer",
+        "strengths": [],
+        "missing_evidence": [
+          "Python syntax",
+          "FastAPI implementation",
+          "Docker configuration",
+          "SQL query construction"
+        ],
+        "contradictions": [],
+        "detected_competency": "none",
+        "evidence_found": [],
+        "remaining_gap": "Candidate lacks foundational technical knowledge in all core areas required for the internship.",
+        "ownership": "not_owned",
+        "topic_decision": "stop",
+        "reason_for_next_question": "Candidate has been unable to provide basic syntax or technical implementation details across four core areas. Further questioning is unlikely to yield evidence of technical proficiency.",
+        "anti_repetition_check": "N/A",
+        "ownership_check": "N/A",
+        "red_flags": [
+          "lack of basic syntax knowledge",
+          "inability to demonstrate core technical skills"
+        ],
+        "communication": {
+          "clarity": 1,
+          "specificity": 1,
+          "relevance": 2,
+          "structure": 1,
+          "summary": "Candidate consistently stated they were unsure of syntax across all technical topics."
+        }
+      }
+    },
+    {
+      "sequence": 5,
+      "question": "Bạn có thể giải thích ngắn gọn cách bạn thường sử dụng câu lệnh điều kiện 'if-else' trong Python để kiểm tra xem một số nguyên có phải là số chẵn hay không?",
+      "answer": "Em chưa chắc cú pháp, nhưng em sẽ thử chạy và xem lỗi trước.",
+      "evaluation": {
+        "score": 0,
+        "status": "not_assessed",
+        "answer_quality": "unable_to_answer",
+        "strengths": [],
+        "missing_evidence": [
+          "Python syntax",
+          "FastAPI implementation",
+          "Docker configuration",
+          "SQL query writing"
+        ],
+        "contradictions": [],
+        "detected_competency": "none",
+        "evidence_found": [],
+        "remaining_gap": "Candidate lacks foundational technical knowledge in all core areas required for the internship.",
+        "ownership": "not_owned",
+        "topic_decision": "stop",
+        "reason_for_next_question": "Candidate has been unable to provide basic syntax or technical implementation details across five consecutive technical questions. Further questioning is unlikely to yield evidence of technical proficiency.",
+        "anti_repetition_check": "N/A",
+        "ownership_check": "N/A",
+        "red_flags": [
+          "lack of basic syntax knowledge",
+          "inability to demonstrate core technical skills"
+        ],
+        "communication": {
+          "clarity": 1,
+          "specificity": 1,
+          "relevance": 2,
+          "structure": 1,
+          "summary": "Candidate consistently stated they were unsure of syntax across all technical topics."
+        }
+      }
+    },
+    {
+      "sequence": 6,
+      "question": "Giả sử bạn có một biến 'x' chứa giá trị 10. Bạn hãy viết một dòng code Python để kiểm tra xem giá trị của 'x' có lớn hơn 5 hay không và in ra màn hình chữ 'Lon hon 5' nếu điều kiện đó đúng.",
+      "answer": "Em chưa chắc cú pháp, nhưng em sẽ thử chạy và xem lỗi trước.",
+      "evaluation": {
+        "score": 0,
+        "status": "not_assessed",
+        "answer_quality": "unable_to_answer",
+        "strengths": [],
+        "missing_evidence": [
+          "Python syntax",
+          "FastAPI implementation",
+          "Docker configuration",
+          "SQL query writing"
+        ],
+        "contradictions": [],
+        "detected_competency": "none",
+        "evidence_found": [],
+        "remaining_gap": "Candidate failed to demonstrate basic technical proficiency across all core areas (Python, FastAPI, Docker, SQL) despite multiple opportunities.",
+        "ownership": "not_owned",
+        "topic_decision": "stop",
+        "reason_for_next_question": "The candidate has been unable to provide basic syntax or technical implementation details across six consecutive technical questions. Further questioning is unlikely to yield evidence of technical proficiency.",
+        "anti_repetition_check": "N/A",
+        "ownership_check": "N/A",
+        "red_flags": [
+          "lack of basic syntax knowledge",
+          "inability to demonstrate core technical skills"
+        ],
+        "communication": {
+          "clarity": 1,
+          "specificity": 1,
+          "relevance": 2,
+          "structure": 1,
+          "summary": "Candidate consistently stated they were unsure of syntax across all technical topics."
+        }
+      }
+    },
+    {
+      "sequence": 7,
+      "question": "Để kiểm tra xem một chuỗi có rỗng hay không trong Python, bạn sẽ viết đoạn code như thế nào?",
+      "answer": "Em chưa chắc cú pháp, nhưng em sẽ thử chạy và xem lỗi trước.",
+      "evaluation": {
+        "score": 0,
+        "status": "not_assessed",
+        "answer_quality": "unable_to_answer",
+        "strengths": [],
+        "missing_evidence": [
+          "Python syntax",
+          "FastAPI implementation",
+          "Docker configuration",
+          "SQL query writing"
+        ],
+        "contradictions": [],
+        "detected_competency": "none",
+        "evidence_found": [],
+        "remaining_gap": "Candidate failed to demonstrate basic technical proficiency across all core areas (Python, FastAPI, Docker, SQL) despite multiple opportunities.",
+        "ownership": "not_owned",
+        "topic_decision": "stop",
+        "reason_for_next_question": "The candidate has been unable to provide basic syntax or technical implementation details across seven consecutive technical questions. Further questioning is unlikely to yield evidence of technical proficiency.",
+        "anti_repetition_check": "N/A",
+        "ownership_check": "N/A",
+        "red_flags": [
+          "lack of basic syntax knowledge",
+          "inability to demonstrate core technical skills"
+        ],
+        "communication": {
+          "clarity": 1,
+          "specificity": 1,
+          "relevance": 2,
+          "structure": 1,
+          "summary": "Candidate consistently stated they were unsure of syntax across all technical topics."
+        }
+      }
+    },
+    {
+      "sequence": 8,
+      "question": "Bạn có thể viết một câu lệnh SQL đơn giản để đếm tổng số bản ghi hiện có trong bảng 'users' không?",
+      "answer": "Em chưa chắc cú pháp, nhưng em sẽ thử chạy và xem lỗi trước.",
+      "evaluation": {
+        "score": 0,
+        "status": "not_assessed",
+        "answer_quality": "unable_to_answer",
+        "strengths": [],
+        "missing_evidence": [
+          "Python syntax",
+          "FastAPI implementation",
+          "Docker configuration",
+          "SQL query construction"
+        ],
+        "contradictions": [],
+        "detected_competency": "none",
+        "evidence_found": [],
+        "remaining_gap": "Candidate failed to demonstrate basic technical proficiency across all core areas despite multiple opportunities.",
+        "ownership": "not_owned",
+        "topic_decision": "stop",
+        "reason_for_next_question": "The candidate has been unable to provide basic syntax or technical implementation details across eight consecutive technical questions. Further questioning is unlikely to yield evidence of technical proficiency.",
+        "anti_repetition_check": "N/A",
+        "ownership_check": "N/A",
+        "red_flags": [
+          "lack of basic syntax knowledge",
+          "inability to demonstrate core technical skills"
+        ],
+        "communication": {
+          "clarity": 1,
+          "specificity": 1,
+          "relevance": 2,
+          "structure": 1,
+          "summary": "Candidate consistently stated they were unsure of syntax across all technical topics."
+        }
+      }
+    },
+    {
+      "sequence": 9,
+      "question": "Bạn hãy viết một đoạn code Python đơn giản để tạo một hàm có tên là 'tinh_tong' nhận vào hai tham số là 'a' và 'b', sau đó trả về kết quả là tổng của hai số đó.",
+      "answer": "Em chưa chắc cú pháp, nhưng em sẽ thử chạy và xem lỗi trước.",
+      "evaluation": {
+        "score": 0,
+        "status": "not_assessed",
+        "answer_quality": "unable_to_answer",
+        "strengths": [],
+        "missing_evidence": [
+          "Python syntax",
+          "FastAPI implementation",
+          "Docker configuration",
+          "SQL querying"
+        ],
+        "contradictions": [],
+        "detected_competency": "none",
+        "evidence_found": [],
+        "remaining_gap": "Candidate failed to demonstrate basic technical proficiency across all core areas despite multiple opportunities.",
+        "ownership": "not_owned",
+        "topic_decision": "stop",
+        "reason_for_next_question": "The candidate has been unable to provide basic syntax or technical implementation details across nine consecutive technical questions. Further questioning is unlikely to yield evidence of technical proficiency.",
+        "anti_repetition_check": "N/A",
+        "ownership_check": "N/A",
+        "red_flags": [
+          "lack of basic syntax knowledge",
+          "inability to demonstrate core technical skills"
+        ],
+        "communication": {
+          "clarity": 1,
+          "specificity": 1,
+          "relevance": 2,
+          "structure": 1,
+          "summary": "Candidate consistently stated they were unsure of syntax across all technical topics."
+        }
+      }
+    }
+  ],
+  "turns": [
+    {
+      "sequence": 1,
+      "question": "Trong dự án FastAPI của bạn, hãy viết một đoạn code ngắn để định nghĩa một endpoint POST nhận dữ liệu JSON bao gồm trường 'username' và trả về thông báo chào mừng.",
+      "answer": "Em chưa chắc cú pháp, nhưng em sẽ thử chạy và xem lỗi trước.",
+      "phase": "cv_verification",
+      "topic_key": "fastapi_implementation",
+      "question_type": "initial",
+      "difficulty": "easy",
+      "provider_metadata": {
+        "planner": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 2691,
+          "output_tokens": 238,
+          "attempts": 1
+        },
+        "question_generator": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 1026,
+          "output_tokens": 42,
+          "attempts": 1
+        }
+      }
+    },
+    {
+      "sequence": 2,
+      "question": "Để đóng gói một ứng dụng Python đơn giản vào Docker, bạn hãy viết nội dung cho một file Dockerfile cơ bản sử dụng image 'python:3.9-slim' làm nền tảng, thực hiện copy file 'app.py' vào container và thiết lập lệnh để chạy file đó.",
+      "answer": "Em chưa chắc cú pháp, nhưng em sẽ thử chạy và xem lỗi trước.",
+      "phase": "cv_verification",
+      "topic_key": "docker_implementation",
+      "question_type": "transition",
+      "difficulty": "easy",
+      "provider_metadata": {
+        "planner": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 2783,
+          "output_tokens": 486,
+          "attempts": 1
+        },
+        "question_generator": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 1366,
+          "output_tokens": 66,
+          "attempts": 1
+        }
+      }
+    },
+    {
+      "sequence": 3,
+      "question": "Giả sử bạn có một bảng 'users' với các cột 'id', 'name' và 'email'. Bạn hãy viết một câu lệnh SQL để lấy ra tất cả các bản ghi từ bảng này mà có giá trị cột 'name' là 'Nguyen Van A'.",
+      "answer": "Em chưa chắc cú pháp, nhưng em sẽ thử chạy và xem lỗi trước.",
+      "phase": "cv_verification",
+      "topic_key": "sql_basics",
+      "question_type": "transition",
+      "difficulty": "easy",
+      "provider_metadata": {
+        "planner": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 3024,
+          "output_tokens": 513,
+          "attempts": 1
+        },
+        "question_generator": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 1479,
+          "output_tokens": 60,
+          "attempts": 1
+        }
+      }
+    },
+    {
+      "sequence": 4,
+      "question": "Trong Python, bạn hãy viết một đoạn code ngắn để khai báo một danh sách (list) chứa ba số nguyên bất kỳ, sau đó sử dụng vòng lặp for để in từng phần tử trong danh sách đó ra màn hình.",
+      "answer": "Em chưa chắc cú pháp, nhưng em sẽ thử chạy và xem lỗi trước.",
+      "phase": "cv_verification",
+      "topic_key": "verify_python",
+      "question_type": "transition",
+      "difficulty": "easy",
+      "provider_metadata": {
+        "planner": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 3279,
+          "output_tokens": 549,
+          "attempts": 1,
+          "backend_overrode_early_finish": true
+        },
+        "question_generator": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 1650,
+          "output_tokens": 52,
+          "attempts": 2
+        }
+      }
+    },
+    {
+      "sequence": 5,
+      "question": "Bạn có thể giải thích ngắn gọn cách bạn thường sử dụng câu lệnh điều kiện 'if-else' trong Python để kiểm tra xem một số nguyên có phải là số chẵn hay không?",
+      "answer": "Em chưa chắc cú pháp, nhưng em sẽ thử chạy và xem lỗi trước.",
+      "phase": "cv_verification",
+      "topic_key": "technical_problem_solving",
+      "question_type": "transition",
+      "difficulty": "easy",
+      "provider_metadata": {
+        "planner": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 3588,
+          "output_tokens": 558,
+          "attempts": 1,
+          "backend_overrode_early_finish": true
+        },
+        "question_generator": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 1620,
+          "output_tokens": 44,
+          "attempts": 1
+        }
+      }
+    },
+    {
+      "sequence": 6,
+      "question": "Giả sử bạn có một biến 'x' chứa giá trị 10. Bạn hãy viết một dòng code Python để kiểm tra xem giá trị của 'x' có lớn hơn 5 hay không và in ra màn hình chữ 'Lon hon 5' nếu điều kiện đó đúng.",
+      "answer": "Em chưa chắc cú pháp, nhưng em sẽ thử chạy và xem lỗi trước.",
+      "phase": "cv_verification",
+      "topic_key": "technical_problem_solving",
+      "question_type": "transition",
+      "difficulty": "easy",
+      "provider_metadata": {
+        "planner": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 3861,
+          "output_tokens": 572,
+          "attempts": 1,
+          "backend_overrode_early_finish": true
+        },
+        "question_generator": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 1660,
+          "output_tokens": 64,
+          "attempts": 1
+        }
+      }
+    },
+    {
+      "sequence": 7,
+      "question": "Để kiểm tra xem một chuỗi có rỗng hay không trong Python, bạn sẽ viết đoạn code như thế nào?",
+      "answer": "Em chưa chắc cú pháp, nhưng em sẽ thử chạy và xem lỗi trước.",
+      "phase": "cv_verification",
+      "topic_key": "technical_problem_solving",
+      "question_type": "transition",
+      "difficulty": "easy",
+      "provider_metadata": {
+        "planner": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 4118,
+          "output_tokens": 569,
+          "attempts": 1,
+          "backend_overrode_early_finish": true
+        },
+        "question_generator": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 1768,
+          "output_tokens": 29,
+          "attempts": 1
+        }
+      }
+    },
+    {
+      "sequence": 8,
+      "question": "Bạn có thể viết một câu lệnh SQL đơn giản để đếm tổng số bản ghi hiện có trong bảng 'users' không?",
+      "answer": "Em chưa chắc cú pháp, nhưng em sẽ thử chạy và xem lỗi trước.",
+      "phase": "cv_verification",
+      "topic_key": "technical_problem_solving",
+      "question_type": "transition",
+      "difficulty": "easy",
+      "provider_metadata": {
+        "planner": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 4229,
+          "output_tokens": 572,
+          "attempts": 1,
+          "backend_overrode_early_finish": true
+        },
+        "question_generator": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 1764,
+          "output_tokens": 31,
+          "attempts": 1
+        }
+      }
+    },
+    {
+      "sequence": 9,
+      "question": "Bạn hãy viết một đoạn code Python đơn giản để tạo một hàm có tên là 'tinh_tong' nhận vào hai tham số là 'a' và 'b', sau đó trả về kết quả là tổng của hai số đó.",
+      "answer": "Em chưa chắc cú pháp, nhưng em sẽ thử chạy và xem lỗi trước.",
+      "phase": "cv_verification",
+      "topic_key": "technical_problem_solving",
+      "question_type": "transition",
+      "difficulty": "easy",
+      "provider_metadata": {
+        "planner": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 4327,
+          "output_tokens": 568,
+          "attempts": 1,
+          "backend_overrode_early_finish": true
+        },
+        "question_generator": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 1781,
+          "output_tokens": 53,
+          "attempts": 1
+        }
+      }
+    },
+    {
+      "sequence": 10,
+      "question": "Với kỹ thuật em vừa mô tả, em hãy giải một task nhỏ: input là gì, output mong muốn là gì, và code hoặc query chính sẽ viết thế nào?",
+      "answer": "Em chưa chắc cú pháp, nhưng em sẽ thử chạy và xem lỗi trước.",
+      "phase": "cv_verification",
+      "topic_key": "technical_problem_solving",
+      "question_type": "transition",
+      "difficulty": "easy",
+      "provider_metadata": {
+        "planner": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 4438,
+          "output_tokens": 551,
+          "attempts": 1,
+          "backend_overrode_early_finish": true
+        },
+        "question_generator": {
+          "fallback": true,
+          "error": "Technical check question is behavioral or communication-focused",
+          "attempts": 2
+        }
+      }
+    }
+  ]
+}

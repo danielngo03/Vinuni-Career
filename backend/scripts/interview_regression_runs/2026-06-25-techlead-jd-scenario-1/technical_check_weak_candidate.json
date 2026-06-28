@@ -1,0 +1,306 @@
+{
+  "case": "technical_check_weak_candidate",
+  "mode": "technical_check",
+  "answer_style": "technical_weak",
+  "max_questions": 10,
+  "generated_at": "2026-06-25T02:52:40.587374+00:00",
+  "flags": [
+    "technical_check ended before collecting enough technical coverage"
+  ],
+  "report": {
+    "overall_score": 8,
+    "overall_summary": "Ứng viên không thể hiện được kiến thức kỹ thuật cơ bản cần thiết cho vị trí Backend AI Engineer Intern. Mặc dù có đề cập đến các kỹ năng trong CV, ứng viên không thể viết được các đoạn mã cú pháp đơn giản nhất liên quan đến FastAPI, Docker, và Python cơ bản. Cách tiếp cận 'thử chạy và xem lỗi' cho thấy sự thiếu hụt về nền tảng lý thuyết và khả năng tư duy logic trong lập trình.",
+    "dimensions": [
+      {
+        "key": "technical_knowledge",
+        "label": "Kiến thức chuyên môn",
+        "score": 5,
+        "weight": 30,
+        "summary": "Ứng viên thiếu kiến thức nền tảng về các công nghệ cốt lõi như FastAPI, Docker và cú pháp Python cơ bản.",
+        "evidence": [
+          "Không thể viết cú pháp FastAPI endpoint cơ bản.",
+          "Không thể xác định cách sử dụng Pydantic model trong FastAPI.",
+          "Không thể liệt kê các chỉ thị cơ bản trong Dockerfile.",
+          "Không thể viết vòng lặp for đơn giản trong Python."
+        ]
+      },
+      {
+        "key": "practical_experience",
+        "label": "Độ đúng code/query",
+        "score": 5,
+        "weight": 25,
+        "summary": "Không có bằng chứng về kinh nghiệm thực tế. Các kỹ năng liệt kê trong CV không được chứng minh qua các câu hỏi kỹ thuật.",
+        "evidence": [
+          "Không thể cung cấp ví dụ mã nguồn cho các tác vụ đã nêu trong CV.",
+          "Mâu thuẫn giữa kinh nghiệm Docker trong CV và khả năng thực tế."
+        ]
+      },
+      {
+        "key": "problem_solving",
+        "label": "Debug và giải quyết vấn đề",
+        "score": 10,
+        "weight": 25,
+        "summary": "Ứng viên dựa hoàn toàn vào việc thử sai (trial and error) thay vì hiểu bản chất vấn đề.",
+        "evidence": [
+          "Câu trả lời nhất quán cho mọi câu hỏi là 'thử chạy và xem lỗi trước', cho thấy thiếu kỹ năng phân tích gốc rễ."
+        ]
+      },
+      {
+        "key": "communication",
+        "label": "Giải thích kỹ thuật",
+        "score": 20,
+        "weight": 10,
+        "summary": "Giao tiếp kỹ thuật rất hạn chế, không thể diễn đạt các khái niệm hoặc cú pháp cơ bản.",
+        "evidence": [
+          "Câu trả lời ngắn gọn, thiếu thông tin kỹ thuật, không thể giải thích logic."
+        ]
+      },
+      {
+        "key": "critical_thinking",
+        "label": "Edge cases và hiệu năng",
+        "score": 5,
+        "weight": 10,
+        "summary": "Chưa thể hiện được khả năng tư duy về các khía cạnh kỹ thuật như hiệu năng, bảo mật hay cấu trúc hệ thống.",
+        "evidence": [
+          "Không có khả năng phân tích các tình huống kỹ thuật cơ bản."
+        ]
+      }
+    ],
+    "strengths": [
+      "Thành thật về việc thiếu kiến thức thay vì cố gắng trả lời sai lệch."
+    ],
+    "improvements": [
+      "Cần học lại cú pháp cơ bản của Python (vòng lặp, cấu trúc dữ liệu).",
+      "Nắm vững kiến thức nền tảng về FastAPI và Pydantic.",
+      "Học cách viết Dockerfile và hiểu quy trình container hóa ứng dụng.",
+      "Rèn luyện tư duy lập trình thay vì phụ thuộc vào việc chạy thử mã nguồn."
+    ],
+    "insufficient_evidence": [
+      "Không có bằng chứng về khả năng lập trình Python.",
+      "Không có bằng chứng về khả năng sử dụng FastAPI.",
+      "Không có bằng chứng về khả năng sử dụng Docker."
+    ],
+    "action_plan": [
+      "Hoàn thành khóa học cơ bản về Python trên các nền tảng uy tín.",
+      "Thực hành viết các API đơn giản với FastAPI và Pydantic theo tài liệu chính thức.",
+      "Tự tay viết Dockerfile cho một ứng dụng Python đơn giản và giải thích từng dòng lệnh.",
+      "Xây dựng một dự án nhỏ từ đầu để củng cố kiến thức thay vì chỉ đọc lý thuyết."
+    ],
+    "confidence": "high"
+  },
+  "report_metadata": {
+    "provider": "gemini",
+    "model": "gemini-3.1-flash-lite",
+    "input_tokens": 2086,
+    "output_tokens": 894,
+    "attempts": 1
+  },
+  "answer_evaluations": [
+    {
+      "sequence": 1,
+      "question": "Trong FastAPI, làm thế nào để bạn định nghĩa một endpoint nhận dữ liệu JSON từ client và sử dụng Pydantic model để kiểm tra dữ liệu đầu vào? Hãy viết một đoạn mã ví dụ ngắn gọn cho trường hợp này.",
+      "answer": "Em chưa chắc cú pháp, nhưng em sẽ thử chạy và xem lỗi trước.",
+      "evaluation": {
+        "score": 1,
+        "status": "claimed",
+        "answer_quality": "vague",
+        "strengths": [],
+        "missing_evidence": [
+          "No code provided",
+          "No understanding of Pydantic models shown"
+        ],
+        "contradictions": [],
+        "detected_competency": "basic_fastapi_syntax",
+        "evidence_found": [],
+        "remaining_gap": "Candidate cannot demonstrate basic FastAPI endpoint structure or Pydantic usage.",
+        "ownership": "unknown",
+        "topic_decision": "clarify",
+        "reason_for_next_question": "The candidate was unable to provide a code snippet. I will provide a very simple structure and ask them to identify where the Pydantic model would be used to verify their conceptual understanding.",
+        "anti_repetition_check": "This is a follow-up to the previous failed code task, shifting from generation to identification.",
+        "ownership_check": "The question is grounded in the candidate's claimed project experience.",
+        "red_flags": [
+          "Lack of basic syntax knowledge for a core skill"
+        ],
+        "communication": {
+          "clarity": 2,
+          "specificity": 1,
+          "relevance": 2,
+          "structure": 1,
+          "summary": "Candidate admitted lack of knowledge regarding syntax."
+        }
+      }
+    },
+    {
+      "sequence": 2,
+      "question": "Giả sử bạn có một class Pydantic là 'User(BaseModel)' với thuộc tính 'name: str'. Trong đoạn mã FastAPI sau: '@app.post(\"/users\") def create_user(user: ...): return user', bạn sẽ điền gì vào vị trí dấu ba chấm để FastAPI tự động kiểm tra dữ liệu JSON đầu vào dựa trên class User đó?",
+      "answer": "Em chưa chắc cú pháp, nhưng em sẽ thử chạy và xem lỗi trước.",
+      "evaluation": {
+        "score": 0,
+        "status": "contradicted",
+        "answer_quality": "unable_to_answer",
+        "strengths": [],
+        "missing_evidence": [
+          "Pydantic model usage in FastAPI",
+          "Basic endpoint syntax"
+        ],
+        "contradictions": [],
+        "detected_competency": "none",
+        "evidence_found": [],
+        "remaining_gap": "Candidate cannot demonstrate basic FastAPI endpoint structure or Pydantic usage.",
+        "ownership": "unknown",
+        "topic_decision": "stop",
+        "reason_for_next_question": "Candidate failed to provide syntax for FastAPI twice. Switching to Docker to verify another core skill.",
+        "anti_repetition_check": "Switching from FastAPI syntax to Docker containerization.",
+        "ownership_check": "Moving to a new skill to assess if the candidate has practical experience with Docker as claimed in the CV.",
+        "red_flags": [
+          "Lack of basic syntax knowledge for a core skill"
+        ],
+        "communication": {
+          "clarity": 1,
+          "specificity": 1,
+          "relevance": 2,
+          "structure": 1,
+          "summary": "Candidate admitted lack of knowledge regarding syntax."
+        }
+      }
+    },
+    {
+      "sequence": 3,
+      "question": "Để đóng gói một ứng dụng Python đơn giản vào Docker, bạn sẽ viết những chỉ thị cơ bản nào trong file Dockerfile để copy mã nguồn vào container và cài đặt các thư viện từ file requirements.txt?",
+      "answer": "Em chưa chắc cú pháp, nhưng em sẽ thử chạy và xem lỗi trước.",
+      "evaluation": {
+        "score": 0,
+        "status": "contradicted",
+        "answer_quality": "unable_to_answer",
+        "strengths": [],
+        "missing_evidence": [
+          "Basic Dockerfile syntax",
+          "Understanding of containerization steps"
+        ],
+        "contradictions": [
+          "Claimed Docker experience in CV but cannot provide basic Dockerfile instructions."
+        ],
+        "detected_competency": "None",
+        "evidence_found": [],
+        "remaining_gap": "Candidate cannot provide basic Dockerfile syntax.",
+        "ownership": "not_owned",
+        "topic_decision": "stop",
+        "reason_for_next_question": "Candidate failed to provide basic Dockerfile syntax. Switching to Python to verify the most fundamental skill.",
+        "anti_repetition_check": "Switching from Docker to Python basics.",
+        "ownership_check": "Ownership is not_owned as the candidate could not explain the basic implementation.",
+        "red_flags": [
+          "Lack of basic syntax knowledge for core skills"
+        ],
+        "communication": {
+          "clarity": 1,
+          "specificity": 1,
+          "relevance": 2,
+          "structure": 1,
+          "summary": "Candidate admitted lack of knowledge regarding Dockerfile syntax."
+        }
+      }
+    }
+  ],
+  "turns": [
+    {
+      "sequence": 1,
+      "question": "Trong FastAPI, làm thế nào để bạn định nghĩa một endpoint nhận dữ liệu JSON từ client và sử dụng Pydantic model để kiểm tra dữ liệu đầu vào? Hãy viết một đoạn mã ví dụ ngắn gọn cho trường hợp này.",
+      "answer": "Em chưa chắc cú pháp, nhưng em sẽ thử chạy và xem lỗi trước.",
+      "phase": "cv_verification",
+      "topic_key": "fastapi_implementation",
+      "question_type": "initial",
+      "difficulty": "easy",
+      "provider_metadata": {
+        "planner": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 2414,
+          "output_tokens": 210,
+          "attempts": 1
+        },
+        "question_generator": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 854,
+          "output_tokens": 56,
+          "attempts": 1
+        }
+      }
+    },
+    {
+      "sequence": 2,
+      "question": "Giả sử bạn có một class Pydantic là 'User(BaseModel)' với thuộc tính 'name: str'. Trong đoạn mã FastAPI sau: '@app.post(\"/users\") def create_user(user: ...): return user', bạn sẽ điền gì vào vị trí dấu ba chấm để FastAPI tự động kiểm tra dữ liệu JSON đầu vào dựa trên class User đó?",
+      "answer": "Em chưa chắc cú pháp, nhưng em sẽ thử chạy và xem lỗi trước.",
+      "phase": "cv_verification",
+      "topic_key": "fastapi_implementation",
+      "question_type": "follow_up",
+      "difficulty": "easy",
+      "provider_metadata": {
+        "planner": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 2516,
+          "output_tokens": 598,
+          "attempts": 1
+        },
+        "question_generator": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 1288,
+          "output_tokens": 84,
+          "attempts": 1
+        }
+      }
+    },
+    {
+      "sequence": 3,
+      "question": "Để đóng gói một ứng dụng Python đơn giản vào Docker, bạn sẽ viết những chỉ thị cơ bản nào trong file Dockerfile để copy mã nguồn vào container và cài đặt các thư viện từ file requirements.txt?",
+      "answer": "Em chưa chắc cú pháp, nhưng em sẽ thử chạy và xem lỗi trước.",
+      "phase": "cv_verification",
+      "topic_key": "docker_basics",
+      "question_type": "transition",
+      "difficulty": "easy",
+      "provider_metadata": {
+        "planner": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 2747,
+          "output_tokens": 577,
+          "attempts": 1
+        },
+        "question_generator": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 1390,
+          "output_tokens": 48,
+          "attempts": 1
+        }
+      }
+    },
+    {
+      "sequence": 4,
+      "question": "Để kiểm tra kiến thức cơ bản về Python, bạn hãy viết một đoạn mã ngắn sử dụng vòng lặp 'for' để in ra các số chẵn từ 1 đến 10.",
+      "answer": "Em chưa chắc cú pháp, nhưng em sẽ thử chạy và xem lỗi trước.",
+      "phase": "cv_verification",
+      "topic_key": "python_basics",
+      "question_type": "transition",
+      "difficulty": "easy",
+      "provider_metadata": {
+        "planner": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 2890,
+          "output_tokens": 565,
+          "attempts": 1
+        },
+        "question_generator": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 1401,
+          "output_tokens": 49,
+          "attempts": 1
+        }
+      }
+    }
+  ]
+}

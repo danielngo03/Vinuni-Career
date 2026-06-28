@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from fastapi.testclient import TestClient
 
+from app.platform.database.models import CV
 from app.platform.database.session import SessionLocal
 from scripts.init_db import seed_demo_product_data
 
@@ -45,6 +46,44 @@ def test_seeded_role_dashboards(client: TestClient):
         )
         assert dashboard.status_code == 200
         assert expected_key in dashboard.json()
+
+
+def test_student_dashboard_accepts_structured_cv_skills(client: TestClient):
+    with SessionLocal() as db:
+        seed_demo_product_data(db)
+        cv = db.query(CV).filter(CV.is_primary.is_(True)).first()
+        assert cv is not None
+        cv.skills = ["Python", "SQL"]
+        cv.parsed_data = {
+            "skills": [
+                {"name": "python", "evidence": "CV skills", "proficiency": "unknown"},
+                {"name": "machine learning", "evidence": "summary", "proficiency": "unknown"},
+            ],
+            "gemini_extraction": {
+                "skills": [
+                    {"name": "PyTorch", "evidence": "technical skills"},
+                ],
+            },
+        }
+        db.commit()
+
+    login = client.post(
+        "/api/v1/auth/login",
+        json={"email": "student@vinuni.edu.vn", "password": "password123"},
+    )
+    assert login.status_code == 200
+    body = login.json()
+    identity = next(item for item in body["identities"] if item["portal"] == "student")
+    dashboard = client.get(
+        "/api/v1/dashboard/student",
+        headers={
+            "Authorization": f"Bearer {body['access_token']}",
+            "X-Identity-Id": identity["id"],
+        },
+    )
+    assert dashboard.status_code == 200
+    skills = {skill for cv in dashboard.json()["cvs"] for skill in cv["skills"]}
+    assert {"Python", "SQL", "machine learning", "PyTorch"}.issubset(skills)
 
 
 def test_job_cv_application_flow(client: TestClient, auth_headers: dict[str, str]):

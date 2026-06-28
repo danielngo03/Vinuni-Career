@@ -4,7 +4,13 @@ from app.modules.ai_operations.infrastructure.interview_models import (
     AIInterviewTurn,
 )
 from app.modules.engagement.infrastructure.models import CompanyReview, Notification
-from app.modules.opportunities.infrastructure.models import Bookmark, Event, EventRegistration, Job
+from app.modules.opportunities.infrastructure.models import (
+    Bookmark,
+    Event,
+    EventRegistration,
+    Job,
+    JobScheduledAction,
+)
 from app.modules.recruitment.infrastructure.models import (
     CV,
     ApplicationTrackingLog,
@@ -85,6 +91,7 @@ __all__ = [
     "Industry",
     "Job",
     "JobApplication",
+    "JobScheduledAction",
     "JobStatistic",
     "LegalDocument",
     "Notification",

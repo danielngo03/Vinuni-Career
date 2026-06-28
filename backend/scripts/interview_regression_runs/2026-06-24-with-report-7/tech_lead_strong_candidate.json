@@ -1,0 +1,317 @@
+{
+  "case": "tech_lead_strong_candidate",
+  "mode": "tech_lead",
+  "answer_style": "strong",
+  "max_questions": 12,
+  "generated_at": "2026-06-24T13:51:19.787972+00:00",
+  "flags": [],
+  "report": {
+    "overall_score": 66,
+    "overall_summary": "Ứng viên thể hiện tư duy thực tế tốt đối với một sinh viên/thực tập sinh, tập trung vào các khía cạnh vận hành (production-ready) như xử lý timeout, logging và containerization. Ứng viên nắm vững các công cụ cơ bản và có kinh nghiệm thực tế trong việc triển khai FastAPI và Docker. Tuy nhiên, ứng viên cần cải thiện khả năng giải thích các khái niệm tối ưu hóa chuyên sâu hơn (như multi-stage build) và cấu trúc hệ thống.",
+    "dimensions": [
+      {
+        "key": "technical_knowledge",
+        "label": "Kiến thức chuyên môn",
+        "score": 70,
+        "weight": 30,
+        "summary": "Ứng viên có kiến thức nền tảng tốt về FastAPI và Docker, đặc biệt là các kỹ thuật xử lý bất đồng bộ và debug container.",
+        "evidence": [
+          "Sử dụng asyncio.wait_for để quản lý timeout khi gọi model AI.",
+          "Hiểu cách bind Uvicorn vào 0.0.0.0 trong Docker.",
+          "Biết cách sử dụng các lệnh debug như docker ps, logs, và exec."
+        ]
+      },
+      {
+        "key": "practical_experience",
+        "label": "Kinh nghiệm thực tế",
+        "score": 75,
+        "weight": 20,
+        "summary": "Ứng viên có kinh nghiệm thực tế trong việc xây dựng và containerize ứng dụng backend.",
+        "evidence": [
+          "Đã triển khai thực tế việc tách service gọi model khỏi router.",
+          "Đã thực hiện container hóa ứng dụng FastAPI.",
+          "Có kinh nghiệm xử lý các vấn đề thực tế như latency và fallback message."
+        ]
+      },
+      {
+        "key": "problem_solving",
+        "label": "Giải quyết vấn đề",
+        "score": 65,
+        "weight": 20,
+        "summary": "Ứng viên có tư duy giải quyết vấn đề theo hướng thực dụng, tập trung vào tính ổn định của hệ thống.",
+        "evidence": [
+          "Chủ động thêm timeout và fallback để tránh treo hệ thống.",
+          "Có quy trình debug container rõ ràng khi gặp lỗi truy cập."
+        ]
+      },
+      {
+        "key": "communication",
+        "label": "Giao tiếp và làm rõ",
+        "score": 60,
+        "weight": 20,
+        "summary": "Giao tiếp rõ ràng, đi thẳng vào vấn đề kỹ thuật, tuy nhiên cần diễn đạt chi tiết hơn về các khái niệm lý thuyết.",
+        "evidence": [
+          "Giải thích ngắn gọn, súc tích về các bước debug.",
+          "Trả lời đúng trọng tâm câu hỏi về kiến trúc."
+        ]
+      },
+      {
+        "key": "critical_thinking",
+        "label": "Tư duy phản biện",
+        "score": 55,
+        "weight": 10,
+        "summary": "Ứng viên có ý thức về bảo mật và hiệu năng, nhưng chưa thể hiện rõ khả năng phân tích sâu về các giải pháp thay thế.",
+        "evidence": [
+          "Nhận thức được việc không lưu prompt nhạy cảm.",
+          "Chưa giải thích được lợi ích của multi-stage build khi được hỏi."
+        ]
+      }
+    ],
+    "strengths": [
+      "Tư duy thực tế, chú trọng vào tính ổn định (timeout, fallback).",
+      "Kỹ năng debug Docker cơ bản tốt.",
+      "Có ý thức về bảo mật dữ liệu người dùng."
+    ],
+    "improvements": [
+      "Cần tìm hiểu sâu hơn về tối ưu hóa Docker (multi-stage build).",
+      "Cần nắm vững hơn về các pattern thiết kế (Dependency Injection, Service Layer) trong FastAPI.",
+      "Cần cải thiện khả năng giải thích lý thuyết đằng sau các kỹ thuật đã áp dụng."
+    ],
+    "insufficient_evidence": [
+      "Kiến thức về cơ sở dữ liệu (SQL).",
+      "Khả năng thiết kế hệ thống phức tạp hơn ngoài demo đơn giản.",
+      "Kiến thức về các công cụ CI/CD."
+    ],
+    "action_plan": [
+      "Tìm hiểu và thực hành viết Dockerfile với multi-stage build để tối ưu image.",
+      "Nghiên cứu sâu hơn về Dependency Injection trong FastAPI để quản lý service hiệu quả hơn.",
+      "Thực hành thiết kế database schema cho một dự án nhỏ để làm quen với SQL.",
+      "Đọc thêm về các best practices khi triển khai AI model vào production."
+    ],
+    "confidence": "high"
+  },
+  "report_metadata": {
+    "provider": "gemini",
+    "model": "gemini-3.1-flash-lite",
+    "input_tokens": 2390,
+    "output_tokens": 957,
+    "attempts": 1
+  },
+  "answer_evaluations": [
+    {
+      "sequence": 1,
+      "question": "Bạn có thể mô tả kiến trúc tổng thể của dự án AI backend demo mà bạn đã thực hiện và giải thích vai trò cụ thể của dịch vụ FastAPI trong việc xử lý các yêu cầu từ người dùng không?",
+      "answer": "Với endpoint AI text, em tách service gọi model khỏi router, log latency và status, thêm timeout/fallback message, và không lưu prompt raw nếu có dữ liệu nhạy cảm.",
+      "evaluation": {
+        "score": 3,
+        "status": "partially_verified",
+        "answer_quality": "sufficient",
+        "strengths": [
+          "Demonstrates awareness of production concerns like latency logging and timeout handling",
+          "Shows security consciousness regarding sensitive data"
+        ],
+        "missing_evidence": [
+          "Specific implementation details of the service-router separation",
+          "Confirmation of direct ownership of the code"
+        ],
+        "contradictions": [],
+        "detected_competency": "technical_problem_solving",
+        "evidence_found": [
+          "Candidate implemented timeout and fallback logic for AI model calls",
+          "Candidate implemented logging for latency and status"
+        ],
+        "remaining_gap": "Need to confirm the specific FastAPI structure used to achieve this separation and verify direct ownership.",
+        "ownership": "direct",
+        "topic_decision": "continue",
+        "reason_for_next_question": "To verify the depth of the implementation and confirm the candidate's direct role in the architectural design.",
+        "anti_repetition_check": "The question focuses on the implementation details of the previously mentioned architecture rather than repeating the high-level description.",
+        "ownership_check": "The question asks for specific code-level implementation details to confirm direct ownership.",
+        "red_flags": [],
+        "communication": {
+          "clarity": 3,
+          "specificity": 3,
+          "relevance": 4,
+          "structure": 3,
+          "summary": "The candidate provided a relevant answer focusing on production-grade practices for AI endpoints."
+        }
+      }
+    },
+    {
+      "sequence": 2,
+      "question": "Để tách biệt service gọi model khỏi router trong FastAPI, bạn đã tổ chức cấu trúc thư mục và sử dụng các thành phần nào như Dependency Injection hay Service Layer để quản lý việc gọi model và xử lý fallback?",
+      "answer": "Em bọc call model bằng timeout, ví dụ `asyncio.wait_for(call_model(payload), timeout=10)`. Nếu timeout thì log latency/status, trả fallback message thân thiện và không retry vô hạn trong request.",
+      "evaluation": {
+        "score": 3,
+        "status": "verified",
+        "answer_quality": "sufficient",
+        "strengths": [
+          "Demonstrated practical use of asyncio.wait_for",
+          "Understands basic production-grade error handling for external API calls"
+        ],
+        "missing_evidence": [
+          "Specific project structure details"
+        ],
+        "contradictions": [],
+        "detected_competency": "FastAPI implementation",
+        "evidence_found": [
+          "Candidate implemented timeout and fallback logic for AI model calls",
+          "Candidate implemented logging for latency and status"
+        ],
+        "remaining_gap": "None for this specific topic.",
+        "ownership": "direct",
+        "topic_decision": "stop",
+        "reason_for_next_question": "FastAPI topic is sufficiently evidenced for an intern level; moving to Docker to cover remaining must-have skills.",
+        "anti_repetition_check": "New topic focuses on Docker, distinct from previous FastAPI/AI logic.",
+        "ownership_check": "Previous answers established direct ownership of the AI backend project.",
+        "red_flags": [],
+        "communication": {
+          "clarity": 3,
+          "specificity": 3,
+          "relevance": 4,
+          "structure": 3,
+          "summary": "The candidate provided a relevant answer focusing on production-grade practices for AI endpoints."
+        }
+      }
+    },
+    {
+      "sequence": 3,
+      "question": "Để chuyển đổi ứng dụng FastAPI hiện tại của bạn sang chạy trong môi trường Docker, bạn sẽ viết một file Dockerfile cơ bản như thế nào để đảm bảo ứng dụng khởi chạy thành công?",
+      "answer": "Em containerize FastAPI service bằng Dockerfile, bind Uvicorn vào `0.0.0.0`, map port `8000:8000`, và debug lỗi không truy cập được bằng `docker ps`, `docker logs`, rồi `docker exec` curl nội bộ.",
+      "evaluation": {
+        "score": 4,
+        "status": "verified",
+        "answer_quality": "sufficient",
+        "strengths": [
+          "Demonstrated practical knowledge of Docker commands",
+          "Understands port mapping and network binding",
+          "Knows basic debugging workflow"
+        ],
+        "missing_evidence": [
+          "Optimization techniques like multi-stage builds"
+        ],
+        "contradictions": [],
+        "detected_competency": "Docker containerization",
+        "evidence_found": [
+          "Candidate knows how to bind Uvicorn to 0.0.0.0",
+          "Candidate uses standard Docker debugging tools"
+        ],
+        "remaining_gap": "Optimization of Docker images for production",
+        "ownership": "direct",
+        "topic_decision": "continue",
+        "reason_for_next_question": "The candidate has verified basic usage; now checking for optimization knowledge.",
+        "anti_repetition_check": "Previous question was about basic setup; this is about optimization.",
+        "ownership_check": "Candidate previously claimed to containerize the service.",
+        "red_flags": [],
+        "communication": {
+          "clarity": 4,
+          "specificity": 4,
+          "relevance": 4,
+          "structure": 4,
+          "summary": "The candidate clearly explained their Docker setup and debugging process."
+        }
+      }
+    }
+  ],
+  "turns": [
+    {
+      "sequence": 1,
+      "question": "Bạn có thể mô tả kiến trúc tổng thể của dự án AI backend demo mà bạn đã thực hiện và giải thích vai trò cụ thể của dịch vụ FastAPI trong việc xử lý các yêu cầu từ người dùng không?",
+      "answer": "Với endpoint AI text, em tách service gọi model khỏi router, log latency và status, thêm timeout/fallback message, và không lưu prompt raw nếu có dữ liệu nhạy cảm.",
+      "phase": "cv_verification",
+      "topic_key": "ai_backend_demo_architecture",
+      "question_type": "initial",
+      "difficulty": "easy",
+      "provider_metadata": {
+        "planner": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 2197,
+          "output_tokens": 247,
+          "attempts": 1
+        },
+        "question_generator": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 802,
+          "output_tokens": 48,
+          "attempts": 1
+        }
+      }
+    },
+    {
+      "sequence": 2,
+      "question": "Để tách biệt service gọi model khỏi router trong FastAPI, bạn đã tổ chức cấu trúc thư mục và sử dụng các thành phần nào như Dependency Injection hay Service Layer để quản lý việc gọi model và xử lý fallback?",
+      "answer": "Em bọc call model bằng timeout, ví dụ `asyncio.wait_for(call_model(payload), timeout=10)`. Nếu timeout thì log latency/status, trả fallback message thân thiện và không retry vô hạn trong request.",
+      "phase": "cv_verification",
+      "topic_key": "ai_backend_demo_architecture",
+      "question_type": "follow_up",
+      "difficulty": "medium",
+      "provider_metadata": {
+        "planner": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 2345,
+          "output_tokens": 698,
+          "attempts": 1
+        },
+        "question_generator": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 1359,
+          "output_tokens": 52,
+          "attempts": 2
+        }
+      }
+    },
+    {
+      "sequence": 3,
+      "question": "Để chuyển đổi ứng dụng FastAPI hiện tại của bạn sang chạy trong môi trường Docker, bạn sẽ viết một file Dockerfile cơ bản như thế nào để đảm bảo ứng dụng khởi chạy thành công?",
+      "answer": "Em containerize FastAPI service bằng Dockerfile, bind Uvicorn vào `0.0.0.0`, map port `8000:8000`, và debug lỗi không truy cập được bằng `docker ps`, `docker logs`, rồi `docker exec` curl nội bộ.",
+      "phase": "cv_verification",
+      "topic_key": "docker_containerization",
+      "question_type": "transition",
+      "difficulty": "easy",
+      "provider_metadata": {
+        "planner": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 2634,
+          "output_tokens": 577,
+          "attempts": 1
+        },
+        "question_generator": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 1299,
+          "output_tokens": 44,
+          "attempts": 1
+        }
+      }
+    },
+    {
+      "sequence": 4,
+      "question": "Khi triển khai ứng dụng FastAPI lên môi trường production, việc sử dụng Dockerfile đơn tầng thường dẫn đến kích thước image lớn. Bạn hãy giải thích cách áp dụng kỹ thuật multi-stage build để tối ưu hóa kích thước image và nêu rõ lợi ích của việc tách biệt giai đoạn build và giai đoạn runtime trong Dockerfile.",
+      "answer": "Em containerize FastAPI service bằng Dockerfile, bind Uvicorn vào `0.0.0.0`, map port `8000:8000`, và debug lỗi không truy cập được bằng `docker ps`, `docker logs`, rồi `docker exec` curl nội bộ.",
+      "phase": "cv_verification",
+      "topic_key": "docker_containerization",
+      "question_type": "follow_up",
+      "difficulty": "medium",
+      "provider_metadata": {
+        "planner": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 2831,
+          "output_tokens": 591,
+          "attempts": 1
+        },
+        "question_generator": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 1339,
+          "output_tokens": 75,
+          "attempts": 1
+        }
+      }
+    }
+  ]
+}

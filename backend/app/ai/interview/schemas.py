@@ -72,9 +72,9 @@ class InterviewConfig(BaseModel):
         ],
         max_length=6,
     )
-    min_questions: int = Field(default=8, ge=1, le=20)
-    max_questions: int = Field(default=18, ge=1, le=40)
-    max_follow_ups_per_topic: int = Field(default=3, ge=0, le=5)
+    min_questions: int = Field(default=3, ge=1, le=20)
+    max_questions: int = Field(default=12, ge=1, le=40)
+    max_follow_ups_per_topic: int = Field(default=2, ge=0, le=5)
     min_communication_samples: int = Field(default=4, ge=1, le=20)
 
     @model_validator(mode="after")

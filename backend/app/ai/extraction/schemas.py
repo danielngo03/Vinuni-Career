@@ -36,6 +36,7 @@ class ProjectItem(BaseModel):
 class CVExtraction(BaseModel):
     document_type: Literal["cv"] = "cv"
     summary: str = Field(default="", max_length=1500)
+    raw_markdown: str = Field(default="", max_length=80_000)
     skills: list[SkillEvidence] = Field(default_factory=list, max_length=80)
     education: list[EducationItem] = Field(default_factory=list, max_length=20)
     experiences: list[ExperienceItem] = Field(default_factory=list, max_length=30)
@@ -54,6 +55,8 @@ class CVExtraction(BaseModel):
 class JDExtraction(BaseModel):
     document_type: Literal["job_description"] = "job_description"
     title: str = Field(default="", max_length=200)
+    description: str = Field(default="", max_length=5000)
+    location: str = Field(default="", max_length=500)
     required_skills: list[SkillEvidence] = Field(default_factory=list, max_length=80)
     nice_to_have_skills: list[SkillEvidence] = Field(default_factory=list, max_length=80)
     responsibilities: list[str] = Field(default_factory=list, max_length=60)

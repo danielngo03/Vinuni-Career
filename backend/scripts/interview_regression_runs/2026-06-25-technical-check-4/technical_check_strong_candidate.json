@@ -1,0 +1,682 @@
+{
+  "case": "technical_check_strong_candidate",
+  "mode": "technical_check",
+  "answer_style": "technical_strong",
+  "max_questions": 10,
+  "generated_at": "2026-06-25T08:42:20.322657+00:00",
+  "flags": [
+    "strong candidate reached max instead of stopping early"
+  ],
+  "report": {
+    "overall_score": 42,
+    "overall_summary": "Ứng viên thể hiện kiến thức nền tảng tốt về cú pháp FastAPI, Docker và SQL. Tuy nhiên, ứng viên gặp vấn đề nghiêm trọng trong việc xử lý các câu hỏi tình huống (scenario-based). Trong ba câu hỏi liên tiếp về debug và tích hợp API, ứng viên đã bỏ qua yêu cầu của câu hỏi và lặp lại nội dung về mã trạng thái HTTP (422, 401, 500) đã trả lời trước đó. Điều này cho thấy sự thiếu hụt kỹ năng giải quyết vấn đề thực tế và khả năng lắng nghe/phản hồi các yêu cầu kỹ thuật phức tạp.",
+    "dimensions": [
+      {
+        "key": "technical_knowledge",
+        "label": "Kiến thức chuyên môn",
+        "score": 60,
+        "weight": 30,
+        "summary": "Nắm vững cú pháp cơ bản của FastAPI, Dockerfile và SQL. Hiểu về Dependency Injection và Multi-stage build.",
+        "evidence": [
+          "Viết đúng cấu trúc Pydantic model và FastAPI endpoint.",
+          "Viết đúng Dockerfile với multi-stage build và bảo mật user.",
+          "Viết đúng câu lệnh SQL với GROUP BY và HAVING."
+        ]
+      },
+      {
+        "key": "practical_experience",
+        "label": "Độ đúng code/query",
+        "score": 50,
+        "weight": 25,
+        "summary": "Có khả năng viết code đơn giản nhưng chưa thể hiện được kinh nghiệm thực tế trong việc xử lý lỗi hoặc tích hợp hệ thống.",
+        "evidence": [
+          "Viết đúng list comprehension trong Python.",
+          "Thiếu khả năng áp dụng kiến thức vào các tình huống debug thực tế."
+        ]
+      },
+      {
+        "key": "problem_solving",
+        "label": "Debug và giải quyết vấn đề",
+        "score": 20,
+        "weight": 25,
+        "summary": "Kém trong việc phân tích và giải quyết vấn đề. Không thể đưa ra quy trình debug cho lỗi 500 hoặc cách xử lý JSON lồng nhau.",
+        "evidence": [
+          "Không đưa ra được các bước debug cụ thể khi gặp lỗi 500.",
+          "Bỏ qua yêu cầu về xử lý dữ liệu JSON lồng nhau."
+        ]
+      },
+      {
+        "key": "communication",
+        "label": "Giải thích kỹ thuật",
+        "score": 30,
+        "weight": 10,
+        "summary": "Khả năng giao tiếp kỹ thuật bị hạn chế do xu hướng lặp lại thông tin cũ thay vì trả lời câu hỏi mới.",
+        "evidence": [
+          "Lặp lại thông tin về mã trạng thái HTTP 3 lần dù đã được nhắc nhở.",
+          "Không phản hồi đúng trọng tâm các câu hỏi tình huống."
+        ]
+      },
+      {
+        "key": "critical_thinking",
+        "label": "Edge cases và hiệu năng",
+        "score": 30,
+        "weight": 10,
+        "summary": "Chưa thể hiện được tư duy phản biện hoặc khả năng xử lý các trường hợp biên (edge cases) trong các tình huống thực tế.",
+        "evidence": [
+          "Không đề xuất được phương án xử lý khi thiếu field trong API response.",
+          "Không thể phân tích nguyên nhân gốc rễ (root-cause) của lỗi 500."
+        ]
+      }
+    ],
+    "strengths": [
+      "Nắm vững cú pháp FastAPI cơ bản.",
+      "Hiểu rõ cách tối ưu hóa Docker image bằng multi-stage build.",
+      "Thành thạo các câu lệnh SQL cơ bản.",
+      "Viết code Python sạch và đúng cú pháp."
+    ],
+    "improvements": [
+      "Cần rèn luyện kỹ năng lắng nghe và trả lời đúng trọng tâm câu hỏi.",
+      "Cần học quy trình debug hệ thống (log analysis, stack trace, reproduction).",
+      "Cần tìm hiểu cách xử lý dữ liệu JSON phức tạp và các trường hợp thiếu field trong Pydantic.",
+      "Cần cải thiện tư duy giải quyết vấn đề thay vì chỉ học thuộc lòng các khái niệm."
+    ],
+    "insufficient_evidence": [
+      "Khả năng debug lỗi 500 trong môi trường production.",
+      "Kỹ năng xử lý dữ liệu API bên thứ ba với cấu trúc phức tạp.",
+      "Khả năng tư duy logic trong các tình huống thực tế không có sẵn trong tài liệu."
+    ],
+    "action_plan": [
+      "Thực hành debug một ứng dụng FastAPI bằng cách sử dụng logging và Sentry.",
+      "Tìm hiểu cách sử dụng 'Optional' và 'Field' trong Pydantic để xử lý dữ liệu thiếu.",
+      "Thực hiện bài tập mô phỏng tích hợp API thời tiết với dữ liệu JSON lồng nhau.",
+      "Đọc tài liệu về 'Troubleshooting FastAPI' để hiểu quy trình xử lý lỗi 500."
+    ],
+    "confidence": "high"
+  },
+  "report_metadata": {
+    "provider": "gemini",
+    "model": "gemini-3.1-flash-lite",
+    "input_tokens": 5756,
+    "output_tokens": 1042,
+    "attempts": 1
+  },
+  "answer_evaluations": [
+    {
+      "sequence": 1,
+      "question": "Trong FastAPI, làm thế nào để bạn định nghĩa một endpoint nhận dữ liệu JSON từ client và sử dụng Pydantic model để validate dữ liệu đó? Hãy viết một đoạn code ví dụ ngắn gọn.",
+      "answer": "Em viết `class LoginRequest(BaseModel): email: EmailStr; password: str`, `def check_db(): return True`, rồi `@app.post('/login')` `def login(payload: LoginRequest, ok: bool = Depends(check_db)): return {'email': payload.email}`.",
+      "evaluation": {
+        "score": 3,
+        "status": "partially_verified",
+        "answer_quality": "sufficient",
+        "strengths": [
+          "Correct use of Pydantic model",
+          "Correct use of Depends for dependency injection"
+        ],
+        "missing_evidence": [
+          "Error handling for invalid input"
+        ],
+        "contradictions": [],
+        "detected_competency": "FastAPI basics",
+        "evidence_found": [
+          "Candidate understands basic Pydantic model definition and dependency injection in FastAPI"
+        ],
+        "remaining_gap": "Understanding of how FastAPI handles validation errors or dependency failures",
+        "ownership": "direct",
+        "topic_decision": "continue",
+        "reason_for_next_question": "Verify how the candidate handles validation errors or dependency failures in a real scenario.",
+        "anti_repetition_check": "This is a follow-up on the previous code snippet, not a repeat.",
+        "ownership_check": "The candidate provided a specific code structure they implemented.",
+        "red_flags": [],
+        "communication": {
+          "clarity": 3,
+          "specificity": 3,
+          "relevance": 4,
+          "structure": 3,
+          "summary": "The candidate provided a concise and correct code example for a FastAPI endpoint with Pydantic and dependency injection."
+        }
+      }
+    },
+    {
+      "sequence": 2,
+      "question": "Nếu người dùng gửi một request với email không đúng định dạng, FastAPI sẽ phản hồi như thế nào và bạn có thể làm gì để tùy chỉnh thông báo lỗi đó cho client?",
+      "answer": "Em tạo Pydantic model gồm `email: EmailStr`, `password: str`, endpoint POST. Input thiếu field FastAPI trả 422, sai password trả 401, lỗi server mới là 500.",
+      "evaluation": {
+        "score": 3,
+        "status": "verified",
+        "answer_quality": "sufficient",
+        "strengths": [
+          "Correctly identified HTTP status codes for validation and authentication errors"
+        ],
+        "missing_evidence": [
+          "Specific implementation of custom exception handlers"
+        ],
+        "contradictions": [],
+        "detected_competency": "FastAPI error handling",
+        "evidence_found": [
+          "Understands standard FastAPI status code behavior for validation and auth"
+        ],
+        "remaining_gap": "Customizing error responses",
+        "ownership": "direct",
+        "topic_decision": "stop",
+        "reason_for_next_question": "FastAPI knowledge is sufficiently verified for a junior level; moving to Docker as per JD requirements.",
+        "anti_repetition_check": "New topic is Docker, previous was FastAPI.",
+        "ownership_check": "Previous answers were consistent with direct implementation.",
+        "red_flags": [],
+        "communication": {
+          "clarity": 3,
+          "specificity": 3,
+          "relevance": 4,
+          "structure": 3,
+          "summary": "Candidate correctly identified status codes for validation and auth errors."
+        }
+      }
+    },
+    {
+      "sequence": 3,
+      "question": "Để đóng gói ứng dụng FastAPI bạn vừa mô tả vào một Docker container, bạn sẽ viết nội dung file Dockerfile như thế nào để cài đặt các dependencies và khởi chạy ứng dụng?",
+      "answer": "Em dùng `FROM python:3.12-slim`, `WORKDIR /app`, copy requirements, `RUN pip install -r requirements.txt`, copy source, `EXPOSE 8000`, và `CMD [\"uvicorn\", \"app.main:app\", \"--host\", \"0.0.0.0\", \"--port\", \"8000\"]`.",
+      "evaluation": {
+        "score": 4,
+        "status": "verified",
+        "answer_quality": "sufficient",
+        "strengths": [
+          "Correct Dockerfile structure",
+          "Proper use of base images",
+          "Correct command for Uvicorn"
+        ],
+        "missing_evidence": [
+          "Multi-stage build knowledge"
+        ],
+        "contradictions": [],
+        "detected_competency": "Docker basics",
+        "evidence_found": [
+          "Candidate can write a functional Dockerfile for a Python/FastAPI application"
+        ],
+        "remaining_gap": "Optimization techniques for production images",
+        "ownership": "direct",
+        "topic_decision": "continue",
+        "reason_for_next_question": "The candidate provided a correct basic Dockerfile. Now I will check if they understand how to optimize it for production (e.g., multi-stage builds).",
+        "anti_repetition_check": "This is a follow-up on the Dockerfile structure, moving from basic syntax to optimization.",
+        "ownership_check": "The candidate previously described their own Dockerfile implementation.",
+        "red_flags": [],
+        "communication": {
+          "clarity": 4,
+          "specificity": 4,
+          "relevance": 4,
+          "structure": 4,
+          "summary": "The candidate provided a clear and accurate Dockerfile configuration."
+        }
+      }
+    },
+    {
+      "sequence": 4,
+      "question": "Với Dockerfile bạn đã viết, nếu muốn tối ưu hóa kích thước image và thời gian build cho môi trường production, bạn sẽ áp dụng kỹ thuật multi-stage build như thế nào để tách biệt giai đoạn cài đặt dependencies và giai đoạn chạy ứng dụng?",
+      "answer": "Em dùng builder stage để cài dependencies vào `/install`, runtime stage dùng `python:3.12-slim`, copy artifact cần thiết, thêm `RUN adduser --disabled-password appuser`, `USER appuser`, và chỉ copy source cần chạy để giảm image size.",
+      "evaluation": {
+        "score": 4,
+        "status": "verified",
+        "answer_quality": "sufficient",
+        "strengths": [
+          "Understands multi-stage build benefits",
+          "Aware of security best practices like non-root users"
+        ],
+        "missing_evidence": [],
+        "contradictions": [],
+        "detected_competency": "Docker optimization",
+        "evidence_found": [
+          "Candidate successfully explained multi-stage Docker build and security hardening"
+        ],
+        "remaining_gap": "None for Docker",
+        "ownership": "direct",
+        "topic_decision": "stop",
+        "reason_for_next_question": "Docker and FastAPI are verified. Moving to SQL as a nice-to-have skill from the JD.",
+        "anti_repetition_check": "This is a new topic (SQL) and a new skill.",
+        "ownership_check": "The question asks for a standard SQL query, which is a foundational skill.",
+        "red_flags": [],
+        "communication": {
+          "clarity": 4,
+          "specificity": 4,
+          "relevance": 4,
+          "structure": 4,
+          "summary": "The candidate provided a technically accurate and complete explanation of multi-stage Docker builds and security best practices."
+        }
+      }
+    },
+    {
+      "sequence": 5,
+      "question": "Giả sử bạn có một bảng 'orders' với các cột 'order_id', 'customer_id', và 'order_date'. Hãy viết một câu lệnh SQL để lấy ra danh sách các 'customer_id' đã thực hiện nhiều hơn 5 đơn hàng, kèm theo tổng số đơn hàng của mỗi khách hàng đó.",
+      "answer": "Em viết `SELECT customer_id, COUNT(order_id) AS order_count FROM orders GROUP BY customer_id HAVING COUNT(order_id) >= 5;`.",
+      "evaluation": {
+        "score": 4,
+        "status": "verified",
+        "answer_quality": "sufficient",
+        "strengths": [
+          "Correct SQL syntax",
+          "Proper use of GROUP BY and HAVING clauses"
+        ],
+        "missing_evidence": [],
+        "contradictions": [],
+        "detected_competency": "SQL proficiency",
+        "evidence_found": [
+          "Candidate demonstrated correct usage of SQL aggregation and filtering"
+        ],
+        "remaining_gap": "None",
+        "ownership": "direct",
+        "topic_decision": "stop",
+        "reason_for_next_question": "SQL verified. Moving to problem solving phase to assess debugging skills as per JD.",
+        "anti_repetition_check": "New topic focusing on debugging scenario rather than syntax.",
+        "ownership_check": "Scenario based on role responsibilities.",
+        "red_flags": [],
+        "communication": {
+          "clarity": 4,
+          "specificity": 4,
+          "relevance": 4,
+          "structure": 4,
+          "summary": "The candidate provided a correct and efficient SQL query."
+        }
+      }
+    },
+    {
+      "sequence": 6,
+      "question": "Trong một ứng dụng FastAPI, giả sử bạn nhận được báo cáo rằng một endpoint API thỉnh thoảng trả về lỗi 500 Internal Server Error nhưng không có thông tin chi tiết trong log. Bạn sẽ thực hiện các bước cụ thể nào để tái hiện và xác định nguyên nhân gốc rễ của lỗi này trong môi trường phát triển?",
+      "answer": "Em tạo Pydantic model gồm `email: EmailStr`, `password: str`, endpoint POST. Input thiếu field FastAPI trả 422, sai password trả 401, lỗi server mới là 500.",
+      "evaluation": {
+        "score": 1,
+        "status": "not_assessed",
+        "answer_quality": "irrelevant",
+        "strengths": [],
+        "missing_evidence": [
+          "Debugging methodology for 500 errors",
+          "Log analysis",
+          "Reproducibility steps"
+        ],
+        "contradictions": [],
+        "detected_competency": "none",
+        "evidence_found": [],
+        "remaining_gap": "The candidate failed to answer the debugging scenario, repeating previous knowledge about status codes instead.",
+        "ownership": "unknown",
+        "topic_decision": "clarify",
+        "reason_for_next_question": "The previous answer was completely off-topic. I need to re-ask the debugging scenario to verify if the candidate can handle production-like issues as required by the JD.",
+        "anti_repetition_check": "The question is a re-ask of the previous debugging scenario because the candidate did not answer it.",
+        "ownership_check": "The question is a standard debugging scenario relevant to the role.",
+        "red_flags": [
+          "Candidate ignored the question prompt entirely and repeated previous answers."
+        ],
+        "communication": {
+          "clarity": 1,
+          "specificity": 1,
+          "relevance": 1,
+          "structure": 1,
+          "summary": "The candidate did not answer the question about debugging 500 errors, instead repeating information about status codes."
+        }
+      }
+    },
+    {
+      "sequence": 7,
+      "question": "Tôi hiểu bạn đã nắm rõ các mã trạng thái HTTP, nhưng hãy tập trung vào quy trình xử lý lỗi 500. Nếu một endpoint FastAPI trả về lỗi 500 mà log không hiển thị thông tin, bạn sẽ thực hiện các bước kỹ thuật cụ thể nào (ví dụ: sử dụng công cụ, thay đổi cấu hình log, hay kỹ thuật debug code) để tìm ra dòng code gây lỗi đó?",
+      "answer": "Em tạo Pydantic model gồm `email: EmailStr`, `password: str`, endpoint POST. Input thiếu field FastAPI trả 422, sai password trả 401, lỗi server mới là 500.",
+      "evaluation": {
+        "score": 0,
+        "status": "contradicted",
+        "answer_quality": "irrelevant",
+        "strengths": [],
+        "missing_evidence": [
+          "Debugging methodology for 500 errors",
+          "Log analysis techniques",
+          "Environment configuration for debugging"
+        ],
+        "contradictions": [
+          "Candidate repeated status code definitions instead of addressing the debugging process for 500 errors."
+        ],
+        "detected_competency": "none",
+        "evidence_found": [],
+        "remaining_gap": "Candidate failed to demonstrate debugging skills after two attempts on the same topic.",
+        "ownership": "not_owned",
+        "topic_decision": "stop",
+        "reason_for_next_question": "The candidate failed to address the debugging scenario twice. Switching to a different technical scenario to assess API integration skills.",
+        "anti_repetition_check": "This is a new topic focusing on API integration rather than debugging.",
+        "ownership_check": "This is a scenario-based question to assess practical application.",
+        "red_flags": [
+          "Candidate ignored the question prompt twice and provided irrelevant information."
+        ],
+        "communication": {
+          "clarity": 1,
+          "specificity": 1,
+          "relevance": 1,
+          "structure": 1,
+          "summary": "The candidate failed to answer the debugging question twice, repeating irrelevant information about HTTP status codes."
+        }
+      }
+    },
+    {
+      "sequence": 8,
+      "question": "Giả sử bạn cần tích hợp một dịch vụ bên thứ ba thông qua API để lấy thông tin thời tiết. Nếu API này trả về dữ liệu JSON với cấu trúc lồng nhau phức tạp, bạn sẽ thiết kế các Pydantic models trong FastAPI như thế nào để parse dữ liệu đó một cách an toàn và xử lý trường hợp một field bị thiếu trong response?",
+      "answer": "Em tạo Pydantic model gồm `email: EmailStr`, `password: str`, endpoint POST. Input thiếu field FastAPI trả 422, sai password trả 401, lỗi server mới là 500.",
+      "evaluation": {
+        "score": 0,
+        "status": "contradicted",
+        "answer_quality": "irrelevant",
+        "strengths": [],
+        "missing_evidence": [
+          "Ability to parse complex JSON structures with Pydantic",
+          "Ability to handle missing fields in API responses"
+        ],
+        "contradictions": [
+          "Candidate repeated the same irrelevant status code explanation for the third time instead of answering the API integration scenario."
+        ],
+        "detected_competency": "none",
+        "evidence_found": [],
+        "remaining_gap": "Candidate is unable to engage with technical scenarios, repeatedly providing irrelevant memorized content.",
+        "ownership": "not_owned",
+        "topic_decision": "stop",
+        "reason_for_next_question": "The candidate has failed to answer three consecutive technical scenarios, instead repeating the same irrelevant information. Further questioning is unlikely to yield valid evidence.",
+        "anti_repetition_check": "The candidate's answer is identical in content to the previous two responses.",
+        "ownership_check": "Candidate is not demonstrating ownership of any technical problem-solving process.",
+        "red_flags": [
+          "Candidate is unresponsive to specific technical prompts.",
+          "Candidate exhibits repetitive, irrelevant behavior across multiple questions."
+        ],
+        "communication": {
+          "clarity": 1,
+          "specificity": 1,
+          "relevance": 1,
+          "structure": 1,
+          "summary": "The candidate failed to address the API integration question, repeating the same irrelevant status code information provided in previous turns."
+        }
+      }
+    },
+    {
+      "sequence": 9,
+      "question": "Để kiểm tra khả năng xử lý logic cơ bản với Python, bạn hãy viết một hàm nhận vào một danh sách các số nguyên và trả về một danh sách mới chỉ chứa các số chẵn đã được bình phương. Ví dụ: input [1, 2, 3, 4] sẽ trả về [4, 16].",
+      "answer": "Em viết `[x * x for x in [1, 2, 3, 4, 5, 6] if x % 2 == 0]`, output là `[4, 16, 36]`.",
+      "evaluation": {
+        "score": 3,
+        "status": "verified",
+        "answer_quality": "sufficient",
+        "strengths": [
+          "Correctly implemented list comprehension for filtering and transformation"
+        ],
+        "missing_evidence": [],
+        "contradictions": [],
+        "detected_competency": "basic_python_syntax",
+        "evidence_found": [
+          "Candidate can perform basic list operations in Python"
+        ],
+        "remaining_gap": "None",
+        "ownership": "direct",
+        "topic_decision": "stop",
+        "reason_for_next_question": "The candidate has demonstrated a pattern of ignoring complex technical scenarios while providing irrelevant, repetitive answers. Despite basic syntax knowledge, the inability to engage with debugging or integration tasks makes further assessment unproductive.",
+        "anti_repetition_check": "N/A",
+        "ownership_check": "N/A",
+        "red_flags": [
+          "Candidate ignored the question prompt entirely and repeated previous answers.",
+          "Candidate ignored the question prompt twice and provided irrelevant information.",
+          "Candidate is unresponsive to specific technical prompts.",
+          "Candidate exhibits repetitive, irrelevant behavior across multiple questions."
+        ],
+        "communication": {
+          "clarity": 4,
+          "specificity": 4,
+          "relevance": 4,
+          "structure": 4,
+          "summary": "The candidate correctly provided the Python list comprehension requested."
+        }
+      }
+    }
+  ],
+  "turns": [
+    {
+      "sequence": 1,
+      "question": "Trong FastAPI, làm thế nào để bạn định nghĩa một endpoint nhận dữ liệu JSON từ client và sử dụng Pydantic model để validate dữ liệu đó? Hãy viết một đoạn code ví dụ ngắn gọn.",
+      "answer": "Em viết `class LoginRequest(BaseModel): email: EmailStr; password: str`, `def check_db(): return True`, rồi `@app.post('/login')` `def login(payload: LoginRequest, ok: bool = Depends(check_db)): return {'email': payload.email}`.",
+      "phase": "cv_verification",
+      "topic_key": "fastapi_implementation",
+      "question_type": "initial",
+      "difficulty": "easy",
+      "provider_metadata": {
+        "planner": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 2682,
+          "output_tokens": 213,
+          "attempts": 1
+        },
+        "question_generator": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 1019,
+          "output_tokens": 46,
+          "attempts": 1
+        }
+      }
+    },
+    {
+      "sequence": 2,
+      "question": "Nếu người dùng gửi một request với email không đúng định dạng, FastAPI sẽ phản hồi như thế nào và bạn có thể làm gì để tùy chỉnh thông báo lỗi đó cho client?",
+      "answer": "Em tạo Pydantic model gồm `email: EmailStr`, `password: str`, endpoint POST. Input thiếu field FastAPI trả 422, sai password trả 401, lỗi server mới là 500.",
+      "phase": "cv_verification",
+      "topic_key": "fastapi_implementation",
+      "question_type": "follow_up",
+      "difficulty": "medium",
+      "provider_metadata": {
+        "planner": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 2876,
+          "output_tokens": 590,
+          "attempts": 1
+        },
+        "question_generator": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 1482,
+          "output_tokens": 41,
+          "attempts": 1
+        }
+      }
+    },
+    {
+      "sequence": 3,
+      "question": "Để đóng gói ứng dụng FastAPI bạn vừa mô tả vào một Docker container, bạn sẽ viết nội dung file Dockerfile như thế nào để cài đặt các dependencies và khởi chạy ứng dụng?",
+      "answer": "Em dùng `FROM python:3.12-slim`, `WORKDIR /app`, copy requirements, `RUN pip install -r requirements.txt`, copy source, `EXPOSE 8000`, và `CMD [\"uvicorn\", \"app.main:app\", \"--host\", \"0.0.0.0\", \"--port\", \"8000\"]`.",
+      "phase": "cv_verification",
+      "topic_key": "docker_implementation",
+      "question_type": "transition",
+      "difficulty": "easy",
+      "provider_metadata": {
+        "planner": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 3103,
+          "output_tokens": 478,
+          "attempts": 1
+        },
+        "question_generator": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 1470,
+          "output_tokens": 42,
+          "attempts": 1
+        }
+      }
+    },
+    {
+      "sequence": 4,
+      "question": "Với Dockerfile bạn đã viết, nếu muốn tối ưu hóa kích thước image và thời gian build cho môi trường production, bạn sẽ áp dụng kỹ thuật multi-stage build như thế nào để tách biệt giai đoạn cài đặt dependencies và giai đoạn chạy ứng dụng?",
+      "answer": "Em dùng builder stage để cài dependencies vào `/install`, runtime stage dùng `python:3.12-slim`, copy artifact cần thiết, thêm `RUN adduser --disabled-password appuser`, `USER appuser`, và chỉ copy source cần chạy để giảm image size.",
+      "phase": "cv_verification",
+      "topic_key": "docker_implementation",
+      "question_type": "follow_up",
+      "difficulty": "medium",
+      "provider_metadata": {
+        "planner": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 3360,
+          "output_tokens": 587,
+          "attempts": 1
+        },
+        "question_generator": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 1577,
+          "output_tokens": 57,
+          "attempts": 1
+        }
+      }
+    },
+    {
+      "sequence": 5,
+      "question": "Giả sử bạn có một bảng 'orders' với các cột 'order_id', 'customer_id', và 'order_date'. Hãy viết một câu lệnh SQL để lấy ra danh sách các 'customer_id' đã thực hiện nhiều hơn 5 đơn hàng, kèm theo tổng số đơn hàng của mỗi khách hàng đó.",
+      "answer": "Em viết `SELECT customer_id, COUNT(order_id) AS order_count FROM orders GROUP BY customer_id HAVING COUNT(order_id) >= 5;`.",
+      "phase": "cv_verification",
+      "topic_key": "sql_query_task",
+      "question_type": "transition",
+      "difficulty": "easy",
+      "provider_metadata": {
+        "planner": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 3593,
+          "output_tokens": 528,
+          "attempts": 1
+        },
+        "question_generator": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 1617,
+          "output_tokens": 73,
+          "attempts": 1
+        }
+      }
+    },
+    {
+      "sequence": 6,
+      "question": "Trong một ứng dụng FastAPI, giả sử bạn nhận được báo cáo rằng một endpoint API thỉnh thoảng trả về lỗi 500 Internal Server Error nhưng không có thông tin chi tiết trong log. Bạn sẽ thực hiện các bước cụ thể nào để tái hiện và xác định nguyên nhân gốc rễ của lỗi này trong môi trường phát triển?",
+      "answer": "Em tạo Pydantic model gồm `email: EmailStr`, `password: str`, endpoint POST. Input thiếu field FastAPI trả 422, sai password trả 401, lỗi server mới là 500.",
+      "phase": "cv_verification",
+      "topic_key": "jd_scenario_debugging",
+      "question_type": "transition",
+      "difficulty": "medium",
+      "provider_metadata": {
+        "planner": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 3806,
+          "output_tokens": 555,
+          "attempts": 1
+        },
+        "question_generator": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 1633,
+          "output_tokens": 75,
+          "attempts": 1
+        }
+      }
+    },
+    {
+      "sequence": 7,
+      "question": "Tôi hiểu bạn đã nắm rõ các mã trạng thái HTTP, nhưng hãy tập trung vào quy trình xử lý lỗi 500. Nếu một endpoint FastAPI trả về lỗi 500 mà log không hiển thị thông tin, bạn sẽ thực hiện các bước kỹ thuật cụ thể nào (ví dụ: sử dụng công cụ, thay đổi cấu hình log, hay kỹ thuật debug code) để tìm ra dòng code gây lỗi đó?",
+      "answer": "Em tạo Pydantic model gồm `email: EmailStr`, `password: str`, endpoint POST. Input thiếu field FastAPI trả 422, sai password trả 401, lỗi server mới là 500.",
+      "phase": "cv_verification",
+      "topic_key": "jd_scenario_debugging",
+      "question_type": "follow_up",
+      "difficulty": "medium",
+      "provider_metadata": {
+        "planner": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 4103,
+          "output_tokens": 703,
+          "attempts": 1
+        },
+        "question_generator": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 1843,
+          "output_tokens": 92,
+          "attempts": 1
+        }
+      }
+    },
+    {
+      "sequence": 8,
+      "question": "Giả sử bạn cần tích hợp một dịch vụ bên thứ ba thông qua API để lấy thông tin thời tiết. Nếu API này trả về dữ liệu JSON với cấu trúc lồng nhau phức tạp, bạn sẽ thiết kế các Pydantic models trong FastAPI như thế nào để parse dữ liệu đó một cách an toàn và xử lý trường hợp một field bị thiếu trong response?",
+      "answer": "Em tạo Pydantic model gồm `email: EmailStr`, `password: str`, endpoint POST. Input thiếu field FastAPI trả 422, sai password trả 401, lỗi server mới là 500.",
+      "phase": "problem_solving",
+      "topic_key": "jd_scenario_api_integration",
+      "question_type": "transition",
+      "difficulty": "easy",
+      "provider_metadata": {
+        "planner": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 4423,
+          "output_tokens": 643,
+          "attempts": 1
+        },
+        "question_generator": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 1933,
+          "output_tokens": 79,
+          "attempts": 1
+        }
+      }
+    },
+    {
+      "sequence": 9,
+      "question": "Để kiểm tra khả năng xử lý logic cơ bản với Python, bạn hãy viết một hàm nhận vào một danh sách các số nguyên và trả về một danh sách mới chỉ chứa các số chẵn đã được bình phương. Ví dụ: input [1, 2, 3, 4] sẽ trả về [4, 16].",
+      "answer": "Em viết `[x * x for x in [1, 2, 3, 4, 5, 6] if x % 2 == 0]`, output là `[4, 16, 36]`.",
+      "phase": "problem_solving",
+      "topic_key": "technical_problem_solving",
+      "question_type": "transition",
+      "difficulty": "easy",
+      "provider_metadata": {
+        "planner": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 4671,
+          "output_tokens": 623,
+          "attempts": 1,
+          "backend_overrode_early_finish": true
+        },
+        "question_generator": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 2042,
+          "output_tokens": 79,
+          "attempts": 1
+        }
+      }
+    },
+    {
+      "sequence": 10,
+      "question": "Giả sử bạn có một từ điển (dictionary) trong Python chứa thông tin sinh viên với cấu trúc {'ten': 'An', 'diem': 8}. Hãy viết một đoạn code ngắn để cập nhật giá trị của key 'diem' thành 9, sau đó in ra toàn bộ từ điển đó.",
+      "answer": "Em sẽ reproduce bằng cURL, xem stack trace Uvicorn, kiểm tra request body, log trước/sau service và DB query, rồi thêm test case cho lỗi đó.",
+      "phase": "problem_solving",
+      "topic_key": "technical_problem_solving",
+      "question_type": "transition",
+      "difficulty": "easy",
+      "provider_metadata": {
+        "planner": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 5057,
+          "output_tokens": 629,
+          "attempts": 1,
+          "backend_overrode_early_finish": true
+        },
+        "question_generator": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 2107,
+          "output_tokens": 70,
+          "attempts": 1
+        }
+      }
+    }
+  ]
+}

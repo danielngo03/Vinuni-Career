@@ -1,0 +1,378 @@
+{
+  "case": "technical_check_strong_candidate",
+  "mode": "technical_check",
+  "answer_style": "technical_strong",
+  "max_questions": 10,
+  "generated_at": "2026-06-25T09:09:25.487104+00:00",
+  "flags": [],
+  "report": {
+    "overall_score": 34,
+    "overall_summary": "Ứng viên có kiến thức cơ bản về FastAPI và Docker, hiểu rõ luồng xác thực JWT và validation bằng Pydantic. Tuy nhiên, ứng viên gặp khó khăn nghiêm trọng trong việc thực hiện các yêu cầu kỹ thuật cụ thể về quản lý kết nối cơ sở dữ liệu (SQLAlchemy session management) và có xu hướng lặp lại các câu trả lời cũ không liên quan khi bị hỏi về chủ đề này.",
+    "dimensions": [
+      {
+        "key": "technical_knowledge",
+        "label": "Kiến thức chuyên môn",
+        "score": 50,
+        "weight": 30,
+        "summary": "Nắm vững các khái niệm cơ bản của FastAPI, Pydantic và Docker. Tuy nhiên, thiếu kiến thức thực tế về quản lý vòng đời session trong SQLAlchemy.",
+        "evidence": [
+          "Hiểu rõ luồng validation của Pydantic và các mã trạng thái HTTP.",
+          "Nắm vững cách sử dụng Dependency Injection cho xác thực JWT.",
+          "Viết được Dockerfile cơ bản với các chỉ thị chính xác."
+        ]
+      },
+      {
+        "key": "practical_experience",
+        "label": "Độ đúng code/query",
+        "score": 30,
+        "weight": 25,
+        "summary": "Kỹ năng thực hành chưa đồng đều. Ứng viên có thể cấu hình Docker nhưng thất bại trong việc triển khai kết nối database theo yêu cầu.",
+        "evidence": [
+          "Dockerfile được viết đúng cú pháp và cấu trúc.",
+          "Không thể cung cấp code mẫu cho hàm get_db với yield.",
+          "Không thể kết nối session vào endpoint sau nhiều lần yêu cầu."
+        ]
+      },
+      {
+        "key": "problem_solving",
+        "label": "Debug và giải quyết vấn đề",
+        "score": 20,
+        "weight": 25,
+        "summary": "Khả năng xử lý vấn đề hạn chế khi gặp câu hỏi về database. Ứng viên không nhận ra mình đang trả lời sai trọng tâm.",
+        "evidence": [
+          "Lặp lại câu trả lời về JWT khi được hỏi về database session.",
+          "Lặp lại câu trả lời về Pydantic khi được hỏi về database session lần thứ hai."
+        ]
+      },
+      {
+        "key": "communication",
+        "label": "Giải thích kỹ thuật",
+        "score": 40,
+        "weight": 10,
+        "summary": "Khả năng diễn đạt kỹ thuật còn hạn chế, đặc biệt là khi cần tập trung vào yêu cầu cụ thể của người phỏng vấn.",
+        "evidence": [
+          "Giải thích rõ ràng về luồng xác thực JWT.",
+          "Không phản hồi đúng trọng tâm câu hỏi về database session.",
+          "Thiếu sự điều chỉnh nội dung khi được yêu cầu làm rõ."
+        ]
+      },
+      {
+        "key": "critical_thinking",
+        "label": "Edge cases và hiệu năng",
+        "score": 30,
+        "weight": 10,
+        "summary": "Chưa thể hiện được tư duy về quản lý tài nguyên (resource management) trong code.",
+        "evidence": [
+          "Không nắm được cơ chế đóng session (yield) trong SQLAlchemy.",
+          "Chưa thể hiện được tư duy về xử lý lỗi hoặc tối ưu hóa kết nối database."
+        ]
+      }
+    ],
+    "strengths": [
+      "Hiểu rõ cách sử dụng Pydantic để validate dữ liệu đầu vào.",
+      "Nắm vững quy trình xác thực JWT trong FastAPI.",
+      "Có khả năng viết Dockerfile chuẩn cho ứng dụng FastAPI."
+    ],
+    "improvements": [
+      "Cần học cách quản lý vòng đời session trong SQLAlchemy (sử dụng yield).",
+      "Cần tập trung lắng nghe và trả lời đúng trọng tâm câu hỏi kỹ thuật.",
+      "Cần thực hành nhiều hơn về tích hợp database vào các framework backend."
+    ],
+    "insufficient_evidence": [
+      "Khả năng viết truy vấn SQL hoặc sử dụng ORM để thao tác dữ liệu.",
+      "Kiến thức về xử lý lỗi nâng cao trong database transaction."
+    ],
+    "action_plan": [
+      "Thực hành viết một ứng dụng FastAPI đơn giản có kết nối PostgreSQL sử dụng SQLAlchemy và Dependency Injection.",
+      "Tìm hiểu kỹ về cơ chế 'yield' trong FastAPI dependencies để quản lý tài nguyên.",
+      "Luyện tập đọc hiểu yêu cầu kỹ thuật và viết code giải quyết đúng vấn đề được đặt ra."
+    ],
+    "confidence": "high"
+  },
+  "report_metadata": {
+    "provider": "gemini",
+    "model": "gemini-3.1-flash-lite",
+    "input_tokens": 3127,
+    "output_tokens": 936,
+    "attempts": 1
+  },
+  "answer_evaluations": [
+    {
+      "sequence": 1,
+      "question": "Trong dự án AI backend của bạn, hãy viết một đoạn code ngắn sử dụng FastAPI để định nghĩa một endpoint POST nhận dữ liệu JSON đầu vào và trả về một phản hồi đơn giản.",
+      "answer": "Em tạo Pydantic model gồm `email: EmailStr`, `password: str`, endpoint POST. Input thiếu field FastAPI trả 422, sai password trả 401, lỗi server mới là 500.",
+      "evaluation": {
+        "score": 3,
+        "status": "verified",
+        "answer_quality": "sufficient",
+        "strengths": [
+          "Understands Pydantic validation",
+          "Correctly identifies HTTP status codes for common scenarios"
+        ],
+        "missing_evidence": [
+          "No code structure provided",
+          "No database interaction context"
+        ],
+        "contradictions": [],
+        "detected_competency": "API implementation basics",
+        "evidence_found": [
+          "Understands FastAPI/Pydantic validation flow",
+          "Knows standard HTTP status codes"
+        ],
+        "remaining_gap": "Need to see how they integrate database operations or handle dependencies in FastAPI.",
+        "ownership": "direct",
+        "topic_decision": "continue",
+        "reason_for_next_question": "Candidate understands basic validation; now checking how they handle database dependencies or service layer integration in FastAPI.",
+        "anti_repetition_check": "Moving from basic endpoint definition to dependency injection/database handling.",
+        "ownership_check": "Asking about their specific implementation of the AI backend project.",
+        "red_flags": [],
+        "communication": {
+          "clarity": 3,
+          "specificity": 3,
+          "relevance": 4,
+          "structure": 3,
+          "summary": "Candidate clearly explained the validation and status code logic."
+        }
+      }
+    },
+    {
+      "sequence": 2,
+      "question": "Trong dự án AI backend của bạn, làm thế nào để bạn tích hợp kết nối cơ sở dữ liệu vào các endpoint FastAPI? Hãy viết một đoạn code ngắn minh họa cách sử dụng Dependency Injection (Depends) để lấy một session cơ sở dữ liệu cho một endpoint cụ thể.",
+      "answer": "Em tạo dependency `get_current_user` đọc `Authorization: Bearer`, verify JWT bằng secret từ env, nếu token thiếu hoặc sai thì raise `HTTPException(status_code=401)`. Endpoint cần auth sẽ khai báo `current_user = Depends(get_current_user)`.",
+      "evaluation": {
+        "score": 3,
+        "status": "verified",
+        "answer_quality": "sufficient",
+        "strengths": [
+          "Correctly identified Dependency Injection pattern",
+          "Understands JWT authentication flow"
+        ],
+        "missing_evidence": [
+          "Did not address the database session injection part of the previous question"
+        ],
+        "contradictions": [],
+        "detected_competency": "FastAPI Dependency Injection",
+        "evidence_found": [
+          "Implemented JWT auth via Depends",
+          "Understands HTTP status codes for auth"
+        ],
+        "remaining_gap": "Need to verify database session management in FastAPI.",
+        "ownership": "direct",
+        "topic_decision": "continue",
+        "reason_for_next_question": "The candidate answered the auth part but missed the database session injection part of the previous prompt. I will now specifically ask for the database session dependency code.",
+        "anti_repetition_check": "This is a specific follow-up on the database session part of the previous question which was not answered.",
+        "ownership_check": "Grounded in the candidate's AI backend project which uses PostgreSQL.",
+        "red_flags": [],
+        "communication": {
+          "clarity": 3,
+          "specificity": 3,
+          "relevance": 3,
+          "structure": 3,
+          "summary": "The candidate explained the auth dependency well but missed the database session component."
+        }
+      }
+    },
+    {
+      "sequence": 3,
+      "question": "Cảm ơn bạn đã chia sẻ về phần xác thực. Để tiếp nối, bạn hãy viết một đoạn code ngắn định nghĩa một hàm dependency `get_db` để tạo và đóng session PostgreSQL, sau đó minh họa cách inject session này vào một endpoint FastAPI cụ thể để thực hiện truy vấn dữ liệu.",
+      "answer": "Em tạo dependency `get_current_user` đọc `Authorization: Bearer`, verify JWT bằng secret từ env, nếu token thiếu hoặc sai thì raise `HTTPException(status_code=401)`. Endpoint cần auth sẽ khai báo `current_user = Depends(get_current_user)`.",
+      "evaluation": {
+        "score": 1,
+        "status": "partially_verified",
+        "answer_quality": "irrelevant",
+        "strengths": [
+          "Understands dependency injection for authentication"
+        ],
+        "missing_evidence": [
+          "Implementation of database session management"
+        ],
+        "contradictions": [
+          "Answered about JWT auth instead of database session dependency"
+        ],
+        "detected_competency": "FastAPI Dependency Injection",
+        "evidence_found": [
+          "Understands how to use Depends for auth"
+        ],
+        "remaining_gap": "Need to see the code for a database session dependency (get_db) and its usage in an endpoint.",
+        "ownership": "direct",
+        "topic_decision": "clarify",
+        "reason_for_next_question": "The candidate misunderstood the previous question about database sessions. I need to re-ask for the specific implementation of a database session dependency.",
+        "anti_repetition_check": "This is a re-clarification of the previous question which was not answered correctly.",
+        "ownership_check": "The candidate claims to have used PostgreSQL in their project, so they should be able to provide the session management code.",
+        "red_flags": [
+          "Did not address the specific technical question about database sessions"
+        ],
+        "communication": {
+          "clarity": 2,
+          "specificity": 2,
+          "relevance": 1,
+          "structure": 2,
+          "summary": "The candidate provided a correct explanation for JWT auth but completely missed the database session part of the question."
+        }
+      }
+    },
+    {
+      "sequence": 4,
+      "question": "Tôi hiểu bạn đã nắm rõ về JWT, tuy nhiên tôi cần kiểm tra kỹ năng quản lý kết nối database. Bạn hãy viết một đoạn code ngắn sử dụng SQLAlchemy để định nghĩa hàm `get_db` (dùng `yield` để đóng session sau khi request kết thúc) và minh họa cách inject session này vào một endpoint FastAPI để thực hiện một câu lệnh truy vấn đơn giản.",
+      "answer": "Em tạo Pydantic model gồm `email: EmailStr`, `password: str`, endpoint POST. Input thiếu field FastAPI trả 422, sai password trả 401, lỗi server mới là 500.",
+      "evaluation": {
+        "score": 0,
+        "status": "contradicted",
+        "answer_quality": "irrelevant",
+        "strengths": [],
+        "missing_evidence": [
+          "SQLAlchemy get_db dependency implementation",
+          "Database session injection in FastAPI"
+        ],
+        "contradictions": [
+          "Repeated JWT auth explanation when asked for database session management"
+        ],
+        "detected_competency": "None",
+        "evidence_found": [],
+        "remaining_gap": "Candidate failed to address database session management twice. Switching to Docker.",
+        "ownership": "unknown",
+        "topic_decision": "stop",
+        "reason_for_next_question": "Candidate failed to answer the database session question twice. Moving to Docker to assess another core JD skill.",
+        "anti_repetition_check": "Switching from database integration to Docker.",
+        "ownership_check": "Docker is listed in the CV project.",
+        "red_flags": [
+          "Repeatedly ignored the specific technical question about database sessions"
+        ],
+        "communication": {
+          "clarity": 2,
+          "specificity": 1,
+          "relevance": 1,
+          "structure": 2,
+          "summary": "The candidate provided an irrelevant answer regarding Pydantic models instead of the requested database session dependency."
+        }
+      }
+    }
+  ],
+  "turns": [
+    {
+      "sequence": 1,
+      "question": "Trong dự án AI backend của bạn, hãy viết một đoạn code ngắn sử dụng FastAPI để định nghĩa một endpoint POST nhận dữ liệu JSON đầu vào và trả về một phản hồi đơn giản.",
+      "answer": "Em tạo Pydantic model gồm `email: EmailStr`, `password: str`, endpoint POST. Input thiếu field FastAPI trả 422, sai password trả 401, lỗi server mới là 500.",
+      "phase": "cv_verification",
+      "topic_key": "fastapi_implementation",
+      "question_type": "initial",
+      "difficulty": "easy",
+      "provider_metadata": {
+        "planner": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 2691,
+          "output_tokens": 238,
+          "attempts": 1
+        },
+        "question_generator": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 1024,
+          "output_tokens": 43,
+          "attempts": 1
+        }
+      }
+    },
+    {
+      "sequence": 2,
+      "question": "Trong dự án AI backend của bạn, làm thế nào để bạn tích hợp kết nối cơ sở dữ liệu vào các endpoint FastAPI? Hãy viết một đoạn code ngắn minh họa cách sử dụng Dependency Injection (Depends) để lấy một session cơ sở dữ liệu cho một endpoint cụ thể.",
+      "answer": "Em tạo dependency `get_current_user` đọc `Authorization: Bearer`, verify JWT bằng secret từ env, nếu token thiếu hoặc sai thì raise `HTTPException(status_code=401)`. Endpoint cần auth sẽ khai báo `current_user = Depends(get_current_user)`.",
+      "phase": "cv_verification",
+      "topic_key": "fastapi_implementation",
+      "question_type": "follow_up",
+      "difficulty": "medium",
+      "provider_metadata": {
+        "planner": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 2848,
+          "output_tokens": 562,
+          "attempts": 1
+        },
+        "question_generator": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 1471,
+          "output_tokens": 61,
+          "attempts": 1
+        }
+      }
+    },
+    {
+      "sequence": 3,
+      "question": "Cảm ơn bạn đã chia sẻ về phần xác thực. Để tiếp nối, bạn hãy viết một đoạn code ngắn định nghĩa một hàm dependency `get_db` để tạo và đóng session PostgreSQL, sau đó minh họa cách inject session này vào một endpoint FastAPI cụ thể để thực hiện truy vấn dữ liệu.",
+      "answer": "Em tạo dependency `get_current_user` đọc `Authorization: Bearer`, verify JWT bằng secret từ env, nếu token thiếu hoặc sai thì raise `HTTPException(status_code=401)`. Endpoint cần auth sẽ khai báo `current_user = Depends(get_current_user)`.",
+      "phase": "cv_verification",
+      "topic_key": "database_integration",
+      "question_type": "transition",
+      "difficulty": "medium",
+      "provider_metadata": {
+        "planner": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 3141,
+          "output_tokens": 635,
+          "attempts": 1
+        },
+        "question_generator": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 1596,
+          "output_tokens": 66,
+          "attempts": 1
+        }
+      }
+    },
+    {
+      "sequence": 4,
+      "question": "Tôi hiểu bạn đã nắm rõ về JWT, tuy nhiên tôi cần kiểm tra kỹ năng quản lý kết nối database. Bạn hãy viết một đoạn code ngắn sử dụng SQLAlchemy để định nghĩa hàm `get_db` (dùng `yield` để đóng session sau khi request kết thúc) và minh họa cách inject session này vào một endpoint FastAPI để thực hiện một câu lệnh truy vấn đơn giản.",
+      "answer": "Em tạo Pydantic model gồm `email: EmailStr`, `password: str`, endpoint POST. Input thiếu field FastAPI trả 422, sai password trả 401, lỗi server mới là 500.",
+      "phase": "cv_verification",
+      "topic_key": "database_integration",
+      "question_type": "follow_up",
+      "difficulty": "medium",
+      "provider_metadata": {
+        "planner": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 3344,
+          "output_tokens": 673,
+          "attempts": 1
+        },
+        "question_generator": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 1714,
+          "output_tokens": 84,
+          "attempts": 1
+        }
+      }
+    },
+    {
+      "sequence": 5,
+      "question": "Để chuyển sang chủ đề Docker, bạn hãy viết nội dung cho một file Dockerfile đơn giản nhằm đóng gói một ứng dụng FastAPI. Dockerfile này cần sử dụng image python:3.9-slim, copy các file cần thiết, cài đặt các thư viện từ requirements.txt và chỉ định lệnh để khởi chạy ứng dụng bằng uvicorn.",
+      "answer": "Em dùng `FROM python:3.12-slim`, `WORKDIR /app`, copy requirements, `RUN pip install -r requirements.txt`, copy source, `EXPOSE 8000`, và `CMD [\"uvicorn\", \"app.main:app\", \"--host\", \"0.0.0.0\", \"--port\", \"8000\"]`.",
+      "phase": "cv_verification",
+      "topic_key": "docker_implementation",
+      "question_type": "transition",
+      "difficulty": "easy",
+      "provider_metadata": {
+        "planner": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 3645,
+          "output_tokens": 589,
+          "attempts": 1
+        },
+        "question_generator": {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 1741,
+          "output_tokens": 76,
+          "attempts": 1
+        }
+      }
+    }
+  ]
+}
