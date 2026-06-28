@@ -258,6 +258,16 @@ class CandidateInterviewResponse(BaseModel):
     current_phase: InterviewPhase
     should_end_interview: bool
     report: InterviewReport | None = None
+    attempt_id: str | None = None
+    feedback: AnswerFeedback | None = None
+    awaiting_acceptance: bool = False
+
+
+class AnswerFeedback(BaseModel):
+    summary: str = Field(min_length=1, max_length=500)
+    tags: list[str] = Field(default_factory=list, max_length=8)
+    strengths: list[str] = Field(default_factory=list, max_length=3)
+    improvements: list[str] = Field(default_factory=list, max_length=3)
 
 
 class InterviewRuntimeContext(BaseModel):
