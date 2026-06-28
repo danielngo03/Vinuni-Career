@@ -21,11 +21,16 @@ class APIKeyPool:
 
     def available_keys(self) -> list[str]:
         with self._lock:
-            keys = [key for key in self._keys if key not in self._exhausted]
-            if not keys:
-                return []
-            start = self._cursor % len(keys)
-            return keys[start:] + keys[:start]
+            return self._available_keys_locked()
+
+    def claim_keys_for_request(self) -> list[str]:
+        """Return keys for one request and advance the cursor before network I/O."""
+        with self._lock:
+            keys = self._available_keys_locked()
+            if keys:
+                first_key_index = self._keys.index(keys[0])
+                self._cursor = (first_key_index + 1) % len(self._keys)
+            return keys
 
     def mark_exhausted(self, api_key: str) -> None:
         with self._lock:
@@ -38,6 +43,12 @@ class APIKeyPool:
 
     def has_available_key(self) -> bool:
         return bool(self.available_keys())
+
+    def _available_keys_locked(self) -> list[str]:
+        if not self._keys:
+            return []
+        ordered = self._keys[self._cursor :] + self._keys[: self._cursor]
+        return [key for key in ordered if key not in self._exhausted]
 
 
 def looks_like_key_exhaustion(status_code: int, detail: str) -> bool:

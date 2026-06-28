@@ -137,6 +137,48 @@ def test_gemini_native_provider_rotates_to_next_key_after_auth_4xx(monkeypatch):
     assert requests == ["key-1", "key-2"]
 
 
+def test_gemini_native_provider_round_robins_first_key_per_request(monkeypatch):
+    requests = []
+
+    class StubClient:
+        def __init__(self, timeout: float) -> None:
+            self.timeout = timeout
+
+        def __enter__(self):
+            return self
+
+        def __exit__(self, exc_type, exc, traceback):
+            return None
+
+        def post(self, url: str, *, params: dict, headers: dict, json: dict):
+            requests.append(params["key"])
+            request = httpx.Request("POST", url)
+            return httpx.Response(
+                200,
+                request=request,
+                json={
+                    "candidates": [{"content": {"parts": [{"text": "ok"}]}}],
+                    "usageMetadata": {"promptTokenCount": 1, "candidatesTokenCount": 1},
+                },
+            )
+
+    monkeypatch.setattr(httpx, "Client", StubClient)
+    provider = GeminiNativeProvider(
+        base_url="https://example.test",
+        api_key="key-1",
+        api_keys=["key-2", "key-3"],
+        chat_model="test-model",
+        embedding_model="test-embedding",
+        timeout_seconds=1,
+    )
+
+    for _ in range(4):
+        response = provider.chat(ChatRequest(messages=[ChatMessage(role="user", content="hello")]))
+        assert response.content == "ok"
+
+    assert requests == ["key-1", "key-2", "key-3", "key-1"]
+
+
 def test_gemini_native_provider_retries_5xx_before_failing_or_rotating(monkeypatch):
     requests = []
     sleeps = []

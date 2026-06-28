@@ -412,7 +412,7 @@ export function InterviewSimulatorModal({
                           {item.feedback.tags.map((tag) => (
                             <span
                               key={tag}
-                              className="rounded-full bg-primary/5 px-2.5 py-1 text-xs font-medium text-primary"
+                              className={feedbackTagClass(tag, "subtle")}
                             >
                               {tag}
                             </span>
@@ -508,7 +508,7 @@ function AnswerFeedbackCard({ feedback }: { feedback: AnswerFeedback }) {
       <p className="text-xs font-semibold uppercase text-primary">Nhận xét câu trả lời</p>
       <div className="mt-2 flex flex-wrap gap-2">
         {feedback.tags.map((tag) => (
-          <span key={tag} className="rounded-full bg-white px-2.5 py-1 text-xs font-medium text-primary ring-1 ring-primary/15">
+          <span key={tag} className={feedbackTagClass(tag, "solid")}>
             {tag}
           </span>
         ))}
@@ -726,6 +726,32 @@ function confidenceLabel(confidence: InterviewReport["confidence"]): string {
     medium: "Trung bình",
     high: "Cao",
   }[confidence];
+}
+
+function feedbackTagClass(tag: string, variant: "solid" | "subtle"): string {
+  const negative = isNegativeFeedbackTag(tag);
+  if (variant === "solid") {
+    return negative
+      ? "rounded-full bg-red-50 px-2.5 py-1 text-xs font-medium text-red-700 ring-1 ring-red-200"
+      : "rounded-full bg-white px-2.5 py-1 text-xs font-medium text-primary ring-1 ring-primary/15";
+  }
+  return negative
+    ? "rounded-full bg-red-50 px-2.5 py-1 text-xs font-medium text-red-700 ring-1 ring-red-200"
+    : "rounded-full bg-primary/5 px-2.5 py-1 text-xs font-medium text-primary";
+}
+
+function isNegativeFeedbackTag(tag: string): boolean {
+  const normalized = tag.trim().toLowerCase();
+  return [
+    "chưa",
+    "thiếu",
+    "cần",
+    "không",
+    "sai",
+    "yếu",
+    "mơ hồ",
+    "chung chung",
+  ].some((marker) => normalized.includes(marker));
 }
 
 function phaseLabel(phase: InterviewPhase, mode: InterviewMode): string {

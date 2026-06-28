@@ -4,7 +4,7 @@ import json
 
 import pytest
 
-from app.ai.extraction.schemas import CVExtraction, JDExtraction, SkillEvidence
+from app.ai.extraction.schemas import CVExtraction, JDExtraction, ProjectItem, SkillEvidence
 from app.ai.gateway.schemas import ChatResponse
 from app.ai.interview.schemas import (
     CommunicationEvaluation,
@@ -20,6 +20,7 @@ from app.ai.interview.schemas import (
 from app.ai.interview.service import (
     InterviewTurnGenerationError,
     _has_enough_evidence_to_finish,
+    _skill_has_interview_evidence,
     _validate_candidate_question,
     generate_interview_report,
     generate_next_turn,
@@ -195,6 +196,248 @@ def test_follow_up_updates_previous_skill_and_keeps_internal_data_out_of_questio
     assert "expected_signals" not in result.question.lower()
 
 
+def test_partial_answer_can_switch_topic_when_planner_does_not_clarify():
+    planner = _planner(
+        action="ask_question",
+        current_phase="cv_verification",
+        question_plan={
+            "question_type": "transition",
+            "difficulty": "easy",
+            "target_competency": "Docker deployment",
+            "source_type": "jd_requirement",
+            "source_reference": "Docker",
+            "evidence_gap": "Docker has not been assessed.",
+            "question_intent": "probe deployment reasoning",
+            "topic_key": "verify_docker",
+            "linked_skill_ids": ["docker"],
+        },
+        previous_answer_evaluation={
+            "score": 2,
+            "status": "partially_verified",
+            "answer_quality": "partial",
+            "strengths": ["Relevant API example"],
+            "missing_evidence": ["No deployment details."],
+            "contradictions": [],
+            "detected_competency": "FastAPI backend service",
+            "evidence_found": ["Explained API routing and service separation"],
+            "remaining_gap": "Deployment details are still unclear.",
+            "ownership": "direct",
+            "topic_decision": "continue",
+            "reason_for_next_question": "Move on to an unassessed must-have skill.",
+            "anti_repetition_check": "Docker has not been asked yet.",
+            "ownership_check": "The next question does not assume Docker ownership.",
+            "communication": {
+                "clarity": 3,
+                "specificity": 2,
+                "relevance": 3,
+                "structure": 2,
+                "summary": "Relevant but incomplete.",
+            },
+        },
+        evaluated_skill_ids=["fastapi"],
+        follow_up_count=0,
+    )
+    gateway = FakeGateway(
+        [
+            planner,
+            {
+                "question": (
+                    "Nếu container FastAPI chạy nhưng host không gọi được API, bạn sẽ "
+                    "kiểm tra port mapping, bind address và log theo thứ tự nào?"
+                )
+            },
+        ]
+    )
+    runtime = _runtime(
+        interview_config=_runtime().interview_config.model_copy(
+            update={"current_phase": "cv_verification"}
+        ),
+        history=[
+            ConversationTurn(
+                question="Bạn thiết kế API FastAPI như thế nào?",
+                answer="Em tách router và service.",
+                phase="cv_verification",
+                topic_key="verify_fastapi",
+            )
+        ],
+        question_count=1,
+        current_topic="verify_fastapi",
+        current_difficulty="easy",
+        latest_answer="Em tách router và service.",
+    )
+
+    result = generate_next_turn(runtime, gateway=gateway)
+
+    assert result.planner_output.question_plan.topic_key == "verify_docker"
+    assert result.planner_output.follow_up_count == 0
+
+
+def test_switching_topics_resets_model_follow_up_count():
+    planner = _planner(
+        action="ask_question",
+        current_phase="cv_verification",
+        question_plan={
+            "question_type": "transition",
+            "difficulty": "easy",
+            "target_competency": "Docker deployment",
+            "source_type": "jd_requirement",
+            "source_reference": "Docker",
+            "evidence_gap": "Docker has not been assessed.",
+            "question_intent": "probe deployment reasoning",
+            "topic_key": "verify_docker",
+            "linked_skill_ids": ["docker"],
+        },
+        previous_answer_evaluation={
+            "score": 3,
+            "status": "verified",
+            "answer_quality": "sufficient",
+            "strengths": ["Specific FastAPI example"],
+            "missing_evidence": [],
+            "contradictions": [],
+            "detected_competency": "FastAPI backend service",
+            "evidence_found": ["Explained API routing and service separation"],
+            "remaining_gap": "",
+            "ownership": "direct",
+            "topic_decision": "continue",
+            "reason_for_next_question": "Move on to Docker.",
+            "anti_repetition_check": "Docker has not been asked yet.",
+            "ownership_check": "The next question does not assume Docker ownership.",
+            "communication": {
+                "clarity": 3,
+                "specificity": 3,
+                "relevance": 4,
+                "structure": 3,
+                "summary": "Clear technical answer.",
+            },
+        },
+        evaluated_skill_ids=["fastapi"],
+        follow_up_count=2,
+    )
+    gateway = FakeGateway(
+        [
+            planner,
+            {
+                "question": (
+                    "Nếu container FastAPI chạy nhưng host không gọi được API, bạn sẽ "
+                    "kiểm tra port mapping, bind address và log theo thứ tự nào?"
+                )
+            },
+        ]
+    )
+    runtime = _runtime(
+        interview_config=_runtime().interview_config.model_copy(
+            update={"current_phase": "cv_verification"}
+        ),
+        history=[
+            ConversationTurn(
+                question="Bạn thiết kế API FastAPI như thế nào?",
+                answer="Em tách router và service.",
+                phase="cv_verification",
+                topic_key="verify_fastapi",
+            )
+        ],
+        question_count=1,
+        current_topic="verify_fastapi",
+        current_difficulty="easy",
+        latest_answer="Em tách router và service.",
+    )
+
+    result = generate_next_turn(runtime, gateway=gateway)
+
+    assert result.planner_output.follow_up_count == 0
+    assert result.provider_metadata["planner"]["sanitized_fields"] == ["follow_up_count"]
+
+
+def test_tech_lead_project_question_retries_until_exact_technology_is_named():
+    planner = _planner(
+        action="ask_initial_question",
+        current_phase="cv_verification",
+        question_plan={
+            "question_type": "initial",
+            "difficulty": "easy",
+            "target_competency": "AI backend demo",
+            "source_type": "cv_project",
+            "source_reference": "AI backend demo",
+            "evidence_gap": "Project stack ownership has not been assessed.",
+            "question_intent": "verify project architecture",
+            "topic_key": "cv_project_ai_backend_demo",
+            "linked_skill_ids": [],
+        },
+    )
+    gateway = FakeGateway(
+        [
+            planner,
+            {
+                "question": (
+                    "Trong dự án AI backend, bạn thiết kế luồng xử lý từ request đến "
+                    "model response như thế nào?"
+                )
+            },
+            {
+                "question": (
+                    "Trong dự án AI backend dùng FastAPI, bạn thiết kế luồng xử lý từ "
+                    "request đến model response như thế nào?"
+                )
+            },
+        ]
+    )
+    runtime = _runtime(
+        cv=_runtime().cv.model_copy(
+            update={
+                "projects": [
+                    ProjectItem(
+                        name="AI backend demo",
+                        description="FastAPI service with an AI endpoint.",
+                        technologies=["Python", "FastAPI", "Docker"],
+                    )
+                ]
+            }
+        ),
+        interview_config=_runtime().interview_config.model_copy(
+            update={"interview_mode": "tech_lead", "current_phase": "cv_verification"}
+        ),
+    )
+
+    result = generate_next_turn(runtime, gateway=gateway)
+
+    assert "FastAPI" in result.question
+    assert result.provider_metadata["question_generator"]["attempts"] == 2
+
+
+def test_python_skill_evidence_can_be_inferred_from_evaluated_ecosystem_answer():
+    coverage_item = CoverageItem(
+        skill_id="python",
+        skill="Python",
+        source="jd_requirement",
+        priority="must_have",
+        status="claimed",
+    )
+    runtime = _runtime(
+        history=[
+            ConversationTurn(
+                question="Bạn xử lý timeout cho model call trong API như thế nào?",
+                answer="Em dùng asyncio.wait_for quanh service call và log latency.",
+                phase="problem_solving",
+                topic_key="ai_timeout_flow",
+            )
+        ],
+        evaluation_state=EvaluationState(
+            topic_evidence={
+                "ai_timeout_flow": TopicEvidenceState(
+                    ownership="direct",
+                    evidence_found=["Used asyncio timeout around model service call"],
+                )
+            }
+        ),
+    )
+
+    assert _skill_has_interview_evidence(
+        coverage_item,
+        runtime,
+        runtime.evaluation_state,
+    )
+
+
 def test_invalid_model_output_raises_interview_generation_error():
     gateway = FakeGateway(["not json"])
 
@@ -216,6 +459,118 @@ def test_technical_check_invalid_planner_output_raises_interview_generation_erro
 
     with pytest.raises(InterviewTurnGenerationError, match="valid interview plan"):
         generate_next_turn(runtime, gateway=gateway)
+
+
+def test_tech_lead_rejects_technical_query_task_intent():
+    planner = _planner(
+        action="ask_question",
+        current_phase="cv_verification",
+        question_plan={
+            "question_type": "transition",
+            "difficulty": "easy",
+            "target_competency": "SQL proficiency and data manipulation",
+            "source_type": "cv_skill",
+            "source_reference": "Languages: Python, SQL",
+            "evidence_gap": "SQL has not been assessed.",
+            "question_intent": "technical_query_task",
+            "topic_key": "sql_data_manipulation",
+            "linked_skill_ids": ["sql"],
+        },
+        previous_answer_evaluation={
+            "score": None,
+            "status": "not_assessed",
+            "answer_quality": "unable_to_answer",
+            "strengths": [],
+            "missing_evidence": ["No useful evidence."],
+            "contradictions": [],
+            "detected_competency": "Data pipeline design",
+            "evidence_found": [],
+            "remaining_gap": "No useful evidence for the previous topic.",
+            "ownership": "unknown",
+            "topic_decision": "stop",
+            "reason_for_next_question": "Switch topics after no useful answer.",
+            "anti_repetition_check": "SQL has not been asked yet.",
+            "ownership_check": "The next question does not assume ownership.",
+            "communication": {
+                "clarity": 1,
+                "specificity": 0,
+                "relevance": 0,
+                "structure": 0,
+                "summary": "The candidate could not answer.",
+            },
+        },
+        follow_up_count=0,
+    )
+    runtime = _runtime(
+        interview_config=_runtime().interview_config.model_copy(
+            update={
+                "interview_mode": "tech_lead",
+                "current_phase": "cv_verification",
+                "allowed_next_phases": ["cv_verification", "problem_solving", "completed"],
+            }
+        ),
+        history=[
+            ConversationTurn(
+                question="Em sẽ thiết kế pipeline Kafka và ClickHouse như thế nào?",
+                answer="Tôi không biết.",
+                phase="cv_verification",
+                topic_key="jd_scenario_data_pipeline",
+            )
+        ],
+        question_count=3,
+        current_topic="jd_scenario_data_pipeline",
+        current_difficulty="medium",
+        latest_answer="Tôi không biết.",
+    )
+
+    with pytest.raises(InterviewTurnGenerationError, match="valid interview plan"):
+        generate_next_turn(runtime, gateway=FakeGateway([planner]))
+
+
+def test_tech_lead_sanitizes_internal_competency_label_in_plan():
+    planner = _planner(
+        current_phase="cv_verification",
+        question_plan={
+            "question_type": "initial",
+            "difficulty": "easy",
+            "target_competency": "technical problem solving",
+            "source_type": "jd_requirement",
+            "source_reference": "FastAPI backend service",
+            "evidence_gap": "Backend debugging evidence has not been assessed.",
+            "question_intent": "probe debugging approach",
+            "topic_key": "verify_fastapi_debugging",
+            "linked_skill_ids": ["fastapi"],
+        },
+    )
+    gateway = FakeGateway(
+        [
+            planner,
+            {
+                "question": (
+                    "Khi một API FastAPI trả 500 trong môi trường test, bạn sẽ kiểm tra "
+                    "log, request và dependency theo thứ tự nào?"
+                )
+            },
+        ]
+    )
+
+    result = generate_next_turn(
+        _runtime(
+            interview_config=_runtime().interview_config.model_copy(
+                update={
+                    "interview_mode": "tech_lead",
+                    "current_phase": "cv_verification",
+                }
+            )
+        ),
+        gateway=gateway,
+    )
+
+    assert result.planner_output.question_plan.target_competency == "FastAPI backend service"
+    assert result.provider_metadata["planner"]["sanitized_fields"] == [
+        "question_plan.target_competency"
+    ]
+    assert "technical problem solving" not in result.question.lower()
 
 
 def test_technical_check_rejects_behavioral_question_and_retries_task():
@@ -314,6 +669,110 @@ def test_technical_check_rejects_early_finish_without_required_evidence():
 
     with pytest.raises(InterviewTurnGenerationError, match="valid interview plan"):
         generate_next_turn(runtime, gateway=gateway)
+
+
+def test_early_finish_retries_planner_before_raising():
+    previous_evaluation = {
+        "score": 3,
+        "status": "verified",
+        "answer_quality": "sufficient",
+        "strengths": ["Specific API evidence"],
+        "missing_evidence": [],
+        "contradictions": [],
+        "detected_competency": "FastAPI backend service",
+        "evidence_found": ["Explained API service separation and logging"],
+        "remaining_gap": "",
+        "ownership": "direct",
+        "topic_decision": "continue",
+        "reason_for_next_question": "Assess another must-have skill.",
+        "anti_repetition_check": "Docker has not been asked yet.",
+        "ownership_check": "The answer described direct API work.",
+        "communication": {
+            "clarity": 3,
+            "specificity": 3,
+            "relevance": 4,
+            "structure": 3,
+            "summary": "Clear technical answer.",
+        },
+    }
+    early_finish = _planner(
+        action="finish_interview",
+        current_phase="completed",
+        question_plan={
+            "question_type": "closing",
+            "difficulty": "easy",
+            "target_competency": "interview completion",
+            "source_type": "general",
+            "source_reference": "",
+            "evidence_gap": "",
+            "question_intent": "finish_interview",
+            "topic_key": "completed",
+            "linked_skill_ids": [],
+        },
+        previous_answer_evaluation=previous_evaluation,
+        evaluated_skill_ids=["python"],
+        should_end_interview=True,
+    )
+    corrected_plan = _planner(
+        action="ask_question",
+        current_phase="cv_verification",
+        question_plan={
+            "question_type": "transition",
+            "difficulty": "easy",
+            "target_competency": "Docker deployment",
+            "source_type": "jd_requirement",
+            "source_reference": "Docker",
+            "evidence_gap": "Docker has not been assessed.",
+            "question_intent": "probe deployment reasoning",
+            "topic_key": "verify_docker",
+            "linked_skill_ids": ["docker"],
+        },
+        previous_answer_evaluation=previous_evaluation,
+        evaluated_skill_ids=["python"],
+        follow_up_count=0,
+    )
+    gateway = FakeGateway(
+        [
+            early_finish,
+            corrected_plan,
+            {
+                "question": (
+                    "Khi triển khai một service FastAPI bằng Docker, bạn sẽ kiểm tra "
+                    "những điểm nào nếu container chạy nhưng API không truy cập được?"
+                )
+            },
+        ]
+    )
+    runtime = _runtime(
+        interview_config=_runtime().interview_config.model_copy(
+            update={
+                "interview_mode": "tech_lead",
+                "current_phase": "cv_verification",
+                "allowed_next_phases": ["cv_verification", "problem_solving", "completed"],
+                "min_questions": 3,
+                "max_questions": 6,
+            }
+        ),
+        history=[
+            ConversationTurn(
+                question="Bạn thiết kế API service như thế nào?",
+                answer="Em tách router và service, thêm log latency.",
+                phase="cv_verification",
+                topic_key="verify_python",
+            )
+        ],
+        question_count=1,
+        current_topic="verify_python",
+        current_difficulty="easy",
+        latest_answer="Em tách router và service, thêm log latency.",
+    )
+
+    result = generate_next_turn(runtime, gateway=gateway)
+
+    assert result.planner_output.should_end_interview is False
+    assert result.planner_output.question_plan.topic_key == "verify_docker"
+    assert len(gateway.requests) == 3
+    assert "finish before backend evidence" in gateway.requests[1].messages[1].content
 
 
 def test_technical_check_can_finish_with_non_verify_topic_evidence():
@@ -873,6 +1332,7 @@ def test_tech_lead_rejects_switch_when_incomplete_answer_needs_follow_up():
             "strengths": ["Mentioned DB logs."],
             "missing_evidence": ["Did not answer the SQL task."],
             "contradictions": [],
+            "topic_decision": "clarify",
             "communication": CommunicationEvaluation(clarity=2, specificity=1, relevance=2, structure=2, summary="Avoided the direct SQL request.").model_dump(),
         },
         evaluated_skill_ids=["postgresql"],

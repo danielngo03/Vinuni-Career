@@ -111,7 +111,7 @@ class GeminiNativeProvider:
         headers = {"Content-Type": "application/json", "X-Client-Request-Id": _request_id()}
         key_errors: list[str] = []
         with httpx.Client(timeout=self.timeout_seconds) as client:
-            for api_key in self.api_key_pool.available_keys():
+            for api_key in self.api_key_pool.claim_keys_for_request():
                 for attempt in range(SERVER_ERROR_RETRY_ATTEMPTS):
                     try:
                         response = client.post(
