@@ -6,22 +6,21 @@ import {
   FileText,
   PencilSimple,
   Robot,
-  ShieldCheck,
   SpinnerGap,
   Star,
   Trash,
 } from "@phosphor-icons/react";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { toast } from "sonner";
-import { apiFetch, apiMessage } from "@/lib/api/client";
-import type { AIRun, CV, DocumentRecord } from "@/lib/api/types";
-import { useI18n } from "@/lib/i18n/provider";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { EmptyState } from "@/components/ui/empty-state";
 import { Input } from "@/components/ui/input";
 import { Modal } from "@/components/ui/modal";
 import { PanelSkeleton } from "@/components/ui/skeleton";
+import { apiFetch, apiMessage } from "@/lib/api/client";
+import type { AIRun, CV } from "@/lib/api/types";
+import { useI18n } from "@/lib/i18n/provider";
 
 type InspectResult = {
   route: string;
@@ -32,25 +31,31 @@ type InspectResult = {
   extracted_text_preview: string;
 };
 
+type AnalysisState = {
+  cvId: string;
+  runId: string;
+  status: string;
+};
+
 export function CVCenter() {
   const { locale, dictionary } = useI18n();
   const [cvs, setCvs] = useState<CV[]>([]);
-  const [documents, setDocuments] = useState<DocumentRecord[]>([]);
   const [loading, setLoading] = useState(true);
   const [uploadOpen, setUploadOpen] = useState(false);
   const [workingId, setWorkingId] = useState<string | null>(null);
   const [editingId, setEditingId] = useState<string | null>(null);
   const [editTitle, setEditTitle] = useState("");
+  const [selectedCvId, setSelectedCvId] = useState<string | null>(null);
+  const [rawDraft, setRawDraft] = useState("");
+  const [rawEditing, setRawEditing] = useState(false);
+  const [analysis, setAnalysis] = useState<AnalysisState | null>(null);
+  const [creatingBlank, setCreatingBlank] = useState(false);
 
   const load = useCallback(async () => {
     setLoading(true);
     try {
-      const [cvData, documentData] = await Promise.all([
-        apiFetch<CV[]>("/cvs/me"),
-        apiFetch<DocumentRecord[]>("/documents/"),
-      ]);
+      const cvData = await apiFetch<CV[]>("/cvs/me");
       setCvs(cvData);
-      setDocuments(documentData);
     } catch (error) {
       toast.error(apiMessage(error, dictionary.common.retry));
     } finally {
@@ -62,6 +67,61 @@ export function CVCenter() {
     const timer = window.setTimeout(() => void load(), 0);
     return () => window.clearTimeout(timer);
   }, [load]);
+
+  const selectedCv = useMemo(
+    () => cvs.find((cv) => cv.id === selectedCvId) || cvs[0] || null,
+    [cvs, selectedCvId],
+  );
+
+  useEffect(() => {
+    if (!cvs.length) {
+      setSelectedCvId(null);
+      setRawDraft("");
+      return;
+    }
+    if (!selectedCvId || !cvs.some((cv) => cv.id === selectedCvId)) {
+      setSelectedCvId(cvs[0].id);
+    }
+  }, [cvs, selectedCvId]);
+
+  useEffect(() => {
+    if (!selectedCv || rawEditing) return;
+    setRawDraft(rawTextForCv(selectedCv, dictionary.common.empty));
+  }, [selectedCv, rawEditing, dictionary.common.empty]);
+
+  useEffect(() => {
+    if (!analysis || !["QUEUED", "RUNNING"].includes(analysis.status)) return;
+    const timer = window.setInterval(async () => {
+      try {
+        const run = await apiFetch<AIRun>(`/ai/runs/${analysis.runId}`);
+        setAnalysis((current) =>
+          current?.runId === run.run_id
+            ? { ...current, status: run.status }
+            : current,
+        );
+        if (["DONE", "FAILED", "CANCELLED"].includes(run.status)) {
+          if (run.status === "DONE") {
+            toast.success(dictionary.ai.completed);
+          } else if (run.status === "FAILED") {
+            toast.error(run.error || dictionary.ai.failed);
+          }
+          window.setTimeout(() => {
+            setAnalysis((current) => (current?.runId === run.run_id ? null : current));
+          }, 3500);
+        }
+      } catch (error) {
+        toast.error(apiMessage(error, dictionary.ai.failed));
+        setAnalysis(null);
+      }
+    }, 1500);
+    return () => window.clearInterval(timer);
+  }, [analysis, dictionary.ai.completed, dictionary.ai.failed]);
+
+  function selectCv(cv: CV) {
+    setSelectedCvId(cv.id);
+    setRawDraft(rawTextForCv(cv, dictionary.common.empty));
+    setRawEditing(false);
+  }
 
   async function makePrimary(cvId: string) {
     setWorkingId(cvId);
@@ -108,12 +168,24 @@ export function CVCenter() {
     }
   }
 
-  async function analyze(cv: CV) {
-    const rawText =
-      typeof cv.parsed_data.raw_text === "string"
-        ? cv.parsed_data.raw_text
-        : [cv.summary, ...(cv.skills || [])].filter(Boolean).join("\n");
-    if (!rawText) {
+  async function createBlankCv() {
+    setCreatingBlank(true);
+    try {
+      const cv = await apiFetch<CV>("/cvs/blank", { method: "POST" });
+      setCvs((current) => [cv, ...current.filter((item) => item.id !== cv.id)]);
+      setSelectedCvId(cv.id);
+      setRawDraft(rawTextForCv(cv, dictionary.common.empty));
+      setRawEditing(true);
+      toast.success(dictionary.common.updated);
+    } catch (error) {
+      toast.error(apiMessage(error, dictionary.common.retry));
+    } finally {
+      setCreatingBlank(false);
+    }
+  }
+
+  async function analyze(cv: CV, rawText = rawTextForCv(cv, dictionary.common.empty)) {
+    if (!rawText.trim()) {
       toast.error(dictionary.ai.input);
       return;
     }
@@ -124,10 +196,14 @@ export function CVCenter() {
         body: JSON.stringify({
           run_type: "cv_extraction",
           input_ref: `cv:${cv.id}`,
-          run_metadata: { raw_text: rawText },
+          run_metadata: {
+            raw_text: rawText.trim(),
+            source_quality: "native_text",
+          },
         }),
       });
-      toast.success(`${dictionary.ai.running} · ${run.run_id.slice(0, 8)}`);
+      setAnalysis({ cvId: cv.id, runId: run.run_id, status: run.status });
+      toast.success(`${dictionary.ai.running} - ${run.run_id.slice(0, 8)}`);
     } catch (error) {
       toast.error(apiMessage(error, dictionary.ai.failed));
     } finally {
@@ -135,9 +211,15 @@ export function CVCenter() {
     }
   }
 
+  const selectedAnalysisStatus =
+    selectedCv && analysis?.cvId === selectedCv.id ? analysis.status : null;
+  const selectedAnalysisRunning = selectedAnalysisStatus
+    ? ["QUEUED", "RUNNING"].includes(selectedAnalysisStatus)
+    : false;
+
   return (
     <>
-      <div className="grid gap-5 xl:grid-cols-[minmax(0,1fr)_360px]">
+      <div className="grid gap-5 xl:grid-cols-[minmax(0,1fr)_380px]">
         <section className="rounded-2xl border bg-white">
           <div className="flex items-center gap-3 border-b p-5">
             <div>
@@ -149,6 +231,18 @@ export function CVCenter() {
             <Button className="ml-auto" onClick={() => setUploadOpen(true)}>
               <FileArrowUp className="size-4" />
               {dictionary.documents.upload}
+            </Button>
+            <Button
+              variant="outline"
+              onClick={createBlankCv}
+              disabled={creatingBlank || cvs.length >= 5}
+            >
+              {creatingBlank ? (
+                <SpinnerGap className="size-4 animate-spin" />
+              ) : (
+                <FileText className="size-4" />
+              )}
+              Tạo CV rỗng
             </Button>
           </div>
           <div className="p-4 sm:p-5">
@@ -162,148 +256,203 @@ export function CVCenter() {
                 onAction={() => setUploadOpen(true)}
               />
             ) : null}
-            {!loading && cvs.length ? (
-              <div className="space-y-3">
-                {cvs.map((cv) => (
-                  <article key={cv.id} className="rounded-2xl border p-4">
-                    <div className="flex flex-col gap-4 sm:flex-row sm:items-start">
-                      <div className="flex size-12 shrink-0 items-center justify-center rounded-2xl bg-blue-50 text-primary">
-                        <FileText className="size-6" weight="duotone" />
-                      </div>
-                      <div className="min-w-0 flex-1">
-                        <div className="flex flex-wrap items-center gap-2">
-                          {editingId === cv.id ? (
-                            <div className="flex items-center gap-2">
-                              <Input
-                                value={editTitle}
-                                onChange={(e) => setEditTitle(e.target.value)}
-                                className="h-7 w-48 text-sm"
-                                autoFocus
-                                onKeyDown={(e) => {
-                                  if (e.key === "Enter") renameCv(cv.id);
-                                  if (e.key === "Escape") setEditingId(null);
-                                }}
-                              />
-                              <Button size="sm" className="h-7 px-2" onClick={() => renameCv(cv.id)}>
-                                <CheckCircle className="size-4" />
-                              </Button>
-                            </div>
-                          ) : (
-                            <h3 className="font-semibold">{cv.title}</h3>
-                          )}
-                          {cv.is_primary ? (
-                            <Badge tone="green">
-                              <Star className="mr-1 size-3" weight="fill" />
-                              Primary
-                            </Badge>
+            {!loading && selectedCv ? (
+              <div>
+                <div className="flex flex-col gap-3 border-b pb-4 sm:flex-row sm:items-start">
+                  <div className="min-w-0 flex-1">
+                    <div className="flex flex-wrap items-center gap-2">
+                      <h3 className="font-semibold">{selectedCv.title}</h3>
+                      {selectedCv.is_primary ? (
+                        <Badge tone="green">
+                          <Star className="mr-1 size-3" weight="fill" />
+                          Primary
+                        </Badge>
+                      ) : null}
+                      {selectedAnalysisStatus ? (
+                        <Badge
+                          tone={
+                            selectedAnalysisStatus === "FAILED"
+                              ? "red"
+                              : selectedAnalysisStatus === "DONE"
+                                ? "green"
+                                : "amber"
+                          }
+                        >
+                          {selectedAnalysisRunning ? (
+                            <SpinnerGap className="mr-1 size-3 animate-spin" />
                           ) : null}
-                        </div>
-                        <p className="mt-1 text-xs text-muted">
-                          {new Intl.DateTimeFormat(locale, { dateStyle: "medium" }).format(
-                            new Date(cv.created_at),
-                          )}
-                        </p>
-                        <p className="mt-3 line-clamp-2 text-sm leading-6 text-muted">
-                          {cv.summary ||
-                            (typeof cv.parsed_data.summary === "string"
-                              ? cv.parsed_data.summary
-                              : dictionary.common.empty)}
-                        </p>
-                        <div className="mt-3 flex flex-wrap gap-1.5">
-                          {(cv.skills || []).slice(0, 10).map((skill) => (
-                            <Badge key={skill} tone="blue">
-                              {skill}
-                            </Badge>
-                          ))}
-                        </div>
-                      </div>
-                      <div className="flex shrink-0 flex-wrap gap-2">
-                        <Button
-                          variant="ghost"
-                          size="sm"
-                          onClick={() => {
-                            setEditingId(cv.id);
-                            setEditTitle(cv.title);
-                          }}
-                          disabled={workingId === cv.id}
-                        >
-                          <PencilSimple className="size-4" />
-                        </Button>
-                        <Button
-                          variant="ghost"
-                          size="sm"
-                          onClick={() => deleteCv(cv.id)}
-                          disabled={workingId === cv.id}
-                          className="text-red-500 hover:text-red-600"
-                        >
-                          <Trash className="size-4" />
-                        </Button>
-                        {!cv.is_primary ? (
-                          <Button
-                            variant="outline"
-                            size="sm"
-                            onClick={() => makePrimary(cv.id)}
-                            disabled={workingId === cv.id}
-                          >
-                            <CheckCircle className="size-4" />
-                            Primary
-                          </Button>
-                        ) : null}
-                        <Button
-                          size="sm"
-                          onClick={() => analyze(cv)}
-                          disabled={workingId === cv.id}
-                        >
-                          {workingId === cv.id ? (
-                            <SpinnerGap className="size-4 animate-spin" />
-                          ) : (
-                            <Robot className="size-4" weight="duotone" />
-                          )}
-                          {dictionary.ai.cvExtraction}
-                        </Button>
-                      </div>
+                          {selectedAnalysisStatus === "DONE"
+                            ? dictionary.ai.completed
+                            : selectedAnalysisStatus === "FAILED"
+                              ? dictionary.ai.failed
+                              : "Đang phân tích"}
+                        </Badge>
+                      ) : null}
                     </div>
-                  </article>
-                ))}
+                    <p className="mt-1 text-xs text-muted">
+                      {new Intl.DateTimeFormat(locale, { dateStyle: "medium" }).format(
+                        new Date(selectedCv.created_at),
+                      )}
+                    </p>
+                  </div>
+                  <div className="flex flex-wrap gap-2">
+                    <Button
+                      variant={rawEditing ? "outline" : "ghost"}
+                      size="sm"
+                      onClick={() => setRawEditing((current) => !current)}
+                    >
+                      <PencilSimple className="size-4" />
+                      {rawEditing ? "Xem Markdown" : "Edit"}
+                    </Button>
+                    <Button
+                      size="sm"
+                      onClick={() => analyze(selectedCv, rawDraft)}
+                      disabled={workingId === selectedCv.id || selectedAnalysisRunning}
+                    >
+                      {workingId === selectedCv.id || selectedAnalysisRunning ? (
+                        <SpinnerGap className="size-4 animate-spin" />
+                      ) : (
+                        <Robot className="size-4" weight="duotone" />
+                      )}
+                      {selectedAnalysisRunning ? "Đang phân tích" : "Phân tích lại"}
+                    </Button>
+                  </div>
+                </div>
+
+                <div className="relative">
+                  {selectedAnalysisRunning ? (
+                    <div className="pointer-events-none absolute right-4 top-8 z-10 inline-flex items-center gap-2 rounded-lg border border-amber-200 bg-amber-50 px-3 py-2 text-xs font-semibold text-amber-800 shadow-sm">
+                      <SpinnerGap className="size-4 animate-spin" />
+                      AI đang phân tích CV này
+                    </div>
+                  ) : null}
+                  {rawEditing ? (
+                    <textarea
+                      value={rawDraft}
+                      onChange={(event) => setRawDraft(event.target.value)}
+                      className="focus-ring mt-4 min-h-[520px] w-full resize-y rounded-xl border bg-slate-50 p-4 font-mono text-sm leading-6"
+                      spellCheck={false}
+                    />
+                  ) : (
+                    <MarkdownPreview content={rawDraft} busy={selectedAnalysisRunning} />
+                  )}
+                </div>
               </div>
             ) : null}
           </div>
         </section>
 
         <section className="rounded-2xl border bg-white p-5">
-          <div className="flex items-center gap-2">
-            <ShieldCheck className="size-5 text-primary" weight="duotone" />
-            <h2 className="font-semibold">{dictionary.documents.title}</h2>
+          <div className="flex items-center justify-between gap-3">
+            <h2 className="font-semibold">Chọn CV</h2>
+            <Badge tone="blue">{cvs.length}/5</Badge>
           </div>
           <p className="mt-2 text-sm leading-6 text-muted">
-            {dictionary.documents.description}
+            Chọn CV để xem raw content dạng Markdown, chỉnh sửa, rồi gửi phân tích lại.
           </p>
           <div className="mt-5 space-y-3">
-            {documents.map((document) => (
-              <div key={document.id} className="rounded-xl bg-slate-50 p-3">
-                <div className="flex items-start gap-3">
-                  <FileText className="mt-0.5 size-5 shrink-0 text-primary" />
+            {loading ? <PanelSkeleton /> : null}
+            {cvs.map((cv) => (
+              <article
+                key={cv.id}
+                className={`rounded-xl border p-3 transition-colors ${
+                  selectedCv?.id === cv.id ? "border-blue-300 bg-blue-50/50" : "bg-white"
+                }`}
+              >
+                <button
+                  type="button"
+                  className="flex w-full items-start gap-3 text-left"
+                  onClick={() => selectCv(cv)}
+                >
+                  <FileText className="mt-0.5 size-5 shrink-0 text-primary" weight="duotone" />
                   <div className="min-w-0 flex-1">
-                    <p className="truncate text-sm font-semibold">{document.file_name}</p>
+                    <div className="flex flex-wrap items-center gap-1.5">
+                      <p className="truncate text-sm font-semibold">{cv.title}</p>
+                      {cv.is_primary ? (
+                        <Badge tone="green" className="px-1.5 py-0.5">
+                          Primary
+                        </Badge>
+                      ) : null}
+                      {analysis?.cvId === cv.id &&
+                      ["QUEUED", "RUNNING"].includes(analysis.status) ? (
+                        <Badge tone="amber" className="px-1.5 py-0.5">
+                          <SpinnerGap className="mr-1 size-3 animate-spin" />
+                          Đang chạy
+                        </Badge>
+                      ) : null}
+                    </div>
                     <p className="mt-1 text-xs text-muted">
-                      {(document.size_bytes / 1024).toFixed(1)} KB · {document.category}
+                      {new Intl.DateTimeFormat(locale, { dateStyle: "medium" }).format(
+                        new Date(cv.created_at),
+                      )}
                     </p>
+                    <div className="mt-2 flex flex-wrap gap-1.5">
+                      {(cv.skills || []).length ? (
+                        (cv.skills || []).slice(0, 8).map((skill) => (
+                          <Badge key={skill} tone="blue" className="px-1.5 py-0.5">
+                            {skill}
+                          </Badge>
+                        ))
+                      ) : (
+                        <span className="text-xs text-muted">{dictionary.common.empty}</span>
+                      )}
+                    </div>
                   </div>
-                  <Badge
-                    tone={
-                      document.scan_status === "CLEAN"
-                        ? "green"
-                        : document.scan_status === "INFECTED"
-                          ? "red"
-                          : "amber"
-                    }
+                </button>
+                <div className="mt-3 flex flex-wrap gap-2 border-t pt-3">
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => {
+                      setEditingId(cv.id);
+                      setEditTitle(cv.title);
+                    }}
+                    disabled={workingId === cv.id}
+                    className="px-2"
                   >
-                    {document.scan_status}
-                  </Badge>
+                    <PencilSimple className="size-4" />
+                  </Button>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => deleteCv(cv.id)}
+                    disabled={workingId === cv.id}
+                    className="px-2 text-red-500 hover:text-red-600"
+                  >
+                    <Trash className="size-4" />
+                  </Button>
+                  {!cv.is_primary ? (
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => makePrimary(cv.id)}
+                      disabled={workingId === cv.id}
+                    >
+                      <CheckCircle className="size-4" />
+                      Primary
+                    </Button>
+                  ) : null}
                 </div>
-              </div>
+                {editingId === cv.id ? (
+                  <div className="mt-3 flex items-center gap-2">
+                    <Input
+                      value={editTitle}
+                      onChange={(e) => setEditTitle(e.target.value)}
+                      className="h-8 text-sm"
+                      autoFocus
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter") renameCv(cv.id);
+                        if (e.key === "Escape") setEditingId(null);
+                      }}
+                    />
+                    <Button size="sm" className="h-8 px-2" onClick={() => renameCv(cv.id)}>
+                      <CheckCircle className="size-4" />
+                    </Button>
+                  </div>
+                ) : null}
+              </article>
             ))}
-            {!documents.length && !loading ? (
+            {!cvs.length && !loading ? (
               <p className="rounded-xl bg-slate-50 p-4 text-sm text-muted">
                 {dictionary.documents.noDocumentsDescription}
               </p>
@@ -317,6 +466,79 @@ export function CVCenter() {
         onUploaded={load}
       />
     </>
+  );
+}
+
+function rawTextForCv(cv: CV, emptyText: string) {
+  if (typeof cv.parsed_data.raw_markdown === "string" && cv.parsed_data.raw_markdown.trim()) {
+    return cv.parsed_data.raw_markdown;
+  }
+  const geminiExtraction = cv.parsed_data.gemini_extraction;
+  if (
+    geminiExtraction &&
+    typeof geminiExtraction === "object" &&
+    "raw_markdown" in geminiExtraction &&
+    typeof geminiExtraction.raw_markdown === "string" &&
+    geminiExtraction.raw_markdown.trim()
+  ) {
+    return geminiExtraction.raw_markdown;
+  }
+  if (typeof cv.parsed_data.raw_text === "string" && cv.parsed_data.raw_text.trim()) {
+    return cv.parsed_data.raw_text;
+  }
+  const lines = [
+    cv.title ? `# ${cv.title}` : "",
+    cv.summary || (typeof cv.parsed_data.summary === "string" ? cv.parsed_data.summary : ""),
+    cv.skills?.length ? `## Skills\n${cv.skills.map((skill) => `- ${skill}`).join("\n")}` : "",
+  ].filter(Boolean);
+  return lines.join("\n\n") || emptyText;
+}
+
+function MarkdownPreview({ content, busy = false }: { content: string; busy?: boolean }) {
+  const lines = content.split(/\r?\n/);
+  return (
+    <div
+      className={`mt-4 min-h-[520px] rounded-xl border bg-slate-50 p-5 transition-opacity ${
+        busy ? "opacity-70" : "opacity-100"
+      }`}
+    >
+      <div className="space-y-2 text-sm leading-7 text-slate-700">
+        {lines.map((line, index) => {
+          const key = `${index}-${line}`;
+          if (!line.trim()) return <div key={key} className="h-2" />;
+          if (line.startsWith("# ")) {
+            return (
+              <h1 key={key} className="text-2xl font-semibold leading-tight text-slate-950">
+                {line.slice(2)}
+              </h1>
+            );
+          }
+          if (line.startsWith("## ")) {
+            return (
+              <h2 key={key} className="pt-3 text-lg font-semibold leading-tight text-slate-950">
+                {line.slice(3)}
+              </h2>
+            );
+          }
+          if (line.startsWith("### ")) {
+            return (
+              <h3 key={key} className="pt-2 font-semibold leading-tight text-slate-900">
+                {line.slice(4)}
+              </h3>
+            );
+          }
+          if (line.startsWith("- ")) {
+            return (
+              <p key={key} className="pl-4">
+                <span className="mr-2 text-primary">•</span>
+                {line.slice(2)}
+              </p>
+            );
+          }
+          return <p key={key}>{line}</p>;
+        })}
+      </div>
+    </div>
   );
 }
 
@@ -381,7 +603,7 @@ function CVUploadModal({
         <span className="mt-3 font-semibold">
           {file?.name || dictionary.documents.upload}
         </span>
-        <span className="mt-1 text-xs text-muted">PDF, DOCX, TXT · 20MB max</span>
+        <span className="mt-1 text-xs text-muted">PDF, DOCX, TXT - 20MB max</span>
         <input
           type="file"
           accept=".pdf,.docx,.txt"
@@ -417,7 +639,7 @@ function CVUploadModal({
           </div>
           <ul className="mt-3 space-y-1 text-xs leading-5 text-muted">
             {inspection.reasons.map((reason) => (
-              <li key={reason}>• {reason}</li>
+              <li key={reason}>- {reason}</li>
             ))}
           </ul>
         </div>

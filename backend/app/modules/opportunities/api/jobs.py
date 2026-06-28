@@ -9,12 +9,15 @@ from app.modules.access.api.identity import get_optional_active_identity
 from app.modules.access.api.rbac import require_permission
 from app.modules.opportunities.application.job_service import (
     count_jobs,
+    create_blank_job,
     create_job,
     list_jobs,
     moderate_job,
+    reanalyze_job,
+    update_job,
 )
 from app.modules.opportunities.infrastructure.models import Bookmark, Job
-from app.modules.opportunities.schemas import JobCreate, JobModerationRequest, JobPage, JobView
+from app.modules.opportunities.schemas import JobCreate, JobModerationRequest, JobPage, JobUpdate, JobView
 from app.platform.database.models import User, UserOrgRole
 from app.platform.database.models.student import StudentProfile
 from app.platform.database.session import get_db
@@ -49,6 +52,22 @@ def post_job(
             code=ErrorCode.BAD_REQUEST, message="Organization is required", status_code=400
         )
     return create_job(db, payload, actor_id=current_user.id)
+
+
+@router.post("/blank", response_model=JobView, status_code=201)
+def post_blank_job(
+    db: Session = Depends(get_db),
+    current_user: User = Depends(require_permission("job", "create")),
+    identity: UserOrgRole | None = Depends(get_optional_active_identity),
+) -> Job:
+    if not identity or identity.org.type != OrgType.PARTNER:
+        raise AppError(code=ErrorCode.FORBIDDEN, message="Partner identity required", status_code=403)
+    return create_blank_job(
+        db,
+        org_id=identity.org_id,
+        dept_id=identity.dept_id,
+        actor_id=current_user.id,
+    )
 
 
 @router.get("", response_model=list[JobView])
@@ -109,6 +128,47 @@ def get_job(
     if not job or job.deleted_at is not None:
         raise AppError(code=ErrorCode.NOT_FOUND, message="Job not found", status_code=404)
     return job
+
+
+@router.patch("/{job_id}", response_model=JobView)
+def patch_job(
+    job_id: str,
+    payload: JobUpdate,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(require_permission("job", "create")),
+    identity: UserOrgRole | None = Depends(get_optional_active_identity),
+) -> Job:
+    job = db.get(Job, job_id)
+    if not job or job.deleted_at is not None:
+        raise AppError(code=ErrorCode.NOT_FOUND, message="Job not found", status_code=404)
+    if identity:
+        if identity.org.type != OrgType.PARTNER:
+            raise AppError(
+                code=ErrorCode.FORBIDDEN, message="Partner identity required", status_code=403
+            )
+        if job.org_id != identity.org_id:
+            raise AppError(code=ErrorCode.FORBIDDEN, message="Organization mismatch", status_code=403)
+    return update_job(db, job_id, payload, actor_id=current_user.id)
+
+
+@router.post("/{job_id}/reanalyze", response_model=JobView)
+def reanalyze(
+    job_id: str,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(require_permission("job", "create")),
+    identity: UserOrgRole | None = Depends(get_optional_active_identity),
+) -> Job:
+    job = db.get(Job, job_id)
+    if not job or job.deleted_at is not None:
+        raise AppError(code=ErrorCode.NOT_FOUND, message="Job not found", status_code=404)
+    if identity:
+        if identity.org.type != OrgType.PARTNER:
+            raise AppError(
+                code=ErrorCode.FORBIDDEN, message="Partner identity required", status_code=403
+            )
+        if job.org_id != identity.org_id:
+            raise AppError(code=ErrorCode.FORBIDDEN, message="Organization mismatch", status_code=403)
+    return reanalyze_job(db, job_id, actor_id=current_user.id)
 
 
 @router.post("/{job_id}/moderate", response_model=JobView)

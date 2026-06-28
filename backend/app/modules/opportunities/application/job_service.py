@@ -11,7 +11,7 @@ from app.modules.ai_operations.application.legacy_ai_service import (
     parse_job_requirements,
 )
 from app.modules.opportunities.infrastructure.models import Job
-from app.modules.opportunities.schemas import JobCreate, JobModerationRequest
+from app.modules.opportunities.schemas import JobCreate, JobModerationRequest, JobUpdate
 from app.modules.reporting.application.audit_service import write_audit
 from app.platform.database.models.base import now_utc
 from app.shared.enum import ApprovalSource, JobStatus
@@ -32,6 +32,11 @@ def create_job(db: Session, payload: JobCreate, *, actor_id: str | None = None) 
         dept_id=payload.dept_id,
         title=payload.title.strip(),
         description=payload.description.strip(),
+        requirements=payload.requirements.strip() if payload.requirements else None,
+        responsibilities=payload.responsibilities.strip() if payload.responsibilities else None,
+        benefits_text=payload.benefits_text.strip() if payload.benefits_text else None,
+        industry=payload.industry,
+        job_function=payload.job_function,
         job_type=payload.job_type,
         experience_level=payload.experience_level,
         location_type=payload.location_type,
@@ -77,6 +82,116 @@ def create_job(db: Session, payload: JobCreate, *, actor_id: str | None = None) 
         db,
         actor_id=actor_id,
         action="job.create",
+        target_resource="jobs",
+        target_id=job.id,
+        new_data={"status": job.status.value, "title": job.title},
+    )
+    db.commit()
+    db.refresh(job)
+    return job
+
+
+def create_blank_job(
+    db: Session,
+    *,
+    org_id: str,
+    dept_id: str | None = None,
+    actor_id: str | None = None,
+) -> Job:
+    description = "# New job description\n\n## Overview\n\n## Responsibilities\n\n## Requirements\n\n## Benefits\n"
+    job = Job(
+        org_id=org_id,
+        dept_id=dept_id,
+        title="New job description",
+        description=description,
+        skills=[],
+        benefits=[],
+        parsed_requirements={"source": "manual_blank"},
+        embedding=embed_text(description),
+        status=JobStatus.DRAFT,
+    )
+    db.add(job)
+    db.flush()
+    write_audit(
+        db,
+        actor_id=actor_id,
+        action="job.create_blank",
+        target_resource="jobs",
+        target_id=job.id,
+        new_data={"status": job.status.value, "title": job.title},
+    )
+    db.commit()
+    db.refresh(job)
+    return job
+
+
+def update_job(db: Session, job_id: str, payload: JobUpdate, *, actor_id: str | None = None) -> Job:
+    job = db.get(Job, job_id)
+    if not job or job.deleted_at is not None:
+        raise AppError(code=ErrorCode.NOT_FOUND, message="Job not found", status_code=404)
+    old_data = {
+        "title": job.title,
+        "description": job.description,
+        "skills": job.skills,
+        "status": job.status.value,
+    }
+    updates = payload.model_dump(exclude_unset=True)
+    for field, value in updates.items():
+        if isinstance(value, str):
+            value = value.strip()
+        setattr(job, field, value)
+    if "description" in updates and job.description:
+        job.embedding = embed_text(job.description)
+    write_audit(
+        db,
+        actor_id=actor_id,
+        action="job.update",
+        target_resource="jobs",
+        target_id=job.id,
+        old_data=old_data,
+        new_data={
+            "title": job.title,
+            "description": job.description,
+            "skills": job.skills,
+            "status": job.status.value,
+        },
+    )
+    db.commit()
+    db.refresh(job)
+    return job
+
+
+def reanalyze_job(db: Session, job_id: str, *, actor_id: str | None = None) -> Job:
+    job = db.get(Job, job_id)
+    if not job or job.deleted_at is not None:
+        raise AppError(code=ErrorCode.NOT_FOUND, message="Job not found", status_code=404)
+    approved, reasons, trace = evaluate_job_policy(job.description)
+    parsed = parse_job_requirements(job.description)
+    job.parsed_requirements = {
+        **parsed,
+        "moderation": {"approved": approved, "reasons": reasons, "trace": trace},
+    }
+    if parsed.get("skills") and not job.skills:
+        job.skills = parsed["skills"]
+    job.embedding = embed_text(job.description)
+    job.status = JobStatus.APPROVED if approved else JobStatus.PENDING_APPROVAL
+    job.approval_source = ApprovalSource.AI_AUTOMATION if approved else None
+    job.approved_by = actor_id if approved else None
+    job.approved_at = now_utc() if approved else None
+    log_ai_usage(
+        db,
+        org_id=job.org_id,
+        user_id=actor_id,
+        feature_name="job_policy_and_parse",
+        input_text=job.description,
+        output_text=str(job.parsed_requirements),
+        provider=trace.get("provider"),
+        model=trace.get("model"),
+    )
+    write_audit(
+        db,
+        actor_id=actor_id,
+        action="job.reanalyze",
         target_resource="jobs",
         target_id=job.id,
         new_data={"status": job.status.value, "title": job.title},

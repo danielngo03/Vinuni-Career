@@ -60,6 +60,17 @@ class JobCreate(BaseModel):
         return self
 
 
+class JobUpdate(BaseModel):
+    title: str | None = Field(default=None, min_length=3, max_length=255)
+    description: str | None = Field(default=None, min_length=20, max_length=50_000)
+    requirements: str | None = None
+    responsibilities: str | None = None
+    benefits_text: str | None = None
+    location_address: str | None = Field(default=None, max_length=500)
+    skills: list[str] | None = None
+    benefits: list[str] | None = None
+
+
 class JobModerationRequest(BaseModel):
     approve: bool
     reason: str | None = Field(default=None, max_length=1_000)

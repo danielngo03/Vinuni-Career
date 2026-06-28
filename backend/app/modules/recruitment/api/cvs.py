@@ -1,10 +1,20 @@
 from __future__ import annotations
 
+import logging
+from io import BytesIO
+from typing import cast
+
 from fastapi import APIRouter, Depends, File, Form, UploadFile
 from sqlalchemy import select, update
 from sqlalchemy.orm import Session
 
-from app.ai.ingestion import inspect_upload
+from app.ai.extraction.gemini_document_cv import (
+    GeminiCVExtractionError,
+    cv_extraction_to_text,
+    extract_cv_from_pdf,
+)
+from app.ai.ingestion import FileKind, inspect_upload
+from app.ai.ingestion.gatekeeper import extract_text_for_gatekeeping
 from app.modules.access.api.auth import get_current_user
 from app.modules.access.api.rbac import require_permission
 from app.modules.ai_operations.application.legacy_ai_service import mask_pii
@@ -25,6 +35,27 @@ from app.platform.database.session import get_db
 from app.shared.errors import AppError, ErrorCode
 
 router = APIRouter()
+logger = logging.getLogger(__name__)
+
+
+def _extract_full_cv_text(content: bytes, detected_kind: str) -> str:
+    if detected_kind == "pdf":
+        try:
+            from pypdf import PdfReader
+        except ImportError:
+            return extract_text_for_gatekeeping(content, "pdf")
+
+        try:
+            reader = PdfReader(BytesIO(content))
+            text = "\n".join(page.extract_text() or "" for page in reader.pages)
+        except Exception:  # noqa: BLE001
+            text = ""
+        return text or extract_text_for_gatekeeping(content, "pdf")
+
+    if detected_kind in {"docx", "text"}:
+        return extract_text_for_gatekeeping(content, cast(FileKind, detected_kind))
+
+    return ""
 
 @router.post("/mask", response_model=CVMaskResponse)
 def mask_cv(
@@ -56,13 +87,36 @@ async def inspect_cv_upload(
         metadata=decision.metadata,
     )
 
+@router.post("/blank", response_model=CVView, status_code=201)
+def create_blank_cv(
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user),
+) -> CV:
+    if not db.get(StudentProfile, current_user.id):
+        raise AppError(
+            code=ErrorCode.FORBIDDEN,
+            message="Only students with a profile can create CVs",
+            status_code=403,
+        )
+    raw_markdown = "# CV moi\n\n## Tom tat\n\n## Ky nang\n\n## Kinh nghiem\n\n## Hoc van\n"
+    return create_cv(
+        db,
+        CVCreate(
+            student_id=current_user.id,
+            title="CV moi",
+            raw_text=raw_markdown,
+            parsed_data={"raw_markdown": raw_markdown, "source": "manual_blank"},
+            is_primary=False,
+        ),
+    )
+
 @router.post("", response_model=CVView, status_code=201)
 def create_student_cv(
     payload: CVCreate,
     db: Session = Depends(get_db),
-    _: User = Depends(get_current_user),
+    current_user: User = Depends(get_current_user),
 ) -> CV:
-    return create_cv(db, payload)
+    return create_cv(db, payload.model_copy(update={"student_id": current_user.id}))
 
 @router.post("/upload", response_model=CVView, status_code=201)
 async def upload_student_cv(
@@ -89,7 +143,56 @@ async def upload_student_cv(
             message="; ".join(decision.reasons),
             status_code=400,
         )
-    raw_text = decision.extracted_text_preview or content.decode("utf-8", errors="ignore")
+
+    if decision.detected_kind == "pdf":
+        try:
+            extraction = extract_cv_from_pdf(content)
+            raw_text = cv_extraction_to_text(extraction)
+            if raw_text.strip():
+                return create_cv(
+                    db,
+                    CVCreate(
+                        student_id=current_user.id,
+                        title=title or upload.filename or "My Resume",
+                        summary=extraction.summary or None,
+                        skills=[skill.name for skill in extraction.skills],
+                        education_history=[
+                            item.model_dump(exclude_none=True) for item in extraction.education
+                        ],
+                        work_experience=[
+                            item.model_dump(exclude_none=True) for item in extraction.experiences
+                        ],
+                        certificates=[
+                            {"name": certificate} for certificate in extraction.certifications
+                        ],
+                        projects=[
+                            item.model_dump(exclude_none=True) for item in extraction.projects
+                        ],
+                        parsed_data={
+                            "gemini_extraction": extraction.model_dump(),
+                            "extraction_provider": "gemini",
+                        },
+                        raw_text=raw_text,
+                        is_primary=True,
+                    ),
+                )
+        except GeminiCVExtractionError as exc:
+            logger.info("Gemini PDF CV extraction failed: %s", exc)
+            raise AppError(
+                code=ErrorCode.UPSTREAM_UNAVAILABLE,
+                message=(
+                    "Unable to extract this PDF CV with Gemini right now. "
+                    "Please try again later."
+                ),
+                status_code=502,
+            ) from exc
+        raise AppError(
+            code=ErrorCode.BAD_REQUEST,
+            message="Gemini did not return usable CV content for this PDF.",
+            status_code=400,
+        )
+
+    raw_text = _extract_full_cv_text(content, decision.detected_kind)
     if not raw_text.strip():
         raise AppError(
             code=ErrorCode.BAD_REQUEST,
