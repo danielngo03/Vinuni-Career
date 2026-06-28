@@ -252,6 +252,13 @@ class InterviewAnswerRequest(BaseModel):
     answer: str = Field(min_length=1, max_length=10_000)
 
 
+class AnswerFeedback(BaseModel):
+    summary: str = Field(min_length=1, max_length=500)
+    tags: list[str] = Field(default_factory=list, max_length=8)
+    strengths: list[str] = Field(default_factory=list, max_length=3)
+    improvements: list[str] = Field(default_factory=list, max_length=3)
+
+
 class CandidateInterviewResponse(BaseModel):
     session_id: str
     question: str
@@ -261,13 +268,6 @@ class CandidateInterviewResponse(BaseModel):
     attempt_id: str | None = None
     feedback: AnswerFeedback | None = None
     awaiting_acceptance: bool = False
-
-
-class AnswerFeedback(BaseModel):
-    summary: str = Field(min_length=1, max_length=500)
-    tags: list[str] = Field(default_factory=list, max_length=8)
-    strengths: list[str] = Field(default_factory=list, max_length=3)
-    improvements: list[str] = Field(default_factory=list, max_length=3)
 
 
 class InterviewRuntimeContext(BaseModel):

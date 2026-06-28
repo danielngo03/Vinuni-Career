@@ -11,7 +11,7 @@ import {
   Target,
   WarningCircle,
 } from "@phosphor-icons/react";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Modal } from "@/components/ui/modal";
@@ -34,6 +34,16 @@ interface InterviewResponse {
   current_phase: InterviewPhase;
   should_end_interview: boolean;
   report: InterviewReport | null;
+  attempt_id?: string | null;
+  feedback?: AnswerFeedback | null;
+  awaiting_acceptance?: boolean;
+}
+
+interface AnswerFeedback {
+  summary: string;
+  tags: string[];
+  strengths: string[];
+  improvements: string[];
 }
 
 interface InterviewReportDimension {
@@ -78,12 +88,19 @@ interface InterviewSessionDetail extends InterviewSessionSummary {
     topic_key: string;
     question: string;
     answer: string | null;
+    feedback: AnswerFeedback | null;
+    attempts: Array<{
+      attempt_id: string;
+      answer: string;
+      feedback: AnswerFeedback;
+    }>;
   }>;
 }
 
 interface TranscriptItem {
   question: string;
   answer?: string;
+  feedback?: AnswerFeedback;
 }
 
 export function InterviewSimulatorModal({
@@ -105,6 +122,21 @@ export function InterviewSimulatorModal({
   const [selectedMode, setSelectedMode] = useState<InterviewMode>("tech_lead");
   const [history, setHistory] = useState<InterviewSessionSummary[]>([]);
   const [historyLoading, setHistoryLoading] = useState(false);
+  const [attemptId, setAttemptId] = useState<string | null>(null);
+  const [attemptedAnswer, setAttemptedAnswer] = useState("");
+  const transcriptEndRef = useRef<HTMLDivElement>(null);
+  const answerRef = useRef<HTMLTextAreaElement>(null);
+
+  useEffect(() => {
+    if (!session || session.should_end_interview) return;
+    const frame = window.requestAnimationFrame(() => {
+      transcriptEndRef.current?.scrollIntoView({
+        behavior: "smooth",
+        block: "end",
+      });
+    });
+    return () => window.cancelAnimationFrame(frame);
+  }, [attemptId, session, transcript]);
 
   useEffect(() => {
     if (!open || !job) return;
@@ -137,6 +169,8 @@ export function InterviewSimulatorModal({
       setSelectedMode("tech_lead");
       setHistory([]);
       setHistoryLoading(false);
+      setAttemptId(null);
+      setAttemptedAnswer("");
     }
     onOpenChange(nextOpen);
   }
@@ -144,6 +178,8 @@ export function InterviewSimulatorModal({
   async function start(mode: InterviewMode) {
     if (!job || !cv) return;
     setSelectedMode(mode);
+    setAttemptId(null);
+    setAttemptedAnswer("");
     setPending(true);
     try {
       const response = await apiFetch<InterviewResponse>("/ai/interviews/sessions", {
@@ -187,8 +223,24 @@ export function InterviewSimulatorModal({
         detail.turns.map((turn) => ({
           question: turn.question,
           answer: turn.answer || undefined,
+          feedback: turn.feedback || undefined,
         })),
       );
+      const latestAttempt = detail.turns.at(-1)?.attempts.at(-1);
+      if (detail.status !== "COMPLETED" && latestAttempt) {
+        setAttemptId(latestAttempt.attempt_id);
+        setAttemptedAnswer(latestAttempt.answer);
+        setTranscript((items) =>
+          items.map((item, index) =>
+            index === items.length - 1
+              ? { ...item, feedback: latestAttempt.feedback }
+              : item,
+          ),
+        );
+      } else {
+        setAttemptId(null);
+        setAttemptedAnswer("");
+      }
       setAnswer("");
     } catch (error) {
       toast.error(apiMessage(error, dictionary.common.retry));
@@ -210,13 +262,42 @@ export function InterviewSimulatorModal({
           body: JSON.stringify({ answer: content }),
         },
       );
-      setTranscript((items) => {
-        const next = items.map((item, index) =>
-          index === items.length - 1 ? { ...item, answer: content } : item,
-        );
-        return response.question ? [...next, { question: response.question }] : next;
-      });
+      setTranscript((items) =>
+        items.map((item, index) =>
+          index === items.length - 1 && response.feedback
+            ? { ...item, answer: content, feedback: response.feedback }
+            : item,
+        ),
+      );
+      setAttemptId(response.attempt_id || null);
+      setAttemptedAnswer(content);
       setAnswer("");
+    } catch (error) {
+      toast.error(apiMessage(error, dictionary.common.retry));
+    } finally {
+      setPending(false);
+    }
+  }
+
+  async function acceptAnswer() {
+    if (!session || !attemptId) return;
+    setPending(true);
+    try {
+      const response = await apiFetch<InterviewResponse>(
+        `/ai/interviews/sessions/${session.session_id}/answers/accept`,
+        {
+          method: "POST",
+          body: JSON.stringify({ attempt_id: attemptId }),
+        },
+      );
+      setTranscript((items) => {
+        const accepted = items.map((item, index) =>
+          index === items.length - 1 ? { ...item, answer: attemptedAnswer } : item,
+        );
+        return response.question ? [...accepted, { question: response.question }] : accepted;
+      });
+      setAttemptId(null);
+      setAttemptedAnswer("");
       setSession(response);
     } catch (error) {
       toast.error(apiMessage(error, dictionary.common.retry));
@@ -225,12 +306,28 @@ export function InterviewSimulatorModal({
     }
   }
 
+  function retryAnswer() {
+    setAnswer(attemptedAnswer);
+    setAttemptId(null);
+    setTranscript((items) =>
+      items.map((item, index) =>
+        index === items.length - 1
+          ? { ...item, answer: undefined, feedback: undefined }
+        : item,
+      ),
+    );
+    window.requestAnimationFrame(() => answerRef.current?.focus());
+  }
+
+  const latestFeedback = transcript.at(-1)?.feedback;
+
   return (
     <Modal
       open={open}
       onOpenChange={handleOpenChange}
       title="Mô phỏng phỏng vấn"
       description={job ? `Vị trí: ${job.title}` : undefined}
+      contentClassName="max-w-6xl"
     >
       {!session ? (
         <div className="space-y-5">
@@ -280,7 +377,7 @@ export function InterviewSimulatorModal({
           />
         </div>
       ) : (
-        <div className="space-y-5">
+        <div className="space-y-4">
           <div className="border-b pb-3 text-xs">
             <span className="font-semibold uppercase text-primary">
               {phaseLabel(session.current_phase, selectedMode)}
@@ -289,21 +386,106 @@ export function InterviewSimulatorModal({
           {session.should_end_interview && session.report ? (
             <InterviewReportView report={session.report} />
           ) : (
-            <div className="max-h-[48vh] space-y-4 overflow-y-auto pr-1">
-              {transcript.map((item, index) => (
-                <div key={`${index}-${item.question}`} className="space-y-2">
-                  <div className="border-l-2 border-primary pl-3">
-                    <p className="text-xs font-semibold text-muted">Người phỏng vấn</p>
-                    <p className="mt-1 text-sm leading-6">{item.question}</p>
-                  </div>
-                  {item.answer ? (
-                    <div className="ml-5 bg-slate-50 p-3">
-                      <p className="text-xs font-semibold text-muted">Bạn</p>
-                      <p className="mt-1 whitespace-pre-wrap text-sm leading-6">{item.answer}</p>
-                    </div>
-                  ) : null}
+            <div className="grid h-[68vh] min-h-0 grid-cols-[minmax(0,2fr)_minmax(20rem,1fr)] gap-5">
+              <section className="flex min-h-0 flex-col rounded-2xl border bg-white">
+                <div className="border-b px-5 py-3">
+                  <p className="text-sm font-semibold">Nội dung phỏng vấn</p>
+                  <p className="mt-0.5 text-xs text-muted">
+                    Câu {transcript.length} · {phaseLabel(session.current_phase, selectedMode)}
+                  </p>
                 </div>
-              ))}
+                <div className="min-h-0 flex-1 space-y-5 overflow-y-auto px-5 py-4">
+                  {transcript.map((item, index) => (
+                    <div key={`${index}-${item.question}`} className="space-y-2">
+                      <div className="border-l-2 border-primary pl-3">
+                        <p className="text-xs font-semibold text-muted">Người phỏng vấn</p>
+                        <p className="mt-1 whitespace-pre-wrap text-sm leading-6">{item.question}</p>
+                      </div>
+                      {item.answer ? (
+                        <div className="ml-5 rounded-xl bg-slate-50 p-3">
+                          <p className="text-xs font-semibold text-muted">Bạn</p>
+                          <p className="mt-1 whitespace-pre-wrap text-sm leading-6">{item.answer}</p>
+                        </div>
+                      ) : null}
+                      {item.feedback && index < transcript.length - 1 ? (
+                        <div className="ml-5 flex flex-wrap gap-1.5">
+                          {item.feedback.tags.map((tag) => (
+                            <span
+                              key={tag}
+                              className="rounded-full bg-primary/5 px-2.5 py-1 text-xs font-medium text-primary"
+                            >
+                              {tag}
+                            </span>
+                          ))}
+                        </div>
+                      ) : null}
+                    </div>
+                  ))}
+                  <div ref={transcriptEndRef} aria-hidden="true" />
+                </div>
+                {!attemptId ? (
+                  <form onSubmit={submitAnswer} className="space-y-3 border-t bg-white p-4">
+                    <textarea
+                      ref={answerRef}
+                      value={answer}
+                      onChange={(event) => setAnswer(event.target.value)}
+                      placeholder="Nhập câu trả lời của bạn..."
+                      className="focus-ring min-h-24 w-full resize-none rounded-lg border p-3 text-sm"
+                      maxLength={10000}
+                      disabled={pending}
+                      autoFocus
+                    />
+                    <Button type="submit" className="w-full" disabled={pending || !answer.trim()}>
+                      {pending ? (
+                        <SpinnerGap className="size-4 animate-spin" />
+                      ) : (
+                        <PaperPlaneTilt className="size-4" />
+                      )}
+                      Gửi câu trả lời
+                    </Button>
+                  </form>
+                ) : null}
+              </section>
+
+              <aside className="flex min-h-0 flex-col rounded-2xl border bg-slate-50/70">
+                <div className="border-b px-5 py-3">
+                  <p className="text-sm font-semibold">Coaching</p>
+                  <p className="mt-0.5 text-xs text-muted">Nhận xét cho câu trả lời hiện tại</p>
+                </div>
+                <div className="min-h-0 flex-1 overflow-y-auto p-4">
+                  {latestFeedback ? (
+                    <AnswerFeedbackCard feedback={latestFeedback} />
+                  ) : (
+                    <div className="rounded-xl border border-dashed bg-white p-4">
+                      <p className="text-sm font-semibold">Hãy trả lời theo trải nghiệm của bạn</p>
+                      <p className="mt-2 text-sm leading-6 text-muted">
+                        Sau khi gửi, hệ thống sẽ chỉ ra điểm tốt, phần chưa sâu và cho phép bạn thử lại.
+                      </p>
+                    </div>
+                  )}
+                </div>
+                {attemptId ? (
+                  <div className="space-y-3 border-t bg-white p-4">
+                    <Button type="button" className="w-full" disabled={pending} onClick={acceptAnswer}>
+                      {pending ? (
+                        <SpinnerGap className="size-4 animate-spin" />
+                      ) : (
+                        <ArrowRight className="size-4" />
+                      )}
+                      Dùng câu trả lời này và tiếp tục
+                    </Button>
+                    <Button
+                      type="button"
+                      className="w-full"
+                      variant="outline"
+                      disabled={pending}
+                      onClick={retryAnswer}
+                    >
+                      Thử trả lời lại
+                    </Button>
+                  </div>
+                ) : null}
+              </aside>
             </div>
           )}
           {session.should_end_interview ? (
@@ -313,30 +495,36 @@ export function InterviewSimulatorModal({
                 Đóng
               </Button>
             </div>
-          ) : (
-            <form onSubmit={submitAnswer} className="space-y-3 border-t pt-4">
-              <textarea
-                value={answer}
-                onChange={(event) => setAnswer(event.target.value)}
-                placeholder="Nhập câu trả lời của bạn..."
-                className="focus-ring min-h-28 w-full resize-y rounded-lg border p-3 text-sm"
-                maxLength={10000}
-                disabled={pending}
-                autoFocus
-              />
-              <Button type="submit" className="w-full" disabled={pending || !answer.trim()}>
-                {pending ? (
-                  <SpinnerGap className="size-4 animate-spin" />
-                ) : (
-                  <PaperPlaneTilt className="size-4" />
-                )}
-                Gửi câu trả lời
-              </Button>
-            </form>
-          )}
+          ) : null}
         </div>
       )}
     </Modal>
+  );
+}
+
+function AnswerFeedbackCard({ feedback }: { feedback: AnswerFeedback }) {
+  return (
+    <div className="rounded-xl border border-primary/20 bg-primary/5 p-3">
+      <p className="text-xs font-semibold uppercase text-primary">Nhận xét câu trả lời</p>
+      <div className="mt-2 flex flex-wrap gap-2">
+        {feedback.tags.map((tag) => (
+          <span key={tag} className="rounded-full bg-white px-2.5 py-1 text-xs font-medium text-primary ring-1 ring-primary/15">
+            {tag}
+          </span>
+        ))}
+      </div>
+      <p className="mt-3 text-sm leading-6 text-muted">{feedback.summary}</p>
+      {feedback.strengths.length ? (
+        <p className="mt-2 text-xs leading-5 text-emerald-700">
+          Điểm tốt: {feedback.strengths.join(" · ")}
+        </p>
+      ) : null}
+      {feedback.improvements.length ? (
+        <p className="mt-1 text-xs leading-5 text-amber-700">
+          Có thể bổ sung: {feedback.improvements.join(" · ")}
+        </p>
+      ) : null}
+    </div>
   );
 }
 

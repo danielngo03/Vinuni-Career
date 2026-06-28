@@ -2080,15 +2080,20 @@
         ],
         "summary": "Start Interview",
         "operationId": "start_interview_api_v1_ai_interviews_sessions_post",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
         "requestBody": {
+          "required": true,
           "content": {
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/StartInterviewRequest"
               }
             }
-          },
-          "required": true
+          }
         },
         "responses": {
           "201": {
@@ -2111,12 +2116,151 @@
               }
             }
           }
-        },
+        }
+      },
+      "get": {
+        "tags": [
+          "ai-interviews",
+          "ai-interviews"
+        ],
+        "summary": "List Interview Sessions",
+        "operationId": "list_interview_sessions_api_v1_ai_interviews_sessions_get",
         "security": [
           {
             "HTTPBearer": []
           }
-        ]
+        ],
+        "parameters": [
+          {
+            "name": "job_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Job Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/InterviewSessionSummary"
+                  },
+                  "title": "Response List Interview Sessions Api V1 Ai Interviews Sessions Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/ai/interviews/sessions/{session_id}": {
+      "get": {
+        "tags": [
+          "ai-interviews",
+          "ai-interviews"
+        ],
+        "summary": "Get Interview Session",
+        "operationId": "get_interview_session_api_v1_ai_interviews_sessions__session_id__get",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "session_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Session Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InterviewSessionDetail"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ai-interviews",
+          "ai-interviews"
+        ],
+        "summary": "Delete Interview Session",
+        "operationId": "delete_interview_session_api_v1_ai_interviews_sessions__session_id__delete",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "session_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Session Id"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successful Response"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
       }
     },
     "/api/v1/ai/interviews/sessions/{session_id}/answers": {
@@ -2149,6 +2293,64 @@
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/InterviewAnswerRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CandidateInterviewResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/ai/interviews/sessions/{session_id}/answers/accept": {
+      "post": {
+        "tags": [
+          "ai-interviews",
+          "ai-interviews"
+        ],
+        "summary": "Accept Interview Answer",
+        "operationId": "accept_interview_answer_api_v1_ai_interviews_sessions__session_id__answers_accept_post",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "session_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Session Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AcceptInterviewAnswerRequest"
               }
             }
           }
@@ -2336,6 +2538,180 @@
         }
       }
     },
+    "/api/v1/jobs/blank": {
+      "post": {
+        "tags": [
+          "opportunities"
+        ],
+        "summary": "Post Blank Job",
+        "operationId": "post_blank_job_api_v1_jobs_blank_post",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "X-Identity-Id",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Identity-Id"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JobView"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/jobs/analyze-upload": {
+      "post": {
+        "tags": [
+          "opportunities"
+        ],
+        "summary": "Analyze Job Upload",
+        "operationId": "analyze_job_upload_api_v1_jobs_analyze_upload_post",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "X-Identity-Id",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Identity-Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_analyze_job_upload_api_v1_jobs_analyze_upload_post"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JDExtraction"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/jobs/schedules/clock": {
+      "get": {
+        "tags": [
+          "opportunities"
+        ],
+        "summary": "Get Schedule Clock",
+        "operationId": "get_schedule_clock_api_v1_jobs_schedules_clock_get",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "X-Identity-Id",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Identity-Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true,
+                  "title": "Response Get Schedule Clock Api V1 Jobs Schedules Clock Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/jobs/page": {
       "get": {
         "tags": [
@@ -2489,6 +2865,479 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/JobView"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "opportunities"
+        ],
+        "summary": "Patch Job",
+        "operationId": "patch_job_api_v1_jobs__job_id__patch",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "job_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Job Id"
+            }
+          },
+          {
+            "name": "X-Identity-Id",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Identity-Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/JobUpdate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JobView"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/jobs/{job_id}/reanalyze": {
+      "post": {
+        "tags": [
+          "opportunities"
+        ],
+        "summary": "Reanalyze",
+        "operationId": "reanalyze_api_v1_jobs__job_id__reanalyze_post",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "job_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Job Id"
+            }
+          },
+          {
+            "name": "X-Identity-Id",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Identity-Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JobView"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/jobs/{job_id}/actions": {
+      "post": {
+        "tags": [
+          "opportunities"
+        ],
+        "summary": "Run Job Action",
+        "operationId": "run_job_action_api_v1_jobs__job_id__actions_post",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "job_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Job Id"
+            }
+          },
+          {
+            "name": "X-Identity-Id",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Identity-Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/JobActionRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JobView"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/jobs/{job_id}/schedules": {
+      "get": {
+        "tags": [
+          "opportunities"
+        ],
+        "summary": "List Schedules",
+        "operationId": "list_schedules_api_v1_jobs__job_id__schedules_get",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "job_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Job Id"
+            }
+          },
+          {
+            "name": "X-Identity-Id",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Identity-Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/JobScheduleView"
+                  },
+                  "title": "Response List Schedules Api V1 Jobs  Job Id  Schedules Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "opportunities"
+        ],
+        "summary": "Create Schedule",
+        "operationId": "create_schedule_api_v1_jobs__job_id__schedules_post",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "job_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Job Id"
+            }
+          },
+          {
+            "name": "X-Identity-Id",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Identity-Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/JobScheduleCreate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JobScheduleView"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/jobs/{job_id}/schedules/{schedule_id}": {
+      "delete": {
+        "tags": [
+          "opportunities"
+        ],
+        "summary": "Cancel Schedule",
+        "operationId": "cancel_schedule_api_v1_jobs__job_id__schedules__schedule_id__delete",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "job_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Job Id"
+            }
+          },
+          {
+            "name": "schedule_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Schedule Id"
+            }
+          },
+          {
+            "name": "X-Identity-Id",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Identity-Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JobScheduleView"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/jobs/schedules/run-due": {
+      "post": {
+        "tags": [
+          "opportunities"
+        ],
+        "summary": "Run Due Schedules",
+        "operationId": "run_due_schedules_api_v1_jobs_schedules_run_due_post",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "X-Identity-Id",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Identity-Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true,
+                  "title": "Response Run Due Schedules Api V1 Jobs Schedules Run Due Post"
                 }
               }
             }
@@ -3311,6 +4160,32 @@
             }
           }
         }
+      }
+    },
+    "/api/v1/cvs/blank": {
+      "post": {
+        "tags": [
+          "recruitment"
+        ],
+        "summary": "Create Blank Cv",
+        "operationId": "create_blank_cv_api_v1_cvs_blank_post",
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CVView"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
       }
     },
     "/api/v1/cvs": {
@@ -5203,6 +6078,21 @@
         ],
         "title": "APIMessage"
       },
+      "AcceptInterviewAnswerRequest": {
+        "properties": {
+          "attempt_id": {
+            "type": "string",
+            "maxLength": 36,
+            "minLength": 1,
+            "title": "Attempt Id"
+          }
+        },
+        "type": "object",
+        "required": [
+          "attempt_id"
+        ],
+        "title": "AcceptInterviewAnswerRequest"
+      },
       "AgentCapabilityResponse": {
         "properties": {
           "task_type": {
@@ -5236,6 +6126,45 @@
         ],
         "title": "AgentCapabilityResponse"
       },
+      "AnswerFeedback": {
+        "properties": {
+          "summary": {
+            "type": "string",
+            "maxLength": 500,
+            "minLength": 1,
+            "title": "Summary"
+          },
+          "tags": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "maxItems": 8,
+            "title": "Tags"
+          },
+          "strengths": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "maxItems": 3,
+            "title": "Strengths"
+          },
+          "improvements": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "maxItems": 3,
+            "title": "Improvements"
+          }
+        },
+        "type": "object",
+        "required": [
+          "summary"
+        ],
+        "title": "AnswerFeedback"
+      },
       "ApplicationStatus": {
         "type": "string",
         "enum": [
@@ -5250,6 +6179,20 @@
           "DECLINED"
         ],
         "title": "ApplicationStatus"
+      },
+      "Body_analyze_job_upload_api_v1_jobs_analyze_upload_post": {
+        "properties": {
+          "file": {
+            "type": "string",
+            "contentMediaType": "application/octet-stream",
+            "title": "File"
+          }
+        },
+        "type": "object",
+        "required": [
+          "file"
+        ],
+        "title": "Body_analyze_job_upload_api_v1_jobs_analyze_upload_post"
       },
       "Body_inspect_cv_upload_api_v1_cvs_inspect_post": {
         "properties": {
@@ -5696,16 +6639,33 @@
       "CVUpdate": {
         "properties": {
           "title": {
-            "type": "string",
-            "maxLength": 255,
-            "minLength": 1,
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 255,
+                "minLength": 1
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "Title"
+          },
+          "raw_text": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 80000,
+                "minLength": 1
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Raw Text"
           }
         },
         "type": "object",
-        "required": [
-          "title"
-        ],
         "title": "CVUpdate"
       },
       "CVView": {
@@ -5920,6 +6880,32 @@
                 "type": "null"
               }
             ]
+          },
+          "attempt_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Attempt Id"
+          },
+          "feedback": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/AnswerFeedback"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "awaiting_acceptance": {
+            "type": "boolean",
+            "title": "Awaiting Acceptance",
+            "default": false
           }
         },
         "type": "object",
@@ -7385,6 +8371,15 @@
       },
       "InterviewConfig": {
         "properties": {
+          "interview_mode": {
+            "type": "string",
+            "enum": [
+              "tech_lead",
+              "technical_check"
+            ],
+            "title": "Interview Mode",
+            "default": "tech_lead"
+          },
           "language": {
             "type": "string",
             "maxLength": 20,
@@ -7443,21 +8438,21 @@
             "maximum": 20.0,
             "minimum": 1.0,
             "title": "Min Questions",
-            "default": 8
+            "default": 3
           },
           "max_questions": {
             "type": "integer",
             "maximum": 40.0,
             "minimum": 1.0,
             "title": "Max Questions",
-            "default": 18
+            "default": 12
           },
           "max_follow_ups_per_topic": {
             "type": "integer",
             "maximum": 5.0,
             "minimum": 0.0,
             "title": "Max Follow Ups Per Topic",
-            "default": 3
+            "default": 2
           },
           "min_communication_samples": {
             "type": "integer",
@@ -7608,6 +8603,167 @@
         ],
         "title": "InterviewReport"
       },
+      "InterviewSessionDetail": {
+        "properties": {
+          "session_id": {
+            "type": "string",
+            "title": "Session Id"
+          },
+          "job_id": {
+            "type": "string",
+            "title": "Job Id"
+          },
+          "cv_id": {
+            "type": "string",
+            "title": "Cv Id"
+          },
+          "interview_mode": {
+            "type": "string",
+            "title": "Interview Mode"
+          },
+          "status": {
+            "type": "string",
+            "title": "Status"
+          },
+          "current_phase": {
+            "type": "string",
+            "title": "Current Phase"
+          },
+          "question_count": {
+            "type": "integer",
+            "title": "Question Count"
+          },
+          "job_title": {
+            "type": "string",
+            "title": "Job Title"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At"
+          },
+          "updated_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Updated At"
+          },
+          "has_report": {
+            "type": "boolean",
+            "title": "Has Report"
+          },
+          "report": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Report"
+          },
+          "turns": {
+            "items": {
+              "$ref": "#/components/schemas/InterviewTurnView"
+            },
+            "type": "array",
+            "title": "Turns"
+          }
+        },
+        "type": "object",
+        "required": [
+          "session_id",
+          "job_id",
+          "cv_id",
+          "interview_mode",
+          "status",
+          "current_phase",
+          "question_count",
+          "job_title",
+          "created_at",
+          "has_report"
+        ],
+        "title": "InterviewSessionDetail"
+      },
+      "InterviewSessionSummary": {
+        "properties": {
+          "session_id": {
+            "type": "string",
+            "title": "Session Id"
+          },
+          "job_id": {
+            "type": "string",
+            "title": "Job Id"
+          },
+          "cv_id": {
+            "type": "string",
+            "title": "Cv Id"
+          },
+          "interview_mode": {
+            "type": "string",
+            "title": "Interview Mode"
+          },
+          "status": {
+            "type": "string",
+            "title": "Status"
+          },
+          "current_phase": {
+            "type": "string",
+            "title": "Current Phase"
+          },
+          "question_count": {
+            "type": "integer",
+            "title": "Question Count"
+          },
+          "job_title": {
+            "type": "string",
+            "title": "Job Title"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At"
+          },
+          "updated_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Updated At"
+          },
+          "has_report": {
+            "type": "boolean",
+            "title": "Has Report"
+          }
+        },
+        "type": "object",
+        "required": [
+          "session_id",
+          "job_id",
+          "cv_id",
+          "interview_mode",
+          "status",
+          "current_phase",
+          "question_count",
+          "job_title",
+          "created_at",
+          "has_report"
+        ],
+        "title": "InterviewSessionSummary"
+      },
       "InterviewStatus": {
         "type": "string",
         "enum": [
@@ -7617,6 +8773,63 @@
           "CANCELLED"
         ],
         "title": "InterviewStatus"
+      },
+      "InterviewTurnView": {
+        "properties": {
+          "sequence": {
+            "type": "integer",
+            "title": "Sequence"
+          },
+          "phase": {
+            "type": "string",
+            "title": "Phase"
+          },
+          "topic_key": {
+            "type": "string",
+            "title": "Topic Key"
+          },
+          "question": {
+            "type": "string",
+            "title": "Question"
+          },
+          "answer": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Answer"
+          },
+          "feedback": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/AnswerFeedback"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "attempts": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "type": "array",
+            "title": "Attempts"
+          }
+        },
+        "type": "object",
+        "required": [
+          "sequence",
+          "phase",
+          "topic_key",
+          "question"
+        ],
+        "title": "InterviewTurnView"
       },
       "InterviewType": {
         "type": "string",
@@ -7774,6 +8987,114 @@
           "notes"
         ],
         "title": "InterviewView"
+      },
+      "JDExtraction": {
+        "properties": {
+          "document_type": {
+            "type": "string",
+            "const": "job_description",
+            "title": "Document Type",
+            "default": "job_description"
+          },
+          "title": {
+            "type": "string",
+            "maxLength": 200,
+            "title": "Title",
+            "default": ""
+          },
+          "description": {
+            "type": "string",
+            "maxLength": 5000,
+            "title": "Description",
+            "default": ""
+          },
+          "raw_text": {
+            "type": "string",
+            "maxLength": 80000,
+            "title": "Raw Text",
+            "default": ""
+          },
+          "location": {
+            "type": "string",
+            "maxLength": 500,
+            "title": "Location",
+            "default": ""
+          },
+          "required_skills": {
+            "items": {
+              "$ref": "#/components/schemas/SkillEvidence"
+            },
+            "type": "array",
+            "maxItems": 80,
+            "title": "Required Skills"
+          },
+          "nice_to_have_skills": {
+            "items": {
+              "$ref": "#/components/schemas/SkillEvidence"
+            },
+            "type": "array",
+            "maxItems": 80,
+            "title": "Nice To Have Skills"
+          },
+          "responsibilities": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "maxItems": 60,
+            "title": "Responsibilities"
+          },
+          "seniority": {
+            "type": "string",
+            "enum": [
+              "intern",
+              "junior",
+              "mid",
+              "senior",
+              "lead",
+              "unknown"
+            ],
+            "title": "Seniority",
+            "default": "unknown"
+          },
+          "employment_type": {
+            "type": "string",
+            "maxLength": 80,
+            "title": "Employment Type",
+            "default": ""
+          },
+          "compliance_flags": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "maxItems": 40,
+            "title": "Compliance Flags"
+          },
+          "confidence": {
+            "type": "number",
+            "maximum": 1.0,
+            "minimum": 0.0,
+            "title": "Confidence",
+            "default": 0.0
+          }
+        },
+        "type": "object",
+        "title": "JDExtraction"
+      },
+      "JobActionRequest": {
+        "properties": {
+          "action": {
+            "type": "string",
+            "pattern": "^(PUBLISH|OPEN|CLOSE)$",
+            "title": "Action"
+          }
+        },
+        "type": "object",
+        "required": [
+          "action"
+        ],
+        "title": "JobActionRequest"
       },
       "JobApplicationCreate": {
         "properties": {
@@ -8129,6 +9450,18 @@
               }
             ],
             "title": "Max Openings"
+          },
+          "parsed_requirements": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Parsed Requirements"
           }
         },
         "type": "object",
@@ -8251,6 +9584,97 @@
         ],
         "title": "JobPolicyResponse"
       },
+      "JobScheduleCreate": {
+        "properties": {
+          "action": {
+            "type": "string",
+            "pattern": "^(PUBLISH|OPEN|CLOSE)$",
+            "title": "Action"
+          },
+          "run_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Run At"
+          }
+        },
+        "type": "object",
+        "required": [
+          "action",
+          "run_at"
+        ],
+        "title": "JobScheduleCreate"
+      },
+      "JobScheduleView": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "job_id": {
+            "type": "string",
+            "title": "Job Id"
+          },
+          "action": {
+            "type": "string",
+            "title": "Action"
+          },
+          "run_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Run At"
+          },
+          "status": {
+            "type": "string",
+            "title": "Status"
+          },
+          "requested_by": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Requested By"
+          },
+          "executed_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Executed At"
+          },
+          "error_message": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Error Message"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "job_id",
+          "action",
+          "run_at",
+          "status",
+          "requested_by",
+          "executed_at",
+          "error_message"
+        ],
+        "title": "JobScheduleView"
+      },
       "JobStatus": {
         "type": "string",
         "enum": [
@@ -8271,6 +9695,158 @@
           "FREELANCE"
         ],
         "title": "JobType"
+      },
+      "JobUpdate": {
+        "properties": {
+          "title": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 255,
+                "minLength": 3
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Title"
+          },
+          "description": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 50000,
+                "minLength": 20
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Description"
+          },
+          "requirements": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Requirements"
+          },
+          "responsibilities": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Responsibilities"
+          },
+          "benefits_text": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Benefits Text"
+          },
+          "location_address": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 500
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Location Address"
+          },
+          "skills": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Skills"
+          },
+          "benefits": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Benefits"
+          },
+          "application_deadline": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Application Deadline"
+          },
+          "is_active": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Is Active"
+          },
+          "max_openings": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 1.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Max Openings"
+          },
+          "parsed_requirements": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Parsed Requirements"
+          }
+        },
+        "type": "object",
+        "title": "JobUpdate"
       },
       "JobView": {
         "properties": {
@@ -8511,6 +10087,31 @@
           },
           "status": {
             "$ref": "#/components/schemas/JobStatus"
+          },
+          "match_score": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Match Score"
+          },
+          "matched_skills": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Matched Skills"
+          },
+          "missing_skills": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Missing Skills"
           }
         },
         "type": "object",
@@ -9970,6 +11571,39 @@
           "ttl_seconds"
         ],
         "title": "SignedUrlResponse"
+      },
+      "SkillEvidence": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "maxLength": 80,
+            "minLength": 1,
+            "title": "Name"
+          },
+          "evidence": {
+            "type": "string",
+            "maxLength": 500,
+            "title": "Evidence",
+            "default": ""
+          },
+          "proficiency": {
+            "type": "string",
+            "enum": [
+              "beginner",
+              "intermediate",
+              "advanced",
+              "expert",
+              "unknown"
+            ],
+            "title": "Proficiency",
+            "default": "unknown"
+          }
+        },
+        "type": "object",
+        "required": [
+          "name"
+        ],
+        "title": "SkillEvidence"
       },
       "StartInterviewRequest": {
         "properties": {
