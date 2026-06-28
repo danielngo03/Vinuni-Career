@@ -15,6 +15,11 @@ async function proxy(
 ) {
   const { path } = await context.params;
   const incomingUrl = new URL(request.url);
+  const targetPath = path.join("/");
+  const normalizedPath =
+    incomingUrl.pathname.endsWith("/") && !targetPath.endsWith("/")
+      ? `${targetPath}/`
+      : targetPath;
   const cookieHeader = request.headers.get("cookie") || "";
   const access = cookieHeader.match(new RegExp(`${ACCESS_COOKIE}=([^;]+)`))?.[1];
   const refresh = cookieHeader.match(new RegExp(`${REFRESH_COOKIE}=([^;]+)`))?.[1];
@@ -33,7 +38,7 @@ async function proxy(
   const hasBody = !["GET", "HEAD"].includes(method);
   const requestBody = hasBody ? await request.arrayBuffer() : undefined;
   let response = await fetch(
-    `${API_URL}/${path.join("/")}${incomingUrl.search}`,
+    `${API_URL}/${normalizedPath}${incomingUrl.search}`,
     {
       method,
       headers,
@@ -53,7 +58,7 @@ async function proxy(
       refreshed = (await refreshResponse.json()) as TokenResponse;
       headers.set("Authorization", `Bearer ${refreshed.access_token}`);
       response = await fetch(
-        `${API_URL}/${path.join("/")}${incomingUrl.search}`,
+        `${API_URL}/${normalizedPath}${incomingUrl.search}`,
         {
           method,
           headers,
