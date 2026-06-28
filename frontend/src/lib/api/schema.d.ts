@@ -2554,6 +2554,12 @@ export interface components {
                 [key: string]: unknown;
             };
             status: components["schemas"]["JobStatus"];
+            /** Match Score */
+            match_score?: number | null;
+            /** Matched Skills */
+            matched_skills?: string[];
+            /** Missing Skills */
+            missing_skills?: string[];
         };
         /**
          * LocationType

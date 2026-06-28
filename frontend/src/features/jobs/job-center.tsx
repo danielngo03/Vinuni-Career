@@ -45,6 +45,7 @@ export function JobCenter({
   const [workingId, setWorkingId] = useState<string | null>(null);
   const [createOpen, setCreateOpen] = useState(false);
   const [interviewJob, setInterviewJob] = useState<Job | null>(null);
+  const [detailJob, setDetailJob] = useState<Job | null>(null);
   const [selectedJobId, setSelectedJobId] = useState<string | null>(null);
   const [partnerDetailTab, setPartnerDetailTab] = useState<PartnerJobTab>("content");
   const [analysisDraft, setAnalysisDraft] = useState<JobAnalysisDraft>(() =>
@@ -86,14 +87,18 @@ export function JobCenter({
 
   const filtered = useMemo(() => {
     const normalized = query.trim().toLowerCase();
-    if (!normalized) return jobs;
-    return jobs.filter((job) =>
-      [job.title, job.description, ...(job.skills || [])]
-        .join(" ")
-        .toLowerCase()
-        .includes(normalized),
-    );
-  }, [jobs, query]);
+    const results = normalized
+      ? jobs.filter((job) =>
+          [job.title, job.description, ...(job.skills || [])]
+            .join(" ")
+            .toLowerCase()
+            .includes(normalized),
+        )
+      : jobs;
+    return portal === "student"
+      ? [...results].sort((a, b) => (b.match_score ?? -1) - (a.match_score ?? -1))
+      : results;
+  }, [jobs, portal, query]);
 
   const selectedJob = useMemo(
     () => jobs.find((job) => job.id === selectedJobId) || jobs[0] || null,
@@ -407,7 +412,20 @@ export function JobCenter({
               {filtered.map((job) => (
                 <article
                   key={job.id}
-                  className="group grid gap-4 rounded-2xl border p-4 transition-all hover:-translate-y-0.5 hover:border-blue-200 hover:shadow-[0_14px_30px_-26px_rgba(15,92,229,.8)] md:grid-cols-[minmax(0,1fr)_auto] md:items-center"
+                  role={portal === "student" ? "button" : undefined}
+                  tabIndex={portal === "student" ? 0 : undefined}
+                  onClick={portal === "student" ? () => setDetailJob(job) : undefined}
+                  onKeyDown={portal === "student" ? (event) => {
+                    if (event.key === "Enter" || event.key === " ") {
+                      event.preventDefault();
+                      setDetailJob(job);
+                    }
+                  } : undefined}
+                  className={`group grid gap-4 rounded-2xl border p-4 transition-all hover:-translate-y-0.5 hover:border-blue-200 hover:shadow-[0_14px_30px_-26px_rgba(15,92,229,.8)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 md:items-center ${
+                    portal === "student"
+                      ? "md:grid-cols-[minmax(0,1fr)_9rem_auto]"
+                      : "md:grid-cols-[minmax(0,1fr)_auto]"
+                  }`}
                 >
                   <div className="min-w-0">
                     <div className="flex flex-wrap items-center gap-2">
@@ -440,13 +458,26 @@ export function JobCenter({
                       ))}
                     </div>
                   </div>
+                  {portal === "student" ? (
+                    <div className="flex md:justify-center">
+                      {typeof job.match_score === "number" ? (
+                        <div className="min-w-28 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 px-4 py-2 text-center text-white shadow-sm">
+                          <div className="text-xl font-bold leading-none">{Math.round(job.match_score)}%</div>
+                          <div className="mt-1 text-xs font-medium text-blue-50">phù hợp</div>
+                        </div>
+                      ) : null}
+                    </div>
+                  ) : null}
                   <div className="flex flex-wrap justify-end gap-2">
                     {portal === "student" ? (
                       <>
                         <Button
                           variant="outline"
                           size="icon"
-                          onClick={() => bookmark(job.id)}
+                          onClick={(event) => {
+                            event.stopPropagation();
+                            void bookmark(job.id);
+                          }}
                           aria-label={dictionary.jobs.save}
                           disabled={workingId === job.id}
                         >
@@ -454,14 +485,20 @@ export function JobCenter({
                         </Button>
                         <Button
                           variant="outline"
-                          onClick={() => setInterviewJob(job)}
+                          onClick={(event) => {
+                            event.stopPropagation();
+                            setInterviewJob(job);
+                          }}
                           disabled={workingId === job.id}
                         >
                           <ChatCircleText className="size-4" />
                           Phỏng vấn thử
                         </Button>
                         <Button
-                          onClick={() => apply(job.id)}
+                          onClick={(event) => {
+                            event.stopPropagation();
+                            void apply(job.id);
+                          }}
                           disabled={workingId === job.id}
                         >
                           {workingId === job.id ? (
@@ -512,9 +549,109 @@ export function JobCenter({
         job={interviewJob}
         cv={cvs.find((item) => item.is_primary) || cvs[0] || null}
       />
+      <StudentJobDetailModal
+        job={detailJob}
+        open={Boolean(detailJob)}
+        working={detailJob ? workingId === detailJob.id : false}
+        onOpenChange={(open) => {
+          if (!open) setDetailJob(null);
+        }}
+        onBookmark={(job) => void bookmark(job.id)}
+        onInterview={setInterviewJob}
+        onApply={(job) => void apply(job.id)}
+      />
     </>
   );
 }
+
+function StudentJobDetailModal({
+  job, open, working, onOpenChange, onBookmark, onInterview, onApply,
+}: {
+  job: Job | null;
+  open: boolean;
+  working: boolean;
+  onOpenChange: (open: boolean) => void;
+  onBookmark: (job: Job) => void;
+  onInterview: (job: Job) => void;
+  onApply: (job: Job) => void;
+}) {
+  if (!job) return null;
+  const salary = job.salary_min || job.salary_max
+    ? `${job.salary_min?.toLocaleString() || "0"} – ${job.salary_max?.toLocaleString() || "∞"} ${job.currency}`
+    : "Thỏa thuận";
+
+  return (
+    <Modal
+      open={open}
+      onOpenChange={onOpenChange}
+      title={job.title}
+      description={`${job.location_address || "Chưa cập nhật địa điểm"} · ${salary}`}
+      contentClassName="max-w-3xl"
+    >
+      {typeof job.match_score === "number" ? (
+        <div className="mb-6 rounded-2xl border border-blue-200 bg-blue-50 p-4">
+          <div className="flex items-center justify-between gap-4">
+            <div>
+              <p className="text-sm font-medium text-blue-700">Mức độ phù hợp với CV chính</p>
+              <p className="mt-1 text-3xl font-bold text-blue-700">{Math.round(job.match_score)}%</p>
+            </div>
+            <div className="h-3 min-w-32 flex-1 overflow-hidden rounded-full bg-blue-100">
+              <div
+                className="h-full rounded-full bg-gradient-to-r from-blue-500 to-indigo-600"
+                style={{ width: `${Math.max(0, Math.min(100, job.match_score))}%` }}
+              />
+            </div>
+          </div>
+          {job.matched_skills?.length ? (
+            <p className="mt-3 text-sm text-blue-800">Kỹ năng đã khớp: {job.matched_skills.join(", ")}</p>
+          ) : null}
+          {job.missing_skills?.length ? (
+            <p className="mt-1 text-sm text-slate-600">Nên bổ sung: {job.missing_skills.join(", ")}</p>
+          ) : null}
+        </div>
+      ) : null}
+
+      <div className="grid gap-5 text-sm leading-6">
+        <JobDetailSection title="Mô tả công việc" value={job.description} />
+        <JobDetailSection title="Yêu cầu" value={job.requirements} />
+        <JobDetailSection title="Trách nhiệm" value={job.responsibilities} />
+        <JobDetailSection title="Quyền lợi" value={job.benefits_text} />
+        {job.skills?.length ? (
+          <div>
+            <h4 className="mb-2 font-semibold">Kỹ năng</h4>
+            <div className="flex flex-wrap gap-2">
+              {job.skills.map((skill) => <Badge key={skill} tone="blue">{skill}</Badge>)}
+            </div>
+          </div>
+        ) : null}
+      </div>
+
+      <div className="mt-7 flex flex-wrap justify-end gap-2 border-t pt-5">
+        <Button variant="outline" onClick={() => onBookmark(job)} disabled={working}>
+          <BookmarkSimple className="size-4" />Lưu việc làm
+        </Button>
+        <Button variant="outline" onClick={() => onInterview(job)} disabled={working}>
+          <ChatCircleText className="size-4" />Phỏng vấn thử
+        </Button>
+        <Button onClick={() => onApply(job)} disabled={working}>
+          {working ? <SpinnerGap className="size-4 animate-spin" /> : <CheckCircle className="size-4" />}
+          Ứng tuyển
+        </Button>
+      </div>
+    </Modal>
+  );
+}
+
+function JobDetailSection({ title, value }: { title: string; value?: string | null }) {
+  if (!value) return null;
+  return (
+    <div>
+      <h4 className="mb-1 font-semibold">{title}</h4>
+      <p className="whitespace-pre-line text-muted">{value}</p>
+    </div>
+  );
+}
+
 function PartnerJobWorkspace({
   jobs,
   selectedJob,

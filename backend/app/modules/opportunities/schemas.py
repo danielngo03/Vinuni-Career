@@ -111,6 +111,9 @@ class JobView(BaseModel):
     max_openings: int | None
     parsed_requirements: dict[str, Any]
     status: JobStatus
+    match_score: float | None = None
+    matched_skills: list[str] = Field(default_factory=list)
+    missing_skills: list[str] = Field(default_factory=list)
 
 
 class JobPage(BaseModel):

@@ -33,6 +33,7 @@ from app.modules.opportunities.application.job_service import (
     update_job,
 )
 from app.modules.opportunities.infrastructure.models import Bookmark, Job
+from app.modules.recruitment.infrastructure.models import CV
 from app.modules.opportunities.schemas import (
     JobActionRequest,
     JobCreate,
@@ -167,7 +168,7 @@ def get_jobs_page(
     org_id: str | None = Query(default=None),
     status: JobStatus | None = Query(default=None),
     db: Session = Depends(get_db),
-    _: User = Depends(get_current_user),
+    current_user: User = Depends(get_current_user),
 ) -> JobPage:
     items = list_jobs(
         db,
@@ -176,12 +177,84 @@ def get_jobs_page(
         limit=page.limit,
         offset=page.offset,
     )
+    primary_cv = _primary_cv_for_user(db, current_user.id)
     return JobPage(
-        items=[JobView.model_validate(item) for item in items],
+        items=[_job_view_with_match(item, primary_cv) for item in items],
         total=count_jobs(db, org_id=org_id, status_filter=status),
         limit=page.limit,
         offset=page.offset,
     )
+
+
+def _primary_cv_for_user(db: Session, user_id: str) -> CV | None:
+    profile = db.get(StudentProfile, user_id)
+    if not profile:
+        return None
+    cvs = list(
+        db.scalars(
+            select(CV)
+            .where(CV.student_id == profile.id, CV.deleted_at.is_(None))
+            .order_by(CV.is_primary.desc(), CV.created_at.desc())
+        )
+    )
+    return cvs[0] if cvs else None
+
+
+def _job_view_with_match(job: Job, cv: CV | None) -> JobView:
+    view = JobView.model_validate(job)
+    if not cv:
+        return view
+
+    parsed_cv = cv.parsed_data or {}
+    gemini_extraction = parsed_cv.get("gemini_extraction")
+    raw_cv_skills = list(cv.skills or []) + list(parsed_cv.get("skills") or [])
+    if isinstance(gemini_extraction, dict):
+        raw_cv_skills.extend(gemini_extraction.get("skills") or [])
+    cv_skills = _skill_names(raw_cv_skills)
+    requirements = job.parsed_requirements or {}
+    nested = requirements.get("requirements")
+    parsed_skills = (
+        (nested.get("skills") or nested.get("required_skills") or [])
+        if isinstance(nested, dict)
+        else []
+    )
+    job_skills = _skill_names(
+        list(job.skills or [])
+        + list(parsed_skills)
+        + list(requirements.get("skills") or requirements.get("required_skills") or [])
+    )
+    cv_keys = {skill.casefold(): skill for skill in cv_skills}
+    matched = [cv_keys[skill.casefold()] for skill in job_skills if skill.casefold() in cv_keys]
+    missing = [skill for skill in job_skills if skill.casefold() not in cv_keys]
+    view.match_score = round(100 * len(matched) / max(1, len(job_skills)), 2)
+    view.matched_skills = matched
+    view.missing_skills = missing
+    return view
+
+
+def _skill_names(raw_skills: list) -> list[str]:
+    names: list[str] = []
+    seen: set[str] = set()
+    for item in raw_skills:
+        if isinstance(item, str):
+            value = item
+        elif isinstance(item, dict):
+            value = next(
+                (
+                    str(item[key])
+                    for key in ("name", "skill", "label", "title")
+                    if item.get(key)
+                ),
+                "",
+            )
+        else:
+            value = str(item)
+        value = value.strip()
+        key = value.casefold()
+        if value and key not in seen:
+            seen.add(key)
+            names.append(value)
+    return names
 
 
 @router.get("/saved", response_model=list[JobView])
