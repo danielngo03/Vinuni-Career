@@ -160,6 +160,105 @@ def test_technical_feedback_keeps_relevant_metric_suggestion() -> None:
     assert any("FPS" in item or "latency" in item for item in feedback.improvements)
 
 
+def test_partial_technical_feedback_drops_overclaimed_skill_tags() -> None:
+    coaching = AnswerFeedback(
+        summary=(
+            "Câu trả lời đúng hướng nhưng chưa giải thích đủ lý do kỹ thuật khi chọn YOLO "
+            "và cách xử lý hạn chế phần cứng."
+        ),
+        tags=[
+            "Tối ưu hóa",
+            "Kỹ năng giải quyết vấn đề",
+            "Thiếu ví dụ cụ thể",
+            "Đúng trọng tâm",
+        ],
+        strengths=["Thành thật về những hạn chế trong quá trình thực hiện dự án."],
+        improvements=[
+            "Bổ sung lý do YOLO phù hợp với bài toán thời gian thực.",
+            "Nêu giải pháp khi phần cứng hạn chế như giảm kích thước ảnh hoặc dùng Colab.",
+        ],
+    )
+
+    feedback = _public_feedback(
+        _evaluation(
+            answer_quality="partial",
+            strengths=["Thành thật về hạn chế phần cứng."],
+            evidence_found=["Chọn YOLO vì đây là mô hình duy nhất bạn biết."],
+            remaining_gap="Chưa giải thích lý do kỹ thuật và cách tối ưu khi phần cứng yếu.",
+            communication=CommunicationEvaluation(
+                clarity=3,
+                specificity=1,
+                relevance=3,
+                structure=2,
+                summary="Câu trả lời liên quan nhưng thiếu chiều sâu kỹ thuật.",
+            ),
+        ),
+        phase="cv_verification",
+        question=(
+            "Bạn chọn YOLO cho dự án phát hiện vi phạm giao thông vì sao, và thách "
+            "thức lớn nhất khi huấn luyện với dữ liệu thực tế là gì?"
+        ),
+        question_intent="Đánh giá lựa chọn mô hình và cách xử lý hạn chế khi huấn luyện.",
+        coaching=coaching,
+    )
+
+    assert "Tối ưu hóa" not in feedback.tags
+    assert "Kỹ năng giải quyết vấn đề" not in feedback.tags
+    assert "Thiếu ví dụ cụ thể" in feedback.tags
+    assert "Đúng trọng tâm" in feedback.tags
+    assert any("YOLO" in item for item in feedback.improvements)
+
+
+def test_weak_learning_answer_drops_engineering_mindset_tags() -> None:
+    coaching = AnswerFeedback(
+        summary="Câu trả lời chưa mô tả được cách bạn tự tìm hiểu công nghệ mới.",
+        tags=[
+            "tự học",
+            "kỹ năng học tập",
+            "phát triển bản thân",
+            "quy trình kỹ thuật",
+            "tư duy kỹ sư",
+            "Cần diễn đạt rõ hơn",
+            "Thiếu ví dụ cụ thể",
+        ],
+        strengths=["Bạn nêu được một cách tiếp cận là tìm người có kinh nghiệm hỗ trợ."],
+        improvements=[
+            "Nêu rõ bạn đọc tài liệu, thử ví dụ nhỏ, kiểm tra lỗi và ghi lại bài học như thế nào."
+        ],
+    )
+
+    feedback = _public_feedback(
+        _evaluation(
+            answer_quality="irrelevant",
+            strengths=["Nêu được việc tìm người hỗ trợ."],
+            evidence_found=[],
+            remaining_gap="Chưa có quy trình tự học hoặc thử nghiệm kỹ thuật cụ thể.",
+            communication=CommunicationEvaluation(
+                clarity=1,
+                specificity=1,
+                relevance=1,
+                structure=1,
+                summary="Câu trả lời né trọng tâm tự học công nghệ mới.",
+            ),
+        ),
+        phase="behavioral",
+        question=(
+            "Ngoài các dự án thị giác máy tính, bạn thường làm thế nào để tiếp cận "
+            "một công nghệ hoặc thư viện mới?"
+        ),
+        question_intent="Đánh giá cách tự học và tiếp cận công nghệ mới.",
+        coaching=coaching,
+    )
+
+    assert "tự học" not in feedback.tags
+    assert "kỹ năng học tập" not in feedback.tags
+    assert "phát triển bản thân" not in feedback.tags
+    assert "quy trình kỹ thuật" not in feedback.tags
+    assert "tư duy kỹ sư" not in feedback.tags
+    assert "Cần diễn đạt rõ hơn" in feedback.tags
+    assert "Thiếu ví dụ cụ thể" in feedback.tags
+
+
 def test_no_generic_gap_tag_when_model_gap_is_english() -> None:
     feedback = _public_feedback(
         _evaluation(),

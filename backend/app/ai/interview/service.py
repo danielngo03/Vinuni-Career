@@ -14,7 +14,11 @@ from app.ai.interview.prompts import (
     INTERVIEW_PLANNER_SYSTEM_PROMPT,
     INTERVIEW_REPORT_SYSTEM_PROMPT,
     QUESTION_GENERATOR_SYSTEM_PROMPT,
+    TECH_LEAD_INTERVIEW_PLANNER_SYSTEM_PROMPT,
+    TECH_LEAD_QUESTION_GENERATOR_SYSTEM_PROMPT,
     TECH_LEAD_REPORT_SYSTEM_PROMPT,
+    TECHNICAL_CHECK_INTERVIEW_PLANNER_SYSTEM_PROMPT,
+    TECHNICAL_CHECK_QUESTION_GENERATOR_SYSTEM_PROMPT,
     TECHNICAL_CHECK_REPORT_SYSTEM_PROMPT,
 )
 from app.ai.interview.schemas import (
@@ -234,15 +238,65 @@ def generate_next_turn(
 
     llm = gateway or get_llm_gateway()
     metadata: dict[str, Any] = {}
+    planner_payload = runtime.model_dump(mode="json")
     try:
-        planner, planner_meta = _call_structured(
-            llm,
-            system_prompt=INTERVIEW_PLANNER_SYSTEM_PROMPT,
-            payload=runtime.model_dump(mode="json"),
-            output_model=PlannerOutput,
-            feature="interview_planner",
-        )
-        _validate_planner(planner, runtime)
+        for attempt in range(4):
+            planner, planner_meta = _call_structured(
+                llm,
+                system_prompt=_planner_prompt(runtime),
+                payload=planner_payload,
+                output_model=PlannerOutput,
+                feature="interview_planner",
+            )
+            planner, sanitized_fields = _sanitize_planner_for_context(planner, runtime)
+            if sanitized_fields:
+                planner_meta = {
+                    **planner_meta,
+                    "sanitized_fields": sanitized_fields,
+                }
+            try:
+                _validate_planner(planner, runtime)
+                preview_coverage, preview_evaluation = _apply_previous_evaluation(
+                    coverage,
+                    runtime.evaluation_state,
+                    planner,
+                    evaluated_topic_key=(
+                        runtime.current_topic
+                        or (runtime.history[-1].topic_key if runtime.history else None)
+                    ),
+                    evaluated_difficulty=runtime.current_difficulty,
+                )
+                if (
+                    planner.should_end_interview
+                    and runtime.question_count < runtime.interview_config.max_questions
+                    and not _has_enough_evidence_to_finish(
+                        runtime,
+                        preview_coverage,
+                        preview_evaluation,
+                    )
+                ):
+                    raise ValueError(
+                        _finish_requirements_gap(
+                            runtime,
+                            preview_coverage,
+                            preview_evaluation,
+                        )
+                    )
+            except Exception as validation_error:
+                if attempt == 3:
+                    raise
+                planner_payload = {
+                    **planner_payload,
+                    "rejected_plan": planner.model_dump(mode="json"),
+                    "rejection_reason": str(validation_error),
+                    "retry_instruction": (
+                        "Return a corrected plan that satisfies the interview_mode rules, "
+                        "topic decision, follow-up limits, and allowed phases."
+                    ),
+                }
+                continue
+            break
+        planner_meta = {**planner_meta, "planner_validation_attempts": attempt + 1}
         metadata["planner"] = planner_meta
     except Exception as exc:  # noqa: BLE001
         raise InterviewTurnGenerationError(
@@ -260,7 +314,10 @@ def generate_next_turn(
         evaluated_difficulty=runtime.current_difficulty,
     )
     if runtime.question_count >= runtime.interview_config.max_questions:
-        planner = _finished_plan(runtime)
+        planner = _finished_plan(
+            runtime,
+            previous_answer_evaluation=planner.previous_answer_evaluation,
+        )
         return InterviewTurnResult(
             question="",
             planner_output=planner,
@@ -269,7 +326,11 @@ def generate_next_turn(
             provider_metadata=metadata,
         )
     if _has_enough_evidence_to_finish(runtime, coverage, evaluation):
-        planner = _finished_plan(runtime, reason="enough_evidence")
+        planner = _finished_plan(
+            runtime,
+            reason="enough_evidence",
+            previous_answer_evaluation=planner.previous_answer_evaluation,
+        )
         return InterviewTurnResult(
             question="",
             planner_output=planner,
@@ -310,14 +371,18 @@ def generate_next_turn(
         for attempt in range(2):
             generated, writer_meta = _call_structured(
                 llm,
-                system_prompt=QUESTION_GENERATOR_SYSTEM_PROMPT,
+                system_prompt=_question_generator_prompt(runtime),
                 payload=writer_payload,
                 output_model=QuestionGeneratorOutput,
                 feature="interview_question_generator",
             )
             writer_attempts.append(writer_meta)
             try:
-                _validate_candidate_question(generated.question, runtime)
+                _validate_candidate_question(
+                    generated.question,
+                    runtime,
+                    planner.question_plan,
+                )
             except ValueError as validation_error:
                 if attempt == 1:
                     raise
@@ -446,6 +511,22 @@ def _report_prompt(context: InterviewRuntimeContext) -> str:
     return INTERVIEW_REPORT_SYSTEM_PROMPT
 
 
+def _planner_prompt(context: InterviewRuntimeContext) -> str:
+    if context.interview_config.interview_mode == "technical_check":
+        return TECHNICAL_CHECK_INTERVIEW_PLANNER_SYSTEM_PROMPT
+    if context.interview_config.interview_mode == "tech_lead":
+        return TECH_LEAD_INTERVIEW_PLANNER_SYSTEM_PROMPT
+    return INTERVIEW_PLANNER_SYSTEM_PROMPT
+
+
+def _question_generator_prompt(context: InterviewRuntimeContext) -> str:
+    if context.interview_config.interview_mode == "technical_check":
+        return TECHNICAL_CHECK_QUESTION_GENERATOR_SYSTEM_PROMPT
+    if context.interview_config.interview_mode == "tech_lead":
+        return TECH_LEAD_QUESTION_GENERATOR_SYSTEM_PROMPT
+    return QUESTION_GENERATOR_SYSTEM_PROMPT
+
+
 def _finalize_report(
     draft: InterviewReportDraft,
     *,
@@ -518,6 +599,12 @@ def _call_structured[ModelT: BaseModel](
                 metadata={"feature": feature},
             )
         )
+        if response.provider == "offline":
+            raise RuntimeError(
+                "Real LLM provider is unavailable; offline fallback cannot generate "
+                "structured interview JSON. Check Gemini API key, quota, model access, "
+                "or network connectivity."
+            )
         try:
             parsed = output_model.model_validate(_load_json_object(response.content))
         except Exception as exc:  # noqa: BLE001
@@ -533,6 +620,43 @@ def _call_structured[ModelT: BaseModel](
             "attempts": attempt + 1,
         }
     raise RuntimeError("Structured model call failed") from last_error
+
+
+def _sanitize_planner_for_context(
+    planner: PlannerOutput,
+    context: InterviewRuntimeContext,
+) -> tuple[PlannerOutput, list[str]]:
+    plan = planner.question_plan
+    sanitized_fields: list[str] = []
+    updates: dict[str, Any] = {}
+
+    if (
+        context.current_topic
+        and plan.topic_key != context.current_topic
+        and planner.follow_up_count != 0
+    ):
+        updates["follow_up_count"] = 0
+        sanitized_fields.append("follow_up_count")
+
+    if context.interview_config.interview_mode == "tech_lead":
+        competency = plan.target_competency.casefold()
+        if any(term in competency for term in TECH_LEAD_LABEL_TERMS):
+            replacement = _candidate_safe_competency_label(plan)
+            plan = plan.model_copy(update={"target_competency": replacement})
+            sanitized_fields.append("question_plan.target_competency")
+
+    if not sanitized_fields:
+        return planner, []
+    return planner.model_copy(update={**updates, "question_plan": plan}), sanitized_fields
+
+
+def _candidate_safe_competency_label(plan: QuestionPlan) -> str:
+    if plan.source_reference:
+        return plan.source_reference[:200]
+    topic = plan.topic_key.replace("_", " ").strip()
+    if topic:
+        return topic[:200]
+    return "technical interview evidence"
 
 
 def _validate_planner(planner: PlannerOutput, context: InterviewRuntimeContext) -> None:
@@ -614,7 +738,7 @@ def _validate_planner(planner: PlannerOutput, context: InterviewRuntimeContext) 
         needs_follow_up = (
             evaluation.topic_decision in {"clarify", "learning_probe"}
             or (
-                evaluation.answer_quality in {"vague", "partial", "irrelevant"}
+                evaluation.answer_quality in {"vague", "irrelevant"}
                 and bool(evaluation.missing_evidence)
             )
         )
@@ -665,6 +789,7 @@ def _validate_planner(planner: PlannerOutput, context: InterviewRuntimeContext) 
 def _validate_candidate_question(
     question: str,
     context: InterviewRuntimeContext | None = None,
+    question_plan: QuestionPlan | None = None,
 ) -> None:
     normalized = question.strip().lower()
     if not normalized:
@@ -684,11 +809,20 @@ def _validate_candidate_question(
             raise ValueError("Tech lead question exposes an internal competency label")
         if _is_tech_lead_direct_task(question):
             raise ValueError("Tech lead question requests code, query, command, or output")
+        if question_plan:
+            required_terms = _required_tech_lead_question_terms(context, question_plan)
+            if required_terms and not any(term in normalized for term in required_terms):
+                raise ValueError(
+                    "Tech lead project or skill question must mention at least one exact "
+                    "technology or skill from the plan: "
+                    + ", ".join(sorted(required_terms))
+                )
 
 
 def _normalize_question(question: str) -> str:
     value = unicodedata.normalize("NFKD", question.casefold())
     value = "".join(character for character in value if not unicodedata.combining(character))
+    value = value.replace("_", " ")
     return " ".join(re.findall(r"\w+", value, flags=re.UNICODE))
 
 
@@ -698,6 +832,57 @@ def _is_tech_lead_direct_task(question: str) -> bool:
         _normalize_question(term) in normalized
         for term in TECH_LEAD_DIRECT_TASK_TERMS
     )
+
+
+def _required_tech_lead_question_terms(
+    context: InterviewRuntimeContext,
+    plan: QuestionPlan,
+) -> set[str]:
+    if plan.source_type not in {"cv_project", "cv_skill", "jd_requirement"}:
+        return set()
+
+    plan_text = _normalize_question(
+        " ".join(
+            [
+                plan.topic_key,
+                plan.source_reference,
+                plan.target_competency,
+                plan.evidence_gap,
+                plan.question_intent,
+                *plan.linked_skill_ids,
+            ]
+        )
+    )
+    candidates: set[str] = set()
+    for item in context.coverage_state.skills:
+        skill = _normalize_question(item.skill)
+        if not skill:
+            continue
+        if item.skill_id in plan.linked_skill_ids or skill in plan_text:
+            candidates.add(skill)
+
+    if plan.source_type == "cv_project":
+        project_technologies = {
+            _normalize_question(technology)
+            for project in context.cv.projects
+            for technology in project.technologies
+        }
+        project_technologies.discard("")
+        if any(term in plan_text for term in {"api", "backend", "ai", "model"}):
+            candidates.update(
+                technology
+                for technology in project_technologies
+                if technology
+                in {
+                    "python",
+                    "fastapi",
+                    "docker",
+                    "postgresql",
+                    "jwt",
+                }
+            )
+
+    return {term for term in candidates if len(term) >= 2}
 
 
 def _find_similar_question(question: str, previous_questions: list[str]) -> str | None:
@@ -834,6 +1019,7 @@ def _finished_plan(
     context: InterviewRuntimeContext,
     *,
     reason: str = "max_questions_reached",
+    previous_answer_evaluation: PreviousAnswerEvaluation | None = None,
 ) -> PlannerOutput:
     return PlannerOutput(
         action="finish_interview",
@@ -847,7 +1033,7 @@ def _finished_plan(
             question_intent="finish_interview",
             topic_key="completed",
         ),
-        previous_answer_evaluation=None,
+        previous_answer_evaluation=previous_answer_evaluation,
         internal_reason=(
             "Enough evidence has been collected across required skills and communication."
             if reason == "enough_evidence"
@@ -1032,7 +1218,7 @@ def _has_enough_evidence_to_finish(
         assessed_must_have = [
             item
             for item in must_have
-            if item.evidence_count > 0 and item.status not in {"not_assessed", "claimed"}
+            if _skill_has_interview_evidence(item, context, evaluation_state)
         ]
         required_count = len(must_have)
         if len(assessed_must_have) < required_count:
@@ -1050,6 +1236,90 @@ def _has_enough_evidence_to_finish(
         re.IGNORECASE,
     )
     return any(problem_signal.search(f"{turn.question} {turn.answer}") for turn in context.history)
+
+
+def _skill_has_interview_evidence(
+    item: CoverageItem,
+    context: InterviewRuntimeContext,
+    evaluation_state: EvaluationState,
+) -> bool:
+    if item.evidence_count > 0 and item.status not in {"not_assessed", "claimed"}:
+        return True
+
+    skill_name = _normalize_question(item.skill)
+    for turn in context.history:
+        topic_state = evaluation_state.topic_evidence.get(turn.topic_key)
+        if not topic_state or not topic_state.evidence_found or topic_state.ownership == "not_owned":
+            continue
+        text = _normalize_question(f"{turn.topic_key} {turn.question} {turn.answer}")
+        if skill_name and skill_name in text:
+            return True
+        if skill_name == "python" and any(
+            term in text
+            for term in {
+                "asyncio",
+                "fastapi",
+                "pydantic",
+                "uvicorn",
+                "pytest",
+                "pip",
+            }
+        ):
+            return True
+    return False
+
+
+def _finish_requirements_gap(
+    context: InterviewRuntimeContext,
+    coverage: CoverageState,
+    evaluation_state: EvaluationState,
+) -> str:
+    gaps: list[str] = [
+        "Interview planner attempted to finish before backend evidence requirements were met."
+    ]
+    answered_questions = context.question_count
+    if _is_technical_check(context):
+        minimum = max(5, context.interview_config.min_questions)
+        if answered_questions < minimum:
+            gaps.append(f"Need at least {minimum} answered technical questions.")
+        covered_categories = _technical_covered_categories(context, coverage)
+        if len(covered_categories) < 4:
+            gaps.append(
+                "Need broader technical category coverage; currently covered: "
+                f"{', '.join(sorted(covered_categories)) or 'none'}."
+            )
+        if not covered_categories.intersection({"debugging", "edge_case"}):
+            gaps.append("Need at least one debugging or edge-case question.")
+        missing_skills = [
+            item.skill
+            for item in coverage.skills
+            if item.priority == "must_have"
+            and not _technical_skill_has_evidence(item, context, evaluation_state)
+        ]
+        if missing_skills:
+            gaps.append("Need technical evidence for must-have skills: " + ", ".join(missing_skills) + ".")
+        return " ".join(gaps)
+
+    if answered_questions < 4:
+        gaps.append("Need at least 4 answered questions.")
+    if len(evaluation_state.communication_samples) < 2:
+        gaps.append("Need at least 2 evaluated answer samples.")
+    missing_must_have = [
+        item.skill
+        for item in coverage.skills
+        if item.priority == "must_have"
+        and not _skill_has_interview_evidence(item, context, evaluation_state)
+    ]
+    if missing_must_have:
+        gaps.append("Need evidence for must-have skills: " + ", ".join(missing_must_have) + ".")
+    if not _has_jd_scenario_evidence(context):
+        gaps.append("Need one JD-based scenario topic before finishing.")
+    phases = {turn.phase for turn in context.history}
+    if "cv_verification" not in phases:
+        gaps.append("Need at least one CV verification question.")
+    if not phases.intersection({"problem_solving", "behavioral"}):
+        gaps.append("Need problem-solving or behavioral evidence before finishing.")
+    return " ".join(gaps)
 
 
 def _load_json_object(content: str) -> dict[str, Any]:

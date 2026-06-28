@@ -145,7 +145,7 @@ class OpenAICompatibleProvider:
     def _post(self, path: str, body: dict) -> dict:
         url = path if path.startswith("http") else f"{self.base_url}{path}"
         key_errors: list[str] = []
-        api_keys = self.api_key_pool.available_keys()
+        api_keys = self.api_key_pool.claim_keys_for_request()
         if not api_keys and self.name not in {"openai", "gemini", "groq"}:
             api_keys = [self.api_key or ""]
         with httpx.Client(timeout=self.timeout_seconds) as client:

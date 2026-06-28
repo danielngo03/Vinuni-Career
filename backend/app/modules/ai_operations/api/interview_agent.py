@@ -45,11 +45,12 @@ router = APIRouter(prefix="/ai/interviews", tags=["ai-interviews"])
 
 
 def _raise_interview_generation_error(exc: Exception) -> None:
+    error = str(exc)[:500]
     raise AppError(
         code=ErrorCode.UPSTREAM_UNAVAILABLE,
-        message="AI interview generation failed",
+        message=f"AI interview generation failed: {error[:180]}",
         status_code=502,
-        details={"error": str(exc)[:500]},
+        details={"error": error},
     ) from exc
 
 
@@ -743,6 +744,42 @@ def _is_technical_coaching_text(value: str) -> bool:
     )
 
 
+_UNSUPPORTED_PARTIAL_TAG_MARKERS = {
+    "giải quyết vấn đề",
+    "kỹ năng giải quyết",
+    "kỹ năng học tập",
+    "phát triển bản thân",
+    "quy trình kỹ thuật",
+    "tư duy kỹ sư",
+    "tự học",
+    "tối ưu",
+    "optimization",
+    "problem solving",
+    "self learning",
+    "technical process",
+}
+
+
+def _is_supported_feedback_tag(
+    tag: str,
+    evaluation: PreviousAnswerEvaluation,
+) -> bool:
+    normalized = tag.lower()
+    if (
+        evaluation.answer_quality != "sufficient"
+        and any(marker in normalized for marker in _UNSUPPORTED_PARTIAL_TAG_MARKERS)
+    ):
+        evidence_text = " ".join(
+            [
+                *evaluation.strengths,
+                *evaluation.evidence_found,
+            ]
+        ).lower()
+        if not any(marker in evidence_text for marker in _UNSUPPORTED_PARTIAL_TAG_MARKERS):
+            return False
+    return True
+
+
 def _public_feedback(
     evaluation: PreviousAnswerEvaluation,
     *,
@@ -787,6 +824,7 @@ def _public_feedback(
         for item in coaching.tags
         if (text := _vietnamese_feedback_text(item))
         and (technical_context or not _is_technical_coaching_text(text))
+        and _is_supported_feedback_tag(text, evaluation)
         and (
             ownership_context
             or all(term not in text.lower() for term in {"vai trò", "phần việc"})
