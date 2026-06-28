@@ -2,6 +2,8 @@ from __future__ import annotations
 
 import json
 
+import pytest
+
 from app.ai.extraction.schemas import CVExtraction, JDExtraction, SkillEvidence
 from app.ai.gateway.schemas import ChatResponse
 from app.ai.interview.schemas import (
@@ -16,7 +18,9 @@ from app.ai.interview.schemas import (
     TopicEvidenceState,
 )
 from app.ai.interview.service import (
+    InterviewTurnGenerationError,
     _has_enough_evidence_to_finish,
+    _validate_candidate_question,
     generate_interview_report,
     generate_next_turn,
 )
@@ -191,19 +195,14 @@ def test_follow_up_updates_previous_skill_and_keeps_internal_data_out_of_questio
     assert "expected_signals" not in result.question.lower()
 
 
-def test_invalid_model_output_uses_single_question_fallback():
+def test_invalid_model_output_raises_interview_generation_error():
     gateway = FakeGateway(["not json"])
 
-    result = generate_next_turn(_runtime(), gateway=gateway)
-
-    assert result.question == (
-        "Với vai trò Backend Intern, phần backend hoặc AI nào em muốn học sâu nhất khi tham gia team?"
-    )
-    assert result.provider_metadata["planner"]["fallback"] is True
-    assert result.question.count("?") == 1
+    with pytest.raises(InterviewTurnGenerationError, match="valid interview plan"):
+        generate_next_turn(_runtime(), gateway=gateway)
 
 
-def test_technical_check_fallback_asks_code_question_instead_of_career():
+def test_technical_check_invalid_planner_output_raises_interview_generation_error():
     gateway = FakeGateway(["not json"])
     runtime = _runtime(
         interview_config=_runtime().interview_config.model_copy(
@@ -215,16 +214,11 @@ def test_technical_check_fallback_asks_code_question_instead_of_career():
         )
     )
 
-    result = generate_next_turn(runtime, gateway=gateway)
-
-    assert result.planner_output.current_phase == "cv_verification"
-    assert result.planner_output.question_plan.topic_key == "verify_python"
-    assert "Python" in result.question
-    assert "ứng tuyển" not in result.question
-    assert "muốn tìm hiểu" not in result.question
+    with pytest.raises(InterviewTurnGenerationError, match="valid interview plan"):
+        generate_next_turn(runtime, gateway=gateway)
 
 
-def test_technical_check_rejects_behavioral_question_and_falls_back_to_task():
+def test_technical_check_rejects_behavioral_question_and_retries_task():
     planner = _planner(
         action="ask_initial_question",
         current_phase="cv_verification",
@@ -283,28 +277,25 @@ def test_technical_check_rejects_behavioral_question_and_falls_back_to_task():
     assert result.provider_metadata["question_generator"]["attempts"] == 2
 
 
-def test_technical_check_overrides_early_finish_until_debug_or_edge_coverage():
-    gateway = FakeGateway(
-        [
-            _planner(
-                action="finish_interview",
-                current_phase="completed",
-                question_plan={
-                    "question_type": "closing",
-                    "difficulty": "easy",
-                    "target_competency": "interview completion",
-                    "source_type": "general",
-                    "source_reference": "",
-                    "evidence_gap": "",
-                    "question_intent": "finish_interview",
-                    "topic_key": "completed",
-                    "linked_skill_ids": [],
-                },
-                should_end_interview=True,
-            ),
-            {"question": "If a FastAPI endpoint returns 500, what logs and request details would you inspect first?"},
-        ]
-    )
+def test_technical_check_rejects_early_finish_without_required_evidence():
+    gateway = FakeGateway([
+        _planner(
+            action="finish_interview",
+            current_phase="completed",
+            question_plan={
+                "question_type": "closing",
+                "difficulty": "easy",
+                "target_competency": "interview completion",
+                "source_type": "general",
+                "source_reference": "",
+                "evidence_gap": "",
+                "question_intent": "finish_interview",
+                "topic_key": "completed",
+                "linked_skill_ids": [],
+            },
+            should_end_interview=True,
+        )
+    ])
     runtime = _runtime(
         interview_config=_runtime().interview_config.model_copy(
             update={
@@ -315,49 +306,14 @@ def test_technical_check_overrides_early_finish_until_debug_or_edge_coverage():
                 "max_questions": 10,
             }
         ),
-        coverage_state=CoverageState(
-            skills=[
-                CoverageItem(
-                    skill_id="python",
-                    skill="Python",
-                    source="jd_requirement",
-                    priority="must_have",
-                    status="verified",
-                    evidence_count=1,
-                ),
-                CoverageItem(
-                    skill_id="fastapi",
-                    skill="FastAPI",
-                    source="jd_requirement",
-                    priority="must_have",
-                    status="verified",
-                    evidence_count=1,
-                ),
-                CoverageItem(
-                    skill_id="docker",
-                    skill="Docker",
-                    source="jd_requirement",
-                    priority="must_have",
-                    status="verified",
-                    evidence_count=1,
-                ),
-            ]
-        ),
         history=[
             ConversationTurn(question="Write a Python function.", answer="def f(): pass", phase="cv_verification", topic_key="verify_python"),
-            ConversationTurn(question="Write a FastAPI endpoint.", answer="@app.post('/items')", phase="cv_verification", topic_key="verify_fastapi"),
-            ConversationTurn(question="Write a Dockerfile.", answer="FROM python:3.12-slim", phase="problem_solving", topic_key="verify_docker"),
-            ConversationTurn(question="Write a small API request body.", answer="{'email': 'a@b.com'}", phase="problem_solving", topic_key="verify_fastapi"),
-            ConversationTurn(question="What status code should create return?", answer="201", phase="problem_solving", topic_key="verify_fastapi"),
         ],
-        question_count=5,
+        question_count=1,
     )
 
-    result = generate_next_turn(runtime, gateway=gateway)
-
-    assert result.question
-    assert "500" in result.question
-    assert result.planner_output.action != "finish_interview"
+    with pytest.raises(InterviewTurnGenerationError, match="valid interview plan"):
+        generate_next_turn(runtime, gateway=gateway)
 
 
 def test_technical_check_can_finish_with_non_verify_topic_evidence():
@@ -559,7 +515,7 @@ def test_repeated_question_is_rejected_and_regenerated():
     assert len(gateway.requests) == 3
 
 
-def test_non_owned_unobserved_topic_is_stopped_instead_of_probed_as_owner():
+def test_non_owned_unobserved_topic_rejects_same_topic_probe():
     planner = _planner(
         action="probe_deeper",
         current_phase="cv_verification",
@@ -568,7 +524,7 @@ def test_non_owned_unobserved_topic_is_stopped_instead_of_probed_as_owner():
             "difficulty": "medium",
             "target_competency": "Docker",
             "source_type": "previous_answer",
-            "source_reference": "Thành viên khác làm và em không quan sát.",
+            "source_reference": "Team member handled it.",
             "evidence_gap": "Docker implementation evidence is missing.",
             "question_intent": "request_evidence",
             "topic_key": "verify_docker",
@@ -585,130 +541,66 @@ def test_non_owned_unobserved_topic_is_stopped_instead_of_probed_as_owner():
             "topic_decision": "stop",
             "reason_for_next_question": "Stop Docker and assess another competency.",
             "ownership_check": "The candidate did not implement or observe Docker work.",
-            "communication": {
-                "clarity": 3,
-                "specificity": 2,
-                "relevance": 4,
-                "structure": 3,
-                "summary": "Clearly states no ownership.",
-            },
+            "communication": {"clarity": 3, "specificity": 2, "relevance": 4, "structure": 3, "summary": "Clearly states no ownership."},
         },
         evaluated_skill_ids=[],
         follow_up_count=1,
     )
-    gateway = FakeGateway(
-        [
-            planner,
-            {"question": "Em có thể nêu một tình huống cụ thể em đã sử dụng Python không?"},
-        ]
-    )
+    gateway = FakeGateway([planner])
     runtime = _runtime(
-        interview_config=_runtime().interview_config.model_copy(
-            update={"current_phase": "cv_verification"}
-        ),
-        history=[
-            ConversationTurn(
-                question="Em đã dùng Docker như thế nào trong dự án?",
-                answer="Thành viên khác làm và em không quan sát.",
-                phase="cv_verification",
-                topic_key="verify_docker",
-            )
-        ],
+        interview_config=_runtime().interview_config.model_copy(update={"current_phase": "cv_verification"}),
+        history=[ConversationTurn(question="How did you use Docker?", answer="Team member handled it.", phase="cv_verification", topic_key="verify_docker")],
         question_count=1,
         current_topic="verify_docker",
         current_difficulty="easy",
-        latest_answer="Thành viên khác làm và em không quan sát.",
+        latest_answer="Team member handled it.",
     )
 
-    result = generate_next_turn(runtime, gateway=gateway)
-
-    assert result.planner_output.question_plan.topic_key != "verify_docker"
-    docker_state = result.evaluation_state.topic_evidence["verify_docker"]
-    assert docker_state.ownership == "not_owned"
-    assert docker_state.stop_reason
-    assert "Docker" not in result.question
+    with pytest.raises(InterviewTurnGenerationError, match="valid interview plan"):
+        generate_next_turn(runtime, gateway=gateway)
 
 
-def test_second_weak_answer_forces_topic_switch():
+def test_second_weak_answer_rejects_same_topic_follow_up():
     planner = _planner(
         action="clarify_answer",
         current_phase="cv_verification",
         question_plan={
             "question_type": "follow_up",
             "difficulty": "easy",
-            "target_competency": "project contribution",
+            "target_competency": "Python",
             "source_type": "previous_answer",
-            "source_reference": "Em làm nhiều lắm.",
-            "evidence_gap": "A concrete contribution is still missing.",
+            "source_reference": "I did many things.",
+            "evidence_gap": "Concrete evidence is missing.",
             "question_intent": "clarify_answer",
-            "topic_key": "project_contribution",
-            "linked_skill_ids": [],
+            "topic_key": "verify_python",
+            "linked_skill_ids": ["python"],
         },
         previous_answer_evaluation={
             "score": 1,
             "status": "not_assessed",
             "answer_quality": "vague",
             "strengths": [],
-            "missing_evidence": ["One concrete contribution"],
-            "remaining_gap": "A concrete contribution is still missing.",
+            "missing_evidence": ["Concrete action missing"],
+            "remaining_gap": "Concrete action missing.",
+            "ownership": "unknown",
             "topic_decision": "clarify",
-            "communication": {
-                "clarity": 1,
-                "specificity": 0,
-                "relevance": 2,
-                "structure": 1,
-                "summary": "Still vague.",
-            },
+            "reason_for_next_question": "Clarify once more.",
+            "communication": {"clarity": 1, "specificity": 0, "relevance": 2, "structure": 1, "summary": "Too vague."},
         },
-        follow_up_count=2,
-    )
-    gateway = FakeGateway(
-        [
-            planner,
-            {"question": "Em có thể nêu một tình huống cụ thể em đã sử dụng Python không?"},
-        ]
-    )
-    runtime = _runtime(
-        interview_config=_runtime().interview_config.model_copy(
-            update={"current_phase": "cv_verification"}
-        ),
-        history=[
-            ConversationTurn(
-                question="Em đóng góp gì trong đề tài?",
-                answer="Nhiều lắm.",
-                phase="cv_verification",
-                topic_key="project_contribution",
-            ),
-            ConversationTurn(
-                question="Em hãy chọn một phần cụ thể em trực tiếp làm?",
-                answer="Em làm nhiều lắm.",
-                phase="cv_verification",
-                topic_key="project_contribution",
-            ),
-        ],
-        evaluation_state=EvaluationState(
-            topic_evidence={
-                "project_contribution": TopicEvidenceState(
-                    consecutive_weak_answers=1
-                )
-            }
-        ),
-        question_count=2,
-        current_topic="project_contribution",
-        current_difficulty="easy",
         follow_up_count=1,
-        latest_answer="Em làm nhiều lắm.",
+    )
+    gateway = FakeGateway([planner])
+    runtime = _runtime(
+        history=[ConversationTurn(question="What did you build with Python?", answer="I did many things.", phase="cv_verification", topic_key="verify_python")],
+        evaluation_state=EvaluationState(topic_evidence={"verify_python": TopicEvidenceState(consecutive_weak_answers=1)}),
+        question_count=1,
+        current_topic="verify_python",
+        current_difficulty="easy",
+        latest_answer="I did many things.",
     )
 
-    result = generate_next_turn(runtime, gateway=gateway)
-
-    assert result.planner_output.question_plan.topic_key != "project_contribution"
-    assert (
-        result.evaluation_state.topic_evidence[
-            "project_contribution"
-        ].consecutive_weak_answers
-        == 2
-    )
+    with pytest.raises(InterviewTurnGenerationError, match="valid interview plan"):
+        generate_next_turn(runtime, gateway=gateway)
 
 
 def test_question_limit_finishes_without_calling_model():
@@ -906,244 +798,60 @@ def test_interview_finishes_early_when_evidence_is_sufficient():
     assert len(gateway.requests) == 1
 
 
-def test_tech_lead_does_not_finish_when_must_have_jd_skill_is_unassessed():
-    communication = CommunicationEvaluation(
-        clarity=3,
-        specificity=3,
-        relevance=3,
-        structure=3,
-        summary="Clear technical answer.",
-    )
-    planner = _planner(
-        action="finish_interview",
-        current_phase="completed",
-        question_plan={
-            "question_type": "closing",
-            "difficulty": "easy",
-            "target_competency": "interview completion",
-            "source_type": "general",
-            "source_reference": "",
-            "evidence_gap": "",
-            "question_intent": "finish_interview",
-            "topic_key": "completed",
-            "linked_skill_ids": [],
-        },
-        previous_answer_evaluation={
-            "score": 4,
-            "status": "verified",
-            "answer_quality": "sufficient",
-            "strengths": ["Explained FastAPI endpoint design."],
-            "missing_evidence": [],
-            "contradictions": [],
-            "communication": communication.model_dump(),
-        },
-        evaluated_skill_ids=["fastapi"],
-        should_end_interview=True,
-    )
-    gateway = FakeGateway(
-        [
-            planner,
-            {
-                "question": (
-                    "JD có yêu cầu Docker nhưng CV chưa có bằng chứng rõ. "
-                    "Em từng containerize app backend chưa, và nếu có thì em tự làm phần nào?"
-                )
+def test_tech_lead_rejects_finish_when_must_have_jd_skill_is_unassessed():
+    gateway = FakeGateway([
+        _planner(
+            action="finish_interview",
+            current_phase="completed",
+            question_plan={
+                "question_type": "closing",
+                "difficulty": "easy",
+                "target_competency": "interview completion",
+                "source_type": "general",
+                "source_reference": "",
+                "evidence_gap": "",
+                "question_intent": "finish_interview",
+                "topic_key": "completed",
+                "linked_skill_ids": [],
             },
-        ]
-    )
-    runtime = _runtime(
-        interview_config=_runtime().interview_config.model_copy(
-            update={"current_phase": "problem_solving", "max_questions": 8}
-        ),
-        history=[
-            ConversationTurn(
-                question="Em dùng Python ở đâu?",
-                answer="Em xây API.",
-                phase="cv_verification",
-                topic_key="verify_python",
-            ),
-            ConversationTurn(
-                question="Em thiết kế FastAPI endpoint thế nào?",
-                answer="Em dùng Pydantic và service layer.",
-                phase="problem_solving",
-                topic_key="verify_fastapi",
-            ),
-            ConversationTurn(
-                question="Giả sử app FastAPI lỗi 500 thì em debug thế nào?",
-                answer="Em xem log, request body và stack trace.",
-                phase="problem_solving",
-                topic_key="jd_scenario_debug_backend_apis",
-            ),
-        ],
-        coverage_state=CoverageState(
-            skills=[
-                CoverageItem(
-                    skill_id="python",
-                    skill="python",
-                    source="jd_requirement",
-                    priority="must_have",
-                    status="verified",
-                    evidence_count=1,
-                ),
-                CoverageItem(
-                    skill_id="fastapi",
-                    skill="fastapi",
-                    source="jd_requirement",
-                    priority="must_have",
-                    status="verified",
-                    evidence_count=1,
-                ),
-                CoverageItem(
-                    skill_id="docker",
-                    skill="docker",
-                    source="jd_requirement",
-                    priority="must_have",
-                    status="not_assessed",
-                    evidence_count=0,
-                ),
-            ]
-        ),
-        evaluation_state=EvaluationState(
-            communication_samples=[communication, communication]
-        ),
-        question_count=3,
-        current_topic="verify_fastapi",
-        current_difficulty="medium",
-        latest_answer="Em dùng Pydantic và tách service để dễ test.",
-    )
+            should_end_interview=True,
+        )
+    ])
+    runtime = _runtime(question_count=1, history=[ConversationTurn(question="Why this role?", answer="Backend AI.", phase="career", topic_key="career_motivation")])
 
-    result = generate_next_turn(runtime, gateway=gateway)
-
-    assert result.question
-    assert result.planner_output.should_end_interview is False
-    assert result.planner_output.question_plan.topic_key == "verify_docker"
-    assert "Docker" in result.question
+    with pytest.raises(InterviewTurnGenerationError, match="valid interview plan"):
+        generate_next_turn(runtime, gateway=gateway)
 
 
-def test_tech_lead_requires_jd_scenario_before_early_finish():
-    communication = CommunicationEvaluation(
-        clarity=3,
-        specificity=3,
-        relevance=3,
-        structure=3,
-        summary="Clear technical answer.",
-    )
-    planner = _planner(
-        action="finish_interview",
-        current_phase="completed",
-        question_plan={
-            "question_type": "closing",
-            "difficulty": "easy",
-            "target_competency": "interview completion",
-            "source_type": "general",
-            "source_reference": "",
-            "evidence_gap": "",
-            "question_intent": "finish_interview",
-            "topic_key": "completed",
-            "linked_skill_ids": [],
-        },
-        previous_answer_evaluation={
-            "score": 4,
-            "status": "verified",
-            "answer_quality": "sufficient",
-            "strengths": ["Explained Docker debugging."],
-            "missing_evidence": [],
-            "contradictions": [],
-            "communication": communication.model_dump(),
-        },
-        evaluated_skill_ids=["docker"],
-        should_end_interview=True,
-    )
-    gateway = FakeGateway(
-        [
-            planner,
-            {
-                "question": (
-                    "Giả sử team cần xây API nhận text, gọi model AI và lưu kết quả. "
-                    "Em sẽ thiết kế flow backend và xử lý lỗi chính như thế nào?"
-                )
+def test_tech_lead_rejects_early_finish_before_jd_scenario():
+    gateway = FakeGateway([
+        _planner(
+            action="finish_interview",
+            current_phase="completed",
+            question_plan={
+                "question_type": "closing",
+                "difficulty": "easy",
+                "target_competency": "interview completion",
+                "source_type": "general",
+                "source_reference": "",
+                "evidence_gap": "",
+                "question_intent": "finish_interview",
+                "topic_key": "completed",
+                "linked_skill_ids": [],
             },
-        ]
-    )
+            should_end_interview=True,
+        )
+    ])
     runtime = _runtime(
-        interview_config=_runtime().interview_config.model_copy(
-            update={"current_phase": "problem_solving", "max_questions": 8}
-        ),
-        job_description=_runtime().job_description.model_copy(
-            update={"responsibilities": ["Build backend APIs that integrate AI model calls."]}
-        ),
-        history=[
-            ConversationTurn(
-                question="Em dùng Python ở đâu?",
-                answer="Em xây API.",
-                phase="cv_verification",
-                topic_key="verify_python",
-            ),
-            ConversationTurn(
-                question="Em thiết kế FastAPI endpoint thế nào?",
-                answer="Em dùng Pydantic và service layer.",
-                phase="problem_solving",
-                topic_key="verify_fastapi",
-            ),
-            ConversationTurn(
-                question="Em dùng Docker như thế nào?",
-                answer="Em viết Dockerfile và map port.",
-                phase="problem_solving",
-                topic_key="verify_docker",
-            ),
-        ],
-        coverage_state=CoverageState(
-            skills=[
-                CoverageItem(
-                    skill_id="python",
-                    skill="python",
-                    source="jd_requirement",
-                    priority="must_have",
-                    status="verified",
-                    evidence_count=1,
-                ),
-                CoverageItem(
-                    skill_id="fastapi",
-                    skill="fastapi",
-                    source="jd_requirement",
-                    priority="must_have",
-                    status="verified",
-                    evidence_count=1,
-                ),
-                CoverageItem(
-                    skill_id="docker",
-                    skill="docker",
-                    source="jd_requirement",
-                    priority="must_have",
-                    status="verified",
-                    evidence_count=1,
-                ),
-            ]
-        ),
-        evaluation_state=EvaluationState(
-            communication_samples=[communication, communication]
-        ),
-        question_count=3,
-        current_topic="verify_docker",
-        current_difficulty="medium",
-        latest_answer="Em viết Dockerfile và debug bằng docker logs.",
+        history=[ConversationTurn(question="What did you build?", answer="An API.", phase="cv_verification", topic_key="verify_python")],
+        question_count=1,
     )
 
-    result = generate_next_turn(runtime, gateway=gateway)
-
-    assert result.question
-    assert result.planner_output.should_end_interview is False
-    assert result.planner_output.question_plan.topic_key.startswith("jd_scenario_")
+    with pytest.raises(InterviewTurnGenerationError, match="valid interview plan"):
+        generate_next_turn(runtime, gateway=gateway)
 
 
-def test_tech_lead_does_not_repeat_direct_coding_task():
-    communication = CommunicationEvaluation(
-        clarity=2,
-        specificity=1,
-        relevance=2,
-        structure=2,
-        summary="Avoided the direct SQL request.",
-    )
+def test_tech_lead_rejects_switch_when_incomplete_answer_needs_follow_up():
     planner = _planner(
         action="switch_topic",
         current_phase="problem_solving",
@@ -1165,57 +873,22 @@ def test_tech_lead_does_not_repeat_direct_coding_task():
             "strengths": ["Mentioned DB logs."],
             "missing_evidence": ["Did not answer the SQL task."],
             "contradictions": [],
-            "communication": communication.model_dump(),
+            "communication": CommunicationEvaluation(clarity=2, specificity=1, relevance=2, structure=2, summary="Avoided the direct SQL request.").model_dump(),
         },
         evaluated_skill_ids=["postgresql"],
     )
-    gateway = FakeGateway(
-        [
-            planner,
-            {"question": "Bạn hãy viết câu lệnh SQL lấy các order có amount lớn hơn 1000000."},
-            {
-                "question": (
-                    "Trong một lỗi database timeout ở FastAPI, em sẽ kiểm tra connection pool, "
-                    "query chậm và log PostgreSQL theo thứ tự nào?"
-                )
-            },
-        ]
-    )
+    gateway = FakeGateway([planner])
     runtime = _runtime(
-        interview_config=_runtime().interview_config.model_copy(
-            update={"current_phase": "problem_solving", "max_questions": 8}
-        ),
-        history=[
-            ConversationTurn(
-                question="Bạn hãy viết câu lệnh SQL tính tổng amount theo user_id.",
-                answer="Em sẽ xem log và sửa dần.",
-                phase="problem_solving",
-                topic_key="verify_postgresql",
-            )
-        ],
-        coverage_state=CoverageState(
-            skills=[
-                CoverageItem(
-                    skill_id="postgresql",
-                    skill="PostgreSQL",
-                    source="jd_requirement",
-                    priority="must_have",
-                    status="partially_verified",
-                    evidence_count=1,
-                )
-            ]
-        ),
+        interview_config=_runtime().interview_config.model_copy(update={"current_phase": "problem_solving", "max_questions": 8}),
+        history=[ConversationTurn(question="Explain this SQL task.", answer="I would check logs.", phase="problem_solving", topic_key="verify_postgresql")],
         question_count=1,
         current_topic="verify_postgresql",
         current_difficulty="medium",
-        latest_answer="Em sẽ xem log và sửa dần.",
+        latest_answer="I would check logs.",
     )
 
-    result = generate_next_turn(runtime, gateway=gateway)
-
-    assert "viết câu lệnh SQL" not in result.question
-    assert "connection pool" in result.question
-    assert result.provider_metadata["question_generator"]["attempts"] == 2
+    with pytest.raises(InterviewTurnGenerationError, match="valid interview plan"):
+        generate_next_turn(runtime, gateway=gateway)
 
 
 def test_final_report_uses_fixed_dimensions_and_backend_weighted_score():
@@ -1355,3 +1028,28 @@ def test_technical_check_report_uses_technical_labels_and_weights():
         "Edge cases và hiệu năng",
     ]
     assert "Assess technical performance only" in gateway.requests[0].messages[0].content
+
+
+def test_tech_lead_rejects_direct_sql_task() -> None:
+    context = _runtime()
+
+    with pytest.raises(ValueError, match="requests code, query, command, or output"):
+        _validate_candidate_question(
+            (
+                "Bạn hãy viết một câu lệnh SQL để lấy các customer_id có nhiều hơn "
+                "5 đơn hàng."
+            ),
+            context,
+        )
+
+
+def test_tech_lead_allows_database_design_scenario() -> None:
+    context = _runtime()
+
+    _validate_candidate_question(
+        (
+            "Khi dữ liệu đơn hàng tăng lớn và báo cáo trở nên chậm, bạn sẽ kiểm tra "
+            "và tối ưu thiết kế lưu trữ như thế nào?"
+        ),
+        context,
+    )

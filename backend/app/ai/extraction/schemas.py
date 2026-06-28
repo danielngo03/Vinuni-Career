@@ -56,6 +56,7 @@ class JDExtraction(BaseModel):
     document_type: Literal["job_description"] = "job_description"
     title: str = Field(default="", max_length=200)
     description: str = Field(default="", max_length=5000)
+    raw_text: str = Field(default="", max_length=80_000)
     location: str = Field(default="", max_length=500)
     required_skills: list[SkillEvidence] = Field(default_factory=list, max_length=80)
     nice_to_have_skills: list[SkillEvidence] = Field(default_factory=list, max_length=80)

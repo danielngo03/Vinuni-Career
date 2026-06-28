@@ -633,11 +633,30 @@ export interface paths {
             path?: never;
             cookie?: never;
         };
-        get?: never;
+        /** List Interview Sessions */
+        get: operations["list_interview_sessions_api_v1_ai_interviews_sessions_get"];
         put?: never;
         /** Start Interview */
         post: operations["start_interview_api_v1_ai_interviews_sessions_post"];
         delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/ai/interviews/sessions/{session_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get Interview Session */
+        get: operations["get_interview_session_api_v1_ai_interviews_sessions__session_id__get"];
+        put?: never;
+        post?: never;
+        /** Delete Interview Session */
+        delete: operations["delete_interview_session_api_v1_ai_interviews_sessions__session_id__delete"];
         options?: never;
         head?: never;
         patch?: never;
@@ -660,6 +679,23 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/v1/ai/interviews/sessions/{session_id}/answers/accept": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Accept Interview Answer */
+        post: operations["accept_interview_answer_api_v1_ai_interviews_sessions__session_id__answers_accept_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/v1/jobs": {
         parameters: {
             query?: never;
@@ -672,6 +708,57 @@ export interface paths {
         put?: never;
         /** Post Job */
         post: operations["post_job_api_v1_jobs_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/jobs/blank": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Post Blank Job */
+        post: operations["post_blank_job_api_v1_jobs_blank_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/jobs/analyze-upload": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Analyze Job Upload */
+        post: operations["analyze_job_upload_api_v1_jobs_analyze_upload_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/jobs/schedules/clock": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get Schedule Clock */
+        get: operations["get_schedule_clock_api_v1_jobs_schedules_clock_get"];
+        put?: never;
+        post?: never;
         delete?: never;
         options?: never;
         head?: never;
@@ -723,6 +810,93 @@ export interface paths {
         get: operations["get_job_api_v1_jobs__job_id__get"];
         put?: never;
         post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        /** Patch Job */
+        patch: operations["patch_job_api_v1_jobs__job_id__patch"];
+        trace?: never;
+    };
+    "/api/v1/jobs/{job_id}/reanalyze": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Reanalyze */
+        post: operations["reanalyze_api_v1_jobs__job_id__reanalyze_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/jobs/{job_id}/actions": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Run Job Action */
+        post: operations["run_job_action_api_v1_jobs__job_id__actions_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/jobs/{job_id}/schedules": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** List Schedules */
+        get: operations["list_schedules_api_v1_jobs__job_id__schedules_get"];
+        put?: never;
+        /** Create Schedule */
+        post: operations["create_schedule_api_v1_jobs__job_id__schedules_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/jobs/{job_id}/schedules/{schedule_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post?: never;
+        /** Cancel Schedule */
+        delete: operations["cancel_schedule_api_v1_jobs__job_id__schedules__schedule_id__delete"];
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/jobs/schedules/run-due": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Run Due Schedules */
+        post: operations["run_due_schedules_api_v1_jobs_schedules_run_due_post"];
         delete?: never;
         options?: never;
         head?: never;
@@ -913,6 +1087,23 @@ export interface paths {
         put?: never;
         /** Inspect Cv Upload */
         post: operations["inspect_cv_upload_api_v1_cvs_inspect_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/cvs/blank": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Create Blank Cv */
+        post: operations["create_blank_cv_api_v1_cvs_blank_post"];
         delete?: never;
         options?: never;
         head?: never;
@@ -1495,6 +1686,11 @@ export interface components {
             /** Message */
             message: string;
         };
+        /** AcceptInterviewAnswerRequest */
+        AcceptInterviewAnswerRequest: {
+            /** Attempt Id */
+            attempt_id: string;
+        };
         /** AgentCapabilityResponse */
         AgentCapabilityResponse: {
             /** Task Type */
@@ -1511,11 +1707,27 @@ export interface components {
              */
             workforce_version: string;
         };
+        /** AnswerFeedback */
+        AnswerFeedback: {
+            /** Summary */
+            summary: string;
+            /** Tags */
+            tags?: string[];
+            /** Strengths */
+            strengths?: string[];
+            /** Improvements */
+            improvements?: string[];
+        };
         /**
          * ApplicationStatus
          * @enum {string}
          */
         ApplicationStatus: "APPLIED" | "SHORTLISTED" | "HR_INTERVIEW" | "TECH_INTERVIEW" | "FINAL_INTERVIEW" | "OFFERED" | "REJECTED" | "HIRED" | "DECLINED";
+        /** Body_analyze_job_upload_api_v1_jobs_analyze_upload_post */
+        Body_analyze_job_upload_api_v1_jobs_analyze_upload_post: {
+            /** File */
+            file: string;
+        };
         /** Body_inspect_cv_upload_api_v1_cvs_inspect_post */
         Body_inspect_cv_upload_api_v1_cvs_inspect_post: {
             /** Upload */
@@ -1659,7 +1871,9 @@ export interface components {
         /** CVUpdate */
         CVUpdate: {
             /** Title */
-            title: string;
+            title?: string | null;
+            /** Raw Text */
+            raw_text?: string | null;
         };
         /** CVView */
         CVView: {
@@ -1727,6 +1941,14 @@ export interface components {
             /** Should End Interview */
             should_end_interview: boolean;
             report?: components["schemas"]["InterviewReport"] | null;
+            /** Attempt Id */
+            attempt_id?: string | null;
+            feedback?: components["schemas"]["AnswerFeedback"] | null;
+            /**
+             * Awaiting Acceptance
+             * @default false
+             */
+            awaiting_acceptance: boolean;
         };
         /** ChatMessagePayload */
         ChatMessagePayload: {
@@ -2223,6 +2445,12 @@ export interface components {
         /** InterviewConfig */
         InterviewConfig: {
             /**
+             * Interview Mode
+             * @default tech_lead
+             * @enum {string}
+             */
+            interview_mode: "tech_lead" | "technical_check";
+            /**
              * Language
              * @default vi
              */
@@ -2248,17 +2476,17 @@ export interface components {
             allowed_next_phases?: ("career" | "cv_verification" | "problem_solving" | "behavioral" | "candidate_questions" | "completed")[];
             /**
              * Min Questions
-             * @default 8
+             * @default 3
              */
             min_questions: number;
             /**
              * Max Questions
-             * @default 18
+             * @default 12
              */
             max_questions: number;
             /**
              * Max Follow Ups Per Topic
-             * @default 3
+             * @default 2
              */
             max_follow_ups_per_topic: number;
             /**
@@ -2312,11 +2540,91 @@ export interface components {
              */
             confidence: "low" | "medium" | "high";
         };
+        /** InterviewSessionDetail */
+        InterviewSessionDetail: {
+            /** Session Id */
+            session_id: string;
+            /** Job Id */
+            job_id: string;
+            /** Cv Id */
+            cv_id: string;
+            /** Interview Mode */
+            interview_mode: string;
+            /** Status */
+            status: string;
+            /** Current Phase */
+            current_phase: string;
+            /** Question Count */
+            question_count: number;
+            /** Job Title */
+            job_title: string;
+            /**
+             * Created At
+             * Format: date-time
+             */
+            created_at: string;
+            /** Updated At */
+            updated_at?: string | null;
+            /** Has Report */
+            has_report: boolean;
+            /** Report */
+            report?: {
+                [key: string]: unknown;
+            } | null;
+            /** Turns */
+            turns?: components["schemas"]["InterviewTurnView"][];
+        };
+        /** InterviewSessionSummary */
+        InterviewSessionSummary: {
+            /** Session Id */
+            session_id: string;
+            /** Job Id */
+            job_id: string;
+            /** Cv Id */
+            cv_id: string;
+            /** Interview Mode */
+            interview_mode: string;
+            /** Status */
+            status: string;
+            /** Current Phase */
+            current_phase: string;
+            /** Question Count */
+            question_count: number;
+            /** Job Title */
+            job_title: string;
+            /**
+             * Created At
+             * Format: date-time
+             */
+            created_at: string;
+            /** Updated At */
+            updated_at?: string | null;
+            /** Has Report */
+            has_report: boolean;
+        };
         /**
          * InterviewStatus
          * @enum {string}
          */
         InterviewStatus: "SCHEDULED" | "IN_PROGRESS" | "COMPLETED" | "CANCELLED";
+        /** InterviewTurnView */
+        InterviewTurnView: {
+            /** Sequence */
+            sequence: number;
+            /** Phase */
+            phase: string;
+            /** Topic Key */
+            topic_key: string;
+            /** Question */
+            question: string;
+            /** Answer */
+            answer?: string | null;
+            feedback?: components["schemas"]["AnswerFeedback"] | null;
+            /** Attempts */
+            attempts?: {
+                [key: string]: unknown;
+            }[];
+        };
         /**
          * InterviewType
          * @enum {string}
@@ -2360,6 +2668,64 @@ export interface components {
             location: string | null;
             /** Notes */
             notes: string | null;
+        };
+        /** JDExtraction */
+        JDExtraction: {
+            /**
+             * Document Type
+             * @default job_description
+             * @constant
+             */
+            document_type: "job_description";
+            /**
+             * Title
+             * @default
+             */
+            title: string;
+            /**
+             * Description
+             * @default
+             */
+            description: string;
+            /**
+             * Raw Text
+             * @default
+             */
+            raw_text: string;
+            /**
+             * Location
+             * @default
+             */
+            location: string;
+            /** Required Skills */
+            required_skills?: components["schemas"]["SkillEvidence"][];
+            /** Nice To Have Skills */
+            nice_to_have_skills?: components["schemas"]["SkillEvidence"][];
+            /** Responsibilities */
+            responsibilities?: string[];
+            /**
+             * Seniority
+             * @default unknown
+             * @enum {string}
+             */
+            seniority: "intern" | "junior" | "mid" | "senior" | "lead" | "unknown";
+            /**
+             * Employment Type
+             * @default
+             */
+            employment_type: string;
+            /** Compliance Flags */
+            compliance_flags?: string[];
+            /**
+             * Confidence
+             * @default 0
+             */
+            confidence: number;
+        };
+        /** JobActionRequest */
+        JobActionRequest: {
+            /** Action */
+            action: string;
         };
         /** JobApplicationCreate */
         JobApplicationCreate: {
@@ -2453,6 +2819,10 @@ export interface components {
             is_featured: boolean;
             /** Max Openings */
             max_openings?: number | null;
+            /** Parsed Requirements */
+            parsed_requirements?: {
+                [key: string]: unknown;
+            } | null;
         };
         /** JobModerationRequest */
         JobModerationRequest: {
@@ -2490,6 +2860,38 @@ export interface components {
                 [key: string]: unknown;
             };
         };
+        /** JobScheduleCreate */
+        JobScheduleCreate: {
+            /** Action */
+            action: string;
+            /**
+             * Run At
+             * Format: date-time
+             */
+            run_at: string;
+        };
+        /** JobScheduleView */
+        JobScheduleView: {
+            /** Id */
+            id: string;
+            /** Job Id */
+            job_id: string;
+            /** Action */
+            action: string;
+            /**
+             * Run At
+             * Format: date-time
+             */
+            run_at: string;
+            /** Status */
+            status: string;
+            /** Requested By */
+            requested_by: string | null;
+            /** Executed At */
+            executed_at: string | null;
+            /** Error Message */
+            error_message: string | null;
+        };
         /**
          * JobStatus
          * @enum {string}
@@ -2500,6 +2902,35 @@ export interface components {
          * @enum {string}
          */
         JobType: "FULL_TIME" | "PART_TIME" | "INTERNSHIP" | "FREELANCE";
+        /** JobUpdate */
+        JobUpdate: {
+            /** Title */
+            title?: string | null;
+            /** Description */
+            description?: string | null;
+            /** Requirements */
+            requirements?: string | null;
+            /** Responsibilities */
+            responsibilities?: string | null;
+            /** Benefits Text */
+            benefits_text?: string | null;
+            /** Location Address */
+            location_address?: string | null;
+            /** Skills */
+            skills?: string[] | null;
+            /** Benefits */
+            benefits?: string[] | null;
+            /** Application Deadline */
+            application_deadline?: string | null;
+            /** Is Active */
+            is_active?: boolean | null;
+            /** Max Openings */
+            max_openings?: number | null;
+            /** Parsed Requirements */
+            parsed_requirements?: {
+                [key: string]: unknown;
+            } | null;
+        };
         /** JobView */
         JobView: {
             /** Id */
@@ -3074,6 +3505,22 @@ export interface components {
             url: string;
             /** Ttl Seconds */
             ttl_seconds: number;
+        };
+        /** SkillEvidence */
+        SkillEvidence: {
+            /** Name */
+            name: string;
+            /**
+             * Evidence
+             * @default
+             */
+            evidence: string;
+            /**
+             * Proficiency
+             * @default unknown
+             * @enum {string}
+             */
+            proficiency: "beginner" | "intermediate" | "advanced" | "expert" | "unknown";
         };
         /** StartInterviewRequest */
         StartInterviewRequest: {
@@ -4717,6 +5164,37 @@ export interface operations {
             };
         };
     };
+    list_interview_sessions_api_v1_ai_interviews_sessions_get: {
+        parameters: {
+            query?: {
+                job_id?: string | null;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["InterviewSessionSummary"][];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
     start_interview_api_v1_ai_interviews_sessions_post: {
         parameters: {
             query?: never;
@@ -4750,6 +5228,66 @@ export interface operations {
             };
         };
     };
+    get_interview_session_api_v1_ai_interviews_sessions__session_id__get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                session_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["InterviewSessionDetail"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    delete_interview_session_api_v1_ai_interviews_sessions__session_id__delete: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                session_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
     answer_interview_question_api_v1_ai_interviews_sessions__session_id__answers_post: {
         parameters: {
             query?: never;
@@ -4762,6 +5300,41 @@ export interface operations {
         requestBody: {
             content: {
                 "application/json": components["schemas"]["InterviewAnswerRequest"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["CandidateInterviewResponse"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    accept_interview_answer_api_v1_ai_interviews_sessions__session_id__answers_accept_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                session_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["AcceptInterviewAnswerRequest"];
             };
         };
         responses: {
@@ -4854,6 +5427,105 @@ export interface operations {
             };
         };
     };
+    post_blank_job_api_v1_jobs_blank_post: {
+        parameters: {
+            query?: never;
+            header?: {
+                "X-Identity-Id"?: string | null;
+            };
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["JobView"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    analyze_job_upload_api_v1_jobs_analyze_upload_post: {
+        parameters: {
+            query?: never;
+            header?: {
+                "X-Identity-Id"?: string | null;
+            };
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "multipart/form-data": components["schemas"]["Body_analyze_job_upload_api_v1_jobs_analyze_upload_post"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["JDExtraction"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    get_schedule_clock_api_v1_jobs_schedules_clock_get: {
+        parameters: {
+            query?: never;
+            header?: {
+                "X-Identity-Id"?: string | null;
+            };
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        [key: string]: unknown;
+                    };
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
     get_jobs_page_api_v1_jobs_page_get: {
         parameters: {
             query?: {
@@ -4926,6 +5598,250 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["JobView"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    patch_job_api_v1_jobs__job_id__patch: {
+        parameters: {
+            query?: never;
+            header?: {
+                "X-Identity-Id"?: string | null;
+            };
+            path: {
+                job_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["JobUpdate"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["JobView"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    reanalyze_api_v1_jobs__job_id__reanalyze_post: {
+        parameters: {
+            query?: never;
+            header?: {
+                "X-Identity-Id"?: string | null;
+            };
+            path: {
+                job_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["JobView"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    run_job_action_api_v1_jobs__job_id__actions_post: {
+        parameters: {
+            query?: never;
+            header?: {
+                "X-Identity-Id"?: string | null;
+            };
+            path: {
+                job_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["JobActionRequest"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["JobView"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    list_schedules_api_v1_jobs__job_id__schedules_get: {
+        parameters: {
+            query?: never;
+            header?: {
+                "X-Identity-Id"?: string | null;
+            };
+            path: {
+                job_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["JobScheduleView"][];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    create_schedule_api_v1_jobs__job_id__schedules_post: {
+        parameters: {
+            query?: never;
+            header?: {
+                "X-Identity-Id"?: string | null;
+            };
+            path: {
+                job_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["JobScheduleCreate"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["JobScheduleView"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    cancel_schedule_api_v1_jobs__job_id__schedules__schedule_id__delete: {
+        parameters: {
+            query?: never;
+            header?: {
+                "X-Identity-Id"?: string | null;
+            };
+            path: {
+                job_id: string;
+                schedule_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["JobScheduleView"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    run_due_schedules_api_v1_jobs_schedules_run_due_post: {
+        parameters: {
+            query?: never;
+            header?: {
+                "X-Identity-Id"?: string | null;
+            };
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        [key: string]: unknown;
+                    };
                 };
             };
             /** @description Validation Error */
@@ -5395,6 +6311,26 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    create_blank_cv_api_v1_cvs_blank_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["CVView"];
                 };
             };
         };

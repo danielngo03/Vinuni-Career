@@ -17,6 +17,7 @@ def test_openapi_exposes_v2_operational_contracts(client: TestClient):
         "/api/v1/ai/interviews/sessions",
         "/api/v1/ai/interviews/sessions/{session_id}",
         "/api/v1/ai/interviews/sessions/{session_id}/answers",
+        "/api/v1/ai/interviews/sessions/{session_id}/answers/accept",
         "/api/v1/dashboard/student",
     }
     assert required.issubset(paths)
@@ -33,6 +34,9 @@ def test_candidate_interview_response_does_not_expose_internal_fields(client: Te
         "current_phase",
         "should_end_interview",
         "report",
+        "attempt_id",
+        "feedback",
+        "awaiting_acceptance",
     }
     assert not {
         "internal_reason",

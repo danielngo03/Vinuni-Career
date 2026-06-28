@@ -12,7 +12,7 @@ import {
   Trash,
   WarningCircle,
 } from "@phosphor-icons/react";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { toast } from "sonner";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -31,6 +31,16 @@ interface InterviewResponse {
   current_phase: string;
   should_end_interview: boolean;
   report: InterviewReport | null;
+  attempt_id?: string | null;
+  feedback?: AnswerFeedback | null;
+  awaiting_acceptance?: boolean;
+}
+
+interface AnswerFeedback {
+  summary: string;
+  tags: string[];
+  strengths: string[];
+  improvements: string[];
 }
 
 interface InterviewReportDimension {
@@ -75,6 +85,12 @@ interface InterviewSessionDetail extends InterviewSessionSummary {
     topic_key: string;
     question: string;
     answer: string | null;
+    feedback: AnswerFeedback | null;
+    attempts: Array<{
+      attempt_id: string;
+      answer: string;
+      feedback: AnswerFeedback;
+    }>;
   }>;
 }
 
@@ -88,6 +104,10 @@ export function AIInterviewHistory() {
   const [deletingId, setDeletingId] = useState<string | null>(null);
   const [answer, setAnswer] = useState("");
   const [submittingAnswer, setSubmittingAnswer] = useState(false);
+  const [attemptId, setAttemptId] = useState<string | null>(null);
+  const [attemptedAnswer, setAttemptedAnswer] = useState("");
+  const transcriptEndRef = useRef<HTMLDivElement>(null);
+  const answerRef = useRef<HTMLTextAreaElement>(null);
 
   const dateFormatter = useMemo(
     () =>
@@ -115,6 +135,17 @@ export function AIInterviewHistory() {
     return () => window.clearTimeout(timer);
   }, [loadSessions]);
 
+  useEffect(() => {
+    if (!selected || activeTab !== "transcript") return;
+    const frame = window.requestAnimationFrame(() => {
+      transcriptEndRef.current?.scrollIntoView({
+        behavior: "smooth",
+        block: "end",
+      });
+    });
+    return () => window.cancelAnimationFrame(frame);
+  }, [activeTab, attemptId, selected]);
+
   async function openSession(sessionId: string) {
     setDetailLoading(true);
     setActiveTab("transcript");
@@ -122,7 +153,31 @@ export function AIInterviewHistory() {
       const detail = await apiFetch<InterviewSessionDetail>(
         `/ai/interviews/sessions/${sessionId}`,
       );
-      setSelected(detail);
+      const latestAttempt = detail.turns.at(-1)?.attempts.at(-1);
+      setSelected(
+        detail.status !== "COMPLETED" && latestAttempt
+          ? {
+              ...detail,
+              turns: detail.turns.map((turn, index) =>
+                index === detail.turns.length - 1
+                  ? {
+                      ...turn,
+                      answer: latestAttempt.answer,
+                      feedback: latestAttempt.feedback,
+                    }
+                  : turn,
+              ),
+            }
+          : detail,
+      );
+      setAttemptId(
+        detail.status !== "COMPLETED" && latestAttempt
+          ? latestAttempt.attempt_id
+          : null,
+      );
+      setAttemptedAnswer(
+        detail.status !== "COMPLETED" && latestAttempt ? latestAttempt.answer : "",
+      );
       setAnswer("");
     } catch (error) {
       toast.error(apiMessage(error, dictionary.common.retry));
@@ -146,9 +201,52 @@ export function AIInterviewHistory() {
         },
       );
 
+      const nextSelected: InterviewSessionDetail = {
+        ...selected,
+        turns: selected.turns.map((turn, index) =>
+          index === selected.turns.length - 1 && response.feedback
+            ? {
+                ...turn,
+                answer: content,
+                feedback: response.feedback,
+                attempts: [
+                  ...turn.attempts,
+                  {
+                    attempt_id: response.attempt_id || "",
+                    answer: content,
+                    feedback: response.feedback,
+                  },
+                ],
+              }
+            : turn,
+        ),
+      };
+
+      setSelected(nextSelected);
+      setAttemptId(response.attempt_id || null);
+      setAttemptedAnswer(content);
+      setAnswer("");
+    } catch (error) {
+      toast.error(apiMessage(error, dictionary.common.retry));
+    } finally {
+      setSubmittingAnswer(false);
+    }
+  }
+
+  async function acceptAnswer() {
+    if (!selected || !attemptId) return;
+    setSubmittingAnswer(true);
+    try {
+      const response = await apiFetch<InterviewResponse>(
+        `/ai/interviews/sessions/${selected.session_id}/answers/accept`,
+        {
+          method: "POST",
+          body: JSON.stringify({ attempt_id: attemptId }),
+        },
+      );
       const nextTurns = selected.turns.map((turn, index) =>
-        index === selected.turns.length - 1 && !turn.answer
-          ? { ...turn, answer: content }
+        index === selected.turns.length - 1
+          ? { ...turn, answer: attemptedAnswer }
           : turn,
       );
       if (response.question) {
@@ -158,9 +256,10 @@ export function AIInterviewHistory() {
           topic_key: "",
           question: response.question,
           answer: null,
+          feedback: null,
+          attempts: [],
         });
       }
-
       const nextSelected: InterviewSessionDetail = {
         ...selected,
         current_phase: response.current_phase,
@@ -171,7 +270,6 @@ export function AIInterviewHistory() {
         turns: nextTurns,
         updated_at: new Date().toISOString(),
       };
-
       setSelected(nextSelected);
       setSessions((items) =>
         items.map((item) =>
@@ -187,13 +285,32 @@ export function AIInterviewHistory() {
             : item,
         ),
       );
-      setAnswer("");
+      setAttemptId(null);
+      setAttemptedAnswer("");
       if (response.should_end_interview) setActiveTab("report");
     } catch (error) {
       toast.error(apiMessage(error, dictionary.common.retry));
     } finally {
       setSubmittingAnswer(false);
     }
+  }
+
+  function retryAnswer() {
+    setAnswer(attemptedAnswer);
+    setAttemptId(null);
+    setSelected((detail) =>
+      detail
+        ? {
+            ...detail,
+            turns: detail.turns.map((turn, index) =>
+              index === detail.turns.length - 1
+                ? { ...turn, answer: null, feedback: null }
+                : turn,
+            ),
+          }
+        : detail,
+    );
+    window.requestAnimationFrame(() => answerRef.current?.focus());
   }
 
   async function deleteSession(sessionId: string) {
@@ -315,7 +432,7 @@ export function AIInterviewHistory() {
               )}`
             : "Đang tải nội dung buổi phỏng vấn..."
         }
-        contentClassName="max-w-5xl"
+        contentClassName="max-w-6xl"
       >
         {detailLoading ? <PanelSkeleton /> : null}
         {!detailLoading && selected ? (
@@ -324,9 +441,14 @@ export function AIInterviewHistory() {
             activeTab={activeTab}
             answer={answer}
             submittingAnswer={submittingAnswer}
+            attemptId={attemptId}
             onTabChange={setActiveTab}
             onAnswerChange={setAnswer}
             onSubmitAnswer={submitAnswer}
+            onAcceptAnswer={acceptAnswer}
+            onRetryAnswer={retryAnswer}
+            transcriptEndRef={transcriptEndRef}
+            answerRef={answerRef}
           />
         ) : null}
       </Modal>
@@ -339,18 +461,30 @@ function InterviewDetail({
   activeTab,
   answer,
   submittingAnswer,
+  attemptId,
   onTabChange,
   onAnswerChange,
   onSubmitAnswer,
+  onAcceptAnswer,
+  onRetryAnswer,
+  transcriptEndRef,
+  answerRef,
 }: {
   detail: InterviewSessionDetail;
   activeTab: DetailTab;
   answer: string;
   submittingAnswer: boolean;
+  attemptId: string | null;
   onTabChange: (tab: DetailTab) => void;
   onAnswerChange: (value: string) => void;
   onSubmitAnswer: (event: React.FormEvent<HTMLFormElement>) => void;
+  onAcceptAnswer: () => void;
+  onRetryAnswer: () => void;
+  transcriptEndRef: React.RefObject<HTMLDivElement | null>;
+  answerRef: React.RefObject<HTMLTextAreaElement | null>;
 }) {
+  const latestFeedback = detail.turns.at(-1)?.feedback;
+
   return (
     <div className="space-y-5">
       <div className="flex flex-wrap items-center gap-2">
@@ -380,19 +514,69 @@ function InterviewDetail({
         />
       </div>
 
-      <div className="max-h-[58vh] overflow-y-auto pr-1">
-        {activeTab === "transcript" ? <TranscriptPage detail={detail} /> : null}
-        {activeTab === "report" ? <ReportPage report={detail.report} /> : null}
-      </div>
+      {activeTab === "transcript" ? (
+        <div className="grid h-[65vh] min-h-0 grid-cols-[minmax(0,2fr)_minmax(20rem,1fr)] gap-5">
+          <section className="flex min-h-0 flex-col rounded-2xl border">
+            <div className="min-h-0 flex-1 overflow-y-auto p-4">
+              <TranscriptPage detail={detail} endRef={transcriptEndRef} />
+            </div>
+            {detail.status !== "COMPLETED" && !attemptId ? (
+              <ResumeAnswerForm
+                answer={answer}
+                pending={submittingAnswer}
+                onAnswerChange={onAnswerChange}
+                onSubmit={onSubmitAnswer}
+                answerRef={answerRef}
+              />
+            ) : null}
+          </section>
 
-      {detail.status !== "COMPLETED" && activeTab === "transcript" ? (
-        <ResumeAnswerForm
-          answer={answer}
-          pending={submittingAnswer}
-          onAnswerChange={onAnswerChange}
-          onSubmit={onSubmitAnswer}
-        />
-      ) : null}
+          <aside className="flex min-h-0 flex-col rounded-2xl border bg-slate-50/70">
+            <div className="border-b px-5 py-3">
+              <p className="text-sm font-semibold">Coaching</p>
+              <p className="mt-0.5 text-xs text-muted">
+                {latestFeedback ? "Nhận xét câu trả lời hiện tại" : "Hướng dẫn luyện tập"}
+              </p>
+            </div>
+            <div className="min-h-0 flex-1 overflow-y-auto p-4">
+              {latestFeedback ? (
+                <AnswerFeedbackCard feedback={latestFeedback} />
+              ) : (
+                <div className="rounded-xl border border-dashed bg-white p-4">
+                  <p className="text-sm font-semibold">Tiếp tục buổi phỏng vấn</p>
+                  <p className="mt-2 text-sm leading-6 text-muted">
+                    Trả lời câu hỏi hiện tại để nhận feedback và lựa chọn thử lại trước khi tiếp tục.
+                  </p>
+                </div>
+              )}
+            </div>
+            {detail.status !== "COMPLETED" && attemptId ? (
+              <div className="space-y-3 border-t bg-white p-4">
+                <Button
+                  className="w-full"
+                  disabled={submittingAnswer}
+                  onClick={onAcceptAnswer}
+                >
+                  {submittingAnswer ? <SpinnerGap className="size-4 animate-spin" /> : null}
+                  Dùng câu trả lời này và tiếp tục
+                </Button>
+                <Button
+                  className="w-full"
+                  variant="outline"
+                  disabled={submittingAnswer}
+                  onClick={onRetryAnswer}
+                >
+                  Thử trả lời lại
+                </Button>
+              </div>
+            ) : null}
+          </aside>
+        </div>
+      ) : (
+        <div className="max-h-[65vh] overflow-y-auto pr-1">
+          <ReportPage report={detail.report} />
+        </div>
+      )}
     </div>
   );
 }
@@ -422,7 +606,13 @@ function TabButton({
   );
 }
 
-function TranscriptPage({ detail }: { detail: InterviewSessionDetail }) {
+function TranscriptPage({
+  detail,
+  endRef,
+}: {
+  detail: InterviewSessionDetail;
+  endRef: React.RefObject<HTMLDivElement | null>;
+}) {
   if (!detail.turns.length) {
     return (
       <EmptyState
@@ -434,7 +624,7 @@ function TranscriptPage({ detail }: { detail: InterviewSessionDetail }) {
   }
   return (
     <section className="space-y-4">
-      {detail.turns.map((turn) => (
+      {detail.turns.map((turn, index) => (
         <article key={turn.sequence} className="rounded-2xl border p-4">
           <p className="text-xs font-semibold uppercase text-primary">Câu {turn.sequence}</p>
           <div className="mt-3 border-l-2 border-primary pl-3">
@@ -447,9 +637,48 @@ function TranscriptPage({ detail }: { detail: InterviewSessionDetail }) {
               {turn.answer || "Chưa trả lời"}
             </p>
           </div>
+          {turn.feedback && index < detail.turns.length - 1 ? (
+            <div className="mt-3 flex flex-wrap gap-1.5">
+              {turn.feedback.tags.map((tag) => (
+                <span
+                  key={tag}
+                  className="rounded-full bg-primary/5 px-2.5 py-1 text-xs font-medium text-primary"
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
+          ) : null}
         </article>
       ))}
+      <div ref={endRef} aria-hidden="true" />
     </section>
+  );
+}
+
+function AnswerFeedbackCard({ feedback }: { feedback: AnswerFeedback }) {
+  return (
+    <div className="mt-3 rounded-xl border border-primary/20 bg-primary/5 p-3">
+      <p className="text-xs font-semibold uppercase text-primary">Nhận xét câu trả lời</p>
+      <div className="mt-2 flex flex-wrap gap-2">
+        {feedback.tags.map((tag) => (
+          <span key={tag} className="rounded-full bg-white px-2.5 py-1 text-xs font-medium text-primary ring-1 ring-primary/15">
+            {tag}
+          </span>
+        ))}
+      </div>
+      <p className="mt-3 text-sm leading-6 text-muted">{feedback.summary}</p>
+      {feedback.strengths.length ? (
+        <p className="mt-2 text-xs leading-5 text-emerald-700">
+          Điểm tốt: {feedback.strengths.join(" · ")}
+        </p>
+      ) : null}
+      {feedback.improvements.length ? (
+        <p className="mt-1 text-xs leading-5 text-amber-700">
+          Có thể bổ sung: {feedback.improvements.join(" · ")}
+        </p>
+      ) : null}
+    </div>
   );
 }
 
@@ -458,19 +687,22 @@ function ResumeAnswerForm({
   pending,
   onAnswerChange,
   onSubmit,
+  answerRef,
 }: {
   answer: string;
   pending: boolean;
   onAnswerChange: (value: string) => void;
   onSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
+  answerRef: React.RefObject<HTMLTextAreaElement | null>;
 }) {
   return (
-    <form onSubmit={onSubmit} className="space-y-3 border-t pt-4">
+    <form onSubmit={onSubmit} className="space-y-3 border-t bg-white p-4">
       <div>
         <label className="text-sm font-semibold" htmlFor="saved-interview-answer">
           Trả lời câu hiện tại
         </label>
         <textarea
+          ref={answerRef}
           id="saved-interview-answer"
           value={answer}
           onChange={(event) => onAnswerChange(event.target.value)}
