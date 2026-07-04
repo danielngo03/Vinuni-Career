@@ -28,7 +28,7 @@ def format_tool_result(plan: AgentPlan, result: dict[str, Any]) -> str:
         registered = plan.tool_name == "get_my_registered_events"
         return _format_events_result(result, registered=registered)
     if plan.tool_name == "search_companies":
-        return _format_companies_result(result)
+        return _format_companies_result(result, plan=plan)
     if plan.tool_name == "get_company_detail":
         return _format_company_detail_result(result)
     if plan.tool_name == "get_company_reviews":
@@ -103,13 +103,24 @@ def _format_jobs_result(result: dict[str, Any], *, plan: AgentPlan) -> str:
             "Bạn có thể thử từ khóa khác trên trang **Việc làm**."
         )
     if plan.tool_name == "recommend_jobs":
-        heading = "Một số việc làm phù hợp với hồ sơ của bạn:"
+        if _is_platform_only_reason(plan.reason):
+            heading = f"{plan.reason}\nMình sẽ gợi ý việc làm bằng dữ liệu nội bộ:"
+        elif plan.reason:
+            heading = (
+                "Bạn muốn ứng tuyển, nên mình cần chọn đúng vị trí trước. "
+                "Một số việc làm phù hợp với hồ sơ của bạn:"
+            )
+        else:
+            heading = "Một số việc làm phù hợp với hồ sơ của bạn:"
     elif plan.tool_name == "get_saved_jobs":
         heading = "Các việc làm bạn đã lưu:"
     elif plan.tool_name == "get_partner_jobs":
         heading = "Các job đang quản lý:"
     else:
-        heading = "Mình tìm thấy các việc làm sau:"
+        if _is_platform_only_reason(plan.reason):
+            heading = f"{plan.reason}\nMình tìm thấy các việc làm trong hệ thống:"
+        else:
+            heading = "Mình tìm thấy các việc làm sau:"
     lines = [heading]
     for index, item in enumerate(jobs[:5], start=1):
         company = item.get("company") or item.get("company_name") or ""
@@ -117,7 +128,10 @@ def _format_jobs_result(result: dict[str, Any], *, plan: AgentPlan) -> str:
             f"{index}. {item.get('title', 'Vị trí tuyển dụng')} · {company} · "
             f"{item.get('url', '/jobs')}"
         )
-    lines.append("Bạn có thể nói “xem chi tiết job thứ 2” hoặc “so CV với job đó”.")
+    lines.append(
+        "Bạn có thể nói “xem chi tiết job thứ 2”, “so CV với job đó”, "
+        "hoặc “apply job thứ 2”."
+    )
     return "\n".join(lines)
 
 
@@ -177,13 +191,15 @@ def _format_cvs_result(result: dict[str, Any], *, plan: AgentPlan) -> str:
             "Bạn chưa có CV nào trong hệ thống. "
             "Hãy vào **CV Studio** để upload CV hoặc tạo CV từ mẫu."
         )
+    total = result.get("total")
     if plan.reason:
         lines = [
             "Mình đã tìm thấy CV của bạn. Để check CV thật chính xác, "
             "hãy chọn một JD/job cụ thể để hệ thống so kỹ năng, keyword và độ phù hợp."
         ]
     else:
-        lines = ["CV hiện có trong thư viện của bạn:"]
+        count_text = f"Bạn đang có {total} CV trong thư viện." if total is not None else None
+        lines = [count_text or "CV hiện có trong thư viện của bạn:", "Danh sách CV hiện có:"]
     for index, cv in enumerate(cvs[:5], start=1):
         primary = " · CV chính" if cv.get("is_primary") else ""
         lines.append(
@@ -224,14 +240,22 @@ def _format_events_result(result: dict[str, Any], *, registered: bool) -> str:
     return "\n".join(lines)
 
 
-def _format_companies_result(result: dict[str, Any]) -> str:
+def _format_companies_result(result: dict[str, Any], *, plan: AgentPlan) -> str:
     companies = result.get("companies") or []
     if not companies:
+        if _is_platform_only_reason(plan.reason):
+            return (
+                f"{plan.reason}\nMình chưa tìm thấy công ty phù hợp trong dữ liệu nội bộ. "
+                "Bạn có thể thử tên công ty khác trong trang **Công ty**."
+            )
         return (
             "Mình chưa tìm thấy công ty phù hợp. "
             "Bạn có thể thử từ khóa khác trong trang **Công ty**."
         )
-    lines = ["Một số công ty phù hợp:"]
+    if _is_platform_only_reason(plan.reason):
+        lines = [f"{plan.reason}\nMột số công ty phù hợp trong hệ thống:"]
+    else:
+        lines = ["Một số công ty phù hợp:"]
     for index, company in enumerate(companies[:5], start=1):
         lines.append(
             f"{index}. {company.get('name', 'Công ty')} · {company.get('industry', '')} "
@@ -239,6 +263,10 @@ def _format_companies_result(result: dict[str, Any]) -> str:
         )
     lines.append("Bạn có thể hỏi “review công ty thứ 1” hoặc “chi tiết công ty đó”.")
     return "\n".join(lines)
+
+
+def _is_platform_only_reason(reason: str | None) -> bool:
+    return bool(reason and "không tra cứu internet" in reason.lower())
 
 
 def _format_company_detail_result(result: dict[str, Any]) -> str:
@@ -285,8 +313,17 @@ def _format_profile_result(result: dict[str, Any]) -> str:
     missing = result.get("missing_sections") or []
     base = f"Hồ sơ của bạn đang hoàn thiện khoảng {result.get('completion_pct', 0)}%."
     if missing:
-        return base + "\nNên bổ sung: " + ", ".join(str(item) for item in missing[:5]) + "."
-    return base + "\nHồ sơ đã khá đầy đủ. Bạn có thể cập nhật CV và trạng thái open-to-work."
+        return (
+            base
+            + "\nNếu bạn đang chưa rõ hướng đi, bước đầu nên bổ sung: "
+            + ", ".join(str(item) for item in missing[:5])
+            + ". Sau đó mình có thể gợi ý việc làm phù hợp hơn từ hồ sơ/CV của bạn."
+        )
+    return (
+        base
+        + "\nHồ sơ đã khá đầy đủ. Bạn có thể hỏi “gợi ý job phù hợp” hoặc "
+        "“so CV với job thứ 1” để đi tiếp."
+    )
 
 
 def _format_interviews_result(result: dict[str, Any]) -> str:

@@ -44,7 +44,7 @@ INTENT_BENIGN = "benign"
 INTENT_OFF_TOPIC = "off_topic"           # clearly outside VinUni career domain
 INTENT_BOUNDARY_PROBE = "boundary_probe" # testing limits / jailbreak attempt
 INTENT_HARMFUL = "harmful"               # explicit harmful content request
-INTENT_COMPETITOR = "competitor"         # asking about competing services by name
+INTENT_EXTERNAL_SOURCE = "external_source"  # asking the assistant to use non-platform sources
 INTENT_PERSONAL_DATA = "personal_data"   # PII was present (already redacted by input_guard)
 
 # Policy actions
@@ -127,10 +127,27 @@ _HARMFUL_SIGNALS = [
     re.compile(r"\b(child|minor).{0,20}\b(sexual|nude|naked|exploit)\b", re.I),
 ]
 
-_COMPETITOR_SIGNALS = [
+_EXTERNAL_SOURCE_SIGNALS = [
     re.compile(
-        r"\b(linkedin|glassdoor|topcv|vieclam24h|careerbuilder|indeed)\s+"
-        r"(job|post|recommend|search)",
+        r"\b(search|find|browse|crawl|scrape|tra\s*cứu|tìm|kiếm|xem|review|đánh\s*giá)\b"
+        r".{0,50}\b(linked\s*in|linkedin|linkedln|linkdn|glassdoor|topcv|"
+        r"vieclam24h|careerbuilder|indeed|"
+        r"google|internet|web|website)\b",
+        re.I,
+    ),
+    re.compile(
+        r"\b(linked\s*in|linkedin|linkedln|linkdn|glassdoor|topcv|"
+        r"vieclam24h|careerbuilder|indeed|"
+        r"google|internet|web|website)\b.{0,50}"
+        r"\b(job|post|recommend|search|review|đánh\s*giá|gợi\s*ý|việc|công\s*ty)\b",
+        re.I,
+    ),
+]
+
+_PLATFORM_COMPANY_LOOKUP_ALLOWLIST = [
+    re.compile(
+        r"\bgoogle\b.{0,30}\b(là\s*công\s*ty|company|employer|nhà\s*tuyển\s*dụng)\b"
+        r"|\b(là\s*công\s*ty|company|employer|nhà\s*tuyển\s*dụng)\b.{0,30}\bgoogle\b",
         re.I,
     ),
 ]
@@ -155,10 +172,14 @@ def _classify_intent(text: str) -> tuple[str, list[str]]:
             flags.append("off_topic")
             return INTENT_OFF_TOPIC, flags
 
-    for pattern in _COMPETITOR_SIGNALS:
+    for pattern in _PLATFORM_COMPANY_LOOKUP_ALLOWLIST:
         if pattern.search(text):
-            flags.append("competitor_mention")
-            return INTENT_COMPETITOR, flags
+            return INTENT_BENIGN, flags
+
+    for pattern in _EXTERNAL_SOURCE_SIGNALS:
+        if pattern.search(text):
+            flags.append("external_source_request")
+            return INTENT_EXTERNAL_SOURCE, flags
 
     return INTENT_BENIGN, flags
 
@@ -183,10 +204,10 @@ _INTENT_TOOL_POLICY: dict[str, dict[str, str]] = {
         WRITE_WITH_CONFIRM: ACTION_ALLOW_WITH_NOTE,
         ADMIN_ONLY: ACTION_ALLOW,
     },
-    INTENT_COMPETITOR: {
-        READ_ONLY: ACTION_ALLOW_WITH_NOTE,
-        WRITE_WITH_CONFIRM: ACTION_ALLOW_WITH_NOTE,
-        ADMIN_ONLY: ACTION_ALLOW,
+    INTENT_EXTERNAL_SOURCE: {
+        READ_ONLY: ACTION_REFUSE,
+        WRITE_WITH_CONFIRM: ACTION_REFUSE,
+        ADMIN_ONLY: ACTION_REFUSE,
     },
     INTENT_BENIGN: {
         READ_ONLY: ACTION_ALLOW,
@@ -208,6 +229,10 @@ _REFUSAL_MESSAGES: dict[str, str] = {
         "Xin lỗi, tôi không thể chia sẻ thông tin về cấu hình nội bộ, "
         "nhà cung cấp, hay hướng dẫn hệ thống. "
         "Tôi có thể giúp bạn tìm việc làm, chuẩn bị CV, hoặc luyện phỏng vấn nhé?",
+    INTENT_EXTERNAL_SOURCE:
+        "Mình không thể tra cứu internet hoặc nguồn ngoài hệ thống. "
+        "Mình chỉ dùng dữ liệu trong VinUni Career Platform như việc làm, CV, "
+        "đơn ứng tuyển, sự kiện, công ty và knowledge base nội bộ.",
 }
 
 

@@ -33,10 +33,15 @@ export const TOOL_LABELS: Record<string, string> = {
   recommend_jobs: "Đang tìm gợi ý phù hợp…",
   get_career_advice: "Đang tra cứu định hướng nghề nghiệp…",
   get_salary_benchmark: "Đang tra cứu mức lương…",
+  save_job: "Đang chuẩn bị lưu việc làm…",
+  apply_job: "Đang chuẩn bị nộp đơn…",
+  knowledge_base_query: "Đang tra cứu hướng dẫn hệ thống…",
+  start_interview_sim: "Đang chuẩn bị luyện phỏng vấn…",
 };
 
 export const STATUS_LABELS: Record<string, string> = {
   received: "Đã nhận yêu cầu của bạn",
+  confirming_action: "Cần bạn xác nhận trước khi thực hiện",
   thinking: "Đang phân tích ý định",
   retrieving_context: "Đang lấy ngữ cảnh hồ sơ",
   using_tool: "Đang tra cứu dữ liệu hệ thống",

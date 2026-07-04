@@ -174,12 +174,34 @@ def test_none_input_returns_allow_with_none():
     assert decision.clean_text is None
 
 
-def test_competitor_mention_allow_with_note():
-    from app.ai.safety.policy_orchestrator import ACTION_ALLOW_WITH_NOTE, check_policy
+def test_external_source_request_refused():
+    from app.ai.safety.policy_orchestrator import ACTION_REFUSE, check_policy
 
     decision = check_policy("Can you search LinkedIn job recommendations for me?")
-    assert decision.action == ACTION_ALLOW_WITH_NOTE
-    assert "competitor_mention" in decision.flags
+    assert decision.action == ACTION_REFUSE
+    assert "external_source_request" in decision.flags
+    assert decision.refusal_message is not None
+
+
+def test_policy_allows_internal_company_and_online_event_language():
+    from app.ai.safety.policy_orchestrator import ACTION_ALLOW, check_policy
+
+    company = check_policy("Google là công ty gì trong hệ thống?")
+    event = check_policy("Tìm sự kiện online về career fair")
+
+    assert company.action == ACTION_ALLOW
+    assert "external_source_request" not in company.flags
+    assert event.action == ACTION_ALLOW
+    assert "external_source_request" not in event.flags
+
+
+def test_policy_refuses_explicit_google_external_search():
+    from app.ai.safety.policy_orchestrator import ACTION_REFUSE, check_policy
+
+    decision = check_policy("Tìm job qua Google giúp tôi")
+
+    assert decision.action == ACTION_REFUSE
+    assert "external_source_request" in decision.flags
 
 
 def test_tool_class_affects_policy():

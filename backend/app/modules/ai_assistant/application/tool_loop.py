@@ -127,12 +127,20 @@ def agent_plan_requires_confirmation(plan: AgentPlan) -> bool:
 
 def create_confirmation_message(chat: ChatSession, plan: AgentPlan) -> ChatMessage:
     tool_name = plan.tool_name or ""
-    reason = f": {plan.reason}" if plan.reason else ""
+    spec = TOOL_SPECS.get(tool_name)
+    copy = spec.confirmation_copy if spec else None
+    if copy:
+        content = f"{copy.title}\n{copy.body}"
+        if plan.reason:
+            content = f"{content}\n\n{plan.reason}"
+    else:
+        reason = f": {plan.reason}" if plan.reason else ""
+        content = f"Đang chờ xác nhận để thực hiện {tool_name}{reason}"
     return ChatMessage(
         id=uuid.uuid4(),
         session_id=chat.id,
         role="tool_call",
-        content=f"Đang chờ xác nhận để thực hiện {tool_name}{reason}",
+        content=content,
         tool_name=tool_name,
         tool_args=plan.tool_args or {},
         requires_confirmation=True,
@@ -215,8 +223,9 @@ async def confirm_tool_action(
     # Write a follow-up assistant message summarising the outcome
     ok = result.get("ok", False)
     summary_text = (
-        f"✅ Đã thực hiện: {tool_name}." if ok
-        else f"❌ Không thể thực hiện {tool_name}. Vui lòng thử lại."
+        _confirmation_result_text(tool_name)
+        if ok
+        else _confirmation_error_text(tool_name, result)
     )
     follow_up = ChatMessage(
         id=uuid.uuid4(),
@@ -233,6 +242,32 @@ async def confirm_tool_action(
         "confirmed": serialize_message(pending),
         "reply": serialize_message(follow_up),
     }
+
+
+def _confirmation_result_text(tool_name: str) -> str:
+    if tool_name == "save_job":
+        return "Đã lưu việc làm này vào danh sách của bạn."
+    if tool_name == "apply_job":
+        return "Đã nộp đơn ứng tuyển. Bạn có thể theo dõi trạng thái trong **Đơn ứng tuyển**."
+    if tool_name == "move_candidate_stage":
+        return "Đã cập nhật trạng thái ứng viên."
+    return "Đã thực hiện thao tác."
+
+
+def _confirmation_error_text(tool_name: str, result: dict[str, Any]) -> str:
+    error = result.get("error")
+    if tool_name == "apply_job":
+        if error == "no_cv_found":
+            return "Bạn chưa có CV để nộp đơn. Hãy tạo hoặc upload CV trong **CV Studio** trước."
+        if error == "already_applied":
+            return (
+                "Bạn đã ứng tuyển vị trí này rồi. "
+                "Hãy kiểm tra trạng thái trong **Đơn ứng tuyển**."
+            )
+        return "Mình chưa nộp đơn được lúc này. Bạn có thể mở trang việc làm và nhấn **Ứng tuyển**."
+    if tool_name == "save_job":
+        return "Mình chưa lưu được việc làm này. Bạn có thể mở trang việc làm và nhấn nút lưu."
+    return "Mình chưa thực hiện được thao tác này. Vui lòng thử lại."
 
 
 # --------------------------------------------------------------------------- #

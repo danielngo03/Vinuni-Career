@@ -13,6 +13,7 @@ from app.modules.notifications.domain.models import NotificationOutbox
 from app.modules.onboarding.application import onboarding_service as svc
 from app.modules.onboarding.domain.models import StudentVerification
 from app.modules.organization.domain.models import PartnerRegistrationRequest
+from app.modules.users.application.user_write_facade import update_identity_persona
 from app.shared.models import AuditLog
 from sqlalchemy import select
 
@@ -45,6 +46,18 @@ async def test_get_or_create_initial_state_starts_at_role_select(db_session) -> 
     # Idempotent: fetching again returns the SAME row, not a fresh reset one.
     again = await svc.get_or_create_onboarding_state(db_session, user_id=user.id)
     assert again.user_id == state.user_id
+    await db_session.commit()
+
+
+async def test_org_scoped_identity_without_state_does_not_get_stuck(db_session) -> None:
+    user = await register_verified(db_session, email="onb_invited_partner@vinuni.edu.vn")
+    await update_identity_persona(db_session, user_id=user.id, persona="partner_member")
+    await db_session.flush()
+
+    status = await svc.get_status(db_session, user_id=user.id)
+    assert status["current_step"] == "complete"
+    assert status["is_complete"] is True
+    assert status["role"] is None
     await db_session.commit()
 
 

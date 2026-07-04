@@ -98,6 +98,20 @@ async def get_status(
     current_step = state.current_step
     is_complete = state.is_complete
 
+    # Invited/seeded org-scoped accounts can exist without having walked through
+    # the self-serve onboarding wizard. New local registrations still start with
+    # the default student identity, so this bypass only applies to already
+    # provisioned university/partner identities.
+    identity = await user_service.primary_identity(session, user_id)
+    if (
+        state.role is None
+        and identity is not None
+        and identity.persona in {"partner_member", "university_staff"}
+        and user.is_email_verified
+    ):
+        current_step = "complete"
+        is_complete = True
+
     # Partner registration approval is completed by a university/admin workflow
     # outside the onboarding wizard. Reconcile the effective state here so the
     # frontend guard never keeps an approved partner trapped on `/onboarding`.

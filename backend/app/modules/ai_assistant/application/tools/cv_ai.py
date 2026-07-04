@@ -197,6 +197,7 @@ async def get_my_cvs(session: AsyncSession, principal: Principal) -> dict:
     )
     return {
         "ok": True,
+        "total": len(items),
         "cvs": [
             {
                 "id": str(c.get("id", "")),

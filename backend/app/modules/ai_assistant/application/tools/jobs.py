@@ -248,20 +248,28 @@ async def apply_job(session: AsyncSession, principal: Principal, args: dict) -> 
     cv_id_str = (args.get("cv_id") or "").strip()
     if not job_id_str:
         return {"ok": False, "error": "job_id_required"}
-    if not cv_id_str:
-        return {"ok": False, "error": "cv_id_required"}
     try:
         job_id = _uuid.UUID(job_id_str)
     except ValueError:
         return {"ok": False, "error": "invalid_job_id"}
     try:
-        cv_id = _uuid.UUID(cv_id_str)
-    except ValueError:
-        return {"ok": False, "error": "invalid_cv_id"}
-    try:
         from app.modules.auth.application.context import RequestContext
         from app.modules.documents.application import cv_service
         from app.modules.recruitment.application import apply_service
+
+        if cv_id_str:
+            try:
+                cv_id = _uuid.UUID(cv_id_str)
+            except ValueError:
+                return {"ok": False, "error": "invalid_cv_id"}
+        else:
+            cvs, _, _ = await cv_service.list_cvs(
+                session, principal=principal, cursor=None, limit=10
+            )
+            primary = next((c for c in cvs if c.get("is_primary")), cvs[0] if cvs else None)
+            if primary is None:
+                return {"ok": False, "error": "no_cv_found", "job_id": str(job_id)}
+            cv_id = _uuid.UUID(str(primary["id"]))
 
         cv_detail = await cv_service.get_cv(session, principal=principal, cv_id=cv_id)
         current_version_id = cv_detail.get("current_version_id")

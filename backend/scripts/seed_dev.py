@@ -49,6 +49,7 @@ from app.modules.organization.domain.models import (
 from app.modules.organization.infrastructure import logo_media
 from app.modules.users.domain.models import Identity, User, UserPreference
 from scripts.seeds.dev_marketplace_seed import enrich_marketplace_seed
+from scripts.seeds.onboarding_seed import seed_onboarding_state
 from scripts.seeds.seed_industries import seed_into_session as seed_industries_into_session
 from scripts.seeds.seed_locations import seed_into_session as seed_locations_into_session
 from sqlalchemy import select
@@ -1865,6 +1866,7 @@ async def main() -> None:
             await seed_industries_into_session(session)
             users = await seed_users(session)
             orgs = await seed_organisations(session, users)
+            await seed_onboarding_state(session, users=users, orgs=orgs)
             await seed_jobs(session, orgs, users)
             await enrich_marketplace_seed(session, orgs=orgs, users=users)
 

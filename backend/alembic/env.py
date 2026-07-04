@@ -12,6 +12,7 @@ from logging.config import fileConfig
 from alembic import context
 from app.core.config import get_settings
 from app.core.metadata import import_all_models, target_metadata
+from sqlalchemy import text
 from sqlalchemy.ext.asyncio import async_engine_from_config
 from sqlalchemy.pool import NullPool
 
@@ -24,6 +25,35 @@ import_all_models()
 
 settings = get_settings()
 DB_URL = settings.database_url
+
+
+def ensure_alembic_version_table(connection) -> None:
+    """Keep descriptive revision IDs from being truncated on PostgreSQL.
+
+    Alembic's default version table uses ``VARCHAR(32)``. This project uses
+    readable revision IDs such as ``0049_ai_model_alias_fallback_chain``, so a
+    freshly reset local database must create the version table with a wider
+    column before Alembic's first migration writes into it.
+    """
+
+    if connection.dialect.name != "postgresql":
+        return
+
+    connection.execute(
+        text(
+            """
+            CREATE TABLE IF NOT EXISTS alembic_version (
+                version_num VARCHAR(128) NOT NULL,
+                CONSTRAINT alembic_version_pkc PRIMARY KEY (version_num)
+            )
+            """
+        )
+    )
+    connection.execute(
+        text("ALTER TABLE alembic_version ALTER COLUMN version_num TYPE VARCHAR(128)")
+    )
+    if connection.in_transaction():
+        connection.commit()
 
 
 def run_migrations_offline() -> None:
@@ -40,6 +70,8 @@ def run_migrations_offline() -> None:
 
 def do_run_migrations(connection) -> None:
     import sqlalchemy as sa
+
+    ensure_alembic_version_table(connection)
     context.configure(
         connection=connection,
         target_metadata=target_metadata,
