@@ -1,0 +1,92 @@
+{
+  "billing": {
+    "subscriber": {
+      "studentTitle": "Plans & Billing",
+      "studentSubtitle": "Manage your subscription, quotas, and upgrades for your student account.",
+      "partnerTitle": "Plans & Billing",
+      "partnerSubtitle": "Manage your organization's subscription, recruiting quotas, and upgrades."
+    },
+    "permissionBody": "You don't have permission to view subscription details.",
+    "current": {
+      "heading": "Current plan",
+      "freeTier": "Free plan",
+      "window": "Active: {window}",
+      "daysLeft": "{count} days left",
+      "endingSoon": "Ending soon",
+      "grantsTitle": "Included benefits",
+      "cancelPending": "Cancel request",
+      "cancelActive": "Cancel plan",
+      "cancelTitle": "Cancel subscription?",
+      "cancelConfirm": "Confirm cancel",
+      "cancelNote": "Your pending subscription request will be cancelled. You can request again anytime.",
+      "cancelActiveNote": "Your active plan will be cancelled and the account reverts to the default (free) limits. This does not refund any payment."
+    },
+    "plans": {
+      "comparisonTitle": "Compare plans",
+      "comparisonHint": "Pick an upgrade to unlock more quota. Payment is by bank transfer, confirmed manually by the university.",
+      "featureCol": "Benefit",
+      "currentBadge": "Current",
+      "yourPlan": "Your plan",
+      "free": "Free",
+      "upgrade": "Upgrade",
+      "alreadyInflight": "You already have a pending or active plan. Cancel the current one before switching.",
+      "upgradeTitle": "Upgrade plan",
+      "upgradeBody": "Subscribe to {plan} for {price}. After you submit, you'll get bank-transfer instructions.",
+      "upgradeConfirm": "Submit request",
+      "upgradeNote": "The request stays in awaiting-payment until the university confirms your bank transfer.",
+      "emptyTitle": "No plans yet",
+      "emptyBody": "There are no subscription plans available for your account."
+    },
+    "payment": {
+      "title": "Payment instructions",
+      "intro": "Transfer to the account below. Your plan activates once the university confirms payment.",
+      "bank": "Bank",
+      "accountName": "Account name",
+      "accountNumber": "Account number",
+      "note": "Transfer note",
+      "doneHint": "After transferring, please wait for the university to confirm. The plan status updates automatically.",
+      "pendingTitle": "Awaiting payment confirmation",
+      "pendingBody": "Your request is awaiting the university's confirmation of your bank transfer. The status updates once payment is recorded."
+    },
+    "toast": {
+      "requested": "Subscription requested. Please follow the payment instructions.",
+      "cancelled": "Subscription cancelled."
+    },
+    "errors": {
+      "conflictTitle": "Subscription exists",
+      "conflictBody": "You already have a pending or active subscription.",
+      "audienceMismatch": "This plan doesn't apply to your account type."
+    },
+    "enums": {
+      "status": {
+        "pending": "Awaiting payment",
+        "active": "Active",
+        "expired": "Expired",
+        "cancelled": "Cancelled"
+      },
+      "audience": {
+        "student": "Student",
+        "partner": "Partner"
+      },
+      "period": {
+        "monthly": "Monthly",
+        "annual": "Annual"
+      }
+    },
+    "limits": {
+      "on": "Yes",
+      "off": "No",
+      "keys": {
+        "cv_active_quota": "Active CVs",
+        "pdf_exports_per_month": "PDF exports / month",
+        "premium_templates": "Premium templates",
+        "mass_apply_limit": "Mass apply limit",
+        "ai_daily_cost_quota_usd": "AI quota / day (USD)",
+        "job_post_quota": "Job posts",
+        "featured_job_slots": "Featured job slots",
+        "passive_search_quota": "Candidate search quota",
+        "email_blast_quota": "Email blasts"
+      }
+    }
+  }
+}

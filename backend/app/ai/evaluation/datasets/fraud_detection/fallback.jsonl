@@ -1,0 +1,3 @@
+{"id": "fd_fallback_signals_is_list_never_raises", "input": {"signals": ["org_age_days", 1]}, "expect": {"risk_level": "low", "signal_count": 0, "no_crash": true}}
+{"id": "fd_fallback_signals_is_string_never_raises", "input": {"signals": "fee_collection_flagged=true"}, "expect": {"risk_level": "low", "signal_count": 0, "no_crash": true}}
+{"id": "fd_fallback_signals_is_number_never_raises", "input": {"signals": 42}, "expect": {"risk_level": "low", "signal_count": 0, "no_crash": true}}

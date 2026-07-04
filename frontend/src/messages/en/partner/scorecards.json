@@ -1,0 +1,73 @@
+{
+  "scorecards": {
+    "panelTitle": "Candidate evaluation",
+    "partnerOnly": "Hiring team only",
+    "formTitle": "Submit your scorecard",
+    "editTitle": "Edit your scorecard",
+    "yourEvaluation": "Your scorecard",
+    "recommendationLabel": "Recommendation",
+    "commentLabel": "Comment (optional)",
+    "commentPlaceholder": "Visible only to your hiring team…",
+    "commentHelp": "Visible to your hiring team only.",
+    "submit": "Submit scorecard",
+    "save": "Save changes",
+    "edit": "Edit",
+    "withdraw": "Withdraw",
+    "submittedToast": "Scorecard submitted.",
+    "updatedToast": "Scorecard updated.",
+    "withdrawnToast": "Scorecard withdrawn.",
+    "withdrawTitle": "Withdraw scorecard",
+    "withdrawBody": "Your scorecard will be excluded from the aggregate and the advance gate.",
+    "withdrawNote": "You can submit a new scorecard later if needed.",
+    "withdrawConfirm": "Withdraw scorecard",
+    "progress": "{count, plural, one {# scorecard submitted} other {# scorecards submitted}}",
+    "gateMet": "Ready to advance",
+    "gateRequired": "Scorecard needed",
+    "gateHint": "At least one submitted scorecard is required before advancing this candidate.",
+    "anchoringNote": "Other reviewers' scores appear after you submit your own scorecard.",
+    "aggregateTitle": "Aggregate",
+    "avgOverall": "Average {score}/5",
+    "avgOverallNone": "No average yet",
+    "overall": "Overall: {score}/5",
+    "scoreOutOf": "{score}/5",
+    "otherReviewers": "{count, plural, one {# other reviewer} other {# other reviewers}}",
+    "reviewerNoScore": "No score",
+    "incompleteError": "Please score all 4 criteria and pick a recommendation.",
+    "validationError": "Invalid scorecard. Please check the scores and recommendation.",
+    "loadError": "Couldn't load scorecards.",
+    "notInStageBody": "Scorecards become available once the candidate is in a review stage.",
+    "criteria": {
+      "technical": "Technical ability",
+      "communication": "Communication",
+      "culture_fit": "Culture fit",
+      "motivation": "Motivation & fit"
+    },
+    "recommendation": {
+      "strong_yes": "Strongly recommend",
+      "yes": "Recommend",
+      "no": "Do not recommend",
+      "strong_no": "Strongly against"
+    },
+    "aiSuggest": {
+      "button": "Suggest scores from notes",
+      "generating": "AI is analyzing notes…",
+      "panelTitle": "AI score suggestions",
+      "disclaimer": "AI suggestions are for your review — verify carefully before submitting.",
+      "applyAll": "Apply all",
+      "applyOne": "Apply",
+      "discard": "Discard",
+      "retry": "Try again",
+      "error": "AI could not analyze the notes. Please try again.",
+      "notesPlaceholder": "Enter notes from the interview…",
+      "notesLabel": "Interview notes",
+      "lowConfidence": "Low confidence — notes may not contain enough information for accurate scoring.",
+      "fallbackNote": "AI is unavailable. Please score manually.",
+      "noScore": "Insufficient information",
+      "confidence": {
+        "high": "High confidence",
+        "medium": "Medium confidence",
+        "low": "Low confidence"
+      }
+    }
+  }
+}

@@ -1,0 +1,5 @@
+{"id": "sb_priv_unexpected_key_with_email_not_leaked", "input": {"llm_json": {"bullets": ["Good technical match."], "suitability": "strong", "candidate_email": "student@example.com"}}, "expect": {"blob_excludes": "student@example.com", "no_crash": true}}
+{"id": "sb_priv_unexpected_key_with_phone_not_leaked", "input": {"llm_json": {"bullets": ["Good technical match."], "suitability": "strong", "candidate_phone": "0912345678"}}, "expect": {"blob_excludes": "0912345678"}}
+{"id": "sb_priv_fallback_path_has_no_candidate_data", "input": {"provider": "unavailable"}, "expect": {"is_fallback": true, "no_pii_in_response": true, "bullet_count_equals": 0}}
+{"id": "sb_priv_no_provider_model_leak", "input": {"llm_json": {"bullets": ["Strong fit overall."], "suitability": "strong"}}, "expect": {"no_provider_leak": true, "no_model_leak": true}}
+{"id": "sb_priv_clean_response_no_internal_status", "input": {"llm_json": {"bullets": ["Solid candidate profile."], "suitability": "moderate"}}, "expect": {"no_internal_status_codes": true}}

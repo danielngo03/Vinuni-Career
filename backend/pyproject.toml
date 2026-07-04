@@ -1,0 +1,79 @@
+[project]
+name = "vinuni-career-backend"
+version = "0.1.0"
+description = "VinUni Career Platform — FastAPI backend (greenfield Phase 0)"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "fastapi>=0.115.0",
+    "uvicorn[standard]>=0.30.0",
+    "sqlalchemy[asyncio]>=2.0.30",
+    "asyncpg>=0.29.0",
+    "aiosqlite>=0.20.0",
+    "greenlet>=3.0.0",
+    "alembic>=1.13.0",
+    "pydantic>=2.7.0",
+    "pydantic-settings>=2.3.0",
+    "redis>=5.0.0",
+    "celery>=5.4.0",
+    "httpx>=0.27.0",
+    "python-multipart>=0.0.9",
+    "pdfplumber>=0.11.0",
+    "python-docx>=1.1.0",
+    "pyjwt>=2.9.0",
+    "argon2-cffi>=23.1.0",
+    "pyotp>=2.9.0",
+    "fpdf2>=2.7.0",
+    "deep-translator>=1.11.4",
+    "scalar-fastapi>=1.0.0",
+]
+
+[project.optional-dependencies]
+# Heavier OCR is opt-in only; default local profile is "ai-lite" and stays lightweight.
+ai-production = [
+    "pytesseract>=0.3.10",
+    "pdf2image>=1.17.0",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=8.2.0",
+    "pytest-asyncio>=0.23.0",
+    "ruff>=0.5.0",
+    "mypy>=1.10.0",
+    "pre-commit>=3.7.0",
+]
+
+[tool.uv]
+package = false
+
+[tool.ruff]
+target-version = "py312"
+line-length = 100
+src = ["app", "tests"]
+extend-exclude = ["alembic/versions"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "C4", "ASYNC"]
+ignore = ["B008"]  # FastAPI uses function calls (Depends/Query) in argument defaults.
+
+[tool.mypy]
+python_version = "3.12"
+files = ["app"]
+plugins = ["pydantic.mypy"]
+ignore_missing_imports = true
+warn_unused_ignores = false
+warn_redundant_casts = true
+no_implicit_optional = true
+check_untyped_defs = true
+exclude = ["alembic/", "tests/"]
+
+[[tool.mypy.overrides]]
+module = ["pdfplumber.*", "docx.*", "celery.*"]
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+addopts = "-q"
+filterwarnings = ["ignore::DeprecationWarning"]

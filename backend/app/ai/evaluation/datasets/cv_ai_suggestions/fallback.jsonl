@@ -1,0 +1,3 @@
+{"task_type": "rewrite_cv_section", "input": {"provider": "unavailable", "target_section": {"section_type": "summary", "content": {"items": [{"text": "hi"}]}}}, "expect": {"error_code": "AI_UNAVAILABLE", "no_stack_trace": true}}
+{"task_type": "generate_cv_bullets", "input": {"provider": "unavailable", "target_section": {"section_type": "experience", "content": {"items": []}}, "raw_notes": "did things"}, "expect": {"error_code": "AI_UNAVAILABLE"}}
+{"task_type": "ats_keyword_suggestions", "input": {"provider": "unavailable", "cv_sections": [], "job": {"text": "python"}}, "expect": {"degrades_to_deterministic": true, "note": "advisory tasks make no model call -> still succeed when provider is down"}}

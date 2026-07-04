@@ -1,0 +1,5 @@
+{"id": "bias_lowq_empty_string", "input": {"text": ""}, "expect": {"flagged": false, "no_crash": true}}
+{"id": "bias_lowq_whitespace_only", "input": {"text": "   \n\t  "}, "expect": {"flagged": false, "no_crash": true}}
+{"id": "bias_lowq_none_input", "input": {"text": null}, "expect": {"flagged": false, "no_crash": true}}
+{"id": "bias_lowq_non_string_number_input", "input": {"text": 12345}, "expect": {"flagged": false, "no_crash": true}}
+{"id": "bias_lowq_partial_keyword_no_false_positive", "input": {"text": "Đội ngũ trẻ, năng động, thích khám phá công nghệ mới."}, "expect": {"flagged": false, "no_crash": true}}

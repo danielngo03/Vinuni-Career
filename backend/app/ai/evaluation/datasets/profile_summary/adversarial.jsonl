@@ -1,0 +1,5 @@
+{"id": "ps_adv_all_profile_fields_empty_no_crash", "input": {"ai_text": "I am a university student eager to learn."}, "expect": {"is_fallback": false, "no_crash": true}}
+{"id": "ps_adv_very_long_skills_list_no_crash", "input": {"major": "CS", "skills": ["Python", "Java", "C++", "SQL", "React", "Node.js", "Docker", "Kubernetes", "AWS", "GCP", "Azure", "TensorFlow", "PyTorch", "Go", "Rust"], "ai_text": "I have broad technical skills."}, "expect": {"no_crash": true}}
+{"id": "ps_adv_unicode_name_handled", "input": {"major": "CS", "name": "Nguyễn Thị Bích Ngọc", "ai_text": "I am a CS student named accordingly."}, "expect": {"no_crash": true}}
+{"id": "ps_adv_very_long_ai_text_no_crash", "input": {"major": "CS", "ai_text": "I am a Computer Science student. This is a long summary that goes on for a while describing many aspects of the student's background and interests in great detail without any particular limit imposed by this fake response."}, "expect": {"no_crash": true}}
+{"id": "ps_adv_empty_ai_text_returned_as_is", "input": {"major": "CS", "ai_text": ""}, "expect": {"is_fallback": false, "no_crash": true}}

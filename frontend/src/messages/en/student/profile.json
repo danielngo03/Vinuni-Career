@@ -1,0 +1,207 @@
+{
+  "profile": {
+    "title": "My profile",
+    "subtitle": "Manage your personal details, education, experience, and privacy.",
+    "saved": "Changes saved.",
+    "completion": {
+      "title": "Profile completeness",
+      "ariaLabel": "Profile is {pct}% complete",
+      "done": "Great! Your profile is complete.",
+      "nextSteps": "Next steps"
+    },
+    "nudges": {
+      "headline": "Add a short headline to make a strong first impression.",
+      "summary": "Write a summary so recruiters understand who you are.",
+      "education": "Add your education to raise your completeness.",
+      "experience": "Add work or internship experience.",
+      "skills": "Add the skills you are best at.",
+      "academic": "Fill in your major, degree level, and graduation year.",
+      "links": "Add links to your portfolio, LinkedIn, or GitHub."
+    },
+    "core": {
+      "title": "Basic information",
+      "intro": "Your main identity and contact details.",
+      "headline": "Headline",
+      "headlineHelp": "e.g. Computer Science student passionate about data.",
+      "summary": "About you",
+      "summaryHelp": "A short summary of your goals and strengths.",
+      "phone": "Phone number",
+      "locationCity": "City",
+      "locationCountry": "Country",
+      "major": "Major",
+      "degreeLevel": "Degree level",
+      "graduationYear": "Graduation year",
+      "notSet": "Not set",
+      "summaryAiDraft": "AI Draft",
+      "summaryAiDisclaimer": "AI-generated draft — review and personalise before saving.",
+      "summaryAiDisclaimerFallback": "Template draft — review and personalise before saving.",
+      "summaryAiError": "Couldn't generate a draft right now."
+    },
+    "privacy": {
+      "title": "Privacy",
+      "intro": "Control who can see your profile and contact details.",
+      "visibilityLabel": "Who can see your profile",
+      "visibilityExplain": {
+        "public": "Any signed-in user on the platform can view your public profile.",
+        "vinuni_only": "Only the VinUni community (students, alumni, staff) can view your profile.",
+        "private": "Only you can see it. Your profile won't appear in search or the talent pool."
+      },
+      "contactLegend": "Contact visibility",
+      "contactIntro": "Decide when recruiters can see your email and phone number.",
+      "showEmail": "Email",
+      "showPhone": "Phone number",
+      "contactExplain": {
+        "public": "Shown anywhere your profile is allowed to be seen.",
+        "invited": "Only shown after you accept a reveal request or within an application.",
+        "hidden": "Never shown to anyone else."
+      },
+      "openToWorkLabel": "Open to work",
+      "openToWorkHelp": "Let recruiters know you're open to new opportunities and which types."
+    },
+    "enums": {
+      "visibility": {
+        "public": "Public",
+        "vinuni_only": "VinUni only",
+        "private": "Private"
+      },
+      "contact": {
+        "public": "Visible",
+        "invited": "When invited",
+        "hidden": "Hidden"
+      },
+      "openToWork": {
+        "full_time": "Full-time",
+        "internship": "Internship",
+        "part_time": "Part-time",
+        "contract": "Contract"
+      },
+      "degree": {
+        "undergraduate": "Undergraduate",
+        "graduate": "Graduate",
+        "phd": "PhD"
+      },
+      "employment": {
+        "full_time": "Full-time",
+        "part_time": "Part-time",
+        "internship": "Internship",
+        "contract": "Contract"
+      },
+      "skillCategory": {
+        "technical": "Technical",
+        "language": "Language",
+        "soft": "Soft skill"
+      },
+      "proficiency": {
+        "1": "1 – Beginner",
+        "2": "2 – Basic",
+        "3": "3 – Intermediate",
+        "4": "4 – Proficient",
+        "5": "5 – Expert"
+      }
+    },
+    "validation": {
+      "required": "This field is required.",
+      "headlineMax": "Headline must be at most 255 characters.",
+      "summaryMax": "Summary must be at most 5000 characters.",
+      "phoneMax": "Phone must be at most 30 characters.",
+      "majorMax": "Major must be at most 200 characters.",
+      "gpaRange": "GPA must be between 0 and 4.",
+      "endBeforeStart": "End date must be after the start date.",
+      "urlInvalid": "Link must start with http:// or https://."
+    },
+    "education": {
+      "title": "Education",
+      "intro": "Your schools, degrees, and fields of study.",
+      "add": "Add",
+      "empty": "No education yet. Add your first school.",
+      "addTitle": "Add education",
+      "editTitle": "Edit education",
+      "institution": "Institution",
+      "degree": "Degree",
+      "fieldOfStudy": "Field of study",
+      "startDate": "Start date",
+      "endDate": "End date",
+      "isCurrent": "Currently studying",
+      "gpa": "GPA",
+      "gpaHelp": "On a 4.0 scale (optional).",
+      "description": "Description",
+      "deleteTitle": "Delete education",
+      "deleteBody": "Are you sure you want to delete this education entry? This cannot be undone."
+    },
+    "experience": {
+      "title": "Experience",
+      "intro": "Your jobs, internships, and activities.",
+      "add": "Add",
+      "empty": "No experience yet. Add your first job or internship.",
+      "addTitle": "Add experience",
+      "editTitle": "Edit experience",
+      "company": "Company / Organization",
+      "jobTitle": "Title",
+      "employmentType": "Employment type",
+      "location": "Location",
+      "startDate": "Start date",
+      "endDate": "End date",
+      "isCurrent": "I currently work here",
+      "skillsUsed": "Skills used",
+      "skillsUsedHelp": "Comma-separated, e.g. Python, SQL, communication.",
+      "description": "Description",
+      "notSet": "Not set",
+      "deleteTitle": "Delete experience",
+      "deleteBody": "Are you sure you want to delete this experience entry? This cannot be undone."
+    },
+    "skills": {
+      "title": "Skills",
+      "intro": "Add a skill by typing and pressing Enter. Click a chip to edit details.",
+      "add": "Add",
+      "addPlaceholder": "Type a skill and press Enter",
+      "empty": "No skills yet.",
+      "name": "Skill name",
+      "category": "Category",
+      "proficiency": "Proficiency",
+      "notSet": "Not set",
+      "editTitle": "Edit skill",
+      "duplicate": "This skill is already on your profile.",
+      "editAria": "Edit skill {name}",
+      "removeAria": "Remove skill {name}",
+      "deleteTitle": "Delete skill",
+      "deleteBody": "Are you sure you want to delete this skill?",
+      "aiSuggest": "AI Suggest",
+      "aiSuggestAria": "Get AI skill suggestions",
+      "aiSuggestLabel": "AI suggestions — click to add:",
+      "aiSuggestFallbackLabel": "Popular skills — click to add:",
+      "aiSuggestEmpty": "No new suggestions. You already have strong coverage!",
+      "aiSuggestError": "Couldn't load suggestions right now."
+    },
+    "links": {
+      "title": "Links",
+      "intro": "Portfolio, LinkedIn, GitHub, or personal website.",
+      "add": "Add",
+      "empty": "No links yet.",
+      "addTitle": "Add link",
+      "editTitle": "Edit link",
+      "label": "Label",
+      "labelHelp": "e.g. LinkedIn, Portfolio (optional).",
+      "url": "URL",
+      "deleteTitle": "Delete link",
+      "deleteBody": "Are you sure you want to delete this link?"
+    },
+    "avatar": {
+      "changeCta": "Change photo",
+      "removeCta": "Remove",
+      "hint": "PNG, JPEG or WebP · Max {maxMb} MB",
+      "saved": "Avatar saved",
+      "uploadError": "Upload failed. Please try again.",
+      "removeError": "Remove failed. Please try again.",
+      "tooLarge": "Image too large. Max {maxMb} MB."
+    },
+    "aiInsights": {
+      "title": "Profile Insights",
+      "insightAddSkills": "Students with 5+ skills appear in 3× more talent searches",
+      "insightAddExperience": "Add internship or project experience to strengthen applications",
+      "insightAddHeadline": "A clear headline helps recruiters understand your career goal at a glance",
+      "insightAddLinks": "Adding a GitHub or portfolio link boosts interview invitations",
+      "insightLowCompletion": "Complete your profile to appear in recruiter talent searches",
+      "insightNearComplete": "Almost there — finishing your profile unlocks full recruiter visibility"
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{"id": "af_happy_score_3", "input": {"llm_json": {"score": 3, "praise": "Good structure.", "improve": "Add a concrete example.", "hint": "Use STAR method."}}, "expect": {"is_fallback": false, "score_equals": 3}}
+{"id": "af_happy_score_5", "input": {"llm_json": {"score": 5, "praise": "Excellent, specific, and quantified.", "improve": "Nothing major.", "hint": ""}}, "expect": {"score_equals": 5}}
+{"id": "af_happy_score_1", "input": {"llm_json": {"score": 1, "praise": "", "improve": "Answer was off-topic and vague.", "hint": "Re-read the question."}}, "expect": {"score_equals": 1}}
+{"id": "af_happy_praise_only", "input": {"llm_json": {"score": 4, "praise": "Clear and confident delivery.", "improve": "", "hint": ""}}, "expect": {"is_fallback": false, "score_equals": 4}}
+{"id": "af_happy_improve_only", "input": {"llm_json": {"score": 2, "praise": "", "improve": "Needs a specific example with measurable impact.", "hint": "Quantify results."}}, "expect": {"is_fallback": false}}
+{"id": "af_happy_score_in_range", "input": {"llm_json": {"score": 4, "praise": "Good.", "improve": "Minor tweaks.", "hint": "Practice pacing."}}, "expect": {"score_in_range": true}}
+{"id": "af_happy_full_feedback", "input": {"llm_json": {"score": 4, "praise": "Well-structured STAR answer.", "improve": "Could quantify the outcome more.", "hint": "Add a number or percentage."}}, "expect": {"is_fallback": false, "score_equals": 4}}
+{"id": "af_happy_no_pii_in_response", "input": {"llm_json": {"score": 3, "praise": "Solid answer.", "improve": "Be more concise.", "hint": "Practice timing."}}, "expect": {"no_pii_in_response": true}}
+{"id": "af_happy_no_provider_leak", "input": {"llm_json": {"score": 3, "praise": "Good.", "improve": "Fine tune delivery.", "hint": "Slow down."}}, "expect": {"no_provider_leak": true, "no_model_leak": true}}
+{"id": "af_happy_score_2_with_hint", "input": {"llm_json": {"score": 2, "praise": "Some relevant points.", "improve": "Structure the answer better.", "hint": "Use STAR."}}, "expect": {"score_equals": 2}}

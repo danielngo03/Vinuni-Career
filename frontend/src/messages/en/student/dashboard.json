@@ -1,0 +1,300 @@
+{
+  "dashboard": {
+    "nextActions": "What to do next",
+    "viewAll": "View all",
+    "actions": {
+      "complete_profile": "Complete your profile",
+      "build_cv": "Build a CV",
+      "create_alert": "Create job alert",
+      "respond_reveal": "Respond to identity reveal",
+      "respond_reveals": "Respond to identity reveals",
+      "jobs_in_draft": "Finish draft jobs",
+      "jobs_pending_review": "Jobs awaiting review",
+      "post_job": "Post a job",
+      "review_jobs": "Review jobs",
+      "review_partners": "Review partner requests"
+    },
+    "student": {
+      "title": "Student overview",
+      "subtitle": "Your career command center",
+      "metric": {
+        "applicationsTotal": "Total applications",
+        "applicationsActive": "Active applications",
+        "profileCompletion": "Profile completion",
+        "cvCount": "CVs",
+        "alertCount": "Job alerts"
+      },
+      "actionsEmptyTitle": "You're all caught up",
+      "actionsEmptyBody": "Nothing needs your attention right now. Keep exploring opportunities.",
+      "upcomingInterviewsTitle": "Upcoming interviews",
+      "viewInterview": "View details",
+      "upcomingEventsTitle": "Your upcoming events",
+      "viewEvent": "View event",
+      "revealsTitle": "Identity reveal requests",
+      "untitledJob": "Untitled role",
+      "unknownCompany": "Anonymous employer",
+      "requestedOn": "Requested {date}",
+      "respondCta": "Respond",
+      "recentApplicationsTitle": "Recent applications",
+      "noApplicationsTitle": "No applications yet",
+      "noApplicationsBody": "Browse jobs and submit your first application.",
+      "browseJobs": "Browse jobs",
+      "recentRolesTitle": "Recent roles",
+      "recommendedRolesTitle": "Recommended for you",
+      "popularRolesTitle": "Popular with VinUni students",
+      "noRolesTitle": "No recent roles",
+      "noRolesBody": "New roles will appear here as employers post them.",
+      "aiSnapshotWidgetLabel": "Career journey snapshot",
+      "aiSnapshotTitle": "Your career snapshot",
+      "aiSnapshotCta": "Get my career snapshot",
+      "aiSnapshotLoading": "Generating your snapshot…",
+      "aiSnapshotError": "Snapshot unavailable right now. Try again later.",
+      "aiSnapshotFallbackNote": "Showing a summary based on your current profile data.",
+      "aiSnapshotRefresh": "Refresh snapshot",
+      "completionCardTitle": "Complete your profile",
+      "completionCardDone": "Your profile is complete",
+      "completionCardSubtitle": "A complete profile improves your job match and visibility to employers.",
+      "completionCardCtaLabel": "Go to profile",
+      "completionSectionHeadline": "Headline",
+      "completionSectionSummary": "Summary",
+      "completionSectionEducation": "Education",
+      "completionSectionExperience": "Experience",
+      "completionSectionSkills": "Skills (at least 3)",
+      "completionSectionLinks": "Profile link",
+      "completionSectionOpenToWork": "Open-to-work status"
+    },
+    "partner": {
+      "title": "Recruiting hub",
+      "subtitle": "Your recruiting operations",
+      "postJob": "Post a job",
+      "metric": {
+        "jobsActive": "Active jobs",
+        "jobsDraft": "Draft jobs",
+        "jobsPendingReview": "Pending review",
+        "jobsPendingReviewHotNote": "{count, plural, one {# job needs review} other {# jobs need review}}",
+        "applicationsTotal": "Total applications",
+        "revealsPending": "Reveals pending",
+        "revealsPendingHotNote": "{count, plural, one {# profile needs a reply} other {# profiles need a reply}}"
+      },
+      "actionsEmptyTitle": "Nothing needs action",
+      "actionsEmptyBody": "All your jobs and applications are handled.",
+      "attentionTitle": "Jobs needing attention",
+      "noAttentionTitle": "No jobs need attention",
+      "noAttentionBody": "Post a job to start receiving candidates.",
+      "applicationCount": "{count, plural, one {# application} other {# applications}}",
+      "recentApplicationsTitle": "Recent applications",
+      "viewCandidates": "View candidates",
+      "noApplicationsTitle": "No applications yet",
+      "noApplicationsBody": "New applications will appear here.",
+      "untitledJob": "Untitled role",
+      "pipelineHealthTitle": "Hiring overview",
+      "aiHiringHealthTitle": "AI Hiring Health",
+      "aiInsightStrongDemand": "Strong demand — {count} applications per active job on average.",
+      "aiInsightLowVolume": "Low application volume ({count} per job) — consider boosting job visibility.",
+      "aiInsightDraftJobs": "{count, plural, one {# draft job} other {# draft jobs}} not yet published — publish to attract candidates.",
+      "aiInsightRevealsPending": "{count, plural, one {# reveal request} other {# reveal requests}} awaiting response — quick replies improve candidate experience.",
+      "aiInsightNoActive": "No active jobs right now — activate a draft to resume hiring.",
+      "todoTitle": "Today's to-do list",
+      "todo": {
+        "respond_reveals": {
+          "title": "Respond to identity reveal requests",
+          "body": "{count, plural, one {# profile is waiting for the hiring team's decision} other {# profiles are waiting for the hiring team's decision}}"
+        },
+        "jobs_pending_review": {
+          "title": "Track jobs awaiting review",
+          "body": "{count, plural, one {# job is in the university moderation queue} other {# jobs are in the university moderation queue}}"
+        },
+        "jobs_in_draft": {
+          "title": "Finish draft jobs",
+          "body": "{count, plural, one {# job can be completed and submitted} other {# jobs can be completed and submitted}}"
+        },
+        "reviewPipeline": {
+          "title": "Review candidate pipeline",
+          "body": "Check open stages, scorecards, interviews, and follow-ups."
+        },
+        "inviteTeam": {
+          "title": "Grant access to your hiring team",
+          "body": "Invite members, assign roles/departments, and scope permissions."
+        },
+        "post_job": {
+          "title": "Create a new hiring need",
+          "body": "Post a new role or clone a job that is performing well."
+        }
+      },
+      "healthTitle": "Operations health",
+      "healthAllClear": "No hot queue needs immediate action.",
+      "healthNeedsWork": "{count, plural, one {# item needs the hiring team's attention} other {# items need the hiring team's attention}}",
+      "health": {
+        "candidateDemand": "Candidate demand",
+        "publishingQueue": "Publishing queue",
+        "privacyQueue": "Identity queue",
+        "applicationsPerJob": "{count} apps/job",
+        "itemsWaiting": "{count} items"
+      },
+      "governanceTitle": "Permissions & operations",
+      "governanceBody": "Partner Admin has full access; capabilities such as analytics, CV access, billing, pipeline, and AI actions are enabled by role, user, or department.",
+      "governance": {
+        "team": {
+          "title": "Members & permissions",
+          "body": "Invite users, create roles, assign departments, and scope access."
+        },
+        "billing": {
+          "title": "Plan management",
+          "body": "Manage package, limits, and upgrade requests."
+        },
+        "company": {
+          "title": "Company profile",
+          "body": "Logo, company information, trust signals, and public page."
+        },
+        "analytics": {
+          "title": "Recruiting analytics",
+          "body": "Funnel, top jobs, and performance metrics by granted access."
+        },
+        "pipeline": {
+          "title": "Company pipeline",
+          "body": "See candidate progress by job and hiring stage."
+        },
+        "security": {
+          "title": "Access & security",
+          "body": "See who viewed/downloaded which CV, and unusual access alerts."
+        },
+        "settings": {
+          "title": "Settings",
+          "body": "Notifications, security, devices, and account preferences."
+        }
+      },
+      "performanceTitle": "Job performance snapshot",
+      "openAnalytics": "Open analytics",
+      "performanceFootnote": "Using real application counts for now; per-job views, clicks, and conversion need a dedicated analytics read model.",
+      "welcomeBack": "Welcome back, {name}",
+      "welcomeSubtitle": "Here is {org}'s hiring picture today."
+    },
+    "partnerOps": {
+      "title": "Recruiting operations center",
+      "subtitle": "Priority todos, job performance, team activity, and CV access alerts.",
+      "backToOverview": "Back to overview",
+      "todoTitle": "To do",
+      "todoEmptyTitle": "Nothing to act on",
+      "todoEmptyBody": "Everything is handled — check back later.",
+      "priority": {
+        "high": "Urgent",
+        "medium": "Medium",
+        "low": "Low"
+      },
+      "todoLabel": {
+        "respond_reveals": "Respond to identity-reveal requests",
+        "jobs_pending_review": "Track jobs pending review",
+        "jobs_in_draft": "Finish draft jobs",
+        "review_access_alerts": "Review candidate access alerts",
+        "post_job": "Post a new job"
+      },
+      "metricsTitle": "Operating metrics",
+      "engagement": {
+        "title": "Job performance (30 days)",
+        "impressions": "Impressions",
+        "detailViews": "Detail views",
+        "ctaClicks": "CTA clicks",
+        "applyStarts": "Apply starts",
+        "applicationsSubmitted": "Applications submitted",
+        "conversion": "Conversion rate",
+        "conversionUnavailable": "Not enough data",
+        "noDataTitle": "No performance data yet",
+        "noDataBody": "Using real application counts for now; views/clicks will appear once new data comes in.",
+        "lockedTitle": "Analytics grant required",
+        "lockedBody": "You have not been granted job-analytics access yet."
+      },
+      "jobPerformanceTitle": "Job performance",
+      "jobPerformanceLockedTitle": "Analytics grant required",
+      "jobPerformanceLockedBody": "You have not been granted access to job metrics. Contact your partner admin for access.",
+      "jobPerformanceFallbackNote": "Using real application counts for now — no view/click data yet for this org.",
+      "jobPerformanceEmptyTitle": "No job data yet",
+      "jobPerformanceEmptyBody": "Post a job and start receiving applications to see performance here.",
+      "table": {
+        "job": "Job",
+        "impressions": "Impressions",
+        "views": "Views",
+        "clicks": "Clicks",
+        "applications": "Applications",
+        "conversion": "Conversion",
+        "applicationCount": "Applications"
+      },
+      "teamActivityTitle": "Team activity",
+      "teamActivityEmptyTitle": "No activity yet",
+      "teamActivityEmptyBody": "Team actions (jobs, applications, interviews, offers) will appear here.",
+      "accessAlertsTitle": "Candidate access alerts",
+      "accessAlertsLockedTitle": "Access-log grant required",
+      "accessAlertsLockedBody": "You have not been granted access to candidate access alerts.",
+      "accessAlertsEmptyTitle": "No alerts",
+      "accessAlertsEmptyBody": "No unusual CV downloads or reveal requests detected in the last 24 hours.",
+      "alertWindow": "{count} in the last {hours}h",
+      "viewAccessLog": "View access log",
+      "aiRecommendationsTitle": "Operating suggestions (advisory only)",
+      "aiRecommendationsDisclaimer": "Suggestions are based on current data — no action is ever taken automatically.",
+      "rbacTitle": "Your permission scope",
+      "rbacAdminBody": "You hold full admin control of this partner organization — every widget is fully visible.",
+      "rbacMemberBody": "Some widgets are hidden or locked because of missing grants. Contact your partner admin for access.",
+      "hiddenWidgetsCount": "{count, plural, one {# widget locked} other {# widgets locked}}"
+    },
+    "partnerAccessLog": {
+      "title": "Candidate access log",
+      "subtitle": "Who viewed or downloaded which CV — for security and compliance review.",
+      "backToOps": "Back to recruiting operations",
+      "lockedTitle": "Access-log grant required",
+      "lockedBody": "You need CV view/download or click-analytics access to view this log.",
+      "emptyTitle": "No access events yet",
+      "emptyBody": "Application opens, CV previews/downloads, and identity-reveal requests will be recorded here.",
+      "table": {
+        "event": "Event",
+        "job": "Job",
+        "actor": "Actor",
+        "time": "Time",
+        "reason": "Reason"
+      },
+      "unknownActor": "Unknown",
+      "noReason": "—",
+      "event": {
+        "application_opened": "Application opened",
+        "cv_previewed": "CV previewed",
+        "cv_downloaded": "CV downloaded",
+        "identity_reveal_requested": "Identity reveal requested",
+        "identity_revealed_viewed": "Revealed identity viewed"
+      }
+    },
+    "university": {
+      "title": "Operations center",
+      "subtitle": "Moderation and governance for the career platform",
+      "metric": {
+        "jobsPending": "Jobs to moderate",
+        "jobsPendingHotNote": "{count, plural, one {# job needs moderation} other {# jobs need moderation}}",
+        "partnersPending": "Partners to review",
+        "partnersPendingHotNote": "{count, plural, one {# partner needs review} other {# partners need review}}",
+        "partnersActive": "Active partners",
+        "jobsActiveTotal": "Active jobs"
+      },
+      "actionsEmptyTitle": "Queue is clear",
+      "actionsEmptyBody": "Nothing to moderate at the moment.",
+      "moderationTitle": "Job moderation queue",
+      "openQueue": "Open queue",
+      "noModerationTitle": "No jobs awaiting review",
+      "noModerationBody": "Newly submitted jobs will appear here for moderation.",
+      "unknownCompany": "Anonymous employer",
+      "partnerRequestsTitle": "Partner registration requests",
+      "openPartners": "Open partners",
+      "noPartnerRequestsTitle": "No partner requests",
+      "noPartnerRequestsBody": "New partner registration requests will appear here.",
+      "requestedOn": "Submitted {date}",
+      "activityTitle": "Platform activity",
+      "queueOnTrack": "On track",
+      "queueBuilding": "Building up",
+      "queueOverloaded": "Needs attention",
+      "aiInsightsTitle": "Governance Insights",
+      "aiInsightQueueClear": "Moderation queue is clear — no jobs pending review",
+      "aiInsightQueuePending": "{count, plural, one {# job} other {# jobs}} pending moderation",
+      "aiInsightQueueOverloaded": "Queue overloaded — {count} jobs awaiting review, prioritise today",
+      "aiInsightPartnersPending": "{count, plural, one {# partner request} other {# partner requests}} awaiting approval",
+      "aiInsightPlatformScope": "{partners, plural, one {# active partner} other {# active partners}} with {jobs, plural, one {# published job} other {# published jobs}} on the platform",
+      "queueDepth": "Moderation queue depth",
+      "queueHealth": "Queue health"
+    }
+  }
+}

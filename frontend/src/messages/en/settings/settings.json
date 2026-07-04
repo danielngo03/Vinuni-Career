@@ -1,0 +1,133 @@
+{
+  "settings": {
+    "title": "Settings",
+    "subtitle": "Manage your account, notifications, and security.",
+    "tabs": {
+      "general": "General",
+      "notifications": "Notifications",
+      "devices": "Sessions & devices",
+      "security": "Security",
+      "privacy": "Privacy"
+    },
+    "general": {
+      "title": "Language & region",
+      "intro": "Display language and appearance apply immediately on this device; timezone is saved to your account.",
+      "language": "Display language",
+      "languageHelp": "Applies across the interface and notifications.",
+      "timezone": "Timezone",
+      "timezoneHelp": "Used to display deadlines, interviews, and events.",
+      "theme": "Appearance",
+      "themeHelp": "Choose light, dark, or follow your system.",
+      "themeLight": "Light",
+      "themeDark": "Dark",
+      "themeSystem": "System",
+      "syncUnavailable": "Couldn't load saved settings. Changes apply on this device; saving to your account will retry."
+    },
+    "notifications": {
+      "title": "Notification preferences",
+      "intro": "Choose how you get notified. Some categories are mandatory and cannot be turned off.",
+      "channelInApp": "In-app",
+      "channelEmail": "Email",
+      "channelPush": "Push",
+      "digest": "Digest cadence",
+      "digestImmediate": "Immediate",
+      "digestDaily": "Daily",
+      "digestWeekly": "Weekly",
+      "digestOff": "Off",
+      "mandatory": "Mandatory",
+      "mandatoryHint": "Security, legal, and application confirmations are always delivered.",
+      "categorySecurity": "Security alerts",
+      "categoryLegal": "Legal & compliance",
+      "categoryLifecycle": "Account lifecycle",
+      "categoryBilling": "Billing & receipts",
+      "categoryApplications": "Application updates",
+      "categoryInterview": "Interview invitations",
+      "categoryOffer": "Job offers",
+      "categoryJobDigest": "Job digest",
+      "categoryJobAlerts": "Job alert matches",
+      "categoryJobs": "Job matches & deadline reminders",
+      "categoryEvents": "Events & tickets",
+      "categoryCv": "CV & document updates",
+      "categoryMessages": "Messages",
+      "pushPermissionNote": "Push notifications require browser permission and are only enabled after you opt in.",
+      "quietHours": "Quiet hours",
+      "quietHoursHelp": "Pause non-urgent notifications during these hours. Mandatory alerts still come through.",
+      "quietStart": "From",
+      "quietEnd": "To"
+    },
+    "devices": {
+      "title": "Active sessions",
+      "intro": "Devices currently signed in to your account.",
+      "deviceColumn": "Device",
+      "unknownDevice": "Unknown device",
+      "thisDevice": "This device",
+      "lastSeen": "Last active",
+      "location": "Location",
+      "logout": "Remote log out",
+      "empty": "No active sessions to display yet.",
+      "revokedToast": "Session signed out.",
+      "revokeTitle": "Sign out this session?",
+      "revokeBody": "This device will be signed out and will need to log in again.",
+      "revokeCurrentBody": "This is the device you're using now. Signing it out will log you out here.",
+      "revokeConfirm": "Sign out",
+      "privacyNote": "We store only minimal hints (browser family, OS family, city-level location) — never raw IPs or GPS location."
+    },
+    "security": {
+      "title": "Recent security activity",
+      "intro": "Sign-in events, password changes, and new-device alerts.",
+      "actions": "Account security",
+      "eventColumn": "Event",
+      "occurredAt": "Time",
+      "changePassword": "Change password",
+      "changePasswordIntro": "Enter your current password and choose a new one.",
+      "currentPassword": "Current password",
+      "passwordChanged": "Password updated.",
+      "enableTotp": "Enable two-factor (TOTP)",
+      "totpIntro": "Add an authenticator app for an extra layer of security.",
+      "totpSecretLabel": "Enter this setup key in your authenticator app:",
+      "totpCodeLabel": "6-digit code",
+      "totpVerify": "Verify & enable",
+      "totpEnabled": "Two-factor authentication enabled.",
+      "empty": "No security events yet.",
+      "eventLogin": "Sign in",
+      "eventNewDevice": "New device",
+      "eventPasswordChange": "Password change"
+    },
+    "privacy": {
+      "consentsTitle": "Consent",
+      "consentsIntro": "Control how VinUni and partner organizations may use specific data about you.",
+      "consentType": {
+        "interview_recording": {
+          "label": "Interview recording",
+          "description": "Allow partner organizations to record video/audio during interviews scheduled through the platform."
+        },
+        "career_outcomes_data_sharing": {
+          "label": "Career outcomes data sharing",
+          "description": "Allow the university to include your (de-identified) employment outcome in career outcomes reporting."
+        }
+      },
+      "grantedAt": "Granted {date}",
+      "revokedAt": "Revoked {date}",
+      "retentionTitle": "Data retention",
+      "requestsTitle": "Data requests",
+      "requestsIntro": "Request a copy of your data or ask us to delete your account data, subject to legal/record-keeping requirements.",
+      "requestExport": "Request my data export",
+      "requestDeletion": "Request account deletion",
+      "requestSubmitted": "Request submitted. Our team will follow up.",
+      "requestAlreadyPending": "You already have a pending request of this type.",
+      "noRequests": "No data requests yet.",
+      "requestType": {
+        "export": "Data export",
+        "deletion": "Account deletion"
+      },
+      "requestStatus": {
+        "pending": "Pending",
+        "processing": "In progress",
+        "fulfilled": "Completed",
+        "rejected": "Rejected"
+      }
+    },
+    "saved": "Changes saved.",
+    "permissionRequired": "You need to sign in to manage these settings."
+  }
+}

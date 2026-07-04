@@ -1,0 +1,94 @@
+{
+  "partnersDetail": {
+    "title": "Partner profile",
+    "backToList": "Back to partners list",
+    "permissionTitle": "Can't view this partner profile",
+    "permissionBody": "You need the partner review permission to open this section.",
+    "notFoundTitle": "Partner organization not found",
+    "notFoundBody": "This organization may not be approved yet, or has been removed.",
+    "tabs": {
+      "overview": "Overview",
+      "riskFlags": "Risk flags",
+      "notes": "Internal notes",
+      "activity": "Activity & hiring"
+    },
+    "profileQuality": {
+      "title": "Company profile quality",
+      "score": "{score}/100",
+      "missingTitle": "Missing",
+      "check": {
+        "logo": "Company logo",
+        "description": "Company description (50+ characters)",
+        "verified": "Verified",
+        "industry": "Industry",
+        "company_size": "Company size",
+        "website": "Website",
+        "has_active_recruiter": "Has an active recruiter",
+        "recent_activity": "Recent recruiting activity"
+      }
+    },
+    "seats": {
+      "title": "Team seats",
+      "usage": "{used}/{max} seats used",
+      "unlimited": "{used} members (unlimited)",
+      "atCapacity": "Plan limit reached"
+    },
+    "campusOwner": {
+      "title": "Campus relationship owner",
+      "intro": "The university staff member primarily accountable for this partner relationship.",
+      "current": "Current",
+      "none": "Not assigned",
+      "assign": "Assign owner",
+      "selectPlaceholder": "Select a staff member…",
+      "save": "Save",
+      "savedToast": "Relationship owner updated.",
+      "clear": "Clear assignment"
+    },
+    "riskFlags": {
+      "title": "Risk / trust flags",
+      "intro": "Only university staff can see these flags. The partner never sees this section.",
+      "raise": "Raise a risk flag",
+      "raiseTitle": "Raise a risk flag",
+      "type": "Issue type",
+      "typePlaceholder": "e.g. spam_jobs, fake_listing, payment_dispute",
+      "severity": "Severity",
+      "severityLow": "Low",
+      "severityMedium": "Medium",
+      "severityHigh": "High",
+      "note": "Note (optional)",
+      "raiseConfirm": "Raise flag",
+      "raisedToast": "Risk flag raised.",
+      "resolve": "Mark resolved",
+      "resolveTitle": "Mark resolved?",
+      "resolutionNote": "Resolution note (optional)",
+      "resolveConfirm": "Confirm",
+      "resolvedToast": "Marked as resolved.",
+      "status": "Status",
+      "resolved": "Resolved",
+      "open": "Open",
+      "empty": "No risk flags for this partner yet.",
+      "raisedBy": "Raised by",
+      "raisedAt": "Raised at"
+    },
+    "notes": {
+      "title": "Internal notes (university-only)",
+      "intro": "These notes are never shown to the partner, including their own admins.",
+      "add": "Add note",
+      "placeholder": "Notes about this partner relationship…",
+      "save": "Save note",
+      "empty": "No notes yet.",
+      "savedToast": "Note saved.",
+      "emptyError": "Note can't be empty."
+    },
+    "activity": {
+      "eventsTitle": "Events",
+      "campaignsTitle": "Ad campaigns",
+      "hiringTitle": "Hiring outcomes (last {months} months)",
+      "totalApplications": "Total applications",
+      "hired": "Hired",
+      "offersAccepted": "Offers accepted",
+      "recentApplications": "Recent applications",
+      "total": "Total: {count}"
+    }
+  }
+}

@@ -1,0 +1,298 @@
+"""Application CV snapshot service — the documents module's PUBLIC interface for
+the future ``recruitment`` module.
+
+``recruitment`` must depend ONLY on the functions in this module (not on the other
+documents services or ORM internals). At application-submit time it calls
+:func:`create_application_cv_snapshot` to capture an IMMUTABLE snapshot from either
+a builder CV version or an uploaded document. Snapshots are never updated or
+deleted (``docs/CV_STUDIO_SPEC.md`` §5; ``docs/SECURITY_PRIVACY.md``).
+
+Partner access to a snapshot (always watermarked) is granted through an injectable
+authorizer seam (:func:`set_snapshot_access_authorizer`) so the recruitment module
+supplies its own context check (e.g. "this partner owns the job the snapshot was
+submitted to") without the documents module importing recruitment internals.
+Until an authorizer is wired, only the snapshot owner can access it; everyone else
+gets ``404``.
+"""
+
+from __future__ import annotations
+
+import uuid
+from collections.abc import Callable
+from dataclasses import dataclass
+
+from sqlalchemy import select
+from sqlalchemy.ext.asyncio import AsyncSession
+
+from app.core.config import get_settings
+from app.modules.auth.application.context import RequestContext
+from app.modules.documents.application import _shared
+from app.modules.documents.domain.models import (
+    ApplicationCvSnapshot,
+    CvParseRun,
+    CvProfile,
+    CvVersion,
+    Document,
+)
+from app.modules.documents.infrastructure import storage
+from app.shared.audit import write_audit
+from app.shared.exceptions import ResourceNotFoundError, ValidationFailedError
+from app.shared.permissions import Principal
+
+
+@dataclass(slots=True)
+class SnapshotAccess:
+    """Result of an authorizer check granting partner access to a snapshot."""
+
+    watermark_text: str | None
+
+
+# Authorizer seam: (principal, snapshot) -> SnapshotAccess | None.
+SnapshotAccessAuthorizer = Callable[[Principal, ApplicationCvSnapshot], SnapshotAccess | None]
+_authorizer: SnapshotAccessAuthorizer | None = None
+
+
+def set_snapshot_access_authorizer(authorizer: SnapshotAccessAuthorizer | None) -> None:
+    """Wire the recruitment-supplied partner-access check (default unset)."""
+
+    global _authorizer
+    _authorizer = authorizer
+
+
+def _sections_from_extracted(extracted: dict) -> list[dict]:
+    sections: list[dict] = []
+    for key, value in (extracted or {}).items():
+        if key == "contact":
+            continue
+        if isinstance(value, dict) and value.get("items"):
+            sections.append({"title": key.title(), "content_json": {"items": value["items"]}})
+    return sections
+
+
+async def create_application_cv_snapshot(
+    session: AsyncSession,
+    *,
+    owner_id: uuid.UUID,
+    cv_selection: dict,
+    application_id: uuid.UUID | None = None,
+    idempotency_key: str | None = None,
+    ctx: RequestContext,
+    commit: bool = True,
+) -> ApplicationCvSnapshot:
+    """Create an immutable application CV snapshot for ``owner_id``.
+
+    ``cv_selection`` matches ``docs/API_CONTRACTS.md`` Application CV Selection:
+    ``{"type": "builder_cv"|"uploaded_document", "cv_profile_id", "cv_version_id",
+    "uploaded_document_id"}``. Verifies ownership of every referenced resource.
+    """
+
+    application_id = _shared.to_uuid(application_id)
+
+    # Idempotency: one snapshot per application; or per (owner, idempotency_key).
+    if application_id is not None:
+        prior = (
+            await session.execute(
+                select(ApplicationCvSnapshot).where(
+                    ApplicationCvSnapshot.application_id == application_id
+                )
+            )
+        ).scalar_one_or_none()
+        if prior is not None:
+            return prior
+    if idempotency_key:
+        prior = (
+            await session.execute(
+                select(ApplicationCvSnapshot).where(
+                    ApplicationCvSnapshot.user_id == owner_id,
+                    ApplicationCvSnapshot.idempotency_key == idempotency_key,
+                )
+            )
+        ).scalar_one_or_none()
+        if prior is not None:
+            return prior
+
+    sel_type = cv_selection.get("type")
+    snapshot = ApplicationCvSnapshot(
+        application_id=application_id,
+        user_id=owner_id,
+        idempotency_key=idempotency_key,
+    )
+
+    if sel_type == "builder_cv":
+        cv_id = _shared.to_uuid(cv_selection.get("cv_profile_id"))
+        version_id = _shared.to_uuid(cv_selection.get("cv_version_id"))
+        if not cv_id or not version_id:
+            raise ValidationFailedError("Thiếu CV hoặc phiên bản CV để nộp.")
+        cv = (
+            await session.execute(
+                select(CvProfile).where(CvProfile.id == cv_id)
+            )
+        ).scalar_one_or_none()
+        if cv is None or cv.user_id != owner_id:
+            raise ResourceNotFoundError()
+        version = (
+            await session.execute(
+                select(CvVersion).where(CvVersion.id == version_id, CvVersion.cv_id == cv.id)
+            )
+        ).scalar_one_or_none()
+        if version is None:
+            raise ResourceNotFoundError()
+        snapshot.cv_id = cv.id
+        snapshot.cv_version_id = version.id
+        snapshot.snapshot_json = dict(version.snapshot_json or {})
+    elif sel_type == "uploaded_document":
+        document_id = _shared.to_uuid(cv_selection.get("uploaded_document_id"))
+        if not document_id:
+            raise ValidationFailedError("Thiếu tài liệu CV đã tải lên để nộp.")
+        document = (
+            await session.execute(
+                select(Document).where(Document.id == document_id, Document.deleted_at.is_(None))
+            )
+        ).scalar_one_or_none()
+        if document is None or document.user_id != owner_id:
+            raise ResourceNotFoundError()
+        run = (
+            await session.execute(
+                select(CvParseRun)
+                .where(CvParseRun.document_id == document.id)
+                .order_by(CvParseRun.created_at.desc())
+            )
+        ).scalars().first()
+        extracted = (run.extracted_data if run else None) or {}
+        snapshot.uploaded_document_id = document.id
+        snapshot.snapshot_json = {
+            "title": document.original_name,
+            "source_type": "uploaded",
+            "document_id": str(document.id),
+            "sections": _sections_from_extracted(extracted),
+        }
+    else:
+        raise ValidationFailedError("Loại CV nộp không hợp lệ.")
+
+    session.add(snapshot)
+    await session.flush()
+    await write_audit(
+        session, action="cv.snapshot.created", resource_type="application_cv_snapshot",
+        resource_id=snapshot.id,
+        context=_shared.audit_ctx(Principal(user_id=owner_id), ctx),
+        after={
+            "selection_type": sel_type,
+            "application_id": str(application_id) if application_id else None,
+        },
+    )
+    if commit:
+        await session.commit()
+        await session.refresh(snapshot)
+    return snapshot
+
+
+async def _load_snapshot(session: AsyncSession, *, snapshot_id: uuid.UUID) -> ApplicationCvSnapshot:
+    snap = (
+        await session.execute(
+            select(ApplicationCvSnapshot).where(ApplicationCvSnapshot.id == snapshot_id)
+        )
+    ).scalar_one_or_none()
+    if snap is None:
+        raise ResourceNotFoundError()
+    return snap
+
+
+async def get_snapshot_json_for_application(
+    session: AsyncSession, *, application_id: uuid.UUID
+) -> dict | None:
+    """The most recent immutable snapshot's structured JSON for ``application_id``.
+
+    Read-only, privacy-neutral projection for advisory surfaces (e.g. the
+    recruitment AI screening brief) that need CV content shape but must never
+    import ``ApplicationCvSnapshot`` directly. Returns ``None`` if no snapshot
+    exists for the application. The caller remains responsible for its own PII
+    handling of the returned structure (e.g. skipping contact sections).
+    """
+
+    snap = (
+        await session.execute(
+            select(ApplicationCvSnapshot)
+            .where(ApplicationCvSnapshot.application_id == application_id)
+            .order_by(ApplicationCvSnapshot.created_at.desc())
+        )
+    ).scalars().first()
+    return dict(snap.snapshot_json or {}) if snap is not None else None
+
+
+async def get_snapshot_download(
+    session: AsyncSession, *, principal: Principal, snapshot_id: uuid.UUID
+) -> dict:
+    """Return a signed download URL for a snapshot.
+
+    Owner -> unwatermarked. Authorized partner (via the authorizer seam) ->
+    watermarked. Anyone else -> ``404`` (enumeration hiding).
+    """
+
+    snap = await _load_snapshot(session, snapshot_id=snapshot_id)
+    watermark: str | None = None
+    if principal.user_id is not None and snap.user_id == principal.user_id:
+        watermark = None  # owner self-download is not watermarked
+    else:
+        access = _authorizer(principal, snap) if _authorizer is not None else None
+        if access is None:
+            raise ResourceNotFoundError()
+        watermark = access.watermark_text or "VinUni Career"
+
+    token = storage.make_signed_token(
+        {
+            "kind": "snapshot",
+            "id": str(snap.id),
+            "uid": str(principal.user_id),
+            "purpose": "application_review" if watermark else "download",
+            "wm": watermark or False,
+        }
+    )
+    base = get_settings().app_url.rstrip("/")
+    return {
+        "snapshot_id": str(snap.id),
+        "has_watermark": watermark is not None,
+        "download_url": f"{base}/api/v1/cv-files/{token}",
+    }
+
+
+# --------------------------------------------------------------------------- #
+# Retention sweep (compliance module's scheduled job hook, ADR-0014 §35)      #
+# --------------------------------------------------------------------------- #
+
+_RETENTION_TOMBSTONE_MARKER = "_retention_anonymized"
+
+
+async def anonymize_expired_snapshots(session: AsyncSession, *, older_than) -> int:
+    """Anonymize snapshots created before ``older_than`` (a ``datetime``).
+
+    Called ONLY by ``compliance.application.retention_service`` — the
+    ``documents`` module never imports ``compliance`` (no direct cross-module
+    ORM writes; this is the facade seam). Idempotent: a row already tombstoned
+    (``snapshot_json`` carries the marker) is skipped on re-run, so running the
+    sweep twice never double-processes. Snapshots stay immutable in every other
+    sense (never deleted, ``application_id``/``id`` preserved) — only the PII
+    payload is scrubbed in place, matching "soft-delete/anonymize" per the ADR.
+    """
+
+    rows = list(
+        (
+            await session.execute(
+                select(ApplicationCvSnapshot).where(
+                    ApplicationCvSnapshot.created_at < older_than
+                )
+            )
+        )
+        .scalars()
+        .all()
+    )
+    count = 0
+    for row in rows:
+        if isinstance(row.snapshot_json, dict) and row.snapshot_json.get(
+            _RETENTION_TOMBSTONE_MARKER
+        ):
+            continue
+        row.snapshot_json = {_RETENTION_TOMBSTONE_MARKER: True}
+        row.redacted_json = None
+        count += 1
+    await session.flush()
+    return count

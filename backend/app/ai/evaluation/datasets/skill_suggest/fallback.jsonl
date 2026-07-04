@@ -1,0 +1,4 @@
+{"id": "ss_fallback_provider_down_basic", "input": {"major": "CS", "existing_skills": [], "provider": "unavailable"}, "expect": {"is_fallback": true, "no_crash": true}}
+{"id": "ss_fallback_provider_down_no_leak", "input": {"major": "CS", "existing_skills": [], "provider": "unavailable"}, "expect": {"is_fallback": true, "no_provider_leak": true, "no_model_leak": true}}
+{"id": "ss_fallback_provider_down_excludes_existing", "input": {"major": "CS", "existing_skills": ["Python", "SQL"], "provider": "unavailable"}, "expect": {"is_fallback": true, "excludes_existing_skill": "python"}}
+{"id": "ss_fallback_provider_down_bounded", "input": {"major": "CS", "existing_skills": [], "provider": "unavailable"}, "expect": {"is_fallback": true, "suggestion_count_at_most": 8}}

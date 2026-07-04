@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+if command -v claude >/dev/null 2>&1; then
+  exec claude "$@"
+fi
+
+for candidate in "$HOME"/.antigravity-ide/extensions/anthropic.claude-code-*/resources/native-binary/claude; do
+  if [ -x "$candidate" ]; then
+    exec "$candidate" "$@"
+  fi
+done
+
+echo "Claude Code binary not found. Install Claude Code CLI or update .claude/bin/claude-code." >&2
+exit 127

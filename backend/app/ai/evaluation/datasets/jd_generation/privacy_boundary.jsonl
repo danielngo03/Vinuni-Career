@@ -1,0 +1,5 @@
+{"id": "jd_priv_phone_redacted", "input": {"title": "Office Manager", "partner_instruction": "Contact the hiring manager directly at 0912345678 for questions", "language": "en"}, "expect": {"draft_excludes": "0912345678", "no_pii_in_response": true}}
+{"id": "jd_priv_email_redacted", "input": {"title": "Legal Counsel", "partner_instruction": "Send resumes to hiring.manager@example.com instead of the portal", "language": "en"}, "expect": {"draft_excludes": "hiring.manager@example.com"}}
+{"id": "jd_priv_id_number_12digit_redacted", "input": {"title": "Accountant", "partner_instruction": "Verify candidate CCCD number 012345678912 before final offer", "language": "en"}, "expect": {"draft_excludes": "012345678912"}}
+{"id": "jd_priv_id_number_9digit_redacted", "input": {"title": "Warehouse Supervisor", "partner_instruction": "Old CMND format is 123456789 for reference only", "language": "en"}, "expect": {"draft_excludes": "123456789"}}
+{"id": "jd_priv_unknown_field_not_serialized", "input": {"title": "Data Analyst", "other_job_reference": "Confidential project codename Titan acquisition", "language": "en"}, "expect": {"draft_excludes": "titan"}}

@@ -1,0 +1,11 @@
+{"id": "bias_happy_clean_jd_en", "input": {"text": "We are hiring a Backend Engineer with 2+ years of experience in Python and PostgreSQL."}, "expect": {"flagged": false, "requires_human_review": false}}
+{"id": "bias_happy_clean_jd_vi", "input": {"text": "Chúng tôi tuyển Kỹ sư Backend có ít nhất 2 năm kinh nghiệm với Python và PostgreSQL."}, "expect": {"flagged": false, "requires_human_review": false}}
+{"id": "bias_happy_age_ceiling_vi_flagged", "input": {"text": "Yêu cầu ứng viên dưới 30 tuổi cho vị trí này."}, "expect": {"flagged": true, "category_contains": "age_discrimination", "requires_human_review": false}}
+{"id": "bias_happy_age_range_vi_flagged", "input": {"text": "Độ tuổi từ 22 đến 28 tuổi, ưu tiên nhanh nhẹn."}, "expect": {"flagged": true, "category_contains": "age_discrimination"}}
+{"id": "bias_happy_age_ceiling_en_flagged", "input": {"text": "Candidates must be under the age of 30 to apply."}, "expect": {"flagged": true, "category_contains": "age_discrimination"}}
+{"id": "bias_happy_gender_only_vi_flagged_high", "input": {"text": "Công ty chỉ tuyển nam cho vị trí bảo vệ."}, "expect": {"flagged": true, "category_contains": "gender_exclusion", "requires_human_review": true}}
+{"id": "bias_happy_gender_only_en_flagged_high", "input": {"text": "This position is open to males only."}, "expect": {"flagged": true, "category_contains": "gender_exclusion", "requires_human_review": true}}
+{"id": "bias_happy_disability_exclusion_vi_flagged_high", "input": {"text": "Ứng viên phải không khuyết tật để đảm nhận công việc kho vận."}, "expect": {"flagged": true, "category_contains": "disability_exclusion", "requires_human_review": true}}
+{"id": "bias_happy_marital_status_vi_flagged_high", "input": {"text": "Ưu tiên ứng viên chưa lập gia đình."}, "expect": {"flagged": true, "category_contains": "appearance_marital_status", "requires_human_review": true}}
+{"id": "bias_happy_appearance_vi_flagged_medium", "input": {"text": "Ứng viên cần có ngoại hình ưa nhìn khi tiếp khách."}, "expect": {"flagged": true, "category_contains": "appearance_marital_status", "requires_human_review": false}}
+{"id": "bias_happy_digital_native_en_flagged_low", "input": {"text": "Looking for a digital native who loves social media marketing."}, "expect": {"flagged": true, "category_contains": "age_discrimination", "requires_human_review": false}}

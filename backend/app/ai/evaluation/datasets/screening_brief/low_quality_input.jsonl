@@ -1,0 +1,5 @@
+{"id": "sb_lowq_empty_llm_json", "input": {"llm_json": {}}, "expect": {"bullet_count_equals": 0, "suitability_equals": "moderate", "no_crash": true}}
+{"id": "sb_lowq_missing_bullets_key", "input": {"llm_json": {"suitability": "strong"}}, "expect": {"bullet_count_equals": 0, "no_crash": true}}
+{"id": "sb_lowq_missing_suitability_key", "input": {"llm_json": {"bullets": ["A bullet."]}}, "expect": {"suitability_equals": "moderate", "no_crash": true}}
+{"id": "sb_lowq_empty_bullets_list", "input": {"llm_json": {"bullets": [], "suitability": "weak"}}, "expect": {"bullet_count_equals": 0, "no_crash": true}}
+{"id": "sb_lowq_bullets_with_empty_strings", "input": {"llm_json": {"bullets": ["", "Valid bullet."], "suitability": "moderate"}}, "expect": {"all_bullets_are_strings": true, "no_crash": true}}

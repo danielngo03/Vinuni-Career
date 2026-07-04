@@ -1,0 +1,92 @@
+{
+  "billing": {
+    "subscriber": {
+      "studentTitle": "Gói & Thanh toán",
+      "studentSubtitle": "Quản lý gói đăng ký, hạn mức và nâng cấp tài khoản sinh viên của bạn.",
+      "partnerTitle": "Gói & Thanh toán",
+      "partnerSubtitle": "Quản lý gói đăng ký, hạn mức tuyển dụng và nâng cấp của tổ chức bạn."
+    },
+    "permissionBody": "Bạn không có quyền xem thông tin gói đăng ký.",
+    "current": {
+      "heading": "Gói hiện tại",
+      "freeTier": "Gói miễn phí",
+      "window": "Hiệu lực: {window}",
+      "daysLeft": "Còn {count} ngày",
+      "endingSoon": "Sắp hết hạn",
+      "grantsTitle": "Quyền lợi áp dụng",
+      "cancelPending": "Hủy yêu cầu",
+      "cancelActive": "Hủy gói",
+      "cancelTitle": "Hủy gói đăng ký?",
+      "cancelConfirm": "Xác nhận hủy",
+      "cancelNote": "Yêu cầu đăng ký đang chờ của bạn sẽ bị hủy. Bạn có thể đăng ký lại bất cứ lúc nào.",
+      "cancelActiveNote": "Gói đang hiệu lực sẽ bị hủy và tài khoản trở về hạn mức mặc định (miễn phí). Thao tác này không hoàn lại phí."
+    },
+    "plans": {
+      "comparisonTitle": "So sánh các gói",
+      "comparisonHint": "Chọn nâng cấp để mở khóa thêm hạn mức. Thanh toán qua chuyển khoản ngân hàng và được nhà trường xác nhận thủ công.",
+      "featureCol": "Quyền lợi",
+      "currentBadge": "Đang dùng",
+      "yourPlan": "Gói của bạn",
+      "free": "Miễn phí",
+      "upgrade": "Nâng cấp",
+      "alreadyInflight": "Bạn đã có một gói đang chờ hoặc đang hiệu lực. Hãy hủy gói hiện tại trước khi đổi gói.",
+      "upgradeTitle": "Nâng cấp gói",
+      "upgradeBody": "Đăng ký gói {plan} với mức phí {price}. Sau khi gửi yêu cầu, bạn sẽ nhận hướng dẫn chuyển khoản.",
+      "upgradeConfirm": "Gửi yêu cầu",
+      "upgradeNote": "Yêu cầu sẽ ở trạng thái chờ thanh toán cho đến khi nhà trường xác nhận chuyển khoản của bạn.",
+      "emptyTitle": "Chưa có gói nào",
+      "emptyBody": "Hiện chưa có gói đăng ký nào khả dụng cho tài khoản của bạn."
+    },
+    "payment": {
+      "title": "Hướng dẫn thanh toán",
+      "intro": "Chuyển khoản theo thông tin dưới đây. Gói của bạn sẽ được kích hoạt sau khi nhà trường xác nhận.",
+      "bank": "Ngân hàng",
+      "accountName": "Tên tài khoản",
+      "accountNumber": "Số tài khoản",
+      "note": "Nội dung chuyển khoản",
+      "doneHint": "Sau khi chuyển khoản, vui lòng chờ nhà trường xác nhận. Trạng thái gói sẽ tự cập nhật.",
+      "pendingTitle": "Đang chờ xác nhận thanh toán",
+      "pendingBody": "Yêu cầu của bạn đang chờ nhà trường xác nhận chuyển khoản. Trạng thái sẽ cập nhật sau khi thanh toán được ghi nhận."
+    },
+    "toast": {
+      "requested": "Đã gửi yêu cầu đăng ký. Vui lòng làm theo hướng dẫn thanh toán.",
+      "cancelled": "Đã hủy gói đăng ký."
+    },
+    "errors": {
+      "conflictTitle": "Đã có gói đăng ký",
+      "conflictBody": "Bạn đã có một gói đang chờ hoặc đang hiệu lực.",
+      "audienceMismatch": "Gói dịch vụ này không áp dụng cho loại tài khoản của bạn."
+    },
+    "enums": {
+      "status": {
+        "pending": "Chờ thanh toán",
+        "active": "Đang hiệu lực",
+        "expired": "Đã hết hạn",
+        "cancelled": "Đã hủy"
+      },
+      "audience": {
+        "student": "Sinh viên",
+        "partner": "Đối tác"
+      },
+      "period": {
+        "monthly": "Hàng tháng",
+        "annual": "Hàng năm"
+      }
+    },
+    "limits": {
+      "on": "Có",
+      "off": "Không",
+      "keys": {
+        "cv_active_quota": "CV đang hoạt động",
+        "pdf_exports_per_month": "Lượt xuất PDF / tháng",
+        "premium_templates": "Mẫu CV cao cấp",
+        "mass_apply_limit": "Ứng tuyển hàng loạt",
+        "ai_daily_cost_quota_usd": "Hạn mức AI / ngày (USD)",
+        "job_post_quota": "Tin tuyển dụng",
+        "featured_job_slots": "Vị trí tin nổi bật",
+        "passive_search_quota": "Tìm kiếm ứng viên chủ động",
+        "email_blast_quota": "Gửi email hàng loạt"
+      }
+    }
+  }
+}

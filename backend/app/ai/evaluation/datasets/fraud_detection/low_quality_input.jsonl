@@ -1,0 +1,5 @@
+{"id": "fd_lowq_empty_signals", "input": {"signals": {}}, "expect": {"risk_level": "low", "requires_human_review": false, "signal_count": 0, "no_crash": true}}
+{"id": "fd_lowq_missing_signals_key", "input": {}, "expect": {"risk_level": "low", "signal_count": 0, "no_crash": true}}
+{"id": "fd_lowq_null_signals", "input": {"signals": null}, "expect": {"risk_level": "low", "signal_count": 0, "no_crash": true}}
+{"id": "fd_lowq_wrong_typed_values", "input": {"signals": {"org_age_days": "yesterday", "jobs_posted_last_7d": [1, 2], "fee_collection_flagged": "yes"}}, "expect": {"signal_count": 0, "no_crash": true}}
+{"id": "fd_lowq_nested_garbage", "input": {"signals": {"org_age_days": {"value": 1}, "user_reports_last_30d": {"n": 9}}}, "expect": {"signal_count": 0, "no_crash": true}}

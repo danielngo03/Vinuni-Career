@@ -1,0 +1,207 @@
+{
+  "profile": {
+    "title": "Hồ sơ của tôi",
+    "subtitle": "Quản lý thông tin cá nhân, học vấn, kinh nghiệm và quyền riêng tư của bạn.",
+    "saved": "Đã lưu thay đổi.",
+    "completion": {
+      "title": "Mức độ hoàn thiện hồ sơ",
+      "ariaLabel": "Hồ sơ đã hoàn thiện {pct}%",
+      "done": "Tuyệt vời! Hồ sơ của bạn đã hoàn thiện.",
+      "nextSteps": "Bước tiếp theo"
+    },
+    "nudges": {
+      "headline": "Thêm một tiêu đề ngắn để gây ấn tượng đầu tiên.",
+      "summary": "Viết phần giới thiệu để nhà tuyển dụng hiểu về bạn.",
+      "education": "Thêm thông tin học vấn để tăng độ hoàn thiện.",
+      "experience": "Thêm kinh nghiệm làm việc hoặc thực tập.",
+      "skills": "Thêm kỹ năng nổi bật của bạn.",
+      "academic": "Bổ sung ngành học, bậc học và năm tốt nghiệp.",
+      "links": "Thêm liên kết tới portfolio, LinkedIn hoặc GitHub."
+    },
+    "core": {
+      "title": "Thông tin cơ bản",
+      "intro": "Thông tin nhận diện và liên hệ chính của bạn.",
+      "headline": "Tiêu đề",
+      "headlineHelp": "Ví dụ: Sinh viên Khoa học Máy tính, đam mê dữ liệu.",
+      "summary": "Giới thiệu bản thân",
+      "summaryHelp": "Tóm tắt ngắn gọn về mục tiêu và thế mạnh của bạn.",
+      "phone": "Số điện thoại",
+      "locationCity": "Thành phố",
+      "locationCountry": "Quốc gia",
+      "major": "Ngành học",
+      "degreeLevel": "Bậc học",
+      "graduationYear": "Năm tốt nghiệp",
+      "notSet": "Chưa chọn",
+      "summaryAiDraft": "AI Soạn thảo",
+      "summaryAiDisclaimer": "Bản nháp từ AI — hãy xem lại và chỉnh sửa trước khi lưu.",
+      "summaryAiDisclaimerFallback": "Bản mẫu — hãy xem lại và chỉnh sửa trước khi lưu.",
+      "summaryAiError": "Không thể tạo bản nháp lúc này."
+    },
+    "privacy": {
+      "title": "Quyền riêng tư",
+      "intro": "Kiểm soát ai có thể nhìn thấy hồ sơ và thông tin liên hệ của bạn.",
+      "visibilityLabel": "Ai có thể xem hồ sơ của bạn",
+      "visibilityExplain": {
+        "public": "Mọi người dùng đã đăng nhập trên nền tảng đều có thể xem bản hồ sơ công khai của bạn.",
+        "vinuni_only": "Chỉ cộng đồng VinUni (sinh viên, cựu sinh viên, cán bộ) mới xem được hồ sơ của bạn.",
+        "private": "Chỉ mình bạn xem được. Hồ sơ không xuất hiện trong tìm kiếm hay kho nhân tài."
+      },
+      "contactLegend": "Hiển thị thông tin liên hệ",
+      "contactIntro": "Quyết định khi nào nhà tuyển dụng được thấy email và số điện thoại của bạn.",
+      "showEmail": "Email",
+      "showPhone": "Số điện thoại",
+      "contactExplain": {
+        "public": "Hiển thị ở mọi nơi hồ sơ của bạn được phép xem.",
+        "invited": "Chỉ hiển thị khi bạn đã đồng ý yêu cầu xem hoặc trong một đơn ứng tuyển.",
+        "hidden": "Không bao giờ hiển thị cho người khác."
+      },
+      "openToWorkLabel": "Đang tìm cơ hội việc làm",
+      "openToWorkHelp": "Cho nhà tuyển dụng biết bạn sẵn sàng cho các cơ hội mới và loại hình mong muốn."
+    },
+    "enums": {
+      "visibility": {
+        "public": "Công khai",
+        "vinuni_only": "Chỉ trong VinUni",
+        "private": "Riêng tư"
+      },
+      "contact": {
+        "public": "Hiển thị",
+        "invited": "Khi được mời",
+        "hidden": "Ẩn"
+      },
+      "openToWork": {
+        "full_time": "Toàn thời gian",
+        "internship": "Thực tập",
+        "part_time": "Bán thời gian",
+        "contract": "Hợp đồng"
+      },
+      "degree": {
+        "undergraduate": "Đại học",
+        "graduate": "Sau đại học",
+        "phd": "Tiến sĩ"
+      },
+      "employment": {
+        "full_time": "Toàn thời gian",
+        "part_time": "Bán thời gian",
+        "internship": "Thực tập",
+        "contract": "Hợp đồng"
+      },
+      "skillCategory": {
+        "technical": "Kỹ thuật",
+        "language": "Ngôn ngữ",
+        "soft": "Kỹ năng mềm"
+      },
+      "proficiency": {
+        "1": "1 – Mới bắt đầu",
+        "2": "2 – Cơ bản",
+        "3": "3 – Trung bình",
+        "4": "4 – Thành thạo",
+        "5": "5 – Chuyên gia"
+      }
+    },
+    "validation": {
+      "required": "Trường này là bắt buộc.",
+      "headlineMax": "Tiêu đề tối đa 255 ký tự.",
+      "summaryMax": "Giới thiệu tối đa 5000 ký tự.",
+      "phoneMax": "Số điện thoại tối đa 30 ký tự.",
+      "majorMax": "Ngành học tối đa 200 ký tự.",
+      "gpaRange": "GPA phải nằm trong khoảng 0 đến 4.",
+      "endBeforeStart": "Ngày kết thúc phải sau ngày bắt đầu.",
+      "urlInvalid": "Đường liên kết phải bắt đầu bằng http:// hoặc https://."
+    },
+    "education": {
+      "title": "Học vấn",
+      "intro": "Trường, bằng cấp và ngành học của bạn.",
+      "add": "Thêm",
+      "empty": "Chưa có thông tin học vấn. Thêm trường đầu tiên của bạn.",
+      "addTitle": "Thêm học vấn",
+      "editTitle": "Sửa học vấn",
+      "institution": "Trường / Cơ sở đào tạo",
+      "degree": "Bằng cấp",
+      "fieldOfStudy": "Ngành học",
+      "startDate": "Ngày bắt đầu",
+      "endDate": "Ngày kết thúc",
+      "isCurrent": "Đang theo học",
+      "gpa": "GPA",
+      "gpaHelp": "Trên thang điểm 4.0 (không bắt buộc).",
+      "description": "Mô tả",
+      "deleteTitle": "Xóa học vấn",
+      "deleteBody": "Bạn có chắc muốn xóa mục học vấn này? Hành động này không thể hoàn tác."
+    },
+    "experience": {
+      "title": "Kinh nghiệm",
+      "intro": "Công việc, thực tập và hoạt động của bạn.",
+      "add": "Thêm",
+      "empty": "Chưa có kinh nghiệm. Thêm công việc hoặc kỳ thực tập đầu tiên.",
+      "addTitle": "Thêm kinh nghiệm",
+      "editTitle": "Sửa kinh nghiệm",
+      "company": "Công ty / Tổ chức",
+      "jobTitle": "Vị trí",
+      "employmentType": "Loại hình",
+      "location": "Địa điểm",
+      "startDate": "Ngày bắt đầu",
+      "endDate": "Ngày kết thúc",
+      "isCurrent": "Đang làm việc tại đây",
+      "skillsUsed": "Kỹ năng sử dụng",
+      "skillsUsedHelp": "Phân tách bằng dấu phẩy, ví dụ: Python, SQL, giao tiếp.",
+      "description": "Mô tả",
+      "notSet": "Chưa chọn",
+      "deleteTitle": "Xóa kinh nghiệm",
+      "deleteBody": "Bạn có chắc muốn xóa mục kinh nghiệm này? Hành động này không thể hoàn tác."
+    },
+    "skills": {
+      "title": "Kỹ năng",
+      "intro": "Thêm kỹ năng bằng cách gõ và nhấn Enter. Nhấn vào thẻ để chỉnh sửa chi tiết.",
+      "add": "Thêm",
+      "addPlaceholder": "Nhập tên kỹ năng rồi nhấn Enter",
+      "empty": "Chưa có kỹ năng nào.",
+      "name": "Tên kỹ năng",
+      "category": "Nhóm",
+      "proficiency": "Mức độ thành thạo",
+      "notSet": "Chưa chọn",
+      "editTitle": "Sửa kỹ năng",
+      "duplicate": "Kỹ năng này đã có trong hồ sơ của bạn.",
+      "editAria": "Sửa kỹ năng {name}",
+      "removeAria": "Xóa kỹ năng {name}",
+      "deleteTitle": "Xóa kỹ năng",
+      "deleteBody": "Bạn có chắc muốn xóa kỹ năng này?",
+      "aiSuggest": "AI Gợi ý",
+      "aiSuggestAria": "Nhận gợi ý kỹ năng từ AI",
+      "aiSuggestLabel": "Gợi ý từ AI — nhấn để thêm:",
+      "aiSuggestFallbackLabel": "Kỹ năng phổ biến — nhấn để thêm:",
+      "aiSuggestEmpty": "Không có gợi ý mới. Kỹ năng của bạn đã khá đầy đủ!",
+      "aiSuggestError": "Không thể tải gợi ý lúc này."
+    },
+    "links": {
+      "title": "Liên kết",
+      "intro": "Portfolio, LinkedIn, GitHub hoặc trang web cá nhân.",
+      "add": "Thêm",
+      "empty": "Chưa có liên kết nào.",
+      "addTitle": "Thêm liên kết",
+      "editTitle": "Sửa liên kết",
+      "label": "Nhãn",
+      "labelHelp": "Ví dụ: LinkedIn, Portfolio (không bắt buộc).",
+      "url": "Đường liên kết",
+      "deleteTitle": "Xóa liên kết",
+      "deleteBody": "Bạn có chắc muốn xóa liên kết này?"
+    },
+    "avatar": {
+      "changeCta": "Đổi ảnh",
+      "removeCta": "Xoá ảnh",
+      "hint": "PNG, JPEG hoặc WebP · Tối đa {maxMb} MB",
+      "saved": "Đã lưu ảnh đại diện",
+      "uploadError": "Tải lên thất bại. Hãy thử lại.",
+      "removeError": "Xoá ảnh thất bại. Hãy thử lại.",
+      "tooLarge": "Ảnh quá lớn. Tối đa {maxMb} MB."
+    },
+    "aiInsights": {
+      "title": "Gợi ý hồ sơ",
+      "insightAddSkills": "Sinh viên có 5+ kỹ năng xuất hiện trong 3× nhiều hơn tìm kiếm ứng viên",
+      "insightAddExperience": "Thêm kinh nghiệm thực tập hoặc dự án để tăng sức mạnh hồ sơ",
+      "insightAddHeadline": "Tiêu đề rõ ràng giúp nhà tuyển dụng hiểu mục tiêu nghề nghiệp của bạn",
+      "insightAddLinks": "Thêm liên kết GitHub hoặc portfolio giúp tăng lời mời phỏng vấn",
+      "insightLowCompletion": "Hoàn thiện hồ sơ để xuất hiện trong tìm kiếm nhà tuyển dụng",
+      "insightNearComplete": "Gần xong rồi — hoàn thành hồ sơ để nhà tuyển dụng tìm thấy bạn đầy đủ"
+    }
+  }
+}

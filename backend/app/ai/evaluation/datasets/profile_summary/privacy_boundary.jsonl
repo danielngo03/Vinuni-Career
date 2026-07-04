@@ -1,0 +1,5 @@
+{"id": "ps_priv_fallback_no_pii", "input": {"major": "CS", "degree_level": "Bachelor", "provider": "unavailable"}, "expect": {"is_fallback": true, "no_pii_in_response": true}}
+{"id": "ps_priv_clean_draft_no_pii", "input": {"major": "CS", "name": "An Nguyen", "ai_text": "I am a dedicated CS student."}, "expect": {"no_pii_in_response": true}}
+{"id": "ps_priv_no_provider_leak_fallback", "input": {"major": "CS", "provider": "unavailable"}, "expect": {"is_fallback": true, "no_provider_leak": true, "no_model_leak": true}}
+{"id": "ps_priv_no_internal_status_leak", "input": {"major": "CS", "ai_text": "I am a strong candidate."}, "expect": {"no_internal_status_codes": true}}
+{"id": "ps_priv_missing_major_fallback_generic", "input": {"provider": "unavailable"}, "expect": {"is_fallback": true, "no_crash": true}}

@@ -1,0 +1,5 @@
+{"id": "jd_lowq_missing_title", "input": {"employment_type": "internship", "language": "en"}, "expect": {"draft_contains": "[not provided]", "no_crash": true}}
+{"id": "jd_lowq_empty_partner_instruction", "input": {"title": "Research Assistant", "partner_instruction": "", "language": "en"}, "expect": {"draft_contains": "research assistant", "no_crash": true}}
+{"id": "jd_lowq_whitespace_title", "input": {"title": "   ", "language": "en"}, "expect": {"no_crash": true}}
+{"id": "jd_lowq_overlong_partner_instruction", "input": {"title": "Operations Analyst", "partner_instruction": "chi tiết công việc rất nhiều yêu cầu cần liệt kê ra đây để kiểm tra độ dài tối đa cho phép của trường ghi chú này khi vượt quá giới hạn ký tự quy định trong hệ thống bảo vệ đầu vào của trợ lý AI dành cho đối tác tuyển dụng trên nền tảng ", "language": "vi"}, "expect": {"draft_contains": "operations analyst", "no_crash": true}}
+{"id": "jd_lowq_empty_required_skills_list", "input": {"title": "Junior Developer", "required_skills": [], "language": "en"}, "expect": {"draft_contains": "junior developer", "no_crash": true}}

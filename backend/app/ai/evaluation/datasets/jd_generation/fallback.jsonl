@@ -1,0 +1,3 @@
+{"id": "jd_fallback_provider_down_basic", "input": {"title": "Software Engineer", "provider": "unavailable", "language": "en"}, "expect": {"error_code": "AI_UNAVAILABLE", "no_stack_trace": true}}
+{"id": "jd_fallback_provider_down_with_instruction", "input": {"title": "Sales Manager", "partner_instruction": "Highlight commission structure", "provider": "unavailable", "language": "en"}, "expect": {"error_code": "AI_UNAVAILABLE", "no_stack_trace": true}}
+{"id": "jd_fallback_provider_down_minimal_payload", "input": {"provider": "unavailable", "language": "vi"}, "expect": {"error_code": "AI_UNAVAILABLE", "no_stack_trace": true}}

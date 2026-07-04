@@ -1,0 +1,5 @@
+{"id": "ip_priv_unexpected_key_with_phone_not_leaked", "input": {"llm_json": {"questions": [{"question": "Q1"}], "prep_tips": "Tips.", "candidate_phone": "0912345678"}}, "expect": {"blob_excludes": "0912345678"}}
+{"id": "ip_priv_unexpected_key_with_email_not_leaked", "input": {"llm_json": {"questions": [{"question": "Q1"}], "prep_tips": "Tips.", "candidate_email": "student@example.com"}}, "expect": {"blob_excludes": "student@example.com"}}
+{"id": "ip_priv_fallback_is_generic_static_content", "input": {"provider": "unavailable"}, "expect": {"is_fallback": true, "no_pii_in_response": true}}
+{"id": "ip_priv_no_provider_model_leak", "input": {"llm_json": {"questions": [{"question": "Q1"}], "prep_tips": "Tips."}}, "expect": {"no_provider_leak": true, "no_model_leak": true}}
+{"id": "ip_priv_no_internal_status_leak", "input": {"llm_json": {"questions": [{"question": "Q1"}], "prep_tips": "Tips."}}, "expect": {"no_internal_status_codes": true}}

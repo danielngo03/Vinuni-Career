@@ -1,0 +1,300 @@
+{
+  "dashboard": {
+    "nextActions": "Việc cần làm",
+    "viewAll": "Xem tất cả",
+    "actions": {
+      "complete_profile": "Hoàn thiện hồ sơ",
+      "build_cv": "Tạo CV",
+      "create_alert": "Tạo thông báo việc làm",
+      "respond_reveal": "Phản hồi yêu cầu hiện danh tính",
+      "respond_reveals": "Phản hồi yêu cầu hiện danh tính",
+      "jobs_in_draft": "Hoàn tất tin nháp",
+      "jobs_pending_review": "Tin đang chờ duyệt",
+      "post_job": "Đăng tin tuyển dụng",
+      "review_jobs": "Duyệt tin tuyển dụng",
+      "review_partners": "Duyệt hồ sơ đối tác"
+    },
+    "student": {
+      "title": "Tổng quan sinh viên",
+      "subtitle": "Trung tâm điều hành sự nghiệp của bạn",
+      "metric": {
+        "applicationsTotal": "Tổng số đơn",
+        "applicationsActive": "Đơn đang xử lý",
+        "profileCompletion": "Mức hoàn thiện hồ sơ",
+        "cvCount": "Số CV",
+        "alertCount": "Thông báo việc làm"
+      },
+      "actionsEmptyTitle": "Bạn đã hoàn tất mọi việc",
+      "actionsEmptyBody": "Hiện chưa có việc nào cần xử lý. Hãy tiếp tục khám phá cơ hội nghề nghiệp.",
+      "upcomingInterviewsTitle": "Phỏng vấn sắp tới",
+      "viewInterview": "Xem chi tiết",
+      "upcomingEventsTitle": "Sự kiện sắp tham dự",
+      "viewEvent": "Xem sự kiện",
+      "revealsTitle": "Yêu cầu hiện danh tính",
+      "untitledJob": "Vị trí chưa đặt tên",
+      "unknownCompany": "Doanh nghiệp ẩn danh",
+      "requestedOn": "Yêu cầu ngày {date}",
+      "respondCta": "Phản hồi",
+      "recentApplicationsTitle": "Đơn ứng tuyển gần đây",
+      "noApplicationsTitle": "Chưa có đơn ứng tuyển",
+      "noApplicationsBody": "Khám phá việc làm và nộp đơn đầu tiên của bạn.",
+      "browseJobs": "Tìm việc làm",
+      "recentRolesTitle": "Vị trí mới đăng",
+      "recommendedRolesTitle": "Đề xuất cho bạn",
+      "popularRolesTitle": "Phổ biến với sinh viên VinUni",
+      "noRolesTitle": "Chưa có vị trí mới",
+      "noRolesBody": "Các vị trí mới sẽ xuất hiện tại đây khi nhà tuyển dụng đăng tin.",
+      "aiSnapshotWidgetLabel": "Tóm tắt hành trình nghề nghiệp",
+      "aiSnapshotTitle": "Tóm tắt hành trình nghề nghiệp",
+      "aiSnapshotCta": "Xem tóm tắt của tôi",
+      "aiSnapshotLoading": "Đang tạo tóm tắt cho bạn…",
+      "aiSnapshotError": "Không thể tạo tóm tắt lúc này. Vui lòng thử lại sau.",
+      "aiSnapshotFallbackNote": "Đang hiển thị tóm tắt dựa trên dữ liệu hồ sơ hiện có của bạn.",
+      "aiSnapshotRefresh": "Làm mới tóm tắt",
+      "completionCardTitle": "Hoàn thiện hồ sơ",
+      "completionCardDone": "Hồ sơ của bạn đã hoàn chỉnh",
+      "completionCardSubtitle": "Hồ sơ đầy đủ giúp tăng khả năng được nhà tuyển dụng tìm thấy và cải thiện độ phù hợp công việc.",
+      "completionCardCtaLabel": "Đến hồ sơ",
+      "completionSectionHeadline": "Tiêu đề nghề nghiệp",
+      "completionSectionSummary": "Giới thiệu bản thân",
+      "completionSectionEducation": "Học vấn",
+      "completionSectionExperience": "Kinh nghiệm",
+      "completionSectionSkills": "Kỹ năng (ít nhất 3)",
+      "completionSectionLinks": "Liên kết hồ sơ",
+      "completionSectionOpenToWork": "Trạng thái tìm việc"
+    },
+    "partner": {
+      "title": "Trung tâm tuyển dụng",
+      "subtitle": "Vận hành tuyển dụng của doanh nghiệp",
+      "postJob": "Đăng tin",
+      "metric": {
+        "jobsActive": "Tin đang hiển thị",
+        "jobsDraft": "Tin nháp",
+        "jobsPendingReview": "Chờ duyệt",
+        "jobsPendingReviewHotNote": "{count, plural, one {# tin cần duyệt} other {# tin cần duyệt}}",
+        "applicationsTotal": "Tổng số đơn",
+        "revealsPending": "Chờ phản hồi danh tính",
+        "revealsPendingHotNote": "{count, plural, one {# hồ sơ cần phản hồi} other {# hồ sơ cần phản hồi}}"
+      },
+      "actionsEmptyTitle": "Không có việc cần xử lý",
+      "actionsEmptyBody": "Mọi tin tuyển dụng và đơn ứng tuyển đều đã được xử lý.",
+      "attentionTitle": "Tin cần chú ý",
+      "noAttentionTitle": "Không có tin cần chú ý",
+      "noAttentionBody": "Đăng tin tuyển dụng để bắt đầu nhận hồ sơ ứng viên.",
+      "applicationCount": "{count, plural, other {# đơn ứng tuyển}}",
+      "recentApplicationsTitle": "Đơn ứng tuyển gần đây",
+      "viewCandidates": "Xem ứng viên",
+      "noApplicationsTitle": "Chưa có đơn ứng tuyển",
+      "noApplicationsBody": "Đơn ứng tuyển mới sẽ xuất hiện tại đây.",
+      "untitledJob": "Vị trí chưa đặt tên",
+      "pipelineHealthTitle": "Tổng quan tuyển dụng",
+      "aiHiringHealthTitle": "Sức khỏe tuyển dụng AI",
+      "aiInsightStrongDemand": "Nhu cầu cao — trung bình {count} ứng tuyển cho mỗi vị trí đang mở.",
+      "aiInsightLowVolume": "Lượng ứng tuyển thấp ({count} mỗi vị trí) — hãy tăng độ phủ của tin tuyển dụng.",
+      "aiInsightDraftJobs": "{count, plural, one {# tin nháp} other {# tin nháp}} chưa đăng — hãy xuất bản để thu hút ứng viên.",
+      "aiInsightRevealsPending": "{count, plural, one {# yêu cầu tiết lộ danh tính} other {# yêu cầu tiết lộ danh tính}} đang chờ phản hồi — trả lời nhanh giúp cải thiện trải nghiệm ứng viên.",
+      "aiInsightNoActive": "Không có tin tuyển dụng nào đang hoạt động — hãy kích hoạt bản nháp để tiếp tục tuyển dụng.",
+      "todoTitle": "Việc cần làm hôm nay",
+      "todo": {
+        "respond_reveals": {
+          "title": "Phản hồi yêu cầu hiện danh tính",
+          "body": "{count, plural, one {# hồ sơ đang chờ quyết định của đội tuyển dụng} other {# hồ sơ đang chờ quyết định của đội tuyển dụng}}"
+        },
+        "jobs_pending_review": {
+          "title": "Theo dõi tin đang chờ duyệt",
+          "body": "{count, plural, one {# tin đang ở hàng đợi kiểm duyệt của trường} other {# tin đang ở hàng đợi kiểm duyệt của trường}}"
+        },
+        "jobs_in_draft": {
+          "title": "Hoàn tất tin nháp",
+          "body": "{count, plural, one {# tin có thể hoàn thiện và gửi duyệt} other {# tin có thể hoàn thiện và gửi duyệt}}"
+        },
+        "reviewPipeline": {
+          "title": "Rà soát quy trình ứng viên",
+          "body": "Kiểm tra các vòng tuyển dụng, phiếu đánh giá và lịch phỏng vấn đang mở."
+        },
+        "inviteTeam": {
+          "title": "Phân quyền cho đội tuyển dụng",
+          "body": "Mời thành viên, gán role/phòng ban và cấp quyền đúng phạm vi."
+        },
+        "post_job": {
+          "title": "Tạo nhu cầu tuyển dụng mới",
+          "body": "Đăng vị trí mới hoặc nhân bản một tin đang hiệu quả."
+        }
+      },
+      "healthTitle": "Sức khỏe vận hành",
+      "healthAllClear": "Không có hàng đợi nóng cần xử lý ngay.",
+      "healthNeedsWork": "{count, plural, one {# mục đang cần đội tuyển dụng xử lý} other {# mục đang cần đội tuyển dụng xử lý}}",
+      "health": {
+        "candidateDemand": "Nhu cầu ứng viên",
+        "publishingQueue": "Hàng đợi đăng tin",
+        "privacyQueue": "Hàng đợi danh tính",
+        "applicationsPerJob": "{count} đơn/tin",
+        "itemsWaiting": "{count} mục"
+      },
+      "governanceTitle": "Phân quyền & vận hành",
+      "governanceBody": "Quản trị viên đối tác có toàn quyền; các năng lực như phân tích, quyền xem CV, gói dịch vụ, quy trình tuyển dụng hoặc tác vụ AI được bật theo vai trò, người dùng hoặc phòng ban.",
+      "governance": {
+        "team": {
+          "title": "Thành viên & quyền",
+          "body": "Mời người dùng, tạo vai trò, gán phòng ban và giới hạn phạm vi quyền."
+        },
+        "billing": {
+          "title": "Gói dịch vụ",
+          "body": "Quản lý gói, hạn mức và yêu cầu nâng cấp."
+        },
+        "company": {
+          "title": "Hồ sơ doanh nghiệp",
+          "body": "Logo, thông tin công ty, tín hiệu tin cậy và trang công khai."
+        },
+        "analytics": {
+          "title": "Phân tích tuyển dụng",
+          "body": "Phễu tuyển dụng, tin nổi bật và số liệu hiệu quả theo quyền được cấp."
+        },
+        "pipeline": {
+          "title": "Quy trình toàn công ty",
+          "body": "Xem tiến độ ứng viên theo tin và theo vòng tuyển dụng."
+        },
+        "security": {
+          "title": "Bảo mật & truy cập",
+          "body": "Nhật ký ai đã xem/tải CV nào và cảnh báo truy cập bất thường."
+        },
+        "settings": {
+          "title": "Cài đặt",
+          "body": "Thông báo, bảo mật, thiết bị và tuỳ chọn tài khoản."
+        }
+      },
+      "performanceTitle": "Hiệu năng tin tuyển dụng",
+      "openAnalytics": "Mở phân tích",
+      "performanceFootnote": "Hiện đang dùng số đơn ứng tuyển thật; lượt xem, lượt nhấp và tỷ lệ chuyển đổi theo từng tin sẽ cần mô hình dữ liệu phân tích riêng.",
+      "welcomeBack": "Chào mừng trở lại, {name}",
+      "welcomeSubtitle": "Đây là bức tranh tuyển dụng của {org} hôm nay."
+    },
+    "partnerOps": {
+      "title": "Trung tâm vận hành tuyển dụng",
+      "subtitle": "Việc cần làm, hiệu năng tin, hoạt động đội ngũ và cảnh báo truy cập hồ sơ.",
+      "backToOverview": "Về tổng quan",
+      "todoTitle": "Việc cần làm",
+      "todoEmptyTitle": "Không có việc cần xử lý",
+      "todoEmptyBody": "Mọi việc đã được xử lý — quay lại sau nhé.",
+      "priority": {
+        "high": "Khẩn cấp",
+        "medium": "Trung bình",
+        "low": "Thấp"
+      },
+      "todoLabel": {
+        "respond_reveals": "Phản hồi yêu cầu hiện danh tính",
+        "jobs_pending_review": "Theo dõi tin đang chờ duyệt",
+        "jobs_in_draft": "Hoàn tất tin nháp",
+        "review_access_alerts": "Rà soát cảnh báo truy cập hồ sơ",
+        "post_job": "Đăng tin tuyển dụng mới"
+      },
+      "metricsTitle": "Chỉ số vận hành",
+      "engagement": {
+        "title": "Hiệu năng tin tuyển dụng (30 ngày)",
+        "impressions": "Lượt hiển thị",
+        "detailViews": "Lượt xem chi tiết",
+        "ctaClicks": "Lượt bấm CTA",
+        "applyStarts": "Bắt đầu ứng tuyển",
+        "applicationsSubmitted": "Đơn đã nộp",
+        "conversion": "Tỷ lệ chuyển đổi",
+        "conversionUnavailable": "Chưa đủ dữ liệu",
+        "noDataTitle": "Chưa có dữ liệu hiệu năng",
+        "noDataBody": "Đang dùng số đơn ứng tuyển thật; lượt xem/lượt nhấp sẽ xuất hiện khi có dữ liệu mới.",
+        "lockedTitle": "Cần quyền xem chỉ số",
+        "lockedBody": "Bạn chưa được cấp quyền phân tích tin tuyển dụng."
+      },
+      "jobPerformanceTitle": "Hiệu năng theo tin",
+      "jobPerformanceLockedTitle": "Cần quyền phân tích",
+      "jobPerformanceLockedBody": "Bạn chưa được cấp quyền xem chỉ số tin tuyển dụng. Liên hệ quản trị viên đối tác để được cấp quyền.",
+      "jobPerformanceFallbackNote": "Đang dùng số đơn ứng tuyển thật — chưa có dữ liệu lượt xem/lượt nhấp cho tổ chức này.",
+      "jobPerformanceEmptyTitle": "Chưa có dữ liệu tin tuyển dụng",
+      "jobPerformanceEmptyBody": "Đăng tin và nhận đơn ứng tuyển để bắt đầu theo dõi hiệu năng.",
+      "table": {
+        "job": "Tin tuyển dụng",
+        "impressions": "Hiển thị",
+        "views": "Lượt xem",
+        "clicks": "Lượt nhấp",
+        "applications": "Đơn",
+        "conversion": "Chuyển đổi",
+        "applicationCount": "Số đơn"
+      },
+      "teamActivityTitle": "Hoạt động đội ngũ",
+      "teamActivityEmptyTitle": "Chưa có hoạt động",
+      "teamActivityEmptyBody": "Hoạt động của đội ngũ (tin đăng, hồ sơ, phỏng vấn, đề nghị) sẽ xuất hiện tại đây.",
+      "accessAlertsTitle": "Cảnh báo truy cập hồ sơ",
+      "accessAlertsLockedTitle": "Cần quyền xem nhật ký truy cập",
+      "accessAlertsLockedBody": "Bạn chưa được cấp quyền xem cảnh báo truy cập hồ sơ ứng viên.",
+      "accessAlertsEmptyTitle": "Không có cảnh báo",
+      "accessAlertsEmptyBody": "Không phát hiện lượt tải CV hoặc yêu cầu tiết lộ danh tính bất thường trong 24 giờ qua.",
+      "alertWindow": "{count} lượt trong {hours} giờ qua",
+      "viewAccessLog": "Xem nhật ký truy cập",
+      "aiRecommendationsTitle": "Gợi ý vận hành (chỉ mang tính tham khảo)",
+      "aiRecommendationsDisclaimer": "Gợi ý dựa trên dữ liệu hiện có — không tự động thực hiện bất kỳ hành động nào.",
+      "rbacTitle": "Phạm vi quyền của bạn",
+      "rbacAdminBody": "Bạn có toàn quyền quản trị tổ chức đối tác — mọi widget đều hiển thị đầy đủ.",
+      "rbacMemberBody": "Một số widget đang bị ẩn/khoá do thiếu quyền. Liên hệ quản trị viên đối tác của bạn để được cấp thêm quyền.",
+      "hiddenWidgetsCount": "{count, plural, one {# widget đang bị khoá} other {# widget đang bị khoá}}"
+    },
+    "partnerAccessLog": {
+      "title": "Nhật ký truy cập hồ sơ ứng viên",
+      "subtitle": "Ai đã xem hoặc tải hồ sơ nào — phục vụ rà soát bảo mật và tuân thủ.",
+      "backToOps": "Về vận hành tuyển dụng",
+      "lockedTitle": "Cần quyền xem nhật ký",
+      "lockedBody": "Bạn cần quyền xem/tải CV hoặc quyền phân tích lượt nhấp để xem nhật ký truy cập này.",
+      "emptyTitle": "Chưa có sự kiện truy cập",
+      "emptyBody": "Các lượt mở hồ sơ, xem/tải CV và yêu cầu tiết lộ danh tính sẽ được ghi lại tại đây.",
+      "table": {
+        "event": "Sự kiện",
+        "job": "Tin tuyển dụng",
+        "actor": "Người thực hiện",
+        "time": "Thời điểm",
+        "reason": "Lý do"
+      },
+      "unknownActor": "Không xác định",
+      "noReason": "—",
+      "event": {
+        "application_opened": "Đã mở hồ sơ ứng tuyển",
+        "cv_previewed": "Đã xem trước CV",
+        "cv_downloaded": "Đã tải CV",
+        "identity_reveal_requested": "Đã yêu cầu tiết lộ danh tính",
+        "identity_revealed_viewed": "Đã xem danh tính đã tiết lộ"
+      }
+    },
+    "university": {
+      "title": "Trung tâm vận hành",
+      "subtitle": "Kiểm duyệt và quản trị nền tảng nghề nghiệp",
+      "metric": {
+        "jobsPending": "Tin chờ kiểm duyệt",
+        "jobsPendingHotNote": "{count, plural, one {# tin cần kiểm duyệt} other {# tin cần kiểm duyệt}}",
+        "partnersPending": "Đối tác chờ duyệt",
+        "partnersPendingHotNote": "{count, plural, one {# đối tác cần duyệt} other {# đối tác cần duyệt}}",
+        "partnersActive": "Đối tác đang hoạt động",
+        "jobsActiveTotal": "Tin đang hiển thị"
+      },
+      "actionsEmptyTitle": "Hàng đợi trống",
+      "actionsEmptyBody": "Không có mục nào cần kiểm duyệt vào lúc này.",
+      "moderationTitle": "Hàng đợi kiểm duyệt tin",
+      "openQueue": "Mở hàng đợi",
+      "noModerationTitle": "Không có tin chờ duyệt",
+      "noModerationBody": "Tin tuyển dụng mới gửi sẽ xuất hiện tại đây để kiểm duyệt.",
+      "unknownCompany": "Doanh nghiệp ẩn danh",
+      "partnerRequestsTitle": "Yêu cầu đăng ký đối tác",
+      "openPartners": "Mở danh sách đối tác",
+      "noPartnerRequestsTitle": "Không có yêu cầu đối tác",
+      "noPartnerRequestsBody": "Yêu cầu đăng ký đối tác mới sẽ xuất hiện tại đây.",
+      "requestedOn": "Gửi ngày {date}",
+      "activityTitle": "Hoạt động nền tảng",
+      "queueOnTrack": "Đang ổn định",
+      "queueBuilding": "Đang tăng",
+      "queueOverloaded": "Cần xử lý ngay",
+      "aiInsightsTitle": "Thông tin quản trị",
+      "aiInsightQueueClear": "Hàng đợi kiểm duyệt trống — không có việc làm nào chờ duyệt",
+      "aiInsightQueuePending": "{count, plural, one {# việc làm} other {# việc làm}} chờ kiểm duyệt",
+      "aiInsightQueueOverloaded": "Hàng đợi quá tải — {count} việc làm chờ duyệt, ưu tiên xử lý hôm nay",
+      "aiInsightPartnersPending": "{count, plural, one {# yêu cầu đối tác} other {# yêu cầu đối tác}} đang chờ phê duyệt",
+      "aiInsightPlatformScope": "{partners, plural, one {# đối tác đang hoạt động} other {# đối tác đang hoạt động}} với {jobs, plural, one {# việc làm đang đăng} other {# việc làm đang đăng}} trên nền tảng",
+      "queueDepth": "Độ sâu hàng đợi kiểm duyệt",
+      "queueHealth": "Tình trạng hàng đợi"
+    }
+  }
+}

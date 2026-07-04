@@ -1,0 +1,6 @@
+{"id": "cm_lowq_empty_string", "input": {"text": ""}, "expect": {"flagged": false, "no_crash": true}}
+{"id": "cm_lowq_whitespace_only", "input": {"text": "  \n\t "}, "expect": {"flagged": false, "no_crash": true}}
+{"id": "cm_lowq_non_string_list", "input": {"text": ["nộp", "phí"]}, "expect": {"flagged": false, "no_crash": true}}
+{"id": "cm_lowq_non_string_dict", "input": {"text": {"x": 1}}, "expect": {"flagged": false, "no_crash": true}}
+{"id": "cm_lowq_gibberish", "input": {"text": "xk29 zzq!! @@## lorem asdf"}, "expect": {"flagged": false, "no_crash": true}}
+{"id": "cm_lowq_emoji_only", "input": {"text": "🚀🚀🔥🔥💰💰"}, "expect": {"flagged": false, "no_crash": true}}

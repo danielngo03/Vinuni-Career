@@ -1,0 +1,42 @@
+{
+  "hooks": {
+    "BeforeAgent": [
+      {
+        "hooks": [
+          {
+            "name": "log-prompt",
+            "type": "command",
+            "command": "bash scripts/_pyrun.sh scripts/log_hook.py --tool=gemini",
+            "timeout": 10000
+          }
+        ]
+      }
+    ],
+    "AfterModel": [
+      {
+        "matcher": ".*",
+        "hooks": [
+          {
+            "name": "log-model",
+            "type": "command",
+            "command": "bash scripts/_pyrun.sh scripts/log_hook.py --tool=gemini",
+            "timeout": 10000
+          }
+        ]
+      }
+    ],
+    "SessionEnd": [
+      {
+        "matcher": ".*",
+        "hooks": [
+          {
+            "name": "log-session-end",
+            "type": "command",
+            "command": "bash scripts/_pyrun.sh scripts/log_hook.py --tool=gemini",
+            "timeout": 10000
+          }
+        ]
+      }
+    ]
+  }
+}

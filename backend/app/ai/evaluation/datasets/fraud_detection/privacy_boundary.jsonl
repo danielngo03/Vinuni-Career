@@ -1,0 +1,5 @@
+{"id": "fd_priv_input_email_never_echoed", "input": {"signals": {"fee_collection_flagged": true, "recruiter_email": "scammer@fraudmail.vn"}}, "expect": {"response_excludes": "scammer@fraudmail.vn", "no_pii_in_response": true}}
+{"id": "fd_priv_input_phone_never_echoed", "input": {"signals": {"user_reports_last_30d": 4, "reporter_phone": "0911222333"}}, "expect": {"response_excludes": "0911222333", "signal_contains": "user_report_volume"}}
+{"id": "fd_priv_input_person_name_never_echoed", "input": {"signals": {"org_age_days": 1, "owner_name": "Tran Van Scam"}}, "expect": {"response_excludes": "tran van scam"}}
+{"id": "fd_priv_no_provider_leak", "input": {"signals": {"fee_collection_flagged": true, "external_contact_in_content": true}}, "expect": {"no_provider_leak": true, "no_model_leak": true}}
+{"id": "fd_priv_no_internal_status_codes", "input": {"signals": {"duplicate_content_ratio": 0.95}}, "expect": {"no_internal_status_codes": true, "signal_contains": "duplicated_content"}}
