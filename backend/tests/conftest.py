@@ -22,10 +22,11 @@ os.environ["DATABASE_URL"] = f"sqlite+aiosqlite:///{_DB_PATH}"
 # Pin all AI-relevant env vars here so test behaviour is deterministic regardless
 # of what the developer has set in backend/.env.
 os.environ["AI_REAL_CALLS_ENABLED"] = "false"
-os.environ["AI_DEFAULT_MODEL_ALIAS"] = "chat_cheap"    # fix: .env may have chat_free
-os.environ["AI_REASONING_MODEL_ALIAS"] = "reasoning_cheap"
-os.environ["AI_EMBEDDING_MODEL_ALIAS"] = "embedding_cheap"
-os.environ["AI_EVAL_MODEL_ALIAS"] = "eval_cheap"
+os.environ["AI_DEFAULT_MODEL_ALIAS"] = "chat_default"  # pin the function slots
+os.environ["AI_REASONING_MODEL_ALIAS"] = "reasoning_default"
+os.environ["AI_EMBEDDING_MODEL_ALIAS"] = "embedding_default"
+os.environ["AI_RERANK_MODEL_ALIAS"] = "rerank_default"
+os.environ["AI_EVAL_MODEL_ALIAS"] = "eval_default"
 os.environ["AI_DAILY_COST_LIMIT_USD"] = "1.00"
 os.environ["OPENROUTER_API_KEY"] = "replace-with-local-key"   # placeholder → key_configured False
 os.environ["CV_LLM_STRUCTURING_ENABLED"] = "false"

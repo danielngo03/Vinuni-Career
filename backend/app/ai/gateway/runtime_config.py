@@ -42,11 +42,25 @@ _PLACEHOLDER_KEYS = frozenset({"", "replace-with-local-key", "replace-with-local
 # Built-in provider routes (used when no DB snapshot is available).
 # Format: alias_name → (provider_name, base_url, model_id)
 _BUILTIN_ROUTES: dict[str, tuple[str, str, str]] = {
+    # Function slots — concrete model is overridden from config at bootstrap
+    # (``_bootstrap_from_env``); these literals are the pre-config fallback.
+    "chat_default": ("openrouter", "https://openrouter.ai/api/v1", "deepseek/deepseek-v4-flash"),
+    "reasoning_default": ("openrouter", "https://openrouter.ai/api/v1", "deepseek/deepseek-r1"),
+    "embedding_default": ("openrouter", "https://openrouter.ai/api/v1", "text-embedding-3-small"),
+    "rerank_default": ("openrouter", "https://openrouter.ai/api/v1", "deepseek/deepseek-v4-flash"),
+    "eval_default": ("openrouter", "https://openrouter.ai/api/v1", "deepseek/deepseek-v4-flash"),
+    "vision_default": ("openrouter", "https://openrouter.ai/api/v1", "google/gemini-2.5-flash"),
+    # Legacy aliases — resolvable synonyms (removed from allowlist/UI).
     "chat_cheap": ("openrouter", "https://openrouter.ai/api/v1", "deepseek/deepseek-chat"),
     "chat_free": ("openrouter", "https://openrouter.ai/api/v1", "deepseek/deepseek-chat"),
     "chat_mini": ("openrouter", "https://openrouter.ai/api/v1", "meta-llama/llama-3.1-8b-instruct"),
     "reasoning_cheap": ("openrouter", "https://openrouter.ai/api/v1", "deepseek/deepseek-r1"),
     "eval_cheap": ("openrouter", "https://openrouter.ai/api/v1", "deepseek/deepseek-chat"),
+    # Cheap multimodal model for CV image / scanned-PDF extraction (OCR+structuring
+    # in one call). Gemini 2.5 Flash reads Vietnamese diacritics and multi-column
+    # layouts well at a low price point (~$0.30/1M input). Swap to
+    # google/gemini-2.5-flash-lite for ~5x cheaper output when accuracy allows.
+    "vision_cheap": ("openrouter", "https://openrouter.ai/api/v1", "google/gemini-2.5-flash"),
     "embedding_cheap": ("openrouter", "https://openrouter.ai/api/v1", "text-embedding-3-small"),
     "rerank_cheap": ("openrouter", "https://openrouter.ai/api/v1", "deepseek/deepseek-chat"),
     "chat_openai_fast": ("openai", "https://api.openai.com/v1", "gpt-4o-mini"),
@@ -160,6 +174,20 @@ def _bootstrap_from_env() -> EffectiveAiConfig:
     for alias, (pname, _, model) in list(routes.items()):
         if pname == "openrouter":
             routes[alias] = (pname, openrouter_url, model)
+    # Bind the six function slots to their concrete config models. Admin/.env is
+    # authoritative for which real model backs each slot; the slot name stays
+    # leak-safe. The default provider serves all slots (one shared key); admins
+    # can rebind a slot to another provider from the admin UI (DB routes win).
+    _prov = s.ai_default_provider
+    _base = openrouter_url if _prov == "openrouter" else _BUILTIN_ROUTES.get(
+        "chat_cheap", (_prov, "", "")
+    )[1]
+    routes["chat_default"] = (_prov, _base, s.ai_chat_model)
+    routes["reasoning_default"] = (_prov, _base, s.ai_reasoning_model)
+    routes["embedding_default"] = (_prov, _base, s.ai_embedding_model)
+    routes["rerank_default"] = (_prov, _base, s.ai_rerank_model)
+    routes["eval_default"] = (_prov, _base, s.ai_eval_model)
+    routes["vision_default"] = (_prov, _base, s.ai_vision_model)
     selected = (
         s.ai_default_model_alias,
         s.ai_reasoning_model_alias,

@@ -29,11 +29,23 @@ from app.shared.exceptions import AIUnavailableError
 # New aliases are added via the DB-backed provider registry and do NOT need to
 # appear here.
 _BUILTIN_MODEL_MAP: dict[str, str] = {
+    # Function slots (admin/.env authoritative; concrete model overridden by the
+    # config-driven routes at bootstrap). These leak-safe handles are the
+    # defaults selected on the ai_settings row.
+    "chat_default": "deepseek/deepseek-v4-flash",
+    "reasoning_default": "deepseek/deepseek-r1",
+    "embedding_default": "text-embedding-3-small",
+    "rerank_default": "deepseek/deepseek-v4-flash",
+    "eval_default": "deepseek/deepseek-v4-flash",
+    "vision_default": "google/gemini-2.5-flash",
+    # Legacy aliases — retained as resolvable synonyms (removed from the admin
+    # allowlist/UI) so existing references keep working.
     "chat_cheap": "deepseek/deepseek-chat",
     "reasoning_cheap": "deepseek/deepseek-r1",
     "reasoning_local": "llama3.2",
     "eval_cheap": "deepseek/deepseek-chat",
     "eval_local": "llama3.2",
+    "vision_cheap": "google/gemini-2.5-flash",
     "chat_free": "deepseek/deepseek-chat",
     "chat_mini": "meta-llama/llama-3.1-8b-instruct",
     "embedding_cheap": "text-embedding-3-small",

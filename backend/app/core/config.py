@@ -70,11 +70,22 @@ class Settings(BaseSettings):
     azure_openai_api_key: str = ""
     institution_email_domains: str = "vinuni.edu.vn"
     ai_default_provider: str = "openrouter"
-    ai_default_model_alias: str = "chat_cheap"
-    ai_reasoning_model_alias: str = "reasoning_cheap"
-    ai_embedding_model_alias: str = "embedding_cheap"
-    ai_rerank_model_alias: str = "rerank_cheap"
-    ai_eval_model_alias: str = "eval_cheap"
+    # Concrete per-slot models (admin/.env authoritative; seed the *_default
+    # slot bindings). Model ids are internal — never exposed to end users.
+    ai_chat_model: str = "deepseek/deepseek-v4-flash"
+    ai_reasoning_model: str = "deepseek/deepseek-r1"
+    ai_embedding_model: str = "text-embedding-3-small"
+    ai_rerank_model: str = "deepseek/deepseek-v4-flash"
+    ai_eval_model: str = "deepseek/deepseek-v4-flash"
+    ai_vision_model: str = "google/gemini-2.5-flash"
+    # Function-slot handles bound to the concrete models above. These leak-safe
+    # role names (never a vendor/model string) are the only identifiers passed
+    # through the gateway and stored on the ai_settings row.
+    ai_default_model_alias: str = "chat_default"
+    ai_reasoning_model_alias: str = "reasoning_default"
+    ai_embedding_model_alias: str = "embedding_default"
+    ai_rerank_model_alias: str = "rerank_default"
+    ai_eval_model_alias: str = "eval_default"
     ai_real_calls_enabled: bool = False
     ai_max_real_calls_per_test_run: int = 3
     ai_daily_cost_limit_usd: float = 1.0
@@ -114,6 +125,34 @@ class Settings(BaseSettings):
     # Ingestion runs through the background queue when true (resumable/idempotent);
     # the inline local queue executes it synchronously, so tests stay deterministic.
     cv_ingestion_async: bool = True
+
+    # Vision-LLM extraction tier (docs/CV_INGESTION_EXTRACTION_SPEC.md §3.5).
+    # PRODUCT DECISION (owner-approved 2026-07-05): image and scanned-CV uploads
+    # may be sent to a cheap multimodal model that performs OCR + structuring in a
+    # single call, because local Tesseract OCR is unreliable on the styled,
+    # multi-column CV templates students actually upload. This tier is
+    # cost-optimized: it runs ONLY when native text and local OCR fail to yield a
+    # reliable parse (never on text PDFs), uses the cheapest capable vision model,
+    # downscales images before upload, and caps the number of pages sent.
+    # The concrete model id is resolved via the alias (never exposed to users).
+    cv_vision_extraction_enabled: bool = True
+    cv_vision_provider_alias: str = "vision_cheap"
+    cv_vision_max_image_px: int = 2200  # long-edge cap; controls token cost
+    cv_vision_max_pages: int = 4  # max rasterized pages sent per scanned PDF
+
+    # JD (job description) upload extraction engine. Mirrors the CV cascade knobs
+    # but independent so partner JD tuning never affects student CV parsing.
+    # Cost-tiered: native text (free) -> local OCR -> cheap vision-LLM for images
+    # and styled/scanned PDFs -> text-LLM structuring. Extraction is auto-fill
+    # ONLY (never persisted). Engine names never appear in user-facing responses.
+    jd_max_upload_bytes: int = 10 * 1024 * 1024  # 10 MB
+    jd_ocr_langs: str = "vie+eng"
+    jd_vision_extraction_enabled: bool = True
+    jd_vision_provider_alias: str = "vision_cheap"
+    jd_vision_max_image_px: int = 2200  # long-edge cap; controls vision token cost
+    jd_vision_max_pages: int = 3  # JDs are short; cap rasterized pages tightly
+    jd_llm_structuring_provider_alias: str = "chat_cheap"
+    jd_extraction_max_seconds: int = 25
 
     # CV Studio quota (docs/CV_STUDIO_SPEC.md §5, docs/BUSINESS_LOGIC.md §4B.4).
     # Default student active CV library limit. "Active" = not soft-deleted and not
