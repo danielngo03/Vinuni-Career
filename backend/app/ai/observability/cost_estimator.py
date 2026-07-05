@@ -13,6 +13,15 @@ from __future__ import annotations
 # Estimated cost per 1M tokens in USD.
 # Keyed by gateway alias, not by model/provider name.
 _ALIAS_PRICE_PER_1M: dict[str, float] = {
+    # Function slots (concrete model set via admin/.env; these are fallback
+    # estimates for the seeded defaults).
+    "chat_default": 0.15,        # ~deepseek-v4-flash blended
+    "reasoning_default": 0.55,   # ~deepseek-r1 blended
+    "embedding_default": 0.02,   # text-embedding-3-small
+    "rerank_default": 0.15,
+    "eval_default": 0.15,
+    "vision_default": 0.30,      # ~gemini-2.5-flash blended
+    # Legacy aliases (resolvable synonyms).
     "chat_cheap": 0.14,          # ~deepseek-chat blended input/output
     "chat_free": 0.0,            # free tier — treat as 0
     "chat_mini": 0.10,

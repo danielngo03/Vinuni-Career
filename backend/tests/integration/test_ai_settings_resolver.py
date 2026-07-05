@@ -191,9 +191,9 @@ def test_cv_llm_uses_snapshot_chat_alias(monkeypatch) -> None:
 async def test_resolve_and_publish_seeds_and_publishes(db_session) -> None:
     cfg = await resolver.resolve_and_publish(db_session)
     await db_session.commit()
-    assert cfg.chat_model_alias == "chat_cheap"
+    assert cfg.chat_model_alias == "chat_default"
     assert cfg.real_calls_active is False  # no key in test env
-    assert runtime_config.current().chat_model_alias == "chat_cheap"
+    assert runtime_config.current().chat_model_alias == "chat_default"
 
 
 async def test_budget_guard_reads_snapshot_and_never_trips_offline(db_session) -> None:

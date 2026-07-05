@@ -60,19 +60,19 @@ class AiSettings(Base):
     # Selected alias NAMES per task family (validated against the allowlist; never
     # free text, never a concrete model id).
     chat_model_alias: Mapped[str] = mapped_column(
-        String(60), nullable=False, default="chat_cheap"
+        String(60), nullable=False, default="chat_default"
     )
     reasoning_model_alias: Mapped[str] = mapped_column(
-        String(60), nullable=False, default="reasoning_cheap"
+        String(60), nullable=False, default="reasoning_default"
     )
     embedding_model_alias: Mapped[str] = mapped_column(
-        String(60), nullable=False, default="embedding_cheap"
+        String(60), nullable=False, default="embedding_default"
     )
     rerank_model_alias: Mapped[str] = mapped_column(
-        String(60), nullable=False, default="rerank_cheap"
+        String(60), nullable=False, default="rerank_default"
     )
     eval_model_alias: Mapped[str] = mapped_column(
-        String(60), nullable=False, default="eval_cheap"
+        String(60), nullable=False, default="eval_default"
     )
 
     # Feature flags.

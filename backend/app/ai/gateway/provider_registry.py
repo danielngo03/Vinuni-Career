@@ -303,6 +303,42 @@ async def ensure_defaults(db: AsyncSession) -> None:
             db.add(alias_row)
     await db.flush()
 
+    # Seed the six function-slot bindings from concrete config models. Admin/.env
+    # is authoritative for which real model backs each slot; the slot name is the
+    # leak-safe handle stored on the ai_settings row. Bound to the default
+    # provider (one shared key); admin can rebind a slot to another provider.
+    s = get_settings()
+    default_slots: list[tuple[str, str, str, str]] = [
+        ("chat_default", s.ai_chat_model, "chat", "Default chat model (admin-managed)"),
+        ("reasoning_default", s.ai_reasoning_model, "reasoning", "Default reasoning model"),
+        ("embedding_default", s.ai_embedding_model, "embedding", "Default embedding model"),
+        ("rerank_default", s.ai_rerank_model, "rerank", "Default rerank model"),
+        ("eval_default", s.ai_eval_model, "eval", "Default eval model"),
+        ("vision_default", s.ai_vision_model, "vision", "Default vision model"),
+    ]
+    default_provider_id = provider_map.get(s.ai_default_provider)
+    if default_provider_id is not None:
+        for slot_name, model_id, family, desc in default_slots:
+            existing_slot = (
+                await db.execute(
+                    select(AiModelAlias).where(AiModelAlias.alias_name == slot_name)
+                )
+            ).scalar_one_or_none()
+            if existing_slot is None:
+                db.add(
+                    AiModelAlias(
+                        id=uuid.uuid4(),
+                        alias_name=slot_name,
+                        model_id=model_id,
+                        provider_id=default_provider_id,
+                        task_families=family,
+                        description=desc,
+                        is_active=True,
+                        is_builtin=True,
+                    )
+                )
+        await db.flush()
+
 
 # ---------------------------------------------------------------------------
 # Resolution — used by the factory to build provider routes

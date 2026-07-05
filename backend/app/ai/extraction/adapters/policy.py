@@ -22,6 +22,7 @@ from app.ai.extraction.adapters.layout import layout_engine_available
 from app.ai.extraction.adapters.native_text import pymupdf_available
 from app.ai.extraction.adapters.ocr import get_ocr_adapter
 from app.ai.extraction.adapters.structuring import get_llm_structuring_adapter
+from app.ai.extraction.adapters.vision import get_vision_adapter
 from app.ai.gateway import runtime_config
 from app.core.config import Settings, get_settings
 
@@ -35,6 +36,10 @@ class EnginePolicy:
     llm_enabled: bool
     llm_provider_alias: str
     async_enabled: bool
+    vision_enabled: bool = False
+    vision_provider_alias: str = "vision_default"
+    vision_max_image_px: int = 2200
+    vision_max_pages: int = 4
 
 
 def _resolve_native_pdf(configured: str) -> str:
@@ -66,6 +71,10 @@ def resolve_policy(settings: Settings | None = None) -> EnginePolicy:
         runtime_config.current().cv_llm_structuring_enabled
         and get_llm_structuring_adapter().available
     )
+    # Vision extraction is gated on the env/admin flag AND a usable multimodal
+    # route (real calls active + key). In offline/test runs the adapter reports
+    # unavailable, so this resolves to False and the cascade never sends images.
+    vision_enabled = s.cv_vision_extraction_enabled and get_vision_adapter().available
     return EnginePolicy(
         native_pdf=_resolve_native_pdf(s.cv_native_pdf_engine),
         layout=_resolve_layout(s.cv_layout_engine),
@@ -74,6 +83,10 @@ def resolve_policy(settings: Settings | None = None) -> EnginePolicy:
         llm_enabled=llm_enabled,
         llm_provider_alias=s.cv_llm_structuring_provider_alias,
         async_enabled=bool(s.cv_ingestion_async),
+        vision_enabled=vision_enabled,
+        vision_provider_alias=s.cv_vision_provider_alias,
+        vision_max_image_px=s.cv_vision_max_image_px,
+        vision_max_pages=s.cv_vision_max_pages,
     )
 
 

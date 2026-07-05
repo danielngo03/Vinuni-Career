@@ -121,7 +121,7 @@ class Settings(BaseSettings):
     # LLM structuring is a TEXT-ONLY fallback, DISABLED by default. When enabled it
     # operates on extracted text/markdown only — never raw PDF/image bytes.
     cv_llm_structuring_enabled: bool = False
-    cv_llm_structuring_provider_alias: str = "chat_cheap"
+    cv_llm_structuring_provider_alias: str = "chat_default"
     # Ingestion runs through the background queue when true (resumable/idempotent);
     # the inline local queue executes it synchronously, so tests stay deterministic.
     cv_ingestion_async: bool = True
@@ -136,7 +136,7 @@ class Settings(BaseSettings):
     # downscales images before upload, and caps the number of pages sent.
     # The concrete model id is resolved via the alias (never exposed to users).
     cv_vision_extraction_enabled: bool = True
-    cv_vision_provider_alias: str = "vision_cheap"
+    cv_vision_provider_alias: str = "vision_default"
     cv_vision_max_image_px: int = 2200  # long-edge cap; controls token cost
     cv_vision_max_pages: int = 4  # max rasterized pages sent per scanned PDF
 
@@ -148,10 +148,10 @@ class Settings(BaseSettings):
     jd_max_upload_bytes: int = 10 * 1024 * 1024  # 10 MB
     jd_ocr_langs: str = "vie+eng"
     jd_vision_extraction_enabled: bool = True
-    jd_vision_provider_alias: str = "vision_cheap"
+    jd_vision_provider_alias: str = "vision_default"
     jd_vision_max_image_px: int = 2200  # long-edge cap; controls vision token cost
     jd_vision_max_pages: int = 3  # JDs are short; cap rasterized pages tightly
-    jd_llm_structuring_provider_alias: str = "chat_cheap"
+    jd_llm_structuring_provider_alias: str = "chat_default"
     jd_extraction_max_seconds: int = 25
 
     # CV Studio quota (docs/CV_STUDIO_SPEC.md §5, docs/BUSINESS_LOGIC.md §4B.4).

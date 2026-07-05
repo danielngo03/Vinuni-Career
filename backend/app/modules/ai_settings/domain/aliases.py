@@ -17,11 +17,11 @@ from app.ai.gateway.openai_compatible import known_aliases
 
 # task family -> selectable alias names. Kept inside the gateway-resolvable set.
 ALIAS_ALLOWLIST: dict[str, tuple[str, ...]] = {
-    "chat": ("chat_cheap", "chat_openai_fast", "chat_openai_best", "chat_local"),
-    "reasoning": ("reasoning_cheap", "reasoning_local"),
-    "embedding": ("embedding_cheap", "embedding_openai", "embedding_local"),
-    "rerank": ("rerank_cheap", "rerank_openai_fast", "rerank_local"),
-    "eval": ("eval_cheap", "eval_local"),
+    "chat": ("chat_default", "chat_openai_fast", "chat_openai_best", "chat_local"),
+    "reasoning": ("reasoning_default", "reasoning_local"),
+    "embedding": ("embedding_default", "embedding_openai", "embedding_local"),
+    "rerank": ("rerank_default", "rerank_openai_fast", "rerank_local"),
+    "eval": ("eval_default", "eval_local"),
 }
 
 # Maps each editable column to its task family for validation/presentation.

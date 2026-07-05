@@ -37,7 +37,7 @@ class AiTaskRunner:
 
     Usage::
 
-        runner = AiTaskRunner(db, alias="chat_cheap", task_type="interview_sim")
+        runner = AiTaskRunner(db, alias="chat_default", task_type="interview_sim")
         completion = await runner.complete(messages, temperature=0.7, max_tokens=300)
 
         async for chunk in runner.stream(messages):

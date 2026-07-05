@@ -104,17 +104,17 @@ async def test_get_seeds_singleton_and_returns_masked_view(db_session) -> None:
 
     # Alias names + flags + budget + DERIVED status are present.
     assert view["models"] == {
-        "chat": "chat_cheap",
-        "reasoning": "reasoning_cheap",
-        "embedding": "embedding_cheap",
-        "rerank": "rerank_cheap",
-        "eval": "eval_cheap",
+        "chat": "chat_default",
+        "reasoning": "reasoning_default",
+        "embedding": "embedding_default",
+        "rerank": "rerank_default",
+        "eval": "eval_default",
     }
     assert view["feature_flags"]["job_fit_ai_explanation_enabled"] is True
     assert view["feature_flags"]["cv_llm_structuring_enabled"] is False
     assert view["daily_budget_usd"] == "1.00"
-    assert "chat_cheap" in view["allowed_aliases"]["chat"]
-    assert "rerank_cheap" in view["allowed_aliases"]["rerank"]
+    assert "chat_default" in view["allowed_aliases"]["chat"]
+    assert "rerank_default" in view["allowed_aliases"]["rerank"]
     # Derived status only: no key in the test env -> offline + key_configured False.
     assert view["key_configured"] is False
     assert view["real_calls"] == "offline"

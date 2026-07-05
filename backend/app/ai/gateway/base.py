@@ -1,6 +1,7 @@
 """Abstract AI provider interface and gateway value objects.
 
-Callers work only with **aliases** (``chat_cheap``, ``reasoning_cheap``, ...).
+Callers work only with **function-slot handles** (``chat_default``,
+``reasoning_default``, ...).
 Provider names, model names, token counts, and latency are gateway internals and
 must never be surfaced to end users (``docs/SECURITY_PRIVACY.md``).
 """
