@@ -46,6 +46,11 @@ class AiProviderConfig(Base):
     )
     base_url: Mapped[str] = mapped_column(Text, nullable=False)
     api_key_ciphertext: Mapped[str | None] = mapped_column(Text, nullable=True)
+    # Safe UI hint (last 4 chars) + fingerprint of the encryption key generation
+    # that wrote the ciphertext. Neither reveals key material; ``key_version``
+    # lets the rotation routine find rows still encrypted under an older key.
+    api_key_last4: Mapped[str | None] = mapped_column(String(8), nullable=True)
+    key_version: Mapped[str | None] = mapped_column(String(32), nullable=True)
     description: Mapped[str | None] = mapped_column(Text, nullable=True)
     is_active: Mapped[bool] = mapped_column(Boolean, nullable=False, default=True)
     is_builtin: Mapped[bool] = mapped_column(Boolean, nullable=False, default=False)

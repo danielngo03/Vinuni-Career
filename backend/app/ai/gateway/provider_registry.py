@@ -22,8 +22,10 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import selectinload
 
 from app.ai.gateway.provider_key_crypto import (
+    current_key_version,
     decrypt_provider_api_key,
     encrypt_provider_api_key,
+    mask_last4,
 )
 from app.ai.gateway.provider_models import AiModelAlias, AiProviderConfig
 from app.ai.gateway.provider_route_chains import normalize_fallback_payload, parse_fallback_names
@@ -423,6 +425,8 @@ async def create_provider(
         provider_type=payload.get("provider_type") or "openai_compatible",
         base_url=base_url,
         api_key_ciphertext=encrypt_provider_api_key(api_key) if api_key else None,
+        api_key_last4=mask_last4(api_key) if api_key else None,
+        key_version=current_key_version() if api_key else None,
         description=payload.get("description"),
         is_active=bool(payload.get("is_active", True)),
         is_builtin=False,
@@ -451,13 +455,58 @@ async def update_provider(db: AsyncSession, provider_id: uuid.UUID, *, payload: 
         row.provider_type = payload["provider_type"]
     if payload.get("clear_api_key"):
         row.api_key_ciphertext = None
+        row.api_key_last4 = None
+        row.key_version = None
     elif "api_key" in payload:
         api_key = (payload.get("api_key") or "").strip()
         if api_key:
             row.api_key_ciphertext = encrypt_provider_api_key(api_key)
+            row.api_key_last4 = mask_last4(api_key)
+            row.key_version = current_key_version()
     await db.flush()
     await db.refresh(row)
     return _serialize_provider(row)
+
+
+async def reencrypt_all_provider_keys(db: AsyncSession) -> dict:
+    """Re-wrap every stored provider key with the current PRIMARY encryption key.
+
+    Zero-downtime rotation step: after prepending a new key to
+    ``AI_PROVIDER_KEY_ENCRYPTION_KEYS``, call this to re-encrypt all ciphertexts
+    under the new key and stamp ``key_version``, so the retired key can then be
+    dropped from the list. Rows already at the current version are skipped; rows
+    whose ciphertext can no longer be decrypted (key truly lost) are left intact
+    rather than destroyed. Never logs or returns key material.
+    """
+
+    target_version = current_key_version()
+    rows = (
+        await db.execute(
+            select(AiProviderConfig).where(AiProviderConfig.api_key_ciphertext.is_not(None))
+        )
+    ).scalars().all()
+    rotated = 0
+    skipped = 0
+    unreadable = 0
+    for r in rows:
+        if r.key_version == target_version:
+            skipped += 1
+            continue
+        plaintext = decrypt_provider_api_key(r.api_key_ciphertext)
+        if not plaintext:
+            unreadable += 1
+            continue
+        r.api_key_ciphertext = encrypt_provider_api_key(plaintext)
+        r.api_key_last4 = mask_last4(plaintext)
+        r.key_version = target_version
+        rotated += 1
+    await db.flush()
+    return {
+        "rotated": rotated,
+        "skipped": skipped,
+        "unreadable": unreadable,
+        "key_version": target_version,
+    }
 
 
 async def create_alias(
@@ -552,6 +601,8 @@ def _serialize_provider(r: AiProviderConfig) -> dict:
         "is_active": r.is_active,
         "is_builtin": r.is_builtin,
         "has_api_key": has_db_key or has_api_key(r.name),
+        "api_key_last4": r.api_key_last4,
+        "key_version": r.key_version,
         "created_at": r.created_at.isoformat() if r.created_at else None,
         "updated_at": r.updated_at.isoformat() if r.updated_at else None,
     }

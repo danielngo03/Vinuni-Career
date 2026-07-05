@@ -157,6 +157,29 @@ async def update_provider(
     return success(data)
 
 
+@admin_router.post("/keys/rotate", summary="Re-encrypt all provider keys with the newest key")
+async def rotate_provider_keys(
+    auth: CurrentAuth = Depends(get_current_auth),
+    session: AsyncSession = Depends(get_db_session),
+) -> dict:
+    from app.ai.gateway import provider_registry
+    from app.shared.audit import AuditContext, write_audit
+    await settings_service._require_ai_settings_admin(session, auth.principal, "manage")
+    result = await provider_registry.reencrypt_all_provider_keys(session)
+    await write_audit(
+        session,
+        action="ai_provider.keys_rotated",
+        resource_type="ai_provider_config",
+        context=AuditContext(
+            actor_id=auth.principal.user_id, actor_org_id=auth.principal.org_id,
+            ip=auth.ctx.ip, user_agent=auth.ctx.user_agent,
+        ),
+        after={"rotated": result["rotated"], "skipped": result["skipped"]},
+    )
+    await _commit_and_republish(session)
+    return success(result)
+
+
 @admin_router.get("/model-aliases", summary="List all model aliases")
 async def list_model_aliases(
     auth: CurrentAuth = Depends(get_current_auth),

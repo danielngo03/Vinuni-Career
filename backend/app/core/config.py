@@ -238,8 +238,14 @@ class Settings(BaseSettings):
     # derive deterministically from ``jwt_secret_key`` (local dev only). Production
     # MUST set ``TOTP_ENCRYPTION_KEY`` in ``backend/.env`` (``docs/ENVIRONMENT.md``).
     totp_encryption_key: str = ""
-    # Fernet key for admin-managed AI provider API keys. Empty uses a local-dev
-    # derivation from ``jwt_secret_key``; production should set a real key.
+    # Fernet key(s) for admin-managed AI provider API keys.
+    # ``ai_provider_key_encryption_keys`` is a comma-separated list, NEWEST KEY
+    # FIRST, enabling zero-downtime rotation via MultiFernet (encrypt with the
+    # first key, decrypt with any). Production (app_env != local) MUST configure
+    # a key or startup fails; local dev derives one from ``jwt_secret_key`` with
+    # a warning. The singular ``ai_provider_key_encryption_key`` is kept for
+    # backward compatibility and used when the plural form is empty.
+    ai_provider_key_encryption_keys: str = ""
     ai_provider_key_encryption_key: str = ""
 
     # Email / notifications
