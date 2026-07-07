@@ -323,6 +323,13 @@ class Settings(BaseSettings):
     pii_log_redaction_enabled: bool = True
     ai_trace_ttl_days: int = 30
 
+    # Langfuse observability (optional; all three must be set to enable tracing).
+    # Keys are secret credentials — never log or return them. When absent the
+    # langfuse_client module runs in no-op mode.
+    langfuse_secret_key: str | None = None
+    langfuse_public_key: str | None = None
+    langfuse_base_url: str | None = None
+
     # CORS
     cors_allow_origins: str = "http://localhost:3000"
 
