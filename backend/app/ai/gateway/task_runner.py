@@ -101,6 +101,7 @@ class AiTaskRunner:
                     alias=alias,
                     estimated_cost_usd=estimated_cost,
                     user_id=self._user_id,
+                    org_id=self._org_id,
                 )
             except Exception:
                 # Record a "blocked" ops event then re-raise so the caller
@@ -278,6 +279,7 @@ class AiTaskRunner:
                     alias=alias,
                     estimated_cost_usd=estimated_cost,
                     user_id=self._user_id,
+                    org_id=self._org_id,
                 )
             except Exception:
                 if self._db is not None:

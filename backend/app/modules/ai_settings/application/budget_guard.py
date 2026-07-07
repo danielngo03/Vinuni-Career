@@ -61,20 +61,50 @@ def check(estimated_cost_usd: float = 0.0) -> None:
         )
 
 
+async def _fetch_org_spend_today(
+    db: AsyncSession,
+    org_id: object,
+    day_start: object,
+) -> float:
+    """Sum today's cost_usd from ai_usage_daily for the given org.
+
+    Extracted as a separate function so tests can patch it for the
+    silent-degrade infra-error path.
+    """
+    from sqlalchemy import func, select
+
+    from app.ai.observability.models import AiUsageDaily
+
+    result = await db.execute(
+        select(func.coalesce(func.sum(AiUsageDaily.cost_usd), 0)).where(
+            AiUsageDaily.org_id == org_id,
+            AiUsageDaily.day >= day_start,
+        )
+    )
+    return float(result.scalar() or 0.0)  # type: ignore[arg-type]
+
+
 async def check_async(
     db: AsyncSession,
     *,
     alias: str,
     estimated_cost_usd: float = 0.0,
     user_id: object | None = None,
+    org_id: object | None = None,
 ) -> None:
     """Async hard-stop: query today's real spend from ``ai_usage_log``.
 
     Raises ``402 PaymentRequiredError`` (code ``BUDGET_EXCEEDED``) if adding
-    ``estimated_cost_usd`` to today's total would exceed the configured daily
-    budget. Degrades silently on DB errors (never blocks the call path on infra
-    failure — only on policy).
+    ``estimated_cost_usd`` to today's total would exceed any configured daily
+    budget. Three layered checks (all degrade silently on DB errors — only
+    policy violations block):
 
+    1. Platform daily budget (``ai_settings.daily_budget_usd``).
+    2. Per-user daily quota (via billing ``limit_facade``).
+    3. Per-org daily budget (``ai_settings.per_org_daily_budget_usd``,
+       queried from the ``ai_usage_daily`` rollup for speed).
+
+    Pass ``org_id=None`` (default) to skip check 3 (backward compatible).
     This is called BEFORE the real provider call so the request is rejected
     before tokens are consumed.
     """
@@ -121,37 +151,88 @@ async def check_async(
             },
         )
 
-    if user_id is None:
+    # --- Per-user daily quota check ---
+    if user_id is not None:
+        user_nested = None
+        try:
+            from app.modules.billing.application import limit_facade
+
+            user_nested = await db.begin_nested()
+            user_budget = await limit_facade.resolve_user_ai_daily_cost_quota(db, user_id)
+            if user_budget <= 0:
+                await user_nested.commit()
+            else:
+                user_result = await db.execute(
+                    select(func.coalesce(func.sum(AiUsageLog.cost_usd), 0)).where(
+                        AiUsageLog.cost_usd.is_not(None),
+                        AiUsageLog.user_id == user_id,
+                        AiUsageLog.created_at >= day_start,
+                    )
+                )
+                user_spent_today = float(user_result.scalar() or 0.0)  # type: ignore[arg-type]
+                await user_nested.commit()
+
+                if user_spent_today + estimated_cost_usd > user_budget:
+                    raise PaymentRequiredError(
+                        "Bạn đã đạt giới hạn sử dụng AI trong ngày của gói hiện tại.",
+                        details={
+                            "reason": "AI_USER_DAILY_QUOTA_EXCEEDED",
+                            "alias": alias,
+                        },
+                    )
+        except PaymentRequiredError:
+            raise
+        except Exception:
+            if user_nested is not None and user_nested.is_active:
+                await user_nested.rollback()
+            # Degrade silently; fall through to per-org check
+
+    # --- Per-org daily budget check (Task 5) ---
+    # Runs AFTER the platform and per-user checks so those remain primary gates.
+    # Queries the pre-aggregated ai_usage_daily rollup (fast path — no log scan).
+    # Degrades silently on infra error, exactly like the platform/user checks above.
+    if org_id is None:
         return
 
-    user_nested = None
+    org_nested = None
     try:
-        from app.modules.billing.application import limit_facade
+        from sqlalchemy import func, select  # noqa: F811
 
-        user_nested = await db.begin_nested()
-        user_budget = await limit_facade.resolve_user_ai_daily_cost_quota(db, user_id)
-        if user_budget <= 0:
-            await user_nested.commit()
-            return
-        user_result = await db.execute(
-            select(func.coalesce(func.sum(AiUsageLog.cost_usd), 0)).where(
-                AiUsageLog.cost_usd.is_not(None),
-                AiUsageLog.user_id == user_id,
-                AiUsageLog.created_at >= day_start,
-            )
+        from app.modules.ai_settings.domain.models import AiSettings
+
+        org_nested = await db.begin_nested()
+        settings_result = await db.execute(
+            select(AiSettings.per_org_daily_budget_usd).limit(1)
         )
-        user_spent_today = float(user_result.scalar() or 0.0)
-        await user_nested.commit()
+        per_org_budget_raw = settings_result.scalar()
+        await org_nested.commit()
     except Exception:
-        if user_nested is not None and user_nested.is_active:
-            await user_nested.rollback()
+        if org_nested is not None and org_nested.is_active:
+            await org_nested.rollback()
         return
 
-    if user_spent_today + estimated_cost_usd > user_budget:
+    if per_org_budget_raw is None:
+        return  # no per-org cap configured
+
+    per_org_budget = float(per_org_budget_raw)
+    if per_org_budget <= 0:
+        return  # 0 / negative = unlimited
+
+    org_spend_nested = None
+    try:
+        org_spend_nested = await db.begin_nested()
+        org_spent = await _fetch_org_spend_today(db, org_id, day_start)
+        await org_spend_nested.commit()
+    except Exception:
+        if org_spend_nested is not None and org_spend_nested.is_active:
+            await org_spend_nested.rollback()
+        return
+
+    if org_spent + estimated_cost_usd > per_org_budget:
         raise PaymentRequiredError(
-            "Bạn đã đạt giới hạn sử dụng AI trong ngày của gói hiện tại.",
+            "Tổ chức của bạn đã đạt giới hạn chi phí AI trong ngày.",
             details={
-                "reason": "AI_USER_DAILY_QUOTA_EXCEEDED",
+                "reason": "BUDGET_EXCEEDED",
                 "alias": alias,
             },
         )

@@ -87,6 +87,13 @@ class AiSettings(Base):
     daily_budget_usd: Mapped[Decimal] = mapped_column(
         Numeric(10, 2), nullable=False, default=Decimal("1.00")
     )
+    # Per-organization daily USD cap. NULL = no per-org cap (unlimited for that
+    # org, bounded only by the platform budget above). When set, the budget_guard
+    # sums today's ai_usage_daily.cost_usd for the given org and rejects new
+    # calls that would push it over this limit. Additive column — migration 0079.
+    per_org_daily_budget_usd: Mapped[Decimal | None] = mapped_column(
+        Numeric(10, 2), nullable=True, default=None
+    )
 
     notes: Mapped[str | None] = mapped_column(Text, nullable=True)
     updated_by: Mapped[uuid.UUID | None] = mapped_column(
