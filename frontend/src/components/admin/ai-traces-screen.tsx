@@ -63,6 +63,95 @@ function DetailRow({
   );
 }
 
+/* -------------------------------------------------------------------------- */
+/* Token breakdown mini-visual                                                 */
+/* -------------------------------------------------------------------------- */
+
+function TokenBreakdownBar({
+  promptTokens,
+  completionTokens,
+  labelPrompt,
+  labelCompletion,
+}: {
+  promptTokens: number | null;
+  completionTokens: number | null;
+  labelPrompt: string;
+  labelCompletion: string;
+}) {
+  if (promptTokens == null && completionTokens == null) return null;
+
+  const p = promptTokens ?? 0;
+  const c = completionTokens ?? 0;
+  const total = p + c;
+  if (total === 0) return null;
+
+  const promptPct = Math.round((p / total) * 100);
+  const completionPct = 100 - promptPct;
+
+  return (
+    <div className="mt-3 mb-1">
+      {/* Segmented bar */}
+      <div
+        className="flex h-2 w-full overflow-hidden rounded-full"
+        role="img"
+        aria-label={`${labelPrompt}: ${p.toLocaleString()} / ${labelCompletion}: ${c.toLocaleString()}`}
+      >
+        <div
+          className="h-full bg-[var(--gray-700)]"
+          style={{ width: `${promptPct}%` }}
+        />
+        <div
+          className="h-full bg-[var(--gray-300)]"
+          style={{ width: `${completionPct}%` }}
+        />
+      </div>
+      {/* Legend */}
+      <div className="mt-1.5 flex items-center gap-4">
+        <div className="flex items-center gap-1.5">
+          <span className="inline-block size-2 rounded-sm bg-[var(--gray-700)]" />
+          <span className="text-[0.65rem] text-[var(--text-muted)]">
+            {labelPrompt}: <span className="font-semibold tabular-nums text-[var(--text-secondary)]">{p.toLocaleString()}</span>
+          </span>
+        </div>
+        <div className="flex items-center gap-1.5">
+          <span className="inline-block size-2 rounded-sm bg-[var(--gray-300)]" />
+          <span className="text-[0.65rem] text-[var(--text-muted)]">
+            {labelCompletion}: <span className="font-semibold tabular-nums text-[var(--text-secondary)]">{c.toLocaleString()}</span>
+          </span>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* -------------------------------------------------------------------------- */
+/* Stat grid for the detail sheet                                              */
+/* -------------------------------------------------------------------------- */
+
+function StatGrid({
+  items,
+}: {
+  items: { label: string; value: React.ReactNode }[];
+}) {
+  return (
+    <div className="mt-4 grid grid-cols-2 gap-x-4 gap-y-3 rounded-xl border border-[var(--border-subtle)] bg-[var(--bg-subtle)] p-4">
+      {items.map(({ label, value }) => (
+        <div key={label} className="flex flex-col gap-0.5">
+          <span className="text-[0.6rem] font-semibold uppercase tracking-wide text-[var(--text-muted)]">
+            {label}
+          </span>
+          <span
+            className="font-mono text-sm font-semibold tabular-nums text-[var(--text-primary)]"
+            style={{ fontFamily: "'JetBrains Mono', ui-monospace, monospace" }}
+          >
+            {value}
+          </span>
+        </div>
+      ))}
+    </div>
+  );
+}
+
 function TraceDetailSheet({
   event,
   onClose,
@@ -84,6 +173,11 @@ function TraceDetailSheet({
       ? `${env.langfuseBaseUrl}/trace/${event.langfuse_trace_id}`
       : undefined;
 
+  const totalTokens =
+    event.prompt_tokens != null && event.completion_tokens != null
+      ? event.prompt_tokens + event.completion_tokens
+      : null;
+
   return (
     <Sheet
       open={event !== null}
@@ -91,6 +185,7 @@ function TraceDetailSheet({
       title={t("sheet.title")}
       closeLabel={t("sheet.closeLabel")}
     >
+      {/* ── Identity + status ── */}
       <div className="space-y-0">
         <DetailRow label={t("sheet.labelId")}>
           <span
@@ -118,8 +213,14 @@ function TraceDetailSheet({
           </span>
         </DetailRow>
 
+        {/* Model: null → "—" (restricted — never expose internals) */}
         <DetailRow label={t("sheet.labelModel")}>
-          {event.model ?? t("sheet.masked")}
+          <span
+            className="font-mono text-xs"
+            style={{ fontFamily: "'JetBrains Mono', ui-monospace, monospace" }}
+          >
+            {event.model ?? "—"}
+          </span>
         </DetailRow>
 
         <DetailRow label={t("sheet.labelStatus")}>
@@ -127,55 +228,41 @@ function TraceDetailSheet({
             {t(`status.${event.status}`)}
           </StatusBadge>
         </DetailRow>
+      </div>
 
-        <DetailRow label={t("sheet.labelPromptTokens")}>
-          <span
-            className="font-mono tabular-nums"
-            style={{ fontFamily: "'JetBrains Mono', ui-monospace, monospace" }}
-          >
-            {event.prompt_tokens != null ? event.prompt_tokens.toLocaleString() : "—"}
-          </span>
-        </DetailRow>
+      {/* ── Inline stat grid: cost / latency / tokens ── */}
+      <StatGrid
+        items={[
+          {
+            label: t("sheet.labelCost"),
+            value: formatUsd(event.cost_usd ?? NaN),
+          },
+          {
+            label: t("sheet.labelLatency"),
+            value: formatLatency(event.latency_ms ?? NaN),
+          },
+          {
+            label: t("sheet.labelTotalTokens"),
+            value: totalTokens != null ? totalTokens.toLocaleString() : "—",
+          },
+          {
+            label: t("sheet.labelPromptTokens"),
+            value: event.prompt_tokens != null ? event.prompt_tokens.toLocaleString() : "—",
+          },
+        ]}
+      />
 
-        <DetailRow label={t("sheet.labelCompletionTokens")}>
-          <span
-            className="font-mono tabular-nums"
-            style={{ fontFamily: "'JetBrains Mono', ui-monospace, monospace" }}
-          >
-            {event.completion_tokens != null ? event.completion_tokens.toLocaleString() : "—"}
-          </span>
-        </DetailRow>
+      {/* ── Token split visual bar ── */}
+      <TokenBreakdownBar
+        promptTokens={event.prompt_tokens}
+        completionTokens={event.completion_tokens}
+        labelPrompt={t("sheet.labelPromptTokens")}
+        labelCompletion={t("sheet.labelCompletionTokens")}
+      />
 
-        <DetailRow label={t("sheet.labelTotalTokens")}>
-          <span
-            className="font-mono tabular-nums"
-            style={{ fontFamily: "'JetBrains Mono', ui-monospace, monospace" }}
-          >
-            {event.prompt_tokens != null && event.completion_tokens != null
-              ? (event.prompt_tokens + event.completion_tokens).toLocaleString()
-              : "—"}
-          </span>
-        </DetailRow>
-
-        <DetailRow label={t("sheet.labelCost")}>
-          <span
-            className="font-mono tabular-nums"
-            style={{ fontFamily: "'JetBrains Mono', ui-monospace, monospace" }}
-          >
-            {formatUsd(event.cost_usd ?? NaN)}
-          </span>
-        </DetailRow>
-
-        <DetailRow label={t("sheet.labelLatency")}>
-          <span
-            className="font-mono tabular-nums"
-            style={{ fontFamily: "'JetBrains Mono', ui-monospace, monospace" }}
-          >
-            {formatLatency(event.latency_ms ?? NaN)}
-          </span>
-        </DetailRow>
-
-        {event.langfuse_trace_id && (
+      {/* ── Trace ID (only when present) ── */}
+      {event.langfuse_trace_id && (
+        <div className="mt-4 space-y-0">
           <DetailRow label={t("sheet.labelTraceId")}>
             <span
               className="font-mono text-xs"
@@ -184,9 +271,10 @@ function TraceDetailSheet({
               {event.langfuse_trace_id}
             </span>
           </DetailRow>
-        )}
-      </div>
+        </div>
+      )}
 
+      {/* ── Langfuse deep-link ── */}
       <div className="mt-5">
         {canOpenLangfuse && langfuseHref ? (
           <a

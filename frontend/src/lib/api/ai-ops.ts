@@ -216,6 +216,50 @@ export interface AdminPlatformOverview {
 }
 
 /* -------------------------------------------------------------------------- */
+/* Timeseries                                                                  */
+/* -------------------------------------------------------------------------- */
+
+/**
+ * One row from `GET /admin/ai-ops/timeseries`.
+ * One row per calendar day, ascending, gap-filled with zeros.
+ * `avg_latency_ms` and `p95_latency_ms` are null on days with no events.
+ */
+export interface AiOpsTimeseriesRow {
+  day: string; // "YYYY-MM-DD"
+  cost_usd: number;
+  requests: number;
+  errors: number;
+  error_rate: number;
+  prompt_tokens: number;
+  completion_tokens: number;
+  avg_latency_ms: number | null;
+  p95_latency_ms: number | null;
+}
+
+export interface AiOpsTimeseries {
+  series: AiOpsTimeseriesRow[];
+}
+
+/* -------------------------------------------------------------------------- */
+/* Error heatmap                                                               */
+/* -------------------------------------------------------------------------- */
+
+/**
+ * One cell from `GET /admin/ai-ops/error-heatmap`.
+ * Sparse — only cells with non-zero data are returned.
+ */
+export interface AiOpsErrorHeatmapCell {
+  day: string; // "YYYY-MM-DD"
+  hour: number; // 0-23
+  requests: number;
+  errors: number;
+}
+
+export interface AiOpsErrorHeatmap {
+  cells: AiOpsErrorHeatmapCell[];
+}
+
+/* -------------------------------------------------------------------------- */
 /* API object                                                                 */
 /* -------------------------------------------------------------------------- */
 
@@ -311,6 +355,28 @@ export const aiOpsApi = {
    */
   updatePrice(id: string, body: AiOpsPriceUpdateBody): Promise<AiOpsPrice> {
     return api.patch<AiOpsPrice>(`/admin/ai-ops/prices/${id}`, body);
+  },
+
+  /**
+   * Daily timeseries for spend, volume, errors, and latency.
+   * `GET /admin/ai-ops/timeseries?range_days=<N>`
+   * Returns `{ series: [...] }` — one row per day, ascending, gap-filled.
+   */
+  timeseries(rangeDays: number): Promise<AiOpsTimeseries> {
+    return api.get<AiOpsTimeseries>("/admin/ai-ops/timeseries", {
+      query: { range_days: rangeDays },
+    });
+  },
+
+  /**
+   * Sparse error frequency heatmap by day and hour.
+   * `GET /admin/ai-ops/error-heatmap?range_days=<N>`
+   * Returns `{ cells: [...] }` — sparse, only non-zero cells.
+   */
+  errorHeatmap(rangeDays: number): Promise<AiOpsErrorHeatmap> {
+    return api.get<AiOpsErrorHeatmap>("/admin/ai-ops/error-heatmap", {
+      query: { range_days: rangeDays },
+    });
   },
 
   /**

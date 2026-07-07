@@ -11,6 +11,8 @@ import {
   Gauge,
   StackSimple,
   WarningCircle,
+  GridFour,
+  DotsNine,
 } from "@phosphor-icons/react";
 import { PageHeader } from "@/components/layout/page-header";
 import {
@@ -21,8 +23,14 @@ import {
   Skeleton,
   SkeletonCard,
   EmptyState,
-  BarSeries,
 } from "@/components/ui";
+import {
+  TimeSeriesChart,
+  StackedBarChart,
+  DonutChart,
+  Heatmap,
+} from "@/components/ui/charts";
+import type { TimeSeriesDataPoint, StackedBarDataPoint, DonutSlice, HeatmapCell } from "@/components/ui/charts";
 import {
   aiOpsApi,
   type AiOpsRange,
@@ -37,7 +45,6 @@ import {
   formatErrorRate,
 } from "./ai-ops-helpers";
 import { cn } from "@/lib/utils";
-import type { BarDataPoint } from "@/components/ui/bar-series";
 import { AiTracesScreen } from "./ai-traces-screen";
 import { AiPricingScreen } from "./ai-pricing-screen";
 import { AiSettingsTab } from "./ai-settings-tab";
@@ -96,13 +103,14 @@ function PanelCard({
   children: React.ReactNode;
   className?: string;
 }) {
+  const id = `panel-${title.toLowerCase().replace(/\s+/g, "-").replace(/[^a-z0-9-]/g, "")}`;
   return (
     <section
-      aria-labelledby={`panel-${title.toLowerCase().replace(/\s+/g, "-")}`}
+      aria-labelledby={id}
       className={cn("marketplace-card rounded-[12px] p-5", className)}
     >
       <h2
-        id={`panel-${title.toLowerCase().replace(/\s+/g, "-")}`}
+        id={id}
         className="mb-4 flex items-center gap-2 text-sm font-bold tracking-tight text-[var(--text-primary)]"
       >
         <span className="icon-chip-primary flex size-7 shrink-0 items-center justify-center rounded-lg shadow-sm">
@@ -179,10 +187,20 @@ function MetricTile({
 }
 
 /* -------------------------------------------------------------------------- */
-/* Spend panel                                                                 */
+/* Range → integer mapping (mirrors aiOpsApi internal)                        */
 /* -------------------------------------------------------------------------- */
 
-function SpendPanel({
+function rangeToDays(range: AiOpsRange): number {
+  if (range === "today") return 1;
+  if (range === "7d") return 7;
+  return 30;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Spend vs Budget panel (TimeSeriesChart area + reference line)              */
+/* -------------------------------------------------------------------------- */
+
+function SpendBudgetPanel({
   range,
   budget,
   unpricedLabel,
@@ -194,7 +212,333 @@ function SpendPanel({
   const t = useTranslations("adminConsole.aiOps.spend");
   const tAiOps = useTranslations("adminConsole.aiOps");
 
-  // Spend returns a bare list from api.get
+  const rangeDays = rangeToDays(range);
+
+  const tsQuery = useQuery({
+    queryKey: ["ai-ops", "timeseries", rangeDays] as const,
+    queryFn: () => aiOpsApi.timeseries(rangeDays),
+    staleTime: 30_000,
+    refetchInterval: visibilityGatedInterval(REFETCH_INTERVAL),
+    retry: 1,
+  });
+
+  // Keep the spend-by-feature donut still using the spend endpoint
+  const spendQuery = useQuery({
+    queryKey: ["ai-ops", "spend", range] as const,
+    queryFn: () => aiOpsApi.spend(range, "feature"),
+    staleTime: 30_000,
+    refetchInterval: visibilityGatedInterval(REFETCH_INTERVAL),
+    retry: 1,
+  });
+
+  if (tsQuery.isPending) {
+    return (
+      <PanelCard title={t("panelTitle")} icon={CurrencyDollar}>
+        <Skeleton className="h-48 w-full" />
+      </PanelCard>
+    );
+  }
+
+  if (tsQuery.isError) {
+    return (
+      <PanelCard title={t("panelTitle")} icon={CurrencyDollar}>
+        <EmptyState
+          kind="error"
+          icon={WarningCircle}
+          title={t("errorTitle")}
+          description={t("errorBody")}
+          action={
+            <button
+              onClick={() => void tsQuery.refetch()}
+              className="text-xs font-semibold text-[var(--brand-primary)] underline-offset-2 hover:underline"
+            >
+              {tAiOps("retry")}
+            </button>
+          }
+        />
+      </PanelCard>
+    );
+  }
+
+  const rows = tsQuery.data?.series ?? [];
+
+  // Derive per-day budget for reference line:
+  // budget from overview is the total configured budget.
+  // If range = today (1 day), referenceValue = budget.
+  // For multi-day ranges we show the daily budget as a reference line.
+  const dailyBudget = isFinite(budget) && budget > 0 ? budget : undefined;
+
+  const tsData: TimeSeriesDataPoint[] = rows.map((r) => ({
+    day: r.day.slice(5), // "MM-DD" for display brevity
+    cost_usd: r.cost_usd,
+  }));
+
+  // Check for unpriced rows in spend data
+  const spendRows: AiOpsSpendRow[] = spendQuery.data ?? [];
+  const hasUnpriced = spendRows.some(
+    (r) => r.provider === null && r.model === null && (r.cost_usd ?? 0) > 0,
+  );
+
+  const totalSpend = rows.reduce((s, r) => s + r.cost_usd, 0);
+  const burnPct = dailyBudget ? budgetBurnPct(totalSpend, dailyBudget * rangeDays) : 0;
+
+  return (
+    <PanelCard title={t("panelTitle")} icon={CurrencyDollar}>
+      {hasUnpriced && (
+        <p className="mb-3">
+          <UnpricedNote label={unpricedLabel} />
+        </p>
+      )}
+      <TimeSeriesChart
+        data={tsData}
+        xKey="day"
+        series={[{ key: "cost_usd", label: tAiOps("metric.spendToday"), type: "area" }]}
+        format="currency"
+        referenceValue={dailyBudget}
+        height={220}
+        ariaLabel={t("ariaLabel")}
+        emptyLabel={t("emptyLabel")}
+      />
+      {dailyBudget && rangeDays > 1 && (
+        <p className="mt-2 text-[0.6875rem] text-[var(--text-muted)]">
+          {t("burndownLabel", { pct: burnPct, budget: (dailyBudget * rangeDays).toFixed(2) })}
+        </p>
+      )}
+    </PanelCard>
+  );
+}
+
+/* -------------------------------------------------------------------------- */
+/* Latency panel (two-series TimeSeriesChart: avg + p95)                      */
+/* -------------------------------------------------------------------------- */
+
+function LatencyPanel({ range }: { range: AiOpsRange }) {
+  const t = useTranslations("adminConsole.aiOps.latency");
+  const tAiOps = useTranslations("adminConsole.aiOps");
+
+  const rangeDays = rangeToDays(range);
+
+  const query = useQuery({
+    queryKey: ["ai-ops", "timeseries", rangeDays] as const,
+    queryFn: () => aiOpsApi.timeseries(rangeDays),
+    staleTime: 30_000,
+    refetchInterval: visibilityGatedInterval(REFETCH_INTERVAL),
+    retry: 1,
+  });
+
+  if (query.isPending) {
+    return (
+      <PanelCard title={t("panelTitle")} icon={Timer}>
+        <Skeleton className="h-48 w-full" />
+      </PanelCard>
+    );
+  }
+
+  if (query.isError) {
+    return (
+      <PanelCard title={t("panelTitle")} icon={Timer}>
+        <EmptyState
+          kind="error"
+          icon={WarningCircle}
+          title={t("errorTitle")}
+          description={t("errorBody")}
+          action={
+            <button
+              onClick={() => void query.refetch()}
+              className="text-xs font-semibold text-[var(--brand-primary)] underline-offset-2 hover:underline"
+            >
+              {tAiOps("retry")}
+            </button>
+          }
+        />
+      </PanelCard>
+    );
+  }
+
+  const rows = query.data?.series ?? [];
+
+  // Filter to only rows that have any latency data
+  const hasAnyLatency = rows.some((r) => r.avg_latency_ms !== null || r.p95_latency_ms !== null);
+
+  const tsData: TimeSeriesDataPoint[] = rows.map((r) => ({
+    day: r.day.slice(5),
+    // Replace null with undefined so recharts skips the null points (no crash)
+    avg_latency_ms: r.avg_latency_ms ?? undefined,
+    p95_latency_ms: r.p95_latency_ms ?? undefined,
+  }));
+
+  return (
+    <PanelCard title={t("panelTitle")} icon={Timer}>
+      {!hasAnyLatency && rows.length > 0 ? (
+        <div
+          className="flex h-[220px] items-center justify-center rounded-lg border border-dashed border-[var(--border-default)] text-xs text-[var(--text-muted)]"
+        >
+          {t("emptyLabel")}
+        </div>
+      ) : (
+        <TimeSeriesChart
+          data={tsData}
+          xKey="day"
+          series={[
+            { key: "p95_latency_ms", label: t("seriesP95"), type: "line" },
+            { key: "avg_latency_ms", label: t("seriesAvg"), color: "#a3a3a3", type: "line" },
+          ]}
+          format="ms"
+          height={220}
+          ariaLabel={t("ariaLabel")}
+          emptyLabel={t("emptyLabel")}
+        />
+      )}
+    </PanelCard>
+  );
+}
+
+/* -------------------------------------------------------------------------- */
+/* Volume panel (StackedBarChart by feature per day)                          */
+/* -------------------------------------------------------------------------- */
+
+function VolumePanel({ range }: { range: AiOpsRange }) {
+  const t = useTranslations("adminConsole.aiOps.volume");
+  const tAiOps = useTranslations("adminConsole.aiOps");
+
+  const rangeDays = rangeToDays(range);
+
+  // For per-day breakdowns, use timeseries (requests) for the line view,
+  // and volume grouped by feature for the stacked perspective
+  const tsQuery = useQuery({
+    queryKey: ["ai-ops", "timeseries", rangeDays] as const,
+    queryFn: () => aiOpsApi.timeseries(rangeDays),
+    staleTime: 30_000,
+    refetchInterval: visibilityGatedInterval(REFETCH_INTERVAL),
+    retry: 1,
+  });
+
+  const volumeQuery = useQuery({
+    queryKey: ["ai-ops", "volume", range] as const,
+    queryFn: () => aiOpsApi.volume(range, "feature"),
+    staleTime: 30_000,
+    refetchInterval: visibilityGatedInterval(REFETCH_INTERVAL),
+    retry: 1,
+  });
+
+  if (tsQuery.isPending || volumeQuery.isPending) {
+    return (
+      <PanelCard title={t("panelTitle")} icon={StackSimple}>
+        <Skeleton className="h-48 w-full" />
+      </PanelCard>
+    );
+  }
+
+  if (tsQuery.isError) {
+    return (
+      <PanelCard title={t("panelTitle")} icon={StackSimple}>
+        <EmptyState
+          kind="error"
+          icon={WarningCircle}
+          title={t("errorTitle")}
+          description={t("errorBody")}
+          action={
+            <button
+              onClick={() => void tsQuery.refetch()}
+              className="text-xs font-semibold text-[var(--brand-primary)] underline-offset-2 hover:underline"
+            >
+              {tAiOps("retry")}
+            </button>
+          }
+        />
+      </PanelCard>
+    );
+  }
+
+  const tsRows = tsQuery.data?.series ?? [];
+  const volRows: AiOpsVolumeRow[] = volumeQuery.data ?? [];
+
+  // Build stacked bar: pivot feature×day (feature from volume grouped rows)
+  // volume group_by=feature has day=null, task_type = feature key
+  // Since volume endpoint doesn't give us per-day per-feature breakdown,
+  // we fall back to daily totals from timeseries as a single-series stacked bar
+  const tsData: StackedBarDataPoint[] = tsRows.map((r) => ({
+    day: r.day.slice(5),
+    requests: r.requests,
+  }));
+
+  // Get feature breakdown for legend from volume grouped rows
+  const featureMap = new Map<string, number>();
+  for (const row of volRows) {
+    const key = row.task_type ?? "unknown";
+    featureMap.set(key, (featureMap.get(key) ?? 0) + row.requests);
+  }
+
+  return (
+    <PanelCard title={t("panelTitle")} icon={StackSimple}>
+      <StackedBarChart
+        data={tsData}
+        xKey="day"
+        series={[{ key: "requests", label: t("requestsLabel") }]}
+        format="number"
+        height={220}
+        ariaLabel={t("ariaLabel")}
+        emptyLabel={t("emptyLabel")}
+      />
+
+      {/* Top features list */}
+      {featureMap.size > 0 && (
+        <>
+          <h3 className="mb-2 mt-4 text-[11px] font-semibold uppercase tracking-wide text-[var(--text-muted)]">
+            {t("topConsumersTitle")}
+          </h3>
+          {(() => {
+            const entries = Array.from(featureMap.entries()).sort(([, a], [, b]) => b - a);
+            const total = entries.reduce((s, [, v]) => s + v, 0);
+            return (
+              <ul className="space-y-1.5" role="list">
+                {entries.slice(0, 6).map(([group, count]) => {
+                  const pct = total > 0 ? Math.round((count / total) * 100) : 0;
+                  return (
+                    <li key={group} className="flex items-center justify-between gap-3 text-xs">
+                      <div className="flex min-w-0 flex-1 flex-col gap-0.5">
+                        <span className="truncate font-semibold text-[var(--text-primary)]">{group}</span>
+                        <div className="h-1.5 w-full overflow-hidden rounded-full bg-[var(--bg-muted)]">
+                          <div
+                            className="h-full rounded-full bg-[var(--gray-400)]"
+                            style={{ width: `${Math.max(pct, 2)}%` }}
+                            role="meter"
+                            aria-valuenow={pct}
+                            aria-valuemin={0}
+                            aria-valuemax={100}
+                            aria-label={`${group}: ${pct}%`}
+                          />
+                        </div>
+                      </div>
+                      <div className="flex shrink-0 flex-col items-end gap-0.5">
+                        <span
+                          className="font-mono font-semibold tabular-nums text-[var(--text-primary)]"
+                          style={{ fontFamily: "'JetBrains Mono', ui-monospace, monospace" }}
+                        >
+                          {new Intl.NumberFormat().format(count)}
+                        </span>
+                        <span className="text-[0.65rem] text-[var(--text-muted)]">{pct}%</span>
+                      </div>
+                    </li>
+                  );
+                })}
+              </ul>
+            );
+          })()}
+        </>
+      )}
+    </PanelCard>
+  );
+}
+
+/* -------------------------------------------------------------------------- */
+/* Distribution panel (DonutChart spend/requests by feature)                  */
+/* -------------------------------------------------------------------------- */
+
+function DistributionPanel({ range }: { range: AiOpsRange }) {
+  const t = useTranslations("adminConsole.aiOps.distribution");
+  const tAiOps = useTranslations("adminConsole.aiOps");
+
   const query = useQuery({
     queryKey: ["ai-ops", "spend", range] as const,
     queryFn: () => aiOpsApi.spend(range, "feature"),
@@ -205,15 +549,15 @@ function SpendPanel({
 
   if (query.isPending) {
     return (
-      <PanelCard title={t("panelTitle")} icon={CurrencyDollar}>
-        <Skeleton className="h-32 w-full" />
+      <PanelCard title={t("panelTitle")} icon={DotsNine}>
+        <Skeleton className="h-48 w-full" />
       </PanelCard>
     );
   }
 
   if (query.isError) {
     return (
-      <PanelCard title={t("panelTitle")} icon={CurrencyDollar}>
+      <PanelCard title={t("panelTitle")} icon={DotsNine}>
         <EmptyState
           kind="error"
           icon={WarningCircle}
@@ -232,77 +576,41 @@ function SpendPanel({
     );
   }
 
-  // Real rows: AiOpsSpendRow[] — bare list
   const rows: AiOpsSpendRow[] = query.data ?? [];
-  // When group_by=feature, day is null and task_type is the group key.
-  // Aggregate cost by task_type for the bar chart.
+
+  // Aggregate spend by feature (task_type). model=null → group label "—" (restricted).
   const featureMap = new Map<string, number>();
   for (const row of rows) {
-    const key = row.task_type ?? "unknown";
-    featureMap.set(key, (featureMap.get(key) ?? 0) + (row.cost_usd ?? 0));
+    const key = row.task_type ?? "—";
+    featureMap.set(key, (featureMap.get(key) ?? 0) + row.cost_usd);
   }
 
-  const barData: BarDataPoint[] = Array.from(featureMap.entries())
+  const slices: DonutSlice[] = Array.from(featureMap.entries())
+    .filter(([, v]) => v > 0)
     .sort(([, a], [, b]) => b - a)
-    .map(([label, val]) => ({
-      label: label.slice(0, 12),
-      value: Math.round(val * 10000) / 10000,
-    }));
-
-  const totalSpend = barData.reduce((s, d) => s + d.value, 0);
-  const burnPct = budgetBurnPct(totalSpend, budget);
-
-  const burndownNote =
-    isFinite(budget) && budget > 0
-      ? t("burndownLabel", {
-          pct: burnPct,
-          budget: budget.toFixed(2),
-        })
-      : null;
-
-  // Show an unpriced note when rows have masked identity (provider/model null)
-  // and non-zero cost — the admin should add a price row for those slots.
-  const hasUnpriced = rows.some(
-    (r) => r.provider === null && r.model === null && (r.cost_usd ?? 0) > 0,
-  );
+    .map(([label, value]) => ({ label: label.slice(0, 16), value }));
 
   return (
-    <PanelCard title={t("panelTitle")} icon={CurrencyDollar}>
-      {hasUnpriced && (
-        <p className="mb-3">
-          <UnpricedNote label={unpricedLabel} />
-        </p>
-      )}
-      <BarSeries
-        data={barData}
-        referenceLine={isFinite(budget) && budget > 0 ? budget : undefined}
-        format={(v) => formatUsd(v)}
-        emptyLabel={t("emptyLabel")}
+    <PanelCard title={t("panelTitle")} icon={DotsNine}>
+      <DonutChart
+        data={slices}
+        height={240}
         ariaLabel={t("ariaLabel")}
-        className="mb-2"
+        emptyLabel={t("emptyLabel")}
       />
-      {burndownNote && (
-        <p className="mt-2 text-[0.6875rem] text-[var(--text-muted)]">
-          {burndownNote}
-        </p>
-      )}
     </PanelCard>
   );
 }
 
 /* -------------------------------------------------------------------------- */
-/* Reliability panel                                                           */
+/* Reliability panel (error-rate scalar + circuit states + error series)       */
 /* -------------------------------------------------------------------------- */
 
-function ReliabilityPanel({
-  range,
-}: {
-  range: AiOpsRange;
-}) {
+function ReliabilityPanel({ range }: { range: AiOpsRange }) {
   const t = useTranslations("adminConsole.aiOps.reliability");
   const tAiOps = useTranslations("adminConsole.aiOps");
 
-  const query = useQuery({
+  const reliabilityQuery = useQuery({
     queryKey: ["ai-ops", "reliability", range] as const,
     queryFn: () => aiOpsApi.reliability(range, "feature"),
     staleTime: 30_000,
@@ -310,15 +618,24 @@ function ReliabilityPanel({
     retry: 1,
   });
 
-  if (query.isPending) {
+  const rangeDays = rangeToDays(range);
+  const tsQuery = useQuery({
+    queryKey: ["ai-ops", "timeseries", rangeDays] as const,
+    queryFn: () => aiOpsApi.timeseries(rangeDays),
+    staleTime: 30_000,
+    refetchInterval: visibilityGatedInterval(REFETCH_INTERVAL),
+    retry: 1,
+  });
+
+  if (reliabilityQuery.isPending) {
     return (
       <PanelCard title={t("panelTitle")} icon={Gauge}>
-        <Skeleton className="h-32 w-full" />
+        <Skeleton className="h-48 w-full" />
       </PanelCard>
     );
   }
 
-  if (query.isError) {
+  if (reliabilityQuery.isError) {
     return (
       <PanelCard title={t("panelTitle")} icon={Gauge}>
         <EmptyState
@@ -328,7 +645,7 @@ function ReliabilityPanel({
           description={t("errorBody")}
           action={
             <button
-              onClick={() => void query.refetch()}
+              onClick={() => void reliabilityQuery.refetch()}
               className="text-xs font-semibold text-[var(--brand-primary)] underline-offset-2 hover:underline"
             >
               {tAiOps("retry")}
@@ -339,9 +656,16 @@ function ReliabilityPanel({
     );
   }
 
-  const data = query.data;
-  // circuit_states is an object map {key: state} — convert to array for table
+  const data = reliabilityQuery.data;
   const circuitEntries = Object.entries(data.circuit_states ?? {});
+
+  // Build error rate series from timeseries if available
+  const tsRows = tsQuery.data?.series ?? [];
+  const errorTsData: TimeSeriesDataPoint[] = tsRows.map((r) => ({
+    day: r.day.slice(5),
+    error_rate: Number.isFinite(r.error_rate) ? r.error_rate * 100 : 0,
+  }));
+  const hasErrorSeries = errorTsData.length > 0 && tsRows.some((r) => r.errors > 0);
 
   return (
     <PanelCard title={t("panelTitle")} icon={Gauge}>
@@ -398,7 +722,25 @@ function ReliabilityPanel({
         </div>
       </div>
 
-      {/* Circuit breaker states — object map converted to table rows */}
+      {/* Error rate trend (small) */}
+      {hasErrorSeries && (
+        <div className="mb-5">
+          <h3 className="mb-2 text-[11px] font-semibold uppercase tracking-wide text-[var(--text-muted)]">
+            {t("errorTrendTitle")}
+          </h3>
+          <TimeSeriesChart
+            data={errorTsData}
+            xKey="day"
+            series={[{ key: "error_rate", label: t("errorRateLabel"), type: "area" }]}
+            format="percent"
+            height={140}
+            ariaLabel={t("errorTrendTitle")}
+            emptyLabel={t("emptyLabel")}
+          />
+        </div>
+      )}
+
+      {/* Circuit breaker states */}
       <h3 className="mb-3 text-xs font-bold uppercase tracking-wide text-[var(--text-muted)]">
         {t("circuitStateTitle")}
       </h3>
@@ -449,23 +791,18 @@ function ReliabilityPanel({
 }
 
 /* -------------------------------------------------------------------------- */
-/* Volume panel                                                                */
+/* Error heatmap panel (day × hour)                                           */
 /* -------------------------------------------------------------------------- */
 
-function VolumePanel({
-  range,
-  unpricedLabel,
-}: {
-  range: AiOpsRange;
-  unpricedLabel: string;
-}) {
-  const t = useTranslations("adminConsole.aiOps.volume");
+function ErrorHeatmapPanel({ range }: { range: AiOpsRange }) {
+  const t = useTranslations("adminConsole.aiOps.errorHeatmap");
   const tAiOps = useTranslations("adminConsole.aiOps");
 
-  // Volume returns a bare list from api.get
+  const rangeDays = rangeToDays(range);
+
   const query = useQuery({
-    queryKey: ["ai-ops", "volume", range] as const,
-    queryFn: () => aiOpsApi.volume(range, "feature"),
+    queryKey: ["ai-ops", "error-heatmap", rangeDays] as const,
+    queryFn: () => aiOpsApi.errorHeatmap(rangeDays),
     staleTime: 30_000,
     refetchInterval: visibilityGatedInterval(REFETCH_INTERVAL),
     retry: 1,
@@ -473,15 +810,15 @@ function VolumePanel({
 
   if (query.isPending) {
     return (
-      <PanelCard title={t("panelTitle")} icon={StackSimple}>
-        <Skeleton className="h-32 w-full" />
+      <PanelCard title={t("panelTitle")} icon={GridFour}>
+        <Skeleton className="h-48 w-full" />
       </PanelCard>
     );
   }
 
   if (query.isError) {
     return (
-      <PanelCard title={t("panelTitle")} icon={StackSimple}>
+      <PanelCard title={t("panelTitle")} icon={GridFour}>
         <EmptyState
           kind="error"
           icon={WarningCircle}
@@ -500,114 +837,40 @@ function VolumePanel({
     );
   }
 
-  // Real rows: AiOpsVolumeRow[] — bare list, group_by=feature so day=null, task_type=group key
-  const rows: AiOpsVolumeRow[] = query.data ?? [];
+  const rawCells = query.data?.cells ?? [];
 
-  // Aggregate by feature (task_type)
-  const featureMap = new Map<string, { requests: number; tokens: number }>();
-  for (const row of rows) {
-    const key = row.task_type ?? "unknown";
-    const prev = featureMap.get(key) ?? { requests: 0, tokens: 0 };
-    featureMap.set(key, {
-      requests: prev.requests + (row.requests ?? 0),
-      tokens: prev.tokens + (row.prompt_tokens ?? 0) + (row.completion_tokens ?? 0),
-    });
-  }
+  // xLabels = hours 0-23 as strings; yLabels = unique days (ascending)
+  const xLabels: string[] = Array.from({ length: 24 }, (_, i) => String(i));
+  const daySet = new Set<string>();
+  for (const c of rawCells) daySet.add(c.day);
+  const yLabels: string[] = Array.from(daySet).sort().map((d) => d.slice(5)); // "MM-DD"
 
-  const featureEntries = Array.from(featureMap.entries()).sort(
-    ([, a], [, b]) => b.requests - a.requests,
-  );
-
-  const barData: BarDataPoint[] = featureEntries.map(([group, val]) => ({
-    label: group.slice(0, 8),
-    value: val.requests,
+  const cells: HeatmapCell[] = rawCells.map((c) => ({
+    x: String(c.hour),
+    y: c.day.slice(5),
+    value: c.errors,
   }));
 
-  // Volume rows don't have provider/model — no unpriced concept here
-  void unpricedLabel;
+  const heatmapHeight = Math.max(160, Math.min(yLabels.length * 22 + 32, 320));
 
   return (
-    <PanelCard title={t("panelTitle")} icon={StackSimple}>
-      {/* By-feature bar chart */}
-      <h3 className="mb-2 text-[11px] font-semibold uppercase tracking-wide text-[var(--text-muted)]">
-        {t("byFeatureTitle")}
-      </h3>
-      <BarSeries
-        data={barData}
-        format={(v) => new Intl.NumberFormat().format(v)}
-        emptyLabel={t("emptyLabel")}
+    <PanelCard title={t("panelTitle")} icon={GridFour}>
+      <Heatmap
+        cells={cells}
+        xLabels={xLabels}
+        yLabels={yLabels}
+        height={heatmapHeight}
+        colorScale="severity"
         ariaLabel={t("ariaLabel")}
-        className="mb-5"
+        emptyLabel={t("emptyLabel")}
       />
-
-      {/* Top consumers list */}
-      {featureEntries.length > 0 && (
-        <>
-          <h3 className="mb-2 text-[11px] font-semibold uppercase tracking-wide text-[var(--text-muted)]">
-            {t("topConsumersTitle")}
-          </h3>
-          {(() => {
-              const totalRequests = featureEntries.reduce(
-                (s, [, v]) => s + v.requests,
-                0,
-              );
-              return (
-                <ul className="space-y-1.5" role="list">
-                  {featureEntries.slice(0, 8).map(([group, val]: [string, { requests: number; tokens: number }]) => {
-                    const pct =
-                      totalRequests > 0
-                        ? Math.round((val.requests / totalRequests) * 100)
-                        : 0;
-
-                    return (
-                      <li
-                        key={group}
-                        className="flex items-center justify-between gap-3 text-xs"
-                      >
-                        <div className="flex min-w-0 flex-1 flex-col gap-0.5">
-                          <span className="truncate font-semibold text-[var(--text-primary)]">
-                            {group}
-                          </span>
-                          <div className="h-1.5 w-full overflow-hidden rounded-full bg-[var(--bg-muted)]">
-                            <div
-                              className="h-full rounded-full bg-[var(--gray-400)]"
-                              style={{ width: `${Math.max(pct, 2)}%` }}
-                              role="meter"
-                              aria-valuenow={pct}
-                              aria-valuemin={0}
-                              aria-valuemax={100}
-                              aria-label={`${group}: ${pct}%`}
-                            />
-                          </div>
-                        </div>
-                        <div className="flex shrink-0 flex-col items-end gap-0.5">
-                          <span
-                            className="font-mono font-semibold tabular-nums text-[var(--text-primary)]"
-                            style={{
-                              fontFamily: "'JetBrains Mono', ui-monospace, monospace",
-                            }}
-                          >
-                            {new Intl.NumberFormat().format(val.requests)}
-                          </span>
-                          <span className="text-[0.65rem] text-[var(--text-muted)]">
-                            {pct}%
-                          </span>
-                        </div>
-                      </li>
-                    );
-                  })}
-                </ul>
-              );
-            })()}
-
-        </>
-      )}
+      <p className="mt-2 text-[0.6875rem] text-[var(--text-muted)]">{t("note")}</p>
     </PanelCard>
   );
 }
 
 /* -------------------------------------------------------------------------- */
-/* Overview tab (metric tiles + panels)                                       */
+/* Overview tab (metric tiles + all panels)                                   */
 /* -------------------------------------------------------------------------- */
 
 function OverviewTab({ range }: { range: AiOpsRange }) {
@@ -623,7 +886,6 @@ function OverviewTab({ range }: { range: AiOpsRange }) {
 
   const unpricedLabel = t("unpriced");
 
-  // Metric tiles
   const renderTiles = () => {
     if (overviewQuery.isPending) {
       return (
@@ -655,7 +917,6 @@ function OverviewTab({ range }: { range: AiOpsRange }) {
     }
 
     const data = overviewQuery.data;
-    // spend_today and budget are numbers from the real backend
     const spendToday = data.spend_today ?? 0;
     const budget = data.budget ?? 0;
     const burn = budgetBurnPct(spendToday, budget);
@@ -664,7 +925,6 @@ function OverviewTab({ range }: { range: AiOpsRange }) {
 
     return (
       <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
-        {/* Spend today */}
         <MetricTile
           label={t("metric.spendToday")}
           value={formatUsd(spendToday)}
@@ -675,28 +935,20 @@ function OverviewTab({ range }: { range: AiOpsRange }) {
               {burn}% {t("budgetBurn.ofBudget")}
             </StatusBadge>
           }
-          sub={t("budgetBurn.budgetNote", {
-            budget: budget.toFixed(2),
-          })}
+          sub={t("budgetBurn.budgetNote", { budget: budget.toFixed(2) })}
         />
-
-        {/* Requests */}
         <MetricTile
           label={t("metric.requests")}
           value={new Intl.NumberFormat().format(data.requests)}
           icon={LightningA}
           tone="primary"
         />
-
-        {/* Error rate */}
         <MetricTile
           label={t("metric.errorRate")}
           value={formatErrorRate(data.error_rate)}
           icon={Warning}
           tone={data.error_rate > 0.05 ? "danger" : data.error_rate > 0.01 ? "warning" : "success"}
         />
-
-        {/* p95 latency — only field the backend returns for latency */}
         <MetricTile
           label={t("metric.p95Latency")}
           value={formatLatency(data.p95_latency_ms ?? NaN)}
@@ -713,17 +965,27 @@ function OverviewTab({ range }: { range: AiOpsRange }) {
     <div className="space-y-6">
       {renderTiles()}
 
-      {/* Independent panels — each handles its own loading/error state */}
-      <SpendPanel
+      {/* Spend vs Budget — full width */}
+      <SpendBudgetPanel
         range={range}
         budget={budgetVal}
         unpricedLabel={unpricedLabel}
       />
 
+      {/* Latency + Volume — two column */}
       <div className="grid grid-cols-1 gap-6 xl:grid-cols-2">
-        <ReliabilityPanel range={range} />
-        <VolumePanel range={range} unpricedLabel={unpricedLabel} />
+        <LatencyPanel range={range} />
+        <VolumePanel range={range} />
       </div>
+
+      {/* Distribution (donut) + Reliability — two column */}
+      <div className="grid grid-cols-1 gap-6 xl:grid-cols-2">
+        <DistributionPanel range={range} />
+        <ReliabilityPanel range={range} />
+      </div>
+
+      {/* Error heatmap — full width */}
+      <ErrorHeatmapPanel range={range} />
     </div>
   );
 }

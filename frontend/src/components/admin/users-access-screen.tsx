@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useTranslations, useLocale } from "next-intl";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import {
@@ -45,10 +45,11 @@ function dash(v: string | null | undefined): string {
 
 function useDebounce<T>(value: T, delay = 350): T {
   const [debouncedValue, setDebouncedValue] = useState<T>(value);
-  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  if (timerRef.current) clearTimeout(timerRef.current);
-  timerRef.current = setTimeout(() => setDebouncedValue(value), delay);
+  useEffect(() => {
+    const id = setTimeout(() => setDebouncedValue(value), delay);
+    return () => clearTimeout(id);
+  }, [value, delay]);
 
   return debouncedValue;
 }
@@ -220,6 +221,12 @@ function User360Sheet({
   const core = query.data?.core ?? null;
   const identities = query.data?.identities ?? [];
   const email = core?.email ?? "";
+
+  const anyMutationPending =
+    suspendMutation.isPending ||
+    unsuspendMutation.isPending ||
+    grantSuperadminMutation.isPending ||
+    revokeSuperadminMutation.isPending;
 
   function handleConfirm() {
     if (!userId || !pendingAction) return;
@@ -422,6 +429,7 @@ function User360Sheet({
                 <Button
                   variant="danger"
                   size="sm"
+                  disabled={anyMutationPending}
                   onClick={() => setPendingAction("suspend")}
                 >
                   {t("actions.suspend")}
@@ -430,6 +438,7 @@ function User360Sheet({
                 <Button
                   variant="ghost"
                   size="sm"
+                  disabled={anyMutationPending}
                   onClick={() => setPendingAction("unsuspend")}
                 >
                   {t("actions.unsuspend")}
@@ -441,6 +450,7 @@ function User360Sheet({
                 <Button
                   variant="danger"
                   size="sm"
+                  disabled={anyMutationPending}
                   onClick={() => {
                     setRevokeError(null);
                     setPendingAction("revokeSuperadmin");
@@ -457,6 +467,7 @@ function User360Sheet({
                 <Button
                   variant="primary"
                   size="sm"
+                  disabled={anyMutationPending}
                   onClick={() => setPendingAction("grantSuperadmin")}
                 >
                   <ShieldCheck aria-hidden className="size-4" />
@@ -748,7 +759,7 @@ function SessionsTab() {
       header: t("sessions.col.email"),
       cell: (row) => (
         <span className="text-sm text-[var(--text-primary)]">
-          {row.user_email}
+          {dash(row.user_email)}
         </span>
       ),
     },

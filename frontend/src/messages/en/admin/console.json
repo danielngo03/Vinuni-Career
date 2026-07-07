@@ -95,8 +95,11 @@
       },
       "reliability": {
         "panelTitle": "Reliability",
+        "requestsLabel": "Requests",
         "errorRateLabel": "Error rate",
         "fallbackRateLabel": "Fallback rate",
+        "fallbacksLabel": "Fallbacks",
+        "errorTrendTitle": "Error rate trend",
         "featureCol": "Feature",
         "p50Label": "p50",
         "p95Label": "p95",
@@ -128,6 +131,30 @@
         "ariaLabel": "Request volume bar chart",
         "errorTitle": "Volume data unavailable",
         "errorBody": "Could not load volume data. Please try again."
+      },
+      "latency": {
+        "panelTitle": "Latency",
+        "seriesP95": "p95",
+        "seriesAvg": "avg",
+        "emptyLabel": "No latency data for this range",
+        "ariaLabel": "Latency time series chart",
+        "errorTitle": "Latency data unavailable",
+        "errorBody": "Could not load latency data. Please try again."
+      },
+      "distribution": {
+        "panelTitle": "Spend by feature",
+        "emptyLabel": "No spend distribution for this range",
+        "ariaLabel": "Spend distribution donut chart",
+        "errorTitle": "Distribution data unavailable",
+        "errorBody": "Could not load spend distribution. Please try again."
+      },
+      "errorHeatmap": {
+        "panelTitle": "Error heatmap (day × hour)",
+        "note": "Cells show error count. Sparse — only hours with errors are shaded.",
+        "emptyLabel": "No errors in this range",
+        "ariaLabel": "Error frequency heatmap by day and hour",
+        "errorTitle": "Heatmap data unavailable",
+        "errorBody": "Could not load error heatmap. Please try again."
       },
       "updated": "Updated {time}",
       "retry": "Retry",

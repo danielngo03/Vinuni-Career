@@ -74,7 +74,7 @@ export interface PlatformUserSuperadminResult {
 export interface AdminSession {
   session_id: string;
   user_id: string;
-  user_email: string;
+  user_email: string | null;
   device_hint: string | null;
   city_level_location: string | null;
   last_seen_at: string;

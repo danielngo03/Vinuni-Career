@@ -95,8 +95,11 @@
       },
       "reliability": {
         "panelTitle": "Độ tin cậy",
+        "requestsLabel": "Số yêu cầu",
         "errorRateLabel": "Tỷ lệ lỗi",
         "fallbackRateLabel": "Tỷ lệ dự phòng",
+        "fallbacksLabel": "Dự phòng",
+        "errorTrendTitle": "Xu hướng tỷ lệ lỗi",
         "featureCol": "Tính năng",
         "p50Label": "p50",
         "p95Label": "p95",
@@ -128,6 +131,30 @@
         "ariaLabel": "Biểu đồ cột khối lượng yêu cầu",
         "errorTitle": "Không có dữ liệu khối lượng",
         "errorBody": "Không thể tải dữ liệu khối lượng. Vui lòng thử lại."
+      },
+      "latency": {
+        "panelTitle": "Độ trễ",
+        "seriesP95": "p95",
+        "seriesAvg": "trung bình",
+        "emptyLabel": "Không có dữ liệu độ trễ cho khoảng thời gian này",
+        "ariaLabel": "Biểu đồ chuỗi thời gian độ trễ",
+        "errorTitle": "Không có dữ liệu độ trễ",
+        "errorBody": "Không thể tải dữ liệu độ trễ. Vui lòng thử lại."
+      },
+      "distribution": {
+        "panelTitle": "Chi phí theo tính năng",
+        "emptyLabel": "Không có phân phối chi phí cho khoảng thời gian này",
+        "ariaLabel": "Biểu đồ donut phân phối chi phí",
+        "errorTitle": "Không có dữ liệu phân phối",
+        "errorBody": "Không thể tải phân phối chi phí. Vui lòng thử lại."
+      },
+      "errorHeatmap": {
+        "panelTitle": "Bản đồ nhiệt lỗi (ngày × giờ)",
+        "note": "Ô hiển thị số lỗi. Thưa thớt — chỉ tô màu những giờ có lỗi.",
+        "emptyLabel": "Không có lỗi trong khoảng thời gian này",
+        "ariaLabel": "Bản đồ nhiệt tần suất lỗi theo ngày và giờ",
+        "errorTitle": "Không có dữ liệu bản đồ nhiệt",
+        "errorBody": "Không thể tải bản đồ nhiệt lỗi. Vui lòng thử lại."
       },
       "updated": "Cập nhật lúc {time}",
       "retry": "Thử lại",
