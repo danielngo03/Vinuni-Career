@@ -21,6 +21,8 @@ export interface BarSeriesProps {
   emphasizeMax?: boolean;
   /** Accessible label for the chart region. */
   ariaLabel?: string;
+  /** Text shown in the empty-data placeholder. Consumers should pass a translated string. */
+  emptyLabel?: string;
   className?: string;
 }
 
@@ -28,8 +30,8 @@ export interface BarSeriesProps {
  * Vertical bar chart primitive using inline SVG with design tokens.
  *
  * - Monochrome: max bar uses ink (#171717), others use --gray-300.
- * - Optional dashed reference line (amber, matches budget/threshold semantics).
- * - Empty data renders a small "no data" placeholder — no crash, no NaN.
+ * - Optional dashed reference line (gray-500, neutral threshold).
+ * - Empty data renders a small placeholder — no crash, no NaN.
  * - Accessible: role="img" + aria-label.
  * - Responsive: width:100% / viewBox scaling.
  * - No external dependencies.
@@ -40,6 +42,7 @@ export function BarSeries({
   format,
   emphasizeMax = true,
   ariaLabel = "Bar chart",
+  emptyLabel = "No data",
   className,
 }: BarSeriesProps) {
   const fmt = format ?? ((v: number) => String(v));
@@ -54,7 +57,7 @@ export function BarSeries({
           className,
         )}
       >
-        No data
+        {emptyLabel}
       </div>
     );
   }
@@ -138,7 +141,7 @@ export function BarSeries({
           y1={refLineY}
           x2={svgW}
           y2={refLineY}
-          stroke="var(--amber-500, #f59e0b)"
+          stroke="var(--gray-500, #6b7280)"
           strokeWidth={1}
           strokeDasharray="4 3"
         />
