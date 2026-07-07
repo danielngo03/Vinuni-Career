@@ -24,11 +24,9 @@ from collections.abc import AsyncGenerator
 from typing import Any
 
 import pytest
-from sqlalchemy import func, select
-
 from app.ai.gateway.base import AICompletion, AIEmbedding, AIMessage, AIProvider
 from app.ai.observability.models import AiOpsEvent, AiUsageLog
-
+from sqlalchemy import func, select
 
 # ---------------------------------------------------------------------------
 # Fake provider returning known usage
@@ -174,6 +172,14 @@ async def test_complete_ops_event_has_correct_fields(
 
     _patch_provider(monkeypatch, FakeProvider(prompt_tokens=42, completion_tokens=17))
 
+    # Deterministically inject a known (provider, model) so the assertion is
+    # not coupled to runtime_config bootstrap state in the test environment.
+    monkeypatch.setattr(
+        "app.ai.gateway.task_runner._resolve_provider_model",
+        lambda alias: ("test_provider", "test-model-v1"),
+        raising=True,
+    )
+
     org_id = uuid.uuid4()
     user_id = uuid.uuid4()
 
@@ -192,9 +198,10 @@ async def test_complete_ops_event_has_correct_fields(
 
     assert ev.task_type == "unit_test"
     assert ev.alias == "chat_default"
-    # Provider must be resolved from runtime_config (openrouter for chat_default in bootstrap)
-    assert ev.provider is not None
-    assert ev.model is not None
+    # Exact values injected by monkeypatch above — deterministic regardless of
+    # runtime_config bootstrap state.
+    assert ev.provider == "test_provider"
+    assert ev.model == "test-model-v1"
     assert ev.prompt_tokens == 42
     assert ev.completion_tokens == 17
     assert ev.latency_ms is not None
@@ -309,11 +316,13 @@ async def test_complete_no_db_does_not_crash(monkeypatch: Any) -> None:
     """When db=None (fire-and-forget path), complete() still returns without error."""
     from app.ai.gateway.task_runner import AiTaskRunner
 
-    # No DB — just check no crash
+    # No DB — just check no crash.
+    # complete() imports real_provider_active directly from factory at call
+    # time, so the patch must target the factory module, not task_runner.
     monkeypatch.setattr(
-        "app.ai.gateway.task_runner.real_provider_active",
+        "app.ai.gateway.factory.real_provider_active",
         lambda: False,
-        raising=False,
+        raising=True,
     )
 
     runner = AiTaskRunner(

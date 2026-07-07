@@ -61,8 +61,10 @@ def trace_call(
     error.  Never raises.  Never includes prompt text, response text, API keys,
     base URLs, or raw PII in the trace payload.
 
-    Parameters mirror the fields in ``ai_usage_log``; provider/model are
-    function-slot aliases (e.g. ``"chat_default"``), never raw vendor strings.
+    Parameters mirror the fields in ``ai_usage_log``; provider/model are the
+    CONCRETE resolved provider identity and model ID (admin-only observability,
+    per §5.6).  They are NEVER surfaced to end users.  Prompt text, response
+    text, and API keys are still never sent to Langfuse.
     """
     if not is_enabled():
         return None
@@ -80,9 +82,9 @@ def trace_call(
         )
 
         # Metadata-only: no prompt, no response, no raw keys, no base URL.
-        # provider/model are slot aliases (e.g. "chat_default"), not raw
-        # vendor/model strings.  Org/user ids are internal UUIDs — not names
-        # or emails.
+        # provider/model are the concrete resolved identity (admin-only, §5.6)
+        # and are never surfaced to end users.
+        # Org/user ids are internal UUIDs — not names or emails.
         metadata = {
             "task_type": task_type,
             "alias": alias,

@@ -352,21 +352,24 @@ class AiTaskRunner:
                     )
                 except Exception:
                     pass
-                await _record_telemetry(
-                    db=self._db,
-                    task_type=self._task_type,
-                    alias=alias,
-                    provider=provider_name,
-                    model=model_id,
-                    prompt_tokens=None,
-                    completion_tokens=None,
-                    latency_ms=latency_ms,
-                    status=stream_status,
-                    fallback_used=False,
-                    org_id=self._org_id,
-                    user_id=self._user_id,
-                    session_id=self._session_id,
-                )
+                try:
+                    await _record_telemetry(
+                        db=self._db,
+                        task_type=self._task_type,
+                        alias=alias,
+                        provider=provider_name,
+                        model=model_id,
+                        prompt_tokens=None,
+                        completion_tokens=None,
+                        latency_ms=latency_ms,
+                        status=stream_status,
+                        fallback_used=False,
+                        org_id=self._org_id,
+                        user_id=self._user_id,
+                        session_id=self._session_id,
+                    )
+                except Exception:
+                    pass
 
     async def embed(
         self,
