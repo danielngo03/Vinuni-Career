@@ -253,8 +253,60 @@
       "pageTitle": "System Health",
       "pageSubtitle": "Near-realtime scheduled jobs, queue depth, and service readiness.",
       "tabs": {
+        "overview": "Overview",
         "queuesJobs": "Queues & Jobs",
         "services": "Services"
+      },
+      "overview": {
+        "flowTitle": "Pipeline flow",
+        "flowSubtitle": "End-to-end operational pipeline: Scheduler → Jobs → Queue → Outbox → Delivered.",
+        "topologyTitle": "Service topology",
+        "topologySubtitle": "Connectivity and readiness of core infrastructure nodes.",
+        "errorTitle": "Overview unavailable",
+        "errorBody": "Could not load system overview. Please try again."
+      },
+      "flow": {
+        "ariaLabel": "Operational pipeline flow diagram",
+        "nodeScheduler": "Scheduler",
+        "nodeJobs": "Jobs",
+        "nodeQueue": "Queue",
+        "nodeOutbox": "Outbox",
+        "nodeDelivered": "Delivered",
+        "tooltipScheduler": "Task scheduler — triggers periodic jobs",
+        "tooltipJobs": "Scheduled job registry — tracks each job's run history",
+        "tooltipQueue": "Celery/Redis broker — queues async work",
+        "tooltipOutbox": "Message outbox — pending and failed outbound events",
+        "tooltipDelivered": "Successfully delivered messages",
+        "ok": "OK",
+        "warn": "Warn",
+        "na": "n/a",
+        "allOk": "All OK",
+        "errJobs": "{count} error",
+        "totalJobs": "{count} total",
+        "jobsRegistered": "{count} registered",
+        "queueDepth": "depth {depth}",
+        "redis": "Redis {status}",
+        "outboxFailed": "{count} failed",
+        "outboxPending": "{count} pending",
+        "pending": "{count} pending",
+        "sentCount": "{count} sent"
+      },
+      "topology": {
+        "ariaLabel": "Service topology diagram",
+        "hubApp": "App",
+        "nodeDb": "Database",
+        "nodeRedis": "Redis",
+        "nodeCelery": "Celery",
+        "nodeOutbox": "Outbox",
+        "statusOk": "ok",
+        "statusDown": "down",
+        "statusUnknown": "unknown"
+      },
+      "jobMatrix": {
+        "ariaLabel": "Job status matrix",
+        "panelTitle": "Job status matrix",
+        "neverRun": "Never run",
+        "interval": "Every {interval}"
       },
       "queuesJobs": {
         "redisTileLabel": "Redis broker",

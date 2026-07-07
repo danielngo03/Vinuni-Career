@@ -15,6 +15,7 @@ import {
   CheckSquare,
   ArrowClockwise,
   Database,
+  ShareNetwork,
 } from "@phosphor-icons/react";
 import { PageHeader } from "@/components/layout/page-header";
 import {
@@ -34,6 +35,8 @@ import {
   type OutboxHealth,
 } from "@/lib/api/system-health";
 import { formatLatency } from "./ai-ops-helpers";
+import { SystemHealthFlow } from "./system-health-flow";
+import { SystemHealthTopology } from "./system-health-topology";
 import { cn } from "@/lib/utils";
 
 /* -------------------------------------------------------------------------- */
@@ -430,6 +433,182 @@ function JobStatusBadge({
 }
 
 /* -------------------------------------------------------------------------- */
+/* Job status matrix — compact grid colored by health                         */
+/* -------------------------------------------------------------------------- */
+
+function JobStatusMatrix({ jobs }: { jobs: JobHealth[] }) {
+  const t = useTranslations("adminConsole.systemHealth.jobMatrix");
+  const tStatus = useTranslations("adminConsole.systemHealth.status");
+  const tQueuesJobs = useTranslations("adminConsole.systemHealth.queuesJobs");
+
+  if (jobs.length === 0) {
+    return (
+      <p className="text-sm text-[var(--text-muted)]">{tQueuesJobs("emptyTitle")}</p>
+    );
+  }
+
+  return (
+    <div
+      className="grid gap-2"
+      style={{
+        gridTemplateColumns: "repeat(auto-fill, minmax(180px, 1fr))",
+      }}
+      role="list"
+      aria-label={t("ariaLabel")}
+    >
+      {jobs.map((job) => {
+        const isError = job.last_status === "error";
+        const isNeverRun = job.never_run || job.last_status === null;
+        const isOk = job.last_status === "ok";
+
+        const borderColor = isError
+          ? "var(--red-600)"
+          : isNeverRun
+            ? "var(--border-strong)"
+            : "var(--teal-500)";
+
+        const bgColor = isError
+          ? "var(--red-50)"
+          : isNeverRun
+            ? "var(--bg-muted)"
+            : "var(--teal-50)";
+
+        const dotColor = isError
+          ? "var(--red-600)"
+          : isNeverRun
+            ? "var(--text-muted)"
+            : "var(--teal-600)";
+
+        const statusText = isError
+          ? tStatus("error")
+          : isNeverRun
+            ? tStatus("neverRun")
+            : tStatus("ok");
+
+        const lastRun = formatRelativeTime(job.last_finished_at);
+        const duration =
+          job.last_duration_ms !== null ? formatLatency(job.last_duration_ms) : null;
+
+        // Last result as tooltip content — truncated for display
+        const resultSummary: string | null = (() => {
+          if (!job.last_result) return null;
+          try {
+            return JSON.stringify(job.last_result).slice(0, 120);
+          } catch {
+            return null;
+          }
+        })();
+
+        return (
+          <div
+            key={job.name}
+            role="listitem"
+            title={resultSummary ?? statusText}
+            className="group relative flex flex-col gap-1.5 rounded-lg border p-3 transition-shadow hover:shadow-sm"
+            style={{
+              borderColor,
+              background: bgColor,
+              borderWidth: "1.5px",
+            }}
+          >
+            {/* Status dot + name */}
+            <div className="flex items-center gap-2">
+              <span
+                className="size-2.5 shrink-0 rounded-full"
+                style={{ background: dotColor }}
+                aria-hidden
+              />
+              <span
+                className="truncate font-mono text-[0.7rem] font-bold text-[var(--text-primary)]"
+                style={{ fontFamily: "'JetBrains Mono', ui-monospace, monospace" }}
+                title={job.name}
+              >
+                {job.name}
+              </span>
+            </div>
+
+            {/* Status badge row */}
+            <div className="flex items-center gap-1.5">
+              {isError ? (
+                <XCircle
+                  aria-hidden
+                  weight="fill"
+                  className="size-3 shrink-0"
+                  style={{ color: "var(--red-600)" }}
+                />
+              ) : isOk ? (
+                <CheckCircle
+                  aria-hidden
+                  weight="fill"
+                  className="size-3 shrink-0"
+                  style={{ color: "var(--teal-600)" }}
+                />
+              ) : (
+                <CircleDashed
+                  aria-hidden
+                  weight="bold"
+                  className="size-3 shrink-0"
+                  style={{ color: "var(--text-muted)" }}
+                />
+              )}
+              <span
+                className="text-[0.6875rem] font-semibold"
+                style={{
+                  color: isError
+                    ? "var(--red-600)"
+                    : isNeverRun
+                      ? "var(--text-muted)"
+                      : "var(--teal-700)",
+                }}
+              >
+                {statusText}
+              </span>
+            </div>
+
+            {/* Meta: last run + duration */}
+            <div className="flex items-center justify-between gap-1 text-[0.65rem] text-[var(--text-muted)]">
+              <span>{isNeverRun ? t("neverRun") : lastRun}</span>
+              {duration && !isNeverRun && (
+                <span
+                  className="font-mono tabular-nums"
+                  style={{ fontFamily: "'JetBrains Mono', ui-monospace, monospace" }}
+                >
+                  {duration}
+                </span>
+              )}
+            </div>
+
+            {/* Interval badge */}
+            <div className="text-[0.6rem] text-[var(--text-muted)]">
+              {t("interval", { interval: formatInterval(job.interval_seconds) })}
+            </div>
+
+            {/* Hover tooltip for last_result */}
+            {resultSummary && (
+              <div
+                className={cn(
+                  "pointer-events-none absolute bottom-full left-0 z-20 mb-1.5 hidden w-64 rounded-lg border p-2 text-[0.65rem] shadow-md group-hover:block",
+                )}
+                style={{
+                  background: "var(--surface-card)",
+                  borderColor: "var(--border-default)",
+                  color: "var(--text-secondary)",
+                  fontFamily: "'JetBrains Mono', ui-monospace, monospace",
+                  wordBreak: "break-all",
+                }}
+                aria-hidden
+              >
+                {resultSummary}
+              </div>
+            )}
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
+/* -------------------------------------------------------------------------- */
 /* Queues & Jobs tab                                                           */
 /* -------------------------------------------------------------------------- */
 
@@ -437,6 +616,7 @@ function QueuesJobsTab() {
   const t = useTranslations("adminConsole.systemHealth.queuesJobs");
   const tStatus = useTranslations("adminConsole.systemHealth.status");
   const tRetry = useTranslations("adminConsole.systemHealth");
+  const tMatrix = useTranslations("adminConsole.systemHealth.jobMatrix");
 
   const queuesQuery = useQuery({
     queryKey: ["system-health", "queues"] as const,
@@ -691,20 +871,28 @@ function QueuesJobsTab() {
     ];
 
     return (
-      <PanelCard title={t("jobsTableCaption")} icon={Timer}>
-        <DataTable<JobHealth>
-          columns={columns}
-          rows={sortedJobs}
-          getRowId={(row) => row.name}
-          caption={t("jobsTableCaption")}
-          empty={{
-            kind: "empty",
-            icon: Pulse,
-            title: t("emptyTitle"),
-            description: t("emptyBody"),
-          }}
-        />
-      </PanelCard>
+      <div className="space-y-5">
+        {/* Job status matrix — compact at-a-glance grid */}
+        <PanelCard title={tMatrix("panelTitle")} icon={ShareNetwork}>
+          <JobStatusMatrix jobs={sortedJobs} />
+        </PanelCard>
+
+        {/* Full data table */}
+        <PanelCard title={t("jobsTableCaption")} icon={Timer}>
+          <DataTable<JobHealth>
+            columns={columns}
+            rows={sortedJobs}
+            getRowId={(row) => row.name}
+            caption={t("jobsTableCaption")}
+            empty={{
+              kind: "empty",
+              icon: Pulse,
+              title: t("emptyTitle"),
+              description: t("emptyBody"),
+            }}
+          />
+        </PanelCard>
+      </div>
     );
   };
 
@@ -712,6 +900,118 @@ function QueuesJobsTab() {
     <div className="space-y-6">
       {renderQueueTiles()}
       {renderJobsTable()}
+    </div>
+  );
+}
+
+/* -------------------------------------------------------------------------- */
+/* Overview / Sơ đồ tab — pipeline flow + service topology                    */
+/* -------------------------------------------------------------------------- */
+
+function OverviewTab() {
+  const t = useTranslations("adminConsole.systemHealth.overview");
+  const tRetry = useTranslations("adminConsole.systemHealth");
+
+  const jobsQuery = useQuery({
+    queryKey: ["system-health", "jobs"] as const,
+    queryFn: () => systemHealthApi.jobs(),
+    staleTime: 8_000,
+    refetchInterval: visibilityGatedInterval(REFETCH_INTERVAL),
+    retry: 1,
+  });
+
+  const queuesQuery = useQuery({
+    queryKey: ["system-health", "queues"] as const,
+    queryFn: () => systemHealthApi.queues(),
+    staleTime: 8_000,
+    refetchInterval: visibilityGatedInterval(REFETCH_INTERVAL),
+    retry: 1,
+  });
+
+  const servicesQuery = useQuery({
+    queryKey: ["system-health", "services"] as const,
+    queryFn: () => systemHealthApi.services(),
+    staleTime: 8_000,
+    refetchInterval: visibilityGatedInterval(REFETCH_INTERVAL),
+    retry: 1,
+  });
+
+  const isLoading =
+    jobsQuery.isPending || queuesQuery.isPending || servicesQuery.isPending;
+  const isError =
+    jobsQuery.isError && queuesQuery.isError && servicesQuery.isError;
+
+  if (isError) {
+    return (
+      <EmptyState
+        kind="error"
+        icon={WarningCircle}
+        title={t("errorTitle")}
+        description={t("errorBody")}
+        action={
+          <button
+            onClick={() => {
+              void jobsQuery.refetch();
+              void queuesQuery.refetch();
+              void servicesQuery.refetch();
+            }}
+            className="text-xs font-semibold text-[var(--brand-primary)] underline-offset-2 hover:underline"
+          >
+            {tRetry("retry")}
+          </button>
+        }
+      />
+    );
+  }
+
+  const outbox = servicesQuery.data?.outbox;
+
+  return (
+    <div className="space-y-6">
+      {/* Pipeline flow diagram */}
+      <section
+        aria-labelledby="sh-overview-flow"
+        className="marketplace-card rounded-[12px] p-5"
+      >
+        <h2
+          id="sh-overview-flow"
+          className="mb-4 flex items-center gap-2 text-sm font-bold tracking-tight text-[var(--text-primary)]"
+        >
+          <span className="icon-chip-primary flex size-7 shrink-0 items-center justify-center rounded-lg shadow-sm">
+            <ShareNetwork aria-hidden weight="duotone" className="size-4" />
+          </span>
+          {t("flowTitle")}
+        </h2>
+        <p className="mb-4 text-xs text-[var(--text-muted)]">{t("flowSubtitle")}</p>
+        <SystemHealthFlow
+          jobs={jobsQuery.data}
+          queues={queuesQuery.data}
+          outbox={outbox}
+          isLoading={isLoading}
+        />
+      </section>
+
+      {/* Service topology */}
+      <section
+        aria-labelledby="sh-overview-topology"
+        className="marketplace-card rounded-[12px] p-5"
+      >
+        <h2
+          id="sh-overview-topology"
+          className="mb-4 flex items-center gap-2 text-sm font-bold tracking-tight text-[var(--text-primary)]"
+        >
+          <span className="icon-chip-primary flex size-7 shrink-0 items-center justify-center rounded-lg shadow-sm">
+            <Database aria-hidden weight="duotone" className="size-4" />
+          </span>
+          {t("topologyTitle")}
+        </h2>
+        <p className="mb-4 text-xs text-[var(--text-muted)]">{t("topologySubtitle")}</p>
+        <SystemHealthTopology
+          services={servicesQuery.data}
+          queues={queuesQuery.data}
+          isLoading={isLoading}
+        />
+      </section>
     </div>
   );
 }
@@ -725,9 +1025,10 @@ const TAB_ID_BASE = "system-health";
 export function SystemHealthScreen() {
   const t = useTranslations("adminConsole.systemHealth");
 
-  const [activeTab, setActiveTab] = useState("queues-jobs");
+  const [activeTab, setActiveTab] = useState("overview");
 
   const tabItems = [
+    { value: "overview", label: t("tabs.overview") },
     { value: "queues-jobs", label: t("tabs.queuesJobs") },
     { value: "services", label: t("tabs.services") },
   ];
@@ -752,6 +1053,14 @@ export function SystemHealthScreen() {
         ariaLabel={t("pageTitle")}
         idBase={TAB_ID_BASE}
       />
+
+      <TabPanel
+        tabsId={TAB_ID_BASE}
+        value="overview"
+        active={activeTab === "overview"}
+      >
+        <OverviewTab />
+      </TabPanel>
 
       <TabPanel
         tabsId={TAB_ID_BASE}

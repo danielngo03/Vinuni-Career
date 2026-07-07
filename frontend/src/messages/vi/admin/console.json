@@ -253,8 +253,60 @@
       "pageTitle": "Tình trạng hệ thống",
       "pageSubtitle": "Tác vụ định kỳ, độ sâu hàng đợi và tình trạng sẵn sàng dịch vụ gần thời gian thực.",
       "tabs": {
+        "overview": "Tổng quan",
         "queuesJobs": "Hàng đợi & Tác vụ",
         "services": "Dịch vụ"
+      },
+      "overview": {
+        "flowTitle": "Sơ đồ luồng vận hành",
+        "flowSubtitle": "Luồng vận hành từ đầu đến cuối: Lịch biểu → Tác vụ → Hàng đợi → Hộp thư đi → Đã gửi.",
+        "topologyTitle": "Sơ đồ cấu trúc dịch vụ",
+        "topologySubtitle": "Kết nối và tình trạng sẵn sàng của các nút hạ tầng cốt lõi.",
+        "errorTitle": "Không thể tải tổng quan",
+        "errorBody": "Không thể tải tổng quan hệ thống. Vui lòng thử lại."
+      },
+      "flow": {
+        "ariaLabel": "Sơ đồ luồng vận hành",
+        "nodeScheduler": "Lịch biểu",
+        "nodeJobs": "Tác vụ",
+        "nodeQueue": "Hàng đợi",
+        "nodeOutbox": "Hộp thư đi",
+        "nodeDelivered": "Đã gửi",
+        "tooltipScheduler": "Lịch biểu tác vụ — kích hoạt các tác vụ định kỳ",
+        "tooltipJobs": "Sổ đăng ký tác vụ — theo dõi lịch sử chạy từng tác vụ",
+        "tooltipQueue": "Celery/Redis broker — xếp hàng công việc bất đồng bộ",
+        "tooltipOutbox": "Hộp thư đi — sự kiện đang chờ và thất bại",
+        "tooltipDelivered": "Tin nhắn đã gửi thành công",
+        "ok": "Ổn",
+        "warn": "Cảnh báo",
+        "na": "n/a",
+        "allOk": "Tất cả ổn",
+        "errJobs": "{count} lỗi",
+        "totalJobs": "{count} tổng",
+        "jobsRegistered": "{count} đã đăng ký",
+        "queueDepth": "độ sâu {depth}",
+        "redis": "Redis {status}",
+        "outboxFailed": "{count} thất bại",
+        "outboxPending": "{count} đang chờ",
+        "pending": "{count} đang chờ",
+        "sentCount": "{count} đã gửi"
+      },
+      "topology": {
+        "ariaLabel": "Sơ đồ cấu trúc dịch vụ",
+        "hubApp": "App",
+        "nodeDb": "Cơ sở dữ liệu",
+        "nodeRedis": "Redis",
+        "nodeCelery": "Celery",
+        "nodeOutbox": "Hộp thư đi",
+        "statusOk": "ok",
+        "statusDown": "ngừng",
+        "statusUnknown": "không rõ"
+      },
+      "jobMatrix": {
+        "ariaLabel": "Ma trận trạng thái tác vụ",
+        "panelTitle": "Ma trận trạng thái tác vụ",
+        "neverRun": "Chưa chạy",
+        "interval": "Mỗi {interval}"
       },
       "queuesJobs": {
         "redisTileLabel": "Redis broker",
