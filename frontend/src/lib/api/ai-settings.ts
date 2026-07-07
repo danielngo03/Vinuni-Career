@@ -68,6 +68,8 @@ export interface AiSettings {
   feature_flags: AiFeatureFlags;
   /** Per-day USD ceiling as a decimal string, e.g. "1.00". */
   daily_budget_usd: string;
+  /** Per-org daily USD cap as a decimal string, or null when no cap is set. */
+  per_org_daily_budget_usd: string | null;
   rollout_state: AiRolloutState;
   /** The admin DB toggle (gated under the env/key ceiling — may be inert). */
   real_calls_enabled: boolean;
@@ -97,6 +99,10 @@ export interface AiSettingsUpdateBody {
   real_calls_enabled?: boolean;
   rollout_state?: AiRolloutState;
   daily_budget_usd?: number;
+  /** Set a per-org cap (USD). Pass alongside clear_per_org_budget to avoid ambiguity. */
+  per_org_daily_budget_usd?: number;
+  /** Set true to remove the per-org cap (sets field to null). */
+  clear_per_org_budget?: boolean;
   notes?: string;
 }
 

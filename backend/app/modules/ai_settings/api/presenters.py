@@ -83,6 +83,11 @@ def settings_view(row: AiSettings) -> dict:
             "job_fit_ai_explanation_enabled": row.job_fit_ai_explanation_enabled,
         },
         "daily_budget_usd": f"{row.daily_budget_usd:.2f}",
+        "per_org_daily_budget_usd": (
+            f"{row.per_org_daily_budget_usd:.2f}"
+            if row.per_org_daily_budget_usd is not None
+            else None
+        ),
         "rollout_state": row.rollout_state,
         "real_calls_enabled": row.real_calls_enabled,
         # DERIVED status only — never the key/base_url/provider/model.

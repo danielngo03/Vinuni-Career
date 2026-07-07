@@ -64,7 +64,9 @@ class AiSettingsUpdateRequest(BaseModel):
     job_fit_ai_explanation_enabled: bool | None = None
     real_calls_enabled: bool | None = None
     rollout_state: str | None = None
-    daily_budget_usd: Decimal | None = Field(default=None, ge=0)
+    daily_budget_usd: Decimal | None = Field(default=None, ge=Decimal("0"))
+    per_org_daily_budget_usd: Decimal | None = Field(default=None, ge=Decimal("0"))
+    clear_per_org_budget: bool | None = None
     notes: str | None = Field(default=None, max_length=2000)
 
 

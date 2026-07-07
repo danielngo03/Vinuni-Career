@@ -89,7 +89,7 @@ function TraceDetailSheet({
       open={event !== null}
       onClose={onClose}
       title={t("sheet.title")}
-      closeLabel="Close"
+      closeLabel={t("sheet.closeLabel")}
     >
       <div className="space-y-0">
         <DetailRow label={t("sheet.labelId")}>

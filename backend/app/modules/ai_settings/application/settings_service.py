@@ -121,6 +121,20 @@ def _validate_budget(value: Any) -> Decimal:
     return amount.quantize(Decimal("0.01"))
 
 
+def _validate_per_org_budget(value: Any) -> Decimal:
+    try:
+        amount = Decimal(str(value))
+    except (InvalidOperation, TypeError, ValueError) as exc:
+        raise ValidationFailedError(
+            details={"field": "per_org_daily_budget_usd", "reason": "invalid_number"}
+        ) from exc
+    if amount < 0 or amount > _MAX_DAILY_BUDGET_USD:
+        raise ValidationFailedError(
+            details={"field": "per_org_daily_budget_usd", "reason": "out_of_range"}
+        )
+    return amount.quantize(Decimal("0.01"))
+
+
 async def _apply_updates(
     session: AsyncSession,
     row: AiSettings,
@@ -160,6 +174,16 @@ async def _apply_updates(
 
     if payload.get("daily_budget_usd") is not None:
         _set("daily_budget_usd", _validate_budget(payload["daily_budget_usd"]))
+
+    # per_org_daily_budget_usd: explicit null (clear_per_org_budget=True) removes the
+    # cap; a numeric value sets it; omitting the field leaves it unchanged.
+    if payload.get("clear_per_org_budget"):
+        _set("per_org_daily_budget_usd", None)
+    elif payload.get("per_org_daily_budget_usd") is not None:
+        _set(
+            "per_org_daily_budget_usd",
+            _validate_per_org_budget(payload["per_org_daily_budget_usd"]),
+        )
 
     if "notes" in payload:
         _set("notes", payload["notes"])

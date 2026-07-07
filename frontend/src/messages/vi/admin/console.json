@@ -119,6 +119,7 @@
         },
         "sheet": {
           "title": "Chi tiết trace",
+          "closeLabel": "Đóng",
           "labelId": "ID sự kiện",
           "labelCreatedAt": "Thời gian",
           "labelTaskType": "Loại tác vụ",
@@ -179,12 +180,12 @@
       "settings": {
         "panelTitle": "Cài đặt AI",
         "perOrgBudgetLabel": "Giới hạn ngân sách AI theo tổ chức mỗi ngày (USD)",
-        "perOrgBudgetHelp": "Giới hạn chi phí AI theo tổ chức mỗi ngày. Đặt 0 để tắt. Thay đổi có hiệu lực ở chu kỳ yêu cầu tiếp theo.",
+        "perOrgBudgetHelp": "Giới hạn chi phí AI theo tổ chức mỗi ngày. Để trống để xóa giới hạn. Thay đổi có hiệu lực ở chu kỳ yêu cầu tiếp theo.",
         "perOrgBudgetPlaceholder": "vd: 0.50",
-        "perOrgBudgetNote": "TODO: liên kết với trường PATCH per_org_daily_budget_usd khi backend cung cấp trên /admin/ai-settings.",
         "perOrgSaveLabel": "Lưu ngân sách theo tổ chức",
         "perOrgSaved": "Đã lưu ngân sách theo tổ chức.",
-        "perOrgError": "Lưu ngân sách theo tổ chức thất bại."
+        "perOrgError": "Lưu ngân sách theo tổ chức thất bại.",
+        "loading": "Đang tải..."
       }
     }
   }

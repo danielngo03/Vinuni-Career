@@ -119,6 +119,7 @@
         },
         "sheet": {
           "title": "Trace detail",
+          "closeLabel": "Close",
           "labelId": "Event ID",
           "labelCreatedAt": "Time",
           "labelTaskType": "Task type",
@@ -179,12 +180,12 @@
       "settings": {
         "panelTitle": "AI Settings",
         "perOrgBudgetLabel": "Per-organisation daily budget cap (USD)",
-        "perOrgBudgetHelp": "Limits AI spend per organisation per day. Set 0 to disable. Changes apply on next request cycle.",
+        "perOrgBudgetHelp": "Limits AI spend per organisation per day. Leave empty to remove the cap. Changes apply on next request cycle.",
         "perOrgBudgetPlaceholder": "e.g. 0.50",
-        "perOrgBudgetNote": "TODO: bind to per_org_daily_budget_usd PATCH field when backend exposes it on /admin/ai-settings.",
         "perOrgSaveLabel": "Save per-org budget",
         "perOrgSaved": "Per-org budget saved.",
-        "perOrgError": "Failed to save per-org budget."
+        "perOrgError": "Failed to save per-org budget.",
+        "loading": "Loading..."
       }
     }
   }

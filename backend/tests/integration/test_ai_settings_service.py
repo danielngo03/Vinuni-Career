@@ -341,3 +341,87 @@ async def test_no_permission_user_forbidden(db_session) -> None:
         await settings_service.get_effective_settings(db_session, principal=principal)
     with pytest.raises(PermissionDeniedError):
         await settings_service.disable_ai(db_session, principal=principal, ctx=CTX)
+
+
+# --------------------------------------------------------------------------- #
+# per_org_daily_budget_usd: GET returns it, PATCH sets it, negative rejected  #
+# --------------------------------------------------------------------------- #
+
+
+async def test_get_returns_per_org_budget_null_by_default(db_session) -> None:
+    """GET /admin/ai-settings includes per_org_daily_budget_usd; default is null."""
+    principal = await _university_admin(db_session)
+    view = await settings_service.get_effective_settings(db_session, principal=principal)
+
+    assert "per_org_daily_budget_usd" in view
+    assert view["per_org_daily_budget_usd"] is None
+    _assert_no_secret_leak(view)
+
+
+async def test_patch_sets_per_org_budget_and_get_returns_it(db_session) -> None:
+    """PATCH per_org_daily_budget_usd=0.75 persists and is returned on GET."""
+    principal = await _university_admin(db_session)
+    await settings_service.get_effective_settings(db_session, principal=principal)
+
+    view = await settings_service.update_settings(
+        db_session,
+        principal=principal,
+        payload={"per_org_daily_budget_usd": "0.75"},
+        ctx=CTX,
+    )
+    assert view["per_org_daily_budget_usd"] == "0.75"
+
+    # GET must also reflect the persisted value.
+    view2 = await settings_service.get_effective_settings(db_session, principal=principal)
+    assert view2["per_org_daily_budget_usd"] == "0.75"
+    _assert_no_secret_leak(view2)
+
+    # An audit row must have been written.
+    audit = (
+        await db_session.execute(
+            select(AuditLog).where(AuditLog.action == "ai_settings.updated")
+        )
+    ).scalars().all()
+    assert any(
+        row.after_snapshot.get("per_org_daily_budget_usd") == "0.75"
+        for row in audit
+    )
+
+
+async def test_patch_clears_per_org_budget(db_session) -> None:
+    """clear_per_org_budget=True resets the cap to null."""
+    principal = await _university_admin(db_session)
+    await settings_service.get_effective_settings(db_session, principal=principal)
+
+    await settings_service.update_settings(
+        db_session,
+        principal=principal,
+        payload={"per_org_daily_budget_usd": "1.00"},
+        ctx=CTX,
+    )
+
+    view = await settings_service.update_settings(
+        db_session,
+        principal=principal,
+        payload={"clear_per_org_budget": True},
+        ctx=CTX,
+    )
+    assert view["per_org_daily_budget_usd"] is None
+
+
+async def test_patch_negative_per_org_budget_rejected(db_session) -> None:
+    """Negative per_org_daily_budget_usd must return 422 (ValidationFailedError)."""
+    from app.shared.exceptions import ValidationFailedError
+
+    principal = await _university_admin(db_session)
+    await settings_service.get_effective_settings(db_session, principal=principal)
+
+    with pytest.raises(ValidationFailedError) as exc_info:
+        await settings_service.update_settings(
+            db_session,
+            principal=principal,
+            payload={"per_org_daily_budget_usd": "-0.01"},
+            ctx=CTX,
+        )
+    assert exc_info.value.details["field"] == "per_org_daily_budget_usd"
+    assert exc_info.value.details["reason"] == "out_of_range"
