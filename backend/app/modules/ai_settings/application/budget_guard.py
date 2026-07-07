@@ -13,6 +13,8 @@ Admin PATCH to ``daily_budget_usd`` takes effect immediately via the snapshot.
 
 from __future__ import annotations
 
+import uuid
+from datetime import datetime, timedelta
 from typing import TYPE_CHECKING, Protocol
 
 from app.ai.gateway import runtime_config
@@ -63,8 +65,8 @@ def check(estimated_cost_usd: float = 0.0) -> None:
 
 async def _fetch_org_spend_today(
     db: AsyncSession,
-    org_id: object,
-    day_start: object,
+    org_id: uuid.UUID,
+    day_start: datetime,
 ) -> float:
     """Sum today's cost_usd from ai_usage_daily for the given org.
 
@@ -79,6 +81,7 @@ async def _fetch_org_spend_today(
         select(func.coalesce(func.sum(AiUsageDaily.cost_usd), 0)).where(
             AiUsageDaily.org_id == org_id,
             AiUsageDaily.day >= day_start,
+            AiUsageDaily.day < day_start + timedelta(days=1),
         )
     )
     return float(result.scalar() or 0.0)  # type: ignore[arg-type]
@@ -89,8 +92,8 @@ async def check_async(
     *,
     alias: str,
     estimated_cost_usd: float = 0.0,
-    user_id: object | None = None,
-    org_id: object | None = None,
+    user_id: uuid.UUID | None = None,
+    org_id: uuid.UUID | None = None,
 ) -> None:
     """Async hard-stop: query today's real spend from ``ai_usage_log``.
 
@@ -196,13 +199,15 @@ async def check_async(
 
     org_nested = None
     try:
-        from sqlalchemy import func, select  # noqa: F811
+        from sqlalchemy import select
 
-        from app.modules.ai_settings.domain.models import AiSettings
+        from app.modules.ai_settings.domain.models import PLATFORM_SCOPE, AiSettings
 
         org_nested = await db.begin_nested()
         settings_result = await db.execute(
-            select(AiSettings.per_org_daily_budget_usd).limit(1)
+            select(AiSettings.per_org_daily_budget_usd)
+            .where(AiSettings.scope == PLATFORM_SCOPE)
+            .limit(1)
         )
         per_org_budget_raw = settings_result.scalar()
         await org_nested.commit()
