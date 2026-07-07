@@ -10,6 +10,7 @@ from app.modules.account.api import router as account_router
 from app.modules.advertising.api import router as advertising_router
 from app.modules.ai_assistant.api.router import router as ai_assistant_router
 from app.modules.ai_assistant.api.router import usage_router as ai_usage_router
+from app.modules.ai_ops.api import router as ai_ops_router
 from app.modules.ai_settings.api import router as ai_settings_router
 from app.modules.analytics.api.partner_router import router as analytics_partner_router
 from app.modules.auth.api import router as auth_router
@@ -95,6 +96,7 @@ def register_routes(app: FastAPI) -> None:
     api.include_router(ai_usage_router)
     api.include_router(ai_workforce_router)
     api.include_router(ai_settings_router.admin_router)
+    api.include_router(ai_ops_router.admin_router)
     api.include_router(platform_settings_router.public_router)
     api.include_router(platform_settings_router.admin_router)
     api.include_router(locations_router)
