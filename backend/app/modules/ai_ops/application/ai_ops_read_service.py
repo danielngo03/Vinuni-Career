@@ -89,14 +89,21 @@ def _today_start() -> datetime:
 
 async def overview(
     db: AsyncSession,
-    range_days: int = 7,  # noqa: ARG001 — reserved for future "today vs N-day context"
+    range_days: int = 7,
 ) -> dict[str, Any]:
-    """Return high-level platform AI health: spend today, budget, error rate, requests."""
+    """Return high-level platform AI health: spend, budget, error rate, requests.
+
+    ``range_days`` controls the aggregation window: ``1`` = today only,
+    ``7`` = last 7 days, etc.  The window always starts at midnight UTC
+    ``range_days`` ago (inclusive) through the end of today.
+    """
+
+    window_start = _range_start(range_days)
 
     async def _spend_today() -> float:
         result = await db.execute(
             select(func.coalesce(func.sum(AiUsageDaily.cost_usd), 0.0)).where(
-                AiUsageDaily.day >= _today_start()
+                AiUsageDaily.day >= window_start
             )
         )
         return float(result.scalar_one())
@@ -104,7 +111,7 @@ async def overview(
     async def _requests_today() -> int:
         result = await db.execute(
             select(func.coalesce(func.sum(AiUsageDaily.requests), 0)).where(
-                AiUsageDaily.day >= _today_start()
+                AiUsageDaily.day >= window_start
             )
         )
         return int(result.scalar_one())
@@ -112,7 +119,7 @@ async def overview(
     async def _errors_today() -> int:
         result = await db.execute(
             select(func.coalesce(func.sum(AiUsageDaily.errors), 0)).where(
-                AiUsageDaily.day >= _today_start()
+                AiUsageDaily.day >= window_start
             )
         )
         return int(result.scalar_one())
@@ -126,7 +133,7 @@ async def overview(
         result = await db.execute(
             select(AiOpsEvent.latency_ms)
             .where(
-                AiOpsEvent.created_at >= _today_start(),
+                AiOpsEvent.created_at >= window_start,
                 AiOpsEvent.latency_ms.is_not(None),
             )
             .order_by(AiOpsEvent.latency_ms)
@@ -505,6 +512,7 @@ async def events(
                 # SQLAlchemy Numeric returns Decimal at runtime; convert explicitly.
                 "cost_usd": float(cost) if cost is not None else None,
                 "unpriced": row.unpriced,
+                "langfuse_trace_id": row.langfuse_trace_id,
             })
 
         return {"items": items, "next_cursor": next_cursor}

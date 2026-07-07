@@ -1,4 +1,5 @@
 import { api } from "./client";
+import type { ApiListEnvelope } from "./types";
 
 /* -------------------------------------------------------------------------- */
 /* Shared range + group_by vocabulary                                         */
@@ -7,27 +8,30 @@ import { api } from "./client";
 export type AiOpsRange = "today" | "7d" | "30d";
 export type AiOpsGroupBy = "feature" | "model" | "provider";
 
+/** Map the UI range token to the integer the backend expects for `range_days`. */
+function rangeToDays(range: AiOpsRange): number {
+  if (range === "today") return 1;
+  if (range === "7d") return 7;
+  return 30;
+}
+
 /* -------------------------------------------------------------------------- */
 /* Overview                                                                   */
 /* -------------------------------------------------------------------------- */
 
 /**
- * Response for `GET /admin/ai-ops/overview`. All monetary values are USD as
- * decimal strings; counts are integers; error_rate is a 0–1 float.
- * Provider/model identity is never exposed at this level.
+ * Response for `GET /admin/ai-ops/overview`.
+ * Real backend fields — provider/model identity is never exposed at this level.
+ *
+ * spend_today / budget are numbers (float/int), NOT strings.
+ * p95_latency_ms is null when no events exist in the window.
  */
 export interface AiOpsOverview {
-  spend_today: string;
-  budget: string;
+  spend_today: number;
+  budget: number;
   error_rate: number;
   requests: number;
-  /** Total completion tokens consumed in the range. */
-  total_tokens: number;
-  /** Average latency across all AI calls in ms. */
-  avg_latency_ms: number;
-  /** p95 latency across all AI calls in ms. Null when no events exist. */
   p95_latency_ms: number | null;
-  updated_at: string | null;
 }
 
 /* -------------------------------------------------------------------------- */
@@ -35,75 +39,59 @@ export interface AiOpsOverview {
 /* -------------------------------------------------------------------------- */
 
 /**
- * One row from `GET /admin/ai-ops/spend`. `provider` and `model` are `null`
- * when the identity is masked (operator-defined secrecy policy).
+ * One row from `GET /admin/ai-ops/spend`.
+ * Real backend fields (bare list inside `data` envelope).
+ * `provider` and `model` are `null` when identity is masked.
+ * `day` is an ISO date string or `null` for grouped (non-day-grain) rows.
  */
 export interface AiOpsSpendRow {
-  ts: string;
-  /** Grouping key: feature slug, alias name, or provider name — never raw ids. */
-  group: string;
-  cost_usd: string;
-  requests: number;
+  day: string | null;
+  task_type: string | null;
   provider: string | null;
   model: string | null;
-}
-
-export interface AiOpsSpendResponse {
-  range: AiOpsRange;
-  group_by: AiOpsGroupBy;
-  rows: AiOpsSpendRow[];
+  cost_usd: number;
+  requests: number;
+  errors: number;
 }
 
 /* -------------------------------------------------------------------------- */
 /* Reliability                                                                */
 /* -------------------------------------------------------------------------- */
 
-export interface AiOpsCircuitState {
-  alias: string;
-  state: "closed" | "open" | "half_open";
-  failures: number;
-  last_failure_at: string | null;
-}
-
-export interface AiOpsReliabilityRow {
-  group: string;
+/**
+ * `circuit_states` from `GET /admin/ai-ops/reliability` is an object map
+ * `{ [key: string]: CircuitStateValue }` — NOT an array.
+ * Keys are either real provider names (with identity grant) or positional
+ * placeholders (`"provider_1"`, …) when masked.
+ * `get_circuit_state()` in the gateway returns the raw Python dict stored in
+ * `_circuit_states`; the shape is whatever the factory stores (typically a
+ * simple string state or a richer struct — we accept `unknown` and render
+ * defensively).
+ */
+export interface AiOpsReliability {
+  requests: number;
+  errors: number;
+  fallbacks: number;
   error_rate: number;
   fallback_rate: number;
-  /** p50 latency in ms. */
-  p50_ms: number;
-  /** p95 latency in ms. */
-  p95_ms: number;
-  /** p99 latency in ms. */
-  p99_ms: number;
-  provider: string | null;
-  model: string | null;
-}
-
-export interface AiOpsReliabilityResponse {
-  range: AiOpsRange;
-  group_by: AiOpsGroupBy;
-  rows: AiOpsReliabilityRow[];
-  circuit_states: AiOpsCircuitState[];
+  circuit_states: Record<string, unknown>;
 }
 
 /* -------------------------------------------------------------------------- */
 /* Volume                                                                     */
 /* -------------------------------------------------------------------------- */
 
+/**
+ * One row from `GET /admin/ai-ops/volume`.
+ * Real backend fields (bare list inside `data` envelope).
+ * `day` is ISO date or null for grouped rows.
+ */
 export interface AiOpsVolumeRow {
-  ts: string;
-  group: string;
+  day: string | null;
+  task_type: string | null;
   requests: number;
   prompt_tokens: number;
   completion_tokens: number;
-  provider: string | null;
-  model: string | null;
-}
-
-export interface AiOpsVolumeResponse {
-  range: AiOpsRange;
-  group_by: AiOpsGroupBy;
-  rows: AiOpsVolumeRow[];
 }
 
 /* -------------------------------------------------------------------------- */
@@ -118,9 +106,11 @@ export type AiOpsEventStatus =
   | "timeout";
 
 /**
- * One row from `GET /admin/ai-ops/events`. Cursor-paginated.
+ * One row from `GET /admin/ai-ops/events`. Cursor-paginated via `paginated()`.
  * `provider` and `model` are `null` when masked by secrecy policy.
- * `langfuse_trace_id` is `null` when observability is disabled.
+ * `langfuse_trace_id` is `null` when observability is disabled or not set.
+ * `cost_usd` is a number or null (not a string).
+ * `prompt_tokens` / `completion_tokens` / `latency_ms` may be null.
  */
 export interface AiOpsEvent {
   id: string;
@@ -129,27 +119,29 @@ export interface AiOpsEvent {
   alias: string;
   provider: string | null;
   model: string | null;
-  prompt_tokens: number;
-  completion_tokens: number;
-  latency_ms: number;
-  cost_usd: string;
+  prompt_tokens: number | null;
+  completion_tokens: number | null;
+  latency_ms: number | null;
+  cost_usd: number | null;
   status: AiOpsEventStatus;
+  fallback_used: boolean;
+  circuit_open: boolean;
+  unpriced: boolean;
   langfuse_trace_id: string | null;
 }
 
 export interface AiOpsEventsParams {
   cursor?: string;
   range?: AiOpsRange;
-  alias?: string;
   status?: AiOpsEventStatus;
   task_type?: string;
   limit?: number;
 }
 
-export interface AiOpsEventsResponse {
-  data: AiOpsEvent[];
+/** The unwrapped events list envelope — items + pagination cursor. */
+export interface AiOpsEventsPage {
+  items: AiOpsEvent[];
   next_cursor: string | null;
-  limit: number;
 }
 
 /* -------------------------------------------------------------------------- */
@@ -158,35 +150,35 @@ export interface AiOpsEventsResponse {
 
 /**
  * One token-price row managed by the admin (`GET /admin/ai-ops/prices`).
- * Prices are stored as cost per 1 000 tokens in USD.
+ * Real backend fields from `pricing_admin_service._row_snapshot`.
+ * Prices are cost per 1 000 tokens in USD (numbers, not strings at rest,
+ * but Pydantic/JSON serialises Numeric as float).
  */
 export interface AiOpsPrice {
   id: string;
-  alias: string;
-  prompt_cost_per_1k: string;
-  completion_cost_per_1k: string;
-  effective_from: string;
-  effective_until: string | null;
-  notes: string | null;
-  created_at: string;
-  updated_at: string | null;
+  provider: string;
+  model: string;
+  input_usd_per_1k: number;
+  output_usd_per_1k: number;
+  active: boolean;
+  updated_by: string | null;
+  updated_at: string;
 }
 
 export interface AiOpsPriceCreateBody {
-  alias: string;
-  prompt_cost_per_1k: string;
-  completion_cost_per_1k: string;
-  effective_from: string;
-  effective_until?: string;
-  notes?: string;
+  provider: string;
+  model: string;
+  input_usd_per_1k: number;
+  output_usd_per_1k: number;
+  active?: boolean;
 }
 
 export interface AiOpsPriceUpdateBody {
-  prompt_cost_per_1k?: string;
-  completion_cost_per_1k?: string;
-  effective_from?: string;
-  effective_until?: string | null;
-  notes?: string | null;
+  provider?: string;
+  model?: string;
+  input_usd_per_1k?: number;
+  output_usd_per_1k?: number;
+  active?: boolean;
 }
 
 /* -------------------------------------------------------------------------- */
@@ -194,18 +186,30 @@ export interface AiOpsPriceUpdateBody {
 /* -------------------------------------------------------------------------- */
 
 /**
- * Response for `GET /admin/overview`. Gives a cross-domain health snapshot
- * for the super-admin landing surface.
+ * Response for `GET /admin/overview`.
+ * Real backend fields from `platform_overview.platform_overview()`.
+ *
+ * `ai` sub-section is the `overview()` result (spend_today, budget, etc.).
+ * `outbox` sub-section comes from `dispatch_service.status_counts()` plus
+ * `oldest_pending_age_seconds` and `retry_scheduled`. The `failed` key is the
+ * cumulative failed count — there is no `failed_last_hour` key.
  */
 export interface AdminPlatformOverview {
   ai: {
-    spend_today: string;
+    spend_today: number;
+    budget: number;
     error_rate: number;
     requests: number;
+    p95_latency_ms: number | null;
   };
   outbox: {
     pending: number;
-    failed_last_hour: number;
+    sent: number;
+    failed: number;
+    skipped: number;
+    dead: number;
+    oldest_pending_age_seconds: number | null;
+    retry_scheduled: number;
   };
   moderation_pending: number;
   active_users: number;
@@ -218,57 +222,71 @@ export interface AdminPlatformOverview {
 export const aiOpsApi = {
   /**
    * Aggregate platform AI health for the given range.
-   * `GET /admin/ai-ops/overview?range=<range>`
+   * `GET /admin/ai-ops/overview?range_days=<N>`
+   * Backend param is `range_days: int`, not a `range` string.
    */
   overview(range: AiOpsRange): Promise<AiOpsOverview> {
     return api.get<AiOpsOverview>("/admin/ai-ops/overview", {
-      query: { range },
+      query: { range_days: rangeToDays(range) },
     });
   },
 
   /**
-   * Cost distribution time-series grouped by feature, model, or provider.
-   * `GET /admin/ai-ops/spend?range=<range>&group_by=<groupBy>`
-   * NOTE: `group_by` is snake_case as the backend expects it.
+   * Cost distribution breakdown.
+   * `GET /admin/ai-ops/spend?range_days=<N>&group_by=<groupBy>`
+   * Returns a bare list (unwrapped from `success({data: []})` by `api.get`).
    */
-  spend(range: AiOpsRange, groupBy: AiOpsGroupBy): Promise<AiOpsSpendResponse> {
-    return api.get<AiOpsSpendResponse>("/admin/ai-ops/spend", {
-      query: { range, group_by: groupBy },
+  spend(range: AiOpsRange, groupBy: AiOpsGroupBy): Promise<AiOpsSpendRow[]> {
+    return api.get<AiOpsSpendRow[]>("/admin/ai-ops/spend", {
+      query: { range_days: rangeToDays(range), group_by: groupBy },
     });
   },
 
   /**
-   * Error/fallback rates, latency percentiles, and circuit-breaker states.
-   * `GET /admin/ai-ops/reliability?range=<range>&group_by=<groupBy>`
+   * Error/fallback rates and circuit-breaker states.
+   * `GET /admin/ai-ops/reliability?range_days=<N>&group_by=<groupBy>`
+   * Returns a dict (NOT rows array).
    */
   reliability(
     range: AiOpsRange,
     groupBy: AiOpsGroupBy,
-  ): Promise<AiOpsReliabilityResponse> {
-    return api.get<AiOpsReliabilityResponse>("/admin/ai-ops/reliability", {
-      query: { range, group_by: groupBy },
+  ): Promise<AiOpsReliability> {
+    return api.get<AiOpsReliability>("/admin/ai-ops/reliability", {
+      query: { range_days: rangeToDays(range), group_by: groupBy },
     });
   },
 
   /**
-   * Request and token volume time-series.
-   * `GET /admin/ai-ops/volume?range=<range>&group_by=<groupBy>`
+   * Request and token volume breakdown.
+   * `GET /admin/ai-ops/volume?range_days=<N>&group_by=<groupBy>`
+   * Returns a bare list.
    */
-  volume(range: AiOpsRange, groupBy: AiOpsGroupBy): Promise<AiOpsVolumeResponse> {
-    return api.get<AiOpsVolumeResponse>("/admin/ai-ops/volume", {
-      query: { range, group_by: groupBy },
+  volume(range: AiOpsRange, groupBy: AiOpsGroupBy): Promise<AiOpsVolumeRow[]> {
+    return api.get<AiOpsVolumeRow[]>("/admin/ai-ops/volume", {
+      query: { range_days: rangeToDays(range), group_by: groupBy },
     });
   },
 
   /**
    * Cursor-paginated raw AI call events.
-   * `GET /admin/ai-ops/events?cursor=&range=&alias=&status=&task_type=&limit=`
+   * `GET /admin/ai-ops/events?cursor=&status=&task_type=&limit=`
+   * Uses `api.list` to get the full `paginated()` envelope:
+   *   `{ data: AiOpsEvent[], page: { next_cursor, limit } }`.
+   *
+   * Note: `range` is NOT a backend param. The backend filters by cursor/status/task_type only.
    */
-  events(params: AiOpsEventsParams = {}): Promise<AiOpsEventsResponse> {
-    const { cursor, range, alias, status, task_type, limit } = params;
-    return api.get<AiOpsEventsResponse>("/admin/ai-ops/events", {
-      query: { cursor, range, alias, status, task_type, limit },
-    });
+  async events(params: AiOpsEventsParams = {}): Promise<AiOpsEventsPage> {
+    const { cursor, status, task_type, limit } = params;
+    const envelope: ApiListEnvelope<AiOpsEvent> = await api.list<AiOpsEvent>(
+      "/admin/ai-ops/events",
+      {
+        query: { cursor, status, task_type, limit },
+      },
+    );
+    return {
+      items: envelope.data,
+      next_cursor: envelope.page.next_cursor,
+    };
   },
 
   /**

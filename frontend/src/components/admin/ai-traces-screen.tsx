@@ -133,7 +133,7 @@ function TraceDetailSheet({
             className="font-mono tabular-nums"
             style={{ fontFamily: "'JetBrains Mono', ui-monospace, monospace" }}
           >
-            {event.prompt_tokens.toLocaleString()}
+            {event.prompt_tokens != null ? event.prompt_tokens.toLocaleString() : "—"}
           </span>
         </DetailRow>
 
@@ -142,7 +142,7 @@ function TraceDetailSheet({
             className="font-mono tabular-nums"
             style={{ fontFamily: "'JetBrains Mono', ui-monospace, monospace" }}
           >
-            {event.completion_tokens.toLocaleString()}
+            {event.completion_tokens != null ? event.completion_tokens.toLocaleString() : "—"}
           </span>
         </DetailRow>
 
@@ -151,7 +151,9 @@ function TraceDetailSheet({
             className="font-mono tabular-nums"
             style={{ fontFamily: "'JetBrains Mono', ui-monospace, monospace" }}
           >
-            {(event.prompt_tokens + event.completion_tokens).toLocaleString()}
+            {event.prompt_tokens != null && event.completion_tokens != null
+              ? (event.prompt_tokens + event.completion_tokens).toLocaleString()
+              : "—"}
           </span>
         </DetailRow>
 
@@ -160,7 +162,7 @@ function TraceDetailSheet({
             className="font-mono tabular-nums"
             style={{ fontFamily: "'JetBrains Mono', ui-monospace, monospace" }}
           >
-            {formatUsd(event.cost_usd)}
+            {formatUsd(event.cost_usd ?? NaN)}
           </span>
         </DetailRow>
 
@@ -169,7 +171,7 @@ function TraceDetailSheet({
             className="font-mono tabular-nums"
             style={{ fontFamily: "'JetBrains Mono', ui-monospace, monospace" }}
           >
-            {formatLatency(event.latency_ms)}
+            {formatLatency(event.latency_ms ?? NaN)}
           </span>
         </DetailRow>
 
@@ -252,21 +254,23 @@ export function AiTracesScreen({ range }: { range: AiOpsRange }) {
 
   const query = useQuery({
     queryKey: ["ai-ops", "events", effectiveRange, cursor] as const,
+    // Note: `range` is NOT a backend param — events are not range-filtered server-side.
+    // We reset local state when the UI range changes so only the cursor/status/task_type filters apply.
     queryFn: () =>
-      aiOpsApi.events({ range: effectiveRange, cursor, limit: 50 }),
+      aiOpsApi.events({ cursor, limit: 50 }),
     staleTime: 30_000,
     retry: 1,
   });
 
-  // Sync allEvents after each successful fetch
+  // query.data is AiOpsEventsPage: { items, next_cursor }
   const syncedEvents = (() => {
     if (!query.data) return allEvents;
     if (isRangeChanged || !cursor) {
-      return query.data.data;
+      return query.data.items;
     }
     // Append new page (dedup by id)
     const existing = new Set(allEvents.map((e) => e.id));
-    const fresh = query.data.data.filter((e) => !existing.has(e.id));
+    const fresh = query.data.items.filter((e) => !existing.has(e.id));
     return [...allEvents, ...fresh];
   })();
 
@@ -288,10 +292,9 @@ export function AiTracesScreen({ range }: { range: AiOpsRange }) {
     void qc.invalidateQueries({ queryKey: ["ai-ops", "events"] });
   }, [effectiveRange, qc]);
 
-  // If range changed since last load, trigger reset on next render cycle
-  // We use a stable reference pattern: only reset when range actually changes
+  // If range changed since last load, show only the fresh page until reset completes
   const eventsToShow: AiOpsEvent[] =
-    isRangeChanged && query.data ? query.data.data : syncedEvents;
+    isRangeChanged && query.data ? query.data.items : syncedEvents;
 
   const columns: Column<AiOpsEvent>[] = [
     {
@@ -341,7 +344,9 @@ export function AiTracesScreen({ range }: { range: AiOpsRange }) {
           className="font-mono text-xs tabular-nums text-[var(--text-secondary)]"
           style={{ fontFamily: "'JetBrains Mono', ui-monospace, monospace" }}
         >
-          {(row.prompt_tokens + row.completion_tokens).toLocaleString()}
+          {row.prompt_tokens != null && row.completion_tokens != null
+            ? (row.prompt_tokens + row.completion_tokens).toLocaleString()
+            : "—"}
         </span>
       ),
     },
@@ -354,7 +359,7 @@ export function AiTracesScreen({ range }: { range: AiOpsRange }) {
           className="font-mono text-xs tabular-nums text-[var(--text-secondary)]"
           style={{ fontFamily: "'JetBrains Mono', ui-monospace, monospace" }}
         >
-          {formatUsd(row.cost_usd)}
+          {formatUsd(row.cost_usd ?? NaN)}
         </span>
       ),
     },
@@ -367,7 +372,7 @@ export function AiTracesScreen({ range }: { range: AiOpsRange }) {
           className="font-mono text-xs tabular-nums text-[var(--text-secondary)]"
           style={{ fontFamily: "'JetBrains Mono', ui-monospace, monospace" }}
         >
-          {formatLatency(row.latency_ms)}
+          {formatLatency(row.latency_ms ?? NaN)}
         </span>
       ),
     },

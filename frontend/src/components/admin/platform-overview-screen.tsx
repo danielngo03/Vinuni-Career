@@ -116,18 +116,19 @@ function StatusBandSkeleton() {
 
 function OutboxHealthRow({
   pending,
-  failedLastHour,
+  failed,
 }: {
   pending: number;
-  failedLastHour: number;
+  /** Cumulative failed count from the outbox (backend key: `failed`, not `failed_last_hour`). */
+  failed: number;
 }) {
   const t = useTranslations("adminConsole.overview.outbox");
-  const tone = outboxTone(pending, failedLastHour);
+  const tone = outboxTone(pending, failed);
   const statusTone = outboxToneToStatusTone(tone);
 
   const detail =
-    failedLastHour > 0
-      ? t("failed", { count: failedLastHour })
+    failed > 0
+      ? t("failed", { count: failed })
       : pending > 0
         ? t("pending", { count: pending })
         : t("healthy");
@@ -320,16 +321,18 @@ export function PlatformOverviewScreen() {
     }
 
     const data = query.data;
-    const aiSpend = data.ai.spend_today ?? "0";
+    // spend_today and budget are numbers from the real backend (not strings)
+    const aiSpend = data.ai.spend_today ?? 0;
     const aiErrorRate = data.ai.error_rate ?? 0;
     const aiRequests = data.ai.requests ?? 0;
     const moderationPending = data.moderation_pending ?? 0;
     const activeUsers = data.active_users ?? 0;
     const outboxPending = data.outbox.pending ?? 0;
-    const outboxFailed = data.outbox.failed_last_hour ?? 0;
+    // The backend returns `failed` (cumulative), not `failed_last_hour`
+    const outboxFailed = data.outbox.failed ?? 0;
 
-    // Determine tile tones
-    const spendToneRaw = budgetTone(aiSpend, "0"); // no budget in overview — default teal
+    // Determine tile tones (no per-day budget on platform overview — default teal)
+    const spendToneRaw = budgetTone(aiSpend, 0);
     const spendTile =
       spendToneRaw === "red"
         ? "danger"
@@ -378,7 +381,7 @@ export function PlatformOverviewScreen() {
         {/* Outbox health */}
         <OutboxHealthRow
           pending={outboxPending}
-          failedLastHour={outboxFailed}
+          failed={outboxFailed}
         />
       </div>
     );

@@ -37,39 +37,36 @@ function isValidCost(s: string): boolean {
 /* -------------------------------------------------------------------------- */
 
 interface PriceFormState {
-  alias: string;
-  prompt_cost_per_1k: string;
-  completion_cost_per_1k: string;
-  effective_from: string;
-  effective_until: string;
-  notes: string;
+  provider: string;
+  model: string;
+  input_usd_per_1k: string;
+  output_usd_per_1k: string;
+  active: boolean;
 }
 
 interface PriceFormErrors {
-  alias?: string;
-  prompt_cost_per_1k?: string;
-  completion_cost_per_1k?: string;
-  effective_from?: string;
+  provider?: string;
+  model?: string;
+  input_usd_per_1k?: string;
+  output_usd_per_1k?: string;
   conflict?: string;
 }
 
 const EMPTY_FORM: PriceFormState = {
-  alias: "",
-  prompt_cost_per_1k: "",
-  completion_cost_per_1k: "",
-  effective_from: new Date().toISOString().slice(0, 10),
-  effective_until: "",
-  notes: "",
+  provider: "",
+  model: "",
+  input_usd_per_1k: "",
+  output_usd_per_1k: "",
+  active: true,
 };
 
 function priceToForm(p: AiOpsPrice): PriceFormState {
   return {
-    alias: p.alias,
-    prompt_cost_per_1k: p.prompt_cost_per_1k,
-    completion_cost_per_1k: p.completion_cost_per_1k,
-    effective_from: p.effective_from.slice(0, 10),
-    effective_until: p.effective_until ? p.effective_until.slice(0, 10) : "",
-    notes: p.notes ?? "",
+    provider: p.provider,
+    model: p.model,
+    input_usd_per_1k: String(p.input_usd_per_1k),
+    output_usd_per_1k: String(p.output_usd_per_1k),
+    active: p.active,
   };
 }
 
@@ -95,7 +92,6 @@ function PriceFormSheet({
 
   function patch(partial: Partial<PriceFormState>) {
     setForm((f) => ({ ...f, ...partial }));
-    // Clear relevant errors on change
     setErrors((e) => {
       const next = { ...e };
       for (const k of Object.keys(partial) as (keyof PriceFormState)[]) {
@@ -108,12 +104,12 @@ function PriceFormSheet({
 
   function validate(): PriceFormErrors {
     const errs: PriceFormErrors = {};
-    if (!editing && !form.alias.trim()) errs.alias = t("sheet.validationAlias");
-    if (!isValidCost(form.prompt_cost_per_1k))
-      errs.prompt_cost_per_1k = t("sheet.validationCost");
-    if (!isValidCost(form.completion_cost_per_1k))
-      errs.completion_cost_per_1k = t("sheet.validationCost");
-    if (!form.effective_from.trim()) errs.effective_from = t("sheet.validationFrom");
+    if (!editing && !form.provider.trim()) errs.provider = t("sheet.validationProvider");
+    if (!editing && !form.model.trim()) errs.model = t("sheet.validationModel");
+    if (!isValidCost(form.input_usd_per_1k))
+      errs.input_usd_per_1k = t("sheet.validationCost");
+    if (!isValidCost(form.output_usd_per_1k))
+      errs.output_usd_per_1k = t("sheet.validationCost");
     return errs;
   }
 
@@ -164,23 +160,23 @@ function PriceFormSheet({
       return;
     }
 
+    const inputCost = parseFloat(form.input_usd_per_1k);
+    const outputCost = parseFloat(form.output_usd_per_1k);
+
     if (editing) {
       const body: AiOpsPriceUpdateBody = {
-        prompt_cost_per_1k: form.prompt_cost_per_1k,
-        completion_cost_per_1k: form.completion_cost_per_1k,
-        effective_from: form.effective_from,
-        effective_until: form.effective_until || null,
-        notes: form.notes || null,
+        input_usd_per_1k: inputCost,
+        output_usd_per_1k: outputCost,
+        active: form.active,
       };
       updateMutation.mutate({ id: editing.id, body });
     } else {
       const body: AiOpsPriceCreateBody = {
-        alias: form.alias.trim(),
-        prompt_cost_per_1k: form.prompt_cost_per_1k,
-        completion_cost_per_1k: form.completion_cost_per_1k,
-        effective_from: form.effective_from,
-        ...(form.effective_until ? { effective_until: form.effective_until } : {}),
-        ...(form.notes ? { notes: form.notes } : {}),
+        provider: form.provider.trim(),
+        model: form.model.trim(),
+        input_usd_per_1k: inputCost,
+        output_usd_per_1k: outputCost,
+        active: form.active,
       };
       createMutation.mutate(body);
     }
@@ -196,85 +192,99 @@ function PriceFormSheet({
       closeLabel={t("sheet.cancel")}
     >
       <form onSubmit={handleSubmit} className="space-y-4" noValidate>
-        {/* Alias — read-only when editing */}
+        {/* Provider — read-only when editing */}
         {editing ? (
           <div>
             <span className="block text-[0.6875rem] font-semibold uppercase tracking-wide text-[var(--text-muted)] mb-1">
-              {t("sheet.labelAlias")}
+              {t("sheet.labelProvider")}
             </span>
             <span
               className="font-mono text-sm text-[var(--text-primary)]"
               style={{ fontFamily: "'JetBrains Mono', ui-monospace, monospace" }}
             >
-              {editing.alias}
+              {editing.provider}
             </span>
           </div>
         ) : (
           <Input
-            id="price-alias"
-            label={t("sheet.labelAlias")}
-            value={form.alias}
-            onChange={(e) => patch({ alias: e.target.value })}
-            error={errors.alias}
-            help={t("sheet.labelAliasHelp")}
-            placeholder="e.g. chat_cheap"
+            id="price-provider"
+            label={t("sheet.labelProvider")}
+            value={form.provider}
+            onChange={(e) => patch({ provider: e.target.value })}
+            error={errors.provider}
+            help={t("sheet.labelProviderHelp")}
+            placeholder="e.g. openrouter"
+            required
+          />
+        )}
+
+        {/* Model — read-only when editing */}
+        {editing ? (
+          <div>
+            <span className="block text-[0.6875rem] font-semibold uppercase tracking-wide text-[var(--text-muted)] mb-1">
+              {t("sheet.labelModel")}
+            </span>
+            <span
+              className="font-mono text-sm text-[var(--text-primary)]"
+              style={{ fontFamily: "'JetBrains Mono', ui-monospace, monospace" }}
+            >
+              {editing.model}
+            </span>
+          </div>
+        ) : (
+          <Input
+            id="price-model"
+            label={t("sheet.labelModel")}
+            value={form.model}
+            onChange={(e) => patch({ model: e.target.value })}
+            error={errors.model}
+            help={t("sheet.labelModelHelp")}
+            placeholder="e.g. deepseek/deepseek-v3"
             required
           />
         )}
 
         <Input
-          id="price-prompt-cost"
+          id="price-input-cost"
           type="number"
           inputMode="decimal"
           min={0}
           step="any"
-          label={t("sheet.labelPromptCost")}
-          value={form.prompt_cost_per_1k}
-          onChange={(e) => patch({ prompt_cost_per_1k: e.target.value })}
-          error={errors.prompt_cost_per_1k}
+          label={t("sheet.labelInputCost")}
+          value={form.input_usd_per_1k}
+          onChange={(e) => patch({ input_usd_per_1k: e.target.value })}
+          error={errors.input_usd_per_1k}
           placeholder="0.0015"
           required
         />
 
         <Input
-          id="price-completion-cost"
+          id="price-output-cost"
           type="number"
           inputMode="decimal"
           min={0}
           step="any"
-          label={t("sheet.labelCompletionCost")}
-          value={form.completion_cost_per_1k}
-          onChange={(e) => patch({ completion_cost_per_1k: e.target.value })}
-          error={errors.completion_cost_per_1k}
+          label={t("sheet.labelOutputCost")}
+          value={form.output_usd_per_1k}
+          onChange={(e) => patch({ output_usd_per_1k: e.target.value })}
+          error={errors.output_usd_per_1k}
           placeholder="0.0020"
           required
         />
 
-        <Input
-          id="price-effective-from"
-          type="date"
-          label={t("sheet.labelEffectiveFrom")}
-          value={form.effective_from}
-          onChange={(e) => patch({ effective_from: e.target.value })}
-          error={errors.effective_from}
-          required
-        />
-
-        <Input
-          id="price-effective-until"
-          type="date"
-          label={t("sheet.labelEffectiveUntil")}
-          value={form.effective_until}
-          onChange={(e) => patch({ effective_until: e.target.value })}
-        />
-
-        <Input
-          id="price-notes"
-          label={t("sheet.labelNotes")}
-          value={form.notes}
-          onChange={(e) => patch({ notes: e.target.value })}
-          placeholder=""
-        />
+        {/* Active toggle */}
+        <div className="flex items-center gap-3">
+          <input
+            id="price-active"
+            type="checkbox"
+            checked={form.active}
+            onChange={(e) => patch({ active: e.target.checked })}
+            className="size-4 rounded border-[var(--border-default)] text-[var(--brand-primary)] focus:ring-[var(--brand-primary)]/50"
+          />
+          <label htmlFor="price-active" className="text-sm text-[var(--text-primary)]">
+            {t("sheet.labelActive")}
+          </label>
+        </div>
 
         {errors.conflict && (
           <div className="flex items-start gap-2 rounded-xl bg-[var(--red-50)] px-3 py-2.5 text-sm text-[var(--brand-red)]">
@@ -302,26 +312,6 @@ function PriceFormSheet({
 }
 
 /* -------------------------------------------------------------------------- */
-/* Unpriced aliases banner                                                    */
-/* -------------------------------------------------------------------------- */
-
-function UnpricedBanner({
-  aliases,
-  label,
-}: {
-  aliases: string[];
-  label: string;
-}) {
-  if (aliases.length === 0) return null;
-  return (
-    <div className="mb-4 flex items-start gap-2 rounded-xl border border-[var(--amber-400)]/40 bg-[var(--amber-50)] px-4 py-3 text-sm text-[var(--amber-700)]">
-      <Warning aria-hidden weight="fill" className="size-4 mt-0.5 shrink-0 text-[var(--amber-600)]" />
-      <p>{label.replace("{aliases}", aliases.join(", "))}</p>
-    </div>
-  );
-}
-
-/* -------------------------------------------------------------------------- */
 /* Main pricing screen                                                        */
 /* -------------------------------------------------------------------------- */
 
@@ -339,85 +329,80 @@ export function AiPricingScreen() {
     retry: 1,
   });
 
-  // Load recent events to detect unpriced aliases (nice-to-have; non-blocking)
-  const eventsQuery = useQuery({
-    queryKey: ["ai-ops", "events", "today", undefined] as const,
-    queryFn: () => aiOpsApi.events({ range: "today", limit: 200 }),
-    staleTime: 60_000,
-    retry: 0,
-  });
-
   const priceRows = pricesQuery.data ?? [];
-  const pricedAliases = new Set(priceRows.map((p) => p.alias));
-
-  // Collect aliases with usage but no price row
-  const unpricedAliases: string[] = (() => {
-    if (!eventsQuery.data) return [];
-    const seen = new Set<string>();
-    const unpriced: string[] = [];
-    for (const ev of eventsQuery.data.data) {
-      if (!pricedAliases.has(ev.alias) && !seen.has(ev.alias)) {
-        seen.add(ev.alias);
-        unpriced.push(ev.alias);
-      }
-    }
-    return unpriced;
-  })();
 
   const columns: Column<AiOpsPrice>[] = [
     {
-      key: "alias",
-      header: t("col.alias"),
+      key: "provider",
+      header: t("col.provider"),
       cell: (row) => (
         <span
           className="font-mono text-xs font-semibold text-[var(--text-primary)]"
           style={{ fontFamily: "'JetBrains Mono', ui-monospace, monospace" }}
         >
-          {row.alias}
+          {row.provider}
         </span>
       ),
     },
     {
-      key: "prompt_cost_per_1k",
-      header: t("col.promptCost"),
+      key: "model",
+      header: t("col.model"),
+      cell: (row) => (
+        <span
+          className="font-mono text-xs text-[var(--text-secondary)]"
+          style={{ fontFamily: "'JetBrains Mono', ui-monospace, monospace" }}
+        >
+          {row.model}
+        </span>
+      ),
+    },
+    {
+      key: "input_usd_per_1k",
+      header: t("col.inputCost"),
       align: "right",
       cell: (row) => (
         <span
           className="font-mono text-xs tabular-nums text-[var(--text-secondary)]"
           style={{ fontFamily: "'JetBrains Mono', ui-monospace, monospace" }}
         >
-          {formatUsd(row.prompt_cost_per_1k)}
+          {formatUsd(row.input_usd_per_1k)}
         </span>
       ),
     },
     {
-      key: "completion_cost_per_1k",
-      header: t("col.completionCost"),
+      key: "output_usd_per_1k",
+      header: t("col.outputCost"),
       align: "right",
       cell: (row) => (
         <span
           className="font-mono text-xs tabular-nums text-[var(--text-secondary)]"
           style={{ fontFamily: "'JetBrains Mono', ui-monospace, monospace" }}
         >
-          {formatUsd(row.completion_cost_per_1k)}
+          {formatUsd(row.output_usd_per_1k)}
         </span>
       ),
     },
     {
-      key: "effective_from",
-      header: t("col.effectiveFrom"),
+      key: "active",
+      header: t("col.active"),
       cell: (row) => (
-        <span className="text-xs text-[var(--text-secondary)]">
-          {row.effective_from.slice(0, 10)}
+        <span
+          className={
+            row.active
+              ? "text-xs font-semibold text-[var(--green-700)]"
+              : "text-xs text-[var(--text-muted)]"
+          }
+        >
+          {row.active ? t("activeYes") : t("activeNo")}
         </span>
       ),
     },
     {
-      key: "effective_until",
-      header: t("col.effectiveUntil"),
+      key: "updated_at",
+      header: t("col.updatedAt"),
       cell: (row) => (
         <span className="text-xs text-[var(--text-muted)]">
-          {row.effective_until ? row.effective_until.slice(0, 10) : "—"}
+          {row.updated_at.slice(0, 10)}
         </span>
       ),
     },
@@ -434,7 +419,7 @@ export function AiPricingScreen() {
             setSheetOpen(true);
           }}
           className="inline-flex items-center gap-1 rounded-lg px-2 py-1 text-xs font-semibold text-[var(--text-secondary)] transition-colors hover:bg-[var(--bg-subtle)] hover:text-[var(--text-primary)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)]/50"
-          aria-label={`${t("editAction")} ${row.alias}`}
+          aria-label={`${t("editAction")} ${row.provider}/${row.model}`}
         >
           <PencilSimple aria-hidden weight="bold" className="size-3.5" />
           {t("editAction")}
@@ -488,11 +473,6 @@ export function AiPricingScreen() {
     <>
       <div className="marketplace-card rounded-[12px] p-5">
         <PanelHeader title={t("panelTitle")} onAdd={handleAddClick} addLabel={t("addPrice")} />
-
-        <UnpricedBanner
-          aliases={unpricedAliases}
-          label={t("unpricedBanner")}
-        />
 
         <DataTable
           columns={columns}

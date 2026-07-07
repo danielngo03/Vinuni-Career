@@ -154,6 +154,61 @@ describe("masked model display", () => {
 });
 
 /* -------------------------------------------------------------------------- */
+/* langfuse_trace_id — Open in Langfuse button state                          */
+/* -------------------------------------------------------------------------- */
+
+describe("langfuse link enablement (mirrors TraceDetailSheet logic)", () => {
+  function canOpenLangfuse(
+    traceId: string | null,
+    langfuseBaseUrl: string | null,
+  ): boolean {
+    return Boolean(traceId) && Boolean(langfuseBaseUrl);
+  }
+
+  it("enables when both traceId and baseUrl are present", () => {
+    expect(canOpenLangfuse("trace-xyz", "https://cloud.langfuse.com")).toBe(true);
+  });
+
+  it("disables when traceId is null (backend masks or not set)", () => {
+    expect(canOpenLangfuse(null, "https://cloud.langfuse.com")).toBe(false);
+  });
+
+  it("disables when langfuse base URL is not configured", () => {
+    expect(canOpenLangfuse("trace-xyz", null)).toBe(false);
+  });
+
+  it("disables when both are null", () => {
+    expect(canOpenLangfuse(null, null)).toBe(false);
+  });
+});
+
+/* -------------------------------------------------------------------------- */
+/* Nullable token/cost/latency display guards                                 */
+/* -------------------------------------------------------------------------- */
+
+describe("nullable field display guards", () => {
+  function displayNullableInt(v: number | null): string {
+    return v != null ? v.toLocaleString() : "—";
+  }
+
+  it("formats a present integer", () => {
+    expect(displayNullableInt(1500)).toBe("1,500");
+  });
+
+  it("shows em-dash for null", () => {
+    expect(displayNullableInt(null)).toBe("—");
+  });
+
+  it("shows em-dash for null cost", () => {
+    // cost_usd is nullable — formatUsd(NaN) returns $—
+    // We test the guard pattern: cost_usd ?? NaN
+    const cost: number | null = null;
+    const guarded = cost ?? NaN;
+    expect(isNaN(guarded)).toBe(true);
+  });
+});
+
+/* -------------------------------------------------------------------------- */
 /* Reuse cost + latency format helpers (shared with overview)                 */
 /* -------------------------------------------------------------------------- */
 

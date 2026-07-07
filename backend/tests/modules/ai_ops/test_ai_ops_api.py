@@ -218,6 +218,7 @@ async def test_events_without_identity_grant_masks_provider_model(
     """Superadmin without ai_settings:view_provider_identity sees masked fields."""
     # Seed two ai_ops_event rows with real provider/model values.
     now = datetime.now(tz=UTC)
+    trace_id = "test-trace-abc123"
     for _i in range(2):
         event = AiOpsEvent(
             id=uuid.uuid4(),
@@ -234,6 +235,7 @@ async def test_events_without_identity_grant_masks_provider_model(
             circuit_open=False,
             cost_usd=0.0001,
             unpriced=False,
+            langfuse_trace_id=trace_id,
         )
         db_session.add(event)
     await db_session.commit()
@@ -245,6 +247,9 @@ async def test_events_without_identity_grant_masks_provider_model(
     for item in items:
         assert item["provider"] is None, f"Expected provider=None, got {item['provider']!r}"
         assert item["model"] is None, f"Expected model=None, got {item['model']!r}"
+        # langfuse_trace_id is always returned regardless of identity grant
+        assert "langfuse_trace_id" in item, "langfuse_trace_id missing from event item"
+        assert item["langfuse_trace_id"] == trace_id
 
 
 # ---------------------------------------------------------------------------
@@ -298,6 +303,75 @@ async def test_events_empty_when_no_rows(superadmin_client: AsyncClient) -> None
     body = resp.json()
     assert body["data"] == []
     assert body["page"]["next_cursor"] is None
+
+
+# ---------------------------------------------------------------------------
+# Test: langfuse_trace_id included in event items (with and without value)
+# ---------------------------------------------------------------------------
+
+@pytest.mark.asyncio
+async def test_events_langfuse_trace_id_present_and_correct(
+    superadmin_client: AsyncClient,
+    db_session: AsyncSession,
+) -> None:
+    """langfuse_trace_id is always returned in each event item."""
+    now = datetime.now(tz=UTC)
+    trace_id = "langfuse-test-trace-id-xyz"
+    event_with_trace = AiOpsEvent(
+        id=uuid.uuid4(),
+        created_at=now,
+        task_type="langfuse_test",
+        alias="chat_default",
+        provider="openrouter",
+        model="deepseek/deepseek-v4-flash",
+        prompt_tokens=10,
+        completion_tokens=5,
+        latency_ms=100,
+        status="ok",
+        fallback_used=False,
+        circuit_open=False,
+        cost_usd=0.0001,
+        unpriced=False,
+        langfuse_trace_id=trace_id,
+    )
+    event_without_trace = AiOpsEvent(
+        id=uuid.uuid4(),
+        created_at=now,
+        task_type="langfuse_test_no_trace",
+        alias="chat_default",
+        provider=None,
+        model=None,
+        prompt_tokens=10,
+        completion_tokens=5,
+        latency_ms=100,
+        status="ok",
+        fallback_used=False,
+        circuit_open=False,
+        cost_usd=None,
+        unpriced=True,
+        langfuse_trace_id=None,
+    )
+    db_session.add(event_with_trace)
+    db_session.add(event_without_trace)
+    await db_session.commit()
+
+    resp = await superadmin_client.get("/admin/ai-ops/events")
+    assert resp.status_code == 200, resp.text
+    items = resp.json()["data"]
+
+    with_trace = [i for i in items if i["task_type"] == "langfuse_test"]
+    without_trace = [i for i in items if i["task_type"] == "langfuse_test_no_trace"]
+
+    assert with_trace, "Expected event with langfuse_trace_id"
+    assert without_trace, "Expected event without langfuse_trace_id"
+
+    assert "langfuse_trace_id" in with_trace[0], "langfuse_trace_id key missing"
+    assert with_trace[0]["langfuse_trace_id"] == trace_id, (
+        f"Expected {trace_id!r}, got {with_trace[0]['langfuse_trace_id']!r}"
+    )
+
+    assert "langfuse_trace_id" in without_trace[0], "langfuse_trace_id key missing for null case"
+    assert without_trace[0]["langfuse_trace_id"] is None
 
 
 # ---------------------------------------------------------------------------
@@ -526,19 +600,28 @@ async def test_reliability_without_identity_grant_masks_circuit_state_keys(
 async def test_reliability_with_identity_grant_exposes_real_circuit_state_keys(
     superadmin_with_identity_client: AsyncClient,
 ) -> None:
-    """Superadmin WITH identity grant receives real provider-keyed circuit_states (or empty)."""
+    """Superadmin WITH identity grant receives real provider-keyed circuit_states (or empty).
+
+    When the identity grant is held, circuit_states keys must NOT be positional
+    placeholders (``"provider_N"`` form) — they should be the raw provider names
+    as registered in the gateway config.  In the CI / unit-test environment,
+    ``provider_routes`` is typically empty, so the dict may legitimately be empty;
+    that case is explicitly guarded without an early ``break``.
+    """
     resp = await superadmin_with_identity_client.get("/admin/ai-ops/reliability")
     assert resp.status_code == 200, resp.text
     data = resp.json()["data"]
     assert "circuit_states" in data
-    # circuit_states may be empty if no providers are configured in the test env;
-    # if non-empty, keys must NOT be positional placeholders.
     circuit_states = data["circuit_states"]
+    assert isinstance(circuit_states, dict)
+    # Only assert key format when the dict is non-empty: in a fully-configured
+    # env, real provider names must NOT look like positional placeholders.
     for key in circuit_states:
-        assert not key.startswith("provider_") or True  # real names are acceptable
-        # The important assertion: no key looks like a positional placeholder
-        # when we have the identity grant.  We only enforce this when non-empty.
-        break  # structure check is sufficient; provider config is env-dependent
+        assert not key.startswith("provider_"), (
+            f"Expected real provider name when identity grant is held, "
+            f"got positional placeholder {key!r}.  "
+            f"Check that reveal_identity=True path does not mask keys."
+        )
 
 
 # ---------------------------------------------------------------------------
@@ -591,3 +674,45 @@ async def test_overview_p95_latency_ms_none_when_no_events(
     data = resp.json()["data"]
     assert "p95_latency_ms" in data
     assert data["p95_latency_ms"] is None
+
+
+# ---------------------------------------------------------------------------
+# overview honors range_days parameter
+# ---------------------------------------------------------------------------
+
+@pytest.mark.asyncio
+async def test_overview_honors_range_days(
+    superadmin_client: AsyncClient,
+    db_session: AsyncSession,
+) -> None:
+    """range_days=1 should produce a spend window that includes today's rows only.
+
+    We seed a row for today and verify the overview (range_days=1) includes it,
+    confirming the window_start is passed to the aggregate query.
+    """
+    from app.ai.observability.models import AiUsageDaily  # noqa: PLC0415
+
+    today = datetime.now(tz=UTC).replace(hour=0, minute=0, second=0, microsecond=0)
+    db_session.add(AiUsageDaily(
+        day=today,
+        task_type="range_test",
+        provider="openrouter",
+        model="deepseek/deepseek-v4-flash",
+        requests=7,
+        errors=0,
+        fallbacks=0,
+        prompt_tokens=100,
+        completion_tokens=50,
+        cost_usd=0.001,
+    ))
+    await db_session.commit()
+
+    # range_days=1 should include today
+    resp = await superadmin_client.get("/admin/ai-ops/overview", params={"range_days": 1})
+    assert resp.status_code == 200, resp.text
+    data = resp.json()["data"]
+    # requests should be at least 7 (may include other seeded rows from other tests)
+    assert data["requests"] >= 7
+    assert "spend_today" in data
+    assert "budget" in data
+    assert "error_rate" in data

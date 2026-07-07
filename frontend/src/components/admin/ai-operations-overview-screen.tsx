@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useCallback } from "react";
-import { useTranslations, useLocale } from "next-intl";
+import { useTranslations } from "next-intl";
 import { useQuery } from "@tanstack/react-query";
 import {
   CurrencyDollar,
@@ -21,17 +21,14 @@ import {
   Skeleton,
   SkeletonCard,
   EmptyState,
-  DataTable,
   BarSeries,
 } from "@/components/ui";
-import type { Column } from "@/components/ui";
 import {
   aiOpsApi,
   type AiOpsRange,
-  type AiOpsCircuitState,
-  type AiOpsReliabilityRow,
+  type AiOpsSpendRow,
+  type AiOpsVolumeRow,
 } from "@/lib/api/ai-ops";
-import { formatDateTime } from "@/lib/format";
 import {
   budgetTone,
   budgetBurnPct,
@@ -119,7 +116,7 @@ function PanelCard({
 }
 
 /* -------------------------------------------------------------------------- */
-/* Metric tile (custom — richer than MetricTiles for spend-specific display) */
+/* Metric tile                                                                */
 /* -------------------------------------------------------------------------- */
 
 function MetricTile({
@@ -191,13 +188,13 @@ function SpendPanel({
   unpricedLabel,
 }: {
   range: AiOpsRange;
-  budget: string;
+  budget: number;
   unpricedLabel: string;
 }) {
   const t = useTranslations("adminConsole.aiOps.spend");
   const tAiOps = useTranslations("adminConsole.aiOps");
-  const locale = useLocale();
 
+  // Spend returns a bare list from api.get
   const query = useQuery({
     queryKey: ["ai-ops", "spend", range] as const,
     queryFn: () => aiOpsApi.spend(range, "feature"),
@@ -235,40 +232,39 @@ function SpendPanel({
     );
   }
 
-  const rows = query.data?.rows ?? [];
-  const hasUnpriced = rows.some(
-    (r) => r.provider === null || r.model === null,
-  );
-
-  // Aggregate daily spend: group by date (ts prefix)
-  const dailyMap = new Map<string, number>();
+  // Real rows: AiOpsSpendRow[] — bare list
+  const rows: AiOpsSpendRow[] = query.data ?? [];
+  // When group_by=feature, day is null and task_type is the group key.
+  // Aggregate cost by task_type for the bar chart.
+  const featureMap = new Map<string, number>();
   for (const row of rows) {
-    const day = row.ts.slice(0, 10); // ISO date prefix
-    const prev = dailyMap.get(day) ?? 0;
-    dailyMap.set(day, prev + parseFloat(row.cost_usd));
+    const key = row.task_type ?? "unknown";
+    featureMap.set(key, (featureMap.get(key) ?? 0) + (row.cost_usd ?? 0));
   }
 
-  const barData: BarDataPoint[] = Array.from(dailyMap.entries())
-    .sort(([a], [b]) => a.localeCompare(b))
-    .map(([day, val]) => ({
-      label: new Intl.DateTimeFormat(locale === "vi" ? "vi-VN" : "en-US", {
-        month: "short",
-        day: "numeric",
-      }).format(new Date(day)),
+  const barData: BarDataPoint[] = Array.from(featureMap.entries())
+    .sort(([, a], [, b]) => b - a)
+    .map(([label, val]) => ({
+      label: label.slice(0, 12),
       value: Math.round(val * 10000) / 10000,
     }));
 
-  const budgetNum = parseFloat(budget);
   const totalSpend = barData.reduce((s, d) => s + d.value, 0);
-  const burnPct = budgetBurnPct(totalSpend, budgetNum);
+  const burnPct = budgetBurnPct(totalSpend, budget);
 
   const burndownNote =
-    isFinite(budgetNum) && budgetNum > 0
+    isFinite(budget) && budget > 0
       ? t("burndownLabel", {
           pct: burnPct,
-          budget: budgetNum.toFixed(2),
+          budget: budget.toFixed(2),
         })
       : null;
+
+  // Show an unpriced note when rows have masked identity (provider/model null)
+  // and non-zero cost — the admin should add a price row for those slots.
+  const hasUnpriced = rows.some(
+    (r) => r.provider === null && r.model === null && (r.cost_usd ?? 0) > 0,
+  );
 
   return (
     <PanelCard title={t("panelTitle")} icon={CurrencyDollar}>
@@ -279,7 +275,7 @@ function SpendPanel({
       )}
       <BarSeries
         data={barData}
-        referenceLine={isFinite(budgetNum) ? budgetNum : undefined}
+        referenceLine={isFinite(budget) && budget > 0 ? budget : undefined}
         format={(v) => formatUsd(v)}
         emptyLabel={t("emptyLabel")}
         ariaLabel={t("ariaLabel")}
@@ -300,14 +296,11 @@ function SpendPanel({
 
 function ReliabilityPanel({
   range,
-  unpricedLabel,
 }: {
   range: AiOpsRange;
-  unpricedLabel: string;
 }) {
   const t = useTranslations("adminConsole.aiOps.reliability");
   const tAiOps = useTranslations("adminConsole.aiOps");
-  const locale = useLocale();
 
   const query = useQuery({
     queryKey: ["ai-ops", "reliability", range] as const,
@@ -346,156 +339,103 @@ function ReliabilityPanel({
     );
   }
 
-  const rows = query.data?.rows ?? [];
-  const circuits = query.data?.circuit_states ?? [];
-  const hasUnpriced = rows.some(
-    (r) => r.provider === null || r.model === null,
-  );
-
-  // Circuit state tone
-  function circuitTone(
-    state: AiOpsCircuitState["state"],
-  ): "active" | "rejected" | "pending" {
-    if (state === "closed") return "active";
-    if (state === "open") return "rejected";
-    return "pending";
-  }
-
-  const circuitColumns: Column<AiOpsCircuitState>[] = [
-    {
-      key: "alias",
-      header: t("circuitCol.alias"),
-      cell: (row) => (
-        <span className="font-mono text-xs font-semibold text-[var(--text-primary)]">
-          {row.alias}
-        </span>
-      ),
-    },
-    {
-      key: "state",
-      header: t("circuitCol.state"),
-      cell: (row) => (
-        <StatusBadge tone={circuitTone(row.state)}>
-          {t(`circuitState.${row.state}`)}
-        </StatusBadge>
-      ),
-    },
-    {
-      key: "failures",
-      header: t("circuitCol.failures"),
-      align: "right",
-      cell: (row) => (
-        <span
-          className="font-mono text-xs tabular-nums"
-          style={{ fontFamily: "'JetBrains Mono', ui-monospace, monospace" }}
-        >
-          {row.failures}
-        </span>
-      ),
-    },
-    {
-      key: "last_failure_at",
-      header: t("circuitCol.lastFailure"),
-      cell: (row) => (
-        <span className="text-xs text-[var(--text-muted)]">
-          {row.last_failure_at
-            ? formatDateTime(row.last_failure_at, locale)
-            : "—"}
-        </span>
-      ),
-    },
-  ];
+  const data = query.data;
+  // circuit_states is an object map {key: state} — convert to array for table
+  const circuitEntries = Object.entries(data.circuit_states ?? {});
 
   return (
     <PanelCard title={t("panelTitle")} icon={Gauge}>
-      {hasUnpriced && (
-        <p className="mb-3">
-          <UnpricedNote label={unpricedLabel} />
-        </p>
-      )}
+      {/* Scalar aggregate metrics */}
+      <div className="mb-5 grid grid-cols-2 gap-4 sm:grid-cols-4">
+        <div className="flex flex-col gap-0.5">
+          <span className="text-[0.6875rem] font-semibold uppercase tracking-wide text-[var(--text-muted)]">
+            {t("requestsLabel")}
+          </span>
+          <span
+            className="font-mono text-lg font-bold tabular-nums text-[var(--text-primary)]"
+            style={{ fontFamily: "'JetBrains Mono', ui-monospace, monospace" }}
+          >
+            {new Intl.NumberFormat().format(data.requests)}
+          </span>
+        </div>
+        <div className="flex flex-col gap-0.5">
+          <span className="text-[0.6875rem] font-semibold uppercase tracking-wide text-[var(--text-muted)]">
+            {t("errorRateLabel")}
+          </span>
+          <span
+            className={cn(
+              "font-mono text-lg font-bold tabular-nums",
+              data.error_rate > 0.05
+                ? "text-[var(--brand-red)]"
+                : "text-[var(--text-primary)]",
+            )}
+            style={{ fontFamily: "'JetBrains Mono', ui-monospace, monospace" }}
+          >
+            {formatErrorRate(data.error_rate)}
+          </span>
+        </div>
+        <div className="flex flex-col gap-0.5">
+          <span className="text-[0.6875rem] font-semibold uppercase tracking-wide text-[var(--text-muted)]">
+            {t("fallbackRateLabel")}
+          </span>
+          <span
+            className="font-mono text-lg font-bold tabular-nums text-[var(--text-primary)]"
+            style={{ fontFamily: "'JetBrains Mono', ui-monospace, monospace" }}
+          >
+            {formatErrorRate(data.fallback_rate)}
+          </span>
+        </div>
+        <div className="flex flex-col gap-0.5">
+          <span className="text-[0.6875rem] font-semibold uppercase tracking-wide text-[var(--text-muted)]">
+            {t("fallbacksLabel")}
+          </span>
+          <span
+            className="font-mono text-lg font-bold tabular-nums text-[var(--text-primary)]"
+            style={{ fontFamily: "'JetBrains Mono', ui-monospace, monospace" }}
+          >
+            {new Intl.NumberFormat().format(data.fallbacks)}
+          </span>
+        </div>
+      </div>
 
-      {/* Per-feature reliability metrics */}
-      {rows.length > 0 ? (
-        <div className="mb-5 overflow-x-auto">
+      {/* Circuit breaker states — object map converted to table rows */}
+      <h3 className="mb-3 text-xs font-bold uppercase tracking-wide text-[var(--text-muted)]">
+        {t("circuitStateTitle")}
+      </h3>
+      {circuitEntries.length === 0 ? (
+        <p className="py-4 text-center text-sm text-[var(--text-muted)]">
+          {t("noCircuits")}
+        </p>
+      ) : (
+        <div className="overflow-x-auto rounded-xl border border-[var(--border-subtle)]">
           <table className="w-full border-collapse text-sm">
             <thead>
-              <tr className="border-b border-[var(--border-subtle)]">
-                <th className="pb-2 pr-4 text-left text-[11px] font-semibold uppercase tracking-wide text-[var(--text-muted)]">
-                  {t("featureCol")}
+              <tr className="border-b border-[var(--border-subtle)] bg-[var(--bg-subtle)]">
+                <th className="px-3.5 py-2 text-left text-[11px] font-semibold uppercase tracking-wide text-[var(--text-muted)]">
+                  {t("circuitCol.alias")}
                 </th>
-                <th className="pb-2 pr-4 text-right text-[11px] font-semibold uppercase tracking-wide text-[var(--text-muted)]">
-                  {t("errorRateLabel")}
-                </th>
-                <th className="pb-2 pr-4 text-right text-[11px] font-semibold uppercase tracking-wide text-[var(--text-muted)]">
-                  {t("fallbackRateLabel")}
-                </th>
-                <th className="pb-2 pr-4 text-right text-[11px] font-semibold uppercase tracking-wide text-[var(--text-muted)]">
-                  {t("p50Label")}
-                </th>
-                <th className="pb-2 text-right text-[11px] font-semibold uppercase tracking-wide text-[var(--text-muted)]">
-                  {t("p95Label")}
+                <th className="px-3.5 py-2 text-left text-[11px] font-semibold uppercase tracking-wide text-[var(--text-muted)]">
+                  {t("circuitCol.state")}
                 </th>
               </tr>
             </thead>
             <tbody>
-              {rows.map((row: AiOpsReliabilityRow) => (
+              {circuitEntries.map(([key, state]) => (
                 <tr
-                  key={row.group}
+                  key={key}
                   className="border-b border-[var(--border-subtle)] last:border-0"
                 >
-                  <td className="py-2 pr-4">
-                    <div className="flex flex-col gap-0.5">
-                      <span className="text-xs font-semibold text-[var(--text-primary)]">
-                        {row.group}
-                      </span>
-                      {(row.provider === null || row.model === null) && (
-                        <UnpricedNote label={unpricedLabel} />
-                      )}
-                    </div>
-                  </td>
-                  <td className="py-2 pr-4 text-right">
+                  <td className="px-3.5 py-2.5">
                     <span
-                      className={cn(
-                        "font-mono text-xs tabular-nums",
-                        row.error_rate > 0.05
-                          ? "font-bold text-[var(--brand-red)]"
-                          : "text-[var(--text-primary)]",
-                      )}
-                      style={{
-                        fontFamily: "'JetBrains Mono', ui-monospace, monospace",
-                      }}
+                      className="font-mono text-xs font-semibold text-[var(--text-primary)]"
+                      style={{ fontFamily: "'JetBrains Mono', ui-monospace, monospace" }}
                     >
-                      {formatErrorRate(row.error_rate)}
+                      {key}
                     </span>
                   </td>
-                  <td className="py-2 pr-4 text-right">
-                    <span
-                      className="font-mono text-xs tabular-nums text-[var(--text-secondary)]"
-                      style={{
-                        fontFamily: "'JetBrains Mono', ui-monospace, monospace",
-                      }}
-                    >
-                      {formatErrorRate(row.fallback_rate)}
-                    </span>
-                  </td>
-                  <td className="py-2 pr-4 text-right">
-                    <span
-                      className="font-mono text-xs tabular-nums text-[var(--text-secondary)]"
-                      style={{
-                        fontFamily: "'JetBrains Mono', ui-monospace, monospace",
-                      }}
-                    >
-                      {formatLatency(row.p50_ms)}
-                    </span>
-                  </td>
-                  <td className="py-2 text-right">
-                    <span
-                      className="font-mono text-xs tabular-nums text-[var(--text-secondary)]"
-                      style={{
-                        fontFamily: "'JetBrains Mono', ui-monospace, monospace",
-                      }}
-                    >
-                      {formatLatency(row.p95_ms)}
+                  <td className="px-3.5 py-2.5">
+                    <span className="text-xs text-[var(--text-secondary)]">
+                      {typeof state === "string" ? state : JSON.stringify(state)}
                     </span>
                   </td>
                 </tr>
@@ -503,28 +443,7 @@ function ReliabilityPanel({
             </tbody>
           </table>
         </div>
-      ) : (
-        <EmptyState
-          kind="empty"
-          title={t("emptyLabel")}
-          className="mb-4 py-6"
-        />
       )}
-
-      {/* Circuit breaker states */}
-      <h3 className="mb-3 text-xs font-bold uppercase tracking-wide text-[var(--text-muted)]">
-        {t("circuitStateTitle")}
-      </h3>
-      <DataTable
-        columns={circuitColumns}
-        rows={circuits}
-        getRowId={(r) => r.alias}
-        empty={{
-          kind: "empty",
-          title: t("noCircuits"),
-        }}
-        caption={t("circuitStateTitle")}
-      />
     </PanelCard>
   );
 }
@@ -543,6 +462,7 @@ function VolumePanel({
   const t = useTranslations("adminConsole.aiOps.volume");
   const tAiOps = useTranslations("adminConsole.aiOps");
 
+  // Volume returns a bare list from api.get
   const query = useQuery({
     queryKey: ["ai-ops", "volume", range] as const,
     queryFn: () => aiOpsApi.volume(range, "feature"),
@@ -580,19 +500,17 @@ function VolumePanel({
     );
   }
 
-  const rows = query.data?.rows ?? [];
-  const hasUnpriced = rows.some(
-    (r) => r.provider === null || r.model === null,
-  );
+  // Real rows: AiOpsVolumeRow[] — bare list, group_by=feature so day=null, task_type=group key
+  const rows: AiOpsVolumeRow[] = query.data ?? [];
 
-  // Aggregate by feature
+  // Aggregate by feature (task_type)
   const featureMap = new Map<string, { requests: number; tokens: number }>();
   for (const row of rows) {
-    const prev = featureMap.get(row.group) ?? { requests: 0, tokens: 0 };
-    featureMap.set(row.group, {
-      requests: prev.requests + row.requests,
-      tokens:
-        prev.tokens + row.prompt_tokens + row.completion_tokens,
+    const key = row.task_type ?? "unknown";
+    const prev = featureMap.get(key) ?? { requests: 0, tokens: 0 };
+    featureMap.set(key, {
+      requests: prev.requests + (row.requests ?? 0),
+      tokens: prev.tokens + (row.prompt_tokens ?? 0) + (row.completion_tokens ?? 0),
     });
   }
 
@@ -601,18 +519,15 @@ function VolumePanel({
   );
 
   const barData: BarDataPoint[] = featureEntries.map(([group, val]) => ({
-    label: group.slice(0, 8), // truncate long feature slugs in axis
+    label: group.slice(0, 8),
     value: val.requests,
   }));
 
+  // Volume rows don't have provider/model — no unpriced concept here
+  void unpricedLabel;
+
   return (
     <PanelCard title={t("panelTitle")} icon={StackSimple}>
-      {hasUnpriced && (
-        <p className="mb-3">
-          <UnpricedNote label={unpricedLabel} />
-        </p>
-      )}
-
       {/* By-feature bar chart */}
       <h3 className="mb-2 text-[11px] font-semibold uppercase tracking-wide text-[var(--text-muted)]">
         {t("byFeatureTitle")}
@@ -697,7 +612,6 @@ function VolumePanel({
 
 function OverviewTab({ range }: { range: AiOpsRange }) {
   const t = useTranslations("adminConsole.aiOps");
-  const locale = useLocale();
 
   const overviewQuery = useQuery({
     queryKey: ["ai-ops", "overview", range] as const,
@@ -741,8 +655,11 @@ function OverviewTab({ range }: { range: AiOpsRange }) {
     }
 
     const data = overviewQuery.data;
-    const burn = budgetBurnPct(data.spend_today, data.budget);
-    const tone = budgetTone(data.spend_today, data.budget);
+    // spend_today and budget are numbers from the real backend
+    const spendToday = data.spend_today ?? 0;
+    const budget = data.budget ?? 0;
+    const burn = budgetBurnPct(spendToday, budget);
+    const tone = budgetTone(spendToday, budget);
     const statusTone = burnToneToStatusTone(tone);
 
     return (
@@ -750,7 +667,7 @@ function OverviewTab({ range }: { range: AiOpsRange }) {
         {/* Spend today */}
         <MetricTile
           label={t("metric.spendToday")}
-          value={formatUsd(data.spend_today)}
+          value={formatUsd(spendToday)}
           icon={CurrencyDollar}
           tone={tone === "red" ? "danger" : tone === "amber" ? "warning" : "success"}
           badge={
@@ -759,7 +676,7 @@ function OverviewTab({ range }: { range: AiOpsRange }) {
             </StatusBadge>
           }
           sub={t("budgetBurn.budgetNote", {
-            budget: parseFloat(data.budget).toFixed(2),
+            budget: budget.toFixed(2),
           })}
         />
 
@@ -779,23 +696,18 @@ function OverviewTab({ range }: { range: AiOpsRange }) {
           tone={data.error_rate > 0.05 ? "danger" : data.error_rate > 0.01 ? "warning" : "success"}
         />
 
-        {/* p95 latency */}
+        {/* p95 latency — only field the backend returns for latency */}
         <MetricTile
           label={t("metric.p95Latency")}
           value={formatLatency(data.p95_latency_ms ?? NaN)}
           icon={Timer}
           tone="primary"
-          sub={
-            data.updated_at
-              ? t("updated", {
-                  time: formatDateTime(data.updated_at, locale),
-                })
-              : undefined
-          }
         />
       </div>
     );
   };
+
+  const budgetVal = overviewQuery.data?.budget ?? 0;
 
   return (
     <div className="space-y-6">
@@ -804,12 +716,12 @@ function OverviewTab({ range }: { range: AiOpsRange }) {
       {/* Independent panels — each handles its own loading/error state */}
       <SpendPanel
         range={range}
-        budget={overviewQuery.data?.budget ?? "0"}
+        budget={budgetVal}
         unpricedLabel={unpricedLabel}
       />
 
       <div className="grid grid-cols-1 gap-6 xl:grid-cols-2">
-        <ReliabilityPanel range={range} unpricedLabel={unpricedLabel} />
+        <ReliabilityPanel range={range} />
         <VolumePanel range={range} unpricedLabel={unpricedLabel} />
       </div>
     </div>
