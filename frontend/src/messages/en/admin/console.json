@@ -279,6 +279,7 @@
         "tooltipDelivered": "Successfully delivered messages",
         "ok": "OK",
         "warn": "Warn",
+        "error": "Error",
         "na": "n/a",
         "allOk": "All OK",
         "errJobs": "{count} error",
@@ -289,10 +290,12 @@
         "outboxFailed": "{count} failed",
         "outboxPending": "{count} pending",
         "pending": "{count} pending",
-        "sentCount": "{count} sent"
+        "sentCount": "{count} sent",
+        "ariaLoading": "Loading flow diagram"
       },
       "topology": {
         "ariaLabel": "Service topology diagram",
+        "ariaLoading": "Loading topology diagram",
         "hubApp": "App",
         "nodeDb": "Database",
         "nodeRedis": "Redis",
@@ -431,7 +434,12 @@
       "emptyBody": "No events found for the selected filters.",
       "errorTitle": "Logs unavailable",
       "errorBody": "Could not load log entries. Please try again.",
-      "retry": "Retry"
+      "retry": "Retry",
+      "logEntry": "Log entry",
+      "recentRangeAriaLabel": "Recent activity time range",
+      "rangeToday": "Today",
+      "range7d": "Last 7 days",
+      "range30d": "Last 30 days"
     },
     "usersAccess": {
       "pageTitle": "Users & Access",
@@ -572,7 +580,7 @@
           "addTitle": "Add feature flag",
           "editTitle": "Edit feature flag",
           "labelKey": "Flag key",
-          "labelKeyHelp": "Lowercase letters, numbers, dots, and underscores only (e.g. cv_studio.ai_fill).",
+          "labelKeyHelp": "Lowercase letters, numbers, dots, hyphens, and underscores (e.g. cv_studio.ai_fill or beta-2026). Cannot start or end with a separator.",
           "labelDescription": "Description",
           "labelDescriptionHelp": "What this flag controls. Keep it concise.",
           "labelEnabled": "Enabled",
@@ -581,10 +589,11 @@
           "labelRolloutHelp": "0 = disabled for all, 100 = fully rolled out. Values in between enable the flag for that percentage of users.",
           "save": "Save",
           "cancel": "Cancel",
-          "validationKey": "Key must contain only lowercase letters, numbers, dots, and underscores.",
+          "validationKey": "Key must contain only lowercase letters, numbers, dots, hyphens, and underscores, and cannot start or end with a separator.",
           "validationKeyRequired": "Flag key is required.",
           "validationRollout": "Rollout must be a whole number between 0 and 100.",
           "conflictError": "A flag with this key already exists. Choose a different key or edit the existing flag.",
+          "validationBackend": "Invalid flag key. Use only lowercase letters, numbers, dots, hyphens, and underscores.",
           "rolloutContext": "0 = off for all · 100 = fully on"
         },
         "emptyTitle": "No feature flags",
@@ -750,7 +759,9 @@
         "universityStaff": "University staff",
         "jobs": "Active jobs",
         "applications": "Applications",
-        "events": "Events"
+        "events": "Events",
+        "errorTitle": "KPI data unavailable",
+        "errorBody": "Could not load platform KPIs. Please try again."
       },
       "funnel": {
         "panelTitle": "Recruitment Funnel",

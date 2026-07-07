@@ -37,6 +37,7 @@ import { cn } from "@/lib/utils";
 /* -------------------------------------------------------------------------- */
 
 type LogSource = "system" | "ai" | "recent";
+type RecentRange = "today" | "7d" | "30d";
 
 const STATUS_TONE: Record<AiOpsEventStatus, StatusTone> = {
   success: "active",
@@ -45,6 +46,31 @@ const STATUS_TONE: Record<AiOpsEventStatus, StatusTone> = {
   rate_limited: "draft",
   timeout: "closed",
 };
+
+/* -------------------------------------------------------------------------- */
+/* Recent range helpers                                                        */
+/* -------------------------------------------------------------------------- */
+
+/** Convert a RecentRange to an ISO since timestamp for the audit query. */
+function recentRangeToSince(range: RecentRange): string {
+  const now = new Date();
+  if (range === "today") {
+    const d = new Date(now);
+    d.setHours(0, 0, 0, 0);
+    return d.toISOString();
+  }
+  if (range === "7d") {
+    return new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000).toISOString();
+  }
+  return new Date(now.getTime() - 30 * 24 * 60 * 60 * 1000).toISOString();
+}
+
+/** Map RecentRange to AiOpsRange for the AI events query. */
+function recentRangeToAiRange(range: RecentRange): import("@/lib/api/ai-ops").AiOpsRange {
+  if (range === "today") return "today";
+  if (range === "7d") return "7d";
+  return "30d";
+}
 
 /* -------------------------------------------------------------------------- */
 /* Shared sub-components (reused across views)                                 */
@@ -1187,7 +1213,7 @@ interface MergedRow {
 /* Recent (All) view                                                           */
 /* -------------------------------------------------------------------------- */
 
-function RecentAllView({ since, until }: { since?: string; until?: string }) {
+function RecentAllView({ range }: { range: RecentRange }) {
   const t = useTranslations("adminConsole.logs");
   const tAudit = useTranslations("adminConsole.audit");
   const tAi = useTranslations("adminConsole.aiOps.traces");
@@ -1196,21 +1222,23 @@ function RecentAllView({ since, until }: { since?: string; until?: string }) {
   const [selectedAudit, setSelectedAudit] = useState<AuditRow | null>(null);
   const [selectedAi, setSelectedAi] = useState<AiOpsEvent | null>(null);
 
+  const since = recentRangeToSince(range);
+  const aiRange = recentRangeToAiRange(range);
+
   const auditQuery = useQuery({
-    queryKey: ["audit-log-recent", since, until] as const,
+    queryKey: ["audit-log-recent", range] as const,
     queryFn: () =>
       auditLogApi.list({
         limit: 25,
-        since: since || undefined,
-        until: until || undefined,
+        since,
       }),
     staleTime: 30_000,
     retry: 1,
   });
 
   const aiQuery = useQuery({
-    queryKey: ["ai-ops-events-recent"] as const,
-    queryFn: () => aiOpsApi.events({ limit: 25 }),
+    queryKey: ["ai-ops-events-recent", range] as const,
+    queryFn: () => aiOpsApi.events({ limit: 25, range: aiRange }),
     staleTime: 30_000,
     retry: 1,
   });
@@ -1334,6 +1362,18 @@ function RecentAllView({ since, until }: { since?: string; until?: string }) {
         icon={WarningCircle}
         title={t("errorTitle")}
         description={t("errorBody")}
+        action={
+          <button
+            type="button"
+            onClick={() => {
+              void auditQuery.refetch();
+              void aiQuery.refetch();
+            }}
+            className="text-xs font-semibold text-[var(--brand-primary)] underline-offset-2 hover:underline"
+          >
+            {t("retry")}
+          </button>
+        }
       />
     );
   }
@@ -1376,7 +1416,7 @@ function RecentAllView({ since, until }: { since?: string; until?: string }) {
               ? `${row.auditRow.action} — ${row.auditRow.resource_type}`
               : row.aiEvent
                 ? `${row.aiEvent.task_type} — ${row.aiEvent.status}`
-                : "Log entry"
+                : t("logEntry")
           }
           loading={auditQuery.isFetching || aiQuery.isFetching}
         />
@@ -1397,14 +1437,19 @@ export function LogsExplorerScreen() {
 
   const [source, setSource] = useState<LogSource>("recent");
 
-  /* Shared time-range for the Recent view */
-  const [since, setSince] = useState("");
-  const [until, setUntil] = useState("");
+  /* Shared time-range for the Recent (All) view — SegmentedControl applies to both sources */
+  const [recentRange, setRecentRange] = useState<RecentRange>("today");
 
-  const options = [
+  const sourceOptions = [
     { value: "recent" as const, label: t("sourceRecent") },
     { value: "system" as const, label: t("sourceSystem") },
     { value: "ai" as const, label: t("sourceAi") },
+  ];
+
+  const recentRangeOptions = [
+    { value: "today" as const, label: t("rangeToday") },
+    { value: "7d" as const, label: t("range7d") },
+    { value: "30d" as const, label: t("range30d") },
   ];
 
   return (
@@ -1427,56 +1472,28 @@ export function LogsExplorerScreen() {
           <SegmentedControl
             value={source}
             onValueChange={(v) => setSource(v as LogSource)}
-            options={options}
+            options={sourceOptions}
             ariaLabel={t("sourceAriaLabel")}
             size="sm"
           />
         </div>
 
-        {/* Shared time-range filter — visible in Recent view only */}
+        {/* Shared time-range filter — visible in Recent (All) view only */}
         {source === "recent" && (
-          <div className="flex flex-wrap items-end gap-3">
-            <div>
-              <label
-                htmlFor="logs-shared-since"
-                className="mb-1 block text-[0.6875rem] font-semibold uppercase tracking-wide text-[var(--text-muted)]"
-              >
-                {t("filter.since")}
-              </label>
-              <Input
-                id="logs-shared-since"
-                type="date"
-                value={since}
-                onChange={(e) => setSince(e.target.value)}
-              />
-            </div>
-            <div>
-              <label
-                htmlFor="logs-shared-until"
-                className="mb-1 block text-[0.6875rem] font-semibold uppercase tracking-wide text-[var(--text-muted)]"
-              >
-                {t("filter.until")}
-              </label>
-              <Input
-                id="logs-shared-until"
-                type="date"
-                value={until}
-                onChange={(e) => setUntil(e.target.value)}
-              />
-            </div>
-          </div>
+          <SegmentedControl
+            value={recentRange}
+            onValueChange={(v) => setRecentRange(v as RecentRange)}
+            options={recentRangeOptions}
+            ariaLabel={t("recentRangeAriaLabel")}
+            size="sm"
+          />
         )}
       </div>
 
       {/* View panel */}
       {source === "system" && <SystemView />}
       {source === "ai" && <AiLogsView />}
-      {source === "recent" && (
-        <RecentAllView
-          since={since || undefined}
-          until={until || undefined}
-        />
-      )}
+      {source === "recent" && <RecentAllView range={recentRange} />}
     </div>
   );
 }

@@ -88,7 +88,7 @@ const SAT_R = 22; // satellite node circle radius
 /* Skeleton                                                                   */
 /* -------------------------------------------------------------------------- */
 
-function TopologySkeleton() {
+function TopologySkeleton({ ariaLabel }: { ariaLabel: string }) {
   return (
     <div
       className="animate-pulse rounded-xl"
@@ -99,7 +99,7 @@ function TopologySkeleton() {
         maxWidth: "100%",
       }}
       aria-busy="true"
-      aria-label="Loading topology diagram"
+      aria-label={ariaLabel}
     />
   );
 }
@@ -116,7 +116,7 @@ export function SystemHealthTopology({
 }: SystemHealthTopologyProps) {
   const t = useTranslations("adminConsole.systemHealth.topology");
 
-  if (isLoading) return <TopologySkeleton />;
+  if (isLoading) return <TopologySkeleton ariaLabel={t("ariaLoading")} />;
 
   // Derive statuses from data
   const dbStatus: NodeStatus = services?.database ?? "unknown";
@@ -247,9 +247,15 @@ export function SystemHealthTopology({
           // Status sub-label
           const subLabelPos = polarToXY(CX, CY, SPOKE_RADIUS + labelOffset + 11, node.angle);
 
+          const statusLabel =
+            node.status === "ok"
+              ? t("statusOk")
+              : node.status === "down"
+                ? t("statusDown")
+                : t("statusUnknown");
           return (
-            <g key={node.id} role="img" aria-label={`${node.label}: ${node.status}`}>
-              <title>{`${node.label}: ${node.status}`}</title>
+            <g key={node.id} role="img" aria-label={`${node.label}: ${statusLabel}`}>
+              <title>{`${node.label}: ${statusLabel}`}</title>
               {/* Satellite circle */}
               <circle
                 cx={x}

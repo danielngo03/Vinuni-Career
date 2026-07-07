@@ -279,6 +279,7 @@
         "tooltipDelivered": "Tin nhắn đã gửi thành công",
         "ok": "Ổn",
         "warn": "Cảnh báo",
+        "error": "Lỗi",
         "na": "n/a",
         "allOk": "Tất cả ổn",
         "errJobs": "{count} lỗi",
@@ -289,10 +290,12 @@
         "outboxFailed": "{count} thất bại",
         "outboxPending": "{count} đang chờ",
         "pending": "{count} đang chờ",
-        "sentCount": "{count} đã gửi"
+        "sentCount": "{count} đã gửi",
+        "ariaLoading": "Đang tải sơ đồ luồng"
       },
       "topology": {
         "ariaLabel": "Sơ đồ cấu trúc dịch vụ",
+        "ariaLoading": "Đang tải sơ đồ cấu trúc",
         "hubApp": "App",
         "nodeDb": "Cơ sở dữ liệu",
         "nodeRedis": "Redis",
@@ -431,7 +434,12 @@
       "emptyBody": "Không tìm thấy sự kiện nào với bộ lọc đã chọn.",
       "errorTitle": "Nhật ký không khả dụng",
       "errorBody": "Không thể tải các mục nhật ký. Vui lòng thử lại.",
-      "retry": "Thử lại"
+      "retry": "Thử lại",
+      "logEntry": "Mục nhật ký",
+      "recentRangeAriaLabel": "Khoảng thời gian hoạt động gần đây",
+      "rangeToday": "Hôm nay",
+      "range7d": "7 ngày qua",
+      "range30d": "30 ngày qua"
     },
     "usersAccess": {
       "pageTitle": "Người dùng & Phân quyền",
@@ -572,7 +580,7 @@
           "addTitle": "Thêm cờ tính năng",
           "editTitle": "Chỉnh sửa cờ tính năng",
           "labelKey": "Khóa cờ",
-          "labelKeyHelp": "Chỉ dùng chữ thường, số, dấu chấm và gạch dưới (vd: cv_studio.ai_fill).",
+          "labelKeyHelp": "Chữ thường, số, dấu chấm, gạch ngang và gạch dưới (vd: cv_studio.ai_fill hoặc beta-2026). Không được bắt đầu hoặc kết thúc bằng ký tự phân cách.",
           "labelDescription": "Mô tả",
           "labelDescriptionHelp": "Cờ này kiểm soát điều gì. Hãy viết ngắn gọn.",
           "labelEnabled": "Bật",
@@ -581,10 +589,11 @@
           "labelRolloutHelp": "0 = tắt với tất cả, 100 = triển khai đầy đủ. Giá trị ở giữa kích hoạt cờ cho tỉ lệ phần trăm người dùng đó.",
           "save": "Lưu",
           "cancel": "Hủy",
-          "validationKey": "Khóa chỉ được chứa chữ thường, số, dấu chấm và gạch dưới.",
+          "validationKey": "Khóa chỉ được chứa chữ thường, số, dấu chấm, gạch ngang và gạch dưới, và không được bắt đầu hoặc kết thúc bằng ký tự phân cách.",
           "validationKeyRequired": "Khóa cờ là bắt buộc.",
           "validationRollout": "Tỉ lệ triển khai phải là số nguyên từ 0 đến 100.",
           "conflictError": "Đã tồn tại cờ với khóa này. Chọn khóa khác hoặc chỉnh sửa cờ hiện có.",
+          "validationBackend": "Khóa cờ không hợp lệ. Chỉ dùng chữ thường, số, dấu chấm, gạch ngang và gạch dưới.",
           "rolloutContext": "0 = tắt với tất cả · 100 = bật toàn bộ"
         },
         "emptyTitle": "Chưa có cờ tính năng",
@@ -750,7 +759,9 @@
         "universityStaff": "Nhân viên trường",
         "jobs": "Tin tuyển dụng đang mở",
         "applications": "Hồ sơ ứng tuyển",
-        "events": "Sự kiện"
+        "events": "Sự kiện",
+        "errorTitle": "Không thể tải KPI",
+        "errorBody": "Không thể tải KPI nền tảng. Vui lòng thử lại."
       },
       "funnel": {
         "panelTitle": "Phễu tuyển dụng",

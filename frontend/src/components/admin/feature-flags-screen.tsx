@@ -38,7 +38,7 @@ import { ApiError } from "@/lib/api";
 /* Helpers                                                                     */
 /* -------------------------------------------------------------------------- */
 
-const FLAG_KEY_RE = /^[a-z0-9._]+$/;
+const FLAG_KEY_RE = /^[a-z0-9][a-z0-9._-]*[a-z0-9]$|^[a-z0-9]$/;
 
 function isValidKey(s: string): boolean {
   return FLAG_KEY_RE.test(s.trim());
@@ -171,6 +171,13 @@ function FlagFormSheet({
     onError: (e) => {
       if (e instanceof ApiError && e.isConflict) {
         setErrors((prev) => ({ ...prev, conflict: t("sheet.conflictError") }));
+        return;
+      }
+      if (e instanceof ApiError && e.isValidation) {
+        const msg = typeof e.message === "string" && e.message
+          ? e.message
+          : t("sheet.validationBackend");
+        setErrors((prev) => ({ ...prev, key: msg }));
         return;
       }
       toast.show({ tone: "error", title: tRoot("retry") });

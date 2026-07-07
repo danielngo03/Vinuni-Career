@@ -265,13 +265,13 @@ function ArrowConnector({ fromIndex }: { fromIndex: number }) {
 /* Skeleton state                                                              */
 /* -------------------------------------------------------------------------- */
 
-function FlowSkeleton() {
+function FlowSkeleton({ ariaLabel }: { ariaLabel: string }) {
   return (
     <div
       className="h-24 w-full animate-pulse rounded-xl"
       style={{ background: "var(--bg-muted)" }}
       aria-busy="true"
-      aria-label="Loading flow diagram"
+      aria-label={ariaLabel}
     />
   );
 }
@@ -289,7 +289,7 @@ export function SystemHealthFlow({
 }: SystemHealthFlowProps) {
   const t = useTranslations("adminConsole.systemHealth.flow");
 
-  if (isLoading) return <FlowSkeleton />;
+  if (isLoading) return <FlowSkeleton ariaLabel={t("ariaLoading")} />;
 
   const schedulerHealth = deriveSchedulerHealth(jobs);
   const jobsHealth = deriveJobsHealth(jobs);
@@ -317,7 +317,9 @@ export function SystemHealthFlow({
           ? t("na")
           : schedulerHealth === "healthy"
             ? t("ok")
-            : t("warn"),
+            : schedulerHealth === "error"
+              ? t("error")
+              : t("warn"),
       metaLine2: totalJobs > 0 ? t("jobsRegistered", { count: totalJobs }) : undefined,
       tooltip: t("tooltipScheduler"),
     },

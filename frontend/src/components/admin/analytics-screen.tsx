@@ -140,8 +140,8 @@ function KpiPanel() {
         <EmptyState
           kind="error"
           icon={WarningCircle}
-          title={t("funnel.errorTitle")}
-          description={t("funnel.errorBody")}
+          title={t("kpi.errorTitle")}
+          description={t("kpi.errorBody")}
           action={
             <button
               onClick={() => void query.refetch()}

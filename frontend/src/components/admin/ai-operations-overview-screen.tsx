@@ -93,24 +93,26 @@ function UnpricedNote({ label }: { label: string }) {
 /* -------------------------------------------------------------------------- */
 
 function PanelCard({
+  id: panelId,
   title,
   icon: Icon,
   children,
   className,
 }: {
+  id: string;
   title: string;
   icon: React.ElementType;
   children: React.ReactNode;
   className?: string;
 }) {
-  const id = `panel-${title.toLowerCase().replace(/\s+/g, "-").replace(/[^a-z0-9-]/g, "")}`;
+  const headingId = `aiops-panel-${panelId}`;
   return (
     <section
-      aria-labelledby={id}
+      aria-labelledby={headingId}
       className={cn("marketplace-card rounded-[12px] p-5", className)}
     >
       <h2
-        id={id}
+        id={headingId}
         className="mb-4 flex items-center gap-2 text-sm font-bold tracking-tight text-[var(--text-primary)]"
       >
         <span className="icon-chip-primary flex size-7 shrink-0 items-center justify-center rounded-lg shadow-sm">
@@ -233,7 +235,7 @@ function SpendBudgetPanel({
 
   if (tsQuery.isPending) {
     return (
-      <PanelCard title={t("panelTitle")} icon={CurrencyDollar}>
+      <PanelCard id="spend" title={t("panelTitle")} icon={CurrencyDollar}>
         <Skeleton className="h-48 w-full" />
       </PanelCard>
     );
@@ -241,7 +243,7 @@ function SpendBudgetPanel({
 
   if (tsQuery.isError) {
     return (
-      <PanelCard title={t("panelTitle")} icon={CurrencyDollar}>
+      <PanelCard id="spend" title={t("panelTitle")} icon={CurrencyDollar}>
         <EmptyState
           kind="error"
           icon={WarningCircle}
@@ -283,7 +285,7 @@ function SpendBudgetPanel({
   const burnPct = dailyBudget ? budgetBurnPct(totalSpend, dailyBudget * rangeDays) : 0;
 
   return (
-    <PanelCard title={t("panelTitle")} icon={CurrencyDollar}>
+    <PanelCard id="spend" title={t("panelTitle")} icon={CurrencyDollar}>
       {hasUnpriced && (
         <p className="mb-3">
           <UnpricedNote label={unpricedLabel} />
@@ -328,7 +330,7 @@ function LatencyPanel({ range }: { range: AiOpsRange }) {
 
   if (query.isPending) {
     return (
-      <PanelCard title={t("panelTitle")} icon={Timer}>
+      <PanelCard id="latency" title={t("panelTitle")} icon={Timer}>
         <Skeleton className="h-48 w-full" />
       </PanelCard>
     );
@@ -336,7 +338,7 @@ function LatencyPanel({ range }: { range: AiOpsRange }) {
 
   if (query.isError) {
     return (
-      <PanelCard title={t("panelTitle")} icon={Timer}>
+      <PanelCard id="latency" title={t("panelTitle")} icon={Timer}>
         <EmptyState
           kind="error"
           icon={WarningCircle}
@@ -368,7 +370,7 @@ function LatencyPanel({ range }: { range: AiOpsRange }) {
   }));
 
   return (
-    <PanelCard title={t("panelTitle")} icon={Timer}>
+    <PanelCard id="latency" title={t("panelTitle")} icon={Timer}>
       {!hasAnyLatency && rows.length > 0 ? (
         <div
           className="flex h-[220px] items-center justify-center rounded-lg border border-dashed border-[var(--border-default)] text-xs text-[var(--text-muted)]"
@@ -423,7 +425,7 @@ function VolumePanel({ range }: { range: AiOpsRange }) {
 
   if (tsQuery.isPending || volumeQuery.isPending) {
     return (
-      <PanelCard title={t("panelTitle")} icon={StackSimple}>
+      <PanelCard id="volume" title={t("panelTitle")} icon={StackSimple}>
         <Skeleton className="h-48 w-full" />
       </PanelCard>
     );
@@ -431,7 +433,7 @@ function VolumePanel({ range }: { range: AiOpsRange }) {
 
   if (tsQuery.isError) {
     return (
-      <PanelCard title={t("panelTitle")} icon={StackSimple}>
+      <PanelCard id="volume" title={t("panelTitle")} icon={StackSimple}>
         <EmptyState
           kind="error"
           icon={WarningCircle}
@@ -470,7 +472,7 @@ function VolumePanel({ range }: { range: AiOpsRange }) {
   }
 
   return (
-    <PanelCard title={t("panelTitle")} icon={StackSimple}>
+    <PanelCard id="volume" title={t("panelTitle")} icon={StackSimple}>
       <StackedBarChart
         data={tsData}
         xKey="day"
@@ -549,7 +551,7 @@ function DistributionPanel({ range }: { range: AiOpsRange }) {
 
   if (query.isPending) {
     return (
-      <PanelCard title={t("panelTitle")} icon={DotsNine}>
+      <PanelCard id="distribution" title={t("panelTitle")} icon={DotsNine}>
         <Skeleton className="h-48 w-full" />
       </PanelCard>
     );
@@ -557,7 +559,7 @@ function DistributionPanel({ range }: { range: AiOpsRange }) {
 
   if (query.isError) {
     return (
-      <PanelCard title={t("panelTitle")} icon={DotsNine}>
+      <PanelCard id="distribution" title={t("panelTitle")} icon={DotsNine}>
         <EmptyState
           kind="error"
           icon={WarningCircle}
@@ -591,7 +593,7 @@ function DistributionPanel({ range }: { range: AiOpsRange }) {
     .map(([label, value]) => ({ label: label.slice(0, 16), value }));
 
   return (
-    <PanelCard title={t("panelTitle")} icon={DotsNine}>
+    <PanelCard id="distribution" title={t("panelTitle")} icon={DotsNine}>
       <DonutChart
         data={slices}
         height={240}
@@ -629,7 +631,7 @@ function ReliabilityPanel({ range }: { range: AiOpsRange }) {
 
   if (reliabilityQuery.isPending) {
     return (
-      <PanelCard title={t("panelTitle")} icon={Gauge}>
+      <PanelCard id="reliability" title={t("panelTitle")} icon={Gauge}>
         <Skeleton className="h-48 w-full" />
       </PanelCard>
     );
@@ -637,7 +639,7 @@ function ReliabilityPanel({ range }: { range: AiOpsRange }) {
 
   if (reliabilityQuery.isError) {
     return (
-      <PanelCard title={t("panelTitle")} icon={Gauge}>
+      <PanelCard id="reliability" title={t("panelTitle")} icon={Gauge}>
         <EmptyState
           kind="error"
           icon={WarningCircle}
@@ -668,7 +670,7 @@ function ReliabilityPanel({ range }: { range: AiOpsRange }) {
   const hasErrorSeries = errorTsData.length > 0 && tsRows.some((r) => r.errors > 0);
 
   return (
-    <PanelCard title={t("panelTitle")} icon={Gauge}>
+    <PanelCard id="reliability" title={t("panelTitle")} icon={Gauge}>
       {/* Scalar aggregate metrics */}
       <div className="mb-5 grid grid-cols-2 gap-4 sm:grid-cols-4">
         <div className="flex flex-col gap-0.5">
@@ -810,7 +812,7 @@ function ErrorHeatmapPanel({ range }: { range: AiOpsRange }) {
 
   if (query.isPending) {
     return (
-      <PanelCard title={t("panelTitle")} icon={GridFour}>
+      <PanelCard id="errorHeatmap" title={t("panelTitle")} icon={GridFour}>
         <Skeleton className="h-48 w-full" />
       </PanelCard>
     );
@@ -818,7 +820,7 @@ function ErrorHeatmapPanel({ range }: { range: AiOpsRange }) {
 
   if (query.isError) {
     return (
-      <PanelCard title={t("panelTitle")} icon={GridFour}>
+      <PanelCard id="errorHeatmap" title={t("panelTitle")} icon={GridFour}>
         <EmptyState
           kind="error"
           icon={WarningCircle}
@@ -854,7 +856,7 @@ function ErrorHeatmapPanel({ range }: { range: AiOpsRange }) {
   const heatmapHeight = Math.max(160, Math.min(yLabels.length * 22 + 32, 320));
 
   return (
-    <PanelCard title={t("panelTitle")} icon={GridFour}>
+    <PanelCard id="errorHeatmap" title={t("panelTitle")} icon={GridFour}>
       <Heatmap
         cells={cells}
         xLabels={xLabels}
