@@ -134,18 +134,104 @@ async def overview(
 async def spend(
     db: AsyncSession,
     range_days: int = 7,
-    group_by: str = "day",  # noqa: ARG001 — grouping applied via SQL grain; exposed for future use
+    group_by: str = "day",
+    reveal_identity: bool = False,
 ) -> list[dict[str, Any]]:
     """Return aggregated spend from ``ai_usage_daily``.
 
-    The full (day × task_type × provider × model) grain is always returned;
-    ``group_by`` is accepted for API forward-compatibility and reserved for
-    server-side aggregation in a future iteration.
+    ``group_by`` controls the SQL aggregation grain:
+    - ``"feature"``  — group by task_type (sums across all days/providers/models).
+    - ``"model"``    — group by model (sums across all days/task_types/providers).
+    - ``"provider"`` — group by provider (sums across all days/task_types/models).
+    - anything else  — default day × task_type × provider × model grain.
+
+    When ``reveal_identity=False``, ``provider`` and ``model`` in every returned
+    row are set to ``None`` regardless of what is stored.
     """
 
     async def _query() -> list[dict[str, Any]]:
         since = _range_start(range_days)
-        stmt = (
+
+        if group_by == "feature":
+            stmt = (
+                select(
+                    AiUsageDaily.task_type,
+                    func.sum(AiUsageDaily.cost_usd).label("cost_usd"),
+                    func.sum(AiUsageDaily.requests).label("requests"),
+                    func.sum(AiUsageDaily.errors).label("errors"),
+                )
+                .where(AiUsageDaily.day >= since)
+                .group_by(AiUsageDaily.task_type)
+                .order_by(AiUsageDaily.task_type.asc())
+            )
+            rows = (await db.execute(stmt)).all()
+            return [
+                {
+                    "day": None,
+                    "task_type": r.task_type,
+                    "provider": None,
+                    "model": None,
+                    "cost_usd": float(r.cost_usd or 0.0),
+                    "requests": int(r.requests or 0),
+                    "errors": int(r.errors or 0),
+                }
+                for r in rows
+            ]
+
+        if group_by == "model":
+            stmt = (
+                select(
+                    AiUsageDaily.model,
+                    func.sum(AiUsageDaily.cost_usd).label("cost_usd"),
+                    func.sum(AiUsageDaily.requests).label("requests"),
+                    func.sum(AiUsageDaily.errors).label("errors"),
+                )
+                .where(AiUsageDaily.day >= since)
+                .group_by(AiUsageDaily.model)
+                .order_by(AiUsageDaily.model.asc())
+            )
+            rows = (await db.execute(stmt)).all()
+            return [
+                {
+                    "day": None,
+                    "task_type": None,
+                    "provider": None,
+                    "model": r.model if reveal_identity else None,
+                    "cost_usd": float(r.cost_usd or 0.0),
+                    "requests": int(r.requests or 0),
+                    "errors": int(r.errors or 0),
+                }
+                for r in rows
+            ]
+
+        if group_by == "provider":
+            stmt = (
+                select(
+                    AiUsageDaily.provider,
+                    func.sum(AiUsageDaily.cost_usd).label("cost_usd"),
+                    func.sum(AiUsageDaily.requests).label("requests"),
+                    func.sum(AiUsageDaily.errors).label("errors"),
+                )
+                .where(AiUsageDaily.day >= since)
+                .group_by(AiUsageDaily.provider)
+                .order_by(AiUsageDaily.provider.asc())
+            )
+            rows = (await db.execute(stmt)).all()
+            return [
+                {
+                    "day": None,
+                    "task_type": None,
+                    "provider": r.provider if reveal_identity else None,
+                    "model": None,
+                    "cost_usd": float(r.cost_usd or 0.0),
+                    "requests": int(r.requests or 0),
+                    "errors": int(r.errors or 0),
+                }
+                for r in rows
+            ]
+
+        # Default: full day × task_type × provider × model grain.
+        default_stmt = (
             select(
                 AiUsageDaily.day,
                 AiUsageDaily.task_type,
@@ -164,18 +250,18 @@ async def spend(
             )
             .order_by(AiUsageDaily.day.asc())
         )
-        rows = (await db.execute(stmt)).all()
+        default_rows = (await db.execute(default_stmt)).all()
         return [
             {
                 "day": r.day.date().isoformat() if r.day else None,
                 "task_type": r.task_type,
-                "provider": r.provider or None,
-                "model": r.model or None,
+                "provider": (r.provider or None) if reveal_identity else None,
+                "model": (r.model or None) if reveal_identity else None,
                 "cost_usd": float(r.cost_usd or 0.0),
                 "requests": int(r.requests or 0),
                 "errors": int(r.errors or 0),
             }
-            for r in rows
+            for r in default_rows
         ]
 
     return await _safe(db, _query, fallback=[])
@@ -185,8 +271,15 @@ async def reliability(
     db: AsyncSession,
     range_days: int = 7,
     group_by: str = "day",  # noqa: ARG001 — reserved for future per-day breakdown
+    reveal_identity: bool = False,
 ) -> dict[str, Any]:
-    """Return error rates, fallback rates, and circuit-breaker states."""
+    """Return error rates, fallback rates, and circuit-breaker states.
+
+    When ``reveal_identity=False``, the ``circuit_states`` map keys are replaced
+    with stable positional placeholders (``"provider_1"``, ``"provider_2"``, …)
+    so no concrete provider names leak.  The factory ``_circuit_states`` dict is
+    never mutated — we build a fresh masked copy.
+    """
 
     _RELIABILITY_FALLBACK: dict[str, Any] = {
         "requests": 0,
@@ -221,8 +314,17 @@ async def reliability(
 
     # Read-only circuit-breaker states from the in-process factory dict.
     cfg = runtime_config.current()
-    provider_names = {route[0] for route in cfg.provider_routes.values() if route}
-    circuit_states = {name: get_circuit_state(name) for name in sorted(provider_names)}
+    provider_names = sorted({route[0] for route in cfg.provider_routes.values() if route})
+    raw_circuit_states = {name: get_circuit_state(name) for name in provider_names}
+
+    if reveal_identity:
+        circuit_states: dict[str, Any] = raw_circuit_states
+    else:
+        # Mask provider names to stable positional placeholders.
+        circuit_states = {
+            f"provider_{i + 1}": state
+            for i, (_, state) in enumerate(raw_circuit_states.items())
+        }
 
     return {**agg, "circuit_states": circuit_states}
 
@@ -230,13 +332,48 @@ async def reliability(
 async def volume(
     db: AsyncSession,
     range_days: int = 7,
-    group_by: str = "day",  # noqa: ARG001 — reserved for future per-provider breakdown
+    group_by: str = "day",
 ) -> list[dict[str, Any]]:
-    """Return request/token volume from ``ai_usage_daily``."""
+    """Return request/token volume from ``ai_usage_daily``.
+
+    ``group_by`` controls the aggregation grain:
+    - ``"feature"``  — group by task_type.
+    - ``"model"``    — group by model (identity not exposed here; no masking needed
+                       because volume rows never carry provider/model labels in the
+                       response schema).
+    - ``"provider"`` — group by provider (same note).
+    - anything else  — default day × task_type grain (time-series).
+    """
 
     async def _query() -> list[dict[str, Any]]:
         since = _range_start(range_days)
-        stmt = (
+
+        if group_by == "feature":
+            stmt = (
+                select(
+                    AiUsageDaily.task_type,
+                    func.sum(AiUsageDaily.requests).label("requests"),
+                    func.sum(AiUsageDaily.prompt_tokens).label("prompt_tokens"),
+                    func.sum(AiUsageDaily.completion_tokens).label("completion_tokens"),
+                )
+                .where(AiUsageDaily.day >= since)
+                .group_by(AiUsageDaily.task_type)
+                .order_by(AiUsageDaily.task_type.asc())
+            )
+            rows = (await db.execute(stmt)).all()
+            return [
+                {
+                    "day": None,
+                    "task_type": r.task_type,
+                    "requests": int(r.requests or 0),
+                    "prompt_tokens": int(r.prompt_tokens or 0),
+                    "completion_tokens": int(r.completion_tokens or 0),
+                }
+                for r in rows
+            ]
+
+        # Default: day × task_type time-series grain.
+        default_stmt = (
             select(
                 AiUsageDaily.day,
                 AiUsageDaily.task_type,
@@ -248,7 +385,7 @@ async def volume(
             .group_by(AiUsageDaily.day, AiUsageDaily.task_type)
             .order_by(AiUsageDaily.day.asc())
         )
-        rows = (await db.execute(stmt)).all()
+        default_rows = (await db.execute(default_stmt)).all()
         return [
             {
                 "day": r.day.date().isoformat() if r.day else None,
@@ -257,7 +394,7 @@ async def volume(
                 "prompt_tokens": int(r.prompt_tokens or 0),
                 "completion_tokens": int(r.completion_tokens or 0),
             }
-            for r in rows
+            for r in default_rows
         ]
 
     return await _safe(db, _query, fallback=[])

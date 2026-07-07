@@ -35,11 +35,11 @@ def _can_reveal_identity(principal: Principal) -> bool:
     ``permission_checker.can()`` so that ``is_superadmin=True`` does NOT bypass
     this gate.  Revealing concrete provider/model names is a separate additive
     privilege even for platform superadmins.
+
+    Wildcard expansions (``"*"``, ``"ai_settings:*"``, ``"*:view_provider_identity"``)
+    are intentionally NOT accepted — only the exact literal grant is honoured.
     """
-    return any(
-        g in (_IDENTITY_GRANT, "ai_settings:*", "*:view_provider_identity", "*")
-        for g in principal.permissions
-    )
+    return _IDENTITY_GRANT in principal.permissions
 
 
 @admin_router.get("/overview", summary="AI platform health overview")
@@ -56,10 +56,13 @@ async def get_overview(
 async def get_spend(
     range_days: int = Query(default=7, ge=1, le=365),
     group_by: str = Query(default="day"),
-    _principal: Principal = Depends(require_superadmin),
+    principal: Principal = Depends(require_superadmin),
     db: AsyncSession = Depends(get_db_session),
 ) -> dict:
-    data = await ai_ops_read_service.spend(db, range_days=range_days, group_by=group_by)
+    reveal_identity = _can_reveal_identity(principal)
+    data = await ai_ops_read_service.spend(
+        db, range_days=range_days, group_by=group_by, reveal_identity=reveal_identity
+    )
     return success(data)
 
 
@@ -67,10 +70,13 @@ async def get_spend(
 async def get_reliability(
     range_days: int = Query(default=7, ge=1, le=365),
     group_by: str = Query(default="day"),
-    _principal: Principal = Depends(require_superadmin),
+    principal: Principal = Depends(require_superadmin),
     db: AsyncSession = Depends(get_db_session),
 ) -> dict:
-    data = await ai_ops_read_service.reliability(db, range_days=range_days, group_by=group_by)
+    reveal_identity = _can_reveal_identity(principal)
+    data = await ai_ops_read_service.reliability(
+        db, range_days=range_days, group_by=group_by, reveal_identity=reveal_identity
+    )
     return success(data)
 
 
