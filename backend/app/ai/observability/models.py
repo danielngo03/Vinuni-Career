@@ -1,12 +1,16 @@
-"""ORM model for the ``ai_usage_log`` table.
+"""ORM models for AI observability tables.
 
-PII-safe cost/observability tracking per ``docs/AI_PRODUCT_SPEC.md`` §5.4.
+Tables:
+- ``ai_usage_log``: PII-safe cost/observability tracking per ``docs/AI_PRODUCT_SPEC.md`` §5.4.
+- ``ai_model_price``: admin-editable per-(provider, model) token price table.
+- ``ai_ops_event``: admin-only per-call operational telemetry (AI_PRODUCT_SPEC §5.6).
+- ``ai_usage_daily``: pre-aggregated rollup for fast dashboards.
 
-Stored: task type, internal model alias, success flag, char-length buckets,
-optional user/session UUID, optional cost estimate.
+Stored in ai_usage_log: task type, internal model alias, success flag,
+char-length buckets, optional user/session UUID, optional cost estimate.
 
 Never stored: provider name, model name, API key, prompt text, response text,
-PII, IP address, raw token counts, raw latency.
+PII, IP address, raw token counts, raw latency (ai_usage_log).
 
 Cross-database: ``Uuid`` and ``Numeric`` render correctly on PostgreSQL
 (runtime) and SQLite (unit tests).
@@ -17,7 +21,16 @@ from __future__ import annotations
 import uuid
 from datetime import datetime
 
-from sqlalchemy import Boolean, DateTime, Numeric, String, UniqueConstraint, Uuid, func
+from sqlalchemy import (
+    Boolean,
+    DateTime,
+    Integer,
+    Numeric,
+    String,
+    UniqueConstraint,
+    Uuid,
+    func,
+)
 from sqlalchemy.orm import Mapped, mapped_column
 
 from app.shared.models import Base
@@ -97,4 +110,111 @@ class AiModelPrice(Base):
         nullable=False,
         server_default=func.now(),
         onupdate=func.now(),
+    )
+
+
+class AiOpsEvent(Base):
+    """Admin-only per-call operational telemetry (AI_PRODUCT_SPEC §5.6). No prompt text."""
+
+    __tablename__ = "ai_ops_event"
+
+    id: Mapped[uuid.UUID] = mapped_column(
+        Uuid(as_uuid=True),
+        primary_key=True,
+        default=uuid.uuid4,
+        server_default=func.gen_random_uuid(),
+    )
+    created_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True),
+        nullable=False,
+        server_default=func.now(),
+        index=True,
+    )
+    task_type: Mapped[str] = mapped_column(String(64), nullable=False)
+    alias: Mapped[str] = mapped_column(String(64), nullable=False)
+    provider: Mapped[str | None] = mapped_column(String(64), nullable=True)
+    model: Mapped[str | None] = mapped_column(String(128), nullable=True)
+    prompt_tokens: Mapped[int | None] = mapped_column(Integer, nullable=True)
+    completion_tokens: Mapped[int | None] = mapped_column(Integer, nullable=True)
+    latency_ms: Mapped[int | None] = mapped_column(Integer, nullable=True)
+    status: Mapped[str] = mapped_column(
+        String(16), nullable=False, server_default="ok"
+    )
+    fallback_used: Mapped[bool] = mapped_column(
+        Boolean, nullable=False, server_default="false"
+    )
+    circuit_open: Mapped[bool] = mapped_column(
+        Boolean, nullable=False, server_default="false"
+    )
+    cost_usd: Mapped[float | None] = mapped_column(Numeric(10, 7), nullable=True)
+    unpriced: Mapped[bool] = mapped_column(
+        Boolean, nullable=False, server_default="false"
+    )
+    org_id: Mapped[uuid.UUID | None] = mapped_column(
+        Uuid(as_uuid=True), nullable=True, index=True
+    )
+    user_id: Mapped[uuid.UUID | None] = mapped_column(Uuid(as_uuid=True), nullable=True)
+    session_id: Mapped[uuid.UUID | None] = mapped_column(
+        Uuid(as_uuid=True), nullable=True
+    )
+    request_id: Mapped[str | None] = mapped_column(String(64), nullable=True)
+    langfuse_trace_id: Mapped[str | None] = mapped_column(String(128), nullable=True)
+
+
+class AiUsageDaily(Base):
+    """Pre-aggregated rollup for fast dashboards.
+
+    Grain: day × task_type × provider × model × org_id.
+    Provider and model default to empty string ``""`` when unknown so the
+    unique constraint never contains NULLs (NULL equality is unreliable across
+    databases).
+    """
+
+    __tablename__ = "ai_usage_daily"
+    __table_args__ = (
+        UniqueConstraint(
+            "day",
+            "task_type",
+            "provider",
+            "model",
+            "org_id",
+            name="uq_ai_usage_daily_grain",
+        ),
+    )
+
+    id: Mapped[uuid.UUID] = mapped_column(
+        Uuid(as_uuid=True),
+        primary_key=True,
+        default=uuid.uuid4,
+        server_default=func.gen_random_uuid(),
+    )
+    day: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), nullable=False, index=True
+    )
+    task_type: Mapped[str] = mapped_column(String(64), nullable=False)
+    provider: Mapped[str] = mapped_column(
+        String(64), nullable=False, server_default=""
+    )
+    model: Mapped[str] = mapped_column(
+        String(128), nullable=False, server_default=""
+    )
+    org_id: Mapped[uuid.UUID | None] = mapped_column(Uuid(as_uuid=True), nullable=True)
+    requests: Mapped[int] = mapped_column(Integer, nullable=False, server_default="0")
+    errors: Mapped[int] = mapped_column(Integer, nullable=False, server_default="0")
+    fallbacks: Mapped[int] = mapped_column(Integer, nullable=False, server_default="0")
+    blocked: Mapped[int] = mapped_column(Integer, nullable=False, server_default="0")
+    prompt_tokens: Mapped[int] = mapped_column(
+        Integer, nullable=False, server_default="0"
+    )
+    completion_tokens: Mapped[int] = mapped_column(
+        Integer, nullable=False, server_default="0"
+    )
+    cost_usd: Mapped[float] = mapped_column(
+        Numeric(12, 7), nullable=False, server_default="0"
+    )
+    latency_ms_sum: Mapped[int] = mapped_column(
+        Integer, nullable=False, server_default="0"
+    )
+    latency_ms_count: Mapped[int] = mapped_column(
+        Integer, nullable=False, server_default="0"
     )
