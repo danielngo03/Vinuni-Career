@@ -13,4 +13,11 @@ export const env = {
     .filter(Boolean),
   browserLocaleDetection:
     (process.env.NEXT_PUBLIC_BROWSER_LOCALE_DETECTION ?? "true") === "true",
+  /**
+   * Optional Langfuse observability base URL. When set, the Traces tab renders
+   * a deep-link button for events that have a `langfuse_trace_id`. When absent,
+   * the button is rendered disabled with an explanatory tooltip.
+   * Example: https://cloud.langfuse.com
+   */
+  langfuseBaseUrl: process.env.NEXT_PUBLIC_LANGFUSE_BASE_URL ?? null,
 } as const;

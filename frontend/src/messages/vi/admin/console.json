@@ -98,7 +98,94 @@
       },
       "updated": "Cập nhật lúc {time}",
       "retry": "Thử lại",
-      "loading": "Đang tải..."
+      "loading": "Đang tải...",
+      "traces": {
+        "panelTitle": "AI Traces",
+        "col": {
+          "time": "Thời gian",
+          "feature": "Tính năng / Tác vụ",
+          "model": "Mô hình",
+          "tokens": "Token",
+          "cost": "Chi phí",
+          "latency": "Độ trễ",
+          "status": "Trạng thái"
+        },
+        "status": {
+          "success": "Thành công",
+          "error": "Lỗi",
+          "fallback": "Dự phòng",
+          "rate_limited": "Giới hạn tốc độ",
+          "timeout": "Hết thời gian"
+        },
+        "sheet": {
+          "title": "Chi tiết trace",
+          "labelId": "ID sự kiện",
+          "labelCreatedAt": "Thời gian",
+          "labelTaskType": "Loại tác vụ",
+          "labelAlias": "Bí danh",
+          "labelModel": "Mô hình",
+          "labelStatus": "Trạng thái",
+          "labelPromptTokens": "Token prompt",
+          "labelCompletionTokens": "Token hoàn thiện",
+          "labelTotalTokens": "Tổng token",
+          "labelCost": "Chi phí",
+          "labelLatency": "Độ trễ",
+          "labelTraceId": "Trace ID",
+          "openInLangfuse": "Mở trong Langfuse",
+          "langfuseNotConfigured": "URL Langfuse chưa cấu hình",
+          "masked": "—"
+        },
+        "loadMore": "Tải thêm",
+        "emptyTitle": "Chưa có trace nào",
+        "emptyBody": "Các trace cuộc gọi AI sẽ xuất hiện tại đây sau khi có sự kiện.",
+        "errorTitle": "Không có dữ liệu trace",
+        "errorBody": "Không thể tải dữ liệu trace. Vui lòng thử lại."
+      },
+      "pricing": {
+        "panelTitle": "Mô hình & Giá",
+        "addPrice": "Thêm giá",
+        "col": {
+          "alias": "Bí danh",
+          "promptCost": "Đầu vào / 1k token",
+          "completionCost": "Đầu ra / 1k token",
+          "effectiveFrom": "Hiệu lực từ",
+          "effectiveUntil": "Đến",
+          "actions": "Hành động"
+        },
+        "sheet": {
+          "addTitle": "Thêm giá",
+          "editTitle": "Chỉnh sửa giá",
+          "labelAlias": "Bí danh",
+          "labelAliasHelp": "Tên bí danh như cấu hình trong sổ đăng ký nhà cung cấp.",
+          "labelPromptCost": "Chi phí đầu vào mỗi 1k token (USD)",
+          "labelCompletionCost": "Chi phí đầu ra mỗi 1k token (USD)",
+          "labelEffectiveFrom": "Hiệu lực từ (ngày ISO)",
+          "labelEffectiveUntil": "Hiệu lực đến (ngày ISO, tùy chọn)",
+          "labelNotes": "Ghi chú (tùy chọn)",
+          "save": "Lưu",
+          "cancel": "Hủy",
+          "conflictError": "Đã tồn tại hàng giá cho bí danh này trong khoảng thời gian này. Hãy chỉnh sửa hàng hiện có hoặc thay đổi khoảng thời gian.",
+          "validationCost": "Nhập số không âm hợp lệ (vd: 0.0015).",
+          "validationAlias": "Bí danh là bắt buộc.",
+          "validationFrom": "Ngày hiệu lực từ là bắt buộc."
+        },
+        "unpricedBanner": "Các bí danh này có sự kiện sử dụng nhưng chưa có hàng giá: {aliases}. Chi phí hiển thị là $0.00.",
+        "emptyTitle": "Chưa có hàng giá",
+        "emptyBody": "Thêm hàng giá cho mỗi bí danh để theo dõi chi phí chính xác.",
+        "errorTitle": "Không có dữ liệu giá",
+        "errorBody": "Không thể tải dữ liệu giá. Vui lòng thử lại.",
+        "editAction": "Sửa"
+      },
+      "settings": {
+        "panelTitle": "Cài đặt AI",
+        "perOrgBudgetLabel": "Giới hạn ngân sách AI theo tổ chức mỗi ngày (USD)",
+        "perOrgBudgetHelp": "Giới hạn chi phí AI theo tổ chức mỗi ngày. Đặt 0 để tắt. Thay đổi có hiệu lực ở chu kỳ yêu cầu tiếp theo.",
+        "perOrgBudgetPlaceholder": "vd: 0.50",
+        "perOrgBudgetNote": "TODO: liên kết với trường PATCH per_org_daily_budget_usd khi backend cung cấp trên /admin/ai-settings.",
+        "perOrgSaveLabel": "Lưu ngân sách theo tổ chức",
+        "perOrgSaved": "Đã lưu ngân sách theo tổ chức.",
+        "perOrgError": "Lưu ngân sách theo tổ chức thất bại."
+      }
     }
   }
 }

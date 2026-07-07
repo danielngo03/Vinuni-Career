@@ -41,6 +41,9 @@ import {
 } from "./ai-ops-helpers";
 import { cn } from "@/lib/utils";
 import type { BarDataPoint } from "@/components/ui/bar-series";
+import { AiTracesScreen } from "./ai-traces-screen";
+import { AiPricingScreen } from "./ai-pricing-screen";
+import { AiSettingsTab } from "./ai-settings-tab";
 
 /* -------------------------------------------------------------------------- */
 /* Visibility-gated refetch interval helper                                   */
@@ -814,21 +817,6 @@ function OverviewTab({ range }: { range: AiOpsRange }) {
 }
 
 /* -------------------------------------------------------------------------- */
-/* Coming-soon placeholder tab                                                */
-/* -------------------------------------------------------------------------- */
-
-function ComingSoonPanel() {
-  const t = useTranslations("adminConsole.aiOps");
-  return (
-    <div className="marketplace-card flex items-center justify-center rounded-[12px] px-6 py-16 text-center">
-      <p className="text-sm font-medium text-[var(--text-muted)]">
-        {t("comingSoon")}
-      </p>
-    </div>
-  );
-}
-
-/* -------------------------------------------------------------------------- */
 /* Main screen                                                                */
 /* -------------------------------------------------------------------------- */
 
@@ -886,15 +874,15 @@ export function AiOperationsOverviewScreen() {
       </TabPanel>
 
       <TabPanel tabsId={TAB_ID_BASE} value="traces" active={activeTab === "traces"}>
-        <ComingSoonPanel />
+        <AiTracesScreen range={range} />
       </TabPanel>
 
       <TabPanel tabsId={TAB_ID_BASE} value="models-pricing" active={activeTab === "models-pricing"}>
-        <ComingSoonPanel />
+        <AiPricingScreen />
       </TabPanel>
 
       <TabPanel tabsId={TAB_ID_BASE} value="settings" active={activeTab === "settings"}>
-        <ComingSoonPanel />
+        <AiSettingsTab />
       </TabPanel>
     </>
   );
