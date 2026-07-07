@@ -14,12 +14,13 @@ import uuid
 from typing import Any
 
 from sqlalchemy import select
+from sqlalchemy.exc import IntegrityError
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.ai.observability.models import AiModelPrice
 from app.modules.auth.application.context import RequestContext
 from app.shared.audit import AuditContext, write_audit
-from app.shared.exceptions import ResourceNotFoundError
+from app.shared.exceptions import ConflictError, ResourceNotFoundError
 from app.shared.permissions import Principal
 
 _RESOURCE = "ai_model_price"
@@ -72,8 +73,21 @@ async def create_price(
     """Insert a new (provider, model) price row and audit the creation.
 
     Raises:
-        sqlalchemy.exc.IntegrityError: if (provider, model) already exists.
+        ConflictError: if a row with the same (provider, model) already exists.
     """
+    # Pre-check: avoids leaking DB constraint names on duplicate insert.
+    existing = await db.execute(
+        select(AiModelPrice).where(
+            AiModelPrice.provider == provider,
+            AiModelPrice.model == model,
+        )
+    )
+    if existing.scalar_one_or_none() is not None:
+        raise ConflictError(
+            "A price entry for this provider and model already exists.",
+            details={"provider": provider, "model": model},
+        )
+
     row = AiModelPrice(
         id=uuid.uuid4(),
         provider=provider,
@@ -84,7 +98,14 @@ async def create_price(
         updated_by=principal.user_id,
     )
     db.add(row)
-    await db.flush()  # populate id / server defaults before snapshot
+    try:
+        await db.flush()  # populate id / server defaults before snapshot
+    except IntegrityError:
+        await db.rollback()
+        raise ConflictError(
+            "A price entry for this provider and model already exists.",
+            details={"provider": provider, "model": model},
+        ) from None
 
     after = _row_snapshot(row)
     await write_audit(
@@ -125,7 +146,7 @@ async def update_price(
 
     _ALLOWED = {"input_usd_per_1k", "output_usd_per_1k", "active", "provider", "model"}
     for field, value in fields.items():
-        if field in _ALLOWED and value is not None:
+        if field in _ALLOWED:
             setattr(row, field, value)
 
     row.updated_by = principal.user_id

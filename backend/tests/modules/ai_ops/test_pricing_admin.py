@@ -9,10 +9,15 @@ Coverage:
 4. Negative price → 422 validation error on POST.
 5. GET /admin/ai-ops/prices returns all rows for superadmin.
 6. Non-superadmin → 403 on GET.
+7. Duplicate (provider, model) POST returns 409 CONFLICT with no DB internals.
 
 Auth is injected via FastAPI dependency overrides (same pattern as
 test_ai_ops_api.py).  The conftest db_session fixture provides a clean
 table-per-test via the autouse _clean_tables fixture.
+
+Note: audit assertions require audit_log_enabled=True.  The global conftest
+sets AUDIT_LOG_ENABLED=true in the environment before importing app code, so
+write_audit() will always persist rows during this test module.
 
 Run:
     cd backend && uv run pytest tests/modules/ai_ops/test_pricing_admin.py -v
@@ -194,12 +199,11 @@ async def test_update_price_updates_row_and_audit_log(
     audit = audit_rows[0]
     assert audit.resource_type == "ai_model_price"
     assert str(audit.resource_id) == price_id
-    # before/after snapshots carry the changed fields
+    # before/after snapshots carry the changed fields and must differ on them
     assert audit.before_snapshot is not None
     assert audit.after_snapshot is not None
-    # The changed fields must appear in the diff
-    assert "input_usd_per_1k" in audit.before_snapshot or "input_usd_per_1k" in audit.after_snapshot
-    assert "active" in audit.before_snapshot or "active" in audit.after_snapshot
+    assert audit.before_snapshot["input_usd_per_1k"] != audit.after_snapshot["input_usd_per_1k"]
+    assert audit.before_snapshot["active"] != audit.after_snapshot["active"]
 
 
 # ---------------------------------------------------------------------------
@@ -321,3 +325,41 @@ async def test_non_superadmin_gets_403_on_get(student_client: AsyncClient) -> No
     resp = await student_client.get("/admin/ai-ops/prices")
     assert resp.status_code == 403
     assert resp.json()["error"]["code"] == "PERMISSION_DENIED"
+
+
+# ---------------------------------------------------------------------------
+# Test 7: duplicate (provider, model) → 409 with no DB internals in body
+# ---------------------------------------------------------------------------
+
+
+@pytest.mark.asyncio
+async def test_duplicate_provider_model_returns_409(
+    superadmin_client: AsyncClient,
+) -> None:
+    """POST with a duplicate (provider, model) must return 409 CONFLICT.
+
+    The response body must contain no DB or constraint internals such as
+    table names or constraint identifiers.
+    """
+    payload = {
+        "provider": "openrouter",
+        "model": "conflict-test-model",
+        "input_usd_per_1k": 0.001,
+        "output_usd_per_1k": 0.002,
+        "active": True,
+    }
+
+    # First insert — must succeed.
+    first = await superadmin_client.post("/admin/ai-ops/prices", json=payload)
+    assert first.status_code == 201, first.text
+
+    # Second insert with identical (provider, model) — must conflict.
+    second = await superadmin_client.post("/admin/ai-ops/prices", json=payload)
+    assert second.status_code == 409, second.text
+
+    body_text = second.text
+    # No DB/constraint internals may appear in the response body.
+    for forbidden in ("ai_model_price", "uq_", "unique", "IntegrityError", "constraint"):
+        assert forbidden.lower() not in body_text.lower(), (
+            f"DB internal '{forbidden}' leaked into 409 response body"
+        )
