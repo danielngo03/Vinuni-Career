@@ -387,16 +387,28 @@ async def load_active_key_ciphertexts(db: AsyncSession) -> dict[str, str]:
     return {name: cipher for name, cipher in rows if cipher}
 
 
-async def list_providers(db: AsyncSession) -> list[dict]:
-    """List all providers for the admin API response."""
+async def list_providers(db: AsyncSession, *, reveal_identity: bool = True) -> list[dict]:
+    """List all providers for the admin API response.
+
+    ``reveal_identity`` gates raw provider identity (real name, provider_type,
+    model-revealing description, key last-4). When ``False`` — ordinary
+    ``ai_settings:read`` university staff without ``view_provider_identity`` — only
+    a curated ``vendor_label`` + status is returned. ``base_url`` is NEVER
+    returned at any privilege level.
+    """
     rows = (
         await db.execute(select(AiProviderConfig).order_by(AiProviderConfig.name))
     ).scalars().all()
-    return [_serialize_provider(r) for r in rows]
+    return [_serialize_provider(r, reveal_identity=reveal_identity) for r in rows]
 
 
-async def list_aliases(db: AsyncSession) -> list[dict]:
-    """List all model aliases for the admin API response."""
+async def list_aliases(db: AsyncSession, *, reveal_identity: bool = True) -> list[dict]:
+    """List all model aliases for the admin API response.
+
+    ``reveal_identity`` gates the real provider name, fallback provider names, and
+    model-revealing description. When ``False`` only the safe internal
+    ``alias_name`` + task families + status are returned.
+    """
     rows = (
         await db.execute(
             select(AiModelAlias)
@@ -404,7 +416,7 @@ async def list_aliases(db: AsyncSession) -> list[dict]:
             .order_by(AiModelAlias.alias_name)
         )
     ).scalars().all()
-    return [_serialize_alias(r) for r in rows]
+    return [_serialize_alias(r, reveal_identity=reveal_identity) for r in rows]
 
 
 async def create_provider(
@@ -585,44 +597,83 @@ async def update_alias(db: AsyncSession, alias_id: uuid.UUID, *, payload: dict) 
 
 
 # ---------------------------------------------------------------------------
-# Serializers (safe — no API keys, no model_id exposed externally)
+# Serializers
+#
+# Two secrecy rules apply (CLAUDE.md AI-settings rule; docs/API_CONTRACTS.md
+# ADR-0011.1; .claude/rules/ai.md):
+#   1. ``base_url`` and API keys are NEVER returned at ANY privilege level.
+#   2. Raw provider/model IDENTITY (real provider name, provider_type,
+#      model-revealing description, key last-4, fallback provider names) is
+#      returned only to callers holding ``ai_settings:view_provider_identity``
+#      (or superadmin). Everyone else — including ordinary ``ai_settings:read``
+#      university staff — gets a curated ``vendor_label`` + status only.
+# ``model_id`` is never exposed on GET at any level.
 # ---------------------------------------------------------------------------
 
-def _serialize_provider(r: AiProviderConfig) -> dict:
+# Curated, non-identifying vendor labels keyed by provider_type. Never derive a
+# label from ``provider.name`` (that IS the raw identifier). Mirrors the routing
+# canvas labels; kept local so app.ai.gateway does not import a module package.
+_VENDOR_LABELS: dict[str, str] = {
+    "openai_compatible": "OpenAI-compatible provider",
+    "anthropic": "Anthropic",
+    "azure_openai": "Azure OpenAI",
+    "local": "Local/self-hosted model",
+}
+
+
+def _serialize_provider(r: AiProviderConfig, *, reveal_identity: bool = True) -> dict:
     has_db_key = bool(
         r.api_key_ciphertext and decrypt_provider_api_key(r.api_key_ciphertext)
     )
-    return {
+    # Safe at every privilege level — no name / base_url / key material.
+    out: dict = {
         "id": str(r.id),
-        "name": r.name,
-        "provider_type": r.provider_type,
-        "base_url": r.base_url,
-        "description": r.description,
+        "vendor_label": _VENDOR_LABELS.get(r.provider_type, "AI provider"),
         "is_active": r.is_active,
         "is_builtin": r.is_builtin,
         "has_api_key": has_db_key or has_api_key(r.name),
-        "api_key_last4": r.api_key_last4,
-        "key_version": r.key_version,
         "created_at": r.created_at.isoformat() if r.created_at else None,
         "updated_at": r.updated_at.isoformat() if r.updated_at else None,
     }
+    if reveal_identity:
+        out.update(
+            {
+                "name": r.name,
+                "provider_type": r.provider_type,
+                "description": r.description,
+                "api_key_last4": r.api_key_last4,
+                "key_version": r.key_version,
+            }
+        )
+    # base_url intentionally excluded at ALL levels.
+    return out
 
 
-def _serialize_alias(r: AiModelAlias, *, provider_name: str | None = None) -> dict:
+def _serialize_alias(
+    r: AiModelAlias, *, provider_name: str | None = None, reveal_identity: bool = True
+) -> dict:
     resolved_provider_name = provider_name
     if resolved_provider_name is None and r.provider is not None:
         resolved_provider_name = r.provider.name
-    return {
+    # Safe at every privilege level — alias_name is an internal function-slot
+    # handle (e.g. "chat_default"), never a real model name.
+    out: dict = {
         "id": str(r.id),
         "alias_name": r.alias_name,
-        "provider_id": str(r.provider_id),
-        "provider_name": resolved_provider_name,
         "task_families": r.task_families,
-        "fallback_provider_names": parse_fallback_names(r.fallback_provider_names),
-        "description": r.description,
         "is_active": r.is_active,
         "is_builtin": r.is_builtin,
         "created_at": r.created_at.isoformat() if r.created_at else None,
         "updated_at": r.updated_at.isoformat() if r.updated_at else None,
         # model_id intentionally excluded — never expose to admin UI
     }
+    if reveal_identity:
+        out.update(
+            {
+                "provider_id": str(r.provider_id),
+                "provider_name": resolved_provider_name,
+                "fallback_provider_names": parse_fallback_names(r.fallback_provider_names),
+                "description": r.description,
+            }
+        )
+    return out

@@ -16,6 +16,7 @@ from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.ai.cv.llm import generate_note
+from app.ai.gateway.usage_context import AiUsageContext, billing_scope_for_persona
 from app.ai.prompts.cover_letter import v1 as cover_prompt
 from app.ai.safety.input_guard import sanitize_instruction
 from app.modules.opportunities.domain.lifecycle import visible_levels_for
@@ -128,6 +129,12 @@ async def generate_cover_letter(
             user_content=user_content,
             temperature=0.35,
             max_tokens=_MAX_TOKENS,
+            usage=AiUsageContext(
+                db=session,
+                user_id=principal.user_id,
+                org_id=principal.org_id,
+                billing_scope=billing_scope_for_persona(getattr(principal, "persona", None)),
+            ),
         )
         return {
             "draft": draft.strip(),

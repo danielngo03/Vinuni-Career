@@ -70,6 +70,16 @@ class AiUsageLog(Base):
     session_id: Mapped[uuid.UUID | None] = mapped_column(Uuid(as_uuid=True), nullable=True)
     # Not always available — depends on provider cost reporting.
     cost_usd: Mapped[float | None] = mapped_column(Numeric(10, 7), nullable=True)
+    # Optional caller-supplied dedup key. When set, a second write with the same
+    # key is skipped so a retried logical operation never double-charges the
+    # ledger. NULL for calls that opt out of idempotency; multiple NULLs are
+    # permitted (both PostgreSQL and SQLite treat NULLs as distinct in a UNIQUE
+    # index), so only real keys are de-duplicated.
+    idempotency_key: Mapped[str | None] = mapped_column(String(128), nullable=True)
+
+    __table_args__ = (
+        UniqueConstraint("idempotency_key", name="uq_ai_usage_log_idempotency_key"),
+    )
 
 
 class AiModelPrice(Base):

@@ -20,6 +20,7 @@ import logging
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.ai.cv.llm import generate_note  # re-uses the same guard/log helper
+from app.ai.gateway.usage_context import AiUsageContext, billing_scope_for_persona
 from app.ai.prompts.jd_generation import v1 as jd_prompt
 from app.ai.safety.bias_detection import BiasCheckResult, check_bias
 from app.ai.safety.content_moderation import ContentCheckResult, check_content
@@ -60,6 +61,12 @@ async def draft_description_standalone(
         user_content=user_message,
         temperature=0.4,
         max_tokens=_MAX_TOKENS,
+        usage=AiUsageContext(
+            db=session,
+            user_id=principal.user_id,
+            org_id=principal.org_id,
+            billing_scope=billing_scope_for_persona(getattr(principal, "persona", None)),
+        ),
     )
 
     return {
@@ -158,6 +165,12 @@ async def draft_description(
         user_content=user_message,
         temperature=0.4,
         max_tokens=_MAX_TOKENS,
+        usage=AiUsageContext(
+            db=session,
+            user_id=principal.user_id,
+            org_id=principal.org_id,
+            billing_scope=billing_scope_for_persona(getattr(principal, "persona", None)),
+        ),
     )
 
     bias = check_bias(draft_text)

@@ -14,7 +14,7 @@ from app.ai.gateway.provider_models import AiModelAlias, AiProviderConfig
 from app.modules.ai_settings.application import settings_service
 from app.modules.auth.application.context import RequestContext
 from app.shared.audit import AuditContext, write_audit
-from app.shared.permissions import Principal, permission_checker
+from app.shared.permissions import Principal
 
 # Static, ai-engineer-maintained curated labels per provider_type — never the
 # literal SDK model string. Extend this map as new provider_type values ship;
@@ -27,9 +27,8 @@ _VENDOR_LABELS: dict[str, str] = {
 
 
 def _has_identity_permission(principal: Principal) -> bool:
-    return principal.is_superadmin or permission_checker.can(
-        principal, "ai_settings", "view_provider_identity", resource_org_id=principal.org_id
-    )
+    # Single source of truth for the provider-identity reveal rule.
+    return settings_service.can_view_provider_identity(principal)
 
 
 def _alias_matches_family(alias: AiModelAlias, task_family: str) -> bool:

@@ -103,8 +103,21 @@ async def list_providers(
     from app.ai.gateway import provider_registry
     await settings_service._require_ai_settings_admin(session, auth.principal, "read")
     await provider_registry.ensure_defaults(session)
+    reveal = settings_service.can_view_provider_identity(auth.principal)
+    if reveal:
+        # Auditing the reveal mirrors the routing-canvas identity view.
+        from app.shared.audit import AuditContext, write_audit
+        await write_audit(
+            session,
+            action="ai_settings.provider_identity_viewed",
+            resource_type="ai_provider_config",
+            context=AuditContext(
+                actor_id=auth.principal.user_id, actor_org_id=auth.principal.org_id,
+                ip=auth.ctx.ip, user_agent=auth.ctx.user_agent,
+            ),
+        )
     await session.commit()
-    data = await provider_registry.list_providers(session)
+    data = await provider_registry.list_providers(session, reveal_identity=reveal)
     return success(data)
 
 
@@ -188,8 +201,20 @@ async def list_model_aliases(
     from app.ai.gateway import provider_registry
     await settings_service._require_ai_settings_admin(session, auth.principal, "read")
     await provider_registry.ensure_defaults(session)
+    reveal = settings_service.can_view_provider_identity(auth.principal)
+    if reveal:
+        from app.shared.audit import AuditContext, write_audit
+        await write_audit(
+            session,
+            action="ai_settings.provider_identity_viewed",
+            resource_type="ai_model_alias",
+            context=AuditContext(
+                actor_id=auth.principal.user_id, actor_org_id=auth.principal.org_id,
+                ip=auth.ctx.ip, user_agent=auth.ctx.user_agent,
+            ),
+        )
     await session.commit()
-    data = await provider_registry.list_aliases(session)
+    data = await provider_registry.list_aliases(session, reveal_identity=reveal)
     return success(data)
 
 

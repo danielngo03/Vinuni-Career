@@ -16,6 +16,7 @@ from dataclasses import dataclass, field
 from app.ai.cv import grounding
 from app.ai.cv.fabrication import find_unsupported_claims
 from app.ai.cv.llm import generate_note
+from app.ai.gateway.usage_context import AiUsageContext
 from app.ai.prompts.cv_bullets import v1 as bullets_prompt
 from app.ai.prompts.cv_draft import v1 as draft_prompt
 from app.ai.prompts.cv_fill import v1 as fill_prompt
@@ -57,6 +58,11 @@ class CvAiContext:
     upload_extracted: dict | None = None
     source_cv_sections: list[dict] | None = None
     job: dict | None = None
+    # Usage-aware accounting carrier (db session + attribution + billing_scope).
+    # Carried only so each model call can be budget-checked / ledgered /
+    # telemetered — task logic never queries through it (still "no DB access
+    # here"). ``None`` => legacy metadata-only logging (e.g. offline eval).
+    usage: AiUsageContext | None = None
 
     @property
     def output_language(self) -> str:
@@ -238,6 +244,7 @@ async def _rewrite(ctx: CvAiContext) -> CvAiResult:
         task_type=ctx.task_type,
         system_prompt=rewrite_prompt.build_system_prompt(ctx.output_language),
         user_content=_context_block(ctx),
+        usage=ctx.usage,
     )
     claims = find_unsupported_claims(
         grounding.content_to_text(after_content), _evidence(ctx)
@@ -276,6 +283,7 @@ async def _bullets(ctx: CvAiContext) -> CvAiResult:
         task_type=ctx.task_type,
         system_prompt=bullets_prompt.build_system_prompt(ctx.output_language),
         user_content=_context_block(ctx),
+        usage=ctx.usage,
     )
     new_text = " ".join(b["text"] for b in new_bullets)
     claims = find_unsupported_claims(new_text, _evidence(ctx))
@@ -313,6 +321,7 @@ async def _draft(ctx: CvAiContext) -> CvAiResult:
         task_type=ctx.task_type,
         system_prompt=draft_prompt.build_system_prompt(ctx.output_language),
         user_content=_context_block(ctx),
+        usage=ctx.usage,
     )
     claims = find_unsupported_claims(
         grounding.sections_to_text(after_sections), _evidence(ctx)
@@ -356,6 +365,7 @@ async def _fill(ctx: CvAiContext) -> CvAiResult:
         task_type=ctx.task_type,
         system_prompt=fill_prompt.build_system_prompt(ctx.output_language),
         user_content=_context_block(ctx),
+        usage=ctx.usage,
     )
     claims = find_unsupported_claims(
         grounding.sections_to_text(after_specs), _evidence(ctx)
@@ -405,6 +415,7 @@ async def _optimize(ctx: CvAiContext) -> CvAiResult:
         task_type=ctx.task_type,
         system_prompt=optimize_prompt.build_system_prompt(ctx.output_language),
         user_content=_context_block(ctx),
+        usage=ctx.usage,
     )
     suggestions = {
         "keyword_coverage": {"present": present, "missing": missing},

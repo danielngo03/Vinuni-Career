@@ -96,13 +96,20 @@ async def log_ai_usage_async(
     user_id: uuid.UUID | None = None,
     session_id: uuid.UUID | None = None,
     cost_usd: float | None = None,
-) -> None:
+    idempotency_key: str | None = None,
+) -> bool:
     """Insert a row into ``ai_usage_log`` and emit the structured log line.
 
     Never raises. A DB error downgrades to the sync log path so callers are
     never broken by an observability failure. The caller should NOT await this
     in the critical path of a response if latency matters — fire-and-forget via
     ``asyncio.create_task`` is preferred when the DB session outlives the call.
+
+    Idempotency: when ``idempotency_key`` is provided and a row with that key
+    already exists, the insert is skipped so a retried logical operation never
+    double-charges the ledger. In that case (and on any DB write failure) this
+    returns ``False``; a fresh insert returns ``True``. Callers that don't care
+    about the outcome may ignore the return value.
 
     Args:
         db: Active async SQLAlchemy session. The insert is flushed but the
@@ -118,6 +125,12 @@ async def log_ai_usage_async(
             anonymous or background/system calls.
         session_id: Optional UUID of the chat/AI session, if applicable.
         cost_usd: Optional estimated cost in USD. ``None`` when unavailable.
+        idempotency_key: Optional dedup key. Skips the insert if a row with the
+            same key already exists (no double-charge on retry).
+
+    Returns:
+        ``True`` if a new ledger row was inserted; ``False`` if the write was a
+        dedup no-op or failed.
     """
     # Always emit the structured log line first (sync, cannot fail).
     log_ai_usage(
@@ -130,9 +143,21 @@ async def log_ai_usage_async(
 
     # Attempt the DB insert. If it fails for any reason, log a warning and
     # continue — observability must never break the product code path.
+    inserted = False
     nested = None
     try:
+        from sqlalchemy import select
+
         from app.ai.observability.models import AiUsageLog  # local import avoids circular deps
+
+        # Idempotency guard: a prior row with the same key means this is a retry
+        # of an already-charged operation — skip the insert (and the sample).
+        if idempotency_key is not None:
+            existing = await db.scalar(
+                select(AiUsageLog.id).where(AiUsageLog.idempotency_key == idempotency_key)
+            )
+            if existing is not None:
+                return False
 
         nested = await db.begin_nested()
         row = AiUsageLog(
@@ -144,10 +169,12 @@ async def log_ai_usage_async(
             user_id=user_id,
             session_id=session_id,
             cost_usd=cost_usd,
+            idempotency_key=idempotency_key,
         )
         db.add(row)
         await db.flush([row])
         await nested.commit()
+        inserted = True
     except Exception as exc:  # noqa: BLE001
         if nested is not None and nested.is_active:
             await nested.rollback()
@@ -158,6 +185,7 @@ async def log_ai_usage_async(
                 "error": str(exc),
             },
         )
+        return False
 
     # 1% online sampling to ai_eval_samples for async human review (§10.2).
     # Import is local to avoid circular deps; failure is silently absorbed.
@@ -179,4 +207,5 @@ async def log_ai_usage_async(
     except Exception:  # noqa: BLE001
         if sample_nested is not None and sample_nested.is_active:
             await sample_nested.rollback()
-        pass
+
+    return inserted

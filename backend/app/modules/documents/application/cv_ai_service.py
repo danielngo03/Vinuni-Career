@@ -25,6 +25,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.ai.cv import CvAiContext, generate_cv_edit_patch, run_cv_task
 from app.ai.cv.edit_command import TASK_TYPE as _EDIT_COMMAND_TASK_TYPE
+from app.ai.gateway.usage_context import AiUsageContext, billing_scope_for_persona
 from app.ai.safety import input_guard
 from app.modules.auth.application.context import RequestContext
 from app.modules.documents.api import presenters
@@ -153,6 +154,15 @@ async def _gather_context(
         upload_extracted=upload_extracted,
         source_cv_sections=source_cv_sections,
         job=job,
+        # Route every model call in this CV task through the usage-aware path:
+        # budget pre-check + durable ai_usage_log ledger + ops telemetry,
+        # attributed to the student and charged to the student billing scope.
+        usage=AiUsageContext(
+            db=session,
+            user_id=principal.user_id,
+            org_id=principal.org_id,
+            billing_scope=billing_scope_for_persona(getattr(principal, "persona", None)),
+        ),
     )
 
 

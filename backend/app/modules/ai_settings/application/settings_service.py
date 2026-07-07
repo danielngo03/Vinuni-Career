@@ -63,6 +63,20 @@ async def _require_ai_settings_admin(
         raise PermissionDeniedError(details={"reason": "university_only"})
 
 
+def can_view_provider_identity(principal: Principal) -> bool:
+    """Whether raw provider/model identity may be revealed to this caller.
+
+    Superadmin OR a holder of ``ai_settings:view_provider_identity``. Everyone
+    else — including ordinary ``ai_settings:read`` university staff — sees masked
+    vendor labels + status only (ADR-0011.1; ``.claude/rules/ai.md``). API keys
+    and base URLs are never returned regardless of this flag.
+    """
+
+    return principal.is_superadmin or permission_checker.can(
+        principal, _RESOURCE, "view_provider_identity", resource_org_id=principal.org_id
+    )
+
+
 async def _allowed_aliases_for_field(session: AsyncSession, field: str) -> tuple[str, ...]:
     """Return selectable alias names for a task-family field.
 
