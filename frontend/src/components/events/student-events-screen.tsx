@@ -6,7 +6,6 @@ import {
   CalendarCheck,
   CalendarBlank,
   CheckCircle,
-  LightbulbFilament,
   MapPin,
   VideoCamera,
   Hourglass,
@@ -18,10 +17,12 @@ import { Link } from "@/i18n/navigation";
 import {
   Button,
   EmptyState,
+  InsightPanel,
   Skeleton,
   StatusBadge,
   useToast,
 } from "@/components/ui";
+import type { InsightTone } from "@/components/ui";
 import { PageHeader } from "@/components/layout/page-header";
 import { useEventLabels, REGISTRATION_STATE_TONE } from "@/lib/events/labels";
 import { formatEventWhen } from "@/lib/events/format";
@@ -117,23 +118,23 @@ export function StudentEventsScreen() {
 
       {!query.isPending && !query.isError && rows.length > 0 && (
         <div className="grid grid-cols-3 gap-3">
-          <div className="rounded-2xl border border-[var(--glass-border)] bg-[var(--glass-surface)] px-4 py-3.5 shadow-[0_2px_12px_rgba(11,34,57,0.06)] backdrop-blur-xl transition-all hover:-translate-y-0.5">
+          <div className="rounded-2xl border border-[var(--border-default)] bg-[var(--surface-card)] px-4 py-3.5 shadow-[var(--shadow-sm)] transition-all hover:-translate-y-0.5">
             <div className="mb-2.5 flex size-9 items-center justify-center rounded-xl icon-chip-primary shadow-sm">
-              <CalendarBlank aria-hidden weight="duotone" className="size-4.5 text-white" />
+              <CalendarBlank aria-hidden weight="duotone" className="size-4.5" />
             </div>
             <p className="text-2xl font-black tracking-tight text-[var(--text-primary)]">{rows.length}</p>
             <p className="mt-0.5 text-xs font-medium text-[var(--text-secondary)]">{t("statTotal")}</p>
           </div>
-          <div className="rounded-2xl border border-[var(--glass-border)] bg-[var(--glass-surface)] px-4 py-3.5 shadow-[0_2px_12px_rgba(11,34,57,0.06)] backdrop-blur-xl transition-all hover:-translate-y-0.5">
+          <div className="rounded-2xl border border-[var(--border-default)] bg-[var(--surface-card)] px-4 py-3.5 shadow-[var(--shadow-sm)] transition-all hover:-translate-y-0.5">
             <div className="mb-2.5 flex size-9 items-center justify-center rounded-xl icon-chip-success shadow-sm">
-              <CheckCircle aria-hidden weight="duotone" className="size-4.5 text-white" />
+              <CheckCircle aria-hidden weight="duotone" className="size-4.5" />
             </div>
             <p className="text-2xl font-black tracking-tight text-[var(--text-primary)]">{confirmedCount}</p>
             <p className="mt-0.5 text-xs font-medium text-[var(--text-secondary)]">{t("statConfirmed")}</p>
           </div>
-          <div className="rounded-2xl border border-[var(--glass-border)] bg-[var(--glass-surface)] px-4 py-3.5 shadow-[0_2px_12px_rgba(11,34,57,0.06)] backdrop-blur-xl transition-all hover:-translate-y-0.5">
+          <div className="rounded-2xl border border-[var(--border-default)] bg-[var(--surface-card)] px-4 py-3.5 shadow-[var(--shadow-sm)] transition-all hover:-translate-y-0.5">
             <div className="mb-2.5 flex size-9 items-center justify-center rounded-xl icon-chip-warning shadow-sm">
-              <Hourglass aria-hidden weight="duotone" className="size-4.5 text-white" />
+              <Hourglass aria-hidden weight="duotone" className="size-4.5" />
             </div>
             <p className="text-2xl font-black tracking-tight text-[var(--text-primary)]">{waitlistedCount}</p>
             <p className="mt-0.5 text-xs font-medium text-[var(--text-secondary)]">{t("statWaitlisted")}</p>
@@ -142,28 +143,19 @@ export function StudentEventsScreen() {
       )}
 
       {!query.isPending && !query.isError && (() => {
-        const insights = deriveMyEventInsights(rows.length, confirmedCount, waitlistedCount);
-        if (insights.length === 0) return null;
+        const insightKeys = deriveMyEventInsights(rows.length, confirmedCount, waitlistedCount);
+        const toneByKey: Record<EventInsightKey, InsightTone> = {
+          insightGoodCalendar: "success",
+          insightComingUp: "success",
+          insightWaitlisted: "neutral",
+          insightNoEvents: "neutral",
+        };
         return (
-          <section
-            className="rounded-2xl border border-[var(--ai-accent)]/25 bg-gradient-to-br from-[var(--ai-accent-soft)] to-[var(--glass-surface-light)] p-4 backdrop-blur-xl"
-            aria-label={t("aiInsightsTitle")}
-          >
-            <h2 className="mb-2.5 flex items-center gap-2 text-sm font-bold text-[var(--text-primary)]">
-              <span className="flex size-6 shrink-0 items-center justify-center rounded-lg icon-chip-info shadow-sm">
-                <Sparkle aria-hidden weight="duotone" className="size-3.5 text-white" />
-              </span>
-              {t("aiInsightsTitle")}
-            </h2>
-            <ul className="space-y-1.5">
-              {insights.map((key) => (
-                <li key={key} className="flex items-start gap-2 text-xs text-[var(--text-secondary)]">
-                  <LightbulbFilament aria-hidden weight="duotone" className="mt-0.5 size-3.5 shrink-0 text-[var(--ai-accent)]" />
-                  {t(key)}
-                </li>
-              ))}
-            </ul>
-          </section>
+          <InsightPanel
+            title={t("aiInsightsTitle")}
+            icon={<Sparkle aria-hidden weight="duotone" className="size-4" />}
+            items={insightKeys.map((key) => ({ label: t(key), tone: toneByKey[key] }))}
+          />
         );
       })()}
 
@@ -239,7 +231,7 @@ function RegistrationRow({
   const canCancel = reg.status === "confirmed" || reg.status === "waitlisted";
 
   return (
-    <li className="rounded-2xl border border-[var(--glass-border)] bg-[var(--glass-surface)] backdrop-blur-md p-4 shadow-[var(--shadow-sm)]">
+    <li className="rounded-2xl border border-[var(--border-default)] bg-[var(--surface-card)] p-4 shadow-[var(--shadow-sm)]">
       <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
         <Link
           href={`/events/${event.id}`}

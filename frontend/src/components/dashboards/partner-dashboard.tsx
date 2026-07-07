@@ -13,8 +13,7 @@ import {
   Eye,
   ClockCounterClockwise,
   UserCircle,
-  Sparkle,
-  LightbulbFilament,
+  ChartLineUp,
   ListChecks,
   ShieldCheck,
   Kanban,
@@ -26,7 +25,7 @@ import {
   type Icon,
 } from "@phosphor-icons/react";
 import { Link } from "@/i18n/navigation";
-import { Button, EmptyState, StatusBadge } from "@/components/ui";
+import { Button, EmptyState, InsightPanel, StatusBadge, type InsightItem } from "@/components/ui";
 import { PageHeader } from "@/components/layout/page-header";
 import { formatRelativeTime } from "@/lib/format";
 import { JOB_STATUS_TONE, useJobLabels } from "@/lib/jobs/labels";
@@ -197,6 +196,14 @@ function deriveHiringInsights(m: PartnerDashboardMetrics): HiringInsightEntry[] 
 
   return insights.slice(0, 3);
 }
+
+const HIRING_INSIGHT_TONE: Record<string, InsightItem["tone"]> = {
+  aiInsightStrongDemand: "success",
+  aiInsightLowVolume: "warning",
+  aiInsightDraftJobs: "neutral",
+  aiInsightRevealsPending: "warning",
+  aiInsightNoActive: "warning",
+};
 
 interface PartnerTodo {
   key: string;
@@ -620,26 +627,14 @@ export function PartnerDashboard() {
                 <div className="space-y-6 lg:col-span-2">
                   <TodoCommandCenter items={todos} />
 
-                  {hiringInsights.length > 0 && (
-                    <div className="marketplace-card rounded-[12px] border-l-[3px] border-l-[var(--brand-teal)] p-5">
-                      <div className="mb-3 flex items-center gap-2">
-                        <span className="icon-chip-success flex size-8 shrink-0 items-center justify-center rounded-[10px]">
-                          <Sparkle aria-hidden weight="fill" className="size-4" />
-                        </span>
-                        <span className="text-sm font-bold text-[var(--text-primary)]">
-                          {tp("aiHiringHealthTitle")}
-                        </span>
-                      </div>
-                      <ul className="space-y-2">
-                        {hiringInsights.map((insight, i) => (
-                          <li key={i} className="flex items-start gap-2.5 text-sm text-[var(--text-secondary)]">
-                            <LightbulbFilament aria-hidden weight="duotone" className="mt-0.5 size-4 shrink-0 text-[var(--ai-accent)]" />
-                            {tp(insight.key, insight.values)}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  )}
+                  <InsightPanel
+                    title={tp("aiHiringHealthTitle")}
+                    icon={<ChartLineUp aria-hidden weight="duotone" className="size-4" />}
+                    items={hiringInsights.map((insight) => ({
+                      label: tp(insight.key, insight.values),
+                      tone: HIRING_INSIGHT_TONE[insight.key],
+                    }))}
+                  />
 
                   <JobPerformanceSnapshot
                     jobs={data.jobs_attention}

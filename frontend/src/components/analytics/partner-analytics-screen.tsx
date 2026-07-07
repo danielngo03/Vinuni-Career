@@ -12,12 +12,11 @@ import {
   Users,
   TrendUp,
   TrendDown,
-  Sparkle,
+  ChartLineUp,
   SealCheck,
-  LightbulbFilament,
 } from "@phosphor-icons/react";
 import { Link } from "@/i18n/navigation";
-import { Button, EmptyState, Skeleton } from "@/components/ui";
+import { Button, EmptyState, InsightPanel, Skeleton, type InsightItem } from "@/components/ui";
 import { PageHeader } from "@/components/layout/page-header";
 import { dashboardsApi, type AnalyticsMonthlyPoint, type PartnerAnalytics } from "@/lib/api";
 
@@ -28,9 +27,9 @@ const FUNNEL_COLOR: Record<string, string> = {
   submitted: "bg-[var(--brand-primary)]",
   under_review: "bg-[var(--brand-primary)]/80",
   shortlisted: "bg-[var(--teal-600)]",
-  interview: "bg-emerald-500",
-  offer: "bg-emerald-600",
-  hired: "bg-emerald-700",
+  interview: "bg-[var(--teal-600)]",
+  offer: "bg-[var(--teal-700)]",
+  hired: "bg-[var(--teal-700)]",
   rejected: "bg-[var(--brand-red)]/70",
   withdrawn: "bg-[var(--text-muted)]/50",
 };
@@ -99,6 +98,18 @@ function deriveInsights(data: PartnerAnalytics): InsightEntry[] {
 
   return insights.slice(0, 3);
 }
+
+const ANALYTICS_INSIGHT_TONE: Record<string, InsightItem["tone"]> = {
+  insightLowShortlist: "warning",
+  insightHighShortlist: "success",
+  insightConversionLow: "warning",
+  insightConversionHigh: "success",
+  insightHighRejection: "danger",
+  insightTrendUp: "success",
+  insightTrendDown: "warning",
+  insightTopJob: "neutral",
+  insightNoData: "neutral",
+};
 
 export function PartnerAnalyticsScreen() {
   const t = useTranslations("analytics");
@@ -179,19 +190,19 @@ export function PartnerAnalyticsScreen() {
             <StatTile
               label={t("statTotalApplications")}
               value={totalApplications}
-              icon={<Users aria-hidden weight="duotone" className="size-5 text-white" />}
+              icon={<Users aria-hidden weight="duotone" className="size-5" />}
               iconBg="icon-chip-primary"
             />
             <StatTile
               label={t("statShortlisted")}
               value={shortlistedCount}
-              icon={<SealCheck aria-hidden weight="duotone" className="size-5 text-white" />}
+              icon={<SealCheck aria-hidden weight="duotone" className="size-5" />}
               iconBg="icon-chip-success"
             />
             <StatTile
               label={t("statHired")}
               value={hiredCount}
-              icon={<Trophy aria-hidden weight="duotone" className="size-5 text-white" />}
+              icon={<Trophy aria-hidden weight="duotone" className="size-5" />}
               iconBg="icon-chip-success"
             />
             <StatTile
@@ -199,41 +210,22 @@ export function PartnerAnalyticsScreen() {
               value={trendPeak}
               icon={
                 isTrendUp
-                  ? <TrendUp aria-hidden weight="duotone" className="size-5 text-white" />
-                  : <TrendDown aria-hidden weight="duotone" className="size-5 text-white" />
+                  ? <TrendUp aria-hidden weight="duotone" className="size-5" />
+                  : <TrendDown aria-hidden weight="duotone" className="size-5" />
               }
               iconBg={isTrendUp ? "icon-chip-info" : "icon-chip-warning"}
             />
           </div>
 
-          {/* AI Hiring Insights */}
-          <section
-            aria-labelledby="ai-insights-heading"
-            className="rounded-2xl border border-[var(--ai-accent)]/25 bg-gradient-to-br from-[var(--ai-accent-soft)] to-white/60 p-5 shadow-[0_2px_16px_rgba(11,34,57,0.06)] "
-          >
-            <h2
-              id="ai-insights-heading"
-              className="mb-4 flex items-center gap-2 text-base font-bold text-[var(--text-primary)]"
-            >
-              <span className="icon-chip-success flex size-8 shrink-0 items-center justify-center rounded-xl shadow-sm">
-                <Sparkle aria-hidden weight="duotone" className="size-4.5 text-white" />
-              </span>
-              {t("aiInsightsTitle")}
-              <span className="ml-auto rounded-full border border-[var(--ai-accent)]/30 bg-[var(--ai-accent-soft)] px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-[var(--ai-accent)]">
-                AI
-              </span>
-            </h2>
-            <ul className="space-y-3">
-              {insights.map((insight, i) => (
-                <li key={i} className="flex items-start gap-3">
-                  <span className="mt-0.5 flex size-5 shrink-0 items-center justify-center rounded-full icon-chip-info shadow-sm">
-                    <LightbulbFilament aria-hidden weight="duotone" className="size-3 text-white" />
-                  </span>
-                  <p className="text-sm leading-relaxed text-[var(--text-secondary)]">{t(insight.key, insight.values)}</p>
-                </li>
-              ))}
-            </ul>
-          </section>
+          {/* Derived hiring signals */}
+          <InsightPanel
+            title={t("aiInsightsTitle")}
+            icon={<ChartLineUp aria-hidden weight="duotone" className="size-4" />}
+            items={insights.map((insight) => ({
+              label: t(insight.key, insight.values),
+              tone: ANALYTICS_INSIGHT_TONE[insight.key],
+            }))}
+          />
 
           {/* Application Funnel */}
           <section
@@ -248,7 +240,7 @@ export function PartnerAnalyticsScreen() {
                 <ChartBar
                   aria-hidden
                   weight="duotone"
-                  className="size-4.5 text-white"
+                  className="size-4.5"
                 />
               </span>
               {t("funnelTitle")}
@@ -310,7 +302,7 @@ export function PartnerAnalyticsScreen() {
                   <ChartLine
                     aria-hidden
                     weight="duotone"
-                    className="size-4.5 text-white"
+                    className="size-4.5"
                   />
                 </span>
                 {t("trendTitle")}
@@ -336,7 +328,7 @@ export function PartnerAnalyticsScreen() {
                   <Trophy
                     aria-hidden
                     weight="duotone"
-                    className="size-4.5 text-white"
+                    className="size-4.5"
                   />
                 </span>
                 {t("topJobsTitle")}
@@ -352,7 +344,7 @@ export function PartnerAnalyticsScreen() {
                         href={`/partner/jobs/${job.job_id}/applications`}
                         className="flex items-center gap-3 rounded-xl border border-[var(--border-default)] bg-white px-3.5 py-2.5 outline-none transition-colors hover:bg-white focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)]/30"
                       >
-                        <span className="flex size-6 shrink-0 items-center justify-center rounded-full icon-chip-primary text-[11px] font-bold text-white shadow-sm">
+                        <span className="flex size-6 shrink-0 items-center justify-center rounded-full icon-chip-primary text-[11px] font-bold text-[var(--text-primary)] shadow-sm">
                           {i + 1}
                         </span>
                         <span className="min-w-0 flex-1 truncate text-sm font-semibold text-[var(--text-primary)]">
@@ -386,7 +378,7 @@ function StatTile({
   iconBg?: string;
 }) {
   return (
-    <div className="rounded-2xl border border-[var(--border-default)] bg-white px-4 py-4 shadow-[0_2px_16px_rgba(11,34,57,0.06)] transition-all hover:-translate-y-0.5 hover:shadow-[0_6px_24px_rgba(11,34,57,0.10)]">
+    <div className="rounded-2xl border border-[var(--border-default)] bg-white px-4 py-4 shadow-[var(--shadow-sm)] transition-all hover:-translate-y-0.5 hover:shadow-[var(--shadow-md)]">
       <div className={`mb-3 flex size-10 items-center justify-center rounded-xl shadow-sm ${iconBg}`}>
         {icon}
       </div>

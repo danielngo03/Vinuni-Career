@@ -11,12 +11,11 @@ import {
   GraduationCap,
   Briefcase,
   ArrowRight,
-  Sparkle,
-  LightbulbFilament,
+  ChartLineUp,
 } from "@phosphor-icons/react";
 import { cn } from "@/lib/utils";
 import { Link } from "@/i18n/navigation";
-import { Button, EmptyState, StatusBadge, Skeleton } from "@/components/ui";
+import { Button, EmptyState, InsightPanel, StatusBadge, Skeleton, type InsightItem } from "@/components/ui";
 import { PageHeader } from "@/components/layout/page-header";
 import { ApiError, talentPoolApi, type TalentCard } from "@/lib/api";
 import { DEGREE_LEVELS, OPEN_TO_WORK_TYPES } from "@/lib/api/profile";
@@ -24,10 +23,10 @@ import { useProfileLabels } from "@/lib/profile/labels";
 import { CompanyAvatar } from "@/components/companies/company-avatar";
 
 const WORK_TYPE_CHIP_COLORS: Record<string, string> = {
-  full_time: "bg-blue-100 text-blue-700",
-  internship: "bg-violet-100 text-violet-700",
-  part_time: "bg-amber-100 text-amber-700",
-  contract: "bg-emerald-100 text-emerald-700",
+  full_time: "bg-[var(--bg-muted)] text-[var(--text-secondary)]",
+  internship: "bg-[var(--bg-muted)] text-[var(--text-secondary)]",
+  part_time: "bg-[var(--amber-50)] text-[var(--amber-700)]",
+  contract: "bg-[var(--teal-100)] text-[var(--teal-700)]",
 };
 
 function TalentCardRow({ card }: { card: TalentCard }) {
@@ -96,7 +95,7 @@ function TalentCardRow({ card }: { card: TalentCard }) {
                 <span
                   key={type}
                   className={`inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[11px] font-medium ${
-                    WORK_TYPE_CHIP_COLORS[type] ?? "bg-slate-100 text-slate-600"
+                    WORK_TYPE_CHIP_COLORS[type] ?? "bg-[var(--bg-muted)] text-[var(--text-secondary)]"
                   }`}
                 >
                   <Briefcase className="h-3 w-3" />
@@ -261,35 +260,21 @@ export function TalentPoolScreen() {
               {t("resultsCount", { count: query.data.pages[0].page.total })}
             </p>
           )}
-          {/* AI Talent Discovery Insights */}
+          {/* Talent discovery signals — derived from current result set */}
           {allCards.length > 0 && (() => {
             const total = query.data?.pages[0]?.page.total ?? allCards.length;
             const highCompletion = allCards.filter((c) => c.profile_completion >= 80).length;
-            const insights: string[] = [];
-            if (total > 0) insights.push(t("aiInsightPool", { count: total }));
-            if (highCompletion > 0) insights.push(t("aiInsightHighCompletion", { count: highCompletion }));
+            const insights: InsightItem[] = [];
+            if (total > 0) insights.push({ label: t("aiInsightPool", { count: total }), tone: "neutral" });
+            if (highCompletion > 0) insights.push({ label: t("aiInsightHighCompletion", { count: highCompletion }), tone: "success" });
             const hasFilters = committedKeyword || committedWorkType || committedDegreeLevel;
-            if (!hasFilters) insights.push(t("aiInsightRefine"));
+            if (!hasFilters) insights.push({ label: t("aiInsightRefine"), tone: "neutral" });
             return (
-              <div className={cn(
-                "rounded-2xl border p-4",
-                "border-[var(--ai-accent)]/25 bg-gradient-to-br from-[var(--ai-accent-soft)] to-white/60 ",
-              )}>
-                <p className="mb-3 flex items-center gap-2 text-sm font-bold text-[var(--text-primary)]">
-                  <span className="flex size-6 shrink-0 items-center justify-center rounded-lg icon-chip-info shadow-sm">
-                    <Sparkle aria-hidden weight="duotone" className="size-3.5 text-white" />
-                  </span>
-                  {t("aiInsightsTitle")}
-                </p>
-                <ul className="space-y-1.5">
-                  {insights.map((s, i) => (
-                    <li key={i} className="flex items-start gap-2 text-sm text-[var(--text-secondary)]">
-                      <LightbulbFilament aria-hidden weight="duotone" className="mt-0.5 size-4 shrink-0 text-[var(--ai-accent)]" />
-                      {s}
-                    </li>
-                  ))}
-                </ul>
-              </div>
+              <InsightPanel
+                title={t("aiInsightsTitle")}
+                icon={<ChartLineUp aria-hidden weight="duotone" className="size-4" />}
+                items={insights}
+              />
             );
           })()}
           {allCards.map((card) => (

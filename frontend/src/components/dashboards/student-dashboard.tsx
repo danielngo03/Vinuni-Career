@@ -59,61 +59,33 @@ export function StudentDashboard() {
 
   return (
     <>
-      <section className="mb-7 overflow-hidden rounded-[18px] border border-[var(--border-default)] bg-[var(--surface-card)] shadow-[0_14px_44px_rgba(11,34,57,0.10)]">
-        <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_360px]">
-          <div className="relative bg-[var(--brand-navy)] p-6 sm:p-8">
-            <div
-              aria-hidden
-              className="absolute inset-0 opacity-[0.16]"
-              style={{
-                backgroundImage:
-                  "linear-gradient(135deg, rgba(255,255,255,0.16) 1px, transparent 1px)",
-                backgroundSize: "28px 28px",
-              }}
-            />
-            <div className="relative max-w-2xl">
-              <p className="text-[11px] font-bold uppercase tracking-[0.14em] text-[var(--blue-200)]">
-                VinUni Career
-              </p>
-              <h1 className="mt-3 text-3xl font-extrabold leading-tight tracking-tight text-white sm:text-4xl">
-                {ts("title")}
-              </h1>
-              <p className="mt-3 max-w-xl text-sm leading-6 text-[var(--blue-100)]/86">
-                {ts("subtitle")}
-              </p>
-              <div className="mt-6 flex flex-wrap gap-3">
-                <Link href="/jobs">
-                  <Button variant="secondary">
-                    <Briefcase aria-hidden weight="bold" className="size-4" />
-                    {ts("browseJobs")}
-                  </Button>
-                </Link>
-                <Link href="/student/cv">
-                  <Button variant="ghost" className="border-white/20 bg-white/10 text-white hover:bg-white/16">
-                    <ReadCvLogo aria-hidden weight="bold" className="size-4" />
-                    CV Studio
-                  </Button>
-                </Link>
-              </div>
-            </div>
+      {/* Command-center header — flat monochrome surface (was a navy + dot-grid
+          hero whose right column showed a fabricated "CV Studio" metric and
+          generic welcome copy). Real numbers live in the MetricTiles below. */}
+      <section className="mb-7 rounded-2xl border border-[var(--border-default)] bg-[var(--surface-card)] p-6 shadow-[var(--shadow-sm)] sm:p-8">
+        <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
+          <div className="max-w-2xl">
+            <p className="kicker">VinUni Career</p>
+            <h1 className="mt-2 text-2xl font-extrabold leading-tight tracking-tight text-[var(--text-primary)] sm:text-3xl">
+              {ts("title")}
+            </h1>
+            <p className="mt-2 max-w-xl text-sm leading-6 text-[var(--text-secondary)]">
+              {ts("subtitle")}
+            </p>
           </div>
-          <div className="border-t border-[var(--border-default)] bg-[var(--surface-card)] p-6 lg:border-l lg:border-t-0">
-            <div className="grid gap-3">
-              <div className="rounded-[14px] border border-[var(--border-default)] bg-[var(--surface-secondary)] p-4">
-                <p className="text-xs font-semibold text-[var(--text-secondary)]">
-                  {ts("metric.cvCount")}
-                </p>
-                <p className="mt-1 text-2xl font-black text-[var(--brand-navy)]">CV Studio</p>
-              </div>
-              <div className="rounded-[14px] border border-[var(--border-default)] bg-[var(--ai-accent-soft)] p-4">
-                <p className="text-xs font-semibold text-[var(--ai-accent)]">
-                  {ts("recommendedRolesTitle")}
-                </p>
-                <p className="mt-1 text-sm leading-5 text-[var(--text-secondary)]">
-                  {ts("actionsEmptyBody")}
-                </p>
-              </div>
-            </div>
+          <div className="flex flex-wrap gap-3">
+            <Link href="/jobs">
+              <Button variant="primary">
+                <Briefcase aria-hidden weight="bold" className="size-4" />
+                {ts("browseJobs")}
+              </Button>
+            </Link>
+            <Link href="/student/cv">
+              <Button variant="secondary">
+                <ReadCvLogo aria-hidden weight="bold" className="size-4" />
+                CV Studio
+              </Button>
+            </Link>
           </div>
         </div>
       </section>

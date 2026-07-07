@@ -3,17 +3,18 @@
 import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { BellSimple, BellSimpleSlash, LightbulbFilament, Plus, Sparkle, Trash, WarningCircle } from "@phosphor-icons/react";
-import { cn } from "@/lib/utils";
+import { BellSimple, BellSimpleSlash, Plus, Sparkle, Trash, WarningCircle } from "@phosphor-icons/react";
 import {
   Button,
   EmptyState,
+  InsightPanel,
   Input,
   Modal,
   Select,
   Skeleton,
   useToast,
 } from "@/components/ui";
+import type { InsightItem } from "@/components/ui";
 import { PageHeader } from "@/components/layout/page-header";
 import {
   ApiError,
@@ -125,7 +126,7 @@ export function JobAlertsScreen() {
             </p>
           )}
 
-          {/* AI Alert Intelligence panel */}
+          {/* Alert signals */}
           {(() => {
             const activeCount = alerts.filter((a) => a.is_active).length;
             const now = Date.now();
@@ -138,34 +139,21 @@ export function JobAlertsScreen() {
             const broadAlerts = alerts.filter(
               (a) => !a.keywords && !a.employment_type && !a.location_type,
             ).length;
-            const insights: string[] = [];
-            insights.push(t("aiInsightTotal", { count: alerts.length, active: activeCount }));
+            const items: InsightItem[] = [
+              { label: t("aiInsightTotal", { count: alerts.length, active: activeCount }), tone: "neutral" },
+            ];
             if (recentDays !== null && recentDays <= 7) {
-              insights.push(t("aiInsightRecent", { days: recentDays }));
+              items.push({ label: t("aiInsightRecent", { days: recentDays }), tone: "success" });
             } else if (recentDays === null || recentDays > 14) {
-              insights.push(t("aiInsightNoRecent"));
+              items.push({ label: t("aiInsightNoRecent"), tone: "warning" });
             }
-            if (broadAlerts > 0) insights.push(t("aiInsightBroad", { count: broadAlerts }));
+            if (broadAlerts > 0) items.push({ label: t("aiInsightBroad", { count: broadAlerts }), tone: "neutral" });
             return (
-              <div className={cn(
-                "rounded-2xl border p-4",
-                "border-[var(--ai-accent)]/25 bg-gradient-to-br from-[var(--ai-accent-soft)] to-[var(--glass-surface-light)] backdrop-blur-xl",
-              )}>
-                <p className="mb-2.5 flex items-center gap-2 text-sm font-bold text-[var(--text-primary)]">
-                  <span className="flex size-6 shrink-0 items-center justify-center rounded-lg icon-chip-info shadow-sm">
-                    <Sparkle aria-hidden weight="duotone" className="size-3.5 text-white" />
-                  </span>
-                  {t("aiInsightsTitle")}
-                </p>
-                <ul className="space-y-1.5">
-                  {insights.map((text, i) => (
-                    <li key={i} className="flex items-start gap-2 text-xs text-[var(--text-secondary)]">
-                      <LightbulbFilament aria-hidden weight="duotone" className="mt-px size-3.5 shrink-0 text-[var(--ai-accent)]" />
-                      {text}
-                    </li>
-                  ))}
-                </ul>
-              </div>
+              <InsightPanel
+                title={t("aiInsightsTitle")}
+                icon={<Sparkle aria-hidden weight="duotone" className="size-4" />}
+                items={items}
+              />
             );
           })()}
 
@@ -237,9 +225,9 @@ function AlertCard({
     : t("neverSent");
 
   return (
-    <div className="flex items-start gap-3 rounded-2xl border border-[var(--glass-border)] bg-[var(--glass-surface)] p-4 shadow-sm backdrop-blur-md">
+    <div className="flex items-start gap-3 rounded-2xl border border-[var(--border-default)] bg-[var(--surface-card)] p-4 shadow-sm">
       <span className="mt-0.5 flex size-8 shrink-0 items-center justify-center rounded-xl icon-chip-primary shadow-sm">
-        <BellSimple weight="duotone" className="size-4 text-white" />
+        <BellSimple weight="duotone" className="size-4" />
       </span>
       <div className="min-w-0 flex-1">
         <p className="truncate font-semibold text-[var(--text-primary)]">{alert.name}</p>

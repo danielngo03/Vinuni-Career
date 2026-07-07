@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import {
@@ -10,14 +10,22 @@ import {
   CurrencyDollar,
   LightbulbFilament,
   SignIn,
-  Sparkle,
   WarningCircle,
   PaperPlaneTilt,
   Handshake,
   CheckCircle,
 } from "@phosphor-icons/react";
 import { Link } from "@/i18n/navigation";
-import { Button, EmptyState, Skeleton, StatusBadge } from "@/components/ui";
+import {
+  Button,
+  EmptyState,
+  FilterChip,
+  InsightPanel,
+  ListToolbar,
+  SearchInput,
+  Skeleton,
+  StatusBadge,
+} from "@/components/ui";
 import { PageHeader } from "@/components/layout/page-header";
 import { CompanyAvatar } from "@/components/companies/company-avatar";
 import { formatDateTime } from "@/lib/format";
@@ -103,6 +111,16 @@ function deriveApplicationInsights(rows: StudentApplication[]): AppInsight[] {
   return out.slice(0, 3);
 }
 
+const INSIGHT_TONE: Record<AppInsightKey, "neutral" | "success" | "warning" | "danger"> = {
+  insightOfferPending: "warning",
+  insightInterviewUpcoming: "success",
+  insightGoodMomentum: "success",
+  insightApplyMore: "neutral",
+  insightKeepApplying: "neutral",
+};
+
+type StatusFilter = "all" | "in_progress" | "interview" | "offer";
+
 export function StudentApplicationsScreen() {
   const t = useTranslations("applications");
   const tStates = useTranslations("states");
@@ -126,6 +144,45 @@ export function StudentApplicationsScreen() {
     [query.data],
   );
   const appInsights = useMemo(() => deriveApplicationInsights(rows), [rows]);
+
+  const [search, setSearch] = useState("");
+  const [statusFilter, setStatusFilter] = useState<StatusFilter>("all");
+
+  const counts = useMemo(
+    () => ({
+      total: rows.length,
+      interview: rows.filter((r) => Boolean(r.upcoming_interview)).length,
+      offer: rows.filter((r) => Boolean(r.offer)).length,
+      inProgress: rows.filter(
+        (r) =>
+          r.status === "under_review" ||
+          Boolean(r.upcoming_interview) ||
+          Boolean(r.offer),
+      ).length,
+    }),
+    [rows],
+  );
+
+  const filteredRows = useMemo(() => {
+    const q = search.trim().toLowerCase();
+    return rows.filter((r) => {
+      if (statusFilter === "interview" && !r.upcoming_interview) return false;
+      if (statusFilter === "offer" && !r.offer) return false;
+      if (
+        statusFilter === "in_progress" &&
+        !(r.status === "under_review" || r.upcoming_interview || r.offer)
+      )
+        return false;
+      if (
+        q &&
+        !`${r.job_title ?? ""} ${r.company_name ?? ""}`.toLowerCase().includes(q)
+      )
+        return false;
+      return true;
+    });
+  }, [rows, statusFilter, search]);
+
+  const filtersActive = search.trim() !== "" || statusFilter !== "all";
 
   if (query.isError && query.error instanceof ApiError && query.error.isAuthError) {
     return (
@@ -180,80 +237,124 @@ export function StudentApplicationsScreen() {
         />
       ) : (
         <>
-          {/* Application summary tiles */}
+          {/* Application summary tiles — flat tokenized cards (was glass). */}
           <div className="mb-5 grid grid-cols-2 gap-3 sm:grid-cols-4">
-            <div className="rounded-2xl border border-[var(--glass-border)] bg-[var(--glass-surface)] px-4 py-3.5 shadow-[0_2px_12px_rgba(11,34,57,0.06)] backdrop-blur-xl transition-all hover:-translate-y-0.5">
-              <div className="mb-2.5 flex size-9 items-center justify-center rounded-xl icon-chip-primary shadow-sm">
-                <PaperPlaneTilt aria-hidden weight="duotone" className="size-4.5 text-white" />
+            <div className="marketplace-card rounded-2xl px-4 py-3.5">
+              <div className="mb-2.5 flex size-9 items-center justify-center rounded-xl icon-chip-primary">
+                <PaperPlaneTilt aria-hidden weight="duotone" className="size-4.5" />
               </div>
-              <p className="text-2xl font-black tracking-tight text-[var(--text-primary)]">{rows.length}</p>
+              <p className="text-2xl font-black tracking-tight text-[var(--text-primary)]">{counts.total}</p>
               <p className="mt-0.5 text-xs font-medium text-[var(--text-secondary)]">{t("statTotalApplied")}</p>
             </div>
-            <div className="rounded-2xl border border-[var(--glass-border)] bg-[var(--glass-surface)] px-4 py-3.5 shadow-[0_2px_12px_rgba(11,34,57,0.06)] backdrop-blur-xl transition-all hover:-translate-y-0.5">
-              <div className="mb-2.5 flex size-9 items-center justify-center rounded-xl icon-chip-success shadow-sm">
-                <CalendarCheck aria-hidden weight="duotone" className="size-4.5 text-white" />
+            <div className="marketplace-card rounded-2xl px-4 py-3.5">
+              <div className="mb-2.5 flex size-9 items-center justify-center rounded-xl icon-chip-success">
+                <CalendarCheck aria-hidden weight="duotone" className="size-4.5" />
               </div>
-              <p className="text-2xl font-black tracking-tight text-[var(--text-primary)]">
-                {rows.filter((r) => r.upcoming_interview !== null && r.upcoming_interview !== undefined).length}
-              </p>
+              <p className="text-2xl font-black tracking-tight text-[var(--text-primary)]">{counts.interview}</p>
               <p className="mt-0.5 text-xs font-medium text-[var(--text-secondary)]">{t("statInterviews")}</p>
             </div>
-            <div className="rounded-2xl border border-[var(--glass-border)] bg-[var(--glass-surface)] px-4 py-3.5 shadow-[0_2px_12px_rgba(11,34,57,0.06)] backdrop-blur-xl transition-all hover:-translate-y-0.5">
-              <div className="mb-2.5 flex size-9 items-center justify-center rounded-xl icon-chip-info shadow-sm">
-                <Handshake aria-hidden weight="duotone" className="size-4.5 text-white" />
+            <div className="marketplace-card rounded-2xl px-4 py-3.5">
+              <div className="mb-2.5 flex size-9 items-center justify-center rounded-xl icon-chip-info">
+                <Handshake aria-hidden weight="duotone" className="size-4.5" />
               </div>
-              <p className="text-2xl font-black tracking-tight text-[var(--text-primary)]">
-                {rows.filter((r) => r.offer !== null && r.offer !== undefined).length}
-              </p>
+              <p className="text-2xl font-black tracking-tight text-[var(--text-primary)]">{counts.offer}</p>
               <p className="mt-0.5 text-xs font-medium text-[var(--text-secondary)]">{t("statOffers")}</p>
             </div>
-            <div className="rounded-2xl border border-[var(--glass-border)] bg-[var(--glass-surface)] px-4 py-3.5 shadow-[0_2px_12px_rgba(11,34,57,0.06)] backdrop-blur-xl transition-all hover:-translate-y-0.5">
-              <div className="mb-2.5 flex size-9 items-center justify-center rounded-xl icon-chip-success shadow-sm">
-                <CheckCircle aria-hidden weight="duotone" className="size-4.5 text-white" />
+            <div className="marketplace-card rounded-2xl px-4 py-3.5">
+              <div className="mb-2.5 flex size-9 items-center justify-center rounded-xl icon-chip-success">
+                <CheckCircle aria-hidden weight="duotone" className="size-4.5" />
               </div>
-              <p className="text-2xl font-black tracking-tight text-[var(--text-primary)]">
-                {
-                  rows.filter(
-                    (r) =>
-                      r.status === "under_review" ||
-                      Boolean(r.upcoming_interview) ||
-                      Boolean(r.offer),
-                  ).length
-                }
-              </p>
+              <p className="text-2xl font-black tracking-tight text-[var(--text-primary)]">{counts.inProgress}</p>
               <p className="mt-0.5 text-xs font-medium text-[var(--text-secondary)]">{t("statInProgress")}</p>
             </div>
           </div>
 
-          {/* AI Application Insights */}
-          {appInsights.length > 0 && (
-            <section
-              className="mb-5 rounded-2xl border border-[var(--ai-accent)]/25 bg-gradient-to-br from-[var(--ai-accent-soft)] to-[var(--glass-surface-light)] p-4 backdrop-blur-xl"
-              aria-label={t("listAiInsightsTitle")}
-            >
-              <h2 className="mb-2.5 flex items-center gap-2 text-sm font-bold text-[var(--text-primary)]">
-                <span className="flex size-6 shrink-0 items-center justify-center rounded-lg icon-chip-info shadow-sm">
-                  <Sparkle aria-hidden weight="duotone" className="size-3.5 text-white" />
-                </span>
-                {t("listAiInsightsTitle")}
-              </h2>
-              <ul className="space-y-1.5">
-                {appInsights.map((insight) => (
-                  <li key={insight.key} className="flex items-start gap-2 text-xs text-[var(--text-secondary)]">
-                    <LightbulbFilament aria-hidden weight="duotone" className="mt-0.5 size-3.5 shrink-0 text-[var(--ai-accent)]" />
-                    {insight.values ? t(insight.key, insight.values) : t(insight.key)}
-                  </li>
-                ))}
-              </ul>
-            </section>
-          )}
+          {/* Application signals — flat monochrome panel (was a gradient,
+              "AI"-styled card; these are deterministic heuristics, not AI). */}
+          <InsightPanel
+            className="mb-5"
+            title={t("listAiInsightsTitle")}
+            icon={<LightbulbFilament aria-hidden weight="duotone" className="size-4" />}
+            items={appInsights.map((insight) => ({
+              label: insight.values ? t(insight.key, insight.values) : t(insight.key),
+              tone: INSIGHT_TONE[insight.key],
+            }))}
+          />
 
-          <ul className="space-y-3">
-            {rows.map((app) => (
+          {/* Filter / search toolbar */}
+          <ListToolbar
+            className="mb-4"
+            search={
+              <SearchInput
+                value={search}
+                onValueChange={setSearch}
+                onClear={() => setSearch("")}
+                ariaLabel={tc("search")}
+                placeholder={tc("search")}
+              />
+            }
+            filters={
+              <>
+                <FilterChip
+                  active={statusFilter === "all"}
+                  onClick={() => setStatusFilter("all")}
+                  count={counts.total}
+                >
+                  {tc("all")}
+                </FilterChip>
+                <FilterChip
+                  active={statusFilter === "in_progress"}
+                  onClick={() => setStatusFilter("in_progress")}
+                  count={counts.inProgress}
+                >
+                  {t("statInProgress")}
+                </FilterChip>
+                <FilterChip
+                  active={statusFilter === "interview"}
+                  onClick={() => setStatusFilter("interview")}
+                  count={counts.interview}
+                >
+                  {t("statInterviews")}
+                </FilterChip>
+                <FilterChip
+                  active={statusFilter === "offer"}
+                  onClick={() => setStatusFilter("offer")}
+                  count={counts.offer}
+                >
+                  {t("statOffers")}
+                </FilterChip>
+              </>
+            }
+            count={<span>{tc("results", { count: filteredRows.length })}</span>}
+          />
+
+          {filteredRows.length === 0 ? (
+            <EmptyState
+              kind="empty"
+              icon={ClipboardText}
+              title={tc("noResultsTitle")}
+              description={tc("noResultsBody")}
+              action={
+                filtersActive ? (
+                  <Button
+                    variant="secondary"
+                    onClick={() => {
+                      setSearch("");
+                      setStatusFilter("all");
+                    }}
+                  >
+                    {tc("clearFilters")}
+                  </Button>
+                ) : undefined
+              }
+            />
+          ) : (
+            <ul className="space-y-3">
+              {filteredRows.map((app) => (
               <li key={app.id}>
                 <Link
                   href={`/student/applications/${app.id}`}
-                  className="flex flex-col gap-0 rounded-2xl border border-[var(--glass-border)] bg-[var(--glass-surface)] p-4 shadow-[0_2px_12px_rgba(11,34,57,0.06)] backdrop-blur-md outline-none transition-all hover:border-[var(--brand-primary)]/40 hover:bg-[var(--glass-surface-heavy)] focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)]/30"
+                  className="marketplace-card marketplace-card-hover flex flex-col gap-0 rounded-2xl p-4 outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)]/30"
                 >
                   <div className="flex items-start gap-3.5">
                     <CompanyAvatar
@@ -339,8 +440,9 @@ export function StudentApplicationsScreen() {
                   )}
                 </Link>
               </li>
-            ))}
-          </ul>
+              ))}
+            </ul>
+          )}
 
           {query.hasNextPage && (
             <div className="mt-6 flex justify-center">

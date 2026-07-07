@@ -7,7 +7,6 @@ import {
   EnvelopeSimple,
   Buildings,
   CheckCircle,
-  LightbulbFilament,
   Sparkle,
   XCircle,
   Clock,
@@ -19,6 +18,7 @@ import { useRouter } from "@/i18n/navigation";
 import {
   Button,
   EmptyState,
+  InsightPanel,
   Modal,
   Skeleton,
   StatusBadge,
@@ -27,7 +27,7 @@ import {
 import { PageHeader } from "@/components/layout/page-header";
 import { ApiError, invitationsApi, type JobInvitation } from "@/lib/api";
 import { cn } from "@/lib/utils";
-import type { StatusTone } from "@/components/ui";
+import type { InsightTone, StatusTone } from "@/components/ui";
 
 function statusTone(status: string): StatusTone {
   if (status === "pending") return "pending";
@@ -69,11 +69,11 @@ function InvitationCard({
     | "statusExpired";
 
   return (
-    <article className="rounded-2xl border border-[var(--border-default)] bg-white shadow-[0_2px_16px_rgba(11,34,57,0.06)] overflow-hidden transition-shadow hover:shadow-[0_4px_24px_rgba(11,34,57,0.10)]">
+    <article className="rounded-2xl border border-[var(--border-default)] bg-white shadow-[var(--shadow-sm)] overflow-hidden transition-shadow hover:shadow-[var(--shadow-md)]">
       {/* Header */}
       <div className="flex items-start gap-3 px-5 pt-5 pb-3">
         <div className="flex size-11 shrink-0 items-center justify-center rounded-xl icon-chip-primary shadow-sm">
-          <Buildings weight="duotone" className="size-6 text-white" aria-hidden />
+          <Buildings weight="duotone" className="size-6" aria-hidden />
         </div>
         <div className="min-w-0 flex-1">
           <p className="text-xs font-semibold uppercase tracking-wide text-[var(--text-muted)] mb-0.5">
@@ -88,7 +88,7 @@ function InvitationCard({
 
       {/* Message */}
       {inv.message && (
-        <div className="mx-5 mb-3 rounded-xl border border-[var(--border-default)] bg-white/60 px-4 py-3 text-sm text-[var(--text-secondary)] leading-relaxed">
+        <div className="mx-5 mb-3 rounded-xl border border-[var(--border-default)] bg-[var(--bg-muted)] px-4 py-3 text-sm text-[var(--text-secondary)] leading-relaxed">
           {inv.message}
         </div>
       )}
@@ -107,7 +107,7 @@ function InvitationCard({
 
       {/* Actions — only for pending */}
       {isPending && (
-        <div className="flex items-center gap-2 border-t border-[var(--border-default)] bg-white/40 px-5 py-3.5">
+        <div className="flex items-center gap-2 border-t border-[var(--border-default)] bg-[var(--bg-muted)] px-5 py-3.5">
           <Button
             size="sm"
             variant="primary"
@@ -181,6 +181,14 @@ function deriveInvitationInsights(
   return out.slice(0, 2);
 }
 
+const INVITATION_INSIGHT_TONE: Record<InvitationInsightKey, InsightTone> = {
+  insightRespondMany: "warning",
+  insightRespondSoon: "warning",
+  insightAcceptedNext: "success",
+  insightAllResolved: "success",
+  insightVisible: "success",
+};
+
 export function StudentInvitationsScreen() {
   const t = useTranslations("jobInvitations");
   const toast = useToast();
@@ -251,23 +259,23 @@ export function StudentInvitationsScreen() {
       {/* Summary tiles — shown once data loads and there are invitations */}
       {!query.isPending && !query.isError && invitations.length > 0 && (
         <div className="grid grid-cols-3 gap-3">
-          <div className="rounded-2xl border border-[var(--border-default)] bg-white px-4 py-3.5 shadow-[0_2px_12px_rgba(11,34,57,0.06)] transition-all hover:-translate-y-0.5">
+          <div className="rounded-2xl border border-[var(--border-default)] bg-white px-4 py-3.5 shadow-[var(--shadow-sm)] transition-all hover:-translate-y-0.5">
             <div className="mb-2.5 flex size-9 items-center justify-center rounded-xl icon-chip-warning shadow-sm">
-              <Hourglass aria-hidden weight="duotone" className="size-4.5 text-white" />
+              <Hourglass aria-hidden weight="duotone" className="size-4.5" />
             </div>
             <p className="text-2xl font-black tracking-tight text-[var(--text-primary)]">{pending.length}</p>
             <p className="mt-0.5 text-xs font-medium text-[var(--text-secondary)]">{t("statusPending")}</p>
           </div>
-          <div className="rounded-2xl border border-[var(--border-default)] bg-white px-4 py-3.5 shadow-[0_2px_12px_rgba(11,34,57,0.06)] transition-all hover:-translate-y-0.5">
+          <div className="rounded-2xl border border-[var(--border-default)] bg-white px-4 py-3.5 shadow-[var(--shadow-sm)] transition-all hover:-translate-y-0.5">
             <div className="mb-2.5 flex size-9 items-center justify-center rounded-xl icon-chip-success shadow-sm">
-              <Handshake aria-hidden weight="duotone" className="size-4.5 text-white" />
+              <Handshake aria-hidden weight="duotone" className="size-4.5" />
             </div>
             <p className="text-2xl font-black tracking-tight text-[var(--text-primary)]">{accepted.length}</p>
             <p className="mt-0.5 text-xs font-medium text-[var(--text-secondary)]">{t("statusAccepted")}</p>
           </div>
-          <div className="rounded-2xl border border-[var(--border-default)] bg-white px-4 py-3.5 shadow-[0_2px_12px_rgba(11,34,57,0.06)] transition-all hover:-translate-y-0.5">
+          <div className="rounded-2xl border border-[var(--border-default)] bg-white px-4 py-3.5 shadow-[var(--shadow-sm)] transition-all hover:-translate-y-0.5">
             <div className="mb-2.5 flex size-9 items-center justify-center rounded-xl icon-chip-primary shadow-sm">
-              <EnvelopeSimple aria-hidden weight="duotone" className="size-4.5 text-white" />
+              <EnvelopeSimple aria-hidden weight="duotone" className="size-4.5" />
             </div>
             <p className="text-2xl font-black tracking-tight text-[var(--text-primary)]">{invitations.length}</p>
             <p className="mt-0.5 text-xs font-medium text-[var(--text-secondary)]">{t("statTotalReceived")}</p>
@@ -275,27 +283,13 @@ export function StudentInvitationsScreen() {
         </div>
       )}
 
-      {/* AI Invitation Insights */}
+      {/* Invitation signals */}
       {!query.isPending && !query.isError && invitations.length > 0 && invInsights.length > 0 && (
-        <section
-          className="rounded-2xl border border-[var(--ai-accent)]/25 bg-gradient-to-br from-[var(--ai-accent-soft)] to-white/60 p-4 "
-          aria-label={t("aiInsightsTitle")}
-        >
-          <h2 className="mb-2.5 flex items-center gap-2 text-sm font-bold text-[var(--text-primary)]">
-            <span className="flex size-6 shrink-0 items-center justify-center rounded-lg icon-chip-info shadow-sm">
-              <Sparkle aria-hidden weight="duotone" className="size-3.5 text-white" />
-            </span>
-            {t("aiInsightsTitle")}
-          </h2>
-          <ul className="space-y-1.5">
-            {invInsights.map((key) => (
-              <li key={key} className="flex items-start gap-2 text-xs text-[var(--text-secondary)]">
-                <LightbulbFilament aria-hidden weight="duotone" className="mt-0.5 size-3.5 shrink-0 text-[var(--ai-accent)]" />
-                {t(key)}
-              </li>
-            ))}
-          </ul>
-        </section>
+        <InsightPanel
+          title={t("aiInsightsTitle")}
+          icon={<Sparkle aria-hidden weight="duotone" className="size-4" />}
+          items={invInsights.map((key) => ({ label: t(key), tone: INVITATION_INSIGHT_TONE[key] }))}
+        />
       )}
 
       {query.isPending && <InvitationsSkeleton />}

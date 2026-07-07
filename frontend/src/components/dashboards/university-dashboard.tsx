@@ -10,14 +10,13 @@ import {
   Buildings,
   Briefcase,
   ClipboardText,
-  LightbulbFilament,
+  ChartLineUp,
   PresentationChart,
   ShieldCheck,
-  Sparkle,
   Warning,
 } from "@phosphor-icons/react";
 import { Link } from "@/i18n/navigation";
-import { EmptyState } from "@/components/ui";
+import { EmptyState, InsightPanel, type InsightItem } from "@/components/ui";
 import { PageHeader } from "@/components/layout/page-header";
 import { formatDateTime } from "@/lib/format";
 import { dashboardsApi, type UniversityDashboardMetrics } from "@/lib/api";
@@ -250,38 +249,24 @@ export function UniversityDashboard() {
               {/* Row 1: 4 metric tiles */}
               <MetricTiles items={metrics} />
 
-              {/* AI Governance Insights panel */}
+              {/* Governance signals panel — derived from live moderation metrics */}
               {(() => {
                 const jobsPending = data.metrics.jobs_pending_moderation;
                 const partnersPending = data.metrics.partners_pending;
                 const partnersActive = data.metrics.partners_active;
                 const jobsTotal = data.metrics.jobs_active_total;
-                const insights: string[] = [];
-                if (jobsPending > 8) insights.push(tu("aiInsightQueueOverloaded", { count: jobsPending }));
-                else if (jobsPending > 0) insights.push(tu("aiInsightQueuePending", { count: jobsPending }));
-                else insights.push(tu("aiInsightQueueClear"));
-                if (partnersPending > 0) insights.push(tu("aiInsightPartnersPending", { count: partnersPending }));
-                if (partnersActive > 0) insights.push(tu("aiInsightPlatformScope", { partners: partnersActive, jobs: jobsTotal }));
+                const insights: InsightItem[] = [];
+                if (jobsPending > 8) insights.push({ label: tu("aiInsightQueueOverloaded", { count: jobsPending }), tone: "danger" });
+                else if (jobsPending > 0) insights.push({ label: tu("aiInsightQueuePending", { count: jobsPending }), tone: "warning" });
+                else insights.push({ label: tu("aiInsightQueueClear"), tone: "success" });
+                if (partnersPending > 0) insights.push({ label: tu("aiInsightPartnersPending", { count: partnersPending }), tone: "warning" });
+                if (partnersActive > 0) insights.push({ label: tu("aiInsightPlatformScope", { partners: partnersActive, jobs: jobsTotal }), tone: "neutral" });
                 return (
-                  <div className={cn(
-                    "marketplace-card rounded-[12px] border-l-[3px] p-4",
-                    "border-l-[var(--brand-teal)]",
-                  )}>
-                    <p className="mb-2.5 flex items-center gap-2 text-sm font-bold text-[var(--text-primary)]">
-                      <span className="icon-chip-success flex size-6 shrink-0 items-center justify-center rounded-lg">
-                        <Sparkle aria-hidden weight="duotone" className="size-3.5" />
-                      </span>
-                      {tu("aiInsightsTitle")}
-                    </p>
-                    <ul className="space-y-1.5">
-                      {insights.map((text, i) => (
-                        <li key={i} className="flex items-start gap-2 text-xs text-[var(--text-secondary)]">
-                          <LightbulbFilament aria-hidden weight="duotone" className="mt-px size-3.5 shrink-0 text-[var(--ai-accent)]" />
-                          {text}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
+                  <InsightPanel
+                    title={tu("aiInsightsTitle")}
+                    icon={<ChartLineUp aria-hidden weight="duotone" className="size-4" />}
+                    items={insights}
+                  />
                 );
               })()}
 
