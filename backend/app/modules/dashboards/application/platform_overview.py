@@ -78,7 +78,7 @@ async def platform_overview(db: AsyncSession) -> dict[str, Any]:
 
     active_users: int = await safe(
         db,
-        lambda: user_read_facade.count_identities_by_persona(db, "student"),
+        lambda: user_read_facade.count_active_identities(db),
         fallback=0,
     )
 

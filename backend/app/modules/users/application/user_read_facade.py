@@ -250,3 +250,20 @@ async def count_identities_by_persona(session: AsyncSession, persona: str) -> in
             select(func.count()).select_from(Identity).where(Identity.persona == persona)
         )
     ).scalar_one()
+
+
+async def count_active_identities(session: AsyncSession) -> int:
+    """Total count of all active ``identities`` rows across every persona.
+
+    Used by superadmin platform overview to report platform-wide active users
+    rather than a single-persona subset.  Not deduped by user — a user holding
+    two identity rows (e.g. student + university_staff) contributes 2.
+    """
+
+    from sqlalchemy import func
+
+    return (
+        await session.execute(
+            select(func.count()).select_from(Identity)
+        )
+    ).scalar_one()

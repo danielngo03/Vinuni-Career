@@ -176,3 +176,65 @@ async def test_one_failing_subquery_returns_200_with_fallback(
     assert "ai" in data
     assert "outbox" in data
     assert "active_users" in data
+
+
+# ---------------------------------------------------------------------------
+# Test 4: ai sub-query failing → 200 with safe fallback {}
+# ---------------------------------------------------------------------------
+
+
+@pytest.mark.asyncio
+async def test_ai_failing_subquery_returns_200_with_fallback(
+    superadmin_client: AsyncClient,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """Simulate ai_ops_read_service.overview raising; endpoint must return 200 with fallback {}."""
+    from app.modules.ai_ops.application import ai_ops_read_service
+
+    async def _raise(*args: object, **kwargs: object) -> dict:
+        raise RuntimeError("injected ai failure")
+
+    monkeypatch.setattr(ai_ops_read_service, "overview", _raise)
+
+    resp = await superadmin_client.get("/admin/overview")
+    assert resp.status_code == 200, resp.text
+    data = resp.json()["data"]
+
+    # The failed section falls back to {} — no 500 raised.
+    assert data["ai"] == {}
+
+    # Other sections still present.
+    assert "outbox" in data
+    assert "moderation_pending" in data
+    assert "active_users" in data
+
+
+# ---------------------------------------------------------------------------
+# Test 5: outbox sub-query failing → 200 with safe fallback {}
+# ---------------------------------------------------------------------------
+
+
+@pytest.mark.asyncio
+async def test_outbox_failing_subquery_returns_200_with_fallback(
+    superadmin_client: AsyncClient,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """Simulate dispatch_service.status_counts raising; endpoint must return 200 with fallback."""
+    from app.modules.notifications.application import dispatch_service
+
+    async def _raise(*args: object, **kwargs: object) -> dict:
+        raise RuntimeError("injected outbox failure")
+
+    monkeypatch.setattr(dispatch_service, "status_counts", _raise)
+
+    resp = await superadmin_client.get("/admin/overview")
+    assert resp.status_code == 200, resp.text
+    data = resp.json()["data"]
+
+    # The failed section falls back to {} — no 500 raised.
+    assert data["outbox"] == {}
+
+    # Other sections still present.
+    assert "ai" in data
+    assert "moderation_pending" in data
+    assert "active_users" in data
