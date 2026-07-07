@@ -221,6 +221,61 @@
         "loading": "Loading..."
       }
     },
+    "systemHealth": {
+      "pageTitle": "System Health",
+      "pageSubtitle": "Near-realtime scheduled jobs, queue depth, and service readiness.",
+      "tabs": {
+        "queuesJobs": "Queues & Jobs",
+        "services": "Services"
+      },
+      "queuesJobs": {
+        "redisTileLabel": "Redis broker",
+        "queueDepthTileLabel": "Celery queue depth",
+        "brokerConfiguredTileLabel": "Broker configured",
+        "yes": "Yes",
+        "no": "No",
+        "na": "n/a",
+        "jobsTableCaption": "Scheduled job health",
+        "col": {
+          "name": "Job",
+          "interval": "Interval",
+          "lastRun": "Last run",
+          "duration": "Duration",
+          "status": "Status"
+        },
+        "neverRun": "Never run",
+        "dash": "—",
+        "emptyTitle": "No scheduled jobs",
+        "emptyBody": "No scheduled job entries were returned by the backend.",
+        "errorTitle": "Jobs unavailable",
+        "errorBody": "Could not load scheduled job health. Please try again."
+      },
+      "services": {
+        "dbTileLabel": "Database",
+        "redisTileLabel": "Redis",
+        "outboxTitle": "Outbox health",
+        "outbox": {
+          "pending": "Pending",
+          "sent": "Sent",
+          "failed": "Failed",
+          "skipped": "Skipped",
+          "dead": "Dead",
+          "oldestPendingAge": "Oldest pending age",
+          "retryScheduled": "Retry scheduled"
+        },
+        "oldestPendingAgeSeconds": "{seconds}s",
+        "healthy": "Healthy",
+        "errorTitle": "Services unavailable",
+        "errorBody": "Could not load service health. Please try again."
+      },
+      "status": {
+        "ok": "OK",
+        "down": "Down",
+        "error": "Error",
+        "neverRun": "Never run"
+      },
+      "retry": "Retry"
+    },
     "audit": {
       "pageTitle": "Audit Log",
       "pageSubtitle": "Immutable record of all superadmin and platform-level actions.",

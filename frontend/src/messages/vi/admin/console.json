@@ -221,6 +221,61 @@
         "loading": "Đang tải..."
       }
     },
+    "systemHealth": {
+      "pageTitle": "Tình trạng hệ thống",
+      "pageSubtitle": "Tác vụ định kỳ, độ sâu hàng đợi và tình trạng sẵn sàng dịch vụ gần thời gian thực.",
+      "tabs": {
+        "queuesJobs": "Hàng đợi & Tác vụ",
+        "services": "Dịch vụ"
+      },
+      "queuesJobs": {
+        "redisTileLabel": "Redis broker",
+        "queueDepthTileLabel": "Độ sâu hàng đợi Celery",
+        "brokerConfiguredTileLabel": "Broker đã cấu hình",
+        "yes": "Có",
+        "no": "Không",
+        "na": "n/a",
+        "jobsTableCaption": "Tình trạng tác vụ định kỳ",
+        "col": {
+          "name": "Tác vụ",
+          "interval": "Chu kỳ",
+          "lastRun": "Lần chạy cuối",
+          "duration": "Thời lượng",
+          "status": "Trạng thái"
+        },
+        "neverRun": "Chưa chạy",
+        "dash": "—",
+        "emptyTitle": "Không có tác vụ định kỳ",
+        "emptyBody": "Không có mục tác vụ định kỳ nào được trả về từ backend.",
+        "errorTitle": "Không có dữ liệu tác vụ",
+        "errorBody": "Không thể tải tình trạng tác vụ định kỳ. Vui lòng thử lại."
+      },
+      "services": {
+        "dbTileLabel": "Cơ sở dữ liệu",
+        "redisTileLabel": "Redis",
+        "outboxTitle": "Tình trạng hộp thư đi",
+        "outbox": {
+          "pending": "Đang chờ",
+          "sent": "Đã gửi",
+          "failed": "Thất bại",
+          "skipped": "Bỏ qua",
+          "dead": "Chết",
+          "oldestPendingAge": "Tuổi chờ lâu nhất",
+          "retryScheduled": "Đã lên lịch thử lại"
+        },
+        "oldestPendingAgeSeconds": "{seconds}s",
+        "healthy": "Bình thường",
+        "errorTitle": "Dịch vụ không khả dụng",
+        "errorBody": "Không thể tải tình trạng dịch vụ. Vui lòng thử lại."
+      },
+      "status": {
+        "ok": "OK",
+        "down": "Ngừng hoạt động",
+        "error": "Lỗi",
+        "neverRun": "Chưa chạy"
+      },
+      "retry": "Thử lại"
+    },
     "audit": {
       "pageTitle": "Nhật ký kiểm tra",
       "pageSubtitle": "Bản ghi bất biến về tất cả hành động cấp superadmin và nền tảng.",
