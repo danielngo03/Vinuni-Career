@@ -5,6 +5,48 @@
 
 ---
 
+## 0. Latest verified batch — Partner candidate triage (08/07/2026)
+
+Branch `feat/partner-candidate-triage` (built on the current uncommitted
+opportunities/CV-JD-fit WIP as a base commit). Three partner recruiter surfaces,
+all EXTENDING existing real components — not rebuilds:
+
+- **Bulk-advance candidates** — `POST /jobs/{job_id}/applications/bulk-advance`.
+  Runs the same gated per-item transaction as single `/advance` (RBAC, scorecard/
+  score-threshold gate never bypassed, audit, notify, optional `Idempotency-Key`);
+  per-item `results` (`advanced|blocked|skipped|error`) per `BUSINESS_LOGIC.md`
+  §3.6. Status: **implemented + backend-tested**.
+- **AI applicant fit ranking** — `GET /jobs/{job_id}/applicants/ranking`.
+  Deterministic 0-100 CV-JD product score over each applicant's IMMUTABLE
+  application-CV snapshot (reuses `app.ai.cv.job_fit`, NO per-applicant model call).
+  Advisory-only, anonymity-safe (masked handle until reveal), no provider/model/
+  confidence leakage, honest `null`/`no_requirements` states. Status: **implemented
+  + backend-tested**.
+- **Partner CV review drawer** — right-anchored, prev/next paging through the
+  applicant list without closing + embedded watermarked CV preview (iframe of the
+  signed snapshot URL) + inline fit chip + screening brief. Status: **API wired +
+  typecheck/lint/build verified; browser + E2E QA pending**.
+- **CV snapshot at apply time** — VERIFIED already immutable
+  (`ApplicationCvSnapshot.snapshot_json` full copy; source FKs `ondelete=SET NULL`;
+  partner download renders the snapshot, not the live CV). A deleted CV still
+  preserves exactly what the partner reviews. (Fidelity note: uploaded-document
+  snapshots re-render extracted sections, not the original PDF bytes — a follow-up.)
+
+**Verification evidence (commands + results):**
+
+- Backend new tests: `DEBUG=false uv run pytest tests/integration/test_recruitment_bulk_advance.py tests/integration/test_recruitment_candidate_ranking.py -q` → **12 passed** (5 bulk-advance + 7 ranking).
+- Backend regression: recruitment + cv-job-fit + opportunities + dashboards suites → **passed, 0 failures**.
+- Lint/type (touched backend files): `uv run ruff check …` → clean; `uv run mypy …` → no NEW errors (the 21 mypy errors present are pre-existing WIP-base salary/experience/fit_cache gaps already flagged in `CLAUDE.md`).
+- Frontend: `npx tsc --noEmit` clean; `npx next lint` clean on touched files; `node scripts/check-message-parity.mjs` → parity OK (51 files); `npm run build` → succeeded.
+
+**Not yet done (see BACKLOG "Partner recruiting — follow-up gaps"):** partner
+package quota ENFORCEMENT (job-post/passive-search/etc. displayed but not
+consumed), analytics CSV export, bulk candidate tagging, AI ranking-explanation/
+requirement-validator/outreach tools, partner dashboard visual charts, and
+browser/E2E QA of this batch.
+
+---
+
 ## 1. Current State
 
 - **Human review checkpoint (27/06/2026):** Build was paused because the

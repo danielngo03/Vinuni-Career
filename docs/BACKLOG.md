@@ -814,3 +814,21 @@
 | B-583 | Dashboard V2 reality pass: replace demo metrics with real read models, honest empty/error/permission/stale-data states, useful charts/flows per persona, and browser-verified responsive layouts | P0 | 2–4 |
 | B-584 | Advertising campaign workflow V2: partner campaign builder supports auto-allocation or manual targeting by surface/category/role/industry/location/cohort, budget pacing, fraud/risk checks, university workflow approval, and real performance attribution | P0 | 4 |
 | B-585 | Events V2 operating model: partner/university event approval, ticket/capacity/waitlist/check-in/certificate flows, event promotion inventory, attendee analytics, and dashboard widgets grounded in real event data | P1 | 4 |
+
+---
+
+## Partner recruiting — follow-up gaps (08/07/2026)
+
+Surfaced during the partner/employer end-to-end review. The partner module is
+~90% built; these are the real remaining gaps (candidate-triage batch — bulk-advance,
+AI applicant fit ranking, CV review drawer prev/next + embedded preview — shipped on
+`feat/partner-candidate-triage`, see `IMPLEMENTATION_STATUS.md` §0).
+
+| ID | Item | Priority | Phase |
+|----|------|----------|-------|
+| B-586 | Partner package quota ENFORCEMENT: `job_post_quota`/`featured_job_slots`/`passive_search_quota`/`email_blast_quota` are defined in plan limits + displayed but NEVER consumed. Add a `quota_usage` ledger + `check_and_consume_quota` at `create_job`/publish/passive-search/email; period reset/carryover per `BUSINESS_LOGIC.md` §1.6/§2; 80% warning; `QUOTA_EXCEEDED` with exhaustion routing (billing upgrade if `billing:manage`, else request owner approval) | P0 | 2 |
+| B-587 | Partner billing live consumption meters: replace static plan-grant rows with real used-vs-limit meters for jobs/candidates/passive-search/email (depends B-586); wire `GET /quota/partner` (currently deferred) to the enforced ledger | P1 | 2 |
+| B-588 | Analytics CSV export: `analytics:export` capability exists but no endpoint/UI — add per-job metrics + funnel + source-mix export (PII-safe coarse dimensions only, `PARTNER_RBAC_ANALYTICS_SPEC.md`) | P1 | 2 |
+| B-589 | Candidate tagging + bulk-tag: tag applicants (e.g. shortlist/keep-warm) and a bulk-tag action alongside bulk review/reject/advance | P2 | 2 |
+| B-590 | AI recruiting tools gap: ranking-explanation (natural-language "why this rank", usage-metered via `UsageContext`), JD requirement validator, and candidate outreach draft — all advisory, confirmation-required, no provider/model leakage; `ai_recruiting:*` grants enforced directly at the tool boundary | P1 | 3 |
+| B-591 | Partner dashboard visual charts: real read-model-backed funnel/aging/conversion/time-series charts (monochrome chart primitives) + proactively grant-rendered locked widgets on `/partner/ops`; browser + E2E QA of the candidate-triage batch (drawer paging/focus/CV embed, ranking honest states + advisory framing, bulk-advance partial-result summary) | P1 | 2–4 |
