@@ -4486,3 +4486,98 @@ reorder, photo crop round-trip, undo/redo, AI diff accept/reject, ingestion
 polish` — nested-interactive ARIA fix on canvas blocks. `backend-developer`/
 `system-architect` — B-528.1 (`CvTemplateVersion`) and B-528.2 (render
 pipeline unification) scope and implementation.
+
+---
+
+## University Operations command center — 2026-07-08
+
+**Scope:** End-to-end review + build for the university operations control
+plane: a unified operations surface, SLA visibility, a request-changes
+moderation decision, and event attendee export. Status tier per surface below.
+
+### Delivered — `API wired` + backend-tested (browser verification pending, B-580)
+
+- **Unified operations read model** — `GET /api/v1/dashboards/university/operations`
+  (`dashboards/application/operations_read.py`). Aggregates every
+  moderation/approval queue (jobs, events, ads, partner registrations, AI
+  human-review) into one payload: per-queue `pending`/`overdue`/`due_soon`
+  counts + SLA `health` traffic light, an SLA roll-up (total pending/overdue,
+  breach rate), a moderation-risk severity mix, workload by moderator + by
+  department (+ unassigned bucket), upcoming events, and a breach-first
+  actionable-task list. Read-only via application-layer facades
+  (`opportunities`/`advertising`/`moderation`/`organization` `ops_queue_read`
+  seams) + `_common.safe` per-widget degradation; university-only gate reused
+  from `university_dashboard._require_university`. No new module-boundary
+  violations (verified against `test_module_boundaries`).
+- **Shared per-queue SLA policy** — `app/shared/moderation.py` now carries the
+  documented SLA windows (jobs/events/ads 24h, partner reg 48h, AI review 4h;
+  `BUSINESS_LOGIC.md` §11), a `sla_health` amber/red classifier (amber window =
+  `max(2h, 25% of SLA)`), and a `summarize_queue` aggregator. File is now
+  mypy-clean.
+- **Events attendee CSV export** — `GET /api/v1/events/{event_id}/registrations/export`
+  (`registration_service.export_attendees` + `events_router`). Organizer/
+  university gated (enumeration-safe 404 for others), **audited**
+  (`event.attendees_exported`), email-masked for non-organizers, UTF-8 BOM,
+  CSV-formula-injection-safe cells.
+- **Request-changes moderation decision** for jobs and events — new
+  `changes_requested` moderation status (code-only, plain-string columns) +
+  `request_changes_job` / `request_changes_event` services and
+  `POST /admin/{jobs,events}/{id}/request-changes` routes. Sends the listing
+  back to `draft` with the reason recorded, removes it from the queue, notifies
+  the owner via new `job.changes_requested` / `event.changes_requested` outbox
+  templates, and is resubmittable through the existing submit flow (which resets
+  `moderation_status=pending`). Idempotent, audited.
+- **Frontend** — `/university/operations` command-center screen (+ nav entry):
+  queue-health cards with SLA traffic lights, breach banner + roll-up tiles,
+  risk mix, workload-by-department, upcoming events, breach-first task rail
+  (`dashboardsApi.universityOperations()`). Request-changes action + modal on
+  the job and event moderation screens. Export-CSV button on the event attendee
+  roster (new `api.download()` blob helper + `eventsApi.exportAttendees`). en/vi
+  copy with locale parity green.
+
+### Verification evidence (commands run)
+
+- `uv run pytest` (full backend suite): completes; **3 failures, all
+  pre-existing and outside this changeset** —
+  `test_marketplace.py::test_http_marketplace_overview_contract`,
+  `test_module_boundaries.py::test_no_undocumented_cross_module_domain_or_infrastructure_imports`
+  (offenders are `onboarding` + `platform_admin` reaching into other modules'
+  `domain.models`; **zero** of the new files appear), and
+  `test_scheduler.py::test_tick_retries_then_dead_letters` (`dispatch_service`
+  AttributeError; untouched here). The ~40 new university-ops tests pass
+  (`tests/unit/test_moderation_sla.py`, operations read-model + RBAC in
+  `test_dashboards.py`, attendee export RBAC/email-masking/audit +
+  CSV-injection in `test_events.py`/`test_moderation_sla.py`, request-changes
+  lifecycle + resubmission in `test_opportunities.py` and `test_events.py`).
+- `uv run ruff check` on all touched backend files — clean.
+- `uv run mypy` on new backend modules + `app/shared/moderation.py` — clean
+  (pre-existing baseline errors in `presenters.py` / `company_directory_service.py`
+  / `event_moderation_service.py` `rowcount` untouched).
+- Frontend `tsc --noEmit`: new/edited files are error-free; repo carries a
+  pre-existing ~37-error baseline from an unrelated in-flight refactor at this
+  HEAD (dangling `marketplace-nav` / `header-ai-button` imports, loose `any`
+  params in `cv-builder-screen` / `job-form`) — unchanged.
+- `node scripts/check-message-parity.mjs` — locale parity OK (52 files).
+- OpenAPI route smoke: all four new routes registered
+  (`/dashboards/university/operations`, `/events/{id}/registrations/export`,
+  `/admin/{jobs,events}/{id}/request-changes`).
+
+### Known gaps (tracked)
+
+- **B-580** — browser/E2E verification of all of the above (blocked at authoring
+  time by the pre-existing broken-import WIP state at HEAD; not by this change).
+- **B-579** — control-plane depth: true assign-to-department/user on queue items
+  (only self-claim exists today), department-scoped queues, holiday/business-hours
+  SLA pause + per-type escalation chains (`BUSINESS_LOGIC.md` §11), and a
+  moderator UI for the AI human-review queue (still no frontend).
+- Workload-by-department is derived from the claimant's primary department and is
+  only populated for university-staff principals (superadmin has no single org);
+  superadmins see workload-by-moderator without departments.
+- Ad-review + AI-review queues are surfaced in the read model but their items are
+  not yet actionable inline from the operations screen (they deep-link to the
+  existing per-queue screens).
+
+**Owner routing:** `tester-qa` — B-580 Playwright verification (SLA thresholds,
+breach banner, empty/permission states, vi/en, non-organizer export masking).
+`product-owner-system-planner` / `system-architect` — B-579 scope (queue
+assignment model, SLA business-calendar, human-review-queue UI).
