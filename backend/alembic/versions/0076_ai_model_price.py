@@ -10,7 +10,7 @@ Sources:
 - deepseek/deepseek-r1:       OpenRouter public pricing ~$0.55/$2.19 per 1M in/out
 - text-embedding-3-small:     OpenAI/OpenRouter public pricing ~$0.02 per 1M (no out)
 - google/gemini-2.5-flash:    OpenRouter public pricing ~$0.15/$0.60 per 1M in/out
-- deepseek/deepseek-chat:     ~$0.14/1M blended, split 50/50
+- deepseek/deepseek-chat:     OpenRouter public pricing ~$0.27/$1.10 per 1M in/out
 - meta-llama/llama-3.1-8b-instruct: ~$0.10/1M blended, split 50/50
 - gpt-4o-mini:                OpenAI public pricing ~$0.15/$0.60 per 1M in/out
 - gpt-4o:                     OpenAI public pricing ~$2.50/$10.00 per 1M in/out
@@ -42,8 +42,8 @@ _SEED_PRICES: list[tuple[str, str, float, float]] = [
     ("openrouter", "deepseek/deepseek-v4-flash", 0.00007, 0.00028),
     # deepseek-r1: reasoning default (~$0.55 in / $2.19 out per 1M)
     ("openrouter", "deepseek/deepseek-r1", 0.00055, 0.00219),
-    # deepseek-chat: legacy alias model (~$0.14/1M blended, split 50/50)
-    ("openrouter", "deepseek/deepseek-chat", 0.00007, 0.00028),
+    # deepseek-chat: legacy alias model (~$0.27 in / $1.10 out per 1M)
+    ("openrouter", "deepseek/deepseek-chat", 0.00027, 0.00110),
     # -- OpenRouter / Meta --
     # llama-3.1-8b-instruct: chat_mini (~$0.10/1M blended, split 50/50)
     ("openrouter", "meta-llama/llama-3.1-8b-instruct", 0.00005, 0.00005),
@@ -80,7 +80,7 @@ def upgrade() -> None:
             "active",
             sa.Boolean(),
             nullable=False,
-            server_default=sa.text("true"),
+            server_default=sa.true(),
         ),
         sa.Column("updated_by", sa.Uuid(as_uuid=True), nullable=True),
         sa.Column(
