@@ -27,6 +27,7 @@ function mergeMessages(base: MessageTree, patch: MessageTree): MessageTree {
 // scripts/messages-manifest.json for the namespace -> file map used to generate this file.
 const loaders: Record<AppLocale, Array<() => Promise<{ default: MessageTree }>>> = {
   vi: [
+    () => import("./vi/admin/console.json"),
     () => import("./vi/auth/auth.json"),
     () => import("./vi/partner/advertising.json"),
     () => import("./vi/partner/billing.json"),
@@ -79,6 +80,7 @@ const loaders: Record<AppLocale, Array<() => Promise<{ default: MessageTree }>>>
     () => import("./vi/university/users.json"),
   ],
   en: [
+    () => import("./en/admin/console.json"),
     () => import("./en/auth/auth.json"),
     () => import("./en/partner/advertising.json"),
     () => import("./en/partner/billing.json"),

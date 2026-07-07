@@ -37,6 +37,10 @@ import {
   Lock,
   ShieldAlert,
   Bell,
+  Activity,
+  Flag,
+  BellRing,
+  ScrollText,
 } from "lucide-react";
 import type { Persona } from "@/stores/auth-store";
 
@@ -57,6 +61,12 @@ export interface NavItem {
    * student "Jobs" entry points at the public marketplace board `/jobs`.
    */
   absolute?: boolean;
+  /**
+   * When true the item is rendered in a non-interactive "coming soon" state:
+   * visible for IA clarity but not clickable. Used in admin nav stubs that are
+   * planned but not yet built.
+   */
+  disabled?: boolean;
 }
 
 /**
@@ -206,3 +216,30 @@ export const SETTINGS_NAV: NavItem = {
   href: "/settings",
   icon: Settings,
 };
+
+/**
+ * Superadmin console navigation. Items use `absolute: true` so hrefs are
+ * treated as full app paths (no persona prefix). Keys resolve under the
+ * `adminConsole.nav` namespace (not `nav`). Stub sections are marked
+ * `disabled: true` — they are visible for IA clarity but not yet clickable.
+ */
+export const ADMIN_NAV_GROUPS: NavGroup[] = [
+  {
+    key: null,
+    items: [
+      { key: "overview", href: "/admin", icon: LayoutGrid, absolute: true },
+      { key: "aiOperations", href: "/admin/ai-operations", icon: Bot, absolute: true },
+    ],
+  },
+  {
+    key: "system",
+    items: [
+      { key: "auditLog", href: "/admin/audit-log", icon: ScrollText, absolute: true, disabled: true },
+      { key: "systemHealth", href: "/admin/system-health", icon: Activity, absolute: true, disabled: true },
+      { key: "usersAccess", href: "/admin/users", icon: Users, absolute: true, disabled: true },
+      { key: "featureFlags", href: "/admin/feature-flags", icon: Flag, absolute: true, disabled: true },
+      { key: "analytics", href: "/admin/analytics", icon: BarChart3, absolute: true, disabled: true },
+      { key: "alerts", href: "/admin/alerts", icon: BellRing, absolute: true, disabled: true },
+    ],
+  },
+];
