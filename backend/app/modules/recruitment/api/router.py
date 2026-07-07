@@ -18,6 +18,7 @@ from app.modules.auth.api.deps import CurrentAuth, get_current_auth
 from app.modules.recruitment.api.schemas import (
     AdvanceRequestBody,
     ApplyRequest,
+    BulkAdvanceRequestBody,
     BulkRejectRequestBody,
     BulkReviewRequestBody,
     InterviewAssigneesBody,
@@ -44,6 +45,7 @@ from app.modules.recruitment.api.schemas import (
 )
 from app.modules.recruitment.application import (
     apply_service,
+    candidate_ranking_service,
     decision_service,
     export_service,
     interview_service,
@@ -683,6 +685,32 @@ async def list_job_applications(
 
 
 @job_applications_router.get(
+    "/{job_id}/applicants/ranking",
+    summary="Rank a job's applicants by CV-JD fit (partner, advisory, deterministic)",
+)
+async def rank_job_applicants(
+    job_id: uuid.UUID,
+    auth: CurrentAuth = Depends(get_current_auth),
+    session: AsyncSession = Depends(get_db_session),
+    accept_language: str | None = Header(default=None),
+) -> dict:
+    """Deterministic CV-JD fit ranking of every applicant to one of the org's jobs.
+
+    Advisory ONLY — the recruiter decides; nothing is auto-advanced/rejected. No
+    per-applicant AI call (deterministic 0-100 product score). Anonymity-safe: an
+    unrevealed anonymous applicant is masked but still scored. RBAC + tenant
+    isolation are enforced in the service layer (cross-org -> 404).
+
+    Returns ``{ data: { job_id, scored_count, signal, items[] } }``.
+    """
+    locale = (accept_language or "vi").split(",")[0].split("-")[0].strip()
+    data = await candidate_ranking_service.rank_job_applicants(
+        session, principal=auth.principal, job_id=job_id, ctx=auth.ctx, locale=locale,
+    )
+    return success(data)
+
+
+@job_applications_router.get(
     "/{job_id}/pipeline", summary="Pipeline kanban board for a job (partner, org-scoped)"
 )
 async def job_pipeline_board(
@@ -771,6 +799,37 @@ async def bulk_reject_applications(
         reason=body.reason,
         note=body.note,
         ctx=auth.ctx,
+    )
+    return success(data)
+
+
+@job_applications_router.post(
+    "/{job_id}/applications/bulk-advance",
+    summary="Bulk-advance candidates to the next pipeline stage (partner)",
+)
+async def bulk_advance_applications(
+    job_id: uuid.UUID,
+    body: BulkAdvanceRequestBody,
+    idempotency_key: str | None = Header(default=None, alias="Idempotency-Key"),
+    auth: CurrentAuth = Depends(get_current_auth),
+    session: AsyncSession = Depends(get_db_session),
+) -> dict:
+    """Advance up to 100 candidates to their next pipeline stage in one call.
+
+    Runs the SAME gated per-item advance as ``/applications/{id}/advance`` (RBAC,
+    scorecard / score-threshold gate, audit, student notify). Candidates whose stage
+    gate is unmet are reported as ``blocked`` (never force-advanced); non-actionable
+    ones are ``skipped``. Returns ``{advanced, blocked, skipped, errors, results[]}``
+    where each ``results`` item carries the outcome + a safe reason code. The
+    optional ``Idempotency-Key`` header makes a retried batch safe (advance is not
+    status-idempotent).
+    """
+    data = await decision_service.bulk_advance_applications(
+        session,
+        principal=auth.principal,
+        application_ids=body.application_ids,
+        ctx=auth.ctx,
+        idempotency_key=idempotency_key,
     )
     return success(data)
 

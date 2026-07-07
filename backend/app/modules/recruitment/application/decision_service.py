@@ -42,6 +42,8 @@ from app.modules.recruitment.application import _shared
 from app.modules.recruitment.application.errors import (
     ApplicationVersionConflictError,
     IllegalApplicationTransitionError,
+    ScoreBelowThresholdError,
+    ScorecardRequiredError,
 )
 from app.modules.recruitment.domain import lifecycle, timeline
 from app.modules.recruitment.domain.models import Application
@@ -385,3 +387,107 @@ async def bulk_reject_applications(
         except Exception:
             errors += 1
     return {"rejected": rejected, "skipped": skipped, "errors": errors}
+
+
+async def bulk_advance_applications(
+    session: AsyncSession,
+    *,
+    principal: Principal,
+    application_ids: list[uuid.UUID],
+    ctx: RequestContext,
+    idempotency_key: str | None = None,
+) -> dict:
+    """Advance up to 100 candidates to their next pipeline stage in one call.
+
+    Each application runs through the SAME gated per-application transaction as
+    ``stage_service.advance_application_stage`` (``docs/BUSINESS_LOGIC.md`` §3.6) so
+    RBAC (``applications:read`` + org match, 404-not-403), the scorecard /
+    score-threshold advance gate, the optimistic version bump, the audit row, and
+    the neutral student notification behave EXACTLY as the single-advance endpoint.
+    The gate is never bypassed — a candidate whose stage gate is unmet is reported
+    as ``blocked``, not force-advanced. Per-item outcomes:
+
+    - ``advanced`` — moved to the next stage.
+    - ``blocked``  — an unmet ``scorecard`` / ``score_threshold`` gate on the
+      current stage (carries the safe ``{reason, submitted/required}`` or
+      ``{reason, avg_overall/threshold}`` — never scorecard content).
+    - ``skipped``  — not actionable (not ``under_review``, already at the last
+      stage, cross-org, or missing).
+    - ``error``    — an unexpected failure on that one item; the batch continues.
+
+    The ``results`` list lets the board show "3/10 couldn't advance" with reasons.
+    When a batch ``idempotency_key`` is supplied, each item advances under a derived
+    per-application key so an at-least-once retry of the whole batch does not
+    double-advance items that already moved (advance is NOT status-idempotent, so
+    this matters more than it does for bulk review/reject).
+    """
+
+    from app.modules.recruitment.application import stage_service
+
+    advanced = 0
+    blocked = 0
+    skipped = 0
+    errors = 0
+    results: list[dict] = []
+    for app_id in application_ids:
+        item_key = f"{idempotency_key}:{app_id}" if idempotency_key else None
+        try:
+            await stage_service.advance_application_stage(
+                session,
+                principal=principal,
+                application_id=app_id,
+                idempotency_key=item_key,
+                ctx=ctx,
+            )
+            advanced += 1
+            results.append({"application_id": str(app_id), "outcome": "advanced"})
+        except ScorecardRequiredError as exc:
+            blocked += 1
+            results.append(
+                {
+                    "application_id": str(app_id),
+                    "outcome": "blocked",
+                    "reason": exc.details.get("reason"),
+                    "submitted": exc.details.get("submitted"),
+                    "required": exc.details.get("required"),
+                }
+            )
+        except ScoreBelowThresholdError as exc:
+            blocked += 1
+            results.append(
+                {
+                    "application_id": str(app_id),
+                    "outcome": "blocked",
+                    "reason": exc.details.get("reason"),
+                    "avg_overall": exc.details.get("avg_overall"),
+                    "threshold": exc.details.get("threshold"),
+                }
+            )
+        except (IllegalApplicationTransitionError, ApplicationVersionConflictError):
+            skipped += 1
+            results.append(
+                {
+                    "application_id": str(app_id),
+                    "outcome": "skipped",
+                    "reason": "not_advanceable",
+                }
+            )
+        except ResourceNotFoundError:
+            skipped += 1
+            results.append(
+                {
+                    "application_id": str(app_id),
+                    "outcome": "skipped",
+                    "reason": "not_found",
+                }
+            )
+        except Exception:  # noqa: BLE001
+            errors += 1
+            results.append({"application_id": str(app_id), "outcome": "error"})
+    return {
+        "advanced": advanced,
+        "blocked": blocked,
+        "skipped": skipped,
+        "errors": errors,
+        "results": results,
+    }

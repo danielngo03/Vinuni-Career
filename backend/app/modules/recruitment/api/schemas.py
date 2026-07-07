@@ -122,6 +122,24 @@ class BulkReviewRequestBody(BaseModel):
     application_ids: list[uuid.UUID] = Field(min_length=1, max_length=100)
 
 
+class BulkAdvanceRequestBody(BaseModel):
+    """``POST /jobs/{jobId}/applications/bulk-advance`` — move multiple candidates
+    to the next pipeline stage in one call (``docs/BUSINESS_LOGIC.md`` §3.6).
+
+    Each application is advanced independently through the SAME gated per-item
+    transaction as ``/applications/{id}/advance`` — items whose current stage has an
+    unmet ``scorecard`` / ``score_threshold`` gate are reported as ``blocked`` (never
+    force-advanced), and items not active in the pipeline are ``skipped``. The
+    response carries a per-item result so the board can show "3/10 couldn't advance".
+
+    ``application_ids`` must be non-empty (max 100 per call, matching the sibling
+    bulk endpoints; ``BUSINESS_LOGIC.md`` §3.6's "50" is reconciled to the
+    implemented sibling limit — see ``docs/API_CONTRACTS.md``).
+    """
+
+    application_ids: list[uuid.UUID] = Field(min_length=1, max_length=100)
+
+
 class ScorecardScoreInput(BaseModel):
     """One criterion rating (1..5). The full ``DEFAULT_CRITERIA`` set is required;
     the "all criteria present / no duplicates" rule is enforced in the service."""

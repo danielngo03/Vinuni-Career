@@ -304,3 +304,35 @@ async def anonymize_expired_snapshots(session: AsyncSession, *, older_than) -> i
         count += 1
     await session.flush()
     return count
+
+
+async def get_snapshot_json_for_applications(
+    session: AsyncSession, *, application_ids: list[uuid.UUID]
+) -> dict[uuid.UUID, dict]:
+    """Batch variant of :func:`get_snapshot_json_for_application`.
+
+    Returns ``{application_id: snapshot_json}`` for the MOST RECENT snapshot of
+    each id (same ordering as the single-id read). Ids without a snapshot are
+    simply absent. Read-only, privacy-neutral projection for advisory BULK
+    surfaces (the partner candidate-ranking triage) that need CV content shape
+    across a whole applicant pool in one round-trip but must never import
+    ``ApplicationCvSnapshot`` directly. The caller remains responsible for its own
+    PII handling of each returned structure (e.g. masking anonymous identities).
+    """
+
+    ids = {i for i in application_ids if i is not None}
+    if not ids:
+        return {}
+    rows = (
+        await session.execute(
+            select(ApplicationCvSnapshot)
+            .where(ApplicationCvSnapshot.application_id.in_(ids))
+            .order_by(ApplicationCvSnapshot.created_at.desc())
+        )
+    ).scalars().all()
+    out: dict[uuid.UUID, dict] = {}
+    for snap in rows:
+        if snap.application_id is None or snap.application_id in out:
+            continue
+        out[snap.application_id] = dict(snap.snapshot_json or {})
+    return out

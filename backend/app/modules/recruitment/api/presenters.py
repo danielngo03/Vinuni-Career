@@ -561,3 +561,40 @@ def reveal_request(req, *, locale: str = "vi") -> dict:
         "responded_at": _iso(req.responded_at),
         "created_at": _iso(req.created_at),
     }
+
+
+def partner_ranking_item(
+    app: Application,
+    *,
+    user,
+    fit: dict | None,
+    rank: int,
+    locale: str = "vi",
+) -> dict:
+    """One row of the partner candidate-triage ranking (anonymity-safe, advisory).
+
+    Reuses the SAME identity-redaction core as :func:`partner_application`
+    (:func:`_applicant_identity`): an anonymous applicant whose reveal is NOT
+    accepted carries only the deterministic ``UV-xxxx`` handle (never name/email).
+
+    ``fit`` is the deterministic CV-JD result for this applicant, or ``None`` when
+    the applicant could not be scored (no requirements on the JD, or an
+    empty/unreadable CV snapshot) — in which case ``fit_score``/``fit_band`` are
+    ``null`` and the evidence lists are empty. The number is a 0-100 PRODUCT score
+    (not model confidence); no provider/model/token/embedding/raw-confidence field
+    is ever present, and ``matched_skills``/``gaps`` are JD-derived terms only.
+    """
+
+    revealed = app.reveal_approved_at is not None or not app.is_anonymous
+    return {
+        "application_id": str(app.id),
+        "applicant": _applicant_identity(app, revealed=revealed, user=user, locale=locale),
+        "status": app.status,
+        "status_label": lifecycle.status_label(app.status, locale=locale),
+        "fit_score": fit["score"] if fit else None,
+        "fit_band": fit["band"] if fit else None,
+        "matched_skills": fit["matched_skills"] if fit else [],
+        "gaps": fit["gaps"] if fit else [],
+        "stale": fit["stale"] if fit else False,
+        "rank": rank,
+    }

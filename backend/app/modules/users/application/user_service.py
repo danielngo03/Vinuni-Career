@@ -91,3 +91,24 @@ async def primary_identity(
 ) -> Identity | None:
     identities = await list_identities(session, user_id)
     return identities[0] if identities else None
+
+
+async def get_many(
+    session: AsyncSession, user_ids: list[uuid.UUID]
+) -> dict[uuid.UUID, User]:
+    """Batch fetch active users -> ``{user_id: User}`` (missing/deleted ids absent).
+
+    One query for a set of ids so callers that need several users at once (e.g. the
+    partner candidate-ranking triage resolving revealed applicant identities) avoid
+    an N+1 of :func:`get_by_id`.
+    """
+
+    ids = {i for i in user_ids if i is not None}
+    if not ids:
+        return {}
+    rows = (
+        await session.execute(
+            select(User).where(User.id.in_(ids), User.deleted_at.is_(None))
+        )
+    ).scalars().all()
+    return {u.id: u for u in rows}

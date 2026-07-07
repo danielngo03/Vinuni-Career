@@ -816,6 +816,89 @@ Bucketing rules:
   `candidate_cap`). When more than `candidate_cap` active cards exist, `truncated`
   is `true` and the newest applications by `applied_at` are kept.
 
+#### Bulk pipeline actions (partner ATS batch; `docs/BUSINESS_LOGIC.md` §3.6)
+
+Batch convenience over the single-application decision/stage endpoints. Each item
+runs the SAME gated per-application transaction as its single counterpart (RBAC =
+`applications:read` + org match → cross-org/missing item is silently skipped, never
+enumerable; audit; student notify; optimistic bumps). `application_ids` is non-empty,
+max **100** per call (the implemented sibling limit; supersedes the "50" example in
+`BUSINESS_LOGIC.md` §3.6, to be reconciled there).
+
+| Path | Method | Auth | Notes |
+|---|---|---|---|
+| `/jobs/{job_id}/applications/bulk-review` | POST | partner (`applications:read`) | Body `{ application_ids[] }`. Moves `submitted → under_review` per item (idempotent). Returns `{ reviewed, skipped, errors }` counts. |
+| `/jobs/{job_id}/applications/bulk-reject` | POST | partner (`applications:read`) | Body `{ application_ids[], reason: <coded enum>, note? }`. Rejects each item; already-terminal items counted `skipped`. Returns `{ rejected, skipped, errors }` counts. |
+| `/jobs/{job_id}/applications/bulk-advance` | POST | partner (`applications:read`) | Body `{ application_ids[] }`; optional `Idempotency-Key` header (advance is NOT status-idempotent, so a batch key makes a retry safe). Advances each candidate one pipeline stage through the SAME scorecard / score-threshold gate as `/applications/{id}/advance` — **the gate is never bypassed**. |
+
+**Bulk-advance response** (per-item detail so the board can show "3/10 couldn't
+advance" — `BUSINESS_LOGIC.md` §3.6):
+
+```json
+{
+  "advanced": 8, "blocked": 1, "skipped": 1, "errors": 0,
+  "results": [
+    { "application_id": "<uuid>", "outcome": "advanced" },
+    { "application_id": "<uuid>", "outcome": "blocked",
+      "reason": "scorecard_required", "submitted": 0, "required": 1 },
+    { "application_id": "<uuid>", "outcome": "blocked",
+      "reason": "score_below_threshold", "avg_overall": 2.5, "threshold": 3.0 },
+    { "application_id": "<uuid>", "outcome": "skipped", "reason": "not_advanceable" },
+    { "application_id": "<uuid>", "outcome": "skipped", "reason": "not_found" }
+  ]
+}
+```
+
+- `outcome`: `advanced` (moved) | `blocked` (unmet scorecard / score-threshold gate
+  — **not** force-advanced) | `skipped` (`not_advanceable` = not `under_review` /
+  already at the last stage; `not_found` = cross-org / missing) | `error`.
+- `blocked` reason codes carry the same safe fields as the single-advance `409`
+  (`scorecard_required` → `{submitted, required}`; `score_below_threshold` →
+  `{avg_overall, threshold}`) — never scorecard content. Anonymity is preserved;
+  a stage move never reveals the student.
+
+#### Applicant fit ranking (partner triage; deterministic, advisory)
+
+`GET /jobs/{job_id}/applicants/ranking` — ranks a job's applicants by deterministic
+CV–JD fit so a recruiter can triage who best matches the JD. Auth: partner
+(`applications:read` + org match; cross-org/missing → `404`; missing permission →
+`403`). **Deterministic, advisory-only:** it reuses the SAME 0-100 product-score
+engine students see for the same JD (no per-applicant model call, no AI fan-out —
+`docs/PRODUCT_OPERATING_MODEL.md` §3.2 charging rules), scored against each
+applicant's **immutable application CV snapshot**. Locale via `Accept-Language`.
+
+```json
+{
+  "job_id": "<uuid>", "scored_count": 12,
+  "signal": "ok",
+  "items": [
+    {
+      "application_id": "<uuid>",
+      "applicant": { "…": "same masked partner-applicant identity block as the applications list — anonymous-unrevealed stays masked (no name/email)" },
+      "status": "under_review", "status_label": "Đang xem xét",
+      "fit_score": 82, "fit_band": "good",
+      "matched_skills": ["python", "sql"], "gaps": ["kubernetes"],
+      "stale": false, "rank": 1
+    }
+  ]
+}
+```
+
+- `fit_score`: 0-100 **product score** (`null` when the applicant snapshot is empty /
+  unreadable or the JD has no requirements — never a fabricated `0`). `fit_band`:
+  `strong` (≥85) | `good` (≥70) | `fair` (≥50) | `weak` (<50) | `null`, aligned with
+  the student-side fit thresholds so both personas read the same number the same way.
+- `signal`: `ok` | `low_signal` | `no_requirements` (JD has no usable requirement
+  terms → all items `fit_score: null`, still listed).
+- Sorted by `fit_score` desc (tie-break self-rated proficiency then recency);
+  unscorable items last; `rank` is 1-based over the whole list. Items include all
+  non-deleted applications (each carries `status`/`status_label` so the UI can
+  filter). **Never** exposes raw confidence, provider/model, prompt, token,
+  embedding, similarity, or raw CV text (`.claude/rules/ai.md`). The per-candidate
+  natural-language explanation stays the separate `GET
+  /applications/{application_id}/ai-screening-brief`. One aggregate metadata-only
+  audit row (`recruitment.applicants_ranked`) is written per call.
+
 ### Organization Media And Logo Delivery
 
 Use this contract for the Visual/Product Rescue logo pipeline. It is a required
