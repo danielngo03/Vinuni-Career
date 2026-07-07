@@ -543,6 +543,69 @@
       "errorBody": "Could not load the user list. Please try again.",
       "retry": "Retry"
     },
+    "featureFlags": {
+      "pageTitle": "Feature Flags",
+      "pageSubtitle": "Manage platform feature flags and view the system permission catalog. Superadmin only.",
+      "tabs": {
+        "flags": "Flags",
+        "permissions": "Permission Catalog"
+      },
+      "flags": {
+        "panelTitle": "Feature Flags",
+        "addFlag": "Add flag",
+        "col": {
+          "key": "Key",
+          "description": "Description",
+          "enabled": "Enabled",
+          "rollout": "Rollout",
+          "updatedBy": "Updated by",
+          "updatedAt": "Updated",
+          "actions": "Actions"
+        },
+        "rolloutFull": "Full rollout (100%)",
+        "rolloutOff": "Off (0%)",
+        "rolloutPartial": "{pct}% rollout",
+        "enabledYes": "On",
+        "enabledNo": "Off",
+        "editAction": "Edit",
+        "sheet": {
+          "addTitle": "Add feature flag",
+          "editTitle": "Edit feature flag",
+          "labelKey": "Flag key",
+          "labelKeyHelp": "Lowercase letters, numbers, dots, and underscores only (e.g. cv_studio.ai_fill).",
+          "labelDescription": "Description",
+          "labelDescriptionHelp": "What this flag controls. Keep it concise.",
+          "labelEnabled": "Enabled",
+          "labelEnabledHelp": "Toggle this flag on or off. Rollout percentage still applies when enabled.",
+          "labelRollout": "Rollout percentage (0–100)",
+          "labelRolloutHelp": "0 = disabled for all, 100 = fully rolled out. Values in between enable the flag for that percentage of users.",
+          "save": "Save",
+          "cancel": "Cancel",
+          "validationKey": "Key must contain only lowercase letters, numbers, dots, and underscores.",
+          "validationKeyRequired": "Flag key is required.",
+          "validationRollout": "Rollout must be a whole number between 0 and 100.",
+          "conflictError": "A flag with this key already exists. Choose a different key or edit the existing flag.",
+          "rolloutContext": "0 = off for all · 100 = fully on"
+        },
+        "emptyTitle": "No feature flags",
+        "emptyBody": "Add a feature flag to start controlling rollouts.",
+        "errorTitle": "Feature flags unavailable",
+        "errorBody": "Could not load feature flags. Please try again."
+      },
+      "permissions": {
+        "panelTitle": "Permission Catalog",
+        "panelSubtitle": "Read-only reference of all resources and their available actions in the system. Role assignment is managed in organisation RBAC.",
+        "col": {
+          "resource": "Resource",
+          "actions": "Actions"
+        },
+        "emptyTitle": "No permissions defined",
+        "emptyBody": "The permission catalog is empty.",
+        "errorTitle": "Permission catalog unavailable",
+        "errorBody": "Could not load the permission catalog. Please try again."
+      },
+      "retry": "Retry"
+    },
     "analytics": {
       "pageTitle": "Platform Analytics",
       "pageSubtitle": "Superadmin platform metrics — KPIs, recruitment funnel, and growth trends.",

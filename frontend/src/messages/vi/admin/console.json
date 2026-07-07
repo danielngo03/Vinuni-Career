@@ -543,6 +543,69 @@
       "errorBody": "Không thể tải danh sách người dùng. Vui lòng thử lại.",
       "retry": "Thử lại"
     },
+    "featureFlags": {
+      "pageTitle": "Cờ tính năng",
+      "pageSubtitle": "Quản lý cờ tính năng nền tảng và xem danh mục quyền hệ thống. Chỉ dành cho superadmin.",
+      "tabs": {
+        "flags": "Cờ",
+        "permissions": "Danh mục quyền"
+      },
+      "flags": {
+        "panelTitle": "Cờ tính năng",
+        "addFlag": "Thêm cờ",
+        "col": {
+          "key": "Khóa",
+          "description": "Mô tả",
+          "enabled": "Bật",
+          "rollout": "Tỉ lệ triển khai",
+          "updatedBy": "Cập nhật bởi",
+          "updatedAt": "Cập nhật lúc",
+          "actions": "Hành động"
+        },
+        "rolloutFull": "Triển khai toàn bộ (100%)",
+        "rolloutOff": "Tắt (0%)",
+        "rolloutPartial": "Triển khai {pct}%",
+        "enabledYes": "Bật",
+        "enabledNo": "Tắt",
+        "editAction": "Sửa",
+        "sheet": {
+          "addTitle": "Thêm cờ tính năng",
+          "editTitle": "Chỉnh sửa cờ tính năng",
+          "labelKey": "Khóa cờ",
+          "labelKeyHelp": "Chỉ dùng chữ thường, số, dấu chấm và gạch dưới (vd: cv_studio.ai_fill).",
+          "labelDescription": "Mô tả",
+          "labelDescriptionHelp": "Cờ này kiểm soát điều gì. Hãy viết ngắn gọn.",
+          "labelEnabled": "Bật",
+          "labelEnabledHelp": "Bật hoặc tắt cờ này. Tỉ lệ triển khai vẫn áp dụng khi cờ được bật.",
+          "labelRollout": "Tỉ lệ triển khai (0–100)",
+          "labelRolloutHelp": "0 = tắt với tất cả, 100 = triển khai đầy đủ. Giá trị ở giữa kích hoạt cờ cho tỉ lệ phần trăm người dùng đó.",
+          "save": "Lưu",
+          "cancel": "Hủy",
+          "validationKey": "Khóa chỉ được chứa chữ thường, số, dấu chấm và gạch dưới.",
+          "validationKeyRequired": "Khóa cờ là bắt buộc.",
+          "validationRollout": "Tỉ lệ triển khai phải là số nguyên từ 0 đến 100.",
+          "conflictError": "Đã tồn tại cờ với khóa này. Chọn khóa khác hoặc chỉnh sửa cờ hiện có.",
+          "rolloutContext": "0 = tắt với tất cả · 100 = bật toàn bộ"
+        },
+        "emptyTitle": "Chưa có cờ tính năng",
+        "emptyBody": "Thêm cờ tính năng để bắt đầu kiểm soát việc triển khai.",
+        "errorTitle": "Cờ tính năng không khả dụng",
+        "errorBody": "Không thể tải cờ tính năng. Vui lòng thử lại."
+      },
+      "permissions": {
+        "panelTitle": "Danh mục quyền",
+        "panelSubtitle": "Tài liệu tham khảo chỉ đọc về tất cả tài nguyên và hành động có sẵn trong hệ thống. Việc phân quyền được quản lý trong RBAC của tổ chức.",
+        "col": {
+          "resource": "Tài nguyên",
+          "actions": "Hành động"
+        },
+        "emptyTitle": "Chưa có quyền nào được định nghĩa",
+        "emptyBody": "Danh mục quyền đang trống.",
+        "errorTitle": "Danh mục quyền không khả dụng",
+        "errorBody": "Không thể tải danh mục quyền. Vui lòng thử lại."
+      },
+      "retry": "Thử lại"
+    },
     "analytics": {
       "pageTitle": "Phân tích nền tảng",
       "pageSubtitle": "Chỉ số nền tảng dành cho superadmin — KPI, phễu tuyển dụng và xu hướng tăng trưởng.",

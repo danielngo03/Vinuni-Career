@@ -39,6 +39,7 @@ import {
   Bell,
   Activity,
   ScrollText,
+  ToggleRight,
 } from "lucide-react";
 import type { Persona } from "@/stores/auth-store";
 
@@ -222,6 +223,7 @@ export const WORKSPACE_NAV_GROUPS: Record<Persona, NavGroup[]> = {
         { key: "logs", href: "/logs", icon: ScrollText, requiresSuperadmin: true },
         { key: "systemHealth", href: "/system-health", icon: Activity, requiresSuperadmin: true },
         { key: "usersAccess", href: "/access", icon: Users, requiresSuperadmin: true },
+        { key: "featureFlags", href: "/feature-flags", icon: ToggleRight, requiresSuperadmin: true },
       ],
     },
   ],
