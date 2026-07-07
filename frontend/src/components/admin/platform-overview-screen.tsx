@@ -353,7 +353,7 @@ export function PlatformOverviewScreen() {
             value={formatUsd(aiSpend)}
             icon={CurrencyDollar}
             tone={spendTile}
-            sub={`${new Intl.NumberFormat().format(aiRequests)} req`}
+            sub={`${new Intl.NumberFormat().format(aiRequests)} ${t("metric.aiRequestsSuffix")}`}
           />
           <OverviewMetricTile
             label={t("metric.aiErrorRate")}
