@@ -606,6 +606,135 @@
       },
       "retry": "Retry"
     },
+    "alerts": {
+      "pageTitle": "Alerts & Incidents",
+      "pageSubtitle": "Alert rules and operational incident management. Superadmin only.",
+      "tabs": {
+        "incidents": "Incidents",
+        "rules": "Alert Rules"
+      },
+      "openSummary": "{count} open incident",
+      "openSummaryPlural": "{count} open incidents",
+      "noOpenIncidents": "No open incidents",
+      "metric": {
+        "ai_spend_vs_budget_pct": "AI spend vs budget (%)",
+        "ai_error_rate": "AI error rate",
+        "queue_depth": "Queue depth",
+        "outbox_failed": "Outbox failed"
+      },
+      "comparison": {
+        "gt": ">",
+        "lt": "<",
+        "gte": ">=",
+        "lte": "<="
+      },
+      "severity": {
+        "info": "Info",
+        "warning": "Warning",
+        "critical": "Critical"
+      },
+      "incidentStatus": {
+        "open": "Open",
+        "acknowledged": "Acknowledged",
+        "resolved": "Resolved",
+        "all": "All"
+      },
+      "channel": {
+        "in_app": "In-app",
+        "email": "Email"
+      },
+      "incidents": {
+        "statusFilter": "Status",
+        "col": {
+          "severity": "Severity",
+          "metric": "Metric",
+          "message": "Message",
+          "triggered": "Triggered",
+          "status": "Status",
+          "actions": "Actions"
+        },
+        "acknowledge": "Acknowledge",
+        "resolve": "Resolve",
+        "acknowledgeConfirmTitle": "Acknowledge incident",
+        "acknowledgeConfirmBody": "Mark this incident as acknowledged. This records that you have seen and are handling it.",
+        "resolveConfirmTitle": "Resolve incident",
+        "resolveConfirmBody": "Mark this incident as resolved. Ensure the underlying condition has been addressed.",
+        "confirm": "Confirm",
+        "cancel": "Cancel",
+        "acknowledgeSuccess": "Incident acknowledged.",
+        "acknowledgeError": "Failed to acknowledge incident.",
+        "resolveSuccess": "Incident resolved.",
+        "resolveError": "Failed to resolve incident.",
+        "loadMore": "Load more",
+        "emptyTitle": "No incidents",
+        "emptyBody": "No incidents match the selected status filter.",
+        "errorTitle": "Incidents unavailable",
+        "errorBody": "Could not load incidents. Please try again.",
+        "sheet": {
+          "title": "Incident detail",
+          "closeLabel": "Close",
+          "labelMetric": "Metric",
+          "labelValue": "Value",
+          "labelThreshold": "Threshold",
+          "labelMessage": "Message",
+          "labelRuleId": "Rule ID",
+          "timelineTitle": "Timeline",
+          "labelTriggered": "Triggered",
+          "labelAcknowledged": "Acknowledged",
+          "labelAcknowledgedBy": "Acknowledged by",
+          "labelResolved": "Resolved",
+          "notYet": "—"
+        }
+      },
+      "rules": {
+        "addRule": "Add rule",
+        "col": {
+          "name": "Name",
+          "metric": "Metric",
+          "condition": "Condition",
+          "severity": "Severity",
+          "enabled": "Enabled",
+          "channels": "Channels",
+          "actions": "Actions"
+        },
+        "editAction": "Edit",
+        "deleteAction": "Delete",
+        "deleteConfirmTitle": "Delete rule",
+        "deleteConfirmBody": "Delete the alert rule \"{name}\"? Active incidents linked to this rule will not be removed.",
+        "confirm": "Delete",
+        "cancel": "Cancel",
+        "deleteSuccess": "Rule deleted.",
+        "deleteError": "Failed to delete rule.",
+        "enabledYes": "On",
+        "enabledNo": "Off",
+        "emptyTitle": "No alert rules",
+        "emptyBody": "Add an alert rule to monitor platform metrics and trigger incidents.",
+        "errorTitle": "Rules unavailable",
+        "errorBody": "Could not load alert rules. Please try again.",
+        "sheet": {
+          "addTitle": "Add alert rule",
+          "editTitle": "Edit alert rule",
+          "labelName": "Name",
+          "labelMetric": "Metric",
+          "labelComparison": "Comparison",
+          "labelThreshold": "Threshold",
+          "labelThresholdHelp": "Numeric value the metric is compared against.",
+          "labelWindowDays": "Window (days)",
+          "labelWindowDaysHelp": "Evaluation window in days (1–90).",
+          "labelSeverity": "Severity",
+          "labelEnabled": "Enabled",
+          "labelChannels": "Notification channels",
+          "save": "Save",
+          "cancel": "Cancel",
+          "saveSuccess": "Rule saved.",
+          "saveError": "Failed to save rule.",
+          "validationName": "Name is required.",
+          "validationThreshold": "Enter a valid number.",
+          "validationWindow": "Window must be a whole number between 1 and 90."
+        }
+      },
+      "retry": "Retry"
+    },
     "analytics": {
       "pageTitle": "Platform Analytics",
       "pageSubtitle": "Superadmin platform metrics — KPIs, recruitment funnel, and growth trends.",

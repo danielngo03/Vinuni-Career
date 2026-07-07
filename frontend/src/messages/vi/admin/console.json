@@ -606,6 +606,135 @@
       },
       "retry": "Thử lại"
     },
+    "alerts": {
+      "pageTitle": "Cảnh báo & Sự cố",
+      "pageSubtitle": "Quy tắc cảnh báo và quản lý sự cố vận hành. Chỉ dành cho superadmin.",
+      "tabs": {
+        "incidents": "Sự cố",
+        "rules": "Quy tắc cảnh báo"
+      },
+      "openSummary": "{count} sự cố đang mở",
+      "openSummaryPlural": "{count} sự cố đang mở",
+      "noOpenIncidents": "Không có sự cố đang mở",
+      "metric": {
+        "ai_spend_vs_budget_pct": "Chi phí AI so với ngân sách (%)",
+        "ai_error_rate": "Tỷ lệ lỗi AI",
+        "queue_depth": "Độ sâu hàng đợi",
+        "outbox_failed": "Hộp thư đi thất bại"
+      },
+      "comparison": {
+        "gt": ">",
+        "lt": "<",
+        "gte": ">=",
+        "lte": "<="
+      },
+      "severity": {
+        "info": "Thông tin",
+        "warning": "Cảnh báo",
+        "critical": "Nghiêm trọng"
+      },
+      "incidentStatus": {
+        "open": "Đang mở",
+        "acknowledged": "Đã ghi nhận",
+        "resolved": "Đã giải quyết",
+        "all": "Tất cả"
+      },
+      "channel": {
+        "in_app": "Trong ứng dụng",
+        "email": "Email"
+      },
+      "incidents": {
+        "statusFilter": "Trạng thái",
+        "col": {
+          "severity": "Mức độ",
+          "metric": "Chỉ số",
+          "message": "Nội dung",
+          "triggered": "Kích hoạt lúc",
+          "status": "Trạng thái",
+          "actions": "Thao tác"
+        },
+        "acknowledge": "Ghi nhận",
+        "resolve": "Giải quyết",
+        "acknowledgeConfirmTitle": "Ghi nhận sự cố",
+        "acknowledgeConfirmBody": "Đánh dấu sự cố này đã được ghi nhận. Điều này xác nhận bạn đã nhận biết và đang xử lý.",
+        "resolveConfirmTitle": "Giải quyết sự cố",
+        "resolveConfirmBody": "Đánh dấu sự cố đã được giải quyết. Hãy đảm bảo nguyên nhân cơ bản đã được xử lý.",
+        "confirm": "Xác nhận",
+        "cancel": "Hủy",
+        "acknowledgeSuccess": "Đã ghi nhận sự cố.",
+        "acknowledgeError": "Không thể ghi nhận sự cố.",
+        "resolveSuccess": "Đã giải quyết sự cố.",
+        "resolveError": "Không thể giải quyết sự cố.",
+        "loadMore": "Tải thêm",
+        "emptyTitle": "Không có sự cố",
+        "emptyBody": "Không có sự cố nào khớp với bộ lọc trạng thái đã chọn.",
+        "errorTitle": "Không thể tải sự cố",
+        "errorBody": "Không thể tải danh sách sự cố. Vui lòng thử lại.",
+        "sheet": {
+          "title": "Chi tiết sự cố",
+          "closeLabel": "Đóng",
+          "labelMetric": "Chỉ số",
+          "labelValue": "Giá trị",
+          "labelThreshold": "Ngưỡng",
+          "labelMessage": "Nội dung",
+          "labelRuleId": "ID quy tắc",
+          "timelineTitle": "Dòng thời gian",
+          "labelTriggered": "Kích hoạt lúc",
+          "labelAcknowledged": "Đã ghi nhận lúc",
+          "labelAcknowledgedBy": "Ghi nhận bởi",
+          "labelResolved": "Đã giải quyết lúc",
+          "notYet": "—"
+        }
+      },
+      "rules": {
+        "addRule": "Thêm quy tắc",
+        "col": {
+          "name": "Tên",
+          "metric": "Chỉ số",
+          "condition": "Điều kiện",
+          "severity": "Mức độ",
+          "enabled": "Bật",
+          "channels": "Kênh thông báo",
+          "actions": "Thao tác"
+        },
+        "editAction": "Sửa",
+        "deleteAction": "Xóa",
+        "deleteConfirmTitle": "Xóa quy tắc",
+        "deleteConfirmBody": "Xóa quy tắc cảnh báo \"{name}\"? Các sự cố đang hoạt động liên kết với quy tắc này sẽ không bị xóa.",
+        "confirm": "Xóa",
+        "cancel": "Hủy",
+        "deleteSuccess": "Đã xóa quy tắc.",
+        "deleteError": "Không thể xóa quy tắc.",
+        "enabledYes": "Bật",
+        "enabledNo": "Tắt",
+        "emptyTitle": "Chưa có quy tắc cảnh báo",
+        "emptyBody": "Thêm quy tắc cảnh báo để theo dõi các chỉ số nền tảng và kích hoạt sự cố.",
+        "errorTitle": "Không thể tải quy tắc",
+        "errorBody": "Không thể tải quy tắc cảnh báo. Vui lòng thử lại.",
+        "sheet": {
+          "addTitle": "Thêm quy tắc cảnh báo",
+          "editTitle": "Chỉnh sửa quy tắc cảnh báo",
+          "labelName": "Tên",
+          "labelMetric": "Chỉ số",
+          "labelComparison": "So sánh",
+          "labelThreshold": "Ngưỡng",
+          "labelThresholdHelp": "Giá trị số để so sánh với chỉ số.",
+          "labelWindowDays": "Cửa sổ (ngày)",
+          "labelWindowDaysHelp": "Cửa sổ đánh giá tính bằng ngày (1–90).",
+          "labelSeverity": "Mức độ",
+          "labelEnabled": "Bật",
+          "labelChannels": "Kênh thông báo",
+          "save": "Lưu",
+          "cancel": "Hủy",
+          "saveSuccess": "Đã lưu quy tắc.",
+          "saveError": "Không thể lưu quy tắc.",
+          "validationName": "Tên là bắt buộc.",
+          "validationThreshold": "Nhập một số hợp lệ.",
+          "validationWindow": "Cửa sổ phải là số nguyên từ 1 đến 90."
+        }
+      },
+      "retry": "Thử lại"
+    },
     "analytics": {
       "pageTitle": "Phân tích nền tảng",
       "pageSubtitle": "Chỉ số nền tảng dành cho superadmin — KPI, phễu tuyển dụng và xu hướng tăng trưởng.",
