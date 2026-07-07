@@ -20,6 +20,12 @@ from datetime import datetime
 
 from sqlalchemy.ext.asyncio import AsyncSession
 
+from app.ai.observability.maintenance import (
+    _prune_entrypoint as _ai_ops_prune,
+)
+from app.ai.observability.maintenance import (
+    _reconcile_entrypoint as _ai_usage_daily_reconcile,
+)
 from app.modules.advertising.application import activation_service as ad_activation
 from app.modules.billing.application import expiry_service as billing_expiry
 from app.modules.career_outcomes.application import materializer_service
@@ -224,6 +230,12 @@ REGISTRY: tuple[ScheduledJob, ...] = (
         86400,
         _market_intelligence_reconcile,
     ),
+    # AI ops maintenance: hourly self-healing reconcile of the ai_usage_daily
+    # rollup (fixes any gaps where the ledger write failed but the ai_ops_event
+    # succeeded), plus a nightly prune of raw ai_ops_event rows past 90 days
+    # (rollup rows in ai_usage_daily are never pruned). Both are idempotent.
+    ScheduledJob("ai_ops.usage_daily_reconcile", 3600, _ai_usage_daily_reconcile),
+    ScheduledJob("ai_ops.prune", 86400, _ai_ops_prune),
 )
 
 
