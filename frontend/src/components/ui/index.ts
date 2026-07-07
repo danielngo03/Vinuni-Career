@@ -28,3 +28,41 @@ export { BarSeries, computeBarGeometry } from "./bar-series";
 export type { BarSeriesProps, BarDataPoint, BarGeometryEntry, ComputeBarGeometryOpts } from "./bar-series";
 export { Sparkline, computeSparklinePoints } from "./sparkline";
 export type { SparklineProps, SparklinePoint } from "./sparkline";
+
+// Chart primitives — admin-only; Next.js code-splits these into admin chunks.
+export {
+  TimeSeriesChart,
+  formatTick,
+  DonutChart,
+  donutTotal,
+  sliceColor,
+  StackedBarChart,
+  Heatmap,
+  buildColorScale,
+  PercentileBandChart,
+  seriesColor,
+  toneColor,
+  buildMonochromeScale,
+  buildSeverityScale,
+  CHART_INK,
+  CHART_TEAL,
+  CHART_AMBER,
+  CHART_RED,
+} from "./charts";
+export type {
+  TimeSeriesChartProps,
+  TimeSeriesDataPoint,
+  TimeSeriesDef,
+  FormatKind,
+  DonutChartProps,
+  DonutSlice,
+  StackedBarChartProps,
+  StackedBarDataPoint,
+  StackedBarSeriesDef,
+  HeatmapProps,
+  HeatmapCell,
+  HeatmapColorScale,
+  PercentileBandChartProps,
+  PercentileBandDataPoint,
+  ChartTone,
+} from "./charts";
