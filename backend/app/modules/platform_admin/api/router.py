@@ -18,6 +18,11 @@ Endpoints:
   GET  /admin/sessions                     — cursor-paginated active sessions
   POST /admin/sessions/{session_id}/revoke — admin-revoke session (audited)
 
+  --- P6: Analytics read models (superadmin-only, aggregate-only) ---
+  GET  /admin/analytics/kpis               — top-line KPI totals
+  GET  /admin/analytics/funnel             — application funnel + conversion rates
+  GET  /admin/analytics/growth             — per-day growth trend series
+
 Authorization is enforced both in the ``require_superadmin`` dependency *and*
 re-checked inside the service layer (defence-in-depth per backend rules).
 
@@ -46,6 +51,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from app.core.db import get_db_session
 from app.modules.auth.api.deps import CurrentAuth, get_current_auth, require_superadmin
 from app.modules.platform_admin.application import (
+    analytics_read_service,
     audit_read_service,
     system_health_service,
     users_admin_service,
@@ -57,6 +63,7 @@ admin_router = APIRouter(prefix="/admin/audit-log", tags=["platform-admin-audit"
 health_router = APIRouter(prefix="/admin/system-health", tags=["platform-admin-health"])
 users_router = APIRouter(prefix="/admin/users", tags=["platform-admin-users"])
 sessions_router = APIRouter(prefix="/admin/sessions", tags=["platform-admin-sessions"])
+analytics_router = APIRouter(prefix="/admin/analytics", tags=["platform-admin-analytics"])
 
 
 @admin_router.get("", summary="Platform-wide audit log (cursor-paginated)")
@@ -301,4 +308,38 @@ async def revoke_platform_session(
         ctx=auth.ctx,
         session_id=session_id,
     )
+    return success(data)
+
+
+# ---------------------------------------------------------------------------
+# P6: Analytics read models — superadmin-only, aggregate-only, no PII
+# ---------------------------------------------------------------------------
+
+
+@analytics_router.get("/kpis", summary="Platform KPI totals — superadmin")
+async def get_analytics_kpis(
+    _principal: Principal = Depends(require_superadmin),
+    db: AsyncSession = Depends(get_db_session),
+) -> dict:
+    data = await analytics_read_service.kpis(db)
+    return success(data)
+
+
+@analytics_router.get("/funnel", summary="Application funnel + conversion rates — superadmin")
+async def get_analytics_funnel(
+    range_days: int = Query(default=30, ge=1, le=365),
+    _principal: Principal = Depends(require_superadmin),
+    db: AsyncSession = Depends(get_db_session),
+) -> dict:
+    data = await analytics_read_service.funnel(db, range_days=range_days)
+    return success(data)
+
+
+@analytics_router.get("/growth", summary="Per-day growth trend series — superadmin")
+async def get_analytics_growth(
+    range_days: int = Query(default=30, ge=1, le=365),
+    _principal: Principal = Depends(require_superadmin),
+    db: AsyncSession = Depends(get_db_session),
+) -> dict:
+    data = await analytics_read_service.growth(db, range_days=range_days)
     return success(data)

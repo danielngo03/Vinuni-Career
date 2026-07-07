@@ -40,7 +40,12 @@ from app.modules.opportunities.api.events_router import (
 from app.modules.organization.api import router as organization_router
 from app.modules.organization.api.public_router import companies_router
 from app.modules.platform_admin.api.router import admin_router as platform_admin_audit_router
+from app.modules.platform_admin.api.router import (
+    analytics_router as platform_admin_analytics_router,
+)
 from app.modules.platform_admin.api.router import health_router as platform_admin_health_router
+from app.modules.platform_admin.api.router import sessions_router as platform_admin_sessions_router
+from app.modules.platform_admin.api.router import users_router as platform_admin_users_router
 from app.modules.platform_feedback.api.router import router as platform_feedback_router
 from app.modules.platform_settings.api import router as platform_settings_router
 from app.modules.platform_support.api import router as platform_support_router
@@ -103,6 +108,9 @@ def register_routes(app: FastAPI) -> None:
     api.include_router(ai_ops_router.admin_router)
     api.include_router(platform_admin_audit_router)
     api.include_router(platform_admin_health_router)
+    api.include_router(platform_admin_users_router)
+    api.include_router(platform_admin_sessions_router)
+    api.include_router(platform_admin_analytics_router)
     api.include_router(platform_settings_router.public_router)
     api.include_router(platform_settings_router.admin_router)
     api.include_router(locations_router)
