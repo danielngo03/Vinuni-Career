@@ -499,10 +499,14 @@ async def revoke_superadmin(
     if not user.is_superadmin:
         return {"id": str(user.id), "is_superadmin": False}
 
-    # Last-superadmin guard: count active superadmins.
+    # Last-superadmin guard: count ACTIVE superadmins only.
+    # A suspended (is_active=False) superadmin cannot log in, so they must NOT
+    # be counted as a "remaining" admin — otherwise revoking the last active
+    # superadmin would leave the system in an effective lockout state.
     superadmin_count_result = await session.execute(
         select(func.count()).select_from(User).where(
             User.is_superadmin.is_(True),
+            User.is_active.is_(True),
             User.deleted_at.is_(None),
         )
     )

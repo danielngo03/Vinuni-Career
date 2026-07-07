@@ -801,3 +801,83 @@ async def test_grant_revoke_unknown_user_404(sa_client: AsyncClient) -> None:
 
     resp_revoke = await sa_client.post(f"/admin/users/{phantom}/revoke-superadmin")
     assert resp_revoke.status_code == 404
+
+
+# ---------------------------------------------------------------------------
+# Test 8 — Suspended superadmin must NOT count as a valid remaining admin
+# ---------------------------------------------------------------------------
+
+
+@pytest.mark.asyncio
+async def test_revoke_last_active_superadmin_rejected_when_other_is_suspended(
+    sa_client: AsyncClient,
+    db_session: AsyncSession,
+) -> None:
+    """Scenario: superadmin A (active) + superadmin B (suspended/is_active=False).
+
+    Revoking A must be REJECTED because A is the only ACTIVE superadmin.
+    Without the is_active filter the old guard would count B and allow the revoke,
+    leaving the system with no loginnable superadmin.
+    """
+    # superadmin A — active, the one we will try to revoke
+    superadmin_a = await _seed_user(
+        db_session,
+        email="active_sa@example.com",
+        is_active=True,
+        is_superadmin=True,
+    )
+    # superadmin B — suspended; must NOT count toward the guard
+    await _seed_user(
+        db_session,
+        email="suspended_sa@example.com",
+        is_active=False,
+        is_superadmin=True,
+    )
+    await db_session.commit()
+
+    resp = await sa_client.post(f"/admin/users/{superadmin_a.id}/revoke-superadmin")
+    # Must be rejected — A is the only ACTIVE superadmin
+    assert resp.status_code == 409, resp.text
+    body = resp.json()
+    assert body["error"]["code"] == "CONFLICT"
+
+    # A must STILL be a superadmin (guard prevented the change)
+    async with get_sessionmaker()() as fresh:
+        from app.modules.users.domain.models import User as UserModel
+
+        unchanged = (
+            await fresh.execute(select(UserModel).where(UserModel.id == superadmin_a.id))
+        ).scalar_one_or_none()
+        assert unchanged is not None
+        assert unchanged.is_superadmin is True, (
+            "Active superadmin A must remain superadmin; suspended B must not count as valid remaining admin"
+        )
+
+
+@pytest.mark.asyncio
+async def test_revoke_superadmin_allowed_when_two_active_superadmins(
+    sa_client: AsyncClient,
+    db_session: AsyncSession,
+) -> None:
+    """Two ACTIVE superadmins present — revoking one must succeed.
+
+    This regression test ensures the is_active filter does not break the
+    happy path: with two active superadmins the guard must pass.
+    """
+    superadmin_a = await _seed_user(
+        db_session,
+        email="active_sa_a@example.com",
+        is_active=True,
+        is_superadmin=True,
+    )
+    await _seed_user(
+        db_session,
+        email="active_sa_b@example.com",
+        is_active=True,
+        is_superadmin=True,
+    )
+    await db_session.commit()
+
+    resp = await sa_client.post(f"/admin/users/{superadmin_a.id}/revoke-superadmin")
+    assert resp.status_code == 200, resp.text
+    assert resp.json()["data"]["is_superadmin"] is False
