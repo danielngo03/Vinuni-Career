@@ -5,6 +5,10 @@ session liveness, loads the user + active identity, and builds the
 :class:`Principal` the service-layer :class:`PermissionChecker` consumes. Any
 failure surfaces as ``401 AUTH_REQUIRED`` — authorization (``403``) is decided
 later, in the service layer (``docs/API_CONTRACTS.md``, ``docs/SECURITY_PRIVACY.md``).
+
+``require_superadmin`` is defined here (canonical shared location) so that any
+module can import it without coupling to ``ai_ops``.  The ``ai_ops`` module
+re-imports it from here for backwards compatibility.
 """
 
 from __future__ import annotations
@@ -26,7 +30,7 @@ from app.modules.auth.infrastructure.jwt import (
 )
 from app.modules.organization.application import grant_resolver
 from app.modules.users.application import user_service
-from app.shared.exceptions import AuthRequiredError
+from app.shared.exceptions import AuthRequiredError, PermissionDeniedError
 from app.shared.permissions import Principal
 
 
@@ -101,3 +105,20 @@ async def get_current_principal(
 
 def get_request_context(request: Request) -> RequestContext:
     return context_from_request(request)
+
+
+async def require_superadmin(
+    auth: CurrentAuth = Depends(get_current_auth),
+) -> Principal:
+    """Return the principal only if the caller is a platform superadmin.
+
+    Canonical shared location — import from here, not from ``ai_ops``.
+
+    Raises:
+        AuthRequiredError: propagated from ``get_current_auth`` when token is absent/invalid (401).
+        PermissionDeniedError: when the caller is authenticated but not a superadmin (403).
+    """
+
+    if not auth.principal.is_superadmin:
+        raise PermissionDeniedError()
+    return auth.principal
