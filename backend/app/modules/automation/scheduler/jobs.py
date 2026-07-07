@@ -172,6 +172,20 @@ async def _market_intelligence_reconcile(
     return await mi_snapshot.reconcile(session, now=now)
 
 
+async def _evaluate_alerts(session: AsyncSession, _now: datetime) -> dict[str, int]:
+    """Evaluate all enabled alert rules and open/resolve incidents. Never raises."""
+    import logging  # noqa: PLC0415
+
+    _log = logging.getLogger(__name__)
+    try:
+        from app.modules.platform_admin.application import alerts_service  # noqa: PLC0415
+
+        return await alerts_service.evaluate_alerts(session)
+    except Exception:  # noqa: BLE001
+        _log.warning("scheduler.alerts_evaluate_failed", exc_info=True)
+        return {"opened": 0, "resolved": 0, "evaluated": 0, "error": 1}
+
+
 # Cadences per ADR-0003 §2 (multiples of the base tick). Order is the run order
 # within a tick; each job is otherwise independent (its own session + commit).
 REGISTRY: tuple[ScheduledJob, ...] = (
@@ -236,6 +250,9 @@ REGISTRY: tuple[ScheduledJob, ...] = (
     # (rollup rows in ai_usage_daily are never pruned). Both are idempotent.
     ScheduledJob("ai_ops.usage_daily_reconcile", 3600, _ai_usage_daily_reconcile),
     ScheduledJob("ai_ops.prune", 86400, _ai_ops_prune),
+    # P7: Alert rule evaluation — opens/resolves incidents on threshold breaches.
+    # Runs every 5 minutes. Never raises (errors logged, never crashes the scheduler).
+    ScheduledJob("alerts.evaluate", 300, _evaluate_alerts),
 )
 
 

@@ -41,6 +41,12 @@ from app.modules.organization.api import router as organization_router
 from app.modules.organization.api.public_router import companies_router
 from app.modules.platform_admin.api.router import admin_router as platform_admin_audit_router
 from app.modules.platform_admin.api.router import (
+    alerts_incidents_router as platform_admin_alerts_incidents_router,
+)
+from app.modules.platform_admin.api.router import (
+    alerts_rules_router as platform_admin_alerts_rules_router,
+)
+from app.modules.platform_admin.api.router import (
     analytics_router as platform_admin_analytics_router,
 )
 from app.modules.platform_admin.api.router import catalog_router as platform_admin_catalog_router
@@ -115,6 +121,8 @@ def register_routes(app: FastAPI) -> None:
     api.include_router(platform_admin_analytics_router)
     api.include_router(platform_admin_flags_router)
     api.include_router(platform_admin_catalog_router)
+    api.include_router(platform_admin_alerts_rules_router)
+    api.include_router(platform_admin_alerts_incidents_router)
     api.include_router(platform_settings_router.public_router)
     api.include_router(platform_settings_router.admin_router)
     api.include_router(locations_router)

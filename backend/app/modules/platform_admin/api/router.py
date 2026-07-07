@@ -29,6 +29,15 @@ Endpoints:
   GET  /admin/analytics/funnel             — application funnel + conversion rates
   GET  /admin/analytics/growth             — per-day growth trend series
 
+  --- P7: Alerts & Incidents ---
+  GET    /admin/alerts/rules               — list alert rules
+  POST   /admin/alerts/rules               — create alert rule (audited)
+  PATCH  /admin/alerts/rules/{id}          — update alert rule (audited)
+  DELETE /admin/alerts/rules/{id}          — delete alert rule (audited)
+  GET    /admin/alerts/incidents           — cursor-paginated incidents list
+  POST   /admin/alerts/incidents/{id}/acknowledge — acknowledge incident (audited)
+  POST   /admin/alerts/incidents/{id}/resolve     — resolve incident (audited)
+
 Authorization is enforced both in the ``require_superadmin`` dependency *and*
 re-checked inside the service layer (defence-in-depth per backend rules).
 
@@ -57,6 +66,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from app.core.db import get_db_session
 from app.modules.auth.api.deps import CurrentAuth, get_current_auth, require_superadmin
 from app.modules.platform_admin.application import (
+    alerts_service,
     analytics_read_service,
     audit_read_service,
     feature_flags_service,
@@ -72,6 +82,10 @@ admin_router = APIRouter(prefix="/admin/audit-log", tags=["platform-admin-audit"
 health_router = APIRouter(prefix="/admin/system-health", tags=["platform-admin-health"])
 users_router = APIRouter(prefix="/admin/users", tags=["platform-admin-users"])
 sessions_router = APIRouter(prefix="/admin/sessions", tags=["platform-admin-sessions"])
+alerts_rules_router = APIRouter(prefix="/admin/alerts/rules", tags=["platform-admin-alerts"])
+alerts_incidents_router = APIRouter(
+    prefix="/admin/alerts/incidents", tags=["platform-admin-alerts"]
+)
 analytics_router = APIRouter(prefix="/admin/analytics", tags=["platform-admin-analytics"])
 flags_router = APIRouter(prefix="/admin/feature-flags", tags=["platform-admin-flags"])
 catalog_router = APIRouter(prefix="/admin/permission-catalog", tags=["platform-admin-catalog"])
@@ -440,3 +454,191 @@ async def get_permission_catalog(
 ) -> dict:
     catalog = permission_catalog_service.permission_catalog()
     return success({"catalog": catalog})
+
+
+# ---------------------------------------------------------------------------
+# P7: Alert Rules — superadmin only
+# ---------------------------------------------------------------------------
+
+
+@alerts_rules_router.get("", summary="List alert rules — superadmin")
+async def list_alert_rules(
+    principal: Principal = Depends(require_superadmin),
+    db: AsyncSession = Depends(get_db_session),
+) -> dict:
+    items = await alerts_service.list_rules(db, principal=principal)
+    return success(items)
+
+
+@alerts_rules_router.post("", summary="Create alert rule — superadmin (audited)")
+async def create_alert_rule(
+    body: dict,
+    auth: CurrentAuth = Depends(get_current_auth),
+    db: AsyncSession = Depends(get_db_session),
+) -> dict:
+    from app.shared.exceptions import PermissionDeniedError  # noqa: PLC0415
+
+    if not auth.principal.is_superadmin:
+        raise PermissionDeniedError()
+
+    ctx = AuditContext(
+        actor_id=auth.principal.user_id,
+        actor_org_id=auth.principal.org_id,
+        session_id=auth.claims.session_id,
+        ip=auth.ctx.ip,
+        user_agent=auth.ctx.user_agent,
+    )
+    result = await alerts_service.create_rule(
+        db,
+        principal=auth.principal,
+        ctx=ctx,
+        name=body.get("name", ""),
+        metric=body.get("metric", ""),
+        comparison=body.get("comparison", ""),
+        threshold=float(body.get("threshold", 0)),
+        window_days=int(body.get("window_days", 1)),
+        severity=body.get("severity", "warning"),
+        enabled=bool(body.get("enabled", True)),
+        channels=list(body.get("channels", [])),
+    )
+    return success(result)
+
+
+@alerts_rules_router.patch("/{rule_id}", summary="Update alert rule — superadmin (audited)")
+async def update_alert_rule(
+    rule_id: uuid.UUID,
+    body: dict,
+    auth: CurrentAuth = Depends(get_current_auth),
+    db: AsyncSession = Depends(get_db_session),
+) -> dict:
+    from app.shared.exceptions import PermissionDeniedError  # noqa: PLC0415
+
+    if not auth.principal.is_superadmin:
+        raise PermissionDeniedError()
+
+    ctx = AuditContext(
+        actor_id=auth.principal.user_id,
+        actor_org_id=auth.principal.org_id,
+        session_id=auth.claims.session_id,
+        ip=auth.ctx.ip,
+        user_agent=auth.ctx.user_agent,
+    )
+    result = await alerts_service.update_rule(
+        db,
+        principal=auth.principal,
+        ctx=ctx,
+        rule_id=rule_id,
+        **body,
+    )
+    return success(result)
+
+
+@alerts_rules_router.delete("/{rule_id}", summary="Delete alert rule — superadmin (audited)")
+async def delete_alert_rule(
+    rule_id: uuid.UUID,
+    auth: CurrentAuth = Depends(get_current_auth),
+    db: AsyncSession = Depends(get_db_session),
+) -> dict:
+    from app.shared.exceptions import PermissionDeniedError  # noqa: PLC0415
+
+    if not auth.principal.is_superadmin:
+        raise PermissionDeniedError()
+
+    ctx = AuditContext(
+        actor_id=auth.principal.user_id,
+        actor_org_id=auth.principal.org_id,
+        session_id=auth.claims.session_id,
+        ip=auth.ctx.ip,
+        user_agent=auth.ctx.user_agent,
+    )
+    result = await alerts_service.delete_rule(
+        db,
+        principal=auth.principal,
+        ctx=ctx,
+        rule_id=rule_id,
+    )
+    return success(result)
+
+
+# ---------------------------------------------------------------------------
+# P7: Incidents — superadmin only
+# ---------------------------------------------------------------------------
+
+
+@alerts_incidents_router.get("", summary="List incidents — superadmin (cursor-paginated)")
+async def list_incidents(
+    status: str | None = Query(
+        default=None, description="Filter by status: open|acknowledged|resolved"
+    ),
+    cursor: str | None = Query(default=None),
+    limit: int = Query(default=50, ge=1, le=200),
+    _principal: Principal = Depends(require_superadmin),
+    db: AsyncSession = Depends(get_db_session),
+) -> dict:
+    items, next_cursor, page_limit = await alerts_service.list_incidents(
+        db,
+        status=status,
+        cursor=cursor,
+        limit=limit,
+    )
+    return paginated(items, next_cursor=next_cursor, limit=page_limit)
+
+
+@alerts_incidents_router.post(
+    "/{incident_id}/acknowledge",
+    summary="Acknowledge an incident — superadmin (audited)",
+)
+async def acknowledge_incident(
+    incident_id: uuid.UUID,
+    auth: CurrentAuth = Depends(get_current_auth),
+    db: AsyncSession = Depends(get_db_session),
+) -> dict:
+    from app.shared.exceptions import PermissionDeniedError  # noqa: PLC0415
+
+    if not auth.principal.is_superadmin:
+        raise PermissionDeniedError()
+
+    ctx = AuditContext(
+        actor_id=auth.principal.user_id,
+        actor_org_id=auth.principal.org_id,
+        session_id=auth.claims.session_id,
+        ip=auth.ctx.ip,
+        user_agent=auth.ctx.user_agent,
+    )
+    result = await alerts_service.acknowledge_incident(
+        db,
+        principal=auth.principal,
+        ctx=ctx,
+        incident_id=incident_id,
+    )
+    return success(result)
+
+
+@alerts_incidents_router.post(
+    "/{incident_id}/resolve",
+    summary="Manually resolve an incident — superadmin (audited)",
+)
+async def resolve_incident(
+    incident_id: uuid.UUID,
+    auth: CurrentAuth = Depends(get_current_auth),
+    db: AsyncSession = Depends(get_db_session),
+) -> dict:
+    from app.shared.exceptions import PermissionDeniedError  # noqa: PLC0415
+
+    if not auth.principal.is_superadmin:
+        raise PermissionDeniedError()
+
+    ctx = AuditContext(
+        actor_id=auth.principal.user_id,
+        actor_org_id=auth.principal.org_id,
+        session_id=auth.claims.session_id,
+        ip=auth.ctx.ip,
+        user_agent=auth.ctx.user_agent,
+    )
+    result = await alerts_service.resolve_incident(
+        db,
+        principal=auth.principal,
+        ctx=ctx,
+        incident_id=incident_id,
+    )
+    return success(result)
