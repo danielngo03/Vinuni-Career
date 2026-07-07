@@ -539,3 +539,55 @@ async def test_reliability_with_identity_grant_exposes_real_circuit_state_keys(
         # The important assertion: no key looks like a positional placeholder
         # when we have the identity grant.  We only enforce this when non-empty.
         break  # structure check is sufficient; provider config is env-dependent
+
+
+# ---------------------------------------------------------------------------
+# p95 latency in overview
+# ---------------------------------------------------------------------------
+
+@pytest.mark.asyncio
+async def test_overview_p95_latency_ms_with_10_rows(
+    superadmin_client: AsyncClient,
+    db_session: AsyncSession,
+) -> None:
+    """Seed 10 events with latencies 100..1000; nearest-rank p95 = index 9 = 1000."""
+    now = datetime.now(tz=UTC)
+    for i, latency in enumerate(range(100, 1100, 100)):  # 100, 200, ..., 1000
+        db_session.add(
+            AiOpsEvent(
+                id=uuid.uuid4(),
+                created_at=now,
+                task_type="p95_test",
+                alias="chat_default",
+                provider=None,
+                model=None,
+                prompt_tokens=10,
+                completion_tokens=10,
+                latency_ms=latency,
+                status="ok",
+                fallback_used=False,
+                circuit_open=False,
+                cost_usd=None,
+                unpriced=True,
+            )
+        )
+    await db_session.commit()
+
+    resp = await superadmin_client.get("/admin/ai-ops/overview")
+    assert resp.status_code == 200, resp.text
+    data = resp.json()["data"]
+    assert "p95_latency_ms" in data
+    # ceil(0.95 * 10) - 1 = ceil(9.5) - 1 = 10 - 1 = 9 → vals[9] = 1000
+    assert data["p95_latency_ms"] == 1000
+
+
+@pytest.mark.asyncio
+async def test_overview_p95_latency_ms_none_when_no_events(
+    superadmin_client: AsyncClient,
+) -> None:
+    """When no ai_ops_event rows exist, p95_latency_ms must be None, not a 500."""
+    resp = await superadmin_client.get("/admin/ai-ops/overview")
+    assert resp.status_code == 200, resp.text
+    data = resp.json()["data"]
+    assert "p95_latency_ms" in data
+    assert data["p95_latency_ms"] is None

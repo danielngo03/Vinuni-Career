@@ -20,6 +20,7 @@ Design notes:
 
 from __future__ import annotations
 
+import math
 import uuid
 from collections.abc import Awaitable, Callable
 from datetime import UTC, date, datetime, timedelta
@@ -116,9 +117,32 @@ async def overview(
         )
         return int(result.scalar_one())
 
+    async def _p95_latency_ms() -> int | None:
+        """Compute nearest-rank p95 latency from per-request ai_ops_event rows.
+
+        SQLite (used in tests) has no PERCENTILE_CONT, so we sort in Python.
+        Capped at 200 000 rows — sufficient for any realistic daily window.
+        """
+        result = await db.execute(
+            select(AiOpsEvent.latency_ms)
+            .where(
+                AiOpsEvent.created_at >= _today_start(),
+                AiOpsEvent.latency_ms.is_not(None),
+            )
+            .order_by(AiOpsEvent.latency_ms)
+            .limit(200_000)
+        )
+        vals = [int(row[0]) for row in result.all()]
+        if not vals:
+            return None
+        # Nearest-rank p95: ceil(0.95 * n) - 1, clamped to last index.
+        idx = min(len(vals) - 1, math.ceil(0.95 * len(vals)) - 1)
+        return vals[idx]
+
     spend_today = await _safe(db, _spend_today, fallback=0.0)
     requests_today = await _safe(db, _requests_today, fallback=0)
     errors_today = await _safe(db, _errors_today, fallback=0)
+    p95_latency_ms = await _safe(db, _p95_latency_ms, fallback=None)
 
     budget = runtime_config.current().daily_budget_usd
     error_rate = (errors_today / requests_today) if requests_today > 0 else 0.0
@@ -128,6 +152,7 @@ async def overview(
         "budget": budget,
         "error_rate": error_rate,
         "requests": requests_today,
+        "p95_latency_ms": p95_latency_ms,
     }
 
 

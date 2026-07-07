@@ -25,6 +25,8 @@ export interface AiOpsOverview {
   total_tokens: number;
   /** Average latency across all AI calls in ms. */
   avg_latency_ms: number;
+  /** p95 latency across all AI calls in ms. Null when no events exist. */
+  p95_latency_ms: number | null;
   updated_at: string | null;
 }
 

@@ -72,6 +72,7 @@ describe("aiOpsApi.overview", () => {
       requests: 120,
       total_tokens: 45000,
       avg_latency_ms: 320,
+      p95_latency_ms: 850,
       updated_at: null,
     };
     resolveWith(apiGet, stub);

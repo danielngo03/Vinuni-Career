@@ -40,6 +40,10 @@ describe("budgetTone", () => {
     expect(budgetTone(89.99, 100)).toBe("amber");
   });
 
+  it("returns amber at exactly 90%", () => {
+    expect(budgetTone(90, 100)).toBe("amber");
+  });
+
   it("returns red above 90%", () => {
     expect(budgetTone(90.01, 100)).toBe("red");
     expect(budgetTone("91", "100")).toBe("red");

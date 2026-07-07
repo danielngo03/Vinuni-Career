@@ -192,6 +192,7 @@ function SpendPanel({
   unpricedLabel: string;
 }) {
   const t = useTranslations("adminConsole.aiOps.spend");
+  const tAiOps = useTranslations("adminConsole.aiOps");
   const locale = useLocale();
 
   const query = useQuery({
@@ -223,7 +224,7 @@ function SpendPanel({
               onClick={() => void query.refetch()}
               className="text-xs font-semibold text-[var(--brand-primary)] underline-offset-2 hover:underline"
             >
-              {useTranslations("adminConsole.aiOps")("retry")}
+              {tAiOps("retry")}
             </button>
           }
         />
@@ -417,7 +418,7 @@ function ReliabilityPanel({
             <thead>
               <tr className="border-b border-[var(--border-subtle)]">
                 <th className="pb-2 pr-4 text-left text-[11px] font-semibold uppercase tracking-wide text-[var(--text-muted)]">
-                  Feature
+                  {t("featureCol")}
                 </th>
                 <th className="pb-2 pr-4 text-right text-[11px] font-semibold uppercase tracking-wide text-[var(--text-muted)]">
                   {t("errorRateLabel")}
@@ -627,55 +628,60 @@ function VolumePanel({
           <h3 className="mb-2 text-[11px] font-semibold uppercase tracking-wide text-[var(--text-muted)]">
             {t("topConsumersTitle")}
           </h3>
-          <ul className="space-y-1.5" role="list">
-            {featureEntries.slice(0, 8).map(([group, val]: [string, { requests: number; tokens: number }]) => {
+          {(() => {
               const totalRequests = featureEntries.reduce(
                 (s, [, v]) => s + v.requests,
                 0,
               );
-              const pct =
-                totalRequests > 0
-                  ? Math.round((val.requests / totalRequests) * 100)
-                  : 0;
-
               return (
-                <li
-                  key={group}
-                  className="flex items-center justify-between gap-3 text-xs"
-                >
-                  <div className="flex min-w-0 flex-1 flex-col gap-0.5">
-                    <span className="truncate font-semibold text-[var(--text-primary)]">
-                      {group}
-                    </span>
-                    <div className="h-1.5 w-full overflow-hidden rounded-full bg-[var(--bg-muted)]">
-                      <div
-                        className="h-full rounded-full bg-[var(--gray-400)]"
-                        style={{ width: `${Math.max(pct, 2)}%` }}
-                        role="meter"
-                        aria-valuenow={pct}
-                        aria-valuemin={0}
-                        aria-valuemax={100}
-                        aria-label={`${group}: ${pct}%`}
-                      />
-                    </div>
-                  </div>
-                  <div className="flex shrink-0 flex-col items-end gap-0.5">
-                    <span
-                      className="font-mono font-semibold tabular-nums text-[var(--text-primary)]"
-                      style={{
-                        fontFamily: "'JetBrains Mono', ui-monospace, monospace",
-                      }}
-                    >
-                      {new Intl.NumberFormat().format(val.requests)}
-                    </span>
-                    <span className="text-[0.65rem] text-[var(--text-muted)]">
-                      {pct}%
-                    </span>
-                  </div>
-                </li>
+                <ul className="space-y-1.5" role="list">
+                  {featureEntries.slice(0, 8).map(([group, val]: [string, { requests: number; tokens: number }]) => {
+                    const pct =
+                      totalRequests > 0
+                        ? Math.round((val.requests / totalRequests) * 100)
+                        : 0;
+
+                    return (
+                      <li
+                        key={group}
+                        className="flex items-center justify-between gap-3 text-xs"
+                      >
+                        <div className="flex min-w-0 flex-1 flex-col gap-0.5">
+                          <span className="truncate font-semibold text-[var(--text-primary)]">
+                            {group}
+                          </span>
+                          <div className="h-1.5 w-full overflow-hidden rounded-full bg-[var(--bg-muted)]">
+                            <div
+                              className="h-full rounded-full bg-[var(--gray-400)]"
+                              style={{ width: `${Math.max(pct, 2)}%` }}
+                              role="meter"
+                              aria-valuenow={pct}
+                              aria-valuemin={0}
+                              aria-valuemax={100}
+                              aria-label={`${group}: ${pct}%`}
+                            />
+                          </div>
+                        </div>
+                        <div className="flex shrink-0 flex-col items-end gap-0.5">
+                          <span
+                            className="font-mono font-semibold tabular-nums text-[var(--text-primary)]"
+                            style={{
+                              fontFamily: "'JetBrains Mono', ui-monospace, monospace",
+                            }}
+                          >
+                            {new Intl.NumberFormat().format(val.requests)}
+                          </span>
+                          <span className="text-[0.65rem] text-[var(--text-muted)]">
+                            {pct}%
+                          </span>
+                        </div>
+                      </li>
+                    );
+                  })}
+                </ul>
               );
-            })}
-          </ul>
+            })()}
+
         </>
       )}
     </PanelCard>
@@ -773,7 +779,7 @@ function OverviewTab({ range }: { range: AiOpsRange }) {
         {/* p95 latency */}
         <MetricTile
           label={t("metric.p95Latency")}
-          value={formatLatency(data.avg_latency_ms)}
+          value={formatLatency(data.p95_latency_ms ?? NaN)}
           icon={Timer}
           tone="primary"
           sub={
