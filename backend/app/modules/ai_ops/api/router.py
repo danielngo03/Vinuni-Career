@@ -13,13 +13,17 @@ is a deliberate least-privilege gate on telemetry internals.
 
 from __future__ import annotations
 
-from fastapi import Depends, Query
+import uuid
+
+from fastapi import Depends, Query, Request
 from fastapi.routing import APIRouter
+from pydantic import BaseModel, Field
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.core.db import get_db_session
 from app.modules.ai_ops.api.deps import require_superadmin
-from app.modules.ai_ops.application import ai_ops_read_service
+from app.modules.ai_ops.application import ai_ops_read_service, pricing_admin_service
+from app.modules.auth.application.context import context_from_request
 from app.shared.permissions import Principal
 from app.shared.responses import paginated, success
 
@@ -119,3 +123,73 @@ async def get_events(
         next_cursor=data["next_cursor"],
         limit=limit,
     )
+
+
+# ---------------------------------------------------------------------------
+# Model price CRUD — superadmin only, every write audited
+# ---------------------------------------------------------------------------
+
+
+class _PriceCreateRequest(BaseModel):
+    provider: str = Field(..., min_length=1, max_length=64)
+    model: str = Field(..., min_length=1, max_length=128)
+    input_usd_per_1k: float = Field(..., gt=0)
+    output_usd_per_1k: float = Field(..., gt=0)
+    active: bool = Field(default=True)
+
+
+class _PricePatchRequest(BaseModel):
+    provider: str | None = Field(default=None, min_length=1, max_length=64)
+    model: str | None = Field(default=None, min_length=1, max_length=128)
+    input_usd_per_1k: float | None = Field(default=None, gt=0)
+    output_usd_per_1k: float | None = Field(default=None, gt=0)
+    active: bool | None = Field(default=None)
+
+
+@admin_router.get("/prices", summary="List all model price rows")
+async def list_prices(
+    _principal: Principal = Depends(require_superadmin),
+    db: AsyncSession = Depends(get_db_session),
+) -> dict:
+    data = await pricing_admin_service.list_prices(db)
+    return success(data)
+
+
+@admin_router.post("/prices", summary="Create a model price row", status_code=201)
+async def create_price(
+    body: _PriceCreateRequest,
+    request: Request,
+    principal: Principal = Depends(require_superadmin),
+    db: AsyncSession = Depends(get_db_session),
+) -> dict:
+    ctx = context_from_request(request)
+    data = await pricing_admin_service.create_price(
+        db,
+        principal,
+        ctx,
+        provider=body.provider,
+        model=body.model,
+        input_usd_per_1k=body.input_usd_per_1k,
+        output_usd_per_1k=body.output_usd_per_1k,
+        active=body.active,
+    )
+    return success(data)
+
+
+@admin_router.patch("/prices/{price_id}", summary="Partially update a model price row")
+async def update_price(
+    price_id: uuid.UUID,
+    body: _PricePatchRequest,
+    request: Request,
+    principal: Principal = Depends(require_superadmin),
+    db: AsyncSession = Depends(get_db_session),
+) -> dict:
+    ctx = context_from_request(request)
+    data = await pricing_admin_service.update_price(
+        db,
+        principal,
+        ctx,
+        price_id,
+        fields=body.model_dump(exclude_none=True),
+    )
+    return success(data)
