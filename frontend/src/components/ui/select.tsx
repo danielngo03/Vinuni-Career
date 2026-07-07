@@ -52,12 +52,12 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(function Select
           aria-invalid={error ? true : undefined}
           aria-describedby={cn(error && errorId, help && helpId) || undefined}
           className={cn(
-            "w-full appearance-none rounded-xl border bg-white/80 px-3.5 py-2.5 pr-10 text-sm font-medium text-[var(--text-primary)]",
+            "w-full appearance-none rounded-xl border bg-[var(--surface-card)] px-3.5 py-2.5 pr-10 text-sm font-medium text-[var(--text-primary)]",
             "outline-none transition-all duration-150",
-            "focus:border-[var(--brand-primary)] focus:bg-white/95 focus:ring-2 focus:ring-[var(--brand-primary)]/20",
+            "focus:border-[var(--brand-primary)] focus:ring-2 focus:ring-[var(--brand-primary)]/20",
             error
               ? "border-[var(--brand-red)]"
-              : "border-white/60 hover:border-[var(--border-default)]",
+              : "border-[var(--border-default)] hover:border-[var(--border-strong)]",
             "disabled:cursor-not-allowed disabled:opacity-60",
             className,
           )}

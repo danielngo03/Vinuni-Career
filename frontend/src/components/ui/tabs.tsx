@@ -78,8 +78,8 @@ export function Tabs({
             className={cn(
               "inline-flex items-center gap-2 whitespace-nowrap rounded-full border px-4 py-2 text-sm font-semibold outline-none transition-all focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)]/30 focus-visible:ring-offset-1",
               selected
-                ? "border-[var(--brand-primary)]/30 bg-[var(--brand-primary)] text-white shadow-sm shadow-[var(--brand-primary)]/20"
-                : "border-white/60 bg-white/72 text-[var(--text-secondary)] backdrop-blur-sm hover:bg-white/90 hover:text-[var(--text-primary)]",
+                ? "border-transparent bg-[var(--btn-primary-bg)] text-[var(--btn-primary-fg)] shadow-sm"
+                : "border-[var(--border-default)] bg-[var(--surface-card)] text-[var(--text-secondary)] hover:bg-[var(--surface-hover)] hover:text-[var(--text-primary)]",
             )}
           >
             {item.icon}

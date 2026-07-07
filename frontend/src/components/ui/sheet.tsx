@@ -61,7 +61,7 @@ export function Sheet({
         aria-label={title}
         tabIndex={-1}
         className={cn(
-          "absolute flex flex-col border border-white/60 bg-white/92 shadow-[0_20px_60px_rgba(11,34,57,0.16)] backdrop-blur-xl outline-none",
+          "absolute flex flex-col border border-[var(--border-default)] bg-[var(--surface-card)] shadow-[var(--shadow-xl)] outline-none",
           // Mobile: bottom sheet
           "inset-x-0 bottom-0 max-h-[85vh] rounded-t-2xl",
           // Desktop: side drawer
@@ -69,7 +69,7 @@ export function Sheet({
           side === "right" ? "sm:right-0" : "sm:left-0",
         )}
       >
-        <div className="flex items-center justify-between border-b border-white/40 px-5 py-4">
+        <div className="flex items-center justify-between border-b border-[var(--border-subtle)] px-5 py-4">
           {title && (
             <h2 className="text-base font-bold text-[var(--text-primary)]">
               {title}

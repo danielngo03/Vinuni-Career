@@ -122,7 +122,7 @@ export function MessagingScreen({
                 {t("title")}
               </h2>
               {threads.length > 0 && (
-                <span className="rounded-full bg-[#f7f6f2] px-2 py-1 text-xs font-semibold text-[var(--text-secondary)] shadow-[inset_0_0_0_1px_rgba(0,0,0,0.055)]">
+                <span className="rounded-full bg-[var(--ops-canvas)] px-2 py-1 text-xs font-semibold text-[var(--text-secondary)] shadow-[inset_0_0_0_1px_rgba(0,0,0,0.055)]">
                   {threads.length}
                 </span>
               )}
@@ -130,7 +130,7 @@ export function MessagingScreen({
             <label htmlFor="message-search" className="sr-only">
               {t("searchLabel")}
             </label>
-            <div className="mt-2 flex h-9 items-center gap-2 rounded-full border border-[var(--border-default)] bg-[#f7f6f2] px-3 text-[var(--text-secondary)] focus-within:border-[var(--border-strong)] focus-within:bg-white">
+            <div className="mt-2 flex h-9 items-center gap-2 rounded-full border border-[var(--border-default)] bg-[var(--ops-canvas)] px-3 text-[var(--text-secondary)] focus-within:border-[var(--border-strong)] focus-within:bg-[var(--surface-card)]">
               <MagnifyingGlass aria-hidden weight="bold" className="size-4 shrink-0" />
               <input
                 id="message-search"

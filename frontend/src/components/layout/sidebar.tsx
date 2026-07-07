@@ -203,7 +203,7 @@ export function Sidebar({
   }, [pathname, persona]);
 
   return (
-    <div className="flex h-full flex-col bg-[#f7f6f2]">
+    <div className="flex h-full flex-col bg-[var(--ops-canvas)]">
       {/* Official VinUniversity lockup. Collapse lives near the footer identity. */}
       <div
         className={cn(

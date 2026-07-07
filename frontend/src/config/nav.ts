@@ -200,7 +200,7 @@ export const WORKSPACE_NAV_GROUPS: Record<Persona, NavGroup[]> = {
         { key: "cvTemplates", href: "/cv-templates", icon: FileText },
         { key: "notificationTemplates", href: "/notifications/templates", icon: Bell },
         { key: "subscriptions", href: "/billing", icon: CreditCard },
-        { key: "aiSettings", href: "/ai-settings", icon: Bot },
+        { key: "aiSettings", href: "/ai-settings", icon: Bot, requiresSuperadmin: true },
       ],
     },
     {

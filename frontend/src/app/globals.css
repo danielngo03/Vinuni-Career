@@ -295,6 +295,9 @@
   --bg-subtle: #f5f5f5;
   --bg-muted: #ececec;
   --bg-hero: #0a0a0a;
+  /* Ops-shell / full-canvas working surface — a hair warmer than --bg-base.
+     Tokenized (was a hardcoded #f7f6f2 in 6 files) so it follows the dark theme. */
+  --ops-canvas: #f7f6f2;
 
   /* ── Semantic: borders ── */
   --border-default: #e5e5e5;
@@ -417,6 +420,7 @@
   --bg-subtle: #111111;
   --bg-muted: #1a1a1a;
   --bg-hero: #000000;
+  --ops-canvas: #0a0a0a;
 
   --border-default: #262626;
   --border-subtle: #1f1f1f;

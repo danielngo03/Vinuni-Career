@@ -54,14 +54,14 @@ export function DataTable<Row>({
   return (
     <div
       className={cn(
-        "overflow-x-auto rounded-xl border border-white/60 bg-white/82 backdrop-blur-md",
+        "overflow-x-auto rounded-xl border border-[var(--border-default)] bg-[var(--surface-card)]",
         className,
       )}
     >
       <table className="w-full border-collapse text-sm">
         {caption && <caption className="sr-only">{caption}</caption>}
         <thead>
-          <tr className="border-b border-white/40 bg-white/60">
+          <tr className="border-b border-[var(--border-default)] bg-[var(--bg-subtle)]">
             {columns.map((col) => (
               <th
                 key={col.key}
@@ -82,7 +82,7 @@ export function DataTable<Row>({
             ? Array.from({ length: skeletonRows }).map((_, i) => (
                 <tr
                   key={`sk-${i}`}
-                  className="border-b border-white/40 last:border-0"
+                  className="border-b border-[var(--border-subtle)] last:border-0"
                 >
                   {columns.map((col) => (
                     <td key={col.key} className="px-3.5 py-2.5">
@@ -94,7 +94,7 @@ export function DataTable<Row>({
             : rows.map((row) => (
                 <tr
                   key={getRowId(row)}
-                  className="border-b border-white/40 align-middle transition-colors last:border-0 hover:bg-white/60"
+                  className="border-b border-[var(--border-subtle)] align-middle transition-colors last:border-0 hover:bg-[var(--surface-hover)]"
                 >
                   {columns.map((col) => (
                     <td

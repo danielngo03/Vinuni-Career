@@ -80,7 +80,7 @@ export function ToastProvider({ children }: { children: React.ReactNode }) {
             <div
               key={toast.id}
               role="status"
-              className="pointer-events-auto flex w-full max-w-sm items-start gap-3 rounded-xl border border-white/60 bg-white/92 p-4 shadow-[0_4px_24px_rgba(11,34,57,0.12)] backdrop-blur-xl"
+              className="pointer-events-auto flex w-full max-w-sm items-start gap-3 rounded-xl border border-[var(--border-default)] bg-[var(--surface-card)] p-4 shadow-[var(--shadow-lg)]"
             >
               <Icon
                 aria-hidden
