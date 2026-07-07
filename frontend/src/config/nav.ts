@@ -234,7 +234,7 @@ export const ADMIN_NAV_GROUPS: NavGroup[] = [
   {
     key: "system",
     items: [
-      { key: "auditLog", href: "/admin/audit-log", icon: ScrollText, absolute: true, disabled: true },
+      { key: "auditLog", href: "/admin/audit-log", icon: ScrollText, absolute: true },
       { key: "systemHealth", href: "/admin/system-health", icon: Activity, absolute: true, disabled: true },
       { key: "usersAccess", href: "/admin/users", icon: Users, absolute: true, disabled: true },
       { key: "featureFlags", href: "/admin/feature-flags", icon: Flag, absolute: true, disabled: true },

@@ -220,6 +220,51 @@
         "perOrgError": "Failed to save per-org budget.",
         "loading": "Loading..."
       }
+    },
+    "audit": {
+      "pageTitle": "Audit Log",
+      "pageSubtitle": "Immutable record of all superadmin and platform-level actions.",
+      "filter": {
+        "action": "Action",
+        "actionPlaceholder": "e.g. user.created",
+        "resourceType": "Resource type",
+        "resourceTypePlaceholder": "e.g. user",
+        "actorId": "Actor ID",
+        "actorIdPlaceholder": "UUID",
+        "since": "From",
+        "until": "To"
+      },
+      "exportCsv": "Export CSV",
+      "exportSuccess": "CSV download started.",
+      "exportError": "CSV export failed. Please try again.",
+      "col": {
+        "time": "Time",
+        "actor": "Actor",
+        "action": "Action",
+        "resource": "Resource"
+      },
+      "sheet": {
+        "title": "Audit entry detail",
+        "closeLabel": "Close",
+        "labelId": "Entry ID",
+        "labelOccurredAt": "Time",
+        "labelActorEmail": "Actor email",
+        "labelActorId": "Actor ID",
+        "labelActorOrgId": "Actor org ID",
+        "labelAction": "Action",
+        "labelResourceType": "Resource type",
+        "labelResourceId": "Resource ID",
+        "labelBefore": "Before",
+        "labelAfter": "After",
+        "nullValue": "—",
+        "noDiff": "—"
+      },
+      "loadMore": "Load more",
+      "emptyTitle": "No audit entries",
+      "emptyBody": "Audit entries will appear here once actions are recorded.",
+      "errorTitle": "Audit log unavailable",
+      "errorBody": "Could not load audit entries. Please try again.",
+      "retry": "Retry"
     }
   }
 }

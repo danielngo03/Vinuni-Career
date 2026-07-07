@@ -220,6 +220,51 @@
         "perOrgError": "Lưu ngân sách theo tổ chức thất bại.",
         "loading": "Đang tải..."
       }
+    },
+    "audit": {
+      "pageTitle": "Nhật ký kiểm tra",
+      "pageSubtitle": "Bản ghi bất biến về tất cả hành động cấp superadmin và nền tảng.",
+      "filter": {
+        "action": "Hành động",
+        "actionPlaceholder": "vd: user.created",
+        "resourceType": "Loại tài nguyên",
+        "resourceTypePlaceholder": "vd: user",
+        "actorId": "ID chủ thể",
+        "actorIdPlaceholder": "UUID",
+        "since": "Từ ngày",
+        "until": "Đến ngày"
+      },
+      "exportCsv": "Xuất CSV",
+      "exportSuccess": "Đã bắt đầu tải CSV.",
+      "exportError": "Xuất CSV thất bại. Vui lòng thử lại.",
+      "col": {
+        "time": "Thời gian",
+        "actor": "Chủ thể",
+        "action": "Hành động",
+        "resource": "Tài nguyên"
+      },
+      "sheet": {
+        "title": "Chi tiết mục kiểm tra",
+        "closeLabel": "Đóng",
+        "labelId": "ID mục",
+        "labelOccurredAt": "Thời gian",
+        "labelActorEmail": "Email chủ thể",
+        "labelActorId": "ID chủ thể",
+        "labelActorOrgId": "ID tổ chức chủ thể",
+        "labelAction": "Hành động",
+        "labelResourceType": "Loại tài nguyên",
+        "labelResourceId": "ID tài nguyên",
+        "labelBefore": "Trước",
+        "labelAfter": "Sau",
+        "nullValue": "—",
+        "noDiff": "—"
+      },
+      "loadMore": "Tải thêm",
+      "emptyTitle": "Chưa có mục kiểm tra",
+      "emptyBody": "Các mục kiểm tra sẽ xuất hiện tại đây sau khi có hành động được ghi lại.",
+      "errorTitle": "Nhật ký kiểm tra không khả dụng",
+      "errorBody": "Không thể tải các mục kiểm tra. Vui lòng thử lại.",
+      "retry": "Thử lại"
     }
   }
 }
