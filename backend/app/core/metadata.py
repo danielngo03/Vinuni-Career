@@ -22,6 +22,7 @@ from app.modules.analytics.domain import (  # noqa: F401
     partner_read_models as _partner_analytics_models,
 )
 from app.modules.auth.domain import models as _auth_models  # noqa: F401
+from app.modules.automation.scheduler import models as _scheduler_run_models  # noqa: F401
 from app.modules.billing.domain import models as _billing_models  # noqa: F401
 from app.modules.career_outcomes.domain import (  # noqa: F401
     models as _career_outcome_models,
@@ -73,6 +74,7 @@ def import_all_models() -> None:
         _ai_eval_samples,
         _ai_workforce_models,
         _advertising_models,
+        _scheduler_run_models,
         _ai_assistant_models,
         _analytics_models,
         _partner_analytics_models,
