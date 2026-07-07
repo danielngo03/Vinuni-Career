@@ -320,6 +320,116 @@
       "errorTitle": "Nhật ký kiểm tra không khả dụng",
       "errorBody": "Không thể tải các mục kiểm tra. Vui lòng thử lại.",
       "retry": "Thử lại"
+    },
+    "usersAccess": {
+      "pageTitle": "Người dùng & Phân quyền",
+      "pageSubtitle": "Quản lý tài khoản người dùng, danh tính và phiên hoạt động trên nền tảng.",
+      "tabs": {
+        "users": "Người dùng",
+        "sessions": "Phiên đăng nhập"
+      },
+      "filter": {
+        "searchPlaceholder": "Tìm kiếm theo email hoặc tên…",
+        "allPersonas": "Tất cả persona",
+        "persona": {
+          "student": "Sinh viên",
+          "alumni": "Cựu sinh viên",
+          "partner_member": "Thành viên đối tác",
+          "university_staff": "Nhân viên trường"
+        }
+      },
+      "col": {
+        "email": "Email",
+        "fullName": "Họ tên",
+        "persona": "Persona",
+        "status": "Trạng thái",
+        "verified": "Xác thực"
+      },
+      "status": {
+        "active": "Hoạt động",
+        "suspended": "Tạm khóa",
+        "verified": "Đã xác thực",
+        "unverified": "Chưa xác thực"
+      },
+      "pagination": {
+        "prev": "Trước",
+        "next": "Tiếp",
+        "page": "Trang {page} / {total}"
+      },
+      "sheet": {
+        "title": "Chi tiết người dùng",
+        "closeLabel": "Đóng",
+        "coreSection": "Tài khoản",
+        "identitiesSection": "Danh tính",
+        "labelId": "ID người dùng",
+        "labelEmail": "Email",
+        "labelActive": "Trạng thái",
+        "labelSuperadmin": "Superadmin",
+        "labelEmailVerified": "Xác thực email",
+        "labelCreatedAt": "Ngày tạo",
+        "labelLastLogin": "Đăng nhập gần nhất",
+        "labelSessions": "Phiên đang hoạt động",
+        "labelAiUsage": "Lượt gọi AI (gần đây)",
+        "yes": "Có",
+        "no": "Không",
+        "never": "Chưa bao giờ",
+        "identityId": "Danh tính",
+        "identityPersona": "Persona",
+        "identityOrg": "Tổ chức",
+        "identityPrimary": "Chính",
+        "noIdentities": "Không có danh tính"
+      },
+      "actions": {
+        "suspend": "Tạm khóa",
+        "unsuspend": "Mở khóa",
+        "grantSuperadmin": "Cấp superadmin",
+        "revokeSuperadmin": "Thu quyền superadmin",
+        "suspendConfirmTitle": "Tạm khóa tài khoản",
+        "suspendConfirmBody": "Tài khoản {email} sẽ không thể đăng nhập. Bạn có thể mở khóa bất cứ lúc nào.",
+        "unsuspendConfirmTitle": "Mở khóa tài khoản",
+        "unsuspendConfirmBody": "Tài khoản {email} sẽ được khôi phục quyền đăng nhập.",
+        "grantSuperadminConfirmTitle": "Cấp quyền superadmin",
+        "grantSuperadminConfirmBody": "Tài khoản {email} sẽ có toàn quyền quản trị nền tảng. Chỉ xác nhận nếu thực sự cần thiết.",
+        "revokeSuperadminConfirmTitle": "Thu quyền superadmin",
+        "revokeSuperadminConfirmBody": "Tài khoản {email} sẽ mất quyền superadmin. Nếu đây là superadmin cuối cùng đang hoạt động, thao tác sẽ bị từ chối.",
+        "confirm": "Xác nhận",
+        "cancel": "Hủy",
+        "suspendSuccess": "Đã tạm khóa tài khoản.",
+        "suspendError": "Không thể tạm khóa tài khoản.",
+        "unsuspendSuccess": "Đã mở khóa tài khoản.",
+        "unsuspendError": "Không thể mở khóa tài khoản.",
+        "grantSuperadminSuccess": "Đã cấp quyền superadmin.",
+        "grantSuperadminError": "Không thể cấp quyền superadmin.",
+        "revokeSuperadminSuccess": "Đã thu quyền superadmin.",
+        "revokeSuperadminError": "Không thể thu quyền superadmin."
+      },
+      "sessions": {
+        "col": {
+          "email": "Email người dùng",
+          "device": "Thiết bị",
+          "location": "Vị trí",
+          "lastSeen": "Hoạt động gần đây",
+          "expires": "Hết hạn",
+          "actions": "Thao tác"
+        },
+        "revokeAction": "Thu hồi",
+        "revokeConfirmTitle": "Thu hồi phiên",
+        "revokeConfirmBody": "Người dùng sẽ bị đăng xuất khỏi thiết bị này ngay lập tức.",
+        "revokeConfirm": "Thu hồi",
+        "revokeCancel": "Hủy",
+        "revokeSuccess": "Đã thu hồi phiên.",
+        "revokeError": "Không thể thu hồi phiên.",
+        "loadMore": "Tải thêm",
+        "emptyTitle": "Không có phiên đang hoạt động",
+        "emptyBody": "Hiện không có phiên nào đang hoạt động.",
+        "errorTitle": "Không thể tải phiên",
+        "errorBody": "Không thể tải danh sách phiên. Vui lòng thử lại."
+      },
+      "emptyTitle": "Không tìm thấy người dùng",
+      "emptyBody": "Không có người dùng nào khớp với tìm kiếm. Thử điều chỉnh bộ lọc.",
+      "errorTitle": "Không thể tải người dùng",
+      "errorBody": "Không thể tải danh sách người dùng. Vui lòng thử lại.",
+      "retry": "Thử lại"
     }
   }
 }

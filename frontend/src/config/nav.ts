@@ -71,6 +71,13 @@ export interface NavItem {
    * server-side protection on direct URL access.
    */
   requiresSuperadmin?: boolean;
+  /**
+   * When set, the item is shown only if the user has `permissions.includes("*")`
+   * (superadmin) OR `permissions.includes(requiresPermission)`. This is additive
+   * with `requiresSuperadmin` — an item may require both. No existing item is
+   * gated by `requiresPermission` yet; this wires the capability for future use.
+   */
+  requiresPermission?: string;
 }
 
 /**
@@ -213,6 +220,7 @@ export const WORKSPACE_NAV_GROUPS: Record<Persona, NavGroup[]> = {
         { key: "aiOperations", href: "/ai-operations", icon: Bot, requiresSuperadmin: true },
         { key: "auditLog", href: "/audit-log", icon: ScrollText, requiresSuperadmin: true },
         { key: "systemHealth", href: "/system-health", icon: Activity, requiresSuperadmin: true },
+        { key: "usersAccess", href: "/access", icon: Users, requiresSuperadmin: true },
       ],
     },
   ],

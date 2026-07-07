@@ -37,6 +37,11 @@ export interface AuthUser {
   avatar_url?: string | null;
   active_identity?: AuthIdentity | null;
   identities?: AuthIdentity[];
+  /**
+   * Permission strings from `/auth/me`. Superadmin accounts return `["*"]`.
+   * Non-superadmin accounts carry explicit capability grants; defaults to `[]`.
+   */
+  permissions?: string[];
 }
 
 export interface AuthTokens {

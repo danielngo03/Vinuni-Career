@@ -29,6 +29,7 @@ function makeSuperadmin(): SessionUser {
     email: "admin@vinuni.edu.vn",
     persona: "university",
     isSuperadmin: true,
+    permissions: ["*"],
   };
 }
 
@@ -39,6 +40,7 @@ function makeRegularUser(): SessionUser {
     email: "student@vinuni.edu.vn",
     persona: "student",
     isSuperadmin: false,
+    permissions: [],
   };
 }
 

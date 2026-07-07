@@ -320,6 +320,116 @@
       "errorTitle": "Audit log unavailable",
       "errorBody": "Could not load audit entries. Please try again.",
       "retry": "Retry"
+    },
+    "usersAccess": {
+      "pageTitle": "Users & Access",
+      "pageSubtitle": "Manage platform user accounts, identities, and active sessions.",
+      "tabs": {
+        "users": "Users",
+        "sessions": "Sessions"
+      },
+      "filter": {
+        "searchPlaceholder": "Search by email or name…",
+        "allPersonas": "All personas",
+        "persona": {
+          "student": "Student",
+          "alumni": "Alumni",
+          "partner_member": "Partner member",
+          "university_staff": "University staff"
+        }
+      },
+      "col": {
+        "email": "Email",
+        "fullName": "Name",
+        "persona": "Persona",
+        "status": "Status",
+        "verified": "Verified"
+      },
+      "status": {
+        "active": "Active",
+        "suspended": "Suspended",
+        "verified": "Verified",
+        "unverified": "Unverified"
+      },
+      "pagination": {
+        "prev": "Previous",
+        "next": "Next",
+        "page": "Page {page} of {total}"
+      },
+      "sheet": {
+        "title": "User detail",
+        "closeLabel": "Close",
+        "coreSection": "Account",
+        "identitiesSection": "Identities",
+        "labelId": "User ID",
+        "labelEmail": "Email",
+        "labelActive": "Status",
+        "labelSuperadmin": "Superadmin",
+        "labelEmailVerified": "Email verified",
+        "labelCreatedAt": "Created",
+        "labelLastLogin": "Last login",
+        "labelSessions": "Active sessions",
+        "labelAiUsage": "AI calls (recent)",
+        "yes": "Yes",
+        "no": "No",
+        "never": "Never",
+        "identityId": "Identity",
+        "identityPersona": "Persona",
+        "identityOrg": "Org",
+        "identityPrimary": "Primary",
+        "noIdentities": "No identities"
+      },
+      "actions": {
+        "suspend": "Suspend",
+        "unsuspend": "Unsuspend",
+        "grantSuperadmin": "Grant superadmin",
+        "revokeSuperadmin": "Revoke superadmin",
+        "suspendConfirmTitle": "Suspend account",
+        "suspendConfirmBody": "This will prevent {email} from logging in. You can unsuspend at any time.",
+        "unsuspendConfirmTitle": "Unsuspend account",
+        "unsuspendConfirmBody": "This will restore login access for {email}.",
+        "grantSuperadminConfirmTitle": "Grant superadmin",
+        "grantSuperadminConfirmBody": "This gives {email} full platform-wide administrative access. Confirm only if intended.",
+        "revokeSuperadminConfirmTitle": "Revoke superadmin",
+        "revokeSuperadminConfirmBody": "This removes superadmin from {email}. If they are the last active superadmin the operation will be rejected.",
+        "confirm": "Confirm",
+        "cancel": "Cancel",
+        "suspendSuccess": "Account suspended.",
+        "suspendError": "Failed to suspend account.",
+        "unsuspendSuccess": "Account unsuspended.",
+        "unsuspendError": "Failed to unsuspend account.",
+        "grantSuperadminSuccess": "Superadmin granted.",
+        "grantSuperadminError": "Failed to grant superadmin.",
+        "revokeSuperadminSuccess": "Superadmin revoked.",
+        "revokeSuperadminError": "Failed to revoke superadmin."
+      },
+      "sessions": {
+        "col": {
+          "email": "User email",
+          "device": "Device",
+          "location": "Location",
+          "lastSeen": "Last seen",
+          "expires": "Expires",
+          "actions": "Actions"
+        },
+        "revokeAction": "Revoke",
+        "revokeConfirmTitle": "Revoke session",
+        "revokeConfirmBody": "The user will be signed out of this device immediately.",
+        "revokeConfirm": "Revoke",
+        "revokeCancel": "Cancel",
+        "revokeSuccess": "Session revoked.",
+        "revokeError": "Failed to revoke session.",
+        "loadMore": "Load more",
+        "emptyTitle": "No active sessions",
+        "emptyBody": "No sessions are currently active.",
+        "errorTitle": "Sessions unavailable",
+        "errorBody": "Could not load sessions. Please try again."
+      },
+      "emptyTitle": "No users found",
+      "emptyBody": "No users match your search. Try adjusting the filters.",
+      "errorTitle": "Users unavailable",
+      "errorBody": "Could not load the user list. Please try again.",
+      "retry": "Retry"
     }
   }
 }

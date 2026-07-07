@@ -44,6 +44,12 @@ export interface SessionUser {
   /** Display tier label, e.g. "VinUni Student", "Alumni" (DESIGN.md §2.5). */
   tier?: string;
   avatarUrl?: string | null;
+  /**
+   * Permission strings from `/auth/me`. Superadmin accounts return `["*"]`.
+   * Non-superadmin accounts carry explicit capability grants; defaults to `[]`.
+   * Used by the sidebar to gate `requiresPermission` items.
+   */
+  permissions: string[];
 }
 
 function toSessionUser(u: AuthUser): SessionUser {
@@ -57,6 +63,7 @@ function toSessionUser(u: AuthUser): SessionUser {
     isSuperadmin: u.is_superadmin ?? false,
     tier: identity?.tier ?? undefined,
     avatarUrl: u.avatar_url ?? null,
+    permissions: u.permissions ?? [],
   };
 }
 

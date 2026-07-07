@@ -213,6 +213,7 @@ export function Sidebar({
   const t = useTranslations("nav");
   const pathname = usePathname();
   const isSuperadmin = useAuthStore((s) => s.user?.isSuperadmin ?? false);
+  const permissions = useAuthStore((s) => s.user?.permissions ?? []);
   const groups = WORKSPACE_NAV_GROUPS[persona];
   const sidebarToggleLabel = collapsed ? t("expandSidebar") : t("collapseSidebar");
 
@@ -273,11 +274,18 @@ export function Sidebar({
             làm" and the "Tuyển dụng" accordion right after it. Every other
             group boundary keeps its breathing room. */}
         {groups.map((group, gi) => {
-          const available = group.items.filter(
-            (i) =>
-              i.available !== false &&
-              (!i.requiresSuperadmin || isSuperadmin),
-          );
+          const available = group.items.filter((i) => {
+            if (i.available === false) return false;
+            if (i.requiresSuperadmin && !isSuperadmin) return false;
+            if (
+              i.requiresPermission &&
+              !isSuperadmin &&
+              !permissions.includes("*") &&
+              !permissions.includes(i.requiresPermission)
+            )
+              return false;
+            return true;
+          });
           if (available.length === 0) return null;
           const previousGroup = groups[gi - 1];
           const gapBefore =
