@@ -48,6 +48,7 @@ from app.modules.opportunities.domain import (  # noqa: F401
 )
 from app.modules.opportunities.domain import models as _opportunity_models  # noqa: F401
 from app.modules.organization.domain import models as _org_models  # noqa: F401
+from app.modules.platform_admin.domain import models as _platform_admin_models  # noqa: F401
 from app.modules.platform_feedback.domain import models as _platform_feedback_models  # noqa: F401
 from app.modules.recruitment.domain import models as _recruitment_models  # noqa: F401
 from app.modules.reviews.domain import models as _reviews_models  # noqa: F401
@@ -101,6 +102,7 @@ def import_all_models() -> None:
         _dashboards_models,
         _reviews_models,
         _knowledge_base_models,
+        _platform_admin_models,
         _platform_feedback_models,
         _workflow_models,
         _onboarding_models,

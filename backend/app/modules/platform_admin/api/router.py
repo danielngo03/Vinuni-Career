@@ -18,6 +18,12 @@ Endpoints:
   GET  /admin/sessions                     — cursor-paginated active sessions
   POST /admin/sessions/{session_id}/revoke — admin-revoke session (audited)
 
+  --- P5: Feature Flags & Permission Catalog ---
+  GET   /admin/feature-flags               — list all feature flags (sorted by key)
+  POST  /admin/feature-flags               — create feature flag (audited)
+  PATCH /admin/feature-flags/{flag_id}     — partial update flag (audited)
+  GET   /admin/permission-catalog          — read-only permission vocabulary
+
   --- P6: Analytics read models (superadmin-only, aggregate-only) ---
   GET  /admin/analytics/kpis               — top-line KPI totals
   GET  /admin/analytics/funnel             — application funnel + conversion rates
@@ -53,9 +59,12 @@ from app.modules.auth.api.deps import CurrentAuth, get_current_auth, require_sup
 from app.modules.platform_admin.application import (
     analytics_read_service,
     audit_read_service,
+    feature_flags_service,
+    permission_catalog_service,
     system_health_service,
     users_admin_service,
 )
+from app.shared.audit import AuditContext
 from app.shared.permissions import Principal
 from app.shared.responses import paginated, success
 
@@ -64,6 +73,8 @@ health_router = APIRouter(prefix="/admin/system-health", tags=["platform-admin-h
 users_router = APIRouter(prefix="/admin/users", tags=["platform-admin-users"])
 sessions_router = APIRouter(prefix="/admin/sessions", tags=["platform-admin-sessions"])
 analytics_router = APIRouter(prefix="/admin/analytics", tags=["platform-admin-analytics"])
+flags_router = APIRouter(prefix="/admin/feature-flags", tags=["platform-admin-flags"])
+catalog_router = APIRouter(prefix="/admin/permission-catalog", tags=["platform-admin-catalog"])
 
 
 @admin_router.get("", summary="Platform-wide audit log (cursor-paginated)")
@@ -343,3 +354,89 @@ async def get_analytics_growth(
 ) -> dict:
     data = await analytics_read_service.growth(db, range_days=range_days)
     return success(data)
+
+
+# ---------------------------------------------------------------------------
+# P5: Feature Flags — superadmin only
+# ---------------------------------------------------------------------------
+
+
+@flags_router.get("", summary="List all feature flags — superadmin")
+async def list_feature_flags(
+    _principal: Principal = Depends(require_superadmin),
+    db: AsyncSession = Depends(get_db_session),
+) -> dict:
+    items = await feature_flags_service.list_flags(db)
+    return success(items)
+
+
+@flags_router.post("", summary="Create a feature flag — superadmin (audited)")
+async def create_feature_flag(
+    body: dict,
+    auth: CurrentAuth = Depends(get_current_auth),
+    db: AsyncSession = Depends(get_db_session),
+) -> dict:
+    from app.shared.exceptions import PermissionDeniedError
+
+    if not auth.principal.is_superadmin:
+        raise PermissionDeniedError()
+
+    ctx = AuditContext(
+        actor_id=auth.principal.user_id,
+        actor_org_id=auth.principal.org_id,
+        session_id=auth.claims.session_id,
+        ip=auth.ctx.ip,
+        user_agent=auth.ctx.user_agent,
+    )
+    result = await feature_flags_service.create_flag(
+        db,
+        principal=auth.principal,
+        ctx=ctx,
+        key=body.get("key", ""),
+        description=body.get("description", ""),
+        enabled=body.get("enabled", False),
+        rollout_percentage=body.get("rollout_percentage", 0),
+    )
+    return success(result)
+
+
+@flags_router.patch("/{flag_id}", summary="Update a feature flag — superadmin (audited)")
+async def update_feature_flag(
+    flag_id: uuid.UUID,
+    body: dict,
+    auth: CurrentAuth = Depends(get_current_auth),
+    db: AsyncSession = Depends(get_db_session),
+) -> dict:
+    from app.shared.exceptions import PermissionDeniedError
+
+    if not auth.principal.is_superadmin:
+        raise PermissionDeniedError()
+
+    ctx = AuditContext(
+        actor_id=auth.principal.user_id,
+        actor_org_id=auth.principal.org_id,
+        session_id=auth.claims.session_id,
+        ip=auth.ctx.ip,
+        user_agent=auth.ctx.user_agent,
+    )
+    result = await feature_flags_service.update_flag(
+        db,
+        principal=auth.principal,
+        ctx=ctx,
+        flag_id=flag_id,
+        **body,
+    )
+    return success(result)
+
+
+# ---------------------------------------------------------------------------
+# P5: Permission Catalog — superadmin read-only
+# ---------------------------------------------------------------------------
+
+
+@catalog_router.get("", summary="Permission catalog vocabulary — superadmin")
+async def get_permission_catalog(
+    _principal: Principal = Depends(require_superadmin),
+) -> dict:
+    catalog = permission_catalog_service.permission_catalog()
+    return success({"catalog": catalog})
