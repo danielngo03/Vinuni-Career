@@ -2,11 +2,18 @@
 
 import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
-import { ChevronDown, HelpCircle, PanelLeftClose, PanelLeftOpen } from "lucide-react";
+import { ChevronDown, HelpCircle, Menu, PanelLeftClose, PanelLeftOpen } from "lucide-react";
+import { ChevronRight } from "lucide-react";
 import { Link, usePathname } from "@/i18n/navigation";
 import { BrandMark } from "./brand-mark";
-import { Topbar } from "./topbar";
+import { LanguageSwitcher } from "./language-switcher";
+import { ThemeSwitcher } from "./theme-switcher";
+import { AccountMenu } from "./account-menu";
+import { NotificationBell } from "@/components/notifications/notification-bell";
+import { MessagingBell } from "@/components/messaging/messaging-bell";
 import { WorkspaceFooter } from "./workspace-footer";
+// Note: Topbar (persona-based) intentionally not imported — AdminTopbar is
+// defined inline below, using ADMIN_NAV_GROUPS / adminConsole i18n namespace.
 import { FeedbackModal } from "./feedback-modal";
 import { HelpSupportModal } from "./help-support-modal";
 import { Sheet } from "@/components/ui";
@@ -293,6 +300,84 @@ function AdminSidebar({ onNavigate, collapsed = false, onToggleCollapsed }: Admi
   );
 }
 
+// ─── Admin Topbar ─────────────────────────────────────────────────────────────
+/**
+ * Fixed topbar for the admin shell. Resolves breadcrumb context from
+ * `ADMIN_NAV_GROUPS` (keyed under `adminConsole.nav`) instead of `WORKSPACE_NAV`
+ * (keyed under `nav`), so admin routes show correct section labels rather than
+ * falling back to university navigation labels.
+ */
+function AdminTopbar() {
+  const t = useTranslations("adminConsole");
+  const tNav = useTranslations("nav");
+  const pathname = usePathname();
+  const setMobileNavOpen = useUiStore((s) => s.setMobileNavOpen);
+
+  // Resolve current admin nav item
+  const allAdminItems = ADMIN_NAV_GROUPS.flatMap((g) => g.items);
+  const currentItem = allAdminItems.find((item) => {
+    if (item.href === "/admin") return pathname === item.href;
+    return pathname === item.href || pathname.startsWith(`${item.href}/`);
+  });
+  const currentKey = currentItem?.key ?? "overview";
+  const isOverview = pathname === "/admin";
+  const currentLabel = t(`nav.${currentKey}`);
+  const overviewLabel = t("nav.overview");
+
+  return (
+    <header className="sticky top-0 z-30 flex h-[60px] items-center gap-3 bg-[#f7f6f2]/95 px-4 backdrop-blur-sm lg:px-6">
+      <button
+        type="button"
+        onClick={() => setMobileNavOpen(true)}
+        aria-label={tNav("openMenu")}
+        className="rounded-lg p-2 text-[var(--text-secondary)] outline-none hover:bg-[var(--bg-subtle)] lg:hidden"
+      >
+        <Menu aria-hidden strokeWidth={1.8} className="size-5" />
+      </button>
+
+      <div className="lg:hidden">
+        <BrandMark showTagline={false} />
+      </div>
+
+      <nav
+        aria-label={t("page.overviewTitle")}
+        className="hidden min-w-0 flex-1 items-center gap-1.5 text-sm lg:flex"
+      >
+        {isOverview ? (
+          <span className="truncate font-semibold text-[var(--text-primary)]">
+            {overviewLabel}
+          </span>
+        ) : (
+          <>
+            <Link
+              href="/admin"
+              className="truncate font-medium text-[var(--text-muted)] outline-none transition-colors hover:text-[var(--text-primary)] focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)]/30"
+            >
+              {overviewLabel}
+            </Link>
+            <ChevronRight
+              aria-hidden
+              strokeWidth={1.8}
+              className="size-4 shrink-0 text-[var(--text-muted)]"
+            />
+            <span className="truncate font-semibold text-[var(--text-primary)]">
+              {currentLabel}
+            </span>
+          </>
+        )}
+      </nav>
+
+      <div className="ml-auto flex items-center gap-2">
+        <LanguageSwitcher compact />
+        <ThemeSwitcher />
+        <NotificationBell variant="labeled" href="/university/notifications" />
+        <MessagingBell variant="labeled" href="/university/messages" />
+        <AccountMenu settingsHref="/university/settings" showName />
+      </div>
+    </header>
+  );
+}
+
 // ─── Shell ───────────────────────────────────────────────────────────────────
 /**
  * Workspace shell for the superadmin `(admin)` route group.
@@ -379,9 +464,7 @@ export function AdminShell({ children }: { children: React.ReactNode }) {
 
       {/* Main column */}
       <div className="flex min-h-dvh flex-col transition-[padding-left] duration-200 motion-reduce:transition-none lg:pl-[var(--sidebar-offset)]">
-        {/* Admin topbar: use "university" persona shape so breadcrumb/bells render;
-            admin routes use /admin/* paths and topbar falls back to "dashboard" label. */}
-        <Topbar persona="university" />
+        <AdminTopbar />
         <div className="flex flex-1 flex-col bg-[var(--surface-card)] shadow-[inset_1px_1px_0_rgba(0,0,0,0.04)] lg:rounded-tl-[28px]">
           <main
             id="main-content"

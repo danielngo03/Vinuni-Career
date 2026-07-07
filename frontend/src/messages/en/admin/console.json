@@ -20,6 +20,38 @@
       "accessDeniedTitle": "Access denied",
       "accessDeniedBody": "This area is restricted to platform superadmins."
     },
+    "overview": {
+      "pageTitle": "Platform Overview",
+      "pageSubtitle": "Cross-domain health snapshot — AI, outbox, moderation, and active users.",
+      "statusBandTitle": "System Status",
+      "metric": {
+        "aiSpend": "AI spend today",
+        "aiErrorRate": "AI error rate",
+        "moderationPending": "Moderation pending",
+        "activeUsers": "Active users"
+      },
+      "outbox": {
+        "title": "Outbox health",
+        "pending": "{count} pending",
+        "failed": "{count} failed (last hour)",
+        "healthy": "Healthy"
+      },
+      "nextActions": {
+        "title": "Quick actions",
+        "aiOperations": "AI Operations",
+        "aiOperationsBody": "Spend, reliability, and volume across all AI features.",
+        "moderationQueue": "Moderation queue",
+        "moderationQueueBody": "{count} job posts pending review."
+      },
+      "incidents": {
+        "title": "Alerts & Incidents",
+        "emptyTitle": "No active incidents",
+        "emptyBody": "Alerts & incident monitoring is planned for a future release."
+      },
+      "errorTitle": "Overview unavailable",
+      "errorBody": "Could not load platform status. Please try again.",
+      "retry": "Retry"
+    },
     "aiOps": {
       "pageTitle": "AI Operations",
       "pageSubtitle": "Spend, reliability, and volume across all AI features.",
