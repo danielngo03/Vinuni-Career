@@ -1,6 +1,6 @@
-import { CvBuilderScreen } from "@/components/cv/cv-builder-screen";
+import { CvDetailScreen } from "@/components/cv/cv-detail-screen";
 
-export default async function StudentCvBuilderPage({
+export default async function StudentCvDetailPage({
   params,
   searchParams,
 }: {
@@ -9,5 +9,5 @@ export default async function StudentCvBuilderPage({
 }) {
   const { cvId } = await params;
   const { suggest, job } = await searchParams;
-  return <CvBuilderScreen cvId={cvId} initialSuggestionId={suggest} jobId={job} />;
+  return <CvDetailScreen cvId={cvId} initialSuggestionId={suggest} jobId={job} />;
 }

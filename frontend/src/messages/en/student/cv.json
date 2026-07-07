@@ -38,11 +38,15 @@
       "dragHandle": "Reorder {name} (drag, or use the move up and down buttons)"
     },
     "preview": {
+      "title": "Live preview",
       "a4Label": "A4 preview",
       "untitled": "Untitled CV",
       "empty": "No content yet. Add information in the editor.",
       "sectionEmpty": "No content yet",
       "pageBreakWarning": "Content may exceed one A4 page."
+    },
+    "render": {
+      "a4Label": "CV document"
     },
     "canvas": {
       "inspectorTitle": "Selected block",
@@ -84,11 +88,183 @@
       "savePhoto": "Save photo",
       "cancel": "Cancel",
       "close": "Close",
+      "useSystemAvatar": "Use profile avatar",
+      "useSystemAvatarHint": "Use the photo from your profile as this CV's photo.",
+      "noSystemAvatarHint": "Add a photo to your profile first to use it here.",
+      "systemAvatarError": "Couldn't use your profile photo. Try uploading instead.",
+      "zoomIn": "Zoom in",
+      "zoomOut": "Zoom out",
+      "zoomFit": "Fit to width",
       "aiCommandTitle": "Tell AI what to change",
       "aiCommandBody": "Describe an edit in your own words. AI proposes a change as a diff you must review and accept — it never edits your CV on its own.",
       "aiCommandPlaceholder": "e.g. Make the summary more concise and focused on backend roles",
       "aiCommandSubmit": "Ask AI",
       "aiCommandSafety": "AI never invents facts and never applies changes without your confirmation."
+    },
+    "canvasEdit": {
+      "editField": "Edit {name}",
+      "name": "Your name",
+      "headline": "Your professional title",
+      "email": "Email",
+      "phone": "Phone",
+      "location": "City, Country",
+      "linkLabel": "Link label",
+      "linkUrl": "https://…",
+      "heading": "Role or title",
+      "subheading": "Organization",
+      "timeframe": "e.g. Jun 2025 – Sep 2025",
+      "entryLocation": "Location",
+      "note": "Short note",
+      "highlight": "Add a bullet point…",
+      "text": "Write here…",
+      "skill": "Skill",
+      "skillLevel": "Skill level",
+      "addHighlight": "Add bullet",
+      "addEntry": "Add entry",
+      "addItem": "Add item",
+      "removeHighlight": "Remove bullet",
+      "removeEntry": "Remove entry",
+      "removeItem": "Remove item"
+    },
+    "restyle": {
+      "title": "Restyle",
+      "template": "Template",
+      "palette": "Palette",
+      "accentLabel": "Accent color",
+      "font": "Font",
+      "density": "Density",
+      "density_regular": "Comfortable",
+      "density_compact": "Compact",
+      "palettes": {
+        "slate": "Slate",
+        "navy": "Navy",
+        "teal": "Teal",
+        "burgundy": "Burgundy",
+        "forest": "Forest",
+        "plum": "Plum",
+        "warm": "Warm",
+        "graphite": "Graphite"
+      },
+      "fonts": {
+        "sans": "Sans",
+        "serif": "Serif",
+        "mono": "Mono"
+      }
+    },
+    "textToolbar": {
+      "label": "Text formatting",
+      "font": "Font",
+      "fonts": {
+        "sans": "Sans",
+        "serif": "Serif",
+        "mono": "Mono"
+      },
+      "sizes": {
+        "xs": "XS",
+        "sm": "S",
+        "base": "M",
+        "lg": "L",
+        "xl": "XL",
+        "2xl": "2XL"
+      },
+      "bold": "Bold",
+      "italic": "Italic",
+      "color": "Text color",
+      "clearColor": "Reset color",
+      "align": {
+        "left": "Align left",
+        "center": "Align center",
+        "right": "Align right"
+      },
+      "close": "Close toolbar"
+    },
+    "elements": {
+      "title": "Elements",
+      "contactLinks": "Contact & social links",
+      "contactLinksHint": "Template missing a link? Add it here — the icon is set automatically.",
+      "noHeaderHint": "Add a header section first to insert contact links.",
+      "links": {
+        "linkedin": "LinkedIn",
+        "github": "GitHub",
+        "facebook": "Facebook",
+        "twitter": "Twitter",
+        "instagram": "Instagram",
+        "website": "Website",
+        "customLink": "Custom link"
+      },
+      "linkAdded": "Added {label} to your contact line.",
+      "blocks": "Insert block",
+      "skillBar": "Skill bar",
+      "customField": "Custom field",
+      "divider": "Divider",
+      "dividerAdded": "Divider added.",
+      "customFieldTitle": "Custom field",
+      "addSection": "Add a section",
+      "sectionTypeLabel": "Section type",
+      "add": "Add",
+      "sectionTypes": {
+        "experience": "Experience",
+        "education": "Education",
+        "projects": "Projects",
+        "skills": "Skills",
+        "certifications": "Certifications",
+        "awards": "Awards",
+        "languages": "Languages",
+        "activities": "Activities",
+        "summary": "Summary",
+        "custom": "Custom section"
+      }
+    },
+    "aiChat": {
+      "title": "AI assistant",
+      "emptyTitle": "Ask AI to improve your CV",
+      "emptyBody": "Describe a change or tap an action below. AI proposes a preview you review and accept — it never edits your CV on its own.",
+      "placeholder": "e.g. Make my summary more concise and focused on backend roles",
+      "send": "Send",
+      "thinking": "AI is thinking…",
+      "applied": "Applied and saved as a new version.",
+      "dismissed": "Suggestion discarded.",
+      "failed": "AI couldn't generate a suggestion. Please try again.",
+      "unavailable": "AI is currently unavailable. Try again later.",
+      "safety": "AI never invents facts and never applies changes without your confirmation.",
+      "draftKickoff": "Draft my CV",
+      "intents": {
+        "rewrite": "Rewrite section",
+        "optimize": "Optimize for role",
+        "ats": "ATS keywords",
+        "evidence": "Evidence check"
+      },
+      "intentSent": {
+        "rewrite": "Rewrite the selected section for clarity and impact.",
+        "optimize": "Optimize my CV for this role.",
+        "ats": "Suggest ATS keywords for this job.",
+        "evidence": "Check my CV for claims that need evidence."
+      }
+    },
+    "insights": {
+      "title": "Insights",
+      "subtitle": "Document health and job fit"
+    },
+    "uploaded": {
+      "badge": "Uploaded",
+      "note": "The system read and saved this CV ({count} sections) to power job matching.",
+      "openOriginal": "Open original",
+      "download": "Download",
+      "backToLibrary": "Back to CV Studio",
+      "unavailable": "The original file preview is unavailable."
+    },
+    "status": {
+      "ready": "Ready to apply",
+      "draft": "Draft"
+    },
+    "library": {
+      "title": "My CV library",
+      "subtitle": "Analyzed CVs — ready to apply and match against jobs.",
+      "emptyRow": "No CVs in your library yet. Save a draft to your library, or upload an existing CV."
+    },
+    "drafts": {
+      "title": "Drafts",
+      "subtitle": "Work in progress — unlimited, not counted, and not used to apply until you save them to your library."
     },
     "list": {
       "title": "CV Studio",
@@ -99,25 +275,19 @@
       "newCv": "New CV",
       "emptyTitle": "You have no CVs yet",
       "emptyBody": "Start by creating a CV from a template, importing from your profile, or uploading an existing CV.",
-      "primary": "Primary",
       "lastEdited": "Last edited: {date}",
       "edit": "Edit",
+      "view": "View",
       "duplicate": "Duplicate",
-      "setPrimary": "Set as primary",
       "copyTitle": "{title} (copy)",
       "duplicatedToast": "CV duplicated.",
-      "primarySetToast": "Set as your primary CV.",
-      "archive": "Archive",
-      "archivedToast": "CV archived. You just freed up a slot.",
+      "delete": "Delete",
+      "deletedToast": "CV deleted.",
+      "deleteConfirmTitle": "Delete this CV?",
+      "deleteConfirmBody": "\"{title}\" will be removed from your library.",
+      "deleteConfirmNote": "Snapshots already attached to submitted applications are kept.",
       "shelfTitle": "Start from a template",
-      "shelfHint": "Pick a layout — you can change sections and content after.",
-      "libraryTitle": "Your CVs",
-      "aiInsightsTitle": "CV Library Guidance",
-      "insightNoPrimary": "No primary CV set — mark one as primary so employers see your best CV in applications.",
-      "insightQuotaFull": "Active CV limit reached — archive an old CV to create a new one or upgrade your plan.",
-      "insightQuotaHigh": "You're close to your active CV limit — consider archiving drafts you no longer need.",
-      "insightHasDrafts": "You have draft CVs — finish editing them or archive to keep your library tidy.",
-      "insightUploadImport": "Imported CV detected — review the extracted fields to make sure everything is accurate."
+      "shelfHint": "Pick a layout — you can change sections and content after."
     },
     "quota": {
       "counter": "Active CVs: {used} / {limit}",
@@ -151,47 +321,27 @@
     "create": {
       "title": "Create a new CV",
       "subtitle": "Choose how to start your CV.",
-      "chooseMode": "How to start",
-      "modeBlankTitle": "From blank template",
-      "modeBlankBody": "Fill in your own content on an approved CV template.",
-      "modeNotesTitle": "Start from raw notes",
-      "modeNotesBody": "Paste rough notes and we'll seed your CV sections instantly. No AI.",
-      "modeProfileTitle": "Import from profile",
-      "modeProfileBody": "Prefill from your profile information.",
       "modeUploadTitle": "Upload existing CV",
-      "modeUploadBody": "Extract content from a CV file you upload.",
-      "modeAiTitle": "AI draft",
-      "modeAiBody": "Let AI draft a first version for you to review.",
-      "aiNotesLabel": "Target role or notes (optional)",
-      "aiNotesPlaceholder": "e.g. Backend software engineering intern at a tech startup, strong in Python and APIs",
-      "aiNotesHint": "Help AI tailor your draft to a specific role. Leave blank to use your profile.",
+      "modeUploadBody": "Upload a CV file you already have — the system reads and saves it for job matching.",
+      "orDivider": "or start from a template",
       "titleLabel": "CV name",
       "titlePlaceholder": "e.g. Backend Internship CV",
-      "templateLabel": "Template",
       "templateNone": "No template",
-      "premium": "Premium",
-      "profileHelp": "Your profile information will be prefilled into the CV.",
-      "notesLabel": "Your notes",
-      "notesPlaceholder": "Summary: Final-year CS student keen on backend roles\nExperience: Intern at Acme — built a payments API\nSkills: Python, FastAPI, PostgreSQL, Docker",
-      "notesHint": "Optional: start lines with Summary: / Experience: / Skills: for richer sections. Plain text works too — it goes into Summary.",
-      "notesTemplateHelp": "Your notes are split into CV sections. Pick a template for the look.",
+      "templatePreviewLabel": "Preview of the {name} template",
       "errTitle": "Please enter a name for the CV.",
-      "errNotesRequired": "Add a few notes to start your CV.",
       "createdToast": "CV created.",
       "submit": "Create CV",
       "templateGalleryTitle": "Choose a target template",
       "templateGalleryHint": "Templates set structure and presentation only. You can still edit every section directly after creating the CV.",
       "templateSelected": "Selected",
       "templateRoleTitle": "Best for",
-      "templateStrengthTitle": "Strengths",
       "templateCategories": {
         "classic": "Classic",
         "technical": "Technical",
         "data": "Data",
         "business": "Business",
         "creative": "Creative",
-        "healthcare": "Healthcare",
-        "premium": "Premium"
+        "healthcare": "Healthcare"
       },
       "templateStrengths": {
         "metrics": "Metrics",
@@ -290,24 +440,41 @@
     "builder": {
       "titleLabel": "CV name",
       "templateLabel": "Template",
-      "setPrimary": "Set as primary",
-      "isPrimary": "Primary",
       "saving": "Saving…",
       "saved": "Saved",
       "saveError": "Save failed",
+      "saveToLibrary": "Save to CV library",
+      "finalizing": "Analyzing CV…",
+      "inLibrary": "In your library",
+      "finalizeSuccessTitle": "Saved to your library",
+      "finalizeSuccessBody": "Ready to apply and match against jobs.",
+      "finalizeBlockedTitle": "Can't save this CV yet",
+      "finalizeReason": {
+        "cv_empty": "This CV has no content yet. Add your name or at least one section with information before saving it to your library.",
+        "cv_quota_reached": "Your CV library is full. Archive or delete a library CV to make room, then save this one."
+      },
       "export": "Export PDF",
       "backToList": "CV Studio",
       "notFoundTitle": "CV not found",
       "notFoundBody": "This CV does not exist or you do not have access to it.",
       "conflictTitle": "This CV was updated elsewhere",
       "conflictBody": "Your latest change was not saved. We reloaded the newest version — please redo your edit if needed.",
-      "tabsLabel": "CV view mode",
+      "tabsLabel": "CV editor view",
+      "inspectorTabsLabel": "CV inspector",
       "tabEdit": "Edit",
       "tabPreview": "Preview",
+      "tabCanvas": "Canvas",
+      "tabRestyle": "Restyle",
+      "tabDesign": "Design",
+      "tabElements": "Elements",
+      "tabVersions": "Versions",
+      "tabAi": "AI",
+      "listEditTitle": "List edit",
+      "listEditHint": "A form view for bulk edits and full keyboard editing.",
       "addSection": "Add section",
       "newSectionTitle": "New section",
       "sectionAdded": "Section added.",
-      "outlineTitle": "Outline",
+      "outlineTitle": "Sections",
       "outlineTemplate": "Template: {name}",
       "outlineNoTemplate": "No template applied",
       "originalTitle": "Original upload",
@@ -323,10 +490,14 @@
       "title": "Version history",
       "current": "Current version",
       "lastEdited": "Last edited",
-      "note": "Each saved edit creates a new stored version.",
+      "note": "Each saved edit creates a new stored version. Restore any earlier version at any time.",
       "currentTag": "current",
       "restore": "Restore",
-      "restoredToast": "Version restored."
+      "restoredToast": "Version restored.",
+      "source": {
+        "import": "Import",
+        "restore": "Restored"
+      }
     },
     "ai": {
       "title": "AI assistant",
@@ -481,6 +652,8 @@
         "languages": "Languages",
         "activities": "Activities",
         "interests": "Interests",
+        "publications": "Publications",
+        "references": "References",
         "custom": "Other",
         "other": "Other details"
       },
@@ -550,6 +723,8 @@
     "snapshotHint": "We save a snapshot of your selected CV. Later edits won't change this application.",
     "noCvTitle": "You need a CV first",
     "noCvBody": "Create or upload a CV in CV Studio, then come back to apply.",
+    "noReadyCvTitle": "No CV in your library yet",
+    "noReadyCvBody": "Save a CV to your library — only library CVs can be used to apply.",
     "goToCvStudio": "Go to CV Studio",
     "successTitle": "Application submitted",
     "successBody": "Your application to {job} has been submitted.",
@@ -571,21 +746,21 @@
     "byCategory": "By category",
     "tier": {
       "strong": "Strong fit",
-      "good": "Good fit",
-      "possible": "Possible fit",
+      "mid": "Possible fit",
       "weak": "Weak fit"
     },
     "tierHint": {
       "strong": "Ready to apply after a final review.",
-      "good": "Apply after addressing a few gaps.",
-      "possible": "Review eligibility and add evidence before applying.",
+      "mid": "Apply after addressing a few gaps and adding evidence.",
       "weak": "Consider strengthening your CV or exploring better-fit roles."
     },
     "bands": {
-      "skills": "Skills",
-      "experience": "Experience",
-      "logistics": "Location & work mode",
-      "quality": "CV quality"
+      "skills": "Skills & tools",
+      "experience": "Experience & relevance",
+      "scope": "Scope & impact",
+      "credentials": "Education & certifications",
+      "soft_skills": "Soft skills",
+      "trajectory": "Career trajectory"
     },
     "matchedTitle": "Matched skills",
     "noMatched": "No matching skills detected yet.",
@@ -597,6 +772,15 @@
     "staleBody": "Last updated {days, plural, =0 {today} one {# day ago} other {# days ago}}.",
     "improveCv": "Improve this CV",
     "otherTitle": "Your other CVs",
+    "recommendedCvLabel": "Recommended CV",
+    "recommendedBadge": "Recommended",
+    "selectedBadge": "Viewing",
+    "cvScoreAria": "{title}: fit score {score} out of 100",
+    "selectCvHint": "Select a CV to see its own score and fit details.",
+    "aiEvaluating": "AI is evaluating…",
+    "aiEvaluatingHint": "AI is taking a closer look at your CV against this job to add a detailed assessment. This only takes a few seconds.",
+    "aiAssessmentTitle": "AI assessment",
+    "aiAssessmentUnavailable": "No detailed assessment is available for this CV.",
     "lowSignalNote": "This job lists few specific requirements, so these scores are indicative. We still ranked your CVs on what's available.",
     "emptyTitle": "No CV to match yet",
     "emptyBody": "Create or upload a CV to see how well you match this job.",
@@ -615,21 +799,22 @@
     "scoreAria": "Fit score {score} out of 100",
     "tier": {
       "strong": "Strong fit",
-      "good": "Good fit",
-      "possible": "Possible fit",
+      "mid": "Possible fit",
       "weak": "Weak fit"
     },
     "tierHint": {
       "strong": "Ready to apply after a final review.",
-      "good": "Apply after addressing a few gaps.",
-      "possible": "Review eligibility and add evidence before applying.",
+      "mid": "Apply after addressing a few gaps and adding evidence.",
       "weak": "Consider strengthening your CV or exploring better-fit roles."
     },
     "staleNote": "This CV hasn't been updated recently — consider refreshing it before applying.",
     "bands": {
-      "skills": "Skills",
-      "experience": "Experience",
-      "quality": "CV quality"
+      "skills": "Skills & tools",
+      "experience": "Experience & relevance",
+      "scope": "Scope & impact",
+      "credentials": "Education & certifications",
+      "soft_skills": "Soft skills",
+      "trajectory": "Career trajectory"
     },
     "matchedTitle": "Matched skills",
     "gapsTitle": "Consider adding evidence for",

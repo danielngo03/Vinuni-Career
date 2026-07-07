@@ -35,11 +35,35 @@ function imageRemotePatterns(): NonNullable<NextConfig["images"]>["remotePattern
   return patterns;
 }
 
+// Backend origin for server-side proxy rewrites.
+// NEXT_PUBLIC_API_URL is the raw backend base (no /api/v1 suffix).
+// Falls back to the dev default so the rewrite works even without .env.
+const backendOrigin = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000";
+
 const nextConfig: NextConfig = {
   reactStrictMode: true,
   poweredByHeader: false,
   images: {
     remotePatterns: imageRemotePatterns(),
+  },
+  // Proxy /api/v1/* → backend so the httpOnly refresh cookie is same-origin.
+  // Without this, the frontend (localhost:3000) would set the cookie for
+  // localhost:8000, causing cross-port cookie inconsistencies in some browsers
+  // and preventing token refresh from working reliably.
+  async rewrites() {
+    return [
+      {
+        source: "/api/v1/:path*",
+        destination: `${backendOrigin}/api/v1/:path*`,
+      },
+    ];
+  },
+  // Build-only: size the build/static-generation worker pool by available memory
+  // so page-data collection workers don't starve/OOM under memory pressure (which
+  // otherwise surfaces as flaky "Cannot find module for page" build failures).
+  // Runtime behaviour is unaffected.
+  experimental: {
+    memoryBasedWorkersCount: true,
   },
 };
 

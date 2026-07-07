@@ -5,20 +5,20 @@ import type { ApiEnvelope, ApiListEnvelope } from "./types";
 
 /* ------------------------------- Vocabularies ----------------------------- */
 
-/** Creation paths accepted by `POST /cvs` (docs/API_CONTRACTS.md). */
+/**
+ * Creation paths accepted by `POST /cvs` (docs/API_CONTRACTS.md). Only
+ * `blank_template` is selectable in the create modal; `uploaded_import` and
+ * `duplicate_existing` are produced by the upload/duplicate flows via their own
+ * endpoints. There is no notes/profile/AI-draft creation path.
+ */
 export type CvCreationMode =
   | "blank_template"
-  | "profile_import"
-  | "notes_import"
   | "uploaded_import"
-  | "duplicate_existing"
-  | "ai_assisted_draft";
+  | "duplicate_existing";
 
-/** Friendly creation modes a user can pick (ai_assisted_draft is "coming soon"). */
+/** Creation modes a user can pick directly in the create modal. */
 export const SELECTABLE_CREATION_MODES: CvCreationMode[] = [
   "blank_template",
-  "profile_import",
-  "notes_import",
   "uploaded_import",
   "duplicate_existing",
 ];
@@ -89,6 +89,32 @@ export type ExportStatus = "queued" | "processing" | "ready" | "failed";
 
 /* ------------------------------- Wire types ------------------------------- */
 
+/**
+ * A template's `layout_schema`. Newer rows carry the full CV document theme (see
+ * `frontend/src/components/cv/render/theme.ts` — the backend ships the identical
+ * shape); older/legacy rows carry only `section_order` + a font hint. Every
+ * field is optional so older rows still type-check; the renderer deep-merges
+ * onto `DEFAULT_THEME`. Kept permissive (`[key: string]: unknown`) on purpose.
+ */
+export interface CvTemplateLayoutSchema {
+  /** Legacy: canonical section order (superseded by `order`). */
+  section_order?: string[];
+  target_roles?: string[];
+  strengths?: string[];
+  page?: { size?: string; max_pages?: number };
+  /** Legacy font hint (`sans`/`serif`) — superseded by `typography`. */
+  typography?: { font?: string; base_pt?: number } & Record<string, unknown>;
+  /** Full CV document theme fields (permissive; validated by `resolveTheme`). */
+  version?: number;
+  layout?: { kind?: string; sidebarWidthPct?: number; bodyColumns?: number };
+  palette?: Record<string, string>;
+  photo?: Record<string, unknown>;
+  sectionStyle?: Record<string, unknown>;
+  regions?: { sidebar?: string[]; main?: string[] };
+  order?: string[];
+  [key: string]: unknown;
+}
+
 export interface CvTemplate {
   id: string;
   key: string;
@@ -96,15 +122,7 @@ export interface CvTemplate {
   name_vi?: string;
   name_en?: string;
   category: string;
-  layout_schema?: {
-    section_order?: string[];
-    target_roles?: string[];
-    strengths?: string[];
-    page?: { size?: string; max_pages?: number };
-    typography?: { font?: string; base_pt?: number };
-    [key: string]: unknown;
-  };
-  is_premium: boolean;
+  layout_schema?: CvTemplateLayoutSchema;
   is_active?: boolean;
   preview_url: string | null;
 }
@@ -115,7 +133,6 @@ export interface AdminCvTemplateCreateBody {
   name_en: string;
   category: string;
   layout_schema: Record<string, unknown>;
-  is_premium: boolean;
   is_active: boolean;
 }
 
@@ -164,6 +181,49 @@ export interface CvCanvasBlock {
   style?: CvCanvasBlockStyle | null;
 }
 
+/** Typed contact-link kind — drives the renderer's per-link icon. */
+export type CvLinkType =
+  | "email"
+  | "phone"
+  | "website"
+  | "linkedin"
+  | "github"
+  | "facebook"
+  | "twitter"
+  | "instagram"
+  | "custom";
+
+/**
+ * Font-size steps allowed on a per-element override. Maps to a fixed pt bump in
+ * the renderer (never a raw px value from the client).
+ */
+export type ElementStyleSize = "xs" | "sm" | "base" | "lg" | "xl" | "2xl";
+export type ElementStyleWeight = "normal" | "medium" | "semibold" | "bold";
+export type ElementStyleAlign = "left" | "center" | "right";
+
+/**
+ * Per-element presentation override written by the contextual text toolbar.
+ * Keyed by the P2 `data-edit-path` grammar and stored in
+ * `canvas.elementStyles = { [editPath]: ElementStyle }` (a sibling of
+ * `canvas.theme`, design spec §data-contract 1). Every field is optional — an
+ * empty object resets that element to the theme default. The backend validates
+ * `font` against the theme font tokens, the size/weight/align enums, and a hex
+ * regex; unknown keys are stripped.
+ */
+export interface ElementStyle {
+  /** Font family token — one of the renderer `FontKind` values. */
+  font?: "sans" | "serif" | "mono";
+  size?: ElementStyleSize;
+  weight?: ElementStyleWeight;
+  italic?: boolean;
+  align?: ElementStyleAlign;
+  /** 6-digit hex (e.g. `#1a1a1a`). */
+  color?: string;
+}
+
+/** The full per-CV element-style map (`editPath` → override). */
+export type ElementStyleMap = Record<string, ElementStyle>;
+
 export interface CvCanvasPhoto {
   url?: string | null;
   shape?: "circle" | "square" | "rounded" | null;
@@ -175,13 +235,50 @@ export interface CvCanvas {
   blocks?: CvCanvasBlock[];
   page?: Record<string, unknown>;
   photo?: CvCanvasPhoto | null;
+  /** Per-CV student theme overrides layered on the template (design spec §4.2). */
+  theme?: CvCanvasTheme | null;
+  /**
+   * Per-element presentation overrides written by the contextual text toolbar,
+   * keyed by the P2 `data-edit-path` grammar (design spec §data-contract 1).
+   * Applied by the renderer per text node on top of the theme.
+   */
+  elementStyles?: ElementStyleMap | null;
   [key: string]: unknown;
 }
 
 export interface UpdateCvCanvasBody {
   blocks?: CvCanvasBlock[];
   page?: Record<string, unknown>;
+  /**
+   * Per-CV student theme overrides layered on the template
+   * (`canvas.theme` — palette/typography/density recolour). Only the provided
+   * keys are merged server-side; omit to leave the theme untouched. The backend
+   * canvas PATCH accepts this alongside `blocks` (design spec §4.2).
+   */
+  theme?: CvCanvasTheme;
+  /**
+   * Full per-element style map (`{ [editPath]: ElementStyle }`). Sent as the
+   * complete map — the client merges a single element change into the CV's
+   * current map and PATCHes the whole thing (see {@link patchElementStyle}).
+   * An entry with an empty object, or a removed key, resets that element to the
+   * theme default. Omit to leave element styles untouched (design spec
+   * §data-contract 1).
+   */
+  elementStyles?: ElementStyleMap;
   expected_version?: number;
+}
+
+/**
+ * Student per-CV theme overrides stored in `canvas.theme`. Mirrors the
+ * renderer's `PartialCvTheme` recolour groups (palette/typography/density);
+ * kept permissive so future theme fields don't break the wire type.
+ */
+export interface CvCanvasTheme {
+  palette?: Record<string, string>;
+  typography?: { headingFont?: string; bodyFont?: string; scale?: string };
+  sectionStyle?: { heading?: string; itemGap?: string };
+  layout?: { kind?: string; sidebarWidthPct?: number; bodyColumns?: number };
+  [key: string]: unknown;
 }
 
 export interface UpdateCvPhotoBody {
@@ -204,7 +301,6 @@ export interface CvSummary {
   language: string;
   status: string;
   status_label: string;
-  is_primary: boolean;
   version: number;
   last_edited_at: string | null;
   canvas?: CvCanvas;
@@ -247,8 +343,16 @@ export interface CvDetail extends CvSummary {
    */
   current_version_id?: string | null;
   versions?: CvVersionSummary[];
-  /** Only present when the CV was just created with ai_assisted_draft mode. */
+  /** Present when the CV was created with a pending AI suggestion to review. */
   pending_suggestion?: CvAiSuggestion | null;
+  /**
+   * True when this CV came from an uploaded file (PDF/image). Uploaded CVs are
+   * viewed read-only (the student's own document) — never opened in the builder,
+   * which is for template-created CVs only.
+   */
+  is_uploaded?: boolean;
+  /** Signed preview URL of the original uploaded file (only for uploaded CVs). */
+  original_preview_url?: string | null;
 }
 
 export interface CvVersionSummary {
@@ -303,7 +407,7 @@ export interface CvExport {
 /* ------------------------------- Job-fit ---------------------------------- */
 
 /**
- * The four user-facing fit categories (0-100 each). These are deterministic
+ * The six core HR fit criteria (0-100 each). These are deterministic
  * **product** scores derived from JD/CV evidence — NOT model confidence. Never
  * label them as "AI confidence" in the UI (docs/API_CONTRACTS.md §CV-To-Job
  * Fit, docs/CV_STUDIO_SPEC.md §3).
@@ -311,8 +415,10 @@ export interface CvExport {
 export interface JobFitBands {
   skills: number;
   experience: number;
-  logistics: number;
-  quality: number;
+  scope: number;
+  credentials: number;
+  soft_skills: number;
+  trajectory: number;
 }
 
 // ─── AI Suggestion types ────────────────────────────────────────────────────
@@ -488,7 +594,6 @@ export interface UpdateCvBody {
   language?: string;
   status?: string;
   template_id?: string | null;
-  is_primary?: boolean;
   expected_version?: number;
 }
 
@@ -598,8 +703,30 @@ export const cvApi = {
     return api.post<CvDetail>("/cvs", body);
   },
 
+  /**
+   * Commit a draft CV to the library (analyzed / matching-ready). Draft CVs are
+   * unlimited scratch and cannot be used to apply or job-fit; finalizing
+   * validates the CV is non-empty, enforces the library quota (max 5 `ready`
+   * CVs), and flips `status` to `ready`. Returns the full detail.
+   *
+   * Errors to handle at the call site:
+   *  - `409 QUOTA_EXCEEDED` (`details.reason === "cv_quota_reached"`) — parse
+   *    with {@link parseCvQuotaError} and open the quota recovery dialog.
+   *  - a user-safe empty-CV error (e.g. `422`/`409` with a "CV trống" message) —
+   *    surface `error.message` inline; do not crash.
+   * Idempotent: an already-`ready` CV returns its current detail (no re-count).
+   */
+  finalize(cvId: string): Promise<CvDetail> {
+    return api.post<CvDetail>(`/cvs/${cvId}/finalize`, {});
+  },
+
   update(cvId: string, body: UpdateCvBody): Promise<CvDetail> {
     return api.patch<CvDetail>(`/cvs/${cvId}`, body);
+  },
+
+  /** Delete a CV (soft-delete; removes it from the library). */
+  remove(cvId: string): Promise<void> {
+    return api.delete<void>(`/cvs/${cvId}`);
   },
 
   upsertSection(
@@ -748,10 +875,10 @@ export function parseCvQuotaError(error: unknown): CvQuotaInfo | null {
 /**
  * True when a thrown error is a `422 VALIDATION_FAILED` raised because a
  * creation `source` was missing/empty for a mode that requires one
- * (`details.reason === "source_required"`). The `notes_import` path raises this
- * with `details.field === "raw_notes"` when the pasted notes are blank/whitespace
- * (docs/API_CONTRACTS.md §POST /cvs). Lets callers render an inline field error
- * instead of a toast. Pass `field` to scope the check to a specific input.
+ * (`details.reason === "source_required"`, e.g. `details.field === "raw_notes"`
+ * for a blank/whitespace `raw_notes` source; docs/API_CONTRACTS.md §POST /cvs).
+ * Lets callers render an inline field error instead of a toast. Pass `field` to
+ * scope the check to a specific input.
  */
 export function isCvSourceRequiredError(
   error: unknown,
@@ -763,6 +890,40 @@ export function isCvSourceRequiredError(
   if (details.reason !== "source_required") return false;
   if (field !== undefined && details.field !== field) return false;
   return true;
+}
+
+/**
+ * Merge a single element's style change into the CV's current element-style map
+ * and return the FULL next map (the shape the canvas PATCH expects). Passing an
+ * empty `patch` — or a `patch` that clears every field — removes the entry so
+ * the element falls back to the theme default. Pure; never mutates `current`.
+ *
+ * Usage (design spec §4 contextual toolbar):
+ *   const next = patchElementStyle(cv.canvas?.elementStyles, editPath, { weight: "bold" });
+ *   await cvApi.updateCanvas(cvId, { elementStyles: next, expected_version });
+ */
+export function patchElementStyle(
+  current: ElementStyleMap | null | undefined,
+  editPath: string,
+  patch: ElementStyle,
+): ElementStyleMap {
+  const next: ElementStyleMap = { ...(current ?? {}) };
+  const merged: ElementStyle = { ...next[editPath] };
+  for (const [key, value] of Object.entries(patch) as [keyof ElementStyle, unknown][]) {
+    if (value === undefined || value === null || value === "") {
+      delete merged[key];
+    } else {
+      // Each key is narrowed by ElementStyle; the runtime value came from a
+      // typed toolbar control, so this assignment is sound.
+      (merged as Record<string, unknown>)[key] = value;
+    }
+  }
+  if (Object.keys(merged).length === 0) {
+    delete next[editPath];
+  } else {
+    next[editPath] = merged;
+  }
+  return next;
 }
 
 /**

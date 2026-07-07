@@ -1,42 +1,42 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { Fragment, useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { useLocale, useTranslations } from "next-intl";
 import { useQuery } from "@tanstack/react-query";
 import {
   ArrowSquareOut,
   Briefcase,
-  Buildings,
   CaretDown,
   CaretRight,
   Check,
   Clock,
   CurrencyCircleDollar,
+  FunnelSimple,
+  GridFour,
   Heart,
-  ListBullets,
   MapPin,
   MagnifyingGlass,
   MapTrifold,
-  SlidersHorizontal,
+  Rows,
   Sparkle,
-  SquaresFour,
   Star,
   WarningCircle,
   WifiSlash,
   X,
-  type Icon,
 } from "@phosphor-icons/react";
 import { Link } from "@/i18n/navigation";
 import { CompanyAvatar } from "@/components/companies/company-avatar";
 import { TrackedItem } from "@/components/discovery/tracked-item";
-import { MarketplaceBannerCard } from "@/components/discovery/marketplace-banner-card";
 import { SaveJobButton } from "@/components/jobs/save-job-button";
+import { JobDetailModal } from "@/components/jobs/job-detail-modal";
+import { FitScoreRing, FitScoreRingSkeleton } from "@/components/jobs/fit-score-ring";
+import { useBatchFitScores } from "@/hooks/use-batch-fit-scores";
 import {
   Button,
   EmptyState,
   Input,
-  Select,
+  Sheet,
   Skeleton,
   SponsoredLabel,
   StatusBadge,
@@ -51,9 +51,9 @@ import {
   type IndustryBranch,
   type IndustryLeaf,
   type IndustryRoot,
+  type JobFitScoreEntry,
+  type JobStudentFitSummary,
   type JobSummary,
-  type MarketplaceBanner,
-  type PublicJobDetail,
 } from "@/lib/api";
 import type { Province, Ward } from "@/lib/api/locations";
 import { formatRelativeTime } from "@/lib/format";
@@ -94,12 +94,11 @@ const POSTED_OPTIONS = [
   { value: "30", key: "posted30" },
 ] as const;
 
-const SALARY_OPTIONS = [
-  { value: "", key: "salaryAny", min: null, max: null },
-  { value: "0-10000000", key: "salaryUnder10", min: 0, max: 10_000_000 },
-  { value: "10000000-30000000", key: "salary10to30", min: 10_000_000, max: 30_000_000 },
-  { value: "30000000-", key: "salary30plus", min: 30_000_000, max: null },
-] as const;
+// Salary slider bounds (VND / month). The right thumb at the ceiling means
+// "no upper limit" so we send salary_max = null in that case.
+const SALARY_FLOOR = 0;
+const SALARY_CEIL = 100_000_000;
+const SALARY_STEP = 5_000_000;
 
 const EXPERIENCE_OPTIONS = [
   { value: "", key: "experienceAny", min: null, max: null },
@@ -109,10 +108,6 @@ const EXPERIENCE_OPTIONS = [
   { value: "3-5", key: "experience3to5", min: 3, max: 5 },
   { value: "5-", key: "experience5plus", min: 5, max: null },
 ] as const;
-
-function salaryBounds(value: string) {
-  return SALARY_OPTIONS.find((option) => option.value === value) ?? SALARY_OPTIONS[0];
-}
 
 function experienceBounds(value: string) {
   return (
@@ -198,7 +193,9 @@ export function PublicJobBoard() {
   const [searchInput, setSearchInput] = useState(initialQ);
   const [search, setSearch] = useState(initialQ);
   const [employment, setEmployment] = useState(initialEmployment);
-  const [location, setLocation] = useState(initialLocation);
+  const [locationTypes, setLocationTypes] = useState<string[]>(
+    initialLocation ? [initialLocation] : [],
+  );
   const [provinceCodes, setProvinceCodes] = useState<string[]>(
     initialProvince ? [initialProvince] : [],
   );
@@ -208,11 +205,13 @@ export function PublicJobBoard() {
   const [selectedIndustryIds, setSelectedIndustryIds] = useState<string[]>([]);
   const [activeProvinceCode, setActiveProvinceCode] = useState(initialProvince);
   const [postedWithin, setPostedWithin] = useState("");
-  const [salaryBand, setSalaryBand] = useState("");
+  const [salaryMin, setSalaryMin] = useState(SALARY_FLOOR);
+  const [salaryMax, setSalaryMax] = useState(SALARY_CEIL);
   const [experienceBand, setExperienceBand] = useState("");
   const [openFilterMenu, setOpenFilterMenu] = useState<
-    "industry" | "location" | "advanced" | null
+    "industry" | "location" | null
   >(null);
+  const [filtersOpen, setFiltersOpen] = useState(false);
   const [selectedJobId, setSelectedJobId] = useState<string | null>(null);
   const [viewMode, setViewMode] = useState<ViewMode>("list");
   const [sort, setSort] = useState<SortMode>("relevant");
@@ -223,7 +222,7 @@ export function PublicJobBoard() {
     return () => window.clearTimeout(id);
   }, [searchInput]);
 
-  const salary = salaryBounds(salaryBand);
+  const salaryActive = salaryMin > SALARY_FLOOR || salaryMax < SALARY_CEIL;
   const experience = experienceBounds(experienceBand);
   const pageSize = viewMode === "grid" ? GRID_PAGE_SIZE : LIST_PAGE_SIZE;
 
@@ -232,12 +231,13 @@ export function PublicJobBoard() {
   }, [
     search,
     employment,
-    location,
+    locationTypes,
     selectedIndustryIds,
     provinceCodes,
     wardCodes,
     postedWithin,
-    salaryBand,
+    salaryMin,
+    salaryMax,
     experienceBand,
     viewMode,
     sort,
@@ -261,12 +261,13 @@ export function PublicJobBoard() {
       "public",
       search,
       employment,
-      location,
+      locationTypes.join(","),
       selectedIndustryIds.join(","),
       provinceCodes.join(","),
       wardCodes.join(","),
       postedWithin,
-      salaryBand,
+      salaryMin,
+      salaryMax,
       experienceBand,
       sort,
       page,
@@ -278,13 +279,13 @@ export function PublicJobBoard() {
         limit: pageSize,
         q: search || undefined,
         employment_type: employment || undefined,
-        location_type: location || undefined,
+        location_types: locationTypes.join(",") || undefined,
         ...industryFilterParams,
         province_codes: provinceCodes.join(",") || undefined,
         ward_codes: wardCodes.join(",") || undefined,
         posted_within_days: postedWithin ? Number(postedWithin) : undefined,
-        salary_min: salary.min,
-        salary_max: salary.max,
+        salary_min: salaryMin > SALARY_FLOOR ? salaryMin : null,
+        salary_max: salaryMax < SALARY_CEIL ? salaryMax : null,
         experience_min_years: experience.min,
         experience_max_years: experience.max,
         sort,
@@ -296,6 +297,14 @@ export function PublicJobBoard() {
   const total = query.data?.page.total ?? 0;
   const pageCount = Math.max(1, Math.ceil(total / pageSize));
 
+  // Batch fit scores — authenticated students only. Fetched async after the
+  // job list renders. Silent failure: badge simply does not appear on error.
+  const isStudent =
+    authStatus === "authenticated" && persona === "student";
+  const jobIds = useMemo(() => jobs.map((job) => job.id), [jobs]);
+  const { scores: batchFitScores, loading: batchFitLoading } =
+    useBatchFitScores(jobIds, isStudent);
+
   useEffect(() => {
     if (selectedJobId && !jobs.some((job) => job.id === selectedJobId)) {
       setSelectedJobId(null);
@@ -303,6 +312,10 @@ export function PublicJobBoard() {
   }, [jobs, selectedJobId]);
 
   const selectedSummary = jobs.find((job) => job.id === selectedJobId) ?? null;
+  const selectedFitScore =
+    (selectedJobId ? batchFitScores[selectedJobId]?.score ?? null : null) ??
+    selectedSummary?.student_fit?.score ??
+    null;
 
   const detailQuery = useQuery({
     queryKey: ["jobs", "public-detail-preview", selectedJobId],
@@ -369,10 +382,6 @@ export function PublicJobBoard() {
     value: option.value,
     label: t(option.key),
   }));
-  const salaryOptions = SALARY_OPTIONS.map((option) => ({
-    value: option.value,
-    label: t(option.key),
-  }));
   const experienceOptions = EXPERIENCE_OPTIONS.map((option) => ({
     value: option.value,
     label: t(option.key),
@@ -385,26 +394,21 @@ export function PublicJobBoard() {
   const hasFilters = Boolean(
     search ||
       employment ||
-      location ||
+      locationTypes.length > 0 ||
       selectedIndustryIds.length > 0 ||
       provinceCodes.length > 0 ||
       wardCodes.length > 0 ||
       postedWithin ||
-      salaryBand ||
+      salaryActive ||
       experienceBand,
   );
-  const advancedFilterCount = [
-    employment,
-    location,
-    postedWithin,
-    salaryBand,
-    experienceBand,
+  const sidebarFilterCount = [
+    locationTypes.length > 0,
+    Boolean(postedWithin),
+    salaryActive,
+    Boolean(experienceBand),
   ].filter(Boolean).length;
 
-  const previewBanners = [
-    overviewQuery.data?.hero_campaign,
-    overviewQuery.data?.sponsored_banner,
-  ].filter(Boolean) as MarketplaceBanner[];
   const promotedJob =
     overviewQuery.data?.sponsored_jobs?.[0] ??
     overviewQuery.data?.featured_jobs?.[0] ??
@@ -414,13 +418,24 @@ export function PublicJobBoard() {
     setSearchInput("");
     setSearch("");
     setEmployment("");
-    setLocation("");
+    setLocationTypes([]);
     setSelectedIndustryIds([]);
     setProvinceCodes([]);
     setWardCodes([]);
     setActiveProvinceCode("");
     setPostedWithin("");
-    setSalaryBand("");
+    setSalaryMin(SALARY_FLOOR);
+    setSalaryMax(SALARY_CEIL);
+    setExperienceBand("");
+  }
+
+  // Clears only the left-rail facets (work mode / posted / salary / experience);
+  // the top-bar search, industry, location, and type stay intact.
+  function clearFacets() {
+    setLocationTypes([]);
+    setPostedWithin("");
+    setSalaryMin(SALARY_FLOOR);
+    setSalaryMax(SALARY_CEIL);
     setExperienceBand("");
   }
 
@@ -454,7 +469,7 @@ export function PublicJobBoard() {
 
       <div className="career-container py-4">
         <div className="z-20 mb-4 rounded-2xl border border-[var(--border-default)] bg-[var(--surface-card)] p-3 shadow-[0_10px_30px_rgba(11,34,57,0.07)]">
-          <div className="grid gap-3 xl:grid-cols-[220px_minmax(460px,1fr)_240px_auto]">
+          <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-[220px_minmax(340px,1fr)_240px_200px]">
             <IndustryFilter
               industries={industries}
               selectedIds={selectedIndustryIds}
@@ -503,55 +518,83 @@ export function PublicJobBoard() {
               onOpenChange={(open) => setOpenFilterMenu(open ? "location" : null)}
               compact
             />
-            <div className="flex gap-2">
-              <AdvancedFiltersMenu
-                open={openFilterMenu === "advanced"}
-                onOpenChange={(open) => setOpenFilterMenu(open ? "advanced" : null)}
-                advancedFilterCount={advancedFilterCount}
-                employmentOptions={employmentOptions}
-                locationOptions={locationOptions}
-                postedOptions={postedOptions}
-                salaryOptions={salaryOptions}
-                experienceOptions={experienceOptions}
-                employment={employment}
-                location={location}
-                postedWithin={postedWithin}
-                salaryBand={salaryBand}
-                experienceBand={experienceBand}
-                onEmploymentChange={setEmployment}
-                onLocationChange={setLocation}
-                onPostedWithinChange={setPostedWithin}
-                onSalaryBandChange={setSalaryBand}
-                onExperienceBandChange={setExperienceBand}
-                onClear={clearFilters}
-                hasFilters={hasFilters}
-              />
-              <Button
-                variant="ghost"
-                onClick={clearFilters}
-                disabled={!hasFilters}
-                className="hidden h-11 2xl:inline-flex"
-              >
-                {t("clearFilters")}
-              </Button>
-            </div>
+            <TypeFilter
+              value={employment}
+              options={employmentOptions}
+              onChange={setEmployment}
+            />
           </div>
         </div>
 
-        <div className="grid gap-5 xl:grid-cols-2">
+        <div className="grid gap-5 xl:grid-cols-[280px_minmax(0,1fr)]">
+          {/* Left facet rail (desktop) */}
+          <aside
+            className="hidden min-w-0 xl:block"
+            aria-label={t("filtersTitle")}
+          >
+            <div className="sticky top-24">
+              {/* Header row — aligned on the same baseline as the results
+                  header on the right so the two columns line up. */}
+              <div className="mb-3 flex min-h-9 items-center justify-between gap-2">
+                <p className="flex items-center gap-2 text-sm font-bold text-[var(--text-primary)]">
+                  <FunnelSimple aria-hidden weight="bold" className="size-4" />
+                  {t("filtersTitle")}
+                </p>
+                <button
+                  type="button"
+                  onClick={clearFacets}
+                  disabled={sidebarFilterCount === 0}
+                  className="text-xs font-semibold text-[var(--text-primary)] transition-colors hover:text-[var(--text-secondary)] disabled:text-[var(--text-muted)]"
+                >
+                  {t("clearFilters")}
+                </button>
+              </div>
+              <div className="rounded-2xl border border-[var(--border-default)] bg-[var(--surface-card)] p-4 shadow-[0_10px_30px_rgba(11,34,57,0.06)]">
+                <JobFilterSidebar
+                  locationOptions={locationOptions}
+                  postedOptions={postedOptions}
+                  experienceOptions={experienceOptions}
+                  locationTypes={locationTypes}
+                  postedWithin={postedWithin}
+                  salaryMin={salaryMin}
+                  salaryMax={salaryMax}
+                  experienceBand={experienceBand}
+                  onLocationTypesChange={setLocationTypes}
+                  onPostedWithinChange={setPostedWithin}
+                  onSalaryChange={(min, max) => {
+                    setSalaryMin(min);
+                    setSalaryMax(max);
+                  }}
+                  onExperienceBandChange={setExperienceBand}
+                />
+              </div>
+            </div>
+          </aside>
+
           <section
             className="min-w-0"
             aria-label={t("listRegionLabel")}
           >
-            <div className="mb-3 flex flex-wrap items-start justify-between gap-3">
-              <div>
+            <div className="mb-3 flex min-h-9 flex-wrap items-center justify-between gap-3">
+              <div className="flex items-center gap-2">
+                {/* Mobile facet trigger */}
+                <button
+                  type="button"
+                  onClick={() => setFiltersOpen(true)}
+                  className="inline-flex h-9 items-center gap-2 rounded-full border border-[var(--border-default)] bg-[var(--surface-card)] px-3.5 text-sm font-semibold text-[var(--text-primary)] shadow-sm transition-colors hover:border-[var(--border-strong)] xl:hidden"
+                >
+                  <FunnelSimple aria-hidden weight="bold" className="size-4" />
+                  {t("openFilters")}
+                  {sidebarFilterCount > 0 && (
+                    <span className="inline-flex min-w-5 items-center justify-center rounded-full bg-[var(--text-primary)] px-1.5 text-xs font-bold text-[var(--surface-card)]">
+                      {sidebarFilterCount}
+                    </span>
+                  )}
+                </button>
                 <p className="text-sm font-semibold text-[var(--text-primary)]" role="status">
                   {query.isPending
                     ? tc("loading")
                     : t("resultCount", { count: total ?? jobs.length })}
-                </p>
-                <p className="mt-0.5 text-xs text-[var(--text-muted)]">
-                  {t("resultHelper")}
                 </p>
               </div>
               <div className="flex shrink-0 items-center justify-end gap-2">
@@ -564,24 +607,26 @@ export function PublicJobBoard() {
                   <button
                     type="button"
                     aria-label={t("viewList")}
+                    aria-pressed={viewMode === "list"}
                     onClick={() => setViewMode("list")}
                     className={cn(
                       "flex size-8 items-center justify-center rounded-full text-[var(--text-muted)] transition-colors hover:text-[var(--text-primary)]",
                       viewMode === "list" && "bg-[var(--text-primary)] text-[var(--surface-card)] hover:text-[var(--surface-card)]",
                     )}
                   >
-                    <ListBullets aria-hidden weight="bold" className="size-4" />
+                    <Rows aria-hidden weight="bold" className="size-4" />
                   </button>
                   <button
                     type="button"
                     aria-label={t("viewGrid")}
+                    aria-pressed={viewMode === "grid"}
                     onClick={() => setViewMode("grid")}
                     className={cn(
                       "flex size-8 items-center justify-center rounded-full text-[var(--text-muted)] transition-colors hover:text-[var(--text-primary)]",
                       viewMode === "grid" && "bg-[var(--text-primary)] text-[var(--surface-card)] hover:text-[var(--surface-card)]",
                     )}
                   >
-                    <SquaresFour aria-hidden weight="bold" className="size-4" />
+                    <GridFour aria-hidden weight="bold" className="size-4" />
                   </button>
                 </div>
               </div>
@@ -630,34 +675,43 @@ export function PublicJobBoard() {
                 <>
                   <ul
                     className={cn(
-                      viewMode === "grid" ? "grid gap-3 sm:grid-cols-2" : "space-y-3",
+                      "grid gap-3",
+                      viewMode === "grid"
+                        ? "grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4"
+                        : "md:grid-cols-2",
                     )}
                   >
                     {jobs.map((job, index) => (
-                      <li key={job.id}>
-                        {viewMode === "list" && index === 3 && promotedJob && promotedJob.id !== job.id && (
-                          <PromotedInlineJob job={promotedJob} />
+                      <Fragment key={job.id}>
+                        {index === 3 && promotedJob && promotedJob.id !== job.id && (
+                          <li className="col-span-full">
+                            <PromotedInlineJob job={promotedJob} />
+                          </li>
                         )}
-                        <TrackedItem
-                          surface="search"
-                          targetType="job"
-                          targetId={job.id}
-                          renderId={`jobs-board-${job.id}`}
-                          signalTags={{
-                            search_terms: search ? [search] : undefined,
-                            company_ids: [job.org_id],
-                            work_mode: job.location_type,
-                            city: job.location_city ?? undefined,
-                          }}
-                        >
-                          <JobListItem
-                            job={job}
-                            active={job.id === selectedJobId}
-                            onSelect={() => setSelectedJobId(job.id)}
-                            mode={viewMode}
-                          />
-                        </TrackedItem>
-                      </li>
+                        <li>
+                          <TrackedItem
+                            surface="search"
+                            targetType="job"
+                            targetId={job.id}
+                            renderId={`jobs-board-${job.id}`}
+                            signalTags={{
+                              search_terms: search ? [search] : undefined,
+                              company_ids: [job.org_id],
+                              work_mode: job.location_type,
+                              city: job.location_city ?? undefined,
+                            }}
+                          >
+                            <JobListItem
+                              job={job}
+                              active={job.id === selectedJobId}
+                              onSelect={() => setSelectedJobId(job.id)}
+                              mode={viewMode}
+                              batchFitScore={batchFitScores[job.id] ?? null}
+                              batchFitLoading={batchFitLoading && isStudent}
+                            />
+                          </TrackedItem>
+                        </li>
+                      </Fragment>
                     ))}
                   </ul>
 
@@ -670,26 +724,56 @@ export function PublicJobBoard() {
               )}
             </div>
           </section>
-
-          <aside
-            className="hidden min-w-0 xl:block"
-            aria-label={t("detailPreviewRegionLabel")}
-          >
-            <div className="sticky top-24 space-y-4">
-              {selectedSummary ? (
-                <JobPreviewPanel
-                  summary={selectedSummary}
-                  detail={detailQuery.data}
-                  loading={detailQuery.isPending && Boolean(selectedJobId)}
-                  onClose={() => setSelectedJobId(null)}
-                />
-              ) : (
-                <PreviewAdStack banners={previewBanners} promotedJob={promotedJob} />
-              )}
-            </div>
-          </aside>
         </div>
       </div>
+
+      {/* Job detail drawer (replaces the old right-side preview panel) */}
+      <JobDetailModal
+        open={Boolean(selectedJobId)}
+        summary={selectedSummary}
+        detail={detailQuery.data}
+        loading={detailQuery.isPending && Boolean(selectedJobId)}
+        onClose={() => setSelectedJobId(null)}
+        fitScore={selectedFitScore}
+        isStudent={isStudent}
+      />
+
+      {/* Mobile facet sheet */}
+      <Sheet
+        open={filtersOpen}
+        onClose={() => setFiltersOpen(false)}
+        side="left"
+        title={t("filtersTitle")}
+        closeLabel={t("closePreview")}
+      >
+        <div className="mb-3 flex justify-end">
+          <button
+            type="button"
+            onClick={clearFacets}
+            disabled={sidebarFilterCount === 0}
+            className="text-xs font-semibold text-[var(--text-primary)] transition-colors hover:text-[var(--text-secondary)] disabled:text-[var(--text-muted)]"
+          >
+            {t("clearFilters")}
+          </button>
+        </div>
+        <JobFilterSidebar
+          locationOptions={locationOptions}
+          postedOptions={postedOptions}
+          experienceOptions={experienceOptions}
+          locationTypes={locationTypes}
+          postedWithin={postedWithin}
+          salaryMin={salaryMin}
+          salaryMax={salaryMax}
+          experienceBand={experienceBand}
+          onLocationTypesChange={setLocationTypes}
+          onPostedWithinChange={setPostedWithin}
+          onSalaryChange={(min, max) => {
+            setSalaryMin(min);
+            setSalaryMax(max);
+          }}
+          onExperienceBandChange={setExperienceBand}
+        />
+      </Sheet>
     </div>
   );
 }
@@ -757,122 +841,292 @@ function SortMenu({
   );
 }
 
-function AdvancedFiltersMenu({
-  open,
-  onOpenChange,
-  advancedFilterCount,
-  employmentOptions,
-  locationOptions,
-  postedOptions,
-  salaryOptions,
-  experienceOptions,
-  employment,
-  location,
-  postedWithin,
-  salaryBand,
-  experienceBand,
-  onEmploymentChange,
-  onLocationChange,
-  onPostedWithinChange,
-  onSalaryBandChange,
-  onExperienceBandChange,
-  onClear,
-  hasFilters,
+function TypeFilter({
+  value,
+  options,
+  onChange,
 }: {
-  open: boolean;
-  onOpenChange: (open: boolean) => void;
-  advancedFilterCount: number;
-  employmentOptions: FilterOption[] | null;
-  locationOptions: FilterOption[] | null;
-  postedOptions: FilterOption[];
-  salaryOptions: FilterOption[];
-  experienceOptions: FilterOption[];
-  employment: string;
-  location: string;
-  postedWithin: string;
-  salaryBand: string;
-  experienceBand: string;
-  onEmploymentChange: (value: string) => void;
-  onLocationChange: (value: string) => void;
-  onPostedWithinChange: (value: string) => void;
-  onSalaryBandChange: (value: string) => void;
-  onExperienceBandChange: (value: string) => void;
-  onClear: () => void;
-  hasFilters: boolean;
+  value: string;
+  options: FilterOption[] | null;
+  onChange: (value: string) => void;
 }) {
   const t = useTranslations("jobs");
+  const [open, setOpen] = useState(false);
+  const selected = options?.find((option) => option.value === value) ?? null;
+  const label = value && selected ? selected.label : t("filterTypeLabel");
 
   return (
     <div className="relative">
-      <Button
-        variant="secondary"
-        onClick={() => onOpenChange(!open)}
+      <button
+        type="button"
+        disabled={!options}
+        aria-haspopup="listbox"
+        aria-expanded={open}
+        onClick={() => setOpen((v) => !v)}
         className={cn(
-          "h-11 whitespace-nowrap",
+          "flex h-11 w-full cursor-pointer items-center justify-between gap-2 rounded-xl border border-[var(--border-default)] bg-[var(--surface-secondary)] px-3 text-left text-sm font-semibold text-[var(--text-primary)] transition-colors hover:border-[var(--border-strong)] disabled:cursor-not-allowed disabled:opacity-60",
           open && "border-[var(--text-primary)] bg-[var(--surface-card)]",
         )}
       >
-        <SlidersHorizontal aria-hidden weight="bold" className="size-4" />
-        <span className="hidden sm:inline">{t("advancedFilters")}</span>
-        {advancedFilterCount > 0 && (
-          <span className="ml-1 inline-flex min-w-5 items-center justify-center rounded-full bg-[var(--text-primary)] px-1.5 text-xs font-bold text-[var(--surface-card)]">
-            {advancedFilterCount}
-          </span>
-        )}
-      </Button>
-      {open && (
-        <div className="absolute right-0 top-[calc(100%+0.5rem)] z-40 w-[min(420px,calc(100vw-2rem))] overflow-hidden rounded-2xl border border-[var(--border-default)] bg-[var(--surface-card)] shadow-[0_24px_70px_rgba(11,34,57,0.16)]">
-          <div className="grid gap-4 p-4">
-            {employmentOptions && (
-              <Select
-                label={t("filterTypeLabel")}
-                value={employment}
-                onChange={(event) => onEmploymentChange(event.target.value)}
-                options={employmentOptions}
-              />
-            )}
-            {locationOptions && (
-              <Select
-                label={t("filterModeLabel")}
-                value={location}
-                onChange={(event) => onLocationChange(event.target.value)}
-                options={locationOptions}
-              />
-            )}
-            <Select
-              label={t("postedFilterLabel")}
-              value={postedWithin}
-              onChange={(event) => onPostedWithinChange(event.target.value)}
-              options={postedOptions}
-            />
-            <Select
-              label={t("salaryFilterLabel")}
-              value={salaryBand}
-              onChange={(event) => onSalaryBandChange(event.target.value)}
-              options={salaryOptions}
-            />
-            <Select
-              label={t("experienceFilterLabel")}
-              value={experienceBand}
-              onChange={(event) => onExperienceBandChange(event.target.value)}
-              options={experienceOptions}
-            />
-          </div>
-          <div className="flex items-center justify-between border-t border-[var(--border-default)] px-4 py-3">
-            <button
-              type="button"
-              onClick={onClear}
-              disabled={!hasFilters}
-              className="cursor-pointer text-sm font-semibold text-[var(--text-primary)] transition-colors hover:text-[var(--text-secondary)] disabled:text-[var(--text-muted)]"
-            >
-              {t("clearFilters")}
-            </button>
-            <Button variant="primary" onClick={() => onOpenChange(false)}>
-              {t("applyFilters")}
-            </Button>
-          </div>
+        <span className="flex min-w-0 items-center gap-2">
+          <Briefcase aria-hidden weight="duotone" className="size-4 shrink-0 text-[var(--text-muted)]" />
+          <span className="truncate">{label}</span>
+        </span>
+        <CaretDown
+          aria-hidden
+          weight="bold"
+          className={cn(
+            "size-4 shrink-0 text-[var(--text-muted)] transition-transform",
+            open && "rotate-180",
+          )}
+        />
+      </button>
+      {open && options && (
+        <div className="absolute right-0 top-[calc(100%+0.4rem)] z-40 w-full min-w-[200px] overflow-hidden rounded-2xl border border-[var(--border-default)] bg-[var(--surface-card)] p-1.5 shadow-[0_18px_45px_rgba(11,34,57,0.14)]">
+          {options.map((option) => {
+            const active = option.value === value;
+            return (
+              <button
+                key={option.value || "all"}
+                type="button"
+                onClick={() => {
+                  onChange(option.value);
+                  setOpen(false);
+                }}
+                className={cn(
+                  "flex w-full cursor-pointer items-center justify-between gap-3 rounded-xl px-3 py-2 text-left text-sm font-medium text-[var(--text-secondary)] transition-colors hover:bg-[var(--surface-secondary)] hover:text-[var(--text-primary)]",
+                  active &&
+                    "bg-[var(--text-primary)] font-semibold text-[var(--surface-card)] hover:bg-[var(--text-primary)] hover:text-[var(--surface-card)]",
+                )}
+              >
+                <span className="truncate">{option.label}</span>
+                {active && <Check aria-hidden weight="bold" className="size-4 shrink-0" />}
+              </button>
+            );
+          })}
         </div>
       )}
+    </div>
+  );
+}
+
+function JobFilterSidebar({
+  locationOptions,
+  postedOptions,
+  experienceOptions,
+  locationTypes,
+  postedWithin,
+  salaryMin,
+  salaryMax,
+  experienceBand,
+  onLocationTypesChange,
+  onPostedWithinChange,
+  onSalaryChange,
+  onExperienceBandChange,
+}: {
+  locationOptions: FilterOption[] | null;
+  postedOptions: FilterOption[];
+  experienceOptions: FilterOption[];
+  locationTypes: string[];
+  postedWithin: string;
+  salaryMin: number;
+  salaryMax: number;
+  experienceBand: string;
+  onLocationTypesChange: (value: string[]) => void;
+  onPostedWithinChange: (value: string) => void;
+  onSalaryChange: (min: number, max: number) => void;
+  onExperienceBandChange: (value: string) => void;
+}) {
+  const t = useTranslations("jobs");
+  // Multi-select work modes: drop the synthetic "all" option; an empty
+  // selection already means "any".
+  const workModes = (locationOptions ?? []).filter((option) => option.value);
+
+  return (
+    <div className="space-y-5">
+      {workModes.length > 0 && (
+        <CheckboxGroup
+          label={t("filterModeLabel")}
+          options={workModes}
+          values={locationTypes}
+          onChange={onLocationTypesChange}
+        />
+      )}
+      <div>
+        <p className="mb-3 text-xs font-bold uppercase tracking-[0.1em] text-[var(--text-muted)]">
+          {t("salaryFilterLabel")}
+        </p>
+        <SalaryRangeSlider min={salaryMin} max={salaryMax} onChange={onSalaryChange} />
+      </div>
+      <FacetGroup
+        label={t("experienceFilterLabel")}
+        options={experienceOptions}
+        value={experienceBand}
+        onChange={onExperienceBandChange}
+      />
+      <FacetGroup
+        label={t("postedFilterLabel")}
+        options={postedOptions}
+        value={postedWithin}
+        onChange={onPostedWithinChange}
+      />
+    </div>
+  );
+}
+
+function CheckboxGroup({
+  label,
+  options,
+  values,
+  onChange,
+}: {
+  label: string;
+  options: FilterOption[];
+  values: string[];
+  onChange: (values: string[]) => void;
+}) {
+  function toggle(value: string) {
+    onChange(
+      values.includes(value)
+        ? values.filter((item) => item !== value)
+        : [...values, value],
+    );
+  }
+
+  return (
+    <div>
+      <p className="mb-2 text-xs font-bold uppercase tracking-[0.1em] text-[var(--text-muted)]">
+        {label}
+      </p>
+      <div className="space-y-0.5">
+        {options.map((option) => {
+          const checked = values.includes(option.value);
+          return (
+            <button
+              key={option.value}
+              type="button"
+              role="checkbox"
+              aria-checked={checked}
+              onClick={() => toggle(option.value)}
+              className="flex w-full cursor-pointer items-center gap-2.5 rounded-lg px-1.5 py-1.5 text-left transition-colors hover:bg-[var(--surface-secondary)]"
+            >
+              <span
+                className={cn(
+                  "flex size-[18px] shrink-0 items-center justify-center rounded-md border transition-colors",
+                  checked
+                    ? "border-[var(--text-primary)] bg-[var(--text-primary)] text-[var(--surface-card)]"
+                    : "border-[var(--border-strong)] bg-[var(--surface-card)]",
+                )}
+              >
+                {checked && <Check aria-hidden weight="bold" className="size-3" />}
+              </span>
+              <span className="text-sm font-medium text-[var(--text-primary)]">
+                {option.label}
+              </span>
+            </button>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+function SalaryRangeSlider({
+  min,
+  max,
+  onChange,
+}: {
+  min: number;
+  max: number;
+  onChange: (min: number, max: number) => void;
+}) {
+  const t = useTranslations("jobs");
+  const span = SALARY_CEIL - SALARY_FLOOR;
+  const pct = (value: number) => ((value - SALARY_FLOOR) / span) * 100;
+  const million = (value: number) => t("salaryMillion", { value: Math.round(value / 1_000_000) });
+  const thumb =
+    "pointer-events-none absolute inset-0 h-5 w-full appearance-none bg-transparent " +
+    "[&::-webkit-slider-thumb]:pointer-events-auto [&::-webkit-slider-thumb]:size-4 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:cursor-pointer [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:border-2 [&::-webkit-slider-thumb]:border-[var(--text-primary)] [&::-webkit-slider-thumb]:bg-[var(--surface-card)] [&::-webkit-slider-thumb]:shadow-sm " +
+    "[&::-moz-range-thumb]:pointer-events-auto [&::-moz-range-thumb]:size-4 [&::-moz-range-thumb]:cursor-pointer [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:border-2 [&::-moz-range-thumb]:border-[var(--text-primary)] [&::-moz-range-thumb]:bg-[var(--surface-card)] [&::-moz-range-track]:bg-transparent";
+
+  return (
+    <div>
+      <div className="mb-3 flex items-center justify-between text-xs font-semibold text-[var(--text-primary)]">
+        <span>{min <= SALARY_FLOOR ? t("salaryAny") : million(min)}</span>
+        <span>{max >= SALARY_CEIL ? t("salaryNoLimit") : million(max)}</span>
+      </div>
+      <div className="relative h-5">
+        <div className="absolute inset-x-0 top-1/2 h-1 -translate-y-1/2 rounded-full bg-[var(--surface-secondary)]" />
+        <div
+          className="absolute top-1/2 h-1 -translate-y-1/2 rounded-full bg-[var(--text-primary)]"
+          style={{ left: `${pct(min)}%`, right: `${100 - pct(max)}%` }}
+        />
+        <input
+          type="range"
+          aria-label={`${t("salaryFilterLabel")} (min)`}
+          min={SALARY_FLOOR}
+          max={SALARY_CEIL}
+          step={SALARY_STEP}
+          value={min}
+          onChange={(event) =>
+            onChange(Math.min(Number(event.target.value), max - SALARY_STEP), max)
+          }
+          className={thumb}
+        />
+        <input
+          type="range"
+          aria-label={`${t("salaryFilterLabel")} (max)`}
+          min={SALARY_FLOOR}
+          max={SALARY_CEIL}
+          step={SALARY_STEP}
+          value={max}
+          onChange={(event) =>
+            onChange(min, Math.max(Number(event.target.value), min + SALARY_STEP))
+          }
+          className={thumb}
+        />
+      </div>
+    </div>
+  );
+}
+
+function FacetGroup({
+  label,
+  options,
+  value,
+  onChange,
+}: {
+  label: string;
+  options: FilterOption[];
+  value: string;
+  onChange: (value: string) => void;
+}) {
+  return (
+    <div>
+      <p className="mb-2 text-xs font-bold uppercase tracking-[0.1em] text-[var(--text-muted)]">
+        {label}
+      </p>
+      <div className="flex flex-wrap gap-1.5">
+        {options.map((option) => {
+          const active = option.value === value;
+          return (
+            <button
+              key={option.value || "all"}
+              type="button"
+              aria-pressed={active}
+              onClick={() => onChange(option.value)}
+              className={cn(
+                "cursor-pointer rounded-full border px-3 py-1.5 text-xs font-semibold transition-colors",
+                active
+                  ? "border-[var(--text-primary)] bg-[var(--text-primary)] text-[var(--surface-card)]"
+                  : "border-[var(--border-default)] bg-[var(--surface-card)] text-[var(--text-secondary)] hover:border-[var(--border-strong)] hover:text-[var(--text-primary)]",
+              )}
+            >
+              {option.label}
+            </button>
+          );
+        })}
+      </div>
     </div>
   );
 }
@@ -1448,16 +1702,131 @@ function PaginationControls({
   );
 }
 
+function fitToneClass(score: number | null | undefined) {
+  if (score == null) return "border-[var(--border-default)] text-[var(--text-secondary)]";
+  if (score >= 80) return "border-[var(--text-primary)] bg-[var(--text-primary)] text-[var(--surface-card)]";
+  if (score >= 65) return "border-[var(--border-strong)] text-[var(--text-primary)]";
+  if (score >= 50) return "border-[var(--border-default)] text-[var(--text-primary)]";
+  return "border-[var(--border-default)] text-[var(--text-secondary)]";
+}
+
+function JobFitDropdown({
+  fit,
+  mode,
+}: {
+  fit: JobStudentFitSummary | null | undefined;
+  mode: ViewMode;
+}) {
+  const t = useTranslations("jobs");
+  const [open, setOpen] = useState(false);
+
+  if (!fit) return null;
+
+  const hasScore = typeof fit.score === "number";
+  const title = hasScore ? t("fitScoreShort", { score: fit.score }) : t("fitNoCvShort");
+  const recommendedTitle = fit.recommended_cv_title;
+
+  return (
+    <div className="relative mt-3">
+      <button
+        type="button"
+        onClick={(event) => {
+          event.stopPropagation();
+          setOpen((value) => !value);
+        }}
+        className={cn(
+          "inline-flex max-w-full cursor-pointer items-center gap-1.5 rounded-full border bg-[var(--surface-card)] px-2.5 py-1.5 text-left text-xs font-bold transition-colors hover:border-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--text-primary)]/15",
+          fitToneClass(fit.score),
+          mode === "grid" && "px-2 py-1 text-[11px]",
+        )}
+        aria-expanded={open}
+      >
+        <Sparkle aria-hidden weight="duotone" className="size-3.5 shrink-0" />
+        <span className="truncate">{title}</span>
+        {recommendedTitle && mode === "list" && (
+          <span className="hidden max-w-[180px] truncate font-semibold text-current/70 md:inline">
+            {t("fitCvPrefix")}: {recommendedTitle}
+          </span>
+        )}
+        {fit.cv_scores.length > 0 && (
+          <CaretDown aria-hidden weight="bold" className="size-3 shrink-0 opacity-70" />
+        )}
+      </button>
+
+      {open && fit.cv_scores.length > 0 && (
+        <div
+          className={cn(
+            "absolute left-0 top-[calc(100%+0.45rem)] z-30 w-[min(360px,calc(100vw-2rem))] overflow-hidden rounded-2xl border border-[var(--border-default)] bg-[var(--surface-card)] shadow-[0_22px_60px_rgba(11,34,57,0.16)]",
+            mode === "grid" && "w-[min(320px,calc(100vw-2rem))]",
+          )}
+          onClick={(event) => event.stopPropagation()}
+        >
+          <div className="flex items-center justify-between border-b border-[var(--border-default)] px-3.5 py-3">
+            <p className="text-sm font-bold text-[var(--text-primary)]">
+              {t("fitCvScoresTitle")}
+            </p>
+            {fit.signal === "low_signal" && (
+              <span className="text-[11px] font-semibold text-[var(--text-muted)]">
+                {t("fitLowSignal")}
+              </span>
+            )}
+          </div>
+          <div className="max-h-72 overflow-y-auto p-2">
+            {fit.cv_scores.map((cv) => (
+              <div
+                key={cv.cv_id}
+                className={cn(
+                  "rounded-xl px-3 py-2.5 transition-colors",
+                  cv.recommended
+                    ? "bg-[var(--surface-secondary)]"
+                    : "hover:bg-[var(--surface-secondary)]",
+                )}
+              >
+                <div className="flex items-start justify-between gap-3">
+                  <div className="min-w-0">
+                    <p className="truncate text-sm font-bold text-[var(--text-primary)]">
+                      {cv.title}
+                    </p>
+                    <div className="mt-1 flex flex-wrap items-center gap-x-2 gap-y-1 text-[11px] font-semibold text-[var(--text-muted)]">
+                      {cv.recommended && (
+                        <span className="inline-flex items-center gap-1 text-[var(--text-primary)]">
+                          <Check aria-hidden weight="bold" className="size-3" />
+                          {t("fitRecommended")}
+                        </span>
+                      )}
+                      {cv.gap_count > 0 && (
+                        <span>{t("fitGapCount", { count: cv.gap_count })}</span>
+                      )}
+                      {cv.stale && <span>{t("fitStaleCv")}</span>}
+                    </div>
+                  </div>
+                  <span className="shrink-0 rounded-full border border-[var(--border-default)] bg-[var(--surface-card)] px-2 py-1 text-xs font-bold text-[var(--text-primary)]">
+                    {cv.score}%
+                  </span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
 function JobListItem({
   job,
   active,
   onSelect,
   mode,
+  batchFitScore,
+  batchFitLoading,
 }: {
   job: JobSummary;
   active: boolean;
   onSelect: () => void;
   mode: ViewMode;
+  batchFitScore?: JobFitScoreEntry | null;
+  batchFitLoading?: boolean;
 }) {
   const t = useTranslations("jobs");
   const locale = useLocale();
@@ -1466,16 +1835,53 @@ function JobListItem({
   const posted = formatRelativeTime(job.published_at, locale);
   const rating = ratingText(job);
 
+  // Fit score for the per-card ring. Prefer the embedded student_fit summary
+  // (which also drives the breakdown dropdown); otherwise use the async batch
+  // score. `null` = no eligible fit, so no ring is drawn.
+  const ringScore =
+    typeof job.student_fit?.score === "number"
+      ? job.student_fit.score
+      : typeof batchFitScore?.score === "number"
+        ? batchFitScore.score
+        : null;
+  const ringSize = mode === "grid" ? "sm" : "md";
+  // Only show a loading ring when we have no embedded fit and the batch call
+  // is still in flight for this authenticated student.
+  const showRingSkeleton =
+    ringScore === null && !job.student_fit && Boolean(batchFitLoading);
+  const hasCornerDisclosure = job.is_sponsored || job.is_featured;
+
   return (
     <div
+      onClick={onSelect}
       className={cn(
-        "group rounded-2xl border bg-[var(--surface-card)] shadow-sm transition-colors",
+        "group relative cursor-pointer rounded-2xl border bg-[var(--surface-card)] shadow-sm transition-colors",
         mode === "grid" ? "h-full p-3" : "p-4",
         active
           ? "border-[var(--brand-primary)] shadow-[0_16px_42px_rgba(11,34,57,0.12)]"
           : "border-[var(--border-default)] hover:border-[var(--border-strong)]",
       )}
     >
+      {/* Sponsored / featured disclosure — absolutely positioned so it never
+          adds layout height. Every card's title therefore starts at the same
+          vertical position and sponsored + organic cards are equal height.
+          Pinned to the top-left corner, clear of the ring/save/open actions.
+          The amber sponsored label is non-removable (CLAUDE.md / ads policy). */}
+      {hasCornerDisclosure && (
+        <div
+          onClick={(event) => event.stopPropagation()}
+          className="pointer-events-none absolute left-3 top-0 z-20 flex -translate-y-1/2 items-center gap-1.5"
+        >
+          {job.is_sponsored && <SponsoredLabel label={t("sponsored")} />}
+          {job.is_featured && (
+            <StatusBadge tone="featured" className="shadow-sm">
+              <Star aria-hidden weight="fill" className="size-3" />
+              {t("featured")}
+            </StatusBadge>
+          )}
+        </div>
+      )}
+
       <div className={cn("flex items-start", mode === "grid" ? "gap-2.5" : "gap-3")}>
         <CompanyAvatar
           name={job.company?.display_name ?? job.title}
@@ -1487,18 +1893,9 @@ function JobListItem({
           onClick={onSelect}
           className="min-w-0 flex-1 cursor-pointer text-left outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)]/30"
         >
-          <span className="flex flex-wrap items-center gap-1.5">
-            {job.is_sponsored && <SponsoredLabel label={t("sponsored")} />}
-            {job.is_featured && (
-              <StatusBadge tone="featured">
-                <Star aria-hidden weight="fill" className="size-3" />
-                {t("featured")}
-              </StatusBadge>
-            )}
-          </span>
           <span
             className={cn(
-              "mt-2 block line-clamp-2 font-bold leading-snug text-[var(--text-primary)] group-hover:text-[var(--brand-primary)]",
+              "block line-clamp-2 font-bold leading-snug text-[var(--text-primary)] group-hover:text-[var(--brand-primary)]",
               mode === "grid" ? "text-sm" : "text-base",
             )}
           >
@@ -1524,18 +1921,28 @@ function JobListItem({
             </span>
           )}
         </button>
-        <div className={cn("relative z-10 flex shrink-0 items-center", mode === "grid" ? "gap-1" : "gap-1.5")}>
-          <SaveJobButton jobId={job.id} size="sm" initialSaved={job.is_saved ?? false} />
-          <Link
-            href={`/jobs/${job.id}`}
-            aria-label={t("openFullJob")}
-            className={cn(
-              "flex items-center justify-center rounded-full border border-[var(--border-default)] text-[var(--text-secondary)] transition-colors hover:border-[var(--brand-primary)]/50 hover:text-[var(--brand-primary)]",
-              mode === "grid" ? "size-8" : "size-9",
-            )}
-          >
-            <ArrowSquareOut aria-hidden weight="bold" className="size-4" />
-          </Link>
+        <div
+          onClick={(event) => event.stopPropagation()}
+          className={cn("relative z-10 flex shrink-0 items-center", mode === "grid" ? "gap-1.5" : "gap-2")}
+        >
+          {ringScore !== null ? (
+            <FitScoreRing score={ringScore} size={ringSize} />
+          ) : showRingSkeleton ? (
+            <FitScoreRingSkeleton size={ringSize} />
+          ) : null}
+          <div className={cn("flex items-center", mode === "grid" ? "gap-1" : "gap-1.5")}>
+            <SaveJobButton jobId={job.id} size="sm" initialSaved={job.is_saved ?? false} />
+            <Link
+              href={`/jobs/${job.id}`}
+              aria-label={t("openFullJob")}
+              className={cn(
+                "flex items-center justify-center rounded-full border border-[var(--border-default)] text-[var(--text-secondary)] transition-colors hover:border-[var(--brand-primary)]/50 hover:text-[var(--brand-primary)]",
+                mode === "grid" ? "size-8" : "size-9",
+              )}
+            >
+              <ArrowSquareOut aria-hidden weight="bold" className="size-4" />
+            </Link>
+          </div>
         </div>
       </div>
 
@@ -1565,6 +1972,11 @@ function JobListItem({
           </span>
         )}
       </div>
+
+      {/* Breakdown chip for the embedded student_fit summary (recommended CV,
+          per-CV scores). The headline score itself now lives in the ring above;
+          this stays as the drill-down affordance. */}
+      <JobFitDropdown fit={job.student_fit} mode={mode} />
     </div>
   );
 }
@@ -1601,324 +2013,5 @@ function PromotedInlineJob({ job }: { job: JobSummary }) {
         />
       </Link>
     </TrackedItem>
-  );
-}
-
-function PreviewAdStack({
-  banners,
-  promotedJob,
-}: {
-  banners: MarketplaceBanner[];
-  promotedJob: JobSummary | null;
-}) {
-  const t = useTranslations("jobs");
-  const slots = banners.slice(0, 2);
-
-  return (
-    <div className="rounded-2xl border border-[var(--border-default)] bg-[var(--surface-card)] p-4 shadow-[0_18px_50px_rgba(11,34,57,0.08)]">
-      <div className="mb-4 flex items-center gap-3">
-        <span className="flex size-9 items-center justify-center rounded-xl bg-[var(--surface-secondary)] text-[var(--brand-primary)]">
-          <Sparkle aria-hidden weight="duotone" className="size-5" />
-        </span>
-        <div>
-          <h2 className="text-base font-bold text-[var(--text-primary)]">
-            {t("previewAdsTitle")}
-          </h2>
-          <p className="text-sm text-[var(--text-secondary)]">
-            {t("previewAdsBody")}
-          </p>
-        </div>
-      </div>
-
-      <div className="space-y-3">
-        {slots.map((banner, index) => (
-          <MarketplaceBannerCard
-            key={banner.placement_id ?? `banner-${index}`}
-            banner={banner}
-            variant="hero"
-            className="rounded-2xl"
-          />
-        ))}
-        {slots.length < 2 && promotedJob && (
-          <Link
-            href={`/jobs/${promotedJob.id}`}
-            className="group flex items-center gap-4 rounded-2xl border border-[var(--border-default)] bg-[var(--surface-card)] p-4 transition-colors hover:border-[var(--border-strong)]"
-          >
-            <CompanyAvatar
-              name={promotedJob.company?.display_name ?? promotedJob.title}
-              logoUrl={promotedJob.company?.logo_url}
-              size="md"
-            />
-            <span className="min-w-0 flex-1">
-              <span className="inline-flex items-center gap-1 rounded-full border border-[var(--border-default)] bg-[var(--bg-subtle)] px-2 py-0.5 text-[0.65rem] font-bold uppercase tracking-[0.1em] text-[var(--text-secondary)]">
-                {t("promotedTitle")}
-              </span>
-              <span className="mt-1 block truncate text-sm font-bold text-[var(--text-primary)] group-hover:text-[var(--brand-primary)]">
-                {promotedJob.title}
-              </span>
-              <span className="mt-1 block truncate text-xs text-[var(--text-muted)]">
-                {compactJobLocation(promotedJob)}
-              </span>
-            </span>
-            <ArrowSquareOut aria-hidden weight="bold" className="size-4 text-[var(--text-secondary)]" />
-          </Link>
-        )}
-        {slots.length === 0 && !promotedJob && (
-          <div className="rounded-2xl border border-dashed border-[var(--border-default)] bg-[var(--surface-secondary)] p-8 text-center">
-            <Briefcase aria-hidden weight="duotone" className="mx-auto size-10 text-[var(--text-muted)]" />
-            <p className="mt-3 text-sm font-semibold text-[var(--text-primary)]">
-              {t("previewEmptyTitle")}
-            </p>
-          </div>
-        )}
-      </div>
-    </div>
-  );
-}
-
-function JobPreviewPanel({
-  summary,
-  detail,
-  loading,
-  onClose,
-}: {
-  summary: JobSummary | null;
-  detail: PublicJobDetail | undefined;
-  loading: boolean;
-  onClose: () => void;
-}) {
-  const t = useTranslations("jobs");
-  const locale = useLocale();
-  const labels = useJobLabels();
-  const [tab, setTab] = useState<"description" | "requirements" | "benefits" | "reviews" | "locations">("description");
-
-  if (!summary) {
-    return (
-      <div className="rounded-2xl border border-[var(--border-default)] bg-[var(--surface-card)] p-8 text-center">
-        <Briefcase aria-hidden weight="duotone" className="mx-auto size-10 text-[var(--text-muted)]" />
-        <p className="mt-3 text-sm font-semibold text-[var(--text-primary)]">
-          {t("previewEmptyTitle")}
-        </p>
-      </div>
-    );
-  }
-
-  const job = detail ?? summary;
-  const salary = jobSalaryLabel(job, locale) ?? t("salaryUndisclosed");
-  const posted = formatRelativeTime(job.published_at, locale);
-  const rating = job.company?.rating;
-
-  return (
-    <div className="overflow-hidden rounded-2xl border border-[var(--border-default)] bg-[var(--surface-card)] shadow-[0_18px_50px_rgba(11,34,57,0.10)]">
-      <div className="border-b border-[var(--border-default)] p-6">
-        <div className="flex items-start justify-between gap-4">
-          <div className="min-w-0">
-            <div className="mb-3 flex flex-wrap items-center gap-1.5">
-              {job.is_sponsored && <SponsoredLabel label={t("sponsored")} />}
-              {job.is_featured && (
-                <StatusBadge tone="featured">
-                  <Star aria-hidden weight="fill" className="size-3" />
-                  {t("featured")}
-                </StatusBadge>
-              )}
-            </div>
-            <h2 className="text-2xl font-extrabold leading-tight tracking-tight text-[var(--text-primary)]">
-              {job.title}
-            </h2>
-            {job.company && (
-              <div className="mt-3 flex items-center gap-2">
-                <CompanyAvatar
-                  name={job.company.display_name}
-                  logoUrl={job.company.logo_url}
-                  size="sm"
-                />
-                <span className="flex min-w-0 items-center gap-1 text-sm font-semibold text-[var(--text-secondary)]">
-                  <span className="truncate">{job.company.display_name}</span>
-                  {job.company.is_verified && (
-                    <VerifiedBadge label={t("verified")} className="[&_svg]:size-3.5" />
-                  )}
-                  {rating?.overall_avg != null && (
-                    <span className="inline-flex items-center gap-1 rounded-full bg-[var(--surface-secondary)] px-2 py-0.5 text-xs font-semibold text-[var(--text-secondary)]">
-                      <Star aria-hidden weight="fill" className="size-3.5 text-amber-500" />
-                      {rating.overall_avg.toFixed(1)}
-                    </span>
-                  )}
-                </span>
-              </div>
-            )}
-          </div>
-          <div className="flex shrink-0 items-center gap-2">
-            <SaveJobButton jobId={job.id} size="md" initialSaved={job.is_saved ?? false} />
-            <button
-              type="button"
-              aria-label={t("closePreview")}
-              onClick={onClose}
-              className="flex size-10 items-center justify-center rounded-full border border-[var(--border-default)] text-[var(--text-muted)] transition-colors hover:border-[var(--border-strong)] hover:text-[var(--text-primary)]"
-            >
-              <X aria-hidden weight="bold" className="size-4" />
-            </button>
-          </div>
-        </div>
-
-        <div className="mt-5 grid gap-2 sm:grid-cols-2">
-          <PreviewFact icon={MapPin} label={t("location")} value={compactJobLocation(job)} />
-          <PreviewFact
-            icon={Briefcase}
-            label={t("employmentType")}
-            value={`${labels.employmentType(job.employment_type, job.employment_type_label)} · ${labels.locationType(job.location_type, job.location_type_label)}`}
-          />
-          <PreviewFact icon={CurrencyCircleDollar} label={t("salary")} value={salary} />
-          <PreviewFact
-            icon={Clock}
-            label={t("posted")}
-            value={posted ?? t("noDeadline")}
-          />
-        </div>
-
-        <div className="mt-5 flex flex-wrap gap-2">
-          <Link
-            href={`/jobs/${job.id}`}
-            className="inline-flex h-9 items-center justify-center rounded-full bg-[var(--btn-primary-bg)] px-5 text-sm font-semibold text-[var(--btn-primary-fg)] shadow-[var(--shadow-brand)] transition-colors hover:bg-[var(--btn-primary-hover)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)]/30"
-          >
-            {t("apply")}
-          </Link>
-          {job.company && (
-            <Link
-              href={`/companies/${job.company.slug}`}
-              className="inline-flex h-9 items-center justify-center gap-2 rounded-full border border-[var(--border-strong)] bg-[var(--surface-card)] px-5 text-sm font-semibold text-[var(--text-primary)] transition-colors hover:bg-[var(--bg-subtle)] hover:border-[var(--text-muted)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)]/30"
-            >
-              <Buildings aria-hidden weight="duotone" className="size-4" />
-              {t("viewCompany")}
-            </Link>
-          )}
-        </div>
-      </div>
-
-      <div className="flex overflow-x-auto border-b border-[var(--border-default)] px-5">
-        {(["description", "requirements", "benefits", "reviews", "locations"] as const).map((value) => (
-          <button
-            key={value}
-            type="button"
-            onClick={() => setTab(value)}
-            className={cn(
-              "relative px-3 py-3 text-sm font-semibold outline-none transition-colors focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)]/30",
-              tab === value
-                ? "text-[var(--text-primary)] after:absolute after:inset-x-3 after:bottom-0 after:h-0.5 after:rounded-full after:bg-[var(--brand-primary)]"
-                : "text-[var(--text-muted)] hover:text-[var(--text-primary)]",
-            )}
-          >
-            {t(`previewTabs.${value}`)}
-          </button>
-        ))}
-      </div>
-
-      <div className="min-h-[250px] p-6">
-        {loading ? (
-          <div className="space-y-3">
-            <Skeleton className="h-4 w-full" />
-            <Skeleton className="h-4 w-11/12" />
-            <Skeleton className="h-4 w-10/12" />
-            <Skeleton className="h-4 w-3/4" />
-          </div>
-        ) : (
-          <>
-            {tab === "description" && (
-              <PreviewText value={detail?.description ?? t("previewLoadingHint")} />
-            )}
-            {tab === "requirements" && (
-              <div className="space-y-5">
-                <PreviewText value={detail?.requirements ?? t("noRequirements")} />
-                {job.required_skills.length > 0 && (
-                  <div className="flex flex-wrap gap-2">
-                    {job.required_skills.slice(0, 10).map((skill) => (
-                      <span
-                        key={skill}
-                        className="rounded-full border border-[var(--border-default)] bg-[var(--surface-secondary)] px-3 py-1 text-xs font-semibold text-[var(--text-secondary)]"
-                      >
-                        {skill}
-                      </span>
-                    ))}
-                  </div>
-                )}
-              </div>
-            )}
-            {tab === "benefits" && (
-              <PreviewText value={detail?.benefits ?? t("noBenefits")} />
-            )}
-            {tab === "reviews" && (
-              <div className="rounded-2xl border border-[var(--border-default)] bg-[var(--surface-secondary)] p-4">
-                {rating?.overall_avg != null ? (
-                  <>
-                    <p className="flex items-center gap-2 text-2xl font-extrabold text-[var(--text-primary)]">
-                      <Star aria-hidden weight="fill" className="size-5 text-amber-500" />
-                      {rating.overall_avg.toFixed(1)}
-                    </p>
-                    <p className="mt-1 text-sm text-[var(--text-secondary)]">
-                      {t("ratingSummary", { count: rating.review_count })}
-                    </p>
-                  </>
-                ) : (
-                  <p className="text-sm text-[var(--text-secondary)]">
-                    {t("noReviews")}
-                  </p>
-                )}
-              </div>
-            )}
-            {tab === "locations" && (
-              <div className="space-y-2">
-                {(job.locations.length > 0 ? job.locations : []).map((item, index) => (
-                  <div
-                    key={`${item.province_code ?? item.city ?? "location"}-${index}`}
-                    className="flex items-start gap-3 rounded-2xl border border-[var(--border-default)] bg-[var(--surface-secondary)] p-3"
-                  >
-                    <span className="flex size-9 shrink-0 items-center justify-center rounded-xl bg-[var(--surface-card)] text-[var(--text-secondary)]">
-                      <MapTrifold aria-hidden weight="duotone" className="size-4" />
-                    </span>
-                    <div>
-                      <p className="text-sm font-semibold text-[var(--text-primary)]">
-                        {formatJobLocationItem(item)}
-                      </p>
-                      <p className="text-xs text-[var(--text-muted)]">
-                        {labels.locationType(item.type, item.type)}
-                      </p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            )}
-          </>
-        )}
-      </div>
-    </div>
-  );
-}
-
-function PreviewFact({
-  icon: Icon,
-  label,
-  value,
-}: {
-  icon: Icon;
-  label: string;
-  value: string;
-}) {
-  return (
-    <div className="rounded-xl bg-[var(--surface-secondary)] px-3 py-2">
-      <p className="flex items-center gap-1.5 text-xs font-semibold text-[var(--text-muted)]">
-        <Icon aria-hidden weight="duotone" className="size-3.5" />
-        {label}
-      </p>
-      <p className="mt-1 line-clamp-2 text-sm font-semibold text-[var(--text-primary)]">
-        {value}
-      </p>
-    </div>
-  );
-}
-
-function PreviewText({ value }: { value: string }) {
-  return (
-    <div className="prose prose-sm max-w-none text-[var(--text-secondary)] prose-p:my-2 prose-li:my-1">
-      <p className="whitespace-pre-line leading-7">{value}</p>
-    </div>
   );
 }

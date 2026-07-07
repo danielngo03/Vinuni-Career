@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { useQuery } from "@tanstack/react-query";
 import {
@@ -8,16 +7,10 @@ import {
   Briefcase,
   CalendarBlank,
   PaperPlaneTilt,
-  UserCircleGear,
   ReadCvLogo,
   ClockCounterClockwise,
   Eye,
   VideoCamera,
-  Warning,
-  CheckCircle,
-  Circle,
-  Star,
-  Compass,
 } from "@phosphor-icons/react";
 import { Link } from "@/i18n/navigation";
 import { Button, EmptyState, StatusBadge } from "@/components/ui";
@@ -25,12 +18,11 @@ import { JobRow } from "@/components/jobs/job-row";
 import { ReasonChips } from "@/components/discovery/reason-chips";
 import type { RecoSource } from "@/lib/api";
 import { formatDateTime } from "@/lib/format";
-import { cn } from "@/lib/utils";
 import {
   APPLICATION_STATUS_TONE,
   useApplicationLabels,
 } from "@/lib/applications/labels";
-import { dashboardsApi, profileApi, type CompletionSection } from "@/lib/api";
+import { dashboardsApi } from "@/lib/api";
 import { useAuthStore } from "@/stores/auth-store";
 import {
   DashboardErrorState,
@@ -43,185 +35,11 @@ import {
   type MetricItem,
 } from "./dashboard-kit";
 
-const SECTION_LABEL_KEYS: Record<string, string> = {
-  headline: "completionSectionHeadline",
-  summary: "completionSectionSummary",
-  education: "completionSectionEducation",
-  experience: "completionSectionExperience",
-  skills: "completionSectionSkills",
-  links: "completionSectionLinks",
-  open_to_work: "completionSectionOpenToWork",
-};
-
-function ProfileCompletionCard({ sections, pct }: { sections: CompletionSection[]; pct: number }) {
-  const ts = useTranslations("dashboard.student");
-
-  if (sections.length === 0) return null;
-
-  const allDone = pct >= 100;
-
-  return (
-    <div className="marketplace-card rounded-[14px] p-5">
-      <div className="mb-3 flex items-center justify-between gap-3">
-        <div className="flex items-center gap-2">
-          <span className={`flex size-8 shrink-0 items-center justify-center rounded-xl shadow-sm ${allDone ? "icon-chip-success" : "icon-chip-primary"}`}>
-            {allDone ? (
-              <Star aria-hidden weight="fill" className="size-4 text-white" />
-            ) : (
-              <UserCircleGear aria-hidden weight="duotone" className="size-4 text-white" />
-            )}
-          </span>
-          <h2 className="text-sm font-bold text-[var(--text-primary)]">
-            {allDone ? ts("completionCardDone") : ts("completionCardTitle")}
-          </h2>
-        </div>
-        <span className="shrink-0 text-xl font-extrabold tabular-nums text-[var(--brand-primary)]">
-          {pct}%
-        </span>
-      </div>
-
-      {/* Progress bar */}
-      <div className="mb-4 h-2 overflow-hidden rounded-full bg-[var(--surface-secondary)] ring-1 ring-[var(--border-default)]">
-        <div
-          className="h-full rounded-full bg-gradient-to-r from-[var(--brand-primary)] to-[var(--brand-teal)] transition-all duration-500"
-          style={{ width: `${pct}%` }}
-          role="progressbar"
-          aria-valuenow={pct}
-          aria-valuemin={0}
-          aria-valuemax={100}
-          aria-label={ts("completionCardTitle")}
-        />
-      </div>
-
-      {!allDone && (
-        <p className="mb-4 text-xs text-[var(--text-secondary)]">
-          {ts("completionCardSubtitle")}
-        </p>
-      )}
-
-      {/* Section checklist */}
-      <ul className="grid grid-cols-1 gap-1.5 sm:grid-cols-2">
-        {sections.map((s) => (
-          <li key={s.key}>
-            <Link
-              href={s.href}
-              className={cn(
-                "flex items-center gap-2.5 rounded-xl border px-3 py-2 text-xs font-medium outline-none transition-all hover:bg-[var(--surface-secondary)] focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)]/30",
-                s.done
-                  ? "border-[var(--brand-teal)]/30 bg-[var(--ai-accent-soft)] text-[var(--text-secondary)]"
-                  : "border-[var(--border-default)] bg-[var(--surface-card)] text-[var(--text-primary)] hover:border-[var(--brand-primary)]/30",
-              )}
-            >
-              {s.done ? (
-                <CheckCircle aria-hidden weight="fill" className="size-4 shrink-0 text-[var(--brand-teal)]" />
-              ) : (
-                <Circle aria-hidden weight="bold" className="size-4 shrink-0 text-[var(--text-muted)]" />
-              )}
-              <span className={s.done ? "line-through opacity-60" : ""}>
-                {ts(SECTION_LABEL_KEYS[s.key] ?? s.key)}
-              </span>
-              {!s.done && (
-                <span className="ml-auto shrink-0 text-[10px] font-bold text-[var(--brand-primary)]">
-                  +{s.weight}%
-                </span>
-              )}
-            </Link>
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
-}
-
 /** Honest rail title key by ranking source (never "recommended" for a fallback). */
 function rolesTitleKey(source: RecoSource): string {
   if (source === "recommended") return "recommendedRolesTitle";
   if (source === "popular") return "popularRolesTitle";
   return "recentRolesTitle";
-}
-
-function AiCareerSnapshotWidget() {
-  const t = useTranslations("dashboard.student");
-  const [enabled, setEnabled] = useState(false);
-
-  const query = useQuery({
-    queryKey: ["ai-career-snapshot"],
-    queryFn: () => profileApi.getAiCareerSnapshot(),
-    enabled,
-    staleTime: 10 * 60 * 1000,
-    retry: false,
-  });
-
-  return (
-    <div
-      className="rounded-[14px] border border-[var(--border-default)] bg-[var(--surface-card)] p-5 shadow-[0_6px_22px_rgba(11,34,57,0.06)]"
-      aria-label={t("aiSnapshotWidgetLabel")}
-    >
-      <div className="mb-3 flex items-center gap-2">
-        <span className="flex size-7 shrink-0 items-center justify-center rounded-xl bg-[var(--blue-50)] text-[var(--brand-primary)]">
-          <Compass aria-hidden weight="duotone" className="size-4" />
-        </span>
-        <span className="text-sm font-bold text-[var(--text-primary)]">
-          {t("aiSnapshotTitle")}
-        </span>
-      </div>
-
-      {!enabled && !query.data && (
-        <button
-          type="button"
-          onClick={() => setEnabled(true)}
-          className="inline-flex cursor-pointer items-center gap-1.5 rounded-xl border border-[var(--brand-primary)]/30 bg-[var(--surface-card)] px-4 py-2 text-sm font-semibold text-[var(--brand-primary)] transition-colors hover:bg-[var(--blue-50)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)]/40"
-        >
-          <Compass weight="bold" className="size-3.5" aria-hidden />
-          {t("aiSnapshotCta")}
-        </button>
-      )}
-
-      {enabled && query.isPending && (
-        <div className="flex items-center gap-2 text-sm text-[var(--text-muted)]">
-          <span
-            className="inline-block size-4 animate-spin rounded-full border-2 border-[var(--brand-primary)]/30 border-t-[var(--brand-primary)]"
-            aria-hidden
-          />
-          {t("aiSnapshotLoading")}
-        </div>
-      )}
-
-      {query.isError && (
-        <p className="text-sm text-[var(--text-muted)]">
-          {t("aiSnapshotError")}
-        </p>
-      )}
-
-      {query.data && (
-        <div className="space-y-2">
-          <p className="text-sm leading-relaxed text-[var(--text-primary)]">
-            {query.data.snapshot}
-          </p>
-          {query.data.is_fallback && (
-            <p className="flex items-center gap-1 text-[11px] text-[var(--text-muted)]">
-              <Warning
-                weight="bold"
-                className="size-3 shrink-0"
-                aria-hidden
-              />
-              {t("aiSnapshotFallbackNote")}
-            </p>
-          )}
-          <button
-            type="button"
-            onClick={() => {
-              void query.refetch();
-            }}
-            className="inline-flex cursor-pointer items-center gap-1 text-[11px] font-semibold text-[var(--brand-primary)] hover:underline focus-visible:outline-none"
-          >
-            <Compass weight="bold" className="size-3" aria-hidden />
-            {t("aiSnapshotRefresh")}
-          </button>
-        </div>
-      )}
-    </div>
-  );
 }
 
 export function StudentDashboard() {
@@ -325,14 +143,6 @@ export function StudentDashboard() {
               tone: "info",
             },
             {
-              key: "profile_completion_pct",
-              label: ts("metric.profileCompletion"),
-              value: data.metrics.profile_completion_pct,
-              icon: UserCircleGear,
-              percent: true,
-              tone: "success",
-            },
-            {
               key: "cv_count",
               label: ts("metric.cvCount"),
               value: data.metrics.cv_count,
@@ -351,13 +161,6 @@ export function StudentDashboard() {
           return (
             <div className="space-y-8">
               <MetricTiles items={metrics} />
-
-              <ProfileCompletionCard
-                sections={data.completion_sections ?? []}
-                pct={data.metrics.profile_completion_pct}
-              />
-
-              <AiCareerSnapshotWidget />
 
               <section aria-labelledby="student-next-actions">
                 <h2

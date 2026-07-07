@@ -48,9 +48,14 @@ function buildUrl(
   query?: RequestOptions["query"],
 ): string {
   const base = env.apiBaseUrl.replace(/\/$/, "");
-  const url = new URL(
-    path.startsWith("http") ? path : `${base}${path.startsWith("/") ? "" : "/"}${path}`,
-  );
+  // Resolve relative base URLs (e.g. "/api/v1" for the same-origin proxy) using
+  // the browser's own origin so new URL() doesn't throw on a bare path.
+  const origin =
+    typeof window !== "undefined" ? window.location.origin : "http://localhost:3000";
+  const absolute = path.startsWith("http")
+    ? path
+    : `${base}${path.startsWith("/") ? "" : "/"}${path}`;
+  const url = new URL(absolute.startsWith("/") ? `${origin}${absolute}` : absolute);
   if (query) {
     for (const [key, value] of Object.entries(query)) {
       if (value !== undefined && value !== null) {

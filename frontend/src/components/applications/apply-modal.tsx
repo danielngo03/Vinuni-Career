@@ -29,8 +29,6 @@ import {
   cvApi,
   newIdempotencyKey,
   type JobFitResult,
-  type ScreeningAnswers,
-  type ScreeningQuestion,
 } from "@/lib/api";
 import { useApiErrorMessage } from "@/lib/auth/use-api-error";
 import { formatDateTime } from "@/lib/format";
@@ -44,13 +42,18 @@ export function ApplyModal({
   onClose,
   jobId,
   jobTitle,
-  screeningQuestions = [],
+  cvLanguageRequired,
 }: {
   open: boolean;
   onClose: () => void;
   jobId: string;
   jobTitle: string;
-  screeningQuestions?: ScreeningQuestion[];
+  /**
+   * CV language preference from the job posting. When "en" or "vi", the modal
+   * shows a soft warning if the selected CV is in a different language.
+   * Undefined / "any" = no warning shown.
+   */
+  cvLanguageRequired?: "any" | "en" | "vi";
 }) {
   const t = useTranslations("apply");
   const tc = useTranslations("common");
@@ -69,8 +72,6 @@ export function ApplyModal({
   const [coverLetterAiLoading, setCoverLetterAiLoading] = useState(false);
   const [coverLetterAiFallback, setCoverLetterAiFallback] = useState(false);
   const [anonymous, setAnonymous] = useState(false);
-  const [answers, setAnswers] = useState<Record<string, string | string[]>>({});
-  const [answerErrors, setAnswerErrors] = useState<Record<string, boolean>>({});
   const [idempotencyKey, setIdempotencyKey] = useState("");
 
   // Fresh idempotency key + clean form each time the modal opens.
@@ -81,8 +82,6 @@ export function ApplyModal({
       setCoverLetter("");
       setCoverLetterAiFallback(false);
       setAnonymous(false);
-      setAnswers({});
-      setAnswerErrors({});
     }
   }, [open]);
 
@@ -93,7 +92,13 @@ export function ApplyModal({
     retry: false,
   });
 
-  const cvs = useMemo(() => cvList.data?.data ?? [], [cvList.data]);
+  // Only library (`ready`) CVs can be used to apply — drafts are unlimited
+  // scratch and are never selectable here (backend rejects applying with a
+  // non-`ready` CV; we filter client-side so the picker never offers one).
+  const cvs = useMemo(
+    () => (cvList.data?.data ?? []).filter((c) => c.status === "ready"),
+    [cvList.data],
+  );
 
   // CV-to-job fit (owner-scoped). Drives ordering, per-option score, and the
   // recommended default. Read-only enrichment — never blocks applying.
@@ -124,14 +129,13 @@ export function ApplyModal({
   // slow/failed fit call never blocks the apply form's CV default).
   const fitReady = !isStudent || fit.isFetched || fit.isError;
 
-  // Default-select the recommended CV, else primary, else first — once ready.
+  // Default-select the recommended CV, else the first available CV — once ready.
   useEffect(() => {
     if (cvId || cvs.length === 0 || !fitReady) return;
     const recommended = recommendedId
       ? cvs.find((c) => c.id === recommendedId)
       : undefined;
-    const primary = cvs.find((c) => c.is_primary);
-    setCvId((recommended ?? primary ?? cvs[0]!).id);
+    setCvId((recommended ?? cvs[0]!).id);
   }, [cvs, cvId, fitReady, recommendedId]);
 
   const cvDetail = useQuery({
@@ -151,23 +155,6 @@ export function ApplyModal({
 
   const versions = useMemo(() => detail?.versions ?? [], [detail]);
 
-  function setAnswer(qid: string, value: string | string[]) {
-    setAnswers((prev) => ({ ...prev, [qid]: value }));
-    setAnswerErrors((prev) => ({ ...prev, [qid]: false }));
-  }
-
-  function validateRequired(): boolean {
-    const errs: Record<string, boolean> = {};
-    for (const q of screeningQuestions) {
-      if (!q.is_required) continue;
-      const v = answers[q.id];
-      const empty = Array.isArray(v) ? v.length === 0 : !v || !v.trim();
-      if (empty) errs[q.id] = true;
-    }
-    setAnswerErrors(errs);
-    return Object.keys(errs).length === 0;
-  }
-
   async function generateCoverLetterDraft() {
     setCoverLetterAiLoading(true);
     try {
@@ -183,17 +170,8 @@ export function ApplyModal({
 
   async function handleSubmit() {
     if (!versionId) return;
-    if (!validateRequired()) {
-      toast.show({ tone: "error", title: t("answersRequired") });
-      return;
-    }
     setPhase("submitting");
     try {
-      const screening_answers = Object.fromEntries(
-        Object.entries(answers).filter(([, v]) =>
-          Array.isArray(v) ? v.length > 0 : !!v && v.trim(),
-        ),
-      ) as ScreeningAnswers;
       await applicationsApi.apply({
         job_id: jobId,
         cv_selection: {
@@ -202,7 +180,6 @@ export function ApplyModal({
           cv_version_id: versionId,
         },
         cover_letter: coverLetter.trim() || null,
-        screening_answers,
         is_anonymous: anonymous,
         idempotency_key: idempotencyKey,
       });
@@ -342,8 +319,8 @@ export function ApplyModal({
         <EmptyState
           kind="empty"
           icon={FileText}
-          title={t("noCvTitle")}
-          description={t("noCvBody")}
+          title={t("noReadyCvTitle")}
+          description={t("noReadyCvBody")}
           action={
             <Link href="/student/cv" onClick={onClose}>
               <Button variant="primary">{t("goToCvStudio")}</Button>
@@ -361,15 +338,22 @@ export function ApplyModal({
               onChange={(e) => setCvId(e.target.value)}
               options={orderedCvs.map((c) => {
                 const f = fitByCv.get(c.id);
-                const parts = [c.title];
+                const langLabel = c.language
+                  ? ` [${c.language.toUpperCase()}]`
+                  : "";
+                const parts = [c.title + langLabel];
                 if (f) parts.push(tFit("applyScoreLabel", { score: f.score }));
                 if (recommendedId === c.id) parts.push(tFit("recommendedTag"));
-                else if (c.is_primary) parts.push(t("primary"));
                 return { value: c.id, label: parts.join(" · ") };
               })}
               help={t("cvHelp")}
             />
             <SelectedCvFit fit={fitByCv.get(cvId)} />
+            <CvLanguageMismatchWarning
+              cvLanguageRequired={cvLanguageRequired}
+              selectedCvLanguage={orderedCvs.find((c) => c.id === cvId)?.language}
+              locale={locale}
+            />
           </div>
 
           {/* Version selection */}
@@ -441,26 +425,6 @@ export function ApplyModal({
             )}
           </div>
 
-          {/* Screening questions (rendered when the job exposes them) */}
-          {screeningQuestions.length > 0 && (
-            <fieldset className="space-y-4">
-              <legend className="text-sm font-semibold text-[var(--text-primary)]">
-                {t("screeningTitle")}
-              </legend>
-              {screeningQuestions.map((q) => (
-                <ScreeningField
-                  key={q.id}
-                  question={q}
-                  value={answers[q.id]}
-                  invalid={!!answerErrors[q.id]}
-                  requiredLabel={t("requiredMark")}
-                  errorLabel={t("answerRequired")}
-                  onChange={(v) => setAnswer(q.id, v)}
-                />
-              ))}
-            </fieldset>
-          )}
-
           {/* Anonymous toggle */}
           <div className="rounded-xl border border-[var(--glass-border)] bg-[var(--glass-surface-light)] p-3.5 backdrop-blur-sm">
             <Switch
@@ -489,117 +453,57 @@ export function ApplyModal({
   );
 }
 
-function ScreeningField({
-  question,
-  value,
-  invalid,
-  requiredLabel,
-  errorLabel,
-  onChange,
+/**
+ * Soft language-mismatch warning. Renders only when the job has a specific CV
+ * language preference ("en" or "vi") and the selected CV is in a different
+ * language. This is advisory only — never blocks applying.
+ */
+function CvLanguageMismatchWarning({
+  cvLanguageRequired,
+  selectedCvLanguage,
+  locale,
 }: {
-  question: ScreeningQuestion;
-  value: string | string[] | undefined;
-  invalid: boolean;
-  requiredLabel: string;
-  errorLabel: string;
-  onChange: (value: string | string[]) => void;
+  cvLanguageRequired?: "any" | "en" | "vi";
+  selectedCvLanguage?: string | null;
+  locale: string;
 }) {
-  const t = useTranslations("apply");
-  const fieldId = `screening-${question.id}`;
-  const label = (
-    <span className="mb-1.5 block text-sm font-medium text-[var(--text-primary)]">
-      {question.question}
-      {question.is_required && (
-        <span className="ml-0.5 text-[var(--brand-red)]" aria-hidden>
-          {requiredLabel}
-        </span>
-      )}
-    </span>
-  );
-
-  const errorNode = invalid ? (
-    <p className="mt-1 text-xs font-medium text-[var(--brand-red)]">
-      {errorLabel}
-    </p>
-  ) : null;
-
-  if (question.q_type === "yes_no") {
-    const opts = ["yes", "no"];
-    return (
-      <div role="radiogroup" aria-labelledby={`${fieldId}-label`}>
-        <span id={`${fieldId}-label`}>{label}</span>
-        <div className="flex gap-4">
-          {opts.map((opt) => (
-            <label key={opt} className="flex items-center gap-2 text-sm">
-              <input
-                type="radio"
-                name={fieldId}
-                checked={value === opt}
-                onChange={() => onChange(opt)}
-                className="size-4 accent-[var(--brand-primary)]"
-              />
-              {opt === "yes" ? t("yes") : t("no")}
-            </label>
-          ))}
-        </div>
-        {errorNode}
-      </div>
-    );
-  }
-
   if (
-    (question.q_type === "single_choice" ||
-      question.q_type === "multiple_choice") &&
-    question.options
-  ) {
-    const multi = question.q_type === "multiple_choice";
-    const selected = Array.isArray(value) ? value : value ? [value] : [];
-    return (
-      <fieldset>
-        <legend>{label}</legend>
-        <div className="space-y-1.5">
-          {question.options.map((opt) => (
-            <label key={opt} className="flex items-center gap-2 text-sm">
-              <input
-                type={multi ? "checkbox" : "radio"}
-                name={fieldId}
-                checked={selected.includes(opt)}
-                onChange={() => {
-                  if (multi) {
-                    onChange(
-                      selected.includes(opt)
-                        ? selected.filter((s) => s !== opt)
-                        : [...selected, opt],
-                    );
-                  } else {
-                    onChange(opt);
-                  }
-                }}
-                className="size-4 accent-[var(--brand-primary)]"
-              />
-              {opt}
-            </label>
-          ))}
-        </div>
-        {errorNode}
-      </fieldset>
-    );
-  }
+    !cvLanguageRequired ||
+    cvLanguageRequired === "any" ||
+    !selectedCvLanguage
+  )
+    return null;
 
-  // Default: free text
+  const required = cvLanguageRequired.toLowerCase();
+  const selected = selectedCvLanguage.toLowerCase();
+  if (required === selected) return null;
+
+  const isVi = locale === "vi";
+  const langName = (code: string) =>
+    code === "en"
+      ? isVi
+        ? "Tiếng Anh"
+        : "English"
+      : isVi
+        ? "Tiếng Việt"
+        : "Vietnamese";
+
+  const message = isVi
+    ? `Vị trí này ưu tiên CV bằng ${langName(required)} — CV bạn chọn đang ở ${langName(selected)}.`
+    : `This position prefers CVs in ${langName(required)} — your selected CV is in ${langName(selected)}.`;
+
   return (
-    <div>
-      <label htmlFor={fieldId}>{label}</label>
-      <input
-        id={fieldId}
-        type="text"
-        value={typeof value === "string" ? value : ""}
-        onChange={(e) => onChange(e.target.value)}
-        aria-invalid={invalid || undefined}
-        className="w-full rounded-xl border border-[var(--glass-border)] bg-[var(--glass-surface)] backdrop-blur-sm px-3.5 py-2.5 text-sm text-[var(--text-primary)] outline-none transition-colors placeholder:text-[var(--text-muted)] focus:border-[var(--brand-primary)]/50 focus:bg-[var(--glass-surface-heavy)] focus:ring-2 focus:ring-[var(--brand-primary)]/30"
+    <p
+      role="status"
+      className="mt-2 flex items-start gap-1.5 text-xs leading-relaxed text-amber-600 dark:text-amber-400"
+    >
+      <Warning
+        aria-hidden
+        weight="duotone"
+        className="mt-0.5 size-3.5 shrink-0"
       />
-      {errorNode}
-    </div>
+      {message}
+    </p>
   );
 }
 

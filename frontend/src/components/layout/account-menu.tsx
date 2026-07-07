@@ -3,10 +3,21 @@
 import { useEffect, useRef, useState } from "react";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
-import { ChevronDown, CreditCard, LogOut, Settings } from "lucide-react";
+import {
+  ChevronDown,
+  ClipboardList,
+  CreditCard,
+  LayoutGrid,
+  LifeBuoy,
+  LogOut,
+  MailOpen,
+  Settings,
+  UserRound,
+} from "lucide-react";
 import { Link, useRouter, usePathname } from "@/i18n/navigation";
 import { useAuthStore } from "@/stores/auth-store";
 import { cn } from "@/lib/utils";
+import { FeedbackModal } from "./feedback-modal";
 
 /**
  * Authenticated account dropdown for the marketplace-style header (student
@@ -21,19 +32,36 @@ import { cn } from "@/lib/utils";
 export function AccountMenu({
   settingsHref,
   billingHref,
+  dashboardHref,
+  profileHref,
+  applicationsHref,
+  invitationsHref,
+  showFeedback = false,
   showName = false,
 }: {
   settingsHref: string;
   billingHref?: string;
+  /** When set, an "Overview / Tổng quan" shortcut is shown at the top. */
+  dashboardHref?: string;
+  /** When set, a "Profile / Hồ sơ" shortcut is shown. */
+  profileHref?: string;
+  /** When set, an "Applications / Đơn ứng tuyển" shortcut is shown. */
+  applicationsHref?: string;
+  /** When set, an "Invitations / Lời mời ứng tuyển" shortcut is shown. */
+  invitationsHref?: string;
+  /** When true, a "Feedback & support" item opens the feedback modal. */
+  showFeedback?: boolean;
   /** Workspace topbar form: avatar + name + caret in a quiet pill. */
   showName?: boolean;
 }) {
   const tNav = useTranslations("nav");
+  const tRail = useTranslations("rail");
   const user = useAuthStore((s) => s.user);
   const signOut = useAuthStore((s) => s.signOut);
   const router = useRouter();
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
+  const [feedbackOpen, setFeedbackOpen] = useState(false);
   const rootRef = useRef<HTMLDivElement>(null);
   const triggerRef = useRef<HTMLButtonElement>(null);
 
@@ -137,6 +165,70 @@ export function AccountMenu({
 
           <div className="my-1 border-t border-[var(--border-subtle)]" />
 
+          {dashboardHref && (
+            <Link
+              href={dashboardHref}
+              role="menuitem"
+              onClick={() => setOpen(false)}
+              className={cn(
+                "flex items-center gap-2.5 rounded-lg px-3 py-2 text-sm font-medium text-[var(--text-secondary)] outline-none transition-colors",
+                "hover:bg-[var(--bg-subtle)] hover:text-[var(--text-primary)] focus-visible:bg-[var(--bg-subtle)] focus-visible:text-[var(--text-primary)]",
+              )}
+            >
+              <LayoutGrid aria-hidden strokeWidth={1.8} className="size-[18px] shrink-0" />
+              {tNav("dashboard")}
+            </Link>
+          )}
+
+          {profileHref && (
+            <Link
+              href={profileHref}
+              role="menuitem"
+              onClick={() => setOpen(false)}
+              className={cn(
+                "flex items-center gap-2.5 rounded-lg px-3 py-2 text-sm font-medium text-[var(--text-secondary)] outline-none transition-colors",
+                "hover:bg-[var(--bg-subtle)] hover:text-[var(--text-primary)] focus-visible:bg-[var(--bg-subtle)] focus-visible:text-[var(--text-primary)]",
+              )}
+            >
+              <UserRound aria-hidden strokeWidth={1.8} className="size-[18px] shrink-0" />
+              {tNav("profile")}
+            </Link>
+          )}
+
+          {applicationsHref && (
+            <Link
+              href={applicationsHref}
+              role="menuitem"
+              onClick={() => setOpen(false)}
+              className={cn(
+                "flex items-center gap-2.5 rounded-lg px-3 py-2 text-sm font-medium text-[var(--text-secondary)] outline-none transition-colors",
+                "hover:bg-[var(--bg-subtle)] hover:text-[var(--text-primary)] focus-visible:bg-[var(--bg-subtle)] focus-visible:text-[var(--text-primary)]",
+              )}
+            >
+              <ClipboardList aria-hidden strokeWidth={1.8} className="size-[18px] shrink-0" />
+              {tNav("applications")}
+            </Link>
+          )}
+
+          {invitationsHref && (
+            <Link
+              href={invitationsHref}
+              role="menuitem"
+              onClick={() => setOpen(false)}
+              className={cn(
+                "flex items-center gap-2.5 rounded-lg px-3 py-2 text-sm font-medium text-[var(--text-secondary)] outline-none transition-colors",
+                "hover:bg-[var(--bg-subtle)] hover:text-[var(--text-primary)] focus-visible:bg-[var(--bg-subtle)] focus-visible:text-[var(--text-primary)]",
+              )}
+            >
+              <MailOpen aria-hidden strokeWidth={1.8} className="size-[18px] shrink-0" />
+              {tNav("invitations")}
+            </Link>
+          )}
+
+          {(dashboardHref || profileHref || applicationsHref || invitationsHref) && (
+            <div className="my-1 border-t border-[var(--border-subtle)]" />
+          )}
+
           {billingHref && (
             <Link
               href={billingHref}
@@ -165,6 +257,24 @@ export function AccountMenu({
             {tNav("settings")}
           </Link>
 
+          {showFeedback && (
+            <button
+              type="button"
+              role="menuitem"
+              onClick={() => {
+                setOpen(false);
+                setFeedbackOpen(true);
+              }}
+              className={cn(
+                "flex w-full items-center gap-2.5 rounded-lg px-3 py-2 text-left text-sm font-medium text-[var(--text-secondary)] outline-none transition-colors",
+                "hover:bg-[var(--bg-subtle)] hover:text-[var(--text-primary)] focus-visible:bg-[var(--bg-subtle)] focus-visible:text-[var(--text-primary)]",
+              )}
+            >
+              <LifeBuoy aria-hidden strokeWidth={1.8} className="size-[18px] shrink-0" />
+              {tRail("feedbackLabel")}
+            </button>
+          )}
+
           <button
             type="button"
             role="menuitem"
@@ -178,6 +288,10 @@ export function AccountMenu({
             {tNav("logout")}
           </button>
         </div>
+      )}
+
+      {showFeedback && (
+        <FeedbackModal open={feedbackOpen} onClose={() => setFeedbackOpen(false)} />
       )}
     </div>
   );

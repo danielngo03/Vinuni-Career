@@ -39,6 +39,14 @@ export const REMODERATION_FORM_FIELDS = new Set<string>([
   "salary_min",
   "salary_max",
   "salary_currency",
+  // Structured salary/experience/eligibility fields added in F2
+  "salary_mode",
+  "salary_period",
+  "salary_gross_net",
+  "experience_mode",
+  "seniority_level",
+  "candidate_requirements",
+  "industry_id",
 ]);
 
 export function isFreeAmendField(field: string): boolean {

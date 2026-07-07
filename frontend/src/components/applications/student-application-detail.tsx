@@ -172,7 +172,6 @@ export function StudentApplicationDetail({ id }: { id: string }) {
   const canWithdraw =
     app.can_withdraw ?? (app.status === "submitted" || app.status === "under_review");
   const reveal = app.reveal_request;
-  const screeningEntries = Object.entries(app.screening_answers ?? {});
 
   return (
     <>
@@ -350,29 +349,6 @@ export function StudentApplicationDetail({ id }: { id: string }) {
           <p className="whitespace-pre-wrap rounded-2xl border border-[var(--glass-border)] bg-[var(--glass-surface)] backdrop-blur-md p-4 text-sm leading-relaxed text-[var(--text-secondary)]">
             {app.cover_letter}
           </p>
-        </section>
-      )}
-
-      {screeningEntries.length > 0 && (
-        <section className="mt-6">
-          <h2 className="mb-2 text-lg font-bold tracking-tight text-[var(--text-primary)]">
-            {t("yourAnswers")}
-          </h2>
-          <dl className="space-y-2">
-            {screeningEntries.map(([key, value]) => (
-              <div
-                key={key}
-                className="rounded-xl border border-[var(--glass-border)] bg-[var(--glass-surface)] backdrop-blur-md p-3"
-              >
-                <dt className="text-xs font-medium text-[var(--text-muted)]">
-                  {key}
-                </dt>
-                <dd className="mt-0.5 text-sm text-[var(--text-primary)]">
-                  {Array.isArray(value) ? value.join(", ") : value}
-                </dd>
-              </div>
-            ))}
-          </dl>
         </section>
       )}
 

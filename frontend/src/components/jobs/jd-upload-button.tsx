@@ -5,17 +5,30 @@ import { useTranslations } from "next-intl";
 import { useMutation } from "@tanstack/react-query";
 import { FilePdf, ArrowsClockwise } from "@phosphor-icons/react";
 import { useToast } from "@/components/ui";
-import { jobsApi, type JdUploadResult } from "@/lib/api";
+import { jobsApi, ApiError, type JdUploadResult } from "@/lib/api";
+import { cn } from "@/lib/utils";
 
 interface Props {
   onExtracted: (result: JdUploadResult) => void;
   disabled?: boolean;
+  label?: string;
+  showFileName?: boolean;
+  className?: string;
 }
 
-const ACCEPT = ".pdf,.docx,.txt,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document,text/plain";
+const ACCEPT = ".pdf,.docx,.txt,.png,.jpg,.jpeg,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document,text/plain,image/png,image/jpeg";
 
-export function JdUploadButton({ onExtracted, disabled }: Props) {
+const JD_REJECT_REASONS = new Set(["not_a_jd", "blank", "low_quality_scan", "insufficient"]);
+
+export function JdUploadButton({
+  onExtracted,
+  disabled,
+  label,
+  showFileName = true,
+  className,
+}: Props) {
   const t = useTranslations("jobs");
+  const tf = useTranslations("jobs.form");
   const toast = useToast();
   const inputRef = useRef<HTMLInputElement>(null);
   const [fileName, setFileName] = useState<string | null>(null);
@@ -23,14 +36,30 @@ export function JdUploadButton({ onExtracted, disabled }: Props) {
   const mutation = useMutation({
     mutationFn: (file: File) => jobsApi.uploadJd(file),
     onSuccess: (result) => {
-      onExtracted(result);
-      if (result.is_ai_extraction) {
-        toast.show({ tone: "success", title: t("jdUploadSuccess") });
-      } else {
+      // Show fallback toast here (AI unavailable path); the success/filled toast
+      // is shown inside handleJdExtracted so it fires after fields are populated.
+      if (!result.is_ai_extraction) {
         toast.show({ tone: "info", title: t("jdUploadFallback") });
       }
+      onExtracted(result);
     },
-    onError: () => {
+    onError: (error) => {
+      if (error instanceof ApiError) {
+        const reason =
+          typeof error.details?.reason === "string" ? error.details.reason : undefined;
+        if (reason && JD_REJECT_REASONS.has(reason)) {
+          const keyMap: Record<string, string> = {
+            not_a_jd: "uploadJdRejected.notAJd",
+            blank: "uploadJdRejected.blank",
+            low_quality_scan: "uploadJdRejected.lowQuality",
+            insufficient: "uploadJdRejected.insufficient",
+          };
+          const key = keyMap[reason] ?? "uploadJdError";
+          toast.show({ tone: "error", title: tf(key as Parameters<typeof tf>[0]) });
+          setFileName(null);
+          return;
+        }
+      }
       toast.show({ tone: "error", title: t("jdUploadError") });
       setFileName(null);
     },
@@ -53,22 +82,25 @@ export function JdUploadButton({ onExtracted, disabled }: Props) {
         accept={ACCEPT}
         onChange={handleFile}
         className="sr-only"
-        aria-label={t("jdUploadLabel")}
+        aria-label={tf("uploadJdLabel")}
       />
       <button
         type="button"
         disabled={disabled || mutation.isPending}
         onClick={() => inputRef.current?.click()}
-        className="flex items-center gap-1.5 rounded-xl border border-teal-500/30 bg-white px-3 py-2 text-sm font-semibold text-teal-700 shadow-sm transition-colors hover:bg-teal-50/60 disabled:opacity-50"
+        className={cn(
+          "inline-flex items-center gap-2 rounded-full border border-[var(--border-default)] bg-white px-4 py-2.5 text-sm font-semibold text-[var(--text-primary)] transition-colors hover:bg-[var(--bg-subtle)] disabled:opacity-50",
+          className,
+        )}
       >
         {mutation.isPending ? (
           <ArrowsClockwise aria-hidden weight="bold" className="size-4 animate-spin" />
         ) : (
           <FilePdf aria-hidden weight="duotone" className="size-4" />
         )}
-        {mutation.isPending ? t("jdUploadExtracting") : t("jdUploadCta")}
+        {mutation.isPending ? tf("uploadJdExtracting") : (label ?? tf("uploadJdCta"))}
       </button>
-      {fileName && !mutation.isPending && (
+      {showFileName && fileName && !mutation.isPending && (
         <span className="max-w-[160px] truncate text-xs text-[var(--text-muted)]">
           {fileName}
         </span>

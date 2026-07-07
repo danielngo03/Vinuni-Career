@@ -50,6 +50,8 @@
     "filterModeLabel": "Hình thức làm việc",
     "postedFilterLabel": "Thời gian đăng",
     "salaryFilterLabel": "Mức lương",
+    "salaryNoLimit": "Không giới hạn",
+    "salaryMillion": "{value} triệu",
     "experienceFilterLabel": "Kinh nghiệm",
     "filterAllTypes": "Tất cả loại hình",
     "filterAllModes": "Tất cả hình thức",
@@ -86,7 +88,28 @@
     "advancedFilters": "Lọc nâng cao",
     "clearFilters": "Xóa lọc",
     "resultCount": "{count, plural, =0 {Không có việc làm} other {# việc làm}}",
-    "resultHelper": "Chọn một tin để xem nhanh chi tiết ở bên phải.",
+    "resultHelper": "Chọn một tin để xem chi tiết công việc.",
+    "detailTitle": "Chi tiết việc làm",
+    "reportJob": "Báo cáo tin",
+    "aiSummaryTitle": "Tóm tắt bởi AI",
+    "seeMore": "Xem thêm",
+    "seeLess": "Thu gọn",
+    "viewFullDetail": "Xem chi tiết",
+    "applicantsLabel": "Ứng viên",
+    "applicantsCount": "{count, plural, other {# hồ sơ}}",
+    "companyDetailsTitle": "Thông tin công ty",
+    "skillsTitle": "Kỹ năng",
+    "filtersTitle": "Bộ lọc",
+    "openFilters": "Bộ lọc",
+    "activeFilters": "{count} bộ lọc",
+    "fitScoreShort": "{score}% phù hợp",
+    "fitNoCvShort": "Thêm CV để chấm điểm",
+    "fitCvPrefix": "CV",
+    "fitCvScoresTitle": "Điểm theo CV",
+    "fitRecommended": "Khuyến nghị",
+    "fitGapCount": "{count, plural, other {# điểm cần cải thiện}}",
+    "fitLowSignal": "Tin đăng còn ít dữ liệu",
+    "fitStaleCv": "CV cần cập nhật",
     "featuredMetric": "{count} nổi bật",
     "remoteMetric": "{count} từ xa/kết hợp",
     "sortLabel": "Sắp xếp",
@@ -373,6 +396,13 @@
       "hiddenInvitationOnly": "Tin này chỉ hiển thị qua lời mời — nhóm người dùng này sẽ không thấy tin trong khám phá hay qua liên kết trực tiếp.",
       "hiddenVisibilityTier": "Phạm vi hiển thị của tin này đang ẩn tin khỏi nhóm người dùng này."
     },
+    "locationType": {
+      "onsite": "Tại văn phòng",
+      "remote": "Từ xa",
+      "hybrid": "Kết hợp"
+    },
+    "addLocation": "Thêm địa điểm",
+    "locationProvincePlaceholder": "Chọn tỉnh/thành",
     "enums": {
       "status": {
         "draft": "Bản nháp",
@@ -456,13 +486,20 @@
       "optionsHelp": "Phân tách các lựa chọn bằng dấu phẩy.",
       "addQuestion": "Thêm câu hỏi",
       "uploadJdTitle": "Tải lên mô tả công việc",
-      "uploadJdHint": "Tải lên PDF/DOCX để tự động điền form (OCR + AI).",
+      "uploadJdHint": "Tải lên PDF, DOCX hoặc ảnh để tự động điền form (OCR + AI).",
       "uploadJdCta": "Chọn tệp",
       "uploadJdExtracting": "Đang phân tích...",
       "uploadJdSuccess": "Đã điền thông tin từ tệp.",
+      "uploadJdFilled": "Đã điền form từ tài liệu — hãy kiểm tra các mục được đánh dấu trước khi gửi.",
       "uploadJdFallback": "AI không khả dụng — xem nội dung thô để điền thủ công.",
       "uploadJdError": "Không thể xử lý tệp. Vui lòng thử định dạng khác.",
-      "uploadJdLabel": "Tải lên mô tả công việc (PDF/DOCX/TXT)",
+      "uploadJdLabel": "Tải lên mô tả công việc (PDF, DOCX hoặc ảnh)",
+      "uploadJdRejected": {
+        "notAJd": "Tệp này không phải mô tả công việc. Vui lòng tải lên JD hợp lệ.",
+        "blank": "Tệp tải lên có vẻ trống hoặc không đọc được. Vui lòng thử tệp khác.",
+        "lowQuality": "Chất lượng scan quá thấp để trích xuất nội dung. Hãy thử ảnh có độ phân giải cao hơn.",
+        "insufficient": "Tệp không chứa đủ thông tin để điền form. Vui lòng bổ sung thêm nội dung."
+      },
       "amendment": {
         "bannerTitle": "Tin này đang được đăng công khai",
         "bannerBody": "Các trường áp dụng ngay (số lượng tuyển, hạn nộp, phạm vi hiển thị, quyền lợi) sẽ có hiệu lực ngay lập tức. Thay đổi nội dung khác sẽ gỡ tin và gửi lại cho trường duyệt.",
@@ -490,9 +527,167 @@
           "salary_is_disclosed": "Hiển thị lương",
           "salary_min": "Lương từ",
           "salary_max": "Lương đến",
-          "salary_currency": "Đơn vị tiền tệ"
+          "salary_currency": "Đơn vị tiền tệ",
+          "salary_mode": "Kiểu lương",
+          "salary_period": "Chu kỳ trả lương",
+          "salary_gross_net": "Lương gộp/thuần",
+          "experience_mode": "Yêu cầu kinh nghiệm",
+          "seniority_level": "Cấp độ kinh nghiệm",
+          "candidate_requirements": "Yêu cầu ứng viên",
+          "industry_id": "Ngành nghề"
         }
-      }
+      },
+      "tabs": {
+        "basics": "Thông tin cơ bản",
+        "basicsDesc": "Tiêu đề, loại hình, địa điểm, mô tả, yêu cầu và quyền lợi của vị trí.",
+        "role": "Vị trí & yêu cầu",
+        "roleDesc": "Kỹ năng, kinh nghiệm, bằng cấp và ngữ cảnh chuyên môn của vị trí.",
+        "comp": "Lương thưởng",
+        "compDesc": "Mức lương, số lượng tuyển, hạn nộp và phạm vi hiển thị.",
+        "eligibility": "Điều kiện ứng viên",
+        "screening": "Câu hỏi sàng lọc",
+        "review": "Xem lại"
+      },
+      "salaryMode": "Kiểu lương",
+      "salaryModeOpts": {
+        "negotiable": "Thỏa thuận",
+        "range": "Khoảng",
+        "from": "Từ",
+        "to": "Đến",
+        "fixed": "Cố định",
+        "hidden": "Ẩn"
+      },
+      "salaryPeriod": "Chu kỳ trả lương",
+      "salaryPeriodOpts": {
+        "monthly": "Hàng tháng",
+        "yearly": "Hàng năm"
+      },
+      "salaryGrossNet": "Gộp / Thuần",
+      "salaryGrossNetOpts": {
+        "unspecified": "Không xác định",
+        "gross": "Gộp (Gross)",
+        "net": "Thuần (Net)"
+      },
+      "salaryAmountLabel": "Số tiền",
+      "salaryFromLabel": "Từ (tối thiểu)",
+      "salaryToLabel": "Đến (tối đa)",
+      "salaryFixedLabel": "Số tiền",
+      "salaryHiddenHelp": "Ẩn với ứng viên — lưu để tham khảo nội bộ.",
+      "experienceMode": "Yêu cầu kinh nghiệm",
+      "experienceModeOpts": {
+        "no_requirement": "Không yêu cầu",
+        "fresher": "Fresher (chưa có kinh nghiệm)",
+        "min": "Tối thiểu",
+        "max": "Tối đa",
+        "range": "Khoảng"
+      },
+      "seniority": "Cấp độ",
+      "seniorityOpts": {
+        "not_required": "Không xác định",
+        "intern": "Thực tập sinh",
+        "fresher": "Fresher",
+        "junior": "Junior",
+        "middle": "Middle",
+        "senior": "Senior",
+        "lead": "Trưởng nhóm",
+        "manager": "Quản lý",
+        "director": "Giám đốc",
+        "executive": "C-level"
+      },
+      "industryNote": "Gợi ý ngành nghề được nhận dạng",
+      "industry": "Ngành nghề",
+      "industryPlaceholder": "Chọn ngành nghề",
+      "industrySearchPlaceholder": "Tìm ngành nghề…",
+      "industryEmpty": "Không tìm thấy ngành phù hợp",
+      "industryLoading": "Đang tải…",
+      "industryHelp": "AI có thể tự chọn từ JD; bạn có thể chỉnh lại",
+      "eligibility": {
+        "legend": "Điều kiện ứng viên",
+        "help": "Để tất cả là \"Không yêu cầu\" nếu không có hạn chế (mặc định).",
+        "panels": {
+          "profile": "Thông tin nhân thân & học vấn",
+          "credentials": "Ngoại ngữ & chứng chỉ"
+        },
+        "gender": "Giới tính",
+        "ageLabel": "Độ tuổi",
+        "marital": "Tình trạng hôn nhân",
+        "nationality": "Quốc tịch",
+        "education": "Trình độ học vấn",
+        "languages": "Yêu cầu ngoại ngữ",
+        "certifications": "Chứng chỉ",
+        "note": "Ghi chú thêm về điều kiện",
+        "notePlaceholder": "Các điều kiện ứng viên bổ sung…",
+        "mode": {
+          "notRequired": "Không yêu cầu",
+          "required": "Bắt buộc",
+          "preferred": "Ưu tiên"
+        },
+        "genderPresets": {
+          "male": "Nam",
+          "female": "Nữ",
+          "other": "Khác"
+        },
+        "maritalPresets": {
+          "single": "Độc thân",
+          "married": "Đã kết hôn",
+          "other": "Khác"
+        },
+        "age": {
+          "notRequired": "Không yêu cầu",
+          "atLeast": "Ít nhất",
+          "upTo": "Không quá",
+          "range": "Khoảng",
+          "minLabel": "Tuổi tối thiểu",
+          "maxLabel": "Tuổi tối đa"
+        },
+        "language": {
+          "language": "Ngôn ngữ",
+          "proficiency": "Trình độ (tùy chọn)",
+          "required": "Bắt buộc",
+          "addRow": "Thêm ngôn ngữ"
+        },
+        "certification": {
+          "name": "Tên chứng chỉ",
+          "required": "Bắt buộc",
+          "addRow": "Thêm chứng chỉ"
+        },
+        "cvLanguageRequired": "Ngôn ngữ CV yêu cầu",
+        "cvLanguageRequiredHelp": "Ứng viên vẫn có thể nộp CV ở bất kỳ ngôn ngữ nào, nhưng sẽ thấy cảnh báo nhẹ nếu không khớp.",
+        "cvLang": {
+          "any": "Không yêu cầu",
+          "en": "Tiếng Anh",
+          "vi": "Tiếng Việt"
+        }
+      },
+      "provenance": {
+        "filled": "Đã điền tự động",
+        "review": "Cần kiểm tra",
+        "eligibilityReview": "AI đã điền — hãy kiểm tra"
+      },
+      "review": {
+        "title": "Xem lại & gửi",
+        "subtitle": "Kiểm tra các thông tin chính trước khi gửi.",
+        "fieldTitle": "Tên vị trí",
+        "fieldType": "Loại hình",
+        "fieldLocations": "Địa điểm",
+        "fieldSalary": "Mức lương",
+        "fieldExperience": "Kinh nghiệm",
+        "fieldHeadcount": "Số lượng",
+        "fieldDeadline": "Hạn nộp",
+        "fieldVisibility": "Phạm vi hiển thị",
+        "salaryNegotiable": "Thỏa thuận",
+        "salaryHidden": "Không công khai",
+        "salaryNoDeadline": "Không có hạn",
+        "qualityTitle": "Kiểm tra nội dung",
+        "noIssues": "Nội dung đạt tất cả tiêu chí chất lượng.",
+        "eligibilitySummary": "Điều kiện ứng viên"
+      },
+      "back": "Quay lại",
+      "next": "Tiếp theo",
+      "saveDraft": "Lưu nháp",
+      "submitReview": "Gửi duyệt",
+      "previewToggle": "Xem trước",
+      "previewPaneTitle": "Xem trước trực tiếp"
     },
     "validation": {
       "required": "Trường này là bắt buộc.",
@@ -501,7 +696,11 @@
       "number": "Nhập một số hợp lệ.",
       "min1": "Phải lớn hơn hoặc bằng 1.",
       "expRange": "Số năm tối đa phải lớn hơn hoặc bằng số năm tối thiểu.",
-      "salaryRange": "Lương tối đa phải lớn hơn hoặc bằng lương tối thiểu."
+      "salaryRange": "Lương tối đa phải lớn hơn hoặc bằng lương tối thiểu.",
+      "salaryModeNeedsRange": "Nhập cả mức tối thiểu và tối đa cho kiểu lương khoảng.",
+      "salaryModeNeedsMin": "Nhập mức lương tối thiểu cho kiểu lương này.",
+      "salaryModeNeedsMax": "Nhập mức lương tối đa cho kiểu lương này.",
+      "salaryModeNeedsAmount": "Nhập số tiền lương."
     },
     "viewCandidates": "Xem ứng viên",
     "verified": "Đã xác minh",

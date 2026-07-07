@@ -28,7 +28,7 @@ export function SectionShell({
   children: React.ReactNode;
 }) {
   return (
-    <section className="rounded-2xl border border-[var(--glass-border-strong)] bg-[var(--glass-surface)] p-6 shadow-[0_2px_12px_rgba(11,34,57,0.06)] backdrop-blur-md">
+    <section className="rounded-2xl border border-white/60 bg-white/82 p-6 shadow-[0_2px_12px_rgba(11,34,57,0.06)] backdrop-blur-md">
       <div className="flex items-start justify-between gap-4">
         <div className="flex min-w-0 items-start gap-3">
           {IconCmp && iconGradient && (
@@ -93,7 +93,7 @@ export function RowActions({
 
 export function EmptyHint({ children }: { children: React.ReactNode }) {
   return (
-    <p className="rounded-xl border border-dashed border-[var(--glass-border)] px-4 py-6 text-center text-sm text-[var(--text-muted)]">
+    <p className="rounded-xl border border-dashed border-white/50 px-4 py-6 text-center text-sm text-[var(--text-muted)]">
       {children}
     </p>
   );

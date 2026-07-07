@@ -47,7 +47,6 @@ export function CandidateDetail({
   const labels = useApplicationLabels();
   const reasonLabel = useRejectionReasonLabel();
   const anonUnrevealed = app.applicant.is_anonymous && !app.applicant.revealed;
-  const screeningEntries = Object.entries(app.screening_answers ?? {});
   const canReview = app.status === "submitted";
   const canReject = app.status === "submitted" || app.status === "under_review";
 
@@ -163,30 +162,6 @@ export function CandidateDetail({
       ) : anonUnrevealed ? (
         <p className="text-sm text-[var(--text-muted)]">{t("hiddenUntilReveal")}</p>
       ) : null}
-
-      {/* Screening answers */}
-      {screeningEntries.length > 0 && (
-        <section>
-          <h3 className="mb-1.5 text-sm font-bold text-[var(--text-primary)]">
-            {t("answers")}
-          </h3>
-          <dl className="space-y-2">
-            {screeningEntries.map(([key, value]) => (
-              <div
-                key={key}
-                className="rounded-xl border border-white/60 bg-white/82 backdrop-blur-md p-3"
-              >
-                <dt className="text-xs font-medium text-[var(--text-muted)]">
-                  {key}
-                </dt>
-                <dd className="mt-0.5 text-sm text-[var(--text-primary)]">
-                  {Array.isArray(value) ? value.join(", ") : value}
-                </dd>
-              </div>
-            ))}
-          </dl>
-        </section>
-      )}
 
       {/* Scorecard (partner-internal evaluation; never shown to the student). */}
       <div className="border-t border-white/40 pt-4">

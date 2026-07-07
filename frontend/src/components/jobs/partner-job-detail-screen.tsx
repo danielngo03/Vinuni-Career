@@ -482,31 +482,6 @@ export function PartnerJobDetailScreen({ jobId }: { jobId: string }) {
         <SkillBlock title={t("preferredSkills")} skills={job.preferred_skills} />
       )}
 
-      {job.screening_questions.length > 0 && (
-        <section className="mt-6">
-          <h2 className="mb-2 text-lg font-bold tracking-tight text-[var(--text-primary)]">
-            {t("screeningQuestions")}
-          </h2>
-          <ol className="space-y-2">
-            {job.screening_questions.map((q) => (
-              <li
-                key={q.id}
-                className="rounded-xl border border-[var(--border-default)] bg-white p-3"
-              >
-                <p className="text-sm font-medium text-[var(--text-primary)]">
-                  {q.question}
-                </p>
-                <p className="mt-1 text-xs text-[var(--text-muted)]">
-                  {labels.screeningType(q.q_type)}
-                  {" · "}
-                  {q.is_required ? t("required") : t("optional")}
-                </p>
-              </li>
-            ))}
-          </ol>
-        </section>
-      )}
-
       {/* Competition signal — shown only when job is active/published */}
       {job.status === "active" && (
         <div className="mt-6">

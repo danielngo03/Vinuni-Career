@@ -1,6 +1,6 @@
 "use client";
 
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { ChevronRight, Menu } from "lucide-react";
 import { LanguageSwitcher } from "./language-switcher";
 import { ThemeSwitcher } from "./theme-switcher";
@@ -9,6 +9,7 @@ import { AccountMenu } from "./account-menu";
 import { NotificationBell } from "@/components/notifications/notification-bell";
 import { MessagingBell } from "@/components/messaging/messaging-bell";
 import { Link, usePathname } from "@/i18n/navigation";
+import { getRouteTitle } from "@/lib/route-titles";
 import { WORKSPACE_NAV } from "@/config/nav";
 import { useUiStore } from "@/stores/ui-store";
 import type { Persona } from "@/stores/auth-store";
@@ -18,6 +19,7 @@ import type { Persona } from "@/stores/auth-store";
 export function Topbar({ persona }: { persona: Persona }) {
   const t = useTranslations();
   const tNav = useTranslations("nav");
+  const locale = useLocale();
   const pathname = usePathname();
   const setMobileNavOpen = useUiStore((s) => s.setMobileNavOpen);
   const base = `/${persona}`;
@@ -34,6 +36,29 @@ export function Topbar({ persona }: { persona: Persona }) {
           });
   const currentKey = currentItem?.key ?? "dashboard";
   const isDashboard = pathname === `${base}/dashboard`;
+  const currentLabel = tNav(currentKey);
+  const currentHref =
+    currentKey === "messages"
+      ? `${base}/messages`
+      : currentKey === "notifications"
+        ? `${base}/notifications`
+        : currentKey === "settings"
+          ? `${base}/settings`
+          : currentItem && "href" in currentItem
+            ? currentItem.absolute
+              ? currentItem.href
+              : `${base}${currentItem.href}`
+            : `${base}/dashboard`;
+  const breadcrumbLeaf =
+    pathname === "/partner/jobs/new"
+      ? tNav("createNew")
+      : (() => {
+          const routeTitle = getRouteTitle(pathname, locale);
+          if (!routeTitle || routeTitle === currentLabel || routeTitle === tNav("dashboard")) {
+            return null;
+          }
+          return routeTitle;
+        })();
 
   return (
     <header className="sticky top-0 z-30 flex h-[60px] items-center gap-3 bg-[#f7f6f2]/95 px-4 backdrop-blur-sm lg:px-6">
@@ -71,9 +96,28 @@ export function Topbar({ persona }: { persona: Persona }) {
               strokeWidth={1.8}
               className="size-4 shrink-0 text-[var(--text-muted)]"
             />
-            <span className="truncate font-semibold text-[var(--text-primary)]">
-              {tNav(currentKey)}
-            </span>
+            {breadcrumbLeaf ? (
+              <>
+                <Link
+                  href={currentHref}
+                  className="truncate font-medium text-[var(--text-muted)] outline-none transition-colors hover:text-[var(--text-primary)] focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)]/30"
+                >
+                  {currentLabel}
+                </Link>
+                <ChevronRight
+                  aria-hidden
+                  strokeWidth={1.8}
+                  className="size-4 shrink-0 text-[var(--text-muted)]"
+                />
+                <span className="truncate font-semibold text-[var(--text-primary)]">
+                  {breadcrumbLeaf}
+                </span>
+              </>
+            ) : (
+              <span className="truncate font-semibold text-[var(--text-primary)]">
+                {currentLabel}
+              </span>
+            )}
           </>
         )}
       </nav>

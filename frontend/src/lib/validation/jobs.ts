@@ -1,20 +1,15 @@
 import { z } from "zod";
+import type { CandidateRequirements } from "@/lib/api/jobs";
 
 type V = (key: string) => string;
 
-const screeningQuestionSchema = (v: V) =>
-  z.object({
-    question: z.string().trim().min(1, v("required")).max(2000),
-    q_type: z.enum(["text", "yes_no", "single_choice", "multiple_choice"]),
-    /** Comma-separated options, only used for choice types. */
-    options: z.string().max(1000).optional().or(z.literal("")),
-    is_required: z.boolean(),
-  });
-
 /**
- * Partner job create/edit form schema. Skills + screening options are entered as
+ * Partner job create/edit form schema. Skills are entered as
  * free text and split into arrays on submit. Numeric fields are kept as strings
  * in the form and coerced by the screen before calling the API.
+ *
+ * NOTE: `candidate_requirements` is NOT in this schema — it is managed as
+ * external component state (see EMPTY_CANDIDATE_REQUIREMENTS / detailToCandidateRequirements).
  */
 export function jobFormSchema(v: V) {
   return z
@@ -74,7 +69,23 @@ export function jobFormSchema(v: V) {
         "vinuni_only",
         "invitation_only",
       ]),
-      screening_questions: z.array(screeningQuestionSchema(v)),
+      /** Structured salary display mode. */
+      salary_mode: z.enum(["negotiable", "hidden", "fixed", "range", "from", "to"]),
+      /** Whether salary is per month or per year. */
+      salary_period: z.enum(["monthly", "yearly"]),
+      /** Whether salary figures are gross or net. */
+      salary_gross_net: z.enum(["unspecified", "gross", "net"]),
+      /** Structured experience requirement mode. */
+      experience_mode: z.enum(["no_requirement", "fresher", "range", "min", "max"]),
+      /** Seniority level vocabulary; empty string = not specified. */
+      seniority_level: z.string().optional().or(z.literal("")),
+      /** Industry taxonomy id; empty string = not specified. */
+      industry_id: z.string().optional().or(z.literal("")),
+      /**
+       * CV document language requirement for this posting. "any" = no
+       * restriction (default). "en" / "vi" = soft preference shown to students.
+       */
+      cv_language_required: z.enum(["any", "en", "vi"]),
     })
     .refine(
       (d) =>
@@ -89,6 +100,28 @@ export function jobFormSchema(v: V) {
         !d.salary_max ||
         Number(d.salary_max) >= Number(d.salary_min),
       { path: ["salary_max"], message: v("salaryRange") },
+    )
+    // salary_mode cross-field refinements
+    .refine(
+      (d) =>
+        d.salary_mode !== "range" ||
+        (Boolean(d.salary_min) && Boolean(d.salary_max)),
+      { path: ["salary_min"], message: v("salaryModeNeedsRange") },
+    )
+    .refine(
+      (d) =>
+        d.salary_mode !== "from" || Boolean(d.salary_min),
+      { path: ["salary_min"], message: v("salaryModeNeedsMin") },
+    )
+    .refine(
+      (d) =>
+        d.salary_mode !== "to" || Boolean(d.salary_max),
+      { path: ["salary_max"], message: v("salaryModeNeedsMax") },
+    )
+    .refine(
+      (d) =>
+        d.salary_mode !== "fixed" || Boolean(d.salary_min),
+      { path: ["salary_min"], message: v("salaryModeNeedsAmount") },
     );
 }
 
@@ -112,8 +145,29 @@ export const JOB_FORM_DEFAULTS: JobFormValues = {
   salary_min: "",
   salary_max: "",
   salary_currency: "VND",
+  salary_mode: "negotiable",
+  salary_period: "monthly",
+  salary_gross_net: "unspecified",
+  experience_mode: "no_requirement",
+  seniority_level: "",
+  industry_id: "",
+  cv_language_required: "any",
   headcount: "1",
   application_deadline: "",
   visibility: "public",
-  screening_questions: [],
+};
+
+/**
+ * Empty candidate requirements object — all groups default to not_required,
+ * arrays empty. Used as the initial external state in F6 (CandidateRequirementsPanel).
+ */
+export const EMPTY_CANDIDATE_REQUIREMENTS: CandidateRequirements = {
+  education: { mode: "not_required", values: [] },
+  nationalities: { mode: "not_required", values: [] },
+  gender: { mode: "not_required", values: [] },
+  age: { mode: "not_required" },
+  marital_status: { mode: "not_required", values: [] },
+  languages: [],
+  certifications: [],
+  note: null,
 };

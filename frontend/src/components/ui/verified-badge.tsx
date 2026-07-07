@@ -26,7 +26,7 @@ export function VerifiedBadge({
       <span className="sr-only">{label}</span>
       <span
         aria-hidden
-        className="pointer-events-none absolute left-1/2 top-full z-30 mt-1.5 -translate-x-1/2 whitespace-nowrap rounded-full bg-[var(--brand-teal)] px-2.5 py-1 text-[11px] font-bold text-white opacity-0 shadow-[0_8px_22px_rgba(14,156,142,0.24)] transition-opacity duration-150 group-hover/verified:opacity-100 group-focus-within/verified:opacity-100"
+        className="pointer-events-none absolute left-full top-1/2 z-30 ml-1.5 -translate-y-1/2 whitespace-nowrap rounded-full bg-[var(--brand-teal)] px-2.5 py-1 text-[11px] font-bold text-white opacity-0 shadow-[0_8px_22px_rgba(14,156,142,0.24)] transition-opacity duration-150 group-hover/verified:opacity-100 group-focus-within/verified:opacity-100"
       >
         {label}
       </span>

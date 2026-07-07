@@ -9,20 +9,21 @@ import {
   useQueryClient,
 } from "@tanstack/react-query";
 import {
+  CheckCircle,
   FilePlus,
   FileText,
+  PencilLine,
   SignIn,
   UploadSimple,
   WarningCircle,
 } from "@phosphor-icons/react";
 import { useRouter } from "@/i18n/navigation";
-import { Button, EmptyState, Skeleton, useToast } from "@/components/ui";
+import { Button, EmptyState, Modal, Skeleton, useToast } from "@/components/ui";
 import { CvCreateModal } from "./cv-create-modal";
 import { CvQuotaModal } from "./cv-quota-modal";
 import { CvStudioHeader } from "./studio/cv-studio-header";
 import { TemplateShelf } from "./studio/template-shelf";
 import { QuotaStrip } from "./studio/quota-strip";
-import { LibraryInsights } from "./studio/library-insights";
 import { CvLibraryCard } from "./studio/cv-library-card";
 import {
   ApiError,
@@ -50,6 +51,7 @@ export function CvStudioScreen() {
   const [busyId, setBusyId] = useState<string | null>(null);
   const [quotaInfo, setQuotaInfo] = useState<CvQuotaInfo | null>(null);
   const [shelfTemplateId, setShelfTemplateId] = useState<string | null>(null);
+  const [deleteCandidate, setDeleteCandidate] = useState<CvSummary | null>(null);
 
   // The import flow's "start from template" recovery returns here with ?create=1.
   useEffect(() => {
@@ -78,9 +80,22 @@ export function CvStudioScreen() {
     [query.data],
   );
 
+  // Two lifecycle tiers: the library (analyzed, quota-bound `ready` CVs, usable
+  // to apply + job-fit) and unlimited free-form drafts (not counted).
+  const readyRows = useMemo(
+    () => rows.filter((cv) => cv.status === "ready"),
+    [rows],
+  );
+  const draftRows = useMemo(
+    () => rows.filter((cv) => cv.status === "draft"),
+    [rows],
+  );
+
   // Quota meta is identical across pages; read it from the first fetched page.
   const meta = query.data?.pages[0]?.meta ?? null;
-  const canCreate = meta?.can_create ?? true;
+  // Only Upload is quota-gated now (an uploaded CV lands in the library). Drafts
+  // (New CV / template / duplicate) are unlimited and never quota-disabled.
+  const canUpload = meta?.can_create ?? true;
   const limitHint = meta
     ? t("quota.disabledHint", { limit: meta.active_cv_limit })
     : undefined;
@@ -121,22 +136,15 @@ export function CvStudioScreen() {
     }
   }
 
-  async function archive(cv: CvSummary) {
+  async function remove(cv: CvSummary) {
     setBusyId(cv.id);
     try {
-      await cvApi.update(cv.id, {
-        status: "archived",
-        expected_version: cv.version,
-      });
-      toast.show({ tone: "success", title: t("list.archivedToast") });
+      await cvApi.remove(cv.id);
+      toast.show({ tone: "success", title: t("list.deletedToast") });
+      setDeleteCandidate(null);
       refetchList();
     } catch (e) {
-      if (e instanceof ApiError && e.isConflict) {
-        toast.show({ tone: "warning", title: tc("conflictReload") });
-        refetchList();
-      } else {
-        toast.show({ tone: "error", title: apiError(e) });
-      }
+      toast.show({ tone: "error", title: apiError(e) });
     } finally {
       setBusyId(null);
     }
@@ -151,44 +159,18 @@ export function CvStudioScreen() {
     }
   }
 
-  async function setPrimary(cv: CvSummary) {
-    setBusyId(cv.id);
-    try {
-      await cvApi.update(cv.id, {
-        is_primary: true,
-        expected_version: cv.version,
-      });
-      toast.show({ tone: "success", title: t("list.primarySetToast") });
-      refetchList();
-    } catch (e) {
-      if (e instanceof ApiError && e.code === "CONFLICT") {
-        toast.show({ tone: "warning", title: tc("conflictReload") });
-        refetchList();
-      } else {
-        toast.show({ tone: "error", title: apiError(e) });
-      }
-    } finally {
-      setBusyId(null);
-    }
-  }
-
   const headerActions = (
     <>
       <Button
         variant="secondary"
         onClick={() => router.push("/student/cv/import")}
-        disabled={!canCreate}
-        title={!canCreate ? limitHint : undefined}
+        disabled={!canUpload}
+        title={!canUpload ? limitHint : undefined}
       >
         <UploadSimple aria-hidden weight="bold" className="size-4" />
         {t("list.upload")}
       </Button>
-      <Button
-        variant="primary"
-        onClick={() => setCreateOpen(true)}
-        disabled={!canCreate}
-        title={!canCreate ? limitHint : undefined}
-      >
+      <Button variant="primary" onClick={() => setCreateOpen(true)}>
         <FilePlus aria-hidden weight="bold" className="size-4" />
         {t("list.newCv")}
       </Button>
@@ -198,12 +180,7 @@ export function CvStudioScreen() {
   const quotaStrip = <QuotaStrip meta={meta} />;
 
   const templateShelf = (
-    <TemplateShelf
-      templates={templates.data ?? []}
-      canCreate={canCreate}
-      limitHint={limitHint}
-      onSelect={startFromTemplate}
-    />
+    <TemplateShelf templates={templates.data ?? []} onSelect={startFromTemplate} />
   );
 
   // Auth state.
@@ -275,33 +252,85 @@ export function CvStudioScreen() {
       ) : (
         <>
           {templateShelf}
-          {quotaStrip}
 
-          {/* CV Library Guidance — deterministic product rules, not AI. */}
-          <LibraryInsights rows={rows} meta={meta} />
+          {/* ── Library: analyzed, quota-bound `ready` CVs (apply + job-fit) ── */}
+          <section id="cv-library" className="scroll-mt-24">
+            <div className="mb-2.5 flex flex-wrap items-baseline gap-x-2.5 gap-y-1">
+              <h2 className="flex items-center gap-1.5 text-sm font-bold text-[var(--text-primary)]">
+                <CheckCircle
+                  aria-hidden
+                  weight="fill"
+                  className="size-4 text-[var(--brand-teal)]"
+                />
+                {t("library.title")}
+                {meta && (
+                  <span className="tabular-nums font-semibold text-[var(--text-muted)]">
+                    ({meta.active_cv_used}/{meta.active_cv_limit})
+                  </span>
+                )}
+              </h2>
+              <p className="text-xs text-[var(--text-secondary)]">
+                {t("library.subtitle")}
+              </p>
+            </div>
 
-          <h2 className="mb-2.5 text-sm font-bold text-[var(--text-primary)]">
-            {t("list.libraryTitle")}
-          </h2>
-          <ul
-            id="cv-library"
-            className="grid scroll-mt-24 gap-3 sm:grid-cols-2 xl:grid-cols-3"
-          >
-            {rows.map((cv) => (
-              <CvLibraryCard
-                key={cv.id}
-                cv={cv}
-                locale={locale}
-                canCreate={canCreate}
-                limitHint={limitHint}
-                busy={busyId === cv.id}
-                onOpen={() => goToBuilder(cv)}
-                onDuplicate={() => duplicate(cv)}
-                onSetPrimary={() => setPrimary(cv)}
-                onArchive={() => archive(cv)}
-              />
-            ))}
-          </ul>
+            {quotaStrip}
+
+            {readyRows.length > 0 ? (
+              <ul className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
+                {readyRows.map((cv) => (
+                  <CvLibraryCard
+                    key={cv.id}
+                    cv={cv}
+                    locale={locale}
+                    busy={busyId === cv.id}
+                    onOpen={() => goToBuilder(cv)}
+                    onDuplicate={() => duplicate(cv)}
+                    onDelete={() => setDeleteCandidate(cv)}
+                  />
+                ))}
+              </ul>
+            ) : (
+              <div className="rounded-[14px] border border-dashed border-[var(--border-default)] bg-[var(--surface-card)] px-5 py-6 text-sm text-[var(--text-secondary)]">
+                {t("library.emptyRow")}
+              </div>
+            )}
+          </section>
+
+          {/* ── Drafts: unlimited, not counted, not usable to apply/job-fit ── */}
+          {draftRows.length > 0 && (
+            <section className="mt-8">
+              <div className="mb-2.5 flex flex-wrap items-baseline gap-x-2.5 gap-y-1">
+                <h2 className="flex items-center gap-1.5 text-sm font-bold text-[var(--text-primary)]">
+                  <PencilLine
+                    aria-hidden
+                    weight="duotone"
+                    className="size-4 text-[var(--text-muted)]"
+                  />
+                  {t("drafts.title")}
+                  <span className="tabular-nums font-semibold text-[var(--text-muted)]">
+                    ({draftRows.length})
+                  </span>
+                </h2>
+                <p className="text-xs text-[var(--text-secondary)]">
+                  {t("drafts.subtitle")}
+                </p>
+              </div>
+              <ul className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
+                {draftRows.map((cv) => (
+                  <CvLibraryCard
+                    key={cv.id}
+                    cv={cv}
+                    locale={locale}
+                    busy={busyId === cv.id}
+                    onOpen={() => goToBuilder(cv)}
+                    onDuplicate={() => duplicate(cv)}
+                    onDelete={() => setDeleteCandidate(cv)}
+                  />
+                ))}
+              </ul>
+            </section>
+          )}
 
           {query.hasNextPage && (
             <div className="mt-6 flex justify-center">
@@ -339,6 +368,38 @@ export function CvStudioScreen() {
         onClose={() => setQuotaInfo(null)}
         onGoToLibrary={goToLibrary}
       />
+      <Modal
+        open={deleteCandidate !== null}
+        onClose={() => setDeleteCandidate(null)}
+        title={t("list.deleteConfirmTitle")}
+        description={
+          deleteCandidate
+            ? t("list.deleteConfirmBody", { title: deleteCandidate.title })
+            : undefined
+        }
+        footer={
+          <div className="flex justify-end gap-2">
+            <Button
+              variant="secondary"
+              onClick={() => setDeleteCandidate(null)}
+              disabled={busyId !== null}
+            >
+              {tc("cancel")}
+            </Button>
+            <Button
+              variant="danger"
+              loading={busyId !== null}
+              onClick={() => deleteCandidate && void remove(deleteCandidate)}
+            >
+              {t("list.delete")}
+            </Button>
+          </div>
+        }
+      >
+        <p className="text-sm text-[var(--text-secondary)]">
+          {t("list.deleteConfirmNote")}
+        </p>
+      </Modal>
     </>
   );
 }

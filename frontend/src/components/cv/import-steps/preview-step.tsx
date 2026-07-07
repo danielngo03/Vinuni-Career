@@ -2,17 +2,25 @@
 
 import { useTranslations } from "next-intl";
 import { ArrowRight, Info, UploadSimple } from "@phosphor-icons/react";
-import { Button } from "@/components/ui";
+import { Button, Input } from "@/components/ui";
 import { CvOriginalPreview, formatBytes } from "../cv-original-preview";
 import type { UploadPreview } from "@/lib/api";
 
-/** Step: preview (before ingestion). */
+/**
+ * Step: confirm the uploaded file and name the CV, then save. Extraction runs on
+ * the backend after this — the student never reviews or edits extracted fields
+ * (that is the backend's job; the parsed data feeds CV–JD matching).
+ */
 export function PreviewStep({
   preview,
+  title,
+  onTitleChange,
   onUse,
   onAnother,
 }: {
   preview: UploadPreview;
+  title: string;
+  onTitleChange: (title: string) => void;
   onUse: () => void;
   onAnother: () => void;
 }) {
@@ -52,8 +60,24 @@ export function PreviewStep({
               </div>
             ) : null}
           </dl>
+          <div className="mt-4">
+            <Input
+              label={t("titleFieldLabel")}
+              placeholder={t("titlePlaceholder")}
+              value={title}
+              onChange={(e) => onTitleChange(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" && title.trim()) onUse();
+              }}
+            />
+          </div>
           <div className="mt-4 flex flex-col gap-2">
-            <Button variant="primary" fullWidth onClick={onUse}>
+            <Button
+              variant="primary"
+              fullWidth
+              disabled={!title.trim()}
+              onClick={onUse}
+            >
               <ArrowRight aria-hidden weight="bold" className="size-4" />
               {t("useThisCv")}
             </Button>

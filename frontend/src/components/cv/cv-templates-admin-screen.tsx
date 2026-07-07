@@ -9,7 +9,6 @@ import {
   PlusCircle,
   ShieldWarning,
   SignIn,
-  Sparkle,
 } from "@phosphor-icons/react";
 import {
   Button,
@@ -39,7 +38,6 @@ type TemplateForm = {
   nameEn: string;
   category: string;
   layoutSchemaText: string;
-  isPremium: boolean;
   isActive: boolean;
 };
 
@@ -57,7 +55,6 @@ const EMPTY_FORM: TemplateForm = {
   nameEn: "",
   category: "business",
   layoutSchemaText: JSON.stringify(EMPTY_LAYOUT, null, 2),
-  isPremium: false,
   isActive: true,
 };
 
@@ -68,7 +65,6 @@ function formFromTemplate(template: CvTemplate): TemplateForm {
     nameEn: template.name_en ?? template.name,
     category: template.category,
     layoutSchemaText: JSON.stringify(template.layout_schema ?? EMPTY_LAYOUT, null, 2),
-    isPremium: template.is_premium,
     isActive: template.is_active ?? true,
   };
 }
@@ -103,9 +99,8 @@ export function CvTemplatesAdminScreen() {
 
   const stats = useMemo(() => {
     const active = templates.filter((item) => item.is_active !== false).length;
-    const premium = templates.filter((item) => item.is_premium).length;
     const categories = new Set(templates.map((item) => item.category)).size;
-    return { active, premium, categories };
+    return { active, categories };
   }, [templates]);
 
   const closeDialog = () => {
@@ -149,7 +144,6 @@ export function CvTemplatesAdminScreen() {
       name_en: form.nameEn.trim(),
       category: form.category.trim(),
       layout_schema: layoutSchema,
-      is_premium: form.isPremium,
       is_active: form.isActive,
     };
   };
@@ -232,7 +226,6 @@ export function CvTemplatesAdminScreen() {
         <MetricCard
           label={t("categoryCount")}
           value={String(stats.categories)}
-          helper={t("premiumCount", { count: stats.premium })}
         />
       </div>
 
@@ -291,12 +284,6 @@ export function CvTemplatesAdminScreen() {
                       >
                         {template.is_active === false ? t("inactive") : t("active")}
                       </StatusBadge>
-                      {template.is_premium && (
-                        <StatusBadge tone="featured">
-                          <Sparkle aria-hidden weight="fill" className="size-3" />
-                          {t("premium")}
-                        </StatusBadge>
-                      )}
                       <StatusBadge tone="info">{template.category}</StatusBadge>
                     </div>
                     <h2 className="truncate text-base font-bold text-[var(--text-primary)]">
@@ -388,13 +375,6 @@ export function CvTemplatesAdminScreen() {
             checked={form.isActive}
             onCheckedChange={(checked) =>
               setForm((prev) => ({ ...prev, isActive: checked }))
-            }
-          />
-          <Switch
-            label={t("isPremium")}
-            checked={form.isPremium}
-            onCheckedChange={(checked) =>
-              setForm((prev) => ({ ...prev, isPremium: checked }))
             }
           />
         </div>

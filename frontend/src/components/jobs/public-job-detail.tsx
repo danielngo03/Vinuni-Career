@@ -3,10 +3,8 @@
 import { useLocale, useTranslations } from "next-intl";
 import { useQuery } from "@tanstack/react-query";
 import {
-  ArrowLeft,
   Briefcase,
   Buildings,
-  LightbulbFilament,
   MapPin,
   CurrencyCircleDollar,
   Clock,
@@ -47,30 +45,6 @@ import { ReportButton } from "@/components/report/report-button";
 import { recordDiscoveryEvent } from "@/lib/discovery/analytics";
 import { recordJobEngagement } from "@/lib/analytics/job-engagement";
 
-type JobInsightKey =
-  | "insightDeadlineSoon"
-  | "insightFeaturedJob"
-  | "insightVerifiedPartner"
-  | "insightMultipleOpenings";
-
-function deriveJobInsights(job: {
-  application_deadline: string | null;
-  is_featured: boolean;
-  headcount: number;
-  company?: { is_verified?: boolean } | null;
-}): JobInsightKey[] {
-  const out: JobInsightKey[] = [];
-  const now = Date.now();
-  if (job.application_deadline) {
-    const deadline = new Date(job.application_deadline).getTime();
-    const hoursLeft = (deadline - now) / (1000 * 60 * 60);
-    if (hoursLeft > 0 && hoursLeft < 48) out.push("insightDeadlineSoon");
-  }
-  if (job.is_featured) out.push("insightFeaturedJob");
-  if (job.company?.is_verified) out.push("insightVerifiedPartner");
-  if (job.headcount > 1) out.push("insightMultipleOpenings");
-  return out.slice(0, 3);
-}
 
 export function PublicJobDetail({ jobId }: { jobId: string }) {
   const t = useTranslations("jobs");
@@ -101,8 +75,6 @@ export function PublicJobDetail({ jobId }: { jobId: string }) {
   const isHydratingAuth = status === "unknown";
   const isGuest = status === "guest";
   const canApply = isStudent;
-  const jobInsights = job ? deriveJobInsights(job) : [];
-
   function handleApply() {
     if (isHydratingAuth) return;
     // The apply button is this page's primary CTA — record it against the
@@ -182,13 +154,6 @@ export function PublicJobDetail({ jobId }: { jobId: string }) {
             </>
           )}
         </nav>
-        <Link
-          href="/jobs"
-          className="inline-flex items-center gap-1.5 rounded-lg text-sm font-semibold text-[var(--text-secondary)] outline-none transition-colors hover:text-[var(--text-primary)] focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)]/30"
-        >
-          <ArrowLeft aria-hidden weight="bold" className="size-4" />
-          {t("backToBoard")}
-        </Link>
       </div>
 
       {query.isError ? (
@@ -427,28 +392,6 @@ export function PublicJobDetail({ jobId }: { jobId: string }) {
               </div>
             )}
 
-            {/* Job signals derived from public inventory data. */}
-            {jobInsights.length > 0 && (
-              <section
-                className="mt-4 rounded-[16px] border border-[var(--border-default)] bg-[var(--surface-card)] p-4 shadow-[0_8px_24px_rgba(11,34,57,0.06)]"
-                aria-label={t("aiJobIntelTitle")}
-              >
-                <h2 className="mb-2.5 flex items-center gap-2 text-sm font-bold text-[var(--text-primary)]">
-                  <span className="flex size-6 shrink-0 items-center justify-center rounded-lg bg-[var(--blue-50)] text-[var(--brand-primary)]">
-                    <LightbulbFilament aria-hidden weight="duotone" className="size-3.5" />
-                  </span>
-                  {t("aiJobIntelTitle")}
-                </h2>
-                <ul className="space-y-1.5">
-                  {jobInsights.map((key) => (
-                    <li key={key} className="flex items-start gap-2 text-xs text-[var(--text-secondary)]">
-                      <LightbulbFilament aria-hidden weight="duotone" className="mt-0.5 size-3.5 shrink-0 text-[var(--brand-primary)]" />
-                      {t(key)}
-                    </li>
-                  ))}
-                </ul>
-              </section>
-            )}
 
             {isStudent && (
               <TrackedItem
@@ -475,7 +418,7 @@ export function PublicJobDetail({ jobId }: { jobId: string }) {
             onClose={() => setApplyOpen(false)}
             jobId={job.id}
             jobTitle={job.title}
-            screeningQuestions={job.screening_questions ?? []}
+            cvLanguageRequired={job.cv_language_required}
           />
         )}
         </>

@@ -38,11 +38,15 @@
       "dragHandle": "Sắp xếp lại {name} (kéo thả, hoặc dùng nút lên/xuống)"
     },
     "preview": {
+      "title": "Xem trước trực tiếp",
       "a4Label": "Bản xem trước A4",
       "untitled": "CV chưa đặt tên",
       "empty": "Chưa có nội dung. Hãy thêm thông tin ở khung chỉnh sửa.",
       "sectionEmpty": "Chưa có nội dung",
       "pageBreakWarning": "Nội dung có thể vượt quá một trang A4."
+    },
+    "render": {
+      "a4Label": "Tài liệu CV"
     },
     "canvas": {
       "inspectorTitle": "Khối đang chọn",
@@ -84,11 +88,183 @@
       "savePhoto": "Lưu ảnh",
       "cancel": "Hủy",
       "close": "Đóng",
+      "useSystemAvatar": "Dùng ảnh hồ sơ",
+      "useSystemAvatarHint": "Dùng ảnh trong hồ sơ của bạn làm ảnh cho CV này.",
+      "noSystemAvatarHint": "Hãy thêm ảnh vào hồ sơ trước để dùng ở đây.",
+      "systemAvatarError": "Không dùng được ảnh hồ sơ. Hãy thử tải ảnh lên.",
+      "zoomIn": "Phóng to",
+      "zoomOut": "Thu nhỏ",
+      "zoomFit": "Vừa chiều rộng",
       "aiCommandTitle": "Yêu cầu AI chỉnh sửa",
       "aiCommandBody": "Mô tả thay đổi bằng lời của bạn. AI đề xuất thay đổi dưới dạng bản so sánh để bạn xem xét và xác nhận — AI không bao giờ tự chỉnh sửa CV của bạn.",
       "aiCommandPlaceholder": "VD: Viết tóm tắt ngắn gọn hơn, tập trung vào vị trí backend",
       "aiCommandSubmit": "Hỏi AI",
       "aiCommandSafety": "AI không bịa đặt thông tin và không áp dụng thay đổi nếu chưa có xác nhận của bạn."
+    },
+    "canvasEdit": {
+      "editField": "Chỉnh sửa {name}",
+      "name": "Tên của bạn",
+      "headline": "Chức danh của bạn",
+      "email": "Email",
+      "phone": "Số điện thoại",
+      "location": "Thành phố, Quốc gia",
+      "linkLabel": "Nhãn liên kết",
+      "linkUrl": "https://…",
+      "heading": "Vị trí hoặc chức danh",
+      "subheading": "Tổ chức",
+      "timeframe": "VD: T6/2025 – T9/2025",
+      "entryLocation": "Địa điểm",
+      "note": "Ghi chú ngắn",
+      "highlight": "Thêm gạch đầu dòng…",
+      "text": "Nhập nội dung…",
+      "skill": "Kỹ năng",
+      "skillLevel": "Mức độ kỹ năng",
+      "addHighlight": "Thêm dòng",
+      "addEntry": "Thêm mục",
+      "addItem": "Thêm mục",
+      "removeHighlight": "Xóa dòng",
+      "removeEntry": "Xóa mục",
+      "removeItem": "Xóa mục"
+    },
+    "restyle": {
+      "title": "Đổi phong cách",
+      "template": "Mẫu",
+      "palette": "Bảng màu",
+      "accentLabel": "Màu nhấn",
+      "font": "Phông chữ",
+      "density": "Mật độ",
+      "density_regular": "Thoáng",
+      "density_compact": "Gọn",
+      "palettes": {
+        "slate": "Xám đá",
+        "navy": "Xanh navy",
+        "teal": "Xanh mòng két",
+        "burgundy": "Đỏ mận",
+        "forest": "Xanh rừng",
+        "plum": "Tím mận",
+        "warm": "Cam ấm",
+        "graphite": "Than chì"
+      },
+      "fonts": {
+        "sans": "Không chân",
+        "serif": "Có chân",
+        "mono": "Đơn cách"
+      }
+    },
+    "textToolbar": {
+      "label": "Định dạng chữ",
+      "font": "Phông",
+      "fonts": {
+        "sans": "Không chân",
+        "serif": "Có chân",
+        "mono": "Đơn cách"
+      },
+      "sizes": {
+        "xs": "XS",
+        "sm": "S",
+        "base": "M",
+        "lg": "L",
+        "xl": "XL",
+        "2xl": "2XL"
+      },
+      "bold": "Đậm",
+      "italic": "Nghiêng",
+      "color": "Màu chữ",
+      "clearColor": "Bỏ màu",
+      "align": {
+        "left": "Canh trái",
+        "center": "Canh giữa",
+        "right": "Canh phải"
+      },
+      "close": "Đóng thanh công cụ"
+    },
+    "elements": {
+      "title": "Phần tử",
+      "contactLinks": "Liên hệ & mạng xã hội",
+      "contactLinksHint": "Mẫu thiếu liên kết? Thêm tại đây — biểu tượng được tự chọn.",
+      "noHeaderHint": "Hãy thêm mục tiêu đề trước để chèn liên kết liên hệ.",
+      "links": {
+        "linkedin": "LinkedIn",
+        "github": "GitHub",
+        "facebook": "Facebook",
+        "twitter": "Twitter",
+        "instagram": "Instagram",
+        "website": "Website",
+        "customLink": "Liên kết khác"
+      },
+      "linkAdded": "Đã thêm {label} vào dòng liên hệ.",
+      "blocks": "Chèn khối",
+      "skillBar": "Thanh kỹ năng",
+      "customField": "Trường tùy chỉnh",
+      "divider": "Đường phân cách",
+      "dividerAdded": "Đã thêm đường phân cách.",
+      "customFieldTitle": "Trường tùy chỉnh",
+      "addSection": "Thêm mục",
+      "sectionTypeLabel": "Loại mục",
+      "add": "Thêm",
+      "sectionTypes": {
+        "experience": "Kinh nghiệm",
+        "education": "Học vấn",
+        "projects": "Dự án",
+        "skills": "Kỹ năng",
+        "certifications": "Chứng chỉ",
+        "awards": "Giải thưởng",
+        "languages": "Ngôn ngữ",
+        "activities": "Hoạt động",
+        "summary": "Tóm tắt",
+        "custom": "Mục tùy chỉnh"
+      }
+    },
+    "aiChat": {
+      "title": "Trợ lý AI",
+      "emptyTitle": "Nhờ AI cải thiện CV",
+      "emptyBody": "Hãy mô tả thay đổi bạn muốn hoặc chọn một thao tác bên dưới. AI đưa ra bản xem trước để bạn duyệt và áp dụng — AI không bao giờ tự sửa CV.",
+      "placeholder": "vd: Viết lại tóm tắt ngắn gọn hơn, tập trung vào vị trí backend",
+      "send": "Gửi",
+      "thinking": "AI đang xử lý…",
+      "applied": "Đã áp dụng và lưu thành phiên bản mới.",
+      "dismissed": "Đã bỏ đề xuất.",
+      "failed": "AI không thể tạo đề xuất. Vui lòng thử lại.",
+      "unavailable": "AI hiện không khả dụng. Thử lại sau.",
+      "safety": "AI không bịa đặt thông tin và không áp dụng thay đổi khi chưa được bạn xác nhận.",
+      "draftKickoff": "Soạn CV giúp tôi",
+      "intents": {
+        "rewrite": "Viết lại mục",
+        "optimize": "Tối ưu cho vị trí",
+        "ats": "Từ khóa ATS",
+        "evidence": "Kiểm tra bằng chứng"
+      },
+      "intentSent": {
+        "rewrite": "Viết lại mục đang chọn cho rõ ràng và ấn tượng hơn.",
+        "optimize": "Tối ưu CV của tôi cho vị trí này.",
+        "ats": "Gợi ý từ khóa ATS cho công việc này.",
+        "evidence": "Kiểm tra CV xem có tuyên bố nào cần bằng chứng không."
+      }
+    },
+    "insights": {
+      "title": "Phân tích",
+      "subtitle": "Chất lượng hồ sơ và độ phù hợp"
+    },
+    "uploaded": {
+      "badge": "Đã tải lên",
+      "note": "Hệ thống đã tự đọc và lưu CV này ({count} mục) để phục vụ gợi ý việc làm phù hợp.",
+      "openOriginal": "Mở bản gốc",
+      "download": "Tải xuống",
+      "backToLibrary": "Quay lại CV Studio",
+      "unavailable": "Không xem trước được tệp gốc."
+    },
+    "status": {
+      "ready": "Sẵn sàng ứng tuyển",
+      "draft": "Bản nháp"
+    },
+    "library": {
+      "title": "Thư viện CV của tôi",
+      "subtitle": "CV đã phân tích — sẵn sàng ứng tuyển và so khớp việc làm.",
+      "emptyRow": "Chưa có CV nào trong thư viện. Hãy lưu một bản nháp vào thư viện, hoặc tải lên CV có sẵn."
+    },
+    "drafts": {
+      "title": "Bản nháp",
+      "subtitle": "Đang soạn — không giới hạn, không tính vào giới hạn và chưa dùng để ứng tuyển cho tới khi bạn lưu vào thư viện."
     },
     "list": {
       "title": "CV Studio",
@@ -99,25 +275,19 @@
       "newCv": "Tạo CV mới",
       "emptyTitle": "Bạn chưa có CV nào",
       "emptyBody": "Bắt đầu bằng cách tạo CV từ mẫu, nhập từ hồ sơ, hoặc tải lên CV có sẵn.",
-      "primary": "CV chính",
       "lastEdited": "Sửa lần cuối: {date}",
       "edit": "Chỉnh sửa",
+      "view": "Xem",
       "duplicate": "Nhân bản",
-      "setPrimary": "Đặt làm CV chính",
       "copyTitle": "{title} (bản sao)",
       "duplicatedToast": "Đã tạo bản sao CV.",
-      "primarySetToast": "Đã đặt làm CV chính.",
-      "archive": "Lưu trữ",
-      "archivedToast": "Đã lưu trữ CV. Bạn vừa giải phóng một chỗ.",
+      "delete": "Xóa",
+      "deletedToast": "Đã xóa CV.",
+      "deleteConfirmTitle": "Xóa CV này?",
+      "deleteConfirmBody": "\"{title}\" sẽ bị gỡ khỏi thư viện của bạn.",
+      "deleteConfirmNote": "Bản chụp CV đã đính kèm vào đơn ứng tuyển đã nộp vẫn được giữ lại.",
       "shelfTitle": "Bắt đầu từ mẫu",
-      "shelfHint": "Chọn bố cục — bạn có thể đổi mục và nội dung sau.",
-      "libraryTitle": "CV của bạn",
-      "aiInsightsTitle": "Hướng dẫn thư viện CV",
-      "insightNoPrimary": "Chưa đặt CV chính — hãy đánh dấu một CV làm chính để nhà tuyển dụng thấy CV tốt nhất của bạn.",
-      "insightQuotaFull": "Đã đạt giới hạn CV hoạt động — lưu trữ CV cũ để tạo mới hoặc nâng cấp gói.",
-      "insightQuotaHigh": "Gần đạt giới hạn CV — hãy lưu trữ các bản nháp không còn cần thiết.",
-      "insightHasDrafts": "Bạn có CV ở trạng thái nháp — hoàn thiện hoặc lưu trữ để giữ thư viện gọn gàng.",
-      "insightUploadImport": "Phát hiện CV được tải lên — hãy kiểm tra lại các trường đã trích xuất để đảm bảo chính xác."
+      "shelfHint": "Chọn bố cục — bạn có thể đổi mục và nội dung sau."
     },
     "quota": {
       "counter": "CV đang hoạt động: {used} / {limit}",
@@ -151,47 +321,27 @@
     "create": {
       "title": "Tạo CV mới",
       "subtitle": "Chọn cách bắt đầu CV của bạn.",
-      "chooseMode": "Cách tạo",
-      "modeBlankTitle": "Từ mẫu trống",
-      "modeBlankBody": "Tự nhập nội dung vào một mẫu CV được duyệt.",
-      "modeNotesTitle": "Tạo từ ghi chú",
-      "modeNotesBody": "Dán ghi chú nhanh và CV sẽ được tạo phần ngay lập tức. Không dùng AI.",
-      "modeProfileTitle": "Nhập từ hồ sơ",
-      "modeProfileBody": "Điền sẵn từ thông tin hồ sơ của bạn.",
       "modeUploadTitle": "Tải CV có sẵn",
-      "modeUploadBody": "Trích xuất nội dung từ tệp CV bạn tải lên.",
-      "modeAiTitle": "AI soạn CV",
-      "modeAiBody": "Để AI soạn bản nháp đầu tiên để bạn duyệt.",
-      "aiNotesLabel": "Vị trí mục tiêu hoặc ghi chú (tuỳ chọn)",
-      "aiNotesPlaceholder": "VD: Thực tập kỹ thuật phần mềm backend tại startup công nghệ, mạnh về Python và API",
-      "aiNotesHint": "Giúp AI tạo CV phù hợp với vị trí cụ thể. Để trống để dùng hồ sơ của bạn.",
+      "modeUploadBody": "Tải lên tệp CV bạn đã có — hệ thống sẽ đọc và lưu để đối sánh việc làm.",
+      "orDivider": "hoặc bắt đầu từ mẫu",
       "titleLabel": "Tên CV",
       "titlePlaceholder": "VD: CV thực tập Backend",
-      "templateLabel": "Mẫu CV",
       "templateNone": "Không dùng mẫu",
-      "premium": "Cao cấp",
-      "profileHelp": "Thông tin hồ sơ sẽ được điền sẵn vào CV.",
-      "notesLabel": "Ghi chú của bạn",
-      "notesPlaceholder": "Tóm tắt: Sinh viên CNTT năm cuối, muốn làm backend\nKinh nghiệm: Thực tập ở Acme — xây API thanh toán\nKỹ năng: Python, FastAPI, PostgreSQL, Docker",
-      "notesHint": "Tùy chọn: bắt đầu dòng bằng Tóm tắt: / Kinh nghiệm: / Kỹ năng: để chia phần tốt hơn. Văn bản thường cũng được — sẽ vào phần Tóm tắt.",
-      "notesTemplateHelp": "Ghi chú của bạn sẽ được chia thành các phần CV. Chọn mẫu để định dạng giao diện.",
+      "templatePreviewLabel": "Xem trước mẫu {name}",
       "errTitle": "Hãy nhập tên cho CV.",
-      "errNotesRequired": "Hãy thêm vài ghi chú để bắt đầu CV.",
       "createdToast": "Đã tạo CV.",
       "submit": "Tạo CV",
       "templateGalleryTitle": "Chọn mẫu theo mục tiêu",
       "templateGalleryHint": "Mẫu chỉ quyết định cấu trúc và cách trình bày. Bạn vẫn chỉnh sửa trực tiếp từng phần sau khi tạo.",
       "templateSelected": "Đang chọn",
       "templateRoleTitle": "Phù hợp với",
-      "templateStrengthTitle": "Điểm mạnh",
       "templateCategories": {
         "classic": "Cổ điển",
         "technical": "Kỹ thuật",
         "data": "Dữ liệu",
         "business": "Kinh doanh",
         "creative": "Sáng tạo",
-        "healthcare": "Y tế",
-        "premium": "Cao cấp"
+        "healthcare": "Y tế"
       },
       "templateStrengths": {
         "metrics": "Số liệu",
@@ -290,24 +440,41 @@
     "builder": {
       "titleLabel": "Tên CV",
       "templateLabel": "Mẫu CV",
-      "setPrimary": "Đặt làm CV chính",
-      "isPrimary": "CV chính",
       "saving": "Đang lưu…",
       "saved": "Đã lưu",
       "saveError": "Lưu thất bại",
+      "saveToLibrary": "Lưu vào thư viện CV",
+      "finalizing": "Đang xử lý CV…",
+      "inLibrary": "Đã ở trong thư viện",
+      "finalizeSuccessTitle": "Đã lưu vào thư viện",
+      "finalizeSuccessBody": "Sẵn sàng ứng tuyển và so khớp việc làm.",
+      "finalizeBlockedTitle": "Chưa thể lưu CV này",
+      "finalizeReason": {
+        "cv_empty": "CV này chưa có nội dung. Hãy thêm tên hoặc ít nhất một mục có thông tin trước khi lưu vào thư viện.",
+        "cv_quota_reached": "Thư viện CV của bạn đã đầy. Hãy lưu trữ hoặc xóa một CV trong thư viện để có chỗ, rồi lưu CV này."
+      },
       "export": "Xuất PDF",
       "backToList": "CV Studio",
       "notFoundTitle": "Không tìm thấy CV",
       "notFoundBody": "CV này không tồn tại hoặc bạn không có quyền truy cập.",
       "conflictTitle": "CV đã được cập nhật ở nơi khác",
       "conflictBody": "Thay đổi gần nhất chưa được lưu. Chúng tôi đã tải lại phiên bản mới nhất, hãy chỉnh sửa lại nếu cần.",
-      "tabsLabel": "Chế độ xem CV",
+      "tabsLabel": "Chế độ xem trình chỉnh sửa CV",
+      "inspectorTabsLabel": "Bảng chỉnh CV",
       "tabEdit": "Chỉnh sửa",
       "tabPreview": "Xem trước",
+      "tabCanvas": "Trang CV",
+      "tabRestyle": "Phong cách",
+      "tabDesign": "Thiết kế",
+      "tabElements": "Phần tử",
+      "tabVersions": "Phiên bản",
+      "tabAi": "AI",
+      "listEditTitle": "Chỉnh sửa dạng danh sách",
+      "listEditHint": "Dạng biểu mẫu để chỉnh sửa hàng loạt và bằng bàn phím.",
       "addSection": "Thêm mục",
       "newSectionTitle": "Mục mới",
       "sectionAdded": "Đã thêm mục.",
-      "outlineTitle": "Bố cục",
+      "outlineTitle": "Các mục",
       "outlineTemplate": "Mẫu: {name}",
       "outlineNoTemplate": "Chưa áp dụng mẫu",
       "originalTitle": "Tệp gốc đã tải",
@@ -323,10 +490,14 @@
       "title": "Lịch sử phiên bản",
       "current": "Phiên bản hiện tại",
       "lastEdited": "Sửa lần cuối",
-      "note": "Mỗi lần lưu chỉnh sửa sẽ tạo một phiên bản mới được lưu lại.",
+      "note": "Mỗi lần lưu chỉnh sửa sẽ tạo một phiên bản mới. Bạn có thể khôi phục về bất kỳ phiên bản cũ nào.",
       "currentTag": "hiện tại",
       "restore": "Khôi phục",
-      "restoredToast": "Đã khôi phục phiên bản."
+      "restoredToast": "Đã khôi phục phiên bản.",
+      "source": {
+        "import": "Nhập",
+        "restore": "Đã khôi phục"
+      }
     },
     "ai": {
       "title": "Trợ lý AI",
@@ -481,6 +652,8 @@
         "languages": "Ngôn ngữ",
         "activities": "Hoạt động",
         "interests": "Sở thích",
+        "publications": "Ấn phẩm",
+        "references": "Người tham chiếu",
         "custom": "Khác",
         "other": "Thông tin khác"
       },
@@ -550,6 +723,8 @@
     "snapshotHint": "Chúng tôi lưu một bản chụp CV bạn chọn. Chỉnh sửa sau này sẽ không ảnh hưởng đơn này.",
     "noCvTitle": "Bạn cần có CV trước",
     "noCvBody": "Tạo hoặc tải lên CV trong CV Studio, sau đó quay lại để ứng tuyển.",
+    "noReadyCvTitle": "Chưa có CV trong thư viện",
+    "noReadyCvBody": "Hãy lưu một CV vào thư viện — chỉ CV trong thư viện mới dùng để ứng tuyển được.",
     "goToCvStudio": "Mở CV Studio",
     "successTitle": "Đã nộp đơn",
     "successBody": "Đơn ứng tuyển {job} của bạn đã được gửi.",
@@ -571,21 +746,21 @@
     "byCategory": "Theo từng nhóm",
     "tier": {
       "strong": "Rất phù hợp",
-      "good": "Phù hợp tốt",
-      "possible": "Có thể phù hợp",
+      "mid": "Có thể phù hợp",
       "weak": "Chưa phù hợp"
     },
     "tierHint": {
       "strong": "Sẵn sàng nộp sau khi rà soát lần cuối.",
-      "good": "Nộp được sau khi bổ sung một vài điểm còn thiếu.",
-      "possible": "Rà soát điều kiện và bổ sung bằng chứng trước khi nộp.",
+      "mid": "Nộp được sau khi bổ sung một vài điểm còn thiếu và bằng chứng.",
       "weak": "Cân nhắc cải thiện CV hoặc tìm vị trí phù hợp hơn."
     },
     "bands": {
-      "skills": "Kỹ năng",
-      "experience": "Kinh nghiệm",
-      "logistics": "Địa điểm & hình thức",
-      "quality": "Chất lượng CV"
+      "skills": "Kỹ năng chuyên môn",
+      "experience": "Kinh nghiệm & liên quan",
+      "scope": "Phạm vi & tác động",
+      "credentials": "Học vấn & chứng chỉ",
+      "soft_skills": "Kỹ năng mềm",
+      "trajectory": "Lộ trình sự nghiệp"
     },
     "matchedTitle": "Kỹ năng đã khớp",
     "noMatched": "Chưa phát hiện kỹ năng nào khớp.",
@@ -597,6 +772,15 @@
     "staleBody": "Cập nhật lần cuối {days, plural, =0 {hôm nay} other {cách đây # ngày}}.",
     "improveCv": "Cập nhật CV",
     "otherTitle": "CV khác của bạn",
+    "recommendedCvLabel": "CV được đề xuất",
+    "recommendedBadge": "Đề xuất",
+    "selectedBadge": "Đang xem",
+    "cvScoreAria": "{title}: điểm phù hợp {score} trên 100",
+    "selectCvHint": "Chọn một CV để xem điểm và chi tiết phù hợp của CV đó.",
+    "aiEvaluating": "AI đang đánh giá…",
+    "aiEvaluatingHint": "AI đang rà soát kỹ hơn CV của bạn với tin này để đưa ra nhận định chi tiết. Chỉ mất vài giây.",
+    "aiAssessmentTitle": "Đánh giá chi tiết từ AI",
+    "aiAssessmentUnavailable": "Chưa có đánh giá chi tiết cho CV này.",
     "lowSignalNote": "Tin tuyển dụng này có ít yêu cầu cụ thể nên điểm phù hợp chỉ mang tính tham khảo. Chúng tôi vẫn xếp hạng CV dựa trên dữ liệu hiện có.",
     "emptyTitle": "Chưa có CV để so khớp",
     "emptyBody": "Tạo hoặc tải lên một CV để xem mức độ phù hợp với tin này.",
@@ -615,21 +799,22 @@
     "scoreAria": "Điểm phù hợp {score} trên 100",
     "tier": {
       "strong": "Phù hợp cao",
-      "good": "Phù hợp tốt",
-      "possible": "Có thể phù hợp",
+      "mid": "Có thể phù hợp",
       "weak": "Chưa phù hợp"
     },
     "tierHint": {
       "strong": "Sẵn sàng ứng tuyển sau khi xem lại lần cuối.",
-      "good": "Ứng tuyển sau khi bổ sung một vài điểm còn thiếu.",
-      "possible": "Xem lại điều kiện và bổ sung bằng chứng trước khi ứng tuyển.",
+      "mid": "Ứng tuyển sau khi bổ sung một vài điểm còn thiếu và bằng chứng.",
       "weak": "Cân nhắc củng cố CV hoặc tìm vị trí phù hợp hơn."
     },
     "staleNote": "CV này chưa được cập nhật gần đây — hãy cập nhật trước khi ứng tuyển.",
     "bands": {
-      "skills": "Kỹ năng",
-      "experience": "Kinh nghiệm",
-      "quality": "Chất lượng CV"
+      "skills": "Kỹ năng chuyên môn",
+      "experience": "Kinh nghiệm & liên quan",
+      "scope": "Phạm vi & tác động",
+      "credentials": "Học vấn & chứng chỉ",
+      "soft_skills": "Kỹ năng mềm",
+      "trajectory": "Lộ trình sự nghiệp"
     },
     "matchedTitle": "Kỹ năng phù hợp",
     "gapsTitle": "Cân nhắc bổ sung bằng chứng cho",

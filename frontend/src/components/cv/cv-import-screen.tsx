@@ -12,13 +12,11 @@ import { PreviewStep } from "./import-steps/preview-step";
 import { ProcessingStep } from "./import-steps/processing-step";
 import { CalmStatus } from "./import-steps/calm-status";
 import { FailedStep } from "./import-steps/failed-step";
-import { ReviewStep } from "./import-steps/review-step";
 import {
   ApiError,
   cvIngestionApi,
   newIdempotencyKey,
   parseCvQuotaError,
-  parseFactConfirmationRequiredError,
   rememberImportOrigin,
   TERMINAL_INGESTION_STATUSES,
   type Ingestion,
@@ -33,7 +31,6 @@ type Phase =
   | "uploading"
   | "preview"
   | "processing"
-  | "review"
   | "failed"
   | "importing";
 
@@ -58,9 +55,6 @@ export function CvImportScreen() {
   const [fatalError, setFatalError] = useState<string | null>(null);
   const [offline, setOffline] = useState(false);
   const [quotaInfo, setQuotaInfo] = useState<CvQuotaInfo | null>(null);
-  // Paths the backend's per-field confirmation gate rejected as undecided
-  // (422 fact_confirmation_required) — the review screen re-highlights these.
-  const [undecidedPaths, setUndecidedPaths] = useState<string[]>([]);
 
   const timerRef = useRef<number | null>(null);
   const pollsRef = useRef(0);
@@ -146,7 +140,6 @@ export function CvImportScreen() {
     async (ing: Ingestion, body: ImportIngestionBody) => {
       if (!preview) return;
       setPhase("importing");
-      setUndecidedPaths([]);
       try {
         const cv = await cvIngestionApi.importIngestion(ing.ingestion_id, {
           ...body,
@@ -160,12 +153,16 @@ export function CvImportScreen() {
           pageCount: preview.page_count,
         });
         toast.show({ tone: "success", title: t("importedToast") });
-        router.push(`/student/cv/${cv.id}`);
+        // Uploaded CVs are done once extracted + stored — send the student back to
+        // their CV library, NOT into the builder/editor (the editor is only for
+        // template-created CVs). Owner decision 2026-07-05.
+        router.push("/student/cv");
       } catch (e) {
         const quota = parseCvQuotaError(e);
         if (quota) {
           setQuotaInfo(quota);
-          setPhase("review");
+          setFatalError(apiError(e));
+          setPhase("failed");
           return;
         }
         if (isOffline(e)) {
@@ -174,34 +171,31 @@ export function CvImportScreen() {
           setPhase("failed");
           return;
         }
-        const undecided = parseFactConfirmationRequiredError(e);
-        if (undecided) {
-          // Server-side re-check found needs_review fields without a decision
-          // (e.g. the ingestion changed between load and import). Highlight
-          // exactly those fields rather than a generic error.
-          setUndecidedPaths(undecided);
-          toast.show({ tone: "error", title: t("confirmFactsNote") });
-          setPhase("review");
-          return;
-        }
-        toast.show({ tone: "error", title: apiError(e) });
-        // Return to the review screen rather than a dead-end failure page —
-        // the student's edits/decisions are preserved so they can retry.
-        setPhase("review");
+        setFatalError(apiError(e));
+        setPhase("failed");
       }
     },
     [preview, t, toast, router, apiError, isOffline],
   );
 
   /**
-   * A terminal, importable ingestion (`ready`/`needs_review`) always routes to
-   * the explicit review screen — it never auto-imports
-   * (`docs/CV_INGESTION_EXTRACTION_SPEC.md` §2 "Review Screen").
+   * On a terminal ingestion the CV is saved automatically with the name the
+   * student typed — there is NO review/edit screen. The backend's parse is
+   * authoritative and feeds CV–JD matching; the student never rechecks fields
+   * (product decision: upload + name = done).
    */
-  const applyTerminal = useCallback((ing: Ingestion) => {
-    setIngestion(ing);
-    setPhase(ing.status === "failed" ? "failed" : "review");
-  }, []);
+  const applyTerminal = useCallback(
+    (ing: Ingestion) => {
+      setIngestion(ing);
+      if (ing.status === "failed") {
+        setPhase("failed");
+        return;
+      }
+      const name = titleDraft.trim() || preview?.filename?.replace(/\.[^.]+$/, "") || "CV";
+      void importToCv(ing, { title: name, fact_confirmation: true });
+    },
+    [importToCv, titleDraft, preview],
+  );
 
   const poll = useCallback(
     async (ingestionId: string) => {
@@ -320,6 +314,8 @@ export function CvImportScreen() {
       {phase === "preview" && preview && (
         <PreviewStep
           preview={preview}
+          title={titleDraft}
+          onTitleChange={setTitleDraft}
           onUse={startIngest}
           onAnother={reset}
         />
@@ -348,20 +344,6 @@ export function CvImportScreen() {
           }}
           onAnother={reset}
           onCreateFromTemplate={() => router.push("/student/cv?create=1")}
-        />
-      )}
-
-      {phase === "review" && ingestion && preview && (
-        <ReviewStep
-          ingestion={ingestion}
-          preview={preview}
-          titleDraft={titleDraft}
-          onTitleChange={setTitleDraft}
-          onImport={(body) => void importToCv(ingestion, body)}
-          onKeepOriginal={() => router.push("/student/cv")}
-          onUploadAnother={reset}
-          importing={false}
-          forcePendingPaths={undecidedPaths}
         />
       )}
 

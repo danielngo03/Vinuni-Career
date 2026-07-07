@@ -50,6 +50,8 @@
     "filterModeLabel": "Work mode",
     "postedFilterLabel": "Posted",
     "salaryFilterLabel": "Salary",
+    "salaryNoLimit": "No limit",
+    "salaryMillion": "{value}M",
     "experienceFilterLabel": "Experience",
     "filterAllTypes": "All types",
     "filterAllModes": "All modes",
@@ -86,7 +88,28 @@
     "advancedFilters": "More filters",
     "clearFilters": "Clear",
     "resultCount": "{count, plural, =0 {No jobs} one {# job} other {# jobs}}",
-    "resultHelper": "Select a role to preview the details on the right.",
+    "resultHelper": "Select a role to view the job details.",
+    "detailTitle": "Job details",
+    "reportJob": "Report job",
+    "aiSummaryTitle": "AI summary",
+    "seeMore": "See more",
+    "seeLess": "See less",
+    "viewFullDetail": "View details",
+    "applicantsLabel": "Applicants",
+    "applicantsCount": "{count, plural, one {# applicant} other {# applicants}}",
+    "companyDetailsTitle": "Company details",
+    "skillsTitle": "Skills",
+    "filtersTitle": "Filters",
+    "openFilters": "Filters",
+    "activeFilters": "{count} active",
+    "fitScoreShort": "{score}% fit",
+    "fitNoCvShort": "Add a CV to score",
+    "fitCvPrefix": "CV",
+    "fitCvScoresTitle": "CV scores",
+    "fitRecommended": "Recommended",
+    "fitGapCount": "{count, plural, one {# improvement area} other {# improvement areas}}",
+    "fitLowSignal": "Limited job data",
+    "fitStaleCv": "CV needs an update",
     "featuredMetric": "{count} featured",
     "remoteMetric": "{count} remote/hybrid",
     "sortLabel": "Sort",
@@ -373,6 +396,13 @@
       "hiddenInvitationOnly": "This job is invitation-only — this audience would not see it in discovery or by direct link.",
       "hiddenVisibilityTier": "This job's visibility setting hides it from this audience."
     },
+    "locationType": {
+      "onsite": "On-site",
+      "remote": "Remote",
+      "hybrid": "Hybrid"
+    },
+    "addLocation": "Add location",
+    "locationProvincePlaceholder": "Select province/city",
     "enums": {
       "status": {
         "draft": "Draft",
@@ -456,13 +486,20 @@
       "optionsHelp": "Separate options with commas.",
       "addQuestion": "Add question",
       "uploadJdTitle": "Upload job description",
-      "uploadJdHint": "Upload a PDF/DOCX to auto-fill the form (OCR + AI).",
+      "uploadJdHint": "Upload a PDF, DOCX, or image to auto-fill the form (OCR + AI).",
       "uploadJdCta": "Choose file",
       "uploadJdExtracting": "Extracting…",
       "uploadJdSuccess": "Form pre-filled from document.",
+      "uploadJdFilled": "Form pre-filled — check the highlighted fields before submitting.",
       "uploadJdFallback": "AI unavailable — see raw text to fill manually.",
       "uploadJdError": "Could not process file. Try a different format.",
-      "uploadJdLabel": "Upload job description (PDF/DOCX/TXT)",
+      "uploadJdLabel": "Upload job description (PDF, DOCX, or image)",
+      "uploadJdRejected": {
+        "notAJd": "This file doesn't appear to be a job description. Please upload a valid JD.",
+        "blank": "The uploaded file appears to be empty or unreadable. Please try a different file.",
+        "lowQuality": "The scan quality is too low to extract content reliably. Try a higher-quality image.",
+        "insufficient": "The file doesn't contain enough information to fill the job form. Please add more detail."
+      },
       "amendment": {
         "bannerTitle": "This job is live",
         "bannerBody": "Quick-edit fields (headcount, deadline, visibility, benefits) apply immediately. Changing anything else will unpublish this job for university re-review.",
@@ -490,9 +527,167 @@
           "salary_is_disclosed": "Salary disclosure",
           "salary_min": "Salary from",
           "salary_max": "Salary to",
-          "salary_currency": "Salary currency"
+          "salary_currency": "Salary currency",
+          "salary_mode": "Salary type",
+          "salary_period": "Salary period",
+          "salary_gross_net": "Salary gross/net",
+          "experience_mode": "Experience requirement",
+          "seniority_level": "Seniority level",
+          "candidate_requirements": "Eligibility requirements",
+          "industry_id": "Industry"
         }
-      }
+      },
+      "tabs": {
+        "basics": "Basics",
+        "basicsDesc": "Job title, type, location, description, requirements, and benefits.",
+        "role": "Role & requirements",
+        "roleDesc": "Skills, experience, degree, and specialist context for the role.",
+        "comp": "Compensation",
+        "compDesc": "Salary, headcount, application deadline, and visibility.",
+        "eligibility": "Eligibility",
+        "screening": "Screening",
+        "review": "Review"
+      },
+      "salaryMode": "Salary type",
+      "salaryModeOpts": {
+        "negotiable": "Negotiable",
+        "range": "Range",
+        "from": "From",
+        "to": "Up to",
+        "fixed": "Fixed",
+        "hidden": "Hidden"
+      },
+      "salaryPeriod": "Pay period",
+      "salaryPeriodOpts": {
+        "monthly": "Monthly",
+        "yearly": "Yearly"
+      },
+      "salaryGrossNet": "Gross / Net",
+      "salaryGrossNetOpts": {
+        "unspecified": "Unspecified",
+        "gross": "Gross",
+        "net": "Net"
+      },
+      "salaryAmountLabel": "Amount",
+      "salaryFromLabel": "From (min)",
+      "salaryToLabel": "Up to (max)",
+      "salaryFixedLabel": "Amount",
+      "salaryHiddenHelp": "Hidden from candidates — stored for internal reference.",
+      "experienceMode": "Experience required",
+      "experienceModeOpts": {
+        "no_requirement": "No requirement",
+        "fresher": "Fresher",
+        "min": "Min years",
+        "max": "Max years",
+        "range": "Range"
+      },
+      "seniority": "Seniority level",
+      "seniorityOpts": {
+        "not_required": "Not specified",
+        "intern": "Intern",
+        "fresher": "Fresher",
+        "junior": "Junior",
+        "middle": "Mid-level",
+        "senior": "Senior",
+        "lead": "Lead",
+        "manager": "Manager",
+        "director": "Director",
+        "executive": "Executive"
+      },
+      "industryNote": "Extracted industry hint",
+      "industry": "Industry",
+      "industryPlaceholder": "Select an industry",
+      "industrySearchPlaceholder": "Search industries…",
+      "industryEmpty": "No matching industry",
+      "industryLoading": "Loading…",
+      "industryHelp": "AI can auto-pick from the JD; you can change it",
+      "eligibility": {
+        "legend": "Eligibility requirements",
+        "help": "Leave all as \"Not required\" for no restrictions (default).",
+        "panels": {
+          "profile": "Profile & education",
+          "credentials": "Languages & certifications"
+        },
+        "gender": "Gender",
+        "ageLabel": "Age",
+        "marital": "Marital status",
+        "nationality": "Nationality",
+        "education": "Education level",
+        "languages": "Language requirements",
+        "certifications": "Certifications",
+        "note": "Additional eligibility note",
+        "notePlaceholder": "Any additional eligibility information…",
+        "mode": {
+          "notRequired": "Not required",
+          "required": "Required",
+          "preferred": "Preferred"
+        },
+        "genderPresets": {
+          "male": "Male",
+          "female": "Female",
+          "other": "Other"
+        },
+        "maritalPresets": {
+          "single": "Single",
+          "married": "Married",
+          "other": "Other"
+        },
+        "age": {
+          "notRequired": "Not required",
+          "atLeast": "At least",
+          "upTo": "Up to",
+          "range": "Range",
+          "minLabel": "Min age",
+          "maxLabel": "Max age"
+        },
+        "language": {
+          "language": "Language",
+          "proficiency": "Proficiency (optional)",
+          "required": "Required",
+          "addRow": "Add language"
+        },
+        "certification": {
+          "name": "Certification name",
+          "required": "Required",
+          "addRow": "Add certification"
+        },
+        "cvLanguageRequired": "CV Submission Language",
+        "cvLanguageRequiredHelp": "Applicants can still apply in any language, but a mismatch shows a soft warning.",
+        "cvLang": {
+          "any": "No requirement",
+          "en": "English",
+          "vi": "Vietnamese"
+        }
+      },
+      "provenance": {
+        "filled": "Auto-filled",
+        "review": "Check this",
+        "eligibilityReview": "AI filled — please review"
+      },
+      "review": {
+        "title": "Review & submit",
+        "subtitle": "Review the key details before submitting.",
+        "fieldTitle": "Job title",
+        "fieldType": "Employment type",
+        "fieldLocations": "Locations",
+        "fieldSalary": "Salary",
+        "fieldExperience": "Experience",
+        "fieldHeadcount": "Openings",
+        "fieldDeadline": "Deadline",
+        "fieldVisibility": "Visibility",
+        "salaryNegotiable": "Negotiable",
+        "salaryHidden": "Not disclosed",
+        "salaryNoDeadline": "No deadline",
+        "qualityTitle": "Content quality",
+        "noIssues": "All quality checks passed.",
+        "eligibilitySummary": "Eligibility requirements"
+      },
+      "back": "Back",
+      "next": "Next",
+      "saveDraft": "Save draft",
+      "submitReview": "Submit for review",
+      "previewToggle": "Preview",
+      "previewPaneTitle": "Live preview"
     },
     "validation": {
       "required": "This field is required.",
@@ -501,7 +696,11 @@
       "number": "Enter a valid number.",
       "min1": "Must be at least 1.",
       "expRange": "Max years must be greater than or equal to min years.",
-      "salaryRange": "Maximum salary must be greater than or equal to minimum."
+      "salaryRange": "Maximum salary must be greater than or equal to minimum.",
+      "salaryModeNeedsRange": "Enter both minimum and maximum for a range salary.",
+      "salaryModeNeedsMin": "Enter a minimum salary for this salary type.",
+      "salaryModeNeedsMax": "Enter a maximum salary for this salary type.",
+      "salaryModeNeedsAmount": "Enter a salary amount."
     },
     "viewCandidates": "View candidates",
     "verified": "Verified",

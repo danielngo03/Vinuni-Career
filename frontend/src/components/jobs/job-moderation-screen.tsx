@@ -508,15 +508,6 @@ export function JobModerationScreen() {
                     {detail.required_skills.join(", ")}
                   </Field>
                 )}
-                {detail.screening_questions.length > 0 && (
-                  <Field label={tj("screeningQuestions")}>
-                    <ol className="list-decimal space-y-1 pl-4">
-                      {detail.screening_questions.map((q) => (
-                        <li key={q.id}>{q.question}</li>
-                      ))}
-                    </ol>
-                  </Field>
-                )}
               </>
             ) : (
               <p className="rounded-xl border border-[var(--border-default)] bg-white px-3 py-2 text-xs text-[var(--text-muted)] ">

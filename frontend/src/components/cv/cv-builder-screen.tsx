@@ -1,73 +1,78 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useTranslations } from "next-intl";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import {
   ArrowLeft,
   ArrowSquareOut,
+  CheckCircle,
   DownloadSimple,
-  Eye,
   FileArrowUp,
-  PencilSimple,
-  Plus,
+  FloppyDisk,
+  ImageSquare,
+  PaintBrushBroad,
+  PuzzlePiece,
+  Rows,
   SignIn,
-  Star,
+  Sparkle,
+  ClockCounterClockwise,
   WarningCircle,
 } from "@phosphor-icons/react";
-import { Link } from "@/i18n/navigation";
+import { Link, useRouter } from "@/i18n/navigation";
 import {
   Button,
   EmptyState,
-  Select,
   Skeleton,
   StatusBadge,
   Tabs,
   TabPanel,
   useToast,
-  type StatusTone,
 } from "@/components/ui";
 import { CvExportModal } from "./cv-export-modal";
-import { CvVersionCard } from "./cv-version-card";
-import { CvAiAssistCard } from "./cv-ai-assist-card";
-import { CvJobFitRail } from "./cv-job-fit-rail";
+import { CvQuotaModal } from "./cv-quota-modal";
+import { VersionsPanel } from "./builder/versions-panel";
 import { SaveIndicator, type SaveState } from "./builder/save-indicator";
-import { DocumentHealthCard } from "./builder/document-health-card";
 import { OutlineRail } from "./builder/outline-rail";
-import { DraggableSectionItem } from "./builder/draggable-section-item";
-import { CvCanvasEditor } from "./builder/cv-canvas-editor";
-import { CanvasInspector } from "./builder/canvas-inspector";
+import { CanvasStage } from "./builder/canvas-stage";
+import { RestyleInspector } from "./builder/restyle-inspector";
+import { ElementsInspector } from "./builder/elements-inspector";
+import { AiChatPanel } from "./builder/ai-chat-panel";
+import { InsightsPanel } from "./builder/insights-panel";
+import { ListEditPanel } from "./builder/list-edit-panel";
+import {
+  buildEditableContent,
+  parseEditPath,
+  applyTextEdit,
+  applyStructuralEdit,
+  themeForTemplate,
+  type CvDocumentEditing,
+  type CvEdit,
+  type PartialCvTheme,
+} from "@/components/cv/render";
+import type { FontPairingKey } from "@/components/cv/render/palettes";
+import { FONT_PAIRINGS } from "@/components/cv/render/palettes";
 import { CvPhotoEditor, type PhotoShape } from "./builder/cv-photo-editor";
-import { CvAiCommandBar } from "./builder/cv-ai-command-bar";
 import {
   ApiError,
   cvApi,
+  parseCvQuotaError,
+  patchElementStyle,
+  profileApi,
   readImportOrigin,
   resolveDownloadUrl,
-  type CvCanvasBlock,
-  type CvCanvasBlockStyle,
+  type CvCanvasTheme,
+  type CvLinkType,
+  type CvQuotaInfo,
   type CvSection,
   type CvSectionContent,
+  type ElementStyle,
+  type ElementStyleMap,
   type ImportOrigin,
 } from "@/lib/api";
 import { sectionTypeKey } from "@/lib/cv/sections";
-import {
-  blocksEqual,
-  moveBlock,
-  reconcileBlocks,
-  setBlockStyle,
-  shiftBlock,
-  toggleBlockVisible,
-} from "@/lib/cv/canvas";
-import { useHistory } from "@/lib/cv/use-history";
 import { useApiErrorMessage } from "@/lib/auth/use-api-error";
-import { cn } from "@/lib/utils";
 
-const STATUS_TONE: Record<string, StatusTone> = {
-  draft: "draft",
-  ready: "active",
-  archived: "closed",
-};
 const AUTOSAVE_DELAY_MS = 1200;
 
 export function CvBuilderScreen({ cvId, initialSuggestionId, jobId }: { cvId: string; initialSuggestionId?: string; jobId?: string }) {
@@ -76,6 +81,8 @@ export function CvBuilderScreen({ cvId, initialSuggestionId, jobId }: { cvId: st
   const tc = useTranslations("common");
   const toast = useToast();
   const apiError = useApiErrorMessage();
+  const queryClient = useQueryClient();
+  const router = useRouter();
 
   const query = useQuery({
     queryKey: ["cv", "detail", cvId],
@@ -83,36 +90,49 @@ export function CvBuilderScreen({ cvId, initialSuggestionId, jobId }: { cvId: st
     retry: false,
   });
 
-  // ---- Local working copy (single source for editor + live A4 preview) ----
+  // ---- Local working copy (single source for editor + live A4 canvas) ----
   const [sections, setSections] = useState<CvSection[]>([]);
   const [title, setTitle] = useState("");
-  const [isPrimary, setIsPrimary] = useState(false);
   const [templateId, setTemplateId] = useState<string>("");
+  // Per-CV theme overrides (palette/typography/density), layered on the template.
+  const [canvasTheme, setCanvasTheme] = useState<CvCanvasTheme | null>(null);
+  // Per-element style overrides (contextual text toolbar), keyed by edit-path.
+  const [elementStyles, setElementStyles] = useState<ElementStyleMap>({});
+  // The `data-edit-path` currently selected for styling (anchors the toolbar).
+  const [activeStylePath, setActiveStylePath] = useState<string | null>(null);
+  // Right-inspector tab (desktop): design / elements / ai / versions.
+  const [inspectorTab, setInspectorTab] = useState("design");
+  const [selectedSectionId, setSelectedSectionId] = useState<string | null>(null);
   const [saveState, setSaveState] = useState<SaveState>("idle");
   const [liveVersion, setLiveVersion] = useState(0);
   const [conflict, setConflict] = useState(false);
-  const [mobileTab, setMobileTab] = useState("edit");
+  const [mobileTab, setMobileTab] = useState("canvas");
   const [exportOpen, setExportOpen] = useState(false);
   const [restoringId, setRestoringId] = useState<string | null>(null);
   const [addingSection, setAddingSection] = useState(false);
-  // Drag-to-reorder (pointer); the up/down buttons remain the keyboard path.
+  // Drag-to-reorder (pointer) state for the list-edit fallback.
   const [armedId, setArmedId] = useState<string | null>(null);
   const [dragId, setDragId] = useState<string | null>(null);
   const [overId, setOverId] = useState<string | null>(null);
   // Best-effort original-document link for imported CVs (session-scoped).
   const [origin, setOrigin] = useState<ImportOrigin | null>(null);
 
-  // ---- Canvas (block layout) editor state ----
-  const blocksHistory = useHistory<CvCanvasBlock[]>([]);
-  const [selectedBlockId, setSelectedBlockId] = useState<string | null>(null);
+  // ---- Photo editor state ----
   const [photoOpen, setPhotoOpen] = useState(false);
   const [photoSaving, setPhotoSaving] = useState(false);
-  // The blocks value we last persisted/hydrated — any later `blocksHistory.value`
-  // change (push, undo, or redo) that differs from this is a real canvas edit.
-  const blocksPersistedRef = useRef<CvCanvasBlock[] | null>(null);
+
+  // ---- Lifecycle: "Save to library" (finalize a draft → ready) ----
+  // Local status mirror so the pill/button flip immediately on success without
+  // waiting for a full detail refetch. Hydrated from the server detail below.
+  const [status, setStatus] = useState<string>("draft");
+  const [finalizing, setFinalizing] = useState(false);
+  const [finalizeError, setFinalizeError] = useState<string | null>(null);
+  const [quotaInfo, setQuotaInfo] = useState<CvQuotaInfo | null>(null);
 
   const sectionsRef = useRef<CvSection[]>([]);
   const titleRef = useRef("");
+  const canvasThemeRef = useRef<CvCanvasTheme | null>(null);
+  const elementStylesRef = useRef<ElementStyleMap>({});
   const versionRef = useRef(0);
   const hydratedRef = useRef<string | null>(null);
   const forceHydrateRef = useRef(false);
@@ -125,6 +145,14 @@ export function CvBuilderScreen({ cvId, initialSuggestionId, jobId }: { cvId: st
     staleTime: 5 * 60_000,
   });
 
+  // The student's own profile — only needed for the "use system avatar" action.
+  const profile = useQuery({
+    queryKey: ["profile", "me", "avatar"],
+    queryFn: () => profileApi.getMine(),
+    staleTime: 5 * 60_000,
+    retry: false,
+  });
+
   // Keep refs in sync with state for use inside the async save queue.
   useEffect(() => {
     sectionsRef.current = sections;
@@ -132,6 +160,12 @@ export function CvBuilderScreen({ cvId, initialSuggestionId, jobId }: { cvId: st
   useEffect(() => {
     titleRef.current = title;
   }, [title]);
+  useEffect(() => {
+    canvasThemeRef.current = canvasTheme;
+  }, [canvasTheme]);
+  useEffect(() => {
+    elementStylesRef.current = elementStyles;
+  }, [elementStyles]);
 
   // Hydrate local state from the server on first load and after conflict reload.
   const data = query.data;
@@ -140,35 +174,16 @@ export function CvBuilderScreen({ cvId, initialSuggestionId, jobId }: { cvId: st
     if (hydratedRef.current === data.id && !forceHydrateRef.current) return;
     setSections(data.sections);
     setTitle(data.title);
-    setIsPrimary(data.is_primary);
+    setStatus(data.status);
     setTemplateId(data.template_id ?? "");
+    setCanvasTheme((data.canvas?.theme as CvCanvasTheme | null | undefined) ?? null);
+    setElementStyles((data.canvas?.elementStyles as ElementStyleMap | null | undefined) ?? {});
     versionRef.current = data.version;
     setLiveVersion(data.version);
-    const reconciled = reconcileBlocks(data.canvas?.blocks, data.sections);
-    blocksHistory.clear(reconciled);
-    blocksPersistedRef.current = reconciled;
-    setSelectedBlockId((prev) =>
-      prev && reconciled.some((b) => b.id === prev) ? prev : null,
-    );
     hydratedRef.current = data.id;
     forceHydrateRef.current = false;
     setSaveState("idle");
-    // blocksHistory identity is stable across renders (see useHistory); omit it
-    // from deps to avoid re-hydrating on every local canvas edit.
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]);
-
-  // Keep the canvas block layout reconciled when sections are added/removed
-  // by the (non-canvas) section editor, without discarding local block order.
-  useEffect(() => {
-    if (hydratedRef.current !== data?.id) return;
-    const reconciled = reconcileBlocks(blocksHistory.value, sections);
-    if (!blocksEqual(reconciled, blocksHistory.value)) {
-      blocksHistory.replace(reconciled);
-      blocksPersistedRef.current = reconciled;
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [sections]);
 
   useEffect(() => {
     const timers = timersRef.current;
@@ -224,7 +239,7 @@ export function CvBuilderScreen({ cvId, initialSuggestionId, jobId }: { cvId: st
   );
 
   const persistMeta = useCallback(
-    (patch: { title?: string; is_primary?: boolean; template_id?: string | null }) =>
+    (patch: { title?: string; template_id?: string | null }) =>
       enqueue(async () => {
         setSaveState("saving");
         try {
@@ -247,15 +262,15 @@ export function CvBuilderScreen({ cvId, initialSuggestionId, jobId }: { cvId: st
     [cvId, enqueue, handleConflict, toast, apiError],
   );
 
-  // Persist the canvas block layout (order/visibility/style). Discrete block
-  // operations commit immediately — no debounce, unlike free-text keystrokes.
-  const persistCanvasBlocks = useCallback(
-    (blocks: CvCanvasBlock[]) =>
+  // Persist the per-CV theme override (palette/typography/density). Discrete
+  // restyle actions commit immediately — no debounce.
+  const persistTheme = useCallback(
+    (theme: CvCanvasTheme) =>
       enqueue(async () => {
         setSaveState("saving");
         try {
           const res = await cvApi.updateCanvas(cvId, {
-            blocks,
+            theme,
             expected_version: versionRef.current,
           });
           versionRef.current = res.version;
@@ -273,51 +288,44 @@ export function CvBuilderScreen({ cvId, initialSuggestionId, jobId }: { cvId: st
     [cvId, enqueue, handleConflict, toast, apiError],
   );
 
-  // Any real change to `blocksHistory.value` — from a push, an undo, or a
-  // redo — is autosaved uniformly here (undo/redo are themselves autosaved).
-  useEffect(() => {
-    const current = blocksHistory.value;
-    const last = blocksPersistedRef.current;
-    if (last !== null && !blocksEqual(last, current)) {
-      void persistCanvasBlocks(current);
-    }
-    blocksPersistedRef.current = current;
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [blocksHistory.value]);
+  // Persist the per-element style map (contextual text toolbar). Sent as the
+  // FULL map via the canvas PATCH (sibling of `theme`); optimistic + versioned.
+  const persistElementStyles = useCallback(
+    (map: ElementStyleMap) =>
+      enqueue(async () => {
+        setSaveState("saving");
+        try {
+          const res = await cvApi.updateCanvas(cvId, {
+            elementStyles: map,
+            expected_version: versionRef.current,
+          });
+          versionRef.current = res.version;
+          setLiveVersion(res.version);
+          setSaveState("saved");
+        } catch (e) {
+          if (e instanceof ApiError && e.code === "CONFLICT") {
+            await handleConflict();
+          } else {
+            setSaveState("error");
+            toast.show({ tone: "error", title: apiError(e) });
+          }
+        }
+      }),
+    [cvId, enqueue, handleConflict, toast, apiError],
+  );
 
-  // Cmd/Ctrl+Z / Shift+Z undo/redo for canvas operations. Skips when focus is
-  // in an editable text field so the browser's native text undo still works.
-  useEffect(() => {
-    function onKeyDown(e: KeyboardEvent) {
-      if (!(e.metaKey || e.ctrlKey) || e.key.toLowerCase() !== "z") return;
-      const active = document.activeElement as HTMLElement | null;
-      const isEditable =
-        active?.isContentEditable ||
-        active?.tagName === "INPUT" ||
-        active?.tagName === "TEXTAREA";
-      if (isEditable) return;
-      e.preventDefault();
-      if (e.shiftKey) blocksHistory.redo();
-      else blocksHistory.undo();
-    }
-    window.addEventListener("keydown", onKeyDown);
-    return () => window.removeEventListener("keydown", onKeyDown);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  function handleMoveBlock(fromId: string, toId: string) {
-    blocksHistory.push(moveBlock(blocksHistory.value, fromId, toId));
-  }
-  function handleShiftBlock(blockId: string, direction: "up" | "down") {
-    blocksHistory.push(shiftBlock(blocksHistory.value, blockId, direction));
-  }
-  function handleToggleBlockVisible(blockId: string, visible: boolean) {
-    blocksHistory.push(toggleBlockVisible(blocksHistory.value, blockId, visible));
-  }
-  function handleBlockStyleChange(style: CvCanvasBlockStyle) {
-    if (!selectedBlockId) return;
-    blocksHistory.push(setBlockStyle(blocksHistory.value, selectedBlockId, style));
-  }
+  // Apply a single-key style patch to the active element, optimistically, then
+  // persist the merged full map (design spec §4 contextual toolbar).
+  const handleStylePatch = useCallback(
+    (patch: ElementStyle) => {
+      const path = activeStylePath;
+      if (!path) return;
+      const next = patchElementStyle(elementStylesRef.current, path, patch);
+      setElementStyles(next);
+      void persistElementStyles(next);
+    },
+    [activeStylePath, persistElementStyles],
+  );
 
   // ---- Photo replace/crop/remove (versioned; refetches for the canonical URL) ----
   const persistPhoto = useCallback(
@@ -355,6 +363,36 @@ export function CvBuilderScreen({ cvId, initialSuggestionId, jobId }: { cvId: st
     [cvId, enqueue, handleConflict, toast, apiError, query, t],
   );
 
+  // Fetch the profile avatar → File → upload as the CV photo (design spec §6.4).
+  const applySystemAvatar = useCallback(
+    async (shape: PhotoShape) => {
+      const url = profile.data?.avatar_url;
+      if (!url) return;
+      setPhotoSaving(true);
+      try {
+        const res = await fetch(resolveDownloadUrl(url), { credentials: "include" });
+        if (!res.ok) throw new Error("avatar-fetch-failed");
+        const blob = await res.blob();
+        const ext = blob.type.includes("png") ? "png" : blob.type.includes("webp") ? "webp" : "jpg";
+        const file = new File([blob], `avatar.${ext}`, {
+          type: blob.type || "image/jpeg",
+        });
+        await persistPhoto({
+          file,
+          cropX: 0,
+          cropY: 0,
+          cropWidth: 1,
+          cropHeight: 1,
+          shape,
+        });
+      } catch {
+        setPhotoSaving(false);
+        toast.show({ tone: "error", title: t("canvas.systemAvatarError") });
+      }
+    },
+    [profile.data?.avatar_url, persistPhoto, toast, t],
+  );
+
   const scheduleAutosave = useCallback(
     (sectionId: string) => {
       if (timersRef.current[sectionId]) {
@@ -380,54 +418,118 @@ export function CvBuilderScreen({ cvId, initialSuggestionId, jobId }: { cvId: st
   );
 
   // ---- Editor mutations on the local working copy ----
-  function changeSectionContent(sectionId: string, content: CvSectionContent) {
-    setSections((prev) =>
-      prev.map((s) => (s.id === sectionId ? { ...s, content } : s)),
-    );
-    scheduleAutosave(sectionId);
-  }
+  const changeSectionContent = useCallback(
+    (sectionId: string, content: CvSectionContent) => {
+      setSections((prev) =>
+        prev.map((s) => (s.id === sectionId ? { ...s, content } : s)),
+      );
+      scheduleAutosave(sectionId);
+    },
+    [scheduleAutosave],
+  );
 
-  function toggleVisible(sectionId: string, visible: boolean) {
-    setSections((prev) =>
-      prev.map((s) => (s.id === sectionId ? { ...s, is_visible: visible } : s)),
-    );
-    flushSection(sectionId);
-  }
+  // The `header` section id (used to resolve `header.*` edit paths).
+  const headerSectionId = useMemo(
+    () => sections.find((s) => s.section_type === "header")?.id ?? null,
+    [sections],
+  );
 
-  function moveSection(sectionId: string, direction: "up" | "down") {
-    const idx = sections.findIndex((s) => s.id === sectionId);
-    const j = direction === "up" ? idx - 1 : idx + 1;
-    if (idx < 0 || j < 0 || j >= sections.length) return;
-    const a = sections[idx]!;
-    const b = sections[j]!;
-    // Swap both array order and sort_order values.
-    const next = [...sections];
-    next[idx] = { ...b, sort_order: a.sort_order };
-    next[j] = { ...a, sort_order: b.sort_order };
-    setSections(next);
-    // Persist both (serialized; version advances between writes).
-    void persistSection(a.id);
-    void persistSection(b.id);
-  }
+  // ---- Inline canvas text commit (debounced input + blur) ----
+  const handleEditCommit = useCallback(
+    (path: string, value: string) => {
+      const target = parseEditPath(path);
+      if (!target) return;
+      const sectionId =
+        target.kind.startsWith("header.")
+          ? headerSectionId
+          : "sectionId" in target
+            ? target.sectionId
+            : null;
+      if (!sectionId) return;
+      const current = sectionsRef.current.find((s) => s.id === sectionId);
+      if (!current) return;
+      const nextContent = applyTextEdit(current.content ?? {}, target, value);
+      if (nextContent === current.content) return;
+      changeSectionContent(sectionId, nextContent);
+    },
+    [headerSectionId, changeSectionContent],
+  );
 
-  // Drag-to-reorder: move `dragId` to the position of `targetId`, renumber
-  // sort_order densely (0..n-1), and persist only the rows whose order changed.
-  function dropOnto(targetId: string) {
-    if (!dragId || dragId === targetId) return;
-    const prev = sections;
-    const fromIdx = prev.findIndex((s) => s.id === dragId);
-    const toIdx = prev.findIndex((s) => s.id === targetId);
-    if (fromIdx < 0 || toIdx < 0) return;
-    const reordered = [...prev];
-    const [moved] = reordered.splice(fromIdx, 1);
-    reordered.splice(toIdx, 0, moved!);
-    const renumbered = reordered.map((s, i) => ({ ...s, sort_order: i }));
-    setSections(renumbered);
-    const prevOrder = new Map(prev.map((s) => [s.id, s.sort_order]));
-    for (const s of renumbered) {
-      if (prevOrder.get(s.id) !== s.sort_order) void persistSection(s.id);
-    }
-  }
+  // ---- On-canvas structural edits (add/remove entry/highlight/item, level) ----
+  const handleStructuralEdit = useCallback(
+    (edit: CvEdit) => {
+      const sectionId =
+        edit.kind === "add-link" || edit.kind === "remove-link"
+          ? headerSectionId
+          : "sectionId" in edit
+            ? edit.sectionId
+            : null;
+      if (!sectionId) return;
+      const current = sectionsRef.current.find((s) => s.id === sectionId);
+      if (!current) return;
+      const nextContent = applyStructuralEdit(current.content ?? {}, edit);
+      setSections((prev) =>
+        prev.map((s) => (s.id === sectionId ? { ...s, content: nextContent } : s)),
+      );
+      // Skill-level drags fire often; debounce. Add/remove commit immediately.
+      if (edit.kind === "set-skill-level") scheduleAutosave(sectionId);
+      else flushSection(sectionId);
+    },
+    [headerSectionId, scheduleAutosave, flushSection],
+  );
+
+  const toggleVisible = useCallback(
+    (sectionId: string, visible: boolean) => {
+      setSections((prev) =>
+        prev.map((s) => (s.id === sectionId ? { ...s, is_visible: visible } : s)),
+      );
+      flushSection(sectionId);
+    },
+    [flushSection],
+  );
+
+  const moveSection = useCallback(
+    (sectionId: string, direction: "up" | "down") => {
+      // Compute from the live ref (kept in sync) so persistence side-effects
+      // happen exactly once — never inside the state updater (StrictMode-safe).
+      const prev = sectionsRef.current;
+      const idx = prev.findIndex((s) => s.id === sectionId);
+      const j = direction === "up" ? idx - 1 : idx + 1;
+      if (idx < 0 || j < 0 || j >= prev.length) return;
+      const a = prev[idx]!;
+      const b = prev[j]!;
+      const next = [...prev];
+      next[idx] = { ...b, sort_order: a.sort_order };
+      next[j] = { ...a, sort_order: b.sort_order };
+      setSections(next);
+      // Persist both (serialized; version advances between writes).
+      void persistSection(a.id);
+      void persistSection(b.id);
+    },
+    [persistSection],
+  );
+
+  // Drag-to-reorder (list-edit fallback): move `dragId` to `targetId`,
+  // renumber sort_order densely, persist rows whose order changed.
+  const dropOnto = useCallback(
+    (targetId: string) => {
+      if (!dragId || dragId === targetId) return;
+      const prev = sectionsRef.current;
+      const fromIdx = prev.findIndex((s) => s.id === dragId);
+      const toIdx = prev.findIndex((s) => s.id === targetId);
+      if (fromIdx < 0 || toIdx < 0) return;
+      const reordered = [...prev];
+      const [moved] = reordered.splice(fromIdx, 1);
+      reordered.splice(toIdx, 0, moved!);
+      const renumbered = reordered.map((s, i) => ({ ...s, sort_order: i }));
+      setSections(renumbered);
+      const prevOrder = new Map(prev.map((s) => [s.id, s.sort_order]));
+      for (const s of renumbered) {
+        if (prevOrder.get(s.id) !== s.sort_order) void persistSection(s.id);
+      }
+    },
+    [dragId, persistSection],
+  );
 
   function handleTitleChange(value: string) {
     setTitle(value);
@@ -438,63 +540,243 @@ export function CvBuilderScreen({ cvId, initialSuggestionId, jobId }: { cvId: st
     }
   }
 
-  function handleSetPrimary() {
-    setIsPrimary(true);
-    void persistMeta({ is_primary: true });
-  }
+  const handleTemplateChange = useCallback(
+    (value: string) => {
+      setTemplateId(value);
+      void persistMeta({ template_id: value || null });
+    },
+    [persistMeta],
+  );
 
-  function handleTemplateChange(value: string) {
-    setTemplateId(value);
-    void persistMeta({ template_id: value || null });
-  }
+  // ---- Restyle handlers (optimistic local theme + persist) ----
+  const mergeTheme = useCallback(
+    (patch: CvCanvasTheme) => {
+      const merged: CvCanvasTheme = {
+        ...canvasThemeRef.current,
+        ...patch,
+        palette: { ...canvasThemeRef.current?.palette, ...patch.palette },
+        typography: { ...canvasThemeRef.current?.typography, ...patch.typography },
+        sectionStyle: { ...canvasThemeRef.current?.sectionStyle, ...patch.sectionStyle },
+      };
+      setCanvasTheme(merged);
+      void persistTheme(merged);
+    },
+    [persistTheme],
+  );
 
-  async function handleAddSection() {
-    setAddingSection(true);
-    try {
-      const res = await cvApi.addSection(cvId, {
-        section_type: "custom",
-        title: t("builder.newSectionTitle"),
-        is_visible: true,
-        content: { items: [] },
-        expected_version: versionRef.current,
+  const handlePaletteChange = useCallback(
+    (palette: Record<string, string>) => mergeTheme({ palette }),
+    [mergeTheme],
+  );
+  const handleAccentChange = useCallback(
+    (accent: string) => mergeTheme({ palette: { accent } }),
+    [mergeTheme],
+  );
+  const handleFontChange = useCallback(
+    (pairing: FontPairingKey) => {
+      const p = FONT_PAIRINGS.find((f) => f.key === pairing);
+      if (!p) return;
+      mergeTheme({ typography: { headingFont: p.headingFont, bodyFont: p.bodyFont } });
+    },
+    [mergeTheme],
+  );
+  const handleDensityChange = useCallback(
+    // Density tunes both the overall type scale (comfortable/compact) and the
+    // per-entry gap (`sectionStyle.itemGap`), per design spec §6 "Density".
+    (scale: "regular" | "compact") =>
+      mergeTheme({
+        typography: { scale },
+        sectionStyle: { itemGap: scale === "compact" ? "tight" : "regular" },
+      }),
+    [mergeTheme],
+  );
+
+  // Append a section of the given type with a sensible starter content shape.
+  // `entrySeed` sections open an empty entry; `skills`/`languages` open one
+  // level item; `text` sections open an empty paragraph; a divider carries the
+  // presentation-only `{ divider: true }` marker.
+  const addSectionOfType = useCallback(
+    async (
+      sectionType: string,
+      opts?: { title?: string; content?: CvSectionContent; toastKey?: string },
+    ) => {
+      setAddingSection(true);
+      try {
+        const sectionTypeKeyName = `sectionTypes.${sectionTypeKey(sectionType)}`;
+        const defaultTitle = t.has(sectionTypeKeyName)
+          ? t(sectionTypeKeyName)
+          : t("builder.newSectionTitle");
+        const res = await cvApi.addSection(cvId, {
+          section_type: sectionType,
+          title: opts?.title ?? defaultTitle,
+          is_visible: true,
+          content: opts?.content ?? { items: [] },
+          expected_version: versionRef.current,
+        });
+        versionRef.current = res.cv_version;
+        forceHydrateRef.current = true;
+        await query.refetch();
+        setSelectedSectionId(res.section.id);
+        toast.show({
+          tone: "success",
+          title: opts?.toastKey ? t(opts.toastKey) : t("builder.sectionAdded"),
+        });
+      } catch (e) {
+        if (e instanceof ApiError && e.code === "CONFLICT") {
+          await handleConflict();
+        } else {
+          toast.show({ tone: "error", title: apiError(e) });
+        }
+      } finally {
+        setAddingSection(false);
+      }
+    },
+    [cvId, t, query, toast, apiError, handleConflict],
+  );
+
+  const handleAddSection = useCallback(
+    () => addSectionOfType("custom"),
+    [addSectionOfType],
+  );
+
+  const handleAddSectionOfType = useCallback(
+    (sectionType: string) => {
+      // Seed a first row so the fresh section is immediately editable on-canvas.
+      const seed: CvSectionContent =
+        sectionType === "skills" || sectionType === "languages"
+          ? { items: [{ name: "", level: 70 }] }
+          : sectionType === "summary"
+            ? { text: "" }
+            : ["experience", "education", "projects", "certifications", "awards", "activities"].includes(
+                  sectionType,
+                )
+              ? { entries: [{ heading: "", highlights: [] }] }
+              : { items: [] };
+      void addSectionOfType(sectionType, { content: seed });
+    },
+    [addSectionOfType],
+  );
+
+  const handleAddSkillBar = useCallback(
+    () =>
+      void addSectionOfType("skills", {
+        content: { items: [{ name: "", level: 70 }] },
+      }),
+    [addSectionOfType],
+  );
+
+  const handleAddCustomField = useCallback(
+    () =>
+      void addSectionOfType("custom", {
+        title: t("elements.customFieldTitle"),
+        content: { items: [{ text: "" }] },
+      }),
+    [addSectionOfType, t],
+  );
+
+  const handleAddDivider = useCallback(
+    () =>
+      void addSectionOfType("custom", {
+        title: t("elements.divider"),
+        content: { divider: true },
+        toastKey: "elements.dividerAdded",
+      }),
+    [addSectionOfType, t],
+  );
+
+  // Add a typed contact link (LinkedIn / GitHub / …) to the header section so
+  // the renderer draws the matching icon (design spec §3 Elements customization).
+  const handleAddTypedLink = useCallback(
+    (link: { type: CvLinkType; label: string }) => {
+      const sectionId = sectionsRef.current.find((s) => s.section_type === "header")?.id;
+      if (!sectionId) return;
+      const current = sectionsRef.current.find((s) => s.id === sectionId);
+      if (!current) return;
+      const nextContent = applyStructuralEdit(current.content ?? {}, {
+        kind: "add-link",
+        type: link.type,
+        label: link.label,
       });
-      versionRef.current = res.cv_version;
-      forceHydrateRef.current = true;
-      await query.refetch();
-      toast.show({ tone: "success", title: t("builder.sectionAdded") });
-    } catch (e) {
-      if (e instanceof ApiError && e.code === "CONFLICT") {
-        await handleConflict();
-      } else {
-        toast.show({ tone: "error", title: apiError(e) });
-      }
-    } finally {
-      setAddingSection(false);
-    }
-  }
-
-  async function handleRestore(versionId: string) {
-    setRestoringId(versionId);
-    try {
-      const restored = await cvApi.restoreVersion(
-        cvId,
-        versionId,
-        versionRef.current,
+      setSections((prev) =>
+        prev.map((s) => (s.id === sectionId ? { ...s, content: nextContent } : s)),
       );
-      versionRef.current = restored.version;
-      forceHydrateRef.current = true;
-      await query.refetch();
-      toast.show({ tone: "success", title: t("versions.restoredToast") });
+      flushSection(sectionId);
+      toast.show({ tone: "success", title: t("elements.linkAdded", { label: link.label }) });
+    },
+    [flushSection, toast, t],
+  );
+
+  const handleRestore = useCallback(
+    async (versionId: string) => {
+      setRestoringId(versionId);
+      try {
+        const restored = await cvApi.restoreVersion(cvId, versionId, versionRef.current);
+        versionRef.current = restored.version;
+        forceHydrateRef.current = true;
+        await query.refetch();
+        toast.show({ tone: "success", title: t("versions.restoredToast") });
+      } catch (e) {
+        if (e instanceof ApiError && e.code === "CONFLICT") {
+          await handleConflict();
+        } else {
+          toast.show({ tone: "error", title: apiError(e) });
+        }
+      } finally {
+        setRestoringId(null);
+      }
+    },
+    [cvId, query, toast, apiError, handleConflict, t],
+  );
+
+  // ---- Commit this draft CV to the library (finalize → ready) ----
+  // Flushes any pending section autosave first so the finalize validation and
+  // snapshot capture the latest edits. On quota-full → recovery dialog; on the
+  // user-safe empty-CV error → inline block (never crashes the editor).
+  const handleFinalize = useCallback(async () => {
+    setFinalizeError(null);
+    setFinalizing(true);
+    // Wait for the in-flight autosave queue to settle so the server has the
+    // student's latest content before it validates non-empty + snapshots.
+    try {
+      await queueRef.current;
+    } catch {
+      /* autosave surfaces its own error; finalize still proceeds. */
+    }
+    try {
+      const detail = await cvApi.finalize(cvId);
+      versionRef.current = detail.version;
+      setLiveVersion(detail.version);
+      setStatus(detail.status);
+      toast.show({
+        tone: "success",
+        title: t("builder.finalizeSuccessTitle"),
+        description: t("builder.finalizeSuccessBody"),
+      });
+      // Refresh the library list (quota + section membership) and the cached detail.
+      queryClient.setQueryData(["cv", "detail", cvId], detail);
+      void queryClient.invalidateQueries({ queryKey: ["cv", "list"] });
     } catch (e) {
-      if (e instanceof ApiError && e.code === "CONFLICT") {
-        await handleConflict();
+      const quota = parseCvQuotaError(e);
+      if (quota) {
+        setQuotaInfo(quota);
+      } else if (e instanceof ApiError) {
+        // Prefer localized FRONTEND copy keyed by the backend `reason` code so
+        // the /en page never renders the backend's Vietnamese default message.
+        const reason =
+          typeof e.details?.reason === "string" ? (e.details.reason as string) : undefined;
+        const reasonKey = reason ? `builder.finalizeReason.${reason}` : undefined;
+        if (reasonKey && t.has(reasonKey)) {
+          setFinalizeError(t(reasonKey));
+        } else {
+          setFinalizeError(e.message);
+        }
       } else {
-        toast.show({ tone: "error", title: apiError(e) });
+        setFinalizeError(apiError(e));
       }
     } finally {
-      setRestoringId(null);
+      setFinalizing(false);
     }
-  }
+  }, [cvId, queryClient, toast, t, apiError]);
 
   // ---------------------------- Render states ----------------------------
   if (query.isPending) {
@@ -502,12 +784,12 @@ export function CvBuilderScreen({ cvId, initialSuggestionId, jobId }: { cvId: st
       <div className="space-y-4">
         <Skeleton className="h-10 w-40" />
         <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(340px,420px)]">
-          <div className="space-y-4">
+          <Skeleton className="h-[560px] w-full rounded-2xl" />
+          <div className="hidden space-y-4 lg:block">
             {[0, 1, 2].map((i) => (
               <Skeleton key={i} className="h-36 w-full rounded-2xl" />
             ))}
           </div>
-          <Skeleton className="hidden h-[560px] w-full rounded-2xl lg:block" />
         </div>
       </div>
     );
@@ -545,46 +827,85 @@ export function CvBuilderScreen({ cvId, initialSuggestionId, jobId }: { cvId: st
   }
 
   const detail = data!;
-  const versionId =
-    detail.current_version_id ?? detail.versions?.[0]?.id ?? null;
+  const versionId = detail.current_version_id ?? detail.versions?.[0]?.id ?? null;
+  // Lifecycle: `ready` = committed to the library (analyzed, usable to apply);
+  // `draft` = unlimited scratch. Read from the local mirror so the pill/button
+  // flip immediately after finalize.
+  const isReady = status === "ready";
 
   const sectionLabel = (s: CvSection) => {
     const key = `sectionTypes.${sectionTypeKey(s.section_type)}`;
     return t.has(key) ? t(key) : s.title;
   };
   const visibleCount = sections.filter((s) => s.is_visible).length;
-  const activeTemplateName =
-    templates.data?.find((tpl) => tpl.id === templateId)?.name ?? null;
+  const activeTemplate = templates.data?.find((tpl) => tpl.id === templateId) ?? null;
+  const activeTemplateName = activeTemplate?.name ?? null;
+  const canvasPhoto = detail.canvas?.photo ?? null;
 
-  function scrollToSection(id: string) {
-    if (typeof document === "undefined") return;
-    document
-      .getElementById(`cv-sec-${id}`)
-      ?.scrollIntoView({ behavior: "smooth", block: "start" });
-  }
+  // ---- Resolve the theme (template + per-CV overrides) and build content. ----
+  const previewTheme = themeForTemplate(
+    activeTemplate,
+    (canvasTheme ?? undefined) as PartialCvTheme,
+  );
+  const editableContent = buildEditableContent(sections, title || t("preview.untitled"));
+  if (canvasPhoto?.url) editableContent.photo = { url: canvasPhoto.url };
+
+  const showsPhoto = previewTheme.photo.show;
+  const hasSystemAvatar = Boolean(profile.data?.avatar_url);
 
   const saveIndicator = <SaveIndicator state={saveState} />;
 
-  // ---- Canvas selection + inspector wiring ----
-  const orderedBlocks = [...blocksHistory.value].sort((a, b) => a.order - b.order);
-  const selectedBlock = orderedBlocks.find((b) => b.id === selectedBlockId) ?? null;
-  const selectedBlockIndex = selectedBlock
-    ? orderedBlocks.findIndex((b) => b.id === selectedBlock.id)
-    : -1;
-  const selectedSection =
-    selectedBlock?.section_id != null
-      ? (sections.find((s) => s.id === selectedBlock.section_id) ?? null)
-      : null;
-  const canvasPhoto = detail.canvas?.photo ?? null;
+  // ---- Editing wiring passed to the editable <CvDocument/>. ----
+  const editing: CvDocumentEditing = {
+    selectedSectionId,
+    onEditCommit: handleEditCommit,
+    onSelectSection: setSelectedSectionId,
+    onEdit: handleStructuralEdit,
+    onMoveSection: moveSection,
+    activeStylePath,
+    onActiveStylePathChange: (path) => setActiveStylePath(path),
+    labels: {
+      placeholderName: t("canvasEdit.name"),
+      placeholderHeadline: t("canvasEdit.headline"),
+      placeholderEmail: t("canvasEdit.email"),
+      placeholderPhone: t("canvasEdit.phone"),
+      placeholderLocation: t("canvasEdit.location"),
+      placeholderLinkLabel: t("canvasEdit.linkLabel"),
+      placeholderLinkUrl: t("canvasEdit.linkUrl"),
+      placeholderHeading: t("canvasEdit.heading"),
+      placeholderSubheading: t("canvasEdit.subheading"),
+      placeholderTimeframe: t("canvasEdit.timeframe"),
+      placeholderEntryLocation: t("canvasEdit.entryLocation"),
+      placeholderNote: t("canvasEdit.note"),
+      placeholderHighlight: t("canvasEdit.highlight"),
+      placeholderText: t("canvasEdit.text"),
+      placeholderSkill: t("canvasEdit.skill"),
+      addHighlight: t("canvasEdit.addHighlight"),
+      addEntry: t("canvasEdit.addEntry"),
+      addItem: t("canvasEdit.addItem"),
+      removeHighlight: t("canvasEdit.removeHighlight"),
+      removeEntry: t("canvasEdit.removeEntry"),
+      removeItem: t("canvasEdit.removeItem"),
+      moveSectionUp: t("editor.moveUp"),
+      moveSectionDown: t("editor.moveDown"),
+      skillLevel: t("canvasEdit.skillLevel"),
+      editField: (name: string) => t("canvasEdit.editField", { name }),
+    },
+  };
 
-  const editorPanel = (
+  const photoControl = showsPhoto ? (
+    <Button variant="secondary" size="sm" onClick={() => setPhotoOpen(true)}>
+      <ImageSquare aria-hidden weight="duotone" className="size-4" />
+      {canvasPhoto?.url ? t("canvas.editPhoto") : t("canvas.addPhoto")}
+    </Button>
+  ) : null;
+
+  // ---- The central editing canvas. ----
+  const canvasPanel = (
     <div className="space-y-4">
-      {/* Meta controls */}
-      <div className="rounded-2xl border border-[var(--glass-border-strong)] bg-[var(--glass-surface)] backdrop-blur-md p-4 shadow-[var(--shadow-sm)] sm:p-5">
-        <label
-          htmlFor="cv-title"
-          className="mb-1.5 block text-sm font-semibold text-[var(--text-primary)]"
-        >
+      {/* CV name — small metadata edit stays a labelled input (not on-canvas). */}
+      <div className="flex flex-col gap-2 rounded-2xl border border-[var(--glass-border-strong)] bg-[var(--glass-surface)] p-3 shadow-[var(--shadow-sm)] backdrop-blur-md sm:flex-row sm:items-center">
+        <label htmlFor="cv-title" className="shrink-0 text-xs font-semibold text-[var(--text-muted)]">
           {t("builder.titleLabel")}
         </label>
         <input
@@ -592,149 +913,117 @@ export function CvBuilderScreen({ cvId, initialSuggestionId, jobId }: { cvId: st
           value={title}
           onChange={(e) => handleTitleChange(e.target.value)}
           onBlur={flushTitle}
-          className="w-full rounded-xl border border-[var(--glass-border-strong)] bg-[var(--glass-surface)] px-3.5 py-2.5 text-sm font-medium text-[var(--text-primary)] outline-none transition-colors backdrop-blur-sm focus:border-[var(--brand-primary)]/50 focus:bg-[var(--glass-surface-heavy)] focus:ring-2 focus:ring-[var(--brand-primary)]/30"
+          className="w-full rounded-xl border border-[var(--glass-border-strong)] bg-[var(--glass-surface)] px-3 py-2 text-sm font-medium text-[var(--text-primary)] outline-none backdrop-blur-sm transition-colors focus:border-[var(--brand-primary)]/50 focus:bg-[var(--glass-surface-heavy)] focus:ring-2 focus:ring-[var(--brand-primary)]/30"
         />
-        <div className="mt-3 grid gap-3 sm:grid-cols-2">
-          <Select
-            label={t("builder.templateLabel")}
-            value={templateId}
-            onChange={(e) => handleTemplateChange(e.target.value)}
-            disabled={templates.isPending}
-            options={[
-              { value: "", label: t("create.templateNone") },
-              ...(templates.data ?? []).map((tpl) => ({
-                value: tpl.id,
-                label: tpl.name,
-              })),
-            ]}
-          />
-          <div className="flex items-end">
-            <Button
-              variant={isPrimary ? "ghost" : "secondary"}
-              disabled={isPrimary}
-              onClick={handleSetPrimary}
-              fullWidth
-            >
-              <Star
-                aria-hidden
-                weight={isPrimary ? "fill" : "bold"}
-                className="size-4"
-              />
-              {isPrimary ? t("builder.isPrimary") : t("builder.setPrimary")}
-            </Button>
-          </div>
-        </div>
       </div>
 
-      {/* AI Document Health — derived from live section state */}
-      <DocumentHealthCard sections={sections} />
+      <CanvasStage
+        content={editableContent}
+        theme={previewTheme}
+        editing={editing}
+        photoControl={photoControl}
+        elementStyles={elementStyles}
+        activeStylePath={activeStylePath}
+        activeStyle={activeStylePath ? elementStyles[activeStylePath] : undefined}
+        onStylePatch={handleStylePatch}
+        onCloseToolbar={() => setActiveStylePath(null)}
+      />
 
-      {/* Sections */}
-      {sections.map((s, i) => (
-        <DraggableSectionItem
-          key={s.id}
-          section={s}
-          index={i}
-          total={sections.length}
-          dragActive={dragId !== null}
-          isDragging={dragId === s.id}
-          isDropTarget={overId === s.id}
-          isArmed={armedId === s.id}
-          onArmDrag={() => setArmedId(s.id)}
-          onDragStart={() => setDragId(s.id)}
-          onDragOverSection={() => setOverId(s.id)}
-          onDropOnSection={() => {
-            dropOnto(s.id);
-            setDragId(null);
-            setOverId(null);
-            setArmedId(null);
-          }}
-          onDragEnd={() => {
-            setDragId(null);
-            setOverId(null);
-            setArmedId(null);
-          }}
-          onContentChange={(content) => changeSectionContent(s.id, content)}
-          onFlush={() => flushSection(s.id)}
-          onToggleVisible={(v) => toggleVisible(s.id, v)}
-          onMove={(dir) => moveSection(s.id, dir)}
-        />
-      ))}
-
-      <Button
-        variant="secondary"
-        fullWidth
-        loading={addingSection}
-        onClick={handleAddSection}
-      >
-        <Plus aria-hidden weight="bold" className="size-4" />
-        {t("builder.addSection")}
-      </Button>
+      {/* List-edit fallback: full keyboard/bulk editing, collapsed by default. */}
+      <ListEditPanel
+        sections={sections}
+        addingSection={addingSection}
+        drag={{ armedId, dragId, overId, setArmedId, setDragId, setOverId, dropOnto }}
+        onContentChange={changeSectionContent}
+        onFlush={flushSection}
+        onToggleVisible={toggleVisible}
+        onMove={moveSection}
+        onAddSection={handleAddSection}
+      />
     </div>
   );
 
-  const previewPanel = (
-    <div className="space-y-4 lg:sticky lg:top-4">
-      <CvCanvasEditor
-        title={title}
-        sections={sections}
-        blocks={blocksHistory.value}
-        selectedBlockId={selectedBlockId}
-        onSelectBlock={setSelectedBlockId}
-        onMoveBlock={handleMoveBlock}
-        onShiftBlock={handleShiftBlock}
-        onToggleBlockVisible={handleToggleBlockVisible}
-        onSectionTextChange={changeSectionContent}
-        onSectionTextFlush={flushSection}
-        photo={canvasPhoto}
-        onEditPhoto={() => setPhotoOpen(true)}
+  const onAiApplied = () => {
+    forceHydrateRef.current = true;
+    void query.refetch();
+  };
+
+  // ---- Tab: Design (Restyle + photo). ----
+  const designPanel = (
+    <div className="space-y-4">
+      <RestyleInspector
+        templates={templates.data ?? []}
+        templatesLoading={templates.isPending}
+        activeTemplateId={templateId}
+        canvasTheme={canvasTheme}
+        onSelectTemplate={handleTemplateChange}
+        onPaletteChange={handlePaletteChange}
+        onAccentChange={handleAccentChange}
+        onFontChange={handleFontChange}
+        onDensityChange={handleDensityChange}
       />
-      <div className="flex items-center justify-end gap-2 text-xs text-[var(--text-muted)]">
-        <button
-          type="button"
-          onClick={() => blocksHistory.undo()}
-          disabled={!blocksHistory.canUndo}
-          className="rounded-lg border border-[var(--glass-border-strong)] px-2.5 py-1 font-semibold outline-none hover:bg-[var(--glass-surface-light)] disabled:opacity-30"
-        >
-          {t("canvas.undo")}
-        </button>
-        <button
-          type="button"
-          onClick={() => blocksHistory.redo()}
-          disabled={!blocksHistory.canRedo}
-          className="rounded-lg border border-[var(--glass-border-strong)] px-2.5 py-1 font-semibold outline-none hover:bg-[var(--glass-surface-light)] disabled:opacity-30"
-        >
-          {t("canvas.redo")}
-        </button>
-      </div>
-      <CanvasInspector
-        block={selectedBlock}
-        section={selectedSection}
-        index={selectedBlockIndex}
-        total={orderedBlocks.length}
-        onStyleChange={handleBlockStyleChange}
-        onToggleVisible={(visible) => selectedBlockId && handleToggleBlockVisible(selectedBlockId, visible)}
-        onShift={(direction) => selectedBlockId && handleShiftBlock(selectedBlockId, direction)}
+      {showsPhoto && (
+        <div className="rounded-2xl border border-[var(--glass-border-strong)] bg-[var(--glass-surface)] p-4 shadow-[var(--shadow-sm)] backdrop-blur-md">
+          <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-[var(--text-muted)]">
+            {t("canvas.photo")}
+          </p>
+          <Button variant="secondary" size="sm" fullWidth onClick={() => setPhotoOpen(true)}>
+            <ImageSquare aria-hidden weight="duotone" className="size-4" />
+            {canvasPhoto?.url ? t("canvas.editPhoto") : t("canvas.addPhoto")}
+          </Button>
+        </div>
+      )}
+    </div>
+  );
+
+  // ---- Tab: Elements (customization: typed links, blocks, add-section). ----
+  const elementsPanel = (
+    <div className="space-y-4">
+      <ElementsInspector
+        hasHeader={headerSectionId !== null}
+        addingSection={addingSection}
+        onAddLink={handleAddTypedLink}
+        onAddSection={handleAddSectionOfType}
+        onAddDivider={handleAddDivider}
+        onAddSkillBar={handleAddSkillBar}
+        onAddCustomField={handleAddCustomField}
       />
-      <CvAiCommandBar
+      <InsightsPanel cvId={cvId} jobId={jobId} sections={sections} />
+    </div>
+  );
+
+  // ---- Tab: AI (integrated chat assistant). ----
+  const aiPanel = (
+    <div className="space-y-4">
+      <AiChatPanel
         cvId={cvId}
-        onApplied={() => {
-          forceHydrateRef.current = true;
-          void query.refetch();
-        }}
+        sections={sections}
+        jobId={jobId}
+        initialSuggestionId={initialSuggestionId}
+        selectedSectionId={selectedSectionId}
+        onApplied={onAiApplied}
+      />
+    </div>
+  );
+
+  // ---- Tab: Versions (timeline + restore) + original-upload link. ----
+  const versionsPanel = (
+    <div className="space-y-4">
+      <VersionsPanel
+        version={liveVersion}
+        lastEditedAt={detail.last_edited_at}
+        versions={detail.versions}
+        onRestore={handleRestore}
+        restoringId={restoringId}
       />
       {origin && origin.previewUrl && (
-        <div className="rounded-xl border border-[var(--glass-border-strong)] bg-[var(--glass-surface)] backdrop-blur-md p-3.5 shadow-[var(--shadow-sm)]">
+        <div className="rounded-xl border border-[var(--glass-border-strong)] bg-[var(--glass-surface)] p-3.5 shadow-[var(--shadow-sm)] backdrop-blur-md">
           <p className="mb-1.5 text-xs font-bold uppercase tracking-wide text-[var(--text-muted)]">
             {t("builder.originalTitle")}
           </p>
           <div className="flex items-center gap-2.5">
             <span className="flex size-9 shrink-0 items-center justify-center rounded-lg icon-chip-primary shadow-sm">
-              <FileArrowUp
-                aria-hidden
-                weight="duotone"
-                className="size-5 text-white"
-              />
+              <FileArrowUp aria-hidden weight="duotone" className="size-5 text-white" />
             </span>
             <div className="min-w-0 flex-1">
               <p
@@ -756,29 +1045,51 @@ export function CvBuilderScreen({ cvId, initialSuggestionId, jobId }: { cvId: st
           </div>
         </div>
       )}
-      <CvVersionCard
-        version={liveVersion}
-        lastEditedAt={detail.last_edited_at}
-        versions={detail.versions}
-        onRestore={handleRestore}
-        restoringId={restoringId}
-      />
-      <CvAiAssistCard cvId={cvId} sections={sections} initialSuggestionId={initialSuggestionId} />
-      <CvJobFitRail cvId={cvId} jobId={jobId} />
     </div>
   );
 
-  // Left document-outline rail (desktop xl+). Navigation-only mirror of the
-  // section list so the builder reads like a document editor, not a stacked
-  // form. Form controls (template/primary) stay single-instance in the editor.
+  const inspectorTabItems = [
+    {
+      value: "design",
+      label: t("builder.tabDesign"),
+      icon: <PaintBrushBroad aria-hidden weight="duotone" className="size-4" />,
+    },
+    {
+      value: "elements",
+      label: t("builder.tabElements"),
+      icon: <PuzzlePiece aria-hidden weight="duotone" className="size-4" />,
+    },
+    {
+      value: "ai",
+      label: t("builder.tabAi"),
+      icon: <Sparkle aria-hidden weight="duotone" className="size-4" />,
+    },
+    {
+      value: "versions",
+      label: t("builder.tabVersions"),
+      icon: <ClockCounterClockwise aria-hidden weight="duotone" className="size-4" />,
+    },
+  ];
+
+  const inspectorPanels: Record<string, React.ReactNode> = {
+    design: designPanel,
+    elements: elementsPanel,
+    ai: aiPanel,
+    versions: versionsPanel,
+  };
+
+  // Left outline rail (desktop lg+). Keyboard path for select/reorder/hide.
   const outlineRail = (
     <OutlineRail
       sections={sections}
       visibleCount={visibleCount}
       activeTemplateName={activeTemplateName}
       addingSection={addingSection}
+      selectedSectionId={selectedSectionId}
       sectionLabel={sectionLabel}
-      onScrollTo={scrollToSection}
+      onSelect={setSelectedSectionId}
+      onMove={moveSection}
+      onToggleVisible={toggleVisible}
       onAddSection={handleAddSection}
     />
   );
@@ -799,18 +1110,64 @@ export function CvBuilderScreen({ cvId, initialSuggestionId, jobId }: { cvId: st
           <h1 className="min-w-0 truncate text-lg font-bold tracking-tight text-[var(--text-primary)]">
             {title || t("preview.untitled")}
           </h1>
-          <StatusBadge tone={STATUS_TONE[detail.status] ?? "info"}>
-            {detail.status_label}
-          </StatusBadge>
+          {isReady ? (
+            <StatusBadge tone="verified">
+              <CheckCircle aria-hidden weight="fill" className="size-3.5" />
+              {t("status.ready")}
+            </StatusBadge>
+          ) : (
+            <StatusBadge tone="draft">{t("status.draft")}</StatusBadge>
+          )}
         </div>
-        <div className="flex items-center gap-3">
+        <div className="flex flex-wrap items-center gap-2 sm:gap-3">
           {saveIndicator}
-          <Button variant="primary" onClick={() => setExportOpen(true)}>
+          {isReady ? (
+            <span className="hidden items-center gap-1 text-xs font-medium text-[var(--text-muted)] sm:inline-flex">
+              <CheckCircle
+                aria-hidden
+                weight="fill"
+                className="size-3.5 text-[var(--brand-teal)]"
+              />
+              {t("builder.inLibrary")}
+            </span>
+          ) : (
+            <Button
+              variant="primary"
+              loading={finalizing}
+              onClick={() => void handleFinalize()}
+            >
+              <FloppyDisk aria-hidden weight="bold" className="size-4" />
+              {finalizing ? t("builder.finalizing") : t("builder.saveToLibrary")}
+            </Button>
+          )}
+          <Button variant="secondary" onClick={() => setExportOpen(true)}>
             <DownloadSimple aria-hidden weight="bold" className="size-4" />
             {t("builder.export")}
           </Button>
         </div>
       </div>
+
+      {finalizeError && (
+        <div
+          role="alert"
+          className="mb-4 flex items-start gap-3 rounded-xl border border-[var(--amber-600)]/40 bg-[var(--amber-100)] p-3.5"
+        >
+          <span className="flex size-7 shrink-0 items-center justify-center rounded-lg icon-chip-warning shadow-sm">
+            <WarningCircle aria-hidden weight="duotone" className="size-4 text-white" />
+          </span>
+          <div className="flex-1">
+            <p className="text-sm font-semibold text-[var(--text-primary)]">
+              {t("builder.finalizeBlockedTitle")}
+            </p>
+            <p className="mt-0.5 text-sm text-[var(--text-secondary)]">
+              {finalizeError}
+            </p>
+          </div>
+          <Button variant="ghost" size="sm" onClick={() => setFinalizeError(null)}>
+            {tc("close")}
+          </Button>
+        </div>
+      )}
 
       {conflict && (
         <div
@@ -834,53 +1191,57 @@ export function CvBuilderScreen({ cvId, initialSuggestionId, jobId }: { cvId: st
         </div>
       )}
 
-      {/* Mobile tabs */}
+      {/* Mobile tabs: Canvas + the four inspector tabs. The canvas panel and the
+          inspector share one tab bar on small screens; on desktop the canvas is
+          always visible and the inspector has its own tab bar (below). */}
       <div className="lg:hidden">
         <Tabs
           ariaLabel={t("builder.tabsLabel")}
           value={mobileTab}
           onValueChange={setMobileTab}
-          idBase="cv-builder"
+          idBase="cv-builder-mobile"
           items={[
             {
-              value: "edit",
-              label: t("builder.tabEdit"),
-              icon: <PencilSimple aria-hidden weight="duotone" className="size-4" />,
+              value: "canvas",
+              label: t("builder.tabCanvas"),
+              icon: <Rows aria-hidden weight="duotone" className="size-4" />,
             },
-            {
-              value: "preview",
-              label: t("builder.tabPreview"),
-              icon: <Eye aria-hidden weight="duotone" className="size-4" />,
-            },
+            ...inspectorTabItems,
           ]}
         />
       </div>
 
-      {/* Single instance of each panel; CSS arranges the document-builder
-          panes side-by-side (outline rail / editor / preview) on desktop and
-          tab-toggles editor/preview on mobile (no duplicated DOM / ids). */}
-      <div className="mt-4 lg:grid lg:grid-cols-[minmax(0,1fr)_minmax(340px,400px)] lg:gap-5 xl:grid-cols-[210px_minmax(0,1fr)_minmax(360px,400px)]">
+      {/* Desktop: outline / canvas / tabbed inspector side-by-side. */}
+      <div className="mt-4 lg:grid lg:grid-cols-[minmax(0,1fr)_minmax(340px,400px)] lg:gap-5 xl:grid-cols-[220px_minmax(0,1fr)_minmax(360px,420px)]">
         {outlineRail}
-        <TabPanel tabsId="cv-builder" value="edit" active>
-          <div
-            className={cn(
-              "lg:block",
-              mobileTab === "edit" ? "block" : "hidden",
-            )}
-          >
-            {editorPanel}
+
+        {/* Canvas: always visible on desktop; on mobile only when its tab is active. */}
+        <div className={mobileTab === "canvas" ? "block lg:block" : "hidden lg:block"}>
+          {canvasPanel}
+        </div>
+
+        {/* Right inspector column. */}
+        <div>
+          {/* Desktop inspector tab bar. */}
+          <div className="hidden lg:block">
+            <Tabs
+              ariaLabel={t("builder.inspectorTabsLabel")}
+              value={inspectorTab}
+              onValueChange={setInspectorTab}
+              idBase="cv-builder-inspector"
+              className="mb-4"
+              items={inspectorTabItems}
+            />
+            <TabPanel tabsId="cv-builder-inspector" value={inspectorTab} active>
+              {inspectorPanels[inspectorTab]}
+            </TabPanel>
           </div>
-        </TabPanel>
-        <TabPanel tabsId="cv-builder" value="preview" active>
-          <div
-            className={cn(
-              "lg:block",
-              mobileTab === "preview" ? "block" : "hidden",
-            )}
-          >
-            {previewPanel}
+
+          {/* Mobile inspector panels — driven by the shared mobile tab. */}
+          <div className="lg:hidden">
+            {mobileTab !== "canvas" && inspectorPanels[mobileTab]}
           </div>
-        </TabPanel>
+        </div>
       </div>
 
       <CvExportModal
@@ -890,11 +1251,23 @@ export function CvBuilderScreen({ cvId, initialSuggestionId, jobId }: { cvId: st
         versionId={versionId}
       />
 
+      <CvQuotaModal
+        open={quotaInfo !== null}
+        info={quotaInfo}
+        onClose={() => setQuotaInfo(null)}
+        onGoToLibrary={() => {
+          setQuotaInfo(null);
+          router.push("/student/cv");
+        }}
+      />
+
       <CvPhotoEditor
         open={photoOpen}
         onClose={() => setPhotoOpen(false)}
         currentPhoto={canvasPhoto}
         saving={photoSaving}
+        systemAvatarAvailable={hasSystemAvatar}
+        onUseSystemAvatar={(shape) => void applySystemAvatar(shape)}
         onSave={({ file, crop, shape }) =>
           void persistPhoto({
             file,

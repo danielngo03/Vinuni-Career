@@ -1,13 +1,23 @@
 "use client";
 
-import { CircleNotch, SquaresFour } from "@phosphor-icons/react";
+import { CircleNotch } from "@phosphor-icons/react";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { useAuthStore, type Persona } from "@/stores/auth-store";
 import { AccountMenu } from "./account-menu";
+import { SavedButton } from "./saved-button";
+import { HeaderAiButton } from "./header-ai-button";
+import { NotificationBell } from "@/components/notifications/notification-bell";
+import { MessagingBell } from "@/components/messaging/messaging-bell";
 
 export interface PersonaAccountRoutes {
   dashboardHref: string;
+  profileHref: string;
+  applicationsHref: string;
+  invitationsHref: string;
+  notificationsHref: string;
+  messagesHref: string;
+  savedHref: string;
   settingsHref: string;
   billingHref: string;
 }
@@ -18,15 +28,28 @@ export function getPersonaAccountRoutes(
   const normalized = persona ?? "student";
   return {
     dashboardHref: `/${normalized}/dashboard`,
+    profileHref: `/${normalized}/profile`,
+    applicationsHref: `/${normalized}/applications`,
+    invitationsHref: `/${normalized}/invitations`,
+    notificationsHref: `/${normalized}/notifications`,
+    messagesHref: `/${normalized}/messages`,
+    savedHref: `/${normalized}/saved`,
     settingsHref: `/${normalized}/settings`,
     billingHref: `/${normalized}/billing`,
   };
 }
 
 /**
- * Auth-aware actions for the public marketplace header. This keeps the public
- * shell honest after session hydration: guests see login/register; signed-in
- * users get their workspace entry point and account menu.
+ * Auth-aware right-hand actions for the shared marketplace header. Used by both
+ * the public shell and the signed-in student shell so the two never drift:
+ *
+ *  - guest        → login / register.
+ *  - student      → notifications, messages, saved, AI assistant, and the
+ *                   account menu (Overview / Profile / Applications / …).
+ *  - other authed → account menu only (partner/university rarely browse here).
+ *
+ * Overview/Profile/Settings live inside the account menu (avatar), not as a
+ * standalone nav pill.
  */
 export function PublicAuthActions() {
   const tNav = useTranslations("nav");
@@ -48,18 +71,25 @@ export function PublicAuthActions() {
 
   if (status === "authenticated") {
     const routes = getPersonaAccountRoutes(persona);
+    const isStudent = (persona ?? "student") === "student";
     return (
-      <div className="hidden items-center gap-2 min-[1360px]:flex">
-        <Link
-          href={routes.dashboardHref}
-          className="inline-flex h-9 items-center gap-2 rounded-full border border-[var(--border-default)] bg-[var(--surface-card)] px-3.5 text-sm font-semibold text-[var(--text-primary)] outline-none transition-colors hover:bg-[var(--bg-subtle)] focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)]/40"
-        >
-          <SquaresFour aria-hidden weight="duotone" className="size-4" />
-          {tNav("dashboard")}
-        </Link>
+      <div className="hidden items-center gap-1.5 min-[1360px]:flex">
+        {isStudent && (
+          <>
+            <NotificationBell href={routes.notificationsHref} />
+            <MessagingBell href={routes.messagesHref} />
+            <SavedButton variant="icon" />
+            <HeaderAiButton />
+          </>
+        )}
         <AccountMenu
           settingsHref={routes.settingsHref}
           billingHref={routes.billingHref}
+          dashboardHref={routes.dashboardHref}
+          profileHref={isStudent ? routes.profileHref : undefined}
+          applicationsHref={isStudent ? routes.applicationsHref : undefined}
+          invitationsHref={isStudent ? routes.invitationsHref : undefined}
+          showFeedback={isStudent}
         />
       </div>
     );

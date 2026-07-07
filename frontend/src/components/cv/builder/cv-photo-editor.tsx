@@ -2,7 +2,7 @@
 
 import { useCallback, useRef, useState } from "react";
 import { useTranslations } from "next-intl";
-import { Circle, Square, Trash, UploadSimple } from "@phosphor-icons/react";
+import { Circle, Square, Trash, UploadSimple, UserCircle } from "@phosphor-icons/react";
 import { Button, Modal, useToast } from "@/components/ui";
 import type { CvCanvasPhoto } from "@/lib/api";
 import { cn } from "@/lib/utils";
@@ -25,6 +25,8 @@ export function CvPhotoEditor({
   saving,
   onSave,
   onRemove,
+  systemAvatarAvailable = false,
+  onUseSystemAvatar,
 }: {
   open: boolean;
   onClose: () => void;
@@ -36,6 +38,10 @@ export function CvPhotoEditor({
     shape: PhotoShape;
   }) => void;
   onRemove: () => void;
+  /** True when the student has a profile avatar that can seed the CV photo. */
+  systemAvatarAvailable?: boolean;
+  /** Fetch the profile avatar, convert to a File, and upload with `shape`. */
+  onUseSystemAvatar?: (shape: PhotoShape) => void;
 }) {
   const t = useTranslations("cv");
   const toast = useToast();
@@ -182,6 +188,40 @@ export function CvPhotoEditor({
             >
               <UploadSimple aria-hidden weight="bold" className="size-3.5" />
               {t("canvas.chooseDifferentPhoto")}
+            </button>
+          </div>
+        )}
+
+        {/* Use the student's profile avatar instead of an upload. Disabled with
+            a hint when there's no profile avatar to pull from. */}
+        {onUseSystemAvatar && (
+          <div>
+            <button
+              type="button"
+              onClick={() => onUseSystemAvatar(shape)}
+              disabled={!systemAvatarAvailable || saving}
+              className={cn(
+                "flex w-full items-center gap-2.5 rounded-xl border px-3.5 py-2.5 text-left outline-none transition",
+                systemAvatarAvailable && !saving
+                  ? "border-[var(--glass-border-strong)] hover:border-[var(--brand-primary)]/50 hover:bg-[var(--glass-surface-light)] focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)]/40"
+                  : "cursor-not-allowed border-[var(--glass-border)] opacity-60",
+              )}
+            >
+              <UserCircle
+                aria-hidden
+                weight="duotone"
+                className="size-5 shrink-0 text-[var(--brand-primary)]"
+              />
+              <span className="min-w-0 flex-1">
+                <span className="block text-sm font-semibold text-[var(--text-primary)]">
+                  {t("canvas.useSystemAvatar")}
+                </span>
+                <span className="block text-xs text-[var(--text-muted)]">
+                  {systemAvatarAvailable
+                    ? t("canvas.useSystemAvatarHint")
+                    : t("canvas.noSystemAvatarHint")}
+                </span>
+              </span>
             </button>
           </div>
         )}

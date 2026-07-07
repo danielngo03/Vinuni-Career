@@ -7,12 +7,8 @@ import { Button, EmptyState, Skeleton } from "@/components/ui";
 import { PageHeader } from "@/components/layout/page-header";
 import { ApiError, profileApi } from "@/lib/api";
 import { ProfileHeroCard } from "./profile-hero-card";
-import { CoreFieldsCard } from "./core-fields-card";
+import { ContactInfoCard } from "./contact-info-card";
 import { PrivacyCard } from "./privacy-card";
-import { EducationSection } from "./education-section";
-import { ExperienceSection } from "./experience-section";
-import { SkillsSection } from "./skills-section";
-import { LinksSection } from "./links-section";
 import { PROFILE_QUERY_KEY } from "./use-profile-mutations";
 
 export function ProfileScreen() {
@@ -49,9 +45,9 @@ export function ProfileScreen() {
       <PageHeader title={t("title")} description={t("subtitle")} />
 
       {query.isPending ? (
-        <div className="space-y-6">
-          <Skeleton className="h-32 w-full rounded-2xl" />
-          <Skeleton className="h-80 w-full rounded-2xl" />
+        <div className="mx-auto max-w-3xl space-y-6">
+          <Skeleton className="h-40 w-full rounded-2xl" />
+          <Skeleton className="h-56 w-full rounded-2xl" />
           <Skeleton className="h-64 w-full rounded-2xl" />
         </div>
       ) : query.isError ? (
@@ -67,22 +63,13 @@ export function ProfileScreen() {
           }
         />
       ) : (
-        <div className="space-y-6">
+        <div className="mx-auto max-w-3xl space-y-6">
+          <p className="rounded-xl border border-[var(--border-default)] bg-[var(--bg-subtle)] px-4 py-3 text-sm text-[var(--text-secondary)]">
+            {t("cvHint")}
+          </p>
           <ProfileHeroCard profile={query.data} />
-          <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
-            <div className="space-y-6 lg:col-span-2">
-              <CoreFieldsCard profile={query.data} />
-              <EducationSection items={query.data.education} />
-              <ExperienceSection items={query.data.experience} />
-              <SkillsSection items={query.data.skills} />
-              <LinksSection items={query.data.links} />
-            </div>
-            <aside className="space-y-6 lg:col-span-1">
-              <div className="lg:sticky lg:top-6">
-                <PrivacyCard profile={query.data} />
-              </div>
-            </aside>
-          </div>
+          <ContactInfoCard profile={query.data} />
+          <PrivacyCard profile={query.data} />
         </div>
       )}
     </>

@@ -324,8 +324,13 @@
 
   /* ── AI / signal accents ── */
   --ai-accent: #059669;
+  --ai-accent-strong: #047857;
   --ai-accent-soft: #f0faf5;
+  --ai-accent-surface: #ecfdf5;
+  --ai-accent-surface-hover: #d8f3e6;
+  --ai-accent-ring: rgba(5, 150, 105, 0.24);
   --ai-glow: rgba(16, 185, 129, 0.35);
+  --ai-chip-shadow: 0 0 0 1px rgba(5, 150, 105, 0.14), 0 6px 16px rgba(5, 150, 105, 0.12);
 
   /* ── Inventory class accents (organic/recommended/sponsored/curated) ── */
   --class-curated: #171717;   /* ink — VinUni-curated */
@@ -350,6 +355,11 @@
   --color-warning: #d97706;
   --color-error: #c83538;
   --color-info: #525252;
+  /* Bare aliases: several components reference `var(--warning)` (diff-panel,
+     ai-chat-panel, job-invite, cv-ai-assist-card) — alias to the semantic token
+     so the amber warning styling actually resolves. Indirection is live, so a
+     dark-theme override of --color-warning flows through automatically. */
+  --warning: var(--color-warning);
 
   /* ── Recruitment status ── */
   --status-pending: #d97706;
@@ -434,8 +444,13 @@
   --brand-teal: #34d399;
   --brand-amber: #fbbf24;
   --ai-accent: #34d399;
+  --ai-accent-strong: #6ee7b7;
   --ai-accent-soft: #0d231a;
+  --ai-accent-surface: #10261e;
+  --ai-accent-surface-hover: #143225;
+  --ai-accent-ring: rgba(52, 211, 153, 0.30);
   --ai-glow: rgba(52, 211, 153, 0.30);
+  --ai-chip-shadow: 0 0 0 1px rgba(52, 211, 153, 0.18), 0 6px 18px rgba(0, 0, 0, 0.22);
   --kicker: #8f8f8f;
   --class-curated: #ededed;
   --class-strategic: #a1a1a1;
@@ -911,4 +926,41 @@ body {
   .aurora-orb-c {
     animation: none !important;
   }
+}
+
+/* ------------------------------------------------------------------------- */
+/* CV canvas inline editing (CvDocument `editable` mode).                     */
+/* The CV document itself is user content (colourful per theme); these rules  */
+/* only add editing affordances — a hover/focus tint and empty placeholders. */
+/* ------------------------------------------------------------------------- */
+.cv-editable {
+  cursor: text;
+  border-radius: 3px;
+  transition: background-color 0.12s ease, box-shadow 0.12s ease;
+  min-width: 1ch;
+  min-height: 1em;
+}
+.cv-editable:hover {
+  background-color: rgba(15, 23, 42, 0.05);
+}
+.cv-editable:focus {
+  background-color: rgba(15, 23, 42, 0.06);
+  box-shadow: 0 0 0 2px rgba(15, 23, 42, 0.18);
+}
+/* Selected-for-styling ring (the contextual text toolbar is anchored to this
+   node). Persists after blur so the toolbar stays open while the student uses
+   it; the wash is subtle so the document colour still reads. */
+.cv-editable-selected {
+  background-color: rgba(15, 23, 42, 0.05);
+  box-shadow: 0 0 0 1.5px rgba(15, 23, 42, 0.28);
+}
+/* Empty editable fields show a muted, clickable placeholder. */
+.cv-editable-empty::before {
+  content: attr(data-placeholder);
+  color: rgba(100, 116, 139, 0.7);
+  font-style: italic;
+  pointer-events: none;
+}
+.cv-editable-empty:focus::before {
+  content: "";
 }

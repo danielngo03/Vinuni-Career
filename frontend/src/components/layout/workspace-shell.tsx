@@ -33,6 +33,7 @@ export function WorkspaceShell({
   const t = useTranslations("common");
   const tNav = useTranslations("nav");
   const status = useAuthStore((s) => s.status);
+  const user = useAuthStore((s) => s.user);
   const {
     mobileNavOpen,
     setMobileNavOpen,
@@ -51,15 +52,19 @@ export function WorkspaceShell({
     pathname === `/${persona}/notifications` ||
     pathname.startsWith(`/${persona}/notifications/`);
 
-  // Route guard: unauthenticated users are sent to login with a return URL.
+  // Route guard: unauthenticated users → login; wrong persona → their workspace.
   // Hydration runs once at app load; while it resolves we show a loading state.
   useEffect(() => {
     if (status === "guest") {
       router.replace(
         `/auth/login?returnTo=${encodeURIComponent(pathname)}`,
       );
+      return;
     }
-  }, [status, pathname, router]);
+    if (status === "authenticated" && user && user.persona !== persona) {
+      router.replace(`/${user.persona}`);
+    }
+  }, [status, user, persona, pathname, router]);
 
   // Sync the persisted collapse preference post-mount only, so SSR and the
   // first client render both start expanded and never hydration-mismatch.
@@ -67,7 +72,9 @@ export function WorkspaceShell({
     setSidebarCollapsed(readPersistedSidebarCollapsed());
   }, [setSidebarCollapsed]);
 
-  if (status !== "authenticated") {
+  // Wait for hydration; reject wrong-persona access (persona check is also
+  // enforced by backend RBAC, so this is a UX guard only).
+  if (status !== "authenticated" || (user && user.persona !== persona)) {
     return (
       <div className="flex min-h-dvh flex-col items-center justify-center gap-4 bg-[var(--bg-subtle)] px-4">
         <BrandMark />

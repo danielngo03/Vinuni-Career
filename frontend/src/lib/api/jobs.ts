@@ -54,12 +54,6 @@ export type JobVisibility =
   | "vinuni_only"
   | "invitation_only";
 
-export type ScreeningQType =
-  | "text"
-  | "single_choice"
-  | "multiple_choice"
-  | "yes_no";
-
 // Keep these for internal form schemas and type-guard usage only.
 // The public filter chips must NOT render from these — use jobsApi.getConfig() instead.
 export const EMPLOYMENT_TYPES: EmploymentType[] = [
@@ -80,12 +74,6 @@ export const JOB_VISIBILITIES: JobVisibility[] = [
   "students_only",
   "vinuni_only",
   "invitation_only",
-];
-export const SCREENING_Q_TYPES: ScreeningQType[] = [
-  "text",
-  "yes_no",
-  "single_choice",
-  "multiple_choice",
 ];
 
 /* ------------------------------- Wire types ------------------------------- */
@@ -172,6 +160,57 @@ export interface JobLocationItem {
   country: string;
 }
 
+/* -------------------- Candidate requirements vocabulary ------------------- */
+
+export type RequirementMode = "not_required" | "required" | "preferred";
+export type AgeMode = "not_required" | "at_least" | "up_to" | "range";
+export type SalaryMode = "negotiable" | "hidden" | "fixed" | "range" | "from" | "to";
+export type SalaryPeriod = "monthly" | "yearly";
+export type SalaryGrossNet = "unspecified" | "gross" | "net";
+export type ExperienceMode = "no_requirement" | "fresher" | "range" | "min" | "max";
+
+export interface RequirementGroup { mode: RequirementMode; values: string[]; note?: string | null; }
+export interface AgeRequirement { mode: AgeMode; min?: number | null; max?: number | null; }
+export interface LanguageRequirement { language: string; proficiency?: string | null; required: boolean; }
+export interface CertificationRequirement { name: string; required: boolean; }
+export interface CandidateRequirements {
+  education?: RequirementGroup;
+  nationalities?: RequirementGroup;
+  gender?: RequirementGroup;
+  age?: AgeRequirement;
+  marital_status?: RequirementGroup;
+  languages?: LanguageRequirement[];
+  certifications?: CertificationRequirement[];
+  note?: string | null;
+}
+
+export type JobStudentFitTier = "strong" | "good" | "possible" | "weak" | "no_cv";
+export type JobStudentFitSignal = "ok" | "low_signal" | "no_cv";
+
+export interface JobStudentFitCvScore {
+  cv_id: string;
+  title: string;
+  score: number;
+  tier: JobStudentFitTier;
+  bands: StudentFitBands;
+  matched_skills: string[];
+  gap_count: number;
+  stale: boolean;
+  recommended: boolean;
+}
+
+export interface JobStudentFitSummary {
+  score: number | null;
+  tier: JobStudentFitTier;
+  recommended_cv_id: string | null;
+  recommended_cv_title: string | null;
+  matched_skills: string[];
+  gap_count: number;
+  signal: JobStudentFitSignal;
+  bands: StudentFitBands | null;
+  cv_scores: JobStudentFitCvScore[];
+}
+
 /** Fields shared by every job projection (public + owner). */
 export interface JobSummary {
   id: string;
@@ -198,6 +237,8 @@ export interface JobSummary {
   company?: JobCompanyRef | null;
   /** True when the authenticated student has saved this job. Always false for guests. */
   is_saved?: boolean;
+  /** Authenticated student/alumni only: lightweight CV-JD fit summary for cards. */
+  student_fit?: JobStudentFitSummary | null;
 }
 
 /** Public discovery detail — never carries moderation/owner internals. */
@@ -213,12 +254,21 @@ export interface PublicJobDetail extends JobSummary {
   view_count: number;
   /** BCP-47 language code of the original JD: "vi" | "en" | "mixed" | "unknown" */
   language_code?: string;
+  /** Structured salary/experience/candidate fields — optional for backward compat. */
+  salary_mode?: string | null;
+  salary_period?: string | null;
+  salary_gross_net?: string | null;
+  experience_mode?: string | null;
+  seniority_level?: string | null;
+  candidate_requirements?: CandidateRequirements | null;
+  /** Industry taxonomy id (level 0–2 node). Null when not set. */
+  industry_id?: string | null;
   /**
-   * Present only on the owner projection today; the public projection omits it.
-   * Optional here so the apply flow can render screening inputs the moment the
-   * backend includes them for applicants (see handoff "backend gaps").
+   * CV document language required by the partner for this posting.
+   * "any" (default) = no restriction. "en" / "vi" = soft preference only —
+   * students can still apply with any CV but see a warning on mismatch.
    */
-  screening_questions?: ScreeningQuestion[];
+  cv_language_required?: "any" | "en" | "vi";
 }
 
 /** Translated JD fields returned by POST /jobs/{id}/translate */
@@ -251,15 +301,6 @@ export interface OwnerJobSummary extends JobSummary {
   is_overdue?: boolean;
 }
 
-export interface ScreeningQuestion {
-  id: string;
-  question: string;
-  q_type: ScreeningQType;
-  options: string[] | null;
-  is_required: boolean;
-  sort_order: number;
-}
-
 /** Full owner/moderator detail (org members of the owning org + superadmin). */
 export interface OwnerJobDetail extends PublicJobDetail {
   posted_by: string;
@@ -276,15 +317,6 @@ export interface OwnerJobDetail extends PublicJobDetail {
   version: number;
   created_at: string;
   updated_at: string;
-  screening_questions: ScreeningQuestion[];
-}
-
-export interface ScreeningQuestionInput {
-  question: string;
-  q_type: ScreeningQType;
-  options?: string[] | null;
-  is_required?: boolean;
-  sort_order?: number;
 }
 
 export interface JobCreateBody {
@@ -310,7 +342,18 @@ export interface JobCreateBody {
   headcount?: number;
   application_deadline?: string | null;
   visibility?: string;
-  screening_questions?: ScreeningQuestionInput[];
+  salary_mode?: string | null;
+  salary_period?: string;
+  salary_gross_net?: string;
+  experience_mode?: string | null;
+  seniority_level?: string | null;
+  industry_id?: string | null;
+  candidate_requirements?: CandidateRequirements | null;
+  /**
+   * CV document language requirement for this posting.
+   * "any" = no restriction (server default). "en" / "vi" = soft preference.
+   */
+  cv_language_required?: "any" | "en" | "vi";
 }
 
 export type JobUpdateBody = Partial<JobCreateBody> & { version?: number };
@@ -344,8 +387,10 @@ export type StudentFitLabel =
 export interface StudentFitBands {
   skills: number;
   experience: number;
-  logistics: number;
-  quality: number;
+  scope: number;
+  credentials: number;
+  soft_skills: number;
+  trajectory: number;
 }
 
 /**
@@ -442,6 +487,20 @@ export interface StudentJobIntelligence {
   next_actions: StudentNextAction[];
 }
 
+/**
+ * `GET /jobs/{job_id}/fit-explanation?cv_id=...` — the slow, LLM-backed
+ * narrative for a specific CV, fetched AFTER the fast deterministic
+ * student-intelligence payload renders. `explanation` is null when the AI
+ * assessment is unavailable (AI offline, low-signal, or not yet generated);
+ * the caller hides the section rather than surfacing an error. Never carries
+ * provider/model/token/prompt/confidence internals.
+ */
+export interface StudentFitExplanation {
+  cv_id: string | null;
+  explanation: string | null;
+  ai_explanation_available: boolean;
+}
+
 /** Result from the JD document upload + AI extraction endpoint. */
 export interface JdUploadResult {
   is_ai_extraction: boolean;
@@ -457,7 +516,7 @@ export interface JdUploadResult {
   benefits_en?: string | null;
   employment_type?: string | null;
   location_type?: string | null;
-  locations?: Array<{ city: string | null; country: string }>;
+  locations?: Array<{ type?: string | null; city: string | null; province_code?: string | null; country: string }>;
   required_skills?: string[];
   preferred_skills?: string[];
   experience_min_years?: number | null;
@@ -471,6 +530,23 @@ export interface JdUploadResult {
   detected_language?: "vi" | "en" | "mixed";
   // Fallback when AI unavailable
   raw_text_preview?: string | null;
+  // Extended fields from rebuilt backend extraction
+  status?: "ok" | "not_a_jd" | "blank" | "low_quality_scan" | "insufficient" | "ai_unavailable" | string;
+  needs_review?: boolean;
+  field_confidence?: Record<string, { needs_review: boolean }>;
+  salary_mode?: string | null;
+  salary_period?: string | null;
+  salary_gross_net?: string | null;
+  experience_mode?: string | null;
+  seniority_level?: string | null;
+  industry?: string | null;
+  application_deadline?: string | null;
+  candidate_requirements?: CandidateRequirements | null;
+  /**
+   * CV language preference extracted from the JD. Null / undefined when the
+   * AI did not detect a specific preference ("any" is the safe default).
+   */
+  cv_language_required?: "any" | "en" | "vi" | null;
 }
 
 /* ------------------------ JD quality-check + preview ----------------------- */
@@ -480,8 +556,8 @@ export type JobQualityIssueSeverity = "blocking" | "advisory";
 /**
  * One finding from the deterministic JD quality-check rubric
  * (`GET /jobs/{job_id}/quality-check`). `field` is a stable machine key
- * (e.g. "title", "description", "salary", "location_city", "experience",
- * "screening_questions") used to route the finding to the matching form
+ * (e.g. "title", "description", "salary", "location_city", "experience")
+ * used to route the finding to the matching form
  * field; `message` is already localized server-side.
  */
 export interface JobQualityIssue {
@@ -522,6 +598,7 @@ export const jobsApi = {
     q?: string | null;
     employment_type?: string | null;
     location_type?: string | null;
+    location_types?: string | null;
     province_code?: string | null;
     ward_code?: string | null;
     province_codes?: string | null;
@@ -550,6 +627,7 @@ export const jobsApi = {
         q: opts?.q ?? undefined,
         employment_type: opts?.employment_type ?? undefined,
         location_type: opts?.location_type ?? undefined,
+        location_types: opts?.location_types ?? undefined,
         province_code: opts?.province_code ?? undefined,
         ward_code: opts?.ward_code ?? undefined,
         province_codes: opts?.province_codes ?? undefined,
@@ -761,7 +839,46 @@ export const jobsApi = {
       { query: { cv_id: cvId ?? undefined } },
     );
   },
+
+  /**
+   * Async AI narrative for the scored CV — fetched separately from (and after)
+   * `studentIntelligence` so the deterministic fit ring/bands render instantly
+   * while the LLM assessment streams in. `explanation` is null when
+   * unavailable; the caller hides the section gracefully. Authenticated-student
+   * only. Never exposes provider/model/token/confidence internals.
+   */
+  fitExplanation(
+    jobId: string,
+    cvId?: string | null,
+  ): Promise<StudentFitExplanation> {
+    return api.get<StudentFitExplanation>(`/jobs/${jobId}/fit-explanation`, {
+      query: { cv_id: cvId ?? undefined },
+    });
+  },
+
+  /**
+   * Batch card-level fit scores for a page of jobs.
+   * Authenticated-student only — 401 for guests/partners.
+   * Silent failure is expected: caller ignores errors and shows no badge.
+   * Max 50 job_ids per request.
+   */
+  batchFitScores(jobIds: string[]): Promise<BatchFitScoresResponse> {
+    return api.post<BatchFitScoresResponse>("/jobs/fit-scores", { job_ids: jobIds });
+  },
 };
+
+/* -------------------- Batch fit scores (card-level async) ------------------ */
+
+export interface JobFitScoreEntry {
+  score: number;
+  recommended_cv_id: string | null;
+  signal: "ok" | "low_signal";
+  stale: boolean;
+}
+
+export interface BatchFitScoresResponse {
+  scores: Record<string, JobFitScoreEntry>;
+}
 
 export interface JdDraftInputs {
   title?: string;

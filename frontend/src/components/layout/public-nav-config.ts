@@ -6,7 +6,7 @@
  */
 export interface PublicNavItem {
   /** i18n key under the `nav` namespace. */
-  key: "jobs" | "companies" | "careerExplore" | "events" | "employers";
+  key: "jobs" | "companies" | "careerExplore" | "events" | "employers" | "createCv";
   href: string;
   mega?: "jobs" | "companies" | "events";
 }
@@ -14,6 +14,6 @@ export interface PublicNavItem {
 export const PUBLIC_PRIMARY_NAV: readonly PublicNavItem[] = [
   { key: "jobs", href: "/jobs", mega: "jobs" },
   { key: "companies", href: "/companies", mega: "companies" },
-  { key: "careerExplore", href: "/career-explore" },
   { key: "events", href: "/events", mega: "events" },
+  { key: "createCv", href: "/student/cv" },
 ] as const;

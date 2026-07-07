@@ -23,7 +23,6 @@ function fieldLabel(
     "salary",
     "location_city",
     "experience",
-    "screening_questions",
   ];
   return known.includes(field) ? t(`quality.fields.${field}`) : field;
 }

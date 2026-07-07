@@ -14,7 +14,7 @@ import {
 import { Link } from "@/i18n/navigation";
 import { Button, Skeleton } from "@/components/ui";
 import { ApiError, cvApi } from "@/lib/api";
-import { FIT_TIER_FILL, FIT_TIER_TEXT, fitTier } from "@/lib/cv/fit";
+import { FIT_TIER_FILL, FIT_TIER_TEXT, fitColor, fitTier } from "@/lib/cv/fit";
 
 /**
  * Right-panel job-fit rail for the CV builder.
@@ -154,9 +154,17 @@ export function CvJobFitRail({
             </p>
           )}
 
-          {/* Category bars */}
+          {/* Category bars — the 6 core HR evaluation criteria the scorer
+              produces, ordered by importance so the strongest signals read first. */}
           <div className="space-y-2">
-            {(["skills", "experience", "quality"] as const).map((band) => {
+            {([
+              "skills",
+              "experience",
+              "scope",
+              "credentials",
+              "soft_skills",
+              "trajectory",
+            ] as const).map((band) => {
               const pct = Math.round(result.bands[band] ?? 0);
               return (
                 <div key={band}>
@@ -168,8 +176,8 @@ export function CvJobFitRail({
                   </div>
                   <div className="h-1.5 overflow-hidden rounded-full bg-[var(--border-light)]">
                     <div
-                      className="h-full rounded-full transition-all duration-500"
-                      style={{ width: `${pct}%`, background: FIT_TIER_FILL[fitTier(pct)] }}
+                      className="h-full rounded-full transition-all duration-500 motion-reduce:transition-none"
+                      style={{ width: `${pct}%`, background: fitColor(pct) }}
                     />
                   </div>
                 </div>
