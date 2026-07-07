@@ -124,11 +124,39 @@ async def reconcile_ai_usage_daily(db: AsyncSession, day: datetime) -> int:
     ).all()
 
     if not events:
-        _log.debug(
-            "reconcile_ai_usage_daily: no events for %s, nothing to write",
-            day_start.date(),
-        )
-        return 0
+        # No source events for this day.  Any AiUsageDaily rows that still
+        # exist for the day are stale (the spec: reconcile makes the rollup
+        # authoritative).  Zero every counter so the grain remains visible but
+        # truthful; do NOT delete so the day-grain stays discoverable.
+        stale_rows = (
+            await db.scalars(
+                select(AiUsageDaily).where(AiUsageDaily.day == day_start)
+            )
+        ).all()
+        corrected = 0
+        for row in stale_rows:
+            row.requests = 0
+            row.errors = 0
+            row.fallbacks = 0
+            row.blocked = 0
+            row.prompt_tokens = 0
+            row.completion_tokens = 0
+            row.cost_usd = 0.0
+            row.latency_ms_sum = 0
+            row.latency_ms_count = 0
+            corrected += 1
+        if corrected:
+            _log.info(
+                "reconcile_ai_usage_daily: day=%s no events — zeroed %d stale row(s)",
+                day_start.date(),
+                corrected,
+            )
+        else:
+            _log.debug(
+                "reconcile_ai_usage_daily: no events for %s, nothing to write",
+                day_start.date(),
+            )
+        return corrected
 
     # ------------------------------------------------------------------
     # 2. Accumulate into per-grain aggregates.
@@ -145,7 +173,7 @@ async def reconcile_ai_usage_daily(db: AsyncSession, day: datetime) -> int:
     # ------------------------------------------------------------------
     written = 0
     for (task_type, provider_key, model_key, org_id), agg in aggregates.items():
-        row = await db.scalar(
+        existing: AiUsageDaily | None = await db.scalar(
             select(AiUsageDaily).where(
                 AiUsageDaily.day == day_start,
                 AiUsageDaily.task_type == task_type,
@@ -155,8 +183,8 @@ async def reconcile_ai_usage_daily(db: AsyncSession, day: datetime) -> int:
             )
         )
 
-        if row is None:
-            row = AiUsageDaily(
+        if existing is None:
+            existing = AiUsageDaily(
                 day=day_start,
                 task_type=task_type,
                 provider=provider_key,
@@ -172,18 +200,18 @@ async def reconcile_ai_usage_daily(db: AsyncSession, day: datetime) -> int:
                 latency_ms_sum=0,
                 latency_ms_count=0,
             )
-            db.add(row)
+            db.add(existing)
 
         # Always overwrite with the recomputed truth (self-healing).
-        row.requests = agg.requests
-        row.errors = agg.errors
-        row.fallbacks = agg.fallbacks
-        row.blocked = agg.blocked
-        row.prompt_tokens = agg.prompt_tokens
-        row.completion_tokens = agg.completion_tokens
-        row.cost_usd = agg.cost_usd
-        row.latency_ms_sum = agg.latency_ms_sum
-        row.latency_ms_count = agg.latency_ms_count
+        existing.requests = agg.requests
+        existing.errors = agg.errors
+        existing.fallbacks = agg.fallbacks
+        existing.blocked = agg.blocked
+        existing.prompt_tokens = agg.prompt_tokens
+        existing.completion_tokens = agg.completion_tokens
+        existing.cost_usd = agg.cost_usd
+        existing.latency_ms_sum = agg.latency_ms_sum
+        existing.latency_ms_count = agg.latency_ms_count
         written += 1
 
     _log.info(

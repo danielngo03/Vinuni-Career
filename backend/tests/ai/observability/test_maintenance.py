@@ -10,7 +10,7 @@ import uuid
 from datetime import UTC, datetime, timedelta
 
 import pytest
-from app.ai.observability.models import AiOpsEvent, AiUsageDaily
+from app.ai.observability.models import AiOpsEvent, AiUsageDaily, AiUsageLog
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
@@ -228,7 +228,7 @@ async def test_reconcile_excludes_events_outside_day(db_session: AsyncSession) -
 
 @pytest.mark.asyncio
 async def test_reconcile_returns_zero_for_empty_day(db_session: AsyncSession) -> None:
-    """Reconciling a day with no events returns 0 and writes no rows."""
+    """Reconciling a day with no events AND no stale rows returns 0 and writes no rows."""
     from app.ai.observability.maintenance import reconcile_ai_usage_daily
 
     day = _day_start(datetime(2026, 6, 5, tzinfo=UTC))
@@ -238,6 +238,70 @@ async def test_reconcile_returns_zero_for_empty_day(db_session: AsyncSession) ->
     assert written == 0
     rows = (await db_session.scalars(select(AiUsageDaily))).all()
     assert len(rows) == 0
+
+
+@pytest.mark.asyncio
+async def test_reconcile_zeros_stale_rows_when_no_events(db_session: AsyncSession) -> None:
+    """When all ai_ops_event rows for a day are gone but a stale AiUsageDaily
+    row still exists, reconcile must zero every counter on that row and return
+    the count of rows corrected.  Running it twice is idempotent (still zero).
+    """
+    from app.ai.observability.maintenance import reconcile_ai_usage_daily
+
+    day = _day_start(datetime(2026, 6, 20, tzinfo=UTC))
+
+    # Seed a stale daily row with non-zero counters (simulates a day whose
+    # source events have since been pruned but whose rollup row survived).
+    stale = AiUsageDaily(
+        day=day,
+        task_type="job_fit",
+        provider="openrouter",
+        model="deepseek/deepseek-r1",
+        org_id=None,
+        requests=10,
+        errors=1,
+        fallbacks=2,
+        blocked=0,
+        prompt_tokens=1000,
+        completion_tokens=500,
+        cost_usd=0.05,
+        latency_ms_sum=3000,
+        latency_ms_count=10,
+    )
+    db_session.add(stale)
+    await db_session.flush()
+
+    # No ai_ops_event rows exist for this day.
+    corrected = await reconcile_ai_usage_daily(db_session, day)
+    await db_session.flush()
+
+    assert corrected == 1
+
+    rows = (await db_session.scalars(select(AiUsageDaily))).all()
+    assert len(rows) == 1
+    row = rows[0]
+    assert row.requests == 0
+    assert row.errors == 0
+    assert row.fallbacks == 0
+    assert row.blocked == 0
+    assert row.prompt_tokens == 0
+    assert row.completion_tokens == 0
+    assert float(row.cost_usd) == 0.0
+    assert row.latency_ms_sum == 0
+    assert row.latency_ms_count == 0
+
+    # Idempotent: running again must still return 1 (row corrected to zero)
+    # and leave all counters at zero.
+    corrected2 = await reconcile_ai_usage_daily(db_session, day)
+    await db_session.flush()
+
+    assert corrected2 == 1
+    rows2 = (await db_session.scalars(select(AiUsageDaily))).all()
+    assert len(rows2) == 1
+    row2 = rows2[0]
+    assert row2.requests == 0
+    assert row2.prompt_tokens == 0
+    assert float(row2.cost_usd) == 0.0
 
 
 # ---------------------------------------------------------------------------
@@ -250,9 +314,9 @@ async def test_prune_deletes_old_events_keeps_recent(db_session: AsyncSession) -
     """Events older than the retention window are deleted; recent ones are kept."""
     from app.ai.observability.maintenance import prune_ai_ops_events
 
-    now = datetime.now(UTC)
-    old_ts = now - timedelta(days=91)
-    recent_ts = now - timedelta(days=10)
+    fixed_now = datetime(2026, 6, 15, 12, 0, 0, tzinfo=UTC)
+    old_ts = fixed_now - timedelta(days=91)
+    recent_ts = fixed_now - timedelta(days=10)
 
     for _ in range(3):
         db_session.add(_make_event(created_at=old_ts, task_type="job_fit"))
@@ -260,7 +324,7 @@ async def test_prune_deletes_old_events_keeps_recent(db_session: AsyncSession) -
         db_session.add(_make_event(created_at=recent_ts, task_type="cv_bullets"))
     await db_session.flush()
 
-    deleted = await prune_ai_ops_events(db_session, older_than_days=90)
+    deleted = await prune_ai_ops_events(db_session, older_than_days=90, _now=fixed_now)
     await db_session.flush()
 
     assert deleted == 3
@@ -272,14 +336,15 @@ async def test_prune_deletes_old_events_keeps_recent(db_session: AsyncSession) -
 
 @pytest.mark.asyncio
 async def test_prune_does_not_touch_ai_usage_daily(db_session: AsyncSession) -> None:
-    """Pruning raw events must never delete AiUsageDaily rollup rows."""
+    """Pruning raw events must never delete AiUsageDaily or AiUsageLog rows."""
     from app.ai.observability.maintenance import prune_ai_ops_events
 
-    now = datetime.now(UTC)
-    old_ts = now - timedelta(days=95)
+    fixed_now = datetime(2026, 6, 15, 12, 0, 0, tzinfo=UTC)
+    old_ts = fixed_now - timedelta(days=95)
 
     db_session.add(_make_event(created_at=old_ts, task_type="job_fit"))
-    # Also seed a daily rollup row that should remain untouched.
+
+    # Seed a daily rollup row — must survive pruning.
     day = _day_start(old_ts)
     db_session.add(AiUsageDaily(
         day=day,
@@ -297,16 +362,35 @@ async def test_prune_does_not_touch_ai_usage_daily(db_session: AsyncSession) -> 
         latency_ms_sum=1500,
         latency_ms_count=5,
     ))
+
+    # Seed an AiUsageLog row — must also survive pruning.
+    db_session.add(AiUsageLog(
+        created_at=old_ts,
+        task_type="job_fit",
+        model_alias="chat_default",
+        success=True,
+        prompt_chars_bucket="sm",
+        completion_chars_bucket="xs",
+        user_id=None,
+        session_id=None,
+        cost_usd=0.002,
+    ))
     await db_session.flush()
 
-    deleted = await prune_ai_ops_events(db_session, older_than_days=90)
+    deleted = await prune_ai_ops_events(db_session, older_than_days=90, _now=fixed_now)
     await db_session.flush()
 
     assert deleted == 1
+
     # AiUsageDaily rows are untouched.
     daily_rows = (await db_session.scalars(select(AiUsageDaily))).all()
     assert len(daily_rows) == 1
     assert daily_rows[0].requests == 5
+
+    # AiUsageLog rows are untouched.
+    log_rows = (await db_session.scalars(select(AiUsageLog))).all()
+    assert len(log_rows) == 1
+    assert log_rows[0].task_type == "job_fit"
 
 
 @pytest.mark.asyncio
