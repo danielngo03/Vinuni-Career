@@ -9,6 +9,7 @@ from __future__ import annotations
 
 from app.ai.agents import models as _ai_workforce_models  # noqa: F401
 from app.ai.gateway import provider_models as _ai_provider_models  # noqa: F401
+from app.ai.observability import eval_samples as _ai_eval_samples  # noqa: F401
 from app.ai.observability import models as _ai_usage_models  # noqa: F401
 from app.modules.advertising.domain import models as _advertising_models  # noqa: F401
 from app.modules.ai_assistant.domain import models as _ai_assistant_models  # noqa: F401
@@ -69,6 +70,7 @@ def import_all_models() -> None:
         _shared_models,
         _ai_provider_models,
         _ai_usage_models,
+        _ai_eval_samples,
         _ai_workforce_models,
         _advertising_models,
         _ai_assistant_models,

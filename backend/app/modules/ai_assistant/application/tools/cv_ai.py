@@ -203,7 +203,6 @@ async def get_my_cvs(session: AsyncSession, principal: Principal) -> dict:
                 "id": str(c.get("id", "")),
                 "title": c.get("title", "Untitled CV"),
                 "status": c.get("status", "draft"),
-                "is_primary": c.get("is_primary", False),
                 "url": f"/student/cv/{c.get('id', '')}",
             }
             for c in items[:8]
@@ -234,13 +233,14 @@ async def get_skill_gap(session: AsyncSession, principal: Principal, args: dict)
             cv_id = _uuid.UUID(raw_cv_id)
             cv_detail = await cv_service.get_cv(session, principal=principal, cv_id=cv_id)
         else:
-            cvs, _, _ = await cv_service.list_cvs(
-                session, principal=principal, cursor=None, limit=10
+            from app.modules.ai_assistant.application.tools.jobs import (
+                recommended_cv_id_for_job,
             )
-            primary = next((c for c in cvs if c.get("is_primary")), cvs[0] if cvs else None)
-            if primary is None:
+
+            best_cv_id = await recommended_cv_id_for_job(session, principal, job_id)
+            if best_cv_id is None:
                 return {"ok": False, "error": "no_cv_found"}
-            cv_id = _uuid.UUID(str(primary["id"]))
+            cv_id = _uuid.UUID(str(best_cv_id))
             cv_detail = await cv_service.get_cv(session, principal=principal, cv_id=cv_id)
 
         from app.ai.cv.job_fit import CvInput, evaluate
@@ -437,6 +437,7 @@ async def start_interview_sim(session: AsyncSession, principal: Principal, args:
         alias=runtime_config.current().chat_model_alias,
         task_type="interview_sim",
         user_id=principal.user_id,
+        org_id=principal.org_id,
     )
     try:
         resp = await runner.complete(
