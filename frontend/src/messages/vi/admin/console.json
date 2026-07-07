@@ -4,6 +4,7 @@
       "overview": "Tổng quan nền tảng",
       "aiOperations": "Vận hành AI",
       "auditLog": "Nhật ký kiểm tra",
+      "logs": "Nhật ký",
       "systemHealth": "Tình trạng hệ thống",
       "usersAccess": "Người dùng & Quyền truy cập",
       "featureFlags": "Cờ tính năng",
@@ -346,6 +347,38 @@
       "emptyBody": "Các mục kiểm tra sẽ xuất hiện tại đây sau khi có hành động được ghi lại.",
       "errorTitle": "Nhật ký kiểm tra không khả dụng",
       "errorBody": "Không thể tải các mục kiểm tra. Vui lòng thử lại.",
+      "retry": "Thử lại"
+    },
+    "logs": {
+      "pageTitle": "Nhật ký & Hoạt động",
+      "pageSubtitle": "Trình khám phá thống nhất cho các sự kiện kiểm tra hệ thống và nhật ký cuộc gọi AI. Chỉ dành cho superadmin.",
+      "sourceAriaLabel": "Bộ chọn nguồn nhật ký",
+      "sourceRecent": "Gần đây (Tất cả)",
+      "sourceSystem": "Hệ thống",
+      "sourceAi": "Nhật ký AI",
+      "categorySystem": "Hệ thống",
+      "categoryAi": "AI",
+      "recentTitle": "Hoạt động gần đây",
+      "recentNote": "Hiển thị 25 mục gần nhất từ mỗi nguồn. Dùng tab Hệ thống hoặc Nhật ký AI để xem toàn bộ lịch sử.",
+      "partialError": "Một số nguồn không thể tải. Đang hiển thị dữ liệu khả dụng.",
+      "col": {
+        "time": "Thời gian",
+        "category": "Nguồn",
+        "summary": "Sự kiện",
+        "meta": "Trạng thái"
+      },
+      "filter": {
+        "taskType": "Loại tác vụ",
+        "taskTypePlaceholder": "vd: cv_extraction",
+        "status": "Trạng thái",
+        "statusPlaceholder": "vd: error",
+        "since": "Từ ngày",
+        "until": "Đến ngày"
+      },
+      "emptyTitle": "Không có mục nhật ký",
+      "emptyBody": "Không tìm thấy sự kiện nào với bộ lọc đã chọn.",
+      "errorTitle": "Nhật ký không khả dụng",
+      "errorBody": "Không thể tải các mục nhật ký. Vui lòng thử lại.",
       "retry": "Thử lại"
     },
     "usersAccess": {

@@ -4,6 +4,7 @@
       "overview": "Platform Overview",
       "aiOperations": "AI Operations",
       "auditLog": "Audit Log",
+      "logs": "Logs",
       "systemHealth": "System Health",
       "usersAccess": "Users & Access",
       "featureFlags": "Feature Flags",
@@ -346,6 +347,38 @@
       "emptyBody": "Audit entries will appear here once actions are recorded.",
       "errorTitle": "Audit log unavailable",
       "errorBody": "Could not load audit entries. Please try again.",
+      "retry": "Retry"
+    },
+    "logs": {
+      "pageTitle": "Logs & Activity",
+      "pageSubtitle": "Unified explorer for system audit events and AI call logs. Superadmin only.",
+      "sourceAriaLabel": "Log source selector",
+      "sourceRecent": "Recent (All)",
+      "sourceSystem": "System",
+      "sourceAi": "AI Logs",
+      "categorySystem": "System",
+      "categoryAi": "AI",
+      "recentTitle": "Recent activity",
+      "recentNote": "Showing the most recent 25 entries from each source. Use the System or AI Logs tab to page through full history.",
+      "partialError": "Some sources could not be loaded. Showing available data.",
+      "col": {
+        "time": "Time",
+        "category": "Source",
+        "summary": "Event",
+        "meta": "Status"
+      },
+      "filter": {
+        "taskType": "Task type",
+        "taskTypePlaceholder": "e.g. cv_extraction",
+        "status": "Status",
+        "statusPlaceholder": "e.g. error",
+        "since": "From",
+        "until": "To"
+      },
+      "emptyTitle": "No log entries",
+      "emptyBody": "No events found for the selected filters.",
+      "errorTitle": "Logs unavailable",
+      "errorBody": "Could not load log entries. Please try again.",
       "retry": "Retry"
     },
     "usersAccess": {
