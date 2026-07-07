@@ -4,10 +4,23 @@ from __future__ import annotations
 
 from app.modules.auth.application.auth_service import AuthTokens
 from app.modules.users.application.user_write_facade import Identity, User
+from app.shared.permissions import Principal
 
 
-def user_summary(user: User, identity: Identity) -> dict:
-    return {
+def user_summary(
+    user: User,
+    identity: Identity,
+    *,
+    principal: Principal | None = None,
+) -> dict:
+    """Build the user summary dict for /auth/me and login responses.
+
+    When ``principal`` is supplied the resolved ``permissions`` list is included
+    (sorted, privacy-safe strings only).  Superadmins always get ``["*"]``
+    regardless of their explicit grants, because :meth:`PermissionChecker.can`
+    bypasses the grants set for superadmins.
+    """
+    base: dict[str, object] = {
         "id": str(user.id),
         "email": user.email,
         "full_name": user.full_name,
@@ -17,6 +30,12 @@ def user_summary(user: User, identity: Identity) -> dict:
         "is_superadmin": user.is_superadmin,
         "active_identity": identity_summary(identity),
     }
+    if principal is not None:
+        if principal.is_superadmin:
+            base["permissions"] = ["*"]
+        else:
+            base["permissions"] = sorted(principal.permissions)
+    return base
 
 
 def identity_summary(identity: Identity, *, is_active: bool = True) -> dict:

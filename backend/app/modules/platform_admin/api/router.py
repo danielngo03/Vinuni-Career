@@ -12,7 +12,9 @@ Endpoints:
   GET  /admin/users                        — list platform users (offset-paged)
   GET  /admin/users/{user_id}              — user 360 detail view
   POST /admin/users/{user_id}/suspend      — suspend user (audited)
-  POST /admin/users/{user_id}/unsuspend    — unsuspend user (audited)
+  POST /admin/users/{user_id}/unsuspend         — unsuspend user (audited)
+  POST /admin/users/{user_id}/grant-superadmin  — grant superadmin (audited)
+  POST /admin/users/{user_id}/revoke-superadmin — revoke superadmin (audited)
   GET  /admin/sessions                     — cursor-paginated active sessions
   POST /admin/sessions/{session_id}/revoke — admin-revoke session (audited)
 
@@ -216,6 +218,48 @@ async def unsuspend_user(
         from app.shared.exceptions import PermissionDeniedError
         raise PermissionDeniedError()
     data = await users_admin_service.unsuspend_user(
+        db,
+        principal=auth.principal,
+        ctx=auth.ctx,
+        user_id=user_id,
+    )
+    return success(data)
+
+
+@users_router.post(
+    "/{user_id}/grant-superadmin",
+    summary="Grant superadmin to a user — superadmin only",
+)
+async def grant_superadmin(
+    user_id: uuid.UUID,
+    auth: CurrentAuth = Depends(get_current_auth),
+    db: AsyncSession = Depends(get_db_session),
+) -> dict:
+    if not auth.principal.is_superadmin:
+        from app.shared.exceptions import PermissionDeniedError
+        raise PermissionDeniedError()
+    data = await users_admin_service.grant_superadmin(
+        db,
+        principal=auth.principal,
+        ctx=auth.ctx,
+        user_id=user_id,
+    )
+    return success(data)
+
+
+@users_router.post(
+    "/{user_id}/revoke-superadmin",
+    summary="Revoke superadmin from a user — superadmin only",
+)
+async def revoke_superadmin(
+    user_id: uuid.UUID,
+    auth: CurrentAuth = Depends(get_current_auth),
+    db: AsyncSession = Depends(get_db_session),
+) -> dict:
+    if not auth.principal.is_superadmin:
+        from app.shared.exceptions import PermissionDeniedError
+        raise PermissionDeniedError()
+    data = await users_admin_service.revoke_superadmin(
         db,
         principal=auth.principal,
         ctx=auth.ctx,

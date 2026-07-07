@@ -409,3 +409,128 @@ async def unsuspend_user(
     )
     await session.commit()
     return result
+
+
+# ---------------------------------------------------------------------------
+# grant_superadmin / revoke_superadmin
+# ---------------------------------------------------------------------------
+
+
+async def grant_superadmin(
+    session: AsyncSession,
+    *,
+    principal: Principal,
+    ctx: Any,
+    user_id: uuid.UUID,
+) -> dict:
+    """Promote ``user_id`` to superadmin.
+
+    Superadmin-only.  Idempotent: if the user is already a superadmin, this is a
+    no-op (no duplicate audit row).  Commits the state change and audit row
+    atomically.
+
+    Returns:
+        ``{"id": str, "is_superadmin": True}``
+    """
+    _require_superadmin(principal)
+
+    user = (
+        await session.execute(
+            select(User).where(User.id == user_id, User.deleted_at.is_(None))
+        )
+    ).scalar_one_or_none()
+    if user is None:
+        raise ResourceNotFoundError(details={"resource": "user"})
+
+    # Idempotent: already a superadmin → no-op, no duplicate audit.
+    if user.is_superadmin:
+        return {"id": str(user.id), "is_superadmin": True}
+
+    user.is_superadmin = True
+    await session.flush()
+
+    audit_ctx = AuditContext(
+        actor_id=principal.user_id,
+        actor_org_id=principal.org_id,
+        ip=getattr(ctx, "ip", None),
+        user_agent=getattr(ctx, "user_agent", None),
+    )
+    await write_audit(
+        session,
+        action="user.superadmin_granted",
+        resource_type="user",
+        resource_id=user_id,
+        context=audit_ctx,
+        before={"is_superadmin": False},
+        after={"is_superadmin": True},
+    )
+    await session.commit()
+    return {"id": str(user.id), "is_superadmin": True}
+
+
+async def revoke_superadmin(
+    session: AsyncSession,
+    *,
+    principal: Principal,
+    ctx: Any,
+    user_id: uuid.UUID,
+) -> dict:
+    """Revoke superadmin from ``user_id``.
+
+    Superadmin-only.  Idempotent: if the user is not a superadmin, no-op.
+    GUARD: refuses to revoke if this would leave zero active superadmins
+    (including the case of a superadmin revoking themselves while they are the
+    last one).
+
+    Returns:
+        ``{"id": str, "is_superadmin": False}``
+    """
+    _require_superadmin(principal)
+
+    user = (
+        await session.execute(
+            select(User).where(User.id == user_id, User.deleted_at.is_(None))
+        )
+    ).scalar_one_or_none()
+    if user is None:
+        raise ResourceNotFoundError(details={"resource": "user"})
+
+    # Idempotent: already not a superadmin → no-op.
+    if not user.is_superadmin:
+        return {"id": str(user.id), "is_superadmin": False}
+
+    # Last-superadmin guard: count active superadmins.
+    superadmin_count_result = await session.execute(
+        select(func.count()).select_from(User).where(
+            User.is_superadmin.is_(True),
+            User.deleted_at.is_(None),
+        )
+    )
+    superadmin_count = superadmin_count_result.scalar_one() or 0
+    if superadmin_count <= 1:
+        from app.shared.exceptions import ConflictError
+
+        raise ConflictError(
+            "Không thể thu hồi quyền superadmin khi đây là tài khoản superadmin duy nhất còn lại."
+        )
+
+    user.is_superadmin = False
+    await session.flush()
+
+    audit_ctx = AuditContext(
+        actor_id=principal.user_id,
+        actor_org_id=principal.org_id,
+        ip=getattr(ctx, "ip", None),
+        user_agent=getattr(ctx, "user_agent", None),
+    )
+    await write_audit(
+        session,
+        action="user.superadmin_revoked",
+        resource_type="user",
+        resource_id=user_id,
+        context=audit_ctx,
+        before={"is_superadmin": True},
+        after={"is_superadmin": False},
+    )
+    await session.commit()
+    return {"id": str(user.id), "is_superadmin": False}

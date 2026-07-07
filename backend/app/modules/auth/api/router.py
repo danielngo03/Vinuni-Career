@@ -281,7 +281,7 @@ async def me(
         session, identity_id=auth.claims.identity_id, user_id=auth.principal.user_id
     )
     assert user is not None and identity is not None
-    return success(presenters.user_summary(user, identity))
+    return success(presenters.user_summary(user, identity, principal=auth.principal))
 
 
 @router.get("/identity", summary="List the user's identities")

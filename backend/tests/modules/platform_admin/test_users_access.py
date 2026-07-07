@@ -606,3 +606,198 @@ async def test_list_users_returns_paginated_shape(
     assert "total_pages" in inner
     assert isinstance(inner["items"], list)
     assert inner["total"] >= 2
+
+
+# ---------------------------------------------------------------------------
+# Test 7 — grant-superadmin / revoke-superadmin
+# ---------------------------------------------------------------------------
+
+
+@pytest.mark.asyncio
+async def test_non_superadmin_grant_superadmin_403(student_client: AsyncClient) -> None:
+    resp = await student_client.post(f"/admin/users/{uuid.uuid4()}/grant-superadmin")
+    assert resp.status_code == 403
+    assert resp.json()["error"]["code"] == "PERMISSION_DENIED"
+
+
+@pytest.mark.asyncio
+async def test_non_superadmin_revoke_superadmin_403(student_client: AsyncClient) -> None:
+    resp = await student_client.post(f"/admin/users/{uuid.uuid4()}/revoke-superadmin")
+    assert resp.status_code == 403
+    assert resp.json()["error"]["code"] == "PERMISSION_DENIED"
+
+
+@pytest.mark.asyncio
+async def test_grant_superadmin_flips_flag_and_audits(
+    sa_client: AsyncClient,
+    db_session: AsyncSession,
+) -> None:
+    """Grant superadmin: sets is_superadmin=True, writes exactly one audit row."""
+    target = await _seed_user(db_session, email="grant_target@example.com", is_superadmin=False)
+    await db_session.commit()
+
+    resp = await sa_client.post(f"/admin/users/{target.id}/grant-superadmin")
+    assert resp.status_code == 200, resp.text
+
+    data = resp.json()["data"]
+    assert data["id"] == str(target.id)
+    assert data["is_superadmin"] is True
+
+    # DB row was updated
+    async with get_sessionmaker()() as fresh:
+        from app.modules.users.domain.models import User as UserModel
+        refreshed = (
+            await fresh.execute(select(UserModel).where(UserModel.id == target.id))
+        ).scalar_one_or_none()
+        assert refreshed is not None
+        assert refreshed.is_superadmin is True
+
+        # Exactly one audit row
+        rows = (
+            await fresh.execute(
+                select(AuditLog).where(
+                    AuditLog.action == "user.superadmin_granted",
+                    AuditLog.resource_id == target.id,
+                )
+            )
+        ).scalars().all()
+        assert len(rows) == 1
+        assert rows[0].before_snapshot == {"is_superadmin": False}
+        assert rows[0].after_snapshot == {"is_superadmin": True}
+
+
+@pytest.mark.asyncio
+async def test_grant_superadmin_idempotent_no_extra_audit(
+    sa_client: AsyncClient,
+    db_session: AsyncSession,
+) -> None:
+    """Granting superadmin to an already-superadmin user is a no-op with no duplicate audit."""
+    target = await _seed_user(db_session, email="already_sa@example.com", is_superadmin=True)
+    await db_session.commit()
+
+    resp = await sa_client.post(f"/admin/users/{target.id}/grant-superadmin")
+    assert resp.status_code == 200, resp.text
+    assert resp.json()["data"]["is_superadmin"] is True
+
+    # No audit row should have been written (idempotent no-op)
+    async with get_sessionmaker()() as fresh:
+        rows = (
+            await fresh.execute(
+                select(AuditLog).where(
+                    AuditLog.action == "user.superadmin_granted",
+                    AuditLog.resource_id == target.id,
+                )
+            )
+        ).scalars().all()
+        assert len(rows) == 0, f"Idempotent grant must not write audit row; got {len(rows)}"
+
+
+@pytest.mark.asyncio
+async def test_revoke_superadmin_flips_flag_and_audits(
+    sa_client: AsyncClient,
+    db_session: AsyncSession,
+) -> None:
+    """Revoke superadmin when another superadmin exists: works, audited."""
+    # Two superadmins: the caller (sa_client) and the target
+    target = await _seed_user(db_session, email="revoke_target@example.com", is_superadmin=True)
+    # Ensure the acting principal's user_id is also a superadmin row in the DB
+    # (sa_client uses a UUID not seeded in DB; seed an extra one to ensure count >= 2)
+    await _seed_user(db_session, email="second_sa@example.com", is_superadmin=True)
+    await db_session.commit()
+
+    resp = await sa_client.post(f"/admin/users/{target.id}/revoke-superadmin")
+    assert resp.status_code == 200, resp.text
+
+    data = resp.json()["data"]
+    assert data["id"] == str(target.id)
+    assert data["is_superadmin"] is False
+
+    async with get_sessionmaker()() as fresh:
+        from app.modules.users.domain.models import User as UserModel
+        refreshed = (
+            await fresh.execute(select(UserModel).where(UserModel.id == target.id))
+        ).scalar_one_or_none()
+        assert refreshed is not None
+        assert refreshed.is_superadmin is False
+
+        rows = (
+            await fresh.execute(
+                select(AuditLog).where(
+                    AuditLog.action == "user.superadmin_revoked",
+                    AuditLog.resource_id == target.id,
+                )
+            )
+        ).scalars().all()
+        assert len(rows) == 1
+        assert rows[0].before_snapshot == {"is_superadmin": True}
+        assert rows[0].after_snapshot == {"is_superadmin": False}
+
+
+@pytest.mark.asyncio
+async def test_revoke_last_superadmin_rejected(
+    sa_client: AsyncClient,
+    db_session: AsyncSession,
+) -> None:
+    """Revoking the only remaining superadmin must be rejected; user remains superadmin."""
+    # Seed exactly ONE superadmin in the DB as the target
+    only_sa = await _seed_user(
+        db_session, email="only_superadmin@example.com", is_superadmin=True
+    )
+    await db_session.commit()
+
+    resp = await sa_client.post(f"/admin/users/{only_sa.id}/revoke-superadmin")
+    # Must be a user-safe error (409 CONFLICT per exceptions.py ConflictError)
+    assert resp.status_code == 409, resp.text
+    body = resp.json()
+    assert body["error"]["code"] == "CONFLICT"
+    # No internal details leaked
+    # No raw internal detail keys leaked — message text is fine
+    details = body["error"].get("details", {})
+    assert isinstance(details, dict)
+
+    # The user must STILL be a superadmin (guard prevented the change)
+    async with get_sessionmaker()() as fresh:
+        from app.modules.users.domain.models import User as UserModel
+        unchanged = (
+            await fresh.execute(select(UserModel).where(UserModel.id == only_sa.id))
+        ).scalar_one_or_none()
+        assert unchanged is not None
+        assert unchanged.is_superadmin is True, (
+            "Last superadmin must remain superadmin after rejected revoke"
+        )
+
+
+@pytest.mark.asyncio
+async def test_revoke_superadmin_idempotent_no_extra_audit(
+    sa_client: AsyncClient,
+    db_session: AsyncSession,
+) -> None:
+    """Revoking superadmin from a non-superadmin user is a no-op."""
+    target = await _seed_user(db_session, email="not_sa@example.com", is_superadmin=False)
+    await db_session.commit()
+
+    resp = await sa_client.post(f"/admin/users/{target.id}/revoke-superadmin")
+    assert resp.status_code == 200, resp.text
+    assert resp.json()["data"]["is_superadmin"] is False
+
+    # No audit row
+    async with get_sessionmaker()() as fresh:
+        rows = (
+            await fresh.execute(
+                select(AuditLog).where(
+                    AuditLog.action == "user.superadmin_revoked",
+                    AuditLog.resource_id == target.id,
+                )
+            )
+        ).scalars().all()
+        assert len(rows) == 0, f"Idempotent revoke must not write audit row; got {len(rows)}"
+
+
+@pytest.mark.asyncio
+async def test_grant_revoke_unknown_user_404(sa_client: AsyncClient) -> None:
+    phantom = uuid.uuid4()
+    resp_grant = await sa_client.post(f"/admin/users/{phantom}/grant-superadmin")
+    assert resp_grant.status_code == 404
+
+    resp_revoke = await sa_client.post(f"/admin/users/{phantom}/revoke-superadmin")
+    assert resp_revoke.status_code == 404
