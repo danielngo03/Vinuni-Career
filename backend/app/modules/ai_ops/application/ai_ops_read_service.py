@@ -87,6 +87,19 @@ def _today_start() -> datetime:
 # ---------------------------------------------------------------------------
 
 
+def _p95_nearest_rank(vals: list[int]) -> int | None:
+    """Return nearest-rank p95 of a sorted (ascending) list of ints.
+
+    Reusable helper — used by ``overview`` and ``timeseries``.
+    Cross-DB safe: no PG percentile function; computes entirely in Python.
+    Returns ``None`` for an empty list.
+    """
+    if not vals:
+        return None
+    idx = min(len(vals) - 1, math.ceil(0.95 * len(vals)) - 1)
+    return vals[idx]
+
+
 async def overview(
     db: AsyncSession,
     range_days: int = 7,
@@ -140,11 +153,7 @@ async def overview(
             .limit(200_000)
         )
         vals = [int(row[0]) for row in result.all()]
-        if not vals:
-            return None
-        # Nearest-rank p95: ceil(0.95 * n) - 1, clamped to last index.
-        idx = min(len(vals) - 1, math.ceil(0.95 * len(vals)) - 1)
-        return vals[idx]
+        return _p95_nearest_rank(vals)
 
     spend_today = await _safe(db, _spend_today, fallback=0.0)
     requests_today = await _safe(db, _requests_today, fallback=0)
@@ -518,3 +527,192 @@ async def events(
         return {"items": items, "next_cursor": next_cursor}
 
     return await _safe(db, _query, fallback={"items": [], "next_cursor": None})
+
+
+# ---------------------------------------------------------------------------
+# timeseries — per-day aggregates for line/area charts
+# ---------------------------------------------------------------------------
+
+
+async def timeseries(
+    db: AsyncSession,
+    range_days: int = 7,
+) -> dict[str, Any]:
+    """Return one row per calendar day in the window for line/area charts.
+
+    Aggregates cost, requests, errors, tokens, avg_latency_ms from
+    ``ai_usage_daily`` grouped by day.  Per-day p95_latency_ms is computed
+    from ``ai_ops_event`` rows (Python nearest-rank — cross-DB safe).
+
+    Gap days (days with no ``ai_usage_daily`` activity) are filled with zero
+    rows so the frontend chart has a continuous axis.  p95_latency_ms is
+    ``None`` when no ``ai_ops_event`` rows exist for that day.
+
+    No provider/model identity is returned — these are aggregate-only rows.
+    """
+
+    window_start = _range_start(range_days)
+    today = _today_utc()
+
+    # Build the ordered list of calendar days in the window (ascending).
+    n_days = (today - window_start.date()).days + 1
+    all_days = [
+        (window_start.date() + timedelta(days=i)).isoformat()
+        for i in range(n_days)
+    ]
+
+    async def _query() -> dict[str, Any]:
+        # --- Aggregate from ai_usage_daily per day --------------------------
+        stmt = (
+            select(
+                AiUsageDaily.day,
+                func.sum(AiUsageDaily.cost_usd).label("cost_usd"),
+                func.sum(AiUsageDaily.requests).label("requests"),
+                func.sum(AiUsageDaily.errors).label("errors"),
+                func.sum(AiUsageDaily.prompt_tokens).label("prompt_tokens"),
+                func.sum(AiUsageDaily.completion_tokens).label("completion_tokens"),
+                func.sum(AiUsageDaily.latency_ms_sum).label("latency_ms_sum"),
+                func.sum(AiUsageDaily.latency_ms_count).label("latency_ms_count"),
+            )
+            .where(AiUsageDaily.day >= window_start)
+            .group_by(AiUsageDaily.day)
+            .order_by(AiUsageDaily.day.asc())
+        )
+        rows = (await db.execute(stmt)).all()
+
+        # Index daily rows by ISO date string.
+        daily: dict[str, dict[str, Any]] = {}
+        for r in rows:
+            day_iso = r.day.date().isoformat() if r.day else None
+            if day_iso is None:
+                continue
+            requests = int(r.requests or 0)
+            errors = int(r.errors or 0)
+            latency_sum = int(r.latency_ms_sum or 0)
+            latency_count = int(r.latency_ms_count or 0)
+            daily[day_iso] = {
+                "cost_usd": float(r.cost_usd or 0.0),
+                "requests": requests,
+                "errors": errors,
+                "error_rate": (errors / requests) if requests > 0 else 0.0,
+                "prompt_tokens": int(r.prompt_tokens or 0),
+                "completion_tokens": int(r.completion_tokens or 0),
+                "avg_latency_ms": (
+                    latency_sum / latency_count if latency_count > 0 else None
+                ),
+            }
+
+        # --- Per-day p95 from ai_ops_event ----------------------------------
+        # Fetch all events in the window once; partition by day in Python.
+        # Capped at 200k rows per the same convention as overview.
+        events_stmt = (
+            select(AiOpsEvent.created_at, AiOpsEvent.latency_ms)
+            .where(
+                AiOpsEvent.created_at >= window_start,
+                AiOpsEvent.latency_ms.is_not(None),
+            )
+            .order_by(AiOpsEvent.created_at.asc(), AiOpsEvent.latency_ms.asc())
+            .limit(200_000)
+        )
+        event_rows = (await db.execute(events_stmt)).all()
+
+        # Group latency values by ISO day.
+        day_latencies: dict[str, list[int]] = {}
+        for ev_created_at, ev_latency_ms in event_rows:
+            ev_day = ev_created_at.date().isoformat()
+            day_latencies.setdefault(ev_day, [])
+            day_latencies[ev_day].append(int(ev_latency_ms))
+
+        # Sort each day's latency list so _p95_nearest_rank can index directly.
+        for d in day_latencies:
+            day_latencies[d].sort()
+
+        # --- Assemble the series, filling gap days --------------------------
+        series: list[dict[str, Any]] = []
+        for day_iso in all_days:
+            agg = daily.get(day_iso)
+            p95 = _p95_nearest_rank(day_latencies.get(day_iso, []))
+            if agg is None:
+                series.append({
+                    "day": day_iso,
+                    "cost_usd": 0.0,
+                    "requests": 0,
+                    "errors": 0,
+                    "error_rate": 0.0,
+                    "prompt_tokens": 0,
+                    "completion_tokens": 0,
+                    "avg_latency_ms": None,
+                    # p95 may be non-None even on gap days if ai_ops_event rows
+                    # exist for that day without a corresponding ai_usage_daily row.
+                    "p95_latency_ms": p95,
+                })
+            else:
+                series.append({
+                    "day": day_iso,
+                    **agg,
+                    "p95_latency_ms": p95,
+                })
+
+        return {"series": series}
+
+    return await _safe(db, _query, fallback={"series": []})
+
+
+# ---------------------------------------------------------------------------
+# error_heatmap — per (day × hour) error counts for heatmap charts
+# ---------------------------------------------------------------------------
+
+
+async def error_heatmap(
+    db: AsyncSession,
+    range_days: int = 7,
+) -> dict[str, Any]:
+    """Return sparse (day × hour) cells of request/error counts for heatmap charts.
+
+    Groups ``ai_ops_event`` rows by UTC date and hour-of-day within the window.
+    Only cells that have activity are returned (sparse is fine for a heatmap).
+
+    No provider/model identity is returned — aggregate-only.
+    Bounded at 500k event rows to guard against runaway full-table scans.
+    """
+
+    window_start = _range_start(range_days)
+
+    async def _query() -> dict[str, Any]:
+        # Pull (created_at, status) from ai_ops_event within the window.
+        # We compute day + hour in Python to stay cross-DB safe (no DATE_TRUNC
+        # or strftime in the GROUP BY since SQLite handles them differently from PG).
+        stmt = (
+            select(AiOpsEvent.created_at, AiOpsEvent.status)
+            .where(AiOpsEvent.created_at >= window_start)
+            .order_by(AiOpsEvent.created_at.asc())
+            .limit(500_000)
+        )
+        rows = (await db.execute(stmt)).all()
+
+        # Aggregate into (day_iso, hour) buckets.
+        # Key: (day_iso, hour_int) → {"requests": int, "errors": int}
+        buckets: dict[tuple[str, int], dict[str, int]] = {}
+        for ev_created_at, ev_status in rows:
+            day_iso = ev_created_at.date().isoformat()
+            hour = ev_created_at.hour  # UTC hour
+            key = (day_iso, hour)
+            if key not in buckets:
+                buckets[key] = {"requests": 0, "errors": 0}
+            buckets[key]["requests"] += 1
+            if ev_status not in ("ok", "success"):
+                buckets[key]["errors"] += 1
+
+        # Emit cells sorted by day then hour for deterministic output.
+        cells: list[dict[str, Any]] = [
+            {
+                "day": day_iso,
+                "hour": hour,
+                "requests": bucket["requests"],
+                "errors": bucket["errors"],
+            }
+            for (day_iso, hour), bucket in sorted(buckets.items())
+        ]
+        return {"cells": cells}
+
+    return await _safe(db, _query, fallback={"cells": []})

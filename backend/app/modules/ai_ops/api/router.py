@@ -176,6 +176,38 @@ async def create_price(
     return success(data)
 
 
+@admin_router.get("/timeseries", summary="Per-day AI telemetry series for line/area charts")
+async def get_timeseries(
+    range_days: int = Query(default=7, ge=1, le=365),
+    _principal: Principal = Depends(require_superadmin),
+    db: AsyncSession = Depends(get_db_session),
+) -> dict:
+    """Return one entry per calendar day in the window.
+
+    Aggregates cost, requests, errors, error_rate, prompt_tokens,
+    completion_tokens, avg_latency_ms, and p95_latency_ms.  Gap days are
+    filled with zero rows.  No provider or model identity is included.
+    """
+    data = await ai_ops_read_service.timeseries(db, range_days=range_days)
+    return success(data)
+
+
+@admin_router.get("/error-heatmap", summary="Per day×hour error counts for heatmap charts")
+async def get_error_heatmap(
+    range_days: int = Query(default=7, ge=1, le=365),
+    _principal: Principal = Depends(require_superadmin),
+    db: AsyncSession = Depends(get_db_session),
+) -> dict:
+    """Return sparse (day × hour) cells of request and error counts.
+
+    Computed from ``ai_ops_event`` rows grouped by UTC date and hour-of-day.
+    Only cells that have activity are returned.  No provider or model identity
+    is included.
+    """
+    data = await ai_ops_read_service.error_heatmap(db, range_days=range_days)
+    return success(data)
+
+
 @admin_router.patch("/prices/{price_id}", summary="Partially update a model price row")
 async def update_price(
     price_id: uuid.UUID,
