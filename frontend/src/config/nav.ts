@@ -225,7 +225,7 @@ export const WORKSPACE_NAV_GROUPS: Record<Persona, NavGroup[]> = {
         { key: "systemHealth", href: "/system-health", icon: Activity, requiresSuperadmin: true },
         { key: "usersAccess", href: "/access", icon: Users, requiresSuperadmin: true },
         { key: "featureFlags", href: "/feature-flags", icon: ToggleRight, requiresSuperadmin: true },
-        { key: "alerts", href: "/alerts", icon: Siren, requiresSuperadmin: true },
+        { key: "alertsAdmin", href: "/alerts", icon: Siren, requiresSuperadmin: true },
       ],
     },
   ],
