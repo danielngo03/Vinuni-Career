@@ -23,6 +23,7 @@ import {
   ApiError,
   applicationsApi,
   newIdempotencyKey,
+  type BulkAdvanceResult,
   type PipelineCard,
   type PipelineColumn,
   type PipelineStage,
@@ -33,9 +34,10 @@ import { useToast } from "@/components/ui";
 import { PipelineColumnView } from "./pipeline-board/pipeline-column";
 import { BulkActionBar } from "./pipeline-board/bulk-action-bar";
 import { BulkRejectModal } from "./pipeline-board/bulk-reject-modal";
+import { BulkAdvanceModal } from "./pipeline-board/bulk-advance-modal";
 import { RollbackModal } from "./pipeline-board/rollback-modal";
 import { BoardSkeleton } from "./pipeline-board/board-skeleton";
-import { cardHandle, MIN_REASON, STALE_DAYS } from "./pipeline-board/utils";
+import { cardHandle, groupBulkAdvance, MIN_REASON, STALE_DAYS } from "./pipeline-board/utils";
 
 type RollbackTarget = {
   applicationId: string;
@@ -71,6 +73,7 @@ export function PartnerPipelineBoard({ jobId }: { jobId: string }) {
   const [bulkRejectOpen, setBulkRejectOpen] = useState(false);
   const [bulkReason, setBulkReason] = useState<RejectionReason>("not_qualified");
   const [bulkNote, setBulkNote] = useState("");
+  const [bulkAdvanceOpen, setBulkAdvanceOpen] = useState(false);
 
   function toggleSelect(id: string) {
     setSelected((prev) => {
@@ -124,6 +127,45 @@ export function PartnerPipelineBoard({ jobId }: { jobId: string }) {
     },
     onError: (e) => {
       setBulkRejectOpen(false);
+      toast.show({ tone: "error", title: apiError(e) });
+    },
+  });
+
+  /**
+   * Compose an honest, localized bulk-advance summary from the batch result:
+   * "N advanced · M need a scorecard · ..." (BUSINESS_LOGIC §3.6). The backend
+   * advances only eligible candidates; blocked/skipped ones are reported, never
+   * force-advanced.
+   */
+  function summarizeBulkAdvance(result: BulkAdvanceResult): string {
+    const b = groupBulkAdvance(result);
+    const parts: string[] = [];
+    if (b.advanced > 0)
+      parts.push(t("bulkAdvanceAdvanced", { count: b.advanced }));
+    if (b.scorecardBlocked > 0)
+      parts.push(t("bulkAdvanceBlockedScorecard", { count: b.scorecardBlocked }));
+    if (b.thresholdBlocked > 0)
+      parts.push(t("bulkAdvanceBlockedThreshold", { count: b.thresholdBlocked }));
+    if (b.otherBlocked > 0)
+      parts.push(t("bulkAdvanceBlockedOther", { count: b.otherBlocked }));
+    if (b.skipped > 0) parts.push(t("bulkAdvanceSkipped", { count: b.skipped }));
+    if (b.errors > 0) parts.push(t("bulkAdvanceErrors", { count: b.errors }));
+    return parts.length > 0 ? parts.join(" · ") : t("bulkAdvanceNone");
+  }
+
+  const bulkAdvanceMutation = useMutation({
+    mutationFn: () => applicationsApi.bulkAdvance(jobId, Array.from(selected)),
+    onSuccess: (data) => {
+      setBulkAdvanceOpen(false);
+      clearSelection();
+      refetchBoard();
+      toast.show({
+        tone: data.advanced > 0 ? "success" : "warning",
+        title: summarizeBulkAdvance(data),
+      });
+    },
+    onError: (e) => {
+      setBulkAdvanceOpen(false);
       toast.show({ tone: "error", title: apiError(e) });
     },
   });
@@ -532,8 +574,10 @@ export function PartnerPipelineBoard({ jobId }: { jobId: string }) {
         <BulkActionBar
           count={selected.size}
           reviewPending={bulkReviewMutation.isPending}
+          advancePending={bulkAdvanceMutation.isPending}
           rejectPending={bulkRejectMutation.isPending}
           onReview={() => bulkReviewMutation.mutate()}
+          onAdvance={() => setBulkAdvanceOpen(true)}
           onReject={() => setBulkRejectOpen(true)}
           onClear={clearSelection}
           t={t}
@@ -551,6 +595,16 @@ export function PartnerPipelineBoard({ jobId }: { jobId: string }) {
         onNoteChange={setBulkNote}
         onClose={() => setBulkRejectOpen(false)}
         onSubmit={() => bulkRejectMutation.mutate()}
+        t={t}
+      />
+
+      {/* Bulk advance confirm */}
+      <BulkAdvanceModal
+        open={bulkAdvanceOpen}
+        count={selected.size}
+        loading={bulkAdvanceMutation.isPending}
+        onClose={() => setBulkAdvanceOpen(false)}
+        onSubmit={() => bulkAdvanceMutation.mutate()}
         t={t}
       />
 

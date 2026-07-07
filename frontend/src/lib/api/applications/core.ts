@@ -242,11 +242,89 @@ export interface RejectBody {
   version?: number;
 }
 
+/** One candidate's outcome in a bulk-advance batch (BUSINESS_LOGIC §3.6). */
+export interface BulkAdvanceItemResult {
+  application_id: string;
+  outcome: "advanced" | "blocked" | "skipped" | "error";
+  /** Safe reason code for `blocked`/`skipped` (e.g. `scorecard_required`). */
+  reason?: string;
+  submitted?: number;
+  required?: number;
+  avg_overall?: number | null;
+  threshold?: number | null;
+}
+
+export interface BulkAdvanceResult {
+  advanced: number;
+  blocked: number;
+  skipped: number;
+  errors: number;
+  results: BulkAdvanceItemResult[];
+}
+
 /** Watermarked signed-download descriptor for a partner CV download. */
 export interface CvDownloadInfo {
   snapshot_id: string;
   has_watermark: boolean;
   download_url: string;
+}
+
+/* --------------------------- Applicant fit ranking ------------------------ */
+
+/**
+ * Product-facing CV↔JD fit band, computed server-side from the 0-100 product
+ * score: `strong` ≥85, `good` ≥70, `fair` ≥50, `weak` <50. This is an assistive
+ * triage signal only — never a raw model confidence and never an automated
+ * decision. The UI must render it as advisory, never auto-advance/-reject on it.
+ */
+export type ApplicantFitBand = "strong" | "good" | "fair" | "weak";
+
+/**
+ * Signal quality for a whole ranking response:
+ * - `ok`: the job has requirements and candidates were scored.
+ * - `low_signal`: scored, but the inputs are thin — present it as a guide.
+ * - `no_requirements`: the job has nothing to score fit against yet; items are
+ *   returned WITHOUT a score (`fit_score: null`) rather than a fabricated number.
+ * Open union: an unknown value renders as no-op (advisory guide) rather than crash.
+ */
+export type ApplicantRankingSignal =
+  | "ok"
+  | "low_signal"
+  | "no_requirements"
+  | (string & {});
+
+/**
+ * One ranked applicant. `applicant` mirrors {@link PartnerApplicant} (masked
+ * until reveal). `fit_score` is the 0-100 PRODUCT score, or `null` when this
+ * candidate could not be scored — the UI renders "—", never `0`. `rank` is the
+ * server-assigned ordering (1-based), stable across identical scores.
+ */
+export interface ApplicantRankingItem {
+  application_id: string;
+  applicant: PartnerApplicant;
+  status: ApplicationStatus | string;
+  status_label: string;
+  /** 0-100 product score, or null when unscored (render "—", never 0). */
+  fit_score: number | null;
+  fit_band: ApplicantFitBand | null;
+  /** Skill terms found in both CV and JD (safe to show). */
+  matched_skills: string[];
+  /** JD requirements the CV does not evidence (safe to show). */
+  gaps: string[];
+  /** The CV snapshot predates recent CV edits — surface a "may be outdated" hint. */
+  stale: boolean;
+  rank: number;
+}
+
+/**
+ * Assistive CV↔JD fit ranking for one job's applicants (triage read model).
+ * `scored_count` counts items with a non-null `fit_score`.
+ */
+export interface ApplicantRanking {
+  job_id: string;
+  scored_count: number;
+  signal: ApplicantRankingSignal;
+  items: ApplicantRankingItem[];
 }
 
 /* ------------------------------ Pipeline board ---------------------------- */
@@ -500,6 +578,34 @@ export const applicationsCoreApi = {
     body: { application_ids: string[]; reason: RejectionReason; note?: string | null },
   ): Promise<{ rejected: number; skipped: number; errors: number }> {
     return api.post(`/jobs/${jobId}/applications/bulk-reject`, body);
+  },
+
+  /**
+   * Partner: advance up to 100 candidates to their next pipeline stage in one
+   * call (BUSINESS_LOGIC §3.6). Each item runs the same gated advance as the
+   * single endpoint — gate-blocked candidates are reported as `blocked` (never
+   * force-advanced), non-actionable ones as `skipped`. The `results` list lets
+   * the board show "3/10 couldn't advance" with reasons.
+   */
+  bulkAdvance(
+    jobId: string,
+    applicationIds: string[],
+  ): Promise<BulkAdvanceResult> {
+    return api.post(`/jobs/${jobId}/applications/bulk-advance`, {
+      application_ids: applicationIds,
+    });
+  },
+
+  /**
+   * Partner: assistive CV↔JD fit ranking for one job's applicants. Locale is
+   * taken from Accept-Language; no query params. Advisory triage signal only —
+   * it never advances/rejects a candidate. `signal:"no_requirements"` returns
+   * items WITHOUT a score; a per-item `fit_score:null` means that candidate
+   * could not be scored (render "—", never a fabricated number). Never carries
+   * provider/model/confidence internals — only the product score + band.
+   */
+  rankApplicants(jobId: string): Promise<ApplicantRanking> {
+    return api.get<ApplicantRanking>(`/jobs/${jobId}/applicants/ranking`);
   },
 
   /** Partner: export all applications for a job as a CSV blob (B-322). */

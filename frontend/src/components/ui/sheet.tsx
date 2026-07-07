@@ -12,6 +12,12 @@ export interface SheetProps {
   children: React.ReactNode;
   /** Right drawer on desktop; bottom sheet on mobile (DESIGN.md §10). */
   side?: "right" | "left";
+  /**
+   * Desktop drawer width. `default` (380px) suits read/edit panels; `wide`
+   * (440px, 860px at lg) suits two-column surfaces such as a candidate review
+   * panel with an embedded CV preview. Mobile is always a full-width bottom sheet.
+   */
+  size?: "default" | "wide";
   closeLabel?: string;
 }
 
@@ -25,6 +31,7 @@ export function Sheet({
   title,
   children,
   side = "right",
+  size = "default",
   closeLabel = "Close",
 }: SheetProps) {
   const ref = useRef<HTMLDivElement>(null);
@@ -65,7 +72,8 @@ export function Sheet({
           // Mobile: bottom sheet
           "inset-x-0 bottom-0 max-h-[85vh] rounded-t-2xl",
           // Desktop: side drawer
-          "sm:inset-y-0 sm:bottom-auto sm:top-0 sm:h-full sm:w-[380px] sm:max-h-none sm:rounded-none",
+          "sm:inset-y-0 sm:bottom-auto sm:top-0 sm:h-full sm:max-h-none sm:rounded-none",
+          size === "wide" ? "sm:w-[440px] lg:w-[860px]" : "sm:w-[380px]",
           side === "right" ? "sm:right-0" : "sm:left-0",
         )}
       >
