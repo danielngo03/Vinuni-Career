@@ -218,6 +218,7 @@ export const WORKSPACE_NAV_GROUPS: Record<Persona, NavGroup[]> = {
       items: [
         { key: "platformOverview", href: "/platform-overview", icon: LayoutGrid, requiresSuperadmin: true },
         { key: "aiOperations", href: "/ai-operations", icon: Bot, requiresSuperadmin: true },
+        { key: "analytics", href: "/analytics", icon: BarChart3, requiresSuperadmin: true },
         { key: "logs", href: "/logs", icon: ScrollText, requiresSuperadmin: true },
         { key: "systemHealth", href: "/system-health", icon: Activity, requiresSuperadmin: true },
         { key: "usersAccess", href: "/access", icon: Users, requiresSuperadmin: true },

@@ -542,6 +542,53 @@
       "errorTitle": "Users unavailable",
       "errorBody": "Could not load the user list. Please try again.",
       "retry": "Retry"
+    },
+    "analytics": {
+      "pageTitle": "Platform Analytics",
+      "pageSubtitle": "Superadmin platform metrics — KPIs, recruitment funnel, and growth trends.",
+      "range": {
+        "label": "Time range",
+        "7d": "Last 7 days",
+        "30d": "Last 30 days"
+      },
+      "kpi": {
+        "sectionTitle": "Platform KPIs",
+        "students": "Students",
+        "partnerMembers": "Partner members",
+        "universityStaff": "University staff",
+        "jobs": "Active jobs",
+        "applications": "Applications",
+        "events": "Events"
+      },
+      "funnel": {
+        "panelTitle": "Recruitment Funnel",
+        "ariaLabel": "Horizontal recruitment funnel chart",
+        "emptyLabel": "No funnel data for this range",
+        "errorTitle": "Funnel data unavailable",
+        "errorBody": "Could not load the recruitment funnel. Please try again.",
+        "conversionLabel": "{pct}%",
+        "stage": {
+          "job_views": "Job views",
+          "job_applies": "Job applies",
+          "applications_submitted": "Applications submitted",
+          "under_review": "Under review",
+          "interview": "Interview",
+          "offer": "Offer",
+          "hired": "Hired",
+          "rejected": "Rejected"
+        }
+      },
+      "growth": {
+        "panelTitle": "Platform Growth",
+        "ariaLabel": "Platform growth time series chart",
+        "emptyLabel": "No growth data for this range",
+        "errorTitle": "Growth data unavailable",
+        "errorBody": "Could not load platform growth data. Please try again.",
+        "seriesSignups": "Signups",
+        "seriesApplications": "Applications",
+        "seriesActiveUsers": "Active users"
+      },
+      "retry": "Retry"
     }
   }
 }
