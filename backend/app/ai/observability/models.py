@@ -17,7 +17,7 @@ from __future__ import annotations
 import uuid
 from datetime import datetime
 
-from sqlalchemy import Boolean, DateTime, Numeric, String, Uuid, func
+from sqlalchemy import Boolean, DateTime, Numeric, String, UniqueConstraint, Uuid, func
 from sqlalchemy.orm import Mapped, mapped_column
 
 from app.shared.models import Base
@@ -57,3 +57,44 @@ class AiUsageLog(Base):
     session_id: Mapped[uuid.UUID | None] = mapped_column(Uuid(as_uuid=True), nullable=True)
     # Not always available — depends on provider cost reporting.
     cost_usd: Mapped[float | None] = mapped_column(Numeric(10, 7), nullable=True)
+
+
+class AiModelPrice(Base):
+    """Admin-editable per-(provider, model) token price table.
+
+    Used by ``pricing.estimate_cost_usd_db`` to compute accurate cost
+    estimates when the concrete provider/model is known. Stored prices are
+    in USD per 1 000 tokens (per-1k) for both input and output.
+
+    The ``active`` flag lets admins soft-disable a row without deleting it
+    (useful when swapping models — mark the old row inactive, insert the new
+    one). ``updated_by`` tracks the admin UUID responsible for the last change;
+    ``updated_at`` is auto-refreshed on every write.
+
+    Never surfaced to end users — internal cost-accounting only.
+    Cross-database: ``Uuid`` and ``Numeric`` render on both PostgreSQL and SQLite.
+    """
+
+    __tablename__ = "ai_model_price"
+    __table_args__ = (
+        UniqueConstraint("provider", "model", name="uq_ai_model_price_provider_model"),
+    )
+
+    id: Mapped[uuid.UUID] = mapped_column(
+        Uuid(as_uuid=True),
+        primary_key=True,
+        default=uuid.uuid4,
+        server_default=func.gen_random_uuid(),
+    )
+    provider: Mapped[str] = mapped_column(String(64), nullable=False)
+    model: Mapped[str] = mapped_column(String(128), nullable=False)
+    input_usd_per_1k: Mapped[float] = mapped_column(Numeric(12, 8), nullable=False)
+    output_usd_per_1k: Mapped[float] = mapped_column(Numeric(12, 8), nullable=False)
+    active: Mapped[bool] = mapped_column(Boolean, nullable=False, server_default="true")
+    updated_by: Mapped[uuid.UUID | None] = mapped_column(Uuid(as_uuid=True), nullable=True)
+    updated_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True),
+        nullable=False,
+        server_default=func.now(),
+        onupdate=func.now(),
+    )
