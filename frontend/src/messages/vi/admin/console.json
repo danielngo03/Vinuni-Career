@@ -19,6 +19,85 @@
       "overviewSubtitle": "Bảng điều khiển superadmin — vận hành và quan sát toàn nền tảng.",
       "accessDeniedTitle": "Từ chối truy cập",
       "accessDeniedBody": "Khu vực này chỉ dành cho superadmin của nền tảng."
+    },
+    "aiOps": {
+      "pageTitle": "Vận hành AI",
+      "pageSubtitle": "Chi phí, độ tin cậy và khối lượng trên tất cả tính năng AI.",
+      "tabs": {
+        "overview": "Tổng quan",
+        "traces": "Traces",
+        "modelsPricing": "Mô hình & Giá",
+        "settings": "Cài đặt"
+      },
+      "comingSoon": "Sắp có trong phiên bản tiếp theo",
+      "range": {
+        "label": "Khoảng thời gian",
+        "today": "Hôm nay",
+        "7d": "7 ngày qua",
+        "30d": "30 ngày qua"
+      },
+      "metric": {
+        "spendToday": "Chi phí hôm nay",
+        "requests": "Số yêu cầu",
+        "errorRate": "Tỷ lệ lỗi",
+        "p95Latency": "Độ trễ p95"
+      },
+      "budgetBurn": {
+        "ofBudget": "ngân sách",
+        "budgetNote": "Ngân sách ngày: ${budget}",
+        "burndownNote": "{pct}% ngân sách ngày đã dùng",
+        "underBudget": "Trong ngân sách",
+        "nearBudget": "Gần giới hạn",
+        "overBudget": "Vượt giới hạn"
+      },
+      "unpriced": "Giá / danh tính bị hạn chế",
+      "maskedProvider": "Bị hạn chế",
+      "spend": {
+        "panelTitle": "Chi phí so với Ngân sách",
+        "burndownLabel": "{pct}% trong ${budget} ngân sách ngày đã dùng",
+        "emptyLabel": "Không có dữ liệu chi phí cho khoảng thời gian này",
+        "ariaLabel": "Biểu đồ cột chi phí theo ngày",
+        "errorTitle": "Không có dữ liệu chi phí",
+        "errorBody": "Không thể tải dữ liệu chi phí. Vui lòng thử lại."
+      },
+      "reliability": {
+        "panelTitle": "Độ tin cậy",
+        "errorRateLabel": "Tỷ lệ lỗi",
+        "fallbackRateLabel": "Tỷ lệ dự phòng",
+        "p50Label": "p50",
+        "p95Label": "p95",
+        "p99Label": "p99",
+        "circuitStateTitle": "Trạng thái bộ ngắt mạch",
+        "circuitCol": {
+          "alias": "Bí danh",
+          "state": "Trạng thái",
+          "failures": "Lỗi",
+          "lastFailure": "Lỗi gần nhất"
+        },
+        "circuitState": {
+          "closed": "Đóng",
+          "open": "Mở",
+          "half_open": "Nửa mở"
+        },
+        "noCircuits": "Chưa cấu hình bộ ngắt mạch",
+        "emptyLabel": "Không có dữ liệu độ tin cậy cho khoảng thời gian này",
+        "errorTitle": "Không có dữ liệu độ tin cậy",
+        "errorBody": "Không thể tải dữ liệu độ tin cậy. Vui lòng thử lại."
+      },
+      "volume": {
+        "panelTitle": "Khối lượng",
+        "byFeatureTitle": "Yêu cầu theo tính năng",
+        "topConsumersTitle": "Tiêu thụ nhiều nhất",
+        "requestsLabel": "Số yêu cầu",
+        "tokensLabel": "Token (prompt + hoàn thiện)",
+        "emptyLabel": "Không có dữ liệu khối lượng cho khoảng thời gian này",
+        "ariaLabel": "Biểu đồ cột khối lượng yêu cầu",
+        "errorTitle": "Không có dữ liệu khối lượng",
+        "errorBody": "Không thể tải dữ liệu khối lượng. Vui lòng thử lại."
+      },
+      "updated": "Cập nhật lúc {time}",
+      "retry": "Thử lại",
+      "loading": "Đang tải..."
     }
   }
 }

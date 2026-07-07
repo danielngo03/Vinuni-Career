@@ -19,6 +19,85 @@
       "overviewSubtitle": "Superadmin console — platform-wide operations and observability.",
       "accessDeniedTitle": "Access denied",
       "accessDeniedBody": "This area is restricted to platform superadmins."
+    },
+    "aiOps": {
+      "pageTitle": "AI Operations",
+      "pageSubtitle": "Spend, reliability, and volume across all AI features.",
+      "tabs": {
+        "overview": "Overview",
+        "traces": "Traces",
+        "modelsPricing": "Models & Pricing",
+        "settings": "Settings"
+      },
+      "comingSoon": "Coming in next slice",
+      "range": {
+        "label": "Time range",
+        "today": "Today",
+        "7d": "Last 7 days",
+        "30d": "Last 30 days"
+      },
+      "metric": {
+        "spendToday": "Spend today",
+        "requests": "Requests",
+        "errorRate": "Error rate",
+        "p95Latency": "p95 Latency"
+      },
+      "budgetBurn": {
+        "ofBudget": "of budget",
+        "budgetNote": "Daily budget: ${budget}",
+        "burndownNote": "{pct}% of daily budget consumed",
+        "underBudget": "Under budget",
+        "nearBudget": "Near limit",
+        "overBudget": "Over limit"
+      },
+      "unpriced": "Pricing / identity restricted",
+      "maskedProvider": "Restricted",
+      "spend": {
+        "panelTitle": "Spend vs Budget",
+        "burndownLabel": "{pct}% of ${budget} daily budget used",
+        "emptyLabel": "No spend data for this range",
+        "ariaLabel": "Daily spend bar chart",
+        "errorTitle": "Spend data unavailable",
+        "errorBody": "Could not load spend data. Please try again."
+      },
+      "reliability": {
+        "panelTitle": "Reliability",
+        "errorRateLabel": "Error rate",
+        "fallbackRateLabel": "Fallback rate",
+        "p50Label": "p50",
+        "p95Label": "p95",
+        "p99Label": "p99",
+        "circuitStateTitle": "Circuit breaker states",
+        "circuitCol": {
+          "alias": "Alias",
+          "state": "State",
+          "failures": "Failures",
+          "lastFailure": "Last failure"
+        },
+        "circuitState": {
+          "closed": "Closed",
+          "open": "Open",
+          "half_open": "Half-open"
+        },
+        "noCircuits": "No circuit breakers configured",
+        "emptyLabel": "No reliability data for this range",
+        "errorTitle": "Reliability data unavailable",
+        "errorBody": "Could not load reliability data. Please try again."
+      },
+      "volume": {
+        "panelTitle": "Volume",
+        "byFeatureTitle": "Requests by feature",
+        "topConsumersTitle": "Top consumers",
+        "requestsLabel": "Requests",
+        "tokensLabel": "Tokens (prompt + completion)",
+        "emptyLabel": "No volume data for this range",
+        "ariaLabel": "Request volume bar chart",
+        "errorTitle": "Volume data unavailable",
+        "errorBody": "Could not load volume data. Please try again."
+      },
+      "updated": "Updated {time}",
+      "retry": "Retry",
+      "loading": "Loading..."
     }
   }
 }
