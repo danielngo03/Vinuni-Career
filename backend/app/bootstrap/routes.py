@@ -19,6 +19,7 @@ from app.modules.career_outcomes.api import router as career_outcomes_router
 from app.modules.career_services.api import router as career_services_router
 from app.modules.compliance.api import router as compliance_router
 from app.modules.dashboards.api import router as dashboards_router
+from app.modules.dashboards.api.admin_router import admin_router as dashboards_admin_router
 from app.modules.discovery.api import recommendations_router as discovery_reco
 from app.modules.discovery.api import router as discovery_router
 from app.modules.discovery.api.search_router import router as search_router
@@ -77,6 +78,7 @@ def register_routes(app: FastAPI) -> None:
     api.include_router(reviews_router.admin_router)
     api.include_router(student_profiles_router.router)
     api.include_router(dashboards_router.router)
+    api.include_router(dashboards_admin_router)
     api.include_router(career_outcomes_router.router)
     api.include_router(career_services_router)
     api.include_router(compliance_router.router)
