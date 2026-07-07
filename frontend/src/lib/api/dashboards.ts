@@ -283,6 +283,85 @@ export interface UniversityDashboard {
   partner_requests_recent: UniversityPartnerRequestItem[];
 }
 
+/* --------------------- University operations console ----------------------- */
+
+/** Traffic-light health shared by every queue card + SLA rollup. */
+export type OperationsHealth = "on_track" | "due_soon" | "breached";
+
+export interface OperationsQueue {
+  key: "jobs" | "events" | "ads" | "partner_registrations" | "ai_review";
+  href: string;
+  pending: number;
+  overdue: number;
+  due_soon: number;
+  oldest_age_hours: number | null;
+  sla_hours: number | null;
+  next_due_at: string | null;
+  health: OperationsHealth;
+}
+
+export interface OperationsSla {
+  total_pending: number;
+  total_overdue: number;
+  total_due_soon: number;
+  breach_rate: number;
+}
+
+export interface OperationsRisk {
+  high: number;
+  medium: number;
+  low: number;
+  flagged_listings: number;
+}
+
+export interface OperationsModeratorLoad {
+  moderator_id: string;
+  name: string;
+  department: string | null;
+  count: number;
+}
+
+export interface OperationsDepartmentLoad {
+  department: string;
+  count: number;
+}
+
+export interface OperationsWorkload {
+  by_moderator: OperationsModeratorLoad[];
+  by_department: OperationsDepartmentLoad[];
+  unassigned: number;
+}
+
+export interface OperationsUpcomingEvent {
+  id: string;
+  title: string;
+  starts_at: string | null;
+  capacity: number | null;
+  registration_count: number;
+  seats_left: number | null;
+  org_id: string;
+}
+
+export interface OperationsTask {
+  queue: OperationsQueue["key"];
+  href: string;
+  pending: number;
+  overdue: number;
+  due_soon: number;
+  priority: "breach" | "due_soon" | "normal";
+  oldest_age_hours: number | null;
+}
+
+export interface UniversityOperations {
+  generated_at: string;
+  queues: OperationsQueue[];
+  sla: OperationsSla;
+  risk: OperationsRisk;
+  workload: OperationsWorkload;
+  upcoming_events: OperationsUpcomingEvent[];
+  actionable_tasks: OperationsTask[];
+}
+
 /* ------------------------------- Analytics -------------------------------- */
 
 export interface AnalyticsFunnelItem {
@@ -371,6 +450,11 @@ export const dashboardsApi = {
   /** University operations projection (authenticated university staff). */
   university(): Promise<UniversityDashboard> {
     return api.get<UniversityDashboard>("/dashboards/university");
+  },
+
+  /** University operations command center — queue health, SLA, workload, tasks. */
+  universityOperations(): Promise<UniversityOperations> {
+    return api.get<UniversityOperations>("/dashboards/university/operations");
   },
 
   /** Partner analytics — application funnel, top jobs, monthly trend. */

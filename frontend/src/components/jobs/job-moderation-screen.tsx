@@ -8,6 +8,7 @@ import {
   CheckCircle,
   Flag,
   LightbulbFilament,
+  PencilSimple,
   ShieldWarning,
   SignIn,
   Sparkle,
@@ -73,6 +74,7 @@ export function JobModerationScreen() {
   const [selected, setSelected] = useState<OwnerJobSummary | null>(null);
   const [approveOpen, setApproveOpen] = useState(false);
   const [rejectOpen, setRejectOpen] = useState(false);
+  const [changesOpen, setChangesOpen] = useState(false);
   const [escalateOpen, setEscalateOpen] = useState(false);
   const [reason, setReason] = useState("");
   const [reasonCode, setReasonCode] = useState<ModerationReasonCode | string>("other");
@@ -138,6 +140,19 @@ export function JobModerationScreen() {
       setSelected(null);
       setReason("");
       toast.show({ tone: "success", title: t("rejectedToast") });
+      refresh();
+    },
+    onError: handleError,
+  });
+
+  const requestChanges = useMutation({
+    mutationFn: (job: OwnerJobSummary) =>
+      jobsApi.requestChanges(job.id, reason, job.version, reasonCode),
+    onSuccess: () => {
+      setChangesOpen(false);
+      setSelected(null);
+      setReason("");
+      toast.show({ tone: "success", title: t("changesRequestedToast") });
       refresh();
     },
     onError: handleError,
@@ -450,7 +465,7 @@ export function JobModerationScreen() {
 
       {/* Review drawer */}
       <Sheet
-        open={selected !== null && !approveOpen && !rejectOpen && !escalateOpen}
+        open={selected !== null && !approveOpen && !rejectOpen && !changesOpen && !escalateOpen}
         onClose={() => setSelected(null)}
         title={t("reviewTitle")}
         closeLabel={tc("close")}
@@ -531,6 +546,19 @@ export function JobModerationScreen() {
                 <Button variant="primary" fullWidth onClick={() => setApproveOpen(true)}>
                   <CheckCircle aria-hidden weight="bold" className="size-4" />
                   {t("approve")}
+                </Button>
+                <Button
+                  variant="secondary"
+                  fullWidth
+                  onClick={() => {
+                    setReason("");
+                    setReasonCode("incomplete_info");
+                    setReasonError(null);
+                    setChangesOpen(true);
+                  }}
+                >
+                  <PencilSimple aria-hidden weight="bold" className="size-4" />
+                  {t("requestChanges")}
                 </Button>
                 <Button
                   variant="danger"
@@ -658,6 +686,73 @@ export function JobModerationScreen() {
               </p>
             )}
             <p className="mt-2 text-xs text-[var(--text-muted)]">{t("reasonHint")}</p>
+          </div>
+        </div>
+      </Modal>
+
+      {/* Request-changes modal */}
+      <Modal
+        open={changesOpen}
+        onClose={() => setChangesOpen(false)}
+        title={t("requestChangesTitle")}
+        description={t("requestChangesBody", { title: selected?.title ?? "" })}
+        size="sm"
+        closeLabel={tc("close")}
+        footer={
+          <>
+            <Button variant="ghost" onClick={() => setChangesOpen(false)}>
+              {tc("cancel")}
+            </Button>
+            <Button
+              variant="primary"
+              loading={requestChanges.isPending}
+              onClick={() => {
+                if (!reason.trim()) {
+                  setReasonError(t("reasonRequired"));
+                  return;
+                }
+                if (selected) requestChanges.mutate(selected);
+              }}
+            >
+              {t("requestChangesConfirm")}
+            </Button>
+          </>
+        }
+      >
+        <div className="space-y-3">
+          <ReasonCodeSelect
+            id="changes-reason-code"
+            value={reasonCode}
+            onChange={setReasonCode}
+          />
+          <div>
+            <label
+              htmlFor="changes-reason"
+              className="mb-1.5 block text-sm font-semibold text-[var(--text-primary)]"
+            >
+              {t("requestChangesLabel")}
+              <span className="ml-0.5 text-[var(--brand-red)]" aria-hidden>
+                *
+              </span>
+            </label>
+            <textarea
+              id="changes-reason"
+              rows={3}
+              value={reason}
+              onChange={(e) => {
+                setReason(e.target.value);
+                if (reasonError) setReasonError(null);
+              }}
+              aria-invalid={reasonError ? true : undefined}
+              aria-describedby={reasonError ? "changes-reason-error" : undefined}
+              className="w-full rounded-xl border border-[var(--border-default)] bg-white px-3.5 py-2.5 text-sm text-[var(--text-primary)] outline-none focus:border-[var(--brand-primary)]/50 focus:bg-white focus:ring-2 focus:ring-[var(--brand-primary)]/30"
+            />
+            {reasonError && (
+              <p id="changes-reason-error" className="mt-1 text-xs font-medium text-[var(--brand-red)]">
+                {reasonError}
+              </p>
+            )}
+            <p className="mt-2 text-xs text-[var(--text-muted)]">{t("requestChangesHint")}</p>
           </div>
         </div>
       </Modal>

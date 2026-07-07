@@ -6,6 +6,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import {
   CalendarCheck,
   CheckCircle,
+  DownloadSimple,
   Hourglass,
   LightbulbFilament,
   ShieldWarning,
@@ -81,6 +82,21 @@ export function EventAttendees({ eventId }: { eventId: string }) {
       toast.show({ tone: "success", title: t("checkedInToast") });
       void qc.invalidateQueries({ queryKey: ["events", "attendees", eventId] });
       void qc.invalidateQueries({ queryKey: ["events", "owned", eventId] });
+    },
+    onError: (e) => toast.show({ tone: "error", title: getMessage(e) }),
+  });
+
+  const exportCsv = useMutation({
+    mutationFn: () => eventsApi.exportAttendees(eventId),
+    onSuccess: ({ blob, filename }) => {
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = filename ?? `attendees-${eventId}.csv`;
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      URL.revokeObjectURL(url);
     },
     onError: (e) => toast.show({ tone: "error", title: getMessage(e) }),
   });
@@ -252,6 +268,19 @@ export function EventAttendees({ eventId }: { eventId: string }) {
           </section>
         );
       })()}
+      {rows.length > 0 && (
+        <div className="flex justify-end">
+          <Button
+            variant="secondary"
+            size="sm"
+            loading={exportCsv.isPending}
+            onClick={() => exportCsv.mutate()}
+          >
+            <DownloadSimple aria-hidden weight="bold" className="size-4" />
+            {t("exportCsv")}
+          </Button>
+        </div>
+      )}
       <DataTable
         columns={columns}
         rows={rows}

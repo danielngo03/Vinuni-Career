@@ -167,6 +167,7 @@ export const WORKSPACE_NAV_GROUPS: Record<Persona, NavGroup[]> = {
       key: null,
       items: [
         { key: "dashboard", href: "/dashboard", icon: LayoutGrid },
+        { key: "operations", href: "/operations", icon: Gauge },
         { key: "reports", href: "/reports", icon: LineChart },
       ],
     },

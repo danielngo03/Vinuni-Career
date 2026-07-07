@@ -383,6 +383,31 @@ export const eventsApi = {
     });
   },
 
+  /**
+   * Send a submitted event back to the organizer to revise and resubmit — a
+   * softer alternative to reject. `pending_review → draft` (changes_requested).
+   */
+  requestChanges(
+    eventId: string,
+    reason: string,
+    version?: number,
+    reasonCode?: ModerationReasonCode | string,
+  ): Promise<OwnerEventSummary> {
+    return api.post<OwnerEventSummary>(`/admin/events/${eventId}/request-changes`, {
+      reason,
+      reason_code: reasonCode,
+      version,
+    });
+  },
+
+  /**
+   * Download the attendee roster as CSV (organizer/university only). Returns the
+   * Blob + server-suggested filename; the caller triggers the browser save.
+   */
+  exportAttendees(eventId: string): Promise<{ blob: Blob; filename: string | null }> {
+    return api.download(`/events/${eventId}/registrations/export`);
+  },
+
   /** Claim a pending event for review (concurrency-safe; 409 if already claimed). */
   claim(eventId: string): Promise<OwnerEventSummary> {
     return api.post<OwnerEventSummary>(`/admin/events/${eventId}/claim`);

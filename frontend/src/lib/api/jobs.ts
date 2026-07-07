@@ -751,6 +751,24 @@ export const jobsApi = {
     });
   },
 
+  /**
+   * Send a submitted job back to the partner to revise and resubmit — a softer
+   * alternative to reject. Returns it to `draft` with a `changes_requested`
+   * moderation status. `pending_review → draft`.
+   */
+  requestChanges(
+    jobId: string,
+    reason: string,
+    version?: number,
+    reasonCode?: ModerationReasonCode | string,
+  ): Promise<OwnerJobSummary> {
+    return api.post<OwnerJobSummary>(`/admin/jobs/${jobId}/request-changes`, {
+      reason,
+      reason_code: reasonCode,
+      version,
+    });
+  },
+
   /** Claim a pending job for review (concurrency-safe; 409 if already claimed). */
   claim(jobId: string): Promise<OwnerJobSummary> {
     return api.post<OwnerJobSummary>(`/admin/jobs/${jobId}/claim`);

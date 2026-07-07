@@ -339,4 +339,31 @@ export const api = {
   async health(): Promise<{ status: string }> {
     return apiFetch<{ status: string }>("/health", { skipAuth: true });
   },
+  /**
+   * Raw authenticated file download (non-JSON responses, e.g. CSV export).
+   * Returns the response Blob plus the server-suggested filename from
+   * `Content-Disposition`. Throws {@link ApiError} on non-2xx.
+   */
+  async download(
+    path: string,
+    options?: RequestOptions,
+  ): Promise<{ blob: Blob; filename: string | null }> {
+    const url = buildUrl(path, options?.query);
+    const headers = new Headers(options?.headers);
+    if (!options?.skipAuth) {
+      const token = await tokenSource();
+      if (token) headers.set("Authorization", `Bearer ${token}`);
+    }
+    const res = await fetch(url, {
+      ...options,
+      method: "GET",
+      headers,
+      credentials: "include",
+    });
+    if (!res.ok) throw await parseError(res);
+    const blob = await res.blob();
+    const disposition = res.headers.get("Content-Disposition");
+    const match = disposition?.match(/filename="?([^"]+)"?/);
+    return { blob, filename: match?.[1] ?? null };
+  },
 };
