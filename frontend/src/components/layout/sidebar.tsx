@@ -10,7 +10,7 @@ import { WORKSPACE_NAV_GROUPS, type NavGroup, type NavItem } from "@/config/nav"
 import { organizationApi } from "@/lib/api";
 import { BrandMark } from "./brand-mark";
 import { SidebarUsageCard } from "./sidebar-usage-card";
-import type { Persona } from "@/stores/auth-store";
+import { useAuthStore, type Persona } from "@/stores/auth-store";
 import { cn } from "@/lib/utils";
 
 interface SidebarProps {
@@ -212,6 +212,7 @@ export function Sidebar({
 }: SidebarProps) {
   const t = useTranslations("nav");
   const pathname = usePathname();
+  const isSuperadmin = useAuthStore((s) => s.user?.isSuperadmin ?? false);
   const groups = WORKSPACE_NAV_GROUPS[persona];
   const sidebarToggleLabel = collapsed ? t("expandSidebar") : t("collapseSidebar");
 
@@ -272,7 +273,11 @@ export function Sidebar({
             làm" and the "Tuyển dụng" accordion right after it. Every other
             group boundary keeps its breathing room. */}
         {groups.map((group, gi) => {
-          const available = group.items.filter((i) => i.available !== false);
+          const available = group.items.filter(
+            (i) =>
+              i.available !== false &&
+              (!i.requiresSuperadmin || isSuperadmin),
+          );
           if (available.length === 0) return null;
           const previousGroup = groups[gi - 1];
           const gapBefore =

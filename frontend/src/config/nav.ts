@@ -38,8 +38,6 @@ import {
   ShieldAlert,
   Bell,
   Activity,
-  Flag,
-  BellRing,
   ScrollText,
 } from "lucide-react";
 import type { Persona } from "@/stores/auth-store";
@@ -67,6 +65,12 @@ export interface NavItem {
    * planned but not yet built.
    */
   disabled?: boolean;
+  /**
+   * When true, this item is only shown to users with `isSuperadmin === true`.
+   * The sidebar filter gates visibility; the per-page SuperadminGuard enforces
+   * server-side protection on direct URL access.
+   */
+  requiresSuperadmin?: boolean;
 }
 
 /**
@@ -200,6 +204,17 @@ export const WORKSPACE_NAV_GROUPS: Record<Persona, NavGroup[]> = {
         { key: "abuseTriage", href: "/abuse", icon: ShieldAlert },
       ],
     },
+    {
+      key: "systemAdmin",
+      accordion: true,
+      icon: Gauge,
+      items: [
+        { key: "platformOverview", href: "/platform-overview", icon: LayoutGrid, requiresSuperadmin: true },
+        { key: "aiOperations", href: "/ai-operations", icon: Bot, requiresSuperadmin: true },
+        { key: "auditLog", href: "/audit-log", icon: ScrollText, requiresSuperadmin: true },
+        { key: "systemHealth", href: "/system-health", icon: Activity, requiresSuperadmin: true },
+      ],
+    },
   ],
 };
 
@@ -216,30 +231,3 @@ export const SETTINGS_NAV: NavItem = {
   href: "/settings",
   icon: Settings,
 };
-
-/**
- * Superadmin console navigation. Items use `absolute: true` so hrefs are
- * treated as full app paths (no persona prefix). Keys resolve under the
- * `adminConsole.nav` namespace (not `nav`). Stub sections are marked
- * `disabled: true` — they are visible for IA clarity but not yet clickable.
- */
-export const ADMIN_NAV_GROUPS: NavGroup[] = [
-  {
-    key: null,
-    items: [
-      { key: "overview", href: "/admin", icon: LayoutGrid, absolute: true },
-      { key: "aiOperations", href: "/admin/ai-operations", icon: Bot, absolute: true },
-    ],
-  },
-  {
-    key: "system",
-    items: [
-      { key: "auditLog", href: "/admin/audit-log", icon: ScrollText, absolute: true },
-      { key: "systemHealth", href: "/admin/system-health", icon: Activity, absolute: true },
-      { key: "usersAccess", href: "/admin/users", icon: Users, absolute: true, disabled: true },
-      { key: "featureFlags", href: "/admin/feature-flags", icon: Flag, absolute: true, disabled: true },
-      { key: "analytics", href: "/admin/analytics", icon: BarChart3, absolute: true, disabled: true },
-      { key: "alerts", href: "/admin/alerts", icon: BellRing, absolute: true, disabled: true },
-    ],
-  },
-];

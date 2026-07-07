@@ -179,7 +179,7 @@ function AdminNextActionsRail({
   }> = [
     {
       id: "ai-operations",
-      href: "/admin/ai-operations",
+      href: "/university/ai-operations",
       title: t("aiOperations"),
       body: t("aiOperationsBody"),
       icon: Robot,

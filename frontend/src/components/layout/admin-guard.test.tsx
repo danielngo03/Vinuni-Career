@@ -1,15 +1,18 @@
 /**
- * AdminGuard logic tests.
+ * SuperadminGuard / AdminGuard logic tests.
  *
  * The vitest environment is `node` (no DOM), so we test the guard's allow/deny
- * decision logic directly by exercising the auth store state that `AdminGuard`
- * consumes, rather than rendering the JSX tree. This is consistent with every
- * other test in this repo.
+ * decision logic directly by exercising the auth store state that
+ * `SuperadminGuard` consumes, rather than rendering the JSX tree. This is
+ * consistent with every other test in this repo.
  *
- * Contract under test: AdminGuard allows children iff
+ * Contract under test: SuperadminGuard allows children iff
  *   status === "authenticated" && user.isSuperadmin === true
  * In every other state (unknown / guest / non-superadmin authenticated) the
- * guard must NOT render children (and must redirect to "/").
+ * guard must NOT render children (and must redirect to "/university/dashboard").
+ *
+ * `AdminGuard` is a deprecated re-export alias of `SuperadminGuard`; the
+ * logic contract is identical.
  */
 import { describe, it, expect, beforeEach } from "vitest";
 import { useAuthStore } from "@/stores/auth-store";

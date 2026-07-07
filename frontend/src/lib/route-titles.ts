@@ -82,8 +82,10 @@ const LOCALE_TITLES: Record<LocaleCode, Record<string, string>> = {
     "/university/abuse": "Xử lý báo cáo vi phạm",
     "/university/workflow": "Quy trình",
     "/university/workflow/new": "Tạo quy trình",
-    "/admin": "Tổng quan nền tảng",
-    "/admin/ai-operations": "Vận hành AI",
+    "/university/platform-overview": "Tổng quan nền tảng",
+    "/university/ai-operations": "Vận hành AI",
+    "/university/audit-log": "Nhật ký kiểm tra",
+    "/university/system-health": "Tình trạng hệ thống",
   },
   en: {
     "/": "Home",
@@ -164,8 +166,10 @@ const LOCALE_TITLES: Record<LocaleCode, Record<string, string>> = {
     "/university/abuse": "Abuse triage",
     "/university/workflow": "Workflow",
     "/university/workflow/new": "Create workflow",
-    "/admin": "Platform Overview",
-    "/admin/ai-operations": "AI Operations",
+    "/university/platform-overview": "Platform Overview",
+    "/university/ai-operations": "AI Operations",
+    "/university/audit-log": "Audit Log",
+    "/university/system-health": "System Health",
   },
 };
 
