@@ -14,6 +14,7 @@ import uuid
 import pytest
 from app.modules.users.application import admin_users_service
 from app.modules.dashboards.application import (
+    operations_read,
     partner_dashboard,
     student_dashboard,
     university_dashboard,
@@ -310,6 +311,81 @@ async def test_university_dashboard_partner_forbidden(db_session) -> None:
     # Partner Admin holds *:* but the org-type gate keeps this surface uni-only.
     with pytest.raises(PermissionDeniedError):
         await university_dashboard.get_university_dashboard(db_session, principal=partner)
+
+
+# --------------------------------------------------------------------------- #
+# University operations command center                                        #
+# --------------------------------------------------------------------------- #
+
+
+async def test_university_operations_aggregates_queues(db_session) -> None:
+    _uu, _uorg, uni = await make_org_with_admin(db_session, org_type="university")
+    _pa_u, _pa_org, partner_a = await make_org_with_admin(db_session, display_name="P A")
+    _pb_u, _pb_org, partner_b = await make_org_with_admin(db_session, display_name="P B")
+
+    # Two pending jobs across two orgs + one pending partner registration.
+    for partner in (partner_a, partner_b):
+        job = await job_service.create_job(
+            db_session, principal=partner, payload=job_payload("Needs Review"), ctx=CTX
+        )
+        await job_service.submit_job(
+            db_session, principal=partner, job_id=uuid.UUID(job["id"]), ctx=CTX
+        )
+    await _register_pending_partner(db_session, company_name="Ops New Co")
+
+    data = await operations_read.get_university_operations(db_session, principal=uni)
+
+    # Envelope shape.
+    assert set(data) >= {
+        "generated_at",
+        "queues",
+        "sla",
+        "risk",
+        "workload",
+        "upcoming_events",
+        "actionable_tasks",
+    }
+
+    queues = {q["key"]: q for q in data["queues"]}
+    assert set(queues) == {"jobs", "events", "ads", "partner_registrations", "ai_review"}
+    assert queues["jobs"]["pending"] == 2
+    assert queues["jobs"]["sla_hours"] == 24
+    assert queues["partner_registrations"]["pending"] == 1
+    assert queues["partner_registrations"]["sla_hours"] == 48
+    # Every queue carries an operator-facing route.
+    assert all(q["href"].startswith("/university/") for q in data["queues"])
+
+    # SLA roll-up counts every pending item across queues.
+    assert data["sla"]["total_pending"] == 3
+
+    # Two freshly-submitted, unclaimed jobs land in the unassigned workload bucket.
+    assert data["workload"]["unassigned"] == 2
+    assert data["workload"]["by_moderator"] == []
+
+    # Actionable tasks include the jobs queue and carry a priority + href.
+    task_queues = {t["queue"] for t in data["actionable_tasks"]}
+    assert {"jobs", "partner_registrations"} <= task_queues
+    jobs_task = next(t for t in data["actionable_tasks"] if t["queue"] == "jobs")
+    assert jobs_task["pending"] == 2 and jobs_task["priority"] in {"normal", "due_soon", "breach"}
+
+    # Risk mix is always well-formed.
+    assert set(data["risk"]) == {"high", "medium", "low", "flagged_listings"}
+
+
+async def test_university_operations_superadmin_empty_state(db_session) -> None:
+    _su, student = await make_student(db_session)
+    student.is_superadmin = True
+    data = await operations_read.get_university_operations(db_session, principal=student)
+    assert data["sla"]["total_pending"] == 0
+    assert data["sla"]["breach_rate"] == 0.0
+    assert data["actionable_tasks"] == []
+    assert all(q["pending"] == 0 for q in data["queues"])
+
+
+async def test_university_operations_partner_forbidden(db_session) -> None:
+    _pu, _porg, partner = await make_org_with_admin(db_session)
+    with pytest.raises(PermissionDeniedError):
+        await operations_read.get_university_operations(db_session, principal=partner)
 
 
 # --------------------------------------------------------------------------- #

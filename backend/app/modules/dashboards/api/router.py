@@ -15,6 +15,7 @@ from app.modules.analytics.application import partner_ops_dashboard_service
 from app.modules.auth.api.deps import CurrentAuth, get_current_auth
 from app.modules.dashboards.application import (
     market_intelligence_service,
+    operations_read,
     partner_dashboard,
     student_dashboard,
     university_dashboard,
@@ -54,6 +55,20 @@ async def get_university_dashboard(
     session: AsyncSession = Depends(get_db_session),
 ) -> dict:
     data = await university_dashboard.get_university_dashboard(
+        session, principal=auth.principal
+    )
+    return success(data)
+
+
+@router.get(
+    "/university/operations",
+    summary="University operations command center — queue health, SLA, workload, tasks",
+)
+async def get_university_operations(
+    auth: CurrentAuth = Depends(get_current_auth),
+    session: AsyncSession = Depends(get_db_session),
+) -> dict:
+    data = await operations_read.get_university_operations(
         session, principal=auth.principal
     )
     return success(data)

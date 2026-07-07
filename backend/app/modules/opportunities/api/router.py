@@ -825,6 +825,23 @@ async def reject_job(
     return success(data)
 
 
+@admin_jobs_router.post(
+    "/{job_id}/request-changes", summary="Send a job back to the partner to revise"
+)
+async def request_changes_job(
+    job_id: uuid.UUID,
+    body: JobModerationRejectRequest,
+    auth: CurrentAuth = Depends(get_current_auth),
+    session: AsyncSession = Depends(get_db_session),
+) -> dict:
+    data = await moderation_service.request_changes_job(
+        session, principal=auth.principal, job_id=job_id,
+        reason=body.reason, reason_code=body.reason_code, version=body.version,
+        ctx=auth.ctx,
+    )
+    return success(data)
+
+
 @admin_jobs_router.post("/{job_id}/claim", summary="Claim a job for review")
 async def claim_job(
     job_id: uuid.UUID,

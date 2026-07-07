@@ -101,15 +101,165 @@ def queue_age_fields(
 ) -> dict:
     """Age/overdue presentation fields for a moderation-queue list/detail row."""
 
-    submitted_at = _as_utc(submitted_at)
-    due_by = _as_utc(due_by)
-    now = _as_utc(now)
+    submitted = _as_utc(submitted_at)
+    due = _as_utc(due_by)
+    now_utc = _as_utc(now)
+    assert now_utc is not None  # ``now`` is always a concrete datetime
 
     age_hours: float | None = None
-    if submitted_at is not None:
-        age_hours = round((now - submitted_at).total_seconds() / 3600.0, 1)
+    if submitted is not None:
+        age_hours = round((now_utc - submitted).total_seconds() / 3600.0, 1)
     return {
-        "due_by": due_by.isoformat() if due_by else None,
+        "due_by": due.isoformat() if due else None,
         "age_hours": age_hours,
-        "is_overdue": bool(due_by is not None and now >= due_by),
+        "is_overdue": bool(due is not None and now_utc >= due),
+    }
+
+
+# --------------------------------------------------------------------------- #
+# Per-queue SLA policy + traffic-light health (BUSINESS_LOGIC.md §11)          #
+# --------------------------------------------------------------------------- #
+#
+# Canonical operations-queue keys. Kept stringly-stable because they are the
+# contract the University Operations read model + frontend share.
+
+QUEUE_JOBS = "jobs"
+QUEUE_EVENTS = "events"
+QUEUE_ADS = "ads"
+QUEUE_PARTNER_REGISTRATIONS = "partner_registrations"
+QUEUE_AI_REVIEW = "ai_review"
+
+QUEUE_KEYS: tuple[str, ...] = (
+    QUEUE_JOBS,
+    QUEUE_EVENTS,
+    QUEUE_ADS,
+    QUEUE_PARTNER_REGISTRATIONS,
+    QUEUE_AI_REVIEW,
+)
+
+# Documented per-type SLA hours (BUSINESS_LOGIC.md §11: partner reg 48h, job 24h,
+# partner event 24h, ad creative 24h; AI-flagged 4h). The AI human-review queue
+# carries mixed sources; 4h is the tightest documented value so it is the queue
+# default (content-report/HIGH-severity items are the urgent members).
+QUEUE_SLA_HOURS: dict[str, int] = {
+    QUEUE_JOBS: 24,
+    QUEUE_EVENTS: 24,
+    QUEUE_ADS: 24,
+    QUEUE_PARTNER_REGISTRATIONS: 48,
+    QUEUE_AI_REVIEW: 4,
+}
+
+# Health traffic light shared by every queue card.
+HEALTH_ON_TRACK = "on_track"
+HEALTH_DUE_SOON = "due_soon"  # amber
+HEALTH_BREACHED = "breached"  # red
+
+
+def queue_sla_hours(queue_key: str) -> int:
+    """SLA window (hours) for a queue key; falls back to the 24h job default."""
+
+    return QUEUE_SLA_HOURS.get(queue_key, 24)
+
+
+def sla_health(due_by: datetime | None, now: datetime, *, sla_hours: int = 24) -> str:
+    """Traffic-light state for one item given its SLA deadline.
+
+    - ``breached`` once ``now`` reaches ``due_by`` (red).
+    - ``due_soon`` inside the amber window before the deadline. The window is
+      ``max(2h, 25% of the SLA)`` — the ">2h before breach" pre-warn threshold
+      of BUSINESS_LOGIC.md §11, widened for longer (48h) SLAs so partner-reg
+      items still amber a shift ahead of breach.
+    - ``on_track`` otherwise. ``due_by is None`` (no deadline yet) is on_track.
+    """
+
+    due = _as_utc(due_by)
+    now_utc = _as_utc(now)
+    assert now_utc is not None  # ``now`` is always a concrete datetime
+    if due is None:
+        return HEALTH_ON_TRACK
+    if now_utc >= due:
+        return HEALTH_BREACHED
+    amber_hours = max(2.0, sla_hours * 0.25)
+    remaining_hours = (due - now_utc).total_seconds() / 3600.0
+    if remaining_hours <= amber_hours:
+        return HEALTH_DUE_SOON
+    return HEALTH_ON_TRACK
+
+
+def queue_health(
+    *,
+    pending: int,
+    overdue: int,
+    due_soon: int = 0,
+) -> str:
+    """Roll a queue's item counts up to a single traffic-light for its card.
+
+    Any breached item makes the whole queue red; else any amber item makes it
+    amber; else green. An empty queue is on_track (nothing to do is healthy).
+    """
+
+    if overdue > 0:
+        return HEALTH_BREACHED
+    if due_soon > 0:
+        return HEALTH_DUE_SOON
+    return HEALTH_ON_TRACK
+
+
+def summarize_queue(
+    rows: list[tuple[datetime | None, datetime | None]],
+    *,
+    now: datetime,
+    sla_hours: int,
+) -> dict:
+    """Aggregate the ``(submitted_at, due_by)`` pairs of a queue's PENDING items.
+
+    Returns the queue-card contract shared by the University Operations read
+    model and its frontend: ``pending`` / ``overdue`` (SLA-breached) / ``due_soon``
+    (amber) counts, the ``oldest_age_hours`` waiting item, the ``next_due_at``
+    deadline, the ``sla_hours`` window, and a rolled-up ``health`` traffic light.
+
+    A ``due_by`` of ``None`` (queues that store no explicit deadline, e.g. the AI
+    review queue and partner registrations) is derived as ``submitted_at +
+    sla_hours`` so every queue reports SLA state on the same basis.
+    """
+
+    now_utc = _as_utc(now)
+    assert now_utc is not None  # narrow for type-checkers; callers always pass a value
+    pending = len(rows)
+    overdue = 0
+    due_soon = 0
+    oldest_submitted: datetime | None = None
+    next_due: datetime | None = None
+
+    for raw_submitted, raw_due in rows:
+        submitted_at = _as_utc(raw_submitted)
+        due_by = _as_utc(raw_due)
+        if due_by is None and submitted_at is not None:
+            due_by = submitted_at + timedelta(hours=sla_hours)
+
+        health = sla_health(due_by, now_utc, sla_hours=sla_hours)
+        if health == HEALTH_BREACHED:
+            overdue += 1
+        elif health == HEALTH_DUE_SOON:
+            due_soon += 1
+
+        if submitted_at is not None and (
+            oldest_submitted is None or submitted_at < oldest_submitted
+        ):
+            oldest_submitted = submitted_at
+        if due_by is not None and (next_due is None or due_by < next_due):
+            next_due = due_by
+
+    oldest_age_hours: float | None = None
+    if oldest_submitted is not None:
+        oldest_age_hours = round((now_utc - oldest_submitted).total_seconds() / 3600.0, 1)
+
+    return {
+        "pending": pending,
+        "overdue": overdue,
+        "due_soon": due_soon,
+        "oldest_age_hours": oldest_age_hours,
+        "sla_hours": sla_hours,
+        "next_due_at": next_due.isoformat() if next_due else None,
+        "health": queue_health(pending=pending, overdue=overdue, due_soon=due_soon),
     }

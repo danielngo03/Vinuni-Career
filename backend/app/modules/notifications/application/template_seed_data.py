@@ -393,6 +393,40 @@ DEFAULT_TEMPLATES: list[dict] = [
         },
     },
     {
+        "key": "job.changes_requested",
+        "channel": "email",
+        "variables_schema": {
+            "allowed": ["name", "email", "job_title", "reason"],
+            "required": ["job_title", "reason"],
+        },
+        "locales": {
+            "vi": {
+                "subject": "Yêu cầu chỉnh sửa tin tuyển dụng — VinUni Career",
+                "body": (
+                    "Chào {{name}},\n\n"
+                    "Tin tuyển dụng \"{{job_title}}\" của bạn cần được chỉnh sửa "
+                    "trước khi được duyệt.\n\n"
+                    "Nội dung cần chỉnh sửa: {{reason}}\n\n"
+                    "Tin đã được chuyển về mục nháp của bạn. Vui lòng cập nhật và "
+                    "gửi lại để được xem xét.\n\n"
+                    "Trân trọng,\nVinUni Career Center"
+                ),
+            },
+            "en": {
+                "subject": "Changes requested on your job posting — VinUni Career",
+                "body": (
+                    "Hi {{name}},\n\n"
+                    "Your job posting \"{{job_title}}\" needs a few changes before "
+                    "it can be approved.\n\n"
+                    "What to update: {{reason}}\n\n"
+                    "The posting is back in your drafts — please revise and resubmit "
+                    "it for review.\n\n"
+                    "Best regards,\nVinUni Career Center"
+                ),
+            },
+        },
+    },
+    {
         "key": "job.auto_closed",
         "channel": "email",
         "variables_schema": {
@@ -1226,6 +1260,40 @@ DEFAULT_TEMPLATES: list[dict] = [
                     "this time.\n\n"
                     "Reason: {{reason}}\n\n"
                     "You can edit and resubmit it for another review.\n\n"
+                    "Best regards,\nVinUni Career Center"
+                ),
+            },
+        },
+    },
+    {
+        "key": "event.changes_requested",
+        "channel": "email",
+        "variables_schema": {
+            "allowed": ["name", "email", "event_title", "reason"],
+            "required": ["event_title", "reason"],
+        },
+        "locales": {
+            "vi": {
+                "subject": "Yêu cầu chỉnh sửa sự kiện — VinUni Career",
+                "body": (
+                    "Chào {{name}},\n\n"
+                    "Sự kiện “{{event_title}}” của bạn cần được chỉnh sửa trước khi "
+                    "được duyệt.\n\n"
+                    "Nội dung cần chỉnh sửa: {{reason}}\n\n"
+                    "Sự kiện đã được chuyển về mục nháp. Vui lòng cập nhật và gửi lại "
+                    "để được xem xét.\n\n"
+                    "Trân trọng,\nVinUni Career Center"
+                ),
+            },
+            "en": {
+                "subject": "Changes requested on your event — VinUni Career",
+                "body": (
+                    "Hi {{name}},\n\n"
+                    "Your event “{{event_title}}” needs a few changes before it can "
+                    "be approved.\n\n"
+                    "What to update: {{reason}}\n\n"
+                    "The event is back in your drafts — please revise and resubmit it "
+                    "for review.\n\n"
                     "Best regards,\nVinUni Career Center"
                 ),
             },

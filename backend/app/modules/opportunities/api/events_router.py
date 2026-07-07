@@ -9,9 +9,12 @@ and ``admin_events_router`` (``/admin/events``).
 
 from __future__ import annotations
 
+import csv
+import io
+import re
 import uuid
 
-from fastapi import APIRouter, Depends, Query, Request, status
+from fastapi import APIRouter, Depends, Query, Request, Response, status
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.core.db import get_db_session
@@ -234,6 +237,66 @@ async def list_attendees(
     return success(items, meta={"count": len(items)})
 
 
+_CSV_INJECTION_PREFIXES = ("=", "+", "-", "@", "\t", "\r")
+
+
+def _csv_safe(value: str | None) -> str:
+    """Neutralise spreadsheet formula-injection in an exported cell.
+
+    A leading ``= + - @`` (or control char) makes Excel/Sheets evaluate the cell
+    as a formula. Names/emails are user-controlled, so a leading such char is
+    prefixed with a single quote before export (OWASP CSV-injection guidance).
+    """
+
+    text = "" if value is None else str(value)
+    if text and text[0] in _CSV_INJECTION_PREFIXES:
+        return "'" + text
+    return text
+
+
+@events_router.get(
+    "/{event_id}/registrations/export",
+    summary="Export the attendee roster as CSV (organizer/university)",
+)
+async def export_attendees(
+    event_id: uuid.UUID,
+    auth: CurrentAuth = Depends(get_current_auth),
+    session: AsyncSession = Depends(get_db_session),
+) -> Response:
+    data = await registration_service.export_attendees(
+        session, principal=auth.principal, event_id=event_id, ctx=auth.ctx,
+    )
+    include_email = data["include_email"]
+
+    buffer = io.StringIO()
+    writer = csv.writer(buffer)
+    header = ["Name"]
+    if include_email:
+        header.append("Email")
+    header += ["Status", "Registered At", "Checked In At"]
+    writer.writerow(header)
+    for row in data["attendees"]:
+        line = [_csv_safe(row.get("display_name"))]
+        if include_email:
+            line.append(_csv_safe(row.get("email")))
+        line += [
+            _csv_safe(row.get("status_label")),
+            row.get("registered_at") or "",
+            row.get("checked_in_at") or "",
+        ]
+        writer.writerow(line)
+
+    slug = re.sub(r"[^a-zA-Z0-9]+", "-", data["event_title"] or "event").strip("-").lower()
+    filename = f"attendees-{slug or 'event'}-{str(event_id)[:8]}.csv"
+    # UTF-8 BOM so Excel opens Vietnamese names/labels without mojibake.
+    body = "﻿" + buffer.getvalue()
+    return Response(
+        content=body,
+        media_type="text/csv; charset=utf-8",
+        headers={"Content-Disposition": f'attachment; filename="{filename}"'},
+    )
+
+
 @events_router.post(
     "/{event_id}/registrations/{registration_id}/check-in",
     summary="Mark a registration as attended",
@@ -293,6 +356,23 @@ async def reject_event(
     session: AsyncSession = Depends(get_db_session),
 ) -> dict:
     data = await event_moderation_service.reject_event(
+        session, principal=auth.principal, event_id=event_id,
+        reason=body.reason, reason_code=body.reason_code, version=body.version,
+        ctx=auth.ctx,
+    )
+    return success(data)
+
+
+@admin_events_router.post(
+    "/{event_id}/request-changes", summary="Send an event back to the organizer to revise"
+)
+async def request_changes_event(
+    event_id: uuid.UUID,
+    body: EventModerationRejectRequest,
+    auth: CurrentAuth = Depends(get_current_auth),
+    session: AsyncSession = Depends(get_db_session),
+) -> dict:
+    data = await event_moderation_service.request_changes_event(
         session, principal=auth.principal, event_id=event_id,
         reason=body.reason, reason_code=body.reason_code, version=body.version,
         ctx=auth.ctx,

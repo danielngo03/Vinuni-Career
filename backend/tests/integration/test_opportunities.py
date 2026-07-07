@@ -372,6 +372,65 @@ async def test_reject_notifies_and_sets_rejected(db_session) -> None:
     assert resubmitted["status"] == "pending_review"
 
 
+async def test_request_changes_returns_job_to_draft_and_resubmittable(db_session) -> None:
+    _u, _org, admin = await make_org_with_admin(db_session)
+    _uu, _uorg, uni = await make_org_with_admin(db_session, org_type="university")
+    job = await job_service.create_job(
+        db_session, principal=admin, payload=_payload(), ctx=CTX
+    )
+    await job_service.submit_job(
+        db_session, principal=admin, job_id=uuid.UUID(job["id"]), ctx=CTX
+    )
+
+    result = await moderation_service.request_changes_job(
+        db_session, principal=uni, job_id=uuid.UUID(job["id"]),
+        reason="Vui lòng bổ sung mức lương và địa điểm.", ctx=CTX,
+    )
+    # Softer than reject: back to the partner's drafts, distinct moderation state.
+    assert result["status"] == "draft"
+    assert result["moderation_status"] == "changes_requested"
+
+    # It leaves the moderation queue.
+    _queue, total = await moderation_service.list_moderation_queue(db_session, principal=uni)
+    assert total == 0
+
+    # Organizer notified via the changes-requested template.
+    outbox = (
+        await db_session.execute(
+            select(NotificationOutbox).where(
+                NotificationOutbox.template_key == "job.changes_requested"
+            )
+        )
+    ).scalars().all()
+    assert len(outbox) == 1
+
+    # Partner revises and resubmits -> back into review, moderation reset.
+    await job_service.update_job(
+        db_session, principal=admin, job_id=uuid.UUID(job["id"]),
+        payload={"title": "Backend Intern (revised)"}, ctx=CTX,
+    )
+    resubmitted = await job_service.submit_job(
+        db_session, principal=admin, job_id=uuid.UUID(job["id"]), ctx=CTX
+    )
+    assert resubmitted["status"] == "pending_review"
+    assert resubmitted["moderation_status"] == "pending"
+
+
+async def test_request_changes_partner_forbidden(db_session) -> None:
+    _u, _org, admin = await make_org_with_admin(db_session)  # partner *:*
+    job = await job_service.create_job(
+        db_session, principal=admin, payload=_payload(), ctx=CTX
+    )
+    await job_service.submit_job(
+        db_session, principal=admin, job_id=uuid.UUID(job["id"]), ctx=CTX
+    )
+    with pytest.raises(PermissionDeniedError):
+        await moderation_service.request_changes_job(
+            db_session, principal=admin, job_id=uuid.UUID(job["id"]),
+            reason="x", ctx=CTX,
+        )
+
+
 # --------------------------------------------------------------------------- #
 # Edit lock + optimistic concurrency                                         #
 # --------------------------------------------------------------------------- #

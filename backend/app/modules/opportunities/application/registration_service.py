@@ -601,6 +601,70 @@ async def list_attendees(
     return out
 
 
+async def export_attendees(
+    session: AsyncSession,
+    *,
+    principal: Principal,
+    event_id: uuid.UUID,
+    ctx: RequestContext,
+    locale: str = "vi",
+) -> dict:
+    """Attendee export payload for a CSV download (organizer/university only).
+
+    Same RBAC/email-masking as :func:`list_attendees` (email only in the owning
+    organizer's projection), but the access is **audited** because exporting an
+    attendee roster is a bulk PII read (``docs/SECURITY_PRIVACY.md``). Returns the
+    event title, whether email is included, and the presenter rows — the router
+    serialises them to CSV.
+    """
+
+    event, is_organizer = await _load_event_for_staff(
+        session, principal=principal, event_id=event_id
+    )
+    rows = list(
+        (
+            await session.execute(
+                select(EventRegistration)
+                .where(
+                    EventRegistration.event_id == event_id,
+                    EventRegistration.status != event_lifecycle.REG_CANCELLED,
+                )
+                .order_by(EventRegistration.created_at.asc())
+            )
+        ).scalars().all()
+    )
+    user_ids = {r.user_id for r in rows}
+    users = await user_read_facade.get_user_contacts(session, user_ids)
+
+    attendees: list[dict] = [
+        presenters.attendee_row(
+            r,
+            display_name=(u.full_name if (u := users.get(r.user_id)) else None),
+            email=u.email if u else None,
+            include_email=is_organizer,
+            locale=locale,
+        )
+        for r in rows
+    ]
+
+    await write_audit(
+        session,
+        action="event.attendees_exported",
+        resource_type="event",
+        resource_id=event.id,
+        context=_audit_ctx(principal, ctx),
+        after={"attendee_count": len(attendees), "include_email": is_organizer},
+    )
+    await session.commit()
+
+    return {
+        "event_id": str(event.id),
+        "event_title": event.title,
+        "include_email": is_organizer,
+        "attendees": attendees,
+    }
+
+
 # --------------------------------------------------------------------------- #
 # Student "My Events"                                                         #
 # --------------------------------------------------------------------------- #

@@ -115,6 +115,7 @@ async def _notify_partner(
     notif_type = {
         "job.approved": "opportunities.job_approved",
         "job.rejected": "opportunities.job_rejected",
+        "job.changes_requested": "opportunities.job_changes_requested",
     }.get(template_key)
     if notif_type is not None:
         await feed_service.create_in_app(
@@ -277,6 +278,63 @@ async def reject_job(
     )
     await _notify_partner(
         session, job=job, template_key="job.rejected", locale=locale,
+        extra={"reason": reason.strip()},
+    )
+    await session.commit()
+    return presenters.owner_job_summary(job, locale=locale)
+
+
+async def request_changes_job(
+    session: AsyncSession,
+    *,
+    principal: Principal,
+    job_id: uuid.UUID,
+    reason: str,
+    reason_code: str | None = None,
+    version: int | None = None,
+    ctx: RequestContext,
+    locale: str = "vi",
+) -> dict:
+    """Send a submitted job back to the partner to revise and resubmit.
+
+    A softer, collaborative alternative to ``reject_job``: the job returns to
+    ``draft`` (editable) with ``moderation_status=changes_requested`` and the
+    reason recorded, leaves the moderation queue, and the partner is notified.
+    Resubmitting via ``submit_job`` (draft -> pending_review) re-enters review
+    and resets the moderation status. Idempotent once already sent back.
+    """
+
+    await _require_university_moderator(session, principal)
+    if not reason or not reason.strip():
+        raise ValidationFailedError(details={"reason": "reason_required"})
+    code = _validate_reason_code(reason_code, reason=reason)
+    job = await _load_job(session, job_id)
+    if job is None:
+        raise ResourceNotFoundError()
+    if version is not None and version != job.version:
+        raise JobVersionConflictError()
+    if job.moderation_status == lifecycle.MOD_CHANGES_REQUESTED:
+        return presenters.owner_job_summary(job, locale=locale)  # idempotent
+    if not lifecycle.can_transition("request_changes", job.status):
+        raise IllegalJobTransitionError(event="request_changes")
+
+    job.status = lifecycle.target_state("request_changes")
+    job.moderation_status = lifecycle.MOD_CHANGES_REQUESTED
+    job.moderation_note = reason.strip()
+    job.moderation_reason_code = code
+    job.claimed_by = None
+    job.claimed_at = None
+    job.version += 1
+    await session.flush()
+
+    await write_audit(
+        session, action="job.changes_requested", resource_type="job", resource_id=job.id,
+        context=_audit_ctx(principal, job, ctx),
+        after={"status": job.status, "moderation_status": job.moderation_status,
+               "reason_code": code, "org_id": str(job.org_id)},
+    )
+    await _notify_partner(
+        session, job=job, template_key="job.changes_requested", locale=locale,
         extra={"reason": reason.strip()},
     )
     await session.commit()

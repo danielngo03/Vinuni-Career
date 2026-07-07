@@ -179,6 +179,50 @@ async def test_moderation_reject_then_resubmit(db_session) -> None:
     assert resubmitted["status"] == "pending_review"
 
 
+async def test_moderation_request_changes_returns_event_to_draft(db_session) -> None:
+    _u, _org, organizer = await make_org_with_admin(db_session)
+    _uu, _uorg, uni = await make_org_with_admin(db_session, org_type="university")
+    created = await event_service.create_event(
+        db_session, principal=organizer, payload=event_payload(), ctx=CTX
+    )
+    await event_service.submit_event(
+        db_session, principal=organizer, event_id=uuid.UUID(created["id"]), ctx=CTX
+    )
+
+    result = await event_moderation_service.request_changes_event(
+        db_session, principal=uni, event_id=uuid.UUID(created["id"]),
+        reason="Vui lòng bổ sung địa điểm và sức chứa.", ctx=CTX,
+    )
+    assert result["status"] == "draft"
+    assert result["moderation_status"] == "changes_requested"
+
+    # Leaves the moderation queue.
+    items, _total = await event_moderation_service.list_moderation_queue(
+        db_session, principal=uni
+    )
+    assert all(row["id"] != created["id"] for row in items)
+
+    # Organizer notified via the changes-requested template.
+    outbox = (
+        await db_session.execute(
+            select(NotificationOutbox).where(
+                NotificationOutbox.template_key == "event.changes_requested"
+            )
+        )
+    ).scalars().all()
+    assert len(outbox) == 1
+
+    # Revise + resubmit re-enters review.
+    await event_service.update_event(
+        db_session, principal=organizer, event_id=uuid.UUID(created["id"]),
+        payload={"title": "Career Day 2026 (revised)"}, ctx=CTX,
+    )
+    resubmitted = await event_service.submit_event(
+        db_session, principal=organizer, event_id=uuid.UUID(created["id"]), ctx=CTX
+    )
+    assert resubmitted["status"] == "pending_review"
+
+
 async def test_partner_admin_cannot_moderate(db_session) -> None:
     _u, _org, organizer = await make_org_with_admin(db_session)
     created = await event_service.create_event(
@@ -729,3 +773,66 @@ async def test_audit_written_on_every_event_write(db_session) -> None:
         db_session, principal=student, event_id=uuid.UUID(created["id"]), ctx=CTX
     )
     assert await _audit_count(db_session, "event.registration_cancelled") == 1
+
+
+# --------------------------------------------------------------------------- #
+# Attendee CSV export (organizer/university, audited, email-masked)            #
+# --------------------------------------------------------------------------- #
+
+
+async def test_export_attendees_organizer_includes_email_and_audits(db_session) -> None:
+    _u, _org, organizer = await make_org_with_admin(db_session)
+    _uu, _uorg, uni = await make_org_with_admin(db_session, org_type="university")
+    event_id = await publish_event(db_session, organizer, uni)
+    _s1u, student1 = await make_student(db_session, prefix="s1")
+    _s2u, student2 = await make_student(db_session, prefix="s2")
+    for s in (student1, student2):
+        await registration_service.register(db_session, principal=s, event_id=event_id, ctx=CTX)
+
+    # Check one attendee in so the export reflects check-in state.
+    rows = await registration_service.list_attendees(
+        db_session, principal=organizer, event_id=event_id
+    )
+    await registration_service.check_in(
+        db_session, principal=organizer, event_id=event_id,
+        registration_id=uuid.UUID(rows[0]["registration_id"]), ctx=CTX,
+    )
+
+    data = await registration_service.export_attendees(
+        db_session, principal=organizer, event_id=event_id, ctx=CTX,
+    )
+    assert data["include_email"] is True
+    assert data["event_title"]
+    assert len(data["attendees"]) == 2
+    assert all("email" in row for row in data["attendees"])
+    assert any(row["checked_in_at"] for row in data["attendees"])
+    assert await _audit_count(db_session, "event.attendees_exported") == 1
+
+
+async def test_export_attendees_university_masks_email(db_session) -> None:
+    _u, _org, organizer = await make_org_with_admin(db_session)
+    _uu, _uorg, uni = await make_org_with_admin(db_session, org_type="university")
+    event_id = await publish_event(db_session, organizer, uni)
+    _su, student = await make_student(db_session)
+    await registration_service.register(db_session, principal=student, event_id=event_id, ctx=CTX)
+
+    data = await registration_service.export_attendees(
+        db_session, principal=uni, event_id=event_id, ctx=CTX,
+    )
+    assert data["include_email"] is False
+    assert data["attendees"] and all("email" not in row for row in data["attendees"])
+
+
+async def test_export_attendees_forbidden_for_registrant(db_session) -> None:
+    _u, _org, organizer = await make_org_with_admin(db_session)
+    _uu, _uorg, uni = await make_org_with_admin(db_session, org_type="university")
+    event_id = await publish_event(db_session, organizer, uni)
+    _su, student = await make_student(db_session)
+    await registration_service.register(db_session, principal=student, event_id=event_id, ctx=CTX)
+
+    # A non-staff principal cannot even see the roster — enumeration-safe 404
+    # (``_load_event_for_staff`` hides existence rather than returning 403).
+    with pytest.raises(ResourceNotFoundError):
+        await registration_service.export_attendees(
+            db_session, principal=student, event_id=event_id, ctx=CTX,
+        )

@@ -55,6 +55,8 @@ MOD_PENDING = "pending"
 MOD_APPROVED = "approved"
 MOD_REJECTED = "rejected"
 MOD_FLAGGED = "flagged"
+# Moderator sent the event back to the organizer to revise and resubmit.
+MOD_CHANGES_REQUESTED = "changes_requested"
 
 # --------------------------------------------------------------------------- #
 # Transition map: event-name -> (allowed from-states, to-state)               #
@@ -67,6 +69,8 @@ TRANSITIONS: dict[str, tuple[frozenset[str], str]] = {
     "submit": (frozenset({DRAFT, REJECTED}), PENDING_REVIEW),
     "approve": (frozenset({PENDING_REVIEW}), PUBLISHED),
     "reject": (frozenset({PENDING_REVIEW}), REJECTED),
+    # Return a submitted event to the organizer's drafts to revise and resubmit.
+    "request_changes": (frozenset({PENDING_REVIEW}), DRAFT),
     "cancel": (frozenset({PUBLISHED}), CANCELLED),
     "complete": (frozenset({PUBLISHED}), COMPLETED),
 }
@@ -154,12 +158,14 @@ _MOD_LABELS: dict[str, dict[str, str]] = {
         MOD_APPROVED: "Đã duyệt",
         MOD_REJECTED: "Đã từ chối",
         MOD_FLAGGED: "Bị gắn cờ",
+        MOD_CHANGES_REQUESTED: "Yêu cầu chỉnh sửa",
     },
     "en": {
         MOD_PENDING: "Pending",
         MOD_APPROVED: "Approved",
         MOD_REJECTED: "Rejected",
         MOD_FLAGGED: "Flagged",
+        MOD_CHANGES_REQUESTED: "Changes requested",
     },
 }
 

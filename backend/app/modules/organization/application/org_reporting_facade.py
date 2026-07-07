@@ -320,3 +320,39 @@ async def department_ids_for_user_in_org(
     if membership_id is None:
         return set()
     return set(await department_ids_for_membership(session, membership_id=membership_id))
+
+
+async def primary_department_names_for_users(
+    session: AsyncSession, *, org_id: uuid.UUID, user_ids: Iterable[uuid.UUID]
+) -> dict[uuid.UUID, str]:
+    """Best-effort ``user_id -> primary department name`` within one org.
+
+    "Primary" is the alphabetically-first department the user's membership sits
+    in — a deterministic single label for the operations workload-by-department
+    roll-up (a moderator may belong to several departments). Users with no
+    department are simply absent from the map (the caller buckets them as
+    unassigned). One bounded join over the moderator set, not per user.
+    """
+
+    ids = [uid for uid in user_ids if uid is not None]
+    if not ids:
+        return {}
+
+    from app.modules.organization.domain.models import Department  # local: avoid cycle
+
+    rows = (
+        await session.execute(
+            select(Membership.user_id, Department.name)
+            .join(MembershipDepartment, MembershipDepartment.membership_id == Membership.id)
+            .join(Department, Department.id == MembershipDepartment.department_id)
+            .where(Membership.org_id == org_id, Membership.user_id.in_(ids))
+            .order_by(Membership.user_id, Department.name.asc())
+        )
+    ).all()
+
+    primary: dict[uuid.UUID, str] = {}
+    for user_id, dept_name in rows:
+        # First row per user wins (ordered by name asc) -> alphabetical primary.
+        if user_id not in primary:
+            primary[user_id] = dept_name
+    return primary

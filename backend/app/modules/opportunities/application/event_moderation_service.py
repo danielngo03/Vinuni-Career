@@ -112,6 +112,7 @@ async def _notify_organizer(
     notif_type = {
         "event.approved": "opportunities.event_approved",
         "event.rejected": "opportunities.event_rejected",
+        "event.changes_requested": "opportunities.event_changes_requested",
     }.get(template_key)
     if notif_type is not None:
         await feed_service.create_in_app(
@@ -269,6 +270,61 @@ async def reject_event(
     )
     await _notify_organizer(
         session, event=event, template_key="event.rejected", locale=locale,
+        extra={"reason": reason.strip()},
+    )
+    await session.commit()
+    return presenters.owner_event_summary(event, locale=locale)
+
+
+async def request_changes_event(
+    session: AsyncSession,
+    *,
+    principal: Principal,
+    event_id: uuid.UUID,
+    reason: str,
+    reason_code: str | None = None,
+    version: int | None = None,
+    ctx: RequestContext,
+    locale: str = "vi",
+) -> dict:
+    """Send a submitted event back to the organizer to revise and resubmit.
+
+    Softer counterpart to ``reject_event``: the event returns to ``draft`` with
+    ``moderation_status=changes_requested`` and the reason recorded, leaves the
+    queue, and the organizer is notified. Resubmitting re-enters review.
+    """
+
+    await _require_university_moderator(session, principal)
+    if not reason or not reason.strip():
+        raise ValidationFailedError(details={"reason": "reason_required"})
+    code = _validate_reason_code(reason_code, reason=reason)
+    event = await _load_event(session, event_id)
+    if event is None:
+        raise ResourceNotFoundError()
+    if version is not None and version != event.version:
+        raise EventVersionConflictError()
+    if event.moderation_status == event_lifecycle.MOD_CHANGES_REQUESTED:
+        return presenters.owner_event_summary(event, locale=locale)  # idempotent
+    if not event_lifecycle.can_transition("request_changes", event.status):
+        raise IllegalEventTransitionError(event="request_changes")
+
+    event.status = event_lifecycle.target_state("request_changes")
+    event.moderation_status = event_lifecycle.MOD_CHANGES_REQUESTED
+    event.moderation_note = reason.strip()
+    event.moderation_reason_code = code
+    event.claimed_by = None
+    event.claimed_at = None
+    event.version += 1
+    await session.flush()
+
+    await write_audit(
+        session, action="event.changes_requested", resource_type="event",
+        resource_id=event.id, context=_audit_ctx(principal, ctx),
+        after={"status": event.status, "moderation_status": event.moderation_status,
+               "reason_code": code, "org_id": str(event.org_id)},
+    )
+    await _notify_organizer(
+        session, event=event, template_key="event.changes_requested", locale=locale,
         extra={"reason": reason.strip()},
     )
     await session.commit()

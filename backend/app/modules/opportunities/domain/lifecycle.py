@@ -93,6 +93,10 @@ MOD_PENDING = "pending"
 MOD_APPROVED = "approved"
 MOD_REJECTED = "rejected"
 MOD_FLAGGED = "flagged"
+# The moderator sent the listing back to the partner to revise and resubmit — a
+# softer, collaborative outcome than ``rejected``. The job returns to ``draft``
+# (editable) carrying this moderation status until the partner resubmits.
+MOD_CHANGES_REQUESTED = "changes_requested"
 
 # --------------------------------------------------------------------------- #
 # Transition map: event -> (allowed from-states, to-state)                    #
@@ -102,6 +106,9 @@ TRANSITIONS: dict[str, tuple[frozenset[str], str]] = {
     "submit": (frozenset({DRAFT, REJECTED}), PENDING_REVIEW),
     "approve": (frozenset({PENDING_REVIEW}), ACTIVE),
     "reject": (frozenset({PENDING_REVIEW}), REJECTED),
+    # "Request changes" returns a submitted job to the partner's drafts so they
+    # can revise and resubmit (submit: DRAFT -> PENDING_REVIEW re-enters review).
+    "request_changes": (frozenset({PENDING_REVIEW}), DRAFT),
     "close": (frozenset({ACTIVE}), CLOSED),
     "reopen": (frozenset({CLOSED}), ACTIVE),
     # A content amendment to a live job re-enters moderation (B-552). Driven
@@ -196,12 +203,14 @@ _MOD_LABELS: dict[str, dict[str, str]] = {
         MOD_APPROVED: "Đã duyệt",
         MOD_REJECTED: "Đã từ chối",
         MOD_FLAGGED: "Bị gắn cờ",
+        MOD_CHANGES_REQUESTED: "Yêu cầu chỉnh sửa",
     },
     "en": {
         MOD_PENDING: "Pending",
         MOD_APPROVED: "Approved",
         MOD_REJECTED: "Rejected",
         MOD_FLAGGED: "Flagged",
+        MOD_CHANGES_REQUESTED: "Changes requested",
     },
 }
 
