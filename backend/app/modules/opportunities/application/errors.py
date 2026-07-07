@@ -25,10 +25,8 @@ class JobNotEditableError(ConflictError):
     """The job is in a state/field that cannot be edited right now.
 
     ``reason`` defaults to the generic ``not_editable`` (wrong status, e.g.
-    closed/pending_review), but a caller may pass a more specific reason such
-    as ``screening_locked_after_publish`` (B-552 amendment policy: screening
-    questions are frozen once a job goes live because existing applications'
-    ``screening_answers`` reference the question set by id/order).
+    closed/pending_review), but a caller may pass a more specific reason for a
+    narrower business rule when needed.
     """
 
     message = "Tin tuyển dụng này không thể chỉnh sửa ở trạng thái hiện tại."

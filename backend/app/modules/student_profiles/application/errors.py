@@ -28,12 +28,3 @@ class InvalidProfileFieldError(ValidationFailedError):
 
     def __init__(self, *, field: str) -> None:
         super().__init__(self.message, details={"reason": "invalid_field", "field": field})
-
-
-class DuplicateSkillError(ValidationFailedError):
-    """A skill with the same name already exists on the profile."""
-
-    message = "Kỹ năng này đã có trong hồ sơ của bạn."
-
-    def __init__(self) -> None:
-        super().__init__(self.message, details={"reason": "duplicate_skill"})

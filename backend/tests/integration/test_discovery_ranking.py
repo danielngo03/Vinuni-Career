@@ -234,7 +234,6 @@ async def test_sponsored_target_hidden_is_dropped_no_leak(db_session) -> None:
             "location_type": "onsite", "location_city": "Hanoi", "location_country": "Vietnam",
             "required_skills": [], "preferred_skills": [], "salary_currency": "VND",
             "salary_is_disclosed": False, "headcount": 1, "visibility": "public",
-            "screening_questions": [],
         }, ctx=CTX,
     )
     await _seed_active_sponsored(
@@ -290,7 +289,6 @@ async def test_eligibility_excludes_hidden_and_expired(db_session) -> None:
             "location_type": "onsite", "location_city": "Hanoi", "location_country": "Vietnam",
             "required_skills": [], "preferred_skills": [], "salary_currency": "VND",
             "salary_is_disclosed": False, "headcount": 1, "visibility": "public",
-            "screening_questions": [],
         }, ctx=CTX,
     )
     # An expired (past-deadline) published job -> excluded by the predicate.
@@ -386,7 +384,6 @@ async def test_similar_jobs_404_on_hidden_seed(db_session) -> None:
             "location_type": "onsite", "location_city": "Hanoi", "location_country": "Vietnam",
             "required_skills": [], "preferred_skills": [], "salary_currency": "VND",
             "salary_is_disclosed": False, "headcount": 1, "visibility": "public",
-            "screening_questions": [],
         }, ctx=CTX,
     )
     with pytest.raises(ResourceNotFoundError):

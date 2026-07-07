@@ -26,6 +26,7 @@ from app.ai.extraction.adapters import (
     run_llm_structuring,
     set_llm_structuring_adapter,
     set_ocr_adapter,
+    set_vision_adapter,
 )
 from app.ai.extraction.text_extraction import ExtractionError
 from app.core.config import get_settings
@@ -47,7 +48,12 @@ from app.shared.models import AuditLog
 from sqlalchemy import select
 
 from tests.auth_utils import CTX
-from tests.documents_utils import InMemoryStorage, make_student, new_key
+from tests.documents_utils import (
+    InMemoryStorage,
+    make_ready_cv,
+    make_student,
+    new_key,
+)
 from tests.fixtures import cv as F
 
 
@@ -67,6 +73,7 @@ def _reset_adapters_and_settings():
 
     set_ocr_adapter(None)
     set_llm_structuring_adapter(None)
+    set_vision_adapter(None)
     # `_enable_llm`/`_enable_ocr_engine` set these process-wide env vars; they must
     # be removed (not just cache-cleared) or they leak into `get_settings()` and the
     # published gateway snapshot, failing combined runs (e.g. ai_settings tests).
@@ -350,6 +357,100 @@ async def test_ocr_unavailable_records_low_quality(db_session) -> None:
 
 
 # --------------------------------------------------------------------------- #
+# Vision-LLM tier (styled image / scanned CV) — fake adapter, no real calls     #
+# --------------------------------------------------------------------------- #
+
+
+class FakeVision:
+    """Fake multimodal extraction engine (returns a pre-baked structured result)."""
+
+    engine_family = "vision_fake"
+    engine_version = "fake-vision-1"
+
+    def __init__(self, result: dict | None) -> None:
+        self._result = result
+        self.calls = 0
+
+    @property
+    def available(self) -> bool:
+        return True
+
+    def extract(self, data, kind, *, max_image_px, max_pages, native_text=None):
+        self.calls += 1
+        assert isinstance(data, (bytes, bytearray))  # the vision tier gets bytes
+        return self._result
+
+
+def test_vision_tier_structures_styled_image_cv() -> None:
+    # A styled/multi-column image CV is structured by the vision tier directly,
+    # bypassing the unreliable OCR + regex path. Vision output flows through the
+    # same review_fields shape as every other engine.
+    from app.ai.extraction.cv_structuring import review_fields_for_extracted
+
+    extracted = {
+        "contact": {
+            "name": "Nguyễn Hương Lê",
+            "email": "hotro@topcv.vn",
+            "phone": "(024) 6680 5588",
+            "location": "Ba Đình, Hà Nội",
+        },
+        "experience": {
+            "items": [{"text": "Điều dưỡng nhi khoa - Trung tâm Y tế - 04/2020 - Nay"}]
+        },
+        "skills": {"items": [{"text": "Kỹ năng giao tiếp"}]},
+    }
+    fake = FakeVision(
+        {
+            "extracted_data": extracted,
+            "review_fields": review_fields_for_extracted(extracted),
+            "detected_language": "vi",
+        }
+    )
+    set_vision_adapter(fake)
+    try:
+        outcome = cv_ingestion_cascade.run_cascade(
+            "cv.png", F.scanned_image_cv(), max_bytes=50 * 1024 * 1024,
+            policy=resolve_policy(),
+        )
+        assert fake.calls == 1
+        assert outcome.accepted is True
+        assert outcome.vision_used is True
+        assert outcome.ocr_used is False
+        assert outcome.quality_code == "REVIEW_REQUIRED"
+        assert outcome.engine_family == "vision_llm_gateway"  # internal-only
+        assert outcome.extracted_data["contact"]["name"] == "Nguyễn Hương Lê"
+        assert outcome.detected_language == "vi"
+        paths = {f["path"] for f in outcome.review_fields}
+        assert "contact.email" in paths
+        assert "experience[0].text" in paths
+    finally:
+        set_vision_adapter(None)
+
+
+def test_vision_returns_nothing_falls_back_to_ocr() -> None:
+    # When the vision tier is enabled but yields nothing (model error / offline),
+    # the cascade degrades to the local OCR + deterministic structuring path.
+    fake_vision = FakeVision(None)
+    fake_ocr = FakeOcr()
+    set_vision_adapter(fake_vision)
+    set_ocr_adapter(fake_ocr)
+    _enable_ocr_engine()
+    try:
+        outcome = cv_ingestion_cascade.run_cascade(
+            "scan.png", F.scanned_image_cv(), max_bytes=50 * 1024 * 1024,
+            policy=resolve_policy(),
+        )
+        assert fake_vision.calls == 1
+        assert fake_ocr.calls >= 1
+        assert outcome.vision_used is False
+        assert outcome.ocr_used is True
+        assert outcome.accepted is True
+    finally:
+        set_vision_adapter(None)
+        set_ocr_adapter(None)
+
+
+# --------------------------------------------------------------------------- #
 # LLM structuring fallback (disabled by default + fake provider; text only)    #
 # --------------------------------------------------------------------------- #
 
@@ -410,12 +511,16 @@ async def test_import_creates_versioned_draft(db_session) -> None:
         db_session, principal=student, ingestion_id=uuid.UUID(ing["ingestion_id"]),
         payload={"title": "Imported CV"}, ctx=CTX,
     )
-    assert detail["status"] == "draft"
+    # An uploaded CV is already extracted/analyzed -> lands directly in the library
+    # (``ready``), not a scratch draft (design spec 2026-07-05).
+    assert detail["status"] == "ready"
+    assert detail["in_library"] is True
+    assert detail["finalized_at"] is not None
     assert detail["source_type"] == "uploaded_import"
     assert detail["current_version_id"]
     assert len(detail["versions"]) == 1
     assert detail["sections"]
-    # The ingestion row now points at the created draft.
+    # The ingestion row now points at the created library CV.
     ing_row = (
         await db_session.execute(
             select(CvIngestion).where(CvIngestion.id == uuid.UUID(ing["ingestion_id"]))
@@ -427,6 +532,27 @@ async def test_import_creates_versioned_draft(db_session) -> None:
 def _section_texts(detail: dict, section_type: str) -> list[str]:
     sect = next(s for s in detail["sections"] if s["section_type"] == section_type)
     return [it.get("text") for it in (sect.get("content") or {}).get("items", [])]
+
+
+async def test_import_carries_contact_in_header_section(db_session) -> None:
+    # An imported CV must carry the person's name + contact in a header section so
+    # the rendered CV can show a real header (not a nameless document).
+    await template_seed.ensure_default_templates(db_session)
+    await db_session.commit()
+    _u, student = await make_student(db_session)
+    ing = await _ingest_ready(db_session, student)
+
+    detail = await ingestion_service.import_ingestion(
+        db_session, principal=student, ingestion_id=uuid.UUID(ing["ingestion_id"]),
+        payload={"title": "Imported CV"}, ctx=CTX,
+    )
+    header = next(s for s in detail["sections"] if s["section_type"] == "header")
+    content = header["content"]
+    assert content.get("name") == "Jane Engineer"
+    assert content.get("email") == "jane.engineer@example.com"
+    assert content.get("phone")  # phone flowed through
+    # Header content is a flat contact object — never entries/items.
+    assert "entries" not in content and "items" not in content
 
 
 async def test_import_applies_review_field_overrides(db_session) -> None:
@@ -458,8 +584,8 @@ async def test_import_applies_review_field_overrides(db_session) -> None:
     assert original_skill not in _section_texts(detail, "skills")
     # ...while non-overridden sections are preserved unchanged.
     assert _section_texts(detail, "experience")
-    # Still a brand-new versioned draft (never an accepted overwrite).
-    assert detail["status"] == "draft"
+    # A brand-new versioned library CV (never an overwrite of an existing CV).
+    assert detail["status"] == "ready"
     assert len(detail["versions"]) == 1
     # The stored ingestion row's extracted_data is NOT mutated by the override.
     ing_row = (
@@ -516,7 +642,7 @@ async def test_import_without_overrides_unchanged(db_session) -> None:
         db_session, principal=student, ingestion_id=uuid.UUID(ing["ingestion_id"]),
         payload={"title": "Imported CV"}, ctx=CTX,
     )
-    assert detail["status"] == "draft"
+    assert detail["status"] == "ready"
     assert len(detail["versions"]) == 1
     assert _section_texts(detail, "skills") == [original_skill]
 
@@ -545,15 +671,13 @@ async def test_import_with_overrides_never_overwrites_accepted_cv(db_session) ->
 
 
 async def test_import_with_overrides_respects_quota(db_session) -> None:
-    # Overrides do not bypass the active-CV quota gate (still 409).
+    # Overrides do not bypass the active-CV quota gate (still 409). The library must
+    # be filled with READY CVs (drafts are free / don't count) to hit the cap.
     _u, student = await make_student(db_session)
     ing = await _ingest_ready(db_session, student)
     limit = cv_service._active_cv_limit()
     for i in range(limit):
-        await cv_service.create_cv(
-            db_session, principal=student,
-            payload={"title": f"CV {i}", "creation_mode": "blank_template"}, ctx=CTX,
-        )
+        await make_ready_cv(db_session, student=student, title=f"CV {i}")
     with pytest.raises(CvQuotaReachedError) as exc:
         await ingestion_service.import_ingestion(
             db_session, principal=student, ingestion_id=uuid.UUID(ing["ingestion_id"]),
@@ -580,13 +704,10 @@ async def test_import_is_idempotent(db_session) -> None:
 async def test_import_respects_active_cv_quota(db_session) -> None:
     _u, student = await make_student(db_session)
     ing = await _ingest_ready(db_session, student)
-    # Fill the active-CV library to the default cap.
+    # Fill the active-CV library to the default cap with READY (committed) CVs.
     limit = cv_service._active_cv_limit()
     for i in range(limit):
-        await cv_service.create_cv(
-            db_session, principal=student,
-            payload={"title": f"CV {i}", "creation_mode": "blank_template"}, ctx=CTX,
-        )
+        await make_ready_cv(db_session, student=student, title=f"CV {i}")
     with pytest.raises(CvQuotaReachedError) as exc:
         await ingestion_service.import_ingestion(
             db_session, principal=student, ingestion_id=uuid.UUID(ing["ingestion_id"]),
@@ -801,7 +922,7 @@ async def test_import_needs_review_succeeds_with_per_field_override(db_session) 
         },
         ctx=CTX,
     )
-    assert detail["status"] == "draft"
+    assert detail["status"] == "ready"
 
 
 async def test_import_needs_review_succeeds_with_field_rejected(db_session) -> None:
@@ -814,7 +935,7 @@ async def test_import_needs_review_succeeds_with_field_rejected(db_session) -> N
         },
         ctx=CTX,
     )
-    assert detail["status"] == "draft"
+    assert detail["status"] == "ready"
 
 
 async def test_import_needs_review_succeeds_with_blanket_fact_confirmation(db_session) -> None:
@@ -823,4 +944,4 @@ async def test_import_needs_review_succeeds_with_blanket_fact_confirmation(db_se
         db_session, principal=student, ingestion_id=uuid.UUID(ing["ingestion_id"]),
         payload={"title": "Imported CV", "fact_confirmation": True}, ctx=CTX,
     )
-    assert detail["status"] == "draft"
+    assert detail["status"] == "ready"

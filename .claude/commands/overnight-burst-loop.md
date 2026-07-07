@@ -62,12 +62,13 @@ Priority order:
 Default tie-breakers after the explicit user focus is complete:
 
 1. CV Ingestion & CV Studio Product Rescue when uploaded-CV preview,
-   extraction/OCR/layout/LLM fallback, review/import, or document-builder UX is
+   extraction/OCR/layout/vision-LLM fallback, upload-and-name import (no manual
+   field-review step — owner decision 2026-07-05), or document-builder UX is
    functional-only. This is a core student workflow and outranks admin AI
    settings or broad roadmap expansion unless a hard blocker exists.
 2. Product Interaction / Visual Realism Rescue when icon semantics, saved-job
-   affordances, floating actions, campaign/banner creative, disclosure wording,
-   or marketplace/dashboard visual quality still feel demo-like.
+   affordances, header quick actions, campaign/banner creative, disclosure
+   wording, or marketplace/dashboard visual quality still feel demo-like.
 3. Visual marketplace/product maturity rescue when the public/student surfaces
    still lack real recruiting-marketplace merchandising: banner/carousel/right
    rail, saved/invitation/feedback/AI quick actions, stronger VinUni visual

@@ -177,6 +177,53 @@ Email: "Bạn đã sử dụng 8/10 lượt đăng tin. Nâng cấp để không
 In-app: amber banner với progress bar + upgrade CTA
 ```
 
+### 1.7 AI Usage, Credits, and University Limits
+
+AI metering has three separate ledgers. Do not collapse them into one counter:
+
+1. **Provider cost telemetry** — internal platform spend, visible only in superadmin AI Operations. It may record failed provider calls, fallback attempts, latency, token counts, and concrete provider/model identity. API keys, base URLs, prompts, and responses are never stored or returned.
+2. **Billable usage / credits** — user- or organization-facing entitlement. It is charged only when an AI action successfully returns useful value to the actor.
+3. **Abuse/rate limits** — session/day/week throttles to protect the system, independent of package credits.
+
+Every provider-backed AI action must pass a durable usage context before calling the model:
+
+```python
+class AiUsageContext(BaseModel):
+    actor_user_id: UUID | None
+    persona: Literal["student", "partner", "university", "system"]
+    org_id: UUID | None
+    billing_scope: Literal["student", "partner_org", "university_org", "platform"]
+    feature_key: str          # e.g. "jd_extraction", "cv_jd_match", "chatbot"
+    task_type: str            # gateway task family / internal function slot
+    resource_type: str | None # "job", "cv", "application", "campaign", ...
+    resource_id: UUID | None
+    session_id: UUID | None
+    idempotency_key: str
+```
+
+**AI actions that consume billable quota/credits when successful:**
+
+- JD extraction/structuring and JD quality/bias suggestions.
+- CV extraction/structuring when an LLM is used after deterministic parsing/OCR.
+- CV-JD match score explanation, evidence-gap analysis, missing-skill suggestions, and learning recommendations.
+- CV rewrite, bullet generation, template fill, grammar/clarity improvement, fabrication/evidence checks.
+- Chatbot / career assistant turns, tool-planning responses, interview simulator questions and feedback.
+- Partner AI features: JD writer, candidate summary/screening brief, ranking explanation, outreach draft, campaign/ad optimization suggestions.
+- University AI features: moderation assist, verification/fraud signal, workflow AI nodes, communication draft assistant.
+- Embedding/rerank/semantic scoring only when backed by a paid provider call; local deterministic scoring does not consume user credits.
+- Proactive/scheduled AI jobs when they generate a user-visible suggestion or workflow task.
+
+**Non-chargeable to user credits:** deterministic local parsing, validation-only checks, cached answer reuse, preview-only UI with no provider call, provider failure/no-result before useful output, and safety blocks. These may still count toward provider cost telemetry if a provider was called.
+
+**Persona rules:**
+
+- Students: personal AI credits/limits. Exhaustion can route to subscription/credit top-up, with safe free fallback states.
+- Partners: organization package credits/limits, role/department-scoped by partner RBAC. Exhaustion can route to billing/package upgrade if the actor has billing permission, otherwise request owner approval.
+- University: no commercial upgrade CTA. Platform/university admins set per-user, per-department, per-feature, day/week/session limits and may approve limit increases through workflow.
+- System/background jobs: charged to platform or university budget, never to an individual without an explicit initiating context.
+
+**Implementation invariant:** a sidebar percentage or `ai_usage_daily` rollup is not enough. The product needs an append-only billable usage ledger keyed by `(billing_scope, actor, org, feature_key, resource, session, idempotency_key)` so retries, duplicate clicks, streaming reconnects, and batch jobs cannot double-charge.
+
 ---
 
 ## 2. Partner Package & Job Posting Logic
@@ -440,7 +487,9 @@ Supported CV creation modes:
     This is optional; it must not become a required profile wizard.
 
   uploaded_import:
-    Student uploads existing CV → extraction → review → import into selected template.
+    Student uploads existing CV → confirms file → names the CV → backend extraction
+    creates the draft directly. (Updated 2026-07-05: no manual field-review step —
+    backend-authoritative extraction; accuracy feeds CV-JD matching.)
 
   duplicate_existing:
     Student duplicates an existing builder CV, optionally changes template and target role.
@@ -456,7 +505,9 @@ Rules:
   CV, or ask AI to draft from raw notes without completing education/experience
   in a separate profile form first.
 - Uploaded CV originals are retained as immutable documents; template CVs are structured editable records.
-- Importing from uploaded CV extraction requires student review before content becomes part of a builder CV.
+- Importing from an uploaded CV creates the builder draft directly from
+  backend-authoritative extraction. (Updated 2026-07-05: no manual field-review
+  step; import must still never silently overwrite an already-accepted CV.)
 - Duplicate existing CV creates a new `cv_profiles` record and initial `cv_versions` snapshot; the source CV is never mutated.
 - Changing a template re-renders the same structured content; it must not delete sections unless the student explicitly confirms hidden/unsupported sections.
 - Profile data can support CVs only as confirmed facts, career preferences,
@@ -534,10 +585,17 @@ Upload processing order:
   3. virus scan
   4. native text extraction
   5. OCR fallback only if native text is empty/low quality
-  6. CV classifier
-  7. minimum content validation
-  8. review/import decision
+  6. cheap vision-LLM (may receive DOWNSCALED document images) for images and
+     styled/scanned PDFs when native text + local OCR are insufficient
+  7. optional text-LLM structuring (text/markdown only)
+  8. CV classifier
+  9. minimum content validation
+  10. draft creation (backend-authoritative; no manual field-review step)
 ```
+
+(Updated 2026-07-05: the vision-LLM tier may receive downscaled document images;
+the text-LLM tier still receives text only. Extraction is backend-authoritative
+and produces the draft directly — there is no student field-review/import gate.)
 
 Rules:
 
@@ -547,8 +605,11 @@ Rules:
 - Low-quality scan = OCR returns noisy text or too little reliable content.
 - Duplicate upload = same `checksum_sha256` for same user and non-deleted document; return existing document option.
 - Validation failures before AI generation do not consume AI credits.
-- AI structuring must not run for `NOT_A_CV`, `BLANK_DOCUMENT`, `FILE_REJECTED_SECURITY`, or `CORRUPT_FILE`.
-- Low confidence extraction becomes `REVIEW_REQUIRED`; student must review field-by-field before import.
+- AI structuring must not run for `NOT_A_CV`, `BLANK_DOCUMENT`, `FILE_REJECTED_SECURITY`, or `CORRUPT_FILE`; the vision-LLM tier must return no CV for these and the cascade must never fabricate a CV from a non-CV/blank/junk file.
+- Low confidence extraction is resolved backend-side and produces the best draft
+  it can. (Updated 2026-07-05: `REVIEW_REQUIRED` is an internal quality state, not
+  a student field-by-field review gate; the student refines the draft later in the
+  editor. Import must still never silently overwrite an already-accepted CV.)
 - Internal parser error/confidence is not exposed to end users.
 
 ### 4B.4 Quota Defaults
@@ -965,7 +1026,7 @@ Post-approval monitoring:
 
 ---
 
-## 10. AI Credit System (Student Subscriptions)
+## 10. AI Credit System (Student, Partner, University Limits)
 
 ### 10.1 Credit-based AI Features
 
@@ -1018,6 +1079,44 @@ async def consume_credits(student_id: UUID, cost: AICreditCost) -> None:
 # Never let balance go negative — "fail open" vs "fail closed" decision:
 # We fail closed: no credits = no AI action (not silent failure)
 ```
+
+### 10.3 Partner and University AI Metering
+
+Partner AI usage is metered at organization scope:
+
+```python
+class PartnerAiEntitlement(Base):
+    org_id: UUID
+    period_start: datetime
+    period_end: datetime
+    included_credits: int
+    used_credits: int
+    overage_allowed: bool
+    overage_credit_price: Decimal | None
+```
+
+Partner users still need feature RBAC before consuming credits. If the actor lacks
+`billing:manage`, an exceeded limit becomes "request owner approval" rather than a
+direct upgrade CTA.
+
+University AI usage is governed, not sold:
+
+```python
+class UniversityAiLimit(Base):
+    org_id: UUID
+    user_id: UUID | None
+    department_id: UUID | None
+    feature_key: str | None
+    session_limit: int | None
+    daily_limit: int | None
+    weekly_limit: int | None
+    budget_usd_limit: Decimal | None
+    approved_by: UUID
+```
+
+University staff exhaustion copy must say "request more capacity" or "contact the
+platform admin", never "upgrade plan". Platform superadmins can override limits and
+must audit the change.
 
 ---
 
@@ -1313,9 +1412,10 @@ Permission changes: role assignment, permission grant/revoke
 Payment events: charge, refund, subscription change
 Broadcast messages sent
 Workflow flow activation/deactivation
-AI provider identity views: ai_settings.provider_identity_viewed (routing
-  canvas raw provider/model identity reveal — requires
-  ai_settings:view_provider_identity; see API_CONTRACTS.md ADR-0011.1)
+AI provider identity views: ai_settings.provider_identity_viewed (superadmin-only
+  raw provider/model identity reveal; see API_CONTRACTS.md ADR-0011.2)
+AI provider/model registry writes: provider/model create/update/delete, price
+  updates, routing-chain changes, kill switch, and key-rotation events
 ```
 
 ### 17.2 Privacy in Audit Logs

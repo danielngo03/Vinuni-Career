@@ -42,12 +42,22 @@ class RankingCandidate:
     job_id: uuid.UUID
     org_id: uuid.UUID
     title: str
+    description: str
+    requirements: str | None
+    benefits: str | None
     required_skills: list[str]
     preferred_skills: list[str]
     employment_type: str
     location_type: str
     location_city: str | None
     location_country: str
+    locations: list[dict]
+    experience_min_years: int | None
+    experience_max_years: int | None
+    experience_mode: str | None
+    degree_required: str | None
+    seniority_level: str | None
+    candidate_requirements: dict
     application_deadline: datetime | None
     published_at: datetime | None
     application_count: int
@@ -63,11 +73,22 @@ class RankingCandidate:
         return {
             "id": str(self.job_id),
             "title": self.title,
+            "description": self.description,
+            "requirements": self.requirements,
+            "benefits": self.benefits,
             "required_skills": list(self.required_skills),
             "preferred_skills": list(self.preferred_skills),
+            "employment_type": self.employment_type,
+            "experience_min_years": self.experience_min_years,
+            "experience_max_years": self.experience_max_years,
+            "experience_mode": self.experience_mode,
+            "degree_required": self.degree_required,
+            "seniority_level": self.seniority_level,
+            "candidate_requirements": dict(self.candidate_requirements),
             "location_type": self.location_type,
             "location_city": self.location_city,
             "location_country": self.location_country,
+            "locations": list(self.locations),
             "jd_text": self.jd_text,
         }
 
@@ -101,18 +122,30 @@ def _to_candidate(
     job: Job, org: OrgSummary | None, *, locale: str
 ) -> RankingCandidate:
     jd_text = " ".join(
-        part for part in (job.description, job.requirements, job.benefits) if part
+        part
+        for part in (job.title, job.description, job.requirements, job.benefits)
+        if part
     )
     return RankingCandidate(
         job_id=job.id,
         org_id=job.org_id,
         title=job.title,
+        description=job.description,
+        requirements=job.requirements,
+        benefits=job.benefits,
         required_skills=list(job.required_skills or []),
         preferred_skills=list(job.preferred_skills or []),
         employment_type=job.employment_type,
         location_type=job.location_type,
         location_city=job.location_city,
         location_country=job.location_country,
+        locations=list(job.locations or []),
+        experience_min_years=job.experience_min_years,
+        experience_max_years=job.experience_max_years,
+        experience_mode=job.experience_mode,
+        degree_required=job.degree_required,
+        seniority_level=job.seniority_level,
+        candidate_requirements=dict(job.candidate_requirements or {}),
         application_deadline=job.application_deadline,
         published_at=job.published_at,
         application_count=job.application_count or 0,

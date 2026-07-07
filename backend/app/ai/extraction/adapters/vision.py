@@ -39,6 +39,7 @@ from app.ai.extraction.text_extraction import FileKind
 from app.ai.gateway import runtime_config
 from app.ai.gateway.factory import _get_api_key, real_provider_active
 from app.ai.gateway.output_guard import scrub_text
+from app.ai.observability.usage import log_ai_usage
 from app.core.config import get_settings
 
 _JSON_FENCE_RE = re.compile(r"```(?:json)?\s*([\s\S]*?)```", re.IGNORECASE)
@@ -189,7 +190,8 @@ class GatewayVisionExtractionAdapter:
         native_text: str | None = None,
     ) -> dict | None:
         cfg = runtime_config.current()
-        route = cfg.provider_routes.get(self._alias(cfg))
+        alias = self._alias(cfg)
+        route = cfg.provider_routes.get(alias)
         if route is None:
             return None
         provider_name, base_url, model_id = route
@@ -226,6 +228,11 @@ class GatewayVisionExtractionAdapter:
             "HTTP-Referer": "https://career.vinuni.edu.vn",
             "X-Title": "VinUni Career Platform",
         }
+        # Prompt-size proxy for the usage ledger (image bytes dominate real cost
+        # but the char-based estimator can't see them; the native-text + prompt
+        # size is still a useful, PII-safe signal and records that a paid vision
+        # call happened — spec §5.4/§15).
+        prompt_chars = len(_SYSTEM_PROMPT) + len(_USER_PROMPT) + len(native_text or "")
         try:
             with httpx.Client(timeout=float(get_settings().cv_extraction_max_seconds)) as client:
                 resp = client.post(
@@ -234,12 +241,16 @@ class GatewayVisionExtractionAdapter:
                 resp.raise_for_status()
                 body = resp.json()
         except (httpx.HTTPError, ValueError):
+            log_ai_usage(task_type="cv_vision_extraction", alias=alias, success=False,
+                         prompt_chars=prompt_chars)
             return None
 
         choice = (body.get("choices") or [{}])[0]
         raw = (choice.get("message") or {}).get("content", "")
         if isinstance(raw, list):  # some providers return content as parts
             raw = "".join(p.get("text", "") for p in raw if isinstance(p, dict))
+        log_ai_usage(task_type="cv_vision_extraction", alias=alias, success=True,
+                     prompt_chars=prompt_chars, completion_chars=len(raw or ""))
         parsed = _extract_json(scrub_text(raw or ""))
         if parsed is None:
             return None

@@ -19,11 +19,16 @@ The latest code review found that the current implementation is not yet a
 release-ready product even though many surfaces now exist. Agents must clear
 these blockers before broad feature expansion or any "complete" status update:
 
-- Backend quality gates are not green. `uv run ruff check app tests` and
-  `uv run mypy app --ignore-missing-imports` currently fail. Known blockers
-  include `SPONSORED_SURFACES` undefined in competition intelligence,
-  onboarding/document-verification type/import issues, nullable auth principal
-  usage, and salary/experience presenter/service type gaps.
+- Backend quality gates are not green (re-verified 2026-07-08: `ruff` 120
+  errors — 21 in `app`, rest cosmetic in `tests`; `mypy app` 45 errors / 15
+  files; `pytest` 1936 passed / 6 failed). `SPONSORED_SURFACES` is now defined
+  (that blocker is resolved). Remaining real blockers: onboarding imports a
+  non-existent `async_session_factory` in `doc_verification.py` (runtime crash),
+  nullable auth principal passed where non-null `UUID` is expected across the
+  onboarding router, salary/experience presenter/service type gaps in
+  `opportunities`, `Result.rowcount` misuse in moderation services, and one
+  module-boundary violation (documents/platform_admin reaching into other
+  modules' `domain.models`).
 - Frontend typecheck/build pass, but build warnings remain in public jobs and
   notifications hook dependencies. Treat these as regression risks for heavily
   used surfaces.
@@ -52,35 +57,38 @@ Read only the docs needed for the task, in this order:
 3. `docs/CV_STUDIO_SPEC.md` — CV upload, template builder, AI-assisted fill/rewrite, exports, snapshots.
 4. `docs/CV_INGESTION_EXTRACTION_SPEC.md` — uploaded-CV preview, OCR/layout extraction, LLM fallback, review/import, and failure recovery.
 5. `docs/BUSINESS_LOGIC.md` — deep business rules and edge cases.
-6. `docs/SECURITY_PRIVACY.md` — RBAC, PII, CV access, AI safety, ads compliance.
-7. `docs/ARCHITECTURE.md` — module boundaries, data flow, infra, ADRs.
-8. `docs/API_CONTRACTS.md` — endpoint, auth, error, pagination, event contracts.
-9. `docs/DATA_MODEL.md` — canonical entities, tenancy, audit, soft delete, projections.
-10. `docs/PARTNER_RBAC_ANALYTICS_SPEC.md` — partner-admin ownership, grantable recruiter capabilities, CV/access audit, and recruiting analytics read models.
-11. `docs/DESIGN.md` — visual design and UI/UX source of truth.
-12. `docs/UI_QUALITY_BAR.md` — frontend polish, responsiveness, accessibility, and browser QA gate.
-13. `docs/SCREEN_SPECS.md` — screen-level UX for critical workflows.
-14. `docs/PRODUCT_INTERACTION_VISUAL_REALISM_SPEC.md` — icon semantics, floating actions, campaign banners, disclosure wording, visual realism.
-15. `docs/FRONTEND_DESIGN_PLUGIN_USAGE.md` — how to invoke `frontend-design`, plan visual direction, audit `globals.css`, and self-critique before coding.
-16. `docs/DISCOVERY_RECOMMENDATION_ADS_SPEC.md` — public discovery, recommendations, guest/session personalization, ad placements, and monetization UX.
-17. `docs/SYSTEM_ACCEPTANCE_BAR.md` — cross-functional product/backend/frontend/AI/data/security completion gate.
-18. `docs/AI_PRODUCT_SPEC.md` — AI feature matrix, permissions, evaluation, fallback.
-19. `docs/ENVIRONMENT.md` — local/dev env names, secret policy, AI test-key policy.
-20. `docs/LOCAL_DEV_STACK.md` — local-first stack, lightweight OCR/parser, no-Docker app runtime.
-21. `docs/NOTIFICATIONS_COMMUNICATIONS_SPEC.md` — notifications, email templates, preferences, device settings.
-22. `docs/EDGE_CASES_FAILURE_MODES.md` — invalid inputs, partial failures, recovery, user-safe errors.
-23. `docs/TEST_STRATEGY.md` — quality gates and test expectations.
-24. `docs/AGENT_PARALLEL_EXECUTION_PLAN.md` — current multi-agent rebuild plan, workstream boundaries, and acceptance gates.
-25. `docs/CLAUDE_MULTI_AGENT_TASKS.md` — copy-ready Claude CLI task commands for parallel execution.
-26. `docs/BACKLOG.md`, `docs/ROADMAP.md`, `docs/IMPLEMENTATION_PLAN.md`, `docs/IMPLEMENTATION_STATUS.md` — priority, phases, current batch, verified status.
+6. `docs/PRODUCT_OPERATING_MODEL.md` — product-management operating model for AI credits/quota, persona entitlements, ads/events/workflows, and dashboard quality.
+7. `docs/SECURITY_PRIVACY.md` — RBAC, PII, CV access, AI safety, ads compliance.
+8. `docs/ARCHITECTURE.md` — module boundaries, data flow, infra, ADRs.
+9. `docs/API_CONTRACTS.md` — endpoint, auth, error, pagination, event contracts.
+10. `docs/DATA_MODEL.md` — canonical entities, tenancy, audit, soft delete, projections.
+11. `docs/PARTNER_RBAC_ANALYTICS_SPEC.md` — partner-admin ownership, grantable recruiter capabilities, CV/access audit, and recruiting analytics read models.
+12. `docs/DESIGN.md` — visual design and UI/UX source of truth.
+13. `docs/UI_QUALITY_BAR.md` — frontend polish, responsiveness, accessibility, and browser QA gate.
+14. `docs/SCREEN_SPECS.md` — screen-level UX for critical workflows.
+15. `docs/PRODUCT_INTERACTION_VISUAL_REALISM_SPEC.md` — icon semantics, header quick actions, campaign banners, disclosure wording, visual realism.
+16. `docs/FRONTEND_DESIGN_PLUGIN_USAGE.md` — how to invoke `frontend-design`, plan visual direction, audit `globals.css`, and self-critique before coding.
+17. `docs/DISCOVERY_RECOMMENDATION_ADS_SPEC.md` — public discovery, recommendations, guest/session personalization, ad placements, and monetization UX.
+18. `docs/SYSTEM_ACCEPTANCE_BAR.md` — cross-functional product/backend/frontend/AI/data/security completion gate.
+19. `docs/AI_PRODUCT_SPEC.md` — AI feature matrix, permissions, evaluation, fallback.
+20. `docs/ENVIRONMENT.md` — local/dev env names, secret policy, AI test-key policy.
+21. `docs/LOCAL_DEV_STACK.md` — local-first stack, lightweight OCR/parser, no-Docker app runtime.
+22. `docs/NOTIFICATIONS_COMMUNICATIONS_SPEC.md` — notifications, email templates, preferences, device settings.
+23. `docs/EDGE_CASES_FAILURE_MODES.md` — invalid inputs, partial failures, recovery, user-safe errors.
+24. `docs/TEST_STRATEGY.md` — quality gates and test expectations.
+25. `docs/AGENT_PARALLEL_EXECUTION_PLAN.md` — current multi-agent rebuild plan, workstream boundaries, and acceptance gates.
+26. `docs/CLAUDE_MULTI_AGENT_TASKS.md` — copy-ready Claude CLI task commands for parallel execution.
+27. `docs/BACKLOG.md`, `docs/ROADMAP.md`, `docs/IMPLEMENTATION_PLAN.md`, `docs/IMPLEMENTATION_STATUS.md` — priority, phases, current batch, verified status.
 
-If docs conflict, stop and resolve by this precedence: product scope -> business rule -> security/privacy -> architecture -> API/data -> design -> implementation plan/status.
+If docs conflict, stop and resolve by this precedence: product scope -> product operating model -> business rule -> security/privacy -> architecture -> API/data -> design -> implementation plan/status.
 
 ## Greenfield Naming Defaults
 
 - Backend modules use `backend/app/modules/{domain}/`.
 - Use `ai_assistant`, not `assistant`, for chat/session/tool execution.
-- Use `ai_settings` for admin-managed provider/model settings.
+- Use `ai_settings` for AI governance. Real provider/model registry identity and
+  CRUD are platform-superadmin-only; ordinary university staff see masked
+  aliases/status/budget controls only.
 - Use module `organization` for shared org/RBAC internals; expose public API paths under `/api/v1/organizations`.
 - Use module `opportunities` for jobs/events discovery and creation.
 - Use module `recruitment` for applications, candidate pipeline, interviews, scorecards, offers.
@@ -170,6 +178,12 @@ Every non-trivial agent result should include:
 - Backend and frontend may run in parallel only after API/data contract is stable.
 - Do not create fake placeholder dashboards. Use real APIs, skeletons, empty states, permission states, or explicit TODO-disabled panels.
 - UI surfaces must be persona-specific operating surfaces, not generic dashboards or marketing filler.
+- AI usage accounting is product-critical. Any real provider call that can affect
+  user value, partner value, cost, quota, billing, or university budget must pass
+  through a usage-aware path with `UsageContext`, durable ledger/idempotency,
+  budget/throttle checks, and persona-appropriate UX. Student/partner exhaustion
+  may route to plan/credit upgrade; university staff exhaustion routes to admin
+  limit/request workflows, not billing upsell.
 - For broad or ambiguous work, apply `docs/PRODUCT_REALITY_REBUILD_SPEC.md`
   before coding. Agents must audit adjacent flows, data integrity, AI usefulness,
   failure modes, and frontend realism instead of implementing only the literal
@@ -199,12 +213,24 @@ Every non-trivial agent result should include:
   structured diff/patch against the CV canvas/content, require explicit student
   confirmation, create a version/audit trail on accept, and never silently edit
   or publish a CV.
-- Uploaded-CV workflows are preview-first and backend-ingestion-driven. A user
-  should see the original document, confirm intent, then review extracted fields
-  beside the preview. Extraction must support local-first native text, layout,
-  OCR, and optional LLM structuring fallbacks per
-  `docs/CV_INGESTION_EXTRACTION_SPEC.md`; a simple extracted-field modal is only
-  functional, not product-complete.
+- Uploaded-CV workflows are upload-and-name, backend-authoritative (owner
+  decision 2026-07-05). The student uploads a PDF/image, confirms it is the right
+  file, names the CV, and is returned to their CV library — done. The backend
+  extracts and stores it; the student does NOT hand-review or edit extracted
+  fields (a manual field-review form is considered wrong UX and was removed).
+  Uploaded CVs are then viewed READ-ONLY (their original document); the visual
+  builder/editor is reserved for TEMPLATE-created CVs only — an uploaded CV never
+  opens the editor. Extraction output is STRUCTURED (one entry per job/degree with
+  separate role/organization/timeframe/highlights fields — no bullet chars in the
+  data; skills carry a 0-100 level) and stored for CV-JD matching. Extraction accuracy is therefore a backend
+  responsibility and feeds CV-JD matching directly. The pipeline is a cost-tiered
+  cascade (`docs/CV_INGESTION_EXTRACTION_SPEC.md`): native text (free) -> local
+  OCR -> a cheap vision-LLM (Gemini-class) for images and styled/multi-column
+  scanned PDFs. Sending DOWNSCALED document images to the vision model is
+  explicitly permitted for the image/scanned path (owner-approved; it overrides
+  the older "never send image bytes to an LLM" rule — the text-only LLM
+  structuring tier still receives text only). Blank/not-CV/corrupt uploads must be
+  rejected with a clear status and must never be fabricated into a CV.
 - Logged-in student job detail surfaces must prioritize useful job intelligence:
   best CV to use, CV-JD fit score, evidence gaps, suggested CV improvements,
   learning gaps, deadline/application context, and competition intelligence when
@@ -253,12 +279,18 @@ Every non-trivial agent result should include:
 - Do not use pre-reset git history or deleted implementation as a reference. Build from docs and current files only.
 - Do not claim implementation is complete just because docs describe it; only `docs/IMPLEMENTATION_STATUS.md` verified facts count.
 - Do not expose AI provider names, model names, token counts, latency, prompts, internal confidence, or internal status codes to end users.
+- Do not expose real AI provider/model names or concrete model ids to ordinary
+  university staff either. Only platform superadmins may view or manage the real
+  provider/model registry, and only inside superadmin AI operations/settings
+  surfaces. API keys and base URLs are never returned by any API.
 - Do not auto-execute AI write actions without explicit user confirmation.
 - Do not hardcode university staff roles.
 - Do not remove `Được tài trợ`, `Quảng cáo`, or sponsored disclosure labels.
 - Public discovery, personalized recommendations, and advertising placements must separate organic, recommended, sponsored, and university-curated inventory.
 - Product interactions must use real-world semantics: job favorite uses a heart,
-  floating actions include saved jobs, invitations, feedback/help, messages, and
-  AI where available, campaign banners have approved or VinUni-curated creative
-  assets, and paid disclosure is truthful without making university-curated
-  partner content feel like low-trust ad tech.
+  quick actions (saved jobs, notifications, messages, and AI where available)
+  live in the header for the public + student marketplace surfaces — with
+  feedback/help in the account (avatar) menu — instead of a bottom-right floating
+  action rail (owner decision 2026-07-07; the rail was removed). Campaign banners
+  have approved or VinUni-curated creative assets, and paid disclosure is truthful
+  without making university-curated partner content feel like low-trust ad tech.

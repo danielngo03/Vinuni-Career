@@ -1,6 +1,0 @@
-{"id": "ss_priv_unexpected_key_with_phone_not_leaked", "input": {"major": "CS", "existing_skills": [], "llm_json": {"suggestions": ["Python", "SQL"], "student_phone": "0912345678"}}, "expect": {"blob_excludes": "0912345678"}}
-{"id": "ss_priv_unexpected_key_with_email_not_leaked", "input": {"major": "CS", "existing_skills": [], "llm_json": {"suggestions": ["Python", "SQL"], "student_email": "student@example.com"}}, "expect": {"blob_excludes": "student@example.com"}}
-{"id": "ss_priv_fallback_is_generic_curated_content", "input": {"major": "CS", "existing_skills": [], "provider": "unavailable"}, "expect": {"is_fallback": true, "no_pii_in_response": true}}
-{"id": "ss_priv_no_provider_model_leak", "input": {"major": "CS", "existing_skills": [], "llm_json": {"suggestions": ["Python", "SQL"]}}, "expect": {"no_provider_leak": true, "no_model_leak": true}}
-{"id": "ss_priv_no_internal_status_leak", "input": {"major": "CS", "existing_skills": [], "llm_json": {"suggestions": ["Python", "SQL"]}}, "expect": {"no_internal_status_codes": true}}
-{"id": "ss_priv_no_pii_in_response_with_experience_titles", "input": {"major": "CS", "experience_titles": ["Intern at ExampleCorp"], "existing_skills": [], "llm_json": {"suggestions": ["Python", "SQL"]}}, "expect": {"no_pii_in_response": true}}

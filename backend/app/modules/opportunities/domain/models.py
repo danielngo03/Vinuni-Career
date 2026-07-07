@@ -1,9 +1,8 @@
 """Opportunities (jobs) ORM models (``docs/DATA_MODEL.md`` §8).
 
-``jobs`` carries the full posting + lifecycle + moderation state; screening
-questions are modeled relationally in ``screening_questions`` (CASCADE on job
-delete). Types use the shared cross-database variants so the same models run on
-PostgreSQL (runtime) and SQLite (unit tests). Postgres-only constructs
+``jobs`` carries the full posting + lifecycle + moderation state. Types use the
+shared cross-database variants so the same models run on PostgreSQL (runtime)
+and SQLite (unit tests). Postgres-only constructs
 (``tsv_search`` generated column, GIN / partial indexes, ``set_updated_at``
 trigger) live in migration ``0004`` only.
 
@@ -193,6 +192,11 @@ class Job(Base):
     language_code: Mapped[str] = mapped_column(
         String(10), nullable=False, default="en"
     )
+    # Language the submitted CV must be in. Default "any" (no requirement).
+    # "en" | "vi" | "any"
+    cv_language_required: Mapped[str] = mapped_column(
+        String(5), nullable=False, default="any"
+    )
 
 
 class JobTranslation(Base):
@@ -279,19 +283,3 @@ class JobAlert(Base):
     __table_args__ = (
         UniqueConstraint("user_id", "name", name="uq_job_alerts_user_name"),
     )
-
-
-class ScreeningQuestion(Base):
-    """A per-job applicant screening question (CASCADE on job delete)."""
-
-    __tablename__ = "screening_questions"
-
-    id: Mapped[uuid.UUID] = mapped_column(default=uuid.uuid4, primary_key=True)
-    job_id: Mapped[uuid.UUID] = mapped_column(
-        ForeignKey("jobs.id", ondelete="CASCADE"), nullable=False, index=True
-    )
-    question: Mapped[str] = mapped_column(Text, nullable=False)
-    q_type: Mapped[str] = mapped_column(String(20), nullable=False)
-    options: Mapped[list | None] = mapped_column(JsonType, nullable=True)
-    is_required: Mapped[bool] = mapped_column(Boolean, nullable=False, default=True)
-    sort_order: Mapped[int] = mapped_column(SmallInteger, nullable=False, default=0)

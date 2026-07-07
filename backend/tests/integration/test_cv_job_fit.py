@@ -14,14 +14,14 @@ from datetime import UTC, datetime, timedelta
 
 import pytest
 from app.ai.cv import job_fit
-from app.modules.documents.application import cv_service, job_fit_service
+from app.modules.documents.application import job_fit_service
 from app.modules.documents.domain.models import CvProfile, CvSection
 from app.modules.opportunities.application import job_service, moderation_service
 from app.shared.exceptions import ResourceNotFoundError
 from sqlalchemy import select
 
 from tests.auth_utils import CTX
-from tests.documents_utils import make_student
+from tests.documents_utils import make_ready_cv, make_student
 from tests.org_utils import make_org_with_admin
 
 _FORBIDDEN = [
@@ -59,7 +59,6 @@ def _job_payload(**over) -> dict:
         "headcount": 1,
         "application_deadline": None,
         "visibility": "public",
-        "screening_questions": [],
     }
     base.update(over)
     return base
@@ -79,10 +78,15 @@ async def _create_job(db, *, publish: bool = True, **over) -> uuid.UUID:
 
 
 async def _make_cv(db, student, *, title="My CV") -> dict:
-    return await cv_service.create_cv(
-        db, principal=student,
-        payload={"title": title, "creation_mode": "blank_template"}, ctx=CTX,
-    )
+    """Create a CV and finalize it into the library (``ready``).
+
+    Job-fit only scores committed library CVs (design spec 2026-07-05), so tests
+    that expect a CV to be scored must go through finalize. ``make_ready_cv`` seeds
+    a header name and finalizes; the returned detail is the finalized CV. Sections
+    are read live at match time, so tests may keep seeding content AFTER this.
+    """
+
+    return await make_ready_cv(db, student=student, title=title)
 
 
 async def _seed(db, cv_id, section_type, items) -> None:

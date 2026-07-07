@@ -42,7 +42,10 @@ Implement user-facing product surfaces with Next.js, TypeScript, Tailwind, i18n,
 - Use Plus Jakarta Sans, VinUni design tokens, and the project's approved icon
   set consistently. Do not reintroduce stale Montserrat or mixed decorative icon
   styles unless `docs/DESIGN.md` explicitly changes.
-- Do not expose AI provider/model/token/prompt internals.
+- Do not expose AI provider/model/token/prompt internals. Concrete
+  provider/model names and ids appear only in superadmin AI operations/settings
+  screens; ordinary university staff, partners, students, guests, exports, and
+  notifications get masked status/alias-only UI.
 - Guest actions that need auth open login modal and preserve intent.
 - Sponsored labels must be visible and non-removable.
 - Do not create decorative placeholder dashboards. Use real data contracts, skeletons, empty states, or blocked states.

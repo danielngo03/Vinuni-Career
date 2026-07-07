@@ -8,6 +8,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.modules.ai_assistant.application.agentic.memory import resolve_recent_entity
 from app.modules.ai_assistant.application.agentic.models import AgentPlan
+from app.modules.ai_assistant.application.messages import assistant_message
 from app.modules.ai_assistant.domain.models import ChatSession
 from app.shared.permissions import Principal
 
@@ -370,15 +371,18 @@ async def build_agent_plan(
     principal: Principal,
     session: AsyncSession,
     chat: ChatSession,
+    locale: str = "vi",
 ) -> AgentPlan | None:
     """Build a plan using live conversation memory before static routing."""
 
-    if recent_plan := await _plan_with_recent_entities(text, session=session, chat=chat):
+    if recent_plan := await _plan_with_recent_entities(
+        text, session=session, chat=chat, locale=locale
+    ):
         return recent_plan
-    return plan_for_text(text, principal=principal)
+    return plan_for_text(text, principal=principal, locale=locale)
 
 
-def plan_for_text(text: str, *, principal: Principal) -> AgentPlan | None:
+def plan_for_text(text: str, *, principal: Principal, locale: str = "vi") -> AgentPlan | None:
     """Return a deterministic domain-agent plan when confidence is high."""
     lowered = text.lower()
 
@@ -387,7 +391,7 @@ def plan_for_text(text: str, *, principal: Principal) -> AgentPlan | None:
             agent="capability_guide",
             action="reply",
             status_code="responding",
-            reply=_capability_reply(),
+            reply=_capability_reply(locale),
         )
 
     if _DATA_BOUNDARY_RE.search(text):
@@ -395,10 +399,10 @@ def plan_for_text(text: str, *, principal: Principal) -> AgentPlan | None:
             agent="platform_boundary",
             action="reply",
             status_code="responding",
-            reply=_data_boundary_reply(),
+            reply=_data_boundary_reply(locale),
         )
 
-    external_plan = _external_source_plan(text)
+    external_plan = _external_source_plan(text, locale)
     if external_plan:
         return external_plan
 
@@ -411,21 +415,21 @@ def plan_for_text(text: str, *, principal: Principal) -> AgentPlan | None:
             tool_args={"query": text[:240]},
         )
 
-    support = _platform_support_reply(text)
+    support = _platform_support_reply(text, locale)
     if support:
         return AgentPlan(
             agent="platform_support", action="reply", status_code="platform_support", reply=support
         )
 
     if _ARITHMETIC_ONLY_RE.match(text) or _CODE_ANALYSIS_RE.search(text):
-        return _out_of_scope_plan()
+        return _out_of_scope_plan(locale)
 
     if _SCAM_OR_SAFETY_RE.search(text):
         return AgentPlan(
             agent="student_safety",
             action="reply",
             status_code="responding",
-            reply=_scam_or_safety_reply(),
+            reply=_scam_or_safety_reply(locale),
         )
 
     if _OFFER_ACTION_RE.search(text):
@@ -433,7 +437,7 @@ def plan_for_text(text: str, *, principal: Principal) -> AgentPlan | None:
             agent="offer_coach",
             action="reply",
             status_code="responding",
-            reply=_offer_action_reply(),
+            reply=_offer_action_reply(locale),
         )
 
     if _REJECTION_RE.search(text):
@@ -441,7 +445,7 @@ def plan_for_text(text: str, *, principal: Principal) -> AgentPlan | None:
             agent="career_coach",
             action="reply",
             status_code="responding",
-            reply=_rejection_reply(),
+            reply=_rejection_reply(locale),
         )
 
     if _COVER_LETTER_RE.search(text):
@@ -449,7 +453,7 @@ def plan_for_text(text: str, *, principal: Principal) -> AgentPlan | None:
             agent="application_coach",
             action="reply",
             status_code="responding",
-            reply=_cover_letter_reply(),
+            reply=_cover_letter_reply(locale),
         )
 
     if _PORTFOLIO_RE.search(text) and not _SEARCH_JOBS_RE.search(text):
@@ -457,7 +461,7 @@ def plan_for_text(text: str, *, principal: Principal) -> AgentPlan | None:
             agent="profile_coach",
             action="reply",
             status_code="responding",
-            reply=_portfolio_reply(),
+            reply=_portfolio_reply(locale),
         )
 
     if _OFFER_RE.search(text) and not _SALARY_RE.search(text):
@@ -465,7 +469,7 @@ def plan_for_text(text: str, *, principal: Principal) -> AgentPlan | None:
             agent="offer_coach",
             action="reply",
             status_code="responding",
-            reply=_offer_reply(),
+            reply=_offer_reply(locale),
         )
 
     if _FIRST_JOB_RE.search(text):
@@ -473,7 +477,7 @@ def plan_for_text(text: str, *, principal: Principal) -> AgentPlan | None:
             agent="career_coach",
             action="reply",
             status_code="responding",
-            reply=_first_job_reply(),
+            reply=_first_job_reply(locale),
         )
 
     if _JOB_SEARCH_START_RE.search(text) or (
@@ -514,7 +518,7 @@ def plan_for_text(text: str, *, principal: Principal) -> AgentPlan | None:
             agent="application_agent",
             action="reply",
             status_code="responding",
-            reply=_withdraw_application_reply(),
+            reply=_withdraw_application_reply(locale),
         )
 
     if _APPLICATION_NAV_RE.search(text):
@@ -522,7 +526,7 @@ def plan_for_text(text: str, *, principal: Principal) -> AgentPlan | None:
             agent="application_agent",
             action="reply",
             status_code="responding",
-            reply=_application_navigation_reply(),
+            reply=_application_navigation_reply(locale),
         )
 
     if _KNOWN_COMPANY_RE.search(text) and (
@@ -541,7 +545,7 @@ def plan_for_text(text: str, *, principal: Principal) -> AgentPlan | None:
             agent="cv_agent",
             action="reply",
             status_code="responding",
-            reply=_cv_navigation_reply(text),
+            reply=_cv_navigation_reply(text, locale),
         )
 
     if _CV_REVIEW_RE.search(text):
@@ -596,7 +600,7 @@ def plan_for_text(text: str, *, principal: Principal) -> AgentPlan | None:
             agent="notification_agent",
             action="reply",
             status_code="responding",
-            reply=_alert_action_reply(text),
+            reply=_alert_action_reply(text, locale),
         )
 
     if _RECOMMEND_JOBS_RE.search(text):
@@ -613,7 +617,7 @@ def plan_for_text(text: str, *, principal: Principal) -> AgentPlan | None:
             agent="job_action",
             action="reply",
             status_code="responding",
-            reply=_unsave_job_reply(),
+            reply=_unsave_job_reply(locale),
         )
 
     if _SAVE_JOB_RE.search(text) and not _SAVED_JOB_RE.search(text):
@@ -621,7 +625,7 @@ def plan_for_text(text: str, *, principal: Principal) -> AgentPlan | None:
             agent="job_action",
             action="reply",
             status_code="responding",
-            reply=_save_job_needs_selection_reply(),
+            reply=_save_job_needs_selection_reply(locale),
         )
 
     if _JOB_DISCOVERY_REQUEST_RE.search(text):
@@ -680,7 +684,7 @@ def plan_for_text(text: str, *, principal: Principal) -> AgentPlan | None:
             agent="event_agent",
             action="reply",
             status_code="responding",
-            reply=_event_action_reply(text),
+            reply=_event_action_reply(text, locale),
         )
 
     if _EVENT_RE.search(text):
@@ -698,7 +702,7 @@ def plan_for_text(text: str, *, principal: Principal) -> AgentPlan | None:
                 agent="application_agent",
                 action="reply",
                 status_code="responding",
-                reply=_interview_action_reply(),
+                reply=_interview_action_reply(locale),
             )
         if _INTERVIEW_PREP_RE.search(text):
             return AgentPlan(
@@ -771,17 +775,17 @@ def plan_for_text(text: str, *, principal: Principal) -> AgentPlan | None:
         )
 
     if not any(keyword in lowered for keyword in _DOMAIN_KEYWORDS):
-        return _out_of_scope_plan()
+        return _out_of_scope_plan(locale)
 
     return AgentPlan(
         agent="clarifier",
         action="reply",
         status_code="responding",
-        reply=_domain_clarification_reply(),
+        reply=_domain_clarification_reply(locale),
     )
 
 
-def _external_source_plan(text: str) -> AgentPlan | None:
+def _external_source_plan(text: str, locale: str) -> AgentPlan | None:
     source_match = _EXTERNAL_SOURCE_RE.search(text)
     channel_match = _EXTERNAL_CHANNEL_RE.search(text)
     if not (source_match or channel_match):
@@ -789,18 +793,28 @@ def _external_source_plan(text: str) -> AgentPlan | None:
     if not (channel_match or _EXTERNAL_LOOKUP_RE.search(text)):
         return None
 
-    source = _external_source_label(text)
-    if source == "Google" and not channel_match:
+    source = _external_source_label(text, locale)
+    # ``google_lookup`` is the sentinel for the Google-only case that must not
+    # trigger the external-source refusal unless a channel phrase is present.
+    if _external_source_is_google(text) and not channel_match:
         return None
     return AgentPlan(
         agent="platform_boundary",
         action="reply",
         status_code="responding",
-        reply=_external_source_reply(source),
+        reply=_external_source_reply(source, locale),
     )
 
 
-def _external_source_label(text: str) -> str:
+def _external_source_is_google(text: str) -> bool:
+    lowered = text.lower()
+    return (
+        "google" in lowered
+        and not re.search(r"\blinked\s*in\b|\blinkedin\b|\blinkedln\b|\blinkdn\b", lowered)
+    )
+
+
+def _external_source_label(text: str, locale: str) -> str:
     lowered = text.lower()
     if re.search(r"\blinked\s*in\b|\blinkedin\b|\blinkedln\b|\blinkdn\b", lowered):
         return "LinkedIn"
@@ -817,163 +831,85 @@ def _external_source_label(text: str) -> str:
     if "careerbuilder" in lowered:
         return "CareerBuilder"
     if re.search(r"\bweb(?:site)?\b", lowered):
-        return "website ngoài hệ thống"
+        return assistant_message("planner.external_source_label.external_website", locale)
     if re.search(r"\bmạng\b|\binternet\b", lowered):
-        return "internet"
-    return "nguồn ngoài hệ thống"
+        return assistant_message("planner.external_source_label.internet", locale)
+    return assistant_message("planner.external_source_label.external_default", locale)
 
 
-def _external_source_reply(source: str) -> str:
-    return (
-        f"Mình không tìm được trên {source} và cũng không tra cứu internet/nguồn ngoài. "
-        "Chatbot này chỉ dùng dữ liệu trong **VinUni Career Platform**: việc làm đang mở, "
-        "CV của bạn, đơn ứng tuyển, sự kiện, công ty/review nội bộ và knowledge base hệ thống. "
-        "Bạn có thể hỏi: “tìm việc trong hệ thống VinUni Career cho data analyst ở Hà Nội” "
-        "hoặc “gợi ý job phù hợp với CV của tôi”."
-    )
+def _external_source_reply(source: str, locale: str) -> str:
+    return assistant_message("planner.external_source", locale, source=source)
 
 
-def _capability_reply() -> str:
-    return (
-        "Mình là chatbot cho student/người tìm việc trong **VinUni Career Platform**. "
-        "Mình có thể tìm job/internship nội bộ, gợi ý job theo CV, xem CV/đơn ứng tuyển/"
-        "lịch phỏng vấn/sự kiện, so CV với JD, tra review công ty nội bộ, benchmark lương "
-        "và hướng dẫn bước tiếp theo. Mình không tìm trên Google, LinkedIn hay internet; "
-        "mọi câu trả lời phải dựa trên dữ liệu trong hệ thống hoặc thông tin bạn cung cấp."
-    )
+def _capability_reply(locale: str) -> str:
+    return assistant_message("planner.capability", locale)
 
 
-def _data_boundary_reply() -> str:
-    return (
-        "Nguồn của mình chỉ là **VinUni Career Platform**: job đang mở, CV của bạn, "
-        "đơn ứng tuyển, lịch phỏng vấn, sự kiện, công ty/review nội bộ, salary benchmark "
-        "và knowledge base của hệ thống. Mình không browse internet, Google, LinkedIn "
-        "hay website ngoài; nếu bạn muốn, mình có thể tìm cơ hội tương ứng trong hệ thống."
-    )
+def _data_boundary_reply(locale: str) -> str:
+    return assistant_message("planner.data_boundary", locale)
 
 
-def _withdraw_application_reply() -> str:
-    return (
-        "Mình chưa thể rút/hủy đơn trực tiếp qua chat. Bạn hãy mở **Đơn ứng tuyển**, "
-        "chọn đúng đơn rồi dùng thao tác rút/hủy nếu hệ thống cho phép. Nếu chưa chắc nên rút, "
-        "mình có thể giúp bạn xem lại trạng thái đơn và cân nhắc bước tiếp theo."
-    )
+def _withdraw_application_reply(locale: str) -> str:
+    return assistant_message("planner.withdraw_application", locale)
 
 
-def _application_navigation_reply() -> str:
-    return (
-        "Mình chưa chỉnh sửa đơn ứng tuyển trực tiếp qua chat. Bạn hãy vào **Đơn ứng tuyển**, "
-        "mở đúng đơn và dùng các thao tác hệ thống cho phép. Nếu cần kiểm tra trạng thái hoặc "
-        "quyết định nên làm gì tiếp, mình có thể xem danh sách đơn của bạn trong hệ thống."
-    )
+def _application_navigation_reply(locale: str) -> str:
+    return assistant_message("planner.application_navigation", locale)
 
 
-def _cv_navigation_reply(text: str) -> str:
+def _cv_navigation_reply(text: str, locale: str) -> str:
     lowered = text.lower()
     if re.search(r"\b(upload|tải\s*lên|tạo|create)\b", lowered):
-        return (
-            "Bạn có thể upload hoặc tạo CV trong **CV Studio**. Sau khi có CV trong hệ thống, "
-            "mình có thể xem danh sách CV, gợi ý job phù hợp hoặc so CV với một JD cụ thể."
-        )
+        return assistant_message("planner.cv_nav.upload_create", locale)
     if re.search(r"\b(xoá|xóa|delete)\b", lowered):
-        return (
-            "Mình chưa xóa CV trực tiếp qua chat. Bạn hãy vào **CV Studio**, chọn CV cần xóa "
-            "và dùng menu thao tác của CV đó. Mình vẫn có thể liệt kê CV hiện có để bạn chọn đúng."
-        )
+        return assistant_message("planner.cv_nav.delete", locale)
     if re.search(r"\b(download|tải\s*xuống)\b", lowered):
-        return (
-            "Bạn có thể tải CV xuống trong **CV Studio** từ menu của từng CV. Nếu muốn biết "
-            "nên dùng CV nào để apply, hãy nói “gợi ý job phù hợp với CV của tôi”."
-        )
+        return assistant_message("planner.cv_nav.download", locale)
     if re.search(r"\b(sửa|chỉnh|edit|rename|đổi\s*tên|duplicate|nhân\s*bản)\b", lowered):
-        return (
-            "Mình không sửa trực tiếp file/CV qua chat. Bạn hãy vào **CV Studio** để chỉnh "
-            "nội dung, đổi tên hoặc quản lý phiên bản CV. Mình có thể hỗ trợ phần AI như: "
-            "gợi ý cải thiện CV, kiểm tra CV cần bổ sung gì, hoặc so CV với một JD/job cụ thể."
-        )
-    return (
-        "Các thao tác quản lý CV nằm trong **CV Studio**. Mình có thể xem CV hiện có, "
-        "gợi ý job theo CV hoặc so CV với một JD/job cụ thể trong hệ thống."
-    )
+        return assistant_message("planner.cv_nav.edit", locale)
+    return assistant_message("planner.cv_nav.default", locale)
 
 
-def _save_job_needs_selection_reply() -> str:
-    return (
-        "Mình có thể lưu job cho bạn sau khi xác định đúng tin tuyển dụng trong hệ thống. "
-        "Hãy tìm job trước hoặc nói rõ “lưu job thứ 2”; thao tác lưu sẽ cần bạn xác nhận."
-    )
+def _save_job_needs_selection_reply(locale: str) -> str:
+    return assistant_message("planner.save_job_needs_selection", locale)
 
 
-def _unsave_job_reply() -> str:
-    return (
-        "Mình chưa bỏ lưu/xóa job khỏi danh sách đã lưu trực tiếp qua chat. Bạn hãy vào "
-        "**Việc làm đã lưu** hoặc mở trang job rồi bấm bỏ lưu. Mình có thể hiển thị danh sách "
-        "job đã lưu để bạn chọn đúng tin."
-    )
+def _unsave_job_reply(locale: str) -> str:
+    return assistant_message("planner.unsave_job", locale)
 
 
-def _event_action_reply(text: str) -> str:
+def _event_action_reply(text: str, locale: str) -> str:
     lowered = text.lower()
     if re.search(r"\b(huỷ|hủy|cancel)\b", lowered):
-        return (
-            "Mình chưa hủy đăng ký sự kiện trực tiếp qua chat. Bạn hãy vào **Sự kiện** hoặc "
-            "**Sự kiện đã đăng ký**, mở đúng sự kiện và dùng nút hủy nếu hệ thống cho phép."
-        )
-    return (
-        "Mình chưa đăng ký sự kiện trực tiếp qua chat. Bạn hãy mở trang **Sự kiện**, chọn sự kiện "
-        "phù hợp và bấm đăng ký. Mình có thể tìm sự kiện trong hệ thống hoặc xem các sự kiện "
-        "bạn đã đăng ký."
-    )
+        return assistant_message("planner.event_action.cancel", locale)
+    return assistant_message("planner.event_action.register", locale)
 
 
-def _interview_action_reply() -> str:
-    return (
-        "Mình chưa xác nhận, hủy hoặc đổi lịch phỏng vấn trực tiếp qua chat. Bạn hãy mở "
-        "**Đơn ứng tuyển** hoặc lịch phỏng vấn trong hệ thống để thao tác. Mình có thể xem "
-        "lịch phỏng vấn sắp tới hoặc bắt đầu mock interview để bạn luyện tập."
-    )
+def _interview_action_reply(locale: str) -> str:
+    return assistant_message("planner.interview_action", locale)
 
 
-def _alert_action_reply(text: str) -> str:
+def _alert_action_reply(text: str, locale: str) -> str:
     lowered = text.lower()
-    action = "quản lý"
+    action_key = "planner.alert_action.manage"
     if re.search(r"\b(tạo|create|bật|turn\s*on|enable)\b", lowered):
-        action = "tạo/bật"
+        action_key = "planner.alert_action.create"
     elif re.search(r"\b(tắt|turn\s*off|disable|xoá|xóa|delete|sửa|edit)\b", lowered):
-        action = "sửa/tắt/xóa"
-    return (
-        f"Mình chưa {action} job alert trực tiếp qua chat. Bạn hãy vào **Thông báo việc làm** "
-        "hoặc **Cài đặt thông báo** để quản lý alert. Mình có thể xem các job alert hiện có "
-        "và tìm việc phù hợp ngay trong hệ thống."
-    )
+        action_key = "planner.alert_action.edit"
+    action = assistant_message(action_key, locale)
+    return assistant_message("planner.alert_action", locale, action=action)
 
 
-def _offer_action_reply() -> str:
-    return (
-        "Mình chưa chấp nhận, từ chối, ký hoặc nộp phản hồi offer/hợp đồng qua chat. "
-        "Bạn nên mở đúng offer trong **Đơn ứng tuyển** và thao tác trong hệ thống sau khi "
-        "đọc kỹ lương, probation, benefit, deadline và điều kiện làm việc. Mình có thể giúp "
-        "bạn kiểm tra checklist hoặc tra benchmark lương trước khi quyết định."
-    )
+def _offer_action_reply(locale: str) -> str:
+    return assistant_message("planner.offer_action", locale)
 
 
-def _scam_or_safety_reply() -> str:
-    return (
-        "Nếu một job hoặc nhà tuyển dụng yêu cầu chuyển khoản, đặt cọc, nộp phí ứng tuyển, "
-        "gửi giấy tờ nhạy cảm ngoài quy trình, hoặc có dấu hiệu quấy rối/phân biệt đối xử, "
-        "bạn nên dừng trao đổi và báo cáo trong hệ thống hoặc liên hệ Career Office. "
-        "Mình có thể giúp bạn kiểm tra lại job/công ty trong dữ liệu nội bộ nếu bạn gửi tên "
-        "hoặc mở job đó trong VinUni Career."
-    )
+def _scam_or_safety_reply(locale: str) -> str:
+    return assistant_message("planner.scam_or_safety", locale)
 
 
-def _domain_clarification_reply() -> str:
-    return (
-        "Mình hiểu đây là câu hỏi liên quan đến quá trình tìm việc, nhưng cần bạn nói rõ hơn "
-        "để trả lời chính xác bằng dữ liệu hệ thống. Bạn có thể hỏi theo một hướng cụ thể như: "
-        "“tìm internship data ở Hà Nội”, “gợi ý job phù hợp với CV của tôi”, "
-        "“đơn ứng tuyển của tôi sao rồi”, hoặc “so CV với job thứ 1”."
-    )
+def _domain_clarification_reply(locale: str) -> str:
+    return assistant_message("planner.domain_clarification", locale)
 
 
 async def _plan_with_recent_entities(
@@ -981,13 +917,14 @@ async def _plan_with_recent_entities(
     *,
     session: AsyncSession,
     chat: ChatSession,
+    locale: str = "vi",
 ) -> AgentPlan | None:
     if _UNSAVE_JOB_RE.search(text):
         return AgentPlan(
             agent="job_action",
             action="reply",
             status_code="responding",
-            reply=_unsave_job_reply(),
+            reply=_unsave_job_reply(locale),
         )
 
     if _SAVED_JOB_RE.search(text):
@@ -1112,78 +1049,36 @@ async def _plan_with_recent_entities(
     return None
 
 
-def _platform_support_reply(text: str) -> str | None:
+def _platform_support_reply(text: str, locale: str) -> str | None:
     if _CONTACT_SUPPORT_RE.search(text):
-        return (
-            "Bạn có thể liên hệ admin/cố vấn qua mục **Tin nhắn** hoặc **Trợ giúp** "
-            "trong hệ thống. Nếu đang ở workspace, hãy bấm biểu tượng chat hoặc avatar "
-            "góc phải rồi chọn **Hỗ trợ**. Với lỗi tài khoản khẩn cấp, hãy gửi kèm email "
-            "đăng ký và ảnh chụp màn hình để đội hỗ trợ kiểm tra nhanh hơn."
-        )
+        return assistant_message("planner.support.contact", locale)
     if _THEME_RE.search(text):
-        return (
-            "Bạn có thể đổi theme/giao diện tại **Cài đặt** → **Ngôn ngữ & khu vực** "
-            "→ **Giao diện**. Chọn Sáng, Tối hoặc Theo hệ thống. Nếu đang ở workspace, "
-            "hãy bấm avatar góc phải rồi vào **Cài đặt**."
-        )
+        return assistant_message("planner.support.theme", locale)
     if _ACCOUNT_RE.search(text):
-        return (
-            "Nếu tài khoản gặp vấn đề, hãy dùng **Quên mật khẩu** ở màn hình đăng nhập "
-            "hoặc vào **Cài đặt** → **Bảo mật** khi còn đăng nhập được. Nếu tài khoản bị "
-            "khóa hoặc email chưa xác thực, hãy liên hệ bộ phận hỗ trợ VinUni Career Platform."
-        )
+        return assistant_message("planner.support.account", locale)
     if _SETTINGS_RE.search(text):
-        return (
-            "Các thiết lập hệ thống nằm trong **Cài đặt**: ngôn ngữ/giao diện, thông báo, "
-            "bảo mật tài khoản, gói sử dụng và quyền/role. Một số mục chỉ hiện nếu tài khoản "
-            "của bạn có quyền student, partner hoặc university tương ứng."
-        )
+        return assistant_message("planner.support.settings", locale)
     return None
 
 
-def _cover_letter_reply() -> str:
-    return (
-        "Mình có thể giúp bạn dựng thư ứng tuyển theo cấu trúc 4 đoạn: "
-        "1) vị trí và lý do quan tâm, 2) 2–3 bằng chứng năng lực khớp JD, "
-        "3) vì sao bạn hợp công ty/đội nhóm, 4) lời kết và CTA lịch sự. "
-        "Bạn gửi JD hoặc nói “viết cover letter cho job thứ 1” để mình cá nhân hóa hơn."
-    )
+def _cover_letter_reply(locale: str) -> str:
+    return assistant_message("planner.cover_letter", locale)
 
 
-def _portfolio_reply() -> str:
-    return (
-        "Portfolio/GitHub/LinkedIn nên chứng minh năng lực bằng bằng chứng cụ thể: "
-        "3–5 dự án tốt nhất, vai trò của bạn, tech/skill dùng, kết quả đo được, "
-        "link demo hoặc repo sạch README. Nếu bạn đang apply, hãy ưu tiên dự án khớp JD "
-        "và đưa 1–2 project mạnh nhất lên đầu CV."
-    )
+def _portfolio_reply(locale: str) -> str:
+    return assistant_message("planner.portfolio", locale)
 
 
-def _offer_reply() -> str:
-    return (
-        "Với offer/hợp đồng, bạn nên kiểm tra 5 điểm: lương gross/net, probation, "
-        "benefit, điều kiện làm việc, và deadline phản hồi. Nếu muốn thương lượng, "
-        "hãy nêu mức mong muốn bằng dữ liệu thị trường và lý do năng lực; mình có thể "
-        "tra benchmark lương nếu bạn cho biết role và số năm kinh nghiệm."
-    )
+def _offer_reply(locale: str) -> str:
+    return assistant_message("planner.offer", locale)
 
 
-def _rejection_reply() -> str:
-    return (
-        "Bị từ chối không có nghĩa là hồ sơ của bạn kém; thường là lệch timing, fit hoặc "
-        "mức cạnh tranh. Bước tốt nhất là xem lại JD, so CV với yêu cầu, ghi lại câu hỏi "
-        "phỏng vấn khó, rồi apply thêm 3–5 vị trí tương tự. Bạn có thể hỏi “gợi ý job phù hợp” "
-        "hoặc “so CV với job đó” để mình giúp cụ thể hơn."
-    )
+def _rejection_reply(locale: str) -> str:
+    return assistant_message("planner.rejection", locale)
 
 
-def _first_job_reply() -> str:
-    return (
-        "Nếu bạn chưa có kinh nghiệm, hãy nhắm internship/fresher và dùng dự án, coursework, "
-        "club, research hoặc volunteer làm bằng chứng. CV nên đặt kỹ năng + dự án liên quan "
-        "lên cao, mỗi bullet có hành động và kết quả. Mình có thể tìm internship phù hợp hoặc "
-        "gợi ý job dựa trên CV của bạn."
-    )
+def _first_job_reply(locale: str) -> str:
+    return assistant_message("planner.first_job", locale)
 
 
 
@@ -1195,20 +1090,22 @@ def _first_job_reply() -> str:
 # ``output_guard.enforce_keyword_scope`` takes these as plain arguments
 # instead of importing this module itself.
 DOMAIN_KEYWORDS = _DOMAIN_KEYWORDS
-OUT_OF_SCOPE_REPLY = (
-    "Mình chỉ hỗ trợ các nội dung liên quan đến VinUni Career Platform, tài khoản, "
-    "cài đặt hệ thống, tìm việc, CV, ứng tuyển, phỏng vấn, sự kiện tuyển dụng, "
-    "mức lương và định hướng nghề nghiệp. Mình không tra cứu internet/nguồn ngoài; "
-    "bạn có thể hỏi mình về một thao tác trong hệ thống hoặc một cơ hội việc làm nhé."
-)
+# Default-locale (vi) constant kept for backward-compatible callers such as the
+# post-generation keyword scope guard, which uses a single default refusal
+# string. Locale-aware callers should use ``out_of_scope_reply(locale)``.
+OUT_OF_SCOPE_REPLY = assistant_message("planner.out_of_scope")
 
 
-def _out_of_scope_plan() -> AgentPlan:
+def out_of_scope_reply(locale: str = "vi") -> str:
+    return assistant_message("planner.out_of_scope", locale)
+
+
+def _out_of_scope_plan(locale: str = "vi") -> AgentPlan:
     return AgentPlan(
         agent="scope_guard",
         action="reply",
         status_code="responding",
-        reply=OUT_OF_SCOPE_REPLY,
+        reply=out_of_scope_reply(locale),
     )
 
 

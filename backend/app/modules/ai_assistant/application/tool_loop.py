@@ -28,6 +28,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from app.ai.gateway.base import AIMessage
 from app.ai.prompts.assistant import v1 as assistant_prompt
 from app.modules.ai_assistant.application.agents import AgentPlan, format_tool_result
+from app.modules.ai_assistant.application.messages import assistant_message
 from app.modules.ai_assistant.application.session_history import (
     require_session,
     serialize_message,
@@ -125,7 +126,9 @@ def agent_plan_requires_confirmation(plan: AgentPlan) -> bool:
     return bool(spec and spec.permission_class == "confirmation_required")
 
 
-def create_confirmation_message(chat: ChatSession, plan: AgentPlan) -> ChatMessage:
+def create_confirmation_message(
+    chat: ChatSession, plan: AgentPlan, *, locale: str = "vi"
+) -> ChatMessage:
     tool_name = plan.tool_name or ""
     spec = TOOL_SPECS.get(tool_name)
     copy = spec.confirmation_copy if spec else None
@@ -135,7 +138,9 @@ def create_confirmation_message(chat: ChatSession, plan: AgentPlan) -> ChatMessa
             content = f"{content}\n\n{plan.reason}"
     else:
         reason = f": {plan.reason}" if plan.reason else ""
-        content = f"Đang chờ xác nhận để thực hiện {tool_name}{reason}"
+        content = assistant_message(
+            "confirm.pending_generic", locale, tool_name=tool_name, reason=reason
+        )
     return ChatMessage(
         id=uuid.uuid4(),
         session_id=chat.id,
@@ -155,6 +160,7 @@ async def execute_agent_plan(
     session: AsyncSession,
     principal: Principal,
     ai_unavailable_reply: str,
+    locale: str = "vi",
 ) -> str:
     """Execute a deterministic domain-agent plan and return user-facing text."""
     if plan.action == "reply":
@@ -172,7 +178,7 @@ async def execute_agent_plan(
         tool_args=tool_args,
         result=result,
     )
-    return format_tool_result(plan, result)
+    return format_tool_result(plan, result, locale)
 
 
 async def confirm_tool_action(
@@ -181,6 +187,7 @@ async def confirm_tool_action(
     principal: Principal,
     session_id: uuid.UUID,
     message_id: uuid.UUID,
+    locale: str = "vi",
 ) -> dict:
     """Execute a ``confirmation_required`` tool after the user confirms.
 
@@ -223,9 +230,9 @@ async def confirm_tool_action(
     # Write a follow-up assistant message summarising the outcome
     ok = result.get("ok", False)
     summary_text = (
-        _confirmation_result_text(tool_name)
+        _confirmation_result_text(tool_name, locale)
         if ok
-        else _confirmation_error_text(tool_name, result)
+        else _confirmation_error_text(tool_name, result, locale)
     )
     follow_up = ChatMessage(
         id=uuid.uuid4(),
@@ -244,30 +251,29 @@ async def confirm_tool_action(
     }
 
 
-def _confirmation_result_text(tool_name: str) -> str:
+def _confirmation_result_text(tool_name: str, locale: str = "vi") -> str:
     if tool_name == "save_job":
-        return "Đã lưu việc làm này vào danh sách của bạn."
+        return assistant_message("confirm.result.save_job", locale)
     if tool_name == "apply_job":
-        return "Đã nộp đơn ứng tuyển. Bạn có thể theo dõi trạng thái trong **Đơn ứng tuyển**."
+        return assistant_message("confirm.result.apply_job", locale)
     if tool_name == "move_candidate_stage":
-        return "Đã cập nhật trạng thái ứng viên."
-    return "Đã thực hiện thao tác."
+        return assistant_message("confirm.result.move_candidate_stage", locale)
+    return assistant_message("confirm.result.generic", locale)
 
 
-def _confirmation_error_text(tool_name: str, result: dict[str, Any]) -> str:
+def _confirmation_error_text(
+    tool_name: str, result: dict[str, Any], locale: str = "vi"
+) -> str:
     error = result.get("error")
     if tool_name == "apply_job":
         if error == "no_cv_found":
-            return "Bạn chưa có CV để nộp đơn. Hãy tạo hoặc upload CV trong **CV Studio** trước."
+            return assistant_message("confirm.error.apply_no_cv", locale)
         if error == "already_applied":
-            return (
-                "Bạn đã ứng tuyển vị trí này rồi. "
-                "Hãy kiểm tra trạng thái trong **Đơn ứng tuyển**."
-            )
-        return "Mình chưa nộp đơn được lúc này. Bạn có thể mở trang việc làm và nhấn **Ứng tuyển**."
+            return assistant_message("confirm.error.apply_already_applied", locale)
+        return assistant_message("confirm.error.apply_generic", locale)
     if tool_name == "save_job":
-        return "Mình chưa lưu được việc làm này. Bạn có thể mở trang việc làm và nhấn nút lưu."
-    return "Mình chưa thực hiện được thao tác này. Vui lòng thử lại."
+        return assistant_message("confirm.error.save_generic", locale)
+    return assistant_message("confirm.error.generic", locale)
 
 
 # --------------------------------------------------------------------------- #

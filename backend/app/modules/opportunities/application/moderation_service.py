@@ -58,6 +58,28 @@ def _now() -> datetime:
     return datetime.now(tz=UTC)
 
 
+async def _invalidate_job_fit_cache(job_id: uuid.UUID) -> None:
+    """Best-effort Redis invalidation of cached fit scores for a job.
+
+    Called after a job's visibility changes (approve, reject).  Failures are
+    silently swallowed — the 4 h TTL is the fallback and a failed invalidation
+    never blocks the write response.
+    """
+    try:
+        import redis.asyncio as aioredis
+
+        from app.ai.cv.fit_cache import invalidate_job
+        from app.core.config import get_settings
+
+        client = aioredis.from_url(get_settings().redis_url, decode_responses=True)
+        try:
+            await invalidate_job(client, job_id=job_id)
+        finally:
+            await client.aclose()
+    except Exception:
+        pass
+
+
 def _use_for_update() -> bool:
     return get_settings().database_url.startswith("postgresql")
 
@@ -213,6 +235,9 @@ async def approve_job(
         extra={"action_url": _job_url(job, locale=locale)},
     )
     await session.commit()
+    # A newly published job may have been scored before it was visible; invalidate
+    # any stale cached scores so students get fresh results on next page load.
+    await _invalidate_job_fit_cache(job.id)
     return presenters.owner_job_summary(job, locale=locale)
 
 

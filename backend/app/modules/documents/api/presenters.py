@@ -38,12 +38,16 @@ def template(
         "key": t.key,
         "name": t.name_vi if locale == "vi" else t.name_en,
         "category": t.category,
+        # Full visual theme (layout/palette/typography/photo/sectionStyle/regions/
+        # order) — the renderer's single source of truth. Aliased as ``theme`` too.
         "layout_schema": t.layout_schema or {},
-        "is_premium": t.is_premium,
+        "theme": t.layout_schema or {},
         "is_active": t.is_active,
-        # Filled CV previews are private; template preview images are not wired
-        # yet, so this is null until a public asset pipeline exists.
-        "preview_url": None,
+        "status": t.status,
+        "version": t.version,
+        # Filled CV previews are private; template preview images are rendered by
+        # the frontend gallery from the theme (no stored crop), so null here.
+        "preview_url": t.preview_image,
     }
     if include_admin_fields:
         data["name_vi"] = t.name_vi
@@ -72,7 +76,11 @@ def cv_summary(p: CvProfile, *, locale: str = "vi") -> dict:
         "language": p.language,
         "status": p.status,
         "status_label": catalog.status_label(p.status, locale=locale),
-        "is_primary": p.is_primary,
+        # Two-tier library lifecycle: a ``ready`` CV is in the library (counts to
+        # the 5-cap, usable for apply/job-fit); ``draft`` is an unlimited scratch CV.
+        # ``finalized_at`` is when it was committed (null for drafts).
+        "in_library": p.status == catalog.CV_READY,
+        "finalized_at": _iso(p.finalized_at),
         "version": p.version,
         "last_edited_at": _iso(p.last_edited_at),
         "canvas": p.canvas_json or {},

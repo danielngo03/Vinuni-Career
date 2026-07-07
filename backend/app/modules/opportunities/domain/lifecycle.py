@@ -64,11 +64,6 @@ EDITABLE_STATES: frozenset[str] = frozenset({DRAFT, REJECTED, ACTIVE})
 #   job and resets it to ``pending_review`` (re-moderation), exactly like a
 #   fresh submission, because the previously-approved content no longer
 #   matches what is live.
-# - Screening questions are **locked** once a job is ``active`` — existing
-#   ``applications.screening_answers`` reference the current question set by
-#   id/order, so mutating them post-publish would silently corrupt or
-#   orphan already-submitted answers. Screening questions may only be edited
-#   in ``draft``/``rejected``.
 FREE_AMEND_FIELDS: frozenset[str] = frozenset(
     {"application_deadline", "headcount", "visibility", "benefits"}
 )
@@ -142,10 +137,6 @@ VINUNI_ONLY = "vinuni_only"
 INVITATION_ONLY = "invitation_only"
 VISIBILITY_LEVELS: frozenset[str] = frozenset(
     {PUBLIC, AUTHENTICATED, STUDENTS_ONLY, VINUNI_ONLY, INVITATION_ONLY}
-)
-
-SCREENING_Q_TYPES: frozenset[str] = frozenset(
-    {"text", "single_choice", "multiple_choice", "yes_no"}
 )
 
 # Seniority/career level vocabulary for structured JD requirements. Partners may

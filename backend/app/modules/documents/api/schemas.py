@@ -32,7 +32,6 @@ class UpdateCvRequest(BaseModel):
     language: str | None = Field(default=None, max_length=10)
     status: str | None = Field(default=None, max_length=20)
     template_id: uuid.UUID | None = None
-    is_primary: bool | None = None
     expected_version: int | None = None
 
 
@@ -123,8 +122,23 @@ class UpdateCvCanvasRequest(BaseModel):
     """Partial update: only the keys provided are replaced. The photo binding
     (managed by ``PATCH /cvs/{cv_id}/photo``) is left untouched here."""
 
+    model_config = ConfigDict(populate_by_name=True)
+
     blocks: list[CvCanvasBlock] | None = Field(default=None, max_length=300)
     page: dict | None = None
+    # Per-CV student restyle overrides layered on top of the chosen template
+    # theme (Canva-like recolor/font/density without forking the template). A
+    # PARTIAL theme: ``{palette?, typography?, sectionStyle?}``. Shape + vocab
+    # are validated in ``cv_canvas_service._validate_theme_override``. ``{}``
+    # resets the CV back to the template default.
+    theme: dict | None = None
+    # Per-element style overrides for the contextual text toolbar (design spec
+    # §"Data contracts" 1): ``{editPath: {font?, size?, weight?, italic?, align?,
+    # color?}}``. Accepts the JSON camelCase ``elementStyles`` (frontend) or the
+    # snake_case field name. Shape + vocab are validated in
+    # ``cv_canvas_service._validate_element_styles``; ``{}`` resets every element
+    # to the theme default.
+    element_styles: dict | None = Field(default=None, alias="elementStyles")
     expected_version: int | None = None
 
 
@@ -170,7 +184,6 @@ class CvTemplateCreateRequest(BaseModel):
     name_en: str = Field(min_length=2, max_length=200)
     category: str = Field(min_length=2, max_length=50)
     layout_schema: dict = Field(default_factory=dict)
-    is_premium: bool = False
     is_active: bool = True
 
     model_config = ConfigDict(extra="forbid")
@@ -182,7 +195,6 @@ class CvTemplateUpdateRequest(BaseModel):
     name_en: str | None = Field(default=None, min_length=2, max_length=200)
     category: str | None = Field(default=None, min_length=2, max_length=50)
     layout_schema: dict | None = None
-    is_premium: bool | None = None
     is_active: bool | None = None
 
     model_config = ConfigDict(extra="forbid")

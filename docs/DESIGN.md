@@ -1,8 +1,15 @@
 # Design System — VinUni Career Platform
 
-> Phiên bản: 5.0 | Cập nhật: 26/06/2026
+> Phiên bản: 9.0 (Monochrome) | Cập nhật: 2026-07-08
 > Nguồn sự thật duy nhất về visual design, UX patterns, component spec.
 > Màu sắc dựa trên VinUniversity Visual Guideline (Bộ hướng dẫn sử dụng hình ảnh chính thức).
+
+> **CANONICAL (v9 Monochrome):** Hướng thị giác chính thức là v9 "Monochrome" —
+> đen/trắng + thang xám, INK là màu hành động DUY NHẤT, KHÔNG dùng accent xanh
+> navy/blue. Màu chỉ để mang nghĩa: xanh lá = verified/success, đỏ VinUni =
+> destructive/brand, hổ phách = sponsored. Các mục §2–§6 mô tả bảng màu xanh/navy
+> cũ (v5) chỉ giữ để tham chiếu lịch sử và ĐÃ BỊ THAY THẾ — không dùng cho code
+> mới. Xem §1.1.2 cho quy tắc v9.
 
 ---
 
@@ -119,11 +126,12 @@ interaction details. Non-negotiables:
 
 - Job favorite uses a heart icon and sits in the top-right of job cards/details.
   Bookmark is reserved for saved collections/resources.
-- Public/student pages should provide a bottom-right floating action rail or
-  launcher for saved jobs, career opportunity invitations, messages,
-  feedback/help, and VinUni AI assistant when available. Desktop actions need
-  hover/focus labels; AI may use restrained VinUni-blue/teal motion that respects
-  `prefers-reduced-motion`.
+- Public/student pages expose quick actions in the **top header** (owner
+  decision 2026-07-07; the bottom-right floating action rail was removed):
+  saved jobs, notifications, messages, and VinUni AI assistant when available
+  live in the header cluster, while feedback/help lives in the account (avatar)
+  menu. Header actions need hover/focus labels; AI may use restrained ink/monochrome
+  motion that respects `prefers-reduced-motion`. Do not reintroduce a floating rail.
 - Campaign banners are university-reviewed surfaces with creative assets,
   responsive sizes, alt text, focal point, preview, and moderation. Do not ship
   only text-only sponsored cards as the final campaign product.
@@ -151,13 +159,22 @@ late polishing checklist. Before writing code, Claude must define:
 - `globals.css` light/dark/system theme audit.
 
 VinUni colors are **brand anchors**, not a command to use every brand color on
-every screen. A mature palette may add modern neutrals, blue action scales,
-teal/cyan AI or success accents, restrained red CTAs, and amber disclosure/status
-accents when they improve clarity and beauty.
+every screen. Per v9 Monochrome (§1.1.2), the palette is a full gray ramp with
+**ink as the only action color** — no blue/navy accent surfaces. Reserve color
+for meaning only: green for verified/success/AI accents, restrained VinUni red
+for destructive/brand detail, and amber for disclosure/sponsored status, applied
+as small chips/labels when they improve clarity.
 
 ---
 
 ## 2. Color System
+
+> **LEGACY (v5, superseded by v9 Monochrome — do not use for new work).** §2–§6
+> below document the pre-v9 blue/navy/teal palette and colored component/layout
+> recipes. They are kept for VinUni brand-color reference and historical context
+> only. For new work follow §1.1.2 (v9 Monochrome): ink is the only action color,
+> no blue/navy accent surfaces; color only for meaning (green/red/amber).
+> `frontend/src/app/globals.css` is the source of truth for exact hex values.
 
 ### 2.1 VinUni Brand Colors (từ Visual Guideline chính thức)
 
@@ -455,6 +472,12 @@ Breakpoints:
 
 ## 5. Component Library
 
+> **LEGACY (v5, superseded by v9 Monochrome — do not use for new work).** The
+> button/card/badge/nav recipes below use the retired blue/navy/teal palette. For
+> v9, the primary CTA is the ink button (black in light, white in dark), semantic
+> color is chips-only (green/red/amber). Keep these for structure/reference; take
+> exact tokens from `globals.css`.
+
 ### 5.1 Buttons
 
 ```
@@ -664,6 +687,10 @@ mobile bottom navigation. A permanent dark sidebar is not the default student
 desktop pattern unless a specific student tool needs it.
 
 ### 6.1.1 Partner / University Workspace Shell
+
+> **LEGACY (v5, superseded by v9 Monochrome — do not use for new work).** The
+> "dark navy sidebar" (`#1c2540`) and blue active states below are retired. In v9
+> the shell is neutral: gray/ink surfaces, ink active state; no navy fills.
 
 ```
 ┌──────────────────────────────────────────────────────────────────┐

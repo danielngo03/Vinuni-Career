@@ -42,6 +42,7 @@ from app.ai.safety.output_guard import enforce_keyword_scope
 from app.modules.ai_assistant.application import usage_service
 from app.modules.ai_assistant.application.agentic import planner
 from app.modules.ai_assistant.application.agents import build_agent_plan
+from app.modules.ai_assistant.application.messages import assistant_message
 from app.modules.ai_assistant.application.response_formatter import (
     ai_unavailable_reply,
     fast_path_reply,
@@ -134,7 +135,7 @@ def _apply_citation_guard(final_text: str, kb_sources: list[str]) -> str:
     return check.clean_answer
 
 
-def _apply_topical_scope_guard(final_text: str, *, used_tool: bool) -> str:
+def _apply_topical_scope_guard(final_text: str, *, used_tool: bool, locale: str = "vi") -> str:
     """Fallback keyword scope-check on the model's OWN final answer (ai.md item 1).
 
     See ``app.ai.safety.output_guard.enforce_keyword_scope`` for the full
@@ -144,7 +145,7 @@ def _apply_topical_scope_guard(final_text: str, *, used_tool: bool) -> str:
     return enforce_keyword_scope(
         final_text,
         domain_keywords=planner.DOMAIN_KEYWORDS,
-        refusal_text=planner.OUT_OF_SCOPE_REPLY,
+        refusal_text=planner.out_of_scope_reply(locale),
         skip=used_tool,
     )
 
@@ -155,11 +156,14 @@ async def send_message(
     principal: Principal,
     session_id: uuid.UUID,
     text: str,
+    locale: str = "vi",
 ) -> dict:
     """Send a user message and return the assistant's response.
 
     Runs up to _MAX_TOOL_ITERATIONS read-only tool calls transparently.
-    Returns the final assistant message dict.
+    Returns the final assistant message dict. ``locale`` ("vi"/"en") selects the
+    language of deterministic user-facing assistant text; unknown values fall
+    back to "vi".
     """
     if not principal.is_authenticated:
         raise AuthRequiredError()
@@ -174,7 +178,7 @@ async def send_message(
     if not clean:
         reply = quick_reply(
             chat,
-            "Tôi không thể xử lý tin nhắn này. Vui lòng thử lại.",
+            assistant_message("chat.cannot_process", locale),
             session,
         )
         chat.last_message_at = datetime.now(UTC)

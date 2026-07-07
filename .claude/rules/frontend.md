@@ -90,9 +90,12 @@ and browser verification.
 
 ## Data And AI Safety
 
-- Never expose provider names, model names, prompts, token counts, raw
-  confidence, embeddings, storage keys, raw object paths, or internal error
-  codes to students, partners, or guests.
+- Never expose provider names, concrete model ids/model names, prompts, token
+  counts, raw confidence, embeddings, storage keys, raw object paths, or
+  internal error codes to students, partners, guests, ordinary university staff,
+  exports, or notifications. Only superadmin AI operations/settings screens may
+  render real provider/model registry details; all other AI UI is alias/status
+  masked.
 - AI suggestions are advisory unless paired with explicit confirmation.
 - Permission and privacy states must be visible in the UI, but backend service
   checks remain final.

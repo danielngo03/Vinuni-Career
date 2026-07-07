@@ -24,23 +24,23 @@ Guarantees:
 
 from __future__ import annotations
 
+import asyncio
 import uuid
 from datetime import UTC, datetime
 
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from app.ai.cv import job_fit
-from app.ai.cv.llm import generate_note
+from app.ai.cv import job_fit, semantic_scorer, skill_translation
+from app.ai.cv.grounding import sections_to_text as _cv_sections_to_text
 from app.ai.gateway import runtime_config
 from app.ai.gateway.factory import real_provider_active
-from app.ai.prompts.cv_recommend import v1 as recommend_prompt
 from app.core.config import get_settings
-from app.modules.documents.application import _cv_core, _shared
+from app.modules.documents.application import _cv_core, _shared, fit_store
 from app.modules.documents.domain import catalog
-from app.modules.documents.domain.models import CvProfile, CvSection
+from app.modules.documents.domain.models import CvJobFitScore, CvProfile, CvSection
 from app.modules.opportunities.application import job_fit_read
-from app.shared.exceptions import AIUnavailableError, ResourceNotFoundError
+from app.shared.exceptions import ResourceNotFoundError
 from app.shared.permissions import Principal, permission_checker
 
 _RESOURCE = _shared.RESOURCE
@@ -56,14 +56,21 @@ def _as_utc(value: datetime | None) -> datetime | None:
 async def _load_active_cvs(
     session: AsyncSession, *, user_id: uuid.UUID
 ) -> list[CvProfile]:
-    """The caller's active CV library: not soft-deleted, not archived."""
+    """The caller's matchable CV library: committed (``ready``), not soft-deleted.
+
+    Only CVs the student has committed to their library (status ``ready`` —
+    finalized template CVs + upload imports) are analyzed and eligible for
+    CV-JD matching (design spec 2026-07-05). Unlimited scratch drafts and archived
+    CVs are excluded, so job-fit never scores a CV the student cannot actually
+    apply with.
+    """
 
     stmt = (
         select(CvProfile)
         .where(
             CvProfile.user_id == user_id,
             CvProfile.deleted_at.is_(None),
-            CvProfile.status != catalog.CV_ARCHIVED,
+            CvProfile.status == catalog.CV_READY,
         )
         .order_by(CvProfile.last_edited_at.desc(), CvProfile.id)
     )
@@ -100,85 +107,224 @@ async def _build_cv_input(
     )
 
 
-def _explanation_context(job: dict, fit: job_fit.CvFit, *, output_language: str) -> str:
-    """Grounded CONTEXT block for the optional explanation (no internals).
-
-    Structural labels are internal English scaffolding; ``OUTPUT_LANGUAGE`` carries
-    the resolved user-facing language so the answer matches the recommended CV.
-    """
-
-    none = "(không có)" if output_language == "vi" else "(none)"
-    matched = ", ".join(fit.matched_skills) or none
-    gaps = ", ".join(fit.gaps) or none
-    return (
-        f"CONTEXT\nOUTPUT_LANGUAGE: {output_language}\n"
-        f"JOB_TITLE: {job.get('title') or ''}\n"
-        f"MATCHED_SKILLS: {matched}\n"
-        f"MISSING_SKILLS: {gaps}\n"
-    )
-
-
-async def _maybe_explain(
+async def _maybe_semantic_analyze(
     job: dict,
-    results: list[job_fit.CvFit],
-    recommended_id: str | None,
-    *,
-    output_language: str = "vi",
-) -> tuple[str | None, bool]:
-    """Return ``(explanation, available)`` for the recommended CV.
+    best_cv_input: job_fit.CvInput,
+    deterministic_score: int,
+    matched_skills: list[str],
+    gaps: list[str],
+) -> semantic_scorer.SemanticFitResult | None:
+    """LLM semantic analysis for the recommended CV — one call per request.
 
-    Only one model call is made (for the recommended CV) to avoid wasting model
-    calls. When no real provider is active, or the call fails, degrade silently.
-    The user-facing explanation is written in ``output_language`` (resolved from
-    the recommended CV's language) while the prompt instructions stay English.
+    The product ``score`` is ALWAYS the deterministic 6-criteria ``job_fit.py`` score;
+    the LLM never moves it (owner decision 2026-07-06). This call is used ONLY for
+    its natural-language ``summary`` explaining the match in the CV's own language —
+    any ``score`` the model returns on ``SemanticFitResult`` is discarded by the
+    caller. (There is deliberately NO 40/60 blend; do not reintroduce one.)
+    Guarded by the same two gates as the old plain-text explanation:
+      1. ``real_provider_active()`` — env ceiling + key presence + DB toggle.
+      2. ``job_fit_ai_explanation_enabled`` — admin feature flag (ADR-0011 §2).
+
+    Returns ``None`` on gate-off or any provider failure so the caller always
+    has a complete deterministic result to fall back to.
     """
-
-    # Two AND-guards: the real-provider gate (env+key+db) AND the admin feature
-    # flag for job-fit AI explanations (ADR-0011 §2). Either off -> degrade to
-    # ``explanation: null`` with the deterministic score still returned.
     if (
-        not recommended_id
-        or not real_provider_active()
+        not real_provider_active()
         or not runtime_config.current().job_fit_ai_explanation_enabled
     ):
-        return None, False
-    fit = next((r for r in results if r.cv_id == recommended_id), None)
-    if fit is None:
-        return None, False
+        return None
     try:
-        text = await generate_note(
-            task_type=TASK_TYPE,
-            system_prompt=recommend_prompt.build_system_prompt(output_language),
-            user_content=_explanation_context(job, fit, output_language=output_language),
+        cv_text = _cv_sections_to_text(best_cv_input.sections)
+        return await asyncio.wait_for(
+            semantic_scorer.analyze(
+                job=job,
+                cv_text=cv_text,
+                cv_language=best_cv_input.language,
+                deterministic_score=deterministic_score,
+                matched_skills=matched_skills,
+                gaps=gaps,
+            ),
+            timeout=20.0,
         )
-    except AIUnavailableError:
-        return None, False
-    text = (text or "").strip()
-    return (text or None), bool(text)
+    except Exception:  # noqa: BLE001 - semantic is advisory; never crash caller
+        return None
 
 
-def _present_result(fit: job_fit.CvFit, *, explanation: str | None) -> dict:
+def _fit_to_result_payload(fit: job_fit.CvFit, *, signal: str) -> dict:
+    """The deterministic store payload (no explanation) from a fresh compute.
+
+    ``signal`` is the job-level fit signal (``ok`` / ``low_signal``) — identical
+    across a job's rows; it is denormalized onto each row so the fast path can
+    rebuild the response without re-deriving requirements.
+    """
     return {
-        "cv_id": fit.cv_id,
-        "title": fit.title,
+        # The product score is ALWAYS the deterministic 6-criteria score: fully
+        # reproducible, free, and identical on every reload. The LLM never moves
+        # the number — it only contributes the natural-language ``explanation``
+        # (owner decision 2026-07-06). This is what makes the score defensible
+        # and stable across page refreshes.
         "score": fit.score,
         "bands": fit.bands.as_dict(),
         "matched_skills": fit.matched_skills,
         "gaps": fit.gaps,
+        "signal": signal,
         "stale": fit.stale,
         "last_updated_days": fit.last_updated_days,
+        # Persisted for consistent tie-break ranking on the fast path (never
+        # surfaced to the user, never part of the score).
+        "avg_skill_level": fit.avg_skill_level,
+    }
+
+
+def _present_from_row(
+    row: CvJobFitScore, *, title: str, explanation: str | None
+) -> dict:
+    """Build the user-facing per-CV result from a stored fit row."""
+    return {
+        "cv_id": str(row.cv_id),
+        "title": title,
+        "score": row.score,
+        "bands": dict(row.bands or {}),
+        "matched_skills": list(row.matched_skills or []),
+        "gaps": list(row.gaps or []),
+        "stale": row.stale,
+        "last_updated_days": row.last_updated_days,
         "explanation": explanation,
     }
 
 
-async def job_fit_for_job(
+async def _resolve_explanation_for_row(
+    session: AsyncSession,
+    *,
+    job: dict,
+    job_id: uuid.UUID,
+    job_version: int,
+    recommended_row: CvJobFitScore,
+    best_cv: CvProfile,
+    now: datetime,
+) -> tuple[str | None, bool]:
+    """Reuse-or-generate the AI explanation for ONE recommended CV row.
+
+    This is the single, shared explanation block used by BOTH the (opt-in)
+    ``job_fit_for_job(with_explanation=True)`` slow path and the async
+    ``fit_explanation_for_job`` endpoint, so the two call sites run byte-for-byte
+    identical logic (no duplication):
+
+    1. Fresh row-level explanation (same content version + prompt + lang) -> REUSE.
+    2. Cross-CV "learning" cache hit (same JD version + same deterministic
+       evidence) -> stamp onto this row, SKIP the LLM.
+    3. Otherwise, if both AI gates are open, generate once (20s timeout), persist
+       the row explanation, and seed the cross-CV cache.
+
+    Returns ``(explanation, ai_explanation_available)``. On gate-off or any
+    provider failure -> ``(None, False)`` — never raises (user-safe).
+    Callers are responsible for committing the session.
+    """
+    lang = best_cv.language or "vi"
+    prompt_version = semantic_scorer.PROMPT_VERSION
+    matched_skills = list(recommended_row.matched_skills or [])
+    gaps = list(recommended_row.gaps or [])
+
+    if fit_store.has_fresh_explanation(
+        recommended_row, prompt_version=prompt_version, lang=lang
+    ):
+        # Fresh cached explanation for THIS (cv, job) content version on the
+        # row itself — REUSE, no LLM.
+        return recommended_row.explanation, True
+
+    if not (
+        real_provider_active()
+        and runtime_config.current().job_fit_ai_explanation_enabled
+    ):
+        # AI gate off -> deterministic-only, no explanation. Never raise.
+        return None, False
+
+    # CROSS-CV REUSE ("learning" cache): a DIFFERENT CV may have already
+    # generated an equivalent, requirement-centric explanation for the
+    # SAME JD version + SAME deterministic evidence. The reused text is
+    # CV-agnostic by construction (prompt v3 rule 9), so sharing it can
+    # never leak another CV's unique details.
+    fingerprint = fit_store.explanation_fingerprint(
+        job_id=job_id,
+        job_version=job_version,
+        matched_skills=matched_skills,
+        gaps=gaps,
+        prompt_version=prompt_version,
+        lang=lang,
+    )
+    reused = await fit_store.get_reusable_explanation(session, fingerprint=fingerprint)
+    if reused is not None:
+        # Cross-CV cache hit -> stamp it onto this row; SKIP the LLM.
+        await fit_store.save_explanation(
+            session,
+            cv_id=best_cv.id,
+            job_id=job_id,
+            explanation=reused,
+            prompt_version=prompt_version,
+            lang=lang,
+        )
+        return reused, True
+
+    best_input = await _build_cv_input(session, cv=best_cv, now=now)
+    # The deterministic matched/gap lists on the stored row are AUTHORITATIVE
+    # (already synonym-normalized). Thread them into the explanation layer so the
+    # LLM narrative can never contradict them (e.g. suggest "add Kubernetes" when
+    # the CV already writes "k8s").
+    sem = await _maybe_semantic_analyze(
+        job,
+        best_input,
+        recommended_row.score,
+        matched_skills,
+        gaps,
+    )
+    if sem is not None and not sem.ai_unavailable and sem.summary:
+        await fit_store.save_explanation(
+            session,
+            cv_id=best_cv.id,
+            job_id=job_id,
+            explanation=sem.summary,
+            prompt_version=prompt_version,
+            lang=lang,
+        )
+        # Seed the cross-CV cache so the NEXT CV with the same evidence
+        # against this JD version reuses it at 0 tokens.
+        await fit_store.put_reusable_explanation(
+            session,
+            fingerprint=fingerprint,
+            explanation=sem.summary,
+            prompt_version=prompt_version,
+            lang=lang,
+        )
+        return sem.summary, True
+
+    # Provider failure / empty summary -> user-safe degrade.
+    return None, False
+
+
+async def _score_active_cvs(
     session: AsyncSession,
     *,
     principal: Principal,
     job_id: uuid.UUID,
 ) -> dict:
-    """Score the caller's active CVs against ``job_id`` and recommend the best."""
+    """Shared deterministic scoring core for both fit entry points.
 
+    Loads the job + the caller's active CVs, reuses fresh stored rows or
+    recomputes/persists the deterministic 6-criteria score, ranks them, and returns
+    the internal working set. NO LLM is invoked here.
+
+    Returns a dict with keys:
+      - ``job`` / ``job_public`` / ``job_version``
+      - ``cv_by_id`` (``{cv_id_str: CvProfile}``)
+      - ``titles`` (``{cv_id_str: title}``)
+      - ``ordered_rows`` (ranked ``list[CvJobFitScore]``)
+      - ``recommended_row`` / ``recommended_cv_id``
+      - ``signal``
+      - ``now``
+      - ``has_cvs`` (bool)
+
+    Raises ``ResourceNotFoundError`` for hidden/closed/missing jobs.
+    """
     permission_checker.require(principal, _RESOURCE, "read")
     assert principal.user_id is not None
 
@@ -189,44 +335,267 @@ async def job_fit_for_job(
         # Hidden / closed / unpublished / missing -> non-enumerable 404.
         raise ResourceNotFoundError()
 
+    job_public = {"id": job["id"], "title": job["title"], "company": job["company"]}
+    job_version = int(job.get("version") or 1)
     now = datetime.now(tz=UTC)
     cvs = await _load_active_cvs(session, user_id=principal.user_id)
 
     if not cvs:
+        return {
+            "job": job,
+            "job_public": job_public,
+            "job_version": job_version,
+            "cv_by_id": {},
+            "titles": {},
+            "ordered_rows": [],
+            "recommended_row": None,
+            "recommended_cv_id": None,
+            "signal": job_fit.evaluate(job, [], stale_days=_stale_days()).signal,
+            "now": now,
+            "has_cvs": False,
+        }
+
+    cv_by_id = {str(cv.id): cv for cv in cvs}
+    titles = {str(cv.id): cv.title for cv in cvs}
+    stored = await fit_store.load_rows(
+        session,
+        user_id=principal.user_id,
+        job_id=job_id,
+        cv_ids=[cv.id for cv in cvs],
+    )
+
+    # --- FAST PATH: every CV has a fresh stored row -> no deterministic recompute.
+    all_fresh = all(
+        (row := stored.get(cv.id)) is not None
+        and fit_store.is_fresh(row, cv_version=cv.version, job_version=job_version)
+        for cv in cvs
+    )
+
+    rows: dict[uuid.UUID, CvJobFitScore]
+    signal: str
+    if all_fresh:
+        rows = stored
+        # Signal is identical across a job's rows (JD-derived); take any.
+        signal = next(iter(rows.values())).signal
+    else:
+        # --- SLOW PATH: recompute all (cheap, deterministic) + upsert each.
+        cv_inputs = [await _build_cv_input(session, cv=cv, now=now) for cv in cvs]
+        # Cross-lingual (VN↔EN) matching: translate every JD/CV skill term to
+        # canonical English and append the English forms before scoring, so the
+        # lexical tier matches "supply chain management" against "quản lý chuỗi
+        # cung ứng". Gated + best-effort: offline / error -> inputs unchanged ->
+        # pure lexical. Runs only here on the compute path; the store persists the
+        # resulting score, so cache hits above never re-translate. The upsert stays
+        # keyed on the ORIGINAL cv/job versions (augmentation doesn't change them).
+        aug_job, aug_cv_inputs, aug_complete = await skill_translation.english_augment(
+            job, cv_inputs
+        )
+        outcome = job_fit.evaluate(
+            aug_job, aug_cv_inputs, stale_days=_stale_days()
+        )
+        signal = outcome.signal
+        rows = {}
+        for fit in outcome.results:
+            cv = cv_by_id[fit.cv_id]
+            payload = _fit_to_result_payload(fit, signal=outcome.signal)
+            # When AI was on but a translation failed, persist the (degraded lexical)
+            # score PROVISIONALLY so the next read retries once AI recovers, rather
+            # than caching the degraded score as final.
+            row = await fit_store.upsert_result(
+                session,
+                user_id=principal.user_id,
+                cv_id=cv.id,
+                job_id=job_id,
+                result=payload,
+                cv_version=cv.version,
+                job_version=job_version,
+                provisional=not aug_complete,
+            )
+            rows[cv.id] = row
+
+    # Rank exactly like the deterministic ``job_fit.evaluate`` did: highest score
+    # first, tie-broken by the most recently updated CV (lowest ``last_updated_days``)
+    # then cv_id for stability. ``results[0]`` IS the recommended CV, so both the
+    # ordered list and ``recommended_cv_id`` stay consistent on the fast path.
+    ordered_rows = sorted(
+        rows.values(),
+        key=lambda r: (-r.score, -r.avg_skill_level, r.last_updated_days, str(r.cv_id)),
+    )
+    recommended_cv_id: str | None = None
+    recommended_row: CvJobFitScore | None = None
+    if ordered_rows:
+        recommended_row = ordered_rows[0]
+        recommended_cv_id = str(recommended_row.cv_id)
+
+    return {
+        "job": job,
+        "job_public": job_public,
+        "job_version": job_version,
+        "cv_by_id": cv_by_id,
+        "titles": titles,
+        "ordered_rows": ordered_rows,
+        "recommended_row": recommended_row,
+        "recommended_cv_id": recommended_cv_id,
+        "signal": signal,
+        "now": now,
+        "has_cvs": True,
+    }
+
+
+async def job_fit_for_job(
+    session: AsyncSession,
+    *,
+    principal: Principal,
+    job_id: uuid.UUID,
+    with_explanation: bool = False,
+) -> dict:
+    """Score the caller's active CVs against ``job_id`` and recommend the best.
+
+    Scoring is two-tier, but the two tiers have strictly separate jobs:
+    - Deterministic (always): the 6-criteria HR score from ``app.ai.cv.job_fit`` IS
+      the product score. Same CV + same JD -> identical number, every reload.
+    - Semantic (opt-in via ``with_explanation``, recommended CV only): the LLM
+      produces ONLY the natural-language ``explanation`` for the recommended CV.
+      It never moves the number (owner decision 2026-07-06). Falls back to
+      ``explanation: null`` when the provider is unavailable or the gate is off.
+
+    ``with_explanation`` defaults to ``False`` so the fast, deterministic-only
+    result returns without EVER waiting on the LLM (the 20-30s job-detail stall
+    fix): the AI explanation is loaded separately by ``fit_explanation_for_job``
+    (``GET /jobs/{job_id}/fit-explanation``). When ``True`` this keeps the legacy
+    inline behavior (compute/reuse the explanation for the recommended CV).
+
+    Results are PERSISTED in ``cv_job_fit_scores``, stamped with the CV/JD content
+    versions. A reload with unchanged versions reuses the stored score AND (when
+    ``with_explanation``) the stored explanation, so the deterministic recompute is
+    skipped and the LLM is NOT re-invoked (owner requirement 2026-07-06). The
+    score/explanation are recomputed only when the CV or JD content version changes.
+    """
+
+    core = await _score_active_cvs(session, principal=principal, job_id=job_id)
+
+    if not core["has_cvs"]:
         # Student has no active CVs: 200 with empty results (UI prompts "create a
         # CV"); never 404.
         return {
-            "job": {"id": job["id"], "title": job["title"], "company": job["company"]},
+            "job": core["job_public"],
             "recommended_cv_id": None,
             "results": [],
-            "signal": job_fit.evaluate(job, [], stale_days=_stale_days()).signal,
+            "signal": core["signal"],
             "ai_explanation_available": False,
         }
 
-    cv_inputs = [await _build_cv_input(session, cv=cv, now=now) for cv in cvs]
-    outcome = job_fit.evaluate(job, cv_inputs, stale_days=_stale_days())
+    ordered_rows: list[CvJobFitScore] = core["ordered_rows"]
+    recommended_cv_id: str | None = core["recommended_cv_id"]
+    recommended_row: CvJobFitScore | None = core["recommended_row"]
+    titles: dict[str, str] = core["titles"]
 
-    # The explanation follows the recommended CV's own (detected/declared) language.
-    output_language = next(
-        (ci.language for ci in cv_inputs if ci.cv_id == outcome.recommended_cv_id),
-        "vi",
-    )
-    explanation, ai_available = await _maybe_explain(
-        job, outcome.results, outcome.recommended_cv_id, output_language=output_language
-    )
+    # --- EXPLANATION: recommended CV only, opt-in, gated, reuse-or-generate once.
+    # ``with_explanation=False`` (default) skips the LLM entirely so the caller
+    # returns fast (deterministic-only); the async ``fit_explanation_for_job``
+    # endpoint fills it in separately.
+    explanation: str | None = None
+    ai_available = False
+    if (
+        with_explanation
+        and recommended_row is not None
+        and recommended_cv_id is not None
+    ):
+        explanation, ai_available = await _resolve_explanation_for_row(
+            session,
+            job=core["job"],
+            job_id=job_id,
+            job_version=core["job_version"],
+            recommended_row=recommended_row,
+            best_cv=core["cv_by_id"][recommended_cv_id],
+            now=core["now"],
+        )
+
+    # Persist upserts + explanation writes (read endpoint that now caches rows).
+    await session.commit()
 
     results = [
-        _present_result(
-            fit,
-            explanation=explanation if fit.cv_id == outcome.recommended_cv_id else None,
+        _present_from_row(
+            row,
+            title=titles.get(str(row.cv_id), ""),
+            explanation=explanation if str(row.cv_id) == recommended_cv_id else None,
         )
-        for fit in outcome.results
+        for row in ordered_rows
     ]
     return {
-        "job": {"id": job["id"], "title": job["title"], "company": job["company"]},
-        "recommended_cv_id": outcome.recommended_cv_id,
+        "job": core["job_public"],
+        "recommended_cv_id": recommended_cv_id,
         "results": results,
-        "signal": outcome.signal,
+        "signal": core["signal"],
+        "ai_explanation_available": ai_available,
+    }
+
+
+async def fit_explanation_for_job(
+    session: AsyncSession,
+    *,
+    principal: Principal,
+    job_id: uuid.UUID,
+    cv_id: uuid.UUID | None = None,
+) -> dict:
+    """Async AI explanation for the recommended (or a chosen) CV against a job.
+
+    This is the SLOW half that ``job_fit_for_job(with_explanation=False)`` no
+    longer does inline: the deterministic score/bands return instantly from the
+    student-intelligence endpoint, and the frontend fires THIS separately to fill
+    in the AI narrative once it is ready.
+
+    The explanation is produced by the exact same shared block
+    (``_resolve_explanation_for_row``) as the legacy inline path — fresh-row
+    reuse, cross-CV learning cache, the two AI gates, and the 20s timeout — so
+    there is no behavioral drift between the two entry points.
+
+    ``cv_id`` (optional): explain THAT CV when it belongs to the caller and is
+    scored; otherwise fall back to the recommended CV (mirrors
+    ``student_intelligence`` selected-CV semantics — an unknown/foreign CV never
+    404s here, it degrades to the recommendation). Hidden/closed/missing jobs
+    still 404 (via ``_score_active_cvs``); no active CVs -> null explanation.
+
+    Returns ``{"cv_id": str|None, "explanation": str|None,
+    "ai_explanation_available": bool}``. Never raises for AI-off/failure.
+    """
+    core = await _score_active_cvs(session, principal=principal, job_id=job_id)
+
+    ordered_rows: list[CvJobFitScore] = core["ordered_rows"]
+    if not core["has_cvs"] or not ordered_rows:
+        await session.commit()
+        return {"cv_id": None, "explanation": None, "ai_explanation_available": False}
+
+    # Resolve the target row: the requested cv_id when it is one of the caller's
+    # scored CVs, else the recommended CV.
+    by_cv_id = {str(r.cv_id): r for r in ordered_rows}
+    target_cv_id: str | None = None
+    if cv_id is not None and str(cv_id) in by_cv_id:
+        target_cv_id = str(cv_id)
+    else:
+        target_cv_id = core["recommended_cv_id"]
+
+    target_row = by_cv_id.get(target_cv_id) if target_cv_id else None
+    if target_row is None or target_cv_id is None:
+        await session.commit()
+        return {"cv_id": None, "explanation": None, "ai_explanation_available": False}
+
+    explanation, ai_available = await _resolve_explanation_for_row(
+        session,
+        job=core["job"],
+        job_id=job_id,
+        job_version=core["job_version"],
+        recommended_row=target_row,
+        best_cv=core["cv_by_id"][target_cv_id],
+        now=core["now"],
+    )
+
+    # Persist any explanation writes (row explanation + cross-CV cache seed).
+    await session.commit()
+
+    return {
+        "cv_id": target_cv_id,
+        "explanation": explanation,
         "ai_explanation_available": ai_available,
     }
 

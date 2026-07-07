@@ -114,8 +114,9 @@ class _FailingAdapter:
 
 async def test_tick_retries_then_dead_letters(db_session, monkeypatch) -> None:
     # Inject a stub adapter that always raises, via the default construction path
-    # inside process_outbox (the scheduler calls it without an explicit adapter).
-    monkeypatch.setattr(dispatch_service, "ConsoleEmailAdapter", _FailingAdapter)
+    # inside process_outbox (the scheduler calls it without an explicit adapter,
+    # so it builds one through ``build_email_adapter``).
+    monkeypatch.setattr(dispatch_service, "build_email_adapter", lambda: _FailingAdapter())
 
     await _seed_template(db_session, key="application.status_changed")
     await enqueue_notification(

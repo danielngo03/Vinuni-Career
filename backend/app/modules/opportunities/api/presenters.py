@@ -4,9 +4,7 @@ Two detail views exist:
 
 - :func:`public_job_detail` / :func:`public_job_summary` — what guests and
   non-owners receive. **Never** include moderation notes, moderation status, the
-  poster's id, or other internal fields. The detail view does carry the job's
-  screening *question definitions* (prompt/type/options/required) so applicants
-  can answer them — these are not owner-only and contain no applicant answers.
+  poster's id, or other internal fields.
 - :func:`owner_job_detail` / :func:`owner_job_summary` — what the owning org (and
   university moderators) receive: the full record including lifecycle/moderation
   metadata.
@@ -20,7 +18,7 @@ from __future__ import annotations
 from datetime import UTC, datetime
 
 from app.modules.opportunities.domain import lifecycle
-from app.modules.opportunities.domain.models import Job, ScreeningQuestion
+from app.modules.opportunities.domain.models import Job
 from app.modules.organization.application.org_reporting_facade import (
     OrgSummary,
     company_block,
@@ -58,17 +56,6 @@ def _build_locations(job: Job) -> list[dict]:
         "city": job.location_city,
         "country": job.location_country,
     }]
-
-
-def screening_question(q: ScreeningQuestion) -> dict:
-    return {
-        "id": str(q.id),
-        "question": q.question,
-        "q_type": q.q_type,
-        "options": q.options,
-        "is_required": q.is_required,
-        "sort_order": q.sort_order,
-    }
 
 
 def _salary(job: Job, *, is_owner: bool = False) -> dict | None:
@@ -332,13 +319,12 @@ def _common(job: Job, *, locale: str, is_owner: bool = False) -> dict:
         # BCP-47 language code of the original JD content.
         # Clients use this to decide whether to offer a translation CTA.
         "language_code": getattr(job, "language_code", None) or "en",
+        # CV language requirement set by the partner ("any" | "en" | "vi").
+        "cv_language_required": getattr(job, "cv_language_required", "any") or "any",
     }
 
 
-def _detail_body(
-    job: Job, *, screening: list[ScreeningQuestion] | None, locale: str,
-    is_owner: bool = False,
-) -> dict:
+def _detail_body(job: Job, *, locale: str, is_owner: bool = False) -> dict:
     """Detail fields shared by public + owner detail (no embedded company)."""
 
     data = _common(job, locale=locale, is_owner=is_owner)
@@ -359,9 +345,6 @@ def _detail_body(
             "candidate_requirements": job.candidate_requirements or {},
             "headcount": job.headcount,
             "view_count": job.view_count,
-            # Question definitions only — applicants need these to apply. No
-            # owner-only fields and no applicant answers are exposed here.
-            "screening_questions": [screening_question(q) for q in (screening or [])],
         }
     )
     return data
@@ -384,12 +367,11 @@ def public_job_summary(
 def public_job_detail(
     job: Job,
     *,
-    screening: list[ScreeningQuestion] | None = None,
     company: OrgSummary | None = None,
     locale: str = "vi",
     is_saved: bool = False,
 ) -> dict:
-    data = _detail_body(job, screening=screening, locale=locale)
+    data = _detail_body(job, locale=locale)
     data["company"] = company_block(company)
     data["is_saved"] = is_saved
     return data
@@ -454,10 +436,8 @@ def owner_job_summary(job: Job, *, locale: str = "vi") -> dict:
     return data
 
 
-def owner_job_detail(
-    job: Job, *, screening: list[ScreeningQuestion], locale: str = "vi"
-) -> dict:
+def owner_job_detail(job: Job, *, locale: str = "vi") -> dict:
     # Owner projection is intentionally company-block-free (unchanged contract).
-    data = _detail_body(job, screening=screening, locale=locale, is_owner=True)
+    data = _detail_body(job, locale=locale, is_owner=True)
     data.update(_owner_fields(job, locale=locale))
     return data

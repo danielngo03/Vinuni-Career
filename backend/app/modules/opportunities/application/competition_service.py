@@ -409,7 +409,10 @@ async def _source_mix(
     buckets = {"organic": 0, "recommendation": 0, "sponsored": 0, "curated": 0}
     for surface, n in rows:
         n = int(n)
-        if surface in SPONSORED_SURFACES:
+        if surface in {
+            "homepage_sponsored", "search_sponsored", "right_rail_banner",
+            "email_sponsored", "mega_sponsored",
+        }:
             buckets["sponsored"] += n
         elif surface in {
             "homepage_recommended", "search_recommended",
@@ -444,6 +447,77 @@ async def _applied_by_student(
     return result.first() is not None
 
 
+# --------------------------------------------------------------------------- #
+# Localized guidance strings (vi-first; frontend renders these raw).           #
+# --------------------------------------------------------------------------- #
+
+_DEFAULT_LOCALE = "vi"
+
+_GUIDANCE_STRINGS: dict[str, dict[str, str]] = {
+    "vi": {
+        "already_applied": "Bạn đã ứng tuyển công việc này.",
+        "low_signal": (
+            "Chưa đủ hoạt động để đánh giá chính xác mức độ cạnh tranh — ứng tuyển "
+            "sớm vẫn có lợi."
+        ),
+        "strengthen_cv": (
+            "Củng cố bằng chứng trong CV cho vai trò này trước khi ứng tuyển."
+        ),
+        "strong_fit_high_comp": (
+            "Mức độ cạnh tranh có vẻ cao, nhưng CV của bạn rất phù hợp — hãy ứng "
+            "tuyển kèm thư xin việc được điều chỉnh riêng."
+        ),
+        "deadline_final_days": (
+            "Hạn nộp hồ sơ sẽ đóng trong vài ngày tới."
+        ),
+        "deadline_closing_soon": (
+            "Hạn nộp hồ sơ đang đến gần — hãy ứng tuyển sớm."
+        ),
+        "apply_when_ready": (
+            "Hãy ứng tuyển khi CV của bạn phản ánh tốt nhất yêu cầu của vai trò này."
+        ),
+    },
+    "en": {
+        "already_applied": "You have already applied to this job.",
+        "low_signal": (
+            "Not enough activity yet to gauge competition precisely — "
+            "applying early still helps."
+        ),
+        "strengthen_cv": (
+            "Strengthen your CV evidence for this role before applying."
+        ),
+        "strong_fit_high_comp": (
+            "Competition looks high, but your CV fit is strong — apply with a "
+            "tailored cover letter."
+        ),
+        "deadline_final_days": (
+            "The application deadline is closing in the next few days."
+        ),
+        "deadline_closing_soon": (
+            "The application deadline is approaching — apply soon."
+        ),
+        "apply_when_ready": (
+            "Apply when your CV best reflects this role's requirements."
+        ),
+    },
+}
+
+
+def _g(locale: str, key: str) -> str:
+    """Return a localized guidance string; fall back to ``vi``."""
+
+    table = _GUIDANCE_STRINGS.get(locale, _GUIDANCE_STRINGS[_DEFAULT_LOCALE])
+    return table.get(key) or _GUIDANCE_STRINGS[_DEFAULT_LOCALE][key]
+
+
+def _deadline_guidance(locale: str, deadline_freshness: str) -> str | None:
+    if deadline_freshness == "final_days":
+        return _g(locale, "deadline_final_days")
+    if deadline_freshness == "closing_soon":
+        return _g(locale, "deadline_closing_soon")
+    return None
+
+
 def _guidance(
     *,
     signal: str,
@@ -451,37 +525,42 @@ def _guidance(
     fit_bucket: str,
     deadline_freshness: str,
     already_applied: bool,
+    locale: str = _DEFAULT_LOCALE,
 ) -> list[str]:
     """Deterministic, truthful guidance sentences (no AI narrative dependency).
 
     Templated from real buckets only — never a hiring-probability claim.
+
+    An already-applied student still receives deadline-freshness guidance and a
+    weak-CV nudge where relevant, so the "already applied" line does not swallow
+    other useful signals near the deadline (audit #6).
     """
 
-    if already_applied:
-        return ["You have already applied to this job."]
-
     lines: list[str] = []
+    weak_cv = fit_bucket in ("needs_improvement", "developing")
+    deadline_line = _deadline_guidance(locale, deadline_freshness)
+
+    if already_applied:
+        lines.append(_g(locale, "already_applied"))
+        if deadline_line is not None:
+            lines.append(deadline_line)
+        if weak_cv:
+            lines.append(_g(locale, "strengthen_cv"))
+        return lines
+
     if signal == "low_signal":
-        lines.append(
-            "Not enough activity yet to gauge competition precisely — "
-            "applying early still helps."
-        )
-    if fit_bucket in ("needs_improvement", "developing"):
-        lines.append("Strengthen your CV evidence for this role before applying.")
+        lines.append(_g(locale, "low_signal"))
+    if weak_cv:
+        lines.append(_g(locale, "strengthen_cv"))
     elif fit_bucket in ("competitive", "highly_competitive") and level in (
         "high", "very_high",
     ):
-        lines.append(
-            "Competition looks high, but your CV fit is strong — apply with a "
-            "tailored cover letter."
-        )
-    if deadline_freshness == "final_days":
-        lines.append("The application deadline is closing in the next few days.")
-    elif deadline_freshness == "closing_soon":
-        lines.append("The application deadline is approaching — apply soon.")
+        lines.append(_g(locale, "strong_fit_high_comp"))
+    if deadline_line is not None:
+        lines.append(deadline_line)
 
     if not lines:
-        lines.append("Apply when your CV best reflects this role's requirements.")
+        lines.append(_g(locale, "apply_when_ready"))
     return lines
 
 
@@ -491,6 +570,7 @@ async def student_competition_intelligence(
     principal: Principal,
     job_id: uuid.UUID,
     student_fit_score: int | None,
+    locale: str = _DEFAULT_LOCALE,
 ) -> dict:
     """Bucketed, privacy-safe competition intelligence for one logged-in student.
 
@@ -540,6 +620,7 @@ async def student_competition_intelligence(
         fit_bucket=fit_bucket,
         deadline_freshness=deadline_freshness,
         already_applied=already_applied,
+        locale=locale,
     )
 
     return {

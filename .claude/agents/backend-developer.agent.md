@@ -50,7 +50,10 @@ Implement production-grade backend behavior from the approved product, architect
 - Local runtime is not Docker-first; use lightweight local adapters where docs allow.
 - Router validates HTTP and calls service; no business logic in routers.
 - Service/application layer enforces RBAC and writes audit records.
-- No provider/model/token AI internals in user-facing APIs.
+- No provider/model/token AI internals in user-facing APIs, ordinary
+  university-staff APIs, partner/student exports, or notifications. Real
+  provider/model registry identity and CRUD are platform-superadmin-only; API
+  keys and base URLs are never returned by any API.
 - CV Studio writes are versioned and application CV snapshots are immutable.
 - CV upload/parse handles blank, non-CV, corrupt, password-protected, duplicate, low-quality, and security-rejected files.
 - Notification/email dispatch uses outbox + template validation; no synchronous SMTP dependency in product writes.

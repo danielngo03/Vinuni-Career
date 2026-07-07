@@ -2,6 +2,13 @@
 
 Status: Approved by product owner (user), 2026-07-02. Ready for implementation planning.
 
+> **Superseded note — 2026-07-08:** the provider/model visibility section in this
+> historical spec is superseded by `docs/API_CONTRACTS.md` ADR-0011.2 and
+> `docs/PRODUCT_OPERATING_MODEL.md`. Raw provider/model identity and provider/model
+> CRUD are platform-superadmin-only. Ordinary university staff may see only masked
+> alias/status/budget controls, even if an old plan mentions
+> `ai_settings:view_provider_identity`.
+
 ## 1. Problem
 
 University admins currently configure two things through forms + on/off toggles:
@@ -49,25 +56,32 @@ Frontend: shared `FlowCanvas` component (React Flow wrapper: rendering, drag/dro
 
 Module boundary: `ai_settings` owns `ai_routing_graphs`/activations/compile-step/circuit-breaker-read-endpoint. `workflow` owns `workflow_flows`/`workflow_executions`/`execute_flow`, unchanged. Neither reads the other's tables directly — `workflow`'s future AI Process node references an alias string only.
 
-### 2c. Provider identity visibility (ADR-0011.1 — already written into docs)
+### 2c. Provider identity visibility (ADR-0011.2 — supersedes ADR-0011.1)
 
-Default: any `ai_settings:read` holder sees only curated, ai-engineer-maintained `vendor_label`/`model_family_label` per alias (e.g. "OpenAI" / "GPT-4 class") — never the literal SDK model string, base URL, or API key.
+Default: any non-superadmin, including ordinary university staff with `ai_settings:read`
+or `ai_settings:manage`, sees only masked alias/status/budget controls and derived
+health. They never receive literal provider names, concrete model ids, base URLs, API
+keys, token counts, prompt text, or response text.
 
-Exception (product owner's explicit decision): a **separate, grantable RBAC permission** `ai_settings:view_provider_identity` (distinct from `ai_settings:manage`/`read`, granted via the existing `organization` RBAC system — not a hardcoded role) allows seeing the literal `provider_internal`/model id on the routing canvas only. Raw API key and base URL are never returned via any API regardless of permission. This exception is scoped exclusively to the internal `ai_settings` routing-canvas endpoint; it must never appear on any partner/employer/student-facing surface, dashboard, export, or log line. Viewing raw identity is audited (`audit_logs` action `ai_settings.provider_identity_viewed`). Already written into: `docs/API_CONTRACTS.md` (ADR-0011.1), `docs/AI_PRODUCT_SPEC.md` §5.5, `docs/SECURITY_PRIVACY.md`, `docs/BUSINESS_LOGIC.md` §17.1, `docs/ARCHITECTURE.md`.
+Exception: platform superadmins only may view and manage raw provider/model identity,
+pricing rows, health probes, and fallback/routing internals. Every raw-identity read
+or provider/model registry write is audited. The old grant-only
+`ai_settings:view_provider_identity` design is superseded and must not be implemented
+as an org-scoped university permission.
 
 ## 3. Acceptance criteria (per docs/SYSTEM_ACCEPTANCE_BAR.md)
 
 **Workflow Builder (A+B):** a university admin can build a real student-verification flow and a real partner-approval flow — without engineering help — producing correct outcomes (auto-approve / department queue / named-staff review / email) for real trigger events. DAG/cycle enforcement, idempotent triggers, versioning (DRAFT never mutates ACTIVE), migrations up/down. Per-node audit trail with no PII/raw-payload leakage beyond `SECURITY_PRIVACY.md` limits. Canvas responsive at 375/768/1024/1440 with loading/empty/error/permission/conflict states; dry-run visually distinct from live; failed-execution inspector shows a real recoverable next action. RBAC enforced service-layer, cross-tenant isolation tested, activation requires confirmation, every write audited.
 
-**AI Routing Canvas (C + 2b):** canvas correctly reflects live `ai_task_model_configs`/circuit-breaker state with zero mutation path bypassing the existing `ai_settings` audit flow. Curated labels shown by default; raw identity only behind `ai_settings:view_provider_identity`, audited on view. No provider/model/token/latency/base-URL/API-key leakage to any non-permitted role or any student/partner-facing surface.
+**AI Routing Canvas (C + 2b):** canvas correctly reflects live `ai_task_model_configs`/circuit-breaker state with zero mutation path bypassing the existing `ai_settings` audit flow. Raw identity is platform-superadmin-only and audited on view. No provider/model/token/latency/base-URL/API-key leakage to students, partners, guests, ordinary university staff, exports, notifications, or logs visible outside superadmin AI Ops.
 
 ## 4. Contract/doc changes already made
 
-- `docs/API_CONTRACTS.md` — ADR-0011.1 (new permission, new response shape, audit requirement).
+- `docs/API_CONTRACTS.md` — ADR-0011.2 (superadmin-only provider/model identity, response shape, audit requirement).
 - `docs/AI_PRODUCT_SPEC.md` — v2.2, §1 footnote, new §5.5.
-- `docs/SECURITY_PRIVACY.md` — cross-reference to ADR-0011.1.
+- `docs/SECURITY_PRIVACY.md` — cross-reference to ADR-0011.2.
 - `docs/BUSINESS_LOGIC.md` §17.1 — new audit action line.
-- `docs/ARCHITECTURE.md` — clarified V1 `/admin/ai-settings` shape is unaffected; new routing-canvas endpoint is the only surface where ADR-0011.1 applies.
+- `docs/ARCHITECTURE.md` — clarified V1 `/admin/ai-settings` shape is masked for non-superadmins; routing-canvas raw identity is superadmin-only.
 
 ## 5. Still to do before/during implementation
 

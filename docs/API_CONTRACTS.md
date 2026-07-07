@@ -12,7 +12,10 @@
   and failure states before exposing a user-visible endpoint.
 - Vietnamese primary user-facing labels, English secondary through i18n.
 - End users receive friendly statuses, not raw enum codes.
-- API schemas must not expose AI provider/model/token internals.
+- API schemas must not expose AI provider/model/token internals except
+  superadmin-only AI operations/settings registry APIs. Ordinary university
+  staff, partners, students, guests, exports, and notifications receive masked
+  alias/status/budget fields only.
 - Public API paths use plural nouns: `/organizations`, `/jobs`, `/events`, `/applications`.
 
 ## Auth And Identity
@@ -1063,7 +1066,8 @@ sources, and tier quota state.
       "title": "Backend Internship CV",
       "source_type": "builder",
       "status": "ready",
-      "is_primary": true,
+      "in_library": true,
+      "finalized_at": "iso-datetime",
       "language": "vi",
       "template_id": "uuid",
       "last_edited_at": "iso-datetime"
@@ -1082,12 +1086,44 @@ sources, and tier quota state.
 Default active CV limit is 5 per student tier unless overridden. `quota_source`
 is `"student_tier"` for the platform default and **`"subscription"`** when an
 active paid plan overrides the cap (ADR-0010: `student_pro` → `cv_active_quota`
-10, resolved through `billing.limit_facade`). Active count includes usable
-uploaded CV originals and builder CVs that can be selected for applications.
-Archived CVs and immutable application snapshots do not count. Creation endpoints
-must enforce this server-side: over-limit creation returns `409 QUOTA_EXCEEDED`
-with actions such as `archive_existing`, `delete_draft`, `request_more_quota`, or
-`upgrade`.
+10, resolved through `billing.limit_facade`).
+
+**CV library lifecycle (design spec 2026-07-05, owner-approved).** A CV has two
+tiers via `status`:
+
+- `draft` — an unlimited scratch CV. The student designs/edits freely on the
+  canvas; it does **not** count against the 5-cap and is **not** usable for apply
+  or job-fit. Creating (`POST /cvs`, every `creation_mode`) and duplicating
+  (`POST /cvs/{id}/duplicate`) produce drafts and are **not** quota-gated.
+- `ready` — a committed **library** CV (analyzed, matching-ready). It counts
+  against the 5-cap and is usable for apply + job-fit. Each summary/detail carries
+  `in_library` (bool) and `finalized_at` (iso-datetime | null).
+
+A CV enters the library one of two ways: the student finalizes a template draft
+(`POST /cvs/{id}/finalize`), or an uploaded CV is imported (already extracted, so
+it lands `ready`). Archived CVs, drafts, and immutable application snapshots do
+not count; `active_cv_used` = the owner's `ready` (non-deleted) CVs. Archiving or
+deleting a `ready` CV frees a slot immediately. The 5-cap is enforced server-side
+only where a CV is committed — **finalize** and **upload import** — returning
+`409 QUOTA_EXCEEDED` with actions such as `archive_existing`, `delete_draft`,
+`request_more_quota`, or `upgrade`.
+
+### Finalize CV (commit a draft into the library)
+
+`POST /api/v1/cvs/{cv_id}/finalize` (owner only; cross-owner → `404`). No request
+body.
+
+Promotes a `draft` CV to `ready` (`status='ready'`, `finalized_at=now()`), writes
+an immutable `cv_versions` snapshot (`change_source='finalize'`) + a `cv.finalized`
+audit row, and returns the full CV detail (same shape as `GET /cvs/{cv_id}`).
+
+- **Idempotent:** an already-`ready` CV returns its current detail unchanged (no
+  new version, no re-count, no duplicate audit).
+- **Empty CV → `422 VALIDATION_FAILED`** with `details.reason = "cv_empty"` when
+  the CV has no header `name` and no visible section carrying real content
+  (`entries` / `items` / `text`). Nothing is mutated.
+- **Library full → `409 QUOTA_EXCEEDED`** with the `cv_quota_reached` payload +
+  recovery `actions` below. Nothing is mutated.
 
 ### CV Version History
 
@@ -1167,7 +1203,8 @@ user's input, so this path works for a brand-new student with zero structured
 profile rows. `source.raw_notes` is required for this mode; an empty/whitespace
 value returns `422 VALIDATION_FAILED` with `details.reason = "source_required"`
 and `details.field = "raw_notes"`. The resulting CV has `source_type =
-"notes_import"` and still counts against the active-CV library quota.
+"notes_import"` and is created as a `draft` (it counts against the 5-cap only once
+the student finalizes it into the library — see *CV library lifecycle* above).
 
 `confirmed_facts_import` may use only student-confirmed facts/preferences. It
 must not force the student to complete a long profile form before CV creation.
@@ -1176,15 +1213,19 @@ confirmed facts only and migrate naming in the next touched slice.
 
 #### CV active-CV quota (`QUOTA_EXCEEDED`)
 
-Both `POST /api/v1/cvs` (every `creation_mode`, including `ai_assisted_draft`)
-and `POST /api/v1/cvs/{cv_id}/duplicate` enforce the active-CV library limit
-**server-side** before insert. "Active" = not soft-deleted and not archived;
-archived CVs and immutable application snapshots do not count, so archiving frees
-a slot. Default limit is 5 per student tier (`STUDENT_ACTIVE_CV_QUOTA`,
-tier-overridable). An idempotent duplicate replay returns the existing copy and
-is never quota-blocked.
+The active-CV library limit is enforced **server-side** where a CV is committed to
+the library — `POST /api/v1/cvs/{cv_id}/finalize` (template drafts) and CV upload
+import — **not** on `POST /api/v1/cvs` or `POST /api/v1/cvs/{cv_id}/duplicate`
+(those produce unlimited scratch drafts). "In library" = `status='ready'` and not
+soft-deleted; drafts, archived CVs, and immutable application snapshots do not
+count, so archiving/deleting a `ready` CV frees a slot. To save extraction tokens,
+CV upload import is also quota pre-checked at **upload start** so a full library
+rejects the upload before the extraction cascade runs. Default limit is 5 per
+student tier (`STUDENT_ACTIVE_CV_QUOTA`, tier-overridable). An idempotent duplicate
+replay returns the existing copy and is never quota-blocked; an idempotent
+finalize of an already-`ready` CV is never re-counted.
 
-At/over the limit, creation returns `409 QUOTA_EXCEEDED`:
+At/over the limit, finalize / upload import returns `409 QUOTA_EXCEEDED`:
 
 ```json
 {
@@ -1268,14 +1309,25 @@ Responses return friendly messages and next actions only. Internal parser errors
 
 ### CV Ingestion (preview-first, adapter cascade)
 
+> **UPDATE 2026-07-05 (owner decision — supersedes the review-screen parts of this
+> contract):** The uploaded-CV flow is **upload → confirm file → name the CV →
+> done**. Backend extraction is authoritative and creates the versioned draft
+> directly; there is NO manual field-review step. The `needs_review` status, the
+> "Check this" review screen, and the import `overrides[]` corrections described
+> below are historical — the student no longer reviews or edits extracted fields.
+> The cascade also gains a cheap **vision-LLM** tier that MAY receive DOWNSCALED
+> document images for images and styled/scanned PDFs; the text-LLM structuring
+> tier still receives text only. Non-CV/blank/corrupt uploads are rejected, never
+> fabricated.
+
 The explicit ingestion API (`docs/CV_INGESTION_EXTRACTION_SPEC.md` §3/§5) runs
 alongside the legacy `POST /api/v1/cvs/upload` (kept for back-compat). It is
 preview-first: store the original, ingest asynchronously through an
-availability-gated adapter cascade (native text → layout → OCR → classifier →
-deterministic structuring → optional LLM-on-text), then review and import. All
-endpoints are owner-scoped; cross-owner access → `404`. Engine/model/provider
-names, prompts, token counts, raw confidence, storage keys, text length, and stack
-traces never appear in any response.
+availability-gated adapter cascade (native text → layout → OCR → vision-LLM →
+classifier → deterministic structuring → optional text-LLM structuring), then name
+and import. All endpoints are owner-scoped; cross-owner access → `404`.
+Engine/model/provider names, prompts, token counts, raw confidence, storage keys,
+text length, and stack traces never appear in any response.
 
 #### Upload original (preview metadata)
 
@@ -2105,17 +2157,24 @@ the plan at request.
 
 ## Admin AI Settings (V1 — IMPLEMENTED, ADR-0011)
 
-Admin governance of AI provider/model selection, feature flags, per-day budget, and
-the kill switch. Module `backend/app/modules/ai_settings/`; entity `ai_settings` — a
+Admin governance of masked AI settings, feature flags, per-day budget, and the
+kill switch. Real provider/model registry management is superadmin-only. Module
+`backend/app/modules/ai_settings/`; entity `ai_settings` — a
 **single platform-scoped row** (migration `0022`). **SECRECY (non-negotiable):** the
 table and every response store/expose **alias names + toggles + budget + derived
 status only** — never the raw API key, base URL, concrete provider/model id, prompt,
 latency, or token counts (the table has no key column to leak; keys live solely in
 `backend/.env`).
 
-**RBAC:** superadmin OR a member of a `university`-type org holding `ai_settings:read`
-(GET) / `ai_settings:manage` (PATCH + kill switch). End users and partners → `403`
-(the surface is invisible to them).
+**RBAC:**
+
+- Masked AI settings/status: superadmin OR a member of a `university`-type org
+  holding `ai_settings:read` (GET) / `ai_settings:manage` (masked PATCH + kill
+  switch). End users and partners → `403` (the surface is invisible to them).
+- Real provider/model registry CRUD, concrete model ids, provider routing
+  chains, price rows, and provider health probes: **superadmin only**. Ordinary
+  university staff never receive provider/model names or concrete ids, even with
+  `ai_settings:read`/`manage`.
 
 **Endpoints:**
 
@@ -2177,58 +2236,69 @@ on a raw `vendor/model-path`); `rollout_state ∈ {enabled, paused, offline}`;
 (no-op accumulator in V1, never trips offline). The metered `ai_usage_log` ledger +
 `402 BUDGET_EXCEEDED` enforcement are the named deferred integration point.
 
-### ADR-0011 Amendment (ADR-0011.1 — routing canvas provider identity)
+### ADR-0011 Amendment (ADR-0011.2 — superadmin-only provider/model identity)
 
-**Status:** Accepted (product owner decision, superseding the ai-engineer's
-earlier "vendor label only" recommendation for the specific case below).
+**Status:** Accepted (product owner decision, 2026-07-08), superseding
+ADR-0011.1's grantable provider-identity exception.
 
-**Context:** the AI provider/model routing canvas (drag-and-drop visualization
-of `ai_task_model_configs`) needs University Admin to see the *real* provider
-and model identity (e.g. "OpenAI GPT-4", "Anthropic Claude") for accountability,
-cost, and vendor decisions — the base ADR-0011 rule ("never the raw... concrete
-provider/model id") is stricter than product now wants for this one narrow
-surface, for principals holding a specific grant.
+**Context:** the system must not reveal which providers or concrete models are
+used to students, partners, guests, or ordinary university staff. The platform
+belongs to the university, but provider/model choice is a superadmin operations
+concern, not a normal staff configuration detail.
 
 **Decision:**
 
-- A new, narrowly-scoped read endpoint/response shape — used **only** by the
-  internal `ai_settings` routing canvas — MAY return `provider_internal` and
-  the concrete `model_id` string per configured task/alias (e.g.
-  `{ "alias": "chat_cheap", "provider_internal": "openai", "model_id": "gpt-4o",
-  "vendor_label": "OpenAI", "model_family_label": "GPT-4" }`).
-- This is gated behind a **new, distinct RBAC permission**:
-  `ai_settings:view_provider_identity`, granted independently of
-  `ai_settings:read` / `ai_settings:manage` through the existing `organization`
-  RBAC grant system (per CLAUDE.md — no hardcoded role-name check; a
-  university may grant this to some `ai_settings:read` holders and not others).
-- Holding `ai_settings:read` **without** `ai_settings:view_provider_identity`
-  still returns only the curated `vendor_label` / `model_family_label` display
-  fields (no raw `provider_internal`/`model_id`) — this remains the default for
-  lower-privileged internal roles, per `docs/AI_PRODUCT_SPEC.md` §5.5.
-- **Unchanged, non-negotiable:** the raw API key and base URL are **never**
-  returned by any API regardless of permission, at any privilege level — those
-  remain `backend/.env`-only, with no key column to leak (base ADR-0011 secrecy
-  rule stands). Only the provider/model **identity string** is in scope for
-  this exception — not the key, not the base URL, not prompt/latency/token data.
-- This exception applies **exclusively** to the internal `ai_settings` routing
-  canvas surface (`/admin/ai-settings/routing-canvas` or equivalent). It must
-  **never** be added to any partner/employer-facing or student-facing response
-  shape, dashboard, export, or log line — the base ADR-0011 "end users and
-  partners → invisible surface" rule is unchanged and absolute.
-- **Audit:** every request to the provider-identity endpoint by a principal
-  holding `ai_settings:view_provider_identity` MUST write an `audit_logs` row
-  with `action = "ai_settings.provider_identity_viewed"`, `actor_type =
-  "university_staff"`, `target_type = "ai_task_model_configs"`, and `org_id`
-  set to the acting university org — no `before_state`/`after_state` diff is
-  needed for a read, but the row must exist (read-of-sensitive-identity is
-  itself the auditable event, consistent with `docs/ARCHITECTURE.md`'s
-  Activity Audit Infrastructure shape). See `docs/BUSINESS_LOGIC.md` §17.1 for
-  the corresponding "what gets audited" entry.
+- Any endpoint returning `provider_internal`, concrete `model_id`, provider
+  routing chains, provider health identity, provider/model price rows, or model
+  registry CRUD is **superadmin-only** (`principal.is_superadmin`), enforced in
+  service/application layer as well as router dependencies.
+- `ai_settings:view_provider_identity` is no longer sufficient to reveal raw
+  provider/model identity. If the permission remains in the catalog for
+  backwards compatibility, it is ignored for identity disclosure unless the
+  principal is also superadmin.
+- University staff with `ai_settings:read`/`manage` may operate only masked
+  settings: aliases/slot handles, feature flags, rollout state, budget/limit
+  state, kill switch, and user-safe health labels. They never receive concrete
+  provider/model strings.
+- Students, partners, guests, public pages, exports, notifications, logs
+  visible to non-superadmins, and org-scoped dashboards must never include
+  provider/model names, concrete ids, token counts, latency, prompt text, API
+  keys, base URLs, or routing internals.
+- Superadmin provider/model reads and all provider/model writes are audited:
+  `ai_settings.provider_identity_viewed`,
+  `ai_settings.provider_created`, `ai_settings.provider_updated`,
+  `ai_settings.provider_deleted`, `ai_settings.model_created`,
+  `ai_settings.model_updated`, `ai_settings.model_deleted`,
+  `ai_settings.provider_price_updated`, `ai_settings.routing_chain_updated`,
+  and kill-switch/key-rotation events where applicable.
 
-**Consequences:** University Admin accountability/cost review is unblocked
-without loosening the blanket admin-facing secrecy default; the permission is
-independently grantable/revocable per RBAC policy rather than baked into a
-role name; partner/student surfaces are untouched.
+**Response examples:**
+
+```json
+// Non-superadmin university staff: masked only
+{
+  "alias": "chat_default",
+  "status": "enabled",
+  "health": "available",
+  "budget_state": "ok"
+}
+```
+
+```json
+// Superadmin only
+{
+  "alias": "chat_default",
+  "provider_internal": "openai_compatible",
+  "model_id": "internal-model-id",
+  "status": "enabled",
+  "price_configured": true
+}
+```
+
+**Consequences:** the routing canvas can still exist for university operators,
+but it must be masked unless the viewer is a platform superadmin. Provider/model
+CRUD belongs in the superadmin operations console, not ordinary university
+workspace screens.
 
 ---
 

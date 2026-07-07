@@ -25,12 +25,18 @@ _STOPWORDS = {
 
 
 def section_texts(content: dict | None) -> list[str]:
-    """Extract human-readable strings from a section ``content_json`` blob."""
+    """Extract human-readable strings from a section ``content_json`` blob.
+
+    Handles both content shapes: list/skill sections (``{"items": [...]}``) and
+    the structured entry sections (``{"entries": [{heading, subheading, timeframe,
+    location, note, highlights[]}]}``). Entry text MUST be flattened here or the
+    experience/education evidence is lost from CV-JD matching + grounding.
+    """
 
     if not isinstance(content, dict):
         return []
-    items = content.get("items")
     out: list[str] = []
+    items = content.get("items")
     if isinstance(items, list):
         for item in items:
             if isinstance(item, str):
@@ -44,6 +50,23 @@ def section_texts(content: dict | None) -> list[str]:
                 ]
                 if parts:
                     out.append(" ".join(parts))
+    entries = content.get("entries")
+    if isinstance(entries, list):
+        for entry in entries:
+            if not isinstance(entry, dict):
+                continue
+            entry_parts = [
+                str(entry.get(key)).strip()
+                for key in ("heading", "subheading", "timeframe", "location", "note")
+                if isinstance(entry.get(key), str) and str(entry.get(key)).strip()
+            ]
+            highlights = entry.get("highlights")
+            if isinstance(highlights, list):
+                entry_parts.extend(
+                    h.strip() for h in highlights if isinstance(h, str) and h.strip()
+                )
+            if entry_parts:
+                out.append(" ".join(entry_parts))
     return out
 
 

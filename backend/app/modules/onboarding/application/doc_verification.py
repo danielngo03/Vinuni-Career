@@ -39,21 +39,13 @@ async def run_verification(payload: dict) -> None:
     Called by InlineTaskQueue (tests/dev) or Celery worker (production).
     Must be registered via ``get_task_queue().register(TASK_NAME, run_verification)``.
     """
-    from sqlalchemy import select
-
     from app.core.db import async_session_factory
-    from app.modules.organization.domain.models import PartnerRegistrationRequest
+    from app.modules.organization.application import partner_registration_facade
 
     request_id = uuid.UUID(payload["request_id"])
 
     async with async_session_factory() as session:
-        req = (
-            await session.execute(
-                select(PartnerRegistrationRequest).where(
-                    PartnerRegistrationRequest.id == request_id
-                )
-            )
-        ).scalar_one_or_none()
+        req = await partner_registration_facade.get_by_id(session, request_id)
 
         if req is None or req.ai_doc_status not in ("pending",):
             return  # idempotent — already processed or request gone

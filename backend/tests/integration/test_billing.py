@@ -43,7 +43,7 @@ from sqlalchemy import func, select
 
 from tests.auth_utils import CTX, register_verified
 from tests.billing_utils import seed_plans
-from tests.documents_utils import make_student
+from tests.documents_utils import make_ready_cv, make_student
 from tests.org_utils import make_org_with_admin
 
 # --------------------------------------------------------------------------- #
@@ -159,9 +159,10 @@ async def test_cv_quota_override_lets_student_pro_create_sixth_cv(db_session) ->
     assert quota["active_cv_limit"] == 10
     assert quota["quota_source"] == "subscription"
 
-    # The student may now create a 6th active CV (the default 5 would have blocked).
+    # The student may now COMMIT a 6th CV to their library (the default 5 would have
+    # blocked finalize at the 6th). Drafts are unlimited; only finalize counts.
     for i in range(6):
-        await _make_blank(db_session, student, f"CV {i}")
+        await make_ready_cv(db_session, student=student, title=f"CV {i}")
     assert await cv_service.count_cvs(db_session, principal=student) == 6
 
 

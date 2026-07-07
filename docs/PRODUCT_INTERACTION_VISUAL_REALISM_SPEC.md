@@ -1,8 +1,14 @@
 # Product Interaction And Visual Realism Spec
 
-> Source of truth for interaction polish, icon semantics, floating actions,
+> Source of truth for interaction polish, icon semantics, header quick actions,
 > campaign/banner surfaces, disclosure language, and "real recruiting platform"
 > visual acceptance.
+>
+> **CANONICAL (owner decision 2026-07-07):** Quick actions (saved jobs,
+> notifications, messages, and AI where available) live in the **top header** for
+> the public + student marketplace surfaces, with feedback/help in the account
+> (avatar) menu. The old bottom-right **floating action rail was REMOVED** — do
+> not reintroduce it.
 
 ## 1. Product Principle
 
@@ -41,40 +47,47 @@ corner. Guests clicking it open login with preserved intent. Students get
 optimistic save/unsave once the saved-jobs backend exists. Until then, show an
 honest login/coming-soon state without fake saved data.
 
-## 3. Floating Action Rail
+## 3. Header Quick Actions
 
-Public and student surfaces should have a fixed, bottom-right quick-action rail
-that remains visible without covering content.
+Public and student marketplace surfaces expose quick actions in the **top
+header**, not a bottom-right floating rail (owner decision 2026-07-07; the rail
+was removed). The header cluster stays visible on the persistent top nav so
+saved jobs, notifications, messages, and AI are always one click away without
+covering content.
 
-Desktop order:
+Header quick-action cluster (right side of the top nav), in order:
 
 1. Saved jobs / shortlist (`Heart`)
-2. Career opportunity invitations (`EnvelopeSimple` or `Briefcase`) when the
-   product has invitation/outreach inventory
+2. Notifications (`Bell`) for authenticated users
 3. Messages (`ChatCircleText`) for authenticated users
-4. Feedback / help (`ChatCenteredDots` or `Question`) for public product
-   feedback and support
-5. VinUni AI career assistant (`VinUni mark + sparkle`) when the assistant is
+4. VinUni AI career assistant (`VinUni mark + sparkle`) when the assistant is
    implemented or honest-disabled
+
+Account (avatar) menu, not the header cluster:
+
+- Feedback / help (`ChatCenteredDots` or `Question`) for public product
+  feedback and support lives under the avatar/account menu.
+- Profile, settings, and sign-out also live under the avatar menu.
 
 Mobile:
 
-- Use one compact floating launcher above the safe-area/bottom nav.
-- Expands into the same actions.
-- Must not overlap cookie/privacy notes, forms, sticky apply bars, or chat
-  composer.
+- The same quick actions collapse into the top header / mobile nav, not a
+  floating launcher.
+- Actions must not overlap cookie/privacy notes, forms, sticky apply bars, or
+  the chat composer.
 
 Rules:
 
-- The rail is a navigation affordance, not a decoration.
+- The header cluster is a navigation affordance, not a decoration.
 - Hide or collapse actions that are not available for the persona.
-- Never duplicate an action so aggressively that header and floating controls
-  compete visually.
+- Do not reintroduce a bottom-right floating action rail; header + avatar menu
+  are the only homes for these quick actions.
 - Keyboard and screen-reader labels are required.
-- Desktop buttons must expose a hover/focus label, not only `title`.
-- The rail should use strong VinUni blue/teal action treatment, not inactive
-  grey-outline buttons. The AI entry may use a restrained pulse/glow/ring to
-  attract attention, but must respect `prefers-reduced-motion`.
+- Header buttons must expose a hover/focus label, not only `title`.
+- The header cluster uses ink/monochrome action treatment (v9 Monochrome), not
+  blue/teal fills and not inactive grey-outline buttons. The AI entry may use a
+  restrained pulse/glow/ring to attract attention, but must respect
+  `prefers-reduced-motion`.
 - Honest-disabled is allowed only when the backend contract is missing. If an
   action is strategically important but blocked, the disabled label must explain
   "coming soon" without looking broken.
@@ -176,7 +189,8 @@ Public marketplace:
 Student:
 
 - inherits marketplace top nav;
-- has floating quick actions;
+- has header quick actions (saved/notifications/messages/AI) plus feedback/help
+  in the avatar menu;
 - dashboards have wide operating surfaces, not a cramped `max-w-5xl` generic
   card grid when the workflow is data-heavy;
 - recommended jobs show reason + recommended CV + fit score where available.
@@ -199,7 +213,8 @@ Before claiming visual/product complete:
 - inspect public homepage, jobs board/detail, student dashboard, CV Studio,
   partner advertising, university advertising moderation;
 - verify heart save affordance and login-gated intent;
-- verify floating action rail does not overlap sticky bars or footer;
+- verify header quick actions (saved/notifications/messages/AI) are present and
+  legible, and feedback/help is reachable from the avatar menu;
 - verify campaign labels are truthful and polished;
 - verify paid disclosure is non-removable only for paid placements;
 - verify university-curated/strategic partner content is not mislabeled as paid;
@@ -216,8 +231,9 @@ A screenshot fails this spec even if build/tests pass when:
 
 - first viewport has no meaningful banner/carousel/right-rail campaign surface;
 - most of the screen is blank navy, white cards, or generic metrics;
-- floating actions are grey, unlabeled, hidden, or missing saved jobs,
-  invitations, feedback/help, and AI affordances where those products exist;
+- header quick actions are grey, unlabeled, hidden, or missing saved jobs,
+  notifications, messages, and AI affordances (or feedback/help is missing from
+  the avatar menu) where those products exist;
 - AI assistant is present but visually dead; it should feel intentionally
   available or intentionally coming soon;
 - public labels repeatedly say blunt "sponsored/ad" wording for curated or

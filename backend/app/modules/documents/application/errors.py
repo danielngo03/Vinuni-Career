@@ -65,6 +65,43 @@ class InvalidCvFieldError(ValidationFailedError):
         super().__init__(self.message, details={"reason": "invalid_field", "field": field})
 
 
+class CvEmptyError(ValidationFailedError):
+    """Finalize attempted on an empty CV (no header name, no real section content).
+
+    Maps to ``422 VALIDATION_FAILED`` with ``details.reason = "cv_empty"`` so the
+    builder can show inline guidance ("Add your name or at least one section") and
+    block the finalize action instead of committing a blank library CV.
+    """
+
+    message = (
+        "CV này chưa có nội dung. Hãy thêm tên hoặc ít nhất một mục có thông tin "
+        "trước khi lưu vào thư viện."
+    )
+
+    def __init__(self) -> None:
+        super().__init__(self.message, details={"reason": "cv_empty"})
+
+
+class CvNotInLibraryError(ConflictError):
+    """Apply/snapshot attempted with a CV that is not committed to the library.
+
+    A draft CV is not analyzed/matchable and cannot be submitted with an
+    application (design spec 2026-07-05). Maps to ``409 CONFLICT`` with
+    ``details.reason = "cv_not_in_library"`` so the apply picker can steer the
+    student to finalize the CV first.
+    """
+
+    message = (
+        "CV này chưa ở trong thư viện. Hãy lưu CV vào thư viện trước khi ứng tuyển."
+    )
+
+    def __init__(self, *, status: str) -> None:
+        super().__init__(
+            self.message,
+            details={"reason": "cv_not_in_library", "status": status},
+        )
+
+
 class CreationModeNotAvailableError(ValidationFailedError):
     """The requested CV creation mode is not available in this slice (AI draft)."""
 

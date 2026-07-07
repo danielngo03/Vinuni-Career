@@ -1,6 +1,6 @@
 # AI Product Spec — VinUni Career Platform
 
-> Phiên bản: 2.2 | Cập nhật: 02/07/2026 (system-architect ADR-0011.1 amendment — new §5.5 routing-canvas provider-identity exception, §1 footnote updated; prior 01/07/2026 ai-engineer reconciliation pass — §4.2, §5.1, §5.3, §7, §10.1, §11.1 annotated with real implementation status vs. target design)  
+> Phiên bản: 2.3 | Cập nhật: 08/07/2026 (product-owner operating-model reconciliation — §5.4 now matches the shipped `ai_usage_log`/`ai_ops_event` split and adds billable AI usage rules; see `docs/PRODUCT_OPERATING_MODEL.md`)  
 > Source of truth for AI task design, agentic architecture, tool registry, safety, evaluation, and rollout.
 
 ---
@@ -10,7 +10,7 @@
 - AI must solve real workflow pain, not decorate the UI.
 - AI is advisory by default; consequential decisions require human confirmation.
 - AI write actions require explicit user confirmation and audit logging.
-- End users never see provider names, model names, token counts, latency, raw confidence, prompt text, OCR internals, embedding internals, chunk IDs, similarity scores, or internal status codes. This is absolute for students and partners/employers with no exception. A single narrow internal exception exists for University Admin: holders of the distinct `ai_settings:view_provider_identity` RBAC grant may see real provider/model identity (never keys/base URL) solely within the `ai_settings` routing canvas — see §5.5 and `docs/API_CONTRACTS.md` ADR-0011.1.
+- End users never see provider names, model names, token counts, latency, raw confidence, prompt text, OCR internals, embedding internals, chunk IDs, similarity scores, or internal status codes. This is absolute for guests, students, partners/employers, and ordinary university staff. Only platform superadmins may view or manage the real provider/model registry, and only inside superadmin AI operations/settings surfaces. API keys and base URLs are never returned by any API.
 - AI must degrade gracefully when unavailable.
 - Human has final say on moderation, fraud, approvals, and all consequential decisions — AI is advisory only.
 - Internal prompt templates, system/developer/task instructions, eval rubrics, and guardrail text are written in English for maintainability. User-facing output language is controlled separately by `target_language`, detected CV/document language, or explicit user locale.
@@ -389,7 +389,10 @@ class ProviderAdapter(Protocol):
 
 **Provider adapters:** `openai_compatible.py` (OpenAI-compatible surface — covers OpenAI, Azure, Ollama, OpenRouter, and any campus-hosted OpenAI-compatible endpoint) and `offline.py` (deterministic, no network — used by CI/eval and as the default fallback). `gemini_native.py` is **not implemented** (2026-07-01) — there is no native Gemini adapter today; a Gemini-family model can only be reached if it exposes an OpenAI-compatible endpoint. Add a native adapter only when a concrete provider requires it, and register it in `provider_registry.py`.
 
-**Model alias:** the gateway maps `"chat_default"` → provider + model from `ai_task_model_configs` DB table (managed by University Admin in `ai_settings`). Modules only know the alias.
+**Model alias:** the gateway maps `"chat_default"` → provider + model from
+`ai_task_model_configs`. The real provider/model registry is managed by
+platform superadmins only; non-superadmin modules and admin surfaces know only
+the alias/slot handle.
 
 ### 5.2 Circuit Breaker
 
@@ -461,72 +464,161 @@ data: {"code": "provider_unavailable", "user_message": "Hiện tại không th�
 - Clients must handle reconnect (exponential backoff, cap at 30s).
 - Stream must be cancelled cleanly if client disconnects (backend holds no orphan goroutine/task).
 
-### 5.4 Cost Tracking
+### 5.4 Usage, Cost, And Billable AI Accounting
 
-Every gateway request writes to `ai_usage_log`:
+The shipped implementation deliberately separates three ledgers:
 
-```sql
-CREATE TABLE ai_usage_log (
-  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  tenant_id UUID NOT NULL,
-  user_id UUID,
-  session_id UUID,
-  task_type VARCHAR NOT NULL,
-  model_alias VARCHAR NOT NULL,
-  provider_internal VARCHAR NOT NULL,  -- stored server-side only, never in API responses
-  input_tokens INT NOT NULL,
-  output_tokens INT NOT NULL,
-  cost_usd NUMERIC(10,6) NOT NULL,     -- computed: tokens × per-token price from config
-  latency_ms INT NOT NULL,
-  success BOOLEAN NOT NULL,
-  error_code VARCHAR,
-  created_at TIMESTAMPTZ DEFAULT NOW()
-);
+1. **`ai_usage_log`** — PII-safe AI call log used by user-facing request meters
+   and legacy daily/weekly quota checks. It stores task type, internal model
+   alias, success, character buckets, optional `user_id`/`session_id`, optional
+   estimated `cost_usd`, and timestamp. It does **not** store provider name,
+   concrete model id, raw token counts, latency, prompt text, response text, raw
+   file paths, or PII.
+2. **`ai_ops_event` + `ai_usage_daily`** — platform-superadmin operational
+   telemetry and rollups for provider cost/reliability dashboards. This may
+   include provider/model identity, token counts, latency, status, org/user
+   references, and cost, but never prompt/response text, keys, or base URLs.
+   Provider/model identity is visible only to platform superadmins inside
+   superadmin-only operations/settings surfaces.
+3. **Billable AI usage ledger (required next step)** — a product entitlement
+   ledger for student credits, partner package AI credits, university/internal
+   department budgets, idempotency, and "what feature consumed quota" reporting.
+   See `docs/PRODUCT_OPERATING_MODEL.md` §3.
+
+The billable ledger is required because `ai_usage_log` is intentionally too
+coarse for plan/package accounting, and `ai_ops_event` is intentionally admin
+only. Do not use either table alone as the final source for student/partner
+credits.
+
+Minimum billable ledger fields:
+
+```text
+actor_user_id
+actor_persona
+org_id
+billing_scope: user | org | department | platform
+feature_key
+task_type
+resource_type/resource_id
+session_id
+idempotency_key
+units_charged
+provider_cost_usd
+result_status
+ai_usage_log_id / ai_ops_event_id
+created_at
 ```
 
-**Cost is attributed** per `(tenant_id, task_type)` for university-level quota tracking.
+**Current implementation caveat (2026-07-08):** calls routed through
+`AiTaskRunner` write DB usage/ops records. Some helper paths that call
+`generate_json_note`, `get_provider`, `get_provider_for_alias`, embedding,
+translation, or semantic-scoring helpers may only call the sync logger
+`log_ai_usage()` and therefore may not create the durable DB rows that
+user/org quota reads. Treat this as a P0 accounting gap before enabling paid AI
+credits or package-based AI limits.
 
-**Token budget alerts:** when a tenant reaches 80% of monthly token budget → alert University Admin. At 100% → new AI requests blocked until next billing cycle (configurable).
+**Charging rule:** user/partner credits are charged only after a successful,
+user-visible AI output or a configured billable background result. Deterministic
+scoring/parsing, local OCR, validation failures before a model call, cache hits,
+and provider failures that produce no useful output do not consume credits.
+Provider cost can still be counted internally when a model call consumed tokens.
 
-### 5.5 Provider Identity Exposure (Routing Canvas Exception)
+### 5.5 Provider/Model Identity And Registry Governance
 
-Product owner decision (2026-07-02), see `docs/API_CONTRACTS.md` ADR-0011.1.
+Product owner decision (2026-07-08): the older ADR-0011.1 idea of a grantable
+`ai_settings:view_provider_identity` permission for university staff is
+superseded. Raw provider/model identity is **platform-superadmin-only**.
 
-**Default (anyone with `ai_settings:read`, no additional grant):** the routing
-canvas and every other admin-facing AI settings surface show only curated
-display fields — `alias`, `vendor_label` (e.g. `"OpenAI"`), `model_family_label`
-(e.g. `"GPT-4"`), toggles, budget, and derived status. Raw `provider_internal`
-and concrete `model_id` are never included in this default shape. This
-supersedes an earlier ai-engineer recommendation to treat `vendor_label`/
-`model_family_label` as the universal ceiling for all admins — it is now the
-ceiling only for admins **without** the permission below.
+**Default for all non-superadmin surfaces:** AI settings, routing, usage, quota,
+assistant, CV/JD, partner, student, and university staff screens show only safe
+operational fields: feature status, alias/slot handles, budget/limit state,
+health state, fallback/unavailable state, and user-safe labels. They do not show
+raw `provider_internal`, concrete `model_id`, base URL, token counts, latency,
+prompt text, or provider pricing.
 
-**Exception (routing canvas only, permission-gated):** a principal holding the
-distinct RBAC permission `ai_settings:view_provider_identity` (granted via the
-`organization` RBAC system, independent of `ai_settings:read`/`manage` — never
-a hardcoded role check) may call the routing-canvas provider-identity endpoint
-and receive the real `provider_internal` + `model_id` per configured
-task/alias, for accountability, cost attribution, and vendor decisions.
+**Superadmin-only:** platform superadmins may view, create, update, delete,
+enable/disable, price, and health-check provider/model registry entries and
+fallback chains inside superadmin AI operations/settings surfaces. These actions
+are audited. Ordinary university staff may request changes or operate masked
+rollout/budget controls only if product scope grants that ability; they do not
+see or edit the real provider/model registry.
 
-**Still absolute, no exception at any permission level:**
+**Still absolute, no exception at any level:**
 
 - Raw API key: never returned by any API. Lives in `backend/.env` only.
 - Base URL: never returned by any API.
-- Prompt text, token counts, latency, raw confidence, internal status codes:
-  unaffected by this exception — still never exposed anywhere (§1, §5.3, §5.4).
-- Partner/employer and student-facing surfaces: this exception does not exist
-  for them under any permission grant. Do not add `provider_internal`/`model_id`
-  to any partner/student response shape, dashboard, export, or log line.
+- Prompt text, response text, raw confidence, user PII, internal status codes,
+  and API keys are never stored in or returned from provider/model registry APIs.
+- Partner/employer, student, guest, and ordinary university-staff surfaces must
+  never include `provider_internal`, `model_id`, concrete model names, provider
+  names, pricing rows, or routing-chain internals.
 
-**Audit:** every read of raw provider identity via the routing-canvas endpoint
-writes `audit_logs` with `action = "ai_settings.provider_identity_viewed"` (see
-`docs/BUSINESS_LOGIC.md` §17.1, `docs/ARCHITECTURE.md` Activity Audit
-Infrastructure).
+**Audit:** every superadmin read of raw provider/model identity writes
+`audit_logs` with `action = "ai_settings.provider_identity_viewed"`. Every
+provider/model create/update/delete/price/key-rotation/kill-switch/fallback-chain
+change writes a before/after audit event.
 
-**Implementation note:** this is a new response shape on the deferred
-multi-row `ai_settings` end-state (routing canvas), not a change to the
-existing masked V1 `/admin/ai-settings` GET/PATCH contract, which keeps its
-current alias-only shape unchanged.
+### 5.6 Platform Superadmin AI Operations Console (owner decision 2026-07-07)
+
+Product owner override extending §5.4/§5.5 for the **Platform Admin Console**
+(superadmin-only control plane; see
+`docs/superpowers/specs/2026-07-07-platform-admin-console-design.md`).
+
+**What changes:** the earlier "token counts, latency … never exposed anywhere"
+wording (§5.5) is narrowed to "never exposed to end users, partners, students,
+or ordinary university staff."
+A **platform superadmin** operating the AI Operations console MAY view
+**aggregated** operational telemetry — cost, request/error/fallback counts,
+token totals, latency percentiles, and circuit-breaker state — for spend,
+reliability, and volume dashboards. Concrete provider/model identity in that
+console is superadmin-only, exactly as §5.5.
+
+**Storage:** implemented via a **separate admin-only `ai_ops_event` table** plus
+a `ai_usage_daily` rollup and an admin-editable `ai_model_price` table. The
+existing `ai_usage_log` remains the PII-safe cost aggregate and is unchanged.
+`ai_ops_event` realizes the server-side telemetry §5.4 originally specified
+(`provider_internal`, tokens, latency, error_code) that the initial
+implementation had reduced to buckets.
+
+**Langfuse:** the superadmin-operated Langfuse project MAY receive per-call
+metadata including provider/model identity, tokens, latency, and status for
+trace/debug/eval.
+
+**Still absolute (no exception at any level):** API keys, base URLs, and **raw
+prompt/response/chunk text** are never stored in `ai_ops_event`, never sent to
+Langfuse, and never returned by any API. End-user and org-scoped-admin surfaces
+are unaffected — provider/model/token/latency/prompt remain fully hidden there.
+Every provider-identity read and every price/budget/kill-switch change is
+audited (§5.5 audit rules apply).
+
+### 5.7 Billable AI Task Policy
+
+Use `docs/PRODUCT_OPERATING_MODEL.md` §3 as the canonical product policy. The
+summary below is binding for implementation:
+
+- **Student:** chat turns, CV AI suggestions, cover letters, interview
+  simulation feedback, learning-gap plans, and AI-backed CV/JD explanations may
+  consume student credits. Deterministic CV-JD fit scores remain free; only AI
+  explanation/improvement text consumes credit, once per `(cv_version,
+  job_version)` cache key.
+- **Partner:** JD extraction consumes org AI credits only when native/local
+  extraction escalates to AI and returns a useful prefill. JD writer, screening
+  brief, scorecard suggestion, outreach/ad creative generation, and semantic
+  candidate narratives consume partner org/package credits.
+- **University:** moderation, fraud, market intelligence, provider probes,
+  workflow AI nodes, and internal reports are charged to platform, department,
+  org, or user budgets controlled by university admins. They never show a
+  student/partner-style upgrade CTA.
+- **System/background:** embeddings, rerank, scheduled summaries, and workforce
+  subtasks must be attributed to platform/org/department budgets unless a
+  specific user action triggered a billable feature.
+
+Implementation requirement: every real provider call that can affect credits,
+quota, billing, package limits, or university budget must accept a usage context
+(`principal`, `org_id`, `feature_key`, `resource`, `session_id`,
+`billing_scope`) and write the durable billable ledger with an idempotency key.
+If a helper cannot receive that context, it is not the final production path for
+a billable feature.
 
 ---
 
@@ -1061,7 +1153,10 @@ Each AI request generates a trace with spans:
 
 ### 11.2 Cost Attribution
 
-Monthly cost report per `(tenant_id, task_type, model_alias)` from `ai_usage_log`. Surfaced in University Admin → AI Settings → Cost Overview.
+Monthly cost report per `(tenant_id, task_type, model_alias)` from
+`ai_usage_log`. Ordinary university views are masked to aliases/status/budget
+only; provider/model-level drilldowns belong to the superadmin AI Operations
+console.
 
 University Admin sets monthly token budgets per tier. Gateway checks budget before each request and rejects with `402 BUDGET_EXCEEDED` when limit is hit.
 
@@ -1303,6 +1398,15 @@ AI_MAX_REAL_CALLS_PER_TEST_RUN=3
 
 ## 19. Lightweight Multilingual Extraction Policy
 
+> **UPDATE 2026-07-05 (owner decisions):** (1) The uploaded-CV flow is
+> upload → confirm file → name the CV → done, with NO manual field-review step —
+> backend extraction is authoritative and creates the versioned draft directly and
+> must be accurate because it feeds CV-JD matching. (2) The cascade adds a cheap
+> **vision-LLM** tier that MAY receive DOWNSCALED document images for images and
+> styled/scanned PDFs; the text-LLM structuring tier still receives extracted text
+> only. Non-CV/blank/corrupt uploads are rejected, never fabricated. Read the
+> "present to user for review" and "text-only LLM" wording below as historical.
+
 The system supports Vietnamese and English first. Other languages may pass through, but v1 quality gates focus on `vi` and `en`.
 
 ### CV And Document Extraction Flow
@@ -1318,10 +1422,17 @@ The system supports Vietnamese and English first. Other languages may pass throu
    an ADR because it is heavier).
 4. If readable text is empty or low quality, render selected pages and run OCR
    with `vie+eng`.
+4b. If native text + local OCR are still insufficient (images, styled/scanned
+   PDFs), escalate to a cheap vision-LLM tier. (Updated 2026-07-05: this tier MAY
+   receive DOWNSCALED document images; the text-LLM tier below still receives text
+   only.)
 5. Normalize Unicode, bullets, dates, phone/email/link patterns.
 6. Run deterministic section classifier.
-7. Optionally call LLM to structure ambiguous fields using `chat_cheap` only after local extraction passes.
-8. Present extraction to user for review before it becomes trusted profile/CV data.
+7. Optionally call the text-LLM to structure ambiguous fields using `chat_cheap`
+   only after local extraction passes; it receives extracted text/markdown only.
+8. Store the structured extraction directly as the versioned draft. (Updated
+   2026-07-05: backend-authoritative — no manual user field-review step; import
+   must never silently overwrite an already-accepted CV.)
 
 Failure gates before LLM structuring:
 
@@ -1341,6 +1452,11 @@ For these gates, do not call the LLM by default. Return a safe failure state and
 - CV extraction default max pages: 6.
 - OCR default timeout: 25 seconds.
 - Heavy OCR is disabled unless `PADDLE_OCR_ENABLED=true`.
-- LLM structuring never receives raw binary files.
-- Any field with low confidence is marked `needs_review`, not silently accepted.
-- Non-CV or blank documents are not treated as model failures; they are product validation outcomes with friendly recovery paths.
+- Text-LLM structuring never receives raw binary files. The vision-LLM tier MAY
+  receive DOWNSCALED document images (owner decision 2026-07-05) for the
+  image/styled/scanned-PDF path only; it never receives raw un-downscaled bytes.
+- Low-confidence extraction is resolved backend-side into the best draft.
+  (Updated 2026-07-05: `needs_review` is an internal quality marker, not a
+  student field-review gate — backend-authoritative extraction feeds CV-JD
+  matching.)
+- Non-CV or blank documents are not treated as model failures; they are product validation outcomes with friendly recovery paths and are never fabricated into a CV.

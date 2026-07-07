@@ -221,17 +221,18 @@ async def upload_document(
     )
     session.add(doc)
     await session.flush()
+    result = _serialize_document(doc)
 
-    # Trigger async ingestion worker — import deferred to avoid circular import
-    try:
-        from app.modules.knowledge_base.application.ingest_task import (
-            enqueue_ingest,
-        )
-        enqueue_ingest(str(doc.id))
-    except Exception:
-        pass  # Worker unavailable — document stays PENDING; admin can re-trigger
+    # Persist the PENDING document before scheduling ingestion: the ingest task
+    # runs in its own session and must be able to load it (commit → enqueue,
+    # mirroring documents.ingestion_service.start_ingestion). Under inline mode
+    # the handler runs here and flips the row to DONE/FAILED.
+    await session.commit()
+    from app.modules.knowledge_base.application.ingest_task import enqueue_ingest
 
-    return _serialize_document(doc)
+    await enqueue_ingest(str(doc.id))
+
+    return result
 
 
 async def get_document(

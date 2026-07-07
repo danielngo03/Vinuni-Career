@@ -29,6 +29,7 @@ is preserved.
 from __future__ import annotations
 
 import re
+from functools import lru_cache
 
 # ---------------------------------------------------------------------------
 # 1. Bidirectional synonym map (pure spelling / shorthand variants)
@@ -42,7 +43,7 @@ _EXPANSION_MAP: dict[str, list[str]] = {
     # ── Cloud & Infrastructure ──────────────────────────────────────────────
     "kubernetes": ["k8s", "kube"],
     "docker": ["containerization", "containers"],
-    "terraform": ["tf", "iac", "infrastructure as code"],
+    "terraform": ["iac", "infrastructure as code"],
     "ansible": ["configuration management"],
     "aws": [
         "amazon web services",
@@ -80,7 +81,7 @@ _EXPANSION_MAP: dict[str, list[str]] = {
     "typescript": ["ts", "tsx"],
     "node.js": ["nodejs", "node js", "node"],
     "java": ["jvm"],
-    "c#": ["csharp", "c sharp"],
+    "c#": ["csharp"],
     ".net": ["dotnet", "asp.net core"],
     "go": ["golang"],
     "rust": ["cargo"],
@@ -92,7 +93,7 @@ _EXPANSION_MAP: dict[str, list[str]] = {
     "scala": ["akka"],
     "r": ["r language", "rstudio", "tidyverse"],
     "matlab": ["simulink"],
-    "c++": ["cpp", "c plus plus"],
+    "c++": ["cpp"],
     "c": ["c language", "embedded c", "ansi c"],
 
     # ── Web Frameworks (spelling variants only, no language bridging) ───────
@@ -255,16 +256,122 @@ _EXPANSION_MAP: dict[str, list[str]] = {
     "hig": ["apple human interface guidelines", "ios design guidelines"],
     "material design": ["google material", "material ui", "mui"],
 
+    # ── Vietnamese city aliases — bidirectional so both CV and JD variants match
+    "ho chi minh city": [
+        "hcmc", "hcm", "saigon", "sài gòn", "sai gon",
+        "tp hcm", "tp.hcm", "tp. hồ chí minh", "thành phố hồ chí minh",
+    ],
+    "hcmc": ["ho chi minh city", "hcm", "saigon", "sài gòn"],
+    "hcm": ["ho chi minh city", "hcmc", "saigon"],
+    "saigon": ["ho chi minh city", "hcmc", "sài gòn"],
+    "sài gòn": ["ho chi minh city", "hcmc", "saigon"],
+    "hanoi": ["hà nội", "ha noi", "hn"],
+    "hà nội": ["hanoi", "ha noi", "hn"],
+    "ha noi": ["hanoi", "hà nội", "hn"],
+    "hn": ["hanoi", "hà nội"],
+    "da nang": ["đà nẵng"],
+    "đà nẵng": ["da nang"],
+
     # ── Vietnamese-specific ───────────────────────────────────────────────────
-    "cntt": ["công nghệ thông tin", "it"],
+    "cntt": ["công nghệ thông tin", "information technology", "it"],
+    "ktpm": ["kỹ thuật phần mềm", "software engineering"],
+    "khmt": ["khoa học máy tính", "computer science"],
+    "httt": ["hệ thống thông tin", "information systems"],
+    "attt": ["an toàn thông tin", "information security", "cybersecurity"],
+    "kspm": ["kỹ sư phần mềm", "software engineer"],
+    "kstt": ["kỹ sư thông tin"],
     "ktkt": ["kỹ thuật kinh tế"],
-    "qtkd": ["quản trị kinh doanh", "mba"],
+    "qtkd": ["quản trị kinh doanh", "business administration", "mba"],
     "tckt": ["tài chính kế toán"],
     "nhtm": ["ngân hàng thương mại"],
     "dn": ["doanh nghiệp"],
     "ktvm": ["kinh tế vĩ mô"],
     "ktvi": ["kinh tế vi mô"],
     "khtn": ["khoa học tự nhiên"],
+
+    # ── Role abbreviations (bidirectional) ───────────────────────────────────
+    "pm": ["product manager"],
+    "po": ["product owner"],
+    "qa": ["quality assurance", "quality engineer", "test engineer", "đảm bảo chất lượng"],
+    "qc": ["quality control", "quality checker", "kiểm soát chất lượng", "kiểm tra chất lượng"],
+    "swe": ["software engineer", "software developer"],
+    "sse": ["senior software engineer"],
+    "tl": ["tech lead", "technical lead"],
+    "em": ["engineering manager"],
+    "de": ["data engineer"],
+    "ds": ["data scientist"],
+    "mle": ["machine learning engineer", "ml engineer"],
+    "devrel": ["developer relations", "developer advocate"],
+
+    # ── Marketing & Digital (VN ↔ EN) ─────────────────────────────────────────
+    "digital marketing": ["tiếp thị số", "tiếp thị kỹ thuật số", "marketing số", "digital mkt"],
+    "marketing": ["tiếp thị", "mkt"],
+    "content marketing": ["tiếp thị nội dung", "content creator", "sáng tạo nội dung"],
+    "seo": ["search engine optimization", "tối ưu công cụ tìm kiếm"],
+    "sem": ["search engine marketing"],
+    "social media": ["mạng xã hội", "social media marketing", "truyền thông mạng xã hội"],
+    "google ads": ["google adwords", "adwords", "quảng cáo google"],
+    "facebook ads": ["fb ads", "meta ads", "quảng cáo facebook"],
+    "google analytics": ["ga4", "google analytic"],
+    "copywriting": ["viết quảng cáo", "content writing", "viết nội dung"],
+    "email marketing": ["tiếp thị email", "edm"],
+    "branding": ["thương hiệu", "xây dựng thương hiệu", "brand", "brand management"],
+    "public relations": ["quan hệ công chúng", "truyền thông báo chí"],
+    "market research": ["nghiên cứu thị trường"],
+    "kpi": ["key performance indicator", "chỉ số hiệu suất"],
+    "crm": ["customer relationship management", "quản lý quan hệ khách hàng"],
+
+    # ── Sales / Business / Customer (VN ↔ EN) ──────────────────────────────────
+    "sales": ["bán hàng", "kinh doanh"],
+    "b2b": ["business to business"],
+    "b2c": ["business to consumer"],
+    "customer service": ["chăm sóc khách hàng", "cskh", "dịch vụ khách hàng", "customer support"],
+    "telesales": ["bán hàng qua điện thoại", "telemarketing"],
+    "account management": ["quản lý khách hàng"],
+    "business development": ["phát triển kinh doanh"],
+
+    # ── HR / Admin (VN ↔ EN) ───────────────────────────────────────────────────
+    "human resources": ["nhân sự", "quản lý nhân sự", "hr", "quản trị nhân sự"],
+    "recruitment": ["tuyển dụng", "talent acquisition"],
+    "payroll": ["tính lương", "c&b", "compensation and benefits"],
+    "training": ["đào tạo", "l&d", "learning and development"],
+
+    # ── Office / Productivity ─────────────────────────────────────────────────
+    "microsoft office": ["ms office", "tin học văn phòng", "microsoft office suite"],
+    "excel": ["microsoft excel", "ms excel", "bảng tính"],
+    "powerpoint": ["microsoft powerpoint", "ms powerpoint", "power point"],
+    "google workspace": ["google suite", "g suite", "google docs", "google sheets"],
+
+    # ── Design / Media tools ──────────────────────────────────────────────────
+    "photoshop": ["adobe photoshop"],
+    "illustrator": ["adobe illustrator"],
+    "premiere pro": ["adobe premiere", "premiere"],
+    "after effects": ["adobe after effects"],
+    "canva": ["canva design"],
+    "capcut": ["cap cut"],
+    "graphic design": ["thiết kế đồ họa", "thiết kế đồ hoạ"],
+    "video editing": ["chỉnh sửa video", "dựng video", "edit video"],
+
+    # ── Soft skills (VN ↔ EN) ─────────────────────────────────────────────────
+    "teamwork": ["làm việc nhóm", "team work", "làm việc theo nhóm", "phối hợp nhóm"],
+    "communication": ["giao tiếp", "kỹ năng giao tiếp"],
+    "time management": ["quản lý thời gian", "quản trị thời gian"],
+    "problem solving": ["giải quyết vấn đề"],
+    "leadership": ["lãnh đạo", "kỹ năng lãnh đạo", "khả năng lãnh đạo"],
+    "presentation": ["thuyết trình", "kỹ năng thuyết trình"],
+    "negotiation": ["đàm phán", "thương lượng"],
+    "critical thinking": ["tư duy phản biện", "tư duy phê phán"],
+    "adaptability": ["khả năng thích nghi", "thích nghi nhanh"],
+
+    # ── Manufacturing / QA / Ops (esp. garment/production) ─────────────────────
+    "lean manufacturing": ["lean", "sản xuất tinh gọn"],
+    "kaizen": ["cải tiến liên tục"],
+    "5s": ["5s methodology", "quy trình 5s"],
+    "production management": ["quản lý sản xuất"],
+    "quality management": ["quản lý chất lượng", "qms"],
+    "garment": ["may mặc", "dệt may", "hàng may mặc"],
+    "supply chain": ["chuỗi cung ứng", "scm"],
+    "inventory management": ["quản lý kho", "quản lý hàng tồn kho"],
 
     # ── Certifications ────────────────────────────────────────────────────────
     "aws certified": [
@@ -383,6 +490,19 @@ _CV_IMPLIES_MAP: dict[str, list[str]] = {
     # Data pipeline tools
     "dbt": ["sql"],
     "apache spark": ["sql"],
+    # Marketing channels/tools → the broader discipline they belong to
+    "facebook ads": ["digital marketing"],
+    "google ads": ["digital marketing"],
+    "seo": ["digital marketing"],
+    "email marketing": ["digital marketing"],
+    "google analytics": ["digital marketing"],
+    # Creative tools → the craft they demonstrate
+    "canva": ["graphic design"],
+    "photoshop": ["graphic design"],
+    "illustrator": ["graphic design"],
+    "capcut": ["video editing"],
+    "premiere pro": ["video editing"],
+    "after effects": ["video editing"],
 }
 
 
@@ -397,6 +517,33 @@ for _canonical, _aliases in _EXPANSION_MAP.items():
     _FULL_EXPANSION[_canonical] = _all
     for _alias in _aliases:
         _FULL_EXPANSION[_alias] = _all
+
+
+# ---------------------------------------------------------------------------
+# Private helper: word-boundary-aware containment check
+# ---------------------------------------------------------------------------
+
+_BOUNDARY_CACHE: dict[str, re.Pattern[str]] = {}
+
+
+def _boundary_match(variant: str, text: str) -> bool:
+    """Word-boundary-aware containment: ``variant`` must appear as a whole token
+    (or whole multi-word phrase), never mid-word.
+
+    Uses a word-boundary regex for ALL variants (not just short ones) so that
+    ``"java"`` does not match ``"javascript"``, ``"pm"`` does not match ``"rpm"``,
+    and ``"develop"`` does not match ``"developer"``. The boundary class includes
+    ``+`` and ``#`` so ``"c"`` does not match ``"c++"``/``"c#"`` and ``"f"`` does
+    not match ``"f#"`` (the ``+``/``#`` are treated as part of the adjacent token).
+    Prefix-style aliases (e.g. ``"postgres"`` for ``postgresql``) still match
+    because synonym expansion injects each alias as a STANDALONE token into the CV
+    text, so the boundary regex finds it on its own.
+    """
+    pattern = _BOUNDARY_CACHE.get(variant)
+    if pattern is None:
+        pattern = re.compile(r"(?<![a-z0-9+#])" + re.escape(variant) + r"(?![a-z0-9+#])")
+        _BOUNDARY_CACHE[variant] = pattern
+    return bool(pattern.search(text))
 
 
 # ---------------------------------------------------------------------------
@@ -421,8 +568,14 @@ def expand_term(term: str) -> frozenset[str]:
     return _FULL_EXPANSION.get(normalized, frozenset({normalized}))
 
 
+@lru_cache(maxsize=2048)
 def expand_text(text: str) -> str:
     """Enrich a CV text with synonym expansions AND one-way skill implications.
+
+    Pure + deterministic, so results are LRU-cached: the same CV/JD text is
+    expanded once and reused. This matters when a page of jobs is scored against a
+    user's CVs — each CV's (identical) text would otherwise be re-expanded once per
+    job, and synonym expansion over a full CV is the dominant per-score cost.
 
     Two-phase enrichment:
 
@@ -454,7 +607,7 @@ def expand_text(text: str) -> str:
         if not expansion:
             continue
         for t in expansion:
-            if t != token and t not in normalized and t not in added:
+            if t != token and not _boundary_match(t, normalized) and t not in added:
                 additions.append(t)
                 added.add(t)
 
@@ -468,7 +621,7 @@ def expand_text(text: str) -> str:
             continue
         # Check if ANY synonym of the skill key is present in phase-1 text.
         skill_forms = _FULL_EXPANSION.get(skill, frozenset({skill}))
-        if not any(f in phase1_text for f in skill_forms):
+        if not any(_boundary_match(f, phase1_text) for f in skill_forms):
             continue
         # Append each implied skill and its synonyms.
         for impl in implied_skills:
@@ -501,6 +654,6 @@ def term_matches(term: str, text_normalized: str) -> bool:
     """
 
     for variant in expand_term(term):
-        if variant in text_normalized:
+        if _boundary_match(variant, text_normalized):
             return True
     return False

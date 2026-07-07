@@ -7,37 +7,36 @@ every raw enum code so the API never ships a raw code alone
 
 from __future__ import annotations
 
+from app.modules.documents.domain import themes
+
 # --------------------------------------------------------------------------- #
 # CV creation modes (``docs/API_CONTRACTS.md`` Create CV)                       #
 # --------------------------------------------------------------------------- #
 
+# The ONLY supported CV creation paths (owner cleanup 2026-07-05):
+#   - blank_template     : create from a (free) template — the direct create path.
+#   - duplicate_existing : duplicate an existing CV.
+#   - uploaded_import    : the ingestion -> import path (create_cv_from_sections);
+#                          NOT selectable via the generic create_cv dispatcher.
+# AI is an in-builder ASSIST (suggestion / ai-edit-command), never a creation mode.
 CREATION_BLANK = "blank_template"
-CREATION_PROFILE_IMPORT = "profile_import"
-CREATION_NOTES_IMPORT = "notes_import"  # deterministic CV-first seed from pasted notes
 CREATION_UPLOADED_IMPORT = "uploaded_import"
 CREATION_DUPLICATE = "duplicate_existing"
-CREATION_AI_DRAFT = "ai_assisted_draft"  # deferred to the ai-engineer slice
 
-# Non-AI creation modes implemented in this slice.
-NON_AI_CREATION_MODES = frozenset(
+# The full set of supported creation modes.
+ALL_CREATION_MODES = frozenset(
     {
         CREATION_BLANK,
-        CREATION_PROFILE_IMPORT,
-        CREATION_NOTES_IMPORT,
         CREATION_UPLOADED_IMPORT,
         CREATION_DUPLICATE,
     }
 )
-ALL_CREATION_MODES = NON_AI_CREATION_MODES | {CREATION_AI_DRAFT}
 
 # source_type stored on cv_profiles (``docs/DATA_MODEL.md`` §7).
 SOURCE_TYPE_FOR_MODE = {
     CREATION_BLANK: "blank_template",
-    CREATION_PROFILE_IMPORT: "profile_import",
-    CREATION_NOTES_IMPORT: "notes_import",
     CREATION_UPLOADED_IMPORT: "uploaded_import",
     CREATION_DUPLICATE: "duplicate_existing",
-    CREATION_AI_DRAFT: "ai_draft",
 }
 
 # --------------------------------------------------------------------------- #
@@ -46,6 +45,7 @@ SOURCE_TYPE_FOR_MODE = {
 
 SECTION_TYPES = frozenset(
     {
+        "header",
         "summary",
         "education",
         "experience",
@@ -56,12 +56,21 @@ SECTION_TYPES = frozenset(
         "languages",
         "activities",
         "publications",
+        "interests",
+        "references",
         "custom",
     }
 )
 
-# Default blank-template section skeleton (ASCII titles; content empty).
+# The header/contact section holds the person's name + contact facts so a CV can
+# render a real header. Its ``content_json`` is neither ``entries`` nor ``items``:
+#   {"name","headline","email","phone","location","links":[{"label","url"}]}
+HEADER_SECTION_TYPE = "header"
+
+# Default blank-template section skeleton (ASCII titles; content empty). The
+# header is always first so a CV can show the owner's name + contact.
 DEFAULT_SECTIONS: list[dict] = [
+    {"section_type": "header", "title": "Header", "sort_order": 5},
     {"section_type": "summary", "title": "Summary", "sort_order": 10},
     {"section_type": "education", "title": "Education", "sort_order": 20},
     {"section_type": "experience", "title": "Experience", "sort_order": 30},
@@ -74,8 +83,11 @@ DEFAULT_SECTIONS: list[dict] = [
 # AI CV suggestion task types (``docs/API_CONTRACTS.md`` AI Suggestion Request) #
 # --------------------------------------------------------------------------- #
 
-TASK_DRAFT_FROM_PROFILE = "draft_cv_from_profile"
-TASK_FILL_FROM_SOURCES = "fill_cv_template_from_sources"
+# In-builder CV AI tasks. The profile-sourced tasks (``draft_cv_from_profile`` /
+# ``fill_cv_template_from_sources``) were removed with the identity-only profile
+# cleanup (owner decision 2026-07-06): the profile no longer holds CV-usable career
+# content, so those tasks had nothing to draft/fill from. Every remaining task
+# grounds on the CV itself, an uploaded-CV extraction, a source CV, or pasted notes.
 TASK_GENERATE_BULLETS = "generate_cv_bullets"
 TASK_REWRITE_SECTION = "rewrite_cv_section"
 TASK_OPTIMIZE_FOR_JOB = "optimize_cv_for_job"
@@ -90,8 +102,6 @@ TASK_AI_EDIT_COMMAND = "ai_edit_command"
 
 AI_TASK_TYPES = frozenset(
     {
-        TASK_DRAFT_FROM_PROFILE,
-        TASK_FILL_FROM_SOURCES,
         TASK_GENERATE_BULLETS,
         TASK_REWRITE_SECTION,
         TASK_OPTIMIZE_FOR_JOB,
@@ -113,8 +123,6 @@ ADVISORY_TASKS = frozenset({TASK_ATS_KEYWORDS, TASK_FABRICATION_CHECK})
 # recorded on the row per ``docs/CV_STUDIO_SPEC.md`` §5 "consume credits only when
 # generation succeeds"). Advisory tasks are free.
 TASK_CREDIT_COST = {
-    TASK_DRAFT_FROM_PROFILE: 2,
-    TASK_FILL_FROM_SOURCES: 2,
     TASK_GENERATE_BULLETS: 1,
     TASK_REWRITE_SECTION: 1,
     TASK_OPTIMIZE_FOR_JOB: 2,
@@ -139,8 +147,11 @@ _SUGGESTION_STATUS_LABELS = {
 }
 
 _TASK_LABELS = {
-    TASK_DRAFT_FROM_PROFILE: ("Soạn CV từ hồ sơ", "Draft CV from profile"),
-    TASK_FILL_FROM_SOURCES: ("Điền CV từ nguồn", "Fill CV from sources"),
+    # Legacy tasks kept in the label map only so any stored suggestion row from
+    # the retired profile-sourced tasks still renders a sensible label (never a
+    # raw code); they are no longer in ``AI_TASK_TYPES`` and cannot be requested.
+    "draft_cv_from_profile": ("CV đã tạo bằng AI", "AI-drafted CV"),
+    "fill_cv_template_from_sources": ("CV đã điền bằng AI", "AI-filled CV"),
     TASK_GENERATE_BULLETS: ("Tạo gạch đầu dòng", "Generate bullet points"),
     TASK_REWRITE_SECTION: ("Viết lại mục", "Rewrite section"),
     TASK_OPTIMIZE_FOR_JOB: ("Tối ưu theo tin tuyển dụng", "Optimize for job"),
@@ -169,18 +180,26 @@ CV_STATUSES = frozenset({CV_DRAFT, CV_READY, CV_ARCHIVED})
 
 _STATUS_LABELS = {
     CV_DRAFT: ("Bản nháp", "Draft"),
-    CV_READY: ("Sẵn sàng", "Ready"),
+    # A CV promoted into the library ("Lưu vào thư viện CV" / upload import) is
+    # analyzed, matching-ready, and usable for apply / job-fit — the label reflects
+    # that it is READY TO APPLY, not merely "ready" (design spec §7).
+    CV_READY: ("Sẵn sàng ứng tuyển", "Ready"),
     CV_ARCHIVED: ("Đã lưu trữ", "Archived"),
 }
 
+# Supported source types get a specific label. Legacy strings (``profile_import`` /
+# ``notes_import`` / ``ai_draft``) may still exist on old ``cv_profiles`` rows, so we
+# keep robust generic labels for them — ``source_label`` must never KeyError/raise on
+# a stored value from a retired creation mode.
 _SOURCE_LABELS = {
     "builder": ("Tự tạo", "Builder"),
     "blank_template": ("Tạo từ mẫu", "From template"),
-    "profile_import": ("Nhập từ hồ sơ", "Imported from profile"),
-    "notes_import": ("Tạo từ ghi chú", "From raw notes"),
     "uploaded_import": ("Nhập từ CV tải lên", "Imported from upload"),
     "duplicate_existing": ("Bản sao", "Duplicated"),
-    "ai_draft": ("Bản nháp AI", "AI draft"),
+    # Retired creation modes — kept only so legacy rows render a sensible label.
+    "profile_import": ("CV đã tạo", "Created CV"),
+    "notes_import": ("CV đã tạo", "Created CV"),
+    "ai_draft": ("CV đã tạo", "Created CV"),
 }
 
 # parse-run + export statuses surfaced to users; raw code never alone.
@@ -259,7 +278,13 @@ def status_label(code: str, *, locale: str = "vi") -> str:
 
 
 def source_label(code: str, *, locale: str = "vi") -> str:
-    return _label(_SOURCE_LABELS, code, locale=locale)
+    """Friendly source label. Robust for legacy/unknown source_type strings that
+    may already exist in the DB (retired ``profile_import`` / ``notes_import`` /
+    ``ai_draft`` modes): a value not in the table returns a sensible generic label
+    instead of raising or leaking the raw code."""
+
+    vi, en = _SOURCE_LABELS.get(code, ("CV đã tạo", "Created CV"))
+    return vi if locale == "vi" else en
 
 
 def parse_status_label(code: str, *, locale: str = "vi") -> str:
@@ -271,160 +296,70 @@ def export_status_label(code: str, *, locale: str = "vi") -> str:
 
 
 # --------------------------------------------------------------------------- #
-# Seed templates (idempotent insert in migration 0005)                         #
+# Seed templates (idempotent insert in migration 0005; upgraded in 0065)        #
 # --------------------------------------------------------------------------- #
+#
+# Each template now carries a FULL visual theme in ``layout_schema`` (layout kind,
+# palette, typography, photo policy, section styling, region assignment, and
+# default order). The theme is the single source of visual truth consumed by the
+# frontend ``<CvDocument/>`` renderer and the PDF renderer alike
+# (``domain.themes`` / design spec §3, §5). Keys are stable — a new admin-published
+# version bumps ``version`` without renaming.
 
-# layout_schema captures section order + simple typography tokens. The renderer
-# reads section order from the CV itself; this is metadata for the builder UI.
-TEMPLATE_SEEDS: list[dict] = [
+# name_vi / name_en / category metadata for each built-in theme key. All templates
+# are free (the premium concept was removed in the 2026-07-05 owner cleanup). The
+# visual theme itself lives in ``domain.themes.BUILTIN_THEMES``.
+_TEMPLATE_META: list[dict] = [
     {
-        "key": "classic_one_page",
-        "name_vi": "Cổ điển một trang",
-        "name_en": "Classic One Page",
+        "key": "classic_ats",
+        "name_vi": "Cổ điển ATS",
+        "name_en": "Classic ATS",
         "category": "classic",
-        "is_premium": False,
-        "layout_schema": {
-            "section_order": [s["section_type"] for s in DEFAULT_SECTIONS],
-            "typography": {"font": "sans", "base_pt": 11},
-            "page": {"size": "A4", "max_pages": 1},
-        },
     },
     {
-        "key": "technical_modern",
-        "name_vi": "Kỹ thuật hiện đại",
-        "name_en": "Technical Modern",
-        "category": "technical",
-        "is_premium": False,
-        "layout_schema": {
-            "section_order": [
-                "summary",
-                "skills",
-                "experience",
-                "projects",
-                "education",
-                "certifications",
-            ],
-            "typography": {"font": "sans", "base_pt": 10},
-            "page": {"size": "A4", "max_pages": 2},
-        },
+        "key": "modern_navy",
+        "name_vi": "Hiện đại Navy",
+        "name_en": "Modern Navy",
+        "category": "professional",
     },
     {
-        "key": "data_analytics_research",
-        "name_vi": "Dữ liệu & nghiên cứu",
-        "name_en": "Data & Research",
-        "category": "data",
-        "is_premium": False,
-        "layout_schema": {
-            "section_order": [
-                "summary",
-                "skills",
-                "projects",
-                "experience",
-                "education",
-                "certifications",
-            ],
-            "typography": {"font": "sans", "base_pt": 10},
-            "page": {"size": "A4", "max_pages": 2},
-            "target_roles": [
-                "Data Analyst",
-                "Research Assistant",
-                "Business Intelligence Intern",
-            ],
-            "strengths": ["metrics", "projects", "technical_skills"],
-        },
+        "key": "modern_teal",
+        "name_vi": "Hiện đại Teal",
+        "name_en": "Modern Teal",
+        "category": "tech",
     },
     {
-        "key": "finance_consulting",
-        "name_vi": "Tài chính & tư vấn",
-        "name_en": "Finance & Consulting",
+        "key": "minimal_mono",
+        "name_vi": "Tối giản",
+        "name_en": "Minimal",
+        "category": "minimal",
+    },
+    {
+        "key": "bold_header",
+        "name_vi": "Tiêu đề nổi bật",
+        "name_en": "Bold Header",
+        "category": "professional",
+    },
+    {
+        "key": "elegant_serif",
+        "name_vi": "Thanh lịch Serif",
+        "name_en": "Elegant Serif",
         "category": "business",
-        "is_premium": False,
-        "layout_schema": {
-            "section_order": [
-                "summary",
-                "experience",
-                "projects",
-                "education",
-                "skills",
-                "awards",
-            ],
-            "typography": {"font": "serif", "base_pt": 10},
-            "page": {"size": "A4", "max_pages": 1},
-            "target_roles": [
-                "Investment Analyst Intern",
-                "Consulting Intern",
-                "Business Analyst",
-            ],
-            "strengths": ["impact", "leadership", "case_projects"],
-        },
     },
     {
-        "key": "marketing_growth",
-        "name_vi": "Marketing & tăng trưởng",
-        "name_en": "Marketing & Growth",
+        "key": "creative_twotone",
+        "name_vi": "Sáng tạo 2 tông",
+        "name_en": "Creative Two-Tone",
         "category": "creative",
-        "is_premium": False,
-        "layout_schema": {
-            "section_order": [
-                "summary",
-                "projects",
-                "experience",
-                "skills",
-                "education",
-                "awards",
-            ],
-            "typography": {"font": "sans", "base_pt": 11},
-            "page": {"size": "A4", "max_pages": 2},
-            "target_roles": [
-                "Marketing Intern",
-                "Growth Intern",
-                "Content Strategist",
-            ],
-            "strengths": ["portfolio", "campaign_metrics", "communication"],
-        },
     },
     {
-        "key": "healthcare_impact",
-        "name_vi": "Y tế & tác động xã hội",
-        "name_en": "Healthcare & Impact",
-        "category": "healthcare",
-        "is_premium": False,
-        "layout_schema": {
-            "section_order": [
-                "summary",
-                "education",
-                "experience",
-                "projects",
-                "certifications",
-                "skills",
-            ],
-            "typography": {"font": "sans", "base_pt": 11},
-            "page": {"size": "A4", "max_pages": 2},
-            "target_roles": [
-                "Clinical Research Intern",
-                "Public Health Intern",
-                "Social Impact Fellow",
-            ],
-            "strengths": ["service", "research", "certifications"],
-        },
+        "key": "tech_chips",
+        "name_vi": "Kỹ thuật Chips",
+        "name_en": "Tech Chips",
+        "category": "tech",
     },
-    {
-        "key": "business_premium",
-        "name_vi": "Doanh nghiệp cao cấp",
-        "name_en": "Business Premium",
-        "category": "business",
-        "is_premium": True,
-        "layout_schema": {
-            "section_order": [
-                "summary",
-                "experience",
-                "education",
-                "skills",
-                "awards",
-                "languages",
-            ],
-            "typography": {"font": "serif", "base_pt": 11},
-            "page": {"size": "A4", "max_pages": 2},
-        },
-    },
+]
+
+TEMPLATE_SEEDS: list[dict] = [
+    {**meta, "layout_schema": themes.theme_for(meta["key"])} for meta in _TEMPLATE_META
 ]

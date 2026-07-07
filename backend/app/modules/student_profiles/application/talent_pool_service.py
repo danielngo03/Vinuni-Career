@@ -1,4 +1,9 @@
-"""Passive talent pool search for partners and university staff.
+"""Passive talent pool search for partners and university staff (identity-only).
+
+Owner decision (2026-07-06): the profile is identity-only, so passive talent
+search now filters by ``is_open_to_work`` + visibility only. Career filters
+(degree/major/headline/summary) are gone — a recruiter who wants career detail
+opens the student's CV(s) via the recruitment reveal flow.
 
 Privacy contracts (``docs/SECURITY_PRIVACY.md`` §8 / BUSINESS_LOGIC.md §talent-pool):
 
@@ -31,14 +36,19 @@ from app.shared.exceptions import PermissionDeniedError
 from app.shared.permissions import Principal
 
 MAX_PAGE_SIZE = 20
-_ALLOWED_OPEN_TO_WORK_TYPES = {"full_time", "internship", "part_time", "contract"}
 
 
 def _require_partner_or_staff(principal: Principal) -> None:
-    """Only active partners and university staff / superadmins may search."""
+    """Only active partners and university staff / superadmins may search.
+
+    The canonical partner persona is ``partner_member`` (``auth.domain.personas``);
+    a prior version checked for ``"partner"`` which never matched a real partner
+    principal, so only staff/superadmin could search. Fixed here to accept
+    ``partner_member`` with an org context.
+    """
     if principal.is_superadmin or principal.persona == "university_staff":
         return
-    if principal.persona == "partner" and principal.org_id is not None:
+    if principal.persona == "partner_member" and principal.org_id is not None:
         return
     raise PermissionDeniedError()
 
@@ -64,16 +74,15 @@ async def search_talent_pool(
     session: AsyncSession,
     *,
     principal: Principal,
-    open_to_work_type: str | None = None,
-    degree_level: str | None = None,
     keyword: str | None = None,
     cursor: str | None = None,
     limit: int = 20,
 ) -> dict:
     """Search students who are open to work, subject to visibility rules.
 
-    Returns a paginated list of anonymised profile summaries. No PII is returned
-    here — partners use the recruitment reveal flow to obtain contact details.
+    Returns a paginated list of anonymised identity summaries. No PII is returned
+    here — partners use the recruitment reveal flow to obtain contact details and
+    to view the student's CV(s).
     """
 
     _require_partner_or_staff(principal)
@@ -88,23 +97,14 @@ async def search_talent_pool(
         )
     )
 
-    # open_to_work_type filtering is applied in Python after the query because
-    # JSON array containment syntax differs between SQLite (test) and Postgres.
-    _filter_work_type = (
-        open_to_work_type if open_to_work_type in _ALLOWED_OPEN_TO_WORK_TYPES else None
-    )
-
-    if degree_level:
-        stmt = stmt.where(StudentProfile.degree_level == degree_level)
-
+    # Keyword now matches identity fields only (city/country); career text is gone.
     if keyword:
         safe_kw = keyword.strip()[:100]
         ilike = f"%{safe_kw}%"
         stmt = stmt.where(
             or_(
-                StudentProfile.headline.ilike(ilike),
-                StudentProfile.major.ilike(ilike),
-                StudentProfile.summary.ilike(ilike),
+                StudentProfile.location_city.ilike(ilike),
+                StudentProfile.location_country.ilike(ilike),
             )
         )
 
@@ -117,20 +117,11 @@ async def search_talent_pool(
         except ValueError:
             pass
 
-    # Fetch more when we'll post-filter in Python; avoids under-returning a page.
-    db_limit = (limit * 4 + 1) if _filter_work_type else (limit + 1)
     stmt = stmt.order_by(
         StudentProfile.updated_at.desc(), StudentProfile.id.desc()
-    ).limit(db_limit)
+    ).limit(limit + 1)
 
     profiles = list((await session.execute(stmt)).scalars().all())
-
-    # Python-side filter for work type (cross-database safe).
-    if _filter_work_type:
-        profiles = [
-            p for p in profiles
-            if _filter_work_type in (list(p.open_to_work_types or []))
-        ]
 
     has_more = len(profiles) > limit
     profiles = profiles[:limit]
@@ -159,23 +150,13 @@ def _profile_avatar_url(profile: StudentProfile) -> str | None:
 
 
 def _talent_card(profile: StudentProfile, full_name: str | None) -> dict:
-    """Anonymous-safe summary card for a talent pool result."""
+    """Anonymous-safe identity summary card for a talent pool result."""
     return {
         "profile_id": str(profile.id),
         "display_name": full_name or "Student",
         "avatar_url": _profile_avatar_url(profile),
-        "headline": profile.headline,
-        "major": profile.major,
-        "degree_level": profile.degree_level,
-        "degree_level_label": vocab.degree_label(profile.degree_level),
-        "graduation_year": profile.graduation_year,
         "location_city": profile.location_city,
         "location_country": profile.location_country,
-        "open_to_work_types": list(profile.open_to_work_types or []),
-        "open_to_work_type_labels": [
-            lbl for t in (profile.open_to_work_types or [])
-            if (lbl := vocab.open_to_work_label(t))
-        ],
-        "profile_completion": profile.profile_completion,
+        "is_open_to_work": profile.is_open_to_work,
         "updated_at": profile.updated_at.isoformat() if profile.updated_at else None,
     }

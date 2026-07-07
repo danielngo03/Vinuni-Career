@@ -18,6 +18,7 @@ owner-only parse-run endpoint.
 
 from __future__ import annotations
 
+import asyncio
 import uuid
 from pathlib import PurePosixPath
 
@@ -104,7 +105,11 @@ async def upload_cv(
             }
 
     existing = await _existing_checksums(session, user_id=principal.user_id)
-    outcome = run_cascade(
+    # run_cascade is synchronous and CPU/IO-heavy (PDF rasterization, PIL
+    # resize/encode, blocking vision HTTP). Offload to a thread so it never
+    # blocks the request event loop and stalls other requests on this worker.
+    outcome = await asyncio.to_thread(
+        run_cascade,
         filename,
         data,
         max_bytes=settings.max_upload_bytes,

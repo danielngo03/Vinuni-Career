@@ -56,7 +56,6 @@ def _job_payload(title: str = "Backend Intern", **over) -> dict:
         "salary_is_disclosed": False,
         "headcount": 1,
         "visibility": "public",
-        "screening_questions": [],
     }
     base.update(over)
     return base

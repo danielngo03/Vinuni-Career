@@ -27,6 +27,8 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from app.core.config import get_settings
 from app.modules.auth.application.context import RequestContext
 from app.modules.documents.application import _shared
+from app.modules.documents.application.errors import CvNotInLibraryError
+from app.modules.documents.domain import catalog
 from app.modules.documents.domain.models import (
     ApplicationCvSnapshot,
     CvParseRun,
@@ -130,6 +132,12 @@ async def create_application_cv_snapshot(
         ).scalar_one_or_none()
         if cv is None or cv.user_id != owner_id:
             raise ResourceNotFoundError()
+        # Only a committed library CV (``ready``) is analyzed/matchable and may be
+        # submitted with an application (design spec 2026-07-05). A draft CV must be
+        # finalized into the library first — reject with a clear, recoverable error
+        # (the apply CV picker only offers ``ready`` CVs, so this guards the API).
+        if cv.status != catalog.CV_READY:
+            raise CvNotInLibraryError(status=cv.status)
         version = (
             await session.execute(
                 select(CvVersion).where(CvVersion.id == version_id, CvVersion.cv_id == cv.id)

@@ -53,9 +53,11 @@ Use this skill when building or reviewing UI, dashboards, CV Studio, application
    surfaces, not the primary CV onboarding path.
    Verify the signed-in student shell inherits the public marketplace top nav
    with student-specific items, not the partner/university ops sidebar by default.
-   For CV upload, verify preview-first flow: original document preview, backend
-   processing states, review/import beside the original, template action, quota
-   handling, and recovery for blank/not-CV/low-quality/password/corrupt/duplicate.
+   For CV upload, verify preview-first flow: original document preview, confirm
+   file, name the CV, backend processing states, landing on the resulting draft,
+   template action, quota handling, and recovery for blank/not-CV/low-quality/
+   password/corrupt/duplicate. (Updated 2026-07-05: upload-and-name; no manual
+   field-review/side-by-side step — backend-authoritative extraction.)
 5. For partner pages, verify recruiting queues, candidate pipeline, job health,
    team/RBAC, quota/package, ads/events, and recent activity.
 6. For university pages, verify moderation queues, SLA risk, governance,
@@ -71,10 +73,12 @@ Use this skill when building or reviewing UI, dashboards, CV Studio, application
 - No fake stats, fake dashboards, or "implemented later" panels marked complete.
 - No random icon semantics: job favorite is heart; messages, notifications,
   AI assistant, featured, sponsored, and curated states use distinct icons/copy.
-- Public/student surfaces need a non-overlapping floating quick-action launcher
-  when saved jobs, opportunity invitations, messages, feedback/help, or
-  assistant are available. Desktop actions need visible hover/focus labels; AI
-  may use restrained motion/glow and must respect `prefers-reduced-motion`.
+- Public/student surfaces put quick actions (saved jobs, notifications,
+  messages, and AI where available) in the TOP HEADER, with feedback/help in the
+  account (avatar) menu — not a bottom-right floating rail (removed, owner
+  decision 2026-07-07). Job favorite uses a heart. Desktop header actions need
+  visible hover/focus labels; AI may use restrained motion/glow and must respect
+  `prefers-reduced-motion`.
 - Public gateway is not complete unless it exposes public jobs, events,
   companies, search, login-gated actions, and sponsored/ad disclosure.
 - Public gateway is not visually complete unless it also has real
@@ -96,9 +100,10 @@ Use this skill when building or reviewing UI, dashboards, CV Studio, application
   fit rail, export controls, and version history. A list of cards plus a simple
   form is functional-only, not visual/product complete.
 - Uploaded-CV flow is not complete unless the user can preview the original,
-  confirm ingestion/import, review extracted fields side by side, correct
-  low-confidence data, import into a template/draft, and recover from failure
-  states without seeing parser/AI internals.
+  confirm the file, name the CV, land on the resulting draft, and recover from
+  failure states without seeing parser/AI internals. (Updated 2026-07-05:
+  uploaded-CV flow is upload-and-name; there is NO manual field-review step —
+  backend-authoritative extraction produces the draft directly.)
 - Use Plus Jakarta Sans as the app UI typeface. Montserrat is legacy/asset-only
   unless a brand image already contains it.
 - Do not accept `globals.css` token changes unless light, dark, and system theme

@@ -13,12 +13,19 @@ from __future__ import annotations
 
 import hashlib
 import math
+import uuid
 from collections import OrderedDict
 from collections.abc import Sequence
+from typing import TYPE_CHECKING
 
 from app.ai.gateway.base import AIEmbedding
 from app.ai.gateway.factory import get_provider_for_alias, real_provider_active
+from app.ai.observability.cost_estimator import estimate_cost_usd
+from app.ai.observability.usage import log_ai_usage, log_ai_usage_async
 from app.core.config import get_settings
+
+if TYPE_CHECKING:
+    from sqlalchemy.ext.asyncio import AsyncSession
 
 _BATCH_SIZE = 512   # max texts per embed call (well below OpenRouter's 2048 limit)
 
@@ -72,6 +79,9 @@ async def embed_texts(
     texts: list[str],
     *,
     alias: str | None = None,
+    db: AsyncSession | None = None,
+    user_id: uuid.UUID | None = None,
+    task_type: str = "embedding",
 ) -> list[AIEmbedding]:
     """Return one embedding per text string, batching automatically.
 
@@ -79,6 +89,12 @@ async def embed_texts(
         texts: Input strings (empty strings produce a zero vector offline).
         alias: Gateway alias to use. Defaults to ``ai_embedding_model_alias``
                from settings (``embedding_cheap``).
+        db: Optional async session. When provided, a real (non-cached) provider
+            call writes a cost row to ``ai_usage_log`` so embedding spend is
+            visible to the budget guard (spec §5.4). Without a session the call
+            still emits the sync structured usage line.
+        user_id: Optional user to attribute the embedding cost to.
+        task_type: Usage-ledger label (e.g. ``"kb_embedding"``).
 
     Uses ``get_provider_for_alias`` so embeddings always route to the provider
     registered for the embedding alias, not the default chat provider.
@@ -122,6 +138,28 @@ async def embed_texts(
         # Populate cache
         for text, emb in zip(batch, embeddings, strict=True):
             _cache_put(_cache_key(text, resolved_alias), emb.vector)
+
+    # Cost/usage ledger: only a real (non-cached) provider fetch spends money.
+    # Cache hits and the offline provider are free and intentionally not logged.
+    if uncached_texts and real_provider_active():
+        prompt_chars = sum(len(t) for t in uncached_texts)
+        if db is not None:
+            await log_ai_usage_async(
+                db,
+                task_type=task_type,
+                alias=resolved_alias,
+                success=True,
+                prompt_chars=prompt_chars,
+                user_id=user_id,
+                cost_usd=estimate_cost_usd(resolved_alias, prompt_chars=prompt_chars),
+            )
+        else:
+            log_ai_usage(
+                task_type=task_type,
+                alias=resolved_alias,
+                success=True,
+                prompt_chars=prompt_chars,
+            )
 
     # Reconstruct results in original order
     fetch_iter = iter(fetched)

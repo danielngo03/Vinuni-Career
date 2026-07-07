@@ -528,14 +528,19 @@ Admin tạo gói nâng cấp cho External/General users:
 - Tier nào được phép mua
 
 #### 2.4 AI Provider Management
-- Thêm provider: alias, type, API key (AES-256 encrypted), base URL
+Superadmin-only. Ordinary university staff may see masked AI status/budget/alias
+controls when granted, but cannot see or edit the real provider/model registry.
+
+- Thêm/sửa/xóa provider: alias, type, encrypted API key reference, base URL
+  reference, active state
 - Provider types: OpenAI-compatible, Gemini native, Anthropic, Ollama, OpenRouter
-- Test kết nối + latency trong UI
+- Test kết nối + latency trong superadmin UI only
 - Model per task type (chat, extraction, matching, embedding, moderation, interview-sim...)
 - Fallback chain (A → B → C local)
 - Health monitoring: latency, error rate, cost per day
 - Budget alerts + auto-disable nếu error rate > threshold
-- **Không expose với end users:** tên provider, key, cost, model names
+- **Không expose với non-superadmin:** tên provider, concrete model id/model
+  name, key, base URL, cost internals, token counts, latency, prompt text
 
 #### 2.5 University RBAC (Fully Configurable)
 Super Admin tự tạo: roles (tên tùy ý) + departments + permissions matrix. Invite staff qua email. Staff có nhiều roles.
@@ -1060,7 +1065,8 @@ Recruiter tạo job (Draft) → Submit for internal review
 - Actionable: mọi recommendation đi kèm next step
 
 #### 9.4 Safety
-- Không expose: provider names, model, tokens, latency, confidence raw, prompt text
+- Không expose với non-superadmin: provider names, concrete model ids/model
+  names, tokens, latency, confidence raw, prompt text
 - Write actions: propose → confirm → execute → audit log
 - AI advisory only — không autonomous
 
@@ -1675,7 +1681,10 @@ AI phải: giải quyết pain point thực sự, output actionable, không tạ
 
 ### 6.3 AI Safety Rules (bất biến)
 
-- **Không expose với end users:** provider names (OpenAI, Gemini...), API keys, token counts, latency, confidence scores raw, OCR/embedding internals, prompt text, internal status codes
+- **Không expose với non-superadmin:** provider names (OpenAI, Gemini...),
+  concrete model ids/model names, API keys, base URLs, token counts, latency,
+  confidence scores raw, OCR/embedding internals, prompt text, internal status
+  codes
 - **Write actions:** AI propose → user explicit confirm → execute → audit log
 - **Human final say:** Mọi AI recommendation là advisory
 - **Moderation:** AI suggest, human approve/reject

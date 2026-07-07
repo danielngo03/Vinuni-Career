@@ -1,3 +1,0 @@
-{"id": "ps_fallback_provider_down_includes_major", "input": {"major": "Computer Science", "degree_level": "Bachelor", "provider": "unavailable"}, "expect": {"is_fallback": true, "draft_contains": "computer science", "no_crash": true}}
-{"id": "ps_fallback_provider_down_no_major_generic", "input": {"provider": "unavailable"}, "expect": {"is_fallback": true, "no_crash": true}}
-{"id": "ps_fallback_provider_down_no_leak", "input": {"major": "CS", "provider": "unavailable"}, "expect": {"is_fallback": true, "no_provider_leak": true, "no_model_leak": true}}

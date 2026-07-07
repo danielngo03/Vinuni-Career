@@ -43,6 +43,32 @@
   from instruction-layer review #8 before broad new feature breadth such as
   generic messaging or `ai_settings`, unless the user explicitly reprioritizes.
 
+### Owner decision — uploaded-CV extraction reversal (05/07/2026)
+
+Two owner product decisions supersede the CV-ingestion field-review and
+LLM-image-policy status recorded below. They are authoritative over any older
+"verified" line in this file that describes a manual field-review gate or a
+text-only-to-LLM rule:
+
+1. **Uploaded-CV flow is upload → confirm file → name the CV → done. NO manual
+   field-review/edit step.** Backend extraction is authoritative and creates the
+   versioned draft directly; the student never reviews or edits extracted fields.
+   This **reverses B-561** (the "CV ingestion field-level review gate" recorded
+   below as fixed/verified, incl. `review-step.tsx`, per-field
+   confirm/edit/reject, and the `fact_confirmation_required` 422 gate). Those
+   entries are now historical — the review gate is being removed as wrong UX.
+   Extraction accuracy is a backend responsibility because it feeds CV-JD
+   matching. Import must still never silently overwrite an already-accepted CV.
+2. **A cheap vision-LLM tier may receive DOWNSCALED document images** for images
+   and styled/scanned PDFs. This supersedes the older "text-only guard, never raw
+   bytes" note recorded below for the ingestion cascade. The separate text-LLM
+   structuring tier still receives extracted text/markdown only. Non-CV / blank /
+   corrupt uploads are rejected and never fabricated into a CV.
+
+Code reconciliation for both items is tracked as implementation work (docs are
+updated first per the docs-only scope of this note); do not treat the older
+field-review/text-only status lines as current after 05/07/2026.
+
 ### Post-Claude review checkpoint — 04/07/2026
 
 Commands run from the current codebase:
@@ -1409,12 +1435,13 @@ Acceptance bar for the next batch:
 
 - Upload preview-first UX exists for PDF/image/DOCX states.
 - Backend ingestion is adapter-based and versioned: native text → layout → OCR
-  → deterministic structuring → optional LLM structuring.
-- OCR/layout/LLM fallback paths have tests or mocked tests.
-- User reviews extracted fields beside the original document and imports into a
-  template/draft with versioning.
-- Browser evidence covers CV upload preview, processing, review/import, quota,
-  and at least one failure recovery at 375/768/1024/1440.
+  → vision-LLM (may receive DOWNSCALED images) → optional text-LLM structuring.
+- OCR/layout/vision-LLM/text-LLM fallback paths have tests or mocked tests.
+- Student confirms the file and names the CV; backend-authoritative extraction
+  creates the versioned draft directly. (Updated 05/07/2026: no manual
+  field-review step; extraction accuracy feeds CV-JD matching.)
+- Browser evidence covers CV upload preview, processing, upload-and-name import,
+  quota, and at least one failure recovery at 375/768/1024/1440.
 
 ## 4eg. Burst Batch 18 — CV Ingestion & CV Studio Product Rescue (review #9, 28/06/2026)
 
@@ -3933,7 +3960,14 @@ product-owner decision on backfilling existing org roles before flipping);
 `webhook` reference catalog nouns that still don't exist (B-565, same bug
 class, out of this ticket's scope).
 
-### 2. B-561 — CV ingestion review gate — **fixed, verified**
+### 2. B-561 — CV ingestion review gate — **fixed, verified** — **SUPERSEDED 05/07/2026**
+> (Updated 2026-07-05: owner decision reverses this review gate. Uploaded-CV flow
+> is upload → confirm file → name the CV → done, with NO manual field-review step;
+> backend-authoritative extraction produces the draft directly. The
+> `review-step.tsx` per-field confirm/edit/reject flow and the
+> `fact_confirmation_required` gate described below are historical. See Section 1,
+> "Owner decision — uploaded-CV extraction reversal (05/07/2026)".)
+
 Backend contract was already correct and tested (per-field `overrides`,
 allowlisted paths, `FactConfirmationFieldsRequiredError` gate) — the gap was
 entirely frontend. New `frontend/src/components/cv/import-steps/review-step.tsx`
@@ -4486,3 +4520,124 @@ reorder, photo crop round-trip, undo/redo, AI diff accept/reject, ingestion
 polish` — nested-interactive ARIA fix on canvas blocks. `backend-developer`/
 `system-architect` — B-528.1 (`CvTemplateVersion`) and B-528.2 (render
 pipeline unification) scope and implementation.
+
+---
+
+## Platform Admin Console — AI Operations (P0+P1) — 07/07/2026
+
+Spec: `docs/superpowers/specs/2026-07-07-platform-admin-console-design.md` (master,
+8 phases) + `2026-07-07-admin-p0-p1-ai-operations-design.md`. Plan:
+`docs/superpowers/plans/2026-07-07-admin-p0-p1-ai-operations.md`. Owner override
+recorded in `AI_PRODUCT_SPEC §5.6`. Built via TDD, per-task spec+quality review,
+adversarial verification; commits `4e8b549..8c22f86` on `feat/ai-provider-model-admin`.
+
+**Status legend:** `implemented` → `API wired` → `browser verified` → `E2E verified`.
+
+Backend (Tasks 1–10) — **implemented + unit/integration-tested (green)**:
+- `ai_model_price` table + DB-backed cost estimate (admin-editable pricing).
+- `ai_ops_event` admin-only per-call telemetry + `ai_usage_daily` rollup +
+  never-raise recorder. `ai_usage_log` (PII-safe) left unchanged.
+- Best-effort Langfuse client (metadata-only, no-op without keys, never blocks a call).
+- `AiTaskRunner` instrumented (org_id, real tokens/latency, provider/model resolve,
+  cost, Langfuse trace, budget-blocked path) — single chokepoint.
+- Per-org daily AI budget enforced in `budget_guard` (+platform+user).
+- `/admin/ai-ops/*` superadmin-only read API (overview/spend/reliability/volume/
+  events) with provider/model identity returned only inside platform-superadmin
+  AI Operations; REAL p95 from `ai_ops_event`.
+- Audited model-price CRUD (duplicate → 409, no DB internals leaked).
+- Scheduler jobs: daily rollup reconcile (self-heal, incl. empty-day) + ops-event
+  retention prune. `/admin/overview` platform read model (per-section safe fallback).
+- Per-org budget exposed + persisted via `/admin/ai-settings` GET/PATCH (audited).
+- Quality gate for our scope: `ruff`/`mypy` clean on all new modules; app boots;
+  new suites green. 6 repo test failures are PRE-EXISTING (jd_extraction eval WIP +
+  a `documents→opportunities` module-boundary violation), confirmed not caused by
+  this work (`git log 4e8b549..HEAD` touched none of them).
+
+Frontend (Tasks 11–17) — **implemented + API wired + typecheck/build/vitest green;
+NOT yet browser/E2E verified**:
+- `(admin)` route group, superadmin `AdminGuard` (gates `is_superadmin===true`,
+  no content flash), standalone `ADMIN_NAV_GROUPS`, `admin/*` i18n (en/vi parity).
+- `Sparkline`/`BarSeries` primitives (pure helpers, NaN-safe, no chart lib).
+- Typed `aiOpsApi` client (snake_case `group_by`, provider/model `string|null`).
+- **AI Operations** screen: Overview (4 tiles + Spend/Reliability/Volume, independent
+  React Query panels, visibility-gated polling, budget-tone thresholds, null-safe),
+  Traces (DataTable + Sheet + Langfuse deep-link from `NEXT_PUBLIC_LANGFUSE_BASE_URL`),
+  Models & Pricing (CRUD + 409 inline), Settings (reuses `AiSettingsScreen` + wired
+  per-org budget control).
+- **Platform Overview** landing `/admin` (real `/admin/overview`, status band,
+  next-actions to existing routes only, incidents = EmptyState, `AdminTopbar`).
+- Gate: `pnpm typecheck` + `check:messages` + `vitest` (205) + `pnpm build`
+  (190 pages, 0 errors) all PASS.
+
+**PENDING (not done):** live browser verification and E2E as a superadmin (needs a
+running backend+frontend with a seeded superadmin login); real-call Langfuse trace
+appearing in the dashboard; visual-design QA. Master-spec phases P2–P7 (Audit Log
+console, System Health/queues, Users & Access incl. session/impersonation, Feature
+Flags, Analytics depth, Alerts & Incidents) are DESIGNED (master spec) but NOT built.
+
+**Owner routing:** `tester-qa` — browser/Playwright verification of the admin console
+as a superadmin; `vinuni-security-review` — sign-off on identity-masking + per-org
+budget + audit before relying on it in production; `product-owner-system-planner` —
+prioritize P2–P7.
+
+### Platform Admin Console — FULL PROGRAM COMPLETE (07/07/2026)
+
+The whole 8-phase program + a visualization upgrade were built, reviewed, and
+**browser-verified**. Commits `4e8b549..88792fa` on `feat/ai-provider-model-admin`
+(local only; nothing pushed).
+
+**Architecture correction (owner feedback):** the admin surfaces are NOT a separate
+`/admin` app. They live INSIDE the `/university` workspace as a superadmin-gated
+`systemAdmin` menu group ("Quản trị hệ thống"). `is_superadmin` shows it; a
+`requiresSuperadmin`/`requiresPermission` sidebar filter + per-page `SuperadminGuard`
+enforce it; `/auth/me` now returns the caller's `permissions` for finer per-permission
+gating. `/university/dashboard` remains the personal dashboard.
+
+**Sections built (backend + frontend, each unit/integration-tested + reviewed +
+contract-parity checked):**
+- Platform Overview (`/university/platform-overview`) — system status band.
+- AI Operations (`/ai-operations`) — spend/latency/volume time-series (Recharts,
+  monochrome), error heatmap (day×hour), reliability + circuit-breaker table,
+  distribution donut, AI log/trace explorer, models & pricing CRUD, AI settings +
+  per-org budget. Real p95 from `ai_ops_event`. Langfuse best-effort trace wired.
+- Logs (`/logs`) — unified Audit + AI log explorer (System / AI / Recent-All merged
+  timeline).
+- System Health (`/system-health`) — queue/pipeline flow diagram + service topology +
+  job-status matrix + queues/services tabs (SchedulerJobRun persistence).
+- Users & Access (`/access`) — user list + user-360 + suspend/unsuspend + platform
+  session list/revoke + grant/revoke superadmin (last-active-superadmin guard).
+- Analytics (`/analytics`) — KPIs + application funnel + growth trends (signups/
+  applications/active-users) over `AnalyticsEvent`.
+- Feature Flags (`/feature-flags`) — generalized flag registry (enable + staged
+  rollout %) + permission-catalog matrix.
+- Alerts (`/alerts`) — threshold alert rules + incidents (ack/resolve) + a scheduler
+  evaluation job that opens/auto-resolves incidents and notifies via the outbox.
+
+**Verification level — `browser verified`:** backend suites for platform_admin +
+ai_ops + observability + ai_settings + auth all green; `ruff` clean on new modules;
+frontend `pnpm typecheck` + `check:messages` (vi/en parity) + `pnpm build` (clean) +
+`vitest` green. Every FE↔BE contract checked field-by-field (a whole-branch review
+caught and fixed a large P0/P1 contract mismatch — always run a contract-parity check
+when FE and BE are built separately). Live browser check as superadmin
+(`admin@vinuni.com`): login → `/university` shows the systemAdmin group; AI Operations
+renders (honest empty states, masked provider identity); Users & Access shows real
+seeded users. Screenshots retained.
+
+**Security:** superadmin-only end-to-end (deps + service layer); provider/model
+identity is platform-superadmin-only per ADR-0011.2 and never exposed to ordinary
+university staff, students, partners, exports, notifications, or non-superadmin
+logs; no prompt/response/keys stored or traced; every write audited;
+per-org + platform + per-user AI budget enforcement; last-active-superadmin lockout
+guard. Owner override recorded in `AI_PRODUCT_SPEC §5.6`.
+
+**Known env note (not a code defect):** a stale `next dev --turbo` server writing to
+`.next` concurrently with `next build` corrupted the build output (turbopack runtime
+module error → HTTP 500). A clean rebuild fixed it. Do not run `pnpm build` while
+`pnpm dev` is running against the same `.next`.
+
+**Deferred (non-blocking, logged):** cohort-retention analytics; folding the two
+hardcoded `AiSettings` AI booleans into the new flag registry; impersonation
+(intentionally NOT built — high-risk, needs its own security-reviewed slice); a few
+minor UI-polish items (open-incident count uses loaded page only; visibility-gated
+refetch resume). `vinuni-security-review` sign-off still recommended before production
+reliance on grant-superadmin + session-revoke + identity masking.

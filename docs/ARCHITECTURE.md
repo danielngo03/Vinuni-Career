@@ -35,7 +35,7 @@
     └────────┬──────────────────────┘
              │
     ┌────────▼────────────────────────────────────┐
-    │  AI Providers (pluggable, admin-managed)     │
+    │  AI Providers (pluggable, superadmin-managed)│
     │  OpenAI · Anthropic · Gemini · OpenRouter   │
     │  Ollama (local) · Any OpenAI-compatible     │
     └─────────────────────────────────────────────┘
@@ -1323,11 +1323,12 @@ per task family (chat/reasoning/embedding/eval), feature flags (`cv_llm_structur
 row with env + key-presence under a strict precedence — **env `AI_REAL_CALLS_ENABLED` + a
 present key is the hard ceiling; the DB toggle can only restrict/select within it; no key forces
 real calls off** — this V1 singleton row and its `/api/v1/admin/ai-settings` GET/PATCH
-shape are unaffected by ADR-0011.1's narrow routing-canvas exception (see
-`docs/API_CONTRACTS.md` ADR-0011.1 / `docs/AI_PRODUCT_SPEC.md` §5.5): only a
-future, separate multi-row routing-canvas endpoint, gated by
-`ai_settings:view_provider_identity`, may return raw provider/model identity
-(never keys/base URL) — and **publishes** an immutable `EffectiveAiConfig` snapshot into the
+shape remains masked for ordinary university staff. Per ADR-0011.2 (see
+`docs/API_CONTRACTS.md` / `docs/AI_PRODUCT_SPEC.md` §5.5), only platform
+superadmins may view or manage raw provider/model identity in the future
+multi-row routing/provider registry; ordinary university staff receive alias
+handles and derived status only (never concrete model ids, provider names, keys,
+or base URLs). The resolver **publishes** an immutable `EffectiveAiConfig` snapshot into the
 gateway's pure in-memory holder (`app/ai/gateway/runtime_config.py`), one-way, mirroring the
 `structuring.set_llm_structuring_adapter` and `advertising → sponsorship_facade` seams. The
 shipped consumers (`gateway.factory.real_provider_active`/`get_provider`, `ai/cv/llm.py`,

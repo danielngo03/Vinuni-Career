@@ -88,7 +88,10 @@ async def generate_cover_letter(
     org = await org_reporting_facade.summary_for(session, job.org_id)
     company_name = org.display_name if org else "the company"
 
-    # Load the student's profile for personalisation.
+    # The profile is identity-only (owner decision 2026-07-06): it supplies the
+    # student's name only. Career content (major/skills/experience/education) lives
+    # in the student's CVs and is intentionally not pulled into the cover-letter
+    # prompt — the prompt already guards missing fields and never invents facts.
     try:
         profile = await get_my_profile(session, principal=principal)
     except Exception:
@@ -96,21 +99,13 @@ async def generate_cover_letter(
 
     student_name = profile.get("display_name") or "the student"
 
-    # Build AI input payload.
+    # Build AI input payload (name + job context only).
     inputs = {
         "title": job.title or "",
         "company_name": company_name,
         "description": job.description or "",
         "required_skills": job.required_skills or [],
         "student_name": student_name,
-        "major": profile.get("major") or "",
-        "degree_level": profile.get("degree_level_label") or "",
-        "graduation_year": profile.get("graduation_year"),
-        "headline": profile.get("headline") or "",
-        "summary": profile.get("summary") or "",
-        "skills": [s.get("name") for s in (profile.get("skills") or []) if s.get("name")],
-        "experience": profile.get("experience") or [],
-        "education": profile.get("education") or [],
     }
 
     # Optionally append the student's own note to the AI context.

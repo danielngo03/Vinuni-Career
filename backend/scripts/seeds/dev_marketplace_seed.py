@@ -59,7 +59,6 @@ JOB_LINKS: dict[str, dict[str, Any]] = {
             "languages": [
                 {"language": "English", "proficiency": "Working proficiency", "required": True}
             ],
-            "work_authorization": {"mode": "required", "values": ["Vietnam"]},
         },
     },
     "React Native Mobile Developer": {
@@ -222,7 +221,6 @@ def _base_requirements(spec: dict[str, Any]) -> dict[str, Any]:
             {"language": "English", "proficiency": "Readable documentation", "required": False}
         ],
         "certifications": [],
-        "work_authorization": {"mode": "required", "values": ["Vietnam"]},
         "note": spec.get("requirement_note"),
     }
 

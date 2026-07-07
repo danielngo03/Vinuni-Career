@@ -9,7 +9,7 @@ grant.
 from __future__ import annotations
 
 import uuid
-from datetime import UTC, date, datetime
+from datetime import UTC, datetime
 
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -18,7 +18,7 @@ from app.core.config import get_settings
 from app.modules.auth.application.context import RequestContext
 from app.modules.student_profiles.domain.models import StudentProfile
 from app.shared.audit import AuditContext
-from app.shared.exceptions import ResourceNotFoundError, ValidationFailedError
+from app.shared.exceptions import ResourceNotFoundError
 from app.shared.permissions import Principal
 
 RESOURCE = "profile"
@@ -40,22 +40,6 @@ def to_uuid(value: object) -> uuid.UUID | None:
         return uuid.UUID(str(value))
     except (ValueError, AttributeError):
         return None
-
-
-def parse_date(value: object, *, field: str) -> date | None:
-    """Coerce an ISO ``YYYY-MM-DD`` string (or ``date``) into a ``date``."""
-
-    if value is None or value == "":
-        return None
-    if isinstance(value, date) and not isinstance(value, datetime):
-        return value
-    if isinstance(value, datetime):
-        return value.date()
-    try:
-        return date.fromisoformat(str(value))
-    except ValueError as exc:
-        raise ValidationFailedError("Ngày không hợp lệ (định dạng YYYY-MM-DD).") from exc
-    raise ValidationFailedError(f"Giá trị '{field}' không hợp lệ.")
 
 
 def audit_ctx(principal: Principal, ctx: RequestContext) -> AuditContext:

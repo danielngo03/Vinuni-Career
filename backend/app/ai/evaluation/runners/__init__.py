@@ -12,7 +12,6 @@ from __future__ import annotations
 from app.ai.evaluation.runners import (
     answer_feedback,
     bias,
-    career_snapshot,
     chat,
     competition_signal,
     content_moderation,
@@ -27,11 +26,9 @@ from app.ai.evaluation.runners import (
     jd_translation,
     knowledge_base,
     market_intelligence,
-    profile_summary,
     recommend,
     scorecard_suggest,
     screening_brief,
-    skill_suggest,
 )
 
 RUN_CASE_BY_FAMILY = {
@@ -50,9 +47,6 @@ RUN_CASE_BY_FAMILY = {
     "screening_brief": screening_brief.run_case,
     "interview_prep": interview_prep.run_case,
     "answer_feedback": answer_feedback.run_case,
-    "skill_suggest": skill_suggest.run_case,
-    "career_snapshot": career_snapshot.run_case,
-    "profile_summary": profile_summary.run_case,
     "competition_signal_explanation": competition_signal.run_case,
     "content_moderation": content_moderation.run_case,
     "fraud_detection": fraud_detection.run_case,
@@ -75,9 +69,6 @@ CHECK_BY_KIND = {
     "screening_brief": screening_brief.check,
     "interview_prep": interview_prep.check,
     "answer_feedback": answer_feedback.check,
-    "skill_suggest": skill_suggest.check,
-    "career_snapshot": career_snapshot.check,
-    "profile_summary": profile_summary.check,
     "competition_signal": competition_signal.check,
     "content_moderation": content_moderation.check,
     "fraud_detection": fraud_detection.check,

@@ -37,7 +37,12 @@ Own the AI product and platform layer: gateway, prompts, tools, evaluation, safe
 
 ## Hard Rules
 
-- End users never see provider names, model names, token counts, latency, raw confidence, prompt text, OCR internals, embedding internals, chunk IDs, similarity scores, or internal status codes.
+- Guests, students, partners, and ordinary university staff never see provider
+  names, concrete model ids/model names, token counts, latency, raw confidence,
+  prompt text, OCR internals, embedding internals, chunk IDs, similarity scores,
+  or internal status codes. Only platform superadmins may view/manage the real
+  provider/model registry inside superadmin AI operations/settings surfaces.
+  API keys and base URLs are never returned at any privilege level.
 - Challenge AI requests that can mislead users, fabricate qualifications, expose private data, bypass human approval, waste model calls, or add model complexity without measurable product value.
 - Challenge AI features that are decorative. AI must reduce real work, produce
   reviewable outputs, have deterministic fallback, and integrate with the

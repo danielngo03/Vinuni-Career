@@ -125,6 +125,12 @@ async def create_alert(
                 details={"reason": "alert_name_exists"}
             ) from exc
         raise
+    # The request-scoped session (``get_db_session``) does NOT auto-commit on
+    # success — every write service in this codebase commits its own
+    # transaction (mirrors ``saved_jobs_service``). Without this the flushed row
+    # is discarded when the session closes and the alert is silently lost.
+    await session.commit()
+    await session.refresh(alert)
     return _present(alert)
 
 
@@ -147,6 +153,8 @@ async def delete_alert(
         raise ResourceNotFoundError()
     alert.is_active = False
     await session.flush()
+    # Persist the soft-delete — the session dependency never commits on success.
+    await session.commit()
 
 
 def _present(alert: JobAlert) -> dict:

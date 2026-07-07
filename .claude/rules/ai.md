@@ -33,7 +33,13 @@ Use for AI gateway, prompts, tool registry, assistants, extraction, matching, mo
 
 ## Non-Negotiables
 
-- Provider names, model names, API keys, token counts, latency, raw confidence, prompt text, OCR internals, embedding internals, chunk IDs, similarity scores, and internal status codes are never exposed to end users.
+- Provider names, concrete model ids/model names, API keys, token counts,
+  latency, raw confidence, prompt text, OCR internals, embedding internals,
+  chunk IDs, similarity scores, and internal status codes are never exposed to
+  guests, students, partners, ordinary university staff, exports, or
+  notifications. Only platform superadmins may view or manage the real
+  provider/model registry, and only in superadmin AI operations/settings
+  surfaces. API keys and base URLs are never returned at any privilege level.
 - AI write actions require explicit confirmation before execution (§4.3 confirmation protocol).
 - AI decisions are advisory. Human final say on moderation, fraud, approvals, and consequential actions.
 - Prompt templates are versioned under `backend/app/ai/prompts/{task}/v{N}.py` — owned by ai-engineer (§8.1).
@@ -51,8 +57,21 @@ Use for AI gateway, prompts, tool registry, assistants, extraction, matching, mo
 - Real AI smoke tests are allowed only after offline eval is green, with
   `AI_REAL_CALLS_ENABLED=true`, `AI_MAX_REAL_CALLS_PER_TEST_RUN` respected,
   cheap aliases only, and no raw prompt/PII/key/provider output in logs.
-- CV/document extraction uses lightweight local parsing first; OCR and LLM structuring are fallback steps (§19).
-- Do not call LLM for blank, corrupt, infected, password-protected, or not-CV uploads by default.
+- CV/document extraction is a cost-tiered cascade: native text (free) -> local OCR
+  -> a cheap vision-LLM for images and styled/scanned PDFs (owner-approved image
+  path) -> optional text-LLM structuring. Escalate to a paid model only when the
+  cheaper tier is insufficient; use the cheapest capable model (§19).
+- The vision-LLM tier MAY receive DOWNSCALED document images (owner decision
+  2026-07-05, supersedes the older "text-only to LLM" rule for the image/scanned
+  path). The text-LLM structuring tier still receives extracted text only.
+- Do not call any model for blank, corrupt, infected, password-protected, or
+  not-CV uploads. The vision tier must return is_cv=false / no result for non-CVs;
+  the cascade must NEVER fabricate a CV from a non-CV, blank, or junk file.
+- Uploaded-CV extraction is backend-authoritative (owner decision 2026-07-05):
+  there is no manual field-review step; the extracted, structured result is stored
+  directly and feeds CV-JD matching, so it must be accurate and well-structured
+  (group each job/degree into one coherent entry; capture skill/language
+  proficiency levels shown as stars/bars/words).
 - CV AI is CV-first: upload/template/raw-notes flows must work without a
   completed student profile form. Profile data is usable only as confirmed facts
   and preferences.
@@ -76,7 +95,9 @@ Use for AI gateway, prompts, tool registry, assistants, extraction, matching, mo
 ## Product Shape
 
 - Use `ai_assistant` for chat/session/tool execution (module: `backend/app/modules/ai_assistant/`).
-- Use `ai_settings` for university-admin provider and model configuration (module: `backend/app/modules/ai_settings/`).
+- Use `ai_settings` for AI governance (module: `backend/app/modules/ai_settings/`).
+  Masked aliases/status/budget may be exposed to authorized university staff;
+  real provider/model identity and provider/model CRUD are superadmin-only.
 - Use `backend/app/ai/` for gateway, agents, extraction, matching, retrieval, safety, evaluation.
 - Workforce/multi-agent tasks: `backend/app/ai/agents/workforce.py` dispatches to Celery workers (§4.2).
 - Reranker: `backend/app/ai/retrieval/rerank.py` (§6.3).
