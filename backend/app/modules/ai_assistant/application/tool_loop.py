@@ -18,7 +18,6 @@ from __future__ import annotations
 
 import json
 import uuid
-from collections.abc import AsyncGenerator
 from datetime import UTC, datetime
 from typing import Any
 
@@ -286,28 +285,38 @@ async def llm_complete(
     *,
     db: AsyncSession | None = None,
     user_id: uuid.UUID | None = None,
+    org_id: uuid.UUID | None = None,
     session_id: uuid.UUID | None = None,
     system_prompt: str | None = None,
 ) -> str:
     """Call the LLM with the conversation history and return the raw text.
 
-    ``system_prompt`` selects the persona system prompt (student vs partner);
-    callers should always pass it explicitly — it defaults to the student
-    prompt only for backward compatibility with any caller not yet updated.
+    ``system_prompt`` selects the persona system prompt (student / partner /
+    university); callers should always pass it explicitly — it defaults to the
+    student prompt only for backward compatibility with any caller not yet
+    updated.
 
     When ``db`` is provided, writes a row to ``ai_usage_log`` via the async
-    path (mandatory cost tracking per AI_PRODUCT_SPEC §5.4). Degrades silently
-    to sync log-only if the DB write fails — never breaks the chat path.
+    path (mandatory cost tracking per AI_PRODUCT_SPEC §5.4) AND emits an ops
+    telemetry event + Langfuse trace via the SAME primitives batch AI tasks use
+    (``AiTaskRunner._record_telemetry``), so a chat turn is observed identically
+    to a batch task. Telemetry is best-effort and never raises; Langfuse is a
+    no-op when keys are absent. Provider/model/token/latency never reach the
+    caller — the return value is guarded reply text only.
     """
+    import time
+
     from app.ai.gateway import runtime_config
     from app.ai.gateway.factory import get_provider_for_alias, real_provider_active
     from app.ai.gateway.offline import OfflineProvider
     from app.ai.gateway.output_guard import guard_completion
+    from app.ai.gateway.task_runner import _record_telemetry, _resolve_provider_model
     from app.ai.observability.cost_estimator import estimate_cost_usd
     from app.ai.observability.usage import log_ai_usage, log_ai_usage_async
     from app.modules.ai_settings.application.budget_guard import check_async
 
     alias = runtime_config.current().chat_model_alias
+    provider_name, model_id = _resolve_provider_model(alias)
     resolved_system_prompt = system_prompt or assistant_prompt.SYSTEM_PROMPT
     messages = [AIMessage(role="system", content=resolved_system_prompt)] + history
 
@@ -330,11 +339,13 @@ async def llm_complete(
             user_id=user_id,
         )
 
+    t0 = time.monotonic()
     try:
         completion = await provider.complete(
             messages, alias=alias, temperature=0.4, max_tokens=800
         )
     except Exception as exc:
+        latency_ms = int((time.monotonic() - t0) * 1000)
         if db is not None:
             await log_ai_usage_async(
                 db,
@@ -343,11 +354,28 @@ async def llm_complete(
                 success=False,
                 user_id=user_id,
                 session_id=session_id,
+                org_id=org_id,
+            )
+            await _record_telemetry(
+                db=db,
+                task_type=_TASK_TYPE,
+                alias=alias,
+                provider=provider_name,
+                model=model_id,
+                prompt_tokens=None,
+                completion_tokens=None,
+                latency_ms=latency_ms,
+                status="error",
+                fallback_used=False,
+                org_id=org_id,
+                user_id=user_id,
+                session_id=session_id,
             )
         else:
             log_ai_usage(task_type=_TASK_TYPE, alias=alias, success=False)
         raise AIUnavailableError() from exc
 
+    latency_ms = int((time.monotonic() - t0) * 1000)
     text = guard_completion(completion)
     completion_chars = len(text)
     cost_usd = estimate_cost_usd(
@@ -355,6 +383,10 @@ async def llm_complete(
         prompt_chars=prompt_chars,
         completion_chars=completion_chars,
     )
+    # Real token counts from the provider usage dict (offline provider supplies
+    # deterministic values); never surfaced to the caller.
+    prompt_tokens: int | None = completion.usage.get("prompt_tokens")
+    completion_tokens: int | None = completion.usage.get("completion_tokens")
 
     if db is not None:
         await log_ai_usage_async(
@@ -366,7 +398,23 @@ async def llm_complete(
             completion_chars=completion_chars,
             user_id=user_id,
             session_id=session_id,
+            org_id=org_id,
             cost_usd=cost_usd,
+        )
+        await _record_telemetry(
+            db=db,
+            task_type=_TASK_TYPE,
+            alias=alias,
+            provider=provider_name,
+            model=model_id,
+            prompt_tokens=prompt_tokens,
+            completion_tokens=completion_tokens,
+            latency_ms=latency_ms,
+            status="ok",
+            fallback_used=False,
+            org_id=org_id,
+            user_id=user_id,
+            session_id=session_id,
         )
     else:
         log_ai_usage(
@@ -377,27 +425,3 @@ async def llm_complete(
             completion_chars=completion_chars,
         )
     return text
-
-
-async def llm_stream_chunks(
-    history: list[AIMessage],
-    *,
-    db: AsyncSession | None = None,
-    user_id: uuid.UUID | None = None,
-    session_id: uuid.UUID | None = None,
-) -> AsyncGenerator[str, None]:
-    """Stream a chat turn through the governed AI task runner."""
-    from app.ai.gateway import runtime_config
-    from app.ai.gateway.task_runner import AiTaskRunner
-
-    alias = runtime_config.current().chat_model_alias
-    messages = [AIMessage(role="system", content=assistant_prompt.SYSTEM_PROMPT)] + history
-    runner = AiTaskRunner(
-        db,
-        alias=alias,
-        task_type=_TASK_TYPE,
-        user_id=user_id,
-        session_id=session_id,
-    )
-    async for chunk in runner.stream(messages, temperature=0.4, max_tokens=800):
-        yield chunk

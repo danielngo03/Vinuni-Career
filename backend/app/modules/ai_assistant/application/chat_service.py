@@ -309,6 +309,7 @@ async def send_message(
                 history,
                 db=session,
                 user_id=principal.user_id,
+                org_id=principal.org_id,
                 session_id=chat.id,
                 system_prompt=system_prompt,
             )
@@ -552,6 +553,7 @@ async def stream_message(
                 history,
                 db=session,
                 user_id=principal.user_id,
+                org_id=principal.org_id,
                 session_id=chat.id,
                 system_prompt=system_prompt,
             )
