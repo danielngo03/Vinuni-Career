@@ -58,6 +58,7 @@ SUPPORTED_TOOL_NAMES = frozenset(
         "suggest_scorecard",
         "generate_screening_brief",
         "get_upcoming_partner_events",
+        "get_partner_analytics_summary",
         "move_candidate_stage",
     }
 )
@@ -222,6 +223,8 @@ async def _execute_tool(
             return await partner.generate_screening_brief(session, principal, args)
         if name == "get_upcoming_partner_events":
             return await partner.get_upcoming_partner_events(session, principal, args)
+        if name == "get_partner_analytics_summary":
+            return await partner.get_partner_analytics_summary(session, principal)
         if name == "move_candidate_stage":
             return await partner.move_candidate_stage(session, principal, args)
 

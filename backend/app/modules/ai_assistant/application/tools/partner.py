@@ -31,6 +31,20 @@ def _parse_uuid(raw: str | None) -> _uuid.UUID | None:
         return None
 
 
+# Human-friendly labels for pipeline statuses — the chat surface must not leak
+# raw enum codes (backend rule: "No raw enum codes in end-user responses").
+_FUNNEL_STAGE_LABELS: dict[str, str] = {
+    "submitted": "Submitted",
+    "under_review": "Under review",
+    "shortlisted": "Shortlisted",
+    "interview": "Interview",
+    "offer": "Offer",
+    "hired": "Hired",
+    "rejected": "Rejected",
+    "withdrawn": "Withdrawn",
+}
+
+
 async def get_partner_pipeline_summary(session: AsyncSession, principal: Principal) -> dict:
     from app.modules.recruitment.application import dashboard_read as recruitment_read
 
@@ -378,6 +392,76 @@ async def get_upcoming_partner_events(
         )
     upcoming.sort(key=lambda x: x["starts_at"] or "")
     return {"ok": True, "events": upcoming[:8], "total": len(upcoming)}
+
+
+async def get_partner_analytics_summary(session: AsyncSession, principal: Principal) -> dict:
+    """Org-scoped hiring analytics summary — funnel, top jobs, conversion.
+
+    Reuses the SAME read functions that power ``GET /dashboards/partner/analytics``
+    (``recruitment.dashboard_read.analytics_*``); no new SQL/aggregation is
+    written here. Every count is scoped to the caller's own ``principal.org_id``
+    and is aggregate-only — no candidate PII, no raw scores, no provider/model
+    internals. Dispatch RBAC (``specs.py`` ``required_permissions`` including
+    ``analytics:view_job_metrics``) gates access; this handler keeps the standard
+    partner auth/org guard as defense-in-depth.
+    """
+    from app.modules.recruitment.application import dashboard_read as recruitment_read
+
+    if not principal.is_authenticated or principal.org_id is None:
+        return {"ok": False, "error": "partner_auth_required"}
+
+    org_id = principal.org_id
+    try:
+        funnel_rows = await recruitment_read.analytics_application_funnel(session, org_id=org_id)
+        top_jobs = await recruitment_read.analytics_top_jobs(session, org_id=org_id, limit=5)
+        monthly = await recruitment_read.analytics_monthly_trend(session, org_id=org_id)
+    except Exception:
+        return {"ok": False, "error": "tool_failed"}
+
+    count_by_status = {r["status"]: int(r["count"]) for r in funnel_rows}
+    # Each application has exactly one current status, so the funnel counts sum
+    # to the org's total application volume.
+    applications_total = sum(count_by_status.values())
+
+    def _rate(n: int) -> float | None:
+        if applications_total <= 0:
+            return None
+        return round(n * 100 / applications_total, 1)
+
+    return {
+        "ok": True,
+        "applications_total": applications_total,
+        "funnel": [
+            {
+                "stage": _FUNNEL_STAGE_LABELS.get(
+                    r["status"], str(r["status"]).replace("_", " ").title()
+                ),
+                "count": int(r["count"]),
+            }
+            for r in funnel_rows
+        ],
+        "top_jobs": [
+            {
+                "title": j.get("title") or "—",
+                "application_count": j.get("application_count", 0),
+                "url": f"/partner/jobs/{j.get('job_id', '')}",
+            }
+            for j in top_jobs
+        ],
+        "monthly_trend": [
+            {"month": m.get("month"), "applications": m.get("count", 0)} for m in monthly
+        ],
+        "conversion": {
+            # hire_rate is the headline (terminal) conversion; interview/offer are
+            # the share of applications currently at that live pipeline stage.
+            "hire_rate_pct": _rate(count_by_status.get("hired", 0)),
+            "offer_rate_pct": _rate(count_by_status.get("offer", 0)),
+            "interview_rate_pct": _rate(count_by_status.get("interview", 0)),
+        },
+        "note": (
+            "Aggregate counts for your organisation only — no individual candidate data."
+        ),
+    }
 
 
 async def move_candidate_stage(session: AsyncSession, principal: Principal, args: dict) -> dict:

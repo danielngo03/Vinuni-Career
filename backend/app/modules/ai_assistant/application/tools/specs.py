@@ -882,6 +882,45 @@ TOOL_SPECS: dict[str, ToolSpec] = {
         fallback="I couldn't load your events right now. Check /partner/events for your listings.",
         audit_event_type="TOOL_GET_UPCOMING_PARTNER_EVENTS",
     ),
+    "get_partner_analytics_summary": ToolSpec(
+        name="get_partner_analytics_summary",
+        description=(
+            "Get an org-scoped hiring analytics summary for the partner's own "
+            "organisation: the application funnel (how many applications sit at "
+            "each pipeline stage), the top jobs by application volume, the recent "
+            "monthly application trend, and overall conversion rates "
+            "(interview / offer / hire). Use this when the recruiter asks 'how is "
+            "our hiring doing', 'what's our application funnel', 'which roles get "
+            "the most applicants', or 'what's our conversion rate'. Aggregate "
+            "counts only — never any individual candidate's identity or data. "
+            "Only available to partner users with analytics access."
+        ),
+        parameters={"type": "object", "properties": {}, "required": []},
+        output_schema={
+            "type": "object",
+            "properties": {
+                "ok": {"type": "boolean"},
+                "applications_total": {"type": "integer"},
+                "funnel": {"type": "array", "items": {"type": "object"}},
+                "top_jobs": {"type": "array", "items": {"type": "object"}},
+                "monthly_trend": {"type": "array", "items": {"type": "object"}},
+                "conversion": {"type": "object"},
+            },
+        },
+        permission_class="read_only",
+        persona=[PARTNER_USER],
+        required_permissions=[
+            "authenticated",
+            "role:partner_user",
+            "analytics:view_job_metrics",
+        ],
+        fallback=(
+            "I couldn't load your hiring analytics right now. Check "
+            "/partner/analytics for your funnel and job performance."
+        ),
+        audit_event_type="TOOL_GET_PARTNER_ANALYTICS_SUMMARY",
+        timeout_seconds=20,
+    ),
     "move_candidate_stage": ToolSpec(
         name="move_candidate_stage",
         description=(

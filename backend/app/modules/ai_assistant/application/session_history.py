@@ -41,6 +41,9 @@ async def create_session(
     chat = ChatSession(
         id=uuid.uuid4(),
         user_id=principal.user_id,
+        # Org context for partner (recruiter) chats — NULL for students / no-org
+        # principals; used for org-scoped audit and energy metering attribution.
+        org_id=principal.org_id,
         persona=principal.persona,
         created_at=datetime.now(UTC),
     )

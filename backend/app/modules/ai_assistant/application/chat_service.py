@@ -33,7 +33,9 @@ from datetime import UTC, datetime
 
 from sqlalchemy.ext.asyncio import AsyncSession
 
+from app.ai.energy.service import build_usage_context, charge_units
 from app.ai.gateway.base import AIMessage
+from app.ai.observability.billable_usage import FEATURE_CHATBOT, record_billable_usage
 from app.ai.prompts.assistant import v1 as assistant_prompt
 from app.ai.prompts.assistant_partner import v1 as partner_prompt
 from app.ai.retrieval.citation_verify import kb_source_titles, verify_citations
@@ -150,6 +152,44 @@ def _apply_topical_scope_guard(final_text: str, *, used_tool: bool, locale: str 
     )
 
 
+async def _charge_chatbot_turn(
+    session: AsyncSession,
+    *,
+    principal: Principal,
+    chat_id: uuid.UUID,
+    user_msg_id: uuid.UUID,
+) -> None:
+    """Charge exactly one FEATURE_CHATBOT credit for a completed chat turn.
+
+    Called once per user message ONLY when a genuine model answer was produced
+    (never for fast-path/agent-plan replies, confirmation-pending turns, or the
+    AI-unavailable fallback — those callers do not invoke this). The idempotency
+    key is namespaced on the *user message id*, so a redelivery / retry of the
+    same turn is a no-op and never double-charges (``record_billable_usage`` is
+    idempotent on that key).
+
+    Scope: partner members debit the shared ORG energy pool, students their own
+    user scope — ``build_usage_context`` resolves the billing scope. Best-effort:
+    a metering failure must never break the reply, so all errors are swallowed.
+    """
+    try:
+        ctx = build_usage_context(
+            principal,
+            feature_key=FEATURE_CHATBOT,
+            task_type="ai_assistant_chat",
+            session_id=chat_id,
+            idempotency_parts=(user_msg_id,),
+        )
+        await record_billable_usage(
+            session,
+            ctx=ctx,
+            result_status="success",
+            base_units=charge_units(FEATURE_CHATBOT),
+        )
+    except Exception:  # noqa: BLE001 — accounting must never break the reply
+        _logger.warning("chatbot_turn_metering_failed", exc_info=True)
+
+
 async def send_message(
     session: AsyncSession,
     *,
@@ -263,6 +303,10 @@ async def send_message(
     tool_call_count = 0
     used_tool = False
     final_text: str | None = None
+    # True only when the loop produced a genuine model answer (the one billable
+    # outcome). Stays False for AI-unavailable / unknown-tool / tool-cap
+    # fallbacks so we never charge for a non-answer.
+    chargeable = False
     kb_sources: list[str] = []  # §6.5: retrieved doc titles for this turn's citation check
 
     while iterations < _MAX_TOOL_ITERATIONS:
@@ -284,6 +328,7 @@ async def send_message(
         if tool_call is None:
             final_text = _apply_citation_guard(raw_response, kb_sources)
             final_text = _apply_topical_scope_guard(final_text, used_tool=used_tool)
+            chargeable = True
             break
 
         tool_name = tool_call.get("name", "")
@@ -349,6 +394,15 @@ async def send_message(
     )
     session.add(assistant_msg)
     chat.last_message_at = datetime.now(UTC)
+
+    # Meter one FEATURE_CHATBOT credit for this turn on a genuine model answer
+    # (best-effort, idempotent on the user message id). Committed together with
+    # the assistant message below.
+    if chargeable:
+        await _charge_chatbot_turn(
+            session, principal=principal, chat_id=chat.id, user_msg_id=user_msg.id
+        )
+
     await session.commit()
 
     return serialize_message(assistant_msg)
@@ -489,6 +543,9 @@ async def stream_message(
     used_tool = False
     final_text: str | None = None
     final_text_streamed = False
+    # True only when the loop produced a genuine model answer (the one billable
+    # outcome) — see send_message for the rationale.
+    chargeable = False
     kb_sources: list[str] = []  # §6.5: retrieved doc titles for this turn's citation check
 
     while iterations < _MAX_TOOL_ITERATIONS:
@@ -520,6 +577,7 @@ async def stream_message(
             final_text = _apply_citation_guard(strip_tool_call_json(raw_response), kb_sources)
             final_text = _apply_topical_scope_guard(final_text, used_tool=used_tool)
             final_text_streamed = False
+            chargeable = True
             break
 
         tool_name = tool_call.get("name", "")
@@ -592,6 +650,14 @@ async def stream_message(
     )
     session.add(assistant_msg)
     chat.last_message_at = datetime.now(UTC)
+
+    # Meter one FEATURE_CHATBOT credit for this turn on a genuine model answer
+    # (best-effort, idempotent on the user message id).
+    if chargeable:
+        await _charge_chatbot_turn(
+            session, principal=principal, chat_id=chat.id, user_msg_id=user_msg.id
+        )
+
     await session.commit()
 
     yield {"type": "done", "message": serialize_message(assistant_msg)}
