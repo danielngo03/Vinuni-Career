@@ -1,0 +1,47 @@
+{
+  "aiGovernance": {
+    "dialog": {
+      "title": "Request more AI capacity",
+      "subtitle": "University AI energy is distributed by a platform administrator — describe what you need and they will review it.",
+      "reasonLabel": "Reason",
+      "reasonPlaceholder": "e.g. Reviewing a large cohort of CVs before the career fair",
+      "reasonHelp": "Explain briefly why your current weekly AI energy is not enough.",
+      "unitsLabel": "Requested energy credits",
+      "unitsOptional": "optional",
+      "unitsPlaceholder": "e.g. 500",
+      "unitsHelp": "An estimate of the extra weekly energy you need. The admin may grant a different amount.",
+      "submit": "Send request",
+      "cancel": "Cancel",
+      "reasonRequired": "Please describe why you need more AI energy.",
+      "unitsInvalid": "Enter a positive number of energy credits.",
+      "alreadyPending": "You already have a capacity request awaiting a decision.",
+      "error": "Could not send your request. Please try again.",
+      "successToast": "Capacity request sent"
+    },
+    "staff": {
+      "title": "My AI capacity",
+      "subtitle": "Your weekly AI energy is distributed by a platform administrator. When it runs low, request more here.",
+      "requestButton": "Request more capacity",
+      "emptyTitle": "No capacity requests yet",
+      "emptyBody": "You have not asked for extra AI energy. If you run out during the week, send a request and an admin will review it.",
+      "errorTitle": "Couldn't load your requests",
+      "errorBody": "Something went wrong loading your capacity requests.",
+      "retry": "Retry",
+      "unlimitedTitle": "Unlimited AI energy",
+      "unlimitedBody": "Your account is exempt from AI energy limits, so there is nothing to request.",
+      "pendingBanner": "You have a capacity request awaiting a decision.",
+      "reasonLabel": "Reason",
+      "requestedLabel": "Requested",
+      "decisionLabel": "Admin note",
+      "submittedAt": "Submitted {when}",
+      "decidedAt": "Decided {when}",
+      "creditsValue": "{units} credits",
+      "creditsUnset": "Amount not specified"
+    },
+    "status": {
+      "pending": "Pending",
+      "approved": "Approved",
+      "denied": "Denied"
+    }
+  }
+}

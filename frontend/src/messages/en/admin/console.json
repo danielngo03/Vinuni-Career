@@ -792,6 +792,132 @@
         "seriesActiveUsers": "Active users"
       },
       "retry": "Retry"
+    },
+    "aiDistribution": {
+      "pageTitle": "AI Energy Distribution",
+      "pageSubtitle": "Distribute weekly AI energy down the organization, and review staff capacity requests.",
+      "masked": "AI energy is shown as opaque credits and a remaining %, never tokens, cost, provider, or model.",
+      "orgContextNote": "Distributing energy for {orgType}.",
+      "orgTypeUniversity": "the VinUni university",
+      "orgTypePartner": "a partner organization",
+      "weekOf": "Week of {date}",
+      "tabs": {
+        "distribution": "Distribution",
+        "requests": "Capacity requests"
+      },
+      "pool": {
+        "title": "Organization energy pool",
+        "usedLabel": "Used this week",
+        "ceilingLabel": "Weekly ceiling",
+        "effectiveLabel": "Effective allowance",
+        "reserveLabel": "+{wallet} reserve",
+        "defaultNote": "Persona default applies (no explicit ceiling set).",
+        "setCeiling": "Set pool ceiling",
+        "energyLabel": "{pct}% left",
+        "energyTitle": "Energy remaining"
+      },
+      "energy": {
+        "value": "{pct}% left",
+        "inherited": "Inherited"
+      },
+      "ceiling": {
+        "explicit": "{units} credits",
+        "inherited": "Inherited",
+        "setLimit": "Set limit",
+        "edit": "Edit limit",
+        "dialogTitleOrg": "Set organization energy ceiling",
+        "dialogTitleDept": "Set department energy ceiling",
+        "dialogTitleUser": "Set member energy ceiling",
+        "dialogSubtitle": "Weekly AI energy credits this scope may spend. Clear it to inherit the parent pool.",
+        "targetLabel": "Target",
+        "modeLabel": "Ceiling",
+        "modeExplicit": "Set a fixed weekly ceiling",
+        "modeInherit": "Inherit from the parent pool",
+        "unitsLabel": "Weekly energy credits",
+        "unitsHelp": "0–1,000,000 opaque credits. Not tokens, cost, or money.",
+        "unitsPlaceholder": "e.g. 500",
+        "unitsInvalid": "Enter a whole number between 0 and 1,000,000.",
+        "save": "Save",
+        "cancel": "Cancel",
+        "savedToast": "Energy ceiling updated",
+        "errorToast": "Could not update the ceiling. Please try again."
+      },
+      "departments": {
+        "title": "Departments",
+        "colName": "Department",
+        "colCeiling": "Weekly ceiling",
+        "colUsed": "Used this week",
+        "colEnergy": "Energy",
+        "colAction": "Actions",
+        "emptyTitle": "No departments",
+        "emptyBody": "This organization has no departments to distribute energy to yet."
+      },
+      "members": {
+        "title": "Members",
+        "colMember": "Member",
+        "colDept": "Department",
+        "colCeiling": "Weekly ceiling",
+        "colUsed": "Used this week",
+        "colEnergy": "Energy",
+        "colAction": "Actions",
+        "noDept": "No department",
+        "deptCount": "{count} departments",
+        "unknownMember": "Unknown member",
+        "emptyTitle": "No members",
+        "emptyBody": "This organization has no members to distribute energy to yet."
+      },
+      "requests": {
+        "title": "Capacity requests",
+        "subtitle": "Staff who exhausted their allocation ask for more energy here. Approving raises their ceiling.",
+        "filterLabel": "Status",
+        "statusPending": "Pending",
+        "statusApproved": "Approved",
+        "statusDenied": "Denied",
+        "colRequester": "Requester",
+        "colReason": "Reason",
+        "colRequested": "Requested",
+        "colSubmitted": "Submitted",
+        "colAction": "Actions",
+        "requestedUnset": "Not specified",
+        "creditsValue": "{units} credits",
+        "unknownRequester": "Unknown user",
+        "approve": "Approve",
+        "deny": "Deny",
+        "review": "Review",
+        "emptyTitle": "No capacity requests",
+        "emptyBody": "There are no {status} capacity requests right now.",
+        "errorTitle": "Couldn't load the queue",
+        "errorBody": "Something went wrong loading capacity requests.",
+        "retry": "Retry",
+        "decideTitle": "Review capacity request",
+        "requesterLabel": "Requester",
+        "reasonLabel": "Reason",
+        "requestedLabel": "Requested amount",
+        "grantLabel": "Energy credits to grant",
+        "grantHelp": "This becomes the requester's new weekly ceiling. Defaults to the requested amount.",
+        "grantPlaceholder": "e.g. 500",
+        "grantInvalid": "Enter a positive whole number of credits.",
+        "grantRequired": "Enter the amount of energy to grant to approve.",
+        "noteLabel": "Decision note",
+        "noteOptional": "optional",
+        "notePlaceholder": "Add context for the requester (optional)",
+        "approveButton": "Approve & raise ceiling",
+        "denyButton": "Deny request",
+        "cancel": "Cancel",
+        "approvedToast": "Request approved",
+        "deniedToast": "Request denied",
+        "conflictToast": "This request was already decided.",
+        "errorToast": "Could not record the decision. Please try again."
+      },
+      "error": {
+        "title": "Distribution data unavailable",
+        "body": "Could not load the AI energy distribution for this organization.",
+        "retry": "Retry"
+      },
+      "noOrg": {
+        "title": "No organization context",
+        "body": "Your account is not linked to an organization, so there is no energy pool to distribute. Sign in with a university identity to manage distribution."
+      }
     }
   }
 }

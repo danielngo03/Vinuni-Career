@@ -59,7 +59,9 @@ export interface AiEnergySession3h {
 /** Reason a caller is hard-blocked from new AI actions (weekly energy spent). */
 export type AiEnergyBlockedReason =
   | "AI_WEEKLY_ENERGY_EXCEEDED"
-  | "AI_ORG_WEEKLY_ENERGY_EXCEEDED";
+  | "AI_ORG_WEEKLY_ENERGY_EXCEEDED"
+  | "AI_MEMBER_ALLOCATION_EXCEEDED"
+  | "AI_UNIVERSITY_ALLOCATION_EXCEEDED";
 
 /** Reason a caller is being warned (burst pacing, nearing the weekly limit, or
  * an already-exceeded weekly/org budget surfaced as a soft warning). */
@@ -67,7 +69,15 @@ export type AiEnergyWarningReason =
   | "AI_SESSION_BURST"
   | "AI_WEEKLY_NEARING_LIMIT"
   | "AI_WEEKLY_ENERGY_EXCEEDED"
-  | "AI_ORG_WEEKLY_ENERGY_EXCEEDED";
+  | "AI_ORG_WEEKLY_ENERGY_EXCEEDED"
+  | "AI_UNIVERSITY_ALLOCATION_EXCEEDED";
+
+/** Persona-aware exhaustion CTA the backend recommends for the meter:
+ *   - `request_capacity`: university staff — ask a platform admin for more
+ *     energy (no self-serve billing);
+ *   - `upgrade`: student/partner — plan/credit upgrade or top-up;
+ *   - `unlimited`: superadmin (or otherwise uncapped) — never blocked/charged. */
+export type AiEnergyAction = "request_capacity" | "upgrade" | "unlimited";
 
 /** AI energy usage for the sidebar meter (`GET /ai/usage/me`).
  * Cost-weighted "energy" model (owner-locked 2026-07-08). The headline is
@@ -88,6 +98,12 @@ export interface AiEnergyUsage {
   warning_reason: AiEnergyWarningReason | null;
   /** ISO-8601 UTC instant the weekly energy budget resets. */
   week_reset: string;
+  /** Recommended exhaustion CTA for this persona (request capacity / upgrade /
+   * unlimited). Drives which action the energy meter offers. */
+  action: AiEnergyAction;
+  /** Superadmin (or otherwise uncapped): the meter never blocks or charges and
+   * shows a clean "unlimited" state with no bar or CTA. */
+  unlimited: boolean;
 }
 
 /** One product-feature bucket in the usage breakdown. `feature` is a stable

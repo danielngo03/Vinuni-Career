@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { useQuery } from "@tanstack/react-query";
 import {
@@ -11,6 +11,7 @@ import {
   CheckCircle,
   XCircle,
   Lightning,
+  Sparkle,
 } from "@phosphor-icons/react";
 import { Button, EmptyState, Skeleton } from "@/components/ui";
 import {
@@ -18,6 +19,7 @@ import {
   type AiEnergyUsageDetail,
   type BillingAudience,
 } from "@/lib/api";
+import { CapacityRequestDialog } from "@/components/ai-governance/capacity-request-dialog";
 import { cn } from "@/lib/utils";
 
 /**
@@ -102,6 +104,8 @@ function UsageBody({
   locale: string;
   t: ReturnType<typeof useTranslations<"billing">>;
 }) {
+  const [capacityOpen, setCapacityOpen] = useState(false);
+
   const featureLabel = (feature: string) =>
     t.has(`usage.features.${feature}`)
       ? t(`usage.features.${feature}`)
@@ -114,6 +118,29 @@ function UsageBody({
 
   const weekReset = relativeTime(data.week_reset, locale);
   const isOrg = data.scope === "org";
+  const isRequestCapacity = data.action === "request_capacity";
+
+  // Superadmin / uncapped: a clean, bar-less unlimited state.
+  if (data.unlimited) {
+    return (
+      <div className="rounded-2xl border border-[var(--border-default)] bg-white p-4 shadow-[0_2px_16px_rgba(11,34,57,0.06)]">
+        <EmptyState
+          kind="empty"
+          icon={Sparkle}
+          title={t("usage.unlimitedTitle")}
+          description={t("usage.unlimitedBody")}
+        />
+      </div>
+    );
+  }
+
+  const blockedCopy =
+    data.blocked_reason === "AI_ORG_WEEKLY_ENERGY_EXCEEDED"
+      ? t("usage.blockedOrgWeekly", { when: weekReset ?? "" })
+      : data.blocked_reason === "AI_UNIVERSITY_ALLOCATION_EXCEEDED" ||
+          data.blocked_reason === "AI_MEMBER_ALLOCATION_EXCEEDED"
+        ? t("usage.blockedUniversity", { when: weekReset ?? "" })
+        : t("usage.blockedWeekly", { when: weekReset ?? "" });
 
   return (
     <div className="space-y-4 rounded-2xl border border-[var(--border-default)] bg-white p-4 shadow-[0_2px_16px_rgba(11,34,57,0.06)]">
@@ -123,16 +150,37 @@ function UsageBody({
       {/* Warning / blocked banner */}
       {data.blocked ? (
         <Banner tone="error">
-          {data.blocked_reason === "AI_ORG_WEEKLY_ENERGY_EXCEEDED"
-            ? t("usage.blockedOrgWeekly", { when: weekReset ?? "" })
-            : t("usage.blockedWeekly", { when: weekReset ?? "" })}
-          <span className="block font-normal text-[var(--text-secondary)]">
-            {t("usage.seePlans")}
-          </span>
+          {blockedCopy}
+          {isRequestCapacity ? (
+            <span className="mt-2 block">
+              <span className="block font-normal text-[var(--text-secondary)]">
+                {t("usage.requestCapacityHint")}
+              </span>
+              <Button
+                variant="secondary"
+                size="sm"
+                className="mt-2"
+                onClick={() => setCapacityOpen(true)}
+              >
+                {t("usage.requestCapacity")}
+              </Button>
+            </span>
+          ) : (
+            <span className="block font-normal text-[var(--text-secondary)]">
+              {t("usage.seePlans")}
+            </span>
+          )}
         </Banner>
       ) : data.warning ? (
         <Banner tone="warning">{t("usage.nearLimit")}</Banner>
       ) : null}
+
+      {isRequestCapacity && (
+        <CapacityRequestDialog
+          open={capacityOpen}
+          onClose={() => setCapacityOpen(false)}
+        />
+      )}
 
       {data.total === 0 ? (
         <EmptyState

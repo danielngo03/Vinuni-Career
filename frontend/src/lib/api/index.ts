@@ -400,9 +400,26 @@ export type {
   AiEnergySession3h,
   AiEnergyBlockedReason,
   AiEnergyWarningReason,
+  AiEnergyAction,
   AiUsageFeatureCount,
   AiUsageActivity,
 } from "./ai-assistant";
+export { aiGovernanceApi } from "./ai-governance";
+export type {
+  CapacityRequestStatus,
+  AiCapacityRequest,
+  AiCapacityRequestQueueItem,
+  AiCapacityRequestDecided,
+  SubmitCapacityRequestBody,
+  DecideCapacityRequestBody,
+  AllocationScopeType,
+  AiAllocationOrgNode,
+  AiAllocationDepartmentNode,
+  AiAllocationMemberNode,
+  AiAllocations,
+  UpsertAllocationBody,
+  UpsertAllocationResult,
+} from "./ai-governance";
 export type {
   InterviewQuestion,
   InterviewPrepResult,

@@ -1,0 +1,47 @@
+{
+  "aiGovernance": {
+    "dialog": {
+      "title": "Yêu cầu cấp thêm hạn mức AI",
+      "subtitle": "Năng lượng AI của trường do quản trị viên hệ thống phân bổ — hãy mô tả nhu cầu của bạn để được xem xét.",
+      "reasonLabel": "Lý do",
+      "reasonPlaceholder": "VD: Cần rà soát một lượng lớn CV trước ngày hội việc làm",
+      "reasonHelp": "Giải thích ngắn gọn vì sao hạn mức năng lượng AI hằng tuần hiện tại chưa đủ.",
+      "unitsLabel": "Số hạn mức năng lượng đề nghị",
+      "unitsOptional": "không bắt buộc",
+      "unitsPlaceholder": "VD: 500",
+      "unitsHelp": "Ước lượng phần năng lượng cần thêm mỗi tuần. Quản trị viên có thể cấp mức khác.",
+      "submit": "Gửi yêu cầu",
+      "cancel": "Hủy",
+      "reasonRequired": "Vui lòng nhập lý do bạn cần thêm năng lượng AI.",
+      "unitsInvalid": "Nhập số hạn mức năng lượng lớn hơn 0.",
+      "alreadyPending": "Bạn đang có một yêu cầu cấp thêm hạn mức chờ duyệt.",
+      "error": "Không thể gửi yêu cầu. Vui lòng thử lại.",
+      "successToast": "Đã gửi yêu cầu cấp thêm hạn mức"
+    },
+    "staff": {
+      "title": "Hạn mức AI của tôi",
+      "subtitle": "Năng lượng AI hằng tuần của bạn do quản trị viên hệ thống phân bổ. Khi sắp hết, hãy yêu cầu thêm tại đây.",
+      "requestButton": "Yêu cầu cấp thêm hạn mức",
+      "emptyTitle": "Chưa có yêu cầu nào",
+      "emptyBody": "Bạn chưa yêu cầu thêm năng lượng AI. Nếu dùng hết trong tuần, hãy gửi yêu cầu để quản trị viên xem xét.",
+      "errorTitle": "Không tải được yêu cầu",
+      "errorBody": "Đã xảy ra lỗi khi tải danh sách yêu cầu của bạn.",
+      "retry": "Thử lại",
+      "unlimitedTitle": "Năng lượng AI không giới hạn",
+      "unlimitedBody": "Tài khoản của bạn được miễn giới hạn năng lượng AI, không cần yêu cầu thêm.",
+      "pendingBanner": "Bạn đang có một yêu cầu cấp thêm hạn mức chờ duyệt.",
+      "reasonLabel": "Lý do",
+      "requestedLabel": "Đề nghị",
+      "decisionLabel": "Ghi chú của quản trị viên",
+      "submittedAt": "Gửi lúc {when}",
+      "decidedAt": "Xử lý lúc {when}",
+      "creditsValue": "{units} điểm",
+      "creditsUnset": "Không nêu cụ thể"
+    },
+    "status": {
+      "pending": "Chờ duyệt",
+      "approved": "Đã duyệt",
+      "denied": "Từ chối"
+    }
+  }
+}

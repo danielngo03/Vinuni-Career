@@ -792,6 +792,132 @@
         "seriesActiveUsers": "Người dùng hoạt động"
       },
       "retry": "Thử lại"
+    },
+    "aiDistribution": {
+      "pageTitle": "Phân bổ năng lượng AI",
+      "pageSubtitle": "Phân bổ năng lượng AI hằng tuần cho tổ chức và xét duyệt yêu cầu cấp thêm của cán bộ.",
+      "masked": "Năng lượng AI hiển thị dưới dạng điểm ẩn danh và phần trăm còn lại, không phải token, chi phí, nhà cung cấp hay mô hình.",
+      "orgContextNote": "Đang phân bổ năng lượng cho {orgType}.",
+      "orgTypeUniversity": "Trường Đại học VinUni",
+      "orgTypePartner": "một tổ chức đối tác",
+      "weekOf": "Tuần bắt đầu {date}",
+      "tabs": {
+        "distribution": "Phân bổ",
+        "requests": "Yêu cầu cấp thêm"
+      },
+      "pool": {
+        "title": "Quỹ năng lượng của tổ chức",
+        "usedLabel": "Đã dùng tuần này",
+        "ceilingLabel": "Hạn mức tuần",
+        "effectiveLabel": "Hạn mức hiệu lực",
+        "reserveLabel": "+{wallet} dự trữ",
+        "defaultNote": "Áp dụng mức mặc định theo nhóm (chưa đặt hạn mức riêng).",
+        "setCeiling": "Đặt hạn mức quỹ",
+        "energyLabel": "Còn {pct}%",
+        "energyTitle": "Năng lượng còn lại"
+      },
+      "energy": {
+        "value": "Còn {pct}%",
+        "inherited": "Kế thừa"
+      },
+      "ceiling": {
+        "explicit": "{units} điểm",
+        "inherited": "Kế thừa",
+        "setLimit": "Đặt hạn mức",
+        "edit": "Sửa hạn mức",
+        "dialogTitleOrg": "Đặt hạn mức năng lượng cho tổ chức",
+        "dialogTitleDept": "Đặt hạn mức năng lượng cho phòng ban",
+        "dialogTitleUser": "Đặt hạn mức năng lượng cho thành viên",
+        "dialogSubtitle": "Số điểm năng lượng AI mỗi tuần phạm vi này được dùng. Xóa để kế thừa quỹ cấp trên.",
+        "targetLabel": "Đối tượng",
+        "modeLabel": "Hạn mức",
+        "modeExplicit": "Đặt hạn mức tuần cố định",
+        "modeInherit": "Kế thừa từ quỹ cấp trên",
+        "unitsLabel": "Điểm năng lượng mỗi tuần",
+        "unitsHelp": "0–1.000.000 điểm ẩn danh. Không phải token, chi phí hay tiền.",
+        "unitsPlaceholder": "VD: 500",
+        "unitsInvalid": "Nhập số nguyên từ 0 đến 1.000.000.",
+        "save": "Lưu",
+        "cancel": "Hủy",
+        "savedToast": "Đã cập nhật hạn mức năng lượng",
+        "errorToast": "Không thể cập nhật hạn mức. Vui lòng thử lại."
+      },
+      "departments": {
+        "title": "Phòng ban",
+        "colName": "Phòng ban",
+        "colCeiling": "Hạn mức tuần",
+        "colUsed": "Đã dùng tuần này",
+        "colEnergy": "Năng lượng",
+        "colAction": "Thao tác",
+        "emptyTitle": "Chưa có phòng ban",
+        "emptyBody": "Tổ chức này chưa có phòng ban để phân bổ năng lượng."
+      },
+      "members": {
+        "title": "Thành viên",
+        "colMember": "Thành viên",
+        "colDept": "Phòng ban",
+        "colCeiling": "Hạn mức tuần",
+        "colUsed": "Đã dùng tuần này",
+        "colEnergy": "Năng lượng",
+        "colAction": "Thao tác",
+        "noDept": "Chưa có phòng ban",
+        "deptCount": "{count} phòng ban",
+        "unknownMember": "Thành viên không xác định",
+        "emptyTitle": "Chưa có thành viên",
+        "emptyBody": "Tổ chức này chưa có thành viên để phân bổ năng lượng."
+      },
+      "requests": {
+        "title": "Yêu cầu cấp thêm",
+        "subtitle": "Cán bộ đã dùng hết hạn mức sẽ yêu cầu thêm năng lượng tại đây. Duyệt sẽ nâng hạn mức của họ.",
+        "filterLabel": "Trạng thái",
+        "statusPending": "Chờ duyệt",
+        "statusApproved": "Đã duyệt",
+        "statusDenied": "Từ chối",
+        "colRequester": "Người yêu cầu",
+        "colReason": "Lý do",
+        "colRequested": "Đề nghị",
+        "colSubmitted": "Đã gửi",
+        "colAction": "Thao tác",
+        "requestedUnset": "Không nêu",
+        "creditsValue": "{units} điểm",
+        "unknownRequester": "Người dùng không xác định",
+        "approve": "Duyệt",
+        "deny": "Từ chối",
+        "review": "Xem xét",
+        "emptyTitle": "Không có yêu cầu nào",
+        "emptyBody": "Hiện không có yêu cầu cấp thêm ở trạng thái {status}.",
+        "errorTitle": "Không tải được danh sách",
+        "errorBody": "Đã xảy ra lỗi khi tải các yêu cầu cấp thêm.",
+        "retry": "Thử lại",
+        "decideTitle": "Xét duyệt yêu cầu cấp thêm",
+        "requesterLabel": "Người yêu cầu",
+        "reasonLabel": "Lý do",
+        "requestedLabel": "Mức đề nghị",
+        "grantLabel": "Số điểm năng lượng cấp",
+        "grantHelp": "Đây sẽ là hạn mức tuần mới của người yêu cầu. Mặc định bằng mức đề nghị.",
+        "grantPlaceholder": "VD: 500",
+        "grantInvalid": "Nhập số nguyên dương điểm năng lượng.",
+        "grantRequired": "Nhập số năng lượng muốn cấp để duyệt.",
+        "noteLabel": "Ghi chú quyết định",
+        "noteOptional": "không bắt buộc",
+        "notePlaceholder": "Thêm ghi chú cho người yêu cầu (không bắt buộc)",
+        "approveButton": "Duyệt & nâng hạn mức",
+        "denyButton": "Từ chối yêu cầu",
+        "cancel": "Hủy",
+        "approvedToast": "Đã duyệt yêu cầu",
+        "deniedToast": "Đã từ chối yêu cầu",
+        "conflictToast": "Yêu cầu này đã được xử lý.",
+        "errorToast": "Không thể lưu quyết định. Vui lòng thử lại."
+      },
+      "error": {
+        "title": "Không có dữ liệu phân bổ",
+        "body": "Không thể tải phân bổ năng lượng AI cho tổ chức này.",
+        "retry": "Thử lại"
+      },
+      "noOrg": {
+        "title": "Chưa có bối cảnh tổ chức",
+        "body": "Tài khoản của bạn chưa gắn với tổ chức nào nên không có quỹ năng lượng để phân bổ. Hãy đăng nhập bằng danh tính của trường để quản lý phân bổ."
+      }
     }
   }
 }

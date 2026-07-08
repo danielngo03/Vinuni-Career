@@ -8,14 +8,17 @@ import {
   Devices,
   ShieldCheck,
   LockKey,
+  Lightning,
 } from "@phosphor-icons/react";
 import { TabPanel, type TabItem } from "@/components/ui";
 import { PageHeader } from "@/components/layout/page-header";
+import { useAuthStore } from "@/stores/auth-store";
 import { GeneralTab } from "./general-tab";
 import { NotificationsTab } from "./notifications-tab";
 import { DevicesTab } from "./devices-tab";
 import { SecurityTab } from "./security-tab";
 import { PrivacyTab } from "./privacy-tab";
+import { MyAiCapacitySection } from "@/components/ai-governance/my-ai-capacity-section";
 import { cn } from "@/lib/utils";
 
 const TABS_ID = "settings";
@@ -29,6 +32,9 @@ export function SettingsScreen() {
   const t = useTranslations("settings");
   const [tab, setTab] = useState("general");
   const refs = useRef<Record<string, HTMLButtonElement | null>>({});
+  // University staff distribute-not-billing AI energy: expose a "My AI capacity"
+  // tab so they can see and request their allocation without a billing surface.
+  const isUniversity = useAuthStore((s) => s.user?.persona === "university");
 
   const items: TabItem[] = [
     {
@@ -56,6 +62,15 @@ export function SettingsScreen() {
       label: t("tabs.privacy"),
       icon: <LockKey aria-hidden weight="duotone" className="size-4" />,
     },
+    ...(isUniversity
+      ? [
+          {
+            value: "aiCapacity",
+            label: t("tabs.aiCapacity"),
+            icon: <Lightning aria-hidden weight="duotone" className="size-4" />,
+          },
+        ]
+      : []),
   ];
 
   function onKeyDown(e: React.KeyboardEvent) {
@@ -143,6 +158,15 @@ export function SettingsScreen() {
           <TabPanel tabsId={TABS_ID} value="privacy" active={tab === "privacy"}>
             <PrivacyTab />
           </TabPanel>
+          {isUniversity && (
+            <TabPanel
+              tabsId={TABS_ID}
+              value="aiCapacity"
+              active={tab === "aiCapacity"}
+            >
+              <MyAiCapacitySection />
+            </TabPanel>
+          )}
         </div>
       </div>
     </div>
