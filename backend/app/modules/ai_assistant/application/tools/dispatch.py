@@ -7,10 +7,16 @@ import uuid
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.modules.analytics.application import ingestion_service as analytics
-from app.shared.permissions import Principal
+from app.shared.permissions import Principal, permission_checker
 
-from . import companies, cv_ai, events, jobs, kb, partner, student
-from .specs import TOOL_SPECS
+from . import companies, cv_ai, events, jobs, kb, partner, student, university
+from .specs import (
+    PARTNER_USER,
+    STUDENT,
+    TOOL_SPECS,
+    UNIVERSITY_STAFF,
+    ToolSpec,
+)
 
 SUPPORTED_TOOL_NAMES = frozenset(
     {
@@ -47,8 +53,96 @@ SUPPORTED_TOOL_NAMES = frozenset(
         "generate_screening_brief",
         "get_upcoming_partner_events",
         "move_candidate_stage",
+        # University staff operations tools
+        "get_university_dashboard_summary",
+        "get_moderation_queue",
+        "get_pending_partner_registrations",
+        "get_partner_overview",
+        "get_at_risk_students",
+        "get_cohort_summary",
+        "get_career_services_report",
+        "get_placement_outcomes_summary",
+        "search_university_knowledge",
+        "approve_job_moderation",
+        "request_job_changes",
     }
 )
+
+
+# --------------------------------------------------------------------------- #
+# Central tool-RBAC gate (AI_PRODUCT_SPEC.md §2/§7; university control-plane   #
+# P3/WS3.2). Enforced for EVERY persona before a tool executes — both in the  #
+# read-only loop and the post-confirmation write path (both route through     #
+# ``dispatch_tool``). The gate is defense-in-depth: each tool handler's        #
+# underlying service still performs its own authoritative org-scoped check.    #
+# --------------------------------------------------------------------------- #
+
+# Map a real ``principal.persona`` string (student / partner_member /
+# university_staff / alumni) to the ToolSpec ``persona`` FAMILY constant
+# (STUDENT / PARTNER_USER / UNIVERSITY_STAFF). The ToolSpec family label
+# "partner_user" intentionally differs from the real "partner_member" persona
+# (see chat_service note), so the mapping cannot be an identity comparison.
+_ROLE_TOKEN_FAMILIES = {
+    "student": STUDENT,
+    "alumni": STUDENT,
+    "partner": PARTNER_USER,
+    "partner_user": PARTNER_USER,
+    "partner_member": PARTNER_USER,
+    "university": UNIVERSITY_STAFF,
+    "university_staff": UNIVERSITY_STAFF,
+}
+
+
+def _persona_family(principal: Principal) -> str | None:
+    """Resolve the caller's ToolSpec persona family, or ``None`` if unknown."""
+
+    persona = (principal.persona or "").lower()
+    if persona in ("student", "alumni"):
+        return STUDENT
+    if persona.startswith("partner"):
+        return PARTNER_USER
+    if persona.startswith("university"):
+        return UNIVERSITY_STAFF
+    return None
+
+
+def _satisfies_permission(token: str, principal: Principal, family: str | None) -> bool:
+    """Resolve one ``required_permissions`` token against the caller.
+
+    Vocabulary:
+    - ``"authenticated"``            -> ``principal.is_authenticated``
+    - ``"role:<persona-family>"``    -> the caller's persona family matches
+      (``role:student`` / ``role:partner`` / ``role:partner_user`` /
+      ``role:university_staff`` — normalised via ``_ROLE_TOKEN_FAMILIES``)
+    - ``"<resource>:<action>"``      -> ``permission_checker.can(...)`` (catalog grant)
+    An unrecognised token denies (fail closed).
+    """
+
+    if token == "authenticated":
+        return principal.is_authenticated
+    if token.startswith("role:"):
+        want = _ROLE_TOKEN_FAMILIES.get(token[len("role:") :].strip().lower())
+        return want is not None and family == want
+    if ":" in token:
+        resource, action = token.split(":", 1)
+        return permission_checker.can(principal, resource, action)
+    return False
+
+
+def authorize_tool(spec: ToolSpec, principal: Principal) -> bool:
+    """True if ``principal`` may invoke ``spec`` (persona family + grants).
+
+    Superadmin passes everything. Otherwise BOTH must hold: (a) the tool's
+    ``persona`` list includes the caller's persona family, and (b) every
+    ``required_permissions`` token is satisfied.
+    """
+
+    if principal.is_superadmin:
+        return True
+    family = _persona_family(principal)
+    if family is None or family not in spec.persona:
+        return False
+    return all(_satisfies_permission(tok, principal, family) for tok in spec.required_permissions)
 
 
 async def dispatch_tool(
@@ -67,7 +161,16 @@ async def dispatch_tool(
     if not valid:
         return {"ok": False, "error": error}
 
-    result = await _execute_tool(name, args, session=session, principal=principal)
+    # Central RBAC gate — deny (do NOT execute) when the caller's persona family
+    # or catalog grants do not satisfy the tool's ``required_permissions``. Kept
+    # as a structured, user-safe result (no internals) so the ReAct loop and the
+    # confirmation path never crash on a raised exception (``dispatch_tool``
+    # never raises, per its contract).
+    spec = TOOL_SPECS[name]  # validated to exist by _validate_tool_args
+    if not authorize_tool(spec, principal):
+        result = {"ok": False, "error": "permission_denied"}
+    else:
+        result = await _execute_tool(name, args, session=session, principal=principal)
     # Metadata-only product-analytics fact (tool name + outcome, never prompt/
     # completion text or provider/model/token internals — those live in
     # ``ai_usage_log`` per .claude/rules/ai.md, a separate cost-tracking ledger).
@@ -184,6 +287,30 @@ async def _execute_tool(
         # --- Knowledge base ---
         if name == "knowledge_base_query":
             return await kb.knowledge_base_query(session, principal, args)
+
+        # --- University staff operations tools ---
+        if name == "get_university_dashboard_summary":
+            return await university.get_university_dashboard_summary(session, principal, args)
+        if name == "get_moderation_queue":
+            return await university.get_moderation_queue(session, principal, args)
+        if name == "get_pending_partner_registrations":
+            return await university.get_pending_partner_registrations(session, principal, args)
+        if name == "get_partner_overview":
+            return await university.get_partner_overview(session, principal, args)
+        if name == "get_at_risk_students":
+            return await university.get_at_risk_students(session, principal, args)
+        if name == "get_cohort_summary":
+            return await university.get_cohort_summary(session, principal, args)
+        if name == "get_career_services_report":
+            return await university.get_career_services_report(session, principal, args)
+        if name == "get_placement_outcomes_summary":
+            return await university.get_placement_outcomes_summary(session, principal, args)
+        if name == "search_university_knowledge":
+            return await university.search_university_knowledge(session, principal, args)
+        if name == "approve_job_moderation":
+            return await university.approve_job_moderation(session, principal, args)
+        if name == "request_job_changes":
+            return await university.request_job_changes(session, principal, args)
 
         return {"ok": False, "error": "unknown_tool"}
     except Exception:

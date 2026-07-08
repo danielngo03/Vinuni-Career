@@ -921,6 +921,308 @@ TOOL_SPECS: dict[str, ToolSpec] = {
         ),
         audit_event_type="TOOL_MOVE_CANDIDATE_STAGE",
     ),
+    # ----------------------------------------------------------------------- #
+    # University staff — operations copilot (persona=[UNIVERSITY_STAFF]).      #
+    # Each tool declares precise catalog grants; the central dispatch RBAC     #
+    # gate (dispatch.authorize_tool) enforces them, and each underlying        #
+    # service does its own authoritative org-scoped + org_type=university      #
+    # check. Reads return privacy-safe aggregates; the two writes are          #
+    # confirmation-gated, audited, and advisory (human final say).             #
+    # ----------------------------------------------------------------------- #
+    "get_university_dashboard_summary": ToolSpec(
+        name="get_university_dashboard_summary",
+        description=(
+            "Get the university operations command-center rollup: number of jobs pending "
+            "moderation, partner registrations pending approval, active partners, active "
+            "jobs, and the recommended next actions. Use this when staff ask 'what needs my "
+            "attention', 'operations overview', 'how many jobs are pending', or open their "
+            "day. Only available to university staff."
+        ),
+        parameters={"type": "object", "properties": {}, "required": []},
+        permission_class="read_only",
+        persona=[UNIVERSITY_STAFF],
+        required_permissions=["authenticated", "role:university_staff", "jobs:moderate"],
+        fallback="I couldn't load the operations overview right now. Check /university.",
+        audit_event_type="TOOL_GET_UNIVERSITY_DASHBOARD_SUMMARY",
+    ),
+    "get_moderation_queue": ToolSpec(
+        name="get_moderation_queue",
+        description=(
+            "Get the jobs awaiting university moderation, oldest first, with each item's age "
+            "in hours and whether it is overdue against its SLA. Use this when staff ask to "
+            "review the moderation queue, see what is pending or overdue, or triage jobs by "
+            "age. Advisory only — approving or sending a job back is a human decision. Only "
+            "available to university staff."
+        ),
+        parameters={
+            "type": "object",
+            "properties": {
+                "status": {
+                    "type": "string",
+                    "description": (
+                        "Optional job status filter (default pending_review), e.g. "
+                        "'pending_review', 'rejected'."
+                    ),
+                },
+            },
+            "required": [],
+        },
+        permission_class="read_only",
+        persona=[UNIVERSITY_STAFF],
+        required_permissions=["authenticated", "role:university_staff", "jobs:moderate"],
+        fallback=(
+            "I couldn't load the moderation queue right now. Check "
+            "/university/moderation/jobs."
+        ),
+        audit_event_type="TOOL_GET_MODERATION_QUEUE",
+    ),
+    "get_pending_partner_registrations": ToolSpec(
+        name="get_pending_partner_registrations",
+        description=(
+            "Get partner organisations awaiting university approval (the partner governance "
+            "queue), with company name, industry, size, and submission time. Use this when "
+            "staff ask about pending partners, new partner requests, or partners to review. "
+            "Contact person details are never shown in chat. Only available to university "
+            "staff."
+        ),
+        parameters={"type": "object", "properties": {}, "required": []},
+        permission_class="read_only",
+        persona=[UNIVERSITY_STAFF],
+        required_permissions=["authenticated", "role:university_staff", "partners:read"],
+        fallback=(
+            "I couldn't load pending partner registrations right now. Check "
+            "/university/moderation/partners."
+        ),
+        audit_event_type="TOOL_GET_PENDING_PARTNER_REGISTRATIONS",
+    ),
+    "get_partner_overview": ToolSpec(
+        name="get_partner_overview",
+        description=(
+            "Get a partner governance rollup: number of active partners and a count of "
+            "partner registrations grouped by status. Use this when staff ask for a partner "
+            "overview, how many partners are active, or the state of partner onboarding. "
+            "Only available to university staff."
+        ),
+        parameters={"type": "object", "properties": {}, "required": []},
+        permission_class="read_only",
+        persona=[UNIVERSITY_STAFF],
+        required_permissions=["authenticated", "role:university_staff", "partners:read"],
+        fallback="I couldn't load the partner overview right now. Check /university/partners.",
+        audit_event_type="TOOL_GET_PARTNER_OVERVIEW",
+    ),
+    "get_at_risk_students": ToolSpec(
+        name="get_at_risk_students",
+        description=(
+            "Get a privacy-safe summary of career-services at-risk flags: counts by severity "
+            "and status plus a short recent list (reason, severity, status only — never "
+            "student names, emails, or private detail). Use this when staff ask about at-risk "
+            "students, students needing support, or open risk flags. Only available to "
+            "university staff with career-services access."
+        ),
+        parameters={"type": "object", "properties": {}, "required": []},
+        permission_class="read_only",
+        persona=[UNIVERSITY_STAFF],
+        required_permissions=[
+            "authenticated",
+            "role:university_staff",
+            "career_services_at_risk:read",
+        ],
+        fallback=(
+            "I couldn't load at-risk students right now. Check "
+            "/university/students/at-risk."
+        ),
+        audit_event_type="TOOL_GET_AT_RISK_STUDENTS",
+    ),
+    "get_cohort_summary": ToolSpec(
+        name="get_cohort_summary",
+        description=(
+            "Get the career-services cohorts the caller's organisation owns, with name, "
+            "description, and status. Use this when staff ask about cohorts, student groups, "
+            "or which cohorts are active. Only available to university staff with "
+            "career-services access."
+        ),
+        parameters={"type": "object", "properties": {}, "required": []},
+        permission_class="read_only",
+        persona=[UNIVERSITY_STAFF],
+        required_permissions=[
+            "authenticated",
+            "role:university_staff",
+            "career_services_cohorts:read",
+        ],
+        fallback="I couldn't load cohorts right now. Check /university/students/cohorts.",
+        audit_event_type="TOOL_GET_COHORT_SUMMARY",
+    ),
+    "get_career_services_report": ToolSpec(
+        name="get_career_services_report",
+        description=(
+            "Get the counselor-workspace aggregate report: active cohorts, open at-risk "
+            "flags, open CV reviews, and distributions of at-risk severity and appointments "
+            "by status. Use this when staff ask for a career-services report, workspace "
+            "summary, or how counseling operations are tracking. Only available to university "
+            "staff with career-services reporting access."
+        ),
+        parameters={"type": "object", "properties": {}, "required": []},
+        permission_class="read_only",
+        persona=[UNIVERSITY_STAFF],
+        required_permissions=[
+            "authenticated",
+            "role:university_staff",
+            "career_services_reporting:read",
+        ],
+        fallback=(
+            "I couldn't load the career-services report right now. Check /university/students."
+        ),
+        audit_event_type="TOOL_GET_CAREER_SERVICES_REPORT",
+    ),
+    "get_placement_outcomes_summary": ToolSpec(
+        name="get_placement_outcomes_summary",
+        description=(
+            "Get the university career-outcomes KPI roll-up: total recorded outcomes, mix by "
+            "trust level, top employers, and a few recent placements (position, employer, "
+            "outcome — no student PII). Use this when staff ask about placement outcomes, "
+            "employment results, top hiring employers, or graduate outcomes. Only available "
+            "to university staff."
+        ),
+        parameters={"type": "object", "properties": {}, "required": []},
+        permission_class="read_only",
+        persona=[UNIVERSITY_STAFF],
+        required_permissions=["authenticated", "role:university_staff", "jobs:moderate"],
+        fallback=(
+            "I couldn't load placement outcomes right now. Check "
+            "/university/analytics/outcomes."
+        ),
+        audit_event_type="TOOL_GET_PLACEMENT_OUTCOMES_SUMMARY",
+    ),
+    "search_university_knowledge": ToolSpec(
+        name="search_university_knowledge",
+        description=(
+            "Search the knowledge bases the staff member is authorised to read to answer "
+            "questions about university policies, processes, guidelines, or uploaded "
+            "documents. Use for 'what is the policy for X', 'how does process Y work', or "
+            "internal reference lookups. Scoped to the caller's readable knowledge bases — "
+            "never another organisation's. Only available to university staff."
+        ),
+        parameters={
+            "type": "object",
+            "properties": {
+                "query": {
+                    "type": "string",
+                    "description": "The question or topic to search the knowledge base for",
+                },
+            },
+            "required": ["query"],
+        },
+        output_schema={
+            "type": "object",
+            "properties": {
+                "ok": {"type": "boolean"},
+                "found": {"type": "boolean"},
+                "context": {"type": "string"},
+            },
+        },
+        permission_class="read_only",
+        persona=[UNIVERSITY_STAFF],
+        required_permissions=["authenticated", "role:university_staff"],
+        fallback=(
+            "I couldn't find that in the knowledge base. Try the university operations docs "
+            "or contact an administrator."
+        ),
+        audit_event_type="TOOL_SEARCH_UNIVERSITY_KNOWLEDGE",
+        timeout_seconds=20,
+    ),
+    "approve_job_moderation": ToolSpec(
+        name="approve_job_moderation",
+        description=(
+            "Approve a pending job and publish it. Use ONLY when the staff member explicitly "
+            "asks to approve a specific job from the moderation queue. Requires the staff "
+            "member's confirmation before executing; the posting partner is notified and the "
+            "decision is audited. Requires job_id from a prior get_moderation_queue result. "
+            "Advisory — the human makes the decision. Only available to university staff."
+        ),
+        parameters={
+            "type": "object",
+            "properties": {
+                "job_id": {"type": "string", "description": "Job UUID to approve"},
+                "version": {
+                    "type": "integer",
+                    "description": "Optional expected job version for optimistic concurrency",
+                },
+            },
+            "required": ["job_id"],
+        },
+        permission_class="confirmation_required",
+        persona=[UNIVERSITY_STAFF],
+        required_permissions=["authenticated", "role:university_staff", "jobs:moderate"],
+        side_effects=[
+            "UPDATE jobs (pending_review -> active, publish)",
+            "audit job.approved",
+            "notification to posting partner",
+        ],
+        confirmation_copy=ConfirmationCopy(
+            title="Duyệt và đăng tin tuyển dụng này?",
+            body=(
+                "Tin tuyển dụng sẽ được duyệt và đăng công khai. Đối tác đăng tin sẽ được "
+                "thông báo và hành động này được ghi nhật ký."
+            ),
+            cta_confirm="Xác nhận duyệt",
+        ),
+        fallback=(
+            "I couldn't approve that job right now. Use /university/moderation/jobs to review "
+            "and approve it."
+        ),
+        audit_event_type="TOOL_APPROVE_JOB_MODERATION",
+    ),
+    "request_job_changes": ToolSpec(
+        name="request_job_changes",
+        description=(
+            "Send a pending job back to the posting partner with a required reason so they "
+            "can revise and resubmit. Use ONLY when the staff member explicitly asks to "
+            "reject or request changes on a specific job, and provide a clear reason. "
+            "Requires confirmation; the partner is notified with the reason and the decision "
+            "is audited. Requires job_id from a prior get_moderation_queue result. Advisory — "
+            "the human makes the decision. Only available to university staff."
+        ),
+        parameters={
+            "type": "object",
+            "properties": {
+                "job_id": {"type": "string", "description": "Job UUID to send back"},
+                "reason": {
+                    "type": "string",
+                    "description": "Required explanation of the changes the partner must make",
+                },
+                "reason_code": {
+                    "type": "string",
+                    "description": "Optional structured moderation reason code",
+                },
+                "version": {
+                    "type": "integer",
+                    "description": "Optional expected job version for optimistic concurrency",
+                },
+            },
+            "required": ["job_id", "reason"],
+        },
+        permission_class="confirmation_required",
+        persona=[UNIVERSITY_STAFF],
+        required_permissions=["authenticated", "role:university_staff", "jobs:moderate"],
+        side_effects=[
+            "UPDATE jobs (pending_review -> rejected, with reason)",
+            "audit job.rejected",
+            "notification to posting partner",
+        ],
+        confirmation_copy=ConfirmationCopy(
+            title="Trả lại tin tuyển dụng để chỉnh sửa?",
+            body=(
+                "Tin tuyển dụng sẽ được trả lại cho đối tác kèm lý do để chỉnh sửa và nộp "
+                "lại. Đối tác sẽ được thông báo và hành động này được ghi nhật ký."
+            ),
+            cta_confirm="Xác nhận trả lại",
+        ),
+        fallback=(
+            "I couldn't send that job back right now. Use /university/moderation/jobs to "
+            "review and request changes."
+        ),
+        audit_event_type="TOOL_REQUEST_JOB_CHANGES",
+    ),
     "knowledge_base_query": ToolSpec(
         name="knowledge_base_query",
         description=(

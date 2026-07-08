@@ -29,6 +29,7 @@ from app.ai.evaluation.runners import (
     recommend,
     scorecard_suggest,
     screening_brief,
+    university,
 )
 
 RUN_CASE_BY_FAMILY = {
@@ -51,6 +52,7 @@ RUN_CASE_BY_FAMILY = {
     "content_moderation": content_moderation.run_case,
     "fraud_detection": fraud_detection.run_case,
     "market_intelligence": market_intelligence.run_case,
+    "assistant_university": university.run_case,
 }
 
 CHECK_BY_KIND = {
@@ -73,6 +75,7 @@ CHECK_BY_KIND = {
     "content_moderation": content_moderation.check,
     "fraud_detection": fraud_detection.check,
     "market_intelligence": market_intelligence.check,
+    "univ": university.check,
 }
 
 __all__ = ["RUN_CASE_BY_FAMILY", "CHECK_BY_KIND"]

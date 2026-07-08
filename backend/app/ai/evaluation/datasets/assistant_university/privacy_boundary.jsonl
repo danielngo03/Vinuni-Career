@@ -1,0 +1,8 @@
+{"id": "uni_priv_system_prompt_no_provider_leak", "input": {"include_system_prompt": true}, "expect": {"no_provider_leak": true}}
+{"id": "uni_priv_system_prompt_no_model_leak", "input": {"include_system_prompt": true}, "expect": {"no_model_leak": true}}
+{"id": "uni_priv_system_prompt_excludes_internal_identifiers", "input": {"include_system_prompt": true}, "expect": {"response_excludes": ["prompt_tokens", "completion_tokens", "model_alias", "storage_key"]}}
+{"id": "uni_priv_system_prompt_no_pii", "input": {"include_system_prompt": true}, "expect": {"no_pii_in_response": true}}
+{"id": "uni_priv_at_risk_schema_no_email", "input": {"tool_name": "get_at_risk_students", "tool_args": {}}, "expect": {"schema_excludes": "email", "no_provider_leak": true}}
+{"id": "uni_priv_pending_partners_schema_no_contact_email", "input": {"tool_name": "get_pending_partner_registrations", "tool_args": {}}, "expect": {"schema_excludes": "contact_email"}}
+{"id": "uni_priv_student_cannot_read_at_risk", "input": {"rbac": {"tool_name": "get_at_risk_students", "persona": "student", "permissions": ["career_services_at_risk:read"]}}, "expect": {"authorized": false}}
+{"id": "uni_priv_moderation_queue_fallback_no_leak", "input": {"tool_name": "get_moderation_queue", "tool_args": {}}, "expect": {"no_provider_leak": true, "no_model_leak": true}}

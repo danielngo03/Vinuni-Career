@@ -36,6 +36,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from app.ai.gateway.base import AIMessage
 from app.ai.prompts.assistant import v1 as assistant_prompt
 from app.ai.prompts.assistant_partner import v1 as partner_prompt
+from app.ai.prompts.assistant_university import v1 as university_prompt
 from app.ai.retrieval.citation_verify import kb_source_titles, verify_citations
 from app.ai.safety.input_guard import sanitize_instruction
 from app.ai.safety.output_guard import enforce_keyword_scope
@@ -83,6 +84,14 @@ from app.shared.permissions import Principal
 # the system prompts (assistant/v1.py, assistant_partner/v1.py) — it is
 # unrelated to this real persona string and must not be confused with it.
 _PARTNER_PERSONA = "partner_member"
+# Real university-staff persona value assigned at login (auth.domain.personas
+# .UNIVERSITY_STAFF). University staff get their own operations-copilot prompt
+# and tool set; the student/partner deterministic planner is bypassed for them.
+_UNIVERSITY_PERSONA = "university_staff"
+
+
+def _is_university(principal: Principal) -> bool:
+    return (principal.persona or "").startswith("university")
 
 __all__ = [
     "archive_session",
@@ -103,15 +112,25 @@ _logger = logging.getLogger("ai.rag")
 
 
 def _system_prompt_for(principal: Principal) -> str:
-    """Select the persona system prompt (§8.1 branching, partner assistant spec).
+    """Select the persona system prompt (§8.1 branching, per-persona assistants).
 
-    Partner (recruiter) accounts get the org-scoped ``PARTNER_SYSTEM_PROMPT``;
-    everyone else (student, alumni, guest-in-practice-never-reaches-here,
-    university staff pending its own future prompt) gets the student prompt.
+    - University staff -> the VinUni operations-copilot prompt
+      (``UNIVERSITY_SYSTEM_PROMPT``, university tools + human-final-say).
+    - Partner (recruiter) accounts -> the org-scoped ``PARTNER_SYSTEM_PROMPT``.
+    - Everyone else (student, alumni, guest-never-reaches-here) -> student prompt.
     """
+    if _is_university(principal):
+        return university_prompt.UNIVERSITY_SYSTEM_PROMPT
     if principal.persona == _PARTNER_PERSONA:
         return partner_prompt.PARTNER_SYSTEM_PROMPT
     return assistant_prompt.SYSTEM_PROMPT
+
+
+def _build_user_message(principal: Principal, text: str, context: dict) -> str:
+    """Persona-aware user-message builder (university gets its own context block)."""
+    if _is_university(principal):
+        return university_prompt.build_user_message(text, context=context)
+    return assistant_prompt.build_user_message(text, context=context)
 
 
 def _apply_citation_guard(final_text: str, kb_sources: list[str]) -> str:
@@ -212,12 +231,15 @@ async def send_message(
         await session.commit()
         return serialize_message(assistant_msg)
 
-    if agent_plan := await build_agent_plan(
-        clean,
-        principal=principal,
-        session=session,
-        chat=chat,
-    ):
+    # The deterministic student/partner planner is not for university staff —
+    # bypass it so university turns are handled by the LLM tool-calling loop with
+    # the university system prompt and university tool set.
+    agent_plan = None
+    if not _is_university(principal):
+        agent_plan = await build_agent_plan(
+            clean, principal=principal, session=session, chat=chat
+        )
+    if agent_plan:
         if agent_plan_requires_confirmation(agent_plan):
             confirm_msg = create_confirmation_message(chat, agent_plan)
             session.add(confirm_msg)
@@ -252,7 +274,7 @@ async def send_message(
     history.append(
         AIMessage(
             role="user",
-            content=assistant_prompt.build_user_message(clean, context=user_context),
+            content=_build_user_message(principal, clean, user_context),
         )
     )
 
@@ -428,12 +450,13 @@ async def stream_message(
         yield {"type": "done", "message": serialize_message(assistant_msg)}
         return
 
-    if agent_plan := await build_agent_plan(
-        clean,
-        principal=principal,
-        session=session,
-        chat=chat,
-    ):
+    # University staff bypass the student/partner planner (LLM loop handles them).
+    agent_plan = None
+    if not _is_university(principal):
+        agent_plan = await build_agent_plan(
+            clean, principal=principal, session=session, chat=chat
+        )
+    if agent_plan:
         if agent_plan_requires_confirmation(agent_plan):
             yield {"type": "status", "code": "confirming_action"}
             confirm_msg = create_confirmation_message(chat, agent_plan)
@@ -479,7 +502,7 @@ async def stream_message(
     history.append(
         AIMessage(
             role="user",
-            content=assistant_prompt.build_user_message(clean, context=user_context),
+            content=_build_user_message(principal, clean, user_context),
         )
     )
 

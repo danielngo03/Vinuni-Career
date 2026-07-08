@@ -268,3 +268,40 @@ deterministic output; full disable removes the endpoints) immediately if any of:
 
 Fallback while disabled: the deterministic non-AI CV builder (blank template,
 profile import, duplicate) remains fully available.
+
+## University operations assistant (`assistant_university`) — 2026-07-08
+
+Family `assistant_university` (runner `runners/university.py`, kind `univ`) is an
+OFFLINE, deterministic gate for the VinUni operations copilot (P3a). It does not
+call an LLM — it asserts the tool-registry §7 contract, the central dispatch
+RBAC gate (`tools/dispatch.authorize_tool`), and provider/model/PII leakage over
+the university system prompt + tool fallback copy. The RBAC probes prove a
+university staffer WITHOUT a grant is denied a grant-gated tool while a granted
+one (and superadmin, and a university `*:*` Admin) is allowed, and that
+student/partner tools are denied for a university session — with matching
+no-regression cases proving student/partner tools still pass for their personas.
+
+Cost: 0 real model calls (offline provider only). Online chat still meters through
+`usage_service.enforce_quota` -> `app/ai/energy` like every other persona.
+
+### Rollback criteria (§17) — university assistant
+
+Disable the university assistant tools / revert `_system_prompt_for` to the prior
+behaviour immediately if any of:
+
+- any provider/model/token/USD/latency/prompt leakage observed in a university
+  chat response or log;
+- the dispatch RBAC gate is observed authorizing a tool the caller lacks the
+  grant/persona for (privacy/authorization failure), or denying a
+  currently-working student/partner pairing (regression);
+- any confirmation-gated write (`approve_job_moderation` / `request_job_changes`)
+  executes WITHOUT explicit human confirmation, or without an audit row /
+  partner notification;
+- a university tool returns another student's/candidate's PII beyond the caller's
+  grants (e.g. partner-contact email or student name/email in chat);
+- output-guard block rate or AI error rate exceeds 3x baseline within 1 hour.
+
+Fallback while disabled: university staff use the operations screens directly
+(`/university/moderation/*`, `/university/students/*`, `/university/partners`,
+`/university/analytics/outcomes`) — every tool is a thin wrapper over an existing
+RBAC-gated service, so no capability is lost, only the chat convenience layer.

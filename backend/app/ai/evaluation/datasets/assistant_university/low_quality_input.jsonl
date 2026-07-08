@@ -1,0 +1,6 @@
+{"id": "uni_lowq_moderation_queue_empty_args_ok", "input": {"tool_name": "get_moderation_queue", "tool_args": {}}, "expect": {"validation_ok": true}}
+{"id": "uni_lowq_approve_missing_job_id", "input": {"tool_name": "approve_job_moderation", "tool_args": {}}, "expect": {"validation_ok": false, "validation_error": "missing_job_id"}}
+{"id": "uni_lowq_request_changes_missing_reason", "input": {"tool_name": "request_job_changes", "tool_args": {"job_id": "11111111-1111-1111-1111-111111111111"}}, "expect": {"validation_ok": false, "validation_error": "missing_reason"}}
+{"id": "uni_lowq_kb_missing_query", "input": {"tool_name": "search_university_knowledge", "tool_args": {}}, "expect": {"validation_ok": false, "validation_error": "missing_query"}}
+{"id": "uni_lowq_approve_wrong_type_job_id", "input": {"tool_name": "approve_job_moderation", "tool_args": {"job_id": 12345}}, "expect": {"validation_ok": false, "validation_error": "invalid_job_id"}}
+{"id": "uni_lowq_cohort_ignores_junk_arg", "input": {"tool_name": "get_cohort_summary", "tool_args": {"nonsense": "???"}}, "expect": {"validation_ok": true}}
