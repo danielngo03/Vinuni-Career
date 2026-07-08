@@ -2,18 +2,15 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useTranslations } from "next-intl";
-import { ArrowRight, Microphone, MicrophoneSlash, PhoneDisconnect } from "@phosphor-icons/react";
+import { ArrowRight, Keyboard, Microphone, MicrophoneSlash, PhoneDisconnect } from "@phosphor-icons/react";
 import { Button } from "@/components/ui";
 import {
   mockInterviewApi,
   type MockInterviewSession,
   type RecordTurnInput,
 } from "@/lib/api";
-import {
-  VoiceController,
-  connectRealtime,
-  type RealtimeConnection,
-} from "@/lib/mock-interview/voice-controller";
+import { VoiceController } from "@/lib/mock-interview/voice-controller";
+import { GeminiLiveClient } from "@/lib/mock-interview/gemini-live-client";
 import { usePrefersReducedMotion } from "@/lib/hooks/use-mount-animation";
 import { cn } from "@/lib/utils";
 import type { AnswerMode } from "./pre-session-setup";
@@ -50,6 +47,14 @@ export function LiveSession({ session, mode, locale, onRequestEnd }: Props) {
 
   const target = Math.max(1, session.caps.target_questions || session.caps.max_questions || 1);
 
+  // Realtime (Tier V2) is active only when the server hands out a descriptor.
+  // Its visible countdown never exceeds the hard live-voice duration cap.
+  const realtime = session.realtime;
+  const initialSeconds =
+    realtime && realtime.duration_cap_s > 0
+      ? Math.min(session.caps.max_session_seconds, realtime.duration_cap_s)
+      : session.caps.max_session_seconds;
+
   const [effectiveMode, setEffectiveMode] = useState<AnswerMode>(mode);
   const [degraded, setDegraded] = useState(false);
   const [phase, setPhase] = useState<Phase>(mode === "voice" ? "interviewer_speaking" : "listening");
@@ -57,14 +62,17 @@ export function LiveSession({ session, mode, locale, onRequestEnd }: Props) {
   const [interviewerStreaming, setInterviewerStreaming] = useState<string | null>(null);
   const [candidateCaption, setCandidateCaption] = useState("");
   const [questionCount, setQuestionCount] = useState(1);
-  const [timeLeft, setTimeLeft] = useState(session.caps.max_session_seconds);
+  const [timeLeft, setTimeLeft] = useState(initialSeconds);
   const [turnError, setTurnError] = useState(false);
   const [textDraft, setTextDraft] = useState("");
+  // Realtime-only presentation states (unused on the V1/text path).
+  const [realtimeConnecting, setRealtimeConnecting] = useState(!!realtime);
+  const [realtimeLost, setRealtimeLost] = useState(false);
 
   const phaseRef = useRef<Phase>(phase);
   const effectiveModeRef = useRef<AnswerMode>(effectiveMode);
   const controllerRef = useRef<VoiceController | null>(null);
-  const realtimeRef = useRef<RealtimeConnection | null>(null);
+  const geminiRef = useRef<GeminiLiveClient | null>(null);
   const abortRef = useRef<AbortController | null>(null);
   const interviewerBufRef = useRef("");
   const lastAnswerRef = useRef("");
@@ -89,12 +97,27 @@ export function LiveSession({ session, mode, locale, onRequestEnd }: Props) {
     const duration = Math.round((Date.now() - startedAtRef.current) / 1000);
     abortRef.current?.abort();
     controllerRef.current?.dispose();
-    realtimeRef.current?.close();
     setPhaseNow("ending");
-    onRequestEnd({
-      duration_seconds: duration,
-      turns: turnsRef.current.length > 0 ? turnsRef.current : undefined,
-    });
+
+    const gemini = geminiRef.current;
+    if (gemini) {
+      // Realtime: stop (releases mic, flushes remaining turns) BEFORE ending so
+      // the coaching report sees the full transcript. Turns are already
+      // persisted via recordTurns; hand over only what a failed final flush left
+      // behind so endSession can persist it without double-recording.
+      void gemini.stop().then(() => {
+        const pending = gemini.pendingTurns;
+        onRequestEnd({
+          duration_seconds: duration,
+          turns: pending.length > 0 ? pending : undefined,
+        });
+      });
+    } else {
+      onRequestEnd({
+        duration_seconds: duration,
+        turns: turnsRef.current.length > 0 ? turnsRef.current : undefined,
+      });
+    }
   }, [onRequestEnd, setPhaseNow]);
 
   /* ------------------------------- one turn ------------------------------- */
@@ -163,12 +186,23 @@ export function LiveSession({ session, mode, locale, onRequestEnd }: Props) {
   const degradeToText = useCallback(() => {
     if (effectiveModeRef.current === "text") return;
     setDegraded(true);
+    setRealtimeConnecting(false);
+    setRealtimeLost(false);
     setEffectiveMode("text");
     setPhaseNow("listening");
   }, [setPhaseNow]);
 
+  /** Realtime dropped mid-session → user chooses to keep going by text. */
+  const continueInText = useCallback(() => {
+    setRealtimeLost(false);
+    degradeToText();
+  }, [degradeToText]);
+
   /* ---------------------------- voice lifecycle --------------------------- */
   useEffect(() => {
+    // Realtime (Tier V2) owns the voice tier when a descriptor is present; the
+    // browser STT/TTS controller must not also grab the mic.
+    if (realtime && effectiveMode === "voice") return;
     if (effectiveMode !== "voice") {
       // Text tier (chosen or degraded): no mic; wait for a typed answer.
       if (phaseRef.current === "interviewer_speaking") setPhaseNow("listening");
@@ -219,22 +253,64 @@ export function LiveSession({ session, mode, locale, onRequestEnd }: Props) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [effectiveMode]);
 
-  /* ------------------------- realtime (V2, thin) -------------------------- */
+  /* --------------------- realtime (V2) speech-to-speech ------------------- */
   useEffect(() => {
-    const rt = session.realtime;
-    if (!rt) return; // Normal path: server disables realtime → V1/Text only.
-    // Connect transport-agnostically using ONLY the ephemeral token. We keep the
-    // channel open; the functional Q&A still runs over the SSE turn loop.
-    const conn = connectRealtime(rt, {
-      onError: () => undefined,
-      onClose: () => undefined,
+    if (!realtime) return; // Normal path: server disables realtime → V1/Text.
+    if (effectiveMode !== "voice") return; // Degraded to text → text tier runs.
+
+    let cancelled = false;
+    const client = new GeminiLiveClient(realtime, session.session_id);
+    geminiRef.current = client;
+
+    client
+      .onCaption((u) => {
+        if (cancelled) return;
+        if (u.speaker === "interviewer") {
+          setRealtimeConnecting(false);
+          if (u.final) {
+            setInterviewerStreaming(null);
+            setCurrentQuestion(u.text);
+            setCandidateCaption("");
+            setQuestionCount((c) => c + 1);
+          } else {
+            setInterviewerStreaming(u.text);
+          }
+        } else {
+          setCandidateCaption(u.text);
+        }
+      })
+      .onInterviewerAudioState((state) => {
+        if (cancelled) return;
+        setRealtimeConnecting(false);
+        setPhaseNow(state === "speaking" ? "interviewer_speaking" : "listening");
+      })
+      .onError((reason) => {
+        if (cancelled) return;
+        if (reason === "connection_lost") {
+          // Established then dropped → calm banner offering to continue by text.
+          setRealtimeConnecting(false);
+          setRealtimeLost(true);
+        } else {
+          // Mic denied / unsupported / never connected → fall to the text tier.
+          degradeToText();
+        }
+      })
+      .onEnded(() => {
+        if (cancelled) return;
+        finalize();
+      });
+
+    void client.start().catch(() => {
+      // onError already fired and drove degradation; nothing else to do.
     });
-    realtimeRef.current = conn;
+
     return () => {
-      conn.close();
-      if (realtimeRef.current === conn) realtimeRef.current = null;
+      cancelled = true;
+      void client.stop();
+      if (geminiRef.current === client) geminiRef.current = null;
     };
-  }, [session.realtime]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [realtime, effectiveMode]);
 
   /* -------------------------------- timer --------------------------------- */
   useEffect(() => {
@@ -261,7 +337,7 @@ export function LiveSession({ session, mode, locale, onRequestEnd }: Props) {
       let goalTarget = 1;
       const p = phaseRef.current;
       if (effectiveModeRef.current === "voice" && p === "listening") {
-        goalTarget = 1 + (controllerRef.current?.level ?? 0) * 0.22;
+        goalTarget = 1 + (geminiRef.current?.level ?? controllerRef.current?.level ?? 0) * 0.22;
       } else if (p === "interviewer_speaking") {
         goalTarget = 1.05 + 0.05 * (0.5 + 0.5 * Math.sin(performance.now() / 320));
       } else if (p === "thinking") {
@@ -278,8 +354,9 @@ export function LiveSession({ session, mode, locale, onRequestEnd }: Props) {
   }, [reduced]);
 
   /* --------------------------------- render ------------------------------- */
-  const statusLabel =
-    phase === "interviewer_speaking"
+  const statusLabel = realtimeConnecting
+    ? t("realtimeConnectingLabel")
+    : phase === "interviewer_speaking"
       ? t("speakingLabel")
       : phase === "thinking"
         ? t("thinkingLabel")
@@ -388,6 +465,24 @@ export function LiveSession({ session, mode, locale, onRequestEnd }: Props) {
 
       {/* Bottom controls */}
       <div className="mt-2 space-y-3">
+        {realtimeLost && (
+          <div
+            role="alert"
+            className="mx-auto max-w-xl rounded-lg border border-[var(--amber-600)]/30 bg-[var(--amber-50)] px-3 py-2.5 text-center"
+          >
+            <p className="text-xs font-semibold text-[var(--text-primary)]">{t("realtimeLostTitle")}</p>
+            <p className="mt-0.5 text-xs leading-relaxed text-[var(--text-secondary)]">
+              {t("realtimeLostBody")}
+            </p>
+            <div className="mt-2 flex justify-center">
+              <Button variant="secondary" size="sm" onClick={continueInText}>
+                <Keyboard aria-hidden weight="bold" className="size-4" />
+                {t("realtimeContinueText")}
+              </Button>
+            </div>
+          </div>
+        )}
+
         {degraded && (
           <p className="mx-auto max-w-xl rounded-lg bg-[var(--amber-50)] px-3 py-2 text-center text-xs leading-relaxed text-[var(--amber-700)]">
             {t("textModeNotice")}
@@ -423,7 +518,11 @@ export function LiveSession({ session, mode, locale, onRequestEnd }: Props) {
           />
         ) : (
           <div className="flex items-center justify-center gap-2 text-xs text-[var(--text-muted)]">
-            <MicLevelMeter controllerRef={controllerRef} active={phase === "listening"} reduced={reduced} />
+            <MicLevelMeter
+              getLevel={() => geminiRef.current?.level ?? controllerRef.current?.level ?? 0}
+              active={phase === "listening"}
+              reduced={reduced}
+            />
             <span>{phase === "listening" ? t("listeningLabel") : t("micLevelLabel")}</span>
           </div>
         )}
@@ -488,13 +587,13 @@ function TextAnswerBar({
   );
 }
 
-/** Small live mic-level bar for the voice tier. */
+/** Small live mic-level bar for the voice tier (browser voice or realtime). */
 function MicLevelMeter({
-  controllerRef,
+  getLevel,
   active,
   reduced,
 }: {
-  controllerRef: React.RefObject<VoiceController | null>;
+  getLevel: () => number;
   active: boolean;
   reduced: boolean;
 }) {
@@ -503,7 +602,7 @@ function MicLevelMeter({
     if (reduced) return;
     let raf = 0;
     const loop = () => {
-      const level = active ? (controllerRef.current?.level ?? 0) : 0;
+      const level = active ? getLevel() : 0;
       if (barRef.current) {
         barRef.current.style.width = `${Math.round(6 + level * 26)}px`;
       }
@@ -511,7 +610,7 @@ function MicLevelMeter({
     };
     raf = requestAnimationFrame(loop);
     return () => cancelAnimationFrame(raf);
-  }, [active, reduced, controllerRef]);
+  }, [active, reduced, getLevel]);
 
   return (
     <span className="flex items-center gap-1.5">

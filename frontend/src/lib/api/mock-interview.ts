@@ -148,12 +148,52 @@ export interface MockInterviewSessionListItem {
   created_at: string;
 }
 
+/* ------------------------------- progress --------------------------------- */
+
+/**
+ * A qualitative practice theme (a recurring gap or a strength). Deliberately
+ * score-free: {@link count} is how many sessions surfaced the theme, and
+ * {@link recurring} flags a theme the student keeps hitting — never a grade.
+ */
+export interface MockInterviewProgressTheme {
+  text: string;
+  count: number;
+  recurring: boolean;
+}
+
+/**
+ * Cross-session practice progress for the student "My interviews" surface.
+ * Formative and qualitative only — there is intentionally NO score/rating.
+ * `by_focus` is a sparse map keyed by focus area (e.g. technical/behavioral/
+ * mixed); `recent` mirrors the compact history row shape.
+ */
+export interface MockInterviewProgress {
+  completed: number;
+  recurring_gaps: MockInterviewProgressTheme[];
+  top_strengths: MockInterviewProgressTheme[];
+  by_focus: Record<string, number>;
+  recent: MockInterviewSessionListItem[];
+}
+
 /* ---------------------------- admin / oversight --------------------------- */
+
+/** One day of the oversight activity trend (aggregate count only). */
+export interface MockInterviewTrendPoint {
+  date: string;
+  count: number;
+}
+
+/** A most-practiced job row for oversight. `title` may be null (job removed). */
+export interface MockInterviewTopJob {
+  job_id: string;
+  title: string | null;
+  count: number;
+}
 
 /**
  * University oversight aggregate for the mock-interview feature. Aggregate-only:
- * carries NO student PII and NO provider/model internals. `by_modality` is a
- * sparse map keyed by modality.
+ * carries NO student PII and NO provider/model internals. `by_modality` and
+ * `by_focus` are sparse maps; `trend` is per-day and `top_jobs` is ranked.
  */
 export interface MockInterviewAdminStats {
   total: number;
@@ -168,6 +208,12 @@ export interface MockInterviewAdminStats {
   /** 0–1 completion ratio (completed / total). */
   completion_rate: number;
   window_days: number;
+  /** Per-day session counts across the window (oldest → newest). */
+  trend: MockInterviewTrendPoint[];
+  /** Ranked most-practiced jobs in the window. */
+  top_jobs: MockInterviewTopJob[];
+  /** Sparse focus-area distribution (technical/behavioral/mixed/…). */
+  by_focus: Record<string, number>;
 }
 
 /**
@@ -421,6 +467,15 @@ export const mockInterviewApi = {
     );
   },
 
+  /**
+   * Cross-session, score-free practice progress: completed count, recurring
+   * gaps/strengths, focus mix, and recent sessions. Powers the student
+   * "My interviews" progress summary.
+   */
+  getProgress(): Promise<MockInterviewProgress> {
+    return api.get<MockInterviewProgress>("/mock-interview/progress");
+  },
+
   /* --- university oversight (university-only; enforced server-side) --- */
 
   /** Aggregate usage + safety stats over a trailing window (days). */
@@ -454,4 +509,11 @@ export const mockInterviewApi = {
 /** Best available display title for a history row. */
 export function sessionListTitle(item: MockInterviewSessionListItem): string {
   return item.title ?? item.job_title ?? "";
+}
+
+/** Best available display title for a most-practiced job row (never a raw key). */
+export function topJobTitle(item: MockInterviewTopJob): string {
+  const title = item.title?.trim();
+  if (title) return title;
+  return `#${item.job_id.slice(0, 8)}`;
 }

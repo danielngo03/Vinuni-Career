@@ -386,7 +386,7 @@ export type {
   RespondOfferBody,
 } from "./applications";
 export { interviewPrepApi, coverLetterApi } from "./interview-prep";
-export { mockInterviewApi, sessionListTitle } from "./mock-interview";
+export { mockInterviewApi, sessionListTitle, topJobTitle } from "./mock-interview";
 export type {
   MockInterviewModality,
   MockInterviewSpeaker,
@@ -404,6 +404,10 @@ export type {
   CoachingReport,
   MockInterviewSessionDetail,
   MockInterviewSessionListItem,
+  MockInterviewProgressTheme,
+  MockInterviewProgress,
+  MockInterviewTrendPoint,
+  MockInterviewTopJob,
   MockInterviewAdminStats,
   MockInterviewAdminConfig,
   MockInterviewFlaggedItem,

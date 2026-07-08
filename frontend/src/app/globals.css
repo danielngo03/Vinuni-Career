@@ -964,3 +964,57 @@ body {
 .cv-editable-empty:focus::before {
   content: "";
 }
+
+/* ------------------------------------------------------------------------- */
+/* Mock-interview coaching report — print / "Download PDF" export.            */
+/*                                                                           */
+/* "Download PDF" calls window.print(); these rules print ONLY the report    */
+/* content (title, per-question observations/suggestions, overall, gaps,     */
+/* strengths) cleanly on white and hide nav / sidebar / buttons. The whole   */
+/* block is guarded by `:has([data-mi-print-region])`, so a bare Ctrl+P on   */
+/* any other surface is completely unaffected. No scores are rendered        */
+/* anywhere — this only restyles existing score-free content.                */
+/* ------------------------------------------------------------------------- */
+@media print {
+  /* Only engage the aggressive hide-everything mode on pages that actually
+     render a coaching-report print region. */
+  body:has([data-mi-print-region]) {
+    background: #ffffff !important;
+  }
+  body:has([data-mi-print-region]) * {
+    visibility: hidden;
+  }
+  body:has([data-mi-print-region]) [data-mi-print-region],
+  body:has([data-mi-print-region]) [data-mi-print-region] * {
+    visibility: visible;
+  }
+  /* Pull the report to the top-left of the page so hidden (space-reserving)
+     siblings don't push it down. */
+  body:has([data-mi-print-region]) [data-mi-print-region] {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    background: #ffffff;
+    color: #171717;
+  }
+  /* Clean monochrome: ink text on white, light rules, no shadows / animation
+     offsets. Forces a consistent print look in both light and dark themes. */
+  [data-mi-print-region] * {
+    color: #171717 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    border-color: #d4d4d4 !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  /* Action controls (Download PDF / Practice again) never appear on paper. */
+  [data-mi-print-region] [data-mi-print-hide] {
+    display: none !important;
+  }
+  @page {
+    margin: 1.5cm;
+  }
+}

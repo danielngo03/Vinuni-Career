@@ -4,8 +4,10 @@ import { useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { useQuery } from "@tanstack/react-query";
 import {
+  Briefcase,
   CaretRight,
   ChartBar,
+  ChartLineUp,
   ChatCircleDots,
   CheckCircle,
   ClockCountdown,
@@ -14,6 +16,7 @@ import {
   Microphone,
   ShieldWarning,
   SlidersHorizontal,
+  Target,
   Timer,
   UserSound,
   Users,
@@ -22,12 +25,15 @@ import {
 import { Button, EmptyState, Modal, Skeleton, SegmentedControl } from "@/components/ui";
 import { PageHeader } from "@/components/layout/page-header";
 import { CoachingReport } from "@/components/jobs/mock-interview/coaching-report";
+import { FocusMix } from "@/components/jobs/mock-interview/focus-mix";
 import { useAuthStore } from "@/stores/auth-store";
 import { formatDateTime } from "@/lib/format";
 import { cn } from "@/lib/utils";
 import {
   ApiError,
   mockInterviewApi,
+  topJobTitle,
+  type MockInterviewAdminStats,
   type MockInterviewFlaggedItem,
   type MockInterviewModality,
   type MockInterviewStatus,
@@ -220,6 +226,13 @@ export function MockInterviewOversightScreen() {
             />
           </div>
 
+          <TrendCard stats={stats} loading={statsQuery.isPending} />
+
+          <div className="mt-5 grid grid-cols-1 gap-5 lg:grid-cols-2">
+            <TopJobsCard stats={stats} loading={statsQuery.isPending} />
+            <FocusCard stats={stats} loading={statsQuery.isPending} />
+          </div>
+
           {isSuperadmin && <FlaggedSection />}
         </>
       )}
@@ -356,6 +369,197 @@ function OutcomeRow({
       <span className="text-[var(--text-secondary)]">{label}</span>
       <span className={cn("font-semibold tabular-nums", tone)}>{value}</span>
     </li>
+  );
+}
+
+/* -------------------------------- trend --------------------------------- */
+
+/** Compact day/month label; falls back to the raw string on parse failure. */
+function formatShortDate(dateStr: string, locale: string): string {
+  const d = new Date(dateStr);
+  if (Number.isNaN(d.getTime())) return dateStr;
+  return d.toLocaleDateString(locale === "vi" ? "vi-VN" : "en-US", {
+    day: "numeric",
+    month: "short",
+  });
+}
+
+/**
+ * Per-day activity as a monochrome CSS bar sparkline (no chart library). The
+ * tallest day uses ink; the rest gray. Aggregate counts only — no PII. Handles
+ * an empty / all-zero window gracefully.
+ */
+function TrendCard({
+  stats,
+  loading,
+}: {
+  stats: MockInterviewAdminStats | undefined;
+  loading: boolean;
+}) {
+  const t = useTranslations("mockInterviewOversight");
+  const locale = useLocale();
+
+  const trend = stats?.trend ?? [];
+  const max = Math.max(1, ...trend.map((p) => p.count));
+  const hasData = trend.some((p) => p.count > 0);
+
+  return (
+    <section className="mt-5 rounded-2xl border border-[var(--border-default)] bg-[var(--surface-card)] p-5">
+      <h2 className="mb-3 flex items-center gap-1.5 text-sm font-bold text-[var(--text-primary)]">
+        <ChartLineUp aria-hidden weight="duotone" className="size-4 text-[var(--text-secondary)]" />
+        {t("trendTitle")}
+      </h2>
+      {loading ? (
+        <Skeleton className="h-28 w-full rounded-lg" />
+      ) : trend.length === 0 || !hasData ? (
+        <p className="text-sm text-[var(--text-muted)]">{t("trendEmpty")}</p>
+      ) : (
+        <>
+          <div
+            role="img"
+            aria-label={t("trendAria")}
+            className="flex h-28 items-end gap-px"
+          >
+            {trend.map((point) => {
+              const pct = Math.round((point.count / max) * 100);
+              const height = point.count > 0 ? Math.max(pct, 6) : 0;
+              const isMax = point.count === max && point.count > 0;
+              return (
+                <div
+                  key={point.date}
+                  title={`${formatShortDate(point.date, locale)} · ${point.count}`}
+                  className="flex h-full min-w-0 flex-1 items-end"
+                >
+                  <div
+                    className={cn(
+                      "w-full rounded-t-sm transition-[height] duration-300",
+                      isMax
+                        ? "bg-[var(--text-primary)]"
+                        : "bg-[var(--border-strong)]",
+                    )}
+                    style={{ height: `${height}%` }}
+                  />
+                </div>
+              );
+            })}
+          </div>
+          {trend.length > 1 &&
+            (() => {
+              const first = trend[0];
+              const last = trend[trend.length - 1];
+              if (!first || !last) return null;
+              return (
+                <div className="mt-1.5 flex justify-between text-[10px] font-medium text-[var(--text-muted)]">
+                  <span>{formatShortDate(first.date, locale)}</span>
+                  <span>{formatShortDate(last.date, locale)}</span>
+                </div>
+              );
+            })()}
+        </>
+      )}
+    </section>
+  );
+}
+
+/* ------------------------------ top jobs -------------------------------- */
+
+/** Most-practiced jobs in the window (title, falling back to a short id). */
+function TopJobsCard({
+  stats,
+  loading,
+}: {
+  stats: MockInterviewAdminStats | undefined;
+  loading: boolean;
+}) {
+  const t = useTranslations("mockInterviewOversight");
+
+  const jobs = stats?.top_jobs ?? [];
+
+  return (
+    <section className="rounded-2xl border border-[var(--border-default)] bg-[var(--surface-card)] p-5">
+      <h2 className="mb-3 flex items-center gap-1.5 text-sm font-bold text-[var(--text-primary)]">
+        <Briefcase aria-hidden weight="duotone" className="size-4 text-[var(--text-secondary)]" />
+        {t("topJobsTitle")}
+      </h2>
+      {loading ? (
+        <div className="space-y-2.5">
+          {[0, 1, 2].map((i) => (
+            <Skeleton key={i} className="h-5 w-full rounded" />
+          ))}
+        </div>
+      ) : jobs.length === 0 ? (
+        <p className="text-sm text-[var(--text-muted)]">{t("topJobsEmpty")}</p>
+      ) : (
+        <ol className="space-y-2.5">
+          {jobs.map((job, i) => {
+            const label = topJobTitle(job);
+            return (
+              <li key={job.job_id} className="flex items-center gap-3 text-sm">
+                <span
+                  aria-hidden
+                  className="flex size-6 shrink-0 items-center justify-center rounded-full bg-[var(--bg-muted)] text-xs font-bold tabular-nums text-[var(--text-secondary)]"
+                >
+                  {i + 1}
+                </span>
+                <span
+                  className="min-w-0 flex-1 truncate text-[var(--text-secondary)]"
+                  title={label}
+                >
+                  {label}
+                </span>
+                <span className="shrink-0 font-semibold tabular-nums text-[var(--text-primary)]">
+                  {t("jobSessions", { count: job.count })}
+                </span>
+              </li>
+            );
+          })}
+        </ol>
+      )}
+    </section>
+  );
+}
+
+/* ------------------------------ focus mix ------------------------------- */
+
+/** Focus-area distribution as monochrome proportion bars (shared component). */
+function FocusCard({
+  stats,
+  loading,
+}: {
+  stats: MockInterviewAdminStats | undefined;
+  loading: boolean;
+}) {
+  const t = useTranslations("mockInterviewOversight");
+
+  const focusLabel = (key: string): string => {
+    const known: Record<string, string> = {
+      technical: t("focusTechnical"),
+      behavioral: t("focusBehavioral"),
+      mixed: t("focusMixed"),
+    };
+    return known[key] ?? key;
+  };
+
+  return (
+    <section className="rounded-2xl border border-[var(--border-default)] bg-[var(--surface-card)] p-5">
+      <h2 className="mb-3 flex items-center gap-1.5 text-sm font-bold text-[var(--text-primary)]">
+        <Target aria-hidden weight="duotone" className="size-4 text-[var(--text-secondary)]" />
+        {t("focusTitle")}
+      </h2>
+      {loading ? (
+        <div className="space-y-3">
+          {[0, 1, 2].map((i) => (
+            <Skeleton key={i} className="h-8 w-full rounded" />
+          ))}
+        </div>
+      ) : (
+        <FocusMix
+          data={stats?.by_focus ?? {}}
+          labelFor={focusLabel}
+          emptyLabel={t("focusEmpty")}
+        />
+      )}
+    </section>
   );
 }
 
@@ -720,7 +924,7 @@ function TranscriptModal({
               className="border-t border-[var(--border-default)] pt-5"
             >
               <h3 className="mb-3 kicker">{t("reportSectionTitle")}</h3>
-              <CoachingReport report={data.report} />
+              <CoachingReport report={data.report} printable={false} />
             </section>
           )}
         </div>

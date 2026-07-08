@@ -3,13 +3,17 @@
 import { useEffect, useRef, useState } from "react";
 import { useTranslations } from "next-intl";
 import {
+  ArrowClockwise,
   CheckCircle,
+  FilePdf,
   Lightbulb,
   Notepad,
   Sparkle,
   TrendUp,
   Warning,
 } from "@phosphor-icons/react";
+import { Link } from "@/i18n/navigation";
+import { Button } from "@/components/ui";
 import type { CoachingReport } from "@/lib/api";
 import { usePrefersReducedMotion } from "@/lib/hooks/use-mount-animation";
 import { cn } from "@/lib/utils";
@@ -18,9 +22,26 @@ import { cn } from "@/lib/utils";
  * Renders the score-free coaching report. There is deliberately NO score,
  * rating, or percentage anywhere — mock interview is formative practice.
  * Sections reveal gently on scroll (static under reduced motion).
+ *
+ * When {@link printable} (the default), the report is marked as the print
+ * region and gains a "Download PDF" action (a print-scoped `window.print()`,
+ * see globals.css `@media print`) plus an optional "Practice again" link when
+ * {@link jobId} is supplied. Admin/read-only embeds pass `printable={false}`.
  */
-export function CoachingReport({ report }: { report: CoachingReport | null }) {
+export function CoachingReport({
+  report,
+  jobId,
+  printable = true,
+}: {
+  report: CoachingReport | null;
+  jobId?: string | null;
+  printable?: boolean;
+}) {
   const t = useTranslations("jobs.mockInterview");
+
+  function handleDownloadPdf() {
+    if (typeof window !== "undefined") window.print();
+  }
 
   if (!report) {
     return (
@@ -39,7 +60,10 @@ export function CoachingReport({ report }: { report: CoachingReport | null }) {
   }
 
   return (
-    <div className="space-y-5">
+    <div
+      className="space-y-5"
+      {...(printable ? { "data-mi-print-region": "" } : {})}
+    >
       <header className="flex items-start gap-3">
         <span className="flex size-10 shrink-0 items-center justify-center rounded-2xl icon-chip-primary shadow-sm">
           <Sparkle aria-hidden weight="duotone" className="size-5" />
@@ -153,6 +177,26 @@ export function CoachingReport({ report }: { report: CoachingReport | null }) {
             </ol>
           </section>
         </Reveal>
+      )}
+
+      {printable && (
+        <div
+          data-mi-print-hide
+          className="flex flex-wrap items-center gap-3 border-t border-[var(--border-default)] pt-5"
+        >
+          <Button variant="secondary" size="sm" onClick={handleDownloadPdf}>
+            <FilePdf aria-hidden weight="bold" className="size-4" />
+            {t("downloadPdf")}
+          </Button>
+          {jobId && (
+            <Link href={`/jobs/${jobId}/interview`}>
+              <Button variant="primary" size="sm">
+                <ArrowClockwise aria-hidden weight="bold" className="size-4" />
+                {t("practiceAgain")}
+              </Button>
+            </Link>
+          )}
+        </div>
       )}
     </div>
   );

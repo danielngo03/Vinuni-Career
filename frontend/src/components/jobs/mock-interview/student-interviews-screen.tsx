@@ -4,12 +4,16 @@ import { useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import {
+  ArrowClockwise,
   ArrowLeft,
   CaretRight,
   ChatCircleDots,
+  CheckCircle,
   ClockCountdown,
   Keyboard,
   Microphone,
+  Target,
+  TrendUp,
   WarningCircle,
 } from "@phosphor-icons/react";
 import { Link } from "@/i18n/navigation";
@@ -19,11 +23,14 @@ import {
   mockInterviewApi,
   sessionListTitle,
   type MockInterviewModality,
+  type MockInterviewProgress,
+  type MockInterviewProgressTheme,
   type MockInterviewSessionListItem,
   type MockInterviewStatus,
 } from "@/lib/api";
 import { cn } from "@/lib/utils";
 import { CoachingReport } from "./coaching-report";
+import { FocusMix } from "./focus-mix";
 import { TranscriptReview } from "./transcript-review";
 
 const STATUS_KEY: Record<MockInterviewStatus, string> = {
@@ -101,6 +108,8 @@ function InterviewsList({ onOpen }: { onOpen: (id: string) => void }) {
       </p>
 
       <div className="mx-auto max-w-3xl">
+        <ProgressSummary />
+
         {query.isPending ? (
           <ul className="space-y-2.5" aria-hidden>
             {[0, 1, 2, 3].map((i) => (
@@ -140,10 +149,18 @@ function InterviewsList({ onOpen }: { onOpen: (id: string) => void }) {
             }
           />
         ) : (
-          <>
-            <p className="mb-2.5 text-xs font-medium text-[var(--text-muted)]">
-              {t("myInterviewsCount", { count: query.data.length })}
-            </p>
+          <section aria-labelledby="mi-sessions-title" className="mt-8">
+            <div className="mb-3 flex items-baseline justify-between gap-3">
+              <h2
+                id="mi-sessions-title"
+                className="text-sm font-bold text-[var(--text-primary)]"
+              >
+                {t("sessionsSectionTitle")}
+              </h2>
+              <p className="text-xs font-medium text-[var(--text-muted)]">
+                {t("myInterviewsCount", { count: query.data.length })}
+              </p>
+            </div>
             <ul className="space-y-2.5">
               {query.data.map((item) => (
                 <InterviewRow
@@ -154,10 +171,260 @@ function InterviewsList({ onOpen }: { onOpen: (id: string) => void }) {
                 />
               ))}
             </ul>
-          </>
+          </section>
         )}
       </div>
     </>
+  );
+}
+
+/* ------------------------------- progress ------------------------------- */
+
+/**
+ * Cross-session, score-free progress summary at the top of "My interviews":
+ * completed count, qualitative themes to keep working on (recurring emphasized),
+ * recurring strengths, and a focus mix. Never numbers-as-grades — the counts are
+ * occurrence tallies, not scores. Real skeleton / empty / error states.
+ */
+function ProgressSummary() {
+  const t = useTranslations("jobs.mockInterview");
+
+  const query = useQuery({
+    queryKey: ["mock-interview", "progress"],
+    queryFn: () => mockInterviewApi.getProgress(),
+    retry: false,
+    staleTime: 30_000,
+  });
+
+  if (query.isPending) {
+    return (
+      <section
+        className="mb-8 rounded-2xl border border-[var(--border-default)] bg-[var(--surface-card)] p-5 sm:p-6"
+        aria-hidden
+      >
+        <Skeleton className="h-5 w-40 rounded" />
+        <div className="mt-4 grid gap-5 sm:grid-cols-2">
+          <Skeleton className="h-24 w-full rounded-xl" />
+          <Skeleton className="h-24 w-full rounded-xl" />
+        </div>
+      </section>
+    );
+  }
+
+  // Progress is a non-blocking header; on error offer a quiet retry and let the
+  // session list below still render.
+  if (query.isError) {
+    return (
+      <section className="mb-8 flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-[var(--border-default)] bg-[var(--surface-card)] px-5 py-4">
+        <p className="text-sm text-[var(--text-muted)]">{t("progressError")}</p>
+        <Button
+          variant="secondary"
+          size="sm"
+          onClick={() => query.refetch()}
+          disabled={query.isFetching}
+        >
+          {t("historyRetry")}
+        </Button>
+      </section>
+    );
+  }
+
+  const progress = query.data;
+
+  // Honest empty state — no completed sessions yet.
+  if (progress.completed === 0) {
+    return (
+      <section className="mb-8 flex flex-col items-start gap-3 rounded-2xl border border-dashed border-[var(--border-strong)]/70 bg-[var(--surface-card)] p-5 sm:flex-row sm:items-center sm:gap-4 sm:p-6">
+        <span
+          aria-hidden
+          className="flex size-11 shrink-0 items-center justify-center rounded-2xl icon-chip-primary"
+        >
+          <TrendUp weight="duotone" className="size-5" />
+        </span>
+        <div className="min-w-0 flex-1">
+          <h2 className="text-base font-bold text-[var(--text-primary)]">
+            {t("progressEmptyTitle")}
+          </h2>
+          <p className="mt-0.5 text-sm text-[var(--text-secondary)]">
+            {t("progressEmptyBody")}
+          </p>
+        </div>
+        <Link href="/jobs" className="shrink-0">
+          <Button variant="primary" size="sm">
+            <Microphone aria-hidden weight="bold" className="size-4" />
+            {t("myInterviewsBrowseCta")}
+          </Button>
+        </Link>
+      </section>
+    );
+  }
+
+  return <ProgressSummaryCard progress={progress} />;
+}
+
+function ProgressSummaryCard({ progress }: { progress: MockInterviewProgress }) {
+  const t = useTranslations("jobs.mockInterview");
+
+  const focusLabel = (key: string): string => {
+    const known: Record<string, string> = {
+      technical: t("focusTechnical"),
+      behavioral: t("focusBehavioral"),
+      mixed: t("focusMixed"),
+    };
+    return known[key] ?? key;
+  };
+
+  return (
+    <section
+      aria-labelledby="mi-progress-title"
+      className="mb-8 rounded-2xl border border-[var(--border-default)] bg-[var(--surface-card)] p-5 sm:p-6"
+    >
+      <header className="flex items-start justify-between gap-4">
+        <div className="flex items-start gap-3">
+          <span
+            aria-hidden
+            className="flex size-10 shrink-0 items-center justify-center rounded-2xl icon-chip-primary"
+          >
+            <TrendUp weight="duotone" className="size-5" />
+          </span>
+          <div className="min-w-0">
+            <h2
+              id="mi-progress-title"
+              className="text-base font-bold tracking-tight text-[var(--text-primary)]"
+            >
+              {t("progressTitle")}
+            </h2>
+            <p className="mt-0.5 text-sm text-[var(--text-secondary)]">
+              {t("progressSubtitle")}
+            </p>
+          </div>
+        </div>
+        <div className="shrink-0 text-right">
+          <p className="text-3xl font-black leading-none tracking-tight tabular-nums text-[var(--text-primary)]">
+            {progress.completed}
+          </p>
+          <p className="mt-1 text-xs font-medium text-[var(--text-secondary)]">
+            {t("progressCompletedLabel")}
+          </p>
+        </div>
+      </header>
+
+      <div className="mt-5 grid gap-5 sm:grid-cols-2">
+        <ThemeGroup
+          icon={TrendUp}
+          iconClass="text-[var(--amber-600)]"
+          title={t("progressGapsTitle")}
+          emptyLabel={t("progressGapsEmpty")}
+          themes={progress.recurring_gaps}
+          tone="gap"
+        />
+        <ThemeGroup
+          icon={CheckCircle}
+          iconClass="text-[var(--teal-600)]"
+          title={t("progressStrengthsTitle")}
+          emptyLabel={t("progressStrengthsEmpty")}
+          themes={progress.top_strengths}
+          tone="strength"
+        />
+      </div>
+
+      <div className="mt-5 border-t border-[var(--border-subtle)] pt-4">
+        <h3 className="mb-3 flex items-center gap-1.5 text-sm font-bold text-[var(--text-primary)]">
+          <Target aria-hidden weight="duotone" className="size-4 text-[var(--text-secondary)]" />
+          {t("progressFocusTitle")}
+        </h3>
+        <FocusMix
+          data={progress.by_focus}
+          labelFor={focusLabel}
+          emptyLabel={t("progressFocusEmpty")}
+        />
+      </div>
+    </section>
+  );
+}
+
+function ThemeGroup({
+  icon: Icon,
+  iconClass,
+  title,
+  emptyLabel,
+  themes,
+  tone,
+}: {
+  icon: React.ElementType;
+  iconClass: string;
+  title: string;
+  emptyLabel: string;
+  themes: MockInterviewProgressTheme[];
+  tone: "gap" | "strength";
+}) {
+  return (
+    <div>
+      <h3 className="mb-2.5 flex items-center gap-1.5 text-sm font-bold text-[var(--text-primary)]">
+        <Icon aria-hidden weight="duotone" className={cn("size-4", iconClass)} />
+        {title}
+      </h3>
+      {themes.length === 0 ? (
+        <p className="text-sm text-[var(--text-muted)]">{emptyLabel}</p>
+      ) : (
+        <ul className="flex flex-wrap gap-2">
+          {themes.map((theme, i) => (
+            <ThemeChip key={i} theme={theme} tone={tone} />
+          ))}
+        </ul>
+      )}
+    </div>
+  );
+}
+
+function ThemeChip({
+  theme,
+  tone,
+}: {
+  theme: MockInterviewProgressTheme;
+  tone: "gap" | "strength";
+}) {
+  const t = useTranslations("jobs.mockInterview");
+  const recurring = theme.recurring;
+
+  const toneClass =
+    tone === "gap"
+      ? recurring
+        ? "border-[var(--amber-600)]/45 bg-[var(--amber-50)] text-[var(--amber-700)] font-semibold"
+        : "border-[var(--border-default)] bg-[var(--surface-card)] text-[var(--text-secondary)]"
+      : recurring
+        ? "border-[var(--teal-500)]/45 bg-[var(--teal-50)] text-[var(--teal-700)] font-semibold"
+        : "border-[var(--border-default)] bg-[var(--surface-card)] text-[var(--text-secondary)]";
+
+  return (
+    <li
+      className={cn(
+        "inline-flex max-w-full items-center gap-1.5 rounded-full border px-3 py-1 text-xs",
+        toneClass,
+      )}
+      title={
+        recurring
+          ? t("progressRecurringSeen", { count: theme.count })
+          : t("progressSeen", { count: theme.count })
+      }
+    >
+      {recurring && (
+        <ArrowClockwise
+          aria-hidden
+          weight="bold"
+          className="size-3 shrink-0"
+        />
+      )}
+      <span className="truncate">{theme.text}</span>
+      {theme.count > 1 && (
+        <span
+          className="shrink-0 tabular-nums opacity-70"
+          aria-label={t("progressSeen", { count: theme.count })}
+        >
+          ×{theme.count}
+        </span>
+      )}
+    </li>
   );
 }
 
@@ -182,11 +449,11 @@ function InterviewRow({
   );
 
   return (
-    <li>
+    <li className="marketplace-card marketplace-card-hover flex items-center gap-1.5 rounded-2xl pr-2.5">
       <button
         type="button"
         onClick={() => onOpen(item.id)}
-        className="marketplace-card marketplace-card-hover flex w-full items-center gap-3.5 rounded-2xl px-4 py-3.5 text-left outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)]/30"
+        className="flex min-w-0 flex-1 items-center gap-3.5 rounded-2xl px-4 py-3.5 text-left outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)]/30"
       >
         <span
           aria-hidden
@@ -226,11 +493,20 @@ function InterviewRow({
             )}
           </div>
         </div>
-        <span className="flex shrink-0 items-center gap-1 text-xs font-semibold text-[var(--brand-primary)]">
+        <span className="hidden shrink-0 items-center gap-1 text-xs font-semibold text-[var(--brand-primary)] sm:flex">
           {t("historyView")}
           <CaretRight aria-hidden weight="bold" className="size-3.5" />
         </span>
       </button>
+      <Link
+        href={`/jobs/${item.job_id}/interview`}
+        title={t("practiceAgain")}
+        aria-label={`${t("practiceAgain")} — ${title}`}
+        className="inline-flex shrink-0 items-center gap-1.5 rounded-full border border-[var(--border-strong)] px-3 py-1.5 text-xs font-semibold text-[var(--text-primary)] outline-none transition-colors hover:bg-[var(--bg-subtle)] hover:border-[var(--text-muted)] focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)]/30"
+      >
+        <ArrowClockwise aria-hidden weight="bold" className="size-3.5" />
+        <span className="hidden sm:inline">{t("practiceAgain")}</span>
+      </Link>
     </li>
   );
 }
@@ -301,7 +577,7 @@ function SessionReview({
         />
       ) : (
         <div className="space-y-6">
-          <CoachingReport report={query.data.report} />
+          <CoachingReport report={query.data.report} jobId={query.data.job_id} />
           <TranscriptReview detail={query.data} onDeleted={handleDeleted} />
         </div>
       )}
