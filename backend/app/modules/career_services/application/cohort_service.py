@@ -17,6 +17,7 @@ from app.modules.auth.application.context import RequestContext
 from app.modules.career_services.application.common import audit_ctx, require_org
 from app.modules.career_services.domain import catalog
 from app.modules.career_services.domain.models import Cohort, CohortMembership
+from app.modules.organization.application import org_lookup_facade
 from app.shared.audit import write_audit
 from app.shared.exceptions import ConflictError, ResourceNotFoundError, ValidationFailedError
 from app.shared.permissions import Principal, permission_checker
@@ -30,6 +31,9 @@ def _presenter(cohort: Cohort, *, locale: str = "vi") -> dict:
         "name": cohort.name,
         "description": cohort.description,
         "owner_counselor_id": str(cohort.owner_counselor_id),
+        # Owning department (P2/WS2.1); NULL = org-wide cohort. Gates cohort
+        # writes for department-scoped counselors.
+        "department_id": str(cohort.department_id) if cohort.department_id else None,
         "status": cohort.status,
         "status_label": catalog.cohort_status_label(cohort.status, locale=locale),
         "created_at": cohort.created_at.isoformat() if cohort.created_at else None,
@@ -62,12 +66,24 @@ async def create_cohort(
     principal: Principal,
     name: str,
     description: str | None,
+    department_id: uuid.UUID | None = None,
     ctx: RequestContext,
     locale: str = "vi",
 ) -> dict:
     org_id = require_org(principal)
+    # Validate the department scope BEFORE the permission check so a foreign /
+    # non-existent department is a clean 404 rather than leaking through the RBAC
+    # decision (the department is also the RBAC decision input below).
+    if department_id is not None and not await org_lookup_facade.department_belongs_to_org(
+        session, org_id=org_id, department_id=department_id
+    ):
+        raise ResourceNotFoundError()
+    # Department-scoped enforcement: a counselor whose ``career_services_cohorts``
+    # grant is scoped to ``department_id`` may create a cohort there; an org-wide
+    # grant works for any department (incl. ``None`` = org-wide cohort).
     permission_checker.require(
-        principal, _RESOURCE, "create", resource_org_id=org_id
+        principal, _RESOURCE, "create",
+        resource_org_id=org_id, resource_department_id=department_id,
     )
     if not name or not name.strip():
         raise ValidationFailedError(details={"reason": "name_required"})
@@ -88,6 +104,7 @@ async def create_cohort(
         org_id=org_id,
         name=name.strip(),
         description=description,
+        department_id=department_id,
         owner_counselor_id=principal.user_id,
         status=catalog.COHORT_ACTIVE,
     )
@@ -99,7 +116,10 @@ async def create_cohort(
         resource_type="career_services_cohort",
         resource_id=cohort.id,
         context=audit_ctx(principal, ctx),
-        after={"name": cohort.name},
+        after={
+            "name": cohort.name,
+            "department_id": str(department_id) if department_id else None,
+        },
     )
     await session.commit()
     return _presenter(cohort, locale=locale)
@@ -132,12 +152,16 @@ async def update_cohort(
     locale: str = "vi",
 ) -> dict:
     org_id = require_org(principal)
-    permission_checker.require(
-        principal, _RESOURCE, "update", resource_org_id=org_id
-    )
+    # Load first so the RBAC decision can be scoped to the cohort's department.
+    # Tenant isolation is preserved (``_get_cohort`` filters ``org_id``); a
+    # missing/foreign cohort is a 404 either way.
     cohort = await _get_cohort(session, org_id=org_id, cohort_id=cohort_id)
     if cohort is None:
         raise ResourceNotFoundError()
+    permission_checker.require(
+        principal, _RESOURCE, "update",
+        resource_org_id=org_id, resource_department_id=cohort.department_id,
+    )
     if status is not None:
         if status not in catalog.COHORT_STATUSES:
             raise ValidationFailedError(details={"reason": "invalid_status"})
@@ -170,12 +194,13 @@ async def delete_cohort(
     ctx: RequestContext,
 ) -> None:
     org_id = require_org(principal)
-    permission_checker.require(
-        principal, _RESOURCE, "delete", resource_org_id=org_id
-    )
     cohort = await _get_cohort(session, org_id=org_id, cohort_id=cohort_id)
     if cohort is None:
         raise ResourceNotFoundError()
+    permission_checker.require(
+        principal, _RESOURCE, "delete",
+        resource_org_id=org_id, resource_department_id=cohort.department_id,
+    )
     from datetime import UTC, datetime
 
     cohort.deleted_at = datetime.now(tz=UTC)
@@ -200,12 +225,13 @@ async def add_member(
     ctx: RequestContext,
 ) -> dict:
     org_id = require_org(principal)
-    permission_checker.require(
-        principal, _RESOURCE, "update", resource_org_id=org_id
-    )
     cohort = await _get_cohort(session, org_id=org_id, cohort_id=cohort_id)
     if cohort is None:
         raise ResourceNotFoundError()
+    permission_checker.require(
+        principal, _RESOURCE, "update",
+        resource_org_id=org_id, resource_department_id=cohort.department_id,
+    )
 
     existing = (
         await session.execute(
@@ -245,12 +271,13 @@ async def remove_member(
     ctx: RequestContext,
 ) -> None:
     org_id = require_org(principal)
-    permission_checker.require(
-        principal, _RESOURCE, "update", resource_org_id=org_id
-    )
     cohort = await _get_cohort(session, org_id=org_id, cohort_id=cohort_id)
     if cohort is None:
         raise ResourceNotFoundError()
+    permission_checker.require(
+        principal, _RESOURCE, "update",
+        resource_org_id=org_id, resource_department_id=cohort.department_id,
+    )
 
     membership = (
         await session.execute(
@@ -279,10 +306,13 @@ async def list_members(
     session: AsyncSession, *, principal: Principal, cohort_id: uuid.UUID
 ) -> list[dict]:
     org_id = require_org(principal)
-    permission_checker.require(principal, _RESOURCE, "read", resource_org_id=org_id)
     cohort = await _get_cohort(session, org_id=org_id, cohort_id=cohort_id)
     if cohort is None:
         raise ResourceNotFoundError()
+    permission_checker.require(
+        principal, _RESOURCE, "read",
+        resource_org_id=org_id, resource_department_id=cohort.department_id,
+    )
     rows = (
         await session.execute(
             select(CohortMembership)

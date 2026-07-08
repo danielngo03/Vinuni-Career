@@ -74,8 +74,18 @@ def member_summary(
     full_name: str | None,
     role_ids: list[str],
     department_ids: list[str],
+    role_assignments: list[dict] | None = None,
     locale: str = "vi",
 ) -> dict:
+    # ``role_assignments`` carries the per-role department scope
+    # (``[{"role_id", "department_id"}]``) so the team screen can render a
+    # per-role department selector. When a caller does not supply it (legacy call
+    # sites), every assigned role is treated as ORG-WIDE (``department_id`` None)
+    # — matching ``role_ids`` exactly.
+    if role_assignments is None:
+        role_assignments = [
+            {"role_id": rid, "department_id": None} for rid in role_ids
+        ]
     return {
         "id": str(membership.id),
         # Partner-internal: the member's user_id, needed for interview-assignee
@@ -86,6 +96,7 @@ def member_summary(
         "status": membership.status,
         "status_label": catalog.member_status_label(membership.status, locale=locale),
         "role_ids": role_ids,
+        "role_assignments": role_assignments,
         "department_ids": department_ids,
         "version": membership.version,
         "joined_at": membership.joined_at.isoformat() if membership.joined_at else None,

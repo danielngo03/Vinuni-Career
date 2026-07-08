@@ -16,6 +16,9 @@ from pydantic import BaseModel, Field
 class CohortCreateRequest(BaseModel):
     name: str = Field(min_length=1, max_length=200)
     description: str | None = None
+    # Optional owning department (P2/WS2.1). When set, cohort writes are gated by
+    # a department-scoped ``career_services_cohorts`` grant for this department.
+    department_id: uuid.UUID | None = None
 
 
 class CohortUpdateRequest(BaseModel):

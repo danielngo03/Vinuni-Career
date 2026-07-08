@@ -14,7 +14,7 @@ import uuid
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from app.modules.organization.domain.models import Organization
+from app.modules.organization.domain.models import Department, Organization
 
 _PARTNER = "partner"
 _ACTIVE = "active"
@@ -35,3 +35,23 @@ async def listable_id_for_slug(
             )
         )
     ).scalar_one_or_none()
+
+
+async def department_belongs_to_org(
+    session: AsyncSession, *, org_id: uuid.UUID, department_id: uuid.UUID
+) -> bool:
+    """True if ``department_id`` is a department of ``org_id``.
+
+    Tenant-isolation read seam so other modules (e.g. ``career_services``) can
+    validate a department scope without importing the ``Department`` ORM — the
+    ORM stays inside the ``organization`` module (module-boundary rule).
+    """
+
+    return (
+        await session.execute(
+            select(Department.id).where(
+                Department.id == department_id,
+                Department.org_id == org_id,
+            )
+        )
+    ).scalar_one_or_none() is not None

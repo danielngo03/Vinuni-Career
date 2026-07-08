@@ -80,7 +80,7 @@ async def get_current_auth(
     if identity is None:
         raise AuthRequiredError()
 
-    permissions = await grant_resolver.resolve_grants(
+    permissions, department_grants = await grant_resolver.resolve_scoped_grants(
         session, user_id=user.id, identity=identity
     )
     principal = Principal(
@@ -89,6 +89,7 @@ async def get_current_auth(
         org_id=identity.org_id,
         is_superadmin=user.is_superadmin,
         permissions=permissions,
+        department_grants=department_grants,
     )
     return CurrentAuth(
         principal=principal,

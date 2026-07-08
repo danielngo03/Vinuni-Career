@@ -20,13 +20,23 @@ from app.shared.exceptions import AuthRequiredError, PermissionDeniedError
 
 @dataclass(slots=True)
 class Principal:
-    """The acting identity for a request, resolved from the active session."""
+    """The acting identity for a request, resolved from the active session.
+
+    ``permissions`` is the ORG-WIDE grant set (role assignments with no
+    department scope). ``department_grants`` maps a ``department_id`` to the
+    grant set that applies ONLY inside that department (role assignments scoped
+    to that department via ``membership_roles.department_id``). It defaults to an
+    empty dict, so every pre-existing ``Principal(...)`` construction site — and
+    every principal without a department-scoped role — behaves exactly as before
+    (``docs/PARTNER_RBAC_ANALYTICS_SPEC.md`` grantable-by-department model).
+    """
 
     user_id: uuid.UUID | None
     persona: str = "guest"
     org_id: uuid.UUID | None = None
     is_superadmin: bool = False
     permissions: frozenset[str] = field(default_factory=frozenset)
+    department_grants: dict[uuid.UUID, frozenset[str]] = field(default_factory=dict)
 
     @property
     def is_authenticated(self) -> bool:
@@ -57,6 +67,7 @@ class PermissionChecker:
         action: str,
         *,
         resource_org_id: uuid.UUID | None = None,
+        resource_department_id: uuid.UUID | None = None,
     ) -> bool:
         if not principal.is_authenticated:
             return False
@@ -67,9 +78,24 @@ class PermissionChecker:
         if resource_org_id is not None and principal.org_id != resource_org_id:
             return False
 
-        return any(
-            _matches(granted, resource_type, action) for granted in principal.permissions
-        )
+        # Org-wide grants (role assignments with department_id IS NULL). This
+        # branch is byte-for-byte identical to the pre-department behavior: when
+        # ``resource_department_id`` is absent AND the principal has no
+        # department-scoped grants, only this check runs.
+        if any(_matches(g, resource_type, action) for g in principal.permissions):
+            return True
+
+        # Department-scoped grants: consulted ONLY when the caller supplies the
+        # resource's department and the principal holds a grant scoped to exactly
+        # that department. Absent either, the result above stands (== today).
+        if resource_department_id is not None:
+            dept_grants = principal.department_grants.get(resource_department_id)
+            if dept_grants is not None and any(
+                _matches(g, resource_type, action) for g in dept_grants
+            ):
+                return True
+
+        return False
 
     def require(
         self,
@@ -78,6 +104,7 @@ class PermissionChecker:
         action: str,
         *,
         resource_org_id: uuid.UUID | None = None,
+        resource_department_id: uuid.UUID | None = None,
     ) -> None:
         """Raise if the principal may not perform ``action`` on ``resource_type``.
 
@@ -88,7 +115,11 @@ class PermissionChecker:
         if not principal.is_authenticated:
             raise AuthRequiredError()
         if not self.can(
-            principal, resource_type, action, resource_org_id=resource_org_id
+            principal,
+            resource_type,
+            action,
+            resource_org_id=resource_org_id,
+            resource_department_id=resource_department_id,
         ):
             raise PermissionDeniedError()
 

@@ -345,9 +345,15 @@ async def update_member(
     session: AsyncSession = Depends(get_db_session),
     org_id: uuid.UUID | None = Query(default=None),
 ) -> dict:
+    scoped = (
+        [(a.role_id, a.department_id) for a in body.role_assignments]
+        if body.role_assignments is not None
+        else None
+    )
     data = await membership_service.update_member(
         session, principal=auth.principal, membership_id=membership_id,
-        role_ids=body.role_ids, department_ids=body.department_ids,
+        role_ids=body.role_ids, role_assignments=scoped,
+        department_ids=body.department_ids,
         version=body.version, ctx=auth.ctx, org_id=org_id,
     )
     return success(data)

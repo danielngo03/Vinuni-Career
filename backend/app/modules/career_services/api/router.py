@@ -63,6 +63,7 @@ async def create_cohort(
         principal=auth.principal,
         name=body.name,
         description=body.description,
+        department_id=body.department_id,
         ctx=auth.ctx,
         locale=locale,
     )

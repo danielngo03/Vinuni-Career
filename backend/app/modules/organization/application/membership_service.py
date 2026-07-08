@@ -37,7 +37,11 @@ from app.modules.organization.domain.models import (
 )
 from app.modules.users.application import user_service
 from app.shared.audit import AuditContext, write_audit
-from app.shared.exceptions import ConflictError, ResourceNotFoundError
+from app.shared.exceptions import (
+    ConflictError,
+    ResourceNotFoundError,
+    ValidationFailedError,
+)
 from app.shared.pagination import build_cursor_page, clamp_limit, decode_cursor
 from app.shared.permissions import Principal, permission_checker
 
@@ -89,6 +93,32 @@ async def _membership_department_ids(
         )
     ).all()
     return [r[0] for r in rows]
+
+
+async def _membership_role_assignments(
+    session: AsyncSession, membership_id: uuid.UUID
+) -> list[tuple[uuid.UUID, uuid.UUID | None]]:
+    """Return each role assignment as ``(role_id, department_id|None)``."""
+
+    rows = (
+        await session.execute(
+            select(MembershipRole.role_id, MembershipRole.department_id)
+            .where(MembershipRole.membership_id == membership_id)
+            .order_by(MembershipRole.role_id)
+        )
+    ).all()
+    return [(rid, did) for rid, did in rows]
+
+
+def _role_scope_payload(
+    assignments: list[tuple[uuid.UUID, uuid.UUID | None]],
+) -> list[dict[str, str | None]]:
+    """Audit/response shape for a set of (role, department-scope) assignments."""
+
+    return [
+        {"role_id": str(rid), "department_id": str(did) if did else None}
+        for rid, did in assignments
+    ]
 
 
 async def _permissions_of_roles(
@@ -146,19 +176,55 @@ async def list_members(
     items = []
     for m in page.items:
         user = await user_service.get_by_id(session, m.user_id)
-        role_ids = await _membership_role_ids(session, m.id)
+        assignments = await _membership_role_assignments(session, m.id)
         dept_ids = await _membership_department_ids(session, m.id)
         items.append(
             presenters.member_summary(
                 membership=m,
                 email=user.email if user else "",
                 full_name=user.full_name if user else None,
-                role_ids=[str(r) for r in role_ids],
+                role_ids=[str(r) for r, _ in assignments],
+                role_assignments=_role_scope_payload(assignments),
                 department_ids=[str(d) for d in dept_ids],
                 locale=locale,
             )
         )
     return items, page.next_cursor, page.limit
+
+
+def _resolve_target_scopes(
+    *,
+    role_ids: list[uuid.UUID] | None,
+    role_assignments: list[tuple[uuid.UUID, uuid.UUID | None]] | None,
+) -> list[tuple[uuid.UUID, uuid.UUID | None]] | None:
+    """Normalize the role-assignment input into ``(role_id, department_id)`` rows.
+
+    - ``None`` (both inputs omitted) -> no role change.
+    - Legacy ``role_ids`` -> every role assigned ORG-WIDE (department None), which
+      reproduces the pre-P2 behavior exactly.
+    - Scoped ``role_assignments`` -> the authoritative set; each role may carry a
+      department. A role may appear at most once (composite PK ``(membership_id,
+      role_id)`` scopes a role to a single department).
+    """
+
+    if role_assignments is not None and role_ids is not None:
+        raise ValidationFailedError(
+            details={"reason": "role_ids_and_role_assignments_mutually_exclusive"}
+        )
+    if role_assignments is not None:
+        seen: set[uuid.UUID] = set()
+        normalized: list[tuple[uuid.UUID, uuid.UUID | None]] = []
+        for rid, did in role_assignments:
+            if rid in seen:
+                raise ValidationFailedError(
+                    details={"reason": "duplicate_role_in_assignments"}
+                )
+            seen.add(rid)
+            normalized.append((rid, did))
+        return normalized
+    if role_ids is not None:
+        return [(rid, None) for rid in dict.fromkeys(role_ids)]
+    return None
 
 
 async def update_member(
@@ -170,6 +236,7 @@ async def update_member(
     department_ids: list[uuid.UUID] | None,
     version: int | None,
     ctx: RequestContext,
+    role_assignments: list[tuple[uuid.UUID, uuid.UUID | None]] | None = None,
     org_id: uuid.UUID | None = None,
     locale: str = "vi",
 ) -> dict:
@@ -183,10 +250,14 @@ async def update_member(
     if version is not None and version != membership.version:
         raise VersionConflictError()
 
-    before_roles = await _membership_role_ids(session, membership.id)
+    before_assignments = await _membership_role_assignments(session, membership.id)
+    before_roles = [rid for rid, _ in before_assignments]
 
-    if role_ids is not None:
-        target_ids = list(dict.fromkeys(role_ids))
+    target_scopes = _resolve_target_scopes(
+        role_ids=role_ids, role_assignments=role_assignments
+    )
+    if target_scopes is not None:
+        target_ids = list(dict.fromkeys(rid for rid, _ in target_scopes))
         roles = (
             await session.execute(
                 select(Role).where(Role.id.in_(target_ids), Role.org_id == org_id)
@@ -195,14 +266,36 @@ async def update_member(
         if len(roles) != len(target_ids):
             raise ResourceNotFoundError()  # a role from another org / missing
 
+        # Validate every non-NULL department scope belongs to this org (a scope
+        # pointing at another tenant's department is rejected, not silently kept).
+        scope_dept_ids = list(
+            dict.fromkeys(did for _, did in target_scopes if did is not None)
+        )
+        if scope_dept_ids:
+            found = (
+                await session.execute(
+                    select(Department.id).where(
+                        Department.id.in_(scope_dept_ids),
+                        Department.org_id == org_id,
+                    )
+                )
+            ).all()
+            if len(found) != len(scope_dept_ids):
+                raise ResourceNotFoundError()
+
         # Escalation ceiling: actor may only assign roles within its own grants.
         requested = await _permissions_of_roles(session, target_ids)
         admin_guard.assert_can_grant(principal, requested)
 
-        # Last-admin protection: do not strip admin from the org's only admin.
+        # Last-admin protection: only an ORG-WIDE (department-None) admin
+        # assignment keeps the org's admin. A department-scoped admin role does
+        # NOT count as an org admin. In the legacy path every scope is None, so
+        # this is identical to the previous behavior.
         new_grants_admin = False
-        for rid in target_ids:
-            if await admin_guard.role_grants_admin(session, role_id=rid):
+        for rid, did in target_scopes:
+            if did is None and await admin_guard.role_grants_admin(
+                session, role_id=rid
+            ):
                 new_grants_admin = True
                 break
         if not new_grants_admin:
@@ -217,10 +310,11 @@ async def update_member(
                 MembershipRole.membership_id == membership.id
             )
         )
-        for rid in target_ids:
+        for rid, did in target_scopes:
             session.add(
                 MembershipRole(
                     membership_id=membership.id, role_id=rid,
+                    department_id=did,
                     assigned_by=principal.user_id,
                 )
             )
@@ -251,11 +345,18 @@ async def update_member(
 
     membership.version += 1
     await session.flush()
+    after_assignments = await _membership_role_assignments(session, membership.id)
     await write_audit(
         session, action="membership.updated", resource_type="membership",
         resource_id=membership.id, context=_audit_ctx(principal, ctx, org_id=org_id),
-        before={"roles": [str(r) for r in before_roles]},
-        after={"roles": [str(r) for r in await _membership_role_ids(session, membership.id)]},
+        before={
+            "roles": [str(r) for r in before_roles],
+            "role_scopes": _role_scope_payload(before_assignments),
+        },
+        after={
+            "roles": [str(r) for r, _ in after_assignments],
+            "role_scopes": _role_scope_payload(after_assignments),
+        },
     )
     await session.commit()
 
@@ -264,7 +365,8 @@ async def update_member(
         membership=membership,
         email=user.email if user else "",
         full_name=user.full_name if user else None,
-        role_ids=[str(r) for r in await _membership_role_ids(session, membership.id)],
+        role_ids=[str(r) for r, _ in after_assignments],
+        role_assignments=_role_scope_payload(after_assignments),
         department_ids=[
             str(d) for d in await _membership_department_ids(session, membership.id)
         ],
@@ -393,13 +495,14 @@ async def _member_view(
     session: AsyncSession, *, membership: Membership, locale: str
 ) -> dict:
     user = await user_service.get_by_id(session, membership.user_id)
-    role_ids = await _membership_role_ids(session, membership.id)
+    assignments = await _membership_role_assignments(session, membership.id)
     dept_ids = await _membership_department_ids(session, membership.id)
     return presenters.member_summary(
         membership=membership,
         email=user.email if user else "",
         full_name=user.full_name if user else None,
-        role_ids=[str(r) for r in role_ids],
+        role_ids=[str(r) for r, _ in assignments],
+        role_assignments=_role_scope_payload(assignments),
         department_ids=[str(d) for d in dept_ids],
         locale=locale,
     )

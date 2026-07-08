@@ -52,6 +52,13 @@ class Cohort(Base):
     owner_counselor_id: Mapped[uuid.UUID] = mapped_column(
         ForeignKey("users.id", ondelete="RESTRICT"), nullable=False, index=True
     )
+    # Owning department (P2/WS2.1). NULL = org-wide cohort (every legacy row, so
+    # enforcement is unchanged for them). When set, cohort writes are gated by a
+    # department-scoped ``career_services_cohorts`` grant for THIS department —
+    # the representative end-to-end enforcement site for department-scoped RBAC.
+    department_id: Mapped[uuid.UUID | None] = mapped_column(
+        ForeignKey("departments.id", ondelete="SET NULL"), nullable=True
+    )
     status: Mapped[str] = mapped_column(String(20), nullable=False, default="active")
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), nullable=False, server_default=func.now()

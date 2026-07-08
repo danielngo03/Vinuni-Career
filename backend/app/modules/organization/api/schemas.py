@@ -61,8 +61,27 @@ class DepartmentUpdateRequest(BaseModel):
     clear_parent: bool = False
 
 
+class ScopedRoleAssignmentInput(BaseModel):
+    """A single role assignment, optionally scoped to one department.
+
+    ``department_id`` NULL/omitted = the role is granted ORG-WIDE (identical to a
+    plain ``role_ids`` entry). Non-NULL = the role's grants apply ONLY inside
+    that department (``membership_roles.department_id``).
+    """
+
+    role_id: uuid.UUID
+    department_id: uuid.UUID | None = None
+
+
 class MemberUpdateRequest(BaseModel):
+    # Legacy org-wide role set (unchanged): every listed role is granted
+    # org-wide. Kept for full backwards compatibility.
     role_ids: list[uuid.UUID] | None = None
+    # Department-scoped role assignments (P2/WS2.1). When provided, this is the
+    # authoritative role-assignment set and REPLACES ``role_ids``; each entry may
+    # carry a ``department_id`` to scope that role to a department. Mutually
+    # exclusive with ``role_ids`` (send one or the other).
+    role_assignments: list[ScopedRoleAssignmentInput] | None = None
     department_ids: list[uuid.UUID] | None = None
     version: int | None = None
 
