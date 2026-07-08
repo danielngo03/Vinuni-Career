@@ -7,17 +7,34 @@ import {
   ArrowsInSimple,
   ArrowsOutSimple,
   ArrowUp,
+  Paperclip,
   Plus,
   Robot,
   Spinner,
   X,
 } from "@phosphor-icons/react";
-import { aiAssistantApi, type ChatMessage, type ChatSession } from "@/lib/api";
+import {
+  aiAssistantApi,
+  ApiError,
+  type ChatAttachment,
+  type ChatMessage,
+  type ChatSession,
+} from "@/lib/api";
 import { getAccessToken } from "@/lib/api/session";
 import { env } from "@/lib/env";
 import { cn } from "@/lib/utils";
+import { useToast } from "@/components/ui";
 import { useAuthStore } from "@/stores/auth-store";
-import { MAX_INPUT_LENGTH, STATUS_LABELS, type StreamEvent } from "./chat-window/constants";
+import {
+  ACCEPTED_ATTACHMENT_ACCEPT,
+  buildAttachmentRef,
+  isAcceptedAttachment,
+  MAX_ATTACHMENT_BYTES,
+  MAX_ATTACHMENTS,
+  MAX_INPUT_LENGTH,
+  STATUS_LABELS,
+  type StreamEvent,
+} from "./chat-window/constants";
 import {
   AssistantActivity,
   MessageBubble,
@@ -26,6 +43,24 @@ import {
 } from "./chat-window/message-bubble";
 import { SessionRail } from "./chat-window/session-rail";
 import { AuthLoadingPrompt, GuestPrompt, WelcomeScreen } from "./chat-window/welcome-screen";
+
+/** A composer-local pending attachment. `descriptor` is present once the upload
+ * resolves; it only ever carries backend-safe display metadata (never a
+ * storage key). */
+interface ComposerAttachment {
+  localId: string;
+  filename: string;
+  size: number;
+  status: "uploading" | "ready";
+  descriptor?: ChatAttachment;
+}
+
+/** Human-readable file size (KB/MB) — display only, mirrors the CV preview. */
+function formatSize(bytes: number): string {
+  const kb = bytes / 1024;
+  if (kb < 1024) return `${Math.max(1, Math.round(kb))} KB`;
+  return `${(kb / 1024).toFixed(1)} MB`;
+}
 
 /**
  * AI career assistant chat window. Renders as a floating panel anchored at the
@@ -42,12 +77,14 @@ export function AiChatWindow({
   onClose: () => void;
 }) {
   const t = useTranslations("aiAssistant");
+  const toast = useToast();
   const authStatus = useAuthStore((s) => s.status);
   const isAuthed = authStatus === "authenticated";
   const isAuthLoading = authStatus === "unknown";
   const qc = useQueryClient();
 
   const [sessionId, setSessionId] = useState<string | null>(null);
+  const [attachments, setAttachments] = useState<ComposerAttachment[]>([]);
   const [input, setInput] = useState("");
   const [sending, setSending] = useState(false);
   const [streamingText, setStreamingText] = useState<string | null>(null);
@@ -59,8 +96,15 @@ export function AiChatWindow({
   const [confirmingMessageId, setConfirmingMessageId] = useState<string | null>(null);
   const bottomRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
   const abortRef = useRef<AbortController | null>(null);
   const messagesRef = useRef<ChatMessage[]>([]);
+  // Dedupes concurrent session creation so picking multiple files at once (or
+  // upload + send racing) never spawns more than one session.
+  const createSessionPromiseRef = useRef<Promise<string> | null>(null);
+
+  const uploadingCount = attachments.filter((a) => a.status === "uploading").length;
+  const readyCount = attachments.filter((a) => a.status === "ready").length;
 
   // Fetch existing sessions to restore the most recent one.
   const sessionsQuery = useQuery({
@@ -131,11 +175,20 @@ export function AiChatWindow({
 
   const ensureSession = useCallback(async (): Promise<string> => {
     if (sessionId) return sessionId;
-    const s = await aiAssistantApi.createSession();
-    setSessionId(s.id);
-    setDraftSession(false);
-    void qc.invalidateQueries({ queryKey: ["ai-assistant", "sessions"] });
-    return s.id;
+    if (createSessionPromiseRef.current) return createSessionPromiseRef.current;
+    const p = (async () => {
+      const s = await aiAssistantApi.createSession();
+      setSessionId(s.id);
+      setDraftSession(false);
+      void qc.invalidateQueries({ queryKey: ["ai-assistant", "sessions"] });
+      return s.id;
+    })();
+    createSessionPromiseRef.current = p;
+    try {
+      return await p;
+    } finally {
+      createSessionPromiseRef.current = null;
+    }
   }, [sessionId, qc]);
 
   function startNewChat() {
@@ -143,6 +196,7 @@ export function AiChatWindow({
     abortRef.current = null;
     setSessionId(null);
     setMessages([]);
+    setAttachments([]);
     setStreamingText(null);
     setActiveToolName(null);
     setActivityStatus(null);
@@ -158,17 +212,121 @@ export function AiChatWindow({
     abortRef.current = null;
     setSessionId(session.id);
     setMessages([]);
+    setAttachments([]);
     setStreamingText(null);
     setActiveToolName(null);
     setActivityStatus(null);
     setDraftSession(false);
   }
 
+  /** Upload one file to the current session, showing an optimistic
+   * uploading→ready chip. A failed upload drops its chip and surfaces the
+   * backend's user-safe rejection message (too large / unsupported / rejected). */
+  async function uploadOne(file: File) {
+    const localId = `att-${Date.now()}-${Math.random().toString(36).slice(2)}`;
+    setAttachments((prev) => [
+      ...prev,
+      { localId, filename: file.name, size: file.size, status: "uploading" },
+    ]);
+    try {
+      const sid = await ensureSession();
+      const descriptor = await aiAssistantApi.uploadAttachment(sid, file);
+      setAttachments((prev) =>
+        prev.map((a) =>
+          a.localId === localId
+            ? {
+                localId,
+                filename: descriptor.filename,
+                size: descriptor.size,
+                status: "ready",
+                descriptor,
+              }
+            : a,
+        ),
+      );
+    } catch (err) {
+      setAttachments((prev) => prev.filter((a) => a.localId !== localId));
+      const message =
+        err instanceof ApiError && err.message ? err.message : t("attachError");
+      toast.show({
+        tone: "error",
+        title: t("attachErrorTitle"),
+        description: message,
+      });
+    }
+  }
+
+  /** Validate a picked file list against remaining slots + type/size, then
+   * upload the accepted files. Client checks are a courtesy; the backend is
+   * authoritative. */
+  function handleFilesPicked(fileList: FileList | null) {
+    if (!fileList || fileList.length === 0) return;
+    const files = Array.from(fileList);
+    const slots = MAX_ATTACHMENTS - attachments.length;
+    if (slots <= 0) {
+      toast.show({
+        tone: "warning",
+        title: t("attachLimitTitle"),
+        description: t("attachLimit", { max: MAX_ATTACHMENTS }),
+      });
+      return;
+    }
+    const accepted: File[] = [];
+    for (const file of files) {
+      if (accepted.length >= slots) break;
+      if (!isAcceptedAttachment(file.name)) {
+        toast.show({
+          tone: "error",
+          title: t("attachErrorTitle"),
+          description: t("attachUnsupported"),
+        });
+        continue;
+      }
+      if (file.size > MAX_ATTACHMENT_BYTES) {
+        toast.show({
+          tone: "error",
+          title: t("attachErrorTitle"),
+          description: t("attachTooLarge"),
+        });
+        continue;
+      }
+      accepted.push(file);
+    }
+    if (files.length > slots) {
+      toast.show({
+        tone: "warning",
+        title: t("attachLimitTitle"),
+        description: t("attachLimit", { max: MAX_ATTACHMENTS }),
+      });
+    }
+    for (const file of accepted) {
+      void uploadOne(file);
+    }
+  }
+
+  function removeAttachment(localId: string) {
+    setAttachments((prev) => prev.filter((a) => a.localId !== localId));
+  }
+
   async function send(textOverride?: string) {
     const text = (textOverride ?? input).trim();
-    if (!text || sending) return;
+    const ready = attachments.filter(
+      (a): a is ComposerAttachment & { descriptor: ChatAttachment } =>
+        a.status === "ready" && !!a.descriptor,
+    );
+    // Block while an upload is still in flight so refs are never dropped.
+    if ((!text && ready.length === 0) || sending || uploadingCount > 0) return;
+
+    // Embed a machine-readable analyze reference per ready attachment so the
+    // assistant sees the id and calls its analyze_attachment tool. The bubble
+    // renderer strips these lines back out and shows a paperclip chip instead.
+    const refLines = ready
+      .map((a) => buildAttachmentRef(a.descriptor.filename, a.descriptor.id))
+      .join("");
+    const outgoing = `${text}${refLines}`;
 
     setInput("");
+    setAttachments([]);
     setSending(true);
     setStreamingText(null);
     setActiveToolName(null);
@@ -179,7 +337,7 @@ export function AiChatWindow({
       id: `opt-${Date.now()}`,
       session_id: sessionId ?? "",
       role: "user",
-      content: text,
+      content: outgoing,
       tool_name: null,
       tool_args: null,
       tool_result: null,
@@ -191,7 +349,7 @@ export function AiChatWindow({
 
     try {
       const sid = await ensureSession();
-      await streamMessage(sid, text, optimistic);
+      await streamMessage(sid, outgoing, optimistic);
     } catch {
       setMessages((prev) => {
         const hasOptimistic = prev.some((m) => m.id === optimistic.id);
@@ -522,6 +680,66 @@ export function AiChatWindow({
       {/* Input */}
       {isAuthed && (
         <div className="border-t border-[var(--glass-border)] px-3 pb-3 pt-2.5">
+          {/* Pending attachment chips */}
+          {attachments.length > 0 && (
+            <ul
+              aria-label={t("attachmentsLabel")}
+              className="mb-2 flex flex-wrap gap-1.5"
+            >
+              {attachments.map((a) => (
+                <li
+                  key={a.localId}
+                  className="flex max-w-[220px] items-center gap-1.5 rounded-lg border border-[var(--glass-border-strong)] bg-[var(--glass-surface-heavy)] py-1 pl-2 pr-1 text-xs text-[var(--text-primary)]"
+                >
+                  {a.status === "uploading" ? (
+                    <Spinner
+                      aria-hidden
+                      weight="bold"
+                      className="size-3.5 shrink-0 animate-spin text-[var(--text-muted)]"
+                    />
+                  ) : (
+                    <Paperclip
+                      aria-hidden
+                      weight="bold"
+                      className="size-3.5 shrink-0 text-[var(--text-muted)]"
+                    />
+                  )}
+                  <span className="min-w-0 flex-1 truncate" title={a.filename}>
+                    {a.filename}
+                  </span>
+                  <span className="shrink-0 text-[10px] tabular-nums text-[var(--text-muted)]">
+                    {a.status === "uploading"
+                      ? t("attachmentUploading")
+                      : formatSize(a.size)}
+                  </span>
+                  <button
+                    type="button"
+                    onClick={() => removeAttachment(a.localId)}
+                    aria-label={t("removeAttachment", { name: a.filename })}
+                    className="shrink-0 rounded p-0.5 text-[var(--text-muted)] outline-none transition hover:bg-[var(--bg-subtle)] hover:text-[var(--text-primary)] focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)]/40"
+                  >
+                    <X aria-hidden weight="bold" className="size-3" />
+                  </button>
+                </li>
+              ))}
+            </ul>
+          )}
+
+          <input
+            ref={fileInputRef}
+            type="file"
+            multiple
+            accept={ACCEPTED_ATTACHMENT_ACCEPT}
+            tabIndex={-1}
+            aria-hidden="true"
+            className="sr-only"
+            onChange={(e) => {
+              handleFilesPicked(e.target.files);
+              // Reset so re-picking the same file fires onChange again.
+              e.target.value = "";
+            }}
+          />
+
           <div className="flex items-end gap-2 rounded-xl border border-[var(--glass-border)] bg-[var(--glass-surface)] px-3 py-2 shadow-[0_1px_4px_rgba(11,34,57,0.06)] transition-all focus-within:border-[var(--brand-primary)]/50 focus-within:bg-[var(--glass-surface-heavy)] focus-within:shadow-[0_2px_8px_rgba(11,34,57,0.10)]">
             <textarea
               ref={inputRef}
@@ -537,13 +755,32 @@ export function AiChatWindow({
             />
             <button
               type="button"
+              onClick={() => fileInputRef.current?.click()}
+              disabled={
+                sending ||
+                uploadingCount > 0 ||
+                attachments.length >= MAX_ATTACHMENTS
+              }
+              aria-label={t("attach")}
+              title={t("attach")}
+              className={cn(
+                "mb-0.5 shrink-0 rounded-lg p-1.5 outline-none transition-all",
+                "text-[var(--text-muted)] hover:bg-[var(--bg-subtle)] hover:text-[var(--text-primary)]",
+                "focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)]/40",
+                "disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:bg-transparent",
+              )}
+            >
+              <Paperclip aria-hidden weight="bold" className="size-4" />
+            </button>
+            <button
+              type="button"
               onClick={() => void send()}
-              disabled={!input.trim() || sending}
+              disabled={(!input.trim() && readyCount === 0) || sending || uploadingCount > 0}
               aria-label={t("sendBtn")}
               className={cn(
                 "shrink-0 rounded-lg p-1.5 outline-none transition-all",
                 "text-white focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)]/40",
-                input.trim() && !sending
+                (input.trim() || readyCount > 0) && !sending && uploadingCount === 0
                   ? "bg-[var(--brand-primary)] hover:bg-[var(--brand-primary)]/90 shadow-[0_1px_4px_rgba(45,95,166,0.30)]"
                   : "bg-[var(--text-muted)]/30 cursor-not-allowed",
               )}

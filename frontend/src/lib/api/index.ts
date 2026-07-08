@@ -393,6 +393,7 @@ export type {
   ChatSession,
   ChatMessage,
   ChatMessageRole,
+  ChatAttachment,
   AiEnergyUsage,
   AiEnergyUsageDetail,
   AiEnergyScope,

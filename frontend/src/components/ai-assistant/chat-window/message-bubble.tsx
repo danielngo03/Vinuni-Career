@@ -4,12 +4,13 @@ import {
   ArrowSquareOut,
   Lightning,
   MagnifyingGlass,
+  Paperclip,
   Robot,
   Spinner,
 } from "@phosphor-icons/react";
 import { cn } from "@/lib/utils";
 import type { ChatMessage } from "@/lib/api";
-import { TOOL_LABELS } from "./constants";
+import { extractAttachmentRefs, TOOL_LABELS } from "./constants";
 import {
   analyzeColumns,
   segmentContent,
@@ -61,6 +62,13 @@ export function MessageBubble({
     );
   }
 
+  // User bubbles may carry appended analyze-attachment reference lines. Strip
+  // them from the visible text and render a clean paperclip chip per file
+  // instead, so the raw machine-readable ref/id never shows.
+  const parsed = isUser ? extractAttachmentRefs(message.content) : null;
+  const displayText = parsed ? parsed.text : message.content;
+  const attachmentNames = parsed?.filenames ?? [];
+
   return (
     <div
       className={cn(
@@ -82,7 +90,25 @@ export function MessageBubble({
             : "rounded-bl-sm border border-[var(--glass-border-strong)] bg-[var(--glass-surface-heavy)] text-[var(--text-primary)] shadow-[0_1px_4px_rgba(11,34,57,0.06)]",
         )}
       >
-        <FormattedContent content={message.content} isUser={isUser} />
+        {displayText && <FormattedContent content={displayText} isUser={isUser} />}
+        {attachmentNames.length > 0 && (
+          <ul
+            aria-label={t("attachmentsLabel")}
+            className={cn("flex flex-wrap gap-1.5", displayText && "mt-1.5")}
+          >
+            {attachmentNames.map((name, i) => (
+              <li
+                key={i}
+                className="flex max-w-full items-center gap-1 rounded-lg bg-white/15 px-2 py-1 text-xs"
+              >
+                <Paperclip aria-hidden weight="bold" className="size-3 shrink-0" />
+                <span className="truncate" title={name}>
+                  {name}
+                </span>
+              </li>
+            ))}
+          </ul>
+        )}
       </div>
     </div>
   );
