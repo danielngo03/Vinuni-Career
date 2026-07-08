@@ -3,8 +3,11 @@
 Endpoints:
   POST   /ai/chat/sessions                               Create a new chat session
   GET    /ai/chat/sessions                               List the caller's sessions (non-archived)
+  PATCH  /ai/chat/sessions/{id}                          Rename a session (owner only)
   GET    /ai/chat/sessions/{id}/messages                 List messages in a session
   POST   /ai/chat/sessions/{id}/messages                 Send a message (runs LLM + tools)
+  POST   /ai/chat/sessions/{id}/messages/regenerate      Regenerate the last assistant reply
+  PATCH  /ai/chat/sessions/{id}/messages/{msg_id}        Edit a user message and re-run
   GET    /ai/chat/sessions/{id}/messages/stream          Stream a message response via SSE
   POST   /ai/chat/sessions/{id}/messages/{msg_id}/confirm  Confirm a pending tool_call message
   DELETE /ai/chat/sessions/{id}                          Archive a session
@@ -32,7 +35,11 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.core.config import get_settings
 from app.core.db import get_db_session
-from app.modules.ai_assistant.api.schemas import SendMessageRequest
+from app.modules.ai_assistant.api.schemas import (
+    EditMessageRequest,
+    RenameSessionRequest,
+    SendMessageRequest,
+)
 from app.modules.ai_assistant.application import attachment_service, chat_service, usage_service
 from app.modules.auth.api.deps import CurrentAuth, get_current_auth
 from app.shared.exceptions import ValidationFailedError
@@ -102,6 +109,30 @@ async def list_sessions(
     return success(data)
 
 
+@router.patch(
+    "/sessions/{session_id}",
+    summary="Rename a chat session (owner only)",
+)
+async def rename_session(
+    session_id: uuid.UUID,
+    body: RenameSessionRequest,
+    auth: CurrentAuth = Depends(get_current_auth),
+    session: AsyncSession = Depends(get_db_session),
+) -> dict:
+    """Set a user-editable title on the session, replacing the auto-generated one.
+
+    The title is stripped and validated (1..120 chars) in the service. The
+    session must belong to the caller.
+    """
+    data = await chat_service.rename_session(
+        session,
+        principal=auth.principal,
+        session_id=session_id,
+        title=body.title,
+    )
+    return success(data)
+
+
 @router.get(
     "/sessions/{session_id}/messages",
     summary="List messages in a chat session (owner only)",
@@ -132,6 +163,56 @@ async def send_message(
         session,
         principal=auth.principal,
         session_id=session_id,
+        text=body.text,
+    )
+    return success(data)
+
+
+@router.post(
+    "/sessions/{session_id}/messages/regenerate",
+    summary="Regenerate the assistant's reply to the most recent user message",
+)
+async def regenerate_message(
+    session_id: uuid.UUID,
+    auth: CurrentAuth = Depends(get_current_auth),
+    session: AsyncSession = Depends(get_db_session),
+) -> dict:
+    """Soft-delete the last assistant reply (+ its trailing tool rows) and re-run.
+
+    Owner-only. Metered and gated exactly like a normal chat turn. Returns the new
+    assistant message. Fails with a user-safe error when there is no assistant
+    reply to regenerate.
+    """
+    data = await chat_service.regenerate_last(
+        session,
+        principal=auth.principal,
+        session_id=session_id,
+    )
+    return success(data)
+
+
+@router.patch(
+    "/sessions/{session_id}/messages/{message_id}",
+    summary="Edit a sent user message and re-run the assistant from it",
+)
+async def edit_message(
+    session_id: uuid.UUID,
+    message_id: uuid.UUID,
+    body: EditMessageRequest,
+    auth: CurrentAuth = Depends(get_current_auth),
+    session: AsyncSession = Depends(get_db_session),
+) -> dict:
+    """Update a USER message in place, soft-delete everything after it, and re-run.
+
+    Owner-only. ``message_id`` must be a user message in ``session_id`` owned by
+    the caller. Metered and gated exactly like a normal chat turn. Returns the new
+    assistant reply.
+    """
+    data = await chat_service.edit_message(
+        session,
+        principal=auth.principal,
+        session_id=session_id,
+        message_id=message_id,
         text=body.text,
     )
     return success(data)

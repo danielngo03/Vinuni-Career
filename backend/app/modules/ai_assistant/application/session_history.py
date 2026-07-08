@@ -11,18 +11,80 @@ from __future__ import annotations
 
 import uuid
 from datetime import UTC, datetime
+from weakref import WeakKeyDictionary
 
-from sqlalchemy import select
+from sqlalchemy import func, select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.ai.gateway.base import AIMessage
 from app.modules.ai_assistant.domain.models import ChatMessage, ChatSession
-from app.shared.exceptions import AuthRequiredError, ResourceNotFoundError
+from app.shared.exceptions import (
+    AuthRequiredError,
+    ResourceNotFoundError,
+    ValidationFailedError,
+)
 from app.shared.permissions import Principal
 
 _MAX_HISTORY_MESSAGES = 20
 _COMPRESS_THRESHOLD = 16   # compress when history exceeds this many messages
 _SUMMARY_KEEP_RECENT = 6   # keep the N most recent turns after compression
+
+_MAX_TITLE_LEN = 120
+
+
+# --------------------------------------------------------------------------- #
+# Per-session monotonic message ordering (seq)                                #
+# --------------------------------------------------------------------------- #
+#
+# ``ChatMessage.seq`` is a monotonic, per-session ordering index. ``created_at``
+# alone is not a reliable order key: several messages produced in one turn (user
+# + hidden tool_result(s) + assistant) can share the same microsecond, and the
+# edit / regenerate truncate-and-replay logic needs a strict "everything after
+# message X" predicate. ``seq`` gives that.
+#
+# Assignment is done in-memory per turn: an async entry point seeds a cursor from
+# the current DB MAX(seq) once (``seed_seq_cursor``), then each message created in
+# that turn takes the next value synchronously (``next_seq``) — no intervening
+# flush required. Soft-deleted rows keep their seq, so a later turn's MAX(seq)
+# never reuses a value that a truncate-and-replay tombstoned.
+#
+# The cursor is held in a WeakKeyDictionary keyed by the live ``ChatSession``
+# instance (not a mapped column), so it is scoped to the request that loaded the
+# session and is dropped automatically when that instance is garbage-collected.
+_seq_cursors: WeakKeyDictionary[ChatSession, int] = WeakKeyDictionary()
+
+
+async def seed_seq_cursor(session: AsyncSession, chat: ChatSession) -> None:
+    """Seed the per-turn seq cursor from the current DB MAX(seq) for this session.
+
+    Idempotent per ``chat`` instance: only queries the first time it is called in
+    a turn. Every async entry point that will create messages (send / stream /
+    confirm / regenerate / edit) calls this before allocating any seq. The MAX is
+    computed over ALL rows (including soft-deleted ones) so a truncate-and-replay
+    never reuses a tombstoned seq.
+    """
+    if chat in _seq_cursors:
+        return
+    current_max = (
+        await session.execute(
+            select(func.coalesce(func.max(ChatMessage.seq), 0)).where(
+                ChatMessage.session_id == chat.id
+            )
+        )
+    ).scalar_one()
+    _seq_cursors[chat] = int(current_max or 0)
+
+
+def next_seq(chat: ChatSession) -> int:
+    """Reserve and return the next monotonic seq for a message in this turn.
+
+    Requires ``seed_seq_cursor`` to have run for this ``chat`` instance earlier in
+    the same turn. Falls back to a 0 base if unseeded (should not happen in the
+    real call paths) so an ordering index is always produced.
+    """
+    cursor = _seq_cursors.get(chat, 0) + 1
+    _seq_cursors[chat] = cursor
+    return cursor
 
 
 # --------------------------------------------------------------------------- #
@@ -84,7 +146,12 @@ async def get_session_messages(
     session_id: uuid.UUID,
     limit: int = 50,
 ) -> list[dict]:
-    """Return the most recent messages for a session (owner-only)."""
+    """Return the most recent messages for a session (owner-only).
+
+    Excludes hidden ``tool_result`` rows and soft-deleted (superseded) rows, and
+    orders by the monotonic ``seq`` (falling back to ``created_at`` for any row
+    whose seq is NULL — e.g. pre-migration rows / ad-hoc fixtures).
+    """
     if not principal.is_authenticated:
         raise AuthRequiredError()
     chat = await require_session(session, principal, session_id)
@@ -93,11 +160,52 @@ async def get_session_messages(
             select(ChatMessage)
             .where(ChatMessage.session_id == chat.id)
             .where(ChatMessage.role != "tool_result")
-            .order_by(ChatMessage.created_at.asc())
+            .where(ChatMessage.is_deleted.is_(False))
+            .order_by(
+                # NULL-seq rows sort last (IS NULL → True/1), then seq asc, then
+                # created_at as the portable tiebreaker (works on SQLite + PG).
+                ChatMessage.seq.is_(None),
+                ChatMessage.seq.asc(),
+                ChatMessage.created_at.asc(),
+            )
             .limit(limit)
         )
     ).scalars().all()
     return [serialize_message(m) for m in rows]
+
+
+async def rename_session(
+    session: AsyncSession,
+    *,
+    principal: Principal,
+    session_id: uuid.UUID,
+    title: str,
+) -> dict:
+    """Rename a chat session (owner-only).
+
+    Turns the auto-generated first-message title into a user-editable one. The
+    title is stripped and must be 1..120 characters after stripping; empty /
+    whitespace-only titles are rejected with a user-safe validation error.
+    Ownership is enforced by ``require_session`` (a non-owner sees 404, never
+    another user's session).
+    """
+    if not principal.is_authenticated:
+        raise AuthRequiredError()
+    chat = await require_session(session, principal, session_id)
+    clean = (title or "").strip()
+    if not clean:
+        raise ValidationFailedError(
+            "Tên cuộc trò chuyện không được để trống.",
+            details={"reason": "title_empty"},
+        )
+    if len(clean) > _MAX_TITLE_LEN:
+        raise ValidationFailedError(
+            "Tên cuộc trò chuyện quá dài (tối đa 120 ký tự).",
+            details={"reason": "title_too_long"},
+        )
+    chat.title = clean
+    await session.commit()
+    return serialize_session(chat)
 
 
 async def archive_session(
@@ -193,7 +301,14 @@ async def load_history(
         await session.execute(
             select(ChatMessage)
             .where(ChatMessage.session_id == chat.id)
-            .order_by(ChatMessage.created_at.desc())
+            .where(ChatMessage.is_deleted.is_(False))
+            .order_by(
+                # Most recent N by seq (NULL-seq rows sort last), created_at as
+                # the portable tiebreaker; reversed below to chronological order.
+                ChatMessage.seq.is_(None),
+                ChatMessage.seq.desc(),
+                ChatMessage.created_at.desc(),
+            )
             .limit(_MAX_HISTORY_MESSAGES)
         )
     ).scalars().all()
@@ -288,6 +403,7 @@ def quick_reply(chat: ChatSession, text: str, session: AsyncSession) -> dict:
         role="assistant",
         content=text,
         created_at=datetime.now(UTC),
+        seq=next_seq(chat),
     )
     session.add(msg)
     return serialize_message(msg)
@@ -315,4 +431,5 @@ def serialize_message(msg: ChatMessage) -> dict:
         "requires_confirmation": msg.requires_confirmation,
         "confirmed_at": msg.confirmed_at.isoformat() if msg.confirmed_at else None,
         "created_at": msg.created_at.isoformat(),
+        "edited_at": msg.edited_at.isoformat() if msg.edited_at else None,
     }

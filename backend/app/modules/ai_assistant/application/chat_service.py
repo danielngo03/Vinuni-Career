@@ -31,6 +31,7 @@ import uuid
 from collections.abc import AsyncGenerator
 from datetime import UTC, datetime
 
+from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.ai.energy.service import build_usage_context, charge_units
@@ -61,8 +62,11 @@ from app.modules.ai_assistant.application.session_history import (
     get_session_messages,
     list_sessions,
     load_history,
+    next_seq,
     quick_reply,
+    rename_session,
     require_session,
+    seed_seq_cursor,
     serialize_message,
 )
 from app.modules.ai_assistant.application.tool_loop import (
@@ -77,16 +81,25 @@ from app.modules.ai_assistant.application.tool_loop import (
     persist_tool_result,
 )
 from app.modules.ai_assistant.application.tool_registry import TOOL_SPECS, dispatch_tool
-from app.modules.ai_assistant.domain.models import ChatMessage
-from app.shared.exceptions import AIUnavailableError, AuthRequiredError, QuotaExceededError
+from app.modules.ai_assistant.domain.models import ChatMessage, ChatSession
+from app.shared.exceptions import (
+    AIUnavailableError,
+    AuthRequiredError,
+    QuotaExceededError,
+    ResourceNotFoundError,
+    ValidationFailedError,
+)
 from app.shared.permissions import Principal
 
 __all__ = [
     "archive_session",
     "confirm_tool_action",
     "create_session",
+    "edit_message",
     "get_session_messages",
     "list_sessions",
+    "regenerate_last",
+    "rename_session",
     "send_message",
     "stream_message",
 ]
@@ -151,16 +164,18 @@ async def _charge_chatbot_turn(
     *,
     principal: Principal,
     chat_id: uuid.UUID,
-    user_msg_id: uuid.UUID,
+    idempotency_key: uuid.UUID,
 ) -> None:
     """Charge exactly one FEATURE_CHATBOT credit for a completed chat turn.
 
-    Called once per user message ONLY when a genuine model answer was produced
-    (never for fast-path/agent-plan replies, confirmation-pending turns, or the
+    Called once per turn ONLY when a genuine model answer was produced (never for
+    fast-path/agent-plan replies, confirmation-pending turns, or the
     AI-unavailable fallback — those callers do not invoke this). The idempotency
-    key is namespaced on the *user message id*, so a redelivery / retry of the
-    same turn is a no-op and never double-charges (``record_billable_usage`` is
-    idempotent on that key).
+    key namespaces the ledger write: ``send_message`` / ``stream_message`` pass
+    the *user message id* (so a redelivery / retry of the same turn is a no-op and
+    never double-charges), while regenerate / edit-and-rerun pass a fresh key per
+    attempt so each re-run is metered as its own normal chat turn.
+    ``record_billable_usage`` is idempotent on that key.
 
     Scope: partner members debit the shared ORG energy pool, students their own
     user scope — ``build_usage_context`` resolves the billing scope. Best-effort:
@@ -172,7 +187,7 @@ async def _charge_chatbot_turn(
             feature_key=FEATURE_CHATBOT,
             task_type="ai_assistant_chat",
             session_id=chat_id,
-            idempotency_parts=(user_msg_id,),
+            idempotency_parts=(idempotency_key,),
         )
         await record_billable_usage(
             session,
@@ -205,6 +220,8 @@ async def send_message(
     # Daily/weekly allowance gate — refuses with 409 QUOTA_EXCEEDED when either
     # window is exhausted (an exhausted week blocks even with daily room left).
     await usage_service.enforce_quota(session, principal=principal)
+    # Seed the per-turn monotonic seq cursor before any message is created.
+    await seed_seq_cursor(session, chat)
 
     # Sanitize user input
     text = text.strip()[: _MAX_USER_MSG_LEN]
@@ -226,12 +243,48 @@ async def send_message(
         role="user",
         content=clean,
         created_at=datetime.now(UTC),
+        seq=next_seq(chat),
     )
     session.add(user_msg)
 
     # Update session title from first user message
     if chat.title is None:
         chat.title = clean[:80]
+
+    # Idempotency key = user message id: a redelivery of the same turn is a no-op.
+    return await _generate_reply_for(
+        session,
+        principal=principal,
+        chat=chat,
+        clean=clean,
+        charge_key=user_msg.id,
+        locale=locale,
+    )
+
+
+async def _generate_reply_for(
+    session: AsyncSession,
+    *,
+    principal: Principal,
+    chat: ChatSession,
+    clean: str,
+    charge_key: uuid.UUID,
+    locale: str = "vi",
+) -> dict:
+    """Run one assistant turn for an already-persisted user message.
+
+    Shared by ``send_message`` (fresh user message) and the regenerate /
+    edit-and-rerun flows (existing user message, later messages already
+    truncated). Runs the fast-path reply, the deterministic agent plan, the
+    intent-level safety gate, and the LLM tool-calling loop exactly as before,
+    persists the assistant reply, meters a genuine model answer via
+    ``_charge_chatbot_turn`` (idempotent on ``charge_key``), commits, and returns
+    the serialized assistant message.
+
+    Assumes the caller has already checked auth + quota and seeded the seq cursor
+    (``seed_seq_cursor`` here is an idempotent safety net).
+    """
+    await seed_seq_cursor(session, chat)
 
     if quick_text := fast_path_reply(clean):
         assistant_msg = ChatMessage(
@@ -240,6 +293,7 @@ async def send_message(
             role="assistant",
             content=quick_text,
             created_at=datetime.now(UTC),
+            seq=next_seq(chat),
         )
         session.add(assistant_msg)
         chat.last_message_at = datetime.now(UTC)
@@ -272,6 +326,7 @@ async def send_message(
             role="assistant",
             content=agent_text,
             created_at=datetime.now(UTC),
+            seq=next_seq(chat),
         )
         session.add(assistant_msg)
         chat.last_message_at = datetime.now(UTC)
@@ -292,6 +347,7 @@ async def send_message(
             role="assistant",
             content=policy.refusal_message or ai_unavailable_reply(),
             created_at=datetime.now(UTC),
+            seq=next_seq(chat),
         )
         session.add(refusal)
         chat.last_message_at = datetime.now(UTC)
@@ -366,6 +422,7 @@ async def send_message(
                 tool_args=tool_args,
                 requires_confirmation=True,
                 created_at=datetime.now(UTC),
+                seq=next_seq(chat),
             )
             session.add(confirm_msg)
             chat.last_message_at = datetime.now(UTC)
@@ -406,16 +463,17 @@ async def send_message(
         role="assistant",
         content=final_text,
         created_at=datetime.now(UTC),
+        seq=next_seq(chat),
     )
     session.add(assistant_msg)
     chat.last_message_at = datetime.now(UTC)
 
     # Meter one FEATURE_CHATBOT credit for this turn on a genuine model answer
-    # (best-effort, idempotent on the user message id). Committed together with
-    # the assistant message below.
+    # (best-effort, idempotent on ``charge_key``). Committed together with the
+    # assistant message below.
     if chargeable:
         await _charge_chatbot_turn(
-            session, principal=principal, chat_id=chat.id, user_msg_id=user_msg.id
+            session, principal=principal, chat_id=chat.id, idempotency_key=charge_key
         )
 
     await session.commit()
@@ -459,6 +517,9 @@ async def stream_message(
         yield {"type": "error", "code": "session_not_found"}
         return
 
+    # Seed the per-turn monotonic seq cursor before any message is created.
+    await seed_seq_cursor(session, chat)
+
     # Sanitize input
     clean_text = text.strip()[: _MAX_USER_MSG_LEN]
     clean, _ = sanitize_instruction(clean_text)
@@ -473,6 +534,7 @@ async def stream_message(
         role="user",
         content=clean,
         created_at=datetime.now(UTC),
+        seq=next_seq(chat),
     )
     session.add(user_msg)
     if chat.title is None:
@@ -487,6 +549,7 @@ async def stream_message(
             role="assistant",
             content=quick_text,
             created_at=datetime.now(UTC),
+            seq=next_seq(chat),
         )
         session.add(assistant_msg)
         chat.last_message_at = datetime.now(UTC)
@@ -532,6 +595,7 @@ async def stream_message(
             role="assistant",
             content=agent_text,
             created_at=datetime.now(UTC),
+            seq=next_seq(chat),
         )
         session.add(assistant_msg)
         chat.last_message_at = datetime.now(UTC)
@@ -554,6 +618,7 @@ async def stream_message(
             role="assistant",
             content=refusal_text,
             created_at=datetime.now(UTC),
+            seq=next_seq(chat),
         )
         session.add(refusal)
         chat.last_message_at = datetime.now(UTC)
@@ -636,6 +701,7 @@ async def stream_message(
                 tool_args=tool_args,
                 requires_confirmation=True,
                 created_at=datetime.now(UTC),
+                seq=next_seq(chat),
             )
             session.add(confirm_msg)
             chat.last_message_at = datetime.now(UTC)
@@ -685,6 +751,7 @@ async def stream_message(
         role="assistant",
         content=final_text,
         created_at=datetime.now(UTC),
+        seq=next_seq(chat),
     )
     session.add(assistant_msg)
     chat.last_message_at = datetime.now(UTC)
@@ -693,9 +760,184 @@ async def stream_message(
     # (best-effort, idempotent on the user message id).
     if chargeable:
         await _charge_chatbot_turn(
-            session, principal=principal, chat_id=chat.id, user_msg_id=user_msg.id
+            session, principal=principal, chat_id=chat.id, idempotency_key=user_msg.id
         )
 
     await session.commit()
 
     yield {"type": "done", "message": serialize_message(assistant_msg)}
+
+
+# --------------------------------------------------------------------------- #
+# Conversation management: regenerate + edit-and-rerun (truncate-and-replay)  #
+# --------------------------------------------------------------------------- #
+#
+# v1 semantics are TRUNCATE-AND-REPLAY (not branching): superseded messages are
+# soft-deleted (``is_deleted=True``, seq retained so a later MAX(seq) never
+# reuses the value) and the assistant is re-run from the surviving history via
+# the same ``_generate_reply_for`` path as a normal turn — identical
+# enforce_quota + safety policy + metering. Re-runs use a fresh idempotency key
+# so each attempt is metered as its own chat turn.
+
+
+async def _messages_after(
+    session: AsyncSession, *, chat: ChatSession, pivot: ChatMessage
+) -> list[ChatMessage]:
+    """Return the non-deleted messages ordered strictly after ``pivot``.
+
+    Uses ``seq`` when the pivot has one (the normal case); falls back to
+    ``created_at`` for a pre-migration pivot whose seq is NULL.
+    """
+    after = (
+        ChatMessage.seq > pivot.seq
+        if pivot.seq is not None
+        else ChatMessage.created_at > pivot.created_at
+    )
+    rows = (
+        await session.execute(
+            select(ChatMessage).where(
+                ChatMessage.session_id == chat.id,
+                ChatMessage.is_deleted.is_(False),
+                after,
+            )
+        )
+    ).scalars().all()
+    return list(rows)
+
+
+async def regenerate_last(
+    session: AsyncSession,
+    *,
+    principal: Principal,
+    session_id: uuid.UUID,
+    locale: str = "vi",
+) -> dict:
+    """Regenerate the assistant reply to the most recent user message (owner-only).
+
+    Soft-deletes the most recent assistant message plus any trailing tool_call /
+    tool_result rows produced after the last user message, then re-runs the
+    assistant from the remaining history. Returns the new assistant message.
+
+    Raises a user-safe validation error when there is nothing to regenerate: no
+    user message yet, or no assistant reply following the last user message (e.g.
+    the last turn is still a pending confirmation card).
+    """
+    if not principal.is_authenticated:
+        raise AuthRequiredError()
+    chat = await require_session(session, principal, session_id)
+    # Normal-turn quota gate BEFORE mutating anything — an exhausted week must not
+    # destroy the existing reply.
+    await usage_service.enforce_quota(session, principal=principal)
+
+    pivot = (
+        await session.execute(
+            select(ChatMessage)
+            .where(
+                ChatMessage.session_id == chat.id,
+                ChatMessage.role == "user",
+                ChatMessage.is_deleted.is_(False),
+            )
+            .order_by(
+                ChatMessage.seq.is_(None),
+                ChatMessage.seq.desc(),
+                ChatMessage.created_at.desc(),
+            )
+            .limit(1)
+        )
+    ).scalar_one_or_none()
+    if pivot is None:
+        raise ValidationFailedError(
+            "Chưa có tin nhắn nào để tạo lại câu trả lời.",
+            details={"reason": "no_user_message"},
+        )
+
+    trailing = await _messages_after(session, chat=chat, pivot=pivot)
+    if not any(m.role == "assistant" for m in trailing):
+        raise ValidationFailedError(
+            "Chưa có câu trả lời nào để tạo lại.",
+            details={"reason": "no_assistant_reply"},
+        )
+
+    for message in trailing:
+        message.is_deleted = True
+    await session.flush()
+
+    # Fresh idempotency key so this re-run is metered as its own chat turn.
+    return await _generate_reply_for(
+        session,
+        principal=principal,
+        chat=chat,
+        clean=pivot.content,
+        charge_key=uuid.uuid4(),
+        locale=locale,
+    )
+
+
+async def edit_message(
+    session: AsyncSession,
+    *,
+    principal: Principal,
+    session_id: uuid.UUID,
+    message_id: uuid.UUID,
+    text: str,
+    locale: str = "vi",
+) -> dict:
+    """Edit a sent USER message in place and re-run from it (owner-only).
+
+    Stamps ``edited_at`` and stores the new sanitized content on the target user
+    message, soft-deletes every later message in the session, then re-runs the
+    assistant from the edited message. Returns the new assistant reply.
+
+    Rejects editing a non-user message (422) or a message the caller does not own
+    — a foreign message id or a message in another user's session resolves to 404
+    via ``require_session`` + the session-scoped lookup.
+    """
+    if not principal.is_authenticated:
+        raise AuthRequiredError()
+    chat = await require_session(session, principal, session_id)
+
+    target = (
+        await session.execute(
+            select(ChatMessage).where(
+                ChatMessage.id == message_id,
+                ChatMessage.session_id == chat.id,
+                ChatMessage.is_deleted.is_(False),
+            )
+        )
+    ).scalar_one_or_none()
+    if target is None:
+        raise ResourceNotFoundError()
+    if target.role != "user":
+        raise ValidationFailedError(
+            "Chỉ có thể chỉnh sửa tin nhắn của bạn.",
+            details={"reason": "not_user_message"},
+        )
+
+    clean_text = text.strip()[: _MAX_USER_MSG_LEN]
+    clean, _ = sanitize_instruction(clean_text)
+    if not clean:
+        raise ValidationFailedError(
+            "Nội dung tin nhắn không được để trống.",
+            details={"reason": "empty_message"},
+        )
+
+    # Normal-turn quota gate BEFORE mutating anything.
+    await usage_service.enforce_quota(session, principal=principal)
+
+    target.content = clean
+    target.edited_at = datetime.now(UTC)
+
+    trailing = await _messages_after(session, chat=chat, pivot=target)
+    for message in trailing:
+        message.is_deleted = True
+    await session.flush()
+
+    # Fresh idempotency key so this re-run is metered as its own chat turn.
+    return await _generate_reply_for(
+        session,
+        principal=principal,
+        chat=chat,
+        clean=clean,
+        charge_key=uuid.uuid4(),
+        locale=locale,
+    )

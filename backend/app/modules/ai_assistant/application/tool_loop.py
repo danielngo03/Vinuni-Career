@@ -29,7 +29,9 @@ from app.ai.prompts.assistant import v1 as assistant_prompt
 from app.modules.ai_assistant.application.agents import AgentPlan, format_tool_result
 from app.modules.ai_assistant.application.messages import assistant_message
 from app.modules.ai_assistant.application.session_history import (
+    next_seq,
     require_session,
+    seed_seq_cursor,
     serialize_message,
 )
 from app.modules.ai_assistant.application.tool_registry import TOOL_SPECS, dispatch_tool
@@ -114,6 +116,7 @@ def persist_tool_result(
             tool_args=tool_args,
             tool_result=result,
             created_at=datetime.now(UTC),
+            seq=next_seq(chat),
         )
     )
 
@@ -149,6 +152,7 @@ def create_confirmation_message(
         tool_args=plan.tool_args or {},
         requires_confirmation=True,
         created_at=datetime.now(UTC),
+        seq=next_seq(chat),
     )
 
 
@@ -198,6 +202,9 @@ async def confirm_tool_action(
         raise AuthRequiredError()
 
     chat = await require_session(session, principal, session_id)
+    # Seed the per-turn seq cursor so the follow-up assistant message below gets
+    # the next monotonic seq for this session.
+    await seed_seq_cursor(session, chat)
 
     pending = (
         await session.execute(
@@ -239,6 +246,7 @@ async def confirm_tool_action(
         role="assistant",
         content=summary_text,
         created_at=datetime.now(UTC),
+        seq=next_seq(chat),
     )
     session.add(follow_up)
     chat.last_message_at = datetime.now(UTC)
