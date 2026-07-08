@@ -213,6 +213,11 @@ class JobCreateRequest(BaseModel):
     application_deadline: datetime | None = None
     visibility: str = Field(default="public", max_length=20)
     cv_language_required: Literal["any", "en", "vi"] = "any"
+    # ORIGINAL language of the JD as authored. A HINT only — the server resolves
+    # the stored value (AI-extraction ``detected_language`` / manual choice, else
+    # a heuristic over the text). Drives the student-side "translate this JD"
+    # affordance. Omit to let the backend detect it.
+    language_code: Literal["vi", "en", "ja", "ko", "zh"] | None = None
 
     @model_validator(mode="after")
     def _validate_structured_modes(self) -> JobCreateRequest:
@@ -268,6 +273,9 @@ class JobUpdateRequest(BaseModel):
     application_deadline: datetime | None = None
     visibility: str | None = Field(default=None, max_length=20)
     cv_language_required: Literal["any", "en", "vi"] | None = None
+    # Hint to re-detect the JD's original language (server resolves; see
+    # JobCreateRequest.language_code). Also re-resolved when description changes.
+    language_code: Literal["vi", "en", "ja", "ko", "zh"] | None = None
     version: int | None = None
 
     @model_validator(mode="after")

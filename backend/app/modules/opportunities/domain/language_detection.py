@@ -63,3 +63,37 @@ def detect_language(text: str) -> str:
     if vi_ratio > 0.02:
         return "mixed"
     return "en"
+
+
+# Concrete languages we store as a JD's ``language_code`` (BCP-47-ish). "mixed"
+# and "unknown" are resolved to a concrete dominant language below.
+STORABLE_LANGUAGES: frozenset[str] = frozenset({"vi", "en", "ja", "ko", "zh"})
+
+
+def resolve_original_language(*, hint: str | None, text: str) -> str:
+    """Resolve the concrete ORIGINAL language to store for a JD.
+
+    Order of trust:
+    1. ``hint`` — the AI extraction's ``detected_language`` (image/text LLM,
+       robust to Vietnamese JDs peppered with English technical terms) or a
+       manual language chosen by the partner. Used when it is a concrete
+       storable language.
+    2. the zero-cost heuristic :func:`detect_language` over the JD text.
+
+    A ``"mixed"`` result maps to ``"vi"`` — in the Vietnamese hiring market a
+    mixed JD is overwhelmingly a Vietnamese posting with English tool/skill terms
+    mixed in, and the original should read Vietnamese. ``"unknown"`` (too short /
+    no markers) falls back to ``"en"``. The stored value drives the student-side
+    "translate this JD" affordance, so it must be a concrete language, never
+    "mixed"/"unknown".
+    """
+    if hint:
+        normalized = hint.strip().lower()
+        if normalized in STORABLE_LANGUAGES:
+            return normalized
+    code = detect_language(text or "")
+    if code in STORABLE_LANGUAGES:
+        return code
+    if code == "mixed":
+        return "vi"
+    return "en"

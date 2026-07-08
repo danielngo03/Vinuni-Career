@@ -39,12 +39,16 @@ from app.modules.opportunities.application.job_common import (
     _validate_fields,
 )
 from app.modules.opportunities.domain import jd_quality, lifecycle
+from app.modules.opportunities.domain.language_detection import resolve_original_language
 from app.modules.opportunities.domain.models import Job
 from app.modules.users.application import user_service
 from app.shared.audit import AuditContext, write_audit
 from app.shared.exceptions import ResourceNotFoundError
 from app.shared.moderation import compute_due_by
 from app.shared.permissions import Principal, permission_checker
+
+# Sentinel: "the caller did not send this key at all" (vs. sent it as null).
+_UNSET: object = object()
 
 
 async def _invalidate_job_fit_cache(job_id: uuid.UUID) -> None:
@@ -86,8 +90,21 @@ async def create_job(
     permission_checker.require(
         principal, _RESOURCE, "create", resource_org_id=principal.org_id
     )
+    # Resolve the JD's ORIGINAL language (client hint from AI extraction /
+    # manual selection, else zero-cost heuristic over the JD text). Stored as a
+    # concrete language so the student "translate this JD" affordance works —
+    # never trust an unresolved/"mixed" client value.
+    lang_hint = payload.pop("language_code", None)
     _validate_fields(payload)
     assert principal.user_id is not None
+
+    language_code = resolve_original_language(
+        hint=lang_hint,
+        text=" ".join(
+            part for part in (payload.get("description"), payload.get("requirements"))
+            if part
+        ),
+    )
 
     slug = await _unique_slug(session, payload["title"])
     job = Job(
@@ -96,6 +113,7 @@ async def create_job(
         slug=slug,
         status=lifecycle.DRAFT,
         moderation_status=lifecycle.MOD_PENDING,
+        language_code=language_code,
         **payload,
     )
     session.add(job)
@@ -221,6 +239,9 @@ async def update_job(
     if expected_version is not None and expected_version != job.version:
         raise JobVersionConflictError()
 
+    # Original language is derived, not a raw client field — resolve it below.
+    lang_hint = payload.pop("language_code", _UNSET)
+
     was_active = job.status == lifecycle.ACTIVE
 
     _validate_fields(payload, existing=job)
@@ -241,6 +262,22 @@ async def update_job(
             changed[field] = True
             if was_active and field in lifecycle.REMODERATION_FIELDS:
                 requires_remoderation = True
+
+    # Re-resolve the stored original language when the partner sent a language
+    # hint OR edited the JD text (so a rewrite from VN to EN re-detects). Never
+    # writes "mixed"/"unknown". Leaves it untouched when neither changed.
+    if lang_hint is not _UNSET or "description" in payload or "requirements" in payload:
+        hint = None if lang_hint is _UNSET else lang_hint
+        new_lang = resolve_original_language(
+            hint=hint,
+            text=" ".join(part for part in (job.description, job.requirements) if part),
+        )
+        if new_lang != job.language_code:
+            before["language_code"] = job.language_code
+            after["language_code"] = new_lang
+            job.language_code = new_lang
+            changed["language_code"] = True
+
     if changed:
         job.version += 1
     await session.flush()
