@@ -57,11 +57,11 @@ function DonutTooltip({ active, payload }: TooltipProps<ValueType, NameType>) {
             width: 8,
             height: 8,
             borderRadius: "50%",
-            background: String((entry.payload as { fill?: string } | undefined)?.fill ?? "#171717"),
+            background: String((entry.payload as { fill?: string } | undefined)?.fill ?? "var(--chart-series-1)"),
             flexShrink: 0,
           }}
         />
-        <span style={{ color: "#525252", fontSize: 12 }}>{String(entry.name ?? "")}</span>
+        <span style={{ color: "var(--chart-label)", fontSize: 12 }}>{String(entry.name ?? "")}</span>
         <span
           style={{
             marginLeft: "auto",
@@ -69,7 +69,7 @@ function DonutTooltip({ active, payload }: TooltipProps<ValueType, NameType>) {
             fontFamily: "'JetBrains Mono', monospace",
             fontWeight: 600,
             fontSize: 12,
-            color: "#171717",
+            color: "var(--chart-tooltip-text)",
           }}
         >
           {new Intl.NumberFormat("vi-VN", {
@@ -135,7 +135,7 @@ export function DonutChart({
               fontFamily: "'JetBrains Mono', monospace",
               fontSize: 18,
               fontWeight: 700,
-              fill: "#171717",
+              fill: "var(--chart-tooltip-text)",
             }}
           >
             {formattedTotal}
@@ -145,7 +145,7 @@ export function DonutChart({
             y="52%"
             textAnchor="middle"
             dominantBaseline="middle"
-            style={{ fontFamily: "inherit", fontSize: 11, fill: "#737373" }}
+            style={{ fontFamily: "inherit", fontSize: 11, fill: "var(--chart-muted)" }}
           >
             total
           </text>
@@ -167,11 +167,11 @@ export function DonutChart({
           </Pie>
           <Tooltip content={<DonutTooltip />} />
           <Legend
-            wrapperStyle={{ fontSize: 11, color: "#525252", paddingTop: 4 }}
+            wrapperStyle={{ fontSize: 11, color: "var(--chart-label)", paddingTop: 4 }}
             iconType="circle"
             iconSize={8}
             formatter={(value: string) => (
-              <span style={{ color: "#525252" }}>{value}</span>
+              <span style={{ color: "var(--chart-label)" }}>{value}</span>
             )}
           />
         </PieChart>

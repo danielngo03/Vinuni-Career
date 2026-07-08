@@ -3,55 +3,66 @@
  *
  * Design source: docs/DESIGN.md §1.1.2 v9 "Monochrome"
  *
- * Primary action color: ink #171717
- * Hierarchy: full --gray-* ramp
- * Semantic colors ONLY for meaning:
- *   teal  --teal-600 (#059669)  = success / healthy
- *   amber --amber-600 (#d97706) = warning / time-sensitive
- *   red   --brand-red (#c83538) = error / destructive
+ * Theme-awareness: render colors resolve to CSS custom properties defined in
+ * globals.css (`:root` light + `[data-theme="dark"]` + prefers-dark fallback),
+ * so recharts SVG series/grid/axis/tooltips auto-adapt when the theme flips —
+ * no re-render or theme hook needed. Modern browsers resolve `var()` inside SVG
+ * presentation attributes (the same technique shadcn charts use).
+ *
+ * Hierarchy: ink → gray series ramp (light) / light-ink → gray (dark).
+ * Semantic colors ONLY for meaning (each maps to a theme-aware token):
+ *   success --color-success  = success / healthy
+ *   warning --brand-amber    = warning / time-sensitive
+ *   error   --color-error    = error / destructive
+ *
+ * NOTE: the interpolation helpers below (buildMonochromeScale /
+ * buildSeverityScale / lerpHex / hexToRgb) operate on literal hex because RGB
+ * math cannot run on `var()` strings; they feed the heatmap's computed cell
+ * fills, not the recharts primitives.
  *
  * Numbers / metric labels use JetBrains Mono via --font-mono.
  */
 
-/** Primary ink for first/main series. */
-export const CHART_INK = "#171717";
+/** Primary series (theme-aware ink: #171717 light → #ededed dark). */
+export const CHART_INK = "var(--chart-series-1)";
 
-/** Gray ramp: use in order for secondary, tertiary, ... series. */
+/** Series ramp: use in order for secondary, tertiary, ... series. */
 export const CHART_GRAY_SERIES = [
-  "#404040", // gray-700 – second series
-  "#737373", // gray-500 – third series
-  "#a3a3a3", // gray-400 – fourth series
-  "#d4d4d4", // gray-300 – fifth series
-  "#e5e5e5", // gray-200 – sixth series
+  "var(--chart-series-2)", // second series
+  "var(--chart-series-3)", // third series
+  "var(--chart-series-4)", // fourth series
+  "var(--chart-series-5)", // fifth series
+  "var(--chart-series-6)", // sixth series
 ] as const;
 
-/** Semantic hues — use ONLY where they carry meaning, not decoration. */
-export const CHART_TEAL = "#059669"; // success / healthy
-export const CHART_AMBER = "#d97706"; // warning / time-sensitive
-export const CHART_RED = "#c83538"; // error / destructive
+/** Semantic hues — use ONLY where they carry meaning, not decoration.
+ *  Each maps to a theme-aware token so meaning survives dark mode. */
+export const CHART_TEAL = "var(--color-success)"; // success / healthy
+export const CHART_AMBER = "var(--brand-amber)"; // warning / time-sensitive
+export const CHART_RED = "var(--color-error)"; // error / destructive
 
 /** Grid / axis styling. */
-export const CHART_GRID_COLOR = "#e5e5e5"; // gray-200
-export const CHART_AXIS_TICK_COLOR = "#737373"; // gray-500
-export const CHART_AXIS_LINE_COLOR = "#e5e5e5"; // gray-200
+export const CHART_GRID_COLOR = "var(--chart-grid)";
+export const CHART_AXIS_TICK_COLOR = "var(--chart-axis)";
+export const CHART_AXIS_LINE_COLOR = "var(--chart-axis-line)";
 
 /** Reference line (dashed neutral threshold). */
-export const CHART_REFERENCE_COLOR = "#a3a3a3"; // gray-400
+export const CHART_REFERENCE_COLOR = "var(--chart-reference)";
 
-/** Tooltip surface styling (CSS values, not variables, for recharts inline styles). */
+/** Tooltip surface styling (recharts inline styles — HTML div, var() resolves). */
 export const CHART_TOOLTIP_STYLE = {
-  background: "#ffffff",
-  border: "1px solid #e5e5e5",
+  background: "var(--chart-tooltip-bg)",
+  border: "1px solid var(--chart-tooltip-border)",
   borderRadius: "6px",
   boxShadow: "0 4px 16px rgba(0,0,0,0.07), 0 2px 6px rgba(0,0,0,0.04)",
   padding: "8px 12px",
   fontFamily: "'Plus Jakarta Sans', 'Inter', system-ui, sans-serif",
   fontSize: "12px",
-  color: "#171717",
+  color: "var(--chart-tooltip-text)",
 } as const;
 
 export const CHART_TOOLTIP_CURSOR_STYLE = {
-  fill: "rgba(23,23,23,0.04)",
+  fill: "var(--chart-cursor)",
 } as const;
 
 /** Monotone curve interpolation — smoother than linear, no over-shoot. */

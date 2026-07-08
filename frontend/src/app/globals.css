@@ -372,6 +372,27 @@
   --status-closed: #737373;
   --status-offer: #171717;
 
+  /* ── Charts (recharts primitives — theme-aware; see chart-theme.ts) ──
+     Monochrome ink→gray series ramp, neutral grid/axis, and tooltip surface.
+     Dark overrides live in [data-theme="dark"] + the prefers-dark fallback so
+     ink series/grid/tooltips stay legible on dark analytics cards. */
+  --chart-series-1: #171717; /* ink — primary series */
+  --chart-series-2: #404040; /* gray-700 */
+  --chart-series-3: #737373; /* gray-500 */
+  --chart-series-4: #a3a3a3; /* gray-400 */
+  --chart-series-5: #d4d4d4; /* gray-300 */
+  --chart-series-6: #e5e5e5; /* gray-200 */
+  --chart-grid: #e5e5e5;
+  --chart-axis: #737373;
+  --chart-axis-line: #e5e5e5;
+  --chart-reference: #a3a3a3;
+  --chart-label: #525252;
+  --chart-muted: #737373;
+  --chart-tooltip-bg: #ffffff;
+  --chart-tooltip-border: #e5e5e5;
+  --chart-tooltip-text: #171717;
+  --chart-cursor: rgba(23, 23, 23, 0.04);
+
   /* ── Motion ── */
   --duration-instant: 50ms;
   --duration-fast: 100ms;
@@ -519,6 +540,24 @@
   --aurora-indigo: rgba(31, 31, 31, 0.45);
   --aurora-emerald: rgba(26, 26, 26, 0.5);
   --aurora-base: #0a0a0a;
+
+  /* ── Charts (dark) — light-ink series ramp legible on #111 cards ── */
+  --chart-series-1: #ededed; /* light ink — primary series */
+  --chart-series-2: #c4c4c4;
+  --chart-series-3: #9a9a9a;
+  --chart-series-4: #7a7a7a;
+  --chart-series-5: #5c5c5c;
+  --chart-series-6: #464646;
+  --chart-grid: #262626;
+  --chart-axis: #8f8f8f;
+  --chart-axis-line: #262626;
+  --chart-reference: #6f6f6f;
+  --chart-label: #a1a1a1;
+  --chart-muted: #8f8f8f;
+  --chart-tooltip-bg: #171717;
+  --chart-tooltip-border: #3a3a3a;
+  --chart-tooltip-text: #ededed;
+  --chart-cursor: rgba(237, 237, 237, 0.06);
 }
 
 /* System fallback before JS resolves a concrete data-theme (no-JS / first paint). */
@@ -552,6 +591,24 @@
     --nav-active-bg: #ededed;
     --nav-active-fg: #0a0a0a;
     --nav-active-text: #ededed;
+
+    /* Charts (dark, no-JS fallback) */
+    --chart-series-1: #ededed;
+    --chart-series-2: #c4c4c4;
+    --chart-series-3: #9a9a9a;
+    --chart-series-4: #7a7a7a;
+    --chart-series-5: #5c5c5c;
+    --chart-series-6: #464646;
+    --chart-grid: #262626;
+    --chart-axis: #8f8f8f;
+    --chart-axis-line: #262626;
+    --chart-reference: #6f6f6f;
+    --chart-label: #a1a1a1;
+    --chart-muted: #8f8f8f;
+    --chart-tooltip-bg: #171717;
+    --chart-tooltip-border: #3a3a3a;
+    --chart-tooltip-text: #ededed;
+    --chart-cursor: rgba(237, 237, 237, 0.06);
   }
 }
 

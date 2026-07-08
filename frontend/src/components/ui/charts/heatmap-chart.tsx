@@ -121,7 +121,7 @@ export function Heatmap({
               y={height - 4}
               textAnchor="middle"
               fontSize={9}
-              fill="#737373"
+              fill="var(--chart-muted)"
               fontFamily="inherit"
             >
               {xLabel}
@@ -141,7 +141,7 @@ export function Heatmap({
                 textAnchor="end"
                 dominantBaseline="middle"
                 fontSize={9}
-                fill="#737373"
+                fill="var(--chart-muted)"
                 fontFamily="inherit"
               >
                 {yLabel}
@@ -190,19 +190,19 @@ export function Heatmap({
             top: tooltip.y - 8,
             transform: "translate(-50%, -100%)",
             pointerEvents: "none",
-            background: "#ffffff",
-            border: "1px solid #e5e5e5",
+            background: "var(--chart-tooltip-bg)",
+            border: "1px solid var(--chart-tooltip-border)",
             borderRadius: 6,
             boxShadow: "0 4px 16px rgba(0,0,0,0.07)",
             padding: "6px 10px",
             fontFamily: "'Plus Jakarta Sans', 'Inter', system-ui, sans-serif",
             fontSize: 12,
-            color: "#171717",
+            color: "var(--chart-tooltip-text)",
             zIndex: 50,
             whiteSpace: "nowrap",
           }}
         >
-          <span style={{ color: "#525252" }}>
+          <span style={{ color: "var(--chart-label)" }}>
             {tooltip.cell.y} · {tooltip.cell.x}
           </span>
           <span

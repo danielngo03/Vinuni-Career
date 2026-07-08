@@ -30,6 +30,13 @@ import {
 // Type imports (compile-time only — no runtime import of .tsx files)
 import type { FormatKind, DonutSliceData } from "./chart-helpers";
 
+/**
+ * Series/slice resolvers now return theme-aware color TOKENS: a literal 6-digit
+ * hex (explicit overrides, interpolated heatmap fills) OR a `var(--chart-*)`
+ * custom property that resolves per [data-theme]. This matcher accepts either.
+ */
+const COLOR_TOKEN = /^(#[0-9a-f]{6}|var\(--[a-z0-9-]+\))$/i;
+
 // ── chart-theme: seriesColor ──────────────────────────────────────────────────
 
 describe("seriesColor", () => {
@@ -40,17 +47,17 @@ describe("seriesColor", () => {
   it("index 1 returns first gray (not ink)", () => {
     const color = seriesColor(1);
     expect(color).not.toBe(CHART_INK);
-    expect(color).toMatch(/^#[0-9a-f]{6}$/i);
+    expect(color).toMatch(COLOR_TOKEN);
   });
 
   it("high index clamps to last gray — no crash, no undefined", () => {
     const color = seriesColor(100);
-    expect(color).toMatch(/^#[0-9a-f]{6}$/i);
+    expect(color).toMatch(COLOR_TOKEN);
   });
 
-  it("all indexes 0–7 return valid hex colors", () => {
+  it("all indexes 0–7 return valid color tokens", () => {
     for (let i = 0; i <= 7; i++) {
-      expect(seriesColor(i)).toMatch(/^#[0-9a-f]{6}$/i);
+      expect(seriesColor(i)).toMatch(COLOR_TOKEN);
     }
   });
 });
@@ -288,10 +295,10 @@ describe("sliceColor", () => {
     expect(sliceColor({ label: "x", value: 1, tone: "error" }, 2)).toBe(CHART_RED);
   });
 
-  it("all indexes 0–7 return valid hex", () => {
+  it("all indexes 0–7 return valid color tokens", () => {
     for (let i = 0; i <= 7; i++) {
       const c = sliceColor({ label: "x", value: 1 }, i);
-      expect(c).toMatch(/^#[0-9a-f]{6}$/i);
+      expect(c).toMatch(COLOR_TOKEN);
     }
   });
 });

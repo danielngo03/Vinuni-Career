@@ -79,7 +79,7 @@ function PercentileTooltip({
           marginBottom: 6,
           fontWeight: 600,
           fontSize: 11,
-          color: "#525252",
+          color: "var(--chart-label)",
           letterSpacing: "0.06em",
           textTransform: "uppercase",
         }}
@@ -106,7 +106,7 @@ function PercentileTooltip({
                 flexShrink: 0,
               }}
             />
-            <span style={{ color: "#525252", fontSize: 12 }}>{lbl}</span>
+            <span style={{ color: "var(--chart-label)", fontSize: 12 }}>{lbl}</span>
             <span
               style={{
                 marginLeft: "auto",
@@ -114,7 +114,7 @@ function PercentileTooltip({
                 fontFamily: "'JetBrains Mono', monospace",
                 fontWeight: 600,
                 fontSize: 12,
-                color: "#171717",
+                color: "var(--chart-tooltip-text)",
               }}
             >
               {formatTick(Number(value), "ms")}
@@ -199,7 +199,7 @@ export function PercentileBandChart({
             cursor={CHART_TOOLTIP_CURSOR_STYLE}
           />
           <Legend
-            wrapperStyle={{ fontSize: 11, color: "#525252", paddingTop: 8 }}
+            wrapperStyle={{ fontSize: 11, color: "var(--chart-label)", paddingTop: 8 }}
             iconType="circle"
             iconSize={8}
           />

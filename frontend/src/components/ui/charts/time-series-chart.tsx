@@ -80,7 +80,7 @@ function MonoTooltip({
           marginBottom: 4,
           fontWeight: 600,
           fontSize: 11,
-          color: "#525252",
+          color: "var(--chart-label)",
           letterSpacing: "0.06em",
           textTransform: "uppercase",
         }}
@@ -98,18 +98,18 @@ function MonoTooltip({
               width: 8,
               height: 8,
               borderRadius: "50%",
-              background: String(entry.color ?? "#171717"),
+              background: String(entry.color ?? "var(--chart-series-1)"),
               flexShrink: 0,
             }}
           />
-          <span style={{ color: "#525252", fontSize: 12 }}>{String(entry.name ?? "")}</span>
+          <span style={{ color: "var(--chart-label)", fontSize: 12 }}>{String(entry.name ?? "")}</span>
           <span
             style={{
               marginLeft: "auto",
               fontFamily: "'JetBrains Mono', monospace",
               fontWeight: 600,
               fontSize: 12,
-              color: "#171717",
+              color: "var(--chart-tooltip-text)",
               paddingLeft: 12,
             }}
           >
@@ -191,7 +191,7 @@ export function TimeSeriesChart({
             cursor={CHART_TOOLTIP_CURSOR_STYLE}
           />
           <Legend
-            wrapperStyle={{ fontSize: 11, color: "#525252", paddingTop: 8 }}
+            wrapperStyle={{ fontSize: 11, color: "var(--chart-label)", paddingTop: 8 }}
             iconType="circle"
             iconSize={8}
           />

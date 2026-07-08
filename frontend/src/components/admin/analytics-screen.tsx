@@ -425,13 +425,14 @@ function GrowthPanel({ range }: { range: AnalyticsRange }) {
             key: "signups",
             label: t("growth.seriesSignups"),
             type: "line",
-            color: "#404040",
+            // theme-aware secondary series (see globals.css --chart-series-*)
+            color: "var(--chart-series-2)",
           },
           {
             key: "applications",
             label: t("growth.seriesApplications"),
             type: "line",
-            color: "#737373",
+            color: "var(--chart-series-3)",
           },
         ]}
         format="number"

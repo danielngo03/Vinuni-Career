@@ -383,7 +383,7 @@ function LatencyPanel({ range }: { range: AiOpsRange }) {
           xKey="day"
           series={[
             { key: "p95_latency_ms", label: t("seriesP95"), type: "line" },
-            { key: "avg_latency_ms", label: t("seriesAvg"), color: "#a3a3a3", type: "line" },
+            { key: "avg_latency_ms", label: t("seriesAvg"), color: "var(--chart-series-4)", type: "line" },
           ]}
           format="ms"
           height={220}
