@@ -96,6 +96,13 @@ async def lifespan(app: FastAPI) -> AsyncIterator[None]:
     await _seed_default_templates()
     await _seed_default_cv_templates()
     await _publish_ai_runtime_config()
+    # Messaging realtime fan-out bus (in-process by default; Redis when configured).
+    try:
+        from app.modules.messaging.application.realtime import startup_bus
+
+        await startup_bus()
+    except Exception:  # noqa: BLE001 - realtime is best-effort, never blocks startup
+        logger.warning("messaging.realtime_bus_start_failed", exc_info=True)
     logger.info(
         "app.startup",
         extra={"env": settings.app_env, "worker_mode": settings.background_worker_mode},
@@ -123,5 +130,11 @@ async def lifespan(app: FastAPI) -> AsyncIterator[None]:
             except asyncio.CancelledError:
                 pass
             logger.info("scheduler.embedded_stopped")
+        try:
+            from app.modules.messaging.application.realtime import shutdown_bus
+
+            await shutdown_bus()
+        except Exception:  # noqa: BLE001
+            pass
         await dispose_engine()
         logger.info("app.shutdown")

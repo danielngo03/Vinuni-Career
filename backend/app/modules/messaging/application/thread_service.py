@@ -537,6 +537,14 @@ async def _persist_thread(
 
     await session.commit()
     await session.refresh(thread)
+    from app.modules.messaging.application.message_service import (
+        _publish_thread_signal,
+    )
+
+    await _publish_thread_signal(
+        session, thread_id=thread.id, event_type="thread.created",
+        exclude_user_id=sender_id,
+    )
     return await _present_created(
         session, thread=thread, principal=principal, locale=locale
     )

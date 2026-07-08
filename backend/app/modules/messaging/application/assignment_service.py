@@ -105,6 +105,13 @@ async def assign(
         },
     )
     await session.commit()
+    from app.modules.messaging.application.message_service import (
+        _publish_thread_signal,
+    )
+
+    await _publish_thread_signal(
+        session, thread_id=thread.id, event_type="thread.updated"
+    )
     return {
         "status": "ok",
         "thread_id": str(thread.id),
@@ -153,6 +160,13 @@ async def set_resolution(
         after={"thread_id": str(thread.id), "assignment_state": party.assignment_state},
     )
     await session.commit()
+    from app.modules.messaging.application.message_service import (
+        _publish_thread_signal,
+    )
+
+    await _publish_thread_signal(
+        session, thread_id=thread.id, event_type="thread.updated"
+    )
     return {
         "status": "ok",
         "thread_id": str(thread.id),

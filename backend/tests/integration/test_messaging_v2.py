@@ -213,3 +213,45 @@ async def test_recipient_search_never_returns_students(db_session) -> None:
     assert results, "student should be able to find organizations to message"
     assert all(r["kind"] == "org" for r in results)
     assert all(r["org_type"] in ("partner", "university") for r in results)
+
+
+# --------------------------------------------------------------------------- #
+# Realtime: a send publishes a lightweight signal to the org channel           #
+# --------------------------------------------------------------------------- #
+
+
+async def test_realtime_signal_published_to_org_channel(db_session) -> None:
+    from app.modules.messaging.application.realtime import connection_manager
+    from app.modules.messaging.application.realtime.hub import org_channel
+
+    student_user, student = await make_student(db_session)
+    partner_user, porg, partner = await make_partner(db_session)
+    out = await thread_service.create_thread(
+        db_session, principal=student, kind="direct", context_type=None,
+        context_id=None, recipient_ids=[partner_user.id], first_message="Hi",
+        ctx=CTX,
+    )
+    tid = out["id"]
+
+    received: list[dict] = []
+
+    async def _send(evt: dict) -> None:
+        received.append(evt)
+
+    conn = await connection_manager.register(
+        send=_send, channels=[org_channel(porg.id)]
+    )
+    try:
+        await message_service.send_message(
+            db_session, principal=student, thread_id=uuid.UUID(tid),
+            body="a follow up", ctx=CTX,
+        )
+    finally:
+        await connection_manager.unregister(conn)
+
+    assert any(
+        e.get("type") == "message.created" and e.get("thread_id") == tid
+        for e in received
+    ), "org inbox socket should receive a lightweight message.created signal (no body)"
+    # The signal is a pure notification — it never carries message content.
+    assert all("body" not in e for e in received)

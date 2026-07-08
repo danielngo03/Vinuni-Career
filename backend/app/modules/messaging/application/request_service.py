@@ -109,4 +109,11 @@ async def respond(
         },
     )
     await session.commit()
+    from app.modules.messaging.application.message_service import (
+        _publish_thread_signal,
+    )
+
+    await _publish_thread_signal(
+        session, thread_id=thread.id, event_type="thread.request"
+    )
     return {"status": "ok", "thread_id": str(thread.id), "request_state": new_state}

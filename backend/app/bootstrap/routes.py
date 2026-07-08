@@ -28,6 +28,7 @@ from app.modules.knowledge_base.api.router import router as knowledge_base_route
 from app.modules.locations.api.router import router as locations_router
 from app.modules.marketplace.api import router as marketplace_router
 from app.modules.messaging.api import router as messaging_router
+from app.modules.messaging.api import ws as messaging_ws
 from app.modules.moderation.api.router import content_reports_router
 from app.modules.moderation.api.router import router as moderation_router
 from app.modules.notifications.api import router as notifications_router
@@ -101,6 +102,7 @@ def register_routes(app: FastAPI) -> None:
     api.include_router(notifications_router.router)
     api.include_router(notifications_router.template_admin_router)
     api.include_router(messaging_router.router)
+    api.include_router(messaging_ws.ws_router)
     api.include_router(moderation_router)
     api.include_router(content_reports_router)
     api.include_router(platform_support_router.router)

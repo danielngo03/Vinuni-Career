@@ -434,9 +434,35 @@ async def send_message(
         await session.flush()
     await session.commit()
     await session.refresh(message)
+    # Persist-before-deliver: signal AFTER commit. Lightweight (no body) — recipients
+    # refetch, so per-viewer masking is applied server-side (never leaks over the socket).
+    await _publish_thread_signal(
+        session, thread_id=thread_id, event_type="message.created",
+        exclude_user_id=sender_id,
+    )
     return presenters.message_item(
         message, sender_label="", is_mine=True, locale=locale
     )
+
+
+async def _publish_thread_signal(
+    session: AsyncSession,
+    *,
+    thread_id: uuid.UUID,
+    event_type: str,
+    exclude_user_id: uuid.UUID | None = None,
+) -> None:
+    from app.modules.messaging.application import realtime
+
+    try:
+        channels = await realtime.channels_for_thread(
+            session, thread_id=thread_id, exclude_user_id=exclude_user_id
+        )
+        await realtime.publish_signal(
+            channels, {"type": event_type, "thread_id": str(thread_id)}
+        )
+    except Exception:  # noqa: BLE001 - realtime is best-effort, never breaks the write
+        pass
 
 
 # --------------------------------------------------------------------------- #
