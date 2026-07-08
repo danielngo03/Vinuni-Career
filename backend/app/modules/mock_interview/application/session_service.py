@@ -136,15 +136,25 @@ async def create_session(
     grounding = built["grounding"]
     chosen_cv_id = built["cv_id"]
 
-    # 2) Concurrency: one live session at a time.
+    now = datetime.now(tz=UTC)
+    # 2) Auto-recover abandoned sessions so a stuck/closed tab never blocks the
+    # student forever (a genuinely concurrent session, started recently, still
+    # blocks — only sessions older than the hard cap + grace are expired).
+    await repo.expire_stale_active(
+        session,
+        user_id=user_id,
+        cutoff=now - timedelta(seconds=caps.MAX_SESSION_SECONDS + 300),
+        now=now,
+    )
+
+    # 3) Concurrency: one live session at a time.
     if await repo.count_active(session, user_id=user_id) >= caps.MAX_CONCURRENT_PER_USER:
         raise ConflictError(
             "Bạn đang có một buổi phỏng vấn thử chưa kết thúc.",
             details={"reason": "ACTIVE_SESSION_EXISTS"},
         )
 
-    # 3) Session caps (daily / weekly) — count sessions started in the window.
-    now = datetime.now(tz=UTC)
+    # 4) Session caps (daily / weekly) — count sessions started in the window.
     _enforce_session_caps(await _session_counts(session, user_id=user_id, now=now))
 
     # 4) Weekly AI request quota (shared platform cap).

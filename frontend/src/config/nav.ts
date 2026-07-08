@@ -7,6 +7,7 @@ import {
   Calendar as PhCalendar,
   BellSimple,
   EnvelopeSimple,
+  Microphone,
 } from "@phosphor-icons/react";
 import {
   LayoutGrid,
@@ -41,6 +42,7 @@ import {
   ScrollText,
   ToggleRight,
   Siren,
+  Mic,
 } from "lucide-react";
 import type { Persona } from "@/stores/auth-store";
 
@@ -99,6 +101,7 @@ export const STUDENT_PRIMARY_NAV: NavItem[] = [
   { key: "profile", href: "/profile", icon: UserCircle },
   { key: "applications", href: "/applications", icon: ClipboardText },
   { key: "invitations", href: "/invitations", icon: EnvelopeSimple },
+  { key: "mockInterviews", href: "/interviews", icon: Microphone },
   { key: "alerts", href: "/alerts", icon: BellSimple },
   { key: "myEvents", href: "/events", icon: PhCalendar },
 ];
@@ -185,6 +188,7 @@ export const WORKSPACE_NAV_GROUPS: Record<Persona, NavGroup[]> = {
       key: "engagement",
       items: [
         { key: "careerServices", href: "/career-services", icon: HeartHandshake },
+        { key: "mockInterview", href: "/mock-interview", icon: Mic },
         { key: "messages", href: "/messages", icon: MessageSquareText },
         { key: "events", href: "/events", icon: CalendarDays },
         { key: "reviews", href: "/reviews", icon: Star },

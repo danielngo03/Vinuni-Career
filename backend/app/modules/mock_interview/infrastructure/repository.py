@@ -6,13 +6,14 @@ import uuid
 from datetime import datetime
 from typing import Any
 
-from sqlalchemy import case, func, select
+from sqlalchemy import case, func, select, update
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.modules.mock_interview.domain.models import (
     STATUS_ABORTED,
     STATUS_ACTIVE,
     STATUS_COMPLETED,
+    STATUS_EXPIRED,
     MockInterviewSession,
     MockInterviewTurn,
 )
@@ -41,6 +42,27 @@ async def load_turns(
         .order_by(MockInterviewTurn.seq)
     )
     return list((await session.execute(stmt)).scalars().all())
+
+
+async def expire_stale_active(
+    session: AsyncSession, *, user_id: uuid.UUID, cutoff: datetime, now: datetime
+) -> int:
+    """Mark this user's abandoned ``active`` sessions (started before ``cutoff``)
+    as ``expired`` so a stuck tab never blocks a new session forever."""
+
+    stmt = (
+        update(MockInterviewSession)
+        .where(
+            MockInterviewSession.user_id == user_id,
+            MockInterviewSession.status == STATUS_ACTIVE,
+            MockInterviewSession.started_at < cutoff,
+        )
+        .values(status=STATUS_EXPIRED, ended_at=now)
+    )
+    result = await session.execute(stmt)
+    # ``rowcount`` lives on CursorResult; the async execute return type is the
+    # narrower ``Result``, so read it defensively for the type checker.
+    return int(getattr(result, "rowcount", 0) or 0)
 
 
 async def count_active(session: AsyncSession, *, user_id: uuid.UUID) -> int:

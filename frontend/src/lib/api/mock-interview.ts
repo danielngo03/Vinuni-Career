@@ -148,6 +148,65 @@ export interface MockInterviewSessionListItem {
   created_at: string;
 }
 
+/* ---------------------------- admin / oversight --------------------------- */
+
+/**
+ * University oversight aggregate for the mock-interview feature. Aggregate-only:
+ * carries NO student PII and NO provider/model internals. `by_modality` is a
+ * sparse map keyed by modality.
+ */
+export interface MockInterviewAdminStats {
+  total: number;
+  completed: number;
+  aborted: number;
+  active: number;
+  flagged: number;
+  avg_questions: number;
+  avg_duration_seconds: number;
+  distinct_students: number;
+  by_modality: Partial<Record<MockInterviewModality, number>>;
+  /** 0–1 completion ratio (completed / total). */
+  completion_rate: number;
+  window_days: number;
+}
+
+/**
+ * Read-only effective limits for the feature. Deliberately provider/model-free:
+ * only caps and the realtime toggle — never any AI backend identity.
+ */
+export interface MockInterviewAdminConfig {
+  daily_session_cap: number;
+  weekly_session_cap: number;
+  max_session_seconds: number;
+  max_questions: number;
+  target_questions: number;
+  realtime_voice_enabled: boolean;
+}
+
+/** A compact flagged-session row for the superadmin safety review list. */
+export interface MockInterviewFlaggedItem {
+  session_id: string;
+  job_id: string;
+  modality: MockInterviewModality;
+  status: MockInterviewStatus;
+  question_count: number;
+  share_opt_in: boolean;
+  created_at: string;
+}
+
+export type MockInterviewAdminTranscriptMode = "redacted" | "full";
+
+/** Audited transcript view. `mode` states whether PII is pseudonymized. */
+export interface MockInterviewAdminTranscript {
+  session_id: string;
+  mode: MockInterviewAdminTranscriptMode;
+  flagged: boolean;
+  modality: MockInterviewModality;
+  status: MockInterviewStatus;
+  report: CoachingReport | null;
+  transcript: MockInterviewOpening[];
+}
+
 /* ------------------------------- requests --------------------------------- */
 
 export interface CreateMockInterviewBody {
@@ -359,6 +418,35 @@ export const mockInterviewApi = {
   getSession(sessionId: string): Promise<MockInterviewSessionDetail> {
     return api.get<MockInterviewSessionDetail>(
       `/mock-interview/sessions/${sessionId}`,
+    );
+  },
+
+  /* --- university oversight (university-only; enforced server-side) --- */
+
+  /** Aggregate usage + safety stats over a trailing window (days). */
+  adminStats(days = 30): Promise<MockInterviewAdminStats> {
+    return api.get<MockInterviewAdminStats>("/admin/mock-interview/stats", {
+      query: { days },
+    });
+  },
+
+  /** Read-only effective limits for the feature (provider/model-free). */
+  adminConfig(): Promise<MockInterviewAdminConfig> {
+    return api.get<MockInterviewAdminConfig>("/admin/mock-interview/config");
+  },
+
+  /** Superadmin-only: sessions flagged for safety review. */
+  adminFlagged(limit = 50): Promise<MockInterviewFlaggedItem[]> {
+    return api.get<MockInterviewFlaggedItem[]>(
+      "/admin/mock-interview/flagged",
+      { query: { limit } },
+    );
+  },
+
+  /** Superadmin-only: audited (pseudonymized-by-default) transcript + report. */
+  adminTranscript(sessionId: string): Promise<MockInterviewAdminTranscript> {
+    return api.get<MockInterviewAdminTranscript>(
+      `/admin/mock-interview/sessions/${sessionId}/transcript`,
     );
   },
 };

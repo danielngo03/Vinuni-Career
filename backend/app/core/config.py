@@ -121,10 +121,10 @@ class Settings(BaseSettings):
     # superadmin enables Tier V2 by registering a realtime provider+model+voice
     # (plus its own key) in the AI registry and flipping ``ai_realtime_enabled``.
     # All values are leak-safe aliases; no vendor/model string reaches end users.
-    ai_realtime_enabled: bool = False
-    ai_realtime_provider: str = ""  # registry alias, e.g. "gemini-live" (superadmin-set)
-    ai_realtime_model: str = ""  # internal model id, resolved via the registry
-    ai_realtime_voice: str = ""  # provider voice name (internal)
+    ai_realtime_enabled: bool = False  # OFF until a NATIVE realtime key is added
+    ai_realtime_provider: str = "gemini-live"  # registry alias (superadmin-swappable)
+    ai_realtime_model: str = "gemini-2.0-flash-live-001"  # native speech-to-speech model
+    ai_realtime_voice: str = "Aoede"  # provider voice name
     ai_realtime_ttl_seconds: int = 660  # ephemeral-token / session hard-cap ceiling
 
     # OCR / extraction (lightweight defaults)

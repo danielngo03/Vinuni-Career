@@ -3,7 +3,12 @@
 import { useCallback, useRef, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { useQueryClient } from "@tanstack/react-query";
-import { ArrowLeft, Sparkle, WarningCircle } from "@phosphor-icons/react";
+import {
+  ArrowLeft,
+  ClockCounterClockwise,
+  Sparkle,
+  WarningCircle,
+} from "@phosphor-icons/react";
 import { Link } from "@/i18n/navigation";
 import { Button, EmptyState, useToast } from "@/components/ui";
 import {
@@ -220,14 +225,23 @@ export function MockInterviewScreen({ jobId }: { jobId: string }) {
         <div className="space-y-6">
           <CoachingReport report={phase.detail.report} />
           <TranscriptReview detail={phase.detail} onDeleted={resetToSetup} />
-          <div className="flex flex-wrap items-center justify-between gap-3 border-t border-[var(--border-default)] pt-5">
-            <Button variant="secondary" onClick={resetToSetup}>
-              {t("backToSetup")}
-            </Button>
-            <Button variant="primary" onClick={resetToSetup}>
-              <Sparkle aria-hidden weight="bold" className="size-4" />
-              {t("practiceAgain")}
-            </Button>
+          <div className="flex flex-col gap-4 border-t border-[var(--border-default)] pt-5">
+            <div className="flex flex-wrap items-center justify-between gap-3">
+              <Button variant="secondary" onClick={resetToSetup}>
+                {t("backToSetup")}
+              </Button>
+              <Button variant="primary" onClick={resetToSetup}>
+                <Sparkle aria-hidden weight="bold" className="size-4" />
+                {t("practiceAgain")}
+              </Button>
+            </div>
+            <Link
+              href="/student/interviews"
+              className="inline-flex items-center gap-1.5 self-center rounded text-xs font-semibold text-[var(--brand-primary)] outline-none transition-colors hover:underline focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)]/30"
+            >
+              <ClockCounterClockwise aria-hidden weight="bold" className="size-3.5" />
+              {t("viewHistoryCta")}
+            </Link>
           </div>
         </div>
       </div>
