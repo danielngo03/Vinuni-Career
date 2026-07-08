@@ -684,7 +684,13 @@ TOOL_SPECS: dict[str, ToolSpec] = {
         },
         permission_class="read_only",
         persona=[PARTNER_USER],
-        required_permissions=["authenticated", "role:partner_user"],
+        # Reading the org's own applicant pipeline is grantable via `pipeline:read`
+        # (docs/PARTNER_RBAC_ANALYTICS_SPEC.md `pipeline` row) — NOT hardcoded to
+        # a role name. Partner Admin holds `*:*`; a recruiter without the grant
+        # is denied at the dispatch capability gate. No candidate identity is
+        # exposed here (anonymous labels only), so `candidate_identity` is not
+        # required.
+        required_permissions=["authenticated", "role:partner_user", "pipeline:read"],
         fallback=(
             "I couldn't search candidates right now. Check /partner/pipeline for your applicants."
         ),
@@ -713,7 +719,10 @@ TOOL_SPECS: dict[str, ToolSpec] = {
         },
         permission_class="read_only",
         persona=[PARTNER_USER],
-        required_permissions=["authenticated", "role:partner_user"],
+        # Reading a single applicant's pipeline stage/status is grantable via
+        # `pipeline:read` (docs/PARTNER_RBAC_ANALYTICS_SPEC.md `pipeline` row).
+        # Returns only a snapshot-availability flag, never CV bytes or identity.
+        required_permissions=["authenticated", "role:partner_user", "pipeline:read"],
         fallback=(
             "I couldn't load that candidate's details right now. Check the pipeline board "
             "at /partner/pipeline."
@@ -749,7 +758,11 @@ TOOL_SPECS: dict[str, ToolSpec] = {
         },
         permission_class="read_only",
         persona=[PARTNER_USER],
-        required_permissions=["authenticated", "role:partner_user"],
+        # AI JD drafting is a grantable AI-recruiting capability
+        # (`ai_recruiting:draft_jd`, docs/PARTNER_RBAC_ANALYTICS_SPEC.md
+        # `ai_recruiting` row) — the grant controls who may even request the
+        # draft. Partner Admin holds `*:*`.
+        required_permissions=["authenticated", "role:partner_user", "ai_recruiting:draft_jd"],
         fallback=(
             "I couldn't draft a job description right now. Try the JD writer at "
             "/partner/jobs/new."
@@ -780,7 +793,9 @@ TOOL_SPECS: dict[str, ToolSpec] = {
         },
         permission_class="read_only",
         persona=[PARTNER_USER],
-        required_permissions=["authenticated", "role:partner_user"],
+        # Rewriting an existing JD is the same grantable AI-recruiting drafting
+        # capability as `draft_job_description` (`ai_recruiting:draft_jd`).
+        required_permissions=["authenticated", "role:partner_user", "ai_recruiting:draft_jd"],
         fallback=(
             "I couldn't rewrite that job description right now. Try editing it directly at "
             "/partner/jobs/{job_id}."
@@ -940,7 +955,17 @@ TOOL_SPECS: dict[str, ToolSpec] = {
         },
         permission_class="confirmation_required",
         persona=[PARTNER_USER],
-        required_permissions=["authenticated", "role:partner_user"],
+        # AI-initiated, confirmation-required stage advance — grantable via
+        # `ai_recruiting:move_candidate_with_confirmation`
+        # (docs/PARTNER_RBAC_ANALYTICS_SPEC.md `ai_recruiting` row). The grant
+        # controls who may request the AI move; the underlying pipeline write is
+        # additionally enforced org-scoped in the handler. Partner Admin `*:*`
+        # passes.
+        required_permissions=[
+            "authenticated",
+            "role:partner_user",
+            "ai_recruiting:move_candidate_with_confirmation",
+        ],
         side_effects=[
             "UPDATE candidate_stages (close current, open next)",
             "UPDATE applications.version",
