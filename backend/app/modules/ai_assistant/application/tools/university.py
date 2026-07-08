@@ -344,6 +344,46 @@ async def get_placement_outcomes_summary(
     }
 
 
+async def analyze_attachment(
+    session: AsyncSession, principal: Principal, args: dict
+) -> dict:
+    """Analyse a file/image the staffer attached to THIS chat session.
+
+    Read-only over the caller's OWN data: it loads an attachment the caller
+    uploaded to their own session (owner + org scoped — a cross-user/cross-org id
+    404s), runs the cost-tiered analysis cascade (native text -> OCR -> vision-LLM
+    for images/scanned docs, reusing the extraction primitives) OFFLOADED off the
+    event loop, and returns a compact, leakage-safe DATA ANALYSIS the assistant
+    turns into tables + charts + a summary. Metered once per genuine analysis
+    (the vision tier costs more); a re-analysis returns the cache free.
+
+    Never returns the storage key/path, provider/model/token internals, or another
+    user's/org's attachment. A non-analyzable/blank/junk file returns a clean
+    "couldn't analyse" result — never a fabricated one.
+    """
+    from app.modules.ai_assistant.application import attachment_service
+
+    if not _staff_ready(principal):
+        return {"ok": False, "error": "university_auth_required"}
+
+    attachment_id = _parse_uuid(args.get("attachment_id"))
+    if attachment_id is None:
+        return {"ok": False, "error": "attachment_id_required"}
+
+    try:
+        result = await attachment_service.analyze_attachment(
+            session, principal=principal, attachment_id=attachment_id
+        )
+    except ResourceNotFoundError:
+        return {"ok": False, "error": "not_found"}
+    except (PermissionDeniedError, AuthRequiredError):
+        return {"ok": False, "error": "permission_denied"}
+    except Exception:
+        return {"ok": False, "error": "tool_failed"}
+
+    return {"ok": True, **result}
+
+
 async def search_university_knowledge(
     session: AsyncSession, principal: Principal, args: dict
 ) -> dict:

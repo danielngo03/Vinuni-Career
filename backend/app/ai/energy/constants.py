@@ -32,6 +32,15 @@ FEATURE_MARKET_INTELLIGENCE = "market_intelligence"
 FEATURE_CANDIDATE_ANALYSIS = "candidate_analysis"
 FEATURE_ANALYTICS_ASSISTANT = "analytics_assistant"
 
+# Chat-attachment analysis (upload a file/image → tables/charts/summary). Two
+# tiers: the deterministic native-text/OCR path is cheap; the vision-LLM path
+# (images / scanned PDFs, owner-approved downscaled images) costs materially more,
+# so it debits the higher weight. Only the vision key is a university addition;
+# ``FEATURE_ATTACHMENT_ANALYSIS`` mirrors the partner-ai-overhaul constant so the
+# merge dedups (keep both at merge).
+FEATURE_ATTACHMENT_ANALYSIS = "attachment_analysis"
+FEATURE_ATTACHMENT_VISION_ANALYSIS = "attachment_vision_analysis"
+
 # --------------------------------------------------------------------------- #
 # Cost-weighted credit cost per feature (INTERNAL — never exposed).            #
 # Scale: 1 credit ≈ a trivial text call; heavier/vision calls cost more.       #
@@ -60,6 +69,9 @@ FEATURE_UNIT_COST: dict[str, int] = {
     FEATURE_MARKET_INTELLIGENCE: 3,
     FEATURE_CANDIDATE_ANALYSIS: 3,
     FEATURE_ANALYTICS_ASSISTANT: 3,
+    # Chat-attachment analysis: deterministic text/OCR tier vs the pricier vision tier.
+    FEATURE_ATTACHMENT_ANALYSIS: 3,
+    FEATURE_ATTACHMENT_VISION_ANALYSIS: 8,
 }
 
 

@@ -35,12 +35,29 @@ async def create_session(
     *,
     principal: Principal,
 ) -> dict:
-    """Create a new chat session for the principal."""
+    """Create a new chat session for the principal.
+
+    Captures the acting principal's org + primary-department context on the
+    session so a staff/partner chat is org-scoped and attributable to a department
+    for per-department AI energy accounting (both NULL for students / principals
+    without an org). Department resolution is best-effort — it must never break
+    session creation.
+    """
     if not principal.is_authenticated:
         raise AuthRequiredError()
+    department_id = None
+    if principal.org_id is not None:
+        try:
+            from app.ai.energy.service import resolve_primary_department_id
+
+            department_id = await resolve_primary_department_id(session, principal=principal)
+        except Exception:  # noqa: BLE001 — department attribution must not block chat
+            department_id = None
     chat = ChatSession(
         id=uuid.uuid4(),
         user_id=principal.user_id,
+        org_id=principal.org_id,
+        department_id=department_id,
         persona=principal.persona,
         created_at=datetime.now(UTC),
     )

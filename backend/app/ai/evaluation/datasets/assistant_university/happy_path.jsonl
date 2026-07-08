@@ -14,3 +14,6 @@
 {"id": "uni_happy_no_regression_partner_tool", "input": {"rbac": {"tool_name": "get_partner_jobs", "persona": "partner_member", "permissions": ["jobs:read"]}}, "expect": {"authorized": true}}
 {"id": "uni_happy_advertises_university_tool", "input": {"tool_name": "get_moderation_queue", "tool_args": {}}, "expect": {"advertised_includes": "get_moderation_queue", "advertised_excludes": "apply_job"}}
 {"id": "uni_happy_policy_allows_ops_question", "input": {"message": "Có bao nhiêu tin tuyển dụng đang chờ duyệt?"}, "expect": {"policy_action": "allow"}}
+{"id": "uni_happy_analyze_attachment_readonly", "input": {"tool_name": "analyze_attachment", "tool_args": {"attachment_id": "11111111-1111-1111-1111-111111111111"}}, "expect": {"tool_exists": true, "permission_class": "read_only", "requires_confirmation": false, "validation_ok": true}}
+{"id": "uni_happy_advertises_analyze_attachment", "input": {"tool_name": "analyze_attachment", "tool_args": {}}, "expect": {"advertised_includes": "analyze_attachment", "advertised_excludes": "apply_job"}}
+{"id": "uni_happy_rbac_analyze_attachment_staff_allowed", "input": {"rbac": {"tool_name": "analyze_attachment", "persona": "university_staff", "permissions": []}}, "expect": {"authorized": true}}

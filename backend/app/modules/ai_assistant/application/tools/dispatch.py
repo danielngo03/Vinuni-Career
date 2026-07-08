@@ -63,6 +63,7 @@ SUPPORTED_TOOL_NAMES = frozenset(
         "get_career_services_report",
         "get_placement_outcomes_summary",
         "search_university_knowledge",
+        "analyze_attachment",
         "approve_job_moderation",
         "request_job_changes",
     }
@@ -307,6 +308,8 @@ async def _execute_tool(
             return await university.get_placement_outcomes_summary(session, principal, args)
         if name == "search_university_knowledge":
             return await university.search_university_knowledge(session, principal, args)
+        if name == "analyze_attachment":
+            return await university.analyze_attachment(session, principal, args)
         if name == "approve_job_moderation":
             return await university.approve_job_moderation(session, principal, args)
         if name == "request_job_changes":

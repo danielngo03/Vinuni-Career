@@ -4,3 +4,5 @@
 {"id": "uni_lowq_kb_missing_query", "input": {"tool_name": "search_university_knowledge", "tool_args": {}}, "expect": {"validation_ok": false, "validation_error": "missing_query"}}
 {"id": "uni_lowq_approve_wrong_type_job_id", "input": {"tool_name": "approve_job_moderation", "tool_args": {"job_id": 12345}}, "expect": {"validation_ok": false, "validation_error": "invalid_job_id"}}
 {"id": "uni_lowq_cohort_ignores_junk_arg", "input": {"tool_name": "get_cohort_summary", "tool_args": {"nonsense": "???"}}, "expect": {"validation_ok": true}}
+{"id": "uni_lowq_analyze_attachment_missing_id", "input": {"tool_name": "analyze_attachment", "tool_args": {}}, "expect": {"validation_ok": false, "validation_error": "missing_attachment_id"}}
+{"id": "uni_lowq_analyze_attachment_wrong_type_id", "input": {"tool_name": "analyze_attachment", "tool_args": {"attachment_id": 12345}}, "expect": {"validation_ok": false, "validation_error": "invalid_attachment_id"}}

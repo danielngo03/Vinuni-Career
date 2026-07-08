@@ -1130,6 +1130,55 @@ TOOL_SPECS: dict[str, ToolSpec] = {
         audit_event_type="TOOL_SEARCH_UNIVERSITY_KNOWLEDGE",
         timeout_seconds=20,
     ),
+    "analyze_attachment": ToolSpec(
+        name="analyze_attachment",
+        description=(
+            "Read and analyse a file or image the staff member attached to THIS chat "
+            "session — transcribe/summarise it and, when it contains data, draw tables and "
+            "charts (columns/bars, lines, or a pie) and surface factual insights (totals, "
+            "min/max/average). Use this when staff ask you to read, analyse, summarise, or "
+            "visualise an attachment they uploaded (e.g. 'phân tích file này', 'vẽ bảng và "
+            "biểu đồ cột từ dữ liệu này', 'đọc ảnh này', 'summarise this document', 'chart "
+            "these numbers'). Requires attachment_id — the id returned when the staffer "
+            "uploaded the attachment to this session. Only reads the staffer's OWN "
+            "attachment; never fabricates content for a blank or unreadable file. Only "
+            "available to university staff."
+        ),
+        parameters={
+            "type": "object",
+            "properties": {
+                "attachment_id": {
+                    "type": "string",
+                    "description": (
+                        "UUID of the attachment the staff member uploaded to this chat session"
+                    ),
+                },
+            },
+            "required": ["attachment_id"],
+        },
+        output_schema={
+            "type": "object",
+            "properties": {
+                "ok": {"type": "boolean"},
+                "status": {"type": "string"},
+                "kind": {"type": "string"},
+                "analyzed": {"type": "boolean"},
+                "summary": {"type": "string"},
+                "insights": {"type": "array", "items": {"type": "string"}},
+                "tables": {"type": "array", "items": {"type": "object"}},
+                "charts": {"type": "array", "items": {"type": "object"}},
+            },
+        },
+        permission_class="read_only",
+        persona=[UNIVERSITY_STAFF],
+        required_permissions=["authenticated", "role:university_staff"],
+        fallback=(
+            "I couldn't analyse that attachment right now. Make sure you uploaded a readable "
+            "PDF, image, DOCX, TXT, or CSV to this chat, then try again."
+        ),
+        audit_event_type="TOOL_ANALYZE_ATTACHMENT",
+        timeout_seconds=30,
+    ),
     "approve_job_moderation": ToolSpec(
         name="approve_job_moderation",
         description=(

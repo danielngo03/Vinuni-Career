@@ -6,3 +6,5 @@
 {"id": "uni_priv_pending_partners_schema_no_contact_email", "input": {"tool_name": "get_pending_partner_registrations", "tool_args": {}}, "expect": {"schema_excludes": "contact_email"}}
 {"id": "uni_priv_student_cannot_read_at_risk", "input": {"rbac": {"tool_name": "get_at_risk_students", "persona": "student", "permissions": ["career_services_at_risk:read"]}}, "expect": {"authorized": false}}
 {"id": "uni_priv_moderation_queue_fallback_no_leak", "input": {"tool_name": "get_moderation_queue", "tool_args": {}}, "expect": {"no_provider_leak": true, "no_model_leak": true}}
+{"id": "uni_priv_analyze_attachment_schema_no_storage_key", "input": {"tool_name": "analyze_attachment", "tool_args": {"attachment_id": "11111111-1111-1111-1111-111111111111"}}, "expect": {"schema_excludes": "storage_key", "no_provider_leak": true, "no_model_leak": true}}
+{"id": "uni_priv_analyze_attachment_schema_no_provider_field", "input": {"tool_name": "analyze_attachment", "tool_args": {}}, "expect": {"schema_excludes": "provider", "no_pii_in_response": true}}
