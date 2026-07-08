@@ -33,3 +33,5 @@ out/
 
 # Browser QA artifacts
 .playwright-mcp/
+# Never track nested git worktrees (accidentally committed as gitlinks in base 430fc6f)
+/.claude/worktrees/
