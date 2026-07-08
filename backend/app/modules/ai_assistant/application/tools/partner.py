@@ -14,12 +14,51 @@ gated ``confirmation_required`` in ``specs.py``.
 from __future__ import annotations
 
 import uuid as _uuid
+from collections.abc import Awaitable, Callable
 from datetime import UTC, datetime
+from functools import wraps
 
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.shared.exceptions import AuthRequiredError, PermissionDeniedError, ResourceNotFoundError
 from app.shared.permissions import Principal
+
+_PartnerToolHandler = Callable[[AsyncSession, Principal, dict], Awaitable[dict]]
+
+
+def partner_tool(func: _PartnerToolHandler) -> _PartnerToolHandler:
+    """Wrap a partner tool handler with the shared org-auth guard + error ladder.
+
+    Every partner tool (a) requires an authenticated principal bound to an org
+    and (b) maps the standard service exception set to the assistant's stable,
+    leakage-safe tool error codes. Extracting it here keeps each handler focused
+    on its core read/write logic and guarantees one consistent contract:
+
+    - unauthenticated / no org   -> ``partner_auth_required``
+    - ``ResourceNotFoundError``  -> ``not_found`` (also the cross-org 404)
+    - ``PermissionDeniedError`` /
+      ``AuthRequiredError``      -> ``permission_denied``
+    - any other exception        -> ``tool_failed``
+
+    Handlers needing extra error codes (e.g. ``move_candidate_stage``'s
+    version/stage-gate conflicts) catch those FIRST in their own body and let the
+    standard set propagate here.
+    """
+
+    @wraps(func)
+    async def _wrapped(session: AsyncSession, principal: Principal, args: dict) -> dict:
+        if not principal.is_authenticated or principal.org_id is None:
+            return {"ok": False, "error": "partner_auth_required"}
+        try:
+            return await func(session, principal, args)
+        except ResourceNotFoundError:
+            return {"ok": False, "error": "not_found"}
+        except (PermissionDeniedError, AuthRequiredError):
+            return {"ok": False, "error": "permission_denied"}
+        except Exception:
+            return {"ok": False, "error": "tool_failed"}
+
+    return _wrapped
 
 
 def _parse_uuid(raw: str | None) -> _uuid.UUID | None:
@@ -76,6 +115,7 @@ async def get_partner_pipeline_summary(session: AsyncSession, principal: Princip
     }
 
 
+@partner_tool
 async def search_partner_candidates(
     session: AsyncSession, principal: Principal, args: dict
 ) -> dict:
@@ -89,9 +129,6 @@ async def search_partner_candidates(
     """
     from app.modules.recruitment.application import apply_service
 
-    if not principal.is_authenticated or principal.org_id is None:
-        return {"ok": False, "error": "partner_auth_required"}
-
     job_id = _parse_uuid(args.get("job_id"))
     if job_id is None:
         return {"ok": False, "error": "job_id_required"}
@@ -99,16 +136,9 @@ async def search_partner_candidates(
     stage_filter = (args.get("stage") or "").strip().lower() or None
     q = (args.get("q") or "").strip().lower() or None
 
-    try:
-        items, _next, _limit = await apply_service.list_job_applications(
-            session, principal=principal, job_id=job_id, cursor=None, limit=25
-        )
-    except ResourceNotFoundError:
-        return {"ok": False, "error": "not_found"}
-    except (PermissionDeniedError, AuthRequiredError):
-        return {"ok": False, "error": "permission_denied"}
-    except Exception:
-        return {"ok": False, "error": "tool_failed"}
+    items, _next, _limit = await apply_service.list_job_applications(
+        session, principal=principal, job_id=job_id, cursor=None, limit=25
+    )
 
     results = []
     for a in items:
@@ -137,6 +167,7 @@ async def search_partner_candidates(
     }
 
 
+@partner_tool
 async def get_candidate_detail(session: AsyncSession, principal: Principal, args: dict) -> dict:
     """Single applicant's stage/scorecard-gate/CV-snapshot link (not raw bytes).
 
@@ -146,23 +177,13 @@ async def get_candidate_detail(session: AsyncSession, principal: Principal, args
     """
     from app.modules.recruitment.application import apply_service
 
-    if not principal.is_authenticated or principal.org_id is None:
-        return {"ok": False, "error": "partner_auth_required"}
-
     application_id = _parse_uuid(args.get("application_id"))
     if application_id is None:
         return {"ok": False, "error": "application_id_required"}
 
-    try:
-        view = await apply_service.get_application(
-            session, principal=principal, application_id=application_id
-        )
-    except ResourceNotFoundError:
-        return {"ok": False, "error": "not_found"}
-    except (PermissionDeniedError, AuthRequiredError):
-        return {"ok": False, "error": "permission_denied"}
-    except Exception:
-        return {"ok": False, "error": "tool_failed"}
+    view = await apply_service.get_application(
+        session, principal=principal, application_id=application_id
+    )
 
     applicant = view.get("applicant") or {}
     pipeline = view.get("pipeline") or {}
@@ -182,12 +203,10 @@ async def get_candidate_detail(session: AsyncSession, principal: Principal, args
     }
 
 
+@partner_tool
 async def draft_job_description(session: AsyncSession, principal: Principal, args: dict) -> dict:
     """LLM draft only — never persisted. The partner must review/edit/apply it."""
     from app.modules.opportunities.application import jd_ai_service
-
-    if not principal.is_authenticated or principal.org_id is None:
-        return {"ok": False, "error": "partner_auth_required"}
 
     title = (args.get("title") or "").strip()
     if not title:
@@ -204,14 +223,9 @@ async def draft_job_description(session: AsyncSession, principal: Principal, arg
         "benefits": args.get("benefits"),
         "partner_instruction": args.get("partner_instruction"),
     }
-    try:
-        result = await jd_ai_service.draft_description_standalone(
-            session, principal=principal, payload=payload
-        )
-    except (PermissionDeniedError, AuthRequiredError):
-        return {"ok": False, "error": "permission_denied"}
-    except Exception:
-        return {"ok": False, "error": "tool_failed"}
+    result = await jd_ai_service.draft_description_standalone(
+        session, principal=principal, payload=payload
+    )
 
     bias = result.get("bias_check") or {}
     return {
@@ -223,12 +237,10 @@ async def draft_job_description(session: AsyncSession, principal: Principal, arg
     }
 
 
+@partner_tool
 async def rewrite_job_description(session: AsyncSession, principal: Principal, args: dict) -> dict:
     """LLM redraft of an EXISTING org-owned job — never persisted directly."""
     from app.modules.opportunities.application import jd_ai_service
-
-    if not principal.is_authenticated or principal.org_id is None:
-        return {"ok": False, "error": "partner_auth_required"}
 
     job_id = _parse_uuid(args.get("job_id"))
     if job_id is None:
@@ -240,16 +252,9 @@ async def rewrite_job_description(session: AsyncSession, principal: Principal, a
         if k in ("employment_type", "experience_level", "location", "required_skills",
                   "preferred_skills", "responsibilities", "benefits", "partner_instruction")
     }
-    try:
-        result = await jd_ai_service.draft_description(
-            session, principal=principal, job_id=job_id, payload=payload
-        )
-    except ResourceNotFoundError:
-        return {"ok": False, "error": "not_found"}
-    except (PermissionDeniedError, AuthRequiredError):
-        return {"ok": False, "error": "permission_denied"}
-    except Exception:
-        return {"ok": False, "error": "tool_failed"}
+    result = await jd_ai_service.draft_description(
+        session, principal=principal, job_id=job_id, payload=payload
+    )
 
     bias = result.get("bias_check") or {}
     return {
@@ -281,33 +286,24 @@ async def check_jd_bias(session: AsyncSession, principal: Principal, args: dict)
     return {"ok": True, **result.as_dict()}
 
 
+@partner_tool
 async def suggest_scorecard(session: AsyncSession, principal: Principal, args: dict) -> dict:
     """Advisory scorecard suggestion from interviewer notes — never persisted."""
     from app.modules.recruitment.application import scorecard_ai_service
-
-    if not principal.is_authenticated or principal.org_id is None:
-        return {"ok": False, "error": "partner_auth_required"}
 
     application_id = _parse_uuid(args.get("application_id"))
     notes = (args.get("notes") or "").strip()
     if application_id is None or not notes:
         return {"ok": False, "error": "application_id_and_notes_required"}
 
-    try:
-        result = await scorecard_ai_service.suggest_scorecard(
-            session,
-            principal=principal,
-            application_id=application_id,
-            notes=notes,
-            job_title=args.get("job_title"),
-            interview_stage=args.get("interview_stage"),
-        )
-    except ResourceNotFoundError:
-        return {"ok": False, "error": "not_found"}
-    except (PermissionDeniedError, AuthRequiredError):
-        return {"ok": False, "error": "permission_denied"}
-    except Exception:
-        return {"ok": False, "error": "tool_failed"}
+    result = await scorecard_ai_service.suggest_scorecard(
+        session,
+        principal=principal,
+        application_id=application_id,
+        notes=notes,
+        job_title=args.get("job_title"),
+        interview_stage=args.get("interview_stage"),
+    )
 
     return {
         "ok": True,
@@ -320,27 +316,18 @@ async def suggest_scorecard(session: AsyncSession, principal: Principal, args: d
     }
 
 
+@partner_tool
 async def generate_screening_brief(session: AsyncSession, principal: Principal, args: dict) -> dict:
     """3-4 bullet privacy-safe CV-vs-role screening brief. Advisory only."""
     from app.modules.recruitment.application import screening_brief_service
-
-    if not principal.is_authenticated or principal.org_id is None:
-        return {"ok": False, "error": "partner_auth_required"}
 
     application_id = _parse_uuid(args.get("application_id"))
     if application_id is None:
         return {"ok": False, "error": "application_id_required"}
 
-    try:
-        result = await screening_brief_service.generate_screening_brief(
-            session, principal=principal, application_id=application_id
-        )
-    except ResourceNotFoundError:
-        return {"ok": False, "error": "not_found"}
-    except (PermissionDeniedError, AuthRequiredError):
-        return {"ok": False, "error": "permission_denied"}
-    except Exception:
-        return {"ok": False, "error": "tool_failed"}
+    result = await screening_brief_service.generate_screening_brief(
+        session, principal=principal, application_id=application_id
+    )
 
     return {
         "ok": True,
@@ -464,6 +451,7 @@ async def get_partner_analytics_summary(session: AsyncSession, principal: Princi
     }
 
 
+@partner_tool
 async def analyze_attachment(session: AsyncSession, principal: Principal, args: dict) -> dict:
     """Analyse a file/image the recruiter attached to THIS chat session.
 
@@ -481,27 +469,18 @@ async def analyze_attachment(session: AsyncSession, principal: Principal, args: 
     """
     from app.modules.ai_assistant.application import attachment_service
 
-    if not principal.is_authenticated or principal.org_id is None:
-        return {"ok": False, "error": "partner_auth_required"}
-
     attachment_id = _parse_uuid(args.get("attachment_id"))
     if attachment_id is None:
         return {"ok": False, "error": "attachment_id_required"}
 
-    try:
-        result = await attachment_service.analyze_attachment(
-            session, principal=principal, attachment_id=attachment_id
-        )
-    except ResourceNotFoundError:
-        return {"ok": False, "error": "not_found"}
-    except (PermissionDeniedError, AuthRequiredError):
-        return {"ok": False, "error": "permission_denied"}
-    except Exception:
-        return {"ok": False, "error": "tool_failed"}
+    result = await attachment_service.analyze_attachment(
+        session, principal=principal, attachment_id=attachment_id
+    )
 
     return {"ok": True, **result}
 
 
+@partner_tool
 async def move_candidate_stage(session: AsyncSession, principal: Principal, args: dict) -> dict:
     """Advance the candidate to the NEXT pipeline stage (confirmation-gated).
 
@@ -509,6 +488,10 @@ async def move_candidate_stage(session: AsyncSession, principal: Principal, args
     partner pipeline UI's ``/advance`` endpoint uses (org-ownership 404 gate,
     optimistic version check, required_action/scorecard-gate enforcement,
     audit row, student notification). No transition rule is duplicated here.
+
+    Catches only the EXTRA conflict codes (version / stage-gate) locally; the
+    standard not_found / permission_denied / tool_failed set propagates to
+    ``@partner_tool``.
     """
     from app.modules.auth.application.context import RequestContext
     from app.modules.recruitment.application import stage_service
@@ -518,9 +501,6 @@ async def move_candidate_stage(session: AsyncSession, principal: Principal, args
         ScoreBelowThresholdError,
         ScorecardRequiredError,
     )
-
-    if not principal.is_authenticated or principal.org_id is None:
-        return {"ok": False, "error": "partner_auth_required"}
 
     application_id = _parse_uuid(args.get("application_id"))
     if application_id is None:
@@ -533,16 +513,10 @@ async def move_candidate_stage(session: AsyncSession, principal: Principal, args
             application_id=application_id,
             ctx=RequestContext(),
         )
-    except ResourceNotFoundError:
-        return {"ok": False, "error": "not_found"}
-    except (PermissionDeniedError, AuthRequiredError):
-        return {"ok": False, "error": "permission_denied"}
     except ApplicationVersionConflictError:
         return {"ok": False, "error": "version_conflict"}
     except (IllegalApplicationTransitionError, ScoreBelowThresholdError, ScorecardRequiredError):
         return {"ok": False, "error": "stage_gate_not_met"}
-    except Exception:
-        return {"ok": False, "error": "tool_failed"}
 
     pipeline = result.get("pipeline") or {}
     current_stage = pipeline.get("current_stage") or {}
