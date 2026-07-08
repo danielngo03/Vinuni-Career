@@ -10,7 +10,7 @@ from __future__ import annotations
 
 import uuid
 
-from fastapi import APIRouter, Depends, Query, status
+from fastapi import APIRouter, Depends, File, Query, Response, UploadFile, status
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.core.db import get_db_session
@@ -25,6 +25,7 @@ from app.modules.messaging.api.schemas import (
 )
 from app.modules.messaging.application import (
     assignment_service,
+    attachment_service,
     inbox_service,
     message_service,
     recipient_service,
@@ -175,9 +176,50 @@ async def send_message(
         body=body.body,
         reply_to_id=body.reply_to_id,
         client_dedupe_key=body.client_dedupe_key,
+        attachment_ids=body.attachment_ids or None,
         ctx=auth.ctx,
     )
     return success(data)
+
+
+@router.post(
+    "/threads/{thread_id}/attachments",
+    status_code=status.HTTP_201_CREATED,
+    summary="Upload an attachment (bind on send)",
+)
+async def upload_attachment(
+    thread_id: uuid.UUID,
+    file: UploadFile = File(...),
+    auth: CurrentAuth = Depends(get_current_auth),
+    session: AsyncSession = Depends(get_db_session),
+) -> dict:
+    data = await attachment_service.upload(
+        session,
+        principal=auth.principal,
+        thread_id=thread_id,
+        file=file,
+        ctx=auth.ctx,
+    )
+    return success(data)
+
+
+@router.get("/attachments/{attachment_id}", summary="Gated attachment download")
+async def download_attachment(
+    attachment_id: uuid.UUID,
+    auth: CurrentAuth = Depends(get_current_auth),
+    session: AsyncSession = Depends(get_db_session),
+) -> Response:
+    content, media_type, filename = await attachment_service.download(
+        session, principal=auth.principal, attachment_id=attachment_id
+    )
+    return Response(
+        content=content,
+        media_type=media_type,
+        headers={
+            "Content-Disposition": f'inline; filename="{filename}"',
+            "Cache-Control": "private, no-store",
+        },
+    )
 
 
 @router.post("/threads/{thread_id}/read", summary="Set my last_read_at = now")

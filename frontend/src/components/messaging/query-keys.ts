@@ -6,6 +6,29 @@
 export const MESSAGING_UNREAD_KEY = ["messaging", "unread-count"] as const;
 export const MESSAGING_THREADS_KEY = ["messaging", "threads"] as const;
 
+/** Root of the org shared-inbox cache family (any scope/dept/search). */
+export const MESSAGING_INBOX_ROOT = ["messaging", "inbox"] as const;
+
+/** Org shared-inbox cache, keyed by the active filter tuple. */
+export function messagingInboxKey(opts: {
+  scope: string;
+  departmentId: string | null;
+  q: string;
+}) {
+  return [
+    "messaging",
+    "inbox",
+    opts.scope,
+    opts.departmentId ?? "all",
+    opts.q,
+  ] as const;
+}
+
+/** Recipient-search cache for the "new message" composer. */
+export function messagingRecipientsKey(q: string) {
+  return ["messaging", "recipients", q] as const;
+}
+
 /** Per-thread message cache (full thread, polled while open). */
 export function messagingThreadKey(threadId: string) {
   return ["messaging", "thread", threadId] as const;

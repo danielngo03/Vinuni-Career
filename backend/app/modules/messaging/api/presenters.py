@@ -122,8 +122,10 @@ def message_item(
     sender_label: str,
     is_mine: bool,
     locale: str = "vi",
+    attachments: list[dict] | None = None,
 ) -> dict:
-    if message.deleted_at is not None:
+    is_deleted = message.deleted_at is not None
+    if is_deleted:
         body = labels.deleted_body(locale=locale)
     else:
         body = message.body
@@ -137,8 +139,10 @@ def message_item(
         "body": body,
         "is_system": message.is_system,
         "is_mine": is_mine,
-        "is_deleted": message.deleted_at is not None,
+        "is_deleted": is_deleted,
         "sender_label": label,
         "reply_to_id": str(message.reply_to_id) if message.reply_to_id else None,
+        # Attachments are hidden on a soft-deleted message.
+        "attachments": [] if is_deleted else (attachments or []),
         "created_at": _iso(message.created_at),
     }

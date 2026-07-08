@@ -13,6 +13,7 @@ import asyncio
 import json
 import logging
 from collections.abc import Awaitable, Callable
+from typing import Any
 
 logger = logging.getLogger(__name__)
 
@@ -45,9 +46,9 @@ class RedisBus:
     def __init__(self, url: str) -> None:
         self._url = url
         self._dispatch: Dispatcher | None = None
-        self._redis = None
-        self._pubsub = None
-        self._task: asyncio.Task | None = None
+        self._redis: Any = None
+        self._pubsub: Any = None
+        self._task: asyncio.Task[None] | None = None
 
     def set_dispatcher(self, dispatch: Dispatcher) -> None:
         self._dispatch = dispatch

@@ -86,7 +86,8 @@ async def channels_for_thread(
         .all()
     )
     for oid in org_ids:
-        channels.add(org_channel(oid))
+        if oid is not None:
+            channels.add(org_channel(oid))
     return list(channels)
 
 

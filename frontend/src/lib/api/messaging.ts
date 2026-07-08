@@ -23,6 +23,38 @@ export type ThreadContextType =
 /** Thread lifecycle. `closed`/`archived` block sends (409 on POST). */
 export type ThreadStatus = "active" | "archived" | "closed" | (string & {});
 
+/**
+ * Messaging V2 thread discriminator. Distinguishes the party axes an inbox row
+ * can represent. Kept string-open so an unknown server value never breaks render.
+ */
+export type ThreadKindV2 =
+  | "org_dm"
+  | "org_to_org"
+  | "internal"
+  | "application"
+  | "support"
+  | "announcement"
+  | (string & {});
+
+/**
+ * First-contact "message request" gate state. A brand-new conversation between
+ * two parties starts `pending`; the recipient accepts/declines/blocks. Privileged
+ * axes (university-initiated, internal, application-backed) start `accepted`.
+ */
+export type RequestState =
+  | "accepted"
+  | "pending"
+  | "declined"
+  | "blocked"
+  | (string & {});
+
+/** Org shared-inbox routing state for a thread (partner/university personas). */
+export type AssignmentState =
+  | "unassigned"
+  | "assigned"
+  | "resolved"
+  | (string & {});
+
 /* ------------------------------- Wire types ------------------------------- */
 
 /**
@@ -44,10 +76,31 @@ export interface ThreadSummary {
   status: ThreadStatus;
   status_label: string;
   is_anonymous: boolean;
+  /**
+   * V2 party-axis discriminator (org_dm/org_to_org/internal/application/…). The
+   * legacy `kind` column stays direct/announcement; this is the richer axis.
+   */
+  thread_kind: ThreadKindV2;
+  /** First-contact request-gate state (accepted for privileged/internal axes). */
+  request_state: RequestState;
+  /** Server-rendered, localized label for `request_state` (render verbatim). */
+  request_label: string;
   unread: number;
   can_reply: boolean;
   muted: boolean;
   last_message_at: string | null;
+}
+
+/**
+ * A thread row inside an ORG shared inbox (`GET /inbox`). Extends the summary with
+ * team-routing fields: whether it is unassigned/assigned/resolved and, when routed,
+ * the raw department/assignee ids (resolved to names in the UI via pickers — never
+ * shown as raw ids to operators).
+ */
+export interface InboxThreadSummary extends ThreadSummary {
+  assignment_state: AssignmentState;
+  assigned_department_id: string | null;
+  assigned_user_id: string | null;
 }
 
 /** One rendered participant (label is masked-or-real per the server). */
@@ -105,6 +158,78 @@ export interface ReportThreadResult {
   thread_id: string;
 }
 
+/** `POST /messaging/threads/{id}/request/{action}` result. */
+export interface RequestActionResult {
+  status: string;
+  thread_id: string;
+  request_state: RequestState;
+}
+
+/** `POST /messaging/threads/{id}/assign` result. */
+export interface AssignThreadResult {
+  status: string;
+  thread_id: string;
+  assignment_state: AssignmentState;
+  assigned_department_id: string | null;
+  assigned_user_id: string | null;
+}
+
+/** `POST /messaging/threads/{id}/resolve` result. */
+export interface ResolveThreadResult {
+  status: string;
+  thread_id: string;
+  assignment_state: AssignmentState;
+}
+
+/** `POST /messaging/inbox/{id}/read` result (team-level read cursor). */
+export interface InboxReadResult {
+  status: string;
+  thread_id: string;
+  unread: number;
+}
+
+/* ----------------------------- Recipient search --------------------------- */
+
+/** An organization Page target (student/partner → partner/university). */
+export interface RecipientOrg {
+  kind: "org";
+  org_id: string;
+  slug: string;
+  display_name: string;
+  org_type: "partner" | "university" | (string & {});
+  is_verified: boolean;
+}
+
+/** An internal department channel target (staff, own org). */
+export interface RecipientDepartment {
+  kind: "department";
+  department_id: string;
+  display_name: string;
+}
+
+/** A colleague target (staff, own org). */
+export interface RecipientUser {
+  kind: "user";
+  user_id: string;
+  display_name: string;
+}
+
+/**
+ * A typed recipient the composer may offer. The permission matrix is enforced at
+ * the SEARCH layer server-side: students only ever receive `org` targets (they can
+ * never discover another student).
+ */
+export type RecipientTarget =
+  | RecipientOrg
+  | RecipientDepartment
+  | RecipientUser;
+
+/** Org-inbox scope filter (team triage). */
+export type InboxScope = "unassigned" | "mine" | "all" | "resolved";
+
+/** Message-request action the recipient may take on a `pending` thread. */
+export type RequestAction = "accept" | "decline" | "block";
+
 /* --------------------------------- Inputs --------------------------------- */
 
 /**
@@ -119,7 +244,12 @@ export interface CreateThreadBody {
   kind?: ThreadKind;
   context_type?: ThreadContextType | null;
   context_id?: string | null;
-  recipient_ids: string[];
+  /** User recipients (internal colleagues, university→user). Defaults to `[]`. */
+  recipient_ids?: string[];
+  /** V2: initiate to an org Page (student→org, partner→university). */
+  target_org_id?: string | null;
+  /** V2: internal department channel (same org, staff only). */
+  target_department_id?: string | null;
   subject?: string | null;
   first_message?: string | null;
 }
@@ -129,6 +259,12 @@ export interface SendMessageBody {
   body: string;
   reply_to_id?: string | null;
   client_dedupe_key?: string | null;
+  /**
+   * V2 (optional): bind previously-uploaded attachments to this message. The
+   * upload UI is handled separately; this field stays optional so the composer
+   * can pass ids once that surface exists.
+   */
+  attachment_ids?: string[];
 }
 
 /* --------------------------------- Calls ---------------------------------- */
@@ -150,10 +286,91 @@ export const messagingApi = {
       kind: body.kind ?? "direct",
       context_type: body.context_type ?? null,
       context_id: body.context_id ?? null,
-      recipient_ids: body.recipient_ids,
+      recipient_ids: body.recipient_ids ?? [],
+      target_org_id: body.target_org_id ?? null,
+      target_department_id: body.target_department_id ?? null,
       subject: body.subject ?? null,
       first_message: body.first_message ?? null,
     });
+  },
+
+  /**
+   * Org shared inbox (`GET /inbox`) — the team queue for partner/university
+   * personas. RBAC + department scoped server-side. `scope` = the triage filter.
+   */
+  listInbox(opts?: {
+    scope?: InboxScope;
+    departmentId?: string | null;
+    q?: string | null;
+    cursor?: string | null;
+    limit?: number;
+  }): Promise<ApiListEnvelope<InboxThreadSummary>> {
+    return api.list<InboxThreadSummary>("/messaging/inbox", {
+      query: {
+        scope: opts?.scope ?? undefined,
+        department_id: opts?.departmentId ?? undefined,
+        q: opts?.q?.trim() || undefined,
+        cursor: opts?.cursor ?? undefined,
+        limit: opts?.limit,
+      },
+    });
+  },
+
+  /** Team-level read: clear unread on the shared org party cursor. */
+  markInboxRead(threadId: string): Promise<InboxReadResult> {
+    return api.post<InboxReadResult>(`/messaging/inbox/${threadId}/read`, {});
+  },
+
+  /**
+   * Search valid recipients for the "new message" composer. Returns only targets
+   * the caller may message (students receive `org` targets only). `q` filters by
+   * name; an empty `q` returns the default set.
+   */
+  async searchRecipients(
+    q?: string | null,
+    limit = 20,
+  ): Promise<RecipientTarget[]> {
+    const data = await api.get<{ items: RecipientTarget[] }>(
+      "/messaging/recipients",
+      { query: { q: q?.trim() || undefined, limit } },
+    );
+    return data.items ?? [];
+  },
+
+  /** Respond to a pending message request (accept | decline | block). */
+  respondRequest(
+    threadId: string,
+    action: RequestAction,
+  ): Promise<RequestActionResult> {
+    return api.post<RequestActionResult>(
+      `/messaging/threads/${threadId}/request/${action}`,
+      {},
+    );
+  },
+
+  /** Route an org thread to a department and/or assignee (RBAC-gated). */
+  assignThread(
+    threadId: string,
+    body: { department_id?: string | null; assignee_id?: string | null },
+  ): Promise<AssignThreadResult> {
+    return api.post<AssignThreadResult>(
+      `/messaging/threads/${threadId}/assign`,
+      {
+        department_id: body.department_id ?? null,
+        assignee_id: body.assignee_id ?? null,
+      },
+    );
+  },
+
+  /** Mark an org thread resolved (or reopen it). */
+  resolveThread(
+    threadId: string,
+    resolved: boolean,
+  ): Promise<ResolveThreadResult> {
+    return api.post<ResolveThreadResult>(
+      `/messaging/threads/${threadId}/resolve`,
+      { resolved },
+    );
   },
 
   /** Thread detail (participant/moderator only; 404 otherwise). */
@@ -180,6 +397,7 @@ export const messagingApi = {
       body: body.body,
       reply_to_id: body.reply_to_id ?? null,
       client_dedupe_key: body.client_dedupe_key ?? null,
+      attachment_ids: body.attachment_ids ?? [],
     });
   },
 

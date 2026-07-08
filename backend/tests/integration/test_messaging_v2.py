@@ -10,9 +10,11 @@ discovery block. The ADR-0012 institutional invariants are still exercised by
 
 from __future__ import annotations
 
+import io
 import uuid
 
 import pytest
+from starlette.datastructures import Headers, UploadFile
 from app.core.config import get_settings
 from app.modules.messaging.application import (
     inbox_service,
@@ -255,3 +257,62 @@ async def test_realtime_signal_published_to_org_channel(db_session) -> None:
     ), "org inbox socket should receive a lightweight message.created signal (no body)"
     # The signal is a pure notification — it never carries message content.
     assert all("body" not in e for e in received)
+
+
+# --------------------------------------------------------------------------- #
+# Attachments: upload → bind on send → list → gated download + access control  #
+# --------------------------------------------------------------------------- #
+
+
+def _png_upload(name: str = "shot.png") -> UploadFile:
+    return UploadFile(
+        file=io.BytesIO(b"\x89PNG\r\n\x1a\n" + b"0" * 64),
+        filename=name,
+        headers=Headers({"content-type": "image/png"}),
+    )
+
+
+async def test_attachment_upload_send_list_and_gated_download(db_session) -> None:
+    from app.modules.messaging.application import attachment_service
+
+    _uu, _uorg, uni = await make_university(db_session)
+    student_user, student = await make_student(db_session)
+    # University → student (instant, accepted) so the student can also read.
+    out = await thread_service.create_thread(
+        db_session, principal=uni, kind="direct", context_type="support",
+        context_id=None, recipient_ids=[student_user.id], first_message="Hello",
+        ctx=CTX,
+    )
+    tid = uuid.UUID(out["id"])
+
+    att = await attachment_service.upload(
+        db_session, principal=uni, thread_id=tid, file=_png_upload(), ctx=CTX
+    )
+    assert att["kind"] == "image"
+    assert att["url"].startswith("/api/v1/messaging/attachments/")
+    assert "storage_key" not in att  # never leak the storage key
+
+    await message_service.send_message(
+        db_session, principal=uni, thread_id=tid, body="See attached",
+        attachment_ids=[uuid.UUID(att["id"])], ctx=CTX,
+    )
+    # The student sees the attachment on the message.
+    msgs, _c, _l = await message_service.list_messages(
+        db_session, principal=student, thread_id=tid
+    )
+    with_att = [m for m in msgs if m["attachments"]]
+    assert with_att and with_att[0]["attachments"][0]["id"] == att["id"]
+
+    # The student (a participant) may download it.
+    data, ctype, _fn = await attachment_service.download(
+        db_session, principal=student, attachment_id=uuid.UUID(att["id"])
+    )
+    assert ctype == "image/png" and data
+
+    # An unrelated partner cannot (404, not 403 — anti-enumeration).
+    _pu, _porg, outsider = await make_partner(db_session)
+    with pytest.raises(ResourceNotFoundError):
+        await attachment_service.download(
+            db_session, principal=outsider, attachment_id=uuid.UUID(att["id"])
+        )
+

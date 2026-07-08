@@ -310,6 +310,7 @@ async def send_message(
     body: str,
     reply_to_id: uuid.UUID | None = None,
     client_dedupe_key: str | None = None,
+    attachment_ids: list[uuid.UUID] | None = None,
     ctx: RequestContext,
     locale: str = "vi",
 ) -> dict:
@@ -429,6 +430,16 @@ async def send_message(
         ctx=ctx,
         locale=locale,
     )
+    if attachment_ids:
+        from app.modules.messaging.application import attachment_service
+
+        await attachment_service.bind_to_message(
+            session,
+            message=message,
+            thread_id=thread_id,
+            uploader_id=sender_id,
+            attachment_ids=attachment_ids,
+        )
     if thread.request_state == rules.REQUEST_PENDING and sender_is_initiator:
         thread.request_message_count += 1
         await session.flush()
@@ -440,8 +451,17 @@ async def send_message(
         session, thread_id=thread_id, event_type="message.created",
         exclude_user_id=sender_id,
     )
+    sent_attachments: list[dict] = []
+    if message.has_attachments:
+        from app.modules.messaging.application import attachment_service
+
+        by_msg = await attachment_service.list_for_messages(
+            session, message_ids=[message.id]
+        )
+        sent_attachments = by_msg.get(message.id, [])
     return presenters.message_item(
-        message, sender_label="", is_mine=True, locale=locale
+        message, sender_label="", is_mine=True, locale=locale,
+        attachments=sent_attachments,
     )
 
 
@@ -510,6 +530,11 @@ async def list_messages(
             "id": str(m.id),
         },
     )
+    from app.modules.messaging.application import attachment_service
+
+    attachments_by_msg = await attachment_service.list_for_messages(
+        session, message_ids=[m.id for m in page.items if m.has_attachments]
+    )
     items: list[dict] = []
     for m in page.items:
         if m.sender_id is None or m.sender_id == principal.user_id:
@@ -531,6 +556,7 @@ async def list_messages(
                 sender_label=sender_label,
                 is_mine=m.sender_id == principal.user_id,
                 locale=locale,
+                attachments=attachments_by_msg.get(m.id, []),
             )
         )
     return items, page.next_cursor, page.limit
