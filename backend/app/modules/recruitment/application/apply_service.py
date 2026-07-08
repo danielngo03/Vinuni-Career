@@ -43,7 +43,7 @@ from app.modules.recruitment.domain import lifecycle, timeline
 from app.modules.recruitment.domain.models import Application, ApplicationRevealRequest
 from app.modules.users.application import user_service
 from app.shared.audit import write_audit
-from app.shared.exceptions import ResourceNotFoundError
+from app.shared.exceptions import PermissionDeniedError, ResourceNotFoundError
 from app.shared.pagination import build_cursor_page, clamp_limit, decode_cursor
 from app.shared.permissions import Principal, permission_checker
 
@@ -536,6 +536,27 @@ def _is_partner_of(principal: Principal, app: Application) -> bool:
     )
 
 
+def _identity_visible_to_partner(principal: Principal, app: Application) -> bool:
+    """Whether THIS partner may see the applicant's deanonymized identity.
+
+    A non-anonymous applicant is never hidden (identity is visible to any
+    partner-of-org with ``applications:read`` — unchanged base behavior). An
+    anonymous applicant's identity is exposed only once the reveal handshake has
+    been ACCEPTED *and* the viewer holds ``candidate_identity:view_revealed_identity``
+    (`docs/PARTNER_RBAC_ANALYTICS_SPEC.md`). A member lacking that grant keeps
+    seeing the anonymous ``UV-xxxx`` handle even after acceptance.
+    """
+
+    if not app.is_anonymous:
+        return True
+    if app.reveal_approved_at is None:
+        return False
+    return permission_checker.can(
+        principal, "candidate_identity", "view_revealed_identity",
+        resource_org_id=app.org_id,
+    )
+
+
 async def get_application(
     session: AsyncSession,
     *,
@@ -623,7 +644,16 @@ async def get_application(
         await _record_candidate_access(
             session, app=app, principal=principal, event_type="application_opened",
         )
-        if app.reveal_approved_at is not None:
+        # ``identity_revealed_viewed`` fires only when a previously-anonymous
+        # identity is ACTUALLY deanonymized to this partner — i.e. reveal accepted
+        # AND the viewer holds ``candidate_identity:view_revealed_identity``. A
+        # member who opens a revealed application without that grant still sees the
+        # anonymous handle, so no identity-view event is logged for them.
+        if (
+            app.is_anonymous
+            and app.reveal_approved_at is not None
+            and _identity_visible_to_partner(principal, app)
+        ):
             await _record_candidate_access(
                 session, app=app, principal=principal, event_type="identity_revealed_viewed",
             )
@@ -746,14 +776,17 @@ async def _reveal_status_for(
 async def _partner_view(
     session: AsyncSession, *, app: Application, principal: Principal, locale: str
 ) -> dict:
+    identity_visible = _identity_visible_to_partner(principal, app)
     user = None
-    if app.reveal_approved_at is not None or not app.is_anonymous:
+    if identity_visible:
+        # Only load the applicant's PII row when this partner may actually see it.
         user = await user_service.get_by_id(session, app.applicant_id)
     reveal_status = await _reveal_status_for(
         session, application_id=app.id, org_id=app.org_id
     )
     return presenters.partner_application(
-        app, user=user, reveal_status=reveal_status, locale=locale
+        app, user=user, reveal_status=reveal_status,
+        identity_visible=identity_visible, locale=locale,
     )
 
 
@@ -831,6 +864,7 @@ async def get_application_cv_download(
     *,
     principal: Principal,
     application_id: uuid.UUID,
+    mode: str = "download",
     locale: str = "vi",
 ) -> dict:
     """Return a signed snapshot download URL.
@@ -838,6 +872,20 @@ async def get_application_cv_download(
     Applicant -> unwatermarked (owner). Authorized partner -> watermarked, but only
     once an anonymous applicant's reveal has been accepted (PDF view is unavailable
     until then per ``docs/BUSINESS_LOGIC.md`` §4.2). Anyone else -> ``404``.
+
+    ``mode`` selects the sensitive candidate-identity gate for a PARTNER caller
+    (the owner's own access is never gated by ``candidate_identity``):
+
+    - ``"download"`` (default) requires ``candidate_identity:download_cv`` and
+      logs ``cv_downloaded``.
+    - ``"view"`` (inline/watermarked preview) requires
+      ``candidate_identity:view_cv`` OR ``download_cv`` (download implies view)
+      and logs ``cv_previewed``.
+
+    Both gates are defense-in-depth ON TOP OF the ``applications:read``
+    partner-of-org check (`docs/PARTNER_RBAC_ANALYTICS_SPEC.md`); the Admin
+    wildcard and the seeded Recruiter role pass both, a Hiring Manager passes
+    ``view`` only, and an Analyst passes neither.
     """
 
     app = await _shared.load_application(session, application_id=application_id)
@@ -853,6 +901,23 @@ async def get_application_cv_download(
     if not _is_partner_of(principal, app):
         raise ResourceNotFoundError()
 
+    # Fine-grained candidate-identity CV gate (403 for a partner-of-org member
+    # lacking the specific grant; the coarse partner-of check above already
+    # returned 404 for non-partners).
+    if mode == "view":
+        can_view = permission_checker.can(
+            principal, "candidate_identity", "view_cv", resource_org_id=app.org_id
+        ) or permission_checker.can(
+            principal, "candidate_identity", "download_cv", resource_org_id=app.org_id
+        )
+        if not can_view:
+            raise PermissionDeniedError()
+    else:
+        permission_checker.require(
+            principal, "candidate_identity", "download_cv",
+            resource_org_id=app.org_id,
+        )
+
     # Anonymous + not yet revealed -> PDF download blocked.
     if app.is_anonymous and app.reveal_approved_at is None:
         raise ResourceNotFoundError()
@@ -860,7 +925,8 @@ async def get_application_cv_download(
     org_name = await _shared.org_display_name(session, app.org_id)
     watermark = f"VinUni Career • {org_name}"
     await _record_candidate_access(
-        session, app=app, principal=principal, event_type="cv_downloaded",
+        session, app=app, principal=principal,
+        event_type="cv_previewed" if mode == "view" else "cv_downloaded",
     )
     with access.authorized_download(
         snapshot_id=app.snapshot_id,

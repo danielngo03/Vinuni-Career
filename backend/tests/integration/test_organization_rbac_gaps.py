@@ -4,8 +4,6 @@ and org audit-log read.
 
 from __future__ import annotations
 
-import uuid
-
 import pytest
 from app.modules.organization.application import (
     audit_log_service,
@@ -69,7 +67,9 @@ async def test_hypothetical_permission_preview_for_pre_invite(db_session) -> Non
     from app.modules.organization.domain.models import Permission, Role
 
     _admin_user, org, admin = await make_org_with_admin(db_session)
-    role = Role(org_id=org.id, name="Recruiter", is_system=False)
+    # Distinct from the auto-seeded partner starter role names ("Recruiter" etc.)
+    # to avoid the (org_id, name) uniqueness clash.
+    role = Role(org_id=org.id, name="Sourcing Lead", is_system=False)
     db_session.add(role)
     await db_session.flush()
     db_session.add(Permission(role_id=role.id, resource_type="jobs", action="read"))

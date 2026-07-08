@@ -165,20 +165,30 @@ def partner_application(
     *,
     user,
     reveal_status: str | None,
+    identity_visible: bool | None = None,
     locale: str = "vi",
 ) -> dict:
-    revealed = app.reveal_approved_at is not None or not app.is_anonymous
-    cv_download_available = revealed
+    # ``reveal_unlocked`` = the anonymous handshake has been accepted (or the
+    # applicant was never anonymous) — i.e. whether the CV PDF is even
+    # downloadable. ``identity_visible`` is the finer question of whether THIS
+    # partner may see the deanonymized identity/PII: it defaults to
+    # ``reveal_unlocked`` (backward compatible), but the caller overrides it with
+    # the ``candidate_identity:view_revealed_identity`` grant decision so a member
+    # who lacks that grant keeps seeing the anonymous handle even post-reveal.
+    reveal_unlocked = app.reveal_approved_at is not None or not app.is_anonymous
+    show_identity = reveal_unlocked if identity_visible is None else identity_visible
+    cv_download_available = reveal_unlocked
     body = {
         "id": str(app.id),
         "job_id": str(app.job_id),
         "status": app.status,
         "status_label": lifecycle.status_label(app.status, locale=locale),
         "is_anonymous": app.is_anonymous,
-        "applicant": _applicant_identity(app, revealed=revealed, user=user, locale=locale),
+        "applicant": _applicant_identity(app, revealed=show_identity, user=user, locale=locale),
         "screening_answers": dict(app.screening_answers or {}),
-        # Cover letter may carry PII (signature) -> withheld until reveal accepted.
-        "cover_letter": app.cover_letter if revealed else None,
+        # Cover letter may carry PII (signature) -> withheld until the identity is
+        # actually visible to this partner (reveal accepted AND grant present).
+        "cover_letter": app.cover_letter if show_identity else None,
         "snapshot_id": str(app.snapshot_id) if app.snapshot_id else None,
         "cv_download_available": cv_download_available,
         "reveal_status": reveal_status or "none",

@@ -134,11 +134,20 @@ async def withdraw_application(
 )
 async def cv_download(
     application_id: uuid.UUID,
+    mode: str = Query(
+        "download",
+        pattern="^(download|view)$",
+        description=(
+            "Partner CV access mode: 'download' (candidate_identity:download_cv) "
+            "or 'view' inline preview (candidate_identity:view_cv). Ignored for "
+            "the applicant's own CV."
+        ),
+    ),
     auth: CurrentAuth = Depends(get_current_auth),
     session: AsyncSession = Depends(get_db_session),
 ) -> dict:
     data = await apply_service.get_application_cv_download(
-        session, principal=auth.principal, application_id=application_id,
+        session, principal=auth.principal, application_id=application_id, mode=mode,
     )
     return success(data)
 

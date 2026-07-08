@@ -53,11 +53,14 @@ async def test_member_without_permission_denied_403(db_session) -> None:
 async def test_admin_can_create_role_and_audits(db_session) -> None:
     _admin_user, org, admin = await make_org_with_admin(db_session)
     before = await _audit_count(db_session, "role.created")
+    # NB: a partner org now auto-seeds "Recruiter"/"Hiring Manager"/"Analyst"/
+    # "Coordinator" starter roles, so this test uses a distinct sample name to
+    # exercise custom-role creation without colliding with a seeded name.
     role = await rbac_service.create_role(
-        db_session, principal=admin, name="Recruiter", description="hires",
+        db_session, principal=admin, name="Sourcing Lead", description="hires",
         permissions=[("members", "read"), ("jobs", "read")], ctx=CTX,
     )
-    assert role["name"] == "Recruiter"
+    assert role["name"] == "Sourcing Lead"
     assert set(role["permissions"]) == {"members:read", "jobs:read"}
     after = await _audit_count(db_session, "role.created")
     assert after == before + 1

@@ -84,7 +84,15 @@ async def request_reveal(
         principal.org_id is None or principal.org_id != app.org_id
     ):
         raise ResourceNotFoundError()
-    permission_checker.require(principal, _RESOURCE, "read", resource_org_id=app.org_id)
+    # Sensitive candidate-identity action: gate on the fine-grained
+    # ``candidate_identity:request_reveal`` grant (not the coarse
+    # ``applications:read`` that every partner-of-org member holds), keeping the
+    # org tenant-isolation check. The Admin wildcard and the seeded Recruiter role
+    # both carry this grant (`docs/PARTNER_RBAC_ANALYTICS_SPEC.md`
+    # ``candidate_identity`` row); a read-only Analyst does not.
+    permission_checker.require(
+        principal, "candidate_identity", "request_reveal", resource_org_id=app.org_id
+    )
     assert principal.user_id is not None
 
     if not app.is_anonymous:

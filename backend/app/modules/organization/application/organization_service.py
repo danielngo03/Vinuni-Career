@@ -9,7 +9,7 @@ identity + membership, and the audit trail. RBAC is enforced here, not in router
 from __future__ import annotations
 
 import uuid
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from datetime import UTC, datetime
 
 from sqlalchemy import select
@@ -79,11 +79,176 @@ async def unique_slug(session: AsyncSession, display_name: str) -> str:
         candidate = f"{base}-{suffix}"
 
 
+# --------------------------------------------------------------------------- #
+# Starter partner roles (GAP A)                                               #
+# --------------------------------------------------------------------------- #
+#
+# On partner-org creation only the system ``Admin`` role (``*:*``) used to be
+# seeded, so a partner admin had to hand-build every non-admin role before it
+# could delegate anything. We now seed a small set of READY-TO-ASSIGN,
+# NON-SYSTEM roles (``is_system=False``) with sensible capability bundles drawn
+# ONLY from ``catalog.PERMISSION_CATALOG`` (each tuple is validated with
+# ``catalog.is_catalog_permission`` at seed time). These are ordinary roles the
+# admin can freely edit/rename/delete/assign through ``rbac_service`` — they are
+# convenience bundles, NOT hardcoded capability sources: every runtime
+# authorization still gates on the ``resource:action`` grant, never the role
+# name (``docs/PARTNER_RBAC_ANALYTICS_SPEC.md``). University orgs are unchanged.
+#
+# ``candidate_identity`` is deliberately split across the bundles so the
+# fine-grained CV/identity grants actually restrict something: Recruiter carries
+# the full sensitive set (request reveal + view revealed identity + view/download
+# CV); Hiring Manager may view a CV and a revealed identity but NOT download the
+# file; Analyst/Coordinator hold NO candidate_identity at all.
+PARTNER_STARTER_ROLES: dict[str, tuple[tuple[str, str], ...]] = {
+    "Recruiter": (
+        ("jobs", "read"),
+        ("jobs", "create"),
+        ("jobs", "update"),
+        ("applications", "read"),
+        ("applications", "update"),
+        ("applications", "review"),
+        ("pipeline", "read"),
+        ("pipeline", "move_candidate"),
+        ("pipeline", "rollback"),
+        ("scorecards", "read"),
+        ("scorecards", "submit"),
+        ("interviews", "read"),
+        ("interviews", "schedule"),
+        ("candidate_identity", "request_reveal"),
+        ("candidate_identity", "view_revealed_identity"),
+        ("candidate_identity", "view_cv"),
+        ("candidate_identity", "download_cv"),
+        ("ai_recruiting", "draft_jd"),
+        ("ai_recruiting", "screen_candidate"),
+        ("ai_recruiting", "suggest_scorecard"),
+    ),
+    "Hiring Manager": (
+        ("applications", "read"),
+        ("pipeline", "read"),
+        ("pipeline", "move_candidate"),
+        ("scorecards", "read"),
+        ("scorecards", "submit"),
+        ("scorecards", "read_aggregate"),
+        ("interviews", "read"),
+        ("interviews", "schedule"),
+        ("interviews", "assign"),
+        ("interviews", "complete"),
+        ("interviews", "cancel"),
+        ("offers", "create"),
+        ("offers", "approve"),
+        ("offers", "send"),
+        ("candidate_identity", "view_cv"),
+        ("candidate_identity", "view_revealed_identity"),
+        ("analytics", "view_job_metrics"),
+    ),
+    "Analyst": (
+        ("analytics", "view_job_metrics"),
+        ("analytics", "view_clicks"),
+        ("analytics", "export"),
+        ("applications", "read"),
+    ),
+    "Coordinator": (
+        ("interviews", "read"),
+        ("interviews", "schedule"),
+        ("interviews", "assign"),
+        ("interviews", "complete"),
+        ("interviews", "cancel"),
+        ("events", "read"),
+        ("events", "create"),
+        ("events", "update"),
+        ("events", "register"),
+        ("applications", "read"),
+    ),
+}
+
+_STARTER_ROLE_DESCRIPTIONS: dict[str, str] = {
+    "Recruiter": (
+        "Sources and screens candidates: jobs, applications, pipeline, "
+        "scorecards, interviews, candidate identity + CV access, and AI "
+        "recruiting assists."
+    ),
+    "Hiring Manager": (
+        "Decides on candidates: applications, pipeline, scorecards, "
+        "interviews, offers, CV/identity view (no CV download), and job "
+        "metrics."
+    ),
+    "Analyst": (
+        "Read-only recruiting analytics (job metrics, clicks, export) plus "
+        "application read. No candidate identity or CV access."
+    ),
+    "Coordinator": (
+        "Logistics: schedules interviews, manages events, and reads "
+        "applications. No candidate identity or CV access."
+    ),
+}
+
+
+async def _seed_partner_starter_roles(
+    session: AsyncSession,
+    *,
+    org: Organization,
+    audit_ctx: AuditContext,
+) -> list[Role]:
+    """Seed the ready-to-assign non-system partner roles (idempotent).
+
+    Skips any role whose name already exists for the org, so re-running against
+    an org that already has (some of) these roles never creates duplicates. Each
+    creation is audited exactly like the Admin role. No commit — the caller owns
+    the transaction so the whole bootstrap stays atomic.
+    """
+
+    existing_names = set(
+        (
+            await session.execute(select(Role.name).where(Role.org_id == org.id))
+        ).scalars().all()
+    )
+    seeded: list[Role] = []
+    for name, grants in PARTNER_STARTER_ROLES.items():
+        if name in existing_names:
+            continue  # idempotent: never duplicate an already-present role
+        # Defensive: a bundle referencing a non-catalog permission is a coding
+        # error (it would also be un-authorable via rbac_service) — fail loud.
+        for resource, action in grants:
+            if not catalog.is_catalog_permission(resource, action):
+                raise ValueError(
+                    f"starter role {name!r} references non-catalog permission "
+                    f"{resource}:{action}"
+                )
+        role = Role(
+            org_id=org.id,
+            name=name,
+            description=_STARTER_ROLE_DESCRIPTIONS[name],
+            is_system=False,
+        )
+        session.add(role)
+        await session.flush()
+        for resource, action in grants:
+            session.add(
+                Permission(role_id=role.id, resource_type=resource, action=action)
+            )
+        await session.flush()
+        await write_audit(
+            session, action="role.created", resource_type="role",
+            resource_id=role.id, context=audit_ctx,
+            after={
+                "name": name,
+                "is_system": False,
+                "permissions": sorted(f"{r}:{a}" for r, a in grants),
+            },
+        )
+        seeded.append(role)
+    return seeded
+
+
 @dataclass(slots=True)
 class OrgBootstrapResult:
     organization: Organization
     admin_role: Role
     membership: Membership
+    # Ready-to-assign non-system roles seeded for partner orgs (empty for
+    # university orgs). Convenience for callers/tests; the roles are also plain
+    # rows queryable through ``rbac_service``.
+    starter_roles: list[Role] = field(default_factory=list)
 
 
 async def create_org_with_admin(
@@ -179,8 +344,19 @@ async def create_org_with_admin(
         resource_id=membership.id, context=audit_ctx,
         after={"user_id": str(admin_user_id), "roles": [str(admin_role.id)]},
     )
+
+    # GAP A: seed ready-to-assign non-system roles for PARTNER orgs only, so a
+    # partner admin can delegate immediately without hand-building every role.
+    # University seeding is intentionally left unchanged.
+    starter_roles: list[Role] = []
+    if org_type == "partner":
+        starter_roles = await _seed_partner_starter_roles(
+            session, org=org, audit_ctx=audit_ctx
+        )
+
     return OrgBootstrapResult(
-        organization=org, admin_role=admin_role, membership=membership
+        organization=org, admin_role=admin_role, membership=membership,
+        starter_roles=starter_roles,
     )
 
 
@@ -225,10 +401,10 @@ async def update_organization(
         raise VersionConflictError()
 
     changed: dict[str, object] = {}
-    for field in _UPDATABLE_FIELDS:
-        if field in payload:
-            setattr(org, field, payload[field])
-            changed[field] = payload[field]
+    for field_name in _UPDATABLE_FIELDS:
+        if field_name in payload:
+            setattr(org, field_name, payload[field_name])
+            changed[field_name] = payload[field_name]
     if changed:
         org.version += 1
     await session.flush()
