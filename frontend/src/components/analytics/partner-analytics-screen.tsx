@@ -12,7 +12,7 @@ import {
   Users,
   TrendUp,
   TrendDown,
-  Sparkle,
+  ChartLineUp,
   SealCheck,
   LightbulbFilament,
 } from "@phosphor-icons/react";
@@ -206,22 +206,19 @@ export function PartnerAnalyticsScreen() {
             />
           </div>
 
-          {/* AI Hiring Insights */}
+          {/* Hiring insights — deterministic rollups of the metrics above (not model output). */}
           <section
             aria-labelledby="ai-insights-heading"
-            className="rounded-2xl border border-[var(--ai-accent)]/25 bg-gradient-to-br from-[var(--ai-accent-soft)] to-white/60 p-5 shadow-[0_2px_16px_rgba(11,34,57,0.06)] "
+            className="rounded-2xl border border-[var(--border-default)] bg-[var(--bg-subtle)] p-5 "
           >
             <h2
               id="ai-insights-heading"
               className="mb-4 flex items-center gap-2 text-base font-bold text-[var(--text-primary)]"
             >
-              <span className="icon-chip-success flex size-8 shrink-0 items-center justify-center rounded-xl shadow-sm">
-                <Sparkle aria-hidden weight="duotone" className="size-4.5 text-white" />
+              <span className="icon-chip-neutral flex size-8 shrink-0 items-center justify-center rounded-xl">
+                <ChartLineUp aria-hidden weight="duotone" className="size-4.5" />
               </span>
               {t("aiInsightsTitle")}
-              <span className="ml-auto rounded-full border border-[var(--ai-accent)]/30 bg-[var(--ai-accent-soft)] px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-[var(--ai-accent)]">
-                AI
-              </span>
             </h2>
             <ul className="space-y-3">
               {insights.map((insight, i) => (

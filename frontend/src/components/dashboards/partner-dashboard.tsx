@@ -13,7 +13,7 @@ import {
   Eye,
   ClockCounterClockwise,
   UserCircle,
-  Sparkle,
+  ChartLineUp,
   LightbulbFilament,
   ListChecks,
   ShieldCheck,
@@ -621,10 +621,10 @@ export function PartnerDashboard() {
                   <TodoCommandCenter items={todos} />
 
                   {hiringInsights.length > 0 && (
-                    <div className="marketplace-card rounded-[12px] border-l-[3px] border-l-[var(--brand-teal)] p-5">
+                    <div className="marketplace-card rounded-[12px] border-l-[3px] border-l-[var(--border-strong)] p-5">
                       <div className="mb-3 flex items-center gap-2">
-                        <span className="icon-chip-success flex size-8 shrink-0 items-center justify-center rounded-[10px]">
-                          <Sparkle aria-hidden weight="fill" className="size-4" />
+                        <span className="icon-chip-neutral flex size-8 shrink-0 items-center justify-center rounded-[10px]">
+                          <ChartLineUp aria-hidden weight="duotone" className="size-4" />
                         </span>
                         <span className="text-sm font-bold text-[var(--text-primary)]">
                           {tp("aiHiringHealthTitle")}
@@ -633,7 +633,7 @@ export function PartnerDashboard() {
                       <ul className="space-y-2">
                         {hiringInsights.map((insight, i) => (
                           <li key={i} className="flex items-start gap-2.5 text-sm text-[var(--text-secondary)]">
-                            <LightbulbFilament aria-hidden weight="duotone" className="mt-0.5 size-4 shrink-0 text-[var(--ai-accent)]" />
+                            <LightbulbFilament aria-hidden weight="duotone" className="mt-0.5 size-4 shrink-0 text-[var(--text-muted)]" />
                             {tp(insight.key, insight.values)}
                           </li>
                         ))}

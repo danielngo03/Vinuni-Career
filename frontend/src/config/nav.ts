@@ -150,7 +150,6 @@ export const WORKSPACE_NAV_GROUPS: Record<Persona, NavGroup[]> = {
         { key: "pipeline", href: "/pipeline", icon: Kanban },
         { key: "talentPool", href: "/talent-pool", icon: BookUser },
         { key: "recruitingWorkflows", href: "/workflow", icon: Workflow },
-        { key: "security", href: "/security", icon: ShieldCheck },
       ],
     },
     {
@@ -159,6 +158,24 @@ export const WORKSPACE_NAV_GROUPS: Record<Persona, NavGroup[]> = {
         { key: "events", href: "/events", icon: CalendarDays },
         { key: "advertising", href: "/advertising", icon: Megaphone },
         { key: "analytics", href: "/analytics", icon: BarChart3 },
+      ],
+    },
+    // Org control plane — previously only reachable via dashboard cards / the
+    // avatar menu (and `reviews` was fully orphaned). Grouped into one accordion
+    // so company profile, team, billing, access & security, employer reviews,
+    // and workspace settings have a discoverable home. `security` moved here
+    // from the Recruitment accordion (governance surface, not a pipeline tool).
+    {
+      key: "organization",
+      accordion: true,
+      icon: Building2,
+      items: [
+        { key: "companyProfile", href: "/company-profile", icon: Building2 },
+        { key: "team", href: "/team", icon: Users },
+        { key: "billing", href: "/billing", icon: CreditCard },
+        { key: "security", href: "/security", icon: ShieldCheck },
+        { key: "reviews", href: "/reviews", icon: Star },
+        { key: "settings", href: "/settings", icon: Settings },
       ],
     },
   ],

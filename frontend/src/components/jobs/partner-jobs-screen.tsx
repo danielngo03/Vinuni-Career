@@ -6,13 +6,13 @@ import { useLocale, useTranslations } from "next-intl";
 import { useInfiniteQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import {
   Briefcase,
+  ChartLineUp,
   CopySimple,
   Kanban,
   LightbulbFilament,
   Plus,
   ShieldWarning,
   SignIn,
-  Sparkle,
   WarningCircle,
 } from "@phosphor-icons/react";
 import { Link } from "@/i18n/navigation";
@@ -235,25 +235,25 @@ export function PartnerJobsScreen() {
         actions={newButton}
       />
 
-      {/* ── AI Job Posting Health ── */}
+      {/* ── Job posting health — deterministic rollup of the status counts below (not model output) ── */}
       {!query.isPending && statusFilter === "all" && (() => {
         const insights = derivePartnerJobInsights(rows);
         if (!insights.length) return null;
         return (
           <section
-            aria-label={t("aiInsightsTitle")}
-            className="mb-4 rounded-2xl border border-[var(--ai-accent)]/25 bg-gradient-to-br from-[var(--ai-accent-soft)] to-white/60 p-4 "
+            aria-label={t("jobPostingHealthTitle")}
+            className="mb-4 rounded-2xl border border-[var(--border-default)] bg-[var(--bg-subtle)] p-4 "
           >
             <div className="mb-3 flex items-center gap-2">
-              <span className="flex size-6 items-center justify-center rounded-lg icon-chip-info shadow-sm">
-                <Sparkle aria-hidden weight="duotone" className="size-3.5 text-white" />
+              <span className="flex size-6 items-center justify-center rounded-lg icon-chip-neutral">
+                <ChartLineUp aria-hidden weight="duotone" className="size-3.5" />
               </span>
-              <p className="text-sm font-semibold text-[var(--text-primary)]">{t("aiInsightsTitle")}</p>
+              <p className="text-sm font-semibold text-[var(--text-primary)]">{t("jobPostingHealthTitle")}</p>
             </div>
             <ul className="space-y-1.5">
               {insights.map((key) => (
                 <li key={key} className="flex items-start gap-2 text-xs text-[var(--text-secondary)]">
-                  <LightbulbFilament aria-hidden className="mt-0.5 size-3.5 shrink-0 text-[var(--ai-accent)]" />
+                  <LightbulbFilament aria-hidden className="mt-0.5 size-3.5 shrink-0 text-[var(--text-muted)]" />
                   {t(key)}
                 </li>
               ))}

@@ -11,6 +11,7 @@ import {
 } from "@tanstack/react-query";
 import {
   ArrowLeft,
+  ChartLineUp,
   DownloadSimple,
   Eye,
   Kanban,
@@ -19,7 +20,6 @@ import {
   Prohibit,
   ShieldWarning,
   SignIn,
-  Sparkle,
   UserCircle,
   UserFocus,
   Users,
@@ -537,19 +537,19 @@ export function PartnerCandidatesScreen({ jobId }: { jobId: string }) {
 
           {candidateInsights.length > 0 && (
             <section
-              className="mb-4 rounded-2xl border border-[var(--ai-accent)]/25 bg-gradient-to-br from-[var(--ai-accent-soft)] to-white/60 p-4 "
+              className="mb-4 rounded-2xl border border-[var(--border-default)] bg-[var(--bg-subtle)] p-4 "
               aria-label={t("aiInsightsTitle")}
             >
               <h2 className="mb-2.5 flex items-center gap-2 text-sm font-bold text-[var(--text-primary)]">
-                <span className="flex size-6 shrink-0 items-center justify-center rounded-lg icon-chip-info shadow-sm">
-                  <Sparkle aria-hidden weight="duotone" className="size-3.5 text-white" />
+                <span className="flex size-6 shrink-0 items-center justify-center rounded-lg icon-chip-neutral">
+                  <ChartLineUp aria-hidden weight="duotone" className="size-3.5" />
                 </span>
                 {t("aiInsightsTitle")}
               </h2>
               <ul className="space-y-1.5">
                 {candidateInsights.map((key) => (
                   <li key={key} className="flex items-start gap-2 text-xs text-[var(--text-secondary)]">
-                    <LightbulbFilament aria-hidden weight="duotone" className="mt-0.5 size-3.5 shrink-0 text-[var(--ai-accent)]" />
+                    <LightbulbFilament aria-hidden weight="duotone" className="mt-0.5 size-3.5 shrink-0 text-[var(--text-muted)]" />
                     {t(key)}
                   </li>
                 ))}

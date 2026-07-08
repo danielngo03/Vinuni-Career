@@ -11,7 +11,7 @@ import {
   GraduationCap,
   Briefcase,
   ArrowRight,
-  Sparkle,
+  ChartLineUp,
   LightbulbFilament,
 } from "@phosphor-icons/react";
 import { cn } from "@/lib/utils";
@@ -261,7 +261,7 @@ export function TalentPoolScreen() {
               {t("resultsCount", { count: query.data.pages[0].page.total })}
             </p>
           )}
-          {/* AI Talent Discovery Insights */}
+          {/* Talent discovery insights — deterministic rollup of the pool counts (not model output). */}
           {allCards.length > 0 && (() => {
             const total = query.data?.pages[0]?.page.total ?? allCards.length;
             const highCompletion = allCards.filter((c) => c.profile_completion >= 80).length;
@@ -273,18 +273,18 @@ export function TalentPoolScreen() {
             return (
               <div className={cn(
                 "rounded-2xl border p-4",
-                "border-[var(--ai-accent)]/25 bg-gradient-to-br from-[var(--ai-accent-soft)] to-white/60 ",
+                "border-[var(--border-default)] bg-[var(--bg-subtle)] ",
               )}>
                 <p className="mb-3 flex items-center gap-2 text-sm font-bold text-[var(--text-primary)]">
-                  <span className="flex size-6 shrink-0 items-center justify-center rounded-lg icon-chip-info shadow-sm">
-                    <Sparkle aria-hidden weight="duotone" className="size-3.5 text-white" />
+                  <span className="flex size-6 shrink-0 items-center justify-center rounded-lg icon-chip-neutral">
+                    <ChartLineUp aria-hidden weight="duotone" className="size-3.5" />
                   </span>
                   {t("aiInsightsTitle")}
                 </p>
                 <ul className="space-y-1.5">
                   {insights.map((s, i) => (
                     <li key={i} className="flex items-start gap-2 text-sm text-[var(--text-secondary)]">
-                      <LightbulbFilament aria-hidden weight="duotone" className="mt-0.5 size-4 shrink-0 text-[var(--ai-accent)]" />
+                      <LightbulbFilament aria-hidden weight="duotone" className="mt-0.5 size-4 shrink-0 text-[var(--text-muted)]" />
                       {s}
                     </li>
                   ))}
