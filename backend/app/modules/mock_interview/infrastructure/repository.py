@@ -149,6 +149,53 @@ async def aggregate_stats(
     }
 
 
+async def completed_with_reports(
+    session: AsyncSession, *, user_id: uuid.UUID, limit: int = 60
+) -> list[MockInterviewSession]:
+    """The student's completed sessions (carry report_json + grounding_json)."""
+
+    stmt = (
+        select(MockInterviewSession)
+        .where(
+            MockInterviewSession.user_id == user_id,
+            MockInterviewSession.status == STATUS_COMPLETED,
+        )
+        .order_by(MockInterviewSession.created_at.desc())
+        .limit(limit)
+    )
+    return list((await session.execute(stmt)).scalars().all())
+
+
+async def daily_counts(
+    session: AsyncSession, *, since: datetime
+) -> list[tuple[str, int]]:
+    """Sessions-per-day trend since ``since`` (single-table, portable)."""
+
+    s = MockInterviewSession
+    day = func.date(s.started_at)
+    stmt = (
+        select(day.label("d"), func.count())
+        .where(s.started_at >= since)
+        .group_by(day)
+        .order_by(day)
+    )
+    return [(str(d), int(c)) for d, c in (await session.execute(stmt)).all()]
+
+
+async def window_rows(
+    session: AsyncSession, *, since: datetime, limit: int = 500
+) -> list[MockInterviewSession]:
+    """Bounded set of recent sessions for JSON-side aggregation (focus/top jobs)."""
+
+    stmt = (
+        select(MockInterviewSession)
+        .where(MockInterviewSession.started_at >= since)
+        .order_by(MockInterviewSession.started_at.desc())
+        .limit(limit)
+    )
+    return list((await session.execute(stmt)).scalars().all())
+
+
 async def list_flagged(
     session: AsyncSession, *, limit: int = 50
 ) -> list[MockInterviewSession]:

@@ -9,6 +9,7 @@ transcript content is ever returned here.
 
 from __future__ import annotations
 
+from collections import Counter
 from datetime import UTC, datetime, timedelta
 from typing import Any
 
@@ -54,6 +55,31 @@ async def stats(
     completed = agg["completed"]
     agg["completion_rate"] = round(completed / total, 3) if total else 0.0
     agg["window_days"] = days
+    agg["trend"] = [
+        {"date": d, "count": c}
+        for d, c in await repo.daily_counts(session, since=since)
+    ]
+    # Focus mix + most-practiced jobs from a bounded recent window (grounding is
+    # leak-safe; only the job title is surfaced, never provider/model/CV content).
+    rows = await repo.window_rows(session, since=since, limit=500)
+    focus_counter: Counter[str] = Counter()
+    job_counter: Counter[str] = Counter()
+    job_titles: dict[str, str | None] = {}
+    for row in rows:
+        grounding = row.grounding_json if isinstance(row.grounding_json, dict) else {}
+        focus_counter[str(grounding.get("focus") or "unknown")] += 1
+        job_id = str(row.job_id)
+        job_counter[job_id] += 1
+        if job_id not in job_titles:
+            job = grounding.get("job")
+            job_titles[job_id] = (
+                job.get("title") if isinstance(job, dict) else None
+            )
+    agg["by_focus"] = dict(focus_counter)
+    agg["top_jobs"] = [
+        {"job_id": j, "title": job_titles.get(j), "count": c}
+        for j, c in job_counter.most_common(10)
+    ]
     return agg
 
 

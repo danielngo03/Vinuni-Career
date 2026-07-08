@@ -24,7 +24,7 @@ from app.modules.mock_interview.api.schemas import (
     ShareRequest,
     TurnRequest,
 )
-from app.modules.mock_interview.application import session_service
+from app.modules.mock_interview.application import progress_service, session_service
 from app.shared.exceptions import AppError
 from app.shared.responses import success
 
@@ -41,6 +41,15 @@ async def prep(
     data = await session_service.prep(
         session, principal=auth.principal, job_id=job_id, locale=locale
     )
+    return success(data)
+
+
+@router.get("/progress", summary="My progress across interviews (recurring themes)")
+async def progress(
+    auth: CurrentAuth = Depends(get_current_auth),
+    session: AsyncSession = Depends(get_db_session),
+) -> dict:
+    data = await progress_service.build_progress(session, principal=auth.principal)
     return success(data)
 
 
