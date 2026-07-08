@@ -976,6 +976,26 @@ TOOL_SPECS: dict[str, ToolSpec] = {
         ),
         audit_event_type="TOOL_GET_MODERATION_QUEUE",
     ),
+    "get_ai_review_queue": ToolSpec(
+        name="get_ai_review_queue",
+        description=(
+            "Get the AI/rule-FLAGGED jobs and events awaiting a human moderator's final "
+            "decision (the AI human-review queue), oldest flag first, each with a plain-language "
+            "flag reason, its age in hours, and whether it is overdue against the AI-review SLA. "
+            "Use this when staff ask what has been flagged, what needs a human decision, or which "
+            "flagged items are overdue. Advisory only — AI flags are not decisions; upholding "
+            "(rejecting) or dismissing a flag is a human call. Only available to university staff."
+        ),
+        parameters={"type": "object", "properties": {}, "required": []},
+        permission_class="read_only",
+        persona=[UNIVERSITY_STAFF],
+        required_permissions=["authenticated", "role:university_staff", "jobs:moderate"],
+        fallback=(
+            "I couldn't load the AI review queue right now. Check "
+            "/university/moderation."
+        ),
+        audit_event_type="TOOL_GET_AI_REVIEW_QUEUE",
+    ),
     "get_pending_partner_registrations": ToolSpec(
         name="get_pending_partner_registrations",
         description=(

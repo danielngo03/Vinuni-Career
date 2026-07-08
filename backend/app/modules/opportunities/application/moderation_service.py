@@ -39,6 +39,7 @@ from app.modules.users.application import user_service
 from app.shared.audit import AuditContext, write_audit
 from app.shared.exceptions import (
     AppError,
+    ConflictError,
     PermissionDeniedError,
     ResourceNotFoundError,
     ValidationFailedError,
@@ -286,6 +287,8 @@ async def reject_job(
     job.moderation_status = lifecycle.MOD_REJECTED
     job.moderation_note = reason.strip()
     job.moderation_reason_code = code
+    # Rejecting resolves any open flag; the flag timestamp no longer applies.
+    job.moderation_flagged_at = None
     job.approved_by = None
     job.approved_at = None
     job.published_at = None
@@ -471,6 +474,8 @@ async def escalate_job(
     if note and note.strip():
         job.moderation_note = note.strip()
     job.moderation_reason_code = code
+    # Anchor the AI human-review-queue SLA on when the flag was raised.
+    job.moderation_flagged_at = _now()
     job.version += 1
     await session.flush()
 
@@ -495,6 +500,135 @@ async def escalate_job(
             "note": (note or "").strip(),
             "escalated_by": str(principal.user_id),
         },
+    )
+    await session.commit()
+    await session.refresh(job)
+    return presenters.owner_job_summary(job, locale=locale)
+
+
+# --------------------------------------------------------------------------- #
+# AI human-review queue: human final say over an AI/rule flag (B-579)          #
+# --------------------------------------------------------------------------- #
+#
+# An AI/rule/moderator FLAG (``moderation_status=flagged``) is ADVISORY. A human
+# moderator has the final say and either UPHOLDS the flag (reject the item) or
+# DISMISSES it (clear the flag, returning the item to its prior reviewable
+# posture). Both are audited with the prior flag reason + the human's reason.
+# Upholding reuses the existing ``reject_job`` transition — no transition logic
+# is duplicated here.
+
+
+def _cleared_moderation_status(status: str) -> str:
+    """The ``moderation_status`` an item returns to when a human clears its flag.
+
+    The flag is an overlay on top of the lifecycle ``status`` (the escalate path
+    never changed ``status``), so clearing it just restores the moderation posture
+    implied by the current status: an ``active`` job returns to ``approved``, a
+    ``rejected`` job to ``rejected``, and anything still in a review posture
+    (``pending_review``/``draft``/``closed``/``expired``) to ``pending``.
+    """
+
+    if status == lifecycle.ACTIVE:
+        return lifecycle.MOD_APPROVED
+    if status == lifecycle.REJECTED:
+        return lifecycle.MOD_REJECTED
+    return lifecycle.MOD_PENDING
+
+
+async def uphold_flag(
+    session: AsyncSession,
+    *,
+    principal: Principal,
+    job_id: uuid.UUID,
+    reason: str,
+    reason_code: str | None = None,
+    ctx: RequestContext,
+    locale: str = "vi",
+) -> dict:
+    """Human UPHOLDS an AI/rule flag on a job -> reject it (final say).
+
+    Reuses the existing ``reject_job`` transition (transition guard, ``job.rejected``
+    audit, partner notification, commit). Records a dedicated ``job.flag_upheld``
+    audit first that captures the PRIOR flag reason so the advisory-flag ->
+    human-decision chain is traceable. ``reason_code`` defaults to the flag's own
+    code (the human is confirming that flag).
+    """
+
+    await _require_university_moderator(session, principal)
+    if not reason or not reason.strip():
+        raise ValidationFailedError(details={"reason": "reason_required"})
+    job = await _load_job(session, job_id)
+    if job is None:
+        raise ResourceNotFoundError()
+    if job.moderation_status != lifecycle.MOD_FLAGGED:
+        raise ConflictError(details={"reason": "not_flagged"})
+    if not lifecycle.can_transition("reject", job.status):
+        # A flagged item that is not in a rejectable posture (e.g. a live/active
+        # job) cannot be upheld-as-rejected on this path; dismiss or take it down
+        # through the normal lifecycle instead.
+        raise IllegalJobTransitionError(event="reject")
+
+    prior_reason = job.moderation_reason_code
+    code = _validate_reason_code(reason_code or prior_reason, reason=reason)
+    await write_audit(
+        session, action="job.flag_upheld", resource_type="job", resource_id=job.id,
+        context=_audit_ctx(principal, job, ctx),
+        before={"moderation_status": lifecycle.MOD_FLAGGED, "flag_reason_code": prior_reason},
+        after={"decision": "uphold", "resulting_status": lifecycle.REJECTED,
+               "reason_code": code, "human_reason": reason.strip()[:500],
+               "org_id": str(job.org_id)},
+    )
+    # Delegate to the existing reject transition (which flushes, audits
+    # ``job.rejected``, notifies the partner, and commits both audit rows).
+    return await reject_job(
+        session, principal=principal, job_id=job_id, reason=reason,
+        reason_code=code, ctx=ctx, locale=locale,
+    )
+
+
+async def clear_flag(
+    session: AsyncSession,
+    *,
+    principal: Principal,
+    job_id: uuid.UUID,
+    reason: str,
+    ctx: RequestContext,
+    locale: str = "vi",
+) -> dict:
+    """Human DISMISSES an AI/rule flag on a job -> clear it (false positive).
+
+    Returns the job to the moderation posture implied by its current lifecycle
+    status (approved if live, pending if awaiting review) without changing
+    ``status`` — the flag was only ever a ``moderation_status`` overlay, so no
+    lifecycle transition is involved. Audited (``job.flag_cleared``) with the
+    prior flag reason + the human's reason. Idempotent: clearing a job that is no
+    longer flagged is a no-op.
+    """
+
+    await _require_university_moderator(session, principal)
+    if not reason or not reason.strip():
+        raise ValidationFailedError(details={"reason": "reason_required"})
+    job = await _load_job(session, job_id)
+    if job is None:
+        raise ResourceNotFoundError()
+    if job.moderation_status != lifecycle.MOD_FLAGGED:
+        return presenters.owner_job_summary(job, locale=locale)  # idempotent
+
+    prior_reason = job.moderation_reason_code
+    new_status = _cleared_moderation_status(job.status)
+    job.moderation_status = new_status
+    job.moderation_reason_code = None
+    job.moderation_flagged_at = None
+    job.moderation_note = None
+    job.version += 1
+    await session.flush()
+
+    await write_audit(
+        session, action="job.flag_cleared", resource_type="job", resource_id=job.id,
+        context=_audit_ctx(principal, job, ctx),
+        before={"moderation_status": lifecycle.MOD_FLAGGED, "flag_reason_code": prior_reason},
+        after={"decision": "dismiss", "moderation_status": new_status,
+               "human_reason": reason.strip()[:500], "org_id": str(job.org_id)},
     )
     await session.commit()
     await session.refresh(job)

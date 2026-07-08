@@ -171,6 +171,12 @@ class Settings(BaseSettings):
     job_moderation_sla_hours: int = 48
     event_moderation_sla_hours: int = 48
     advertising_moderation_sla_hours: int = 48
+    # AI/rule-flagged content human-review SLA (`docs/BUSINESS_LOGIC.md` §11:
+    # "AI-flagged content ... SLA 4h"). Hours from the moment an item is FLAGGED
+    # (``moderation_flagged_at``) to its human-review ``due_by`` deadline surfaced
+    # in the AI human-review queue. Tighter than the 48h first-pass moderation SLA
+    # because a flagged item is a live risk awaiting a human's final say.
+    ai_review_moderation_sla_hours: int = 4
 
     # Advertising / sponsored placements (ADR-0009). Max concurrent in-flight
     # (pending_approval | approved | active) placements per advertiser org; a

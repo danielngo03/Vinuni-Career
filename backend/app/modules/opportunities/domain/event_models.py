@@ -95,6 +95,12 @@ class Event(Base):
     moderation_reason_code: Mapped[str | None] = mapped_column(
         String(30), nullable=True
     )
+    # When an AI/rule/moderator FLAG was raised (``moderation_status=flagged``);
+    # the anchor for the AI human-review-queue SLA, cleared on uphold/dismiss.
+    # NULL for a never-flagged event (read-model falls back to ``updated_at``).
+    moderation_flagged_at: Mapped[datetime | None] = mapped_column(
+        DateTime(timezone=True), nullable=True
+    )
     approved_by: Mapped[uuid.UUID | None] = mapped_column(
         ForeignKey("users.id"), nullable=True
     )

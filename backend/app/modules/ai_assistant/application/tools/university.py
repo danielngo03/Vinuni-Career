@@ -128,6 +128,58 @@ async def get_moderation_queue(
     }
 
 
+async def get_ai_review_queue(
+    session: AsyncSession, principal: Principal, args: dict
+) -> dict:
+    """AI/rule-FLAGGED jobs + events awaiting a human's final say, oldest first.
+
+    Read-only advisory summary: each item carries a user-safe flag reason LABEL
+    (never model confidence / provider / model / token internals), its age, and
+    whether it is overdue against the tight AI-review SLA. Upholding or dismissing
+    a flag remains a human decision made from the moderation surface.
+    """
+    from app.modules.opportunities.application import ai_review_queue_service
+
+    if not _staff_ready(principal):
+        return {"ok": False, "error": "university_auth_required"}
+
+    try:
+        items, counts = await ai_review_queue_service.list_queue(
+            session, principal=principal, limit=15, locale="en"
+        )
+    except (PermissionDeniedError, AuthRequiredError):
+        return {"ok": False, "error": "permission_denied"}
+    except Exception:
+        return {"ok": False, "error": "tool_failed"}
+
+    queue = [
+        {
+            "item_type": it.get("item_type"),
+            "id": it.get("id"),
+            "title": it.get("title", ""),
+            "flag_reason": it.get("flag_reason_label") or it.get("flag_reason_code"),
+            "status": it.get("status_label") or it.get("status"),
+            "age_hours": it.get("age_hours"),
+            "is_overdue": it.get("is_overdue", False),
+            "due_by": it.get("due_by"),
+            "url": "/university/moderation",
+        }
+        for it in items[:10]
+    ]
+    overdue = sum(1 for it in items if it.get("is_overdue"))
+    return {
+        "ok": True,
+        "queue": queue,
+        "counts": counts,
+        "total_flagged": counts.get("total", 0),
+        "overdue_count": overdue,
+        "note": (
+            "Advisory summary — AI/rule flags are not decisions. Upholding "
+            "(rejecting) or dismissing a flag is a human call."
+        ),
+    }
+
+
 async def get_pending_partner_registrations(
     session: AsyncSession, principal: Principal, args: dict
 ) -> dict:

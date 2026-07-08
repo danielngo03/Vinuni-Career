@@ -42,6 +42,7 @@ from app.modules.moderation.api.router import router as moderation_router
 from app.modules.notifications.api import router as notifications_router
 from app.modules.onboarding.api import router as onboarding_router
 from app.modules.opportunities.api import router as opportunities_router
+from app.modules.opportunities.api.ai_review_router import ai_review_router
 from app.modules.opportunities.api.events_router import (
     admin_events_router,
     events_router,
@@ -96,6 +97,7 @@ def register_routes(app: FastAPI) -> None:
     # parameterised /{event_id} route to avoid path capture.
     api.include_router(events_router)
     api.include_router(admin_events_router)
+    api.include_router(ai_review_router)
     api.include_router(documents_router.router)
     api.include_router(recruitment_router.router)
     api.include_router(reviews_router.router)

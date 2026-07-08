@@ -38,6 +38,7 @@ from app.modules.users.application import user_service
 from app.shared.audit import AuditContext, write_audit
 from app.shared.exceptions import (
     AppError,
+    ConflictError,
     PermissionDeniedError,
     ResourceNotFoundError,
     ValidationFailedError,
@@ -253,6 +254,8 @@ async def reject_event(
     event.moderation_status = event_lifecycle.MOD_REJECTED
     event.moderation_note = reason.strip()
     event.moderation_reason_code = code
+    # Rejecting resolves any open flag; the flag timestamp no longer applies.
+    event.moderation_flagged_at = None
     event.approved_by = None
     event.approved_at = None
     event.published_at = None
@@ -420,6 +423,8 @@ async def escalate_event(
     if note and note.strip():
         event.moderation_note = note.strip()
     event.moderation_reason_code = code
+    # Anchor the AI human-review-queue SLA on when the flag was raised.
+    event.moderation_flagged_at = _now()
     event.version += 1
     await session.flush()
 
@@ -444,6 +449,116 @@ async def escalate_event(
             "note": (note or "").strip(),
             "escalated_by": str(principal.user_id),
         },
+    )
+    await session.commit()
+    await session.refresh(event)
+    return presenters.owner_event_summary(event, locale=locale)
+
+
+# --------------------------------------------------------------------------- #
+# AI human-review queue: human final say over an AI/rule flag (B-579)          #
+# --------------------------------------------------------------------------- #
+
+
+def _cleared_moderation_status(status: str) -> str:
+    """The ``moderation_status`` an event returns to when a human clears its flag.
+
+    Mirrors the jobs helper: a ``published`` event returns to ``approved``, a
+    ``rejected`` event to ``rejected``, and anything still in a review posture to
+    ``pending``.
+    """
+
+    if status == event_lifecycle.PUBLISHED:
+        return event_lifecycle.MOD_APPROVED
+    if status == event_lifecycle.REJECTED:
+        return event_lifecycle.MOD_REJECTED
+    return event_lifecycle.MOD_PENDING
+
+
+async def uphold_flag_event(
+    session: AsyncSession,
+    *,
+    principal: Principal,
+    event_id: uuid.UUID,
+    reason: str,
+    reason_code: str | None = None,
+    ctx: RequestContext,
+    locale: str = "vi",
+) -> dict:
+    """Human UPHOLDS an AI/rule flag on an event -> reject it (final say).
+
+    Reuses the existing ``reject_event`` transition; records a dedicated
+    ``event.flag_upheld`` audit capturing the prior flag reason first.
+    """
+
+    await _require_university_moderator(session, principal)
+    if not reason or not reason.strip():
+        raise ValidationFailedError(details={"reason": "reason_required"})
+    event = await _load_event(session, event_id)
+    if event is None:
+        raise ResourceNotFoundError()
+    if event.moderation_status != event_lifecycle.MOD_FLAGGED:
+        raise ConflictError(details={"reason": "not_flagged"})
+    if not event_lifecycle.can_transition("reject", event.status):
+        raise IllegalEventTransitionError(event="reject")
+
+    prior_reason = event.moderation_reason_code
+    code = _validate_reason_code(reason_code or prior_reason, reason=reason)
+    await write_audit(
+        session, action="event.flag_upheld", resource_type="event",
+        resource_id=event.id, context=_audit_ctx(principal, ctx),
+        before={"moderation_status": event_lifecycle.MOD_FLAGGED,
+                "flag_reason_code": prior_reason},
+        after={"decision": "uphold", "resulting_status": event_lifecycle.REJECTED,
+               "reason_code": code, "human_reason": reason.strip()[:500],
+               "org_id": str(event.org_id)},
+    )
+    return await reject_event(
+        session, principal=principal, event_id=event_id, reason=reason,
+        reason_code=code, ctx=ctx, locale=locale,
+    )
+
+
+async def clear_flag_event(
+    session: AsyncSession,
+    *,
+    principal: Principal,
+    event_id: uuid.UUID,
+    reason: str,
+    ctx: RequestContext,
+    locale: str = "vi",
+) -> dict:
+    """Human DISMISSES an AI/rule flag on an event -> clear it (false positive).
+
+    Returns the event to the moderation posture implied by its current status
+    without changing ``status``. Audited (``event.flag_cleared``). Idempotent.
+    """
+
+    await _require_university_moderator(session, principal)
+    if not reason or not reason.strip():
+        raise ValidationFailedError(details={"reason": "reason_required"})
+    event = await _load_event(session, event_id)
+    if event is None:
+        raise ResourceNotFoundError()
+    if event.moderation_status != event_lifecycle.MOD_FLAGGED:
+        return presenters.owner_event_summary(event, locale=locale)  # idempotent
+
+    prior_reason = event.moderation_reason_code
+    new_status = _cleared_moderation_status(event.status)
+    event.moderation_status = new_status
+    event.moderation_reason_code = None
+    event.moderation_flagged_at = None
+    event.moderation_note = None
+    event.version += 1
+    await session.flush()
+
+    await write_audit(
+        session, action="event.flag_cleared", resource_type="event",
+        resource_id=event.id, context=_audit_ctx(principal, ctx),
+        before={"moderation_status": event_lifecycle.MOD_FLAGGED,
+                "flag_reason_code": prior_reason},
+        after={"decision": "dismiss", "moderation_status": new_status,
+               "human_reason": reason.strip()[:500], "org_id": str(event.org_id)},
     )
     await session.commit()
     await session.refresh(event)

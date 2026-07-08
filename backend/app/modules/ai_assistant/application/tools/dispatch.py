@@ -56,6 +56,7 @@ SUPPORTED_TOOL_NAMES = frozenset(
         # University staff operations tools
         "get_university_dashboard_summary",
         "get_moderation_queue",
+        "get_ai_review_queue",
         "get_pending_partner_registrations",
         "get_partner_overview",
         "get_at_risk_students",
@@ -296,6 +297,8 @@ async def _execute_tool(
             return await university.get_university_dashboard_summary(session, principal, args)
         if name == "get_moderation_queue":
             return await university.get_moderation_queue(session, principal, args)
+        if name == "get_ai_review_queue":
+            return await university.get_ai_review_queue(session, principal, args)
         if name == "get_pending_partner_registrations":
             return await university.get_pending_partner_registrations(session, principal, args)
         if name == "get_partner_overview":
