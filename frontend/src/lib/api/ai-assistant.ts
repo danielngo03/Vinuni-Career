@@ -153,6 +153,12 @@ export const aiAssistantApi = {
     return api.get<ChatSession[]>("/ai/chat/sessions");
   },
 
+  /** Rename a session. `title` must be a non-empty 1..120 char string
+   * (server-validated); returns the updated session descriptor. */
+  renameSession(sessionId: string, title: string): Promise<ChatSession> {
+    return api.patch<ChatSession>(`/ai/chat/sessions/${sessionId}`, { title });
+  },
+
   /** Get messages for a session. */
   getMessages(sessionId: string): Promise<ChatMessage[]> {
     return api.get<ChatMessage[]>(`/ai/chat/sessions/${sessionId}/messages`);
@@ -179,6 +185,31 @@ export const aiAssistantApi = {
     return api.post<ChatMessage>(`/ai/chat/sessions/${sessionId}/messages`, {
       text,
     });
+  },
+
+  /** Regenerate the last assistant reply in a session. Takes no body and
+   * returns the fresh assistant message; the previous reply is superseded
+   * server-side. Errors if the session has no assistant message yet. */
+  regenerateMessage(sessionId: string): Promise<ChatMessage> {
+    return api.post<ChatMessage>(
+      `/ai/chat/sessions/${sessionId}/messages/regenerate`,
+      {},
+    );
+  },
+
+  /** Edit a prior USER message and re-run the conversation from that point.
+   * The server soft-deletes every later message (truncate-and-replay) and
+   * returns the new assistant reply, so callers must refetch the whole thread
+   * rather than splice the tail. */
+  editMessage(
+    sessionId: string,
+    messageId: string,
+    text: string,
+  ): Promise<ChatMessage> {
+    return api.patch<ChatMessage>(
+      `/ai/chat/sessions/${sessionId}/messages/${messageId}`,
+      { text },
+    );
   },
 
   /** Confirm and execute a pending tool action. */
