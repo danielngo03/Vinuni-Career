@@ -58,3 +58,24 @@ class MessageDeleteNotAllowedError(AppError):
     code = "PERMISSION_DENIED"
     http_status = 403
     message = "Bạn không thể xóa tin nhắn này."
+
+
+class RequestPendingError(AppError):
+    # 409 — the message request has hit its intro-message cap and is waiting for the
+    # recipient to accept (Messaging V2 gate). Friendly, non-enumerating.
+    code = "REQUEST_LIMIT_REACHED"
+    http_status = 409
+    message = (
+        "Bạn đã gửi hết số tin nhắn giới thiệu. Vui lòng chờ bên kia chấp nhận "
+        "để tiếp tục trò chuyện."
+    )
+
+    def __init__(self, *, reason: str = "request_pending_limit") -> None:
+        super().__init__(self.message, details={"reason": reason})
+
+
+class RequestNotActionableError(AppError):
+    # 409 — accept/decline/block on a thread that is not a pending request.
+    code = "REQUEST_NOT_PENDING"
+    http_status = 409
+    message = "Yêu cầu nhắn tin này không còn ở trạng thái chờ duyệt."

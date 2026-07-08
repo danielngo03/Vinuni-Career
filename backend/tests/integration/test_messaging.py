@@ -144,14 +144,25 @@ async def test_partner_to_student_without_application_blocked(db_session) -> Non
         )
 
 
-async def test_partner_to_student_missing_context_rejected(db_session) -> None:
+async def test_partner_to_student_cold_opens_pending_request(db_session) -> None:
+    # Messaging V2 (owner decision 2026-07-09): a partner MAY cold-message a student
+    # without an application, but it opens a message REQUEST (pending) — capped intro
+    # messages until the student accepts — and the student stays masked to the partner
+    # while pending (the partner initiated; the student did not choose to reach out).
     _pu, porg, partner = await make_partner(db_session)
     student_user, _student = await make_student(db_session)
-    with pytest.raises(ValidationFailedError):
-        await thread_service.create_thread(
-            db_session, principal=partner, kind="direct", context_type=None,
-            context_id=None, recipient_ids=[student_user.id], ctx=CTX,
+    out = await thread_service.create_thread(
+        db_session, principal=partner, kind="direct", context_type=None,
+        context_id=None, recipient_ids=[student_user.id], first_message="Hello",
+        ctx=CTX,
+    )
+    thread = (
+        await db_session.execute(
+            select(MessageThread).where(MessageThread.id == uuid.UUID(out["id"]))
         )
+    ).scalar_one()
+    assert thread.request_state == "pending"
+    assert thread.thread_kind == "org_dm"
 
 
 async def test_partner_to_student_with_application_ok(db_session) -> None:
@@ -384,14 +395,24 @@ async def test_student_initiates_support_ok(db_session) -> None:
     assert out["id"]
 
 
-async def test_student_cannot_initiate_partner_thread(db_session) -> None:
+async def test_student_initiates_partner_opens_pending_request(db_session) -> None:
+    # Messaging V2 (owner decision 2026-07-09): a student MAY now initiate to a partner
+    # Page — it opens a message REQUEST (pending, 3 intro messages) until the partner
+    # accepts. Student↔student stays a hard block (tested separately).
     _su, student = await make_student(db_session)
     partner_user, _porg, _partner = await make_partner(db_session)
-    with pytest.raises(MessagingNotAllowedError):
-        await thread_service.create_thread(
-            db_session, principal=student, kind="direct", context_type=None,
-            context_id=None, recipient_ids=[partner_user.id], ctx=CTX,
+    out = await thread_service.create_thread(
+        db_session, principal=student, kind="direct", context_type=None,
+        context_id=None, recipient_ids=[partner_user.id], first_message="Hi, I'm keen",
+        ctx=CTX,
+    )
+    thread = (
+        await db_session.execute(
+            select(MessageThread).where(MessageThread.id == uuid.UUID(out["id"]))
         )
+    ).scalar_one()
+    assert thread.request_state == "pending"
+    assert thread.request_message_count == 1
 
 
 async def test_student_replies_into_partner_thread(db_session) -> None:

@@ -97,6 +97,8 @@ class Settings(BaseSettings):
     # policy, V1 flat). Single weekly window, resets at UTC Monday. The daily
     # request-count window was removed (WS-1) — cost-weighted metering is now the
     # masked-energy account; this weekly cap is a coarse safety net for chat.
+    ai_session_request_limit: int = 50
+    ai_session_window_hours: int = 3
     ai_weekly_request_limit: int = 200
     openai_compatible_base_url: str = "https://openrouter.ai/api/v1"
 
@@ -321,6 +323,21 @@ class Settings(BaseSettings):
     messaging_inactive_application_daily_cap: int = 3
     # Own-message soft-delete window (ADR-0012 §5 / BUSINESS_LOGIC §14.3).
     messaging_delete_window_minutes: int = 10
+    # Messaging V2 (owner decision 2026-07-09). First-contact "message request"
+    # gate: a NEW conversation between two parties with no prior accepted thread
+    # starts ``pending`` and the initiator may send at most this many intro
+    # messages before the recipient accepts (university-initiated / internal /
+    # application-bound threads skip the gate). See
+    # ``docs/superpowers/specs/2026-07-09-messaging-v2-design.md``.
+    messaging_request_message_limit: int = 3
+    # Attachment upload ceiling (per file). Type allowlist lives in the service.
+    messaging_attachment_max_mb: int = 15
+    # Optional Redis fan-out for realtime WS across workers. When unset the
+    # in-process asyncio bus is used (single-worker local dev). Never logged.
+    messaging_redis_url: str | None = None
+    # Master switch for the realtime WebSocket endpoint (persist-before-deliver
+    # is unconditional; this only gates live push — polling is the fallback).
+    messaging_realtime_enabled: bool = True
 
     audit_log_enabled: bool = True
     pii_log_redaction_enabled: bool = True

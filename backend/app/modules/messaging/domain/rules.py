@@ -31,7 +31,46 @@ KINDS = frozenset({KIND_DIRECT, KIND_ANNOUNCEMENT})
 CONTEXT_APPLICATION = "application"
 CONTEXT_SUPPORT = "support"
 CONTEXT_TEAM = "team"
-CONTEXT_TYPES = frozenset({CONTEXT_APPLICATION, CONTEXT_SUPPORT, CONTEXT_TEAM})
+# Messaging V2 (owner decision 2026-07-09): richer contexts for the new axes.
+CONTEXT_INQUIRY = "inquiry"  # student/partner → org, general (message-request gated)
+CONTEXT_ORG = "org"  # org ↔ org (university ↔ partner), Page-to-Page
+CONTEXT_INTERNAL = "internal"  # staff ↔ staff / staff ↔ department, same org
+CONTEXT_TYPES = frozenset(
+    {
+        CONTEXT_APPLICATION,
+        CONTEXT_SUPPORT,
+        CONTEXT_TEAM,
+        CONTEXT_INQUIRY,
+        CONTEXT_ORG,
+        CONTEXT_INTERNAL,
+    }
+)
+
+# Thread kinds (V2 discriminator; the legacy ``kind`` column stays direct/announcement).
+TK_APPLICATION = "application"
+TK_SUPPORT = "support"
+TK_ORG_DM = "org_dm"  # individual ↔ org Page
+TK_ORG_TO_ORG = "org_to_org"  # org Page ↔ org Page
+TK_INTERNAL = "internal"  # colleagues / department, same org
+TK_ANNOUNCEMENT = "announcement"
+
+# Request-gate states (first-contact "message request").
+REQUEST_ACCEPTED = "accepted"
+REQUEST_PENDING = "pending"
+REQUEST_DECLINED = "declined"
+REQUEST_BLOCKED = "blocked"
+REQUEST_STATES = frozenset(
+    {REQUEST_ACCEPTED, REQUEST_PENDING, REQUEST_DECLINED, REQUEST_BLOCKED}
+)
+
+# Party vocabularies.
+PARTY_USER = "user"
+PARTY_ORG = "org"
+IDENTITY_PERSON = "person"
+IDENTITY_ORG = "org"
+ASSIGN_UNASSIGNED = "unassigned"
+ASSIGN_ASSIGNED = "assigned"
+ASSIGN_RESOLVED = "resolved"
 
 STATUS_ACTIVE = "active"
 STATUS_ARCHIVED = "archived"
@@ -51,6 +90,10 @@ REASON_STUDENT_CANNOT_INITIATE_PARTNER = "student_cannot_initiate_partner"
 REASON_NOT_ALLOWED = "not_allowed"
 REASON_INVALID_KIND = "invalid_kind"
 REASON_ANNOUNCEMENT_UNIVERSITY_ONLY = "announcement_university_only"
+# V2 send-time gate reasons.
+REASON_REQUEST_PENDING_LIMIT = "request_pending_limit"
+REASON_REQUEST_DECLINED = "request_declined"
+REASON_REQUEST_BLOCKED = "request_blocked"
 
 # Send-time reason codes.
 REASON_NOT_PARTICIPANT = "not_participant"
@@ -80,9 +123,15 @@ def evaluate_open(
 ) -> str | None:
     """Return ``None`` if opening the thread is allowed, else a stable reason code.
 
-    ``relationship_ok`` (partner↔student): a bound application exists where
-    ``application.org_id == sender.org_id`` AND ``application.applicant_id ==
-    recipient``. ``same_org``: every recipient shares the sender's org (team threads).
+    Messaging V2 (owner decision 2026-07-09) relaxes the ADR-0012 matrix so any
+    non-university party may INITIATE cross-persona — but whether the thread starts
+    ``accepted`` or ``pending`` (the 3-message request gate) is a separate decision
+    made by :mod:`app.modules.messaging.domain.gate`, NOT here. This predicate only
+    answers "is this axis structurally allowed at all".
+
+    Hard invariants preserved: student↔student is the first, unconditional block;
+    cross-org partner↔partner is refused (enumeration-masked to 404 at the service);
+    announcements are university-authored only.
     """
 
     # 1) STUDENT↔STUDENT HARD BLOCK — first, unconditional.
@@ -98,31 +147,31 @@ def evaluate_open(
             return REASON_ANNOUNCEMENT_UNIVERSITY_ONLY
         return None
 
-    # 2) University staff may initiate a direct thread to anyone.
+    # 2) University staff may initiate a direct thread to anyone (instant, no gate).
     if sender_persona == UNIVERSITY_STAFF:
         return None
 
     # 3) Partner sender.
     if sender_persona == PARTNER_MEMBER:
-        # Partner ↔ partner (team) must be same org.
+        # Partner ↔ partner: internal team only (same org). Cross-org is refused.
         if all(p == PARTNER_MEMBER for p in recipient_personas):
             return None if same_org else REASON_PARTNER_CROSS_ORG
-        # Partner ↔ student/alumni: requires an application-bound relationship.
+        # Partner → university (Page↔Page): allowed (gated).
+        if all(p == UNIVERSITY_STAFF for p in recipient_personas):
+            return None
+        # Partner → student/alumni: allowed. An application context skips the gate
+        # (recruitment consent + reveal masking); a cold thread is request-gated and
+        # keeps the student masked to the partner until accepted (see gate/thread_view).
         if any(p in _STUDENT_SIDE for p in recipient_personas):
-            if context_type != CONTEXT_APPLICATION or not relationship_ok:
-                return REASON_PARTNER_NEEDS_APPLICATION
             return None
         return REASON_NOT_ALLOWED
 
-    # 4) Student/alumni sender.
+    # 4) Student/alumni sender — may initiate to any org (partner or university),
+    #    request-gated. Student↔student is already blocked above.
     if sender_persona in _STUDENT_SIDE:
-        # May initiate support to university only.
-        if all(p == UNIVERSITY_STAFF for p in recipient_personas):
-            return None
-        # May NOT initiate a partner thread (reply-only into an existing one).
-        if any(p == PARTNER_MEMBER for p in recipient_personas):
-            return REASON_STUDENT_CANNOT_INITIATE_PARTNER
-        return REASON_NOT_ALLOWED
+        if any(p in _STUDENT_SIDE for p in recipient_personas):
+            return REASON_STUDENT_TO_STUDENT
+        return None
 
     return REASON_NOT_ALLOWED
 

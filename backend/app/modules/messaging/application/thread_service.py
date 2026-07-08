@@ -18,22 +18,25 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from app.core.config import get_settings
 from app.modules.auth.application.context import RequestContext
 from app.modules.messaging.api import presenters
-from app.modules.messaging.application import _shared
+from app.modules.messaging.application import _shared, party_service
 from app.modules.messaging.application.errors import (
     ContextRequiredError,
     MessageRateLimitedError,
     MessagingNotAllowedError,
     StudentToStudentBlockedError,
 )
+from app.modules.messaging.application.party_service import RecipientUser
 from app.modules.messaging.application.recruitment_relationship import (
     ApplicationRelationship,
     load_relationship,
 )
-from app.modules.messaging.domain import rules
+from app.modules.messaging.domain import gate, parties, rules
 from app.modules.messaging.domain.models import (
     MessageThread,
     MessageThreadParticipant,
+    MessageThreadParty,
 )
+from app.modules.organization.application import org_reporting_facade
 from app.modules.users.application import user_read_facade
 from app.shared.audit import write_audit
 from app.shared.exceptions import (
@@ -103,6 +106,41 @@ async def _enforce_thread_rate_limit(
         )
 
 
+async def _org_persona(session: AsyncSession, org_id: uuid.UUID) -> str:
+    """The matrix persona an org presents as: university_staff or partner_member."""
+
+    return (
+        rules.UNIVERSITY_STAFF
+        if await org_reporting_facade.is_university_org(session, org_id)
+        else rules.PARTNER_MEMBER
+    )
+
+
+async def _existing_direct_org_thread(
+    session: AsyncSession, *, initiator_id: uuid.UUID, target_org_id: uuid.UUID
+) -> MessageThread | None:
+    """Reuse an existing live 1:1 thread this initiator has with ``target_org_id``
+    (prevents duplicate pending requests / re-opening a Page conversation)."""
+
+    stmt = (
+        select(MessageThread)
+        .join(
+            MessageThreadParty, MessageThreadParty.thread_id == MessageThread.id
+        )
+        .where(
+            MessageThread.created_by == initiator_id,
+            MessageThread.deleted_at.is_(None),
+            MessageThread.context_type.in_(
+                [rules.CONTEXT_INQUIRY, rules.CONTEXT_ORG]
+            ),
+            MessageThreadParty.party_kind == rules.PARTY_ORG,
+            MessageThreadParty.org_id == target_org_id,
+        )
+        .limit(1)
+    )
+    return (await session.execute(stmt)).scalars().first()
+
+
 async def create_thread(
     session: AsyncSession,
     *,
@@ -111,11 +149,25 @@ async def create_thread(
     context_type: str | None,
     context_id: uuid.UUID | None,
     recipient_ids: list[uuid.UUID],
+    target_org_id: uuid.UUID | None = None,
+    target_department_id: uuid.UUID | None = None,
     subject: str | None = None,
     first_message: str | None = None,
     ctx: RequestContext,
     locale: str = "vi",
 ) -> dict:
+    """Create a conversation (Messaging V2).
+
+    Four target modes, mutually exclusive by precedence:
+      1. ``application`` context (partner→candidate) — recipient resolved server-side
+         from the application; masked; no request gate (recruitment consent).
+      2. ``target_org_id`` — individual/Page → an org Page (student→partner/uni,
+         partner→university). Request-gated unless the initiator is a university Page
+         or a prior accepted thread exists.
+      3. ``target_department_id`` — internal department channel (same org, shared).
+      4. ``recipient_ids`` — user recipients (internal colleagues, university→user).
+    """
+
     sender_id = await _require_authenticated(principal)
 
     if kind not in rules.KINDS:
@@ -123,31 +175,131 @@ async def create_thread(
     if context_type is not None and context_type not in rules.CONTEXT_TYPES:
         raise ValidationFailedError(details={"field": "context_type"})
 
-    # Partner opening an application-context thread (ADR-0012 §3/§8): while the
-    # application is anonymous the recruitment contract WITHHOLDS the student's
-    # user id, so the partner has no ``recipient_ids`` to pass. Resolve the
-    # recipient = the application's bound ``applicant_id`` SERVER-SIDE — the partner
-    # never passes, nor sees, the student's identity. The application context is
-    # authoritative: any client-supplied ``recipient_ids`` are IGNORED in favor of
-    # the resolved applicant, so this path can ONLY reach the bound applicant.
     relationship: ApplicationRelationship | None = None
+    recipient_users: list[RecipientUser] = []
+    recipient_personas: list[str] = []
+    recipient_org_ids: set[uuid.UUID] = set()
+    thread_org_id = principal.org_id
+    is_application = False
+
+    # -- Mode 1: partner→candidate application thread (existing behavior) ---------
     if (
         principal.persona == rules.PARTNER_MEMBER
         and context_type == rules.CONTEXT_APPLICATION
         and context_id is not None
     ):
         relationship = await load_relationship(session, application_id=context_id)
-        # Unknown application, or one owned by another org -> 404 (never 403) so a
-        # partner cannot enumerate applications it does not own.
         if relationship is None or relationship.org_id != principal.org_id:
             raise ResourceNotFoundError()
         recipient_ids = [relationship.applicant_id]
 
+    # -- Mode 2: initiate to an org Page ----------------------------------------
+    if target_org_id is not None:
+        if not principal.org_id and not principal.is_superadmin:
+            pass  # student/alumni have no org — allowed as individual initiators
+        target = await org_reporting_facade.summary_for(session, target_org_id)
+        if target is None or target.org_type not in ("partner", "university"):
+            raise ResourceNotFoundError()
+        if target_org_id == principal.org_id:
+            # Reaching your own org as a Page makes no sense; use internal instead.
+            raise ValidationFailedError(details={"reason": "self_org_target"})
+        recipient_personas = [await _org_persona(session, target_org_id)]
+        recipient_org_ids = {target_org_id}
+        same_org = False
+        context_type = context_type or (
+            rules.CONTEXT_ORG
+            if parties.is_org_side(principal.persona)
+            else rules.CONTEXT_INQUIRY
+        )
+        # Tenant/moderation scope: prefer the university side, else the target org.
+        thread_org_id = (
+            target_org_id
+            if recipient_personas[0] == rules.UNIVERSITY_STAFF
+            else target_org_id
+        )
+        reason = rules.evaluate_open(
+            sender_persona=principal.persona,
+            recipient_personas=recipient_personas,
+            kind=kind,
+            context_type=context_type,
+            relationship_ok=False,
+            same_org=same_org,
+        )
+        _raise_open_reason(reason)
+        existing = await _existing_direct_org_thread(
+            session, initiator_id=sender_id, target_org_id=target_org_id
+        )
+        if existing is not None:
+            return await _present_created(
+                session, thread=existing, principal=principal, locale=locale
+            )
+        thread_kind = parties.thread_kind_for(
+            sender_persona=principal.persona,
+            recipient_personas=recipient_personas,
+            kind=kind,
+            same_org=False,
+            is_application=False,
+        )
+        return await _persist_thread(
+            session,
+            principal=principal,
+            sender_id=sender_id,
+            kind=kind,
+            context_type=context_type,
+            context_id=None,
+            thread_org_id=thread_org_id,
+            thread_kind=thread_kind,
+            recipient_users=[],
+            target_org_id=target_org_id,
+            target_department_id=None,
+            relationship=None,
+            subject=subject,
+            first_message=first_message,
+            initiator_is_university=(principal.persona == rules.UNIVERSITY_STAFF),
+            is_internal=False,
+            is_application=False,
+            ctx=ctx,
+            locale=locale,
+        )
+
+    # -- Mode 3: internal department channel ------------------------------------
+    if target_department_id is not None:
+        if not parties.is_org_side(principal.persona) or principal.org_id is None:
+            raise MessagingNotAllowedError(details={"reason": rules.REASON_NOT_ALLOWED})
+        # The department must belong to the sender's org (else 404 anti-enumeration).
+        exists = await _department_in_org(
+            session, org_id=principal.org_id, department_id=target_department_id
+        )
+        if not exists:
+            raise ResourceNotFoundError()
+        context_type = rules.CONTEXT_INTERNAL
+        thread_org_id = principal.org_id
+        return await _persist_thread(
+            session,
+            principal=principal,
+            sender_id=sender_id,
+            kind=kind,
+            context_type=context_type,
+            context_id=None,
+            thread_org_id=thread_org_id,
+            thread_kind=rules.TK_INTERNAL,
+            recipient_users=[],
+            target_org_id=None,
+            target_department_id=target_department_id,
+            relationship=None,
+            subject=subject,
+            first_message=first_message,
+            initiator_is_university=(principal.persona == rules.UNIVERSITY_STAFF),
+            is_internal=True,
+            is_application=False,
+            ctx=ctx,
+            locale=locale,
+        )
+
+    # -- Mode 4 (and application mode 1): user recipients ------------------------
     recipient_ids = [r for r in dict.fromkeys(recipient_ids) if r != sender_id]
     if not recipient_ids:
         raise ValidationFailedError(details={"field": "recipient_ids"})
-
-    # Every recipient must be a real user (else indistinguishable from missing).
     known = await user_read_facade.existing_user_ids(session, recipient_ids)
     if known != set(recipient_ids):
         raise ResourceNotFoundError()
@@ -156,22 +308,16 @@ async def create_thread(
         session, recipient_ids=recipient_ids
     )
 
-    # The org that scopes this thread: partner org for application/team (the sender's
-    # org), the university org for support/announcement (the sender's org).
-    thread_org_id = principal.org_id
-
-    # Partner↔student requires a bound application relationship (and its context).
     is_partner_student = (
         principal.persona == rules.PARTNER_MEMBER
         and any(p in (rules.STUDENT, rules.ALUMNI) for p in recipient_personas)
+        and context_type == rules.CONTEXT_APPLICATION
     )
     if is_partner_student:
-        if context_type != rules.CONTEXT_APPLICATION or context_id is None:
+        if context_id is None:
             raise ContextRequiredError()
         if relationship is None:
             relationship = await load_relationship(session, application_id=context_id)
-        # The relationship must bind THIS partner org to THIS recipient (else 404 —
-        # a partner cannot fabricate a thread to an arbitrary student).
         if (
             relationship is None
             or relationship.org_id != principal.org_id
@@ -179,6 +325,7 @@ async def create_thread(
         ):
             raise ResourceNotFoundError()
         thread_org_id = relationship.org_id
+        is_application = True
 
     same_org = bool(recipient_org_ids) and recipient_org_ids <= {principal.org_id}
 
@@ -190,16 +337,9 @@ async def create_thread(
         relationship_ok=relationship is not None,
         same_org=same_org,
     )
-    if reason == rules.REASON_STUDENT_TO_STUDENT:
-        raise StudentToStudentBlockedError()
-    if reason == rules.REASON_PARTNER_CROSS_ORG:
-        # Cross-org partner↔partner is enumeration-masked as missing (ADR-0012 §5).
-        raise ResourceNotFoundError()
-    if reason is not None:
-        raise MessagingNotAllowedError(details={"reason": reason})
+    _raise_open_reason(reason)
 
     if thread_org_id is None:
-        # Direct threads to a university/partner must carry an org scope.
         if recipient_org_ids:
             thread_org_id = next(iter(recipient_org_ids))
         else:
@@ -215,7 +355,101 @@ async def create_thread(
                 session, thread=existing, principal=principal, locale=locale
             )
 
+    recipient_users = [
+        RecipientUser(user_id=r, persona=p)
+        for r, p in zip(recipient_ids, recipient_personas, strict=False)
+    ]
+    thread_kind = parties.thread_kind_for(
+        sender_persona=principal.persona,
+        recipient_personas=recipient_personas,
+        kind=kind,
+        same_org=same_org,
+        is_application=is_application,
+    )
+    is_internal = thread_kind == rules.TK_INTERNAL
+    return await _persist_thread(
+        session,
+        principal=principal,
+        sender_id=sender_id,
+        kind=kind,
+        context_type=context_type,
+        context_id=context_id,
+        thread_org_id=thread_org_id,
+        thread_kind=thread_kind,
+        recipient_users=recipient_users,
+        target_org_id=None,
+        target_department_id=None,
+        relationship=relationship,
+        subject=subject,
+        first_message=first_message,
+        initiator_is_university=(principal.persona == rules.UNIVERSITY_STAFF),
+        is_internal=is_internal,
+        is_application=is_application,
+        ctx=ctx,
+        locale=locale,
+    )
+
+
+def _raise_open_reason(reason: str | None) -> None:
+    if reason == rules.REASON_STUDENT_TO_STUDENT:
+        raise StudentToStudentBlockedError()
+    if reason == rules.REASON_PARTNER_CROSS_ORG:
+        # Cross-org partner↔partner is enumeration-masked as missing (ADR-0012 §5).
+        raise ResourceNotFoundError()
+    if reason is not None:
+        raise MessagingNotAllowedError(details={"reason": reason})
+
+
+async def _department_in_org(
+    session: AsyncSession, *, org_id: uuid.UUID, department_id: uuid.UUID
+) -> bool:
+    from sqlalchemy import column, table
+
+    dept = table("departments", column("id"), column("org_id"))
+    row = (
+        await session.execute(
+            select(dept.c.id).where(
+                dept.c.id == department_id, dept.c.org_id == org_id
+            )
+        )
+    ).first()
+    return row is not None
+
+
+async def _persist_thread(
+    session: AsyncSession,
+    *,
+    principal: Principal,
+    sender_id: uuid.UUID,
+    kind: str,
+    context_type: str | None,
+    context_id: uuid.UUID | None,
+    thread_org_id: uuid.UUID,
+    thread_kind: str,
+    recipient_users: list[RecipientUser],
+    target_org_id: uuid.UUID | None,
+    target_department_id: uuid.UUID | None,
+    relationship: ApplicationRelationship | None,
+    subject: str | None,
+    first_message: str | None,
+    initiator_is_university: bool,
+    is_internal: bool,
+    is_application: bool,
+    ctx: RequestContext,
+    locale: str,
+) -> dict:
+    """Insert the thread + participants + parties + gate; post first message; commit."""
+
     await _enforce_thread_rate_limit(session, sender_id=sender_id)
+
+    prior_accepted = False  # dedupe already reused any existing org thread upstream
+
+    request_state = gate.initial_request_state(
+        initiator_is_university=initiator_is_university,
+        is_internal=is_internal,
+        is_application=is_application,
+        prior_accepted_exists=prior_accepted,
+    )
 
     thread = MessageThread(
         kind=kind,
@@ -224,32 +458,45 @@ async def create_thread(
         org_id=thread_org_id,
         subject=subject,
         is_anonymous=bool(relationship.is_anonymous) if relationship else False,
+        thread_kind=thread_kind,
+        request_state=request_state,
+        request_message_count=0,
         created_by=sender_id,
         status=rules.STATUS_ACTIVE,
     )
     session.add(thread)
     await session.flush()
 
-    # Author participant (owner).
+    # Participant rows: the author always; each USER recipient. Org/department
+    # recipients carry NO user participants — access is via the org inbox (RBAC).
     session.add(
         MessageThreadParticipant(
-            thread_id=thread.id,
-            user_id=sender_id,
-            role_in_thread="owner",
+            thread_id=thread.id, user_id=sender_id, role_in_thread="owner",
             can_reply=True,
         )
     )
-    # Recipients. Announcement recipients are one-way (can_reply=False).
     recipient_can_reply = kind != rules.KIND_ANNOUNCEMENT
-    for rid in recipient_ids:
+    for r in recipient_users:
         session.add(
             MessageThreadParticipant(
-                thread_id=thread.id,
-                user_id=rid,
-                role_in_thread="member",
+                thread_id=thread.id, user_id=r.user_id, role_in_thread="member",
                 can_reply=recipient_can_reply,
             )
         )
+    await session.flush()
+
+    sender_party = await party_service.build_parties(
+        session,
+        thread=thread,
+        sender_id=sender_id,
+        sender_persona=principal.persona,
+        sender_org_id=principal.org_id,
+        thread_kind=thread_kind,
+        recipient_users=recipient_users,
+        target_org_id=target_org_id,
+        target_department_id=target_department_id,
+    )
+    thread.initiator_party_id = sender_party.id
     await session.flush()
 
     await write_audit(
@@ -261,21 +508,22 @@ async def create_thread(
         after={
             "thread_id": str(thread.id),
             "kind": kind,
+            "thread_kind": thread_kind,
             "context_type": context_type,
             "org_id": str(thread_org_id),
+            "request_state": request_state,
             "is_anonymous": thread.is_anonymous,
-            "participant_count": len(recipient_ids) + 1,
         },
     )
 
     if first_message and first_message.strip():
-        # Persist-before-deliver in the SAME transaction as the thread create.
         from app.modules.messaging.application import message_service
 
         await message_service.deliver_message(
             session,
             thread=thread,
             sender_principal=principal,
+            sender_party_id=sender_party.id,
             body=first_message,
             reply_to_id=None,
             client_dedupe_key=None,
@@ -283,6 +531,9 @@ async def create_thread(
             ctx=ctx,
             locale=locale,
         )
+        if request_state == rules.REQUEST_PENDING:
+            thread.request_message_count += 1
+            await session.flush()
 
     await session.commit()
     await session.refresh(thread)

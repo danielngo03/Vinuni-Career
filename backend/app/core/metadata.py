@@ -23,9 +23,6 @@ from app.modules.analytics.domain import (  # noqa: F401
 )
 from app.modules.auth.domain import models as _auth_models  # noqa: F401
 from app.modules.automation.scheduler import models as _scheduler_run_models  # noqa: F401
-from app.modules.billing.domain import (  # noqa: F401
-    energy_models as _billing_energy_models,
-)
 from app.modules.billing.domain import models as _billing_models  # noqa: F401
 from app.modules.career_outcomes.domain import (  # noqa: F401
     models as _career_outcome_models,
@@ -87,7 +84,6 @@ def import_all_models() -> None:
         _discovery_models,
         _search_log_model,
         _billing_models,
-        _billing_energy_models,
         _notification_models,
         _user_models,
         _auth_models,

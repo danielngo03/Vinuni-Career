@@ -25,21 +25,25 @@ from datetime import UTC, datetime
 from sqlalchemy import func, or_, select
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from app.modules.messaging.application import _shared
+from sqlalchemy import column, table
+
+from app.modules.messaging.application import _shared, party_service
 from app.modules.messaging.application.recruitment_relationship import (
     ApplicationRelationship,
 )
-from app.modules.messaging.domain import labels, rules
+from app.modules.messaging.domain import labels, parties, rules
 from app.modules.messaging.domain.models import (
     Message,
     MessageThread,
     MessageThreadParticipant,
+    MessageThreadParty,
 )
 from app.modules.users.application import user_read_facade
 from app.shared.permissions import Principal
 
 _EPOCH = datetime(1970, 1, 1, tzinfo=UTC)
 _NEUTRAL_NAME = {"vi": "Người dùng", "en": "User"}
+_departments = table("departments", column("id"), column("name"))
 
 
 def _short_code(application_id: uuid.UUID | None) -> str:
@@ -59,6 +63,105 @@ async def _is_org_member(
     return await user_read_facade.is_org_member(session, user_id=user_id, org_id=org_id)
 
 
+async def _department_name(session: AsyncSession, dept_id: uuid.UUID | None) -> str | None:
+    if dept_id is None:
+        return None
+    row = (
+        await session.execute(
+            select(_departments.c.name).where(_departments.c.id == dept_id)
+        )
+    ).first()
+    return row[0] if row else None
+
+
+async def _resolve_viewer_party(
+    session: AsyncSession,
+    *,
+    viewer: Principal,
+    thread_parties: list[MessageThreadParty],
+) -> MessageThreadParty | None:
+    for p in thread_parties:
+        if p.party_kind == rules.PARTY_USER and p.user_id == viewer.user_id:
+            return p
+    if viewer.org_id is not None:
+        for p in thread_parties:
+            if p.party_kind == rules.PARTY_ORG and p.org_id == viewer.org_id:
+                # Confirm the viewer is actually an active member of that org.
+                if await _is_org_member(
+                    session, user_id=viewer.user_id, org_id=p.org_id  # type: ignore[arg-type]
+                ):
+                    return p
+    return None
+
+
+async def _render_party(
+    session: AsyncSession,
+    *,
+    viewer: Principal,
+    viewer_party: MessageThreadParty | None,
+    target: MessageThreadParty,
+    thread: MessageThread,
+    relationship: ApplicationRelationship | None,
+    is_moderator: bool,
+    locale: str,
+) -> str:
+    """Render how ``viewer`` sees the ``target`` party (the org-Page masking core)."""
+
+    viewer_on_target = viewer_party is not None and viewer_party.id == target.id
+
+    # --- ORG party ---------------------------------------------------------------
+    if target.party_kind == rules.PARTY_ORG:
+        # Internal department channel renders as the department (names elsewhere).
+        if (
+            target.identity_mode == rules.IDENTITY_PERSON
+            and target.assigned_department_id is not None
+        ):
+            dept = await _department_name(session, target.assigned_department_id)
+            if dept:
+                return dept
+        # A Page: outsiders (and everyone, for the header) see the org display name.
+        if target.org_id is not None:
+            return await _shared.org_display_name(session, target.org_id)
+        return labels.kind_label(thread.kind, locale=locale)
+
+    # --- USER party --------------------------------------------------------------
+    user_id = target.user_id
+    if user_id is None:
+        return _NEUTRAL_NAME.get(labels.normalize_locale(locale), _NEUTRAL_NAME["vi"])
+    if is_moderator:
+        return await _real_name(session, user_id, locale)
+
+    viewer_is_org = viewer_party is not None and viewer_party.party_kind == rules.PARTY_ORG
+    org_is_initiator = thread.initiator_party_id != target.id
+
+    # Partner viewing the masked applicant in a recruitment application thread.
+    if (
+        viewer_is_org
+        and thread.context_type == rules.CONTEXT_APPLICATION
+        and relationship is not None
+        and user_id == relationship.applicant_id
+    ):
+        if relationship.is_anonymous and not relationship.is_revealed:
+            return labels.anonymous_handle(
+                short_code=_short_code(thread.context_id), locale=locale
+            )
+        return await _real_name(session, user_id, locale)
+
+    # A cold partner-INITIATED request keeps the student masked until accepted (the
+    # student did not choose to reach out). A student-initiated request does NOT mask.
+    if (
+        viewer_is_org
+        and not viewer_on_target
+        and parties.student_masked_to_partner_pending(
+            thread_request_state=thread.request_state,
+            org_is_initiator=org_is_initiator,
+        )
+    ):
+        return labels.anonymous_handle(short_code=thread.id.hex[:6].upper(), locale=locale)
+
+    return await _real_name(session, user_id, locale)
+
+
 async def render_participant_label(
     session: AsyncSession,
     *,
@@ -68,17 +171,55 @@ async def render_participant_label(
     relationship: ApplicationRelationship | None,
     is_moderator: bool,
     locale: str = "vi",
+    sender_party_id: uuid.UUID | None = None,
 ) -> str:
-    """Render how ``viewer`` should see ``other_user_id`` in ``thread`` (masked or real)."""
+    """Render how ``viewer`` should see ``other_user_id`` (party-aware, masked/real)."""
 
-    # 1) Moderators see everything.
+    thread_parties = await party_service.list_parties(session, thread_id=thread.id)
+    if thread_parties:
+        viewer_party = await _resolve_viewer_party(
+            session, viewer=viewer, thread_parties=thread_parties
+        )
+        target: MessageThreadParty | None = None
+        if sender_party_id is not None:
+            target = next((p for p in thread_parties if p.id == sender_party_id), None)
+        if target is None:
+            # Resolve the author's party by user id, else the org party they're a
+            # member of (staff acting for the Page).
+            target = next(
+                (
+                    p
+                    for p in thread_parties
+                    if p.party_kind == rules.PARTY_USER and p.user_id == other_user_id
+                ),
+                None,
+            )
+            if target is None:
+                for p in thread_parties:
+                    if p.party_kind == rules.PARTY_ORG and p.org_id is not None:
+                        if await _is_org_member(
+                            session, user_id=other_user_id, org_id=p.org_id
+                        ):
+                            target = p
+                            break
+        if target is not None:
+            return await _render_party(
+                session,
+                viewer=viewer,
+                viewer_party=viewer_party,
+                target=target,
+                thread=thread,
+                relationship=relationship,
+                is_moderator=is_moderator,
+                locale=locale,
+            )
+
+    # Legacy fallback (threads created before Messaging V2 have no party rows).
     if is_moderator:
         return await _real_name(session, other_user_id, locale)
-
     viewer_is_partner = (
         viewer.persona == rules.PARTNER_MEMBER and viewer.org_id == thread.org_id
     )
-    # 2) Partner viewing the masked applicant.
     if (
         viewer_is_partner
         and thread.context_type == rules.CONTEXT_APPLICATION
@@ -90,13 +231,9 @@ async def render_participant_label(
                 short_code=_short_code(thread.context_id), locale=locale
             )
         return await _real_name(session, other_user_id, locale)
-
-    # 3) Student/alumni viewing the org counterpart -> org name.
     if viewer.persona in (rules.STUDENT, rules.ALUMNI):
         if await _is_org_member(session, user_id=other_user_id, org_id=thread.org_id):
             return await _shared.org_display_name(session, thread.org_id)
-
-    # 4) Default: real name.
     return await _real_name(session, other_user_id, locale)
 
 
@@ -112,6 +249,37 @@ async def counterpart_label(
 ) -> str:
     """A single label summarizing the OTHER side of the thread for ``viewer``."""
 
+    thread_parties = await party_service.list_parties(session, thread_id=thread.id)
+    if thread_parties:
+        viewer_party = await _resolve_viewer_party(
+            session, viewer=viewer, thread_parties=thread_parties
+        )
+        others = [
+            p
+            for p in thread_parties
+            if viewer_party is None or p.id != viewer_party.id
+        ]
+        if not others:
+            return labels.kind_label(thread.kind, locale=locale)
+        rendered = [
+            await _render_party(
+                session,
+                viewer=viewer,
+                viewer_party=viewer_party,
+                target=p,
+                thread=thread,
+                relationship=relationship,
+                is_moderator=is_moderator,
+                locale=locale,
+            )
+            for p in others[:3]
+        ]
+        label = ", ".join(rendered)
+        if len(others) > 3:
+            label += f" +{len(others) - 3}"
+        return label
+
+    # Legacy fallback.
     others = [p for p in participants if p.user_id != viewer.user_id]
     if not others:
         return labels.kind_label(thread.kind, locale=locale)

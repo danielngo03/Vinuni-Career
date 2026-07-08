@@ -25,12 +25,18 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from app.core.config import get_settings
 from app.modules.auth.application.context import RequestContext
 from app.modules.messaging.api import presenters
-from app.modules.messaging.application import _shared, thread_view
+from app.modules.messaging.application import (
+    _shared,
+    capability,
+    party_service,
+    thread_view,
+)
 from app.modules.messaging.application.errors import (
     BlankMessageError,
     MessageDeleteNotAllowedError,
     MessageRateLimitedError,
     MessagingNotAllowedError,
+    RequestPendingError,
     StudentToStudentBlockedError,
     ThreadClosedError,
 )
@@ -38,10 +44,11 @@ from app.modules.messaging.application.recruitment_relationship import (
     ApplicationRelationship,
     load_relationship,
 )
-from app.modules.messaging.domain import rules
+from app.modules.messaging.domain import gate, rules
 from app.modules.messaging.domain.models import (
     Message,
     MessageThread,
+    MessageThreadParticipant,
 )
 from app.modules.notifications.application import feed_service
 from app.modules.notifications.application.dispatch_service import enqueue_notification
@@ -121,6 +128,7 @@ async def deliver_message(
     client_dedupe_key: str | None,
     relationship: ApplicationRelationship | None,
     ctx: RequestContext,
+    sender_party_id: uuid.UUID | None = None,
     is_system: bool = False,
     locale: str = "vi",
 ) -> Message:
@@ -128,12 +136,15 @@ async def deliver_message(
 
     The caller owns the transaction/commit so this composes inside ``create_thread``
     (first message) and ``send_message`` (single tx, persist-before-deliver).
+    ``sender_party_id`` records which side (Messaging V2 party) authored it so the
+    projection can render an org Page label without re-resolving org membership.
     """
 
     sender_id = None if is_system else sender_principal.user_id
     message = Message(
         thread_id=thread.id,
         sender_id=sender_id,
+        sender_party_id=sender_party_id,
         body=body.strip(),
         is_system=is_system,
         reply_to_id=reply_to_id,
@@ -310,13 +321,41 @@ async def send_message(
 
     thread = await _shared.load_thread(session, thread_id=thread_id, lock=True)
 
-    # Non-participant (or cross-tenant) is indistinguishable from missing -> 404.
+    # Resolve which SIDE (party) the sender acts within + whether they may send.
+    # A user with a participant row acts within their own/linked party. A staff
+    # member WITHOUT a participant row may act for an org Page party in this thread
+    # if they hold the ``messaging:send`` capability for that org (shared inbox) —
+    # a participant row is then created lazily (audit + personal list).
     participant = await _shared.get_participant(
         session, thread_id=thread_id, user_id=sender_id
     )
     is_author = thread.created_by == sender_id
+    sender_party = None
+    if participant is not None and participant.party_id is not None:
+        sender_party = await party_service.get_party(
+            session, party_id=participant.party_id
+        )
     if participant is None and not is_author:
-        raise ResourceNotFoundError()
+        user_org_ids = {principal.org_id} if principal.org_id else set()
+        org_party = await party_service.party_for_user(
+            session, thread_id=thread_id, user_id=sender_id, user_org_ids=user_org_ids
+        )
+        if org_party is None or org_party.org_id is None or not capability.can_send_as_org(
+            principal, org_party.org_id
+        ):
+            raise ResourceNotFoundError()
+        participant = MessageThreadParticipant(
+            thread_id=thread_id, user_id=sender_id, party_id=org_party.id,
+            role_in_thread="member", can_reply=True,
+        )
+        session.add(participant)
+        await session.flush()
+        sender_party = org_party
+    if sender_party is None:
+        user_org_ids = {principal.org_id} if principal.org_id else set()
+        sender_party = await party_service.party_for_user(
+            session, thread_id=thread_id, user_id=sender_id, user_org_ids=user_org_ids
+        )
 
     # STUDENT↔STUDENT HARD BLOCK — the SECOND enforcement layer (re-checked on every
     # send, never cached at create). Even a thread that somehow contains two students
@@ -348,6 +387,20 @@ async def send_message(
     if reason is not None:
         raise MessagingNotAllowedError(details={"reason": reason})
 
+    # MESSAGE-REQUEST GATE (Messaging V2): a pending request lets only the initiator
+    # post, up to the intro cap, until the recipient accepts.
+    sender_is_initiator = (
+        sender_party is not None and thread.initiator_party_id == sender_party.id
+    )
+    gate_reason = gate.evaluate_request_send(
+        request_state=thread.request_state,
+        sender_is_initiator=sender_is_initiator,
+        request_message_count=thread.request_message_count,
+        limit=get_settings().messaging_request_message_limit,
+    )
+    if gate_reason is not None:
+        raise RequestPendingError(reason=gate_reason)
+
     # Idempotent re-send: same key -> the original message, no new row / notify.
     existing = await _existing_dedupe(
         session,
@@ -368,6 +421,7 @@ async def send_message(
         session,
         thread=thread,
         sender_principal=principal,
+        sender_party_id=sender_party.id if sender_party else None,
         body=body,
         reply_to_id=reply_to_id,
         client_dedupe_key=client_dedupe_key,
@@ -375,6 +429,9 @@ async def send_message(
         ctx=ctx,
         locale=locale,
     )
+    if thread.request_state == rules.REQUEST_PENDING and sender_is_initiator:
+        thread.request_message_count += 1
+        await session.flush()
     await session.commit()
     await session.refresh(message)
     return presenters.message_item(
@@ -440,6 +497,7 @@ async def list_messages(
                 relationship=relationship,
                 is_moderator=is_mod,
                 locale=locale,
+                sender_party_id=m.sender_party_id,
             )
         items.append(
             presenters.message_item(

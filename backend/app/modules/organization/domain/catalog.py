@@ -140,6 +140,21 @@ PERMISSION_CATALOG: dict[str, frozenset[str]] = {
     "notification_templates": frozenset(
         {"read", "create", "update", "activate", "archive"}
     ),
+    # Institutional messaging as a grantable capability (Messaging V2, owner
+    # decision 2026-07-09; `docs/superpowers/specs/2026-07-09-messaging-v2-design.md`).
+    # An organization acts as a single "Page": inbound/outbound threads belong to
+    # the ORG (shared team inbox), not one recruiter. Partner/University Admin hold
+    # the wildcard and see everything; other members receive messaging access only
+    # through these grants, scoped by user/role/department — never hardcoded to a
+    # role name (mirrors `docs/PARTNER_RBAC_ANALYTICS_SPEC.md`). Recruitment
+    # application threads stay authorized by the application relationship, so this
+    # capability does not regress existing recruiter↔candidate messaging.
+    #   read      see the org shared inbox (dept-scoped + unassigned + assigned-to-me)
+    #   send      reply/send in org threads the member may read
+    #   initiate  start a new outbound thread as the org Page
+    #   assign    route/assign/resolve threads (assignee + department)
+    #   moderate  (university) read/moderate/delete/export any thread for compliance
+    "messaging": frozenset({"read", "send", "initiate", "assign", "moderate"}),
     # Platform trust — support console, privacy/compliance, abuse/fraud
     # (ADR-0014, E36). No new hardcoded role: grantable on any university-org
     # role like `jobs:moderate`; every service gate additionally requires
