@@ -3,7 +3,7 @@ from __future__ import annotations
 import uuid
 
 from app.modules.ai_assistant.application.tools.dispatch import (
-    SUPPORTED_TOOL_NAMES,
+    _TOOL_HANDLERS,
     _tool_not_permitted,
     _validate_tool_args,
 )
@@ -25,7 +25,11 @@ def _partner() -> Principal:
 
 
 def test_tool_registry_and_dispatch_stay_in_sync() -> None:
-    assert set(TOOL_SPECS) == set(SUPPORTED_TOOL_NAMES)
+    # Every spec has a dispatch handler and every handler has a spec (the
+    # import-time _assert_registry_complete() guards this too, but assert it
+    # explicitly here so a regression surfaces as a test failure, not an import
+    # crash).
+    assert set(TOOL_SPECS) == set(_TOOL_HANDLERS)
 
 
 def test_partner_principal_may_not_dispatch_student_only_tool() -> None:
