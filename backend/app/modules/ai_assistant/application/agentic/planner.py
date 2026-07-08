@@ -12,6 +12,12 @@ from app.modules.ai_assistant.application.messages import assistant_message
 from app.modules.ai_assistant.domain.models import ChatSession
 from app.shared.permissions import Principal
 
+# Auth-layer persona string assigned to partner recruiters at login
+# (mirrors ``app.modules.auth.domain.personas.PARTNER_MEMBER`` and
+# ``chat_service._PARTNER_PERSONA``). Kept as a local literal to avoid an
+# ai_assistant -> auth module-boundary import.
+_PARTNER_PERSONA = "partner_member"
+
 _ARITHMETIC_ONLY_RE = re.compile(
     r"^\s*\d+\s*[-+*/x×÷]\s*\d+\s*(=|bằng|is)?"
     r"\s*(mấy|gì|what)?\s*[?.!]?\s*$",
@@ -373,13 +379,74 @@ async def build_agent_plan(
     chat: ChatSession,
     locale: str = "vi",
 ) -> AgentPlan | None:
-    """Build a plan using live conversation memory before static routing."""
+    """Build a deterministic plan before the LLM tool-calling loop fallback.
+
+    Partner recruiters route through the SMALL partner-intent matcher
+    (``plan_for_partner``) and otherwise fall through (``None``) to the LLM
+    loop, which selects the partner system prompt + partner tools. The
+    student-centric recent-entity resolver and full deterministic planner are
+    intentionally NOT run for partners — they only understand student tools.
+    """
+    if principal.persona == _PARTNER_PERSONA:
+        return plan_for_partner(text, principal=principal, locale=locale)
 
     if recent_plan := await _plan_with_recent_entities(
         text, session=session, chat=chat, locale=locale
     ):
         return recent_plan
     return plan_for_text(text, principal=principal, locale=locale)
+
+
+def plan_for_partner(text: str, *, principal: Principal, locale: str = "vi") -> AgentPlan | None:
+    """Deterministic partner-recruiter routing — a few safe, cheap replies only.
+
+    Keeps ONLY: capability guide, data-boundary / external-source refusal,
+    platform help/support, and the partner pipeline summary tool. EVERYTHING
+    else returns ``None`` so the message falls through to the LLM tool-calling
+    loop (partner system prompt + the 11 partner tools). Offline (no real
+    provider) the loop degrades to an ai-unavailable reply — acceptable.
+
+    This is intentionally NOT the full student planner: a partner must never be
+    routed onto student tools (apply_job, get_my_cvs, recommend_jobs, ...) or a
+    student clarifier reply.
+    """
+    if _CAPABILITY_RE.search(text):
+        return AgentPlan(
+            agent="partner_capability_guide",
+            action="reply",
+            status_code="responding",
+            reply=_partner_capability_reply(locale),
+        )
+
+    # Data-boundary probe OR any external-source/channel lookup ("search on
+    # LinkedIn", "google this company"): refuse with the partner-scoped copy.
+    # ``_external_source_plan`` is reused purely as a detector here.
+    if _DATA_BOUNDARY_RE.search(text) or _external_source_plan(text, locale) is not None:
+        return AgentPlan(
+            agent="partner_platform_boundary",
+            action="reply",
+            status_code="responding",
+            reply=_partner_data_boundary_reply(locale),
+        )
+
+    if support := _platform_support_reply(text, locale):
+        return AgentPlan(
+            agent="platform_support",
+            action="reply",
+            status_code="platform_support",
+            reply=support,
+        )
+
+    if _PARTNER_PIPELINE_RE.search(text) and principal.org_id is not None:
+        return AgentPlan(
+            agent="partner_recruiting",
+            action="tool",
+            status_code="using_tool",
+            tool_name="get_partner_pipeline_summary",
+            tool_args={},
+        )
+
+    return None
 
 
 def plan_for_text(text: str, *, principal: Principal, locale: str = "vi") -> AgentPlan | None:
@@ -847,6 +914,14 @@ def _capability_reply(locale: str) -> str:
 
 def _data_boundary_reply(locale: str) -> str:
     return assistant_message("planner.data_boundary", locale)
+
+
+def _partner_capability_reply(locale: str) -> str:
+    return assistant_message("planner.partner.capability", locale)
+
+
+def _partner_data_boundary_reply(locale: str) -> str:
+    return assistant_message("planner.partner.data_boundary", locale)
 
 
 def _withdraw_application_reply(locale: str) -> str:

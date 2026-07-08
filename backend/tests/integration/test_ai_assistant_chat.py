@@ -1091,3 +1091,174 @@ async def test_agent_planner_resolves_job_and_cv_references_together(db_session)
     assert apply_plan is not None
     assert apply_plan.tool_name == "apply_job"
     assert apply_plan.tool_args == {"job_id": str(second_job_id), "cv_id": str(first_cv_id)}
+
+
+# --------------------------------------------------------------------------- #
+# Partner (recruiter) routing + dispatch RBAC (P3a)                            #
+# --------------------------------------------------------------------------- #
+
+
+async def _partner_chat(db_session) -> tuple[Principal, ChatSession]:
+    """Create a real user + chat session and return a partner-persona principal."""
+    user = await register_verified(
+        db_session, email=f"partner_chat_{uuid.uuid4().hex[:8]}@vinuni.edu.vn"
+    )
+    principal = Principal(
+        user_id=user.id,
+        persona="partner_member",
+        org_id=uuid.uuid4(),
+        permissions=frozenset(),
+    )
+    created = await chat_service.create_session(db_session, principal=principal)
+    chat = (
+        await db_session.execute(
+            select(ChatSession).where(ChatSession.id == uuid.UUID(created["id"]))
+        )
+    ).scalar_one()
+    return principal, chat
+
+
+async def test_partner_open_question_falls_through_to_llm_loop(db_session) -> None:
+    # An open-ended recruiter task (draft a JD) is NOT a deterministic partner
+    # intent, so the partner planner returns None and the message reaches the
+    # LLM tool-calling loop (partner prompt + partner tools).
+    principal, chat = await _partner_chat(db_session)
+
+    plan = await build_agent_plan(
+        "Viết cho tôi một JD cho vị trí backend engineer",
+        principal=principal,
+        session=db_session,
+        chat=chat,
+    )
+
+    assert plan is None
+
+
+async def test_partner_pipeline_summary_still_routes_deterministically(db_session) -> None:
+    principal, chat = await _partner_chat(db_session)
+
+    plan = await build_agent_plan(
+        "Cho tôi xem pipeline ứng viên hiện tại",
+        principal=principal,
+        session=db_session,
+        chat=chat,
+    )
+
+    assert plan is not None
+    assert plan.action == "tool"
+    assert plan.tool_name == "get_partner_pipeline_summary"
+
+
+async def test_partner_capability_and_data_boundary_use_partner_copy(db_session) -> None:
+    principal, chat = await _partner_chat(db_session)
+
+    capability = await build_agent_plan(
+        "Bạn làm được gì cho tôi?",
+        principal=principal,
+        session=db_session,
+        chat=chat,
+    )
+    boundary = await build_agent_plan(
+        "Bạn có tra cứu ứng viên trên LinkedIn không?",
+        principal=principal,
+        session=db_session,
+        chat=chat,
+    )
+
+    assert capability is not None
+    assert capability.action == "reply"
+    # Partner-scoped capability copy, not the student ("người tìm việc") copy.
+    assert "vận hành tuyển dụng" in (capability.reply or "")
+    assert boundary is not None
+    assert boundary.action == "reply"
+    assert "tổ chức bạn" in (boundary.reply or "")
+
+
+async def test_partner_does_not_route_to_student_tools(db_session) -> None:
+    # Phrases that would trigger STUDENT tools (recommend_jobs / get_my_cvs)
+    # must NOT produce a student plan for a partner — they fall through to the
+    # LLM loop instead of mis-routing onto student tooling.
+    principal, chat = await _partner_chat(db_session)
+
+    recommend = await build_agent_plan(
+        "Gợi ý vài việc phù hợp với tôi",
+        principal=principal,
+        session=db_session,
+        chat=chat,
+    )
+    my_cvs = await build_agent_plan(
+        "Cho tôi xem CV của tôi",
+        principal=principal,
+        session=db_session,
+        chat=chat,
+    )
+
+    assert recommend is None
+    assert my_cvs is None
+
+
+async def test_student_planner_unchanged_by_partner_routing(db_session) -> None:
+    # Regression guard: the student deterministic planner still routes a job
+    # discovery request to search_jobs exactly as before.
+    user = await register_verified(
+        db_session, email=f"chat_student_regress_{uuid.uuid4().hex[:8]}@vinuni.edu.vn"
+    )
+    principal = Principal(user_id=user.id, persona="student", permissions=frozenset())
+    created = await chat_service.create_session(db_session, principal=principal)
+    chat = (
+        await db_session.execute(
+            select(ChatSession).where(ChatSession.id == uuid.UUID(created["id"]))
+        )
+    ).scalar_one()
+
+    plan = await build_agent_plan(
+        "Có việc thực tập backend nào đang mở không?",
+        principal=principal,
+        session=db_session,
+        chat=chat,
+    )
+
+    assert plan is not None
+    assert plan.tool_name == "search_jobs"
+
+
+async def test_dispatch_rejects_student_tool_for_partner_principal(db_session) -> None:
+    from app.modules.ai_assistant.application.tools.dispatch import dispatch_tool
+
+    user = await register_verified(
+        db_session, email=f"partner_dispatch_{uuid.uuid4().hex[:8]}@vinuni.edu.vn"
+    )
+    partner = Principal(
+        user_id=user.id,
+        persona="partner_member",
+        org_id=uuid.uuid4(),
+        permissions=frozenset(),
+    )
+
+    result = await dispatch_tool(
+        "apply_job",
+        {"job_id": str(uuid.uuid4())},
+        session=db_session,
+        principal=partner,
+    )
+
+    # Rejected at the persona gate BEFORE arg validation or execution.
+    assert result == {"ok": False, "error": "tool_not_permitted"}
+
+
+async def test_dispatch_rejects_partner_tool_for_student_principal(db_session) -> None:
+    from app.modules.ai_assistant.application.tools.dispatch import dispatch_tool
+
+    user = await register_verified(
+        db_session, email=f"student_dispatch_{uuid.uuid4().hex[:8]}@vinuni.edu.vn"
+    )
+    student = Principal(user_id=user.id, persona="student", permissions=frozenset())
+
+    result = await dispatch_tool(
+        "get_partner_pipeline_summary",
+        {},
+        session=db_session,
+        principal=student,
+    )
+
+    assert result == {"ok": False, "error": "tool_not_permitted"}

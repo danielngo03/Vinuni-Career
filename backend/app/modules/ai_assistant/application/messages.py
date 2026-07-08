@@ -205,6 +205,44 @@ _MESSAGES: Final[dict[str, dict[str, str]]] = {
             "inside the platform."
         ),
     },
+    # ---- planner: partner (recruiter) deterministic replies -------------- #
+    "planner.partner.capability": {
+        "vi": (
+            "Mình là trợ lý vận hành tuyển dụng cho nhà tuyển dụng đối tác trên "
+            "**VinUni Career Platform**. Mình có thể giúp bạn quản lý tin tuyển dụng của "
+            "tổ chức, xem pipeline ứng viên, soạn hoặc viết lại mô tả công việc (JD), "
+            "kiểm tra JD có ngôn từ thiên kiến, gợi ý scorecard từ ghi chú phỏng vấn, "
+            "tạo bản tóm tắt sàng lọc ứng viên, và xem sự kiện do tổ chức bạn tổ chức. "
+            "Mọi thao tác chỉ giới hạn trong dữ liệu của **tổ chức bạn**; mình không tra cứu "
+            "Google, LinkedIn hay internet."
+        ),
+        "en": (
+            "I'm the hiring-operations assistant for partner recruiters on the "
+            "**VinUni Career Platform**. I can help you manage your organisation's job "
+            "postings, review your candidate pipeline, draft or rewrite job descriptions, "
+            "check a JD for biased wording, suggest a scorecard from interview notes, "
+            "generate candidate screening briefs, and view your organisation's hosted events. "
+            "Everything is limited to **your own organisation's** data; I don't search "
+            "Google, LinkedIn, or the internet."
+        ),
+    },
+    "planner.partner.data_boundary": {
+        "vi": (
+            "Nguồn của mình chỉ là dữ liệu **tổ chức bạn** trong **VinUni Career Platform**: "
+            "tin tuyển dụng, pipeline ứng viên, phỏng vấn/scorecard, sự kiện do tổ chức tổ chức "
+            "và knowledge base hệ thống. Mình không browse internet, Google, LinkedIn hay dữ "
+            "liệu của tổ chức khác. Bạn có thể hỏi ví dụ: “xem pipeline ứng viên”, “soạn JD cho "
+            "vị trí backend”, hoặc “kiểm tra JD này có thiên kiến không”."
+        ),
+        "en": (
+            "My only source is **your organisation's** data inside the "
+            "**VinUni Career Platform**: job postings, candidate pipeline, "
+            "interviews/scorecards, your hosted events, and the platform knowledge base. "
+            "I don't browse the internet, Google, LinkedIn, or another organisation's data. "
+            "You can ask, for example: “show my candidate pipeline”, “draft a JD for a backend "
+            "role”, or “check this JD for bias”."
+        ),
+    },
     "planner.withdraw_application": {
         "vi": (
             "Mình chưa thể rút/hủy đơn trực tiếp qua chat. Bạn hãy mở **Đơn ứng tuyển**, "

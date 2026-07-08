@@ -7,10 +7,22 @@ import uuid
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.modules.analytics.application import ingestion_service as analytics
-from app.shared.permissions import Principal
+from app.shared.permissions import Principal, permission_checker
 
 from . import companies, cv_ai, events, jobs, kb, partner, student
-from .specs import TOOL_SPECS
+from .specs import PARTNER_USER, STUDENT, TOOL_SPECS, UNIVERSITY_STAFF, ToolSpec
+
+# Map the auth-layer persona (``Principal.persona``, e.g. "partner_member")
+# to the ``ToolSpec.persona`` vocabulary declared in ``specs.py`` (STUDENT /
+# PARTNER_USER / UNIVERSITY_STAFF). Alumni reuse the student tool surface;
+# guests never reach dispatch (chat_service raises AuthRequiredError first) and
+# map to no tool persona (so every persona-scoped tool is rejected for them).
+_AUTH_PERSONA_TO_TOOL_PERSONA: dict[str, str] = {
+    "student": STUDENT,
+    "alumni": STUDENT,
+    "partner_member": PARTNER_USER,
+    "university_staff": UNIVERSITY_STAFF,
+}
 
 SUPPORTED_TOOL_NAMES = frozenset(
     {
@@ -51,6 +63,42 @@ SUPPORTED_TOOL_NAMES = frozenset(
 )
 
 
+def _tool_not_permitted(principal: Principal, spec: ToolSpec) -> bool:
+    """Persona + capability gate at the dispatch boundary (defense-in-depth).
+
+    Returns ``True`` when ``principal`` may NOT dispatch ``spec``. This runs
+    before EVERY tool execution path (read-only ReAct loop, deterministic plan
+    execution, and post-confirmation execution all go through ``dispatch_tool``)
+    so a partner can never dispatch a student-only tool (and vice-versa) even if
+    a jailbroken model or a mis-routed plan requests it. It COMPLEMENTS — never
+    replaces — the org-scoped ownership RBAC each tool handler already enforces.
+
+    - Persona: map the auth persona to the ``ToolSpec.persona`` vocabulary and
+      require it to be in the tool's declared persona list.
+    - Capabilities: enforce ``ToolSpec.required_permissions``. ``authenticated``
+      maps to ``is_authenticated``; ``role:<p>`` must agree with the mapped tool
+      persona; any ``resource:action`` capability is checked via
+      ``permission_checker`` (dormant for the current tool set, correct for
+      future tools).
+    """
+    tool_persona = _AUTH_PERSONA_TO_TOOL_PERSONA.get(principal.persona)
+    if tool_persona is None or tool_persona not in spec.persona:
+        return True
+    for perm in spec.required_permissions:
+        if perm == "authenticated":
+            if not principal.is_authenticated:
+                return True
+            continue
+        if perm.startswith("role:"):
+            if perm.split(":", 1)[1] != tool_persona:
+                return True
+            continue
+        resource_type, _, action = perm.partition(":")
+        if action and not permission_checker.can(principal, resource_type, action):
+            return True
+    return False
+
+
 async def dispatch_tool(
     name: str,
     args: dict,
@@ -63,6 +111,14 @@ async def dispatch_tool(
     Never raises — always returns ``{"ok": bool, ...}``.
     Callers must not surface raw error messages to end users.
     """
+    spec = TOOL_SPECS.get(name)
+    if spec is None:
+        return {"ok": False, "error": "unknown_tool"}
+    if _tool_not_permitted(principal, spec):
+        # Persona/capability mismatch — do NOT execute, do NOT record an
+        # analytics fact (mirrors the early-return arg-validation behaviour).
+        return {"ok": False, "error": "tool_not_permitted"}
+
     valid, error = _validate_tool_args(name, args)
     if not valid:
         return {"ok": False, "error": error}
