@@ -18,6 +18,7 @@ from __future__ import annotations
 import json
 import uuid
 from datetime import UTC, datetime
+from typing import TYPE_CHECKING
 
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -33,12 +34,35 @@ from app.modules.knowledge_base.domain.models import (
     KnowledgeBase,
     KnowledgeBaseDocument,
 )
+from app.shared.audit import AuditContext, write_audit
 from app.shared.exceptions import ConflictError, ValidationFailedError
 from app.shared.permissions import Principal, permission_checker
+
+if TYPE_CHECKING:
+    # Lightweight request-scoped client context (raw ip / user-agent). Imported
+    # for typing only — ``write_audit`` hashes ip/ua before persistence, so no
+    # runtime coupling to the auth module is introduced here.
+    from app.modules.auth.application.context import RequestContext
 
 # Grantable capability that gates create / upload / delete of a KB + its docs.
 KB_RESOURCE = "knowledge_base"
 KB_ACTION_MANAGE = "manage"
+
+
+def _audit_ctx(principal: Principal, ctx: RequestContext | None) -> AuditContext:
+    """Build the audit context for a KB write from the actor principal.
+
+    ``actor_org_id`` is stamped so an org can page its own KB-management trail via
+    the org audit read model. ``ip``/``user_agent`` are optional and hashed by
+    ``write_audit`` (raw values are never persisted).
+    """
+
+    return AuditContext(
+        actor_id=principal.user_id,
+        actor_org_id=principal.org_id,
+        ip=ctx.ip if ctx is not None else None,
+        user_agent=ctx.user_agent if ctx is not None else None,
+    )
 
 # ---------------------------------------------------------------------------
 # Access control
@@ -179,6 +203,7 @@ async def create_kb(
     job_id: uuid.UUID | None = None,
     audience: str = KB_AUDIENCE_INTERNAL,
     department_id: uuid.UUID | None = None,
+    ctx: RequestContext | None = None,
 ) -> dict:
     """Create a new knowledge base.
 
@@ -220,6 +245,23 @@ async def create_kb(
     )
     session.add(kb)
     await session.flush()
+
+    # Audit the write in the caller's transaction (commits atomically with the KB
+    # row). Metadata only: scope/audience/department/name — never file content.
+    await write_audit(
+        session,
+        action="knowledge_base.create",
+        resource_type="knowledge_base",
+        resource_id=kb.id,
+        context=_audit_ctx(principal, ctx),
+        after={
+            "scope": kb.scope,
+            "audience": kb.audience,
+            "org_id": str(kb.org_id) if kb.org_id else None,
+            "department_id": str(kb.department_id) if kb.department_id else None,
+            "name": kb.name,
+        },
+    )
     return _serialize_kb(kb)
 
 
@@ -282,6 +324,7 @@ async def upload_document(
     file_size_bytes: int | None = None,
     page_count: int | None = None,
     chunking_mode: str = "auto",
+    ctx: RequestContext | None = None,
 ) -> dict:
     """Register a document upload and kick off the ingest Celery task.
 
@@ -332,6 +375,27 @@ async def upload_document(
     session.add(doc)
     await session.flush()
     result = _serialize_document(doc)
+
+    # Audit the upload in the same transaction as the document row. Metadata only:
+    # filename/mime/size/page-count + KB scope — NEVER the storage key (file_path)
+    # or raw bytes/content.
+    await write_audit(
+        session,
+        action="knowledge_base.document.upload",
+        resource_type="knowledge_base_document",
+        resource_id=doc.id,
+        context=_audit_ctx(principal, ctx),
+        after={
+            "kb_id": str(kb_id),
+            "kb_scope": kb.scope,
+            "kb_audience": kb.audience,
+            "department_id": str(kb.department_id) if kb.department_id else None,
+            "filename": title,
+            "mime_type": mime_type,
+            "file_size_bytes": file_size_bytes,
+            "page_count": page_count,
+        },
+    )
 
     # Persist the PENDING document before scheduling ingestion: the ingest task
     # runs in its own session and must be able to load it (commit → enqueue,
@@ -389,6 +453,7 @@ async def delete_document(
     *,
     principal: Principal,
     document_id: uuid.UUID,
+    ctx: RequestContext | None = None,
 ) -> dict:
     """Soft-delete a KB document and its chunks.
 
@@ -426,6 +491,26 @@ async def delete_document(
             .values(is_deleted=True)
         )
         await session.flush()
+
+        # Audit only on a real state change: an idempotent re-delete of an already
+        # removed document is a no-op and must not spam the trail. Metadata only:
+        # filename + KB scope — never the storage key (file_path) or file content.
+        await write_audit(
+            session,
+            action="knowledge_base.document.delete",
+            resource_type="knowledge_base_document",
+            resource_id=doc.id,
+            context=_audit_ctx(principal, ctx),
+            before={
+                "kb_id": str(doc.kb_id),
+                "kb_scope": kb.scope if kb is not None else None,
+                "kb_audience": kb.audience if kb is not None else None,
+                "department_id": (
+                    str(kb.department_id) if (kb is not None and kb.department_id) else None
+                ),
+                "filename": doc.title,
+            },
+        )
     return {"id": str(doc.id), "deleted": True}
 
 

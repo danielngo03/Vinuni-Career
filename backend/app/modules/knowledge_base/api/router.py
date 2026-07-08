@@ -84,6 +84,7 @@ async def create_knowledge_base(
         job_id=body.job_id,
         audience=body.audience,
         department_id=body.department_id,
+        ctx=auth.ctx,
     )
     await session.commit()
     return kb
@@ -153,6 +154,7 @@ async def upload_document(
             file_path=storage_key,
             mime_type=file.content_type,
             file_size_bytes=len(content),
+            ctx=auth.ctx,
         )
     except ValueError as exc:
         # Unknown KB → clean up the orphaned blob and surface a user-safe 404.
@@ -215,7 +217,7 @@ async def delete_document(
 
     try:
         result = await kb_service.delete_document(
-            session, principal=auth.principal, document_id=doc_id
+            session, principal=auth.principal, document_id=doc_id, ctx=auth.ctx
         )
     except ValueError as err:
         raise HTTPException(status_code=404, detail="document_not_found") from err

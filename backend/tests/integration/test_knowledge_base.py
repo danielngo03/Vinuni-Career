@@ -498,3 +498,173 @@ async def test_ingest_blank_file_marks_failed_no_charge(db_session) -> None:
         assert charged == []
     finally:
         set_storage(None)
+
+
+# --------------------------------------------------------------------------- #
+# Audit trail — every KB write is audited (.claude/rules/backend.md            #
+# non-negotiable). Storage keys / file contents must NEVER reach the payload.  #
+# --------------------------------------------------------------------------- #
+
+
+async def _audit_rows(db_session, *, action: str, resource_id: uuid.UUID) -> list:
+    from app.shared.models import AuditLog
+    from sqlalchemy import select
+
+    return list(
+        (
+            await db_session.execute(
+                select(AuditLog).where(
+                    AuditLog.action == action,
+                    AuditLog.resource_id == resource_id,
+                )
+            )
+        ).scalars().all()
+    )
+
+
+async def test_create_kb_writes_audit_record(db_session) -> None:
+    """KB create emits a ``knowledge_base.create`` audit stamped with the actor,
+    the actor's org, and safe scope/audience metadata."""
+    _u, org, admin = await make_org_with_admin(db_session, org_type="partner")
+    kb = await kb_service.create_kb(
+        db_session,
+        principal=admin,
+        name="Internal Playbook",
+        scope=KB_SCOPE_PARTNER,
+        org_id=org.id,
+        audience=KB_AUDIENCE_INTERNAL,
+    )
+
+    rows = await _audit_rows(
+        db_session, action="knowledge_base.create", resource_id=uuid.UUID(kb["id"])
+    )
+    assert len(rows) == 1
+    entry = rows[0]
+    assert entry.actor_id == admin.user_id
+    assert entry.actor_org_id == org.id
+    assert entry.resource_type == "knowledge_base"
+    assert entry.after_snapshot["scope"] == "partner"
+    assert entry.after_snapshot["audience"] == KB_AUDIENCE_INTERNAL
+    assert entry.after_snapshot["org_id"] == str(org.id)
+
+
+async def test_upload_document_writes_audit_without_storage_key(db_session) -> None:
+    """Document upload emits a ``knowledge_base.document.upload`` audit with the
+    filename + size, and NEVER the internal storage key (``file_path``)."""
+    _u, org, admin = await make_org_with_admin(db_session, org_type="partner")
+    kb = await kb_service.create_kb(
+        db_session,
+        principal=admin,
+        name="Docs KB",
+        scope=KB_SCOPE_PARTNER,
+        org_id=org.id,
+        audience=KB_AUDIENCE_INTERNAL,
+    )
+    kb_id = uuid.UUID(kb["id"])
+    # A recognisable internal storage key we then assert is absent from the audit.
+    storage_key = f"kb/{kb_id}/SECRET-STORAGE-KEY-abc123.pdf"
+
+    doc = await kb_service.upload_document(
+        db_session,
+        principal=admin,
+        kb_id=kb_id,
+        title="Handbook.pdf",
+        file_path=storage_key,
+        mime_type="application/pdf",
+        file_size_bytes=2048,
+        page_count=3,
+    )
+
+    rows = await _audit_rows(
+        db_session,
+        action="knowledge_base.document.upload",
+        resource_id=uuid.UUID(doc["id"]),
+    )
+    assert len(rows) == 1
+    entry = rows[0]
+    assert entry.actor_id == admin.user_id
+    assert entry.actor_org_id == org.id
+    assert entry.resource_type == "knowledge_base_document"
+    assert entry.after_snapshot["filename"] == "Handbook.pdf"
+    assert entry.after_snapshot["kb_id"] == str(kb_id)
+    assert entry.after_snapshot["kb_scope"] == "partner"
+    assert entry.after_snapshot["file_size_bytes"] == 2048
+
+    # The storage key must NOT leak into the audit payload under any field.
+    import json as _json
+
+    payload = _json.dumps(entry.after_snapshot)
+    assert "file_path" not in entry.after_snapshot
+    assert storage_key not in payload
+    assert "SECRET-STORAGE-KEY" not in payload
+
+
+async def test_delete_document_writes_audit_without_storage_key(db_session) -> None:
+    """Document delete emits a ``knowledge_base.document.delete`` audit; the
+    storage key never appears in the ``before`` snapshot."""
+    _u, org, admin = await make_org_with_admin(db_session, org_type="partner")
+    kb = await kb_service.create_kb(
+        db_session, principal=admin, name="Docs KB", scope=KB_SCOPE_PARTNER, org_id=org.id
+    )
+    kb_id = uuid.UUID(kb["id"])
+    storage_key = f"kb/{kb_id}/CONFIDENTIAL-key-xyz.pdf"
+    doc = await kb_service.upload_document(
+        db_session,
+        principal=admin,
+        kb_id=kb_id,
+        title="Policy.pdf",
+        file_path=storage_key,
+        mime_type="application/pdf",
+        file_size_bytes=512,
+    )
+    doc_id = uuid.UUID(doc["id"])
+
+    result = await kb_service.delete_document(
+        db_session, principal=admin, document_id=doc_id
+    )
+    assert result["deleted"] is True
+
+    rows = await _audit_rows(
+        db_session, action="knowledge_base.document.delete", resource_id=doc_id
+    )
+    assert len(rows) == 1
+    entry = rows[0]
+    assert entry.actor_id == admin.user_id
+    assert entry.actor_org_id == org.id
+    assert entry.resource_type == "knowledge_base_document"
+    assert entry.before_snapshot["filename"] == "Policy.pdf"
+    assert entry.before_snapshot["kb_id"] == str(kb_id)
+
+    import json as _json
+
+    payload = _json.dumps(entry.before_snapshot)
+    assert "file_path" not in entry.before_snapshot
+    assert storage_key not in payload
+    assert "CONFIDENTIAL-key" not in payload
+
+
+async def test_delete_already_deleted_document_does_not_double_audit(db_session) -> None:
+    """Idempotent re-delete of an already-removed document writes no new audit."""
+    _u, org, admin = await make_org_with_admin(db_session, org_type="partner")
+    kb = await kb_service.create_kb(
+        db_session, principal=admin, name="Docs KB", scope=KB_SCOPE_PARTNER, org_id=org.id
+    )
+    kb_id = uuid.UUID(kb["id"])
+    doc = await kb_service.upload_document(
+        db_session,
+        principal=admin,
+        kb_id=kb_id,
+        title="Once.pdf",
+        file_path=f"kb/{kb_id}/once.pdf",
+        mime_type="application/pdf",
+        file_size_bytes=128,
+    )
+    doc_id = uuid.UUID(doc["id"])
+
+    await kb_service.delete_document(db_session, principal=admin, document_id=doc_id)
+    await kb_service.delete_document(db_session, principal=admin, document_id=doc_id)
+
+    rows = await _audit_rows(
+        db_session, action="knowledge_base.document.delete", resource_id=doc_id
+    )
+    assert len(rows) == 1
