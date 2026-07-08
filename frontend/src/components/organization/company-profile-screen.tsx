@@ -38,6 +38,7 @@ import {
 
 export function CompanyProfileScreen() {
   const t = useTranslations("companyProfile");
+  const tNav = useTranslations("nav");
   const tv = useTranslations("partnerReg.validation");
   const tStates = useTranslations("states");
   const tc = useTranslations("common");
@@ -136,7 +137,7 @@ export function CompanyProfileScreen() {
     const err = query.error;
     return (
       <>
-        <PageHeader title={t("title")} description={t("subtitle")} />
+        <PageHeader eyebrow={tNav("group.organization")} title={t("title")} description={t("subtitle")} />
         <EmptyState
           kind={err.isPermissionError ? "permission" : err.isAuthError ? "auth" : "error"}
           icon={err.isAuthError ? SignIn : ShieldWarning}
@@ -169,6 +170,7 @@ export function CompanyProfileScreen() {
   return (
     <>
       <PageHeader
+        eyebrow={tNav("group.organization")}
         title={t("title")}
         description={t("subtitle")}
         actions={

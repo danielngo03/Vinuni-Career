@@ -48,6 +48,7 @@ function deriveIndexInsights(rows: OwnerJobSummary[], t: (key: string, values?: 
 
 export function PartnerCandidatesIndex() {
   const t = useTranslations("candidates");
+  const tNav = useTranslations("nav");
   const tJobs = useTranslations("jobs");
   const tStates = useTranslations("states");
   const tc = useTranslations("common");
@@ -71,7 +72,7 @@ export function PartnerCandidatesIndex() {
     if (err.isPermissionError || err.isAuthError) {
       return (
         <>
-          <PageHeader title={t("indexTitle")} description={t("indexSubtitle")} />
+          <PageHeader eyebrow={tNav("group.recruitment")} title={t("indexTitle")} description={t("indexSubtitle")} />
           <EmptyState
             kind={err.isPermissionError ? "permission" : "auth"}
             icon={err.isPermissionError ? ShieldWarning : SignIn}
@@ -150,7 +151,7 @@ export function PartnerCandidatesIndex() {
 
   return (
     <>
-      <PageHeader title={t("indexTitle")} description={t("indexSubtitle")} />
+      <PageHeader eyebrow={tNav("group.recruitment")} title={t("indexTitle")} description={t("indexSubtitle")} />
 
       {query.isError &&
       !(
