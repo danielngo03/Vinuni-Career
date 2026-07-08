@@ -152,6 +152,14 @@ async def confirm_topup(
 # --------------------------------------------------------------------------- #
 
 
+@member_router.get("/packs", summary="Buyable AI energy top-up packs")
+async def list_packs(
+    auth: CurrentAuth = Depends(get_current_auth),
+) -> dict:
+    """Any authenticated member can see the packs to self-purchase a top-up."""
+    return success({"packs": admin_service.list_packs()})
+
+
 @member_router.post(
     "/topup",
     status_code=status.HTTP_201_CREATED,

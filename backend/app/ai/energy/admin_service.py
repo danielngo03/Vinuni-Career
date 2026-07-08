@@ -261,6 +261,13 @@ def _packs_public() -> list[dict]:
     ]
 
 
+def list_packs() -> list[dict]:
+    """The buyable AI-energy top-up packs (reference data; any authenticated
+    member may read them to self-purchase — no management capability required).
+    """
+    return _packs_public()
+
+
 # --------------------------------------------------------------------------- #
 # Org overview                                                                  #
 # --------------------------------------------------------------------------- #
