@@ -5,6 +5,60 @@
 
 ---
 
+## AI Mock Interview (2026-07-09) — new module `mock_interview`
+
+Student-facing, JD+CV-grounded AI mock interview on a dedicated page
+`/[locale]/jobs/[id]/interview`. HR-style interviewer grounded on the real JD +
+chosen CV (matched skills / gaps from deterministic CV-JD fit), natural
+follow-ups, **no scoring** — coaching report only. Voice-first (browser STT/TTS
+driving the text brain, Tier V1) with a text floor and a provider-agnostic,
+superadmin-activatable true-realtime tier (V2, disabled by default). See
+**ADR-0016**.
+
+Verification levels (per `docs/SYSTEM_ACCEPTANCE_BAR.md`):
+
+- **Backend — verified (offline gates green + real smoke).**
+  - `pytest tests/mock_interview` → **72 passed** (units, session lifecycle,
+    RBAC/isolation, quota/caps, no-score/no-leak, migration `0084` round-trip,
+    HTTP envelopes, university governance + AI-ops privacy boundary).
+  - `ruff check app/modules/mock_interview app/ai/gateway/realtime
+    app/ai/prompts/mock_interview` → clean; `mypy app/modules/mock_interview`
+    → clean.
+  - Offline eval `mock_interview_report` (5 categories, ≥ minimums) →
+    privacy-boundary 100%, happy ≥ 80%, **no-score invariant holds in all
+    categories**; registered in the eval-gate registry.
+  - **Real-call smoke (OpenRouter, 2 small calls, `google/gemini-2.5-flash`):**
+    opening turn + coaching report generated in Vietnamese, grounded on JD+CV,
+    `is_fallback=false`, invariants OK (no score key, no provider/model leak).
+- **Frontend — API wired + build verified (not yet browser/E2E verified).**
+  - `pnpm tsc --noEmit` clean; `check-message-parity` OK (52 files, vi/en
+    parity); `pnpm build` exit 0, route `/[locale]/jobs/[jobId]/interview`
+    emitted, 0 lint errors in new files.
+  - Browser/E2E (mic grant/deny, quota/conflict/no-CV states, keyboard +
+    reduced-motion + dark theme) — **pending**.
+
+Governance/observability: university reads aggregate stats + safety-flag counts
+(`/api/v1/admin/mock-interview/stats|config`), never named transcripts;
+superadmin AI-ops reads flagged metadata + audited transcript
+(`/flagged`, `/sessions/{id}/transcript`) — redacted by default, full only with
+the `view_provider_identity` grant AND student opt-in, every open audited.
+Partners have no access.
+
+Config/env: `AI_INTERVIEW_MODEL` (alias `interview_default`, default
+`google/gemini-2.5-flash` on OpenRouter) + `AI_REALTIME_*` (off by default) added
+to `backend/.env(.example)` and `config.py`; the realtime tier is
+provider-agnostic (superadmin registry) and never returns a raw provider key.
+
+> Incidental fix (pre-existing blocker on this branch): `app/core/metadata.py`
+> imported a non-existent `billing.domain.energy_models`, which broke ALL backend
+> imports (partial energy-metering merge). Removed the dangling import to restore
+> importability; the energy-metering subsystem itself is unrelated and still
+> absent on this branch (flag for separate attention). Also unrelated + still
+> open: the `jd_extraction` eval family fails on this branch independent of this
+> work (`'list' object has no attribute 'get'`).
+
+---
+
 ## 1. Current State
 
 - **Human review checkpoint (27/06/2026):** Build was paused because the

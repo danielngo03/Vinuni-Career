@@ -64,6 +64,10 @@ PERMISSION_CATALOG: dict[str, frozenset[str]] = {
     # (or superadmin) read effective settings (``read``) and edit aliases/flags/
     # budget/toggles + kill switch (``manage``). Invisible to students/partners.
     "ai_settings": frozenset({"read", "manage", "view_provider_identity"}),
+    # Mock-interview governance (university-only). ``read`` = aggregate analytics +
+    # safety-flag counts; ``manage`` = enable/disable + per-university quota/caps.
+    # Students own their own sessions independently; partners have no access.
+    "mock_interview": frozenset({"read", "manage"}),
     # University-managed CV template catalogue. Students only consume active
     # templates through /cv-templates; this admin surface is university-only.
     "cv_templates": frozenset({"read", "create", "update"}),

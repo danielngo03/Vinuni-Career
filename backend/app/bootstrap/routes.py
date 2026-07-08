@@ -28,6 +28,10 @@ from app.modules.knowledge_base.api.router import router as knowledge_base_route
 from app.modules.locations.api.router import router as locations_router
 from app.modules.marketplace.api import router as marketplace_router
 from app.modules.messaging.api import router as messaging_router
+from app.modules.mock_interview.api import router as mock_interview_router
+from app.modules.mock_interview.api.admin_router import (
+    admin_router as mock_interview_admin_router,
+)
 from app.modules.moderation.api.router import content_reports_router
 from app.modules.moderation.api.router import router as moderation_router
 from app.modules.notifications.api import router as notifications_router
@@ -111,6 +115,8 @@ def register_routes(app: FastAPI) -> None:
     api.include_router(billing_router.admin_router)
     api.include_router(ai_assistant_router)
     api.include_router(ai_usage_router)
+    api.include_router(mock_interview_router.router)
+    api.include_router(mock_interview_admin_router)
     api.include_router(ai_workforce_router)
     api.include_router(ai_settings_router.admin_router)
     api.include_router(ai_ops_router.admin_router)

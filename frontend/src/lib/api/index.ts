@@ -386,6 +386,34 @@ export type {
   RespondOfferBody,
 } from "./applications";
 export { interviewPrepApi, coverLetterApi } from "./interview-prep";
+export { mockInterviewApi, sessionListTitle } from "./mock-interview";
+export type {
+  MockInterviewModality,
+  MockInterviewSpeaker,
+  MockInterviewStatus,
+  MockInterviewFitSignal,
+  MockInterviewJobRef,
+  MockInterviewPrepCv,
+  MockInterviewPrep,
+  MockInterviewOpening,
+  MockInterviewCaps,
+  MockInterviewRealtimeDescriptor,
+  MockInterviewSession,
+  MockInterviewTranscriptTurn,
+  CoachingReportQuestion,
+  CoachingReport,
+  MockInterviewSessionDetail,
+  MockInterviewSessionListItem,
+  CreateMockInterviewBody,
+  RecordTurnInput,
+  RecordTurnsResult,
+  EndSessionBody,
+  TurnTokenEvent,
+  TurnDoneEvent,
+  TurnErrorEvent,
+  TurnStreamEvent,
+  StreamTurnHandlers,
+} from "./mock-interview";
 export { jobAlertsApi } from "./job-alerts";
 export type { JobAlert, CreateJobAlertBody } from "./job-alerts";
 export { aiAssistantApi } from "./ai-assistant";

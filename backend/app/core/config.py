@@ -100,6 +100,33 @@ class Settings(BaseSettings):
     ai_weekly_request_limit: int = 200
     openai_compatible_base_url: str = "https://openrouter.ai/api/v1"
 
+    # --- Mock Interview: conversational "brain" model ---------------------------
+    # The turn-by-turn interviewer engine AND the post-session coaching report run
+    # through the SAME safe text gateway as every other AI task (guard + fallback +
+    # usage log + telemetry + eval sampling). Bound to a leak-safe alias; the
+    # concrete model id is internal. Gemini 2.5 Flash reads/writes Vietnamese well
+    # and is fast + cheap, which matters for a low-latency spoken interview. Any
+    # OpenAI-compatible model works — a superadmin can rebind the alias in the
+    # provider registry without touching code.
+    ai_interview_model: str = "google/gemini-2.5-flash"
+    ai_interview_model_alias: str = "interview_default"
+
+    # --- Mock Interview: realtime speech-to-speech tier (Tier V2) ---------------
+    # TRUE full-duplex voice needs a NATIVE provider socket (Gemini Live via
+    # WebSocket / OpenAI Realtime via WebRTC) and that provider's own key — it
+    # CANNOT be proxied through an OpenAI-compatible TEXT endpoint like OpenRouter.
+    # It is therefore DISABLED by default: the default spoken experience is
+    # browser-native STT/TTS driving the text brain above (Tier V1), which runs on
+    # the existing OpenRouter key at ~zero extra provider cost. A platform
+    # superadmin enables Tier V2 by registering a realtime provider+model+voice
+    # (plus its own key) in the AI registry and flipping ``ai_realtime_enabled``.
+    # All values are leak-safe aliases; no vendor/model string reaches end users.
+    ai_realtime_enabled: bool = False
+    ai_realtime_provider: str = ""  # registry alias, e.g. "gemini-live" (superadmin-set)
+    ai_realtime_model: str = ""  # internal model id, resolved via the registry
+    ai_realtime_voice: str = ""  # provider voice name (internal)
+    ai_realtime_ttl_seconds: int = 660  # ephemeral-token / session hard-cap ceiling
+
     # OCR / extraction (lightweight defaults)
     backend_ai_extras: str = "ai-lite"
     local_ocr_engine: str = "auto"

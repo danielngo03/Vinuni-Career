@@ -37,6 +37,9 @@ EVENT_TYPES: frozenset[str] = frozenset(
         "ad.impression",
         "ad.click",
         "ad.apply_start",
+        "mock_interview.started",
+        "mock_interview.completed",
+        "mock_interview.flagged",
     }
 )
 
@@ -51,6 +54,7 @@ AGGREGATE_TYPES: frozenset[str] = frozenset(
         "ai_tool",
         "workflow_execution",
         "ad_placement",
+        "mock_interview_session",
     }
 )
 

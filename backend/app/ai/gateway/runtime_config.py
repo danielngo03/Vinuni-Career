@@ -50,6 +50,9 @@ _BUILTIN_ROUTES: dict[str, tuple[str, str, str]] = {
     "rerank_default": ("openrouter", "https://openrouter.ai/api/v1", "deepseek/deepseek-v4-flash"),
     "eval_default": ("openrouter", "https://openrouter.ai/api/v1", "deepseek/deepseek-v4-flash"),
     "vision_default": ("openrouter", "https://openrouter.ai/api/v1", "google/gemini-2.5-flash"),
+    # Mock Interview conversational brain + coaching report. Fast, Vietnamese-
+    # capable, cheap — bound to ``ai_interview_model`` at bootstrap.
+    "interview_default": ("openrouter", "https://openrouter.ai/api/v1", "google/gemini-2.5-flash"),
     # Legacy aliases — resolvable synonyms (removed from allowlist/UI).
     "chat_cheap": ("openrouter", "https://openrouter.ai/api/v1", "deepseek/deepseek-chat"),
     "chat_free": ("openrouter", "https://openrouter.ai/api/v1", "deepseek/deepseek-chat"),
@@ -188,6 +191,7 @@ def _bootstrap_from_env() -> EffectiveAiConfig:
     routes["rerank_default"] = (_prov, _base, s.ai_rerank_model)
     routes["eval_default"] = (_prov, _base, s.ai_eval_model)
     routes["vision_default"] = (_prov, _base, s.ai_vision_model)
+    routes["interview_default"] = (_prov, _base, s.ai_interview_model)
     selected = (
         s.ai_default_model_alias,
         s.ai_reasoning_model_alias,
