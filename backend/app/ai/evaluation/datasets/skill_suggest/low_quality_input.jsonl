@@ -1,6 +1,0 @@
-{"id": "ss_lowq_empty_llm_json_returns_empty_list", "input": {"major": "CS", "existing_skills": [], "llm_json": {}}, "expect": {"is_fallback": false, "suggestion_count_at_most": 0, "no_crash": true}}
-{"id": "ss_lowq_missing_major_and_headline", "input": {"major": "", "existing_skills": [], "llm_json": {"suggestions": ["Python", "SQL"]}}, "expect": {"is_fallback": false, "no_crash": true}}
-{"id": "ss_lowq_no_existing_skills_no_experience", "input": {"major": "CS", "existing_skills": [], "experience_titles": [], "llm_json": {"suggestions": ["Python"]}}, "expect": {"no_crash": true}}
-{"id": "ss_lowq_suggestions_key_missing_entirely", "input": {"major": "CS", "existing_skills": [], "llm_json": {"note": "no suggestions field"}}, "expect": {"is_fallback": false, "suggestion_count_at_most": 0, "no_crash": true}}
-{"id": "ss_lowq_all_suggestions_already_existing", "input": {"major": "CS", "existing_skills": ["Python", "SQL"], "llm_json": {"suggestions": ["Python", "SQL"]}}, "expect": {"suggestion_count_at_most": 0, "no_crash": true}}
-{"id": "ss_lowq_empty_string_suggestion_entries_kept_but_harmless", "input": {"major": "CS", "existing_skills": [], "llm_json": {"suggestions": ["", "Python"]}}, "expect": {"no_crash": true, "all_suggestions_are_strings": true}}

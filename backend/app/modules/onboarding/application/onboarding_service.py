@@ -29,7 +29,7 @@ from app.modules.auth.application.auth_service import (
 )
 from app.modules.auth.application.context import RequestContext
 from app.modules.onboarding.domain.models import OnboardingState, StudentVerification
-from app.modules.organization.domain.models import PartnerRegistrationRequest
+from app.modules.organization.application import partner_registration_facade
 from app.modules.users.application import user_service
 from app.modules.users.application.user_write_facade import update_identity_persona
 from app.shared.audit import AuditContext, write_audit
@@ -88,13 +88,7 @@ async def get_status(
             select(StudentVerification).where(StudentVerification.user_id == user_id)
         )
     ).scalar_one_or_none()
-    employer_req = (
-        await session.execute(
-            select(PartnerRegistrationRequest).where(
-                PartnerRegistrationRequest.submitted_by_user_id == user_id
-            )
-        )
-    ).scalar_one_or_none()
+    employer_req = await partner_registration_facade.get_by_user(session, user_id)
     current_step = state.current_step
     is_complete = state.is_complete
 
@@ -361,17 +355,12 @@ async def save_employer_info(
     if state.role != ROLE_EMPLOYER:
         raise ValidationFailedError("wrong_role_for_employer_info")
 
-    # Upsert PartnerRegistrationRequest
-    existing_req = (
-        await session.execute(
-            select(PartnerRegistrationRequest).where(
-                PartnerRegistrationRequest.submitted_by_user_id == user_id
-            )
-        )
-    ).scalar_one_or_none()
+    # Upsert PartnerRegistrationRequest (via the organization facade).
+    existing_req = await partner_registration_facade.get_by_user(session, user_id)
 
     if existing_req is None:
-        req = PartnerRegistrationRequest(
+        partner_registration_facade.create(
+            session,
             company_name=company_name,
             industry=industry,
             company_size=company_size,
@@ -381,7 +370,6 @@ async def save_employer_info(
             description=address,
             submitted_by_user_id=user_id,
         )
-        session.add(req)
     else:
         existing_req.company_name = company_name
         existing_req.industry = industry
@@ -416,13 +404,7 @@ async def submit_employer_docs(
     """Record uploaded business document path, enqueue AI verification task."""
     from app.modules.onboarding.application import doc_verification  # local import
 
-    req = (
-        await session.execute(
-            select(PartnerRegistrationRequest).where(
-                PartnerRegistrationRequest.submitted_by_user_id == user_id
-            )
-        )
-    ).scalar_one_or_none()
+    req = await partner_registration_facade.get_by_user(session, user_id)
     if req is None:
         raise ValidationFailedError("employer_info_not_submitted")
 
@@ -456,13 +438,7 @@ async def submit_employer_docs(
 async def get_employer_doc_status(
     session: AsyncSession, *, user_id: uuid.UUID
 ) -> dict:
-    req = (
-        await session.execute(
-            select(PartnerRegistrationRequest).where(
-                PartnerRegistrationRequest.submitted_by_user_id == user_id
-            )
-        )
-    ).scalar_one_or_none()
+    req = await partner_registration_facade.get_by_user(session, user_id)
     if req is None:
         raise NotFoundError("employer_request_not_found")
     return {

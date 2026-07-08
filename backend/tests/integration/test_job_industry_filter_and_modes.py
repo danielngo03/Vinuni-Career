@@ -51,7 +51,6 @@ def _payload(title: str = "Backend Intern", **over) -> dict:
         "headcount": 1,
         "application_deadline": None,
         "visibility": "public",
-        "screening_questions": [],
     }
     base.update(over)
     return base
@@ -233,6 +232,27 @@ async def test_industry_terms_free_text_still_works_without_canonical_params(db_
     )
     ids = {uuid.UUID(i["id"]) for i in items}
     assert matching in ids
+
+
+@pytest.mark.asyncio
+async def test_location_types_multi_select_or_matches(db_session) -> None:
+    """Multi-select work-mode filter: comma-separated `location_types` OR-matches
+    the requested modes and excludes the others (marketplace sidebar)."""
+    _u, _org, admin = await make_org_with_admin(db_session)
+    _uu, _uorg, uni = await make_org_with_admin(db_session, org_type="university")
+
+    onsite = await _publish(db_session, admin, uni, title="Onsite job", location_type="onsite")
+    remote = await _publish(db_session, admin, uni, title="Remote job", location_type="remote")
+    hybrid = await _publish(db_session, admin, uni, title="Hybrid job", location_type="hybrid")
+
+    items, _next, _limit, total = await job_service.list_public_jobs(
+        db_session, principal=GUEST, location_types="onsite,remote",
+    )
+    ids = {uuid.UUID(i["id"]) for i in items}
+    assert onsite in ids
+    assert remote in ids
+    assert hybrid not in ids
+    assert total == 2
 
 
 # --------------------------------------------------------------------------- #

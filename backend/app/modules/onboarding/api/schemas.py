@@ -23,10 +23,11 @@ class SeekerProfileRequest(BaseModel):
     company: str | None = Field(default=None, max_length=255)
     industry: str | None = Field(default=None, max_length=100)
     years_experience: int | None = Field(default=None, ge=0, le=60)
-    # Fresh graduate sub-type fields
+    # Fresh graduate sub-type field. Career facts (major / graduation year) were
+    # removed with the identity-only profile cleanup (owner decision 2026-07-06):
+    # they belong in the student's CV, not onboarding/profile. Onboarding sets only
+    # identity/basics that still exist.
     university: str | None = Field(default=None, max_length=255)
-    major: str | None = Field(default=None, max_length=150)
-    graduation_year: int | None = Field(default=None, ge=1980, le=2030)
 
 
 class StudentVerifyRequestBody(BaseModel):

@@ -54,6 +54,24 @@ async def my_ai_usage(
     return success(data)
 
 
+@usage_router.get(
+    "/summary",
+    summary="My AI usage detail (windows, reset timing, per-feature breakdown, recent activity)",
+)
+async def my_ai_usage_summary(
+    auth: CurrentAuth = Depends(get_current_auth),
+    session: AsyncSession = Depends(get_db_session),
+) -> dict:
+    """Powers the billing/usage screen's AI-usage panel.
+
+    Returns the same day/week quota windows as ``/me`` plus reset timestamps, a
+    per-feature request breakdown, and a recent-activity list over the last 30
+    days. Never exposes provider/model names, aliases, tokens, cost, or latency.
+    """
+    data = await usage_service.my_usage_detail(session, principal=auth.principal)
+    return success(data)
+
+
 @router.post(
     "/sessions",
     status_code=status.HTTP_201_CREATED,

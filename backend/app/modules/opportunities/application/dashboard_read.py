@@ -147,4 +147,4 @@ async def count_events_by_status_for_org(
             .group_by(Event.status)
         )
     ).all()
-    return {status: count for status, count in rows}
+    return {row[0]: row[1] for row in rows}

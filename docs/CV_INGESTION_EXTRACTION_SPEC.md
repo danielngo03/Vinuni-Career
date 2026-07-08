@@ -2,19 +2,37 @@
 
 > Source of truth for uploaded-CV preview, backend ingestion, OCR/layout extraction, LLM fallback, review/import, and recovery states.
 
+> **UPDATE 2026-07-05 (owner decisions — supersede parts of this spec):**
+> 1. **No manual field-review step.** The flow is **upload → confirm file → name
+>    the CV → done**. The backend extraction is authoritative and produces the
+>    versioned draft directly; the student does NOT review or edit extracted fields
+>    (the field-review screen and per-field confirmation gate were removed — they
+>    were judged wrong UX). Sections marked "Review Screen" / "review/import
+>    per-field decisions" below are historical and no longer implemented.
+> 2. **Vision-LLM tier added.** Extraction is a cost-tiered cascade: native text
+>    (free) → local OCR → a **cheap vision-LLM** (Gemini-class) that reads the
+>    document **image** for images and styled/multi-column scanned PDFs, then does
+>    OCR + structuring in one call. Sending DOWNSCALED images to this model is
+>    permitted (supersedes any "text-only to LLM" wording here); the text-LLM
+>    structuring tier still gets text only. For PDFs the native text is passed
+>    alongside the image so exact emails/phones/dates come from the embedded text.
+> 3. **Structured, matching-ready output.** Each job/degree is one coherent entry
+>    (role — org | dates + bullets); skill/language proficiency shown as
+>    stars/bars/words is captured (e.g. "— 4/5"). Non-CV/blank/corrupt uploads are
+>    rejected with a clear status and are never fabricated into a CV.
+
 ## 1. Product Principle
 
 CV upload is a user-facing document workflow, not a parser demo.
 
-The student should experience:
+The student should experience (per the 2026-07-05 update above):
 
 1. choose or drag a CV file;
 2. see a faithful preview or file summary;
-3. click one clear action such as `Use this CV` or `Import into template`;
-4. let the backend process extraction asynchronously;
-5. review extracted fields beside the original document;
-6. save a structured editable CV or keep the original upload;
-7. use AI/editor tools to improve the CV without losing factual control.
+3. name the CV and click one clear action such as `Save this CV`;
+4. let the backend process extraction and store it — no manual field review;
+5. land on the resulting draft CV, which they may refine with AI/editor tools
+   later without losing factual control.
 
 The user does not need to know whether the system used native text extraction,
 OCR, layout analysis, or an LLM. Internal parser/provider details are never

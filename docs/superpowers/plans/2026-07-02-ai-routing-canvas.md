@@ -1,18 +1,25 @@
 # AI Provider/Model Routing Canvas Implementation Plan
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
+>
+> **Superseded note — 2026-07-08:** all raw provider/model visibility instructions
+> in this historical plan are superseded by `docs/API_CONTRACTS.md` ADR-0011.2.
+> Provider/model identity, registry CRUD, pricing, health probes, and routing
+> internals are platform-superadmin-only. Mentions of
+> `ai_settings:view_provider_identity` below must not be implemented as a
+> university/org-scoped permission.
 
-**Goal:** Let a university admin visually configure, on a drag-and-drop canvas, which AI provider is primary and which providers are fallback (in order) for each task family (chat/reasoning/embedding/rerank/eval), and see live circuit-breaker health per provider — without touching raw API keys, base URLs, or (unless separately permitted) real provider/model identifiers.
+**Goal:** Let a platform superadmin visually configure, on a drag-and-drop canvas, which AI provider is primary and which providers are fallback (in order) for each task family (chat/reasoning/embedding/rerank/eval), and see live circuit-breaker health per provider — without returning raw API keys or base URLs through any API. Ordinary university staff get masked alias/status/budget governance surfaces only.
 
-**Architecture:** New tables `ai_routing_graphs`/`ai_routing_graph_activations` live in the existing `ai_settings` module. A routing graph is an **authoring artifact** (React Flow node/edge JSON); "Activate" compiles it into the REAL runtime tables the gateway already reads — `AiModelAlias.provider_id` (primary) and `AiModelAlias.fallback_provider_names` (ordered fallback, a comma-separated `Text` column added by migration `0049_ai_model_alias_fallback_chain`) — then republishes `EffectiveAiConfig` via the existing `resolve_and_publish` seam. Raw provider/model identity is hidden by default (curated `vendor_label`/`model_family_label`) and only returned to callers holding the new `ai_settings:view_provider_identity` permission, audited on every raw read, per ADR-0011.1 (`docs/API_CONTRACTS.md`). The frontend reuses the exact `FlowCanvas` component shipped in the Workflow Canvas Phase B plan (`frontend/src/components/workflow/flow-canvas.tsx`) with a different `nodeTypeDefs` set and a separate API client — proving out the design doc's "one shared canvas, two backend engines" decision.
+**Architecture:** New tables `ai_routing_graphs`/`ai_routing_graph_activations` live in the existing `ai_settings` module. A routing graph is an **authoring artifact** (React Flow node/edge JSON); "Activate" compiles it into the REAL runtime tables the gateway already reads — `AiModelAlias.provider_id` (primary) and `AiModelAlias.fallback_provider_names` (ordered fallback, a comma-separated `Text` column added by migration `0049_ai_model_alias_fallback_chain`) — then republishes `EffectiveAiConfig` via the existing `resolve_and_publish` seam. Raw provider/model identity is platform-superadmin-only and audited on every raw read, per ADR-0011.2 (`docs/API_CONTRACTS.md`). The frontend reuses the exact `FlowCanvas` component shipped in the Workflow Canvas Phase B plan (`frontend/src/components/workflow/flow-canvas.tsx`) with a different `nodeTypeDefs` set and a separate API client — proving out the design doc's "one shared canvas, two backend engines" decision.
 
 **Tech Stack:** FastAPI async, SQLAlchemy 2.x async, Alembic, Pydantic v2, pytest + pytest-asyncio (backend); Next.js App Router, TypeScript strict, `@tanstack/react-query`, `@xyflow/react` (already installed by Phase B), Playwright e2e (frontend).
 
 ## Global Constraints
 
-- Raw API key and base URL are **never** returned by any API regardless of permission (`docs/API_CONTRACTS.md` ADR-0011 / ADR-0011.1) — only `provider_internal`-equivalent identity strings are in scope for the new permission.
-- Default (holding only `ai_settings:read`) shows curated `vendor_label`/`model_family_label` per alias; raw provider/model identity requires `ai_settings:view_provider_identity`, a distinct RBAC permission granted via the existing `organization` RBAC system (never a hardcoded role).
-- Every raw-identity read must write an `audit_logs` row, `action = "ai_settings.provider_identity_viewed"` (ADR-0011.1 exact text).
+- Raw API key and base URL are **never** returned by any API regardless of permission (`docs/API_CONTRACTS.md` ADR-0011 / ADR-0011.2).
+- Default non-superadmin views, including ordinary university staff with `ai_settings:read`/`manage`, show only masked alias/status/budget controls. Raw provider/model identity requires `principal.is_superadmin`.
+- Every raw-identity read must write an `audit_logs` row, `action = "ai_settings.provider_identity_viewed"` (ADR-0011.2 governance).
 - The routing graph is an authoring artifact; activation must compile into the real `ai_model_aliases`/`ai_provider_configs` tables the gateway already reads via `EffectiveAiConfig` — never a second, competing runtime read path.
 - No direct cross-module implementation imports; this plan stays entirely inside `ai_settings` plus the existing `app/ai/gateway/` package it already depends on — it does not touch the `workflow` module's tables or execution engine (per the design doc's explicit rejection of unifying the two).
 - New migrations must chain off the TRUE current head, confirmed fresh as `0050_ai_workforce_runs`, with both `upgrade()` and `downgrade()`.
@@ -756,7 +763,7 @@ Expected: 2 passed
 
 **Interfaces:**
 - Consumes: `AiProviderConfig`/`AiModelAlias`, `settings_service._require_ai_settings_admin`, `write_audit`.
-- Produces: `async def get_routing_canvas_view(session, *, principal, task_family, ctx) -> dict` returning `{"task_family": ..., "providers": [{"provider_id": ..., "vendor_label": ..., "model_family_label": ..., "circuit_state": "closed"|"open", "provider_internal": str|None, "model_id": str|None}]}` where `provider_internal`/`model_id` are populated ONLY if `principal` holds `ai_settings:view_provider_identity` (else `None`, and the curated labels are always present); in `factory.py`, a new public `get_circuit_state(provider_name: str) -> str` returning `"open"` or `"closed"` (never inventing a `half_open` value the code doesn't track).
+- Produces: `async def get_routing_canvas_view(session, *, principal, task_family, ctx) -> dict` returning `{"task_family": ..., "providers": [{"provider_id": ..., "vendor_label": ..., "model_family_label": ..., "circuit_state": "closed"|"open", "provider_internal": str|None, "model_id": str|None}]}` where `provider_internal`/`model_id` are populated ONLY if `principal.is_superadmin` (else `None`, and the curated labels are always present); in `factory.py`, a new public `get_circuit_state(provider_name: str) -> str` returning `"open"` or `"closed"` (never inventing a `half_open` value the code doesn't track).
 
 - [ ] **Step 1: Add a public circuit-state accessor to `factory.py`**
 
@@ -844,8 +851,8 @@ Expected: FAIL with `ModuleNotFoundError`
 # backend/app/modules/ai_settings/application/routing_read_service.py
 """Read-only view of live provider/alias/circuit-breaker state for the routing
 canvas. Curated vendor_label/model_family_label are the DEFAULT display; raw
-provider_internal/model_id are populated only for callers holding
-ai_settings:view_provider_identity, per ADR-0011.1 (docs/API_CONTRACTS.md).
+provider_internal/model_id are populated only for platform superadmins,
+per ADR-0011.2 (docs/API_CONTRACTS.md).
 """
 
 from __future__ import annotations

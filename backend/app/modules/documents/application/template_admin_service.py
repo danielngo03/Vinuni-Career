@@ -9,13 +9,15 @@ routers.
 from __future__ import annotations
 
 import uuid
+from datetime import UTC, datetime
 
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.modules.auth.application.context import RequestContext
 from app.modules.documents.api import presenters
-from app.modules.documents.domain.models import CvTemplate
+from app.modules.documents.domain import themes
+from app.modules.documents.domain.models import CvTemplate, CvTemplateVersion
 from app.modules.organization.application import org_reporting_facade
 from app.shared.audit import AuditContext, write_audit
 from app.shared.exceptions import (
@@ -71,6 +73,11 @@ def _normalize_layout_schema(value: dict) -> dict:
         raise ValidationFailedError(
             details={"field": "layout_schema", "reason": "invalid_layout_schema"}
         )
+    # A full visual theme (layout/palette/typography/...) validates through its own
+    # structural check; the P4 composer produces this shape. Legacy metadata-only
+    # schemas ({section_order, target_roles, strengths}) still validate below.
+    if themes.is_full_theme(value):
+        return value
     section_order = value.get("section_order")
     if section_order is not None and not (
         isinstance(section_order, list)
@@ -137,27 +144,50 @@ async def create_template(
         raise ValidationFailedError(
             details={"field": "key", "reason": "duplicate_template_key"}
         )
+    is_active = bool(payload.get("is_active", True))
     template = CvTemplate(
         key=key,
         name_vi=payload["name_vi"].strip(),
         name_en=payload["name_en"].strip(),
         category=_normalize_category(payload["category"]),
         layout_schema=_normalize_layout_schema(payload.get("layout_schema") or {}),
-        is_premium=bool(payload.get("is_premium", False)),
-        is_active=bool(payload.get("is_active", True)),
+        is_active=is_active,
+        status="published" if is_active else "draft",
+        version=1,
+        owner_org_id=principal.org_id,
+        published_at=datetime.now(UTC) if is_active else None,
     )
     session.add(template)
     await session.flush()
+    # Immutable snapshot of version 1 so student CVs can bind to an exact design.
+    await _snapshot_template_version(session, template, created_by=principal.user_id)
     await write_audit(
         session,
         action="cv_template.created",
         resource_type="cv_template",
         resource_id=template.id,
         context=_audit_ctx(principal, ctx),
-        after={"key": template.key, "category": template.category},
+        after={"key": template.key, "category": template.category, "version": 1},
     )
     await session.commit()
     return presenters.template(template, locale=locale, include_admin_fields=True)
+
+
+async def _snapshot_template_version(
+    session: AsyncSession, template: CvTemplate, *, created_by: uuid.UUID | None
+) -> CvTemplateVersion:
+    """Insert the immutable design snapshot for the template's current version."""
+
+    version = CvTemplateVersion(
+        template_id=template.id,
+        version_number=template.version,
+        design_json=template.layout_schema or {},
+        preview_image=template.preview_image,
+        created_by=created_by,
+    )
+    session.add(version)
+    await session.flush()
+    return version
 
 
 async def update_template(
@@ -178,7 +208,7 @@ async def update_template(
         "key": template.key,
         "category": template.category,
         "is_active": template.is_active,
-        "is_premium": template.is_premium,
+        "version": template.version,
     }
 
     if "key" in payload:
@@ -202,14 +232,22 @@ async def update_template(
         template.name_en = payload["name_en"].strip()
     if "category" in payload:
         template.category = _normalize_category(payload["category"])
+    design_changed = False
     if "layout_schema" in payload:
-        template.layout_schema = _normalize_layout_schema(payload["layout_schema"] or {})
-    if "is_premium" in payload:
-        template.is_premium = bool(payload["is_premium"])
+        new_schema = _normalize_layout_schema(payload["layout_schema"] or {})
+        if new_schema != (template.layout_schema or {}):
+            design_changed = True
+            # A design change publishes a NEW immutable version so student CVs
+            # bound to the prior version keep rendering unchanged.
+            template.version += 1
+            template.layout_schema = new_schema
     if "is_active" in payload:
         template.is_active = bool(payload["is_active"])
 
     await session.flush()
+    if design_changed:
+        template.published_at = datetime.now(UTC)
+        await _snapshot_template_version(session, template, created_by=principal.user_id)
     await write_audit(
         session,
         action="cv_template.updated",
@@ -221,7 +259,7 @@ async def update_template(
             "key": template.key,
             "category": template.category,
             "is_active": template.is_active,
-            "is_premium": template.is_premium,
+            "version": template.version,
         },
     )
     await session.commit()

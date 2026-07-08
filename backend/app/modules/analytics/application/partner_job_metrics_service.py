@@ -17,10 +17,13 @@ Coarse dimensions:
   (`docs/DATA_MODEL.md` has no such column) — persona is the closest coarse,
   non-PII tier signal available today; a real tier field is a documented open
   question for `system-architect`/`product-owner-system-planner`.
-- ``major_group`` / ``year_group`` — best-effort buckets derived from the
-  student's OWN confirmed preferences via the existing
-  ``student_profiles.preferences_facade`` (never a raw free-text major or exact
-  graduation year). ``None`` when the student has no profile.
+- ``major_group`` / ``year_group`` — RETIRED academic cohort buckets. They used to
+  be derived from the student's profile ``major`` / ``graduation_year``, but the
+  profile is now identity-only (owner decision 2026-07-06) and no longer carries
+  those fields, so :func:`coarse_academic_dims` always returns ``(None, None)`` and
+  the recorder never emits an academic-cohort dimension row. The dimension-type
+  vocabulary keeps ``major_group`` only for backward compatibility with any
+  historical rows; ``year_group`` is dropped from the accepted vocabulary.
 """
 
 from __future__ import annotations
@@ -35,12 +38,11 @@ from sqlalchemy.dialects.sqlite import insert as sqlite_insert
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.modules.advertising.application import inventory_facade
+from app.modules.advertising.domain.lifecycle import TARGET_JOB
 from app.modules.analytics.domain.partner_read_models import (
     PartnerJobMetricDaily,
     PartnerJobMetricDimensionDaily,
 )
-from app.modules.advertising.domain.lifecycle import TARGET_JOB
-from app.modules.student_profiles.application import preferences_facade
 from app.shared.hashing import device_hint
 
 logger = logging.getLogger(__name__)
@@ -61,8 +63,11 @@ SOURCE_VALUES: frozenset[str] = frozenset(
 )
 _SOURCE_COLUMN = {s: f"src_{s}" for s in SOURCE_VALUES}
 
+# ``year_group`` retired with the identity-only profile cleanup (no more
+# ``graduation_year``). ``major_group`` kept in the vocabulary only for backward
+# compatibility with any historical rows; it is no longer produced.
 DIMENSION_TYPES: frozenset[str] = frozenset(
-    {"device_class", "student_tier", "major_group", "year_group"}
+    {"device_class", "student_tier", "major_group"}
 )
 DEVICE_CLASSES: frozenset[str] = frozenset({"desktop", "mobile", "tablet", "unknown"})
 STUDENT_TIERS: frozenset[str] = frozenset({"student", "alumni", "guest"})
@@ -95,57 +100,20 @@ def student_tier_for_persona(persona: str | None) -> str | None:
     return None
 
 
-_MAJOR_KEYWORDS: dict[str, tuple[str, ...]] = {
-    "computer_science": ("computer science", "software", "information technology", "data science", "ai", "cs"),
-    "engineering": ("engineering", "mechanical", "electrical", "civil"),
-    "business": ("business", "economics", "finance", "management", "marketing", "accounting"),
-    "design": ("design", "art", "media", "communication"),
-    "health_sciences": ("health", "biology", "medicine", "nursing", "pharma"),
-    "social_sciences": ("social", "psychology", "education", "law", "political"),
-}
-
-
-def _major_group(major: str | None) -> str | None:
-    if not major:
-        return None
-    low = major.lower()
-    for group, keywords in _MAJOR_KEYWORDS.items():
-        if any(k in low for k in keywords):
-            return group
-    return "other"
-
-
-def _year_group(graduation_year: int | None, *, as_of: date | None = None) -> str | None:
-    if graduation_year is None:
-        return None
-    as_of = as_of or _today()
-    delta = graduation_year - as_of.year
-    if delta <= 0:
-        return "graduating_or_alumni"
-    if delta == 1:
-        return "senior"
-    if delta == 2:
-        return "junior"
-    if delta == 3:
-        return "sophomore"
-    return "freshman_or_earlier"
-
-
 async def coarse_academic_dims(
     session: AsyncSession, *, user_id: uuid.UUID | None
 ) -> tuple[str | None, str | None]:
-    """Best-effort ``(major_group, year_group)`` for a student principal.
+    """Return ``(major_group, year_group)`` — now always ``(None, None)``.
 
-    ``None, None`` for guests, non-students, or students with no profile yet —
-    callers must treat this as "unknown", never fabricate a bucket.
+    The academic cohort dimensions were derived from the student profile's
+    ``major`` / ``graduation_year``, but the profile is identity-only now (owner
+    decision 2026-07-06) and no longer carries those fields. The signature is kept
+    (callers destructure a 2-tuple and forward it to :func:`record_job_metric_event`,
+    which skips ``None`` dimensions) so no call site churns; both values are always
+    ``None`` and no academic-cohort dimension row is ever emitted.
     """
 
-    if user_id is None:
-        return None, None
-    prefs = await preferences_facade.get_ranking_preferences(session, user_id=user_id)
-    if prefs is None:
-        return None, None
-    return _major_group(prefs.field), _year_group(prefs.graduation_year)
+    return None, None
 
 
 async def default_source_for_job(
@@ -372,7 +340,9 @@ async def org_metrics_summary(
     """Org-wide totals + conversion for the trailing window, or ``None`` if the
     projection has no rows yet for this org (honest "no data yet" trigger)."""
 
-    perf = await job_performance_for_org(session, org_id=org_id, since_days=since_days, limit=10_000)
+    perf = await job_performance_for_org(
+        session, org_id=org_id, since_days=since_days, limit=10_000
+    )
     if not perf:
         return None
     totals = {

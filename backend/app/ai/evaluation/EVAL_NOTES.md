@@ -33,6 +33,17 @@ the platform — see the addendum below for the 7 most recently closed):
   `optimize_cv_for_job`, `ats_keyword_suggestions`, `cv_fabrication_check`).
 - `recommend_cv_for_job` (deterministic CV-to-job fit scoring + best-CV
   recommendation; `app/ai/cv/job_fit.py` + `documents/.../job_fit_service.py`).
+  As of `SCORER_VERSION="10"` the score is built from SIX HR criteria — `skills`,
+  `experience`, `scope`, `credentials`, `soft_skills`, `trajectory` (the old
+  standalone `domain` band was folded into skills + experience). The dataset is
+  band-agnostic: cases assert the score's *effect* (`recommended_cv_id`, `ranking`,
+  `score_gt`, `matched_contains`) rather than raw band numbers, so it survives a
+  band restructure. Three happy_path regression cases pin the new bands via
+  `score_gt`: `hp-scope-leadership-beats-participation` (leadership + quantified
+  impact > plain participation), `hp-soft-skills-context-beats-bare` (a JD-required
+  soft skill proven in context > listed), and `hp-trajectory-stable-beats-jobhopper`
+  (stable tenure > repeated <6-month jobs). Band-level behaviour is additionally
+  covered by `tests/unit/test_cv_jd_six_criteria.py`.
 - `interview_sim` (deterministic mock-interview opening question/tip path).
 - `ai_assistant_chat` (the ReAct tool-calling safety layer of the assistant —
   policy orchestrator gate, LLM tool-call JSON parsing, and the tool registry
@@ -134,16 +145,14 @@ a reimplementation of it:
   `"five"`) — the only AI task in the whole platform that could 500 on a
   malformed model response instead of degrading. Extracted pure
   `normalize_interview_prep_result`/`normalize_answer_feedback_result`.
-- `skill_suggest`, `career_snapshot`, `profile_summary` (student profile AI,
-  `profile_service.py`). **Found and fixed the most severe bug of this
-  entire effort**: `get_ai_summary_draft` called
-  `user_service.get_user_by_id(...)` — a function that does not exist (the
-  real function is `get_by_id`). This was an unconditional `AttributeError`
-  on every single call, sitting OUTSIDE the AI try/except entirely, so the
-  advisory-only "AI is down" safety net never even applied — the endpoint
-  was 100% broken in production. Found only because building the eval
-  required mocking the exact attribute the code called, and `mock.patch.object`
-  raises immediately if the target attribute doesn't exist.
+- `skill_suggest`, `career_snapshot`, `profile_summary` — **RETIRED**
+  (2026-07-06). These families exercised the profile-content AI endpoints
+  (`get_ai_skill_suggestions` / `get_ai_career_snapshot` / `get_ai_summary_draft`)
+  that summarized a bio/skills. The student profile is now identity-only (owner
+  decision): it holds no bio, skills, major, or career content, so these tasks
+  had nothing to draft/suggest. The endpoints, prompts, runners, datasets, and
+  eval-gate registration were removed. Career AI is CV-first (CV Studio suggest /
+  ai-edit-command / job-fit) instead.
 - `cover_letter` (student cover-letter draft). Fixed
   `sanitize_instruction(...)` tuple-unpacking bug (§ above) and wired
   `student_note` into the prompt builder so the feature actually works.

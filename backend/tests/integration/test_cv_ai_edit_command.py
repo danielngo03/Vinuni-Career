@@ -72,6 +72,16 @@ async def _seed_section_content(db, cv_id, section_type, items) -> uuid.UUID:
     return target.id
 
 
+async def _seed_entry_content(db, cv_id, section_type, entries) -> uuid.UUID:
+    sections = (
+        await db.execute(select(CvSection).where(CvSection.cv_id == uuid.UUID(cv_id)))
+    ).scalars().all()
+    target = next(s for s in sections if s.section_type == section_type)
+    target.content_json = {"entries": entries}
+    await db.commit()
+    return target.id
+
+
 class _FakeJsonProvider:
     """A fake provider returning a fixed JSON completion (no network)."""
 
@@ -207,6 +217,93 @@ async def test_edit_command_reject_leaves_cv_unchanged(db_session, monkeypatch) 
     cv_now = await cv_service.get_cv(db_session, principal=student, cv_id=uuid.UUID(cv["id"]))
     summary = next(s for s in cv_now["sections"] if s["section_type"] == "summary")
     assert summary["content"]["items"][0]["text"] == "junior dev"
+
+
+# --------------------------------------------------------------------------- #
+# Entry-based sections (experience/education/projects) — B-595                  #
+# --------------------------------------------------------------------------- #
+
+
+_ENTRIES = [
+    {"heading": "Intern", "subheading": "Acme", "timeframe": "2023",
+     "location": "", "note": "", "highlights": ["Built APIs", "Wrote tests"]},
+    {"heading": "Analyst", "subheading": "Beta", "timeframe": "2022",
+     "location": "", "note": "", "highlights": ["Analysed data"]},
+]
+
+
+async def test_edit_command_updates_entry_highlight_pending_then_accept(
+    db_session, monkeypatch
+) -> None:
+    _u, student = await make_student(db_session)
+    cv = await _make_cv(db_session, student)
+    await _seed_entry_content(db_session, cv["id"], "experience",
+                              [dict(e, highlights=list(e["highlights"])) for e in _ENTRIES])
+    before = await cv_service.get_cv(db_session, principal=student, cv_id=uuid.UUID(cv["id"]))
+    versions_before = len(before["versions"])
+
+    _patch_provider(
+        monkeypatch,
+        {
+            "operations": [
+                {"op": "update_highlight", "section_type": "experience",
+                 "entry_index": 0, "highlight_index": 0,
+                 "text": "Built REST APIs with FastAPI"}
+            ],
+            "explanation": "Made the first experience bullet more specific.",
+        },
+    )
+    sug = await cv_ai_service.request_edit_command(
+        db_session, principal=student, cv_id=uuid.UUID(cv["id"]),
+        payload={"instruction": "rewrite my first experience bullet",
+                 "idempotency_key": new_key()},
+        ctx=CTX,
+    )
+    assert sug["diff"]["applicable"] is True
+    after_entries = sug["diff"]["after"]["sections"][0]["content"]["entries"]
+    assert after_entries[0]["highlights"][0] == "Built REST APIs with FastAPI"
+    assert after_entries[0]["highlights"][1] == "Wrote tests"  # untouched
+    _assert_no_leak(sug)
+
+    # Nothing is mutated before accept.
+    mid = await cv_service.get_cv(db_session, principal=student, cv_id=uuid.UUID(cv["id"]))
+    exp = next(s for s in mid["sections"] if s["section_type"] == "experience")
+    assert exp["content"]["entries"][0]["highlights"][0] == "Built APIs"
+
+    # Accepting applies the entry diff and creates a new version.
+    accepted = await cv_ai_service.accept_suggestion(
+        db_session, principal=student, cv_id=uuid.UUID(cv["id"]),
+        suggestion_id=uuid.UUID(sug["suggestion_id"]),
+        payload={"fact_confirmation": True, "idempotency_key": new_key()}, ctx=CTX,
+    )
+    assert len(accepted["versions"]) == versions_before + 1
+    exp2 = next(s for s in accepted["sections"] if s["section_type"] == "experience")
+    assert exp2["content"]["entries"][0]["highlights"][0] == "Built REST APIs with FastAPI"
+
+
+async def test_edit_command_reorders_entries(db_session, monkeypatch) -> None:
+    _u, student = await make_student(db_session)
+    cv = await _make_cv(db_session, student)
+    await _seed_entry_content(db_session, cv["id"], "experience",
+                              [dict(e, highlights=list(e["highlights"])) for e in _ENTRIES])
+
+    _patch_provider(
+        monkeypatch,
+        {
+            "operations": [
+                {"op": "reorder_entries", "section_type": "experience", "order": [1, 0]}
+            ],
+            "explanation": "Moved the most recent role to the top.",
+        },
+    )
+    sug = await cv_ai_service.request_edit_command(
+        db_session, principal=student, cv_id=uuid.UUID(cv["id"]),
+        payload={"instruction": "put my analyst role first", "idempotency_key": new_key()},
+        ctx=CTX,
+    )
+    assert sug["diff"]["applicable"] is True
+    headings = [e["heading"] for e in sug["diff"]["after"]["sections"][0]["content"]["entries"]]
+    assert headings == ["Analyst", "Intern"]
 
 
 # --------------------------------------------------------------------------- #

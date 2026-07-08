@@ -19,6 +19,7 @@ _MIGRATION_0003 = _VERSIONS / "0003_organization_rbac.py"
 _MIGRATION_0004 = _VERSIONS / "0004_opportunities.py"
 _MIGRATION_0005 = _VERSIONS / "0005_documents.py"
 _MIGRATION_0006 = _VERSIONS / "0006_recruitment.py"
+_MIGRATION_0065 = _VERSIONS / "0065_cv_template_themes_governance.py"
 
 
 def _load_migration(path=_MIGRATION, name="baseline_migration"):
@@ -67,6 +68,20 @@ def test_recruitment_migration_well_formed() -> None:
     assert callable(mod.downgrade)
     assert mod.revision == "0006_recruitment"
     assert mod.down_revision == "0005_documents"
+
+
+def test_cv_template_themes_migration_well_formed() -> None:
+    mod = _load_migration(_MIGRATION_0065, "cv_template_themes_migration")
+    assert callable(mod.upgrade)
+    assert callable(mod.downgrade)
+    assert mod.revision == "0065_cv_template_themes_governance"
+    assert mod.down_revision == "0064_remove_cv_primary_flags"
+
+
+def test_cv_template_versions_registered_on_metadata() -> None:
+    import_all_models()
+    names = set(target_metadata.tables.keys())
+    assert "cv_template_versions" in names
 
 
 def test_recruitment_tables_registered_on_metadata() -> None:

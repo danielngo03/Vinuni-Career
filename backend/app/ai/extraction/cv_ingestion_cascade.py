@@ -28,8 +28,10 @@ from app.ai.extraction.adapters import (
     NativeTextAdapter,
     StructuringAdapter,
     get_ocr_adapter,
+    is_cid_corrupted,
     resolve_policy,
     run_llm_structuring,
+    run_vision_extraction,
 )
 from app.ai.extraction.text_extraction import ExtractionError, FileKind, sniff_kind
 
@@ -59,6 +61,29 @@ class IngestionOutcome:
     ocr_unavailable: bool = False
     layout_used: bool = False
     llm_used: bool = False
+    vision_used: bool = False
+
+
+def _section_text(section: dict) -> str:
+    """Flatten a structured section (entries or items) into plain text.
+
+    Handles both shapes: ``{"items": [{"text"|"name"}]}`` and
+    ``{"entries": [{"heading","subheading","note","highlights":[...]}]}``.
+    """
+
+    parts: list[str] = []
+    for item in section.get("items", []) or []:
+        if isinstance(item, dict):
+            parts.append(str(item.get("text") or item.get("name") or ""))
+    for entry in section.get("entries", []) or []:
+        if isinstance(entry, dict):
+            parts.append(str(entry.get("heading") or ""))
+            parts.append(str(entry.get("subheading") or ""))
+            parts.append(str(entry.get("note") or ""))
+            hl = entry.get("highlights")
+            if isinstance(hl, list):
+                parts.extend(str(h) for h in hl)
+    return " ".join(p for p in parts if p)
 
 
 def _mixed_language(text: str) -> bool:
@@ -122,37 +147,64 @@ def run_cascade(
             engine_version = improved.engine_version
             layout_used = True
 
-    # ---- 4. OCR fallback (scanned image / too little native text) -----------
-    # A PDF needs OCR only when it is image-based (scanned) with little native
-    # text; a no-image PDF with little text is genuinely blank, not a scan.
-    needs_ocr = kind is FileKind.IMAGE or (
-        kind is FileKind.PDF
-        and len(text.strip()) < OCR_TRIGGER_THRESHOLD
-        and signals.has_images
+    # ---- 4. Vision-first structuring for styled CVs (images AND PDFs) -------
+    # The styled, multi-column CV templates students actually upload defeat both
+    # local OCR (images) and native text extraction (PDFs interleave columns), so
+    # when a multimodal route is configured we use the vision model as the primary
+    # structurer for BOTH. For PDFs we also hand it the native text: it reads the
+    # page image for correct structure and the embedded text for exact spelling of
+    # emails/phones/dates. Local OCR / deterministic parsing remain the offline
+    # fallbacks.
+    is_image = kind is FileKind.IMAGE
+    is_pdf = kind is FileKind.PDF
+    cid_corrupted = is_pdf and is_cid_corrupted(text)
+    # A PDF needs OCR/vision when image-based (scanned), or when native text is
+    # CID-font garbage (visually rich PDF with unreadable encoded glyphs).
+    needs_ocr = is_image or cid_corrupted or (
+        is_pdf and len(text.strip()) < OCR_TRIGGER_THRESHOLD and signals.has_images
     )
-    if needs_ocr:
-        if policy.ocr != "none":
-            ocr = get_ocr_adapter()
-            if ocr.available:
-                try:
-                    ocr_text = ocr.recognize(data, policy.ocr_langs)
-                except Exception:  # noqa: BLE001 - OCR is best-effort
-                    ocr_text = ""
-                if ocr_text.strip():
-                    text = ocr_text
-                    engine_family = getattr(ocr, "engine_family", "ocr")
-                    engine_version = getattr(ocr, "engine_version", "ocr")
-                    ocr_used = True
-                else:
-                    ocr_unavailable = True
+    # Send to vision every image, and every PDF that actually has content (text or
+    # images) — a truly empty PDF skips the paid call and classifies as blank.
+    vision_candidate = is_image or (is_pdf and bool(text.strip() or signals.has_images))
+
+    vision_structured: dict | None = None
+    if policy.vision_enabled and vision_candidate:
+        vision_structured = run_vision_extraction(
+            data,
+            kind,
+            enabled=True,
+            max_image_px=policy.vision_max_image_px,
+            max_pages=policy.vision_max_pages,
+            native_text=text if is_pdf else None,
+        )
+        if vision_structured is not None:
+            engine_family = "vision_llm_gateway"
+            engine_version = "v1"
+
+    # Local OCR fallback (image / scanned PDF) — only when vision produced nothing
+    # (offline/test runs, missing key, model error). Degraded but functional.
+    if vision_structured is None and needs_ocr and policy.ocr != "none":
+        ocr = get_ocr_adapter()
+        if ocr.available:
+            try:
+                ocr_text = ocr.recognize(data, policy.ocr_langs)
+            except Exception:  # noqa: BLE001 - OCR is best-effort
+                ocr_text = ""
+            if ocr_text.strip():
+                text = ocr_text
+                engine_family = getattr(ocr, "engine_family", "ocr")
+                engine_version = getattr(ocr, "engine_version", "ocr")
+                ocr_used = True
             else:
                 ocr_unavailable = True
         else:
             ocr_unavailable = True
+    elif vision_structured is None and needs_ocr:
+        ocr_unavailable = True
 
-    # The document required OCR but no engine could read it -> low-quality scan
-    # (docs/CV_INGESTION_EXTRACTION_SPEC.md §4: "otherwise record LOW_QUALITY_SCAN").
-    if needs_ocr and not ocr_used:
+    # The document required OCR but neither the OCR engine nor the vision tier
+    # could read it -> low-quality scan (docs/CV_INGESTION_EXTRACTION_SPEC.md §4).
+    if needs_ocr and not ocr_used and vision_structured is None:
         return IngestionOutcome(
             accepted=False,
             quality_code="LOW_QUALITY_SCAN",
@@ -166,7 +218,37 @@ def run_cascade(
             layout_used=layout_used,
         )
 
-    # ---- 5. CV classifier + quality checks ----------------------------------
+    # ---- 6. Vision structuring path -----------------------------------------
+    # The vision tier already returned structured data; use it directly.
+    if vision_structured is not None:
+        extracted = vision_structured["extracted_data"]
+        review_fields = vision_structured["review_fields"]
+        detected_language = vision_structured.get("detected_language")
+        combined_text = " ".join(
+            _section_text(section)
+            for section in extracted.values()
+            if isinstance(section, dict)
+        )
+        return IngestionOutcome(
+            accepted=True,
+            quality_code="REVIEW_REQUIRED",
+            needs_review=any(f.get("needs_review") for f in review_fields),
+            checksum=checksum,
+            detected_language=detected_language,
+            mixed_language=_mixed_language(combined_text),
+            page_count=page_count or 1,
+            text_length=len(combined_text),
+            extracted_data=extracted,
+            review_fields=review_fields,
+            engine_family=engine_family,
+            engine_version=engine_version,
+            ocr_used=ocr_used,
+            ocr_unavailable=ocr_unavailable,
+            layout_used=layout_used,
+            vision_used=True,
+        )
+
+    # ---- 7. CV classifier + quality checks (text path) ----------------------
     code, needs_review = cv_validation.classify_content(text, kind=kind, ocr_used=ocr_used)
     if not (code == "REVIEW_REQUIRED"):
         return IngestionOutcome(
@@ -183,13 +265,12 @@ def run_cascade(
             layout_used=layout_used,
         )
 
-    # ---- 6. Deterministic structuring ---------------------------------------
+    # ---- 8. Deterministic structuring (+ optional LLM-on-TEXT) --------------
     structured = StructuringAdapter().structure(text)
     extracted = structured["extracted_data"]
     review_fields = structured["review_fields"]
     detected_language = structured.get("detected_language")
 
-    # ---- 7. Optional LLM-on-TEXT structuring (disabled by default) ----------
     llm_used = False
     if policy.llm_enabled:
         refined = run_llm_structuring(text, structured)  # text only — never bytes

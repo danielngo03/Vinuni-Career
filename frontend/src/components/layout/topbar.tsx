@@ -2,6 +2,7 @@
 
 import { useLocale, useTranslations } from "next-intl";
 import { ChevronRight, Menu } from "lucide-react";
+import { Sparkle } from "@phosphor-icons/react";
 import { LanguageSwitcher } from "./language-switcher";
 import { ThemeSwitcher } from "./theme-switcher";
 import { BrandMark } from "./brand-mark";
@@ -12,11 +13,22 @@ import { Link, usePathname } from "@/i18n/navigation";
 import { getRouteTitle } from "@/lib/route-titles";
 import { WORKSPACE_NAV } from "@/config/nav";
 import { useUiStore } from "@/stores/ui-store";
+import { cn } from "@/lib/utils";
 import type { Persona } from "@/stores/auth-store";
 
 /** Fixed workspace topbar (DESIGN.md §5.4). 60px chrome surface, labeled
  * notification/message pills, and the account dropdown (settings + sign-out). */
-export function Topbar({ persona }: { persona: Persona }) {
+export function Topbar({
+  persona,
+  onAiClick,
+  aiActive,
+}: {
+  persona: Persona;
+  /** Toggles the shared workspace AI assistant chat window. */
+  onAiClick?: () => void;
+  /** When true, the AI assistant button reads as active/open. */
+  aiActive?: boolean;
+}) {
   const t = useTranslations();
   const tNav = useTranslations("nav");
   const locale = useLocale();
@@ -127,6 +139,28 @@ export function Topbar({ persona }: { persona: Persona }) {
         <ThemeSwitcher />
         <NotificationBell variant="labeled" href={`/${persona}/notifications`} />
         <MessagingBell variant="labeled" href={`/${persona}/messages`} />
+        {onAiClick && (
+          <button
+            type="button"
+            aria-label={tNav("aiAssistant")}
+            aria-haspopup="dialog"
+            aria-expanded={aiActive ?? false}
+            title={tNav("aiAssistant")}
+            onClick={onAiClick}
+            className={cn(
+              "relative inline-flex size-9 items-center justify-center rounded-lg border outline-none transition-colors duration-200 focus-visible:ring-2 focus-visible:ring-[var(--ai-accent)]/50",
+              aiActive
+                ? "border-[var(--ai-accent)] bg-[var(--ai-accent)] text-white shadow-[var(--shadow-teal)] hover:bg-[var(--ai-accent-strong)]"
+                : "border-[var(--ai-accent-ring)] bg-[var(--ai-accent-surface)] text-[var(--ai-accent-strong)] shadow-[var(--ai-chip-shadow)] hover:border-[var(--ai-accent)] hover:bg-[var(--ai-accent-surface-hover)]",
+            )}
+          >
+            <Sparkle
+              aria-hidden
+              weight="fill"
+              className={cn("size-5", aiActive ? "text-white" : "text-[var(--ai-accent-strong)]")}
+            />
+          </button>
+        )}
         <AccountMenu settingsHref={`/${persona}/settings`} showName />
       </div>
     </header>

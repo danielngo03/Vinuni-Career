@@ -2,7 +2,20 @@
 
 > Source of truth for CV upload, CV builder, AI-assisted CV creation, templates, exports, versioning, and CV-to-job optimization.
 > Detailed uploaded-file ingestion, OCR/layout extraction, LLM fallback, and
-> review/import behavior lives in `docs/CV_INGESTION_EXTRACTION_SPEC.md`.
+> import behavior lives in `docs/CV_INGESTION_EXTRACTION_SPEC.md`.
+
+> **UPDATE 2026-07-05 (owner decision — supersedes the field-review wording below):**
+> The uploaded-CV flow is **upload → confirm file → name the CV → done**. Backend
+> extraction is authoritative and creates the versioned draft directly; the student
+> does NOT review or edit extracted fields (the field-review/diff screen was removed
+> as wrong UX). Extraction accuracy is a backend responsibility because it feeds
+> CV-JD matching. Where sentences below say "student reviews extracted fields",
+> "field-by-field review", or "review/diff", read them as historical. The
+> extraction cascade also gains a cheap **vision-LLM tier** that may receive
+> DOWNSCALED document images for images and styled/scanned PDFs; the text-LLM
+> structuring tier still receives text only. (This does NOT change the separate
+> in-editor rule that natural-language CV Studio edits require a structured diff +
+> student confirmation.)
 
 ## 1. Product Goal
 
@@ -42,12 +55,16 @@ AI never silently edits or publishes a CV. AI proposes a diff; the student accep
 ### Upload And Import
 
 - Upload existing CV files: PDF, DOCX, DOC, image.
-- Extract structured content from uploaded CV into a reviewable import source.
+- Extract structured content from an uploaded CV directly into a versioned builder
+  draft. (Updated 2026-07-05: extraction is backend-authoritative; there is no
+  manual review-source step.)
 - Upload UX is preview-first: students see the original document/file preview
   before choosing to ingest/import it.
 - Backend owns extraction. The UI must not require the student to understand or
   manually trigger parser/OCR/LLM steps.
-- Student reviews extracted fields before importing into any builder CV.
+- The student names the CV and confirms the file; the backend extraction produces
+  the draft directly. (Updated 2026-07-05: no manual field-review step —
+  backend-authoritative extraction; accuracy feeds CV-JD matching.)
 - Import can target:
   - a new template CV,
   - an existing draft,
@@ -212,6 +229,12 @@ Failure branches:
   EXTRACTING -> REVIEW_REQUIRED_LOW_CONFIDENCE
 ```
 
+(Updated 2026-07-05: `REVIEW_REQUIRED` / `REVIEW_REQUIRED_LOW_CONFIDENCE` no
+longer surface a manual field-review screen to the student. Extraction is
+backend-authoritative; these remain internal quality states that the backend
+resolves before producing the versioned draft. Blank/not-CV/corrupt uploads are
+rejected and are never fabricated into a CV.)
+
 Builder-generated CVs and uploaded CVs share the same student-facing CV list, but they are stored differently:
 
 - uploaded originals are `documents` rows and appear in UI with `source_type = uploaded`;
@@ -259,11 +282,15 @@ Before a file can be imported into a builder CV:
    column/canvas-heavy.
 7. Run OCR fallback only when native text/layout extraction is empty or low
    quality.
-8. Use optional LLM structuring only after local extraction has produced text or
-   markdown and only when enabled by AI settings/env.
-9. Classify whether the document is likely a CV/resume.
-10. Check minimum usable content.
-11. Create a parse result: `CONFIRMED`, `REVIEW_REQUIRED`, or a failure status.
+8. Escalate to a cheap vision-LLM tier for images and styled/multi-column scanned
+   PDFs when native text + local OCR are insufficient. (Updated 2026-07-05: this
+   tier MAY receive DOWNSCALED document images; the separate text-LLM structuring
+   tier still receives text/markdown only.)
+9. Use optional text-LLM structuring only after local extraction has produced text
+   or markdown and only when enabled by AI settings/env.
+10. Classify whether the document is likely a CV/resume.
+11. Check minimum usable content.
+12. Create a parse result: `CONFIRMED`, `REVIEW_REQUIRED`, or a failure status.
 
 Minimum CV signals:
 
@@ -275,12 +302,15 @@ Failure behavior:
 
 - `BLANK_DOCUMENT`, `NOT_A_CV`, `LOW_QUALITY_SCAN`, `PASSWORD_PROTECTED_FILE`, and `CORRUPT_FILE` are user-fixable failures.
 - UI offers: upload another file, create from template, or manually enter content.
-- Low-confidence extraction becomes `REVIEW_REQUIRED`, never silent import.
+- Low-confidence extraction is resolved backend-side; it never silently overwrites
+  an already-accepted CV. (Updated 2026-07-05: `REVIEW_REQUIRED` is an internal
+  quality state, not a student-facing field-review screen.)
 - Internal confidence/error details are logged internally only and never shown to the user.
 - Parser/AI uncertainty must preserve student trust: say what happened and what to do next.
-- A simple modal that lists extracted fields is not product-complete. The release
-  UI must provide original preview + field review/diff + import/template action,
-  with mobile tabs and quota/failure recovery.
+- The release UI must provide original preview + name-and-confirm import/template
+  action, with mobile tabs and quota/failure recovery. (Updated 2026-07-05:
+  uploaded-CV flow is upload-and-name; no manual field-review/diff step —
+  backend-authoritative extraction produces the draft directly.)
 
 ## 6. Data Model Additions
 
@@ -388,7 +418,9 @@ Required states:
 - Upload rejected with friendly reason and next action.
 - Uploaded file not recognized as CV: upload another file or start from template.
 - Blank/low-quality scan: explain unreadable file and suggest clearer PDF/DOCX.
-- Extraction review required: field-by-field review before import.
+- Low-quality extraction: the backend resolves it and produces the best draft it
+  can; the student refines it later in the editor. (Updated 2026-07-05: no manual
+  field-by-field review step — backend-authoritative extraction.)
 
 ## 10. Accessibility And UX
 

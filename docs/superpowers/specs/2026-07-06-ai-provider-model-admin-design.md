@@ -5,11 +5,19 @@
 - **Module:** `ai_settings` + `app/ai/gateway`, frontend `components/ai-settings`
 - **Status:** approved for implementation
 
+> **Amendment — 2026-07-08:** this historical spec is superseded by
+> `docs/API_CONTRACTS.md` ADR-0011.2 and `docs/PRODUCT_OPERATING_MODEL.md` for
+> visibility and ownership. Concrete provider/model identity and provider/model
+> registry CRUD are platform-superadmin-only. Ordinary university staff see only
+> masked alias/status/budget controls. Do not expose concrete provider/model names
+> from this spec in product UI, API responses, exports, notifications, or
+> non-superadmin docs/screens.
+
 ## 1. Goal
 
 Make the admin-facing AI configuration behave like a real production system:
 
-1. **Direct model binding, no alias catalog.** Admin (and `.env`) bind each AI
+1. **Direct model binding, no alias catalog.** Platform superadmin (and `.env`) bind each AI
    *function* directly to a concrete provider + real model id. Drop the
    `chat_cheap` / `chat_standard` named-alias catalog entirely.
 2. **Strong-but-cheap default models** seeded from `.env`, overridable by admin.
@@ -62,17 +70,10 @@ synonyms (see §6.5).
 
 ### Default model table (seeded from `.env`)
 
-| Slot | Provider | Model id |
-|---|---|---|
-| `chat_default` | openrouter | `deepseek/deepseek-v4-flash` |
-| `reasoning_default` | openrouter | `deepseek/deepseek-r1` |
-| `embedding_default` | openrouter | `text-embedding-3-small` |
-| `rerank_default` | openrouter | `deepseek/deepseek-v4-flash` |
-| `eval_default` | openrouter | `deepseek/deepseek-v4-flash` |
-| `vision_default` | openrouter | `google/gemini-2.5-flash` |
-
-`deepseek/deepseek-v4-flash` verified on OpenRouter at ~$0.098/1M in, $0.197/1M
-out — cheaper than Gemini 2.5 Flash, adequate for chat/eval/rerank.
+Concrete default provider/model ids are internal platform operations data. They
+must live in environment/configuration and superadmin-only registry screens, not in
+ordinary university screens, partner/student surfaces, exports, notifications, or
+public docs. This spec intentionally does not repeat the live model ids.
 
 ## 4. Architecture
 

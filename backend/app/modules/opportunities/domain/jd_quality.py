@@ -16,7 +16,7 @@ from __future__ import annotations
 import re
 from dataclasses import dataclass
 
-from app.modules.opportunities.domain.models import Job, ScreeningQuestion
+from app.modules.opportunities.domain.models import Job
 
 BLOCKING = "blocking"
 ADVISORY = "advisory"
@@ -95,9 +95,7 @@ def _has_city(job: Job) -> bool:
     return False
 
 
-def evaluate(
-    job: Job, *, screening: list[ScreeningQuestion] | None = None
-) -> list[QualityIssue]:
+def evaluate(job: Job) -> list[QualityIssue]:
     """Evaluate a job's structured content against the JD quality rubric.
 
     Deterministic and side-effect free — callers decide what to do with the
@@ -106,8 +104,6 @@ def evaluate(
     """
 
     issues: list[QualityIssue] = []
-    screening = screening or []
-
     # --- Title --------------------------------------------------------- #
     # NOTE: the schema already enforces `min_length=3`; a short-but-real title
     # (e.g. "PM", "QA Lead", "Eng") is common and must not be treated as a
@@ -242,28 +238,5 @@ def evaluate(
                 "specific range to help candidates self-assess.",
             )
         )
-
-    # --- Screening questions ------------------------------------------------- #
-    for idx, q in enumerate(screening):
-        q_type = q.q_type
-        options = q.options or []
-        question_text = (q.question or "").strip()
-        if q_type in {"single_choice", "multiple_choice"} and len(options) < 2:
-            issues.append(
-                QualityIssue(
-                    "screening_questions", "screening_option_incomplete", BLOCKING,
-                    f"Câu hỏi sàng lọc #{idx + 1} cần ít nhất 2 lựa chọn.",
-                    f"Screening question #{idx + 1} needs at least 2 options.",
-                )
-            )
-        if question_text and _contains_placeholder(question_text):
-            issues.append(
-                QualityIssue(
-                    "screening_questions", "screening_question_placeholder", ADVISORY,
-                    f"Câu hỏi sàng lọc #{idx + 1} có vẻ là nội dung tạm.",
-                    f"Screening question #{idx + 1} looks like placeholder "
-                    "content.",
-                )
-            )
 
     return issues

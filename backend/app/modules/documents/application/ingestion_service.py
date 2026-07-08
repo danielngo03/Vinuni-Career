@@ -18,6 +18,7 @@ layer. Audit/analytics payloads carry ids/codes/lengths only — never raw CV te
 
 from __future__ import annotations
 
+import asyncio
 import copy
 import re
 import uuid
@@ -231,6 +232,16 @@ async def start_ingestion(
         )
     ).scalars().first()
     if ing is None:
+        # Upload-start quota pre-check: an uploaded CV lands DIRECTLY in the library
+        # (``ready``), so if the library is already full there is no point spending
+        # the (token-expensive) extraction cascade — reject up front with the same
+        # ``409 QUOTA_EXCEEDED`` + recovery actions the import step would raise. Only
+        # gates a genuinely NEW ingestion; a resume/retry of an in-flight one is not
+        # re-checked here (import remains the authoritative gate). Lazy import keeps
+        # the ``_cv_core`` seam local to this create path.
+        from app.modules.documents.application import _cv_core
+
+        await _cv_core._enforce_active_cv_quota(session, principal=principal)
         ing = CvIngestion(
             document_id=document.id,
             user_id=principal.user_id,
@@ -321,7 +332,11 @@ async def _execute_ingestion(session: AsyncSession, *, ingestion_id: uuid.UUID) 
     ).scalars().all()
 
     policy = resolve_policy()
-    outcome: IngestionOutcome = run_cascade(
+    # run_cascade is synchronous and CPU/IO-heavy (PDF rasterization, PIL
+    # resize/encode, blocking vision HTTP). Offload to a thread so it never
+    # blocks the request event loop (the inline queue runs this on the loop).
+    outcome: IngestionOutcome = await asyncio.to_thread(
+        run_cascade,
         document.original_name,
         data,
         max_bytes=get_settings().max_upload_bytes,
@@ -386,13 +401,113 @@ async def get_ingestion(
 # --------------------------------------------------------------------------- #
 
 
+# Titles for extracted section types that are not part of the default template
+# (awards / languages / activities). Extraction can surface these — especially the
+# vision tier on styled CVs — and they must not be silently dropped at import.
+_EXTRA_SECTION_TITLES: dict[str, str] = {
+    "awards": "Awards",
+    "languages": "Languages",
+    "activities": "Activities",
+    "publications": "Publications",
+    "interests": "Interests",
+    "references": "References",
+}
+
+
+def _section_content(section_data: object) -> dict | None:
+    """Return the render-ready content_json for a section, or ``None`` if empty.
+
+    Sections are structured: entry sections carry ``{"entries": [...]}`` and
+    list/skill/text sections carry ``{"items": [...]}``. Both are passed through
+    to ``cv_sections.content_json`` verbatim.
+    """
+
+    if not isinstance(section_data, dict):
+        return None
+    entries = section_data.get("entries")
+    items = section_data.get("items")
+    if isinstance(entries, list) and entries:
+        return {"entries": list(entries)}
+    if isinstance(items, list) and items:
+        return {"items": list(items)}
+    return None
+
+
+# Header fields imported from the extraction's ``contact`` object. Empty values are
+# dropped so a partially-extracted CV does not carry blank contact lines.
+_HEADER_CONTACT_FIELDS = ("name", "headline", "email", "phone", "location")
+
+
+def _header_content(contact: object) -> dict | None:
+    """Build the header section's ``content_json`` from the extracted contact.
+
+    Header content is neither ``entries`` nor ``items`` — it is a flat contact
+    object ``{name, headline, email, phone, location, links:[{label,url}]}``. Empty
+    fields are omitted; returns ``None`` when nothing usable was extracted so the
+    header stays empty rather than carrying blank keys.
+    """
+
+    if not isinstance(contact, dict):
+        return None
+    content: dict = {}
+    for field in _HEADER_CONTACT_FIELDS:
+        value = contact.get(field)
+        if isinstance(value, str) and value.strip():
+            content[field] = value.strip()
+    links_raw = contact.get("links")
+    if isinstance(links_raw, list):
+        links: list[dict] = []
+        for link in links_raw:
+            if not isinstance(link, dict):
+                continue
+            url = link.get("url")
+            if not isinstance(url, str) or not url.strip():
+                continue
+            label = link.get("label")
+            links.append(
+                {
+                    "label": label.strip() if isinstance(label, str) and label.strip()
+                    else url.strip(),
+                    "url": url.strip(),
+                }
+            )
+        if links:
+            content["links"] = links
+    return content or None
+
+
 def _sections_from_extracted(extracted: dict | None) -> list[dict]:
     sections = [dict(s) for s in catalog.DEFAULT_SECTIONS]
     data = extracted or {}
+    known = {s["section_type"] for s in sections}
     for s in sections:
-        section_data = data.get(s["section_type"])
-        if isinstance(section_data, dict) and section_data.get("items"):
-            s["content_json"] = {"items": list(section_data["items"])}
+        if s["section_type"] == catalog.HEADER_SECTION_TYPE:
+            # The header carries the person's name + contact, not entries/items.
+            content = _header_content(data.get("contact"))
+            if content is not None:
+                s["content_json"] = content
+            continue
+        content = _section_content(data.get(s["section_type"]))
+        if content is not None:
+            s["content_json"] = content
+    # Append any extracted section the default template doesn't carry, so an
+    # imported CV keeps every section the ingestion found (never lose awards /
+    # languages / activities). Ordered after the defaults, in a stable order.
+    next_order = max((s.get("sort_order", 0) for s in sections), default=0) + 10
+    for section_type, title in _EXTRA_SECTION_TITLES.items():
+        if section_type in known:
+            continue
+        content = _section_content(data.get(section_type))
+        if content is not None:
+            sections.append(
+                {
+                    "section_type": section_type,
+                    "title": title,
+                    "sort_order": next_order,
+                    "content_json": content,
+                }
+            )
+            next_order += 10
     return sections
 
 
@@ -640,8 +755,8 @@ async def _import_into_draft(
             "title": s.get("title"),
             "content": s.get("content_json") or {},
         }
-        # Only seed sections that carry imported items.
-        if not payload["content"].get("items"):
+        # Only seed sections that carry imported content (entries or items).
+        if not (payload["content"].get("entries") or payload["content"].get("items")):
             continue
         await cv_section_service.create_section(
             session, principal=principal, cv_id=cv.id, payload=payload, ctx=ctx, locale=locale

@@ -420,8 +420,10 @@ export interface StudentCompetitionIntelligence {
   signal: "ok" | "low_signal";
   seats_bucket: "single_seat" | "small_batch" | "batch" | "mass_hiring";
   application_volume_bucket: "low" | "medium" | "high" | "very_high";
-  /** "unknown" until a real aggregate applicant-quality read model exists. */
-  applicant_quality_bucket: string;
+  /** Aggregate applicant-pool quality bucket; "unknown" below the sample threshold. */
+  applicant_quality_bucket: "unknown" | "strong" | "mixed" | "developing";
+  /** The student's coarse standing within the scored pool; "unknown" below threshold. */
+  student_standing_bucket: "unknown" | "ahead_of_most" | "middle_of_pack" | "behind_most";
   student_fit_bucket:
     | "unknown"
     | "needs_improvement"

@@ -19,6 +19,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.core.db import get_db_session
 from app.modules.auth.api.deps import CurrentAuth, get_current_auth
+from app.modules.documents.application import job_fit_batch_service, job_fit_service
 from app.modules.opportunities.api.events_router import (
     admin_events_router,
     events_router,
@@ -28,6 +29,7 @@ from app.modules.opportunities.api.industries_router import (
     industries_router,
 )
 from app.modules.opportunities.api.schemas import (
+    BatchFitScoresRequest,
     JobApproveRequest,
     JobBulkApproveRequest,
     JobBulkRejectRequest,
@@ -53,9 +55,32 @@ from app.modules.opportunities.application import (
 from app.shared.permissions import GUEST, Principal
 from app.shared.responses import paginated, success
 
+
+async def _get_redis():
+    """FastAPI dependency: yield a redis.asyncio client for the request lifetime.
+
+    Redis is optional in local dev (no Redis -> endpoint returns HTTP 503).
+    The client is closed in the finally block so connections are not leaked.
+    """
+    import redis.asyncio as aioredis
+
+    from app.core.config import get_settings
+
+    client = aioredis.from_url(get_settings().redis_url, decode_responses=True)
+    try:
+        yield client
+    finally:
+        await client.aclose()
+
 router = APIRouter(tags=["opportunities"])
 
 jobs_router = APIRouter(prefix="/jobs")
+# Static student-scoped GET routes (``/jobs/saved``, ``/jobs/alerts``) MUST be
+# registered BEFORE the dynamic ``GET /jobs/{job_id}`` — otherwise Starlette
+# matches ``/jobs/saved`` against ``/{job_id}`` (job_id="saved") and returns a
+# 422 UUID-validation error, making both list pages dead end-to-end. This
+# sub-router is included ahead of ``jobs_router`` at the bottom of this module.
+jobs_me_router = APIRouter(prefix="/jobs")
 admin_jobs_router = APIRouter(prefix="/admin/jobs")
 
 
@@ -87,6 +112,9 @@ async def list_jobs(
     q: str | None = Query(default=None),
     employment_type: str | None = Query(default=None),
     location_type: str | None = Query(default=None),
+    location_types: str | None = Query(
+        default=None, description="Comma-separated work modes (multi-select); OR-matched."
+    ),
     province_code: str | None = Query(default=None),
     ward_code: str | None = Query(default=None),
     province_codes: str | None = Query(default=None),
@@ -120,6 +148,7 @@ async def list_jobs(
     items, next_cursor, page_limit, total = await job_service.list_public_jobs(
         session, principal=principal, cursor=cursor, page=page, limit=limit,
         q=q, employment_type=employment_type, location_type=location_type,
+        location_types=location_types,
         province_code=province_code, ward_code=ward_code,
         province_codes=province_codes, ward_codes=ward_codes,
         industry_terms=industry_terms,
@@ -242,6 +271,7 @@ async def get_student_intelligence(
     cv_id: uuid.UUID | None = Query(default=None),
     auth: CurrentAuth = Depends(get_current_auth),
     session: AsyncSession = Depends(get_db_session),
+    accept_language: str | None = Header(default=None),
 ) -> dict:
     """Authenticated-student-only combined job-detail intelligence.
 
@@ -250,12 +280,101 @@ async def get_student_intelligence(
     ``Authorization`` header, and a non-student persona is rejected with
     ``403`` in the service layer. See ``docs/API_CONTRACTS.md`` "Student Job
     Intelligence" for the response contract.
+
+    Personalized guidance strings (improvement actions, learning-gap
+    suggestions, next-action labels, competition guidance) are localized
+    server-side because the frontend renders them as raw backend strings.
     """
 
+    locale = (accept_language or "vi").split(",")[0].split("-")[0].strip()
     data = await student_intelligence_service.student_intelligence_for_job(
         session, principal=auth.principal, job_id=job_id, cv_id=cv_id,
+        locale=locale,
     )
     return success(data)
+
+
+@jobs_router.get(
+    "/{job_id}/fit-explanation",
+    summary="Async AI fit explanation for the recommended (or chosen) CV (student only)",
+)
+async def get_fit_explanation(
+    job_id: uuid.UUID,
+    cv_id: uuid.UUID | None = Query(default=None),
+    auth: CurrentAuth = Depends(get_current_auth),
+    session: AsyncSession = Depends(get_db_session),
+) -> dict:
+    """Authenticated-student-only AI explanation for the CV-to-job fit.
+
+    Split from ``GET /jobs/{job_id}/student-intelligence`` so the deterministic
+    score/bands render immediately: that endpoint no longer waits on the LLM,
+    and the frontend fires THIS separately, showing an "evaluating" state until
+    it returns.
+
+    Guests / non-student personas are rejected the same way as
+    ``get_student_intelligence`` (``get_current_auth`` -> 401 without a token; a
+    non-student persona -> 403 in the service layer). ``cv_id`` (optional)
+    explains that CV when it belongs to the caller and is scored; otherwise the
+    recommended CV. Hidden/closed/missing jobs -> 404.
+
+    Returns ``{ data: { cv_id, explanation, ai_explanation_available } }``. On
+    AI-off / provider failure -> ``explanation: null`` +
+    ``ai_explanation_available: false`` (never an error). Provider/model/token/
+    prompt/cost internals are never exposed.
+    """
+    data = await job_fit_service.fit_explanation_for_job(
+        session, principal=auth.principal, job_id=job_id, cv_id=cv_id
+    )
+    return success(data)
+
+
+@jobs_router.post(
+    "/fit-scores",
+    summary="Batch CV fit scores for a list of jobs (authenticated student only)",
+)
+async def batch_fit_scores(
+    body: BatchFitScoresRequest,
+    auth: CurrentAuth = Depends(get_current_auth),
+    session: AsyncSession = Depends(get_db_session),
+    redis=Depends(_get_redis),
+) -> dict:
+    """Return deterministic CV-job fit scores for up to 50 jobs in one call.
+
+    Intended for job-list page loads: the frontend fires this after receiving a
+    paginated job list and uses the scores to hydrate the fit-score badges on each
+    card without a separate per-job request.
+
+    - Cache hit (Redis): score returned instantly, no DB read.
+    - Cache miss: job + CV data loaded from DB, score computed in pure Python
+      (<1 ms / job), result written to Redis (TTL 4 h).
+    - No active CVs: empty scores dict returned (200).
+    - Non-student or missing auth: 401/403.
+
+    Response::
+
+        {
+          "data": {
+            "scores": {
+              "<job_id>": {
+                "score": 72,
+                "recommended_cv_id": "<uuid>",
+                "signal": "ok",
+                "stale": false
+              }
+            }
+          }
+        }
+
+    Jobs that are not found or not visible to the student are silently omitted
+    (no entry in the scores dict); the frontend renders no badge for those cards.
+    """
+    scores = await job_fit_batch_service.batch_fit_for_jobs(
+        session,
+        redis,
+        principal=auth.principal,
+        job_ids=body.job_ids,
+    )
+    return success({"scores": scores})
 
 
 # --------------------------------------------------------------------------- #
@@ -513,7 +632,7 @@ async def ai_cover_letter(
 # --------------------------------------------------------------------------- #
 
 
-@jobs_router.get(
+@jobs_me_router.get(
     "/saved",
     summary="List the authenticated student's saved jobs (cursor-paginated)",
 )
@@ -572,7 +691,7 @@ async def unsave_job(
 # --------------------------------------------------------------------------- #
 
 
-@jobs_router.get(
+@jobs_me_router.get(
     "/alerts",
     summary="List the authenticated student's job alerts",
 )
@@ -614,6 +733,7 @@ async def create_job_alert(
         employment_type=body.get("employment_type") or None,
         location_type=body.get("location_type") or None,
         province_code=body.get("province_code") or None,
+        ctx=auth.ctx,
     )
     return success(data)
 
@@ -630,7 +750,7 @@ async def delete_job_alert(
     """Deactivates a job alert. The alert is soft-deleted and will no longer
     trigger notifications. Returns ``{"status": "deleted"}``."""
     await job_alert_service.delete_alert(
-        session, principal=auth.principal, alert_id=alert_id
+        session, principal=auth.principal, alert_id=alert_id, ctx=auth.ctx
     )
     return success({"status": "deleted"})
 
@@ -642,17 +762,18 @@ async def delete_job_alert(
 
 @jobs_router.post(
     "/upload-jd",
-    summary="Upload a job description PDF/DOCX and extract structured fields via OCR+LLM",
+    summary="Upload a job description (PDF/DOCX/TXT/image) and extract structured fields",
 )
 async def upload_jd_document(
-    file: UploadFile = File(..., description="PDF, DOCX, or TXT job description"),
+    file: UploadFile = File(..., description="PDF, DOCX, TXT, or image job description"),
     auth: CurrentAuth = Depends(get_current_auth),
 ) -> dict:
-    """Extract structured job fields from an uploaded document.
+    """Extract structured job fields from an uploaded document for form prefill.
 
-    Partners may upload their existing JD template (PDF/DOCX/TXT).
-    Returns prefill-ready structured fields for the job-creation form.
-    On AI unavailability, returns raw text preview for manual copy-paste.
+    Supports digital PDFs/DOCX/TXT and images/scans (OCR + vision). Returns
+    prefill-ready fields on success, a raw-text fallback when AI is unavailable,
+    and a user-safe validation error for blank/not-a-JD/corrupt files. Never
+    writes to the database.
     """
     data = await file.read()
     result = await jd_upload_service.extract_jd_from_upload(
@@ -880,6 +1001,7 @@ async def bulk_reject_jobs(
     return success(results)
 
 
+router.include_router(jobs_me_router)  # static /jobs/saved,/jobs/alerts before /jobs/{job_id}
 router.include_router(jobs_router)
 router.include_router(admin_jobs_router)
 router.include_router(events_router)

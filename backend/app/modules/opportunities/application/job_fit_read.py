@@ -51,18 +51,34 @@ async def load_job_for_fit(
     org = await org_reporting_facade.summary_for(session, job.org_id)
 
     jd_text = " ".join(
-        part for part in (job.description, job.requirements, job.benefits) if part
+        part
+        for part in (job.title, job.description, job.requirements, job.benefits)
+        if part
     )
     return {
         "id": str(job.id),
+        # Content version stamp for the persisted CV-JD fit store: bumped whenever
+        # the employer edits the JD, so a stored fit row is recomputed only when
+        # the JD actually changes (INTERNAL; never surfaced to end users).
+        "version": job.version,
         "title": job.title,
         "company": {"display_name": org.display_name if org else None},
+        "description": job.description,
+        "requirements": job.requirements,
+        "benefits": job.benefits,
         "required_skills": list(job.required_skills or []),
         "preferred_skills": list(job.preferred_skills or []),
         "experience_min_years": job.experience_min_years,
+        "experience_max_years": job.experience_max_years,
+        "experience_mode": job.experience_mode,
         "degree_required": job.degree_required,
+        "seniority_level": job.seniority_level,
+        "candidate_requirements": dict(job.candidate_requirements or {}),
+        "employment_type": job.employment_type,
         "location_type": job.location_type,
         "location_city": job.location_city,
         "location_country": job.location_country,
+        "locations": list(job.locations or []),
+        "cv_language_required": getattr(job, "cv_language_required", "any") or "any",
         "jd_text": jd_text,
     }

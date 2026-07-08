@@ -221,19 +221,26 @@ _INTENT_TOOL_POLICY: dict[str, dict[str, str]] = {
     },
 }
 
-_REFUSAL_MESSAGES: dict[str, str] = {
-    INTENT_HARMFUL:
-        "Tôi không thể hỗ trợ yêu cầu này. Nếu bạn đang gặp khó khăn, "
-        "vui lòng liên hệ đường dây hỗ trợ sức khỏe tâm thần hoặc tư vấn viên nhà trường.",
-    INTENT_BOUNDARY_PROBE:
-        "Xin lỗi, tôi không thể chia sẻ thông tin về cấu hình nội bộ, "
-        "nhà cung cấp, hay hướng dẫn hệ thống. "
-        "Tôi có thể giúp bạn tìm việc làm, chuẩn bị CV, hoặc luyện phỏng vấn nhé?",
-    INTENT_EXTERNAL_SOURCE:
-        "Mình không thể tra cứu internet hoặc nguồn ngoài hệ thống. "
-        "Mình chỉ dùng dữ liệu trong VinUni Career Platform như việc làm, CV, "
-        "đơn ứng tuyển, sự kiện, công ty và knowledge base nội bộ.",
+# Maps a refused intent to its localized user-facing refusal catalog key. The
+# actual vi/en copy lives in the ai_assistant message catalog so all user-facing
+# assistant text is localized in one place; this module only owns intent -> key.
+_REFUSAL_MESSAGE_KEYS: dict[str, str] = {
+    INTENT_HARMFUL: "safety.refuse.harmful",
+    INTENT_BOUNDARY_PROBE: "safety.refuse.boundary_probe",
+    INTENT_EXTERNAL_SOURCE: "safety.refuse.external_source",
 }
+
+
+def _refusal_message(intent: str, locale: str) -> str:
+    """User-safe refusal text for ``intent`` in ``locale`` (defaults to vi).
+
+    Imported lazily so ``app.ai.safety`` keeps no import-time dependency on
+    ``app.modules.*`` (layering); the catalog is a plain data lookup.
+    """
+    from app.modules.ai_assistant.application.messages import assistant_message
+
+    key = _REFUSAL_MESSAGE_KEYS.get(intent, "safety.refuse.generic")
+    return assistant_message(key, locale)
 
 
 # ---------------------------------------------------------------------------
@@ -244,12 +251,18 @@ _REFUSAL_MESSAGES: dict[str, str] = {
 def check_policy(
     text: str | None,
     tool_class: str = READ_ONLY,
+    *,
+    locale: str = "vi",
 ) -> PolicyDecision:
     """Run the full safety pipeline and return a PolicyDecision.
 
     Args:
         text: Raw user message. None → allow with None clean_text.
         tool_class: Permission class of the tool being invoked.
+        locale: User-facing language for the refusal message ("vi"/"en");
+            unknown values fall back to "vi" so callers can pass a raw locale
+            hint. Only the ``refusal_message`` is localized — classification,
+            flags, and audit are language independent.
 
     Returns:
         PolicyDecision with action, clean_text, intent, and flags.
@@ -300,7 +313,7 @@ def check_policy(
             clean_text=None,
             intent=intent,
             flags=all_flags,
-            refusal_message=_REFUSAL_MESSAGES.get(intent, "Tôi không thể xử lý yêu cầu này."),
+            refusal_message=_refusal_message(intent, locale),
         )
 
     return PolicyDecision(

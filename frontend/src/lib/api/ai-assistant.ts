@@ -50,10 +50,47 @@ export interface AiUsageSummary {
   blocked_scope: "day" | "week" | null;
 }
 
+/** One product-feature bucket in the usage breakdown. `feature` is a stable
+ * code the client localizes (`billing.usage.features.*`) — never a raw internal
+ * task/model label. */
+export interface AiUsageFeatureCount {
+  feature: string;
+  count: number;
+}
+
+/** One recent AI activity row. Request metadata only — no cost/token/provider. */
+export interface AiUsageActivity {
+  feature: string;
+  ok: boolean;
+  at: string | null;
+}
+
+/** Rich AI usage detail for the billing/usage panel (`GET /ai/usage/summary`).
+ * Extends the sidebar meter with reset timing, a per-feature breakdown, and a
+ * recent-activity list. Still request-count only: no provider/model/token/cost. */
+export interface AiUsageDetail extends AiUsageSummary {
+  /** ISO-8601 UTC instant the daily window resets. */
+  day_reset: string;
+  /** ISO-8601 UTC instant the weekly window resets. */
+  week_reset: string;
+  /** Number of days the breakdown/total cover (default 30). */
+  window_days: number;
+  /** Total AI requests in the window (includes system tasks not shown by feature). */
+  total: number;
+  by_feature: AiUsageFeatureCount[];
+  recent: AiUsageActivity[];
+}
+
 export const aiAssistantApi = {
   /** My AI usage today vs the daily allowance. */
   myUsage(): Promise<AiUsageSummary> {
     return api.get<AiUsageSummary>("/ai/usage/me");
+  },
+
+  /** My AI usage detail for the billing/usage panel (windows, reset timing,
+   * per-feature breakdown, recent activity). */
+  myUsageDetail(): Promise<AiUsageDetail> {
+    return api.get<AiUsageDetail>("/ai/usage/summary");
   },
 
   /** Create a new chat session. */

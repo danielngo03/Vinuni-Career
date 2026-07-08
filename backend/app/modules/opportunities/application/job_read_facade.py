@@ -5,7 +5,7 @@ student's upcoming registered events through this seam instead of importing the
 ``Job`` / ``Event`` / ``EventRegistration`` ORM, so the module boundary holds
 (`docs/ARCHITECTURE.md`: communicate through interfaces/read models). Only the
 small projected shape a consumer needs is returned — never the full owner-only
-job/event row (visibility, moderation internals, screening answers, etc.).
+job/event row (visibility, moderation internals, applicant answers, etc.).
 """
 
 from __future__ import annotations

@@ -31,7 +31,10 @@
 - No sponsored/ad content without visible `Được tài trợ` or `Quảng cáo` disclosure.
 - No "recommended" section is valid if it is actually a recent/new list without
   reason codes, fit score, session signal, or documented fallback label.
-- No provider/model/token/prompt/internal AI details in user-facing UI.
+- No provider/model/token/prompt/internal AI details in user-facing UI,
+  ordinary university-staff UI, exports, or notifications. Real provider/model
+  registry details belong only in superadmin AI operations/settings screens;
+  all other AI surfaces use masked alias/status/budget language.
 - No public homepage is complete if it only contains hero copy, generic feature
   cards, or fake stats. It must show real public discovery surfaces or honest
   loading/empty/error states.
@@ -76,10 +79,11 @@
 ## 4. Visual Quality
 
 - Use VinUni tokens and Plus Jakarta Sans from `docs/DESIGN.md`.
-- VinUni brand colors are anchors, not a requirement to saturate the product
-  with every brand color. Use clean neutrals, action blues, teal/cyan AI/success
-  accents, restrained red, and amber disclosure/status where they improve
-  hierarchy and trust.
+- Follow v9 Monochrome (`docs/DESIGN.md` §1.1.2): ink is the only action color,
+  carried by a full gray ramp; no blue/navy accent surfaces. Reserve color for
+  meaning only — green = verified/success (the AI/success accent token), VinUni
+  red = destructive/brand detail, amber = sponsored/paid disclosure. Use these as
+  small chips/labels, not large surfaces.
 - Prefer flat, precise, readable SaaS UI over glassmorphism-heavy surfaces inside the app.
 - Public/brand surfaces may use restrained enterprise gateway patterns: trust signals, clear persona paths, and conservative accent CTAs.
 - Do not let dashboard screens become one-note blue/grey blocks; use status colors, neutral density, and clear hierarchy.
@@ -111,10 +115,12 @@ Use this bar whenever the UI feels "demo-like" or visually weaker than
   creatives, VinUni-curated banners, strategic-partner spotlights, event/career
   day media, and right-rail/inline placements. Paid placements keep disclosure;
   curated/strategic content uses polished trust language.
-- Floating action launcher: bottom-right desktop rail + mobile launcher for
-  saved jobs, career opportunity invitations, messages, feedback/help, and
-  VinUni AI when available. Buttons need hover/focus labels; AI may use a
-  restrained pulse/glow with `prefers-reduced-motion`.
+- Header quick actions (owner decision 2026-07-07; the bottom-right floating
+  rail was removed): saved jobs, notifications, messages, and VinUni AI when
+  available live in the top header cluster; feedback/help lives in the account
+  (avatar) menu. On mobile these collapse into the top header/nav, not a floating
+  launcher. Buttons need hover/focus labels; AI may use a restrained
+  ink/monochrome pulse/glow with `prefers-reduced-motion`.
 - Signed-in student: inherits marketplace-style top nav with student-specific
   items; no admin sidebar by default. First screen focuses on job discovery,
   active CV quota/readiness, recommended CV per job, applications, interviews,

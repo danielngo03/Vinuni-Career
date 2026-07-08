@@ -16,15 +16,35 @@ import uuid
 from sqlalchemy import func, select
 from sqlalchemy.ext.asyncio import AsyncSession
 
+from app.modules.auth.application.context import RequestContext
 from app.modules.opportunities.domain.models import JobAlert
+from app.shared.audit import AuditContext, write_audit
 from app.shared.exceptions import (
     ConflictError,
     PermissionDeniedError,
     QuotaExceededError,
     ResourceNotFoundError,
 )
+from app.shared.permissions import Principal
 
 _MAX_ALERTS_PER_USER = 10
+
+
+def _audit_ctx(principal: Principal, ctx: RequestContext | None) -> AuditContext:
+    """Build an audit context from the caller's principal + optional request ctx.
+
+    Mirrors the ``_audit_ctx`` helper other opportunities write services use
+    (e.g. ``registration_service``). ``ctx`` is optional so the request path can
+    supply raw IP / user-agent (hashed by ``write_audit``) while direct service
+    callers still record an audited write scoped to the actor.
+    """
+
+    return AuditContext(
+        actor_id=principal.user_id,
+        actor_org_id=principal.org_id,
+        ip=ctx.ip if ctx is not None else None,
+        user_agent=ctx.user_agent if ctx is not None else None,
+    )
 
 
 async def count_alerts_for_user(session: AsyncSession, *, user_id: uuid.UUID) -> int:
@@ -74,6 +94,7 @@ async def create_alert(
     employment_type: str | None = None,
     location_type: str | None = None,
     province_code: str | None = None,
+    ctx: RequestContext | None = None,
 ) -> dict:
     """Create a new job alert for the authenticated student.
 
@@ -125,6 +146,30 @@ async def create_alert(
                 details={"reason": "alert_name_exists"}
             ) from exc
         raise
+
+    # Every write action records an audit entry (CLAUDE.md non-negotiable). The
+    # snapshot carries only the non-PII alert criteria — no email/name.
+    await write_audit(
+        session,
+        action="job_alert.created",
+        resource_type="job_alert",
+        resource_id=alert.id,
+        context=_audit_ctx(principal, ctx),
+        after={
+            "name": alert.name,
+            "keywords": alert.keywords,
+            "employment_type": alert.employment_type,
+            "location_type": alert.location_type,
+            "province_code": alert.province_code,
+        },
+    )
+
+    # The request-scoped session (``get_db_session``) does NOT auto-commit on
+    # success — every write service in this codebase commits its own
+    # transaction (mirrors ``saved_jobs_service``). Without this the flushed row
+    # is discarded when the session closes and the alert is silently lost.
+    await session.commit()
+    await session.refresh(alert)
     return _present(alert)
 
 
@@ -133,6 +178,7 @@ async def delete_alert(
     *,
     principal,
     alert_id: uuid.UUID,
+    ctx: RequestContext | None = None,
 ) -> None:
     """Soft-delete (deactivate) a job alert owned by the authenticated student."""
     _require_student(principal)
@@ -147,6 +193,20 @@ async def delete_alert(
         raise ResourceNotFoundError()
     alert.is_active = False
     await session.flush()
+
+    # Every write action records an audit entry (CLAUDE.md non-negotiable).
+    await write_audit(
+        session,
+        action="job_alert.deleted",
+        resource_type="job_alert",
+        resource_id=alert.id,
+        context=_audit_ctx(principal, ctx),
+        before={"name": alert.name, "is_active": True},
+        after={"is_active": False},
+    )
+
+    # Persist the soft-delete — the session dependency never commits on success.
+    await session.commit()
 
 
 def _present(alert: JobAlert) -> dict:

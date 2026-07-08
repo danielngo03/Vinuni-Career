@@ -43,9 +43,19 @@ _RESOURCE = _shared.RESOURCE
 
 
 async def list_templates(session: AsyncSession, *, locale: str = "vi") -> list[dict]:
+    """Public template catalogue: only published + active templates are offered.
+
+    Draft/archived templates are back-office states and never reach students.
+    """
+
     rows = (
         await session.execute(
-            select(CvTemplate).where(CvTemplate.is_active.is_(True)).order_by(CvTemplate.key)
+            select(CvTemplate)
+            .where(
+                CvTemplate.is_active.is_(True),
+                CvTemplate.status == "published",
+            )
+            .order_by(CvTemplate.key)
         )
     ).scalars().all()
     return [presenters.template(t, locale=locale) for t in rows]
@@ -86,11 +96,11 @@ async def list_versions(
 
 
 async def count_cvs(session: AsyncSession, *, principal: Principal) -> int:
-    """Number of the owner's ACTIVE CVs (not soft-deleted, not archived).
+    """Number of the owner's LIBRARY CVs (``ready``, not soft-deleted).
 
     Shares ``_active_cv_count`` with the quota gate so the dashboard read model
-    and the create/duplicate enforcement can never disagree on what "active"
-    means.
+    and the finalize/upload-import enforcement can never disagree on what counts
+    against the 5-cap. Unlimited scratch drafts and archived CVs are excluded.
     """
 
     permission_checker.require(principal, _RESOURCE, "read")
@@ -101,11 +111,13 @@ async def count_cvs(session: AsyncSession, *, principal: Principal) -> int:
 async def cv_library_quota(session: AsyncSession, *, principal: Principal) -> dict:
     """Active-CV library quota state for the CV list ``meta`` block.
 
-    Shape matches docs/API_CONTRACTS.md "CV Library And Quota": the UI uses this
-    to render the live counter and to disable create when ``can_create`` is false.
-    ``quota_reset_at`` is null because the active-CV limit is a standing cap, not a
-    periodic allowance. ``quota_source`` is ``subscription`` when an active paid tier
-    overrides the platform default (ADR-0010 §3), else ``student_tier``.
+    Shape matches docs/API_CONTRACTS.md "CV Library And Quota": the UI uses this to
+    render the live "x/5" library counter and to disable **finalize / upload import**
+    when ``can_create`` is false (creating/duplicating drafts stays unlimited).
+    ``active_cv_used`` counts only ``ready`` library CVs. ``quota_reset_at`` is null
+    because the active-CV limit is a standing cap, not a periodic allowance.
+    ``quota_source`` is ``subscription`` when an active paid tier overrides the
+    platform default (ADR-0010 §3), else ``student_tier``.
     """
 
     permission_checker.require(principal, _RESOURCE, "read")
@@ -195,26 +207,6 @@ async def update_cv(
             setattr(cv, field, payload[field])
             changed[field] = True
 
-    is_primary = payload.get("is_primary")
-    if is_primary is True:
-        # Single primary CV per owner.
-        others = (
-            await session.execute(
-                select(CvProfile).where(
-                    CvProfile.user_id == principal.user_id,
-                    CvProfile.id != cv.id,
-                    CvProfile.is_primary.is_(True),
-                )
-            )
-        ).scalars().all()
-        for o in others:
-            o.is_primary = False
-        cv.is_primary = True
-        changed["is_primary"] = True
-    elif is_primary is False:
-        cv.is_primary = False
-        changed["is_primary"] = True
-
     if changed:
         cv.version += 1
         cv.last_edited_at = _shared.now()
@@ -228,6 +220,34 @@ async def update_cv(
     await session.commit()
     await session.refresh(cv)
     return await _cv_core._detail_response(session, cv=cv, locale=locale)
+
+
+async def delete_cv(
+    session: AsyncSession,
+    *,
+    principal: Principal,
+    cv_id: uuid.UUID,
+    ctx: RequestContext,
+    expected_version: int | None = None,
+) -> None:
+    """Soft-delete the owner's CV — it disappears from the library and stops
+    counting against the active-CV quota. Snapshots referenced by submitted
+    applications are preserved (immutable), so this is safe. Owner-only; the write
+    is audited. Re-deleting a missing/already-deleted CV raises 404.
+    """
+
+    permission_checker.require(principal, _RESOURCE, "update")
+    cv = await _cv_core._load_owned_cv(session, principal=principal, cv_id=cv_id, lock=True)
+    if expected_version is not None and expected_version != cv.version:
+        raise CvVersionConflictError(current_version=cv.version)
+    cv.deleted_at = _shared.now()
+    cv.version += 1
+    await session.flush()
+    await write_audit(
+        session, action="cv.deleted", resource_type="cv", resource_id=cv.id,
+        context=_shared.audit_ctx(principal, ctx),
+    )
+    await session.commit()
 
 
 # --------------------------------------------------------------------------- #

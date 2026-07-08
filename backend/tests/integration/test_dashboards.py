@@ -12,14 +12,13 @@ from __future__ import annotations
 import uuid
 
 import pytest
-from app.modules.users.application import admin_users_service
 from app.modules.dashboards.application import (
     partner_dashboard,
     student_dashboard,
     university_dashboard,
 )
 from app.modules.documents.application import snapshot_service
-from app.modules.opportunities.application import job_service
+from app.modules.opportunities.application import job_service, registration_service
 from app.modules.organization.application import partner_registration_service
 from app.modules.recruitment.application import (
     access,
@@ -29,6 +28,7 @@ from app.modules.recruitment.application import (
 from app.modules.recruitment.application import (
     dashboard_read as recruitment_read,
 )
+from app.modules.users.application import admin_users_service
 from app.shared.exceptions import PermissionDeniedError
 
 from tests.auth_utils import CTX
@@ -41,8 +41,6 @@ from tests.recruitment_utils import (
     make_builder_cv,
     publish_job,
 )
-
-from app.modules.opportunities.application import registration_service
 
 _REVEAL_REASON = "We would like to learn more about your internship experience here."
 
@@ -78,12 +76,13 @@ async def test_student_dashboard_empty_state(db_session) -> None:
     assert data["metrics"] == {
         "applications_total": 0,
         "applications_active": 0,
-        "profile_completion_pct": 0,
         "cv_count": 0,
         "alert_count": 0,
     }
     keys = {a["key"] for a in data["next_actions"]}
-    assert "complete_profile" in keys and "build_cv" in keys
+    # Identity-only profile: no "complete_profile" nudge; the setup nudge is CV-first.
+    assert "complete_profile" not in keys
+    assert "build_cv" in keys
     assert "create_alert" in keys  # nudge when no alerts exist
     assert "respond_reveal" not in keys
     assert data["applications_recent"] == []
@@ -328,7 +327,8 @@ async def test_widget_failure_degrades_to_fallback(db_session, monkeypatch) -> N
     # The failing widget falls back to zero; the rest of the dashboard still loads.
     assert data["metrics"]["applications_total"] == 0
     assert data["metrics"]["applications_active"] == 0
-    assert {a["key"] for a in data["next_actions"]} >= {"complete_profile", "build_cv"}
+    # Identity-only profile: the setup nudge is CV-first (no "complete_profile").
+    assert {a["key"] for a in data["next_actions"]} >= {"build_cv"}
 
 
 # --------------------------------------------------------------------------- #

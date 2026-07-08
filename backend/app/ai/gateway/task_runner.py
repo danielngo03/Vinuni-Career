@@ -29,6 +29,8 @@ from typing import TYPE_CHECKING
 if TYPE_CHECKING:
     from sqlalchemy.ext.asyncio import AsyncSession
 
+    from app.ai.observability.billable_usage import UsageContext
+
 from app.ai.gateway.base import AICompletion, AIEmbedding, AIMessage
 from app.shared.exceptions import AIUnavailableError, ValidationFailedError
 
@@ -55,6 +57,8 @@ class AiTaskRunner:
         session_id: uuid.UUID | None = None,
         tool_class: str = "read_only",
         org_id: uuid.UUID | None = None,
+        usage_context: UsageContext | None = None,
+        charge_units: int = 0,
     ) -> None:
         self._db = db
         self._alias = alias
@@ -63,6 +67,40 @@ class AiTaskRunner:
         self._session_id = session_id
         self._tool_class = tool_class
         self._org_id = org_id
+        # Opt-in billable ledger (PRODUCT_OPERATING_MODEL §3.5). When a call site
+        # passes a UsageContext, every terminal outcome (success / blocked /
+        # provider_failed) records exactly one durable, idempotent charge row.
+        # Left None (the default) the runner is byte-for-byte unchanged.
+        self._usage_context = usage_context
+        self._charge_units = charge_units
+
+    async def _record_billable(
+        self, result_status: str, *, provider_cost_usd: float | None = None
+    ) -> None:
+        """Best-effort billable-ledger write — NEVER breaks the AI call path.
+
+        No-op unless a ``UsageContext`` was supplied. The ledger facade
+        savepoint-isolates its own insert; this extra guard swallows any residual
+        error so accounting can never disrupt the user's response.
+        """
+        if self._usage_context is None or self._db is None:
+            return
+        try:
+            from app.ai.observability.billable_usage import record_billable_usage
+
+            await record_billable_usage(
+                self._db,
+                ctx=self._usage_context,
+                result_status=result_status,
+                base_units=self._charge_units,
+                provider_cost_usd=provider_cost_usd,
+            )
+        except Exception:  # noqa: BLE001
+            import logging
+
+            logging.getLogger("ai.task_runner").warning(
+                "ai_billable_ledger_write_failed", exc_info=True
+            )
 
     async def complete(
         self,
@@ -122,6 +160,7 @@ class AiTaskRunner:
                         user_id=self._user_id,
                         session_id=self._session_id,
                     )
+                await self._record_billable("blocked")
                 raise
 
         # 2. Policy orchestration: intent classification → policy decision → rewrite/refuse
@@ -176,6 +215,7 @@ class AiTaskRunner:
                 )
             else:
                 log_ai_usage(task_type=self._task_type, alias=alias, success=False)
+            await self._record_billable("provider_failed")
             raise AIUnavailableError() from exc
 
         latency_ms = int((time.monotonic() - t0) * 1000)
@@ -232,6 +272,10 @@ class AiTaskRunner:
                 user_id=self._user_id,
                 session_id=self._session_id,
             )
+
+        # 8. Billable ledger — one durable, idempotent charge on the successful,
+        # user-visible result (§3.2 charges only on success).
+        await self._record_billable("success", provider_cost_usd=cost_usd)
 
         # Return a guarded completion — model_alias is safe (alias, not provider name)
         return AICompletion(
@@ -298,6 +342,7 @@ class AiTaskRunner:
                         user_id=self._user_id,
                         session_id=self._session_id,
                     )
+                await self._record_billable("blocked")
                 raise
 
         try:
@@ -372,6 +417,11 @@ class AiTaskRunner:
                     )
                 except Exception:
                     pass
+                # Billable ledger: charge only a streamed turn that produced text.
+                if stream_status == "ok" and total_chars:
+                    await self._record_billable("success", provider_cost_usd=cost_usd)
+                else:
+                    await self._record_billable("provider_failed")
 
     async def embed(
         self,

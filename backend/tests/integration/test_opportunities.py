@@ -51,7 +51,6 @@ def _payload(title: str = "Backend Intern", **over) -> dict:
         "headcount": 1,
         "application_deadline": None,
         "visibility": "public",
-        "screening_questions": [],
     }
     base.update(over)
     return base
@@ -441,21 +440,6 @@ async def test_content_amend_on_active_job_requires_remoderation(db_session) -> 
     assert detail["title"] == "Backend Intern (Revised)"
 
 
-async def test_screening_questions_locked_after_publish(db_session) -> None:
-    _u, _org, admin = await make_org_with_admin(db_session)
-    _uu, _uorg, uni = await make_org_with_admin(db_session, org_type="university")
-    job_id = await _publish(db_session, admin, uni)
-
-    with pytest.raises(JobNotEditableError):
-        await job_service.update_job(
-            db_session, principal=admin, job_id=job_id,
-            payload={"screening_questions": [
-                {"question": "Are you eligible to work in Vietnam?", "q_type": "yes_no"}
-            ]},
-            ctx=CTX,
-        )
-
-
 async def test_amendment_audit_records_before_after_diff(db_session) -> None:
     _u, _org, admin = await make_org_with_admin(db_session)
     _uu, _uorg, uni = await make_org_with_admin(db_session, org_type="university")
@@ -540,7 +524,6 @@ async def test_university_moderator_can_view_pending_job_detail(db_session) -> N
     )
     assert detail["status"] == "pending_review"
     assert "moderation_status" in detail
-    assert detail["screening_questions"] == []
 
     # A different (non-university) partner still gets 404 (tenant/enumeration).
     _ob_u, _ob, other_partner = await make_org_with_admin(
@@ -602,12 +585,7 @@ async def test_duplicate_job_creates_draft_copy(db_session) -> None:
     source = await job_service.create_job(
         db_session,
         principal=admin,
-        payload=_payload(
-            "Senior Python Dev",
-            screening_questions=[
-                {"question": "GitHub?", "q_type": "text", "is_required": True, "sort_order": 0}
-            ],
-        ),
+        payload=_payload("Senior Python Dev"),
         ctx=CTX,
     )
     source_id = uuid.UUID(source["id"])
@@ -622,8 +600,6 @@ async def test_duplicate_job_creates_draft_copy(db_session) -> None:
     assert copy["moderation_status"] == "pending"
     assert copy["slug"] != source["slug"]
     assert copy["description"] == source["description"]
-    assert len(copy["screening_questions"]) == 1
-    assert copy["screening_questions"][0]["question"] == "GitHub?"
 
 
 @pytest.mark.asyncio

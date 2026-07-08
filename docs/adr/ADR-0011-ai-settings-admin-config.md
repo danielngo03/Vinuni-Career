@@ -3,10 +3,21 @@
 **Status:** Accepted (Proposed for implementation in the next backend slice)
 **Date:** 2026-06-28
 **Owner:** system-architect
+
+> **Amendment — 2026-07-08 (ADR-0011.2):** provider/model registry identity and
+> CRUD are platform-superadmin-only. Earlier ADR-0011 wording that says
+> "University Admin" manages providers/models now means platform superadmin. Ordinary
+> university staff may manage masked AI governance controls only: feature flags,
+> budgets, alias handles, derived health, and limit requests. The grant
+> `ai_settings:view_provider_identity` is not sufficient to reveal raw provider or
+> concrete model identity unless the principal is also a platform superadmin. API
+> keys and base URLs are never stored in responses or returned by any API.
+
 **Related:** CLAUDE.md (Greenfield Naming Defaults: "Use `ai_settings` for admin-managed
 provider/model settings"; "Do not expose AI provider names, model names, token counts…");
-`docs/AI_PRODUCT_SPEC.md` §5.1 (model-alias → provider/model mapping "managed by University
-Admin in `ai_settings`"), §5.2 (circuit-breaker "thresholds configurable in ai_settings"),
+`docs/AI_PRODUCT_SPEC.md` §5.1 (legacy wording amended above: provider/model
+registry is platform-superadmin-only; ordinary university staff see masked AI
+governance controls), §5.2 (circuit-breaker "thresholds configurable in ai_settings"),
 §5.4 + §11.2 (cost tracking / budget check / `402 BUDGET_EXCEEDED`), §16 (Rollout Defaults),
 §17 (Rollback Criteria per feature); `docs/PRODUCT_REQUIREMENTS.md` (University AI governance
 scope); `docs/SECURITY_PRIVACY.md` §AI Safety (lines 79–81: provider names / model names /
@@ -35,10 +46,11 @@ read `get_settings()` (`ai_real_calls_enabled` AND `openrouter_api_key not in PL
 `cv_llm_structuring_enabled`; job-fit enrichment short-circuits on `real_provider_active()`.
 The `output_guard` already scrubs provider/model/key/token signals from every **end-user**
 path. What does **not** exist is any **admin governance surface**: there is no way for a
-University Admin to select aliases, flip a feature flag, set a budget, or pull a kill switch
-**without editing `.env` and restarting**. `AI_PRODUCT_SPEC` repeatedly names `ai_settings`
-as the home for this ("managed by University Admin in `ai_settings`", "configurable in
-ai_settings", "University Admin → AI Settings"), but no entity, facade, or endpoint backs it.
+platform superadmin to select provider/model bindings, flip a feature flag, set a
+budget, or pull a kill switch **without editing `.env` and restarting**. Ordinary
+university staff may only receive masked AI governance controls. Earlier
+`AI_PRODUCT_SPEC` wording that named "University Admin → AI Settings" is amended by
+ADR-0011.2: real provider/model registry ownership is platform-superadmin-only.
 
 Constraints that bound the decision:
 

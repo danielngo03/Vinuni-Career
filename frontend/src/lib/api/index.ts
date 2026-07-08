@@ -389,7 +389,16 @@ export { interviewPrepApi, coverLetterApi } from "./interview-prep";
 export { jobAlertsApi } from "./job-alerts";
 export type { JobAlert, CreateJobAlertBody } from "./job-alerts";
 export { aiAssistantApi } from "./ai-assistant";
-export type { ChatSession, ChatMessage, ChatMessageRole, AiUsageSummary, AiUsageWindow } from "./ai-assistant";
+export type {
+  ChatSession,
+  ChatMessage,
+  ChatMessageRole,
+  AiUsageSummary,
+  AiUsageWindow,
+  AiUsageDetail,
+  AiUsageFeatureCount,
+  AiUsageActivity,
+} from "./ai-assistant";
 export type {
   InterviewQuestion,
   InterviewPrepResult,

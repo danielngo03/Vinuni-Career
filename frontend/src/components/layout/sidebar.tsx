@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
 import { useQuery } from "@tanstack/react-query";
-import { ChevronDown, PanelLeftClose, PanelLeftOpen, Sparkles } from "lucide-react";
+import { ChevronDown, PanelLeftClose, PanelLeftOpen } from "lucide-react";
 import { Link, usePathname } from "@/i18n/navigation";
 import { CompanyAvatar } from "@/components/companies/company-avatar";
 import { WORKSPACE_NAV_GROUPS, type NavGroup, type NavItem } from "@/config/nav";
@@ -16,10 +16,6 @@ import { cn } from "@/lib/utils";
 interface SidebarProps {
   persona: Persona;
   onNavigate?: () => void;
-  /** Called when the AI assistant button is clicked. */
-  onAiClick?: () => void;
-  /** When true, the AI button shows as active. */
-  aiActive?: boolean;
   /** Icon-only rail mode (desktop only — DESIGN.md §4 collapsed width 64px). */
   collapsed?: boolean;
   /** Renders the collapse/expand toggle when provided (desktop rail only, not the mobile drawer). */
@@ -107,46 +103,6 @@ function SubNavLink({
   );
 }
 
-function AiAssistantButton({
-  label,
-  active,
-  collapsed,
-  onClick,
-}: {
-  label: string;
-  active?: boolean;
-  collapsed?: boolean;
-  onClick: () => void;
-}) {
-  return (
-    <button
-      type="button"
-      onClick={onClick}
-      aria-pressed={active}
-      aria-label={label}
-      title={collapsed ? label : undefined}
-      className={cn(
-        ROW_CLASS,
-        "w-full",
-        collapsed && "justify-center px-0 py-2.5",
-        active
-          ? "bg-[var(--ai-accent-soft)] font-semibold text-[var(--teal-700)]"
-          : ROW_IDLE_CLASS,
-      )}
-    >
-      <Sparkles
-        aria-hidden
-        strokeWidth={active ? 2.1 : 1.7}
-        className={cn(
-          "size-[18px] shrink-0",
-          active ? "text-[var(--brand-teal)]" : "text-[var(--text-muted)]",
-        )}
-      />
-      <span className={cn(collapsed && "sr-only")}>{label}</span>
-    </button>
-  );
-}
-
 function PartnerCompanyIdentity() {
   const t = useTranslations("nav");
   const query = useQuery({
@@ -205,8 +161,6 @@ function PartnerCompanyIdentity() {
 export function Sidebar({
   persona,
   onNavigate,
-  onAiClick,
-  aiActive,
   collapsed = false,
   onToggleCollapsed,
 }: SidebarProps) {
@@ -406,22 +360,11 @@ export function Sidebar({
             </div>
           );
         })}
-        {persona === "partner" && onAiClick && (
-          <div className="mt-4">
-            <AiAssistantButton
-              label={t("aiAssistant")}
-              active={aiActive}
-              collapsed={collapsed}
-              onClick={onAiClick}
-            />
-          </div>
-        )}
       </nav>
 
-      {/* Footer: AI usage + plan card.
-          In the partner shell, AI assistant sits with the primary nav under
-          the Organization group so it is closer to recruiting workflows.
-          Account & settings live in the topbar's AccountMenu. */}
+      {/* Footer: AI usage + plan card. The AI assistant now lives in the
+          topbar (after the messaging bell); account & settings live in the
+          topbar's AccountMenu. */}
       <div
         className={cn(
           "space-y-0.5 py-3",
@@ -454,14 +397,6 @@ export function Sidebar({
             )}
             <span className={cn(collapsed && "sr-only")}>{sidebarToggleLabel}</span>
           </button>
-        )}
-        {persona !== "partner" && onAiClick && (
-          <AiAssistantButton
-            label={t("aiAssistant")}
-            active={aiActive}
-            collapsed={collapsed}
-            onClick={onAiClick}
-          />
         )}
       </div>
     </div>

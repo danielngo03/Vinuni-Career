@@ -317,6 +317,13 @@ async def _maybe_explain(
 _LOW_SIGNAL_APPLICATION_THRESHOLD = 3
 _LOW_SIGNAL_SOURCE_EVENT_THRESHOLD = 5
 
+# Minimum number of OTHER scored candidates required before an applicant-quality
+# distribution / student-standing bucket may be emitted. Below this the pool is
+# too small to (a) be statistically meaningful and (b) stay privacy-safe (a
+# coarse bucket over a handful of rows could hint at a single individual), so
+# ``applicant_quality_bucket`` stays "unknown" and standing stays "unknown".
+_MIN_QUALITY_POOL = 5
+
 # English machine-readable label (distinct from the Vietnamese display label
 # used by the public, non-personalized ``competition_signal`` above).
 _STUDENT_LABELS: dict[str, str] = {
@@ -409,7 +416,10 @@ async def _source_mix(
     buckets = {"organic": 0, "recommendation": 0, "sponsored": 0, "curated": 0}
     for surface, n in rows:
         n = int(n)
-        if surface in SPONSORED_SURFACES:
+        if surface in {
+            "homepage_sponsored", "search_sponsored", "right_rail_banner",
+            "email_sponsored", "mega_sponsored",
+        }:
             buckets["sponsored"] += n
         elif surface in {
             "homepage_recommended", "search_recommended",
@@ -422,6 +432,91 @@ async def _source_mix(
             buckets["organic"] += n
 
     return {k: round(v / total, 2) for k, v in buckets.items() if v > 0}
+
+
+async def _applicant_quality_pool(
+    session: AsyncSession,
+    *,
+    job_id: uuid.UUID,
+    exclude_user_id: uuid.UUID | None,
+) -> list[int]:
+    """Best persisted fit score per OTHER scored candidate for this job.
+
+    Reads the ``documents`` module's ``cv_job_fit_scores`` store READ-ONLY via a
+    raw ``text()`` query — the same cross-module read pattern this file already
+    uses for ``applications`` / ``discovery_events`` (no ``documents`` ORM/domain
+    import, so the module boundary holds). One representative (MAX) score per
+    distinct ``user_id`` so a candidate with several CVs cannot skew the
+    distribution, and the requesting student is excluded so their own score never
+    inflates/deflates the pool they are compared against.
+
+    Returns raw integer scores. The caller emits ONLY coarse buckets derived from
+    them — never an individual score, a rank, a percentile, or an identity.
+    """
+
+    sql = (
+        "SELECT user_id, MAX(score) AS best FROM cv_job_fit_scores"
+        " WHERE job_id = :job_id"
+    )
+    params: dict[str, object] = {"job_id": job_id}
+    binds = [bindparam("job_id", type_=Uuid(as_uuid=True))]
+    if exclude_user_id is not None:
+        sql += " AND user_id <> :exclude_user_id"
+        params["exclude_user_id"] = exclude_user_id
+        binds.append(bindparam("exclude_user_id", type_=Uuid(as_uuid=True)))
+    sql += " GROUP BY user_id"
+
+    result = await session.execute(text(sql).bindparams(*binds), params)
+    return [int(best) for _uid, best in result.all() if best is not None]
+
+
+def _median(values: list[int]) -> float:
+    """Deterministic median (average of the two middle values for even counts)."""
+
+    ordered = sorted(values)
+    n = len(ordered)
+    mid = n // 2
+    if n % 2 == 1:
+        return float(ordered[mid])
+    return (ordered[mid - 1] + ordered[mid]) / 2
+
+
+def _applicant_quality_bucket(pool: list[int]) -> str:
+    """Coarse caliber of the competing pool from its fit-score median.
+
+    ``strong`` / ``mixed`` / ``developing`` — or ``unknown`` when the sample is
+    below :data:`_MIN_QUALITY_POOL`. Never exposes any individual value.
+    """
+
+    if len(pool) < _MIN_QUALITY_POOL:
+        return "unknown"
+    median = _median(pool)
+    if median >= 70:
+        return "strong"
+    if median >= 50:
+        return "mixed"
+    return "developing"
+
+
+def _student_standing_bucket(student_score: int | None, pool: list[int]) -> str:
+    """Coarse position of the student within the pool (NOT an exact rank/percentile).
+
+    ``ahead_of_most`` / ``middle_of_pack`` / ``behind_most`` from the fraction of
+    the pool the student's score is at-or-above, in deterministic thirds — or
+    ``unknown`` when there is no student score or the pool is too small. The
+    output is intentionally coarse (three bands) so it can never be reversed into
+    another candidate's score or an exact ordering.
+    """
+
+    if student_score is None or len(pool) < _MIN_QUALITY_POOL:
+        return "unknown"
+    at_or_below = sum(1 for score in pool if score <= student_score)
+    fraction = at_or_below / len(pool)
+    if fraction >= 0.66:
+        return "ahead_of_most"
+    if fraction >= 0.33:
+        return "middle_of_pack"
+    return "behind_most"
 
 
 async def _applied_by_student(
@@ -444,6 +539,77 @@ async def _applied_by_student(
     return result.first() is not None
 
 
+# --------------------------------------------------------------------------- #
+# Localized guidance strings (vi-first; frontend renders these raw).           #
+# --------------------------------------------------------------------------- #
+
+_DEFAULT_LOCALE = "vi"
+
+_GUIDANCE_STRINGS: dict[str, dict[str, str]] = {
+    "vi": {
+        "already_applied": "Bạn đã ứng tuyển công việc này.",
+        "low_signal": (
+            "Chưa đủ hoạt động để đánh giá chính xác mức độ cạnh tranh — ứng tuyển "
+            "sớm vẫn có lợi."
+        ),
+        "strengthen_cv": (
+            "Củng cố bằng chứng trong CV cho vai trò này trước khi ứng tuyển."
+        ),
+        "strong_fit_high_comp": (
+            "Mức độ cạnh tranh có vẻ cao, nhưng CV của bạn rất phù hợp — hãy ứng "
+            "tuyển kèm thư xin việc được điều chỉnh riêng."
+        ),
+        "deadline_final_days": (
+            "Hạn nộp hồ sơ sẽ đóng trong vài ngày tới."
+        ),
+        "deadline_closing_soon": (
+            "Hạn nộp hồ sơ đang đến gần — hãy ứng tuyển sớm."
+        ),
+        "apply_when_ready": (
+            "Hãy ứng tuyển khi CV của bạn phản ánh tốt nhất yêu cầu của vai trò này."
+        ),
+    },
+    "en": {
+        "already_applied": "You have already applied to this job.",
+        "low_signal": (
+            "Not enough activity yet to gauge competition precisely — "
+            "applying early still helps."
+        ),
+        "strengthen_cv": (
+            "Strengthen your CV evidence for this role before applying."
+        ),
+        "strong_fit_high_comp": (
+            "Competition looks high, but your CV fit is strong — apply with a "
+            "tailored cover letter."
+        ),
+        "deadline_final_days": (
+            "The application deadline is closing in the next few days."
+        ),
+        "deadline_closing_soon": (
+            "The application deadline is approaching — apply soon."
+        ),
+        "apply_when_ready": (
+            "Apply when your CV best reflects this role's requirements."
+        ),
+    },
+}
+
+
+def _g(locale: str, key: str) -> str:
+    """Return a localized guidance string; fall back to ``vi``."""
+
+    table = _GUIDANCE_STRINGS.get(locale, _GUIDANCE_STRINGS[_DEFAULT_LOCALE])
+    return table.get(key) or _GUIDANCE_STRINGS[_DEFAULT_LOCALE][key]
+
+
+def _deadline_guidance(locale: str, deadline_freshness: str) -> str | None:
+    if deadline_freshness == "final_days":
+        return _g(locale, "deadline_final_days")
+    if deadline_freshness == "closing_soon":
+        return _g(locale, "deadline_closing_soon")
+    return None
+
+
 def _guidance(
     *,
     signal: str,
@@ -451,37 +617,42 @@ def _guidance(
     fit_bucket: str,
     deadline_freshness: str,
     already_applied: bool,
+    locale: str = _DEFAULT_LOCALE,
 ) -> list[str]:
     """Deterministic, truthful guidance sentences (no AI narrative dependency).
 
     Templated from real buckets only — never a hiring-probability claim.
+
+    An already-applied student still receives deadline-freshness guidance and a
+    weak-CV nudge where relevant, so the "already applied" line does not swallow
+    other useful signals near the deadline (audit #6).
     """
 
-    if already_applied:
-        return ["You have already applied to this job."]
-
     lines: list[str] = []
+    weak_cv = fit_bucket in ("needs_improvement", "developing")
+    deadline_line = _deadline_guidance(locale, deadline_freshness)
+
+    if already_applied:
+        lines.append(_g(locale, "already_applied"))
+        if deadline_line is not None:
+            lines.append(deadline_line)
+        if weak_cv:
+            lines.append(_g(locale, "strengthen_cv"))
+        return lines
+
     if signal == "low_signal":
-        lines.append(
-            "Not enough activity yet to gauge competition precisely — "
-            "applying early still helps."
-        )
-    if fit_bucket in ("needs_improvement", "developing"):
-        lines.append("Strengthen your CV evidence for this role before applying.")
+        lines.append(_g(locale, "low_signal"))
+    if weak_cv:
+        lines.append(_g(locale, "strengthen_cv"))
     elif fit_bucket in ("competitive", "highly_competitive") and level in (
         "high", "very_high",
     ):
-        lines.append(
-            "Competition looks high, but your CV fit is strong — apply with a "
-            "tailored cover letter."
-        )
-    if deadline_freshness == "final_days":
-        lines.append("The application deadline is closing in the next few days.")
-    elif deadline_freshness == "closing_soon":
-        lines.append("The application deadline is approaching — apply soon.")
+        lines.append(_g(locale, "strong_fit_high_comp"))
+    if deadline_line is not None:
+        lines.append(deadline_line)
 
     if not lines:
-        lines.append("Apply when your CV best reflects this role's requirements.")
+        lines.append(_g(locale, "apply_when_ready"))
     return lines
 
 
@@ -491,6 +662,7 @@ async def student_competition_intelligence(
     principal: Principal,
     job_id: uuid.UUID,
     student_fit_score: int | None,
+    locale: str = _DEFAULT_LOCALE,
 ) -> dict:
     """Bucketed, privacy-safe competition intelligence for one logged-in student.
 
@@ -524,12 +696,22 @@ async def student_competition_intelligence(
         )
 
     fit_bucket = _student_fit_bucket(student_fit_score)
-    # applicant_quality_bucket: honest "unknown" — no per-applicant quality signal
-    # is persisted anywhere in the schema today (no stored fit/score for OTHER
-    # applicants). Inventing a "mixed"/"strong" split here would violate the
-    # never-fabricate rule, so this is intentionally the low-signal default
-    # until a real aggregate quality read model exists.
-    applicant_quality_bucket = "unknown"
+
+    # applicant_quality_bucket + student_standing_bucket: real, privacy-safe
+    # aggregates over the OTHER candidates who have a persisted deterministic fit
+    # score for this job (``documents.cv_job_fit_scores``). Both are coarse
+    # buckets derived from the pool's score DISTRIBUTION only — never an
+    # individual score, a rank, a percentile, or an identity — and both fall back
+    # to "unknown" when the scored pool is below ``_MIN_QUALITY_POOL`` (small
+    # sample / privacy guard). This is a distinct sample from ``app_count`` (the
+    # application-VOLUME signal below): the scored pool measures the caliber of
+    # interested candidates, which may be informative even when few have formally
+    # applied yet.
+    quality_pool = await _applicant_quality_pool(
+        session, job_id=job_id, exclude_user_id=principal.user_id
+    )
+    applicant_quality_bucket = _applicant_quality_bucket(quality_pool)
+    student_standing_bucket = _student_standing_bucket(student_fit_score, quality_pool)
 
     signal = "low_signal" if app_count < _LOW_SIGNAL_APPLICATION_THRESHOLD else "ok"
     source_mix = await _source_mix(session, job_id=job_id)
@@ -540,6 +722,7 @@ async def student_competition_intelligence(
         fit_bucket=fit_bucket,
         deadline_freshness=deadline_freshness,
         already_applied=already_applied,
+        locale=locale,
     )
 
     return {
@@ -550,6 +733,7 @@ async def student_competition_intelligence(
         "application_volume_bucket": _application_volume_bucket(app_count),
         "applicant_quality_bucket": applicant_quality_bucket,
         "student_fit_bucket": fit_bucket,
+        "student_standing_bucket": student_standing_bucket,
         "deadline_freshness": deadline_freshness,
         "source_mix": source_mix,
         "guidance": guidance,

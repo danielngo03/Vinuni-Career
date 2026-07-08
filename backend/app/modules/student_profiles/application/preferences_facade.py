@@ -1,18 +1,23 @@
 """Read facade: a student's confirmed ranking preferences (spec §4).
 
 The ``discovery`` ranker personalizes authenticated-student recommendations from
-*confirmed first-party preferences* without deep-importing the
-``StudentProfile`` ORM. This facade returns a small, leak-safe
-:class:`RankingPreferences` DTO (job types, location, field/degree, graduation
-year) — never contact PII, phone, raw visibility settings, or completion
-internals. ``None`` when the student has no profile yet (the ranker then simply
-treats preferences as absent).
+*confirmed first-party preferences* without deep-importing the ``StudentProfile``
+ORM. Since the profile is now identity-only (owner decision 2026-07-06), the only
+confirmed preference signals it can supply are ``is_open_to_work`` and the
+student's location. The career-derived signals (job types, field/major, degree,
+graduation year) no longer exist on the profile — they are kept on the DTO as
+inert ``[]`` / ``None`` so downstream consumers (ranking, analytics) keep
+compiling and simply treat them as "no signal" rather than churning. Career
+personalization now comes from the student's CV(s), not this facade.
+
+Returns ``None`` when the student has no profile yet (the ranker then treats
+preferences as absent).
 """
 
 from __future__ import annotations
 
 import uuid
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -22,24 +27,24 @@ from app.modules.student_profiles.domain.models import StudentProfile
 
 @dataclass(frozen=True, slots=True)
 class RankingPreferences:
-    """Confirmed, privacy-safe preference signals for organic personalization."""
+    """Confirmed, privacy-safe preference signals for organic personalization.
+
+    Only ``is_open_to_work`` and location are live signals now. The remaining
+    career fields are retained (inert) so ranking/analytics consumers that read
+    them keep working without change; they always resolve to "no signal".
+    """
 
     is_open_to_work: bool
-    job_types: list[str]  # open_to_work_types (internship | full_time | ...)
     location_city: str | None
     location_country: str | None
-    field: str | None  # major
-    degree_level: str | None
-    graduation_year: int | None
+    job_types: list[str] = field(default_factory=list)  # inert: career content moved to CVs
+    field: str | None = None  # inert
+    degree_level: str | None = None  # inert
+    graduation_year: int | None = None  # inert
 
     @property
     def has_signal(self) -> bool:
-        return bool(
-            self.job_types
-            or self.location_city
-            or self.field
-            or self.is_open_to_work
-        )
+        return bool(self.location_city or self.is_open_to_work)
 
 
 async def get_ranking_preferences(
@@ -59,10 +64,6 @@ async def get_ranking_preferences(
         return None
     return RankingPreferences(
         is_open_to_work=bool(profile.is_open_to_work),
-        job_types=list(profile.open_to_work_types or []),
         location_city=profile.location_city,
         location_country=profile.location_country,
-        field=profile.major,
-        degree_level=profile.degree_level,
-        graduation_year=profile.graduation_year,
     )

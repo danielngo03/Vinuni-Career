@@ -69,7 +69,6 @@ def _payload(title: str = "Backend Intern", **over) -> dict:
         "headcount": 1,
         "application_deadline": None,
         "visibility": "public",
-        "screening_questions": [],
     }
     base.update(over)
     return base
@@ -471,12 +470,14 @@ async def test_http_marketplace_overview_contract(client, db_session) -> None:
         "featured_events",
         # Spec §8 explicit recommendation/sponsored/curated rails.
         "hero_campaign", "recommended_jobs", "recommended_events",
+        "recommended_companies",
         "sponsored_banner", "employer_spotlight", "popular_roles", "trust_modules",
     }
     # Empty marketplace: recommendation rails hide-if-empty, hero/banner null,
     # trust modules are static (no fabricated metrics).
     assert data["recommended_jobs"]["items"] == []
     assert data["recommended_jobs"]["source"] in {"recent", "popular"}
+    assert data["recommended_companies"] == []
     assert data["hero_campaign"] is None and data["sponsored_banner"] is None
     assert data["popular_roles"] == []
     assert all("key" in m for m in data["trust_modules"])

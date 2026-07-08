@@ -167,10 +167,10 @@ TOOL_SPECS: dict[str, ToolSpec] = {
     "get_profile_status": ToolSpec(
         name="get_profile_status",
         description=(
-            "Get the student's profile completion percentage and what is missing. Returns "
-            "completion score (0-100) and a list of incomplete sections. Use this when the student "
-            "asks how complete their profile is, what to add next, or wants tips to improve their "
-            "profile visibility to recruiters."
+            "Get the student's identity-profile status. Returns whether the student is marked "
+            "'open to work' (the profile's only career signal — all career detail lives in the "
+            "student's CVs). Use this when the student asks about their open-to-work status or "
+            "their visibility to recruiters; for career content, point them to their CVs."
         ),
         parameters={"type": "object", "properties": {}, "required": []},
         permission_class="read_only",

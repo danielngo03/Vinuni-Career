@@ -14,12 +14,14 @@
 - Use the project icon set; no emoji icons.
 - Job save/favorite uses a heart icon. Bookmark is reserved for saved
   collections/resources, not the primary job-favorite action.
-- Public/student routes include a bottom-right quick-action launcher for saved
-  jobs, career opportunity invitations, messages, feedback/help, and VinUni AI
-  assistant when those actions are available or honestly disabled. It must avoid
-  overlap with sticky apply bars, footer, and mobile navigation. Desktop actions
-  need hover/focus labels; AI may use restrained attention motion that respects
-  `prefers-reduced-motion`.
+- Public/student routes expose quick actions in the top header (owner decision
+  2026-07-07; the bottom-right floating launcher was removed): saved jobs,
+  notifications, messages, and VinUni AI assistant when those actions are
+  available or honestly disabled live in the header cluster, while feedback/help
+  lives in the account (avatar) menu. On mobile these collapse into the top
+  header/nav and must avoid overlap with sticky apply bars, footer, and mobile
+  navigation. Header actions need hover/focus labels; AI may use restrained
+  attention motion that respects `prefers-reduced-motion`.
 - Campaign/banner surfaces distinguish paid sponsored, strategic partner, and
   VinUni-curated content. Labels must be truthful but polished.
 
@@ -229,33 +231,43 @@ Right: inspector + AI/job-fit drawer; export preview uses the same render pipeli
 - Export PDF.
 - Restore version.
 
-### Upload Preview / Ingestion Review
+### Upload Preview / Ingestion
+
+> **Updated 2026-07-05 (owner decision):** The uploaded-CV flow is
+> **upload → confirm file → name the CV → done**. Backend extraction is
+> authoritative and creates the versioned draft directly; there is NO manual
+> field-review step. The "extracted fields / review rows / Check this" layout and
+> behavior below are historical. Extraction accuracy is a backend responsibility
+> (it feeds CV-JD matching). The cascade also gains a cheap vision-LLM tier that
+> may receive DOWNSCALED document images for images and styled/scanned PDFs.
 
 This is the required product flow for uploaded CVs. A bare upload modal with a
-spinner and extracted-field list is functional-only.
+spinner is functional-only; the student should see the original, confirm it, and
+name the resulting CV.
 
-Desktop layout:
+Desktop layout (upload-and-name):
 
 ```text
-Left: original document preview      Center: extracted fields + confidence copy
-      pages / zoom / file summary            editable review rows / diff
-Right: template preview + actions    Sticky: Use original / Import to template / Upload another
+Left: original document preview      Right: name the CV + confirm
+      pages / zoom / file summary            "Save this CV" / choose template
+                                     Sticky: Use original / Save this CV / Upload another
 ```
 
 Mobile layout:
 
-- Tabs: Original | Review | Template.
+- Tabs: Original | Name & Save.
 - Sticky bottom actions.
 
 Behavior:
 
-- Show PDF/image preview before the student confirms ingestion/import.
+- Show PDF/image preview before the student confirms the file.
 - For DOC/DOCX, show file summary and rendered preview when available.
-- After confirmation, backend handles extraction, layout/OCR fallback, and
-  optional AI structuring; UI shows user-friendly progress, not engine names.
-- Low-confidence fields open in review state with "Check this" copy.
-- Student can import into a new selected template, an existing draft, or keep the
-  uploaded original as a selectable CV if allowed by quota/business rules.
+- After the student names and confirms, backend handles extraction, layout/OCR
+  fallback, vision-LLM and optional text-LLM structuring, and creates the draft;
+  UI shows user-friendly progress, not engine names. (Updated 2026-07-05: no
+  student field-review step.)
+- Student lands on the resulting draft; they can also keep the uploaded original
+  as a selectable CV if allowed by quota/business rules.
 - Quota reached, blank, not-CV, low-quality, password-protected, corrupt,
   duplicate, OCR-unavailable, and AI-unavailable states must all have a next
   action.
@@ -265,7 +277,7 @@ Behavior:
 - No CV: start wizard with three choices.
 - Existing CVs: show upload, import, duplicate, template switch, and tailor paths without forcing a new blank CV.
 - Active CV limit reached: explain quota and offer archive/delete/request-more/upgrade.
-- Upload processing: scanning, extracting, OCR fallback, review required.
+- Upload processing: scanning, extracting, OCR/vision-LLM fallback, then draft ready. (Updated 2026-07-05: no student review-required state — backend-authoritative extraction.)
 - Upload failure: unsupported type, too large, security rejection, password-protected, corrupt, blank document, not a CV, low-quality scan, duplicate file.
 - Empty section: guided examples.
 - Autosaving: subtle status; never block typing.
@@ -281,7 +293,9 @@ Upload failure UI:
 - Show a concise reason, not technical parser details.
 - Always offer at least one next action: upload another file, create from template, or enter manually.
 - Duplicate upload offers "Use existing CV" instead of failing hard.
-- Low-confidence extraction opens review screen with highlighted fields.
+- Low-confidence extraction is resolved backend-side into the best draft; the
+  student refines it later in the editor. (Updated 2026-07-05: no student
+  field-review screen — backend-authoritative extraction.)
 
 ### Accessibility
 

@@ -30,32 +30,21 @@ async def get_my_applications(session: AsyncSession, principal: Principal) -> di
 
 
 async def get_profile_status(session: AsyncSession, principal: Principal) -> dict:
+    """Identity-only profile status.
+
+    The profile is identity-only (owner decision 2026-07-06): career content lives
+    in the student's CVs, not the profile. So the assistant reports the job-seeking
+    signal (``is_open_to_work``) and points career next-steps at the CV library
+    rather than at profile-completion nudges.
+    """
     from app.modules.student_profiles.application import profile_service
 
     profile = await profile_service.get_my_profile(session, principal=principal)
-    pct = int(profile.get("profile_completion") or 0)
-    missing = []
-    if not profile.get("headline"):
-        missing.append("headline")
-    if not profile.get("summary"):
-        missing.append("summary")
-    if not profile.get("education"):
-        missing.append("education")
-    if not profile.get("experience"):
-        missing.append("experience")
-    if not profile.get("skills"):
-        missing.append("skills")
-    if not profile.get("major") or not profile.get("degree_level"):
-        missing.append("academic details (major, degree)")
-    if not profile.get("links"):
-        missing.append("portfolio or social links")
     return {
         "ok": True,
-        "completion_pct": pct,
         "is_open_to_work": profile.get("is_open_to_work", False),
-        "open_to_work_types": profile.get("open_to_work_type_labels") or [],
-        "missing_sections": missing,
         "profile_url": "/student/profile",
+        "cv_url": "/student/cv",
     }
 
 

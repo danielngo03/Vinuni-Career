@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import {
@@ -10,7 +10,6 @@ import {
   CurrencyDollar,
   LightbulbFilament,
   SignIn,
-  Sparkle,
   WarningCircle,
   PaperPlaneTilt,
   Handshake,
@@ -21,6 +20,7 @@ import { Button, EmptyState, Skeleton, StatusBadge } from "@/components/ui";
 import { PageHeader } from "@/components/layout/page-header";
 import { CompanyAvatar } from "@/components/companies/company-avatar";
 import { formatDateTime } from "@/lib/format";
+import { cn } from "@/lib/utils";
 import {
   APPLICATION_STATUS_TONE,
   INTERVIEW_STATUS_TONE,
@@ -103,6 +103,34 @@ function deriveApplicationInsights(rows: StudentApplication[]): AppInsight[] {
   return out.slice(0, 3);
 }
 
+// Status filter tabs. `interview`/`offer` are derived from the student's own
+// upcoming-interview / offer cards (never `application.status` values), so they
+// get their own predicates rather than a status equality check.
+type FilterKey =
+  | "all"
+  | "submitted"
+  | "under_review"
+  | "interview"
+  | "offer"
+  | "hired"
+  | "rejected"
+  | "withdrawn";
+
+const FILTER_PREDICATES: Record<
+  Exclude<FilterKey, "all">,
+  (r: StudentApplication) => boolean
+> = {
+  submitted: (r) => r.status === "submitted",
+  under_review: (r) => r.status === "under_review",
+  interview: (r) => Boolean(r.upcoming_interview),
+  offer: (r) => Boolean(r.offer),
+  hired: (r) => r.status === "hired",
+  rejected: (r) => r.status === "rejected",
+  withdrawn: (r) => r.status === "withdrawn",
+};
+
+const FILTER_ORDER = Object.keys(FILTER_PREDICATES) as (keyof typeof FILTER_PREDICATES)[];
+
 export function StudentApplicationsScreen() {
   const t = useTranslations("applications");
   const tStates = useTranslations("states");
@@ -126,6 +154,28 @@ export function StudentApplicationsScreen() {
     [query.data],
   );
   const appInsights = useMemo(() => deriveApplicationInsights(rows), [rows]);
+
+  const [statusFilter, setStatusFilter] = useState<FilterKey>("all");
+  const filterCounts = useMemo(() => {
+    const counts: Record<FilterKey, number> = {
+      all: rows.length,
+      submitted: 0,
+      under_review: 0,
+      interview: 0,
+      offer: 0,
+      hired: 0,
+      rejected: 0,
+      withdrawn: 0,
+    };
+    for (const key of FILTER_ORDER) counts[key] = rows.filter(FILTER_PREDICATES[key]).length;
+    return counts;
+  }, [rows]);
+  // Filters the loaded rows (paginated). Counts reflect what's loaded; "Load
+  // more" stays available so a filtered view can still pull additional pages.
+  const filteredRows = useMemo(
+    () => (statusFilter === "all" ? rows : rows.filter(FILTER_PREDICATES[statusFilter])),
+    [rows, statusFilter],
+  );
 
   if (query.isError && query.error instanceof ApiError && query.error.isAuthError) {
     return (
@@ -233,7 +283,7 @@ export function StudentApplicationsScreen() {
             >
               <h2 className="mb-2.5 flex items-center gap-2 text-sm font-bold text-[var(--text-primary)]">
                 <span className="flex size-6 shrink-0 items-center justify-center rounded-lg icon-chip-info shadow-sm">
-                  <Sparkle aria-hidden weight="duotone" className="size-3.5 text-white" />
+                  <LightbulbFilament aria-hidden weight="duotone" className="size-3.5 text-white" />
                 </span>
                 {t("listAiInsightsTitle")}
               </h2>
@@ -248,8 +298,46 @@ export function StudentApplicationsScreen() {
             </section>
           )}
 
+          {/* Status filter tabs — client-side filter of loaded applications. */}
+          <div
+            className="mb-4 flex flex-wrap gap-2"
+            role="tablist"
+            aria-label={t("filterLabel")}
+          >
+            {(["all", ...FILTER_ORDER] as FilterKey[])
+              .filter((key) => key === "all" || filterCounts[key] > 0)
+              .map((key) => {
+                const active = statusFilter === key;
+                return (
+                  <button
+                    key={key}
+                    type="button"
+                    role="tab"
+                    aria-selected={active}
+                    onClick={() => setStatusFilter(key)}
+                    className={cn(
+                      "inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-xs font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)]/30",
+                      active
+                        ? "border-[var(--brand-primary)] bg-[var(--brand-primary)] text-white"
+                        : "border-[var(--glass-border)] bg-[var(--glass-surface)] text-[var(--text-secondary)] hover:border-[var(--brand-primary)]/40 hover:text-[var(--text-primary)]",
+                    )}
+                  >
+                    {t(`filter.${key}`)}
+                    <span
+                      className={cn(
+                        "rounded-full px-1.5 text-[10px] font-bold tabular-nums",
+                        active ? "bg-white/20 text-white" : "bg-[var(--bg-muted)] text-[var(--text-muted)]",
+                      )}
+                    >
+                      {filterCounts[key]}
+                    </span>
+                  </button>
+                );
+              })}
+          </div>
+
           <ul className="space-y-3">
-            {rows.map((app) => (
+            {filteredRows.map((app) => (
               <li key={app.id}>
                 <Link
                   href={`/student/applications/${app.id}`}

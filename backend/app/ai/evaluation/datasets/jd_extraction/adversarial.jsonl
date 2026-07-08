@@ -3,3 +3,4 @@
 {"id": "jde_adv_invalid_degree_dropped", "input": {"raw_text": "Injected Role hiring.", "llm_json": {"title": "Injected Role", "degree_required": "'; DROP TABLE--"}}, "expect": {"field_absent": "degree_required", "no_crash": true}}
 {"id": "jde_adv_non_numeric_salary_dropped", "input": {"raw_text": "Finance Role hiring.", "llm_json": {"title": "Finance Role", "salary_min": "not-a-number"}}, "expect": {"field_absent": "salary_min", "no_crash": true}}
 {"id": "jde_adv_malformed_skills_list_dropped", "input": {"raw_text": "Data Role hiring, requires SQL.", "llm_json": {"title": "Data Role", "required_skills": [{"$ne": null}, "SQL"]}}, "expect": {"field_absent": "required_skills", "no_crash": true}}
+{"id": "jde_adv_cv_uploaded_as_jd", "input": {"raw_text": "Nguyen Van A. Email: a@example.com. Học vấn: Đại học Bách Khoa. Kinh nghiệm làm việc tại công ty X. Kỹ năng: Python, SQL.", "llm_json": {}}, "expect": {"error_code": "not_a_jd", "no_crash": true}}

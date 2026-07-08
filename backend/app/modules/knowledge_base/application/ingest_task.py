@@ -18,6 +18,7 @@ from __future__ import annotations
 
 import asyncio
 import json
+import logging
 import uuid
 from datetime import UTC, datetime
 
@@ -29,18 +30,52 @@ from app.modules.knowledge_base.domain.models import (
     KnowledgeBaseDocument,
 )
 
+logger = logging.getLogger(__name__)
 
-def enqueue_ingest(document_id: str) -> None:
-    """Enqueue the ingest task via Celery. Safe to call when Celery is unavailable."""
+_KB_TASK_NAME = "knowledge_base.ingest_document"
+
+
+async def _kb_ingest_task(payload: dict) -> None:
+    """Background handler: run KB ingestion in its own session (idempotent).
+
+    Mirrors ``documents.ingestion_service._ingestion_task``. On failure
+    ``run_ingest`` marks the document ``FAILED`` and flushes before re-raising, so
+    we commit in ``finally`` to persist either the DONE result or the FAILED
+    status — the document never gets stuck silently in PROCESSING.
+    """
+    from app.core.db import get_sessionmaker
+
+    document_id = str(payload["document_id"])
+    sessionmaker = get_sessionmaker()
+    async with sessionmaker() as session:
+        try:
+            await run_ingest(document_id, session=session)
+        except Exception:
+            logger.exception("kb.ingest_failed", extra={"document_id": document_id})
+        finally:
+            await session.commit()
+
+
+async def enqueue_ingest(document_id: str) -> None:
+    """Schedule KB ingestion through the shared background-work queue.
+
+    Uses ``app.core.worker.get_queue()`` — the same abstraction the CV ingestion
+    pipeline uses — instead of a hardcoded Celery ``send_task`` to a queue no
+    worker consumes. The caller MUST have committed the document first, because
+    the handler runs in its own session (mirrors
+    ``documents.ingestion_service.start_ingestion``: commit → enqueue). Under the
+    default inline mode the handler runs in-process before this returns; a later
+    Celery swap needs no caller change. Best-effort: a scheduling failure is
+    logged (not silently swallowed) and the document stays PENDING for retry.
+    """
+    from app.core.worker import get_queue
+
     try:
-        from app.worker.celery_app import celery_app
-        celery_app.send_task(
-            "knowledge_base.ingest_document",
-            args=[document_id],
-            queue="ai",
-        )
+        queue = get_queue()
+        queue.register(_KB_TASK_NAME, _kb_ingest_task)
+        await queue.enqueue(_KB_TASK_NAME, {"document_id": document_id})
     except Exception:
-        pass  # Celery offline — document stays PENDING; admin can re-trigger
+        logger.exception("kb.enqueue_failed", extra={"document_id": document_id})
 
 
 async def run_ingest(document_id: str, *, session) -> None:
@@ -84,8 +119,10 @@ async def run_ingest(document_id: str, *, session) -> None:
             raise ValueError("no_chunks_produced")
 
         # --- Step 3: Embed all chunks (batched) ---
+        # Pass the session so real embedding spend is written to ai_usage_log
+        # (visible to the budget guard, spec §5.4).
         chunk_texts = [c.content for c in chunks]
-        embeddings = await embed_texts(chunk_texts)
+        embeddings = await embed_texts(chunk_texts, db=session, task_type="kb_embedding")
 
         # --- Step 4: Delete old chunks and upsert fresh ones ---
         await session.execute(

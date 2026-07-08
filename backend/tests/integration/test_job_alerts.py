@@ -5,13 +5,16 @@ Covers: create, list, delete (soft), permission guards, quota limit, name confli
 
 from __future__ import annotations
 
+import uuid
+
 import pytest
 from app.modules.opportunities.application import job_alert_service
 from app.shared.exceptions import ConflictError, PermissionDeniedError, QuotaExceededError
+from app.shared.models import AuditLog
+from sqlalchemy import select
 
 from tests.documents_utils import make_student
 from tests.org_utils import make_org_with_admin
-
 
 # ---------------------------------------------------------------------------
 # helpers
@@ -112,6 +115,7 @@ async def test_delete_removes_from_list(db_session) -> None:
 
 async def test_delete_nonexistent_raises_not_found(db_session) -> None:
     import uuid as _uuid
+
     from app.shared.exceptions import ResourceNotFoundError
     _, student = await make_student(db_session)
     with pytest.raises(ResourceNotFoundError):
@@ -122,6 +126,7 @@ async def test_delete_nonexistent_raises_not_found(db_session) -> None:
 
 async def test_delete_owned_by_other_raises_not_found(db_session) -> None:
     import uuid as _uuid
+
     from app.shared.exceptions import ResourceNotFoundError
     _, student1 = await make_student(db_session)
     _, student2 = await make_student(db_session)
@@ -154,3 +159,45 @@ async def test_list_empty_for_new_student(db_session) -> None:
     _, student = await make_student(db_session)
     alerts = await job_alert_service.list_alerts(db_session, principal=student)
     assert alerts == []
+
+
+# ---------------------------------------------------------------------------
+# audit (B-594): every write action creates audit data
+# ---------------------------------------------------------------------------
+
+
+async def test_create_and_delete_alert_write_audit_rows(db_session) -> None:
+    _, student = await make_student(db_session)
+    alert = await _make_alert(db_session, student, name="Audited Alert")
+    alert_id = uuid.UUID(alert["id"])
+
+    created_rows = (
+        await db_session.execute(
+            select(AuditLog).where(
+                AuditLog.action == "job_alert.created",
+                AuditLog.resource_id == alert_id,
+            )
+        )
+    ).scalars().all()
+    assert len(created_rows) == 1
+    created = created_rows[0]
+    assert created.resource_type == "job_alert"
+    assert created.actor_id == student.user_id
+    # Snapshot carries only non-PII alert criteria (no email/name-of-person).
+    assert created.after_snapshot is not None
+    assert created.after_snapshot.get("name") == "Audited Alert"
+
+    await job_alert_service.delete_alert(
+        db_session, principal=student, alert_id=alert_id
+    )
+
+    deleted_rows = (
+        await db_session.execute(
+            select(AuditLog).where(
+                AuditLog.action == "job_alert.deleted",
+                AuditLog.resource_id == alert_id,
+            )
+        )
+    ).scalars().all()
+    assert len(deleted_rows) == 1
+    assert deleted_rows[0].after_snapshot == {"is_active": False}

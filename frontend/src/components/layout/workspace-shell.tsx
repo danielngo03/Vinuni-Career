@@ -113,8 +113,6 @@ export function WorkspaceShell({
       >
         <Sidebar
           persona={persona}
-          onAiClick={() => setAiOpen((v) => !v)}
-          aiActive={aiOpen}
           collapsed={sidebarCollapsed}
           onToggleCollapsed={toggleSidebarCollapsed}
         />
@@ -131,8 +129,6 @@ export function WorkspaceShell({
         <Sidebar
           persona={persona}
           onNavigate={() => setMobileNavOpen(false)}
-          onAiClick={() => { setMobileNavOpen(false); setAiOpen(true); }}
-          aiActive={aiOpen}
         />
       </Sheet>
 

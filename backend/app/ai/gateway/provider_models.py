@@ -27,7 +27,7 @@ from datetime import datetime
 from sqlalchemy import Boolean, DateTime, ForeignKey, String, Text, UniqueConstraint, func
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
-from app.shared.models import Base
+from app.shared.models import Base, JsonType
 
 
 class AiProviderConfig(Base):
@@ -51,6 +51,11 @@ class AiProviderConfig(Base):
     # lets the rotation routine find rows still encrypted under an older key.
     api_key_last4: Mapped[str | None] = mapped_column(String(8), nullable=True)
     key_version: Mapped[str | None] = mapped_column(String(32), nullable=True)
+    # Last health-probe outcome (admin "Test connection" action); status only.
+    last_health_status: Mapped[str | None] = mapped_column(String(20), nullable=True)
+    last_health_checked_at: Mapped[datetime | None] = mapped_column(
+        DateTime(timezone=True), nullable=True
+    )
     description: Mapped[str | None] = mapped_column(Text, nullable=True)
     is_active: Mapped[bool] = mapped_column(Boolean, nullable=False, default=True)
     is_builtin: Mapped[bool] = mapped_column(Boolean, nullable=False, default=False)
@@ -103,6 +108,21 @@ class AiModelAlias(Base):
             "base_url — admins must only chain providers that serve an "
             "equivalent model id."
         ),
+    )
+    # Rotation strategy across the ordered provider chain: 'priority' (default —
+    # try hops in order, failover only) or 'round_robin' (spread calls across
+    # healthy hops, still failing over to the rest). Both skip circuit-open hops.
+    rotation_strategy: Mapped[str] = mapped_column(
+        String(20), nullable=False, default="priority"
+    )
+    # Richer ordered fallback: a JSON list of ``{"provider_name", "model_id"}``
+    # so each hop can carry its OWN model id (providers rarely share model ids).
+    # When present it supersedes ``fallback_provider_names`` for chain building.
+    fallback_bindings: Mapped[list | None] = mapped_column(JsonType, nullable=True)
+    # Last health-probe outcome (admin "Test" action); non-secret status only.
+    last_health_status: Mapped[str | None] = mapped_column(String(20), nullable=True)
+    last_health_checked_at: Mapped[datetime | None] = mapped_column(
+        DateTime(timezone=True), nullable=True
     )
     description: Mapped[str | None] = mapped_column(Text, nullable=True)
     is_active: Mapped[bool] = mapped_column(Boolean, nullable=False, default=True)

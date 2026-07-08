@@ -17,9 +17,12 @@ is enqueued on the outbox (no synchronous SMTP).
 
 from __future__ import annotations
 
+import copy
+import re
 import uuid
 
 from sqlalchemy import or_, select
+from sqlalchemy.exc import IntegrityError
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.modules.analytics.application import ingestion_service as analytics
@@ -130,7 +133,24 @@ async def apply_to_job(
         idempotency_key=idempotency_key,
     )
     session.add(app)
-    await session.flush()
+    # B-593: two requests with DIFFERENT idempotency keys can both clear the
+    # in-transaction ``_active_duplicate`` pre-check above and then race to INSERT.
+    # The Postgres partial unique index ``uq_applications_active`` (one active row
+    # per ``(job, applicant)``) rejects the loser's insert with an ``IntegrityError``.
+    # Translate that into the SAME clean ``409`` the sequential-duplicate path
+    # returns — never a raw ``500``. The DB index still guarantees no corruption.
+    try:
+        await session.flush()
+    except IntegrityError as exc:
+        await session.rollback()
+        winner = await _active_duplicate(
+            session, job_id=job.id, applicant_id=principal.user_id
+        )
+        if winner is not None:
+            raise DuplicateApplicationError(
+                application_id=winner.id, status=winner.status
+            ) from exc
+        raise DuplicateApplicationError() from exc
 
     # Immutable CV snapshot via the documents facade (atomic with this txn).
     snapshot = await snapshot_service.create_application_cv_snapshot(
@@ -144,12 +164,14 @@ async def apply_to_job(
     )
     app.snapshot_id = snapshot.id
 
-    # Anonymous applications carry a redacted snapshot copy for the partner-side
-    # preview. Full AI PII stripping (``docs/BUSINESS_LOGIC.md`` §4.2) is a later
-    # slice; here we drop the human-readable title/contact so the partner cannot
-    # infer identity from the stored snapshot before a reveal is accepted.
+    # Anonymous applications carry a redacted snapshot COPY for the partner-side
+    # pre-reveal preview (``docs/BUSINESS_LOGIC.md`` §4.2 / ``docs/SECURITY_PRIVACY.md``).
+    # The ORIGINAL ``snapshot_json`` stays immutable and un-redacted so an accepted
+    # reveal still exposes the true identity; only this copy is served pre-reveal.
+    # Guarded on ``redacted_json is None`` so an idempotent apply-replay (the
+    # snapshot already existed) never rebuilds/overwrites it.
     if app.is_anonymous and snapshot.redacted_json is None:
-        snapshot.redacted_json = _redact_snapshot(dict(snapshot.snapshot_json or {}))
+        snapshot.redacted_json = _redact_snapshot(snapshot.snapshot_json or {})
 
     await job_read_facade.increment_application_count(session, job.id)
     await session.flush()
@@ -220,9 +242,120 @@ async def _record_apply_metrics(session: AsyncSession, *, job, principal: Princi
         pass
 
 
+# --------------------------------------------------------------------------- #
+# Anonymous-apply CV snapshot redaction (B-603)                                #
+# --------------------------------------------------------------------------- #
+#
+# The immutable snapshot mirrors the CV content model (``documents`` module):
+#   - a ``header`` section, ``content_json`` = {name, headline, email, phone,
+#     location, links:[{label,url}]} — DIRECTLY identifying,
+#   - entry sections, ``content_json`` = {entries:[{heading, subheading, timeframe,
+#     location, note, highlights[]}]},
+#   - skills/languages, ``content_json`` = {items:[{name, level}]},
+#   - text sections, ``content_json`` = {text} / {items:[{text}]}.
+# Uploaded-CV snapshots use {title, source_type, document_id, sections:[{title,
+# content_json:{items}}]} (no header section; the ingestion path already drops the
+# contact block).
+#
+# For an anonymous application the partner's PRE-REVEAL view must not leak the
+# student's identity, yet must keep the evaluable professional content. We drop the
+# header contact block and scrub email/phone patterns that can appear inside free
+# text — while preserving skills, experience headings/bullets, and education.
+
+_ANON_NAME = "[Ẩn danh]"
+# Inline redaction mark for a scrubbed email/phone pattern. Carries no ``@`` and no
+# digit run, which makes the scrub idempotent (a re-run finds nothing new).
+_PII_MARK = "[đã ẩn]"
+
+# Header/contact fields that identify the applicant — removed entirely.
+_HEADER_CONTACT_FIELDS = ("name", "email", "phone", "location", "links")
+
+_EMAIL_RE = re.compile(r"[A-Za-z0-9._%+\-]+@[A-Za-z0-9][A-Za-z0-9.\-]*\.[A-Za-z]{2,}")
+# A phone-like run: optional leading ``+``/``(``, a digit, then 8-14 more chars from
+# {digit, space, ., -, (, )}, ending on a digit. The digit-count validator below
+# (9..15) keeps year ranges ("2020 - 2023" = 8 digits), month/year ranges broken by
+# ``/``, and GPAs intact — only genuine phone numbers are scrubbed.
+_PHONE_CANDIDATE_RE = re.compile(r"\+?\(?\d[\d\s().\-]{7,}\d")
+
+
+def _scrub_pii_text(value: str) -> str:
+    """Replace email + phone-number patterns in one string with a redaction mark.
+
+    Deterministic (pure regex) and idempotent (the mark contains no ``@`` and no
+    9+ digit run, so re-scrubbing already-scrubbed text is a no-op).
+    """
+
+    scrubbed = _EMAIL_RE.sub(_PII_MARK, value)
+
+    def _phone_repl(match: re.Match[str]) -> str:
+        digits = sum(ch.isdigit() for ch in match.group(0))
+        return _PII_MARK if 9 <= digits <= 15 else match.group(0)
+
+    return _PHONE_CANDIDATE_RE.sub(_phone_repl, scrubbed)
+
+
+def _scrub_deep(value: object) -> object:
+    """Recursively scrub PII patterns from every string in a nested structure.
+
+    Non-string leaves (skill ``level`` ints, ``is_visible`` bools, ids) are returned
+    untouched, so evaluable structured data (skills 0-100, experience entries,
+    education) survives intact.
+    """
+
+    if isinstance(value, str):
+        return _scrub_pii_text(value)
+    if isinstance(value, list):
+        return [_scrub_deep(v) for v in value]
+    if isinstance(value, dict):
+        return {k: _scrub_deep(v) for k, v in value.items()}
+    return value
+
+
+def _redact_header_content(content: dict) -> dict:
+    """Strip the identifying contact block from a CV header ``content_json``.
+
+    Drops name/email/phone/location/links and re-labels the name as ``[Ẩn danh]``
+    so the header still renders anonymously; keeps the professional ``headline``
+    (pattern-scrubbed) because it carries positioning, not identity.
+    """
+
+    redacted = {
+        key: value
+        for key, value in content.items()
+        if key not in _HEADER_CONTACT_FIELDS
+    }
+    redacted = {key: _scrub_deep(value) for key, value in redacted.items()}
+    redacted["name"] = _ANON_NAME
+    return redacted
+
+
 def _redact_snapshot(snapshot_json: dict) -> dict:
-    redacted = dict(snapshot_json)
-    redacted["title"] = "[Ẩn danh]"
+    """Build the anonymous partner-preview COPY of an immutable CV snapshot.
+
+    Removes identifying PII (header contact + inline email/phone patterns) while
+    PRESERVING evaluable content (skills, experience headings/bullets, education).
+    Deep-copies its input so the ORIGINAL immutable ``snapshot_json`` is never
+    mutated — the reveal flow keeps serving the un-redacted original. Pure,
+    deterministic, and idempotent (redacting the output again yields the same JSON).
+    """
+
+    redacted = copy.deepcopy(dict(snapshot_json))
+    # The top-level title can carry the applicant's name — an uploaded CV's title is
+    # ``document.original_name`` (e.g. "Nguyen Van A - CV.pdf"), and a builder title
+    # may include the person's name. Replace it with the anonymous label.
+    redacted["title"] = _ANON_NAME
+    sections = redacted.get("sections")
+    if isinstance(sections, list):
+        for section in sections:
+            if not isinstance(section, dict):
+                continue
+            content = section.get("content_json")
+            if not isinstance(content, dict):
+                continue
+            if section.get("section_type") == "header":
+                section["content_json"] = _redact_header_content(content)
+            else:
+                section["content_json"] = _scrub_deep(content)
     redacted["redacted"] = True
     return redacted
 

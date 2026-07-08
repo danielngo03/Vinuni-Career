@@ -59,6 +59,37 @@ class ExtractionSignals:
     warnings: list[str] = field(default_factory=list)
 
 
+_CID_RE = re.compile(r"\(cid:\d+\)")
+_SPACED_WORD_RE = re.compile(r"\b[A-Za-zÀ-ỹ]\s[A-Za-zÀ-ỹ]\s[A-Za-zÀ-ỹ]")
+
+
+def is_cid_corrupted(text: str) -> bool:
+    """Heuristic: native-extracted text is dominated by CID font garbage.
+
+    CID-encoded PDFs produce either literal ``(cid:N)`` sequences or words with
+    spaces inserted between every letter ("E N G I N E E R").  Either pattern
+    makes the text useless for structuring and signals that the vision-LLM tier
+    should be used instead, even when ``len(text) > OCR_TRIGGER_THRESHOLD``.
+
+    Returns True when either:
+    - More than 5 % of non-whitespace characters are inside (cid:N) tokens, OR
+    - More than 20 % of lines contain the spaced-letter pattern.
+    """
+    if not text:
+        return False
+    # (cid:N) ratio
+    cid_chars = sum(len(m.group()) for m in _CID_RE.finditer(text))
+    nonws = sum(1 for c in text if not c.isspace())
+    if nonws > 0 and cid_chars / nonws > 0.05:
+        return True
+    # Spaced-letter ratio
+    lines = [ln for ln in text.splitlines() if ln.strip()]
+    if not lines:
+        return False
+    spaced = sum(1 for ln in lines if _SPACED_WORD_RE.search(ln))
+    return spaced / len(lines) > 0.20
+
+
 def is_disordered(text: str) -> bool:
     """Heuristic: does native text look column-merged / out of reading order?
 

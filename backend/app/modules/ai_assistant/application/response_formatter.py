@@ -10,31 +10,26 @@ from __future__ import annotations
 
 import re
 
+from app.modules.ai_assistant.application.messages import assistant_message
+
 _GREETING_RE = re.compile(
     r"^\s*(xin\s+chào|chào|chào\s+bạn|hello|hi|hey|alo|hi\s+there)[!.?\s]*$",
     re.IGNORECASE,
 )
 
 
-def ai_unavailable_reply() -> str:
-    return (
-        "Xin lỗi, trợ lý AI tạm thời không khả dụng. "
-        "Vui lòng thử lại sau hoặc dùng thanh tìm kiếm để khám phá cơ hội việc làm."
-    )
+def ai_unavailable_reply(locale: str = "vi") -> str:
+    return assistant_message("formatter.ai_unavailable", locale)
 
 
-def fast_path_reply(text: str) -> str | None:
+def fast_path_reply(text: str, locale: str = "vi") -> str | None:
     """Return deterministic replies for tiny conversational turns.
 
     These turns do not need a model call. Keeping them local reduces latency,
     cost, and the chance of over-answering a simple greeting.
     """
     if _GREETING_RE.match(text):
-        return (
-            "Xin chào! Mình là trợ lý hướng nghiệp của VinUni. "
-            "Bạn có thể hỏi mình về việc làm phù hợp, CV, đơn ứng tuyển, "
-            "sự kiện tuyển dụng, mức lương hoặc định hướng nghề nghiệp."
-        )
+        return assistant_message("formatter.greeting", locale)
     return None
 
 
@@ -51,11 +46,11 @@ def local_stream_chunks(text: str):
         yield word if i == len(words) - 1 else word + " "
 
 
-def strip_tool_call_json(text: str) -> str:
+def strip_tool_call_json(text: str, locale: str = "vi") -> str:
     """Remove leaked tool-call JSON from a final assistant response."""
     if "tool_call" not in text:
         return text.strip()
     stripped = re.sub(r"\{[^{}]*\"tool_call\"[\s\S]*\}\s*", "", text).strip()
     if stripped:
         return stripped
-    return "Mình đang tra cứu dữ liệu hệ thống. Vui lòng thử lại với câu hỏi cụ thể hơn."
+    return assistant_message("formatter.stripped_tool_call_fallback", locale)

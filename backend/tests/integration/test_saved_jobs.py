@@ -42,7 +42,6 @@ def _job_payload(title: str = "Test Job") -> dict:
         "headcount": 1,
         "application_deadline": None,
         "visibility": "public",
-        "screening_questions": [],
     }
 
 

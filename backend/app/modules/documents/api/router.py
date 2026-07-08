@@ -41,6 +41,7 @@ from app.modules.documents.application import (
     cv_ai_service,
     cv_canvas_service,
     cv_creation_service,
+    cv_lifecycle_service,
     cv_photo_service,
     cv_section_service,
     cv_service,
@@ -253,8 +254,13 @@ async def cv_job_fit(
     auth: CurrentAuth = Depends(get_current_auth),
     session: AsyncSession = Depends(get_db_session),
 ) -> dict:
+    # DETERMINISTIC-ONLY (fast): return every active CV's score/bands with NO LLM
+    # wait. Both consumers (the job-detail intelligence panel and the CV-studio
+    # fit rail) render the deterministic fit immediately and load the AI narrative
+    # separately via ``GET /jobs/{job_id}/fit-explanation`` — so blocking this call
+    # on the 20s explanation LLM was the source of the job-detail stall.
     data = await job_fit_service.job_fit_for_job(
-        session, principal=auth.principal, job_id=job_id
+        session, principal=auth.principal, job_id=job_id, with_explanation=False
     )
     return success(data)
 
@@ -313,6 +319,18 @@ async def update_cv(
         payload=body.model_dump(exclude_unset=True), ctx=auth.ctx,
     )
     return success(data)
+
+
+@cvs_router.delete("/{cv_id}", status_code=status.HTTP_204_NO_CONTENT,
+                   summary="Delete a CV (owner only, soft-delete)")
+async def delete_cv(
+    cv_id: uuid.UUID,
+    auth: CurrentAuth = Depends(get_current_auth),
+    session: AsyncSession = Depends(get_db_session),
+) -> None:
+    await cv_service.delete_cv(
+        session, principal=auth.principal, cv_id=cv_id, ctx=auth.ctx
+    )
 
 
 @cvs_router.get("/{cv_id}/versions", summary="List a CV's version history (owner only)")
@@ -443,6 +461,19 @@ async def duplicate_cv(
     data = await cv_creation_service.duplicate_cv(
         session, principal=auth.principal, cv_id=cv_id,
         payload=body.model_dump(), ctx=auth.ctx,
+    )
+    return success(data)
+
+
+@cvs_router.post("/{cv_id}/finalize",
+                 summary="Commit a draft CV into the library (draft -> ready)")
+async def finalize_cv(
+    cv_id: uuid.UUID,
+    auth: CurrentAuth = Depends(get_current_auth),
+    session: AsyncSession = Depends(get_db_session),
+) -> dict:
+    data = await cv_lifecycle_service.finalize_cv(
+        session, principal=auth.principal, cv_id=cv_id, ctx=auth.ctx,
     )
     return success(data)
 

@@ -81,7 +81,6 @@ def _job_payload(**over) -> dict:
         "headcount": 2,
         "application_deadline": None,
         "visibility": "public",
-        "screening_questions": [],
     }
     base.update(over)
     return base

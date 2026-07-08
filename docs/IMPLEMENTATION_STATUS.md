@@ -43,6 +43,32 @@
   from instruction-layer review #8 before broad new feature breadth such as
   generic messaging or `ai_settings`, unless the user explicitly reprioritizes.
 
+### Owner decision — uploaded-CV extraction reversal (05/07/2026)
+
+Two owner product decisions supersede the CV-ingestion field-review and
+LLM-image-policy status recorded below. They are authoritative over any older
+"verified" line in this file that describes a manual field-review gate or a
+text-only-to-LLM rule:
+
+1. **Uploaded-CV flow is upload → confirm file → name the CV → done. NO manual
+   field-review/edit step.** Backend extraction is authoritative and creates the
+   versioned draft directly; the student never reviews or edits extracted fields.
+   This **reverses B-561** (the "CV ingestion field-level review gate" recorded
+   below as fixed/verified, incl. `review-step.tsx`, per-field
+   confirm/edit/reject, and the `fact_confirmation_required` 422 gate). Those
+   entries are now historical — the review gate is being removed as wrong UX.
+   Extraction accuracy is a backend responsibility because it feeds CV-JD
+   matching. Import must still never silently overwrite an already-accepted CV.
+2. **A cheap vision-LLM tier may receive DOWNSCALED document images** for images
+   and styled/scanned PDFs. This supersedes the older "text-only guard, never raw
+   bytes" note recorded below for the ingestion cascade. The separate text-LLM
+   structuring tier still receives extracted text/markdown only. Non-CV / blank /
+   corrupt uploads are rejected and never fabricated into a CV.
+
+Code reconciliation for both items is tracked as implementation work (docs are
+updated first per the docs-only scope of this note); do not treat the older
+field-review/text-only status lines as current after 05/07/2026.
+
 ### Post-Claude review checkpoint — 04/07/2026
 
 Commands run from the current codebase:
@@ -1409,12 +1435,13 @@ Acceptance bar for the next batch:
 
 - Upload preview-first UX exists for PDF/image/DOCX states.
 - Backend ingestion is adapter-based and versioned: native text → layout → OCR
-  → deterministic structuring → optional LLM structuring.
-- OCR/layout/LLM fallback paths have tests or mocked tests.
-- User reviews extracted fields beside the original document and imports into a
-  template/draft with versioning.
-- Browser evidence covers CV upload preview, processing, review/import, quota,
-  and at least one failure recovery at 375/768/1024/1440.
+  → vision-LLM (may receive DOWNSCALED images) → optional text-LLM structuring.
+- OCR/layout/vision-LLM/text-LLM fallback paths have tests or mocked tests.
+- Student confirms the file and names the CV; backend-authoritative extraction
+  creates the versioned draft directly. (Updated 05/07/2026: no manual
+  field-review step; extraction accuracy feeds CV-JD matching.)
+- Browser evidence covers CV upload preview, processing, upload-and-name import,
+  quota, and at least one failure recovery at 375/768/1024/1440.
 
 ## 4eg. Burst Batch 18 — CV Ingestion & CV Studio Product Rescue (review #9, 28/06/2026)
 
@@ -3933,7 +3960,14 @@ product-owner decision on backfilling existing org roles before flipping);
 `webhook` reference catalog nouns that still don't exist (B-565, same bug
 class, out of this ticket's scope).
 
-### 2. B-561 — CV ingestion review gate — **fixed, verified**
+### 2. B-561 — CV ingestion review gate — **fixed, verified** — **SUPERSEDED 05/07/2026**
+> (Updated 2026-07-05: owner decision reverses this review gate. Uploaded-CV flow
+> is upload → confirm file → name the CV → done, with NO manual field-review step;
+> backend-authoritative extraction produces the draft directly. The
+> `review-step.tsx` per-field confirm/edit/reject flow and the
+> `fact_confirmation_required` gate described below are historical. See Section 1,
+> "Owner decision — uploaded-CV extraction reversal (05/07/2026)".)
+
 Backend contract was already correct and tested (per-field `overrides`,
 allowlisted paths, `FactConfirmationFieldsRequiredError` gate) — the gap was
 entirely frontend. New `frontend/src/components/cv/import-steps/review-step.tsx`
@@ -4486,3 +4520,311 @@ reorder, photo crop round-trip, undo/redo, AI diff accept/reject, ingestion
 polish` — nested-interactive ARIA fix on canvas blocks. `backend-developer`/
 `system-architect` — B-528.1 (`CvTemplateVersion`) and B-528.2 (render
 pipeline unification) scope and implementation.
+
+---
+
+## Platform Admin Console — AI Operations (P0+P1) — 07/07/2026
+
+Spec: `docs/superpowers/specs/2026-07-07-platform-admin-console-design.md` (master,
+8 phases) + `2026-07-07-admin-p0-p1-ai-operations-design.md`. Plan:
+`docs/superpowers/plans/2026-07-07-admin-p0-p1-ai-operations.md`. Owner override
+recorded in `AI_PRODUCT_SPEC §5.6`. Built via TDD, per-task spec+quality review,
+adversarial verification; commits `4e8b549..8c22f86` on `feat/ai-provider-model-admin`.
+
+**Status legend:** `implemented` → `API wired` → `browser verified` → `E2E verified`.
+
+Backend (Tasks 1–10) — **implemented + unit/integration-tested (green)**:
+- `ai_model_price` table + DB-backed cost estimate (admin-editable pricing).
+- `ai_ops_event` admin-only per-call telemetry + `ai_usage_daily` rollup +
+  never-raise recorder. `ai_usage_log` (PII-safe) left unchanged.
+- Best-effort Langfuse client (metadata-only, no-op without keys, never blocks a call).
+- `AiTaskRunner` instrumented (org_id, real tokens/latency, provider/model resolve,
+  cost, Langfuse trace, budget-blocked path) — single chokepoint.
+- Per-org daily AI budget enforced in `budget_guard` (+platform+user).
+- `/admin/ai-ops/*` superadmin-only read API (overview/spend/reliability/volume/
+  events) with provider/model identity returned only inside platform-superadmin
+  AI Operations; REAL p95 from `ai_ops_event`.
+- Audited model-price CRUD (duplicate → 409, no DB internals leaked).
+- Scheduler jobs: daily rollup reconcile (self-heal, incl. empty-day) + ops-event
+  retention prune. `/admin/overview` platform read model (per-section safe fallback).
+- Per-org budget exposed + persisted via `/admin/ai-settings` GET/PATCH (audited).
+- Quality gate for our scope: `ruff`/`mypy` clean on all new modules; app boots;
+  new suites green. 6 repo test failures are PRE-EXISTING (jd_extraction eval WIP +
+  a `documents→opportunities` module-boundary violation), confirmed not caused by
+  this work (`git log 4e8b549..HEAD` touched none of them).
+
+Frontend (Tasks 11–17) — **implemented + API wired + typecheck/build/vitest green;
+NOT yet browser/E2E verified**:
+- `(admin)` route group, superadmin `AdminGuard` (gates `is_superadmin===true`,
+  no content flash), standalone `ADMIN_NAV_GROUPS`, `admin/*` i18n (en/vi parity).
+- `Sparkline`/`BarSeries` primitives (pure helpers, NaN-safe, no chart lib).
+- Typed `aiOpsApi` client (snake_case `group_by`, provider/model `string|null`).
+- **AI Operations** screen: Overview (4 tiles + Spend/Reliability/Volume, independent
+  React Query panels, visibility-gated polling, budget-tone thresholds, null-safe),
+  Traces (DataTable + Sheet + Langfuse deep-link from `NEXT_PUBLIC_LANGFUSE_BASE_URL`),
+  Models & Pricing (CRUD + 409 inline), Settings (reuses `AiSettingsScreen` + wired
+  per-org budget control).
+- **Platform Overview** landing `/admin` (real `/admin/overview`, status band,
+  next-actions to existing routes only, incidents = EmptyState, `AdminTopbar`).
+- Gate: `pnpm typecheck` + `check:messages` + `vitest` (205) + `pnpm build`
+  (190 pages, 0 errors) all PASS.
+
+**PENDING (not done):** live browser verification and E2E as a superadmin (needs a
+running backend+frontend with a seeded superadmin login); real-call Langfuse trace
+appearing in the dashboard; visual-design QA. Master-spec phases P2–P7 (Audit Log
+console, System Health/queues, Users & Access incl. session/impersonation, Feature
+Flags, Analytics depth, Alerts & Incidents) are DESIGNED (master spec) but NOT built.
+
+**Owner routing:** `tester-qa` — browser/Playwright verification of the admin console
+as a superadmin; `vinuni-security-review` — sign-off on identity-masking + per-org
+budget + audit before relying on it in production; `product-owner-system-planner` —
+prioritize P2–P7.
+
+### Platform Admin Console — FULL PROGRAM COMPLETE (07/07/2026)
+
+The whole 8-phase program + a visualization upgrade were built, reviewed, and
+**browser-verified**. Commits `4e8b549..88792fa` on `feat/ai-provider-model-admin`
+(local only; nothing pushed).
+
+**Architecture correction (owner feedback):** the admin surfaces are NOT a separate
+`/admin` app. They live INSIDE the `/university` workspace as a superadmin-gated
+`systemAdmin` menu group ("Quản trị hệ thống"). `is_superadmin` shows it; a
+`requiresSuperadmin`/`requiresPermission` sidebar filter + per-page `SuperadminGuard`
+enforce it; `/auth/me` now returns the caller's `permissions` for finer per-permission
+gating. `/university/dashboard` remains the personal dashboard.
+
+**Sections built (backend + frontend, each unit/integration-tested + reviewed +
+contract-parity checked):**
+- Platform Overview (`/university/platform-overview`) — system status band.
+- AI Operations (`/ai-operations`) — spend/latency/volume time-series (Recharts,
+  monochrome), error heatmap (day×hour), reliability + circuit-breaker table,
+  distribution donut, AI log/trace explorer, models & pricing CRUD, AI settings +
+  per-org budget. Real p95 from `ai_ops_event`. Langfuse best-effort trace wired.
+- Logs (`/logs`) — unified Audit + AI log explorer (System / AI / Recent-All merged
+  timeline).
+- System Health (`/system-health`) — queue/pipeline flow diagram + service topology +
+  job-status matrix + queues/services tabs (SchedulerJobRun persistence).
+- Users & Access (`/access`) — user list + user-360 + suspend/unsuspend + platform
+  session list/revoke + grant/revoke superadmin (last-active-superadmin guard).
+- Analytics (`/analytics`) — KPIs + application funnel + growth trends (signups/
+  applications/active-users) over `AnalyticsEvent`.
+- Feature Flags (`/feature-flags`) — generalized flag registry (enable + staged
+  rollout %) + permission-catalog matrix.
+- Alerts (`/alerts`) — threshold alert rules + incidents (ack/resolve) + a scheduler
+  evaluation job that opens/auto-resolves incidents and notifies via the outbox.
+
+**Verification level — `browser verified`:** backend suites for platform_admin +
+ai_ops + observability + ai_settings + auth all green; `ruff` clean on new modules;
+frontend `pnpm typecheck` + `check:messages` (vi/en parity) + `pnpm build` (clean) +
+`vitest` green. Every FE↔BE contract checked field-by-field (a whole-branch review
+caught and fixed a large P0/P1 contract mismatch — always run a contract-parity check
+when FE and BE are built separately). Live browser check as superadmin
+(`admin@vinuni.com`): login → `/university` shows the systemAdmin group; AI Operations
+renders (honest empty states, masked provider identity); Users & Access shows real
+seeded users. Screenshots retained.
+
+**Security:** superadmin-only end-to-end (deps + service layer); provider/model
+identity is platform-superadmin-only per ADR-0011.2 and never exposed to ordinary
+university staff, students, partners, exports, notifications, or non-superadmin
+logs; no prompt/response/keys stored or traced; every write audited;
+per-org + platform + per-user AI budget enforcement; last-active-superadmin lockout
+guard. Owner override recorded in `AI_PRODUCT_SPEC §5.6`.
+
+**Known env note (not a code defect):** a stale `next dev --turbo` server writing to
+`.next` concurrently with `next build` corrupted the build output (turbopack runtime
+module error → HTTP 500). A clean rebuild fixed it. Do not run `pnpm build` while
+`pnpm dev` is running against the same `.next`.
+
+**Deferred (non-blocking, logged):** cohort-retention analytics; folding the two
+hardcoded `AiSettings` AI booleans into the new flag registry; impersonation
+(intentionally NOT built — high-risk, needs its own security-reviewed slice); a few
+minor UI-polish items (open-incident count uses loaded page only; visibility-gated
+refetch resume). `vinuni-security-review` sign-off still recommended before production
+reliance on grant-superadmin + session-revoke + identity masking.
+
+---
+
+## Student-Area Deep Audit + Fix Pass (08/07/2026)
+
+Three-agent end-to-end audit of the STUDENT area (backend `documents`/CV,
+backend jobs/apply/AI, frontend student surfaces). Headline: the core student
+journey is **real, not demo-ware** — deterministic CV-JD fit, honest
+recommendation reason codes, privacy-safe competition buckets, immutable apply
+snapshots, a full CV Studio canvas editor, and clean no-leakage AI responses.
+The audit surfaced concrete thin/incorrect spots; the highest-ROI, self-contained
+ones were fixed and verified this pass. Deferred findings are logged as backlog
+**E38 (B-586…B-603)**; the AI usage-ledger gap remains **B-579/B-580**.
+
+**Fixed + verified (`implemented`, test-verified):**
+
+1. **`GET /jobs/saved` + `GET /jobs/alerts` route-shadow (422 → 200).** Both
+   static routes were declared after the dynamic `GET /jobs/{job_id}` on the same
+   router, so Starlette matched `/{job_id}` (`job_id="saved"`) and 422'd — the
+   **Saved Jobs page was dead end-to-end**. Fixed by registering them on a
+   `jobs_me_router` included ahead of `jobs_router`
+   (`opportunities/api/router.py`). Pre-existing coverage only exercised the
+   service layer, which is why it slipped.
+2. **Job-alert create/delete silent data loss.** `job_alert_service.create_alert`
+   / `delete_alert` only `flush()`-ed; the request session never commits on
+   success (every other write service commits its own txn), so alert
+   writes were discarded at session close. Added `commit()` (+`refresh`).
+3. **CV export PDF renderer rewritten.** The exporter only understood
+   `{"items": [...]}`/flat dicts, so it **dropped `entries`-shaped
+   experience/education entirely**, printed the contact header as `name: …`
+   key:value lines, and rendered skills as `level: 85` — i.e. it mangled exactly
+   the CVs students upload (vision extraction produces `entries` + numeric skill
+   levels). Rewrote `pdf_render.py` around a pure, testable `build_render_model`
+   that mirrors the frontend `<CvDocument/>` binding (header/entries/skills-with-
+   level-bars/languages/text/divider). Full theme/pixel parity via a
+   headless-browser print route stays deferred (ADR-0015, B-591).
+
+Evidence (commands run, all green):
+- `uv run pytest tests/integration/test_jobs_saved_alerts_routes.py` (new, 5) —
+  HTTP-route-level regression for the shadow + alert persistence (create/delete
+  re-read in a separate request).
+- `uv run pytest tests/unit/test_cv_pdf_render_content.py` (new, 9) — asserts
+  `build_render_model` binds header/experience/education/skills/languages/text
+  and drops empty sections; render smoke (`%PDF`, watermark, minimal snapshot).
+- Regression: `test_saved_jobs.py`, `test_job_alerts.py`,
+  `test_job_alert_dispatch.py`, `test_documents.py`, `test_cv_canvas_and_photo.py`,
+  `test_recruitment.py`, `test_cv_ingestion.py`, `test_cv_job_fit.py`,
+  `test_fit_explanation_split.py`, `test_cv_pdf_render_canvas_order.py`,
+  `test_cv_studio_primitives.py` — all pass.
+- `uv run ruff check app` = **21** (unchanged baseline; no new lint debt);
+  `uv run mypy app/modules/documents/infrastructure/pdf_render.py
+  app/modules/opportunities/application/job_alert_service.py` = clean.
+
+**Fixed + verified (`API wired`, type/lint-clean — NOT yet browser-verified):**
+
+4. **Applications status filter tabs** (`student-applications-screen.tsx`):
+   All / Submitted / Under review / Interview / Offer / Hired / Not selected /
+   Withdrawn segmented control filtering loaded rows, per-tab counts, chips only
+   shown when non-empty; `filter`/`filterLabel` i18n added for vi+en (parity
+   verified).
+5. **De-"AI-washed" deterministic insight labels** (UI_QUALITY_BAR §2 truthfulness):
+   application-detail "AI Guidance" → "Next steps"/"Các bước tiếp theo" with the
+   Sparkle+AI-gradient chip replaced by a neutral checklist icon; the
+   applications-list insights header Sparkle → lightbulb (the box is real-signal
+   only, not AI). Values changed in `messages/{en,vi}/student/applications.json`.
+- Evidence: `pnpm typecheck` clean; `pnpm lint` clean on touched files (only the
+  two pre-existing `public-job-board`/`notifications` hook-dep warnings remain);
+  edited JSON parses with vi/en `filter` parity. **Remaining:** browser QA at
+  375/768/1024/1440 before `browser verified`.
+
+---
+
+## Student-Area Hardening — E38 Workstreams + AI Usage Ledger (08/07/2026)
+
+Second pass on the student area: the full E38 backlog (from the deep audit above)
+executed as three module-disjoint workstreams in parallel, plus the AI
+billable-usage ledger (the P0 from the operating model). **Full-suite gate after
+integration: `ruff app` = 21, `mypy app` = 45 (both exactly the pre-existing
+baseline — zero net lint/type debt from ~15 items), and `pytest` ≈ 2028 passed /
+6 failed — the 6 failures are the documented pre-existing baseline (4 eval-gate +
+`test_jd_upload_service` for the in-flight JD-extraction refactor already
+uncommitted on this branch, + the known `documents`/`platform_admin` module-boundary
+violation). Zero net new failures.** Four `student_intelligence*` test-fidelity
+regressions surfaced by the integration (a `_seed` helper that mutated
+`content_json` without bumping `cv.version`, and stale learning-gap phrase
+assertions) were fixed.
+
+**Backend correctness / privacy / robustness (implemented, test-verified):**
+- **B-603** — real anonymous-apply CV redaction: deep PII scrub (contact header +
+  email/phone patterns across entries/text/skills), deterministic + idempotent,
+  writes a redacted `redacted_json` copy while the immutable `snapshot_json`
+  retains identity for the reveal handshake. (`recruitment/apply_service.py`; 8 tests.)
+- **B-593** — concurrent-apply race → clean 409 (`IntegrityError → DuplicateApplicationError`),
+  DB unique index remains the source of truth.
+- **B-586** — job-alert dispatch now uses the canonical student visibility predicate
+  (excludes past-deadline / invitation-only / unmoderated), keyword match broadened
+  to title+description+requirements+skills, province filter backend-agnostic.
+- **B-594** — job-alert create/delete now audited (`job_alert.created`/`deleted`); router passes request ctx.
+- **B-587** — real `applicant_quality_bucket` + new `student_standing_bucket` from the
+  persisted `cv_job_fit_scores` read model (privacy-safe buckets only; `unknown`
+  below a 5-sample threshold; requesting student excluded from the pool).
+- **B-588** — learning-gaps skill→resource catalog (`opportunities/domain/learning_resources.py`, vi/en) replacing the hardcoded `practice_project` string.
+- **B-589** — uploaded-CV read-only enforced at the service layer:
+  `UploadedCvReadOnlyError` → 409 `uploaded_cv_read_only` (`actions:["duplicate"]`)
+  on section/canvas/AI-edit paths for `source_type == "uploaded_import"`; import /
+  read / duplicate / export still allowed.
+- **B-596** — `cv_profiles.matching_json` wired: lossless version-stamped projection,
+  consumed by `job_fit_service._build_cv_input` as a fast path **only when
+  `content_version == cv.version`** (any edit invalidates it → live-section fallback);
+  deterministic-parity test proves identical scores.
+- **B-599** — deterministic/OCR structuring now emits `entries` + numeric skill levels
+  (mirrors the vision tier) so CV-JD matching quality holds when vision is off; never loses content.
+- **B-595** — natural-language CV edit-command gains 5 entry ops (update field / update·add·remove
+  highlight / reorder), producing a **pending** structured diff through the unchanged accept
+  flow. *(Remaining: a `cv_edit_command` prompt v2 — ai-engineer prompt layer — so the live
+  model emits the new ops; the deterministic applier + tests are complete and safe.)*
+
+**AI billable-usage ledger — B-579 (implemented, test-verified; 21 tests):**
+- New durable, idempotent `ai_billable_usage` table (migration 0083, up/down) — the
+  charge-decision source of truth for plan/package limits, distinct from `ai_usage_log`
+  (PII-safe call log) and `ai_ops_event` (superadmin telemetry). `UsageContext` +
+  `record_billable_usage` (charging rules §3.2: credits only on success; blocked/failed/cached
+  record 0 units) + `billable_summary` read + `make_idempotency_key`.
+- Wired into the central `AiTaskRunner` as **opt-in, backward-compatible** (behavior
+  byte-identical until a call site passes a `UsageContext`); records success/blocked/
+  provider-failed with idempotency across `complete()` and `stream()`.
+- **Remaining (documented follow-ons): B-580** — route call sites through it; the
+  `generate_note`/`generate_json_note` helpers (`app/ai/cv/llm.py`) currently bypass the
+  metered path and don't accept a DB session, so they need migration to a usage-aware path
+  before per-feature credit charging is live. **B-581** — persona credit-meter/upgrade UX
+  (uses `billable_summary`).
+
+**Frontend (API wired, typecheck/lint/build green; NOT browser-verified):** the
+student job-intelligence panel now renders the real `applicant_quality_bucket` +
+new `student_standing_bucket` (hidden gracefully when `unknown`), with vi/en i18n
+parity. `pnpm typecheck` + `pnpm lint` + `pnpm build` all pass.
+
+**Doc drift reconciled this pass:** `docs/API_CONTRACTS.md` "Student Job Intelligence"
+updated for the real applicant-quality bucket + `student_standing_bucket` + the
+`uploaded_cv_read_only` 409. Note: the active-duplicate 409 emits
+`reason:"duplicate_application"` (frontend + tests depend on it); the older
+`"application_exists"` wording in the contract is the stale side.
+
+**Remaining before "complete":** B-580 AI call-site closure + B-581 persona credit UX;
+the `cv_edit_command` prompt v2; browser QA of all touched frontend surfaces at
+375/768/1024/1440; and the 6 pre-existing baseline failures (JD-extraction refactor
++ module-boundary) are owned outside this student-area pass.
+
+## AI Usage View — student/partner-facing quota & usage surface (08/07/2026)
+
+Follow-on to the ledger pass above, closing the "where do I actually SEE my AI
+quota/usage" gap. Before this, the only usage surface was a small sidebar meter
+(`GET /ai/usage/me`) + a billing page that showed plan *entitlements* but never
+*consumption*; the richer `ai_billable_usage` ledger was surfaced nowhere.
+
+**Backend (implemented, test-verified — 13 tests in `test_ai_usage_summary.py`):**
+- `usage_service.my_usage_detail()` + `GET /api/v1/ai/usage/summary`: day/week
+  windows (reused meter logic), `day_reset`/`week_reset` ISO instants,
+  `window_days`/`total`, `by_feature: [{feature,count}]`, and `recent:
+  [{feature,ok,at}]` over 30 days, grouped from real `ai_usage_log` rows.
+- Leakage-safe: internal `task_type` → stable **product feature codes** via an
+  explicit allowlist (`_FEATURE_BY_TASK`); system tasks (embeddings, rerank,
+  translation, eval judge) excluded from the breakdown; nothing else exposed.
+  Tests assert no `model_alias`/cost/token/provider/raw-task-label leaks +
+  per-user isolation + 30-day window + unknown-task → `other`.
+- `ruff` clean on touched files; `mypy` adds **0** new errors (the two touched
+  modules type-clean; remaining `mypy app` errors are the pre-existing baseline).
+
+**Frontend (API wired, typecheck/lint/build green; NOT browser-verified):**
+- New `AiUsagePanel` (`components/billing/ai-usage-panel.tsx`) mounted on the
+  shared `SubscriberBillingScreen` (so it appears on **both** `/student/billing`
+  and `/partner/billing`), between the current-plan rail and plan comparison.
+- Renders day/week meters with a live localized reset countdown
+  (`Intl.RelativeTimeFormat`), warning/blocked banners, a per-feature breakdown
+  (localized labels + bars), and a recent-activity list — with real loading
+  (skeleton), error (retry), and empty (persona-specific copy) states.
+- `aiAssistantApi.myUsageDetail()` + `AiUsageDetail`/`AiUsageFeatureCount`/
+  `AiUsageActivity` types; `billing.usage.*` keys added to en+vi (parity gate
+  green, 51 files). `pnpm typecheck`/`lint`/`build` all pass.
+
+**Honest limitation (documented):** the view reflects **request-count** usage.
+Single-shot CV features that still log via the sync `log_ai_usage()` path (no
+per-user DB row) under-count until **B-580** routes them through the metered
+runner — this is the same documented gap the operating model flags (§3). Once
+B-580 lands, per-feature **credit** charges layer onto this same surface. This
+delivers the read/discoverability half of **B-581**; credit top-up / package
+allocation / university request-more flows remain.

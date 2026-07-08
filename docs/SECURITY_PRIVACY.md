@@ -86,12 +86,12 @@ End users never see:
 - OCR/embedding internals
 - internal status codes
 
-> **Narrow exception (routing canvas only):** University Admin holding the
-> distinct `ai_settings:view_provider_identity` RBAC grant MAY see real
-> provider/model identity (not API keys, not base URL) via the internal
-> `ai_settings` routing canvas surface only. This never applies to end
-> users, partners, or students, and never applies to any other admin surface.
-> See `docs/API_CONTRACTS.md` ADR-0011.1 and `docs/AI_PRODUCT_SPEC.md` §5.5.
+> **Superadmin-only exception:** only platform superadmins may see or manage
+> real provider/model identity, and only inside superadmin AI operations/settings
+> surfaces. Ordinary university staff, partners, students, guests, exports, and
+> notifications never receive provider/model names or concrete ids. API keys and
+> base URLs are never returned at any privilege level. See `docs/API_CONTRACTS.md`
+> ADR-0011.2 and `docs/AI_PRODUCT_SPEC.md` §5.5.
 
 AI write actions:
 

@@ -1,4 +1,0 @@
-{"id": "cs_fallback_provider_down_basic", "input": {"total_applications": 3, "active_applications": 1, "interviews_upcoming": 0, "provider": "unavailable"}, "expect": {"is_fallback": true, "snapshot_nonempty": true, "no_crash": true}}
-{"id": "cs_fallback_provider_down_no_leak", "input": {"total_applications": 3, "active_applications": 1, "interviews_upcoming": 0, "provider": "unavailable"}, "expect": {"is_fallback": true, "no_provider_leak": true, "no_model_leak": true}}
-{"id": "cs_fallback_provider_down_zero_applications_message", "input": {"total_applications": 0, "active_applications": 0, "interviews_upcoming": 0, "provider": "unavailable"}, "expect": {"is_fallback": true, "snapshot_contains": "first application"}}
-{"id": "cs_fallback_provider_down_nonzero_applications_message", "input": {"total_applications": 4, "active_applications": 2, "interviews_upcoming": 0, "provider": "unavailable"}, "expect": {"is_fallback": true, "snapshot_contains": "4 applications"}}

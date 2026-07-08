@@ -43,15 +43,24 @@ Do not expose stack traces, provider names, model names, token counts, OCR inter
 | Missing minimum sections | no name/contact + no education/experience/project/skills | `INSUFFICIENT_CV_CONTENT` | Review manually or create from template |
 | Too many pages | page count over CV limit | `CV_TOO_LONG` | Upload first N pages or shorten CV |
 | Unsupported language quality | detected language outside supported set and low parse quality | `LANGUAGE_REVIEW_REQUIRED` | Continue manual review or switch to vi/en |
-| Mixed layout/table heavy | parser low confidence on sections | `REVIEW_REQUIRED` | Review extracted fields before import |
+| Mixed layout/table heavy | parser low confidence on sections | `REVIEW_REQUIRED` | Backend resolves it into the best draft (no manual field review — updated 2026-07-05); student refines later in the editor |
 
 ### 2.3 AI And Parser Behavior
 
 - Deterministic parser runs first.
 - OCR runs only when native extraction is empty/low quality.
-- LLM structuring runs only after extraction has enough text and `AI_REAL_CALLS_ENABLED` policy allows the environment.
-- If classifier says `NOT_A_CV`, do not call LLM by default. Offer manual template creation.
-- If confidence is low, mark fields `needs_review`; never silently import.
+- The cheap vision-LLM tier runs only when native text + local OCR are
+  insufficient (images, styled/scanned PDFs). It MAY receive DOWNSCALED document
+  images (owner decision 2026-07-05); the text-LLM structuring tier still receives
+  extracted text only and runs only after extraction has enough text, subject to
+  `AI_REAL_CALLS_ENABLED`/AI-settings policy.
+- If classifier says `NOT_A_CV`, do not call any model by default; the vision tier
+  must return no CV for non-CVs and the cascade must never fabricate a CV. Offer
+  manual template creation.
+- Low-confidence extraction is resolved backend-side into the best draft; import
+  must never silently overwrite an already-accepted CV. (Updated 2026-07-05: no
+  student field-review gate — backend-authoritative extraction that feeds CV-JD
+  matching.)
 - AI never spends credits for validation failures before generation.
 - AI credits are charged only when a suggestion/draft is successfully produced.
 

@@ -1,11 +1,11 @@
-"""Student-profile vocabulary + localized labels.
+"""Student-profile vocabulary + localized labels (identity-only profile).
 
 Every raw enum code is paired with a vi/en label so the API never ships a raw
 code alone (``.claude/rules/backend.md``: "No raw enum codes in end-user
-responses"). Canonical field set follows ``docs/DATA_MODEL.md`` §6; the single
-``profile_visibility`` overall gate is introduced by this slice (see the module
-docstring in ``models.py`` for the documented reconciliation with the per-field
-``privacy_settings`` of the data model).
+responses"). Since the profile is now identity-only (owner decision 2026-07-06),
+the only vocabulary it owns is the overall visibility gate and the per-field
+contact gates. Career vocabulary (degrees, employment types, skill categories,
+open-to-work types) moved out with the career fields.
 """
 
 from __future__ import annotations
@@ -33,15 +33,6 @@ CONTACT_HIDDEN = "hidden"     # never exposed to anyone but the owner
 CONTACT_VISIBILITY = frozenset({CONTACT_PUBLIC, CONTACT_INVITED, CONTACT_HIDDEN})
 
 # --------------------------------------------------------------------------- #
-# Enumerations                                                                 #
-# --------------------------------------------------------------------------- #
-
-OPEN_TO_WORK_TYPES = frozenset({"full_time", "internship", "part_time", "contract"})
-DEGREE_LEVELS = frozenset({"undergraduate", "graduate", "phd"})
-EMPLOYMENT_TYPES = frozenset({"full_time", "part_time", "internship", "contract"})
-SKILL_CATEGORIES = frozenset({"technical", "language", "soft"})
-
-# --------------------------------------------------------------------------- #
 # Labels                                                                       #
 # --------------------------------------------------------------------------- #
 
@@ -55,32 +46,6 @@ _CONTACT_LABELS: dict[str, tuple[str, str]] = {
     CONTACT_PUBLIC: ("Hiển thị", "Visible"),
     CONTACT_INVITED: ("Khi được mời", "When invited"),
     CONTACT_HIDDEN: ("Ẩn", "Hidden"),
-}
-
-_OPEN_TO_WORK_LABELS: dict[str, tuple[str, str]] = {
-    "full_time": ("Toàn thời gian", "Full-time"),
-    "internship": ("Thực tập", "Internship"),
-    "part_time": ("Bán thời gian", "Part-time"),
-    "contract": ("Hợp đồng", "Contract"),
-}
-
-_DEGREE_LABELS: dict[str, tuple[str, str]] = {
-    "undergraduate": ("Đại học", "Undergraduate"),
-    "graduate": ("Sau đại học", "Graduate"),
-    "phd": ("Tiến sĩ", "PhD"),
-}
-
-_EMPLOYMENT_LABELS: dict[str, tuple[str, str]] = {
-    "full_time": ("Toàn thời gian", "Full-time"),
-    "part_time": ("Bán thời gian", "Part-time"),
-    "internship": ("Thực tập", "Internship"),
-    "contract": ("Hợp đồng", "Contract"),
-}
-
-_SKILL_CATEGORY_LABELS: dict[str, tuple[str, str]] = {
-    "technical": ("Kỹ thuật", "Technical"),
-    "language": ("Ngôn ngữ", "Language"),
-    "soft": ("Kỹ năng mềm", "Soft skill"),
 }
 
 
@@ -97,19 +62,3 @@ def visibility_label(code: str, *, locale: str = "vi") -> str:
 
 def contact_label(code: str, *, locale: str = "vi") -> str:
     return _label(_CONTACT_LABELS, code, locale=locale) or code
-
-
-def open_to_work_label(code: str, *, locale: str = "vi") -> str | None:
-    return _label(_OPEN_TO_WORK_LABELS, code, locale=locale)
-
-
-def degree_label(code: str | None, *, locale: str = "vi") -> str | None:
-    return _label(_DEGREE_LABELS, code, locale=locale)
-
-
-def employment_label(code: str | None, *, locale: str = "vi") -> str | None:
-    return _label(_EMPLOYMENT_LABELS, code, locale=locale)
-
-
-def skill_category_label(code: str | None, *, locale: str = "vi") -> str | None:
-    return _label(_SKILL_CATEGORY_LABELS, code, locale=locale)

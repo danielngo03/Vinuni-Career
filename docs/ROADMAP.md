@@ -1,12 +1,19 @@
 # Roadmap — VinUni Career Platform
 
-> Phiên bản: 5.1 | Cập nhật: 27/06/2026
+> Phiên bản: 5.2 | Cập nhật: 08/07/2026
 > Roadmap này theo sát `docs/PRODUCT_REQUIREMENTS.md` v5.0.
 > Thứ tự ưu tiên: Core loops trước → Advanced features → AI → Monetization → University intelligence → Real-time + RAG.
 >
 > **Lưu ý về Module ID:** ROADMAP dùng M1–M33 theo thứ tự *ưu tiên giao hàng*. PRD dùng MODULE 1–24 theo thứ tự *nhóm tính năng*. Hai bộ số này KHÔNG đồng nhất — xem bảng cross-reference ở §Module ID Legend.
 
 ---
+
+## Product correction — 08/07/2026
+
+- **AI provider/model secrecy:** Students, partners, guests, and ordinary university staff must never know which provider or concrete model the platform uses. Only platform superadmins may view/create/update/delete provider records, concrete model bindings, pricing rows, fallback chains, health probes, and routing internals. API keys and base URLs are never returned by any API.
+- **AI quota and credits:** quota is not only a sidebar percentage. Every AI-producing action that creates user/business value or provider cost must pass through a durable usage ledger: JD extraction, CV extraction/structuring, CV-JD fit/match explanation, missing-skill suggestions, CV rewrite/template fill, chatbot turns, interview simulator, partner JD tools, partner screening/briefing, moderation AI, workflow AI nodes, embeddings/rerank when billed, and proactive AI jobs. Cache hits, deterministic local logic, validation-only checks, and provider failures do not consume user credits, although provider-cost telemetry may still record internal spend.
+- **Persona commercial model:** Students and partners can upgrade packages or buy credits. University usage is controlled by platform/university admins through limits, budgets, approvals, and internal request workflows, not an upgrade CTA.
+- **Dashboards:** dashboard V2 work must use real read models, real empty/error/permission states, charts/flows appropriate to the job, and no fake demo metrics.
 
 ## Nguyên tắc phân pha
 
@@ -198,15 +205,15 @@
 **Mục tiêu:** AI làm tăng đáng kể value cho mọi user. AI đi vào mọi feature quan trọng.
 
 ### AI Gateway (infra)
-- [ ] AI provider management (university admin panel)
+- [ ] Platform superadmin-only AI provider/model registry; ordinary university AI settings are masked governance controls only
 - [ ] Provider adapter: OpenAI, Anthropic, Gemini, Ollama, OpenRouter
-- [ ] Model selection per task type (from DB config)
+- [ ] Internal function-slot/task-type routing from DB config; non-superadmin views see only masked alias/status/budget fields
 - [ ] Load balancer: round-robin, priority, health-weighted
 - [ ] Fallback chain (provider A → B → C on error)
-- [ ] Cost tracking per task type
+- [ ] Provider cost telemetry per task type + billable AI usage ledger per actor/org/session/resource
 - [ ] Budget alerts
-- [ ] Health monitoring dashboard (admin only)
-- [ ] Provider name never exposed to end users
+- [ ] Health monitoring dashboard: concrete provider/model identity superadmin-only; ordinary university views get derived status only
+- [ ] Provider/model identity never exposed to students, partners, guests, exports, notifications, or ordinary university staff
 
 ### Module 4: AI Career Assistant (M4) ⭐
 - [ ] Full-page chat UI
@@ -253,20 +260,20 @@
 - [ ] Confidence shown in admin UI; low confidence items flagged for human
 
 ### Module 23: AI Settings (M23)
-- [ ] University admin: add/remove/edit AI providers
-- [ ] Set model per task type
-- [ ] Cost dashboard (per task type, per day/month)
-- [ ] Health status per provider
-- [ ] Test prompt per provider
-- [ ] AI audit log (what was called, by whom, at what cost — no content)
+- [ ] Platform superadmin: add/remove/edit AI providers and concrete model bindings
+- [ ] Platform superadmin: set model/fallback/rotation per internal task type
+- [ ] University AI governance view: feature flags, budgets, masked alias handles, derived health, and limit requests only
+- [ ] Superadmin AI cost dashboard (per task type, per day/month); ordinary university views never reveal provider/model identity
+- [ ] Superadmin-only health probe/test prompt per provider/model; no prompt/response bodies stored
+- [ ] AI audit log (what feature/task was called, by whom, charged to which scope, at what cost — no content)
 
-### Module 32: AI Provider Hub Visual Management (M32) ⭐
-- [ ] Provider cards UI: name (admin only), status indicator (🟢/🟡/🔴), response time avg, monthly cost, models, tasks assigned
+### Module 32: Superadmin AI Provider Hub Visual Management (M32) ⭐
+- [ ] Provider cards UI: real provider/model names visible only to platform superadmins, with status indicator, response time avg, monthly cost, models, tasks assigned
 - [ ] Health check auto-runs every 60s; auto-skip unhealthy providers
 - [ ] Priority mode: drag to reorder fallback chain
 - [ ] Round-robin mode: weight sliders per provider
 - [ ] Task-based routing: select provider per task_type via table UI
-- [ ] "Test" button: send test prompt → show latency + sample output (no provider name to non-admin)
+- [ ] "Test" button: send test prompt → show latency + sample output to superadmin only; prompt/response never persisted
 - [ ] Cost cap per provider per day (auto-disable + alert on breach)
 
 ### Module 33: Document Knowledge Base / RAG (M33) ⭐
@@ -319,11 +326,11 @@
 - [ ] Banner ads: header, sidebar, email digest positions
 - [ ] Sponsored job cards (amber "Được tài trợ" label — mandatory)
 - [ ] Sponsored events
-- [ ] Targeting: role, interest, graduation year — NEVER PII/health/religion
+- [ ] Targeting: automatic allocation or manual targeting by surface, role/category, industry, location/region, graduation year, interests, and campaign objective — NEVER PII/health/religion/sensitive traits
 - [ ] Ad campaign builder (partner)
 - [ ] Creative upload (image/HTML)
-- [ ] University approval before live
-- [ ] Budget + bid setup
+- [ ] University approval before live, with workflow rules for auto-approve/hold/escalate to department or named reviewer
+- [ ] Budget + bid setup with pacing, caps, fraud/risk checks, and spend guardrails
 - [ ] Performance dashboard: impressions, clicks, CTR
 - [ ] Invoice / revenue reporting
 

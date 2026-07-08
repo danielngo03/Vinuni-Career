@@ -7,6 +7,52 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from app.shared.permissions import Principal
 
 
+async def _combined_cv_query_text(
+    session: AsyncSession,
+    principal: Principal,
+    *,
+    limit: int = 5,
+) -> str:
+    """Build a search query from the student's whole CV library, not one arbitrary CV."""
+
+    from app.ai.cv import grounding
+    from app.modules.documents.application import cv_ranking_facade
+
+    cv_inputs = await cv_ranking_facade.build_cv_inputs(session, principal=principal)
+    parts: list[str] = []
+    for cv in cv_inputs[:limit]:
+        text = grounding.sections_to_text(cv.sections)
+        if text.strip():
+            parts.append(f"{cv.title}\n{text}")
+    return "\n\n".join(parts)[:2500]
+
+
+async def recommended_cv_id_for_job(
+    session: AsyncSession, principal: Principal, job_id
+) -> str | None:
+    """Return the highest scoring CV for a visible job, or None when no CV exists."""
+
+    from app.ai.cv import job_fit
+    from app.core.config import get_settings
+    from app.modules.documents.application import cv_ranking_facade
+    from app.modules.opportunities.application import job_fit_read
+
+    job = await job_fit_read.load_job_for_fit(
+        session, job_id=job_id, persona=principal.persona or "student"
+    )
+    if job is None:
+        return None
+    cv_inputs = await cv_ranking_facade.build_cv_inputs(session, principal=principal)
+    if not cv_inputs:
+        return None
+    outcome = job_fit.evaluate(
+        job,
+        cv_inputs,
+        stale_days=get_settings().cv_stale_after_days,
+    )
+    return outcome.recommended_cv_id
+
+
 async def search_jobs(session: AsyncSession, principal: Principal, args: dict) -> dict:
     from app.modules.opportunities.application import job_service
 
@@ -152,18 +198,9 @@ async def recommend_jobs(session: AsyncSession, principal: Principal, args: dict
         return {"ok": False, "error": "auth_required"}
     limit = min(int(args.get("limit") or 5), 10)
     try:
-        from app.modules.documents.application import cv_service
         from app.modules.opportunities.application import job_service
 
-        cvs, _, _ = await cv_service.list_cvs(session, principal=principal, cursor=None, limit=5)
-        primary = next((c for c in cvs if c.get("is_primary")), cvs[0] if cvs else None)
-
-        if primary:
-            from app.ai.cv import grounding
-            cv_detail = await cv_service.get_cv(session, principal=principal, cv_id=primary["id"])  # type: ignore
-            query_text = grounding.sections_to_text(cv_detail.get("sections", []))[:500]
-        else:
-            query_text = ""
+        query_text = await _combined_cv_query_text(session, principal, limit=5)
 
         from app.ai.retrieval.hybrid_search import hybrid_job_search
         from app.ai.retrieval.rerank import rerank_jobs
@@ -263,13 +300,10 @@ async def apply_job(session: AsyncSession, principal: Principal, args: dict) -> 
             except ValueError:
                 return {"ok": False, "error": "invalid_cv_id"}
         else:
-            cvs, _, _ = await cv_service.list_cvs(
-                session, principal=principal, cursor=None, limit=10
-            )
-            primary = next((c for c in cvs if c.get("is_primary")), cvs[0] if cvs else None)
-            if primary is None:
+            best_cv_id = await recommended_cv_id_for_job(session, principal, job_id)
+            if best_cv_id is None:
                 return {"ok": False, "error": "no_cv_found", "job_id": str(job_id)}
-            cv_id = _uuid.UUID(str(primary["id"]))
+            cv_id = _uuid.UUID(str(best_cv_id))
 
         cv_detail = await cv_service.get_cv(session, principal=principal, cv_id=cv_id)
         current_version_id = cv_detail.get("current_version_id")

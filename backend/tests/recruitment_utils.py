@@ -4,13 +4,11 @@ from __future__ import annotations
 
 import uuid
 
-from app.modules.documents.application import cv_service
-from app.modules.documents.domain.models import CvVersion
 from app.modules.opportunities.application import job_service, moderation_service
-from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from tests.auth_utils import CTX
+from tests.documents_utils import make_ready_cv
 
 
 def job_payload(title: str = "Backend Intern", **over) -> dict:
@@ -27,7 +25,6 @@ def job_payload(title: str = "Backend Intern", **over) -> dict:
         "salary_is_disclosed": False,
         "headcount": 1,
         "visibility": "public",
-        "screening_questions": [],
     }
     base.update(over)
     return base
@@ -50,23 +47,19 @@ async def publish_job(
 
 
 async def make_builder_cv(session: AsyncSession, *, student) -> dict:
-    """Create a blank builder CV + its first version; return the cv_selection dict."""
+    """Create a builder CV, finalize it into the library, and return the cv_selection.
 
-    cv = await cv_service.create_cv(
-        session,
-        principal=student,
-        payload={"title": "My CV", "creation_mode": "blank_template"},
-        ctx=CTX,
-    )
-    version = (
-        await session.execute(
-            select(CvVersion).where(CvVersion.cv_id == uuid.UUID(cv["id"]))
-        )
-    ).scalars().first()
+    A CV must be committed to the library (``status='ready'``) before it can be
+    submitted with an application (design spec 2026-07-05), so this helper runs the
+    real finalize path and returns the CURRENT head version id (finalize adds a new
+    immutable version).
+    """
+
+    detail = await make_ready_cv(session, student=student, title="My CV")
     return {
         "type": "builder_cv",
-        "cv_profile_id": cv["id"],
-        "cv_version_id": str(version.id),
+        "cv_profile_id": detail["id"],
+        "cv_version_id": detail["current_version_id"],
         "uploaded_document_id": None,
     }
 

@@ -218,3 +218,68 @@ class AiUsageDaily(Base):
     latency_ms_count: Mapped[int] = mapped_column(
         Integer, nullable=False, server_default="0"
     )
+
+
+class AiBillableUsage(Base):
+    """Durable billable-usage ledger (PRODUCT_OPERATING_MODEL.md §3.1).
+
+    The append-only source of truth for plan/package credit limits — DISTINCT
+    from ``ai_usage_log`` (PII-safe provider call log) and ``ai_ops_event``
+    (superadmin ops telemetry). Every billable AI call records exactly one row
+    here with the *charge decision* (``result_status`` + ``units_charged``), so a
+    model call can be attributed to the correct student/partner-org/university
+    budget and feature even when the provider telemetry also fired.
+
+    Idempotent: ``idempotency_key`` (caller-namespaced, e.g.
+    ``"cv_fit_explanation:<cv_version>:<job_version>"``) is globally unique when
+    present, so a Celery redelivery / client retry / cache reuse never
+    double-charges. ``NULL`` keys are allowed to repeat (non-idempotent events).
+
+    Never stores provider name, model id, prompt/response text, token counts, or
+    raw cost internals beyond the aggregate ``provider_cost_usd`` estimate — this
+    ledger is user/org/budget attribution, not observability.
+    Cross-database: ``Uuid`` and ``Numeric`` render on both PostgreSQL and SQLite.
+    """
+
+    __tablename__ = "ai_billable_usage"
+    __table_args__ = (
+        UniqueConstraint("idempotency_key", name="uq_ai_billable_usage_idempotency"),
+    )
+
+    id: Mapped[uuid.UUID] = mapped_column(
+        Uuid(as_uuid=True),
+        primary_key=True,
+        default=uuid.uuid4,
+        server_default=func.gen_random_uuid(),
+    )
+    created_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), nullable=False, server_default=func.now(), index=True
+    )
+    # Nullable: system/background calls have no acting user.
+    actor_user_id: Mapped[uuid.UUID | None] = mapped_column(
+        Uuid(as_uuid=True), nullable=True, index=True
+    )
+    # "student" | "partner" | "university" | "system"
+    actor_persona: Mapped[str] = mapped_column(String(24), nullable=False)
+    org_id: Mapped[uuid.UUID | None] = mapped_column(
+        Uuid(as_uuid=True), nullable=True, index=True
+    )
+    # "user" | "org" | "department" | "platform"
+    billing_scope: Mapped[str] = mapped_column(String(16), nullable=False)
+    # Product feature key, e.g. "chatbot" | "cv_fit_explanation" | "jd_extraction".
+    feature_key: Mapped[str] = mapped_column(String(48), nullable=False, index=True)
+    # Internal AI task name (matches ai_usage_log.task_type).
+    task_type: Mapped[str] = mapped_column(String(64), nullable=False)
+    resource_type: Mapped[str | None] = mapped_column(String(32), nullable=True)
+    resource_id: Mapped[uuid.UUID | None] = mapped_column(Uuid(as_uuid=True), nullable=True)
+    session_id: Mapped[uuid.UUID | None] = mapped_column(Uuid(as_uuid=True), nullable=True)
+    idempotency_key: Mapped[str | None] = mapped_column(String(160), nullable=True)
+    # Credits actually charged to the actor/org (0 for free/failed/cached/blocked).
+    units_charged: Mapped[int] = mapped_column(Integer, nullable=False, server_default="0")
+    # Estimated internal provider cost (counted even when units_charged == 0).
+    provider_cost_usd: Mapped[float | None] = mapped_column(Numeric(10, 7), nullable=True)
+    # "success" | "provider_failed" | "validation_failed" | "cached" | "blocked"
+    result_status: Mapped[str] = mapped_column(String(24), nullable=False)
+    # Nullable cross-links to the observability rows for the same call.
+    ai_usage_log_id: Mapped[uuid.UUID | None] = mapped_column(Uuid(as_uuid=True), nullable=True)
+    ai_ops_event_id: Mapped[uuid.UUID | None] = mapped_column(Uuid(as_uuid=True), nullable=True)

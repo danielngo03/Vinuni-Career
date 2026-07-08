@@ -1,15 +1,10 @@
 """Eval runner + checker for the ``jd_extraction`` family.
 
-Exercises the REAL ``jd_upload_service.extract_jd_from_upload`` pipeline —
-including the key-allowlist strip, the new ``JDExtractionSchema`` pydantic
-validation, and the per-field ``needs_review`` confidence heuristic added
-this batch (§10.1 gap: JD extraction previously had no schema validation and
-no eval dataset). Only the two I/O boundaries are mocked: text extraction
-(``extract_text`` — real PDF/OCR parsing is covered by its own extraction
-adapter tests) and the LLM JSON call (``generate_json_note`` — offline
-provider text is not valid JSON, so a canned dict/exception stands in for
-"what the model returned", exactly like ``recommend.py`` stubs the reranker
-boundary).
+Exercises the REAL ``jd_upload_service.extract_jd_from_upload_with`` pipeline —
+including the cascade's key-allowlist strip, the JDExtractionSchema pydantic
+validation, and the per-field ``needs_review`` confidence heuristic. Only the
+I/O boundaries are mocked: text extraction (``cascade.extract_text``) and the
+structurer/vision_runner seams (injected via ``extract_jd_from_upload_with``).
 """
 
 from __future__ import annotations
@@ -19,13 +14,24 @@ from typing import Any
 from unittest import mock
 
 from app.ai.evaluation.models import Probe
+from app.ai.extraction.adapters.ocr import set_ocr_adapter
+from app.ai.extraction.jd import cascade
 from app.modules.opportunities.application import jd_upload_service as svc
 from app.shared.exceptions import AIUnavailableError
 
 
-class _FakeExtraction:
-    def __init__(self, text: str) -> None:
-        self.text = text
+class _NoOcr:
+    """Disabled OCR adapter — makes the eval environment-independent."""
+
+    engine_family = "none"
+    engine_version = "none"
+
+    @property
+    def available(self) -> bool:
+        return False
+
+    def recognize(self, data: bytes, langs: str) -> str:
+        return ""
 
 
 async def run_case(case: dict[str, Any]) -> Probe:
@@ -34,22 +40,36 @@ async def run_case(case: dict[str, Any]) -> Probe:
     llm_json = inp.get("llm_json") or {}
     provider_down = inp.get("provider") == "unavailable"
 
-    async def _fake_generate_json_note(**kwargs: Any) -> dict:
+    async def _fake_structurer(text: str) -> dict:
         if provider_down:
             raise AIUnavailableError()
         return llm_json
 
-    with (
-        mock.patch.object(svc, "extract_text", return_value=_FakeExtraction(raw_text)),
-        mock.patch.object(svc, "generate_json_note", new=_fake_generate_json_note),
-    ):
-        try:
-            result = await svc.extract_jd_from_upload(
-                filename="jd.pdf", data=b"%PDF-fake", content_type="application/pdf"
-            )
-        except Exception as exc:
-            code = getattr(exc, "code", None)
-            return Probe(kind="jd_extraction", raised_code=code, raised_message=str(exc))
+    def _fake_vision(*args: Any, **kwargs: Any):
+        return None  # dataset drives the text path
+
+    set_ocr_adapter(_NoOcr())
+    try:
+        with mock.patch.object(
+            cascade, "extract_text",
+            return_value=type("R", (), {"text": raw_text, "page_count": 1,
+                                         "engine": "pdfplumber", "ocr_used": False})(),
+        ):
+            try:
+                result = await svc.extract_jd_from_upload_with(
+                    filename="jd.pdf", data=b"%PDF-fake",
+                    structurer=_fake_structurer, vision_runner=_fake_vision,
+                )
+            except Exception as exc:  # noqa: BLE001
+                # Prefer details["reason"] (the JD status like "not_a_jd") when
+                # present — ValidationFailedError.code is always "VALIDATION_FAILED"
+                # (class-level) which is too generic for per-status assertions. Only
+                # fall back to .code when details carries no "reason".
+                details_reason = (getattr(exc, "details", {}) or {}).get("reason")
+                code = details_reason or getattr(exc, "code", None)
+                return Probe(kind="jd_extraction", raised_code=code, raised_message=str(exc))
+    finally:
+        set_ocr_adapter(None)
 
     blob = json.dumps(result, ensure_ascii=False, default=str).lower()
     return Probe(kind="jd_extraction", blob=blob, data=result)

@@ -65,6 +65,71 @@ class InvalidCvFieldError(ValidationFailedError):
         super().__init__(self.message, details={"reason": "invalid_field", "field": field})
 
 
+class CvEmptyError(ValidationFailedError):
+    """Finalize attempted on an empty CV (no header name, no real section content).
+
+    Maps to ``422 VALIDATION_FAILED`` with ``details.reason = "cv_empty"`` so the
+    builder can show inline guidance ("Add your name or at least one section") and
+    block the finalize action instead of committing a blank library CV.
+    """
+
+    message = (
+        "CV này chưa có nội dung. Hãy thêm tên hoặc ít nhất một mục có thông tin "
+        "trước khi lưu vào thư viện."
+    )
+
+    def __init__(self) -> None:
+        super().__init__(self.message, details={"reason": "cv_empty"})
+
+
+class CvNotInLibraryError(ConflictError):
+    """Apply/snapshot attempted with a CV that is not committed to the library.
+
+    A draft CV is not analyzed/matchable and cannot be submitted with an
+    application (design spec 2026-07-05). Maps to ``409 CONFLICT`` with
+    ``details.reason = "cv_not_in_library"`` so the apply picker can steer the
+    student to finalize the CV first.
+    """
+
+    message = (
+        "CV này chưa ở trong thư viện. Hãy lưu CV vào thư viện trước khi ứng tuyển."
+    )
+
+    def __init__(self, *, status: str) -> None:
+        super().__init__(
+            self.message,
+            details={"reason": "cv_not_in_library", "status": status},
+        )
+
+
+class UploadedCvReadOnlyError(ConflictError):
+    """A user-initiated edit / AI-mutation was attempted on an uploaded CV.
+
+    Uploaded CVs are viewed READ-ONLY — the student's own original document —
+    while the visual builder/editor and AI edits are reserved for
+    TEMPLATE-created CVs (owner decision 2026-07-05, ``CLAUDE.md``). Section,
+    canvas, and AI-suggestion mutations on an uploaded CV are rejected here so the
+    API can never version-edit or AI-mutate the student's original document.
+
+    Maps to ``409 CONFLICT`` with ``details.reason = "uploaded_cv_read_only"`` and
+    a ``duplicate`` recovery action — duplicating an uploaded CV into an editable
+    builder copy IS allowed, so the UI can steer the student there instead of
+    silently failing. Reading/detail, duplicate, ingestion import (which CREATES
+    the CV), and export are never blocked.
+    """
+
+    message = (
+        "CV này được tải lên nên chỉ có thể xem, không thể chỉnh sửa. "
+        "Hãy tạo một bản sao nếu bạn muốn chỉnh sửa nội dung."
+    )
+
+    def __init__(self) -> None:
+        super().__init__(
+            self.message,
+            details={"reason": "uploaded_cv_read_only", "actions": ["duplicate"]},
+        )
+
+
 class CreationModeNotAvailableError(ValidationFailedError):
     """The requested CV creation mode is not available in this slice (AI draft)."""
 

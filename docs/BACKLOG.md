@@ -782,7 +782,7 @@
 | B-558 | Read-model governance: source events, refresh strategy, stale-data behavior, fallback UI, and reconciliation checks for dashboards, recommendations, analytics, and competition intelligence | P0 | 2 |
 | B-559 | Fix RBAC permission-catalog/resource-string mismatch: extend catalog with `analytics`, `candidate_identity`, `pipeline`, `scorecards`, `interviews`, `offers`, `ai_recruiting` nouns (with correct actions) and repoint `interview_service`/`offer_service`/`scorecard_service`/`scorecard_ai_service`/`screening_brief_service`/`apply_service`/`reveal_service` off the ungranted `"recruitment"`/`applications:update` resource strings so non-Admin custom roles can actually be granted these capabilities (extends B-519) | P0 | 2 |
 | B-560 | Workflow builder real node execution: implement `action` node subtypes (assign_owner, send_notification, create_task, move_candidate, webhook) instead of the current no-op stub, and add a human-review resume/approve endpoint so paused executions are not stuck forever (extends B-391/B-395) | P0 | 4 |
-| B-561 | CV ingestion field-level review gate: replace the auto-import path (which hardcodes `fact_confirmation: true` and skips straight to the CV builder) with a real diff/review screen showing original preview beside extracted fields before any import call (extends B-532) | P0 | 1 |
+| B-561 | ~~CV ingestion field-level review gate: replace the auto-import path with a diff/review screen showing original preview beside extracted fields before any import call~~ **REVERSED by owner decision 2026-07-05.** The uploaded-CV flow is upload → confirm file → name the CV → done, with NO manual field-review step; backend-authoritative extraction creates the versioned draft directly (accuracy feeds CV-JD matching). New work: remove the field-review screen/gate and land the student on the resulting draft; import must still never silently overwrite an accepted CV. (extends B-532) | P0 | 1 |
 | B-562 | Typed screening-answer validation: validate `screening_answers` against each `ScreeningQuestion.q_type` (yes/no, single/multi-select, numeric, free text) at the API schema layer instead of accepting an unvalidated dict (extends B-544) | P1 | 2 |
 | B-563 | AI output-guard hardening: extend `output_guard.py` to scrub internal status codes (`QUEUED`/`FAILED`/`RUNNING`/`PENDING`) and bare latency/timing figures from free-text model output, with adversarial eval cases for both (extends B-494) | P1 | 3 |
 | B-564 | Extend `applications:review`/`reject`/`bulk_review` action checks into `decision_service.review_application`/`reject_application` (currently gated only on `applications:read`); requires a backfill decision for existing org roles that only hold `read` today, route through `product-owner-system-planner` before flipping the gate (extends B-559, fixed 04/07/2026) | P0 | 2 |
@@ -800,3 +800,76 @@
 | B-576 | CV Studio production closure: implement `CvTemplateVersion`/assets/binding schema, unify canvas/PDF/template-preview render pipeline, add template admin publish/archive/version audit, browser-verify canvas/photo/AI-diff/import review, and fix known accessibility gaps | P0 | 1 |
 | B-577 | AI product evidence gate: add per-feature offline evals and adversarial cases for CV edit, JD matching, competition, recommendation, workflow AI nodes, and output-guard leakage; add user-facing unavailable/low-signal states without provider/model/token leakage | P0 | 3 |
 | B-578 | Status/doc truth maintenance: remove or supersede stale "clean/complete" claims after every blocker pass; every status update must include command output tier (`implemented`, `API wired`, `browser verified`, `visual-design verified`, `E2E verified`) and remaining owner | P0 | 1–5 |
+
+---
+
+## E37 — Product Operating Model Corrections (08/07/2026)
+
+| ID | Story | Priority | Phase |
+|----|-------|----------|-------|
+| B-579 | Universal billable AI usage ledger: all provider-backed AI calls carry `AiUsageContext` (`persona`, `billing_scope`, `feature_key`, task type, actor/org/resource/session/idempotency) and write an append-only charge decision before updating day/week/session meters | P0 | 3 |
+| B-580 | AI call-site accounting closure: route JD extraction, CV extraction, CV-JD match/explanation, missing-skill suggestions, chatbot, interview simulator, partner JD tools, partner screening briefs, moderation AI, workflow AI nodes, embeddings/rerank, and proactive jobs through the same metered runner; direct helper/provider paths may not bypass durable usage rows | P0 | 3 |
+| B-581 | Persona quota UX: student credit/top-up flow, partner org package/approval flow, and university request-more-capacity/admin-limit flow with no university billing upgrade CTA | P0 | 3 |
+| B-582 | Superadmin-only provider/model registry: remove grant-based raw identity access for ordinary university staff, enforce `principal.is_superadmin` for provider/model CRUD, pricing, health probes, fallback chains, routing internals, and concrete identity reads; audit every read/write | P0 | 3 |
+| B-583 | Dashboard V2 reality pass: replace demo metrics with real read models, honest empty/error/permission/stale-data states, useful charts/flows per persona, and browser-verified responsive layouts | P0 | 2–4 |
+| B-584 | Advertising campaign workflow V2: partner campaign builder supports auto-allocation or manual targeting by surface/category/role/industry/location/cohort, budget pacing, fraud/risk checks, university workflow approval, and real performance attribution | P0 | 4 |
+| B-585 | Events V2 operating model: partner/university event approval, ticket/capacity/waitlist/check-in/certificate flows, event promotion inventory, attendee analytics, and dashboard widgets grounded in real event data | P1 | 4 |
+
+---
+
+## E38 — Student-Area Deep Audit Findings (08/07/2026)
+
+> Source: three-agent end-to-end student audit (backend `documents`/CV,
+> backend jobs/apply/AI, frontend student surfaces). The core journey is real,
+> not demo-ware; these are the concrete thin/incorrect spots. Two shipping
+> blockers from this audit were FIXED the same day — see
+> `docs/IMPLEMENTATION_STATUS.md` (2026-07-08 student-area pass):
+> `/jobs/saved`+`/jobs/alerts` route-shadow (422) and job-alert create/delete
+> silent-data-loss (missing commit); CV export PDF renderer rewritten to render
+> the real content model. The AI usage-ledger gap this audit re-confirmed is
+> already tracked as B-579/B-580.
+
+| ID | Story | Priority | Phase |
+|----|-------|----------|-------|
+| B-586 | Job-alert dispatch must reuse the canonical visibility predicate (`visibility.apply_visible_filter`) instead of a hand-rolled status/moderation check — today it can notify about past-deadline / invitation-only jobs; also broaden keyword match beyond title and make province filtering backend-agnostic (`job_alert_dispatch_service.py:76-103`) | P1 | 2 |
+| B-587 | Real `applicant_quality_bucket` + student fit-percentile-within-pool for competition intelligence, aggregated from the already-persisted `cv_job_fit_scores` read model (replaces the hardcoded `"unknown"` at `competition_service.py:612`); privacy-safe buckets only | P1 | 3 |
+| B-588 | Learning-gaps real resource mapping: replace the hardcoded `resource_type="practice_project"` + generic sentence (`student_intelligence_service.py:207-217`) with a skill→resource/role-family catalog | P2 | 3 |
+| B-589 | Enforce uploaded-CV read-only at the service layer: `source_type == uploaded_import` guard in `cv_section_service`, `cv_canvas_service`, `cv_ai_service` request paths, and `export_service` (today read-only is frontend-only; the API will version-edit/AI-mutate an uploaded CV) | P1 | 1 |
+| B-590 | Reconcile the ingestion review contract with upload-and-name (owner decision 2026-07-05): the deterministic/OCR path still emits `review_fields`/`INGEST_NEEDS_REVIEW` and blocks `import` with `FactConfirmationFieldsRequiredError` — a hard dead-end whenever the vision tier is unavailable. Make the deterministic path land `READY` (mirror `vision._normalize`) or auto-confirm on import | P1 | 1 |
+| B-591 | CV export ↔ `<CvDocument/>` full theme/column-layout/palette parity via a headless-browser print route (ADR-0015). The 2026-07-08 fpdf renderer is content-faithful (header/entries/skills/languages/text/divider) and grayscale but not theme/pixel-identical to the on-canvas document | P2 | 1–3 |
+| B-592 | Discovery keyword search + facet counts: move `q` to Postgres FTS/`pg_trgm` across title+description+requirements+skills with relevance ranking; expose grouped facet counts (or wire `job_read_facade.market_aggregates`) instead of static enums in `/jobs/config`; honor `sort` in cursor mode | P2 | 2 |
+| B-593 | Return 409 (not 500) on a true concurrent-apply race: wrap the flush in `apply_service.apply_to_job:132-133` with `IntegrityError → DuplicateApplicationError` (DB unique index already prevents corruption) | P2 | 1 |
+| B-594 | Audit writes for job-alert create/delete (CLAUDE.md "every write action creates audit data"); currently only the DB row is persisted | P2 | 2 |
+| B-595 | Natural-language CV edit-command must operate on `entries`-shaped sections (add `update_entry`/`reorder_entries` ops in `edit_command.py`) — today it only mutates `items`-shape content, so uploaded/entry-based CVs cannot use "rewrite my experience"; also provide a non-generative write path for contact edits | P2 | 3 |
+| B-596 | Consume the persisted `cv_profiles.matching_json` in `job_fit_service` (or delete it) and populate it on upload-import (`create_cv_from_sections`) so the "extraction feeds a stored matching read model" contract is actually wired | P2 | 1–3 |
+| B-597 | Coalesced CV autosave: a mutable draft head that only checkpoints a `cv_versions` row on explicit save/accept, so a 5-second autosave loop does not explode immutable version history | P2 | 1 |
+| B-598 | CV template admin publish/archive/preview endpoints (`POST /admin/cv-templates/{id}/publish|archive|preview`) over the existing version/status columns; make `content_binding_schema` a first-class field | P2 | 1 |
+| B-599 | Upgrade the deterministic/OCR structuring tier to entry-based output + numeric skill levels (mirror `vision._normalize`) so CV-JD matching quality does not collapse when the vision tier is off | P2 | 1–3 |
+| B-600 | CV Studio library right rail (job-fit recommendations + AI-credit/export-quota) and an always-visible AI-credit chip where credits are spent (CV Studio header, AI assistant) | P2 | 3–4 |
+| B-601 | Align alumni persona: `_attach_student_fit` shows fit badges to alumni but `saved_jobs_service._require_student` 403s alumni on save — make save/fit consistent | P3 | 1 |
+| B-602 | Uploaded-CV application snapshot fidelity: the snapshot is a re-rendered structured extraction, not a byte-copy of the original uploaded PDF, so anything the extractor missed is absent from the immutable record — evaluate storing/serving the original document reference in the snapshot | P2 | 1 |
+| B-603 | Strengthen anonymous-apply redaction: `_redact_snapshot` currently only overwrites `title` with `[Ẩn danh]`; extracted sections may still carry identifying content pre-reveal (`apply_service.py:223-227`) | P1 | 1 |
+
+> **E38 status (implemented + test-verified 08/07/2026):** B-586, B-587, B-588,
+> B-589, B-593, B-594, B-596, B-599, B-603 DONE; B-595 deterministic applier DONE
+> (remaining sub-step: `cv_edit_command` prompt v2 for live-model emission — ai-engineer).
+> Full-gate green vs baseline (ruff 21 / mypy 45 / ~2028 pass / 6 pre-existing fail).
+> See `docs/IMPLEMENTATION_STATUS.md` "Student-Area Hardening (08/07/2026)".
+> Deferred/next: B-590, B-591, B-592, B-597, B-598, B-600, B-601, B-602, and the
+> B-589 frontend "Duplicate to edit" affordance. The AI usage ledger foundation
+> (B-579) is now IMPLEMENTED (durable idempotent `ai_billable_usage` + `UsageContext`
+> + `AiTaskRunner` wiring); B-580 (route all call sites — the `generate_note`
+> helpers need a usage-aware, DB-session-carrying path) remains.
+>
+> **B-581 (partial, 08/07/2026):** the student/partner-facing **AI usage view** is
+> now IMPLEMENTED — `GET /ai/usage/summary` (day/week windows, reset timing,
+> per-feature breakdown, recent activity; PII/leakage-safe, request-count only)
+> + an `AiUsagePanel` on the shared billing screen (`/student/billing`,
+> `/partner/billing`) with meters, reset countdown, feature bars, activity list,
+> and loading/error/empty states. Backend tests in `test_ai_usage_summary.py`
+> (13, incl. leakage + user-isolation + window). Remaining B-581 sub-steps:
+> student credit top-up flow, partner org package/approval allocation, and the
+> university request-more-capacity flow — all of which depend on B-580 landing
+> real per-feature credit charges first (today the view reflects request-count
+> usage, which under-counts single-shot CV features that still log via the sync
+> `log_ai_usage()` path — the documented B-580 gap).

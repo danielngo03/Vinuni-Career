@@ -2,13 +2,15 @@
 
 RBAC: the acting principal must be a ``student`` (wrong persona -> ``403``). All
 data is scoped to the acting student's own ``user_id`` — a student never sees
-another student's applications, CVs, reveals, or completion. The gate runs before
-any widget so it is never swallowed by the failure-tolerant widget wrapper.
+another student's applications, CVs, or reveals. The gate runs before any widget
+so it is never swallowed by the failure-tolerant widget wrapper.
+
+The profile is identity-only (owner decision 2026-07-06): there is no
+profile-completion metric anymore. The dashboard's "get set up" nudge is now
+CV-first — it points the student at building a CV, where all career content lives.
 """
 
 from __future__ import annotations
-
-from typing import cast
 
 from sqlalchemy.ext.asyncio import AsyncSession
 
@@ -23,7 +25,6 @@ from app.modules.discovery.application import ranking_service
 from app.modules.documents.application import cv_service
 from app.modules.opportunities.application import job_alert_service, job_read_facade
 from app.modules.recruitment.application import dashboard_read as recruitment_read
-from app.modules.student_profiles.application import profile_service
 from app.shared.exceptions import AuthRequiredError, PermissionDeniedError
 from app.shared.permissions import Principal
 
@@ -47,12 +48,6 @@ async def get_student_dashboard(
         lambda: recruitment_read.count_student_applications(session, user_id=user_id),
         fallback={"total": 0, "active": 0},
     )
-    completion_detail = await safe(
-        session,
-        lambda: profile_service.get_completion_detail_for_user(session, principal=principal),
-        fallback={"pct": 0, "sections": []},
-    )
-    completion = int(cast(int, completion_detail["pct"]))
     cv_count = await safe(
         session,
         lambda: cv_service.count_cvs(session, principal=principal),
@@ -74,16 +69,11 @@ async def get_student_dashboard(
     metrics = {
         "applications_total": counts["total"],
         "applications_active": counts["active"],
-        "profile_completion_pct": completion,
         "cv_count": cv_count,
         "alert_count": alert_count,
     }
 
     next_actions: list[dict] = []
-    if completion < 100:
-        next_actions.append(
-            {"key": "complete_profile", "href": "/student/profile", "count": None}
-        )
     if cv_count == 0:
         next_actions.append(
             {"key": "build_cv", "href": "/student/cv", "count": None}
@@ -149,7 +139,6 @@ async def get_student_dashboard(
 
     return {
         "metrics": metrics,
-        "completion_sections": completion_detail["sections"],
         "next_actions": next_actions,
         "applications_recent": applications_recent,
         "reveal_requests_pending": reveal_requests_pending,

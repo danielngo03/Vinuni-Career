@@ -42,9 +42,14 @@ def test_structure_cv_text_groups_sections_and_contact() -> None:
         "Skills\nPython, FastAPI\n"
     )
     out = structure_cv_text(text)
-    assert out["extracted_data"]["contact"]["email"] == "jane@example.com"
-    assert "education" in out["extracted_data"]
-    assert any(f["path"].startswith("experience") for f in out["review_fields"])
+    extracted = out["extracted_data"]
+    assert extracted["contact"]["email"] == "jane@example.com"
+    # Career sections are grouped into structured entries (B-599), not flat items.
+    assert "entries" in extracted["education"]
+    assert extracted["experience"]["entries"][0]["highlights"] == ["Built APIs"]
+    # Skills are parsed into named {name, level} items (level None here — no rating).
+    skill_names = [it["name"] for it in extracted["skills"]["items"]]
+    assert "Python" in skill_names and "FastAPI" in skill_names
     assert out["detected_language"] == "en"
 
 

@@ -2,8 +2,8 @@
 
 Covers: every task_type produces a deterministic pending diff; suggest does NOT
 mutate the CV; accept without fact_confirmation (when required) is rejected; accept
-with confirmation creates a new cv_version + audit; ai_assisted_draft creates a
-pending suggestion; output-guard / no-leak assertions; prompt-injection cannot
+with confirmation creates a new cv_version + audit; output-guard / no-leak
+assertions; prompt-injection cannot
 exfiltrate the system prompt or bypass grounding; AI-unavailable -> AI_UNAVAILABLE;
 cross-owner 404; idempotent suggest + accept.
 """
@@ -134,25 +134,34 @@ async def test_deterministic_same_input_same_diff(db_session) -> None:
     assert r1["diff"]["after"] == r2["diff"]["after"]
 
 
-@pytest.mark.parametrize(
-    "task_type",
-    [
-        "draft_cv_from_profile",
-        "fill_cv_template_from_sources",
-        "cv_fabrication_check",
-    ],
-)
-async def test_whole_cv_tasks_produce_leak_safe_diffs(db_session, task_type) -> None:
+# The profile-sourced whole-CV tasks (``draft_cv_from_profile`` /
+# ``fill_cv_template_from_sources``) were removed with the identity-only profile
+# cleanup (owner decision 2026-07-06) — the profile no longer holds CV-usable
+# career content. ``cv_fabrication_check`` remains a whole-CV advisory task and
+# now grounds on the CV itself / uploaded extraction / notes (never the profile).
+async def test_fabrication_check_produces_leak_safe_diff(db_session) -> None:
     _u, student = await make_student(db_session)
     cv = await _make_cv(db_session, student)
     res = await cv_ai_service.request_suggestion(
         db_session, principal=student, cv_id=uuid.UUID(cv["id"]),
-        payload={"task_type": task_type, "source_ids": {"profile": True},
-                 "idempotency_key": new_key()},
+        payload={"task_type": "cv_fabrication_check", "idempotency_key": new_key()},
         ctx=CTX,
     )
     assert res["status"] == "pending"
     _assert_no_leak(res)
+
+
+async def test_removed_profile_task_is_rejected(db_session) -> None:
+    from app.modules.documents.application.errors import InvalidTaskTypeError
+
+    _u, student = await make_student(db_session)
+    cv = await _make_cv(db_session, student)
+    with pytest.raises(InvalidTaskTypeError):
+        await cv_ai_service.request_suggestion(
+            db_session, principal=student, cv_id=uuid.UUID(cv["id"]),
+            payload={"task_type": "draft_cv_from_profile", "idempotency_key": new_key()},
+            ctx=CTX,
+        )
 
 
 async def test_bullets_from_notes(db_session) -> None:
@@ -469,27 +478,6 @@ async def test_cross_owner_accept_404(db_session) -> None:
             suggestion_id=uuid.UUID(sug["suggestion_id"]),
             payload={"fact_confirmation": True}, ctx=CTX,
         )
-
-
-# --------------------------------------------------------------------------- #
-# ai_assisted_draft creation mode                                            #
-# --------------------------------------------------------------------------- #
-
-
-async def test_ai_assisted_draft_creates_pending_suggestion(db_session) -> None:
-    _u, student = await make_student(db_session)
-    detail = await cv_service.create_cv(
-        db_session, principal=student,
-        payload={"title": "AI CV", "creation_mode": "ai_assisted_draft"},
-        ctx=CTX,
-    )
-    assert detail["source_type"] == "ai_draft"
-    assert detail["pending_suggestion"]["status"] == "pending"
-    assert detail["pending_suggestion"]["task_type"] == "draft_cv_from_profile"
-    _assert_no_leak(detail)
-    # The CV itself is NOT auto-populated (sections remain the blank skeleton).
-    summary = next(s for s in detail["sections"] if s["section_type"] == "summary")
-    assert not summary["content"].get("items")
 
 
 # --------------------------------------------------------------------------- #

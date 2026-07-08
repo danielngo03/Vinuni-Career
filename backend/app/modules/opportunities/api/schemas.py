@@ -13,14 +13,6 @@ from typing import Literal
 from pydantic import BaseModel, Field, model_validator
 
 
-class ScreeningQuestionInput(BaseModel):
-    question: str = Field(min_length=1, max_length=2000)
-    q_type: str = Field(max_length=20)
-    options: list[str] | None = None
-    is_required: bool = True
-    sort_order: int = Field(default=0, ge=0, le=1000)
-
-
 class JobLocationItem(BaseModel):
     """One worksite entry for a job posting.
 
@@ -89,7 +81,6 @@ class CandidateRequirements(BaseModel):
     marital_status: RequirementGroup | None = None
     languages: list[LanguageRequirement] = Field(default_factory=list, max_length=20)
     certifications: list[CertificationRequirement] = Field(default_factory=list, max_length=30)
-    work_authorization: RequirementGroup | None = None
     note: str | None = Field(default=None, max_length=2000)
 
 
@@ -221,7 +212,7 @@ class JobCreateRequest(BaseModel):
     headcount: int = Field(default=1, ge=1, le=10000)
     application_deadline: datetime | None = None
     visibility: str = Field(default="public", max_length=20)
-    screening_questions: list[ScreeningQuestionInput] = Field(default_factory=list)
+    cv_language_required: Literal["any", "en", "vi"] = "any"
 
     @model_validator(mode="after")
     def _validate_structured_modes(self) -> JobCreateRequest:
@@ -276,7 +267,7 @@ class JobUpdateRequest(BaseModel):
     headcount: int | None = Field(default=None, ge=1, le=10000)
     application_deadline: datetime | None = None
     visibility: str | None = Field(default=None, max_length=20)
-    screening_questions: list[ScreeningQuestionInput] | None = None
+    cv_language_required: Literal["any", "en", "vi"] | None = None
     version: int | None = None
 
     @model_validator(mode="after")
@@ -337,3 +328,18 @@ class JobBulkRejectItem(BaseModel):
 
 class JobBulkRejectRequest(BaseModel):
     items: list[JobBulkRejectItem] = Field(min_length=1, max_length=100)
+
+
+class BatchFitScoresRequest(BaseModel):
+    """Batch CV-job fit score request.
+
+    The frontend sends the list of job IDs visible on the current page (up to 50).
+    The backend returns a score entry for each job the authenticated student has
+    an active CV that can be scored against.
+    """
+
+    job_ids: list[uuid.UUID] = Field(
+        min_length=1,
+        max_length=50,
+        description="Job IDs to score (max 50 per request; one page worth).",
+    )

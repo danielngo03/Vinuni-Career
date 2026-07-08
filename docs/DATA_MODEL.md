@@ -641,8 +641,8 @@ CREATE TABLE cv_parse_runs (
   page_count      INT,
   text_length     INT,
   provider_alias  VARCHAR(100),         -- internal alias, never exposed
-  extracted_data  JSONB,                -- structured CV fields
-  review_fields   JSONB,                -- fields requiring student review before import
+  extracted_data  JSONB,                -- structured CV fields (backend-authoritative draft source)
+  review_fields   JSONB,                -- internal quality markers only (updated 2026-07-05: no student field-review step; extraction is backend-authoritative)
   confidence      NUMERIC(4,3),         -- internal only, never in API responses
   error_message   TEXT,                 -- internal only
   started_at      TIMESTAMPTZ,

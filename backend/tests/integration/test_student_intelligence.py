@@ -13,9 +13,6 @@ import uuid
 from datetime import UTC, datetime, timedelta
 
 import pytest
-from sqlalchemy import select
-
-from app.modules.documents.application import cv_service
 from app.modules.documents.domain.models import CvProfile, CvSection
 from app.modules.opportunities.application import (
     job_service,
@@ -24,9 +21,10 @@ from app.modules.opportunities.application import (
 )
 from app.modules.recruitment.domain.models import Application
 from app.shared.exceptions import PermissionDeniedError, ResourceNotFoundError
+from sqlalchemy import select
 
 from tests.auth_utils import CTX
-from tests.documents_utils import make_student
+from tests.documents_utils import make_ready_cv, make_student
 from tests.org_utils import make_org_with_admin
 
 _FORBIDDEN = [
@@ -65,7 +63,6 @@ def _job_payload(**over) -> dict:
         "headcount": 1,
         "application_deadline": None,
         "visibility": "public",
-        "screening_questions": [],
     }
     base.update(over)
     return base
@@ -85,18 +82,27 @@ async def _create_job(db, *, publish: bool = True, **over) -> uuid.UUID:
 
 
 async def _make_cv(db, student, *, title="My CV") -> dict:
-    return await cv_service.create_cv(
-        db, principal=student,
-        payload={"title": title, "creation_mode": "blank_template"}, ctx=CTX,
-    )
+    # Student intelligence / fit reads only committed library CVs (``ready``), so
+    # finalize the CV (seeds a header name so the non-empty gate passes). Sections
+    # are read live, so callers may keep seeding content afterward.
+    return await make_ready_cv(db, student=student, title=title)
 
 
 async def _seed(db, cv_id, section_type, items) -> None:
+    # A real section edit bumps cv.version, which invalidates the cached fit rows
+    # AND the stored matching-json snapshot (B-596). Mirror that here so job-fit
+    # reads the freshly seeded content live instead of the empty finalize-time
+    # snapshot (a raw content_json write without the bump is a test-only back door
+    # production never takes).
+    cv = (
+        await db.execute(select(CvProfile).where(CvProfile.id == uuid.UUID(cv_id)))
+    ).scalar_one()
     sections = (
         await db.execute(select(CvSection).where(CvSection.cv_id == uuid.UUID(cv_id)))
     ).scalars().all()
     target = next(s for s in sections if s.section_type == section_type)
     target.content_json = {"items": items}
+    cv.version += 1
     await db.commit()
 
 

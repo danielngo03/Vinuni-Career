@@ -74,7 +74,11 @@ backend/app/modules/{domain}/
   `docs/PARTNER_RBAC_ANALYTICS_SPEC.md`.
 - Every write action must create audit data.
 - No raw enum codes in end-user responses.
-- No AI provider/model/token internals in end-user responses.
+- No AI provider/model/token internals in end-user responses, ordinary
+  university-staff responses, partner/student exports, notifications, or logs
+  visible outside the superadmin operations boundary. Real provider/model
+  registry identity and CRUD are platform-superadmin-only; API keys and base
+  URLs are never returned by any API.
 - No business logic in routers.
 - No direct cross-module implementation imports; communicate through interfaces/events/read models.
 - No dashboard with heavy live multi-domain joins; use projections/read models.
@@ -119,16 +123,22 @@ backend/app/modules/{domain}/
 - CV upload/parse must handle blank, non-CV, corrupt, password-protected, duplicate, low-quality, and security-rejected files.
 - CV ingestion must be backend-owned and adapter-based. Do not build product
   logic around one parser library. Native text, layout extraction, OCR fallback,
-  and optional LLM structuring are separate interfaces with versioned outputs and
-  user-safe statuses.
+  vision-LLM extraction, and optional text-LLM structuring are separate interfaces
+  with versioned outputs and user-safe statuses.
 - CV ingestion should be asynchronous or resumable for non-trivial files. A
   request-path parser is acceptable only for the smallest first slice and must
   be documented as functional-only.
-- Uploaded-CV import creates reviewable structured data and then a versioned CV
-  draft after user confirmation; it must never silently overwrite accepted CV
-  content.
-- Never send raw PDF/image bytes to an LLM. Only extracted/redacted text or
-  markdown may be sent, and only when AI settings/env allow it.
+- Uploaded-CV import is upload-and-name, backend-authoritative (owner decision
+  2026-07-05): the student names the CV and the backend produces the versioned
+  draft directly from the extraction — there is NO manual field-review/edit step.
+  Extraction accuracy is a backend responsibility (it feeds CV-JD matching). Import
+  must still never silently overwrite an already-accepted CV.
+- The vision-LLM extraction tier MAY receive DOWNSCALED document images for the
+  image / styled-or-scanned-PDF path (owner-approved; supersedes the older "never
+  send image bytes to an LLM" rule). It runs only when native text + local OCR are
+  insufficient, uses the cheapest capable vision model, and is gated on AI
+  settings/env. The separate TEXT-LLM structuring tier still receives extracted
+  text/markdown only — never raw bytes.
 - Celery tasks must be idempotent.
 - Notification dispatch uses an outbox and template renderer; no synchronous SMTP dependency in product writes.
 - Device/session APIs must not expose raw IP, raw refresh tokens, or full user-agent strings.

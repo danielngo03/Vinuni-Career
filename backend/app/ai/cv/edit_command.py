@@ -18,9 +18,21 @@ injection from validating a fabricated claim.
 The ONLY generative model call is inside :func:`generate_cv_edit_patch` ->
 :func:`app.ai.cv.llm.generate_json_note`.
 
-Op allowlist (ai-engineer review, 2026-07-04): kept at exactly the original 3
-ops (``update_item_text``, ``add_item_text``, ``reorder_sections``) — NOT
-expanded. Two candidate additions were considered and both rejected:
+Op allowlist (ai-engineer review, 2026-07-04; extended 2026-07-08, B-595): the
+original 3 ITEM/section ops (``update_item_text``, ``add_item_text``,
+``reorder_sections``) plus 5 ENTRY ops for entry-based sections
+(experience/education/projects) — ``update_entry_field`` (heading / subheading /
+timeframe / location / note), ``update_highlight``, ``add_highlight``,
+``remove_highlight``, ``reorder_entries``. All are validated deterministically
+against the CV's existing sections + the fabrication check before anything is
+proposed; the model's raw text is never trusted as CV structure, and the result is
+always a PENDING diff requiring explicit student acceptance. NOTE: for the live
+model to actually EMIT the entry ops, the ``cv_edit_command`` prompt must describe
+them (a prompt v2, owned by the ai-engineer prompt layer under
+``app.ai.prompts``); the deterministic applier here accepts them regardless of how
+they are produced (tests inject them directly).
+
+Two candidate additions were considered and both still rejected:
 
 - **Contact-field edits** (e.g. "0324xx0898 is my phone number", the CV Studio
   spec's own example). Structurally unreliable through this free-text
@@ -50,6 +62,8 @@ allowed op.
 
 from __future__ import annotations
 
+from typing import TypeGuard
+
 from app.ai.cv import grounding
 from app.ai.cv.fabrication import find_unsupported_claims
 from app.ai.cv.llm import generate_json_note
@@ -58,9 +72,31 @@ from app.ai.prompts.cv_edit_command import v1 as edit_command_prompt
 
 TASK_TYPE = "ai_edit_command"
 
-_ALLOWED_OPS = frozenset({"update_item_text", "add_item_text", "reorder_sections"})
+# Item ops mutate ``content["items"]`` (bullet/skill sections). Entry ops mutate
+# ``content["entries"]`` (experience/education/projects — one entry per role/degree
+# with separate heading/subheading/timeframe/location/note/highlights fields), so a
+# student can rewrite an experience bullet, fix a role/timeframe, or reorder roles
+# through the SAME pending-diff → explicit-accept pipeline. Every op is validated
+# deterministically here; the model's raw text is never trusted as CV structure.
+_ITEM_OPS = frozenset({"update_item_text", "add_item_text"})
+_ENTRY_OPS = frozenset(
+    {
+        "update_entry_field",
+        "update_highlight",
+        "add_highlight",
+        "remove_highlight",
+        "reorder_entries",
+    }
+)
+_ALLOWED_OPS = _ITEM_OPS | _ENTRY_OPS | {"reorder_sections"}
+
+# The entry fields an ``update_entry_field`` op may set (never ``highlights`` — those
+# have their own add/update/remove ops).
+_ENTRY_FIELDS = frozenset({"heading", "subheading", "timeframe", "location", "note"})
+
 _MAX_OPERATIONS = 10
 _MAX_TEXT_CHARS = 2000
+_MAX_HIGHLIGHTS = 30
 
 
 def _context_block(ctx: CvAiContext) -> str:
@@ -101,6 +137,78 @@ def _by_type(cv_sections: list[dict]) -> dict[str, dict]:
     }
 
 
+def _clip(text: str) -> str:
+    return text.strip()[:_MAX_TEXT_CHARS]
+
+
+def _valid_index(value: object, length: int) -> TypeGuard[int]:
+    return isinstance(value, int) and not isinstance(value, bool) and 0 <= value < length
+
+
+def _apply_entry_op(op: str, raw_op: dict, entries: list[dict]) -> tuple[bool, bool]:
+    """Apply one entry op to ``entries`` IN PLACE (validated, model text distrusted).
+
+    Returns ``(changed, added_text)``: ``added_text`` marks ops that introduce new
+    prose (so the caller runs the fabrication check on them); reorder/remove change
+    structure only. Any malformed / out-of-range op is a silent no-op — a bad model
+    response degrades to an empty diff, never a crash.
+    """
+
+    if op == "reorder_entries":
+        order = raw_op.get("order")
+        if not isinstance(order, list) or not order:
+            return False, False
+        idxs = [i for i in order if _valid_index(i, len(entries))]
+        if not idxs or len(set(idxs)) != len(idxs):
+            return False, False
+        remaining = [i for i in range(len(entries)) if i not in idxs]
+        reordered = [entries[i] for i in idxs] + [entries[i] for i in remaining]
+        if reordered == entries:
+            return False, False
+        entries[:] = reordered
+        return True, False
+
+    ei = raw_op.get("entry_index")
+    if not _valid_index(ei, len(entries)):
+        return False, False
+    entry = dict(entries[ei])
+
+    if op == "update_entry_field":
+        field, text = raw_op.get("field"), raw_op.get("text")
+        if field not in _ENTRY_FIELDS or not isinstance(text, str) or not text.strip():
+            return False, False
+        entry[field] = _clip(text)
+        entries[ei] = entry
+        return True, True
+
+    highlights = [h for h in (entry.get("highlights") or []) if isinstance(h, str)]
+    if op == "add_highlight":
+        text = raw_op.get("text")
+        if not isinstance(text, str) or not text.strip() or len(highlights) >= _MAX_HIGHLIGHTS:
+            return False, False
+        highlights.append(_clip(text))
+        entry["highlights"] = highlights
+        entries[ei] = entry
+        return True, True
+    if op == "update_highlight":
+        hi, text = raw_op.get("highlight_index"), raw_op.get("text")
+        if not _valid_index(hi, len(highlights)) or not isinstance(text, str) or not text.strip():
+            return False, False
+        highlights[hi] = _clip(text)
+        entry["highlights"] = highlights
+        entries[ei] = entry
+        return True, True
+    if op == "remove_highlight":
+        hi = raw_op.get("highlight_index")
+        if not _valid_index(hi, len(highlights)):
+            return False, False
+        highlights.pop(hi)
+        entry["highlights"] = highlights
+        entries[ei] = entry
+        return True, False
+    return False, False
+
+
 def _apply_operations(
     cv_sections: list[dict], operations: list[dict]
 ) -> tuple[dict, dict, bool]:
@@ -139,9 +247,20 @@ def _apply_operations(
         if section_type not in by_type:
             continue
         section = by_type[section_type]
-        content = touched.get(section_type, dict(section.get("content") or {}))
-        items = list(content.get("items") or [])
+        content = dict(touched.get(section_type) or dict(section.get("content") or {}))
 
+        if op in _ENTRY_OPS:
+            # Entry-based section: mutate a COPY of ``content["entries"]`` so the
+            # source section is never touched before the student accepts.
+            entries = [dict(e) for e in (content.get("entries") or []) if isinstance(e, dict)]
+            changed, added_text = _apply_entry_op(op, raw_op, entries)
+            if changed:
+                content["entries"] = entries
+                touched[section_type] = content
+                has_content_change = has_content_change or added_text
+            continue
+
+        items = list(content.get("items") or [])
         if op == "update_item_text":
             idx = raw_op.get("item_index")
             text = raw_op.get("text")
@@ -151,7 +270,6 @@ def _apply_operations(
                 item = dict(items[idx]) if isinstance(items[idx], dict) else {}
                 item["text"] = text.strip()[:_MAX_TEXT_CHARS]
                 items[idx] = item
-                content = dict(content)
                 content["items"] = items
                 touched[section_type] = content
                 has_content_change = True
@@ -159,7 +277,6 @@ def _apply_operations(
             text = raw_op.get("text")
             if not isinstance(text, str) or not text.strip():
                 continue
-            content = dict(content)
             content["items"] = items + [{"text": text.strip()[:_MAX_TEXT_CHARS]}]
             touched[section_type] = content
             has_content_change = True

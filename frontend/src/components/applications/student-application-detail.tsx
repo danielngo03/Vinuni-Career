@@ -8,10 +8,10 @@ import {
   ChatCircleDots,
   Eye,
   LightbulbFilament,
+  ListChecks,
   MagnifyingGlass,
   ShieldWarning,
   SignIn,
-  Sparkle,
   UserFocus,
   WarningCircle,
 } from "@phosphor-icons/react";
@@ -199,15 +199,15 @@ export function StudentApplicationDetail({ id }: { id: string }) {
         timeline={app.timeline}
       />
 
-      {/* AI Next Steps — derived from status, no API call. */}
+      {/* Next steps — derived deterministically from status, no API/AI call. */}
       {(() => {
         const steps = statusNextSteps(app.status, t as (key: string) => string);
         if (steps.length === 0) return null;
         return (
-          <div className="mb-6 rounded-2xl border border-[var(--ai-accent)]/25 bg-gradient-to-br from-[var(--ai-accent-soft)] to-[var(--glass-surface-light)] p-4 backdrop-blur-xl">
+          <div className="mb-6 rounded-2xl border border-[var(--border-default)] bg-[var(--glass-surface)] p-4 backdrop-blur-xl">
             <div className="mb-3 flex items-center gap-2">
-              <span className="flex size-7 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-[var(--brand-primary)] to-[var(--brand-teal)] shadow-sm">
-                <Sparkle aria-hidden weight="fill" className="size-3.5 text-white" />
+              <span className="flex size-7 shrink-0 items-center justify-center rounded-lg bg-[var(--brand-primary)] shadow-sm">
+                <ListChecks aria-hidden weight="bold" className="size-3.5 text-white" />
               </span>
               <span className="text-sm font-bold text-[var(--text-primary)]">
                 {t("aiNextStepsTitle")}

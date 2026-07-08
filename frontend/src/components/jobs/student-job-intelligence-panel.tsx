@@ -629,6 +629,24 @@ function CompetitionSection({ competition }: { competition: StudentCompetitionIn
             {t(`studentIntel.applicationVolumeBucket.${competition.application_volume_bucket}`)}
           </dd>
         </div>
+        {/* Applicant-pool quality + the student's standing — shown only when the
+            scored pool is large enough (backend returns "unknown" otherwise). */}
+        {competition.applicant_quality_bucket !== "unknown" && (
+          <div className="flex items-center justify-between gap-2">
+            <dt className="text-[var(--text-muted)]">{t("studentIntel.applicantQualityTitle")}</dt>
+            <dd className="font-medium">
+              {t(`studentIntel.applicantQuality.${competition.applicant_quality_bucket}`)}
+            </dd>
+          </div>
+        )}
+        {competition.student_standing_bucket !== "unknown" && (
+          <div className="flex items-center justify-between gap-2">
+            <dt className="text-[var(--text-muted)]">{t("studentIntel.studentStandingTitle")}</dt>
+            <dd className="font-medium">
+              {t(`studentIntel.studentStanding.${competition.student_standing_bucket}`)}
+            </dd>
+          </div>
+        )}
         <div className="flex items-center justify-between gap-2">
           <dt className="text-[var(--text-muted)]">{t("deadline")}</dt>
           <dd className="font-medium">

@@ -22,7 +22,10 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from app.core.config import get_settings
 from app.modules.documents.api import presenters
 from app.modules.documents.application import _shared
-from app.modules.documents.application.errors import CvQuotaReachedError
+from app.modules.documents.application.errors import (
+    CvQuotaReachedError,
+    UploadedCvReadOnlyError,
+)
 from app.modules.documents.domain import catalog
 from app.modules.documents.domain.models import CvProfile, CvSection, CvVersion
 from app.shared.exceptions import ResourceNotFoundError
@@ -32,11 +35,13 @@ from app.shared.permissions import Principal
 # Active-CV library quota (single source of truth)                            #
 # --------------------------------------------------------------------------- #
 #
-# "Active" CV library items = owner's CVs that are NOT soft-deleted and NOT
-# archived. Archived CVs and immutable application snapshots do not count, so
-# archiving a CV frees a slot (docs/CV_STUDIO_SPEC.md §5, docs/BUSINESS_LOGIC.md
-# §4B.4). The count predicate is defined ONCE here and reused by create_cv,
-# duplicate_cv, and count_cvs so they cannot drift.
+# CV library lifecycle (design spec 2026-07-05, owner-approved): the 5-cap bounds
+# the cost of preparing a CV for JD matching, so it counts ONLY CVs committed to
+# the library — status == ``ready`` (finalized template CVs + upload imports).
+# Unlimited scratch drafts (``draft``) and archived/soft-deleted CVs do NOT count,
+# so archiving/deleting a ready CV frees a slot immediately, and designing freely
+# is free. The count predicate is defined ONCE here and reused by count_cvs and the
+# quota gate (finalize + upload import) so they cannot drift.
 
 
 def _active_cv_count_stmt(user_id: uuid.UUID):
@@ -46,7 +51,7 @@ def _active_cv_count_stmt(user_id: uuid.UUID):
         .where(
             CvProfile.user_id == user_id,
             CvProfile.deleted_at.is_(None),
-            CvProfile.status != catalog.CV_ARCHIVED,
+            CvProfile.status == catalog.CV_READY,
         )
     )
 
@@ -92,9 +97,11 @@ async def _enforce_active_cv_quota(
     session: AsyncSession, *, principal: Principal
 ) -> None:
     """Raise ``CvQuotaReachedError`` (409 QUOTA_EXCEEDED) when the owner is at or
-    over the active CV library limit. Called at the service layer BEFORE any new
-    CvProfile insert. The limit resolves through the subscription facade (a paid
-    tier overrides the platform default)."""
+    over the active CV library limit (``ready`` CVs). Called at the service layer
+    BEFORE a CV is committed into the library — on **finalize** (draft -> ready) and
+    on **upload import** (an uploaded CV lands ``ready``). Creating/duplicating a
+    draft is unlimited and NOT gated here. The limit resolves through the
+    subscription facade (a paid tier overrides the platform default)."""
 
     assert principal.user_id is not None
     limit, _source = await _resolve_active_cv_limit(session, principal=principal)
@@ -146,14 +153,132 @@ async def _load_versions(session: AsyncSession, *, cv_id: uuid.UUID) -> list[CvV
     )
 
 
+_UPLOADED_SOURCE_TYPE = "uploaded_import"
+
+
+def is_uploaded_cv(cv: CvProfile) -> bool:
+    """True when this CV is an uploaded (imported) CV — viewed READ-ONLY.
+
+    The single predicate the module uses to distinguish an uploaded CV (its own
+    original document, view-only) from a TEMPLATE-created CV (the editable
+    builder/canvas). Reused by the detail response and the edit guard so they
+    can never drift.
+    """
+
+    return cv.source_type == _UPLOADED_SOURCE_TYPE
+
+
+def guard_editable(cv: CvProfile) -> None:
+    """Reject user-initiated edits / AI-mutations of an uploaded CV.
+
+    Uploaded CVs are viewed READ-ONLY (owner decision 2026-07-05, ``CLAUDE.md``):
+    the visual builder/editor and CV AI edits are reserved for TEMPLATE-created
+    CVs. Called at the service layer on the mutate paths (section upsert/create,
+    version restore, canvas update, AI suggestion request / edit-command /
+    accept) so the API can never version-edit or AI-mutate the student's original
+    document. Raises :class:`UploadedCvReadOnlyError` (409, user-safe).
+
+    Deliberately NOT called on: reading/detail, DUPLICATE (an uploaded CV may be
+    duplicated into an editable builder copy), the ingestion IMPORT that CREATES
+    the uploaded CV (``create_cv_from_sections``), or export.
+    """
+
+    if is_uploaded_cv(cv):
+        raise UploadedCvReadOnlyError()
+
+
+async def _uploaded_original_preview_url(
+    session: AsyncSession, *, cv: CvProfile
+) -> str | None:
+    """Signed preview URL of the ORIGINAL uploaded file backing an uploaded CV.
+
+    Uploaded CVs are viewed read-only (the student's own document), so the detail
+    surfaces the original — never a builder. Resolved via the ingestion that
+    produced this CV; returns ``None`` if the link is missing. Storage keys never
+    leak — only a short-lived signed token.
+    """
+
+    from app.core.config import get_settings
+    from app.modules.documents.domain.models import CvIngestion
+    from app.modules.documents.infrastructure import storage
+
+    document_id = (
+        await session.execute(
+            select(CvIngestion.document_id)
+            .where(CvIngestion.imported_cv_id == cv.id)
+            .order_by(CvIngestion.created_at.desc())
+        )
+    ).scalars().first()
+    if document_id is None:
+        return None
+    token = storage.make_signed_token(
+        {"kind": "document", "id": str(document_id), "uid": str(cv.user_id),
+         "purpose": "preview"}
+    )
+    base = get_settings().app_url.rstrip("/")
+    return f"{base}/api/v1/cv-files/{token}"
+
+
+def _canvas_photo_url(cv: CvProfile, document_id: object) -> str | None:
+    """Signed, displayable URL for the CV's canvas profile photo.
+
+    The photo is stored as an owner-scoped ``cv_photo`` document and the canvas
+    only persists its ``document_id`` (never a storage key). The renderer/preview
+    /PDF need a real URL, so we mint the same short-lived signed token the
+    uploaded-original preview uses. Returns ``None`` for an unusable id.
+    """
+
+    from app.core.config import get_settings
+    from app.modules.documents.infrastructure import storage
+
+    try:
+        doc_uuid = uuid.UUID(str(document_id))
+    except (ValueError, TypeError, AttributeError):
+        return None
+    token = storage.make_signed_token(
+        {"kind": "document", "id": str(doc_uuid), "uid": str(cv.user_id),
+         "purpose": "preview"}
+    )
+    base = get_settings().app_url.rstrip("/")
+    return f"{base}/api/v1/cv-files/{token}"
+
+
 async def _detail_response(
     session: AsyncSession, *, cv: CvProfile, locale: str
 ) -> dict:
-    """Build the full CV detail (sections + version history + current_version_id)."""
+    """Build the full CV detail (sections + version history + current_version_id).
+
+    For uploaded CVs the response also carries ``is_uploaded`` + the original
+    file's signed ``original_preview_url`` so the frontend shows a read-only view
+    of the student's document instead of the (template-only) builder/editor.
+
+    The canvas profile photo is stored only as a ``document_id``; here we resolve
+    it into a signed ``canvas.photo.url`` so the renderer can display it (the raw
+    document_id alone is not viewable).
+    """
 
     sections = await _load_sections(session, cv_id=cv.id)
     versions = await _load_versions(session, cv_id=cv.id)
-    return presenters.cv_detail(cv, sections=sections, versions=versions, locale=locale)
+    data = presenters.cv_detail(cv, sections=sections, versions=versions, locale=locale)
+
+    # Resolve the canvas photo binding into a displayable signed URL. Copy the
+    # canvas/photo dicts instead of mutating them in place — ``presenters.cv_detail``
+    # returns the ORM's ``canvas_json`` object by reference, and writing a URL into
+    # it would dirty the persisted row.
+    canvas = data.get("canvas")
+    if isinstance(canvas, dict):
+        photo = canvas.get("photo")
+        if isinstance(photo, dict) and photo.get("document_id"):
+            photo_url = _canvas_photo_url(cv, photo["document_id"])
+            if photo_url:
+                data["canvas"] = {**canvas, "photo": {**photo, "url": photo_url}}
+
+    data["is_uploaded"] = is_uploaded_cv(cv)
+    if data["is_uploaded"]:
+        data["original_preview_url"] = await _uploaded_original_preview_url(
+            session, cv=cv
+        )
+    return data
 
 
 async def _snapshot_version(

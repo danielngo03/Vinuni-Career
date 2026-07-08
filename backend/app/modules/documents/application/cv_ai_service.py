@@ -90,18 +90,11 @@ async def _gather_context(
         if target_section is None:
             raise ResourceNotFoundError()
 
+    # The profile is identity-only (owner decision 2026-07-06) — it no longer holds
+    # any CV-usable career content, so CV AI grounding never pulls from it. Career
+    # evidence comes from the CV itself, an uploaded-CV extraction, a source CV, or
+    # the student's pasted notes.
     profile_sections = None
-    want_profile = bool(source_ids.get("profile")) or task_type in (
-        catalog.TASK_DRAFT_FROM_PROFILE,
-        catalog.TASK_FILL_FROM_SOURCES,
-        catalog.TASK_FABRICATION_CHECK,
-    )
-    if want_profile:
-        from app.modules.student_profiles.application import profile_import
-
-        profile_sections = await profile_import.build_cv_import_sections(
-            session, user_id=principal.user_id, notes=None
-        )
 
     upload_extracted = None
     parse_run_id = _shared.to_uuid(source_ids.get("cv_parse_run_id"))
@@ -178,6 +171,10 @@ async def request_suggestion(
         raise InvalidTaskTypeError()
 
     cv = await _cv_core._load_owned_cv(session, principal=principal, cv_id=cv_id)
+    # Uploaded CVs are read-only: AI suggestions are an in-builder assist for
+    # TEMPLATE-created CVs only (owner decision 2026-07-05). Guard before spending
+    # a model call so an uploaded CV can never be AI-mutated.
+    _cv_core.guard_editable(cv)
 
     # Idempotent replay: same (cv, key) -> return the existing suggestion.
     idempotency_key = payload.get("idempotency_key")
@@ -285,6 +282,9 @@ async def request_edit_command(
         raise AiSourceRequiredError(field="instruction")
 
     cv = await _cv_core._load_owned_cv(session, principal=principal, cv_id=cv_id)
+    # Uploaded CVs are read-only: natural-language AI edits target TEMPLATE-created
+    # CVs only. Guard before spending a model call.
+    _cv_core.guard_editable(cv)
 
     idempotency_key = payload.get("idempotency_key")
     if idempotency_key:
@@ -405,6 +405,10 @@ async def accept_suggestion(
     cv = await _cv_core._load_owned_cv(
         session, principal=principal, cv_id=cv_id, lock=True
     )
+    # Uploaded CVs are read-only: an AI suggestion can never be APPLIED to an
+    # uploaded CV (defense in depth — request_suggestion / request_edit_command
+    # already refuse to create one for an uploaded CV).
+    _cv_core.guard_editable(cv)
 
     suggestion = (
         await session.execute(
@@ -531,95 +535,3 @@ async def reject_suggestion(
     await session.commit()
     await session.refresh(suggestion)
     return presenters.ai_suggestion(suggestion, locale=locale)
-
-
-# --------------------------------------------------------------------------- #
-# creation_mode = ai_assisted_draft (ARCHITECTURE §4.3b)                        #
-# --------------------------------------------------------------------------- #
-
-
-async def create_ai_draft(
-    session: AsyncSession,
-    *,
-    principal,
-    payload: dict,
-    ctx: RequestContext,
-    locale: str = "vi",
-) -> dict:
-    """Create a blank AI-draft CV PLUS a pending draft suggestion.
-
-    Per ARCHITECTURE §4.3b the CV is created as an empty draft; AI does NOT
-    auto-populate it. A pending ``draft_cv_from_profile`` suggestion is attached so
-    the student can review the proposed content and accept it (creating a version).
-    """
-
-    permission_checker.require(principal, _RESOURCE, "create")
-    assert principal.user_id is not None
-
-    cv = CvProfile(
-        user_id=principal.user_id,
-        title=payload.get("title") or "AI draft CV",
-        source_type=catalog.SOURCE_TYPE_FOR_MODE[catalog.CREATION_AI_DRAFT],
-        template_id=_shared.to_uuid(payload.get("template_id")),
-        language=payload.get("language") or "vi",
-        status=catalog.CV_DRAFT,
-    )
-    session.add(cv)
-    await session.flush()
-    await _cv_core._seed_sections(
-        session, cv_id=cv.id, sections=catalog.DEFAULT_SECTIONS
-    )
-    await _cv_core._snapshot_version(
-        session, cv=cv, change_source="manual",
-        change_summary="initial ai draft", created_by=principal.user_id,
-    )
-    await write_audit(
-        session, action="cv.created", resource_type="cv", resource_id=cv.id,
-        context=_shared.audit_ctx(principal, ctx),
-        after={"source_type": cv.source_type, "creation_mode": catalog.CREATION_AI_DRAFT},
-    )
-    await session.flush()
-
-    source = payload.get("source") or {}
-    raw_notes, _flags = input_guard.sanitize_notes(source.get("raw_notes"))
-    context = await _gather_context(
-        session,
-        principal=principal,
-        cv=cv,
-        task_type=catalog.TASK_DRAFT_FROM_PROFILE,
-        instruction=None,
-        raw_notes=raw_notes,
-        target_section_id=None,
-        job_id=None,
-        source_ids={"profile": True},
-    )
-    result = await run_cv_task(context)
-    suggestion = CvAiSuggestion(
-        cv_id=cv.id,
-        requested_by=principal.user_id,
-        task_type=catalog.TASK_DRAFT_FROM_PROFILE,
-        status=catalog.SUGGESTION_PENDING,
-        diff_json=result.to_diff(),
-        credits_charged=result.credits,
-    )
-    session.add(suggestion)
-    await session.flush()
-    await write_audit(
-        session,
-        action="cv.ai_suggestion.requested",
-        resource_type="cv_ai_suggestion",
-        resource_id=suggestion.id,
-        context=_shared.audit_ctx(principal, ctx),
-        after={
-            "cv_id": str(cv.id),
-            "task_type": catalog.TASK_DRAFT_FROM_PROFILE,
-            "requires_fact_confirmation": result.requires_fact_confirmation,
-            "applicable": result.applicable,
-            "creation_mode": catalog.CREATION_AI_DRAFT,
-        },
-    )
-    await session.commit()
-    await session.refresh(cv)
-    detail = await _cv_core._detail_response(session, cv=cv, locale=locale)
-    detail["pending_suggestion"] = presenters.ai_suggestion(suggestion, locale=locale)
-    return detail

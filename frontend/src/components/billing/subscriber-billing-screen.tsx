@@ -24,6 +24,7 @@ import {
   useToast,
 } from "@/components/ui";
 import { PageHeader } from "@/components/layout/page-header";
+import { AiUsagePanel } from "./ai-usage-panel";
 import {
   useBillingLabels,
   useLimitLabels,
@@ -346,6 +347,9 @@ export function SubscriberBillingScreen({
               </div>
             )}
           </section>
+
+          {/* ---- AI usage (real consumption from GET /ai/usage/summary) ---- */}
+          <AiUsagePanel audience={audience} />
 
           {/* ---- Plan comparison ---- */}
           <section aria-label={t("plans.comparisonTitle")}>

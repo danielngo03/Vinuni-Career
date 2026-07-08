@@ -49,6 +49,9 @@ async def upsert_section(
     permission_checker.require(principal, _RESOURCE, "update")
     assert principal.user_id is not None
     cv = await _cv_core._load_owned_cv(session, principal=principal, cv_id=cv_id, lock=True)
+    # Uploaded CVs are read-only (the student's original document); only
+    # TEMPLATE-created CVs are section-editable (owner decision 2026-07-05).
+    _cv_core.guard_editable(cv)
 
     expected = payload.get("expected_version")
     if expected is not None and expected != cv.version:
@@ -136,6 +139,8 @@ async def create_section(
     permission_checker.require(principal, _RESOURCE, "update")
     assert principal.user_id is not None
     cv = await _cv_core._load_owned_cv(session, principal=principal, cv_id=cv_id, lock=True)
+    # Uploaded CVs are read-only; only TEMPLATE-created CVs accept new sections.
+    _cv_core.guard_editable(cv)
 
     expected = payload.get("expected_version")
     if expected is not None and expected != cv.version:
@@ -207,6 +212,9 @@ async def restore_version(
     permission_checker.require(principal, _RESOURCE, "update")
     assert principal.user_id is not None
     cv = await _cv_core._load_owned_cv(session, principal=principal, cv_id=cv_id, lock=True)
+    # Uploaded CVs are read-only; version restore is an editor-only action
+    # reserved for TEMPLATE-created CVs (an uploaded CV never opens the editor).
+    _cv_core.guard_editable(cv)
 
     expected = (payload or {}).get("expected_version")
     if expected is not None and expected != cv.version:
