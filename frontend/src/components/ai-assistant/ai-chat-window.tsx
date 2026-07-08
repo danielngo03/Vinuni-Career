@@ -7,6 +7,7 @@ import {
   ArrowsInSimple,
   ArrowsOutSimple,
   ArrowUp,
+  ClockCounterClockwise,
   Paperclip,
   Plus,
   Robot,
@@ -41,6 +42,8 @@ import {
   StreamingBubble,
   TypingIndicator,
 } from "./chat-window/message-bubble";
+import { SessionHistorySheet } from "./chat-window/session-history-sheet";
+import { SessionList } from "./chat-window/session-list";
 import { SessionRail } from "./chat-window/session-rail";
 import { AuthLoadingPrompt, GuestPrompt, WelcomeScreen } from "./chat-window/welcome-screen";
 
@@ -94,6 +97,10 @@ export function AiChatWindow({
   const [expanded, setExpanded] = useState(false);
   const [draftSession, setDraftSession] = useState(false);
   const [confirmingMessageId, setConfirmingMessageId] = useState<string | null>(null);
+  // Conversation-history overlay (mobile/tablet/collapsed) + per-row delete state.
+  const [historyOpen, setHistoryOpen] = useState(false);
+  const [deletingSessionId, setDeletingSessionId] = useState<string | null>(null);
+  const [confirmDeleteSessionId, setConfirmDeleteSessionId] = useState<string | null>(null);
   const bottomRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -167,6 +174,8 @@ export function AiChatWindow({
     if (!open) {
       abortRef.current?.abort();
       abortRef.current = null;
+      setHistoryOpen(false);
+      setConfirmDeleteSessionId(null);
     }
     return () => {
       abortRef.current?.abort();
@@ -217,6 +226,54 @@ export function AiChatWindow({
     setActiveToolName(null);
     setActivityStatus(null);
     setDraftSession(false);
+  }
+
+  /** Archive (soft-delete) a session with optimistic removal + rollback on
+   * failure. If the deleted session is the active one, fall back to the most
+   * recent remaining session or a fresh "new chat" state. */
+  async function deleteSession(id: string) {
+    if (deletingSessionId) return;
+    setDeletingSessionId(id);
+    const key = ["ai-assistant", "sessions"] as const;
+    const prev =
+      qc.getQueryData<ChatSession[]>(key) ?? sessionsQuery.data ?? [];
+    const remaining = prev.filter((s) => s.id !== id);
+    // Optimistic removal from the list.
+    qc.setQueryData<ChatSession[]>(key, remaining);
+    try {
+      await aiAssistantApi.archiveSession(id);
+      qc.removeQueries({ queryKey: ["ai-assistant", "messages", id] });
+      if (sessionId === id) {
+        abortRef.current?.abort();
+        abortRef.current = null;
+        setMessages([]);
+        setAttachments([]);
+        setStreamingText(null);
+        setActiveToolName(null);
+        setActivityStatus(null);
+        setSending(false);
+        const next = remaining[0];
+        if (next) {
+          setSessionId(next.id);
+          setDraftSession(false);
+        } else {
+          setSessionId(null);
+          setDraftSession(true);
+        }
+      }
+      void qc.invalidateQueries({ queryKey: [...key] });
+    } catch {
+      // Roll back the optimistic removal and surface a user-safe error.
+      qc.setQueryData<ChatSession[]>(key, prev);
+      toast.show({
+        tone: "error",
+        title: t("deleteErrorTitle"),
+        description: t("deleteError"),
+      });
+    } finally {
+      setDeletingSessionId(null);
+      setConfirmDeleteSessionId(null);
+    }
   }
 
   /** Upload one file to the current session, showing an optimistic
@@ -596,6 +653,26 @@ export function AiChatWindow({
             {t("panelSubtitle")}
           </p>
         </div>
+        {isAuthed && (
+          <button
+            type="button"
+            onClick={() => setHistoryOpen((v) => !v)}
+            aria-label={t("history")}
+            title={t("history")}
+            aria-expanded={historyOpen}
+            aria-pressed={historyOpen}
+            className={cn(
+              "rounded-lg p-1 outline-none transition hover:bg-[var(--bg-subtle)] hover:text-[var(--text-primary)] focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)]/40",
+              historyOpen
+                ? "bg-[var(--bg-subtle)] text-[var(--text-primary)]"
+                : "text-[var(--text-muted)]",
+              // The persistent rail already shows history on the expanded desktop layout.
+              expanded && "lg:hidden",
+            )}
+          >
+            <ClockCounterClockwise aria-hidden weight="bold" className="size-4" />
+          </button>
+        )}
         <button
           type="button"
           onClick={startNewChat}
@@ -628,16 +705,51 @@ export function AiChatWindow({
         </button>
       </div>
 
-      <div className={cn("flex min-h-0 flex-1", expanded && "lg:grid lg:grid-cols-[260px_minmax(0,1fr)]")}>
+      <div className={cn("relative flex min-h-0 flex-1", expanded && "lg:grid lg:grid-cols-[260px_minmax(0,1fr)]")}>
         {expanded && isAuthed && (
           <SessionRail
             sessions={sessionsQuery.data ?? []}
             activeId={sessionId}
             loading={sessionsQuery.isPending}
+            deletingId={deletingSessionId}
+            confirmDeleteId={confirmDeleteSessionId}
             onNew={startNewChat}
             onSelect={selectSession}
+            onRequestDelete={setConfirmDeleteSessionId}
+            onCancelDelete={() => setConfirmDeleteSessionId(null)}
+            onConfirmDelete={(id) => void deleteSession(id)}
             t={t}
           />
+        )}
+
+        {/* History overlay — reachable at every viewport and in the collapsed panel. */}
+        {isAuthed && (
+          <SessionHistorySheet
+            open={historyOpen}
+            title={t("history")}
+            closeLabel={t("historyClose")}
+            onClose={() => setHistoryOpen(false)}
+          >
+            <SessionList
+              sessions={sessionsQuery.data ?? []}
+              activeId={sessionId}
+              loading={sessionsQuery.isPending}
+              deletingId={deletingSessionId}
+              confirmDeleteId={confirmDeleteSessionId}
+              onNew={() => {
+                startNewChat();
+                setHistoryOpen(false);
+              }}
+              onSelect={(session) => {
+                selectSession(session);
+                setHistoryOpen(false);
+              }}
+              onRequestDelete={setConfirmDeleteSessionId}
+              onCancelDelete={() => setConfirmDeleteSessionId(null)}
+              onConfirmDelete={(id) => void deleteSession(id)}
+              t={t}
+            />
+          </SessionHistorySheet>
         )}
 
         {/* Messages */}
