@@ -40,6 +40,7 @@ from app.ai.prompts.assistant import v1 as assistant_prompt
 from app.ai.retrieval.citation_verify import kb_source_titles, verify_citations
 from app.ai.safety.input_guard import sanitize_instruction
 from app.ai.safety.output_guard import enforce_keyword_scope
+from app.ai.safety.policy_orchestrator import ACTION_REFUSE, READ_ONLY, check_policy
 from app.modules.ai_assistant.application import usage_service
 from app.modules.ai_assistant.application.agentic import planner
 from app.modules.ai_assistant.application.agentic.persona_registry import (
@@ -276,6 +277,26 @@ async def send_message(
         chat.last_message_at = datetime.now(UTC)
         await session.commit()
         return serialize_message(assistant_msg)
+
+    # Intent-level safety gate on the USER turn before the LLM loop — mirrors
+    # AiTaskRunner._sanitize_messages so the chat path is guarded identically to
+    # batch AI tasks. Harmful / boundary-probe / external-source intents are
+    # refused with a user-safe message and NO model call (never charged). The
+    # deterministic planner replies above are already scope-correct, so this only
+    # guards turns that actually reach the LLM (open partner/university turns).
+    policy = check_policy(clean, READ_ONLY, locale=locale)
+    if policy.action == ACTION_REFUSE:
+        refusal = ChatMessage(
+            id=uuid.uuid4(),
+            session_id=chat.id,
+            role="assistant",
+            content=policy.refusal_message or ai_unavailable_reply(),
+            created_at=datetime.now(UTC),
+        )
+        session.add(refusal)
+        chat.last_message_at = datetime.now(UTC)
+        await session.commit()
+        return serialize_message(refusal)
 
     # Build LLM conversation history
     history = await load_history(session, chat)
@@ -519,6 +540,28 @@ async def stream_message(
         for chunk in local_stream_chunks(agent_text):
             yield {"type": "token", "text": chunk}
         yield {"type": "done", "message": serialize_message(assistant_msg)}
+        return
+
+    # Intent-level safety gate before the LLM loop (see send_message): refuse
+    # harmful / boundary-probe / external-source turns with a user-safe message,
+    # streamed like any other reply, with NO model call (never charged).
+    policy = check_policy(clean, READ_ONLY)
+    if policy.action == ACTION_REFUSE:
+        refusal_text = policy.refusal_message or ai_unavailable_reply()
+        refusal = ChatMessage(
+            id=uuid.uuid4(),
+            session_id=chat.id,
+            role="assistant",
+            content=refusal_text,
+            created_at=datetime.now(UTC),
+        )
+        session.add(refusal)
+        chat.last_message_at = datetime.now(UTC)
+        await session.commit()
+        yield {"type": "status", "code": "responding"}
+        for chunk in local_stream_chunks(refusal_text):
+            yield {"type": "token", "text": chunk}
+        yield {"type": "done", "message": serialize_message(refusal)}
         return
 
     yield {"type": "status", "code": "retrieving_context"}
