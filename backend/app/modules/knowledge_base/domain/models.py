@@ -38,6 +38,13 @@ if TYPE_CHECKING:
 KB_SCOPE_PLATFORM = "platform"   # visible to all authenticated users
 KB_SCOPE_PARTNER = "partner"     # visible to applicants to that org's jobs
 KB_SCOPE_JOB = "job"             # visible only to applicants to a specific job
+# Institutional/operational knowledge owned by the VinUni university org
+# (policies, handbooks, employer guidelines, career-services playbooks,
+# moderation guidelines). Visible ONLY to members of the owning university org
+# (with an appropriate grant) and platform superadmins — never to students,
+# partners, or guests. ``scope`` is a plain ``String(20)`` column (no DB enum /
+# CHECK constraint), so this value needs no schema migration.
+KB_SCOPE_UNIVERSITY = "university"
 
 # Document ingestion status lifecycle
 DOC_STATUS_PENDING = "pending"

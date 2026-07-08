@@ -8,6 +8,11 @@ Architecture:
 - Partner KB (scope="partner"): partner staff upload, applicants to that org can query.
 - Per-job KB (scope="job"): partner staff upload, applicants to that job can query
   while their application is active (revoked on REJECTED/WITHDRAWN).
+- University KB (scope="university"): institutional/operational knowledge owned by
+  the VinUni university org (policies, handbooks, employer guidelines, career
+  playbooks, moderation guidelines). Readable ONLY by members of the owning
+  university org (with an appropriate grant) and platform superadmins — never by
+  students, partners, or guests.
 
 Chunk embedding and BM25 index population are async Celery tasks — this service
 only manages the synchronous lifecycle state and triggers the async worker.
@@ -17,6 +22,7 @@ from __future__ import annotations
 
 import json
 import uuid
+from collections.abc import Iterable
 from datetime import UTC, datetime
 
 from sqlalchemy import select
@@ -27,10 +33,21 @@ from app.modules.knowledge_base.domain.models import (
     KB_SCOPE_JOB,
     KB_SCOPE_PARTNER,
     KB_SCOPE_PLATFORM,
+    KB_SCOPE_UNIVERSITY,
     KnowledgeBase,
     KnowledgeBaseDocument,
 )
+from app.shared.exceptions import PermissionDeniedError
 from app.shared.permissions import Principal
+
+# Scope preference for the university assistant's ``search_university_knowledge``
+# tool: prefer the curated ``university`` institutional KB, unioned with shared
+# ``platform`` knowledge. Excludes partner/job KBs so a staffer who happens to
+# hold an application somewhere never pulls unrelated employer/job KBs into an
+# institutional-policy answer.
+UNIVERSITY_QUERY_SCOPES: frozenset[str] = frozenset(
+    {KB_SCOPE_UNIVERSITY, KB_SCOPE_PLATFORM}
+)
 
 # ---------------------------------------------------------------------------
 # Access control
@@ -64,7 +81,60 @@ async def _can_query_kb(
             session, user_id=principal.user_id, job_id=kb.job_id
         )
 
+    if kb.scope == KB_SCOPE_UNIVERSITY:
+        return await _can_read_university_kb(session, kb=kb, principal=principal)
+
     return False
+
+
+async def _can_read_university_kb(
+    session: AsyncSession, *, kb: KnowledgeBase, principal: Principal
+) -> bool:
+    """Read gate for a ``university``-scoped institutional KB.
+
+    Allowed only for: platform superadmins, or a member acting from the OWNING
+    university org (``principal.org_id == kb.org_id`` AND that org resolves to a
+    ``university`` org via the organization read-model facade — defense in depth
+    so a mislabeled partner KB can never leak through this branch). Students,
+    partners, and guests are always denied. No ``knowledge_base:read`` grant
+    exists in the permission catalog yet, so university-org membership is the
+    grant boundary; when that catalog verb is added this is where it plugs in.
+    """
+
+    if principal.is_superadmin:
+        return True
+    if principal.org_id is None or kb.org_id is None:
+        return False
+    if str(principal.org_id) != str(kb.org_id):
+        return False
+    from app.modules.organization.application import org_reporting_facade
+
+    return await org_reporting_facade.is_university_org(session, kb.org_id)
+
+
+async def _require_can_manage_university_kb(
+    session: AsyncSession, *, principal: Principal, org_id: uuid.UUID | None
+) -> None:
+    """Raise ``PermissionDeniedError`` unless the caller may create/manage a
+    ``university``-scoped KB for ``org_id``.
+
+    Superadmin passes. Otherwise the caller must be acting from the SAME
+    ``university`` org that will own the KB (students, partners, and guests are
+    always denied). Mirrors the read gate so ownership and visibility line up.
+    """
+
+    if principal.is_superadmin:
+        return
+    if (
+        org_id is None
+        or principal.org_id is None
+        or str(principal.org_id) != str(org_id)
+    ):
+        raise PermissionDeniedError()
+    from app.modules.organization.application import org_reporting_facade
+
+    if not await org_reporting_facade.is_university_org(session, org_id):
+        raise PermissionDeniedError()
 
 
 async def _has_active_application_to_org(
@@ -123,7 +193,14 @@ async def create_kb(
     org_id: uuid.UUID | None = None,
     job_id: uuid.UUID | None = None,
 ) -> dict:
-    """Create a new knowledge base. Requires staff or partner-admin role."""
+    """Create a new knowledge base. Requires staff or partner-admin role.
+
+    A ``university``-scoped KB is institutional and may be created ONLY by a
+    platform superadmin or a member acting from the owning ``university`` org
+    (service-layer RBAC — the router's coarse gate is not sufficient on its own).
+    """
+    if scope == KB_SCOPE_UNIVERSITY:
+        await _require_can_manage_university_kb(session, principal=principal, org_id=org_id)
     kb = KnowledgeBase(
         id=uuid.uuid4(),
         name=name,
@@ -161,19 +238,26 @@ async def get_kb_ids_for_query(
     session: AsyncSession,
     *,
     principal: Principal,
+    scopes: Iterable[str] | None = None,
 ) -> list[uuid.UUID]:
     """Return all KB IDs accessible to the principal for a RAG query.
 
     Used by the ``knowledge_base_query`` tool to build the scope filter.
     Cross-KB leakage is prevented downstream by filtering every chunk query
     on ``kb_id = ANY(:kb_ids)`` before returning results.
+
+    ``scopes`` optionally restricts the candidate set to specific KB scopes
+    (e.g. the university assistant passes ``UNIVERSITY_QUERY_SCOPES`` so it only
+    considers institutional + platform knowledge). ``None`` (the default) keeps
+    the original behavior of considering every scope, and every candidate still
+    passes the per-KB ``_can_query_kb`` authorization check regardless.
     """
+    stmt = select(KnowledgeBase).where(KnowledgeBase.is_active.is_(True))
+    scope_list = list(scopes) if scopes is not None else None
+    if scope_list:
+        stmt = stmt.where(KnowledgeBase.scope.in_(scope_list))
     rows = (
-        await session.execute(
-            select(KnowledgeBase)
-            .where(KnowledgeBase.is_active.is_(True))
-            .order_by(KnowledgeBase.scope)
-        )
+        await session.execute(stmt.order_by(KnowledgeBase.scope))
     ).scalars().all()
     result: list[uuid.UUID] = []
     for kb in rows:

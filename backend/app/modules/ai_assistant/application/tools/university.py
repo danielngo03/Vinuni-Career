@@ -387,18 +387,54 @@ async def analyze_attachment(
 async def search_university_knowledge(
     session: AsyncSession, principal: Principal, args: dict
 ) -> dict:
-    """RAG over the knowledge bases the caller may already read (no cross-org leak).
+    """RAG over the curated ``university`` institutional KB (+ shared platform KB).
 
-    Reuses the shared ``knowledge_base`` retrieval (``tools.kb``); scoping is
-    delegated to ``kb_service.get_kb_ids_for_query(principal=...)``, which only
-    returns KBs the caller is authorised to read. A dedicated ``university`` KB
-    scope is a later slice (P3/WS3.3).
+    Prefers the dedicated ``university`` scope (institutional policies, handbooks,
+    employer guidelines, career/moderation playbooks), unioned with ``platform``,
+    via the shared hybrid retrieval + rerank + citation path (``tools.kb`` ->
+    ``kb_service``). Scoping/authorization is delegated to
+    ``get_kb_ids_for_query`` — a university KB is only ever returned for a member
+    of the owning university org (or superadmin), never a student/partner/guest.
+
+    Chunks are stripped to a leakage-safe shape before return: no chunk/kb/doc
+    ids, no similarity scores, no provider/model internals — only the document
+    title, section heading, and content the assistant needs to answer and cite.
     """
     from app.modules.ai_assistant.application.tools import kb
+    from app.modules.knowledge_base.application import kb_service
 
     if not _staff_ready(principal):
         return {"ok": False, "error": "university_auth_required"}
-    return await kb.knowledge_base_query(session, principal, args)
+    result = await kb.knowledge_base_query(
+        session, principal, args, scopes=kb_service.UNIVERSITY_QUERY_SCOPES
+    )
+    if result.get("ok"):
+        result["chunks"] = _leakage_safe_chunks(result.get("chunks") or [])
+    return result
+
+
+def _leakage_safe_chunks(chunks: list[dict]) -> list[dict]:
+    """Strip retrieval internals from KB chunks before they leave the tool.
+
+    Keeps only ``document_title`` / ``section_heading`` / ``content`` (what the
+    assistant needs to answer + let the §6.5 citation guard verify sources).
+    Drops chunk id, kb id, document id, chunk index, token count, and any score —
+    none of those may reach staff, and the assembled ``context`` string is
+    already built from these same safe fields.
+    """
+
+    safe: list[dict] = []
+    for chunk in chunks:
+        if not isinstance(chunk, dict):
+            continue
+        safe.append(
+            {
+                "document_title": chunk.get("document_title"),
+                "section_heading": chunk.get("section_heading") or "",
+                "content": chunk.get("content") or "",
+            }
+        )
+    return safe
 
 
 # --------------------------------------------------------------------------- #

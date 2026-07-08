@@ -154,8 +154,14 @@ def _build_user_message(principal: Principal, text: str, context: dict) -> str:
     return assistant_prompt.build_user_message(text, context=context)
 
 
+# RAG retrieval tools whose ``chunks`` feed the §6.5 post-generation citation
+# guard: the shared student/partner KB tool and the university assistant's
+# institutional-KB tool (both return the same leakage-safe chunk shape).
+_KB_RETRIEVAL_TOOLS = frozenset({"knowledge_base_query", "search_university_knowledge"})
+
+
 def _apply_citation_guard(final_text: str, kb_sources: list[str]) -> str:
-    """Run §6.5 citation verification when this turn used ``knowledge_base_query``.
+    """Run §6.5 citation verification when this turn used a KB retrieval tool.
 
     Strips any citation naming a document that was not actually retrieved and
     logs metadata only (never raw answer/citation text — §15).
@@ -377,7 +383,7 @@ async def send_message(
         # render it — the hidden tool_result-role row above stays excluded.
         if (worthy := _render_worthy_result(tool_name, result)) is not None:
             render_result = worthy
-        if tool_name == "knowledge_base_query" and result.get("ok"):
+        if tool_name in _KB_RETRIEVAL_TOOLS and result.get("ok"):
             kb_sources = kb_source_titles(result.get("chunks") or [])
 
         # Inject tool result as a context message for the next LLM turn
@@ -633,7 +639,7 @@ async def stream_message(
             tool_args=tool_args,
             result=result,
         )
-        if tool_name == "knowledge_base_query" and result.get("ok"):
+        if tool_name in _KB_RETRIEVAL_TOOLS and result.get("ok"):
             kb_sources = kb_source_titles(result.get("chunks") or [])
 
         tool_context = assistant_prompt.build_tool_result_message(tool_name, result)

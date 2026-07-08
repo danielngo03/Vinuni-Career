@@ -2,12 +2,27 @@
 
 from __future__ import annotations
 
+from collections.abc import Iterable
+
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.shared.permissions import Principal
 
 
-async def knowledge_base_query(session: AsyncSession, principal: Principal, args: dict) -> dict:
+async def knowledge_base_query(
+    session: AsyncSession,
+    principal: Principal,
+    args: dict,
+    *,
+    scopes: Iterable[str] | None = None,
+) -> dict:
+    """Hybrid RAG retrieval (dense+BM25 RRF -> rerank -> context assembly).
+
+    ``scopes`` optionally restricts the query to specific KB scopes (the
+    university assistant passes ``UNIVERSITY_QUERY_SCOPES``). ``None`` keeps the
+    default behavior of every scope the caller may read. Authorization per KB is
+    always enforced by ``get_kb_ids_for_query`` regardless of ``scopes``.
+    """
     if not principal.is_authenticated:
         return {"ok": False, "error": "auth_required", "chunks": []}
     query = (args.get("query") or "").strip()
@@ -26,7 +41,7 @@ async def knowledge_base_query(session: AsyncSession, principal: Principal, args
             search_chunks,
         )
 
-        kb_ids = await get_kb_ids_for_query(session, principal=principal)
+        kb_ids = await get_kb_ids_for_query(session, principal=principal, scopes=scopes)
         if not kb_ids:
             return {
                 "ok": True,

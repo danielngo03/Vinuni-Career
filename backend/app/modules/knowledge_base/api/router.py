@@ -37,7 +37,7 @@ router = APIRouter(prefix="/knowledge-bases", tags=["knowledge_base"])
 class CreateKbRequest(BaseModel):
     name: str = Field(..., max_length=200)
     description: str | None = None
-    scope: str = Field("platform", pattern="^(platform|partner|job)$")
+    scope: str = Field("platform", pattern="^(platform|partner|job|university)$")
     org_id: uuid.UUID | None = None
     job_id: uuid.UUID | None = None
 
@@ -67,6 +67,10 @@ async def create_knowledge_base(
             raise HTTPException(status_code=403, detail="staff_only")
         if body.scope == "partner" and principal.org_id is None:
             raise HTTPException(status_code=403, detail="partner_required")
+        if body.scope == "university" and principal.org_id is None:
+            # Institutional KB — coarse gate; the service layer is authoritative
+            # (superadmin or a member of the owning university org only).
+            raise HTTPException(status_code=403, detail="university_required")
 
     try:
         kb = await kb_service.create_kb(
