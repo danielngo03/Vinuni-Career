@@ -1149,6 +1149,24 @@ async def test_partner_pipeline_summary_still_routes_deterministically(db_sessio
     assert plan.tool_name == "get_partner_pipeline_summary"
 
 
+async def test_partner_internal_docs_question_routes_to_kb(db_session) -> None:
+    # A recruiter asking about their OWN org's internal documents/policies must
+    # deterministically route to the RAG tool (access scoped server-side).
+    principal, chat = await _partner_chat(db_session)
+
+    plan = await build_agent_plan(
+        "Chính sách nội bộ của công ty về phúc lợi quy định thế nào?",
+        principal=principal,
+        session=db_session,
+        chat=chat,
+    )
+
+    assert plan is not None
+    assert plan.action == "tool"
+    assert plan.tool_name == "knowledge_base_query"
+    assert plan.tool_args is not None and plan.tool_args.get("query")
+
+
 async def test_partner_capability_and_data_boundary_use_partner_copy(db_session) -> None:
     principal, chat = await _partner_chat(db_session)
 

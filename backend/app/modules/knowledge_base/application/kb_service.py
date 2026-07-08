@@ -24,13 +24,21 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.modules.knowledge_base.domain.models import (
     DOC_STATUS_PENDING,
+    KB_AUDIENCE_APPLICANT_FACING,
+    KB_AUDIENCE_INTERNAL,
+    KB_AUDIENCES,
     KB_SCOPE_JOB,
     KB_SCOPE_PARTNER,
     KB_SCOPE_PLATFORM,
     KnowledgeBase,
     KnowledgeBaseDocument,
 )
-from app.shared.permissions import Principal
+from app.shared.exceptions import ConflictError, ValidationFailedError
+from app.shared.permissions import Principal, permission_checker
+
+# Grantable capability that gates create / upload / delete of a KB + its docs.
+KB_RESOURCE = "knowledge_base"
+KB_ACTION_MANAGE = "manage"
 
 # ---------------------------------------------------------------------------
 # Access control
@@ -43,21 +51,25 @@ async def _can_query_kb(
     kb: KnowledgeBase,
     principal: Principal,
 ) -> bool:
-    """Return True when the principal has read access to this KB scope."""
+    """Return True when the principal has read access to this KB scope.
+
+    Isolation model (partner scope, owner decision 2026-07-08):
+    - ``applicant_facing``: org members OR students with an ACTIVE application to
+      the org (access revoked on REJECTED/WITHDRAWN).
+    - ``internal``: org members ONLY (never applicants). When the KB is
+      department-scoped, only members of that department (or an org KB manager)
+      may read it.
+    """
     if not principal.is_authenticated:
         return False
+    if principal.is_superadmin:
+        return True
 
     if kb.scope == KB_SCOPE_PLATFORM:
         return True
 
     if kb.scope == KB_SCOPE_PARTNER:
-        # Applicants to any active job at this org may query the KB
-        if principal.org_id and str(principal.org_id) == str(kb.org_id):
-            return True
-        # Check if the user has an active application to this org
-        return await _has_active_application_to_org(
-            session, user_id=principal.user_id, org_id=kb.org_id
-        )
+        return await _can_query_partner_kb(session, kb=kb, principal=principal)
 
     if kb.scope == KB_SCOPE_JOB:
         return await _has_active_application_to_job(
@@ -67,44 +79,87 @@ async def _can_query_kb(
     return False
 
 
+async def _can_query_partner_kb(
+    session: AsyncSession, *, kb: KnowledgeBase, principal: Principal
+) -> bool:
+    audience = kb.audience or KB_AUDIENCE_INTERNAL
+    is_org_member = principal.org_id is not None and str(principal.org_id) == str(kb.org_id)
+
+    if audience == KB_AUDIENCE_APPLICANT_FACING:
+        if is_org_member:
+            return True
+        return await _has_active_application_to_org(
+            session, user_id=principal.user_id, org_id=kb.org_id
+        )
+
+    # audience == internal: org members only — NO applicant branch.
+    if not is_org_member:
+        return False
+    # An org KB manager (Partner Admin holds ``*:*``) reads every internal KB.
+    if permission_checker.can(
+        principal, KB_RESOURCE, KB_ACTION_MANAGE, resource_org_id=kb.org_id
+    ):
+        return True
+    # Whole-org internal KB: any active member may read it.
+    if kb.department_id is None:
+        return True
+    # Department-scoped internal KB: only members of that department.
+    return await _is_member_of_department(
+        session,
+        user_id=principal.user_id,
+        org_id=kb.org_id,
+        department_id=kb.department_id,
+    )
+
+
 async def _has_active_application_to_org(
     session: AsyncSession, *, user_id: uuid.UUID | None, org_id: uuid.UUID | None
 ) -> bool:
-    if user_id is None or org_id is None:
-        return False
-    # Lightweight check — avoids importing full recruitment domain
+    """Active-application check via the recruitment read-model facade (no raw SQL)."""
     try:
-        result = await session.execute(
-            select(1).select_from(
-                __import__("sqlalchemy", fromlist=["text"]).text(
-                    "SELECT 1 FROM job_applications ja "
-                    "JOIN jobs j ON j.id = ja.job_id "
-                    "WHERE ja.applicant_id = :uid AND j.org_id = :oid "
-                    "AND ja.status NOT IN ('rejected', 'withdrawn') LIMIT 1"
-                )
-            ).params(uid=user_id, oid=org_id)
+        from app.modules.recruitment.application import application_access_facade
+
+        return await application_access_facade.has_active_application_to_org(
+            session, user_id=user_id, org_id=org_id
         )
-        return result.scalar() is not None
-    except Exception:
+    except Exception:  # noqa: BLE001 — a lookup failure must never grant access
         return False
 
 
 async def _has_active_application_to_job(
     session: AsyncSession, *, user_id: uuid.UUID | None, job_id: uuid.UUID | None
 ) -> bool:
-    if user_id is None or job_id is None:
+    try:
+        from app.modules.recruitment.application import application_access_facade
+
+        return await application_access_facade.has_active_application_to_job(
+            session, user_id=user_id, job_id=job_id
+        )
+    except Exception:  # noqa: BLE001
+        return False
+
+
+async def _is_member_of_department(
+    session: AsyncSession,
+    *,
+    user_id: uuid.UUID | None,
+    org_id: uuid.UUID | None,
+    department_id: uuid.UUID | None,
+) -> bool:
+    """True if ``user_id`` belongs to ``department_id`` within ``org_id``.
+
+    Uses the organization read-model facade (no ``MembershipDepartment`` import).
+    """
+    if user_id is None or org_id is None or department_id is None:
         return False
     try:
-        from sqlalchemy import text
-        result = await session.execute(
-            text(
-                "SELECT 1 FROM job_applications "
-                "WHERE applicant_id = :uid AND job_id = :jid "
-                "AND status NOT IN ('rejected', 'withdrawn') LIMIT 1"
-            ).params(uid=user_id, jid=job_id)
+        from app.modules.organization.application import org_reporting_facade
+
+        dept_ids = await org_reporting_facade.department_ids_for_user_in_org(
+            session, org_id=org_id, user_id=user_id
         )
-        return result.scalar() is not None
-    except Exception:
+        return department_id in dept_ids
+    except Exception:  # noqa: BLE001
         return False
 
 
@@ -122,8 +177,35 @@ async def create_kb(
     scope: str = KB_SCOPE_PLATFORM,
     org_id: uuid.UUID | None = None,
     job_id: uuid.UUID | None = None,
+    audience: str = KB_AUDIENCE_INTERNAL,
+    department_id: uuid.UUID | None = None,
 ) -> dict:
-    """Create a new knowledge base. Requires staff or partner-admin role."""
+    """Create a new knowledge base.
+
+    RBAC: requires the ``knowledge_base:manage`` capability (Partner Admin holds
+    ``*:*``; platform superadmin bypasses). Enforced at the service layer — not
+    only in the router. ``audience``/``department_id`` apply to partner-scoped KBs.
+    """
+    # Platform KBs are org-agnostic (resource_org_id=None); org KBs are tenant-scoped.
+    permission_checker.require(
+        principal, KB_RESOURCE, KB_ACTION_MANAGE, resource_org_id=org_id
+    )
+
+    if audience not in KB_AUDIENCES:
+        raise ValidationFailedError("Invalid knowledge base audience.")
+    # Department scoping only makes sense for an org-scoped internal KB.
+    if department_id is not None:
+        if scope != KB_SCOPE_PARTNER or org_id is None:
+            raise ValidationFailedError(
+                "Department scoping requires a partner (organization) knowledge base."
+            )
+        from app.modules.organization.application import org_reporting_facade
+
+        if not await org_reporting_facade.department_in_org(
+            session, org_id=org_id, department_id=department_id
+        ):
+            raise ValidationFailedError("Department does not belong to this organization.")
+
     kb = KnowledgeBase(
         id=uuid.uuid4(),
         name=name,
@@ -131,6 +213,8 @@ async def create_kb(
         scope=scope,
         org_id=org_id,
         job_id=job_id,
+        audience=audience,
+        department_id=department_id,
         created_by=principal.user_id,
         created_at=datetime.now(UTC),
     )
@@ -199,12 +283,38 @@ async def upload_document(
     page_count: int | None = None,
     chunking_mode: str = "auto",
 ) -> dict:
-    """Register a document upload and kick off the ingest Celery task."""
+    """Register a document upload and kick off the ingest Celery task.
+
+    RBAC: ``knowledge_base:manage`` on the KB's org (Partner Admin ``*:*`` /
+    superadmin bypass). The check runs against the KB's real ``org_id`` so a
+    member of org A can never seed documents into org B's KB.
+    """
     kb = (
         await session.execute(select(KnowledgeBase).where(KnowledgeBase.id == kb_id))
     ).scalar_one_or_none()
     if kb is None:
         raise ValueError("knowledge_base_not_found")
+
+    permission_checker.require(
+        principal, KB_RESOURCE, KB_ACTION_MANAGE, resource_org_id=kb.org_id
+    )
+
+    # Duplicate guard: same title + size already live in this KB (heuristic, no
+    # content hash column). Prevents accidental double-uploads; the caller gets a
+    # user-safe conflict rather than a silently duplicated document.
+    if file_size_bytes is not None:
+        dup = (
+            await session.execute(
+                select(KnowledgeBaseDocument.id).where(
+                    KnowledgeBaseDocument.kb_id == kb_id,
+                    KnowledgeBaseDocument.title == title,
+                    KnowledgeBaseDocument.file_size_bytes == file_size_bytes,
+                    KnowledgeBaseDocument.is_deleted.is_(False),
+                ).limit(1)
+            )
+        ).first()
+        if dup is not None:
+            raise ConflictError("Tài liệu này đã có trong cơ sở kiến thức.")
 
     doc = KnowledgeBaseDocument(
         id=uuid.uuid4(),
@@ -272,6 +382,51 @@ async def list_documents(
         )
     ).scalars().all()
     return [_serialize_document(d) for d in rows]
+
+
+async def delete_document(
+    session: AsyncSession,
+    *,
+    principal: Principal,
+    document_id: uuid.UUID,
+) -> dict:
+    """Soft-delete a KB document and its chunks.
+
+    RBAC: ``knowledge_base:manage`` on the owning KB's org. Idempotent — deleting
+    an already-deleted doc returns the same user-safe payload. Chunks are marked
+    deleted so retrieval never surfaces content from a removed document.
+    """
+    from sqlalchemy import update
+
+    doc = (
+        await session.execute(
+            select(KnowledgeBaseDocument).where(KnowledgeBaseDocument.id == document_id)
+        )
+    ).scalar_one_or_none()
+    if doc is None:
+        raise ValueError("document_not_found")
+
+    kb = (
+        await session.execute(select(KnowledgeBase).where(KnowledgeBase.id == doc.kb_id))
+    ).scalar_one_or_none()
+    permission_checker.require(
+        principal,
+        KB_RESOURCE,
+        KB_ACTION_MANAGE,
+        resource_org_id=kb.org_id if kb is not None else None,
+    )
+
+    if not doc.is_deleted:
+        doc.is_deleted = True
+        from app.modules.knowledge_base.domain.models import KnowledgeBaseChunk
+
+        await session.execute(
+            update(KnowledgeBaseChunk)
+            .where(KnowledgeBaseChunk.document_id == doc.id)
+            .values(is_deleted=True)
+        )
+        await session.flush()
+    return {"id": str(doc.id), "deleted": True}
 
 
 # ---------------------------------------------------------------------------
@@ -532,6 +687,8 @@ def _serialize_kb(kb: KnowledgeBase) -> dict:
         "scope": kb.scope,
         "org_id": str(kb.org_id) if kb.org_id else None,
         "job_id": str(kb.job_id) if kb.job_id else None,
+        "audience": kb.audience,
+        "department_id": str(kb.department_id) if kb.department_id else None,
         "is_active": kb.is_active,
         "created_at": kb.created_at.isoformat(),
     }

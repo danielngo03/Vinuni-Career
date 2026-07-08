@@ -36,8 +36,15 @@ if TYPE_CHECKING:
 
 # KB scope types
 KB_SCOPE_PLATFORM = "platform"   # visible to all authenticated users
-KB_SCOPE_PARTNER = "partner"     # visible to applicants to that org's jobs
+KB_SCOPE_PARTNER = "partner"     # org-scoped; audience decides who reads it
 KB_SCOPE_JOB = "job"             # visible only to applicants to a specific job
+
+# KB audience (partner scope only). Controls whether a partner KB is exposed to
+# applicants or kept internal to the org (owner decision 2026-07-08 — closes the
+# hole where internal company docs were readable by student applicants).
+KB_AUDIENCE_APPLICANT_FACING = "applicant_facing"  # org members + active applicants
+KB_AUDIENCE_INTERNAL = "internal"                  # org members only (dept-scopable)
+KB_AUDIENCES = frozenset({KB_AUDIENCE_APPLICANT_FACING, KB_AUDIENCE_INTERNAL})
 
 # Document ingestion status lifecycle
 DOC_STATUS_PENDING = "pending"
@@ -55,6 +62,15 @@ class KnowledgeBase(Base):
     scope: Mapped[str] = mapped_column(String(20), nullable=False, default=KB_SCOPE_PLATFORM)
     org_id: Mapped[uuid.UUID | None] = mapped_column(UUID(as_uuid=True), nullable=True, index=True)
     job_id: Mapped[uuid.UUID | None] = mapped_column(UUID(as_uuid=True), nullable=True, index=True)
+    # Applicant-facing vs internal (partner scope). Default internal = safest:
+    # a KB created without an explicit audience is never exposed to applicants.
+    audience: Mapped[str] = mapped_column(
+        String(20), nullable=False, default=KB_AUDIENCE_INTERNAL
+    )
+    # Optional department scoping for internal partner KBs. NULL = whole org.
+    department_id: Mapped[uuid.UUID | None] = mapped_column(
+        UUID(as_uuid=True), nullable=True
+    )
     is_active: Mapped[bool] = mapped_column(Boolean, nullable=False, default=True)
     created_by: Mapped[uuid.UUID | None] = mapped_column(UUID(as_uuid=True), nullable=True)
     created_at: Mapped[datetime] = mapped_column(
@@ -63,6 +79,10 @@ class KnowledgeBase(Base):
 
     documents: Mapped[list[KnowledgeBaseDocument]] = relationship(
         "KnowledgeBaseDocument", back_populates="kb", cascade="all, delete-orphan"
+    )
+
+    __table_args__ = (
+        Index("ix_kb_scope_org_audience", "scope", "org_id", "audience"),
     )
 
 

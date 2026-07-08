@@ -1012,11 +1012,16 @@ TOOL_SPECS: dict[str, ToolSpec] = {
     "knowledge_base_query": ToolSpec(
         name="knowledge_base_query",
         description=(
-            "Search the VinUni Career Platform knowledge base to answer questions about: platform "
-            "policies, application processes, employer information, internship guidelines, or any "
-            "documents uploaded to the knowledge base. Use when the student asks 'how does X "
-            "work', 'what is the policy for Y', or 'tell me about Z company'. Do NOT use for "
-            "real-time job search — use search_jobs instead."
+            "Search the knowledge base to answer questions grounded in uploaded documents. "
+            "For students: platform policies, application processes, employer information, "
+            "internship guidelines, or any document in the platform knowledge base. For an "
+            "organization's own staff: their organization's OWN internal company documents and "
+            "policies (e.g. hiring playbooks, interview rubrics, onboarding, benefits, internal "
+            "guidelines) that the organization uploaded. Use when the user asks 'how does X "
+            "work', 'what is our/the policy for Y', 'what do our internal docs say about Z', "
+            "or 'tell me about Z company'. Access is scoped server-side — it only ever returns "
+            "documents the caller is authorized to read. Do NOT use for real-time job search — "
+            "use search_jobs instead."
         ),
         parameters={
             "type": "object",

@@ -12,15 +12,17 @@ import uuid
 import pytest
 from app.modules.knowledge_base.application import kb_service
 from app.modules.knowledge_base.domain.models import (
+    KB_AUDIENCE_APPLICANT_FACING,
+    KB_AUDIENCE_INTERNAL,
     KB_SCOPE_JOB,
     KB_SCOPE_PARTNER,
     KB_SCOPE_PLATFORM,
 )
+from app.shared.exceptions import PermissionDeniedError
 from app.shared.permissions import GUEST
 
 from tests.documents_utils import make_student
-from tests.org_utils import make_org_with_admin
-
+from tests.org_utils import add_member, make_org_with_admin
 
 # --------------------------------------------------------------------------- #
 # create_kb / list_kbs                                                        #
@@ -191,3 +193,308 @@ async def test_job_scope_kb_not_visible_without_active_application(db_session) -
 
     kbs_for_student = await kb_service.list_kbs(db_session, principal=student)
     assert kb["id"] not in {k["id"] for k in kbs_for_student}
+
+
+# --------------------------------------------------------------------------- #
+# Audience + department isolation (security)                                   #
+# --------------------------------------------------------------------------- #
+
+
+async def _add_active_application(db_session, *, user_id, org_id) -> None:
+    """Insert a minimal active application row (FK-off SQLite test harness)."""
+    from app.modules.recruitment.domain.models import Application
+
+    db_session.add(
+        Application(
+            id=uuid.uuid4(),
+            job_id=uuid.uuid4(),
+            applicant_id=user_id,
+            org_id=org_id,
+            status="submitted",
+        )
+    )
+    await db_session.flush()
+
+
+async def test_internal_partner_kb_isolated_from_other_org(db_session) -> None:
+    """Org B (even as admin) can never read Org A's INTERNAL knowledge base."""
+    _ua, org_a, admin_a = await make_org_with_admin(
+        db_session, org_type="partner", display_name="Org A"
+    )
+    _ub, _org_b, admin_b = await make_org_with_admin(
+        db_session, org_type="partner", display_name="Org B"
+    )
+
+    kb = await kb_service.create_kb(
+        db_session,
+        principal=admin_a,
+        name="Internal Playbook",
+        scope=KB_SCOPE_PARTNER,
+        org_id=org_a.id,
+        audience=KB_AUDIENCE_INTERNAL,
+    )
+
+    ids_for_b = await kb_service.get_kb_ids_for_query(db_session, principal=admin_b)
+    assert uuid.UUID(kb["id"]) not in ids_for_b
+    ids_for_a = await kb_service.get_kb_ids_for_query(db_session, principal=admin_a)
+    assert uuid.UUID(kb["id"]) in ids_for_a
+
+
+async def test_internal_kb_hidden_from_applicant_but_applicant_facing_visible(
+    db_session,
+) -> None:
+    """A student applicant reads APPLICANT_FACING KBs but never INTERNAL ones."""
+    student_user, student = await make_student(db_session)
+    _u, org, admin = await make_org_with_admin(db_session, org_type="partner")
+    await _add_active_application(db_session, user_id=student_user.id, org_id=org.id)
+
+    internal_kb = await kb_service.create_kb(
+        db_session,
+        principal=admin,
+        name="Internal Comp Bands",
+        scope=KB_SCOPE_PARTNER,
+        org_id=org.id,
+        audience=KB_AUDIENCE_INTERNAL,
+    )
+    public_kb = await kb_service.create_kb(
+        db_session,
+        principal=admin,
+        name="Applicant FAQ",
+        scope=KB_SCOPE_PARTNER,
+        org_id=org.id,
+        audience=KB_AUDIENCE_APPLICANT_FACING,
+    )
+
+    ids = await kb_service.get_kb_ids_for_query(db_session, principal=student)
+    assert uuid.UUID(public_kb["id"]) in ids, "applicant must read applicant_facing KB"
+    assert uuid.UUID(internal_kb["id"]) not in ids, "applicant must NOT read internal KB"
+
+
+async def test_department_scoped_internal_kb_isolation(db_session) -> None:
+    """A member of dept X reads dept-X + whole-org KBs, never a dept-Y KB."""
+    from app.modules.organization.domain.models import (
+        Department,
+        MembershipDepartment,
+    )
+
+    _u, org, admin = await make_org_with_admin(db_session, org_type="partner")
+    dept_x = Department(id=uuid.uuid4(), org_id=org.id, name="Engineering")
+    dept_y = Department(id=uuid.uuid4(), org_id=org.id, name="Finance")
+    db_session.add_all([dept_x, dept_y])
+    await db_session.flush()
+
+    # A plain member with only knowledge_base:read, assigned to department X.
+    _mu, membership, member = await add_member(
+        db_session, org=org, permissions=[("knowledge_base", "read")]
+    )
+    db_session.add(
+        MembershipDepartment(membership_id=membership.id, department_id=dept_x.id)
+    )
+    await db_session.commit()
+
+    kb_x = await kb_service.create_kb(
+        db_session, principal=admin, name="Eng Handbook",
+        scope=KB_SCOPE_PARTNER, org_id=org.id,
+        audience=KB_AUDIENCE_INTERNAL, department_id=dept_x.id,
+    )
+    kb_y = await kb_service.create_kb(
+        db_session, principal=admin, name="Finance Handbook",
+        scope=KB_SCOPE_PARTNER, org_id=org.id,
+        audience=KB_AUDIENCE_INTERNAL, department_id=dept_y.id,
+    )
+    kb_all = await kb_service.create_kb(
+        db_session, principal=admin, name="Org Handbook",
+        scope=KB_SCOPE_PARTNER, org_id=org.id, audience=KB_AUDIENCE_INTERNAL,
+    )
+
+    ids = await kb_service.get_kb_ids_for_query(db_session, principal=member)
+    assert uuid.UUID(kb_x["id"]) in ids, "dept-X member reads dept-X KB"
+    assert uuid.UUID(kb_all["id"]) in ids, "dept-X member reads whole-org KB"
+    assert uuid.UUID(kb_y["id"]) not in ids, "dept-X member must NOT read dept-Y KB"
+
+
+# --------------------------------------------------------------------------- #
+# Admin gate (RBAC at service layer)                                          #
+# --------------------------------------------------------------------------- #
+
+
+async def test_non_privileged_member_cannot_create_kb(db_session) -> None:
+    _u, org, _admin = await make_org_with_admin(db_session, org_type="partner")
+    _mu, _m, member = await add_member(
+        db_session, org=org, permissions=[("jobs", "read")]
+    )
+    with pytest.raises(PermissionDeniedError):
+        await kb_service.create_kb(
+            db_session, principal=member, name="Sneaky KB",
+            scope=KB_SCOPE_PARTNER, org_id=org.id,
+        )
+
+
+async def test_non_privileged_member_cannot_upload_document(db_session) -> None:
+    _u, org, admin = await make_org_with_admin(db_session, org_type="partner")
+    kb = await kb_service.create_kb(
+        db_session, principal=admin, name="Org KB",
+        scope=KB_SCOPE_PARTNER, org_id=org.id,
+    )
+    _mu, _m, member = await add_member(
+        db_session, org=org, permissions=[("jobs", "read")]
+    )
+    with pytest.raises(PermissionDeniedError):
+        await kb_service.upload_document(
+            db_session, principal=member, kb_id=uuid.UUID(kb["id"]),
+            title="secret.txt", file_path="kb/x/secret.txt",
+            mime_type="text/plain", file_size_bytes=10,
+        )
+
+
+async def test_member_with_manage_can_upload(db_session) -> None:
+    _u, org, admin = await make_org_with_admin(db_session, org_type="partner")
+    kb = await kb_service.create_kb(
+        db_session, principal=admin, name="Org KB",
+        scope=KB_SCOPE_PARTNER, org_id=org.id,
+    )
+    _mu, _m, manager = await add_member(
+        db_session, org=org, permissions=[("knowledge_base", "manage")]
+    )
+    doc = await kb_service.upload_document(
+        db_session, principal=manager, kb_id=uuid.UUID(kb["id"]),
+        title="policy.txt", file_path="kb/x/policy.txt",
+        mime_type="text/plain", file_size_bytes=12,
+    )
+    assert doc["status"] == "pending"
+
+
+# --------------------------------------------------------------------------- #
+# Storage fix + async ingestion + energy metering                             #
+# --------------------------------------------------------------------------- #
+
+
+async def test_uploaded_bytes_ingest_to_done_with_chunks_and_meter(db_session) -> None:
+    """The storage fix: bytes saved via save_bytes are loaded by ingestion, the
+    document reaches DONE with chunks, and the embedding pass debits AI energy."""
+    from app.ai.energy.constants import unit_cost
+    from app.ai.observability.billable_usage import FEATURE_EMBEDDINGS
+    from app.ai.observability.models import AiBillableUsage
+    from app.modules.documents.infrastructure.storage import set_storage
+    from app.modules.knowledge_base.application.ingest_task import run_ingest
+    from app.modules.knowledge_base.domain.models import (
+        DOC_STATUS_DONE,
+        KnowledgeBaseDocument,
+    )
+    from app.shared.storage import save_bytes
+    from sqlalchemy import select
+
+    from tests.documents_utils import InMemoryStorage
+
+    set_storage(InMemoryStorage())
+    try:
+        _u, org, admin = await make_org_with_admin(db_session, org_type="partner")
+        kb = await kb_service.create_kb(
+            db_session, principal=admin, name="Internal Docs",
+            scope=KB_SCOPE_PARTNER, org_id=org.id, audience=KB_AUDIENCE_INTERNAL,
+        )
+        kb_id = uuid.UUID(kb["id"])
+
+        body = (
+            b"Company Leave Policy\n\n"
+            b"Employees may request annual leave through the HR portal. "
+            b"Managers approve requests within three business days. "
+            b"Remote work is available two days per week for engineering roles.\n"
+        )
+        key = save_bytes(folder=f"kb/{kb_id}", filename="leave_policy.txt", data=body)
+        # Storage key is internal — never the client-supplied path.
+        assert key.startswith(f"kb/{kb_id}/") and key.endswith(".txt")
+
+        doc = KnowledgeBaseDocument(
+            id=uuid.uuid4(), kb_id=kb_id, title="leave_policy.txt",
+            file_path=key, mime_type="text/plain", file_size_bytes=len(body),
+            status="pending",
+        )
+        db_session.add(doc)
+        await db_session.flush()
+
+        await run_ingest(str(doc.id), session=db_session)
+        await db_session.commit()
+
+        await db_session.refresh(doc)
+        assert doc.status == DOC_STATUS_DONE
+        assert doc.chunk_count > 0
+
+        rows = (
+            await db_session.execute(
+                select(AiBillableUsage).where(
+                    AiBillableUsage.feature_key == FEATURE_EMBEDDINGS,
+                    AiBillableUsage.org_id == org.id,
+                )
+            )
+        ).scalars().all()
+        assert len(rows) == 1
+        assert rows[0].result_status == "success"
+        assert rows[0].units_charged == unit_cost(FEATURE_EMBEDDINGS)
+
+        # Idempotent: re-ingesting the same doc must not double-charge energy.
+        await run_ingest(str(doc.id), session=db_session)
+        await db_session.commit()
+        rows2 = (
+            await db_session.execute(
+                select(AiBillableUsage).where(
+                    AiBillableUsage.feature_key == FEATURE_EMBEDDINGS,
+                    AiBillableUsage.org_id == org.id,
+                )
+            )
+        ).scalars().all()
+        assert len(rows2) == 1
+    finally:
+        set_storage(None)
+
+
+async def test_ingest_blank_file_marks_failed_no_charge(db_session) -> None:
+    """A blank/empty upload never fabricates a CV/doc and is charged nothing."""
+    from app.ai.observability.billable_usage import FEATURE_EMBEDDINGS
+    from app.ai.observability.models import AiBillableUsage
+    from app.modules.documents.infrastructure.storage import set_storage
+    from app.modules.knowledge_base.application.ingest_task import run_ingest
+    from app.modules.knowledge_base.domain.models import (
+        DOC_STATUS_FAILED,
+        KnowledgeBaseDocument,
+    )
+    from app.shared.storage import save_bytes
+    from sqlalchemy import select
+
+    from tests.documents_utils import InMemoryStorage
+
+    set_storage(InMemoryStorage())
+    try:
+        _u, org, admin = await make_org_with_admin(db_session, org_type="partner")
+        kb = await kb_service.create_kb(
+            db_session, principal=admin, name="Docs",
+            scope=KB_SCOPE_PARTNER, org_id=org.id,
+        )
+        kb_id = uuid.UUID(kb["id"])
+        key = save_bytes(folder=f"kb/{kb_id}", filename="blank.txt", data=b"   \n  ")
+        doc = KnowledgeBaseDocument(
+            id=uuid.uuid4(), kb_id=kb_id, title="blank.txt", file_path=key,
+            mime_type="text/plain", file_size_bytes=6, status="pending",
+        )
+        db_session.add(doc)
+        await db_session.flush()
+
+        with pytest.raises(ValueError):
+            await run_ingest(str(doc.id), session=db_session)
+        await db_session.commit()
+
+        await db_session.refresh(doc)
+        assert doc.status == DOC_STATUS_FAILED
+        assert doc.chunk_count == 0
+        charged = (
+            await db_session.execute(
+                select(AiBillableUsage).where(
+                    AiBillableUsage.feature_key == FEATURE_EMBEDDINGS,
+                    AiBillableUsage.org_id == org.id,
+                    AiBillableUsage.units_charged > 0,
+                )
+            )
+        ).scalars().all()
+        assert charged == []
+    finally:
+        set_storage(None)

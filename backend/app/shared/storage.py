@@ -7,9 +7,38 @@ documents module internals.
 
 from __future__ import annotations
 
+import os
 import uuid
 
 from fastapi import HTTPException, UploadFile, status
+
+
+def _ext_from(filename: str) -> str:
+    """Return the lowercased extension (with dot) of ``filename``, else ``""``."""
+    return os.path.splitext(filename or "")[1].lower()
+
+
+def save_bytes(*, folder: str, filename: str, data: bytes) -> str:
+    """Persist raw ``data`` to shared storage and return the internal storage key.
+
+    Thin wrapper so modules such as ``knowledge_base`` can store already-read
+    bytes without importing the documents storage backend directly. The key is
+    server-generated (``{folder}/{uuid}{ext}``) and INTERNAL — never returned in
+    an API response or logged. The original extension is preserved so the
+    extraction cascade can sniff the file kind.
+    """
+    from app.modules.documents.infrastructure.storage import get_storage as get_storage_backend
+
+    key = f"{folder}/{uuid.uuid4().hex}{_ext_from(filename)}"
+    get_storage_backend().save(key, data)
+    return key
+
+
+def load_bytes(key: str) -> bytes:
+    """Load the raw bytes previously stored under ``key`` (server-side only)."""
+    from app.modules.documents.infrastructure.storage import get_storage as get_storage_backend
+
+    return get_storage_backend().load(key)
 
 
 async def save_upload(

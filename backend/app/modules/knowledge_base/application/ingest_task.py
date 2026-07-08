@@ -26,6 +26,7 @@ from app.modules.knowledge_base.domain.models import (
     DOC_STATUS_DONE,
     DOC_STATUS_FAILED,
     DOC_STATUS_PROCESSING,
+    KnowledgeBase,
     KnowledgeBaseChunk,
     KnowledgeBaseDocument,
 )
@@ -100,6 +101,14 @@ async def run_ingest(document_id: str, *, session) -> None:
     if doc is None:
         return
 
+    # Resolve the owning KB's org so the embedding spend is metered against the
+    # right budget (partner ORG pool vs. platform system scope).
+    kb_org_id = (
+        await session.execute(
+            select(KnowledgeBase.org_id).where(KnowledgeBase.id == doc.kb_id)
+        )
+    ).scalar_one_or_none()
+
     # Mark as processing
     doc.status = DOC_STATUS_PROCESSING
     await session.flush()
@@ -122,7 +131,15 @@ async def run_ingest(document_id: str, *, session) -> None:
         # Pass the session so real embedding spend is written to ai_usage_log
         # (visible to the budget guard, spec §5.4).
         chunk_texts = [c.content for c in chunks]
-        embeddings = await embed_texts(chunk_texts, db=session, task_type="kb_embedding")
+        try:
+            embeddings = await embed_texts(
+                chunk_texts, db=session, task_type="kb_embedding"
+            )
+        except Exception:
+            # Embedding provider failed — record a 0-unit failed usage row (for
+            # attribution) but never charge the org, then let the doc go FAILED.
+            await _record_embedding_usage(session, doc=doc, org_id=kb_org_id, success=False)
+            raise
 
         # --- Step 4: Delete old chunks and upsert fresh ones ---
         await session.execute(
@@ -150,6 +167,11 @@ async def run_ingest(document_id: str, *, session) -> None:
         doc.processed_at = datetime.now(UTC)
         await session.flush()
 
+        # --- Step 6: Meter the embedding spend (success, idempotent per doc) ---
+        # Charged AFTER the document is DONE so a metering hiccup can never fail
+        # the ingest (``_record_embedding_usage`` swallows its own errors).
+        await _record_embedding_usage(session, doc=doc, org_id=kb_org_id, success=True)
+
     except Exception as exc:
         doc.status = DOC_STATUS_FAILED
         doc.error_message = str(exc)[:500]
@@ -158,41 +180,99 @@ async def run_ingest(document_id: str, *, session) -> None:
         raise
 
 
-def _read_bytes_file(file_path: str) -> bytes:
-    """Blocking read helper; run via ``asyncio.to_thread`` to avoid blocking the loop."""
-    with open(file_path, "rb") as f:
-        return f.read()
+async def _record_embedding_usage(
+    session,
+    *,
+    doc: KnowledgeBaseDocument,
+    org_id,
+    success: bool,
+) -> None:
+    """Debit AI energy for a KB-document embedding pass (fail-open, idempotent).
 
+    Idempotent per document id: re-ingesting the same document (admin re-index)
+    never double-charges. On success the org pool is debited ``FEATURE_EMBEDDINGS``
+    credits; on failure a 0-unit ``provider_failed`` row is written for attribution
+    only. A metering failure is logged and swallowed — it must never block or fail
+    ingestion (mirrors the energy-meter fail-open contract).
+    """
+    try:
+        from app.ai.energy.constants import unit_cost
+        from app.ai.observability.billable_usage import (
+            FEATURE_EMBEDDINGS,
+            PERSONA_PARTNER,
+            PERSONA_SYSTEM,
+            RESULT_PROVIDER_FAILED,
+            RESULT_SUCCESS,
+            SCOPE_ORG,
+            SCOPE_PLATFORM,
+            UsageContext,
+            make_idempotency_key,
+            record_billable_usage,
+        )
 
-def _read_text_file(file_path: str) -> str:
-    """Blocking read helper; run via ``asyncio.to_thread`` to avoid blocking the loop."""
-    with open(file_path, encoding="utf-8", errors="replace") as f:
-        return f.read()
+        if org_id is not None:
+            persona, billing_scope = PERSONA_PARTNER, SCOPE_ORG
+        else:
+            persona, billing_scope = PERSONA_SYSTEM, SCOPE_PLATFORM
+
+        ctx = UsageContext(
+            actor_persona=persona,
+            feature_key=FEATURE_EMBEDDINGS,
+            task_type="kb_embedding",
+            billing_scope=billing_scope,
+            org_id=org_id,
+            resource_type="knowledge_base_document",
+            resource_id=doc.id,
+            idempotency_key=make_idempotency_key(
+                FEATURE_EMBEDDINGS, "kb_doc", str(doc.id)
+            ),
+        )
+        await record_billable_usage(
+            session,
+            ctx=ctx,
+            result_status=RESULT_SUCCESS if success else RESULT_PROVIDER_FAILED,
+            base_units=unit_cost(FEATURE_EMBEDDINGS),
+        )
+    except Exception:  # noqa: BLE001 — metering must never break ingestion
+        logger.warning("kb.embedding_meter_failed", extra={"document_id": str(doc.id)})
 
 
 async def _extract_text(doc: KnowledgeBaseDocument) -> str:
-    """Extract text from the document file using the local-first extraction cascade
-    (native text -> layout -> OCR fallback per ``docs/CV_INGESTION_EXTRACTION_SPEC.md``
-    §19). Falls back to a raw plain-text read for ``.txt``/``.md`` files.
+    """Extract text from the stored document via the local-first extraction cascade.
+
+    ``doc.file_path`` is an INTERNAL storage KEY (not a filesystem path): the
+    uploaded bytes are loaded through ``app.shared.storage.load_bytes`` and fed to
+    the extraction cascade (native text -> layout -> OCR fallback per
+    ``docs/CV_INGESTION_EXTRACTION_SPEC.md`` §19). A missing/blank/corrupt object
+    yields ``""`` so the caller marks the document ``FAILED`` with a user-safe
+    status rather than fabricating content.
     """
     if not doc.file_path:
         return ""
 
+    from app.shared.storage import load_bytes
+
+    try:
+        data = await asyncio.to_thread(load_bytes, doc.file_path)
+    except Exception:
+        return ""
+    if not data:
+        return ""
+
+    filename = doc.file_path.rsplit("/", 1)[-1]
     try:
         from app.ai.extraction.text_extraction import extract_text
 
-        data = await asyncio.to_thread(_read_bytes_file, doc.file_path)
-        filename = doc.file_path.rsplit("/", 1)[-1]
         result = await asyncio.to_thread(extract_text, filename, data)
         if result.text:
             return result.text
     except Exception:
         pass
 
-    # Plain text fallback for .txt and .md files
-    if doc.file_path.endswith((".txt", ".md")):
+    # Plain-text fallback for .txt/.md when the cascade returned nothing.
+    if filename.endswith((".txt", ".md")):
         try:
-            return await asyncio.to_thread(_read_text_file, doc.file_path)
+            return data.decode("utf-8", errors="replace")
         except Exception:
             pass
 

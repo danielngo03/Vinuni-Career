@@ -80,6 +80,11 @@ PERMISSION_CATALOG: dict[str, frozenset[str]] = {
     # Org audit-log read (B-518/523). Distinct from `members:*` so it can be
     # granted narrowly (e.g. a compliance-only role) without member management.
     "audit": frozenset({"read"}),
+    # Knowledge base (internal-document RAG). `manage` gates create/upload/delete
+    # of a KB and its documents; `read` is a grantable capability that lets a KB
+    # manager read every internal KB in their org (dept-scoped internal KBs are
+    # otherwise readable only by department members). Partner Admin holds `*:*`.
+    "knowledge_base": frozenset({"read", "manage"}),
     # AI-assisted recruiting actions (`docs/PARTNER_RBAC_ANALYTICS_SPEC.md`).
     # These are advisory/confirmation-required AI writes; the grant controls
     # who may even request them. No provider/model internals ever leave here.

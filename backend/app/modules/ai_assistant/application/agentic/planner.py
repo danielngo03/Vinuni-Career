@@ -289,6 +289,25 @@ _PLATFORM_KB_RE = re.compile(
     r"student\s*plan|partner\s*plan|gói)\b",
     re.IGNORECASE,
 )
+# Partner asking about their OWN org's uploaded internal documents / policies.
+# Routes to the RAG tool (server-side access scoping decides what is returned).
+# Matches an internal-doc noun (policy/handbook/guideline/process/document...)
+# OR an explicit possessive ("our"/"của công ty"/"nội bộ") near a doc/query verb.
+_PARTNER_INTERNAL_DOCS_RE = re.compile(
+    r"\b(nội\s*bộ|internal)\b"
+    r"|\b(chính\s*sách|policy|policies|quy\s*trình|quy\s*định|quy\s*chế|"
+    r"hướng\s*dẫn|guideline|guidelines|handbook|sổ\s*tay|playbook|"
+    r"tài\s*liệu|document|documents|onboarding|benefit|phúc\s*lợi|"
+    r"rubric|tiêu\s*chí\s*phỏng\s*vấn)\b"
+    r".{0,40}\b(công\s*ty|tổ\s*chức|của\s*(chúng\s*)?(tôi|ta)|our|company|"
+    r"nội\s*bộ|internal|nói\s*gì|quy\s*định|ra\s*sao|thế\s*nào)\b"
+    r"|\b(công\s*ty|tổ\s*chức|của\s*(chúng\s*)?(tôi|ta)|our|company)\b"
+    r".{0,40}\b(chính\s*sách|policy|policies|quy\s*trình|quy\s*định|quy\s*chế|"
+    r"hướng\s*dẫn|guideline|guidelines|handbook|sổ\s*tay|playbook|"
+    r"tài\s*liệu|document|documents|onboarding|benefit|phúc\s*lợi|"
+    r"rubric|tiêu\s*chí\s*phỏng\s*vấn)\b",
+    re.IGNORECASE,
+)
 
 _DOMAIN_KEYWORDS = (
     "việc",
@@ -435,6 +454,19 @@ def plan_for_partner(text: str, *, principal: Principal, locale: str = "vi") -> 
             action="reply",
             status_code="platform_support",
             reply=support,
+        )
+
+    # Partner asking about their OWN org's internal documents / policies → RAG.
+    # Access is scoped server-side in ``get_kb_ids_for_query`` (org-internal +
+    # applicant-facing KBs the recruiter is authorized to read); another org's
+    # internal docs are never reachable.
+    if _PARTNER_INTERNAL_DOCS_RE.search(text) and principal.org_id is not None:
+        return AgentPlan(
+            agent="partner_knowledge",
+            action="tool",
+            status_code="using_tool",
+            tool_name="knowledge_base_query",
+            tool_args={"query": text[:240]},
         )
 
     if _PARTNER_PIPELINE_RE.search(text) and principal.org_id is not None:
