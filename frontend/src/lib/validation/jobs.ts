@@ -86,6 +86,13 @@ export function jobFormSchema(v: V) {
        * restriction (default). "en" / "vi" = soft preference shown to students.
        */
       cv_language_required: z.enum(["any", "en", "vi"]),
+      /**
+       * Original language the JD text is written in — a HINT sent to the
+       * backend (re-resolved server-side) used to seed the student "translate
+       * this JD" flow. `undefined` = let the server auto-detect. This is
+       * SEPARATE from `cv_language_required` (the candidate's CV language).
+       */
+      language_code: z.enum(["vi", "en", "ja", "ko", "zh"]).optional(),
     })
     .refine(
       (d) =>
@@ -152,6 +159,7 @@ export const JOB_FORM_DEFAULTS: JobFormValues = {
   seniority_level: "",
   industry_id: "",
   cv_language_required: "any",
+  language_code: undefined,
   headcount: "1",
   application_deadline: "",
   visibility: "public",

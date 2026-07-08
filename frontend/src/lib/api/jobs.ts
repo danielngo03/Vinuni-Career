@@ -354,6 +354,12 @@ export interface JobCreateBody {
    * "any" = no restriction (server default). "en" / "vi" = soft preference.
    */
   cv_language_required?: "any" | "en" | "vi";
+  /**
+   * Original language the JD is written in — an optional HINT. The server
+   * re-resolves the stored `language_code`, so a slightly-off value is safe;
+   * omit to let the backend auto-detect. Distinct from `cv_language_required`.
+   */
+  language_code?: "vi" | "en" | "ja" | "ko" | "zh";
 }
 
 export type JobUpdateBody = Partial<JobCreateBody> & { version?: number };
@@ -529,7 +535,12 @@ export interface JdUploadResult {
   salary_currency?: string | null;
   salary_is_disclosed?: boolean;
   headcount?: number | null;
-  detected_language?: "vi" | "en" | "mixed";
+  /**
+   * Original language detected from the uploaded JD. "mixed" = bilingual doc;
+   * "unknown" = detector abstained; a concrete code (vi/en/ja/ko/zh) otherwise.
+   * Seeds the form `language_code` hint (see normalizeLanguageCode in the form).
+   */
+  detected_language?: "vi" | "en" | "mixed" | "unknown" | "ja" | "ko" | "zh";
   // Fallback when AI unavailable
   raw_text_preview?: string | null;
   // Extended fields from rebuilt backend extraction

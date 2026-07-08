@@ -181,6 +181,27 @@ function deriveSalaryMinMax(
   }
 }
 
+/** Concrete language codes the backend can store for a JD's original language. */
+const STORABLE_LANGUAGE_CODES = ["vi", "en", "ja", "ko", "zh"] as const;
+type StorableLanguageCode = (typeof STORABLE_LANGUAGE_CODES)[number];
+
+/**
+ * Normalize a raw language value (from JD-upload `detected_language` or a
+ * stored `job.language_code`) into a concrete, storable form value.
+ * - "mixed" (bilingual JD) -> "vi" (the local default)
+ * - "unknown" / empty / any non-storable value -> undefined (let the backend
+ *   auto-detect; the form shows the "Auto-detect" option)
+ */
+function normalizeLanguageCode(
+  raw: string | null | undefined,
+): StorableLanguageCode | undefined {
+  if (!raw) return undefined;
+  if (raw === "mixed") return "vi";
+  return (STORABLE_LANGUAGE_CODES as readonly string[]).includes(raw)
+    ? (raw as StorableLanguageCode)
+    : undefined;
+}
+
 /**
  * Map `JobFormValues` + external state to a `JobCreateBody` ready for the API.
  * `cv_language_required` is forwarded as-is; "any" is the server default.
@@ -232,6 +253,10 @@ function toBody(
     visibility: v.visibility,
     candidate_requirements: pruneCandidateRequirements(candidateRequirements) ?? null,
     cv_language_required: v.cv_language_required,
+    // Original-JD-language hint — sent only when the partner/AI set a concrete
+    // value; undefined lets the backend auto-detect. Separate from
+    // `cv_language_required` (the candidate's required CV language).
+    language_code: v.language_code || undefined,
   };
   return body;
 }
@@ -273,6 +298,7 @@ function detailToValues(job: OwnerJobDetail): JobFormValues {
     seniority_level: job.seniority_level ?? "",
     industry_id: job.industry_id ?? "",
     cv_language_required: (job.cv_language_required as JobFormValues["cv_language_required"]) ?? JOB_FORM_DEFAULTS.cv_language_required,
+    language_code: normalizeLanguageCode(job.language_code),
     headcount: String(job.headcount ?? 1),
     application_deadline: toLocalInput(job.application_deadline),
     visibility: job.visibility,
@@ -502,6 +528,16 @@ export function JobForm({ mode, job, qualityIssues, companyName, onSuccess, onCa
       mark("cv_language_required");
     }
 
+    // Original JD language (the language the JD text itself is written in).
+    // Normalize the detector output: "mixed" -> "vi", "unknown"/other -> unset
+    // (leave the field on "Auto-detect" so the backend resolves it). Distinct
+    // from cv_language_required above.
+    const detectedLang = normalizeLanguageCode(result.detected_language);
+    if (detectedLang) {
+      setValue("language_code", detectedLang, { shouldDirty: true });
+      mark("language_code");
+    }
+
     // Application deadline: convert ISO/date string to datetime-local format
     if (result.application_deadline) {
       const dlLocal = toLocalInput(result.application_deadline);
@@ -685,6 +721,15 @@ export function JobForm({ mode, job, qualityIssues, companyName, onSuccess, onCa
     ...(["intern", "fresher", "junior", "middle", "senior", "lead", "manager", "director", "executive"] as const).map(
       (v) => ({ value: v, label: tf(`seniorityOpts.${v}`) }),
     ),
+  ];
+  // Original-JD-language selector. "" = Auto-detect (maps to an undefined
+  // `language_code`, letting the backend resolve it).
+  const originalLanguageOptions = [
+    { value: "", label: tf("originalLanguage.auto") },
+    ...STORABLE_LANGUAGE_CODES.map((v) => ({
+      value: v,
+      label: tf(`originalLanguage.opts.${v}`),
+    })),
   ];
 
   const requirementModeLabels = {
@@ -898,6 +943,50 @@ export function JobForm({ mode, job, qualityIssues, companyName, onSuccess, onCa
                 <AmendTagInline kind="remoderation" label={tf("amendment.remoderationTag")} />
               )}
               <JdFieldIssueNote issues={qualityIssues} field="location_city" />
+            </div>
+
+            <div className="xl:col-span-2">
+              <div className="mb-1.5 flex items-center gap-2">
+                <label
+                  htmlFor="job-language-code"
+                  className="text-sm font-semibold text-[var(--text-primary)]"
+                >
+                  {tf("originalLanguage.label")}
+                </label>
+                <FieldProvenance
+                  state={provenance.get("language_code")}
+                  label={
+                    provenance.get("language_code") === "filled"
+                      ? tf("provenance.filled")
+                      : tf("provenance.review")
+                  }
+                  onClear={() => provenance.clear("language_code")}
+                />
+              </div>
+              <Controller
+                control={control}
+                name="language_code"
+                render={({ field }) => (
+                  <Select
+                    id="job-language-code"
+                    options={originalLanguageOptions}
+                    help={tf("originalLanguage.help")}
+                    value={field.value ?? ""}
+                    onChange={(e) => {
+                      const next = e.target.value;
+                      field.onChange(
+                        next === ""
+                          ? undefined
+                          : (next as JobFormValues["language_code"]),
+                      );
+                      provenance.clear("language_code");
+                    }}
+                  />
+                )}
+              />
+              {isActive && (
+                <AmendTagInline kind="free" label={tf("amendment.freeTag")} />
+              )}
             </div>
 
             <div className="xl:col-span-6">
