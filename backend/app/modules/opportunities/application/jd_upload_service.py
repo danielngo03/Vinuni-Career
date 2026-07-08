@@ -78,6 +78,10 @@ def _to_response(outcome: JdExtractionOutcome) -> dict:
     response["field_confidence"] = outcome.field_confidence
     response["needs_review"] = outcome.needs_review
     response["prompt_version"] = jd_prompt.PROMPT_VERSION
+    # Detected ORIGINAL language of the JD (vi/en/mixed/...), so the create-job
+    # form can prefill language_code. The server re-resolves on submit — this is
+    # a hint, not authoritative.
+    response["detected_language"] = outcome.detected_language
     return response
 
 
