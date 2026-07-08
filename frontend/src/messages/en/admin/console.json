@@ -1,0 +1,797 @@
+{
+  "adminConsole": {
+    "nav": {
+      "overview": "Platform Overview",
+      "aiOperations": "AI Operations",
+      "auditLog": "Audit Log",
+      "logs": "Logs",
+      "systemHealth": "System Health",
+      "usersAccess": "Users & Access",
+      "featureFlags": "Feature Flags",
+      "analytics": "Analytics",
+      "alerts": "Alerts"
+    },
+    "group": {
+      "operations": "Operations",
+      "system": "System"
+    },
+    "page": {
+      "overviewTitle": "Platform Admin",
+      "overviewSubtitle": "Superadmin console — platform-wide operations and observability.",
+      "accessDeniedTitle": "Access denied",
+      "accessDeniedBody": "This area is restricted to platform superadmins."
+    },
+    "overview": {
+      "pageTitle": "Platform Overview",
+      "pageSubtitle": "Cross-domain health snapshot — AI, outbox, moderation, and active users.",
+      "statusBandTitle": "System Status",
+      "metric": {
+        "aiSpend": "AI spend today",
+        "aiErrorRate": "AI error rate",
+        "moderationPending": "Moderation pending",
+        "activeUsers": "Active users",
+        "aiRequestsSuffix": "req"
+      },
+      "outbox": {
+        "title": "Outbox health",
+        "pending": "{count} pending",
+        "failed": "{count} failed (last hour)",
+        "healthy": "Healthy"
+      },
+      "nextActions": {
+        "title": "Quick actions",
+        "aiOperations": "AI Operations",
+        "aiOperationsBody": "Spend, reliability, and volume across all AI features.",
+        "moderationQueue": "Moderation queue",
+        "moderationQueueBody": "{count} job posts pending review."
+      },
+      "incidents": {
+        "title": "Alerts & Incidents",
+        "emptyTitle": "No active incidents",
+        "emptyBody": "Alerts & incident monitoring is planned for a future release."
+      },
+      "errorTitle": "Overview unavailable",
+      "errorBody": "Could not load platform status. Please try again.",
+      "retry": "Retry"
+    },
+    "aiOps": {
+      "pageTitle": "AI Operations",
+      "pageSubtitle": "Spend, reliability, and volume across all AI features.",
+      "tabs": {
+        "overview": "Overview",
+        "traces": "Traces",
+        "modelsPricing": "Models & Pricing",
+        "settings": "Settings"
+      },
+      "comingSoon": "Coming in next slice",
+      "range": {
+        "label": "Time range",
+        "today": "Today",
+        "7d": "Last 7 days",
+        "30d": "Last 30 days"
+      },
+      "metric": {
+        "spendToday": "Spend today",
+        "requests": "Requests",
+        "errorRate": "Error rate",
+        "p95Latency": "p95 Latency"
+      },
+      "budgetBurn": {
+        "ofBudget": "of budget",
+        "budgetNote": "Daily budget: ${budget}",
+        "burndownNote": "{pct}% of daily budget consumed",
+        "underBudget": "Under budget",
+        "nearBudget": "Near limit",
+        "overBudget": "Over limit"
+      },
+      "unpriced": "Pricing / identity restricted",
+      "maskedProvider": "Restricted",
+      "spend": {
+        "panelTitle": "Spend vs Budget",
+        "burndownLabel": "{pct}% of ${budget} daily budget used",
+        "emptyLabel": "No spend data for this range",
+        "ariaLabel": "Daily spend bar chart",
+        "errorTitle": "Spend data unavailable",
+        "errorBody": "Could not load spend data. Please try again."
+      },
+      "reliability": {
+        "panelTitle": "Reliability",
+        "requestsLabel": "Requests",
+        "errorRateLabel": "Error rate",
+        "fallbackRateLabel": "Fallback rate",
+        "fallbacksLabel": "Fallbacks",
+        "errorTrendTitle": "Error rate trend",
+        "featureCol": "Feature",
+        "p50Label": "p50",
+        "p95Label": "p95",
+        "p99Label": "p99",
+        "circuitStateTitle": "Circuit breaker states",
+        "circuitCol": {
+          "alias": "Alias",
+          "state": "State",
+          "failures": "Failures",
+          "lastFailure": "Last failure"
+        },
+        "circuitState": {
+          "closed": "Closed",
+          "open": "Open",
+          "half_open": "Half-open"
+        },
+        "noCircuits": "No circuit breakers configured",
+        "emptyLabel": "No reliability data for this range",
+        "errorTitle": "Reliability data unavailable",
+        "errorBody": "Could not load reliability data. Please try again."
+      },
+      "volume": {
+        "panelTitle": "Volume",
+        "byFeatureTitle": "Requests by feature",
+        "topConsumersTitle": "Top consumers",
+        "requestsLabel": "Requests",
+        "tokensLabel": "Tokens (prompt + completion)",
+        "emptyLabel": "No volume data for this range",
+        "ariaLabel": "Request volume bar chart",
+        "errorTitle": "Volume data unavailable",
+        "errorBody": "Could not load volume data. Please try again."
+      },
+      "latency": {
+        "panelTitle": "Latency",
+        "seriesP95": "p95",
+        "seriesAvg": "avg",
+        "emptyLabel": "No latency data for this range",
+        "ariaLabel": "Latency time series chart",
+        "errorTitle": "Latency data unavailable",
+        "errorBody": "Could not load latency data. Please try again."
+      },
+      "distribution": {
+        "panelTitle": "Spend by feature",
+        "emptyLabel": "No spend distribution for this range",
+        "ariaLabel": "Spend distribution donut chart",
+        "errorTitle": "Distribution data unavailable",
+        "errorBody": "Could not load spend distribution. Please try again."
+      },
+      "errorHeatmap": {
+        "panelTitle": "Error heatmap (day × hour)",
+        "note": "Cells show error count. Sparse — only hours with errors are shaded.",
+        "emptyLabel": "No errors in this range",
+        "ariaLabel": "Error frequency heatmap by day and hour",
+        "errorTitle": "Heatmap data unavailable",
+        "errorBody": "Could not load error heatmap. Please try again."
+      },
+      "updated": "Updated {time}",
+      "retry": "Retry",
+      "loading": "Loading...",
+      "traces": {
+        "panelTitle": "AI Traces",
+        "col": {
+          "time": "Time",
+          "feature": "Feature / Task",
+          "model": "Model",
+          "tokens": "Tokens",
+          "cost": "Cost",
+          "latency": "Latency",
+          "status": "Status"
+        },
+        "status": {
+          "success": "Success",
+          "error": "Error",
+          "fallback": "Fallback",
+          "rate_limited": "Rate limited",
+          "timeout": "Timeout"
+        },
+        "sheet": {
+          "title": "Trace detail",
+          "closeLabel": "Close",
+          "labelId": "Event ID",
+          "labelCreatedAt": "Time",
+          "labelTaskType": "Task type",
+          "labelAlias": "Alias",
+          "labelModel": "Model",
+          "labelStatus": "Status",
+          "labelPromptTokens": "Prompt tokens",
+          "labelCompletionTokens": "Completion tokens",
+          "labelTotalTokens": "Total tokens",
+          "labelCost": "Cost",
+          "labelLatency": "Latency",
+          "labelTraceId": "Trace ID",
+          "openInLangfuse": "Open in Langfuse",
+          "langfuseNotConfigured": "Langfuse URL not configured",
+          "masked": "—"
+        },
+        "loadMore": "Load more",
+        "emptyTitle": "No traces yet",
+        "emptyBody": "AI call traces will appear here once events are recorded.",
+        "errorTitle": "Traces unavailable",
+        "errorBody": "Could not load trace events. Please try again."
+      },
+      "pricing": {
+        "panelTitle": "Models & Pricing",
+        "addPrice": "Add price",
+        "col": {
+          "alias": "Alias",
+          "promptCost": "Input / 1k tokens",
+          "completionCost": "Output / 1k tokens",
+          "effectiveFrom": "Effective from",
+          "effectiveUntil": "Until",
+          "actions": "Actions"
+        },
+        "sheet": {
+          "addTitle": "Add price",
+          "editTitle": "Edit price",
+          "labelAlias": "Alias",
+          "labelAliasHelp": "Alias name as configured in the provider registry.",
+          "labelPromptCost": "Input cost per 1k tokens (USD)",
+          "labelCompletionCost": "Output cost per 1k tokens (USD)",
+          "labelEffectiveFrom": "Effective from (ISO date)",
+          "labelEffectiveUntil": "Effective until (ISO date, optional)",
+          "labelNotes": "Notes (optional)",
+          "save": "Save",
+          "cancel": "Cancel",
+          "conflictError": "A price row for this alias already exists on these dates. Edit the existing row or change the date range.",
+          "validationCost": "Enter a valid non-negative number (e.g. 0.0015).",
+          "validationAlias": "Alias is required.",
+          "validationFrom": "Effective from date is required."
+        },
+        "unpricedBanner": "These aliases have usage events but no price row: {aliases}. Costs shown as $0.00.",
+        "emptyTitle": "No price rows",
+        "emptyBody": "Add a price row for each alias to enable accurate cost tracking.",
+        "errorTitle": "Pricing unavailable",
+        "errorBody": "Could not load price data. Please try again.",
+        "editAction": "Edit"
+      },
+      "settings": {
+        "panelTitle": "AI Settings",
+        "perOrgBudgetLabel": "Per-organisation daily budget cap (USD)",
+        "perOrgBudgetHelp": "Limits AI spend per organisation per day. Leave empty to remove the cap. Changes apply on next request cycle.",
+        "perOrgBudgetPlaceholder": "e.g. 0.50",
+        "perOrgSaveLabel": "Save per-org budget",
+        "perOrgSaved": "Per-org budget saved.",
+        "perOrgError": "Failed to save per-org budget.",
+        "loading": "Loading..."
+      }
+    },
+    "systemHealth": {
+      "pageTitle": "System Health",
+      "pageSubtitle": "Near-realtime scheduled jobs, queue depth, and service readiness.",
+      "tabs": {
+        "overview": "Overview",
+        "queuesJobs": "Queues & Jobs",
+        "services": "Services"
+      },
+      "overview": {
+        "flowTitle": "Pipeline flow",
+        "flowSubtitle": "End-to-end operational pipeline: Scheduler → Jobs → Queue → Outbox → Delivered.",
+        "topologyTitle": "Service topology",
+        "topologySubtitle": "Connectivity and readiness of core infrastructure nodes.",
+        "errorTitle": "Overview unavailable",
+        "errorBody": "Could not load system overview. Please try again."
+      },
+      "flow": {
+        "ariaLabel": "Operational pipeline flow diagram",
+        "nodeScheduler": "Scheduler",
+        "nodeJobs": "Jobs",
+        "nodeQueue": "Queue",
+        "nodeOutbox": "Outbox",
+        "nodeDelivered": "Delivered",
+        "tooltipScheduler": "Task scheduler — triggers periodic jobs",
+        "tooltipJobs": "Scheduled job registry — tracks each job's run history",
+        "tooltipQueue": "Celery/Redis broker — queues async work",
+        "tooltipOutbox": "Message outbox — pending and failed outbound events",
+        "tooltipDelivered": "Successfully delivered messages",
+        "ok": "OK",
+        "warn": "Warn",
+        "error": "Error",
+        "na": "n/a",
+        "allOk": "All OK",
+        "errJobs": "{count} error",
+        "totalJobs": "{count} total",
+        "jobsRegistered": "{count} registered",
+        "queueDepth": "depth {depth}",
+        "redis": "Redis {status}",
+        "outboxFailed": "{count} failed",
+        "outboxPending": "{count} pending",
+        "pending": "{count} pending",
+        "sentCount": "{count} sent",
+        "ariaLoading": "Loading flow diagram"
+      },
+      "topology": {
+        "ariaLabel": "Service topology diagram",
+        "ariaLoading": "Loading topology diagram",
+        "hubApp": "App",
+        "nodeDb": "Database",
+        "nodeRedis": "Redis",
+        "nodeCelery": "Celery",
+        "nodeOutbox": "Outbox",
+        "statusOk": "ok",
+        "statusDown": "down",
+        "statusUnknown": "unknown"
+      },
+      "jobMatrix": {
+        "ariaLabel": "Job status matrix",
+        "panelTitle": "Job status matrix",
+        "neverRun": "Never run",
+        "interval": "Every {interval}"
+      },
+      "queuesJobs": {
+        "redisTileLabel": "Redis broker",
+        "queueDepthTileLabel": "Celery queue depth",
+        "brokerConfiguredTileLabel": "Broker configured",
+        "yes": "Yes",
+        "no": "No",
+        "na": "n/a",
+        "jobsTableCaption": "Scheduled job health",
+        "col": {
+          "name": "Job",
+          "interval": "Interval",
+          "lastRun": "Last run",
+          "duration": "Duration",
+          "status": "Status"
+        },
+        "neverRun": "Never run",
+        "dash": "—",
+        "emptyTitle": "No scheduled jobs",
+        "emptyBody": "No scheduled job entries were returned by the backend.",
+        "errorTitle": "Jobs unavailable",
+        "errorBody": "Could not load scheduled job health. Please try again."
+      },
+      "services": {
+        "dbTileLabel": "Database",
+        "redisTileLabel": "Redis",
+        "outboxTitle": "Outbox health",
+        "outbox": {
+          "pending": "Pending",
+          "sent": "Sent",
+          "failed": "Failed",
+          "skipped": "Skipped",
+          "dead": "Dead",
+          "oldestPendingAge": "Oldest pending age",
+          "retryScheduled": "Retry scheduled"
+        },
+        "oldestPendingAgeSeconds": "{seconds}s",
+        "healthy": "Healthy",
+        "errorTitle": "Services unavailable",
+        "errorBody": "Could not load service health. Please try again."
+      },
+      "status": {
+        "ok": "OK",
+        "down": "Down",
+        "error": "Error",
+        "neverRun": "Never run"
+      },
+      "retry": "Retry"
+    },
+    "audit": {
+      "pageTitle": "Audit Log",
+      "pageSubtitle": "Immutable record of all superadmin and platform-level actions.",
+      "filter": {
+        "action": "Action",
+        "actionPlaceholder": "e.g. user.created",
+        "resourceType": "Resource type",
+        "resourceTypePlaceholder": "e.g. user",
+        "actorId": "Actor ID",
+        "actorIdPlaceholder": "UUID",
+        "since": "From",
+        "until": "To"
+      },
+      "exportCsv": "Export CSV",
+      "exportSuccess": "CSV download started.",
+      "exportError": "CSV export failed. Please try again.",
+      "col": {
+        "time": "Time",
+        "actor": "Actor",
+        "action": "Action",
+        "resource": "Resource"
+      },
+      "sheet": {
+        "title": "Audit entry detail",
+        "closeLabel": "Close",
+        "labelId": "Entry ID",
+        "labelOccurredAt": "Time",
+        "labelActorEmail": "Actor email",
+        "labelActorId": "Actor ID",
+        "labelActorOrgId": "Actor org ID",
+        "labelAction": "Action",
+        "labelResourceType": "Resource type",
+        "labelResourceId": "Resource ID",
+        "labelBefore": "Before",
+        "labelAfter": "After",
+        "nullValue": "—",
+        "noDiff": "—"
+      },
+      "loadMore": "Load more",
+      "emptyTitle": "No audit entries",
+      "emptyBody": "Audit entries will appear here once actions are recorded.",
+      "errorTitle": "Audit log unavailable",
+      "errorBody": "Could not load audit entries. Please try again.",
+      "retry": "Retry"
+    },
+    "logs": {
+      "pageTitle": "Logs & Activity",
+      "pageSubtitle": "Unified explorer for system audit events and AI call logs. Superadmin only.",
+      "sourceAriaLabel": "Log source selector",
+      "sourceRecent": "Recent (All)",
+      "sourceSystem": "System",
+      "sourceAi": "AI Logs",
+      "categorySystem": "System",
+      "categoryAi": "AI",
+      "recentTitle": "Recent activity",
+      "recentNote": "Showing the most recent 25 entries from each source. Use the System or AI Logs tab to page through full history.",
+      "partialError": "Some sources could not be loaded. Showing available data.",
+      "col": {
+        "time": "Time",
+        "category": "Source",
+        "summary": "Event",
+        "meta": "Status"
+      },
+      "filter": {
+        "taskType": "Task type",
+        "taskTypePlaceholder": "e.g. cv_extraction",
+        "status": "Status",
+        "statusPlaceholder": "e.g. error",
+        "since": "From",
+        "until": "To"
+      },
+      "emptyTitle": "No log entries",
+      "emptyBody": "No events found for the selected filters.",
+      "errorTitle": "Logs unavailable",
+      "errorBody": "Could not load log entries. Please try again.",
+      "retry": "Retry",
+      "logEntry": "Log entry",
+      "recentRangeAriaLabel": "Recent activity time range",
+      "rangeToday": "Today",
+      "range7d": "Last 7 days",
+      "range30d": "Last 30 days"
+    },
+    "usersAccess": {
+      "pageTitle": "Users & Access",
+      "pageSubtitle": "Manage platform user accounts, identities, and active sessions.",
+      "tabs": {
+        "users": "Users",
+        "sessions": "Sessions"
+      },
+      "filter": {
+        "searchPlaceholder": "Search by email or name…",
+        "allPersonas": "All personas",
+        "persona": {
+          "student": "Student",
+          "alumni": "Alumni",
+          "partner_member": "Partner member",
+          "university_staff": "University staff"
+        }
+      },
+      "col": {
+        "email": "Email",
+        "fullName": "Name",
+        "persona": "Persona",
+        "status": "Status",
+        "verified": "Verified"
+      },
+      "status": {
+        "active": "Active",
+        "suspended": "Suspended",
+        "verified": "Verified",
+        "unverified": "Unverified"
+      },
+      "pagination": {
+        "prev": "Previous",
+        "next": "Next",
+        "page": "Page {page} of {total}"
+      },
+      "sheet": {
+        "title": "User detail",
+        "closeLabel": "Close",
+        "coreSection": "Account",
+        "identitiesSection": "Identities",
+        "labelId": "User ID",
+        "labelEmail": "Email",
+        "labelActive": "Status",
+        "labelSuperadmin": "Superadmin",
+        "labelEmailVerified": "Email verified",
+        "labelCreatedAt": "Created",
+        "labelLastLogin": "Last login",
+        "labelSessions": "Active sessions",
+        "labelAiUsage": "AI calls (recent)",
+        "yes": "Yes",
+        "no": "No",
+        "never": "Never",
+        "identityId": "Identity",
+        "identityPersona": "Persona",
+        "identityOrg": "Org",
+        "identityPrimary": "Primary",
+        "noIdentities": "No identities"
+      },
+      "actions": {
+        "suspend": "Suspend",
+        "unsuspend": "Unsuspend",
+        "grantSuperadmin": "Grant superadmin",
+        "revokeSuperadmin": "Revoke superadmin",
+        "suspendConfirmTitle": "Suspend account",
+        "suspendConfirmBody": "This will prevent {email} from logging in. You can unsuspend at any time.",
+        "unsuspendConfirmTitle": "Unsuspend account",
+        "unsuspendConfirmBody": "This will restore login access for {email}.",
+        "grantSuperadminConfirmTitle": "Grant superadmin",
+        "grantSuperadminConfirmBody": "This gives {email} full platform-wide administrative access. Confirm only if intended.",
+        "revokeSuperadminConfirmTitle": "Revoke superadmin",
+        "revokeSuperadminConfirmBody": "This removes superadmin from {email}. If they are the last active superadmin the operation will be rejected.",
+        "confirm": "Confirm",
+        "cancel": "Cancel",
+        "suspendSuccess": "Account suspended.",
+        "suspendError": "Failed to suspend account.",
+        "unsuspendSuccess": "Account unsuspended.",
+        "unsuspendError": "Failed to unsuspend account.",
+        "grantSuperadminSuccess": "Superadmin granted.",
+        "grantSuperadminError": "Failed to grant superadmin.",
+        "revokeSuperadminSuccess": "Superadmin revoked.",
+        "revokeSuperadminError": "Failed to revoke superadmin."
+      },
+      "sessions": {
+        "col": {
+          "email": "User email",
+          "device": "Device",
+          "location": "Location",
+          "lastSeen": "Last seen",
+          "expires": "Expires",
+          "actions": "Actions"
+        },
+        "revokeAction": "Revoke",
+        "revokeConfirmTitle": "Revoke session",
+        "revokeConfirmBody": "The user will be signed out of this device immediately.",
+        "revokeConfirm": "Revoke",
+        "revokeCancel": "Cancel",
+        "revokeSuccess": "Session revoked.",
+        "revokeError": "Failed to revoke session.",
+        "loadMore": "Load more",
+        "emptyTitle": "No active sessions",
+        "emptyBody": "No sessions are currently active.",
+        "errorTitle": "Sessions unavailable",
+        "errorBody": "Could not load sessions. Please try again."
+      },
+      "emptyTitle": "No users found",
+      "emptyBody": "No users match your search. Try adjusting the filters.",
+      "errorTitle": "Users unavailable",
+      "errorBody": "Could not load the user list. Please try again.",
+      "retry": "Retry"
+    },
+    "featureFlags": {
+      "pageTitle": "Feature Flags",
+      "pageSubtitle": "Manage platform feature flags and view the system permission catalog. Superadmin only.",
+      "tabs": {
+        "flags": "Flags",
+        "permissions": "Permission Catalog"
+      },
+      "flags": {
+        "panelTitle": "Feature Flags",
+        "addFlag": "Add flag",
+        "col": {
+          "key": "Key",
+          "description": "Description",
+          "enabled": "Enabled",
+          "rollout": "Rollout",
+          "updatedBy": "Updated by",
+          "updatedAt": "Updated",
+          "actions": "Actions"
+        },
+        "rolloutFull": "Full rollout (100%)",
+        "rolloutOff": "Off (0%)",
+        "rolloutPartial": "{pct}% rollout",
+        "enabledYes": "On",
+        "enabledNo": "Off",
+        "editAction": "Edit",
+        "sheet": {
+          "addTitle": "Add feature flag",
+          "editTitle": "Edit feature flag",
+          "labelKey": "Flag key",
+          "labelKeyHelp": "Lowercase letters, numbers, dots, hyphens, and underscores (e.g. cv_studio.ai_fill or beta-2026). Cannot start or end with a separator.",
+          "labelDescription": "Description",
+          "labelDescriptionHelp": "What this flag controls. Keep it concise.",
+          "labelEnabled": "Enabled",
+          "labelEnabledHelp": "Toggle this flag on or off. Rollout percentage still applies when enabled.",
+          "labelRollout": "Rollout percentage (0–100)",
+          "labelRolloutHelp": "0 = disabled for all, 100 = fully rolled out. Values in between enable the flag for that percentage of users.",
+          "save": "Save",
+          "cancel": "Cancel",
+          "validationKey": "Key must contain only lowercase letters, numbers, dots, hyphens, and underscores, and cannot start or end with a separator.",
+          "validationKeyRequired": "Flag key is required.",
+          "validationRollout": "Rollout must be a whole number between 0 and 100.",
+          "conflictError": "A flag with this key already exists. Choose a different key or edit the existing flag.",
+          "validationBackend": "Invalid flag key. Use only lowercase letters, numbers, dots, hyphens, and underscores.",
+          "rolloutContext": "0 = off for all · 100 = fully on"
+        },
+        "emptyTitle": "No feature flags",
+        "emptyBody": "Add a feature flag to start controlling rollouts.",
+        "errorTitle": "Feature flags unavailable",
+        "errorBody": "Could not load feature flags. Please try again."
+      },
+      "permissions": {
+        "panelTitle": "Permission Catalog",
+        "panelSubtitle": "Read-only reference of all resources and their available actions in the system. Role assignment is managed in organisation RBAC.",
+        "col": {
+          "resource": "Resource",
+          "actions": "Actions"
+        },
+        "emptyTitle": "No permissions defined",
+        "emptyBody": "The permission catalog is empty.",
+        "errorTitle": "Permission catalog unavailable",
+        "errorBody": "Could not load the permission catalog. Please try again."
+      },
+      "retry": "Retry"
+    },
+    "alerts": {
+      "pageTitle": "Alerts & Incidents",
+      "pageSubtitle": "Alert rules and operational incident management. Superadmin only.",
+      "tabs": {
+        "incidents": "Incidents",
+        "rules": "Alert Rules"
+      },
+      "openSummary": "{count} open incident",
+      "openSummaryPlural": "{count} open incidents",
+      "noOpenIncidents": "No open incidents",
+      "metric": {
+        "ai_spend_vs_budget_pct": "AI spend vs budget (%)",
+        "ai_error_rate": "AI error rate",
+        "queue_depth": "Queue depth",
+        "outbox_failed": "Outbox failed"
+      },
+      "comparison": {
+        "gt": ">",
+        "lt": "<",
+        "gte": ">=",
+        "lte": "<="
+      },
+      "severity": {
+        "info": "Info",
+        "warning": "Warning",
+        "critical": "Critical"
+      },
+      "incidentStatus": {
+        "open": "Open",
+        "acknowledged": "Acknowledged",
+        "resolved": "Resolved",
+        "all": "All"
+      },
+      "channel": {
+        "in_app": "In-app",
+        "email": "Email"
+      },
+      "incidents": {
+        "statusFilter": "Status",
+        "col": {
+          "severity": "Severity",
+          "metric": "Metric",
+          "message": "Message",
+          "triggered": "Triggered",
+          "status": "Status",
+          "actions": "Actions"
+        },
+        "acknowledge": "Acknowledge",
+        "resolve": "Resolve",
+        "acknowledgeConfirmTitle": "Acknowledge incident",
+        "acknowledgeConfirmBody": "Mark this incident as acknowledged. This records that you have seen and are handling it.",
+        "resolveConfirmTitle": "Resolve incident",
+        "resolveConfirmBody": "Mark this incident as resolved. Ensure the underlying condition has been addressed.",
+        "confirm": "Confirm",
+        "cancel": "Cancel",
+        "acknowledgeSuccess": "Incident acknowledged.",
+        "acknowledgeError": "Failed to acknowledge incident.",
+        "resolveSuccess": "Incident resolved.",
+        "resolveError": "Failed to resolve incident.",
+        "loadMore": "Load more",
+        "emptyTitle": "No incidents",
+        "emptyBody": "No incidents match the selected status filter.",
+        "errorTitle": "Incidents unavailable",
+        "errorBody": "Could not load incidents. Please try again.",
+        "sheet": {
+          "title": "Incident detail",
+          "closeLabel": "Close",
+          "labelMetric": "Metric",
+          "labelValue": "Value",
+          "labelThreshold": "Threshold",
+          "labelMessage": "Message",
+          "labelRuleId": "Rule ID",
+          "timelineTitle": "Timeline",
+          "labelTriggered": "Triggered",
+          "labelAcknowledged": "Acknowledged",
+          "labelAcknowledgedBy": "Acknowledged by",
+          "labelResolved": "Resolved",
+          "notYet": "—"
+        }
+      },
+      "rules": {
+        "addRule": "Add rule",
+        "col": {
+          "name": "Name",
+          "metric": "Metric",
+          "condition": "Condition",
+          "severity": "Severity",
+          "enabled": "Enabled",
+          "channels": "Channels",
+          "actions": "Actions"
+        },
+        "editAction": "Edit",
+        "deleteAction": "Delete",
+        "deleteConfirmTitle": "Delete rule",
+        "deleteConfirmBody": "Delete the alert rule \"{name}\"? Active incidents linked to this rule will not be removed.",
+        "confirm": "Delete",
+        "cancel": "Cancel",
+        "deleteSuccess": "Rule deleted.",
+        "deleteError": "Failed to delete rule.",
+        "enabledYes": "On",
+        "enabledNo": "Off",
+        "emptyTitle": "No alert rules",
+        "emptyBody": "Add an alert rule to monitor platform metrics and trigger incidents.",
+        "errorTitle": "Rules unavailable",
+        "errorBody": "Could not load alert rules. Please try again.",
+        "sheet": {
+          "addTitle": "Add alert rule",
+          "editTitle": "Edit alert rule",
+          "labelName": "Name",
+          "labelMetric": "Metric",
+          "labelComparison": "Comparison",
+          "labelThreshold": "Threshold",
+          "labelThresholdHelp": "Numeric value the metric is compared against.",
+          "labelWindowDays": "Window (days)",
+          "labelWindowDaysHelp": "Evaluation window in days (1–90).",
+          "labelSeverity": "Severity",
+          "labelEnabled": "Enabled",
+          "labelChannels": "Notification channels",
+          "save": "Save",
+          "cancel": "Cancel",
+          "saveSuccess": "Rule saved.",
+          "saveError": "Failed to save rule.",
+          "validationName": "Name is required.",
+          "validationThreshold": "Enter a valid number.",
+          "validationWindow": "Window must be a whole number between 1 and 90."
+        }
+      },
+      "retry": "Retry"
+    },
+    "analytics": {
+      "pageTitle": "Platform Analytics",
+      "pageSubtitle": "Superadmin platform metrics — KPIs, recruitment funnel, and growth trends.",
+      "range": {
+        "label": "Time range",
+        "7d": "Last 7 days",
+        "30d": "Last 30 days"
+      },
+      "kpi": {
+        "sectionTitle": "Platform KPIs",
+        "students": "Students",
+        "partnerMembers": "Partner members",
+        "universityStaff": "University staff",
+        "jobs": "Active jobs",
+        "applications": "Applications",
+        "events": "Events",
+        "errorTitle": "KPI data unavailable",
+        "errorBody": "Could not load platform KPIs. Please try again."
+      },
+      "funnel": {
+        "panelTitle": "Recruitment Funnel",
+        "ariaLabel": "Horizontal recruitment funnel chart",
+        "emptyLabel": "No funnel data for this range",
+        "errorTitle": "Funnel data unavailable",
+        "errorBody": "Could not load the recruitment funnel. Please try again.",
+        "conversionLabel": "{pct}%",
+        "stage": {
+          "job_views": "Job views",
+          "job_applies": "Job applies",
+          "applications_submitted": "Applications submitted",
+          "under_review": "Under review",
+          "interview": "Interview",
+          "offer": "Offer",
+          "hired": "Hired",
+          "rejected": "Rejected"
+        }
+      },
+      "growth": {
+        "panelTitle": "Platform Growth",
+        "ariaLabel": "Platform growth time series chart",
+        "emptyLabel": "No growth data for this range",
+        "errorTitle": "Growth data unavailable",
+        "errorBody": "Could not load platform growth data. Please try again.",
+        "seriesSignups": "Signups",
+        "seriesApplications": "Applications",
+        "seriesActiveUsers": "Active users"
+      },
+      "retry": "Retry"
+    }
+  }
+}

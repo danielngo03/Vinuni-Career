@@ -1,27 +1,33 @@
 import { cn } from "@/lib/utils";
 
-export function Skeleton({ className }: { className?: string }) {
+/** Loading placeholder. Uses stable dimensions (UI_QUALITY_BAR.md). */
+export function Skeleton({
+  className,
+  ...props
+}: React.HTMLAttributes<HTMLDivElement>) {
   return (
     <div
-      aria-hidden
+      role="status"
+      aria-busy="true"
+      aria-live="polite"
       className={cn(
-        "animate-pulse rounded-lg bg-[linear-gradient(90deg,#edf2f8_25%,#f8fafc_50%,#edf2f8_75%)] bg-[length:200%_100%]",
+        "animate-skeleton rounded-lg bg-[var(--bg-muted)]",
         className,
       )}
-    />
+      {...props}
+    >
+      <span className="sr-only">Loading</span>
+    </div>
   );
 }
 
-export function PanelSkeleton() {
+/** Common card skeleton for dashboard tiles. */
+export function SkeletonCard() {
   return (
-    <div className="rounded-2xl border bg-white p-5">
-      <Skeleton className="h-5 w-40" />
-      <Skeleton className="mt-3 h-4 w-64 max-w-full" />
-      <div className="mt-6 space-y-3">
-        {Array.from({ length: 4 }, (_, index) => (
-          <Skeleton key={index} className="h-16 w-full" />
-        ))}
-      </div>
+    <div className="rounded-2xl border border-white/60 bg-white/82 p-6 shadow-[0_2px_12px_rgba(11,34,57,0.06)] backdrop-blur-md">
+      <Skeleton className="h-8 w-8 rounded-xl" />
+      <Skeleton className="mt-4 h-9 w-24" />
+      <Skeleton className="mt-2 h-4 w-32" />
     </div>
   );
 }

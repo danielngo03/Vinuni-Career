@@ -1,49 +1,93 @@
-"""Shared pagination primitives — generic, no ORM dependency."""
+"""Cursor and offset pagination helpers.
+
+Cursor pagination is the default for mutable lists; offset pagination is only for
+small admin/static lookup lists (``docs/API_CONTRACTS.md``). Cursors are opaque,
+URL-safe base64 tokens — clients must not parse them.
+"""
+
 from __future__ import annotations
 
+import base64
+import json
 from dataclasses import dataclass
-from typing import TypeVar
+from typing import Any
 
-T = TypeVar("T")
+from app.shared.exceptions import ValidationFailedError
+
+DEFAULT_LIMIT = 20
+MAX_LIMIT = 100
 
 
-@dataclass(frozen=True)
-class PageRequest:
-    """Cursor-based or offset-based pagination input."""
+def encode_cursor(payload: dict[str, Any]) -> str:
+    """Encode a cursor payload into an opaque URL-safe token."""
+
+    raw = json.dumps(payload, separators=(",", ":"), default=str).encode("utf-8")
+    return base64.urlsafe_b64encode(raw).decode("ascii")
+
+
+def decode_cursor(token: str | None) -> dict[str, Any] | None:
+    """Decode an opaque cursor token, raising a user-safe error if malformed."""
+
+    if not token:
+        return None
+    try:
+        raw = base64.urlsafe_b64decode(token.encode("ascii"))
+        decoded = json.loads(raw.decode("utf-8"))
+    except (ValueError, json.JSONDecodeError) as exc:
+        raise ValidationFailedError("Con trỏ phân trang không hợp lệ.") from exc
+    if not isinstance(decoded, dict):
+        raise ValidationFailedError("Con trỏ phân trang không hợp lệ.")
+    return decoded
+
+
+def clamp_limit(limit: int | None, *, default: int = DEFAULT_LIMIT) -> int:
+    """Clamp a requested page size into the allowed range."""
+
+    if limit is None:
+        return default
+    if limit < 1:
+        return 1
+    return min(limit, MAX_LIMIT)
+
+
+@dataclass(slots=True)
+class CursorPage:
+    """A single page of cursor-paginated results."""
+
+    items: list[Any]
+    next_cursor: str | None
+    limit: int
+
+
+@dataclass(slots=True)
+class OffsetParams:
+    """Offset pagination parameters for small admin/static lists."""
 
     page: int = 1
-    page_size: int = 20
-
-    def __post_init__(self) -> None:
-        if self.page < 1:
-            raise ValueError("page must be >= 1")
-        if not (1 <= self.page_size <= 200):
-            raise ValueError("page_size must be between 1 and 200")
+    page_size: int = DEFAULT_LIMIT
 
     @property
     def offset(self) -> int:
-        return (self.page - 1) * self.page_size
-
-
-@dataclass(frozen=True)
-class PageResult[T]:
-    """Paginated result envelope."""
-
-    items: list[T]
-    total: int
-    page: int
-    page_size: int
+        return (max(self.page, 1) - 1) * self.limit
 
     @property
-    def total_pages(self) -> int:
-        if self.page_size == 0:
-            return 0
-        return (self.total + self.page_size - 1) // self.page_size
+    def limit(self) -> int:
+        return clamp_limit(self.page_size)
 
-    @property
-    def has_next(self) -> bool:
-        return self.page < self.total_pages
 
-    @property
-    def has_prev(self) -> bool:
-        return self.page > 1
+def build_cursor_page(
+    rows: list[Any],
+    *,
+    limit: int,
+    cursor_builder: Any,
+) -> CursorPage:
+    """Build a :class:`CursorPage` from one extra-fetched row of lookahead.
+
+    Pass ``limit + 1`` rows: if the extra row exists there is a next page, and
+    ``cursor_builder(last_returned_row)`` produces its opaque cursor.
+    """
+
+    has_more = len(rows) > limit
+    items = rows[:limit]
+    next_cursor = encode_cursor(cursor_builder(items[-1])) if has_more and items else None
+    return CursorPage(items=items, next_cursor=next_cursor, limit=limit)

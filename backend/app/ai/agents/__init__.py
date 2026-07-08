@@ -1,15 +1,9 @@
-from app.ai.agents.cv_pipeline import CVPipelineResult, run_cv_pipeline
-from app.ai.agents.runtime import AgentExecutionError, AgentRegistry, AgentResult, AgentTask
-from app.ai.agents.workforce import WORKFORCE_VERSION, build_agent_registry, describe_workforce
+"""Multi-agent "workforce" pattern (``docs/AI_PRODUCT_SPEC.md`` §4.2).
 
-__all__ = [
-    "AgentExecutionError",
-    "AgentRegistry",
-    "AgentResult",
-    "AgentTask",
-    "CVPipelineResult",
-    "WORKFORCE_VERSION",
-    "build_agent_registry",
-    "describe_workforce",
-    "run_cv_pipeline",
-]
+A coordinator agent decomposes a complex task into idempotent subtasks,
+dispatches each subtask to a Celery worker, and aggregates results once every
+subtask has reached a terminal state. See ``workforce.py`` for the public
+entrypoint other modules should call.
+"""
+
+from __future__ import annotations

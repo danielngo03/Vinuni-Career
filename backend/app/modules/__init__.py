@@ -1,1 +1,1 @@
-"""Business modules introduced incrementally around the existing API surface."""
+"""Domain modules (DDD shape: api / application / domain / infrastructure)."""

@@ -1,0 +1,133 @@
+{
+  "settings": {
+    "title": "Cài đặt",
+    "subtitle": "Quản lý tài khoản, thông báo và bảo mật của bạn.",
+    "tabs": {
+      "general": "Chung",
+      "notifications": "Thông báo",
+      "devices": "Phiên & thiết bị",
+      "security": "Bảo mật",
+      "privacy": "Quyền riêng tư"
+    },
+    "general": {
+      "title": "Ngôn ngữ & khu vực",
+      "intro": "Ngôn ngữ hiển thị và giao diện áp dụng ngay trên thiết bị này; múi giờ được lưu vào tài khoản.",
+      "language": "Ngôn ngữ hiển thị",
+      "languageHelp": "Áp dụng cho toàn bộ giao diện và thông báo.",
+      "timezone": "Múi giờ",
+      "timezoneHelp": "Dùng để hiển thị thời hạn, lịch phỏng vấn và sự kiện.",
+      "theme": "Giao diện",
+      "themeHelp": "Chọn sáng, tối hoặc theo hệ thống.",
+      "themeLight": "Sáng",
+      "themeDark": "Tối",
+      "themeSystem": "Theo hệ thống",
+      "syncUnavailable": "Không tải được cài đặt đã lưu. Thay đổi áp dụng trên thiết bị này; lưu vào tài khoản sẽ được thử lại."
+    },
+    "notifications": {
+      "title": "Tùy chọn thông báo",
+      "intro": "Chọn cách bạn nhận thông báo. Một số loại là bắt buộc và không thể tắt.",
+      "channelInApp": "Trong ứng dụng",
+      "channelEmail": "Email",
+      "channelPush": "Đẩy (Push)",
+      "digest": "Tần suất tổng hợp",
+      "digestImmediate": "Ngay lập tức",
+      "digestDaily": "Hằng ngày",
+      "digestWeekly": "Hằng tuần",
+      "digestOff": "Tắt",
+      "mandatory": "Bắt buộc",
+      "mandatoryHint": "Cảnh báo bảo mật, pháp lý và xác nhận ứng tuyển luôn được gửi.",
+      "categorySecurity": "Cảnh báo bảo mật",
+      "categoryLegal": "Pháp lý & tuân thủ",
+      "categoryLifecycle": "Vòng đời tài khoản",
+      "categoryBilling": "Thanh toán & hóa đơn",
+      "categoryApplications": "Cập nhật ứng tuyển",
+      "categoryInterview": "Lời mời phỏng vấn",
+      "categoryOffer": "Thư mời nhận việc",
+      "categoryJobDigest": "Tổng hợp việc làm",
+      "categoryJobAlerts": "Kết quả thông báo việc làm",
+      "categoryJobs": "Gợi ý & nhắc hạn việc làm",
+      "categoryEvents": "Sự kiện & vé",
+      "categoryCv": "CV & tài liệu",
+      "categoryMessages": "Tin nhắn",
+      "pushPermissionNote": "Thông báo đẩy cần quyền của trình duyệt và chỉ bật sau khi bạn đồng ý.",
+      "quietHours": "Giờ yên lặng",
+      "quietHoursHelp": "Tạm dừng thông báo không khẩn cấp trong khung giờ này. Cảnh báo bắt buộc vẫn được gửi.",
+      "quietStart": "Từ",
+      "quietEnd": "Đến"
+    },
+    "devices": {
+      "title": "Phiên đăng nhập đang hoạt động",
+      "intro": "Các thiết bị hiện đang đăng nhập vào tài khoản của bạn.",
+      "deviceColumn": "Thiết bị",
+      "unknownDevice": "Thiết bị không xác định",
+      "thisDevice": "Thiết bị này",
+      "lastSeen": "Hoạt động gần nhất",
+      "location": "Khu vực",
+      "logout": "Đăng xuất từ xa",
+      "empty": "Chưa có phiên hoạt động nào để hiển thị.",
+      "revokedToast": "Đã đăng xuất phiên.",
+      "revokeTitle": "Đăng xuất phiên này?",
+      "revokeBody": "Thiết bị này sẽ bị đăng xuất và cần đăng nhập lại.",
+      "revokeCurrentBody": "Đây là thiết bị bạn đang dùng. Đăng xuất phiên này sẽ đăng xuất bạn khỏi đây.",
+      "revokeConfirm": "Đăng xuất",
+      "privacyNote": "Chúng tôi chỉ lưu thông tin tối giản (loại trình duyệt, hệ điều hành, khu vực mức thành phố) — không lưu IP thô hay vị trí GPS."
+    },
+    "security": {
+      "title": "Hoạt động bảo mật gần đây",
+      "intro": "Sự kiện đăng nhập, đổi mật khẩu và cảnh báo thiết bị mới.",
+      "actions": "Bảo mật tài khoản",
+      "eventColumn": "Sự kiện",
+      "occurredAt": "Thời gian",
+      "changePassword": "Đổi mật khẩu",
+      "changePasswordIntro": "Nhập mật khẩu hiện tại và chọn mật khẩu mới.",
+      "currentPassword": "Mật khẩu hiện tại",
+      "passwordChanged": "Đã cập nhật mật khẩu.",
+      "enableTotp": "Bật xác thực hai bước (TOTP)",
+      "totpIntro": "Thêm ứng dụng xác thực để tăng cường bảo mật.",
+      "totpSecretLabel": "Nhập khóa thiết lập này vào ứng dụng xác thực của bạn:",
+      "totpCodeLabel": "Mã 6 chữ số",
+      "totpVerify": "Xác minh & bật",
+      "totpEnabled": "Đã bật xác thực hai bước.",
+      "empty": "Chưa có sự kiện bảo mật nào.",
+      "eventLogin": "Đăng nhập",
+      "eventNewDevice": "Thiết bị mới",
+      "eventPasswordChange": "Đổi mật khẩu"
+    },
+    "privacy": {
+      "consentsTitle": "Sự đồng ý",
+      "consentsIntro": "Kiểm soát cách VinUni và các đối tác được sử dụng một số dữ liệu cụ thể về bạn.",
+      "consentType": {
+        "interview_recording": {
+          "label": "Ghi hình phỏng vấn",
+          "description": "Cho phép nhà tuyển dụng ghi âm/ghi hình trong các buổi phỏng vấn được lên lịch qua nền tảng."
+        },
+        "career_outcomes_data_sharing": {
+          "label": "Chia sẻ dữ liệu kết quả nghề nghiệp",
+          "description": "Cho phép nhà trường đưa kết quả việc làm (đã ẩn danh) của bạn vào báo cáo kết quả nghề nghiệp."
+        }
+      },
+      "grantedAt": "Đã đồng ý {date}",
+      "revokedAt": "Đã thu hồi {date}",
+      "retentionTitle": "Chính sách lưu trữ dữ liệu",
+      "requestsTitle": "Yêu cầu dữ liệu",
+      "requestsIntro": "Yêu cầu bản sao dữ liệu của bạn hoặc yêu cầu xóa dữ liệu tài khoản, tuân theo các yêu cầu lưu trữ pháp lý.",
+      "requestExport": "Yêu cầu xuất dữ liệu của tôi",
+      "requestDeletion": "Yêu cầu xóa tài khoản",
+      "requestSubmitted": "Đã gửi yêu cầu. Đội ngũ của chúng tôi sẽ liên hệ tiếp theo.",
+      "requestAlreadyPending": "Bạn đã có một yêu cầu cùng loại đang chờ xử lý.",
+      "noRequests": "Chưa có yêu cầu dữ liệu nào.",
+      "requestType": {
+        "export": "Xuất dữ liệu",
+        "deletion": "Xóa tài khoản"
+      },
+      "requestStatus": {
+        "pending": "Đang chờ",
+        "processing": "Đang xử lý",
+        "fulfilled": "Đã hoàn tất",
+        "rejected": "Đã từ chối"
+      }
+    },
+    "saved": "Đã lưu thay đổi.",
+    "permissionRequired": "Bạn cần đăng nhập để quản lý cài đặt này."
+  }
+}

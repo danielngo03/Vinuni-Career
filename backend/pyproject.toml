@@ -1,70 +1,82 @@
 [project]
-name = "vinuni-career-platform-backend"
+name = "vinuni-career-backend"
 version = "0.1.0"
-description = "B2B2C AI career platform backend MVP"
-requires-python = ">=3.12,<3.15"
+description = "VinUni Career Platform — FastAPI backend (greenfield Phase 0)"
+readme = "README.md"
+requires-python = ">=3.12"
 dependencies = [
     "fastapi>=0.115.0",
     "uvicorn[standard]>=0.30.0",
-    "gunicorn>=22.0.0",
-    "pydantic>=2.8.0",
-    "pydantic-settings>=2.4.0",
-    "sqlalchemy>=2.0.32",
-    "alembic>=1.13.2",
-    "psycopg[binary]>=3.2.1",
-    "PyJWT[crypto]>=2.10.0",
-    "python-multipart>=0.0.9",
-    "scalar-fastapi>=1.8.2",
+    "sqlalchemy[asyncio]>=2.0.30",
+    "asyncpg>=0.29.0",
+    "aiosqlite>=0.20.0",
+    "greenlet>=3.0.0",
+    "alembic>=1.13.0",
+    "pydantic>=2.7.0",
+    "pydantic-settings>=2.3.0",
+    "redis>=5.0.0",
     "celery>=5.4.0",
-    "redis>=5.0.8",
     "httpx>=0.27.0",
-    "boto3>=1.35.0",
-    "orjson>=3.10.7",
-    "structlog>=24.4.0",
+    "python-multipart>=0.0.9",
+    "pdfplumber>=0.11.0",
+    "pymupdf>=1.24.0",
+    "pillow>=10.0.0",
+    "python-docx>=1.1.0",
+    "pyjwt>=2.9.0",
+    "argon2-cffi>=23.1.0",
+    "pyotp>=2.9.0",
+    "fpdf2>=2.7.0",
+    "deep-translator>=1.11.4",
+    "scalar-fastapi>=1.0.0",
+    "langfuse>=4.0.0",
 ]
 
 [project.optional-dependencies]
-dev = [
-    "pytest>=8.3.2",
-    "pytest-cov>=5.0.0",
-    "ruff>=0.6.3",
-    "mypy>=1.11.1",
-]
+# Heavier OCR is opt-in only; default local profile is "ai-lite" and stays lightweight.
 ai-production = [
-    "langgraph>=0.2.70",
-    "instructor>=1.7.0",
-    "python-magic>=0.4.27",
-    "pypdf>=5.0.0",
-    "python-docx>=1.1.2",
-    "presidio-analyzer>=2.2.355",
-    "presidio-anonymizer>=2.2.355",
-    "rapidfuzz>=3.10.0",
-    "flashrank>=0.2.10",
-    "langfuse>=2.53.0",
-    "litellm>=1.52.0",
+    "pytesseract>=0.3.10",
+    "pdf2image>=1.17.0",
 ]
 
-[build-system]
-requires = ["hatchling"]
-build-backend = "hatchling.build"
+[dependency-groups]
+dev = [
+    "pytest>=8.2.0",
+    "pytest-asyncio>=0.23.0",
+    "ruff>=0.5.0",
+    "mypy>=1.10.0",
+    "pre-commit>=3.7.0",
+]
 
-[tool.hatch.build.targets.wheel]
-packages = ["app"]
-
-[tool.pytest.ini_options]
-testpaths = ["tests"]
-pythonpath = ["."]
-addopts = "-q"
+[tool.uv]
+package = false
 
 [tool.ruff]
+target-version = "py312"
 line-length = 100
-target-version = "py314"
+src = ["app", "tests"]
+extend-exclude = ["alembic/versions"]
 
 [tool.ruff.lint]
-select = ["E", "F", "I", "B", "UP", "SIM"]
-ignore = [
-    "B008",
-    "E501",
-    "SIM102",
-    "UP042",
-]
+select = ["E", "F", "I", "UP", "B", "C4", "ASYNC"]
+ignore = ["B008"]  # FastAPI uses function calls (Depends/Query) in argument defaults.
+
+[tool.mypy]
+python_version = "3.12"
+files = ["app"]
+plugins = ["pydantic.mypy"]
+ignore_missing_imports = true
+warn_unused_ignores = false
+warn_redundant_casts = true
+no_implicit_optional = true
+check_untyped_defs = true
+exclude = ["alembic/", "tests/"]
+
+[[tool.mypy.overrides]]
+module = ["pdfplumber.*", "docx.*", "celery.*"]
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+addopts = "-q"
+filterwarnings = ["ignore::DeprecationWarning"]

@@ -1,23 +1,27 @@
-# Install git pre-push hook for AI log submission (Windows PowerShell).
-# Run once after cloning: powershell -ExecutionPolicy Bypass -File scripts\setup_hooks.ps1
+$ErrorActionPreference = "Stop"
 
-$ErrorActionPreference = 'Stop'
+$root = git rev-parse --show-toplevel 2>$null
+if (-not $root) { $root = (Get-Location).Path }
+Set-Location $root
 
-$HookFile = '.git/hooks/pre-push'
+New-Item -ItemType Directory -Force -Path ".ai-log/archive" | Out-Null
+New-Item -ItemType Directory -Force -Path ".git/hooks" | Out-Null
+if (-not (Test-Path ".ai-log/.gitkeep")) {
+  New-Item -ItemType File -Path ".ai-log/.gitkeep" | Out-Null
+}
 
-# Git on Windows runs hooks via Git Bash, so the hook body must be bash.
-$HookBody = @'
+$hook = @'
 #!/usr/bin/env bash
-# Pre-push: sweep recent Antigravity / Gemini prompts, then submit AI logs.
-bash scripts/_pyrun.sh scripts/log_antigravity.py --auto || true
-bash scripts/_pyrun.sh scripts/submit_log.py || true
-exit 0
+set -euo pipefail
+
+ROOT="$(git rev-parse --show-toplevel 2>/dev/null || pwd)"
+cd "$ROOT"
+
+bash scripts/_pyrun.sh scripts/log_antigravity.py || true
+bash scripts/_pyrun.sh scripts/submit_log.py
 '@
 
-Set-Content -Path $HookFile -Value $HookBody -Encoding UTF8 -NoNewline
-Write-Host "[ai-log] Git pre-push hook installed."
-
-if (-not (Test-Path .ai-log)) { New-Item -ItemType Directory -Path .ai-log | Out-Null }
-if (-not (Test-Path .ai-log/.gitkeep)) { New-Item -ItemType File -Path .ai-log/.gitkeep | Out-Null }
-
-Write-Host "[ai-log] Setup complete. Configure AI_LOG_SERVER in your .env file."
+Set-Content -Path ".git/hooks/pre-push" -Value $hook -Encoding UTF8
+Write-Host "AI logging hooks installed."
+Write-Host "Pre-push hook: .git/hooks/pre-push"
+Write-Host "Log file: .ai-log/session.jsonl"

@@ -1,170 +1,232 @@
 #!/usr/bin/env python3
-"""
-Submit .ai-log/session.jsonl to grading server.
-Called by git pre-push hook or manually.
+"""Submit .ai-log/session.jsonl to the grading server, then archive on success."""
 
-After a successful submit, the live log is rotated:
-  - Moved into .ai-log/archive/YYYY-MM-DD.jsonl (appended, never overwritten)
-  - The live session.jsonl is recreated empty by the next hook write
+from __future__ import annotations
 
-If the POST fails, the pending file is restored so nothing is lost.
-"""
+import argparse
 import json
 import os
-import shutil
+import subprocess
 import sys
 import time
-import urllib.request
 import urllib.error
-from datetime import datetime, timezone
+import urllib.request
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
-def _load_dotenv(path: Path = Path(".env")) -> None:
-    """Load simple KEY=VALUE pairs without requiring python-dotenv in hooks."""
-    if not path.exists():
-        return
+VN_TZ = timezone(timedelta(hours=7))
+MAX_BATCH_BYTES = 700_000
+MAX_BATCH_ENTRIES = 500
+BATCH_PAUSE_SECONDS = 3
+MAX_RETRIES = 5
+RETRY_STATUSES = {429, 500, 502, 503, 504}
+
+
+def git(args: list[str], cwd: Path) -> str:
     try:
-        lines = path.read_text(encoding="utf-8-sig").splitlines()
-    except OSError:
-        return
-    for line in lines:
-        line = line.strip()
+        return subprocess.check_output(["git", *args], cwd=cwd, text=True, stderr=subprocess.DEVNULL).strip()
+    except Exception:
+        return ""
+
+
+def load_env(root: Path) -> dict[str, str]:
+    values = dict(os.environ)
+    env_path = root / ".env"
+    if not env_path.exists():
+        return values
+    for raw in env_path.read_text(encoding="utf-8", errors="replace").splitlines():
+        line = raw.strip()
         if not line or line.startswith("#") or "=" not in line:
             continue
         key, value = line.split("=", 1)
-        key = key.strip()
-        value = value.strip().strip("\"'")
-        if key and key not in os.environ:
-            os.environ[key] = value
+        values.setdefault(key.strip(), value.strip().strip('"').strip("'"))
+    return values
 
 
-_load_dotenv()
-
-SERVER_URL = os.environ.get("AI_LOG_SERVER", "")
-API_KEY = os.environ.get("AI_LOG_API_KEY", "")
-LOG_DIR = Path(os.environ.get("AI_LOG_DIR", ".ai-log"))
-LOG_FILE = LOG_DIR / "session.jsonl"
-ARCHIVE_DIR = LOG_DIR / "archive"
-
-# Match server-side MAX_BATCH_ENTRIES so we never get a 422.
-# If the local file has more than this, we submit the oldest BATCH_LIMIT
-# and leave the rest for the next push.
-BATCH_LIMIT = 500
-
-
-def _archive(pending: Path) -> None:
-    """Append pending file to today's archive. Never overwrites existing data."""
-    if not pending.exists() or pending.stat().st_size == 0:
-        return
-    ARCHIVE_DIR.mkdir(parents=True, exist_ok=True)
-    today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
-    archive_file = ARCHIVE_DIR / f"{today}.jsonl"
-    with open(pending, "rb") as src, open(archive_file, "ab") as dst:
-        shutil.copyfileobj(src, dst)
-
-
-def _restore_pending(pending: Path) -> None:
-    """Failure path: put pending back at LOG_FILE so the next push retries.
-    If hook wrote new entries to LOG_FILE in the meantime, prepend pending."""
-    if not pending.exists():
-        return
-    if LOG_FILE.exists():
-        # Concat: pending (older) + LOG_FILE (newer) → LOG_FILE
-        tmp = LOG_FILE.with_suffix(".merge.jsonl")
-        with open(tmp, "wb") as out:
-            with open(pending, "rb") as a:
-                shutil.copyfileobj(a, out)
-            with open(LOG_FILE, "rb") as b:
-                shutil.copyfileobj(b, out)
-        os.replace(tmp, LOG_FILE)
-        pending.unlink()
-    else:
-        pending.rename(LOG_FILE)
-
-
-def main():
-    if not SERVER_URL:
-        print("[ai-log] AI_LOG_SERVER not set — skipping submission.", file=sys.stderr)
-        sys.exit(0)
-
-    if not LOG_FILE.exists() or LOG_FILE.stat().st_size == 0:
-        print("[ai-log] No logs to submit.", file=sys.stderr)
-        sys.exit(0)
-
-    # Atomic rename closes the race window: hook writes that arrive after this
-    # land in a fresh LOG_FILE, not in the batch we're about to POST.
-    pending = LOG_FILE.with_name(f"session.pending.{int(time.time())}.jsonl")
-    try:
-        LOG_FILE.rename(pending)
-    except FileNotFoundError:
-        print("[ai-log] No logs to submit.", file=sys.stderr)
-        sys.exit(0)
-
-    entries = []
-    leftover_lines = []
-    with open(pending, encoding="utf-8") as f:
-        for line in f:
-            stripped = line.strip()
-            if not stripped:
-                continue
-            if len(entries) >= BATCH_LIMIT:
-                leftover_lines.append(line)
-                continue
-            try:
-                entries.append(json.loads(stripped))
-            except json.JSONDecodeError:
-                pass  # drop unparseable line
-
-    if not entries:
-        # Nothing to send; archive whatever was there (probably junk) and bail.
-        _archive(pending)
-        pending.unlink()
-        print("[ai-log] No valid entries to submit.", file=sys.stderr)
-        sys.exit(0)
-
-    payload = json.dumps({"entries": entries}, ensure_ascii=False).encode("utf-8")
-    headers = {"Content-Type": "application/json"}
-    if API_KEY:
-        headers["Authorization"] = f"Bearer {API_KEY}"
-    req = urllib.request.Request(
-        SERVER_URL,
-        data=payload,
-        headers=headers,
+def post_bytes(url: str, api_key: str, body: bytes, content_type: str) -> tuple[int, str]:
+    request = urllib.request.Request(
+        url,
+        data=body,
+        headers={
+            "Content-Type": content_type,
+            "Authorization": f"Bearer {api_key}",
+            "X-API-Key": api_key,
+            "User-Agent": "vinuni-ai-log-hook/1.0",
+        },
         method="POST",
     )
-
     try:
-        with urllib.request.urlopen(req, timeout=10) as resp:
-            print(f"[ai-log] Submitted {len(entries)} entries → {resp.status}", file=sys.stderr)
-    except urllib.error.HTTPError as e:
-        body = e.read().decode("utf-8", errors="replace")[:500]
-        _restore_pending(pending)
+        with urllib.request.urlopen(request, timeout=30) as response:
+            return response.status, response.read().decode("utf-8", errors="replace")
+    except urllib.error.HTTPError as exc:
+        return exc.code, exc.read().decode("utf-8", errors="replace")
+
+
+def chunk_lines(
+    raw: bytes,
+    max_bytes: int = MAX_BATCH_BYTES,
+    max_entries: int = MAX_BATCH_ENTRIES,
+) -> list[bytes]:
+    chunks: list[bytes] = []
+    current = bytearray()
+    current_entries = 0
+    for line in raw.splitlines(keepends=True):
+        if not line.strip():
+            continue
+        if current and (len(current) + len(line) > max_bytes or current_entries >= max_entries):
+            chunks.append(bytes(current))
+            current.clear()
+            current_entries = 0
+        current.extend(line)
+        current_entries += 1
+    if current:
+        chunks.append(bytes(current))
+    return chunks
+
+
+def submit_chunk(server: str, api_key: str, body: bytes, root: Path) -> tuple[int, str]:
+    status, text = post_bytes(server, api_key, body, "application/x-ndjson")
+    if status not in (400, 404, 415, 422):
+        return status, text
+
+    entries = []
+    for line in body.decode("utf-8", errors="replace").splitlines():
+        if not line.strip():
+            continue
+        try:
+            entries.append(json.loads(line))
+        except json.JSONDecodeError:
+            entries.append({"raw": line})
+    envelope = {
+        "repo": git(["remote", "get-url", "vinuni"], root)
+        or git(["remote", "get-url", "origin"], root)
+        or root.name,
+        "branch": git(["rev-parse", "--abbrev-ref", "HEAD"], root),
+        "commit": git(["rev-parse", "--short", "HEAD"], root),
+        "entries": entries,
+    }
+    return post_bytes(
+        server,
+        api_key,
+        json.dumps(envelope, ensure_ascii=False).encode("utf-8"),
+        "application/json",
+    )
+
+
+def load_completed_batches(progress_path: Path) -> int:
+    try:
+        data = json.loads(progress_path.read_text(encoding="utf-8"))
+    except Exception:
+        return 0
+    try:
+        return max(0, int(data.get("completed_batches", 0)))
+    except Exception:
+        return 0
+
+
+def save_completed_batches(progress_path: Path, completed_batches: int) -> None:
+    progress_path.write_text(
+        json.dumps({"completed_batches": completed_batches}, ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+    )
+
+
+def clear_progress(progress_path: Path) -> None:
+    try:
+        progress_path.unlink()
+    except FileNotFoundError:
+        pass
+
+
+def submit_chunk_with_retry(server: str, api_key: str, body: bytes, root: Path, index: int) -> tuple[int, str]:
+    for attempt in range(MAX_RETRIES + 1):
+        status, text = submit_chunk(server, api_key, body, root)
+        if status not in RETRY_STATUSES:
+            return status, text
+        if attempt >= MAX_RETRIES:
+            return status, text
+        delay = BATCH_PAUSE_SECONDS * (2**attempt)
         print(
-            f"[ai-log] Submit failed: HTTP {e.code} {e.reason}: {body} "
-            "— logs kept locally.",
+            f"AI log submit hit HTTP {status} on batch {index}; retrying in {delay:.0f}s.",
             file=sys.stderr,
         )
-        sys.exit(0)  # Don't block push on server error
-    except urllib.error.URLError as e:
-        # Failure: restore the whole pending (including leftover) for next push.
-        _restore_pending(pending)
-        print(f"[ai-log] Submit failed: {e} — logs kept locally.", file=sys.stderr)
-        sys.exit(0)  # Don't block push on server error
+        time.sleep(delay)
+    return status, text
 
-    # Success: archive the submitted batch, then handle any leftover.
-    _archive(pending)
-    pending.unlink()
 
-    if leftover_lines:
-        # More than BATCH_LIMIT entries existed; put the rest back so the
-        # next push picks them up.
-        with open(LOG_FILE, "a", encoding="utf-8") as f:
-            f.writelines(leftover_lines)
+def archive_session(session_path: Path) -> Path:
+    archive_dir = session_path.parent / "archive"
+    archive_dir.mkdir(parents=True, exist_ok=True)
+    archive_path = archive_dir / f"{datetime.now(VN_TZ).date().isoformat()}.jsonl"
+    with session_path.open("rb") as src, archive_path.open("ab") as dst:
+        dst.write(src.read())
+    session_path.write_text("", encoding="utf-8")
+    return archive_path
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--dry-run", action="store_true")
+    parser.add_argument("--keep-session", action="store_true", help="Submit without archiving session.jsonl")
+    args = parser.parse_args()
+
+    root_text = git(["rev-parse", "--show-toplevel"], Path.cwd())
+    root = Path(root_text).resolve() if root_text else Path.cwd().resolve()
+    env = load_env(root)
+
+    log_dir = Path(env.get("AI_LOG_DIR", ".ai-log"))
+    if not log_dir.is_absolute():
+        log_dir = root / log_dir
+    session_path = log_dir / "session.jsonl"
+    progress_path = log_dir / "submit-progress.json"
+    if not session_path.exists() or session_path.stat().st_size == 0:
+        clear_progress(progress_path)
+        print("AI log: no session log to submit.")
+        return 0
+
+    server = env.get("AI_LOG_SERVER", "").strip()
+    api_key = env.get("AI_LOG_API_KEY", "").strip()
+    if not server or not api_key or api_key.startswith("replace-with"):
+        print("AI log submit failed: AI_LOG_SERVER/AI_LOG_API_KEY is missing in .env.", file=sys.stderr)
+        return 1
+
+    raw = session_path.read_bytes()
+    line_count = sum(1 for line in raw.splitlines() if line.strip())
+    batches = chunk_lines(raw)
+    completed_batches = min(load_completed_batches(progress_path), len(batches))
+    if args.dry_run:
+        resume_text = f"; resume after {completed_batches} completed batch(es)" if completed_batches else ""
         print(
-            f"[ai-log] {len(leftover_lines)} entries deferred to next push.",
-            file=sys.stderr,
+            f"AI log dry-run: {line_count} entries ready in {len(batches)} batch(es){resume_text} "
+            f"from {session_path}."
         )
+        return 0
+
+    for index, batch in enumerate(batches, start=1):
+        if index <= completed_batches:
+            continue
+        status, text = submit_chunk_with_retry(server, api_key, batch, root, index)
+        if not 200 <= status < 300:
+            print(
+                f"AI log submit failed on batch {index}/{len(batches)} with HTTP {status}. "
+                f"Logs remain in {session_path}.",
+                file=sys.stderr,
+            )
+            if text:
+                print(text[:500], file=sys.stderr)
+            return 1
+        save_completed_batches(progress_path, index)
+        if index < len(batches):
+            time.sleep(BATCH_PAUSE_SECONDS)
+
+    if args.keep_session:
+        print(f"AI log submitted {line_count} entries in {len(batches)} batch(es); session kept.")
+    else:
+        archive_path = archive_session(session_path)
+        clear_progress(progress_path)
+        print(f"AI log submitted {line_count} entries in {len(batches)} batch(es); archived to {archive_path}.")
+    return 0
 
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())

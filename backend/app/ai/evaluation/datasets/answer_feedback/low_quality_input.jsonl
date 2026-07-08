@@ -1,0 +1,5 @@
+{"id": "af_lowq_empty_llm_json_falls_back", "input": {"llm_json": {}}, "expect": {"is_fallback": true, "no_crash": true}}
+{"id": "af_lowq_missing_score_key_defaults_3", "input": {"llm_json": {"praise": "Good.", "improve": "Better.", "hint": ""}}, "expect": {"score_equals": 3, "no_crash": true}}
+{"id": "af_lowq_missing_hint_key", "input": {"llm_json": {"score": 4, "praise": "Good.", "improve": "Better."}}, "expect": {"is_fallback": false, "no_crash": true}}
+{"id": "af_lowq_all_fields_empty_strings", "input": {"llm_json": {"score": 3, "praise": "", "improve": "", "hint": ""}}, "expect": {"is_fallback": true, "no_crash": true}}
+{"id": "af_lowq_score_zero", "input": {"llm_json": {"score": 0, "praise": "Weak.", "improve": "Everything.", "hint": ""}}, "expect": {"score_equals": 1, "no_crash": true}}

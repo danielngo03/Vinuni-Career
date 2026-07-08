@@ -1,0 +1,5 @@
+{"id": "kb_lowq_empty_answer", "input": {"answer": "", "sources": ["Internship Policy"]}, "expect": {"hallucination_risk": false, "cited_count": 0, "no_crash": true}}
+{"id": "kb_lowq_whitespace_answer", "input": {"answer": "   ", "sources": ["Internship Policy"]}, "expect": {"hallucination_risk": false, "cited_count": 0, "no_crash": true}}
+{"id": "kb_lowq_empty_sources_no_citation", "input": {"answer": "Xin lỗi, mình chưa tìm thấy thông tin phù hợp.", "sources": []}, "expect": {"hallucination_risk": false, "cited_count": 0, "no_crash": true}}
+{"id": "kb_lowq_malformed_citation_no_name", "input": {"answer": "Theo , bạn cần đăng ký trước.", "sources": ["Internship Policy"]}, "expect": {"no_crash": true}}
+{"id": "kb_lowq_very_long_document_title_match", "input": {"answer": "Theo Quy Định Thực Tập Dành Cho Sinh Viên Quốc Tế Năm Học 2026-2027 — cần đăng ký sớm.", "sources": ["Quy Định Thực Tập Dành Cho Sinh Viên Quốc Tế Năm Học 2026-2027"]}, "expect": {"hallucination_risk": false, "grounded_count": 1}}

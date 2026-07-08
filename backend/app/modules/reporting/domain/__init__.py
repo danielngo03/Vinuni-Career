@@ -1,1 +1,0 @@
-"""Reporting projection domain."""

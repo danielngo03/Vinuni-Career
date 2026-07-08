@@ -1,0 +1,3 @@
+{"id": "sc_fallback_provider_down_basic", "input": {"provider": "unavailable"}, "expect": {"is_fallback": true, "recommendation_equals": null, "confidence_equals": "low", "no_crash": true}}
+{"id": "sc_fallback_provider_down_all_criteria_null", "input": {"provider": "unavailable"}, "expect": {"is_fallback": true, "criterion_score_equals": {"field": "technical", "value": null}, "all_criteria_present": true}}
+{"id": "sc_fallback_provider_down_no_provider_leak", "input": {"provider": "unavailable"}, "expect": {"is_fallback": true, "no_provider_leak": true, "no_model_leak": true}}

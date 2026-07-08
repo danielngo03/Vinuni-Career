@@ -1,0 +1,5 @@
+{"id": "ip_lowq_empty_llm_json_falls_back", "input": {"llm_json": {}}, "expect": {"is_fallback": true, "question_count_at_least": 5, "no_crash": true}}
+{"id": "ip_lowq_missing_prep_tips", "input": {"llm_json": {"questions": [{"question": "Q1"}]}}, "expect": {"is_fallback": false, "no_crash": true}}
+{"id": "ip_lowq_empty_questions_list_falls_back", "input": {"llm_json": {"questions": [], "prep_tips": "Tips."}}, "expect": {"is_fallback": true, "no_crash": true}}
+{"id": "ip_lowq_single_question_no_hint_rubric", "input": {"llm_json": {"questions": [{"question": "Minimal question."}]}}, "expect": {"is_fallback": false, "no_crash": true}}
+{"id": "ip_lowq_prep_tips_empty_string", "input": {"llm_json": {"questions": [{"question": "Q1"}], "prep_tips": ""}}, "expect": {"is_fallback": false, "no_crash": true}}

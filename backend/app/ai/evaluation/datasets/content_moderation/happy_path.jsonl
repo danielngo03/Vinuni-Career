@@ -1,0 +1,12 @@
+{"id": "cm_happy_clean_jd_en", "input": {"text": "We are hiring a Data Analyst with 1+ years of SQL experience. Competitive salary and mentorship."}, "expect": {"flagged": false, "policy_violation": false}}
+{"id": "cm_happy_clean_jd_vi", "input": {"text": "Tuyển thực tập sinh Marketing, hỗ trợ lương 5 triệu/tháng, đào tạo bài bản, môi trường trẻ."}, "expect": {"flagged": false, "policy_violation": false}}
+{"id": "cm_happy_fee_vi_high", "input": {"text": "Ứng viên vui lòng nộp phí hồ sơ 200.000đ trước khi phỏng vấn."}, "expect": {"flagged": true, "policy_violation": true, "category_contains": "fee_collection"}}
+{"id": "cm_happy_deposit_vi_high", "input": {"text": "Yêu cầu đặt cọc 500k để giữ chỗ làm việc."}, "expect": {"flagged": true, "policy_violation": true, "category_contains": "fee_collection"}}
+{"id": "cm_happy_fee_en_high", "input": {"text": "A training fee of $50 must be paid before onboarding."}, "expect": {"flagged": true, "policy_violation": true, "category_contains": "fee_collection"}}
+{"id": "cm_happy_mlm_vi_high", "input": {"text": "Cơ hội kinh doanh đa cấp thu nhập hấp dẫn cho sinh viên."}, "expect": {"flagged": true, "policy_violation": true, "category_contains": "pyramid_scheme"}}
+{"id": "cm_happy_mlm_en_high", "input": {"text": "Join our network marketing team and recruit your own downline."}, "expect": {"flagged": true, "policy_violation": true, "category_contains": "pyramid_scheme"}}
+{"id": "cm_happy_viec_nhe_luong_cao_high", "input": {"text": "Việc nhẹ lương cao, chỉ cần điện thoại, làm tại nhà."}, "expect": {"flagged": true, "policy_violation": true, "category_contains": "unrealistic_earnings"}}
+{"id": "cm_happy_thu_nhap_khung_medium", "input": {"text": "Thu nhập khủng lên tới 50 triệu/tháng cho người mới."}, "expect": {"flagged": true, "policy_violation": false, "category_contains": "unrealistic_earnings"}}
+{"id": "cm_happy_zalo_pressure_medium", "input": {"text": "Nhắn tin qua Zalo trước để được nhận việc ngay, không cần phỏng vấn."}, "expect": {"flagged": true, "policy_violation": false, "category_contains": "off_platform_contact"}}
+{"id": "cm_happy_adult_en_high", "input": {"text": "Hiring hostesses for adult entertainment venues, high tips."}, "expect": {"flagged": true, "policy_violation": true, "category_contains": "adult_content"}}
+{"id": "cm_happy_legit_zalo_listing_not_flagged", "input": {"text": "Ứng tuyển qua nền tảng. Thông tin thêm: phòng nhân sự, SĐT công ty trên website."}, "expect": {"flagged": false, "policy_violation": false}}

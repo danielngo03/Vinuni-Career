@@ -1,60 +1,72 @@
+"""Shared test fixtures.
+
+The whole suite runs WITHOUT real provider keys and WITHOUT requiring Redis or
+Postgres: a temporary SQLite file backs the ORM so all connections share state.
+"""
+
 from __future__ import annotations
 
 import os
-import shutil
+import tempfile
+from collections.abc import AsyncIterator
 from pathlib import Path
 
 import pytest
-from fastapi.testclient import TestClient
 
-os.environ.setdefault("APP_ENV", "test")
-os.environ.setdefault("DATABASE_URL", "sqlite:///./test.db")
-os.environ.setdefault("SECRET_KEY", "test-secret-key-with-enough-length")
-os.environ.setdefault("ENFORCE_RBAC", "false")
-os.environ.setdefault("LLM_PROVIDER", "offline")
-os.environ.setdefault("LLM_PROVIDER_CHAIN", "offline")
-os.environ.setdefault("EMBEDDING_PROVIDER_CHAIN", "offline")
-os.environ.setdefault("RERANK_PROVIDER", "offline")
-os.environ.setdefault("INTERNAL_SERVICE_TOKEN", "test-internal-service-token")
+# Point the app at a temporary file-backed SQLite DB BEFORE importing app code.
+_TMP_DIR = tempfile.mkdtemp(prefix="vinuni_test_")
+_DB_PATH = Path(_TMP_DIR) / "test.db"
+os.environ["DATABASE_URL"] = f"sqlite+aiosqlite:///{_DB_PATH}"
+# --- Test environment isolation (docs/ENVIRONMENT.md, testing.md) -----------
+# Tests MUST NOT depend on backend/.env real-call settings or alias overrides.
+# Pin all AI-relevant env vars here so test behaviour is deterministic regardless
+# of what the developer has set in backend/.env.
+os.environ["AI_REAL_CALLS_ENABLED"] = "false"
+os.environ["AI_DEFAULT_MODEL_ALIAS"] = "chat_default"  # pin the function slots
+os.environ["AI_REASONING_MODEL_ALIAS"] = "reasoning_default"
+os.environ["AI_EMBEDDING_MODEL_ALIAS"] = "embedding_default"
+os.environ["AI_RERANK_MODEL_ALIAS"] = "rerank_default"
+os.environ["AI_EVAL_MODEL_ALIAS"] = "eval_default"
+os.environ["AI_DAILY_COST_LIMIT_USD"] = "1.00"
+os.environ["OPENROUTER_API_KEY"] = "replace-with-local-key"   # placeholder → key_configured False
+os.environ["CV_LLM_STRUCTURING_ENABLED"] = "false"
+os.environ["AUDIT_LOG_ENABLED"] = "true"
 
-from app.main import app  # noqa: E402
-from app.platform.cache.factory import get_cache  # noqa: E402
-from app.platform.database import models  # noqa: E402,F401
-from app.platform.database.session import Base, engine  # noqa: E402
-from app.platform.search.factory import get_search_client  # noqa: E402
+from app.core.config import get_settings  # noqa: E402
+from app.core.db import dispose_engine, get_engine, get_sessionmaker  # noqa: E402
+from app.core.metadata import import_all_models, target_metadata  # noqa: E402
+
+get_settings.cache_clear()
+
+
+@pytest.fixture(scope="session", autouse=True)
+async def _create_schema() -> AsyncIterator[None]:
+    import_all_models()
+    engine = get_engine()
+    async with engine.begin() as conn:
+        await conn.run_sync(target_metadata.create_all)
+    yield
+    await dispose_engine()
 
 
 @pytest.fixture(autouse=True)
-def reset_database():
-    get_cache.cache_clear()
-    get_search_client.cache_clear()
-    Base.metadata.drop_all(bind=engine)
-    Base.metadata.create_all(bind=engine)
+async def _clean_tables(_create_schema: None) -> AsyncIterator[None]:
+    """Truncate all tables after each test for cross-test isolation.
+
+    The schema is created once per session; services commit their own
+    transactions, so committed rows would otherwise leak between tests.
+    """
+
     yield
-    Base.metadata.drop_all(bind=engine)
-    shutil.rmtree(Path(".data"), ignore_errors=True)
+    sessionmaker = get_sessionmaker()
+    async with sessionmaker() as session:
+        for table in reversed(target_metadata.sorted_tables):
+            await session.execute(table.delete())
+        await session.commit()
 
 
 @pytest.fixture
-def client() -> TestClient:
-    with TestClient(app) as test_client:
-        yield test_client
-
-
-@pytest.fixture
-def auth_headers(client: TestClient) -> dict[str, str]:
-    response = client.post(
-        "/api/v1/auth/register",
-        json={
-            "email": "owner@example.com",
-            "password": "StrongPass123!",
-            "full_name": "Platform Owner",
-        },
-    )
-    assert response.status_code == 201
-    login = client.post(
-        "/api/v1/auth/login",
-        json={"email": "owner@example.com", "password": "StrongPass123!"},
-    )
-    assert login.status_code == 200
-    return {"Authorization": f"Bearer {login.json()['access_token']}"}
+async def db_session() -> AsyncIterator:
+    sessionmaker = get_sessionmaker()
+    async with sessionmaker() as session:
+        yield session

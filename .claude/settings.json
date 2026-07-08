@@ -1,24 +1,65 @@
 {
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "env": {
+    "CLAUDE_PROJECT_NAME": "vinuni-career-platform",
+    "CLAUDE_GREENFIELD_MODE": "1"
+  },
+  "permissions": {
+    "deny": [
+      "Read(./.env.production)",
+      "Read(./.env.prod)",
+      "Read(./**/.env.production)",
+      "Read(./**/.env.prod)",
+      "Read(./**/secrets/**)",
+      "Bash(rm -rf *)",
+      "Bash(git reset --hard*)",
+      "Bash(git clean -fd*)",
+      "Bash(git push --force*)",
+      "Bash(chmod -R 777*)",
+      "Bash(curl * | sh*)",
+      "Bash(curl * | bash*)",
+      "Bash(wget * | sh*)",
+      "Bash(wget * | bash*)",
+      "Bash(docker compose down -v*)",
+      "Bash(kubectl delete *)",
+      "Bash(terraform destroy*)"
+    ]
+  },
   "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash|Edit|Write|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"${CLAUDE_PROJECT_DIR}/.claude/hooks/run-python.sh\" \"${CLAUDE_PROJECT_DIR}/.claude/hooks/guard-sensitive.py\"",
+            "shell": "bash",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
     "UserPromptSubmit": [
       {
         "hooks": [
           {
             "type": "command",
-            "command": "bash scripts/_pyrun.sh scripts/log_hook.py --tool=claude",
-            "shell": "bash"
+            "command": "bash \"${CLAUDE_PROJECT_DIR}/.claude/hooks/run-python.sh\" \"${CLAUDE_PROJECT_DIR}/.claude/hooks/log-hook.py\" --tool=claude",
+            "shell": "bash",
+            "timeout": 10
           }
         ]
       }
     ],
     "PostToolUse": [
       {
-        "matcher": ".*",
+        "matcher": "Bash|Edit|Write|MultiEdit",
         "hooks": [
           {
             "type": "command",
-            "command": "bash scripts/_pyrun.sh scripts/log_hook.py --tool=claude",
-            "shell": "bash"
+            "command": "bash \"${CLAUDE_PROJECT_DIR}/.claude/hooks/run-python.sh\" \"${CLAUDE_PROJECT_DIR}/.claude/hooks/log-hook.py\" --tool=claude",
+            "shell": "bash",
+            "timeout": 10
           }
         ]
       }
@@ -28,11 +69,17 @@
         "hooks": [
           {
             "type": "command",
-            "command": "bash scripts/_pyrun.sh scripts/log_hook.py --tool=claude",
-            "shell": "bash"
+            "command": "bash \"${CLAUDE_PROJECT_DIR}/.claude/hooks/run-python.sh\" \"${CLAUDE_PROJECT_DIR}/.claude/hooks/log-hook.py\" --tool=claude",
+            "shell": "bash",
+            "timeout": 10
           }
         ]
       }
     ]
+  },
+  "enabledPlugins": {
+    "frontend-design@claude-plugins-official": true,
+    "code-review@claude-plugins-official": true,
+    "claude-code-setup@claude-plugins-official": true
   }
 }

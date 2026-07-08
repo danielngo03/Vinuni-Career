@@ -1,0 +1,35 @@
+# Pre-commit hooks for the backend (lint + format check + typecheck).
+#
+# One-time setup (run once per clone, from backend/):
+#   uv run pre-commit install
+#
+# This wires these hooks to run automatically on `git commit`. To run them
+# manually against the whole repo without committing:
+#   uv run pre-commit run --all-files
+#
+# Hooks call the project's own `uv run` tools (not a separate pre-commit
+# venv's copy of ruff/mypy) so hook behavior always matches `make lint` /
+# `make typecheck` / `make check` exactly — no separate version to drift.
+repos:
+  - repo: local
+    hooks:
+      - id: ruff-check
+        name: ruff check (backend)
+        entry: uv run ruff check
+        language: system
+        types: [python]
+        pass_filenames: true
+
+      - id: ruff-format-check
+        name: ruff format --check (backend)
+        entry: uv run ruff format --check
+        language: system
+        types: [python]
+        pass_filenames: true
+
+      - id: mypy
+        name: mypy (backend)
+        entry: uv run mypy app
+        language: system
+        types: [python]
+        pass_filenames: false

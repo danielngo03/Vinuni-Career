@@ -1,0 +1,6 @@
+{"id": "af_adv_non_numeric_score_defaults_safely", "input": {"llm_json": {"score": "five", "praise": "Good.", "improve": "Improve X.", "hint": "Try Y."}}, "expect": {"score_equals": 3, "no_crash": true}}
+{"id": "af_adv_score_above_range_clamped", "input": {"llm_json": {"score": 99, "praise": "Amazing.", "improve": "None.", "hint": ""}}, "expect": {"score_in_range": true, "score_equals": 5}}
+{"id": "af_adv_score_below_range_clamped", "input": {"llm_json": {"score": -20, "praise": "", "improve": "Everything.", "hint": ""}}, "expect": {"score_in_range": true, "score_equals": 1}}
+{"id": "af_adv_float_string_score_defaults_safely", "input": {"llm_json": {"score": "4.7", "praise": "Good.", "improve": "Tweak.", "hint": ""}}, "expect": {"score_equals": 3, "no_crash": true}}
+{"id": "af_adv_null_score_defaults_to_3", "input": {"llm_json": {"score": null, "praise": "Fine.", "improve": "Minor.", "hint": ""}}, "expect": {"score_equals": 3}}
+{"id": "af_adv_empty_praise_and_improve_falls_back", "input": {"llm_json": {"score": 4, "praise": "", "improve": "", "hint": ""}}, "expect": {"is_fallback": true, "no_crash": true}}

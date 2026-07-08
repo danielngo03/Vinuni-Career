@@ -1,0 +1,797 @@
+{
+  "adminConsole": {
+    "nav": {
+      "overview": "Tổng quan nền tảng",
+      "aiOperations": "Vận hành AI",
+      "auditLog": "Nhật ký kiểm tra",
+      "logs": "Nhật ký",
+      "systemHealth": "Tình trạng hệ thống",
+      "usersAccess": "Người dùng & Quyền truy cập",
+      "featureFlags": "Cờ tính năng",
+      "analytics": "Phân tích",
+      "alerts": "Cảnh báo"
+    },
+    "group": {
+      "operations": "Vận hành",
+      "system": "Hệ thống"
+    },
+    "page": {
+      "overviewTitle": "Quản trị nền tảng",
+      "overviewSubtitle": "Bảng điều khiển superadmin — vận hành và quan sát toàn nền tảng.",
+      "accessDeniedTitle": "Từ chối truy cập",
+      "accessDeniedBody": "Khu vực này chỉ dành cho superadmin của nền tảng."
+    },
+    "overview": {
+      "pageTitle": "Tổng quan nền tảng",
+      "pageSubtitle": "Trạng thái sức khỏe đa miền — AI, hộp thư đi, kiểm duyệt và người dùng hoạt động.",
+      "statusBandTitle": "Trạng thái hệ thống",
+      "metric": {
+        "aiSpend": "Chi phí AI hôm nay",
+        "aiErrorRate": "Tỷ lệ lỗi AI",
+        "moderationPending": "Chờ kiểm duyệt",
+        "activeUsers": "Người dùng hoạt động",
+        "aiRequestsSuffix": "lượt"
+      },
+      "outbox": {
+        "title": "Tình trạng hộp thư đi",
+        "pending": "{count} đang chờ",
+        "failed": "{count} thất bại (giờ qua)",
+        "healthy": "Bình thường"
+      },
+      "nextActions": {
+        "title": "Thao tác nhanh",
+        "aiOperations": "Vận hành AI",
+        "aiOperationsBody": "Chi phí, độ tin cậy và khối lượng trên tất cả tính năng AI.",
+        "moderationQueue": "Hàng đợi kiểm duyệt",
+        "moderationQueueBody": "{count} tin tuyển dụng đang chờ duyệt."
+      },
+      "incidents": {
+        "title": "Cảnh báo & Sự cố",
+        "emptyTitle": "Không có sự cố đang hoạt động",
+        "emptyBody": "Giám sát cảnh báo & sự cố được lên kế hoạch cho phiên bản tương lai."
+      },
+      "errorTitle": "Không thể tải tổng quan",
+      "errorBody": "Không thể tải trạng thái nền tảng. Vui lòng thử lại.",
+      "retry": "Thử lại"
+    },
+    "aiOps": {
+      "pageTitle": "Vận hành AI",
+      "pageSubtitle": "Chi phí, độ tin cậy và khối lượng trên tất cả tính năng AI.",
+      "tabs": {
+        "overview": "Tổng quan",
+        "traces": "Traces",
+        "modelsPricing": "Mô hình & Giá",
+        "settings": "Cài đặt"
+      },
+      "comingSoon": "Sắp có trong phiên bản tiếp theo",
+      "range": {
+        "label": "Khoảng thời gian",
+        "today": "Hôm nay",
+        "7d": "7 ngày qua",
+        "30d": "30 ngày qua"
+      },
+      "metric": {
+        "spendToday": "Chi phí hôm nay",
+        "requests": "Số yêu cầu",
+        "errorRate": "Tỷ lệ lỗi",
+        "p95Latency": "Độ trễ p95"
+      },
+      "budgetBurn": {
+        "ofBudget": "ngân sách",
+        "budgetNote": "Ngân sách ngày: ${budget}",
+        "burndownNote": "{pct}% ngân sách ngày đã dùng",
+        "underBudget": "Trong ngân sách",
+        "nearBudget": "Gần giới hạn",
+        "overBudget": "Vượt giới hạn"
+      },
+      "unpriced": "Giá / danh tính bị hạn chế",
+      "maskedProvider": "Bị hạn chế",
+      "spend": {
+        "panelTitle": "Chi phí so với Ngân sách",
+        "burndownLabel": "{pct}% trong ${budget} ngân sách ngày đã dùng",
+        "emptyLabel": "Không có dữ liệu chi phí cho khoảng thời gian này",
+        "ariaLabel": "Biểu đồ cột chi phí theo ngày",
+        "errorTitle": "Không có dữ liệu chi phí",
+        "errorBody": "Không thể tải dữ liệu chi phí. Vui lòng thử lại."
+      },
+      "reliability": {
+        "panelTitle": "Độ tin cậy",
+        "requestsLabel": "Số yêu cầu",
+        "errorRateLabel": "Tỷ lệ lỗi",
+        "fallbackRateLabel": "Tỷ lệ dự phòng",
+        "fallbacksLabel": "Dự phòng",
+        "errorTrendTitle": "Xu hướng tỷ lệ lỗi",
+        "featureCol": "Tính năng",
+        "p50Label": "p50",
+        "p95Label": "p95",
+        "p99Label": "p99",
+        "circuitStateTitle": "Trạng thái bộ ngắt mạch",
+        "circuitCol": {
+          "alias": "Bí danh",
+          "state": "Trạng thái",
+          "failures": "Lỗi",
+          "lastFailure": "Lỗi gần nhất"
+        },
+        "circuitState": {
+          "closed": "Đóng",
+          "open": "Mở",
+          "half_open": "Nửa mở"
+        },
+        "noCircuits": "Chưa cấu hình bộ ngắt mạch",
+        "emptyLabel": "Không có dữ liệu độ tin cậy cho khoảng thời gian này",
+        "errorTitle": "Không có dữ liệu độ tin cậy",
+        "errorBody": "Không thể tải dữ liệu độ tin cậy. Vui lòng thử lại."
+      },
+      "volume": {
+        "panelTitle": "Khối lượng",
+        "byFeatureTitle": "Yêu cầu theo tính năng",
+        "topConsumersTitle": "Tiêu thụ nhiều nhất",
+        "requestsLabel": "Số yêu cầu",
+        "tokensLabel": "Token (prompt + hoàn thiện)",
+        "emptyLabel": "Không có dữ liệu khối lượng cho khoảng thời gian này",
+        "ariaLabel": "Biểu đồ cột khối lượng yêu cầu",
+        "errorTitle": "Không có dữ liệu khối lượng",
+        "errorBody": "Không thể tải dữ liệu khối lượng. Vui lòng thử lại."
+      },
+      "latency": {
+        "panelTitle": "Độ trễ",
+        "seriesP95": "p95",
+        "seriesAvg": "trung bình",
+        "emptyLabel": "Không có dữ liệu độ trễ cho khoảng thời gian này",
+        "ariaLabel": "Biểu đồ chuỗi thời gian độ trễ",
+        "errorTitle": "Không có dữ liệu độ trễ",
+        "errorBody": "Không thể tải dữ liệu độ trễ. Vui lòng thử lại."
+      },
+      "distribution": {
+        "panelTitle": "Chi phí theo tính năng",
+        "emptyLabel": "Không có phân phối chi phí cho khoảng thời gian này",
+        "ariaLabel": "Biểu đồ donut phân phối chi phí",
+        "errorTitle": "Không có dữ liệu phân phối",
+        "errorBody": "Không thể tải phân phối chi phí. Vui lòng thử lại."
+      },
+      "errorHeatmap": {
+        "panelTitle": "Bản đồ nhiệt lỗi (ngày × giờ)",
+        "note": "Ô hiển thị số lỗi. Thưa thớt — chỉ tô màu những giờ có lỗi.",
+        "emptyLabel": "Không có lỗi trong khoảng thời gian này",
+        "ariaLabel": "Bản đồ nhiệt tần suất lỗi theo ngày và giờ",
+        "errorTitle": "Không có dữ liệu bản đồ nhiệt",
+        "errorBody": "Không thể tải bản đồ nhiệt lỗi. Vui lòng thử lại."
+      },
+      "updated": "Cập nhật lúc {time}",
+      "retry": "Thử lại",
+      "loading": "Đang tải...",
+      "traces": {
+        "panelTitle": "AI Traces",
+        "col": {
+          "time": "Thời gian",
+          "feature": "Tính năng / Tác vụ",
+          "model": "Mô hình",
+          "tokens": "Token",
+          "cost": "Chi phí",
+          "latency": "Độ trễ",
+          "status": "Trạng thái"
+        },
+        "status": {
+          "success": "Thành công",
+          "error": "Lỗi",
+          "fallback": "Dự phòng",
+          "rate_limited": "Giới hạn tốc độ",
+          "timeout": "Hết thời gian"
+        },
+        "sheet": {
+          "title": "Chi tiết trace",
+          "closeLabel": "Đóng",
+          "labelId": "ID sự kiện",
+          "labelCreatedAt": "Thời gian",
+          "labelTaskType": "Loại tác vụ",
+          "labelAlias": "Bí danh",
+          "labelModel": "Mô hình",
+          "labelStatus": "Trạng thái",
+          "labelPromptTokens": "Token prompt",
+          "labelCompletionTokens": "Token hoàn thiện",
+          "labelTotalTokens": "Tổng token",
+          "labelCost": "Chi phí",
+          "labelLatency": "Độ trễ",
+          "labelTraceId": "Trace ID",
+          "openInLangfuse": "Mở trong Langfuse",
+          "langfuseNotConfigured": "URL Langfuse chưa cấu hình",
+          "masked": "—"
+        },
+        "loadMore": "Tải thêm",
+        "emptyTitle": "Chưa có trace nào",
+        "emptyBody": "Các trace cuộc gọi AI sẽ xuất hiện tại đây sau khi có sự kiện.",
+        "errorTitle": "Không có dữ liệu trace",
+        "errorBody": "Không thể tải dữ liệu trace. Vui lòng thử lại."
+      },
+      "pricing": {
+        "panelTitle": "Mô hình & Giá",
+        "addPrice": "Thêm giá",
+        "col": {
+          "alias": "Bí danh",
+          "promptCost": "Đầu vào / 1k token",
+          "completionCost": "Đầu ra / 1k token",
+          "effectiveFrom": "Hiệu lực từ",
+          "effectiveUntil": "Đến",
+          "actions": "Hành động"
+        },
+        "sheet": {
+          "addTitle": "Thêm giá",
+          "editTitle": "Chỉnh sửa giá",
+          "labelAlias": "Bí danh",
+          "labelAliasHelp": "Tên bí danh như cấu hình trong sổ đăng ký nhà cung cấp.",
+          "labelPromptCost": "Chi phí đầu vào mỗi 1k token (USD)",
+          "labelCompletionCost": "Chi phí đầu ra mỗi 1k token (USD)",
+          "labelEffectiveFrom": "Hiệu lực từ (ngày ISO)",
+          "labelEffectiveUntil": "Hiệu lực đến (ngày ISO, tùy chọn)",
+          "labelNotes": "Ghi chú (tùy chọn)",
+          "save": "Lưu",
+          "cancel": "Hủy",
+          "conflictError": "Đã tồn tại hàng giá cho bí danh này trong khoảng thời gian này. Hãy chỉnh sửa hàng hiện có hoặc thay đổi khoảng thời gian.",
+          "validationCost": "Nhập số không âm hợp lệ (vd: 0.0015).",
+          "validationAlias": "Bí danh là bắt buộc.",
+          "validationFrom": "Ngày hiệu lực từ là bắt buộc."
+        },
+        "unpricedBanner": "Các bí danh này có sự kiện sử dụng nhưng chưa có hàng giá: {aliases}. Chi phí hiển thị là $0.00.",
+        "emptyTitle": "Chưa có hàng giá",
+        "emptyBody": "Thêm hàng giá cho mỗi bí danh để theo dõi chi phí chính xác.",
+        "errorTitle": "Không có dữ liệu giá",
+        "errorBody": "Không thể tải dữ liệu giá. Vui lòng thử lại.",
+        "editAction": "Sửa"
+      },
+      "settings": {
+        "panelTitle": "Cài đặt AI",
+        "perOrgBudgetLabel": "Giới hạn ngân sách AI theo tổ chức mỗi ngày (USD)",
+        "perOrgBudgetHelp": "Giới hạn chi phí AI theo tổ chức mỗi ngày. Để trống để xóa giới hạn. Thay đổi có hiệu lực ở chu kỳ yêu cầu tiếp theo.",
+        "perOrgBudgetPlaceholder": "vd: 0.50",
+        "perOrgSaveLabel": "Lưu ngân sách theo tổ chức",
+        "perOrgSaved": "Đã lưu ngân sách theo tổ chức.",
+        "perOrgError": "Lưu ngân sách theo tổ chức thất bại.",
+        "loading": "Đang tải..."
+      }
+    },
+    "systemHealth": {
+      "pageTitle": "Tình trạng hệ thống",
+      "pageSubtitle": "Tác vụ định kỳ, độ sâu hàng đợi và tình trạng sẵn sàng dịch vụ gần thời gian thực.",
+      "tabs": {
+        "overview": "Tổng quan",
+        "queuesJobs": "Hàng đợi & Tác vụ",
+        "services": "Dịch vụ"
+      },
+      "overview": {
+        "flowTitle": "Sơ đồ luồng vận hành",
+        "flowSubtitle": "Luồng vận hành từ đầu đến cuối: Lịch biểu → Tác vụ → Hàng đợi → Hộp thư đi → Đã gửi.",
+        "topologyTitle": "Sơ đồ cấu trúc dịch vụ",
+        "topologySubtitle": "Kết nối và tình trạng sẵn sàng của các nút hạ tầng cốt lõi.",
+        "errorTitle": "Không thể tải tổng quan",
+        "errorBody": "Không thể tải tổng quan hệ thống. Vui lòng thử lại."
+      },
+      "flow": {
+        "ariaLabel": "Sơ đồ luồng vận hành",
+        "nodeScheduler": "Lịch biểu",
+        "nodeJobs": "Tác vụ",
+        "nodeQueue": "Hàng đợi",
+        "nodeOutbox": "Hộp thư đi",
+        "nodeDelivered": "Đã gửi",
+        "tooltipScheduler": "Lịch biểu tác vụ — kích hoạt các tác vụ định kỳ",
+        "tooltipJobs": "Sổ đăng ký tác vụ — theo dõi lịch sử chạy từng tác vụ",
+        "tooltipQueue": "Celery/Redis broker — xếp hàng công việc bất đồng bộ",
+        "tooltipOutbox": "Hộp thư đi — sự kiện đang chờ và thất bại",
+        "tooltipDelivered": "Tin nhắn đã gửi thành công",
+        "ok": "Ổn",
+        "warn": "Cảnh báo",
+        "error": "Lỗi",
+        "na": "n/a",
+        "allOk": "Tất cả ổn",
+        "errJobs": "{count} lỗi",
+        "totalJobs": "{count} tổng",
+        "jobsRegistered": "{count} đã đăng ký",
+        "queueDepth": "độ sâu {depth}",
+        "redis": "Redis {status}",
+        "outboxFailed": "{count} thất bại",
+        "outboxPending": "{count} đang chờ",
+        "pending": "{count} đang chờ",
+        "sentCount": "{count} đã gửi",
+        "ariaLoading": "Đang tải sơ đồ luồng"
+      },
+      "topology": {
+        "ariaLabel": "Sơ đồ cấu trúc dịch vụ",
+        "ariaLoading": "Đang tải sơ đồ cấu trúc",
+        "hubApp": "App",
+        "nodeDb": "Cơ sở dữ liệu",
+        "nodeRedis": "Redis",
+        "nodeCelery": "Celery",
+        "nodeOutbox": "Hộp thư đi",
+        "statusOk": "ok",
+        "statusDown": "ngừng",
+        "statusUnknown": "không rõ"
+      },
+      "jobMatrix": {
+        "ariaLabel": "Ma trận trạng thái tác vụ",
+        "panelTitle": "Ma trận trạng thái tác vụ",
+        "neverRun": "Chưa chạy",
+        "interval": "Mỗi {interval}"
+      },
+      "queuesJobs": {
+        "redisTileLabel": "Redis broker",
+        "queueDepthTileLabel": "Độ sâu hàng đợi Celery",
+        "brokerConfiguredTileLabel": "Broker đã cấu hình",
+        "yes": "Có",
+        "no": "Không",
+        "na": "n/a",
+        "jobsTableCaption": "Tình trạng tác vụ định kỳ",
+        "col": {
+          "name": "Tác vụ",
+          "interval": "Chu kỳ",
+          "lastRun": "Lần chạy cuối",
+          "duration": "Thời lượng",
+          "status": "Trạng thái"
+        },
+        "neverRun": "Chưa chạy",
+        "dash": "—",
+        "emptyTitle": "Không có tác vụ định kỳ",
+        "emptyBody": "Không có mục tác vụ định kỳ nào được trả về từ backend.",
+        "errorTitle": "Không có dữ liệu tác vụ",
+        "errorBody": "Không thể tải tình trạng tác vụ định kỳ. Vui lòng thử lại."
+      },
+      "services": {
+        "dbTileLabel": "Cơ sở dữ liệu",
+        "redisTileLabel": "Redis",
+        "outboxTitle": "Tình trạng hộp thư đi",
+        "outbox": {
+          "pending": "Đang chờ",
+          "sent": "Đã gửi",
+          "failed": "Thất bại",
+          "skipped": "Bỏ qua",
+          "dead": "Chết",
+          "oldestPendingAge": "Tuổi chờ lâu nhất",
+          "retryScheduled": "Đã lên lịch thử lại"
+        },
+        "oldestPendingAgeSeconds": "{seconds}s",
+        "healthy": "Bình thường",
+        "errorTitle": "Dịch vụ không khả dụng",
+        "errorBody": "Không thể tải tình trạng dịch vụ. Vui lòng thử lại."
+      },
+      "status": {
+        "ok": "OK",
+        "down": "Ngừng hoạt động",
+        "error": "Lỗi",
+        "neverRun": "Chưa chạy"
+      },
+      "retry": "Thử lại"
+    },
+    "audit": {
+      "pageTitle": "Nhật ký kiểm tra",
+      "pageSubtitle": "Bản ghi bất biến về tất cả hành động cấp superadmin và nền tảng.",
+      "filter": {
+        "action": "Hành động",
+        "actionPlaceholder": "vd: user.created",
+        "resourceType": "Loại tài nguyên",
+        "resourceTypePlaceholder": "vd: user",
+        "actorId": "ID chủ thể",
+        "actorIdPlaceholder": "UUID",
+        "since": "Từ ngày",
+        "until": "Đến ngày"
+      },
+      "exportCsv": "Xuất CSV",
+      "exportSuccess": "Đã bắt đầu tải CSV.",
+      "exportError": "Xuất CSV thất bại. Vui lòng thử lại.",
+      "col": {
+        "time": "Thời gian",
+        "actor": "Chủ thể",
+        "action": "Hành động",
+        "resource": "Tài nguyên"
+      },
+      "sheet": {
+        "title": "Chi tiết mục kiểm tra",
+        "closeLabel": "Đóng",
+        "labelId": "ID mục",
+        "labelOccurredAt": "Thời gian",
+        "labelActorEmail": "Email chủ thể",
+        "labelActorId": "ID chủ thể",
+        "labelActorOrgId": "ID tổ chức chủ thể",
+        "labelAction": "Hành động",
+        "labelResourceType": "Loại tài nguyên",
+        "labelResourceId": "ID tài nguyên",
+        "labelBefore": "Trước",
+        "labelAfter": "Sau",
+        "nullValue": "—",
+        "noDiff": "—"
+      },
+      "loadMore": "Tải thêm",
+      "emptyTitle": "Chưa có mục kiểm tra",
+      "emptyBody": "Các mục kiểm tra sẽ xuất hiện tại đây sau khi có hành động được ghi lại.",
+      "errorTitle": "Nhật ký kiểm tra không khả dụng",
+      "errorBody": "Không thể tải các mục kiểm tra. Vui lòng thử lại.",
+      "retry": "Thử lại"
+    },
+    "logs": {
+      "pageTitle": "Nhật ký & Hoạt động",
+      "pageSubtitle": "Trình khám phá thống nhất cho các sự kiện kiểm tra hệ thống và nhật ký cuộc gọi AI. Chỉ dành cho superadmin.",
+      "sourceAriaLabel": "Bộ chọn nguồn nhật ký",
+      "sourceRecent": "Gần đây (Tất cả)",
+      "sourceSystem": "Hệ thống",
+      "sourceAi": "Nhật ký AI",
+      "categorySystem": "Hệ thống",
+      "categoryAi": "AI",
+      "recentTitle": "Hoạt động gần đây",
+      "recentNote": "Hiển thị 25 mục gần nhất từ mỗi nguồn. Dùng tab Hệ thống hoặc Nhật ký AI để xem toàn bộ lịch sử.",
+      "partialError": "Một số nguồn không thể tải. Đang hiển thị dữ liệu khả dụng.",
+      "col": {
+        "time": "Thời gian",
+        "category": "Nguồn",
+        "summary": "Sự kiện",
+        "meta": "Trạng thái"
+      },
+      "filter": {
+        "taskType": "Loại tác vụ",
+        "taskTypePlaceholder": "vd: cv_extraction",
+        "status": "Trạng thái",
+        "statusPlaceholder": "vd: error",
+        "since": "Từ ngày",
+        "until": "Đến ngày"
+      },
+      "emptyTitle": "Không có mục nhật ký",
+      "emptyBody": "Không tìm thấy sự kiện nào với bộ lọc đã chọn.",
+      "errorTitle": "Nhật ký không khả dụng",
+      "errorBody": "Không thể tải các mục nhật ký. Vui lòng thử lại.",
+      "retry": "Thử lại",
+      "logEntry": "Mục nhật ký",
+      "recentRangeAriaLabel": "Khoảng thời gian hoạt động gần đây",
+      "rangeToday": "Hôm nay",
+      "range7d": "7 ngày qua",
+      "range30d": "30 ngày qua"
+    },
+    "usersAccess": {
+      "pageTitle": "Người dùng & Phân quyền",
+      "pageSubtitle": "Quản lý tài khoản người dùng, danh tính và phiên hoạt động trên nền tảng.",
+      "tabs": {
+        "users": "Người dùng",
+        "sessions": "Phiên đăng nhập"
+      },
+      "filter": {
+        "searchPlaceholder": "Tìm kiếm theo email hoặc tên…",
+        "allPersonas": "Tất cả persona",
+        "persona": {
+          "student": "Sinh viên",
+          "alumni": "Cựu sinh viên",
+          "partner_member": "Thành viên đối tác",
+          "university_staff": "Nhân viên trường"
+        }
+      },
+      "col": {
+        "email": "Email",
+        "fullName": "Họ tên",
+        "persona": "Persona",
+        "status": "Trạng thái",
+        "verified": "Xác thực"
+      },
+      "status": {
+        "active": "Hoạt động",
+        "suspended": "Tạm khóa",
+        "verified": "Đã xác thực",
+        "unverified": "Chưa xác thực"
+      },
+      "pagination": {
+        "prev": "Trước",
+        "next": "Tiếp",
+        "page": "Trang {page} / {total}"
+      },
+      "sheet": {
+        "title": "Chi tiết người dùng",
+        "closeLabel": "Đóng",
+        "coreSection": "Tài khoản",
+        "identitiesSection": "Danh tính",
+        "labelId": "ID người dùng",
+        "labelEmail": "Email",
+        "labelActive": "Trạng thái",
+        "labelSuperadmin": "Superadmin",
+        "labelEmailVerified": "Xác thực email",
+        "labelCreatedAt": "Ngày tạo",
+        "labelLastLogin": "Đăng nhập gần nhất",
+        "labelSessions": "Phiên đang hoạt động",
+        "labelAiUsage": "Lượt gọi AI (gần đây)",
+        "yes": "Có",
+        "no": "Không",
+        "never": "Chưa bao giờ",
+        "identityId": "Danh tính",
+        "identityPersona": "Persona",
+        "identityOrg": "Tổ chức",
+        "identityPrimary": "Chính",
+        "noIdentities": "Không có danh tính"
+      },
+      "actions": {
+        "suspend": "Tạm khóa",
+        "unsuspend": "Mở khóa",
+        "grantSuperadmin": "Cấp superadmin",
+        "revokeSuperadmin": "Thu quyền superadmin",
+        "suspendConfirmTitle": "Tạm khóa tài khoản",
+        "suspendConfirmBody": "Tài khoản {email} sẽ không thể đăng nhập. Bạn có thể mở khóa bất cứ lúc nào.",
+        "unsuspendConfirmTitle": "Mở khóa tài khoản",
+        "unsuspendConfirmBody": "Tài khoản {email} sẽ được khôi phục quyền đăng nhập.",
+        "grantSuperadminConfirmTitle": "Cấp quyền superadmin",
+        "grantSuperadminConfirmBody": "Tài khoản {email} sẽ có toàn quyền quản trị nền tảng. Chỉ xác nhận nếu thực sự cần thiết.",
+        "revokeSuperadminConfirmTitle": "Thu quyền superadmin",
+        "revokeSuperadminConfirmBody": "Tài khoản {email} sẽ mất quyền superadmin. Nếu đây là superadmin cuối cùng đang hoạt động, thao tác sẽ bị từ chối.",
+        "confirm": "Xác nhận",
+        "cancel": "Hủy",
+        "suspendSuccess": "Đã tạm khóa tài khoản.",
+        "suspendError": "Không thể tạm khóa tài khoản.",
+        "unsuspendSuccess": "Đã mở khóa tài khoản.",
+        "unsuspendError": "Không thể mở khóa tài khoản.",
+        "grantSuperadminSuccess": "Đã cấp quyền superadmin.",
+        "grantSuperadminError": "Không thể cấp quyền superadmin.",
+        "revokeSuperadminSuccess": "Đã thu quyền superadmin.",
+        "revokeSuperadminError": "Không thể thu quyền superadmin."
+      },
+      "sessions": {
+        "col": {
+          "email": "Email người dùng",
+          "device": "Thiết bị",
+          "location": "Vị trí",
+          "lastSeen": "Hoạt động gần đây",
+          "expires": "Hết hạn",
+          "actions": "Thao tác"
+        },
+        "revokeAction": "Thu hồi",
+        "revokeConfirmTitle": "Thu hồi phiên",
+        "revokeConfirmBody": "Người dùng sẽ bị đăng xuất khỏi thiết bị này ngay lập tức.",
+        "revokeConfirm": "Thu hồi",
+        "revokeCancel": "Hủy",
+        "revokeSuccess": "Đã thu hồi phiên.",
+        "revokeError": "Không thể thu hồi phiên.",
+        "loadMore": "Tải thêm",
+        "emptyTitle": "Không có phiên đang hoạt động",
+        "emptyBody": "Hiện không có phiên nào đang hoạt động.",
+        "errorTitle": "Không thể tải phiên",
+        "errorBody": "Không thể tải danh sách phiên. Vui lòng thử lại."
+      },
+      "emptyTitle": "Không tìm thấy người dùng",
+      "emptyBody": "Không có người dùng nào khớp với tìm kiếm. Thử điều chỉnh bộ lọc.",
+      "errorTitle": "Không thể tải người dùng",
+      "errorBody": "Không thể tải danh sách người dùng. Vui lòng thử lại.",
+      "retry": "Thử lại"
+    },
+    "featureFlags": {
+      "pageTitle": "Cờ tính năng",
+      "pageSubtitle": "Quản lý cờ tính năng nền tảng và xem danh mục quyền hệ thống. Chỉ dành cho superadmin.",
+      "tabs": {
+        "flags": "Cờ",
+        "permissions": "Danh mục quyền"
+      },
+      "flags": {
+        "panelTitle": "Cờ tính năng",
+        "addFlag": "Thêm cờ",
+        "col": {
+          "key": "Khóa",
+          "description": "Mô tả",
+          "enabled": "Bật",
+          "rollout": "Tỉ lệ triển khai",
+          "updatedBy": "Cập nhật bởi",
+          "updatedAt": "Cập nhật lúc",
+          "actions": "Hành động"
+        },
+        "rolloutFull": "Triển khai toàn bộ (100%)",
+        "rolloutOff": "Tắt (0%)",
+        "rolloutPartial": "Triển khai {pct}%",
+        "enabledYes": "Bật",
+        "enabledNo": "Tắt",
+        "editAction": "Sửa",
+        "sheet": {
+          "addTitle": "Thêm cờ tính năng",
+          "editTitle": "Chỉnh sửa cờ tính năng",
+          "labelKey": "Khóa cờ",
+          "labelKeyHelp": "Chữ thường, số, dấu chấm, gạch ngang và gạch dưới (vd: cv_studio.ai_fill hoặc beta-2026). Không được bắt đầu hoặc kết thúc bằng ký tự phân cách.",
+          "labelDescription": "Mô tả",
+          "labelDescriptionHelp": "Cờ này kiểm soát điều gì. Hãy viết ngắn gọn.",
+          "labelEnabled": "Bật",
+          "labelEnabledHelp": "Bật hoặc tắt cờ này. Tỉ lệ triển khai vẫn áp dụng khi cờ được bật.",
+          "labelRollout": "Tỉ lệ triển khai (0–100)",
+          "labelRolloutHelp": "0 = tắt với tất cả, 100 = triển khai đầy đủ. Giá trị ở giữa kích hoạt cờ cho tỉ lệ phần trăm người dùng đó.",
+          "save": "Lưu",
+          "cancel": "Hủy",
+          "validationKey": "Khóa chỉ được chứa chữ thường, số, dấu chấm, gạch ngang và gạch dưới, và không được bắt đầu hoặc kết thúc bằng ký tự phân cách.",
+          "validationKeyRequired": "Khóa cờ là bắt buộc.",
+          "validationRollout": "Tỉ lệ triển khai phải là số nguyên từ 0 đến 100.",
+          "conflictError": "Đã tồn tại cờ với khóa này. Chọn khóa khác hoặc chỉnh sửa cờ hiện có.",
+          "validationBackend": "Khóa cờ không hợp lệ. Chỉ dùng chữ thường, số, dấu chấm, gạch ngang và gạch dưới.",
+          "rolloutContext": "0 = tắt với tất cả · 100 = bật toàn bộ"
+        },
+        "emptyTitle": "Chưa có cờ tính năng",
+        "emptyBody": "Thêm cờ tính năng để bắt đầu kiểm soát việc triển khai.",
+        "errorTitle": "Cờ tính năng không khả dụng",
+        "errorBody": "Không thể tải cờ tính năng. Vui lòng thử lại."
+      },
+      "permissions": {
+        "panelTitle": "Danh mục quyền",
+        "panelSubtitle": "Tài liệu tham khảo chỉ đọc về tất cả tài nguyên và hành động có sẵn trong hệ thống. Việc phân quyền được quản lý trong RBAC của tổ chức.",
+        "col": {
+          "resource": "Tài nguyên",
+          "actions": "Hành động"
+        },
+        "emptyTitle": "Chưa có quyền nào được định nghĩa",
+        "emptyBody": "Danh mục quyền đang trống.",
+        "errorTitle": "Danh mục quyền không khả dụng",
+        "errorBody": "Không thể tải danh mục quyền. Vui lòng thử lại."
+      },
+      "retry": "Thử lại"
+    },
+    "alerts": {
+      "pageTitle": "Cảnh báo & Sự cố",
+      "pageSubtitle": "Quy tắc cảnh báo và quản lý sự cố vận hành. Chỉ dành cho superadmin.",
+      "tabs": {
+        "incidents": "Sự cố",
+        "rules": "Quy tắc cảnh báo"
+      },
+      "openSummary": "{count} sự cố đang mở",
+      "openSummaryPlural": "{count} sự cố đang mở",
+      "noOpenIncidents": "Không có sự cố đang mở",
+      "metric": {
+        "ai_spend_vs_budget_pct": "Chi phí AI so với ngân sách (%)",
+        "ai_error_rate": "Tỷ lệ lỗi AI",
+        "queue_depth": "Độ sâu hàng đợi",
+        "outbox_failed": "Hộp thư đi thất bại"
+      },
+      "comparison": {
+        "gt": ">",
+        "lt": "<",
+        "gte": ">=",
+        "lte": "<="
+      },
+      "severity": {
+        "info": "Thông tin",
+        "warning": "Cảnh báo",
+        "critical": "Nghiêm trọng"
+      },
+      "incidentStatus": {
+        "open": "Đang mở",
+        "acknowledged": "Đã ghi nhận",
+        "resolved": "Đã giải quyết",
+        "all": "Tất cả"
+      },
+      "channel": {
+        "in_app": "Trong ứng dụng",
+        "email": "Email"
+      },
+      "incidents": {
+        "statusFilter": "Trạng thái",
+        "col": {
+          "severity": "Mức độ",
+          "metric": "Chỉ số",
+          "message": "Nội dung",
+          "triggered": "Kích hoạt lúc",
+          "status": "Trạng thái",
+          "actions": "Thao tác"
+        },
+        "acknowledge": "Ghi nhận",
+        "resolve": "Giải quyết",
+        "acknowledgeConfirmTitle": "Ghi nhận sự cố",
+        "acknowledgeConfirmBody": "Đánh dấu sự cố này đã được ghi nhận. Điều này xác nhận bạn đã nhận biết và đang xử lý.",
+        "resolveConfirmTitle": "Giải quyết sự cố",
+        "resolveConfirmBody": "Đánh dấu sự cố đã được giải quyết. Hãy đảm bảo nguyên nhân cơ bản đã được xử lý.",
+        "confirm": "Xác nhận",
+        "cancel": "Hủy",
+        "acknowledgeSuccess": "Đã ghi nhận sự cố.",
+        "acknowledgeError": "Không thể ghi nhận sự cố.",
+        "resolveSuccess": "Đã giải quyết sự cố.",
+        "resolveError": "Không thể giải quyết sự cố.",
+        "loadMore": "Tải thêm",
+        "emptyTitle": "Không có sự cố",
+        "emptyBody": "Không có sự cố nào khớp với bộ lọc trạng thái đã chọn.",
+        "errorTitle": "Không thể tải sự cố",
+        "errorBody": "Không thể tải danh sách sự cố. Vui lòng thử lại.",
+        "sheet": {
+          "title": "Chi tiết sự cố",
+          "closeLabel": "Đóng",
+          "labelMetric": "Chỉ số",
+          "labelValue": "Giá trị",
+          "labelThreshold": "Ngưỡng",
+          "labelMessage": "Nội dung",
+          "labelRuleId": "ID quy tắc",
+          "timelineTitle": "Dòng thời gian",
+          "labelTriggered": "Kích hoạt lúc",
+          "labelAcknowledged": "Đã ghi nhận lúc",
+          "labelAcknowledgedBy": "Ghi nhận bởi",
+          "labelResolved": "Đã giải quyết lúc",
+          "notYet": "—"
+        }
+      },
+      "rules": {
+        "addRule": "Thêm quy tắc",
+        "col": {
+          "name": "Tên",
+          "metric": "Chỉ số",
+          "condition": "Điều kiện",
+          "severity": "Mức độ",
+          "enabled": "Bật",
+          "channels": "Kênh thông báo",
+          "actions": "Thao tác"
+        },
+        "editAction": "Sửa",
+        "deleteAction": "Xóa",
+        "deleteConfirmTitle": "Xóa quy tắc",
+        "deleteConfirmBody": "Xóa quy tắc cảnh báo \"{name}\"? Các sự cố đang hoạt động liên kết với quy tắc này sẽ không bị xóa.",
+        "confirm": "Xóa",
+        "cancel": "Hủy",
+        "deleteSuccess": "Đã xóa quy tắc.",
+        "deleteError": "Không thể xóa quy tắc.",
+        "enabledYes": "Bật",
+        "enabledNo": "Tắt",
+        "emptyTitle": "Chưa có quy tắc cảnh báo",
+        "emptyBody": "Thêm quy tắc cảnh báo để theo dõi các chỉ số nền tảng và kích hoạt sự cố.",
+        "errorTitle": "Không thể tải quy tắc",
+        "errorBody": "Không thể tải quy tắc cảnh báo. Vui lòng thử lại.",
+        "sheet": {
+          "addTitle": "Thêm quy tắc cảnh báo",
+          "editTitle": "Chỉnh sửa quy tắc cảnh báo",
+          "labelName": "Tên",
+          "labelMetric": "Chỉ số",
+          "labelComparison": "So sánh",
+          "labelThreshold": "Ngưỡng",
+          "labelThresholdHelp": "Giá trị số để so sánh với chỉ số.",
+          "labelWindowDays": "Cửa sổ (ngày)",
+          "labelWindowDaysHelp": "Cửa sổ đánh giá tính bằng ngày (1–90).",
+          "labelSeverity": "Mức độ",
+          "labelEnabled": "Bật",
+          "labelChannels": "Kênh thông báo",
+          "save": "Lưu",
+          "cancel": "Hủy",
+          "saveSuccess": "Đã lưu quy tắc.",
+          "saveError": "Không thể lưu quy tắc.",
+          "validationName": "Tên là bắt buộc.",
+          "validationThreshold": "Nhập một số hợp lệ.",
+          "validationWindow": "Cửa sổ phải là số nguyên từ 1 đến 90."
+        }
+      },
+      "retry": "Thử lại"
+    },
+    "analytics": {
+      "pageTitle": "Phân tích nền tảng",
+      "pageSubtitle": "Chỉ số nền tảng dành cho superadmin — KPI, phễu tuyển dụng và xu hướng tăng trưởng.",
+      "range": {
+        "label": "Khoảng thời gian",
+        "7d": "7 ngày qua",
+        "30d": "30 ngày qua"
+      },
+      "kpi": {
+        "sectionTitle": "KPI nền tảng",
+        "students": "Sinh viên",
+        "partnerMembers": "Thành viên đối tác",
+        "universityStaff": "Nhân viên trường",
+        "jobs": "Tin tuyển dụng đang mở",
+        "applications": "Hồ sơ ứng tuyển",
+        "events": "Sự kiện",
+        "errorTitle": "Không thể tải KPI",
+        "errorBody": "Không thể tải KPI nền tảng. Vui lòng thử lại."
+      },
+      "funnel": {
+        "panelTitle": "Phễu tuyển dụng",
+        "ariaLabel": "Biểu đồ phễu tuyển dụng nằm ngang",
+        "emptyLabel": "Không có dữ liệu phễu cho khoảng thời gian này",
+        "errorTitle": "Không có dữ liệu phễu",
+        "errorBody": "Không thể tải phễu tuyển dụng. Vui lòng thử lại.",
+        "conversionLabel": "{pct}%",
+        "stage": {
+          "job_views": "Lượt xem tin",
+          "job_applies": "Lượt bắt đầu ứng tuyển",
+          "applications_submitted": "Hồ sơ đã nộp",
+          "under_review": "Đang xem xét",
+          "interview": "Phỏng vấn",
+          "offer": "Đề nghị tuyển dụng",
+          "hired": "Đã tuyển",
+          "rejected": "Không phù hợp"
+        }
+      },
+      "growth": {
+        "panelTitle": "Tăng trưởng nền tảng",
+        "ariaLabel": "Biểu đồ chuỗi thời gian tăng trưởng nền tảng",
+        "emptyLabel": "Không có dữ liệu tăng trưởng cho khoảng thời gian này",
+        "errorTitle": "Không có dữ liệu tăng trưởng",
+        "errorBody": "Không thể tải dữ liệu tăng trưởng nền tảng. Vui lòng thử lại.",
+        "seriesSignups": "Đăng ký mới",
+        "seriesApplications": "Ứng tuyển",
+        "seriesActiveUsers": "Người dùng hoạt động"
+      },
+      "retry": "Thử lại"
+    }
+  }
+}

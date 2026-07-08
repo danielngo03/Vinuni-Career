@@ -1,1 +1,1 @@
-"""Vinuni Career Platform backend package."""
+"""VinUni Career Platform backend application package."""

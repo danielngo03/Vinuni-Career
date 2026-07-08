@@ -1,0 +1,59 @@
+name: Frontend CI
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "frontend/**"
+      - ".github/workflows/frontend-ci.yml"
+  pull_request:
+    paths:
+      - "frontend/**"
+      - ".github/workflows/frontend-ci.yml"
+
+defaults:
+  run:
+    working-directory: frontend
+
+jobs:
+  gates:
+    name: Typecheck, lint, locale parity, build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "pnpm"
+          cache-dependency-path: frontend/pnpm-lock.yaml
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Type check
+        run: pnpm run typecheck
+
+      - name: Lint
+        run: pnpm run lint
+
+      - name: Locale message parity (en/vi key + non-empty check)
+        run: pnpm run check:messages
+
+      - name: Build
+        run: pnpm run build
+        env:
+          NEXT_PUBLIC_API_BASE_URL: http://localhost:8000
+
+  # Playwright e2e needs the backend + a seeded database, which this workflow
+  # does not stand up. Wire this job up once a CI-friendly backend + seed
+  # fixture exists (tracked in docs/IMPLEMENTATION_STATUS.md); until then, e2e
+  # stays a local/manual gate (`pnpm run test:e2e`), not a merge blocker.
+  # e2e:
+  #   name: Playwright e2e (requires backend + seeded DB)
+  #   runs-on: ubuntu-latest
+  #   steps: []

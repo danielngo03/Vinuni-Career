@@ -12,6 +12,7 @@ venv/
 build/
 *.egg-info/
 .pytest_cache/
+.ruff_cache/
 .mypy_cache/
 *.db
 *.sqlite
@@ -28,13 +29,16 @@ out/
 *.tsbuildinfo
 .dev/
 
+# Local examples / scratch workspace
+example/
+.superpowers/sdd/
+.claude/worktrees/
+
 # AI logs — tracked structure, ignored content
 .ai-log/*.jsonl
+.ai-log/submit-progress.json
+.ai-log/archive/*.jsonl
 
-
-run-server.md
-trng/
-*.pptx
-thumbnail/
-bai-toan-giai-phap-ky-thuat.md
-outputs/
+# Browser QA artifacts
+.playwright-mcp/
+frontend/test-results/

@@ -1,6 +1,9 @@
-.next
-node_modules
-.env.local
+/node_modules
+/.next
+/out
+/build
+next-env.d.ts
 *.tsbuildinfo
-design-qa-artifacts
-.vercel
+.DS_Store
+.env*.local
+.playwright-mcp/

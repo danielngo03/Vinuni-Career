@@ -1,0 +1,5 @@
+{"id": "bias_priv_matched_phrase_excludes_nearby_phone", "input": {"text": "Liên hệ 0912345678 để biết thêm chi tiết. Công ty chỉ tuyển nam cho vị trí này."}, "expect": {"flagged": true, "matched_phrase_excludes": "0912345678"}}
+{"id": "bias_priv_matched_phrase_excludes_nearby_email", "input": {"text": "Send your CV to hr@example.com. This position is open to males only."}, "expect": {"flagged": true, "matched_phrase_excludes": "hr@example.com"}}
+{"id": "bias_priv_matched_phrase_excludes_nearby_id_number", "input": {"text": "Số CCCD ứng viên mẫu: 012345678912. Ứng viên phải không khuyết tật."}, "expect": {"flagged": true, "matched_phrase_excludes": "012345678912"}}
+{"id": "bias_priv_no_pii_in_response_for_clean_text", "input": {"text": "Software Engineer role, remote-friendly, 3+ years experience."}, "expect": {"flagged": false, "no_pii_in_response": true}}
+{"id": "bias_priv_no_pii_in_response_for_flagged_text", "input": {"text": "Contact 0987654321. This role is for males only, must be under the age of 30."}, "expect": {"flagged": true, "no_pii_in_response": true}}

@@ -1,0 +1,74 @@
+{
+  "profile": {
+    "title": "My profile",
+    "subtitle": "Manage your identity, contact details, and privacy.",
+    "saved": "Changes saved.",
+    "cvHint": "Your education, experience, skills, and links now live in your CVs. Recruiters review your CVs — this page keeps your identity and contact details.",
+    "header": {
+      "ariaLabel": "Identity and open-to-work status",
+      "openToWorkLabel": "Open to work",
+      "openToWorkExplain": "When on, recruiters can see that you are open to new opportunities."
+    },
+    "contact": {
+      "title": "Contact details",
+      "intro": "How recruiters can reach you when you allow it.",
+      "phone": "Phone number",
+      "locationCity": "City",
+      "locationCountry": "Country"
+    },
+    "privacy": {
+      "title": "Privacy",
+      "intro": "Control who can see your profile and contact details.",
+      "visibilityLabel": "Who can see your profile",
+      "visibilityExplain": {
+        "public": "Any signed-in user on the platform can view your public profile.",
+        "vinuni_only": "Only the VinUni community (students, alumni, staff) can view your profile.",
+        "private": "Only you can see it. Your profile won't appear in search or the talent pool."
+      },
+      "contactLegend": "Contact visibility",
+      "contactIntro": "Decide when recruiters can see your email and phone number.",
+      "showEmail": "Email",
+      "showPhone": "Phone number",
+      "contactExplain": {
+        "public": "Shown anywhere your profile is allowed to be seen.",
+        "invited": "Only shown after you accept a reveal request or within an application.",
+        "hidden": "Never shown to anyone else."
+      }
+    },
+    "enums": {
+      "visibility": {
+        "public": "Public",
+        "vinuni_only": "VinUni only",
+        "private": "Private"
+      },
+      "contact": {
+        "public": "Visible",
+        "invited": "When invited",
+        "hidden": "Hidden"
+      },
+      "openToWork": {
+        "full_time": "Full-time",
+        "internship": "Internship",
+        "part_time": "Part-time",
+        "contract": "Contract"
+      },
+      "degree": {
+        "undergraduate": "Undergraduate",
+        "graduate": "Graduate",
+        "phd": "PhD"
+      }
+    },
+    "validation": {
+      "phoneMax": "Phone must be at most 30 characters."
+    },
+    "avatar": {
+      "changeCta": "Change photo",
+      "removeCta": "Remove",
+      "hint": "PNG, JPEG or WebP · Max {maxMb} MB",
+      "saved": "Avatar saved",
+      "uploadError": "Upload failed. Please try again.",
+      "removeError": "Remove failed. Please try again.",
+      "tooLarge": "Image too large. Max {maxMb} MB."
+    }
+  }
+}

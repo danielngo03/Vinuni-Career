@@ -1,0 +1,5 @@
+{"id": "jde_lq_gibberish_text_empty_extraction", "input": {"raw_text": "asdkjfh aslkdjf qwpoeiruty", "llm_json": {}}, "expect": {"error_code": "blank", "no_stack_trace": true, "no_crash": true}}
+{"id": "jde_lq_single_char_text", "input": {"raw_text": "a", "llm_json": {"title": null}}, "expect": {"error_code": "blank", "no_stack_trace": true, "no_crash": true}}
+{"id": "jde_lq_wrong_type_skills_dropped", "input": {"raw_text": "JD content here.", "llm_json": {"title": "JD", "required_skills": "not-a-list"}}, "expect": {"field_absent": "required_skills", "no_crash": true}}
+{"id": "jde_lq_mixed_language_garbled", "input": {"raw_text": "??? job posting mixed vi/en garbled text ???", "llm_json": {"title": "??? job ???", "detected_language": "mixed"}}, "expect": {"error_code": "not_a_jd", "no_stack_trace": true, "no_crash": true}}
+{"id": "jde_lq_minimal_placeholder_text", "input": {"raw_text": "N/A", "llm_json": {"title": "N/A"}}, "expect": {"error_code": "blank", "no_stack_trace": true, "no_crash": true}}

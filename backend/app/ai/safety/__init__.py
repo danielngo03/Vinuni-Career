@@ -1,4 +1,7 @@
-from app.ai.safety.pii import PIIEntity, mask_pii
-from app.ai.safety.prompt_injection import detect_prompt_injection
+"""AI safety guards: input guard (pre-generation) and output guard.
 
-__all__ = ["PIIEntity", "mask_pii", "detect_prompt_injection"]
+The output guard lives in ``app.ai.gateway.output_guard`` (applied on every
+gateway response). The input guard here neutralises prompt-injection and caps
+length on free-text user input before it reaches the LLM (``docs/AI_PRODUCT_SPEC``
+§9.1, ``.claude/rules/ai.md`` §9).
+"""

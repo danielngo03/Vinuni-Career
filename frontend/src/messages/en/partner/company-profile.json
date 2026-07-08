@@ -1,0 +1,72 @@
+{
+  "companyProfile": {
+    "title": "Company profile",
+    "subtitle": "Your public-facing company information.",
+    "permissionBody": "You don't have permission to edit the company profile.",
+    "sectionTitle": "Company details",
+    "sectionIntro": "Keep this up to date — students see it on your job posts and profile.",
+    "verified": "Verified",
+    "companyName": "Company name",
+    "website": "Website",
+    "industry": "Industry",
+    "companySize": "Company size",
+    "city": "Headquarters city",
+    "founded": "Founded year",
+    "description": "About",
+    "selectPlaceholder": "Select…",
+    "slugNote": "Profile URL: /{slug}",
+    "savedToast": "Profile saved.",
+    "conflictToast": "Already updated",
+    "conflictBody": "This profile was changed elsewhere. We've reloaded the latest version.",
+    "logoTitle": "Company logo",
+    "logoIntro": "Shown on your job posts, company page and search results.",
+    "logoFileLabel": "Logo image file",
+    "logoHint": "PNG, JPEG or WebP, up to about 3 MB.",
+    "logoCurrent": "Current logo",
+    "logoPreview": "Preview",
+    "logoUploadBtn": "Upload logo",
+    "logoCancel": "Cancel",
+    "logoRemove": "Remove logo",
+    "logoRetry": "Retry",
+    "logoUploadedToast": "Logo updated.",
+    "logoRemovedToast": "Logo removed.",
+    "logoRemoveTitle": "Remove company logo?",
+    "logoRemoveBody": "Students will see the initials placeholder until you upload a new logo.",
+    "logoRemoveConfirm": "Remove logo",
+    "logoErr": {
+      "emptyFile": "The file is empty. Please choose a valid image.",
+      "tooLarge": "The image is too large. Please choose a file under 3 MB.",
+      "unsupportedType": "Unsupported format. Please use PNG, JPEG or WebP.",
+      "conflict": "The profile changed elsewhere. We've reloaded the latest version — please try again.",
+      "network": "Couldn't reach the server. Check your connection and retry.",
+      "generic": "Couldn't update the logo. Please try again."
+    },
+    "aiInsightsTitle": "Company Profile Health",
+    "aiInsightNoLogo": "Upload a company logo — profiles with logos receive significantly more candidate views",
+    "aiInsightNoDescription": "Add an 'About' section — students look for company culture and values before applying",
+    "aiInsightNoWebsite": "Add your website URL — candidates want to learn more about your company",
+    "aiInsightNoIndustry": "Set your industry — it helps students discover you through industry-based filters",
+    "aiInsightComplete": "Your company profile is complete! Keep it updated to stay relevant to top candidates.",
+    "profileQuality": {
+      "title": "Profile quality",
+      "score": "{score}/100",
+      "missingTitle": "Still missing",
+      "check": {
+        "logo": "Company logo",
+        "description": "Company description (50+ characters)",
+        "verified": "Verified",
+        "industry": "Industry",
+        "company_size": "Company size",
+        "website": "Website",
+        "has_active_recruiter": "Has an active recruiter",
+        "recent_activity": "Recent recruiting activity"
+      }
+    },
+    "seats": {
+      "title": "Team seats",
+      "usage": "{used}/{max} seats used",
+      "unlimited": "{used} members (unlimited)",
+      "atCapacity": "Current plan limit reached"
+    }
+  }
+}

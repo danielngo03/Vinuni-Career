@@ -1,3 +1,8 @@
+# pnpm settings (pnpm v11 reads project settings from here).
+# Skip the auto `pnpm install` that runs before each script — it treats the
+# optional native build scripts below as fatal in this pnpm version.
+verifyDepsBeforeRun: false
+# Optional native build scripts are not needed for local dev/build.
 allowBuilds:
-  sharp: set this to true or false
-  unrs-resolver: set this to true or false
+  sharp: false
+  unrs-resolver: false

@@ -1,30 +1,70 @@
 import type { NextConfig } from "next";
+import createNextIntlPlugin from "next-intl/plugin";
+
+const withNextIntl = createNextIntlPlugin("./src/i18n/request.ts");
+
+function imageRemotePatterns(): NonNullable<NextConfig["images"]>["remotePatterns"] {
+  const patterns: NonNullable<NextConfig["images"]>["remotePatterns"] = [
+    { protocol: "http", hostname: "localhost", port: "8000", pathname: "/**" },
+    { protocol: "http", hostname: "127.0.0.1", port: "8000", pathname: "/**" },
+  ];
+
+  const apiBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
+  if (apiBaseUrl) {
+    try {
+      const url = new URL(apiBaseUrl);
+      const alreadyAllowed = patterns.some(
+        (p) =>
+          p.protocol === url.protocol.replace(":", "") &&
+          p.hostname === url.hostname &&
+          (p.port ?? "") === url.port,
+      );
+      if (!alreadyAllowed && (url.protocol === "http:" || url.protocol === "https:")) {
+        patterns.push({
+          protocol: url.protocol.replace(":", "") as "http" | "https",
+          hostname: url.hostname,
+          port: url.port,
+          pathname: "/**",
+        });
+      }
+    } catch {
+      // Ignore malformed local env; Next will still use the fixed local patterns.
+    }
+  }
+
+  return patterns;
+}
+
+// Backend origin for server-side proxy rewrites.
+// NEXT_PUBLIC_API_URL is the raw backend base (no /api/v1 suffix).
+// Falls back to the dev default so the rewrite works even without .env.
+const backendOrigin = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000";
 
 const nextConfig: NextConfig = {
-  output: "standalone",
+  reactStrictMode: true,
   poweredByHeader: false,
-  turbopack: {
-    root: process.cwd(),
-  },
   images: {
-    formats: ["image/avif", "image/webp"],
+    remotePatterns: imageRemotePatterns(),
   },
-  async headers() {
+  // Proxy /api/v1/* → backend so the httpOnly refresh cookie is same-origin.
+  // Without this, the frontend (localhost:3000) would set the cookie for
+  // localhost:8000, causing cross-port cookie inconsistencies in some browsers
+  // and preventing token refresh from working reliably.
+  async rewrites() {
     return [
       {
-        source: "/(.*)",
-        headers: [
-          { key: "X-Content-Type-Options", value: "nosniff" },
-          { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
-          { key: "X-Frame-Options", value: "DENY" },
-          {
-            key: "Permissions-Policy",
-            value: "camera=(), microphone=(), geolocation=()",
-          },
-        ],
+        source: "/api/v1/:path*",
+        destination: `${backendOrigin}/api/v1/:path*`,
       },
     ];
   },
+  // Build-only: size the build/static-generation worker pool by available memory
+  // so page-data collection workers don't starve/OOM under memory pressure (which
+  // otherwise surfaces as flaky "Cannot find module for page" build failures).
+  // Runtime behaviour is unaffected.
+  experimental: {
+    memoryBasedWorkersCount: true,
+  },
 };
 
-export default nextConfig;
+export default withNextIntl(nextConfig);

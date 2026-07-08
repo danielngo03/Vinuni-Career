@@ -1,42 +1,41 @@
-.PHONY: install test lint typecheck check contract run init-db migrate migrate-down migration-check ai-smoke
+.PHONY: install dev worker-ai test lint typecheck migrate downgrade revision fmt check
 
 install:
-	python3 -m venv .venv
-	.venv/bin/python -m pip install --upgrade pip
-	.venv/bin/python -m pip install -e ".[dev]"
+	uv sync
+
+dev:
+	uv run uvicorn app.main:app --reload --port 8000
+
+# Background worker for AI workforce subtasks (AI_PRODUCT_SPEC §4.2) plus the
+# default queue. Requires a running Redis broker (docs/LOCAL_DEV_STACK.md).
+# --include registers app.ai.agents.worker_tasks on the shared celery app
+# without coupling the automation module to AI code at import time.
+worker-ai:
+	uv run celery -A app.modules.automation.workers.celery_app worker \
+		-l info -Q ai,default --include=app.ai.agents.worker_tasks
 
 test:
-	.venv/bin/python -m pytest
+	uv run pytest -q
 
 lint:
-	.venv/bin/python -m ruff check app tests scripts alembic
+	uv run ruff check .
+
+fmt:
+	uv run ruff check --fix . && uv run ruff format .
 
 typecheck:
-	.venv/bin/python -m mypy app --ignore-missing-imports --no-error-summary
+	uv run mypy app
 
+# Combined quality gate: lint + typecheck + test, in that order (fastest signal
+# first). CI and pre-commit should both run this instead of the individual
+# targets so lint/type debt cannot silently reaccumulate between them.
 check: lint typecheck test
 
-contract:
-	.venv/bin/python scripts/export_openapi.py
-
-init-db:
-	.venv/bin/alembic upgrade head
-	.venv/bin/python scripts/init_db.py
-
 migrate:
-	.venv/bin/alembic upgrade head
+	uv run alembic upgrade head
 
-migrate-down:
-	.venv/bin/alembic downgrade -1
+downgrade:
+	uv run alembic downgrade base
 
-migration-check:
-	rm -f /tmp/vinuni-career-migration-check.db
-	DATABASE_URL=sqlite:////tmp/vinuni-career-migration-check.db .venv/bin/alembic upgrade head
-	DATABASE_URL=sqlite:////tmp/vinuni-career-migration-check.db .venv/bin/alembic downgrade base
-	DATABASE_URL=sqlite:////tmp/vinuni-career-migration-check.db .venv/bin/alembic upgrade head
-
-ai-smoke:
-	.venv/bin/python scripts/smoke_ai.py
-
-run:
-	.venv/bin/uvicorn app.main:app --host 127.0.0.1 --port 8000 --reload
+revision:
+	uv run alembic revision -m "$(m)"

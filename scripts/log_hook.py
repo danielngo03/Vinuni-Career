@@ -1,233 +1,154 @@
 #!/usr/bin/env python3
+"""Project-local AI usage hook logger.
+
+The hook is intentionally forgiving: AI tools should never be blocked because
+their hook payload shape changed. Submit-time failures are handled separately by
+scripts/submit_log.py.
 """
-Shared AI hook logger — works with Claude Code, Gemini CLI, Codex, Cursor, Copilot.
-Reads JSON from stdin, normalizes to common format, appends to .ai-log/session.jsonl
-"""
+
+from __future__ import annotations
+
+import argparse
 import json
 import os
-import sys
 import subprocess
-from datetime import datetime, timezone, timedelta
+import sys
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
+from typing import Any
 
 VN_TZ = timezone(timedelta(hours=7))
+MAX_TEXT = 8000
 
 
-def repair_mojibake(value):
-    """Repair common UTF-8 text that was decoded as a Windows code page."""
-    if isinstance(value, str):
-        markers = ("Ã", "Â", "â€", "â€™", "â€œ", "â€�", "áº", "á»", "Ä‘")
-        if not any(marker in value for marker in markers):
-            return value
-        repaired = value
-        for _ in range(3):
-            changed = False
-            for encoding in ("cp1252", "latin1"):
-                try:
-                    candidate = repaired.encode(encoding).decode("utf-8")
-                except UnicodeError:
-                    continue
-                if candidate != repaired:
-                    repaired = candidate
-                    changed = True
-                    break
-            if not changed or not any(marker in repaired for marker in markers):
-                break
-        return repaired
-    if isinstance(value, list):
-        return [repair_mojibake(item) for item in value]
-    if isinstance(value, dict):
-        return {key: repair_mojibake(item) for key, item in value.items()}
-    return value
-
-
-def repo_root_from_cwd() -> Path | None:
-    """Find the repo root without invoking git, so safe.directory can be set."""
-    cwd = Path.cwd().resolve()
-    for path in (cwd, *cwd.parents):
-        if (path / ".git").exists():
-            return path
-    return None
-
-
-def git(cmd):
-    repo_root = repo_root_from_cwd()
-    if repo_root and cmd.startswith("git "):
-        safe_dir = str(repo_root).replace("\\", "/")
-        cmd = f'git -c safe.directory="{safe_dir}" {cmd[4:]}'
+def run_git(args: list[str], cwd: Path) -> str:
     try:
-        return subprocess.check_output(cmd, shell=True, text=True, stderr=subprocess.DEVNULL).strip()
+        return subprocess.check_output(
+            ["git", *args],
+            cwd=cwd,
+            text=True,
+            stderr=subprocess.DEVNULL,
+        ).strip()
     except Exception:
         return ""
 
 
-def detect_tool(data: dict) -> str:
-    """Detect which AI tool sent this hook event.
-
-    Priority:
-      1. --tool=NAME CLI argument (cross-platform: works in cmd.exe, PowerShell, bash)
-      2. AI_TOOL_NAME env var (legacy, bash-only when set inline)
-      3. Heuristics from payload shape
-    """
-    for arg in sys.argv[1:]:
-        if arg.startswith("--tool="):
-            return arg.split("=", 1)[1].lower()
-    tool_env = os.environ.get("AI_TOOL_NAME", "").lower()
-    if tool_env:
-        return tool_env
-    # Heuristics
-    if "transcript_path" in data:
-        return "codex"
-    if data.get("hook_event_name", "").startswith(("Before", "After", "Session", "Pre", "Notification")):
-        return "gemini"
-    if data.get("hook_event_name", "")[0:1].islower():
-        # camelCase event names → Cursor or Copilot
-        if "workspace_roots" in data:
-            return "cursor"
-        if "toolName" in data:
-            return "copilot"
-    if "hook_event_name" in data:
-        return "claude"
-    return "unknown"
+def repo_root() -> Path:
+    root = run_git(["rev-parse", "--show-toplevel"], Path.cwd())
+    return Path(root).resolve() if root else Path.cwd().resolve()
 
 
-def normalize(data: dict, tool: str) -> dict | None:
-    """Normalize tool-specific payload to common log entry."""
-    event = data.get("hook_event_name") or data.get("event", "")
-    ts = datetime.now(VN_TZ).isoformat()
+def env_file_values(root: Path) -> dict[str, str]:
+    values: dict[str, str] = {}
+    env_path = root / ".env"
+    if not env_path.exists():
+        return values
+    for raw in env_path.read_text(encoding="utf-8", errors="replace").splitlines():
+        line = raw.strip()
+        if not line or line.startswith("#") or "=" not in line:
+            continue
+        key, value = line.split("=", 1)
+        values[key.strip()] = value.strip().strip('"').strip("'")
+    return values
 
-    # Resolve repo from git origin. When cwd is not a git working tree (or
-    # origin isn't set), skip the event entirely — these entries can't be
-    # tied back to a team on the server and would just clutter the pending
-    # queue forever.
-    origin = git("git remote get-url origin")
-    if not origin:
-        return None
-    repo = origin.rstrip("/").split("/")[-1]
-    if repo.endswith(".git"):
-        repo = repo[:-4]
 
-    base = {
-        "ts": ts,
-        "tool": tool,
-        "event": event,
-        "session_id": (
-            data.get("session_id") or
-            data.get("conversation_id") or
-            data.get("generation_id") or ""
-        ),
-        "model": data.get("model", ""),
+def truncate(value: Any, limit: int = MAX_TEXT) -> Any:
+    if isinstance(value, str):
+        return value if len(value) <= limit else value[:limit] + "...[truncated]"
+    if isinstance(value, list):
+        return [truncate(item, limit) for item in value[:50]]
+    if isinstance(value, dict):
+        return {str(k): truncate(v, limit) for k, v in list(value.items())[:80]}
+    return value
+
+
+def redact(value: Any) -> Any:
+    if isinstance(value, dict):
+        redacted: dict[str, Any] = {}
+        for key, item in value.items():
+            key_text = str(key)
+            if any(secret in key_text.lower() for secret in ("api_key", "apikey", "token", "password", "secret")):
+                redacted[key_text] = "[redacted]"
+            else:
+                redacted[key_text] = redact(item)
+        return redacted
+    if isinstance(value, list):
+        return [redact(item) for item in value]
+    return truncate(value)
+
+
+def parse_payload(raw: str) -> dict[str, Any]:
+    if not raw.strip():
+        return {}
+    try:
+        parsed = json.loads(raw)
+        return parsed if isinstance(parsed, dict) else {"payload": parsed}
+    except json.JSONDecodeError:
+        return {"prompt": raw.strip()}
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--tool", default="unknown")
+    args = parser.parse_args()
+
+    root = repo_root()
+    env_values = env_file_values(root)
+    payload = parse_payload(sys.stdin.read())
+
+    origin = run_git(["remote", "get-url", "origin"], root)
+    repo = origin.rstrip("/").split("/")[-1].removesuffix(".git") if origin else root.name
+    event = (
+        payload.get("hook_event_name")
+        or payload.get("event")
+        or payload.get("event_name")
+        or payload.get("type")
+        or "Hook"
+    )
+
+    prompt = (
+        payload.get("prompt")
+        or payload.get("user_prompt")
+        or payload.get("message")
+        or payload.get("input")
+        or ""
+    )
+
+    entry: dict[str, Any] = {
+        "ts": datetime.now(VN_TZ).isoformat(),
+        "tool": args.tool,
+        "event": str(event),
+        "session_id": str(payload.get("session_id") or payload.get("conversation_id") or ""),
+        "model": str(payload.get("model") or payload.get("model_name") or ""),
         "repo": repo,
-        "branch": git("git rev-parse --abbrev-ref HEAD"),
-        "commit": git("git rev-parse --short HEAD"),
-        "student": git("git config user.email"),
+        "branch": run_git(["rev-parse", "--abbrev-ref", "HEAD"], root),
+        "commit": run_git(["rev-parse", "--short", "HEAD"], root),
+        "student": os.environ.get("AI_LOG_STUDENT") or env_values.get("AI_LOG_STUDENT") or "",
+        "prompt": truncate(prompt) if prompt else "",
+        "tool_name": str(payload.get("tool_name") or payload.get("name") or ""),
     }
 
-    if tool == "claude":
-        prompt = ""
-        # UserPromptSubmit: prompt is at top level
-        if event == "UserPromptSubmit":
-            prompt = data.get("prompt", "")[:1000]
-        # PostToolUse: extract from tool_input
-        elif isinstance(data.get("tool_input"), dict):
-            prompt = data["tool_input"].get("prompt") or data["tool_input"].get("content") or ""
-        base.update({
-            "prompt": prompt,
-            "tool_name": data.get("tool_name", ""),
-            "tool_input": data.get("tool_input") if event != "UserPromptSubmit" else None,
-            "tool_response": str(data.get("tool_response", ""))[:500],
-        })
+    if isinstance(payload.get("tool_input"), dict):
+        entry["tool_input"] = redact(payload["tool_input"])
+    elif payload.get("args") is not None:
+        entry["tool_input"] = redact(payload.get("args"))
 
-    elif tool == "gemini":
-        if event == "BeforeAgent":
-            prompt = data.get("prompt", "")[:1000]
-            base.update({"prompt": prompt})
-        else:
-            req = data.get("request", {})
-            contents = req.get("contents", [])
-            prompt = ""
-            for c in reversed(contents):
-                for part in c.get("parts", []):
-                    if part.get("text"):
-                        prompt = part["text"][:1000]
-                        break
-                if prompt:
-                    break
-            resp = data.get("response", {})
-            answer = ""
-            try:
-                answer = resp["candidates"][0]["content"]["parts"][0]["text"][:500]
-            except Exception:
-                pass
-            base.update({"prompt": prompt, "response_summary": answer})
+    if payload.get("tool_response") is not None:
+        entry["tool_response"] = redact(payload.get("tool_response"))
+    elif payload.get("response") is not None:
+        entry["tool_response"] = redact(payload.get("response"))
 
-    elif tool == "codex":
-        base.update({
-            "prompt": data.get("prompt", "")[:1000],
-            "turn_id": data.get("turn_id", ""),
-            "transcript_path": data.get("transcript_path", ""),
-        })
-
-    elif tool == "cursor":
-        base.update({
-            "prompt": data.get("prompt", "")[:1000],
-            "files_context": data.get("attachments", []),
-        })
-
-    elif tool == "copilot":
-        base.update({
-            "prompt": data.get("prompt", "")[:1000],
-            "tool_name": data.get("toolName", ""),
-            "tool_args": data.get("toolArgs"),
-        })
-
-    # Skip only true noise: no prompt AND no tool-specific payload (tool_input,
-    # response_summary, tool_response, tool_args, files_context). Previously
-    # this only checked `prompt`, which dropped Claude Bash/Edit events (their
-    # tool_input has `command` / `file_path`, not `prompt` or `content`) and
-    # any Gemini/Cursor/Copilot turn that carried context but no plain prompt.
-    _PAYLOAD_KEYS = ("prompt", "tool_input", "response_summary",
-                     "tool_response", "tool_args", "files_context")
-    _LIFECYCLE_EVENTS = ("Stop", "stop", "SessionEnd", "sessionEnd", "AfterModel")
-    has_payload = any(base.get(k) for k in _PAYLOAD_KEYS)
-    if not has_payload and event not in _LIFECYCLE_EVENTS:
-        return None
-
-    return base
-
-
-def main():
-    # Read stdin as UTF-8 explicitly. On Windows, sys.stdin defaults to the
-    # system code page (e.g. cp1252), which corrupts non-Latin1 prompts
-    # (Vietnamese, CJK, emoji) into mojibake. The hook payload is always UTF-8.
-    raw = sys.stdin.buffer.read().decode("utf-8", errors="replace").strip()
-    if not raw:
-        sys.exit(0)
-
-    try:
-        data = json.loads(raw)
-    except json.JSONDecodeError:
-        sys.exit(0)
-    data = repair_mojibake(data)
-
-    tool = detect_tool(data)
-    entry = normalize(data, tool)
-    if not entry:
-        sys.exit(0)
-
-    log_dir = Path(os.environ.get("AI_LOG_DIR", ".ai-log"))
-    log_dir.mkdir(exist_ok=True)
-    log_file = log_dir / "session.jsonl"
-
-    with open(log_file, "a", encoding="utf-8") as f:
-        f.write(json.dumps(entry, ensure_ascii=False) + "\n")
-
-    # Some Codex hook events treat stdout as an optional control response with
-    # an event-specific schema. This logger is passive, so Codex should see no
-    # control output. Other tools, such as Gemini, still expect JSON on stdout.
-    if tool != "codex":
-        print(json.dumps({"status": "logged"}))
+    log_dir = Path(env_values.get("AI_LOG_DIR") or os.environ.get("AI_LOG_DIR") or ".ai-log")
+    if not log_dir.is_absolute():
+        log_dir = root / log_dir
+    log_dir.mkdir(parents=True, exist_ok=True)
+    with (log_dir / "session.jsonl").open("a", encoding="utf-8") as fh:
+        fh.write(json.dumps(entry, ensure_ascii=False, separators=(",", ":")) + "\n")
+    return 0
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        raise SystemExit(main())
+    except Exception:
+        raise SystemExit(0)

@@ -1,0 +1,5 @@
+{"id": "cse_lowq_missing_experience_min_years_treated_as_entry", "input": {"required_skills_count": 2, "employment_type": "full_time", "application_count": 0}, "expect": {"level_equals": "low", "no_crash": true}}
+{"id": "cse_lowq_zero_required_skills", "input": {"experience_min_years": 0, "required_skills_count": 0, "employment_type": "full_time", "application_count": 0}, "expect": {"jd_complexity_score_equals": 0, "no_crash": true}}
+{"id": "cse_lowq_empty_employment_type_string", "input": {"experience_min_years": 1, "required_skills_count": 1, "employment_type": "", "application_count": 0}, "expect": {"no_crash": true}}
+{"id": "cse_lowq_no_application_count_defaults_zero", "input": {"experience_min_years": 1, "required_skills_count": 1, "employment_type": "full_time"}, "expect": {"no_crash": true}}
+{"id": "cse_lowq_ai_text_empty_string_treated_as_available", "input": {"experience_min_years": 1, "required_skills_count": 1, "employment_type": "full_time", "application_count": 0, "real_provider_active": true, "explanation_enabled": true, "ai_text": ""}, "expect": {"no_crash": true}}

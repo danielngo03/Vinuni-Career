@@ -1,0 +1,5 @@
+{"id": "cm_priv_matched_phrase_excludes_phone", "input": {"text": "Liên hệ 0987654321. Vui lòng nộp phí hồ sơ trước khi phỏng vấn."}, "expect": {"flagged": true, "matched_phrase_excludes": "0987654321", "no_pii_in_response": true}}
+{"id": "cm_priv_matched_phrase_excludes_email", "input": {"text": "Email hr@scamcorp.vn. A registration fee of 100k is required before interview."}, "expect": {"flagged": true, "matched_phrase_excludes": "hr@scamcorp.vn"}}
+{"id": "cm_priv_matched_phrase_excludes_person_name", "input": {"text": "Gặp chị Nguyễn Thị Hoa để đặt cọc giữ chỗ."}, "expect": {"flagged": true, "matched_phrase_excludes": "Nguyễn Thị Hoa"}}
+{"id": "cm_priv_no_provider_leak_in_output", "input": {"text": "Việc nhẹ lương cao không cần kinh nghiệm."}, "expect": {"flagged": true, "no_provider_leak": true, "no_model_leak": true}}
+{"id": "cm_priv_no_internal_status_codes", "input": {"text": "Join our multi-level marketing family today."}, "expect": {"flagged": true, "no_internal_status_codes": true}}

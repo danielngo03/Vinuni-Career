@@ -1,0 +1,5 @@
+{"id": "af_priv_unexpected_key_with_phone_not_leaked", "input": {"llm_json": {"score": 3, "praise": "Good.", "improve": "Better.", "hint": "Try.", "student_phone": "0912345678"}}, "expect": {"blob_excludes": "0912345678"}}
+{"id": "af_priv_unexpected_key_with_email_not_leaked", "input": {"llm_json": {"score": 3, "praise": "Good.", "improve": "Better.", "hint": "Try.", "student_email": "student@example.com"}}, "expect": {"blob_excludes": "student@example.com"}}
+{"id": "af_priv_fallback_path_no_pii", "input": {"provider": "unavailable"}, "expect": {"is_fallback": true, "no_pii_in_response": true}}
+{"id": "af_priv_no_provider_model_leak", "input": {"llm_json": {"score": 3, "praise": "Good.", "improve": "Better.", "hint": "Try."}}, "expect": {"no_provider_leak": true, "no_model_leak": true}}
+{"id": "af_priv_no_internal_status_leak", "input": {"llm_json": {"score": 3, "praise": "Good.", "improve": "Better.", "hint": "Try."}}, "expect": {"no_internal_status_codes": true}}

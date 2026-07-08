@@ -1,0 +1,3 @@
+{"id": "cl_fallback_provider_down_basic", "input": {"title": "Backend Engineer", "company_name": "Acme Corp", "student_name": "An Nguyen", "provider": "unavailable"}, "expect": {"is_fallback": true, "draft_contains": "backend engineer", "no_provider_leak": true}}
+{"id": "cl_fallback_provider_down_missing_company", "input": {"title": "Data Analyst", "provider": "unavailable"}, "expect": {"is_fallback": true, "draft_contains": "data analyst", "no_provider_leak": true}}
+{"id": "cl_fallback_provider_down_minimal_payload", "input": {"provider": "unavailable"}, "expect": {"is_fallback": true, "no_provider_leak": true, "no_crash": true}}
