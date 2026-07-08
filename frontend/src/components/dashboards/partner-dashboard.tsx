@@ -4,7 +4,6 @@ import { useLocale, useTranslations } from "next-intl";
 import { useQuery } from "@tanstack/react-query";
 import {
   Briefcase,
-  Buildings,
   ChartBar,
   NotePencil,
   Hourglass,
@@ -18,9 +17,6 @@ import {
   ListChecks,
   ShieldCheck,
   Kanban,
-  Receipt,
-  GearSix,
-  TrendUp,
   Target,
   CaretRight,
   type Icon,
@@ -384,53 +380,6 @@ function OperationsHealthCard({
   );
 }
 
-function PermissionGovernancePanel() {
-  const tp = useTranslations("dashboard.partner");
-  const controls: Array<{ key: string; href: string; icon: Icon }> = [
-    { key: "team", href: "/partner/team", icon: UsersThree },
-    { key: "billing", href: "/partner/billing", icon: Receipt },
-    { key: "company", href: "/partner/company-profile", icon: Buildings },
-    { key: "analytics", href: "/partner/analytics", icon: TrendUp },
-    { key: "pipeline", href: "/partner/pipeline", icon: Kanban },
-    { key: "security", href: "/partner/security", icon: ShieldCheck },
-    { key: "settings", href: "/partner/settings", icon: GearSix },
-  ];
-
-  return (
-    <DashboardSection
-      icon={ShieldCheck}
-      tone="neutral"
-      title={tp("governanceTitle")}
-    >
-      <p className="-mt-1 mb-3 text-xs leading-5 text-[var(--text-secondary)]">
-        {tp("governanceBody")}
-      </p>
-      <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-1">
-        {controls.map((item) => (
-          <Link
-            key={item.key}
-            href={item.href}
-            className="group flex items-center gap-3 rounded-[12px] border border-[var(--border-default)] bg-[var(--surface-card)] px-3.5 py-3 outline-none transition-colors hover:border-[var(--border-strong)] hover:bg-[var(--bg-subtle)] focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)]/30"
-          >
-            <span className="icon-chip-neutral flex size-8 shrink-0 items-center justify-center rounded-lg">
-              <item.icon aria-hidden weight="duotone" className="size-4" />
-            </span>
-            <span className="min-w-0 flex-1">
-              <span className="block truncate text-sm font-bold text-[var(--text-primary)] group-hover:text-[var(--brand-primary)]">
-                {tp(`governance.${item.key}.title`)}
-              </span>
-              <span className="mt-0.5 block truncate text-xs text-[var(--text-secondary)]">
-                {tp(`governance.${item.key}.body`)}
-              </span>
-            </span>
-            <CaretRight aria-hidden weight="bold" className="size-3.5 text-[var(--text-muted)]" />
-          </Link>
-        ))}
-      </div>
-    </DashboardSection>
-  );
-}
-
 function JobPerformanceSnapshot({
   jobs,
   jobLabels,
@@ -533,17 +482,13 @@ export function PartnerDashboard() {
   return (
     <>
       <PageHeader
+        eyebrow={tNav("group.recruitment")}
         title={tNav("dashboard")}
         actions={
           authed && !query.isError ? (
-            <>
-              <Link href="/partner/ops">
-                <Button variant="secondary">{tNav("ops")}</Button>
-              </Link>
-              <Link href="/partner/jobs/new">
-                <Button variant="primary">{tp("postJob")}</Button>
-              </Link>
-            </>
+            <Link href="/partner/jobs/new">
+              <Button variant="primary">{tp("postJob")}</Button>
+            </Link>
           ) : undefined
         }
       />
@@ -652,8 +597,6 @@ export function PartnerDashboard() {
                     metrics={data.metrics}
                     applicationsPerActiveJob={applicationsPerActiveJob}
                   />
-
-                  <PermissionGovernancePanel />
 
                   <DashboardSection
                     icon={ClockCounterClockwise}

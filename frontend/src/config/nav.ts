@@ -137,7 +137,6 @@ export const WORKSPACE_NAV_GROUPS: Record<Persona, NavGroup[]> = {
       key: null,
       items: [
         { key: "dashboard", href: "/dashboard", icon: LayoutGrid },
-        { key: "ops", href: "/ops", icon: Gauge },
         { key: "jobs", href: "/jobs", icon: Briefcase },
       ],
     },
@@ -153,7 +152,7 @@ export const WORKSPACE_NAV_GROUPS: Record<Persona, NavGroup[]> = {
       ],
     },
     {
-      key: null,
+      key: "growth",
       items: [
         { key: "events", href: "/events", icon: CalendarDays },
         { key: "advertising", href: "/advertising", icon: Megaphone },
@@ -170,6 +169,7 @@ export const WORKSPACE_NAV_GROUPS: Record<Persona, NavGroup[]> = {
       accordion: true,
       icon: Building2,
       items: [
+        { key: "ops", href: "/ops", icon: Gauge },
         { key: "companyProfile", href: "/company-profile", icon: Building2 },
         { key: "team", href: "/team", icon: Users },
         { key: "billing", href: "/billing", icon: CreditCard },

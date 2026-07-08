@@ -203,7 +203,7 @@ export function Sidebar({
   }, [pathname, persona]);
 
   return (
-    <div className="flex h-full flex-col bg-[#f7f6f2]">
+    <div className="flex h-full flex-col bg-[var(--workspace-canvas)]">
       {/* Official VinUniversity lockup. Collapse lives near the footer identity. */}
       <div
         className={cn(
@@ -241,11 +241,9 @@ export function Sidebar({
             return true;
           });
           if (available.length === 0) return null;
-          const previousGroup = groups[gi - 1];
           const gapBefore =
             gi > 0 &&
-            !(gi === 1 && groups[0]?.key === null) &&
-            !(persona === "partner" && group.key === null && previousGroup?.key === "recruitment");
+            !(gi === 1 && groups[0]?.key === null);
 
           // Accordion block: one clickable row + collapsible submenu.
           if (group.accordion && group.icon) {
