@@ -53,6 +53,7 @@ _PLAN_NUMERIC_LIMITS: dict[str, frozenset[str]] = {
             "pdf_exports_per_month",
             "mass_apply_limit",
             "ai_daily_cost_quota_usd",
+            "ai_weekly_energy_units",
         }
     ),
     lifecycle.AUDIENCE_PARTNER: frozenset(
@@ -62,6 +63,7 @@ _PLAN_NUMERIC_LIMITS: dict[str, frozenset[str]] = {
             "passive_search_quota",
             "email_blast_quota",
             "ai_daily_cost_quota_usd",
+            "ai_weekly_energy_units",
         }
     ),
 }

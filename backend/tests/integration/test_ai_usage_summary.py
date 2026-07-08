@@ -31,8 +31,11 @@ from app.shared.permissions import Principal
 
 from tests.auth_utils import register_verified
 
-# Persona defaults (see app.ai.energy.constants).
-STUDENT_WEEKLY = 120
+# Persona defaults (see app.ai.energy.constants). ``_student`` registers a VinUni
+# (institution-domain) student, whose segment weekly AI-energy allowance is 300 —
+# resolved via ``limit_facade`` regardless of whether a plan sets it. (An external
+# student would resolve 120.)
+STUDENT_WEEKLY = 300
 PARTNER_ORG_WEEKLY = 400
 
 
@@ -197,14 +200,14 @@ async def test_org_weekly_exhaustion_blocks_and_gates(db_session) -> None:
 
 async def test_3h_burst_warns_but_never_blocks(db_session) -> None:
     principal = await _student(db_session)
-    # soft_cap = 0.4 * 120 = 48. Spend 50 in the last 3h — over the burst cap but
-    # well under the weekly allowance.
+    # soft_cap = 0.4 * 300 = 120. Spend 130 in the last 3h — over the burst cap but
+    # well under the weekly allowance (300).
     await _charge(
-        db_session, units=50, user_id=principal.user_id, persona=PERSONA_STUDENT,
+        db_session, units=130, user_id=principal.user_id, persona=PERSONA_STUDENT,
         scope=SCOPE_USER,
     )
     data = await usage_service.my_usage(db_session, principal=principal)
-    assert data["session_3h"]["used"] == 50
+    assert data["session_3h"]["used"] == 130
     assert data["session_3h"]["over_soft_cap"] is True
     assert data["warning"] is True
     assert data["blocked"] is False  # 3h NEVER blocks

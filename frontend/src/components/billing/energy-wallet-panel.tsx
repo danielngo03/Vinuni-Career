@@ -60,13 +60,13 @@ export function EnergyWalletPanel() {
       {heading}
 
       {q.isPending ? (
-        <div className="space-y-3 rounded-2xl border border-[var(--border-default)] bg-white p-4 shadow-[0_2px_16px_rgba(11,34,57,0.06)]">
+        <div className="space-y-3 marketplace-card rounded-2xl p-4">
           <Skeleton className="h-6 w-40" />
           <Skeleton className="h-2 w-full" />
           <Skeleton className="h-10 w-full" />
         </div>
       ) : q.isError || !q.data ? (
-        <div className="flex flex-col items-start gap-2 rounded-2xl border border-[var(--border-default)] bg-white p-4 shadow-[0_2px_16px_rgba(11,34,57,0.06)]">
+        <div className="flex flex-col items-start gap-2 marketplace-card rounded-2xl p-4">
           <p className="flex items-center gap-2 text-sm font-semibold text-[var(--text-primary)]">
             <WarningCircle aria-hidden weight="duotone" className="size-5 text-[var(--brand-red)]" />
             {t("errorTitle")}
@@ -103,17 +103,17 @@ function WalletBody({
       : t("okNote");
 
   return (
-    <div className="space-y-4 rounded-2xl border border-[var(--border-default)] bg-white p-4 shadow-[0_2px_16px_rgba(11,34,57,0.06)]">
+    <div className="space-y-4 marketplace-card rounded-2xl p-4">
       {/* Masked meter */}
       <div>
         <div className="flex items-end justify-between gap-3">
           <div className="min-w-0">
-            <p className="text-xs font-medium text-[var(--text-secondary)]">
+            <p className="text-[11px] font-semibold uppercase tracking-wide text-[var(--text-muted)]">
               {view.isOrg ? t("orgPoolLabel") : t("meterLabel")}
             </p>
             <p
               className={cn(
-                "text-2xl font-bold tabular-nums leading-tight",
+                "text-3xl font-extrabold tabular-nums leading-none",
                 view.blocked ? "text-[var(--red-600)]" : "text-[var(--text-primary)]",
               )}
             >
@@ -149,7 +149,7 @@ function WalletBody({
                 ? "bg-[var(--red-600)]"
                 : view.tone === "warn"
                   ? "bg-[var(--amber-500)]"
-                  : "bg-[var(--text-primary)]",
+                  : "bg-[var(--teal-500)]",
             )}
             style={{ width: `${view.fillPct}%` }}
           />

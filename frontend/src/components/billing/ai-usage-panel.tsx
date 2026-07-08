@@ -66,7 +66,7 @@ export function AiUsagePanel({ audience }: { audience: BillingAudience }) {
       {heading}
 
       {q.isPending ? (
-        <div className="space-y-3 rounded-2xl border border-[var(--border-default)] bg-white p-4 shadow-[0_2px_16px_rgba(11,34,57,0.06)]">
+        <div className="space-y-3 marketplace-card rounded-2xl p-4">
           <Skeleton className="h-4 w-40" />
           <Skeleton className="h-2 w-full" />
           <Skeleton className="h-4 w-32" />
@@ -116,7 +116,7 @@ function UsageBody({
   const isOrg = data.scope === "org";
 
   return (
-    <div className="space-y-4 rounded-2xl border border-[var(--border-default)] bg-white p-4 shadow-[0_2px_16px_rgba(11,34,57,0.06)]">
+    <div className="space-y-4 marketplace-card rounded-2xl p-4">
       {/* Energy meter */}
       <EnergyMeter data={data} weekReset={weekReset} isOrg={isOrg} t={t} />
 
@@ -251,12 +251,12 @@ function EnergyMeter({
     <div>
       <div className="flex items-end justify-between gap-3">
         <div className="min-w-0">
-          <p className="text-xs font-medium text-[var(--text-secondary)]">
+          <p className="text-[11px] font-semibold uppercase tracking-wide text-[var(--text-muted)]">
             {isOrg ? t("usage.orgPoolLabel") : t("usage.energyLabel")}
           </p>
           <p
             className={cn(
-              "text-2xl font-bold tabular-nums leading-tight",
+              "text-3xl font-extrabold tabular-nums leading-none",
               tone === "critical"
                 ? "text-[var(--red-600)]"
                 : "text-[var(--text-primary)]",
@@ -300,7 +300,7 @@ function EnergyMeter({
               ? "bg-[var(--red-600)]"
               : tone === "warning"
                 ? "bg-[var(--amber-500)]"
-                : "bg-[var(--text-primary)]",
+                : "bg-[var(--teal-500)]",
           )}
           style={{ width: `${Math.min(100, Math.max(0, data.energy_pct))}%` }}
         />

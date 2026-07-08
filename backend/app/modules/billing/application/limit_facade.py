@@ -28,20 +28,36 @@ from typing import Any
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
+from app.ai.energy import constants as energy_constants
 from app.core.config import get_settings
 from app.modules.billing.domain import lifecycle
 from app.modules.billing.domain.models import Subscription, SubscriptionPlan
 from app.modules.users.application import user_read_facade
 from app.shared.permissions import Principal
 
+# The masked weekly AI-energy plan-limit key (canonical vocabulary lives in the
+# energy module). Its VALUE is an opaque product credit count — never USD/tokens.
+_WEEKLY_ENERGY_KEY = energy_constants.PLAN_LIMIT_KEY_WEEKLY_UNITS
+
+# Segment bonuses layered on the free/default student plan. ``ai_daily_cost_quota_usd``
+# is an INTERNAL cost mechanic (budget_guard/superadmin only) and must never reach a
+# subscriber billing response — see ``INTERNAL_LIMIT_KEYS`` / ``subscriber_limits``.
 _VINUNI_STUDENT_LIMITS = {
     "student_segment": "vinuni_student",
     "ai_daily_cost_quota_usd": 0.20,
+    _WEEKLY_ENERGY_KEY: energy_constants.DEFAULT_WEEKLY_UNITS_STUDENT_VINUNI,
 }
 _EXTERNAL_STUDENT_LIMITS = {
     "student_segment": "external_student",
     "ai_daily_cost_quota_usd": 0.02,
+    _WEEKLY_ENERGY_KEY: energy_constants.DEFAULT_WEEKLY_UNITS_STUDENT_EXTERNAL,
 }
+
+# Limit keys that are INTERNAL cost/segment mechanics. ``resolve_limits`` keeps them
+# (budget_guard resolves the USD quota, the energy meter reads the raw units), but the
+# self-service billing surface strips them via :func:`subscriber_limits` so a student /
+# partner never sees a raw USD figure or the internal segment marker.
+INTERNAL_LIMIT_KEYS = frozenset({"ai_daily_cost_quota_usd", "student_segment"})
 
 
 def _now() -> datetime:
@@ -221,3 +237,64 @@ async def resolve_limit(
     limits = await resolve_limits(session, principal, now=now)
     value = limits.get(key)
     return default if value is None else value
+
+
+# --------------------------------------------------------------------------- #
+# Subscriber-facing masking (student/partner billing surface)                  #
+# --------------------------------------------------------------------------- #
+
+
+def subscriber_limits(raw: dict[str, Any], *, weekly_energy: int | None = None) -> dict:
+    """Strip INTERNAL cost/segment keys and expose the masked weekly AI-energy row.
+
+    Removes ``ai_daily_cost_quota_usd`` (raw USD) and ``student_segment`` so a
+    subscriber never sees a cost figure or internal marker, and surfaces
+    ``ai_weekly_energy_units`` as an OPAQUE product credit count (never USD/tokens).
+    ``weekly_energy`` fills the row only when the map does not already carry it (so an
+    explicit paid-plan value such as the Pro tier's is preserved).
+    """
+
+    out = {k: v for k, v in (raw or {}).items() if k not in INTERNAL_LIMIT_KEYS}
+    if weekly_energy is not None:
+        out.setdefault(_WEEKLY_ENERGY_KEY, int(weekly_energy))
+    return out
+
+
+async def subscriber_weekly_energy_default(
+    session: AsyncSession, principal: Principal
+) -> int:
+    """Weekly AI-energy allowance default for the CALLER's own segment/persona.
+
+    Mirrors the energy meter's resolution so billing and the header meter agree: a
+    VinUni student -> 300, an external student -> 120, a partner org -> 400, else the
+    safe-low fallback. Used to fill the free-tier comparison cell and the entitlements
+    row when no plan sets ``ai_weekly_energy_units`` explicitly.
+    """
+
+    if principal.org_id is not None:
+        return energy_constants.DEFAULT_WEEKLY_UNITS_PARTNER_ORG
+    if principal.user_id is not None:
+        email = await _email_for_user(session, principal.user_id)
+        if _is_institution_email(email):
+            return energy_constants.DEFAULT_WEEKLY_UNITS_STUDENT_VINUNI
+        return energy_constants.DEFAULT_WEEKLY_UNITS_STUDENT_EXTERNAL
+    return energy_constants.DEFAULT_WEEKLY_UNITS_FALLBACK
+
+
+def plan_weekly_energy_units(plan: SubscriptionPlan, *, segment_default: int) -> int:
+    """Weekly AI-energy shown for ONE plan on the comparison table.
+
+    An explicit ``ai_weekly_energy_units`` on the plan (e.g. a paid tier) wins; else a
+    partner plan falls back to the partner-org default and a student plan (the free
+    tier) to the caller's segment default (VinUni 300 / external 120).
+    """
+
+    explicit = (plan.limits or {}).get(_WEEKLY_ENERGY_KEY)
+    if explicit is not None:
+        try:
+            return int(explicit)
+        except (TypeError, ValueError):
+            pass
+    if plan.audience == lifecycle.AUDIENCE_PARTNER:
+        return energy_constants.DEFAULT_WEEKLY_UNITS_PARTNER_ORG
+    return segment_default

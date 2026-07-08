@@ -39,6 +39,9 @@ class JobRef:
     application_deadline: datetime | None
     created_at: datetime
     posted_by: uuid.UUID
+    # Seats/hiring target — needed by the apply-time competition-projection refresh.
+    # Optional (defaults None) so existing ref consumers are unaffected.
+    headcount: int | None = None
 
 
 def to_ref(job: Job) -> JobRef:
@@ -50,6 +53,7 @@ def to_ref(job: Job) -> JobRef:
         application_deadline=job.application_deadline,
         created_at=job.created_at,
         posted_by=job.posted_by,
+        headcount=job.headcount,
     )
 
 

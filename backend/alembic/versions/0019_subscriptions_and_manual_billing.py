@@ -85,6 +85,11 @@ _SEED_PLANS: list[dict] = [
             "premium_templates": True,
             "mass_apply_limit": 10,
             "ai_daily_cost_quota_usd": 0.75,
+            # Masked weekly AI-energy allowance (opaque product credits, NOT USD).
+            # A paid tier's explicit value overrides the per-segment default; the
+            # free student tier has none and resolves from the segment (VinUni 300 /
+            # external 120) in ``limit_facade``.
+            "ai_weekly_energy_units": 1500,
         },
         "is_default": False,
         "is_visible": True,
@@ -105,6 +110,8 @@ _SEED_PLANS: list[dict] = [
             "passive_search_quota": 0,
             "email_blast_quota": 0,
             "ai_daily_cost_quota_usd": 0.05,
+            # Masked weekly AI-energy pool for the partner org (opaque credits).
+            "ai_weekly_energy_units": 400,
         },
         "is_default": True,
         "is_visible": True,
@@ -125,6 +132,8 @@ _SEED_PLANS: list[dict] = [
             "passive_search_quota": 50,
             "email_blast_quota": 10,
             "ai_daily_cost_quota_usd": 1.50,
+            # Masked weekly AI-energy pool for the partner org (opaque credits).
+            "ai_weekly_energy_units": 1500,
         },
         "is_default": False,
         "is_visible": True,

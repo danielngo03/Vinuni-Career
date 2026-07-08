@@ -18,6 +18,7 @@ import uuid
 from datetime import UTC, datetime, timedelta
 
 import pytest
+from app.ai.energy import service as energy_service
 from app.modules.automation.scheduler import runner
 from app.modules.billing.application import (
     expiry_service,
@@ -231,6 +232,133 @@ async def test_student_pro_plan_overrides_segment_ai_quota(db_session) -> None:
 
     assert before == 0.20
     assert after == 0.75
+
+
+# --------------------------------------------------------------------------- #
+# Masked weekly AI-energy allowance (energy model) — no USD leaks to students  #
+# --------------------------------------------------------------------------- #
+
+
+def _student(user_id, *, perms: set[str]) -> Principal:
+    return Principal(
+        user_id=user_id, persona="student", permissions=frozenset(perms)
+    )
+
+
+async def test_student_entitlements_hide_usd_and_show_weekly_energy(
+    db_session,
+) -> None:
+    """The self-service billing response must NOT leak a raw daily-USD figure and
+    MUST carry the masked weekly AI-energy allowance (VinUni student -> 300)."""
+
+    await seed_plans(db_session)
+    vin_user = await register_verified(db_session, email="ent@vinuni.edu.vn")
+    student = _student(vin_user.id, perms={"billing:view"})
+
+    mine = await subscription_service.get_mine(db_session, principal=student)
+
+    # (a) No USD / internal segment marker anywhere on the entitlements response.
+    assert "ai_daily_cost_quota_usd" not in mine["limits"]
+    assert "student_segment" not in mine["limits"]
+    assert "ai_daily_cost_quota_usd" not in mine["default_plan"]["limits"]
+    # (a)+(b) Masked weekly AI-energy allowance present and segment-correct.
+    assert mine["limits"]["ai_weekly_energy_units"] == 300
+    assert mine["default_plan"]["limits"]["ai_weekly_energy_units"] == 300
+
+
+async def test_external_student_entitlements_weekly_energy_is_lower(
+    db_session,
+) -> None:
+    await seed_plans(db_session)
+    ext_user = await register_verified(db_session, email="ent@example.edu")
+    student = _student(ext_user.id, perms={"billing:view"})
+
+    mine = await subscription_service.get_mine(db_session, principal=student)
+
+    assert "ai_daily_cost_quota_usd" not in mine["limits"]
+    assert mine["limits"]["ai_weekly_energy_units"] == 120
+
+
+async def test_plan_comparison_masks_usd_and_scales_weekly_energy(db_session) -> None:
+    """The plan comparison table shows a masked weekly AI-energy row per plan: the
+    free tier from the caller's segment, the Pro tier from its explicit value."""
+
+    await seed_plans(db_session)
+    vin_user = await register_verified(db_session, email="cmp@vinuni.edu.vn")
+    ext_user = await register_verified(db_session, email="cmp@example.edu")
+    vin = _student(vin_user.id, perms={"billing:view"})
+    ext = _student(ext_user.id, perms={"billing:view"})
+
+    vin_plans = await subscription_service.list_plans(
+        db_session, principal=vin, audience="student"
+    )
+    ext_plans = await subscription_service.list_plans(
+        db_session, principal=ext, audience="student"
+    )
+
+    for plans in (vin_plans, ext_plans):
+        for p in plans:
+            assert "ai_daily_cost_quota_usd" not in p["limits"]
+            assert "student_segment" not in p["limits"]
+
+    vin_free = next(p for p in vin_plans if p["code"] == "student_free")
+    vin_pro = next(p for p in vin_plans if p["code"] == "student_pro")
+    ext_free = next(p for p in ext_plans if p["code"] == "student_free")
+    ext_pro = next(p for p in ext_plans if p["code"] == "student_pro")
+
+    # Free tier scales with the viewer's segment; Pro is the explicit higher tier.
+    assert vin_free["limits"]["ai_weekly_energy_units"] == 300
+    assert ext_free["limits"]["ai_weekly_energy_units"] == 120
+    assert vin_pro["limits"]["ai_weekly_energy_units"] == 1500
+    assert ext_pro["limits"]["ai_weekly_energy_units"] == 1500
+
+
+async def test_energy_meter_reflects_segment_and_pro_allowance(db_session) -> None:
+    """The header energy meter (energy_service.snapshot) resolves the SAME masked
+    weekly allowance billing shows: VinUni 300, external 120, active Pro 1500 — and
+    never leaks USD/token internals in its public shape."""
+
+    plans = await seed_plans(db_session)
+    vin_user = await register_verified(db_session, email="meter@vinuni.edu.vn")
+    ext_user = await register_verified(db_session, email="meter@example.edu")
+    pro_user = await register_verified(db_session, email="meter-pro@vinuni.edu.vn")
+    _uu, _uo, uni = await make_org_with_admin(db_session, org_type="university")
+
+    vin = _student(vin_user.id, perms={"billing:view"})
+    ext = _student(ext_user.id, perms={"billing:view"})
+    pro = _student(pro_user.id, perms={"billing:view", "billing:subscribe"})
+
+    vin_snap = await energy_service.snapshot(db_session, principal=vin)
+    ext_snap = await energy_service.snapshot(db_session, principal=ext)
+    assert vin_snap.weekly_allowance == 300
+    assert ext_snap.weekly_allowance == 120
+
+    await _request_and_activate(
+        db_session, subscriber=pro, uni=uni, plan=plans["student_pro"]
+    )
+    pro_snap = await energy_service.snapshot(db_session, principal=pro)
+    assert pro_snap.weekly_allowance == 1500
+
+    # Leakage guard: the public meter shape carries only opaque energy fields.
+    public = vin_snap.to_public()
+    flat = str(public).lower()
+    assert "usd" not in flat and "token" not in flat and "cost" not in flat
+
+
+async def test_resolve_limits_keeps_usd_internally_for_budget_guard(db_session) -> None:
+    """The resolver stays truthful for INTERNAL consumers (budget_guard/superadmin):
+    the raw USD quota is still resolvable even though it is masked on the response."""
+
+    await seed_plans(db_session)
+    vin_user = await register_verified(db_session, email="internal@vinuni.edu.vn")
+    student = _student(vin_user.id, perms={"billing:view"})
+
+    limits = await limit_facade.resolve_limits(db_session, student)
+    assert limits["ai_daily_cost_quota_usd"] == 0.20
+    assert limits["ai_weekly_energy_units"] == 300
+    # And the dedicated internal accessor still returns the USD quota.
+    usd = await limit_facade.resolve_user_ai_daily_cost_quota(db_session, vin_user.id)
+    assert usd == 0.20
 
 
 async def test_university_admin_can_create_and_update_plan_limits(db_session) -> None:

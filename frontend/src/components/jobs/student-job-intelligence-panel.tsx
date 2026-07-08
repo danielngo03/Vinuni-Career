@@ -21,7 +21,7 @@ import {
   type StudentFitBands,
   type StudentJobIntelligence,
 } from "@/lib/api";
-import { fitColor, fitTextColor } from "@/lib/cv/fit";
+import { fitColor, fitTextColor, fitTier } from "@/lib/cv/fit";
 import {
   deriveCvReadiness,
   type CvReadiness,
@@ -316,7 +316,11 @@ function DrawerButton({
   );
 }
 
-/** Big total-score ring that animates its arc + number 0 → score on mount. */
+/**
+ * The CV-JD fit score ring — the panel's signature element. A crisp, thin ring
+ * with a big tabular score and a tier band label beneath it. Animates its arc +
+ * number 0 → score on mount (respects `prefers-reduced-motion`).
+ */
 function ScoreRing({ score }: { score: number }) {
   const tf = useTranslations("cvFit");
   const reduced = usePrefersReducedMotion();
@@ -327,6 +331,7 @@ function ScoreRing({ score }: { score: number }) {
   const shownArc = animated ? target : 0;
   const dash = (shownArc / 100) * CIRC;
   const color = fitColor(target);
+  const tier = fitTier(target);
 
   const [display, setDisplay] = useState(reduced ? target : 0);
   useEffect(() => {
@@ -348,24 +353,24 @@ function ScoreRing({ score }: { score: number }) {
   }, [target, reduced]);
 
   return (
-    <div className="shrink-0">
+    <div className="flex w-[76px] shrink-0 flex-col items-center gap-1.5">
       <div
-        className="relative size-16"
+        className="relative size-[72px]"
         role="meter"
         aria-valuenow={target}
         aria-valuemin={0}
         aria-valuemax={100}
         aria-label={tf("scoreAria", { score: target })}
       >
-        <svg viewBox="0 0 56 56" className="size-16 -rotate-90" aria-hidden>
-          <circle cx="28" cy="28" r="22" fill="none" stroke="var(--bg-muted)" strokeWidth="5" />
+        <svg viewBox="0 0 56 56" className="size-[72px] -rotate-90" aria-hidden>
+          <circle cx="28" cy="28" r="22" fill="none" stroke="var(--bg-muted)" strokeWidth="3.5" />
           <circle
             cx="28"
             cy="28"
             r="22"
             fill="none"
             stroke={color}
-            strokeWidth="5"
+            strokeWidth="3.5"
             strokeLinecap="round"
             strokeDasharray={`${dash} ${CIRC}`}
             style={{
@@ -373,13 +378,20 @@ function ScoreRing({ score }: { score: number }) {
             }}
           />
         </svg>
-        <div className="absolute inset-0 flex flex-col items-center justify-center">
-          <span className="text-xl font-extrabold leading-none tabular-nums" style={{ color: fitTextColor(target) }}>
+        <div className="absolute inset-0 flex flex-col items-center justify-center leading-none">
+          <span className="text-2xl font-extrabold tabular-nums" style={{ color: fitTextColor(target) }}>
             {display}
           </span>
-          <span className="text-[9px] font-semibold text-[var(--text-muted)]">/100</span>
+          <span className="mt-0.5 text-[9px] font-semibold text-[var(--text-muted)]">/100</span>
         </div>
       </div>
+      {/* Band label — makes the ring self-describing (fit tier, not AI confidence). */}
+      <span
+        className="text-center text-[10px] font-bold uppercase leading-tight tracking-[0.06em]"
+        style={{ color: fitTextColor(target) }}
+      >
+        {tf(`tier.${tier}`)}
+      </span>
     </div>
   );
 }

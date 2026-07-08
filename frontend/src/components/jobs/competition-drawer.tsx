@@ -8,7 +8,6 @@ import {
   Info,
   Sparkle,
   Target,
-  WarningCircle,
 } from "@phosphor-icons/react";
 import { Sheet, Skeleton } from "@/components/ui";
 import { jobsApi, type StudentCompetitionIntelligence } from "@/lib/api";
@@ -74,13 +73,13 @@ export function CompetitionDrawer({ open, onClose, jobId, competition }: Props) 
       overlayBlur={false}
       closeLabel={tc("title")}
     >
-      <div className="space-y-4">
+      <div className="space-y-5">
         <p className="text-xs leading-relaxed text-[var(--text-muted)]">{tc("subtitle")}</p>
 
         {!hasSignal ? (
           <div className="flex flex-col items-start gap-2 rounded-xl border border-[var(--border-default)] bg-[var(--surface-secondary)] px-4 py-5">
             <p className="flex items-center gap-2 text-sm font-semibold text-[var(--text-primary)]">
-              <WarningCircle aria-hidden weight="duotone" className="size-5 text-[var(--text-muted)]" />
+              <Info aria-hidden weight="duotone" className="size-5 text-[var(--text-muted)]" />
               {tc("lowSignalTitle")}
             </p>
             <p className="text-sm leading-relaxed text-[var(--text-secondary)]">{tc("lowSignalBody")}</p>
@@ -175,7 +174,12 @@ function BandRow({ row }: { row: CompetitionRow }) {
   return (
     <div className="flex items-center justify-between gap-3 px-3.5 py-2.5">
       <dt className="text-xs text-[var(--text-muted)]">{label}</dt>
-      <dd className="text-xs font-semibold text-[var(--text-primary)]">{value}</dd>
+      <dd>
+        {/* Calm coarse chip — a bucket label, never a raw applicant number. */}
+        <span className="inline-flex items-center rounded-full border border-[var(--border-default)] bg-[var(--bg-subtle)] px-2.5 py-0.5 text-[11px] font-semibold text-[var(--text-primary)]">
+          {value}
+        </span>
+      </dd>
     </div>
   );
 }

@@ -11,6 +11,7 @@ from __future__ import annotations
 
 from decimal import Decimal
 
+from app.modules.billing.application import limit_facade
 from app.modules.billing.domain import lifecycle
 from app.modules.billing.domain.models import Subscription, SubscriptionPlan
 
@@ -23,7 +24,21 @@ def _amount(value: Decimal | None) -> str | None:
     return None if value is None else f"{value:.2f}"
 
 
-def plan(p: SubscriptionPlan, *, locale: str = "vi") -> dict:
+def plan(
+    p: SubscriptionPlan,
+    *,
+    locale: str = "vi",
+    subscriber_facing: bool = False,
+    weekly_energy: int | None = None,
+) -> dict:
+    """Present a plan. ``subscriber_facing`` masks the ``limits`` map for the
+    self-service (student/partner) surface — no raw USD cost quota, no internal
+    segment marker, and a masked weekly AI-energy row (``weekly_energy`` fills the
+    free tier). The admin catalogue keeps the raw limits (default)."""
+
+    limits = dict(p.limits or {})
+    if subscriber_facing:
+        limits = limit_facade.subscriber_limits(limits, weekly_energy=weekly_energy)
     return {
         "id": str(p.id),
         "code": p.code,
@@ -39,7 +54,7 @@ def plan(p: SubscriptionPlan, *, locale: str = "vi") -> dict:
         "duration_days": p.duration_days,
         "price_amount": _amount(p.price_amount),
         "currency": p.currency,
-        "limits": dict(p.limits or {}),
+        "limits": limits,
         "is_default": p.is_default,
         "is_visible": p.is_visible,
         "sort_order": p.sort_order,
@@ -52,12 +67,22 @@ def subscription(
     locale: str = "vi",
     plan_obj: SubscriptionPlan | None = None,
     admin: bool = False,
+    weekly_energy: int | None = None,
 ) -> dict:
     data = {
         "id": str(s.id),
         "principal_type": s.principal_type,
         "plan_id": str(s.plan_id),
-        "plan": plan(plan_obj, locale=locale) if plan_obj is not None else None,
+        "plan": (
+            plan(
+                plan_obj,
+                locale=locale,
+                subscriber_facing=not admin,
+                weekly_energy=weekly_energy,
+            )
+            if plan_obj is not None
+            else None
+        ),
         "billing_period": s.billing_period,
         "billing_period_label": lifecycle.billing_period_label(
             s.billing_period, locale=locale

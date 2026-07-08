@@ -103,7 +103,7 @@ export function AnalyzeCvDrawer({
       overlayBlur={false}
       closeLabel={tf("aiAssessmentTitle")}
     >
-      <div className="space-y-4">
+      <div className="space-y-5">
         <p className="text-xs leading-relaxed text-[var(--text-muted)]">
           {t("subtitle")}
         </p>

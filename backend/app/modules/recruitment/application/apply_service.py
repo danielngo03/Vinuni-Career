@@ -232,7 +232,7 @@ async def _refresh_competition_projection(session: AsyncSession, *, job) -> None
         )
 
         await competition_projection.refresh_job_competition_safe(
-            session, job_id=job.id, org_id=job.org_id, seats=job.headcount
+            session, job_id=job.id, org_id=job.org_id, seats=job.headcount or 1
         )
     except Exception:  # noqa: BLE001 — telemetry must never break apply submission
         pass

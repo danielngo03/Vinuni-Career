@@ -23,7 +23,8 @@ _SEED_PLANS: list[dict] = [
         "name_en": "Student — Pro", "audience": "student",
         "price_amount": "99000.00", "limits": {"cv_active_quota": 10,
         "pdf_exports_per_month": 50, "premium_templates": True,
-        "mass_apply_limit": 10, "ai_daily_cost_quota_usd": 0.75},
+        "mass_apply_limit": 10, "ai_daily_cost_quota_usd": 0.75,
+        "ai_weekly_energy_units": 1500},
         "is_default": False, "sort_order": 1,
     },
     {
@@ -31,7 +32,8 @@ _SEED_PLANS: list[dict] = [
         "name_en": "Partner — Basic", "audience": "partner",
         "price_amount": "0.00", "limits": {"job_post_quota": 5,
         "featured_job_slots": 0, "passive_search_quota": 0,
-        "email_blast_quota": 0, "ai_daily_cost_quota_usd": 0.05},
+        "email_blast_quota": 0, "ai_daily_cost_quota_usd": 0.05,
+        "ai_weekly_energy_units": 400},
         "is_default": True, "sort_order": 0,
     },
     {
@@ -39,7 +41,8 @@ _SEED_PLANS: list[dict] = [
         "name_en": "Partner — Pro", "audience": "partner",
         "price_amount": "2000000.00", "limits": {"job_post_quota": 20,
         "featured_job_slots": 3, "passive_search_quota": 50,
-        "email_blast_quota": 10, "ai_daily_cost_quota_usd": 1.50},
+        "email_blast_quota": 10, "ai_daily_cost_quota_usd": 1.50,
+        "ai_weekly_energy_units": 1500},
         "is_default": False, "sort_order": 1,
     },
 ]

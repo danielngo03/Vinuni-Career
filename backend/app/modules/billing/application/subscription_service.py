@@ -108,7 +108,23 @@ async def list_plans(
         SubscriptionPlan.price_amount.asc(),
     )
     rows = list((await session.execute(stmt)).scalars().all())
-    return [presenters.plan(p, locale=locale) for p in rows]
+    # Subscriber-facing catalogue: mask the raw USD quota + segment marker and show a
+    # masked weekly AI-energy allowance per plan (the free tier resolves from the
+    # caller's segment; paid tiers use their explicit plan value).
+    segment_default = await limit_facade.subscriber_weekly_energy_default(
+        session, principal
+    )
+    return [
+        presenters.plan(
+            p,
+            locale=locale,
+            subscriber_facing=True,
+            weekly_energy=limit_facade.plan_weekly_energy_units(
+                p, segment_default=segment_default
+            ),
+        )
+        for p in rows
+    ]
 
 
 async def _load_plan(
@@ -182,10 +198,20 @@ async def _load_owned(
 
 
 async def _present(
-    session: AsyncSession, sub: Subscription, *, locale: str
+    session: AsyncSession, sub: Subscription, *, principal: Principal, locale: str
 ) -> dict:
     plan_obj = await _load_plan(session, sub.plan_id)
-    return presenters.subscription(sub, locale=locale, plan_obj=plan_obj)
+    weekly_energy = None
+    if plan_obj is not None:
+        segment_default = await limit_facade.subscriber_weekly_energy_default(
+            session, principal
+        )
+        weekly_energy = limit_facade.plan_weekly_energy_units(
+            plan_obj, segment_default=segment_default
+        )
+    return presenters.subscription(
+        sub, locale=locale, plan_obj=plan_obj, weekly_energy=weekly_energy
+    )
 
 
 # --------------------------------------------------------------------------- #
@@ -209,17 +235,33 @@ async def get_mine(
     )
     sub = await _load_current_inflight(session, principal=principal)
     default_plan = await _default_plan_for(session, audience=audience)
+    segment_default = await limit_facade.subscriber_weekly_energy_default(
+        session, principal
+    )
     effective = await limit_facade.resolve_limits(session, principal)
     if not effective and default_plan is not None:
         effective = dict(default_plan.limits or {})
+    # Mask the entitlements the caller sees: strip the raw USD cost quota + segment
+    # marker and surface the masked weekly AI-energy allowance (opaque credits).
+    effective = limit_facade.subscriber_limits(
+        effective, weekly_energy=segment_default
+    )
     return {
         "subscription": (
-            await _present(session, sub, locale=locale) if sub is not None else None
+            await _present(session, sub, principal=principal, locale=locale)
+            if sub is not None else None
         ),
         "audience": audience,
         "limits": effective,
         "default_plan": (
-            presenters.plan(default_plan, locale=locale)
+            presenters.plan(
+                default_plan,
+                locale=locale,
+                subscriber_facing=True,
+                weekly_energy=limit_facade.plan_weekly_energy_units(
+                    default_plan, segment_default=segment_default
+                ),
+            )
             if default_plan is not None else None
         ),
     }
@@ -238,7 +280,7 @@ async def get(
     sub = await _load_owned(
         session, principal=principal, subscription_id=subscription_id
     )
-    return await _present(session, sub, locale=locale)
+    return await _present(session, sub, principal=principal, locale=locale)
 
 
 # --------------------------------------------------------------------------- #
@@ -294,7 +336,17 @@ async def request_subscription(
     )
     await session.commit()
     await session.refresh(sub)
-    data = presenters.subscription(sub, locale=locale, plan_obj=plan_obj)
+    segment_default = await limit_facade.subscriber_weekly_energy_default(
+        session, principal
+    )
+    data = presenters.subscription(
+        sub,
+        locale=locale,
+        plan_obj=plan_obj,
+        weekly_energy=limit_facade.plan_weekly_energy_units(
+            plan_obj, segment_default=segment_default
+        ),
+    )
     data["payment_instructions"] = dict(_PAYMENT_INSTRUCTIONS)
     return data
 
@@ -331,7 +383,9 @@ async def cancel(
     if version is not None and version != sub.version:
         raise SubscriptionVersionConflictError()
     if sub.status in lifecycle.TERMINAL_STATES:
-        return await _present(session, sub, locale=locale)  # idempotent
+        return await _present(
+            session, sub, principal=principal, locale=locale
+        )  # idempotent
     if not lifecycle.can_transition("cancel", sub.status):
         raise IllegalSubscriptionTransitionError(event="cancel")
 
@@ -353,4 +407,4 @@ async def cancel(
     )
     await session.commit()
     await session.refresh(sub)
-    return await _present(session, sub, locale=locale)
+    return await _present(session, sub, principal=principal, locale=locale)

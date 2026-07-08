@@ -43,6 +43,11 @@ const backendOrigin = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000"
 const nextConfig: NextConfig = {
   reactStrictMode: true,
   poweredByHeader: false,
+  // Hide the framework's dev-tools indicator (the small Next.js "N" logo button
+  // that renders bottom-left only under `next dev`). It is a dev-only overlay,
+  // never present in production builds, but the owner wants a clean marketplace
+  // surface with no stray floating element in any environment/screenshot.
+  devIndicators: false,
   images: {
     remotePatterns: imageRemotePatterns(),
   },
