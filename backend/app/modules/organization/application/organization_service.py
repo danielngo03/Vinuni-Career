@@ -17,7 +17,9 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.modules.auth.application.context import RequestContext
 from app.modules.organization.api import presenters
+from app.modules.organization.application import role_seed
 from app.modules.organization.application.errors import VersionConflictError
+from app.modules.organization.application.org_resolution import resolve_managed_org
 from app.modules.organization.domain import catalog
 from app.modules.organization.domain.models import (
     Membership,
@@ -47,10 +49,15 @@ _UPDATABLE_FIELDS = {
 }
 
 
-def _audit_ctx(principal: Principal, ctx: RequestContext) -> AuditContext:
+def _audit_ctx(
+    principal: Principal, ctx: RequestContext, *, org_id: uuid.UUID | None = None
+) -> AuditContext:
+    # ``org_id`` (the RESOLVED managed org) is stamped as ``actor_org_id`` so a
+    # superadmin's cross-org write lands in that org's audit trail; for an
+    # ordinary actor the resolved org == ``principal.org_id`` (unchanged).
     return AuditContext(
         actor_id=principal.user_id,
-        actor_org_id=principal.org_id,
+        actor_org_id=org_id if org_id is not None else principal.org_id,
         ip=ctx.ip,
         user_agent=ctx.user_agent,
     )
@@ -190,14 +197,17 @@ async def create_org_with_admin(
 
 
 async def get_organization(
-    session: AsyncSession, *, principal: Principal, locale: str = "vi"
+    session: AsyncSession,
+    *,
+    principal: Principal,
+    org_id: uuid.UUID | None = None,
+    locale: str = "vi",
 ) -> dict:
-    if principal.org_id is None:
-        raise ResourceNotFoundError()
+    resolved = await resolve_managed_org(session, principal, org_id=org_id)
     permission_checker.require(
-        principal, _RESOURCE, "read", resource_org_id=principal.org_id
+        principal, _RESOURCE, "read", resource_org_id=resolved
     )
-    org = await _get_org(session, principal.org_id)
+    org = await _get_org(session, resolved)
     if org is None:
         raise ResourceNotFoundError()
     return presenters.organization_detail(org, locale=locale)
@@ -209,14 +219,14 @@ async def update_organization(
     principal: Principal,
     payload: dict,
     ctx: RequestContext,
+    org_id: uuid.UUID | None = None,
     locale: str = "vi",
 ) -> dict:
-    if principal.org_id is None:
-        raise ResourceNotFoundError()
+    resolved = await resolve_managed_org(session, principal, org_id=org_id)
     permission_checker.require(
-        principal, _RESOURCE, "update", resource_org_id=principal.org_id
+        principal, _RESOURCE, "update", resource_org_id=resolved
     )
-    org = await _get_org(session, principal.org_id)
+    org = await _get_org(session, resolved)
     if org is None:
         raise ResourceNotFoundError()
 
@@ -234,7 +244,7 @@ async def update_organization(
     await session.flush()
     await write_audit(
         session, action="organization.updated", resource_type="organization",
-        resource_id=org.id, context=_audit_ctx(principal, ctx),
+        resource_id=org.id, context=_audit_ctx(principal, ctx, org_id=resolved),
         after={"fields": sorted(changed.keys())},
     )
     await session.commit()
@@ -266,6 +276,11 @@ async def create_university_org(
         is_verified=True,
         verified_by=principal.user_id,
         trust_level="strategic",
+    )
+    # Seed editable starter roles (Career Services / Moderation / Partnerships /
+    # Analytics) in the same transaction as the bootstrap. Idempotent.
+    await role_seed.ensure_university_starter_roles(
+        session, org_id=result.organization.id, actor_id=principal.user_id, ctx=ctx
     )
     await session.commit()
     return presenters.organization_detail(result.organization, locale=locale)

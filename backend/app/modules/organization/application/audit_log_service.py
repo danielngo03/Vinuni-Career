@@ -15,17 +15,11 @@ from datetime import datetime
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
+from app.modules.organization.application.org_resolution import resolve_managed_org
 from app.modules.users.application import user_read_facade
-from app.shared.exceptions import ResourceNotFoundError
 from app.shared.models import AuditLog
 from app.shared.pagination import build_cursor_page, clamp_limit, decode_cursor
 from app.shared.permissions import Principal, permission_checker
-
-
-def _require_org(principal: Principal) -> uuid.UUID:
-    if principal.org_id is None:
-        raise ResourceNotFoundError()
-    return principal.org_id
 
 
 def _require_audit_read(principal: Principal, *, org_id: uuid.UUID) -> None:
@@ -46,8 +40,9 @@ async def list_audit_log(
     action: str | None = None,
     since: datetime | None = None,
     until: datetime | None = None,
+    org_id: uuid.UUID | None = None,
 ):
-    org_id = _require_org(principal)
+    org_id = await resolve_managed_org(session, principal, org_id=org_id)
     _require_audit_read(principal, org_id=org_id)
     page_limit = clamp_limit(limit)
 

@@ -23,6 +23,7 @@ from app.modules.organization.application.errors import (
     ConfirmationRequiredError,
     NotOwnerError,
 )
+from app.modules.organization.application.org_resolution import resolve_managed_org
 from app.modules.organization.domain import catalog
 from app.modules.organization.domain.models import (
     Membership,
@@ -86,8 +87,11 @@ async def current_owner_membership_id(
     return rows[0] if rows else None
 
 
-async def get_ownership(session: AsyncSession, *, principal: Principal) -> dict:
-    org_id = _require_org(principal)
+async def get_ownership(
+    session: AsyncSession, *, principal: Principal,
+    org_id: uuid.UUID | None = None,
+) -> dict:
+    org_id = await resolve_managed_org(session, principal, org_id=org_id)
     permission_checker.require(
         principal, "organizations", "read", resource_org_id=org_id
     )

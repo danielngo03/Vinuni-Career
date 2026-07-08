@@ -2,7 +2,12 @@
 
 Routers are HTTP-only: validate, delegate to services (which enforce RBAC + audit
 + tenant isolation), and shape the response envelope. Org context for
-``/organizations/*`` is implicit from ``principal.org_id``.
+``/organizations/*`` is implicit from ``principal.org_id`` for ordinary actors.
+Management + read endpoints also accept an OPTIONAL ``?org_id=`` query param that
+ONLY a platform superadmin may use (via ``org_resolution.resolve_managed_org``):
+a superadmin resolves the single university org by default, or the explicit
+``org_id`` when supplied. Non-superadmins ignore the param entirely — tenant
+isolation is unchanged.
 """
 
 from __future__ import annotations
@@ -78,8 +83,31 @@ def _perms(items) -> list[tuple[str, str]]:
 async def get_organization(
     auth: CurrentAuth = Depends(get_current_auth),
     session: AsyncSession = Depends(get_db_session),
+    org_id: uuid.UUID | None = Query(default=None),
 ) -> dict:
-    data = await organization_service.get_organization(session, principal=auth.principal)
+    data = await organization_service.get_organization(
+        session, principal=auth.principal, org_id=org_id
+    )
+    return success(data)
+
+
+@org_router.get(
+    "/current",
+    summary="Get the organization the caller manages (superadmin may pass ?org_id=)",
+)
+async def get_current_organization(
+    auth: CurrentAuth = Depends(get_current_auth),
+    session: AsyncSession = Depends(get_db_session),
+    org_id: uuid.UUID | None = Query(default=None),
+) -> dict:
+    """Explicit "the org I manage" endpoint for the team/RBAC screen.
+
+    Non-superadmins get their own org (``org_id`` ignored); a superadmin gets the
+    single university org by default, or the explicit ``org_id`` if supplied.
+    """
+    data = await organization_service.get_organization(
+        session, principal=auth.principal, org_id=org_id
+    )
     return success(data)
 
 
@@ -101,10 +129,11 @@ async def update_organization(
     body: OrganizationPatch,
     auth: CurrentAuth = Depends(get_current_auth),
     session: AsyncSession = Depends(get_db_session),
+    org_id: uuid.UUID | None = Query(default=None),
 ) -> dict:
     data = await organization_service.update_organization(
         session, principal=auth.principal,
-        payload=body.model_dump(exclude_unset=True), ctx=auth.ctx,
+        payload=body.model_dump(exclude_unset=True), ctx=auth.ctx, org_id=org_id,
     )
     return success(data)
 
@@ -160,8 +189,11 @@ async def remove_logo(
 async def list_roles(
     auth: CurrentAuth = Depends(get_current_auth),
     session: AsyncSession = Depends(get_db_session),
+    org_id: uuid.UUID | None = Query(default=None),
 ) -> dict:
-    items = await rbac_service.list_roles(session, principal=auth.principal)
+    items = await rbac_service.list_roles(
+        session, principal=auth.principal, org_id=org_id
+    )
     return success(items, meta={"count": len(items)})
 
 
@@ -170,10 +202,12 @@ async def create_role(
     body: RoleCreateRequest,
     auth: CurrentAuth = Depends(get_current_auth),
     session: AsyncSession = Depends(get_db_session),
+    org_id: uuid.UUID | None = Query(default=None),
 ) -> dict:
     data = await rbac_service.create_role(
         session, principal=auth.principal, name=body.name,
-        description=body.description, permissions=_perms(body.permissions), ctx=auth.ctx,
+        description=body.description, permissions=_perms(body.permissions),
+        ctx=auth.ctx, org_id=org_id,
     )
     return success(data)
 
@@ -183,8 +217,11 @@ async def get_role(
     role_id: uuid.UUID,
     auth: CurrentAuth = Depends(get_current_auth),
     session: AsyncSession = Depends(get_db_session),
+    org_id: uuid.UUID | None = Query(default=None),
 ) -> dict:
-    data = await rbac_service.get_role(session, principal=auth.principal, role_id=role_id)
+    data = await rbac_service.get_role(
+        session, principal=auth.principal, role_id=role_id, org_id=org_id
+    )
     return success(data)
 
 
@@ -194,11 +231,12 @@ async def update_role(
     body: RoleUpdateRequest,
     auth: CurrentAuth = Depends(get_current_auth),
     session: AsyncSession = Depends(get_db_session),
+    org_id: uuid.UUID | None = Query(default=None),
 ) -> dict:
     perms = _perms(body.permissions) if body.permissions is not None else None
     data = await rbac_service.update_role(
         session, principal=auth.principal, role_id=role_id, name=body.name,
-        description=body.description, permissions=perms, ctx=auth.ctx,
+        description=body.description, permissions=perms, ctx=auth.ctx, org_id=org_id,
     )
     return success(data)
 
@@ -208,9 +246,10 @@ async def delete_role(
     role_id: uuid.UUID,
     auth: CurrentAuth = Depends(get_current_auth),
     session: AsyncSession = Depends(get_db_session),
+    org_id: uuid.UUID | None = Query(default=None),
 ) -> dict:
     await rbac_service.delete_role(
-        session, principal=auth.principal, role_id=role_id, ctx=auth.ctx
+        session, principal=auth.principal, role_id=role_id, ctx=auth.ctx, org_id=org_id
     )
     return success({"status": "deleted"})
 
@@ -224,8 +263,11 @@ async def delete_role(
 async def list_departments(
     auth: CurrentAuth = Depends(get_current_auth),
     session: AsyncSession = Depends(get_db_session),
+    org_id: uuid.UUID | None = Query(default=None),
 ) -> dict:
-    items = await rbac_service.list_departments(session, principal=auth.principal)
+    items = await rbac_service.list_departments(
+        session, principal=auth.principal, org_id=org_id
+    )
     return success(items, meta={"count": len(items)})
 
 
@@ -235,10 +277,11 @@ async def create_department(
     body: DepartmentCreateRequest,
     auth: CurrentAuth = Depends(get_current_auth),
     session: AsyncSession = Depends(get_db_session),
+    org_id: uuid.UUID | None = Query(default=None),
 ) -> dict:
     data = await rbac_service.create_department(
         session, principal=auth.principal, name=body.name,
-        parent_id=body.parent_id, ctx=auth.ctx,
+        parent_id=body.parent_id, ctx=auth.ctx, org_id=org_id,
     )
     return success(data)
 
@@ -249,10 +292,12 @@ async def update_department(
     body: DepartmentUpdateRequest,
     auth: CurrentAuth = Depends(get_current_auth),
     session: AsyncSession = Depends(get_db_session),
+    org_id: uuid.UUID | None = Query(default=None),
 ) -> dict:
     data = await rbac_service.update_department(
         session, principal=auth.principal, dept_id=dept_id, name=body.name,
         parent_id=body.parent_id, clear_parent=body.clear_parent, ctx=auth.ctx,
+        org_id=org_id,
     )
     return success(data)
 
@@ -262,9 +307,10 @@ async def delete_department(
     dept_id: uuid.UUID,
     auth: CurrentAuth = Depends(get_current_auth),
     session: AsyncSession = Depends(get_db_session),
+    org_id: uuid.UUID | None = Query(default=None),
 ) -> dict:
     await rbac_service.delete_department(
-        session, principal=auth.principal, dept_id=dept_id, ctx=auth.ctx
+        session, principal=auth.principal, dept_id=dept_id, ctx=auth.ctx, org_id=org_id
     )
     return success({"status": "deleted"})
 
@@ -282,10 +328,11 @@ async def list_members(
     limit: int | None = Query(default=None),
     member_status: str | None = Query(default=None, alias="status"),
     role_id: uuid.UUID | None = Query(default=None),
+    org_id: uuid.UUID | None = Query(default=None),
 ) -> dict:
     items, next_cursor, page_limit = await membership_service.list_members(
         session, principal=auth.principal, cursor=cursor, limit=limit,
-        status=member_status, role_id=role_id,
+        status=member_status, role_id=role_id, org_id=org_id,
     )
     return paginated(items, next_cursor=next_cursor, limit=page_limit)
 
@@ -296,11 +343,12 @@ async def update_member(
     body: MemberUpdateRequest,
     auth: CurrentAuth = Depends(get_current_auth),
     session: AsyncSession = Depends(get_db_session),
+    org_id: uuid.UUID | None = Query(default=None),
 ) -> dict:
     data = await membership_service.update_member(
         session, principal=auth.principal, membership_id=membership_id,
         role_ids=body.role_ids, department_ids=body.department_ids,
-        version=body.version, ctx=auth.ctx,
+        version=body.version, ctx=auth.ctx, org_id=org_id,
     )
     return success(data)
 
@@ -310,9 +358,11 @@ async def remove_member(
     membership_id: uuid.UUID,
     auth: CurrentAuth = Depends(get_current_auth),
     session: AsyncSession = Depends(get_db_session),
+    org_id: uuid.UUID | None = Query(default=None),
 ) -> dict:
     await membership_service.remove_member(
-        session, principal=auth.principal, membership_id=membership_id, ctx=auth.ctx
+        session, principal=auth.principal, membership_id=membership_id, ctx=auth.ctx,
+        org_id=org_id,
     )
     return success({"status": "removed"})
 
@@ -325,9 +375,11 @@ async def deactivate_member(
     membership_id: uuid.UUID,
     auth: CurrentAuth = Depends(get_current_auth),
     session: AsyncSession = Depends(get_db_session),
+    org_id: uuid.UUID | None = Query(default=None),
 ) -> dict:
     data = await membership_service.deactivate_member(
-        session, principal=auth.principal, membership_id=membership_id, ctx=auth.ctx
+        session, principal=auth.principal, membership_id=membership_id, ctx=auth.ctx,
+        org_id=org_id,
     )
     return success(data)
 
@@ -340,9 +392,11 @@ async def reactivate_member(
     membership_id: uuid.UUID,
     auth: CurrentAuth = Depends(get_current_auth),
     session: AsyncSession = Depends(get_db_session),
+    org_id: uuid.UUID | None = Query(default=None),
 ) -> dict:
     data = await membership_service.reactivate_member(
-        session, principal=auth.principal, membership_id=membership_id, ctx=auth.ctx
+        session, principal=auth.principal, membership_id=membership_id, ctx=auth.ctx,
+        org_id=org_id,
     )
     return success(data)
 
@@ -355,9 +409,10 @@ async def member_permission_preview(
     membership_id: uuid.UUID,
     auth: CurrentAuth = Depends(get_current_auth),
     session: AsyncSession = Depends(get_db_session),
+    org_id: uuid.UUID | None = Query(default=None),
 ) -> dict:
     data = await permission_preview_service.preview_for_member(
-        session, principal=auth.principal, membership_id=membership_id
+        session, principal=auth.principal, membership_id=membership_id, org_id=org_id
     )
     return success(data)
 
@@ -370,10 +425,11 @@ async def hypothetical_permission_preview(
     body: PermissionPreviewRequest,
     auth: CurrentAuth = Depends(get_current_auth),
     session: AsyncSession = Depends(get_db_session),
+    org_id: uuid.UUID | None = Query(default=None),
 ) -> dict:
     data = await permission_preview_service.preview_hypothetical(
         session, principal=auth.principal,
-        role_ids=body.role_ids, department_ids=body.department_ids,
+        role_ids=body.role_ids, department_ids=body.department_ids, org_id=org_id,
     )
     return success(data)
 
@@ -387,8 +443,11 @@ async def hypothetical_permission_preview(
 async def get_ownership(
     auth: CurrentAuth = Depends(get_current_auth),
     session: AsyncSession = Depends(get_db_session),
+    org_id: uuid.UUID | None = Query(default=None),
 ) -> dict:
-    data = await ownership_service.get_ownership(session, principal=auth.principal)
+    data = await ownership_service.get_ownership(
+        session, principal=auth.principal, org_id=org_id
+    )
     return success(data)
 
 
@@ -421,10 +480,11 @@ async def list_audit_log(
     action: str | None = Query(default=None),
     since: datetime | None = Query(default=None),
     until: datetime | None = Query(default=None),
+    org_id: uuid.UUID | None = Query(default=None),
 ) -> dict:
     items, next_cursor, page_limit = await audit_log_service.list_audit_log(
         session, principal=auth.principal, cursor=cursor, limit=limit,
-        actor_id=actor_id, action=action, since=since, until=until,
+        actor_id=actor_id, action=action, since=since, until=until, org_id=org_id,
     )
     return paginated(items, next_cursor=next_cursor, limit=page_limit)
 
@@ -600,8 +660,11 @@ async def create_note(
 async def list_invitations(
     auth: CurrentAuth = Depends(get_current_auth),
     session: AsyncSession = Depends(get_db_session),
+    org_id: uuid.UUID | None = Query(default=None),
 ) -> dict:
-    items = await membership_service.list_invitations(session, principal=auth.principal)
+    items = await membership_service.list_invitations(
+        session, principal=auth.principal, org_id=org_id
+    )
     return success(items, meta={"count": len(items)})
 
 
@@ -611,10 +674,11 @@ async def create_invitation(
     body: InvitationCreateRequest,
     auth: CurrentAuth = Depends(get_current_auth),
     session: AsyncSession = Depends(get_db_session),
+    org_id: uuid.UUID | None = Query(default=None),
 ) -> dict:
     data = await membership_service.create_invitation(
         session, principal=auth.principal, email=body.email, role_id=body.role_id,
-        department_id=body.department_id, ctx=auth.ctx,
+        department_id=body.department_id, ctx=auth.ctx, org_id=org_id,
     )
     return success(data)
 
@@ -624,9 +688,11 @@ async def revoke_invitation(
     invitation_id: uuid.UUID,
     auth: CurrentAuth = Depends(get_current_auth),
     session: AsyncSession = Depends(get_db_session),
+    org_id: uuid.UUID | None = Query(default=None),
 ) -> dict:
     await membership_service.revoke_invitation(
-        session, principal=auth.principal, invitation_id=invitation_id, ctx=auth.ctx
+        session, principal=auth.principal, invitation_id=invitation_id, ctx=auth.ctx,
+        org_id=org_id,
     )
     return success({"status": "revoked"})
 

@@ -24,6 +24,7 @@ from app.modules.organization.application.errors import (
     SeatLimitReachedError,
     VersionConflictError,
 )
+from app.modules.organization.application.org_resolution import resolve_managed_org
 from app.modules.organization.domain.models import (
     Department,
     Invitation,
@@ -43,17 +44,16 @@ from app.shared.permissions import Principal, permission_checker
 INVITATION_TTL_DAYS = 7
 
 
-def _audit_ctx(principal: Principal, ctx: RequestContext) -> AuditContext:
+def _audit_ctx(
+    principal: Principal, ctx: RequestContext, *, org_id: uuid.UUID | None = None
+) -> AuditContext:
+    # ``org_id`` is the RESOLVED managed org (superadmin cross-org writes land in
+    # that org's audit trail); for an ordinary actor it == ``principal.org_id``.
     return AuditContext(
-        actor_id=principal.user_id, actor_org_id=principal.org_id,
+        actor_id=principal.user_id,
+        actor_org_id=org_id if org_id is not None else principal.org_id,
         ip=ctx.ip, user_agent=ctx.user_agent,
     )
-
-
-def _require_org(principal: Principal) -> uuid.UUID:
-    if principal.org_id is None:
-        raise ResourceNotFoundError()
-    return principal.org_id
 
 
 async def _get_membership(
@@ -119,9 +119,10 @@ async def list_members(
     limit: int | None = None,
     status: str | None = None,
     role_id: uuid.UUID | None = None,
+    org_id: uuid.UUID | None = None,
     locale: str = "vi",
 ):
-    org_id = _require_org(principal)
+    org_id = await resolve_managed_org(session, principal, org_id=org_id)
     permission_checker.require(principal, "members", "read", resource_org_id=org_id)
     page_limit = clamp_limit(limit)
 
@@ -169,9 +170,10 @@ async def update_member(
     department_ids: list[uuid.UUID] | None,
     version: int | None,
     ctx: RequestContext,
+    org_id: uuid.UUID | None = None,
     locale: str = "vi",
 ) -> dict:
-    org_id = _require_org(principal)
+    org_id = await resolve_managed_org(session, principal, org_id=org_id)
     permission_checker.require(principal, "members", "update", resource_org_id=org_id)
     membership = await _get_membership(
         session, org_id=org_id, membership_id=membership_id
@@ -251,7 +253,7 @@ async def update_member(
     await session.flush()
     await write_audit(
         session, action="membership.updated", resource_type="membership",
-        resource_id=membership.id, context=_audit_ctx(principal, ctx),
+        resource_id=membership.id, context=_audit_ctx(principal, ctx, org_id=org_id),
         before={"roles": [str(r) for r in before_roles]},
         after={"roles": [str(r) for r in await _membership_role_ids(session, membership.id)]},
     )
@@ -276,8 +278,9 @@ async def remove_member(
     principal: Principal,
     membership_id: uuid.UUID,
     ctx: RequestContext,
+    org_id: uuid.UUID | None = None,
 ) -> None:
-    org_id = _require_org(principal)
+    org_id = await resolve_managed_org(session, principal, org_id=org_id)
     permission_checker.require(principal, "members", "remove", resource_org_id=org_id)
     membership = await _get_membership(
         session, org_id=org_id, membership_id=membership_id
@@ -297,7 +300,7 @@ async def remove_member(
     await session.flush()
     await write_audit(
         session, action="membership.removed", resource_type="membership",
-        resource_id=membership.id, context=_audit_ctx(principal, ctx),
+        resource_id=membership.id, context=_audit_ctx(principal, ctx, org_id=org_id),
         after={"status": "left"},
     )
     await session.commit()
@@ -309,6 +312,7 @@ async def deactivate_member(
     principal: Principal,
     membership_id: uuid.UUID,
     ctx: RequestContext,
+    org_id: uuid.UUID | None = None,
     locale: str = "vi",
 ) -> dict:
     """Suspend a member's access (reversible) — distinct from permanent removal.
@@ -318,7 +322,7 @@ async def deactivate_member(
     re-invited instead.
     """
 
-    org_id = _require_org(principal)
+    org_id = await resolve_managed_org(session, principal, org_id=org_id)
     permission_checker.require(principal, "members", "remove", resource_org_id=org_id)
     membership = await _get_membership(
         session, org_id=org_id, membership_id=membership_id
@@ -339,7 +343,7 @@ async def deactivate_member(
     await session.flush()
     await write_audit(
         session, action="membership.deactivated", resource_type="membership",
-        resource_id=membership.id, context=_audit_ctx(principal, ctx),
+        resource_id=membership.id, context=_audit_ctx(principal, ctx, org_id=org_id),
         before={"status": "active"}, after={"status": "suspended"},
     )
     await session.commit()
@@ -352,6 +356,7 @@ async def reactivate_member(
     principal: Principal,
     membership_id: uuid.UUID,
     ctx: RequestContext,
+    org_id: uuid.UUID | None = None,
     locale: str = "vi",
 ) -> dict:
     """Restore a previously-suspended member's access.
@@ -360,7 +365,7 @@ async def reactivate_member(
     removed) member cannot be reactivated — a new invitation is required.
     """
 
-    org_id = _require_org(principal)
+    org_id = await resolve_managed_org(session, principal, org_id=org_id)
     permission_checker.require(principal, "members", "update", resource_org_id=org_id)
     membership = await _get_membership(
         session, org_id=org_id, membership_id=membership_id
@@ -377,7 +382,7 @@ async def reactivate_member(
     await session.flush()
     await write_audit(
         session, action="membership.reactivated", resource_type="membership",
-        resource_id=membership.id, context=_audit_ctx(principal, ctx),
+        resource_id=membership.id, context=_audit_ctx(principal, ctx, org_id=org_id),
         before={"status": "suspended"}, after={"status": "active"},
     )
     await session.commit()
@@ -423,9 +428,10 @@ async def create_invitation(
     role_id: uuid.UUID | None,
     department_id: uuid.UUID | None,
     ctx: RequestContext,
+    org_id: uuid.UUID | None = None,
     locale: str = "vi",
 ) -> dict:
-    org_id = _require_org(principal)
+    org_id = await resolve_managed_org(session, principal, org_id=org_id)
     permission_checker.require(principal, "members", "invite", resource_org_id=org_id)
     norm_email = email.strip().lower()
 
@@ -516,7 +522,7 @@ async def create_invitation(
     )
     await write_audit(
         session, action="invitation.created", resource_type="invitation",
-        resource_id=invitation.id, context=_audit_ctx(principal, ctx),
+        resource_id=invitation.id, context=_audit_ctx(principal, ctx, org_id=org_id),
         after={"email": norm_email, "role_id": str(role_id) if role_id else None},
     )
     await session.commit()
@@ -531,9 +537,10 @@ def _invite_link(*, token: str, locale: str) -> str:
 
 
 async def list_invitations(
-    session: AsyncSession, *, principal: Principal, locale: str = "vi"
+    session: AsyncSession, *, principal: Principal,
+    org_id: uuid.UUID | None = None, locale: str = "vi",
 ) -> list[dict]:
-    org_id = _require_org(principal)
+    org_id = await resolve_managed_org(session, principal, org_id=org_id)
     permission_checker.require(principal, "members", "read", resource_org_id=org_id)
     rows = (
         await session.execute(
@@ -550,9 +557,9 @@ async def list_invitations(
 
 async def revoke_invitation(
     session: AsyncSession, *, principal: Principal, invitation_id: uuid.UUID,
-    ctx: RequestContext,
+    ctx: RequestContext, org_id: uuid.UUID | None = None,
 ) -> None:
-    org_id = _require_org(principal)
+    org_id = await resolve_managed_org(session, principal, org_id=org_id)
     permission_checker.require(principal, "members", "invite", resource_org_id=org_id)
     inv = (
         await session.execute(
@@ -568,7 +575,7 @@ async def revoke_invitation(
         await session.flush()
         await write_audit(
             session, action="invitation.revoked", resource_type="invitation",
-            resource_id=inv.id, context=_audit_ctx(principal, ctx),
+            resource_id=inv.id, context=_audit_ctx(principal, ctx, org_id=org_id),
         )
     await session.commit()
 

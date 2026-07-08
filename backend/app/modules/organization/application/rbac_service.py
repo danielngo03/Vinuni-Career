@@ -22,6 +22,7 @@ from app.modules.organization.application.errors import (
     LastAdminError,
     SystemRoleImmutableError,
 )
+from app.modules.organization.application.org_resolution import resolve_managed_org
 from app.modules.organization.domain import catalog
 from app.modules.organization.domain.models import (
     Department,
@@ -33,17 +34,16 @@ from app.shared.exceptions import ResourceNotFoundError, ValidationFailedError
 from app.shared.permissions import Principal, permission_checker
 
 
-def _audit_ctx(principal: Principal, ctx: RequestContext) -> AuditContext:
+def _audit_ctx(
+    principal: Principal, ctx: RequestContext, *, org_id: uuid.UUID | None = None
+) -> AuditContext:
+    # ``org_id`` is the RESOLVED managed org (superadmin cross-org writes land in
+    # that org's audit trail); for an ordinary actor it == ``principal.org_id``.
     return AuditContext(
-        actor_id=principal.user_id, actor_org_id=principal.org_id,
+        actor_id=principal.user_id,
+        actor_org_id=org_id if org_id is not None else principal.org_id,
         ip=ctx.ip, user_agent=ctx.user_agent,
     )
-
-
-def _require_org(principal: Principal) -> uuid.UUID:
-    if principal.org_id is None:
-        raise ResourceNotFoundError()
-    return principal.org_id
 
 
 # --------------------------------------------------------------------------- #
@@ -78,9 +78,10 @@ def _validate_permissions(requested: list[tuple[str, str]]) -> None:
 
 
 async def list_roles(
-    session: AsyncSession, *, principal: Principal, locale: str = "vi"
+    session: AsyncSession, *, principal: Principal,
+    org_id: uuid.UUID | None = None, locale: str = "vi",
 ) -> list[dict]:
-    org_id = _require_org(principal)
+    org_id = await resolve_managed_org(session, principal, org_id=org_id)
     permission_checker.require(principal, "roles", "read", resource_org_id=org_id)
     roles = (
         await session.execute(
@@ -96,9 +97,9 @@ async def list_roles(
 
 async def get_role(
     session: AsyncSession, *, principal: Principal, role_id: uuid.UUID,
-    locale: str = "vi",
+    org_id: uuid.UUID | None = None, locale: str = "vi",
 ) -> dict:
-    org_id = _require_org(principal)
+    org_id = await resolve_managed_org(session, principal, org_id=org_id)
     permission_checker.require(principal, "roles", "read", resource_org_id=org_id)
     role = await _get_role(session, org_id=org_id, role_id=role_id)
     if role is None:
@@ -115,8 +116,9 @@ async def create_role(
     description: str | None,
     permissions: list[tuple[str, str]],
     ctx: RequestContext,
+    org_id: uuid.UUID | None = None,
 ) -> dict:
-    org_id = _require_org(principal)
+    org_id = await resolve_managed_org(session, principal, org_id=org_id)
     permission_checker.require(principal, "roles", "create", resource_org_id=org_id)
     _validate_permissions(permissions)
     admin_guard.assert_can_grant(principal, permissions)
@@ -139,7 +141,7 @@ async def create_role(
     await session.flush()
     await write_audit(
         session, action="role.created", resource_type="role", resource_id=role.id,
-        context=_audit_ctx(principal, ctx),
+        context=_audit_ctx(principal, ctx, org_id=org_id),
         after={"name": name, "permissions": sorted(f"{r}:{a}" for r, a in permissions)},
     )
     await session.commit()
@@ -156,8 +158,9 @@ async def update_role(
     description: str | None,
     permissions: list[tuple[str, str]] | None,
     ctx: RequestContext,
+    org_id: uuid.UUID | None = None,
 ) -> dict:
-    org_id = _require_org(principal)
+    org_id = await resolve_managed_org(session, principal, org_id=org_id)
     permission_checker.require(principal, "roles", "update", resource_org_id=org_id)
     role = await _get_role(session, org_id=org_id, role_id=role_id)
     if role is None:
@@ -213,7 +216,7 @@ async def update_role(
     await session.flush()
     await write_audit(
         session, action="role.updated", resource_type="role", resource_id=role.id,
-        context=_audit_ctx(principal, ctx),
+        context=_audit_ctx(principal, ctx, org_id=org_id),
         before={"permissions": sorted(before_perms)},
         after={"permissions": sorted(await _role_permission_strings(session, role.id))},
     )
@@ -224,9 +227,9 @@ async def update_role(
 
 async def delete_role(
     session: AsyncSession, *, principal: Principal, role_id: uuid.UUID,
-    ctx: RequestContext,
+    ctx: RequestContext, org_id: uuid.UUID | None = None,
 ) -> None:
-    org_id = _require_org(principal)
+    org_id = await resolve_managed_org(session, principal, org_id=org_id)
     permission_checker.require(principal, "roles", "delete", resource_org_id=org_id)
     role = await _get_role(session, org_id=org_id, role_id=role_id)
     if role is None:
@@ -242,7 +245,7 @@ async def delete_role(
     await session.delete(role)
     await write_audit(
         session, action="role.deleted", resource_type="role", resource_id=role.id,
-        context=_audit_ctx(principal, ctx), before={"name": role.name},
+        context=_audit_ctx(principal, ctx, org_id=org_id), before={"name": role.name},
     )
     await session.commit()
 
@@ -262,9 +265,10 @@ async def _get_department(
 
 
 async def list_departments(
-    session: AsyncSession, *, principal: Principal
+    session: AsyncSession, *, principal: Principal,
+    org_id: uuid.UUID | None = None,
 ) -> list[dict]:
-    org_id = _require_org(principal)
+    org_id = await resolve_managed_org(session, principal, org_id=org_id)
     permission_checker.require(principal, "departments", "read", resource_org_id=org_id)
     depts = (
         await session.execute(
@@ -283,8 +287,9 @@ async def create_department(
     name: str,
     parent_id: uuid.UUID | None,
     ctx: RequestContext,
+    org_id: uuid.UUID | None = None,
 ) -> dict:
-    org_id = _require_org(principal)
+    org_id = await resolve_managed_org(session, principal, org_id=org_id)
     permission_checker.require(
         principal, "departments", "create", resource_org_id=org_id
     )
@@ -306,7 +311,8 @@ async def create_department(
     await session.flush()
     await write_audit(
         session, action="department.created", resource_type="department",
-        resource_id=dept.id, context=_audit_ctx(principal, ctx), after={"name": name},
+        resource_id=dept.id, context=_audit_ctx(principal, ctx, org_id=org_id),
+        after={"name": name},
     )
     await session.commit()
     return presenters.department_summary(dept)
@@ -321,8 +327,9 @@ async def update_department(
     parent_id: uuid.UUID | None,
     clear_parent: bool,
     ctx: RequestContext,
+    org_id: uuid.UUID | None = None,
 ) -> dict:
-    org_id = _require_org(principal)
+    org_id = await resolve_managed_org(session, principal, org_id=org_id)
     permission_checker.require(
         principal, "departments", "update", resource_org_id=org_id
     )
@@ -355,7 +362,7 @@ async def update_department(
     await session.flush()
     await write_audit(
         session, action="department.updated", resource_type="department",
-        resource_id=dept.id, context=_audit_ctx(principal, ctx),
+        resource_id=dept.id, context=_audit_ctx(principal, ctx, org_id=org_id),
     )
     await session.commit()
     return presenters.department_summary(dept)
@@ -388,9 +395,9 @@ async def _would_cycle(
 
 async def delete_department(
     session: AsyncSession, *, principal: Principal, dept_id: uuid.UUID,
-    ctx: RequestContext,
+    ctx: RequestContext, org_id: uuid.UUID | None = None,
 ) -> None:
-    org_id = _require_org(principal)
+    org_id = await resolve_managed_org(session, principal, org_id=org_id)
     permission_checker.require(
         principal, "departments", "delete", resource_org_id=org_id
     )
@@ -406,7 +413,7 @@ async def delete_department(
     await session.delete(dept)
     await write_audit(
         session, action="department.deleted", resource_type="department",
-        resource_id=dept.id, context=_audit_ctx(principal, ctx),
+        resource_id=dept.id, context=_audit_ctx(principal, ctx, org_id=org_id),
         before={"name": dept.name},
     )
     await session.commit()

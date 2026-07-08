@@ -80,6 +80,12 @@ PERMISSION_CATALOG: dict[str, frozenset[str]] = {
     # Org audit-log read (B-518/523). Distinct from `members:*` so it can be
     # granted narrowly (e.g. a compliance-only role) without member management.
     "audit": frozenset({"read"}),
+    # Shared industry/career-field taxonomy governance (P2/WS2.4). The taxonomy
+    # is a GLOBAL (non-org-scoped) list; only the university control plane governs
+    # it. Reads are public. Writes require this grant AND — like `support`/
+    # `privacy`/`abuse` — an acting **university** org, so a partner Admin holding
+    # `*:*` can never mutate it (`principal.is_superadmin` bypasses as usual).
+    "taxonomy": frozenset({"manage"}),
     # AI-assisted recruiting actions (`docs/PARTNER_RBAC_ANALYTICS_SPEC.md`).
     # These are advisory/confirmation-required AI writes; the grant controls
     # who may even request them. No provider/model internals ever leave here.

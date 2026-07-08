@@ -21,15 +21,10 @@ from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.modules.organization.application import grant_resolver
+from app.modules.organization.application.org_resolution import resolve_managed_org
 from app.modules.organization.domain.models import Membership, Role
 from app.shared.exceptions import ResourceNotFoundError
 from app.shared.permissions import Principal, permission_checker
-
-
-def _require_org(principal: Principal) -> uuid.UUID:
-    if principal.org_id is None:
-        raise ResourceNotFoundError()
-    return principal.org_id
 
 
 def _grants_summary(grants: frozenset[str]) -> dict:
@@ -45,11 +40,12 @@ def _grants_summary(grants: frozenset[str]) -> dict:
 
 
 async def preview_for_member(
-    session: AsyncSession, *, principal: Principal, membership_id: uuid.UUID
+    session: AsyncSession, *, principal: Principal, membership_id: uuid.UUID,
+    org_id: uuid.UUID | None = None,
 ) -> dict:
     """Effective grant set for an existing member (tenant-isolated, 404 hidden)."""
 
-    org_id = _require_org(principal)
+    org_id = await resolve_managed_org(session, principal, org_id=org_id)
     permission_checker.require(principal, "members", "read", resource_org_id=org_id)
 
     membership = (
@@ -77,6 +73,7 @@ async def preview_hypothetical(
     principal: Principal,
     role_ids: list[uuid.UUID],
     department_ids: list[uuid.UUID] | None = None,
+    org_id: uuid.UUID | None = None,
 ) -> dict:
     """What-if preview for a candidate role set, e.g. before sending an invite.
 
@@ -84,7 +81,7 @@ async def preview_hypothetical(
     restrict grants in the current RBAC model — roles are the sole grant source.
     """
 
-    org_id = _require_org(principal)
+    org_id = await resolve_managed_org(session, principal, org_id=org_id)
     permission_checker.require(principal, "members", "read", resource_org_id=org_id)
 
     target_ids = list(dict.fromkeys(role_ids))

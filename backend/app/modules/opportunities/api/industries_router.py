@@ -4,7 +4,9 @@ Public:
   GET  /api/v1/industries           — full tree (cached)
   GET  /api/v1/industries/{id}      — single node with children
 
-Admin (university_admin only):
+Admin (governed by the ``taxonomy:manage`` catalog grant on a university-org
+role, or platform superadmin — enforced in ``industry_taxonomy_service`` at the
+service layer, NOT here):
   POST   /api/v1/admin/industries
   PATCH  /api/v1/admin/industries/{id}
   DELETE /api/v1/admin/industries/{id}   (soft-deactivate, not hard-delete)
@@ -22,6 +24,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.core.db import get_db_session
 from app.modules.auth.api.deps import CurrentAuth, get_current_auth
+from app.modules.opportunities.application import industry_taxonomy_service
 from app.modules.opportunities.domain.industry_models import Industry
 
 industries_router = APIRouter(prefix="/industries", tags=["industries"])
@@ -71,40 +74,11 @@ class IndustryUpdateRequest(BaseModel):
 # ── Helpers ────────────────────────────────────────────────────────────────
 
 
-def _require_university_admin(auth: CurrentAuth) -> None:
-    """Gate industry-taxonomy admin writes.
-
-    ``CurrentAuth`` has no ``role`` attribute (this previously raised
-    ``AttributeError`` on every admin request, a 500 disguised as a 403 check).
-    There is also no ``"university_admin"`` persona anywhere in the system —
-    the real bootstrap persona for university staff is
-    ``UNIVERSITY_STAFF = "university_staff"`` (see
-    ``app.modules.auth.domain.personas``). Mirrors the same precedent fix in
-    ``platform_settings.application.settings_service._check_admin``.
-    """
-    principal = auth.principal if auth else None
-    if (
-        principal is None
-        or not principal.is_authenticated
-        or not (principal.is_superadmin or principal.persona == "university_staff")
-    ):
-        raise HTTPException(
-            status_code=status.HTTP_403_FORBIDDEN,
-            detail="University admin access required.",
-        )
-
-
 async def _get_or_404(db: AsyncSession, industry_id: uuid.UUID) -> Industry:
     row = await db.get(Industry, industry_id)
     if row is None:
         raise HTTPException(status_code=404, detail="Industry not found.")
     return row
-
-
-def _compute_level(parent: Industry | None) -> int:
-    if parent is None:
-        return 0
-    return parent.level + 1
 
 
 # ── Public routes ──────────────────────────────────────────────────────────
@@ -185,36 +159,11 @@ async def create_industry(
     auth: CurrentAuth = Depends(get_current_auth),
     db: AsyncSession = Depends(get_db_session),
 ) -> Any:
-    _require_university_admin(auth)
-
-    # Slug must be unique
-    existing = await db.execute(select(Industry).where(Industry.slug == body.slug))
-    if existing.scalar_one_or_none():
-        raise HTTPException(status_code=409, detail="Slug already exists.")
-
-    parent: Industry | None = None
-    if body.parent_id:
-        parent = await _get_or_404(db, body.parent_id)
-        if parent.level >= 2:
-            raise HTTPException(
-                status_code=400,
-                detail="Maximum hierarchy depth is 3 levels (0-1-2).",
-            )
-
-    row = Industry(
-        id=uuid.uuid4(),
-        slug=body.slug,
-        name_vi=body.name_vi,
-        name_en=body.name_en,
-        level=_compute_level(parent),
-        parent_id=body.parent_id,
-        sort_order=body.sort_order,
-        is_active=True,
+    return await industry_taxonomy_service.create_industry(
+        db, principal=auth.principal, name_vi=body.name_vi, name_en=body.name_en,
+        slug=body.slug, parent_id=body.parent_id, sort_order=body.sort_order,
+        ctx=auth.ctx,
     )
-    db.add(row)
-    await db.commit()
-    await db.refresh(row)
-    return row
 
 
 @admin_industries_router.patch(
@@ -228,21 +177,11 @@ async def update_industry(
     auth: CurrentAuth = Depends(get_current_auth),
     db: AsyncSession = Depends(get_db_session),
 ) -> Any:
-    _require_university_admin(auth)
-    row = await _get_or_404(db, industry_id)
-
-    if body.name_vi is not None:
-        row.name_vi = body.name_vi
-    if body.name_en is not None:
-        row.name_en = body.name_en
-    if body.sort_order is not None:
-        row.sort_order = body.sort_order
-    if body.is_active is not None:
-        row.is_active = body.is_active
-
-    await db.commit()
-    await db.refresh(row)
-    return row
+    return await industry_taxonomy_service.update_industry(
+        db, principal=auth.principal, industry_id=industry_id, name_vi=body.name_vi,
+        name_en=body.name_en, sort_order=body.sort_order, is_active=body.is_active,
+        ctx=auth.ctx,
+    )
 
 
 @admin_industries_router.delete(
@@ -255,20 +194,6 @@ async def deactivate_industry(
     auth: CurrentAuth = Depends(get_current_auth),
     db: AsyncSession = Depends(get_db_session),
 ) -> None:
-    _require_university_admin(auth)
-    row = await _get_or_404(db, industry_id)
-
-    # Check no active children remain
-    children_result = await db.execute(
-        select(Industry).where(
-            Industry.parent_id == row.id, Industry.is_active.is_(True)
-        )
+    await industry_taxonomy_service.deactivate_industry(
+        db, principal=auth.principal, industry_id=industry_id, ctx=auth.ctx
     )
-    if children_result.scalars().first():
-        raise HTTPException(
-            status_code=409,
-            detail="Deactivate all child industries first.",
-        )
-
-    row.is_active = False
-    await db.commit()
