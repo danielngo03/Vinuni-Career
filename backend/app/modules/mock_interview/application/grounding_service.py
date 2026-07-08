@@ -41,6 +41,51 @@ def _clean_list(items: list[str] | None, *, limit: int) -> list[str]:
     return out
 
 
+_TECH_HINTS = frozenset(
+    {
+        "python", "java", "javascript", "typescript", "react", "node", "sql",
+        "api", "backend", "frontend", "fullstack", "docker", "kubernetes", "cloud",
+        "aws", "gcp", "azure", "data", "ml", "machine learning", "ai", "algorithm",
+        "c++", "golang", "rust", "devops", "engineer", "developer", "software",
+        "database", "microservice", "system design", "security", "network",
+    }
+)
+
+
+def _infer_focus(job: dict[str, Any]) -> str:
+    """Deterministically infer interview focus from the JD (no manual picker)."""
+
+    haystack = " ".join(
+        [
+            str(job.get("title") or ""),
+            " ".join(str(s) for s in (job.get("required_skills") or [])),
+            " ".join(str(s) for s in (job.get("preferred_skills") or [])),
+        ]
+    ).lower()
+    hits = sum(1 for h in _TECH_HINTS if h in haystack)
+    if hits >= 2:
+        return "technical"
+    if hits == 1:
+        return "mixed"
+    return "behavioral"
+
+
+def _infer_difficulty(job: dict[str, Any]) -> str:
+    """Calibrate difficulty from the JD's seniority signal."""
+
+    level = str(job.get("seniority_level") or "").lower()
+    if any(k in level for k in ("intern", "fresher", "entry", "junior", "trainee")):
+        return "foundational"
+    if any(k in level for k in ("senior", "lead", "principal", "staff", "manager", "head")):
+        return "advanced"
+    lo = job.get("experience_min_years")
+    if isinstance(lo, int | float) and lo >= 4:
+        return "advanced"
+    if isinstance(lo, int | float) and lo <= 1:
+        return "foundational"
+    return "intermediate"
+
+
 def _experience_str(job: dict[str, Any]) -> str | None:
     lo = job.get("experience_min_years")
     hi = job.get("experience_max_years")
@@ -147,6 +192,8 @@ async def build_grounding(
     grounding = {
         "locale": locale or "vi",
         "grounding_version": prompts.PROMPT_VERSION,
+        "focus": _infer_focus(job),
+        "difficulty": _infer_difficulty(job),
         "job": {
             "title": _clean(job.get("title")),
             "company_name": company.get("display_name"),

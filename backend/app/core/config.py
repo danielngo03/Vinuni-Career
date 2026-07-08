@@ -121,11 +121,17 @@ class Settings(BaseSettings):
     # superadmin enables Tier V2 by registering a realtime provider+model+voice
     # (plus its own key) in the AI registry and flipping ``ai_realtime_enabled``.
     # All values are leak-safe aliases; no vendor/model string reaches end users.
-    ai_realtime_enabled: bool = False  # OFF until a NATIVE realtime key is added
+    ai_realtime_enabled: bool = False  # OFF until a NATIVE realtime key is present
     ai_realtime_provider: str = "gemini-live"  # registry alias (superadmin-swappable)
-    ai_realtime_model: str = "gemini-2.0-flash-live-001"  # native speech-to-speech model
-    ai_realtime_voice: str = "Aoede"  # provider voice name
+    # Native speech-to-speech model (Gemini Live). Default = the natural-voice
+    # "Native Audio Dialog"; alternatives your project may expose:
+    # gemini-3-flash-live-preview, gemini-2.5-flash-native-audio-preview-09-2025.
+    ai_realtime_model: str = "gemini-2.5-flash-preview-native-audio-dialog"
+    ai_realtime_voice: str = "Aoede"  # provider voice name (Aoede/Puck/Charon/…)
     ai_realtime_ttl_seconds: int = 660  # ephemeral-token / session hard-cap ceiling
+    # Native Gemini/Google AI key for the realtime Live tier (NOT OpenRouter).
+    # Also read from GEMINI_API_KEY / GOOGLE_API_KEY / AI_PROVIDER_GEMINI_LIVE_API_KEY.
+    gemini_api_key: str = ""
 
     # OCR / extraction (lightweight defaults)
     backend_ai_extras: str = "ai-lite"
