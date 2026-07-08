@@ -69,7 +69,7 @@ from app.modules.platform_support.api import router as platform_support_router
 from app.modules.recruitment.api import router as recruitment_router
 from app.modules.reviews.api import router as reviews_router
 from app.modules.student_profiles.api import router as student_profiles_router
-from app.modules.users.api import router as admin_users_router
+from app.modules.users.api import router as university_governance_router
 from app.modules.workflow.api import router as workflow_router
 
 API_PREFIX = "/api/v1"
@@ -138,7 +138,7 @@ def register_routes(app: FastAPI) -> None:
     api.include_router(platform_settings_router.public_router)
     api.include_router(platform_settings_router.admin_router)
     api.include_router(locations_router)
-    api.include_router(admin_users_router.router)
+    api.include_router(university_governance_router.router)
     api.include_router(knowledge_base_router)
     api.include_router(platform_feedback_router)
     api.include_router(workflow_router.router)

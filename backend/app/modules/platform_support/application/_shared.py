@@ -3,7 +3,7 @@
 No new ORM tables here (ADR-0014 §1). Every gate additionally requires
 ``org_reporting_facade.is_university_org`` — mirrors
 ``review_queue_service._require_university`` / ``admin_users_service.
-_require_university_admin`` — so a misconfigured partner role can never hold
+_require_account_governor`` — so a misconfigured partner role can never hold
 ``support:*`` even if granted by mistake.
 """
 

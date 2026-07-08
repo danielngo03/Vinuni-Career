@@ -17,10 +17,65 @@ import uuid
 import pytest
 from app.modules.users.application import admin_users_service, preferences_service, user_service
 from app.modules.users.application.student_directory_facade import DEPARTED_LABEL, display_for
-from app.shared.exceptions import PermissionDeniedError, ResourceNotFoundError, ValidationFailedError
+from app.modules.users.domain.models import Identity, User
+from app.shared.exceptions import (
+    PermissionDeniedError,
+    ResourceNotFoundError,
+    ValidationFailedError,
+)
+from app.shared.models import AuditLog
+from app.shared.permissions import Principal
+from sqlalchemy import func, select
 
+from tests.auth_utils import CTX, register_verified
 from tests.documents_utils import make_student
-from tests.org_utils import make_org_with_admin
+from tests.org_utils import add_member, email, make_org_with_admin
+
+
+async def _make_superadmin_principal(db_session) -> Principal:
+    """A real, verified user promoted to platform superadmin (``org_id=None``)."""
+
+    user = await register_verified(db_session, email=email("super"))
+    row = (await db_session.execute(select(User).where(User.id == user.id))).scalar_one()
+    row.is_superadmin = True
+    await db_session.commit()
+    return Principal(
+        user_id=user.id, persona="university_staff", org_id=None,
+        is_superadmin=True, permissions=frozenset(),
+    )
+
+
+async def _audit_count(db_session, action: str, resource_id) -> int:
+    return (
+        await db_session.execute(
+            select(func.count()).select_from(AuditLog).where(
+                AuditLog.action == action, AuditLog.resource_id == resource_id
+            )
+        )
+    ).scalar_one()
+
+
+async def _make_partner_member(db_session, org):
+    """A user whose PRIMARY identity is partner_member in ``org`` (control-plane
+    governs partner-member accounts, not just students)."""
+
+    user = await register_verified(db_session, email=email("pm"))
+    # Flip the registration-default student identity off primary, add a primary
+    # partner_member identity in the partner org.
+    student_ident = (
+        await db_session.execute(
+            select(Identity).where(
+                Identity.user_id == user.id, Identity.is_primary.is_(True)
+            )
+        )
+    ).scalar_one()
+    student_ident.is_primary = False
+    await user_service.add_identity(
+        db_session, user_id=user.id, persona="partner_member",
+        org_id=org.id, is_primary=True,
+    )
+    await db_session.commit()
+    return user
 
 
 # --------------------------------------------------------------------------- #
@@ -89,12 +144,12 @@ async def test_university_admin_can_suspend_and_unsuspend_user(db_session) -> No
     student_user, _student = await make_student(db_session)
 
     suspended = await admin_users_service.suspend_user(
-        db_session, principal=uni, user_id=student_user.id
+        db_session, principal=uni, ctx=CTX, user_id=student_user.id, reason="Spam reports"
     )
     assert suspended["is_active"] is False
 
     restored = await admin_users_service.unsuspend_user(
-        db_session, principal=uni, user_id=student_user.id
+        db_session, principal=uni, ctx=CTX, user_id=student_user.id, reason="Appeal accepted"
     )
     assert restored["is_active"] is True
 
@@ -102,13 +157,17 @@ async def test_university_admin_can_suspend_and_unsuspend_user(db_session) -> No
 async def test_admin_cannot_suspend_self(db_session) -> None:
     admin_user, _org, uni = await make_org_with_admin(db_session, org_type="university")
     with pytest.raises(PermissionDeniedError):
-        await admin_users_service.suspend_user(db_session, principal=uni, user_id=admin_user.id)
+        await admin_users_service.suspend_user(
+            db_session, principal=uni, ctx=CTX, user_id=admin_user.id, reason="x"
+        )
 
 
 async def test_suspend_nonexistent_user_raises_not_found(db_session) -> None:
     _u, _org, uni = await make_org_with_admin(db_session, org_type="university")
     with pytest.raises(ResourceNotFoundError):
-        await admin_users_service.suspend_user(db_session, principal=uni, user_id=uuid.uuid4())
+        await admin_users_service.suspend_user(
+            db_session, principal=uni, ctx=CTX, user_id=uuid.uuid4(), reason="x"
+        )
 
 
 async def test_partner_admin_cannot_suspend_user(db_session) -> None:
@@ -116,8 +175,209 @@ async def test_partner_admin_cannot_suspend_user(db_session) -> None:
     student_user, _student = await make_student(db_session)
     with pytest.raises(PermissionDeniedError):
         await admin_users_service.suspend_user(
-            db_session, principal=partner_admin, user_id=student_user.id
+            db_session, principal=partner_admin, ctx=CTX,
+            user_id=student_user.id, reason="x",
         )
+
+
+# --------------------------------------------------------------------------- #
+# Cross-persona account governance (accounts:govern grant, audit, protection)  #
+# --------------------------------------------------------------------------- #
+
+
+async def test_granted_governor_can_suspend_student(db_session) -> None:
+    _u, uni, _admin = await make_org_with_admin(db_session, org_type="university")
+    _gu, _m, governor = await add_member(
+        db_session, org=uni, permissions=[("accounts", "govern")], role_name="AcctGov"
+    )
+    student_user, _student = await make_student(db_session)
+
+    before = await _audit_count(db_session, "account.suspended", student_user.id)
+    result = await admin_users_service.suspend_user(
+        db_session, principal=governor, ctx=CTX,
+        user_id=student_user.id, reason="Multiple abuse reports",
+    )
+    assert result["is_active"] is False
+
+    await db_session.refresh(student_user)
+    assert student_user.is_active is False
+    assert await _audit_count(db_session, "account.suspended", student_user.id) == before + 1
+
+    row = (
+        await db_session.execute(
+            select(AuditLog).where(
+                AuditLog.action == "account.suspended",
+                AuditLog.resource_id == student_user.id,
+            )
+        )
+    ).scalars().all()[-1]
+    assert row.after_snapshot["reason"] == "Multiple abuse reports"
+    assert row.after_snapshot["target_persona"] == "student"
+    assert row.actor_id == governor.user_id
+
+
+async def test_granted_governor_can_suspend_partner_member(db_session) -> None:
+    # The control plane governs partner accounts too: a partner-member user
+    # (another org's member) can be suspended by a university governor.
+    _u, uni, _admin = await make_org_with_admin(db_session, org_type="university")
+    _gu, _m, governor = await add_member(
+        db_session, org=uni, permissions=[("accounts", "govern")], role_name="AcctGov"
+    )
+    _pu, porg, _padmin = await make_org_with_admin(
+        db_session, org_type="partner", display_name="Acme"
+    )
+    partner_user = await _make_partner_member(db_session, porg)
+
+    result = await admin_users_service.suspend_user(
+        db_session, principal=governor, ctx=CTX,
+        user_id=partner_user.id, reason="Fraudulent listings",
+    )
+    assert result["is_active"] is False
+    await db_session.refresh(partner_user)
+    assert partner_user.is_active is False
+
+    row = (
+        await db_session.execute(
+            select(AuditLog).where(
+                AuditLog.action == "account.suspended",
+                AuditLog.resource_id == partner_user.id,
+            )
+        )
+    ).scalars().all()[-1]
+    assert row.after_snapshot["target_persona"] == "partner_member"
+
+
+async def test_governor_empty_reason_rejected_and_no_write(db_session) -> None:
+    _u, uni, _admin = await make_org_with_admin(db_session, org_type="university")
+    _gu, _m, governor = await add_member(
+        db_session, org=uni, permissions=[("accounts", "govern")], role_name="AcctGov"
+    )
+    student_user, _student = await make_student(db_session)
+
+    for bad in ("", "   "):
+        with pytest.raises(ValidationFailedError):
+            await admin_users_service.suspend_user(
+                db_session, principal=governor, ctx=CTX,
+                user_id=student_user.id, reason=bad,
+            )
+    # No mutation and no audit row on rejected reason.
+    await db_session.refresh(student_user)
+    assert student_user.is_active is True
+    assert await _audit_count(db_session, "account.suspended", student_user.id) == 0
+
+
+async def test_ungranted_university_staffer_denied(db_session) -> None:
+    _u, uni, _admin = await make_org_with_admin(db_session, org_type="university")
+    _mu, _m, ungranted = await add_member(
+        db_session, org=uni, permissions=[("jobs", "read")], role_name="NoGovern"
+    )
+    student_user, _student = await make_student(db_session)
+    with pytest.raises(PermissionDeniedError):
+        await admin_users_service.suspend_user(
+            db_session, principal=ungranted, ctx=CTX,
+            user_id=student_user.id, reason="x",
+        )
+    with pytest.raises(PermissionDeniedError):
+        await admin_users_service.list_platform_users(db_session, principal=ungranted)
+
+
+async def test_partner_wildcard_holder_denied_for_governance(db_session) -> None:
+    # A partner Admin holds ``*:*`` (matches ``accounts:govern``) but is NOT a
+    # university org -> the org-type gate blocks it (mirrors taxonomy/support).
+    _u, _porg, partner_admin = await make_org_with_admin(db_session, org_type="partner")
+    student_user, _student = await make_student(db_session)
+    with pytest.raises(PermissionDeniedError):
+        await admin_users_service.suspend_user(
+            db_session, principal=partner_admin, ctx=CTX,
+            user_id=student_user.id, reason="x",
+        )
+    with pytest.raises(PermissionDeniedError):
+        await admin_users_service.list_platform_users(db_session, principal=partner_admin)
+
+
+async def test_superadmin_can_govern_accounts(db_session) -> None:
+    superadmin = await _make_superadmin_principal(db_session)
+    student_user, _student = await make_student(db_session)
+
+    result = await admin_users_service.suspend_user(
+        db_session, principal=superadmin, ctx=CTX,
+        user_id=student_user.id, reason="Platform action",
+    )
+    assert result["is_active"] is False
+    assert await _audit_count(db_session, "account.suspended", student_user.id) == 1
+
+
+async def test_non_superadmin_governor_cannot_govern_superadmin_target(db_session) -> None:
+    _u, uni, _admin = await make_org_with_admin(db_session, org_type="university")
+    _gu, _m, governor = await add_member(
+        db_session, org=uni, permissions=[("accounts", "govern")], role_name="AcctGov"
+    )
+    # Seed a superadmin target.
+    target = await register_verified(db_session, email=email("sa-target"))
+    row = (await db_session.execute(select(User).where(User.id == target.id))).scalar_one()
+    row.is_superadmin = True
+    await db_session.commit()
+
+    with pytest.raises(PermissionDeniedError):
+        await admin_users_service.suspend_user(
+            db_session, principal=governor, ctx=CTX, user_id=target.id, reason="x"
+        )
+    with pytest.raises(PermissionDeniedError):
+        await admin_users_service.get_account_detail(
+            db_session, principal=governor, user_id=target.id
+        )
+    # Target untouched.
+    await db_session.refresh(row)
+    assert row.is_active is True
+
+
+async def test_superadmin_may_govern_superadmin_target(db_session) -> None:
+    superadmin = await _make_superadmin_principal(db_session)
+    target = await register_verified(db_session, email=email("sa-target2"))
+    row = (await db_session.execute(select(User).where(User.id == target.id))).scalar_one()
+    row.is_superadmin = True
+    await db_session.commit()
+
+    result = await admin_users_service.suspend_user(
+        db_session, principal=superadmin, ctx=CTX, user_id=target.id, reason="Ops action"
+    )
+    assert result["is_active"] is False
+
+
+async def test_governor_detail_is_privacy_safe(db_session) -> None:
+    _u, uni, _admin = await make_org_with_admin(db_session, org_type="university")
+    _gu, _m, governor = await add_member(
+        db_session, org=uni, permissions=[("accounts", "govern")], role_name="AcctGov"
+    )
+    student_user, _student = await make_student(db_session)
+
+    detail = await admin_users_service.get_account_detail(
+        db_session, principal=governor, user_id=student_user.id
+    )
+    assert detail["core"]["email"] == student_user.email
+    assert detail["core"]["is_active"] is True
+    assert isinstance(detail["identities"], list)
+    assert "active_session_count" in detail
+    # Privacy: no password hash, raw tokens, or AI internals leak.
+    flat = str(detail)
+    for forbidden in ("password_hash", "token", "ip_hash", "user_agent"):
+        assert forbidden not in flat
+
+
+async def test_reinstate_writes_reason_audit(db_session) -> None:
+    _u, uni, _admin = await make_org_with_admin(db_session, org_type="university")
+    _gu, _m, governor = await add_member(
+        db_session, org=uni, permissions=[("accounts", "govern")], role_name="AcctGov"
+    )
+    student_user, _student = await make_student(db_session)
+    await admin_users_service.suspend_user(
+        db_session, principal=governor, ctx=CTX, user_id=student_user.id, reason="Investigation"
+    )
+    result = await admin_users_service.unsuspend_user(
+        db_session, principal=governor, ctx=CTX, user_id=student_user.id, reason="Cleared"
+    )
+    assert result["is_active"] is True
+    assert await _audit_count(db_session, "account.reinstated", student_user.id) == 1
 
 
 # --------------------------------------------------------------------------- #
@@ -280,7 +540,9 @@ async def test_display_for_returns_full_name_for_active_user(db_session) -> None
 async def test_display_for_masks_deactivated_user(db_session) -> None:
     _u, _org, uni = await make_org_with_admin(db_session, org_type="university")
     student_user, _student = await make_student(db_session)
-    await admin_users_service.suspend_user(db_session, principal=uni, user_id=student_user.id)
+    await admin_users_service.suspend_user(
+        db_session, principal=uni, ctx=CTX, user_id=student_user.id, reason="Deactivated"
+    )
 
     result = await display_for(db_session, [student_user.id], locale="en")
     assert result[student_user.id] == DEPARTED_LABEL["en"]

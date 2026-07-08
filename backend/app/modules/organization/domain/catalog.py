@@ -156,6 +156,15 @@ PERMISSION_CATALOG: dict[str, frozenset[str]] = {
     "support": frozenset({"read", "act", "escalate"}),
     "privacy": frozenset({"read", "process"}),
     "abuse": frozenset({"read", "triage", "escalate", "override"}),
+    # Cross-persona account governance for the university control plane (P5 —
+    # "university kiểm soát được cả student, partner"). Grants a university-staff
+    # role the ability to view and suspend/reinstate STUDENT and PARTNER-MEMBER
+    # accounts. Like `support`/`privacy`/`abuse`/`taxonomy`, every service gate
+    # additionally requires an acting UNIVERSITY org
+    # (`org_reporting_facade.is_university_org`), so a partner Admin holding
+    # `*:*` can never govern accounts (`principal.is_superadmin` bypasses as
+    # usual). Governing another SUPERADMIN's account still requires superadmin.
+    "accounts": frozenset({"govern"}),
 }
 
 # The single all-access grant tuple stored on a system Admin role.

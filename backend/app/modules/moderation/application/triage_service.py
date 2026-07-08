@@ -259,8 +259,12 @@ async def _reverse_user_suspension(
 ) -> tuple[dict, dict] | None:
     from app.modules.users.application import admin_users_service
 
-    result = await admin_users_service.unsuspend_user(
-        session, principal=principal, user_id=resource_id
+    # The abuse-override authority is ``abuse:override`` (already checked in
+    # ``override_action``) — not ``accounts:govern`` — and this path owns its own
+    # audit + commit, so it uses the raw flip helper rather than the audited/
+    # committing ``unsuspend_user`` governance entrypoint.
+    result = await admin_users_service.set_user_active(
+        session, user_id=resource_id, active=True, actor_user_id=principal.user_id
     )
     return {"is_active": False}, {"is_active": result["is_active"]}
 

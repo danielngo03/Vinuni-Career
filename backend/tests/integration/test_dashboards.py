@@ -418,10 +418,14 @@ async def test_admin_users_suspend_and_unsuspend(db_session) -> None:
     _su, student = await make_student(db_session)
     uid = uuid_mod.UUID(str(student.user_id))
 
-    result = await admin_users_service.suspend_user(db_session, principal=uni, user_id=uid)
+    result = await admin_users_service.suspend_user(
+        db_session, principal=uni, ctx=CTX, user_id=uid, reason="Policy violation"
+    )
     assert result["is_active"] is False
 
-    result = await admin_users_service.unsuspend_user(db_session, principal=uni, user_id=uid)
+    result = await admin_users_service.unsuspend_user(
+        db_session, principal=uni, ctx=CTX, user_id=uid, reason="Reinstated after review"
+    )
     assert result["is_active"] is True
 
 

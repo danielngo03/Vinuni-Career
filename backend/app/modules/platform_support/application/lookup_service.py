@@ -32,8 +32,11 @@ async def lookup(
         raise ValidationFailedError(details={"field": "type"})
 
     if type_ == "user":
-        return await admin_users_service.list_platform_users(
-            session, principal=principal, q=q, page=page, page_size=page_size
+        # Authorized above by ``require_support`` (support:read + university org);
+        # use the non-gated raw read so support lookup does not additionally
+        # require the ``accounts:govern`` grant.
+        return await admin_users_service.query_users(
+            session, q=q, page=page, page_size=page_size
         )
     return await org_reporting_facade.search_orgs(
         session, q=q, page=page, page_size=page_size

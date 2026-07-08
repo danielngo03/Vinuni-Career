@@ -337,8 +337,9 @@ async def suspend_user(
 ) -> dict:
     """Superadmin suspend with audit.
 
-    ``admin_users_service.suspend_user`` does NOT write an audit row — we write
-    one here so every superadmin suspend action is recorded.
+    ``admin_users_service.set_user_active`` is the raw flip (no gate/audit) — we
+    write the superadmin audit row here so every superadmin suspend is recorded.
+    The self-suspend guard is preserved by passing the acting principal.
     """
     _require_superadmin(principal)
 
@@ -349,8 +350,8 @@ async def suspend_user(
         )
     ).scalar_one_or_none()
 
-    result = await admin_users_service.suspend_user(
-        session, principal=principal, user_id=user_id
+    result = await admin_users_service.set_user_active(
+        session, user_id=user_id, active=False, actor_user_id=principal.user_id
     )
 
     audit_ctx = AuditContext(
@@ -388,8 +389,8 @@ async def unsuspend_user(
         )
     ).scalar_one_or_none()
 
-    result = await admin_users_service.unsuspend_user(
-        session, principal=principal, user_id=user_id
+    result = await admin_users_service.set_user_active(
+        session, user_id=user_id, active=True, actor_user_id=principal.user_id
     )
 
     audit_ctx = AuditContext(

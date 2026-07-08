@@ -61,7 +61,8 @@ STARTER_UNIVERSITY_ROLES: dict[str, tuple[str, list[tuple[str, str]]]] = {
         ],
     ),
     "Moderation": (
-        "Kiểm duyệt tin tuyển dụng, sự kiện, quảng cáo, đánh giá và quản trị phân loại ngành.",
+        "Kiểm duyệt tin tuyển dụng, sự kiện, quảng cáo, đánh giá, quản trị phân "
+        "loại ngành và kiểm soát tài khoản sinh viên/đối tác.",
         [
             ("members", "read"),
             ("jobs", "read"),
@@ -75,6 +76,10 @@ STARTER_UNIVERSITY_ROLES: dict[str, tuple[str, list[tuple[str, str]]]] = {
             ("abuse", "escalate"),
             ("taxonomy", "manage"),
             ("audit", "read"),
+            # Cross-persona account governance (P5): view + suspend/reinstate
+            # student & partner-member accounts. Enforced in the service layer
+            # with the additional acting-university-org gate.
+            ("accounts", "govern"),
         ],
     ),
     "Partnerships": (
