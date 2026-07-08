@@ -960,6 +960,55 @@ TOOL_SPECS: dict[str, ToolSpec] = {
         ),
         audit_event_type="TOOL_MOVE_CANDIDATE_STAGE",
     ),
+    "analyze_attachment": ToolSpec(
+        name="analyze_attachment",
+        description=(
+            "Read and analyse a file or image the recruiter attached to THIS chat "
+            "session — transcribe the text, summarise it, and extract any table or "
+            "key/value data. Use this when the recruiter asks you to read, analyse, "
+            "or pull information out of an attachment they uploaded (e.g. 'phân tích "
+            "ảnh này', 'đọc bảng trong file này', 'what does this document say', "
+            "'summarise this file'). Requires attachment_id — the id returned when "
+            "the recruiter uploaded the attachment to this session. Only reads the "
+            "recruiter's OWN attachment; never fabricates content for a blank or "
+            "unreadable file. Only available to partner users."
+        ),
+        parameters={
+            "type": "object",
+            "properties": {
+                "attachment_id": {
+                    "type": "string",
+                    "description": (
+                        "UUID of the attachment the recruiter uploaded to this chat session"
+                    ),
+                },
+            },
+            "required": ["attachment_id"],
+        },
+        output_schema={
+            "type": "object",
+            "properties": {
+                "ok": {"type": "boolean"},
+                "status": {"type": "string"},
+                "kind": {"type": "string"},
+                "analyzed": {"type": "boolean"},
+                "degraded": {"type": "boolean"},
+                "summary": {"type": "string"},
+                "extracted_text_preview": {"type": "string"},
+                "table": {"type": "object"},
+                "key_values": {"type": "object"},
+            },
+        },
+        permission_class="read_only",
+        persona=[PARTNER_USER],
+        required_permissions=["authenticated", "role:partner_user"],
+        fallback=(
+            "I couldn't analyse that attachment right now. Make sure you uploaded it to "
+            "this chat, and try again in a moment."
+        ),
+        audit_event_type="TOOL_ANALYZE_ATTACHMENT",
+        timeout_seconds=25,
+    ),
     "knowledge_base_query": ToolSpec(
         name="knowledge_base_query",
         description=(

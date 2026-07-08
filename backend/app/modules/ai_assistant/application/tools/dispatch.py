@@ -60,6 +60,7 @@ SUPPORTED_TOOL_NAMES = frozenset(
         "get_upcoming_partner_events",
         "get_partner_analytics_summary",
         "move_candidate_stage",
+        "analyze_attachment",
     }
 )
 
@@ -227,6 +228,8 @@ async def _execute_tool(
             return await partner.get_partner_analytics_summary(session, principal)
         if name == "move_candidate_stage":
             return await partner.move_candidate_stage(session, principal, args)
+        if name == "analyze_attachment":
+            return await partner.analyze_attachment(session, principal, args)
 
         # --- CV / AI tools ---
         if name == "get_my_cvs":

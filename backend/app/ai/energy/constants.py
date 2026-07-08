@@ -31,6 +31,10 @@ FEATURE_JD_TRANSLATION = "jd_translation"
 FEATURE_MARKET_INTELLIGENCE = "market_intelligence"
 FEATURE_CANDIDATE_ANALYSIS = "candidate_analysis"
 FEATURE_ANALYTICS_ASSISTANT = "analytics_assistant"
+# Chat-attachment analysis: the recruiter attaches a file/image to the assistant
+# and asks it to read/summarise/extract it. Cost-weighted like the vision tier
+# because the priciest path (image / scanned PDF) is a multimodal call.
+FEATURE_ATTACHMENT_ANALYSIS = "attachment_analysis"
 
 # --------------------------------------------------------------------------- #
 # Cost-weighted credit cost per feature (INTERNAL — never exposed).            #
@@ -60,6 +64,7 @@ FEATURE_UNIT_COST: dict[str, int] = {
     FEATURE_MARKET_INTELLIGENCE: 3,
     FEATURE_CANDIDATE_ANALYSIS: 3,
     FEATURE_ANALYTICS_ASSISTANT: 3,
+    FEATURE_ATTACHMENT_ANALYSIS: 8,  # vision-tier weight (image/scanned path)
 }
 
 

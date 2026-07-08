@@ -26,14 +26,16 @@ import json
 import uuid
 from collections.abc import AsyncGenerator
 
-from fastapi import APIRouter, Depends, Query, status
+from fastapi import APIRouter, Depends, File, Query, UploadFile, status
 from fastapi.responses import StreamingResponse
 from sqlalchemy.ext.asyncio import AsyncSession
 
+from app.core.config import get_settings
 from app.core.db import get_db_session
 from app.modules.ai_assistant.api.schemas import SendMessageRequest
-from app.modules.ai_assistant.application import chat_service, usage_service
+from app.modules.ai_assistant.application import attachment_service, chat_service, usage_service
 from app.modules.auth.api.deps import CurrentAuth, get_current_auth
+from app.shared.exceptions import ValidationFailedError
 from app.shared.responses import success
 
 router = APIRouter(prefix="/ai/chat", tags=["ai-assistant"])
@@ -174,6 +176,44 @@ async def stream_message(
             "X-Accel-Buffering": "no",
         },
     )
+
+
+@router.post(
+    "/sessions/{session_id}/attachments",
+    status_code=status.HTTP_201_CREATED,
+    summary="Attach a file/image to a chat session for AI analysis (owner only)",
+)
+async def upload_attachment(
+    session_id: uuid.UUID,
+    file: UploadFile = File(...),
+    auth: CurrentAuth = Depends(get_current_auth),
+    session: AsyncSession = Depends(get_db_session),
+) -> dict:
+    """Upload a file/image the assistant can later analyse (``analyze_attachment``).
+
+    The session must belong to the caller. The file is validated (size/type/
+    security) and stored server-side; the response is a SAFE descriptor
+    (id/filename/content_type/size/status) — the storage key/path is never
+    returned. Analysis is a separate, metered assistant tool call, not part of
+    this upload.
+    """
+    data = await file.read()
+    settings = get_settings()
+    if len(data) > settings.max_upload_bytes:
+        # Fail fast before buffering further; the service also enforces this.
+        raise ValidationFailedError(
+            "Tệp quá lớn. Hãy nén hoặc chia nhỏ tệp rồi tải lại.",
+            details={"reason": "file_too_large"},
+        )
+    result = await attachment_service.upload_attachment(
+        session,
+        principal=auth.principal,
+        session_id=session_id,
+        filename=file.filename or "upload",
+        data=data,
+        content_type=file.content_type,
+    )
+    return success(result)
 
 
 @router.post(
