@@ -88,6 +88,12 @@ export type {
   StudentNextAction,
   StudentJobIntelligence,
   StudentFitExplanation,
+  StudentLearningResource,
+  CvImprovementHandoff,
+  FitMatchedEvidence,
+  FitAnalysisGap,
+  FitAnalysis,
+  CompetitionExplanation,
   JobQualityIssueSeverity,
   JobQualityIssue,
   JobQualityCheckResult,
@@ -384,6 +390,10 @@ export type {
   CreateOfferBody,
   UpdateOfferBody,
   RespondOfferBody,
+  OfferBenchmark,
+  OfferCompareRow,
+  OfferCompareResult,
+  OfferNegotiationResult,
 } from "./applications";
 export { interviewPrepApi, coverLetterApi } from "./interview-prep";
 export { jobAlertsApi } from "./job-alerts";
@@ -411,6 +421,11 @@ export type {
   AnswerFeedbackResult,
   CoverLetterResult,
   CoverLetterRequest,
+  InterviewReadiness,
+  InterviewAttempt,
+  InterviewHistory,
+  InterviewTurn,
+  InterviewSessionDetail,
 } from "./interview-prep";
 export {
   profileApi,
@@ -472,6 +487,7 @@ export type {
 export {
   advertisingApi,
   PLACEMENT_STATUSES,
+  TARGETING_DIMENSIONS,
   CREATIVE_SLOTS,
   PRIMARY_CREATIVE_SLOTS,
   CREATIVE_SLOT_SPECS,
@@ -492,6 +508,17 @@ export type {
   CreativeAssetRequirements,
   PlacementCreative,
   UploadCreativeBody,
+  TargetingMode,
+  TargetingDimension,
+  TargetingDescriptor,
+  CreativePolicyCode,
+  CreativePolicySeverity,
+  CreativePolicyFlag,
+  AdAnalyticsCounters,
+  PlacementAnalyticsDay,
+  PlacementAnalytics,
+  OrgAnalyticsCampaign,
+  OrgAnalytics,
 } from "./advertising";
 export { billingApi, SUBSCRIPTION_STATUSES } from "./billing";
 export type {

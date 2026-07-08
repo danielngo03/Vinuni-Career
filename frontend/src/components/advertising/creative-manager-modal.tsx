@@ -10,6 +10,7 @@ import {
   WarningCircle,
   ImageSquare,
   Crosshair,
+  Flag,
 } from "@phosphor-icons/react";
 import {
   Button,
@@ -26,11 +27,13 @@ import {
   CREATIVE_SLOTS,
   PRIMARY_CREATIVE_SLOTS,
   CREATIVE_SLOT_SPECS,
+  type CreativePolicyFlag,
   type CreativeSlot,
   type Placement,
   type PlacementCreative,
 } from "@/lib/api";
 import { useApiErrorMessage } from "@/lib/auth/use-api-error";
+import { hasPolicyFlags, policyFlagKeys } from "@/lib/advertising/creative-flags";
 import { cn } from "@/lib/utils";
 import {
   CreativeImage,
@@ -90,6 +93,14 @@ export function CreativeManagerModal({
   const [objectUrl, setObjectUrl] = useState<string | null>(null);
   const [fieldError, setFieldError] = useState<string | null>(null);
   const [deleteTarget, setDeleteTarget] = useState<PlacementCreative | null>(null);
+  /**
+   * Advisory policy pre-flags are returned ONLY on the upload response, keyed by
+   * the freshly created creative id, so we hold them in session state to annotate
+   * the corresponding card until the human review resolves.
+   */
+  const [flagsByCreativeId, setFlagsByCreativeId] = useState<
+    Record<string, CreativePolicyFlag[]>
+  >({});
 
   const creatives = placement?.creatives ?? [];
   const missing = (placement?.missing_primary_slots ?? []) as CreativeSlot[];
@@ -111,6 +122,7 @@ export function CreativeManagerModal({
     setDraft(EMPTY_DRAFT);
     setFieldError(null);
     setDeleteTarget(null);
+    setFlagsByCreativeId({});
     if (inputRef.current) inputRef.current.value = "";
   }, [open]);
 
@@ -173,11 +185,23 @@ export function CreativeManagerModal({
         click_target: draft.clickTarget.trim() || undefined,
       });
     },
-    onSuccess: () => {
+    onSuccess: (created) => {
       setDraft((d) => ({ ...EMPTY_DRAFT, slot: d.slot }));
       if (inputRef.current) inputRef.current.value = "";
       setFieldError(null);
-      toast.show({ tone: "success", title: t("uploadedToast") });
+      const flagged = hasPolicyFlags(created.policy_flags);
+      if (flagged) {
+        setFlagsByCreativeId((prev) => ({
+          ...prev,
+          [created.id]: created.policy_flags ?? [],
+        }));
+      }
+      toast.show({
+        tone: flagged ? "info" : "success",
+        title: flagged
+          ? t("policyFlags.uploadedFlaggedToast")
+          : t("uploadedToast"),
+      });
       refresh();
     },
     onError: (e) => {
@@ -305,6 +329,12 @@ export function CreativeManagerModal({
                             <p className="mt-1 text-xs text-[var(--brand-red)]">
                               {t("rejectedNote", { note: c.moderation_note })}
                             </p>
+                          )}
+                        {c.moderation_status !== "rejected" &&
+                          hasPolicyFlags(flagsByCreativeId[c.id]) && (
+                            <PolicyFlagNote
+                              flagKeys={policyFlagKeys(flagsByCreativeId[c.id])}
+                            />
                           )}
                       </div>
                       <Button
@@ -515,6 +545,42 @@ export function CreativeManagerModal({
 
 function round2(n: number): number {
   return Math.round(n * 100) / 100;
+}
+
+/* ------------------------------ Policy pre-flags ---------------------------- */
+
+/**
+ * Advisory "needs review — flagged" note shown on a freshly uploaded creative
+ * (spec §5/§9). Non-alarming, amber (disclosure/attention) — the creative stays
+ * `pending` and a human reviewer decides. No internals are ever surfaced.
+ */
+function PolicyFlagNote({ flagKeys }: { flagKeys: string[] }) {
+  const t = useTranslations("advertisingCreatives");
+  if (flagKeys.length === 0) return null;
+  return (
+    <div className="mt-2 rounded-lg border border-[var(--amber-600)]/40 bg-[var(--amber-50)] px-2.5 py-2">
+      <p className="flex items-center gap-1.5 text-[11px] font-semibold text-[var(--amber-700)]">
+        <Flag aria-hidden weight="duotone" className="size-3.5" />
+        {t("policyFlags.title")}
+      </p>
+      <ul className="mt-1 space-y-0.5">
+        {flagKeys.map((key) => (
+          <li
+            key={key}
+            className="flex gap-1.5 text-[11px] text-[var(--text-secondary)]"
+          >
+            <span aria-hidden className="text-[var(--amber-700)]">
+              •
+            </span>
+            <span>{t(`policyFlags.flags.${key}`)}</span>
+          </li>
+        ))}
+      </ul>
+      <p className="mt-1 text-[11px] text-[var(--text-muted)]">
+        {t("policyFlags.helper")}
+      </p>
+    </div>
+  );
 }
 
 /* --------------------------------- Drop zone -------------------------------- */

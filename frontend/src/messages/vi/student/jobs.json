@@ -165,6 +165,11 @@
     "guestApplyHint": "Bạn cần tài khoản VinUni Career để ứng tuyển.",
     "applyHint": "Bạn có thể chọn CV, thêm thư xin việc và ứng tuyển trong vài bước.",
     "studentsOnlyApplyHint": "Hãy chuyển sang tài khoản sinh viên để nộp hồ sơ. Tài khoản nhà tuyển dụng và quản trị trường chỉ có thể xem tin này.",
+    "alreadyApplied": "Đã ứng tuyển",
+    "alreadyAppliedHint": "Bạn đã nộp hồ sơ cho vị trí này.",
+    "viewMyApplication": "Xem đơn ứng tuyển của tôi",
+    "deadlinePassed": "Đã hết hạn nộp",
+    "deadlinePassedHint": "Vị trí này đã đóng nhận hồ sơ.",
     "shareJob": "Chia sẻ tin tuyển dụng",
     "shareLinkCopied": "Đã sao chép liên kết vào bộ nhớ tạm",
     "aiJobIntelTitle": "Thông tin việc làm",
@@ -251,7 +256,111 @@
       },
       "alreadyApplied": "Bạn đã ứng tuyển công việc này.",
       "deadlinePassed": "Đã hết hạn nộp đơn.",
-      "noActiveCvBlocked": "Tạo CV trước khi ứng tuyển."
+      "noActiveCvBlocked": "Tạo CV trước khi ứng tuyển.",
+      "tabFit": "Độ phù hợp & cạnh tranh",
+      "tabInterview": "Luyện phỏng vấn",
+      "bestCvScoreLabel": "CV phù hợp nhất",
+      "analyzeCta": "Phân tích CV",
+      "competitionCta": "Mức độ cạnh tranh",
+      "improveThenApply": "Cải thiện rồi ứng tuyển",
+      "readiness": {
+        "ready": "Sẵn sàng ứng tuyển",
+        "almost": "Gần sẵn sàng",
+        "needs_work": "Cần cải thiện trước khi ứng tuyển",
+        "no_cv": "Chưa có CV để so khớp",
+        "applied": "Đã ứng tuyển",
+        "closed": "Đã đóng nhận hồ sơ",
+        "staleNote": "CV này có thể đã cũ — hãy cập nhật trước khi ứng tuyển."
+      },
+      "energy": {
+        "costNote": "Dùng năng lượng AI",
+        "remaining": "Còn {pct}% năng lượng",
+        "blockedTitle": "Đã dùng hết năng lượng AI tuần này",
+        "blockedBody": "Nạp thêm hoặc nâng cấp để chạy phân tích này.",
+        "manage": "Nạp thêm hoặc nâng cấp"
+      },
+      "improve": {
+        "apply": "Áp dụng",
+        "retry": "Thử lại",
+        "error": "Không chuẩn bị được thay đổi này. Vui lòng thử lại.",
+        "confirmHint": "Thao tác này mở một bản nháp trong CV Studio — không có gì thay đổi cho đến khi bạn chấp nhận.",
+        "before": "Hiện tại",
+        "after": "Đề xuất",
+        "factConfirm": "Tôi xác nhận điều này phản ánh đúng kinh nghiệm thực tế của tôi.",
+        "reject": "Bỏ qua",
+        "accept": "Chấp nhận thay đổi",
+        "accepting": "Đang áp dụng…",
+        "accepted": "Đã áp dụng vào CV — một phiên bản mới đã được lưu."
+      },
+      "analyze": {
+        "title": "Phân tích CV",
+        "subtitle": "CV của bạn phù hợp với công việc này ra sao — bằng chứng, thiếu sót và cải thiện một chạm.",
+        "bestCvTitle": "CV nên dùng",
+        "pickCvLabel": "Phân tích một CV khác",
+        "overallTitle": "Đánh giá tổng quan",
+        "evidenceTitle": "Bằng chứng phù hợp",
+        "gapsTitle": "Thiếu sót cần bù đắp",
+        "improvementsTitle": "Cải thiện CV của bạn",
+        "learningGapsTitle": "Kỹ năng cần học",
+        "learningResourcesTitle": "Tài nguyên học tập gợi ý",
+        "resourceKind": {
+          "course": "Khóa học",
+          "certification": "Chứng chỉ",
+          "practice": "Luyện tập",
+          "project": "Dự án",
+          "language": "Ngôn ngữ",
+          "reflection": "Nhìn lại kinh nghiệm"
+        },
+        "evaluating": "Đang phân tích CV của bạn với công việc này…",
+        "aiUnavailable": "Phân tích AI đang tạm ngưng — mức độ phù hợp và các đề xuất cải thiện vẫn hiển thị bên dưới.",
+        "evidenceStrength": {
+          "strong": "Mạnh",
+          "moderate": "Vừa",
+          "weak": "Một phần"
+        },
+        "gapSeverity": {
+          "hard": "Bắt buộc",
+          "soft": "Ưu tiên"
+        }
+      },
+      "competition": {
+        "title": "Mức độ cạnh tranh",
+        "subtitle": "Mức độ cạnh tranh của vị trí này với bạn — từ tín hiệu ứng viên thực tế, dưới dạng nhóm an toàn về quyền riêng tư.",
+        "lowSignalTitle": "Chưa đủ dữ liệu",
+        "lowSignalBody": "Hiện còn quá ít ứng viên để đánh giá cạnh tranh một cách đáng tin cậy. Vui lòng quay lại sau.",
+        "bandsTitle": "Tín hiệu",
+        "narrativeTitle": "Vì sao vị trí này cạnh tranh với bạn",
+        "narrativeEvaluating": "Đang đọc tình hình cạnh tranh…",
+        "narrativeUnavailable": "Hiện chưa có phần giải thích bằng lời — các tín hiệu bên dưới vẫn áp dụng.",
+        "disclaimer": "Chỉ nhóm an toàn về quyền riêng tư — không bao giờ hiển thị từng ứng viên, thứ hạng chính xác hay số lượng cụ thể.",
+        "basis": {
+          "applicant_caliber": "Dựa trên chất lượng ứng viên",
+          "application_volume": "Dựa trên số lượng hồ sơ"
+        },
+        "rows": {
+          "applicants_per_seat": "Ứng viên trên mỗi vị trí",
+          "strong_density": "Đối thủ mạnh",
+          "standing_vs_strong": "Bạn so với ứng viên mạnh",
+          "applicant_quality": "Nhóm ứng viên",
+          "deadline": "Hạn nộp"
+        },
+        "applicantsPerSeat": {
+          "low": "Ít trên mỗi vị trí",
+          "moderate": "Vừa trên mỗi vị trí",
+          "high": "Cao trên mỗi vị trí",
+          "very_high": "Rất cao trên mỗi vị trí"
+        },
+        "strongDensity": {
+          "few": "Ít đối thủ mạnh trên mỗi vị trí",
+          "some": "Một số đối thủ mạnh trên mỗi vị trí",
+          "many": "Nhiều đối thủ mạnh trên mỗi vị trí"
+        },
+        "standingVsStrong": {
+          "ahead": "Vượt nhóm ứng viên mạnh",
+          "among": "Nằm trong nhóm ứng viên mạnh",
+          "behind": "Dưới ngưỡng ứng viên mạnh"
+        }
+      }
     },
     "manageTitle": "Tin tuyển dụng",
     "manageSubtitle": "Tạo, gửi duyệt và quản lý tin tuyển dụng của tổ chức.",
@@ -341,7 +450,40 @@
       "behavioral": "Hành vi",
       "technical": "Kỹ thuật",
       "situational": "Tình huống",
-      "motivation": "Động lực"
+      "motivation": "Động lực",
+      "historyCta": "Xem tiến độ của tôi",
+      "backToPractice": "Quay lại luyện tập",
+      "historyTitle": "Tiến độ phỏng vấn của tôi",
+      "historySubtitle": "Mức độ sẵn sàng và các buổi luyện tập gần đây của bạn.",
+      "readinessTitle": "Mức độ sẵn sàng",
+      "readinessNotEnoughTitle": "Chưa đủ dữ liệu",
+      "readinessNotEnoughBody": "Cần thêm {count, plural, other {# câu trả lời được đánh giá}} để hiển thị mức độ sẵn sàng.",
+      "readinessPct": "{pct}% sẵn sàng",
+      "attemptsCount": "{count, plural, other {# lần luyện tập}}",
+      "answersCount": "{count, plural, other {# câu trả lời}}",
+      "band": {
+        "developing": "Đang phát triển",
+        "emerging": "Bắt đầu hình thành",
+        "progressing": "Tiến bộ",
+        "interview_ready": "Sẵn sàng phỏng vấn"
+      },
+      "trend": {
+        "improving": "Đang tiến bộ",
+        "steady": "Ổn định",
+        "declining": "Đang giảm"
+      },
+      "attemptsTitle": "Buổi luyện tập gần đây",
+      "attemptUntitled": "Buổi luyện tập",
+      "attemptAnswered": "{answered}/{total} câu",
+      "attemptAvg": "TB {score}/5",
+      "attemptNoTurns": "Buổi này chưa có câu trả lời nào được ghi lại.",
+      "turnScore": "{score}/5",
+      "detailError": "Không tải được chi tiết. Vui lòng thử lại.",
+      "historyEmptyTitle": "Chưa có buổi luyện tập",
+      "historyEmptyBody": "Hoàn thành một buổi mô phỏng phỏng vấn để bắt đầu theo dõi tiến độ.",
+      "historyErrorTitle": "Không tải được tiến độ",
+      "historyErrorBody": "Vui lòng thử lại.",
+      "retry": "Thử lại"
     },
     "backToJobs": "Quay lại danh sách tin",
     "newJobTitle": "Tạo tin tuyển dụng",

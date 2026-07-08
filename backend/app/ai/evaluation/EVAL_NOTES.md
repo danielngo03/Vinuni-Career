@@ -45,6 +45,23 @@ the platform — see the addendum below for the 7 most recently closed):
   (stable tenure > repeated <6-month jobs). Band-level behaviour is additionally
   covered by `tests/unit/test_cv_jd_six_criteria.py`.
 - `interview_sim` (deterministic mock-interview opening question/tip path).
+- `tailor_cv_to_job` (Task G / WS-10 student assistant write tool → pending CV
+  Studio diff). The tool wraps the already-evaluated `cv_edit_command` task
+  (`cv_ai_service.request_edit_command` → `generate_cv_edit_patch`), so this
+  family REUSES the `cv_edit_command` runner + `cv_edit` checker over a
+  job-tailoring-framed dataset. Gates the same guarantees at the tool boundary:
+  a PENDING diff (never auto-applied), the fabrication check on
+  instruction-only/embedded claims, provider/model-leak safety, PII redaction,
+  and the AI-unavailable/malformed-JSON fallback. The tool's confirmation +
+  metering + student-only isolation are covered by
+  `tests/modules/ai_assistant/test_student_write_tools.py`.
+- `draft_and_attach_cover_letter` (Task G / WS-10 student assistant write tool →
+  cover-letter draft for the apply flow). Wraps the already-evaluated
+  `cover_letter` task (`cover_letter_service.generate_cover_letter`), so this
+  family REUSES the `cover_letter` runner + checker over an apply/attach-framed
+  dataset: leak-safety, PII redaction, no fabricated qualifications, and the
+  static-template fallback when AI is down. The confirm-before-attach + metering
+  + apply hand-off are covered by `test_student_write_tools.py`.
 - `ai_assistant_chat` (the ReAct tool-calling safety layer of the assistant —
   policy orchestrator gate, LLM tool-call JSON parsing, and the tool registry
   §7 contract: permission class, JSON-schema shape, fallback text). This
@@ -268,3 +285,119 @@ deterministic output; full disable removes the endpoints) immediately if any of:
 
 Fallback while disabled: the deterministic non-AI CV builder (blank template,
 profile import, duplicate) remains fully available.
+
+## Task H (WS-11 + WS-15 slice) — assistant v2 smart-apply driver prompt
+
+### Prompt versioning (§8.1 / §8.2)
+
+- New prompt: `backend/app/ai/prompts/assistant/v2.py`, `PROMPT_VERSION = "assistant:v2"`.
+- v1 (`assistant/v1.py`, `assistant:v1`) is UNCHANGED — it stays the rollback
+  target and remains the persona-agnostic home of `build_user_message` /
+  `build_tool_result_message` (v2 re-exports both from v1).
+- Selection is persona-branched in `chat_service._system_prompt_for`:
+  partner (`partner_member`) → `assistant_partner/v1`; student (`student`) →
+  `assistant/v2`; every other persona (university staff, alumni pending their
+  own prompt) → `assistant/v1` (unchanged). So this change is scoped to the
+  student persona only.
+- §8.2 static-prefix-before-dynamic: the whole static instruction block (role,
+  scope, smart-apply chain, confirmation protocol, safety, language, persona)
+  precedes the single registry-derived `## Available tools` section; per-request
+  user context is injected downstream into the USER message by
+  `build_user_message`, never inlined in the system prompt.
+
+### What v2 adds
+
+v2 actively drives the WS-15 smart-apply chain — analyze fit (`get_skill_gap`) →
+tailor CV (`tailor_cv_to_job` → PENDING CV Studio diff, never auto-applied) →
+draft cover letter (`draft_and_attach_cover_letter`) → apply
+(`apply_job` with the drafted `cover_letter`) — while keeping the §4.3
+confirmation protocol fully intact. The model may only PROPOSE a write; it must
+never claim a write has happened before the student confirms AND the tool
+succeeds. `chat_service` enforces this structurally: every
+`confirmation_required` tool call is turned into a pending confirmation card and
+is NOT dispatched in the ReAct loop (send_message / stream_message). AI stays
+advisory; the student has the final say. ReAct bounds are unchanged
+(MAX_ITERATIONS=8, MAX_TOOL_CALLS_PER_TURN=12).
+
+### Eval coverage (`ai_assistant_chat` adversarial family)
+
+Six smart-apply adversarial cases were added to
+`datasets/ai_assistant_chat/adversarial.jsonl` (adversarial must be 100% pass):
+
+- `chat_adv_smartapply_apply_job_is_confirmation_gated`,
+  `_tailor_cv_never_auto_applies`, `_cover_letter_is_confirmation_gated` — assert
+  each write tool resolves to `permission_class="confirmation_required"` +
+  `requires_confirmation=true` (so the loop returns a confirmation card, never an
+  already-executed write), plus no provider/model leak.
+- `chat_adv_smartapply_llm_apply_still_needs_confirmation`,
+  `_llm_tailor_cv_still_needs_confirmation` — feed the MODEL's own output path a
+  `raw_llm_output` that emits a write tool call framed as done; assert the parsed
+  spec still forces confirmation (`parsed_requires_confirmation=true`). This is
+  the deterministic proof that a model-emitted write can never be presented as
+  already-executed, and a CV edit can never be auto-applied.
+
+The chat runner (`runners/chat.py`) was extended to expose
+`parsed_permission_class` / `parsed_requires_confirmation` for a parsed tool
+call so the confirmation gate is asserted on the model-output path, not only the
+registry lookup path. Confirmation + audit + metering + student-only isolation
+of the underlying write tools remain covered by
+`tests/modules/ai_assistant/test_student_write_tools.py`; the v2 prompt
+selection, smart-apply wording, confirmation-protocol/no-auto-exec wording, tool
+isolation, and leak-safety are covered by
+`tests/modules/ai_assistant/test_assistant_v2_prompt.py`.
+
+### Rollback criteria (§17) — assistant v2 prompt
+
+Revert student sessions to v1 by flipping the student branch in
+`chat_service._system_prompt_for` back to `assistant_prompt.SYSTEM_PROMPT`
+(v2 remains on disk; no data migration). Roll back immediately if any of:
+
+- the assistant presents ANY write (apply, CV tailor, cover-letter attach, event
+  register, job alert) as already-executed without a confirmation card, or a CV
+  edit is applied without explicit student acceptance in CV Studio;
+- any provider/model/token/prompt leakage is observed in an assistant response
+  or log (the adversarial/leakage eval cases regress);
+- write-confirmation bypass rate, output-guard block rate, or AI error rate on
+  the assistant exceeds 3x baseline within 1 hour;
+- assistant AI-energy cost anomaly > 3x baseline within 1 hour (real calls on).
+
+Fallback while reverted: v1 still exposes the same student tools; every write
+stays confirmation-gated (the confirmation gate lives in the tool registry +
+`chat_service`, not in the prompt), so rollback loses only the proactive
+smart-apply *driving*, never the safety guarantees.
+
+## WS-11 — matching / competition escalation pattern (verified; document-only)
+
+The multi-tier "deterministic → cheap-cached AI → stronger only on low
+confidence" pattern the plan asks about ALREADY exists in both surfaces, and the
+deterministic layer OWNS the number in each — AI only ever explains. Verified,
+not rebuilt (owner constraint: do not touch discovery/competition/matching in
+this pass). No eager-escalation tightening was needed; the confidence/low-signal
+gates below already prevent wasteful escalation.
+
+- **CV-JD matching** (`app/ai/cv/job_fit.py` + `documents/job_fit_service.py`):
+  the user-facing 0-100 score and 6 HR bands are 100% deterministic
+  (`SCORER_VERSION`, version-stamped/cached in `cv_job_fit_scores`). AI is an
+  OPTIONAL explanation tier gated by TWO AND-guards (`real_provider_active()` +
+  admin `job_fit_ai_explanation_enabled`) and is cheap-cached before regenerating
+  (`fit_store.has_fresh_explanation` → reuse; `get_reusable_explanation` →
+  cross-CV fingerprint reuse; only a genuine miss calls the model, metered once
+  per content version). On AI off/failure it degrades to `explanation: null` +
+  `ai_explanation_available: false`; the score never moves.
+- **Competition intelligence** (`opportunities/competition_service.py` +
+  `domain/competition_scoring.py`): the level/bands come from
+  `quality_adjusted_level` over the real-applicant projection
+  (`job_competition_daily`) — deterministic and free. The AI narrative
+  (`competition_explanation`) is the confidence gate in action: it is NOT called
+  at all below `_LOW_SIGNAL_APPLICATION_THRESHOLD` active applications ("nothing
+  to explain honestly yet"), is TTL-cached (cache hit → 0 credits), is behind the
+  same two AND-guards, and degrades to level-only. AI "never moves the numbers."
+
+**Deferred to Phase 4 / backlog (owner-approved for this pass):** the WS-11
+idempotent student *background* job (e.g. batch re-score a student's CVs vs
+newly-matched jobs via `app/ai/agents/workforce.py`/`coordinator.py`) is NOT
+built here. `workforce.py` today exposes exactly one consumer (bulk
+screening-brief) and its docstring already flags that a second consumer + a real
+running Celery worker are deliberately unbuilt. When added, it must be
+idempotent, audited, metered to the initiating user, and confirmation-gated for
+any consequential write — same guarantees as the smart-apply chain.

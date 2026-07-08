@@ -33,13 +33,15 @@ from app.modules.advertising.application.errors import (
     IllegalPlacementTransitionError,
     InvalidCreativeFieldError,
     InvalidModerationReasonError,
+    InvalidTargetingFieldError,
     PaidDisclosureImmutableError,
     PlacementAlreadyClaimedError,
     PlacementVersionConflictError,
 )
+from app.modules.advertising.domain import creative_policy, lifecycle
 from app.modules.advertising.domain import creatives as creative_vocab
 from app.modules.advertising.domain import disclosure as disclosure_vocab
-from app.modules.advertising.domain import lifecycle
+from app.modules.advertising.domain import targeting as targeting_vocab
 from app.modules.advertising.domain.models import (
     AdPackage,
     CampaignCreative,
@@ -339,7 +341,7 @@ async def claim_placement(
             version=SponsoredPlacement.version + 1,
         )
     )
-    if result.rowcount == 0:
+    if int(getattr(result, "rowcount", 0) or 0) == 0:
         raise PlacementAlreadyClaimedError()
     await session.flush()
     await write_audit(
@@ -634,6 +636,120 @@ async def set_disclosure_class(
     await session.commit()
     await session.refresh(placement)
     return await _present(session, placement, locale=locale)
+
+
+# --------------------------------------------------------------------------- #
+# Audience targeting (university sets / restricts a placement's audience)       #
+# --------------------------------------------------------------------------- #
+
+
+async def set_placement_targeting(
+    session: AsyncSession,
+    *,
+    principal: Principal,
+    placement_id: uuid.UUID,
+    targeting: dict | None,
+    version: int | None = None,
+    ctx: RequestContext,
+    locale: str = "vi",
+) -> dict:
+    """University sets/overrides a placement's audience targeting (spec §4/§7).
+
+    The university may set any mode, including ``university_restricted`` (which
+    then blocks the partner from editing the descriptor). The descriptor is
+    re-validated against the discovery forbidden-signal allowlist so even a
+    university actor can never target on a PII/sensitive dimension.
+    """
+
+    await _require_advertising_moderator(session, principal)
+    try:
+        normalized = targeting_vocab.validate_and_normalize(
+            targeting, allow_restricted=True
+        )
+    except targeting_vocab.InvalidTargetingError as exc:
+        raise InvalidTargetingFieldError(
+            reason=exc.reason, dimension=exc.dimension
+        ) from exc
+
+    placement = await _load(session, placement_id, lock=True)
+    if placement is None:
+        raise ResourceNotFoundError()
+    if version is not None and version != placement.version:
+        raise PlacementVersionConflictError()
+
+    before = targeting_vocab.descriptor_from_settings(placement.settings)
+    merged = dict(placement.settings or {})
+    merged["targeting"] = normalized
+    placement.settings = merged
+    placement.version += 1
+    await session.flush()
+    await write_audit(
+        session,
+        action="advertising.placement_targeting_set",
+        resource_type="advertising_placement",
+        resource_id=placement.id,
+        context=_audit_ctx(principal, ctx),
+        before={"targeting_mode": before.get("mode")},
+        after={"targeting_mode": normalized["mode"], "org_id": str(placement.org_id)},
+    )
+    await session.commit()
+    await session.refresh(placement)
+    return await _present(session, placement, locale=locale)
+
+
+# --------------------------------------------------------------------------- #
+# Creative policy PRE-check (deterministic auto-flag into the review queue)     #
+# --------------------------------------------------------------------------- #
+
+
+async def autoflag_creative_policy(
+    session: AsyncSession,
+    *,
+    creative: CampaignCreative,
+    placement: SponsoredPlacement,
+    findings: list[creative_policy.PolicyFinding],
+) -> None:
+    """Enqueue a deterministic creative-policy pre-flag for human review.
+
+    System-initiated (no moderator principal): the SAME escalation queue
+    ``escalate_placement`` feeds, so the university reviews it in the normal
+    queue. The creative stays ``pending`` and a human still approves/rejects —
+    this only PRE-FLAGS. Best-effort: a queue-write failure never breaks the
+    upload (the caller isolates it). Idempotent per placement via the review
+    queue's ``(source, resource_type, resource_id)`` dedupe.
+    """
+
+    if not findings:
+        return
+    from app.modules.moderation.application import review_queue_service
+
+    payload = creative_policy.findings_payload(findings)
+    await write_audit(
+        session,
+        action="advertising.creative_policy_flagged",
+        resource_type="advertising_creative",
+        resource_id=creative.id,
+        after={
+            "placement_id": str(placement.id),
+            "org_id": str(placement.org_id),
+            "codes": [f["code"] for f in payload],
+        },
+    )
+    await session.flush()
+    await review_queue_service.enqueue(
+        session,
+        source=review_queue_service.SOURCE_CONTENT,
+        resource_type="advertising_placement",
+        resource_id=placement.id,
+        org_id=placement.org_id,
+        severity=creative_policy.overall_severity(findings),
+        findings={
+            "kind": "creative_policy_precheck",
+            "creative_id": str(creative.id),
+            "slot": creative.slot,
+            "flags": payload,
+        },
+    )
 
 
 # --------------------------------------------------------------------------- #

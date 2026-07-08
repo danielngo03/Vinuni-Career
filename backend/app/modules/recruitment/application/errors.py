@@ -232,6 +232,22 @@ class OfferNotActionableError(ConflictError):
         super().__init__(self.message, details={"reason": reason})
 
 
+class ConfirmationRequiredError(ConflictError):
+    """A metered AI write action was requested without explicit confirmation (§4.3).
+
+    On-demand AI narratives that debit the student's energy require an explicit
+    ``confirm`` from the user first. This distinct ``409`` lets the client render
+    the confirmation card instead of silently spending energy.
+    """
+
+    message = "Vui lòng xác nhận trước khi tạo nội dung gợi ý bằng AI."
+
+    def __init__(self) -> None:
+        super().__init__(
+            self.message, details={"reason": "confirmation_required"}
+        )
+
+
 class InvalidApplicationFieldError(ValidationFailedError):
     """An application field value is invalid (e.g. reveal reason too short)."""
 

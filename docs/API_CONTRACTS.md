@@ -1864,7 +1864,17 @@ receive personalized fit/competition data.
       {
         "skill": "Docker",
         "suggestion": "Build a small portfolio project that demonstrates Docker...",
-        "resource_type": "practice_project"
+        "resource_type": "practice_project",
+        "cv_edit": {
+          "action": "cv_edit_command",
+          "method": "POST",
+          "endpoint": "/api/v1/cvs/{cv_id}/ai-edit-command",
+          "cv_id": "uuid",
+          "skill": "Docker",
+          "rationale": "Build a small portfolio project that demonstrates Docker...",
+          "request": { "instruction": "Add concrete evidence for the \"Docker\" skill..." },
+          "requires_confirmation": true
+        }
       }
     ],
     "apply_readiness": {
@@ -1915,6 +1925,97 @@ Rules:
   for the deterministic fit score; the frontend should prefer this combined
   endpoint over calling `/cvs/job-fit` and `/jobs/{job_id}/competition-signal`
   separately for signed-in job detail.
+- **Authoritative fit contract (WS-3 consolidation, 2026-07-08).** This is the
+  ONE endpoint the signed-in job-detail page calls on load for deterministic fit +
+  bands + matched/gaps + competition + next actions. It NEVER invokes the model
+  (score/bands are deterministic), so default page load has no model cost. The AI
+  narrative + structured matching detail is a clearly-separated on-demand sub-call
+  (`GET /jobs/{job_id}/fit-explanation`, below). `GET /cvs/job-fit` remains for the
+  CV-Studio fit rail / other consumers but should NOT be fired on the job-detail
+  page. Do not re-introduce a third overlapping fetch on this surface.
+- `learning_gaps[].cv_edit` is a confirmation-gated CV-Studio hand-off (or `null`
+  when there is no target CV): a ready-to-send `POST /cvs/{cv_id}/ai-edit-command`
+  body that drafts an improvement for the gap. It NEVER auto-applies — the
+  edit-command returns a PENDING diff the student must accept (which creates a new
+  version and charges `cv_edit_command` energy). The instruction is advisory
+  ("only if you genuinely have experience") and never asserts the student has the
+  skill.
+
+### CV-JD Fit Analysis (On-Demand AI Narrative + Structured Suggestions)
+
+`GET /api/v1/jobs/{job_id}/fit-explanation?cv_id={optional_uuid}`
+
+Authenticated-student only. The clearly-separated, on-demand half of the fit
+contract: the deterministic score/bands return instantly from
+`/jobs/{job_id}/student-intelligence`; the frontend fires THIS on the "Analyze CV"
+action to fill in the AI narrative + structured matching detail. The model is
+invoked only here (energy-metered via `cv_fit_explanation`, once per content
+version, cached + reused across reloads and cross-CV). Default page load never
+reaches it.
+
+```json
+{
+  "data": {
+    "cv_id": "uuid-or-null",
+    "explanation": "short user-facing summary or null",
+    "analysis": {
+      "overall_suggestion": "Highlight cloud/infra impact to close the platform gap.",
+      "matched_evidence": [
+        {
+          "requirement": "Python",
+          "cv_evidence": "Built REST APIs with Python and FastAPI",
+          "evidence_strength": "strong",
+          "reasoning": "Hands-on backend delivery at a startup."
+        }
+      ],
+      "gaps": [
+        {
+          "requirement": "Kubernetes",
+          "cv_evidence": null,
+          "severity": "hard",
+          "reasoning": "No container-orchestration evidence in the CV.",
+          "suggestion": "Add a project deploying a service to Kubernetes, if you have genuine experience with it."
+        }
+      ]
+    },
+    "improvements": [
+      {
+        "action": "cv_edit_command",
+        "method": "POST",
+        "endpoint": "/api/v1/cvs/{cv_id}/ai-edit-command",
+        "cv_id": "uuid",
+        "skill": "Kubernetes",
+        "rationale": null,
+        "request": { "instruction": "Add concrete evidence for the \"Kubernetes\" skill..." },
+        "requires_confirmation": true
+      }
+    ],
+    "ai_explanation_available": true
+  }
+}
+```
+
+Rules:
+
+- `explanation` is the free-text HR-evaluator summary (backward-compatible field).
+- `analysis` is the STRUCTURED matching detail (previously computed then discarded):
+  per-requirement `matched_evidence` with an `evidence_strength` label
+  (`strong`/`moderate`/`weak`), confirmed `gaps` with a `severity`
+  (`hard`/`soft`) and a per-requirement advisory `suggestion`, plus an
+  `overall_suggestion`. `null` when the AI narrative is unavailable (gate off /
+  provider failure / a cross-CV summary-reuse that carried no CV-specific detail).
+  It never contains the model's numeric score, provider/model/token/prompt, or any
+  raw confidence — the authoritative 0-100 product score lives in the deterministic
+  fit contract only.
+- `improvements` is one confirmation-gated CV-Studio hand-off per deterministic fit
+  gap (same shape as `learning_gaps[].cv_edit`). It is DETERMINISTIC and present
+  even when the AI narrative is unavailable, so the "apply this improvement" loop
+  always works. Never auto-applies.
+- `cv_id` (optional query) explains that CV when it belongs to the caller and is
+  scored; otherwise the recommended CV (a foreign/unknown `cv_id` degrades to the
+  recommendation, never `404`). Hidden/closed/missing jobs -> `404`. No active CVs
+  -> `{ cv_id: null, explanation: null, analysis: null, improvements: [],
+  ai_explanation_available: false }`.
 
 ### CV Export
 

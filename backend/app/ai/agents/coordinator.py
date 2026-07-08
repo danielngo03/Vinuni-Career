@@ -12,7 +12,7 @@ from __future__ import annotations
 
 import logging
 import uuid
-from datetime import UTC, datetime
+from datetime import UTC, datetime, timedelta
 
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -25,9 +25,12 @@ from app.ai.agents.models import (
     SubtaskStatus,
     WorkforceRun,
 )
+from app.modules.documents.application import job_fit_batch_service
+from app.modules.opportunities.application import job_fit_read
 from app.modules.recruitment.application import apply_service
-from app.shared.exceptions import ResourceNotFoundError
-from app.shared.permissions import Principal
+from app.shared.audit import AuditContext, write_audit
+from app.shared.exceptions import PermissionDeniedError, ResourceNotFoundError
+from app.shared.permissions import Principal, permission_checker
 
 logger = logging.getLogger(__name__)
 
@@ -40,6 +43,33 @@ MAX_SUBTASKS_PER_RUN = 25
 
 BULK_SCREENING_TASK_TYPE = "bulk_screening_brief"
 SCREENING_BRIEF_SUBTASK_TYPE = "screening_brief"
+
+# --- Student CV re-score (Task O / WS-11) ---------------------------------- #
+# A student-scoped background job: batch-refresh the deterministic CV-JD fit
+# scores for the student's active CVs against recently posted/amended jobs so
+# their job intelligence stays fresh without a foreground request. One subtask
+# per candidate job; each subtask deterministically re-scores every active CV
+# against that job (NO LLM — the scoring is free) and upserts the version-stamped
+# ``cv_job_fit_scores`` rows. No consequential write beyond refreshing the
+# student's OWN scores (no applying / messaging — those stay confirmation-gated
+# in the foreground).
+STUDENT_CV_RESCORE_TASK_TYPE = "student_cv_rescore"
+CV_RESCORE_SUBTASK_TYPE = "cv_rescore_job"
+
+# A single re-score run fans out at most this many per-job subtasks. The
+# candidate set is bounded here and any overflow is LOGGED (never silently
+# dropped) — the next scheduled run picks up jobs that missed the cap.
+MAX_RESCORE_SUBTASKS_PER_RUN = 40
+
+# Only jobs published or amended within this window are re-score candidates:
+# "recently posted / newly matched" freshness, not the whole marketplace.
+RESCORE_LOOKBACK_DAYS = 14
+
+# Personas that own a personal CV library and are therefore eligible for the
+# background re-score. An org-scoped principal (partner/university admin) holds a
+# wildcard org grant that would otherwise satisfy the ``cv:read`` check, so the
+# persona is gated explicitly — this is a student (CV-owner) background job.
+_RESCORE_PERSONAS = frozenset({"student"})
 
 
 # --------------------------------------------------------------------------- #
@@ -58,6 +88,34 @@ def decompose_bulk_screening_brief(application_ids: list[str]) -> list[SubtaskSp
             payload={"application_id": application_id},
         )
         for application_id in capped
+    ]
+
+
+def decompose_student_cv_rescore(job_ids: list[str]) -> list[SubtaskSpec]:
+    """One subtask per candidate job. Deterministic key (job_id) -> retry-safe.
+
+    Hard-capped at ``MAX_RESCORE_SUBTASKS_PER_RUN``. When the candidate set is
+    larger the overflow is LOGGED (never silently truncated) so it is visible in
+    logs that some jobs were deferred to the next scheduled run.
+    """
+
+    if len(job_ids) > MAX_RESCORE_SUBTASKS_PER_RUN:
+        logger.warning(
+            "workforce_run.rescore_candidates_capped",
+            extra={
+                "candidate_count": len(job_ids),
+                "cap": MAX_RESCORE_SUBTASKS_PER_RUN,
+                "deferred": len(job_ids) - MAX_RESCORE_SUBTASKS_PER_RUN,
+            },
+        )
+    capped = job_ids[:MAX_RESCORE_SUBTASKS_PER_RUN]
+    return [
+        SubtaskSpec(
+            key=job_id,
+            subtask_type=CV_RESCORE_SUBTASK_TYPE,
+            payload={"job_id": job_id},
+        )
+        for job_id in capped
     ]
 
 
@@ -109,6 +167,71 @@ def aggregate_screening_results(subtask_results_json: dict) -> dict:
         "strong_matches": strong,
         "briefs": briefs,
     }
+
+
+def aggregate_rescore_results(subtask_results_json: dict) -> dict:
+    """Roll per-job re-score outcomes into a run-level summary.
+
+    User-safe / owner-scoped only: ``recommended_cv_id`` is the student's OWN CV;
+    ``signal`` is the public fit signal. No score internals, provider/model, or
+    token metadata is ever added here (the deterministic score itself is not even
+    echoed — the authoritative value lives on the persisted ``cv_job_fit_scores``
+    row the student reads through the normal fit endpoints).
+    """
+
+    jobs: list[dict] = []
+    refreshed = 0
+    failed = 0
+    skipped = 0
+    for job_id, entry in subtask_results_json.items():
+        status = entry.get("status")
+        if status == SubtaskStatus.SUCCESS.value:
+            result = entry.get("result") or {}
+            if result.get("skipped"):
+                skipped += 1
+            else:
+                refreshed += 1
+            jobs.append(
+                {
+                    "job_id": job_id,
+                    "scored_cvs": int(result.get("scored_cvs") or 0),
+                    "recommended_cv_id": result.get("recommended_cv_id"),
+                    "signal": result.get("signal"),
+                    "skipped": result.get("skipped"),
+                }
+            )
+        else:
+            failed += 1
+            jobs.append(
+                {
+                    "job_id": job_id,
+                    "scored_cvs": 0,
+                    "recommended_cv_id": None,
+                    "signal": None,
+                    "skipped": None,
+                }
+            )
+    return {
+        "total": len(subtask_results_json),
+        "refreshed": refreshed,
+        "skipped": skipped,
+        "failed": failed,
+        "jobs": jobs,
+    }
+
+
+# Register a new workforce task type's aggregator here — the run's ``task_type``
+# selects it in ``record_subtask_result`` / ``start_*``. Never branch a single
+# aggregator on ``task_type``.
+_AGGREGATORS = {
+    BULK_SCREENING_TASK_TYPE: aggregate_screening_results,
+    STUDENT_CV_RESCORE_TASK_TYPE: aggregate_rescore_results,
+}
+
+
+def _aggregate(task_type: str, results: dict) -> dict:
+    aggregator = _AGGREGATORS.get(task_type, aggregate_screening_results)
+    return aggregator(results)
 
 
 def _next_run_status(subtask_keys: list[str], results: dict) -> RunStatus:
@@ -218,6 +341,121 @@ async def start_bulk_screening_run(
     return run
 
 
+async def start_student_cv_rescore_run(
+    session: AsyncSession, *, principal: Principal
+) -> WorkforceRun:
+    """Plan + dispatch a background CV re-score run for one student.
+
+    RBAC: student-scoped + owner-checked. The principal must be a CV-owner
+    persona AND hold ``cv:read`` (students hold ``cv:*``). A partner/university
+    admin — whose wildcard org grant would otherwise satisfy ``cv:read`` — is
+    rejected by the explicit persona gate (``PermissionDeniedError``) before any
+    planning, so a run can only ever refresh the caller's OWN fit scores.
+
+    Planning is deterministic and side-effect-light:
+      1. Skip entirely (empty, immediately-complete run) when the student has no
+         active CV — there is nothing to score.
+      2. Discover recently posted/amended jobs the student can discover
+         (``job_fit_read.recent_candidate_job_ids``), bounded + logged if capped.
+      3. One subtask per candidate job; each subtask re-scores every active CV
+         against that job deterministically (NO LLM) and refreshes the
+         version-stamped ``cv_job_fit_scores`` rows.
+
+    An audit row is written for the run (metadata only — candidate/subtask counts,
+    lookback window, capped flag) in the SAME transaction as the run insert, so
+    the audit and run commit atomically. No provider/model/token internals and no
+    PII cross into the audit snapshot.
+    """
+
+    if principal.persona not in _RESCORE_PERSONAS:
+        # A partner/university admin holds a wildcard grant that would pass the
+        # ``cv:read`` check below — reject non-CV-owner personas up front so a
+        # run can only ever be a student refreshing their own scores.
+        raise PermissionDeniedError()
+    permission_checker.require(principal, "cv", "read")
+    assert principal.user_id is not None
+
+    cv_count = await job_fit_batch_service.active_cv_count(session, principal=principal)
+    if cv_count == 0:
+        job_ids: list[str] = []
+    else:
+        since = datetime.now(tz=UTC) - timedelta(days=RESCORE_LOOKBACK_DAYS)
+        candidate_ids = await job_fit_read.recent_candidate_job_ids(
+            session,
+            persona=principal.persona,
+            since=since,
+            # Fetch a little past the cap so ``decompose`` can see + log the overflow.
+            limit=MAX_RESCORE_SUBTASKS_PER_RUN * 4,
+        )
+        job_ids = [str(jid) for jid in candidate_ids]
+
+    subtasks = decompose_student_cv_rescore(job_ids)
+    capped = len(job_ids) > MAX_RESCORE_SUBTASKS_PER_RUN
+
+    run = WorkforceRun(
+        id=uuid.uuid4(),
+        task_type=STUDENT_CV_RESCORE_TASK_TYPE,
+        status=(RunStatus.COMPLETE if not subtasks else RunStatus.RUNNING).value,
+        requested_by_user_id=principal.user_id,
+        org_id=principal.org_id,
+        context_json={
+            "principal": _serialize_principal(principal),
+            "lookback_days": RESCORE_LOOKBACK_DAYS,
+            "active_cv_count": cv_count,
+        },
+        subtask_keys_json=[s.key for s in subtasks],
+        subtask_results_json={},
+        summary_json=(aggregate_rescore_results({}) if not subtasks else None),
+    )
+    if not subtasks:
+        run.completed_at = datetime.now(tz=UTC)
+    session.add(run)
+    await session.flush()
+
+    # Audit the run (metadata only) in the run's own transaction.
+    await write_audit(
+        session,
+        action="ai.workforce.student_cv_rescore.start",
+        resource_type=_RESOURCE,
+        resource_id=run.id,
+        context=AuditContext(
+            actor_id=principal.user_id, actor_org_id=principal.org_id
+        ),
+        after={
+            "task_type": STUDENT_CV_RESCORE_TASK_TYPE,
+            "candidate_jobs": len(job_ids),
+            "subtasks": len(subtasks),
+            "active_cv_count": cv_count,
+            "lookback_days": RESCORE_LOOKBACK_DAYS,
+            "capped": capped,
+        },
+    )
+    await session.commit()
+
+    logger.info(
+        "workforce_run.start",
+        extra={
+            "run_id": str(run.id),
+            "task_type": run.task_type,
+            "subtask_count": len(subtasks),
+            "candidate_jobs": len(job_ids),
+            "capped": capped,
+        },
+    )
+
+    if subtasks:
+        from app.ai.agents import worker_tasks
+
+        for subtask in subtasks:
+            worker_tasks.dispatch_subtask(run_id=run.id, subtask=subtask)
+    else:
+        logger.info(
+            "workforce_run.end", extra={"run_id": str(run.id), "status": run.status}
+        )
+
+    return run
+
+
 async def _load_run(session: AsyncSession, run_id: uuid.UUID) -> WorkforceRun:
     run = (
         await session.execute(select(WorkforceRun).where(WorkforceRun.id == run_id))
@@ -290,7 +528,7 @@ async def record_subtask_result(
         },
     )
     if new_status in {RunStatus.COMPLETE, RunStatus.PARTIAL, RunStatus.FAILED}:
-        run.summary_json = aggregate_screening_results(results)
+        run.summary_json = _aggregate(run.task_type, results)
         run.completed_at = datetime.now(tz=UTC)
         logger.info(
             "workforce_run.end", extra={"run_id": str(run_id), "status": new_status.value}

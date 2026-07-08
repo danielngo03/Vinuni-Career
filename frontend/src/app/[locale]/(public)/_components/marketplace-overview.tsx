@@ -33,6 +33,7 @@ import { VerifiedBadge } from "@/components/ui/verified-badge";
 import { RecommendationRail } from "@/components/discovery/recommendation-rail";
 import { MarketplaceBannerCard } from "@/components/discovery/marketplace-banner-card";
 import { TrackedItem } from "@/components/discovery/tracked-item";
+import { companySignalTags, eventSignalTags } from "@/lib/discovery/signal-tags";
 import { PopularRoles } from "@/components/discovery/popular-roles";
 import { TrustModules } from "@/components/discovery/trust-modules";
 import { DiscoveryPrivacyNote } from "@/components/discovery/discovery-privacy-note";
@@ -366,6 +367,7 @@ export function MarketplaceOverview() {
                       targetId={event.id}
                       renderId={renderId}
                       clickEvent="click"
+                      signalTags={eventSignalTags(event)}
                     >
                       <EventCard event={event} />
                     </TrackedItem>
@@ -424,6 +426,7 @@ function EmployerSpotlightPanel({
               targetType="company"
               targetId={company.id}
               renderId={renderId}
+              signalTags={companySignalTags(company)}
             >
               <Link
                 href={`/companies/${company.slug}`}
@@ -548,6 +551,7 @@ function EventSpotlightPanel({
       targetId={event.id}
       renderId={renderId}
       clickEvent="click"
+      signalTags={eventSignalTags(event)}
     >
       {content}
     </TrackedItem>

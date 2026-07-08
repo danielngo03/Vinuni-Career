@@ -239,6 +239,29 @@ export interface JobSummary {
   is_saved?: boolean;
   /** Authenticated student/alumni only: lightweight CV-JD fit summary for cards. */
   student_fit?: JobStudentFitSummary | null;
+  /**
+   * Coarse role family derived server-side from the job title
+   * (`discovery/domain/taxonomy.role_family_of`), e.g. "software_engineering".
+   * Drives the privacy-safe `role_families` discovery signal.
+   *
+   * OPTIONAL + BACKEND-PENDING (WS-12 Task E handoff): the public job
+   * projection does not stamp this yet, so it is currently always undefined and
+   * no `role_families` tag is emitted from job surfaces. Once the backend adds
+   * it, {@link ../discovery/signal-tags} emits it automatically. Never a UUID —
+   * always a coarse family key.
+   */
+  role_family?: string | null;
+  /**
+   * Coarse, tokenizable industry slug (e.g. "information-technology") for the
+   * privacy-safe `industries` discovery signal.
+   *
+   * OPTIONAL + BACKEND-PENDING (WS-12 Task E handoff): the current projection
+   * only carries the opaque `industry_id` UUID (on the DETAIL shape), which is
+   * deliberately NOT emitted as a coarse tag (a UUID is not a coarse industry
+   * token). Once the backend stamps a slug/label here, it is emitted
+   * automatically.
+   */
+  industry_slug?: string | null;
 }
 
 /** Public discovery detail — never carries moderation/owner internals. */
@@ -418,12 +441,24 @@ export interface StudentCompetitionIntelligence {
   score: number | null;
   label: "low" | "moderate" | "high" | "very_high" | null;
   signal: "ok" | "low_signal";
+  /**
+   * Whether the headline reads on real applicant caliber (deep enough scored
+   * pool) or on capped application volume (honest cold-start). Null in
+   * `low_signal`. Never exposes a raw count — only the interpretation basis.
+   */
+  basis: "applicant_caliber" | "application_volume" | null;
   seats_bucket: "single_seat" | "small_batch" | "batch" | "mass_hiring";
   application_volume_bucket: "low" | "medium" | "high" | "very_high";
+  /** Total applicants relative to seats — band only, never a count. */
+  applicants_per_seat_band: "low_signal" | "low" | "moderate" | "high" | "very_high";
+  /** Strong (high-fit) applicants per seat — the quality-adjusted headline driver. */
+  strong_competitor_density: "low_signal" | "few" | "some" | "many";
   /** Aggregate applicant-pool quality bucket; "unknown" below the sample threshold. */
   applicant_quality_bucket: "unknown" | "strong" | "mixed" | "developing";
   /** The student's coarse standing within the scored pool; "unknown" below threshold. */
   student_standing_bucket: "unknown" | "ahead_of_most" | "middle_of_pack" | "behind_most";
+  /** Where the student's own fit sits versus the strong competitor pool. */
+  standing_vs_strong: "low_signal" | "ahead" | "among" | "behind";
   student_fit_bucket:
     | "unknown"
     | "needs_improvement"
@@ -441,10 +476,37 @@ export interface StudentCompetitionIntelligence {
   guidance: string[];
 }
 
+/**
+ * A confirmation-gated CV-Studio "apply this improvement" hand-off. Built by the
+ * backend (`cv_gap_handoff`) from a real fit gap; the frontend POSTs `request`
+ * (adding its own `idempotency_key`) to `endpoint` to open the existing
+ * natural-language CV-edit flow, which ALWAYS returns a pending diff the student
+ * must explicitly accept — never an auto-applied edit. Leak-safe (no
+ * provider/model/token/score internals).
+ */
+export interface CvImprovementHandoff {
+  action: "cv_edit_command";
+  method: "POST";
+  /** Absolute API path, e.g. `/api/v1/cvs/{cv_id}/ai-edit-command`. */
+  endpoint: string;
+  cv_id: string;
+  skill: string;
+  /** Advisory rationale copy — never asserts the student HAS the skill. */
+  rationale: string | null;
+  /** Ready-to-send body; the client attaches its own `idempotency_key`. */
+  request: { instruction: string };
+  requires_confirmation: boolean;
+}
+
 export interface StudentLearningGap {
   skill: string;
   suggestion: string;
   resource_type: string;
+  /**
+   * Closed-loop hand-off to draft an improvement for this gap on the student's
+   * CV (confirmation-gated, never auto-applied). Null when no target CV exists.
+   */
+  cv_edit: CvImprovementHandoff | null;
 }
 
 export interface StudentApplyReadiness {
@@ -489,16 +551,84 @@ export interface StudentJobIntelligence {
   next_actions: StudentNextAction[];
 }
 
+/** One matched requirement with its evidence strength (leak-safe — no confidence). */
+export interface FitMatchedEvidence {
+  requirement: string;
+  cv_evidence: string | null;
+  evidence_strength: "strong" | "moderate" | "weak";
+  reasoning: string;
+}
+
+/** One confirmed gap with an advisory (never accusatory) suggestion. */
+export interface FitAnalysisGap {
+  requirement: string;
+  cv_evidence: string | null;
+  severity: "hard" | "soft";
+  reasoning: string;
+  suggestion: string;
+}
+
 /**
- * `GET /jobs/{job_id}/fit-explanation?cv_id=...` — the slow, LLM-backed
- * narrative for a specific CV, fetched AFTER the fast deterministic
- * student-intelligence payload renders. `explanation` is null when the AI
- * assessment is unavailable (AI offline, low-signal, or not yet generated);
- * the caller hides the section rather than surfacing an error. Never carries
+ * Structured matching detail (`semantic_scorer.analysis_payload`) — the
+ * per-requirement matched evidence, confirmed gaps, and overall suggestion the
+ * older contract discarded. Null when the AI narrative is unavailable. The
+ * model-mirrored score is deliberately absent (it would read as raw confidence).
+ */
+export interface FitAnalysis {
+  overall_suggestion: string;
+  matched_evidence: FitMatchedEvidence[];
+  gaps: FitAnalysisGap[];
+}
+
+/**
+ * `GET /jobs/{job_id}/fit-explanation?cv_id=...` — the on-demand, LLM-backed
+ * analysis for a specific CV, fired ONLY when the student opens the "Analyze CV"
+ * drawer (energy-metered; cached per `(cv, job)`). `explanation`/`analysis` are
+ * null when the AI assessment is unavailable (AI offline, low-signal, exhausted
+ * energy); the caller degrades gracefully rather than surfacing an error.
+ * `improvements` are confirmation-gated CV-Studio hand-offs (one per fit gap),
+ * present even when the AI narrative is off. Never carries
  * provider/model/token/prompt/confidence internals.
  */
 export interface StudentFitExplanation {
   cv_id: string | null;
+  explanation: string | null;
+  analysis: FitAnalysis | null;
+  improvements: CvImprovementHandoff[];
+  /**
+   * Internal curated learning foci (one per fit gap) — a deterministic mapping,
+   * NOT confirmation-gated CV edits. Distinct from `improvements`: these are
+   * "what to study/practice", rendered as advisory reading, with no external
+   * URLs and no provider/model internals. Empty when there is nothing to suggest.
+   */
+  learning_resources: StudentLearningResource[];
+  ai_explanation_available: boolean;
+}
+
+/**
+ * One curated learning focus for a fit gap. `resource_type` is a stable code
+ * the client localizes into an icon + label (e.g. course/practice/reading);
+ * `suggestion` is already-localized advisory copy. Never a real URL, never an
+ * assertion that the student lacks the skill.
+ */
+export interface StudentLearningResource {
+  skill: string;
+  resource_type: string;
+  suggestion: string;
+}
+
+/**
+ * `GET /jobs/{job_id}/competition-explanation` — the on-demand AI narrative that
+ * explains the competition bands, fired ONLY when the student opens the
+ * "Competition" drawer (energy-metered; cached per `(job, level)`). The
+ * deterministic bands come free from `student-intelligence.competition`; AI
+ * never moves the numbers. `explanation` is null (with `ai_explanation_available:
+ * false`) on AI-off / provider error / exhausted energy / low signal — never an
+ * error, never a raw count/rank/identity or provider/model/token internals.
+ */
+export interface CompetitionExplanation {
+  level: "low" | "moderate" | "high" | "very_high" | null;
+  label: string | null;
   explanation: string | null;
   ai_explanation_available: boolean;
 }
@@ -856,6 +986,18 @@ export const jobsApi = {
     return api.get<StudentFitExplanation>(`/jobs/${jobId}/fit-explanation`, {
       query: { cv_id: cvId ?? undefined },
     });
+  },
+
+  /**
+   * On-demand AI narrative for the Competition drawer. Fired ONLY when the
+   * student opens the drawer (the deterministic bands render free from
+   * `studentIntelligence`). Model-metered + cached; authenticated-student only.
+   * `explanation` is null when unavailable — the caller degrades gracefully.
+   */
+  competitionExplanation(jobId: string): Promise<CompetitionExplanation> {
+    return api.get<CompetitionExplanation>(
+      `/jobs/${jobId}/competition-explanation`,
+    );
   },
 
   /**

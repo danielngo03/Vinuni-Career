@@ -44,7 +44,18 @@ async def run_case(case: dict[str, Any]) -> Probe:  # noqa: C901
         data["parsed_tool_call"] = parsed
         data["stripped_text"] = strip_tool_call_json(inp["raw_llm_output"])
         if parsed:
-            data["parsed_tool_exists"] = parsed.get("name") in TOOL_SPECS
+            parsed_name = parsed.get("name")
+            parsed_spec = TOOL_SPECS.get(parsed_name) if isinstance(parsed_name, str) else None
+            data["parsed_tool_exists"] = parsed_spec is not None
+            if parsed_spec is not None:
+                # Even if the model emits a WRITE tool call framed as "done", the
+                # resolved spec forces a confirmation card (chat_service returns a
+                # pending confirmation without dispatching it — §4.3). This lets the
+                # eval assert the confirmation gate on the model's own output path.
+                data["parsed_permission_class"] = parsed_spec.permission_class
+                data["parsed_requires_confirmation"] = (
+                    parsed_spec.permission_class == "confirmation_required"
+                )
 
     if "tool_name" in inp:
         tool_name = inp["tool_name"]
@@ -120,6 +131,14 @@ def check(key: str, exp: Any, probe: Probe) -> str | None:  # noqa: C901
         got = bool(d.get("parsed_tool_exists"))
         return None if got == bool(exp) else (
             f"parsed_tool_exists_for_parsed expected {exp}, got {got}"
+        )
+    if key == "parsed_permission_class":
+        got = d.get("parsed_permission_class")
+        return None if got == exp else f"parsed_permission_class expected {exp!r}, got {got!r}"
+    if key == "parsed_requires_confirmation":
+        got = bool(d.get("parsed_requires_confirmation"))
+        return None if got == bool(exp) else (
+            f"parsed_requires_confirmation expected {exp}, got {got}"
         )
     if key == "no_crash":
         return None

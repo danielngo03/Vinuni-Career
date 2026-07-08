@@ -165,6 +165,11 @@
     "guestApplyHint": "You'll need a VinUni Career account to apply.",
     "applyHint": "You can pick a CV, add a cover letter, and apply in a few steps.",
     "studentsOnlyApplyHint": "Switch to a student account to submit an application. Employer and university accounts can review this posting only.",
+    "alreadyApplied": "Applied",
+    "alreadyAppliedHint": "You've already applied to this job.",
+    "viewMyApplication": "View my application",
+    "deadlinePassed": "Deadline passed",
+    "deadlinePassedHint": "This job is no longer accepting applications.",
     "shareJob": "Share this job",
     "shareLinkCopied": "Link copied to clipboard",
     "aiJobIntelTitle": "Job Intel",
@@ -251,7 +256,111 @@
       },
       "alreadyApplied": "You already applied to this job.",
       "deadlinePassed": "The application deadline has passed.",
-      "noActiveCvBlocked": "Create a CV before applying."
+      "noActiveCvBlocked": "Create a CV before applying.",
+      "tabFit": "Fit & competition",
+      "tabInterview": "Interview prep",
+      "bestCvScoreLabel": "Best-CV match",
+      "analyzeCta": "Analyze CV",
+      "competitionCta": "Competition",
+      "improveThenApply": "Improve, then apply",
+      "readiness": {
+        "ready": "Ready to apply",
+        "almost": "Nearly ready",
+        "needs_work": "Needs work before applying",
+        "no_cv": "No CV to match yet",
+        "applied": "Already applied",
+        "closed": "Applications closed",
+        "staleNote": "This CV may be out of date — refresh it before applying."
+      },
+      "energy": {
+        "costNote": "Uses AI energy",
+        "remaining": "{pct}% energy left",
+        "blockedTitle": "AI energy used up this week",
+        "blockedBody": "Top up or upgrade to run this analysis.",
+        "manage": "Top up or upgrade"
+      },
+      "improve": {
+        "apply": "Apply",
+        "retry": "Try again",
+        "error": "Couldn't prepare this change. Try again.",
+        "confirmHint": "This opens a pending draft in CV Studio — nothing changes until you accept.",
+        "before": "Current",
+        "after": "Proposed",
+        "factConfirm": "I confirm this reflects my real experience.",
+        "reject": "Discard",
+        "accept": "Accept change",
+        "accepting": "Applying…",
+        "accepted": "Applied to your CV — a new version was saved."
+      },
+      "analyze": {
+        "title": "Analyze CV",
+        "subtitle": "How your CV matches this job — evidence, gaps, and one-click improvements.",
+        "bestCvTitle": "Best CV to use",
+        "pickCvLabel": "Analyze a different CV",
+        "overallTitle": "Overall assessment",
+        "evidenceTitle": "Matched evidence",
+        "gapsTitle": "Gaps to close",
+        "improvementsTitle": "Improve your CV",
+        "learningGapsTitle": "Learning gaps",
+        "learningResourcesTitle": "Suggested learning resources",
+        "resourceKind": {
+          "course": "Course",
+          "certification": "Certification",
+          "practice": "Practice",
+          "project": "Project",
+          "language": "Language",
+          "reflection": "Experience review"
+        },
+        "evaluating": "Analyzing your CV against this job…",
+        "aiUnavailable": "AI analysis is paused right now — your match and suggested improvements are still shown below.",
+        "evidenceStrength": {
+          "strong": "Strong",
+          "moderate": "Moderate",
+          "weak": "Partial"
+        },
+        "gapSeverity": {
+          "hard": "Must-have",
+          "soft": "Nice-to-have"
+        }
+      },
+      "competition": {
+        "title": "Competition",
+        "subtitle": "How competitive this role is for you — from real applicant signals, in privacy-safe bands.",
+        "lowSignalTitle": "Not enough data yet",
+        "lowSignalBody": "Too few applicants so far to judge competition reliably. Check back later.",
+        "bandsTitle": "Signals",
+        "narrativeTitle": "Why this is competitive for you",
+        "narrativeEvaluating": "Reading the competition…",
+        "narrativeUnavailable": "A written explanation isn't available right now — the signals below still apply.",
+        "disclaimer": "Privacy-safe bands only — never individual applicants, exact ranks, or counts.",
+        "basis": {
+          "applicant_caliber": "Based on applicant strength",
+          "application_volume": "Based on application volume"
+        },
+        "rows": {
+          "applicants_per_seat": "Applicants per opening",
+          "strong_density": "Strong competitors",
+          "standing_vs_strong": "You vs. strong applicants",
+          "applicant_quality": "Applicant pool",
+          "deadline": "Deadline"
+        },
+        "applicantsPerSeat": {
+          "low": "Few per opening",
+          "moderate": "Moderate per opening",
+          "high": "High per opening",
+          "very_high": "Very high per opening"
+        },
+        "strongDensity": {
+          "few": "Few strong per opening",
+          "some": "Some strong per opening",
+          "many": "Many strong per opening"
+        },
+        "standingVsStrong": {
+          "ahead": "Ahead of the strong pool",
+          "among": "Among the strong applicants",
+          "behind": "Below the strong bar"
+        }
+      }
     },
     "manageTitle": "Job postings",
     "manageSubtitle": "Create, submit, and manage your organization's jobs.",
@@ -341,7 +450,40 @@
       "behavioral": "Behavioral",
       "technical": "Technical",
       "situational": "Situational",
-      "motivation": "Motivation"
+      "motivation": "Motivation",
+      "historyCta": "View my progress",
+      "backToPractice": "Back to practice",
+      "historyTitle": "My interview progress",
+      "historySubtitle": "Your readiness and recent practice sessions.",
+      "readinessTitle": "Readiness",
+      "readinessNotEnoughTitle": "Not enough data yet",
+      "readinessNotEnoughBody": "Practise {count, plural, one {# more evaluated answer} other {# more evaluated answers}} to show a readiness level.",
+      "readinessPct": "{pct}% ready",
+      "attemptsCount": "{count, plural, one {# session} other {# sessions}}",
+      "answersCount": "{count, plural, one {# answer} other {# answers}}",
+      "band": {
+        "developing": "Developing",
+        "emerging": "Emerging",
+        "progressing": "Progressing",
+        "interview_ready": "Interview ready"
+      },
+      "trend": {
+        "improving": "Improving",
+        "steady": "Steady",
+        "declining": "Declining"
+      },
+      "attemptsTitle": "Recent sessions",
+      "attemptUntitled": "Practice session",
+      "attemptAnswered": "{answered}/{total} answered",
+      "attemptAvg": "Avg {score}/5",
+      "attemptNoTurns": "No answers were recorded in this session.",
+      "turnScore": "{score}/5",
+      "detailError": "Couldn't load details. Please try again.",
+      "historyEmptyTitle": "No practice sessions yet",
+      "historyEmptyBody": "Complete an interview simulation to start tracking your progress.",
+      "historyErrorTitle": "Couldn't load progress",
+      "historyErrorBody": "Please try again.",
+      "retry": "Try again"
     },
     "backToJobs": "Back to job postings",
     "newJobTitle": "New job posting",

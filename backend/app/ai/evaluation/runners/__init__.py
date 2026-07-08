@@ -34,6 +34,13 @@ from app.ai.evaluation.runners import (
 RUN_CASE_BY_FAMILY = {
     "cv_ai_suggestions": cv_suggestions.run_case,
     "cv_edit_command": cv_edit_command.run_case,
+    # Student assistant loop-closing write tools (Task G / WS-10). Each wraps an
+    # already-evaluated AI task, so the tool's model behaviour is gated by reusing
+    # that task's runner over a tool-framed dataset:
+    #   tailor_cv_to_job              -> cv_edit_command (pending CV diff)
+    #   draft_and_attach_cover_letter -> cover_letter    (draft, never auto-sent)
+    "tailor_cv_to_job": cv_edit_command.run_case,
+    "draft_and_attach_cover_letter": cover_letter.run_case,
     "recommend_cv_for_job": recommend.run_case,
     "interview_sim": interview_sim.run_case,
     "ai_assistant_chat": chat.run_case,

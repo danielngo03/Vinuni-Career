@@ -41,6 +41,8 @@ DEFAULT_CATEGORIES: tuple[CategoryDefault, ...] = (
     CategoryDefault("interview", email="immediate"),
     CategoryDefault("offer", email="immediate"),
     CategoryDefault("job_digest", email="weekly"),
+    # Saved-job application-deadline nudges (spec §3). Opt-outable per channel.
+    CategoryDefault("job_deadline", in_app=True, email="immediate", push=False),
     CategoryDefault("event", email="immediate"),
     CategoryDefault("cv", email="immediate"),
     # Messaging (ADR-0012 §4): optional, default-on, NOT mandatory.

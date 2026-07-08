@@ -177,6 +177,77 @@ export interface RespondOfferBody {
   note?: string | null;
 }
 
+/* ----------------- Offer comparison + negotiation (WS-15) ----------------- */
+
+/**
+ * Internal curated salary-benchmark block for one offer's role. Never fabricates
+ * a range: an unknown role returns `{ found: false }`. `market_band` is a coarse
+ * "min–max" string (in the benchmark's own units) — never a per-offer figure.
+ * `position_vs_market` is only asserted when the offer comp is directly
+ * comparable (disclosed, VND, monthly); otherwise null (honest).
+ */
+export interface OfferBenchmark {
+  found: boolean;
+  market_band?: string;
+  market_min?: number;
+  market_max?: number;
+  currency?: string;
+  position_vs_market?: "below_market" | "within_market" | "above_market" | null;
+}
+
+/**
+ * One row in the student's own offer comparison. Comp is decrypted for the
+ * OWNING student only and is null when the partner did not disclose a figure.
+ * Never carries partner internals (`created_by`/`approved_by`/`decline_reason`).
+ */
+export interface OfferCompareRow {
+  id: string;
+  application_id: string;
+  position_title: string;
+  company_name: string | null;
+  job_title: string | null;
+  status: OfferStatus | string;
+  status_label: string;
+  salary_amount: number | null;
+  salary_currency: string;
+  salary_period: string;
+  comp_summary: string | null;
+  expiry_date: string;
+  start_date: string | null;
+  benchmark: OfferBenchmark;
+}
+
+/** `GET /offers/compare` — deterministic side-by-side of my offers (FREE, no AI). */
+export interface OfferCompareResult {
+  count: number;
+  /** True once there are at least two offers to weigh against each other. */
+  comparable: boolean;
+  offers: OfferCompareRow[];
+}
+
+/**
+ * `POST /offers/negotiation-guidance` — on-demand, confirmation-gated,
+ * energy-metered AI negotiation narrative grounded in the deterministic
+ * comparison. `guidance` is the advisory paragraph, null when there are no
+ * offers, the AI gate is off, weekly energy is exhausted, or the provider
+ * fails — in which case `tips` (deterministic) still render. The `disclaimer`
+ * is ALWAYS present (AI on or off): the product never implies a guaranteed
+ * outcome. No provider/model/token internals ever appear.
+ */
+export interface OfferNegotiationResult {
+  offers: OfferCompareRow[];
+  guidance: string | null;
+  ai_available: boolean;
+  ai_unavailable_reason:
+    | "no_offers"
+    | "ai_disabled"
+    | "energy_exhausted"
+    | "ai_unavailable"
+    | null;
+  tips: string[];
+  disclaimer: string;
+}
+
 /* --------------------------------- Calls ---------------------------------- */
 
 export const offersApi = {
@@ -265,6 +336,28 @@ export const offersApi = {
       decision: body.decision,
       notes: body.note?.trim() ? body.note.trim() : undefined,
       idempotency_key: newIdempotencyKey(),
+    });
+  },
+
+  /**
+   * Student: deterministic side-by-side of my own student-visible offers with
+   * the internal salary benchmark for each role. FREE (no AI, no energy).
+   * Owner-only — an unauthenticated caller simply has no offers.
+   */
+  compareOffers(): Promise<OfferCompareResult> {
+    return api.get<OfferCompareResult>("/offers/compare");
+  },
+
+  /**
+   * Student: on-demand AI negotiation guidance. Confirmation-gated — the caller
+   * MUST pass `confirm: true` (explicit consent for a metered AI action); the
+   * server returns a user-safe `409 confirmation_required` otherwise. Always
+   * returns a disclaimer; degrades to deterministic `tips` when the AI is off or
+   * energy is exhausted. Never guarantees an outcome; never leaks internals.
+   */
+  negotiationGuidance(confirm: boolean): Promise<OfferNegotiationResult> {
+    return api.post<OfferNegotiationResult>("/offers/negotiation-guidance", {
+      confirm,
     });
   },
 };

@@ -39,10 +39,12 @@ from app.modules.advertising.api.schemas import (
     PlacementMarkPaidRequest,
     PlacementRejectRequest,
     PlacementSubmitRequest,
+    PlacementTargetingRequest,
     PlacementUpdateRequest,
     PlacementVersionRequest,
 )
 from app.modules.advertising.application import (
+    campaign_metrics_service,
     creative_service,
     moderation_service,
     placement_service,
@@ -112,6 +114,34 @@ async def create_placement(
 ) -> dict:
     data = await placement_service.create_placement(
         session, principal=auth.principal, payload=body.model_dump(), ctx=auth.ctx,
+    )
+    return success(data)
+
+
+@router.get(
+    "/analytics", summary="My org's campaign analytics rollup (owner-scoped)"
+)
+async def org_campaign_analytics(
+    auth: CurrentAuth = Depends(get_current_auth),
+    session: AsyncSession = Depends(get_db_session),
+) -> dict:
+    data = await campaign_metrics_service.get_org_analytics(
+        session, principal=auth.principal,
+    )
+    return success(data)
+
+
+@router.get(
+    "/placements/{placement_id}/analytics",
+    summary="Per-campaign analytics (owner / 404)",
+)
+async def placement_analytics(
+    placement_id: uuid.UUID,
+    auth: CurrentAuth = Depends(get_current_auth),
+    session: AsyncSession = Depends(get_db_session),
+) -> dict:
+    data = await campaign_metrics_service.get_placement_analytics(
+        session, principal=auth.principal, placement_id=placement_id,
     )
     return success(data)
 
@@ -431,6 +461,23 @@ async def set_disclosure_class(
     data = await moderation_service.set_disclosure_class(
         session, principal=auth.principal, placement_id=placement_id,
         disclosure_class=body.disclosure_class, version=body.version, ctx=auth.ctx,
+    )
+    return success(data)
+
+
+@admin_router.post(
+    "/placements/{placement_id}/targeting",
+    summary="Set / restrict a placement's audience targeting",
+)
+async def set_placement_targeting(
+    placement_id: uuid.UUID,
+    body: PlacementTargetingRequest,
+    auth: CurrentAuth = Depends(get_current_auth),
+    session: AsyncSession = Depends(get_db_session),
+) -> dict:
+    data = await moderation_service.set_placement_targeting(
+        session, principal=auth.principal, placement_id=placement_id,
+        targeting=body.targeting, version=body.version, ctx=auth.ctx,
     )
     return success(data)
 

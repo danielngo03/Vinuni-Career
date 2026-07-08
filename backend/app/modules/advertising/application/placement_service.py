@@ -34,11 +34,13 @@ from app.modules.advertising.application.errors import (
     DisclosureRequiredError,
     IllegalPlacementTransitionError,
     InvalidPlacementFieldError,
+    InvalidTargetingFieldError,
     PlacementExistsError,
     PlacementNotEditableError,
     PlacementVersionConflictError,
 )
 from app.modules.advertising.domain import lifecycle
+from app.modules.advertising.domain import targeting as targeting_vocab
 from app.modules.advertising.domain.models import AdPackage, SponsoredPlacement
 from app.modules.auth.application.context import RequestContext
 from app.modules.opportunities.application import sponsorship_facade
@@ -124,6 +126,29 @@ async def _load_owned(
     return placement
 
 
+def _normalize_partner_targeting(raw: object) -> dict:
+    """Validate + normalize a PARTNER-supplied targeting descriptor.
+
+    Rejects forbidden PII/sensitive dimensions and the university-only
+    ``university_restricted`` mode. Returns the stored descriptor shape.
+    """
+
+    if raw is not None and not isinstance(raw, dict):
+        raise InvalidTargetingFieldError(reason="invalid_targeting")
+    try:
+        return targeting_vocab.validate_and_normalize(raw, allow_restricted=False)
+    except targeting_vocab.InvalidTargetingError as exc:
+        raise InvalidTargetingFieldError(
+            reason=exc.reason, dimension=exc.dimension
+        ) from exc
+
+
+def _with_targeting(settings: dict | None, targeting: dict) -> dict:
+    merged = dict(settings or {})
+    merged["targeting"] = targeting
+    return merged
+
+
 async def _present(
     session: AsyncSession, placement: SponsoredPlacement, *, locale: str
 ) -> dict:
@@ -190,6 +215,9 @@ async def create_placement(
         start_at = start_at.replace(tzinfo=UTC)
     end_at = start_at + timedelta(days=pkg.duration_days)
 
+    # Audience targeting is validated (allowlist-safe) and stored in settings JSON.
+    targeting = _normalize_partner_targeting(payload.get("targeting"))
+
     placement = SponsoredPlacement(
         org_id=principal.org_id,
         created_by=principal.user_id,
@@ -203,6 +231,7 @@ async def create_placement(
         end_at=end_at,
         status=lifecycle.DRAFT,
         disclosure_confirmed=bool(payload.get("disclosure_confirmed", False)),
+        settings=_with_targeting(None, targeting),
     )
     session.add(placement)
     await session.flush()
@@ -220,7 +249,9 @@ async def create_placement(
     return await _present(session, placement, locale=locale)
 
 
-_UPDATABLE = {"placement_type", "package_id", "start_at", "disclosure_confirmed"}
+_UPDATABLE = {
+    "placement_type", "package_id", "start_at", "disclosure_confirmed", "targeting",
+}
 
 
 async def update_placement(
@@ -274,6 +305,16 @@ async def update_placement(
     if "disclosure_confirmed" in payload:
         placement.disclosure_confirmed = bool(payload["disclosure_confirmed"])
         changed["disclosure_confirmed"] = True
+    if "targeting" in payload:
+        # A university-restricted descriptor is partner-immutable — only the
+        # university may relabel/clear it (moderation_service.set_placement_targeting).
+        if targeting_vocab.is_restricted(placement.settings):
+            raise InvalidTargetingFieldError(
+                reason="restricted_by_university", dimension="mode"
+            )
+        targeting = _normalize_partner_targeting(payload["targeting"])
+        placement.settings = _with_targeting(placement.settings, targeting)
+        changed["targeting"] = True
     if "start_at" in payload and payload["start_at"] is not None:
         start_at = payload["start_at"]
         if start_at.tzinfo is None:

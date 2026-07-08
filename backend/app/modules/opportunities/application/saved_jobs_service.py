@@ -21,6 +21,9 @@ from sqlalchemy.dialects.postgresql import insert as pg_insert
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.modules.opportunities.api import presenters
+from app.modules.opportunities.application.industry_read import (
+    resolve_industry_slugs,
+)
 from app.modules.opportunities.application.visibility import (
     apply_visible_filter,
     guest_levels,
@@ -221,6 +224,10 @@ async def list_saved_jobs(
 
     org_ids = {j.org_id for j in jobs_map.values()}
     orgs_map = await org_reporting_facade.summaries_for(session, org_ids)
+    # One extra query for the whole page (never N): map industry_id -> slug.
+    slugs = await resolve_industry_slugs(
+        session, {j.industry_id for j in jobs_map.values()}
+    )
 
     items = []
     for s in page.items:
@@ -228,7 +235,11 @@ async def list_saved_jobs(
         if job is None:
             continue
         summary = presenters.public_job_summary(
-            job, company=orgs_map.get(job.org_id), locale=locale, is_saved=True
+            job,
+            company=orgs_map.get(job.org_id),
+            locale=locale,
+            is_saved=True,
+            industry_slug=slugs.get(job.industry_id) if job.industry_id else None,
         )
         items.append(summary)
 

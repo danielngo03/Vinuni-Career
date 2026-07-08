@@ -39,6 +39,71 @@ export const PLACEMENT_STATUSES: PlacementStatus[] = [
   "cancelled",
 ];
 
+/* ------------------------------- Targeting -------------------------------- */
+
+/**
+ * Audience-targeting mode for a sponsored placement (spec §4/§7).
+ * `automatic` = broad reach (no dimensions). `manual` = partner-declared
+ * allowlisted values. `university_restricted` = the university set the audience
+ * and the partner may NOT edit it (the partner write path 422s
+ * `restricted_by_university`).
+ */
+export type TargetingMode = "automatic" | "manual" | "university_restricted";
+
+/**
+ * The SIX allowlisted, privacy-safe targeting dimensions. NEVER any PII /
+ * sensitive category — the backend rejects a forbidden dimension outright.
+ */
+export type TargetingDimension =
+  | "region"
+  | "industry"
+  | "role_family"
+  | "work_mode"
+  | "student_segment"
+  | "language";
+
+export const TARGETING_DIMENSIONS: TargetingDimension[] = [
+  "region",
+  "industry",
+  "role_family",
+  "work_mode",
+  "student_segment",
+  "language",
+];
+
+/**
+ * A validated, allowlist-safe audience descriptor persisted on a placement. The
+ * backend re-normalizes on read, so this only ever carries the six coarse
+ * dimensions — never a forbidden/PII signal.
+ */
+export interface TargetingDescriptor {
+  mode: TargetingMode | string;
+  dimensions: Partial<Record<TargetingDimension, string[]>>;
+}
+
+/* --------------------------- Creative policy flags ------------------------ */
+
+/** Deterministic creative pre-check codes (advisory; a human still approves). */
+export type CreativePolicyCode =
+  | "creative_dimension_mismatch"
+  | "creative_low_resolution"
+  | "banned_claim"
+  | "off_platform_contact"
+  | "disclosure_impersonation";
+
+export type CreativePolicySeverity = "high" | "medium" | "low";
+
+/**
+ * One advisory pre-flag returned on the creative UPLOAD response only (spec
+ * §5/§9). The creative stays `pending` for human review; a flag never
+ * auto-rejects. `detail` is user-safe (no internals).
+ */
+export interface CreativePolicyFlag {
+  code: CreativePolicyCode | string;
+  severity: CreativePolicySeverity | string;
+  detail: string;
+}
+
 /* ------------------------------- Creatives -------------------------------- */
 
 /**
@@ -155,6 +220,11 @@ export interface PlacementCreative {
   created_at: string | null;
   updated_at: string | null;
   version: number;
+  /**
+   * Advisory policy pre-flags — present ONLY on the upload response (spec §5/§9),
+   * never on the list/detail projection. The creative stays `pending` regardless.
+   */
+  policy_flags?: CreativePolicyFlag[];
 }
 
 /* ------------------------------- Wire types ------------------------------- */
@@ -228,6 +298,8 @@ export interface Placement {
      creative ("asset required before this can run"). */
   disclosure_class?: DisclosureClass | string;
   disclosure?: InventoryDisclosure;
+  /** Audience-targeting descriptor (allowlist-safe; never PII). Always present. */
+  targeting?: TargetingDescriptor;
   creatives?: PlacementCreative[];
   missing_primary_slots?: (CreativeSlot | string)[];
   has_approved_creative?: boolean;
@@ -245,6 +317,64 @@ export interface AdvertisingSpend {
   currency: string;
 }
 
+/* ------------------------------- Analytics -------------------------------- */
+
+/**
+ * Aggregate campaign counters (spec §7). Privacy-safe totals ONLY — never an
+ * individual viewer, session, or candidate id, and never PII.
+ */
+export interface AdAnalyticsCounters {
+  impressions: number;
+  clicks: number;
+  views: number;
+  apply_starts: number;
+  save_intents: number;
+  event_register_intents: number;
+}
+
+/** One day of a placement's aggregate metrics. */
+export interface PlacementAnalyticsDay extends AdAnalyticsCounters {
+  date: string;
+  ctr_pct: number | null;
+}
+
+/**
+ * Per-campaign analytics (`GET /advertising/placements/{id}/analytics`).
+ * Owner-scoped: a cross-org / unknown placement is a non-enumerable 404.
+ */
+export interface PlacementAnalytics {
+  placement_id: string;
+  org_id: string;
+  totals: AdAnalyticsCounters;
+  ctr_pct: number | null;
+  apply_start_rate_pct: number | null;
+  /** Decimal string — the partner's OWN frozen campaign price / apply-starts. */
+  cost_per_apply_start: string | null;
+  campaign_price: string | null;
+  currency: string;
+  daily: PlacementAnalyticsDay[];
+  day_count: number;
+  /** Backend-localized aggregates-only disclaimer. */
+  note: string;
+}
+
+/** One campaign row inside the org rollup. */
+export interface OrgAnalyticsCampaign extends AdAnalyticsCounters {
+  placement_id: string;
+  ctr_pct: number | null;
+}
+
+/** Org-wide campaign rollup (`GET /advertising/analytics`). */
+export interface OrgAnalytics {
+  org_id: string;
+  campaign_count: number;
+  totals: AdAnalyticsCounters;
+  ctr_pct: number | null;
+  apply_start_rate_pct: number | null;
+  campaigns: OrgAnalyticsCampaign[];
+  note: string;
+}
+
 /* ------------------------------- Write bodies ----------------------------- */
 
 export interface CreatePlacementBody {
@@ -256,6 +386,8 @@ export interface CreatePlacementBody {
   start_at: string;
   /** Acknowledges the non-removable label; required true before submit. */
   disclosure_confirmed?: boolean;
+  /** Optional audience descriptor. Omit for broad reach (server defaults it). */
+  targeting?: TargetingDescriptor;
 }
 
 export interface UpdatePlacementBody {
@@ -263,6 +395,11 @@ export interface UpdatePlacementBody {
   package_id?: string;
   start_at?: string;
   disclosure_confirmed?: boolean;
+  /**
+   * Audience descriptor. NEVER send for a `university_restricted` placement —
+   * the server 422s `restricted_by_university`.
+   */
+  targeting?: TargetingDescriptor;
   version?: number;
 }
 
@@ -306,6 +443,22 @@ export const advertisingApi = {
   /** Owner-full placement detail (cross-org / unknown → 404). */
   getPlacement(placementId: string): Promise<Placement> {
     return api.get<Placement>(`/advertising/placements/${placementId}`);
+  },
+
+  /**
+   * Owner-scoped per-campaign analytics (spec §7). Aggregates only — never an
+   * individual viewer/PII. A cross-org / unknown placement is a non-enumerable
+   * 404 (render a not-authorized/empty state).
+   */
+  getPlacementAnalytics(placementId: string): Promise<PlacementAnalytics> {
+    return api.get<PlacementAnalytics>(
+      `/advertising/placements/${placementId}/analytics`,
+    );
+  },
+
+  /** The caller org's campaign analytics rollup (aggregates only). */
+  getOrgAnalytics(): Promise<OrgAnalytics> {
+    return api.get<OrgAnalytics>("/advertising/analytics");
   },
 
   /**

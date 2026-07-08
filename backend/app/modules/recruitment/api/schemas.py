@@ -275,6 +275,18 @@ class OfferRespondBody(BaseModel):
     idempotency_key: str = Field(min_length=1, max_length=200)
 
 
+class OfferNegotiationBody(BaseModel):
+    """``POST /offers/negotiation-guidance`` — on-demand, energy-metered AI narrative.
+
+    ``confirm`` is the explicit user consent for a metered AI write action (§4.3):
+    the frontend surfaces a confirmation card and sends ``confirm=true`` only after
+    the student agrees. The service raises a user-safe ``confirmation_required`` when
+    it is not set.
+    """
+
+    confirm: bool = False
+
+
 class RevealRequestBody(BaseModel):
     # Min-length 20 is enforced in the service for a friendly, field-scoped error.
     reason: str = Field(min_length=1, max_length=2000)

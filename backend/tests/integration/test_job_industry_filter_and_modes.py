@@ -339,3 +339,90 @@ async def test_patch_partial_salary_min_revalidated_against_stored_mode(db_sessi
     )
     assert updated["salary_display"]["min"] == 18_000_000
     assert updated["salary_display"]["kind"] == "range"
+
+
+# --------------------------------------------------------------------------- #
+# WS-12: guest-personalization discovery signals on the PUBLIC job DTO         #
+#                                                                              #
+# The public job summary + detail carry two tokenizable, privacy-safe coarse   #
+# signals for guest discovery: ``role_family`` (from the title) and            #
+# ``industry_slug`` (from the industry taxonomy). Both must be human/token     #
+# strings — NEVER the raw industry UUID — and ``None`` when absent.            #
+# --------------------------------------------------------------------------- #
+
+
+async def _make_industry(db, *, slug: str, name_en: str = "Information Technology"):
+    row = Industry(
+        id=uuid.uuid4(),
+        name_vi="Công nghệ thông tin",
+        name_en=name_en,
+        slug=slug,
+        level=0,
+        is_active=True,
+    )
+    db.add(row)
+    await db.flush()
+    return row
+
+
+@pytest.mark.asyncio
+async def test_public_summary_carries_role_family_and_industry_slug(db_session) -> None:
+    _u, _org, admin = await make_org_with_admin(db_session)
+    _uu, _uorg, uni = await make_org_with_admin(db_session, org_type="university")
+    industry = await _make_industry(db_session, slug="information-technology")
+
+    job_id = await _publish(
+        db_session, admin, uni,
+        title="Software Engineer", industry_id=industry.id,
+    )
+
+    items, _next, _limit, _total = await job_service.list_public_jobs(
+        db_session, principal=GUEST,
+    )
+    item = next(i for i in items if uuid.UUID(i["id"]) == job_id)
+
+    # role_family: a "Software Engineer" title -> the software role family token.
+    assert item["role_family"] == "software_engineering"
+    # industry_slug: the tokenizable taxonomy slug, NEVER the raw UUID.
+    assert item["industry_slug"] == "information-technology"
+    assert item["industry_slug"] != str(industry.id)
+
+
+@pytest.mark.asyncio
+async def test_public_detail_carries_role_family_and_industry_slug(db_session) -> None:
+    _u, _org, admin = await make_org_with_admin(db_session)
+    _uu, _uorg, uni = await make_org_with_admin(db_session, org_type="university")
+    industry = await _make_industry(db_session, slug="information-technology")
+
+    job_id = await _publish(
+        db_session, admin, uni,
+        title="Senior Backend Developer", industry_id=industry.id,
+    )
+
+    # Non-owner (guest) sees the PUBLIC detail projection.
+    detail = await job_service.get_job(db_session, principal=GUEST, job_id=job_id)
+
+    assert detail["role_family"] == "software_engineering"
+    assert detail["industry_slug"] == "information-technology"
+    assert detail["industry_slug"] != str(industry.id)
+
+
+@pytest.mark.asyncio
+async def test_public_dto_signals_are_none_when_absent(db_session) -> None:
+    """No industry + a title matching no known role family -> both signals None."""
+    _u, _org, admin = await make_org_with_admin(db_session)
+    _uu, _uorg, uni = await make_org_with_admin(db_session, org_type="university")
+
+    # "Librarian" matches no role-family keyword; no industry_id is set.
+    job_id = await _publish(db_session, admin, uni, title="Librarian")
+
+    items, _next, _limit, _total = await job_service.list_public_jobs(
+        db_session, principal=GUEST,
+    )
+    item = next(i for i in items if uuid.UUID(i["id"]) == job_id)
+    assert item["role_family"] is None
+    assert item["industry_slug"] is None
+
+    detail = await job_service.get_job(db_session, principal=GUEST, job_id=job_id)
+    assert detail["role_family"] is None
+    assert detail["industry_slug"] is None

@@ -18,7 +18,7 @@ from __future__ import annotations
 import uuid
 from datetime import UTC, datetime
 
-from sqlalchemy import select
+from sqlalchemy import or_, select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.modules.opportunities.application.visibility import apply_visible_filter
@@ -29,6 +29,42 @@ from app.modules.organization.application import org_reporting_facade
 
 def _now() -> datetime:
     return datetime.now(tz=UTC)
+
+
+async def recent_candidate_job_ids(
+    session: AsyncSession,
+    *,
+    persona: str,
+    since: datetime,
+    limit: int,
+) -> list[uuid.UUID]:
+    """IDs of publicly-visible jobs published OR amended since ``since``.
+
+    The candidate set a student's active CVs are (re)scored against by the
+    background freshness job (Task O / WS-11). Reuses the EXACT public visibility
+    predicate (:func:`apply_visible_filter`) at the caller's persona tier, so a
+    hidden, unpublished, closed, or past-deadline job is never scored — the
+    background job stays consistent with what the student can actually discover
+    and apply to.
+
+    Ordered most-recently-amended first and hard-capped at ``limit`` so the
+    coordinator gets a bounded candidate set (it caps + logs again before
+    dispatch). No internal job columns cross the boundary — only the id list.
+    """
+
+    if limit <= 0:
+        return []
+    levels = lifecycle.visible_levels_for(persona, is_authenticated=True)
+    stmt = apply_visible_filter(
+        select(Job.id).where(
+            or_(Job.published_at >= since, Job.updated_at >= since)
+        ),
+        levels=levels,
+        now=_now(),
+    )
+    stmt = stmt.order_by(Job.updated_at.desc(), Job.id).limit(limit)
+    rows = (await session.execute(stmt)).scalars().all()
+    return list(rows)
 
 
 async def load_job_for_fit(

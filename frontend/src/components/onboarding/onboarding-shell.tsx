@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import {
   CheckCircle,
   Clock,
@@ -21,12 +22,6 @@ interface OnboardingShellProps {
   totalSteps?: number;
 }
 
-const NEXT_STEPS = [
-  "Xác định vai trò và nhu cầu sử dụng",
-  "Xác minh thông tin cần thiết",
-  "Mở đúng không gian làm việc",
-];
-
 export function OnboardingShell({
   children,
   title,
@@ -34,10 +29,12 @@ export function OnboardingShell({
   step,
   totalSteps,
 }: OnboardingShellProps) {
+  const t = useTranslations("onboarding");
   const router = useRouter();
   const signOut = useAuthStore((s) => s.signOut);
   const showProgress = step !== undefined && totalSteps !== undefined;
   const pct = showProgress ? Math.round((step / totalSteps) * 100) : 0;
+  const nextSteps = [t("step1"), t("step2"), t("step3")];
 
   async function handleSignOut() {
     await signOut();
@@ -65,7 +62,7 @@ export function OnboardingShell({
                 className="inline-flex h-10 items-center gap-2 rounded-full border border-[var(--border-default)] bg-[var(--surface-card)] px-3 text-sm font-semibold text-[var(--text-secondary)] outline-none transition-colors hover:bg-[var(--bg-subtle)] hover:text-[var(--text-primary)] focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)]/35"
               >
                 <SignOut aria-hidden weight="bold" className="size-4" />
-                <span className="hidden sm:inline">Đăng xuất</span>
+                <span className="hidden sm:inline">{t("signOut")}</span>
               </button>
             </div>
           </header>
@@ -75,10 +72,8 @@ export function OnboardingShell({
               {showProgress && (
                 <div className="mb-7">
                   <div className="mb-2 flex items-center justify-between gap-3 text-xs font-bold uppercase tracking-[0.12em] text-[var(--text-muted)]">
-                    <span>Thiết lập tài khoản</span>
-                    <span>
-                      Bước {step}/{totalSteps}
-                    </span>
+                    <span>{t("setupAccount")}</span>
+                    <span>{t("stepProgress", { step: step!, total: totalSteps! })}</span>
                   </div>
                   <div className="h-2 overflow-hidden rounded-full bg-[var(--bg-subtle)]">
                     <div
@@ -113,14 +108,14 @@ export function OnboardingShell({
                 VinUni Career
               </span>
               <h2 className="mt-8 text-3xl font-extrabold leading-tight tracking-tight text-[var(--text-primary)]">
-                Tài khoản được thiết lập theo đúng vai trò của bạn.
+                {t("asideTitle")}
               </h2>
               <p className="mt-4 text-sm leading-6 text-[var(--text-secondary)]">
-                Sinh viên, cựu sinh viên, nhà tuyển dụng và đội ngũ trường dùng chung một nền tảng nhưng có quyền, dữ liệu và không gian làm việc riêng.
+                {t("asideBody")}
               </p>
 
               <div className="mt-8 space-y-3">
-                {NEXT_STEPS.map((item, index) => (
+                {nextSteps.map((item, index) => (
                   <div
                     key={item}
                     className="flex items-center gap-3 rounded-[16px] border border-[var(--border-default)] bg-[var(--bg-subtle)] px-3.5 py-3"
@@ -143,21 +138,21 @@ export function OnboardingShell({
                 </span>
                 <div>
                   <p className="text-sm font-bold text-[var(--text-primary)]">
-                    Bảo mật phiên và xác minh
+                    {t("securityTitle")}
                   </p>
                   <p className="mt-1 text-xs leading-5 text-[var(--text-secondary)]">
-                    Hệ thống hỗ trợ email OTP, magic link, phiên đăng nhập httpOnly và xác thực hai lớp.
+                    {t("securityBody")}
                   </p>
                 </div>
               </div>
               <div className="mt-4 grid grid-cols-2 gap-2 text-xs font-semibold text-[var(--text-secondary)]">
                 <span className="inline-flex items-center gap-1.5 rounded-full bg-[var(--surface-card)] px-2.5 py-1.5">
                   <CheckCircle aria-hidden weight="fill" className="size-3.5" />
-                  RBAC
+                  {t("securityTagRbac")}
                 </span>
                 <span className="inline-flex items-center gap-1.5 rounded-full bg-[var(--surface-card)] px-2.5 py-1.5">
                   <Clock aria-hidden weight="duotone" className="size-3.5" />
-                  Audit log
+                  {t("securityTagAudit")}
                 </span>
               </div>
             </div>

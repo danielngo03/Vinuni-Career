@@ -18,6 +18,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.modules.opportunities.api import presenters
 from app.modules.opportunities.application import (
+    industry_read,
     job_read_facade,
     saved_jobs_service,
 )
@@ -84,12 +85,16 @@ async def get_job(
         raise ResourceNotFoundError()
     org = await org_reporting_facade.summary_for(session, job.org_id)
     saved_ids = await saved_jobs_service.get_saved_ids(session, principal=principal)
+    industry_slug = await industry_read.resolve_industry_slug(
+        session, job.industry_id
+    )
     await _record_detail_view_metric(
         session, job=job, principal=principal, user_agent=user_agent, source=source
     )
     return presenters.public_job_detail(
         job, company=org, locale=locale,
         is_saved=job.id in saved_ids,
+        industry_slug=industry_slug,
     )
 
 
@@ -179,8 +184,12 @@ async def preview_job(
     would_be_visible = job.visibility in levels and not is_invitation_only
 
     org = await org_reporting_facade.summary_for(session, job.org_id)
+    industry_slug = await industry_read.resolve_industry_slug(
+        session, job.industry_id
+    )
     detail = presenters.public_job_detail(
         job, company=org, locale=locale, is_saved=False,
+        industry_slug=industry_slug,
     )
     hidden_reason = None
     if not would_be_visible:

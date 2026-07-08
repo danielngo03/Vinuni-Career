@@ -17,6 +17,7 @@ import {
   Broadcast,
   Hourglass,
   PencilSimple as PencilSimpleIcon,
+  ChartLineUp,
 } from "@phosphor-icons/react";
 import {
   Button,
@@ -31,6 +32,8 @@ import { cn } from "@/lib/utils";
 import { PageHeader } from "@/components/layout/page-header";
 import { PlacementFormModal } from "./placement-form-modal";
 import { CreativeManagerModal } from "./creative-manager-modal";
+import { CampaignAnalyticsDrawer } from "./campaign-analytics-drawer";
+import { CampaignAnalyticsOverview } from "./campaign-analytics-overview";
 import {
   useAdvertisingLabels,
   PLACEMENT_STATUS_TONE,
@@ -53,6 +56,8 @@ const STATUS_FILTERS = [
 
 const EDITABLE = new Set(["draft", "rejected"]);
 const CANCELLABLE = new Set(["pending_approval", "approved", "active"]);
+/** Statuses where a placement may have accrued measurable delivery. */
+const HAS_ANALYTICS = new Set(["approved", "active", "completed", "cancelled"]);
 /** Creatives can be staged/managed while the campaign is not terminal. */
 const MANAGE_CREATIVES = new Set([
   "draft",
@@ -96,6 +101,7 @@ export function PartnerAdvertisingScreen() {
   const [cancelTarget, setCancelTarget] = useState<Placement | null>(null);
   const [deleteTarget, setDeleteTarget] = useState<Placement | null>(null);
   const [creativeTargetId, setCreativeTargetId] = useState<string | null>(null);
+  const [analyticsTargetId, setAnalyticsTargetId] = useState<string | null>(null);
 
   const query = useInfiniteQuery({
     queryKey: ["advertising", "placements", statusFilter],
@@ -131,6 +137,19 @@ export function PartnerAdvertisingScreen() {
   const creativeTarget = creativeTargetId
     ? (rows.find((r) => r.id === creativeTargetId) ?? null)
     : null;
+
+  const analyticsTarget = analyticsTargetId
+    ? (rows.find((r) => r.id === analyticsTargetId) ?? null)
+    : null;
+
+  /** placement_id → target title, for the org rollup's per-campaign list. */
+  const campaignTitles = useMemo(() => {
+    const map: Record<string, string> = {};
+    for (const p of rows) {
+      if (p.target_title) map[p.id] = p.target_title;
+    }
+    return map;
+  }, [rows]);
 
   function refresh() {
     void qc.invalidateQueries({ queryKey: ["advertising", "placements"] });
@@ -304,6 +323,16 @@ export function PartnerAdvertisingScreen() {
       align: "right",
       cell: (r) => (
         <div className="flex items-center justify-end gap-1">
+          {HAS_ANALYTICS.has(r.status) && (
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => setAnalyticsTargetId(r.id)}
+            >
+              <ChartLineUp aria-hidden weight="duotone" className="size-4" />
+              {t("analytics.viewAction")}
+            </Button>
+          )}
           {MANAGE_CREATIVES.has(r.status) && (
             <Button
               variant="ghost"
@@ -381,6 +410,9 @@ export function PartnerAdvertisingScreen() {
           </div>
         </div>
       )}
+
+      {/* Org campaign analytics rollup (aggregates only) */}
+      {rows.length > 0 && <CampaignAnalyticsOverview titles={campaignTitles} />}
 
       {/* AI Campaign Insights */}
       {adInsights.length > 0 && (
@@ -497,6 +529,13 @@ export function PartnerAdvertisingScreen() {
         open={creativeTarget !== null}
         onClose={() => setCreativeTargetId(null)}
         placement={creativeTarget}
+      />
+
+      {/* Per-placement analytics drawer (aggregates only) */}
+      <CampaignAnalyticsDrawer
+        open={analyticsTarget !== null}
+        onClose={() => setAnalyticsTargetId(null)}
+        placement={analyticsTarget}
       />
 
       {/* Cancel confirmation */}

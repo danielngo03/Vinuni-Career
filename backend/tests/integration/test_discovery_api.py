@@ -103,7 +103,12 @@ async def test_events_merges_only_allowlisted_signal_tags(client, db_session) ->
     row = (
         await db_session.execute(select(DiscoverySession))
     ).scalar_one()
-    assert row.coarse_tags == {"categories": ["data analyst"]}
+    # Weighted taxonomy shape: only the allowlisted coarse value survives; forbidden
+    # PII keys are stripped and never persisted.
+    assert set(row.coarse_tags) == {"categories"}
+    assert set(row.coarse_tags["categories"]) == {"data analyst"}
+    assert row.coarse_tags["categories"]["data analyst"]["count"] == 1
+    assert "email" not in row.coarse_tags and "gps" not in row.coarse_tags
 
 
 async def test_invalid_event_returns_422(client) -> None:

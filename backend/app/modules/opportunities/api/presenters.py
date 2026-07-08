@@ -17,6 +17,7 @@ from __future__ import annotations
 
 from datetime import UTC, datetime
 
+from app.modules.discovery.domain import taxonomy
 from app.modules.opportunities.domain import lifecycle
 from app.modules.opportunities.domain.models import Job
 from app.modules.organization.application.org_reporting_facade import (
@@ -350,17 +351,43 @@ def _detail_body(job: Job, *, locale: str, is_owner: bool = False) -> dict:
     return data
 
 
+def _public_discovery_signals(job: Job, *, industry_slug: str | None) -> dict:
+    """Coarse, privacy-safe personalization signals for public (guest) surfaces.
+
+    Both are **tokenizable strings, never UUIDs** — guest discovery emits them as
+    interest signals that the ranker tokenizes (``taxonomy.tokens_of``) and matches
+    against job title/skill tokens:
+
+    - ``role_family``: a deterministic coarse role family from the title (shared
+      vocabulary with the ranker's ``role_family_of``), or ``None`` when the title
+      matches no known family.
+    - ``industry_slug``: the job's industry taxonomy slug (e.g.
+      ``"information-technology"``), resolved by the caller from ``industry_id``,
+      or ``None`` when the job has no industry.
+
+    These are public-only signals: intentionally absent from owner/moderator
+    projections, which already carry the raw ``industry_id`` for internal use.
+    """
+
+    return {
+        "role_family": taxonomy.role_family_of(job.title),
+        "industry_slug": industry_slug,
+    }
+
+
 def public_job_summary(
     job: Job,
     *,
     company: OrgSummary | None = None,
     locale: str = "vi",
     is_saved: bool = False,
+    industry_slug: str | None = None,
 ) -> dict:
     data = _common(job, locale=locale)
     # Marketplace rows always show the employer (``docs/SCREEN_SPECS.md`` §1.1).
     data["company"] = company_block(company)
     data["is_saved"] = is_saved
+    data.update(_public_discovery_signals(job, industry_slug=industry_slug))
     return data
 
 
@@ -370,10 +397,12 @@ def public_job_detail(
     company: OrgSummary | None = None,
     locale: str = "vi",
     is_saved: bool = False,
+    industry_slug: str | None = None,
 ) -> dict:
     data = _detail_body(job, locale=locale)
     data["company"] = company_block(company)
     data["is_saved"] = is_saved
+    data.update(_public_discovery_signals(job, industry_slug=industry_slug))
     return data
 
 

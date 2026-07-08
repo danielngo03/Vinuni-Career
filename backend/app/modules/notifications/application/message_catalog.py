@@ -370,6 +370,21 @@ CATALOG: dict[str, CatalogEntry] = {
             "en": "A seat opened up — you're now registered for “{event_title}”.",
         },
     ),
+    "opportunities.saved_job_deadline": CatalogEntry(
+        # Student re-engagement (spec §3: "Job deadline reminders and saved-job
+        # closure"). PII-safe: job title + deadline only, no other-candidate data.
+        category="job_deadline",
+        title={
+            "vi": "Công việc bạn đã lưu sắp hết hạn nộp hồ sơ",
+            "en": "A job you saved is closing soon",
+        },
+        body={
+            "vi": "“{job_title}” bạn đã lưu sẽ hết hạn nhận hồ sơ vào {deadline_label}. "
+            "Ứng tuyển trước khi hết hạn để không bỏ lỡ cơ hội.",
+            "en": "“{job_title}” that you saved closes for applications on "
+            "{deadline_label}. Apply before the deadline so you don't miss out.",
+        },
+    ),
     "opportunities.event_reminder": CatalogEntry(
         category="event",
         title={

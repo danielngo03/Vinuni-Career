@@ -68,6 +68,10 @@ FEATURE_CV_EXTRACTION = "cv_extraction"
 FEATURE_CV_SUGGESTION = "cv_suggestion"
 FEATURE_CV_EDIT_COMMAND = "cv_edit_command"
 FEATURE_CV_FIT_EXPLANATION = "cv_fit_explanation"
+# On-demand student narrative that explains the (already-deterministic, free)
+# competition bands in plain language — produced ONLY on the user-triggered
+# Competition drawer, cached, and metered. AI never moves the numbers.
+FEATURE_COMPETITION_EXPLANATION = "competition_explanation"
 FEATURE_COVER_LETTER = "cover_letter"
 FEATURE_INTERVIEW_SIM = "interview_sim"
 FEATURE_LEARNING_PLAN = "learning_plan"

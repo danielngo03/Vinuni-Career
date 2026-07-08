@@ -1,0 +1,5 @@
+{"id": "dcl_lowq_missing_title", "input": {"company_name": "SomeCo"}, "expect": {"is_fallback": false, "draft_contains": "not specified", "no_crash": true}}
+{"id": "dcl_lowq_empty_student_note", "input": {"title": "Intern", "student_note": ""}, "expect": {"is_fallback": false, "no_crash": true}}
+{"id": "dcl_lowq_whitespace_student_note", "input": {"title": "Intern", "student_note": "   "}, "expect": {"is_fallback": false, "no_crash": true}}
+{"id": "dcl_lowq_empty_required_skills_and_description", "input": {"title": "Intern", "required_skills": [], "description": ""}, "expect": {"is_fallback": false, "no_crash": true}}
+{"id": "dcl_lowq_non_list_required_skills_string", "input": {"title": "Intern", "required_skills": "Python, SQL"}, "expect": {"is_fallback": false, "no_crash": true}}

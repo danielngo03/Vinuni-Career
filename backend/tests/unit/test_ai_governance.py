@@ -33,19 +33,37 @@ def test_every_tool_declares_persona_and_required_permissions():
 
 
 def test_confirmation_required_tools_declare_copy_and_side_effects():
+    from app.modules.ai_assistant.application.messages import assistant_message
     from app.modules.ai_assistant.application.tools.specs import TOOL_SPECS
 
     mutating = [s for s in TOOL_SPECS.values() if s.permission_class == "confirmation_required"]
     assert mutating, "expected at least one confirmation_required tool to exist"
     for spec in mutating:
-        assert spec.confirmation_copy is not None, (
+        copy = spec.confirmation_copy
+        assert copy is not None, (
             f"{spec.name} is confirmation_required and must declare confirmation_copy (§4.3)"
         )
-        assert spec.confirmation_copy.title
-        assert spec.confirmation_copy.body
-        assert spec.confirmation_copy.cta_confirm
-        assert spec.confirmation_copy.cta_cancel
+        # The contract stores i18n KEYS, never a single hardcoded locale — the card
+        # must render non-empty copy in BOTH vi and en (§4.3 i18n requirement).
+        assert copy.title_key
+        assert copy.body_key
+        assert copy.cta_confirm_key
+        assert copy.cta_cancel_key
+        for locale in ("vi", "en"):
+            localized = copy.localized(locale)
+            for field in ("title", "body", "cta_confirm", "cta_cancel"):
+                assert localized[field].strip(), (
+                    f"{spec.name}.confirmation_copy.{field} is empty for locale {locale!r}"
+                )
+        # vi and en must actually differ for the title (a real translation, not a
+        # single hardcoded locale masquerading as both).
+        assert copy.localized("vi")["title"] != copy.localized("en")["title"], (
+            f"{spec.name}.confirmation_copy.title is identical in vi and en — "
+            "the card is not truly localized"
+        )
         assert spec.side_effects, f"{spec.name} must declare side_effects (§7)"
+        # Every key resolves through the assistant i18n catalog (no missing key).
+        assert assistant_message(copy.title_key, "en")
 
 
 def test_read_only_tools_have_no_declared_side_effects():

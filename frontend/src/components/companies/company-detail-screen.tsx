@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useId } from "react";
 import { useTranslations } from "next-intl";
 import { useQuery } from "@tanstack/react-query";
 import {
@@ -22,6 +23,8 @@ import { CompanyAvatar } from "./company-avatar";
 import { JobRow } from "@/components/jobs/job-row";
 import { CompanyReviewsSection } from "@/components/reviews/company-reviews-section";
 import { ReportButton } from "@/components/report/report-button";
+import { recordDiscoveryEvent } from "@/lib/discovery/analytics";
+import { companySignalTags } from "@/lib/discovery/signal-tags";
 import { ApiError, companiesApi } from "@/lib/api";
 
 type InsightKey =
@@ -96,6 +99,8 @@ export function CompanyDetailScreen({ slug }: { slug: string }) {
   const tc = useTranslations("common");
   const tStates = useTranslations("states");
 
+  const renderId = useId();
+
   const query = useQuery({
     queryKey: ["companies", "detail", slug],
     queryFn: () => companiesApi.getBySlug(slug),
@@ -104,6 +109,20 @@ export function CompanyDetailScreen({ slug }: { slug: string }) {
 
   const company = query.data;
   const careerInsights = company ? deriveCareerInsights(company) : [];
+
+  // Record a privacy-safe `view` discovery event once the real company loads,
+  // so browsing feeds the coarse-signal ranker (company id + coarse industry).
+  useEffect(() => {
+    if (!company) return;
+    recordDiscoveryEvent({
+      event_type: "view",
+      source_surface: "company_profile",
+      target_type: "company",
+      target_id: company.id,
+      idempotency_key: `${renderId}:${company.id}:view`,
+      signal_tags: companySignalTags(company),
+    });
+  }, [company, renderId]);
 
   return (
     <div className="mx-auto w-full max-w-5xl px-4 py-8 lg:px-6">

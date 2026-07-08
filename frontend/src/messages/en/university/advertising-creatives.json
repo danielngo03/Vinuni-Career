@@ -48,6 +48,19 @@
       "network": "Could not reach the server. Please try again.",
       "retry": "Retry"
     },
+    "policyFlags": {
+      "title": "Needs review — flagged:",
+      "helper": "A reviewer will check this before it can go live. Your banner stays pending until then.",
+      "uploadedFlaggedToast": "Banner uploaded — flagged for review before it can go live.",
+      "flags": {
+        "creative_dimension_mismatch": "Banner shape differs from the slot size",
+        "creative_low_resolution": "Image resolution looks low for this slot",
+        "banned_claim": "Wording may contain a prohibited claim",
+        "off_platform_contact": "Contains contact details that move people off-platform",
+        "disclosure_impersonation": "Wording implies an official university endorsement",
+        "unknown": "Flagged for review"
+      }
+    },
     "slots": {
       "homepage_hero": "Homepage hero",
       "right_rail": "Right-rail banner",

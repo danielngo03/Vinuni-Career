@@ -25,6 +25,7 @@ import {
 } from "@/components/ui";
 import { PageHeader } from "@/components/layout/page-header";
 import { AiUsagePanel } from "./ai-usage-panel";
+import { EnergyWalletPanel, BILLING_PLANS_ANCHOR } from "./energy-wallet-panel";
 import {
   useBillingLabels,
   useLimitLabels,
@@ -348,11 +349,14 @@ export function SubscriberBillingScreen({
             )}
           </section>
 
+          {/* ---- Student AI energy wallet (masked % + coarse bucket + nudge) ---- */}
+          {audience === "student" && <EnergyWalletPanel />}
+
           {/* ---- AI usage (real consumption from GET /ai/usage/summary) ---- */}
           <AiUsagePanel audience={audience} />
 
           {/* ---- Plan comparison ---- */}
-          <section aria-label={t("plans.comparisonTitle")}>
+          <section id={BILLING_PLANS_ANCHOR} aria-label={t("plans.comparisonTitle")} className="scroll-mt-6">
             <div className="mb-2.5">
               <h2 className="text-sm font-bold text-[var(--text-primary)]">
                 {t("plans.comparisonTitle")}

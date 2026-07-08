@@ -29,6 +29,7 @@ from app.modules.recruitment.api.schemas import (
     InviteToApplyBody,
     OfferApproveBody,
     OfferCreateBody,
+    OfferNegotiationBody,
     OfferRescindBody,
     OfferRespondBody,
     OfferSendBody,
@@ -48,6 +49,7 @@ from app.modules.recruitment.application import (
     export_service,
     interview_service,
     invitation_service,
+    offer_compare_service,
     offer_service,
     pipeline_board,
     reveal_service,
@@ -632,6 +634,41 @@ async def list_my_offers(
         session, principal=auth.principal,
     )
     return success({"offers": data})
+
+
+# NOTE: the static ``/compare`` + ``/negotiation-guidance`` routes MUST be declared
+# before the dynamic ``/{offer_id}`` route so they are not captured as an offer id.
+
+
+@offers_router.get("/compare", summary="Side-by-side comparison of my offers (student)")
+async def compare_my_offers(
+    auth: CurrentAuth = Depends(get_current_auth),
+    session: AsyncSession = Depends(get_db_session),
+    accept_language: str | None = Header(default=None),
+) -> dict:
+    locale = (accept_language or "vi").split(",")[0].split("-")[0].strip()
+    data = await offer_compare_service.compare_offers(
+        session, principal=auth.principal, locale=locale,
+    )
+    return success(data)
+
+
+@offers_router.post(
+    "/negotiation-guidance",
+    summary="On-demand AI negotiation guidance for my offers (student; metered)",
+)
+async def offer_negotiation_guidance(
+    body: OfferNegotiationBody,
+    auth: CurrentAuth = Depends(get_current_auth),
+    session: AsyncSession = Depends(get_db_session),
+    accept_language: str | None = Header(default=None),
+) -> dict:
+    locale = (accept_language or "vi").split(",")[0].split("-")[0].strip()
+    data = await offer_compare_service.negotiation_guidance(
+        session, principal=auth.principal, confirm=body.confirm,
+        ctx=auth.ctx, locale=locale,
+    )
+    return success(data)
 
 
 @offers_router.get("/{offer_id}", summary="My offer detail (student; owner)")

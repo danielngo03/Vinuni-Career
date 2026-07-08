@@ -37,6 +37,7 @@ const CATEGORY_LABEL_KEYS: Record<string, string> = {
   offer: "categoryOffer",
   job_digest: "categoryJobDigest",
   job_alert: "categoryJobAlerts",
+  job_deadline: "categoryJobDeadline",
   event: "categoryEvents",
   cv: "categoryCv",
   message: "categoryMessages",
@@ -45,6 +46,13 @@ const CATEGORY_LABEL_KEYS: Record<string, string> = {
   "application.status_changed": "categoryApplications",
   "job.digest": "categoryJobDigest",
   "event.reminder": "categoryEvents",
+};
+
+// Optional one-line description per category (helps distinguish the newer
+// deadline-nudge and job-alert-digest email toggles). Unknown ids show no desc.
+const CATEGORY_DESC_KEYS: Record<string, string> = {
+  job_deadline: "descJobDeadline",
+  job_alert: "descJobAlerts",
 };
 
 export function NotificationsTab() {
@@ -99,6 +107,11 @@ export function NotificationsTab() {
   function labelFor(id: string): string {
     const key = CATEGORY_LABEL_KEYS[id];
     return key ? t(key) : id;
+  }
+
+  function descFor(id: string): string | null {
+    const key = CATEGORY_DESC_KEYS[id];
+    return key ? t(key) : null;
   }
 
   // Loading.
@@ -172,12 +185,19 @@ export function NotificationsTab() {
                   key={id}
                   className="flex flex-col gap-3 py-4 sm:flex-row sm:items-center sm:justify-between"
                 >
-                  <div className="flex items-center gap-2">
-                    <span className="text-sm font-medium text-[var(--text-primary)]">
-                      {labelFor(id)}
-                    </span>
-                    {locked && (
-                      <StatusBadge tone="info">{t("mandatory")}</StatusBadge>
+                  <div className="min-w-0">
+                    <div className="flex items-center gap-2">
+                      <span className="text-sm font-medium text-[var(--text-primary)]">
+                        {labelFor(id)}
+                      </span>
+                      {locked && (
+                        <StatusBadge tone="info">{t("mandatory")}</StatusBadge>
+                      )}
+                    </div>
+                    {descFor(id) && (
+                      <p className="mt-0.5 text-xs leading-relaxed text-[var(--text-secondary)]">
+                        {descFor(id)}
+                      </p>
                     )}
                   </div>
                   <div className="flex flex-wrap items-center gap-4">

@@ -12,6 +12,9 @@ from app.ai.energy import models as _ai_energy_models  # noqa: F401
 from app.ai.gateway import provider_models as _ai_provider_models  # noqa: F401
 from app.ai.observability import eval_samples as _ai_eval_samples  # noqa: F401
 from app.ai.observability import models as _ai_usage_models  # noqa: F401
+from app.modules.advertising.domain import (  # noqa: F401
+    metrics_models as _advertising_metrics_models,
+)
 from app.modules.advertising.domain import models as _advertising_models  # noqa: F401
 from app.modules.ai_assistant.domain import models as _ai_assistant_models  # noqa: F401
 from app.modules.ai_settings.domain import models as _ai_settings_models  # noqa: F401
@@ -42,10 +45,16 @@ from app.modules.moderation.domain import models as _moderation_models  # noqa: 
 from app.modules.notifications.domain import models as _notification_models  # noqa: F401
 from app.modules.onboarding.domain import models as _onboarding_models  # noqa: F401
 from app.modules.opportunities.domain import (  # noqa: F401
+    competition_read_models as _competition_read_models,
+)
+from app.modules.opportunities.domain import (  # noqa: F401
     event_models as _event_models,
 )
 from app.modules.opportunities.domain import (  # noqa: F401
     industry_models as _industry_models,
+)
+from app.modules.opportunities.domain import (  # noqa: F401
+    interview_sim_models as _interview_sim_models,
 )
 from app.modules.opportunities.domain import models as _opportunity_models  # noqa: F401
 from app.modules.organization.domain import models as _org_models  # noqa: F401
@@ -77,6 +86,7 @@ def import_all_models() -> None:
         _ai_eval_samples,
         _ai_workforce_models,
         _advertising_models,
+        _advertising_metrics_models,
         _scheduler_run_models,
         _ai_assistant_models,
         _analytics_models,
@@ -91,7 +101,9 @@ def import_all_models() -> None:
         _auth_models,
         _org_models,
         _opportunity_models,
+        _competition_read_models,
         _event_models,
+        _interview_sim_models,
         _industry_models,
         _documents_models,
         _recruitment_models,

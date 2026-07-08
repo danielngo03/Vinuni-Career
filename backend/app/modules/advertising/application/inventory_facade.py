@@ -28,7 +28,12 @@ from app.modules.advertising.api import presenters
 from app.modules.advertising.domain import creatives as creative_vocab
 from app.modules.advertising.domain import disclosure as disclosure_vocab
 from app.modules.advertising.domain import lifecycle
+from app.modules.advertising.domain import targeting as targeting_vocab
 from app.modules.advertising.domain.models import CampaignCreative, SponsoredPlacement
+
+# When a viewer is supplied we over-fetch a bounded candidate pool so targeting can
+# select the most-relevant paid slots (not just the newest); still one indexed read.
+_TARGETING_POOL_CAP = 60
 
 
 @dataclass(frozen=True, slots=True)
@@ -170,8 +175,9 @@ async def list_active_sponsored(
     now: datetime | None = None,
     limit: int = 10,
     exclude_placement_ids: set[uuid.UUID] | None = None,
+    viewer: targeting_vocab.ViewerSignals | None = None,
 ) -> list[ActiveSponsoredItem]:
-    """Live sponsored placements for ``target_type``, newest activation first.
+    """Live sponsored placements for ``target_type``, relevance- then recency-first.
 
     Filters to ``status == active``, not soft-deleted, *grants sponsored*, and
     ``start_at <= now < end_at``. One placement per row; the caller dedupes by
@@ -181,9 +187,21 @@ async def list_active_sponsored(
     ``discovery`` module — see ``frequency_cap.over_capped_placements``) has
     already decided this viewer has seen enough times. Excluded slots are left
     unfilled, never backfilled with organic content (hide-if-empty).
+
+    ``viewer`` enables audience TARGETING (spec §4/§7): each placement's stored,
+    allowlist-safe targeting descriptor is matched against the viewer's coarse
+    signals. A placement whose determinable audience contradicts the viewer is
+    EXCLUDED (its paid slot is left unfilled — never bled into the organic
+    stream); eligible placements are ranked by targeting relevance, then by
+    activation recency, so a well-targeted campaign wins the slot over a broad
+    "newest" one. With ``viewer=None`` (health/attribution reads) the legacy
+    newest-first behaviour is preserved unchanged.
     """
 
     now = now or _now()
+    fetch_limit = (
+        _TARGETING_POOL_CAP if viewer is not None else max(limit, 0) * 2
+    )
     stmt = (
         select(SponsoredPlacement)
         .where(
@@ -197,12 +215,13 @@ async def list_active_sponsored(
             SponsoredPlacement.activated_at.desc().nullslast(),
             SponsoredPlacement.id.desc(),
         )
-        .limit(max(limit, 0) * 2)  # over-fetch a little; window re-checked below
+        .limit(fetch_limit)
     )
     rows = list((await session.execute(stmt)).scalars().all())
 
-    out: list[ActiveSponsoredItem] = []
-    seen_targets: set[uuid.UUID] = set()
+    # (relevance, placement) for every eligible row, preserving the query's
+    # activation-recency order (used as the stable tiebreak within equal relevance).
+    scored: list[tuple[int, SponsoredPlacement]] = []
     for p in rows:
         # Defensive re-check against (possibly naive) stored bounds; and only the
         # sponsored class fills sponsored slots (a featured-only placement does not).
@@ -212,6 +231,21 @@ async def list_active_sponsored(
             continue
         if exclude_placement_ids and p.id in exclude_placement_ids:
             continue
+        relevance = 0
+        if viewer is not None:
+            descriptor = targeting_vocab.descriptor_from_settings(p.settings)
+            outcome = targeting_vocab.match(descriptor, viewer)
+            if not outcome.eligible:
+                continue  # audience contradicts the viewer — leave the slot unfilled
+            relevance = outcome.relevance
+        scored.append((relevance, p))
+
+    # Stable sort by relevance desc keeps the activation-recency order as tiebreak.
+    scored.sort(key=lambda item: -item[0])
+
+    out: list[ActiveSponsoredItem] = []
+    seen_targets: set[uuid.UUID] = set()
+    for _relevance, p in scored:
         if p.target_id in seen_targets:
             continue
         seen_targets.add(p.target_id)
@@ -289,4 +323,4 @@ async def count_campaigns_by_status_for_org(
             .group_by(SponsoredPlacement.status)
         )
     ).all()
-    return {status: count for status, count in rows}
+    return {row[0]: row[1] for row in rows}

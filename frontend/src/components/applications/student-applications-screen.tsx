@@ -8,7 +8,6 @@ import {
   CalendarCheck,
   ClipboardText,
   CurrencyDollar,
-  LightbulbFilament,
   SignIn,
   WarningCircle,
   PaperPlaneTilt,
@@ -18,6 +17,8 @@ import {
 import { Link } from "@/i18n/navigation";
 import { Button, EmptyState, Skeleton, StatusBadge } from "@/components/ui";
 import { PageHeader } from "@/components/layout/page-header";
+import { SummaryPanel } from "@/components/students/summary-panel";
+import { OfferComparePanel } from "@/components/applications/offer-compare-panel";
 import { CompanyAvatar } from "@/components/companies/company-avatar";
 import { formatDateTime } from "@/lib/format";
 import { cn } from "@/lib/utils";
@@ -198,7 +199,7 @@ export function StudentApplicationsScreen() {
       {query.isPending ? (
         <div className="space-y-3">
           {[0, 1, 2].map((i) => (
-            <Skeleton key={i} className="h-24 w-full rounded-2xl" />
+            <Skeleton key={i} className="h-24 w-full rounded-[12px]" />
           ))}
         </div>
       ) : query.isError ? (
@@ -232,34 +233,34 @@ export function StudentApplicationsScreen() {
         <>
           {/* Application summary tiles */}
           <div className="mb-5 grid grid-cols-2 gap-3 sm:grid-cols-4">
-            <div className="rounded-2xl border border-[var(--glass-border)] bg-[var(--glass-surface)] px-4 py-3.5 shadow-[0_2px_12px_rgba(11,34,57,0.06)] backdrop-blur-xl transition-all hover:-translate-y-0.5">
+            <div className="marketplace-card rounded-[12px] px-4 py-3.5">
               <div className="mb-2.5 flex size-9 items-center justify-center rounded-xl icon-chip-primary shadow-sm">
-                <PaperPlaneTilt aria-hidden weight="duotone" className="size-4.5 text-white" />
+                <PaperPlaneTilt aria-hidden weight="duotone" className="size-[18px]" />
               </div>
               <p className="text-2xl font-black tracking-tight text-[var(--text-primary)]">{rows.length}</p>
               <p className="mt-0.5 text-xs font-medium text-[var(--text-secondary)]">{t("statTotalApplied")}</p>
             </div>
-            <div className="rounded-2xl border border-[var(--glass-border)] bg-[var(--glass-surface)] px-4 py-3.5 shadow-[0_2px_12px_rgba(11,34,57,0.06)] backdrop-blur-xl transition-all hover:-translate-y-0.5">
+            <div className="marketplace-card rounded-[12px] px-4 py-3.5">
               <div className="mb-2.5 flex size-9 items-center justify-center rounded-xl icon-chip-success shadow-sm">
-                <CalendarCheck aria-hidden weight="duotone" className="size-4.5 text-white" />
+                <CalendarCheck aria-hidden weight="duotone" className="size-[18px]" />
               </div>
               <p className="text-2xl font-black tracking-tight text-[var(--text-primary)]">
                 {rows.filter((r) => r.upcoming_interview !== null && r.upcoming_interview !== undefined).length}
               </p>
               <p className="mt-0.5 text-xs font-medium text-[var(--text-secondary)]">{t("statInterviews")}</p>
             </div>
-            <div className="rounded-2xl border border-[var(--glass-border)] bg-[var(--glass-surface)] px-4 py-3.5 shadow-[0_2px_12px_rgba(11,34,57,0.06)] backdrop-blur-xl transition-all hover:-translate-y-0.5">
+            <div className="marketplace-card rounded-[12px] px-4 py-3.5">
               <div className="mb-2.5 flex size-9 items-center justify-center rounded-xl icon-chip-info shadow-sm">
-                <Handshake aria-hidden weight="duotone" className="size-4.5 text-white" />
+                <Handshake aria-hidden weight="duotone" className="size-[18px]" />
               </div>
               <p className="text-2xl font-black tracking-tight text-[var(--text-primary)]">
                 {rows.filter((r) => r.offer !== null && r.offer !== undefined).length}
               </p>
               <p className="mt-0.5 text-xs font-medium text-[var(--text-secondary)]">{t("statOffers")}</p>
             </div>
-            <div className="rounded-2xl border border-[var(--glass-border)] bg-[var(--glass-surface)] px-4 py-3.5 shadow-[0_2px_12px_rgba(11,34,57,0.06)] backdrop-blur-xl transition-all hover:-translate-y-0.5">
+            <div className="marketplace-card rounded-[12px] px-4 py-3.5">
               <div className="mb-2.5 flex size-9 items-center justify-center rounded-xl icon-chip-success shadow-sm">
-                <CheckCircle aria-hidden weight="duotone" className="size-4.5 text-white" />
+                <CheckCircle aria-hidden weight="duotone" className="size-[18px]" />
               </div>
               <p className="text-2xl font-black tracking-tight text-[var(--text-primary)]">
                 {
@@ -275,28 +276,17 @@ export function StudentApplicationsScreen() {
             </div>
           </div>
 
-          {/* AI Application Insights */}
-          {appInsights.length > 0 && (
-            <section
-              className="mb-5 rounded-2xl border border-[var(--ai-accent)]/25 bg-gradient-to-br from-[var(--ai-accent-soft)] to-[var(--glass-surface-light)] p-4 backdrop-blur-xl"
-              aria-label={t("listAiInsightsTitle")}
-            >
-              <h2 className="mb-2.5 flex items-center gap-2 text-sm font-bold text-[var(--text-primary)]">
-                <span className="flex size-6 shrink-0 items-center justify-center rounded-lg icon-chip-info shadow-sm">
-                  <LightbulbFilament aria-hidden weight="duotone" className="size-3.5 text-white" />
-                </span>
-                {t("listAiInsightsTitle")}
-              </h2>
-              <ul className="space-y-1.5">
-                {appInsights.map((insight) => (
-                  <li key={insight.key} className="flex items-start gap-2 text-xs text-[var(--text-secondary)]">
-                    <LightbulbFilament aria-hidden weight="duotone" className="mt-0.5 size-3.5 shrink-0 text-[var(--ai-accent)]" />
-                    {insight.values ? t(insight.key, insight.values) : t(insight.key)}
-                  </li>
-                ))}
-              </ul>
-            </section>
-          )}
+          {/* Deterministic, client-derived summary — honestly labelled (not "AI"). */}
+          <SummaryPanel
+            className="mb-5"
+            title={tc("summaryTitle")}
+            items={appInsights.map((insight) =>
+              insight.values ? t(insight.key, insight.values) : t(insight.key),
+            )}
+          />
+
+          {/* Offer comparison + confirmation-gated negotiation (self-hides with no offers). */}
+          <OfferComparePanel />
 
           {/* Status filter tabs — client-side filter of loaded applications. */}
           <div
@@ -319,7 +309,7 @@ export function StudentApplicationsScreen() {
                       "inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-xs font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)]/30",
                       active
                         ? "border-[var(--brand-primary)] bg-[var(--brand-primary)] text-white"
-                        : "border-[var(--glass-border)] bg-[var(--glass-surface)] text-[var(--text-secondary)] hover:border-[var(--brand-primary)]/40 hover:text-[var(--text-primary)]",
+                        : "border-[var(--border-default)] bg-[var(--surface-card)] text-[var(--text-secondary)] hover:border-[var(--brand-primary)]/40 hover:text-[var(--text-primary)]",
                     )}
                   >
                     {t(`filter.${key}`)}
@@ -341,7 +331,7 @@ export function StudentApplicationsScreen() {
               <li key={app.id}>
                 <Link
                   href={`/student/applications/${app.id}`}
-                  className="flex flex-col gap-0 rounded-2xl border border-[var(--glass-border)] bg-[var(--glass-surface)] p-4 shadow-[0_2px_12px_rgba(11,34,57,0.06)] backdrop-blur-md outline-none transition-all hover:border-[var(--brand-primary)]/40 hover:bg-[var(--glass-surface-heavy)] focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)]/30"
+                  className="marketplace-card flex flex-col gap-0 rounded-[12px] p-4 outline-none transition-colors hover:border-[var(--brand-primary)]/40 focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)]/30"
                 >
                   <div className="flex items-start gap-3.5">
                     <CompanyAvatar

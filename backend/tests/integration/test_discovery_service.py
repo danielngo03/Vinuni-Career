@@ -67,8 +67,14 @@ def test_sanitize_strips_forbidden_and_unknown_keys() -> None:
     for forbidden in allowlist.FORBIDDEN_COARSE_TAG_KEYS:
         assert forbidden not in clean
     assert "random_unknown" not in clean
-    # de-dupe + lowercase
-    assert clean["categories"] == ["data analyst", "finance"]
+    # Weighted taxonomy keys → {value: {count, last_seen}} (de-duped + lowercased).
+    assert set(clean["categories"]) == {"data analyst", "finance"}
+    for entry in clean["categories"].values():
+        assert entry["count"] >= 1
+        assert isinstance(entry["last_seen"], str)
+    # search_terms is also weighted.
+    assert set(clean["search_terms"]) == {"data analyst intern"}
+    # Scalars unchanged.
     assert clean["work_mode"] == "remote"
     assert clean["device_type"] == "mobile"
     assert clean["city"] == "hanoi"
@@ -85,7 +91,11 @@ def test_merge_dedupes_caps_and_stays_allowlisted() -> None:
     existing = {"categories": ["python"], "name": "leak"}  # name shouldn't persist
     incoming = {"categories": ["python", "go"], "email": "x@y.z"}
     merged = allowlist.merge_coarse_tags(existing, incoming)
-    assert merged == {"categories": ["python", "go"]}
+    assert set(merged) == {"categories"}
+    assert set(merged["categories"]) == {"python", "go"}
+    # Repeated token ACCUMULATES across the merge (frequency), one-off stays 1.
+    assert merged["categories"]["python"]["count"] == 2
+    assert merged["categories"]["go"]["count"] == 1
     assert "name" not in merged and "email" not in merged
 
     many = {"categories": [f"c{i}" for i in range(40)]}
@@ -133,7 +143,9 @@ async def test_record_signal_only_allowlisted_persisted(db_session) -> None:
     )
     await db_session.commit()
     await db_session.refresh(s)
-    assert s.coarse_tags == {"categories": ["data analyst"]}
+    assert set(s.coarse_tags) == {"categories"}
+    assert set(s.coarse_tags["categories"]) == {"data analyst"}
+    assert s.coarse_tags["categories"]["data analyst"]["count"] == 1
     assert "email" not in s.coarse_tags
     assert "gps" not in s.coarse_tags
     assert "cv_text" not in s.coarse_tags
@@ -269,10 +281,11 @@ async def test_invalid_vocab_rejected(db_session) -> None:
         {"source_surface": "totally_unknown_surface"},
         {"target_type": "spaceship"},
     ):
-        kwargs = dict(
-            event_type="impression", source_surface="homepage_recommended",
-            target_type="job",
-        )
+        kwargs = {
+            "event_type": "impression",
+            "source_surface": "homepage_recommended",
+            "target_type": "job",
+        }
         kwargs.update(bad)
         try:
             await event_service.record_event(
@@ -332,4 +345,8 @@ async def test_cleanup_sweep_prunes_expired_via_tick(db_session) -> None:
 
     # Re-tick is a no-op (idempotent).
     again = await cleanup_service.session_cleanup(db_session, now=now)
-    assert again == {"sessions_pruned": 0, "events_pruned": 0}
+    assert again == {
+        "sessions_pruned": 0,
+        "events_pruned": 0,
+        "snapshots_pruned": 0,
+    }

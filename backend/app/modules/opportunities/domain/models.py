@@ -273,7 +273,13 @@ class JobAlert(Base):
     location_type: Mapped[str | None] = mapped_column(String(20), nullable=True)
     province_code: Mapped[str | None] = mapped_column(String(10), nullable=True)
     is_active: Mapped[bool] = mapped_column(Boolean, nullable=False, default=True)
+    # Watermark for the real-time in-app match nudge (30-min sweep).
     last_sent_at: Mapped[datetime | None] = mapped_column(
+        DateTime(timezone=True), nullable=True
+    )
+    # Independent watermark for the scheduled EMAIL digest (daily sweep). Kept
+    # separate from ``last_sent_at`` so the two cadences never clobber each other.
+    last_digest_at: Mapped[datetime | None] = mapped_column(
         DateTime(timezone=True), nullable=True
     )
     created_at: Mapped[datetime] = mapped_column(

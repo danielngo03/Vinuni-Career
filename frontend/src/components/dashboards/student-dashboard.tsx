@@ -59,9 +59,8 @@ export function StudentDashboard() {
 
   return (
     <>
-      <section className="mb-7 overflow-hidden rounded-[18px] border border-[var(--border-default)] bg-[var(--surface-card)] shadow-[0_14px_44px_rgba(11,34,57,0.10)]">
-        <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_360px]">
-          <div className="relative bg-[var(--brand-navy)] p-6 sm:p-8">
+      <section className="mb-7 overflow-hidden rounded-[18px] border border-[var(--border-default)] bg-[var(--brand-navy)] shadow-[0_14px_44px_rgba(11,34,57,0.10)]">
+          <div className="relative p-6 sm:p-8">
             <div
               aria-hidden
               className="absolute inset-0 opacity-[0.16]"
@@ -97,25 +96,6 @@ export function StudentDashboard() {
               </div>
             </div>
           </div>
-          <div className="border-t border-[var(--border-default)] bg-[var(--surface-card)] p-6 lg:border-l lg:border-t-0">
-            <div className="grid gap-3">
-              <div className="rounded-[14px] border border-[var(--border-default)] bg-[var(--surface-secondary)] p-4">
-                <p className="text-xs font-semibold text-[var(--text-secondary)]">
-                  {ts("metric.cvCount")}
-                </p>
-                <p className="mt-1 text-2xl font-black text-[var(--brand-navy)]">CV Studio</p>
-              </div>
-              <div className="rounded-[14px] border border-[var(--border-default)] bg-[var(--ai-accent-soft)] p-4">
-                <p className="text-xs font-semibold text-[var(--ai-accent)]">
-                  {ts("recommendedRolesTitle")}
-                </p>
-                <p className="mt-1 text-sm leading-5 text-[var(--text-secondary)]">
-                  {ts("actionsEmptyBody")}
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
       </section>
 
       {!authed ? (

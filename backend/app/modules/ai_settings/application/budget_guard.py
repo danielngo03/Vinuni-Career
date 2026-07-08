@@ -102,7 +102,11 @@ async def check_async(
     budget. Three layered checks (all degrade silently on DB errors — only
     policy violations block):
 
-    1. Platform daily budget (``ai_settings.daily_budget_usd``).
+    1. Daily budget ceiling (``ai_settings.daily_budget_usd``), applied
+       **per-org** when an org context exists so one busy tenant cannot exhaust
+       the cap and 402 every other tenant. Requests with no org context
+       (``org_id=None`` — student/system/guest shared pool) keep the true
+       platform-wide global ceiling.
     2. Per-user daily quota (via billing ``limit_facade``).
     3. Per-org daily budget (``ai_settings.per_org_daily_budget_usd``,
        queried from the ``ai_usage_daily`` rollup for speed).
@@ -128,14 +132,24 @@ async def check_async(
     # rows whenever the local timezone offset crosses midnight relative to UTC.
     day_start = datetime.combine(datetime.now(tz=UTC).date(), time.min, tzinfo=UTC)
 
+    # The daily-budget ceiling is scoped to the caller's billing tenant: an org
+    # request only counts that org's own spend, so a heavy tenant can no longer
+    # starve peers by pushing the GLOBAL total over the cap. Org-less calls
+    # (org_id=None: student / system / guest shared pool) retain the genuine
+    # platform-wide ceiling — those callers share the platform pool and have no
+    # tenant to isolate (they are further bounded by the per-user quota below).
+    conds = [
+        AiUsageLog.cost_usd.is_not(None),
+        AiUsageLog.created_at >= day_start,
+    ]
+    if org_id is not None:
+        conds.append(AiUsageLog.org_id == org_id)
+
     nested = None
     try:
         nested = await db.begin_nested()
         result = await db.execute(
-            select(func.coalesce(func.sum(AiUsageLog.cost_usd), 0)).where(
-                AiUsageLog.cost_usd.is_not(None),
-                AiUsageLog.created_at >= day_start,
-            )
+            select(func.coalesce(func.sum(AiUsageLog.cost_usd), 0)).where(*conds)
         )
         spent_today = float(result.scalar() or 0.0)
         await nested.commit()

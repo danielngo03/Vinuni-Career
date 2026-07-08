@@ -59,10 +59,31 @@ async def _execute_screening_brief(
     )
 
 
+async def _execute_cv_rescore(
+    session: AsyncSession, principal: Principal, payload: dict
+) -> dict:
+    """Deterministically refresh the student's CV-JD fit scores for ONE job.
+
+    Calls the documents facade (owner-checked, NO LLM, no energy charge — the
+    deterministic score is free) which upserts the version-stamped
+    ``cv_job_fit_scores`` rows. Idempotent: a redelivered subtask re-scores to the
+    same rows (the framework's ``get_terminal_result`` pre-check also short-circuits
+    an already-terminal subtask before this runs). No provider/model/token
+    internals leave this path.
+    """
+    from app.modules.documents.application import job_fit_batch_service
+
+    job_id = uuid.UUID(payload["job_id"])
+    return await job_fit_batch_service.refresh_fit_scores_for_job(
+        session, principal=principal, job_id=job_id
+    )
+
+
 # Extend the workforce framework with a new subtask type by adding one entry
 # here — never by branching an existing executor on ``subtask_type``.
 EXECUTORS: dict[str, Executor] = {
     coordinator.SCREENING_BRIEF_SUBTASK_TYPE: _execute_screening_brief,
+    coordinator.CV_RESCORE_SUBTASK_TYPE: _execute_cv_rescore,
 }
 
 

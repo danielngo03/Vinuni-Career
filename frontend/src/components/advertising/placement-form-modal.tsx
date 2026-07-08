@@ -25,6 +25,15 @@ import {
 import { useApiErrorMessage } from "@/lib/auth/use-api-error";
 import { useAdvertisingLabels, PLACEMENT_TYPE_TONE } from "@/lib/advertising/labels";
 import { deriveWindow, formatVnd, formatWindow } from "@/lib/advertising/format";
+import {
+  buildTargetingDescriptor,
+  descriptorFromPlacement,
+  isUniversityRestricted,
+} from "@/lib/advertising/targeting";
+import {
+  TargetingEditor,
+  type TargetingEditorValue,
+} from "./targeting-editor";
 
 interface TargetOption {
   key: string;
@@ -74,6 +83,15 @@ export function PlacementFormModal({
   const [disclosure, setDisclosure] = useState(false);
   const [fieldError, setFieldError] = useState<string | null>(null);
   const [disclosureError, setDisclosureError] = useState<string | null>(null);
+  const [targeting, setTargeting] = useState<TargetingEditorValue>({
+    mode: "automatic",
+    dimensions: {},
+  });
+
+  /** A university-restricted placement's targeting is read-only (partner cannot edit). */
+  const targetingRestricted = isUniversityRestricted(
+    placement?.targeting ?? null,
+  );
 
   /* Pricing tiers. */
   const packagesQuery = useQuery({
@@ -123,11 +141,13 @@ export function PlacementFormModal({
       setPackageId(placement.package_id);
       setStartDate((placement.start_at ?? new Date().toISOString()).slice(0, 10));
       setDisclosure(placement.disclosure_confirmed);
+      setTargeting(descriptorFromPlacement(placement));
     } else {
       setTargetKey("");
       setPackageId("");
       setStartDate(todayInput());
       setDisclosure(false);
+      setTargeting({ mode: "automatic", dimensions: {} });
     }
   }, [open, placement]);
 
@@ -158,6 +178,11 @@ export function PlacementFormModal({
       package_id: selectedPackage.id,
       start_at: startIso,
       disclosure_confirmed: confirm,
+      // A university-restricted placement's audience is partner-immutable — never
+      // send targeting (the server would 422 `restricted_by_university`).
+      targeting: targetingRestricted
+        ? undefined
+        : buildTargetingDescriptor(targeting.mode, targeting.dimensions),
     };
   }
 
@@ -168,6 +193,29 @@ export function PlacementFormModal({
         : undefined;
     if (reason === "disclosure_required") {
       setDisclosureError(t("form.disclosureRequired"));
+      return;
+    }
+    if (reason === "restricted_by_university") {
+      toast.show({
+        tone: "error",
+        title: t("errors.targetingRestrictedTitle"),
+        description: t("errors.targetingRestrictedBody"),
+      });
+      void qc.invalidateQueries({ queryKey: ["advertising", "placements"] });
+      return;
+    }
+    if (
+      reason === "forbidden_targeting_dimension" ||
+      reason === "invalid_targeting" ||
+      reason === "invalid_mode" ||
+      reason === "invalid_dimensions" ||
+      reason === "restricted_mode_forbidden"
+    ) {
+      toast.show({
+        tone: "error",
+        title: t("errors.targetingInvalidTitle"),
+        description: t("errors.targetingInvalidBody"),
+      });
       return;
     }
     if (reason === "active_placement_limit") {
@@ -223,6 +271,7 @@ export function PlacementFormModal({
           package_id: body.package_id,
           start_at: body.start_at,
           disclosure_confirmed: body.disclosure_confirmed,
+          targeting: body.targeting,
           version: placement.version,
         });
       } else {
@@ -399,6 +448,13 @@ export function PlacementFormModal({
             {fieldError}
           </p>
         )}
+
+        {/* Audience targeting (allowlist-safe; read-only when university-restricted) */}
+        <TargetingEditor
+          value={targeting}
+          onChange={setTargeting}
+          restricted={targetingRestricted}
+        />
 
         {/* Mandatory disclosure acknowledgement */}
         <div

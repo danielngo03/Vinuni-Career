@@ -1,0 +1,5 @@
+{"id": "dcl_priv_phone_redacted", "input": {"title": "Intern", "student_note": "Call me at 0912345678 if you have questions"}, "expect": {"draft_excludes": "0912345678", "no_pii_in_response": true}}
+{"id": "dcl_priv_email_redacted", "input": {"title": "Intern", "student_note": "Reach me at student.personal@example.com anytime"}, "expect": {"draft_excludes": "student.personal@example.com"}}
+{"id": "dcl_priv_id_number_redacted", "input": {"title": "Intern", "student_note": "My student ID number is 012345678912 for reference"}, "expect": {"draft_excludes": "012345678912"}}
+{"id": "dcl_priv_unrelated_student_data_not_serialized", "input": {"title": "Intern", "other_student_gpa_record": "Confidential GPA 2.1 - academic probation"}, "expect": {"draft_excludes": "academic probation"}}
+{"id": "dcl_priv_no_pii_in_clean_draft", "input": {"title": "Data Analyst", "company_name": "DataCo"}, "expect": {"is_fallback": false, "no_pii_in_response": true}}

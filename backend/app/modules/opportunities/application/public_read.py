@@ -22,6 +22,9 @@ from sqlalchemy import ScalarSelect, func, select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.modules.opportunities.api import presenters
+from app.modules.opportunities.application.industry_read import (
+    resolve_industry_slugs,
+)
 from app.modules.opportunities.application.visibility import (
     apply_visible_filter,
     guest_levels,
@@ -49,12 +52,15 @@ async def enrich_summaries(
 
     org_ids = {j.org_id for j in jobs}
     orgs = await org_reporting_facade.summaries_for(session, org_ids)
+    # One extra query for the whole page (never N): map industry_id -> slug.
+    slugs = await resolve_industry_slugs(session, {j.industry_id for j in jobs})
     return [
         presenters.public_job_summary(
             j,
             company=orgs.get(j.org_id),
             locale=locale,
             is_saved=j.id in saved_ids if saved_ids is not None else False,
+            industry_slug=slugs.get(j.industry_id) if j.industry_id else None,
         )
         for j in jobs
     ]

@@ -1,14 +1,4 @@
 import {
-  SquaresFour,
-  UserCircle,
-  FileText as PhFileText,
-  Briefcase as PhBriefcase,
-  ClipboardText,
-  Calendar as PhCalendar,
-  BellSimple,
-  EnvelopeSimple,
-} from "@phosphor-icons/react";
-import {
   LayoutGrid,
   Briefcase,
   UsersRound,
@@ -43,6 +33,14 @@ import {
   Siren,
 } from "lucide-react";
 import type { Persona } from "@/stores/auth-store";
+
+/**
+ * Personas that use the admin-style workspace shell (sidebar + topbar). The
+ * student uses the marketplace top-nav shell (`student-shell.tsx`) rendering the
+ * shared `PUBLIC_PRIMARY_NAV`, so it has no sidebar/topbar nav model here — that
+ * kept three drifting student nav definitions in sync for no benefit.
+ */
+export type WorkspacePersona = Exclude<Persona, "student">;
 
 export interface NavItem {
   /** i18n key under `nav`. */
@@ -83,32 +81,6 @@ export interface NavItem {
 }
 
 /**
- * Student primary navigation (SCREEN_SPECS §1: "signed-in marketplace top nav
- * inherited from the public gateway"). The student does NOT use the admin-style
- * sidebar — these items render in the marketplace-style top-nav shell
- * (`student-shell.tsx`) and its mobile drawer. Every item deep-links into a
- * shipped surface, so there is no "coming soon" group here (no dead ends).
- * Employer-acquisition items (Employers, partner registration) are intentionally
- * absent from the student context. `Saved` is exposed via the header's
- * `SavedButton`, not as a primary tab.
- */
-export const STUDENT_PRIMARY_NAV: NavItem[] = [
-  { key: "jobs", href: "/jobs", icon: PhBriefcase, absolute: true },
-  { key: "dashboard", href: "/dashboard", icon: SquaresFour },
-  { key: "cv", href: "/cv", icon: PhFileText },
-  { key: "profile", href: "/profile", icon: UserCircle },
-  { key: "applications", href: "/applications", icon: ClipboardText },
-  { key: "invitations", href: "/invitations", icon: EnvelopeSimple },
-  { key: "alerts", href: "/alerts", icon: BellSimple },
-  { key: "myEvents", href: "/events", icon: PhCalendar },
-];
-
-/** Resolve a student nav item to its full path (persona-prefixed unless absolute). */
-export function studentHref(item: NavItem): string {
-  return item.absolute ? item.href : `/student${item.href}`;
-}
-
-/**
  * A sidebar block (v7.4 "Quiet Operations" hybrid). Two shapes:
  * - Flat block (`accordion` unset): items render as always-visible links.
  *   `key` (i18n under `nav.group`) renders a small-caps title above them, or
@@ -128,10 +100,10 @@ export interface NavGroup {
 }
 
 /**
- * Workspace sidebar per persona.
+ * Workspace sidebar per persona. Student is intentionally absent — it uses the
+ * marketplace top-nav shell, not the sidebar.
  */
-export const WORKSPACE_NAV_GROUPS: Record<Persona, NavGroup[]> = {
-  student: [{ key: null, items: STUDENT_PRIMARY_NAV }],
+export const WORKSPACE_NAV_GROUPS: Record<WorkspacePersona, NavGroup[]> = {
   partner: [
     {
       key: null,
@@ -233,8 +205,7 @@ export const WORKSPACE_NAV_GROUPS: Record<Persona, NavGroup[]> = {
 
 /** Flat per-persona nav — derived from the grouped structure for consumers
  * that only need the item list (route-title resolution, placeholder catch-alls). */
-export const WORKSPACE_NAV: Record<Persona, NavItem[]> = {
-  student: STUDENT_PRIMARY_NAV,
+export const WORKSPACE_NAV: Record<WorkspacePersona, NavItem[]> = {
   partner: WORKSPACE_NAV_GROUPS.partner.flatMap((g) => g.items),
   university: WORKSPACE_NAV_GROUPS.university.flatMap((g) => g.items),
 };

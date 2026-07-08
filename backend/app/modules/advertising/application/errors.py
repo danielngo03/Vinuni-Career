@@ -83,6 +83,23 @@ class InvalidCreativeFieldError(ValidationFailedError):
         super().__init__(details={"field": field})
 
 
+class InvalidTargetingFieldError(ValidationFailedError):
+    """A targeting descriptor used a forbidden/invalid dimension or an illegal mode.
+
+    Forbidden dimensions are PII / sensitive categories / third-party ad ids
+    (rejected via the discovery forbidden-signal allowlist); an illegal mode is a
+    partner trying to set the university-only ``university_restricted`` mode.
+    """
+
+    message = "Cấu hình nhắm mục tiêu quảng cáo không hợp lệ. Vui lòng kiểm tra lại."
+
+    def __init__(self, *, reason: str, dimension: str | None = None) -> None:
+        details: dict[str, str] = {"reason": reason}
+        if dimension is not None:
+            details["dimension"] = dimension
+        super().__init__(details=details)
+
+
 class PlacementAlreadyClaimedError(ConflictError):
     """Another moderator already claimed this placement for review."""
 

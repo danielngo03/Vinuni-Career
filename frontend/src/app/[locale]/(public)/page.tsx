@@ -15,19 +15,19 @@ import { CuratedSpotlight } from "./_components/curated-spotlight";
 const FEATURES = [
   {
     icon: Briefcase,
-    iconBg: "from-[var(--gray-700)] to-[var(--gray-900)]",
+    chip: "icon-chip-primary",
     key: "feature1Title" as const,
     bodyKey: "feature1Body" as const,
   },
   {
     icon: ReadCvLogo,
-    iconBg: "from-[var(--teal-500)] to-[var(--teal-700)]",
+    chip: "icon-chip-success",
     key: "feature2Title" as const,
     bodyKey: "feature2Body" as const,
   },
   {
     icon: CalendarCheck,
-    iconBg: "from-[var(--gray-600)] to-[var(--gray-800)]",
+    chip: "icon-chip-info",
     key: "feature3Title" as const,
     bodyKey: "feature3Body" as const,
   },
@@ -112,13 +112,13 @@ export default async function HomePage() {
             {t("featuresSubtitle")}
           </p>
           <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-3">
-            {FEATURES.map(({ icon: Icon, iconBg, key, bodyKey }) => (
+            {FEATURES.map(({ icon: Icon, chip, key, bodyKey }) => (
               <div
                 key={key}
-                className="marketplace-card flex items-start gap-3.5 rounded-[18px] p-4"
+                className="marketplace-card flex items-start gap-3.5 rounded-[14px] p-4"
               >
-                <span className={`flex size-9 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br shadow-sm ${iconBg}`}>
-                  <Icon aria-hidden weight="duotone" className="size-5 text-white" />
+                <span className={`flex size-9 shrink-0 items-center justify-center rounded-xl ${chip}`}>
+                  <Icon aria-hidden weight="duotone" className="size-5" />
                 </span>
                 <div className="min-w-0">
                   <p className="text-sm font-bold text-[var(--brand-navy)]">{t(key)}</p>

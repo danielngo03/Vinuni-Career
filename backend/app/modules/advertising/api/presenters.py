@@ -16,6 +16,7 @@ from decimal import Decimal
 from app.modules.advertising.domain import creatives as creative_vocab
 from app.modules.advertising.domain import disclosure as disclosure_vocab
 from app.modules.advertising.domain import lifecycle
+from app.modules.advertising.domain import targeting as targeting_vocab
 from app.modules.advertising.domain.models import (
     AdPackage,
     CampaignCreative,
@@ -117,6 +118,10 @@ def placement(
         "disclosure": disclosure_vocab.disclosure_payload(
             p.disclosure_class, locale=locale
         ),
+        # Audience targeting descriptor (allowlist-safe; never PII). Always the
+        # re-validated shape so a hand-edited settings row can't surface a
+        # forbidden dimension.
+        "targeting": targeting_vocab.descriptor_from_settings(p.settings),
         "package_id": str(p.package_id),
         "package": package(pkg, locale=locale) if pkg is not None else None,
         "price_amount": _amount(p.price_amount),

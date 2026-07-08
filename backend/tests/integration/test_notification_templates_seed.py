@@ -69,6 +69,7 @@ async def test_seeded_templates_render_for_all_locales(db_session) -> None:
                 "applicant_label": "một ứng viên",
                 "decision_label": "Đã chấp nhận",
                 "event_title": "Career Day 2026",
+                "deadline_label": "2026-07-01 09:00 UTC",
                 "starts_at": "2026-07-01T09:00:00+07:00",
                 "venue_or_format": "VinUni Campus",
                 "waitlist_position": 3,

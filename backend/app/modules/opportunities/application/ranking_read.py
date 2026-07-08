@@ -26,6 +26,9 @@ from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.modules.opportunities.api import presenters
+from app.modules.opportunities.application.industry_read import (
+    resolve_industry_slugs,
+)
 from app.modules.opportunities.application.visibility import apply_visible_filter
 from app.modules.opportunities.domain import lifecycle
 from app.modules.opportunities.domain.models import Job
@@ -119,7 +122,7 @@ async def _orgs_for(
 
 
 def _to_candidate(
-    job: Job, org: OrgSummary | None, *, locale: str
+    job: Job, org: OrgSummary | None, *, locale: str, industry_slug: str | None
 ) -> RankingCandidate:
     jd_text = " ".join(
         part
@@ -153,7 +156,9 @@ def _to_candidate(
         is_verified_employer=bool(org.is_verified) if org is not None else False,
         has_logo=bool(org is not None and org.has_logo),
         jd_text=jd_text,
-        summary=presenters.public_job_summary(job, company=org, locale=locale),
+        summary=presenters.public_job_summary(
+            job, company=org, locale=locale, industry_slug=industry_slug
+        ),
     )
 
 
@@ -161,7 +166,17 @@ async def _materialize(
     session: AsyncSession, jobs: list[Job], *, locale: str
 ) -> list[RankingCandidate]:
     orgs = await _orgs_for(session, jobs)
-    return [_to_candidate(j, orgs.get(j.org_id), locale=locale) for j in jobs]
+    # One extra query for the whole page (never N): map industry_id -> slug.
+    slugs = await resolve_industry_slugs(session, {j.industry_id for j in jobs})
+    return [
+        _to_candidate(
+            j,
+            orgs.get(j.org_id),
+            locale=locale,
+            industry_slug=slugs.get(j.industry_id) if j.industry_id else None,
+        )
+        for j in jobs
+    ]
 
 
 async def list_candidates(

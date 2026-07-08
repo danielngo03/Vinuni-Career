@@ -213,6 +213,9 @@ async def test_fit_explanation_no_active_cv_returns_null(db_session, monkeypatch
     assert out == {
         "cv_id": None,
         "explanation": None,
+        "analysis": None,
+        "improvements": [],
+        "learning_resources": [],
         "ai_explanation_available": False,
     }
     assert fake.calls == 0

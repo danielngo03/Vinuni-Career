@@ -425,6 +425,40 @@ DEFAULT_TEMPLATES: list[dict] = [
         },
     },
     {
+        # Student saved-job deadline nudge (spec §3). Student-scoped; PII-safe
+        # (only the recipient's own name/email + the job title + deadline).
+        "key": "job.saved_deadline",
+        "channel": "email",
+        "variables_schema": {
+            "allowed": ["name", "email", "job_title", "deadline_label", "action_url"],
+            "required": ["job_title", "deadline_label"],
+        },
+        "locales": {
+            "vi": {
+                "subject": "Công việc bạn đã lưu sắp hết hạn nộp hồ sơ — VinUni Career",
+                "body": (
+                    "Chào {{name}},\n\n"
+                    "Công việc “{{job_title}}” mà bạn đã lưu sẽ hết hạn nhận hồ sơ vào "
+                    "{{deadline_label}}.\n\n"
+                    "Đừng bỏ lỡ — ứng tuyển ngay tại:\n"
+                    "{{action_url}}\n\n"
+                    "Trân trọng,\nVinUni Career Center"
+                ),
+            },
+            "en": {
+                "subject": "A job you saved is closing soon — VinUni Career",
+                "body": (
+                    "Hi {{name}},\n\n"
+                    "The job “{{job_title}}” you saved closes for applications on "
+                    "{{deadline_label}}.\n\n"
+                    "Don't miss out — apply now at:\n"
+                    "{{action_url}}\n\n"
+                    "Best regards,\nVinUni Career Center"
+                ),
+            },
+        },
+    },
+    {
         "key": "application.received",
         "channel": "email",
         "variables_schema": {
@@ -1559,6 +1593,45 @@ DEFAULT_TEMPLATES: list[dict] = [
                     "VinUni Career:\n\n"
                     "{{job_lines}}\n\n"
                     "Browse all openings at: {{url}}\n\n"
+                    "Best regards,\nVinUni Career Center"
+                ),
+            },
+        },
+    },
+    {
+        "key": "job.alert_digest",
+        "channel": "email",
+        "variables_schema": {
+            # ``ai_summary`` is optional (empty string when the AI line is off /
+            # exhausted); the deterministic ``job_lines`` are always present.
+            "allowed": [
+                "name", "email", "alert_name", "match_count", "job_lines",
+                "ai_summary", "url",
+            ],
+            "required": [],
+        },
+        "locales": {
+            "vi": {
+                "subject": "{{match_count}} việc làm mới cho thông báo {{alert_name}}",
+                "body": (
+                    "Chào {{name}},\n\n"
+                    "{{ai_summary}}"
+                    "Có {{match_count}} việc làm mới khớp với thông báo "
+                    "\"{{alert_name}}\" của bạn:\n\n"
+                    "{{job_lines}}\n\n"
+                    "Xem chi tiết tại: {{url}}\n\n"
+                    "Trân trọng,\nVinUni Career Center"
+                ),
+            },
+            "en": {
+                "subject": "{{match_count}} new jobs for your alert {{alert_name}} — VinUni Career",
+                "body": (
+                    "Hi {{name}},\n\n"
+                    "{{ai_summary}}"
+                    "{{match_count}} new job(s) match your alert "
+                    "\"{{alert_name}}\":\n\n"
+                    "{{job_lines}}\n\n"
+                    "View them at: {{url}}\n\n"
                     "Best regards,\nVinUni Career Center"
                 ),
             },

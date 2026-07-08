@@ -46,7 +46,11 @@
       "conflictTitle": "Nội dung đã thay đổi",
       "conflictBody": "Yêu cầu này đã được cập nhật ở nơi khác. Danh sách đã được tải lại.",
       "targetGoneTitle": "Không tìm thấy mục tiêu",
-      "targetGoneBody": "Tin tuyển dụng / sự kiện được chọn không còn khả dụng hoặc không thuộc tổ chức của bạn."
+      "targetGoneBody": "Tin tuyển dụng / sự kiện được chọn không còn khả dụng hoặc không thuộc tổ chức của bạn.",
+      "targetingRestrictedTitle": "Nhắm mục tiêu do trường thiết lập",
+      "targetingRestrictedBody": "Đối tượng của vị trí này do nhà trường quản lý và không thể thay đổi ở đây.",
+      "targetingInvalidTitle": "Không thể lưu đối tượng",
+      "targetingInvalidBody": "Vui lòng kiểm tra lại các giá trị đối tượng và thử lại."
     },
     "form": {
       "createTitle": "Tạo yêu cầu quảng cáo",
@@ -102,6 +106,102 @@
     "insightPendingApproval": "Các đề xuất quảng cáo đang chờ duyệt — dự kiến 1-2 ngày làm việc",
     "insightActiveCampaigns": "Các vị trí tài trợ của bạn đang hiển thị với sinh viên VinUni trên thị trường",
     "insightDraftsPending": "Bạn có bản nháp — gửi đi để tiếp cận sinh viên",
-    "insightGetStarted": "Tài trợ cho một vị trí việc làm hoặc sự kiện để tăng tầm nhìn với sinh viên VinUni"
+    "insightGetStarted": "Tài trợ cho một vị trí việc làm hoặc sự kiện để tăng tầm nhìn với sinh viên VinUni",
+    "targeting": {
+      "title": "Nhắm đối tượng",
+      "subtitle": "Chọn ai sẽ thấy vị trí trả phí này. Tự động tiếp cận tất cả; thủ công thu hẹp tới sinh viên phù hợp.",
+      "modeLabel": "Phân phối",
+      "mode": {
+        "automatic": "Tự động",
+        "manual": "Thủ công"
+      },
+      "automaticHint": "Tiếp cận rộng — hiển thị với mọi người xem đủ điều kiện.",
+      "manualHint": "Thêm giá trị đối tượng bên dưới. Bỏ trống một tiêu chí để không giới hạn theo tiêu chí đó; người xem không có tín hiệu phù hợp sẽ không bị loại.",
+      "restrictedBadge": "Do trường thiết lập",
+      "restrictedNote": "Nhà trường đã thiết lập đối tượng cho vị trí này. Bạn không thể thay đổi nhắm mục tiêu đối với vị trí bị giới hạn bởi nhà trường.",
+      "emptyRestricted": "Chưa thiết lập giá trị đối tượng — vị trí này tiếp cận đối tượng rộng.",
+      "selectedCount": "Đã chọn {count}",
+      "addTagPlaceholder": "Nhập một giá trị và nhấn Enter",
+      "addTag": "Thêm",
+      "removeTag": "Xóa {value}",
+      "dimensions": {
+        "region": "Khu vực / thành phố",
+        "industry": "Ngành",
+        "role_family": "Nhóm vai trò",
+        "work_mode": "Hình thức làm việc",
+        "student_segment": "Nhóm đối tượng",
+        "language": "Ngôn ngữ"
+      },
+      "dimensionHint": {
+        "region": "Thêm thẻ thành phố / khu vực khớp với địa điểm công việc của bạn.",
+        "industry": "Thêm thẻ ngành khớp với cách phân loại vị trí của bạn."
+      },
+      "values": {
+        "work_mode": {
+          "onsite": "Tại văn phòng",
+          "remote": "Từ xa",
+          "hybrid": "Kết hợp"
+        },
+        "student_segment": {
+          "student": "Sinh viên",
+          "alumni": "Cựu sinh viên",
+          "guest": "Khách"
+        },
+        "language": {
+          "vi": "Tiếng Việt",
+          "en": "Tiếng Anh"
+        },
+        "role_family": {
+          "software_engineering": "Kỹ thuật phần mềm",
+          "data_ai": "Dữ liệu & AI",
+          "product": "Sản phẩm",
+          "design": "Thiết kế",
+          "marketing": "Marketing",
+          "sales_bizdev": "Kinh doanh & phát triển",
+          "finance": "Tài chính",
+          "operations": "Vận hành",
+          "hr_people": "Nhân sự",
+          "customer": "Khách hàng & hỗ trợ"
+        }
+      }
+    },
+    "analytics": {
+      "viewAction": "Phân tích",
+      "drawerTitle": "Phân tích chiến dịch",
+      "kpi": {
+        "impressions": "Lượt hiển thị",
+        "clicks": "Lượt nhấp",
+        "ctr": "Tỷ lệ nhấp",
+        "applyStarts": "Lượt bắt đầu ứng tuyển",
+        "applyStartRate": "Tỷ lệ bắt đầu ứng tuyển",
+        "costPerApplyStart": "Chi phí mỗi lượt ứng tuyển"
+      },
+      "trendTitle": "Lượt hiển thị theo ngày",
+      "trendAria": "Xu hướng lượt hiển thị theo ngày",
+      "tableTitle": "Chi tiết theo ngày",
+      "col": {
+        "date": "Ngày",
+        "impressions": "H.thị",
+        "clicks": "Nhấp",
+        "ctr": "CTR",
+        "applyStarts": "Ứng tuyển"
+      },
+      "emptyTitle": "Chưa có dữ liệu chiến dịch",
+      "emptyBody": "Khi vị trí này chạy và tiếp cận sinh viên, lượt hiển thị, nhấp và bắt đầu ứng tuyển sẽ hiện ở đây.",
+      "notAuthorizedTitle": "Không có dữ liệu phân tích",
+      "notAuthorizedBody": "Dữ liệu phân tích của chiến dịch này không khả dụng cho tài khoản của bạn.",
+      "errorTitle": "Không thể tải phân tích",
+      "errorBody": "Đã xảy ra lỗi khi tải phân tích chiến dịch. Vui lòng thử lại."
+    },
+    "orgAnalytics": {
+      "title": "Hiệu quả chiến dịch",
+      "subtitle": "Tổng lượt tiếp cận trên các vị trí tài trợ của bạn — không có dữ liệu người xem cá nhân.",
+      "byCampaign": "Theo chiến dịch",
+      "campaignFallback": "Chiến dịch",
+      "impressionsShort": "{count} h.thị",
+      "ctrShort": "CTR {value}",
+      "emptyBody": "Tổng lượt tiếp cận của các chiến dịch sẽ hiện ở đây khi chúng bắt đầu chạy.",
+      "errorBody": "Không thể tải hiệu quả chiến dịch."
+    }
   }
 }

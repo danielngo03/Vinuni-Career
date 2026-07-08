@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useId, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import {
@@ -41,6 +41,8 @@ import {
   isEventFull,
 } from "@/lib/events/format";
 import { formatDateTime } from "@/lib/format";
+import { recordDiscoveryEvent } from "@/lib/discovery/analytics";
+import { eventSignalTags } from "@/lib/discovery/signal-tags";
 import {
   ApiError,
   eventsApi,
@@ -57,6 +59,8 @@ export function PublicEventDetail({ eventId }: { eventId: string }) {
   const locale = useLocale();
   const labels = useEventLabels();
 
+  const renderId = useId();
+
   const query = useQuery({
     queryKey: ["events", "detail", eventId],
     queryFn: () => eventsApi.getPublic(eventId),
@@ -64,6 +68,20 @@ export function PublicEventDetail({ eventId }: { eventId: string }) {
   });
 
   const event = query.data;
+
+  // Record a privacy-safe `view` discovery event once the real event loads, so
+  // browsing feeds the coarse-signal ranker (event id + coarse event category).
+  useEffect(() => {
+    if (!event) return;
+    recordDiscoveryEvent({
+      event_type: "view",
+      source_surface: "event_detail",
+      target_type: "event",
+      target_id: event.id,
+      idempotency_key: `${renderId}:${event.id}:view`,
+      signal_tags: eventSignalTags(event),
+    });
+  }, [event, renderId]);
 
   return (
     <div className="mx-auto w-full max-w-5xl px-4 py-8 lg:px-6">

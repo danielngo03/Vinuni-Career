@@ -21,9 +21,14 @@ from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.ai.cv.llm import generate_json_note
+from app.ai.energy import service as energy_service
+from app.ai.observability.billable_usage import FEATURE_INTERVIEW_SIM
 from app.ai.prompts.answer_feedback import v1 as feedback_prompt
 from app.ai.prompts.interview_sim import v1 as sim_prompt
 from app.ai.safety.input_guard import sanitize_instruction
+from app.modules.auth.application.context import RequestContext
+from app.modules.opportunities.application import interview_history_service
+from app.modules.opportunities.domain import lifecycle
 from app.modules.opportunities.domain.lifecycle import visible_levels_for
 from app.modules.opportunities.domain.models import Job
 from app.modules.organization.application import org_reporting_facade
@@ -93,12 +98,17 @@ async def generate_interview_prep(
     num_questions: int = 6,
     student_instruction: str | None = None,
     locale: str = "vi",
+    ctx: RequestContext | None = None,
 ) -> dict:
     """Generate tailored interview questions for a publicly visible job.
 
-    Returns a dict with ``questions``, ``prep_tips``, and ``prompt_version``.
-    Falls back to static bank questions on AI failure (never raises on AI error).
+    Returns a dict with ``questions``, ``prep_tips``, ``prompt_version``, and the
+    persisted ``session_id`` for the practice attempt. Falls back to static bank
+    questions on AI failure (never raises on AI error).
     """
+    # Student-only gate: guests get a clean 401, partners/university a 403.
+    interview_history_service.require_student(principal)
+
     # Load publicly visible job (students can only prep for public jobs)
     job = (
         await session.execute(
@@ -113,7 +123,8 @@ async def generate_interview_prep(
     )
     now = __import__("datetime").datetime.utcnow()
     is_public = (
-        job.status == "published"
+        job.status == lifecycle.ACTIVE
+        and job.moderation_status == lifecycle.MOD_APPROVED
         and job.published_at is not None
         and job.published_at <= now
         and (job.application_deadline is None or job.application_deadline >= now)
@@ -121,6 +132,10 @@ async def generate_interview_prep(
     )
     if not is_public and not principal.is_superadmin:
         raise ResourceNotFoundError()
+
+    # Preflight AI-energy gate BEFORE spending a model call (no-op for guests;
+    # 409 only on genuine weekly exhaustion after wallet).
+    await energy_service.enforce_energy(session, principal=principal)
 
     # Load company name for context
     org = await org_reporting_facade.summary_for(session, job.org_id)
@@ -143,6 +158,17 @@ async def generate_interview_prep(
     if extra_context:
         inputs["student_profile"] = extra_context
 
+    # Metered gateway: a successful generation debits the student's AI energy for
+    # one interview-sim credit (interview questions are ephemeral, so the charge
+    # is attributed to the job resource without an idempotency key — each run is a
+    # genuinely new generation).
+    usage_context = energy_service.build_usage_context(
+        principal,
+        feature_key=FEATURE_INTERVIEW_SIM,
+        task_type=_TASK_TYPE,
+        resource_type="job",
+        resource_id=job_id,
+    )
     try:
         result = await generate_json_note(
             task_type=_TASK_TYPE,
@@ -150,10 +176,30 @@ async def generate_interview_prep(
             user_content=sim_prompt.build_user_message(inputs),
             temperature=0.5,
             max_tokens=_MAX_TOKENS,
+            db=session,
+            user_id=getattr(principal, "user_id", None),
+            org_id=getattr(principal, "org_id", None),
+            usage_context=usage_context,
+            charge_units=energy_service.charge_units(FEATURE_INTERVIEW_SIM),
         )
-        return normalize_interview_prep_result(result)
+        data = normalize_interview_prep_result(result)
     except AIUnavailableError:
-        return dict(_STATIC_FALLBACK)
+        data = dict(_STATIC_FALLBACK)
+
+    # Persist the attempt (student-scoped + audited) and return its id so answer
+    # feedback can be recorded against it. Persistence does NOT re-charge — the
+    # gateway already metered the generation above.
+    session_id = await interview_history_service.record_prep_session(
+        session,
+        principal=principal,
+        job_id=job_id,
+        job_title=job.title,
+        org_id=job.org_id,
+        questions_count=len(data.get("questions") or []),
+        ctx=ctx,
+    )
+    data["session_id"] = str(session_id)
+    return data
 
 
 def normalize_interview_prep_result(result: dict) -> dict:
@@ -211,18 +257,20 @@ async def evaluate_answer(
     question_type: str,
     rubric: str,
     answer: str,
+    session_id: uuid.UUID | None = None,
+    question_number: int = 0,
+    ctx: RequestContext | None = None,
 ) -> dict:
     """Evaluate a student's interview answer and return coaching feedback.
 
-    The job must be publicly visible. Output is ephemeral advisory — never stored,
-    never shown to the partner. Falls back to static guidance on AI failure.
+    The job must be publicly visible. The Q/answer/feedback are persisted to the
+    student's own practice history (owner-checked, student-scoped, never shown to
+    the partner). Falls back to static guidance on AI failure.
 
     Returns: score (1-5), praise, improve, hint, is_fallback, prompt_version.
     """
-    # Permission: authenticated non-partner student
-    if principal.persona not in ("student", None) and not principal.is_superadmin:
-        from app.shared.exceptions import PermissionDeniedError
-        raise PermissionDeniedError()
+    # Student-only gate: guests get a clean 401, partners/university a 403.
+    interview_history_service.require_student(principal)
 
     # Verify job is publicly accessible (reuse existing check path)
     job = (
@@ -238,7 +286,8 @@ async def evaluate_answer(
     )
     now = __import__("datetime").datetime.utcnow()
     is_public = (
-        job.status == "published"
+        job.status == lifecycle.ACTIVE
+        and job.moderation_status == lifecycle.MOD_APPROVED
         and job.published_at is not None
         and job.published_at <= now
         and (job.application_deadline is None or job.application_deadline >= now)
@@ -246,6 +295,9 @@ async def evaluate_answer(
     )
     if not is_public and not principal.is_superadmin:
         raise ResourceNotFoundError()
+
+    # Preflight AI-energy gate BEFORE spending a model call.
+    await energy_service.enforce_energy(session, principal=principal)
 
     # Sanitize student answer (could contain injection attempts)
     clean_answer, _ = sanitize_instruction(answer[:600])
@@ -259,6 +311,14 @@ async def evaluate_answer(
         "answer": clean_answer or "",
     }
 
+    # Metered gateway: a successful evaluation debits one interview-sim credit.
+    usage_context = energy_service.build_usage_context(
+        principal,
+        feature_key=FEATURE_INTERVIEW_SIM,
+        task_type=_FEEDBACK_TASK_TYPE,
+        resource_type="job",
+        resource_id=job_id,
+    )
     try:
         result = await generate_json_note(
             task_type=_FEEDBACK_TASK_TYPE,
@@ -266,10 +326,35 @@ async def evaluate_answer(
             user_content=feedback_prompt.build_user_message(inputs),
             temperature=0.3,
             max_tokens=_FEEDBACK_MAX_TOKENS,
+            db=session,
+            user_id=getattr(principal, "user_id", None),
+            org_id=getattr(principal, "org_id", None),
+            usage_context=usage_context,
+            charge_units=energy_service.charge_units(FEATURE_INTERVIEW_SIM),
         )
-        return normalize_answer_feedback_result(result)
+        data = normalize_answer_feedback_result(result)
     except AIUnavailableError:
-        return dict(_FALLBACK_FEEDBACK)
+        data = dict(_FALLBACK_FEEDBACK)
+
+    # Persist the answered turn to the student's own history (owner-checked +
+    # audited). Persistence does NOT re-charge — the gateway already metered the
+    # evaluation above.
+    await interview_history_service.record_answer_turn(
+        session,
+        principal=principal,
+        job_id=job_id,
+        org_id=job.org_id,
+        job_title=job.title,
+        session_id=session_id,
+        question_number=question_number,
+        question_type=question_type,
+        question=question,
+        rubric=rubric,
+        answer=answer,
+        feedback=data,
+        ctx=ctx,
+    )
+    return data
 
 
 def normalize_answer_feedback_result(result: dict) -> dict:

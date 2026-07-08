@@ -10,6 +10,7 @@ from __future__ import annotations
 
 from app.ai.observability.billable_usage import (
     FEATURE_CHATBOT,
+    FEATURE_COMPETITION_EXPLANATION,
     FEATURE_COVER_LETTER,
     FEATURE_CV_EDIT_COMMAND,
     FEATURE_CV_EXTRACTION,
@@ -31,6 +32,11 @@ FEATURE_JD_TRANSLATION = "jd_translation"
 FEATURE_MARKET_INTELLIGENCE = "market_intelligence"
 FEATURE_CANDIDATE_ANALYSIS = "candidate_analysis"
 FEATURE_ANALYTICS_ASSISTANT = "analytics_assistant"
+# Student on-demand narratives grounded in deterministic internal data. The
+# comparison/digest CORE is always deterministic + free; only the optional AI
+# narrative line debits energy (charged on success only).
+FEATURE_OFFER_NEGOTIATION = "offer_negotiation"
+FEATURE_JOB_ALERT_DIGEST = "job_alert_digest"
 
 # --------------------------------------------------------------------------- #
 # Cost-weighted credit cost per feature (INTERNAL — never exposed).            #
@@ -45,9 +51,16 @@ FEATURE_UNIT_COST: dict[str, int] = {
     FEATURE_CV_SUGGESTION: 2,
     FEATURE_CV_EDIT_COMMAND: 2,
     FEATURE_CV_FIT_EXPLANATION: 2,
+    # One short grounded paragraph over pre-computed bands — cheapest text tier.
+    FEATURE_COMPETITION_EXPLANATION: 2,
     FEATURE_COVER_LETTER: 3,
     FEATURE_INTERVIEW_SIM: 4,
     FEATURE_LEARNING_PLAN: 3,
+    # One short grounded paragraph over pre-computed offer comp + internal salary
+    # benchmark — cheapest text tier (advisory; never guarantees an outcome).
+    FEATURE_OFFER_NEGOTIATION: 2,
+    # One short digest summary line over already-matched jobs — cheapest text tier.
+    FEATURE_JOB_ALERT_DIGEST: 2,
     FEATURE_EMBEDDINGS: 1,
     FEATURE_RERANK: 1,
     # Partner features

@@ -46,7 +46,11 @@
       "conflictTitle": "Content changed",
       "conflictBody": "This request was updated elsewhere. The list has been reloaded.",
       "targetGoneTitle": "Target not found",
-      "targetGoneBody": "The selected job / event is no longer available or does not belong to your organization."
+      "targetGoneBody": "The selected job / event is no longer available or does not belong to your organization.",
+      "targetingRestrictedTitle": "Targeting set by university",
+      "targetingRestrictedBody": "This placement's audience is managed by the university and cannot be changed here.",
+      "targetingInvalidTitle": "Audience could not be saved",
+      "targetingInvalidBody": "Please check the audience values and try again."
     },
     "form": {
       "createTitle": "Create advertising request",
@@ -102,6 +106,102 @@
     "insightPendingApproval": "Placements awaiting university approval — expect 1-2 business days for review",
     "insightActiveCampaigns": "Your sponsored placements are live and visible to VinUni students on the marketplace",
     "insightDraftsPending": "You have draft requests — submit them to start reaching students",
-    "insightGetStarted": "Sponsor a job or event to boost its visibility to verified VinUni students"
+    "insightGetStarted": "Sponsor a job or event to boost its visibility to verified VinUni students",
+    "targeting": {
+      "title": "Audience targeting",
+      "subtitle": "Choose who sees this paid placement. Automatic reaches everyone; manual narrows it to relevant students.",
+      "modeLabel": "Delivery",
+      "mode": {
+        "automatic": "Automatic",
+        "manual": "Manual"
+      },
+      "automaticHint": "Broad reach — shown to every eligible viewer.",
+      "manualHint": "Add audience values below. Leave a dimension empty to not restrict on it; viewers with no matching signal are never excluded.",
+      "restrictedBadge": "Set by university",
+      "restrictedNote": "The university set this placement's audience. You cannot change targeting for a university-restricted placement.",
+      "emptyRestricted": "No audience values set — this placement reaches a broad audience.",
+      "selectedCount": "{count} selected",
+      "addTagPlaceholder": "Type a value and press Enter",
+      "addTag": "Add",
+      "removeTag": "Remove {value}",
+      "dimensions": {
+        "region": "Region / city",
+        "industry": "Industry",
+        "role_family": "Role family",
+        "work_mode": "Work mode",
+        "student_segment": "Audience segment",
+        "language": "Language"
+      },
+      "dimensionHint": {
+        "region": "Add city / region tags matching where your roles are located.",
+        "industry": "Add industry tags matching how your roles are categorised."
+      },
+      "values": {
+        "work_mode": {
+          "onsite": "On-site",
+          "remote": "Remote",
+          "hybrid": "Hybrid"
+        },
+        "student_segment": {
+          "student": "Students",
+          "alumni": "Alumni",
+          "guest": "Guests"
+        },
+        "language": {
+          "vi": "Vietnamese",
+          "en": "English"
+        },
+        "role_family": {
+          "software_engineering": "Software engineering",
+          "data_ai": "Data & AI",
+          "product": "Product",
+          "design": "Design",
+          "marketing": "Marketing",
+          "sales_bizdev": "Sales & business development",
+          "finance": "Finance",
+          "operations": "Operations",
+          "hr_people": "HR & people",
+          "customer": "Customer & support"
+        }
+      }
+    },
+    "analytics": {
+      "viewAction": "Analytics",
+      "drawerTitle": "Campaign analytics",
+      "kpi": {
+        "impressions": "Impressions",
+        "clicks": "Clicks",
+        "ctr": "Click-through rate",
+        "applyStarts": "Apply starts",
+        "applyStartRate": "Apply-start rate",
+        "costPerApplyStart": "Cost per apply-start"
+      },
+      "trendTitle": "Daily impressions",
+      "trendAria": "Daily impressions trend",
+      "tableTitle": "Daily breakdown",
+      "col": {
+        "date": "Date",
+        "impressions": "Impr.",
+        "clicks": "Clicks",
+        "ctr": "CTR",
+        "applyStarts": "Applies"
+      },
+      "emptyTitle": "No campaign data yet",
+      "emptyBody": "Once this placement runs and reaches students, impressions, clicks and apply-starts will appear here.",
+      "notAuthorizedTitle": "Analytics not available",
+      "notAuthorizedBody": "This campaign's analytics are not available for your account.",
+      "errorTitle": "Could not load analytics",
+      "errorBody": "Something went wrong loading campaign analytics. Please try again."
+    },
+    "orgAnalytics": {
+      "title": "Campaign performance",
+      "subtitle": "Aggregate reach across your sponsored placements — no individual viewer data.",
+      "byCampaign": "By campaign",
+      "campaignFallback": "Campaign",
+      "impressionsShort": "{count} impr.",
+      "ctrShort": "CTR {value}",
+      "emptyBody": "Your campaigns' aggregate reach appears here once they start running.",
+      "errorBody": "Could not load campaign performance."
+    }
   }
 }

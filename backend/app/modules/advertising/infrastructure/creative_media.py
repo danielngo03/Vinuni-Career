@@ -85,6 +85,82 @@ def sniff_image(data: bytes) -> CreativeMedia | None:
     return None
 
 
+def _png_dimensions(data: bytes) -> tuple[int, int] | None:
+    # 8-byte signature + IHDR: length(4)+type(4) then width(4)+height(4) @ offset 16.
+    if len(data) < 24:
+        return None
+    width = int.from_bytes(data[16:20], "big")
+    height = int.from_bytes(data[20:24], "big")
+    return (width, height) if width and height else None
+
+
+def _jpeg_dimensions(data: bytes) -> tuple[int, int] | None:
+    # Walk the JPEG marker segments to the first Start-Of-Frame (SOFn) marker.
+    i = 2
+    n = len(data)
+    while i + 9 < n:
+        if data[i] != 0xFF:
+            i += 1
+            continue
+        marker = data[i + 1]
+        # SOF0..SOF15 carry the frame dimensions, except DHT/JPG/DAC (C4/C8/CC).
+        if 0xC0 <= marker <= 0xCF and marker not in (0xC4, 0xC8, 0xCC):
+            height = int.from_bytes(data[i + 5 : i + 7], "big")
+            width = int.from_bytes(data[i + 7 : i + 9], "big")
+            return (width, height) if width and height else None
+        if marker in (0xD8, 0xD9) or 0xD0 <= marker <= 0xD7:
+            i += 2  # standalone markers carry no length
+            continue
+        seg_len = int.from_bytes(data[i + 2 : i + 4], "big")
+        if seg_len < 2:
+            return None
+        i += 2 + seg_len
+    return None
+
+
+def _webp_dimensions(data: bytes) -> tuple[int, int] | None:
+    if len(data) < 30:
+        return None
+    fourcc = data[12:16]
+    if fourcc == b"VP8X":
+        width = 1 + int.from_bytes(data[24:27], "little")
+        height = 1 + int.from_bytes(data[27:30], "little")
+        return (width, height)
+    if fourcc == b"VP8 ":
+        # Lossy: 3-byte frame tag, 3-byte start code, then 14-bit w/h at offset 26.
+        if data[23:26] != b"\x9d\x01\x2a":
+            return None
+        width = int.from_bytes(data[26:28], "little") & 0x3FFF
+        height = int.from_bytes(data[28:30], "little") & 0x3FFF
+        return (width, height) if width and height else None
+    if fourcc == b"VP8L" and data[20] == 0x2F:
+        bits = int.from_bytes(data[21:25], "little")
+        width = (bits & 0x3FFF) + 1
+        height = ((bits >> 14) & 0x3FFF) + 1
+        return (width, height)
+    return None
+
+
+def sniff_dimensions(data: bytes) -> tuple[int, int] | None:
+    """Best-effort (width, height) from image bytes; ``None`` if not parseable.
+
+    Pure header parsing (no image library) for the creative-policy dimension
+    pre-check. A parse failure returns ``None`` so the dimension check is simply
+    skipped — it never blocks an upload.
+    """
+
+    try:
+        if data.startswith(_PNG_MAGIC):
+            return _png_dimensions(data)
+        if data.startswith(_JPEG_MAGIC):
+            return _jpeg_dimensions(data)
+        if len(data) >= 12 and data[0:4] == _RIFF_MAGIC and data[8:12] == _WEBP_MAGIC:
+            return _webp_dimensions(data)
+    except (IndexError, ValueError):
+        return None
+    return None
+
+
 def validate_creative(
     data: bytes, content_type: str | None, *, max_bytes: int
 ) -> CreativeMedia:

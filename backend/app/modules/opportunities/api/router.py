@@ -181,6 +181,54 @@ async def list_my_jobs(
     return paginated(items, next_cursor=next_cursor, limit=page_limit)
 
 
+# NOTE: the two interview-sim history routes are static sub-paths and MUST be
+# declared before the ``/{job_id}`` param route below, otherwise FastAPI would
+# try to parse "interview-sim" as a job UUID and 422 the request.
+@jobs_router.get(
+    "/interview-sim/history",
+    summary="My interview practice history + deterministic readiness signal (student)",
+)
+async def interview_sim_history(
+    auth: CurrentAuth = Depends(get_current_auth),
+    session: AsyncSession = Depends(get_db_session),
+) -> dict:
+    """Return the caller's own interview practice attempts + readiness signal.
+
+    Student-scoped: only the caller's own attempts are visible. The readiness
+    signal is a deterministic aggregate over evaluated answers — below the
+    minimum it honestly reports ``status="not_enough_data"`` (no fabricated
+    number). Returns ``{ data: { readiness, sessions } }``.
+    """
+    from app.modules.opportunities.application import interview_history_service
+
+    data = await interview_history_service.get_history(
+        session, principal=auth.principal
+    )
+    return success(data)
+
+
+@jobs_router.get(
+    "/interview-sim/history/{sim_session_id}",
+    summary="One interview practice attempt with its answered turns (student)",
+)
+async def interview_sim_session_detail(
+    sim_session_id: uuid.UUID,
+    auth: CurrentAuth = Depends(get_current_auth),
+    session: AsyncSession = Depends(get_db_session),
+) -> dict:
+    """Return one owned practice attempt with its Q/answer/feedback turns.
+
+    Owner-checked + student-scoped: a missing attempt is 404, another student's
+    attempt is 403. Returns ``{ data: { session, turns } }``.
+    """
+    from app.modules.opportunities.application import interview_history_service
+
+    data = await interview_history_service.get_session_detail(
+        session, principal=auth.principal, session_id=sim_session_id
+    )
+    return success(data)
+
+
 @jobs_router.get("/{job_id}", summary="Job detail (owner full / public visible / 404)")
 async def get_job(
     job_id: uuid.UUID,
@@ -303,6 +351,7 @@ async def get_fit_explanation(
     cv_id: uuid.UUID | None = Query(default=None),
     auth: CurrentAuth = Depends(get_current_auth),
     session: AsyncSession = Depends(get_db_session),
+    accept_language: str | None = Header(default=None),
 ) -> dict:
     """Authenticated-student-only AI explanation for the CV-to-job fit.
 
@@ -317,13 +366,58 @@ async def get_fit_explanation(
     explains that CV when it belongs to the caller and is scored; otherwise the
     recommended CV. Hidden/closed/missing jobs -> 404.
 
-    Returns ``{ data: { cv_id, explanation, ai_explanation_available } }``. On
-    AI-off / provider failure -> ``explanation: null`` +
-    ``ai_explanation_available: false`` (never an error). Provider/model/token/
-    prompt/cost internals are never exposed.
+    Returns ``{ data: { cv_id, explanation, analysis, improvements,
+    learning_resources, ai_explanation_available } }``. ``analysis`` is the
+    STRUCTURED matching detail (per-requirement matched evidence + confirmed gaps
+    with advisory suggestions + overall suggestion), ``null`` when the AI narrative
+    is unavailable. ``improvements`` are confirmation-gated CV-Studio edit-command
+    hand-offs (one per fit gap); ``learning_resources`` are internal curated
+    learning foci (one per fit gap, ``{skill, resource_type, suggestion}``) — a
+    pure deterministic mapping with no external URLs. Both are present even when the
+    AI is off. On AI-off / provider failure -> ``explanation: null`` +
+    ``analysis: null`` + ``ai_explanation_available: false`` (never an error).
+    Provider/model/token/prompt/cost internals are never exposed.
     """
+    locale = (accept_language or "vi").split(",")[0].split("-")[0].strip()
     data = await job_fit_service.fit_explanation_for_job(
-        session, principal=auth.principal, job_id=job_id, cv_id=cv_id
+        session, principal=auth.principal, job_id=job_id, cv_id=cv_id, locale=locale
+    )
+    return success(data)
+
+
+@jobs_router.get(
+    "/{job_id}/competition-explanation",
+    summary="On-demand AI competition narrative for the Competition drawer (student only)",
+)
+async def get_competition_explanation(
+    job_id: uuid.UUID,
+    auth: CurrentAuth = Depends(get_current_auth),
+    session: AsyncSession = Depends(get_db_session),
+    accept_language: str | None = Header(default=None),
+    redis=Depends(_get_redis),
+) -> dict:
+    """Authenticated-student-only AI narrative that explains the competition bands.
+
+    Fired ONLY when the student opens the Competition drawer (not on the default
+    job-detail load — the deterministic bands from
+    ``GET /jobs/{job_id}/student-intelligence`` render immediately and free). The
+    narrative is grounded in the pre-computed level, cached, and metered: a fresh
+    generation charges the student's AI energy once (idempotent per ``(job,
+    level)``); a cache hit charges nothing. AI never moves the numbers.
+
+    Guests / non-student personas are rejected the same way as
+    ``get_fit_explanation`` (``get_current_auth`` -> 401 without a token; a
+    non-student persona -> 403 in the service layer). Hidden/closed/missing jobs
+    -> 404. On AI-off / provider failure / weekly-energy exhaustion / low signal
+    -> ``explanation: null`` + ``ai_explanation_available: false`` (never an
+    error). Provider/model/token/prompt/cost internals are never exposed.
+
+    Returns ``{ data: { level, label, explanation, ai_explanation_available } }``.
+    """
+
+    locale = (accept_language or "vi").split(",")[0].split("-")[0].strip()
+    data = await competition_service.competition_explanation(
+        session, principal=auth.principal, job_id=job_id, locale=locale, redis=redis
     )
     return success(data)
 
@@ -553,6 +647,7 @@ async def ai_interview_prep(
         num_questions=int(body.get("num_questions", 6)),
         student_instruction=body.get("student_instruction"),
         locale=locale,
+        ctx=auth.ctx,
     )
     return success(data)
 
@@ -572,9 +667,10 @@ async def interview_sim_answer_feedback(
 ) -> dict:
     """Returns AI coaching feedback on a student's practice interview answer.
 
-    The job must be published and publicly visible. Output is ephemeral —
-    never stored and never sent to the hiring partner. On AI failure a static
-    fallback coaching tip is returned (is_fallback=True).
+    The job must be published and publicly visible. The Q/answer/feedback are
+    saved to the student's own practice history (never sent to the hiring
+    partner). On AI failure a static fallback coaching tip is returned
+    (is_fallback=True).
 
     Request body (required):
     - ``question``: str — the interview question text
@@ -582,8 +678,23 @@ async def interview_sim_answer_feedback(
     - ``rubric``: str — the rubric from the question set
     - ``answer``: str — the student's practice answer
 
+    Request body (optional):
+    - ``session_id``: uuid — the practice attempt to attach this turn to
+    - ``question_number``: int — the question index within the attempt
+
     Returns ``{ data: { score, praise, improve, hint, prompt_version, is_fallback } }``.
     """
+    raw_session_id = body.get("session_id")
+    session_id: uuid.UUID | None = None
+    if raw_session_id:
+        try:
+            session_id = uuid.UUID(str(raw_session_id))
+        except (ValueError, TypeError):
+            session_id = None
+    try:
+        question_number = int(body.get("question_number", 0))
+    except (ValueError, TypeError):
+        question_number = 0
     data = await interview_sim_service.evaluate_answer(
         session,
         principal=auth.principal,
@@ -592,6 +703,9 @@ async def interview_sim_answer_feedback(
         question_type=str(body.get("question_type") or "behavioral")[:30],
         rubric=str(body.get("rubric") or "")[:300],
         answer=str(body.get("answer") or "")[:600],
+        session_id=session_id,
+        question_number=question_number,
+        ctx=auth.ctx,
     )
     return success(data)
 

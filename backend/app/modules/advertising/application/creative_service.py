@@ -24,8 +24,8 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from app.core.config import get_settings
 from app.modules.advertising.api import presenters
 from app.modules.advertising.application.errors import InvalidCreativeFieldError
+from app.modules.advertising.domain import creative_policy, lifecycle
 from app.modules.advertising.domain import creatives as creative_vocab
-from app.modules.advertising.domain import lifecycle
 from app.modules.advertising.domain.models import CampaignCreative, SponsoredPlacement
 from app.modules.advertising.infrastructure import creative_media
 from app.modules.auth.application.context import RequestContext
@@ -248,7 +248,35 @@ async def upload_creative(
     )
     await session.commit()
     await session.refresh(creative)
-    return presenters.creative(creative, locale=locale)
+
+    # Deterministic creative-policy PRE-check (advisory): dimensions vs SLOT_SPECS,
+    # banned claims, off-platform contact, disclosure. Any finding auto-flags the
+    # placement into the EXISTING review queue (a human still approves; the
+    # creative stays pending). Best-effort — never breaks the upload.
+    dims = creative_media.sniff_dimensions(data)
+    width, height = dims if dims is not None else (None, None)
+    findings = creative_policy.evaluate_creative(
+        slot=slot,
+        width=width,
+        height=height,
+        alt_vi=alt_vi,
+        alt_en=alt_en,
+        click_target=click_target,
+        disclosure_class=placement.disclosure_class,
+    )
+    if findings:
+        try:
+            from app.modules.advertising.application import moderation_service
+
+            await moderation_service.autoflag_creative_policy(
+                session, creative=creative, placement=placement, findings=findings
+            )
+        except Exception:  # noqa: BLE001 — pre-flag is advisory, never fatal
+            pass
+
+    result = presenters.creative(creative, locale=locale)
+    result["policy_flags"] = creative_policy.findings_payload(findings)
+    return result
 
 
 # --------------------------------------------------------------------------- #

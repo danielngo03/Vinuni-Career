@@ -240,25 +240,30 @@ async def test_per_org_degrade_silently_on_infra_error(db_session: object) -> No
 
 
 @pytest.mark.asyncio
-async def test_platform_budget_still_enforced(db_session: object) -> None:
-    """Platform daily_budget_usd is still checked even when org_id is provided."""
+async def test_daily_budget_enforced_per_org(db_session: object) -> None:
+    """The daily-budget ceiling still blocks — but scoped to the caller's org.
+
+    An org already at the cap (its OWN spend) is blocked; the check no longer
+    depends on other tenants' or org-less spend.
+    """
     from app.ai.observability.models import AiUsageLog
     from app.modules.ai_settings.application.budget_guard import check_async
     from app.shared.exceptions import PaymentRequiredError
 
-    # The platform budget is already exceeded via AiUsageLog
+    org_id = uuid.uuid4()
     db_session.add(
         AiUsageLog(
             task_type="assistant",
             model_alias="chat_cheap",
             success=True,
             cost_usd=0.99,
+            org_id=org_id,
             created_at=datetime.now(tz=UTC),
         )
     )
     await db_session.commit()
 
-    # Platform budget = 1.0 USD, already spent 0.99 → adding 0.02 exceeds it
+    # Budget = 1.0 USD, this org already spent 0.99 → adding 0.02 exceeds it.
     mock_cfg = _make_cfg(daily_budget_usd=1.0)
 
     with patch("app.modules.ai_settings.application.budget_guard.runtime_config") as mock_rc:
@@ -268,7 +273,94 @@ async def test_platform_budget_still_enforced(db_session: object) -> None:
                 db_session,
                 alias="chat_cheap",
                 estimated_cost_usd=0.02,
-                org_id=uuid.uuid4(),  # org_id present but platform check fires first
+                org_id=org_id,
+            )
+
+    assert exc.value.details["reason"] == "BUDGET_EXCEEDED"
+
+
+@pytest.mark.asyncio
+async def test_daily_budget_one_tenant_does_not_starve_another(
+    db_session: object,
+) -> None:
+    """The core tenant-isolation guarantee: one busy tenant exhausting its own
+    daily budget must NOT 402 a different tenant that has spent nothing.
+
+    Before the fix the platform layer summed ALL orgs' spend with no filter, so
+    a single heavy tenant could push the global total over the cap and block
+    everyone.
+    """
+    from app.ai.observability.models import AiUsageLog
+    from app.modules.ai_settings.application.budget_guard import check_async
+    from app.shared.exceptions import PaymentRequiredError
+
+    busy_org = uuid.uuid4()
+    quiet_org = uuid.uuid4()
+
+    # busy_org has blown well past the platform ceiling on its own.
+    db_session.add(
+        AiUsageLog(
+            task_type="assistant",
+            model_alias="chat_cheap",
+            success=True,
+            cost_usd=5.00,
+            org_id=busy_org,
+            created_at=datetime.now(tz=UTC),
+        )
+    )
+    await db_session.commit()
+
+    mock_cfg = _make_cfg(daily_budget_usd=1.0)
+
+    with patch("app.modules.ai_settings.application.budget_guard.runtime_config") as mock_rc:
+        mock_rc.current.return_value = mock_cfg
+        # quiet_org has spent nothing → must NOT be blocked by busy_org's spend.
+        await check_async(
+            db_session,
+            alias="chat_cheap",
+            estimated_cost_usd=0.02,
+            org_id=quiet_org,
+        )
+        # busy_org itself is correctly blocked.
+        with pytest.raises(PaymentRequiredError):
+            await check_async(
+                db_session,
+                alias="chat_cheap",
+                estimated_cost_usd=0.02,
+                org_id=busy_org,
+            )
+
+
+@pytest.mark.asyncio
+async def test_platform_ceiling_global_for_orgless_calls(db_session: object) -> None:
+    """Org-less calls (org_id=None: student/system/guest shared pool) keep the
+    true platform-wide global ceiling."""
+    from app.ai.observability.models import AiUsageLog
+    from app.modules.ai_settings.application.budget_guard import check_async
+    from app.shared.exceptions import PaymentRequiredError
+
+    db_session.add(
+        AiUsageLog(
+            task_type="assistant",
+            model_alias="chat_cheap",
+            success=True,
+            cost_usd=0.99,
+            org_id=None,
+            created_at=datetime.now(tz=UTC),
+        )
+    )
+    await db_session.commit()
+
+    mock_cfg = _make_cfg(daily_budget_usd=1.0)
+
+    with patch("app.modules.ai_settings.application.budget_guard.runtime_config") as mock_rc:
+        mock_rc.current.return_value = mock_cfg
+        with pytest.raises(PaymentRequiredError) as exc:
+            await check_async(
+                db_session,
+                alias="chat_cheap",
+                estimated_cost_usd=0.02,
+                org_id=None,
             )
 
     assert exc.value.details["reason"] == "BUDGET_EXCEEDED"

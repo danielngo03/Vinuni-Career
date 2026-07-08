@@ -20,6 +20,7 @@ from datetime import datetime
 
 from sqlalchemy.ext.asyncio import AsyncSession
 
+from app.ai.agents import workforce as ai_workforce
 from app.ai.observability.maintenance import (
     _prune_entrypoint as _ai_ops_prune,
 )
@@ -27,6 +28,9 @@ from app.ai.observability.maintenance import (
     _reconcile_entrypoint as _ai_usage_daily_reconcile,
 )
 from app.modules.advertising.application import activation_service as ad_activation
+from app.modules.advertising.application import (
+    campaign_metrics_service as ad_campaign_metrics,
+)
 from app.modules.billing.application import expiry_service as billing_expiry
 from app.modules.career_outcomes.application import materializer_service
 from app.modules.compliance.application import retention_service as compliance_retention
@@ -34,9 +38,12 @@ from app.modules.dashboards.application import snapshot_service as mi_snapshot
 from app.modules.discovery.application import cleanup_service as discovery_cleanup
 from app.modules.notifications.application import dispatch_service
 from app.modules.opportunities.application import (
+    competition_projection_service,
+    job_alert_digest_service,
     job_alert_dispatch_service,
     job_service,
     registration_service,
+    saved_job_deadline_service,
     weekly_digest_service,
 )
 from app.modules.recruitment.application import (
@@ -122,6 +129,12 @@ async def _advertising_flag_reconcile(
     return await ad_activation.flag_reconcile(session, now=now)
 
 
+async def _advertising_metrics_refresh(
+    session: AsyncSession, now: datetime
+) -> dict[str, int]:
+    return await ad_campaign_metrics.sweep_refresh(session, now=now)
+
+
 async def _billing_expiry_sweep(
     session: AsyncSession, now: datetime
 ) -> dict[str, int]:
@@ -150,8 +163,26 @@ async def _job_alert_sweep(session: AsyncSession, now: datetime) -> dict[str, in
     return await job_alert_dispatch_service.sweep_job_alerts(session, now=now)
 
 
+async def _job_alert_digest_sweep(
+    session: AsyncSession, now: datetime
+) -> dict[str, int]:
+    return await job_alert_digest_service.sweep_job_alert_digests(session, now)
+
+
 async def _weekly_job_digest(session: AsyncSession, now: datetime) -> dict[str, int]:
     return await weekly_digest_service.sweep_weekly_digest(session, now=now)
+
+
+async def _saved_job_deadline_sweep(
+    session: AsyncSession, now: datetime
+) -> dict[str, int]:
+    return await saved_job_deadline_service.sweep_saved_job_deadlines(session, now=now)
+
+
+async def _competition_projection_refresh(
+    session: AsyncSession, now: datetime
+) -> dict[str, int]:
+    return await competition_projection_service.sweep_refresh(session, now=now)
 
 
 async def _compliance_retention_sweep(
@@ -170,6 +201,12 @@ async def _market_intelligence_reconcile(
     session: AsyncSession, now: datetime
 ) -> dict[str, int]:
     return await mi_snapshot.reconcile(session, now=now)
+
+
+async def _student_cv_rescore_sweep(
+    session: AsyncSession, now: datetime
+) -> dict[str, int]:
+    return await ai_workforce.sweep_student_cv_rescore(session, now)
 
 
 async def _evaluate_alerts(session: AsyncSession, _now: datetime) -> dict[str, int]:
@@ -209,6 +246,12 @@ REGISTRY: tuple[ScheduledJob, ...] = (
     ScheduledJob("advertising.activation_sweep", 300, _advertising_activation),
     ScheduledJob("advertising.completion_sweep", 300, _advertising_completion),
     ScheduledJob("advertising.flag_reconcile", 86400, _advertising_flag_reconcile),
+    # WS-13: nightly self-healing recompute of the ad_placement_metrics_daily
+    # projection (the partner campaign-analytics read hits this projection). Also
+    # refreshed read-through when a partner opens their campaign analytics; the
+    # sweep catches late events + retention pruning. Idempotent (recomputes to the
+    # same values from the discovery_events ledger).
+    ScheduledJob("advertising.metrics_refresh", 86400, _advertising_metrics_refresh),
     # ADR-0010: date-windowed subscription expiry + nightly T-7d "expiring soon"
     # notice. Status/end_at-gated + idempotent (re-tick is a no-op).
     ScheduledJob("billing.expiry_sweep", 600, _billing_expiry_sweep),
@@ -227,6 +270,28 @@ REGISTRY: tuple[ScheduledJob, ...] = (
     # Weekly job digest: top-8 most recently published jobs sent to all active
     # students every 7 days. Idempotent per ISO week via dedupe_key.
     ScheduledJob("opportunities.weekly_job_digest", 604800, _weekly_job_digest),
+    # WS-15 (Task N): DAILY per-alert email digest of newly-matched jobs (outbox +
+    # template renderer; deterministic matching, optional metered AI summary line).
+    # Idempotent per (alert, UTC-day) via the outbox dedupe_key + the per-alert
+    # ``last_digest_at`` watermark; respects the ``job_alert`` email preference.
+    ScheduledJob("opportunities.job_alert_digest", 86400, _job_alert_digest_sweep),
+    # WS-6: saved-job application-deadline nudge. Notifies a student when a job
+    # they SAVED (and have not yet applied to) is within T-48h/T-24h of its
+    # application deadline so they re-engage before it closes. Runs hourly.
+    # Idempotent per (job, user, window) via the outbox dedupe_key.
+    ScheduledJob(
+        "opportunities.saved_job_deadline_sweep", 3600, _saved_job_deadline_sweep
+    ),
+    # WS-5: nightly self-healing refresh of the job_competition_daily projection
+    # (the student competition read hits this projection, not a live join). Also
+    # refreshed on each apply event; the sweep catches withdrawals / rejections /
+    # deadline closes that shrink the active set. Idempotent (recomputes to the
+    # same values).
+    ScheduledJob(
+        "opportunities.competition_projection_refresh",
+        86400,
+        _competition_projection_refresh,
+    ),
     # ADR-0014 §35: anonymize application_cv_snapshots past the hardcoded
     # retention window. Time-gated (created_at cutoff) + idempotent (a
     # re-tick finds only newly-expired rows; already-tombstoned rows are
@@ -250,6 +315,13 @@ REGISTRY: tuple[ScheduledJob, ...] = (
     # (rollup rows in ai_usage_daily are never pruned). Both are idempotent.
     ScheduledJob("ai_ops.usage_daily_reconcile", 3600, _ai_usage_daily_reconcile),
     ScheduledJob("ai_ops.prune", 86400, _ai_ops_prune),
+    # WS-11 (Task O): nightly background re-score of every active student's active
+    # CVs against recently posted/amended jobs, keeping their deterministic CV-JD
+    # fit intelligence fresh without a foreground request. Per-student runs are
+    # owner-checked + audited, deterministic (NO LLM, free), and idempotent
+    # (version-stamped fit rows short-circuit a re-run) — so a re-tick is cheap.
+    # No consequential write beyond refreshing the student's own scores.
+    ScheduledJob("ai.student_cv_rescore_sweep", 86400, _student_cv_rescore_sweep),
     # P7: Alert rule evaluation — opens/resolves incidents on threshold breaches.
     # Runs every 5 minutes. Never raises (errors logged, never crashes the scheduler).
     ScheduledJob("alerts.evaluate", 300, _evaluate_alerts),

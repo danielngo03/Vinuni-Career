@@ -19,6 +19,9 @@ class PlacementCreateRequest(BaseModel):
     package_id: uuid.UUID
     start_at: datetime
     disclosure_confirmed: bool = False
+    # Optional audience-targeting descriptor: {"mode": ..., "dimensions": {...}}.
+    # Validated + allowlist-checked in the service (never trusts the client shape).
+    targeting: dict | None = None
 
 
 class PlacementUpdateRequest(BaseModel):
@@ -26,6 +29,14 @@ class PlacementUpdateRequest(BaseModel):
     package_id: uuid.UUID | None = None
     start_at: datetime | None = None
     disclosure_confirmed: bool | None = None
+    targeting: dict | None = None
+    version: int | None = None
+
+
+class PlacementTargetingRequest(BaseModel):
+    """University sets/overrides a placement's audience targeting (spec §4)."""
+
+    targeting: dict | None = None
     version: int | None = None
 
 

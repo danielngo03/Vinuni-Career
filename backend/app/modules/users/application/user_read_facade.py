@@ -143,6 +143,28 @@ async def get_notification_in_app_preference(
     return None if row is None else bool(row.in_app_enabled)
 
 
+async def get_notification_email_setting(
+    session: AsyncSession, *, user_id: uuid.UUID, category: str
+) -> str | None:
+    """The recipient's stored email setting for ``category``, or ``None`` if unset.
+
+    Values are the ``EMAIL_SETTINGS`` vocabulary (``off``/``immediate``/``daily``/
+    ``weekly``); ``None`` means the category default applies. The seam a producer
+    sweep uses to skip enqueuing an email a student turned off, without importing
+    the ``NotificationPreference`` model directly.
+    """
+
+    row = (
+        await session.execute(
+            select(NotificationPreference).where(
+                NotificationPreference.user_id == user_id,
+                NotificationPreference.category == category,
+            )
+        )
+    ).scalar_one_or_none()
+    return None if row is None else row.email_setting
+
+
 async def is_org_member(
     session: AsyncSession, *, user_id: uuid.UUID, org_id: uuid.UUID
 ) -> bool:
@@ -238,6 +260,38 @@ async def list_active_persona_contacts(
         )
         for row in rows
     ]
+
+
+async def contacts_by_ids(
+    session: AsyncSession, ids: Iterable[uuid.UUID]
+) -> dict[uuid.UUID, PersonaContact]:
+    """Batch-fetch active, non-deleted user contacts by id (for digest sweeps).
+
+    Silently drops inactive / deleted / missing users so a producer sweep never
+    emails a deactivated recipient. Keyed by user id for O(1) lookup.
+    """
+
+    unique = list({i for i in ids if i is not None})
+    if not unique:
+        return {}
+    rows = (
+        await session.execute(
+            select(User.id, User.full_name, User.email, User.preferred_language).where(
+                User.id.in_(unique),
+                User.is_active.is_(True),
+                User.deleted_at.is_(None),
+            )
+        )
+    ).all()
+    return {
+        row.id: PersonaContact(
+            id=row.id,
+            full_name=row.full_name,
+            email=row.email,
+            preferred_language=row.preferred_language,
+        )
+        for row in rows
+    }
 
 
 async def count_identities_by_persona(session: AsyncSession, persona: str) -> int:
