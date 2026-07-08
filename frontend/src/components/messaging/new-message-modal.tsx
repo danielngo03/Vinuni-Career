@@ -5,7 +5,6 @@ import { useTranslations } from "next-intl";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import {
   ArrowLeft,
-  Buildings,
   CaretRight,
   MagnifyingGlass,
   PaperPlaneTilt,

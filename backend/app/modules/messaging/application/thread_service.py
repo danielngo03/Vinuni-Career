@@ -18,7 +18,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from app.core.config import get_settings
 from app.modules.auth.application.context import RequestContext
 from app.modules.messaging.api import presenters
-from app.modules.messaging.application import _shared, party_service
+from app.modules.messaging.application import _shared, capability, party_service
 from app.modules.messaging.application.errors import (
     ContextRequiredError,
     MessageRateLimitedError,
@@ -680,6 +680,20 @@ async def list_mine(
     return items, page.next_cursor, page.limit
 
 
+async def _org_party_in_thread(
+    session: AsyncSession, *, thread_id: uuid.UUID, org_id: uuid.UUID
+) -> MessageThreadParty | None:
+    return (
+        await session.execute(
+            select(MessageThreadParty).where(
+                MessageThreadParty.thread_id == thread_id,
+                MessageThreadParty.party_kind == rules.PARTY_ORG,
+                MessageThreadParty.org_id == org_id,
+            )
+        )
+    ).scalar_one_or_none()
+
+
 async def _load_readable(
     session: AsyncSession, *, principal: Principal, thread_id: uuid.UUID
 ) -> tuple[MessageThread, bool]:
@@ -693,9 +707,21 @@ async def _load_readable(
     participant = await _shared.get_participant(
         session, thread_id=thread_id, user_id=user_id
     )
-    if participant is None:
-        raise ResourceNotFoundError()
-    return thread, False
+    if participant is not None:
+        return thread, False
+    # Org shared-inbox read: a staff member with ``messaging:read`` may read a thread
+    # that carries their org's Page party WITHOUT a per-user participant row (rows are
+    # created lazily only when they send/accept). Without this, an inbox thread 404s
+    # until the first reply — the shared inbox must be readable by the whole team.
+    if principal.org_id is not None and capability.can_read_org_inbox(
+        principal, principal.org_id
+    ):
+        org_party = await _org_party_in_thread(
+            session, thread_id=thread_id, org_id=principal.org_id
+        )
+        if org_party is not None:
+            return thread, False
+    raise ResourceNotFoundError()
 
 
 async def get_thread(
@@ -745,12 +771,45 @@ async def get_thread(
     unread = await thread_view.thread_unread(
         session, thread_id=thread.id, viewer_id=principal.user_id  # type: ignore[arg-type]
     )
-    return presenters.thread_detail(
+    # Resolve the viewer's party to expose two facts the composer UX needs exactly:
+    # whether the viewer is the request RECIPIENT (→ show Accept/Decline/Block), and
+    # whether an org-inbox staff member (no participant row yet) may reply as the Page.
+    party_list = await party_service.list_parties(session, thread_id=thread.id)
+    viewer_party = None
+    for pp in party_list:
+        if pp.party_kind == rules.PARTY_USER and pp.user_id == principal.user_id:
+            viewer_party = pp
+            break
+    if viewer_party is None and principal.org_id is not None:
+        viewer_party = next(
+            (
+                pp
+                for pp in party_list
+                if pp.party_kind == rules.PARTY_ORG and pp.org_id == principal.org_id
+            ),
+            None,
+        )
+    viewer_is_recipient = (
+        thread.request_state == rules.REQUEST_PENDING
+        and viewer_party is not None
+        and thread.initiator_party_id is not None
+        and viewer_party.id != thread.initiator_party_id
+    )
+    org_can_send = (
+        me is None
+        and viewer_party is not None
+        and viewer_party.party_kind == rules.PARTY_ORG
+        and viewer_party.org_id is not None
+        and capability.can_send_as_org(principal, viewer_party.org_id)
+    )
+    detail = presenters.thread_detail(
         thread,
         counterpart=counterpart,
         participants=rendered_participants,
         unread=unread,
-        can_reply=bool(me and me.can_reply),
+        can_reply=bool(me and me.can_reply) or org_can_send,
         muted=bool(me and me.muted),
         locale=locale,
     )
+    detail["viewer_is_recipient"] = viewer_is_recipient
+    return detail

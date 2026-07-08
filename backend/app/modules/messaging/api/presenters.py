@@ -8,6 +8,7 @@ never a user identity.
 
 from __future__ import annotations
 
+from app.core.config import get_settings
 from app.modules.messaging.domain import labels
 from app.modules.messaging.domain.models import (
     Message,
@@ -62,6 +63,8 @@ def thread_summary(
         "request_label": _REQUEST_LABELS.get(
             labels.normalize_locale(locale), _REQUEST_LABELS["vi"]
         ).get(thread.request_state, thread.request_state),
+        "request_message_count": thread.request_message_count,
+        "request_message_limit": get_settings().messaging_request_message_limit,
         "unread": unread,
         "can_reply": can_reply,
         "muted": muted,

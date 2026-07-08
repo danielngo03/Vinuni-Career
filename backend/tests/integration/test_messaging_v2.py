@@ -201,6 +201,36 @@ async def test_org_inbox_lists_incoming_and_scopes_by_org(db_session) -> None:
     assert all(i["id"] != tid for i in other_items)
 
 
+async def test_org_staff_reads_inbox_thread_without_participant_row(db_session) -> None:
+    # The whole team must be able to READ a shared-inbox thread via ``messaging:read``,
+    # not only after someone replies (participant rows are created lazily on send/accept).
+    student_user, student = await make_student(db_session)
+    _pu, porg, partner = await make_partner(db_session)
+    out = await thread_service.create_thread(
+        db_session, principal=student, kind="direct", context_type=None,
+        context_id=None, recipient_ids=[_pu.id], first_message="Hi there",
+        ctx=CTX,
+    )
+    tid = uuid.UUID(out["id"])
+
+    detail = await thread_service.get_thread(
+        db_session, principal=partner, thread_id=tid
+    )
+    assert detail["viewer_is_recipient"] is True  # pending request, partner is recipient
+    assert detail["request_message_limit"] >= 1
+    msgs, _c, _l = await message_service.list_messages(
+        db_session, principal=partner, thread_id=tid
+    )
+    assert any(m["body"] == "Hi there" for m in msgs)
+
+    # A partner from another org still cannot read it (404).
+    _pu2, _porg2, outsider = await make_partner(db_session, display_name="Other Co")
+    with pytest.raises(ResourceNotFoundError):
+        await thread_service.get_thread(
+            db_session, principal=outsider, thread_id=tid
+        )
+
+
 # --------------------------------------------------------------------------- #
 # Recipient discovery: a student can never find another student               #
 # --------------------------------------------------------------------------- #

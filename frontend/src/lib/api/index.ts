@@ -472,7 +472,7 @@ export type {
   InboxReadResult as MessagingInboxReadResult,
   RecipientOrg,
   RecipientDepartment,
-  RecipientUser as MessagingRecipientUser,
+  RecipientUser,
   RecipientTarget,
   InboxScope,
   RequestAction,

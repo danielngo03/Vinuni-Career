@@ -156,6 +156,7 @@ export const WORKSPACE_NAV_GROUPS: Record<Persona, NavGroup[]> = {
     {
       key: null,
       items: [
+        { key: "messages", href: "/messages", icon: MessageSquareText },
         { key: "events", href: "/events", icon: CalendarDays },
         { key: "advertising", href: "/advertising", icon: Megaphone },
         { key: "analytics", href: "/analytics", icon: BarChart3 },

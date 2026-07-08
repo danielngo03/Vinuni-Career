@@ -459,7 +459,7 @@ export function ThreadPanel({
           </p>
         </div>
         <div className="flex shrink-0 items-center gap-1">
-          {isOrg && !isAnnouncement && (
+          {isOrg && canAssign && !isAnnouncement && (
             <>
               <Button
                 variant="secondary"
@@ -517,7 +517,7 @@ export function ThreadPanel({
       </div>
 
       {/* Org inbox: mobile Assign/Resolve row (buttons hidden on small header) */}
-      {isOrg && !isAnnouncement && (
+      {isOrg && canAssign && !isAnnouncement && (
         <div className="flex items-center gap-2 border-b border-[var(--border-default)] bg-[#fbfaf8] px-5 py-2 sm:hidden">
           <Button
             variant="secondary"

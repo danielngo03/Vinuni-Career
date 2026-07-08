@@ -293,7 +293,7 @@ export function PublicJobBoard() {
     retry: false,
   });
 
-  const jobs: JobSummary[] = query.data?.data ?? [];
+  const jobs: JobSummary[] = useMemo(() => query.data?.data ?? [], [query.data]);
   const total = query.data?.page.total ?? 0;
   const pageCount = Math.max(1, Math.ceil(total / pageSize));
 
