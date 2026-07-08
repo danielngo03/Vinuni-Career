@@ -285,11 +285,16 @@ async def get_org_energy_overview(
 
     Management-gated, org-scoped. Never exposes tokens/USD/provider/model — only
     abstract energy credits + the derived %.
+
+    The pool is the PURE org view (``org_pool_snapshot``), independent of the
+    calling admin's OWN personal sub-cap — otherwise an admin who also holds a
+    personal ``user`` allocation would see the org ``energy_pct``/``blocked``
+    under-report the real org pool.
     """
     _require_manage(principal)
     org_id = _org_context(principal)
 
-    pool = await energy_service.snapshot(session, principal=principal)
+    pool = await energy_service.org_pool_snapshot(session, principal=principal)
 
     rows = (
         await session.execute(

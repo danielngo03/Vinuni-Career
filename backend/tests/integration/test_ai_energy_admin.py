@@ -22,7 +22,6 @@ from datetime import UTC, datetime
 
 import pytest
 from app.ai.energy import service as energy_service
-from app.modules.ai_energy.application import admin_service
 from app.ai.energy.models import (
     SCOPE_DEPARTMENT,
     SCOPE_ORG,
@@ -39,6 +38,7 @@ from app.ai.observability.billable_usage import (
     SCOPE_ORG as LEDGER_SCOPE_ORG,
 )
 from app.ai.observability.models import AiBillableUsage
+from app.modules.ai_energy.application import admin_service
 from app.modules.organization.domain.models import Department
 from app.shared.exceptions import (
     PermissionDeniedError,
@@ -149,6 +149,37 @@ async def test_clear_subcap_shares_org_pool_again(db_session) -> None:
     snap = await energy_service.snapshot(db_session, principal=member)
     assert snap.to_public()["allocation"] is None
     assert snap.blocked is False  # org pool (400) still has headroom
+
+
+async def test_overview_org_pool_ignores_admin_personal_subcap(db_session) -> None:
+    """The org overview reports the TRUE org pool even when the calling admin
+    has their OWN exhausted personal sub-cap (regression: the overview used to
+    reuse the caller's personal snapshot, so such an admin saw org energy_pct=0
+    / blocked=True instead of the org pool's real headroom)."""
+    admin_user, org, admin = await make_org_with_admin(db_session)
+
+    # Give the admin themselves a tiny personal sub-cap and exhaust it. The org
+    # pool (default 400) still has plenty of headroom.
+    await admin_service.set_allocation(
+        db_session, principal=admin, scope_type=SCOPE_USER,
+        scope_id=admin_user.id, weekly_allowance_units=10, ctx=CTX,
+    )
+    await _charge_member(db_session, org_id=org.id, user_id=admin_user.id, units=10)
+
+    # The admin's OWN metered snapshot is blocked on their personal allocation...
+    personal = await energy_service.snapshot(db_session, principal=admin)
+    assert personal.blocked is True
+    assert personal.blocked_reason == "AI_MEMBER_ALLOCATION_EXCEEDED"
+    assert personal.energy_pct == 0
+
+    # ...but the ORG POOL view in the overview is independent of that sub-cap.
+    overview = await admin_service.get_org_energy_overview(db_session, principal=admin)
+    org_pool = overview["org_pool"]
+    assert org_pool["blocked"] is False
+    assert org_pool["allocation"] is None  # pure org view — no personal sub-block
+    assert org_pool["weekly"]["allowance"] == 400
+    assert org_pool["weekly"]["used"] == 10
+    assert org_pool["energy_pct"] >= 90  # 390/400 remaining
 
 
 # --------------------------------------------------------------------------- #

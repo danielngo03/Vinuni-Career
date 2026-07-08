@@ -276,8 +276,34 @@ class EnergySnapshot:
         }
 
 
-async def snapshot(session: AsyncSession, *, principal: Principal) -> EnergySnapshot:
-    """Resolve the caller's current energy state (never raises)."""
+async def org_pool_snapshot(
+    session: AsyncSession, *, principal: Principal
+) -> EnergySnapshot:
+    """The PURE org-pool energy state, independent of the caller's personal sub-cap.
+
+    ``snapshot`` folds a partner member's personal ``user`` sub-allocation into
+    ``energy_pct``/``blocked`` (the MIN of the org pool and their own ceiling), so
+    an admin who ALSO holds a personal sub-cap would see the org overview
+    under-report the org pool. The admin energy overview needs the TRUE org pool
+    (org allowance + org wallet + org-scoped weekly usage), so it uses this view.
+    """
+    return await snapshot(
+        session, principal=principal, include_member_allocation=False
+    )
+
+
+async def snapshot(
+    session: AsyncSession,
+    *,
+    principal: Principal,
+    include_member_allocation: bool = True,
+) -> EnergySnapshot:
+    """Resolve the caller's current energy state (never raises).
+
+    ``include_member_allocation`` (default ``True``) folds a partner member's
+    personal ``user`` sub-cap into the binding meter. Set it ``False`` for a pure
+    org-pool view (see :func:`org_pool_snapshot`).
+    """
     now = datetime.now(UTC)
     week_start = _week_start(now)
     session_start = now - timedelta(hours=constants.SESSION_WINDOW_HOURS)
@@ -312,9 +338,12 @@ async def snapshot(session: AsyncSession, *, principal: Principal) -> EnergySnap
             )
             # Member's personal sub-cap on top of the org pool: an admin has
             # allocated this member a weekly ceiling + optional personal wallet.
+            # Skipped for a pure org-pool view (admin overview).
             member_id = principal.user_id
             member_acct = (
-                await _account(session, SCOPE_USER, member_id) if member_id else None
+                await _account(session, SCOPE_USER, member_id)
+                if include_member_allocation and member_id
+                else None
             )
             if (
                 member_acct is not None
