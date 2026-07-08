@@ -18,6 +18,8 @@ from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.ai.cv.llm import generate_json_note
+from app.ai.energy import service as energy_service
+from app.ai.observability.billable_usage import FEATURE_SCREENING_BRIEF
 from app.ai.prompts.screening_brief import v1 as brief_prompt
 from app.modules.documents.application import snapshot_service
 from app.modules.opportunities.application import job_read_facade
@@ -100,6 +102,8 @@ async def generate_screening_brief(
     if not principal.is_superadmin and app.org_id != principal.org_id:
         raise ResourceNotFoundError()
 
+    await energy_service.enforce_energy(session, principal=principal)
+
     # Load job for title + required skills
     title, skills = await job_read_facade.get_job_title_and_skills(session, app.job_id)
     job_title = title or "this role"
@@ -131,12 +135,24 @@ async def generate_screening_brief(
             education_summary=education_summary,
             cover_letter_snippet=cover_snippet,
         )
+        usage_context = energy_service.build_usage_context(
+            principal,
+            feature_key=FEATURE_SCREENING_BRIEF,
+            task_type=_TASK_TYPE,
+            resource_type="application",
+            resource_id=application_id,
+        )
         result = await generate_json_note(
             task_type=_TASK_TYPE,
             system_prompt=brief_prompt.STATIC_SYSTEM_PROMPT,
             user_content=user_msg,
             temperature=0.2,
             max_tokens=512,
+            db=session,
+            user_id=principal.user_id,
+            org_id=principal.org_id,
+            usage_context=usage_context,
+            charge_units=energy_service.charge_units(FEATURE_SCREENING_BRIEF),
         )
         return normalize_screening_brief_result(result)
     except AIUnavailableError:

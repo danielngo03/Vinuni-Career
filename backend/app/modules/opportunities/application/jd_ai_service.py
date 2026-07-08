@@ -20,6 +20,8 @@ import logging
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.ai.cv.llm import generate_note  # re-uses the same guard/log helper
+from app.ai.energy import service as energy_service
+from app.ai.observability.billable_usage import FEATURE_JD_WRITER
 from app.ai.prompts.jd_generation import v1 as jd_prompt
 from app.ai.safety.bias_detection import BiasCheckResult, check_bias
 from app.ai.safety.content_moderation import ContentCheckResult, check_content
@@ -44,6 +46,7 @@ async def draft_description_standalone(
 ) -> dict:
     """Generate a JD draft without an existing job (for new-job creation flow)."""
     permission_checker.require(principal, _RESOURCE, "create")
+    await energy_service.enforce_energy(session, principal=principal)
 
     inputs = dict(payload)
     partner_instruction = inputs.get("partner_instruction") or ""
@@ -54,12 +57,22 @@ async def draft_description_standalone(
     system_prompt = jd_prompt.build_system_prompt(output_language=locale)
     user_message = jd_prompt.build_user_message(inputs)
 
+    usage_context = energy_service.build_usage_context(
+        principal,
+        feature_key=FEATURE_JD_WRITER,
+        task_type=_TASK_TYPE,
+    )
     draft_text = await generate_note(
         task_type=_TASK_TYPE,
         system_prompt=system_prompt,
         user_content=user_message,
         temperature=0.4,
         max_tokens=_MAX_TOKENS,
+        db=session,
+        user_id=principal.user_id,
+        org_id=principal.org_id,
+        usage_context=usage_context,
+        charge_units=energy_service.charge_units(FEATURE_JD_WRITER),
     )
 
     return {
@@ -140,6 +153,7 @@ async def draft_description(
     )
     # Load job to confirm org ownership (raises ResourceNotFoundError on miss).
     job = await _load_owned_job(session, principal=principal, job_id=job_id)
+    await energy_service.enforce_energy(session, principal=principal)
 
     inputs = dict(payload)
     inputs.setdefault("title", job.title)
@@ -152,12 +166,24 @@ async def draft_description(
     system_prompt = jd_prompt.build_system_prompt(output_language=locale)
     user_message = jd_prompt.build_user_message(inputs)
 
+    usage_context = energy_service.build_usage_context(
+        principal,
+        feature_key=FEATURE_JD_WRITER,
+        task_type=_TASK_TYPE,
+        resource_type="job",
+        resource_id=job.id,
+    )
     draft_text = await generate_note(
         task_type=_TASK_TYPE,
         system_prompt=system_prompt,
         user_content=user_message,
         temperature=0.4,
         max_tokens=_MAX_TOKENS,
+        db=session,
+        user_id=principal.user_id,
+        org_id=principal.org_id,
+        usage_context=usage_context,
+        charge_units=energy_service.charge_units(FEATURE_JD_WRITER),
     )
 
     bias = check_bias(draft_text)

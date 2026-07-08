@@ -103,7 +103,42 @@ async def get_or_create_translation(
         logger.debug("translate: AI offline — returning None for job_id=%s", job.id)
         return None
 
-    translated = await _ai_translate(job, target_lang=target_lang, session=session)
+    # Meter the translation against the PARTNER ORG that owns the job (its content
+    # is being made bilingual; cached once per (job, lang) so the org pays once).
+    # We do NOT gate the viewer on the partner's energy — a student clicking
+    # "translate" must not be blocked because the partner org is low; the charge
+    # simply records against the org.
+    from app.ai.energy.constants import FEATURE_JD_TRANSLATION
+    from app.ai.energy.service import charge_units
+    from app.ai.observability.billable_usage import (
+        PERSONA_PARTNER,
+        SCOPE_ORG,
+        UsageContext,
+        make_idempotency_key,
+    )
+
+    org_id = getattr(job, "org_id", None)
+    usage_context = UsageContext(
+        actor_persona=PERSONA_PARTNER,
+        feature_key=FEATURE_JD_TRANSLATION,
+        task_type="jd_translation",
+        billing_scope=SCOPE_ORG,
+        org_id=org_id,
+        resource_type="job",
+        resource_id=getattr(job, "id", None),
+        idempotency_key=make_idempotency_key(
+            FEATURE_JD_TRANSLATION, getattr(job, "id", ""), target_lang
+        ),
+    )
+
+    translated = await _ai_translate(
+        job,
+        target_lang=target_lang,
+        session=session,
+        org_id=org_id,
+        usage_context=usage_context,
+        charge_units=charge_units(FEATURE_JD_TRANSLATION),
+    )
     if translated is None:
         return None
 
@@ -133,6 +168,9 @@ async def _ai_translate(
     *,
     target_lang: str,
     session: AsyncSession | None = None,
+    org_id: uuid.UUID | None = None,
+    usage_context: object | None = None,
+    charge_units: int = 0,
 ) -> dict | None:
     """Translate JD fields with a fast MT draft plus AI polishing.
 
@@ -160,6 +198,9 @@ async def _ai_translate(
             session,
             alias=runtime_config.current().chat_model_alias,
             task_type="jd_translation",
+            org_id=org_id,
+            usage_context=usage_context,  # type: ignore[arg-type]
+            charge_units=charge_units,
         )
         completion = await runner.complete(
             [

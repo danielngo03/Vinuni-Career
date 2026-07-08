@@ -68,6 +68,8 @@ class AiUsageLog(Base):
     # Nullable: anonymous / system / background calls have no user or session.
     user_id: Mapped[uuid.UUID | None] = mapped_column(Uuid(as_uuid=True), nullable=True)
     session_id: Mapped[uuid.UUID | None] = mapped_column(Uuid(as_uuid=True), nullable=True)
+    # Owning partner/university org for per-org metering. NULL for student/system.
+    org_id: Mapped[uuid.UUID | None] = mapped_column(Uuid(as_uuid=True), nullable=True)
     # Not always available — depends on provider cost reporting.
     cost_usd: Mapped[float | None] = mapped_column(Numeric(10, 7), nullable=True)
 

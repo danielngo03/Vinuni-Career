@@ -89,10 +89,11 @@ class Settings(BaseSettings):
     ai_real_calls_enabled: bool = False
     ai_max_real_calls_per_test_run: int = 3
     ai_daily_cost_limit_usd: float = 1.0
-    # Per-user AI request allowances (counted from ai_usage_log rows; platform
-    # policy, V1 flat). Two windows: the day resets at UTC midnight, the week
-    # at UTC Monday. The gateway-facing guard blocks when EITHER is exhausted —
-    # an exhausted week blocks requests even if today still has room.
+    # DEPRECATED (2026-07-08): the request-count daily/weekly gate was replaced by
+    # the cost-weighted AI energy meter (``app.ai.energy``) — weekly HARD block +
+    # 3h SOFT warn, NO daily gate. These two fields are retained only so existing
+    # ``.env`` values do not error; nothing reads them anymore. Energy allowances
+    # live in ``app.ai.energy.constants`` + per-org/plan config.
     ai_daily_request_limit: int = 50
     ai_weekly_request_limit: int = 200
     openai_compatible_base_url: str = "https://openrouter.ai/api/v1"

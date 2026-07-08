@@ -12,6 +12,7 @@ structured fields (no AI internals) are returned to the client.
 from __future__ import annotations
 
 import logging
+from typing import TYPE_CHECKING
 
 from app.ai.extraction.jd import structuring as _structuring
 from app.ai.extraction.jd import validation as jd_validation
@@ -19,6 +20,11 @@ from app.ai.extraction.jd import vision as _vision
 from app.ai.extraction.jd.cascade import JdExtractionOutcome, run_jd_cascade
 from app.ai.prompts.jd_extraction import v2 as jd_prompt
 from app.shared.exceptions import ValidationFailedError
+
+if TYPE_CHECKING:
+    from sqlalchemy.ext.asyncio import AsyncSession
+
+    from app.shared.permissions import Principal
 
 logger = logging.getLogger(__name__)
 
@@ -75,23 +81,99 @@ def _to_response(outcome: JdExtractionOutcome) -> dict:
     return response
 
 
-async def extract_jd_from_upload_with(*, filename: str, data: bytes,
-                                      structurer, vision_runner) -> dict:
-    """Testable core: run the cascade with injected AI seams, map to a response."""
+async def _meter_extraction(
+    db: AsyncSession | None,
+    principal: Principal | None,
+    outcome: JdExtractionOutcome,
+) -> None:
+    """Debit the partner org's energy for a JD extraction that spent LLM tokens.
+
+    Charged at the service layer (not inside the cascade) using the outcome's
+    tier diagnostics, because the vision tier runs in a worker thread with no
+    async session. A native-text-only extraction (``llm_used``/``vision_used``
+    both False) spends no tokens and is NOT charged. Best-effort — never breaks
+    the extraction response.
+    """
+    if db is None or principal is None:
+        return
+    from app.ai.energy.constants import FEATURE_JD_VISION_EXTRACTION
+    from app.ai.energy.service import build_usage_context, charge_units
+    from app.ai.observability.billable_usage import (
+        FEATURE_JD_EXTRACTION,
+        record_billable_usage,
+    )
+    from app.ai.observability.usage import log_ai_usage_async
+
+    if outcome.status == "ai_unavailable":
+        feature, task_type, status = (
+            FEATURE_JD_EXTRACTION, "jd_extraction", "provider_failed"
+        )
+        units = 0
+    elif outcome.is_ai_extraction and outcome.vision_used:
+        feature, task_type, status = (
+            FEATURE_JD_VISION_EXTRACTION, "jd_vision_extraction", "success"
+        )
+        units = charge_units(feature)
+    elif outcome.is_ai_extraction and outcome.llm_used:
+        feature, task_type, status = (
+            FEATURE_JD_EXTRACTION, "jd_extraction", "success"
+        )
+        units = charge_units(feature)
+    else:
+        return  # native-text-only or hard-reject: no tokens spent
+
+    try:
+        ctx = build_usage_context(
+            principal, feature_key=feature, task_type=task_type
+        )
+        await record_billable_usage(
+            db, ctx=ctx, result_status=status, base_units=units
+        )
+        await log_ai_usage_async(
+            db,
+            task_type=task_type,
+            alias="jd_extraction",
+            success=status == "success",
+            user_id=getattr(principal, "user_id", None),
+            org_id=getattr(principal, "org_id", None),
+        )
+    except Exception:  # noqa: BLE001 — accounting must never break extraction
+        logger.warning("jd_extraction_metering_failed", exc_info=True)
+
+
+async def extract_jd_from_upload_with(
+    *, filename: str, data: bytes, structurer, vision_runner,
+    db: AsyncSession | None = None, principal: Principal | None = None,
+) -> dict:
+    """Testable core: run the cascade with injected AI seams, map to a response.
+
+    When ``db`` + ``principal`` are supplied the extraction is metered against
+    the partner org's AI energy (charged only when an LLM/vision tier ran).
+    """
     outcome = await run_jd_cascade(filename, data,
                                    structurer=structurer, vision_runner=vision_runner)
+    await _meter_extraction(db, principal, outcome)
     return _to_response(outcome)
 
 
-async def extract_jd_from_upload(filename: str, data: bytes,
-                                 content_type: str | None = None) -> dict:
+async def extract_jd_from_upload(
+    filename: str, data: bytes, content_type: str | None = None,
+    *, db: AsyncSession | None = None, principal: Principal | None = None,
+) -> dict:
     """Extract structured JD fields for form prefill. Never persists anything.
 
     Returns a flat dict (ok) or an ``ai_unavailable`` dict; raises
-    ``ValidationFailedError`` (user-safe) for blank/not-a-JD/corrupt/etc.
+    ``ValidationFailedError`` (user-safe) for blank/not-a-JD/corrupt/etc. When a
+    ``db`` + ``principal`` are supplied, a weekly-energy preflight gate runs and
+    a successful AI extraction debits the partner org's energy.
     """
+    if db is not None and principal is not None:
+        from app.ai.energy.service import enforce_energy
+
+        await enforce_energy(db, principal=principal)
     return await extract_jd_from_upload_with(
         filename=filename, data=data,
         structurer=_structuring.run_jd_text_structuring,
         vision_runner=_vision.run_jd_vision_extraction,
+        db=db, principal=principal,
     )

@@ -17,6 +17,8 @@ from __future__ import annotations
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.ai.cv.llm import generate_note
+from app.ai.energy import service as energy_service
+from app.ai.energy.constants import FEATURE_MARKET_INTELLIGENCE
 from app.ai.prompts.market_intelligence import v1 as mi_prompt
 from app.modules.dashboards.application.university_dashboard import (
     _require_university,
@@ -81,15 +83,41 @@ def build_report(
     }
 
 
-async def narrate_report(report: dict) -> str | None:
-    """AI narrative over the aggregate report; ``None`` on gateway failure."""
+async def narrate_report(
+    report: dict,
+    *,
+    session: AsyncSession | None = None,
+    principal: Principal | None = None,
+) -> str | None:
+    """AI narrative over the aggregate report; ``None`` on gateway failure.
+
+    When ``session`` + ``principal`` are supplied (the product path) the call is
+    metered through the governed gateway and debits the university org's energy
+    ledger on success. Without them (the offline eval harness) it runs on the
+    unmetered legacy path.
+    """
+    usage_context = energy_service.build_usage_context(
+        principal,
+        feature_key=FEATURE_MARKET_INTELLIGENCE,
+        task_type=_TASK_TYPE,
+    )
     try:
+        # Gate ONLY the AI narrative on energy — the deterministic aggregates in
+        # ``get_market_intelligence`` always render. Exhaustion raises here and is
+        # caught below, degrading to "no narrative" rather than failing the report.
+        if session is not None and principal is not None:
+            await energy_service.enforce_energy(session, principal=principal)
         return await generate_note(
             task_type=_TASK_TYPE,
             system_prompt=mi_prompt.STATIC_SYSTEM_PROMPT,
             user_content=mi_prompt.build_user_message(report),
             temperature=0.3,
             max_tokens=_MAX_TOKENS,
+            db=session,
+            user_id=principal.user_id if principal else None,
+            org_id=principal.org_id if principal else None,
+            usage_context=usage_context,
+            charge_units=energy_service.charge_units(FEATURE_MARKET_INTELLIGENCE),
         )
     except Exception:  # noqa: BLE001 — AI enrichment degrades, never breaks
         return None
@@ -103,6 +131,10 @@ async def get_market_intelligence(
 ) -> dict:
     await _require_university(session, principal)
 
+    # NOTE: no endpoint-level energy gate — the deterministic aggregates must
+    # survive AI-energy exhaustion (owner: non-AI paths always work). Only the
+    # narrative in ``narrate_report`` is energy-gated and degrades to None.
+
     # Local import: avoids a snapshot_service <-> market_intelligence_service
     # cycle (snapshot_service calls back into ``build_report`` here).
     from app.modules.dashboards.application import snapshot_service
@@ -111,7 +143,9 @@ async def get_market_intelligence(
 
     narrative: str | None = None
     if include_narrative and not report["low_signal"]:
-        narrative = await narrate_report(report)
+        narrative = await narrate_report(
+            report, session=session, principal=principal
+        )
 
     return {
         **report,

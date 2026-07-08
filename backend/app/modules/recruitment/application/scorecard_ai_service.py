@@ -24,6 +24,8 @@ from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.ai.cv.llm import generate_json_note
+from app.ai.energy import service as energy_service
+from app.ai.observability.billable_usage import FEATURE_SCORECARD_SUGGESTION
 from app.ai.prompts.scorecard_suggest import v1 as sc_prompt
 from app.ai.safety.input_guard import sanitize_instruction
 from app.modules.recruitment.domain.models import Application
@@ -70,6 +72,8 @@ async def suggest_scorecard(
     if not principal.is_superadmin and application.org_id != principal.org_id:
         raise ResourceNotFoundError()
 
+    await energy_service.enforce_energy(session, principal=principal)
+
     # Sanitize notes (partner free text)
     clean_notes, _ = sanitize_instruction(notes[:2000])
     if not clean_notes:
@@ -82,12 +86,24 @@ async def suggest_scorecard(
     }
 
     try:
+        usage_context = energy_service.build_usage_context(
+            principal,
+            feature_key=FEATURE_SCORECARD_SUGGESTION,
+            task_type=_TASK_TYPE,
+            resource_type="application",
+            resource_id=application_id,
+        )
         result = await generate_json_note(
             task_type=_TASK_TYPE,
             system_prompt=sc_prompt.STATIC_SYSTEM_PROMPT,
             user_content=sc_prompt.build_user_message(inputs),
             temperature=0.2,
             max_tokens=800,
+            db=session,
+            user_id=principal.user_id,
+            org_id=principal.org_id,
+            usage_context=usage_context,
+            charge_units=energy_service.charge_units(FEATURE_SCORECARD_SUGGESTION),
         )
         return normalize_scorecard_result(result)
 

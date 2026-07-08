@@ -44,7 +44,7 @@ usage_router = APIRouter(prefix="/ai/usage", tags=["ai-assistant"])
 
 @usage_router.get(
     "/me",
-    summary="My AI usage today (request count vs daily allowance)",
+    summary="My AI energy (weekly allowance + 3h burst + wallet)",
 )
 async def my_ai_usage(
     auth: CurrentAuth = Depends(get_current_auth),
@@ -56,7 +56,7 @@ async def my_ai_usage(
 
 @usage_router.get(
     "/summary",
-    summary="My AI usage detail (windows, reset timing, per-feature breakdown, recent activity)",
+    summary="My AI energy detail (windows, wallet, per-feature breakdown, recent activity)",
 )
 async def my_ai_usage_summary(
     auth: CurrentAuth = Depends(get_current_auth),
@@ -64,9 +64,11 @@ async def my_ai_usage_summary(
 ) -> dict:
     """Powers the billing/usage screen's AI-usage panel.
 
-    Returns the same day/week quota windows as ``/me`` plus reset timestamps, a
-    per-feature request breakdown, and a recent-activity list over the last 30
-    days. Never exposes provider/model names, aliases, tokens, cost, or latency.
+    Returns the caller's AI energy snapshot (weekly allowance + wallet + 3h burst
+    window, as an energy %) plus the week reset time, a per-feature breakdown, and
+    a recent-activity list over the last 30 days. For a partner member the meter
+    is the shared ORG pool. Never exposes provider/model names, aliases, tokens,
+    cost, or latency.
     """
     data = await usage_service.my_usage_detail(session, principal=auth.principal)
     return success(data)

@@ -95,6 +95,7 @@ async def log_ai_usage_async(
     completion_chars: int = 0,
     user_id: uuid.UUID | None = None,
     session_id: uuid.UUID | None = None,
+    org_id: uuid.UUID | None = None,
     cost_usd: float | None = None,
 ) -> None:
     """Insert a row into ``ai_usage_log`` and emit the structured log line.
@@ -117,6 +118,8 @@ async def log_ai_usage_async(
         user_id: Optional UUID of the authenticated user. ``None`` for
             anonymous or background/system calls.
         session_id: Optional UUID of the chat/AI session, if applicable.
+        org_id: Optional UUID of the owning partner/university org, for per-org
+            metering. ``None`` for student/anonymous/system calls.
         cost_usd: Optional estimated cost in USD. ``None`` when unavailable.
     """
     # Always emit the structured log line first (sync, cannot fail).
@@ -143,6 +146,7 @@ async def log_ai_usage_async(
             completion_chars_bucket=_db_bucket(completion_chars),
             user_id=user_id,
             session_id=session_id,
+            org_id=org_id,
             cost_usd=cost_usd,
         )
         db.add(row)

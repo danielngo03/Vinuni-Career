@@ -767,6 +767,7 @@ async def delete_job_alert(
 async def upload_jd_document(
     file: UploadFile = File(..., description="PDF, DOCX, TXT, or image job description"),
     auth: CurrentAuth = Depends(get_current_auth),
+    session: AsyncSession = Depends(get_db_session),
 ) -> dict:
     """Extract structured job fields from an uploaded document for form prefill.
 
@@ -774,13 +775,20 @@ async def upload_jd_document(
     prefill-ready fields on success, a raw-text fallback when AI is unavailable,
     and a user-safe validation error for blank/not-a-JD/corrupt files. Never
     writes to the database.
+
+    Metering: extraction that spends LLM/vision tokens debits the partner org's
+    AI energy (weekly-energy preflight gate + per-tier charge). The commit
+    persists the energy-ledger row.
     """
     data = await file.read()
     result = await jd_upload_service.extract_jd_from_upload(
         filename=file.filename or "upload",
         data=data,
         content_type=file.content_type,
+        db=session,
+        principal=auth.principal,
     )
+    await session.commit()
     return result
 
 

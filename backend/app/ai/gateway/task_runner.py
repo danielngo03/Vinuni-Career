@@ -197,6 +197,7 @@ class AiTaskRunner:
                     success=False,
                     user_id=self._user_id,
                     session_id=self._session_id,
+                    org_id=self._org_id,
                 )
                 await _record_telemetry(
                     db=self._db,
@@ -244,6 +245,7 @@ class AiTaskRunner:
                 completion_chars=completion_chars,
                 user_id=self._user_id,
                 session_id=self._session_id,
+                org_id=self._org_id,
                 cost_usd=cost_usd,
             )
         else:
@@ -395,6 +397,7 @@ class AiTaskRunner:
                         completion_chars=total_chars,
                         user_id=self._user_id,
                         session_id=self._session_id,
+                        org_id=self._org_id,
                         cost_usd=cost_usd,
                     )
                 except Exception:
