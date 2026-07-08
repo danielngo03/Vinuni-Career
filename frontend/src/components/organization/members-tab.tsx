@@ -14,6 +14,7 @@ import {
   DataTable,
   EmptyState,
   Modal,
+  Select,
   StatusBadge,
   useToast,
   type Column,
@@ -25,6 +26,7 @@ import {
   type OrgRole,
   type OrgMember,
   type PermissionPreview,
+  type RoleAssignment,
 } from "@/lib/api";
 import { useApiErrorMessage } from "@/lib/auth/use-api-error";
 import { grants } from "@/lib/validation/organization";
@@ -35,6 +37,29 @@ function sameSet(a: string[], b: string[]): boolean {
   if (a.length !== b.length) return false;
   const right = new Set(b);
   return a.every((item) => right.has(item));
+}
+
+/**
+ * Normalize a member's role assignments to `[{role_id, department_id}]`. Older
+ * projections may omit `role_assignments`; fall back to `role_ids` treated as
+ * org-wide (department_id null) so the editor always has a canonical shape.
+ */
+function memberAssignments(m: OrgMember): RoleAssignment[] {
+  if (m.role_assignments && m.role_assignments.length > 0) {
+    return m.role_assignments.map((a) => ({
+      role_id: a.role_id,
+      department_id: a.department_id ?? null,
+    }));
+  }
+  return m.role_ids.map((id) => ({ role_id: id, department_id: null }));
+}
+
+/** Compare two assignment sets by (role_id, department_id) pairs, order-free. */
+function sameAssignments(a: RoleAssignment[], b: RoleAssignment[]): boolean {
+  if (a.length !== b.length) return false;
+  const key = (x: RoleAssignment) => `${x.role_id}::${x.department_id ?? ""}`;
+  const right = new Set(b.map(key));
+  return a.every((x) => right.has(key(x)));
 }
 
 function canAssignRole(
@@ -77,7 +102,9 @@ export function MembersTab({
   const [removing, setRemoving] = useState<OrgMember | null>(null);
   const [deactivating, setDeactivating] = useState<OrgMember | null>(null);
   const [previewing, setPreviewing] = useState<OrgMember | null>(null);
-  const [roleIds, setRoleIds] = useState<string[]>([]);
+  // Per-role assignments (role_id + optional department scope). Replaces the old
+  // flat role-id list so each assigned role can be scoped to a department.
+  const [assignments, setAssignments] = useState<RoleAssignment[]>([]);
   const [deptIds, setDeptIds] = useState<string[]>([]);
 
   const rolesQuery = useQuery({
@@ -109,7 +136,7 @@ export function MembersTab({
 
   useEffect(() => {
     if (editing) {
-      setRoleIds(editing.role_ids);
+      setAssignments(memberAssignments(editing));
       setDeptIds(editing.department_ids);
     }
   }, [editing]);
@@ -122,10 +149,25 @@ export function MembersTab({
     mutationFn: (m: OrgMember) => {
       const body: {
         role_ids?: string[];
+        role_assignments?: RoleAssignment[];
         department_ids?: string[];
         version: number;
       } = { version: m.version };
-      if (!sameSet(roleIds, m.role_ids)) body.role_ids = roleIds;
+      // Only send a role field when the assignment set actually changed. When
+      // any assigned role carries a department scope, send the authoritative
+      // `role_assignments`; otherwise keep the legacy org-wide `role_ids` path
+      // (the two are mutually exclusive per the backend contract).
+      if (!sameAssignments(assignments, memberAssignments(m))) {
+        const anyScoped = assignments.some((a) => a.department_id != null);
+        if (anyScoped) {
+          body.role_assignments = assignments.map((a) => ({
+            role_id: a.role_id,
+            department_id: a.department_id ?? null,
+          }));
+        } else {
+          body.role_ids = assignments.map((a) => a.role_id);
+        }
+      }
       if (!sameSet(deptIds, m.department_ids)) body.department_ids = deptIds;
       return organizationApi.updateMember(m.id, body, orgId);
     },
@@ -265,21 +307,28 @@ export function MembersTab({
     {
       key: "roles",
       header: t("roles"),
-      cell: (m) =>
-        m.role_ids.length ? (
+      cell: (m) => {
+        const list = memberAssignments(m);
+        return list.length ? (
           <div className="flex flex-wrap gap-1">
-            {m.role_ids.map((id) => (
+            {list.map((a) => (
               <span
-                key={id}
-                className="rounded-md bg-[var(--bg-subtle)] px-2 py-0.5 text-xs font-medium text-[var(--text-secondary)]"
+                key={`${a.role_id}::${a.department_id ?? ""}`}
+                className="inline-flex items-center gap-1 rounded-md bg-[var(--bg-subtle)] px-2 py-0.5 text-xs font-medium text-[var(--text-secondary)]"
               >
-                {roleName(id)}
+                {roleName(a.role_id)}
+                {a.department_id && (
+                  <span className="text-[var(--text-muted)]">
+                    · {deptName(a.department_id)}
+                  </span>
+                )}
               </span>
             ))}
           </div>
         ) : (
           <span className="text-[var(--text-muted)]">—</span>
-        ),
+        );
+      },
     },
     {
       key: "departments",
@@ -398,18 +447,31 @@ export function MembersTab({
         }
       >
         <div className="space-y-5">
-          <CheckGroup
+          <RoleScopeEditor
             legend={t("roles")}
             empty={t("noRoles")}
-            options={roles.map((r) => ({
+            hint={t("roleScopeHint")}
+            orgWideLabel={t("orgWide")}
+            scopeAriaLabel={(role) => t("roleScopeFor", { role })}
+            roles={roles.map((r) => ({
               id: r.id,
               label: r.name,
               disabled: !canAssignRole(r, effective, holdsWildcard),
             }))}
-            selected={roleIds}
+            depts={depts.map((d) => ({ id: d.id, name: d.name }))}
+            assignments={assignments}
             onToggle={(id) =>
-              setRoleIds((prev) =>
-                prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id],
+              setAssignments((prev) =>
+                prev.some((a) => a.role_id === id)
+                  ? prev.filter((a) => a.role_id !== id)
+                  : [...prev, { role_id: id, department_id: null }],
+              )
+            }
+            onScope={(id, deptId) =>
+              setAssignments((prev) =>
+                prev.map((a) =>
+                  a.role_id === id ? { ...a, department_id: deptId } : a,
+                ),
               )
             }
           />
@@ -495,6 +557,112 @@ export function MembersTab({
         error={preview.isError}
       />
     </SectionCard>
+  );
+}
+
+/**
+ * Role assignment editor with an optional per-role department scope. Each role
+ * is a checkbox; once assigned, a department dropdown ("Org-wide" default)
+ * appears next to it so the role can be scoped to a single department (or left
+ * org-wide). Disabled roles exceed the actor's own permission ceiling.
+ */
+function RoleScopeEditor({
+  legend,
+  empty,
+  hint,
+  orgWideLabel,
+  scopeAriaLabel,
+  roles,
+  depts,
+  assignments,
+  onToggle,
+  onScope,
+}: {
+  legend: string;
+  empty: string;
+  hint: string;
+  orgWideLabel: string;
+  scopeAriaLabel: (role: string) => string;
+  roles: { id: string; label: string; disabled?: boolean }[];
+  depts: { id: string; name: string }[];
+  assignments: RoleAssignment[];
+  onToggle: (id: string) => void;
+  onScope: (id: string, deptId: string | null) => void;
+}) {
+  const anyScoped = assignments.some((a) => a.department_id != null);
+  return (
+    <fieldset>
+      <legend className="mb-1.5 text-sm font-semibold text-[var(--text-primary)]">
+        {legend}
+      </legend>
+      {roles.length === 0 ? (
+        <p className="text-sm text-[var(--text-muted)]">{empty}</p>
+      ) : (
+        <>
+          <ul className="space-y-1.5">
+            {roles.map((r) => {
+              const assignment = assignments.find((a) => a.role_id === r.id);
+              const checked = assignment !== undefined;
+              return (
+                <li
+                  key={r.id}
+                  className={
+                    "flex flex-wrap items-center gap-2 rounded-lg border px-2.5 py-1.5 transition-colors " +
+                    (checked
+                      ? "border-[var(--brand-primary)]/40 bg-[var(--blue-50)]/40"
+                      : "border-[var(--border-default)]")
+                  }
+                >
+                  <label
+                    className={
+                      "inline-flex min-w-0 flex-1 items-center gap-2 text-sm font-medium " +
+                      (r.disabled
+                        ? "cursor-not-allowed opacity-55"
+                        : "cursor-pointer")
+                    }
+                  >
+                    <input
+                      type="checkbox"
+                      className="size-4 shrink-0 rounded border-[var(--border-default)] text-[var(--brand-primary)] outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)]/40"
+                      checked={checked}
+                      disabled={r.disabled}
+                      onChange={() => onToggle(r.id)}
+                    />
+                    <span
+                      className={
+                        "min-w-0 truncate " +
+                        (checked
+                          ? "text-[var(--text-primary)]"
+                          : "text-[var(--text-secondary)]")
+                      }
+                    >
+                      {r.label}
+                    </span>
+                  </label>
+                  {checked && depts.length > 0 && (
+                    <div className="w-full sm:w-48">
+                      <Select
+                        aria-label={scopeAriaLabel(r.label)}
+                        value={assignment?.department_id ?? ""}
+                        onChange={(e) => onScope(r.id, e.target.value || null)}
+                        className="py-1.5 text-xs"
+                        options={[
+                          { value: "", label: orgWideLabel },
+                          ...depts.map((d) => ({ value: d.id, label: d.name })),
+                        ]}
+                      />
+                    </div>
+                  )}
+                </li>
+              );
+            })}
+          </ul>
+          {anyScoped && (
+            <p className="mt-1.5 text-xs text-[var(--text-muted)]">{hint}</p>
+          )}
+        </>
+      )}
+    </fieldset>
   );
 }
 

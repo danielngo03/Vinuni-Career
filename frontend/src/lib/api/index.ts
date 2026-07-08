@@ -28,6 +28,7 @@ export type {
   OrgRole,
   OrgDepartment,
   OrgMember,
+  RoleAssignment,
   OrgInvitation,
   PermissionInput,
   OrganizationPatch,
@@ -123,6 +124,14 @@ export type {
   MyEventRegistration,
   CancelRegistrationResult,
 } from "./events";
+export { aiReviewQueueApi } from "./ai-review-queue";
+export type {
+  AiReviewItemType,
+  AiReviewQueueItem,
+  AiReviewQueueCounts,
+  AiReviewQueueResult,
+  AiReviewDecisionResult,
+} from "./ai-review-queue";
 export { companiesApi } from "./companies";
 export { reviewsApi } from "./reviews";
 export type {

@@ -48,6 +48,17 @@ export interface OrgDepartment {
   created_at: string;
 }
 
+/**
+ * A single role grant, optionally scoped to one department (dept-scoped RBAC,
+ * P2/WS2.1). `department_id` null/omitted = the role applies ORG-WIDE (identical
+ * to a plain `role_ids` entry); a non-null id scopes the role's grants to that
+ * department only.
+ */
+export interface RoleAssignment {
+  role_id: string;
+  department_id?: string | null;
+}
+
 export interface OrgMember {
   id: string;
   /**
@@ -63,6 +74,12 @@ export interface OrgMember {
   status: string;
   status_label: string;
   role_ids: string[];
+  /**
+   * Per-role department scope. Always present in current responses (defaults to
+   * one org-wide entry per `role_ids` when a member has no scoped roles). Kept
+   * optional for backwards/forwards compatibility with directory projections.
+   */
+  role_assignments?: RoleAssignment[];
   department_ids: string[];
   version: number;
   joined_at: string;
@@ -321,7 +338,17 @@ export const organizationApi = {
   },
   updateMember(
     id: string,
-    body: { role_ids?: string[]; department_ids?: string[]; version?: number },
+    body: {
+      /** Legacy org-wide role set. Mutually exclusive with `role_assignments`. */
+      role_ids?: string[];
+      /**
+       * Department-scoped role set (authoritative — REPLACES `role_ids`). Send
+       * this instead of `role_ids` when any role carries a `department_id`.
+       */
+      role_assignments?: RoleAssignment[];
+      department_ids?: string[];
+      version?: number;
+    },
     orgId?: string | null,
   ): Promise<OrgMember> {
     return api.patch<OrgMember>(`/organizations/members/${id}`, body, {
