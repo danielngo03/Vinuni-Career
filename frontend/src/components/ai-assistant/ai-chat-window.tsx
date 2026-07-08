@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useTranslations } from "next-intl";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import {
@@ -101,6 +101,13 @@ export function AiChatWindow({
   const [historyOpen, setHistoryOpen] = useState(false);
   const [deletingSessionId, setDeletingSessionId] = useState<string | null>(null);
   const [confirmDeleteSessionId, setConfirmDeleteSessionId] = useState<string | null>(null);
+  // Inline session rename state (which row is editing, which save is in flight).
+  const [renamingSessionId, setRenamingSessionId] = useState<string | null>(null);
+  const [savingRenameId, setSavingRenameId] = useState<string | null>(null);
+  // Regenerate-last-reply + edit-user-message state.
+  const [regenerating, setRegenerating] = useState(false);
+  const [editingMessageId, setEditingMessageId] = useState<string | null>(null);
+  const [savingEditId, setSavingEditId] = useState<string | null>(null);
   const bottomRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -112,6 +119,30 @@ export function AiChatWindow({
 
   const uploadingCount = attachments.filter((a) => a.status === "uploading").length;
   const readyCount = attachments.filter((a) => a.status === "ready").length;
+
+  // Any turn in flight — gates the regenerate + edit affordances so only one
+  // AI action runs at a time.
+  const busy =
+    sending ||
+    regenerating ||
+    confirmingMessageId !== null ||
+    savingEditId !== null;
+
+  // Newest assistant reply that is a real, server-persisted message (not an
+  // optimistic/error/stream-fallback placeholder). Only it exposes regenerate.
+  const lastAssistantId = useMemo(() => {
+    for (let i = messages.length - 1; i >= 0; i--) {
+      const m = messages[i];
+      if (m && m.role === "assistant") {
+        const local =
+          m.id.startsWith("opt-") ||
+          m.id.startsWith("err-") ||
+          m.id.startsWith("stream-");
+        return local ? null : m.id;
+      }
+    }
+    return null;
+  }, [messages]);
 
   // Fetch existing sessions to restore the most recent one.
   const sessionsQuery = useQuery({
@@ -176,6 +207,8 @@ export function AiChatWindow({
       abortRef.current = null;
       setHistoryOpen(false);
       setConfirmDeleteSessionId(null);
+      setRenamingSessionId(null);
+      setEditingMessageId(null);
     }
     return () => {
       abortRef.current?.abort();
@@ -212,6 +245,7 @@ export function AiChatWindow({
     setSending(false);
     setInput("");
     setDraftSession(true);
+    setEditingMessageId(null);
     setTimeout(() => inputRef.current?.focus(), 40);
   }
 
@@ -226,6 +260,7 @@ export function AiChatWindow({
     setActiveToolName(null);
     setActivityStatus(null);
     setDraftSession(false);
+    setEditingMessageId(null);
   }
 
   /** Archive (soft-delete) a session with optimistic removal + rollback on
@@ -273,6 +308,89 @@ export function AiChatWindow({
     } finally {
       setDeletingSessionId(null);
       setConfirmDeleteSessionId(null);
+    }
+  }
+
+  /** Rename a session with an optimistic title swap + rollback on failure. The
+   * client mirrors the server's 1..120 non-empty bound so an obviously-invalid
+   * title never round-trips. */
+  async function renameSession(id: string, rawTitle: string) {
+    if (savingRenameId) return;
+    const title = rawTitle.trim();
+    if (title.length < 1 || title.length > 120) return;
+    const key = ["ai-assistant", "sessions"] as const;
+    const prev =
+      qc.getQueryData<ChatSession[]>(key) ?? sessionsQuery.data ?? [];
+    setSavingRenameId(id);
+    // Optimistic title swap.
+    qc.setQueryData<ChatSession[]>(
+      key,
+      prev.map((s) => (s.id === id ? { ...s, title } : s)),
+    );
+    try {
+      const updated = await aiAssistantApi.renameSession(id, title);
+      qc.setQueryData<ChatSession[]>(key, (cur) =>
+        (cur ?? prev).map((s) =>
+          s.id === id ? { ...s, title: updated.title } : s,
+        ),
+      );
+      setRenamingSessionId(null);
+      void qc.invalidateQueries({ queryKey: [...key] });
+    } catch {
+      // Roll back the optimistic title and surface a user-safe error.
+      qc.setQueryData<ChatSession[]>(key, prev);
+      toast.show({
+        tone: "error",
+        title: t("renameErrorTitle"),
+        description: t("renameError"),
+      });
+    } finally {
+      setSavingRenameId(null);
+    }
+  }
+
+  /** Regenerate the newest assistant reply. The server supersedes the previous
+   * reply, so a full messages refetch is the correct, robust update. */
+  async function regenerate() {
+    if (!sessionId || busy) return;
+    setRegenerating(true);
+    try {
+      await aiAssistantApi.regenerateMessage(sessionId);
+      await qc.invalidateQueries({
+        queryKey: ["ai-assistant", "messages", sessionId],
+      });
+    } catch {
+      toast.show({
+        tone: "error",
+        title: t("regenerateErrorTitle"),
+        description: t("regenerateError"),
+      });
+    } finally {
+      setRegenerating(false);
+    }
+  }
+
+  /** Edit a prior user message and re-run from that point. The server truncates
+   * and replays the tail, so we refetch the whole thread instead of splicing. */
+  async function submitEdit(messageId: string, rawText: string) {
+    if (!sessionId || savingEditId) return;
+    const text = rawText.trim();
+    if (!text) return;
+    setSavingEditId(messageId);
+    try {
+      await aiAssistantApi.editMessage(sessionId, messageId, text);
+      await qc.invalidateQueries({
+        queryKey: ["ai-assistant", "messages", sessionId],
+      });
+      setEditingMessageId(null);
+    } catch {
+      toast.show({
+        tone: "error",
+        title: t("editErrorTitle"),
+        description: t("editError"),
+      });
+    } finally {
+      setSavingEditId(null);
     }
   }
 
@@ -713,11 +831,22 @@ export function AiChatWindow({
             loading={sessionsQuery.isPending}
             deletingId={deletingSessionId}
             confirmDeleteId={confirmDeleteSessionId}
+            renamingId={renamingSessionId}
+            savingRenameId={savingRenameId}
             onNew={startNewChat}
             onSelect={selectSession}
-            onRequestDelete={setConfirmDeleteSessionId}
+            onRequestDelete={(id) => {
+              setConfirmDeleteSessionId(id);
+              setRenamingSessionId(null);
+            }}
             onCancelDelete={() => setConfirmDeleteSessionId(null)}
             onConfirmDelete={(id) => void deleteSession(id)}
+            onRequestRename={(id) => {
+              setRenamingSessionId(id);
+              setConfirmDeleteSessionId(null);
+            }}
+            onCancelRename={() => setRenamingSessionId(null)}
+            onSubmitRename={(id, title) => void renameSession(id, title)}
             t={t}
           />
         )}
@@ -736,6 +865,8 @@ export function AiChatWindow({
               loading={sessionsQuery.isPending}
               deletingId={deletingSessionId}
               confirmDeleteId={confirmDeleteSessionId}
+              renamingId={renamingSessionId}
+              savingRenameId={savingRenameId}
               onNew={() => {
                 startNewChat();
                 setHistoryOpen(false);
@@ -744,9 +875,18 @@ export function AiChatWindow({
                 selectSession(session);
                 setHistoryOpen(false);
               }}
-              onRequestDelete={setConfirmDeleteSessionId}
+              onRequestDelete={(id) => {
+                setConfirmDeleteSessionId(id);
+                setRenamingSessionId(null);
+              }}
               onCancelDelete={() => setConfirmDeleteSessionId(null)}
               onConfirmDelete={(id) => void deleteSession(id)}
+              onRequestRename={(id) => {
+                setRenamingSessionId(id);
+                setConfirmDeleteSessionId(null);
+              }}
+              onCancelRename={() => setRenamingSessionId(null)}
+              onSubmitRename={(id, title) => void renameSession(id, title)}
               t={t}
             />
           </SessionHistorySheet>
@@ -768,6 +908,15 @@ export function AiChatWindow({
                 expanded={expanded}
                 confirming={confirmingMessageId === msg.id}
                 onConfirm={() => void confirmTool(msg)}
+                busy={busy}
+                isLastAssistant={msg.id === lastAssistantId}
+                regenerating={regenerating}
+                onRegenerate={() => void regenerate()}
+                editing={editingMessageId === msg.id}
+                savingEdit={savingEditId === msg.id}
+                onStartEdit={() => setEditingMessageId(msg.id)}
+                onCancelEdit={() => setEditingMessageId(null)}
+                onSubmitEdit={(text) => void submitEdit(msg.id, text)}
                 t={t}
               />
             ))

@@ -1,16 +1,19 @@
 "use client";
 
+import { useEffect, useRef, useState } from "react";
 import {
+  ArrowsClockwise,
   ArrowSquareOut,
   Lightning,
   MagnifyingGlass,
   Paperclip,
+  PencilSimple,
   Robot,
   Spinner,
 } from "@phosphor-icons/react";
 import { cn } from "@/lib/utils";
 import type { ChatMessage } from "@/lib/api";
-import { extractAttachmentRefs, TOOL_LABELS } from "./constants";
+import { extractAttachmentRefs, MAX_INPUT_LENGTH, TOOL_LABELS } from "./constants";
 import {
   analyzeColumns,
   segmentContent,
@@ -25,12 +28,36 @@ export function MessageBubble({
   expanded,
   confirming,
   onConfirm,
+  /** True while any turn (send / regenerate / edit / tool confirm) is in flight;
+   * gates the edit + regenerate affordances so only one action runs at a time. */
+  busy = false,
+  /** Marks the newest assistant reply so only it exposes the regenerate control. */
+  isLastAssistant = false,
+  /** The regenerate request for this (last) assistant reply is in flight. */
+  regenerating = false,
+  onRegenerate,
+  /** This user message is currently in the inline edit-and-rerun editor. */
+  editing = false,
+  /** The edit request for this user message is in flight. */
+  savingEdit = false,
+  onStartEdit,
+  onCancelEdit,
+  onSubmitEdit,
   t,
 }: {
   message: ChatMessage;
   expanded: boolean;
   confirming: boolean;
   onConfirm: () => void;
+  busy?: boolean;
+  isLastAssistant?: boolean;
+  regenerating?: boolean;
+  onRegenerate?: () => void;
+  editing?: boolean;
+  savingEdit?: boolean;
+  onStartEdit?: () => void;
+  onCancelEdit?: () => void;
+  onSubmitEdit?: (text: string) => void;
   t: (k: string) => string;
 }) {
   const isUser = message.role === "user";
@@ -69,10 +96,29 @@ export function MessageBubble({
   const displayText = parsed ? parsed.text : message.content;
   const attachmentNames = parsed?.filenames ?? [];
 
+  // Only persisted user messages can be edited-and-rerun. Optimistic drafts
+  // (opt-*) have no server id yet, so the edit affordance stays hidden for them.
+  const canEdit =
+    isUser && !!onSubmitEdit && !message.id.startsWith("opt-");
+
+  // Swap the bubble for the inline edit-and-rerun editor when armed.
+  if (canEdit && editing) {
+    return (
+      <UserEditEditor
+        initialText={displayText}
+        saving={savingEdit}
+        expanded={expanded}
+        onCancel={() => onCancelEdit?.()}
+        onSubmit={(text) => onSubmitEdit?.(text)}
+        t={t}
+      />
+    );
+  }
+
   return (
     <div
       className={cn(
-        "flex items-end gap-2",
+        "group flex items-end gap-2",
         isUser ? "flex-row-reverse" : "flex-row",
       )}
     >
@@ -109,6 +155,146 @@ export function MessageBubble({
             ))}
           </ul>
         )}
+      </div>
+
+      {/* Edit-and-rerun affordance: reveals on hover/focus so many user
+          bubbles stay quiet, but the button remains keyboard-reachable. */}
+      {canEdit && (
+        <button
+          type="button"
+          onClick={() => onStartEdit?.()}
+          disabled={busy}
+          aria-label={t("editMessage")}
+          title={t("editMessage")}
+          className={cn(
+            "mb-0.5 shrink-0 self-end rounded-lg p-1 opacity-0 outline-none transition",
+            "text-[var(--text-muted)] hover:bg-[var(--bg-subtle)] hover:text-[var(--text-primary)]",
+            "group-hover:opacity-100 focus-visible:opacity-100 focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)]/40",
+            "disabled:cursor-not-allowed disabled:hover:bg-transparent",
+          )}
+        >
+          <PencilSimple aria-hidden weight="bold" className="size-3.5" />
+        </button>
+      )}
+
+      {/* Regenerate the newest assistant reply. */}
+      {isLastAssistant && onRegenerate && (
+        <button
+          type="button"
+          onClick={onRegenerate}
+          disabled={busy}
+          aria-label={t("regenerate")}
+          title={t("regenerate")}
+          className={cn(
+            "mb-0.5 shrink-0 self-end rounded-lg p-1 outline-none transition",
+            "text-[var(--text-muted)] hover:bg-[var(--bg-subtle)] hover:text-[var(--text-primary)]",
+            "focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)]/40",
+            "disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:bg-transparent",
+          )}
+        >
+          {regenerating ? (
+            <Spinner aria-hidden weight="bold" className="size-3.5 animate-spin" />
+          ) : (
+            <ArrowsClockwise aria-hidden weight="bold" className="size-3.5" />
+          )}
+        </button>
+      )}
+    </div>
+  );
+}
+
+/**
+ * Inline edit-and-rerun editor for a user message. Focuses the textarea (caret
+ * at end) on mount; Esc cancels, Cmd/Ctrl+Enter saves, and the Save button is
+ * blocked while the text is empty or a save is in flight. Editing truncates and
+ * replays the conversation server-side, so the helper line warns the user.
+ */
+function UserEditEditor({
+  initialText,
+  saving,
+  expanded,
+  onCancel,
+  onSubmit,
+  t,
+}: {
+  initialText: string;
+  saving: boolean;
+  expanded: boolean;
+  onCancel: () => void;
+  onSubmit: (text: string) => void;
+  t: (k: string) => string;
+}) {
+  const [draft, setDraft] = useState(initialText);
+  const ref = useRef<HTMLTextAreaElement>(null);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (el) {
+      el.focus();
+      el.setSelectionRange(el.value.length, el.value.length);
+    }
+  }, []);
+
+  const valid = draft.trim().length > 0;
+
+  function submit() {
+    if (!valid || saving) return;
+    onSubmit(draft.trim());
+  }
+
+  return (
+    <div className="flex flex-col items-end gap-1">
+      <div
+        className={cn(
+          "w-full rounded-2xl rounded-br-sm border border-[var(--brand-primary)]/45 bg-[var(--glass-surface-heavy)] p-2",
+          expanded ? "max-w-[min(72ch,92%)]" : "max-w-[92%]",
+        )}
+      >
+        <textarea
+          ref={ref}
+          value={draft}
+          onChange={(e) => setDraft(e.target.value.slice(0, MAX_INPUT_LENGTH))}
+          onKeyDown={(e) => {
+            if (e.key === "Escape") {
+              e.preventDefault();
+              onCancel();
+            } else if (e.key === "Enter" && (e.metaKey || e.ctrlKey)) {
+              e.preventDefault();
+              submit();
+            }
+          }}
+          rows={2}
+          disabled={saving}
+          aria-label={t("editMessage")}
+          className="w-full resize-none rounded-lg bg-transparent px-1 py-0.5 text-sm leading-relaxed text-[var(--text-primary)] outline-none disabled:opacity-60"
+          style={{ maxHeight: "160px" }}
+        />
+        <div className="mt-1.5 flex items-end justify-between gap-2">
+          <p className="min-w-0 flex-1 text-[11px] leading-tight text-[var(--text-muted)]">
+            {t("editRerunHint")}
+          </p>
+          <div className="flex shrink-0 items-center gap-1.5">
+            <button
+              type="button"
+              onClick={onCancel}
+              disabled={saving}
+              className="rounded-md px-2 py-1 text-xs font-semibold text-[var(--text-secondary)] outline-none transition-colors hover:bg-[var(--bg-subtle)] focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)]/40 disabled:opacity-60"
+            >
+              {t("cancel")}
+            </button>
+            <button
+              type="button"
+              onClick={submit}
+              disabled={!valid || saving}
+              className="inline-flex items-center gap-1.5 rounded-md bg-[var(--brand-primary)] px-2.5 py-1 text-xs font-semibold text-white outline-none transition-colors hover:bg-[var(--brand-primary)]/90 focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)]/40 disabled:cursor-not-allowed disabled:opacity-60"
+            >
+              {saving && (
+                <Spinner aria-hidden weight="bold" className="size-3 animate-spin" />
+              )}
+              {t("editSave")}
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   );
