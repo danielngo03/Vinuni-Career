@@ -5,13 +5,13 @@ from __future__ import annotations
 from fastapi import APIRouter, FastAPI
 
 from app.ai.agents.api import router as ai_workforce_router
-from app.ai.energy.api import admin_router as ai_energy_admin_router
-from app.ai.energy.api import member_router as ai_energy_member_router
 from app.api import health
 from app.modules.account.api import router as account_router
 from app.modules.advertising.api import router as advertising_router
 from app.modules.ai_assistant.api.router import router as ai_assistant_router
 from app.modules.ai_assistant.api.router import usage_router as ai_usage_router
+from app.modules.ai_energy.api.router import admin_router as ai_energy_admin_router
+from app.modules.ai_energy.api.router import member_router as ai_energy_member_router
 from app.modules.ai_ops.api import router as ai_ops_router
 from app.modules.ai_settings.api import router as ai_settings_router
 from app.modules.analytics.api.partner_router import router as analytics_partner_router

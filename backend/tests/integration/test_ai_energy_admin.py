@@ -1,7 +1,7 @@
 """AI energy WRITE path — allocation, wallet grant, and top-up purchases.
 
-Covers (partner AI overhaul, ``app.ai.energy.admin_service`` + the member sub-cap
-enforcement added to ``app.ai.energy.service``):
+Covers (partner AI overhaul, ``app.modules.ai_energy.application.admin_service`` +
+the member sub-cap enforcement in ``app.ai.energy.service``):
 
 (a) admin sets a member weekly sub-cap → the overview + the member's snapshot
     reflect it, and the member is gated on their OWN allocation (not just the org
@@ -21,8 +21,8 @@ import uuid
 from datetime import UTC, datetime
 
 import pytest
-from app.ai.energy import admin_service
 from app.ai.energy import service as energy_service
+from app.modules.ai_energy.application import admin_service
 from app.ai.energy.models import (
     SCOPE_DEPARTMENT,
     SCOPE_ORG,

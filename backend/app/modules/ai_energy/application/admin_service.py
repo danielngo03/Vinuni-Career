@@ -6,6 +6,11 @@ per-member sub-cap and gates calls. This module is the WRITE path that lets a
 partner admin allocate the org pool to departments/members, and lets a member
 (or admin) buy more energy when a scope runs out.
 
+Module boundary: this is ``app.modules.ai_energy`` — it imports the shared
+``app.ai.energy`` infra (models + meter) plus ``app.modules.auth`` /
+``app.modules.organization``. The shared ``app.ai`` layer must NOT import
+``app.modules``, so the write path lives here, not under ``app/ai``.
+
 RBAC + audit + tenant isolation live HERE (not in routers):
 
 - **Management** (``billing:manage``, org-scoped): the org energy overview,

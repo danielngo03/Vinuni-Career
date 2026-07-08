@@ -1,7 +1,8 @@
 """HTTP surface for the AI energy WRITE path (partner AI overhaul).
 
 Two routers, both auth-gated (RBAC + audit + tenant isolation live in
-``app.ai.energy.admin_service``, never here — routers do HTTP only):
+``app.modules.ai_energy.application.admin_service``, never here — routers do
+HTTP only):
 
 Admin (``/organizations/ai-energy``, management / finance gated):
   GET  /organizations/ai-energy/overview              Org pool + dept/member allocations
@@ -27,8 +28,8 @@ from fastapi import APIRouter, Depends, Query, status
 from pydantic import BaseModel, Field
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from app.ai.energy import admin_service
 from app.core.db import get_db_session
+from app.modules.ai_energy.application import admin_service
 from app.modules.auth.api.deps import CurrentAuth, get_current_auth
 from app.shared.responses import success
 
