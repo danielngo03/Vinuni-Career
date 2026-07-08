@@ -86,5 +86,26 @@ Transcripts are TEXT ONLY — audio is never persisted.
   true low-latency speech-to-speech is a superadmin config away (native key).
 - The feature inherits all existing AI safety/observability rails for free.
 - Deferred: the per-university enable/quota config store (V1 uses global
-  `feature_flags` + code caps), the AI-ops `ai_eval_samples` reviewer UI, and the
-  concrete native realtime ephemeral-mint adapters (scaffolded + disabled).
+  `feature_flags` + code caps) and the AI-ops `ai_eval_samples` reviewer UI.
+
+## Update — 2026-07-09 (realtime wired + adaptive + analytics)
+
+- **Realtime V2 is now implemented, not just scaffolded.** `GeminiLiveProvider`
+  mints a Gemini Live ephemeral token via `POST /v1alpha/auth_tokens` with
+  `bidiGenerateContentSetup` constraints (model + system instruction locked
+  server-side; request format verified against Google's live endpoint). Reads
+  `GEMINI_API_KEY`; default model `gemini-2.5-flash-preview-native-audio-dialog`.
+  Missing/invalid key → graceful fallback to browser-voice. Frontend
+  `gemini-live-client.ts` streams mic PCM16@16kHz ⇄ plays PCM16@24kHz with
+  barge-in and maps input/output transcription to stored turns. Status: API
+  wired; browser-verify with a real key + mic.
+- **Auto-adaptive interview (no manual mode picker).** `grounding_service`
+  deterministically infers `focus` (technical/behavioral/mixed) + `difficulty`
+  (foundational/intermediate/advanced) from the JD; the interviewer prompt adapts
+  and runs natural phases. The CV-JD match drives the interview, not a form.
+- **Student progress** (`GET /mock-interview/progress`): recurring coaching
+  themes (gaps + strengths, with counts) + focus mix across completed sessions —
+  the score-free progress signal. Frontend adds a progress summary, "practice
+  again", and PDF export of the coaching report.
+- **Deeper university analytics**: per-day trend, most-practiced jobs, and focus
+  mix added to the aggregate stats (still PII-free) with monochrome charts.
