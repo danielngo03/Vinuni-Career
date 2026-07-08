@@ -13,13 +13,18 @@ gated ``confirmation_required`` in ``specs.py``.
 
 from __future__ import annotations
 
+import re
 import uuid as _uuid
-from datetime import UTC, datetime
+from datetime import UTC, datetime, timedelta
 
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.shared.exceptions import AuthRequiredError, PermissionDeniedError, ResourceNotFoundError
 from app.shared.permissions import Principal
+
+# xlsx MIME + how long a generated download link stays valid.
+_XLSX_MIME = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+_EXPORT_TTL_HOURS = 24
 
 
 def _parse_uuid(raw: str | None) -> _uuid.UUID | None:
@@ -29,6 +34,89 @@ def _parse_uuid(raw: str | None) -> _uuid.UUID | None:
         return _uuid.UUID(str(raw).strip())
     except ValueError:
         return None
+
+
+def _slug(value: str, *, fallback: str = "ung-vien") -> str:
+    """ASCII-fold a title into a filename-safe slug (Vietnamese-aware)."""
+    import unicodedata
+
+    ascii_only = (
+        unicodedata.normalize("NFKD", value or "")
+        .encode("ascii", "ignore")
+        .decode("ascii")
+    )
+    slug = re.sub(r"[^a-z0-9]+", "-", ascii_only.lower()).strip("-")
+    return slug[:60] or fallback
+
+
+async def export_applications(session: AsyncSession, principal: Principal, args: dict) -> dict:
+    """Generate a real .xlsx of a job's applicants (filters + selectable columns).
+
+    Stores the file server-side and returns a ``render`` artifact carrying only
+    the RBAC-checked download path (never raw bytes/paths). Org-scoped and gated
+    on ``applications:export`` inside ``export_service`` (also enforced by the
+    tool-loop RBAC gate before dispatch).
+    """
+    if not principal.is_authenticated or principal.org_id is None:
+        return {"ok": False, "error": "partner_only"}
+    job_id = _parse_uuid(args.get("job_id"))
+    if job_id is None:
+        return {"ok": False, "error": "missing_job_id"}
+
+    columns = args.get("columns")
+    if isinstance(columns, str):
+        columns = [c.strip() for c in columns.split(",") if c.strip()]
+    if not isinstance(columns, list):
+        columns = None
+
+    from app.modules.ai_assistant.domain.models import ChatExportFile
+    from app.modules.recruitment.application import export_service
+
+    try:
+        content, row_count, resolved_cols, job_title = (
+            await export_service.export_applications_xlsx(
+                session,
+                principal=principal,
+                job_id=job_id,
+                stage=args.get("stage"),
+                status=args.get("status"),
+                columns=columns,
+                locale=str(args.get("locale") or "vi"),
+            )
+        )
+    except PermissionDeniedError:
+        return {"ok": False, "error": "permission_denied"}
+    except (ResourceNotFoundError, AuthRequiredError):
+        return {"ok": False, "error": "job_not_found"}
+
+    filename = f"ung-vien-{_slug(job_title)}.xlsx"
+    export = ChatExportFile(
+        id=_uuid.uuid4(),
+        user_id=principal.user_id,
+        org_id=principal.org_id,
+        filename=filename,
+        mime=_XLSX_MIME,
+        content=content,
+        row_count=row_count,
+        expires_at=datetime.now(UTC) + timedelta(hours=_EXPORT_TTL_HOURS),
+    )
+    session.add(export)
+
+    return {
+        "ok": True,
+        "row_count": row_count,
+        "columns": resolved_cols,
+        "job_title": job_title,
+        "filename": filename,
+        # FE-only render artifact (stripped before the model sees the result).
+        "render": {
+            "kind": "download",
+            "download_path": f"/ai/chat/exports/{export.id}",
+            "filename": filename,
+            "row_count": row_count,
+            "format": "xlsx",
+        },
+    }
 
 
 async def get_partner_pipeline_summary(session: AsyncSession, principal: Principal) -> dict:

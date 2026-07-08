@@ -47,6 +47,7 @@ SUPPORTED_TOOL_NAMES = frozenset(
         "generate_screening_brief",
         "get_upcoming_partner_events",
         "move_candidate_stage",
+        "export_applications",
     }
 )
 
@@ -168,6 +169,8 @@ async def _execute_tool(
             return await partner.get_upcoming_partner_events(session, principal, args)
         if name == "move_candidate_stage":
             return await partner.move_candidate_stage(session, principal, args)
+        if name == "export_applications":
+            return await partner.export_applications(session, principal, args)
 
         # --- CV / AI tools ---
         if name == "get_my_cvs":

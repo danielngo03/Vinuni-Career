@@ -306,6 +306,9 @@ async def run_native_turn(
     iterations = 0
     tool_calls_used = 0
     final_text: str | None = None
+    # Render-worthy artifacts (download buttons, charts, ...) surfaced from tool
+    # results to the FE via the final assistant message — NOT fed to the model.
+    artifacts: list[dict] = []
 
     while iterations < MAX_ITERATIONS:
         iterations += 1
@@ -381,6 +384,11 @@ async def run_native_turn(
             yield {"type": "tool_call", "name": name}
             result = await dispatch_tool(name, args, session=session, principal=principal)
             tool_calls_used += 1
+            # A ``render`` block is a FE-only artifact (download/chart). Pull it
+            # out so it reaches the client but not the model's context/cost.
+            render = result.pop("render", None) if isinstance(result, dict) else None
+            if isinstance(render, dict):
+                artifacts.append(render)
             yield {"type": "tool_result", "name": name, "ok": bool(result.get("ok"))}
             persist_tool_result(
                 session, chat=chat, tool_name=name, tool_args=args, result=result
@@ -400,6 +408,9 @@ async def run_native_turn(
         session_id=chat.id,
         role="assistant",
         content=final_text,
+        # Attach render artifacts (downloads/charts) for the FE. Reuses the
+        # existing tool_result JSON column; serialize_message forwards it.
+        tool_result={"artifacts": artifacts} if artifacts else None,
         created_at=datetime.now(UTC),
     )
     session.add(assistant_msg)

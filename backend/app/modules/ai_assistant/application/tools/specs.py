@@ -933,6 +933,54 @@ TOOL_SPECS: dict[str, ToolSpec] = {
         ),
         audit_event_type="TOOL_MOVE_CANDIDATE_STAGE",
     ),
+    "export_applications": ToolSpec(
+        name="export_applications",
+        description=(
+            "Export the applicants of one of the partner's OWN jobs to a real "
+            "Excel (.xlsx) file the recruiter can download. Use this when the "
+            "recruiter asks to export/download/'xuất file' the applicant or "
+            "application list for a job, optionally filtered by pipeline stage or "
+            "status, and optionally with a chosen set of columns. Requires job_id "
+            "from a prior get_partner_jobs result. Returns a download link (shown "
+            "to the recruiter as a button) plus the row count — never raw file "
+            "bytes. Selectable columns: applicant, email, status, stage, "
+            "applied_at, last_status_at, rejection_reason, is_anonymous, "
+            "application_id. Only available to partner users with export rights."
+        ),
+        parameters={
+            "type": "object",
+            "properties": {
+                "job_id": {"type": "string", "description": "Job UUID owned by the partner's org"},
+                "stage": {
+                    "type": "string",
+                    "description": "Optional pipeline-stage name filter (e.g. 'Phỏng vấn')",
+                },
+                "status": {
+                    "type": "string",
+                    "description": "Optional application-status filter (e.g. 'active', 'rejected')",
+                },
+                "columns": {
+                    "type": "array",
+                    "items": {"type": "string"},
+                    "description": (
+                        "Optional subset/order of columns. Valid keys: applicant, email, "
+                        "status, stage, applied_at, last_status_at, rejection_reason, "
+                        "is_anonymous, application_id. Omit for a sensible default set."
+                    ),
+                },
+            },
+            "required": ["job_id"],
+        },
+        permission_class="read_only",
+        persona=[PARTNER_USER],
+        required_permissions=["authenticated", "role:partner_user", "applications:export"],
+        fallback=(
+            "I couldn't build the export right now. You can export applicants from "
+            "the pipeline board at /partner/pipeline."
+        ),
+        audit_event_type="TOOL_EXPORT_APPLICATIONS",
+        timeout_seconds=25,
+    ),
     "knowledge_base_query": ToolSpec(
         name="knowledge_base_query",
         description=(
