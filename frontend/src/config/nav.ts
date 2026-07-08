@@ -179,6 +179,10 @@ export const WORKSPACE_NAV_GROUPS: Record<Persona, NavGroup[]> = {
         { key: "moderation", href: "/moderation", icon: FileCheck },
         { key: "partners", href: "/partners", icon: Building2 },
         { key: "users", href: "/users", icon: Users },
+        // Org RBAC control plane: departments, staff, roles, invitations.
+        // Superadmin-only this phase (matches /university/team's SuperadminGuard);
+        // distinct from `users` (platform users) — the P4 IA merges them later.
+        { key: "teamAccess", href: "/team", icon: UsersRound, requiresSuperadmin: true },
         { key: "workflowBuilder", href: "/workflow", icon: Workflow },
       ],
     },

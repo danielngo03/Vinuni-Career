@@ -17,6 +17,7 @@ import {
 import { SectionCard } from "@/components/settings/section-card";
 import { ApiError, organizationApi, type OrgDepartment } from "@/lib/api";
 import { useApiErrorMessage } from "@/lib/auth/use-api-error";
+import { useOrgScope, orgScopedKey } from "./org-scope";
 
 type EditState = { mode: "create" } | { mode: "edit"; dept: OrgDepartment } | null;
 
@@ -28,6 +29,7 @@ export function DepartmentsTab() {
   const toast = useToast();
   const qc = useQueryClient();
   const getMessage = useApiErrorMessage();
+  const { orgId } = useOrgScope();
 
   const [edit, setEdit] = useState<EditState>(null);
   const [deleting, setDeleting] = useState<OrgDepartment | null>(null);
@@ -36,8 +38,8 @@ export function DepartmentsTab() {
   const [nameError, setNameError] = useState<string | null>(null);
 
   const query = useQuery({
-    queryKey: ["org", "departments"],
-    queryFn: () => organizationApi.listDepartments(),
+    queryKey: orgScopedKey(["org", "departments"], orgId),
+    queryFn: () => organizationApi.listDepartments(orgId),
     retry: false,
   });
 
@@ -63,13 +65,20 @@ export function DepartmentsTab() {
   const save = useMutation({
     mutationFn: () => {
       if (edit?.mode === "edit") {
-        return organizationApi.updateDepartment(edit.dept.id, {
-          name,
-          parent_id: parentId || null,
-          clear_parent: !parentId,
-        });
+        return organizationApi.updateDepartment(
+          edit.dept.id,
+          {
+            name,
+            parent_id: parentId || null,
+            clear_parent: !parentId,
+          },
+          orgId,
+        );
       }
-      return organizationApi.createDepartment({ name, parent_id: parentId || null });
+      return organizationApi.createDepartment(
+        { name, parent_id: parentId || null },
+        orgId,
+      );
     },
     onSuccess: () => {
       setEdit(null);
@@ -80,7 +89,7 @@ export function DepartmentsTab() {
   });
 
   const del = useMutation({
-    mutationFn: (d: OrgDepartment) => organizationApi.deleteDepartment(d.id),
+    mutationFn: (d: OrgDepartment) => organizationApi.deleteDepartment(d.id, orgId),
     onSuccess: () => {
       setDeleting(null);
       toast.show({ tone: "success", title: t("deletedToast") });

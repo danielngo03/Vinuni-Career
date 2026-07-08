@@ -18,6 +18,7 @@ import { SectionCard } from "@/components/settings/section-card";
 import { ApiError, organizationApi, type OrgRole, type PermissionInput } from "@/lib/api";
 import { useApiErrorMessage } from "@/lib/auth/use-api-error";
 import { PermissionPicker } from "./permission-picker";
+import { useOrgScope, orgScopedKey } from "./org-scope";
 
 type EditState =
   | { mode: "create" }
@@ -49,6 +50,7 @@ export function RolesTab({
   const toast = useToast();
   const qc = useQueryClient();
   const getMessage = useApiErrorMessage();
+  const { orgId } = useOrgScope();
 
   const canCreate = holdsWildcard || effective.has("roles:create") || effective.has("roles:*");
   const canUpdate = holdsWildcard || effective.has("roles:update") || effective.has("roles:*");
@@ -62,8 +64,8 @@ export function RolesTab({
   const [nameError, setNameError] = useState<string | null>(null);
 
   const query = useQuery({
-    queryKey: ["org", "roles"],
-    queryFn: () => organizationApi.listRoles(),
+    queryKey: orgScopedKey(["org", "roles"], orgId),
+    queryFn: () => organizationApi.listRoles(orgId),
     retry: false,
   });
 
@@ -90,13 +92,20 @@ export function RolesTab({
   const save = useMutation({
     mutationFn: () => {
       if (edit?.mode === "edit") {
-        return organizationApi.updateRole(edit.role.id, {
-          name: edit.role.is_system ? undefined : name,
-          description: description || null,
-          permissions: edit.role.is_system ? undefined : perms,
-        });
+        return organizationApi.updateRole(
+          edit.role.id,
+          {
+            name: edit.role.is_system ? undefined : name,
+            description: description || null,
+            permissions: edit.role.is_system ? undefined : perms,
+          },
+          orgId,
+        );
       }
-      return organizationApi.createRole({ name, description: description || null, permissions: perms });
+      return organizationApi.createRole(
+        { name, description: description || null, permissions: perms },
+        orgId,
+      );
     },
     onSuccess: () => {
       setEdit(null);
@@ -107,7 +116,7 @@ export function RolesTab({
   });
 
   const del = useMutation({
-    mutationFn: (r: OrgRole) => organizationApi.deleteRole(r.id),
+    mutationFn: (r: OrgRole) => organizationApi.deleteRole(r.id, orgId),
     onSuccess: () => {
       setDeleting(null);
       toast.show({ tone: "success", title: t("deletedToast") });

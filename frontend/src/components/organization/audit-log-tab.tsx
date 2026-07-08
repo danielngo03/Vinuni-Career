@@ -8,6 +8,7 @@ import { Button, DataTable, EmptyState, Input, type Column } from "@/components/
 import { SectionCard } from "@/components/settings/section-card";
 import { ApiError, organizationApi, type AuditLogEntry } from "@/lib/api";
 import { formatDateTime } from "@/lib/format";
+import { useOrgScope, orgScopedKey } from "./org-scope";
 
 /** Human-readable rendering of a dotted audit action code, e.g.
  * "membership.deactivated" -> "membership deactivated". Never shows raw enum
@@ -21,6 +22,7 @@ export function AuditLogTab() {
   const t = useTranslations("team.auditLog");
   const tc = useTranslations("common");
   const locale = useLocale();
+  const { orgId } = useOrgScope();
 
   const [actionFilter, setActionFilter] = useState("");
   const [actorFilter, setActorFilter] = useState("");
@@ -28,12 +30,15 @@ export function AuditLogTab() {
   const [appliedActor, setAppliedActor] = useState("");
 
   const query = useInfiniteQuery({
-    queryKey: ["org", "audit-log", appliedAction, appliedActor],
+    queryKey: orgScopedKey(["org", "audit-log", appliedAction, appliedActor], orgId),
     queryFn: ({ pageParam }) =>
-      organizationApi.listAuditLog({
-        cursor: pageParam,
-        action: appliedAction || undefined,
-      }),
+      organizationApi.listAuditLog(
+        {
+          cursor: pageParam,
+          action: appliedAction || undefined,
+        },
+        orgId,
+      ),
     initialPageParam: undefined as string | undefined,
     getNextPageParam: (last) => last.page.next_cursor ?? undefined,
     retry: false,

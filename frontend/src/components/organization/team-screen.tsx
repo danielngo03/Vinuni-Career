@@ -16,7 +16,7 @@ import {
   ClockCounterClockwise,
 } from "@phosphor-icons/react";
 import Link from "next/link";
-import { Tabs, TabPanel, EmptyState, type TabItem } from "@/components/ui";
+import { Tabs, TabPanel, EmptyState, Skeleton, type TabItem } from "@/components/ui";
 import { PageHeader } from "@/components/layout/page-header";
 import { ApiError, organizationApi } from "@/lib/api";
 import { useAuthStore } from "@/stores/auth-store";
@@ -26,31 +26,54 @@ import { DepartmentsTab } from "./departments-tab";
 import { InvitationsTab } from "./invitations-tab";
 import { OwnershipTab } from "./ownership-tab";
 import { AuditLogTab } from "./audit-log-tab";
+import { OrgScopeProvider, orgScopedKey } from "./org-scope";
 
 const TABS_ID = "team";
 
-export function TeamScreen() {
+/**
+ * Shared org team/RBAC screen, reused by two personas via `source`:
+ *
+ * - `"self"` (default — `/partner/team`): loads the caller's own org via
+ *   `GET /organizations` and threads no `?org_id=`. Byte-for-byte unchanged.
+ * - `"managed"` (`/university/team`): loads the org the caller manages via
+ *   `GET /organizations/current` (for a superadmin: the single university org),
+ *   then threads its id as `?org_id=` into every sub-query/mutation so a pure
+ *   superadmin and a university-admin member both operate on the right org.
+ */
+export function TeamScreen({ source = "self" }: { source?: "self" | "managed" }) {
   const t = useTranslations("team");
   const tStates = useTranslations("states");
   const [tab, setTab] = useState("members");
 
   const user = useAuthStore((s) => s.user);
   const isSuperadmin = user?.isSuperadmin ?? false;
+  const isManaged = source === "managed";
 
-  // Shared queries (deduped by key with the tabs).
+  // Discover the org this screen operates on. Managed = "the org I manage"
+  // (superadmin -> single university org); self = the caller's own org.
   const orgQuery = useQuery({
-    queryKey: ["org", "profile"],
-    queryFn: () => organizationApi.get(),
+    queryKey: isManaged ? ["org", "managed-profile"] : ["org", "profile"],
+    queryFn: () => (isManaged ? organizationApi.getCurrent() : organizationApi.get()),
     retry: false,
   });
+
+  // The org id threaded as `?org_id=` everywhere (null on the partner/self path).
+  // Sub-queries wait until it resolves so a superadmin never hits an endpoint
+  // without the org context it needs.
+  const scopedOrgId = isManaged ? (orgQuery.data?.id ?? null) : null;
+  const scopeReady = !isManaged || scopedOrgId !== null;
+
+  // Shared queries (deduped by key with the tabs; org-scoped for the managed path).
   const rolesQuery = useQuery({
-    queryKey: ["org", "roles"],
-    queryFn: () => organizationApi.listRoles(),
+    queryKey: orgScopedKey(["org", "roles"], scopedOrgId),
+    queryFn: () => organizationApi.listRoles(scopedOrgId),
+    enabled: scopeReady,
     retry: false,
   });
   const membersQuery = useQuery({
-    queryKey: ["org", "members"],
-    queryFn: () => organizationApi.listMembers(),
+    queryKey: orgScopedKey(["org", "members"], scopedOrgId),
+    queryFn: () => organizationApi.listMembers(null, scopedOrgId),
+    enabled: scopeReady,
     retry: false,
   });
 
@@ -70,13 +93,18 @@ export function TeamScreen() {
     return { effective: set as ReadonlySet<string>, holdsWildcard: set.has("*:*") };
   }, [membersQuery.data, rolesQuery.data, user?.email, isSuperadmin]);
 
+  // University superadmins manage the whole org's RBAC; partner admins manage
+  // their own org's team. The page label reflects the context.
+  const title = isManaged ? t("universityTitle") : t("title");
+  const subtitle = isManaged ? t("universitySubtitle") : t("subtitle");
+
   // Gate on the org query: 403 → permission, 401 → auth.
   if (orgQuery.isError && orgQuery.error instanceof ApiError) {
     const err = orgQuery.error;
     if (err.isPermissionError) {
       return (
         <>
-          <PageHeader title={t("title")} description={t("subtitle")} />
+          <PageHeader title={title} description={subtitle} />
           <EmptyState
             kind="permission"
             icon={ShieldWarning}
@@ -89,7 +117,7 @@ export function TeamScreen() {
     if (err.isAuthError) {
       return (
         <>
-          <PageHeader title={t("title")} description={t("subtitle")} />
+          <PageHeader title={title} description={subtitle} />
           <EmptyState
             kind="auth"
             icon={SignIn}
@@ -99,15 +127,48 @@ export function TeamScreen() {
         </>
       );
     }
+    // Managed path resolves its org id from this query before any sub-query can
+    // run, so a generic failure must surface here (rather than leaving the tabs
+    // in a perpetual skeleton). The self/partner path falls through unchanged.
+    if (isManaged) {
+      return (
+        <>
+          <PageHeader title={title} description={subtitle} />
+          <EmptyState
+            kind="error"
+            icon={Warning}
+            title={tStates("errorTitle")}
+            description={tStates("errorBody")}
+          />
+        </>
+      );
+    }
   }
 
-  const orgType = orgQuery.data?.org_type ?? "partner";
+  // Managed path: hold the tabs until the org id resolves so no sub-query fires
+  // without the `?org_id=` context a superadmin needs.
+  if (isManaged && !scopeReady && !orgQuery.isError) {
+    return (
+      <>
+        <PageHeader title={title} description={subtitle} />
+        <Skeleton className="mb-4 h-10 w-full max-w-md" />
+        <Skeleton className="h-64 w-full" />
+      </>
+    );
+  }
+
+  const orgType = orgQuery.data?.org_type ?? (isManaged ? "university" : "partner");
   const maxSeats = orgQuery.data?.max_team_members ?? 4;
   const activeMembers = membersQuery.data?.data.filter(
     (m) => m.status === "active" || m.status === "pending"
   ).length ?? 0;
   const seatLimitEnabled = maxSeats !== -1;
   const atSeatLimit = seatLimitEnabled && activeMembers >= maxSeats;
+
+  // Ownership transfer is a per-org designated-owner action (partner path). For
+  // the university control plane the institution owns the org and superadmins
+  // hold wildcard control, so the ownership tab is omitted there.
+  const showOwnership = orgType !== "university";
 
   const items: TabItem[] = [
     {
@@ -130,11 +191,15 @@ export function TeamScreen() {
       label: t("tabs.invitations"),
       icon: <EnvelopeSimple aria-hidden weight="duotone" className="size-4" />,
     },
-    {
-      value: "ownership",
-      label: t("tabs.ownership"),
-      icon: <Crown aria-hidden weight="duotone" className="size-4" />,
-    },
+    ...(showOwnership
+      ? [
+          {
+            value: "ownership",
+            label: t("tabs.ownership"),
+            icon: <Crown aria-hidden weight="duotone" className="size-4" />,
+          } satisfies TabItem,
+        ]
+      : []),
     {
       value: "auditLog",
       label: t("tabs.auditLog"),
@@ -143,8 +208,8 @@ export function TeamScreen() {
   ];
 
   return (
-    <>
-      <PageHeader title={t("title")} description={t("subtitle")} />
+    <OrgScopeProvider orgId={scopedOrgId}>
+      <PageHeader title={title} description={subtitle} />
 
       {/* Seat usage banner — shown for partner orgs with a seat limit */}
       {seatLimitEnabled && orgQuery.data?.org_type === "partner" && (
@@ -229,12 +294,14 @@ export function TeamScreen() {
           holdsWildcard={holdsWildcard}
         />
       </TabPanel>
-      <TabPanel tabsId={TABS_ID} value="ownership" active={tab === "ownership"}>
-        <OwnershipTab />
-      </TabPanel>
+      {showOwnership && (
+        <TabPanel tabsId={TABS_ID} value="ownership" active={tab === "ownership"}>
+          <OwnershipTab />
+        </TabPanel>
+      )}
       <TabPanel tabsId={TABS_ID} value="auditLog" active={tab === "auditLog"}>
         <AuditLogTab />
       </TabPanel>
-    </>
+    </OrgScopeProvider>
   );
 }

@@ -24,6 +24,7 @@ import { zodResolver } from "@/lib/validation/resolver";
 import { grants, invitationSchema, type InvitationValues } from "@/lib/validation/organization";
 import { formatDateTime } from "@/lib/format";
 import { PermissionPreviewModal } from "./permission-preview-panel";
+import { useOrgScope, orgScopedKey } from "./org-scope";
 
 const STATUS_TONE: Record<string, StatusTone> = {
   pending: "pending",
@@ -68,6 +69,7 @@ export function InvitationsTab({
   const toast = useToast();
   const qc = useQueryClient();
   const getMessage = useApiErrorMessage();
+  const { orgId } = useOrgScope();
 
   const [createOpen, setCreateOpen] = useState(false);
   const [revoking, setRevoking] = useState<OrgInvitation | null>(null);
@@ -75,18 +77,18 @@ export function InvitationsTab({
   const [previewOpen, setPreviewOpen] = useState(false);
 
   const query = useQuery({
-    queryKey: ["org", "invitations"],
-    queryFn: () => organizationApi.listInvitations(),
+    queryKey: orgScopedKey(["org", "invitations"], orgId),
+    queryFn: () => organizationApi.listInvitations(orgId),
     retry: false,
   });
   const rolesQuery = useQuery({
-    queryKey: ["org", "roles"],
-    queryFn: () => organizationApi.listRoles(),
+    queryKey: orgScopedKey(["org", "roles"], orgId),
+    queryFn: () => organizationApi.listRoles(orgId),
     retry: false,
   });
   const deptsQuery = useQuery({
-    queryKey: ["org", "departments"],
-    queryFn: () => organizationApi.listDepartments(),
+    queryKey: orgScopedKey(["org", "departments"], orgId),
+    queryFn: () => organizationApi.listDepartments(orgId),
     retry: false,
   });
 
@@ -106,12 +108,18 @@ export function InvitationsTab({
   const watchedDeptId = useWatch({ control, name: "department_id" });
 
   const hypotheticalPreview = useQuery({
-    queryKey: ["org", "permission-preview", "hypothetical", watchedRoleId, watchedDeptId],
+    queryKey: orgScopedKey(
+      ["org", "permission-preview", "hypothetical", watchedRoleId, watchedDeptId],
+      orgId,
+    ),
     queryFn: () =>
-      organizationApi.previewHypotheticalPermissions({
-        role_ids: watchedRoleId ? [watchedRoleId] : [],
-        department_ids: watchedDeptId ? [watchedDeptId] : [],
-      }),
+      organizationApi.previewHypotheticalPermissions(
+        {
+          role_ids: watchedRoleId ? [watchedRoleId] : [],
+          department_ids: watchedDeptId ? [watchedDeptId] : [],
+        },
+        orgId,
+      ),
     enabled: previewOpen && Boolean(watchedRoleId),
     retry: false,
   });
@@ -122,11 +130,14 @@ export function InvitationsTab({
 
   const create = useMutation({
     mutationFn: (values: InvitationValues) =>
-      organizationApi.createInvitation({
-        email: values.email,
-        role_id: values.role_id || null,
-        department_id: values.department_id || null,
-      }),
+      organizationApi.createInvitation(
+        {
+          email: values.email,
+          role_id: values.role_id || null,
+          department_id: values.department_id || null,
+        },
+        orgId,
+      ),
     onSuccess: () => {
       setCreateOpen(false);
       reset();
@@ -149,7 +160,7 @@ export function InvitationsTab({
   });
 
   const revoke = useMutation({
-    mutationFn: (inv: OrgInvitation) => organizationApi.revokeInvitation(inv.id),
+    mutationFn: (inv: OrgInvitation) => organizationApi.revokeInvitation(inv.id, orgId),
     onSuccess: () => {
       setRevoking(null);
       toast.show({ tone: "success", title: t("revokedToast") });

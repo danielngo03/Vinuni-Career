@@ -29,6 +29,7 @@ import {
 import { useApiErrorMessage } from "@/lib/auth/use-api-error";
 import { grants } from "@/lib/validation/organization";
 import { PermissionPreviewModal } from "./permission-preview-panel";
+import { useOrgScope, orgScopedKey } from "./org-scope";
 
 function sameSet(a: string[], b: string[]): boolean {
   if (a.length !== b.length) return false;
@@ -66,6 +67,7 @@ export function MembersTab({
   const toast = useToast();
   const qc = useQueryClient();
   const getMessage = useApiErrorMessage();
+  const { orgId } = useOrgScope();
 
   const canManage = holdsWildcard || effective.has("members:update") || effective.has("members:*");
   const canRemove = holdsWildcard || effective.has("members:remove") || effective.has("members:*");
@@ -79,13 +81,13 @@ export function MembersTab({
   const [deptIds, setDeptIds] = useState<string[]>([]);
 
   const rolesQuery = useQuery({
-    queryKey: ["org", "roles"],
-    queryFn: () => organizationApi.listRoles(),
+    queryKey: orgScopedKey(["org", "roles"], orgId),
+    queryFn: () => organizationApi.listRoles(orgId),
     retry: false,
   });
   const deptsQuery = useQuery({
-    queryKey: ["org", "departments"],
-    queryFn: () => organizationApi.listDepartments(),
+    queryKey: orgScopedKey(["org", "departments"], orgId),
+    queryFn: () => organizationApi.listDepartments(orgId),
     retry: false,
   });
 
@@ -98,8 +100,8 @@ export function MembersTab({
   // invalidateQueries({queryKey:["org","members"]}) elsewhere still matches
   // this key via react-query's default prefix matching.
   const members = useInfiniteQuery({
-    queryKey: ["org", "members", "paginated"],
-    queryFn: ({ pageParam }) => organizationApi.listMembers(pageParam),
+    queryKey: orgScopedKey(["org", "members", "paginated"], orgId),
+    queryFn: ({ pageParam }) => organizationApi.listMembers(pageParam, orgId),
     initialPageParam: undefined as string | undefined,
     getNextPageParam: (last) => last.page.next_cursor ?? undefined,
     retry: false,
@@ -125,7 +127,7 @@ export function MembersTab({
       } = { version: m.version };
       if (!sameSet(roleIds, m.role_ids)) body.role_ids = roleIds;
       if (!sameSet(deptIds, m.department_ids)) body.department_ids = deptIds;
-      return organizationApi.updateMember(m.id, body);
+      return organizationApi.updateMember(m.id, body, orgId);
     },
     onSuccess: () => {
       setEditing(null);
@@ -136,7 +138,7 @@ export function MembersTab({
   });
 
   const remove = useMutation({
-    mutationFn: (m: OrgMember) => organizationApi.removeMember(m.id),
+    mutationFn: (m: OrgMember) => organizationApi.removeMember(m.id, orgId),
     onSuccess: () => {
       setRemoving(null);
       toast.show({ tone: "success", title: t("removedToast") });
@@ -146,7 +148,7 @@ export function MembersTab({
   });
 
   const deactivate = useMutation({
-    mutationFn: (m: OrgMember) => organizationApi.deactivateMember(m.id),
+    mutationFn: (m: OrgMember) => organizationApi.deactivateMember(m.id, orgId),
     onSuccess: () => {
       setDeactivating(null);
       toast.show({ tone: "success", title: tMember("deactivatedToast") });
@@ -156,7 +158,7 @@ export function MembersTab({
   });
 
   const reactivate = useMutation({
-    mutationFn: (m: OrgMember) => organizationApi.reactivateMember(m.id),
+    mutationFn: (m: OrgMember) => organizationApi.reactivateMember(m.id, orgId),
     onSuccess: () => {
       toast.show({ tone: "success", title: tMember("reactivatedToast") });
       refresh();
@@ -165,8 +167,11 @@ export function MembersTab({
   });
 
   const preview = useQuery({
-    queryKey: ["org", "members", previewing?.id, "permission-preview"],
-    queryFn: () => organizationApi.previewMemberPermissions(previewing!.id),
+    queryKey: orgScopedKey(
+      ["org", "members", previewing?.id, "permission-preview"],
+      orgId,
+    ),
+    queryFn: () => organizationApi.previewMemberPermissions(previewing!.id, orgId),
     enabled: previewing !== null,
     retry: false,
   });

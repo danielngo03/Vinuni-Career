@@ -189,10 +189,30 @@ export interface OrganizationPatch {
 
 /* --------------------------------- Calls ---------------------------------- */
 
+/**
+ * Superadmin cross-org scope helper. When a managed org id is supplied (the
+ * university/superadmin team-screen path), it is appended as `?org_id=` — a
+ * param the backend honours ONLY for superadmins and ignores for everyone else.
+ * When omitted (the partner/self path), this returns `undefined` so the request
+ * is byte-for-byte identical to before: the caller's own `principal.org_id`.
+ */
+function orgScope(orgId?: string | null): { org_id: string } | undefined {
+  return orgId ? { org_id: orgId } : undefined;
+}
+
 export const organizationApi = {
   /* Profile */
   get(): Promise<Organization> {
     return api.get<Organization>("/organizations");
+  },
+  /**
+   * "The org I manage" — for a superadmin this resolves to the single university
+   * org when no `orgId` is given (or the explicit `orgId` for cross-org
+   * management); for an org member it is their own org. Used by the university
+   * team screen to discover the org id it then threads as `?org_id=` everywhere.
+   */
+  getCurrent(orgId?: string | null): Promise<Organization> {
+    return api.get<Organization>("/organizations/current", { query: orgScope(orgId) });
   },
   update(body: OrganizationPatch): Promise<Organization> {
     return api.patch<Organization>("/organizations", body);
@@ -221,15 +241,18 @@ export const organizationApi = {
   },
 
   /* Roles */
-  listRoles(): Promise<OrgRole[]> {
-    return api.get<OrgRole[]>("/organizations/roles");
+  listRoles(orgId?: string | null): Promise<OrgRole[]> {
+    return api.get<OrgRole[]>("/organizations/roles", { query: orgScope(orgId) });
   },
-  createRole(body: {
-    name: string;
-    description?: string | null;
-    permissions: PermissionInput[];
-  }): Promise<OrgRole> {
-    return api.post<OrgRole>("/organizations/roles", body);
+  createRole(
+    body: {
+      name: string;
+      description?: string | null;
+      permissions: PermissionInput[];
+    },
+    orgId?: string | null,
+  ): Promise<OrgRole> {
+    return api.post<OrgRole>("/organizations/roles", body, { query: orgScope(orgId) });
   },
   updateRole(
     id: string,
@@ -238,68 +261,112 @@ export const organizationApi = {
       description?: string | null;
       permissions?: PermissionInput[] | null;
     },
+    orgId?: string | null,
   ): Promise<OrgRole> {
-    return api.patch<OrgRole>(`/organizations/roles/${id}`, body);
+    return api.patch<OrgRole>(`/organizations/roles/${id}`, body, {
+      query: orgScope(orgId),
+    });
   },
-  deleteRole(id: string): Promise<unknown> {
-    return apiFetch(`/organizations/roles/${id}`, { method: "DELETE" });
+  deleteRole(id: string, orgId?: string | null): Promise<unknown> {
+    return apiFetch(`/organizations/roles/${id}`, {
+      method: "DELETE",
+      query: orgScope(orgId),
+    });
   },
 
   /* Departments */
-  listDepartments(): Promise<OrgDepartment[]> {
-    return api.get<OrgDepartment[]>("/organizations/departments");
+  listDepartments(orgId?: string | null): Promise<OrgDepartment[]> {
+    return api.get<OrgDepartment[]>("/organizations/departments", {
+      query: orgScope(orgId),
+    });
   },
-  createDepartment(body: {
-    name: string;
-    parent_id?: string | null;
-  }): Promise<OrgDepartment> {
-    return api.post<OrgDepartment>("/organizations/departments", body);
+  createDepartment(
+    body: {
+      name: string;
+      parent_id?: string | null;
+    },
+    orgId?: string | null,
+  ): Promise<OrgDepartment> {
+    return api.post<OrgDepartment>("/organizations/departments", body, {
+      query: orgScope(orgId),
+    });
   },
   updateDepartment(
     id: string,
     body: { name?: string | null; parent_id?: string | null; clear_parent?: boolean },
+    orgId?: string | null,
   ): Promise<OrgDepartment> {
-    return api.patch<OrgDepartment>(`/organizations/departments/${id}`, body);
+    return api.patch<OrgDepartment>(`/organizations/departments/${id}`, body, {
+      query: orgScope(orgId),
+    });
   },
-  deleteDepartment(id: string): Promise<unknown> {
-    return apiFetch(`/organizations/departments/${id}`, { method: "DELETE" });
+  deleteDepartment(id: string, orgId?: string | null): Promise<unknown> {
+    return apiFetch(`/organizations/departments/${id}`, {
+      method: "DELETE",
+      query: orgScope(orgId),
+    });
   },
 
   /* Members */
-  listMembers(cursor?: string | null): Promise<ApiListEnvelope<OrgMember>> {
+  listMembers(
+    cursor?: string | null,
+    orgId?: string | null,
+  ): Promise<ApiListEnvelope<OrgMember>> {
+    const query: Record<string, string> = {};
+    if (cursor) query.cursor = cursor;
+    if (orgId) query.org_id = orgId;
     return api.list<OrgMember>("/organizations/members", {
-      query: cursor ? { cursor } : undefined,
+      query: Object.keys(query).length ? query : undefined,
     });
   },
   updateMember(
     id: string,
     body: { role_ids?: string[]; department_ids?: string[]; version?: number },
+    orgId?: string | null,
   ): Promise<OrgMember> {
-    return api.patch<OrgMember>(`/organizations/members/${id}`, body);
+    return api.patch<OrgMember>(`/organizations/members/${id}`, body, {
+      query: orgScope(orgId),
+    });
   },
-  removeMember(id: string): Promise<unknown> {
-    return apiFetch(`/organizations/members/${id}`, { method: "DELETE" });
+  removeMember(id: string, orgId?: string | null): Promise<unknown> {
+    return apiFetch(`/organizations/members/${id}`, {
+      method: "DELETE",
+      query: orgScope(orgId),
+    });
   },
   /** Suspend a member's access. Reversible — distinct from permanent removal. */
-  deactivateMember(id: string): Promise<OrgMember> {
-    return api.post<OrgMember>(`/organizations/members/${id}/deactivate`, {});
+  deactivateMember(id: string, orgId?: string | null): Promise<OrgMember> {
+    return api.post<OrgMember>(`/organizations/members/${id}/deactivate`, {}, {
+      query: orgScope(orgId),
+    });
   },
   /** Restore a previously-suspended member's access. */
-  reactivateMember(id: string): Promise<OrgMember> {
-    return api.post<OrgMember>(`/organizations/members/${id}/reactivate`, {});
+  reactivateMember(id: string, orgId?: string | null): Promise<OrgMember> {
+    return api.post<OrgMember>(`/organizations/members/${id}/reactivate`, {}, {
+      query: orgScope(orgId),
+    });
   },
 
   /* Permission preview */
-  previewMemberPermissions(membershipId: string): Promise<PermissionPreview> {
+  previewMemberPermissions(
+    membershipId: string,
+    orgId?: string | null,
+  ): Promise<PermissionPreview> {
     return api.get<PermissionPreview>(
       `/organizations/members/${membershipId}/permission-preview`,
+      { query: orgScope(orgId) },
     );
   },
-  previewHypotheticalPermissions(body: {
-    role_ids: string[];
-    department_ids?: string[];
-  }): Promise<PermissionPreview> {
-    return api.post<PermissionPreview>("/organizations/permission-preview", body);
+  previewHypotheticalPermissions(
+    body: {
+      role_ids: string[];
+      department_ids?: string[];
+    },
+    orgId?: string | null,
+  ): Promise<PermissionPreview> {
+    return api.post<PermissionPreview>("/organizations/permission-preview", body, {
+      query: orgScope(orgId),
+    });
   },
 
   /* Ownership */
@@ -314,19 +381,23 @@ export const organizationApi = {
   },
 
   /* Audit log */
-  listAuditLog(params?: {
-    cursor?: string | null;
-    actor_id?: string;
-    action?: string;
-    since?: string;
-    until?: string;
-  }): Promise<ApiListEnvelope<AuditLogEntry>> {
+  listAuditLog(
+    params?: {
+      cursor?: string | null;
+      actor_id?: string;
+      action?: string;
+      since?: string;
+      until?: string;
+    },
+    orgId?: string | null,
+  ): Promise<ApiListEnvelope<AuditLogEntry>> {
     const query: Record<string, string> = {};
     if (params?.cursor) query.cursor = params.cursor;
     if (params?.actor_id) query.actor_id = params.actor_id;
     if (params?.action) query.action = params.action;
     if (params?.since) query.since = params.since;
     if (params?.until) query.until = params.until;
+    if (orgId) query.org_id = orgId;
     return api.list<AuditLogEntry>("/organizations/audit-log", { query });
   },
 
@@ -378,18 +449,28 @@ export const organizationApi = {
   },
 
   /* Invitations */
-  listInvitations(): Promise<OrgInvitation[]> {
-    return api.get<OrgInvitation[]>("/organizations/invitations");
+  listInvitations(orgId?: string | null): Promise<OrgInvitation[]> {
+    return api.get<OrgInvitation[]>("/organizations/invitations", {
+      query: orgScope(orgId),
+    });
   },
-  createInvitation(body: {
-    email: string;
-    role_id?: string | null;
-    department_id?: string | null;
-  }): Promise<OrgInvitation> {
-    return api.post<OrgInvitation>("/organizations/invitations", body);
+  createInvitation(
+    body: {
+      email: string;
+      role_id?: string | null;
+      department_id?: string | null;
+    },
+    orgId?: string | null,
+  ): Promise<OrgInvitation> {
+    return api.post<OrgInvitation>("/organizations/invitations", body, {
+      query: orgScope(orgId),
+    });
   },
-  revokeInvitation(id: string): Promise<unknown> {
-    return apiFetch(`/organizations/invitations/${id}`, { method: "DELETE" });
+  revokeInvitation(id: string, orgId?: string | null): Promise<unknown> {
+    return apiFetch(`/organizations/invitations/${id}`, {
+      method: "DELETE",
+      query: orgScope(orgId),
+    });
   },
   acceptInvitation(token: string): Promise<OrgMember> {
     return api.post<OrgMember>(
