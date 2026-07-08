@@ -403,6 +403,22 @@ export type {
   AiUsageFeatureCount,
   AiUsageActivity,
 } from "./ai-assistant";
+export { aiEnergyApi } from "./ai-energy";
+export type {
+  AiEnergyAllocationScope,
+  AiEnergyTopupScope,
+  AiEnergyPack,
+  AiEnergyAllocationSnapshot,
+  OrgEnergyPool,
+  AiEnergyAllocation,
+  AiEnergyOverview,
+  AiEnergyTopupStatus,
+  AiEnergyTopup,
+  AiEnergyPaymentInstructions,
+  AiEnergyTopupResult,
+  AiEnergyAllocationResult,
+  AiEnergyWalletGrantResult,
+} from "./ai-energy";
 export type {
   InterviewQuestion,
   InterviewPrepResult,

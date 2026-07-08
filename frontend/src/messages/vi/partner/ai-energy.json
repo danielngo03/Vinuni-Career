@@ -1,0 +1,103 @@
+{
+  "aiEnergy": {
+    "buyButton": "Mua thêm năng lượng",
+    "scope": {
+      "department": "Phòng ban",
+      "user": "Thành viên",
+      "org": "Tổ chức"
+    },
+    "admin": {
+      "intro": "Tổ chức của bạn dùng chung một hạn mức năng lượng AI mỗi tuần. Đặt giới hạn theo phòng ban hoặc thành viên, nạp thêm dự phòng và theo dõi các khoản nạp.",
+      "permissionBody": "Bạn không có quyền quản lý năng lượng AI của tổ chức.",
+      "poolTitle": "Hạn mức năng lượng tổ chức",
+      "remaining": "Còn {pct}% tuần này",
+      "weeklyLabel": "Đã dùng {used}/{allowance} năng lượng",
+      "walletLabel": "+{wallet} dự phòng",
+      "blockedPool": "Năng lượng AI dùng chung của tổ chức đã hết cho tuần này.",
+      "warningPool": "Năng lượng AI dùng chung của tổ chức sắp hết trong tuần này.",
+      "packsTitle": "Gói nạp thêm",
+      "packLabel": "{units} năng lượng",
+      "allocations": {
+        "title": "Phân bổ cho phòng ban & thành viên",
+        "intro": "Đặt hạn mức tuần riêng cho một phòng ban hoặc thành viên, hoặc để họ dùng chung hạn mức. Năng lượng dự phòng được dùng sau khi hết hạn mức tuần.",
+        "scopeCol": "Phòng ban / thành viên",
+        "capCol": "Hạn mức tuần",
+        "walletCol": "Dự phòng",
+        "usedCol": "Đã dùng tuần này",
+        "actionsCol": "Thao tác",
+        "emptyTitle": "Chưa có thành viên hoặc phòng ban",
+        "emptyBody": "Thêm phòng ban và thành viên vào nhóm để phân bổ năng lượng AI.",
+        "shared": "Dùng chung",
+        "perWeek": "{units}/tuần",
+        "reserve": "+{units}",
+        "advisory": "Mức dùng của phòng ban chỉ mang tính tham khảo",
+        "capLabel": "Hạn mức tuần (năng lượng)",
+        "save": "Lưu",
+        "cancel": "Huỷ",
+        "editCap": "Sửa hạn mức tuần cho {name}",
+        "grantWallet": "Cấp dự phòng"
+      },
+      "grant": {
+        "title": "Cấp năng lượng dự phòng",
+        "body": "Cấp thêm năng lượng dự phòng cho {name}. Đây là cấp thủ công, không phải mua.",
+        "unitsLabel": "Số năng lượng",
+        "reasonLabel": "Lý do",
+        "reasonPlaceholder": "Ví dụ: Hết giữa chiến dịch; bù phần thiếu.",
+        "submit": "Cấp dự phòng"
+      },
+      "topups": {
+        "title": "Khoản nạp thanh toán",
+        "intro": "Các khoản nạp qua chuyển khoản cho tổ chức của bạn. Năng lượng được cộng sau khi thanh toán được xác nhận.",
+        "financeNote": "Việc xác nhận thanh toán do bộ phận tài chính VinUni thực hiện. Bạn có thể yêu cầu và theo dõi các khoản nạp tại đây.",
+        "emptyTitle": "Chưa có khoản nạp",
+        "emptyBody": "Các yêu cầu nạp năng lượng sẽ hiển thị ở đây.",
+        "dateCol": "Yêu cầu",
+        "scopeCol": "Cho",
+        "unitsCol": "Năng lượng",
+        "priceCol": "Giá",
+        "statusCol": "Trạng thái",
+        "actionCol": "Thao tác",
+        "confirm": "Xác nhận thanh toán",
+        "confirmDisabled": "Chỉ bộ phận tài chính VinUni mới có thể xác nhận thanh toán.",
+        "awaitingFinance": "Chờ xác nhận",
+        "confirmTitle": "Xác nhận chuyển khoản",
+        "confirmBody": "Xác nhận đã nhận khoản chuyển cho {units} năng lượng ({price}). Năng lượng sẽ được cộng ngay.",
+        "referenceLabel": "Mã tham chiếu thanh toán",
+        "referencePlaceholder": "Ví dụ: mã giao dịch ngân hàng",
+        "confirmAction": "Xác nhận & cộng"
+      },
+      "toast": {
+        "allocationSaved": "Đã cập nhật hạn mức tuần.",
+        "allocationCleared": "Đã bỏ hạn mức tuần — quay lại dùng chung.",
+        "walletGranted": "Đã cấp năng lượng dự phòng.",
+        "topupConfirmed": "Đã xác nhận thanh toán và cộng năng lượng."
+      }
+    },
+    "member": {
+      "title": "Mua thêm năng lượng",
+      "subtitle": "Nạp thêm năng lượng AI bằng chuyển khoản. Năng lượng được cộng sau khi thanh toán được xác nhận.",
+      "packsTitle": "Chọn gói nạp",
+      "packUnits": "{units} năng lượng",
+      "manualHint": "Thanh toán bằng chuyển khoản thủ công và ở trạng thái chờ cho đến khi được xác nhận.",
+      "orgManagedTitle": "Do tổ chức của bạn quản lý",
+      "orgManagedBody": "Năng lượng AI của nhóm là hạn mức dùng chung do quản trị viên quản lý. Hãy liên hệ quản trị viên để nạp thêm hoặc đặt hạn mức riêng cho bạn.",
+      "request": "Yêu cầu nạp",
+      "buyAnother": "Mua thêm",
+      "pendingTitle": "Chờ thanh toán",
+      "pendingBody": "Khoản nạp {units} năng lượng ({price}) đang chờ. Vui lòng chuyển khoản theo thông tin bên dưới.",
+      "bank": {
+        "title": "Hướng dẫn chuyển khoản",
+        "intro": "Chuyển đúng số tiền và ghi kèm nội dung tham chiếu để chúng tôi đối soát thanh toán của bạn.",
+        "bank": "Ngân hàng",
+        "accountName": "Tên tài khoản",
+        "accountNumber": "Số tài khoản",
+        "reference": "Nội dung chuyển khoản",
+        "doneHint": "Sau khi được xác nhận, năng lượng sẽ được cộng tự động. Việc này có thể mất chút thời gian."
+      },
+      "history": {
+        "title": "Khoản nạp của bạn",
+        "empty": "Chưa có khoản nạp nào."
+      }
+    }
+  }
+}

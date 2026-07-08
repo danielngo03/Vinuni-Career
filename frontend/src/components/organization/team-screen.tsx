@@ -14,6 +14,7 @@ import {
   Warning,
   Crown,
   ClockCounterClockwise,
+  Lightning,
 } from "@phosphor-icons/react";
 import Link from "next/link";
 import { Tabs, TabPanel, EmptyState, type TabItem } from "@/components/ui";
@@ -26,6 +27,7 @@ import { DepartmentsTab } from "./departments-tab";
 import { InvitationsTab } from "./invitations-tab";
 import { OwnershipTab } from "./ownership-tab";
 import { AuditLogTab } from "./audit-log-tab";
+import { AiEnergyTab } from "./ai-energy-tab";
 
 const TABS_ID = "team";
 
@@ -102,6 +104,11 @@ export function TeamScreen() {
   }
 
   const orgType = orgQuery.data?.org_type ?? "partner";
+  // AI energy is a shared partner-org pool governed by billing managers. Gate the
+  // tab on the org-management capability (backend re-checks); universities meter
+  // AI differently, so it's a partner-org surface.
+  const canManageBilling = holdsWildcard || effective.has("billing:manage");
+  const showEnergyTab = orgType === "partner" && canManageBilling;
   const maxSeats = orgQuery.data?.max_team_members ?? 4;
   const activeMembers = membersQuery.data?.data.filter(
     (m) => m.status === "active" || m.status === "pending"
@@ -125,6 +132,15 @@ export function TeamScreen() {
       label: t("tabs.departments"),
       icon: <TreeStructure aria-hidden weight="duotone" className="size-4" />,
     },
+    ...(showEnergyTab
+      ? [
+          {
+            value: "aiEnergy",
+            label: t("tabs.aiEnergy"),
+            icon: <Lightning aria-hidden weight="duotone" className="size-4" />,
+          },
+        ]
+      : []),
     {
       value: "invitations",
       label: t("tabs.invitations"),
@@ -223,6 +239,11 @@ export function TeamScreen() {
       <TabPanel tabsId={TABS_ID} value="departments" active={tab === "departments"}>
         <DepartmentsTab />
       </TabPanel>
+      {showEnergyTab && (
+        <TabPanel tabsId={TABS_ID} value="aiEnergy" active={tab === "aiEnergy"}>
+          <AiEnergyTab />
+        </TabPanel>
+      )}
       <TabPanel tabsId={TABS_ID} value="invitations" active={tab === "invitations"}>
         <InvitationsTab
           effective={effective}

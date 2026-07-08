@@ -1,0 +1,103 @@
+{
+  "aiEnergy": {
+    "buyButton": "Buy more energy",
+    "scope": {
+      "department": "Department",
+      "user": "Member",
+      "org": "Organization"
+    },
+    "admin": {
+      "intro": "Your organization shares one weekly AI energy pool. Cap it per department or member, top up reserves, and track top-up payments.",
+      "permissionBody": "You don't have permission to manage your organization's AI energy.",
+      "poolTitle": "Organization energy pool",
+      "remaining": "{pct}% left this week",
+      "weeklyLabel": "{used}/{allowance} energy used",
+      "walletLabel": "+{wallet} reserve",
+      "blockedPool": "Your organization's shared AI energy is used up for this week.",
+      "warningPool": "Your organization's shared AI energy is running low this week.",
+      "packsTitle": "Top-up packs",
+      "packLabel": "{units} energy",
+      "allocations": {
+        "title": "Department & member allocations",
+        "intro": "Give a department or member their own weekly cap, or leave them on the shared pool. Reserve energy is spent after the weekly cap.",
+        "scopeCol": "Department / member",
+        "capCol": "Weekly cap",
+        "walletCol": "Reserve",
+        "usedCol": "Used this week",
+        "actionsCol": "Actions",
+        "emptyTitle": "No members or departments yet",
+        "emptyBody": "Add departments and members to your team to allocate AI energy.",
+        "shared": "Shared pool",
+        "perWeek": "{units}/week",
+        "reserve": "+{units}",
+        "advisory": "Department usage is advisory",
+        "capLabel": "Weekly cap (energy)",
+        "save": "Save",
+        "cancel": "Cancel",
+        "editCap": "Edit weekly cap for {name}",
+        "grantWallet": "Grant reserve"
+      },
+      "grant": {
+        "title": "Grant energy reserve",
+        "body": "Add goodwill reserve energy to {name}. This is a manual grant, not a purchase.",
+        "unitsLabel": "Energy units",
+        "reasonLabel": "Reason",
+        "reasonPlaceholder": "e.g. Ran out mid-campaign; covering the shortfall.",
+        "submit": "Grant reserve"
+      },
+      "topups": {
+        "title": "Top-up payments",
+        "intro": "Bank-transfer top-ups requested for your organization. Energy is credited once payment is confirmed.",
+        "financeNote": "Payment confirmation is handled by VinUni finance. You can request and track top-ups here.",
+        "emptyTitle": "No top-ups yet",
+        "emptyBody": "Requested energy top-ups will appear here.",
+        "dateCol": "Requested",
+        "scopeCol": "For",
+        "unitsCol": "Energy",
+        "priceCol": "Price",
+        "statusCol": "Status",
+        "actionCol": "Action",
+        "confirm": "Confirm payment",
+        "confirmDisabled": "Only VinUni finance can confirm a payment.",
+        "awaitingFinance": "Awaiting confirmation",
+        "confirmTitle": "Confirm bank transfer",
+        "confirmBody": "Confirm you received the transfer for {units} energy ({price}). This credits the energy immediately.",
+        "referenceLabel": "Payment reference",
+        "referencePlaceholder": "e.g. bank transaction ID",
+        "confirmAction": "Confirm & credit"
+      },
+      "toast": {
+        "allocationSaved": "Weekly cap updated.",
+        "allocationCleared": "Weekly cap removed — back on the shared pool.",
+        "walletGranted": "Reserve energy granted.",
+        "topupConfirmed": "Payment confirmed and energy credited."
+      }
+    },
+    "member": {
+      "title": "Buy more energy",
+      "subtitle": "Top up your AI energy with a bank transfer. Energy is added once payment is confirmed.",
+      "packsTitle": "Choose a top-up pack",
+      "packUnits": "{units} energy",
+      "manualHint": "Payment is by manual bank transfer and stays pending until confirmed.",
+      "orgManagedTitle": "Managed by your organization",
+      "orgManagedBody": "Your team's AI energy is a shared pool managed by an admin. Ask an admin to top up or set you a personal cap.",
+      "request": "Request top-up",
+      "buyAnother": "Buy another",
+      "pendingTitle": "Awaiting payment",
+      "pendingBody": "Your top-up of {units} energy ({price}) is pending. Transfer the amount using the details below.",
+      "bank": {
+        "title": "Bank transfer instructions",
+        "intro": "Transfer the exact amount and include the reference so we can match your payment.",
+        "bank": "Bank",
+        "accountName": "Account name",
+        "accountNumber": "Account number",
+        "reference": "Transfer note",
+        "doneHint": "Once confirmed, your energy is credited automatically. This can take a little time."
+      },
+      "history": {
+        "title": "Your top-ups",
+        "empty": "No top-ups yet."
+      }
+    }
+  }
+}

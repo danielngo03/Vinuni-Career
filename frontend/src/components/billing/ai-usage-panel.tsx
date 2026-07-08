@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { useQuery } from "@tanstack/react-query";
 import {
@@ -11,6 +11,7 @@ import {
   CheckCircle,
   XCircle,
   Lightning,
+  Plus,
 } from "@phosphor-icons/react";
 import { Button, EmptyState, Skeleton } from "@/components/ui";
 import {
@@ -18,6 +19,7 @@ import {
   type AiEnergyUsageDetail,
   type BillingAudience,
 } from "@/lib/api";
+import { EnergyTopupDialog } from "./energy-topup-dialog";
 import { cn } from "@/lib/utils";
 
 /**
@@ -36,7 +38,9 @@ import { cn } from "@/lib/utils";
  */
 export function AiUsagePanel({ audience }: { audience: BillingAudience }) {
   const t = useTranslations("billing");
+  const tE = useTranslations("aiEnergy");
   const locale = useLocale();
+  const [buyOpen, setBuyOpen] = useState(false);
 
   const q = useQuery({
     queryKey: ["ai", "usage", "summary"],
@@ -45,25 +49,45 @@ export function AiUsagePanel({ audience }: { audience: BillingAudience }) {
     retry: false,
   });
 
+  // Buying energy is a partner-org top-up flow (shared org pool). Students'
+  // personal budgets don't use the manual/bank-transfer pack catalogue here.
+  const showBuy = audience === "partner";
+
   const heading = (
-    <div className="mb-2.5 flex items-center gap-2">
-      <span className="flex size-7 items-center justify-center rounded-lg icon-chip-primary shadow-sm">
-        <Gauge aria-hidden weight="duotone" className="size-4 text-white" />
-      </span>
-      <div>
-        <h2 className="text-sm font-bold text-[var(--text-primary)]">
-          {t("usage.title")}
-        </h2>
-        <p className="text-xs text-[var(--text-secondary)]">
-          {t("usage.subtitle", { days: q.data?.window_days ?? 30 })}
-        </p>
+    <div className="mb-2.5 flex items-start justify-between gap-3">
+      <div className="flex items-center gap-2">
+        <span className="flex size-7 items-center justify-center rounded-lg icon-chip-primary shadow-sm">
+          <Gauge aria-hidden weight="duotone" className="size-4 text-white" />
+        </span>
+        <div>
+          <h2 className="text-sm font-bold text-[var(--text-primary)]">
+            {t("usage.title")}
+          </h2>
+          <p className="text-xs text-[var(--text-secondary)]">
+            {t("usage.subtitle", { days: q.data?.window_days ?? 30 })}
+          </p>
+        </div>
       </div>
+      {showBuy && (
+        <Button
+          size="sm"
+          variant={q.data?.blocked ? "primary" : "secondary"}
+          onClick={() => setBuyOpen(true)}
+        >
+          <Plus aria-hidden weight="bold" className="size-3.5" />
+          {tE("buyButton")}
+        </Button>
+      )}
     </div>
   );
 
   return (
     <section aria-label={t("usage.title")}>
       {heading}
+
+      {showBuy && (
+        <EnergyTopupDialog open={buyOpen} onClose={() => setBuyOpen(false)} />
+      )}
 
       {q.isPending ? (
         <div className="space-y-3 rounded-2xl border border-[var(--border-default)] bg-white p-4 shadow-[0_2px_16px_rgba(11,34,57,0.06)]">
