@@ -6,6 +6,7 @@ import {
   ArrowLeft,
   ArrowRight,
   Brain,
+  ChartLineUp,
   ChatsTeardrop,
   CheckCircle,
   Lightning,
@@ -18,6 +19,7 @@ import {
 } from "@phosphor-icons/react";
 import { Link } from "@/i18n/navigation";
 import { interviewPrepApi, type InterviewQuestion, type AnswerFeedbackResult } from "@/lib/api";
+import { InterviewHistoryPanel } from "./interview-history-panel";
 import { cn } from "@/lib/utils";
 
 interface Props {
@@ -31,7 +33,7 @@ type QuestionType = InterviewQuestion["type"];
 type LoadPhase =
   | { name: "idle" }
   | { name: "loading" }
-  | { name: "ready"; questions: InterviewQuestion[]; prepTips: string }
+  | { name: "ready"; questions: InterviewQuestion[]; prepTips: string; sessionId: string }
   | { name: "failed" };
 
 type AnswerState =
@@ -91,7 +93,9 @@ function ScoreRing({ score }: { score: number }) {
 
 export function InterviewSimulatorScreen({ jobId, jobTitle, companyName }: Props) {
   const t = useTranslations("jobs.interviewSim");
+  const [view, setView] = useState<"practice" | "history">("practice");
   const [load, setLoad] = useState<LoadPhase>({ name: "idle" });
+  const [sessionId, setSessionId] = useState<string | null>(null);
   const [currentIdx, setCurrentIdx] = useState(0);
   const [answers, setAnswers] = useState<Record<number, string>>({});
   const [states, setStates] = useState<Record<number, AnswerState>>({});
@@ -102,7 +106,13 @@ export function InterviewSimulatorScreen({ jobId, jobTitle, companyName }: Props
     setLoad({ name: "loading" });
     try {
       const result = await interviewPrepApi.generatePrep(jobId, { num_questions: 6 });
-      setLoad({ name: "ready", questions: result.questions, prepTips: result.prep_tips });
+      setLoad({
+        name: "ready",
+        questions: result.questions,
+        prepTips: result.prep_tips,
+        sessionId: result.session_id,
+      });
+      setSessionId(result.session_id);
       setCurrentIdx(0);
       setAnswers({});
       setStates({});
@@ -122,16 +132,24 @@ export function InterviewSimulatorScreen({ jobId, jobTitle, companyName }: Props
         question_type: q.type,
         rubric: q.rubric,
         answer,
+        // Thread the persisted attempt id so this turn attaches to the same
+        // practice attempt (and rolls into the deterministic readiness signal).
+        session_id: sessionId ?? undefined,
+        question_number: q.number,
       });
       setStates((prev) => ({ ...prev, [idx]: { status: "done", feedback } }));
     } catch {
       setStates((prev) => ({ ...prev, [idx]: { status: "error" } }));
     }
-  }, [jobId]);
+  }, [jobId, sessionId]);
 
   const skipQuestion = useCallback((q: InterviewQuestion) => {
     setStates((prev) => ({ ...prev, [q.number]: { status: "skipped" } }));
   }, []);
+
+  if (view === "history") {
+    return <InterviewHistoryPanel onBack={() => setView("practice")} />;
+  }
 
   if (load.name === "idle" || load.name === "failed") {
     return (
@@ -152,9 +170,17 @@ export function InterviewSimulatorScreen({ jobId, jobTitle, companyName }: Props
           <Sparkle weight="bold" className="size-4" aria-hidden />
           {load.name === "failed" ? t("retryLoad") : t("pageTitle")}
         </button>
+        <button
+          type="button"
+          onClick={() => setView("history")}
+          className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-[var(--text-secondary)] outline-none hover:text-[var(--text-primary)] focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)]/30"
+        >
+          <ChartLineUp weight="duotone" className="size-4" aria-hidden />
+          {t("historyCta")}
+        </button>
         <Link
           href={`/jobs/${jobId}`}
-          className="mt-4 text-sm text-[var(--text-muted)] underline hover:text-[var(--text-secondary)]"
+          className="mt-3 text-sm text-[var(--text-muted)] underline hover:text-[var(--text-secondary)]"
         >
           {t("backToJob")}
         </Link>
@@ -180,6 +206,7 @@ export function InterviewSimulatorScreen({ jobId, jobTitle, companyName }: Props
         states={states}
         prepTips={prepTips}
         onRestart={startSession}
+        onViewHistory={() => setView("history")}
         jobId={jobId}
         t={t}
       />
@@ -239,9 +266,9 @@ export function InterviewSimulatorScreen({ jobId, jobTitle, companyName }: Props
       </div>
 
       {/* Question card */}
-      <div className="overflow-hidden rounded-2xl border border-[var(--glass-border)] bg-[var(--glass-surface)] shadow-[0_4px_24px_rgba(11,34,57,0.08)] backdrop-blur-md">
+      <div className="marketplace-card overflow-hidden rounded-[12px]">
         {/* Question header */}
-        <div className="flex items-center gap-2.5 border-b border-[var(--glass-border)] px-5 py-3.5">
+        <div className="flex items-center gap-2.5 border-b border-[var(--border-default)] px-5 py-3.5">
           <span
             className={cn(
               "inline-flex items-center gap-1.5 rounded-lg px-2.5 py-1 text-xs font-bold",
@@ -275,7 +302,7 @@ export function InterviewSimulatorScreen({ jobId, jobTitle, companyName }: Props
             {hintOpen ? t("hintHide") : t("hintToggle")}
           </button>
           {hintOpen && (
-            <p className="mt-2 rounded-xl border border-[var(--glass-border)] bg-[var(--glass-surface-light)] px-3.5 py-2.5 text-sm leading-relaxed text-[var(--text-secondary)]">
+            <p className="mt-2 rounded-[10px] border border-[var(--border-default)] bg-[var(--bg-muted)] px-3.5 py-2.5 text-sm leading-relaxed text-[var(--text-secondary)]">
               <span className="font-semibold text-[var(--text-primary)]">{t("hintPrefix")} </span>
               {q.hint}
             </p>
@@ -284,7 +311,7 @@ export function InterviewSimulatorScreen({ jobId, jobTitle, companyName }: Props
 
         {/* Answer textarea — hidden when feedback is shown */}
         {qState.status !== "done" && qState.status !== "skipped" && (
-          <div className="border-t border-[var(--glass-border)] px-5 pb-5 pt-4">
+          <div className="border-t border-[var(--border-default)] px-5 pb-5 pt-4">
             <label className="mb-2 block text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">
               {t("answerLabel")}
             </label>
@@ -294,7 +321,7 @@ export function InterviewSimulatorScreen({ jobId, jobTitle, companyName }: Props
               onChange={(e) => setAnswers((prev) => ({ ...prev, [q.number]: e.target.value }))}
               placeholder={t("answerPlaceholder")}
               disabled={qState.status === "submitting"}
-              className="w-full resize-none rounded-xl border border-[var(--glass-border)] bg-[var(--glass-surface)] px-4 py-3 text-sm leading-relaxed text-[var(--text-primary)] placeholder:text-[var(--text-muted)] focus:border-[var(--ai-accent)]/60 focus:bg-[var(--glass-surface-heavy)] focus:outline-none focus:ring-2 focus:ring-[var(--ai-accent)]/25 disabled:opacity-60"
+              className="w-full resize-none rounded-[10px] border border-[var(--border-default)] bg-[var(--surface-card)] px-4 py-3 text-sm leading-relaxed text-[var(--text-primary)] placeholder:text-[var(--text-muted)] focus:border-[var(--ai-accent)]/60 focus:outline-none focus:ring-2 focus:ring-[var(--ai-accent)]/25 disabled:opacity-60"
             />
 
             {qState.status === "error" && (
@@ -338,7 +365,7 @@ export function InterviewSimulatorScreen({ jobId, jobTitle, companyName }: Props
         )}
 
         {qState.status === "skipped" && (
-          <div className="border-t border-[var(--glass-border)] px-5 py-4">
+          <div className="border-t border-[var(--border-default)] px-5 py-4">
             <p className="flex items-center gap-1.5 text-sm text-[var(--text-muted)]">
               <X weight="bold" className="size-4" aria-hidden />
               {t("skippedLabel")}
@@ -348,7 +375,7 @@ export function InterviewSimulatorScreen({ jobId, jobTitle, companyName }: Props
 
         {/* Navigation */}
         {(qState.status === "done" || qState.status === "skipped") && (
-          <div className="flex items-center justify-between border-t border-[var(--glass-border)] px-5 py-3.5">
+          <div className="flex items-center justify-between border-t border-[var(--border-default)] px-5 py-3.5">
             <button
               type="button"
               onClick={goPrev}
@@ -396,7 +423,7 @@ export function InterviewSimulatorScreen({ jobId, jobTitle, companyName }: Props
                 isDone ? "bg-[var(--brand-primary)]" :
                 isSkipped ? "bg-[var(--text-muted)]" :
                 isCurrent ? "w-5 bg-[var(--ai-accent)]" :
-                "bg-[var(--glass-surface-light)] hover:bg-[var(--glass-surface)]",
+                "bg-[var(--bg-muted)] hover:bg-[var(--border-strong)]",
               )}
               aria-label={`Question ${question.number}`}
             />
@@ -503,6 +530,7 @@ function SummaryScreen({
   states,
   prepTips,
   onRestart,
+  onViewHistory,
   jobId,
   t,
 }: {
@@ -510,6 +538,7 @@ function SummaryScreen({
   states: Record<number, AnswerState>;
   prepTips: string;
   onRestart: () => void;
+  onViewHistory: () => void;
   jobId: string;
   t: ReturnType<typeof useTranslations<"jobs.interviewSim">>;
 }) {
@@ -532,7 +561,7 @@ function SummaryScreen({
       {/* Trophy header */}
       <div className="mb-8 text-center">
         <div className="mb-4 flex justify-center">
-          <div className="flex size-16 items-center justify-center rounded-2xl bg-gradient-to-br from-[var(--amber-400)]/30 to-[var(--ai-accent)]/30 shadow-[var(--shadow-md)]">
+          <div className="flex size-16 items-center justify-center rounded-2xl icon-chip-warning">
             <Trophy weight="duotone" className="size-8 text-[var(--amber-600)]" aria-hidden />
           </div>
         </div>
@@ -546,7 +575,7 @@ function SummaryScreen({
 
       {/* Score card */}
       {scored.length > 0 && (
-        <div className="mb-6 rounded-2xl border border-[var(--glass-border)] bg-[var(--glass-surface)] p-5 backdrop-blur-md shadow-[0_2px_12px_rgba(11,34,57,0.06)]">
+        <div className="marketplace-card mb-6 rounded-[12px] p-5">
           <div className="flex items-center justify-around gap-4">
             <div className="text-center">
               <div className="flex justify-center">
@@ -589,7 +618,7 @@ function SummaryScreen({
           return (
             <div
               key={q.number}
-              className="overflow-hidden rounded-xl border border-[var(--glass-border)] bg-[var(--glass-surface-light)] backdrop-blur-sm"
+              className="overflow-hidden rounded-[10px] border border-[var(--border-default)] bg-[var(--bg-muted)]"
             >
               <div className="flex items-start gap-3 px-4 py-3">
                 <span className={cn("mt-0.5 flex size-6 shrink-0 items-center justify-center rounded-md text-[10px] font-bold", typeColor.badge)}>
@@ -606,7 +635,7 @@ function SummaryScreen({
                 )}
               </div>
               {s?.status === "done" && s.feedback.improve && (
-                <div className="border-t border-[var(--glass-border)] bg-[var(--glass-surface-light)] px-4 py-2.5">
+                <div className="border-t border-[var(--border-default)] bg-[var(--bg-muted)] px-4 py-2.5">
                   <p className="flex items-start gap-1.5 text-xs text-[var(--text-secondary)]">
                     <Lightning weight="duotone" className="mt-0.5 size-3.5 shrink-0 text-[var(--amber-600)]" aria-hidden />
                     {s.feedback.improve}
@@ -637,6 +666,14 @@ function SummaryScreen({
         >
           <Sparkle weight="bold" className="size-4" aria-hidden />
           {t("practiceAgain")}
+        </button>
+        <button
+          type="button"
+          onClick={onViewHistory}
+          className="inline-flex items-center gap-1.5 text-sm font-semibold text-[var(--text-secondary)] outline-none hover:text-[var(--text-primary)] focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)]/30"
+        >
+          <ChartLineUp weight="duotone" className="size-4" aria-hidden />
+          {t("historyCta")}
         </button>
         <Link
           href={`/jobs/${jobId}`}

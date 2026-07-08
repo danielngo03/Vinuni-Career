@@ -3,10 +3,10 @@
 import { useMemo } from "react";
 import { useTranslations } from "next-intl";
 import { useInfiniteQuery } from "@tanstack/react-query";
-import { Heart, LightbulbFilament, SignIn, Sparkle, WarningCircle } from "@phosphor-icons/react";
-import { cn } from "@/lib/utils";
+import { Heart, SignIn, WarningCircle } from "@phosphor-icons/react";
 import { Button, EmptyState, Skeleton } from "@/components/ui";
 import { PageHeader } from "@/components/layout/page-header";
+import { SummaryPanel } from "@/components/students/summary-panel";
 import { JobCard } from "@/components/jobs/job-card";
 import { ApiError, jobsApi, type JobSummary } from "@/lib/api";
 
@@ -62,7 +62,7 @@ export function SavedJobsScreen() {
       ) : query.isPending ? (
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {Array.from({ length: 6 }).map((_, i) => (
-            <Skeleton key={i} className="h-48 w-full rounded-2xl" />
+            <Skeleton key={i} className="h-48 w-full rounded-[14px]" />
           ))}
         </div>
       ) : jobs.length === 0 ? (
@@ -79,7 +79,7 @@ export function SavedJobsScreen() {
             {t("savedCount", { count: query.data?.pages[0]?.page.total ?? jobs.length })}
           </p>
 
-          {/* AI Saved Jobs Insights */}
+          {/* Deterministic, client-derived summary — honestly labelled (not "AI"). */}
           {jobs.length > 0 && (() => {
             const total = query.data?.pages[0]?.page.total ?? jobs.length;
             const now = Date.now();
@@ -89,30 +89,11 @@ export function SavedJobsScreen() {
               return ms > 0 && ms <= 7 * 86_400_000;
             }).length;
             const featuredCount = jobs.filter((j) => j.is_featured).length;
-            const insights: string[] = [];
-            insights.push(t("aiInsightSaved", { count: total }));
+            const insights: string[] = [t("aiInsightSaved", { count: total })];
             if (soonCount > 0) insights.push(t("aiInsightDeadlineSoon", { count: soonCount }));
             if (featuredCount > 0) insights.push(t("aiInsightFeatured", { count: featuredCount }));
             return (
-              <div className={cn(
-                "mb-6 rounded-2xl border p-4",
-                "border-[var(--ai-accent)]/25 bg-gradient-to-br from-[var(--ai-accent-soft)] to-[var(--glass-surface-light)] backdrop-blur-xl",
-              )}>
-                <p className="mb-3 flex items-center gap-2 text-sm font-bold text-[var(--text-primary)]">
-                  <span className="flex size-6 shrink-0 items-center justify-center rounded-lg icon-chip-info shadow-sm">
-                    <Sparkle aria-hidden weight="duotone" className="size-3.5 text-white" />
-                  </span>
-                  {t("aiInsightsTitle")}
-                </p>
-                <ul className="space-y-1.5">
-                  {insights.map((s, i) => (
-                    <li key={i} className="flex items-start gap-2 text-sm text-[var(--text-secondary)]">
-                      <LightbulbFilament aria-hidden weight="duotone" className="mt-0.5 size-4 shrink-0 text-[var(--ai-accent)]" />
-                      {s}
-                    </li>
-                  ))}
-                </ul>
-              </div>
+              <SummaryPanel className="mb-6" title={tc("summaryTitle")} items={insights} />
             );
           })()}
 

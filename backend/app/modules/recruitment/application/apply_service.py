@@ -152,7 +152,11 @@ async def apply_to_job(
             ) from exc
         raise DuplicateApplicationError() from exc
 
-    # Immutable CV snapshot via the documents facade (atomic with this txn).
+    # Immutable CV snapshot via the documents facade (atomic with this txn). The
+    # job_id/persona let the facade FREEZE the deterministic CV-JD fit of the chosen
+    # CV onto the snapshot at apply time (WS-5) — point-in-time, free, never
+    # fabricated — so the competition applicant-quality pool is the real applicant
+    # set, not fit-score viewers.
     snapshot = await snapshot_service.create_application_cv_snapshot(
         session,
         owner_id=principal.user_id,
@@ -160,6 +164,8 @@ async def apply_to_job(
         application_id=app.id,
         idempotency_key=(f"{idempotency_key}:cv" if idempotency_key else None),
         ctx=ctx,
+        job_id=job.id,
+        job_persona=principal.persona or "student",
         commit=False,
     )
     app.snapshot_id = snapshot.id
@@ -203,10 +209,33 @@ async def apply_to_job(
     )
     await _notify_partner_received(session, app=app, job=job, locale=locale)
     await _record_apply_metrics(session, job=job, principal=principal)
+    await _refresh_competition_projection(session, job=job)
 
     await session.commit()
     await session.refresh(app)
     return presenters.applicant_application(app, job_title=job.title, locale=locale)
+
+
+async def _refresh_competition_projection(session: AsyncSession, *, job) -> None:
+    """Recompute the ``job_competition_daily`` projection for this job (WS-5).
+
+    The new application + its immutable snapshot ``fit_score`` are already flushed
+    and visible in-session, so the projection reflects the new applicant
+    immediately (the student competition read hits the projection, not a live
+    join). Best-effort in a savepoint — a projection-write failure never breaks
+    apply submission (mirrors ``_record_apply_metrics``).
+    """
+
+    try:
+        from app.modules.opportunities.application import (
+            competition_projection_service as competition_projection,
+        )
+
+        await competition_projection.refresh_job_competition_safe(
+            session, job_id=job.id, org_id=job.org_id, seats=job.headcount
+        )
+    except Exception:  # noqa: BLE001 — telemetry must never break apply submission
+        pass
 
 
 async def _record_apply_metrics(session: AsyncSession, *, job, principal: Principal) -> None:

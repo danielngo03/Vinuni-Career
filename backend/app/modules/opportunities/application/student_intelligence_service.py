@@ -35,7 +35,7 @@ import uuid
 
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from app.modules.documents.application import job_fit_service
+from app.modules.documents.application import cv_gap_handoff, job_fit_service
 from app.modules.opportunities.application import competition_service
 from app.modules.opportunities.domain import learning_resources
 from app.shared.exceptions import PermissionDeniedError
@@ -196,7 +196,12 @@ def _present_fit(result: dict | None, *, signal: str, locale: str = _DEFAULT_LOC
     }
 
 
-def _learning_gaps(result: dict | None, *, locale: str = _DEFAULT_LOCALE) -> list[dict]:
+def _learning_gaps(
+    result: dict | None,
+    *,
+    locale: str = _DEFAULT_LOCALE,
+    cv_id: str | None = None,
+) -> list[dict]:
     if result is None or not result["gaps"]:
         return []
     gaps: list[dict] = []
@@ -209,6 +214,15 @@ def _learning_gaps(result: dict | None, *, locale: str = _DEFAULT_LOCALE) -> lis
             "skill": gap,
             "suggestion": resource["suggestion"],
             "resource_type": resource["resource_type"],
+            # Closed-loop hand-off: a confirmation-gated CV-Studio edit-command
+            # the frontend can trigger to draft an improvement for this gap on the
+            # student's CV (never auto-applied). ``None`` when no target CV exists.
+            "cv_edit": cv_gap_handoff.build_improvement(
+                cv_id=cv_id,
+                skill=gap,
+                locale=locale,
+                suggestion=resource["suggestion"],
+            ),
         })
     return gaps
 
@@ -337,13 +351,18 @@ async def student_intelligence_for_job(
         locale=locale,
     )
 
+    # The CV to improve for the gap hand-offs: the selected CV, else the best CV.
+    improve_cv_id = selected_cv_id or best_cv_id
+
     return {
         "job_id": str(job_id),
         "selected_cv_id": selected_cv_id,
         "best_cv_id": best_cv_id,
         "fit": fit,
         "competition": competition,
-        "learning_gaps": _learning_gaps(selected_result, locale=locale),
+        "learning_gaps": _learning_gaps(
+            selected_result, locale=locale, cv_id=improve_cv_id
+        ),
         "apply_readiness": apply_readiness,
         "next_actions": next_actions,
     }

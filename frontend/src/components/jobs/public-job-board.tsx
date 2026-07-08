@@ -28,6 +28,7 @@ import {
 import { Link } from "@/i18n/navigation";
 import { CompanyAvatar } from "@/components/companies/company-avatar";
 import { TrackedItem } from "@/components/discovery/tracked-item";
+import { jobSignalTags } from "@/lib/discovery/signal-tags";
 import { SaveJobButton } from "@/components/jobs/save-job-button";
 import { JobDetailModal } from "@/components/jobs/job-detail-modal";
 import { FitScoreRing, FitScoreRingSkeleton } from "@/components/jobs/fit-score-ring";
@@ -694,12 +695,9 @@ export function PublicJobBoard() {
                             targetType="job"
                             targetId={job.id}
                             renderId={`jobs-board-${job.id}`}
-                            signalTags={{
-                              search_terms: search ? [search] : undefined,
-                              company_ids: [job.org_id],
-                              work_mode: job.location_type,
-                              city: job.location_city ?? undefined,
-                            }}
+                            signalTags={jobSignalTags(job, {
+                              searchTerms: search ? [search] : undefined,
+                            })}
                           >
                             <JobListItem
                               job={job}

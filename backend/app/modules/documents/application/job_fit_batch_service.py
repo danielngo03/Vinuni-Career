@@ -20,6 +20,7 @@ Security
 
 from __future__ import annotations
 
+import logging
 import uuid
 from datetime import UTC, datetime
 
@@ -41,6 +42,8 @@ from app.modules.opportunities.domain import lifecycle
 from app.modules.opportunities.domain.models import Job
 from app.modules.organization.application import org_reporting_facade
 from app.shared.permissions import Principal, permission_checker
+
+logger = logging.getLogger(__name__)
 
 _RESOURCE = _shared.RESOURCE
 
@@ -307,3 +310,109 @@ async def batch_fit_for_jobs(
     await session.commit()
 
     return scores
+
+
+# --------------------------------------------------------------------------- #
+# Background re-score facade (Task O / WS-11)                                  #
+# --------------------------------------------------------------------------- #
+#
+# The multi-agent workforce (``app.ai.agents``) calls THIS facade — never the
+# private ``_score_job`` / private ``job_fit_service`` helpers directly — to keep
+# the CV-JD scoring logic owned by the documents module. Both functions are
+# owner-checked (student + ``cv:read``), fully DETERMINISTIC (no LLM / no energy
+# charge — the translation tier runs cache-only), and idempotent via the
+# version-stamped ``fit_store`` (a re-run reuses fresh rows and re-computes to the
+# same values, upserting on ``(cv_id, job_id)`` — never duplicating rows).
+
+
+async def active_cv_count(session: AsyncSession, *, principal: Principal) -> int:
+    """Number of the caller's active (``ready``, matchable) CVs. Owner-checked.
+
+    The workforce coordinator uses this to skip planning a re-score run entirely
+    when the student has no matchable CV (nothing to score), instead of
+    dispatching per-job subtasks that would each no-op.
+    """
+    permission_checker.require(principal, _RESOURCE, "read")
+    assert principal.user_id is not None
+    cvs = await _load_active_cvs(session, user_id=principal.user_id)
+    return len(cvs)
+
+
+async def refresh_fit_scores_for_job(
+    session: AsyncSession, *, principal: Principal, job_id: uuid.UUID
+) -> dict:
+    """Deterministically (re)score the caller's active CVs against ONE job.
+
+    Reuses the SAME no-LLM per-job scorer as the job-list badge path
+    (:func:`_score_job` -> ``job_fit.evaluate`` + version-stamped
+    :mod:`fit_store` upsert), so the persisted ``cv_job_fit_scores`` rows are
+    byte-identical to what the student sees on the job card / detail page and feed
+    the competition applicant-quality inputs.
+
+    Idempotent: every active CV that already has a FRESH stored row for this job
+    is reused (no recompute); the rest are recomputed and upserted on
+    ``(cv_id, job_id)``. Re-running with unchanged CV/JD versions yields the same
+    rows and never duplicates them. Commits its own writes (the worker executor
+    session is otherwise discarded).
+
+    Returns a leak-safe summary — the student's own product signal only, never a
+    provider/model/token/embedding internal::
+
+        {"job_id", "scored_cvs", "recommended_cv_id", "signal", "skipped"}
+
+    ``skipped`` is set (and ``scored_cvs`` is 0) when there is nothing to score:
+    ``"no_active_cvs"`` or ``"job_not_visible"`` (hidden/closed/expired/missing —
+    the background job never fabricates a score for a job the student cannot see).
+    """
+    permission_checker.require(principal, _RESOURCE, "read")
+    assert principal.user_id is not None
+
+    cvs = await _load_active_cvs(session, user_id=principal.user_id)
+    if not cvs:
+        return {
+            "job_id": str(job_id),
+            "scored_cvs": 0,
+            "recommended_cv_id": None,
+            "signal": "low_signal",
+            "skipped": "no_active_cvs",
+        }
+
+    now = _now()
+    # Same public visibility predicate as the badge path — a hidden / unpublished /
+    # closed / past-deadline job is indistinguishable from missing (no score).
+    levels = lifecycle.visible_levels_for("student", is_authenticated=True)
+    stmt = apply_visible_filter(
+        select(Job).where(Job.id == job_id), levels=levels, now=now
+    )
+    job = (await session.execute(stmt)).scalar_one_or_none()
+    if job is None:
+        return {
+            "job_id": str(job_id),
+            "scored_cvs": 0,
+            "recommended_cv_id": None,
+            "signal": "low_signal",
+            "skipped": "job_not_visible",
+        }
+
+    org = await org_reporting_facade.summary_for(session, job.org_id)
+    job_dict = _job_projection(job, org.display_name if org else None)
+    cv_inputs = [await _build_cv_input(session, cv=cv, now=now) for cv in cvs]
+
+    result = await _score_job(
+        session,
+        user_id=principal.user_id,
+        job=job,
+        job_dict=job_dict,
+        cvs=cvs,
+        cv_inputs=cv_inputs,
+    )
+    # Persist the (possibly refreshed) version-stamped fit rows.
+    await session.commit()
+
+    return {
+        "job_id": str(job_id),
+        "scored_cvs": len(cvs),
+        "recommended_cv_id": result["recommended_cv_id"],
+        "signal": result["signal"],
+        "skipped": None,
+    }

@@ -161,8 +161,10 @@ async def upsert_result(
 
     if stamps_changed:
         # Content moved (or brand-new row): any cached explanation no longer
-        # describes the current score, so drop it and let the caller regenerate.
+        # describes the current score, so drop it (and its structured detail) and
+        # let the caller regenerate.
         row.explanation = None
+        row.explanation_structured = None
         row.explanation_prompt_version = None
         row.explanation_lang = None
         row.explanation_generated_at = None
@@ -179,11 +181,15 @@ async def save_explanation(
     explanation: str,
     prompt_version: int,
     lang: str,
+    structured: dict | None = None,
 ) -> None:
     """Persist the AI explanation for ``(cv_id, job_id)`` — explanation fields only.
 
-    The deterministic score/bands are left untouched. No-op if the row is missing
-    (it is always upserted first by the caller).
+    The deterministic score/bands are left untouched. ``structured`` is the
+    leak-safe per-requirement matching detail (``semantic_scorer.analysis_payload``)
+    for THIS CV; it is stored on the row and defaults to ``None`` (e.g. a cross-CV
+    summary reuse carries no CV-specific structured detail). No-op if the row is
+    missing (it is always upserted first by the caller).
     """
     row = (
         await session.execute(
@@ -196,6 +202,7 @@ async def save_explanation(
     if row is None:
         return
     row.explanation = explanation
+    row.explanation_structured = structured
     row.explanation_prompt_version = prompt_version
     row.explanation_lang = lang
     row.explanation_generated_at = datetime.now(tz=UTC)

@@ -79,6 +79,8 @@ async def create_application_cv_snapshot(
     application_id: uuid.UUID | None = None,
     idempotency_key: str | None = None,
     ctx: RequestContext,
+    job_id: uuid.UUID | None = None,
+    job_persona: str = "student",
     commit: bool = True,
 ) -> ApplicationCvSnapshot:
     """Create an immutable application CV snapshot for ``owner_id``.
@@ -86,6 +88,16 @@ async def create_application_cv_snapshot(
     ``cv_selection`` matches ``docs/API_CONTRACTS.md`` Application CV Selection:
     ``{"type": "builder_cv"|"uploaded_document", "cv_profile_id", "cv_version_id",
     "uploaded_document_id"}``. Verifies ownership of every referenced resource.
+
+    When ``job_id`` is supplied (the apply flow), the DETERMINISTIC CV-JD fit of the
+    chosen builder CV against that job is computed and FROZEN onto the snapshot
+    (``fit_score`` + ``scorer_version``) — point-in-time, immutable, and free (no
+    LLM / no energy). This is the WS-5 foundation that makes the competition
+    applicant-quality pool the set of REAL applicants instead of fit-score viewers.
+    The fit is left ``None`` (never fabricated) for an uploaded-document apply (no
+    scoreable CV profile) or when the job can no longer be scored. Immutability is
+    preserved: the fit is only ever set on FIRST creation — an idempotent replay
+    returns the existing snapshot untouched above and never recomputes.
     """
 
     application_id = _shared.to_uuid(application_id)
@@ -148,6 +160,25 @@ async def create_application_cv_snapshot(
         snapshot.cv_id = cv.id
         snapshot.cv_version_id = version.id
         snapshot.snapshot_json = dict(version.snapshot_json or {})
+        # Freeze the deterministic CV-JD fit at apply time (WS-5). Lazy import keeps
+        # the AI-gateway/energy import graph out of this lightweight snapshot module
+        # and avoids any import cycle. Best-effort: a scorer failure must never break
+        # the apply — the pool is simply incomplete for this row (fit stays None).
+        if job_id is not None:
+            try:
+                from app.modules.documents.application import job_fit_service
+
+                fit = await job_fit_service.deterministic_fit_score(
+                    session,
+                    user_id=owner_id,
+                    persona=job_persona,
+                    job_id=job_id,
+                    cv=cv,
+                )
+            except Exception:  # noqa: BLE001 — fit capture is advisory; never break apply
+                fit = None
+            if fit is not None:
+                snapshot.fit_score, snapshot.scorer_version = fit
     elif sel_type == "uploaded_document":
         document_id = _shared.to_uuid(cv_selection.get("uploaded_document_id"))
         if not document_id:

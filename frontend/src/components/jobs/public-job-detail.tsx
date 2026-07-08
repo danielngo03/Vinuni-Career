@@ -17,7 +17,7 @@ import {
   CaretRight,
   ShareNetwork,
 } from "@phosphor-icons/react";
-import { useId, useState } from "react";
+import { useEffect, useId, useState } from "react";
 import { Link } from "@/i18n/navigation";
 import {
   Button,
@@ -31,11 +31,11 @@ import { useUiStore } from "@/stores/ui-store";
 import { useAuthStore } from "@/stores/auth-store";
 import { useJobLabels } from "@/lib/jobs/labels";
 import { formatSalary, formatLocation } from "@/lib/jobs/format";
+import { deriveApplyCta } from "@/lib/jobs/job-intelligence";
 import { ApiError, jobsApi, type JobTranslation } from "@/lib/api";
 import { CompanyAvatar } from "@/components/companies/company-avatar";
 import { ApplyModal } from "@/components/applications/apply-modal";
 import { SaveJobButton } from "@/components/jobs/save-job-button";
-import { InterviewPrepPanel } from "@/components/jobs/interview-prep-panel";
 import { CompetitionBadge } from "@/components/jobs/competition-badge";
 import { StudentJobIntelligencePanel } from "@/components/jobs/student-job-intelligence-panel";
 import { SimilarJobsRail } from "@/components/discovery/similar-jobs-rail";
@@ -43,6 +43,7 @@ import { TrackedItem } from "@/components/discovery/tracked-item";
 import { TranslateJobBanner } from "@/components/jobs/translate-job-banner";
 import { ReportButton } from "@/components/report/report-button";
 import { recordDiscoveryEvent } from "@/lib/discovery/analytics";
+import { jobSignalTags } from "@/lib/discovery/signal-tags";
 import { recordJobEngagement } from "@/lib/analytics/job-engagement";
 
 
@@ -70,11 +71,48 @@ export function PublicJobDetail({ jobId }: { jobId: string }) {
     retry: false,
   });
 
+  // Apply-readiness comes from the same student-intelligence read the fit panel
+  // uses (shared query key → one fetch, one cache). Only students call it; it
+  // surfaces the server's own apply guard (`already_applied` / `deadline_passed`)
+  // so the primary CTA never invites a duplicate the backend would 409.
+  const intel = useQuery({
+    queryKey: ["jobs", "student-intelligence", jobId],
+    queryFn: () => jobsApi.studentIntelligence(jobId),
+    enabled: isStudent,
+    retry: false,
+    staleTime: 60_000,
+  });
+
   const job = query.data;
+
+  // Record a privacy-safe `view` discovery event once the real job loads. This
+  // is what feeds the coarse-signal ranker: a guest reading many JDs now
+  // registers company/work-mode/city affinity (and role_family/industry once the
+  // public job projection stamps them). Fire-and-forget + deduped by key.
+  useEffect(() => {
+    if (!job) return;
+    recordDiscoveryEvent({
+      event_type: "view",
+      source_surface: "job_detail",
+      target_type: "job",
+      target_id: job.id,
+      idempotency_key: `${renderId}:${job.id}:view`,
+      signal_tags: jobSignalTags(job),
+    });
+  }, [job, renderId]);
+
   const salary = job ? formatSalary(job.salary, locale) : null;
   const isHydratingAuth = status === "unknown";
   const isGuest = status === "guest";
   const canApply = isStudent;
+  const applyReadiness = intel.data?.apply_readiness;
+  const applyCta = deriveApplyCta({
+    isHydrating: isHydratingAuth,
+    isGuest,
+    canApply,
+    alreadyApplied: applyReadiness?.already_applied ?? false,
+    deadlinePassed: applyReadiness?.deadline_passed ?? false,
+  });
   function handleApply() {
     if (isHydratingAuth) return;
     // The apply button is this page's primary CTA — record it against the
@@ -325,23 +363,39 @@ export function PublicJobDetail({ jobId }: { jobId: string }) {
               <Button
                 variant="primary"
                 fullWidth
-                disabled={isHydratingAuth || !canApply}
+                disabled={applyCta.disabled}
                 onClick={handleApply}
               >
-                {isHydratingAuth
+                {applyCta.label === "loading"
                   ? tc("loading")
-                  : isGuest
+                  : applyCta.label === "signIn"
                     ? t("signInToApply")
-                    : canApply
-                      ? t("apply")
-                      : t("studentsOnlyApply")}
+                    : applyCta.label === "studentsOnly"
+                      ? t("studentsOnlyApply")
+                      : applyCta.label === "alreadyApplied"
+                        ? t("alreadyApplied")
+                        : applyCta.label === "deadlinePassed"
+                          ? t("deadlinePassed")
+                          : t("apply")}
               </Button>
+              {applyCta.showViewApplications && (
+                <Link
+                  href="/student/applications"
+                  className="mt-3 flex w-full items-center justify-center gap-1.5 rounded-lg border border-[var(--border-default)] px-3 py-2 text-sm font-semibold text-[var(--text-primary)] outline-none transition-colors hover:bg-[var(--surface-hover)] focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)]/30"
+                >
+                  {t("viewMyApplication")}
+                </Link>
+              )}
               <p className="mt-3 text-xs text-[var(--text-muted)]">
-                {isGuest
+                {applyCta.label === "signIn"
                   ? t("guestApplyHint")
-                  : canApply
-                    ? t("applyHint")
-                    : t("studentsOnlyApplyHint")}
+                  : applyCta.label === "studentsOnly"
+                    ? t("studentsOnlyApplyHint")
+                    : applyCta.label === "alreadyApplied"
+                      ? t("alreadyAppliedHint")
+                      : applyCta.label === "deadlinePassed"
+                        ? t("deadlinePassedHint")
+                        : t("applyHint")}
               </p>
             </div>
 
@@ -405,7 +459,6 @@ export function PublicJobDetail({ jobId }: { jobId: string }) {
                 <StudentJobIntelligencePanel jobId={job.id} />
               </TrackedItem>
             )}
-            {isStudent && <InterviewPrepPanel jobId={job.id} />}
           </aside>
         </div>
 

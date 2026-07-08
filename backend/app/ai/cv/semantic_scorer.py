@@ -82,6 +82,45 @@ class SemanticFitResult:
     prompt_version: int = PROMPT_VERSION
 
 
+def analysis_payload(result: SemanticFitResult) -> dict:
+    """Leak-safe structured analysis for the API + persistence (JSON-round-trippable).
+
+    This is the STRUCTURED matching detail that the caller used to discard — the
+    per-requirement matched evidence (with an ``evidence_strength`` label), the
+    confirmed gaps (each carrying its own advisory ``suggestion``), and the
+    ``overall_suggestion``. It is returned by the on-demand fit-explanation
+    sub-call and persisted per ``(cv_id, job_id)`` so a reload reuses it without
+    re-invoking the model.
+
+    The model-mirrored ``score`` is deliberately EXCLUDED — the deterministic
+    6-criteria product score is authoritative and returned separately; exposing the
+    model's number here would read as raw model confidence. No provider/model/
+    token/prompt internals are ever present (the dataclass already carries none).
+    """
+    return {
+        "overall_suggestion": result.overall_suggestion,
+        "matched_evidence": [
+            {
+                "requirement": m.requirement,
+                "cv_evidence": m.cv_evidence,
+                "evidence_strength": m.strength,
+                "reasoning": m.reasoning,
+            }
+            for m in result.matched_evidence
+        ],
+        "gaps": [
+            {
+                "requirement": g.requirement,
+                "cv_evidence": g.cv_evidence,
+                "severity": g.severity,
+                "reasoning": g.reasoning,
+                "suggestion": g.suggestion,
+            }
+            for g in result.gaps
+        ],
+    }
+
+
 # ---------------------------------------------------------------------------
 # CV evidence extraction (injection-resistant)
 # ---------------------------------------------------------------------------

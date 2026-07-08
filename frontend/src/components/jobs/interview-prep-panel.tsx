@@ -35,11 +35,13 @@ const TYPE_ICON: Record<QuestionType, React.ElementType> = {
   motivation: Sparkle,
 };
 
+// v9 Monochrome: no blue. Neutral chips carry the question number/type; color is
+// reserved for meaning (amber = motivation-style prompts) not decoration.
 const TYPE_COLOR: Record<QuestionType, string> = {
-  behavioral: "bg-[var(--blue-50)] text-[var(--brand-primary)]",
-  technical: "bg-[var(--teal-50)] text-[var(--brand-teal)]",
-  situational: "bg-[var(--teal-50)] text-[var(--brand-teal)]",
-  motivation: "bg-[var(--amber-100)] text-[var(--amber-700)]",
+  behavioral: "bg-[var(--bg-muted)] text-[var(--text-secondary)]",
+  technical: "bg-[var(--bg-muted)] text-[var(--text-secondary)]",
+  situational: "bg-[var(--bg-muted)] text-[var(--text-secondary)]",
+  motivation: "bg-[var(--amber-50)] text-[var(--amber-700)]",
 };
 
 /**
@@ -118,12 +120,12 @@ export function InterviewPrepPanel({ jobId }: Props) {
 
   const { result } = phase;
   return (
-    <div className="mt-3 overflow-hidden rounded-xl border border-[var(--ai-accent)]/25 bg-gradient-to-br from-[var(--ai-accent-soft)] to-[var(--glass-surface-light)] shadow-[0_2px_12px_rgba(11,34,57,0.06)]">
+    <div className="mt-3 overflow-hidden rounded-xl border border-[var(--border-default)] bg-[var(--surface-card)] shadow-[0_1px_2px_rgba(15,23,42,0.04)]">
       {/* Header */}
       <div className="flex items-center justify-between border-b border-[var(--border-default)] px-3.5 py-2.5">
         <div className="flex items-center gap-2">
-          <span className="flex size-5 shrink-0 items-center justify-center rounded-md icon-chip-info shadow-sm">
-            <Sparkle aria-hidden weight="duotone" className="size-3 text-white" />
+          <span className="flex size-5 shrink-0 items-center justify-center rounded-md icon-chip-info">
+            <Sparkle aria-hidden weight="duotone" className="size-3" />
           </span>
           <span className="text-xs font-bold text-[var(--text-primary)]">
             {t("panelTitle")}
@@ -133,7 +135,7 @@ export function InterviewPrepPanel({ jobId }: Props) {
           type="button"
           aria-label={t("close")}
           onClick={() => setPhase({ name: "idle" })}
-          className="rounded-lg p-1 text-[var(--text-muted)] hover:bg-[var(--glass-surface-light)]"
+          className="rounded-lg p-1 text-[var(--text-muted)] hover:bg-[var(--surface-hover)]"
         >
           <X aria-hidden weight="bold" className="size-3.5" />
         </button>
@@ -156,7 +158,7 @@ export function InterviewPrepPanel({ jobId }: Props) {
             <div key={q.number}>
               <button
                 type="button"
-                className="flex w-full items-start gap-2.5 px-3.5 py-2.5 text-left hover:bg-[var(--glass-surface-light)]"
+                className="flex w-full items-start gap-2.5 px-3.5 py-2.5 text-left hover:bg-[var(--surface-hover)]"
                 onClick={() => toggleExpanded(q.number)}
                 aria-expanded={isOpen}
               >
@@ -182,7 +184,7 @@ export function InterviewPrepPanel({ jobId }: Props) {
               </button>
 
               {isOpen && (
-                <div className="space-y-2 border-t border-[var(--border-default)] bg-[var(--glass-surface-light)] px-3.5 py-3">
+                <div className="space-y-2 border-t border-[var(--border-default)] bg-[var(--surface-secondary)] px-3.5 py-3">
                   <Detail
                     icon={CheckCircle}
                     label={t("hintLabel")}

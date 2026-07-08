@@ -502,6 +502,18 @@ class ApplicationCvSnapshot(Base):
     snapshot_json: Mapped[dict] = mapped_column(JsonType, nullable=False, default=dict)
     redacted_json: Mapped[dict | None] = mapped_column(JsonType, nullable=True)
     idempotency_key: Mapped[str | None] = mapped_column(String(200), nullable=True)
+    # Deterministic CV-JD fit (0-100) of the CHOSEN CV vs the job, captured at apply
+    # time and FROZEN with the snapshot — point-in-time by construction, so the
+    # competition applicant-quality pool is the real applicant set, not fit-score
+    # VIEWERS (``docs`` WS-5). ``scorer_version`` stamps the deterministic scorer
+    # (``app.ai.cv.job_fit.SCORER_VERSION``) used, so a later scorer bump is
+    # distinguishable. Both are NULLABLE and NEVER fabricated: they stay ``None``
+    # when no deterministic score can be computed (an uploaded-document apply with
+    # no scoreable CV profile, or a job no longer loadable). NO backfill — the
+    # competition quality pool is complete ONLY for applies made after this column
+    # shipped; historical applies keep ``fit_score = None`` (never invented).
+    fit_score: Mapped[int | None] = mapped_column(Integer, nullable=True)
+    scorer_version: Mapped[str | None] = mapped_column(String(20), nullable=True)
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), nullable=False, server_default=func.now()
     )
@@ -555,6 +567,13 @@ class CvJobFitScore(Base):
     # Optional AI explanation for the recommended CV (regenerated only when the
     # content version or prompt version/language changes).
     explanation: Mapped[str | None] = mapped_column(Text, nullable=True)
+    # Structured matching detail from the semantic layer (per-requirement matched
+    # evidence + confirmed gaps with advisory suggestions + overall suggestion),
+    # persisted alongside ``explanation`` so a reload returns the full analysis
+    # without re-invoking the model. CV-specific (owner-scoped by the row), so it
+    # is NOT shared through the cross-CV ``cv_fit_explanation_cache``. Leak-safe:
+    # no score/provider/model/token internals (``semantic_scorer.analysis_payload``).
+    explanation_structured: Mapped[dict | None] = mapped_column(JsonType, nullable=True)
     explanation_prompt_version: Mapped[int | None] = mapped_column(
         Integer, nullable=True
     )

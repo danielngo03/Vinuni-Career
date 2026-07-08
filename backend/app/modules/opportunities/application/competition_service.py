@@ -46,6 +46,7 @@ RBAC:
 
 from __future__ import annotations
 
+import logging
 import uuid
 from datetime import UTC, datetime
 
@@ -53,14 +54,28 @@ from sqlalchemy import Uuid, bindparam, select, text
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.ai.cv.llm import generate_note
+from app.ai.energy import service as energy_service
 from app.ai.gateway import runtime_config
 from app.ai.gateway.factory import real_provider_active
+from app.ai.observability.billable_usage import (
+    FEATURE_COMPETITION_EXPLANATION,
+    record_billable_usage,
+)
 from app.ai.prompts.competition import v1 as competition_prompt
+from app.modules.opportunities.application import competition_projection_service
 from app.modules.opportunities.application.visibility import apply_visible_filter
+from app.modules.opportunities.domain import competition_scoring as scoring
 from app.modules.opportunities.domain import lifecycle
 from app.modules.opportunities.domain.models import Job
-from app.shared.exceptions import AIUnavailableError, ResourceNotFoundError
+from app.shared.exceptions import (
+    AIUnavailableError,
+    PermissionDeniedError,
+    QuotaExceededError,
+    ResourceNotFoundError,
+)
 from app.shared.permissions import Principal
+
+logger = logging.getLogger(__name__)
 
 # --------------------------------------------------------------------------- #
 # Internal constants                                                           #
@@ -222,15 +237,14 @@ def compute_jd_complexity(
 
 
 def map_raw_to_level(raw: int) -> str:
-    """Map the combined raw score to a competition level key."""
+    """Map the combined raw score to a competition level key.
 
-    if raw < 20:
-        return "low"
-    if raw < 45:
-        return "medium"
-    if raw < 65:
-        return "high"
-    return "very_high"
+    Thin re-export of the shared pure mapping in
+    :mod:`opportunities.domain.competition_scoring` so the public signal, the
+    student-aware signal, and the projection all agree on the level boundaries.
+    """
+
+    return scoring.map_raw_to_level(raw)
 
 
 def compute_signal(
@@ -238,14 +252,17 @@ def compute_signal(
     jd_complexity: int,
     application_count: int,
 ) -> tuple[int, str]:
-    """Return ``(raw_score, level_key)``.
+    """Return ``(raw_score, level_key)`` for the PUBLIC (non-personalized) signal.
 
-    ``raw = jd_complexity + clamp(application_count × 3, 0, 40)``
+    ``raw = jd_complexity + clamp(application_count × 3, 0, 40)``. This
+    volume-based mapping is used by the public ``competition_signal`` endpoint
+    only; the authenticated-student signal is QUALITY-adjusted (reads on the
+    caliber of real applicants, not raw volume) via
+    ``scoring.quality_adjusted_level``.
     """
 
-    app_contribution = max(0, min(application_count * 3, 40))
-    raw = jd_complexity + app_contribution
-    return raw, map_raw_to_level(raw)
+    raw = scoring.volume_raw(jd_complexity, application_count)
+    return raw, scoring.map_raw_to_level(raw)
 
 
 # --------------------------------------------------------------------------- #
@@ -316,13 +333,6 @@ async def _maybe_explain(
 
 _LOW_SIGNAL_APPLICATION_THRESHOLD = 3
 _LOW_SIGNAL_SOURCE_EVENT_THRESHOLD = 5
-
-# Minimum number of OTHER scored candidates required before an applicant-quality
-# distribution / student-standing bucket may be emitted. Below this the pool is
-# too small to (a) be statistically meaningful and (b) stay privacy-safe (a
-# coarse bucket over a handful of rows could hint at a single individual), so
-# ``applicant_quality_bucket`` stays "unknown" and standing stays "unknown".
-_MIN_QUALITY_POOL = 5
 
 # English machine-readable label (distinct from the Vietnamese display label
 # used by the public, non-personalized ``competition_signal`` above).
@@ -434,101 +444,26 @@ async def _source_mix(
     return {k: round(v / total, 2) for k, v in buckets.items() if v > 0}
 
 
-async def _applicant_quality_pool(
-    session: AsyncSession,
-    *,
-    job_id: uuid.UUID,
-    exclude_user_id: uuid.UUID | None,
-) -> list[int]:
-    """Best persisted fit score per OTHER scored candidate for this job.
-
-    Reads the ``documents`` module's ``cv_job_fit_scores`` store READ-ONLY via a
-    raw ``text()`` query — the same cross-module read pattern this file already
-    uses for ``applications`` / ``discovery_events`` (no ``documents`` ORM/domain
-    import, so the module boundary holds). One representative (MAX) score per
-    distinct ``user_id`` so a candidate with several CVs cannot skew the
-    distribution, and the requesting student is excluded so their own score never
-    inflates/deflates the pool they are compared against.
-
-    Returns raw integer scores. The caller emits ONLY coarse buckets derived from
-    them — never an individual score, a rank, a percentile, or an identity.
-    """
-
-    sql = (
-        "SELECT user_id, MAX(score) AS best FROM cv_job_fit_scores"
-        " WHERE job_id = :job_id"
-    )
-    params: dict[str, object] = {"job_id": job_id}
-    binds = [bindparam("job_id", type_=Uuid(as_uuid=True))]
-    if exclude_user_id is not None:
-        sql += " AND user_id <> :exclude_user_id"
-        params["exclude_user_id"] = exclude_user_id
-        binds.append(bindparam("exclude_user_id", type_=Uuid(as_uuid=True)))
-    sql += " GROUP BY user_id"
-
-    result = await session.execute(text(sql).bindparams(*binds), params)
-    return [int(best) for _uid, best in result.all() if best is not None]
-
-
-def _median(values: list[int]) -> float:
-    """Deterministic median (average of the two middle values for even counts)."""
-
-    ordered = sorted(values)
-    n = len(ordered)
-    mid = n // 2
-    if n % 2 == 1:
-        return float(ordered[mid])
-    return (ordered[mid - 1] + ordered[mid]) / 2
-
-
-def _applicant_quality_bucket(pool: list[int]) -> str:
-    """Coarse caliber of the competing pool from its fit-score median.
-
-    ``strong`` / ``mixed`` / ``developing`` — or ``unknown`` when the sample is
-    below :data:`_MIN_QUALITY_POOL`. Never exposes any individual value.
-    """
-
-    if len(pool) < _MIN_QUALITY_POOL:
-        return "unknown"
-    median = _median(pool)
-    if median >= 70:
-        return "strong"
-    if median >= 50:
-        return "mixed"
-    return "developing"
-
-
-def _student_standing_bucket(student_score: int | None, pool: list[int]) -> str:
-    """Coarse position of the student within the pool (NOT an exact rank/percentile).
-
-    ``ahead_of_most`` / ``middle_of_pack`` / ``behind_most`` from the fraction of
-    the pool the student's score is at-or-above, in deterministic thirds — or
-    ``unknown`` when there is no student score or the pool is too small. The
-    output is intentionally coarse (three bands) so it can never be reversed into
-    another candidate's score or an exact ordering.
-    """
-
-    if student_score is None or len(pool) < _MIN_QUALITY_POOL:
-        return "unknown"
-    at_or_below = sum(1 for score in pool if score <= student_score)
-    fraction = at_or_below / len(pool)
-    if fraction >= 0.66:
-        return "ahead_of_most"
-    if fraction >= 0.33:
-        return "middle_of_pack"
-    return "behind_most"
-
-
 async def _applied_by_student(
     session: AsyncSession, *, job_id: uuid.UUID, student_user_id: uuid.UUID
 ) -> bool:
-    """Whether this student has a live (non-withdrawn, non-deleted) application."""
+    """Whether this student has an ACTIVE (re-apply-blocking) application.
+
+    This is the canonical "already applied → cannot re-apply" predicate that
+    drives the apply-readiness flag / apply-button disable. It MUST match the
+    server-side apply guard (``apply_service._active_duplicate`` blocks exactly
+    the ACTIVE statuses), so that a state which the backend would actually accept
+    a re-application for never shows a disabled apply button. A ``withdrawn``,
+    ``rejected``, or ``hired`` application frees the slot (``lifecycle`` docstring)
+    and therefore does NOT count as already-applied here — re-apply is allowed.
+    """
 
     result = await session.execute(
         text(
             "SELECT 1 FROM applications"
             " WHERE job_id = :job_id AND applicant_id = :user_id"
-            " AND status != 'withdrawn' AND deleted_at IS NULL"
+            " AND status IN ('submitted', 'under_review')"
+            " AND deleted_at IS NULL"
             " LIMIT 1"
         ).bindparams(
             bindparam("job_id", type_=Uuid(as_uuid=True)),
@@ -679,14 +614,30 @@ async def student_competition_intelligence(
         raise ResourceNotFoundError()
 
     now = _now()
-    app_count = await _count_active_applications(session, job_id=job_id)
     required_skills_count = len(job.required_skills or [])
     jd_complexity, _exp_tier, _skills_tier = compute_jd_complexity(
         experience_min_years=job.experience_min_years,
         required_skills_count=required_skills_count,
         employment_type=job.employment_type,
     )
-    raw, level = compute_signal(jd_complexity=jd_complexity, application_count=app_count)
+
+    # Hot path: read the materialized competition inputs from the
+    # ``job_competition_daily`` projection (ONE indexed lookup; on a miss a single
+    # bounded live compute for this job). The applicant-quality pool is the set of
+    # REAL active applicants joined to their immutable snapshot fit — NOT fit-score
+    # viewers/browsers. NULL-fit applicants are unknown quality, excluded from the
+    # caliber math (never fit 0).
+    stats = await competition_projection_service.stats_for_read(
+        session, job_id=job_id, org_id=job.org_id, seats=job.headcount
+    )
+    app_count = stats.active_applications
+
+    # QUALITY-adjusted headline: reads on strong-competitor density (real caliber),
+    # so 1000 weak applicants + a handful of strong ones for one seat reads on the
+    # handful, not the 1000. Falls back to a capped volume estimate only when the
+    # scored pool is too thin to judge caliber (honest cold start). AI never moves
+    # this number.
+    raw, level, basis = scoring.quality_adjusted_level(stats, jd_complexity)
 
     deadline_freshness = _deadline_freshness(job.application_deadline, now=now)
     already_applied = False
@@ -697,21 +648,14 @@ async def student_competition_intelligence(
 
     fit_bucket = _student_fit_bucket(student_fit_score)
 
-    # applicant_quality_bucket + student_standing_bucket: real, privacy-safe
-    # aggregates over the OTHER candidates who have a persisted deterministic fit
-    # score for this job (``documents.cv_job_fit_scores``). Both are coarse
-    # buckets derived from the pool's score DISTRIBUTION only — never an
-    # individual score, a rank, a percentile, or an identity — and both fall back
-    # to "unknown" when the scored pool is below ``_MIN_QUALITY_POOL`` (small
-    # sample / privacy guard). This is a distinct sample from ``app_count`` (the
-    # application-VOLUME signal below): the scored pool measures the caliber of
-    # interested candidates, which may be informative even when few have formally
-    # applied yet.
-    quality_pool = await _applicant_quality_pool(
-        session, job_id=job_id, exclude_user_id=principal.user_id
-    )
-    applicant_quality_bucket = _applicant_quality_bucket(quality_pool)
-    student_standing_bucket = _student_standing_bucket(student_fit_score, quality_pool)
+    # Coarse, privacy-safe bands over the REAL-applicant distribution. Every
+    # caliber band is guarded by a minimum scored pool (never a raw count, an
+    # individual score, an exact rank, or an identity).
+    applicant_quality_bucket = scoring.applicant_quality_bucket(stats)
+    student_standing_bucket = scoring.student_standing_bucket(student_fit_score, stats)
+    applicants_per_seat_band = scoring.applicants_per_seat_band(stats)
+    strong_competitor_density = scoring.strong_competitor_density(stats)
+    standing_vs_strong = scoring.standing_vs_strong(student_fit_score, stats)
 
     signal = "low_signal" if app_count < _LOW_SIGNAL_APPLICATION_THRESHOLD else "ok"
     source_mix = await _source_mix(session, job_id=job_id)
@@ -729,17 +673,192 @@ async def student_competition_intelligence(
         "score": None if signal == "low_signal" else max(0, min(100, raw)),
         "label": None if signal == "low_signal" else _STUDENT_LABELS[level],
         "signal": signal,
+        "basis": None if signal == "low_signal" else basis,
         "seats_bucket": _seats_bucket(job.headcount),
         "application_volume_bucket": _application_volume_bucket(app_count),
+        "applicants_per_seat_band": applicants_per_seat_band,
+        "strong_competitor_density": strong_competitor_density,
         "applicant_quality_bucket": applicant_quality_bucket,
         "student_fit_bucket": fit_bucket,
         "student_standing_bucket": student_standing_bucket,
+        "standing_vs_strong": standing_vs_strong,
         "deadline_freshness": deadline_freshness,
         "source_mix": source_mix,
         "guidance": guidance,
         "_deadline_passed": deadline_freshness == "closed",
         "_already_applied": already_applied,
     }
+
+
+# --------------------------------------------------------------------------- #
+# On-demand AI competition narrative (metered; user-triggered drawer only)      #
+# --------------------------------------------------------------------------- #
+#
+# The deterministic bands above OWN the signal and are FREE. This narrative is a
+# single short, grounded paragraph that explains the pre-computed level in plain
+# language — produced ONLY when the student opens the Competition drawer, cached,
+# and metered on success. It NEVER moves the numbers.
+
+TASK_TYPE_EXPLANATION = "student_competition_explanation"
+_COMPETITION_NARRATIVE_TTL_SECONDS = 6 * 3600
+
+
+async def _charge_competition_energy(
+    session: AsyncSession, *, principal: Principal, job_id: uuid.UUID, level: str
+) -> None:
+    """Debit the student's AI energy for one freshly-generated narrative.
+
+    Idempotent on the ``(job, level)`` pair so re-opening the drawer while the
+    signal is unchanged never double-charges. Best-effort; never breaks the read.
+    Stores no provider/model/token internals.
+    """
+
+    try:
+        ctx = energy_service.build_usage_context(
+            principal,
+            feature_key=FEATURE_COMPETITION_EXPLANATION,
+            task_type=TASK_TYPE_EXPLANATION,
+            resource_type="job",
+            resource_id=job_id,
+            idempotency_parts=(job_id, level),
+        )
+        await record_billable_usage(
+            session,
+            ctx=ctx,
+            result_status="success",
+            base_units=energy_service.charge_units(FEATURE_COMPETITION_EXPLANATION),
+        )
+    except Exception:  # noqa: BLE001 — accounting must never break the read
+        logger.warning("competition_energy_charge_failed", exc_info=True)
+
+
+async def competition_explanation(
+    session: AsyncSession,
+    *,
+    principal: Principal,
+    job_id: uuid.UUID,
+    locale: str = _DEFAULT_LOCALE,
+    redis: object | None = None,
+) -> dict:
+    """On-demand, metered AI narrative for the student Competition drawer.
+
+    Returns ``{level, label, explanation, ai_explanation_available}``. The
+    deterministic ``level``/``label`` are always present (they are the product);
+    ``explanation`` is the advisory narrative, ``None`` when the AI gate is off,
+    the provider fails, weekly energy is exhausted, or the signal is still
+    ``low_signal`` (nothing to explain yet). A cache hit returns the stored
+    narrative WITHOUT charging (``cached`` → 0 credits); a fresh generation
+    charges once (idempotent per ``(job, level)``). Never raises for AI-off /
+    failure; provider/model/token/prompt/cost internals are never exposed.
+    """
+
+    if principal.persona != "student":
+        raise PermissionDeniedError()
+
+    job = await _load_job(session, job_id=job_id, principal=principal)
+    if job is None:
+        raise ResourceNotFoundError()
+
+    required_skills_count = len(job.required_skills or [])
+    jd_complexity, exp_tier, skills_tier = compute_jd_complexity(
+        experience_min_years=job.experience_min_years,
+        required_skills_count=required_skills_count,
+        employment_type=job.employment_type,
+    )
+    stats = await competition_projection_service.stats_for_read(
+        session, job_id=job_id, org_id=job.org_id, seats=job.headcount
+    )
+    _raw, level, _basis = scoring.quality_adjusted_level(stats, jd_complexity)
+
+    # Not enough activity to explain competition honestly yet.
+    if stats.active_applications < _LOW_SIGNAL_APPLICATION_THRESHOLD:
+        return {
+            "level": None,
+            "label": None,
+            "explanation": None,
+            "ai_explanation_available": False,
+        }
+
+    label = _STUDENT_LABELS[level]
+
+    # AI gate OFF -> deterministic level only, no charge.
+    if not (
+        real_provider_active()
+        and runtime_config.current().job_fit_ai_explanation_enabled
+    ):
+        return {
+            "level": level,
+            "label": label,
+            "explanation": None,
+            "ai_explanation_available": False,
+        }
+
+    cache_key = f"competition_expl:{job_id}:{level}:{locale}"
+    cached = await _cache_get(redis, cache_key)
+    if cached is not None:
+        # Cache hit: reuse the narrative, charge 0 (already billed on generation).
+        return {
+            "level": level,
+            "label": label,
+            "explanation": cached,
+            "ai_explanation_available": True,
+        }
+
+    # Preflight the weekly energy gate; the narrative is advisory enrichment, so
+    # degrade to no-narrative on exhaustion rather than surfacing a 409 here.
+    try:
+        await energy_service.enforce_energy(session, principal=principal)
+    except QuotaExceededError:
+        return {
+            "level": level,
+            "label": label,
+            "explanation": None,
+            "ai_explanation_available": False,
+        }
+
+    explanation, available = await _maybe_explain(
+        job_title=job.title,
+        level=level,
+        experience_tier=exp_tier,
+        skills_tier=skills_tier,
+        employment_type=job.employment_type,
+    )
+    if available and explanation is not None:
+        await _cache_set(redis, cache_key, explanation)
+        await _charge_competition_energy(
+            session, principal=principal, job_id=job_id, level=level
+        )
+        await session.commit()
+
+    return {
+        "level": level,
+        "label": label,
+        "explanation": explanation,
+        "ai_explanation_available": available,
+    }
+
+
+async def _cache_get(redis: object | None, key: str) -> str | None:
+    if redis is None:
+        return None
+    try:
+        value = await redis.get(key)  # type: ignore[attr-defined]
+    except Exception:  # noqa: BLE001 — cache is best-effort
+        return None
+    if value is None:
+        return None
+    return value.decode() if isinstance(value, bytes) else str(value)
+
+
+async def _cache_set(redis: object | None, key: str, value: str) -> None:
+    if redis is None:
+        return
+    try:
+        await redis.set(  # type: ignore[attr-defined]
+            key, value, ex=_COMPETITION_NARRATIVE_TTL_SECONDS
+        )
+    except Exception:  # noqa: BLE001 — cache is best-effort
+        logger.debug("competition_narrative_cache_set_failed", exc_info=True)
 
 
 async def competition_signal(
