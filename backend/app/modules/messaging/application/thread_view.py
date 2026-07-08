@@ -22,10 +22,8 @@ from __future__ import annotations
 import uuid
 from datetime import UTC, datetime
 
-from sqlalchemy import func, or_, select
+from sqlalchemy import column, func, or_, select, table
 from sqlalchemy.ext.asyncio import AsyncSession
-
-from sqlalchemy import column, table
 
 from app.modules.messaging.application import _shared, party_service
 from app.modules.messaging.application.recruitment_relationship import (
@@ -279,26 +277,26 @@ async def counterpart_label(
             label += f" +{len(others) - 3}"
         return label
 
-    # Legacy fallback.
-    others = [p for p in participants if p.user_id != viewer.user_id]
-    if not others:
+    # Legacy fallback (threads with no party rows).
+    other_participants = [p for p in participants if p.user_id != viewer.user_id]
+    if not other_participants:
         return labels.kind_label(thread.kind, locale=locale)
     rendered = []
-    for p in others[:3]:
+    for participant in other_participants[:3]:
         rendered.append(
             await render_participant_label(
                 session,
                 viewer=viewer,
                 thread=thread,
-                other_user_id=p.user_id,
+                other_user_id=participant.user_id,
                 relationship=relationship,
                 is_moderator=is_moderator,
                 locale=locale,
             )
         )
     label = ", ".join(rendered)
-    if len(others) > 3:
-        label += f" +{len(others) - 3}"
+    if len(other_participants) > 3:
+        label += f" +{len(other_participants) - 3}"
     return label
 
 

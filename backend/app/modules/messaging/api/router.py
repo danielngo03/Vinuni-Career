@@ -16,12 +16,21 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from app.core.db import get_db_session
 from app.modules.auth.api.deps import CurrentAuth, get_current_auth
 from app.modules.messaging.api.schemas import (
+    AssignThreadBody,
     CreateThreadBody,
     MuteBody,
     ReportBody,
+    ResolveThreadBody,
     SendMessageBody,
 )
-from app.modules.messaging.application import message_service, thread_service
+from app.modules.messaging.application import (
+    assignment_service,
+    inbox_service,
+    message_service,
+    recipient_service,
+    request_service,
+    thread_service,
+)
 from app.shared.responses import paginated, success
 
 router = APIRouter(prefix="/messaging", tags=["messaging"])
@@ -53,11 +62,60 @@ async def create_thread(
         context_type=body.context_type,
         context_id=body.context_id,
         recipient_ids=body.recipient_ids,
+        target_org_id=body.target_org_id,
+        target_department_id=body.target_department_id,
         subject=body.subject,
         first_message=body.first_message,
         ctx=auth.ctx,
     )
     return success(data)
+
+
+@router.get("/inbox", summary="Org shared inbox (RBAC + department scoped)")
+async def org_inbox(
+    auth: CurrentAuth = Depends(get_current_auth),
+    session: AsyncSession = Depends(get_db_session),
+    scope: str = Query(default="all"),
+    department_id: uuid.UUID | None = Query(default=None),
+    q: str | None = Query(default=None),
+    cursor: str | None = Query(default=None),
+    limit: int | None = Query(default=None),
+) -> dict:
+    items, next_cursor, page_limit = await inbox_service.list_org_inbox(
+        session,
+        principal=auth.principal,
+        scope=scope,
+        department_id=department_id,
+        q=q,
+        cursor=cursor,
+        limit=limit,
+    )
+    return paginated(items, next_cursor=next_cursor, limit=page_limit)
+
+
+@router.post("/inbox/{thread_id}/read", summary="Mark an org thread team-read")
+async def org_inbox_read(
+    thread_id: uuid.UUID,
+    auth: CurrentAuth = Depends(get_current_auth),
+    session: AsyncSession = Depends(get_db_session),
+) -> dict:
+    data = await inbox_service.mark_org_read(
+        session, principal=auth.principal, thread_id=thread_id, ctx=auth.ctx
+    )
+    return success(data)
+
+
+@router.get("/recipients", summary="Search valid message recipients for the composer")
+async def search_recipients(
+    auth: CurrentAuth = Depends(get_current_auth),
+    session: AsyncSession = Depends(get_db_session),
+    q: str | None = Query(default=None),
+    limit: int = Query(default=20),
+) -> dict:
+    items = await recipient_service.search(
+        session, principal=auth.principal, q=q, limit=limit
+    )
+    return success({"items": items})
 
 
 @router.get("/unread-count", summary="Badge sum across my non-muted threads (polling)")
@@ -179,6 +237,61 @@ async def report_thread(
         principal=auth.principal,
         thread_id=thread_id,
         reason=body.reason,
+        ctx=auth.ctx,
+    )
+    return success(data)
+
+
+@router.post(
+    "/threads/{thread_id}/request/{action}",
+    summary="Respond to a message request (accept | decline | block)",
+)
+async def respond_request(
+    thread_id: uuid.UUID,
+    action: str,
+    auth: CurrentAuth = Depends(get_current_auth),
+    session: AsyncSession = Depends(get_db_session),
+) -> dict:
+    data = await request_service.respond(
+        session,
+        principal=auth.principal,
+        thread_id=thread_id,
+        action=action,
+        ctx=auth.ctx,
+    )
+    return success(data)
+
+
+@router.post("/threads/{thread_id}/assign", summary="Route an org thread (dept/assignee)")
+async def assign_thread(
+    thread_id: uuid.UUID,
+    body: AssignThreadBody,
+    auth: CurrentAuth = Depends(get_current_auth),
+    session: AsyncSession = Depends(get_db_session),
+) -> dict:
+    data = await assignment_service.assign(
+        session,
+        principal=auth.principal,
+        thread_id=thread_id,
+        department_id=body.department_id,
+        assignee_id=body.assignee_id,
+        ctx=auth.ctx,
+    )
+    return success(data)
+
+
+@router.post("/threads/{thread_id}/resolve", summary="Resolve/reopen an org thread")
+async def resolve_thread(
+    thread_id: uuid.UUID,
+    body: ResolveThreadBody,
+    auth: CurrentAuth = Depends(get_current_auth),
+    session: AsyncSession = Depends(get_db_session),
+) -> dict:
+    data = await assignment_service.set_resolution(
+        session,
+        principal=auth.principal,
+        thread_id=thread_id,
+        resolved=body.resolved,
         ctx=auth.ctx,
     )
     return success(data)

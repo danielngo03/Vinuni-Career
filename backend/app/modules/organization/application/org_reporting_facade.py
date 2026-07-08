@@ -31,6 +31,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.core.config import get_settings
 from app.modules.organization.domain.models import (
+    Department,
     Membership,
     MembershipDepartment,
     Organization,
@@ -320,3 +321,46 @@ async def department_ids_for_user_in_org(
     if membership_id is None:
         return set()
     return set(await department_ids_for_membership(session, membership_id=membership_id))
+
+
+async def list_departments_brief(
+    session: AsyncSession, *, org_id: uuid.UUID, q: str | None = None, limit: int = 20
+) -> list[dict]:
+    """Departments of an org (id + name) for the messaging recipient picker."""
+
+    stmt = select(Department.id, Department.name).where(Department.org_id == org_id)
+    if q:
+        stmt = stmt.where(func.lower(Department.name).like(f"%{q.strip().lower()}%"))
+    stmt = stmt.order_by(Department.name.asc()).limit(max(1, min(limit, 50)))
+    rows = (await session.execute(stmt)).all()
+    return [{"id": str(r[0]), "name": r[1]} for r in rows]
+
+
+async def list_members_brief(
+    session: AsyncSession, *, org_id: uuid.UUID, q: str | None = None, limit: int = 20
+) -> list[dict]:
+    """Active members of an org (user_id + full name) for the recipient picker.
+
+    Joins ``memberships`` (org-owned) to a lightweight ``users`` core view so the
+    facade resolves the name without importing the ``users`` ORM (module boundary).
+    """
+
+    from sqlalchemy import column, table
+
+    users = table("users", column("id"), column("full_name"), column("is_active"))
+    stmt = (
+        select(users.c.id, users.c.full_name)
+        .select_from(
+            Membership.__table__.join(users, users.c.id == Membership.user_id)
+        )
+        .where(
+            Membership.org_id == org_id,
+            Membership.status == "active",
+            users.c.is_active.is_(True),
+        )
+    )
+    if q:
+        stmt = stmt.where(func.lower(users.c.full_name).like(f"%{q.strip().lower()}%"))
+    stmt = stmt.order_by(users.c.full_name.asc()).limit(max(1, min(limit, 50)))
+    rows = (await session.execute(stmt)).all()
+    return [{"user_id": str(r[0]), "full_name": r[1] or ""} for r in rows]

@@ -9,9 +9,28 @@ never a user identity.
 from __future__ import annotations
 
 from app.modules.messaging.domain import labels
-from app.modules.messaging.domain.models import Message, MessageThread
+from app.modules.messaging.domain.models import (
+    Message,
+    MessageThread,
+    MessageThreadParty,
+)
 
 _SYSTEM_LABEL = {"vi": "Hệ thống", "en": "System"}
+
+_REQUEST_LABELS = {
+    "vi": {
+        "accepted": "Đang trò chuyện",
+        "pending": "Chờ chấp nhận",
+        "declined": "Đã từ chối",
+        "blocked": "Đã chặn",
+    },
+    "en": {
+        "accepted": "Open",
+        "pending": "Pending request",
+        "declined": "Declined",
+        "blocked": "Blocked",
+    },
+}
 
 
 def _iso(value) -> str | None:
@@ -38,10 +57,31 @@ def thread_summary(
         "status": thread.status,
         "status_label": labels.status_label(thread.status, locale=locale),
         "is_anonymous": thread.is_anonymous,
+        "thread_kind": thread.thread_kind or thread.kind,
+        "request_state": thread.request_state,
+        "request_label": _REQUEST_LABELS.get(
+            labels.normalize_locale(locale), _REQUEST_LABELS["vi"]
+        ).get(thread.request_state, thread.request_state),
         "unread": unread,
         "can_reply": can_reply,
         "muted": muted,
         "last_message_at": _iso(thread.last_message_at),
+    }
+
+
+def assignment_block(party: MessageThreadParty) -> dict:
+    """Org-inbox routing fields for a shared-inbox thread row (never raw PII)."""
+
+    return {
+        "assignment_state": party.assignment_state,
+        "assigned_department_id": (
+            str(party.assigned_department_id)
+            if party.assigned_department_id
+            else None
+        ),
+        "assigned_user_id": (
+            str(party.assigned_user_id) if party.assigned_user_id else None
+        ),
     }
 
 
