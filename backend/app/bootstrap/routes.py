@@ -5,6 +5,8 @@ from __future__ import annotations
 from fastapi import APIRouter, FastAPI
 
 from app.ai.agents.api import router as ai_workforce_router
+from app.ai.energy.api import admin_router as ai_energy_admin_router
+from app.ai.energy.api import member_router as ai_energy_member_router
 from app.api import health
 from app.modules.account.api import router as account_router
 from app.modules.advertising.api import router as advertising_router
@@ -111,6 +113,8 @@ def register_routes(app: FastAPI) -> None:
     api.include_router(billing_router.admin_router)
     api.include_router(ai_assistant_router)
     api.include_router(ai_usage_router)
+    api.include_router(ai_energy_admin_router)
+    api.include_router(ai_energy_member_router)
     api.include_router(ai_workforce_router)
     api.include_router(ai_settings_router.admin_router)
     api.include_router(ai_ops_router.admin_router)

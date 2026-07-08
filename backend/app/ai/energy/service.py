@@ -177,6 +177,23 @@ async def _weekly_used(
     return int(total or 0)
 
 
+async def weekly_used_units(
+    session: AsyncSession,
+    *,
+    org_id: uuid.UUID | None = None,
+    user_id: uuid.UUID | None = None,
+) -> int:
+    """Credits a scope consumed in the current calendar week (Mon 00:00 UTC).
+
+    Public helper for the admin energy-overview surface so a per-member /
+    per-org "used this week" number matches the snapshot exactly.
+    """
+    week_start = _week_start(datetime.now(UTC))
+    return await _weekly_used(
+        session, org_id=org_id, user_id=user_id, since=week_start
+    )
+
+
 # --------------------------------------------------------------------------- #
 # Snapshot                                                                       #
 # --------------------------------------------------------------------------- #
@@ -184,10 +201,18 @@ async def _weekly_used(
 
 @dataclass(frozen=True, slots=True)
 class EnergySnapshot:
-    """PII/leakage-safe energy state for the UI meter and enforcement."""
+    """PII/leakage-safe energy state for the UI meter and enforcement.
+
+    For a partner member the primary meter (``weekly``) is the shared ORG pool
+    (unchanged). When an admin has set that member a personal sub-allocation
+    (a ``user`` energy account with a non-null ``weekly_allowance_units``), the
+    ``allocation`` sub-block carries the member's OWN ceiling + wallet + usage,
+    and the member is ``blocked`` when EITHER the org pool OR their own sub-cap
+    is exhausted (wallet consumed after allowance within each scope).
+    """
 
     scope: str  # "org" | "user"
-    energy_pct: int  # remaining, 0..100
+    energy_pct: int  # remaining, 0..100 (the BINDING scope when a sub-cap exists)
     weekly_used: int
     weekly_allowance: int
     wallet_units: int
@@ -198,6 +223,24 @@ class EnergySnapshot:
     warn: bool
     warn_reason: str | None
     week_reset: str
+    # Member sub-allocation (only set for a partner member with a sub-cap row).
+    allocation_allowance: int | None = None
+    allocation_wallet: int = 0
+    allocation_used: int = 0
+    allocation_blocked: bool = False
+
+    def _allocation_public(self) -> dict | None:
+        if self.allocation_allowance is None:
+            return None
+        capacity = self.allocation_allowance + self.allocation_wallet
+        return {
+            "used": self.allocation_used,
+            "allowance": self.allocation_allowance,
+            "wallet": self.allocation_wallet,
+            "capacity": capacity,
+            "energy_pct": _energy_pct(self.allocation_used, capacity),
+            "blocked": self.allocation_blocked,
+        }
 
     def to_public(self) -> dict:
         """Shape returned to end users — credits/units are internal; expose %.
@@ -216,6 +259,9 @@ class EnergySnapshot:
                 "wallet": self.wallet_units,
                 "capacity": self.weekly_allowance + self.wallet_units,
             },
+            # Member's personal sub-allocation, or ``None`` when they share the
+            # org pool directly (no admin sub-cap set).
+            "allocation": self._allocation_public(),
             "session_3h": {
                 "used": self.session_used,
                 "soft_cap": self.session_soft_cap,
@@ -238,6 +284,11 @@ async def snapshot(session: AsyncSession, *, principal: Principal) -> EnergySnap
     on_org = persona_meters_on_org(principal)
     scope_label = "org" if on_org else "user"
 
+    # Member sub-allocation (only populated for a partner member with a sub-cap).
+    alloc_allowance: int | None = None
+    alloc_wallet = 0
+    alloc_used = 0
+
     try:
         if on_org and principal.org_id is not None:
             org_id = principal.org_id
@@ -258,6 +309,21 @@ async def snapshot(session: AsyncSession, *, principal: Principal) -> EnergySnap
             session_used = await _weekly_used(
                 session, org_id=org_id, user_id=None, since=session_start
             )
+            # Member's personal sub-cap on top of the org pool: an admin has
+            # allocated this member a weekly ceiling + optional personal wallet.
+            member_id = principal.user_id
+            member_acct = (
+                await _account(session, SCOPE_USER, member_id) if member_id else None
+            )
+            if (
+                member_acct is not None
+                and member_acct.weekly_allowance_units is not None
+            ):
+                alloc_allowance = member_acct.weekly_allowance_units
+                alloc_wallet = member_acct.wallet_units
+                alloc_used = await _weekly_used(
+                    session, org_id=None, user_id=member_id, since=week_start
+                )
         else:
             user_id = principal.user_id
             acct = await _account(session, SCOPE_USER, user_id) if user_id else None
@@ -282,42 +348,77 @@ async def snapshot(session: AsyncSession, *, principal: Principal) -> EnergySnap
         wallet = 0
         weekly_used = 0
         session_used = 0
+        alloc_allowance = None
+        alloc_wallet = 0
+        alloc_used = 0
 
     capacity = allowance + wallet
     soft_cap = int(round(allowance * constants.SESSION_SOFT_FRACTION))
-    blocked = weekly_used >= capacity and capacity > 0
-    weekly_pct_used = 0 if capacity <= 0 else round(weekly_used * 100 / capacity)
-    over_burst = soft_cap > 0 and session_used >= soft_cap
-    warn = (weekly_pct_used >= constants.WARNING_THRESHOLD_PCT) or over_burst
-    warn_reason = None
-    if blocked:
-        warn = True
-        warn_reason = (
+    org_blocked = weekly_used >= capacity and capacity > 0
+
+    # Member sub-cap gate: blocked when the member's own ceiling + wallet is used
+    # up (independent of the org pool). No sub-cap row → never member-blocked, so
+    # a plain org-pool member is behaviourally unchanged.
+    alloc_capacity = (alloc_allowance or 0) + alloc_wallet
+    alloc_blocked = (
+        alloc_allowance is not None
+        and alloc_capacity > 0
+        and alloc_used >= alloc_capacity
+    )
+    blocked = org_blocked or alloc_blocked
+
+    # Meter % reflects the BINDING scope so it never shows headroom the member
+    # cannot actually use.
+    org_pct = _energy_pct(weekly_used, capacity)
+    energy_pct = org_pct
+    if alloc_allowance is not None:
+        energy_pct = min(org_pct, _energy_pct(alloc_used, alloc_capacity))
+
+    if org_blocked:
+        blocked_reason: str | None = (
             constants.REASON_ORG_WEEKLY_EXCEEDED if on_org
             else constants.REASON_WEEKLY_EXCEEDED
         )
+    elif alloc_blocked:
+        blocked_reason = constants.REASON_MEMBER_ALLOCATION_EXCEEDED
+    else:
+        blocked_reason = None
+
+    weekly_pct_used = 0 if capacity <= 0 else round(weekly_used * 100 / capacity)
+    alloc_pct_used = (
+        0 if alloc_capacity <= 0 else round(alloc_used * 100 / alloc_capacity)
+    )
+    over_burst = soft_cap > 0 and session_used >= soft_cap
+    nearing = (
+        weekly_pct_used >= constants.WARNING_THRESHOLD_PCT
+        or alloc_pct_used >= constants.WARNING_THRESHOLD_PCT
+    )
+    warn = nearing or over_burst or blocked
+    warn_reason = None
+    if blocked:
+        warn_reason = blocked_reason
     elif over_burst:
         warn_reason = "AI_SESSION_BURST"
-    elif weekly_pct_used >= constants.WARNING_THRESHOLD_PCT:
+    elif nearing:
         warn_reason = "AI_WEEKLY_NEARING_LIMIT"
 
     return EnergySnapshot(
         scope=scope_label,
-        energy_pct=_energy_pct(weekly_used, capacity),
+        energy_pct=energy_pct,
         weekly_used=weekly_used,
         weekly_allowance=allowance,
         wallet_units=wallet,
         session_used=session_used,
         session_soft_cap=soft_cap,
         blocked=blocked,
-        blocked_reason=(
-            (constants.REASON_ORG_WEEKLY_EXCEEDED if on_org
-             else constants.REASON_WEEKLY_EXCEEDED)
-            if blocked else None
-        ),
+        blocked_reason=blocked_reason,
         warn=warn,
         warn_reason=warn_reason,
         week_reset=_iso(_week_reset(now)),
+        allocation_allowance=alloc_allowance,
+        allocation_wallet=alloc_wallet,
+        allocation_used=alloc_used,
+        allocation_blocked=alloc_blocked,
     )
 
 
@@ -342,11 +443,20 @@ async def enforce_energy(session: AsyncSession, *, principal: Principal) -> None
         return
     if not snap.blocked:
         return
-    if snap.scope == "org":
+    if snap.blocked_reason == constants.REASON_ORG_WEEKLY_EXCEEDED:
         raise QuotaExceededError(
             "Tổ chức của bạn đã dùng hết năng lượng AI trong tuần. "
             "Quản trị viên có thể nâng gói hoặc mua thêm để tiếp tục.",
             details={"reason": constants.REASON_ORG_WEEKLY_EXCEEDED, "scope": "org"},
+        )
+    if snap.blocked_reason == constants.REASON_MEMBER_ALLOCATION_EXCEEDED:
+        raise QuotaExceededError(
+            "Bạn đã dùng hết phần năng lượng AI được phân bổ cho bạn trong tuần. "
+            "Bạn có thể mua thêm cho chính mình hoặc đề nghị quản trị viên tăng hạn mức.",
+            details={
+                "reason": constants.REASON_MEMBER_ALLOCATION_EXCEEDED,
+                "scope": "user",
+            },
         )
     raise QuotaExceededError(
         "Bạn đã dùng hết năng lượng AI trong tuần. Hạn mức sẽ đặt lại vào thứ Hai, "

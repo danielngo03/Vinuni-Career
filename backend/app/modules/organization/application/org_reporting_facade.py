@@ -31,6 +31,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.core.config import get_settings
 from app.modules.organization.domain.models import (
+    Department,
     Membership,
     MembershipDepartment,
     Organization,
@@ -320,3 +321,18 @@ async def department_ids_for_user_in_org(
     if membership_id is None:
         return set()
     return set(await department_ids_for_membership(session, membership_id=membership_id))
+
+
+async def department_in_org(
+    session: AsyncSession, *, org_id: uuid.UUID, department_id: uuid.UUID
+) -> bool:
+    """True if ``department_id`` is a department of ``org_id`` (tenant check)."""
+
+    found = (
+        await session.execute(
+            select(Department.id).where(
+                Department.id == department_id, Department.org_id == org_id
+            )
+        )
+    ).scalar_one_or_none()
+    return found is not None
