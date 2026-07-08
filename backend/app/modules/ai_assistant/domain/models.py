@@ -5,7 +5,18 @@ from __future__ import annotations
 import uuid
 from datetime import UTC, datetime
 
-from sqlalchemy import JSON, BigInteger, Boolean, DateTime, ForeignKey, Index, String, Text, Uuid
+from sqlalchemy import (
+    JSON,
+    BigInteger,
+    Boolean,
+    DateTime,
+    ForeignKey,
+    Index,
+    Integer,
+    String,
+    Text,
+    Uuid,
+)
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.shared.models import Base
@@ -47,7 +58,7 @@ class ChatMessage(Base):
     session_id: Mapped[uuid.UUID] = mapped_column(
         ForeignKey("chat_sessions.id", ondelete="CASCADE"), nullable=False
     )
-    # role: user | assistant | tool_result
+    # role: user | assistant | tool_call | tool_result
     role: Mapped[str] = mapped_column(String(16), nullable=False)
     content: Mapped[str] = mapped_column(Text, nullable=False)
     tool_name: Mapped[str | None] = mapped_column(String(64), nullable=True)
@@ -58,12 +69,26 @@ class ChatMessage(Base):
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), nullable=False, default=lambda: datetime.now(UTC)
     )
+    # Conversation-management fields (migration 0089).
+    # ``seq`` is a monotonic per-session ordering index assigned at insert time so
+    # the read path and truncate-and-replay (edit / regenerate) have a stable order
+    # independent of ``created_at`` microsecond ties. NULL only for pre-migration
+    # rows / ad-hoc fixtures — readers fall back to ``created_at`` when it is NULL.
+    seq: Mapped[int | None] = mapped_column(Integer, nullable=True)
+    # Set when a USER message is edited in place (edit-and-rerun); powers the
+    # frontend "edited" affordance. Never mutated for assistant/tool rows.
+    edited_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
+    # Soft-delete flag. Truncate-and-replay marks superseded messages
+    # ``is_deleted=True`` instead of hard-deleting so the history stays auditable;
+    # every read path excludes deleted rows.
+    is_deleted: Mapped[bool] = mapped_column(Boolean, nullable=False, default=False)
 
     session: Mapped[ChatSession] = relationship("ChatSession", back_populates="messages")
 
     __table_args__ = (
         Index("ix_chat_messages_session_id", "session_id"),
         Index("ix_chat_messages_created_at", "created_at"),
+        Index("ix_chat_messages_session_seq", "session_id", "seq"),
     )
 
 
