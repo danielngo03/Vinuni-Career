@@ -42,6 +42,7 @@ import {
   ToggleRight,
   Siren,
   Zap,
+  UserCog,
 } from "lucide-react";
 import type { Persona } from "@/stores/auth-store";
 
@@ -185,6 +186,16 @@ export const WORKSPACE_NAV_GROUPS: Record<Persona, NavGroup[]> = {
         { key: "partners", href: "/partners", icon: Building2 },
         { key: "reviews", href: "/reviews", icon: Star },
         { key: "abuseTriage", href: "/abuse", icon: ShieldAlert },
+        // Cross-persona account governance (suspend/reinstate student + partner
+        // accounts). Grant-gated on `accounts:govern`; the sidebar hides it for
+        // staff without the grant, and the screen falls back to a permission
+        // state on a backend 403 for anyone reaching the URL directly.
+        {
+          key: "accountGovernance",
+          href: "/governance",
+          icon: UserCog,
+          requiresPermission: "accounts:govern",
+        },
         { key: "workflowBuilder", href: "/workflow", icon: Workflow },
       ],
     },
