@@ -1,4 +1,5 @@
-import { api } from "./client";
+import { api, apiUpload } from "./client";
+import type { ApiEnvelope } from "./types";
 
 /* ------------------------------- Wire types ------------------------------- */
 
@@ -26,6 +27,19 @@ export interface ChatMessage {
   tool_result: Record<string, unknown> | null;
   requires_confirmation: boolean;
   confirmed_at: string | null;
+  created_at: string;
+}
+
+/** Safe descriptor for a chat attachment. The backend never returns a storage
+ * key, bucket path, or any provider/model internal — only display metadata the
+ * composer needs to render a chip and embed the analyze reference. */
+export interface ChatAttachment {
+  id: string;
+  session_id: string;
+  filename: string;
+  content_type: string;
+  size: number;
+  status: string;
   created_at: string;
 }
 
@@ -158,6 +172,21 @@ export const aiAssistantApi = {
   /** Get messages for a session. */
   getMessages(sessionId: string): Promise<ChatMessage[]> {
     return api.get<ChatMessage[]>(`/ai/chat/sessions/${sessionId}/messages`);
+  },
+
+  /** Upload a file/image to a session (multipart). Returns a safe descriptor.
+   * The backend validates type/size/security and rejects blank/oversized/
+   * unsupported/failed-scan files with a user-safe 4xx whose message the caller
+   * surfaces. Analysis (tables/charts) is a separate, metered chat turn that
+   * asks the assistant to analyze the returned attachment id. */
+  async uploadAttachment(sessionId: string, file: File): Promise<ChatAttachment> {
+    const form = new FormData();
+    form.append("file", file);
+    const res = await apiUpload<ApiEnvelope<ChatAttachment>>(
+      `/ai/chat/sessions/${sessionId}/attachments`,
+      form,
+    );
+    return res.data;
   },
 
   /** Send a message; receive the assistant's reply. */

@@ -108,7 +108,28 @@ __all__ = [
 _MAX_TOOL_ITERATIONS = MAX_ITERATIONS
 _MAX_USER_MSG_LEN = 1500
 
+# Tools whose structured result the frontend renders inline (tables/charts/insights).
+# The hidden ``tool_result``-role memory rows are excluded from the client (see
+# ``get_session_messages``), so the LAST such result of a turn is copied onto the
+# CONCLUDING ASSISTANT message's ``tool_result`` field — that surfaces it through
+# the normal message read, the ``send_message`` return, and the SSE ``done`` event
+# without ever exposing raw ``tool_result``-role rows. ``analyze_attachment``
+# (P3c: university attachment data analysis) is the current member; detection also
+# accepts any result carrying a boolean ``analyzed`` flag so a future render-worthy
+# tool works without another edit. The payload is already leakage-safe (no
+# provider/model/token/storage_key/PII) — this only decides whether to surface it.
+_RENDER_WORTHY_TOOLS = {"analyze_attachment"}
+
 _logger = logging.getLogger("ai.rag")
+
+
+def _render_worthy_result(tool_name: str, result: dict) -> dict | None:
+    """Return ``result`` when it is a render-worthy structured payload, else ``None``."""
+    if not isinstance(result, dict):
+        return None
+    if tool_name in _RENDER_WORTHY_TOOLS or isinstance(result.get("analyzed"), bool):
+        return result
+    return None
 
 
 def _system_prompt_for(principal: Principal) -> str:
@@ -285,6 +306,7 @@ async def send_message(
     tool_call_count = 0
     used_tool = False
     final_text: str | None = None
+    render_result: dict | None = None  # last render-worthy tool result this turn
     kb_sources: list[str] = []  # §6.5: retrieved doc titles for this turn's citation check
 
     while iterations < _MAX_TOOL_ITERATIONS:
@@ -350,6 +372,11 @@ async def send_message(
             tool_args=tool_args,
             result=result,
         )
+        # Carry a render-worthy structured result (e.g. analyze_attachment
+        # tables/charts) onto the concluding assistant message so the client can
+        # render it — the hidden tool_result-role row above stays excluded.
+        if (worthy := _render_worthy_result(tool_name, result)) is not None:
+            render_result = worthy
         if tool_name == "knowledge_base_query" and result.get("ok"):
             kb_sources = kb_source_titles(result.get("chunks") or [])
 
@@ -367,6 +394,7 @@ async def send_message(
         session_id=chat.id,
         role="assistant",
         content=final_text,
+        tool_result=render_result,
         created_at=datetime.now(UTC),
     )
     session.add(assistant_msg)
@@ -388,8 +416,11 @@ async def stream_message(
     Yields event dicts; the router serialises each to a JSON SSE line. Events:
     - ``{"type": "token", "text": "..."}``        — partial text (simulated)
     - ``{"type": "tool_call", "name": "..."}``    — before tool dispatch
-    - ``{"type": "tool_result", "name": "...", "ok": bool}`` — after dispatch
-    - ``{"type": "done", "message": {...}}``       — final persisted message
+    - ``{"type": "tool_result", "name": "...", "ok": bool}`` — after dispatch;
+      carries an additive ``result`` field with the leakage-safe structured
+      payload for render-worthy tools (e.g. ``analyze_attachment`` tables/charts)
+    - ``{"type": "done", "message": {...}}``       — final persisted message; its
+      ``tool_result`` field carries the same render-worthy payload
     - ``{"type": "error", "code": "..."}``         — on failure
 
     The first non-tool response is streamed through the gateway when the
@@ -512,6 +543,7 @@ async def stream_message(
     used_tool = False
     final_text: str | None = None
     final_text_streamed = False
+    render_result: dict | None = None  # last render-worthy tool result this turn
     kb_sources: list[str] = []  # §6.5: retrieved doc titles for this turn's citation check
 
     while iterations < _MAX_TOOL_ITERATIONS:
@@ -581,7 +613,19 @@ async def stream_message(
         result = await dispatch_tool(tool_name, tool_args, session=session, principal=principal)
         tool_call_count += 1
         used_tool = True
-        yield {"type": "tool_result", "name": tool_name, "ok": result.get("ok", False)}
+        tool_result_event: dict = {
+            "type": "tool_result",
+            "name": tool_name,
+            "ok": result.get("ok", False),
+        }
+        # Carry a render-worthy structured result (e.g. analyze_attachment
+        # tables/charts) onto the concluding assistant message AND include it live
+        # on this SSE event (additive ``result`` field) so streaming clients can
+        # render it before ``done``. The hidden tool_result-role row stays excluded.
+        if (worthy := _render_worthy_result(tool_name, result)) is not None:
+            render_result = worthy
+            tool_result_event["result"] = worthy
+        yield tool_result_event
         persist_tool_result(
             session,
             chat=chat,
@@ -611,6 +655,7 @@ async def stream_message(
         session_id=chat.id,
         role="assistant",
         content=final_text,
+        tool_result=render_result,
         created_at=datetime.now(UTC),
     )
     session.add(assistant_msg)

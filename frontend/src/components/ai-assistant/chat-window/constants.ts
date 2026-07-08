@@ -3,6 +3,75 @@ import { Briefcase, ReadCvLogo, CalendarCheck, PaperPlaneTilt, ChartBar, Currenc
 
 export const MAX_INPUT_LENGTH = 1000;
 
+/* ----------------------------- Attachments ------------------------------ */
+
+/** Max number of files a single message may carry. */
+export const MAX_ATTACHMENTS = 3;
+
+/** Client-side courtesy cap for instant feedback. The backend limit is
+ * authoritative — anything it rejects surfaces the backend's user-safe message. */
+export const MAX_ATTACHMENT_BYTES = 20 * 1024 * 1024;
+
+/** Allowed upload extensions (mirrors the backend attachment contract:
+ * images + PDF/CSV/DOCX/TXT). */
+export const ACCEPTED_ATTACHMENT_EXT = [
+  "pdf",
+  "png",
+  "jpg",
+  "jpeg",
+  "docx",
+  "txt",
+  "csv",
+] as const;
+
+/** `accept` attribute for the hidden file input. */
+export const ACCEPTED_ATTACHMENT_ACCEPT =
+  ".pdf,.png,.jpg,.jpeg,.docx,.txt,.csv," +
+  "application/pdf,image/png,image/jpeg," +
+  "application/vnd.openxmlformats-officedocument.wordprocessingml.document," +
+  "text/plain,text/csv";
+
+/** True when the file's extension is one the backend can accept. */
+export function isAcceptedAttachment(filename: string): boolean {
+  const ext = filename.split(".").pop()?.toLowerCase() ?? "";
+  return (ACCEPTED_ATTACHMENT_EXT as readonly string[]).includes(ext);
+}
+
+// Machine-readable reference the composer appends to the outgoing message text
+// so the assistant sees the attachment id and calls its `analyze_attachment`
+// tool (SendMessageRequest is text-only, so this is the only channel). The id
+// is the staffer's OWN attachment id — not sensitive. This marker is internal
+// plumbing, NOT user-facing copy: the message-bubble renderer strips these
+// lines back out and shows a paperclip chip instead, so the raw ref never
+// appears in the visible bubble (hence it is intentionally locale-neutral and
+// exempt from the i18n gate).
+const ATTACHMENT_REF_RE =
+  /\n*\[Attachment — use analyze_attachment:\s*(.+?)\s*\(id:\s*[^)]+\)\]/g;
+
+/** Build the ref line for one ready attachment. */
+export function buildAttachmentRef(filename: string, id: string): string {
+  return `\n\n[Attachment — use analyze_attachment: ${filename} (id: ${id})]`;
+}
+
+/**
+ * Split a user message into its clean visible text and the attachment
+ * filenames referenced by any appended ref lines. Only user content is passed
+ * in (assistant text never embeds refs).
+ */
+export function extractAttachmentRefs(content: string): {
+  text: string;
+  filenames: string[];
+} {
+  const re = new RegExp(ATTACHMENT_REF_RE.source, "g");
+  const filenames: string[] = [];
+  for (const match of content.matchAll(re)) {
+    const name = match[1]?.trim();
+    if (name) filenames.push(name);
+  }
+  const text = content.replace(re, "").trim();
+  return { text, filenames };
+}
+
 export type StreamEvent =
   | { type: "status"; code: string }
   | { type: "token"; text: string }

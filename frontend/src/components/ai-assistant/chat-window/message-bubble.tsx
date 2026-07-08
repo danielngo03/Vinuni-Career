@@ -4,12 +4,17 @@ import {
   ArrowSquareOut,
   Lightning,
   MagnifyingGlass,
+  Paperclip,
   Robot,
   Spinner,
 } from "@phosphor-icons/react";
 import { cn } from "@/lib/utils";
 import type { ChatMessage } from "@/lib/api";
-import { TOOL_LABELS } from "./constants";
+import { extractAttachmentRefs, TOOL_LABELS } from "./constants";
+import { segmentContent } from "./markdown-table";
+import { DataTable } from "./data-table";
+import { parseAnalysis } from "./chat-analysis";
+import { AttachmentAnalysis } from "./attachment-analysis";
 
 export function MessageBubble({
   message,
@@ -53,29 +58,69 @@ export function MessageBubble({
     );
   }
 
+  // User bubbles may carry appended analyze-attachment reference lines. Strip
+  // them from the visible text and render a clean paperclip chip per file so the
+  // raw machine-readable ref/id never shows.
+  const parsed = isUser ? extractAttachmentRefs(message.content) : null;
+  const displayText = parsed ? parsed.text : message.content;
+  const attachmentNames = parsed?.filenames ?? [];
+
+  // Structured `analyze_attachment` result (tables/charts/insights) is rendered
+  // below the assistant reply when the message carries it. Non-analyze tool
+  // results parse to null and render nothing extra.
+  const analysis = !isUser ? parseAnalysis(message.tool_result) : null;
+
   return (
-    <div
-      className={cn(
-        "flex items-end gap-2",
-        isUser ? "flex-row-reverse" : "flex-row",
-      )}
-    >
-      {!isUser && (
-        <span className="mb-0.5 flex size-6 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[var(--brand-primary)] to-[var(--brand-teal)] shadow-sm">
-          <Robot aria-hidden weight="fill" className="size-3.5 text-white" />
-        </span>
-      )}
+    <div className="flex flex-col gap-1.5">
       <div
         className={cn(
-          "rounded-2xl px-3 py-2.5 text-sm leading-relaxed",
-          expanded ? "max-w-[min(72ch,82%)]" : "max-w-[82%]",
-          isUser
-            ? "rounded-br-sm icon-chip-primary text-white shadow-[var(--shadow-sm)]"
-            : "rounded-bl-sm border border-[var(--glass-border-strong)] bg-[var(--glass-surface-heavy)] text-[var(--text-primary)] shadow-[0_1px_4px_rgba(11,34,57,0.06)]",
+          "flex items-end gap-2",
+          isUser ? "flex-row-reverse" : "flex-row",
         )}
       >
-        <FormattedContent content={message.content} isUser={isUser} />
+        {!isUser && (
+          <span className="mb-0.5 flex size-6 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[var(--brand-primary)] to-[var(--brand-teal)] shadow-sm">
+            <Robot aria-hidden weight="fill" className="size-3.5 text-white" />
+          </span>
+        )}
+        <div
+          className={cn(
+            "rounded-2xl px-3 py-2.5 text-sm leading-relaxed",
+            expanded ? "max-w-[min(72ch,82%)]" : "max-w-[82%]",
+            isUser
+              ? "rounded-br-sm icon-chip-primary text-white shadow-[var(--shadow-sm)]"
+              : "rounded-bl-sm border border-[var(--glass-border-strong)] bg-[var(--glass-surface-heavy)] text-[var(--text-primary)] shadow-[0_1px_4px_rgba(11,34,57,0.06)]",
+          )}
+        >
+          {displayText && <FormattedContent content={displayText} isUser={isUser} />}
+          {attachmentNames.length > 0 && (
+            <ul
+              aria-label={t("attachmentsLabel")}
+              className={cn("flex flex-wrap gap-1.5", displayText && "mt-1.5")}
+            >
+              {attachmentNames.map((name, i) => (
+                <li
+                  key={i}
+                  className="flex max-w-full items-center gap-1 rounded-lg bg-white/15 px-2 py-1 text-xs"
+                >
+                  <Paperclip aria-hidden weight="bold" className="size-3 shrink-0" />
+                  <span className="truncate" title={name}>
+                    {name}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
       </div>
+
+      {/* Structured attachment analysis (tables + charts + insights) spans the
+          message column so wide tables/charts have room to render. */}
+      {analysis && (
+        <div className="ml-8 mr-1">
+          <AttachmentAnalysis analysis={analysis} t={t} />
+        </div>
+      )}
     </div>
   );
 }
@@ -132,7 +177,16 @@ export function AssistantActivity({
   );
 }
 
-/** Render plain text with basic markdown: **bold**, lists, internal links. */
+/**
+ * Render assistant/user text with markdown-lite support: **bold**, bullet and
+ * numbered lists, internal links, and GitHub-Flavored pipe tables (rendered as
+ * clean monochrome `<table>`s with inline bars for numeric columns).
+ *
+ * Tables are only parsed for assistant messages — user bubbles use the ink
+ * surface and keep the plain-line rendering. Table parsing degrades gracefully:
+ * anything that is not a well-formed pipe table falls back to the line renderer,
+ * so a malformed/partial table never crashes the bubble.
+ */
 export function FormattedContent({
   content,
   isUser,
@@ -140,7 +194,28 @@ export function FormattedContent({
   content: string;
   isUser: boolean;
 }) {
-  const lines = content.split("\n").filter((l) => l.trim() !== "");
+  if (isUser) {
+    return <LinesBlock lines={content.split("\n")} isUser={isUser} />;
+  }
+
+  const blocks = segmentContent(content);
+  return (
+    <div className="space-y-1.5">
+      {blocks.map((block, bi) =>
+        block.type === "table" ? (
+          <DataTable key={bi} table={block.table} />
+        ) : (
+          <LinesBlock key={bi} lines={block.lines} isUser={isUser} />
+        ),
+      )}
+    </div>
+  );
+}
+
+/** Render a run of non-table lines with **bold**, lists, and internal links. */
+function LinesBlock({ lines: rawLines, isUser }: { lines: string[]; isUser: boolean }) {
+  const lines = rawLines.filter((l) => l.trim() !== "");
+  if (lines.length === 0) return null;
 
   return (
     <div className="space-y-1">

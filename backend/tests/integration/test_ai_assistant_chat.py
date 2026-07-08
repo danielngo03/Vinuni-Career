@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import json
 import uuid
 
 from app.ai.prompts.assistant import v1 as assistant_prompt
@@ -1009,6 +1010,144 @@ async def test_recent_job_mutation_becomes_confirmation_tool_call(db_session) ->
     assert reply["tool_name"] == "save_job"
     assert reply["tool_args"] == {"job_id": str(job_id)}
     assert reply["requires_confirmation"] is True
+
+
+async def test_analyze_attachment_result_surfaces_on_assistant_message(
+    db_session, monkeypatch
+) -> None:
+    """A university turn that runs ``analyze_attachment`` (P3c) must surface its
+    leakage-safe tables/charts payload on the CONCLUDING ASSISTANT message.
+
+    Locks the end-to-end render path:
+    - the ``send_message`` return carries ``tool_result`` with ``analyzed`` + tables/charts;
+    - the normal session read surfaces it on the assistant message (never as a raw
+      ``tool_result``-role row, which stays excluded but still persisted as memory);
+    - the streaming ``done`` payload carries it, and the live ``tool_result`` SSE
+      event carries the additive ``result`` field.
+    """
+    user = await register_verified(
+        db_session, email=f"chat_attach_{uuid.uuid4().hex[:8]}@vinuni.edu.vn"
+    )
+    principal = Principal(
+        user_id=user.id,
+        persona="university_staff",
+        org_id=uuid.uuid4(),
+        permissions=frozenset(),
+    )
+    created = await chat_service.create_session(db_session, principal=principal)
+    session_id = uuid.UUID(created["id"])
+
+    attachment_id = uuid.uuid4()
+    analysis_result = {
+        "ok": True,
+        "status": "analyzed",
+        "kind": "csv",
+        "analyzed": True,
+        "degraded": False,
+        "summary": "Cohort applications and hires by month.",
+        "insights": ["Applications: total 543"],
+        "tables": [
+            {
+                "title": "Cohort",
+                "columns": ["Month", "Applications"],
+                "rows": [["Jan", 120], ["Feb", 150]],
+            }
+        ],
+        "charts": [
+            {
+                "type": "column",
+                "title": "Applications",
+                "x_label": "Month",
+                "y_label": "Applications",
+                "series": [{"label": "Applications", "points": [{"x": "Jan", "y": 120}]}],
+            }
+        ],
+        "extracted_text_preview": "Month,Applications\nJan,120",
+        "cached": False,
+    }
+
+    tool_call_json = json.dumps(
+        {
+            "tool_call": {
+                "name": "analyze_attachment",
+                "args": {"attachment_id": str(attachment_id)},
+            }
+        }
+    )
+    llm_calls = {"n": 0}
+
+    async def fake_llm_complete(history, **kwargs):
+        llm_calls["n"] += 1
+        if llm_calls["n"] == 1:
+            return tool_call_json
+        return "Đây là bảng và biểu đồ từ dữ liệu bạn đã tải lên."
+
+    async def fake_dispatch_tool(name, args, *, session, principal):
+        assert name == "analyze_attachment"
+        assert args == {"attachment_id": str(attachment_id)}
+        return analysis_result
+
+    monkeypatch.setattr(chat_service, "llm_complete", fake_llm_complete)
+    monkeypatch.setattr(chat_service, "dispatch_tool", fake_dispatch_tool)
+
+    # --- send_message return: structured result on the concluding assistant msg ---
+    reply = await chat_service.send_message(
+        db_session,
+        principal=principal,
+        session_id=session_id,
+        text="Phân tích file này và vẽ bảng, biểu đồ cột giúp tôi",
+    )
+    assert reply["role"] == "assistant"
+    assert reply["tool_result"] is not None
+    assert reply["tool_result"]["analyzed"] is True
+    assert reply["tool_result"]["tables"]
+    assert reply["tool_result"]["charts"]
+
+    # --- session read: surfaced on assistant msg, never as a tool_result-role row ---
+    messages = await chat_service.get_session_messages(
+        db_session, principal=principal, session_id=session_id
+    )
+    assert all(m["role"] != "tool_result" for m in messages)
+    assistant_msgs = [m for m in messages if m["role"] == "assistant"]
+    assert assistant_msgs, "expected a concluding assistant message"
+    concluding = assistant_msgs[-1]
+    assert concluding["tool_result"] is not None
+    assert concluding["tool_result"]["analyzed"] is True
+    assert concluding["tool_result"]["charts"]
+
+    # Hidden tool_result-role memory row is still persisted (just excluded from read).
+    hidden = (
+        await db_session.execute(
+            select(ChatMessage).where(
+                ChatMessage.session_id == session_id,
+                ChatMessage.role == "tool_result",
+                ChatMessage.tool_name == "analyze_attachment",
+            )
+        )
+    ).scalar_one_or_none()
+    assert hidden is not None
+
+    # --- streaming: done payload + live tool_result event carry it too ---
+    llm_calls["n"] = 0
+    events = [
+        event
+        async for event in chat_service.stream_message(
+            db_session,
+            principal=principal,
+            session_id=session_id,
+            text="Phân tích lại file này giúp tôi",
+        )
+    ]
+    done = events[-1]
+    assert done["type"] == "done"
+    assert done["message"]["tool_result"] is not None
+    assert done["message"]["tool_result"]["analyzed"] is True
+    assert done["message"]["tool_result"]["charts"]
+
+    live_events = [e for e in events if e.get("type") == "tool_result"]
+    assert live_events, "expected a live tool_result SSE event"
+    assert live_events[-1]["result"]["analyzed"] is True
+    assert live_events[-1]["result"]["charts"]
 
 
 async def test_agent_planner_resolves_job_and_cv_references_together(db_session) -> None:
