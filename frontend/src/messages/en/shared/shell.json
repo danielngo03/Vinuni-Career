@@ -81,14 +81,17 @@
       "systemAdmin": "System administration"
     },
     "usage": {
-      "title": "AI quota",
-      "dayLabel": "Today",
-      "weekLabel": "This week",
-      "count": "{used}/{limit}",
-      "nearLimit": "Approaching the limit",
-      "dayLimitReached": "Daily quota reached — resets at midnight",
-      "weekLimitReached": "Weekly quota reached — resets on Monday",
+      "energyTitle": "AI energy",
+      "orgPoolLabel": "Org AI energy",
+      "energyRemaining": "{pct}% left",
+      "weeklyLabel": "{used}/{allowance} this week",
+      "walletLabel": "+{wallet} reserve",
+      "burstHint": "Heavy AI use in the last few hours",
+      "nearLimit": "Approaching your energy limit",
+      "blockedWeekly": "Weekly AI energy used up",
+      "blockedOrgWeekly": "Org AI energy used up this week",
       "upgrade": "Upgrade plan",
+      "topUp": "Top up energy",
       "plan": "{name} plan",
       "planManage": "Manage"
     }

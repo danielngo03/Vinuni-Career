@@ -31,23 +31,63 @@ export interface ChatMessage {
 
 /* --------------------------------- Calls ---------------------------------- */
 
-/** One AI quota window (day or week) for the sidebar meter. */
-export interface AiUsageWindow {
+/** Whether the energy budget is a shared partner-org pool or a personal one. */
+export type AiEnergyScope = "org" | "user";
+
+/** Weekly AI energy budget, expressed in opaque "energy" credits.
+ * These are NOT tokens, USD, or provider units — the backend deliberately masks
+ * cost so no provider/model/token/price signal ever reaches the client.
+ *   - `used`:      credits spent this week
+ *   - `allowance`: base weekly grant from the plan/entitlement
+ *   - `wallet`:    extra top-up/reserve credits on top of the allowance
+ *   - `capacity`:  total spendable this week (allowance + wallet) */
+export interface AiEnergyWeekly {
   used: number;
-  limit: number;
-  pct: number;
+  allowance: number;
+  wallet: number;
+  capacity: number;
 }
 
-/** AI request usage for the sidebar meter (`GET /ai/usage/me`).
- * Request counts only — the backend never exposes cost/token/provider data.
- * `blocked` mirrors the gateway gate: when either window is exhausted, new AI
- * requests are refused with 409 QUOTA_EXCEEDED (week dominates day). */
-export interface AiUsageSummary {
-  day: AiUsageWindow;
-  week: AiUsageWindow;
-  warning: boolean;
+/** Rolling 3-hour burst window. `over_soft_cap` means recent activity crossed
+ * the soft pacing threshold (a warning, not a hard block). */
+export interface AiEnergySession3h {
+  used: number;
+  soft_cap: number;
+  over_soft_cap: boolean;
+}
+
+/** Reason a caller is hard-blocked from new AI actions (weekly energy spent). */
+export type AiEnergyBlockedReason =
+  | "AI_WEEKLY_ENERGY_EXCEEDED"
+  | "AI_ORG_WEEKLY_ENERGY_EXCEEDED";
+
+/** Reason a caller is being warned (burst pacing, nearing the weekly limit, or
+ * an already-exceeded weekly/org budget surfaced as a soft warning). */
+export type AiEnergyWarningReason =
+  | "AI_SESSION_BURST"
+  | "AI_WEEKLY_NEARING_LIMIT"
+  | "AI_WEEKLY_ENERGY_EXCEEDED"
+  | "AI_ORG_WEEKLY_ENERGY_EXCEEDED";
+
+/** AI energy usage for the sidebar meter (`GET /ai/usage/me`).
+ * Cost-weighted "energy" model (owner-locked 2026-07-08). The headline is
+ * `energy_pct` — the share of this week's energy that is still REMAINING (0..100).
+ * The backend never exposes cost/token/provider/model data; `weekly` counts are
+ * opaque energy credits. `blocked` mirrors the gateway gate: when the weekly (or
+ * shared org) energy is exhausted, new AI actions are refused. */
+export interface AiEnergyUsage {
+  /** "org" = shared partner-org pool; "user" = the caller's personal budget. */
+  scope: AiEnergyScope;
+  /** Remaining weekly energy, 0..100 (headline). */
+  energy_pct: number;
+  weekly: AiEnergyWeekly;
+  session_3h: AiEnergySession3h;
   blocked: boolean;
-  blocked_scope: "day" | "week" | null;
+  blocked_reason: AiEnergyBlockedReason | null;
+  warning: boolean;
+  warning_reason: AiEnergyWarningReason | null;
+  /** ISO-8601 UTC instant the weekly energy budget resets. */
+  week_reset: string;
 }
 
 /** One product-feature bucket in the usage breakdown. `feature` is a stable
@@ -65,32 +105,28 @@ export interface AiUsageActivity {
   at: string | null;
 }
 
-/** Rich AI usage detail for the billing/usage panel (`GET /ai/usage/summary`).
- * Extends the sidebar meter with reset timing, a per-feature breakdown, and a
- * recent-activity list. Still request-count only: no provider/model/token/cost. */
-export interface AiUsageDetail extends AiUsageSummary {
-  /** ISO-8601 UTC instant the daily window resets. */
-  day_reset: string;
-  /** ISO-8601 UTC instant the weekly window resets. */
-  week_reset: string;
+/** Rich AI energy detail for the billing/usage panel (`GET /ai/usage/summary`).
+ * Extends the sidebar meter with the reporting window, a per-feature breakdown,
+ * and a recent-activity list. Still masked: no provider/model/token/cost. */
+export interface AiEnergyUsageDetail extends AiEnergyUsage {
   /** Number of days the breakdown/total cover (default 30). */
   window_days: number;
-  /** Total AI requests in the window (includes system tasks not shown by feature). */
+  /** Total AI actions in the window (includes system tasks not shown by feature). */
   total: number;
   by_feature: AiUsageFeatureCount[];
   recent: AiUsageActivity[];
 }
 
 export const aiAssistantApi = {
-  /** My AI usage today vs the daily allowance. */
-  myUsage(): Promise<AiUsageSummary> {
-    return api.get<AiUsageSummary>("/ai/usage/me");
+  /** My remaining AI energy for this week (sidebar meter). */
+  myUsage(): Promise<AiEnergyUsage> {
+    return api.get<AiEnergyUsage>("/ai/usage/me");
   },
 
-  /** My AI usage detail for the billing/usage panel (windows, reset timing,
-   * per-feature breakdown, recent activity). */
-  myUsageDetail(): Promise<AiUsageDetail> {
-    return api.get<AiUsageDetail>("/ai/usage/summary");
+  /** My AI energy detail for the billing/usage panel (weekly budget, burst
+   * window, reset timing, per-feature breakdown, recent activity). */
+  myUsageDetail(): Promise<AiEnergyUsageDetail> {
+    return api.get<AiEnergyUsageDetail>("/ai/usage/summary");
   },
 
   /** Create a new chat session. */

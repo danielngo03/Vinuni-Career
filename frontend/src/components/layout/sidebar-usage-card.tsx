@@ -4,17 +4,23 @@ import { useTranslations } from "next-intl";
 import { useQuery } from "@tanstack/react-query";
 import { ArrowUpRight } from "lucide-react";
 import { Link } from "@/i18n/navigation";
-import { aiAssistantApi, billingApi, type AiUsageWindow } from "@/lib/api";
+import { aiAssistantApi, billingApi } from "@/lib/api";
 import { useAuthStore, type Persona } from "@/stores/auth-store";
 import { cn } from "@/lib/utils";
 
 /**
- * Sidebar footer card: AI request quota meters (real counts from
- * `GET /ai/usage/me` — daily window + weekly window, the same two gates the
- * backend enforces with 409 QUOTA_EXCEEDED) and, for partners, the current
- * subscription plan (`GET /billing/subscription`). Warns at ≥80%, shows the
- * blocked state (week dominates day) with an upgrade link into billing.
- * Hidden while loading, on error, and in the collapsed icon rail.
+ * Sidebar footer card: the caller's AI energy meter (`GET /ai/usage/me`) and,
+ * for partners, the current subscription plan (`GET /billing/subscription`).
+ *
+ * AI usage is a cost-weighted "energy" budget (owner-locked 2026-07-08): the
+ * headline is the share of this week's energy that is still REMAINING, shown as
+ * a single slim bar (ink normally, amber on warning, red when blocked). A
+ * secondary line shows weekly credits used vs the allowance (plus any top-up
+ * reserve). Energy is opaque — no tokens, cost, provider, or model ever appear.
+ *
+ * For a shared partner-org pool (`scope === "org"`) the copy uses org framing.
+ * On block, a top-up/upgrade link routes into billing (partner only). Hidden
+ * while loading, on error, and in the collapsed icon rail.
  */
 export function SidebarUsageCard({ persona }: { persona: Persona }) {
   const t = useTranslations("nav.usage");
@@ -45,30 +51,75 @@ export function SidebarUsageCard({ persona }: { persona: Persona }) {
     subscription.data?.default_plan?.name ??
     null;
   const billingHref = `/${persona}/billing`;
-  const showUpgrade = (u.warning || u.blocked) && persona === "partner";
+  const showAction = (u.warning || u.blocked) && persona === "partner";
+  const isOrg = u.scope === "org";
+  const pct = Math.round(u.energy_pct);
 
   return (
     <div className="mx-1 rounded-[10px] border border-[var(--border-default)] bg-[var(--bg-subtle)] p-3">
-      <p className="text-[0.6875rem] font-semibold uppercase tracking-[0.08em] text-[var(--text-muted)]">
-        {t("title")}
+      <div className="flex items-baseline justify-between gap-2">
+        <p className="min-w-0 truncate text-[0.6875rem] font-semibold uppercase tracking-[0.08em] text-[var(--text-muted)]">
+          {isOrg ? t("orgPoolLabel") : t("energyTitle")}
+        </p>
+        <span
+          className={cn(
+            "shrink-0 text-[0.6875rem] font-semibold tabular-nums",
+            u.blocked
+              ? "text-[var(--red-600)]"
+              : u.warning
+                ? "text-[var(--amber-700)]"
+                : "text-[var(--text-secondary)]",
+          )}
+        >
+          {t("energyRemaining", { pct })}
+        </span>
+      </div>
+
+      <div
+        role="meter"
+        aria-valuenow={pct}
+        aria-valuemin={0}
+        aria-valuemax={100}
+        aria-label={isOrg ? t("orgPoolLabel") : t("energyTitle")}
+        className="mt-2 h-1.5 w-full overflow-hidden rounded-full bg-[var(--bg-muted)]"
+      >
+        <div
+          className={cn(
+            "h-full rounded-full transition-[width] duration-500 motion-reduce:transition-none",
+            u.blocked
+              ? "bg-[var(--red-600)]"
+              : u.warning
+                ? "bg-[var(--amber-500)]"
+                : "bg-[var(--text-primary)]",
+          )}
+          style={{ width: `${Math.min(100, Math.max(0, u.energy_pct))}%` }}
+        />
+      </div>
+
+      <p className="mt-1.5 text-[0.6875rem] tabular-nums text-[var(--text-secondary)]">
+        {t("weeklyLabel", {
+          used: u.weekly.used,
+          allowance: u.weekly.allowance,
+        })}
+        {u.weekly.wallet > 0 && (
+          <span className="text-[var(--text-muted)]">
+            {" "}
+            {t("walletLabel", { wallet: u.weekly.wallet })}
+          </span>
+        )}
       </p>
 
-      <UsageMeter
-        label={t("dayLabel")}
-        window={u.day}
-        blocked={u.blocked_scope === "day"}
-        countLabel={t("count", { used: u.day.used, limit: u.day.limit })}
-      />
-      <UsageMeter
-        label={t("weekLabel")}
-        window={u.week}
-        blocked={u.blocked_scope === "week"}
-        countLabel={t("count", { used: u.week.used, limit: u.week.limit })}
-      />
+      {u.session_3h.over_soft_cap && !u.blocked && (
+        <p className="mt-1 text-[0.6875rem] font-medium text-[var(--amber-700)]">
+          {t("burstHint")}
+        </p>
+      )}
 
       {u.blocked ? (
         <p className="mt-2 text-[0.6875rem] font-medium text-[var(--red-600)]">
-          {u.blocked_scope === "week" ? t("weekLimitReached") : t("dayLimitReached")}
+          {u.blocked_reason === "AI_ORG_WEEKLY_ENERGY_EXCEEDED"
+            ? t("blockedOrgWeekly")
+            : t("blockedWeekly")}
         </p>
       ) : u.warning ? (
         <p className="mt-2 text-[0.6875rem] font-medium text-[var(--amber-700)]">
@@ -76,12 +127,12 @@ export function SidebarUsageCard({ persona }: { persona: Persona }) {
         </p>
       ) : null}
 
-      {showUpgrade && (
+      {showAction && (
         <Link
           href={billingHref}
           className="mt-1 inline-flex items-center gap-1 text-[0.6875rem] font-semibold text-[var(--text-primary)] underline underline-offset-2 outline-none hover:text-[var(--text-secondary)] focus-visible:ring-2 focus-visible:ring-[var(--border-focus)]"
         >
-          {t("upgrade")}
+          {u.blocked ? t("topUp") : t("upgrade")}
           <ArrowUpRight aria-hidden strokeWidth={2} className="size-3" />
         </Link>
       )}
@@ -100,54 +151,6 @@ export function SidebarUsageCard({ persona }: { persona: Persona }) {
           </Link>
         </div>
       )}
-    </div>
-  );
-}
-
-function UsageMeter({
-  label,
-  window: w,
-  blocked,
-  countLabel,
-}: {
-  label: string;
-  window: AiUsageWindow;
-  blocked: boolean;
-  countLabel: string;
-}) {
-  const critical = blocked || w.pct >= 95;
-  const warning = !critical && w.pct >= 80;
-
-  return (
-    <div className="mt-2">
-      <div className="flex items-baseline justify-between gap-2">
-        <span className="text-[0.6875rem] font-medium text-[var(--text-secondary)]">
-          {label}
-        </span>
-        <span className="text-[0.6875rem] font-semibold tabular-nums text-[var(--text-secondary)]">
-          {countLabel}
-        </span>
-      </div>
-      <div
-        role="meter"
-        aria-valuenow={w.pct}
-        aria-valuemin={0}
-        aria-valuemax={100}
-        aria-label={label}
-        className="mt-1 h-1.5 w-full overflow-hidden rounded-full bg-[var(--bg-muted)]"
-      >
-        <div
-          className={cn(
-            "h-full rounded-full transition-[width] duration-500 motion-reduce:transition-none",
-            critical
-              ? "bg-[var(--red-600)]"
-              : warning
-                ? "bg-[var(--amber-500)]"
-                : "bg-[var(--text-primary)]",
-          )}
-          style={{ width: `${Math.max(w.pct, w.used > 0 ? 4 : 0)}%` }}
-        />
-      </div>
     </div>
   );
 }

@@ -10,25 +10,27 @@ import {
   WarningCircle,
   CheckCircle,
   XCircle,
+  Lightning,
 } from "@phosphor-icons/react";
 import { Button, EmptyState, Skeleton } from "@/components/ui";
 import {
   aiAssistantApi,
-  type AiUsageDetail,
-  type AiUsageWindow,
+  type AiEnergyUsageDetail,
   type BillingAudience,
 } from "@/lib/api";
 import { cn } from "@/lib/utils";
 
 /**
- * AI usage panel for the billing/usage screen (student + partner). Surfaces the
- * caller's real AI request consumption from `GET /ai/usage/summary`:
- *   - daily + weekly quota meters (the same two gates the backend enforces) with
- *     a live reset countdown,
- *   - a per-feature breakdown over the last 30 days,
+ * AI energy panel for the billing/usage screen (student + partner). Surfaces the
+ * caller's real AI consumption from `GET /ai/usage/summary` under the
+ * cost-weighted "energy" model (owner-locked 2026-07-08):
+ *   - remaining weekly energy as a single meter (with the week-reset time),
+ *   - weekly energy credits used vs the allowance (plus any top-up reserve),
+ *   - a rolling-3h burst indicator,
+ *   - a per-feature breakdown over the reporting window,
  *   - a recent-activity list.
  *
- * Request counts only — no provider/model names, tokens, cost, or latency ever
+ * Energy is opaque — no provider/model names, tokens, cost, or latency ever
  * reach this surface (AI_PRODUCT_SPEC §15). The backend returns stable feature
  * CODES which this component localizes via `billing.usage.features.*`.
  */
@@ -95,7 +97,7 @@ function UsageBody({
   locale,
   t,
 }: {
-  data: AiUsageDetail;
+  data: AiEnergyUsageDetail;
   audience: BillingAudience;
   locale: string;
   t: ReturnType<typeof useTranslations<"billing">>;
@@ -110,41 +112,20 @@ function UsageBody({
     [data.by_feature],
   );
 
-  const dayReset = relativeTime(data.day_reset, locale);
   const weekReset = relativeTime(data.week_reset, locale);
+  const isOrg = data.scope === "org";
 
   return (
     <div className="space-y-4 rounded-2xl border border-[var(--border-default)] bg-white p-4 shadow-[0_2px_16px_rgba(11,34,57,0.06)]">
-      {/* Meters */}
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-        <Meter
-          label={t("usage.dayLabel")}
-          window={data.day}
-          blocked={data.blocked_scope === "day"}
-          countLabel={t("usage.count", {
-            used: data.day.used,
-            limit: data.day.limit,
-          })}
-          resetLabel={dayReset ? t("usage.resetsIn", { when: dayReset }) : null}
-        />
-        <Meter
-          label={t("usage.weekLabel")}
-          window={data.week}
-          blocked={data.blocked_scope === "week"}
-          countLabel={t("usage.count", {
-            used: data.week.used,
-            limit: data.week.limit,
-          })}
-          resetLabel={weekReset ? t("usage.resetsIn", { when: weekReset }) : null}
-        />
-      </div>
+      {/* Energy meter */}
+      <EnergyMeter data={data} weekReset={weekReset} isOrg={isOrg} t={t} />
 
       {/* Warning / blocked banner */}
       {data.blocked ? (
         <Banner tone="error">
-          {data.blocked_scope === "week"
-            ? t("usage.blockedWeek", { when: weekReset ?? "" })
-            : t("usage.blockedDay", { when: dayReset ?? "" })}
+          {data.blocked_reason === "AI_ORG_WEEKLY_ENERGY_EXCEEDED"
+            ? t("usage.blockedOrgWeekly", { when: weekReset ?? "" })
+            : t("usage.blockedWeekly", { when: weekReset ?? "" })}
           <span className="block font-normal text-[var(--text-secondary)]">
             {t("usage.seePlans")}
           </span>
@@ -252,54 +233,84 @@ function UsageBody({
   );
 }
 
-function Meter({
-  label,
-  window: w,
-  blocked,
-  countLabel,
-  resetLabel,
+function EnergyMeter({
+  data,
+  weekReset,
+  isOrg,
+  t,
 }: {
-  label: string;
-  window: AiUsageWindow;
-  blocked: boolean;
-  countLabel: string;
-  resetLabel: string | null;
+  data: AiEnergyUsageDetail;
+  weekReset: string | null;
+  isOrg: boolean;
+  t: ReturnType<typeof useTranslations<"billing">>;
 }) {
-  const critical = blocked || w.pct >= 95;
-  const warning = !critical && w.pct >= 80;
+  const pct = Math.round(data.energy_pct);
+  const tone = data.blocked ? "critical" : data.warning ? "warning" : "normal";
 
   return (
     <div>
-      <div className="flex items-baseline justify-between gap-2">
-        <span className="text-sm font-medium text-[var(--text-secondary)]">
-          {label}
-        </span>
-        <span className="text-sm font-semibold tabular-nums text-[var(--text-primary)]">
-          {countLabel}
-        </span>
+      <div className="flex items-end justify-between gap-3">
+        <div className="min-w-0">
+          <p className="text-xs font-medium text-[var(--text-secondary)]">
+            {isOrg ? t("usage.orgPoolLabel") : t("usage.energyLabel")}
+          </p>
+          <p
+            className={cn(
+              "text-2xl font-bold tabular-nums leading-tight",
+              tone === "critical"
+                ? "text-[var(--red-600)]"
+                : "text-[var(--text-primary)]",
+            )}
+          >
+            {t("usage.energyRemaining", { pct })}
+          </p>
+        </div>
+        <div className="shrink-0 text-right">
+          <p className="text-sm font-semibold tabular-nums text-[var(--text-primary)]">
+            {t("usage.weeklyLabel", {
+              used: data.weekly.used,
+              allowance: data.weekly.allowance,
+            })}
+          </p>
+          {data.weekly.wallet > 0 && (
+            <p className="text-xs tabular-nums text-[var(--text-muted)]">
+              {t("usage.walletLabel", { wallet: data.weekly.wallet })}
+            </p>
+          )}
+          {weekReset && (
+            <p className="text-xs text-[var(--text-muted)]">
+              {t("usage.resetsIn", { when: weekReset })}
+            </p>
+          )}
+        </div>
       </div>
+
       <div
         role="meter"
-        aria-valuenow={w.pct}
+        aria-valuenow={pct}
         aria-valuemin={0}
         aria-valuemax={100}
-        aria-label={label}
-        className="mt-1.5 h-2 w-full overflow-hidden rounded-full bg-[var(--bg-muted)]"
+        aria-label={isOrg ? t("usage.orgPoolLabel") : t("usage.energyLabel")}
+        className="mt-2 h-2 w-full overflow-hidden rounded-full bg-[var(--bg-muted)]"
       >
         <div
           className={cn(
             "h-full rounded-full transition-[width] duration-500 motion-reduce:transition-none",
-            critical
+            tone === "critical"
               ? "bg-[var(--red-600)]"
-              : warning
+              : tone === "warning"
                 ? "bg-[var(--amber-500)]"
                 : "bg-[var(--text-primary)]",
           )}
-          style={{ width: `${Math.max(w.pct, w.used > 0 ? 4 : 0)}%` }}
+          style={{ width: `${Math.min(100, Math.max(0, data.energy_pct))}%` }}
         />
       </div>
-      {resetLabel && (
-        <p className="mt-1 text-xs text-[var(--text-muted)]">{resetLabel}</p>
+
+      {data.session_3h.over_soft_cap && !data.blocked && (
+        <p className="mt-2 inline-flex items-center gap-1.5 text-xs font-medium text-[var(--amber-700)]">
+          <Lightning aria-hidden weight="fill" className="size-3.5" />
+          {t("usage.burstHint")}
+        </p>
       )}
     </div>
   );
