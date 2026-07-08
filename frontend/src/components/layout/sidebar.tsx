@@ -6,15 +6,20 @@ import { useQuery } from "@tanstack/react-query";
 import { ChevronDown, PanelLeftClose, PanelLeftOpen } from "lucide-react";
 import { Link, usePathname } from "@/i18n/navigation";
 import { CompanyAvatar } from "@/components/companies/company-avatar";
-import { WORKSPACE_NAV_GROUPS, type NavGroup, type NavItem } from "@/config/nav";
+import {
+  WORKSPACE_NAV_GROUPS,
+  type NavGroup,
+  type NavItem,
+  type WorkspacePersona,
+} from "@/config/nav";
 import { organizationApi } from "@/lib/api";
 import { BrandMark } from "./brand-mark";
 import { SidebarUsageCard } from "./sidebar-usage-card";
-import { useAuthStore, type Persona } from "@/stores/auth-store";
+import { useAuthStore } from "@/stores/auth-store";
 import { cn } from "@/lib/utils";
 
 interface SidebarProps {
-  persona: Persona;
+  persona: WorkspacePersona;
   onNavigate?: () => void;
   /** Icon-only rail mode (desktop only — DESIGN.md §4 collapsed width 64px). */
   collapsed?: boolean;

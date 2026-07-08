@@ -22,7 +22,7 @@ from dataclasses import dataclass, field
 
 from app.ai.extraction import cv_validation
 from app.ai.extraction.adapters import (
-    OCR_TRIGGER_THRESHOLD,
+    NATIVE_TEXT_MIN_CHARS_PER_PAGE,
     EnginePolicy,
     LayoutAdapter,
     NativeTextAdapter,
@@ -62,6 +62,15 @@ class IngestionOutcome:
     layout_used: bool = False
     llm_used: bool = False
     vision_used: bool = False
+    # A real (paid) vision HTTP call was attempted this run — set even when it
+    # returned nothing. Lets the service layer attribute provider cost to the
+    # superadmin ledger without charging the student for a failed output.
+    vision_attempted: bool = False
+    # The document required a PAID tier (vision/scan reading) but AI was
+    # deliberately withheld (energy exhausted or AI disabled), so no result could
+    # be produced. Distinct from a genuine bad scan: a retryable "pending" state,
+    # NOT the user's fault and NOT a fabricated CV. No energy is ever charged.
+    ai_unavailable: bool = False
 
 
 def _section_text(section: dict) -> str:
@@ -101,7 +110,18 @@ def run_cascade(
     max_bytes: int,
     existing_checksums: tuple[str, ...] | list[str] = (),
     policy: EnginePolicy | None = None,
+    ai_gated: bool = False,
 ) -> IngestionOutcome:
+    """Run the local-first ingestion cascade.
+
+    ``ai_gated`` signals that the CALLER deliberately withheld the paid tiers
+    (student out of AI energy, or AI disabled) — the ``policy`` passed in should
+    already have ``vision_enabled``/``llm_enabled`` off. When a document still
+    NEEDS a paid tier that we could not run, the outcome is a user-safe
+    ``ai_unavailable`` (retryable "extraction pending"), never a misleading
+    "low-quality scan" and never a fabricated CV.
+    """
+
     policy = policy or resolve_policy()
     checksum = cv_validation.compute_checksum(data)
 
@@ -147,28 +167,50 @@ def run_cascade(
             engine_version = improved.engine_version
             layout_used = True
 
-    # ---- 4. Vision-first structuring for styled CVs (images AND PDFs) -------
-    # The styled, multi-column CV templates students actually upload defeat both
-    # local OCR (images) and native text extraction (PDFs interleave columns), so
-    # when a multimodal route is configured we use the vision model as the primary
-    # structurer for BOTH. For PDFs we also hand it the native text: it reads the
-    # page image for correct structure and the embedded text for exact spelling of
-    # emails/phones/dates. Local OCR / deterministic parsing remain the offline
-    # fallbacks.
+    # ---- 4. Cost-tiered vision selection (images AND insufficient-native PDFs) -
+    # Cost fix (2026-07-08): the paid vision tier runs ONLY when the cheaper,
+    # FREE native-text tier is INSUFFICIENT. A clean, dense, in-order native-text
+    # PDF is fully structured by the deterministic tier below and NEVER escalates
+    # to vision — so a text CV costs 0 energy. Vision remains the primary
+    # structurer for the styled/scanned inputs that defeat native extraction
+    # (images, column-flattened PDFs, CID-font garbage, thin scanned PDFs); for
+    # PDFs it is also handed the native text so it reads structure from the page
+    # image but exact spelling of emails/phones/dates from the embedded text.
     is_image = kind is FileKind.IMAGE
     is_pdf = kind is FileKind.PDF
+    stripped = text.strip()
     cid_corrupted = is_pdf and is_cid_corrupted(text)
-    # A PDF needs OCR/vision when image-based (scanned), or when native text is
-    # CID-font garbage (visually rich PDF with unreadable encoded glyphs).
-    needs_ocr = is_image or cid_corrupted or (
-        is_pdf and len(text.strip()) < OCR_TRIGGER_THRESHOLD and signals.has_images
+
+    # Per-page native-text coverage: a clean text CV yields hundreds of characters
+    # per page; a scanned / canvas / vector-only PDF yields almost none.
+    native_chars_per_page = len(stripped) / max(page_count, 1)
+    sparse_native = native_chars_per_page < NATIVE_TEXT_MIN_CHARS_PER_PAGE
+
+    # A PDF's native text is SUFFICIENT (clean) — and therefore fully served by the
+    # FREE deterministic tier with NO paid vision call — when it is dense enough,
+    # in reading order (not column-flattened), and not CID-font garbage.
+    native_text_sufficient = (
+        is_pdf and not sparse_native and not signals.disordered and not cid_corrupted
     )
-    # Send to vision every image, and every PDF that actually has content (text or
-    # images) — a truly empty PDF skips the paid call and classifies as blank.
-    vision_candidate = is_image or (is_pdf and bool(text.strip() or signals.has_images))
+
+    # A PDF needs OCR/vision when it is scanned (image-based with too little native
+    # text) or its native text is CID-font garbage. Images always need it.
+    needs_ocr = is_image or cid_corrupted or (
+        is_pdf and sparse_native and signals.has_images
+    )
+    # Escalate to the paid vision tier ONLY when the cheaper native-text tier is
+    # insufficient: every image (no native text at all), or a PDF whose native text
+    # is too sparse / column-flattened / CID-garbled to trust — provided the page
+    # actually carries content to read (text or an embedded image). A truly empty
+    # PDF stays out (classified blank); a clean native-text PDF is never a candidate.
+    vision_candidate = is_image or (
+        is_pdf and not native_text_sufficient and bool(stripped or signals.has_images)
+    )
 
     vision_structured: dict | None = None
+    vision_attempted = False
     if policy.vision_enabled and vision_candidate:
+        vision_attempted = True  # a real (paid) vision call is being made
         vision_structured = run_vision_extraction(
             data,
             kind,
@@ -203,11 +245,18 @@ def run_cascade(
         ocr_unavailable = True
 
     # The document required OCR but neither the OCR engine nor the vision tier
-    # could read it -> low-quality scan (docs/CV_INGESTION_EXTRACTION_SPEC.md §4).
+    # could read it. Two distinct reasons:
+    #   * ``ai_gated`` — the paid vision tier was deliberately WITHHELD (student
+    #     out of AI energy, or AI disabled): a retryable "extraction pending",
+    #     not the user's fault (docs/.../WS-9 degradation contract).
+    #   * otherwise — a genuine low-quality scan the tools could not read
+    #     (docs/CV_INGESTION_EXTRACTION_SPEC.md §4).
+    # Neither fabricates a CV; neither is chargeable.
     if needs_ocr and not ocr_used and vision_structured is None:
         return IngestionOutcome(
             accepted=False,
-            quality_code="LOW_QUALITY_SCAN",
+            quality_code="EXTRACTION_PENDING_AI" if ai_gated else "LOW_QUALITY_SCAN",
+            ai_unavailable=ai_gated,
             checksum=checksum,
             page_count=page_count,
             text_length=len(text),
@@ -216,6 +265,7 @@ def run_cascade(
             ocr_used=False,
             ocr_unavailable=True,
             layout_used=layout_used,
+            vision_attempted=vision_attempted,
         )
 
     # ---- 6. Vision structuring path -----------------------------------------
@@ -246,6 +296,7 @@ def run_cascade(
             ocr_unavailable=ocr_unavailable,
             layout_used=layout_used,
             vision_used=True,
+            vision_attempted=vision_attempted,
         )
 
     # ---- 7. CV classifier + quality checks (text path) ----------------------
@@ -263,6 +314,7 @@ def run_cascade(
             ocr_used=ocr_used,
             ocr_unavailable=ocr_unavailable,
             layout_used=layout_used,
+            vision_attempted=vision_attempted,
         )
 
     # ---- 8. Deterministic structuring (+ optional LLM-on-TEXT) --------------
@@ -297,6 +349,7 @@ def run_cascade(
         ocr_unavailable=ocr_unavailable,
         layout_used=layout_used,
         llm_used=llm_used,
+        vision_attempted=vision_attempted,
     )
 
 

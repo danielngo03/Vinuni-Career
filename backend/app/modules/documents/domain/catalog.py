@@ -232,6 +232,10 @@ INGEST_PREPARING_REVIEW = "preparing_review"
 INGEST_NEEDS_REVIEW = "needs_review"
 INGEST_READY = "ready"
 INGEST_FAILED = "failed"
+# The upload succeeded and the file is safely stored, but the PAID extraction
+# tier could not run (student out of AI energy, or AI temporarily disabled). A
+# retryable "extraction pending" state — never a fabricated CV, never a charge.
+INGEST_AI_UNAVAILABLE = "ai_unavailable"
 
 INGESTION_STATUSES = frozenset(
     {
@@ -244,11 +248,12 @@ INGESTION_STATUSES = frozenset(
         INGEST_NEEDS_REVIEW,
         INGEST_READY,
         INGEST_FAILED,
+        INGEST_AI_UNAVAILABLE,
     }
 )
 
 INGESTION_TERMINAL_STATUSES = frozenset(
-    {INGEST_NEEDS_REVIEW, INGEST_READY, INGEST_FAILED}
+    {INGEST_NEEDS_REVIEW, INGEST_READY, INGEST_FAILED, INGEST_AI_UNAVAILABLE}
 )
 
 _INGESTION_STATUS_LABELS = {
@@ -261,6 +266,7 @@ _INGESTION_STATUS_LABELS = {
     INGEST_NEEDS_REVIEW: ("Cần bạn kiểm tra", "Needs your review"),
     INGEST_READY: ("Sẵn sàng để nhập", "Ready to import"),
     INGEST_FAILED: ("Chưa xử lý được", "Could not process"),
+    INGEST_AI_UNAVAILABLE: ("Đang chờ AI để trích xuất", "Waiting for AI to extract"),
 }
 
 

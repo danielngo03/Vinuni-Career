@@ -32,6 +32,14 @@ OPTIMIZE_FOR_JOB = "optimize_cv_for_job"
 ATS_KEYWORDS = "ats_keyword_suggestions"
 FABRICATION_CHECK = "cv_fabrication_check"
 
+# Task types that spend a real model call (a generative gateway completion). The
+# deterministic checks (ATS keywords, fabrication check) never touch the gateway,
+# so they are free and must survive AI-energy exhaustion — callers gate the energy
+# preflight + charge on membership here.
+MODEL_BACKED_TASKS = frozenset(
+    {DRAFT_FROM_PROFILE, FILL_FROM_SOURCES, GENERATE_BULLETS, REWRITE_SECTION, OPTIMIZE_FOR_JOB}
+)
+
 _SECTION_PRIORITY = [
     "skills", "experience", "projects", "summary", "education",
     "certifications", "awards", "languages", "activities", "publications", "custom",

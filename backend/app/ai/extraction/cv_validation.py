@@ -132,6 +132,14 @@ _COPY: dict[str, tuple[str, str, str, list[str]]] = {
         "fix_input",
         ["upload_another", "create_from_template"],
     ),
+    "EXTRACTION_PENDING_AI": (
+        "Trích xuất bằng AI đang tạm ngưng. Tệp của bạn đã được lưu — hệ thống sẽ "
+        "tự trích xuất khi AI sẵn sàng, hoặc bạn có thể thử lại sau.",
+        "AI extraction is paused right now. Your file is saved — we'll extract it "
+        "once AI is available again, or you can retry later.",
+        "retry",
+        ["retry_extraction", "keep_original", "create_from_template"],
+    ),
     "NOT_A_CV": (
         "Tệp này không giống CV/hồ sơ ứng tuyển. Hãy tải lên CV, "
         "hoặc bắt đầu bằng mẫu CV và nhập thông tin thủ công.",

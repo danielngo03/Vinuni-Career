@@ -7,6 +7,7 @@ import { useAuthStore, type Persona } from "@/stores/auth-store";
 import { AccountMenu } from "./account-menu";
 import { SavedButton } from "./saved-button";
 import { HeaderAiButton } from "./header-ai-button";
+import { HeaderEnergyMeter } from "./header-energy-meter";
 import { NotificationBell } from "@/components/notifications/notification-bell";
 import { MessagingBell } from "@/components/messaging/messaging-bell";
 
@@ -80,6 +81,7 @@ export function PublicAuthActions() {
             <MessagingBell href={routes.messagesHref} />
             <SavedButton variant="icon" />
             <HeaderAiButton />
+            <HeaderEnergyMeter />
           </>
         )}
         <AccountMenu

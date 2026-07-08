@@ -17,6 +17,7 @@ for a student they are the caller's own user scope.
 
 from __future__ import annotations
 
+import uuid
 from datetime import UTC, datetime, timedelta
 from typing import Any
 
@@ -171,3 +172,46 @@ async def enforce_quota(session: AsyncSession, *, principal: Any) -> None:
     advisory and never blocks.
     """
     await energy_service.enforce_energy(session, principal=principal)
+
+
+async def charge_chat_turn(
+    session: AsyncSession,
+    *,
+    principal: Any,
+    message_id: uuid.UUID,
+    session_id: uuid.UUID | None = None,
+) -> None:
+    """Debit one chatbot AI-energy credit for a completed, model-generated turn.
+
+    Charged ONCE per user-visible assistant reply that actually spent a model
+    call (the caller invokes this only on that path — deterministic fast-path /
+    quick / agent-tool / fallback replies spend no tokens and are never charged).
+    Idempotent on the assistant message id, so a client retry / stream re-run of
+    the same turn never double-charges. Best-effort: an accounting error never
+    breaks the chat reply, and no provider/model/token internals are stored.
+    """
+    try:
+        from app.ai.observability.billable_usage import (
+            FEATURE_CHATBOT,
+            record_billable_usage,
+        )
+
+        ctx = energy_service.build_usage_context(
+            principal,
+            feature_key=FEATURE_CHATBOT,
+            task_type="ai_assistant_chat",
+            resource_type="chat_session",
+            resource_id=session_id,
+            session_id=session_id,
+            idempotency_parts=(message_id,),
+        )
+        await record_billable_usage(
+            session,
+            ctx=ctx,
+            result_status="success",
+            base_units=energy_service.charge_units(FEATURE_CHATBOT),
+        )
+    except Exception:  # noqa: BLE001 — accounting must never break the chat path
+        import logging
+
+        logging.getLogger("ai.usage").warning("chat_energy_charge_failed", exc_info=True)

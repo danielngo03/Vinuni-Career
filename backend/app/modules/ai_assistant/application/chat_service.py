@@ -35,6 +35,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.ai.gateway.base import AIMessage
 from app.ai.prompts.assistant import v1 as assistant_prompt
+from app.ai.prompts.assistant import v2 as assistant_prompt_v2
 from app.ai.prompts.assistant_partner import v1 as partner_prompt
 from app.ai.retrieval.citation_verify import kb_source_titles, verify_citations
 from app.ai.safety.input_guard import sanitize_instruction
@@ -68,6 +69,7 @@ from app.modules.ai_assistant.application.tool_loop import (
     create_confirmation_message,
     execute_agent_plan,
     llm_complete,
+    make_confirmation_message,
     parse_tool_call,
     persist_tool_result,
 )
@@ -83,6 +85,10 @@ from app.shared.permissions import Principal
 # the system prompts (assistant/v1.py, assistant_partner/v1.py) — it is
 # unrelated to this real persona string and must not be confused with it.
 _PARTNER_PERSONA = "partner_member"
+# Student persona value assigned at login (identity.persona). Student sessions
+# use the smart-apply driver prompt (assistant/v2); other non-partner personas
+# (university staff, alumni pending their own prompt) keep the v1 student prompt.
+_STUDENT_PERSONA = "student"
 
 __all__ = [
     "archive_session",
@@ -105,12 +111,19 @@ _logger = logging.getLogger("ai.rag")
 def _system_prompt_for(principal: Principal) -> str:
     """Select the persona system prompt (§8.1 branching, partner assistant spec).
 
-    Partner (recruiter) accounts get the org-scoped ``PARTNER_SYSTEM_PROMPT``;
-    everyone else (student, alumni, guest-in-practice-never-reaches-here,
-    university staff pending its own future prompt) gets the student prompt.
+    - Partner (recruiter) accounts get the org-scoped ``PARTNER_SYSTEM_PROMPT``.
+    - Students get the smart-apply driver ``assistant/v2`` prompt, which actively
+      drives the confirmation-gated apply chain (analyze fit → tailor CV → draft
+      cover letter → apply). Every write stays confirmation-gated (§4.3) — the
+      prompt only lets the model PROPOSE a write, never execute or claim one.
+    - Everyone else (alumni pending their own prompt, university staff pending
+      its own future prompt, guest-in-practice-never-reaches-here) keeps the v1
+      student prompt so this change is scoped to the student persona only.
     """
     if principal.persona == _PARTNER_PERSONA:
         return partner_prompt.PARTNER_SYSTEM_PROMPT
+    if principal.persona == _STUDENT_PERSONA:
+        return assistant_prompt_v2.STUDENT_SYSTEM_PROMPT
     return assistant_prompt.SYSTEM_PROMPT
 
 
@@ -219,7 +232,7 @@ async def send_message(
         chat=chat,
     ):
         if agent_plan_requires_confirmation(agent_plan):
-            confirm_msg = create_confirmation_message(chat, agent_plan)
+            confirm_msg = create_confirmation_message(chat, agent_plan, locale=locale)
             session.add(confirm_msg)
             chat.last_message_at = datetime.now(UTC)
             await session.commit()
@@ -262,6 +275,7 @@ async def send_message(
     iterations = 0
     tool_call_count = 0
     used_tool = False
+    model_used = False  # a real model call produced this turn -> chargeable
     final_text: str | None = None
     kb_sources: list[str] = []  # §6.5: retrieved doc titles for this turn's citation check
 
@@ -278,6 +292,7 @@ async def send_message(
         except AIUnavailableError:
             final_text = ai_unavailable_reply()
             break
+        model_used = True
 
         # Check if the model wants to call a tool
         tool_call = parse_tool_call(raw_response)
@@ -296,16 +311,9 @@ async def send_message(
             break
 
         if spec.permission_class == "confirmation_required":
-            # Do NOT execute — return a pending confirmation message
-            confirm_msg = ChatMessage(
-                id=uuid.uuid4(),
-                session_id=chat.id,
-                role="tool_call",
-                content=f"Đang chuẩn bị thực hiện: {tool_name}",
-                tool_name=tool_name,
-                tool_args=tool_args,
-                requires_confirmation=True,
-                created_at=datetime.now(UTC),
+            # Do NOT execute — return a pending, locale-driven confirmation card.
+            confirm_msg = make_confirmation_message(
+                chat, tool_name=tool_name, tool_args=tool_args, locale=locale
             )
             session.add(confirm_msg)
             chat.last_message_at = datetime.now(UTC)
@@ -349,6 +357,12 @@ async def send_message(
     )
     session.add(assistant_msg)
     chat.last_message_at = datetime.now(UTC)
+    # Charge the chatbot AI-energy credit ONCE per model-generated turn (an
+    # AI-unavailable fallback that never reached the model is not charged).
+    if model_used:
+        await usage_service.charge_chat_turn(
+            session, principal=principal, message_id=assistant_msg.id, session_id=chat.id
+        )
     await session.commit()
 
     return serialize_message(assistant_msg)
@@ -360,6 +374,7 @@ async def stream_message(
     principal: Principal,
     session_id: uuid.UUID,
     text: str,
+    locale: str = "vi",
 ) -> AsyncGenerator[dict, None]:
     """Stream the assistant reply for a user message as a series of SSE event dicts.
 
@@ -436,7 +451,7 @@ async def stream_message(
     ):
         if agent_plan_requires_confirmation(agent_plan):
             yield {"type": "status", "code": "confirming_action"}
-            confirm_msg = create_confirmation_message(chat, agent_plan)
+            confirm_msg = create_confirmation_message(chat, agent_plan, locale=locale)
             session.add(confirm_msg)
             chat.last_message_at = datetime.now(UTC)
             await session.commit()
@@ -487,6 +502,7 @@ async def stream_message(
     iterations = 0
     tool_call_count = 0
     used_tool = False
+    model_used = False  # a real model call produced this turn -> chargeable
     final_text: str | None = None
     final_text_streamed = False
     kb_sources: list[str] = []  # §6.5: retrieved doc titles for this turn's citation check
@@ -514,6 +530,7 @@ async def stream_message(
             final_text = ai_unavailable_reply()
             final_text_streamed = False
             break
+        model_used = True
 
         tool_call = parse_tool_call(raw_response)
         if tool_call is None:
@@ -531,15 +548,8 @@ async def stream_message(
             break
 
         if spec.permission_class == "confirmation_required":
-            confirm_msg = ChatMessage(
-                id=uuid.uuid4(),
-                session_id=chat.id,
-                role="tool_call",
-                content=f"Đang chuẩn bị thực hiện: {tool_name}",
-                tool_name=tool_name,
-                tool_args=tool_args,
-                requires_confirmation=True,
-                created_at=datetime.now(UTC),
+            confirm_msg = make_confirmation_message(
+                chat, tool_name=tool_name, tool_args=tool_args, locale=locale
             )
             session.add(confirm_msg)
             chat.last_message_at = datetime.now(UTC)
@@ -592,6 +602,11 @@ async def stream_message(
     )
     session.add(assistant_msg)
     chat.last_message_at = datetime.now(UTC)
+    # Charge the chatbot AI-energy credit ONCE per model-generated turn.
+    if model_used:
+        await usage_service.charge_chat_turn(
+            session, principal=principal, message_id=assistant_msg.id, session_id=chat.id
+        )
     await session.commit()
 
     yield {"type": "done", "message": serialize_message(assistant_msg)}

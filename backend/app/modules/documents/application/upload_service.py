@@ -31,7 +31,7 @@ from app.ai.extraction.cv_ingestion_cascade import run_cascade
 from app.core.config import get_settings
 from app.modules.auth.application.context import RequestContext
 from app.modules.documents.api import presenters
-from app.modules.documents.application import _shared
+from app.modules.documents.application import _shared, extraction_metering
 from app.modules.documents.domain.models import CvParseRun, Document
 from app.modules.documents.infrastructure import storage
 from app.shared.audit import write_audit
@@ -105,6 +105,13 @@ async def upload_cv(
             }
 
     existing = await _existing_checksums(session, user_id=principal.user_id)
+    # Weekly-energy preflight for the PAID tiers. On exhaustion the paid tiers are
+    # withheld and the cascade runs offline-only (native text stays free; a scan
+    # returns a user-safe ``ai_unavailable`` state) — the upload never hard-fails.
+    ai_gated = await extraction_metering.preflight_gate(session, principal=principal)
+    policy = resolve_policy()
+    if ai_gated:
+        policy = extraction_metering.gated_policy(policy)
     # run_cascade is synchronous and CPU/IO-heavy (PDF rasterization, PIL
     # resize/encode, blocking vision HTTP). Offload to a thread so it never
     # blocks the request event loop and stalls other requests on this worker.
@@ -114,7 +121,8 @@ async def upload_cv(
         data,
         max_bytes=settings.max_upload_bytes,
         existing_checksums=existing,
-        policy=resolve_policy(),
+        policy=policy,
+        ai_gated=ai_gated,
     )
 
     document_id = uuid.uuid4()
@@ -157,6 +165,13 @@ async def upload_cv(
 
     session.add(run)
     await session.flush()
+
+    # Charge only the paid extraction tier that actually ran (native-text/OCR are
+    # free); charge-on-success, idempotent on the parse-run id. Best-effort.
+    await extraction_metering.charge_extraction(
+        session, principal, outcome,
+        resource_type="cv_parse_run", resource_id=run.id,
+    )
 
     await write_audit(
         session, action="cv.uploaded", resource_type="document", resource_id=document.id,

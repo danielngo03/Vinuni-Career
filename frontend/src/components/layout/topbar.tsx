@@ -11,10 +11,9 @@ import { NotificationBell } from "@/components/notifications/notification-bell";
 import { MessagingBell } from "@/components/messaging/messaging-bell";
 import { Link, usePathname } from "@/i18n/navigation";
 import { getRouteTitle } from "@/lib/route-titles";
-import { WORKSPACE_NAV } from "@/config/nav";
+import { WORKSPACE_NAV, type WorkspacePersona } from "@/config/nav";
 import { useUiStore } from "@/stores/ui-store";
 import { cn } from "@/lib/utils";
-import type { Persona } from "@/stores/auth-store";
 
 /** Fixed workspace topbar (DESIGN.md §5.4). 60px chrome surface, labeled
  * notification/message pills, and the account dropdown (settings + sign-out). */
@@ -23,7 +22,7 @@ export function Topbar({
   onAiClick,
   aiActive,
 }: {
-  persona: Persona;
+  persona: WorkspacePersona;
   /** Toggles the shared workspace AI assistant chat window. */
   onAiClick?: () => void;
   /** When true, the AI assistant button reads as active/open. */

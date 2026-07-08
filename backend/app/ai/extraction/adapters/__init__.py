@@ -5,6 +5,7 @@ depends on one parser library (``docs/CV_INGESTION_EXTRACTION_SPEC.md`` §3).
 """
 
 from app.ai.extraction.adapters.base import (
+    NATIVE_TEXT_MIN_CHARS_PER_PAGE,
     OCR_TRIGGER_THRESHOLD,
     ExtractionSignals,
     is_cid_corrupted,
@@ -39,6 +40,7 @@ from app.ai.extraction.adapters.vision import (
 )
 
 __all__ = [
+    "NATIVE_TEXT_MIN_CHARS_PER_PAGE",
     "OCR_TRIGGER_THRESHOLD",
     "ExtractionSignals",
     "is_cid_corrupted",

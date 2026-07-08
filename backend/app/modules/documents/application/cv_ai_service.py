@@ -18,6 +18,7 @@ Guarantees (``docs/CV_STUDIO_SPEC.md`` §3, ``docs/SECURITY_PRIVACY.md``):
 
 from __future__ import annotations
 
+import logging
 import uuid
 
 from sqlalchemy import select
@@ -25,6 +26,13 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.ai.cv import CvAiContext, generate_cv_edit_patch, run_cv_task
 from app.ai.cv.edit_command import TASK_TYPE as _EDIT_COMMAND_TASK_TYPE
+from app.ai.cv.tasks import MODEL_BACKED_TASKS
+from app.ai.energy import service as energy_service
+from app.ai.observability.billable_usage import (
+    FEATURE_CV_EDIT_COMMAND,
+    FEATURE_CV_SUGGESTION,
+    record_billable_usage,
+)
 from app.ai.safety import input_guard
 from app.modules.auth.application.context import RequestContext
 from app.modules.documents.api import presenters
@@ -49,6 +57,46 @@ from app.shared.exceptions import ResourceNotFoundError
 from app.shared.permissions import permission_checker
 
 _RESOURCE = _shared.RESOURCE
+
+logger = logging.getLogger("ai.cv")
+
+
+async def _charge_cv_energy(
+    session: AsyncSession,
+    *,
+    principal,
+    feature_key: str,
+    task_type: str,
+    cv_id: uuid.UUID,
+    suggestion_id: uuid.UUID,
+) -> None:
+    """Debit the student's AI energy for one successful CV AI result.
+
+    Service-layer charge (mirrors ``jd_upload_service._meter_extraction``): the
+    grounded pending diff IS the user-visible product, so a successful
+    ``run_cv_task`` / ``generate_cv_edit_patch`` return is the chargeable event
+    (a provider/validation failure raises before reaching here → never charged).
+    Idempotent on (cv, suggestion) so a client-key replay that early-returns the
+    existing suggestion can never double-charge. Best-effort — an accounting error
+    never breaks the suggestion write. No provider/model/token internals stored.
+    """
+    try:
+        ctx = energy_service.build_usage_context(
+            principal,
+            feature_key=feature_key,
+            task_type=task_type,
+            resource_type="cv_ai_suggestion",
+            resource_id=suggestion_id,
+            idempotency_parts=(cv_id, suggestion_id),
+        )
+        await record_billable_usage(
+            session,
+            ctx=ctx,
+            result_status="success",
+            base_units=energy_service.charge_units(feature_key),
+        )
+    except Exception:  # noqa: BLE001 — accounting must never break the CV AI path
+        logger.warning("cv_ai_energy_charge_failed", exc_info=True)
 
 
 # --------------------------------------------------------------------------- #
@@ -214,10 +262,33 @@ async def request_suggestion(
         target_language=payload.get("target_language"),
     )
 
+    # Model-backed tasks spend a real completion and are AI-energy metered; the
+    # deterministic ATS/fabrication checks spend nothing and survive exhaustion.
+    model_backed = task_type in MODEL_BACKED_TASKS
+    if model_backed:
+        # Preflight hard gate BEFORE the model call.
+        await energy_service.enforce_energy(session, principal=principal)
+
+    # Pre-generate the suggestion id so the energy charge is keyed to the exact
+    # row it pays for (traceable + idempotent).
+    suggestion_id = uuid.uuid4()
+
     # May raise AIUnavailableError -> mapped to the friendly AI_UNAVAILABLE envelope.
     result = await run_cv_task(context)
 
+    if model_backed:
+        # Charge on the successful, user-visible suggestion (§3.2).
+        await _charge_cv_energy(
+            session,
+            principal=principal,
+            feature_key=FEATURE_CV_SUGGESTION,
+            task_type=task_type,
+            cv_id=cv.id,
+            suggestion_id=suggestion_id,
+        )
+
     suggestion = CvAiSuggestion(
+        id=suggestion_id,
         cv_id=cv.id,
         requested_by=principal.user_id,
         task_type=task_type,
@@ -314,10 +385,25 @@ async def request_edit_command(
         source_ids={},
     )
 
+    # A natural-language edit command always spends a model call — preflight gate
+    # BEFORE it, then charge on the successfully-produced pending diff.
+    await energy_service.enforce_energy(session, principal=principal)
+    suggestion_id = uuid.uuid4()
+
     # May raise AIUnavailableError -> mapped to the friendly AI_UNAVAILABLE envelope.
     result = await generate_cv_edit_patch(context)
 
+    await _charge_cv_energy(
+        session,
+        principal=principal,
+        feature_key=FEATURE_CV_EDIT_COMMAND,
+        task_type=_EDIT_COMMAND_TASK_TYPE,
+        cv_id=cv.id,
+        suggestion_id=suggestion_id,
+    )
+
     suggestion = CvAiSuggestion(
+        id=suggestion_id,
         cv_id=cv.id,
         requested_by=principal.user_id,
         task_type=_EDIT_COMMAND_TASK_TYPE,

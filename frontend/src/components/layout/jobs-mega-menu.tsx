@@ -17,6 +17,7 @@ import { Skeleton } from "@/components/ui";
 import { CompanyAvatar } from "@/components/companies/company-avatar";
 import { VerifiedBadge } from "@/components/ui/verified-badge";
 import { TrackedItem } from "@/components/discovery/tracked-item";
+import { jobSignalTags } from "@/lib/discovery/signal-tags";
 import { discoveryApi, jobsApi, marketplaceApi } from "@/lib/api";
 import type { JobSummary, RecommendedJob } from "@/lib/api";
 import { EMPLOYMENT_TYPES, LOCATION_TYPES } from "@/lib/api";
@@ -282,11 +283,7 @@ function JobMegaRow({
         targetType="job"
         targetId={job.id}
         renderId={`mega-job-${renderId}`}
-        signalTags={{
-          search_terms: [job.title],
-          company_ids: [job.org_id],
-          work_mode: job.location_type,
-        }}
+        signalTags={jobSignalTags(job, { searchTerms: [job.title] })}
       >
         <Link
           href={`/jobs/${job.id}`}

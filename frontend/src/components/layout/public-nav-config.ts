@@ -6,7 +6,7 @@
  */
 export interface PublicNavItem {
   /** i18n key under the `nav` namespace. */
-  key: "jobs" | "companies" | "careerExplore" | "events" | "employers" | "createCv";
+  key: "jobs" | "companies" | "events" | "createCv";
   href: string;
   mega?: "jobs" | "companies" | "events";
 }

@@ -42,7 +42,13 @@ def upgrade() -> None:
                 name_en=spec["name_en"],
                 category=spec["category"],
                 layout=json.dumps(spec["layout_schema"]),
-                is_premium=spec["is_premium"],
+                # Read defensively: the live ``TEMPLATE_SEEDS`` catalog dropped
+                # ``is_premium`` in the 2026-07-05 owner cleanup and migration
+                # 0068 drops the column. At this revision the column still
+                # exists, so default to ``False`` when the catalog spec omits the
+                # key (a hard ``spec["is_premium"]`` would ``KeyError`` on a fresh
+                # full-chain upgrade if these industry keys are re-added).
+                is_premium=spec.get("is_premium", False),
             )
         )
 

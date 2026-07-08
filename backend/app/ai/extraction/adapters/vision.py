@@ -228,6 +228,15 @@ class GatewayVisionExtractionAdapter:
             "HTTP-Referer": "https://career.vinuni.edu.vn",
             "X-Title": "VinUni Career Platform",
         }
+        # GOVERNANCE (WS-2): this tier still issues its own downscaled-image HTTP
+        # call rather than routing through the gateway provider abstraction, which
+        # does not yet carry multimodal image parts. That refactor is a tracked
+        # follow-up. Until then this call is (a) gated on ``real_provider_active``
+        # (see ``available`` above), (b) preflight-gated + METERED at the service
+        # layer via ``documents.application.extraction_metering`` using the
+        # cascade's tier flags (charged only on a successful, user-visible result),
+        # and (c) documented here. Image bytes go ONLY down this approved
+        # downscaled-vision path — never anywhere else.
         # Prompt-size proxy for the usage ledger (image bytes dominate real cost
         # but the char-based estimator can't see them; the native-text + prompt
         # size is still a useful, PII-safe signal and records that a paid vision

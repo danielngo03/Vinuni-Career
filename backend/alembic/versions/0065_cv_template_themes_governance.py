@@ -167,7 +167,13 @@ def _upgrade_data_pg(bind) -> None:
                 name_en=spec["name_en"],
                 category=spec["category"],
                 layout=json.dumps(spec["layout_schema"]),
-                is_premium=spec["is_premium"],
+                # Read defensively: the live ``TEMPLATE_SEEDS`` catalog dropped
+                # ``is_premium`` in the 2026-07-05 owner cleanup (all templates
+                # free) and migration 0068 drops the column. At this revision the
+                # column still exists, so default to ``False`` when the catalog
+                # spec no longer carries the key (a hard ``spec["is_premium"]``
+                # would ``KeyError`` on a fresh full-chain upgrade).
+                is_premium=spec.get("is_premium", False),
             )
         ).scalar()
         canonical_id_by_key[spec["key"]] = row_id

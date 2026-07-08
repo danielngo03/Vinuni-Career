@@ -295,6 +295,15 @@ def upgrade() -> None:
             )
 
         # Idempotent template seed.
+        #
+        # ``is_premium`` is read defensively: the live ``TEMPLATE_SEEDS`` catalog
+        # dropped the ``is_premium`` key in the 2026-07-05 owner cleanup (all CV
+        # templates are free), and the backing column is dropped by migration
+        # 0068. At *this* revision the column still exists (created above with
+        # ``server_default=sa.false()``), so we seed it explicitly, defaulting to
+        # ``False`` when the catalog spec no longer carries the key. A hard
+        # ``spec["is_premium"]`` here would ``KeyError`` on a fresh full-chain
+        # ``alembic upgrade head`` against the current catalog.
         for spec in TEMPLATE_SEEDS:
             op.execute(
                 sa.text(
@@ -309,7 +318,7 @@ def upgrade() -> None:
                     name_en=spec["name_en"],
                     category=spec["category"],
                     layout=json.dumps(spec["layout_schema"]),
-                    is_premium=spec["is_premium"],
+                    is_premium=spec.get("is_premium", False),
                 )
             )
     else:

@@ -16,6 +16,7 @@ import { Link } from "@/i18n/navigation";
 import { Skeleton } from "@/components/ui";
 import { VerifiedBadge } from "@/components/ui/verified-badge";
 import { TrackedItem } from "@/components/discovery/tracked-item";
+import { eventSignalTags } from "@/lib/discovery/signal-tags";
 import { marketplaceApi } from "@/lib/api";
 import type { EventFormat, EventSummary, EventType } from "@/lib/api";
 import { EVENT_FORMATS, EVENT_TYPES } from "@/lib/api";
@@ -198,7 +199,7 @@ function EventMegaRow({
         targetType="event"
         targetId={event.id}
         renderId={`mega-event-${renderId}`}
-        signalTags={{ event_ids: [event.id] }}
+        signalTags={eventSignalTags(event)}
       >
         <Link
           href={`/events/${event.id}`}

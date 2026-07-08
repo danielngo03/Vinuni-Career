@@ -20,6 +20,16 @@ from dataclasses import dataclass, field
 # "too little readable text" and fall through to the OCR stage.
 OCR_TRIGGER_THRESHOLD = 40
 
+# Per-page native-text COVERAGE floor. A clean, text-selectable CV page yields
+# hundreds of characters; a scanned / canvas / vector-only page yields almost
+# none. When ``len(native_text) / page_count`` is at or above this floor (and the
+# text is in reading order and not CID-font garbage), the FREE deterministic tier
+# can structure the CV on its own and the paid vision tier is NOT invoked — this
+# is the cost fix that keeps clean native-text PDFs free. Chosen well below a real
+# CV page (roughly two short lines) so only genuinely thin/scanned PDFs escalate,
+# while the minimal single-column fixtures stay on the free path.
+NATIVE_TEXT_MIN_CHARS_PER_PAGE = 160
+
 _SECRET_PATTERNS = [
     re.compile(r"(?i)(api[_-]?key|secret|password|token)\s*[:=]\s*\S+"),
     re.compile(r"\b[A-Za-z0-9_]{20,}\.[A-Za-z0-9_]{20,}\.[A-Za-z0-9_-]{10,}\b"),  # JWT-ish

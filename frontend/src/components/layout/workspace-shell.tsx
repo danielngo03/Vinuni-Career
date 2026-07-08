@@ -15,7 +15,8 @@ import { AiChatWindow } from "@/components/ai-assistant/ai-chat-window";
 import { Sheet } from "@/components/ui";
 import { usePathname, useRouter } from "@/i18n/navigation";
 import { readPersistedSidebarCollapsed, useUiStore } from "@/stores/ui-store";
-import { useAuthStore, type Persona } from "@/stores/auth-store";
+import { useAuthStore } from "@/stores/auth-store";
+import { type WorkspacePersona } from "@/config/nav";
 import { cn } from "@/lib/utils";
 
 /**
@@ -27,7 +28,7 @@ export function WorkspaceShell({
   persona,
   children,
 }: {
-  persona: Persona;
+  persona: WorkspacePersona;
   children: React.ReactNode;
 }) {
   const t = useTranslations("common");

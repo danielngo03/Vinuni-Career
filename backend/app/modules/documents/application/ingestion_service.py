@@ -40,6 +40,7 @@ from app.modules.documents.application import (
     cv_creation_service,
     cv_section_service,
     cv_service,
+    extraction_metering,
 )
 from app.modules.documents.application.errors import FactConfirmationFieldsRequiredError
 from app.modules.documents.domain import catalog
@@ -64,6 +65,8 @@ def _next_actions(status: str, quality_code: str | None) -> list[str]:
         return ["import_to_cv", "keep_original", "upload_another"]
     if status == catalog.INGEST_NEEDS_REVIEW:
         return ["review_fields", "import_to_cv", "keep_original"]
+    if status == catalog.INGEST_AI_UNAVAILABLE:
+        return ["retry_extraction", "keep_original", "create_from_template"]
     if status == catalog.INGEST_FAILED and quality_code:
         _vi, _en, _recover, actions = cv_validation.copy_for(quality_code)
         return actions
@@ -331,7 +334,17 @@ async def _execute_ingestion(session: AsyncSession, *, ingestion_id: uuid.UUID) 
         )
     ).scalars().all()
 
+    # Weekly-energy preflight for the PAID extraction tiers. Uploaded CVs are a
+    # student-facing feature, so meter on the uploader's own user scope
+    # (reconstruct a minimal student principal — the background worker path has no
+    # request principal). On exhaustion the paid tiers are withheld and the cascade
+    # runs offline-only: native-text CVs still extract for free; a scan surfaces a
+    # user-safe ``ai_unavailable`` status. The upload NEVER hard-fails on energy.
+    principal = Principal(user_id=ing.user_id, persona="student")
+    ai_gated = await extraction_metering.preflight_gate(session, principal=principal)
     policy = resolve_policy()
+    if ai_gated:
+        policy = extraction_metering.gated_policy(policy)
     # run_cascade is synchronous and CPU/IO-heavy (PDF rasterization, PIL
     # resize/encode, blocking vision HTTP). Offload to a thread so it never
     # blocks the request event loop (the inline queue runs this on the loop).
@@ -342,10 +355,17 @@ async def _execute_ingestion(session: AsyncSession, *, ingestion_id: uuid.UUID) 
         max_bytes=get_settings().max_upload_bytes,
         existing_checksums=list(others),
         policy=policy,
+        ai_gated=ai_gated,
     )
 
     _apply_outcome(ing, outcome)
     await session.flush()
+    # Charge only the paid tier that actually ran (native-text/OCR = free);
+    # charge-on-success, idempotent on the ingestion id. Best-effort.
+    await extraction_metering.charge_extraction(
+        session, principal, outcome,
+        resource_type="cv_ingestion", resource_id=ing.id,
+    )
     await write_audit(
         session, action="cv.ingestion.completed", resource_type="cv_ingestion",
         resource_id=ing.id,
@@ -362,7 +382,11 @@ async def _execute_ingestion(session: AsyncSession, *, ingestion_id: uuid.UUID) 
 
 
 def _apply_outcome(ing: CvIngestion, outcome: IngestionOutcome) -> None:
-    if outcome.accepted:
+    if outcome.ai_unavailable:
+        # File stored, but the paid extraction tier was withheld (out of AI energy
+        # or AI disabled) — a retryable "pending" state, never a failure/fabrication.
+        status = catalog.INGEST_AI_UNAVAILABLE
+    elif outcome.accepted:
         status = (
             catalog.INGEST_NEEDS_REVIEW if outcome.needs_review else catalog.INGEST_READY
         )

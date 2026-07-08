@@ -16,8 +16,11 @@ from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.ai.cv.llm import generate_note
+from app.ai.energy import service as energy_service
+from app.ai.observability.billable_usage import FEATURE_COVER_LETTER
 from app.ai.prompts.cover_letter import v1 as cover_prompt
 from app.ai.safety.input_guard import sanitize_instruction
+from app.modules.opportunities.domain import lifecycle
 from app.modules.opportunities.domain.lifecycle import visible_levels_for
 from app.modules.opportunities.domain.models import Job
 from app.modules.organization.application import org_reporting_facade
@@ -75,8 +78,12 @@ async def generate_cover_letter(
     import datetime
 
     now = datetime.datetime.utcnow()
+    # A publicly visible job is ACTIVE + moderation-APPROVED + published + within
+    # deadline + a tier the persona may discover (mirrors ``apply_visible_filter``;
+    # a job's published state is ``active``, never a ``"published"`` status).
     is_public = (
-        job.status == "published"
+        job.status == lifecycle.ACTIVE
+        and job.moderation_status == lifecycle.MOD_APPROVED
         and job.published_at is not None
         and job.published_at <= now
         and (job.application_deadline is None or job.application_deadline >= now)
@@ -84,6 +91,10 @@ async def generate_cover_letter(
     )
     if not is_public and not principal.is_superadmin:
         raise ResourceNotFoundError()
+
+    # Preflight AI-energy gate BEFORE spending a model call. No-op for guests;
+    # raises 409 QUOTA_EXCEEDED only on genuine weekly exhaustion (after wallet).
+    await energy_service.enforce_energy(session, principal=principal)
 
     org = await org_reporting_facade.summary_for(session, job.org_id)
     company_name = org.display_name if org else "the company"
@@ -114,7 +125,19 @@ async def generate_cover_letter(
         if safe_note:
             inputs["student_note"] = safe_note
 
-    # Try AI generation; fall back to static template on failure.
+    # Try AI generation; fall back to static template on failure. On success the
+    # metered gateway debits the student's AI energy for one cover-letter credit
+    # (charged ONLY on a successful, user-visible draft). No stable cv identity is
+    # available on this endpoint (draft is job + name only) and drafts are freely
+    # regenerable, so the charge is attributed to the job resource without an
+    # idempotency key — each genuine regeneration is a real model call.
+    usage_context = energy_service.build_usage_context(
+        principal,
+        feature_key=FEATURE_COVER_LETTER,
+        task_type=_TASK_TYPE,
+        resource_type="job",
+        resource_id=job_id,
+    )
     try:
         user_content = cover_prompt.build_user_message(inputs)
         draft = await generate_note(
@@ -123,6 +146,11 @@ async def generate_cover_letter(
             user_content=user_content,
             temperature=0.35,
             max_tokens=_MAX_TOKENS,
+            db=session,
+            user_id=getattr(principal, "user_id", None),
+            org_id=getattr(principal, "org_id", None),
+            usage_context=usage_context,
+            charge_units=energy_service.charge_units(FEATURE_COVER_LETTER),
         )
         return {
             "draft": draft.strip(),

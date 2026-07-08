@@ -1,8 +1,7 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { WORKSPACE_NAV } from "@/config/nav";
-import type { Persona } from "@/stores/auth-store";
+import { WORKSPACE_NAV, type WorkspacePersona } from "@/config/nav";
 import { ComingSoon } from "./coming-soon";
 
 /**
@@ -14,7 +13,7 @@ export function WorkspacePlaceholder({
   persona,
   slug,
 }: {
-  persona: Persona;
+  persona: WorkspacePersona;
   slug: string[];
 }) {
   const tNav = useTranslations("nav");

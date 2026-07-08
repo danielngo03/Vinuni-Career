@@ -21,6 +21,7 @@ import { Skeleton } from "@/components/ui";
 import { CompanyAvatar } from "@/components/companies/company-avatar";
 import { TrackedItem } from "@/components/discovery/tracked-item";
 import { VerifiedBadge } from "@/components/ui/verified-badge";
+import { companySignalTags } from "@/lib/discovery/signal-tags";
 import { marketplaceApi } from "@/lib/api";
 import { cn } from "@/lib/utils";
 import { MegaCampaignCard } from "./mega-campaign-card";
@@ -210,7 +211,7 @@ export function CompanyMegaMenu({
                               targetType="company"
                               targetId={c.id}
                               renderId={`mega-company-${renderId}`}
-                              signalTags={{ company_ids: [c.id] }}
+                              signalTags={companySignalTags(c)}
                             >
                               <Link
                                 href={`/companies/${c.slug}`}
@@ -283,7 +284,7 @@ export function CompanyMegaMenu({
                     targetType="company"
                     targetId={strategicPartner.id}
                     renderId={`mega-company-spotlight-${renderId}`}
-                    signalTags={{ company_ids: [strategicPartner.id] }}
+                    signalTags={companySignalTags(strategicPartner)}
                   >
                     <Link
                       href={`/companies/${strategicPartner.slug}`}
