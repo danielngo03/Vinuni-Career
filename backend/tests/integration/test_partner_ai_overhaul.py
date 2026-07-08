@@ -101,12 +101,13 @@ async def test_charge_chatbot_turn_is_org_attributed_and_idempotent(db_session) 
     chat_id = uuid.uuid4()
     user_msg_id = uuid.uuid4()
 
-    # First charge, then a retry of the SAME turn (same user message id).
+    # First charge, then a retry of the SAME turn (same idempotency key = user
+    # message id, matching how send_message/stream_message namespace the ledger).
     await chat_service._charge_chatbot_turn(
-        db_session, principal=partner, chat_id=chat_id, user_msg_id=user_msg_id
+        db_session, principal=partner, chat_id=chat_id, idempotency_key=user_msg_id
     )
     await chat_service._charge_chatbot_turn(
-        db_session, principal=partner, chat_id=chat_id, user_msg_id=user_msg_id
+        db_session, principal=partner, chat_id=chat_id, idempotency_key=user_msg_id
     )
 
     rows = (
