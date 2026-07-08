@@ -213,7 +213,7 @@ export function PartnerEventDetailScreen({ eventId }: { eventId: string }) {
       <>
         {backLink}
         <PageHeader title={t("editTitle")} description={t("editSubtitle")} />
-        <div className="rounded-2xl border border-[var(--border-default)] bg-white p-6">
+        <div className="rounded-2xl border border-[var(--border-default)] bg-[var(--surface-card)] p-6">
           <EventForm
             mode="edit"
             event={event}
@@ -365,7 +365,7 @@ export function PartnerEventDetailScreen({ eventId }: { eventId: string }) {
       {event.status === "cancelled" && (
         <div
           role="status"
-          className="mb-6 flex items-start gap-2 rounded-2xl border border-[var(--border-default)] bg-white p-4 text-sm text-[var(--text-secondary)] "
+          className="mb-6 flex items-start gap-2 rounded-2xl border border-[var(--border-default)] bg-[var(--surface-card)] p-4 text-sm text-[var(--text-secondary)] "
         >
           <Info aria-hidden weight="duotone" className="mt-0.5 size-4 shrink-0" />
           {t("cancelledHint")}
@@ -434,7 +434,7 @@ export function PartnerEventDetailScreen({ eventId }: { eventId: string }) {
               {event.tags.map((s) => (
                 <li
                   key={s}
-                  className="rounded-full border border-[var(--border-default)] bg-white px-3 py-1 text-xs font-medium text-[var(--text-secondary)] "
+                  className="rounded-full border border-[var(--border-default)] bg-[var(--surface-card)] px-3 py-1 text-xs font-medium text-[var(--text-secondary)] "
                 >
                   {s}
                 </li>
@@ -446,7 +446,7 @@ export function PartnerEventDetailScreen({ eventId }: { eventId: string }) {
 
       {showAttendees && (
         <TabPanel tabsId={tabsId} value="attendees" active={tab === "attendees"}>
-          <div className="mb-3 flex items-start gap-2 rounded-xl border border-[var(--border-default)] bg-white px-3.5 py-2.5 text-xs text-[var(--text-secondary)] ">
+          <div className="mb-3 flex items-start gap-2 rounded-xl border border-[var(--border-default)] bg-[var(--surface-card)] px-3.5 py-2.5 text-xs text-[var(--text-secondary)] ">
             <Info aria-hidden weight="duotone" className="mt-0.5 size-4 shrink-0" />
             {t("attendees.privacyNote")}
           </div>
@@ -540,14 +540,14 @@ function EventStatTiles({
 
   return (
     <div className="mb-5 grid grid-cols-3 gap-3">
-      <div className="rounded-2xl border border-[var(--border-default)] bg-white px-4 py-3.5 shadow-[0_2px_12px_rgba(11,34,57,0.06)] transition-all hover:-translate-y-0.5 hover:shadow-[0_6px_20px_rgba(11,34,57,0.09)]">
+      <div className="rounded-2xl border border-[var(--border-default)] bg-[var(--surface-card)] px-4 py-3.5 shadow-[0_2px_12px_rgba(11,34,57,0.06)] transition-all hover:-translate-y-0.5 hover:shadow-[0_6px_20px_rgba(11,34,57,0.09)]">
         <div className="mb-2.5 flex size-9 items-center justify-center rounded-xl icon-chip-primary shadow-sm">
           <Ticket aria-hidden weight="duotone" className="size-4.5 text-white" />
         </div>
         <p className="text-2xl font-black tracking-tight text-[var(--text-primary)]">{registrationCount}</p>
         <p className="mt-0.5 text-xs font-medium text-[var(--text-secondary)]">Registrations</p>
       </div>
-      <div className="rounded-2xl border border-[var(--border-default)] bg-white px-4 py-3.5 shadow-[0_2px_12px_rgba(11,34,57,0.06)] transition-all hover:-translate-y-0.5 hover:shadow-[0_6px_20px_rgba(11,34,57,0.09)]">
+      <div className="rounded-2xl border border-[var(--border-default)] bg-[var(--surface-card)] px-4 py-3.5 shadow-[0_2px_12px_rgba(11,34,57,0.06)] transition-all hover:-translate-y-0.5 hover:shadow-[0_6px_20px_rgba(11,34,57,0.09)]">
         <div className="mb-2.5 flex size-9 items-center justify-center rounded-xl icon-chip-success shadow-sm">
           <ChartBar aria-hidden weight="duotone" className="size-4.5 text-white" />
         </div>
@@ -558,7 +558,7 @@ function EventStatTiles({
           {capacity !== null ? `Fill rate (of ${capacity})` : "Unlimited capacity"}
         </p>
       </div>
-      <div className="rounded-2xl border border-[var(--border-default)] bg-white px-4 py-3.5 shadow-[0_2px_12px_rgba(11,34,57,0.06)] transition-all hover:-translate-y-0.5 hover:shadow-[0_6px_20px_rgba(11,34,57,0.09)]">
+      <div className="rounded-2xl border border-[var(--border-default)] bg-[var(--surface-card)] px-4 py-3.5 shadow-[0_2px_12px_rgba(11,34,57,0.06)] transition-all hover:-translate-y-0.5 hover:shadow-[0_6px_20px_rgba(11,34,57,0.09)]">
         <div className={`mb-2.5 flex size-9 items-center justify-center rounded-xl shadow-sm ${isPast ? "icon-chip-neutral" : "icon-chip-info"}`}>
           <ClockCountdown aria-hidden weight="duotone" className="size-4.5 text-white" />
         </div>
@@ -575,7 +575,7 @@ function EventStatTiles({
 
 function Meta({ label, children }: { label: string; children: React.ReactNode }) {
   return (
-    <div className="rounded-xl border border-[var(--border-default)] bg-white px-3.5 py-2.5 ">
+    <div className="rounded-xl border border-[var(--border-default)] bg-[var(--surface-card)] px-3.5 py-2.5 ">
       <dt className="text-xs font-medium text-[var(--text-muted)]">{label}</dt>
       <dd className="mt-0.5 text-sm font-semibold text-[var(--text-primary)]">{children}</dd>
     </div>

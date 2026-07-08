@@ -82,6 +82,7 @@ function deriveAdInsights(rows: { status: string }[]): AdInsightKey[] {
 
 export function PartnerAdvertisingScreen() {
   const t = useTranslations("advertising");
+  const tNav = useTranslations("nav");
   const tStates = useTranslations("states");
   const tc = useTranslations("common");
   const locale = useLocale();
@@ -194,7 +195,7 @@ export function PartnerAdvertisingScreen() {
     if (err.isPermissionError || err.isAuthError) {
       return (
         <>
-          <PageHeader title={t("partnerTitle")} description={t("partnerSubtitle")} />
+          <PageHeader eyebrow={tNav("group.growth")} title={t("partnerTitle")} description={t("partnerSubtitle")} />
           <EmptyState
             kind={err.isPermissionError ? "permission" : "auth"}
             icon={err.isPermissionError ? ShieldWarning : SignIn}
@@ -344,6 +345,7 @@ export function PartnerAdvertisingScreen() {
   return (
     <>
       <PageHeader
+        eyebrow={tNav("group.growth")}
         title={t("partnerTitle")}
         description={t("partnerSubtitle")}
         actions={newButton}
@@ -352,7 +354,7 @@ export function PartnerAdvertisingScreen() {
       {/* Campaign health tiles */}
       {rows.length > 0 && (
         <div className="mb-5 grid grid-cols-3 gap-3">
-          <div className="rounded-2xl border border-[var(--border-default)] bg-white px-4 py-3.5 shadow-[0_2px_12px_rgba(11,34,57,0.06)] transition-all hover:-translate-y-0.5">
+          <div className="rounded-2xl border border-[var(--border-default)] bg-[var(--surface-card)] px-4 py-3.5 shadow-[0_2px_12px_rgba(11,34,57,0.06)] transition-all hover:-translate-y-0.5">
             <div className="mb-2.5 flex size-9 items-center justify-center rounded-xl icon-chip-success shadow-sm">
               <Broadcast aria-hidden weight="duotone" className="size-4.5 text-white" />
             </div>
@@ -361,7 +363,7 @@ export function PartnerAdvertisingScreen() {
             </p>
             <p className="mt-0.5 text-xs font-medium text-[var(--text-secondary)]">{t("statActiveCampaigns")}</p>
           </div>
-          <div className="rounded-2xl border border-[var(--border-default)] bg-white px-4 py-3.5 shadow-[0_2px_12px_rgba(11,34,57,0.06)] transition-all hover:-translate-y-0.5">
+          <div className="rounded-2xl border border-[var(--border-default)] bg-[var(--surface-card)] px-4 py-3.5 shadow-[0_2px_12px_rgba(11,34,57,0.06)] transition-all hover:-translate-y-0.5">
             <div className="mb-2.5 flex size-9 items-center justify-center rounded-xl icon-chip-warning shadow-sm">
               <Hourglass aria-hidden weight="duotone" className="size-4.5 text-white" />
             </div>
@@ -370,7 +372,7 @@ export function PartnerAdvertisingScreen() {
             </p>
             <p className="mt-0.5 text-xs font-medium text-[var(--text-secondary)]">{t("statPendingApproval")}</p>
           </div>
-          <div className="rounded-2xl border border-[var(--border-default)] bg-white px-4 py-3.5 shadow-[0_2px_12px_rgba(11,34,57,0.06)] transition-all hover:-translate-y-0.5">
+          <div className="rounded-2xl border border-[var(--border-default)] bg-[var(--surface-card)] px-4 py-3.5 shadow-[0_2px_12px_rgba(11,34,57,0.06)] transition-all hover:-translate-y-0.5">
             <div className="mb-2.5 flex size-9 items-center justify-center rounded-xl icon-chip-neutral shadow-sm">
               <PencilSimpleIcon aria-hidden weight="duotone" className="size-4.5 text-white" />
             </div>
@@ -424,7 +426,7 @@ export function PartnerAdvertisingScreen() {
               "inline-flex items-center rounded-full border px-3.5 py-1.5 text-xs font-semibold transition-all focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--brand-primary)]",
               statusFilter === s
                 ? "border-[var(--brand-primary)]/30 bg-[var(--brand-primary)] text-white shadow-sm shadow-[var(--brand-primary)]/20"
-                : "border-[var(--border-default)] bg-white text-[var(--text-secondary)] hover:bg-white hover:text-[var(--text-primary)]",
+                : "border-[var(--border-default)] bg-[var(--surface-card)] text-[var(--text-secondary)] hover:bg-[var(--surface-card)] hover:text-[var(--text-primary)]",
             )}
           >
             {s === "all" ? t("filterAllStatuses") : labels.status(s)}

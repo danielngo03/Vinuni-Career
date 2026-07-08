@@ -21,10 +21,10 @@ export const STAGE_FILTERS = [
 
 export const STAGE_CHIP_ACTIVE: Record<string, string> = {
   all: "border-[var(--brand-primary)]/30 bg-[var(--brand-primary)] text-white shadow-sm shadow-[var(--brand-primary)]/20",
-  submitted: "border-blue-400/30 bg-blue-500 text-white shadow-sm",
+  submitted: "border-[var(--gray-600)]/30 bg-[var(--gray-700)] text-white shadow-sm",
   under_review: "border-amber-400/30 bg-amber-500 text-white shadow-sm",
   rejected: "border-red-500/30 bg-red-600 text-white shadow-sm",
-  withdrawn: "border-slate-400/30 bg-slate-600 text-white shadow-sm",
+  withdrawn: "border-[var(--gray-300)]/30 bg-[var(--gray-400)] text-white shadow-sm",
   // v9 Monochrome reserves green for verified/success states.
   hired: "border-emerald-500/30 bg-emerald-600 text-white shadow-sm",
 };

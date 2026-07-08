@@ -203,13 +203,13 @@ export function NotificationScreen() {
                   type="button"
                   disabled={markAll.isPending}
                   onClick={() => markAll.mutate()}
-                  className="h-8 shrink-0 cursor-pointer rounded-full px-2.5 text-xs font-semibold text-[var(--text-secondary)] outline-none transition-colors hover:bg-[#f2f1ee] hover:text-[var(--text-primary)] disabled:cursor-not-allowed disabled:opacity-50 focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)]/30"
+                  className="h-8 shrink-0 cursor-pointer rounded-full px-2.5 text-xs font-semibold text-[var(--text-secondary)] outline-none transition-colors hover:bg-[var(--bg-muted)] hover:text-[var(--text-primary)] disabled:cursor-not-allowed disabled:opacity-50 focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)]/30"
                 >
                   {t("markAllRead")}
                 </button>
               )}
             </div>
-            <div className="mt-3 flex rounded-full bg-[#f7f6f2] p-1">
+            <div className="mt-3 flex rounded-full bg-[var(--workspace-canvas)] p-1">
               <FilterButton
                 active={statusFilter === "all"}
                 onClick={() => setStatusFilter("all")}
@@ -367,8 +367,8 @@ function NotificationListRow({
       className={cn(
         "relative flex w-full cursor-pointer items-start gap-3 rounded-[14px] px-3 py-2.5 text-left outline-none transition-colors duration-200",
         active
-          ? "bg-[#f7f6f2] shadow-[inset_0_0_0_1px_rgba(0,0,0,0.055)]"
-          : "hover:bg-[#f7f6f2] focus-visible:bg-[#f7f6f2]",
+          ? "bg-[var(--workspace-canvas)] shadow-[inset_0_0_0_1px_rgba(0,0,0,0.055)]"
+          : "hover:bg-[var(--workspace-canvas)] focus-visible:bg-[var(--workspace-canvas)]",
         unread && !active && "bg-white",
       )}
     >
@@ -454,8 +454,8 @@ function CategoryFilterButton({
       className={cn(
         "h-7 shrink-0 cursor-pointer rounded-full px-2.5 text-[11px] font-bold outline-none transition-colors focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)]/30",
         active
-          ? "bg-[#f2f1ee] text-[var(--text-primary)] shadow-[inset_0_0_0_1px_rgba(0,0,0,0.08)]"
-          : "text-[var(--text-muted)] hover:bg-[#f7f6f2] hover:text-[var(--text-primary)]",
+          ? "bg-[var(--bg-muted)] text-[var(--text-primary)] shadow-[inset_0_0_0_1px_rgba(0,0,0,0.08)]"
+          : "text-[var(--text-muted)] hover:bg-[var(--workspace-canvas)] hover:text-[var(--text-primary)]",
       )}
     >
       {children}
@@ -481,7 +481,7 @@ function NotificationDetail({
         <div className="min-w-0 flex-1">
           <div className="flex flex-wrap items-center gap-2">
             {categoryKey && (
-              <span className="rounded-full bg-[#f2f1ee] px-2 py-1 text-[10px] font-bold uppercase tracking-[0.08em] text-[var(--text-muted)]">
+              <span className="rounded-full bg-[var(--bg-muted)] px-2 py-1 text-[10px] font-bold uppercase tracking-[0.08em] text-[var(--text-muted)]">
                 {t(`categories.${categoryKey}`)}
               </span>
             )}

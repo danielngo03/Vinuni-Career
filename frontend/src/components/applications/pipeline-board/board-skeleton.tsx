@@ -4,7 +4,7 @@ export function BoardSkeleton() {
       {Array.from({ length: 4 }).map((_, i) => (
         <div
           key={i}
-          className="flex w-72 shrink-0 flex-col rounded-2xl border border-[var(--border-default)] bg-white "
+          className="flex w-72 shrink-0 flex-col rounded-2xl border border-[var(--border-default)] bg-[var(--surface-card)] "
         >
           <div className="border-b border-[var(--border-default)] px-3.5 py-3">
             <div className="h-4 w-24 animate-pulse rounded bg-[var(--bg-muted)]" />
@@ -13,7 +13,7 @@ export function BoardSkeleton() {
             {Array.from({ length: 3 }).map((__, j) => (
               <div
                 key={j}
-                className="h-24 animate-pulse rounded-xl bg-white"
+                className="h-24 animate-pulse rounded-xl bg-[var(--surface-card)]"
               />
             ))}
           </div>

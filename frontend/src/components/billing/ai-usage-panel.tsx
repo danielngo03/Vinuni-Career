@@ -90,7 +90,7 @@ export function AiUsagePanel({ audience }: { audience: BillingAudience }) {
       )}
 
       {q.isPending ? (
-        <div className="space-y-3 rounded-2xl border border-[var(--border-default)] bg-white p-4 shadow-[0_2px_16px_rgba(11,34,57,0.06)]">
+        <div className="space-y-3 rounded-2xl border border-[var(--border-default)] bg-[var(--surface-card)] p-4 shadow-[0_2px_16px_rgba(11,34,57,0.06)]">
           <Skeleton className="h-4 w-40" />
           <Skeleton className="h-2 w-full" />
           <Skeleton className="h-4 w-32" />
@@ -140,7 +140,7 @@ function UsageBody({
   const isOrg = data.scope === "org";
 
   return (
-    <div className="space-y-4 rounded-2xl border border-[var(--border-default)] bg-white p-4 shadow-[0_2px_16px_rgba(11,34,57,0.06)]">
+    <div className="space-y-4 rounded-2xl border border-[var(--border-default)] bg-[var(--surface-card)] p-4 shadow-[0_2px_16px_rgba(11,34,57,0.06)]">
       {/* Energy meter */}
       <EnergyMeter data={data} weekReset={weekReset} isOrg={isOrg} t={t} />
 

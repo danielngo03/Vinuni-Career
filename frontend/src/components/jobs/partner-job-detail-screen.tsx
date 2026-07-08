@@ -238,7 +238,7 @@ export function PartnerJobDetailScreen({ jobId }: { jobId: string }) {
       <>
         {backLink}
         <PageHeader title={t("editTitle")} description={t("editSubtitle")} />
-        <div className="rounded-2xl border border-[var(--border-default)] bg-white p-6">
+        <div className="rounded-2xl border border-[var(--border-default)] bg-[var(--surface-card)] p-6">
           <JobForm
             mode="edit"
             job={job}
@@ -331,21 +331,21 @@ export function PartnerJobDetailScreen({ jobId }: { jobId: string }) {
 
       {/* Job key-metric tiles */}
       <div className="mb-5 grid grid-cols-2 gap-3 sm:grid-cols-3">
-        <div className="rounded-2xl border border-[var(--border-default)] bg-white px-4 py-3.5 shadow-[0_2px_12px_rgba(11,34,57,0.06)] transition-all hover:-translate-y-0.5">
+        <div className="rounded-2xl border border-[var(--border-default)] bg-[var(--surface-card)] px-4 py-3.5 shadow-[0_2px_12px_rgba(11,34,57,0.06)] transition-all hover:-translate-y-0.5">
           <div className="mb-2.5 flex size-9 items-center justify-center rounded-xl icon-chip-primary shadow-sm">
             <Users aria-hidden weight="duotone" className="size-4.5 text-white" />
           </div>
           <p className="text-2xl font-black tracking-tight text-[var(--text-primary)]">{job.application_count}</p>
           <p className="mt-0.5 text-xs font-medium text-[var(--text-secondary)]">{t("applications")}</p>
         </div>
-        <div className="rounded-2xl border border-[var(--border-default)] bg-white px-4 py-3.5 shadow-[0_2px_12px_rgba(11,34,57,0.06)] transition-all hover:-translate-y-0.5">
+        <div className="rounded-2xl border border-[var(--border-default)] bg-[var(--surface-card)] px-4 py-3.5 shadow-[0_2px_12px_rgba(11,34,57,0.06)] transition-all hover:-translate-y-0.5">
           <div className="mb-2.5 flex size-9 items-center justify-center rounded-xl icon-chip-success shadow-sm">
             <Eye aria-hidden weight="duotone" className="size-4.5 text-white" />
           </div>
           <p className="text-2xl font-black tracking-tight text-[var(--text-primary)]">{job.view_count}</p>
           <p className="mt-0.5 text-xs font-medium text-[var(--text-secondary)]">{t("views")}</p>
         </div>
-        <div className="rounded-2xl border border-[var(--border-default)] bg-white px-4 py-3.5 shadow-[0_2px_12px_rgba(11,34,57,0.06)] transition-all hover:-translate-y-0.5">
+        <div className="rounded-2xl border border-[var(--border-default)] bg-[var(--surface-card)] px-4 py-3.5 shadow-[0_2px_12px_rgba(11,34,57,0.06)] transition-all hover:-translate-y-0.5">
           <div className="mb-2.5 flex size-9 items-center justify-center rounded-xl icon-chip-info shadow-sm">
             <Kanban aria-hidden weight="duotone" className="size-4.5 text-white" />
           </div>
@@ -597,7 +597,7 @@ export function PartnerJobDetailScreen({ jobId }: { jobId: string }) {
 
 function Meta({ label, children }: { label: string; children: React.ReactNode }) {
   return (
-    <div className="rounded-xl border border-[var(--border-default)] bg-white px-3.5 py-2.5 ">
+    <div className="rounded-xl border border-[var(--border-default)] bg-[var(--surface-card)] px-3.5 py-2.5 ">
       <dt className="text-xs font-medium text-[var(--text-muted)]">{label}</dt>
       <dd className="mt-0.5 text-sm font-semibold text-[var(--text-primary)]">{children}</dd>
     </div>

@@ -38,7 +38,7 @@ function TalentCardRow({ card }: { card: TalentCard }) {
   return (
     <Link
       href={`/partner/talent/${card.profile_id}`}
-      className="group flex items-start gap-4 rounded-2xl border border-[var(--border-default)] bg-white p-5 outline-none transition-colors hover:border-[var(--brand-primary)]/60 hover:bg-white focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)]/30"
+      className="group flex items-start gap-4 rounded-2xl border border-[var(--border-default)] bg-[var(--surface-card)] p-5 outline-none transition-colors hover:border-[var(--brand-primary)]/60 hover:bg-[var(--surface-card)] focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)]/30"
     >
       {/* Avatar */}
       <div className="shrink-0">
@@ -153,7 +153,7 @@ export function TalentPoolScreen() {
       <PageHeader title={t("title")} description={t("subtitle")} />
 
       {/* Filters */}
-      <div className="mb-6 rounded-2xl border border-[var(--border-default)] bg-white p-4 space-y-3">
+      <div className="mb-6 rounded-2xl border border-[var(--border-default)] bg-[var(--surface-card)] p-4 space-y-3">
         {/* Keyword row */}
         <div className="flex gap-3">
           <div className="relative flex-1">
@@ -167,7 +167,7 @@ export function TalentPoolScreen() {
               onChange={(e) => setKeyword(e.target.value)}
               onKeyDown={(e) => e.key === "Enter" && applyFilters()}
               placeholder={t("searchPlaceholder")}
-              className="w-full rounded-xl border border-[var(--border-default)] bg-white py-2 pl-9 pr-3 text-sm text-[var(--text-primary)] outline-none placeholder:text-[var(--text-muted)] focus:border-[var(--brand-primary)]/50 focus:bg-white focus:ring-2 focus:ring-[var(--brand-primary)]/30"
+              className="w-full rounded-xl border border-[var(--border-default)] bg-[var(--surface-card)] py-2 pl-9 pr-3 text-sm text-[var(--text-primary)] outline-none placeholder:text-[var(--text-muted)] focus:border-[var(--brand-primary)]/50 focus:bg-[var(--surface-card)] focus:ring-2 focus:ring-[var(--brand-primary)]/30"
             />
           </div>
           <Button variant="primary" onClick={applyFilters}>
@@ -187,7 +187,7 @@ export function TalentPoolScreen() {
                   "inline-flex shrink-0 items-center rounded-full px-3.5 py-1.5 text-xs font-semibold transition-all",
                   committedWorkType === opt.value
                     ? "bg-[var(--brand-primary)] text-white shadow-sm"
-                    : "border border-[var(--border-default)] bg-white text-[var(--text-secondary)] hover:bg-white ",
+                    : "border border-[var(--border-default)] bg-[var(--surface-card)] text-[var(--text-secondary)] hover:bg-[var(--surface-card)] ",
                 )}
               >
                 {opt.label}
@@ -208,7 +208,7 @@ export function TalentPoolScreen() {
                   "inline-flex shrink-0 items-center rounded-full px-3.5 py-1.5 text-xs font-semibold transition-all",
                   committedDegreeLevel === opt.value
                     ? "bg-[var(--brand-primary)] text-white shadow-sm"
-                    : "border border-[var(--border-default)] bg-white text-[var(--text-secondary)] hover:bg-white ",
+                    : "border border-[var(--border-default)] bg-[var(--surface-card)] text-[var(--text-secondary)] hover:bg-[var(--surface-card)] ",
                 )}
               >
                 {opt.label}

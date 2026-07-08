@@ -58,7 +58,7 @@ export function PipelineColumnView({
     <section
       role="listitem"
       aria-label={t("columnAria", { name: column.name, count: column.count })}
-      className="flex w-72 shrink-0 flex-col rounded-2xl border border-[var(--border-default)] bg-white "
+      className="flex w-72 shrink-0 flex-col rounded-2xl border border-[var(--border-default)] bg-[var(--surface-card)] "
     >
       {/* Stage progress strip — one segment per stage, filled up to current */}
       {totalStages > 1 && (
@@ -84,7 +84,7 @@ export function PipelineColumnView({
             <h2 className="truncate text-sm font-bold text-[var(--text-primary)]">
               {column.name}
             </h2>
-            <span className="shrink-0 rounded-full bg-white px-2 py-0.5 text-xs font-semibold text-[var(--text-secondary)]">
+            <span className="shrink-0 rounded-full bg-[var(--surface-card)] px-2 py-0.5 text-xs font-semibold text-[var(--text-secondary)]">
               {column.count}
             </span>
           </div>

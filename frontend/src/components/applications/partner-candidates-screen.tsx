@@ -521,7 +521,7 @@ export function PartnerCandidatesScreen({ jobId }: { jobId: string }) {
                     "inline-flex items-center rounded-full border px-3.5 py-1.5 text-xs font-semibold transition-all focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--brand-primary)]",
                     stageFilter === s
                       ? STAGE_CHIP_ACTIVE[s] ?? "border-[var(--brand-primary)]/30 bg-[var(--brand-primary)] text-white shadow-sm"
-                      : "border-[var(--border-default)] bg-white text-[var(--text-secondary)] hover:bg-white hover:text-[var(--text-primary)]",
+                      : "border-[var(--border-default)] bg-[var(--surface-card)] text-[var(--text-secondary)] hover:bg-[var(--surface-card)] hover:text-[var(--text-primary)]",
                   )}
                 >
                   {s === "all" ? t("filterAllStatuses") : labels.status(s)}

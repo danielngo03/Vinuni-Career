@@ -80,7 +80,7 @@ export function PartnerReviewsScreen() {
 
       {/* Rating overview strip */}
       {rating && rating.overall_avg != null && (
-        <div className="mt-6 flex items-center gap-4 rounded-2xl border border-[var(--border-default)] bg-white p-4 ">
+        <div className="mt-6 flex items-center gap-4 rounded-2xl border border-[var(--border-default)] bg-[var(--surface-card)] p-4 ">
           <div className="flex flex-col items-center gap-0.5 pr-4 border-r border-[var(--border-default)]">
             <span className="text-3xl font-bold text-[var(--text-primary)]">
               {rating.overall_avg.toFixed(1)}

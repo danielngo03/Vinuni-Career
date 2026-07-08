@@ -187,7 +187,7 @@ export function PartnerScorecardPanel({
     return (
       <section aria-label={t("panelTitle")} className="space-y-3">
         {header}
-        <div className="rounded-xl border border-[var(--border-default)] bg-white p-3.5 ">
+        <div className="rounded-xl border border-[var(--border-default)] bg-[var(--surface-card)] p-3.5 ">
           <p className="flex items-center gap-2 text-sm text-[var(--text-secondary)]">
             <WarningCircle
               aria-hidden
@@ -214,7 +214,7 @@ export function PartnerScorecardPanel({
     return (
       <section aria-label={t("panelTitle")} className="space-y-3">
         {header}
-        <div className="rounded-xl border border-[var(--border-default)] bg-white p-3.5 ">
+        <div className="rounded-xl border border-[var(--border-default)] bg-[var(--surface-card)] p-3.5 ">
           <p className="text-sm text-[var(--text-secondary)]">
             {t("notInStageBody")}
           </p>
@@ -238,7 +238,7 @@ export function PartnerScorecardPanel({
       </div>
 
       {/* Round progress + gate state (always visible; anchoring-safe). */}
-      <div className="rounded-xl border border-[var(--border-default)] bg-white p-3.5">
+      <div className="rounded-xl border border-[var(--border-default)] bg-[var(--surface-card)] p-3.5">
         <div className="flex flex-wrap items-center justify-between gap-2">
           <p className="text-sm font-semibold text-[var(--text-primary)]">
             {t("progress", { count: submitted })}
@@ -285,7 +285,7 @@ export function PartnerScorecardPanel({
 
       {/* Submit / edit form. */}
       {showForm && (
-        <div className="rounded-xl border border-[var(--border-default)] bg-white p-3.5">
+        <div className="rounded-xl border border-[var(--border-default)] bg-[var(--surface-card)] p-3.5">
           <div className="mb-3 flex items-center justify-between gap-2">
             <p className="text-sm font-semibold text-[var(--text-primary)]">
               {mine ? t("editTitle") : t("formTitle")}

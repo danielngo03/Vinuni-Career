@@ -93,7 +93,7 @@ export function WorkspaceShell({
 
   return (
     <div
-      className="min-h-dvh bg-[#f7f6f2]"
+      className="min-h-dvh bg-[var(--workspace-canvas)]"
       style={{
         ["--sidebar-offset" as string]: sidebarCollapsed ? "64px" : "var(--sidebar-width)",
       }}

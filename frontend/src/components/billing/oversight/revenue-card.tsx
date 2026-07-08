@@ -14,7 +14,7 @@ export function RevenueCard({
   iconBg?: string;
 }) {
   return (
-    <div className="rounded-2xl border border-[var(--border-default)] bg-white px-5 py-4 shadow-[0_2px_16px_rgba(11,34,57,0.06)] transition-all hover:-translate-y-0.5 hover:shadow-[0_6px_24px_rgba(11,34,57,0.10)]">
+    <div className="rounded-2xl border border-[var(--border-default)] bg-[var(--surface-card)] px-5 py-4 shadow-[0_2px_16px_rgba(11,34,57,0.06)] transition-all hover:-translate-y-0.5 hover:shadow-[0_6px_24px_rgba(11,34,57,0.10)]">
       <div
         className={`mb-3 flex size-11 items-center justify-center rounded-xl shadow-sm ${iconBg}`}
       >

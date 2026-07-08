@@ -89,7 +89,7 @@ export function JdUploadButton({
         disabled={disabled || mutation.isPending}
         onClick={() => inputRef.current?.click()}
         className={cn(
-          "inline-flex items-center gap-2 rounded-full border border-[var(--border-default)] bg-white px-4 py-2.5 text-sm font-semibold text-[var(--text-primary)] transition-colors hover:bg-[var(--bg-subtle)] disabled:opacity-50",
+          "inline-flex items-center gap-2 rounded-full border border-[var(--border-default)] bg-[var(--surface-card)] px-4 py-2.5 text-sm font-semibold text-[var(--text-primary)] transition-colors hover:bg-[var(--bg-subtle)] disabled:opacity-50",
           className,
         )}
       >

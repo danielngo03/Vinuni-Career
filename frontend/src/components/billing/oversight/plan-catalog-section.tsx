@@ -25,7 +25,7 @@ export function PlanCatalogSection({
   const limitLabels = useLimitLabels();
 
   return (
-    <section className="mb-5 rounded-2xl border border-[var(--border-default)] bg-white p-5 shadow-[0_2px_16px_rgba(11,34,57,0.06)] ">
+    <section className="mb-5 rounded-2xl border border-[var(--border-default)] bg-[var(--surface-card)] p-5 shadow-[0_2px_16px_rgba(11,34,57,0.06)] ">
       <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <div className="flex items-center gap-2">
@@ -56,7 +56,7 @@ export function PlanCatalogSection({
           ))}
         </div>
       ) : plans.length === 0 ? (
-        <p className="rounded-xl border border-[var(--border-default)] bg-white px-4 py-3 text-sm text-[var(--text-secondary)]">
+        <p className="rounded-xl border border-[var(--border-default)] bg-[var(--surface-card)] px-4 py-3 text-sm text-[var(--text-secondary)]">
           {t("planEmpty")}
         </p>
       ) : (
@@ -66,7 +66,7 @@ export function PlanCatalogSection({
             return (
               <article
                 key={plan.id}
-                className="rounded-xl border border-[var(--border-default)] bg-white p-4 shadow-[0_1px_10px_rgba(11,34,57,0.05)]"
+                className="rounded-xl border border-[var(--border-default)] bg-[var(--surface-card)] p-4 shadow-[0_1px_10px_rgba(11,34,57,0.05)]"
               >
                 <div className="flex items-start justify-between gap-3">
                   <div className="min-w-0">

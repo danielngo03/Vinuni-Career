@@ -365,7 +365,7 @@ export function JobModerationScreen() {
                       : s === "rejected"
                         ? "border-[var(--red-500)]/30 bg-[var(--red-600)] text-white shadow-sm"
                         : "border-[var(--gray-500)]/30 bg-[var(--gray-600)] text-white shadow-sm"
-                  : "border-[var(--border-default)] bg-white text-[var(--text-secondary)] hover:bg-white hover:text-[var(--text-primary)]",
+                  : "border-[var(--border-default)] bg-[var(--surface-card)] text-[var(--text-secondary)] hover:bg-[var(--surface-card)] hover:text-[var(--text-primary)]",
               )}
             >
               {tj(`enums.status.${s}`)}
@@ -391,7 +391,7 @@ export function JobModerationScreen() {
 
       {/* Bulk action bar */}
       {selectedIds.size > 0 && (
-        <div className="mb-4 flex flex-wrap items-center gap-2 rounded-xl border border-[var(--border-default)] bg-white px-4 py-2.5">
+        <div className="mb-4 flex flex-wrap items-center gap-2 rounded-xl border border-[var(--border-default)] bg-[var(--surface-card)] px-4 py-2.5">
           <span className="text-sm font-semibold text-[var(--text-primary)]">
             {tm("moderationQueue.selectedCount", { count: selectedIds.size })}
           </span>
@@ -510,7 +510,7 @@ export function JobModerationScreen() {
                 )}
               </>
             ) : (
-              <p className="rounded-xl border border-[var(--border-default)] bg-white px-3 py-2 text-xs text-[var(--text-muted)] ">
+              <p className="rounded-xl border border-[var(--border-default)] bg-[var(--surface-card)] px-3 py-2 text-xs text-[var(--text-muted)] ">
                 {t("detailUnavailable")}
               </p>
             )}
@@ -561,7 +561,7 @@ export function JobModerationScreen() {
                 )}
               </div>
             ) : (
-              <p className="rounded-xl border border-[var(--border-default)] bg-white px-3 py-2 text-sm text-[var(--text-secondary)] ">
+              <p className="rounded-xl border border-[var(--border-default)] bg-[var(--surface-card)] px-3 py-2 text-sm text-[var(--text-secondary)] ">
                 {t("notPending")}
               </p>
             )}
@@ -650,7 +650,7 @@ export function JobModerationScreen() {
               }}
               aria-invalid={reasonError ? true : undefined}
               aria-describedby={reasonError ? "reject-reason-error" : undefined}
-              className="w-full rounded-xl border border-[var(--border-default)] bg-white px-3.5 py-2.5 text-sm text-[var(--text-primary)] outline-none focus:border-[var(--brand-primary)]/50 focus:bg-white focus:ring-2 focus:ring-[var(--brand-primary)]/30"
+              className="w-full rounded-xl border border-[var(--border-default)] bg-[var(--surface-card)] px-3.5 py-2.5 text-sm text-[var(--text-primary)] outline-none focus:border-[var(--brand-primary)]/50 focus:bg-[var(--surface-card)] focus:ring-2 focus:ring-[var(--brand-primary)]/30"
             />
             {reasonError && (
               <p id="reject-reason-error" className="mt-1 text-xs font-medium text-[var(--brand-red)]">
@@ -703,7 +703,7 @@ export function JobModerationScreen() {
               rows={3}
               value={escalateNote}
               onChange={(e) => setEscalateNote(e.target.value)}
-              className="w-full rounded-xl border border-[var(--border-default)] bg-white px-3.5 py-2.5 text-sm text-[var(--text-primary)] outline-none focus:border-[var(--brand-primary)]/50 focus:bg-white focus:ring-2 focus:ring-[var(--brand-primary)]/30"
+              className="w-full rounded-xl border border-[var(--border-default)] bg-[var(--surface-card)] px-3.5 py-2.5 text-sm text-[var(--text-primary)] outline-none focus:border-[var(--brand-primary)]/50 focus:bg-[var(--surface-card)] focus:ring-2 focus:ring-[var(--brand-primary)]/30"
             />
           </div>
         </div>
@@ -789,7 +789,7 @@ export function JobModerationScreen() {
                 if (reasonError) setReasonError(null);
               }}
               aria-invalid={reasonError ? true : undefined}
-              className="w-full rounded-xl border border-[var(--border-default)] bg-white px-3.5 py-2.5 text-sm text-[var(--text-primary)] outline-none focus:border-[var(--brand-primary)]/50 focus:bg-white focus:ring-2 focus:ring-[var(--brand-primary)]/30"
+              className="w-full rounded-xl border border-[var(--border-default)] bg-[var(--surface-card)] px-3.5 py-2.5 text-sm text-[var(--text-primary)] outline-none focus:border-[var(--brand-primary)]/50 focus:bg-[var(--surface-card)] focus:ring-2 focus:ring-[var(--brand-primary)]/30"
             />
             {reasonError && (
               <p className="mt-1 text-xs font-medium text-[var(--brand-red)]">{reasonError}</p>

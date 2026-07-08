@@ -30,7 +30,7 @@ export function JobPreviewContent({ job }: { job: PublicJobDetail }) {
   const salary = formatSalary(job.salary, locale);
 
   return (
-    <div className="min-w-0 overflow-hidden rounded-[16px] border border-[var(--border-default)] bg-white">
+    <div className="min-w-0 overflow-hidden rounded-[16px] border border-[var(--border-default)] bg-[var(--surface-card)]">
       <header className="border-b border-[var(--border-default)] bg-[var(--surface-card)] p-4 sm:p-5">
         <div className="flex flex-wrap items-center justify-between gap-3">
           {job.company && (

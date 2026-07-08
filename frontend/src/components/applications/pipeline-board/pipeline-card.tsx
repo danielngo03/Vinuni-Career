@@ -91,7 +91,7 @@ export function PipelineCardView({
       className={`rounded-xl border p-3 shadow-[0_1px_8px_rgba(11,34,57,0.06)] transition-colors ${
         isSelected
           ? "border-[var(--brand-primary)]/60 bg-[var(--brand-primary)]/8"
-          : "border-[var(--border-default)] bg-white"
+          : "border-[var(--border-default)] bg-[var(--surface-card)]"
       }`}
     >
       <div className="flex items-center justify-between gap-2">

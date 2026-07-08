@@ -240,7 +240,7 @@ export function ThreadPanel({ thread, open, onBack, onChanged }: ThreadPanelProp
           type="button"
           onClick={onBack}
           aria-label={tc("back")}
-          className="-ml-1 rounded-lg p-1.5 text-[var(--text-secondary)] outline-none hover:bg-[#f2f1ee] focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)]"
+          className="-ml-1 rounded-lg p-1.5 text-[var(--text-secondary)] outline-none hover:bg-[var(--bg-muted)] focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)]"
         >
           <ArrowLeft aria-hidden weight="bold" className="size-5" />
         </button>
@@ -270,7 +270,7 @@ export function ThreadPanel({ thread, open, onBack, onChanged }: ThreadPanelProp
               aria-pressed={muted}
               aria-label={muted ? t("unmute") : t("mute")}
               title={muted ? t("unmute") : t("mute")}
-              className="rounded-lg p-1.5 text-[var(--text-muted)] outline-none hover:bg-[#f2f1ee] hover:text-[var(--text-primary)] focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)]"
+              className="rounded-lg p-1.5 text-[var(--text-muted)] outline-none hover:bg-[var(--bg-muted)] hover:text-[var(--text-primary)] focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)]"
             >
               {muted ? (
                 <BellSlash aria-hidden weight="duotone" className="size-4" />

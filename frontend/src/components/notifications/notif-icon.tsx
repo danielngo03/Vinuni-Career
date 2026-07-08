@@ -218,7 +218,7 @@ export function NotifIcon({
         "flex size-9 shrink-0 items-center justify-center rounded-full shadow-[inset_0_0_0_1px_rgba(0,0,0,0.045)]",
         active
           ? "bg-[var(--text-primary)] text-white"
-          : "bg-[#f2f1ee] text-[var(--text-secondary)]",
+          : "bg-[var(--bg-muted)] text-[var(--text-secondary)]",
       )}
     >
       <IconCmp weight="duotone" className="size-[18px]" />

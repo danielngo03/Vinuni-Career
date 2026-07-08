@@ -263,7 +263,7 @@ export function CreativeManagerModal({
                 {t("existingTitle")}
               </h3>
               {creatives.length === 0 ? (
-                <p className="rounded-xl border border-[var(--border-default)] bg-white px-3.5 py-3 text-sm text-[var(--text-secondary)] ">
+                <p className="rounded-xl border border-[var(--border-default)] bg-[var(--surface-card)] px-3.5 py-3 text-sm text-[var(--text-secondary)] ">
                   {t("noCreatives")}
                 </p>
               ) : (
@@ -271,7 +271,7 @@ export function CreativeManagerModal({
                   {creatives.map((c) => (
                     <li
                       key={c.id}
-                      className="flex gap-3 rounded-xl border border-[var(--border-default)] bg-white p-3"
+                      className="flex gap-3 rounded-xl border border-[var(--border-default)] bg-[var(--surface-card)] p-3"
                     >
                       <div className="h-20 w-28 shrink-0 overflow-hidden rounded-lg border border-[var(--border-default)]">
                         <CreativeImage
@@ -410,7 +410,7 @@ export function CreativeManagerModal({
                   />
 
                   {/* Exact desktop/mobile placement preview. */}
-                  <div className="rounded-xl border border-[var(--border-default)] bg-white p-3 ">
+                  <div className="rounded-xl border border-[var(--border-default)] bg-[var(--surface-card)] p-3 ">
                     <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-[var(--text-muted)]">
                       {t("placementPreviewTitle")}
                     </p>
@@ -575,7 +575,7 @@ function DropZone({
           accept={accept}
           aria-describedby="creative-file-hint"
           onChange={(e) => onFile(e.target.files?.[0])}
-          className="block w-full max-w-xs cursor-pointer text-sm text-[var(--text-secondary)] file:mr-4 file:cursor-pointer file:rounded-lg file:border-0 file:bg-white file:px-4 file:py-2 file:text-sm file:font-semibold file:text-[var(--brand-primary)] hover:file:bg-[var(--blue-50)]"
+          className="block w-full max-w-xs cursor-pointer text-sm text-[var(--text-secondary)] file:mr-4 file:cursor-pointer file:rounded-lg file:border-0 file:bg-[var(--surface-card)] file:px-4 file:py-2 file:text-sm file:font-semibold file:text-[var(--brand-primary)] hover:file:bg-[var(--blue-50)]"
         />
         <p id="creative-file-hint" className="text-xs text-[var(--text-muted)]">
           {fileHint}

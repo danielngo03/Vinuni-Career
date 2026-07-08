@@ -73,7 +73,7 @@ export function Topbar({
         })();
 
   return (
-    <header className="sticky top-0 z-30 flex h-[60px] items-center gap-3 bg-[#f7f6f2]/95 px-4 backdrop-blur-sm lg:px-6">
+    <header className="sticky top-0 z-30 flex h-[60px] items-center gap-3 bg-[var(--workspace-canvas)]/95 px-4 backdrop-blur-sm lg:px-6">
       <button
         type="button"
         onClick={() => setMobileNavOpen(true)}

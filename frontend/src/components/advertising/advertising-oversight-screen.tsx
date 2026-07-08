@@ -485,13 +485,13 @@ export function AdvertisingOversightScreen() {
                     : s === "approved"
                       ? "border-[var(--teal-500)]/30 bg-[var(--teal-600)] text-white shadow-sm"
                       : s === "active"
-                        ? "border-teal-500/30 bg-teal-600 text-white shadow-sm"
+                        ? "border-[var(--teal-500)]/30 bg-[var(--teal-600)] text-white shadow-sm"
                         : s === "rejected"
                           ? "border-[var(--red-500)]/30 bg-[var(--red-600)] text-white shadow-sm"
                           : s === "cancelled" || s === "completed"
                             ? "border-[var(--gray-500)]/30 bg-[var(--gray-600)] text-white shadow-sm"
                             : "border-[var(--brand-primary)]/30 bg-[var(--brand-primary)] text-white shadow-sm shadow-[var(--brand-primary)]/20"
-                  : "border-[var(--border-default)] bg-white text-[var(--text-secondary)] hover:bg-white hover:text-[var(--text-primary)]",
+                  : "border-[var(--border-default)] bg-[var(--surface-card)] text-[var(--text-secondary)] hover:bg-[var(--surface-card)] hover:text-[var(--text-primary)]",
               )}
             >
               {s === "all" ? ta("filterAllStatuses") : labels.status(s)}
@@ -517,7 +517,7 @@ export function AdvertisingOversightScreen() {
 
       {/* Bulk action bar */}
       {selectedIds.size > 0 && (
-        <div className="mb-4 flex flex-wrap items-center gap-2 rounded-xl border border-[var(--border-default)] bg-white px-4 py-2.5">
+        <div className="mb-4 flex flex-wrap items-center gap-2 rounded-xl border border-[var(--border-default)] bg-[var(--surface-card)] px-4 py-2.5">
           <span className="text-sm font-semibold text-[var(--text-primary)]">
             {tm("moderationQueue.selectedCount", { count: selectedIds.size })}
           </span>
@@ -714,7 +714,7 @@ export function AdvertisingOversightScreen() {
                 </Button>
               )}
               {!canApprove && !canMarkPaid && !canDisable && (
-                <p className="rounded-xl border border-[var(--border-default)] bg-white px-3 py-2 text-sm text-[var(--text-secondary)] ">
+                <p className="rounded-xl border border-[var(--border-default)] bg-[var(--surface-card)] px-3 py-2 text-sm text-[var(--text-secondary)] ">
                   {t("noActions")}
                 </p>
               )}
@@ -1040,7 +1040,7 @@ function SpendCard({
   iconBg?: string;
 }) {
   return (
-    <div className="rounded-2xl border border-[var(--border-default)] bg-white px-5 py-4 shadow-[0_2px_16px_rgba(11,34,57,0.06)] transition-all hover:-translate-y-0.5 hover:shadow-[0_6px_24px_rgba(11,34,57,0.10)]">
+    <div className="rounded-2xl border border-[var(--border-default)] bg-[var(--surface-card)] px-5 py-4 shadow-[0_2px_16px_rgba(11,34,57,0.06)] transition-all hover:-translate-y-0.5 hover:shadow-[0_6px_24px_rgba(11,34,57,0.10)]">
       <div
         className={`mb-3 flex size-11 items-center justify-center rounded-xl shadow-sm ${iconBg}`}
       >
@@ -1102,7 +1102,7 @@ function LabeledTextarea({
         onChange={(e) => onChange(e.target.value)}
         aria-invalid={error ? true : undefined}
         aria-describedby={error ? `${id}-error` : undefined}
-        className="w-full rounded-xl border border-[var(--border-default)] bg-white px-3.5 py-2.5 text-sm text-[var(--text-primary)] outline-none placeholder:text-[var(--text-muted)] focus:border-[var(--brand-primary)]/50 focus:bg-white focus:ring-2 focus:ring-[var(--brand-primary)]/30"
+        className="w-full rounded-xl border border-[var(--border-default)] bg-[var(--surface-card)] px-3.5 py-2.5 text-sm text-[var(--text-primary)] outline-none placeholder:text-[var(--text-muted)] focus:border-[var(--brand-primary)]/50 focus:bg-[var(--surface-card)] focus:ring-2 focus:ring-[var(--brand-primary)]/30"
       />
       {error ? (
         <p id={`${id}-error`} className="mt-1 text-xs font-medium text-[var(--brand-red)]">

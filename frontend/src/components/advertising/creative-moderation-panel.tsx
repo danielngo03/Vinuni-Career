@@ -162,7 +162,7 @@ export function CreativeModerationPanel({
       </div>
 
       {/* Inventory-class relabel. */}
-      <div className="rounded-xl border border-[var(--border-default)] bg-white px-3.5 py-3 ">
+      <div className="rounded-xl border border-[var(--border-default)] bg-[var(--surface-card)] px-3.5 py-3 ">
         <Select
           label={t("relabelLabel")}
           value={selectedClass}
@@ -218,7 +218,7 @@ export function CreativeModerationPanel({
 
       {/* Creative previews + review. */}
       {creatives.length === 0 ? (
-        <p className="flex items-center gap-2.5 rounded-xl border border-[var(--border-default)] bg-white px-3.5 py-3 text-sm text-[var(--text-secondary)] ">
+        <p className="flex items-center gap-2.5 rounded-xl border border-[var(--border-default)] bg-[var(--surface-card)] px-3.5 py-3 text-sm text-[var(--text-secondary)] ">
           <span className="flex size-7 shrink-0 items-center justify-center rounded-lg icon-chip-success shadow-sm">
             <ImageSquare aria-hidden weight="duotone" className="size-4 text-white" />
           </span>
@@ -229,7 +229,7 @@ export function CreativeModerationPanel({
           {creatives.map((c) => (
             <li
               key={c.id}
-              className="rounded-xl border border-[var(--border-default)] bg-white p-3"
+              className="rounded-xl border border-[var(--border-default)] bg-[var(--surface-card)] p-3"
             >
               <div className="flex gap-3">
                 <div className="h-24 w-32 shrink-0 overflow-hidden rounded-lg border border-[var(--border-default)]">
@@ -300,7 +300,7 @@ export function CreativeModerationPanel({
                     aria-describedby={
                       rejectError ? `creative-reject-${c.id}-err` : undefined
                     }
-                    className="w-full rounded-lg border border-[var(--border-default)] bg-white px-3 py-2 text-sm text-[var(--text-primary)] outline-none placeholder:text-[var(--text-muted)] focus:border-[var(--brand-primary)]/50 focus:bg-white focus:ring-2 focus:ring-[var(--brand-primary)]/30"
+                    className="w-full rounded-lg border border-[var(--border-default)] bg-[var(--surface-card)] px-3 py-2 text-sm text-[var(--text-primary)] outline-none placeholder:text-[var(--text-muted)] focus:border-[var(--brand-primary)]/50 focus:bg-[var(--surface-card)] focus:ring-2 focus:ring-[var(--brand-primary)]/30"
                   />
                   {rejectError && (
                     <p

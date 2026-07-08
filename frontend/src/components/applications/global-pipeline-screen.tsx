@@ -204,7 +204,7 @@ function SummaryStat({
       className={`flex items-center gap-2 rounded-xl border px-4 py-2.5 ${
         tone === "active"
           ? "border-[var(--brand-primary)]/30 bg-[var(--blue-50)]/70"
-          : "border-[var(--border-default)] bg-white"
+          : "border-[var(--border-default)] bg-[var(--surface-card)]"
       }`}
     >
       <span className="text-xs font-medium text-[var(--text-secondary)]">
@@ -242,7 +242,7 @@ function JobPipelineRow({
   const withdrawnW = total > 0 ? (job.withdrawn / total) * 100 : 0;
 
   return (
-    <li className="rounded-2xl border border-[var(--border-default)] bg-white p-4 shadow-[0_2px_12px_rgba(11,34,57,0.06)]">
+    <li className="rounded-2xl border border-[var(--border-default)] bg-[var(--surface-card)] p-4 shadow-[0_2px_12px_rgba(11,34,57,0.06)]">
       <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
         {/* Left: job info */}
         <div className="min-w-0 flex-1">
@@ -353,7 +353,7 @@ function PipelineSkeleton() {
       {Array.from({ length: 4 }).map((_, i) => (
         <div
           key={i}
-          className="rounded-2xl border border-[var(--border-default)] bg-white p-4 "
+          className="rounded-2xl border border-[var(--border-default)] bg-[var(--surface-card)] p-4 "
         >
           <div className="flex items-start justify-between gap-4">
             <div className="flex-1">

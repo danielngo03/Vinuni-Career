@@ -287,7 +287,7 @@ export function ReviewsModerationScreen() {
               "inline-flex items-center rounded-full border px-3.5 py-1.5 text-xs font-semibold transition-all focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--brand-primary)]",
               statusFilter === value
                 ? active
-                : "border-[var(--border-default)] bg-white text-[var(--text-secondary)] hover:bg-white hover:text-[var(--text-primary)]",
+                : "border-[var(--border-default)] bg-[var(--surface-card)] text-[var(--text-secondary)] hover:bg-[var(--surface-card)] hover:text-[var(--text-primary)]",
             )}
           >
             {label}
@@ -370,7 +370,7 @@ function Stat({
   iconBg?: string;
 }) {
   return (
-    <div className="rounded-2xl border border-[var(--border-default)] bg-white px-5 py-4 shadow-[0_2px_16px_rgba(11,34,57,0.06)] transition-all hover:-translate-y-0.5 hover:shadow-[0_6px_24px_rgba(11,34,57,0.10)]">
+    <div className="rounded-2xl border border-[var(--border-default)] bg-[var(--surface-card)] px-5 py-4 shadow-[0_2px_16px_rgba(11,34,57,0.06)] transition-all hover:-translate-y-0.5 hover:shadow-[0_6px_24px_rgba(11,34,57,0.10)]">
       <div className={`mb-3 flex size-11 items-center justify-center rounded-xl shadow-sm ${iconBg}`}>
         {icon}
       </div>

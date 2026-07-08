@@ -157,7 +157,7 @@ function SkillChips({ raw, label }: { raw: string; label: string }) {
         {skills.map((s) => (
           <span
             key={s}
-            className="inline-flex items-center rounded-full border border-[var(--border-default)] bg-white px-2.5 py-0.5 text-[12px] font-medium text-[var(--text-primary)]"
+            className="inline-flex items-center rounded-full border border-[var(--border-default)] bg-[var(--surface-card)] px-2.5 py-0.5 text-[12px] font-medium text-[var(--text-primary)]"
           >
             {s}
           </span>

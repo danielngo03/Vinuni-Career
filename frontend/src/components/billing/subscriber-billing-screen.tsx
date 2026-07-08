@@ -214,7 +214,7 @@ export function SubscriberBillingScreen({
           {/* ---- Current plan rail ---- */}
           <section
             aria-label={t("current.heading")}
-            className="overflow-hidden rounded-2xl border border-[var(--border-default)] bg-white shadow-[0_2px_16px_rgba(11,34,57,0.06)] "
+            className="overflow-hidden rounded-2xl border border-[var(--border-default)] bg-[var(--surface-card)] shadow-[0_2px_16px_rgba(11,34,57,0.06)] "
           >
             <header className="flex flex-wrap items-center justify-between gap-3 border-b border-[var(--border-default)] bg-[var(--bg-subtle)] px-4 py-3">
               <div className="flex items-center gap-2">
@@ -372,7 +372,7 @@ export function SubscriberBillingScreen({
                 description={t("plans.emptyBody")}
               />
             ) : (
-              <div className="overflow-x-auto overflow-hidden rounded-2xl border border-[var(--border-default)] bg-white shadow-[0_2px_16px_rgba(11,34,57,0.06)] ">
+              <div className="overflow-x-auto overflow-hidden rounded-2xl border border-[var(--border-default)] bg-[var(--surface-card)] shadow-[0_2px_16px_rgba(11,34,57,0.06)] ">
                 <table className="w-full min-w-[480px] border-collapse text-sm">
                   <caption className="sr-only">
                     {t("plans.comparisonTitle")}

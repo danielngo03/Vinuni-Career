@@ -85,7 +85,7 @@ export function SettingsScreen() {
           onKeyDown={onKeyDown}
           className="lg:sticky lg:top-[84px]"
         >
-          <div className="flex gap-1 overflow-x-auto rounded-[18px] bg-[#f7f6f2] p-1.5 shadow-[inset_0_0_0_1px_rgba(0,0,0,0.045)] lg:flex-col lg:overflow-visible">
+          <div className="flex gap-1 overflow-x-auto rounded-[18px] bg-[var(--workspace-canvas)] p-1.5 shadow-[inset_0_0_0_1px_rgba(0,0,0,0.045)] lg:flex-col lg:overflow-visible">
             {items.map((item) => {
               const selected = item.value === tab;
               return (

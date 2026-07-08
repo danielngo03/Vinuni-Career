@@ -398,7 +398,7 @@ export function BillingOversightScreen() {
                       : s === "cancelled" || s === "expired"
                         ? "border-[var(--gray-500)]/30 bg-[var(--gray-600)] text-white shadow-sm"
                         : "border-[var(--brand-primary)]/30 bg-[var(--brand-primary)] text-white shadow-sm shadow-[var(--brand-primary)]/20"
-                  : "border-[var(--border-default)] bg-white text-[var(--text-secondary)] hover:bg-white hover:text-[var(--text-primary)]",
+                  : "border-[var(--border-default)] bg-[var(--surface-card)] text-[var(--text-secondary)] hover:bg-[var(--surface-card)] hover:text-[var(--text-primary)]",
               )}
             >
               {s === "all" ? t("filterAll") : labels.status(s)}
@@ -419,7 +419,7 @@ export function BillingOversightScreen() {
                     : a === "partner"
                       ? "border-violet-500/30 bg-violet-600 text-white shadow-sm"
                       : "border-[var(--brand-primary)]/30 bg-[var(--brand-primary)] text-white shadow-sm shadow-[var(--brand-primary)]/20"
-                  : "border-[var(--border-default)] bg-white text-[var(--text-secondary)] hover:bg-white hover:text-[var(--text-primary)]",
+                  : "border-[var(--border-default)] bg-[var(--surface-card)] text-[var(--text-secondary)] hover:bg-[var(--surface-card)] hover:text-[var(--text-primary)]",
               )}
             >
               {a === "all" ? t("filterAll") : labels.audience(a)}

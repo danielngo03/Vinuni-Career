@@ -283,7 +283,7 @@ export function PartnerJobsScreen() {
                   "inline-flex items-center rounded-full border px-3.5 py-1.5 text-xs font-semibold transition-all focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--brand-primary)]",
                   statusFilter === s
                     ? CHIP_ACTIVE[s] ?? CHIP_ACTIVE.all
-                    : "border-[var(--border-default)] bg-white text-[var(--text-secondary)] hover:bg-white hover:text-[var(--text-primary)]",
+                    : "border-[var(--border-default)] bg-[var(--surface-card)] text-[var(--text-secondary)] hover:bg-[var(--surface-card)] hover:text-[var(--text-primary)]",
                 )}
               >
                 {s === "all" ? t("filterAllStatuses") : t(`enums.status.${s}`)}

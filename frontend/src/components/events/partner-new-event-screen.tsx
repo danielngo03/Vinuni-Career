@@ -20,7 +20,7 @@ export function PartnerNewEventScreen() {
         {t("backToEvents")}
       </Link>
       <PageHeader title={t("newEventTitle")} description={t("newEventSubtitle")} />
-      <div className="rounded-2xl border border-[var(--border-default)] bg-white p-6">
+      <div className="rounded-2xl border border-[var(--border-default)] bg-[var(--surface-card)] p-6">
         <EventForm
           mode="create"
           onSuccess={(event) => router.push(`/partner/events/${event.id}`)}

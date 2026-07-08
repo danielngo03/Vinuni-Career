@@ -201,7 +201,7 @@ export function NotificationCenter({ open, onClose }: NotificationCenterProps) {
                 type="button"
                 disabled={markAll.isPending}
                 onClick={() => markAll.mutate()}
-                className="h-8 cursor-pointer rounded-full px-2.5 text-xs font-semibold text-[var(--text-secondary)] outline-none transition-colors hover:bg-[#f2f1ee] hover:text-[var(--text-primary)] disabled:cursor-not-allowed disabled:opacity-50 focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)]/30"
+                className="h-8 cursor-pointer rounded-full px-2.5 text-xs font-semibold text-[var(--text-secondary)] outline-none transition-colors hover:bg-[var(--bg-muted)] hover:text-[var(--text-primary)] disabled:cursor-not-allowed disabled:opacity-50 focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)]/30"
               >
                 {t("markAllRead")}
               </button>
@@ -210,7 +210,7 @@ export function NotificationCenter({ open, onClose }: NotificationCenterProps) {
               type="button"
               aria-label={tc("close")}
               onClick={onClose}
-              className="flex size-8 shrink-0 cursor-pointer items-center justify-center rounded-full text-[var(--text-muted)] outline-none transition-colors hover:bg-[#f2f1ee] hover:text-[var(--text-primary)] focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)]/30"
+              className="flex size-8 shrink-0 cursor-pointer items-center justify-center rounded-full text-[var(--text-muted)] outline-none transition-colors hover:bg-[var(--bg-muted)] hover:text-[var(--text-primary)] focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)]/30"
             >
               <X aria-hidden strokeWidth={1.8} className="size-4" />
             </button>

@@ -179,7 +179,7 @@ export function PartnerOfferPanel({
     return (
       <section aria-label={t("panelTitle")} className="space-y-3">
         {header}
-        <div className="rounded-xl border border-[var(--border-default)] bg-white p-3.5 ">
+        <div className="rounded-xl border border-[var(--border-default)] bg-[var(--surface-card)] p-3.5 ">
           <p className="flex items-center gap-2 text-sm text-[var(--text-secondary)]">
             <WarningCircle
               aria-hidden
@@ -232,7 +232,7 @@ export function PartnerOfferPanel({
           onRescind={() => setRescindTarget(current)}
         />
       ) : (
-        <div className="rounded-xl border border-[var(--border-default)] bg-white p-3.5 ">
+        <div className="rounded-xl border border-[var(--border-default)] bg-[var(--surface-card)] p-3.5 ">
           <p className="text-sm text-[var(--text-secondary)]">
             {canCreate ? t("emptyBody") : t("emptyBlocked")}
           </p>

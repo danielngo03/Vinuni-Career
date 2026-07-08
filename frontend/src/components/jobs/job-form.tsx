@@ -801,7 +801,7 @@ export function JobForm({ mode, job, qualityIssues, companyName, onSuccess, onCa
           size="sm"
           type="button"
           onClick={() => setPreviewOpen(true)}
-          className="size-10 rounded-full border border-[var(--border-default)] bg-white px-0 hover:bg-[var(--bg-subtle)]"
+          className="size-10 rounded-full border border-[var(--border-default)] bg-[var(--surface-card)] px-0 hover:bg-[var(--bg-subtle)]"
           aria-label={tf("previewToggle")}
           title={tf("previewToggle")}
         >

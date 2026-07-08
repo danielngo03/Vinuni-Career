@@ -222,7 +222,7 @@ export function CompanyReviewsSection({
 
       {/* Aggregate */}
       {rating && rating.overall_avg != null ? (
-        <div className="mb-5 grid grid-cols-1 gap-4 rounded-2xl border border-[var(--border-default)] bg-white p-4 sm:grid-cols-[auto_1fr]">
+        <div className="mb-5 grid grid-cols-1 gap-4 rounded-2xl border border-[var(--border-default)] bg-[var(--surface-card)] p-4 sm:grid-cols-[auto_1fr]">
           <div className="flex flex-col items-center justify-center gap-1 sm:pr-5 sm:border-r sm:border-[var(--border-subtle)]">
             <span className="text-4xl font-bold text-[var(--text-primary)]">
               {rating.overall_avg.toFixed(1)}
@@ -260,7 +260,7 @@ export function CompanyReviewsSection({
           {reviews.map((r) => (
             <li
               key={r.id}
-              className="rounded-2xl border border-[var(--border-default)] bg-white p-4"
+              className="rounded-2xl border border-[var(--border-default)] bg-[var(--surface-card)] p-4"
             >
               <div className="mb-1.5 flex items-start justify-between gap-3">
                 <div className="min-w-0">
@@ -272,7 +272,7 @@ export function CompanyReviewsSection({
                     <StatusBadge tone="verified">{r.trust_label}</StatusBadge>
                   </p>
                 </div>
-                <span className="flex shrink-0 items-center gap-1 rounded-lg border border-[var(--border-default)] bg-white px-2 py-1 text-sm font-semibold text-[var(--text-primary)] ">
+                <span className="flex shrink-0 items-center gap-1 rounded-lg border border-[var(--border-default)] bg-[var(--surface-card)] px-2 py-1 text-sm font-semibold text-[var(--text-primary)] ">
                   <Star
                     aria-hidden
                     weight="fill"
@@ -295,7 +295,7 @@ export function CompanyReviewsSection({
                     </p>
                   )}
                   {r.cons && (
-                    <p className="rounded-lg border border-[var(--border-default)] bg-white px-3 py-2 text-sm text-[var(--text-secondary)] ">
+                    <p className="rounded-lg border border-[var(--border-default)] bg-[var(--surface-card)] px-3 py-2 text-sm text-[var(--text-secondary)] ">
                       <span className="font-semibold text-[var(--text-primary)]">
                         {t("consLabel")}:{" "}
                       </span>
@@ -307,7 +307,7 @@ export function CompanyReviewsSection({
 
               {/* Partner response (display) */}
               {r.partner_response && (
-                <div className="mt-3 rounded-xl border border-[var(--border-default)] bg-white px-3 py-2.5">
+                <div className="mt-3 rounded-xl border border-[var(--border-default)] bg-[var(--surface-card)] px-3 py-2.5">
                   <p className="mb-1 flex items-center gap-1.5 text-xs font-semibold text-[var(--brand-primary)]">
                     <span className="flex size-4 shrink-0 items-center justify-center rounded icon-chip-primary shadow-sm">
                     <Buildings aria-hidden weight="duotone" className="size-2.5 text-white" />
@@ -329,7 +329,7 @@ export function CompanyReviewsSection({
               {persona === "partner" && !r.partner_response && (
                 <div className="mt-3">
                   {respondingTo === r.id ? (
-                    <div className="rounded-xl border border-[var(--border-default)] bg-white p-3 ">
+                    <div className="rounded-xl border border-[var(--border-default)] bg-[var(--surface-card)] p-3 ">
                       <p className="mb-2 flex items-center gap-1.5 text-xs font-semibold text-[var(--brand-primary)]">
                         <span className="flex size-4 shrink-0 items-center justify-center rounded icon-chip-primary shadow-sm">
                     <Buildings aria-hidden weight="duotone" className="size-2.5 text-white" />
@@ -341,7 +341,7 @@ export function CompanyReviewsSection({
                         value={responseDraft}
                         onChange={(e) => setResponseDraft(e.target.value)}
                         placeholder={t("partnerRespondPlaceholder")}
-                        className="w-full resize-none rounded-lg border border-[var(--border-default)] bg-white px-3 py-2 text-sm text-[var(--text-primary)] outline-none placeholder:text-[var(--text-muted)] focus:border-[var(--brand-primary)]/50 focus:bg-white focus:ring-2 focus:ring-[var(--brand-primary)]/30"
+                        className="w-full resize-none rounded-lg border border-[var(--border-default)] bg-[var(--surface-card)] px-3 py-2 text-sm text-[var(--text-primary)] outline-none placeholder:text-[var(--text-muted)] focus:border-[var(--brand-primary)]/50 focus:bg-[var(--surface-card)] focus:ring-2 focus:ring-[var(--brand-primary)]/30"
                       />
                       <div className="mt-2 flex items-center justify-end gap-2">
                         <Button
@@ -367,7 +367,7 @@ export function CompanyReviewsSection({
                     <button
                       type="button"
                       onClick={() => { setRespondingTo(r.id); setResponseDraft(""); }}
-                      className="flex items-center gap-1.5 rounded-lg border border-[var(--border-default)] bg-white px-2.5 py-1.5 text-xs font-semibold text-[var(--brand-primary)] outline-none transition-colors hover:bg-white focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)]/30"
+                      className="flex items-center gap-1.5 rounded-lg border border-[var(--border-default)] bg-[var(--surface-card)] px-2.5 py-1.5 text-xs font-semibold text-[var(--brand-primary)] outline-none transition-colors hover:bg-[var(--surface-card)] focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)]/30"
                     >
                       <ChatText aria-hidden weight="duotone" className="size-3.5" />
                       {t("partnerRespondCta")}
