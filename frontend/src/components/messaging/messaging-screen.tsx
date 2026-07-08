@@ -8,6 +8,7 @@ import {
   ChatsCircle,
   MagnifyingGlass,
   Megaphone,
+  PencilSimpleLine,
   WifiSlash,
 } from "@phosphor-icons/react";
 import { Button, EmptyState, Skeleton } from "@/components/ui";
@@ -16,6 +17,9 @@ import { relativeTime } from "@/lib/notifications/grouping";
 import { messagingApi, type ThreadSummary } from "@/lib/api";
 import { MESSAGING_THREADS_KEY } from "./query-keys";
 import { ThreadPanel } from "./thread-panel";
+import { NewMessageModal } from "./new-message-modal";
+import { RequestChip } from "./thread-chips";
+import { useMyOrgIdentity } from "./use-my-org";
 
 /**
  * Full-page two-column messaging workspace. Left rail: thread inbox. Right
@@ -37,7 +41,9 @@ export function MessagingScreen({
 
   const [selected, setSelected] = useState<ThreadSummary | null>(null);
   const [search, setSearch] = useState("");
+  const [composeOpen, setComposeOpen] = useState(false);
   const [pendingDeepLink, setPendingDeepLink] = useState(initialThreadId ?? null);
+  const orgIdentity = useMyOrgIdentity();
 
   // Deep-link: fetch the specific thread directly (it may not be on the first
   // inbox page) and select it once loaded. Falls through to the normal
@@ -117,15 +123,21 @@ export function MessagingScreen({
           )}
         >
           <div className="mb-3 border-b border-[var(--border-default)] px-1 pb-3">
-            <div className="flex h-9 items-center justify-between">
-              <h2 className="text-sm font-bold text-[var(--text-primary)]">
-                {t("title")}
-              </h2>
-              {threads.length > 0 && (
-                <span className="rounded-full bg-[#f7f6f2] px-2 py-1 text-xs font-semibold text-[var(--text-secondary)] shadow-[inset_0_0_0_1px_rgba(0,0,0,0.055)]">
-                  {threads.length}
-                </span>
-              )}
+            <div className="flex h-9 items-center justify-between gap-2">
+              <div className="flex items-center gap-2">
+                <h2 className="text-sm font-bold text-[var(--text-primary)]">
+                  {t("title")}
+                </h2>
+                {threads.length > 0 && (
+                  <span className="rounded-full bg-[#f7f6f2] px-2 py-0.5 text-xs font-semibold text-[var(--text-secondary)] shadow-[inset_0_0_0_1px_rgba(0,0,0,0.055)]">
+                    {threads.length}
+                  </span>
+                )}
+              </div>
+              <Button variant="primary" size="xs" onClick={() => setComposeOpen(true)}>
+                <PencilSimpleLine aria-hidden weight="bold" className="size-3.5" />
+                {t("newMessage")}
+              </Button>
             </div>
             <label htmlFor="message-search" className="sr-only">
               {t("searchLabel")}
@@ -218,8 +230,11 @@ export function MessagingScreen({
         >
           {selected ? (
             <ThreadPanel
+              key={selected.id}
               thread={selected}
               open
+              variant="personal"
+              orgIdentity={orgIdentity}
               onBack={() => setSelected(null)}
               onChanged={() => void query.refetch()}
             />
@@ -242,6 +257,16 @@ export function MessagingScreen({
           )}
         </div>
       </div>
+
+      <NewMessageModal
+        open={composeOpen}
+        onClose={() => setComposeOpen(false)}
+        persona={persona}
+        onCreated={(thread) => {
+          void query.refetch();
+          setSelected(thread);
+        }}
+      />
     </div>
   );
 }
@@ -340,6 +365,11 @@ function ThreadListRow({
             </span>
           )}
         </span>
+        {thread.request_state !== "accepted" && (
+          <span className="mt-1 flex">
+            <RequestChip state={thread.request_state} label={thread.request_label} />
+          </span>
+        )}
       </span>
     </button>
   );

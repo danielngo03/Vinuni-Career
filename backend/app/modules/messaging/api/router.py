@@ -209,17 +209,13 @@ async def download_attachment(
     auth: CurrentAuth = Depends(get_current_auth),
     session: AsyncSession = Depends(get_db_session),
 ) -> Response:
-    content, media_type, filename = await attachment_service.download(
+    content, content_type, filename = await attachment_service.download(
         session, principal=auth.principal, attachment_id=attachment_id
     )
-    return Response(
-        content=content,
-        media_type=media_type,
-        headers={
-            "Content-Disposition": f'inline; filename="{filename}"',
-            "Cache-Control": "private, no-store",
-        },
+    media_type, headers = attachment_service.response_meta(
+        content_type=content_type, filename=filename
     )
+    return Response(content=content, media_type=media_type, headers=headers)
 
 
 @router.post("/threads/{thread_id}/read", summary="Set my last_read_at = now")

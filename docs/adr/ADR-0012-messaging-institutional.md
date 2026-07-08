@@ -1,8 +1,44 @@
 # ADR-0012: Messaging — Institutional In-App Threads (Phase 2 Foundation)
 
-**Status:** Accepted (Proposed for implementation in the next backend slice)
+**Status:** Accepted — **partially superseded by Messaging V2 (owner decision 2026-07-09)**
 **Date:** 2026-06-28
 **Owner:** system-architect
+
+> ## ⚠️ Amendment — Messaging V2 (owner decision 2026-07-09)
+>
+> The owner directed a richer interaction model. Design + rationale:
+> `docs/superpowers/specs/2026-07-09-messaging-v2-design.md`. What V2 changes about
+> this ADR (everything else below still holds — student↔student hard block,
+> persist-before-deliver, PII-safe notif/audit, recruitment reveal masking, hidden
+> AI internals are all preserved):
+>
+> 1. **Cross-persona initiation via a message-request gate.** A student MAY now
+>    initiate to a partner/university (was reply-only); a partner MAY cold-initiate
+>    to a student and to a university. A first contact opens `pending` — the
+>    initiator sends up to `messaging_request_message_limit` (default 3) intro
+>    messages, then the recipient **accepts / declines / blocks**. University Pages
+>    initiate instantly (no gate); internal + application-bound threads skip the gate.
+> 2. **Organization-as-Page + shared team inbox.** A partner/university is a single
+>    Page: outsiders (and the other org) see only the org name/logo, never which
+>    staff member sent a message. Staff share one org inbox, can filter
+>    (unassigned/mine/all/resolved), route a thread to a department/assignee, and
+>    share a team read cursor. New `message_thread_parties` table models the 1–2
+>    sides; identity masking is asymmetric — a student who *initiates* is shown to
+>    the org (so it can help), a *cold-requested* student stays masked until accept.
+> 3. **Messaging is a grantable RBAC capability** (`messaging: read/send/initiate/
+>    assign/moderate`), scoped by user/role/department. Application threads remain
+>    authorized by the recruitment relationship (no regression).
+> 4. **Realtime + attachments are in scope** (were deferred): a WebSocket
+>    (`/api/v1/messaging/ws`) delivers lightweight persist-before-deliver signals
+>    (in-process bus locally, Redis when configured); images/files attach to messages
+>    via a gated upload/download.
+>
+> Tables added by migration `0085_messaging_v2`: `message_thread_parties`,
+> `message_attachments`, plus `message_threads.{thread_kind,request_state,
+> request_message_count,initiator_party_id}` and `messages.{sender_party_id,
+> has_attachments}`. New endpoints: `GET /inbox`, `GET /recipients`,
+> `POST /threads/{id}/request/{action}`, `/assign`, `/resolve`,
+> `POST /threads/{id}/attachments`, `GET /attachments/{id}`, `WS /ws`.
 **Related:** `CLAUDE.md` (naming default: module `messaging`, "in-app institutional
 messages; never student-to-student"), `docs/PRODUCT_REQUIREMENTS.md` M25 (In-app
 Institutional Messaging + the permission matrix) and the "Student → Student

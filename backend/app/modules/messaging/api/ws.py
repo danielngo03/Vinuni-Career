@@ -12,18 +12,12 @@ the connection lifetime.
 from __future__ import annotations
 
 import uuid
-from datetime import UTC, datetime
 
 from fastapi import APIRouter, Query, WebSocket, WebSocketDisconnect
 from sqlalchemy import select
 
 from app.core.db import get_sessionmaker
-from app.modules.auth.domain.models import Session
-from app.modules.auth.infrastructure import token_revocation
-from app.modules.auth.infrastructure.jwt import (
-    InvalidTokenError,
-    decode_access_token,
-)
+from app.modules.auth.application.ws_auth import principal_from_access_token
 from app.modules.messaging.application import capability
 from app.modules.messaging.application.realtime import (
     channels_for_thread,
@@ -36,44 +30,14 @@ from app.modules.messaging.domain.models import (
     MessageThreadParticipant,
     MessageThreadParty,
 )
-from app.modules.organization.application import grant_resolver
-from app.modules.users.application import user_service
 from app.shared.permissions import Principal
 
 ws_router = APIRouter(prefix="/messaging", tags=["messaging"])
 
 
 async def _principal_from_token(token: str) -> Principal | None:
-    try:
-        claims = decode_access_token(token)
-    except InvalidTokenError:
-        return None
-    if await token_revocation.is_revoked(claims.jti):
-        return None
     async with get_sessionmaker()() as session:
-        sess = (
-            await session.execute(select(Session).where(Session.id == claims.session_id))
-        ).scalar_one_or_none()
-        if sess is None or not sess.is_active(now=datetime.now(tz=UTC)):
-            return None
-        user = await user_service.get_by_id(session, claims.user_id)
-        if user is None or not user.is_active:
-            return None
-        identity = await user_service.get_identity(
-            session, identity_id=claims.identity_id, user_id=user.id
-        )
-        if identity is None:
-            return None
-        permissions = await grant_resolver.resolve_grants(
-            session, user_id=user.id, identity=identity
-        )
-        return Principal(
-            user_id=user.id,
-            persona=identity.persona,
-            org_id=identity.org_id,
-            is_superadmin=user.is_superadmin,
-            permissions=permissions,
-        )
+        return await principal_from_access_token(session, token)
 
 
 async def _user_in_thread(principal: Principal, thread_id: uuid.UUID) -> bool:

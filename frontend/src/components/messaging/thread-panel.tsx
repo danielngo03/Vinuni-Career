@@ -6,17 +6,24 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import {
   ArrowLeft,
   ArrowClockwise,
+  ArrowUUpLeft,
   BellSlash,
   Bell,
+  CheckCircle,
   CircleNotch,
   Flag,
+  HourglassMedium,
   Megaphone,
   PaperPlaneTilt,
+  Prohibit,
   Trash,
+  UserSwitch,
   WarningCircle,
   WifiSlash,
+  XCircle,
 } from "@phosphor-icons/react";
 import { Button, EmptyState, Skeleton, useToast } from "@/components/ui";
+import { CompanyAvatar } from "@/components/companies/company-avatar";
 import { ReportModal } from "@/components/report/report-modal";
 import { cn } from "@/lib/utils";
 import { relativeTime } from "@/lib/notifications/grouping";
@@ -25,17 +32,31 @@ import {
   ApiError,
   messagingApi,
   newDedupeKey,
+  type InboxThreadSummary,
   type MessagingMessage,
+  type RequestAction,
+  type RequestState,
   type ThreadSummary,
 } from "@/lib/api";
 import {
+  MESSAGING_INBOX_ROOT,
   MESSAGING_THREADS_KEY,
   MESSAGING_UNREAD_KEY,
   messagingThreadKey,
 } from "./query-keys";
 import { useThreadMessages } from "./use-thread-messages";
+import { RequestChip } from "./thread-chips";
+import { AssignThreadModal } from "./assign-thread-modal";
 
 const DELETE_WINDOW_MS = 10 * 60 * 1000;
+
+/** Party axes where a staff member replies AS the org Page (masked identity). */
+const ORG_PAGE_KINDS = new Set([
+  "org_dm",
+  "org_to_org",
+  "application",
+  "support",
+]);
 
 interface PendingMessage {
   key: string;
@@ -45,21 +66,50 @@ interface PendingMessage {
   created_at: string;
 }
 
+/** The org identity the caller replies as (for the "Replying as" affordance). */
+export interface OrgIdentity {
+  name: string;
+  slug?: string | null;
+  logoUrl?: string | null;
+}
+
 export interface ThreadPanelProps {
-  thread: ThreadSummary;
+  thread: ThreadSummary | InboxThreadSummary;
   open: boolean;
   onBack: () => void;
   onChanged: () => void;
+  /**
+   * `personal` = my own thread list (I initiated pending requests). `org` = the
+   * shared org inbox (my org is the recipient of pending requests; team read).
+   */
+  variant?: "personal" | "org";
+  /** When set, shows a "Replying as {name}" chip so staff know they are masked. */
+  orgIdentity?: OrgIdentity | null;
+  /** Org inbox: expose Assign + Resolve controls (server re-checks the grant). */
+  canAssign?: boolean;
+  /** Fired after an assign/resolve mutation so the inbox list refreshes. */
+  onAssignmentChanged?: () => void;
 }
 
 /**
- * One open thread: header (masked counterpart + mute/report), a polled,
- * sanitized, aria-live transcript, and a composer with optimistic send + retry
- * (idempotent on a generated `client_dedupe_key`). Announcement threads and
- * closed/non-reply threads render the composer as a read-only notice. Identity
- * is the server label only — never a reconstructed name/email.
+ * One open thread: header (masked counterpart + request/assignment state +
+ * mute/report, plus Assign/Resolve in the org inbox), a polled, sanitized,
+ * aria-live transcript, and a composer with optimistic send + retry (idempotent).
+ * Adds the Messaging V2 first-contact request gate: a pending recipient sees an
+ * Accept/Decline/Block bar; a pending initiator sees a waiting notice and keeps
+ * the composer until the intro cap (409) is hit. Identity is the server label
+ * only — never a reconstructed name/email.
  */
-export function ThreadPanel({ thread, open, onBack, onChanged }: ThreadPanelProps) {
+export function ThreadPanel({
+  thread,
+  open,
+  onBack,
+  onChanged,
+  variant = "personal",
+  orgIdentity = null,
+  canAssign = false,
+  onAssignmentChanged,
+}: ThreadPanelProps) {
   const t = useTranslations("messaging");
   const tc = useTranslations("common");
   const tStates = useTranslations("states");
@@ -68,16 +118,38 @@ export function ThreadPanel({ thread, open, onBack, onChanged }: ThreadPanelProp
   const { show } = useToast();
 
   const isAnnouncement = thread.kind === "announcement";
+  const isOrg = variant === "org";
   const [closed, setClosed] = useState(thread.status === "closed");
   const [muted, setMuted] = useState(thread.muted);
   const [pending, setPending] = useState<PendingMessage[]>([]);
   const [draft, setDraft] = useState("");
   const [rateLimitMsg, setRateLimitMsg] = useState<string | null>(null);
   const [reportOpen, setReportOpen] = useState(false);
+  const [assignOpen, setAssignOpen] = useState(false);
+  const [requestState, setRequestState] = useState<RequestState>(
+    thread.request_state,
+  );
+  const [introLimitReached, setIntroLimitReached] = useState(false);
+
+  const assignmentState = (thread as Partial<InboxThreadSummary>).assignment_state;
+  const isResolved = assignmentState === "resolved";
 
   const scrollRef = useRef<HTMLDivElement>(null);
   const liveRef = useRef<HTMLDivElement>(null);
   const lastSeenId = useRef<string | null>(null);
+
+  // Reset per-thread local state when the open thread changes.
+  useEffect(() => {
+    setRequestState(thread.request_state);
+    setClosed(thread.status === "closed");
+    setMuted(thread.muted);
+    setPending([]);
+    setDraft("");
+    setRateLimitMsg(null);
+    setIntroLimitReached(false);
+    lastSeenId.current = null;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [thread.id]);
 
   const messagesQuery = useThreadMessages(thread.id, open);
   const serverMessages = useMemo(
@@ -85,15 +157,21 @@ export function ThreadPanel({ thread, open, onBack, onChanged }: ThreadPanelProp
     [messagesQuery.data],
   );
 
-  /* Mark read on open + whenever new server messages land. */
+  // The org inbox uses a TEAM-level read cursor; personal threads use the
+  // participant cursor. Non-participant org staff would 404 on the participant
+  // mark-read, so route by variant.
   const markRead = useMutation({
-    mutationFn: () => messagingApi.markRead(thread.id),
+    mutationFn: () =>
+      isOrg
+        ? messagingApi.markInboxRead(thread.id)
+        : messagingApi.markRead(thread.id),
     onSuccess: () => {
       patchThreadUnread(qc, thread.id, 0);
-      // Reconcile the global badge from the server (avoids over-decrement when
-      // mark-read fires repeatedly as new messages poll in).
       void qc.invalidateQueries({ queryKey: MESSAGING_UNREAD_KEY });
+      if (isOrg) void qc.invalidateQueries({ queryKey: MESSAGING_INBOX_ROOT });
     },
+    // Non-participant org read may 404 before the first reply — safe to ignore.
+    onError: () => undefined,
   });
 
   useEffect(() => {
@@ -101,7 +179,6 @@ export function ThreadPanel({ thread, open, onBack, onChanged }: ThreadPanelProp
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [open, thread.id]);
 
-  /* Announce + auto-scroll when the newest message changes. */
   useEffect(() => {
     const newest = serverMessages[serverMessages.length - 1];
     if (!newest) return;
@@ -120,6 +197,79 @@ export function ThreadPanel({ thread, open, onBack, onChanged }: ThreadPanelProp
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [serverMessages]);
 
+  /* ------------------------------ Request gate ---------------------------- */
+
+  const isPending = requestState === "pending";
+  const iSent = serverMessages.some((m) => m.is_mine && !m.is_system);
+  const hasIncoming = serverMessages.some((m) => !m.is_mine && !m.is_system);
+  // Am I (my party) the recipient who must accept? The org inbox is the
+  // recipient-triage surface; a personal pending thread I did not send into with
+  // incoming messages is the rare cold inbound. Otherwise I am the initiator.
+  const iAmRequestRecipient =
+    isPending && !iSent && (isOrg ? true : hasIncoming);
+  const iAmRequestInitiator = isPending && !iAmRequestRecipient;
+
+  const respond = useMutation({
+    mutationFn: (action: RequestAction) =>
+      messagingApi.respondRequest(thread.id, action),
+    onSuccess: (res, action) => {
+      setRequestState(res.request_state);
+      show({
+        tone: action === "accept" ? "success" : "info",
+        title:
+          action === "accept"
+            ? t("requestAcceptedToast")
+            : action === "decline"
+              ? t("requestDeclinedToast")
+              : t("requestBlockedToast"),
+      });
+      void messagesQuery.refetch();
+      void qc.invalidateQueries({ queryKey: messagingThreadKey(thread.id) });
+      onChanged();
+      void qc.invalidateQueries({ queryKey: MESSAGING_THREADS_KEY });
+      if (isOrg) void qc.invalidateQueries({ queryKey: MESSAGING_INBOX_ROOT });
+    },
+    onError: (err) => {
+      if (err instanceof ApiError && err.status === 409) {
+        // No longer pending (someone else acted) — resync.
+        show({ tone: "info", title: t("requestNotPendingToast") });
+        void messagesQuery.refetch();
+        onChanged();
+      } else {
+        show({
+          tone: "error",
+          title:
+            err instanceof ApiError ? err.message : t("errors.requestActionFailed"),
+        });
+      }
+    },
+  });
+
+  /* ------------------------------ Assign / resolve ------------------------ */
+
+  const resolve = useMutation({
+    mutationFn: (next: boolean) => messagingApi.resolveThread(thread.id, next),
+    onSuccess: (_res, next) => {
+      show({
+        tone: "success",
+        title: next ? t("resolvedToast") : t("reopenedToast"),
+      });
+      void qc.invalidateQueries({ queryKey: MESSAGING_INBOX_ROOT });
+      onAssignmentChanged?.();
+      onChanged();
+    },
+    onError: (err) =>
+      show({
+        tone: "error",
+        title:
+          err instanceof ApiError && err.isPermissionError
+            ? t("errors.notAllowedAssign")
+            : err instanceof ApiError
+              ? err.message
+              : tStates("errorTitle"),
+      }),
+  });
+
   /* --------------------------------- Send --------------------------------- */
 
   async function deliver(body: string, key: string, replyTo: string | null) {
@@ -134,7 +284,29 @@ export function ThreadPanel({ thread, open, onBack, onChanged }: ThreadPanelProp
       setPending((p) => p.filter((m) => m.key !== key));
       onChanged();
       void qc.invalidateQueries({ queryKey: MESSAGING_THREADS_KEY });
+      if (isOrg) void qc.invalidateQueries({ queryKey: MESSAGING_INBOX_ROOT });
     } catch (err) {
+      if (err instanceof ApiError) {
+        const reason =
+          typeof err.details?.reason === "string" ? err.details.reason : undefined;
+        // Request-gate 409s must be handled BEFORE the generic conflict→closed path.
+        if (err.status === 409 && reason === "request_pending_limit") {
+          setPending((p) => p.filter((m) => m.key !== key));
+          setIntroLimitReached(true);
+          show({ tone: "info", title: t("requestLimitToast") });
+          return;
+        }
+        if (err.status === 409 && reason === "request_declined") {
+          setPending((p) => p.filter((m) => m.key !== key));
+          setRequestState("declined");
+          return;
+        }
+        if (err.status === 409 && reason === "request_blocked") {
+          setPending((p) => p.filter((m) => m.key !== key));
+          setRequestState("blocked");
+          return;
+        }
+      }
       setPending((p) =>
         p.map((m) => (m.key === key ? { ...m, status: "failed" } : m)),
       );
@@ -193,7 +365,7 @@ export function ThreadPanel({ thread, open, onBack, onChanged }: ThreadPanelProp
     setPending((p) => p.filter((m) => m.key !== key));
   }
 
-  /* ----------------------------- Mute / report ---------------------------- */
+  /* ----------------------------- Mute / delete ---------------------------- */
 
   const muteMutation = useMutation({
     mutationFn: (next: boolean) => messagingApi.muteThread(thread.id, next),
@@ -224,13 +396,38 @@ export function ThreadPanel({ thread, open, onBack, onChanged }: ThreadPanelProp
 
   /* --------------------------------- Render ------------------------------- */
 
+  const readError = messagesQuery.error;
+  // Partner shared-inbox staff who are not yet participants cannot read the
+  // transcript until they join (send/accept). Handle that gracefully instead of a
+  // generic offline error.
+  const isReadBlocked =
+    isOrg &&
+    readError instanceof ApiError &&
+    (readError.isNotFound || readError.isPermissionError);
+
   const isLoading = messagesQuery.isLoading;
-  const isError = messagesQuery.isError && serverMessages.length === 0;
+  const isError = messagesQuery.isError && serverMessages.length === 0 && !isReadBlocked;
   const isStale = messagesQuery.isError && serverMessages.length > 0;
   const isEmpty =
-    !isLoading && !isError && serverMessages.length === 0 && pending.length === 0;
+    !isLoading &&
+    !isError &&
+    !isReadBlocked &&
+    serverMessages.length === 0 &&
+    pending.length === 0;
 
-  const canCompose = thread.can_reply && !isAnnouncement && !closed;
+  const requestBlocked =
+    requestState === "declined" || requestState === "blocked";
+  const showRequestActions = iAmRequestRecipient && !requestBlocked;
+  const canCompose =
+    thread.can_reply &&
+    !isAnnouncement &&
+    !closed &&
+    !showRequestActions &&
+    !requestBlocked &&
+    !introLimitReached;
+
+  const actsAsOrgPage =
+    !!orgIdentity && ORG_PAGE_KINDS.has(thread.thread_kind) && !isAnnouncement;
 
   return (
     <div className="flex h-full flex-col">
@@ -245,7 +442,7 @@ export function ThreadPanel({ thread, open, onBack, onChanged }: ThreadPanelProp
           <ArrowLeft aria-hidden weight="bold" className="size-5" />
         </button>
         <div className="min-w-0 flex-1">
-          <div className="flex items-center gap-1.5">
+          <div className="flex flex-wrap items-center gap-1.5">
             {isAnnouncement && (
               <span className="flex size-5 shrink-0 items-center justify-center rounded-md icon-chip-warning shadow-sm">
                 <Megaphone aria-hidden weight="duotone" className="size-3 text-white" />
@@ -254,42 +451,94 @@ export function ThreadPanel({ thread, open, onBack, onChanged }: ThreadPanelProp
             <h3 className="truncate text-sm font-bold text-[var(--text-primary)]">
               {thread.counterpart_label}
             </h3>
+            <RequestChip state={requestState} label={thread.request_label} />
           </div>
           <p className="mt-0.5 truncate text-xs text-[var(--text-muted)]">
-            {thread.subject ||
-              thread.context_label ||
-              thread.kind_label}
+            {thread.subject || thread.context_label || thread.kind_label}
             {thread.status !== "active" && ` · ${thread.status_label}`}
           </p>
         </div>
-        {!isAnnouncement && (
-          <div className="flex shrink-0 items-center">
-            <button
-              type="button"
-              onClick={() => muteMutation.mutate(!muted)}
-              aria-pressed={muted}
-              aria-label={muted ? t("unmute") : t("mute")}
-              title={muted ? t("unmute") : t("mute")}
-              className="rounded-lg p-1.5 text-[var(--text-muted)] outline-none hover:bg-[#f2f1ee] hover:text-[var(--text-primary)] focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)]"
-            >
-              {muted ? (
-                <BellSlash aria-hidden weight="duotone" className="size-4" />
-              ) : (
-                <Bell aria-hidden weight="duotone" className="size-4" />
-              )}
-            </button>
-            <button
-              type="button"
-              onClick={() => setReportOpen(true)}
-              aria-label={t("report")}
-              title={t("report")}
-              className="rounded-lg p-1.5 text-[var(--text-muted)] outline-none hover:bg-[var(--red-50)] hover:text-[var(--brand-red)] focus-visible:ring-2 focus-visible:ring-[var(--brand-red)]"
-            >
-              <Flag aria-hidden weight="duotone" className="size-4" />
-            </button>
-          </div>
-        )}
+        <div className="flex shrink-0 items-center gap-1">
+          {isOrg && !isAnnouncement && (
+            <>
+              <Button
+                variant="secondary"
+                size="xs"
+                onClick={() => setAssignOpen(true)}
+                className="hidden sm:inline-flex"
+              >
+                <UserSwitch aria-hidden weight="bold" className="size-3.5" />
+                {assignmentState === "assigned" ? t("reassign") : t("assign")}
+              </Button>
+              <Button
+                variant={isResolved ? "ghost" : "secondary"}
+                size="xs"
+                loading={resolve.isPending}
+                onClick={() => resolve.mutate(!isResolved)}
+                className="hidden sm:inline-flex"
+              >
+                {isResolved ? (
+                  <ArrowUUpLeft aria-hidden weight="bold" className="size-3.5" />
+                ) : (
+                  <CheckCircle aria-hidden weight="bold" className="size-3.5" />
+                )}
+                {isResolved ? t("reopen") : t("resolve")}
+              </Button>
+            </>
+          )}
+          {!isAnnouncement && (
+            <>
+              <button
+                type="button"
+                onClick={() => muteMutation.mutate(!muted)}
+                aria-pressed={muted}
+                aria-label={muted ? t("unmute") : t("mute")}
+                title={muted ? t("unmute") : t("mute")}
+                className="rounded-lg p-1.5 text-[var(--text-muted)] outline-none hover:bg-[#f2f1ee] hover:text-[var(--text-primary)] focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)]"
+              >
+                {muted ? (
+                  <BellSlash aria-hidden weight="duotone" className="size-4" />
+                ) : (
+                  <Bell aria-hidden weight="duotone" className="size-4" />
+                )}
+              </button>
+              <button
+                type="button"
+                onClick={() => setReportOpen(true)}
+                aria-label={t("report")}
+                title={t("report")}
+                className="rounded-lg p-1.5 text-[var(--text-muted)] outline-none hover:bg-[var(--red-50)] hover:text-[var(--brand-red)] focus-visible:ring-2 focus-visible:ring-[var(--brand-red)]"
+              >
+                <Flag aria-hidden weight="duotone" className="size-4" />
+              </button>
+            </>
+          )}
+        </div>
       </div>
+
+      {/* Org inbox: mobile Assign/Resolve row (buttons hidden on small header) */}
+      {isOrg && !isAnnouncement && (
+        <div className="flex items-center gap-2 border-b border-[var(--border-default)] bg-[#fbfaf8] px-5 py-2 sm:hidden">
+          <Button
+            variant="secondary"
+            size="xs"
+            fullWidth
+            onClick={() => setAssignOpen(true)}
+          >
+            <UserSwitch aria-hidden weight="bold" className="size-3.5" />
+            {assignmentState === "assigned" ? t("reassign") : t("assign")}
+          </Button>
+          <Button
+            variant={isResolved ? "ghost" : "secondary"}
+            size="xs"
+            fullWidth
+            loading={resolve.isPending}
+            onClick={() => resolve.mutate(!isResolved)}
+          >
+            {isResolved ? t("reopen") : t("resolve")}
+          </Button>
+        </div>
+      )}
 
       {/* Transcript */}
       <div
@@ -305,6 +554,17 @@ export function ThreadPanel({ thread, open, onBack, onChanged }: ThreadPanelProp
         )}
 
         {isLoading && <TranscriptSkeleton />}
+
+        {isReadBlocked && (
+          <EmptyState
+            kind="empty"
+            icon={HourglassMedium}
+            title={t("joinToViewTitle")}
+            description={
+              isPending ? t("joinToViewPendingBody") : t("joinToViewBody")
+            }
+          />
+        )}
 
         {isError && (
           <EmptyState
@@ -363,7 +623,7 @@ export function ThreadPanel({ thread, open, onBack, onChanged }: ThreadPanelProp
       {/* aria-live region for incoming messages (visually hidden) */}
       <div ref={liveRef} role="status" aria-live="polite" className="sr-only" />
 
-      {/* Composer / read-only notice */}
+      {/* Composer / request bar / read-only notice */}
       {rateLimitMsg && (
         <p
           role="alert"
@@ -378,38 +638,83 @@ export function ThreadPanel({ thread, open, onBack, onChanged }: ThreadPanelProp
         <ReadOnlyNotice text={t("threadClosed")} icon={WarningCircle} />
       ) : isAnnouncement ? (
         <ReadOnlyNotice text={t("announcementReadOnly")} icon={Megaphone} />
+      ) : requestState === "blocked" ? (
+        <ReadOnlyNotice
+          text={t("requestBlockedNotice", { name: thread.counterpart_label })}
+          icon={Prohibit}
+          tone="danger"
+        />
+      ) : requestState === "declined" ? (
+        <ReadOnlyNotice
+          text={t("requestDeclinedNotice", { name: thread.counterpart_label })}
+          icon={XCircle}
+        />
+      ) : showRequestActions ? (
+        <RequestActionBar
+          counterpart={thread.counterpart_label}
+          pending={respond.isPending}
+          onAction={(a) => respond.mutate(a)}
+        />
+      ) : introLimitReached ? (
+        <ReadOnlyNotice
+          text={t("requestLimitReachedNotice", { name: thread.counterpart_label })}
+          icon={HourglassMedium}
+        />
       ) : !thread.can_reply ? (
         <ReadOnlyNotice text={t("replyNotAllowed")} icon={WarningCircle} />
       ) : (
-        <form onSubmit={onSubmit} className="flex items-end gap-2 border-t border-[var(--border-default)] bg-[#fbfaf8] px-5 py-4">
-          <label htmlFor="msg-composer" className="sr-only">
-            {t("composerLabel")}
-          </label>
-          <textarea
-            id="msg-composer"
-            value={draft}
-            onChange={(e) => setDraft(e.target.value)}
-            onKeyDown={(e) => {
-              if (e.key === "Enter" && !e.shiftKey) {
-                e.preventDefault();
-                onSubmit(e);
-              }
-            }}
-            rows={1}
-            maxLength={8000}
-            placeholder={t("composerPlaceholder")}
-            className="max-h-32 min-h-[40px] flex-1 resize-none rounded-xl border border-[var(--border-default)] bg-white px-3 py-2 text-sm text-[var(--text-primary)] outline-none placeholder:text-[var(--text-muted)] focus:border-[var(--brand-primary)]/50 focus:ring-2 focus:ring-[var(--brand-primary)]/20"
-          />
-          <Button
-            type="submit"
-            size="md"
-            disabled={!draft.trim()}
-            aria-label={t("send")}
-            className="shrink-0"
-          >
-            <PaperPlaneTilt aria-hidden weight="fill" className="size-4" />
-          </Button>
-        </form>
+        <div className="border-t border-[var(--border-default)] bg-[#fbfaf8]">
+          {iAmRequestInitiator && (
+            <p className="flex items-center gap-1.5 px-5 pt-3 text-xs font-medium text-[var(--text-secondary)]">
+              <HourglassMedium
+                aria-hidden
+                weight="duotone"
+                className="size-4 shrink-0 text-[var(--text-muted)]"
+              />
+              {t("requestWaitingNotice", { name: thread.counterpart_label })}
+            </p>
+          )}
+          {actsAsOrgPage && (
+            <div className="flex items-center gap-1.5 px-5 pt-3 text-[11px] font-medium text-[var(--text-muted)]">
+              <CompanyAvatar
+                name={orgIdentity!.name}
+                logoUrl={orgIdentity!.logoUrl ?? null}
+                size="sm"
+                className="!size-4 !rounded"
+              />
+              {t("replyingAs", { name: orgIdentity!.name })}
+            </div>
+          )}
+          <form onSubmit={onSubmit} className="flex items-end gap-2 px-5 py-3">
+            <label htmlFor="msg-composer" className="sr-only">
+              {t("composerLabel")}
+            </label>
+            <textarea
+              id="msg-composer"
+              value={draft}
+              onChange={(e) => setDraft(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" && !e.shiftKey) {
+                  e.preventDefault();
+                  onSubmit(e);
+                }
+              }}
+              rows={1}
+              maxLength={8000}
+              placeholder={t("composerPlaceholder")}
+              className="max-h-32 min-h-[40px] flex-1 resize-none rounded-xl border border-[var(--border-default)] bg-white px-3 py-2 text-sm text-[var(--text-primary)] outline-none placeholder:text-[var(--text-muted)] focus:border-[var(--brand-primary)]/50 focus:ring-2 focus:ring-[var(--brand-primary)]/20"
+            />
+            <Button
+              type="submit"
+              size="md"
+              disabled={!draft.trim()}
+              aria-label={t("send")}
+              className="shrink-0"
+            >
+              <PaperPlaneTilt aria-hidden weight="fill" className="size-4" />
+            </Button>
+          </form>
+        </div>
       )}
 
       <ReportModal
@@ -419,11 +724,74 @@ export function ThreadPanel({ thread, open, onBack, onChanged }: ThreadPanelProp
         entityId={thread.id}
         entityLabel={thread.counterpart_label}
       />
+
+      {isOrg && (
+        <AssignThreadModal
+          open={assignOpen}
+          onClose={() => setAssignOpen(false)}
+          thread={thread}
+          onAssigned={() => {
+            onAssignmentChanged?.();
+            onChanged();
+          }}
+        />
+      )}
     </div>
   );
 }
 
 /* ------------------------------- Sub-views -------------------------------- */
+
+function RequestActionBar({
+  counterpart,
+  pending,
+  onAction,
+}: {
+  counterpart: string;
+  pending: boolean;
+  onAction: (action: RequestAction) => void;
+}) {
+  const t = useTranslations("messaging");
+  return (
+    <div className="border-t border-[var(--border-default)] bg-[#fbfaf8] px-5 py-4">
+      <p className="text-sm font-semibold text-[var(--text-primary)]">
+        {t("requestActionsTitle")}
+      </p>
+      <p className="mt-0.5 text-xs text-[var(--text-secondary)]">
+        {t("requestActionsBody", { name: counterpart })}
+      </p>
+      <div className="mt-3 flex flex-wrap items-center gap-2">
+        <Button
+          variant="primary"
+          size="sm"
+          loading={pending}
+          onClick={() => onAction("accept")}
+        >
+          <CheckCircle aria-hidden weight="bold" className="size-4" />
+          {t("requestAccept")}
+        </Button>
+        <Button
+          variant="secondary"
+          size="sm"
+          disabled={pending}
+          onClick={() => onAction("decline")}
+        >
+          <XCircle aria-hidden weight="bold" className="size-4" />
+          {t("requestDecline")}
+        </Button>
+        <Button
+          variant="danger"
+          size="sm"
+          disabled={pending}
+          onClick={() => onAction("block")}
+        >
+          <Prohibit aria-hidden weight="bold" className="size-4" />
+          {t("requestBlock")}
+        </Button>
+      </div>
+    </div>
+  );
+}
 
 function MessageBubble({
   message,
@@ -555,12 +923,19 @@ function PendingBubble({
 function ReadOnlyNotice({
   text,
   icon: Icon,
+  tone = "muted",
 }: {
   text: string;
   icon: typeof WarningCircle;
+  tone?: "muted" | "danger";
 }) {
   return (
-    <p className="flex items-center justify-center gap-1.5 border-t border-white/40 pt-3 text-xs font-medium text-[var(--text-muted)]">
+    <p
+      className={cn(
+        "flex items-center justify-center gap-1.5 border-t border-[var(--border-default)] bg-[#fbfaf8] px-5 py-4 text-xs font-medium",
+        tone === "danger" ? "text-[var(--brand-red)]" : "text-[var(--text-muted)]",
+      )}
+    >
       <Icon aria-hidden weight="duotone" className="size-4 shrink-0" />
       {text}
     </p>

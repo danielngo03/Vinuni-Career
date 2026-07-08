@@ -198,6 +198,8 @@ export interface RecipientOrg {
   display_name: string;
   org_type: "partner" | "university" | (string & {});
   is_verified: boolean;
+  /** Safe logo URL when the search projection provides one (else initials). */
+  logo_url?: string | null;
 }
 
 /** An internal department channel target (staff, own org). */

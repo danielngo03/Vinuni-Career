@@ -7,14 +7,19 @@ import {
   ChatsCircle,
   Megaphone,
   BellSlash,
+  PencilSimpleLine,
   WifiSlash,
 } from "@phosphor-icons/react";
 import { Button, EmptyState, Sheet, Skeleton } from "@/components/ui";
 import { cn } from "@/lib/utils";
 import { relativeTime } from "@/lib/notifications/grouping";
 import { messagingApi, type ThreadSummary } from "@/lib/api";
+import { useAuthStore } from "@/stores/auth-store";
 import { MESSAGING_THREADS_KEY } from "./query-keys";
 import { ThreadPanel } from "./thread-panel";
+import { NewMessageModal } from "./new-message-modal";
+import { RequestChip } from "./thread-chips";
+import { useMyOrgIdentity } from "./use-my-org";
 
 export interface MessagingCenterProps {
   open: boolean;
@@ -43,6 +48,9 @@ export function MessagingCenter({
   const [selected, setSelected] = useState<ThreadSummary | null>(
     initialThread ?? null,
   );
+  const [composeOpen, setComposeOpen] = useState(false);
+  const persona = useAuthStore((s) => s.user?.persona ?? "student");
+  const orgIdentity = useMyOrgIdentity();
 
   useEffect(() => {
     if (open && initialThread) setSelected(initialThread);
@@ -84,8 +92,11 @@ export function MessagingCenter({
       {selected ? (
         <div className="-my-4 flex h-[calc(100%+2rem)] flex-col py-0">
           <ThreadPanel
+            key={selected.id}
             thread={selected}
             open={open}
+            variant="personal"
+            orgIdentity={orgIdentity}
             onBack={() => {
               setSelected(null);
               void query.refetch();
@@ -95,6 +106,16 @@ export function MessagingCenter({
         </div>
       ) : (
         <div className="flex flex-col gap-1">
+          <div className="mb-1 flex justify-end">
+            <Button
+              variant="primary"
+              size="xs"
+              onClick={() => setComposeOpen(true)}
+            >
+              <PencilSimpleLine aria-hidden weight="bold" className="size-3.5" />
+              {t("newMessage")}
+            </Button>
+          </div>
           {isStale && (
             <p className="mb-1 flex items-center gap-1.5 rounded-lg bg-[var(--amber-100)] px-3 py-1.5 text-xs font-medium text-[var(--amber-700)]">
               <WifiSlash aria-hidden weight="bold" className="size-3.5" />
@@ -160,6 +181,16 @@ export function MessagingCenter({
           )}
         </div>
       )}
+
+      <NewMessageModal
+        open={composeOpen}
+        onClose={() => setComposeOpen(false)}
+        persona={persona}
+        onCreated={(thread) => {
+          void query.refetch();
+          setSelected(thread);
+        }}
+      />
     </Sheet>
   );
 }
@@ -253,6 +284,11 @@ function ThreadRow({
             </span>
           )}
         </span>
+        {thread.request_state !== "accepted" && (
+          <span className="mt-1 flex">
+            <RequestChip state={thread.request_state} label={thread.request_label} />
+          </span>
+        )}
       </span>
     </button>
   );

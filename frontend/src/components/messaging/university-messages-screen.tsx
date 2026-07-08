@@ -5,44 +5,38 @@ import { useTranslations } from "next-intl";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { PaperPlaneTilt, Megaphone } from "@phosphor-icons/react";
 import { Button, Input, Modal, Textarea, useToast } from "@/components/ui";
-import { MessagingScreen } from "./messaging-screen";
+import { OrgInboxScreen } from "./org-inbox-screen";
 import { messagingApi } from "@/lib/api";
-import { MESSAGING_THREADS_KEY } from "./query-keys";
+import { MESSAGING_THREADS_KEY, MESSAGING_INBOX_ROOT } from "./query-keys";
 import { useApiErrorMessage } from "@/lib/auth/use-api-error";
 
 /**
- * University messaging workspace. Extends the shared MessagingScreen with a
- * "New announcement" CTA — university staff can broadcast one-way messages to
- * all students (kind="announcement"). The inbox, thread detail, and read/mute
- * controls are inherited from MessagingScreen.
+ * University messaging workspace = the org shared inbox (team triage, assign,
+ * resolve, request-gate handling) PLUS a "New announcement" CTA that broadcasts a
+ * one-way message to all students (kind="announcement"). University staff are
+ * moderators, so they can read + moderate any thread routed to their inbox.
  */
 export function UniversityMessagesScreen() {
   const t = useTranslations("messaging");
   const [composeOpen, setComposeOpen] = useState(false);
 
   return (
-    <div className="flex h-full flex-col gap-4">
-      <div className="flex items-center justify-between">
-        <div />
-        <Button
-          variant="primary"
-          size="sm"
-          onClick={() => setComposeOpen(true)}
-        >
-          <Megaphone aria-hidden weight="duotone" className="size-4" />
-          {t("newAnnouncement")}
-        </Button>
-      </div>
-
-      <div className="flex-1">
-        <MessagingScreen />
-      </div>
-
-      <AnnounceModal
-        open={composeOpen}
-        onClose={() => setComposeOpen(false)}
+    <>
+      <OrgInboxScreen
+        persona="university"
+        headerExtra={
+          <Button
+            variant="secondary"
+            size="xs"
+            onClick={() => setComposeOpen(true)}
+          >
+            <Megaphone aria-hidden weight="duotone" className="size-3.5" />
+            {t("newAnnouncement")}
+          </Button>
+        }
       />
-    </div>
+      <AnnounceModal open={composeOpen} onClose={() => setComposeOpen(false)} />
+    </>
   );
 }
 
@@ -76,6 +70,7 @@ function AnnounceModal({
     onSuccess: () => {
       toast.show({ tone: "success", title: t("announcementSent") });
       void qc.invalidateQueries({ queryKey: MESSAGING_THREADS_KEY });
+      void qc.invalidateQueries({ queryKey: MESSAGING_INBOX_ROOT });
       setSubject("");
       setBody("");
       onClose();

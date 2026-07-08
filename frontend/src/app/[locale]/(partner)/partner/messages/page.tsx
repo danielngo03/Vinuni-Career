@@ -1,5 +1,5 @@
-import { MessagingScreen } from "@/components/messaging/messaging-screen";
+import { OrgInboxScreen } from "@/components/messaging/org-inbox-screen";
 
 export default function PartnerMessagesPage() {
-  return <MessagingScreen persona="partner" />;
+  return <OrgInboxScreen persona="partner" />;
 }

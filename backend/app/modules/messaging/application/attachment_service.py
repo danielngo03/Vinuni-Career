@@ -10,7 +10,9 @@ re-checks thread READ access every time and streams the bytes through a gated en
 
 from __future__ import annotations
 
+import re
 import uuid
+from urllib.parse import quote
 
 from fastapi import UploadFile
 from sqlalchemy import select
@@ -270,3 +272,35 @@ def validate_attachment_ids(raw: list) -> list[uuid.UUID]:
     if len(raw) > 10:
         raise ValidationFailedError(details={"field": "attachment_ids"})
     return list(raw)
+
+
+# Only these render inline (as <img>); everything else is forced to download so a
+# mislabeled/crafted file can never execute in the app's origin (XSS defense).
+_INLINE_SAFE = {"image/png", "image/jpeg", "image/webp", "image/gif"}
+
+
+def response_meta(*, content_type: str, filename: str) -> tuple[str, dict[str, str]]:
+    """Return ``(safe_media_type, headers)`` for a gated attachment download.
+
+    Neutralizes content-sniffing XSS: ``nosniff`` + a strict CSP sandbox, inline only
+    for a safelist of image types (attachment otherwise), and an RFC 6266 filename
+    (percent-encoded ``filename*`` + a stripped ASCII fallback — no quote/CR/LF).
+    """
+
+    inline = content_type in _INLINE_SAFE
+    # Serve non-inline content as an opaque octet-stream so the browser cannot be
+    # coerced into interpreting it in-origin even if the declared type were wrong.
+    media_type = content_type if inline else "application/octet-stream"
+    ascii_name = re.sub(r'[":\\\r\n]', "_", filename)
+    ascii_name = ascii_name.encode("ascii", "ignore").decode("ascii") or "attachment"
+    star = quote(filename, safe="")
+    disposition = "inline" if inline else "attachment"
+    headers = {
+        "Content-Disposition": (
+            f"{disposition}; filename=\"{ascii_name}\"; filename*=UTF-8''{star}"
+        ),
+        "X-Content-Type-Options": "nosniff",
+        "Content-Security-Policy": "default-src 'none'; sandbox; frame-ancestors 'none'",
+        "Cache-Control": "private, no-store",
+    }
+    return media_type, headers
