@@ -37,12 +37,14 @@ from app.ai.energy.service import build_usage_context, charge_units
 from app.ai.gateway.base import AIMessage
 from app.ai.observability.billable_usage import FEATURE_CHATBOT, record_billable_usage
 from app.ai.prompts.assistant import v1 as assistant_prompt
-from app.ai.prompts.assistant_partner import v1 as partner_prompt
 from app.ai.retrieval.citation_verify import kb_source_titles, verify_citations
 from app.ai.safety.input_guard import sanitize_instruction
 from app.ai.safety.output_guard import enforce_keyword_scope
 from app.modules.ai_assistant.application import usage_service
 from app.modules.ai_assistant.application.agentic import planner
+from app.modules.ai_assistant.application.agentic.persona_registry import (
+    resolve_persona_profile,
+)
 from app.modules.ai_assistant.application.agents import build_agent_plan
 from app.modules.ai_assistant.application.messages import assistant_message
 from app.modules.ai_assistant.application.response_formatter import (
@@ -78,14 +80,6 @@ from app.modules.ai_assistant.domain.models import ChatMessage
 from app.shared.exceptions import AIUnavailableError, AuthRequiredError, QuotaExceededError
 from app.shared.permissions import Principal
 
-# Real partner persona value assigned at login (app.modules.auth.api.deps ->
-# identity.persona; see app.modules.messaging.domain.rules.PARTNER_MEMBER).
-# NOTE: ai_assistant's own ToolSpec.persona constant is named "partner_user"
-# for historical reasons but is only used to scope tool-list advertising in
-# the system prompts (assistant/v1.py, assistant_partner/v1.py) — it is
-# unrelated to this real persona string and must not be confused with it.
-_PARTNER_PERSONA = "partner_member"
-
 __all__ = [
     "archive_session",
     "confirm_tool_action",
@@ -105,15 +99,14 @@ _logger = logging.getLogger("ai.rag")
 
 
 def _system_prompt_for(principal: Principal) -> str:
-    """Select the persona system prompt (§8.1 branching, partner assistant spec).
+    """Select the persona system prompt via the persona registry (§8.1).
 
-    Partner (recruiter) accounts get the org-scoped ``PARTNER_SYSTEM_PROMPT``;
-    everyone else (student, alumni, guest-in-practice-never-reaches-here,
-    university staff pending its own future prompt) gets the student prompt.
+    Resolves ``principal.persona`` to its :class:`PersonaProfile` (one source of
+    truth for prompt + planner + tool surface). Student/alumni get the student
+    prompt, partner members the org-scoped partner prompt, university staff the
+    university prompt; an unknown persona degrades to the student prompt.
     """
-    if principal.persona == _PARTNER_PERSONA:
-        return partner_prompt.PARTNER_SYSTEM_PROMPT
-    return assistant_prompt.SYSTEM_PROMPT
+    return resolve_persona_profile(principal.persona).system_prompt
 
 
 def _apply_citation_guard(final_text: str, kb_sources: list[str]) -> str:

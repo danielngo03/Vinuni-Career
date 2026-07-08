@@ -12,12 +12,6 @@ from app.modules.ai_assistant.application.messages import assistant_message
 from app.modules.ai_assistant.domain.models import ChatSession
 from app.shared.permissions import Principal
 
-# Auth-layer persona string assigned to partner recruiters at login
-# (mirrors ``app.modules.auth.domain.personas.PARTNER_MEMBER`` and
-# ``chat_service._PARTNER_PERSONA``). Kept as a local literal to avoid an
-# ai_assistant -> auth module-boundary import.
-_PARTNER_PERSONA = "partner_member"
-
 _ARITHMETIC_ONLY_RE = re.compile(
     r"^\s*\d+\s*[-+*/x×÷]\s*\d+\s*(=|bằng|is)?"
     r"\s*(mấy|gì|what)?\s*[?.!]?\s*$",
@@ -400,20 +394,80 @@ async def build_agent_plan(
 ) -> AgentPlan | None:
     """Build a deterministic plan before the LLM tool-calling loop fallback.
 
-    Partner recruiters route through the SMALL partner-intent matcher
-    (``plan_for_partner``) and otherwise fall through (``None``) to the LLM
-    loop, which selects the partner system prompt + partner tools. The
-    student-centric recent-entity resolver and full deterministic planner are
-    intentionally NOT run for partners — they only understand student tools.
+    Persona routing is resolved via the persona registry (a single source of
+    truth) instead of scattered ``if persona == ...`` branches: each persona's
+    :class:`PersonaProfile` names its own planner adapter (``student_agent_plan``
+    / ``partner_agent_plan`` / ``university_agent_plan``). Returning ``None``
+    sends the turn to the governed LLM tool-calling loop with that persona's
+    system prompt + tool surface. Imported lazily to avoid a circular import
+    (the registry imports this module for the planner adapters).
     """
-    if principal.persona == _PARTNER_PERSONA:
-        return plan_for_partner(text, principal=principal, locale=locale)
+    from app.modules.ai_assistant.application.agentic.persona_registry import (
+        resolve_persona_profile,
+    )
 
+    profile = resolve_persona_profile(principal.persona)
+    return await profile.planner(
+        text, principal=principal, session=session, chat=chat, locale=locale
+    )
+
+
+async def student_agent_plan(
+    text: str,
+    *,
+    principal: Principal,
+    session: AsyncSession,
+    chat: ChatSession,
+    locale: str = "vi",
+) -> AgentPlan | None:
+    """Student/alumni deterministic planner: recent-entity resolver → full planner.
+
+    Behaviour-identical to the historical student branch of ``build_agent_plan``.
+    """
     if recent_plan := await _plan_with_recent_entities(
         text, session=session, chat=chat, locale=locale
     ):
         return recent_plan
     return plan_for_text(text, principal=principal, locale=locale)
+
+
+async def partner_agent_plan(
+    text: str,
+    *,
+    principal: Principal,
+    session: AsyncSession,  # noqa: ARG001 — signature parity with the registry
+    chat: ChatSession,  # noqa: ARG001 — signature parity with the registry
+    locale: str = "vi",
+) -> AgentPlan | None:
+    """Partner-recruiter deterministic planner (SMALL, org-scoped intents only).
+
+    Behaviour-identical to the historical partner branch: only the partner
+    intent matcher runs; the student recent-entity resolver + full planner are
+    intentionally NOT run (they only understand student tools). Everything else
+    returns ``None`` → the LLM loop with the partner prompt + partner tools.
+    """
+    return plan_for_partner(text, principal=principal, locale=locale)
+
+
+async def university_agent_plan(
+    text: str,  # noqa: ARG001 — deliberate no-op minimal seam (see below)
+    *,
+    principal: Principal,  # noqa: ARG001
+    session: AsyncSession,  # noqa: ARG001
+    chat: ChatSession,  # noqa: ARG001
+    locale: str = "vi",  # noqa: ARG001
+) -> AgentPlan | None:
+    """University-staff planner: minimal, correct seam.
+
+    University staff have NO deterministic pre-LLM plan yet, so every open turn
+    returns ``None`` and reaches the governed LLM tool-calling loop (which
+    selects the university system prompt + the shared university tool surface).
+    This is the correct fix for the previously broken stub, which ran the
+    STUDENT planner and mis-routed university turns onto student-only tools that
+    dispatch then rejected. A parallel workstream owns the full university
+    planner; this function is the deliberate placeholder for it.
+    """
+    return None
 
 
 def plan_for_partner(text: str, *, principal: Principal, locale: str = "vi") -> AgentPlan | None:

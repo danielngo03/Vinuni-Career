@@ -49,18 +49,19 @@ from app.ai.observability.billable_usage import (
     SCOPE_USER as LEDGER_SCOPE_USER,
 )
 from app.ai.observability.models import AiBillableUsage
+from app.shared import personas
 from app.shared.exceptions import QuotaExceededError
 from app.shared.permissions import Principal
 
-# Auth persona vocabulary (mirror of app.modules.auth.domain.personas — kept as
-# local literals to avoid a cross-module implementation import).
-_PERSONA_PARTNER_MEMBER = "partner_member"
-_PERSONA_UNIVERSITY_STAFF = "university_staff"
-_PERSONA_STUDENT = "student"
-_PERSONA_ALUMNI = "alumni"
+# Auth persona vocabulary — sourced from the shared kernel (single source of
+# truth) instead of re-declared literals. ``app/ai`` may import ``app/shared``
+# (kernel) but not ``app.modules.auth`` (a cross-module implementation import).
+_PERSONA_UNIVERSITY_STAFF = personas.UNIVERSITY_STAFF
+_PERSONA_STUDENT = personas.STUDENT
+_PERSONA_ALUMNI = personas.ALUMNI
 
 # Personas whose AI budget is the shared partner ORG pool (vs the USER scope).
-_ORG_PERSONAS = frozenset({_PERSONA_PARTNER_MEMBER})
+_ORG_PERSONAS = personas.ORG_PERSONAS
 
 
 def _week_start(now: datetime) -> datetime:

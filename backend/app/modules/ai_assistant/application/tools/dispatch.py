@@ -7,21 +7,27 @@ import uuid
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.modules.analytics.application import ingestion_service as analytics
+from app.shared import personas
 from app.shared.permissions import Principal, permission_checker
 
 from . import companies, cv_ai, events, jobs, kb, partner, student
 from .specs import PARTNER_USER, STUDENT, TOOL_SPECS, UNIVERSITY_STAFF, ToolSpec
 
-# Map the auth-layer persona (``Principal.persona``, e.g. "partner_member")
-# to the ``ToolSpec.persona`` vocabulary declared in ``specs.py`` (STUDENT /
-# PARTNER_USER / UNIVERSITY_STAFF). Alumni reuse the student tool surface;
-# guests never reach dispatch (chat_service raises AuthRequiredError first) and
-# map to no tool persona (so every persona-scoped tool is rejected for them).
+# Map the auth-layer persona (``Principal.persona``, e.g. "partner_member") to
+# the ``ToolSpec.persona`` vocabulary declared in ``specs.py`` (STUDENT /
+# PARTNER_USER / UNIVERSITY_STAFF). Persona strings come from the shared kernel
+# (``app.shared.personas``) so this defensive map cannot drift from the persona
+# registry that drives prompt/planner selection. Alumni reuse the student tool
+# surface; guests never reach dispatch (chat_service raises AuthRequiredError
+# first) and map to no tool persona (so every persona-scoped tool is rejected
+# for them). This module must NOT import the agentic persona registry — the
+# prompts it imports would create a tool ↔ prompt import cycle — so it keeps its
+# own map, sharing only the string constants.
 _AUTH_PERSONA_TO_TOOL_PERSONA: dict[str, str] = {
-    "student": STUDENT,
-    "alumni": STUDENT,
-    "partner_member": PARTNER_USER,
-    "university_staff": UNIVERSITY_STAFF,
+    personas.STUDENT: STUDENT,
+    personas.ALUMNI: STUDENT,
+    personas.PARTNER_MEMBER: PARTNER_USER,
+    personas.UNIVERSITY_STAFF: UNIVERSITY_STAFF,
 }
 
 SUPPORTED_TOOL_NAMES = frozenset(
