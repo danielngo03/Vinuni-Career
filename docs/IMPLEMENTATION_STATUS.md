@@ -5,6 +5,20 @@
 
 ---
 
+## 0. Student AI Overhaul — 08/07/2026 (branch `feat/student-ai-overhaul`, local, not pushed)
+
+Full-package student overhaul (4 phases, 15 workstreams) on a worktree based on the partner energy foundation. Status distinctions: most items are `implemented` + `API wired` + backend/unit `test verified`; **not yet `browser verified` / `E2E verified`** (SSG build blocks a prod render — dev-server QA pending).
+
+- **Gate (verified 08/07/2026, `cd backend`):** `uv run ruff check app` → **20** (baseline 21); `uv run mypy app` → **43/13** (baseline 45/15 — fixed `doc_verification` `async_session_factory` crash + a `rowcount` typing); `uv run pytest -q` → only the **6 pre-existing non-student failures** (`test_eval_gate` jd_extraction ×4, `test_jd_upload_service`, `test_module_boundaries`), verified identical on the base branch; **~350 new student tests pass**. `uv run alembic heads` → single head `0091`. Frontend: `pnpm typecheck`/`pnpm lint`/`pnpm check:messages` clean, **372** vitest pass; `pnpm build` compiles (fails only on the pre-existing 60s SSG prerender timeout, environment-wide).
+- **P1 metering + resilience:** all value-affecting student LLM ops metered on masked "AI energy %" (weekly-hard/3h-soft/no-daily/wallet) via the shared `app/ai/energy` foundation; header meter; AI-off degradation (offline where possible, `ai_unavailable`, no fabrication, no charge-on-failure); `0005/0046/0065 is_premium` migration crash fixed.
+- **P2 job intelligence:** quality-adjusted competition (real-applicant pool via apply-time `fit_score` snapshot; bands only; `job_competition_daily` projection); surfaced matching suggestions + one authoritative fit endpoint + gap→CV-Studio hand-off; job detail = score-only + Analyze-CV/Competition drawers.
+- **P3 discovery + assistant:** guest personalization loop wired end-to-end (industry/role signals + view events + frequency/decay weighting + `recommendation_snapshots` + guest→login carry-over); student chatbot loop-closing confirmation-gated tools + i18n; `assistant/v2` smart-apply chain.
+- **P4 polish + gaps + ads:** frontend consolidation (glass→flat, dedup, dead-file cleanup, nav unify, onboarding i18n); interview memory; notifications depth; cascade vision-cost fix; workforce re-score job; learning resources; offer compare + negotiation; alert digests; dup-apply guard; energy wallet UX; ads campaign-grade (targeting/analytics/creative-checks).
+- **Migrations (student):** `0085` fit-explanation-structured, `0086` snapshot fit_score, `0087` job_competition_daily, `0088` recommendation_snapshots, `0089` interview_sim_sessions, `0090` ad_placement_metrics_daily, `0091` job_alert_digest_watermark.
+- **Deferred/follow-up:** ads budget-pacing + spend↔package link; eval datasets for offer_negotiation + job_alert_digest; browser/E2E QA; `/ai/energy/topup` self-serve; PageHeader unification; onboarding page-level i18n. **Pre-existing non-student blockers (partner base):** jd_extraction/jd_translation eval, jd_upload classifier, module_boundaries (`documents/job_fit_batch_service` + `platform_admin`).
+
+---
+
 ## 1. Current State
 
 - **Human review checkpoint (27/06/2026):** Build was paused because the

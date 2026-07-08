@@ -8,7 +8,7 @@
 
 ## 1. Goal
 
-Make the **student end-to-end AI experience** correct, metered, resilient, and world-class. Every value-affecting LLM call is metered against a masked "AI energy" budget; the job-detail page becomes an on-demand analysis surface; competition intelligence becomes quality-adjusted and grounded in real applicants; AI degrades safely when the model is off or erroring (offline where no AI is needed, clear user-safe errors where it is, never fabrication); and the student assistant is a system-internal, chat-only agentic helper. Accuracy is non-negotiable — no fabricated CVs, scores, or competition claims.
+Make the **student end-to-end experience** (guest → logged-in) correct, metered, resilient, and world-class. Every value-affecting LLM call is metered against a masked "AI energy" budget; the job-detail page becomes an on-demand analysis surface; competition intelligence becomes quality-adjusted and grounded in real applicants; AI degrades safely when the model is off or erroring (offline where no AI is needed, clear user-safe errors where it is, never fabrication); the student assistant is a system-internal, chat-only agentic helper; the **guest/public** funnel gets progressive, privacy-safe personalization; **advertising** becomes campaign-grade and relevance-targeted without eroding trust; and the **frontend** is consolidated to one clean, consistent, low-noise system. Accuracy is non-negotiable — no fabricated CVs, scores, competition claims, or "recommended"/"AI" labels without a real backend signal.
 
 ## 2. Locked owner decisions (2026-07-08)
 
@@ -52,6 +52,8 @@ Make the **student end-to-end AI experience** correct, metered, resilient, and w
 - **Tiering:** `subscription_plans.limits.weekly_energy_units` per tier; `limit_facade` resolves the student's weekly allowance; grants (weekly refill, purchases) recorded to `ai_energy_transaction`.
 - **API:** `GET /ai/energy/me` → `{ weekly: {used_pct, remaining_pct, resets_at}, wallet_balance_display, warn_soft: bool, blocked: bool, upgrade_path }`. No tokens/USD. `POST /ai/energy/topup` (manual/bank-transfer adapter per V1 payment default) creates a pending top-up; superadmin/billing confirmation grants wallet energy.
 - **UX:** energy meter in the student marketplace header quick actions (adapt `SidebarUsageCard` → `HeaderAiButton` area); at the point of action (Analyze CV, CV Studio, chatbot) show remaining % + the op's energy cost before charging an AI write; 80% warn; block state shows upgrade/top-up, never a raw number.
+
+**Shared foundation:** the same `ai_billable_usage` + `UsageContext` ledger and gateway path underpin the parallel **partner AI overhaul** (org + department/user quota + top-up). Keep the energy model scope-aware via `billing_scope`/`actor_persona` so student (per-user) and partner (per-org/dept/user) metering share one substrate; do not fork the ledger.
 
 **Acceptance:** every student AI op decrements energy exactly once on success (idempotent under retry); cache hit charges 0; weekly exhaustion blocks with upgrade UX; 3h over-threshold warns without blocking; no daily enforcement remains; no token/USD leaks to student surfaces; energy meter visible in header and at points of action.
 
@@ -121,6 +123,8 @@ Each migration has upgrade + downgrade; permission/tenant/failure-mode tests.
 - **New** `job_competition_daily` projection (seats/remaining, active-application band, strong-competitor-density band, quality distribution buckets, refreshed_at).
 - Add `weekly_energy_units` to `subscription_plans.limits` per tier.
 - Remove daily-only enforcement logic (config + code); keep tables.
+- **Discovery/personalization (WS-12):** `recommendation_snapshots` (what a guest/student was shown, for audit/repro/eval). `discovery_sessions.coarse_tags` moves to a PII-free `{tag:{count,last_seen}}` shape — JSON-shape change + ranker weighting/decay, no column migration; add a compact per-session aggregate read-model only if the ranker needs it on the hot path.
+- **Advertising (WS-13):** `ad_placement_metrics_daily` per-campaign analytics read-model (impressions/clicks/CTR/apply-starts/cost-per-apply/pacing). Targeting descriptor + budget/pacing persist in the existing `sponsored_placements.settings` JSON (no new column) unless budget needs its own indexed field.
 - **(Optional)** `jobs.positions_filled` counter; normalized skills table.
 
 ### WS-8 — Testing strategy (economical real-model)
@@ -176,11 +180,79 @@ Each migration has upgrade + downgrade; permission/tenant/failure-mode tests.
 
 **Acceptance:** background agent runs are idempotent, audited, and metered; escalation only fires on low confidence; no autonomous unconfirmed writes; competition/matching numbers remain deterministic with AI explanation only.
 
+### WS-12 — Public / guest discovery + progressive session personalization
+
+**Goal:** a guest (not-logged-in) discovery experience that gets progressively better as the visitor browses, privacy-safe — by wiring the personalization loop that already exists in the backend but is dead-lettered on the capture side.
+
+**Ground truth:** the ranker (`discovery/application/ranking_service.py:286` `_session_component`; `marketplace/application/overview_service.py:238-281`) already consumes `categories`/`industries`/`role_families` coarse signals and emits honest reason codes (`similar_industry`, `similar_role`, with `recent`/`popular` fallback). A privacy-safe guest session store exists (`discovery_sessions`, httpOnly `vinuni_discovery` cookie, default-deny allowlist `discovery/domain/allowlist.py`). **But no frontend surface emits industry/role signals, and the job-detail page records no `view` event** — so a guest reading 20 Finance JDs records nothing.
+
+**Design:**
+- **Emit the missing coarse signals** (`categories`/`industries`/`role_families`) from `JobListItem`/`JobRow` tracked items and the jobs/events/company mega-menus (today only `search_terms`/`company_ids`/`work_mode`/`city` flow).
+- **Record a `view` discovery event on job detail** (`public-job-detail.tsx` fires only `apply_start` today) with the viewed job's industry/category/role_family in `signal_tags`; same for `event_detail` and `company_profile` (allowlist already defines these surfaces).
+- **Signal weighting + decay + counts:** `coarse_tags` is presence-only, most-recent-wins, capped — so "viewed Finance 20×" cannot outrank "once" and a 29-day tag counts fully. Move to a PII-free `{tag: {count, last_seen}}` shape (or a compact per-session aggregate) and apply time-decay + frequency weighting in the ranker.
+- **`recommendation_snapshots`** (spec §8, currently absent): persist what a guest/student was shown for audit/debug/repro and as the substrate for offline ranking evals.
+- **Unify `search_logs` with the ranker:** keyword suggestions (`search_logs`) and job ranking (`discovery_sessions.coarse_tags`) are disconnected; feed recent search terms into `_query_component` or converge the stores.
+- **Guest → login continuity:** on login, link `discovery_sessions.user_id` and carry accumulated coarse signals into the student's personalized recommendations (link column exists; ensure carry-over).
+- **`career-explore` content:** replace the placeholder (`career-explore/page.tsx`) with real role guides / skill tracks / career-content rails for guests (spec §2/§6).
+- **Privacy:** everything stays within the default-deny allowlist (no PII, exact location, raw IP, raw CV text, sensitive categories, third-party ad ids); opt-out and TTL honored.
+
+**Acceptance:** guest browsing measurably improves recommendations (industry/role signals flow end-to-end); job-detail/event/company view events recorded with coarse tags; weighting/decay in effect; `recommendation_snapshots` persisted; `career-explore` is real content; guest→login carries signals; the forbidden-signal allowlist is enforced (tests). Honest source labels preserved — never label a rail "recommended" without a real signal.
+
+### WS-13 — Advertising realism (campaign-grade + student relevance)
+
+**Goal:** extend the already-solid advertising system to campaign-grade while preserving its trust guardrails. (Built today: `advertising` DDD module — `ad_packages`, `sponsored_placements`, `campaign_creatives`; disclosure taxonomy `advertising/domain/disclosure.py`; organic/recommended/sponsored/curated separation; partner campaign UI; university moderation; frequency cap.)
+
+**Design (gaps to close):**
+- **Targeting** (absent): a validated targeting descriptor persisted in the existing `sponsored_placements.settings` JSON (region, industry, role family, work mode, student segment, degree/major/year, language) for automatic/manual/university-restricted modes; wire into `inventory_facade.list_active_sponsored` / `ranking_service._resolve_sponsored` so paid slots are **relevance-filtered** (not newest-first) → sponsored inventory becomes relevant to the student/guest. **Reuse the discovery forbidden-signal allowlist** so targeting can never use PII/sensitive categories.
+- **Budget & pacing** (absent — fixed price × duration only): budget/spend model, even pacing across the window, spend-based completion.
+- **Per-campaign analytics for partners** (absent — `discovery_events.placement_id` captured but never aggregated): a per-placement read model (impressions, clicks, CTR, apply-starts, save-intent, cost-per-apply, pacing/frequency coverage) + partner endpoint + UI. Reuse `health_service` privacy discipline (aggregates only, no PII). This is a currently-failing spec acceptance gate.
+- **Link ad spend to package entitlements** (billing standalone/manual today): either package entitlements grant/consume ad slots, or reconcile manual-pay into partner billing views.
+- **Creative policy pre-checks** (human approve/reject only): deterministic pre-checks (dimensions vs `SLOT_SPECS`, banned claims, off-platform contact, disclosure presence) feeding the existing escalation queue.
+- **Wire reserved slots** (`inline_card`, `event_banner`) + confirm event-target delivery parity.
+
+**Preserve (do not regress):** paid disclosure non-removable; paid→editorial relabel blocked; curated fallback never tracked/reported as paid; organic/recommended rail never reordered by sponsored; university-curated stays on the editorial (SealCheck/Handshake) styling, never the amber ad chip.
+
+**Acceptance:** sponsored inventory is relevance-targeted (privacy-safe); budget/pacing enforced; partner sees per-campaign analytics; ad spend reconciled with billing; creative pre-checks run; organic/paid separation + curated trust preserved. The student-relevant slice (targeting so sponsored is relevant) may ride with WS-12; the rest is partner/monetization-facing (Phase 4).
+
+### WS-14 — Frontend IA/UX consolidation (student)
+
+**Goal:** remove the "tùm lum" (messy) feeling. The audit confirms the IA is sound and state-complete (every screen has skeleton/empty/error/auth states; modals trap focus; monochrome tokens are correctly wired). The mess is **surface-treatment drift + duplication + dead files** — a consolidation/polish pass, not a rebuild.
+
+**Design (prioritized):**
+1. **Kill glass/gradient drift → flat `marketplace-card` on student operating surfaces** (glass reserved for topbar + slide-in panels only, per `DESIGN.md` §1.1.1 — the named "single biggest cause of a messy surface"). Offenders: `student-job-intelligence-panel.tsx`, `interview-prep-panel.tsx`, applications stat tiles/rows, `job-alerts-screen.tsx`, `saved-jobs-screen.tsx`, `interview-simulator-screen.tsx`, `student-events-screen.tsx`.
+2. **Consolidate job-detail fit queries** (aligns with WS-4/WS-3): drive `StudentJobIntelligencePanel` from the single `student-intelligence` payload (already carries `.fit` incl. `explanation`); drop the redundant `cv-job-fit` + `fit-explanation` fetches, or make per-CV ranking authoritative and drop `.fit` from the intel contract. Removes duplicate band data + 1–2 round-trips.
+3. **Replace the copy-pasted fake "AI Insights" banner** (4 screens: applications/saved/alerts/events) with one honestly-labeled shared component ("Tổng quan"/"Summary", not "AI") — the content is deterministic client heuristics; the "AI" label violates the quality bar.
+4. **Delete dead/duplicate files:** `public-job-board (1).tsx`, `auth-shell (1).tsx`, `cv-fit-panel.tsx` (superseded), `job-fit-score-badge.tsx`, `student-mobile-nav.tsx`.
+5. **Unify the student nav source of truth:** reconcile `PUBLIC_PRIMARY_NAV` (rendered) vs `STUDENT_PRIMARY_NAV`/`WORKSPACE_NAV.student` (config); remove unused `careerExplore`/`employers` keys and the vestigial sidebar model; de-scaffold the `(student)/student/[...slug]` catch-all "coming soon".
+6. **Trim the job-detail right rail** (aligns with WS-4): collapse the two stacked AI panels (intelligence + interview prep) into progressive disclosure (tab/accordion), consistent with the on-demand drawers.
+7. **Standardize the page header** (route CV Studio / notifications / job detail through `PageHeader` or document why they differ) and settle an 8–12px radius scale.
+8. **i18n the onboarding shell** (hardcoded Vietnamese `NEXT_STEPS`, "Đăng xuất", step labels, right-rail marketing copy) — breaks the `en` locale.
+9. **Monochrome:** convert homepage gradient icon chips → `icon-chip-*`; de-dup the dashboard hero placeholder cards; remove decorative gradients on operating surfaces.
+10. **Nits:** fix non-standard `size-4.5` icons; remove the alerts double-padding; ensure fit color is always paired with a numeric label (color-not-only-signal).
+
+**Acceptance:** one card treatment on operating surfaces; no duplicate fit fetches; no mislabeled "AI" banners; dead files removed; single nav source; consistent headers/radius; onboarding i18n; no decorative gradients on operating surfaces; monochrome + a11y pass. Do the job-detail items together with WS-4.
+
+### WS-15 — Additional student intelligence & automation (owner: "còn thiếu nhiều cái thực tế")
+
+**Goal:** the realistic, high-value student features that close the loop from discovery → applied → outcome. All deterministic-first with AI narrative; all AI writes confirmation-gated + metered; never fabricate.
+
+- **CV strength + readiness coaching:** an overall CV strength score + completeness coaching, and per-job apply-readiness (extend `student_intelligence_service` apply_readiness). Deterministic signals + cheap AI narrative on demand.
+- **AI job-alert digests (email):** scheduled digests of newly-matched jobs via the notifications outbox + matching (beyond static keyword alerts); respects preferences; energy-free (deterministic matching) except optional AI summary.
+- **Offer comparison + negotiation helper:** when a student has multiple offers (`recruitment` offers), a side-by-side comparison + AI negotiation guidance grounded in the internal salary benchmark; confirmation-gated; never guarantees an outcome or exposes internals.
+- **Learning resources from skill gaps:** map a job's learning gaps → internal/curated learning resources (closed loop from WS-3 gaps); no external scraping.
+- **Smart apply ("improve then apply"):** one guided flow from job detail — analyze → tailor CV (confirmation-gated diff, WS-3) → draft cover letter (metered) → apply (confirmation-gated) — composed by the assistant (WS-10/WS-11).
+- **Application next-best-action:** per application, a deterministic "what to do next" (follow up, prep interview, withdraw, improve CV) — grounded in real status, no fabrication.
+- **AI feedback loop:** thumbs up/down on AI suggestions feeding the online eval sampling (`.claude/rules/ai.md` §10.2) for continuous improvement.
+- **Duplicate-application guard:** surface already-applied state and prevent accidental re-apply.
+
+**Acceptance:** each feature is deterministic-grounded, metered where it calls a model, confirmation-gated for writes, honestly labeled, and privacy-safe; no fabricated scores/claims; feedback samples recorded.
+
 ## 6. Phasing
 
-- **Phase 1 — Metering backbone + resilience:** WS-1, WS-2, WS-9, relevant WS-7 migrations, WS-8 harness. Root cause of the owner's complaints; unblocks everything.
-- **Phase 2 — Job detail + competition + matching:** WS-3, WS-4, WS-5, remaining WS-7 (`fit_score` snapshot, `job_competition_daily`).
-- **Phase 3 — Chatbot + automation + remaining gaps:** WS-10, WS-11, WS-6 (interview memory, new write tools, notifications, wallet UX, known fixes).
+- **Phase 1 — Foundation:** WS-1 (energy metering backbone), WS-2 (route all LLM ops), WS-9 (resilience/degradation), core WS-7 migrations, WS-8 harness. Root cause of the owner's complaints; unblocks everything. Shares the metering substrate with the partner overhaul.
+- **Phase 2 — Job intelligence:** WS-3 (matching suggestions + closed loop), WS-4 (job-detail redesign + drawers), WS-5 (quality-adjusted competition), remaining WS-7 (`fit_score` snapshot, `job_competition_daily`), the job-detail slice of WS-14 (fit-query consolidation, glass→flat, rail trim), plus the WS-15 job-detail slice (CV strength/readiness, smart-apply, application next-best-action).
+- **Phase 3 — Discovery & assistant:** WS-12 (guest personalization loop), WS-10 (student chatbot), WS-11 (multi-agent automation), plus WS-15 smart-apply orchestration + AI feedback loop.
+- **Phase 4 — Polish, gaps & monetization:** WS-14 remainder (frontend consolidation/polish, nav unification, dead-file cleanup, onboarding i18n), WS-6 (interview memory, new write tools, notifications depth, wallet UX, known fixes), WS-15 remainder (alert digests, offer comparison/negotiation, learning resources, duplicate-application guard), WS-13 (advertising campaign-grade realism).
 
 Each phase ends at a checkpoint: green backend quality gates, tests/evals, and a `docs/IMPLEMENTATION_STATUS.md` update distinguishing `implemented` / `API wired` / `browser verified` / `E2E verified`.
 
@@ -195,3 +267,6 @@ Each phase ends at a checkpoint: green backend quality gates, tests/evals, and a
 - Exact weekly energy allowance numbers per tier (Free/Premium) and top-up pack sizes — needs a calibration pass from real-cost telemetry (shadow period).
 - Whether to ship the normalized skills table now (WS-6 stretch) or defer to a separate spec.
 - Whether `positions_filled` funnel discounting ships in Phase 2 or defers.
+- Advertising billing model (WS-13): do package entitlements grant/consume ad slots, or keep manual bank-transfer pay and only reconcile it into partner billing views?
+- Guest signal weighting (WS-12): `{tag:{count,last_seen}}` in the existing `coarse_tags` JSON vs a separate per-session aggregate read-model — decide by ranker hot-path cost.
+- `career-explore` content scope (WS-12): how much role-guide / skill-track content ships in Phase 3 vs a later content pass.
