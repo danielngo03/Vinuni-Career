@@ -34,7 +34,7 @@ from collections.abc import Awaitable, Callable
 
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from app.ai.agents import coordinator
+from app.ai.agents import coordinator, operations_analysis
 from app.ai.agents.models import SubtaskResult, SubtaskSpec, SubtaskStatus
 from app.modules.automation.workers.celery_app import celery_app
 from app.shared.permissions import Principal
@@ -63,6 +63,8 @@ async def _execute_screening_brief(
 # here — never by branching an existing executor on ``subtask_type``.
 EXECUTORS: dict[str, Executor] = {
     coordinator.SCREENING_BRIEF_SUBTASK_TYPE: _execute_screening_brief,
+    # Second consumer: university operations deep-analysis sub-passes (WS3.4).
+    **operations_analysis.OPS_EXECUTORS,
 }
 
 

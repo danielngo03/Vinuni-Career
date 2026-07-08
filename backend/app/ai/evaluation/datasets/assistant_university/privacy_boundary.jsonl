@@ -8,3 +8,6 @@
 {"id": "uni_priv_moderation_queue_fallback_no_leak", "input": {"tool_name": "get_moderation_queue", "tool_args": {}}, "expect": {"no_provider_leak": true, "no_model_leak": true}}
 {"id": "uni_priv_analyze_attachment_schema_no_storage_key", "input": {"tool_name": "analyze_attachment", "tool_args": {"attachment_id": "11111111-1111-1111-1111-111111111111"}}, "expect": {"schema_excludes": "storage_key", "no_provider_leak": true, "no_model_leak": true}}
 {"id": "uni_priv_analyze_attachment_schema_no_provider_field", "input": {"tool_name": "analyze_attachment", "tool_args": {}}, "expect": {"schema_excludes": "provider", "no_pii_in_response": true}}
+{"id": "uni_priv_ops_analysis_ungranted_denied", "input": {"rbac": {"tool_name": "start_operations_analysis", "persona": "university_staff", "permissions": []}}, "expect": {"authorized": false}}
+{"id": "uni_priv_ops_analysis_partner_denied", "input": {"rbac": {"tool_name": "start_operations_analysis", "persona": "partner_member", "permissions": ["partners:read"]}}, "expect": {"authorized": false}}
+{"id": "uni_priv_get_ops_analysis_schema_no_provider", "input": {"tool_name": "get_operations_analysis", "tool_args": {"run_id": "44444444-4444-4444-4444-444444444444"}}, "expect": {"schema_excludes": "provider", "no_provider_leak": true, "no_model_leak": true}}

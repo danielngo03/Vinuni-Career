@@ -86,6 +86,51 @@ async def list_outcomes(
     return list((await session.execute(stmt)).scalars().all())
 
 
+async def employer_outcomes_aggregate(
+    session: AsyncSession,
+    *,
+    employer_org_id: uuid.UUID,
+    locale: str = "en",
+    recent_limit: int = 5,
+) -> dict:
+    """Privacy-safe outcome aggregate for ONE employer org (no RBAC — internal).
+
+    Returns totals, a trust-level mix (friendly labels), and recent POSITION
+    TITLES only (no student PII, no salary — the table stores neither). RBAC is
+    the caller's responsibility, exactly like :func:`count_outcomes` /
+    :func:`list_outcomes`; the multi-agent operations analysis (WS3.4) gates the
+    whole run once at start, then reads these aggregates per sub-pass.
+    """
+
+    total = await count_outcomes(session, employer_org_id=employer_org_id)
+    trust_rows = (
+        await session.execute(
+            select(CareerOutcomeRecord.trust_level, func.count().label("n"))
+            .where(CareerOutcomeRecord.employer_org_id == employer_org_id)
+            .group_by(CareerOutcomeRecord.trust_level)
+        )
+    ).all()
+    by_trust_level = [
+        {
+            "trust_level": int(r.trust_level),
+            "label": labels.trust_label(int(r.trust_level), locale=locale),
+            "count": int(r.n),
+        }
+        for r in sorted(trust_rows, key=lambda r: int(r.trust_level))
+    ]
+    recent = await list_outcomes(
+        session, employer_org_id=employer_org_id, limit=max(recent_limit, 0)
+    )
+    recent_positions = [r.position_title for r in recent if r.position_title][
+        : max(recent_limit, 0)
+    ]
+    return {
+        "total_outcomes": int(total),
+        "by_trust_level": by_trust_level,
+        "recent_positions": recent_positions,
+    }
+
+
 # --------------------------------------------------------------------------- #
 # University read API (RBAC'd, label-mapped, PII-free)                        #
 # --------------------------------------------------------------------------- #

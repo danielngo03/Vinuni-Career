@@ -3,7 +3,8 @@ end (bulk screening-brief generation for a partner reviewing many applicants).
 
 Endpoints:
   POST /ai/workforce/screening-briefs        Start a bulk screening-brief run
-  GET  /ai/workforce/runs/{run_id}            Poll run status + results
+  POST /ai/workforce/operations-analysis     Start a university ops deep-analysis
+  GET  /ai/workforce/runs/{run_id}            Poll run status + results (both)
 
 Deviation from ``docs/AI_PRODUCT_SPEC.md`` §4.2's illustrative
 ``GET /api/v1/ai/jobs/{job_id}`` path: this codebase already uses `/jobs` for
@@ -39,6 +40,11 @@ class StartBulkScreeningBriefBody(BaseModel):
     job_id: uuid.UUID
 
 
+class StartOperationsAnalysisBody(BaseModel):
+    target_org_id: uuid.UUID
+    target_type: str = "partner_hiring_quality"
+
+
 @router.post(
     "/screening-briefs",
     summary="Start a bulk AI screening-brief run for every (capped) applicant on a job",
@@ -56,6 +62,32 @@ async def start_bulk_screening_briefs(
     """
     data = await workforce.start_bulk_screening_brief_run(
         session, principal=auth.principal, job_id=body.job_id
+    )
+    return success(data)
+
+
+@router.post(
+    "/operations-analysis",
+    summary="Start a university operations deep-analysis run on a partner target",
+)
+async def start_operations_analysis(
+    body: StartOperationsAnalysisBody,
+    auth: CurrentAuth = Depends(get_current_auth),
+    session: AsyncSession = Depends(get_db_session),
+) -> dict:
+    """Fan out a bounded, READ-ONLY multi-agent analysis of a partner's hiring
+    quality, then synthesize a privacy-safe report.
+
+    Returns ``{ data: { run_id, status, total_subtasks, target_type } }``
+    immediately; poll ``GET /ai/workforce/runs/{run_id}`` for the report. RBAC:
+    a university-org staffer holding ``partners:read`` (or superadmin). Advisory
+    only — no consequential domain write.
+    """
+    data = await workforce.start_operations_analysis_run(
+        session,
+        principal=auth.principal,
+        target_org_id=body.target_org_id,
+        target_type=body.target_type,
     )
     return success(data)
 

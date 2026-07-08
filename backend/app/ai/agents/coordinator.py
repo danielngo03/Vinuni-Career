@@ -111,6 +111,22 @@ def aggregate_screening_results(subtask_results_json: dict) -> dict:
     }
 
 
+def _aggregator_for(task_type: str):
+    """Resolve the pure aggregator that composes a run's terminal summary.
+
+    Extension point for a new workforce consumer: register its ``aggregate_*``
+    here keyed by ``task_type`` (never branch an existing aggregator). The
+    operations-analysis aggregator is imported lazily to avoid an import cycle
+    (``operations_analysis`` imports this module for the run lifecycle helpers).
+    """
+
+    from app.ai.agents import operations_analysis
+
+    if task_type == operations_analysis.OPERATIONS_ANALYSIS_TASK_TYPE:
+        return operations_analysis.synthesize_operations_report
+    return aggregate_screening_results
+
+
 def _next_run_status(subtask_keys: list[str], results: dict) -> RunStatus:
     terminal = [
         results[k]
@@ -290,7 +306,7 @@ async def record_subtask_result(
         },
     )
     if new_status in {RunStatus.COMPLETE, RunStatus.PARTIAL, RunStatus.FAILED}:
-        run.summary_json = aggregate_screening_results(results)
+        run.summary_json = _aggregator_for(run.task_type)(results)
         run.completed_at = datetime.now(tz=UTC)
         logger.info(
             "workforce_run.end", extra={"run_id": str(run_id), "status": new_status.value}

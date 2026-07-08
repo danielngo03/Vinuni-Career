@@ -32,6 +32,11 @@ FEATURE_MARKET_INTELLIGENCE = "market_intelligence"
 FEATURE_CANDIDATE_ANALYSIS = "candidate_analysis"
 FEATURE_ANALYTICS_ASSISTANT = "analytics_assistant"
 
+# University multi-agent operations deep-analysis (WS3.4). Deterministic-first:
+# every sub-pass reads privacy-safe aggregates for free; ONLY a low-confidence
+# pass escalates to a cheap text narrative, which debits this (per paid pass).
+FEATURE_OPERATIONS_ANALYSIS = "operations_analysis"
+
 # Chat-attachment analysis (upload a file/image → tables/charts/summary). Two
 # tiers: the deterministic native-text/OCR path is cheap; the vision-LLM path
 # (images / scanned PDFs, owner-approved downscaled images) costs materially more,
@@ -72,6 +77,9 @@ FEATURE_UNIT_COST: dict[str, int] = {
     # Chat-attachment analysis: deterministic text/OCR tier vs the pricier vision tier.
     FEATURE_ATTACHMENT_ANALYSIS: 3,
     FEATURE_ATTACHMENT_VISION_ANALYSIS: 8,
+    # University multi-agent analysis: a single low-confidence narrative pass is a
+    # cheap grounded text call (only charged on a successful, parsed narrative).
+    FEATURE_OPERATIONS_ANALYSIS: 3,
 }
 
 

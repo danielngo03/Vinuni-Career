@@ -413,6 +413,93 @@ async def search_university_knowledge(
     return result
 
 
+async def start_operations_analysis(
+    session: AsyncSession, principal: Principal, args: dict
+) -> dict:
+    """Start a bounded, READ-ONLY multi-agent analysis of a partner's hiring quality.
+
+    Delegates to the workforce facade, which RBAC-gates the run in the service
+    layer (university-org staffer with ``partners:read``, or superadmin) and
+    validates the target is a real partner org. Returns a run id the staffer polls
+    via ``get_operations_analysis``. Advisory only — no consequential domain write.
+    """
+    from app.ai.agents import workforce
+
+    if not _staff_ready(principal):
+        return {"ok": False, "error": "university_auth_required"}
+
+    target_org_id = _parse_uuid(args.get("target_org_id"))
+    if target_org_id is None:
+        return {"ok": False, "error": "target_org_id_required"}
+    target_type = (args.get("target_type") or "partner_hiring_quality").strip()
+
+    try:
+        data = await workforce.start_operations_analysis_run(
+            session,
+            principal=principal,
+            target_org_id=target_org_id,
+            target_type=target_type,
+        )
+    except ResourceNotFoundError:
+        return {"ok": False, "error": "not_found"}
+    except (PermissionDeniedError, AuthRequiredError):
+        return {"ok": False, "error": "permission_denied"}
+    except AppError:
+        return {"ok": False, "error": "unsupported_target"}
+    except Exception:
+        return {"ok": False, "error": "tool_failed"}
+
+    return {
+        "ok": True,
+        "run_id": data["run_id"],
+        "status": data["status"],
+        "total_subtasks": data["total_subtasks"],
+        "note": (
+            "Analysis started in the background. Ask me to check it (with this run "
+            "id) in a moment for the report. Advisory only — you decide any action."
+        ),
+    }
+
+
+async def get_operations_analysis(
+    session: AsyncSession, principal: Principal, args: dict
+) -> dict:
+    """Poll a previously-started operations analysis and return the report if ready.
+
+    Owner/org-scoped read (a run started by another org/user 404s). The returned
+    ``summary`` is the synthesized, privacy-safe report (aggregates/bands only —
+    no other-users' PII, no provider/model/token internals).
+    """
+    from app.ai.agents import workforce
+
+    if not _staff_ready(principal):
+        return {"ok": False, "error": "university_auth_required"}
+
+    run_id = _parse_uuid(args.get("run_id"))
+    if run_id is None:
+        return {"ok": False, "error": "run_id_required"}
+
+    try:
+        data = await workforce.get_operations_analysis_status(
+            session, principal=principal, run_id=run_id
+        )
+    except ResourceNotFoundError:
+        return {"ok": False, "error": "not_found"}
+    except (PermissionDeniedError, AuthRequiredError):
+        return {"ok": False, "error": "permission_denied"}
+    except Exception:
+        return {"ok": False, "error": "tool_failed"}
+
+    return {
+        "ok": True,
+        "status": data.get("status"),
+        "total_passes": data.get("total_subtasks"),
+        "completed_passes": data.get("completed_subtasks"),
+        "report": data.get("summary"),
+        "url": "/university/partners",
+    }
+
+
 def _leakage_safe_chunks(chunks: list[dict]) -> list[dict]:
     """Strip retrieval internals from KB chunks before they leave the tool.
 

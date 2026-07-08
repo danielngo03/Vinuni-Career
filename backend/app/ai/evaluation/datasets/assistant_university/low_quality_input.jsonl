@@ -6,3 +6,5 @@
 {"id": "uni_lowq_cohort_ignores_junk_arg", "input": {"tool_name": "get_cohort_summary", "tool_args": {"nonsense": "???"}}, "expect": {"validation_ok": true}}
 {"id": "uni_lowq_analyze_attachment_missing_id", "input": {"tool_name": "analyze_attachment", "tool_args": {}}, "expect": {"validation_ok": false, "validation_error": "missing_attachment_id"}}
 {"id": "uni_lowq_analyze_attachment_wrong_type_id", "input": {"tool_name": "analyze_attachment", "tool_args": {"attachment_id": 12345}}, "expect": {"validation_ok": false, "validation_error": "invalid_attachment_id"}}
+{"id": "uni_lowq_start_ops_analysis_missing_target", "input": {"tool_name": "start_operations_analysis", "tool_args": {}}, "expect": {"validation_ok": false, "validation_error": "missing_target_org_id"}}
+{"id": "uni_lowq_get_ops_analysis_missing_run_id", "input": {"tool_name": "get_operations_analysis", "tool_args": {}}, "expect": {"validation_ok": false, "validation_error": "missing_run_id"}}

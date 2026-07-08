@@ -1093,6 +1093,94 @@ TOOL_SPECS: dict[str, ToolSpec] = {
         ),
         audit_event_type="TOOL_GET_PLACEMENT_OUTCOMES_SUMMARY",
     ),
+    "start_operations_analysis": ToolSpec(
+        name="start_operations_analysis",
+        description=(
+            "Kick off a deeper, multi-step operations analysis of ONE partner "
+            "employer's hiring quality. A set of specialist read-passes look at the "
+            "partner's job-posting hygiene, application pipeline, recorded graduate "
+            "outcomes, and moderation friction, then compose one privacy-safe "
+            "report with findings and advisory recommendations. Use this when staff "
+            "ask for a thorough review or 'deep dive' on a specific partner (e.g. "
+            "'analyse this employer's hiring quality', 'phân tích chất lượng tuyển "
+            "dụng của đối tác này'). It runs in the background — this call returns a "
+            "run id; then call get_operations_analysis with that id to read the "
+            "report. Requires the partner organisation's id. Read-only and "
+            "advisory. Only available to university staff with partner access."
+        ),
+        parameters={
+            "type": "object",
+            "properties": {
+                "target_org_id": {
+                    "type": "string",
+                    "description": "Partner organisation UUID to analyse",
+                },
+                "target_type": {
+                    "type": "string",
+                    "description": (
+                        "Analysis target (default 'partner_hiring_quality')"
+                    ),
+                },
+            },
+            "required": ["target_org_id"],
+        },
+        output_schema={
+            "type": "object",
+            "properties": {
+                "ok": {"type": "boolean"},
+                "run_id": {"type": "string"},
+                "status": {"type": "string"},
+                "total_subtasks": {"type": "integer"},
+            },
+        },
+        permission_class="read_only",
+        persona=[UNIVERSITY_STAFF],
+        required_permissions=["authenticated", "role:university_staff", "partners:read"],
+        fallback=(
+            "I couldn't start the partner analysis right now. Check the partner's "
+            "profile under /university/partners."
+        ),
+        audit_event_type="TOOL_START_OPERATIONS_ANALYSIS",
+        timeout_seconds=20,
+    ),
+    "get_operations_analysis": ToolSpec(
+        name="get_operations_analysis",
+        description=(
+            "Read the status and (once finished) the report of a partner "
+            "operations analysis you previously started with "
+            "start_operations_analysis. Returns overall status, how many of the "
+            "analysis passes are done, and — when complete — a structured report "
+            "with a summary, findings by area, advisory recommendations, and "
+            "caveats. Requires the run_id returned by start_operations_analysis. "
+            "Only available to university staff."
+        ),
+        parameters={
+            "type": "object",
+            "properties": {
+                "run_id": {
+                    "type": "string",
+                    "description": "Run UUID returned by start_operations_analysis",
+                },
+            },
+            "required": ["run_id"],
+        },
+        output_schema={
+            "type": "object",
+            "properties": {
+                "ok": {"type": "boolean"},
+                "status": {"type": "string"},
+                "summary": {"type": "object"},
+            },
+        },
+        permission_class="read_only",
+        persona=[UNIVERSITY_STAFF],
+        required_permissions=["authenticated", "role:university_staff", "partners:read"],
+        fallback=(
+            "I couldn't load that analysis right now. You can start a new one or "
+            "check /university/partners."
+        ),
+        audit_event_type="TOOL_GET_OPERATIONS_ANALYSIS",
+    ),
     "search_university_knowledge": ToolSpec(
         name="search_university_knowledge",
         description=(
