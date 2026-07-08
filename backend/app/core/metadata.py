@@ -14,6 +14,7 @@ from app.ai.observability import eval_samples as _ai_eval_samples  # noqa: F401
 from app.ai.observability import models as _ai_usage_models  # noqa: F401
 from app.modules.advertising.domain import models as _advertising_models  # noqa: F401
 from app.modules.ai_assistant.domain import models as _ai_assistant_models  # noqa: F401
+from app.modules.ai_governance.domain import models as _ai_governance_models  # noqa: F401
 from app.modules.ai_settings.domain import models as _ai_settings_models  # noqa: F401
 from app.modules.ai_settings.domain import (  # noqa: F401
     routing_models as _ai_routing_models,
@@ -79,6 +80,7 @@ def import_all_models() -> None:
         _advertising_models,
         _scheduler_run_models,
         _ai_assistant_models,
+        _ai_governance_models,
         _analytics_models,
         _partner_analytics_models,
         _ai_settings_models,

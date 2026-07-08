@@ -104,3 +104,15 @@ SESSION_SOFT_FRACTION = 0.4
 REASON_WEEKLY_EXCEEDED = "AI_WEEKLY_ENERGY_EXCEEDED"
 REASON_ORG_WEEKLY_EXCEEDED = "AI_ORG_WEEKLY_ENERGY_EXCEEDED"
 REASON_MEMBER_ALLOCATION_EXCEEDED = "AI_MEMBER_ALLOCATION_EXCEEDED"
+# University member exhausted their distributed weekly allocation (or the org
+# pool). Resolution is an ADMIN capacity request, never a billing upsell.
+REASON_UNIVERSITY_ALLOCATION_EXCEEDED = "AI_UNIVERSITY_ALLOCATION_EXCEEDED"
+
+# --------------------------------------------------------------------------- #
+# Persona-aware exhaustion ACTION the UI should offer (never a billing hint    #
+# for university). Carried on the public snapshot so the client renders the    #
+# correct CTA without knowing persona rules.                                   #
+# --------------------------------------------------------------------------- #
+ACTION_REQUEST_CAPACITY = "request_capacity"  # university → ask admin for more
+ACTION_UPGRADE = "upgrade"  # student/partner → plan/credit upgrade
+ACTION_UNLIMITED = "unlimited"  # superadmin → never limited

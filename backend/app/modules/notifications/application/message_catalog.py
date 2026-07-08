@@ -630,6 +630,33 @@ CATALOG: dict[str, CatalogEntry] = {
             "en": "A candidate accepted your invitation to apply for {job_title}.",
         },
     ),
+    "ai_governance.capacity_approved": CatalogEntry(
+        category="application_lifecycle",
+        title={
+            "vi": "Yêu cầu cấp thêm năng lượng AI đã được duyệt",
+            "en": "Your AI capacity request was approved",
+        },
+        body={
+            # University distribution, NOT billing: no unit numbers, no upsell.
+            "vi": "Quản trị viên đã duyệt yêu cầu cấp thêm năng lượng AI của bạn. "
+            "Hạn mức AI hằng tuần của bạn đã được tăng.",
+            "en": "An administrator approved your AI capacity request. Your weekly "
+            "AI allocation has been increased.",
+        },
+    ),
+    "ai_governance.capacity_denied": CatalogEntry(
+        category="application_lifecycle",
+        title={
+            "vi": "Yêu cầu cấp thêm năng lượng AI chưa được duyệt",
+            "en": "Your AI capacity request was not approved",
+        },
+        body={
+            "vi": "Quản trị viên chưa duyệt yêu cầu cấp thêm năng lượng AI của bạn. "
+            "Bạn có thể liên hệ quản trị viên để biết thêm chi tiết.",
+            "en": "An administrator did not approve your AI capacity request. You "
+            "can contact your administrator for more details.",
+        },
+    ),
 }
 
 

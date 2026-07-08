@@ -31,6 +31,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.core.config import get_settings
 from app.modules.organization.domain.models import (
+    Department,
     Membership,
     MembershipDepartment,
     Organization,
@@ -320,3 +321,81 @@ async def department_ids_for_user_in_org(
     if membership_id is None:
         return set()
     return set(await department_ids_for_membership(session, membership_id=membership_id))
+
+
+async def department_belongs_to_org(
+    session: AsyncSession, *, department_id: uuid.UUID, org_id: uuid.UUID
+) -> bool:
+    """``True`` iff ``department_id`` is a department of ``org_id``.
+
+    The validation seam the AI-governance allocation API uses to confirm a
+    scope target belongs to the org before writing an energy ceiling.
+    """
+
+    return (
+        await session.execute(
+            select(Department.id).where(
+                Department.id == department_id, Department.org_id == org_id
+            )
+        )
+    ).first() is not None
+
+
+async def list_departments_for_org(
+    session: AsyncSession, *, org_id: uuid.UUID
+) -> list[dict]:
+    """Departments in an org as ``[{"id", "name"}]`` (name-ordered).
+
+    Read-model for the superadmin energy-distribution surface — non-sensitive
+    id + name only, never RBAC/settings internals.
+    """
+
+    rows = (
+        await session.execute(
+            select(Department.id, Department.name)
+            .where(Department.org_id == org_id)
+            .order_by(Department.name)
+        )
+    ).all()
+    return [{"id": row.id, "name": row.name} for row in rows]
+
+
+async def list_members_for_org(
+    session: AsyncSession, *, org_id: uuid.UUID
+) -> list[dict]:
+    """Active members of an org as ``[{"user_id", "membership_id", "department_ids"}]``.
+
+    Read-model for the superadmin energy-distribution surface — identity is left
+    to the caller (resolve display via the users facade); this returns only the
+    membership/department shape needed to place per-user allocations.
+    """
+
+    rows = (
+        await session.execute(
+            select(Membership.id, Membership.user_id)
+            .where(Membership.org_id == org_id, Membership.status == "active")
+            .order_by(Membership.created_at)
+        )
+    ).all()
+    if not rows:
+        return []
+    membership_ids = [row.id for row in rows]
+    dept_rows = (
+        await session.execute(
+            select(
+                MembershipDepartment.membership_id,
+                MembershipDepartment.department_id,
+            ).where(MembershipDepartment.membership_id.in_(membership_ids))
+        )
+    ).all()
+    depts_by_membership: dict[uuid.UUID, list[uuid.UUID]] = {}
+    for membership_id, department_id in dept_rows:
+        depts_by_membership.setdefault(membership_id, []).append(department_id)
+    return [
+        {
+            "user_id": row.user_id,
+            "membership_id": row.id,
+            "department_ids": depts_by_membership.get(row.id, []),
+        }
+        for row in rows
+    ]

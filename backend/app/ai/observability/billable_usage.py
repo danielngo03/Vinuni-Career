@@ -106,6 +106,10 @@ class UsageContext:
     billing_scope: str = SCOPE_PLATFORM
     actor_user_id: uuid.UUID | None = None
     org_id: uuid.UUID | None = None
+    # Primary department of the acting member (university/partner). Nullable —
+    # students/system/anonymous calls and members with no department set carry
+    # None. Enables per-department energy attribution + department ceilings.
+    department_id: uuid.UUID | None = None
     resource_type: str | None = None
     resource_id: uuid.UUID | None = None
     session_id: uuid.UUID | None = None
@@ -148,6 +152,7 @@ async def record_billable_usage(
         actor_user_id=ctx.actor_user_id,
         actor_persona=ctx.actor_persona,
         org_id=ctx.org_id,
+        department_id=ctx.department_id,
         billing_scope=ctx.billing_scope,
         feature_key=ctx.feature_key,
         task_type=ctx.task_type,

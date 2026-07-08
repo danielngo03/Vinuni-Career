@@ -24,6 +24,7 @@ from datetime import datetime
 from sqlalchemy import (
     Boolean,
     DateTime,
+    Index,
     Integer,
     Numeric,
     String,
@@ -246,6 +247,11 @@ class AiBillableUsage(Base):
     __tablename__ = "ai_billable_usage"
     __table_args__ = (
         UniqueConstraint("idempotency_key", name="uq_ai_billable_usage_idempotency"),
+        Index(
+            "ix_ai_billable_usage_department_id_created_at",
+            "department_id",
+            "created_at",
+        ),
     )
 
     id: Mapped[uuid.UUID] = mapped_column(
@@ -265,6 +271,12 @@ class AiBillableUsage(Base):
     actor_persona: Mapped[str] = mapped_column(String(24), nullable=False)
     org_id: Mapped[uuid.UUID | None] = mapped_column(
         Uuid(as_uuid=True), nullable=True, index=True
+    )
+    # Primary department of the acting member (nullable). Enables per-department
+    # energy attribution and department-ceiling enforcement (university control
+    # plane). Indexed with created_at for the weekly department-consumption sum.
+    department_id: Mapped[uuid.UUID | None] = mapped_column(
+        Uuid(as_uuid=True), nullable=True
     )
     # "user" | "org" | "department" | "platform"
     billing_scope: Mapped[str] = mapped_column(String(16), nullable=False)
