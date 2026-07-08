@@ -1,16 +1,11 @@
-import { SuperadminGuard } from "@/components/layout/superadmin-guard";
-import { LogsExplorerScreen } from "@/components/admin/logs-explorer-screen";
+import { redirect } from "@/i18n/navigation";
 
-/**
- * Unified Logs & Activity page (`/university/logs`).
- * Superadmin-only. Composes system audit log and AI event log into a single
- * explorer with source selector (Recent / System / AI) and per-source filters.
- * `SuperadminGuard` redirects non-superadmin staff to `/university/dashboard`.
- */
-export default function LogsPage() {
-  return (
-    <SuperadminGuard>
-      <LogsExplorerScreen />
-    </SuperadminGuard>
-  );
+/** Legacy path → Platform Admin console `/admin/logs`. */
+export default async function LegacyLogsRedirect({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  redirect({ href: "/admin/logs", locale });
 }

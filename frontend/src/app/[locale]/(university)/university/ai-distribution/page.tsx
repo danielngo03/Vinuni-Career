@@ -1,16 +1,11 @@
-import { SuperadminGuard } from "@/components/layout/superadmin-guard";
-import { AiAllocationsScreen } from "@/components/admin/ai-allocations-screen";
+import { redirect } from "@/i18n/navigation";
 
-/**
- * AI Energy Distribution page (`/university/ai-distribution`).
- * Superadmin-only. The platform superadmin distributes weekly AI energy down the
- * organization → department → user tree, and reviews staff capacity requests.
- * `SuperadminGuard` redirects non-superadmin staff to `/university/dashboard`.
- */
-export default function AiDistributionPage() {
-  return (
-    <SuperadminGuard>
-      <AiAllocationsScreen />
-    </SuperadminGuard>
-  );
+/** Legacy path → Platform Admin console `/admin/ai-distribution`. */
+export default async function LegacyAiDistributionRedirect({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  redirect({ href: "/admin/ai-distribution", locale });
 }

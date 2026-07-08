@@ -1,15 +1,11 @@
-import { SuperadminGuard } from "@/components/layout/superadmin-guard";
-import { AiOperationsOverviewScreen } from "@/components/admin/ai-operations-overview-screen";
+import { redirect } from "@/i18n/navigation";
 
-/**
- * AI Operations page (`/university/ai-operations`).
- * Superadmin-only. Renders the AI spend / reliability / volume / traces tabs.
- * `SuperadminGuard` redirects non-superadmin staff to `/university/dashboard`.
- */
-export default function AiOperationsPage() {
-  return (
-    <SuperadminGuard>
-      <AiOperationsOverviewScreen />
-    </SuperadminGuard>
-  );
+/** Legacy path → Platform Admin console `/admin/ai-operations`. */
+export default async function LegacyAiOperationsRedirect({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  redirect({ href: "/admin/ai-operations", locale });
 }

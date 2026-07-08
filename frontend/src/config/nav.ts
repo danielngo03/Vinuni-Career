@@ -29,7 +29,6 @@ import {
   GraduationCap,
   FileText,
   Bot,
-  Layers,
   LineChart,
   Settings,
   HeartHandshake,
@@ -39,6 +38,7 @@ import {
   Bell,
   Activity,
   ScrollText,
+  ClipboardList,
   ToggleRight,
   Siren,
   Zap,
@@ -163,6 +163,11 @@ export const WORKSPACE_NAV_GROUPS: Record<Persona, NavGroup[]> = {
       ],
     },
   ],
+  // University Operations — a career-office operating model. Platform/system
+  // administration (AI ops, health, logs, flags, alerts, platform users) is NOT
+  // here anymore: it lives in the separate superadmin Platform Admin console
+  // (`ADMIN_NAV_GROUPS` → `/admin/*`). This shell is the day-to-day career
+  // services / governance surface for university staff.
   university: [
     {
       key: null,
@@ -178,34 +183,28 @@ export const WORKSPACE_NAV_GROUPS: Record<Persona, NavGroup[]> = {
       items: [
         { key: "moderation", href: "/moderation", icon: FileCheck },
         { key: "partners", href: "/partners", icon: Building2 },
-        { key: "users", href: "/users", icon: Users },
-        // Org RBAC control plane: departments, staff, roles, invitations.
-        // Superadmin-only this phase (matches /university/team's SuperadminGuard);
-        // distinct from `users` (platform users) — the P4 IA merges them later.
-        { key: "teamAccess", href: "/team", icon: UsersRound, requiresSuperadmin: true },
+        { key: "reviews", href: "/reviews", icon: Star },
+        { key: "abuseTriage", href: "/abuse", icon: ShieldAlert },
         { key: "workflowBuilder", href: "/workflow", icon: Workflow },
       ],
     },
     {
-      key: "engagement",
+      key: "students",
       items: [
         { key: "careerServices", href: "/career-services", icon: HeartHandshake },
-        { key: "messages", href: "/messages", icon: MessageSquareText },
-        { key: "events", href: "/events", icon: CalendarDays },
-        { key: "reviews", href: "/reviews", icon: Star },
-        { key: "advertising", href: "/advertising", icon: Megaphone },
+        { key: "careerOutcomes", href: "/career-outcomes", icon: GraduationCap },
+        { key: "cvTemplates", href: "/cv-templates", icon: FileText },
       ],
     },
     {
-      key: "platform",
+      key: "engagement",
       accordion: true,
-      icon: Layers,
+      icon: Megaphone,
       items: [
-        { key: "careerOutcomes", href: "/career-outcomes", icon: GraduationCap },
-        { key: "cvTemplates", href: "/cv-templates", icon: FileText },
+        { key: "events", href: "/events", icon: CalendarDays },
+        { key: "messages", href: "/messages", icon: MessageSquareText },
+        { key: "advertising", href: "/advertising", icon: Megaphone },
         { key: "notificationTemplates", href: "/notifications/templates", icon: Bell },
-        { key: "subscriptions", href: "/billing", icon: CreditCard },
-        { key: "aiSettings", href: "/ai-settings", icon: Bot },
       ],
     },
     {
@@ -215,27 +214,61 @@ export const WORKSPACE_NAV_GROUPS: Record<Persona, NavGroup[]> = {
       items: [
         { key: "support", href: "/support", icon: LifeBuoy },
         { key: "privacyAdmin", href: "/privacy", icon: Lock },
-        { key: "abuseTriage", href: "/abuse", icon: ShieldAlert },
       ],
     },
     {
-      key: "systemAdmin",
+      key: "administration",
       accordion: true,
       icon: Gauge,
       items: [
-        { key: "platformOverview", href: "/platform-overview", icon: LayoutGrid, requiresSuperadmin: true },
-        { key: "aiOperations", href: "/ai-operations", icon: Bot, requiresSuperadmin: true },
-        { key: "aiDistribution", href: "/ai-distribution", icon: Zap, requiresSuperadmin: true },
-        { key: "analytics", href: "/analytics", icon: BarChart3, requiresSuperadmin: true },
-        { key: "logs", href: "/logs", icon: ScrollText, requiresSuperadmin: true },
-        { key: "systemHealth", href: "/system-health", icon: Activity, requiresSuperadmin: true },
-        { key: "usersAccess", href: "/access", icon: Users, requiresSuperadmin: true },
-        { key: "featureFlags", href: "/feature-flags", icon: ToggleRight, requiresSuperadmin: true },
-        { key: "alertsAdmin", href: "/alerts", icon: Siren, requiresSuperadmin: true },
+        // Org RBAC control plane: departments, staff, roles, invitations.
+        // Superadmin-only this phase (matches /university/team's SuperadminGuard).
+        { key: "teamAccess", href: "/team", icon: UsersRound, requiresSuperadmin: true },
+        // Staff-facing AI energy governance: my usage + capacity requests.
+        { key: "aiGovernance", href: "/ai-governance", icon: Zap },
+        // Masked AI settings (aliases/status/budget) for staff; the real
+        // provider registry inside is superadmin-gated in the screen itself.
+        { key: "aiSettings", href: "/ai-settings", icon: Bot },
+        { key: "subscriptions", href: "/billing", icon: CreditCard },
       ],
     },
   ],
 };
+
+/**
+ * Platform Admin console navigation — a distinct superadmin-only workspace
+ * (`/admin/*`), split out of the University Operations shell (owner decision
+ * 2026-07-08). Every destination is superadmin-only both here (nav filter) and
+ * at the shell (`AdminShell` wraps in `SuperadminGuard`) and per page. Backend
+ * `/admin/*` API paths are unchanged; this only reorganizes the frontend IA.
+ */
+export const ADMIN_NAV_GROUPS: NavGroup[] = [
+  {
+    key: null,
+    items: [
+      { key: "platformOverview", href: "/platform-overview", icon: LayoutGrid, requiresSuperadmin: true },
+      { key: "analytics", href: "/analytics", icon: BarChart3, requiresSuperadmin: true },
+    ],
+  },
+  {
+    key: "aiOps",
+    items: [
+      { key: "aiOperations", href: "/ai-operations", icon: Bot, requiresSuperadmin: true },
+      { key: "aiDistribution", href: "/ai-distribution", icon: Zap, requiresSuperadmin: true },
+    ],
+  },
+  {
+    key: "system",
+    items: [
+      { key: "systemHealth", href: "/system-health", icon: Activity, requiresSuperadmin: true },
+      { key: "alertsAdmin", href: "/alerts", icon: Siren, requiresSuperadmin: true },
+      { key: "logs", href: "/logs", icon: ScrollText, requiresSuperadmin: true },
+      { key: "auditLog", href: "/audit-log", icon: ClipboardList, requiresSuperadmin: true },
+      { key: "featureFlags", href: "/feature-flags", icon: ToggleRight, requiresSuperadmin: true },
+      { key: "usersAccess", href: "/access", icon: Users, requiresSuperadmin: true },
+    ],
+  },
+];
 
 /** Flat per-persona nav — derived from the grouped structure for consumers
  * that only need the item list (route-title resolution, placeholder catch-alls). */
@@ -244,6 +277,27 @@ export const WORKSPACE_NAV: Record<Persona, NavItem[]> = {
   partner: WORKSPACE_NAV_GROUPS.partner.flatMap((g) => g.items),
   university: WORKSPACE_NAV_GROUPS.university.flatMap((g) => g.items),
 };
+
+/** Flat admin nav — derived from `ADMIN_NAV_GROUPS`. */
+export const ADMIN_NAV: NavItem[] = ADMIN_NAV_GROUPS.flatMap((g) => g.items);
+
+/**
+ * A workspace shell is one of the three persona shells or the superadmin
+ * Platform Admin console. The shared `WorkspaceShell`/`Sidebar`/`Topbar` accept
+ * a `Workspace` so the admin console can reuse the same chrome with its own nav
+ * and `/admin` base path.
+ */
+export type Workspace = Persona | "admin";
+
+/** Grouped nav for a workspace (persona shells or the admin console). */
+export function navGroupsForWorkspace(workspace: Workspace): NavGroup[] {
+  return workspace === "admin" ? ADMIN_NAV_GROUPS : WORKSPACE_NAV_GROUPS[workspace];
+}
+
+/** Flat nav item list for a workspace (breadcrumb / route-title resolution). */
+export function navItemsForWorkspace(workspace: Workspace): NavItem[] {
+  return workspace === "admin" ? ADMIN_NAV : WORKSPACE_NAV[workspace];
+}
 
 export const SETTINGS_NAV: NavItem = {
   key: "settings",

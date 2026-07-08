@@ -11,11 +11,13 @@ import { LoginModal } from "./login-modal";
 import { BrandMark } from "./brand-mark";
 import { FeedbackModal } from "./feedback-modal";
 import { HelpSupportModal } from "./help-support-modal";
+import { SuperadminGuard } from "./superadmin-guard";
 import { AiChatWindow } from "@/components/ai-assistant/ai-chat-window";
 import { Sheet } from "@/components/ui";
 import { usePathname, useRouter } from "@/i18n/navigation";
 import { readPersistedSidebarCollapsed, useUiStore } from "@/stores/ui-store";
-import { useAuthStore, type Persona } from "@/stores/auth-store";
+import { useAuthStore } from "@/stores/auth-store";
+import type { Workspace } from "@/config/nav";
 import { cn } from "@/lib/utils";
 
 /**
@@ -27,13 +29,17 @@ export function WorkspaceShell({
   persona,
   children,
 }: {
-  persona: Persona;
+  persona: Workspace;
   children: React.ReactNode;
 }) {
   const t = useTranslations("common");
   const tNav = useTranslations("nav");
   const status = useAuthStore((s) => s.status);
   const user = useAuthStore((s) => s.user);
+  // The Platform Admin console is not a persona: any superadmin (whose own
+  // persona is typically university) may enter it. Persona-matching is skipped
+  // and access is enforced by the wrapping `SuperadminGuard` + per-page guards.
+  const isAdmin = persona === "admin";
   const {
     mobileNavOpen,
     setMobileNavOpen,
@@ -54,6 +60,7 @@ export function WorkspaceShell({
 
   // Route guard: unauthenticated users → login; wrong persona → their workspace.
   // Hydration runs once at app load; while it resolves we show a loading state.
+  // The admin console skips persona-matching (SuperadminGuard enforces access).
   useEffect(() => {
     if (status === "guest") {
       router.replace(
@@ -61,10 +68,10 @@ export function WorkspaceShell({
       );
       return;
     }
-    if (status === "authenticated" && user && user.persona !== persona) {
+    if (!isAdmin && status === "authenticated" && user && user.persona !== persona) {
       router.replace(`/${user.persona}`);
     }
-  }, [status, user, persona, pathname, router]);
+  }, [status, user, persona, isAdmin, pathname, router]);
 
   // Sync the persisted collapse preference post-mount only, so SSR and the
   // first client render both start expanded and never hydration-mismatch.
@@ -73,8 +80,12 @@ export function WorkspaceShell({
   }, [setSidebarCollapsed]);
 
   // Wait for hydration; reject wrong-persona access (persona check is also
-  // enforced by backend RBAC, so this is a UX guard only).
-  if (status !== "authenticated" || (user && user.persona !== persona)) {
+  // enforced by backend RBAC, so this is a UX guard only). The admin console
+  // only waits for auth — superadmin gating is delegated to SuperadminGuard.
+  if (
+    status !== "authenticated" ||
+    (!isAdmin && user && user.persona !== persona)
+  ) {
     return (
       <div className="flex min-h-dvh flex-col items-center justify-center gap-4 bg-[var(--bg-subtle)] px-4">
         <BrandMark />
@@ -91,7 +102,7 @@ export function WorkspaceShell({
     );
   }
 
-  return (
+  const shell = (
     <div
       className="min-h-dvh bg-[#f7f6f2]"
       style={{
@@ -158,7 +169,11 @@ export function WorkspaceShell({
 
       {/* Main column — left offset only applies at the lg breakpoint where the fixed sidebar shows */}
       <div className="flex min-h-dvh flex-col transition-[padding-left] duration-200 motion-reduce:transition-none lg:pl-[var(--sidebar-offset)]">
-        <Topbar persona={persona} />
+        <Topbar
+          persona={persona}
+          onAiClick={() => setAiOpen((v) => !v)}
+          aiActive={aiOpen}
+        />
         <div
           className={cn(
             "flex flex-1 flex-col bg-[var(--surface-card)] shadow-[inset_1px_1px_0_rgba(0,0,0,0.04)] lg:rounded-tl-[28px]",
@@ -189,4 +204,8 @@ export function WorkspaceShell({
       <LoginModal />
     </div>
   );
+
+  // The admin console is superadmin-only at the shell level (belt-and-suspenders
+  // with the per-page guards). Non-superadmins are redirected out.
+  return isAdmin ? <SuperadminGuard>{shell}</SuperadminGuard> : shell;
 }

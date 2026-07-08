@@ -9,11 +9,12 @@ import { useAuthStore } from "@/stores/auth-store";
  * has `isSuperadmin === true`. Any other state (loading, guest, non-superadmin)
  * redirects to `/university/dashboard` or shows nothing until auth resolves.
  *
- * Used as a per-page wrapper for the four superadmin-only pages that live
- * inside the university route group (`/university/platform-overview`,
- * `/university/ai-operations`, `/university/audit-log`,
- * `/university/system-health`). The university layout wraps all staff and
- * cannot enforce superadmin access by itself.
+ * Used two ways: (1) at the Platform Admin console shell (the `(admin)`
+ * route group wraps `WorkspaceShell persona="admin"`, which itself wraps its
+ * tree in this guard) and per admin page under `/admin/*`; and (2) as a
+ * per-page wrapper for the superadmin-only surfaces that remain inside the
+ * university route group (`/university/ai-settings/routing`). The persona
+ * layouts wrap all staff and cannot enforce superadmin access by themselves.
  *
  * SECURITY NOTE: this is a UX guard only — backend RBAC must enforce the same
  * permission on every admin API endpoint.

@@ -1,16 +1,11 @@
-import { SuperadminGuard } from "@/components/layout/superadmin-guard";
-import { SystemHealthScreen } from "@/components/admin/system-health-screen";
+import { redirect } from "@/i18n/navigation";
 
-/**
- * System health page (`/university/system-health`).
- * Superadmin-only. Renders near-realtime scheduled jobs, queue depth, and
- * service readiness panels. `SuperadminGuard` redirects non-superadmin staff
- * to `/university/dashboard`.
- */
-export default function SystemHealthPage() {
-  return (
-    <SuperadminGuard>
-      <SystemHealthScreen />
-    </SuperadminGuard>
-  );
+/** Legacy path → Platform Admin console `/admin/system-health`. */
+export default async function LegacySystemHealthRedirect({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  redirect({ href: "/admin/system-health", locale });
 }

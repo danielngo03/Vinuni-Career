@@ -3,18 +3,23 @@
 import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
 import { useQuery } from "@tanstack/react-query";
-import { ChevronDown, PanelLeftClose, PanelLeftOpen } from "lucide-react";
+import { ChevronDown, PanelLeftClose, PanelLeftOpen, ShieldCheck } from "lucide-react";
 import { Link, usePathname } from "@/i18n/navigation";
 import { CompanyAvatar } from "@/components/companies/company-avatar";
-import { WORKSPACE_NAV_GROUPS, type NavGroup, type NavItem } from "@/config/nav";
+import {
+  navGroupsForWorkspace,
+  type NavGroup,
+  type NavItem,
+  type Workspace,
+} from "@/config/nav";
 import { organizationApi } from "@/lib/api";
 import { BrandMark } from "./brand-mark";
 import { SidebarUsageCard } from "./sidebar-usage-card";
-import { useAuthStore, type Persona } from "@/stores/auth-store";
+import { useAuthStore } from "@/stores/auth-store";
 import { cn } from "@/lib/utils";
 
 interface SidebarProps {
-  persona: Persona;
+  persona: Workspace;
   onNavigate?: () => void;
   /** Icon-only rail mode (desktop only — DESIGN.md §4 collapsed width 64px). */
   collapsed?: boolean;
@@ -168,7 +173,8 @@ export function Sidebar({
   const pathname = usePathname();
   const isSuperadmin = useAuthStore((s) => s.user?.isSuperadmin ?? false);
   const permissions = useAuthStore((s) => s.user?.permissions ?? []);
-  const groups = WORKSPACE_NAV_GROUPS[persona];
+  const isAdmin = persona === "admin";
+  const groups = navGroupsForWorkspace(persona);
   const sidebarToggleLabel = collapsed ? t("expandSidebar") : t("collapseSidebar");
 
   // Workspace routes are namespaced by persona to avoid route-group collisions
@@ -217,6 +223,34 @@ export function Sidebar({
           <BrandMark wordmarkClassName="text-[0.75rem] tracking-[0.13em]" />
         )}
       </div>
+
+      {/* Platform Admin identity — inverted ink chip so the superadmin console
+          reads as distinct from the white/paper University Operations shell. */}
+      {isAdmin &&
+        (collapsed ? (
+          <div className="flex justify-center pb-1">
+            <span
+              title={t("adminConsole")}
+              className="flex size-8 items-center justify-center rounded-[10px] bg-[var(--text-primary)] text-[var(--surface-card)]"
+            >
+              <ShieldCheck aria-hidden strokeWidth={2} className="size-4" />
+            </span>
+          </div>
+        ) : (
+          <div className="px-3 pb-1.5">
+            <div className="flex items-center gap-2.5 rounded-[12px] bg-[var(--text-primary)] px-3 py-2 text-[var(--surface-card)]">
+              <ShieldCheck aria-hidden strokeWidth={2} className="size-4 shrink-0" />
+              <div className="min-w-0">
+                <p className="truncate text-[0.8125rem] font-bold leading-tight">
+                  {t("adminConsole")}
+                </p>
+                <p className="truncate text-[0.6875rem] font-medium opacity-75">
+                  {t("adminConsoleSubtitle")}
+                </p>
+              </div>
+            </div>
+          </div>
+        ))}
 
       {/* Primary nav — flat titled blocks + accordion rows for dense clusters */}
       <nav
@@ -371,7 +405,10 @@ export function Sidebar({
           collapsed ? "px-2" : "px-3",
         )}
       >
-        {!collapsed && (
+        {/* Superadmins are exempt from AI energy limits, and the admin console
+            is not persona-scoped — so the usage meter only shows in the persona
+            shells, never in the Platform Admin console. */}
+        {persona !== "admin" && !collapsed && (
           <div className="pb-2">
             <SidebarUsageCard persona={persona} />
           </div>

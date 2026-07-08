@@ -46,6 +46,7 @@ import {
   type AiSettings,
   type AiSettingsUpdateBody,
 } from "@/lib/api";
+import { useAuthStore } from "@/stores/auth-store";
 import { AiProviderManager } from "./ai-provider-manager";
 
 /* ---- Derived-status presentation (text + icon, never color-only) ---- */
@@ -93,6 +94,11 @@ export function AiSettingsScreen() {
   const toast = useToast();
   const qc = useQueryClient();
   const getMessage = useApiErrorMessage();
+  // The real provider/model registry and routing internals are superadmin-only
+  // (CLAUDE.md). Ordinary university staff see the masked alias/status/budget
+  // controls above but never the provider registry or routing canvas. This is a
+  // UX guard mirroring the backend RBAC — the admin APIs also reject non-admins.
+  const isSuperadmin = useAuthStore((s) => s.user?.isSuperadmin ?? false);
 
   const query = useQuery({
     queryKey: ["admin", "ai-settings"],
@@ -295,9 +301,11 @@ export function AiSettingsScreen() {
         description={t("subtitle")}
         actions={
           <>
-            <Link href="/university/ai-settings/routing">
-              <Button variant="secondary">{t("routingLinkLabel")}</Button>
-            </Link>
+            {isSuperadmin && (
+              <Link href="/university/ai-settings/routing">
+                <Button variant="secondary">{t("routingLinkLabel")}</Button>
+              </Link>
+            )}
             <Button
               variant="danger"
               onClick={() => {
@@ -467,8 +475,9 @@ export function AiSettingsScreen() {
           </div>
         </Card>
 
-        {/* Multi-provider configuration */}
-        <AiProviderManager />
+        {/* Multi-provider configuration — real provider/model registry, keys, and
+            base URLs. Superadmin-only: never rendered for ordinary staff. */}
+        {isSuperadmin && <AiProviderManager />}
 
         {/* Secrecy footnote */}
         <p className="px-1 text-xs text-[var(--text-muted)]">{t("secrecyNote")}</p>

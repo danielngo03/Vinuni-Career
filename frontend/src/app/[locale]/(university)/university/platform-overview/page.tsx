@@ -1,15 +1,14 @@
-import { SuperadminGuard } from "@/components/layout/superadmin-guard";
-import { PlatformOverviewScreen } from "@/components/admin/platform-overview-screen";
+import { redirect } from "@/i18n/navigation";
 
 /**
- * Platform overview page (`/university/platform-overview`).
- * Superadmin-only. Renders the cross-domain health snapshot.
- * `SuperadminGuard` redirects non-superadmin staff to `/university/dashboard`.
+ * Legacy path — the Platform Admin console was split into its own `/admin/*`
+ * route group (owner decision 2026-07-08). Redirect old links/bookmarks.
  */
-export default function PlatformOverviewPage() {
-  return (
-    <SuperadminGuard>
-      <PlatformOverviewScreen />
-    </SuperadminGuard>
-  );
+export default async function LegacyPlatformOverviewRedirect({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  redirect({ href: "/admin/platform-overview", locale });
 }

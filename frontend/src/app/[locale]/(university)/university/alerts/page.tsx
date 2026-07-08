@@ -1,15 +1,11 @@
-import { SuperadminGuard } from "@/components/layout/superadmin-guard";
-import { AlertsScreen } from "@/components/admin/alerts-screen";
+import { redirect } from "@/i18n/navigation";
 
-/**
- * Alerts & Incidents page (`/university/alerts`).
- * Superadmin-only. Provides incident management and alert rule CRUD.
- * `SuperadminGuard` redirects non-superadmin staff to `/university/dashboard`.
- */
-export default function AlertsPage() {
-  return (
-    <SuperadminGuard>
-      <AlertsScreen />
-    </SuperadminGuard>
-  );
+/** Legacy path → Platform Admin console `/admin/alerts`. */
+export default async function LegacyAlertsRedirect({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  redirect({ href: "/admin/alerts", locale });
 }
