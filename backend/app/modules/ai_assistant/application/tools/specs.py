@@ -384,7 +384,7 @@ TOOL_SPECS: dict[str, ToolSpec] = {
         },
         permission_class="read_only",
         persona=[PARTNER_USER],
-        required_permissions=["authenticated", "role:partner_user"],
+        required_permissions=["authenticated", "role:partner_user", "jobs:read"],
         fallback="I couldn't load your jobs right now. Check /partner/jobs for your listings.",
         audit_event_type="TOOL_GET_PARTNER_JOBS",
     ),
@@ -399,7 +399,7 @@ TOOL_SPECS: dict[str, ToolSpec] = {
         parameters={"type": "object", "properties": {}, "required": []},
         permission_class="read_only",
         persona=[PARTNER_USER],
-        required_permissions=["authenticated", "role:partner_user"],
+        required_permissions=["authenticated", "role:partner_user", "applications:read"],
         fallback=(
             "I couldn't load your pipeline summary right now. Check /partner/pipeline for details."
         ),
@@ -684,7 +684,7 @@ TOOL_SPECS: dict[str, ToolSpec] = {
         },
         permission_class="read_only",
         persona=[PARTNER_USER],
-        required_permissions=["authenticated", "role:partner_user"],
+        required_permissions=["authenticated", "role:partner_user", "applications:read"],
         fallback=(
             "I couldn't search candidates right now. Check /partner/pipeline for your applicants."
         ),
@@ -713,7 +713,7 @@ TOOL_SPECS: dict[str, ToolSpec] = {
         },
         permission_class="read_only",
         persona=[PARTNER_USER],
-        required_permissions=["authenticated", "role:partner_user"],
+        required_permissions=["authenticated", "role:partner_user", "applications:read"],
         fallback=(
             "I couldn't load that candidate's details right now. Check the pipeline board "
             "at /partner/pipeline."
@@ -749,7 +749,7 @@ TOOL_SPECS: dict[str, ToolSpec] = {
         },
         permission_class="read_only",
         persona=[PARTNER_USER],
-        required_permissions=["authenticated", "role:partner_user"],
+        required_permissions=["authenticated", "role:partner_user", "ai_recruiting:draft_jd"],
         fallback=(
             "I couldn't draft a job description right now. Try the JD writer at "
             "/partner/jobs/new."
@@ -780,7 +780,7 @@ TOOL_SPECS: dict[str, ToolSpec] = {
         },
         permission_class="read_only",
         persona=[PARTNER_USER],
-        required_permissions=["authenticated", "role:partner_user"],
+        required_permissions=["authenticated", "role:partner_user", "ai_recruiting:draft_jd"],
         fallback=(
             "I couldn't rewrite that job description right now. Try editing it directly at "
             "/partner/jobs/{job_id}."
@@ -806,7 +806,7 @@ TOOL_SPECS: dict[str, ToolSpec] = {
         },
         permission_class="read_only",
         persona=[PARTNER_USER],
-        required_permissions=["authenticated", "role:partner_user"],
+        required_permissions=["authenticated", "role:partner_user", "jobs:read"],
         fallback="I couldn't run the bias check right now. Please review the text manually.",
         audit_event_type="TOOL_CHECK_JD_BIAS",
     ),
@@ -832,7 +832,11 @@ TOOL_SPECS: dict[str, ToolSpec] = {
         },
         permission_class="read_only",
         persona=[PARTNER_USER],
-        required_permissions=["authenticated", "role:partner_user"],
+        required_permissions=[
+            "authenticated",
+            "role:partner_user",
+            "ai_recruiting:suggest_scorecard",
+        ],
         fallback=(
             "I couldn't generate a scorecard suggestion right now. Fill in the scorecard "
             "manually from the application detail page."
@@ -859,7 +863,11 @@ TOOL_SPECS: dict[str, ToolSpec] = {
         },
         permission_class="read_only",
         persona=[PARTNER_USER],
-        required_permissions=["authenticated", "role:partner_user"],
+        required_permissions=[
+            "authenticated",
+            "role:partner_user",
+            "ai_recruiting:screen_candidate",
+        ],
         fallback=(
             "I couldn't generate a screening brief right now. Review the CV directly on "
             "the application page."
@@ -878,7 +886,7 @@ TOOL_SPECS: dict[str, ToolSpec] = {
         parameters={"type": "object", "properties": {}, "required": []},
         permission_class="read_only",
         persona=[PARTNER_USER],
-        required_permissions=["authenticated", "role:partner_user"],
+        required_permissions=["authenticated", "role:partner_user", "events:read"],
         fallback="I couldn't load your events right now. Check /partner/events for your listings.",
         audit_event_type="TOOL_GET_UPCOMING_PARTNER_EVENTS",
     ),
@@ -901,7 +909,11 @@ TOOL_SPECS: dict[str, ToolSpec] = {
         },
         permission_class="confirmation_required",
         persona=[PARTNER_USER],
-        required_permissions=["authenticated", "role:partner_user"],
+        required_permissions=[
+            "authenticated",
+            "role:partner_user",
+            "ai_recruiting:move_candidate_with_confirmation",
+        ],
         side_effects=[
             "UPDATE candidate_stages (close current, open next)",
             "UPDATE applications.version",

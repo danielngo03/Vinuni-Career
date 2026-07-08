@@ -1,5 +1,13 @@
 import type { ChatMessage } from "@/lib/api";
-import { Briefcase, ReadCvLogo, CalendarCheck, PaperPlaneTilt, ChartBar, CurrencyDollar } from "@phosphor-icons/react";
+import {
+  Briefcase,
+  ReadCvLogo,
+  CalendarCheck,
+  PaperPlaneTilt,
+  ChartBar,
+  CurrencyDollar,
+  UsersThree,
+} from "@phosphor-icons/react";
 
 export const MAX_INPUT_LENGTH = 1000;
 
@@ -37,6 +45,16 @@ export const TOOL_LABELS: Record<string, string> = {
   apply_job: "Đang chuẩn bị nộp đơn…",
   knowledge_base_query: "Đang tra cứu hướng dẫn hệ thống…",
   start_interview_sim: "Đang chuẩn bị luyện phỏng vấn…",
+  // Partner (recruiter) tools
+  search_partner_candidates: "Đang tìm ứng viên…",
+  get_candidate_detail: "Đang tải hồ sơ ứng viên…",
+  draft_job_description: "Đang soạn mô tả công việc…",
+  rewrite_job_description: "Đang biên tập lại mô tả công việc…",
+  check_jd_bias: "Đang kiểm tra ngôn ngữ thiên kiến…",
+  suggest_scorecard: "Đang gợi ý phiếu đánh giá…",
+  generate_screening_brief: "Đang tóm tắt sàng lọc ứng viên…",
+  get_upcoming_partner_events: "Đang tải sự kiện của công ty…",
+  move_candidate_stage: "Đang chuẩn bị chuyển vòng ứng viên…",
 };
 
 export const STATUS_LABELS: Record<string, string> = {
@@ -49,18 +67,59 @@ export const STATUS_LABELS: Record<string, string> = {
   responding: "Đang soạn câu trả lời",
 };
 
-export const SUGGESTION_ITEMS = [
+/** Persona of the current chat user — drives greeting, quick prompts, and links. */
+export type ChatPersona = "student" | "partner" | "university";
+
+export type SuggestionItem = {
+  icon: typeof Briefcase;
+  key: string;
+  href: string;
+};
+
+const STUDENT_SUGGESTIONS: readonly SuggestionItem[] = [
   { icon: Briefcase, key: "suggestJobs", href: "/jobs" },
   { icon: ReadCvLogo, key: "suggestCv", href: "/student/cv" },
   { icon: CalendarCheck, key: "suggestEvents", href: "/events" },
   { icon: PaperPlaneTilt, key: "suggestApps", href: "/student/applications" },
   { icon: ChartBar, key: "suggestSkillGap", href: "/student/cv" },
   { icon: CurrencyDollar, key: "suggestSalary", href: "/jobs" },
-] as const;
+];
 
-export const QUICK_PROMPTS = [
+// Partner (recruiter) shortcuts point at partner operating surfaces — never the
+// student /jobs, /student/cv, /student/applications routes.
+const PARTNER_SUGGESTIONS: readonly SuggestionItem[] = [
+  { icon: Briefcase, key: "suggestPartnerJobs", href: "/partner/jobs" },
+  { icon: UsersThree, key: "suggestPartnerPipeline", href: "/partner/pipeline" },
+  { icon: CalendarCheck, key: "suggestPartnerEvents", href: "/partner/events" },
+  { icon: ChartBar, key: "suggestPartnerAnalytics", href: "/partner/analytics" },
+];
+
+export const SUGGESTION_ITEMS_BY_PERSONA: Record<ChatPersona, readonly SuggestionItem[]> = {
+  student: STUDENT_SUGGESTIONS,
+  partner: PARTNER_SUGGESTIONS,
+  university: STUDENT_SUGGESTIONS,
+};
+
+const STUDENT_QUICK_PROMPTS: readonly string[] = [
   "Tìm việc làm IT phù hợp với tôi",
   "Phân tích gap kỹ năng của tôi",
   "Mức lương Data Scientist tại Hà Nội?",
   "Sự kiện tuyển dụng sắp tới",
-] as const;
+];
+
+const PARTNER_QUICK_PROMPTS: readonly string[] = [
+  "Liệt kê tin tuyển dụng đang mở của tôi",
+  "Tổng quan pipeline ứng viên của tôi",
+  "Soạn mô tả công việc cho một vị trí mới",
+  "Sự kiện tuyển dụng sắp tới của công ty",
+];
+
+export const QUICK_PROMPTS_BY_PERSONA: Record<ChatPersona, readonly string[]> = {
+  student: STUDENT_QUICK_PROMPTS,
+  partner: PARTNER_QUICK_PROMPTS,
+  university: STUDENT_QUICK_PROMPTS,
+};
+
+// Back-compat aliases (default = student) for any other importer.
+export const SUGGESTION_ITEMS = STUDENT_SUGGESTIONS;
+export const QUICK_PROMPTS = STUDENT_QUICK_PROMPTS;

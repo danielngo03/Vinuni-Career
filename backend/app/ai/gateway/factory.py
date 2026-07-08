@@ -234,11 +234,25 @@ class CircuitAwareProvider(AIProvider):
     def name(self) -> str:  # type: ignore[override]
         return self._inner.name
 
-    async def complete(self, messages, *, alias, temperature=0.2, max_tokens=1024):
+    async def complete(
+        self,
+        messages,
+        *,
+        alias,
+        temperature=0.2,
+        max_tokens=1024,
+        tools=None,
+        tool_choice=None,
+    ):
         circuit = _get_circuit(self._provider_name)
         try:
             result = await self._inner.complete(
-                messages, alias=alias, temperature=temperature, max_tokens=max_tokens
+                messages,
+                alias=alias,
+                temperature=temperature,
+                max_tokens=max_tokens,
+                tools=tools,
+                tool_choice=tool_choice,
             )
             circuit.record_success()
             return result

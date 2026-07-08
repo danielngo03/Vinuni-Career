@@ -13,13 +13,24 @@ from collections.abc import AsyncGenerator
 from dataclasses import dataclass, field
 from typing import Literal
 
-Role = Literal["system", "user", "assistant"]
+Role = Literal["system", "user", "assistant", "tool"]
 
 
 @dataclass(slots=True)
 class AIMessage:
     role: Role
     content: str
+    #: Native function-calling metadata (OpenAI tools protocol). Optional and
+    #: default-empty so every existing ``AIMessage(role=, content=)`` caller is
+    #: byte-for-byte unchanged.
+    #: - ``tool_calls``: set on an ``assistant`` turn that requested tools; each
+    #:   item is the raw provider tool_call dict ``{id, type, function{name,
+    #:   arguments}}`` echoed straight back on the next request.
+    #: - ``tool_call_id`` / ``name``: set on a ``tool`` role message carrying a
+    #:   tool's result back to the model.
+    tool_calls: list[dict] | None = None
+    tool_call_id: str | None = None
+    name: str | None = None
 
 
 @dataclass(slots=True)
@@ -28,12 +39,15 @@ class AICompletion:
 
     ``text`` is user-safe. ``usage`` and ``model_alias`` are internal-only
     metadata for cost tracking and must be scrubbed before any client response.
+    ``tool_calls`` holds any native function-calls the model requested (empty for
+    a plain text answer).
     """
 
     text: str
     model_alias: str
     usage: dict[str, int] = field(default_factory=dict)
     finish_reason: str = "stop"
+    tool_calls: list[dict] = field(default_factory=list)
 
 
 @dataclass(slots=True)
@@ -64,8 +78,16 @@ class AIProvider(abc.ABC):
         alias: str,
         temperature: float = 0.2,
         max_tokens: int = 1024,
+        tools: list[dict] | None = None,
+        tool_choice: str | None = None,
     ) -> AICompletion:
-        """Return a completion for ``messages`` using the resolved alias model."""
+        """Return a completion for ``messages`` using the resolved alias model.
+
+        When ``tools`` is supplied, the provider offers them via the native
+        function-calling interface and any requested calls are returned on
+        ``AICompletion.tool_calls``. ``tools`` defaults to ``None`` so plain
+        text callers are unaffected.
+        """
         raise NotImplementedError
 
     async def stream(

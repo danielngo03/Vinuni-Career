@@ -29,7 +29,12 @@ class OfflineProvider(AIProvider):
         alias: str,
         temperature: float = 0.2,
         max_tokens: int = 1024,
+        tools: list[dict] | None = None,
+        tool_choice: str | None = None,
     ) -> AICompletion:
+        # The offline provider is deterministic and never issues tool calls; the
+        # ``tools`` args are accepted for interface parity so the native
+        # tool-loop can run against it in tests (it just gets a text answer).
         seed = "\n".join(f"{m.role}:{m.content}" for m in messages)
         digest = hashlib.sha256(seed.encode("utf-8")).hexdigest()
         last_user = next(

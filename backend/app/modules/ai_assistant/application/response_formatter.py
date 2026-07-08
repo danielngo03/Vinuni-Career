@@ -22,13 +22,19 @@ def ai_unavailable_reply(locale: str = "vi") -> str:
     return assistant_message("formatter.ai_unavailable", locale)
 
 
-def fast_path_reply(text: str, locale: str = "vi") -> str | None:
+def fast_path_reply(
+    text: str, locale: str = "vi", *, persona: str | None = None
+) -> str | None:
     """Return deterministic replies for tiny conversational turns.
 
     These turns do not need a model call. Keeping them local reduces latency,
-    cost, and the chance of over-answering a simple greeting.
+    cost, and the chance of over-answering a simple greeting. ``persona`` selects
+    a persona-appropriate greeting (a partner recruiter must never get the
+    student "trợ lý hướng nghiệp / CV / đơn ứng tuyển" wording).
     """
     if _GREETING_RE.match(text):
+        if persona and persona.startswith("partner"):
+            return assistant_message("formatter.greeting_partner", locale)
         return assistant_message("formatter.greeting", locale)
     return None
 

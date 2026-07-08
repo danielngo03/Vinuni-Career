@@ -158,7 +158,7 @@ export function WorkspaceShell({
 
       {/* Main column — left offset only applies at the lg breakpoint where the fixed sidebar shows */}
       <div className="flex min-h-dvh flex-col transition-[padding-left] duration-200 motion-reduce:transition-none lg:pl-[var(--sidebar-offset)]">
-        <Topbar persona={persona} />
+        <Topbar persona={persona} onAiClick={() => setAiOpen(true)} />
         <div
           className={cn(
             "flex flex-1 flex-col bg-[var(--surface-card)] shadow-[inset_1px_1px_0_rgba(0,0,0,0.04)] lg:rounded-tl-[28px]",

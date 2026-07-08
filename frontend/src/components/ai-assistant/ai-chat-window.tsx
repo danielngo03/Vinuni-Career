@@ -43,6 +43,9 @@ export function AiChatWindow({
 }) {
   const t = useTranslations("aiAssistant");
   const authStatus = useAuthStore((s) => s.status);
+  // Persona drives the persona-specific greeting, quick prompts, and shortcut
+  // links so a partner recruiter never sees the student CV/applications welcome.
+  const persona = useAuthStore((s) => s.user?.persona) ?? "student";
   const isAuthed = authStatus === "authenticated";
   const isAuthLoading = authStatus === "unknown";
   const qc = useQueryClient();
@@ -489,7 +492,7 @@ export function AiChatWindow({
           ) : !isAuthed ? (
             <GuestPrompt t={t} />
           ) : messages.length === 0 && !messagesQuery.isPending ? (
-            <WelcomeScreen t={t} onPrompt={(prompt) => void send(prompt)} />
+            <WelcomeScreen t={t} persona={persona} onPrompt={(prompt) => void send(prompt)} />
           ) : (
             messages.map((msg) => (
               <MessageBubble
