@@ -94,6 +94,137 @@ _MESSAGES: Final[dict[str, dict[str, str]]] = {
         "vi": "Đang chờ xác nhận để thực hiện {tool_name}{reason}",
         "en": "Waiting for confirmation to run {tool_name}{reason}",
     },
+    # ---- confirmation CARD copy (mutating-tool contract, §4.3) ------------ #
+    # These are the locale-driven strings behind every ``ConfirmationCopy``.
+    # ``vi`` stays byte-identical to the historical hardcoded card text; ``en``
+    # is a faithful translation. The shared cancel CTA is reused by every card.
+    "confirm.card.cta_cancel": {
+        "vi": "Huỷ",
+        "en": "Cancel",
+    },
+    "confirm.card.save_job.title": {
+        "vi": "Lưu tin tuyển dụng này?",
+        "en": "Save this job?",
+    },
+    "confirm.card.save_job.body": {
+        "vi": "Việc làm sẽ được thêm vào danh sách đã lưu của bạn.",
+        "en": "This job will be added to your saved list.",
+    },
+    "confirm.card.save_job.cta_confirm": {
+        "vi": "Lưu",
+        "en": "Save",
+    },
+    "confirm.card.apply_job.title": {
+        "vi": "Nộp đơn ứng tuyển?",
+        "en": "Submit application?",
+    },
+    "confirm.card.apply_job.body": {
+        "vi": (
+            "Bạn sẽ ứng tuyển vào vị trí này bằng CV đã chọn "
+            "(hoặc CV chính nếu không chỉ định)."
+        ),
+        "en": (
+            "You'll apply to this position with the selected CV "
+            "(or your primary CV if none is specified)."
+        ),
+    },
+    "confirm.card.apply_job.cta_confirm": {
+        "vi": "Xác nhận nộp đơn",
+        "en": "Confirm application",
+    },
+    "confirm.card.move_candidate_stage.title": {
+        "vi": "Chuyển ứng viên sang vòng tiếp theo?",
+        "en": "Advance the candidate to the next stage?",
+    },
+    "confirm.card.move_candidate_stage.body": {
+        "vi": (
+            "Ứng viên sẽ được chuyển sang vòng tuyển dụng tiếp theo trong quy trình. "
+            "Hành động này sẽ được ghi nhận và có thể thông báo cho ứng viên."
+        ),
+        "en": (
+            "The candidate will be moved to the next recruitment stage in the pipeline. "
+            "This action is recorded and may notify the candidate."
+        ),
+    },
+    "confirm.card.move_candidate_stage.cta_confirm": {
+        "vi": "Xác nhận chuyển vòng",
+        "en": "Confirm advance",
+    },
+    "confirm.card.tailor_cv_to_job.title": {
+        "vi": "Tạo bản chỉnh sửa CV cho công việc này?",
+        "en": "Create a CV tailoring draft for this job?",
+    },
+    "confirm.card.tailor_cv_to_job.body": {
+        "vi": (
+            "Hệ thống sẽ tạo một bản đề xuất chỉnh sửa CV (dạng nháp, cần bạn duyệt) để phù hợp "
+            "hơn với tin tuyển dụng. CV của bạn sẽ không thay đổi cho đến khi bạn chấp nhận trong "
+            "CV Studio."
+        ),
+        "en": (
+            "The system will create a pending CV edit suggestion (a draft you review) to better "
+            "match this job. Your CV is not changed until you accept it in CV Studio."
+        ),
+    },
+    "confirm.card.tailor_cv_to_job.cta_confirm": {
+        "vi": "Tạo bản nháp",
+        "en": "Create draft",
+    },
+    "confirm.card.cover_letter.title": {
+        "vi": "Soạn thư xin việc cho công việc này?",
+        "en": "Draft a cover letter for this job?",
+    },
+    "confirm.card.cover_letter.body": {
+        "vi": (
+            "Hệ thống sẽ soạn một bản nháp thư xin việc dựa trên tin tuyển dụng và hồ sơ của bạn "
+            "để bạn dùng khi ứng tuyển. Bạn có thể chỉnh sửa trước khi nộp; thư không được gửi cho "
+            "nhà tuyển dụng cho đến khi bạn ứng tuyển."
+        ),
+        "en": (
+            "The system will draft a cover letter based on this job and your profile for you to "
+            "use when applying. You can edit it before you submit; it is not sent to the employer "
+            "until you apply."
+        ),
+    },
+    "confirm.card.cover_letter.cta_confirm": {
+        "vi": "Soạn thư",
+        "en": "Draft letter",
+    },
+    "confirm.card.set_job_alert.title": {
+        "vi": "Tạo thông báo việc làm?",
+        "en": "Create a job alert?",
+    },
+    "confirm.card.set_job_alert.body": {
+        "vi": (
+            "Hệ thống sẽ tạo một thông báo việc làm theo tiêu chí tìm kiếm hiện tại để gửi cho bạn "
+            "các tin phù hợp."
+        ),
+        "en": (
+            "The system will create a job alert from your current search criteria to send you "
+            "matching new listings."
+        ),
+    },
+    "confirm.card.set_job_alert.cta_confirm": {
+        "vi": "Tạo thông báo",
+        "en": "Create alert",
+    },
+    "confirm.card.register_for_event.title": {
+        "vi": "Đăng ký tham gia sự kiện này?",
+        "en": "Register for this event?",
+    },
+    "confirm.card.register_for_event.body": {
+        "vi": (
+            "Bạn sẽ được đăng ký tham gia sự kiện. Nếu sự kiện đã đầy, bạn sẽ được thêm vào danh "
+            "sách chờ."
+        ),
+        "en": (
+            "You'll be registered for this event. If it's already full, you'll be added to the "
+            "waitlist."
+        ),
+    },
+    "confirm.card.register_for_event.cta_confirm": {
+        "vi": "Đăng ký",
+        "en": "Register",
+    },
     "confirm.result.save_job": {
         "vi": "Đã lưu việc làm này vào danh sách của bạn.",
         "en": "This job has been saved to your list.",
@@ -105,6 +236,69 @@ _MESSAGES: Final[dict[str, dict[str, str]]] = {
     "confirm.result.move_candidate_stage": {
         "vi": "Đã cập nhật trạng thái ứng viên.",
         "en": "The candidate stage has been updated.",
+    },
+    "confirm.result.tailor_cv_to_job": {
+        "vi": (
+            "Đã tạo bản nháp chỉnh sửa CV cho công việc này. Hãy mở **CV Studio** để xem lại và "
+            "chấp nhận thay đổi — CV của bạn chưa bị thay đổi."
+        ),
+        "en": (
+            "I've created a CV tailoring draft for this job. Open **CV Studio** to review and "
+            "accept the changes — your CV hasn't been changed yet."
+        ),
+    },
+    "confirm.result.draft_and_attach_cover_letter": {
+        "vi": (
+            "Đã soạn bản nháp thư xin việc. Bạn có thể chỉnh sửa và đính kèm khi ứng tuyển vào vị "
+            "trí này."
+        ),
+        "en": (
+            "I've drafted a cover letter. You can edit it and attach it when you apply to this "
+            "position."
+        ),
+    },
+    "confirm.result.set_job_alert": {
+        "vi": "Đã tạo thông báo việc làm. Bạn sẽ nhận được các tin phù hợp.",
+        "en": "Your job alert has been created. You'll receive matching listings.",
+    },
+    "confirm.result.register_for_event": {
+        "vi": "Đã đăng ký sự kiện cho bạn.",
+        "en": "You've been registered for the event.",
+    },
+    "confirm.result.register_for_event.waitlisted": {
+        "vi": "Sự kiện đã đầy — bạn đã được thêm vào danh sách chờ.",
+        "en": "The event is full — you've been added to the waitlist.",
+    },
+    "confirm.error.tailor_cv_not_editable": {
+        "vi": (
+            "CV này là CV tải lên nên chỉ xem, không thể chỉnh sửa qua AI. Hãy nhân bản nó thành "
+            "CV mẫu trong **CV Studio** rồi thử lại."
+        ),
+        "en": (
+            "This is an uploaded CV, so it's read-only and can't be AI-edited. Duplicate it into a "
+            "template CV in **CV Studio**, then try again."
+        ),
+    },
+    "confirm.error.set_job_alert_exists": {
+        "vi": (
+            "Bạn đã có thông báo việc làm trùng tên. "
+            "Hãy đặt tên khác hoặc quản lý ở **Thông báo việc làm**."
+        ),
+        "en": (
+            "You already have a job alert with that name. "
+            "Use a different name or manage them in **Job Alerts**."
+        ),
+    },
+    "confirm.error.set_job_alert_limit": {
+        "vi": (
+            "Bạn đã đạt giới hạn số thông báo việc làm. "
+            "Hãy xóa bớt ở **Thông báo việc làm** trước."
+        ),
+        "en": "You've reached the job-alert limit. Remove one in **Job Alerts** first.",
+    },
+    "confirm.error.register_already": {
+        "vi": "Bạn đã đăng ký sự kiện này rồi.",
+        "en": "You're already registered for this event.",
     },
     "confirm.result.generic": {
         "vi": "Đã thực hiện thao tác.",

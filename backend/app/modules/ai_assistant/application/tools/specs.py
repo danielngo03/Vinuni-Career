@@ -29,12 +29,33 @@ _ALL_AUTHENTICATED = [STUDENT, PARTNER_USER, UNIVERSITY_STAFF]
 
 @dataclass(frozen=True)
 class ConfirmationCopy:
-    """User-facing confirmation card copy for a mutating tool (§4.3)."""
+    """Locale-driven confirmation-card copy for a mutating tool (§4.3).
 
-    title: str
-    body: str
-    cta_confirm: str
-    cta_cancel: str = "Huỷ"
+    The tool contract must NOT hardcode a single locale. Instead of literal
+    strings this stores message-catalog KEYS resolved at render time through the
+    existing assistant i18n mechanism (``ai_assistant.application.messages``),
+    so the confirmation card renders vi/en (and any future locale) from one
+    contract. Use :meth:`localized` to materialise the four user-facing strings
+    for a given locale.
+    """
+
+    title_key: str
+    body_key: str
+    cta_confirm_key: str
+    cta_cancel_key: str = "confirm.card.cta_cancel"
+
+    def localized(self, locale: str | None = None) -> dict[str, str]:
+        """Resolve the card's title/body/CTAs for ``locale`` (vi/en fallback vi)."""
+        # Imported lazily to avoid a module-load import cycle (messages.py has no
+        # dependency on the tool specs, but specs.py is imported very early).
+        from app.modules.ai_assistant.application.messages import assistant_message
+
+        return {
+            "title": assistant_message(self.title_key, locale),
+            "body": assistant_message(self.body_key, locale),
+            "cta_confirm": assistant_message(self.cta_confirm_key, locale),
+            "cta_cancel": assistant_message(self.cta_cancel_key, locale),
+        }
 
 
 @dataclass(frozen=True)
@@ -610,9 +631,9 @@ TOOL_SPECS: dict[str, ToolSpec] = {
         required_permissions=["authenticated", "role:student"],
         side_effects=["INSERT saved_jobs row"],
         confirmation_copy=ConfirmationCopy(
-            title="Lưu tin tuyển dụng này?",
-            body="Việc làm sẽ được thêm vào danh sách đã lưu của bạn.",
-            cta_confirm="Lưu",
+            title_key="confirm.card.save_job.title",
+            body_key="confirm.card.save_job.body",
+            cta_confirm_key="confirm.card.save_job.cta_confirm",
         ),
         fallback=(
             "I couldn't save the job right now. Visit the job page and use the heart button to "
@@ -641,6 +662,14 @@ TOOL_SPECS: dict[str, ToolSpec] = {
                         "Optional: the CV ID to use. If omitted, the student's active CV is used."
                     ),
                 },
+                "cover_letter": {
+                    "type": "string",
+                    "description": (
+                        "Optional cover letter body to attach to the application (e.g. a draft "
+                        "produced by draft_and_attach_cover_letter). If omitted, no cover letter "
+                        "is attached."
+                    ),
+                },
             },
             "required": ["job_id"],
         },
@@ -649,18 +678,203 @@ TOOL_SPECS: dict[str, ToolSpec] = {
         required_permissions=["authenticated", "role:student"],
         side_effects=["INSERT job_applications row", "notification to partner"],
         confirmation_copy=ConfirmationCopy(
-            title="Nộp đơn ứng tuyển?",
-            body=(
-                "Bạn sẽ ứng tuyển vào vị trí này bằng CV đã chọn "
-                "(hoặc CV chính nếu không chỉ định)."
-            ),
-            cta_confirm="Xác nhận nộp đơn",
+            title_key="confirm.card.apply_job.title",
+            body_key="confirm.card.apply_job.body",
+            cta_confirm_key="confirm.card.apply_job.cta_confirm",
         ),
         fallback=(
             "Tôi không thể nộp đơn lúc này. Bạn có thể truy cập trang việc làm và nhấn 'Ứng tuyển' "
             "trực tiếp."
         ),
         audit_event_type="TOOL_APPLY_JOB",
+    ),
+    "tailor_cv_to_job": ToolSpec(
+        name="tailor_cv_to_job",
+        description=(
+            "Produce a CV Studio improvement DRAFT that tailors one of the student's own "
+            "template CVs to a specific job's requirements. Use this when the student says "
+            "'tailor my CV for this job', 'optimise my CV for [role]', or 'help me improve my CV "
+            "for this position'. Requires a job_id (from a prior search_jobs/get_job_detail). "
+            "Produces a PENDING, structured diff (never auto-applied) that the student reviews and "
+            "accepts in CV Studio; it never invents experience the CV does not support. Requires "
+            "the student to confirm before drafting. Only for student users."
+        ),
+        parameters={
+            "type": "object",
+            "properties": {
+                "job_id": {
+                    "type": "string",
+                    "description": "Job UUID to tailor the CV toward",
+                },
+                "cv_id": {
+                    "type": "string",
+                    "description": (
+                        "Optional CV UUID. If omitted, the best-matching template CV is used."
+                    ),
+                },
+            },
+            "required": ["job_id"],
+        },
+        permission_class="confirmation_required",
+        persona=[STUDENT],
+        required_permissions=["authenticated", "role:student"],
+        side_effects=[
+            "INSERT cv_ai_suggestions row (pending diff)",
+            "debit AI energy (cv_edit_command)",
+        ],
+        confirmation_copy=ConfirmationCopy(
+            title_key="confirm.card.tailor_cv_to_job.title",
+            body_key="confirm.card.tailor_cv_to_job.body",
+            cta_confirm_key="confirm.card.tailor_cv_to_job.cta_confirm",
+        ),
+        fallback=(
+            "I couldn't draft CV tailoring right now. Open the CV in CV Studio and use the AI "
+            "improve tools, or compare your CV to the job with a skill-gap check first."
+        ),
+        audit_event_type="TOOL_TAILOR_CV_TO_JOB",
+        timeout_seconds=25,
+    ),
+    "draft_and_attach_cover_letter": ToolSpec(
+        name="draft_and_attach_cover_letter",
+        description=(
+            "Draft a personalised cover letter for a specific job and hand it back ready to attach "
+            "to the student's application for that job. Use this when the student says 'write a "
+            "cover letter for this job', 'draft a cover letter', or 'help me apply with a cover "
+            "letter'. Requires a job_id. The draft grounds only on the job and the student's own "
+            "profile/CV and never invents qualifications; it is returned for the "
+            "confirmation-gated apply flow and is never sent to the employer until the student "
+            "applies. Requires the "
+            "student to confirm before drafting. Only for student users."
+        ),
+        parameters={
+            "type": "object",
+            "properties": {
+                "job_id": {
+                    "type": "string",
+                    "description": "Job UUID to draft a cover letter for",
+                },
+                "cv_id": {
+                    "type": "string",
+                    "description": (
+                        "Optional CV UUID to use when the student proceeds to apply with the draft."
+                    ),
+                },
+                "note": {
+                    "type": "string",
+                    "description": (
+                        "Optional short note from the student to steer the draft "
+                        "(e.g. 'emphasise my internship')."
+                    ),
+                },
+            },
+            "required": ["job_id"],
+        },
+        permission_class="confirmation_required",
+        persona=[STUDENT],
+        required_permissions=["authenticated", "role:student"],
+        side_effects=[
+            "generate cover letter draft",
+            "debit AI energy (cover_letter)",
+            "return draft for the apply flow (no employer send)",
+        ],
+        confirmation_copy=ConfirmationCopy(
+            title_key="confirm.card.cover_letter.title",
+            body_key="confirm.card.cover_letter.body",
+            cta_confirm_key="confirm.card.cover_letter.cta_confirm",
+        ),
+        fallback=(
+            "I couldn't draft a cover letter right now. You can still apply and write a short "
+            "cover letter yourself on the application page."
+        ),
+        audit_event_type="TOOL_DRAFT_COVER_LETTER",
+        timeout_seconds=25,
+    ),
+    "set_job_alert": ToolSpec(
+        name="set_job_alert",
+        description=(
+            "Create a saved job alert subscription from the student's current search criteria so "
+            "they get notified about matching new jobs. Use this when the student says 'notify me "
+            "about jobs like this', 'create a job alert for [keywords]', or 'save this search'. "
+            "Requires the student to confirm before creating. Only for student users."
+        ),
+        parameters={
+            "type": "object",
+            "properties": {
+                "keywords": {
+                    "type": "string",
+                    "description": "Search keywords for the alert, e.g. 'data analyst'",
+                },
+                "employment_type": {
+                    "type": "string",
+                    "description": (
+                        "Optional employment type filter, e.g. 'full_time', 'internship'"
+                    ),
+                },
+                "location_type": {
+                    "type": "string",
+                    "description": "Optional work mode filter, e.g. 'remote', 'onsite', 'hybrid'",
+                },
+                "province_code": {
+                    "type": "string",
+                    "description": "Optional province code, e.g. 'HN' for Hanoi",
+                },
+                "name": {
+                    "type": "string",
+                    "description": "Optional display name for the alert. Defaults to the keywords.",
+                },
+            },
+            "required": [],
+        },
+        permission_class="confirmation_required",
+        persona=[STUDENT],
+        required_permissions=["authenticated", "role:student"],
+        side_effects=["INSERT job_alerts row"],
+        confirmation_copy=ConfirmationCopy(
+            title_key="confirm.card.set_job_alert.title",
+            body_key="confirm.card.set_job_alert.body",
+            cta_confirm_key="confirm.card.set_job_alert.cta_confirm",
+        ),
+        fallback=(
+            "I couldn't create the job alert right now. You can manage alerts at /student/alerts."
+        ),
+        audit_event_type="TOOL_SET_JOB_ALERT",
+    ),
+    "register_for_event": ToolSpec(
+        name="register_for_event",
+        description=(
+            "Register the student for a specific career event, workshop, or fair. Use this when "
+            "the student says 'register me for this event', 'sign me up', or 'RSVP to [event]'. "
+            "Requires an event_id (from a prior search_events/get_upcoming_events). A full event "
+            "adds the student to the waitlist. Requires the student to confirm before registering. "
+            "Only for student users."
+        ),
+        parameters={
+            "type": "object",
+            "properties": {
+                "event_id": {
+                    "type": "string",
+                    "description": "Event UUID to register for",
+                },
+            },
+            "required": ["event_id"],
+        },
+        permission_class="confirmation_required",
+        persona=[STUDENT],
+        required_permissions=["authenticated", "role:student"],
+        side_effects=[
+            "INSERT event_registrations row (confirmed or waitlisted)",
+            "notification to student",
+        ],
+        confirmation_copy=ConfirmationCopy(
+            title_key="confirm.card.register_for_event.title",
+            body_key="confirm.card.register_for_event.body",
+            cta_confirm_key="confirm.card.register_for_event.cta_confirm",
+        ),
+        fallback=(
+            "I couldn't register you for the event right now. Open the event page at "
+            "/events and use the Register button."
+        ),
+        audit_event_type="TOOL_REGISTER_FOR_EVENT",
     ),
     "search_partner_candidates": ToolSpec(
         name="search_partner_candidates",
@@ -908,12 +1122,9 @@ TOOL_SPECS: dict[str, ToolSpec] = {
             "notification to student (if next stage is candidate-visible)",
         ],
         confirmation_copy=ConfirmationCopy(
-            title="Chuyển ứng viên sang vòng tiếp theo?",
-            body=(
-                "Ứng viên sẽ được chuyển sang vòng tuyển dụng tiếp theo trong quy trình. "
-                "Hành động này sẽ được ghi nhận và có thể thông báo cho ứng viên."
-            ),
-            cta_confirm="Xác nhận chuyển vòng",
+            title_key="confirm.card.move_candidate_stage.title",
+            body_key="confirm.card.move_candidate_stage.body",
+            cta_confirm_key="confirm.card.move_candidate_stage.cta_confirm",
         ),
         fallback=(
             "I couldn't move that candidate right now. Use the pipeline board at "

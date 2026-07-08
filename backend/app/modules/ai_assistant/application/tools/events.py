@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+import uuid as _uuid
+
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.shared.permissions import Principal
@@ -80,4 +82,54 @@ async def search_events(session: AsyncSession, principal: Principal, args: dict)
             for e in items[:5]
         ],
         "total": _total,
+    }
+
+
+async def register_for_event(
+    session: AsyncSession, principal: Principal, args: dict
+) -> dict:
+    """Register the student for an event (mutating; confirmation-gated upstream).
+
+    The assistant must have surfaced the confirmation card (§4.3) before this
+    executes. A full event waitlists FIFO. ``registration_service.register``
+    writes the audit row and commits its own transaction.
+    """
+    if not principal.is_authenticated:
+        return {"ok": False, "error": "auth_required"}
+
+    from app.modules.auth.application.context import RequestContext
+    from app.modules.opportunities.application import registration_service
+    from app.shared.exceptions import (
+        AuthRequiredError,
+        PermissionDeniedError,
+        ResourceNotFoundError,
+    )
+
+    raw = (args.get("event_id") or "").strip()
+    if not raw:
+        return {"ok": False, "error": "event_id_required"}
+    try:
+        event_id = _uuid.UUID(raw)
+    except ValueError:
+        return {"ok": False, "error": "invalid_event_id"}
+
+    try:
+        reg = await registration_service.register(
+            session, principal=principal, event_id=event_id, ctx=RequestContext()
+        )
+    except ResourceNotFoundError:
+        return {"ok": False, "error": "event_not_found", "event_id": raw}
+    except (PermissionDeniedError, AuthRequiredError):
+        return {"ok": False, "error": "not_allowed", "event_id": raw}
+    except Exception:
+        return {"ok": False, "error": "register_failed", "event_id": raw}
+
+    status = reg.get("status_label") or reg.get("status") or ""
+    return {
+        "ok": True,
+        "registered": True,
+        "event_id": raw,
+        "status": status,
+        "waitlist_position": reg.get("waitlist_position"),
+        "url": f"/events/{raw}",
     }

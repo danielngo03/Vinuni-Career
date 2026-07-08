@@ -149,6 +149,45 @@ def resolve_session_id(cookie_id: str | None) -> uuid.UUID | None:
     return _parse_cookie_id(cookie_id)
 
 
+async def link_user_on_login(
+    session: AsyncSession,
+    *,
+    cookie_id: str | None,
+    user_id: uuid.UUID | None,
+    now: datetime | None = None,
+) -> DiscoverySession | None:
+    """Bind a live guest discovery session to the user who just logged in. Commits.
+
+    Guest → login continuity (spec §4): the coarse signals a visitor accumulated
+    while browsing anonymously already carry into their authenticated recommendations
+    (the delivery routers read the SAME first-party cookie's coarse tags regardless
+    of auth). This additionally sets the durable ``discovery_sessions.user_id`` link
+    on login so the anonymous session is attributable to the account going forward.
+
+    Best-effort and non-fatal: a missing/expired cookie, an opted-out session, or a
+    write failure returns quietly (login must never break on personalization). The
+    link is only ever SET (never overwritten) and no coarse tags are read or logged.
+    """
+
+    if user_id is None:
+        return None
+    now = now or _now()
+    existing = await _load_live(
+        session, session_id=_parse_cookie_id(cookie_id), now=now
+    )
+    if existing is None or existing.user_id is not None:
+        return existing
+    existing.user_id = user_id
+    existing.last_seen_at = now
+    existing.expires_at = now + _ttl()
+    try:
+        await session.commit()
+    except Exception:  # noqa: BLE001 — a link failure never blocks login
+        await session.rollback()
+        return None
+    return existing
+
+
 async def record_signal(
     session: AsyncSession,
     discovery_session: DiscoverySession,

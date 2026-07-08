@@ -5,9 +5,9 @@ re-tick over an already-clean window prunes nothing. Flush-only — the schedule
 (:mod:`app.modules.automation.scheduler.runner`) owns the commit.
 
 Retention is config-driven: sessions past ``expires_at`` are dropped (short TTL);
-events older than ``discovery_event_retention_days`` are dropped (longer analytics
-window). Pruning a session leaves its longer-lived events intact (the FK is
-``ON DELETE SET NULL`` in Postgres).
+events AND recommendation snapshots older than ``discovery_event_retention_days``
+are dropped (longer analytics window). Pruning a session leaves its longer-lived
+events/snapshots intact (the FK is ``ON DELETE SET NULL`` in Postgres).
 """
 
 from __future__ import annotations
@@ -19,7 +19,11 @@ from sqlalchemy import CursorResult, delete
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.core.config import get_settings
-from app.modules.discovery.domain.models import DiscoveryEvent, DiscoverySession
+from app.modules.discovery.domain.models import (
+    DiscoveryEvent,
+    DiscoverySession,
+    RecommendationSnapshot,
+)
 
 
 def _now() -> datetime:
@@ -29,7 +33,7 @@ def _now() -> datetime:
 async def session_cleanup(
     session: AsyncSession, *, now: datetime | None = None
 ) -> dict[str, int]:
-    """Prune expired discovery sessions and out-of-retention events. Flush-only."""
+    """Prune expired sessions + out-of-retention events/snapshots. Flush-only."""
 
     now = now or _now()
     retention = timedelta(days=get_settings().discovery_event_retention_days)
@@ -47,8 +51,17 @@ async def session_cleanup(
             delete(DiscoveryEvent).where(DiscoveryEvent.created_at < event_cutoff)
         ),
     )
+    snapshots_result = cast(
+        "CursorResult[object]",
+        await session.execute(
+            delete(RecommendationSnapshot).where(
+                RecommendationSnapshot.created_at < event_cutoff
+            )
+        ),
+    )
     await session.flush()
     return {
         "sessions_pruned": sessions_result.rowcount or 0,
         "events_pruned": events_result.rowcount or 0,
+        "snapshots_pruned": snapshots_result.rowcount or 0,
     }

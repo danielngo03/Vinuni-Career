@@ -78,6 +78,7 @@ async def job_recommendations(
         q=q,
         limit=limit,
         discovery_session_id=session_service.resolve_session_id(cookie_id),
+        snapshot_surface="jobs_recommendations",
     )
     return success(data)
 

@@ -33,6 +33,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from app.core.db import get_db_session
 from app.modules.ai_assistant.api.schemas import SendMessageRequest
 from app.modules.ai_assistant.application import chat_service, usage_service
+from app.modules.ai_assistant.application.messages import normalize_locale
 from app.modules.auth.api.deps import CurrentAuth, get_current_auth
 from app.shared.responses import success
 
@@ -131,6 +132,7 @@ async def send_message(
         principal=auth.principal,
         session_id=session_id,
         text=body.text,
+        locale=normalize_locale(body.locale),
     )
     return success(data)
 
@@ -161,6 +163,7 @@ async def stream_message(
                 principal=auth.principal,
                 session_id=session_id,
                 text=body.text,
+                locale=normalize_locale(body.locale),
             ):
                 yield f"data: {json.dumps(event, ensure_ascii=False)}\n\n"
         except Exception:

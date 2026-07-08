@@ -18,6 +18,13 @@ only allowlisted coarse keys can ever land there.
     ``sponsored_placements`` set ONLY for sponsored surfaces. ``scope`` records
     whether the event was anonymous / session-linked / user-linked.
 
+``recommendation_snapshots``
+    An append-only, PRIVACY-SAFE record of what a guest/student was actually SHOWN
+    at a recommendation-serving point (job ids + honest source + reason codes +
+    product score, NO PII, NO raw model prompts/confidence). It is the audit/repro
+    substrate for "why did this rail look like this" and the offline ranking-eval
+    ground truth. Pruned by the same TTL sweep as ``discovery_events``.
+
 Types use the shared cross-database variants so the same models run on PostgreSQL
 (runtime) and SQLite (unit tests). Postgres-only constructs (partial/extra indexes,
 CHECK constraints, ``set_updated_at`` trigger) live in migration ``0020`` only.
@@ -32,6 +39,7 @@ from sqlalchemy import (
     Boolean,
     DateTime,
     ForeignKey,
+    Integer,
     String,
     Uuid,
     func,
@@ -103,6 +111,40 @@ class DiscoveryEvent(Base):
     idempotency_key: Mapped[str] = mapped_column(
         String(120), nullable=False, unique=True
     )
+    created_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), nullable=False, server_default=func.now()
+    )
+
+
+class RecommendationSnapshot(Base):
+    """An append-only, privacy-safe record of a served recommendation list.
+
+    Stores WHAT was shown (ordered ``items`` = job id + honest per-item source +
+    product score + user-safe reason codes) at a serving surface, plus the list-level
+    honest source label and personalization flag. NO PII, NO CV text/title, NO raw
+    model prompt/confidence — only coarse, reproducible ranking outputs.
+    """
+
+    __tablename__ = "recommendation_snapshots"
+
+    id: Mapped[uuid.UUID] = mapped_column(
+        Uuid(as_uuid=True), primary_key=True, default=uuid.uuid4
+    )
+    # Serving surface: 'marketplace_overview' | 'jobs_recommendations'.
+    surface: Mapped[str] = mapped_column(String(50), nullable=False)
+    # Honest list source: recommended | recent | popular.
+    list_source: Mapped[str] = mapped_column(String(20), nullable=False)
+    personalized: Mapped[bool] = mapped_column(Boolean, nullable=False, default=False)
+    # anonymous | session | user (derived server-side, never trusted from client).
+    scope: Mapped[str] = mapped_column(String(20), nullable=False)
+    session_id: Mapped[uuid.UUID | None] = mapped_column(
+        ForeignKey("discovery_sessions.id", ondelete="SET NULL"), nullable=True
+    )
+    # Plain (FK-less) — high-volume append-only ledger, mirrors discovery_events.
+    user_id: Mapped[uuid.UUID | None] = mapped_column(Uuid(as_uuid=True), nullable=True)
+    # Ordered [{job_id, source, score, reason_codes, placement_id}] — no PII.
+    items: Mapped[list] = mapped_column(JsonType, nullable=False, default=list)
+    item_count: Mapped[int] = mapped_column(Integer, nullable=False, default=0)
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), nullable=False, server_default=func.now()
     )

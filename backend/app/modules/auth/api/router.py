@@ -8,6 +8,7 @@ in the service layer.
 from __future__ import annotations
 
 import urllib.parse
+import uuid
 
 from fastapi import APIRouter, Depends, Query, Request, Response, status
 from fastapi.responses import RedirectResponse
@@ -37,6 +38,7 @@ from app.modules.auth.application import auth_service, errors, oauth_service
 from app.modules.auth.application.auth_service import LoginChallenge
 from app.modules.auth.application.context import context_from_request
 from app.modules.auth.infrastructure import jwt as jwt_infra
+from app.modules.discovery.application import session_service as discovery_session
 from app.modules.users.application import user_service
 from app.shared.responses import success
 
@@ -70,6 +72,27 @@ def _clear_refresh_cookie(response: Response) -> None:
         secure=settings.refresh_cookie_secure,
         samesite="lax",
     )
+
+
+async def _link_discovery_session(
+    request: Request, session: AsyncSession, user_id: uuid.UUID
+) -> None:
+    """Guest → login continuity: bind the first-party discovery session to the user.
+
+    Best-effort — the accumulated coarse browsing signals already carry into the
+    student's authenticated recommendations via the same cookie; this durably sets
+    the ``discovery_sessions.user_id`` link on login. Never blocks the login path.
+    """
+
+    cookie_id = request.cookies.get(get_settings().discovery_session_cookie_name)
+    if not cookie_id:
+        return
+    try:
+        await discovery_session.link_user_on_login(
+            session, cookie_id=cookie_id, user_id=user_id
+        )
+    except Exception:  # noqa: BLE001 — personalization linkage never blocks login
+        pass
 
 
 @router.post("/register", status_code=status.HTTP_202_ACCEPTED, summary="Register a local account")
@@ -204,6 +227,7 @@ async def login(
             {"totp_required": True, "challenge_token": result.challenge_token}
         )
     _set_refresh_cookie(response, result.tokens.refresh_token)
+    await _link_discovery_session(request, session, result.user.id)
     payload = presenters.tokens_payload(result.tokens)
     payload["user"] = presenters.user_summary(result.user, result.identity)
     return success(payload)
@@ -223,6 +247,7 @@ async def login_totp(
         ctx=context_from_request(request),
     )
     _set_refresh_cookie(response, result.tokens.refresh_token)
+    await _link_discovery_session(request, session, result.user.id)
     payload = presenters.tokens_payload(result.tokens)
     payload["user"] = presenters.user_summary(result.user, result.identity)
     return success(payload)
@@ -443,6 +468,7 @@ async def oauth_exchange(
         session, ticket=body.ticket, ctx=context_from_request(request)
     )
     _set_refresh_cookie(response, result.tokens.refresh_token)
+    await _link_discovery_session(request, session, result.user.id)
     payload = presenters.tokens_payload(result.tokens)
     payload["user"] = presenters.user_summary(result.user, result.identity)
     return success(payload)
@@ -462,6 +488,7 @@ async def oauth_link_confirm(
         ctx=context_from_request(request),
     )
     _set_refresh_cookie(response, result.tokens.refresh_token)
+    await _link_discovery_session(request, session, result.user.id)
     payload = presenters.tokens_payload(result.tokens)
     payload["user"] = presenters.user_summary(result.user, result.identity)
     return success(payload)

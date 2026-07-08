@@ -29,6 +29,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.modules.advertising.application import inventory_facade
 from app.modules.discovery.application import frequency_cap, ranking_service
+from app.modules.discovery.domain import allowlist
 from app.modules.opportunities.application import (
     event_public_read,
     public_read,
@@ -157,12 +158,6 @@ def _uuid_list(values: object, *, limit: int = 12) -> list[uuid.UUID]:
     return parsed
 
 
-def _string_list(values: object, *, limit: int = 12) -> list[str]:
-    if not isinstance(values, list):
-        return []
-    return [str(value).strip() for value in values[:limit] if str(value).strip()]
-
-
 async def _sponsored_banners(
     session: AsyncSession,
     *,
@@ -273,10 +268,12 @@ async def _recommended_companies(
     """Public companies ranked from company/industry session signals."""
 
     tags = session_tags or {}
+    # ``industries`` is a weighted ``{value: {count, last_seen}}`` map; read the
+    # plain viewed-value list shape-tolerantly (legacy bare lists still work).
     return await company_directory_service.list_recommended_companies(
         session,
         seed_company_ids=_uuid_list(tags.get("company_ids")),
-        industries=_string_list(tags.get("industries")),
+        industries=allowlist.coarse_values(tags, "industries")[:_SPOTLIGHT_CAP],
         limit=_SPOTLIGHT_CAP,
     )
 
@@ -338,6 +335,8 @@ async def get_overview(
             limit=_RECOMMENDED_CAP,
             locale=locale,
             with_sponsored=False,
+            discovery_session_id=discovery_session_id,
+            snapshot_surface="marketplace_overview",
         )
     except Exception:  # noqa: BLE001 — a ranker failure hides the rail, never 500s
         recommended = {"source": "recent", "personalized": False, "items": []}

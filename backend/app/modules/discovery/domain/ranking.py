@@ -18,6 +18,7 @@ Honesty contract enforced here:
 
 from __future__ import annotations
 
+import math
 from collections.abc import Callable
 from dataclasses import dataclass
 
@@ -115,6 +116,32 @@ class Components:
     preference: float | None = None
     session: float | None = None
     saved: float | None = None
+
+
+# Guest-session taxonomy-signal weighting (frequency + recency), applied to the
+# per-value ``{count, last_seen}`` coarse tags before they enter the ranker's
+# session component. A value viewed many times out-weighs a one-off; a stale value
+# time-decays so a month-old glance no longer counts as a fresh, live interest.
+SESSION_SIGNAL_HALF_LIFE_DAYS = 7.0   # weight halves every 7 idle days
+_SESSION_FREQ_LOG_NORM = math.log1p(20.0)  # ~20 views saturate the frequency term
+
+
+def session_signal_weight(count: int, age_days: float | None) -> float:
+    """Frequency- and recency-weighted strength of a coarse session signal, in [0,1].
+
+    ``count`` uses diminishing (log) returns so a value viewed 20× clearly out-weighs
+    one viewed once without letting a single burst dominate unbounded; ``age_days``
+    applies an exponential half-life decay so a stale value fades. ``age_days=None``
+    (legacy presence-only rows with no ``last_seen``) applies NO decay, preserving
+    prior behaviour for pre-migration sessions.
+    """
+
+    c = max(1, count)
+    freq = min(1.0, math.log1p(c) / _SESSION_FREQ_LOG_NORM)
+    if age_days is None or age_days <= 0:
+        return freq
+    decay = 0.5 ** (age_days / SESSION_SIGNAL_HALF_LIFE_DAYS)
+    return freq * decay
 
 
 def recency_score(days_since_published: float | None) -> float:

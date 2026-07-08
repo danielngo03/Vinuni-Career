@@ -22,6 +22,10 @@ SUPPORTED_TOOL_NAMES = frozenset(
         "recommend_jobs",
         "save_job",
         "apply_job",
+        "set_job_alert",
+        "tailor_cv_to_job",
+        "draft_and_attach_cover_letter",
+        "register_for_event",
         "get_upcoming_events",
         "get_my_registered_events",
         "search_events",
@@ -122,6 +126,8 @@ async def _execute_tool(
             return await jobs.save_job(session, principal, args)
         if name == "apply_job":
             return await jobs.apply_job(session, principal, args)
+        if name == "set_job_alert":
+            return await jobs.set_job_alert(session, principal, args)
 
         # --- Event tools ---
         if name == "get_upcoming_events":
@@ -130,6 +136,8 @@ async def _execute_tool(
             return await events.get_my_registered_events(session, principal)
         if name == "search_events":
             return await events.search_events(session, principal, args)
+        if name == "register_for_event":
+            return await events.register_for_event(session, principal, args)
 
         # --- Student tools ---
         if name == "get_my_applications":
@@ -180,6 +188,10 @@ async def _execute_tool(
             return await cv_ai.get_salary_benchmark(session, principal, args)
         if name == "start_interview_sim":
             return await cv_ai.start_interview_sim(session, principal, args)
+        if name == "tailor_cv_to_job":
+            return await cv_ai.tailor_cv_to_job(session, principal, args)
+        if name == "draft_and_attach_cover_letter":
+            return await cv_ai.draft_and_attach_cover_letter(session, principal, args)
 
         # --- Knowledge base ---
         if name == "knowledge_base_query":

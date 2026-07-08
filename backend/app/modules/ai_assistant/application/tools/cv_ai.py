@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from sqlalchemy.ext.asyncio import AsyncSession
 
+from app.ai.career import salary_benchmark
 from app.shared.permissions import Principal
 
 # Curated career data — static; never AI-generated to avoid provider exposure.
@@ -127,66 +128,9 @@ _CAREER_DATA: dict[str, dict] = {
 }
 
 # Curated salary ranges (VND million/month) — approximate market data 2024–2025.
-_SALARY_DB: dict[str, dict] = {
-    "software engineer": {
-        "tiers": [
-            {"years": "0–1", "min": 12, "max": 20},
-            {"years": "1–3", "min": 20, "max": 40},
-            {"years": "3–6", "min": 35, "max": 70},
-            {"years": "6+", "min": 60, "max": 120},
-        ],
-        "currency": "triệu VND/tháng",
-    },
-    "data scientist": {
-        "tiers": [
-            {"years": "0–1", "min": 15, "max": 25},
-            {"years": "1–3", "min": 25, "max": 50},
-            {"years": "3–6", "min": 45, "max": 80},
-            {"years": "6+", "min": 70, "max": 140},
-        ],
-        "currency": "triệu VND/tháng",
-    },
-    "product manager": {
-        "tiers": [
-            {"years": "0–2", "min": 18, "max": 30},
-            {"years": "2–5", "min": 30, "max": 65},
-            {"years": "5+", "min": 60, "max": 150},
-        ],
-        "currency": "triệu VND/tháng",
-    },
-    "marketing manager": {
-        "tiers": [
-            {"years": "0–2", "min": 10, "max": 18},
-            {"years": "2–5", "min": 18, "max": 40},
-            {"years": "5+", "min": 35, "max": 80},
-        ],
-        "currency": "triệu VND/tháng",
-    },
-    "finance analyst": {
-        "tiers": [
-            {"years": "0–2", "min": 12, "max": 22},
-            {"years": "2–5", "min": 22, "max": 50},
-            {"years": "5+", "min": 45, "max": 100},
-        ],
-        "currency": "triệu VND/tháng",
-    },
-    "ui ux designer": {
-        "tiers": [
-            {"years": "0–1", "min": 10, "max": 18},
-            {"years": "1–3", "min": 18, "max": 35},
-            {"years": "3+", "min": 30, "max": 70},
-        ],
-        "currency": "triệu VND/tháng",
-    },
-    "devops engineer": {
-        "tiers": [
-            {"years": "0–2", "min": 18, "max": 30},
-            {"years": "2–5", "min": 30, "max": 60},
-            {"years": "5+", "min": 55, "max": 110},
-        ],
-        "currency": "triệu VND/tháng",
-    },
-}
+# Sourced from the shared internal benchmark so the offer-negotiation helper and
+# this tool ground on the SAME numbers (no external data, no drift).
+_SALARY_DB: dict[str, dict] = salary_benchmark.SALARY_DB
 
 
 async def get_my_cvs(session: AsyncSession, principal: Principal) -> dict:
@@ -316,12 +260,8 @@ async def get_salary_benchmark(session: AsyncSession, principal: Principal, args
     city = (args.get("city") or "").strip().lower()
     exp_years = args.get("experience_years")
 
-    role_lower = role.lower().replace("-", " ").replace("_", " ")
-    data = None
-    for key, val in _SALARY_DB.items():
-        if key in role_lower or role_lower in key or any(w in role_lower for w in key.split()):
-            data = val
-            break
+    matched = salary_benchmark.lookup(role)
+    data = matched[1] if matched is not None else None
 
     if data is None:
         return {
@@ -368,6 +308,197 @@ async def get_salary_benchmark(session: AsyncSession, principal: Principal, args
         ),
         "search_url": f"/jobs?q={role.replace(' ', '+')}",
         "source": "market_estimate",
+    }
+
+
+def _tailor_instruction(job_title: str, gaps: list[str]) -> str:
+    """Build a non-fabricating CV-tailoring instruction for the edit-command flow.
+
+    English-authored (guardrail/prompt text stays English per .claude/rules/ai.md;
+    the edit command's output language follows the CV's own language). The
+    instruction is deliberately CONDITIONAL — the downstream edit command excludes
+    the instruction from the grounding evidence and runs the fabrication check, so
+    any skill the CV does not support is returned flagged, never silently added.
+    """
+    job_title = (job_title or "this role").strip() or "this role"
+    focus = ", ".join(g for g in gaps[:5] if g)
+    if focus:
+        return (
+            f"Tailor my CV for the '{job_title}' role. Strengthen concrete, quantified evidence "
+            f"for these required areas ONLY where my existing experience genuinely supports it: "
+            f"{focus}. Do not invent experience, skills, employers, or outcomes I do not have."
+        )
+    return (
+        f"Tailor my CV summary and experience wording to better match the '{job_title}' role, "
+        "using only my existing experience. Do not invent anything I do not have."
+    )
+
+
+async def tailor_cv_to_job(session: AsyncSession, principal: Principal, args: dict) -> dict:
+    """Produce a PENDING CV Studio diff tailoring a template CV to a job.
+
+    Mutating/AI tool: the assistant must have surfaced the confirmation card
+    (§4.3) before this executes. Reuses the WS-3 gap -> CV-edit hand-off: computes
+    the CV-JD skill gaps deterministically, then routes a grounded, conditional
+    tailoring instruction through ``cv_ai_service.request_edit_command`` — which
+    stores a PENDING ``cv_ai_suggestions`` diff (never auto-applied), meters the
+    student's AI energy (``cv_edit_command``), and audits the request. The student
+    reviews/accepts in CV Studio; nothing is written to the CV here.
+    """
+    import uuid as _uuid
+
+    if not principal.is_authenticated:
+        return {"ok": False, "error": "auth_required"}
+    if getattr(principal, "persona", None) not in ("student", "alumni", None):
+        return {"ok": False, "error": "student_only"}
+
+    raw_job_id = (args.get("job_id") or "").strip()
+    try:
+        job_id = _uuid.UUID(raw_job_id)
+    except ValueError:
+        return {"ok": False, "error": "invalid_job_id"}
+    raw_cv_id = (args.get("cv_id") or "").strip() or None
+
+    from app.modules.auth.application.context import RequestContext
+    from app.modules.documents.application import cv_ai_service, cv_service
+    from app.modules.documents.application.errors import UploadedCvReadOnlyError
+    from app.modules.opportunities.application import job_service
+    from app.shared.exceptions import (
+        AIUnavailableError,
+        QuotaExceededError,
+        ResourceNotFoundError,
+    )
+
+    try:
+        job_detail = await job_service.get_job(session, principal=principal, job_id=job_id)
+    except Exception:
+        return {"ok": False, "error": "job_not_found"}
+
+    # Resolve the CV: explicit cv_id, else the best-matching CV for this job.
+    if raw_cv_id:
+        try:
+            cv_id = _uuid.UUID(raw_cv_id)
+        except ValueError:
+            return {"ok": False, "error": "invalid_cv_id"}
+    else:
+        from app.modules.ai_assistant.application.tools.jobs import (
+            recommended_cv_id_for_job,
+        )
+
+        best_cv_id = await recommended_cv_id_for_job(session, principal, job_id)
+        if best_cv_id is None:
+            return {"ok": False, "error": "no_cv_found"}
+        cv_id = _uuid.UUID(str(best_cv_id))
+
+    # Compute the gaps deterministically (same evaluator as get_skill_gap).
+    try:
+        cv_detail = await cv_service.get_cv(session, principal=principal, cv_id=cv_id)
+    except Exception:
+        return {"ok": False, "error": "cv_not_found"}
+
+    from app.ai.cv.job_fit import CvInput, evaluate
+
+    cv_input = CvInput(
+        cv_id=str(cv_id),
+        title=cv_detail.get("title", ""),
+        language=cv_detail.get("language_code", "vi"),
+        sections=cv_detail.get("sections", []),
+        last_updated_days=cv_detail.get("last_updated_days", 0),
+    )
+    outcome = evaluate(job_detail, [cv_input], stale_days=180)
+    fit = outcome.results[0] if outcome.results else None
+    gaps = list(fit.gaps[:5]) if fit else []
+
+    instruction = _tailor_instruction(job_detail.get("title", ""), gaps)
+
+    # Route through the pending-diff edit-command flow (metered + audited there).
+    try:
+        suggestion = await cv_ai_service.request_edit_command(
+            session,
+            principal=principal,
+            cv_id=cv_id,
+            payload={"instruction": instruction},
+            ctx=RequestContext(),
+        )
+    except UploadedCvReadOnlyError:
+        return {"ok": False, "error": "cv_not_editable", "cv_id": str(cv_id)}
+    except QuotaExceededError:
+        return {"ok": False, "error": "quota_exceeded"}
+    except AIUnavailableError:
+        return {"ok": False, "error": "ai_unavailable"}
+    except ResourceNotFoundError:
+        return {"ok": False, "error": "cv_not_found"}
+    except Exception:
+        return {"ok": False, "error": "tailor_failed"}
+
+    return {
+        "ok": True,
+        "job_id": str(job_id),
+        "job_title": job_detail.get("title", ""),
+        "cv_id": str(cv_id),
+        "suggestion_id": suggestion.get("id"),
+        # PENDING diff — never auto-applied; the student accepts in CV Studio.
+        "status": suggestion.get("status"),
+        "requires_confirmation": True,
+        "targeted_gaps": gaps,
+        "review_url": f"/student/cv/{cv_id}",
+    }
+
+
+async def draft_and_attach_cover_letter(
+    session: AsyncSession, principal: Principal, args: dict
+) -> dict:
+    """Draft a cover letter for a job and return it for the apply flow.
+
+    Mutating/AI tool: the assistant must have surfaced the confirmation card
+    (§4.3) before this executes. Reuses ``cover_letter_service.generate_cover_letter``
+    (metered ``cover_letter`` energy on the successful draft; deterministic static
+    fallback if AI is down). The draft is NEVER forwarded to the employer here — it
+    is returned with a ready-to-send ``attach`` payload for the confirmation-gated
+    ``apply_job`` flow, where the student attaches it on submit.
+    """
+    import uuid as _uuid
+
+    if not principal.is_authenticated:
+        return {"ok": False, "error": "auth_required"}
+    if getattr(principal, "persona", None) not in ("student", "alumni", None):
+        return {"ok": False, "error": "student_only"}
+
+    raw_job_id = (args.get("job_id") or "").strip()
+    try:
+        job_id = _uuid.UUID(raw_job_id)
+    except ValueError:
+        return {"ok": False, "error": "invalid_job_id"}
+    cv_id = (args.get("cv_id") or "").strip() or None
+    note = (args.get("note") or "").strip() or None
+
+    from app.modules.opportunities.application import cover_letter_service
+    from app.shared.exceptions import QuotaExceededError, ResourceNotFoundError
+
+    try:
+        drafted = await cover_letter_service.generate_cover_letter(
+            session, principal=principal, job_id=job_id, student_note=note
+        )
+    except ResourceNotFoundError:
+        return {"ok": False, "error": "job_not_found", "job_id": raw_job_id}
+    except QuotaExceededError:
+        return {"ok": False, "error": "quota_exceeded"}
+    except Exception:
+        return {"ok": False, "error": "cover_letter_failed", "job_id": raw_job_id}
+
+    draft = (drafted.get("draft") or "").strip()
+    attach_args: dict = {"job_id": raw_job_id, "cover_letter": draft}
+    if cv_id:
+        attach_args["cv_id"] = cv_id
+    return {
+        "ok": True,
+        "job_id": raw_job_id,
+        "draft": draft,
+        "ai_available": not drafted.get("is_fallback", False),
+        # Loop-closing hand-off: the drafted letter attaches on the next
+        # confirmation-gated apply (apply_job accepts an optional cover_letter).
+        "attach": {"tool": "apply_job", "args": attach_args},
+        "apply_url": f"/jobs/{raw_job_id}",
     }
 
 

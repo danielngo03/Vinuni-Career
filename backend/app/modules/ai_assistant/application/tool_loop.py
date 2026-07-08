@@ -126,20 +126,32 @@ def agent_plan_requires_confirmation(plan: AgentPlan) -> bool:
     return bool(spec and spec.permission_class == "confirmation_required")
 
 
-def create_confirmation_message(
-    chat: ChatSession, plan: AgentPlan, *, locale: str = "vi"
+def make_confirmation_message(
+    chat: ChatSession,
+    *,
+    tool_name: str,
+    tool_args: dict | None,
+    reason: str | None = None,
+    locale: str = "vi",
 ) -> ChatMessage:
-    tool_name = plan.tool_name or ""
+    """Build a pending ``tool_call`` confirmation card for a mutating tool.
+
+    The card copy is LOCALE-DRIVEN: it resolves the tool's ``ConfirmationCopy``
+    (message-catalog keys) for ``locale`` so vi/en both render from one contract
+    (§4.3). Used by both the deterministic-planner path and the LLM tool-call
+    path so neither hardcodes a single locale.
+    """
     spec = TOOL_SPECS.get(tool_name)
     copy = spec.confirmation_copy if spec else None
-    if copy:
-        content = f"{copy.title}\n{copy.body}"
-        if plan.reason:
-            content = f"{content}\n\n{plan.reason}"
+    if copy is not None:
+        localized = copy.localized(locale)
+        content = f"{localized['title']}\n{localized['body']}"
+        if reason:
+            content = f"{content}\n\n{reason}"
     else:
-        reason = f": {plan.reason}" if plan.reason else ""
+        reason_suffix = f": {reason}" if reason else ""
         content = assistant_message(
-            "confirm.pending_generic", locale, tool_name=tool_name, reason=reason
+            "confirm.pending_generic", locale, tool_name=tool_name, reason=reason_suffix
         )
     return ChatMessage(
         id=uuid.uuid4(),
@@ -147,9 +159,21 @@ def create_confirmation_message(
         role="tool_call",
         content=content,
         tool_name=tool_name,
-        tool_args=plan.tool_args or {},
+        tool_args=tool_args or {},
         requires_confirmation=True,
         created_at=datetime.now(UTC),
+    )
+
+
+def create_confirmation_message(
+    chat: ChatSession, plan: AgentPlan, *, locale: str = "vi"
+) -> ChatMessage:
+    return make_confirmation_message(
+        chat,
+        tool_name=plan.tool_name or "",
+        tool_args=plan.tool_args or {},
+        reason=plan.reason,
+        locale=locale,
     )
 
 
@@ -230,7 +254,7 @@ async def confirm_tool_action(
     # Write a follow-up assistant message summarising the outcome
     ok = result.get("ok", False)
     summary_text = (
-        _confirmation_result_text(tool_name, locale)
+        _confirmation_result_text(tool_name, result, locale)
         if ok
         else _confirmation_error_text(tool_name, result, locale)
     )
@@ -251,13 +275,26 @@ async def confirm_tool_action(
     }
 
 
-def _confirmation_result_text(tool_name: str, locale: str = "vi") -> str:
+def _confirmation_result_text(
+    tool_name: str, result: dict[str, Any], locale: str = "vi"
+) -> str:
     if tool_name == "save_job":
         return assistant_message("confirm.result.save_job", locale)
     if tool_name == "apply_job":
         return assistant_message("confirm.result.apply_job", locale)
     if tool_name == "move_candidate_stage":
         return assistant_message("confirm.result.move_candidate_stage", locale)
+    if tool_name == "tailor_cv_to_job":
+        return assistant_message("confirm.result.tailor_cv_to_job", locale)
+    if tool_name == "draft_and_attach_cover_letter":
+        return assistant_message("confirm.result.draft_and_attach_cover_letter", locale)
+    if tool_name == "set_job_alert":
+        return assistant_message("confirm.result.set_job_alert", locale)
+    if tool_name == "register_for_event":
+        status = str(result.get("status") or "").lower()
+        if "waitlist" in status or result.get("waitlist_position"):
+            return assistant_message("confirm.result.register_for_event.waitlisted", locale)
+        return assistant_message("confirm.result.register_for_event", locale)
     return assistant_message("confirm.result.generic", locale)
 
 
@@ -273,6 +310,15 @@ def _confirmation_error_text(
         return assistant_message("confirm.error.apply_generic", locale)
     if tool_name == "save_job":
         return assistant_message("confirm.error.save_generic", locale)
+    if tool_name == "tailor_cv_to_job" and error == "cv_not_editable":
+        return assistant_message("confirm.error.tailor_cv_not_editable", locale)
+    if tool_name == "set_job_alert":
+        if error == "alert_name_exists":
+            return assistant_message("confirm.error.set_job_alert_exists", locale)
+        if error == "alert_limit_reached":
+            return assistant_message("confirm.error.set_job_alert_limit", locale)
+    if tool_name == "register_for_event" and error == "already_registered":
+        return assistant_message("confirm.error.register_already", locale)
     return assistant_message("confirm.error.generic", locale)
 
 

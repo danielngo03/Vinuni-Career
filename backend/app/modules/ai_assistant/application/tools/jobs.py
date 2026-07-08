@@ -269,6 +269,63 @@ async def save_job(session: AsyncSession, principal: Principal, args: dict) -> d
         return {"ok": False, "error": "save_failed", "job_id": job_id_str}
 
 
+async def set_job_alert(session: AsyncSession, principal: Principal, args: dict) -> dict:
+    """Create a job alert subscription from the current search criteria.
+
+    Mutating tool: the assistant must have surfaced the confirmation card (§4.3)
+    before this executes. ``job_alert_service.create_alert`` writes the audit row
+    (criteria only — no PII) and commits its own transaction.
+    """
+    if not principal.is_authenticated:
+        return {"ok": False, "error": "auth_required"}
+
+    from app.modules.auth.application.context import RequestContext
+    from app.modules.opportunities.application import job_alert_service
+    from app.shared.exceptions import (
+        ConflictError,
+        PermissionDeniedError,
+        QuotaExceededError,
+    )
+
+    keywords = (args.get("keywords") or "").strip() or None
+    employment_type = (args.get("employment_type") or "").strip() or None
+    location_type = (args.get("location_type") or "").strip() or None
+    province_code = (args.get("province_code") or "").strip() or None
+    name = (args.get("name") or "").strip() or keywords or "Job alert"
+
+    try:
+        alert = await job_alert_service.create_alert(
+            session,
+            principal=principal,
+            name=name[:120],
+            keywords=keywords,
+            employment_type=employment_type,
+            location_type=location_type,
+            province_code=province_code,
+            ctx=RequestContext(),
+        )
+    except ConflictError:
+        return {"ok": False, "error": "alert_name_exists"}
+    except QuotaExceededError:
+        return {"ok": False, "error": "alert_limit_reached"}
+    except PermissionDeniedError:
+        return {"ok": False, "error": "student_only"}
+    except Exception:
+        return {"ok": False, "error": "alert_failed"}
+
+    return {
+        "ok": True,
+        "created": True,
+        "alert": {
+            "name": alert.get("name", name),
+            "keywords": alert.get("keywords") or keywords,
+            "employment_type": alert.get("employment_type") or employment_type,
+            "location_type": alert.get("location_type") or location_type,
+        },
+        "manage_url": "/student/alerts",
+    }
+
+
 async def apply_job(session: AsyncSession, principal: Principal, args: dict) -> dict:
     """Submit an application on the student's behalf.
 
@@ -276,6 +333,8 @@ async def apply_job(session: AsyncSession, principal: Principal, args: dict) -> 
     confirmation card (§4.3) before this executes. ``cv_id`` names one of the
     student's own CV profiles; the currently accepted version of that CV is
     used as the immutable application snapshot (``documents`` module contract).
+    An optional ``cover_letter`` (e.g. a draft produced by
+    ``draft_and_attach_cover_letter``) is attached to the application.
     """
     if not principal.is_authenticated:
         return {"ok": False, "error": "auth_required"}
@@ -310,17 +369,23 @@ async def apply_job(session: AsyncSession, principal: Principal, args: dict) -> 
         if not current_version_id:
             return {"ok": False, "error": "cv_has_no_version", "job_id": str(job_id)}
 
+        apply_payload: dict = {
+            "job_id": str(job_id),
+            "cv_selection": {
+                "type": "builder_cv",
+                "cv_profile_id": str(cv_id),
+                "cv_version_id": current_version_id,
+            },
+        }
+        cover_letter = (args.get("cover_letter") or "").strip()
+        if cover_letter:
+            # Cap defensively to the application schema's cover_letter bound.
+            apply_payload["cover_letter"] = cover_letter[:20000]
+
         result = await apply_service.apply_to_job(
             session,
             principal=principal,
-            payload={
-                "job_id": str(job_id),
-                "cv_selection": {
-                    "type": "builder_cv",
-                    "cv_profile_id": str(cv_id),
-                    "cv_version_id": current_version_id,
-                },
-            },
+            payload=apply_payload,
             ctx=RequestContext(),
         )
         return {

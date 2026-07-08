@@ -24,15 +24,18 @@ from __future__ import annotations
 
 import uuid
 from dataclasses import dataclass, field
-from datetime import UTC, datetime
+from datetime import UTC, datetime, timedelta
 
+from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.ai.cv import job_fit
 from app.core.config import get_settings
 from app.modules.advertising.application import inventory_facade
-from app.modules.discovery.application import frequency_cap
-from app.modules.discovery.domain import ranking, taxonomy
+from app.modules.advertising.domain import targeting as ad_targeting
+from app.modules.discovery.application import frequency_cap, snapshot_service
+from app.modules.discovery.domain import allowlist, ranking, taxonomy
+from app.modules.discovery.domain.search_log_model import SearchLog
 from app.modules.documents.application import cv_ranking_facade
 from app.modules.opportunities.application import ranking_read, saved_jobs_service
 from app.modules.opportunities.application.ranking_read import RankingCandidate
@@ -48,6 +51,10 @@ _POOL_CAP = 60
 _SIMILAR_POOL_CAP = 80
 _POPULAR_POOL_CAP = 200
 _MAX_QUERY_TERMS = 6
+# Recent typed searches (from ``search_logs``) that also personalize job ranking:
+# a single indexed read bounded by window + limit (NOT a multi-domain join).
+_SEARCH_LOG_LOOKBACK_DAYS = 7
+_SEARCH_LOG_QUERY_LIMIT = 10
 
 
 def _now() -> datetime:
@@ -58,6 +65,40 @@ def _aware(dt: datetime | None) -> datetime | None:
     if dt is None:
         return None
     return dt if dt.tzinfo is not None else dt.replace(tzinfo=UTC)
+
+
+def _age_days(last_seen_iso: str | None, *, now: datetime) -> float | None:
+    """Days since a coarse tag's ``last_seen`` (``None`` for legacy → no decay)."""
+
+    if not last_seen_iso:
+        return None
+    try:
+        dt = datetime.fromisoformat(last_seen_iso)
+    except ValueError:
+        return None
+    aware = dt if dt.tzinfo is not None else dt.replace(tzinfo=UTC)
+    return max(0.0, (now - aware).total_seconds() / 86400.0)
+
+
+def _session_weights(
+    tags: dict | None, keys: tuple[str, ...], *, now: datetime
+) -> dict[str, float]:
+    """Collapse weighted coarse tags across ``keys`` into value → freq×decay weight.
+
+    Reads the PII-free ``{value: {count, last_seen}}`` shape (legacy bare lists read
+    as ``count=1`` / no decay) and applies :func:`ranking.session_signal_weight`, so
+    the ranker sees a live, frequency- and recency-aware strength per coarse value.
+    """
+
+    weights: dict[str, float] = {}
+    for key in keys:
+        for value, count, last_seen_iso in allowlist.weighted_entries(tags, key):
+            weight = ranking.session_signal_weight(
+                count, _age_days(last_seen_iso, now=now)
+            )
+            if weight > weights.get(value, 0.0):
+                weights[value] = weight
+    return weights
 
 
 def _days_since(dt: datetime | None, *, now: datetime) -> float | None:
@@ -78,8 +119,10 @@ class _RankCtx:
     locale: str
     stale_days: int
     query_terms: list[str]
-    session_categories: list[str]
-    session_role_families: list[str]
+    # Value → frequency×decay weight (freshly recomputed per request from the
+    # coarse ``{count, last_seen}`` tags), consumed by ``_session_component``.
+    session_category_weights: dict[str, float]
+    session_role_family_weights: dict[str, float]
     cv_inputs: list[job_fit.CvInput]
     prefs: RankingPreferences | None
     saved_employment_types: list[str] = field(default_factory=list)
@@ -103,15 +146,27 @@ class _RankCtx:
         )
 
 
-def _coarse_list(tags: dict | None, key: str) -> list[str]:
-    if not isinstance(tags, dict):
-        return []
-    value = tags.get(key)
-    if isinstance(value, str):
-        return [value]
-    if isinstance(value, list):
-        return [str(v) for v in value if isinstance(v, str)]
-    return []
+async def _recent_search_terms(
+    session: AsyncSession, discovery_session_id: uuid.UUID, *, now: datetime
+) -> list[str]:
+    """Recent typed searches for this session from ``search_logs`` (newest first).
+
+    Unifies the previously-disconnected keyword store with the ranker: a bounded,
+    session-scoped, indexed read (``ix_search_logs_session_created``) — never a
+    heavy join. A failure here must never 500 discovery (caller guards).
+    """
+
+    cutoff = now - timedelta(days=_SEARCH_LOG_LOOKBACK_DAYS)
+    rows = await session.execute(
+        select(SearchLog.query)
+        .where(
+            SearchLog.session_id == discovery_session_id,
+            SearchLog.created_at >= cutoff,
+        )
+        .order_by(SearchLog.created_at.desc())
+        .limit(_SEARCH_LOG_QUERY_LIMIT)
+    )
+    return [q for (q,) in rows.all()]
 
 
 async def _build_ctx(
@@ -121,26 +176,44 @@ async def _build_ctx(
     cookie_tags: dict | None,
     q: str | None,
     locale: str,
+    discovery_session_id: uuid.UUID | None = None,
 ) -> _RankCtx:
     settings = get_settings()
+    now = _now()
     tags = cookie_tags or {}
 
-    search_terms = _coarse_list(tags, "search_terms")
+    # Query terms: explicit ``q`` → recorded coarse ``search_terms`` → recent typed
+    # searches from ``search_logs``. De-duped by normalized form so a term recorded
+    # in BOTH stores is never double-counted.
     query_terms: list[str] = []
     seen: set[str] = set()
-    for raw in [*( [q] if q else [] ), *search_terms]:
+
+    def _add_term(raw: str | None) -> None:
+        if not raw or len(query_terms) >= _MAX_QUERY_TERMS:
+            return
         norm = taxonomy.normalize(raw)
         if norm and norm not in seen:
             seen.add(norm)
             query_terms.append(raw.strip())
-        if len(query_terms) >= _MAX_QUERY_TERMS:
-            break
 
-    session_categories = [
-        *_coarse_list(tags, "categories"),
-        *_coarse_list(tags, "industries"),
-    ]
-    session_role_families = _coarse_list(tags, "role_families")
+    if q:
+        _add_term(q)
+    for term in allowlist.coarse_values(tags, "search_terms"):
+        _add_term(term)
+    if discovery_session_id is not None and len(query_terms) < _MAX_QUERY_TERMS:
+        try:
+            recent = await _recent_search_terms(
+                session, discovery_session_id, now=now
+            )
+        except Exception:  # noqa: BLE001 — a search-log read must not 500 discovery
+            recent = []
+        for term in recent:
+            _add_term(term)
+
+    session_category_weights = _session_weights(
+        tags, ("categories", "industries"), now=now
+    )
+    session_role_family_weights = _session_weights(tags, ("role_families",), now=now)
 
     cv_inputs: list[job_fit.CvInput] = []
     prefs: RankingPreferences | None = None
@@ -163,12 +236,12 @@ async def _build_ctx(
             saved_signals = {}
 
     ctx = _RankCtx(
-        now=_now(),
+        now=now,
         locale=locale,
         stale_days=settings.cv_stale_after_days,
         query_terms=query_terms,
-        session_categories=session_categories,
-        session_role_families=session_role_families,
+        session_category_weights=session_category_weights,
+        session_role_family_weights=session_role_family_weights,
         cv_inputs=cv_inputs,
         prefs=prefs,
         saved_employment_types=saved_signals.get("employment_types", []),
@@ -178,7 +251,9 @@ async def _build_ctx(
     ctx.has_query = bool(query_terms)
     ctx.has_cv = bool(cv_inputs)
     ctx.has_pref = bool(prefs and prefs.has_signal)
-    ctx.has_session = bool(session_categories or session_role_families)
+    ctx.has_session = bool(
+        session_category_weights or session_role_family_weights
+    )
     ctx.has_saved = bool(
         saved_signals.get("employment_types")
         or saved_signals.get("raw_titles")
@@ -286,35 +361,44 @@ def _preference_component(
 def _session_component(
     cand: RankingCandidate, ctx: _RankCtx, tokens: set[str]
 ) -> tuple[float | None, dict | None]:
-    if not (ctx.session_categories or ctx.session_role_families):
+    """Frequency- and recency-weighted guest-session affinity for a candidate.
+
+    Each matched coarse value contributes its ``session_signal_weight`` (already
+    freq×decay-scaled into [0,1]); the candidate takes the STRONGEST match. So a
+    Finance job matches a "Finance viewed 20×" signal far more strongly than a
+    once-viewed one, and a month-old signal has decayed toward zero — while a
+    no-overlap candidate returns ``None`` (the component is simply absent, never a
+    diluting zero).
+    """
+
+    if not (ctx.session_category_weights or ctx.session_role_family_weights):
         return None, None
-    matched_value: str | None = None
-    matched = 0
-    total = max(1, len(ctx.session_categories))
-    for cat in ctx.session_categories:
-        cat_tokens = taxonomy.tokens_of(cat, None)
-        if cat_tokens & tokens:
-            matched += 1
-            if matched_value is None:
-                matched_value = cat
+
+    best_category: str | None = None
+    best_category_weight = 0.0
+    for cat, weight in ctx.session_category_weights.items():
+        if taxonomy.tokens_of(cat, None) & tokens and weight > best_category_weight:
+            best_category_weight = weight
+            best_category = cat
+
     # Role-family overlap: the candidate's family (or its word parts) appears among
-    # the viewed role families the session recorded.
+    # the weighted viewed role families the session recorded.
     family = taxonomy.role_family_of(cand.title)
-    family_words: set[str] = set()
-    for fam in ctx.session_role_families:
-        family_words |= taxonomy.tokens_of(fam, None)
-        family_words.add(taxonomy.normalize(fam))
-    family_hit = bool(
-        family and (family in family_words or bool(set(family.split("_")) & family_words))
-    )
-    frac = matched / total
-    if family_hit:
-        frac = max(frac, 0.7)
-    if matched_value is not None:
-        return frac, {"code": ranking.REASON_SIMILAR_INDUSTRY, "value": matched_value}
-    if family_hit:
-        return frac, {"code": ranking.REASON_SIMILAR_ROLE}
-    return (frac if matched else None), None
+    best_family_weight = 0.0
+    if family:
+        for fam, weight in ctx.session_role_family_weights.items():
+            fam_words = taxonomy.tokens_of(fam, None) | {taxonomy.normalize(fam)}
+            if (
+                family in fam_words or bool(set(family.split("_")) & fam_words)
+            ) and weight > best_family_weight:
+                best_family_weight = weight
+
+    frac = max(best_category_weight, best_family_weight)
+    if frac <= 0.0:
+        return None, None
+    if best_category is not None and best_category_weight >= best_family_weight:
+        return frac, {"code": ranking.REASON_SIMILAR_INDUSTRY, "value": best_category}
+    return frac, {"code": ranking.REASON_SIMILAR_ROLE}
 
 
 def _saved_component(
@@ -464,6 +548,7 @@ async def recommend_jobs(
     fallback: str = ranking.SOURCE_RECENT,
     with_sponsored: bool = True,
     discovery_session_id: uuid.UUID | None = None,
+    snapshot_surface: str | None = None,
 ) -> dict:
     """Personalized (or honestly-fallback) job recommendations.
 
@@ -472,10 +557,20 @@ async def recommend_jobs(
     No signal → honest ``source=recent`` / ``popular`` fallback (never a silent
     "recommended" mislabel). Sponsored items fill defined slots only and never
     reorder organic relevance. Hide-if-empty: ``items == []`` when nothing eligible.
+
+    When ``snapshot_surface`` is set (only at the real serving points —
+    ``marketplace_overview`` / ``jobs_recommendations``), a privacy-safe
+    ``recommendation_snapshot`` of exactly what was returned (job ids + honest
+    source + reason codes, no PII) is persisted best-effort for audit/repro/eval.
     """
 
     ctx = await _build_ctx(
-        session, principal=principal, cookie_tags=cookie_tags, q=q, locale=locale
+        session,
+        principal=principal,
+        cookie_tags=cookie_tags,
+        q=q,
+        locale=locale,
+        discovery_session_id=discovery_session_id,
     )
     pool = await ranking_read.list_candidates(
         session,
@@ -518,6 +613,7 @@ async def recommend_jobs(
             principal=principal,
             ctx=ctx,
             locale=locale,
+            cookie_tags=cookie_tags,
             discovery_session_id=discovery_session_id,
         )
         # Dedupe: a sponsored job never also appears in the organic stream.
@@ -526,11 +622,70 @@ async def recommend_jobs(
         ]
 
     composed = ranking.inject_sponsored(organic_items, sponsored_items)
+    items = composed[:limit]
+
+    if snapshot_surface is not None and items:
+        await snapshot_service.record_serving_snapshot(
+            session,
+            surface=snapshot_surface,
+            principal=principal,
+            discovery_session_id=discovery_session_id,
+            list_source=list_source,
+            personalized=list_has_signal,
+            items=items,
+        )
+
     return {
         "source": list_source,
         "personalized": list_has_signal,
-        "items": composed[:limit],
+        "items": items,
     }
+
+
+def _norm_token(value: str | None) -> str | None:
+    if not value:
+        return None
+    token = value.strip().lower()
+    return token or None
+
+
+def _build_viewer_signals(
+    *,
+    cookie_tags: dict | None,
+    principal: Principal,
+    locale: str,
+    prefs: RankingPreferences | None,
+) -> ad_targeting.ViewerSignals:
+    """Assemble the PII-free coarse signals a paid slot may be targeted against.
+
+    Reuses ONLY allowlisted coarse tags (city / work_mode / industries /
+    role_families) plus the student's confirmed preference field/location and the
+    coarse persona + locale — never any PII/sensitive signal (the targeting domain
+    also re-checks the descriptor against the forbidden-signal allowlist).
+    """
+
+    tags = cookie_tags or {}
+    cities = {t for t in allowlist.coarse_values(tags, "city") if t}
+    work_modes = {t for t in allowlist.coarse_values(tags, "work_mode") if t}
+    industries = {t for t in allowlist.coarse_values(tags, "industries") if t}
+    role_families = {t for t in allowlist.coarse_values(tags, "role_families") if t}
+
+    if prefs is not None:
+        pref_city = _norm_token(prefs.location_city)
+        if pref_city:
+            cities.add(pref_city)
+        pref_field = _norm_token(prefs.field)
+        if pref_field:
+            industries.add(pref_field)
+
+    return ad_targeting.ViewerSignals(
+        persona=principal.persona,
+        locale=locale,
+        cities=frozenset(cities),
+        work_modes=frozenset(work_modes),
+        industries=frozenset(industries),
+        role_families=frozenset(role_families),
+    )
 
 
 async def _resolve_sponsored(
@@ -539,10 +694,20 @@ async def _resolve_sponsored(
     principal: Principal,
     ctx: _RankCtx,
     locale: str,
+    cookie_tags: dict | None = None,
     discovery_session_id: uuid.UUID | None = None,
 ) -> tuple[list[dict], set[uuid.UUID]]:
-    """Live sponsored job placements, eligibility- and frequency-cap-filtered."""
+    """Live sponsored job placements, targeting-, eligibility- and cap-filtered.
 
+    Paid slots are relevance-filtered to the viewer's coarse signals BEFORE the
+    organic dedupe/injection — targeting only ever selects/orders the PAID slots;
+    it never reorders or bleeds into the organic stream (that separation is
+    preserved by ``ranking.inject_sponsored`` in the caller).
+    """
+
+    viewer = _build_viewer_signals(
+        cookie_tags=cookie_tags, principal=principal, locale=locale, prefs=ctx.prefs
+    )
     capped = await frequency_cap.over_capped_placements(
         session,
         session_id=discovery_session_id,
@@ -553,6 +718,7 @@ async def _resolve_sponsored(
         target_type="job",
         limit=len(ranking.SPONSORED_SLOTS),
         exclude_placement_ids=capped,
+        viewer=viewer,
     )
     if not active:
         return [], set()
