@@ -223,4 +223,20 @@ async def analyze_attachment(
     return {**public, "cached": False}
 
 
-__all__ = ["upload_attachment", "analyze_attachment"]
+async def get_owned_file(
+    session: AsyncSession, *, principal: Principal, attachment_id: uuid.UUID
+) -> tuple[str, bytes]:
+    """Load the caller's OWN attachment's ``(filename, bytes)`` — owner+org scoped.
+
+    For downstream tools (e.g. building a job from an uploaded JD PDF) that need
+    the raw bytes. The storage key stays internal; only filename + content leave.
+    Raises ``ResourceNotFoundError`` (404) for a foreign/missing id.
+    """
+
+    if not principal.is_authenticated:
+        raise AuthRequiredError()
+    row = await _load_owned(session, principal=principal, attachment_id=attachment_id)
+    return row.filename, storage.load(row.storage_key)
+
+
+__all__ = ["upload_attachment", "analyze_attachment", "get_owned_file"]

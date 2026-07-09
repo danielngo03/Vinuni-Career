@@ -1056,6 +1056,99 @@ TOOL_SPECS: dict[str, ToolSpec] = {
         audit_event_type="TOOL_ANALYZE_ATTACHMENT",
         timeout_seconds=25,
     ),
+    "draft_job_from_attachment": ToolSpec(
+        name="draft_job_from_attachment",
+        description=(
+            "Extract a structured JOB DRAFT from a JD file the recruiter uploaded to "
+            "this chat (PDF, image/scan, or DOCX). Use this when the recruiter uploads "
+            "a job description and asks to create a posting from it, e.g. 'tạo tin từ "
+            "file này', 'draft a job from this JD'. Requires attachment_id from the "
+            "uploaded file. Returns structured draft fields (title, description, "
+            "skills, employment type, etc.) plus a bias flag — nothing is saved. "
+            "After showing the draft, call create_job to actually create it. Only "
+            "available to partner users."
+        ),
+        parameters={
+            "type": "object",
+            "properties": {
+                "attachment_id": {
+                    "type": "string",
+                    "description": "UUID of the JD file the recruiter uploaded to this chat",
+                },
+            },
+            "required": ["attachment_id"],
+        },
+        permission_class="read_only",
+        persona=[PARTNER_USER],
+        required_permissions=["authenticated", "role:partner_user", "ai_recruiting:draft_jd"],
+        fallback=(
+            "I couldn't read that JD file right now. Make sure you uploaded a PDF/image/"
+            "DOCX job description to this chat, then try again."
+        ),
+        audit_event_type="TOOL_DRAFT_JOB_FROM_ATTACHMENT",
+        timeout_seconds=30,
+    ),
+    "create_job": ToolSpec(
+        name="create_job",
+        description=(
+            "Create a new job posting for the partner's organisation as a DRAFT "
+            "(not public; moderation pending). Use this ONLY after the recruiter has "
+            "reviewed a draft (e.g. from draft_job_from_attachment or one you wrote) "
+            "and explicitly asks to create/save the job. Pass the job fields you and "
+            "the recruiter agreed on (title and description are required). Requires "
+            "the recruiter to confirm before it runs; it never publishes the job — "
+            "the recruiter submits it for moderation afterwards. Only available to "
+            "partner users with job-create rights."
+        ),
+        parameters={
+            "type": "object",
+            "properties": {
+                "title": {"type": "string", "description": "Job title"},
+                "description": {"type": "string", "description": "Full job description"},
+                "requirements": {"type": "string"},
+                "benefits": {"type": "string"},
+                "employment_type": {
+                    "type": "string",
+                    "enum": ["full_time", "part_time", "internship", "contract"],
+                },
+                "location_type": {
+                    "type": "string",
+                    "enum": ["onsite", "remote", "hybrid"],
+                },
+                "location_city": {"type": "string"},
+                "required_skills": {"type": "array", "items": {"type": "string"}},
+                "preferred_skills": {"type": "array", "items": {"type": "string"}},
+                "experience_min_years": {"type": "integer"},
+                "experience_max_years": {"type": "integer"},
+                "seniority_level": {"type": "string"},
+                "salary_min": {"type": "integer"},
+                "salary_max": {"type": "integer"},
+                "salary_currency": {"type": "string"},
+            },
+            "required": ["title", "description"],
+        },
+        permission_class="confirmation_required",
+        persona=[PARTNER_USER],
+        required_permissions=["authenticated", "role:partner_user", "jobs:create"],
+        side_effects=[
+            "INSERT jobs row (status=draft, moderation=pending)",
+            "audit job.created",
+        ],
+        confirmation_copy=ConfirmationCopy(
+            title="Tạo tin tuyển dụng này?",
+            body=(
+                "Một tin tuyển dụng NHÁP (chưa công khai, chờ kiểm duyệt) sẽ được tạo "
+                "cho tổ chức của bạn. Bạn có thể chỉnh sửa và gửi duyệt sau."
+            ),
+            cta_confirm="Tạo tin nháp",
+        ),
+        fallback=(
+            "I couldn't create the job right now. You can create it directly at "
+            "/partner/jobs/new."
+        ),
+        audit_event_type="TOOL_CREATE_JOB",
+        timeout_seconds=20,
+    ),
     "knowledge_base_query": ToolSpec(
         name="knowledge_base_query",
         description=(
