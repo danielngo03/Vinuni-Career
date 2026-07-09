@@ -605,6 +605,43 @@ async def test_department_scope_is_access_control_not_just_a_filter(db_session) 
     assert detail_admin["id"] == str(tid)
 
 
+async def test_org_page_initiate_and_send_require_capability(db_session) -> None:
+    """Acting AS the org Page (initiate + send) requires the grantable messaging
+    capability — org membership alone must not let an ungranted staffer speak for
+    the company; a granted member can."""
+    from app.modules.messaging.application.errors import MessagingNotAllowedError
+
+    admin_user, porg, admin = await make_partner(db_session, display_name="Acme Co")
+    _uu, uorg, _uni = await make_university(db_session, display_name="VinUni")
+
+    # A member with NO messaging grant cannot initiate as the Page.
+    _ng_user, _m, nogrant = await add_member(
+        db_session, org=porg, member_email=email("nogrant"), permissions=[],
+    )
+    with pytest.raises(MessagingNotAllowedError):
+        await thread_service.create_thread(
+            db_session, principal=nogrant, kind="direct", context_type=None,
+            context_id=None, recipient_ids=[], target_org_id=uorg.id,
+            first_message="Rogue outreach", ctx=CTX,
+        )
+
+    # A member WITH messaging:initiate + send can, and can then send as the Page.
+    _ok_user, _m2, ok = await add_member(
+        db_session, org=porg, member_email=email("ok"),
+        permissions=[("messaging", "initiate"), ("messaging", "send")],
+    )
+    out = await thread_service.create_thread(
+        db_session, principal=ok, kind="direct", context_type=None,
+        context_id=None, recipient_ids=[], target_org_id=uorg.id,
+        first_message="Official partner outreach", ctx=CTX,
+    )
+    tid = uuid.UUID(out["id"])
+    await message_service.send_message(
+        db_session, principal=ok, thread_id=tid, body="Following up as the company",
+        ctx=CTX,
+    )
+
+
 # --------------------------------------------------------------------------- #
 # Recipient discovery: a student can never find another student               #
 # --------------------------------------------------------------------------- #

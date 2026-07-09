@@ -438,6 +438,17 @@ async def send_message(
             session, thread_id=thread_id, user_id=sender_id, user_org_ids=user_org_ids
         )
 
+    # Speaking AS an org Page requires the grantable messaging:send on EVERY send —
+    # not just when a participant row is first created. This closes the hole where
+    # the initiator (or anyone who already holds a participant row) could keep
+    # posting as the company/university Page after their grant was never given or
+    # was later revoked. Individual (user-party) senders need no capability.
+    if sender_party is not None and sender_party.party_kind == rules.PARTY_ORG:
+        if sender_party.org_id is None or not capability.can_send_as_org(
+            principal, sender_party.org_id
+        ):
+            raise ResourceNotFoundError()
+
     # STUDENT↔STUDENT HARD BLOCK — the SECOND enforcement layer (re-checked on every
     # send, never cached at create). Even a thread that somehow contains two students
     # can never carry a student↔student message.

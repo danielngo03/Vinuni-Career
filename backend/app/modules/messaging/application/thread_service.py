@@ -182,6 +182,22 @@ async def create_thread(
     thread_org_id = principal.org_id
     is_application = False
 
+    # Initiating AS an org Page (partner/university outbound: to another org, an
+    # internal department, or a cold outreach) requires the grantable
+    # messaging:initiate capability — org membership alone must not let an
+    # ungranted staffer speak for the company/university Page. Individual
+    # (student/alumni) initiators need no capability; recruitment application
+    # threads stay authorized by the application relationship, so they are exempt.
+    if (
+        parties.is_org_side(principal.persona)
+        and context_type != rules.CONTEXT_APPLICATION
+        and (
+            principal.org_id is None
+            or not capability.can_initiate_as_org(principal, principal.org_id)
+        )
+    ):
+        raise MessagingNotAllowedError(details={"reason": rules.REASON_NOT_ALLOWED})
+
     # -- Mode 1: partner→candidate application thread (existing behavior) ---------
     if (
         principal.persona == rules.PARTNER_MEMBER
