@@ -279,7 +279,19 @@ function CvCard({
             : "border-[var(--border-default)] bg-[var(--surface-card)] hover:border-[var(--border-strong)]",
         )}
       >
-        <FitScoreRing score={cv.score} size="sm" />
+        <span
+          className="flex flex-col items-center gap-0.5"
+          title={t("cvMatchLabel")}
+          aria-label={t("cvMatchAria", { score: cv.score })}
+        >
+          <FitScoreRing score={cv.score} size="sm" />
+          <span
+            aria-hidden
+            className="text-[9px] font-semibold uppercase tracking-wide text-[var(--text-tertiary)]"
+          >
+            {t("cvMatchLabel")}
+          </span>
+        </span>
         <div className="min-w-0 flex-1">
           <p className="truncate text-sm font-semibold text-[var(--text-primary)]" title={cv.title}>
             {cv.title}

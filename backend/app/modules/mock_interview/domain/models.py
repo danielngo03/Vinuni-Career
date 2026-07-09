@@ -28,6 +28,7 @@ from sqlalchemy import (
     String,
     Text,
     Uuid,
+    text,
 )
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
@@ -130,6 +131,16 @@ class MockInterviewSession(Base):
         Index("ix_mock_interview_sessions_user_created", "user_id", "created_at"),
         Index("ix_mock_interview_sessions_job_id", "job_id"),
         Index("ix_mock_interview_sessions_status", "status"),
+        # Concurrency guard (ADR-0016 §5 "1 concurrent session"): the DB — not a
+        # check-then-insert race — guarantees at most ONE active session per user.
+        # Partial unique index works on both Postgres and SQLite (3.8+).
+        Index(
+            "uq_mock_interview_one_active_per_user",
+            "user_id",
+            unique=True,
+            postgresql_where=text("status = 'active'"),
+            sqlite_where=text("status = 'active'"),
+        ),
     )
 
 
@@ -156,5 +167,12 @@ class MockInterviewTurn(Base):
     session: Mapped[MockInterviewSession] = relationship(back_populates="turns")
 
     __table_args__ = (
-        Index("ix_mock_interview_turns_session_seq", "session_id", "seq"),
+        # Unique per session so two concurrent turn writers cannot mint the same
+        # seq and corrupt transcript ordering (backstop to per-session locking).
+        Index(
+            "uq_mock_interview_turns_session_seq",
+            "session_id",
+            "seq",
+            unique=True,
+        ),
     )

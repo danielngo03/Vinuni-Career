@@ -24,13 +24,30 @@ async def get_session(
     *,
     session_id: uuid.UUID,
     user_id: uuid.UUID | None = None,
+    for_update: bool = False,
 ) -> MockInterviewSession | None:
-    """Load one session. When ``user_id`` is given, hard-scope to that owner."""
+    """Load one session. When ``user_id`` is given, hard-scope to that owner.
+
+    ``for_update`` takes a row lock (Postgres ``SELECT … FOR UPDATE``) so
+    concurrent turn writers on the SAME session serialize and cannot both read
+    the same max ``seq``; it is a harmless no-op on SQLite (single writer).
+    """
 
     stmt = select(MockInterviewSession).where(MockInterviewSession.id == session_id)
     if user_id is not None:
         stmt = stmt.where(MockInterviewSession.user_id == user_id)
+    if for_update:
+        stmt = stmt.with_for_update()
     return (await session.execute(stmt)).scalar_one_or_none()
+
+
+async def count_turns(session: AsyncSession, *, session_id: uuid.UUID) -> int:
+    stmt = (
+        select(func.count())
+        .select_from(MockInterviewTurn)
+        .where(MockInterviewTurn.session_id == session_id)
+    )
+    return int((await session.execute(stmt)).scalar_one())
 
 
 async def load_turns(

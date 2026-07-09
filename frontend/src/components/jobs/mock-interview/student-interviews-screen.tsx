@@ -443,18 +443,16 @@ function InterviewRow({
     : "completed";
   const ModalityIcon = MODALITY_ICON[item.modality] ?? ChatCircleDots;
   const title = sessionListTitle(item) || t("historyUntitled");
+  const isActive = status === "active";
   const date = new Date(item.created_at).toLocaleDateString(
     locale === "vi" ? "vi-VN" : "en-US",
     { day: "numeric", month: "short", year: "numeric" },
   );
 
-  return (
-    <li className="marketplace-card marketplace-card-hover flex items-center gap-1.5 rounded-2xl pr-2.5">
-      <button
-        type="button"
-        onClick={() => onOpen(item.id)}
-        className="flex min-w-0 flex-1 items-center gap-3.5 rounded-2xl px-4 py-3.5 text-left outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)]/30"
-      >
+  // An in-progress session has no report yet — opening the review is a dead end.
+  // Route it back into the live interview screen ("Resume") instead.
+  const rowInner = (
+    <>
         <span
           aria-hidden
           className="flex size-9 shrink-0 items-center justify-center rounded-xl icon-chip-primary"
@@ -493,10 +491,39 @@ function InterviewRow({
             )}
           </div>
         </div>
-        <span className="hidden shrink-0 items-center gap-1 text-xs font-semibold text-[var(--brand-primary)] sm:flex">
-          {t("historyView")}
+        <span
+          className={cn(
+            "hidden shrink-0 items-center gap-1 text-xs font-semibold sm:flex",
+            isActive ? "text-[var(--teal-600)]" : "text-[var(--brand-primary)]",
+          )}
+        >
+          {isActive ? t("resume") : t("historyView")}
           <CaretRight aria-hidden weight="bold" className="size-3.5" />
         </span>
+    </>
+  );
+
+  if (isActive) {
+    return (
+      <li className="marketplace-card marketplace-card-hover flex items-center gap-1.5 rounded-2xl pr-2.5">
+        <Link
+          href={`/jobs/${item.job_id}/interview`}
+          className="flex min-w-0 flex-1 items-center gap-3.5 rounded-2xl px-4 py-3.5 text-left outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)]/30"
+        >
+          {rowInner}
+        </Link>
+      </li>
+    );
+  }
+
+  return (
+    <li className="marketplace-card marketplace-card-hover flex items-center gap-1.5 rounded-2xl pr-2.5">
+      <button
+        type="button"
+        onClick={() => onOpen(item.id)}
+        className="flex min-w-0 flex-1 items-center gap-3.5 rounded-2xl px-4 py-3.5 text-left outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)]/30"
+      >
+        {rowInner}
       </button>
       <Link
         href={`/jobs/${item.job_id}/interview`}
@@ -577,7 +604,12 @@ function SessionReview({
         />
       ) : (
         <div className="space-y-6">
-          <CoachingReport report={query.data.report} jobId={query.data.job_id} />
+          <CoachingReport
+            report={query.data.report}
+            jobId={query.data.job_id}
+            jobTitle={query.data.job_title}
+            completedAt={query.data.ended_at}
+          />
           <TranscriptReview detail={query.data} onDeleted={handleDeleted} />
         </div>
       )}

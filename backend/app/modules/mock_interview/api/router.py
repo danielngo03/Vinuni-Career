@@ -127,6 +127,7 @@ async def record_turns(
         principal=auth.principal,
         session_id=session_id,
         turns_in=[t.model_dump() for t in body.turns],
+        ctx=auth.ctx,
     )
     return success(data)
 

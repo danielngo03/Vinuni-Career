@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import {
   ArrowClockwise,
   CheckCircle,
@@ -31,17 +31,35 @@ import { cn } from "@/lib/utils";
 export function CoachingReport({
   report,
   jobId,
+  jobTitle,
+  completedAt,
   printable = true,
 }: {
   report: CoachingReport | null;
   jobId?: string | null;
+  jobTitle?: string | null;
+  completedAt?: string | null;
   printable?: boolean;
 }) {
   const t = useTranslations("jobs.mockInterview");
+  const locale = useLocale();
 
   function handleDownloadPdf() {
     if (typeof window !== "undefined") window.print();
   }
+
+  let printedDate: string | null = null;
+  if (completedAt) {
+    const d = new Date(completedAt);
+    if (!Number.isNaN(d.getTime())) {
+      printedDate = d.toLocaleDateString(locale, {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      });
+    }
+  }
+  const printMeta = [jobTitle?.trim(), printedDate].filter(Boolean).join(" · ");
 
   if (!report) {
     return (
@@ -64,6 +82,19 @@ export function CoachingReport({
       className="space-y-5"
       {...(printable ? { "data-mi-print-region": "" } : {})}
     >
+      {printable && (
+        <div data-mi-print-header className="hidden">
+          <p className="text-base font-bold text-[var(--text-primary)]">
+            {t("reportTitle")}
+          </p>
+          {printMeta && (
+            <p className="mt-0.5 text-sm text-[var(--text-secondary)]">
+              {printMeta}
+            </p>
+          )}
+        </div>
+      )}
+
       <header className="flex items-start gap-3">
         <span className="flex size-10 shrink-0 items-center justify-center rounded-2xl icon-chip-primary shadow-sm">
           <Sparkle aria-hidden weight="duotone" className="size-5" />

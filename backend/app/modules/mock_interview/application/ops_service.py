@@ -18,6 +18,7 @@ from typing import Any
 
 from sqlalchemy.ext.asyncio import AsyncSession
 
+from app.ai.safety.input_guard import redact_pii
 from app.modules.mock_interview.infrastructure import repository as repo
 from app.shared.audit import AuditContext, write_audit
 from app.shared.exceptions import PermissionDeniedError, ResourceNotFoundError
@@ -31,6 +32,41 @@ _IDENTITY_GRANT = "ai_settings:view_provider_identity"
 def _require_superadmin(principal: Principal) -> None:
     if not principal.is_superadmin:
         raise PermissionDeniedError(details={"reason": "superadmin_only"})
+
+
+def _redact_text(value: object) -> str:
+    red, _ = redact_pii(str(value or ""))
+    return red
+
+
+def _redact_report(report: dict | None) -> dict | None:
+    """Pseudonymize the coaching report's free-text for the redacted view.
+
+    The report is coaching prose; even though ``report_service`` whitelists
+    fields, it can still echo student-identifying specifics, so redacted mode
+    must not return it raw (the transcript turns are already redacted).
+    """
+
+    if not isinstance(report, dict):
+        return report
+    out = dict(report)
+    if "overall_observations" in out:
+        out["overall_observations"] = _redact_text(out.get("overall_observations"))
+    out["gaps_to_work_on"] = [
+        _redact_text(g) for g in (out.get("gaps_to_work_on") or [])
+    ]
+    out["strengths"] = [_redact_text(s) for s in (out.get("strengths") or [])]
+    out["per_question"] = [
+        {
+            **q,
+            "question": _redact_text(q.get("question")),
+            "suggestion": _redact_text(q.get("suggestion")),
+            "observation": _redact_text(q.get("observation")),
+        }
+        for q in (out.get("per_question") or [])
+        if isinstance(q, dict)
+    ]
+    return out
 
 
 async def list_flagged(
@@ -111,6 +147,6 @@ async def view_transcript(
         "flagged": bool(row.flagged),
         "modality": row.modality,
         "status": row.status,
-        "report": row.report_json,
+        "report": row.report_json if full else _redact_report(row.report_json),
         "transcript": transcript,
     }

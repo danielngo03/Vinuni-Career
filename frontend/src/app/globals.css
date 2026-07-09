@@ -1010,6 +1010,33 @@ body {
     opacity: 1 !important;
     transform: none !important;
   }
+  /* Explicit print font stack with full Vietnamese diacritic coverage, so the
+     saved PDF renders consistently regardless of the on-screen app font. */
+  [data-mi-print-region] {
+    font-family: "Inter", -apple-system, "Segoe UI", Roboto, "Helvetica Neue",
+      Arial, "Noto Sans", sans-serif;
+  }
+  /* Keep a question card, a section, or a list item from splitting across a
+     page boundary — the whole reason a coaching PDF exists is readability. */
+  [data-mi-print-region] section,
+  [data-mi-print-region] li,
+  [data-mi-print-region] [data-mi-print-keep] {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+  [data-mi-print-region] h2,
+  [data-mi-print-region] h3 {
+    break-after: avoid;
+    page-break-after: avoid;
+  }
+  /* Print-only attribution header (job title + date); hidden on screen. */
+  [data-mi-print-region] [data-mi-print-header] {
+    display: block !important;
+    visibility: visible !important;
+    margin-bottom: 1rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid #d4d4d4;
+  }
   /* Action controls (Download PDF / Practice again) never appear on paper. */
   [data-mi-print-region] [data-mi-print-hide] {
     display: none !important;

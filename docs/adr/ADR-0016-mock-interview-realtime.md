@@ -109,3 +109,44 @@ Transcripts are TEXT ONLY — audio is never persisted.
   again", and PDF export of the coaching report.
 - **Deeper university analytics**: per-day trend, most-practiced jobs, and focus
   mix added to the aggregate stats (still PII-free) with monochrome charts.
+
+## Update — 2026-07-09 (hardening pass: privacy + concurrency + UX)
+
+A cross-cutting audit (student UX, governance/RBAC, backend edge-cases) drove a
+hardening pass. Backend gates stay at the pre-existing baseline (ruff feature-
+clean; `mypy app` 45/15; `pytest tests/mock_interview` 81 passed) and a real
+OpenRouter + Gemini-Live E2E confirmed the flow (first-token ≈1s, no score/model
+leakage, ephemeral token minted). Migration `0085_mock_interview_hardening`.
+
+- **Privacy (was a real leak): the student `GET /sessions/{id}` route no longer
+  widens ownership for a superadmin.** It previously returned another user's RAW
+  transcript with no redaction, no opt-in gate, and no audit. Cross-user reads
+  now go **only** through `ops_service.view_transcript` (redacted by default,
+  grant + opt-in for raw, audited every open). The ops redacted view also
+  pseudonymizes the coaching **report** (not just the turns), and the admin
+  flagged/transcript routes gained a router-level `require_superadmin` guard.
+- **Concurrency is now a DB guarantee, not a check-then-insert race.** A partial
+  unique index `UNIQUE(user_id) WHERE status='active'` enforces the one-live-
+  session cap (the losing create trips before any opening LLM call is billed),
+  and `UNIQUE(session_id, seq)` + per-session `FOR UPDATE` locking prevents two
+  concurrent turns from minting the same seq. Ending mid-stream no longer appends
+  a turn after the report is built.
+- **Safety on the realtime path.** The realtime transcript flush (`record_turns`)
+  now runs the same injection guard as the typed path, is audited, and hard-caps
+  total persisted turns. Flagged sessions escalate to moderation at **flag time**,
+  so an aborted/abandoned (never-`end`ed) flagged session still reaches review.
+- **Server-enforced caps.** Per-session question/time caps are enforced in the
+  service (a looping client can no longer bill unbounded turns); stale-session
+  recovery tightened to `MAX_SESSION_SECONDS + grace`. Thin JDs surface a
+  `low_signal` flag instead of pretending the grounding was rich.
+- **Student UX.** Progress themes now cluster by keyword signature (so "recurring"
+  actually fires across paraphrases) and the internal `unknown` focus no longer
+  leaks; in-progress sessions in history route to **Resume** instead of a blank
+  report; the coaching PDF gained page-break control, a print header (job +
+  date), and a Vietnamese-safe print font stack; the CV-fit ring is explicitly
+  labelled "CV match" so it can't read as an interview score; realtime adds a
+  connect-timeout that degrades to browser-voice/text.
+- **Known follow-ups (documented, not done):** in-session idle auto-nudge and a
+  "no speech detected → switch to typing" affordance on the browser-STT path;
+  history pagination; per-university aggregate scoping (moot today — single
+  university).

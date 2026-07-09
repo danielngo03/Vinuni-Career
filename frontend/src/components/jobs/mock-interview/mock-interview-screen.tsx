@@ -223,7 +223,11 @@ export function MockInterviewScreen({ jobId }: { jobId: string }) {
       <div className="mx-auto max-w-2xl px-4 py-8 lg:py-10">
         {backLink}
         <div className="space-y-6">
-          <CoachingReport report={phase.detail.report} />
+          <CoachingReport
+            report={phase.detail.report}
+            jobTitle={phase.detail.job_title}
+            completedAt={phase.detail.ended_at}
+          />
           <TranscriptReview detail={phase.detail} onDeleted={resetToSetup} />
           <div className="flex flex-col gap-4 border-t border-[var(--border-default)] pt-5">
             <div className="flex flex-wrap items-center justify-between gap-3">

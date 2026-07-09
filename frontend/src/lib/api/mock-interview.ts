@@ -116,6 +116,7 @@ export interface CoachingReport {
 export interface MockInterviewSessionDetail {
   id: string;
   job_id: string;
+  job_title?: string | null;
   cv_id: string | null;
   locale: string;
   modality: MockInterviewModality;

@@ -15,6 +15,7 @@ from collections.abc import AsyncGenerator
 from datetime import UTC, datetime, timedelta
 from typing import Any
 
+from sqlalchemy.exc import IntegrityError
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.ai.gateway.realtime import mint_session
@@ -140,10 +141,13 @@ async def create_session(
     # 2) Auto-recover abandoned sessions so a stuck/closed tab never blocks the
     # student forever (a genuinely concurrent session, started recently, still
     # blocks — only sessions older than the hard cap + grace are expired).
+    # A session cannot legitimately take a turn past MAX_SESSION_SECONDS (see
+    # _assert_within_caps), so anything older than that + a short grace is
+    # abandoned and can be recovered — the student is not blocked for 15 minutes.
     await repo.expire_stale_active(
         session,
         user_id=user_id,
-        cutoff=now - timedelta(seconds=caps.MAX_SESSION_SECONDS + 300),
+        cutoff=now - timedelta(seconds=caps.MAX_SESSION_SECONDS + 120),
         now=now,
     )
 
@@ -162,7 +166,10 @@ async def create_session(
 
     await usage_service.enforce_quota(session, principal=principal)
 
-    # 5) Persist the session row (active).
+    # 5) Persist the session row (active). The partial unique index
+    # (uq_mock_interview_one_active_per_user) is the authoritative concurrency
+    # guard: if two creates race past the count check above, the second flush
+    # trips IntegrityError here — BEFORE any opening LLM call is billed.
     row = MockInterviewSession(
         user_id=user_id,
         job_id=job_id,
@@ -177,7 +184,14 @@ async def create_session(
         provider_ref="interview",
     )
     session.add(row)
-    await session.flush()
+    try:
+        await session.flush()
+    except IntegrityError as exc:
+        await session.rollback()
+        raise ConflictError(
+            "Bạn đang có một buổi phỏng vấn thử chưa kết thúc.",
+            details={"reason": "ACTIVE_SESSION_EXISTS"},
+        ) from exc
 
     # 6) Opening interviewer turn (LLM; never raises — static fallback inside).
     opening_text = await conversation_service.generate_opening(
@@ -232,6 +246,7 @@ async def create_session(
             "idle_timeout_seconds": caps.IDLE_TIMEOUT_SECONDS,
             "target_questions": caps.DEFAULT_TARGET_QUESTIONS,
         },
+        "low_signal": bool(grounding.get("low_signal")),
         "realtime": realtime,
     }
 
@@ -307,11 +322,33 @@ async def _load_owned(
     return row
 
 
+def _assert_within_caps(row: MockInterviewSession) -> None:
+    """Server-side hard stop for the per-session caps (ADR-0016 §5).
+
+    These caps are advertised in the create response, but a misbehaving/looping
+    client could otherwise ignore the ``ended`` hint and keep POSTing answers —
+    billing unbounded interviewer turns. Enforce them here, in the service, so
+    the DB/cost invariants hold regardless of the client.
+    """
+
+    if int(row.question_count or 0) >= caps.MAX_QUESTIONS:
+        raise ConflictError(
+            "Buổi phỏng vấn đã đạt số câu hỏi tối đa. Hãy kết thúc để nhận nhận xét.",
+            details={"reason": "SESSION_QUESTION_LIMIT"},
+        )
+    elapsed = (datetime.now(tz=UTC) - _aware(row.started_at)).total_seconds()
+    if elapsed >= caps.MAX_SESSION_SECONDS:
+        raise ConflictError(
+            "Buổi phỏng vấn đã đạt thời lượng tối đa. Hãy kết thúc để nhận nhận xét.",
+            details={"reason": "SESSION_TIME_LIMIT"},
+        )
+
+
 async def assert_turnable(
     session: AsyncSession, *, principal: Principal, session_id: uuid.UUID
 ) -> None:
     """Pre-flight for the streaming endpoint so real HTTP status codes surface
-    (404 not-owner, 409 not-active) BEFORE the 200 stream starts."""
+    (404 not-owner, 409 not-active / cap reached) BEFORE the 200 stream starts."""
 
     _require_student(principal)
     row = await _load_owned(session, principal=principal, session_id=session_id)
@@ -320,6 +357,7 @@ async def assert_turnable(
             "Buổi phỏng vấn này đã kết thúc.",
             details={"reason": "SESSION_NOT_ACTIVE"},
         )
+    _assert_within_caps(row)
 
 
 async def stream_turn(
@@ -337,12 +375,19 @@ async def stream_turn(
     """
 
     _require_student(principal)
-    row = await _load_owned(session, principal=principal, session_id=session_id)
+    # Lock the session row for the seq allocation so two concurrent turn writers
+    # serialize (H2) — no-op on SQLite, real FOR UPDATE on Postgres.
+    row = await repo.get_session(
+        session, session_id=session_id, user_id=principal.user_id, for_update=True
+    )
+    if row is None:
+        raise ResourceNotFoundError()
     if row.status != STATUS_ACTIVE:
         raise ConflictError(
             "Buổi phỏng vấn này đã kết thúc.",
             details={"reason": "SESSION_NOT_ACTIVE"},
         )
+    _assert_within_caps(row)
 
     clean_answer, flags = sanitize_instruction((answer or "")[: caps.MAX_ANSWER_CHARS])
     candidate_text = clean_answer or (answer or "").strip()[: caps.MAX_ANSWER_CHARS]
@@ -357,8 +402,17 @@ async def stream_turn(
     )
     session.add(candidate_turn)
     if "injection" in flags:
-        row.flagged = True
-    await session.commit()  # durability: candidate answer survives a dropped stream
+        await _flag_and_escalate(session, row=row)
+    try:
+        # durability: candidate answer survives a dropped stream; the unique
+        # (session_id, seq) index rejects a duplicate-seq double-submit.
+        await session.commit()
+    except IntegrityError as exc:
+        await session.rollback()
+        raise ConflictError(
+            "Câu trả lời trùng lặp. Vui lòng thử lại.",
+            details={"reason": "TURN_CONFLICT"},
+        ) from exc
     turns.append(candidate_turn)
 
     grounding = row.grounding_json or {}
@@ -376,28 +430,58 @@ async def stream_turn(
     clean_text, ended = conversation_service.strip_end_marker("".join(parts))
     if not clean_text:
         clean_text = prompts.fallback_next_turn(grounding)
-    iseq = next_seq + 1
+
+    # M4: the student may have ended the session while the reply was streaming.
+    # Re-read the row; if it is no longer active, drop the interviewer turn rather
+    # than appending it after the report was already built.
+    fresh = await repo.get_session(
+        session, session_id=session_id, user_id=row.user_id, for_update=True
+    )
+    if fresh is None or fresh.status != STATUS_ACTIVE:
+        yield {
+            "type": "done",
+            "seq": next_seq,
+            "text": clean_text,
+            "question_count": int((fresh or row).question_count or 0),
+            "ended": True,
+        }
+        return
+
+    latest = await repo.load_turns(session, session_id=session_id)
+    iseq = (latest[-1].seq if latest else next_seq) + 1
     session.add(
         MockInterviewTurn(
-            session_id=row.id,
+            session_id=fresh.id,
             seq=iseq,
             speaker=SPEAKER_INTERVIEWER,
             text=clean_text,
             text_redacted=_redacted(clean_text),
         )
     )
-    row.question_count = int(row.question_count or 0) + 1
+    fresh.question_count = int(fresh.question_count or 0) + 1
     reached_end = (
         ended
-        or row.question_count >= caps.DEFAULT_TARGET_QUESTIONS
+        or fresh.question_count >= caps.DEFAULT_TARGET_QUESTIONS
         or iseq >= caps.MAX_TURNS_PERSISTED
     )
-    await session.commit()
+    try:
+        await session.commit()
+    except IntegrityError:
+        await session.rollback()
+        # A racing writer took our seq; the reply was still shown to the client.
+        yield {
+            "type": "done",
+            "seq": iseq,
+            "text": clean_text,
+            "question_count": int(fresh.question_count or 0),
+            "ended": reached_end,
+        }
+        return
     yield {
         "type": "done",
         "seq": iseq,
         "text": clean_text,
-        "question_count": row.question_count,
+        "question_count": fresh.question_count,
         "ended": reached_end,
     }
 
@@ -411,17 +495,30 @@ async def record_turns(
     principal: Principal,
     session_id: uuid.UUID,
     turns_in: list[dict[str, Any]],
+    ctx: Any | None = None,
 ) -> dict[str, Any]:
-    """Append provider-produced transcript turns (realtime path). Owner + active."""
+    """Append provider-produced transcript turns (realtime path). Owner + active.
+
+    Candidate text is client/provider supplied, so it runs through the SAME
+    injection guard as the typed turn path (a flagged turn escalates to
+    moderation), the running total is hard-capped at ``MAX_TURNS_PERSISTED``, and
+    the batch write is audited (metadata only).
+    """
 
     _require_student(principal)
-    row = await _load_owned(session, principal=principal, session_id=session_id)
+    row = await repo.get_session(
+        session, session_id=session_id, user_id=principal.user_id, for_update=True
+    )
+    if row is None:
+        raise ResourceNotFoundError()
     if row.status != STATUS_ACTIVE:
         raise ConflictError(details={"reason": "SESSION_NOT_ACTIVE"})
     existing = await repo.load_turns(session, session_id=session_id)
     seq = existing[-1].seq if existing else 0
     added = 0
     for item in turns_in[: caps.MAX_TURNS_PERSISTED]:
+        if len(existing) + added >= caps.MAX_TURNS_PERSISTED:
+            break  # hard total ceiling (L4) — never exceed the persisted-turn cap
         speaker = (
             SPEAKER_INTERVIEWER
             if str(item.get("speaker")) == SPEAKER_INTERVIEWER
@@ -430,6 +527,13 @@ async def record_turns(
         text = str(item.get("text") or "").strip()[: caps.MAX_ANSWER_CHARS]
         if not text:
             continue
+        # Candidate turns pass the injection guard (interviewer text is provider
+        # output, not attacker-controlled, so it is stored as-is).
+        if speaker == SPEAKER_CANDIDATE:
+            clean, flags = sanitize_instruction(text)
+            text = clean or text
+            if "injection" in flags:
+                await _flag_and_escalate(session, row=row)
         seq += 1
         session.add(
             MockInterviewTurn(
@@ -443,7 +547,20 @@ async def record_turns(
         if speaker == SPEAKER_INTERVIEWER:
             row.question_count = int(row.question_count or 0) + 1
         added += 1
-    await session.commit()
+    if added:
+        await write_audit(
+            session,
+            action="mock_interview.turns_recorded",
+            resource_type="mock_interview_session",
+            resource_id=row.id,
+            context=_audit_ctx(principal, ctx),
+            after={"added": added, "flagged": bool(row.flagged)},
+        )
+    try:
+        await session.commit()
+    except IntegrityError as exc:
+        await session.rollback()
+        raise ConflictError(details={"reason": "TURN_CONFLICT"}) from exc
     return {"added": added, "question_count": row.question_count}
 
 
@@ -471,7 +588,11 @@ async def end_session(
 
     if turns_in:
         await record_turns(
-            session, principal=principal, session_id=session_id, turns_in=turns_in
+            session,
+            principal=principal,
+            session_id=session_id,
+            turns_in=turns_in,
+            ctx=ctx,
         )
 
     turns = await repo.load_turns(session, session_id=session_id)
@@ -496,9 +617,8 @@ async def end_session(
         if duration_seconds is not None
         else int((now - _aware(row.started_at)).total_seconds())
     )
-
-    if row.flagged:
-        await _escalate_flagged(session, row=row)
+    # Flagged sessions are escalated to moderation at FLAG time (see
+    # _flag_and_escalate), so ending does not need to re-enqueue.
 
     await write_audit(
         session,
@@ -527,10 +647,20 @@ def _aware(value: datetime) -> datetime:
     return value if value.tzinfo is not None else value.replace(tzinfo=UTC)
 
 
-async def _escalate_flagged(
+async def _flag_and_escalate(
     session: AsyncSession, *, row: MockInterviewSession
 ) -> None:
-    """Send a flagged session to the moderation queue (metadata only)."""
+    """Flag a session and escalate to moderation at FLAG time (metadata only).
+
+    Escalating when the flag is first raised — not only in ``end_session`` —
+    means a flagged session that is later aborted, deleted, or abandoned (→
+    ``expired``) still reaches the moderation queue. Idempotent: a second flagged
+    turn in the same session does not re-enqueue.
+    """
+
+    if row.flagged:
+        return
+    row.flagged = True
 
     from app.modules.moderation.application import review_queue_service
 
@@ -656,9 +786,15 @@ async def get_session(
     session: AsyncSession, *, principal: Principal, session_id: uuid.UUID
 ) -> dict[str, Any]:
     _require_student(principal)
-    # Owner-scoped; a superadmin may read any session for support.
-    owner = None if principal.is_superadmin else principal.user_id
-    row = await repo.get_session(session, session_id=session_id, user_id=owner)
+    # HARD owner scoping — this student route returns the caller's OWN session
+    # only, even for a superadmin. Cross-user reads for AI-ops support must go
+    # through ops_service.view_transcript, which redacts by default, requires the
+    # identity grant + the student's opt-in for raw text, and audits every open
+    # (ADR-0016 §6). Widening ownership here would leak raw PII transcripts with
+    # no consent gate and no audit trail.
+    row = await repo.get_session(
+        session, session_id=session_id, user_id=principal.user_id
+    )
     if row is None:
         raise ResourceNotFoundError()
     turns = await repo.load_turns(session, session_id=session_id)

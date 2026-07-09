@@ -17,6 +17,10 @@ import type { AnswerMode } from "./pre-session-setup";
 
 type Phase = "interviewer_speaking" | "listening" | "thinking" | "ending";
 
+// If the realtime (V2) socket opens but produces no audio/transcription within
+// this window, we stop waiting and degrade to the browser-voice/text tier.
+const REALTIME_CONNECT_TIMEOUT_MS = 12_000;
+
 function formatClock(seconds: number): string {
   const s = Math.max(0, Math.round(seconds));
   const m = Math.floor(s / 60);
@@ -259,12 +263,24 @@ export function LiveSession({ session, mode, locale, onRequestEnd }: Props) {
     if (effectiveMode !== "voice") return; // Degraded to text → text tier runs.
 
     let cancelled = false;
+    let connected = false;
+    const markConnected = () => {
+      connected = true;
+    };
     const client = new GeminiLiveClient(realtime, session.session_id);
     geminiRef.current = client;
+
+    // Connect watchdog: a socket that opens + completes setup but never emits
+    // audio/transcription would otherwise leave the student stuck on
+    // "Connecting live voice…" forever. Degrade to the browser-voice/text tier.
+    const connectTimer = window.setTimeout(() => {
+      if (!cancelled && !connected) degradeToText();
+    }, REALTIME_CONNECT_TIMEOUT_MS);
 
     client
       .onCaption((u) => {
         if (cancelled) return;
+        markConnected();
         if (u.speaker === "interviewer") {
           setRealtimeConnecting(false);
           if (u.final) {
@@ -281,6 +297,7 @@ export function LiveSession({ session, mode, locale, onRequestEnd }: Props) {
       })
       .onInterviewerAudioState((state) => {
         if (cancelled) return;
+        markConnected();
         setRealtimeConnecting(false);
         setPhaseNow(state === "speaking" ? "interviewer_speaking" : "listening");
       })
@@ -306,6 +323,7 @@ export function LiveSession({ session, mode, locale, onRequestEnd }: Props) {
 
     return () => {
       cancelled = true;
+      window.clearTimeout(connectTimer);
       void client.stop();
       if (geminiRef.current === client) geminiRef.current = null;
     };

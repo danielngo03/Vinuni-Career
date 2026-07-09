@@ -15,8 +15,9 @@ from fastapi import APIRouter, Depends, Query
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.core.db import get_db_session
-from app.modules.auth.api.deps import CurrentAuth, get_current_auth
+from app.modules.auth.api.deps import CurrentAuth, get_current_auth, require_superadmin
 from app.modules.mock_interview.application import governance_service, ops_service
+from app.shared.permissions import Principal
 from app.shared.responses import success
 
 admin_router = APIRouter(prefix="/admin/mock-interview", tags=["mock-interview-admin"])
@@ -46,9 +47,12 @@ async def config(
 @admin_router.get("/flagged", summary="Safety-flagged sessions (superadmin)")
 async def flagged(
     limit: int = Query(50, ge=1, le=100),
+    _superadmin: Principal = Depends(require_superadmin),
     auth: CurrentAuth = Depends(get_current_auth),
     session: AsyncSession = Depends(get_db_session),
 ) -> dict:
+    # Router-level superadmin guard (defense-in-depth) in addition to the
+    # service-layer check in ops_service.
     data = await ops_service.list_flagged(
         session, principal=auth.principal, limit=limit
     )
@@ -61,6 +65,7 @@ async def flagged(
 )
 async def transcript(
     session_id: uuid.UUID,
+    _superadmin: Principal = Depends(require_superadmin),
     auth: CurrentAuth = Depends(get_current_auth),
     session: AsyncSession = Depends(get_db_session),
 ) -> dict:

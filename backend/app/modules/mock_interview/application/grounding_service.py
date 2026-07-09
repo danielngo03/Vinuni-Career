@@ -214,8 +214,18 @@ async def build_grounding(
         "gaps": _clean_list(selected.get("gaps"), limit=15),
         "fit": {"score": selected.get("score"), "signal": cvg.get("signal")},
     }
+    # M5: a near-empty JD (no requirements, no required skills, tiny description)
+    # yields generic questions. The interview still runs, but flag it so the UI
+    # can set expectations honestly instead of pretending the grounding was rich.
+    low_signal = (
+        not _job_requirements(job)
+        and not _clean_list(job.get("required_skills"), limit=20)
+        and len(_clean(job.get("description"))) < 120
+    )
+    grounding["low_signal"] = low_signal
     return {
         "grounding": grounding,
         "cv_id": selected.get("cv_id"),
-        "signal": cvg.get("signal"),
+        "signal": "low_jd" if low_signal else (cvg.get("signal") or "ok"),
+        "low_signal": low_signal,
     }
