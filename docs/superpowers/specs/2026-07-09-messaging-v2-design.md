@@ -384,3 +384,60 @@ tsc/eslint green.
 Deferred (lower value / product-decision-heavy): dedicated "Requests" inbox scope +
 hide declined from recipient; read receipts ("seen") + `thread.read`/`message.deleted`
 realtime signals; unblock / block-list management; thread-fetch pagination on the client.
+
+## 15. Rigorous verification pass (2026-07-09)
+
+Full-suite tests + three adversarial reviews (correctness/edge-cases, security/RBAC/PII,
+adjacent-flow/UX). Evidence: full backend suite = 12 pre-existing failures only (AI
+billing/eval/jd/governance + the documented `documents`/`platform_admin` boundary),
+ZERO messaging/notification regressions; messaging module boundary-clean; frontend
+`tsc` + `eslint` + `next build` + i18n parity (51 files) green; migration `0085`
+emits valid Postgres DDL. Confirmed strong defenses: student↔student block (create +
+every send + recipient search), org-Page individual identity never leaks (incl. over
+WS — signals carry only `{type, thread_id}`), cross-tenant 404 (no 403/404 seam),
+attachment download hardening, notification/audit PII safety.
+
+**Fixed (real defects the reviews surfaced):**
+- Cold-requested student was UNMASKED to the partner on decline/block (mask now lifts
+  only on accept). Partner could co-locate two students who'd read each other's names
+  (rejected). Application/recruitment threads inflated every non-owner teammate's
+  shared-inbox badge + list (excluded). Person-only assignment (no dept) was readable
+  by the whole org (confined). Idempotent intro-retry at the cap wrongly 409'd (dedupe
+  now precedes the gate). `respond` leaked 409-vs-404 to non-recipients (authorize
+  first). Soft-deleted message attachments + unbound draft attachments were downloadable
+  (gated). Org-Page initiate/send were persona-gated not capability-gated (now require
+  `messaging:initiate`/`send`; application threads stay relationship-authorized). A
+  teammate's outgoing Page reply inflated colleagues' unread + notified them (party-aware
+  now). Messaging emails ignored the "message" email-mute preference (now gated). The
+  `message.request_accepted` email had no template (added).
+
+**Deferred with rationale (owner decisions / follow-ups, documented not silently
+dropped):**
+- **University-staff moderation is persona-gated** (`is_university_moderator` = any
+  `university_staff`), not the grantable `messaging:moderate` — a scoped staffer is a
+  global moderator who sees unmasked identities across all partner orgs. Pre-existing
+  ADR-0012 design (university owns the platform); switching to capability-gated
+  moderation is an owner decision + a larger change.
+- **Department scope is bypassed by a pre-existing participant row** — a staffer who
+  engaged a thread while it was unassigned keeps access after it's reassigned to another
+  department. Genuine trade-off (cutting off an active handler mid-conversation is
+  disruptive); owner decision. Person/dept assignment scoping IS now enforced for
+  non-participants.
+- **Concurrent-create TOCTOU** could produce duplicate pending org-Page threads (no
+  backing unique index for inquiry/org kinds). Needs a unique index/advisory lock;
+  deferred while this branch's migration numbering is rebased onto the live head.
+- **WS `org:{id}` channel is not department-scoped** and grants aren't re-checked
+  mid-connection — metadata/timing only (no body; HTTP re-checks on refetch). Low.
+- `message.flagged` moderation alert rides the mutable "message" category (a muted
+  moderator misses reports — consider a mandatory compliance category). `declined`
+  threads still show in the recipient's org inbox. `validate_attachment_ids` is dead
+  (the schema `max_length` already caps count). Frontend LOW polish: bell focus ring,
+  silent deep-link-404, org request-bar flash before `detail` loads, no explicit
+  "reconnecting" indicator.
+
+**Deploy caveat (important):** the shared dev DB `vinuni_career` is at alembic head
+`0089` (other parallel worktrees), while this branch's `0085_messaging_v2` branches from
+`0084`. Before deploy, rebase this migration onto the real target head (down_revision →
+current head) so it does not create a second Alembic head. A from-scratch DB is also
+blocked by a PRE-EXISTING seed bug in `0005_documents.py` (`KeyError: 'is_premium'`),
+unrelated to messaging.
