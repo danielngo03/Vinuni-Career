@@ -60,6 +60,7 @@ from app.shared.permissions import Principal
 
 _MESSAGE_NOTIF = "message.received"
 _FLAGGED_NOTIF = "message.flagged"
+_REQUEST_ACCEPTED_NOTIF = "message.request_accepted"
 
 
 # --------------------------------------------------------------------------- #
@@ -240,6 +241,79 @@ async def _notify_participants(
                     "action_url": action_url,
                 },
                 dedupe_key=f"{_MESSAGE_NOTIF}:{thread.id}:{p.user_id}",
+            )
+
+
+# --------------------------------------------------------------------------- #
+# Request-lifecycle notification (accept)                                       #
+# --------------------------------------------------------------------------- #
+
+
+async def notify_request_accepted(
+    session: AsyncSession,
+    *,
+    thread: MessageThread,
+    acceptor_id: uuid.UUID | None,
+) -> None:
+    """Tell the request INITIATOR side that its message request was accepted.
+
+    Written in the caller's transaction (no commit), mirroring
+    :func:`_notify_participants`. Only participants on the *initiator* party hear
+    it — the acceptor already knows. Decline/block stay silent by design (no
+    rejection notification / harassment signal). PII-safe: carries a MASKED
+    counterpart label as the initiator perceives it — an org Page name for a
+    student initiator; the now-revealed student for a partner initiator, since
+    acceptance lifts the cold-request mask — and never any message body.
+    """
+
+    if thread.initiator_party_id is None:
+        return
+    participants = await _shared.list_participants(session, thread_id=thread.id)
+    relationship = await _relationship_for(session, thread)
+    action_url = f"/messages/{thread.id}"
+    for p in participants:
+        if p.party_id != thread.initiator_party_id:
+            continue
+        if acceptor_id is not None and p.user_id == acceptor_id:
+            continue
+        if p.muted:
+            continue
+        recipient_principal = await _recipient_view_principal(
+            session, recipient_id=p.user_id, thread=thread
+        )
+        locale = await user_read_facade.get_preferred_language(session, p.user_id) or "vi"
+        counterpart = await thread_view.counterpart_label(
+            session,
+            viewer=recipient_principal,
+            thread=thread,
+            participants=participants,
+            relationship=relationship,
+            is_moderator=False,
+            locale=locale,
+        )
+        await feed_service.create_in_app(
+            session,
+            recipient_id=p.user_id,
+            notif_type=_REQUEST_ACCEPTED_NOTIF,
+            action_url=action_url,
+            variables={"counterpart_label": counterpart},
+            locale=locale,
+        )
+        recipient = await user_read_facade.get_user_contact(session, p.user_id)
+        if recipient is not None:
+            await enqueue_notification(
+                session,
+                recipient_id=p.user_id,
+                template_key=_REQUEST_ACCEPTED_NOTIF,
+                channel="email",
+                locale=locale,
+                variables={
+                    "email": recipient.email,
+                    "name": recipient.full_name or "",
+                    "counterpart_label": counterpart,
+                    "action_url": action_url,
+                },
+                dedupe_key=f"{_REQUEST_ACCEPTED_NOTIF}:{thread.id}:{p.user_id}",
             )
 
 

@@ -14,7 +14,6 @@ import io
 import uuid
 
 import pytest
-from starlette.datastructures import Headers, UploadFile
 from app.core.config import get_settings
 from app.modules.messaging.application import (
     inbox_service,
@@ -28,8 +27,10 @@ from app.modules.messaging.application.errors import (
     RequestPendingError,
 )
 from app.modules.messaging.domain.models import MessageThread
+from app.modules.notifications.domain.models import Notification, NotificationOutbox
 from app.shared.exceptions import ResourceNotFoundError
 from sqlalchemy import select
+from starlette.datastructures import Headers, UploadFile
 
 from tests.auth_utils import CTX
 from tests.messaging_utils import (
@@ -94,6 +95,87 @@ async def test_student_request_then_partner_accepts(db_session) -> None:
         ctx=CTX,
     )
     assert (await _thread(db_session, tid)).request_state == "accepted"
+
+
+async def test_accept_notifies_initiator_masked(db_session) -> None:
+    """Accepting a request notifies ONLY the initiator, with an org-Page label and
+    never the message body; the accepting staff member is not surfaced."""
+    student_user, student = await make_student(db_session)
+    partner_user, porg, partner = await make_partner(db_session)
+
+    out = await thread_service.create_thread(
+        db_session, principal=student, kind="direct", context_type=None,
+        context_id=None, recipient_ids=[partner_user.id],
+        first_message="Hi, I'd love to learn about your internships.", ctx=CTX,
+    )
+    tid = uuid.UUID(out["id"])
+
+    await request_service.respond(
+        db_session, principal=partner, thread_id=tid, action="accept", ctx=CTX,
+    )
+
+    # The student (initiator) gets exactly one in-app "request accepted" row.
+    student_rows = (
+        await db_session.execute(
+            select(Notification).where(
+                Notification.recipient_id == student_user.id,
+                Notification.notif_type == "message.request_accepted",
+            )
+        )
+    ).scalars().all()
+    assert len(student_rows) == 1
+    note = student_rows[0]
+    # Org-Page masking: names the org, never the message body.
+    assert "Partner Co" in note.body
+    assert "internships" not in note.body
+    assert note.action_url == f"/messages/{tid}"
+
+    # The acceptor (partner staff) is NOT notified about their own accept.
+    partner_rows = (
+        await db_session.execute(
+            select(Notification).where(
+                Notification.recipient_id == partner_user.id,
+                Notification.notif_type == "message.request_accepted",
+            )
+        )
+    ).scalars().all()
+    assert partner_rows == []
+
+    # A preference-gated email is also enqueued to the initiator (drained later).
+    outbox = (
+        await db_session.execute(
+            select(NotificationOutbox).where(
+                NotificationOutbox.recipient_id == student_user.id,
+                NotificationOutbox.template_key == "message.request_accepted",
+            )
+        )
+    ).scalars().all()
+    assert len(outbox) == 1
+
+
+async def test_decline_notifies_nobody(db_session) -> None:
+    """Declining a request stays silent — no rejection notification anywhere."""
+    student_user, student = await make_student(db_session)
+    partner_user, porg, partner = await make_partner(db_session)
+
+    out = await thread_service.create_thread(
+        db_session, principal=student, kind="direct", context_type=None,
+        context_id=None, recipient_ids=[partner_user.id],
+        first_message="Hello there.", ctx=CTX,
+    )
+    tid = uuid.UUID(out["id"])
+    await request_service.respond(
+        db_session, principal=partner, thread_id=tid, action="decline", ctx=CTX,
+    )
+
+    rows = (
+        await db_session.execute(
+            select(Notification).where(
+                Notification.notif_type == "message.request_accepted",
+            )
+        )
+    ).scalars().all()
+    assert rows == []
 
 
 async def test_partner_decline_blocks_further_sends(db_session) -> None:

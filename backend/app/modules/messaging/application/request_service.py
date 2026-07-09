@@ -108,6 +108,16 @@ async def respond(
             "actor_id": str(principal.user_id),
         },
     )
+    if action == "accept":
+        # Notify the initiator (in-app + email) that they can now converse.
+        # Same transaction as the state change (persist-before-deliver).
+        from app.modules.messaging.application.message_service import (
+            notify_request_accepted,
+        )
+
+        await notify_request_accepted(
+            session, thread=thread, acceptor_id=principal.user_id
+        )
     await session.commit()
     from app.modules.messaging.application.message_service import (
         _publish_thread_signal,

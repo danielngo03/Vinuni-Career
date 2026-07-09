@@ -583,6 +583,22 @@ CATALOG: dict[str, CatalogEntry] = {
             "en": "A user reported a conversation. Please review it.",
         },
     ),
+    "message.request_accepted": CatalogEntry(
+        category="message",
+        title={
+            "vi": "Lời mời nhắn tin đã được chấp nhận",
+            "en": "Your message request was accepted",
+        },
+        body={
+            # PII-safe (ADR-0012 §4): a MASKED counterpart label + a neutral prompt,
+            # never any message body. Sent to the request INITIATOR when the other
+            # side accepts; decline/block stay silent by design.
+            "vi": "{counterpart_label} đã chấp nhận lời mời nhắn tin của bạn. "
+            "Bây giờ bạn có thể bắt đầu trò chuyện.",
+            "en": "{counterpart_label} accepted your message request. You can now "
+            "start the conversation.",
+        },
+    ),
     "organization.partner_approved": CatalogEntry(
         category="application_lifecycle",
         title={
