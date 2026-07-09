@@ -981,6 +981,39 @@ TOOL_SPECS: dict[str, ToolSpec] = {
         audit_event_type="TOOL_EXPORT_APPLICATIONS",
         timeout_seconds=25,
     ),
+    "get_recruitment_analytics_chart": ToolSpec(
+        name="get_recruitment_analytics_chart",
+        description=(
+            "Build a visual CHART of the partner org's recruiting analytics from real "
+            "aggregate data. Use this when the recruiter asks to 'show a chart/graph', "
+            "'vẽ biểu đồ', visualise their funnel, applications over time, top jobs by "
+            "applicants, or the pipeline across jobs. Pick 'chart': 'funnel' (applications "
+            "by status), 'monthly_trend' (applications per month, last 6 months), "
+            "'top_jobs' (most applied-to jobs), or 'pipeline_by_job' (active vs rejected "
+            "per job). Returns a chart rendered for the recruiter plus a short summary — "
+            "aggregate counts only, no candidate identities. Only available to partner users."
+        ),
+        parameters={
+            "type": "object",
+            "properties": {
+                "chart": {
+                    "type": "string",
+                    "enum": ["funnel", "monthly_trend", "top_jobs", "pipeline_by_job"],
+                    "description": "Which analytics chart to build (default: funnel)",
+                },
+            },
+            "required": [],
+        },
+        permission_class="read_only",
+        persona=[PARTNER_USER],
+        required_permissions=["authenticated", "role:partner_user", "applications:read"],
+        fallback=(
+            "I couldn't build that chart right now. Check /partner/analytics for your "
+            "recruiting metrics."
+        ),
+        audit_event_type="TOOL_GET_RECRUITMENT_ANALYTICS_CHART",
+        timeout_seconds=20,
+    ),
     "knowledge_base_query": ToolSpec(
         name="knowledge_base_query",
         description=(

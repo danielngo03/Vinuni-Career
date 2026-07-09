@@ -14,6 +14,27 @@ import { env } from "@/lib/env";
 import type { ChatMessage } from "@/lib/api";
 import { getAccessToken } from "@/lib/api/session";
 import { TOOL_LABELS } from "./constants";
+import {
+  Bar,
+  BarChart,
+  CartesianGrid,
+  Legend,
+  Line,
+  LineChart,
+  ResponsiveContainer,
+  Tooltip,
+  XAxis,
+  YAxis,
+} from "recharts";
+
+/** A chart spec the backend emits for the FE to render with Recharts. */
+type ChartSpec = {
+  type?: string;
+  title?: string;
+  x_key?: string;
+  series?: { key: string; name?: string }[];
+  data?: Record<string, number | string>[];
+};
 
 /** A render artifact the backend attaches to an assistant message (download/chart). */
 type MessageArtifact = {
@@ -22,6 +43,7 @@ type MessageArtifact = {
   filename?: string;
   row_count?: number;
   format?: string;
+  chart?: ChartSpec;
 };
 
 function readArtifacts(message: ChatMessage): MessageArtifact[] {
@@ -108,6 +130,8 @@ function MessageArtifacts({ message }: { message: ChatMessage }) {
       {artifacts.map((a, i) =>
         a.kind === "download" && a.download_path ? (
           <DownloadArtifact key={i} artifact={a} />
+        ) : a.kind === "chart" && a.chart ? (
+          <ChartArtifact key={i} artifact={a} />
         ) : null,
       )}
     </div>
@@ -165,6 +189,92 @@ function DownloadArtifact({ artifact }: { artifact: MessageArtifact }) {
         )}
       </span>
     </button>
+  );
+}
+
+const CHART_COLORS = [
+  "var(--brand-primary)",
+  "var(--brand-teal)",
+  "var(--amber-600)",
+];
+
+/** Render a backend-emitted analytics chart (bar/line) with Recharts. */
+function ChartArtifact({ artifact }: { artifact: MessageArtifact }) {
+  const chart = artifact.chart;
+  if (!chart || !Array.isArray(chart.data) || chart.data.length === 0) return null;
+  const xKey = chart.x_key ?? "label";
+  const series = chart.series && chart.series.length > 0 ? chart.series : [{ key: "value" }];
+  const isLine = chart.type === "line";
+  const many = chart.data.length > 4;
+  return (
+    <figure className="mt-1 w-full rounded-xl border border-[var(--glass-border-strong)] bg-[var(--surface-card)]/60 p-3">
+      {chart.title && (
+        <figcaption className="mb-2 text-xs font-semibold text-[var(--text-secondary)]">
+          {chart.title}
+        </figcaption>
+      )}
+      <div className="h-[220px] w-full">
+        <ResponsiveContainer width="100%" height="100%">
+          {isLine ? (
+            <LineChart data={chart.data} margin={{ top: 4, right: 8, bottom: 4, left: -14 }}>
+              <CartesianGrid strokeDasharray="3 3" stroke="var(--glass-border-strong)" vertical={false} />
+              <XAxis
+                dataKey={xKey}
+                tick={{ fontSize: 10, fill: "var(--text-muted)" }}
+                interval="preserveStartEnd"
+              />
+              <YAxis
+                tick={{ fontSize: 10, fill: "var(--text-muted)" }}
+                allowDecimals={false}
+                width={30}
+              />
+              <Tooltip contentStyle={{ fontSize: 12, borderRadius: 8 }} />
+              {series.length > 1 && <Legend wrapperStyle={{ fontSize: 11 }} />}
+              {series.map((sr, i) => (
+                <Line
+                  key={sr.key}
+                  type="monotone"
+                  dataKey={sr.key}
+                  name={sr.name ?? sr.key}
+                  stroke={CHART_COLORS[i % CHART_COLORS.length]}
+                  strokeWidth={2}
+                  dot={{ r: 3 }}
+                />
+              ))}
+            </LineChart>
+          ) : (
+            <BarChart data={chart.data} margin={{ top: 4, right: 8, bottom: 4, left: -14 }}>
+              <CartesianGrid strokeDasharray="3 3" stroke="var(--glass-border-strong)" vertical={false} />
+              <XAxis
+                dataKey={xKey}
+                tick={{ fontSize: 10, fill: "var(--text-muted)" }}
+                interval={0}
+                angle={many ? -20 : 0}
+                textAnchor={many ? "end" : "middle"}
+                height={many ? 52 : 24}
+              />
+              <YAxis
+                tick={{ fontSize: 10, fill: "var(--text-muted)" }}
+                allowDecimals={false}
+                width={30}
+              />
+              <Tooltip contentStyle={{ fontSize: 12, borderRadius: 8 }} cursor={{ fill: "rgba(0,0,0,0.04)" }} />
+              {series.length > 1 && <Legend wrapperStyle={{ fontSize: 11 }} />}
+              {series.map((sr, i) => (
+                <Bar
+                  key={sr.key}
+                  dataKey={sr.key}
+                  name={sr.name ?? sr.key}
+                  fill={CHART_COLORS[i % CHART_COLORS.length]}
+                  radius={[3, 3, 0, 0]}
+                  maxBarSize={44}
+                />
+              ))}
+            </BarChart>
+          )}
+        </ResponsiveContainer>
+      </div>
+    </figure>
   );
 }
 
