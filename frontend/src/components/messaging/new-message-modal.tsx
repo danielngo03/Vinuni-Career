@@ -243,7 +243,7 @@ function PickStep({
                             : t("recipientTypePartner")}
                         </span>
                         {org.is_verified && (
-                          <span className="inline-flex items-center gap-0.5 text-[10px] font-semibold text-[#0d7f59]">
+                          <span className="inline-flex items-center gap-0.5 text-[10px] font-semibold text-[var(--color-success)]">
                             <SealCheck aria-hidden weight="fill" className="size-3" />
                             {t("verified")}
                           </span>

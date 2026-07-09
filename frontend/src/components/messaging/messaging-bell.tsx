@@ -73,7 +73,7 @@ export function MessagingBell({
       : "border-[var(--border-default)] bg-[var(--surface-card)] text-[var(--text-primary)] hover:border-[var(--border-strong)] hover:bg-[var(--bg-subtle)]",
   );
   const iconClassName = cn(
-    "relative rounded-lg p-2 outline-none transition-colors duration-200 focus-visible:ring-2 focus-visible:ring-[var(--brand-mid-blue)]",
+    "relative rounded-lg p-2 outline-none transition-colors duration-200 focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)]",
     active
       ? "bg-[var(--text-primary)] text-white"
       : "text-[var(--text-secondary)] hover:bg-[var(--bg-subtle)]",

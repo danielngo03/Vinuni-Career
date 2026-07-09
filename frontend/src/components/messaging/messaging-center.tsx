@@ -219,7 +219,7 @@ function ThreadRow({
       onClick={onOpen}
       className={cn(
         "flex w-full items-start gap-3 rounded-xl px-2 py-3 text-left outline-none transition-colors hover:bg-[var(--bg-subtle)] focus-visible:bg-[var(--bg-subtle)]",
-        unread && "bg-[var(--blue-50)]/40",
+        unread && "bg-[var(--surface-card)]",
       )}
     >
       <span
@@ -242,7 +242,7 @@ function ThreadRow({
           {unread && (
             <span
               aria-hidden
-              className="size-2 shrink-0 rounded-full bg-[var(--brand-primary)]"
+              className="size-2 shrink-0 rounded-full bg-[var(--color-success)]"
             />
           )}
           <span
@@ -271,7 +271,7 @@ function ThreadRow({
         </span>
         <span className="mt-0.5 flex items-center gap-1.5">
           {isAnnouncement && (
-            <span className="shrink-0 rounded-full bg-[var(--blue-50)] px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wide text-[var(--brand-primary)]">
+            <span className="shrink-0 rounded-full bg-[var(--bg-subtle)] px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wide text-[var(--text-secondary)]">
               {announcementLabel}
             </span>
           )}
@@ -279,7 +279,7 @@ function ThreadRow({
             {secondary}
           </span>
           {unread && (
-            <span className="shrink-0 rounded-full bg-[var(--brand-primary)] px-1.5 text-[10px] font-bold leading-4 text-white">
+            <span className="shrink-0 rounded-full bg-[var(--color-success)]/15 px-1.5 text-[10px] font-bold leading-4 text-[var(--color-success)]">
               {thread.unread > 99 ? "99+" : thread.unread}
             </span>
           )}

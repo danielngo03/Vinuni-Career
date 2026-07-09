@@ -379,7 +379,7 @@ function InboxRow({
       <span className="min-w-0 flex-1">
         <span className="flex items-center gap-1.5">
           {unread && (
-            <span aria-hidden className="size-2 shrink-0 rounded-full bg-[#10a36f]" />
+            <span aria-hidden className="size-2 shrink-0 rounded-full bg-[var(--color-success)]" />
           )}
           <span
             className={cn(
@@ -415,7 +415,7 @@ function InboxRow({
             {secondary}
           </span>
           {unread && (
-            <span className="shrink-0 rounded-full bg-[#e6f7ef] px-1.5 text-[10px] font-bold leading-4 text-[#0d7f59]">
+            <span className="shrink-0 rounded-full bg-[var(--color-success)]/15 px-1.5 text-[10px] font-bold leading-4 text-[var(--color-success)]">
               {thread.unread > 99 ? "99+" : thread.unread}
             </span>
           )}

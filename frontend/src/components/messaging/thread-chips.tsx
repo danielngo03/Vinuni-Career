@@ -72,7 +72,7 @@ export function AssignmentChip({
     },
     resolved: {
       label: t("assignmentResolved"),
-      tone: "bg-[#e6f7ef] text-[#0d7f59] shadow-[inset_0_0_0_1px_rgba(13,127,89,0.2)]",
+      tone: "bg-[var(--color-success)]/15 text-[var(--color-success)] shadow-[inset_0_0_0_1px_var(--color-success)]",
       Icon: CheckCircle,
     },
   };
