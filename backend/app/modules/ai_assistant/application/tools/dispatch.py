@@ -9,7 +9,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from app.modules.analytics.application import ingestion_service as analytics
 from app.shared.permissions import Principal
 
-from . import analytics_charts, companies, cv_ai, events, jobs, kb, partner, student
+from . import analytics_charts, attachments, companies, cv_ai, events, jobs, kb, partner, student
 from .specs import TOOL_SPECS
 
 SUPPORTED_TOOL_NAMES = frozenset(
@@ -49,6 +49,7 @@ SUPPORTED_TOOL_NAMES = frozenset(
         "move_candidate_stage",
         "export_applications",
         "get_recruitment_analytics_chart",
+        "analyze_attachment",
     }
 )
 
@@ -174,6 +175,8 @@ async def _execute_tool(
             return await partner.export_applications(session, principal, args)
         if name == "get_recruitment_analytics_chart":
             return await analytics_charts.get_recruitment_analytics_chart(session, principal, args)
+        if name == "analyze_attachment":
+            return await attachments.analyze_attachment(session, principal, args)
 
         # --- CV / AI tools ---
         if name == "get_my_cvs":

@@ -7,6 +7,7 @@ from datetime import UTC, datetime
 
 from sqlalchemy import (
     JSON,
+    BigInteger,
     Boolean,
     DateTime,
     ForeignKey,
@@ -99,3 +100,38 @@ class ChatExportFile(Base):
     expires_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
 
     __table_args__ = (Index("ix_chat_export_files_user_id", "user_id"),)
+
+
+class ChatAttachment(Base):
+    """A file/image a user attached to a chat session for AI analysis.
+
+    Raw bytes live in blob storage addressed by ``storage_key`` (INTERNAL — never
+    returned to a client). ``analysis_json`` caches the structured, leakage-safe
+    analysis result so re-analysis is idempotent and never re-charges. Owner + org
+    scoped: a cross-user/cross-org id is indistinguishable from a missing one.
+    """
+
+    __tablename__ = "chat_attachments"
+
+    id: Mapped[uuid.UUID] = mapped_column(primary_key=True, default=uuid.uuid4)
+    created_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), nullable=False, default=lambda: datetime.now(UTC)
+    )
+    session_id: Mapped[uuid.UUID] = mapped_column(
+        ForeignKey("chat_sessions.id", ondelete="CASCADE"), nullable=False
+    )
+    user_id: Mapped[uuid.UUID] = mapped_column(nullable=False)
+    org_id: Mapped[uuid.UUID | None] = mapped_column(nullable=True)
+    filename: Mapped[str] = mapped_column(String(500), nullable=False)
+    content_type: Mapped[str] = mapped_column(String(100), nullable=False)
+    size_bytes: Mapped[int] = mapped_column(BigInteger, nullable=False, default=0)
+    storage_key: Mapped[str] = mapped_column(String(500), nullable=False)
+    status: Mapped[str] = mapped_column(String(16), nullable=False, default="uploaded")
+    analysis_json: Mapped[dict | None] = mapped_column(JSON, nullable=True)
+    version: Mapped[int] = mapped_column(Integer, nullable=False, default=1)
+
+    __table_args__ = (
+        Index("ix_chat_attachments_session_id", "session_id"),
+        Index("ix_chat_attachments_user_id", "user_id"),
+        Index("ix_chat_attachments_org_id", "org_id"),
+    )

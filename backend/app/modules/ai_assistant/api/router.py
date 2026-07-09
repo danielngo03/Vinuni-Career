@@ -27,14 +27,21 @@ import json
 import uuid
 from collections.abc import AsyncGenerator
 
-from fastapi import APIRouter, Depends, Query, status
+from fastapi import APIRouter, Depends, File, Query, UploadFile, status
 from fastapi.responses import Response, StreamingResponse
 from sqlalchemy.ext.asyncio import AsyncSession
 
+from app.core.config import get_settings
 from app.core.db import get_db_session
 from app.modules.ai_assistant.api.schemas import SendMessageRequest, UpdateSessionRequest
-from app.modules.ai_assistant.application import chat_exports, chat_service, usage_service
+from app.modules.ai_assistant.application import (
+    attachment_service,
+    chat_exports,
+    chat_service,
+    usage_service,
+)
 from app.modules.auth.api.deps import CurrentAuth, get_current_auth
+from app.shared.exceptions import ValidationFailedError
 from app.shared.responses import success
 
 router = APIRouter(prefix="/ai/chat", tags=["ai-assistant"])
@@ -241,6 +248,40 @@ async def download_export(
         media_type=row.mime,
         headers={"Content-Disposition": f'attachment; filename="{row.filename}"'},
     )
+
+
+@router.post(
+    "/sessions/{session_id}/attachments",
+    status_code=status.HTTP_201_CREATED,
+    summary="Attach a file/image to a chat session for AI analysis (owner only)",
+)
+async def upload_attachment(
+    session_id: uuid.UUID,
+    file: UploadFile = File(...),
+    auth: CurrentAuth = Depends(get_current_auth),
+    session: AsyncSession = Depends(get_db_session),
+) -> dict:
+    """Store an owner-scoped chat attachment; analysis is a separate metered tool.
+
+    Session ownership is enforced inside ``attachment_service.upload_attachment``
+    (404 on a non-owned session). Rejects blank/oversized/unsupported/
+    security-failed files with a user-safe error; raw bytes are never returned.
+    """
+    data = await file.read()
+    if len(data) > get_settings().max_upload_bytes:
+        raise ValidationFailedError(
+            "Tệp quá lớn. Hãy nén hoặc chia nhỏ tệp rồi tải lại.",
+            details={"reason": "file_too_large"},
+        )
+    result = await attachment_service.upload_attachment(
+        session,
+        principal=auth.principal,
+        session_id=session_id,
+        filename=file.filename or "upload",
+        data=data,
+        content_type=file.content_type,
+    )
+    return success(result)
 
 
 @router.delete(

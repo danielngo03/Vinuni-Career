@@ -464,8 +464,7 @@ TOOL_SPECS: dict[str, ToolSpec] = {
         persona=[STUDENT],
         required_permissions=["authenticated", "role:student"],
         fallback=(
-            "I couldn't generate recommendations right now. Browse /jobs to discover "
-            "opportunities."
+            "I couldn't generate recommendations right now. Browse /jobs to discover opportunities."
         ),
         audit_event_type="TOOL_RECOMMEND_JOBS",
         timeout_seconds=20,
@@ -566,8 +565,7 @@ TOOL_SPECS: dict[str, ToolSpec] = {
                 "role": {
                     "type": "string",
                     "description": (
-                        "Role title if no specific job ID, e.g. 'software engineer', 'data "
-                        "analyst'"
+                        "Role title if no specific job ID, e.g. 'software engineer', 'data analyst'"
                     ),
                 },
                 "round": {
@@ -751,8 +749,7 @@ TOOL_SPECS: dict[str, ToolSpec] = {
         persona=[PARTNER_USER],
         required_permissions=["authenticated", "role:partner_user", "ai_recruiting:draft_jd"],
         fallback=(
-            "I couldn't draft a job description right now. Try the JD writer at "
-            "/partner/jobs/new."
+            "I couldn't draft a job description right now. Try the JD writer at /partner/jobs/new."
         ),
         audit_event_type="TOOL_DRAFT_JOB_DESCRIPTION",
         timeout_seconds=20,
@@ -1013,6 +1010,51 @@ TOOL_SPECS: dict[str, ToolSpec] = {
         ),
         audit_event_type="TOOL_GET_RECRUITMENT_ANALYTICS_CHART",
         timeout_seconds=20,
+    ),
+    "analyze_attachment": ToolSpec(
+        name="analyze_attachment",
+        description=(
+            "Analyse a file or image the user uploaded to THIS chat session (PDF, "
+            "image/scan, DOCX, TXT, or CSV). Use this when the user attaches a "
+            "document and asks you to read, summarise, extract, or answer questions "
+            "about it — e.g. 'what does this file say?', 'tóm tắt tệp này', 'đọc CV "
+            "này giúp tôi'. Requires the attachment_id from the attachment the user "
+            "just uploaded (it appears in the message as an attachment reference). "
+            "Returns a text summary and an extracted-text preview (plus a small "
+            "table or key-values when detected) — never the raw file. Scanned/image "
+            "files are read with document vision; blank, corrupt, or unsupported "
+            "files are reported as not analysable, never fabricated."
+        ),
+        parameters={
+            "type": "object",
+            "properties": {
+                "attachment_id": {
+                    "type": "string",
+                    "description": (
+                        "UUID of the attachment the user uploaded to this chat session"
+                    ),
+                },
+            },
+            "required": ["attachment_id"],
+        },
+        output_schema={
+            "type": "object",
+            "properties": {
+                "ok": {"type": "boolean"},
+                "status": {"type": "string"},
+                "summary": {"type": "string"},
+                "extracted_text_preview": {"type": "string"},
+            },
+        },
+        permission_class="read_only",
+        persona=[STUDENT, PARTNER_USER, UNIVERSITY_STAFF],
+        required_permissions=["authenticated"],
+        fallback=(
+            "I couldn't analyse that attachment right now. Make sure you uploaded it "
+            "to this chat, then try again in a moment."
+        ),
+        audit_event_type="TOOL_ANALYZE_ATTACHMENT",
+        timeout_seconds=25,
     ),
     "knowledge_base_query": ToolSpec(
         name="knowledge_base_query",
